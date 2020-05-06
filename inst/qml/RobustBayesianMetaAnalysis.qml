@@ -1,0 +1,1978 @@
+//
+// Copyright (C) 2013-2018 University of Amsterdam
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public
+// License along with this program.  If not, see
+// <http://www.gnu.org/licenses/>.
+//
+import QtQuick 2.8
+import QtQuick.Layouts 1.3
+import JASP.Controls 1.0
+import JASP.Widgets 1.0
+import JASP 1.0
+Form
+{
+ 	id: form
+
+	RadioButtonGroup
+	{
+		Layout.columnSpan:		2
+		runOnChange:			false
+		name:					"measures"
+		radioButtonsOnSameRow:	true
+		
+		RadioButton
+		{
+			label: qsTr("Cohen's d / t-statistics & (N / SE)")
+			value: "cohensd"
+			id: 	measures_cohensd
+			checked:true
+		}
+		RadioButton
+		{
+			label: qsTr("Correlations & (N / SE)")
+			value: "correlation"
+			id: 	measures_correlation
+		}
+
+		RadioButton
+		{
+			label: qsTr("Effect sizes & SE")
+			value: "general"
+			id: 	measures_general
+		}
+
+		RadioButton
+		{
+			label: qsTr("Fitted model")
+			value: "fitted"
+			id: 	measures_fitted
+		}
+	}
+
+	TextField
+	{
+		runOnChange:	false
+		name:			"fitted_path"
+		label:  		qsTr("Path to the fitted model")
+		value:			"D:/Desktop/FA2s.RDS"
+		visible:		measures_fitted.checked
+	}
+
+	VariablesForm
+	{
+		preferredHeight:	620
+		visible:			!measures_fitted.checked
+
+		AvailableVariablesList {name: "variablesList"}
+
+		AssignedVariablesList
+		{
+			runOnChange:	false
+			id: 			input_ES
+			name: 			"input_ES"
+			enabled: 		input_t.count == 0
+			title: 			qsTr("Effect Size")
+			singleVariable: true
+			allowedColumns: ["scale"]
+		}
+
+		AssignedVariablesList
+		{
+			runOnChange:	false
+			name: 			"input_t"
+			id: 			input_t
+			enabled: 		input_ES.count == 0
+			title: 			qsTr("t-statistic")
+			singleVariable: true
+			allowedColumns: ["scale"]
+			visible:		 measures_cohensd.checked || measures_correlation.checked
+		}
+
+		AssignedVariablesList
+		{
+			runOnChange:	false
+			id: 			input_SE
+			enabled: 		input_CI.count == 0 && input_N.count == 0 && input_N1.count == 0 && input_N2.count == 0 && input_t.count == 0
+			name: 			"input_SE"
+			title: 			qsTr("Effect Size Standard Error")
+			singleVariable: true
+			allowedColumns: ["scale"]
+		}
+
+		AssignedPairsVariablesList
+		{
+			runOnChange:	false
+			id: 			input_CI
+			enabled: 		input_SE.count == 0 && input_N.count == 0 && input_N1.count == 0 && input_N2.count == 0 && input_t.count == 0
+			name: 			"input_CI"
+			title: 			qsTr("95% CI Lower and Upper Bound")
+			singleVariable: true
+			allowedColumns: ["scale"]
+		}
+
+		AssignedVariablesList
+		{
+			runOnChange:	false
+			id: 			input_N
+			enabled: 		input_SE.count == 0 && input_CI.count == 0 && input_N1.count == 0 && input_N2.count == 0
+			name: 			"input_N"
+			title: 			qsTr("N")
+			singleVariable: true
+			allowedColumns: ["scale", "ordinal"]
+			visible:		 measures_cohensd.checked || measures_correlation.checked
+		}
+
+		AssignedVariablesList
+		{
+			runOnChange:	false
+			id: 			input_N1
+			enabled: 		input_SE.count == 0 && input_CI.count == 0 && input_N.count == 0 && input_N2.count == 0
+			name: 			"input_N1"
+			title: 			qsTr("N (group 1)")
+			singleVariable: true
+			allowedColumns: ["scale", "ordinal"]
+			visible:		 measures_cohensd.checked && cohensd_twoSample.checked
+		}
+
+		AssignedVariablesList
+		{
+			runOnChange:	false
+			id: 			input_N2
+			enabled: 		input_SE.count == 0 && input_CI.count == 0 && input_N.count == 0 && input_N1.count == 0
+			name: 			"input_N2"
+			title: 			qsTr("N (group 2)")
+			singleVariable: true
+			allowedColumns: ["scale", "ordinal"]
+			visible:		 measures_cohensd.checked && cohensd_twoSample.checked
+		}
+
+		AssignedVariablesList
+		{
+			runOnChange:	false
+			name: 			"input_labels"
+			title: 			qsTr("Study Labels")
+			singleVariable:	true
+			allowedColumns: ["nominalText"]
+		}
+	}
+
+	RadioButtonGroup
+	{
+		runOnChange:			false
+		name:					"cohensd_testType"
+		visible:				measures_cohensd.checked
+		radioButtonsOnSameRow:	true
+		
+		RadioButton
+		{
+			label:		qsTr("One-sample t-tests")
+			value:		"one.sample"
+			id:			cohensd_oneSample
+		}
+		RadioButton
+		{
+			label:		qsTr("Two-sample t-tests")
+			value: 		"two.sample"
+			id:			cohensd_twoSample
+			checked:	true
+		}
+	}
+
+
+	Button
+	{
+		id:			runAnalysis
+		name:		"runAnalysis"
+		label:		"Run Analysis"
+		enabled:	false
+		Connections
+		{
+			target:			form
+			onValueChanged:	if (item && !item.runOnChange) runAnalysis.enabled = true
+		}
+		onClicked:
+		{
+			form.refreshAnalysis()
+			enabled = false;
+		}
+	}
+
+
+	//// Priors ////
+	Section
+	{
+		title: 			qsTr("Priors")
+		runOnChange:	false
+		columns:		2
+
+
+		CheckBox
+		{	
+			Layout.columnSpan:		2
+			name:		"priors_plot"
+			label:		qsTr("Plot priors")
+		}
+
+
+		// mu prior
+		InputListView
+		{
+			Layout.columnSpan:		2
+			visible:				!measures_fitted.checked
+			height:					count * 40 + 50
+			title:					qsTr("Effect size")
+			name:					"priors_mu"
+			optionKey:				"name"
+			placeHolder:			qsTr("prior name")
+			rowComponentsTitles: [qsTr("Distribution                   Parameters                          Truncation              Prior Odds     ")]
+
+			rowComponents:
+			[
+				Component
+				{
+					DropDown
+					{
+						name: "type"
+						useExternalBorder: true
+						values:
+						[
+							{ label: "Normal(μ,σ)",			value: "normal"},
+							{ label: "Student-t(μ,σ,v)",	value: "t"},
+							{ label: "Cauchy(x₀,θ)",		value: "cauchy"},
+							{ label: "Gamma(α,β)",			value: "gamma_ab"},
+							{ label: "Gamma(k,θ)",			value: "gamma_k0"},
+							{ label: "Inverse-Gamma(α,β)",	value: "invgamma"},
+							{ label: "Spike(x₀)",			value: "spike"},
+						]
+						Layout.rightMargin: if(currentText === "Cauchy(x₀,θ)" | currentText === "Spike(x₀)") { 8 } else { 15 }
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"μ"
+						name:				"parMean"
+						visible:			fromRowComponents["type"].currentText === "Normal(μ,σ)"		||
+											fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
+						value:				"0"
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"x₀"
+						name:				"parLocation"
+						visible:			fromRowComponents["type"].currentText === "Cauchy(x₀,θ)"	||
+											fromRowComponents["type"].currentText === "Spike(x₀)"
+						value:				"0"
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: if(fromRowComponents["type"].currentText === "Spike(x₀)") 348.5
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"σ"
+						name:				"parScale"
+						visible:			fromRowComponents["type"].currentText === "Normal(μ,σ)"		||
+											fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
+						value:				"1"
+						min:				0
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: if(fromRowComponents["type"].currentText === "Normal(μ,σ)") width  + .5
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"k"
+						name:				"parShape"
+						visible:			fromRowComponents["type"].currentText === "Gamma(k,θ)"
+						value:				"1"
+						min:				0
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"θ"
+						name:				"parScale2"
+						visible:			fromRowComponents["type"].currentText === "Cauchy(x₀,θ)"	||
+											fromRowComponents["type"].currentText === "Gamma(k,θ)"
+						value:				"1"
+						min:				0
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: width  + .5
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"ν"
+						name:				"parDF"
+						visible:			fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
+						value:				"2"
+						min:				1
+						inclusive:			JASP.MinOnly
+						fieldWidth: 		40
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: 10.5
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"α"
+						name:				"parAlpha"
+						visible:			fromRowComponents["type"].currentText === "Gamma(α,β)"		||
+											fromRowComponents["type"].currentText === "Inverse-Gamma(α,β)"
+						value:				"1"
+						min:				0
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"β"
+						name:				"parBeta"
+						visible:			fromRowComponents["type"].currentText === "Gamma(α,β)"	||
+											fromRowComponents["type"].currentText === "Inverse-Gamma(α,β)"
+						value:				"0.15"
+						min:				0
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: width + .5
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label: 				"lower"
+						name: 				"truncationLower"
+						visible:			fromRowComponents["type"].currentText !== "Spike(x₀)"
+						value:				"-Inf"
+						max: 				fromRowComponents["truncationUpper"].value
+						inclusive: 			JASP.MinOnly
+						fieldWidth:			50
+						useExternalBorder:	false
+						showBorder:			true
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label: 				"upper"
+						name: 				"truncationUpper"
+						visible:			fromRowComponents["type"].currentText !== "Spike(x₀)"
+						value:				"Inf"
+						min: 				fromRowComponents["truncationLower"].currentText
+						inclusive: 			JASP.MaxOnly
+						fieldWidth:			50
+						useExternalBorder:	false
+						showBorder:			true
+						Layout.rightMargin: 15
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label: 				"Odds"
+						name: 				"priorOdds"
+						value:				"1"
+						min: 				0
+						inclusive: 			JASP.None
+						fieldWidth:			50
+						useExternalBorder:	false
+						showBorder:			true
+					}
+				}
+			]
+
+			defaultValues: ["1"]
+		}
+
+
+		// tau prior
+		InputListView
+		{
+			Layout.columnSpan:		2
+			visible:				!measures_fitted.checked
+			height:					100
+			title:					qsTr("Heterogeneity")
+			name:					"priors_tau"
+			optionKey:				"name"
+			placeHolder:			qsTr("prior name")
+			rowComponentsTitles:	[qsTr("Distribution                     Parameters                                        Truncation                    Prior Odds       ")]
+
+			rowComponents:
+			[
+				Component
+				{
+					DropDown
+					{
+						name: "type"
+						useExternalBorder: true
+						values:
+						[
+							{ label: "Normal(μ,σ)",			value: "normal"},
+							{ label: "Student-t(μ,σ,v)",	value: "t"},
+							{ label: "Cauchy(x₀,θ)",		value: "cauchy"},
+							{ label: "Gamma(α,β)",			value: "gamma_ab"},
+							{ label: "Gamma(k,θ)",			value: "gamma_k0"},
+							{ label: "Inverse-Gamma(α,β)",	value: "invgamma"},
+							{ label: "Spike(x₀)",			value: "spike"},
+						]
+						Layout.rightMargin: if(currentText === "Cauchy(x₀,θ)" | currentText === "Spike(x₀)") { 8 } else { 15 }
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"μ"
+						name:				"parMean"
+						visible:			fromRowComponents["type"].currentText === "Normal(μ,σ)"		||
+											fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
+						value:				"0"
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"x₀"
+						name:				"parLocation"
+						visible:			fromRowComponents["type"].currentText === "Cauchy(x₀,θ)"	||
+											fromRowComponents["type"].currentText === "Spike(x₀)"
+						value:				"0"
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: if(fromRowComponents["type"].currentText === "Spike(x₀)") 125.5
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"σ"
+						name:				"	"
+						visible:			fromRowComponents["type"].currentText === "Normal(μ,σ)"		||
+											fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
+						value:				"1"
+						min:				0
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: if(fromRowComponents["type"].currentText === "Normal(μ,σ)") width + .5
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"k"
+						name:				"parShape"
+						visible:			fromRowComponents["type"].currentText === "Gamma(k,θ)"
+						value:				"1"
+						min:				0
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"θ"
+						name:				"parScale2"
+						visible:			fromRowComponents["type"].currentText === "Cauchy(x₀,θ)"	||
+											fromRowComponents["type"].currentText === "Gamma(k,θ)"
+						value:				"1"
+						min:				0
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: width + .5
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"ν"
+						name:				"parDF"
+						visible:			fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
+						value:				"2"
+						min:				1
+						inclusive:			JASP.MinOnly
+						fieldWidth: 		40
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: 10
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"α"
+						name:				"parAlpha"
+						visible:			fromRowComponents["type"].currentText === "Gamma(α,β)"		||
+											fromRowComponents["type"].currentText === "Inverse-Gamma(α,β)"
+						value:				"1"
+						min:				0
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"β"
+						name:				"parBeta"
+						visible:			fromRowComponents["type"].currentText === "Gamma(α,β)"	||
+											fromRowComponents["type"].currentText === "Inverse-Gamma(α,β)"
+						value:				"0.15"
+						min:				0
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: width + .5
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label: 				"lower"
+						name: 				"truncationLower"
+						value:				"0"
+						min:				0
+						//max: 				fromRowComponents["truncationUpper"].currentText
+						inclusive: 			JASP.MinOnly
+						fieldWidth:			50
+						useExternalBorder:	false
+						showBorder:			true
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label: 				"upper"
+						name: 				"truncationUpper"
+						value:				"Inf"
+						min: 				fromRowComponents["truncationLower"].currentText
+						inclusive: 			JASP.MaxOnly
+						fieldWidth:			50
+						useExternalBorder:	false
+						showBorder:			true
+						Layout.rightMargin: 15
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label: 				"Odds"
+						name: 				"priorOdds"
+						value:				"1"
+						min: 				0
+						inclusive: 			JASP.None
+						fieldWidth:			50
+						useExternalBorder:	false
+						showBorder:			true
+					}
+				}
+			]
+
+			defaultValues: [1]
+		}
+
+
+		// omega prior
+		InputListView
+		{
+			Layout.columnSpan:		2
+			visible:				!measures_fitted.checked
+			height:					100
+			title:					qsTr("Publication bias")
+			name:					"priors_omega"
+			optionKey:				"name"
+			placeHolder:			qsTr("prior name")
+			rowComponentsTitles: [qsTr("Weight function                      Cut-points                  Parameters                              Prior Odds       ")]
+
+			rowComponents:
+			[
+				Component
+				{
+					DropDown
+					{
+						name: "type"
+						useExternalBorder: true
+						values: [
+							{ label: "Two-sided",			value: "Two-sided"},
+							{ label: "Two-sided",			value: "Two-sided2", visible: false},
+							{ label: "One-sided (mon.)",	value: "One-sided (mon.)"},
+							{ label: "One-sided",			value: "One-sided"},
+							{ label: "Spike(x₀)",			value: "spike"},
+						]
+						Layout.rightMargin: if(currentText === "Spike(x₀)") { 200 } else { 15 }
+					}
+				},
+				Component
+				{
+					TextField
+					{
+						label:				"p-values"
+						name:				"parCuts"
+						visible:			fromRowComponents["type"].currentText === "Two-sided"		||
+											fromRowComponents["type"].currentText === "Two-sided2"	||
+											fromRowComponents["type"].currentText === "One-sided"		||
+											fromRowComponents["type"].currentText === "One-sided (mon.)"
+						value:				if(fromRowComponents["type"].currentText === "Two-sided2"){ "(.05)" }else{ "(.05, .10)" }
+						fieldWidth: 		100
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: if(fromRowComponents["type"].currentText === "One-sided"){ 8 }else{ 15 }
+					}
+				},
+				Component
+				{
+					TextField
+					{
+						label:				"α"
+						name:				"parAlpha"
+						visible:			fromRowComponents["type"].currentText === "Two-sided"		||
+											fromRowComponents["type"].currentText === "Two-sided2"	||
+											fromRowComponents["type"].currentText === "One-sided (mon.)"
+						value:				if(fromRowComponents["type"].currentText === "Two-sided2"){ "(1,1)" }else{ "(1,1,1)" }
+						fieldWidth: 		70
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: 105
+					}
+				},
+				Component
+				{
+					TextField
+					{
+						label:				"α₁"
+						name:				"parAlpha1"
+						visible:			fromRowComponents["type"].currentText === "One-sided"
+						value:				"(1,1,1)"
+						fieldWidth: 		70
+						useExternalBorder:	false
+						showBorder: 		true
+					}
+				},
+				Component
+				{
+					TextField
+					{
+						label:				"α₂"
+						name:				"parAlpha2"
+						visible:			fromRowComponents["type"].currentText === "One-sided"
+						value:				"(1,1)"
+						fieldWidth: 		70
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: 15
+					}
+				},
+				Component
+				{
+					IntegerField
+					{
+						label:				"x₀"
+						name:				"parLocation"
+						visible:			fromRowComponents["type"].currentText === "Spike(x₀)"
+						defaultValue:		1
+						min:				1
+						max:				1
+						inclusive: 			JASP.MinMax
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: 90
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label: 				"Odds"
+						name: 				"priorOdds"
+						value:				"1"
+						min: 				0
+						inclusive: 			JASP.None
+						fieldWidth:			50
+						useExternalBorder:	false
+						showBorder:			true
+					}
+				}
+			]
+
+			defaultValues: [1, 2]
+		}
+
+
+		CheckBox
+		{	
+			Layout.columnSpan:		2
+			id:						priors_null
+			name:					"priors_null"
+			label:					qsTr("Set null priors")
+		}
+
+
+		// mu prior
+		InputListView
+		{
+			Layout.columnSpan:		2
+			height:					count * 40 + 50
+			visible:				priors_null.checked & !measures_fitted.checked
+			title:					qsTr("Effect size")
+			name:					"priors_mu_null"
+			optionKey:				"name"
+			placeHolder:			qsTr("prior name")
+			rowComponentsTitles:	[qsTr("Distribution                   Parameters                          Truncation              Prior Odds     ")]
+
+			rowComponents:
+			[
+				Component
+				{
+					DropDown
+					{
+						name: "type"
+						useExternalBorder: true
+						values:
+						[
+							{ label: "Normal(μ,σ)",			value: "normal"},
+							{ label: "Student-t(μ,σ,v)",	value: "t"},
+							{ label: "Cauchy(x₀,θ)",		value: "cauchy"},
+							{ label: "Gamma(α,β)",			value: "gamma_ab"},
+							{ label: "Gamma(k,θ)",			value: "gamma_k0"},
+							{ label: "Inverse-Gamma(α,β)",	value: "invgamma"},
+							{ label: "Spike(x₀)",			value: "spike"},
+						]
+						Layout.rightMargin: if(currentText === "Cauchy(x₀,θ)" | currentText === "Spike(x₀)") { 8 } else { 15 }
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"μ"
+						name:				"parMean"
+						visible:			fromRowComponents["type"].currentText === "Normal(μ,σ)"		||
+											fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
+						value:				"0"
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"x₀"
+						name:				"parLocation"
+						visible:			fromRowComponents["type"].currentText === "Cauchy(x₀,θ)"	||
+											fromRowComponents["type"].currentText === "Spike(x₀)"
+						value:				"0"
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: if(fromRowComponents["type"].currentText === "Spike(x₀)") 348.5
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"σ"
+						name:				"parScale"
+						visible:			fromRowComponents["type"].currentText === "Normal(μ,σ)"		||
+											fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
+						value:				"1"
+						min:				0
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: if(fromRowComponents["type"].currentText === "Normal(μ,σ)") width  + .5
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"k"
+						name:				"parShape"
+						visible:			fromRowComponents["type"].currentText === "Gamma(k,θ)"
+						value:				"1"
+						min:				0
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"θ"
+						name:				"parScale2"
+						visible:			fromRowComponents["type"].currentText === "Cauchy(x₀,θ)"	||
+											fromRowComponents["type"].currentText === "Gamma(k,θ)"
+						value:				"1"
+						min:				0
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: width  + .5
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"ν"
+						name:				"parDF"
+						visible:			fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
+						value:				"2"
+						min:				1
+						inclusive:			JASP.MinOnly
+						fieldWidth: 		40
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: 10.5
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"α"
+						name:				"parAlpha"
+						visible:			fromRowComponents["type"].currentText === "Gamma(α,β)"		||
+											fromRowComponents["type"].currentText === "Inverse-Gamma(α,β)"
+						value:				"1"
+						min:				0
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"β"
+						name:				"parBeta"
+						visible:			fromRowComponents["type"].currentText === "Gamma(α,β)"	||
+											fromRowComponents["type"].currentText === "Inverse-Gamma(α,β)"
+						value:				"0.15"
+						min:				0
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: width + .5
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label: 				"lower"
+						name: 				"truncationLower"
+						visible:			fromRowComponents["type"].currentText !== "Spike(x₀)"
+						value:				"-Inf"
+						//max: 				fromRowComponents["truncationUpper"].currentText
+						inclusive: 			JASP.MinOnly
+						fieldWidth:			50
+						useExternalBorder:	false
+						showBorder:			true
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label: 				"upper"
+						name: 				"truncationUpper"
+						visible:			fromRowComponents["type"].currentText !== "Spike(x₀)"
+						value:				"Inf"
+						//min: 				fromRowComponents["truncationLower"].currentText
+						inclusive: 			JASP.MaxOnly
+						fieldWidth:			50
+						useExternalBorder:	false
+						showBorder:			true
+						Layout.rightMargin: 15
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label: 				"Odds"
+						name: 				"priorOdds"
+						value:				"1"
+						min: 				0
+						inclusive: 			JASP.None
+						fieldWidth:			50
+						useExternalBorder:	false
+						showBorder:			true
+					}
+				}
+			]
+
+			defaultValues: ["7"]
+		}
+
+
+		// tau prior
+		InputListView
+		{
+			Layout.columnSpan:		2
+			height:					100
+			visible:				priors_null.checked & !measures_fitted.checked
+			title:					qsTr("Heterogeneity")
+			name:					"priors_tau_null"
+			optionKey:				"name"
+			placeHolder:			qsTr("prior name")
+			rowComponentsTitles: [qsTr("Distribution                     Parameters                                        Truncation                    Prior Odds       ")]
+
+			rowComponents:
+			[
+				Component
+				{
+					DropDown
+					{
+						name: "type"
+						useExternalBorder: true
+						values:
+						[
+							{ label: "Normal(μ,σ)",			value: "normal"},
+							{ label: "Student-t(μ,σ,v)",	value: "t"},
+							{ label: "Cauchy(x₀,θ)",		value: "cauchy"},
+							{ label: "Gamma(α,β)",			value: "gamma_ab"},
+							{ label: "Gamma(k,θ)",			value: "gamma_k0"},
+							{ label: "Inverse-Gamma(α,β)",	value: "invgamma"},
+							{ label: "Spike(x₀)",			value: "spike"},
+						]
+						Layout.rightMargin: if(currentText === "Cauchy(x₀,θ)" | currentText === "Spike(x₀)") { 8 } else { 15 }
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"μ"
+						name:				"parMean"
+						visible:			fromRowComponents["type"].currentText === "Normal(μ,σ)"		||
+											fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
+						value:				"0"
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"x₀"
+						name:				"parLocation"
+						visible:			fromRowComponents["type"].currentText === "Cauchy(x₀,θ)"	||
+											fromRowComponents["type"].currentText === "Spike(x₀)"
+						value:				"0"
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: if(fromRowComponents["type"].currentText === "Spike(x₀)") 125.5
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"σ"
+						name:				"	"
+						visible:			fromRowComponents["type"].currentText === "Normal(μ,σ)"		||
+											fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
+						value:				"1"
+						min:				0
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: if(fromRowComponents["type"].currentText === "Normal(μ,σ)") width + .5
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"k"
+						name:				"parShape"
+						visible:			fromRowComponents["type"].currentText === "Gamma(k,θ)"
+						value:				"1"
+						min:				0
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"θ"
+						name:				"parScale2"
+						visible:			fromRowComponents["type"].currentText === "Cauchy(x₀,θ)"	||
+											fromRowComponents["type"].currentText === "Gamma(k,θ)"
+						value:				"1"
+						min:				0
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: width + .5
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"ν"
+						name:				"parDF"
+						visible:			fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
+						value:				"2"
+						min:				1
+						inclusive:			JASP.MinOnly
+						fieldWidth: 		40
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: 10
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"α"
+						name:				"parAlpha"
+						visible:			fromRowComponents["type"].currentText === "Gamma(α,β)"		||
+											fromRowComponents["type"].currentText === "Inverse-Gamma(α,β)"
+						value:				"1"
+						min:				0
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label:				"β"
+						name:				"parBeta"
+						visible:			fromRowComponents["type"].currentText === "Gamma(α,β)"	||
+											fromRowComponents["type"].currentText === "Inverse-Gamma(α,β)"
+						value:				"0.15"
+						min:				0
+						inclusive:			JASP.None
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: width + .5
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label: 				"lower"
+						name: 				"truncationLower"
+						value:				"0"
+						min:				0
+						//max: 				fromRowComponents["truncationUpper"].currentText
+						inclusive: 			JASP.MinOnly
+						fieldWidth:			50
+						useExternalBorder:	false
+						showBorder:			true
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label: 				"upper"
+						name: 				"truncationUpper"
+						value:				"Inf"
+						//min: 				fromRowComponents["truncationLower"].currentText
+						inclusive: 			JASP.MaxOnly
+						fieldWidth:			50
+						useExternalBorder:	false
+						showBorder:			true
+						Layout.rightMargin: 15
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label: 				"Odds"
+						name: 				"priorOdds"
+						value:				"1"
+						min: 				0
+						inclusive: 			JASP.None
+						fieldWidth:			50
+						useExternalBorder:	false
+						showBorder:			true
+					}
+				}
+			]
+
+			defaultValues: ["7"]
+		}
+
+
+		// omega prior
+		InputListView
+		{
+			Layout.columnSpan:		2
+			visible:				priors_null.checked & !measures_fitted.checked
+			height:					100
+			title:					qsTr("Publication bias")
+			name:					"priors_omega_null"
+			optionKey:				"name"
+			placeHolder:			qsTr("prior name")
+			rowComponentsTitles: [qsTr("Weight function                      Cut-points                  Parameters                              Prior Odds       ")]
+
+			rowComponents:
+			[
+				Component
+				{
+					DropDown
+					{
+						name: "type"
+						useExternalBorder: true
+						values: [
+							{ label: "Two-sided",			value: "Two-sided"},
+							{ label: "Two-sided",			value: "Two-sided2", visible: false},
+							{ label: "One-sided (mon.)",	value: "One-sided (mon.)"},
+							{ label: "One-sided",			value: "One-sided"},
+							{ label: "Spike(x₀)",			value: "spike"}
+						]
+						Layout.rightMargin: if(currentText === "Spike(x₀)") { 200 } else { 15 }
+					}
+				},
+				Component
+				{
+					TextField
+					{
+						label:				"p-values"
+						name:				"parCuts"
+						visible:			fromRowComponents["type"].currentText === "Two-sided"		||
+											fromRowComponents["type"].currentText === "Two-sided2"	||
+											fromRowComponents["type"].currentText === "One-sided"		||
+											fromRowComponents["type"].currentText === "One-sided (mon.)"
+						value:				if(fromRowComponents["type"].currentText === "Two-sided2"){ "(.05)" }else{ "(.05, .10)" }
+						fieldWidth: 		100
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: if(fromRowComponents["type"].currentText === "One-sided"){ 8 }else{ 15 }
+					}
+				},
+				Component
+				{
+					TextField
+					{
+						label:				"α"
+						name:				"parAlpha"
+						visible:			fromRowComponents["type"].currentText === "Two-sided"		||
+											fromRowComponents["type"].currentText === "Two-sided2"	||
+											fromRowComponents["type"].currentText === "One-sided (mon.)"
+						value:				if(fromRowComponents["type"].currentText === "Two-sided2"){ "(1,1)" }else{ "(1,1,1)" }
+						fieldWidth: 		70
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: 105
+					}
+				},
+				Component
+				{
+					TextField
+					{
+						label:				"α₁"
+						name:				"parAlpha1"
+						visible:			fromRowComponents["type"].currentText === "One-sided"
+						value:				"(1,1,1)"
+						fieldWidth: 		70
+						useExternalBorder:	false
+						showBorder: 		true
+					}
+				},
+				Component
+				{
+					TextField
+					{
+						label:				"α₂"
+						name:				"parAlpha2"
+						visible:			fromRowComponents["type"].currentText === "One-sided"
+						value:				"(1,1)"
+						fieldWidth: 		70
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: 15
+					}
+				},
+				Component
+				{
+					IntegerField
+					{
+						label:				"x₀"
+						name:				"parLocation"
+						visible:			fromRowComponents["type"].currentText === "Spike(x₀)"
+						defaultValue:		1
+						min:				1
+						max:				1
+						inclusive: 			JASP.MinMax
+						fieldWidth: 		50
+						useExternalBorder:	false
+						showBorder: 		true
+						Layout.rightMargin: 90
+					}
+				},
+				Component
+				{
+					FormulaField
+					{
+						label: 				"Odds"
+						name: 				"priorOdds"
+						value:				"1"
+						min: 				0
+						inclusive: 			JASP.None
+						fieldWidth:			50
+						useExternalBorder:	false
+						showBorder:			true
+					}
+				}
+			]
+
+			defaultValues: ["4"]
+		}
+
+	}
+
+	//// Options section ////
+	Section
+	{
+		title: qsTr("Inference")
+
+		Group
+		{
+
+			CheckBox
+			{
+				label:		qsTr("Conditional estimates")
+				name:		"results_conditional"
+			}
+
+			CheckBox
+			{
+				columns:	2
+				label:		qsTr("Models overview")
+				name:		"results_models"
+
+				RadioButtonGroup
+				{
+					name: "results_models_BF"
+					title: qsTr("BF")
+
+					RadioButton
+					{
+						name: 		"inclusion"
+						label: 		qsTr("Inclusion")
+						checked: 	true
+					}
+
+					RadioButton
+					{
+						name: 		"best"
+						label: 		qsTr("vs Best")
+					}
+
+					RadioButton
+					{
+						name: 		"previous"
+						label: 		qsTr("vs Previous")
+						enabled:	results_models_order_marglik.checked
+					}
+				}
+
+				RadioButtonGroup
+				{
+					name: 		"results_models_order"
+					title:		qsTr("Order")
+					
+					RadioButton
+					{
+						name: 		"default"
+						label: 		qsTr("Priors")
+						checked:	true
+					}
+
+					RadioButton
+					{
+						name: 		"marglik"
+						label: 		qsTr("Marginal likelihood")
+						id:			results_models_order_marglik
+					}
+
+					RadioButton
+					{
+						name: 		"posterior"
+						label: 		qsTr("Posterior prob.")
+						
+					}
+				}
+			}
+
+			CheckBox
+			{
+				label:		qsTr("Individual models")
+				name:		"results_individual"
+
+				CheckBox
+				{
+					label:		qsTr("Single model")
+					name:		"results_individual_single"
+					childrenOnSameRow: true
+					IntegerField
+					{
+						name:	"results_individual_single_number"
+						defaultValue:	1
+					}
+				}
+			}
+
+		}
+
+		Group
+		{
+
+			BayesFactorType{}
+
+			CIField
+			{
+				name: "results_CI"
+				label: qsTr("CI width")
+			}
+
+			CheckBox
+			{
+				label:		qsTr("Estimated studies' effects")
+				name:		"results_theta"
+			}
+
+
+		}
+
+
+
+	}
+
+	//// Plots section ////
+	Section
+	{
+		title: 		qsTr("Plots")
+
+		Group
+		{
+			title:	qsTr("Pooled estimates")
+
+			CheckBox
+			{
+				columns:	2
+				label:		qsTr("Forest plot")
+				name:		"plots_theta"
+
+					RadioButtonGroup
+					{
+						name: "plots_theta_show"
+						title: qsTr("Show")
+
+						RadioButton
+						{
+							name: 		"observed"
+							label: 		qsTr("Observed")
+							checked: 	true
+						}
+
+						RadioButton
+						{
+							name: 		"estimated"
+							label: 		qsTr("Estimated")
+						}
+
+						RadioButton
+						{
+							name: 		"both"
+							label: 		qsTr("Both")
+						}
+					}
+
+					RadioButtonGroup
+					{
+						name: 		"plots_theta_order"
+						title:		qsTr("Order")
+
+						RadioButton
+						{
+							name: 	"ascending"
+							label: 	qsTr("Ascending")
+						}
+
+						RadioButton
+						{
+							name: 	"descending"
+							label: 	qsTr("Descending")
+						}
+
+						RadioButton
+						{
+							name: 	"labels"
+							label: 	qsTr("Row order")
+							checked:true
+						}
+					}
+				
+			}
+
+			CheckBox
+			{
+				label:	qsTr("Effect")
+				name:	"plots_mu"
+			}
+
+			CheckBox
+			{
+				label:	qsTr("Heterogeneity")
+				name:	"plots_tau"
+			}
+
+			CheckBox
+			{
+				label:	qsTr("Weights")
+				name:	"plots_omega"
+
+				CheckBox
+				{
+					label:	qsTr("Weight function")
+					name:	"plots_omega_function"
+					checked:true
+				}
+			}
+
+		}
+
+		Group
+		{
+			title:	qsTr(" ") // just alligning one line lower ;)
+			RadioButtonGroup
+			{
+				name:	"plots_type"
+				title:	qsTr("Type")
+				RadioButton
+				{
+					value:	"averaged"
+					label:	qsTr("Model-averaged")
+					checked:true
+				}
+				RadioButton
+				{
+					value:	"conditional"
+					label:	qsTr("Conditional")
+				}
+
+			}
+
+			CheckBox
+			{
+				label:	qsTr("Show priors")
+				name:	"plots_priors"
+				checked:true
+			}
+/*************************************************** TODO: enable once/if CI are made available
+			RadioButtonGroup
+			{
+				name:	"plots_estimate"
+				title:	qsTr("Point estimate")
+				RadioButton
+				{
+					value:	"mean"
+					label:	qsTr("Mean")
+					checked:true
+				}
+				RadioButton
+				{
+					value:	"median"
+					label:	qsTr("Median")
+				}
+			}
+
+			CIField
+			{
+				name: "plots_CI"
+				label: qsTr("CI width")
+			}
+****************************************************/
+		}
+
+		Group
+		{
+			title:	qsTr("Individual models")
+
+			
+			CheckBox
+			{
+				label:	qsTr("Effect")
+				name:	"plots_individual_mu"
+			}
+
+			CheckBox
+			{
+				label:	qsTr("Heterogeneity")
+				name:	"plots_individual_tau"
+			}
+
+			CheckBox
+			{
+				label:	qsTr("Weights")
+				name:	"plots_individual_omega"
+			}
+
+				
+		}
+
+		Group
+		{
+			title:	qsTr(" ")
+
+			CheckBox
+			{
+
+				name:	"plots_type_individual_conditional"
+				label:	qsTr("Omit null models")
+				checked:true
+			}
+
+			RadioButtonGroup
+			{
+				name: 		"plots_type_individual_by"
+				title:		qsTr("Order")
+				RadioButton
+				{
+					name: 	"model"
+					label: 	qsTr("Model number")
+					checked:true
+				}
+
+				RadioButton
+				{
+					name: 	"prob"
+					label: 	qsTr("Posterior prob.")
+				}
+
+				RadioButton
+				{
+					name: 	"marglik"
+					label: 	qsTr("Marginal likelihood")
+				}
+			}
+
+			RadioButtonGroup
+			{
+				name: 		"plots_type_individual_order"
+				title:		qsTr("")
+				columns: 	2
+				RadioButton
+				{
+					name: 	"ascending"
+					label: 	qsTr("Ascending")
+				}
+
+				RadioButton
+				{
+					name: 	"descending"
+					label: 	qsTr("Descending")
+				}
+			}
+		}
+
+
+	}
+
+	//// Diagnostics section ////
+	Section
+	{
+		title: qsTr("MCMC Diagnostics")
+
+		CheckBox
+		{
+			Layout.columnSpan: 2
+			label:		qsTr("Overview")
+			name:		"diagnostics_overview"
+
+				CheckBox
+				{
+					label:		qsTr("Include theta")
+					name:		"diagnostics_overview_theta"
+				}
+		}
+
+		Group
+		{
+			title:			qsTr("Plot")
+			CheckBox
+			{
+				label:		qsTr("Effect")
+				name:		"diagnostics_mu"
+			}
+
+			CheckBox
+			{
+				label:		qsTr("Heterogeneity")
+				name:		"diagnostics_tau"
+			}
+
+			CheckBox
+			{
+				label:		qsTr("Weights")
+				name:		"diagnostics_omega"
+			}
+
+			CheckBox
+			{
+				label:		qsTr("Estimated studies' effects")
+				name:		"diagnostics_theta"
+			}
+		}
+
+		Group
+		{
+			title:			qsTr("Type")
+			CheckBox
+			{
+				label:		qsTr("Trace")
+				name:		"diagnostics_trace"
+			}
+
+			CheckBox
+			{
+				label:		qsTr("Autocorrelation")
+				name:		"diagnostics_autocorrelation"
+			}
+
+			CheckBox
+			{
+				label:		qsTr("Posterior samples densities")
+				name:		"diagnostics_samples"
+			}
+
+		}
+
+		CheckBox
+		{
+			label:		qsTr("Single model")
+			name:		"diagnostics_single"
+			childrenOnSameRow: true
+			IntegerField
+			{
+				name:	"diagnostics_single_model"
+				defaultValue:	1
+			}
+		}
+
+		CheckBox
+		{
+			label:		qsTr("Transform estimates")
+			name:		"diagnostics_transformed"
+			checked:	true
+			visible:	measures_correlation.checked | measures_fitted.checked
+		}
+
+	}
+
+	//// Advanced section for prior model probabilities sampling settings ////
+	Section
+	{
+		runOnChange:	false
+		columns: 		2
+		title: 			qsTr("Advanced")
+
+		DropDown
+		{
+			enabled:	measures_correlation.checked
+			label:		qsTr("Transform correlations")
+			name:		"advanced_mu_transform"
+			values:
+			[
+				{ label: "Cohen's d",			value: "cohens_d"},
+				{ label: "Fisher's z",			value: "fishers_z"}
+			]
+		}
+
+		IntegerField
+		{
+			label:  		qsTr("Bridge sampling iterations:")
+			name:     		"advanced_bridge_iter"
+			defaultValue: 	5000
+			max:			1000000
+			fieldWidth: 	100
+		}
+
+
+		Group
+		{
+			title: 		qsTr("Estimation settings (MCMC)")
+
+			IntegerField
+			{
+				name:			"advanced_adapt"
+				label:			qsTr("Adaptation")
+				defaultValue:	1000
+				min:			100
+			}
+			IntegerField
+			{
+				name:			"advanced_burnin"
+				label:			qsTr("Burnin")
+				defaultValue:	5000
+				min:			4000
+			}
+			IntegerField
+			{
+				name:			"advanced_iteration"
+				label:			qsTr("Iterations")
+				defaultValue:	10000
+			}
+			IntegerField
+			{
+				name:			"advanced_chains"
+				label:			qsTr("Chains")
+				defaultValue:	3
+				min:			1
+			}
+			IntegerField
+			{
+				name:			"advanced_thin"
+				label:			qsTr("Thin")
+				defaultValue:	1
+				min:			1
+			}
+
+		}
+
+
+		Group
+		{
+			CheckBox
+			{
+				label: 		qsTr("Autofit")
+				name:		"advanced_autofit"
+				checked:	true
+				Group
+				{
+					columns:	2
+
+					IntegerField
+					{
+						name:			"advanced_autofit_time"
+						label:			qsTr("Maximum fitting time")
+						defaultValue:	1
+						min:			0
+					}
+
+					DropDown
+					{
+						name:	"advanced_autofit_time_unit"
+						values:
+						[
+							{ label: "hours",			value: "hours"},
+							{ label: "minutes",			value: "minutes"},
+							{ label: "seconds",			value: "seconds"}
+
+						]
+					}
+				}
+
+				DoubleField
+				{
+					name:			"advanced_autofit_rhat"
+					label:			qsTr("Maximum Rhat")
+					defaultValue:	1.05
+					min:			1
+				}
+
+
+			}
+
+			CheckBox
+			{
+				label:		qsTr("Omit models")
+				name:		"advanced_omit"
+				checked:	true
+
+
+				CheckBox
+				{
+					childrenOnSameRow:	true
+					name:				"advanced_omit_rhat"
+					label:				qsTr("Rhat >")
+					checked:			true
+
+					DoubleField
+					{
+						name: 			"advanced_omit_rhat_value"
+						defaultValue: 	1.05
+						min:			1
+					}
+				}
+				
+
+				CheckBox
+				{
+					childrenOnSameRow:	true
+					name:				"advanced_omit_ESS"
+					label:				qsTr("Estimated sample size <")
+
+					DoubleField
+					{
+						name: 			"advanced_omit_ESS_value"
+						defaultValue:	500
+						min: 			1
+					}
+				}
+
+
+				CheckBox
+				{
+					label:			qsTr("Include theta")
+					name:			"advanced_omit_theta"
+				}
+
+				
+				CheckBox
+				{
+					name:		"advanced_omit_marglik"
+					label:		qsTr("Failed bridge sampling")
+					checked:	true
+				}
+
+				DropDown
+				{
+					label:		qsTr("Redistribute prior probability")
+					name:		"advanced_omit_prior"
+					values:
+					[
+						{ label: "Conditional models",	value: "conditional"},
+						{ label: "Model space",			value: "overal"}
+					]
+				}
+			}
+		}
+
+		SetSeed{}
+
+		DropDown
+		{
+			label: qsTr("Control")
+			name: "advanced_control"
+			values:
+			[
+				{ label: "Clever refitting",	value: "clever",	default: true},
+				{ label: "Do not refit",		value: "no_refit"},
+				{ label: "Always refit",		value: "refit"}
+			]
+		}
+
+
+	}
+ 	
+}
