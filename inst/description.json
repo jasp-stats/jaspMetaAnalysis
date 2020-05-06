@@ -1,0 +1,35 @@
+{
+	"moduleDescription" :
+	{
+		"name": 		"MetaAnalysis",
+		"title" : 		"Meta-Analysis",
+		"description" : "Meta-Analysis module.",
+		"icon":			"meta-analysis.svg",
+		"version":		1,
+		"author":		"JASP Team",
+		"maintainer":	"JASP Team <info@jasp-stats.org>",
+		"website":		"jasp-stats.org",
+		"license":		"GPL (>= 2)",
+		"dynamic":		false
+	},
+
+	"requiredPackages":	[],
+
+	"menu":  [
+		{
+			"title":	"Classical Meta-Analysis",
+			"function":	"ClassicalMetaAnalysis"
+		},
+		{
+			"title":	"-"
+		},
+		{
+			"title": 	"Bayesian Meta-Analysis",
+			"function":	"BayesianMetaAnalysis"
+		},
+		{
+			"title": 	"Robust Bayesian Meta-Analysis",
+			"function":	"RobustBayesianMetaAnalysis"
+		}
+	]
+}
