@@ -1,11 +1,16 @@
 Robust Bayesian Meta-Analysis
 ===
 
+<<<<<<< HEAD
 The robust Bayesian meta-analysis allows the user to specify a wide range of meta-analytic models, combine their estimates using model averaging and quantify evidence for different hypotheses using Bayes factors. The analysis allows to specify various prior distributions for effect sizes and heterogeneity and incorporate models correcting for publication bias by estimating a weight function on p-values. 
+=======
+The robust Bayesian meta-analysis allows the user to specify a wide range of meta-analytic models, combine their estimates using model-averaging and quantify evidence for different hypotheses using Bayes Factors. The analysis allows to specify various prior distributions for effect sizes and heterogeneity and incorporate models correcting for publication bias by estimating a weight function on p-values. 
+>>>>>>> fixes
 
 ### Input
 ---
 #### Input type
+<<<<<<< HEAD
 - Cohen's d / t-statistics & (N / SE): Specifying input using either Cohen's d effect sizes and the sample size or standard errors, or reported t-statistics and sample sizes.
 - Correlations & (N / SE): Specifying input using correlations and the sample size. Note that the effect size is internally transformed to Cohen's d scale for model estimation (see Advanced tab for additional options). The prior distributions are specified on the transformed scale, with the provided visualization transforming the priors back to the correlation scale. The output for the mean parameter is transformed back for easier interpretability, however, the heterogeneity parameter is always summarized on the transformed scale.
 - Effect sizes & SE: Specifying input using any other types of effect sizes and standard errors. Note that effect sizes supplied in this way will result in approximating the corresponding test statistics distribution using a normal distribution.
@@ -15,6 +20,17 @@ The robust Bayesian meta-analysis allows the user to specify a wide range of met
 - Effect Size: Effect sizes of the studies. In case that the effect sizes are measured by Cohen's d t-statistics can be provided instead.
 - t-statistic: t-statistics of the studies. Only possible if the studies effect sizes are measured by Cohen's d or correlations. Effect sizes can be provided instead. 
 - Effect Size Standard Error: Standard errors of the effect sizes per study. Must always be positive. A 95% CI for the effect sizes can be provided instead. In case that the effect sizes are measured by Cohen's d the sample sizes can be provided instead.
+=======
+- Cohen's d / t-statistics & (N / SE): Specifying input using either Cohen's d measured effect sizes and the sample size or standard errors, or reported t-statistics and sample sizes.
+- Correlations & (N / SE): Specifying input using effect sizes measured as correlations and the sample size or standard errors. Note that the effect size is internally transformed on Cohen's d scale for model estimation (see Advanced for additional options). The prior distributions are specified on the transformed scale, with the provided visualization transforming the priors back to the correlation scale. The output for the mean parameter is transformed back for easier interpretability, however, the heterogeneity parameter is always summarized on the transformed scale.
+- Effect sizes & SE: Specifying input using any other types of effect sizes and standard errors. Note that effect sizes supplied in this way will result in approximating the corresponding test-statistics distribution using a normal distribution.
+- Fitted model: Specify a path to already fitted RoBMA model using R. The model must be saved as an RDS file.
+
+#### Data
+- Effect Size: Effect sizes of the studies. t-statistics can be provided instead of the effect sizes are measured by Cohen's d or correlations.
+- t-statistic: t-statistics of the studies. Only possible if the studies effect sizes are measured by Cohen's d or correlations. Effect sizes can be provided instead. 
+- Effect Size Standard Error: Standard errors of the effect sizes per study. Must always be positive. A 95% CI for the effect sizes can be provided instead. In case that the effect sizes are measured by Cohen's d or correlations, the sample sizes can be provided instead.
+>>>>>>> fixes
 - 95% CI Lower and Upper Bound: 95% CI lower and upper bounds of the effect sizes per study. Must be separated into two columns. The standard errors of the effect sizes can be provided instead.
 - N: Overall sample sizes of the studies. Only possible if the studies effect sizes are measured by Cohen's d or correlations. Effect Size Standard Errors can be provided instead. In the case of two-sample t-tests, sample sizes per group can be provided as well.
 - N (group 1) / N (group 2): Sample sizes of each group of the studies. Only possible if the studies effect sizes are measured by Cohen's d and correspond to two-sample t-tests. Overall sample sizes or Effect Size Standard Errors can be provided instead.
@@ -71,7 +87,11 @@ Displays estimates assuming that the alternative models are true.
 
 #### Models overview
 Display overview of the specified models.
+<<<<<<< HEAD
 - BF: Show different types of Bayes factors
+=======
+- BF: Show different types of Bayes Factors
+>>>>>>> fixes
   - Inclusion: Change from prior to posterior odds for each individual model.
   - vs Best: Bayes factor comparing to the best fitting model.
   - vs Previous: Bayes factor comparing to a better fitting model.
@@ -113,8 +133,13 @@ Display the estimated effects of individual studies. These correspond to the 'ra
   - Weight function: Combine the weights into a weight function and display that instead.
 
 #### Type
+<<<<<<< HEAD
 - Model averaged: Pooled estimates will contain model averaged estimates across all models.
 - Conditional: Pooled estimates will contain model averaged estimates across models assuming that the alternative hypothesis is true models.
+=======
+- Model-averaged: Pooled estimates will contain model-averaged estimates across all models.
+- Conditional: Pooled estimates will contain model-averaged estimates across models assuming that the alternative hypothesis is true models.
+>>>>>>> fixes
 
 #### Show priors
 Displays prior distribution density on top of the pooled estimates figures.
