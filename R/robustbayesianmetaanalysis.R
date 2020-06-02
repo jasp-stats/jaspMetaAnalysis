@@ -16,18 +16,16 @@
 #
 
 
-
-
 RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NULL){
 
   # load data
-  dataset <- .RoBMA_data_get(options, dataset)
+  if(.RoBMA_ready(options))dataset <- .RoBMA_data_get(options, dataset)
 
   # get the priors
   .RoBMA_priors_get(jaspResults, options)
 
   # fit model model
-  if(is.null(jaspResults[["model_notifier"]])).RoBMA_fit_model(jaspResults, dataset, options)
+  if(is.null(jaspResults[["model_notifier"]]) & .RoBMA_ready(options)).RoBMA_fit_model(jaspResults, dataset, options)
 
   # show the model preview if model isn't fitted yet
   if(is.null(jaspResults[["model"]])).RoBMA_model_preview(jaspResults, options)
@@ -65,8 +63,11 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     # plots
     if((options$diagnostics_mu | options$diagnostics_tau | options$diagnostics_omega | options$diagnostics_theta) &
        (options$diagnostics_trace | options$diagnostics_autocorrelation | options$diagnostics_samples)).RoBMA_diagnostics_plots(jaspResults, options)
-  }
 
+    ### Save the model
+    if(options$save_path != "" & is.null(jaspResults[["model_saved"]])).RoBMA_save_model(jaspResults, options)
+  }
+  
   return()
 }
 
@@ -75,8 +76,8 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   "input_ES", "input_t", "input_SE", "input_CI", "input_N", "input_N1", "input_N2", "input_labels",
   "priors_mu", "priors_tau", "priors_omega", "priors_mu_null", "priors_tau_null", "priors_omega_null",
   "advanced_control", "advanced_omit_prior", "advanced_omit_marglik", "advanced_omit_theta",
-  "advanced_omit_ESS_value", "advanced_omit_ESS", "advanced_omit_rhat_value", "advanced_omit_rhat",
-  "advanced_omit", "advanced_autofit_rhat", "advanced_autofit_time_unit", "advanced_autofit_time",
+  "advanced_omit_error", "advanced_omit_error_value", "advanced_omit_ESS_value", "advanced_omit_ESS", "advanced_omit_rhat_value", "advanced_omit_rhat",
+  "advanced_omit", "advanced_autofit_error", "advanced_autofit_time_unit", "advanced_autofit_time",
   "advanced_autofit", "advanced_thin", "advanced_chains", "advanced_iteration", "advanced_burnin",
   "advanced_adapt", "advanced_bridge_iter", "advanced_mu_transform"
 )
@@ -152,6 +153,13 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
       parameters = list(
         location   = options_prior$parLocation),
       prior_odds = options_prior$priorOdds))
+  }else if(options_prior$type == "uniform"){
+    return(RoBMA::prior(
+      distribution = "uniform",
+      parameters = list(
+        a          = options_prior$parA,
+        b          = options_prior$parB),
+      prior_odds = options_prior$priorOdds))
   }else if(options_prior$type %in% c("Two-sided", "Two-sided2")){
     return(RoBMA::prior(
       distribution = "two.sided",
@@ -197,7 +205,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 }
 .RoBMA_options2priors_eval  <- function(x){
 
-  if(x$type %in% c("Two-sided", "Two-sided2", "One-sided (monotonic)", "One-sided")){
+  if(x$type %in% c("Two-sided", "One-sided (mon.)", "One-sided")){
 
     x[["priorOdds"]] <- eval(parse(text = x[["priorOdds"]]))
     x[["parAlpha"]]  <- .RoBMA_options2priors_clean(x[["parAlpha"]])
@@ -205,14 +213,14 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     x[["parAlpha2"]] <- .RoBMA_options2priors_clean(x[["parAlpha2"]])
     x[["parCuts"]]   <- .RoBMA_options2priors_clean(x[["parCuts"]])
 
-  }else if(x$type == "spike" & any(names(x) %in% c("parAlpha", "parAlpha1", "parAlpha2"))){
+  }else if(x$type == "spike" & any(names(x) %in% c("parAlpha2"))){
 
     x[["priorOdds"]]   <- eval(parse(text = x[["priorOdds"]]))
-    x[["parLocation"]] <- eval(parse(text = x[["parLocation"]]))
+    x[["parLocation"]] <- 1
 
   }else{
 
-    eval_names <- c("parAlpha","parBeta","parDF","parLocation","parMean","parScale","parScale2","parShape","priorOdds","truncationLower","truncationUpper")
+    eval_names <- c("parA","parB","parAlpha","parBeta","parDF","parLocation","parMean","parScale","parScale2","parShape","priorOdds","truncationLower","truncationUpper")
 
     for(n in eval_names){
       if(!is.null(x[[n]]))x[[n]] <- eval(parse(text = x[[n]]))
@@ -234,7 +242,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   jasp_table$addColumnInfo(name = "upperCI", title = gettext("Upper"), type = "number",
                            overtitle = gettextf("%s%% CI", 100 * options$results_CI))
   if(individual){
-    jasp_table$addColumnInfo(name = "error",  title = "error %",       type = "number")
+    jasp_table$addColumnInfo(name = "error",  title = "MCMC error",    type = "number")
     jasp_table$addColumnInfo(name = "ess",    title = "ESS",           type = "integer")
     jasp_table$addColumnInfo(name = "rhat",   title = "Rhat",          type = "number")
   }
@@ -250,7 +258,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
         upperCI  = results_table[i, 4]
       )
       if(individual){
-        temp_row$error <- results_table$`Error % of SD`[i]
+        temp_row$error <- results_table$`MCMC error`[i]
         temp_row$ess   <- results_table$`ESS`[i]
         temp_row$rhat  <- results_table$`Rhat`[i]
       }
@@ -360,12 +368,39 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   if(substr(name, 1, 5) == "theta")return(if(!is.null(add_info$study_names)) add_info$study_names[as.numeric(substr(name,7,nchar(name)-1))] else paste0("Study (",substr(name,7,nchar(name)-1),")"))
 }
 # main functions
+.RoBMA_ready                <- function(options){
+  
+  if(options$measures == "fitted"){
+    return(options$fitted_path != "")
+  }
+  
+  if(length(options$input_CI) != 0){
+    CI_input <- all(options$input_CI[[1]] != "")
+  }else{
+    CI_input <- FALSE
+  }
+   
+  ready_arg1 <- any(c(options$input_ES, options$input_t) != "")
+  if(options$measures == "cohensd"){
+    if(options$cohensd_testType == "one.sample"){
+      ready_arg2 <- any(c(options$input_CI, options$input_SE, options$input_N) != "", CI_input)
+    }else if(options$cohensd_testType == "two.sample"){
+      ready_arg2 <- any(c(options$input_CI, options$input_SE, options$input_N) != "", CI_input, all(c(options$input_N1, options$input_N2) != ""))
+    }
+  }else if(options$measures == "correlation"){
+    ready_arg2 <- any(c(options$input_CI, options$input_SE, options$input_N) != "", CI_input)
+  }else if(options$measures == "general"){
+    ready_arg2 <- any(c(options$input_CI, options$input_SE) != "", CI_input)
+  }
+
+  return(ready_arg1 & ready_arg2)
+
+}
 .RoBMA_model_notifier       <- function(jaspResults){
 
   # We don't wanna delete the RoBMA modele every time settings is change since RoBMA takes a lot of time to fit.
   # Therefore, we don't create dependencies on the fitted model, but on a notifier that tells us when there was
-  # a change. If we can resolve the change. If possible, we don't refit the whole model, just update the neccessary
-  # parts.
+  # a change. If possible, we don't refit the whole model, just update the neccessary parts.
 
   if(is.null(jaspResults[["model_notifier"]])){
     model_notifier <- createJaspState()
@@ -388,15 +423,14 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
       return(dataset)
     }else{
 
-      var_names <- c(options$input_t, options$input_ES, options$input_N, options$input_N1, options$input_N2, unlist(options$input_CI))
+      var_names <- c(options$input_t, options$input_ES, options$input_SE, options$input_N, options$input_N1, options$input_N2, unlist(options$input_CI))
       var_names <- var_names[var_names != ""]
 
       dataset <- readDataSetToEnd(columns.as.numeric = var_names, columns = if(options$input_labels != "") options$input_labels)
 
       # compute SE from CI
-      if(length(options$input_CI != 0)){
-        if(length(options$input_CI != 2))stop("Both upper and lower CI must be provided.")
-        data$SE <- abs(data[,.v(options$input_CI[1])] - data[,.v(options$input_CI[2])]) / (2*1.96)
+      if(length(options$input_CI) != 0){
+        dataset$SE <- abs(dataset[,.v(options$input_CI[[1]][1])] - dataset[,.v(options$input_CI[[1]][2])]) / (2*1.96)
       }
     }
 
@@ -410,7 +444,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     return()
   }else{
     priors <- createJaspState()
-    priors$dependOn(c("priors_mu", "priors_tau", "priors_omega", "priors_mu_null", "priors_tau_null", "priors_omega_null"))
+    priors$dependOn(.RoBMA_dependencies)
     jaspResults[["priors"]] <- priors
   }
 
@@ -556,7 +590,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   # create / access the container
   if(is.null(jaspResults[["prior_plots"]])){
     model_preview <- createJaspContainer(title = "Model Preview")
-    model_preview$dependOn(c("priors_mu", "priors_tau", "priors_omega", "null_mu", "null_tau", "null_omega", "measures"))
+    model_preview$dependOn(.RoBMA_dependencies)
     model_preview$position <- 1
     jaspResults[["model_preview"]] <- model_preview
   }else{
@@ -568,7 +602,9 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   priors  <- jaspResults[["priors"]]$object
 
   # set error if no priors are specified
-  if(length(priors$mu) == 0 | length(priors$tau) == 0 | length(priors$omega) == 0){
+  if((length(priors$mu) == 0    & length(priors$mu_null))         |
+     (length(priors$tau) == 0   & length(priors$tau_null) == 0)   |
+     (length(priors$omega) == 0 & length(priors$omega_null) == 0)){
     priors_error <- createJaspTable()
     priors_error$setError("At least one prior distribution per parameter must be specified (either null or a user specified one).")
     model_preview[["priors_error"]] <- priors_error
@@ -640,11 +676,21 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 }
 .RoBMA_fit_model            <- function(jaspResults, dataset, options){
 
-  if(options$measures == "fitted"){
-
+  if(is.null(jaspResults[["model"]])){
+    
     model <- createJaspState()
     model$dependOn("measures")
     jaspResults[["model"]] <- model
+    
+  }else{
+
+    model <- jaspResults[["model"]]
+    fit   <- model$object
+    
+  }
+  
+  if(options$measures == "fitted"){
+
     fit <- readRDS(file = options$fitted_path)
     if(class(fit) != "RoBMA")stop("The loaded object is not a RoBMA model.")
 
@@ -676,10 +722,6 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
     if(needs_refit){
 
-      model <- createJaspState()
-      model$dependOn("measures")
-      jaspResults[["model"]] <- model
-
       # extract priors
       priors <- jaspResults[["priors"]]$object
 
@@ -688,7 +730,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
         d  = if(options$measures == "cohensd" & options$input_ES != "")     dataset[, .v(options$input_ES)] else NULL,
         r  = if(options$measures == "correlation" & options$input_ES != "") dataset[, .v(options$input_ES)] else NULL,
         y  = if(options$measures == "general" & options$input_ES != "")     dataset[, .v(options$input_ES)] else NULL,
-        se = if(options$input_SE != "")                                     dataset[, .v(options$input_SE)] else NULL,
+        se = if(options$input_SE != "") dataset[, .v(options$input_SE)] else if(length(unlist(options$input_CI)) == 2) dataset[, "SE"] else NULL,
         n  = if(options$measures %in% c("cohensd","correlation") & options$input_N != "") dataset[, .v(options$input_N)] else NULL,
         n1 = if(options$measures == "cohensd" & options$input_N1 != "")     dataset[, .v(options$input_N1)] else NULL,
         n2 = if(options$measures == "cohensd" & options$input_N2 != "")     dataset[, .v(options$input_N2)] else NULL,
@@ -710,16 +752,18 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
         thin    = options$advanced_thin,
         control = list(
           autofit         = options$advanced_autofit,
-          max_rhat        = if(options$advanced_autofit) options$advanced_autofit_rhat,
+          max_error       = if(options$advanced_autofit) options$advanced_autofit_error,
           max_time        = if(options$advanced_autofit) paste0(options$advanced_autofit_time, options$advanced_autofit_time_unit),
           adapt           = options$advanced_adapt,
           bridge_max_iter = options$advanced_bridge_iter,
-          allow_max_rhat  = if(options$advanced_omit_rhat) options$advanced_omit_rhat_value,
-          allow_min_ESS   = if(options$advanced_omit_ESS)  options$advanced_omit_ESS_value,
+          allow_max_error = if(options$advanced_omit & options$advanced_omit_error) options$advanced_omit_error_value,
+          allow_max_rhat  = if(options$advanced_omit & options$advanced_omit_rhat)  options$advanced_omit_rhat_value,
+          allow_min_ESS   = if(options$advanced_omit & options$advanced_omit_ESS)   options$advanced_omit_ESS_value,
           allow_inc_theta = options$advanced_omit_theta,
           balance_prob    = options$advanced_omit_prior == "conditional",
           silent          = TRUE,
-          JASP            = TRUE
+          progress_start  = 'startProgressbar(length(object$models))',
+          progress_tick   = 'progressbarTick()'
         ),
         save    = "all",
         seed    = if(options$setSeed) options$setSeed
@@ -727,7 +771,6 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
     }else{
 
-      fit <- jaspResults[["model"]]$object
       fit <- RoBMA::update.RoBMA(
         object  = fit,
         chains  = options$advanced_chains,
@@ -736,16 +779,18 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
         thin    = options$advanced_thin,
         control = list(
           autofit         = options$advanced_autofit,
-          max_rhat        = if(options$advanced_autofit) options$advanced_autofit_rhat,
+          max_error       = if(options$advanced_autofit) options$advanced_autofit_error,
           max_time        = if(options$advanced_autofit) paste0(options$advanced_autofit_time, options$advanced_autofit_time_unit),
           adapt           = options$advanced_adapt,
           bridge_max_iter = options$advanced_bridge_iter,
-          allow_max_rhat  = if(options$advanced_omit_rhat) options$advanced_omit_rhat_value,
+          allow_max_error = if(options$advanced_omit & options$advanced_omit_error) options$advanced_omit_error_value,
+          allow_max_rhat  = if(options$advanced_omit & options$advanced_omit_rhat)  options$advanced_omit_rhat_value,
           allow_min_ESS   = if(options$advanced_omit_ESS)  options$advanced_omit_ESS_value,
           allow_inc_theta = options$advanced_omit_theta,
           balance_prob    = options$advanced_omit_prior == "conditional",
           silent          = TRUE,
-          JASP            = TRUE
+          progress_start  = 'startProgressbar(sum(converged_models))',
+          progress_tick   = 'progressbarTick()'
         ),
         refit_failed = options$advanced_control != "no_refit"
       )
@@ -755,8 +800,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   }
 
   # update the fit and reset notifier
-  object       <- fit
-  model$object <- object
+  model$object <- fit
   .RoBMA_model_notifier(jaspResults)
 
   return()
@@ -798,6 +842,11 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   overall_summary$addColumnInfo(name = "postProb",  title = "P(M|data)",       type = "number")
   overall_summary$addColumnInfo(name = "BF",        title = BF_title,          type = "number")
 
+  if(!any(fit$add_info$converged)){
+    overall_summary$setError("All models failed to converge. Please, consider inspecting the 'MCMC diagnostics' and changing the 'Advanced options'.")
+    return()
+  }
+  
   for(i in 1:nrow(s.fit$overview)){
     temp_row <- list(
       terms     = if(i == 3) "Publication bias" else rownames(s.fit$overview)[i],
@@ -1376,13 +1425,14 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   models_diagnostics$dependOn(diagnostics_dependencies)
 
 
-  models_diagnostics$addColumnInfo(name = "number",      title = "#",         type = "integer")
+  models_diagnostics$addColumnInfo(name = "number",      title = "#",                type = "integer")
   models_diagnostics$addColumnInfo(name = "prior_mu",    title = "Effect Size",      type = "string",
                                overtitle = "Prior Distribution")
   models_diagnostics$addColumnInfo(name = "prior_tau",   title = "Heterogeneity",    type = "string",
                                overtitle = "Prior Distribution")
   models_diagnostics$addColumnInfo(name = "prior_omega", title = "Publication Bias", type = "string",
                                overtitle = "Prior Distribution")
+  models_diagnostics$addColumnInfo(name = "error",       title = "max(MCMC error)",  type = "number")
   models_diagnostics$addColumnInfo(name = "ESS",         title = "min(ESS)",         type = "integer")
   models_diagnostics$addColumnInfo(name = "Rhat",        title = "max(Rhat)",        type = "number")
 
@@ -1392,6 +1442,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
       prior_mu     = s.fit$diagnostics$`Prior mu`[i],
       prior_tau    = s.fit$diagnostics$`Prior tau`[i],
       prior_omega  = s.fit$diagnostics$`Prior omega`[i],
+      error        = s.fit$diagnostics$`max(MCMC error)`[i],
       ESS          = s.fit$diagnostics$`min(ESS)`[i],
       Rhat         = s.fit$diagnostics$`max(Rhat)`[i]
     )
@@ -1623,11 +1674,18 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   return()
 }
+.RoBMA_save_model           <- function(jaspResults, options){
 
+  if(is.null(jaspResults[["model_saved"]])){
+    
+    model_saved <- createJaspState()
+    model_saved$dependOn(c(.RoBMA_dependencies, "save_path"))
+    jaspResults[["model_saved"]] <- model_saved
+    
+  }
 
-RDEBUG <- function(message){
-  sink(file = "D:/Projects/jasp/jasp-R-debug/RDEBUG.txt", append = TRUE)
-  cat(message)
-  cat("\n")
-  sink(file = NULL)
+  saveRDS(jaspResults[["model"]]$object, file = options$save_path)
+  
+  model_saved$object <- TRUE
+  
 }

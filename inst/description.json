@@ -28,8 +28,9 @@
 			"function":	"BayesianMetaAnalysis"
 		},
 		{
-			"title": 	"Robust Bayesian Meta-Analysis",
-			"function":	"RobustBayesianMetaAnalysis"
+			"title": 		"Robust Bayesian Meta-Analysis (beta)",
+			"function":		"RobustBayesianMetaAnalysis",
+			"requiresData":	false
 		}
 	]
 }

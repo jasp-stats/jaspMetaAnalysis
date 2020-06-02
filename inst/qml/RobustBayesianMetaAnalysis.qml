@@ -27,7 +27,6 @@ Form
 	RadioButtonGroup
 	{
 		Layout.columnSpan:		2
-		runOnChange:			false
 		name:					"measures"
 		radioButtonsOnSameRow:	true
 		
@@ -60,25 +59,24 @@ Form
 		}
 	}
 
-	TextField
+	FileSelector
 	{
-		runOnChange:	false
 		name:			"fitted_path"
 		label:  		qsTr("Path to the fitted model")
-		value:			"D:/Desktop/FA2s.RDS"
+		filter:			"*.RDS"
+		save:			false
 		visible:		measures_fitted.checked
 	}
 
 	VariablesForm
 	{
-		preferredHeight:	620
+		preferredHeight:	400 * preferencesModel.uiScale
 		visible:			!measures_fitted.checked
 
 		AvailableVariablesList {name: "variablesList"}
 
 		AssignedVariablesList
 		{
-			runOnChange:	false
 			id: 			input_ES
 			name: 			"input_ES"
 			enabled: 		input_t.count == 0
@@ -89,7 +87,6 @@ Form
 
 		AssignedVariablesList
 		{
-			runOnChange:	false
 			name: 			"input_t"
 			id: 			input_t
 			enabled: 		input_ES.count == 0
@@ -101,7 +98,6 @@ Form
 
 		AssignedVariablesList
 		{
-			runOnChange:	false
 			id: 			input_SE
 			enabled: 		input_CI.count == 0 && input_N.count == 0 && input_N1.count == 0 && input_N2.count == 0 && input_t.count == 0
 			name: 			"input_SE"
@@ -112,7 +108,6 @@ Form
 
 		AssignedPairsVariablesList
 		{
-			runOnChange:	false
 			id: 			input_CI
 			enabled: 		input_SE.count == 0 && input_N.count == 0 && input_N1.count == 0 && input_N2.count == 0 && input_t.count == 0
 			name: 			"input_CI"
@@ -123,7 +118,6 @@ Form
 
 		AssignedVariablesList
 		{
-			runOnChange:	false
 			id: 			input_N
 			enabled: 		input_SE.count == 0 && input_CI.count == 0 && input_N1.count == 0 && input_N2.count == 0
 			name: 			"input_N"
@@ -135,7 +129,6 @@ Form
 
 		AssignedVariablesList
 		{
-			runOnChange:	false
 			id: 			input_N1
 			enabled: 		input_SE.count == 0 && input_CI.count == 0 && input_N.count == 0 && input_N2.count == 0
 			name: 			"input_N1"
@@ -147,7 +140,6 @@ Form
 
 		AssignedVariablesList
 		{
-			runOnChange:	false
 			id: 			input_N2
 			enabled: 		input_SE.count == 0 && input_CI.count == 0 && input_N.count == 0 && input_N1.count == 0
 			name: 			"input_N2"
@@ -159,17 +151,15 @@ Form
 
 		AssignedVariablesList
 		{
-			runOnChange:	false
 			name: 			"input_labels"
 			title: 			qsTr("Study Labels")
 			singleVariable:	true
-			allowedColumns: ["nominalText"]
+			allowedColumns: ["nominal","nominalText"]
 		}
 	}
 
 	RadioButtonGroup
 	{
-		runOnChange:			false
 		name:					"cohensd_testType"
 		visible:				measures_cohensd.checked
 		radioButtonsOnSameRow:	true
@@ -190,1154 +180,1165 @@ Form
 	}
 
 
-	Button
-	{
-		id:			runAnalysis
-		name:		"runAnalysis"
-		label:		"Run Analysis"
-		enabled:	false
-		Connections
-		{
-			target:			form
-			onValueChanged:	if (item && !item.runOnChange) runAnalysis.enabled = true
-		}
-		onClicked:
-		{
-			form.refreshAnalysis()
-			enabled = false;
-		}
-	}
-
-
 	//// Priors ////
 	Section
 	{
 		title: 			qsTr("Priors")
-		runOnChange:	false
-		columns:		2
-
+		columns:		1
 
 		CheckBox
 		{	
-			Layout.columnSpan:		2
 			name:		"priors_plot"
 			label:		qsTr("Plot priors")
 		}
 
-
 		// mu prior
-		InputListView
+		ColumnLayout
 		{
-			Layout.columnSpan:		2
+			spacing:				0
+			Layout.preferredWidth:	parent.width
 			visible:				!measures_fitted.checked
-			height:					count * 40 + 50
-			title:					qsTr("Effect size")
-			name:					"priors_mu"
-			optionKey:				"name"
-			placeHolder:			qsTr("prior name")
-			rowComponentsTitles: [qsTr("Distribution                   Parameters                          Truncation              Prior Odds     ")]
 
-			rowComponents:
-			[
-				Component
+			Label { text: qsTr("Effect"); Layout.preferredHeight: 20 * preferencesModel.uiScale}
+
+
+			RowLayout
+			{
+				Label { text: qsTr("Distribution");	Layout.preferredWidth: 140 * preferencesModel.uiScale; Layout.leftMargin: 5 * preferencesModel.uiScale}
+				Label { text: qsTr("Parameters");	Layout.preferredWidth: 160 * preferencesModel.uiScale }
+				Label { text: qsTr("Truncation");	Layout.preferredWidth: 160 * preferencesModel.uiScale }
+				Label { text: qsTr("Prior Odds") }
+			}
+			ComponentsList
+			{
+				name:					"priors_mu"
+				optionKey:				"name"
+				defaultValues: 			[{"type": "normal"}]
+				preferredHeight: 		90 * preferencesModel.uiScale
+				rowComponent: 			RowLayout
 				{
-					DropDown
+					Row
 					{
-						name: "type"
-						useExternalBorder: true
-						values:
-						[
-							{ label: "Normal(μ,σ)",			value: "normal"},
-							{ label: "Student-t(μ,σ,v)",	value: "t"},
-							{ label: "Cauchy(x₀,θ)",		value: "cauchy"},
-							{ label: "Gamma(α,β)",			value: "gamma_ab"},
-							{ label: "Gamma(k,θ)",			value: "gamma_k0"},
-							{ label: "Inverse-Gamma(α,β)",	value: "invgamma"},
-							{ label: "Spike(x₀)",			value: "spike"},
-						]
-						Layout.rightMargin: if(currentText === "Cauchy(x₀,θ)" | currentText === "Spike(x₀)") { 8 } else { 15 }
+						spacing: 4 * preferencesModel.uiScale
+						Layout.preferredWidth: 140 * preferencesModel.uiScale
+						DropDown
+						{
+							id: typeMuItem
+							name: "type"
+							useExternalBorder: true
+							values:
+							[
+								{ label: qsTr("Normal(μ,σ)"),			value: "normal"},
+								{ label: qsTr("Student-t(μ,σ,v)"),		value: "t"},
+								{ label: qsTr("Cauchy(x₀,θ)"),			value: "cauchy"},
+								{ label: qsTr("Gamma(α,β)"),			value: "gamma_ab"},
+								{ label: qsTr("Gamma(k,θ)"),			value: "gamma_k0"},
+								{ label: qsTr("Inverse-Gamma(α,β)"),	value: "invgamma"},
+								{ label: qsTr("Spike(x₀)"),				value: "spike"},
+								{ label: qsTr("Uniform(a,b)"),			value: "uniform"}
+							]
+						}
 					}
-				},
-				Component
-				{
+
+					Row
+					{
+						spacing: 4 * preferencesModel.uiScale
+						Layout.preferredWidth: 160 * preferencesModel.uiScale
+						FormulaField
+						{
+							label:				"μ "
+							name:				"parMean"
+							visible:			typeMuItem.currentValue === "normal"		||
+												typeMuItem.currentValue === "t"
+							value:				"0"
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"x₀"
+							name:				"parLocation"
+							visible:			typeMuItem.currentValue === "cauchy"	||
+												typeMuItem.currentValue === "spike"
+							value:				"0"
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"σ"
+							name:				"parScale"
+							visible:			typeMuItem.currentValue === "normal"		||
+												typeMuItem.currentValue === "t"
+							value:				"1"
+							min:				0
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"k "
+							name:				"parShape"
+							visible:			typeMuItem.currentValue === "gamma_k0"
+							value:				"1"
+							min:				0
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+						}
+						FormulaField
+						{
+							label:				"θ"
+							name:				"parScale2"
+							visible:			typeMuItem.currentValue === "cauchy"	||
+												typeMuItem.currentValue === "gamma_k0"
+							value:				"1"
+							min:				0
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"ν"
+							name:				"parDF"
+							visible:			typeMuItem.currentValue === "t"
+							value:				"2"
+							min:				1
+							inclusive:			JASP.MinOnly
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"α "
+							name:				"parAlpha"
+							visible:			typeMuItem.currentValue === "gamma_ab"	||
+												typeMuItem.currentValue === "invgamma"
+							value:				"1"
+							min:				0
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"β"
+							name:				"parBeta"
+							visible:			typeMuItem.currentValue === "gamma_ab"	||
+												typeMuItem.currentValue === "invgamma"
+							value:				"0.15"
+							min:				0
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"a "
+							name:				"parA"
+							id:					parA
+							visible:			typeMuItem.currentValue === "uniform"
+							value:				"0"
+							max:				parB.value
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"b"
+							name:				"parB"
+							id:					parB
+							visible:			typeMuItem.currentValue === "uniform"
+							value:				"1"
+							min:				parA.value
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+					}
+
+					Row
+					{
+						spacing: 4 * preferencesModel.uiScale
+						Layout.preferredWidth: 160 * preferencesModel.uiScale
+						FormulaField
+						{
+							id:					truncationMuLower
+							label: 				qsTr("lower")
+							name: 				"truncationLower"
+							visible:			typeMuItem.currentValue !== "spike" && typeMuItem.currentValue !== "uniform"
+							value:				"-Inf"
+							max: 				truncationMuUpper.value
+							inclusive: 			JASP.MinOnly
+							fieldWidth:			40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder:			true
+						}
+						FormulaField
+						{
+							id:					truncationMuUpper
+							label: 				qsTr("upper")
+							name: 				"truncationUpper"
+							visible:			typeMuItem.currentValue !== "spike" && typeMuItem.currentValue !== "uniform"
+							value:				"Inf"
+							min: 				truncationMuLower ? truncationMuLower.value : 0
+							inclusive: 			JASP.MaxOnly
+							fieldWidth:			40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder:			true
+						}
+					}
 					FormulaField
 					{
-						label:				"μ"
-						name:				"parMean"
-						visible:			fromRowComponents["type"].currentText === "Normal(μ,σ)"		||
-											fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
-						value:				"0"
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"x₀"
-						name:				"parLocation"
-						visible:			fromRowComponents["type"].currentText === "Cauchy(x₀,θ)"	||
-											fromRowComponents["type"].currentText === "Spike(x₀)"
-						value:				"0"
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: if(fromRowComponents["type"].currentText === "Spike(x₀)") 348.5
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"σ"
-						name:				"parScale"
-						visible:			fromRowComponents["type"].currentText === "Normal(μ,σ)"		||
-											fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
-						value:				"1"
-						min:				0
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: if(fromRowComponents["type"].currentText === "Normal(μ,σ)") width  + .5
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"k"
-						name:				"parShape"
-						visible:			fromRowComponents["type"].currentText === "Gamma(k,θ)"
-						value:				"1"
-						min:				0
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"θ"
-						name:				"parScale2"
-						visible:			fromRowComponents["type"].currentText === "Cauchy(x₀,θ)"	||
-											fromRowComponents["type"].currentText === "Gamma(k,θ)"
-						value:				"1"
-						min:				0
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: width  + .5
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"ν"
-						name:				"parDF"
-						visible:			fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
-						value:				"2"
-						min:				1
-						inclusive:			JASP.MinOnly
-						fieldWidth: 		40
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: 10.5
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"α"
-						name:				"parAlpha"
-						visible:			fromRowComponents["type"].currentText === "Gamma(α,β)"		||
-											fromRowComponents["type"].currentText === "Inverse-Gamma(α,β)"
-						value:				"1"
-						min:				0
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"β"
-						name:				"parBeta"
-						visible:			fromRowComponents["type"].currentText === "Gamma(α,β)"	||
-											fromRowComponents["type"].currentText === "Inverse-Gamma(α,β)"
-						value:				"0.15"
-						min:				0
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: width + .5
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label: 				"lower"
-						name: 				"truncationLower"
-						visible:			fromRowComponents["type"].currentText !== "Spike(x₀)"
-						value:				"-Inf"
-						max: 				fromRowComponents["truncationUpper"].value
-						inclusive: 			JASP.MinOnly
-						fieldWidth:			50
-						useExternalBorder:	false
-						showBorder:			true
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label: 				"upper"
-						name: 				"truncationUpper"
-						visible:			fromRowComponents["type"].currentText !== "Spike(x₀)"
-						value:				"Inf"
-						min: 				fromRowComponents["truncationLower"].currentText
-						inclusive: 			JASP.MaxOnly
-						fieldWidth:			50
-						useExternalBorder:	false
-						showBorder:			true
-						Layout.rightMargin: 15
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label: 				"Odds"
+						label: 				qsTr("Odds")
 						name: 				"priorOdds"
 						value:				"1"
 						min: 				0
 						inclusive: 			JASP.None
-						fieldWidth:			50
+						fieldWidth:			40 * preferencesModel.uiScale
 						useExternalBorder:	false
 						showBorder:			true
 					}
 				}
-			]
-
-			defaultValues: ["1"]
+			}
 		}
 
 
 		// tau prior
-		InputListView
+		ColumnLayout
 		{
-			Layout.columnSpan:		2
+			spacing: 				0
+			Layout.preferredWidth:	parent.width
 			visible:				!measures_fitted.checked
-			height:					100
-			title:					qsTr("Heterogeneity")
-			name:					"priors_tau"
-			optionKey:				"name"
-			placeHolder:			qsTr("prior name")
-			rowComponentsTitles:	[qsTr("Distribution                     Parameters                                        Truncation                    Prior Odds       ")]
 
-			rowComponents:
-			[
-				Component
+			Label { text: qsTr("Heterogeneity"); Layout.preferredHeight: 20 * preferencesModel.uiScale}
+
+			RowLayout
+			{
+
+				Label { text: qsTr("Distribution");	Layout.preferredWidth: 140 * preferencesModel.uiScale; Layout.leftMargin: 5 * preferencesModel.uiScale}
+				Label { text: qsTr("Parameters");	Layout.preferredWidth: 160 * preferencesModel.uiScale }
+				Label { text: qsTr("Truncation");	Layout.preferredWidth: 160 * preferencesModel.uiScale }
+				Label { text: qsTr("Prior Odds") }
+			}
+			ComponentsList
+			{
+				name:					"priors_tau"
+				optionKey:				"name"
+				defaultValues: 			[{"type": "invgamma"}]
+				preferredHeight: 		90 * preferencesModel.uiScale
+				rowComponent: 			RowLayout
 				{
-					DropDown
+					Row
 					{
-						name: "type"
-						useExternalBorder: true
-						values:
-						[
-							{ label: "Normal(μ,σ)",			value: "normal"},
-							{ label: "Student-t(μ,σ,v)",	value: "t"},
-							{ label: "Cauchy(x₀,θ)",		value: "cauchy"},
-							{ label: "Gamma(α,β)",			value: "gamma_ab"},
-							{ label: "Gamma(k,θ)",			value: "gamma_k0"},
-							{ label: "Inverse-Gamma(α,β)",	value: "invgamma"},
-							{ label: "Spike(x₀)",			value: "spike"},
-						]
-						Layout.rightMargin: if(currentText === "Cauchy(x₀,θ)" | currentText === "Spike(x₀)") { 8 } else { 15 }
+						spacing: 4 * preferencesModel.uiScale
+						Layout.preferredWidth: 140 * preferencesModel.uiScale
+						DropDown
+						{
+							id: typeTauItem
+							name: "type"
+							useExternalBorder: true
+							values:
+							[
+								{ label: qsTr("Normal(μ,σ)"),			value: "normal"},
+								{ label: qsTr("Student-t(μ,σ,v)"),		value: "t"},
+								{ label: qsTr("Cauchy(x₀,θ)"),			value: "cauchy"},
+								{ label: qsTr("Gamma(α,β)"),			value: "gamma_ab"},
+								{ label: qsTr("Gamma(k,θ)"),			value: "gamma_k0"},
+								{ label: qsTr("Inverse-Gamma(α,β)"),	value: "invgamma"},
+								{ label: qsTr("Spike(x₀)"),				value: "spike"},
+								{ label: qsTr("Uniform(a,b)"),			value: "uniform"}
+							]
+						}
 					}
-				},
-				Component
-				{
+					Row
+					{
+						spacing: 4 * preferencesModel.uiScale
+						Layout.preferredWidth: 160 * preferencesModel.uiScale
+
+						FormulaField
+						{
+							label:				"μ "
+							name:				"parMean"
+							visible:			typeTauItem.currentValue === "normal"	||
+												typeTauItem.currentValue === "t"
+							value:				"0"
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"x₀"
+							name:				"parLocation"
+							visible:			typeTauItem.currentValue === "cauchy"	||
+												typeTauItem.currentValue === "spike"
+							value:				"0"
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"σ"
+							name:				"	"
+							visible:			typeTauItem.currentValue === "normal"	||
+												typeTauItem.currentValue === "t"
+							value:				"1"
+							min:				0
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"k "
+							name:				"parShape"
+							visible:			typeTauItem.currentValue === "gamma_k0"
+							value:				"1"
+							min:				0
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"θ"
+							name:				"parScale2"
+							visible:			typeTauItem.currentValue === "cauchy"	||
+												typeTauItem.currentValue === "gamma_k0"
+							value:				"1"
+							min:				0
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"ν"
+							name:				"parDF"
+							visible:			typeTauItem.currentValue === "t"
+							value:				"2"
+							min:				1
+							inclusive:			JASP.MinOnly
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"α "
+							name:				"parAlpha"
+							visible:			typeTauItem.currentValue === "gamma_ab"		||
+												typeTauItem.currentValue === "invgamma"
+							value:				"1"
+							min:				0
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"β"
+							name:				"parBeta"
+							visible:			typeTauItem.currentValue === "gamma_ab"	||
+												typeTauItem.currentValue === "invgamma"
+							value:				"0.15"
+							min:				0
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"a "
+							name:				"parA"
+							id:					parATau
+							visible:			typeTauItem.currentValue === "uniform"
+							value:				"0"
+							min:				0
+							max:				parBTau.value
+							inclusive:			JASP.MinOnly
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"b"
+							name:				"parB"
+							id:					parBTau
+							visible:			typeTauItem.currentValue === "uniform"
+							value:				"1"
+							min:				parATau.value
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+					}
+					Row
+					{
+						spacing: 4 * preferencesModel.uiScale
+						Layout.preferredWidth: 160 * preferencesModel.uiScale
+
+						FormulaField
+						{
+							id:					truncationTauLower
+							label: 				"lower"
+							name: 				"truncationLower"
+							value:				"0"
+							min:				0
+							max: 				truncationTauUpper.value
+							inclusive: 			JASP.MinOnly
+							visible:			typeTauItem.currentValue !== "spike" && typeTauItem.currentValue !== "uniform"
+							fieldWidth:			40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder:			true
+						}
+						FormulaField
+						{
+							id:					truncationTauUpper
+							label: 				"upper"
+							name: 				"truncationUpper"
+							value:				"Inf"
+							min: 				truncationTauLower ? truncationTauLower.value : 0
+							inclusive: 			JASP.MaxOnly
+							visible:			typeTauItem.currentValue !== "spike" && typeTauItem.currentValue !== "uniform"
+							fieldWidth:			40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder:			true
+							Layout.rightMargin: 15
+						}
+					}
 					FormulaField
 					{
-						label:				"μ"
-						name:				"parMean"
-						visible:			fromRowComponents["type"].currentText === "Normal(μ,σ)"		||
-											fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
-						value:				"0"
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"x₀"
-						name:				"parLocation"
-						visible:			fromRowComponents["type"].currentText === "Cauchy(x₀,θ)"	||
-											fromRowComponents["type"].currentText === "Spike(x₀)"
-						value:				"0"
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: if(fromRowComponents["type"].currentText === "Spike(x₀)") 125.5
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"σ"
-						name:				"	"
-						visible:			fromRowComponents["type"].currentText === "Normal(μ,σ)"		||
-											fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
-						value:				"1"
-						min:				0
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: if(fromRowComponents["type"].currentText === "Normal(μ,σ)") width + .5
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"k"
-						name:				"parShape"
-						visible:			fromRowComponents["type"].currentText === "Gamma(k,θ)"
-						value:				"1"
-						min:				0
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"θ"
-						name:				"parScale2"
-						visible:			fromRowComponents["type"].currentText === "Cauchy(x₀,θ)"	||
-											fromRowComponents["type"].currentText === "Gamma(k,θ)"
-						value:				"1"
-						min:				0
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: width + .5
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"ν"
-						name:				"parDF"
-						visible:			fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
-						value:				"2"
-						min:				1
-						inclusive:			JASP.MinOnly
-						fieldWidth: 		40
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: 10
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"α"
-						name:				"parAlpha"
-						visible:			fromRowComponents["type"].currentText === "Gamma(α,β)"		||
-											fromRowComponents["type"].currentText === "Inverse-Gamma(α,β)"
-						value:				"1"
-						min:				0
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"β"
-						name:				"parBeta"
-						visible:			fromRowComponents["type"].currentText === "Gamma(α,β)"	||
-											fromRowComponents["type"].currentText === "Inverse-Gamma(α,β)"
-						value:				"0.15"
-						min:				0
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: width + .5
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label: 				"lower"
-						name: 				"truncationLower"
-						value:				"0"
-						min:				0
-						//max: 				fromRowComponents["truncationUpper"].currentText
-						inclusive: 			JASP.MinOnly
-						fieldWidth:			50
-						useExternalBorder:	false
-						showBorder:			true
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label: 				"upper"
-						name: 				"truncationUpper"
-						value:				"Inf"
-						min: 				fromRowComponents["truncationLower"].currentText
-						inclusive: 			JASP.MaxOnly
-						fieldWidth:			50
-						useExternalBorder:	false
-						showBorder:			true
-						Layout.rightMargin: 15
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label: 				"Odds"
+						label: 				qsTr("Odds")
 						name: 				"priorOdds"
 						value:				"1"
 						min: 				0
 						inclusive: 			JASP.None
-						fieldWidth:			50
+						fieldWidth:			40 * preferencesModel.uiScale
 						useExternalBorder:	false
 						showBorder:			true
 					}
 				}
-			]
-
-			defaultValues: [1]
+			}
 		}
 
 
 		// omega prior
-		InputListView
+		ColumnLayout
 		{
-			Layout.columnSpan:		2
+			spacing: 0
+			Layout.preferredWidth:	parent.width
 			visible:				!measures_fitted.checked
-			height:					100
-			title:					qsTr("Publication bias")
-			name:					"priors_omega"
-			optionKey:				"name"
-			placeHolder:			qsTr("prior name")
-			rowComponentsTitles: [qsTr("Weight function                      Cut-points                  Parameters                              Prior Odds       ")]
 
-			rowComponents:
-			[
-				Component
+			Label { text: qsTr("Publication bias"); Layout.preferredHeight: 20 * preferencesModel.uiScale}
+
+			RowLayout
+			{
+
+				Label { text: qsTr("Weight function");	Layout.preferredWidth: 140 * preferencesModel.uiScale; Layout.leftMargin: 5 * preferencesModel.uiScale}
+				Label { text: qsTr("Cut-points");		Layout.preferredWidth: 160 * preferencesModel.uiScale }
+				Label { text: qsTr("Parameters");		Layout.preferredWidth: 160 * preferencesModel.uiScale }
+				Label { text: qsTr("Prior Odds")}
+			}
+			ComponentsList
+			{
+				name:					"priors_omega"
+				optionKey:				"name"
+				defaultValues:
+				[
+					{"type": "Two-sided", "parCuts": "(.05)", "parAlpha": "(1,1)", "priorOdds": "1/2"},
+					{"type": "Two-sided", "parCuts": "(.05, .10)", "parAlpha": "(1,1,1)", "priorOdds": "1/2"}
+				]
+				preferredHeight: 		90 * preferencesModel.uiScale
+				rowComponent: 			RowLayout
 				{
-					DropDown
+					Row
 					{
-						name: "type"
-						useExternalBorder: true
-						values: [
-							{ label: "Two-sided",			value: "Two-sided"},
-							{ label: "Two-sided",			value: "Two-sided2", visible: false},
-							{ label: "One-sided (mon.)",	value: "One-sided (mon.)"},
-							{ label: "One-sided",			value: "One-sided"},
-							{ label: "Spike(x₀)",			value: "spike"},
-						]
-						Layout.rightMargin: if(currentText === "Spike(x₀)") { 200 } else { 15 }
+						spacing: 4 * preferencesModel.uiScale
+						Layout.preferredWidth: 140 * preferencesModel.uiScale
+						DropDown
+						{
+							id: typeOmegatem
+							name: "type"
+							useExternalBorder: true
+							values: [
+								{ label: qsTr("Two-sided"),			value: "Two-sided"},
+								{ label: qsTr("One-sided (mon.)"),	value: "One-sided (mon.)"},
+								{ label: qsTr("One-sided"),			value: "One-sided"},
+								{ label: qsTr("None"),				value: "spike"}
+							]
+						}
 					}
-				},
-				Component
-				{
-					TextField
+					Row
 					{
-						label:				"p-values"
-						name:				"parCuts"
-						visible:			fromRowComponents["type"].currentText === "Two-sided"		||
-											fromRowComponents["type"].currentText === "Two-sided2"	||
-											fromRowComponents["type"].currentText === "One-sided"		||
-											fromRowComponents["type"].currentText === "One-sided (mon.)"
-						value:				if(fromRowComponents["type"].currentText === "Two-sided2"){ "(.05)" }else{ "(.05, .10)" }
-						fieldWidth: 		100
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: if(fromRowComponents["type"].currentText === "One-sided"){ 8 }else{ 15 }
+						spacing: 4 * preferencesModel.uiScale
+						Layout.preferredWidth: 160 * preferencesModel.uiScale
+						TextField
+						{
+							label:				qsTr("p-values")
+							name:				"parCuts"
+							visible:			typeOmegatem.currentValue === "Two-sided"		||
+												typeOmegatem.currentValue === "One-sided"		||
+												typeOmegatem.currentValue === "One-sided (mon.)"
+							value:				"(.05, .10)"
+							fieldWidth: 		100 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
 					}
-				},
-				Component
-				{
-					TextField
+					Row
 					{
-						label:				"α"
-						name:				"parAlpha"
-						visible:			fromRowComponents["type"].currentText === "Two-sided"		||
-											fromRowComponents["type"].currentText === "Two-sided2"	||
-											fromRowComponents["type"].currentText === "One-sided (mon.)"
-						value:				if(fromRowComponents["type"].currentText === "Two-sided2"){ "(1,1)" }else{ "(1,1,1)" }
-						fieldWidth: 		70
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: 105
+						spacing: 4 * preferencesModel.uiScale
+						Layout.preferredWidth: 160 * preferencesModel.uiScale
+
+						TextField
+						{
+							label:				"α "
+							name:				"parAlpha"
+							visible:			typeOmegatem.currentValue === "Two-sided"		||
+												typeOmegatem.currentValue === "One-sided (mon.)"
+							value:				"(1,1,1)" 
+							fieldWidth: 		70 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						TextField
+						{
+							label:				"α₁"
+							name:				"parAlpha1"
+							visible:			typeOmegatem.currentValue === "One-sided"
+							value:				"(1,1,1)"
+							fieldWidth: 		70 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						TextField
+						{
+							label:				"α₂"
+							name:				"parAlpha2"
+							visible:			typeOmegatem.currentValue === "One-sided"
+							value:				"(1,1)"
+							fieldWidth: 		65 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
 					}
-				},
-				Component
-				{
-					TextField
-					{
-						label:				"α₁"
-						name:				"parAlpha1"
-						visible:			fromRowComponents["type"].currentText === "One-sided"
-						value:				"(1,1,1)"
-						fieldWidth: 		70
-						useExternalBorder:	false
-						showBorder: 		true
-					}
-				},
-				Component
-				{
-					TextField
-					{
-						label:				"α₂"
-						name:				"parAlpha2"
-						visible:			fromRowComponents["type"].currentText === "One-sided"
-						value:				"(1,1)"
-						fieldWidth: 		70
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: 15
-					}
-				},
-				Component
-				{
-					IntegerField
-					{
-						label:				"x₀"
-						name:				"parLocation"
-						visible:			fromRowComponents["type"].currentText === "Spike(x₀)"
-						defaultValue:		1
-						min:				1
-						max:				1
-						inclusive: 			JASP.MinMax
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: 90
-					}
-				},
-				Component
-				{
 					FormulaField
 					{
-						label: 				"Odds"
+						label: 				qsTr("Odds")
 						name: 				"priorOdds"
 						value:				"1"
 						min: 				0
 						inclusive: 			JASP.None
-						fieldWidth:			50
+						fieldWidth:			40 * preferencesModel.uiScale
 						useExternalBorder:	false
 						showBorder:			true
 					}
 				}
-			]
-
-			defaultValues: [1, 2]
+			}
 		}
 
 
 		CheckBox
 		{	
-			Layout.columnSpan:		2
 			id:						priors_null
 			name:					"priors_null"
 			label:					qsTr("Set null priors")
 		}
 
 
-		// mu prior
-		InputListView
+		// mu null prior
+		ColumnLayout
 		{
-			Layout.columnSpan:		2
-			height:					count * 40 + 50
-			visible:				priors_null.checked & !measures_fitted.checked
-			title:					qsTr("Effect size")
-			name:					"priors_mu_null"
-			optionKey:				"name"
-			placeHolder:			qsTr("prior name")
-			rowComponentsTitles:	[qsTr("Distribution                   Parameters                          Truncation              Prior Odds     ")]
+			spacing:				0
+			Layout.preferredWidth:	parent.width
+			visible:				priors_null.checked && !measures_fitted.checked
 
-			rowComponents:
-			[
-				Component
+			Label { text: qsTr("Effect (null)"); Layout.preferredHeight: 20 * preferencesModel.uiScale}
+
+
+			RowLayout
+			{
+				Label { text: qsTr("Distribution"); Layout.preferredWidth: 140 * preferencesModel.uiScale; Layout.leftMargin: 5 * preferencesModel.uiScale}
+				Label { text: qsTr("Parameters");	Layout.preferredWidth: 160 * preferencesModel.uiScale }
+				Label { text: qsTr("Truncation");	Layout.preferredWidth: 160 * preferencesModel.uiScale }
+				Label { text: qsTr("Prior Odds") }
+			}
+			ComponentsList
+			{
+				name:					"priors_mu_null"
+				optionKey:				"name"
+				defaultValues: 			[{"type": "spike"}]
+				preferredHeight: 		90 * preferencesModel.uiScale
+				rowComponent: 			RowLayout
 				{
-					DropDown
+					Row
 					{
-						name: "type"
-						useExternalBorder: true
-						values:
-						[
-							{ label: "Normal(μ,σ)",			value: "normal"},
-							{ label: "Student-t(μ,σ,v)",	value: "t"},
-							{ label: "Cauchy(x₀,θ)",		value: "cauchy"},
-							{ label: "Gamma(α,β)",			value: "gamma_ab"},
-							{ label: "Gamma(k,θ)",			value: "gamma_k0"},
-							{ label: "Inverse-Gamma(α,β)",	value: "invgamma"},
-							{ label: "Spike(x₀)",			value: "spike"},
-						]
-						Layout.rightMargin: if(currentText === "Cauchy(x₀,θ)" | currentText === "Spike(x₀)") { 8 } else { 15 }
+						spacing: 4 * preferencesModel.uiScale
+						Layout.preferredWidth: 140 * preferencesModel.uiScale
+						DropDown
+						{
+							id: typeMuNullItem
+							name: "type"
+							useExternalBorder: true
+							values:
+							[
+								{ label: qsTr("Normal(μ,σ)"),			value: "normal"},
+								{ label: qsTr("Student-t(μ,σ,v)"),		value: "t"},
+								{ label: qsTr("Cauchy(x₀,θ)"),			value: "cauchy"},
+								{ label: qsTr("Gamma(α,β)"),			value: "gamma_ab"},
+								{ label: qsTr("Gamma(k,θ)"),			value: "gamma_k0"},
+								{ label: qsTr("Inverse-Gamma(α,β)"),	value: "invgamma"},
+								{ label: qsTr("Spike(x₀)"),				value: "spike"},
+								{ label: qsTr("Uniform(a,b)"),			value: "uniform"}
+							]
+						}
 					}
-				},
-				Component
-				{
+					Row
+					{
+						spacing: 4 * preferencesModel.uiScale
+						Layout.preferredWidth: 160 * preferencesModel.uiScale
+						FormulaField
+						{
+							label:				"μ "
+							name:				"parMean"
+							visible:			typeMuNullItem.currentValue === "normal"		||
+												typeMuNullItem.currentValue === "t"
+							value:				"0"
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"x₀"
+							name:				"parLocation"
+							visible:			typeMuNullItem.currentValue === "cauchy"	||
+												typeMuNullItem.currentValue === "spike"
+							value:				"0"
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"σ"
+							name:				"parScale"
+							visible:			typeMuNullItem.currentValue === "normal"		||
+												typeMuNullItem.currentValue === "t"
+							value:				"1"
+							min:				0
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"k "
+							name:				"parShape"
+							visible:			typeMuNullItem.currentValue === "gamma_k0"
+							value:				"1"
+							min:				0
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+						}
+						FormulaField
+						{
+							label:				"θ"
+							name:				"parScale2"
+							visible:			typeMuNullItem.currentValue === "cauchy"	||
+												typeMuNullItem.currentValue === "gamma_k0"
+							value:				"1"
+							min:				0
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"ν"
+							name:				"parDF"
+							visible:			typeMuNullItem.currentValue === "t"
+							value:				"2"
+							min:				1
+							inclusive:			JASP.MinOnly
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"α "
+							name:				"parAlpha"
+							visible:			typeMuNullItem.currentValue === "gamma_ab"	||
+												typeMuNullItem.currentValue === "invgamma"
+							value:				"1"
+							min:				0
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"β"
+							name:				"parBeta"
+							visible:			typeMuNullItem.currentValue === "gamma_ab"	||
+												typeMuNullItem.currentValue === "invgamma"
+							value:				"0.15"
+							min:				0
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"a "
+							name:				"parA"
+							id:					parAMuNull
+							visible:			typeMuNullItem.currentValue === "uniform"
+							value:				"0"
+							max:				parBMuNull.value
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"b"
+							name:				"parB"
+							id:					parBMuNull
+							visible:			typeMuNullItem.currentValue === "uniform"
+							value:				"1"
+							min:				parAMuNull.value
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+					}
+					Row
+					{
+						spacing: 4 * preferencesModel.uiScale
+						Layout.preferredWidth: 160 * preferencesModel.uiScale
+						FormulaField
+						{
+							id:					truncationMuNullLower
+							label: 				qsTr("lower")
+							name: 				"truncationLower"
+							visible:			typeMuNullItem.currentValue !== "spike" && typeMuNullItem.currentValue !== "uniform"
+							value:				"-Inf"
+							max: 				truncationMuNullUpper.value
+							inclusive: 			JASP.MinOnly
+							fieldWidth:			40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder:			true
+						}
+						FormulaField
+						{
+							id:					truncationMuNullUpper
+							label: 				qsTr("upper")
+							name: 				"truncationUpper"
+							visible:			typeMuNullItem.currentValue !== "spike" && typeMuNullItem.currentValue !== "uniform"
+							value:				"Inf"
+							min: 				truncationMuNullLower ? truncationMuNullLower.value : 0
+							inclusive: 			JASP.MaxOnly
+							fieldWidth:			40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder:			true
+						}
+					}
 					FormulaField
 					{
-						label:				"μ"
-						name:				"parMean"
-						visible:			fromRowComponents["type"].currentText === "Normal(μ,σ)"		||
-											fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
-						value:				"0"
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"x₀"
-						name:				"parLocation"
-						visible:			fromRowComponents["type"].currentText === "Cauchy(x₀,θ)"	||
-											fromRowComponents["type"].currentText === "Spike(x₀)"
-						value:				"0"
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: if(fromRowComponents["type"].currentText === "Spike(x₀)") 348.5
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"σ"
-						name:				"parScale"
-						visible:			fromRowComponents["type"].currentText === "Normal(μ,σ)"		||
-											fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
-						value:				"1"
-						min:				0
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: if(fromRowComponents["type"].currentText === "Normal(μ,σ)") width  + .5
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"k"
-						name:				"parShape"
-						visible:			fromRowComponents["type"].currentText === "Gamma(k,θ)"
-						value:				"1"
-						min:				0
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"θ"
-						name:				"parScale2"
-						visible:			fromRowComponents["type"].currentText === "Cauchy(x₀,θ)"	||
-											fromRowComponents["type"].currentText === "Gamma(k,θ)"
-						value:				"1"
-						min:				0
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: width  + .5
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"ν"
-						name:				"parDF"
-						visible:			fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
-						value:				"2"
-						min:				1
-						inclusive:			JASP.MinOnly
-						fieldWidth: 		40
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: 10.5
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"α"
-						name:				"parAlpha"
-						visible:			fromRowComponents["type"].currentText === "Gamma(α,β)"		||
-											fromRowComponents["type"].currentText === "Inverse-Gamma(α,β)"
-						value:				"1"
-						min:				0
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"β"
-						name:				"parBeta"
-						visible:			fromRowComponents["type"].currentText === "Gamma(α,β)"	||
-											fromRowComponents["type"].currentText === "Inverse-Gamma(α,β)"
-						value:				"0.15"
-						min:				0
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: width + .5
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label: 				"lower"
-						name: 				"truncationLower"
-						visible:			fromRowComponents["type"].currentText !== "Spike(x₀)"
-						value:				"-Inf"
-						//max: 				fromRowComponents["truncationUpper"].currentText
-						inclusive: 			JASP.MinOnly
-						fieldWidth:			50
-						useExternalBorder:	false
-						showBorder:			true
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label: 				"upper"
-						name: 				"truncationUpper"
-						visible:			fromRowComponents["type"].currentText !== "Spike(x₀)"
-						value:				"Inf"
-						//min: 				fromRowComponents["truncationLower"].currentText
-						inclusive: 			JASP.MaxOnly
-						fieldWidth:			50
-						useExternalBorder:	false
-						showBorder:			true
-						Layout.rightMargin: 15
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label: 				"Odds"
+						label: 				qsTr("Odds")
 						name: 				"priorOdds"
 						value:				"1"
 						min: 				0
 						inclusive: 			JASP.None
-						fieldWidth:			50
+						fieldWidth:			40 * preferencesModel.uiScale
 						useExternalBorder:	false
 						showBorder:			true
 					}
 				}
-			]
-
-			defaultValues: ["7"]
+			}
 		}
 
 
-		// tau prior
-		InputListView
+		// tau null prior
+		ColumnLayout
 		{
-			Layout.columnSpan:		2
-			height:					100
-			visible:				priors_null.checked & !measures_fitted.checked
-			title:					qsTr("Heterogeneity")
-			name:					"priors_tau_null"
-			optionKey:				"name"
-			placeHolder:			qsTr("prior name")
-			rowComponentsTitles: [qsTr("Distribution                     Parameters                                        Truncation                    Prior Odds       ")]
+			spacing: 				0
+			Layout.preferredWidth:	parent.width
+			visible:				priors_null.checked && !measures_fitted.checked
 
-			rowComponents:
-			[
-				Component
+			Label { text: qsTr("Heterogeneity (null)"); Layout.preferredHeight: 20 * preferencesModel.uiScale}
+
+			RowLayout
+			{
+
+				Label { text: qsTr("Distribution"); Layout.preferredWidth: 140 * preferencesModel.uiScale; Layout.leftMargin: 5 * preferencesModel.uiScale}
+				Label { text: qsTr("Parameters");	Layout.preferredWidth:   160 * preferencesModel.uiScale }
+				Label { text: qsTr("Truncation");	Layout.preferredWidth:   160 * preferencesModel.uiScale }
+				Label { text: qsTr("Prior Odds") }
+			}
+			ComponentsList
+			{
+				name:					"priors_tau_null"
+				optionKey:				"name"
+				defaultValues: 			[{"type": "spike"}]
+				preferredHeight: 		90 * preferencesModel.uiScale
+				rowComponent: 			RowLayout
 				{
-					DropDown
+					Row
 					{
-						name: "type"
-						useExternalBorder: true
-						values:
-						[
-							{ label: "Normal(μ,σ)",			value: "normal"},
-							{ label: "Student-t(μ,σ,v)",	value: "t"},
-							{ label: "Cauchy(x₀,θ)",		value: "cauchy"},
-							{ label: "Gamma(α,β)",			value: "gamma_ab"},
-							{ label: "Gamma(k,θ)",			value: "gamma_k0"},
-							{ label: "Inverse-Gamma(α,β)",	value: "invgamma"},
-							{ label: "Spike(x₀)",			value: "spike"},
-						]
-						Layout.rightMargin: if(currentText === "Cauchy(x₀,θ)" | currentText === "Spike(x₀)") { 8 } else { 15 }
+						spacing: 4 * preferencesModel.uiScale
+						Layout.preferredWidth: 140 * preferencesModel.uiScale
+						DropDown
+						{
+							id: typeTauNullItem
+							name: "type"
+							useExternalBorder: true
+							values:
+							[
+								{ label: qsTr("Normal(μ,σ)"),			value: "normal"},
+								{ label: qsTr("Student-t(μ,σ,v)"),		value: "t"},
+								{ label: qsTr("Cauchy(x₀,θ)"),			value: "cauchy"},
+								{ label: qsTr("Gamma(α,β)"),			value: "gamma_ab"},
+								{ label: qsTr("Gamma(k,θ)"),			value: "gamma_k0"},
+								{ label: qsTr("Inverse-Gamma(α,β)"),	value: "invgamma"},
+								{ label: qsTr("Spike(x₀)"),				value: "spike"},
+								{ label: qsTr("Uniform(a,b)"),			value: "uniform"}
+							]
+						}
 					}
-				},
-				Component
-				{
+					Row
+					{
+						spacing: 4 * preferencesModel.uiScale
+						Layout.preferredWidth: 160 * preferencesModel.uiScale
+
+						FormulaField
+						{
+							label:				"μ"
+							name:				"parMean"
+							visible:			typeTauNullItem.currentValue === "normal"	||
+												typeTauNullItem.currentValue === "t"
+							value:				"0"
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"x₀"
+							name:				"parLocation"
+							visible:			typeTauNullItem.currentValue === "cauchy"	||
+												typeTauNullItem.currentValue === "spike"
+							value:				"0"
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"σ"
+							name:				"	"
+							visible:			typeTauNullItem.currentValue === "normal"	||
+												typeTauNullItem.currentValue === "t"
+							value:				"1"
+							min:				0
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"k"
+							name:				"parShape"
+							visible:			typeTauNullItem.currentValue === "gamma_k0"
+							value:				"1"
+							min:				0
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"θ"
+							name:				"parScale2"
+							visible:			typeTauNullItem.currentValue === "cauchy"	||
+												typeTauNullItem.currentValue === "gamma_k0"
+							value:				"1"
+							min:				0
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"ν"
+							name:				"parDF"
+							visible:			typeTauNullItem.currentValue === "t"
+							value:				"2"
+							min:				1
+							inclusive:			JASP.MinOnly
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"α"
+							name:				"parAlpha"
+							visible:			typeTauNullItem.currentValue === "gamma_ab"		||
+												typeTauNullItem.currentValue === "invgamma"
+							value:				"1"
+							min:				0
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"β"
+							name:				"parBeta"
+							visible:			typeTauNullItem.currentValue === "gamma_ab"	||
+												typeTauNullItem.currentValue === "invgamma"
+							value:				"0.15"
+							min:				0
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"a "
+							name:				"parA"
+							id:					parATauNull
+							visible:			typeTauNullItem.currentValue === "uniform"
+							value:				"0"
+							min:				0
+							max:				parBTauNull.value
+							inclusive:			JASP.MinOnly
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						FormulaField
+						{
+							label:				"b"
+							name:				"parB"
+							id:					parBTauNull
+							visible:			typeTauNullItem.currentValue === "uniform"
+							value:				"1"
+							min:				parATauNull.value
+							inclusive:			JASP.None
+							fieldWidth: 		40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+					}
+					Row
+					{
+						spacing: 4 * preferencesModel.uiScale
+						Layout.preferredWidth: 160 * preferencesModel.uiScale
+
+						FormulaField
+						{
+							id:					truncationTauNullLower
+							label: 				qsTr("lower")
+							name: 				"truncationLower"
+							value:				"0"
+							min:				0
+							max: 				truncationTauNullUpper.value
+							inclusive: 			JASP.MinOnly
+							visible:			typeTauNullItem.currentValue !== "spike" && typeTauNullItem.currentValue !== "uniform"
+							fieldWidth:			40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder:			true
+						}
+						FormulaField
+						{
+							id:					truncationTauNullUpper
+							label: 				qsTr("upper")
+							name: 				"truncationUpper"
+							value:				"Inf"
+							min: 				truncationTauNullLower ? truncationTauNullLower.value : 0
+							inclusive: 			JASP.MaxOnly
+							visible:			typeTauNullItem.currentValue !== "spike" && typeTauNullItem.currentValue !== "uniform"
+							fieldWidth:			40 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder:			true
+							Layout.rightMargin: 15
+						}
+					}
 					FormulaField
 					{
-						label:				"μ"
-						name:				"parMean"
-						visible:			fromRowComponents["type"].currentText === "Normal(μ,σ)"		||
-											fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
-						value:				"0"
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"x₀"
-						name:				"parLocation"
-						visible:			fromRowComponents["type"].currentText === "Cauchy(x₀,θ)"	||
-											fromRowComponents["type"].currentText === "Spike(x₀)"
-						value:				"0"
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: if(fromRowComponents["type"].currentText === "Spike(x₀)") 125.5
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"σ"
-						name:				"	"
-						visible:			fromRowComponents["type"].currentText === "Normal(μ,σ)"		||
-											fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
-						value:				"1"
-						min:				0
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: if(fromRowComponents["type"].currentText === "Normal(μ,σ)") width + .5
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"k"
-						name:				"parShape"
-						visible:			fromRowComponents["type"].currentText === "Gamma(k,θ)"
-						value:				"1"
-						min:				0
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"θ"
-						name:				"parScale2"
-						visible:			fromRowComponents["type"].currentText === "Cauchy(x₀,θ)"	||
-											fromRowComponents["type"].currentText === "Gamma(k,θ)"
-						value:				"1"
-						min:				0
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: width + .5
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"ν"
-						name:				"parDF"
-						visible:			fromRowComponents["type"].currentText === "Student-t(μ,σ,v)"
-						value:				"2"
-						min:				1
-						inclusive:			JASP.MinOnly
-						fieldWidth: 		40
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: 10
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"α"
-						name:				"parAlpha"
-						visible:			fromRowComponents["type"].currentText === "Gamma(α,β)"		||
-											fromRowComponents["type"].currentText === "Inverse-Gamma(α,β)"
-						value:				"1"
-						min:				0
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label:				"β"
-						name:				"parBeta"
-						visible:			fromRowComponents["type"].currentText === "Gamma(α,β)"	||
-											fromRowComponents["type"].currentText === "Inverse-Gamma(α,β)"
-						value:				"0.15"
-						min:				0
-						inclusive:			JASP.None
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: width + .5
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label: 				"lower"
-						name: 				"truncationLower"
-						value:				"0"
-						min:				0
-						//max: 				fromRowComponents["truncationUpper"].currentText
-						inclusive: 			JASP.MinOnly
-						fieldWidth:			50
-						useExternalBorder:	false
-						showBorder:			true
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label: 				"upper"
-						name: 				"truncationUpper"
-						value:				"Inf"
-						//min: 				fromRowComponents["truncationLower"].currentText
-						inclusive: 			JASP.MaxOnly
-						fieldWidth:			50
-						useExternalBorder:	false
-						showBorder:			true
-						Layout.rightMargin: 15
-					}
-				},
-				Component
-				{
-					FormulaField
-					{
-						label: 				"Odds"
+						label: 				qsTr("Odds")
 						name: 				"priorOdds"
 						value:				"1"
 						min: 				0
 						inclusive: 			JASP.None
-						fieldWidth:			50
+						fieldWidth:			40 * preferencesModel.uiScale
 						useExternalBorder:	false
 						showBorder:			true
 					}
 				}
-			]
-
-			defaultValues: ["7"]
+			}
 		}
 
 
-		// omega prior
-		InputListView
+		// omega null prior
+		ColumnLayout
 		{
-			Layout.columnSpan:		2
-			visible:				priors_null.checked & !measures_fitted.checked
-			height:					100
-			title:					qsTr("Publication bias")
-			name:					"priors_omega_null"
-			optionKey:				"name"
-			placeHolder:			qsTr("prior name")
-			rowComponentsTitles: [qsTr("Weight function                      Cut-points                  Parameters                              Prior Odds       ")]
+			spacing: 0
+			Layout.preferredWidth:	parent.width
+			visible:				priors_null.checked && !measures_fitted.checked
 
-			rowComponents:
-			[
-				Component
+			Label { text: qsTr("Publication bias (null)"); Layout.preferredHeight: 20 * preferencesModel.uiScale}
+
+			RowLayout
+			{
+
+				Label { text: qsTr("Weight function");	Layout.preferredWidth: 140 * preferencesModel.uiScale; Layout.leftMargin: 5 * preferencesModel.uiScale}
+				Label { text: qsTr("Cut-points"); 		Layout.preferredWidth: 160 * preferencesModel.uiScale }
+				Label { text: qsTr("Parameters");		Layout.preferredWidth: 160 * preferencesModel.uiScale }
+				Label { text: qsTr("Prior Odds") }
+			}
+			ComponentsList
+			{
+				name:					"priors_omega_null"
+				optionKey:				"name"
+				defaultValues:			[{"type": "spike"}]
+				preferredHeight: 		90 * preferencesModel.uiScale
+				rowComponent: 			RowLayout
 				{
-					DropDown
+					Row
 					{
-						name: "type"
-						useExternalBorder: true
-						values: [
-							{ label: "Two-sided",			value: "Two-sided"},
-							{ label: "Two-sided",			value: "Two-sided2", visible: false},
-							{ label: "One-sided (mon.)",	value: "One-sided (mon.)"},
-							{ label: "One-sided",			value: "One-sided"},
-							{ label: "Spike(x₀)",			value: "spike"}
-						]
-						Layout.rightMargin: if(currentText === "Spike(x₀)") { 200 } else { 15 }
+						spacing: 4 * preferencesModel.uiScale
+						Layout.preferredWidth: 140 * preferencesModel.uiScale
+						DropDown
+						{
+							id: typeOmegaNullItem
+							name: "type"
+							useExternalBorder: true
+							values: [
+								{ label: qsTr("Two-sided"),			value: "Two-sided"},
+								{ label: qsTr("One-sided (mon.)"),	value: "One-sided (mon.)"},
+								{ label: qsTr("One-sided"),			value: "One-sided"},
+								{ label: qsTr("None"),				value: "spike"}
+							]
+						}
 					}
-				},
-				Component
-				{
-					TextField
+					Row
 					{
-						label:				"p-values"
-						name:				"parCuts"
-						visible:			fromRowComponents["type"].currentText === "Two-sided"		||
-											fromRowComponents["type"].currentText === "Two-sided2"	||
-											fromRowComponents["type"].currentText === "One-sided"		||
-											fromRowComponents["type"].currentText === "One-sided (mon.)"
-						value:				if(fromRowComponents["type"].currentText === "Two-sided2"){ "(.05)" }else{ "(.05, .10)" }
-						fieldWidth: 		100
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: if(fromRowComponents["type"].currentText === "One-sided"){ 8 }else{ 15 }
+						spacing: 4 * preferencesModel.uiScale
+						Layout.preferredWidth: 160 * preferencesModel.uiScale
+						TextField
+						{
+							label:				qsTr("p-values")
+							name:				"parCuts"
+							visible:			typeOmegaNullItem.currentValue === "Two-sided"		||
+												typeOmegaNullItem.currentValue === "One-sided"		||
+												typeOmegaNullItem.currentValue === "One-sided (mon.)"
+							value:				"(.05, .10)"
+							fieldWidth: 		100 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
 					}
-				},
-				Component
-				{
-					TextField
+					Row
 					{
-						label:				"α"
-						name:				"parAlpha"
-						visible:			fromRowComponents["type"].currentText === "Two-sided"		||
-											fromRowComponents["type"].currentText === "Two-sided2"	||
-											fromRowComponents["type"].currentText === "One-sided (mon.)"
-						value:				if(fromRowComponents["type"].currentText === "Two-sided2"){ "(1,1)" }else{ "(1,1,1)" }
-						fieldWidth: 		70
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: 105
+						spacing: 4 * preferencesModel.uiScale
+						Layout.preferredWidth: 160 * preferencesModel.uiScale
+
+						TextField
+						{
+							label:				"α "
+							name:				"parAlpha"
+							visible:			typeOmegaNullItem.currentValue === "Two-sided"		||
+												typeOmegaNullItem.currentValue === "One-sided (mon.)"
+							value:				"(1,1,1)" 
+							fieldWidth: 		70 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						TextField
+						{
+							label:				"α₁"
+							name:				"parAlpha1"
+							visible:			typeOmegaNullItem.currentValue === "One-sided"
+							value:				"(1,1,1)"
+							fieldWidth: 		70 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
+						TextField
+						{
+							label:				"α₂"
+							name:				"parAlpha2"
+							visible:			typeOmegaNullItem.currentValue === "One-sided"
+							value:				"(1,1)"
+							fieldWidth: 		60 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder: 		true
+						}
 					}
-				},
-				Component
-				{
-					TextField
-					{
-						label:				"α₁"
-						name:				"parAlpha1"
-						visible:			fromRowComponents["type"].currentText === "One-sided"
-						value:				"(1,1,1)"
-						fieldWidth: 		70
-						useExternalBorder:	false
-						showBorder: 		true
-					}
-				},
-				Component
-				{
-					TextField
-					{
-						label:				"α₂"
-						name:				"parAlpha2"
-						visible:			fromRowComponents["type"].currentText === "One-sided"
-						value:				"(1,1)"
-						fieldWidth: 		70
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: 15
-					}
-				},
-				Component
-				{
-					IntegerField
-					{
-						label:				"x₀"
-						name:				"parLocation"
-						visible:			fromRowComponents["type"].currentText === "Spike(x₀)"
-						defaultValue:		1
-						min:				1
-						max:				1
-						inclusive: 			JASP.MinMax
-						fieldWidth: 		50
-						useExternalBorder:	false
-						showBorder: 		true
-						Layout.rightMargin: 90
-					}
-				},
-				Component
-				{
 					FormulaField
 					{
-						label: 				"Odds"
+						label: 				qsTr("Odds")
 						name: 				"priorOdds"
 						value:				"1"
 						min: 				0
 						inclusive: 			JASP.None
-						fieldWidth:			50
+						fieldWidth:			40 * preferencesModel.uiScale
 						useExternalBorder:	false
 						showBorder:			true
 					}
 				}
-			]
-
-			defaultValues: ["4"]
+			}
 		}
 
 	}
+
 
 	//// Options section ////
 	Section
@@ -1638,7 +1639,7 @@ Form
 			{
 
 				name:	"plots_type_individual_conditional"
-				label:	qsTr("Omit null models")
+				label:	qsTr("Conditional models only")
 				checked:true
 			}
 
@@ -1802,7 +1803,7 @@ Form
 		{
 			label:  		qsTr("Bridge sampling iterations:")
 			name:     		"advanced_bridge_iter"
-			defaultValue: 	5000
+			defaultValue: 	10000
 			max:			1000000
 			fieldWidth: 	100
 		}
@@ -1824,20 +1825,21 @@ Form
 				name:			"advanced_burnin"
 				label:			qsTr("Burnin")
 				defaultValue:	5000
-				min:			4000
+				min:			1000
 			}
 			IntegerField
 			{
 				name:			"advanced_iteration"
 				label:			qsTr("Iterations")
 				defaultValue:	10000
+				min:			4000
 			}
 			IntegerField
 			{
 				name:			"advanced_chains"
 				label:			qsTr("Chains")
 				defaultValue:	3
-				min:			1
+				min:			2
 			}
 			IntegerField
 			{
@@ -1882,12 +1884,12 @@ Form
 					}
 				}
 
-				DoubleField
+				PercentField
 				{
-					name:			"advanced_autofit_rhat"
-					label:			qsTr("Maximum Rhat")
-					defaultValue:	1.05
-					min:			1
+					name:			"advanced_autofit_error"
+					label:			qsTr("Target margin of error")
+					defaultValue:	1
+					decimals:		1
 				}
 
 
@@ -1895,7 +1897,7 @@ Form
 
 			CheckBox
 			{
-				label:		qsTr("Omit models")
+				label:		qsTr("Exclude models")
 				name:		"advanced_omit"
 				checked:	true
 
@@ -1903,8 +1905,24 @@ Form
 				CheckBox
 				{
 					childrenOnSameRow:	true
+					name:				"advanced_omit_error"
+					label:				qsTr("error % >")
+					checked:			true
+
+					PercentField
+					{
+						name: 			"advanced_omit_error_value"
+						defaultValue: 	1
+						decimals:		1
+					}
+				}
+
+
+				CheckBox
+				{
+					childrenOnSameRow:	true
 					name:				"advanced_omit_rhat"
-					label:				qsTr("Rhat >")
+					label:				qsTr("R-hat >")
 					checked:			true
 
 					DoubleField
@@ -1914,7 +1932,7 @@ Form
 						min:			1
 					}
 				}
-				
+
 
 				CheckBox
 				{
@@ -1937,13 +1955,6 @@ Form
 					name:			"advanced_omit_theta"
 				}
 
-				
-				CheckBox
-				{
-					name:		"advanced_omit_marglik"
-					label:		qsTr("Failed bridge sampling")
-					checked:	true
-				}
 
 				DropDown
 				{
@@ -1970,6 +1981,15 @@ Form
 				{ label: "Do not refit",		value: "no_refit"},
 				{ label: "Always refit",		value: "refit"}
 			]
+		}
+
+		FileSelector
+		{
+			Layout.columnSpan:	2
+			label: 				qsTr("Save the fitted model")
+			name:				"save_path"
+			filter:				"*.RDS"
+			save:				true
 		}
 
 
