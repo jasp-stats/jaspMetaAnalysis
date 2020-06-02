@@ -1858,7 +1858,7 @@ Form
 			{
 				label: 		qsTr("Autofit")
 				name:		"advanced_autofit"
-				checked:	true
+				checked:	false
 				Group
 				{
 					columns:	2
@@ -1899,7 +1899,7 @@ Form
 			{
 				label:		qsTr("Exclude models")
 				name:		"advanced_omit"
-				checked:	true
+				checked:	false
 
 
 				CheckBox
@@ -1907,7 +1907,7 @@ Form
 					childrenOnSameRow:	true
 					name:				"advanced_omit_error"
 					label:				qsTr("error % >")
-					checked:			true
+					checked:			false
 
 					PercentField
 					{
@@ -1923,7 +1923,7 @@ Form
 					childrenOnSameRow:	true
 					name:				"advanced_omit_rhat"
 					label:				qsTr("R-hat >")
-					checked:			true
+					checked:			false
 
 					DoubleField
 					{
