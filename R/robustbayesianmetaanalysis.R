@@ -26,7 +26,7 @@ RobustBayesianMetaAnalysis <-
     .RoBMA_priors_get(jaspResults, options)
     
     # fit model model
-    if (is.null(jaspResults[["model_notifier"]]) &
+    if (is.null(jaspResults[["model_notifier"]]) &&
         .RoBMA_ready(options))
       .RoBMA_fit_model(jaspResults, dataset, options)
     
@@ -58,9 +58,9 @@ RobustBayesianMetaAnalysis <-
         .RoBMA_plots(jaspResults,    options, "mu")
       if (options$plots_tau)
         .RoBMA_plots(jaspResults,   options, "tau")
-      if (options$plots_tau &
-          options$plots_mu &
-          options$plots_type == "averaged" &
+      if (options$plots_tau &&
+          options$plots_mu &&
+          options$plots_type == "averaged" &&
           !options$plots_priors)
         .RoBMA_plots(jaspResults, options, c("mu", "tau"))
       if (options$plots_omega)
@@ -80,19 +80,19 @@ RobustBayesianMetaAnalysis <-
         .RoBMA_diagnostics_overview(jaspResults, options)
       # plots
       if ((
-        options$diagnostics_mu |
-        options$diagnostics_tau |
-        options$diagnostics_omega | options$diagnostics_theta
-      ) &
+        options$diagnostics_mu ||
+        options$diagnostics_tau ||
+        options$diagnostics_omega || options$diagnostics_theta
+      ) &&
       (
-        options$diagnostics_trace |
-        options$diagnostics_autocorrelation |
+        options$diagnostics_trace ||
+        options$diagnostics_autocorrelation ||
         options$diagnostics_samples
       ))
         .RoBMA_diagnostics_plots(jaspResults, options)
       
       ### Save the model
-      if (options$save_path != "" &
+      if (options$save_path != "" &&
           is.null(jaspResults[["model_saved"]]))
         .RoBMA_save_model(jaspResults, options)
     }
@@ -307,7 +307,7 @@ RobustBayesianMetaAnalysis <-
       .RoBMA_options2priors_clean(x[["parAlpha2"]])
     x[["parCuts"]]   <- .RoBMA_options2priors_clean(x[["parCuts"]])
     
-  } else if (x$type == "spike" & any(names(x) %in% c("parAlpha2"))) {
+  } else if (x$type == "spike" && any(names(x) %in% c("parAlpha2"))) {
     x[["priorOdds"]]   <- eval(parse(text = x[["priorOdds"]]))
     x[["parLocation"]] <- 1
     
@@ -631,7 +631,7 @@ RobustBayesianMetaAnalysis <-
       any(c(options$input_CI, options$input_SE) != "", CI_input)
   }
   
-  return(ready_arg1 & ready_arg2)
+  return(ready_arg1 && ready_arg2)
   
 }
 .RoBMA_model_notifier       <- function(jaspResults) {
@@ -826,7 +826,7 @@ RobustBayesianMetaAnalysis <-
           plot_type   = "ggplot",
           par_name    = parameter,
           samples     = 1e6,
-          mu_transform = if (options$measures == "correlation" &
+          mu_transform = if (options$measures == "correlation" &&
                              parameter == "mu")
             options$advanced_mu_transform
         )
@@ -837,7 +837,7 @@ RobustBayesianMetaAnalysis <-
           par_name    = parameter,
           samples     = 1e6,
           # TODO: change to 1e7 once not testing
-          mu_transform = if (!is.null(fit$add_info$r) &
+          mu_transform = if (!is.null(fit$add_info$r) &&
                              parameter == "mu")
             fit$add_info$mu_transform
         )
@@ -869,9 +869,9 @@ RobustBayesianMetaAnalysis <-
   priors  <- jaspResults[["priors"]]$object
   
   # set error if no priors are specified
-  if ((length(priors$mu) == 0    & length(priors$mu_null))         |
-      (length(priors$tau) == 0   & length(priors$tau_null) == 0)   |
-      (length(priors$omega) == 0 & length(priors$omega_null) == 0)) {
+  if ((length(priors$mu) == 0    && length(priors$mu_null))         ||
+      (length(priors$tau) == 0   && length(priors$tau_null) == 0)   ||
+      (length(priors$omega) == 0 && length(priors$omega_null) == 0)) {
     priors_error <- createJaspTable()
     priors_error$setError(
       "At least one prior distribution per parameter must be specified (either null or a user specified one)."
@@ -989,11 +989,11 @@ RobustBayesianMetaAnalysis <-
       
     } else{
       # check whether any variable was selected - otherwise, the settings overview will be created
-      if (!(options$input_ES != "" | options$input_t != ""))
+      if (!(options$input_ES != "" || options$input_t != ""))
         return()
       
       # check whether priors whether RoBMA was already fitted - maybe we don't need to refit everything
-      if (!is.null(jaspResults[["model"]]) &
+      if (!is.null(jaspResults[["model"]]) &&
           options$advanced_control %in% c("clever", "no_refit")) {
         fit     <- jaspResults[["model"]]$object
         priors  <- jaspResults[["priors"]]$object
@@ -1019,22 +1019,22 @@ RobustBayesianMetaAnalysis <-
         priors <- jaspResults[["priors"]]$object
         
         fit <- RoBMA::RoBMA(
-          t  = if (options$measures == "cohensd" &
+          t  = if (options$measures == "cohensd" &&
                    options$input_t != "")
             dataset[, .v(options$input_t)]
           else
             NULL,
-          d  = if (options$measures == "cohensd" &
+          d  = if (options$measures == "cohensd" &&
                    options$input_ES != "")
             dataset[, .v(options$input_ES)]
           else
             NULL,
-          r  = if (options$measures == "correlation" &
+          r  = if (options$measures == "correlation" &&
                    options$input_ES != "")
             dataset[, .v(options$input_ES)]
           else
             NULL,
-          y  = if (options$measures == "general" &
+          y  = if (options$measures == "general" &&
                    options$input_ES != "")
             dataset[, .v(options$input_ES)]
           else
@@ -1045,17 +1045,17 @@ RobustBayesianMetaAnalysis <-
             dataset[, "SE"]
           else
             NULL,
-          n  = if (options$measures %in% c("cohensd", "correlation") &
+          n  = if (options$measures %in% c("cohensd", "correlation") &&
                    options$input_N != "")
             dataset[, .v(options$input_N)]
           else
             NULL,
-          n1 = if (options$measures == "cohensd" &
+          n1 = if (options$measures == "cohensd" &&
                    options$input_N1 != "")
             dataset[, .v(options$input_N1)]
           else
             NULL,
-          n2 = if (options$measures == "cohensd" &
+          n2 = if (options$measures == "cohensd" &&
                    options$input_N2 != "")
             dataset[, .v(options$input_N2)]
           else
@@ -1096,13 +1096,13 @@ RobustBayesianMetaAnalysis <-
               ),
             adapt           = options$advanced_adapt,
             bridge_max_iter = options$advanced_bridge_iter,
-            allow_max_error = if (options$advanced_omit &
+            allow_max_error = if (options$advanced_omit &&
                                   options$advanced_omit_error)
               options$advanced_omit_error_value,
-            allow_max_rhat  = if (options$advanced_omit &
+            allow_max_rhat  = if (options$advanced_omit &&
                                   options$advanced_omit_rhat)
               options$advanced_omit_rhat_value,
-            allow_min_ESS   = if (options$advanced_omit &
+            allow_min_ESS   = if (options$advanced_omit &&
                                   options$advanced_omit_ESS)
               options$advanced_omit_ESS_value,
             allow_inc_theta = options$advanced_omit_theta,
@@ -1134,10 +1134,10 @@ RobustBayesianMetaAnalysis <-
               ),
             adapt           = options$advanced_adapt,
             bridge_max_iter = options$advanced_bridge_iter,
-            allow_max_error = if (options$advanced_omit &
+            allow_max_error = if (options$advanced_omit &&
                                   options$advanced_omit_error)
               options$advanced_omit_error_value,
-            allow_max_rhat  = if (options$advanced_omit &
+            allow_max_rhat  = if (options$advanced_omit &&
                                   options$advanced_omit_rhat)
               options$advanced_omit_rhat_value,
             allow_min_ESS   = if (options$advanced_omit_ESS)
@@ -1504,7 +1504,7 @@ RobustBayesianMetaAnalysis <-
   # select models to iterate over
   if (options$results_individual_single) {
     models_i <- options$results_individual_single_number
-    if (models_i < 1 | models_i > length(fit$models)) {
+    if (models_i < 1 || models_i > length(fit$models)) {
       temp_model  <-
         createJaspContainer(title = paste0("Model ", models_i))
       temp_error  <- createJaspTable(title = "")
@@ -1865,7 +1865,7 @@ RobustBayesianMetaAnalysis <-
     
     
     # plot
-    if (pars == "omega" &
+    if (pars == "omega" &&
         sum(grepl(pars, rownames(temp_s$averaged))) > 1) {
       temp_plots <- createJaspContainer(title = title)
       temp_plots$position <- position
@@ -2054,7 +2054,7 @@ RobustBayesianMetaAnalysis <-
   # select models to iterate over
   if (options$diagnostics_single) {
     models_i <- options$diagnostics_single_model
-    if (models_i < 1 | models_i > length(fit$models)) {
+    if (models_i < 1 || models_i > length(fit$models)) {
       temp_model  <-
         createJaspContainer(title = paste0("Model ", models_i))
       diagnostics[[paste0("model_", models_i)]] <- temp_model
@@ -2279,7 +2279,7 @@ RobustBayesianMetaAnalysis <-
     }
     
     # show error if only one model is selected but doesn't contain any of the diagnostics
-    if (no_pars & options$diagnostics_single_model) {
+    if (no_pars && options$diagnostics_single_model) {
       temp_error  <- createJaspPlot(title = "")
       temp_error$dependOn(
         c(
