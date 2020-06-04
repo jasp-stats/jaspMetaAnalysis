@@ -404,18 +404,13 @@ RobustBayesianMetaAnalysis <-
     # add footnote
     if (any(rownames(results_table) == "tau")) {
       if (add_info$effect_size == "r")
-        jasp_table$addFootnote(paste0(
-          "\u03C4 ",
-          gettext("is on"),
-          " ",
-          ifelse(
+        jasp_table$addFootnote(
+          gettextf("%s is on %s scale.", "\u03C4",ifelse(
             add_info$mu_transform == "cohens_d",
             gettext("Cohen's <em>d</em>"),
             gettext("Fisher's <em>z</em>")
-          ),
-          " ",
-          gettext("scale.")
-        ))
+          ))
+        )
     }
     
     return(jasp_table)
@@ -431,13 +426,13 @@ RobustBayesianMetaAnalysis <-
       name = "lowerRange",
       title = gettext("Lower"),
       type = "number",
-      overtitle = paste0(gettext("<em>p</em>-values interval"), "\u002A")
+      overtitle = gettextf("<em>p</em>-values interval %s","\u002A")
     )
     jasp_table$addColumnInfo(
       name = "upperRange",
       title = gettext("Upper"),
       type = "number",
-      overtitle = paste0(gettext("<em>p</em>-values interval"), "\u002A")
+      overtitle = gettextf("<em>p</em>-values interval %s", "\u002A")
     )
     jasp_table$addColumnInfo(name = "mean",
                              title = gettext("Mean"),
@@ -501,15 +496,7 @@ RobustBayesianMetaAnalysis <-
     # add footnote
     jasp_table$addFootnote(
       symbol = "\u002A",
-      paste0(
-        gettext("The weights"),
-        " (\u03C9) ",
-        gettext("correspond to"),
-        " ",
-        add_info$weight_type,
-        " ",
-        gettext("<em>p</em>-values.")
-      )
+      gettextf("The weights (%s) correspond to %s <em>p</em>-values.", "\u03C9", add_info$weight_type)
     )
     
     return(jasp_table)
@@ -577,45 +564,23 @@ RobustBayesianMetaAnalysis <-
     }
     
     # add footnote
-    if (add_info$effect_size == "r")
-      jasp_table$addFootnote(paste0(
-        gettext("Estimated studies' effects"),
-        " (\u03B8) ",
-        gettext("correspond to effect size"),
-        "\u03C1."
-      ))
-    if (add_info$effect_size == "d")
-      jasp_table$addFootnote(paste0(
-        gettext("Estimated studies' effects"),
-        " (\u03B8) ",
-        gettext("correspond to effect size"),
-        " \u03B4."
-      ))
+    if (add_info$effect_size == "r"){
+      jasp_table$addFootnote(
+        gettextf("Estimated studies' effects (%s) correspond to effect size %s.","\u03B8","\u03C1")
+      )
+    }else if (add_info$effect_size == "d"){
+      jasp_table$addFootnote(
+        gettextf("Estimated studies' effects (%s) correspond to effect size %s.","\u03B8","\u03B4")
+      )
+    }
     
     return(jasp_table)
   }
 .RoBMA_coef_names           <- function(name, add_info) {
-  if (substr(name, 1, 2) == "mu")
-    return(paste0(
-      gettext("Effect size"),
-      " (",
-      if (add_info$effect_size == "r")
-        "\u03C1"
-      else if (add_info$effect_size == "d")
-        "\u03B4"
-      else
-        "\u03BC",
-      ")"
-    ))
-  if (substr(name, 1, 3) == "tau")
-    return(paste0(gettext("Heterogeneity"), " (\u03C4)"))
-  if (substr(name, 1, 5) == "omega")
-    return(paste0(gettext("Weights"), " (\u03C9", substr(name, 6, nchar(name)), ")"))
-  if (substr(name, 1, 5) == "theta")
-    return(if (!is.null(add_info$study_names))
-      add_info$study_names[as.numeric(substr(name, 7, nchar(name) - 1))]
-      else
-        paste0(gettext("Study"), " (", substr(name, 7, nchar(name) - 1), ")"))
+  if (name == "mu")
+    return(gettextf("Effect size (%s)",if (add_info$effect_size == "r") "\u03C1" else if (add_info$effect_size == "d") "\u03B4" else "\u03BC"))
+  if (name == "tau")
+    return(gettextf("Heterogeneity (%s)","\u03C4"))
 }
 # main functions
 .RoBMA_ready                <- function(options) {
@@ -1016,8 +981,8 @@ RobustBayesianMetaAnalysis <-
     
     if (options$measures == "fitted") {
       fit <- readRDS(file = options$fitted_path)
-      if (class(fit) != "RoBMA")
-        stop("The loaded object is not a RoBMA model.")
+      if (!RoBMA::is.RoBMA(fit))
+        stop(gettext("The loaded object is not a RoBMA model."))
       
     } else{
       # check whether any variable was selected - otherwise, the settings overview will be created
@@ -1285,11 +1250,11 @@ RobustBayesianMetaAnalysis <-
     overall_summary$addRows(temp_row)
   }
   if (s.fit$add_info$failed != 0)
-    overall_summary$addFootnote(paste0(s.fit$add_info$failed, gettext(" models failed to converge.")),
-                                symbol = gettext("Warning:"))
+    overall_summary$addFootnote(symbol = gettext("Warning:"),
+                                gettextf("%i models failed to converge.", s.fit$add_info$failed))
   if (!is.null(fit$add_info$warnings)) {
     for (w in fit$add_info$warnings)
-      overall_summary$addFootnote(w, symbol = gettext("Warning:"))
+      overall_summary$addFootnote(symbol = gettext("Warning:"), w)
   }
   
   main_summary[["overall_summary"]] <- overall_summary
@@ -1307,7 +1272,7 @@ RobustBayesianMetaAnalysis <-
   # weights table
   if (any(grepl("omega", rownames(s.fit$averaged)))) {
     averaged_weights <-
-      createJaspTable(title = paste0(gettext("Model-Averaged Weights"), " (\u03C9)"))
+      createJaspTable(title = gettextf("Model-Averaged Weights (%s)", "\u03C9"))
     averaged_weights$position <- 3
     averaged_weights <-
       .RoBMA_table_fill_weights(averaged_weights, s.fit$averaged, s.fit$add_info, options)
@@ -1317,10 +1282,7 @@ RobustBayesianMetaAnalysis <-
   # estimated studies table
   if (options$results_theta) {
     studies_summary <-
-      createJaspTable(title = gettext(
-        gettext("Model-Averaged Estimated Studies' Effects"),
-        " (\u03B8)"
-      ))
+      createJaspTable(title = gettextf("Model-Averaged Estimated Studies' Effects (%s)", "\u03B8"))
     studies_summary$position <- 4
     studies_summary <-
       .RoBMA_table_fill_studies(studies_summary, s.fit$averaged, s.fit$add_info, options)
@@ -1349,43 +1311,28 @@ RobustBayesianMetaAnalysis <-
     # weights table
     if (any(grepl("omega", rownames(s.fit$conditional)))) {
       conditional_weights <-
-        createJaspTable(title = paste0(gettext("Conditional Weights"), " (\u03C9)"))
+        createJaspTable(title = gettextf("Conditional Weights (%s)", "\u03C9"))
       conditional_weights$position <- 6
       conditional_weights <-
         .RoBMA_table_fill_weights(conditional_weights,
                                   s.fit$conditional,
                                   s.fit$add_info,
                                   options)
-      conditional_weights$addFootnote(paste0(
-        gettext("Estimated weights"),
-        " (\u03C9) ",
-        gettext(
-          "are model-averaged over models assuming existence of publication bias"
-        )
-      ))
+      conditional_weights$addFootnote(gettextf("Estimated weights (%s) are model-averaged over models assuming existence of publication bias.", "\u03C9"))
       main_summary[["conditional_weights"]] <- conditional_weights
     }
     
     # add the estimated studies effects
     if (options$results_theta) {
       conditional_studies_summary <-
-        createJaspTable(title = paste0(
-          gettext("Conditional Estimated Studies' Effects"),
-          " (\u03B8)"
-        ))
+        createJaspTable(title = gettextf("Conditional Estimated Studies' Effects (%s)","\u03B8"))
       conditional_studies_summary$position <- 7
       conditional_studies_summary <-
         .RoBMA_table_fill_studies(conditional_studies_summary,
                                   s.fit$conditional,
                                   fit$add_info,
                                   options)
-      conditional_studies_summary$addFootnote(paste0(
-        gettext("Estimated studies effects"),
-        " (\u03B8) ",
-        gettext(
-          "are model-averaged over models assuming existence of effect."
-        )
-      ))
+      conditional_studies_summary$addFootnote(gettextf("Estimated studies effects (%s) are model-averaged over models assuming existence of effect.", "\u03B8"))
       main_summary[["conditional_studies_summary"]] <-
         conditional_studies_summary
     }
@@ -1581,19 +1528,10 @@ RobustBayesianMetaAnalysis <-
     models_i <- options$results_individual_single_number
     if (models_i < 1 || models_i > length(fit$models)) {
       temp_model  <-
-        createJaspContainer(title = paste0(gettext("Model "), models_i))
+        createJaspContainer(title = gettextf("Model %i", models_i))
       temp_error  <- createJaspTable(title = "")
-      temp_error$setError(paste0(
-        gettext("Model"),
-        " ",
-        models_i,
-        " ",
-        gettext("does not exist. Select one of the models between 1 and"),
-        " ",
-        length(fit$models),
-        "."
-      ))
-      temp_model[["temp_error"]]                     <- temp_error
+      temp_error$setError(gettextf("Model %i does not exist. Select one of the models between 1 and %i.", models_i, length(fit$models)))
+      temp_model[["temp_error"]]                      <- temp_error
       individual_models[[paste0("model_", models_i)]] <- temp_model
       return()
     }
@@ -1604,11 +1542,11 @@ RobustBayesianMetaAnalysis <-
   
   # do the iteration
   for (i in models_i) {
-    temp_model <- createJaspContainer(title = paste0("Model ", i))
+    temp_model <- createJaspContainer(title = gettextf("Model %i", i))
     individual_models[[paste0("model_", i)]] <- temp_model
     
     ### model priors
-    temp_priors <- createJaspTable(title = "Priors")
+    temp_priors <- createJaspTable(title = gettext("Priors"))
     temp_priors$addColumnInfo(name = "prior_mu",
                               title = gettext("Effect Size"),
                               type = "string")
@@ -1676,7 +1614,7 @@ RobustBayesianMetaAnalysis <-
       # weights table
       if (any(grepl("omega", rownames(s.fit$overview[[i]]$tab)))) {
         temp_weights <-
-          createJaspTable(title = paste0(gettext("Estimated Weights"), " (\u03C9)"))
+          createJaspTable(title = gettextf("Estimated Weights (%s)", "\u03C9"))
         temp_weights <-
           .RoBMA_table_fill_weights(
             temp_weights,
@@ -1691,7 +1629,7 @@ RobustBayesianMetaAnalysis <-
       # estimated studies table
       if (any(grepl("theta", rownames(s.fit$overview[[i]]$tab)))) {
         temp_studies <-
-          createJaspTable(title = paste0(gettext("Estimated Studies' Effects"), " (\u03B8)"))
+          createJaspTable(title = gettextf("Estimated Studies' Effects (%s)", "\u03B8"))
         temp_studies <-
           .RoBMA_table_fill_studies(
             temp_studies,
@@ -1713,7 +1651,7 @@ RobustBayesianMetaAnalysis <-
   function(jaspResults, options, parameters) {
     # create / access the container
     if (is.null(jaspResults[["plots"]])) {
-      plots <- createJaspContainer(title = "Plots")
+      plots <- createJaspContainer(title = gettext("Plots"))
       plots$position <- 6
       jaspResults[["plots"]] <- plots
     } else{
@@ -1765,13 +1703,7 @@ RobustBayesianMetaAnalysis <-
       position <- 4
     }
     title <-
-      paste0(title,
-             " (",
-             if (options$plots_type == "conditional")
-               gettext("Conditional")
-             else if (options$plots_type == "averaged")
-               gettext("Model-Averaged"),
-             ")")
+      gettextf("%s (%s)", title, ifelse(options$plots_type == "conditional", gettext("Conditional"), gettext("Model-Averaged")))
     
     if (all(parameters %in% "theta")) {
       height <-
@@ -1931,14 +1863,7 @@ RobustBayesianMetaAnalysis <-
       position <- 3
     }
     title <-
-      paste0(title,
-             " (",
-             if (options$plots_type_individual_conditional)
-               gettext("Conditional Models")
-             else
-               gettext("Models"),
-             ")")
-    
+      gettextf("%s (%s)", title, ifelse(options$plots_type_individual_conditional, gettext("Conditional Models"), gettext("Models")))
     
     height <-
       250 + 70 * if (options$plots_type_individual_conditional) {
@@ -2152,20 +2077,11 @@ RobustBayesianMetaAnalysis <-
     models_i <- options$diagnostics_single_model
     if (models_i < 1 || models_i > length(fit$models)) {
       temp_model  <-
-        createJaspContainer(title = paste0(gettext("Model"), " ", models_i))
+        createJaspContainer(title = gettextf("Model %i", models_i))
       diagnostics[[paste0("model_", models_i)]] <- temp_model
       temp_error  <- createJaspPlot(title = "")
       temp_error$dependOn("diagnostics_single_model", "diagnostics_single")
-      temp_error$setError(paste0(
-        gettext("Model"),
-        " ",
-        models_i,
-        " ",
-        gettext("does not exist. Select one of the models between 1 and"),
-        " ",
-        length(fit$models),
-        "."
-      ))
+      temp_error$setError(gettextf("Model %i does not exist. Select one of the models between 1 and %i.", models_i, length(fit$models)))
       temp_model[["temp_error"]] <- temp_error
       return()
     }
@@ -2188,7 +2104,7 @@ RobustBayesianMetaAnalysis <-
     # create / access container for individual models
     if (is.null(diagnostics[[paste0("model_", i)]])) {
       temp_model <-
-        createJaspContainer(title = paste0(gettext("Model"), " ", i))
+        createJaspContainer(title = gettextf("Model %i", i))
       temp_model$position <- i
       temp_model$dependOn(c("diagnostics_single_model", "diagnostics_single"))
       diagnostics[[paste0("model_", i)]] <- temp_model
@@ -2393,11 +2309,7 @@ RobustBayesianMetaAnalysis <-
           "diagnostics_samples"
         )
       )
-      temp_error$setError(paste0(
-        "Model ",
-        i,
-        " does not contain any of the selected parameters."
-      ))
+      temp_error$setError(gettextf("Model %i does not contain any of the selected parameters.", i))
       temp_model[["temp_error"]] <- temp_error
     }
   }

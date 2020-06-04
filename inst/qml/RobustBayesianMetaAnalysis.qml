@@ -769,6 +769,7 @@ Form
 			id:						priors_null
 			name:					"priors_null"
 			label:					qsTr("Set null priors")
+			visible:				!measures_fitted.checked
 		}
 
 
