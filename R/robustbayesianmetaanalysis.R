@@ -293,7 +293,7 @@ RobustBayesianMetaAnalysis <-
   x <- trimws(x, which = "both")
   x <- x[x != ""]
   
-  if (any(is.na(as.numeric(x))))
+  if (anyNA(as.numeric(x)))
     stop("The priors for weights were set incorrectly.")
   return(as.numeric(x))
 }
