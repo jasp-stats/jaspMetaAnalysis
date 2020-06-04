@@ -278,15 +278,12 @@ RobustBayesianMetaAnalysis <-
   }
 }
 .RoBMA_options2priors_clean <- function(x) {
-  nx <- 666
-  while (nchar(x) != nx) {
-    x <- trimws(x, which = "both")
-    x <- trimws(x, which = "both", whitespace = "\\(")
-    x <- trimws(x, which = "both", whitespace = "\\)")
-    x <- trimws(x, which = "both", whitespace = ",")
-    x <- trimws(x, which = "both", whitespace = "c")
-    nx <- nchar(x)
-  }
+
+  x <- trimws(x, which = "both")
+  x <- trimws(x, which = "both", whitespace = "\\(")
+  x <- trimws(x, which = "both", whitespace = "\\)")
+  x <- trimws(x, which = "both", whitespace = ",")
+  x <- trimws(x, which = "both", whitespace = "c")
   
   x <- strsplit(x, ",", fixed = TRUE)[[1]]
   
@@ -294,7 +291,7 @@ RobustBayesianMetaAnalysis <-
   x <- x[x != ""]
   
   if (anyNA(as.numeric(x)))
-    stop("The priors for weights were set incorrectly.")
+    stop(gettext("The priors for weights were set incorrectly."))
   return(as.numeric(x))
 }
 .RoBMA_options2priors_eval  <- function(x) {
@@ -639,7 +636,6 @@ RobustBayesianMetaAnalysis <-
 .RoBMA_data_get             <- function(options, dataset) {
   if (options$measures == "fitted") {
     return(NULL)
-    
   } else{
     if (!is.null(dataset)) {
       return(dataset)
@@ -682,68 +678,18 @@ RobustBayesianMetaAnalysis <-
     jaspResults[["priors"]] <- priors
   }
   
-  priors_mu    <- NULL
-  priors_tau   <- NULL
-  priors_omega <- NULL
   
-  priors_mu_null    <- NULL
-  priors_tau_null   <- NULL
-  priors_omega_null <- NULL
-  
-  
-  # add priors from options
-  if (length(options$priors_mu) != 0) {
-    for (i in 1:length(options$priors_mu)) {
-      priors_mu <- c(priors_mu,
-                     list(.RoBMA_options2priors(options$priors_mu[[i]])))
+  object <- list()
+  prior_elements <- c("priors_mu", "priors_tau", "priors_omega", "priors_mu_null", "priors_tau_null", "priors_omega_null")
+  prior_names    <- c("mu", "tau", "omega", "mu_null", "tau_null", "omega_null")
+  for (i in seq_along(prior_elements)) {
+    tmp <- NULL
+    for (elem in options[[prior_elements[i]]]) {
+      tmp <- c(tmp, list(.RoBMA_options2priors(elem)))
     }
+    object[[prior_names[i]]] <- tmp
   }
   
-  if (length(options$priors_tau) != 0) {
-    for (i in 1:length(options$priors_tau)) {
-      priors_tau <- c(priors_tau,
-                      list(.RoBMA_options2priors(options$priors_tau[[i]])))
-    }
-  }
-  
-  if (length(options$priors_omega) != 0) {
-    for (i in 1:length(options$priors_omega)) {
-      priors_omega <- c(priors_omega,
-                        list(.RoBMA_options2priors(options$priors_omega[[i]])))
-    }
-  }
-  
-  # add priors from options
-  if (length(options$priors_mu_null) != 0) {
-    for (i in 1:length(options$priors_mu_null)) {
-      priors_mu_null <- c(priors_mu_null,
-                          list(.RoBMA_options2priors(options$priors_mu_null[[i]])))
-    }
-  }
-  
-  if (length(options$priors_tau_null) != 0) {
-    for (i in 1:length(options$priors_tau_null)) {
-      priors_tau_null <- c(priors_tau_null,
-                           list(.RoBMA_options2priors(options$priors_tau_null[[i]])))
-    }
-  }
-  
-  if (length(options$priors_omega_null) != 0) {
-    for (i in 1:length(options$priors_omega_null)) {
-      priors_omega_null <- c(priors_omega_null,
-                             list(.RoBMA_options2priors(options$priors_omega_null[[i]])))
-    }
-  }
-  
-  # return the container
-  object <- list(
-    mu         = priors_mu,
-    tau        = priors_tau,
-    omega      = priors_omega,
-    mu_null    = priors_mu_null,
-    tau_null   = priors_tau_null,
-    omega_null = priors_omega_null
-  )
   
   priors$object <- object
   
