@@ -280,10 +280,10 @@ RobustBayesianMetaAnalysis <-
 .RoBMA_options2priors_clean <- function(x) {
 
   x <- trimws(x, which = "both")
+  x <- trimws(x, which = "both", whitespace = "c")
   x <- trimws(x, which = "both", whitespace = "\\(")
   x <- trimws(x, which = "both", whitespace = "\\)")
   x <- trimws(x, which = "both", whitespace = ",")
-  x <- trimws(x, which = "both", whitespace = "c")
   
   x <- strsplit(x, ",", fixed = TRUE)[[1]]
   
@@ -291,7 +291,7 @@ RobustBayesianMetaAnalysis <-
   x <- x[x != ""]
   
   if (anyNA(as.numeric(x)))
-    stop(gettext("The priors for weights were set incorrectly."))
+    stop(gettext("The priors for publication bias were set incorrectly."))
   return(as.numeric(x))
 }
 .RoBMA_options2priors_eval  <- function(x) {
