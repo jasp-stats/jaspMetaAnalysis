@@ -585,23 +585,19 @@ RobustBayesianMetaAnalysis <-
     return(options$fitted_path != "")
   }
   
-  if (length(options$input_CI) != 0) {
     CI_input <- all(options$input_CI[[1]] != "")
   } else{
-    CI_input <- FALSE
-  }
-  
   ready_arg1 <- any(c(options$input_ES, options$input_t) != "")
   if (options$measures == "cohensd") {
     if (options$cohensd_testType == "one.sample") {
       ready_arg2 <-
-        any(c(options$input_CI, options$input_SE, options$input_N) != "",
-            CI_input)
+        any(c(options$input_SE, options$input_N) != "",
+            sum(unlist(options$input_CI) != "") == 2)
     } else if (options$cohensd_testType == "two.sample") {
       ready_arg2 <-
         any(
-          c(options$input_CI, options$input_SE, options$input_N) != "",
-          CI_input,
+          c(options$input_SE, options$input_N) != "",
+          sum(unlist(options$input_CI) != "") == 2,
           all(c(
             options$input_N1, options$input_N2
           ) != "")
@@ -609,11 +605,11 @@ RobustBayesianMetaAnalysis <-
     }
   } else if (options$measures == "correlation") {
     ready_arg2 <-
-      any(c(options$input_CI, options$input_SE, options$input_N) != "",
-          CI_input)
+      any(c(options$input_SE, options$input_N) != "",
+          sum(unlist(options$input_CI) != "") == 2)
   } else if (options$measures == "general") {
     ready_arg2 <-
-      any(c(options$input_CI, options$input_SE) != "", CI_input)
+      any(options$input_SE != "", sum(unlist(options$input_CI) != "") == 2)
   }
   
   return(ready_arg1 && ready_arg2)
@@ -658,10 +654,9 @@ RobustBayesianMetaAnalysis <-
                            options$input_labels)
       
       # compute SE from CI
-      if (length(options$input_CI) != 0) {
-        dataset$SE <-
-          abs(dataset[, .v(options$input_CI[[1]][1])] - dataset[, .v(options$input_CI[[1]][2])]) / (2 *
-                                                                                                      1.96)
+      if (sum(unlist(options$input_CI) != "") == 2) {
+        dataset$JASP_computed_SE <-
+          abs(dataset[, .v(options$input_CI[[1]][1])] - dataset[, .v(options$input_CI[[1]][2])]) / (2 * 1.96)
       }
     }
     
@@ -926,9 +921,12 @@ RobustBayesianMetaAnalysis <-
     }
     
     if (options$measures == "fitted") {
-      fit <- readRDS(file = options$fitted_path)
-      if (!RoBMA::is.RoBMA(fit))
-        stop(gettext("The loaded object is not a RoBMA model."))
+      
+      fit <- tryCatch({
+        readRDS(file = options$fitted_path)
+        if (!RoBMA::is.RoBMA(fit))
+          stop(gettext("The loaded object is not a RoBMA model."))
+      },error = function(e)e)
       
     } else{
       # check whether any variable was selected - otherwise, the settings overview will be created
@@ -961,7 +959,7 @@ RobustBayesianMetaAnalysis <-
         # extract priors
         priors <- jaspResults[["priors"]]$object
         
-        fit <- RoBMA::RoBMA(
+        fit <- tryCatch(RoBMA::RoBMA(
           t  = if (options$measures == "cohensd" &&
                    options$input_t != "")
             dataset[, .v(options$input_t)]
@@ -984,8 +982,8 @@ RobustBayesianMetaAnalysis <-
             NULL,
           se = if (options$input_SE != "")
             dataset[, .v(options$input_SE)]
-          else if (length(unlist(options$input_CI)) == 2)
-            dataset[, "SE"]
+          else if (sum(unlist(options$input_CI) != "") == 2)
+            dataset[, "JASP_computed_SE"]
           else
             NULL,
           n  = if (options$measures %in% c("cohensd", "correlation") &&
@@ -1054,10 +1052,10 @@ RobustBayesianMetaAnalysis <-
           save    = "all",
           seed    = if (options$setSeed)
             options$setSeed
-        )
+        ),error = function(e)e)
         
       } else{
-        fit <- RoBMA::update.RoBMA(
+        fit <- tryCatch(RoBMA::update.RoBMA(
           object  = fit,
           chains  = options$advanced_chains,
           iter    = options$advanced_iteration,
@@ -1089,11 +1087,27 @@ RobustBayesianMetaAnalysis <-
             progress_tick   = 'progressbarTick()'
           ),
           refit_failed = options$advanced_control != "no_refit"
-        )
+        ),error = function(e)e)
         
       }
       
     }
+    
+
+    # error handling
+    if(any(class(fit) %in% c("simpleError", "error"))){
+      # try to pass on the main summary tables if it exist
+      if(!is.null(jaspResults[["model_preview"]])){
+        jaspResults[["model_preview"]][["overall_summary"]]$setError(fit$message)
+        jaspResults[["model_preview"]][["models_summary"]] <- NULL
+      }else{
+        stop(fit$message)
+      }
+        
+      jaspResults[["model"]] <- NULL
+      return()
+    }
+    
     
     # update the fit and reset notifier
     model$object <- fit

@@ -93,7 +93,7 @@ Form
 			title: 			qsTr("t-statistic")
 			singleVariable: true
 			allowedColumns: ["scale"]
-			visible:		 measures_cohensd.checked || measures_correlation.checked
+			visible:		 measures_cohensd.checked
 		}
 
 		AssignedVariablesList
@@ -104,6 +104,7 @@ Form
 			title: 			qsTr("Effect Size Standard Error")
 			singleVariable: true
 			allowedColumns: ["scale"]
+			visible:		measures_cohensd.checked || measures_general.checked
 		}
 
 		AssignedPairsVariablesList
@@ -114,6 +115,7 @@ Form
 			title: 			qsTr("95% CI Lower and Upper Bound")
 			singleVariable: true
 			allowedColumns: ["scale"]
+			visible:		measures_cohensd.checked || measures_general.checked
 		}
 
 		AssignedVariablesList
