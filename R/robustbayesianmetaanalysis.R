@@ -25,14 +25,14 @@ RobustBayesianMetaAnalysis <-
     # get the priors
     .RoBMA_priors_get(jaspResults, options)
     
+    # show the model preview
+    if (is.null(jaspResults[["model"]]))
+      .RoBMA_model_preview(jaspResults, options)
+    
     # fit model model
     if (is.null(jaspResults[["model_notifier"]]) &&
         .RoBMA_ready(options))
       .RoBMA_fit_model(jaspResults, dataset, options)
-    
-    # show the model preview if model isn't fitted yet
-    if (is.null(jaspResults[["model"]]))
-      .RoBMA_model_preview(jaspResults, options)
     
     ### Priors plot
     if (options$priors_plot)
@@ -1119,6 +1119,9 @@ RobustBayesianMetaAnalysis <-
     main_summary$dependOn(summary_dependencies)
     jaspResults[["main_summary"]] <- main_summary
   }
+  
+  # remove the model preview
+  jaspResults[["model_preview"]] <- NULL
   
   # extract the model
   fit   <- jaspResults[["model"]]$object
