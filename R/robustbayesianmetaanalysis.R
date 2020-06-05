@@ -585,8 +585,6 @@ RobustBayesianMetaAnalysis <-
     return(options$fitted_path != "")
   }
   
-    CI_input <- all(options$input_CI[[1]] != "")
-  } else{
   ready_arg1 <- any(c(options$input_ES, options$input_t) != "")
   if (options$measures == "cohensd") {
     if (options$cohensd_testType == "one.sample") {
