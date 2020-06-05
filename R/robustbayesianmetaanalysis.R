@@ -726,9 +726,9 @@ RobustBayesianMetaAnalysis <-
     fit     <- jaspResults[["model"]]$object
     priors  <- fit$priors
   }
-  priors$mu    <- c(priors$mu_null,    priors$mu)
-  priors$tau   <- c(priors$tau_null,   priors$tau)
-  priors$omega <- c(priors$omega_null, priors$omega)
+  priors$mu    <- c(priors[["mu_null"]],    priors[["mu"]])
+  priors$tau   <- c(priors[["tau_null"]],   priors[["tau"]])
+  priors$omega <- c(priors[["omega_null"]], priors[["omega"]])
   
   
   # create plots for each of the parameters
@@ -805,12 +805,12 @@ RobustBayesianMetaAnalysis <-
   priors  <- jaspResults[["priors"]]$object
   
   # set error if no priors are specified
-  if ((length(priors$mu) == 0    &&
-       length(priors$mu_null))         ||
-      (length(priors$tau) == 0   &&
-       length(priors$tau_null) == 0)   ||
-      (length(priors$omega) == 0 &&
-       length(priors$omega_null) == 0)) {
+  if ((length(priors[["mu"]]) == 0 &&
+       length(priors[["mu_null"]]) == 0) ||
+      (length(priors[["tau"]]) == 0 &&
+       length(priors[["tau_null"]]) == 0) ||
+      (length(priors[["omega"]]) == 0 &&
+       length(priors[["omega_null"]]) == 0)) {
     priors_error <- createJaspTable()
     priors_error$setError(
       gettext(
@@ -824,12 +824,12 @@ RobustBayesianMetaAnalysis <-
   
   # create the setup table
   s.fit   <- RoBMA::check_setup(
-    priors_mu         = priors$mu,
-    priors_tau        = priors$tau,
-    priors_omega      = priors$omega,
-    priors_mu_null    = priors$mu_null,
-    priors_tau_null   = priors$tau_null,
-    priors_omega_null = priors$omega_null,
+    priors_mu         = priors[["mu"]],
+    priors_tau        = priors[["tau"]],
+    priors_omega      = priors[["omega"]],
+    priors_mu_null    = priors[["mu_null"]],
+    priors_tau_null   = priors[["tau_null"]],
+    priors_omega_null = priors[["omega_null"]],
     models            = TRUE
   )
   
@@ -943,12 +943,12 @@ RobustBayesianMetaAnalysis <-
         
         # this actually saves the priors in the same format as the RoBMA function does, what a coincidence ;)
         s.fit   <- RoBMA::check_setup(
-          priors_mu         = priors$mu,
-          priors_tau        = priors$tau,
-          priors_omega      = priors$omega,
-          priors_mu_null    = priors$mu_null,
-          priors_tau_null   = priors$tau_null,
-          priors_omega_null = priors$omega_null,
+          priors_mu         = priors[["mu"]],
+          priors_tau        = priors[["tau"]],
+          priors_omega      = priors[["omega"]],
+          priors_mu_null    = priors[["mu_null"]],
+          priors_tau_null   = priors[["tau_null"]],
+          priors_omega_null = priors[["omega_null"]],
           models            = TRUE
         )
         
@@ -1015,12 +1015,12 @@ RobustBayesianMetaAnalysis <-
             dataset[, .v(options$input_labels)]
           else
             NULL,
-          priors_mu         = priors$mu,
-          priors_tau        = priors$tau,
-          priors_omega      = priors$omega,
-          priors_mu_null    = priors$mu_null,
-          priors_tau_null   = priors$tau_null,
-          priors_omega_null = priors$omega_null,
+          priors_mu         = priors[["mu"]],
+          priors_tau        = priors[["tau"]],
+          priors_omega      = priors[["omega"]],
+          priors_mu_null    = priors[["mu_null"]],
+          priors_tau_null   = priors[["tau_null"]],
+          priors_omega_null = priors[["omega_null"]],
           chains  = options$advanced_chains,
           iter    = options$advanced_iteration,
           burnin  = options$advanced_burnin,
@@ -1511,9 +1511,9 @@ RobustBayesianMetaAnalysis <-
     )
     
     temp_row <- list(
-      prior_mu     = print(s.fit$overview[[i]]$priors$mu, silent = TRUE),
-      prior_tau    = print(s.fit$overview[[i]]$priors$tau, silent = TRUE),
-      prior_omega  = print(s.fit$overview[[i]]$priors$omega, silent = TRUE)
+      prior_mu     = print(s.fit$overview[[i]]$priors[["mu"]], silent = TRUE),
+      prior_tau    = print(s.fit$overview[[i]]$priors[["tau"]], silent = TRUE),
+      prior_omega  = print(s.fit$overview[[i]]$priors[["omega"]], silent = TRUE)
     )
     temp_priors$addRows(temp_row)
     
