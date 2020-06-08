@@ -18,6 +18,11 @@
 
 RobustBayesianMetaAnalysis <-
   function(jaspResults, dataset, options, state = NULL) {
+    
+    # clean fitted model if it was changed
+    if(!.RoBMA_ready(options))
+      .RoBMA_clean_model(jaspResults)
+    
     # load data
     if (.RoBMA_ready(options))
       dataset <- .RoBMA_data_get(options, dataset)
@@ -30,10 +35,9 @@ RobustBayesianMetaAnalysis <-
       .RoBMA_model_preview(jaspResults, options)
     
     # fit model model
-    if (is.null(jaspResults[["model_notifier"]]) &&
-        .RoBMA_ready(options))
+    if (is.null(jaspResults[["model_notifier"]]) && .RoBMA_ready(options))
       .RoBMA_fit_model(jaspResults, dataset, options)
-    
+                  
     ### Priors plot
     if (options$priors_plot)
       .RoBMA_priors_plots(jaspResults, options)
@@ -627,6 +631,14 @@ RobustBayesianMetaAnalysis <-
   return()
   
 }
+.RoBMA_clean_model          <- function(jaspResults) {
+  
+  if(!is.null(jaspResults[["model"]])){
+    jaspResults[["model"]] <- NULL
+  }
+  
+  return()
+}
 .RoBMA_data_get             <- function(options, dataset) {
   if (options$measures == "fitted") {
     return(NULL)
@@ -907,6 +919,7 @@ RobustBayesianMetaAnalysis <-
 }
 .RoBMA_fit_model            <-
   function(jaspResults, dataset, options) {
+
     if (is.null(jaspResults[["model"]])) {
       model <- createJaspState()
       model$dependOn("measures")
@@ -921,15 +934,13 @@ RobustBayesianMetaAnalysis <-
     if (options$measures == "fitted") {
       
       fit <- tryCatch({
-        readRDS(file = options$fitted_path)
+        fit <- readRDS(file = options$fitted_path)
         if (!RoBMA::is.RoBMA(fit))
           stop(gettext("The loaded object is not a RoBMA model."))
+        fit
       },error = function(e)e)
       
     } else{
-      # check whether any variable was selected - otherwise, the settings overview will be created
-      if (!(options$input_ES != "" || options$input_t != ""))
-        return()
       
       # check whether priors whether RoBMA was already fitted - maybe we don't need to refit everything
       if (!is.null(jaspResults[["model"]]) &&
@@ -1053,8 +1064,13 @@ RobustBayesianMetaAnalysis <-
         ),error = function(e)e)
         
       } else{
+        
         fit <- tryCatch(RoBMA::update.RoBMA(
           object  = fit,
+          study_names  = if (options$input_labels != "")
+            dataset[, .v(options$input_labels)]
+          else
+            NULL,
           chains  = options$advanced_chains,
           iter    = options$advanced_iteration,
           burnin  = options$advanced_burnin,
@@ -1239,7 +1255,7 @@ RobustBayesianMetaAnalysis <-
       .RoBMA_table_fill_weights(averaged_weights, s.fit$averaged, s.fit$add_info, options)
     main_summary[["averaged_weights"]] <- averaged_weights
   }
-  
+
   # estimated studies table
   if (options$results_theta) {
     studies_summary <-

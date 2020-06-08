@@ -132,7 +132,7 @@ Form
 		AssignedVariablesList
 		{
 			id: 			input_N1
-			enabled: 		input_SE.count == 0 && input_CI.count == 0 && input_N.count == 0 && input_N2.count == 0
+			enabled: 		input_SE.count == 0 && input_CI.count == 0 && input_N.count == 0
 			name: 			"input_N1"
 			title: 			qsTr("N (group 1)")
 			singleVariable: true
@@ -143,7 +143,7 @@ Form
 		AssignedVariablesList
 		{
 			id: 			input_N2
-			enabled: 		input_SE.count == 0 && input_CI.count == 0 && input_N.count == 0 && input_N1.count == 0
+			enabled: 		input_SE.count == 0 && input_CI.count == 0 && input_N.count == 0
 			name: 			"input_N2"
 			title: 			qsTr("N (group 2)")
 			singleVariable: true
