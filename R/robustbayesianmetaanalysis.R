@@ -295,7 +295,7 @@ RobustBayesianMetaAnalysis <-
   x <- x[x != ""]
   
   if (anyNA(as.numeric(x)))
-    stop(gettext("The priors for publication bias were set incorrectly."))
+    JASP:::.quitAnalysis(gettext("The priors for publication bias were set incorrectly."))
   return(as.numeric(x))
 }
 .RoBMA_options2priors_eval  <- function(x) {
@@ -936,7 +936,7 @@ RobustBayesianMetaAnalysis <-
       fit <- tryCatch({
         fit <- readRDS(file = options$fitted_path)
         if (!RoBMA::is.RoBMA(fit))
-          stop(gettext("The loaded object is not a RoBMA model."))
+          JASP:::.quitAnalysis(gettext("The loaded object is not a RoBMA model."))
         fit
       },error = function(e)e)
       
@@ -1110,16 +1110,7 @@ RobustBayesianMetaAnalysis <-
 
     # error handling
     if(any(class(fit) %in% c("simpleError", "error"))){
-      # try to pass on the main summary tables if it exist
-      if(!is.null(jaspResults[["model_preview"]])){
-        jaspResults[["model_preview"]][["overall_summary"]]$setError(fit$message)
-        jaspResults[["model_preview"]][["models_summary"]] <- NULL
-      }else{
-        stop(fit$message)
-      }
-        
-      jaspResults[["model"]] <- NULL
-      return()
+        JASP:::.quitAnalysis(fit$message)
     }
     
     
