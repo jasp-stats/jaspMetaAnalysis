@@ -3,7 +3,7 @@ import JASP.Module 	1.0
 
 Description
 {
-	name:			"Meta Analysis"
+	name:			"MetaAnalysis"
 	title : 		qsTr("Meta-Analysis")
 	description:	qsTr("Meta-Analysis module.")
 	icon:			"meta-analysis.svg"
