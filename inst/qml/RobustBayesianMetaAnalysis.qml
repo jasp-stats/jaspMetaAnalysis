@@ -1786,7 +1786,6 @@ Form
 	//// Advanced section for prior model probabilities sampling settings ////
 	Section
 	{
-		runOnChange:	false
 		columns: 		2
 		title: 			qsTr("Advanced")
 
