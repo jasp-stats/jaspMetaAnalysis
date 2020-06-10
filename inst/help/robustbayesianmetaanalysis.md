@@ -6,9 +6,9 @@ The robust Bayesian meta-analysis allows the user to specify a wide range of met
 ### Input
 ---
 #### Input type
-- Cohen's d / t-statistics & (N / SE): Specifying input using either Cohen's d measured effect sizes and the sample size or standard errors, or reported t-statistics and sample sizes.
-- Correlations & (N / SE): Specifying input using effect sizes measured as correlations and the sample size or standard errors. Note that the effect size is internally transformed on Cohen's d scale for model estimation (see Advanced for additional options). The prior distributions are specified on the transformed scale, with the provided visualization transforming the priors back to the correlation scale. The output for the mean parameter is transformed back for easier interpretability, however, the heterogeneity parameter is always summarized on the transformed scale.
-- Effect sizes & SE: Specifying input using any other types of effect sizes and standard errors. Note that effect sizes supplied in this way will result in approximating the corresponding test-statistics distribution using a normal distribution.
+- Cohen's d / t-statistics & (N / SE): Specifying input using either Cohen's d effect sizes and the sample size or standard errors, or reported t-statistics and sample sizes.
+- Correlations & (N / SE): Specifying input using correlations and the sample size or standard errors. Note that the effect size is internally transformed to Cohen's d scale for model estimation (see Advanced tab for additional options). The prior distributions are specified on the transformed scale, with the provided visualization transforming the priors back to the correlation scale. The output for the mean parameter is transformed back for easier interpretability, however, the heterogeneity parameter is always summarized on the transformed scale.
+- Effect sizes & SE: Specifying input using any other types of effect sizes and standard errors. Note that effect sizes supplied in this way will result in approximating the corresponding test statistics distribution using a normal distribution.
 - Fitted model: Specify a path to already fitted RoBMA model using R. The model must be saved as an RDS file.
 
 #### Data

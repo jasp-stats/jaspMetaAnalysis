@@ -406,7 +406,10 @@ RobustBayesianMetaAnalysis <-
     if (any(rownames(results_table) == "tau")) {
       if (add_info$effect_size == "r")
         jasp_table$addFootnote(
-          gettextf("%s is on %s scale.", "\u03C4",ifelse(
+          gettextf("%s is on %s scale.", 
+                   "\u03C4",
+                   if(add_info$mu_transform == "cohens_d") gettext("Cohen's <em>d</em>") else gettext("Fisher's <em>z</em>")
+          )
             add_info$mu_transform == "cohens_d",
             gettext("Cohen's <em>d</em>"),
             gettext("Fisher's <em>z</em>")

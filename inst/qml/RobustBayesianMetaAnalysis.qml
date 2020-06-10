@@ -608,7 +608,7 @@ Form
 						FormulaField
 						{
 							id:					truncationTauLower
-							label: 				"lower"
+							label: 				qsTr("lower")
 							name: 				"truncationLower"
 							value:				"0"
 							min:				0
@@ -1797,8 +1797,8 @@ Form
 			name:		"advanced_mu_transform"
 			values:
 			[
-				{ label: "Cohen's d",			value: "cohens_d"},
-				{ label: "Fisher's z",			value: "fishers_z"}
+				{ label: qsTr("Cohen's d"),			value: "cohens_d"},
+				{ label: qsTr("Fisher's z"),			value: "fishers_z"}
 			]
 		}
 

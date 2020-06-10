@@ -30,7 +30,7 @@ Description
 	Analysis
 	{
 		title: 		qsTr("Robust Bayesian Meta-Analysis (beta)")
-		function"		"RobustBayesianMetaAnalysis"
+		function:		"RobustBayesianMetaAnalysis"
 		requiresData:	false
 	}
 }
