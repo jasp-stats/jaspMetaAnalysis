@@ -410,10 +410,6 @@ RobustBayesianMetaAnalysis <-
                    "\u03C4",
                    if(add_info$mu_transform == "cohens_d") gettext("Cohen's <em>d</em>") else gettext("Fisher's <em>z</em>")
           )
-            add_info$mu_transform == "cohens_d",
-            gettext("Cohen's <em>d</em>"),
-            gettext("Fisher's <em>z</em>")
-          ))
         )
     }
     
@@ -1231,10 +1227,10 @@ RobustBayesianMetaAnalysis <-
   main_summary[["overall_summary"]] <- overall_summary
   
   
-  ### create model-averaged results tables
+  ### create model averaged results tables
   # estimate table
   averaged_summary <-
-    createJaspTable(title = gettext("Model-Averaged Estimates"))
+    createJaspTable(title = gettext("Model Averaged Estimates"))
   averaged_summary$position <- 2
   averaged_summary <-
     .RoBMA_table_fill_coef(averaged_summary, s.fit$averaged, s.fit$add_info, options)
@@ -1243,7 +1239,7 @@ RobustBayesianMetaAnalysis <-
   # weights table
   if (any(grepl("omega", rownames(s.fit$averaged)))) {
     averaged_weights <-
-      createJaspTable(title = gettextf("Model-Averaged Weights (%s)", "\u03C9"))
+      createJaspTable(title = gettextf("Model Averaged Weights (%s)", "\u03C9"))
     averaged_weights$position <- 3
     averaged_weights <-
       .RoBMA_table_fill_weights(averaged_weights, s.fit$averaged, s.fit$add_info, options)
@@ -1253,7 +1249,7 @@ RobustBayesianMetaAnalysis <-
   # estimated studies table
   if (options$results_theta) {
     studies_summary <-
-      createJaspTable(title = gettextf("Model-Averaged Estimated Studies' Effects (%s)", "\u03B8"))
+      createJaspTable(title = gettextf("Model Averaged Estimated Studies' Effects (%s)", "\u03B8"))
     studies_summary$position <- 4
     studies_summary <-
       .RoBMA_table_fill_studies(studies_summary, s.fit$averaged, s.fit$add_info, options)
@@ -1274,7 +1270,7 @@ RobustBayesianMetaAnalysis <-
                              options)
     conditional_summary$addFootnote(
       gettext(
-        "Estimates are model-averaged over models assuming existence of effect / heterogeneity."
+        "Estimates are model averaged over models assuming existence of effect / heterogeneity."
       )
     )
     main_summary[["conditional_summary"]] <- conditional_summary
@@ -1289,7 +1285,7 @@ RobustBayesianMetaAnalysis <-
                                   s.fit$conditional,
                                   s.fit$add_info,
                                   options)
-      conditional_weights$addFootnote(gettextf("Estimated weights (%s) are model-averaged over models assuming existence of publication bias.", "\u03C9"))
+      conditional_weights$addFootnote(gettextf("Estimated weights (%s) are model averaged over models assuming existence of publication bias.", "\u03C9"))
       main_summary[["conditional_weights"]] <- conditional_weights
     }
     
@@ -1303,7 +1299,7 @@ RobustBayesianMetaAnalysis <-
                                   s.fit$conditional,
                                   fit$add_info,
                                   options)
-      conditional_studies_summary$addFootnote(gettextf("Estimated studies effects (%s) are model-averaged over models assuming existence of effect.", "\u03B8"))
+      conditional_studies_summary$addFootnote(gettextf("Estimated studies effects (%s) are model averaged over models assuming existence of effect.", "\u03B8"))
       main_summary[["conditional_studies_summary"]] <-
         conditional_studies_summary
     }
@@ -1674,7 +1670,7 @@ RobustBayesianMetaAnalysis <-
       position <- 4
     }
     title <-
-      gettextf("%s (%s)", title, ifelse(options$plots_type == "conditional", gettext("Conditional"), gettext("Model-Averaged")))
+      gettextf("%s (%s)", title, ifelse(options$plots_type == "conditional", gettext("Conditional"), gettext("Model Averaged")))
     
     if (all(parameters %in% "theta")) {
       height <-
