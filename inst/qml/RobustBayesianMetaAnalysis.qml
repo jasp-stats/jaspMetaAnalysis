@@ -622,7 +622,7 @@ Form
 						FormulaField
 						{
 							id:					truncationTauUpper
-							label: 				"upper"
+							label: 				qsTr("upper")
 							name: 				"truncationUpper"
 							value:				"Inf"
 							min: 				truncationTauLower ? truncationTauLower.value : 0
@@ -1879,9 +1879,9 @@ Form
 						name:	"advanced_autofit_time_unit"
 						values:
 						[
-							{ label: "hours",			value: "hours"},
-							{ label: "minutes",			value: "minutes"},
-							{ label: "seconds",			value: "seconds"}
+							{ label: qsTr("hours"),				value: "hours"},
+							{ label: qsTr("minutes"),			value: "minutes"},
+							{ label: qsTr("seconds"),			value: "seconds"}
 
 						]
 					}
@@ -1965,8 +1965,8 @@ Form
 					name:		"advanced_omit_prior"
 					values:
 					[
-						{ label: "Conditional models",	value: "conditional"},
-						{ label: "Model space",			value: "overal"}
+						{ label: qsTr("Conditional models"),	value: "conditional"},
+						{ label: qsTr("Model space"),			value: "overal"}
 					]
 				}
 			}
@@ -1980,9 +1980,9 @@ Form
 			name: "advanced_control"
 			values:
 			[
-				{ label: "Clever refitting",	value: "clever",	default: true},
-				{ label: "Do not refit",		value: "no_refit"},
-				{ label: "Always refit",		value: "refit"}
+				{ label: qsTr("Clever refitting"),	value: "clever",	default: true},
+				{ label: qsTr("Do not refit"),		value: "no_refit"},
+				{ label: qsTr("Always refit"),		value: "refit"}
 			]
 		}
 
