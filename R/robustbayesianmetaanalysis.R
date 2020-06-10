@@ -382,25 +382,28 @@ RobustBayesianMetaAnalysis <-
                                type = "number")
     }
     
+    
+    if (is.null(results_table)) 
+      return(jasp_table)
+    
     # fill rows
-    if (!is.null(results_table)) {
-      for (i in c(1:nrow(results_table))[rownames(results_table) %in% c("mu", "tau")]) {
-        temp_row <- list(
-          terms    = .RoBMA_coef_names(rownames(results_table)[i], add_info),
-          mean     = results_table$Mean[i],
-          median   = results_table$Median[i],
-          lowerCI  = results_table[i, 3],
-          upperCI  = results_table[i, 4]
-        )
-        if (individual) {
-          temp_row$error <- results_table$`MCMC error`[i]
-          temp_row$ess   <- results_table$`ESS`[i]
-          temp_row$rhat  <- results_table$`Rhat`[i]
-        }
-        
-        jasp_table$addRows(temp_row)
+    for (i in c(1:nrow(results_table))[rownames(results_table) %in% c("mu", "tau")]) {
+      temp_row <- list(
+        terms    = .RoBMA_coef_names(rownames(results_table)[i], add_info),
+        mean     = results_table$Mean[i],
+        median   = results_table$Median[i],
+        lowerCI  = results_table[i, if(individual) ".025" else as.character(.5 - options$results_CI / 2)],
+        upperCI  = results_table[i, if(individual) ".975" else as.character(.5 + options$results_CI / 2)]
+      )
+      if (individual) {
+        temp_row$error <- results_table$`MCMC error`[i]
+        temp_row$ess   <- results_table$`ESS`[i]
+        temp_row$rhat  <- results_table$`Rhat`[i]
       }
+      
+      jasp_table$addRows(temp_row)
     }
+
     
     # add footnote
     if (any(rownames(results_table) == "tau")) {
@@ -464,34 +467,39 @@ RobustBayesianMetaAnalysis <-
                                type = "number")
     }
     
+    
+    if (is.null(results_table))
+      return(jasp_table)
+    
+    
+    
     # fill rows
-    if (!is.null(results_table)) {
-      for (i in c(1:nrow(results_table))[grepl("omega", rownames(results_table))]) {
-        temp_row <- list(
-          lowerRange = as.numeric(substr(
-            rownames(results_table)[i],
-            7,
-            regexec(",", rownames(results_table)[i], fixed = TRUE)[[1]] - 1
-          )),
-          upperRange = as.numeric(substr(
-            rownames(results_table)[i],
-            regexec(",", rownames(results_table)[i], fixed = TRUE)[[1]] + 1,
-            nchar(rownames(results_table)[i]) - 1
-          )),
-          mean       = results_table$Mean[i],
-          median     = results_table$Median[i],
-          lowerCI    = results_table[i, 3],
-          upperCI    = results_table[i, 4]
-        )
-        if (individual) {
-          temp_row$error <- results_table$`Error % of SD`[i]
-          temp_row$ess   <- results_table$`ESS`[i]
-          temp_row$rhat  <- results_table$`Rhat`[i]
-        }
-        
-        jasp_table$addRows(temp_row)
+    for (i in c(1:nrow(results_table))[grepl("omega", rownames(results_table))]) {
+      temp_row <- list(
+        lowerRange = as.numeric(substr(
+          rownames(results_table)[i],
+          7,
+          regexec(",", rownames(results_table)[i], fixed = TRUE)[[1]] - 1
+        )),
+        upperRange = as.numeric(substr(
+          rownames(results_table)[i],
+          regexec(",", rownames(results_table)[i], fixed = TRUE)[[1]] + 1,
+          nchar(rownames(results_table)[i]) - 1
+        )),
+        mean       = results_table$Mean[i],
+        median     = results_table$Median[i],
+        lowerCI    = results_table[i, if(individual) ".025" else as.character(.5 - options$results_CI / 2)],
+        upperCI    = results_table[i, if(individual) ".975" else as.character(.5 + options$results_CI / 2)]
+      )
+      if (individual) {
+        temp_row$error <- results_table$`Error % of SD`[i]
+        temp_row$ess   <- results_table$`ESS`[i]
+        temp_row$rhat  <- results_table$`Rhat`[i]
       }
+      
+      jasp_table$addRows(temp_row)
     }
+    
     
     # add footnote
     jasp_table$addFootnote(
@@ -541,27 +549,31 @@ RobustBayesianMetaAnalysis <-
                                type = "number")
     }
     
+    
+    if (is.null(results_table))
+      return(jasp_table)
+    
+    
     # fill rows
-    if (!is.null(results_table)) {
-      temp_i <- 0
-      for (i in c(1:nrow(results_table))[grepl("theta", rownames(results_table))]) {
-        temp_i <- temp_i + 1
-        temp_row <- list(
-          terms    = add_info$study_names[temp_i],
-          mean     = results_table$Mean[i],
-          median   = results_table$Median[i],
-          lowerCI  = results_table[i, 3],
-          upperCI  = results_table[i, 4]
-        )
-        if (individual) {
-          temp_row$error <- results_table$`Error % of SD`[i]
-          temp_row$ess   <- results_table$`ESS`[i]
-          temp_row$rhat  <- results_table$`Rhat`[i]
-        }
-        
-        jasp_table$addRows(temp_row)
+    temp_i <- 0
+    for (i in c(1:nrow(results_table))[grepl("theta", rownames(results_table))]) {
+      temp_i <- temp_i + 1
+      temp_row <- list(
+        terms    = add_info$study_names[temp_i],
+        mean     = results_table$Mean[i],
+        median   = results_table$Median[i],
+        lowerCI  = results_table[i, if(individual) ".025" else as.character(.5 - options$results_CI / 2)],
+        upperCI  = results_table[i, if(individual) ".975" else as.character(.5 + options$results_CI / 2)]
+      )
+      if (individual) {
+        temp_row$error <- results_table$`Error % of SD`[i]
+        temp_row$ess   <- results_table$`ESS`[i]
+        temp_row$rhat  <- results_table$`Rhat`[i]
       }
+      
+      jasp_table$addRows(temp_row)
     }
+
     
     # add footnote
     if (add_info$effect_size == "r"){
@@ -855,10 +867,12 @@ RobustBayesianMetaAnalysis <-
   
   for (i in 1:nrow(s.fit$overview)) {
     temp_row <- list(
-      terms     = if (i == 3)
-        gettext("Publication bias")
-      else
-        rownames(s.fit$overview)[i],
+      terms     = if (i == 1)
+        gettext("Effect")
+      else if (i == 2)
+        gettext("Heterogeneity")
+      else if (i == 3)
+        gettext("Publication bias"),
       models    = paste0(s.fit$overview$Models[i], "/", s.fit$add_info$n_models),
       priorProb = s.fit$overview$`Prior prob.`[i]
     )
@@ -1200,10 +1214,12 @@ RobustBayesianMetaAnalysis <-
   
   for (i in 1:nrow(s.fit$overview)) {
     temp_row <- list(
-      terms     = if (i == 3)
-        gettext("Publication bias")
-      else
-        rownames(s.fit$overview)[i],
+      terms     = if (i == 1)
+        gettext("Effect")
+      else if (i == 2)
+        gettext("Heterogeneity")
+      else if (i == 3)
+        gettext("Publication bias"),
       models    = paste0(
         s.fit$overview$Models[i],
         "/",
