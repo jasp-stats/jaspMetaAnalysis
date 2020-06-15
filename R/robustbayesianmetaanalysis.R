@@ -702,7 +702,7 @@ RobustBayesianMetaAnalysis <-
   for (i in seq_along(prior_elements)) {
     tmp <- NULL
     for (elem in options[[prior_elements[i]]]) {
-      tmp <- c(tmp, list(.RoBMA_options2priors(elem)))
+      tmp_prior <- tryCatch(.RoBMA_options2priors(elem), error = function(e)e)
       if(class(tmp_prior) %in% c("simpleError", "error")){
         JASP:::.quitAnalysis(tmp_prior$message)
       }
