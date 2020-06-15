@@ -500,7 +500,7 @@ Form
 						FormulaField
 						{
 							label:				"σ"
-							name:				"	"
+							name:				"parScale"
 							visible:			typeTauItem.currentValue === "normal"	||
 												typeTauItem.currentValue === "t"
 							value:				"1"
@@ -1080,7 +1080,7 @@ Form
 						FormulaField
 						{
 							label:				"σ"
-							name:				"	"
+							name:				"parScale"
 							visible:			typeTauNullItem.currentValue === "normal"	||
 												typeTauNullItem.currentValue === "t"
 							value:				"1"
