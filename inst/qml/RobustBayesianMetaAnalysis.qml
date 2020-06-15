@@ -708,7 +708,7 @@ Form
 							visible:			typeOmegatem.currentValue === "Two-sided"		||
 												typeOmegatem.currentValue === "One-sided"		||
 												typeOmegatem.currentValue === "One-sided (mon.)"
-							value:				"(.05, .10)"
+							value:				if(typeOmegatem.currentValue === "Two-sided"){"(.05, .10)"} else {"(.05, .95)"}
 							fieldWidth: 		100 * preferencesModel.uiScale
 							useExternalBorder:	false
 							showBorder: 		true
@@ -735,7 +735,7 @@ Form
 							label:				"α₁"
 							name:				"parAlpha1"
 							visible:			typeOmegatem.currentValue === "One-sided"
-							value:				"(1,1,1)"
+							value:				"(1,1)"
 							fieldWidth: 		70 * preferencesModel.uiScale
 							useExternalBorder:	false
 							showBorder: 		true
@@ -1284,7 +1284,7 @@ Form
 							visible:			typeOmegaNullItem.currentValue === "Two-sided"		||
 												typeOmegaNullItem.currentValue === "One-sided"		||
 												typeOmegaNullItem.currentValue === "One-sided (mon.)"
-							value:				"(.05, .10)"
+							value:				if(typeOmegaNullItem.currentValue === "Two-sided") {"(.05, .10)"} else {"(.05, .95)"}
 							fieldWidth: 		100 * preferencesModel.uiScale
 							useExternalBorder:	false
 							showBorder: 		true
@@ -1311,7 +1311,7 @@ Form
 							label:				"α₁"
 							name:				"parAlpha1"
 							visible:			typeOmegaNullItem.currentValue === "One-sided"
-							value:				"(1,1,1)"
+							value:				"(1,1)"
 							fieldWidth: 		70 * preferencesModel.uiScale
 							useExternalBorder:	false
 							showBorder: 		true
