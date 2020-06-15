@@ -746,7 +746,7 @@ Form
 							name:				"parAlpha2"
 							visible:			typeOmegatem.currentValue === "One-sided"
 							value:				"(1,1)"
-							fieldWidth: 		65 * preferencesModel.uiScale
+							fieldWidth: 		50 * preferencesModel.uiScale
 							useExternalBorder:	false
 							showBorder: 		true
 						}
@@ -1322,7 +1322,7 @@ Form
 							name:				"parAlpha2"
 							visible:			typeOmegaNullItem.currentValue === "One-sided"
 							value:				"(1,1)"
-							fieldWidth: 		60 * preferencesModel.uiScale
+							fieldWidth: 		50 * preferencesModel.uiScale
 							useExternalBorder:	false
 							showBorder: 		true
 						}
