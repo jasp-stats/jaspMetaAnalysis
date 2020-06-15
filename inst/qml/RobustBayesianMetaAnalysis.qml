@@ -207,8 +207,8 @@ Form
 			RowLayout
 			{
 				Label { text: qsTr("Distribution");	Layout.preferredWidth: 140 * preferencesModel.uiScale; Layout.leftMargin: 5 * preferencesModel.uiScale}
-				Label { text: qsTr("Parameters");	Layout.preferredWidth: 160 * preferencesModel.uiScale }
-				Label { text: qsTr("Truncation");	Layout.preferredWidth: 160 * preferencesModel.uiScale }
+				Label { text: qsTr("Parameters");	Layout.preferredWidth: 155 * preferencesModel.uiScale }
+				Label { text: qsTr("Truncation");	Layout.preferredWidth: 150 * preferencesModel.uiScale }
 				Label { text: qsTr("Prior Odds") }
 			}
 			ComponentsList
@@ -245,7 +245,7 @@ Form
 					Row
 					{
 						spacing: 4 * preferencesModel.uiScale
-						Layout.preferredWidth: 160 * preferencesModel.uiScale
+						Layout.preferredWidth: 155 * preferencesModel.uiScale
 						FormulaField
 						{
 							label:				"μ "
@@ -376,14 +376,15 @@ Form
 					Row
 					{
 						spacing: 4 * preferencesModel.uiScale
-						Layout.preferredWidth: 160 * preferencesModel.uiScale
+						Layout.preferredWidth: 150 * preferencesModel.uiScale
 						FormulaField
 						{
 							id:					truncationMuLower
 							label: 				qsTr("lower")
 							name: 				"truncationLower"
 							visible:			typeMuItem.currentValue !== "spike" && typeMuItem.currentValue !== "uniform"
-							value:				"-Inf"
+							value:				if(typeMuItem.currentValue === "gamma_k0" || typeMuItem.currentValue === "gamma_ab" || typeMuItem.currentValue === "invgamma"){ 0 } else "-Inf"
+							min:				if(typeMuItem.currentValue === "gamma_k0" || typeMuItem.currentValue === "gamma_ab" || typeMuItem.currentValue === "invgamma"){ 0 } else "-Inf"
 							max: 				truncationMuUpper.value
 							inclusive: 			JASP.MinOnly
 							fieldWidth:			40 * preferencesModel.uiScale
@@ -433,8 +434,8 @@ Form
 			{
 
 				Label { text: qsTr("Distribution");	Layout.preferredWidth: 140 * preferencesModel.uiScale; Layout.leftMargin: 5 * preferencesModel.uiScale}
-				Label { text: qsTr("Parameters");	Layout.preferredWidth: 160 * preferencesModel.uiScale }
-				Label { text: qsTr("Truncation");	Layout.preferredWidth: 160 * preferencesModel.uiScale }
+				Label { text: qsTr("Parameters");	Layout.preferredWidth: 155 * preferencesModel.uiScale }
+				Label { text: qsTr("Truncation");	Layout.preferredWidth: 150 * preferencesModel.uiScale }
 				Label { text: qsTr("Prior Odds") }
 			}
 			ComponentsList
@@ -470,7 +471,7 @@ Form
 					Row
 					{
 						spacing: 4 * preferencesModel.uiScale
-						Layout.preferredWidth: 160 * preferencesModel.uiScale
+						Layout.preferredWidth: 155 * preferencesModel.uiScale
 
 						FormulaField
 						{
@@ -603,7 +604,7 @@ Form
 					Row
 					{
 						spacing: 4 * preferencesModel.uiScale
-						Layout.preferredWidth: 160 * preferencesModel.uiScale
+						Layout.preferredWidth: 150 * preferencesModel.uiScale
 
 						FormulaField
 						{
@@ -663,8 +664,8 @@ Form
 			{
 
 				Label { text: qsTr("Weight function");	Layout.preferredWidth: 140 * preferencesModel.uiScale; Layout.leftMargin: 5 * preferencesModel.uiScale}
-				Label { text: qsTr("Cut-points");		Layout.preferredWidth: 160 * preferencesModel.uiScale }
-				Label { text: qsTr("Parameters");		Layout.preferredWidth: 160 * preferencesModel.uiScale }
+				Label { text: qsTr("Cut-points");		Layout.preferredWidth: 155 * preferencesModel.uiScale }
+				Label { text: qsTr("Parameters");		Layout.preferredWidth: 150 * preferencesModel.uiScale }
 				Label { text: qsTr("Prior Odds")}
 			}
 			ComponentsList
@@ -699,7 +700,7 @@ Form
 					Row
 					{
 						spacing: 4 * preferencesModel.uiScale
-						Layout.preferredWidth: 160 * preferencesModel.uiScale
+						Layout.preferredWidth: 155 * preferencesModel.uiScale
 						TextField
 						{
 							label:				qsTr("p-values")
@@ -716,7 +717,7 @@ Form
 					Row
 					{
 						spacing: 4 * preferencesModel.uiScale
-						Layout.preferredWidth: 160 * preferencesModel.uiScale
+						Layout.preferredWidth: 150 * preferencesModel.uiScale
 
 						TextField
 						{
@@ -788,8 +789,8 @@ Form
 			RowLayout
 			{
 				Label { text: qsTr("Distribution"); Layout.preferredWidth: 140 * preferencesModel.uiScale; Layout.leftMargin: 5 * preferencesModel.uiScale}
-				Label { text: qsTr("Parameters");	Layout.preferredWidth: 160 * preferencesModel.uiScale }
-				Label { text: qsTr("Truncation");	Layout.preferredWidth: 160 * preferencesModel.uiScale }
+				Label { text: qsTr("Parameters");	Layout.preferredWidth: 155 * preferencesModel.uiScale }
+				Label { text: qsTr("Truncation");	Layout.preferredWidth: 150 * preferencesModel.uiScale }
 				Label { text: qsTr("Prior Odds") }
 			}
 			ComponentsList
@@ -825,7 +826,7 @@ Form
 					Row
 					{
 						spacing: 4 * preferencesModel.uiScale
-						Layout.preferredWidth: 160 * preferencesModel.uiScale
+						Layout.preferredWidth: 155 * preferencesModel.uiScale
 						FormulaField
 						{
 							label:				"μ "
@@ -955,14 +956,15 @@ Form
 					Row
 					{
 						spacing: 4 * preferencesModel.uiScale
-						Layout.preferredWidth: 160 * preferencesModel.uiScale
+						Layout.preferredWidth: 150 * preferencesModel.uiScale
 						FormulaField
 						{
 							id:					truncationMuNullLower
 							label: 				qsTr("lower")
 							name: 				"truncationLower"
 							visible:			typeMuNullItem.currentValue !== "spike" && typeMuNullItem.currentValue !== "uniform"
-							value:				"-Inf"
+							value:				if(typeMuNullItem.currentValue === "gamma_k0" || typeMuNullItem.currentValue === "gamma_ab" || typeMuNullItem.currentValue === "invgamma"){ 0 } else "-Inf"
+							min:				if(typeMuNullItem.currentValue === "gamma_k0" || typeMuNullItem.currentValue === "gamma_ab" || typeMuNullItem.currentValue === "invgamma"){ 0 } else "-Inf"
 							max: 				truncationMuNullUpper.value
 							inclusive: 			JASP.MinOnly
 							fieldWidth:			40 * preferencesModel.uiScale
@@ -1012,8 +1014,8 @@ Form
 			{
 
 				Label { text: qsTr("Distribution"); Layout.preferredWidth: 140 * preferencesModel.uiScale; Layout.leftMargin: 5 * preferencesModel.uiScale}
-				Label { text: qsTr("Parameters");	Layout.preferredWidth:   160 * preferencesModel.uiScale }
-				Label { text: qsTr("Truncation");	Layout.preferredWidth:   160 * preferencesModel.uiScale }
+				Label { text: qsTr("Parameters");	Layout.preferredWidth: 155 * preferencesModel.uiScale }
+				Label { text: qsTr("Truncation");	Layout.preferredWidth: 150 * preferencesModel.uiScale }
 				Label { text: qsTr("Prior Odds") }
 			}
 			ComponentsList
@@ -1049,7 +1051,7 @@ Form
 					Row
 					{
 						spacing: 4 * preferencesModel.uiScale
-						Layout.preferredWidth: 160 * preferencesModel.uiScale
+						Layout.preferredWidth: 155 * preferencesModel.uiScale
 
 						FormulaField
 						{
@@ -1182,7 +1184,7 @@ Form
 					Row
 					{
 						spacing: 4 * preferencesModel.uiScale
-						Layout.preferredWidth: 160 * preferencesModel.uiScale
+						Layout.preferredWidth: 150 * preferencesModel.uiScale
 
 						FormulaField
 						{
@@ -1242,8 +1244,8 @@ Form
 			{
 
 				Label { text: qsTr("Weight function");	Layout.preferredWidth: 140 * preferencesModel.uiScale; Layout.leftMargin: 5 * preferencesModel.uiScale}
-				Label { text: qsTr("Cut-points"); 		Layout.preferredWidth: 160 * preferencesModel.uiScale }
-				Label { text: qsTr("Parameters");		Layout.preferredWidth: 160 * preferencesModel.uiScale }
+				Label { text: qsTr("Cut-points"); 		Layout.preferredWidth: 155 * preferencesModel.uiScale }
+				Label { text: qsTr("Parameters");		Layout.preferredWidth: 150 * preferencesModel.uiScale }
 				Label { text: qsTr("Prior Odds") }
 			}
 			ComponentsList
@@ -1274,7 +1276,7 @@ Form
 					Row
 					{
 						spacing: 4 * preferencesModel.uiScale
-						Layout.preferredWidth: 160 * preferencesModel.uiScale
+						Layout.preferredWidth: 155 * preferencesModel.uiScale
 						TextField
 						{
 							label:				qsTr("p-values")
@@ -1291,7 +1293,7 @@ Form
 					Row
 					{
 						spacing: 4 * preferencesModel.uiScale
-						Layout.preferredWidth: 160 * preferencesModel.uiScale
+						Layout.preferredWidth: 150 * preferencesModel.uiScale
 
 						TextField
 						{
