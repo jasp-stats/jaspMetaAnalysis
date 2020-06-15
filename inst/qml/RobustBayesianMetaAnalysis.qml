@@ -726,7 +726,7 @@ Form
 							visible:			typeOmegatem.currentValue === "Two-sided"		||
 												typeOmegatem.currentValue === "One-sided"		||
 												typeOmegatem.currentValue === "One-sided (mon.)"
-							value:				"(.05, .10)"
+							value:				if(typeOmegatem.currentValue === "Two-sided"){"(.05, .10)"} else {"(.05, .95)"}
 							fieldWidth: 		100 * preferencesModel.uiScale
 							useExternalBorder:	false
 							showBorder: 		true
