@@ -10,4 +10,13 @@ result <- test_dir("testthat")
 result <- as.data.frame(result)
 
 if (sum(result$failed) > 0 || sum(result$error) > 0)
+<<<<<<< HEAD
   quit(save = "no", status = 1)
+=======
+  quit(save = "no", status = 1)
+
+
+MA_test <- read.delim("D:/Desktop/MA_test.txt")
+options <- readRDS(file = "D:/Projects/jasp/jasp-R-debug/options.RDS")
+results <- jasptools::run("RobustBayesianMetaAnalysis", "debug.csv", options, makeTests = F)
+>>>>>>> adding unit tests
