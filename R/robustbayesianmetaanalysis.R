@@ -1865,7 +1865,7 @@ RobustBayesianMetaAnalysis <-
     
     # plot
     if (pars == "omega" &&
-        sum(grepl(pars, rownames(temp_s[["averaged"]]))) > 1) {
+        sum(grepl(pars, rownames(temp_s[["averaged"]]))) > 2) {
       temp_plots <- createJaspContainer(title = title)
       temp_plots$position <- position
       temp_plots$dependOn(dependencies)
