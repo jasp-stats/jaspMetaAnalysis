@@ -29,8 +29,8 @@ Description
 	
 	Analysis
 	{
-		title: 		qsTr("Robust Bayesian Meta-Analysis (beta)")
-		function:		"RobustBayesianMetaAnalysis"
+		title: 			qsTr("Robust Bayesian Meta-Analysis (beta)")
+		func:			"RobustBayesianMetaAnalysis"
 		requiresData:	false
 	}
 }
