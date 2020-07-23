@@ -8,3 +8,4 @@ Website: jasp-stats.org
 Maintainer: JASP Team <info@jasp-stats.org>
 Description: Meta-Analysis module.
 License: GPL (>= 2)
+Imports: RoBMA, weightr
