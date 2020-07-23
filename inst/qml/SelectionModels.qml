@@ -88,6 +88,12 @@ Form
 			text:		qsTr("Automatically join p-values intervals")
 			checked:	true
 		}
+
+		CheckBox
+		{
+			name:		"negative_direction"
+			text:		qsTr("Expected direction is negative")
+		}
 	}
 
 	Section
