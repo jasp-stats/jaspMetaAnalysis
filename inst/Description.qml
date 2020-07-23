@@ -18,19 +18,26 @@ Description
 		title:	qsTr("Classical Meta-Analysis")
 		func:	"ClassicalMetaAnalysis"
 	}
+	
+	Analysis
+	{
+		title:	qsTr("Selection Models")
+		func:	"SelectionModels"
+		requiresData:	false
+	}
 
 	Separator{}
 
 	Analysis
 	{
-		title: 	qsTr("Bayesian Meta-Analysis")
+		title:	qsTr("Bayesian Meta-Analysis")
 		func:	"BayesianMetaAnalysis"
 	}
 	
 	Analysis
 	{
-		title: 		qsTr("Robust Bayesian Meta-Analysis (beta)")
-		function:		"RobustBayesianMetaAnalysis"
+		title:		qsTr("Robust Bayesian Meta-Analysis")
+		func:		"RobustBayesianMetaAnalysis"
 		requiresData:	false
 	}
 }

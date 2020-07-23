@@ -21,6 +21,10 @@
 			"function":	"ClassicalMetaAnalysis"
 		},
 		{
+			"title":	"Selection Models",
+			"function":	"SelectionModels"
+		},
+		{
 			"title":	"-"
 		},
 		{
@@ -28,7 +32,7 @@
 			"function":	"BayesianMetaAnalysis"
 		},
 		{
-			"title": 		"Robust Bayesian Meta-Analysis (beta)",
+			"title": 		"Robust Bayesian Meta-Analysis",
 			"function":		"RobustBayesianMetaAnalysis",
 			"requiresData":	false
 		}
