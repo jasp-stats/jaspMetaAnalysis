@@ -2,10 +2,9 @@ Package: MetaAnalysis
 Type: Package
 Title: Meta-Analysis Module for JASP
 Version: 0.13.0
-Date: 2020-07-23
+Date: 2020-07-24
 Author: JASP Team
 Website: jasp-stats.org
 Maintainer: JASP Team <info@jasp-stats.org>
 Description: Meta-Analysis module.
 License: GPL (>= 2)
-Imports: RoBMA, weightr

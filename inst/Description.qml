@@ -34,13 +34,16 @@ Description
 		requiresData:	false
 	}
 
+/*
 	Package
 	{
 		name: 	"RoBMA"
 		github: "FBartos"
 	}
+
 	Package
 	{
 		name: 	"weightr"
 	}
+*/
 }
