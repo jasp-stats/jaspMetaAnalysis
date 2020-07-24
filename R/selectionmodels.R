@@ -29,7 +29,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   .SM_fit_tests(jaspResults, dataset, options)
   .SM_fit_estimates(jaspResults, dataset, options)
   
-  # the p-values frequency tables
+  # the p-value frequency tables
   if(options[["p_table"]]).SM_p_frequency(jaspResults, dataset, options)
   
   # figures
@@ -41,7 +41,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
 }
 
 .SM_dependencies <- c(
-  "auto_reduce", "cutoffs_p", "selection_twosided", "negative_direction",
+  "auto_reduce", "cutoffs_p", "selection_twosided", "effect_direction",
   "input_ES", "input_SE", "input_p"
 )
 .SM_ready              <- function(options){
@@ -131,7 +131,9 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
 .SM_pval_get           <- function(dataset, options){
   # weightfunc uses one-sided p-values as input!
   if(options[["input_p"]] == ""){
-    pval <- pnorm(dataset[,.v(options[["input_ES"]])] /dataset[,.v(options[["input_SE"]])], lower.tail = options[["negative_direction"]]) 
+    pval <- pnorm(
+      dataset[,.v(options[["input_ES"]])] /dataset[,.v(options[["input_SE"]])],
+      lower.tail = options[["effect_direction"]] == "negative") 
   }else{
     pval <- dataset[,.v(options[["input_p"]])]
   }
@@ -141,7 +143,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
 
   ### this is probably the most complex part of the analysis
   # the fit function protests when there is any p-value interval with lower than 4 p-values
-  # the autoreduce should combine all p-values intervals that have too few p-values
+  # the autoreduce should combine all p-value intervals that have too few p-values
 
   # create p-value table
   cutoffs_table <- table(cut(pval, breaks = c(0, steps)))
@@ -253,14 +255,14 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
         est  = sqrt(fit[["unadj_est"]][1,1]),
         stat = fit[["z_unadj"]][1,1],
         pval = fit[["p_unadj"]][1,1],
-        lCI  = sqrt(fit[["ci.lb_unadj"]][1,1]),
+        lCI  = sqrt(ifelse(fit[["ci.lb_unadj"]][1,1] < 0, 0, fit[["ci.lb_unadj"]][1,1])),
         uCI  = sqrt(fit[["ci.ub_unadj"]][1,1])
       ))
       row_RE_adjusted_tau    <- c(row_RE_adjusted_tau, list(
         est  = sqrt(fit[["adj_est"]][1,1]),
         stat = fit[["z_adj"]][1,1],
         pval = fit[["p_adj"]][1,1],
-        lCI  = sqrt(fit[["ci.lb_adj"]][1,1]),
+        lCI  = sqrt(ifelse(fit[["ci.lb_adj"]][1,1] < 0, 0, fit[["ci.lb_adj"]][1,1])),
         uCI  = sqrt(fit[["ci.ub_adj"]][1,1])
       ))
       
@@ -378,7 +380,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   
   # fit the models
   fit_FE <- tryCatch(weightr::weightfunct(
-    effect = dataset[,.v(options[["input_ES"]])] * ifelse(options[["negative_direction"]], -1, 1),
+    effect = dataset[,.v(options[["input_ES"]])] * ifelse(options[["effect_direction"]] == "negative", -1, 1),
     v      = dataset[,.v(options[["input_SE"]])]^2,
     pval   = pval,
     steps  = steps,
@@ -386,7 +388,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   ),error = function(e)e)
   
   fit_RE <- tryCatch(weightr::weightfunct(
-    effect = dataset[,.v(options[["input_ES"]])] * ifelse(options[["negative_direction"]], -1, 1),
+    effect = dataset[,.v(options[["input_ES"]])] * ifelse(options[["effect_direction"]] == "negative", -1, 1),
     v      = dataset[,.v(options[["input_SE"]])]^2,
     pval   = pval,
     steps  = steps,
@@ -394,7 +396,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   ),error = function(e)e)
 
   # take care of the possibly turned estimates
-  if(options[["negative_direction"]]){
+  if(options[["effect_direction"]] == "negative"){
     fit_FE <- .SM_turn_estimates(fit_FE)
     fit_RE <- .SM_turn_estimates(fit_RE)    
   }
@@ -554,7 +556,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   
   # mean estimates
   if(is.null(FE_estimates[["FE_estimates"]]) && options[["FE_estimates"]]){
-    FE_estimates_mean <- createJaspTable(title = gettext("Mean Estimates"))
+    FE_estimates_mean <- createJaspTable(title = gettext("Mean Estimates (μ)"))
     FE_estimates_mean$position  <- 1
     FE_estimates[["FE_mean"]] <- FE_estimates_mean
     FE_mean <- .SM_fill_estimates(jaspResults, FE_estimates_mean, models[["FE"]], options)    
@@ -583,7 +585,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   
   # mean estimates
   if(is.null(RE_estimates[["RE_mean"]]) && options[["RE_estimates"]]){
-    RE_estimates_mean <- createJaspTable(title = gettext("Mean Estimates"))
+    RE_estimates_mean <- createJaspTable(title = gettextf("Mean Estimates(%s)", "\u03BC"))
     RE_estimates_mean$position <- 1
     RE_estimates[["RE_mean"]] <- RE_estimates_mean
     RE_estimates_mean <- .SM_fill_estimates(jaspResults, RE_estimates_mean, models[["RE"]], options)    
@@ -615,7 +617,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     return()
   }else{
     # create container
-    p_frequency <- createJaspTable(title = gettext("P-values Frequency"))
+    p_frequency <- createJaspTable(title = gettext("p-value Frequency"))
     p_frequency$position <- 4
     p_frequency$dependOn(c(.SM_dependencies, "p_table"))
     jaspResults[["p_frequency"]] <- p_frequency
@@ -642,10 +644,10 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     if(options[["auto_reduce"]]){
       if(class(models[["FE"]]) %in% c("simpleError","error") && class(models[["RE"]]) %in% c("simpleError","error")){
         if(models[["FE"]]$message == "No steps"){
-          p_frequency$addFootnote(gettext("There were no p-values cutoffs after their automatic reduction. The displayed frequencies correspond to the non-reduced p-values cutoffs."))
+          p_frequency$addFootnote(gettext("There were no p-value cutoffs after their automatic reduction. The displayed frequencies correspond to the non-reduced p-value cutoffs."))
         }
       }else{
-        # the failure wasn't due to the reduce - reduce the p-values
+        # the failure wasn't due to the reduce - reduce the p-value cuttoffs
         steps <- .SM_autoreduce(steps, pval)
       }
     }
@@ -680,7 +682,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
       ),
       width  = 500,
       height = 400)
-    weights_plot$dependOn(c(.SM_dependencies, ifelse(type == "FE", "FE_weightfunction", "RE_weightfunction")))
+    weights_plot$dependOn(c(.SM_dependencies, "rescale_weightfunction", ifelse(type == "FE", "FE_weightfunction", "RE_weightfunction")))
     weights_plot$position <- ifelse(type == "FE", 5, 6)
     jaspResults[[paste0(type, "_weights")]] <- weights_plot
   }
@@ -719,31 +721,32 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   x_tics    <- trimws(steps, which = "both", whitespace = "0")
   x_tics[1] <- 0
   y_tics    <- JASPgraphs::getPrettyAxisBreaks(range(c(weights_mean, weights_lCI, weights_uCI)))
+  x_steps   <- if(options[["rescale_weightfunction"]]) seq(0, 1, length.out = length(steps)) else steps
   
   # make the plot happen
   plot <- ggplot2::ggplot()
   # mean
   plot <- plot + ggplot2::geom_polygon(
     ggplot2::aes(
-      x = c(steps[steps_order], rev(steps[steps_order])),
+      x = c(x_steps[steps_order], rev(x_steps[steps_order])),
       y = c(weights_lCI[coord_order], rev(weights_uCI[coord_order]))
     ),
     fill = "grey80")
   # CI
   plot <- plot +ggplot2::geom_path(
     ggplot2::aes(
-      x = steps[steps_order],
+      x = x_steps[steps_order],
       y = weights_mean[coord_order]
     ),
     size = 1.25)
 
   plot <- plot + ggplot2::scale_x_continuous(
-    gettext("p-value (one-sided)"),
-    breaks = steps,
+    gettext("P-value (One-sided)"),
+    breaks = x_steps,
     labels = x_tics,
     limits = c(0,1))
   plot <- plot + ggplot2::scale_y_continuous(
-    gettext("Publication probability"),
+    gettext("Publication Probability"),
     breaks = y_tics,
     limits = range(y_tics))
   
@@ -758,9 +761,9 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     return()
   }else{
     plot_estimates <- createJaspPlot(
-      title  = gettextf("Models' mean estimates"),
+      title  = gettextf("Mean Model Estimates (μ)"),
       width  = 500,
-      height = 400)
+      height = 200)
     plot_estimates$dependOn(c(.SM_dependencies, "plot_models"))
     plot_estimates$position <- 7
     jaspResults[["plot_estimates"]] <- plot_estimates
@@ -813,7 +816,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     shape = 15)
   plot <- plot + ggplot2::geom_line(ggplot2::aes(x = c(0,0), y = c(.5, 4.5)), linetype = "dotted")
   plot <- plot + ggplot2::scale_x_continuous(
-    gettext("Mean estimate"),
+    gettext("Mean Estimate (μ)"),
     breaks = JASPgraphs::getPrettyAxisBreaks(range(c(0, estimates[,"lCI"], estimates[,"uCI"]))),
     limits = range(c(0, estimates[,"lCI"], estimates[,"uCI"])))
   plot <- plot + ggplot2::scale_y_continuous(
@@ -847,7 +850,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     if(fit$message == "non-finite value supplied by optim"){
       message <- gettextf("%sThe optimizer failed to find a solution. Consider re-specifying the model.", model_type)
     }else if(fit$message == "No steps"){
-      message <- gettextf("%sThe automatic cutoffs selection did not find viable p-values cutoffs. Please, specify them manually.", model_type)      
+      message <- gettextf("%sThe automatic cutoffs selection did not find viable p-value cutoffs. Please, specify them manually.", model_type)      
     }else{
       message <- paste0(model_type, fit$message)
     }
@@ -863,7 +866,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
 
   if(!class(fit) %in% c("simpleError","error")){
     
-    ### check for no p-values in cutoffs
+    ### check for no p-value in cutoffs
     steps <- c(0, fit[["steps"]])
     pval  <- fit[["p"]]
     
@@ -881,7 +884,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     ### check whether the unadjusted estimates is negative - the weightr assumes that the effect sizes are in expected direction
     if(fit[["unadj_est"]][ifelse(fit[["fe"]], 1, 2),1] < 0 && is.null(fit[["estimates_turned"]])){
       messages <- c(messages, gettext(
-        "The unadjusted estimate is negative. The selection model specification expects that the expected direction is positive. Please, check that you specified the effect sizes correctly or check the 'Expected direction is negative' checkbox in the 'Model' tab."
+        "The unadjusted estimate is negative. The selection model default specification expects that the expected direction of the effect size is positive. Please, check that you specified the effect sizes correctly or change the 'Expected effect size direction' option in the 'Model' tab."
       ))
     }
     
@@ -903,7 +906,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     
     if(!all(steps_settings %in% steps) && options[["auto_reduce"]]){
       messages      <- c(messages, gettextf(
-        "Only the following one-sided p-values cutoffs were used: %s.",
+        "Only the following one-sided p-value cutoffs were used: %s.",
         paste(steps[steps != 1], collapse = ", ")
       ))
     }

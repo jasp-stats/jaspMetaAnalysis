@@ -2,5 +2,3 @@ export(ClassicalMetaAnalysis)
 export(SelectionModels)
 export(BayesianMetaAnalysis)
 export(RobustBayesianMetaAnalysis)
-  import('RoBMA');
-  import('weightr');

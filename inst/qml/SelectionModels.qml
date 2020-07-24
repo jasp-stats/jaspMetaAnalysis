@@ -51,7 +51,7 @@ Form
 		AssignedVariablesList
 		{
 			name:			"input_p"
-			title:			qsTr("P-values (one-sided)")
+			title:			qsTr("P-value (one-sided)")
 			singleVariable:	true
 			allowedColumns:	["scale"]
 		}
@@ -65,7 +65,7 @@ Form
 		{
 			name:		"cutoffs_p"
 			text:		qsTr("P-value cutoffs")
-			value:		"(.05, .10)"
+			value:		"(.05)"
 			fieldWidth:	150
 		}
 
@@ -79,45 +79,72 @@ Form
 		CheckBox
 		{
 			name:	"p_table"
-			text:	qsTr("P-values frequency")
+			text:	qsTr("P-value frequency")
 		}
 		
 		CheckBox
 		{
 			name:		"auto_reduce"
-			text:		qsTr("Automatically join p-values intervals")
+			text:		qsTr("Automatically join p-value intervals")
 			checked:	true
 		}
 
-		CheckBox
+		RadioButtonGroup
 		{
-			name:		"negative_direction"
-			text:		qsTr("Expected direction is negative")
+			columns:	2
+			name:		"effect_direction"
+			title:		qsTr("Expected effect size direction")
+
+			RadioButton
+			{
+				value:		"positive"
+				label:		qsTr("Positive")
+				checked: 	true
+			}
+
+			RadioButton
+			{
+				value:		"negative"
+				label:		qsTr("Negative")
+			}
+
 		}
+
 	}
 
 	Section
 	{
 		title: qsTr("Inference")
 
-		CheckBox
+		Group
 		{
-			name:	"FE_estimates"
-			text:	qsTr("Fixed effects estimates")
-			checked: true
+			title: qsTr("Fixed Effects")
+			
+			CheckBox
+			{
+				name:	"FE_estimates"
+				text:	qsTr("Mean estimates")
+				checked: true
+			}
 
 			CheckBox
 			{
 				name:	"FE_weights"
 				text:	qsTr("Estimated weights")
 			}
+		
 		}
 		
-		CheckBox
+		Group
 		{
-			name:	"RE_estimates"
-			text:	qsTr("Random effects estimates")
-			checked: true
+			title: qsTr("Random Effects")
+		
+			CheckBox
+			{
+				name:	"RE_estimates"
+				text:	qsTr("Mean estimates")
+				checked: true
+			}
 
 			CheckBox
 			{
@@ -130,6 +157,7 @@ Form
 				name:	"RE_weights"
 				text:	qsTr("Estimated weights")
 			}
+	
 		}
 
 	}
@@ -139,7 +167,8 @@ Form
 
 		Group
 		{
-			title: qsTr("Weight function")
+			title: qsTr("Weight Function")
+
 			CheckBox
 			{
 				name:	"FE_weightfunction"
@@ -150,6 +179,12 @@ Form
 			{
 				name:	"RE_weightfunction"
 				text:	qsTr("Random effects")
+			}
+
+			CheckBox
+			{
+				name:	"rescale_weightfunction"
+				text:	qsTr("Rescale x-axis")
 			}
 		}
 
