@@ -23,7 +23,6 @@ Description
 	{
 		title:	qsTr("Selection Models")
 		func:	"SelectionModels"
-		requiresData:	false
 	}
 
 	Separator{}
