@@ -27,6 +27,13 @@ Description
 		func:			"SelectionModels"
 		requiresData:	true
 	}
+	
+	Analysis
+	{
+		title:	qsTr("Selection Models")
+		func:	"SelectionModels"
+		requiresData:	false
+	}
 
 	Separator{}
 

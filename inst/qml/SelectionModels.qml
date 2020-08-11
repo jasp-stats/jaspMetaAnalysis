@@ -65,7 +65,7 @@ Form
 		{
 			name:		"cutoffs_p"
 			text:		qsTr("P-value cutoffs")
-			value:		"(.05)"
+			value:		"(.05, .10)"
 			fieldWidth:	150
 		}
 
@@ -79,7 +79,7 @@ Form
 		CheckBox
 		{
 			name:	"p_table"
-			text:	qsTr("P-value frequency")
+			text:	qsTr("P-values frequency")
 		}
 		
 		CheckBox
