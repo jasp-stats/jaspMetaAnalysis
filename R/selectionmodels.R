@@ -16,12 +16,12 @@
 #
 
 SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
-
+  
   if(.SM_ready(options)){
     dataset <- .SM_data_get(dataset, options)
     dataset <- .SM_data_check(jaspResults, dataset, options)
   }
-
+  
   # fit the models
   if(.SM_ready(options)).SM_fit(jaspResults, dataset, options)
   
@@ -60,7 +60,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
 }
 .SM_data_check         <- function(jaspResults, dataset, options){
   
-
+  
   dataset_old <- dataset
   dataset     <- na.omit(dataset)
   
@@ -86,13 +86,13 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
              negativeValues.target = options[["input_SE"]],
              exitAnalysisIfErrors  = TRUE)
   
-
+  
   if(options[["input_p"]] != ""){
-    if(any(dataset[,options[["input_p"]]] <= 0 | dataset[,options[["input_p"]]] >= 1)){
-      JASP:::.quitAnalysis(gettextf("Error in %s: All p-value needs to be between 0 and 1.", .unv(options[["input_p"]])))
+    if(any(dataset[,.v(options[["input_p"]])] <= 0 | dataset[,.v(options[["input_p"]])] >= 1)){
+      JASP:::.quitAnalysis(gettextf("Error in %s: All p-value needs to be between 0 and 1.", options[["input_p"]]))
     }
   }
-
+  
   return(dataset)
 }
 .SM_pcutoffs_get       <- function(options){
@@ -140,14 +140,14 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   return(pval)
 }
 .SM_autoreduce         <- function(steps, pval){
-
+  
   ### this is probably the most complex part of the analysis
   # the fit function protests when there is any p-value interval with lower than 4 p-values
   # the autoreduce should combine all p-value intervals that have too few p-values
-
+  
   # create p-value table
   cutoffs_table <- table(cut(pval, breaks = c(0, steps)))
-
+  
   # start removing from the end, but never 1 at the end
   while(cutoffs_table[length(cutoffs_table)] < 4){
     
@@ -163,7 +163,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     
     # remove the first step that has less than 4 p-values
     steps <- steps[-which.max(cutoffs_table < 4)]
-
+    
     # create p-value table
     cutoffs_table <- table(cut(pval, breaks = c(0, steps)))
   }
@@ -215,7 +215,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
         lCI  = fit[["ci.lb_adj"]][mean_pos,1],
         uCI  = fit[["ci.ub_adj"]][mean_pos,1]
       ))
-
+      
       note_messages    <- .SM_notes(jaspResults, fit, options)      
       warning_messages <- .SM_warning_messages(fit)
       for(i in seq_along(note_messages)){
@@ -232,11 +232,11 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   
   table$addRows(row_unadjusted)
   table$addRows(row_adjusted)
-
+  
   return(table)
 }
 .SM_fill_heterogeneity <- function(jaspResults, table, fit, options){
-
+  
   CI_overtitle <- gettext("95% Confidence Interval")
   
   table$addColumnInfo(name = "type", title = "",                        type = "string")
@@ -248,7 +248,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   
   row_RE_unadjusted_tau <- list(type = "Unadjusted")
   row_RE_adjusted_tau   <- list(type = "Adjusted")
-
+  
   if(!is.null(fit)){
     if(!class(fit) %in% c("simpleError","error")){
       row_RE_unadjusted_tau  <- c(row_RE_unadjusted_tau, list(
@@ -361,14 +361,14 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   
   # get the p-value steps
   steps <- .SM_pcutoffs_get(options)
-   
+  
   # get the p-values
   pval  <- .SM_pval_get(dataset, options)
   
   # remove intervals that do not contain enought (3) p-values
   if(options[["auto_reduce"]]){
     steps <- tryCatch(.SM_autoreduce(steps, pval), error = function(e)e)
-
+    
     if(class(steps) %in% c("simpleError","error")){
       models[["object"]] <- list(
         FE = steps,
@@ -394,7 +394,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     steps  = steps,
     fe     = FALSE
   ),error = function(e)e)
-
+  
   # take care of the possibly turned estimates
   if(options[["effect_direction"]] == "negative"){
     fit_FE <- .SM_turn_estimates(fit_FE)
@@ -405,7 +405,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     FE = fit_FE,
     RE = fit_RE
   )
-
+  
   return()
 }
 .SM_fit_tests          <- function(jaspResults, dataset, options){
@@ -437,7 +437,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   if(!is.null(models)){
     
     row_heterogeneity      <- list()
-
+    
     if(!FE_error){
       row_heterogeneity    <- c(row_heterogeneity, list(
         stat = models[["FE"]][["QE"]],
@@ -453,7 +453,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     }
     
     heterogeneity_test$addRows(row_heterogeneity)
-
+    
     note_messages <- unique(c(
       .SM_notes(jaspResults, models[["FE"]], options), .SM_notes(jaspResults, models[["RE"]], options)
     ))
@@ -471,6 +471,10 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     }
     for(i in seq_along(error_messages)){
       heterogeneity_test$addFootnote(symbol = gettext("Error:"),   error_messages[i])
+    }
+  }else{
+    if(!.SM_ready(options) && options[["input_p"]] != ""){
+      heterogeneity_test$addFootnote(symbol = gettext("Note:"), .SM_notes(NULL, NULL, options))
     }
   }
   
@@ -498,7 +502,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
           2*abs(models[["FE"]][["output_unadj"]][["value"]] - models[["FE"]][["output_adj"]][["value"]]), 
           length(models[["FE"]][["output_adj"]][["par"]]) - length(models[["FE"]][["output_unadj"]][["par"]]),
           lower.tail = FALSE
-          )
+        )
       ))
     }
     if(!RE_error){
@@ -529,12 +533,16 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
       bias_test$addFootnote(symbol = gettext("Note:"),    note_messages[i])
     }
     for(i in seq_along(warning_messages)){
-      bias_test$addFootnote(symbol = gettext("Warning:"), warning_messages[i])      
+      bias_test$addFootnote(symbol = gettext("Warning:"), warning_messages[i])
     }
     for(i in seq_along(error_messages)){
       bias_test$addFootnote(symbol = gettext("Error:"),   error_messages[i])
     }
-
+    
+  }else{
+    if(!.SM_ready(options) && options[["input_p"]] != ""){
+      bias_test$addFootnote(symbol = gettext("Note:"), .SM_notes(NULL, NULL, options))
+    }
   }
   
   return()
@@ -542,7 +550,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
 .SM_fit_estimates      <- function(jaspResults, dataset, options){
   
   models   <- jaspResults[["models"]]$object
-
+  
   ### assuming homogeneity
   if(is.null(jaspResults[["FE_estimates"]])){
     # create container
@@ -561,7 +569,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     FE_estimates[["FE_mean"]] <- FE_estimates_mean
     FE_mean <- .SM_fill_estimates(jaspResults, FE_estimates_mean, models[["FE"]], options)    
   }
-
+  
   # weights estimates
   if(is.null(FE_estimates[["FE_weights"]]) && options[["FE_weights"]] && options[["FE_estimates"]]){
     FE_weights <- createJaspTable(title = gettext("Estimated Weights"))
@@ -590,7 +598,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     RE_estimates[["RE_mean"]] <- RE_estimates_mean
     RE_estimates_mean <- .SM_fill_estimates(jaspResults, RE_estimates_mean, models[["RE"]], options)    
   }
-
+  
   # tau estimates
   if(is.null(RE_estimates[["RE_estimates_tau"]]) && options[["RE_heterogeneity"]] && options[["RE_estimates"]]){
     RE_estimates_tau <- createJaspTable(title = gettextf("Heterogeneity Estimates (%s)", "\u03C4"))
@@ -599,7 +607,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     RE_estimates[["RE_estimates_tau"]] <- RE_estimates_tau
     RE_estimates_tau <- .SM_fill_heterogeneity(jaspResults, RE_estimates_tau, models[["RE"]], options)    
   }
-
+  
   # weights estimates
   if(is.null(RE_estimates[["RE_weights"]]) && options[["RE_weights"]] && options[["RE_estimates"]]){
     RE_weights <- createJaspTable(title = gettext("Estimated Weights"))
@@ -633,7 +641,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   }
   
   models <- jaspResults[["models"]]$object
-
+  
   # get the p-value steps and p-values (so we don't have to search for them in the models)
   steps <- .SM_pcutoffs_get(options)
   pval  <- .SM_pval_get(dataset, options)
@@ -690,7 +698,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   if(!.SM_ready(options)){
     return()
   }
-
+  
   # handle errors
   fit <- jaspResults[["models"]]$object[[type]]
   if(class(fit) %in% c("simpleError","error")){
@@ -739,7 +747,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
       y = weights_mean[coord_order]
     ),
     size = 1.25)
-
+  
   plot <- plot + ggplot2::scale_x_continuous(
     gettext("P-value (One-sided)"),
     breaks = x_steps,
@@ -756,7 +764,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   return()
 }
 .SM_estimates_plot     <- function(jaspResults, dataset, options){
-
+  
   if(!is.null(jaspResults[["plot_estimates"]])){
     return()
   }else{
@@ -794,7 +802,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     uCI   = c(FE[["ci.ub_unadj"]][1,1],   FE[["ci.ub_adj"]][1,1],                RE[["ci.ub_unadj"]][2,1],   RE[["ci.ub_adj"]][2,1])
   )
   estimates <- estimates[4:1,]
-
+  
   # handle NaN in the estimates
   if(any(c(is.nan(estimates[,"mean"]), is.nan(estimates[,"lCI"]), is.nan(estimates[,"uCI"])))){
     plot_estimates$setError(gettext("The figure could not be created since one of the estimates is NaN."))
@@ -802,7 +810,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   
   # make the plot happen
   plot <- ggplot2::ggplot()
- 
+  
   plot <- plot + ggplot2::geom_errorbarh(
     ggplot2::aes(
       xmin = estimates[,"lCI"],
@@ -845,7 +853,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     }else{
       model_type <- ""
     }
-  
+    
     # add more error messages as we find them I guess
     if(fit$message == "non-finite value supplied by optim"){
       message <- gettextf("%sThe optimizer failed to find a solution. Consider re-specifying the model.", model_type)
@@ -857,13 +865,13 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   }else{
     message <- NULL
   }
-
+  
   return(message)
 }
 .SM_warning_messages   <- function(fit){
   
   messages   <- NULL
-
+  
   if(!class(fit) %in% c("simpleError","error")){
     
     ### check for no p-value in cutoffs
@@ -889,19 +897,23 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     }
     
   }
-
+  
   return(messages)
 }
 .SM_notes              <- function(jaspResults, fit, options){
   
   messages <- NULL
   
-  if(!class(fit) %in% c("simpleError","error")){
+  if(!.SM_ready(options) && options[["input_p"]] != ""){
+    
+    messages <- gettext("The analysis requires both 'Effect Site' and 'Effect Size Standard Error' to be specified.")
+    
+  }else if(!class(fit) %in% c("simpleError","error")){
     
     # add note about the ommited steps
     steps <- fit[["steps"]]
     steps <- steps
-
+    
     steps_settings <- .SM_pcutoffs_get(options)
     
     if(!all(steps_settings %in% steps) && options[["auto_reduce"]]){
@@ -924,15 +936,16 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     
   }
   
+  
   return(messages)
 }
 .SM_turn_estimates     <- function(fit){
-
+  
   # in the case that the expected direction was negative, the estimated effect sizes will be in the opposite direction
   # this function turns them around
   
   if(!class(fit) %in% c("simpleError","error")){
-  
+    
     if(fit[["fe"]]){
       mean_pos <- 1    
     }else{
@@ -950,10 +963,10 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     fit[["z_adj"]][mean_pos,1]       <- fit_old[["z_adj"]][mean_pos,1]       * -1
     fit[["ci.lb_unadj"]][mean_pos,1] <- fit_old[["ci.ub_unadj"]][mean_pos,1] * -1
     fit[["ci.ub_unadj"]][mean_pos,1] <- fit_old[["ci.lb_unadj"]][mean_pos,1] * -1
-
+    
     fit[["output_unadj"]][["par"]][mean_pos] <- fit_old[["output_unadj"]][["par"]][mean_pos] * -1    
     fit[["output_adj"]][["par"]][mean_pos]   <- fit_old[["output_adj"]][["par"]][mean_pos]   * -1
-  
+    
     fit[["estimates_turned"]] <- TRUE
   }
   
