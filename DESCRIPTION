@@ -1,4 +1,4 @@
-Package: MetaAnalysis
+Package: jaspMetaAnalysis
 Type: Package
 Title: Meta-Analysis Module for JASP
 Version: 0.13.0
