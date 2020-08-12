@@ -698,7 +698,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   plotMat[[1,2]] <- .metaAnalysisFunnelPlotFill(trimfill.fit)
   plotMat[[2,1]] <- .metaAnalysisRadialPlotFill(trimfill.fit)
   plotMat[[2,2]] <- .metaAnalysisQQPlotFill(trimfill.fit)
-  p <- JASPgraphs::ggMatrixPlot(plotList = plotMat, scaleXYlabels = NULL)
+  p <- jaspGraphs::ggMatrixPlot(plotList = plotMat, scaleXYlabels = NULL)
   return(p)
 }
 
@@ -725,7 +725,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   else
     plotMat[[2,2]] <- .metaAnalysisStandResidPlotFill(rma.fit)
 
-  p <- JASPgraphs::ggMatrixPlot(plotList = plotMat, scaleXYlabels = NULL)
+  p <- jaspGraphs::ggMatrixPlot(plotList = plotMat, scaleXYlabels = NULL)
   return(p)
 }
 
@@ -822,7 +822,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   # clip = "off" allows us to draw outside of the margins using the annotate("segment", ...) above.
   p <- p + ggplot2::coord_flip(ylim = ylims, clip = "on") +
     ggplot2::xlab(NULL) + ggplot2::ylab(gettext("Observed Outcome")) +
-    ggplot2::scale_y_continuous(breaks = JASPgraphs::getPrettyAxisBreaks(ylims),
+    ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(ylims),
                                 expand = ggplot2::expand_scale(mult = c(0.3,0.3), add = 0))
 
   p <- p + ggplot2::scale_x_continuous(breaks   = dat$StudyNo,
@@ -831,8 +831,8 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
                                        sec.axis = ggplot2::dup_axis(trans = ~., labels = dat$ci.int),
                                        expand   = ggplot2::expand_scale(mult = c(0.1,0), add = 0))
 
-  fontsize <- 0.85 * JASPgraphs::getGraphOption("fontsize")
-  p <- p + JASPgraphs::geom_rangeframe(sides = "b") + JASPgraphs::themeJaspRaw() +
+  fontsize <- 0.85 * jaspGraphs::getGraphOption("fontsize")
+  p <- p + jaspGraphs::geom_rangeframe(sides = "b") + jaspGraphs::themeJaspRaw() +
     ggplot2::theme(axis.ticks.y      = ggplot2::element_blank(),
                    axis.text.y.left  = ggplot2::element_text(hjust = 0, size = fontsize),
                    axis.text.y.right = ggplot2::element_text(hjust = 1, size = fontsize),
@@ -888,13 +888,13 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     ggplot2::geom_vline(xintercept = x$tau2,    linetype = "dotted", colour = "black") +
     ggplot2::xlab(xlab) + ggplot2::ylab(gettext("Restricted Log-Likelihood")) +
     ggplot2::ggtitle(title) +
-    ggplot2::scale_x_continuous(breaks = JASPgraphs::getPrettyAxisBreaks(xlim),
+    ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(xlim),
                                 limits = xlim) +
-    ggplot2::scale_y_continuous(breaks = JASPgraphs::getPrettyAxisBreaks(ylim),
+    ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(ylim),
                                 limits = ylim)
   p <- p + ggplot2::theme(axis.line.x = ggplot2::element_line(),
                           axis.line.y = ggplot2::element_line())
-  p <- JASPgraphs::themeJasp(p, legend.position = "none")
+  p <- jaspGraphs::themeJasp(p, legend.position = "none")
   return(p)
 }
 
@@ -991,7 +991,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   funnel.data   <- data.frame(x = xaxis.vals, y = yaxis.vals, slab = slab, fill = fillcol)
   triangle.data <- data.frame(x = c(ci.left, ci.right[ci.res:1]),
                               y = c(yi.vals, yi.vals[ci.res:1]))
-  hlines <- JASPgraphs::getPrettyAxisBreaks(ylim)
+  hlines <- jaspGraphs::getPrettyAxisBreaks(ylim)
   #hlines <- seq(from = ylim[1], to = ylim[2], length.out = 5)
   p <- ggplot2::ggplot(data = funnel.data, ggplot2::aes(x = x, y = y))
   p <- p + ggplot2::geom_hline(yintercept = hlines, linetype  = "solid", colour = "white")
@@ -1005,7 +1005,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
                           linetype  = "dotted", colour = "black")
   p <- p + ggplot2::xlab(xlab) + ggplot2::ylab(gettext("Standard Error"))
   #p <- p + ggplot2::ylim(new_ylim[1], new_ylim[2])
-  p <- JASPgraphs::themeJasp(p)
+  p <- jaspGraphs::themeJasp(p)
   p <- p + ggplot2::theme(axis.line.x.bottom= ggplot2::element_line(),
                           axis.line.x.top   = ggplot2::element_blank(),
                           axis.line.y       = ggplot2::element_line(),
@@ -1018,7 +1018,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
                                     labels = round(hlines, 3),
                                     expand = ggplot2::expand_scale(mult = c(0,0.05), add = 0)) +
     ggplot2::scale_x_continuous(limits = xlims,
-                                breaks = JASPgraphs::getPrettyAxisBreaks(xlims))
+                                breaks = jaspGraphs::getPrettyAxisBreaks(xlims))
   return(p)
 }
 
@@ -1168,23 +1168,23 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
                                  linetype  = "solid", colour = "black")
 
   valsForBreaks <- c(-zcrit, zcrit, min(-zcrit +xaxismax * beta), max(zcrit + xaxismax * beta))
-  yBreaks <- JASPgraphs::getPrettyAxisBreaks(valsForBreaks)
+  yBreaks <- jaspGraphs::getPrettyAxisBreaks(valsForBreaks)
   # do it again to get something symmetric around 0
   temp <- max(abs(yBreaks))
-  yBreaks <- JASPgraphs::getPrettyAxisBreaks(c(-temp, temp))
+  yBreaks <- jaspGraphs::getPrettyAxisBreaks(c(-temp, temp))
   # add the data from the right axis to stop ggplot2 from deleting these values
-  yLimits <- range(JASPgraphs::getPrettyAxisBreaks(c(
+  yLimits <- range(jaspGraphs::getPrettyAxisBreaks(c(
     yBreaks, valsForBreaks, arc.text$data$y, arc.line$data$y, arc.line$data$yend)
   ))
 
-  yBreaks <- JASPgraphs::getPrettyAxisBreaks(c(-temp, temp))
-  xBreaks <- JASPgraphs::getPrettyAxisBreaks(c(0, radial.data$x))
+  yBreaks <- jaspGraphs::getPrettyAxisBreaks(c(-temp, temp))
+  xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, radial.data$x))
   xLimits <- c(0, x.margin.right)
   p <- p + ggplot2::xlab(xlabExpression) + ggplot2::ylab(ylabExpression) +
     ggplot2::scale_x_continuous(breaks = xBreaks, limits = xLimits) +
     ggplot2::scale_y_continuous(breaks = yBreaks, limits = yLimits)
 
-  p <- p + JASPgraphs::geom_rangeframe() + JASPgraphs::themeJaspRaw()
+  p <- p + jaspGraphs::geom_rangeframe() + jaspGraphs::themeJaspRaw()
 
   # we want to show the axis titles in the middle of the breaks, not the middle of the limits (the default)
   # so we adjust the vjust and hjust accordingly
@@ -1232,8 +1232,8 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   temp.ub <- qqnorm(ub, plot.it = FALSE)
   temp.ub <- supsmu(temp.ub$x, temp.ub$y)
 
-  xBreaks <- JASPgraphs::getPrettyAxisBreaks(pos.x)
-  yBreaks <- JASPgraphs::getPrettyAxisBreaks(c(pos.y, temp.lb$y, temp.ub$y))
+  xBreaks <- jaspGraphs::getPrettyAxisBreaks(pos.x)
+  yBreaks <- jaspGraphs::getPrettyAxisBreaks(c(pos.y, temp.lb$y, temp.ub$y))
   xLimits <- range(xBreaks)
   yLimits <- range(yBreaks)
 
@@ -1246,7 +1246,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     ggplot2::geom_abline(slope = 1, intercept = 0) +
     ggplot2::scale_x_continuous(name = gettext("Theoretical Quantiles"), limits = xLimits, breaks = xBreaks) +
     ggplot2::scale_y_continuous(name = gettext("Sample Quantiles"),      limits = yLimits, breaks = yBreaks)
-  p <- JASPgraphs::themeJasp(p)
+  p <- jaspGraphs::themeJasp(p)
   return(p)
 }
 
@@ -1264,12 +1264,12 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     ggplot2::geom_point(shape = 19, colour = "black") + ggplot2::geom_line() +
     ggplot2::geom_hline(yintercept = hlines, linetype  = linetypes, colour = "black") +
     ggplot2::xlab(gettext("Study")) + ggplot2::ylab(" ") + ggplot2::ggtitle(title)
-  p <- p + ggplot2::scale_y_continuous(breaks = JASPgraphs::getPrettyAxisBreaks(ylims),
+  p <- p + ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(ylims),
                                 limits = ylims) +
     ggplot2::theme(axis.line.x         = ggplot2::element_line(),
                    axis.line.y         = ggplot2::element_line(),
                    axis.ticks.x.bottom = ggplot2::element_line())
-  p <- JASPgraphs::themeJasp(p, legend.position = "none")
+  p <- jaspGraphs::themeJasp(p, legend.position = "none")
 
   return(p)
 }
@@ -1287,14 +1287,14 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     ggplot2::xlab(gettext("Fitted Value")) + ggplot2::ylab(gettext("Standardized Residual")) +
     ggplot2::ggtitle(title) +
     ggplot2::scale_x_continuous(limits = xlims,
-                                breaks = JASPgraphs::getPrettyAxisBreaks(xlims)) +
+                                breaks = jaspGraphs::getPrettyAxisBreaks(xlims)) +
     ggplot2::scale_y_continuous(limits = ylims,
-                                breaks = JASPgraphs::getPrettyAxisBreaks(ylims))
+                                breaks = jaspGraphs::getPrettyAxisBreaks(ylims))
   p <- p + ggplot2::theme(axis.line.x         = ggplot2::element_line(),
                           axis.line.y         = ggplot2::element_line(),
                           axis.ticks.x.bottom = ggplot2::element_line()
   )
-  p <- JASPgraphs::themeJasp(p, legend.position = "none")
+  p <- jaspGraphs::themeJasp(p, legend.position = "none")
   return(p)
 }
 

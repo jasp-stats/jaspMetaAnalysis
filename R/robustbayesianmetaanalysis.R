@@ -296,7 +296,7 @@ RobustBayesianMetaAnalysis <-
   x <- x[x != ""]
   
   if (anyNA(as.numeric(x)))
-    JASP:::.quitAnalysis(gettext("The priors for publication bias were set incorrectly."))
+    jaspBase:::.quitAnalysis(gettext("The priors for publication bias were set incorrectly."))
   return(as.numeric(x))
 }
 .RoBMA_options2priors_eval  <- function(x) {
@@ -704,7 +704,7 @@ RobustBayesianMetaAnalysis <-
     for (elem in options[[prior_elements[i]]]) {
       tmp_prior <- tryCatch(.RoBMA_options2priors(elem), error = function(e)e)
       if(class(tmp_prior) %in% c("simpleError", "error")){
-        JASP:::.quitAnalysis(tmp_prior$message)
+        jaspBase:::.quitAnalysis(tmp_prior$message)
       }
       tmp <- c(tmp, list(tmp_prior))
     }
@@ -799,7 +799,7 @@ RobustBayesianMetaAnalysis <-
         )
       }
       
-      p <- JASPgraphs::themeJasp(p)
+      p <- jaspGraphs::themeJasp(p)
       
       temp_plots[[paste0(parameter, "_", i)]][["plotObject"]] <- p
       
@@ -954,7 +954,7 @@ RobustBayesianMetaAnalysis <-
       fit <- tryCatch({
         fit <- readRDS(file = options[["fitted_path"]])
         if (!RoBMA::is.RoBMA(fit))
-          JASP:::.quitAnalysis(gettext("The loaded object is not a RoBMA model."))
+          jaspBase:::.quitAnalysis(gettext("The loaded object is not a RoBMA model."))
         fit
       },error = function(e)e)
       
@@ -1128,7 +1128,7 @@ RobustBayesianMetaAnalysis <-
 
     # error handling
     if(any(class(fit) %in% c("simpleError", "error"))){
-        JASP:::.quitAnalysis(fit[["message"]])
+        jaspBase:::.quitAnalysis(fit[["message"]])
     }
     
     
@@ -1764,12 +1764,12 @@ RobustBayesianMetaAnalysis <-
       plots[[paste(parameters, collapse = "")]] <- temp_plot
       
       if (all(parameters %in% "theta")) {
-        p <- JASPgraphs::themeJasp(p, sides =  "b")
+        p <- jaspGraphs::themeJasp(p, sides =  "b")
       } else{
         if (!is.null(ggplot2::ggplot_build(p)[["layout"]][["panel_params"]][[1]][["y.sec.labels"]])) {
-          p <- JASPgraphs::themeJasp(p, sides =  "blr")
+          p <- jaspGraphs::themeJasp(p, sides =  "blr")
         } else{
-          p <- JASPgraphs::themeJasp(p, sides =  "bl")
+          p <- jaspGraphs::themeJasp(p, sides =  "bl")
         }
       }
       
@@ -1788,12 +1788,12 @@ RobustBayesianMetaAnalysis <-
           temp_plot
         
         if (all(parameters %in% "theta")) {
-          p[[i]] <- JASPgraphs::themeJasp(p[[i]], sides =  "b")
+          p[[i]] <- jaspGraphs::themeJasp(p[[i]], sides =  "b")
         } else{
           if (!is.null(ggplot2::ggplot_build(p[[i]])[["layout"]][["panel_params"]][[1]][["y.sec.labels"]])) {
-            p[[i]] <- JASPgraphs::themeJasp(p[[i]], sides =  "blr")
+            p[[i]] <- jaspGraphs::themeJasp(p[[i]], sides =  "blr")
           } else{
-            p[[i]] <- JASPgraphs::themeJasp(p[[i]], sides =  "bl")
+            p[[i]] <- jaspGraphs::themeJasp(p[[i]], sides =  "bl")
           }
         }
         
@@ -1911,7 +1911,7 @@ RobustBayesianMetaAnalysis <-
                                     height      = height)
         temp_plots[[paste0("plot_", i)]] <- temp_plot
         
-        p[[i]] <- JASPgraphs::themeJasp(p[[i]], sides = "b")
+        p[[i]] <- jaspGraphs::themeJasp(p[[i]], sides = "b")
         
         temp_plots[[paste0("plot_", i)]][["plotObject"]] <- p[[i]]
       }
@@ -1946,7 +1946,7 @@ RobustBayesianMetaAnalysis <-
         return()
       }
       
-      p <- JASPgraphs::themeJasp(p, sides = "b")
+      p <- jaspGraphs::themeJasp(p, sides = "b")
       
       plots_individual[[paste(parameters, collapse = "")]][["plotObject"]] <-
         p
@@ -2177,13 +2177,13 @@ RobustBayesianMetaAnalysis <-
             temp_plot  <- createJaspPlot(width = 400, aspectRatio = .7)
             temp_plots[[paste0("trace_", pi)]] <- temp_plot
             temp_plot[["plotObject"]] <-
-              JASPgraphs::themeJasp(new_plots[[pi]])
+              jaspGraphs::themeJasp(new_plots[[pi]])
           }
           
         } else{
           temp_plot  <- createJaspPlot(width = 400, aspectRatio = .7)
           temp_plots[[paste0("trace_", 1)]] <- temp_plot
-          temp_plot[["plotObject"]] <- JASPgraphs::themeJasp(new_plots)
+          temp_plot[["plotObject"]] <- jaspGraphs::themeJasp(new_plots)
         }
         
       }
@@ -2223,13 +2223,13 @@ RobustBayesianMetaAnalysis <-
             temp_plot  <- createJaspPlot(width = 400, aspectRatio = .7)
             temp_plots[[paste0("autocor_", pi)]] <- temp_plot
             temp_plot[["plotObject"]] <-
-              JASPgraphs::themeJasp(new_plots[[pi]])
+              jaspGraphs::themeJasp(new_plots[[pi]])
           }
           
         } else{
           temp_plot  <- createJaspPlot(width = 400, aspectRatio = .7)
           temp_plots[[paste0("autocor_", 1)]] <- temp_plot
-          temp_plot[["plotObject"]] <- JASPgraphs::themeJasp(new_plots)
+          temp_plot[["plotObject"]] <- jaspGraphs::themeJasp(new_plots)
         }
         
       }
@@ -2269,13 +2269,13 @@ RobustBayesianMetaAnalysis <-
             temp_plot  <- createJaspPlot(width = 400, aspectRatio = .7)
             temp_plots[[paste0("samples_", pi)]] <- temp_plot
             temp_plot[["plotObject"]] <-
-              JASPgraphs::themeJasp(new_plots[[pi]])
+              jaspGraphs::themeJasp(new_plots[[pi]])
           }
           
         } else{
           temp_plot  <- createJaspPlot(width = 400, aspectRatio = .7)
           temp_plots[[paste0("samples_", 1)]] <- temp_plot
-          temp_plot[["plotObject"]] <- JASPgraphs::themeJasp(new_plots)
+          temp_plot[["plotObject"]] <- jaspGraphs::themeJasp(new_plots)
         }
         
       }
