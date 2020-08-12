@@ -9,9 +9,9 @@ jaspResultsPath <- file.path("~", "jasp-desktop", "JASP-R-Interface", "jaspResul
 remotes::install_deps(jaspResultsPath, upgrade=FALSE)
 install.packages(jaspResultsPath, type="source", repos=NULL)
 
-JASPgraphsPath <- file.path("~", "jasp-desktop", "JASP-Engine", "jaspGraphs")
-remotes::install_deps(JASPgraphsPath, upgrade=FALSE)
-install.packages(JASPgraphsPath, type="source", repos=NULL)
+jaspGraphsPath <- file.path("~", "jasp-desktop", "JASP-Engine", "jaspGraphs")
+remotes::install_deps(jaspGraphsPath, upgrade=FALSE)
+install.packages(jaspGraphsPath, type="source", repos=NULL)
 
 JASPPath <- file.path("~", "jasp-desktop", "JASP-Engine", "jaspBase")
 # remotes::install_deps(JASPPath, upgrade=FALSE) # JASP doesn't have any dependencies (yet)
