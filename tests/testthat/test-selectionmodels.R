@@ -2,7 +2,7 @@ context("Meta Analysis - Selection Models")
 
 ### output for all default settings
 {
-  options <- jasptools::analysisOptions("SelectionModels")
+  options <- jaspTools::analysisOptions("SelectionModels")
   options$FE_weightfunction <- TRUE
   options$FE_weights <- TRUE
   options$RE_heterogeneity <- TRUE
@@ -14,7 +14,7 @@ context("Meta Analysis - Selection Models")
   options$p_table <- TRUE
   options$plot_models <- TRUE
   set.seed(1)
-  results <- jasptools::run("SelectionModels", "debug.csv", options)
+  results <- jaspTools::runAnalysis("SelectionModels", "debug.csv", options)
   
   
   test_that("Mean Estimates (mu) table results match", {
@@ -103,7 +103,7 @@ context("Meta Analysis - Selection Models")
 
 ### weight function scalling works
 {
-  options <- jasptools::analysisOptions("SelectionModels")
+  options <- jaspTools::analysisOptions("SelectionModels")
   options$FE_estimates <- FALSE
   options$FE_weightfunction <- TRUE
   options$RE_estimates <- FALSE
@@ -113,7 +113,7 @@ context("Meta Analysis - Selection Models")
   options$input_SE <- "contGamma"
   options$rescale_weightfunction <- TRUE
   set.seed(1)
-  results <- jasptools::run("SelectionModels", "debug.csv", options)
+  results <- jaspTools::runAnalysis("SelectionModels", "debug.csv", options)
   
   
   test_that("[x-scaled] Weight Function (Fixed Effects) plot matches", {
@@ -131,7 +131,7 @@ context("Meta Analysis - Selection Models")
 
 ### one sided selection & expected negative direction works
 {
-  options <- jasptools::analysisOptions("SelectionModels")
+  options <- jaspTools::analysisOptions("SelectionModels")
   options$FE_weights <- TRUE
   options$RE_heterogeneity <- TRUE
   options$RE_weights <- TRUE
@@ -141,7 +141,7 @@ context("Meta Analysis - Selection Models")
   options$input_SE <- "contGamma"
   options$selection_twosided <- FALSE
   set.seed(1)
-  results <- jasptools::run("SelectionModels", "debug.csv", options)
+  results <- jaspTools::runAnalysis("SelectionModels", "debug.csv", options)
   
   
   test_that("Mean Estimates (mu) table results match", {
@@ -203,7 +203,7 @@ context("Meta Analysis - Selection Models")
 
 ### different cutoffs without automatic joining works
 {
-  options <- jasptools::analysisOptions("SelectionModels")
+  options <- jaspTools::analysisOptions("SelectionModels")
   options$FE_weightfunction <- TRUE
   options$FE_weights <- TRUE
   options$RE_heterogeneity <- TRUE
@@ -218,7 +218,7 @@ context("Meta Analysis - Selection Models")
   options$rescale_weightfunction <- TRUE
   options$selection_twosided <- FALSE
   set.seed(1)
-  results <- jasptools::run("SelectionModels", "debug.csv", options)
+  results <- jaspTools::runAnalysis("SelectionModels", "debug.csv", options)
   
   
   test_that("Mean Estimates (mu) table results match", {
@@ -305,7 +305,7 @@ context("Meta Analysis - Selection Models")
 
 ### different cutoffs with automatic joining works
 {
-  options <- jasptools::analysisOptions("SelectionModels")
+  options <- jaspTools::analysisOptions("SelectionModels")
   options$FE_weightfunction <- TRUE
   options$FE_weights <- TRUE
   options$RE_heterogeneity <- TRUE
@@ -319,7 +319,7 @@ context("Meta Analysis - Selection Models")
   options$rescale_weightfunction <- TRUE
   options$selection_twosided <- FALSE
   set.seed(1)
-  results <- jasptools::run("SelectionModels", "debug.csv", options)
+  results <- jaspTools::runAnalysis("SelectionModels", "debug.csv", options)
   
   
   test_that("Mean Estimates (mu) table results match", {
@@ -391,7 +391,7 @@ context("Meta Analysis - Selection Models")
 
 ### supplying p-values work
 {
-  options <- jasptools::analysisOptions("SelectionModels")
+  options <- jaspTools::analysisOptions("SelectionModels")
   options$auto_reduce <- FALSE
   options$cutoffs_p <- "(.01)"
   options$effect_direction <- "negative"
@@ -528,7 +528,7 @@ context("Meta Analysis - Selection Models")
       class = "data.frame",
       row.names = c(NA,-13L)
     )
-  results <- jasptools::run("SelectionModels", dataset, options)
+  results <- jaspTools::runAnalysis("SelectionModels", dataset, options)
   
   
   test_that("Mean Estimates (mu) table results match", {
