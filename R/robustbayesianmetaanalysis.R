@@ -146,7 +146,6 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   "advanced_bridge_iter",
   "advanced_mu_transform"
 )
-
 # priors related functions
 .robmaOptions2Priors      <- function(options_prior) {
   options_prior <- .robmaOptions2PriorsEval(options_prior)
