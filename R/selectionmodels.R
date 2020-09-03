@@ -89,7 +89,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
 
   if(options[["input_p"]] != ""){
     if(any(dataset[,.v(options[["input_p"]])] <= 0 | dataset[,.v(options[["input_p"]])] >= 1)){
-      JASP:::.quitAnalysis(gettextf("Error in %s: All p-value needs to be between 0 and 1.", options[["input_p"]]))
+      jaspGraphs.quitAnalysis(gettextf("Error in %s: All p-value needs to be between 0 and 1.", options[["input_p"]]))
     }
   }
 
@@ -110,9 +110,9 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   x <- x[x != ""]
   
   if(anyNA(as.numeric(x)))
-    JASP:::.quitAnalysis(gettext("The p-value cutoffs were set incorectly."))
+    jaspGraphs.quitAnalysis(gettext("The p-value cutoffs were set incorectly."))
   if(length(x) == 0){
-    JASP:::.quitAnalysis(gettext("At least one p-value cuttoff needs to be set."))
+    jaspGraphs.quitAnalysis(gettext("At least one p-value cuttoff needs to be set."))
   }
   
   x <- as.numeric(x)
@@ -121,7 +121,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   }
   
   if(any(x <= 0 | x >= 1)){
-    JASP:::.quitAnalysis(gettext("All p-value cutoffs needs to be between 0 and 1."))
+    jaspGraphs.quitAnalysis(gettext("All p-value cutoffs needs to be between 0 and 1."))
   }
   
   x <- c(sort(x), 1)
@@ -728,7 +728,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   # axis ticks
   x_tics    <- trimws(steps, which = "both", whitespace = "0")
   x_tics[1] <- 0
-  y_tics    <- JASPgraphs::getPrettyAxisBreaks(range(c(weights_mean, weights_lCI, weights_uCI)))
+  y_tics    <- jaspGraphs::getPrettyAxisBreaks(range(c(weights_mean, weights_lCI, weights_uCI)))
   x_steps   <- if(options[["rescale_weightfunction"]]) seq(0, 1, length.out = length(steps)) else steps
   
   # make the plot happen
@@ -758,7 +758,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     breaks = y_tics,
     limits = range(y_tics))
   
-  plot <- JASPgraphs::themeJasp(plot)
+  plot <- jaspGraphs::themeJasp(plot)
   weights_plot$plotObject <- plot
   
   return()
@@ -825,7 +825,7 @@ jaspResults[["plot_estimates"]] <- plot_estimates
   plot <- plot + ggplot2::geom_line(ggplot2::aes(x = c(0,0), y = c(.5, 4.5)), linetype = "dotted")
   plot <- plot + ggplot2::scale_x_continuous(
     gettextf("Mean Estimates (%s)", "\u03BC"),
-    breaks = JASPgraphs::getPrettyAxisBreaks(range(c(0, estimates[,"lCI"], estimates[,"uCI"]))),
+    breaks = jaspGraphs::getPrettyAxisBreaks(range(c(0, estimates[,"lCI"], estimates[,"uCI"]))),
     limits = range(c(0, estimates[,"lCI"], estimates[,"uCI"])))
   plot <- plot + ggplot2::scale_y_continuous(
     "",
@@ -836,7 +836,7 @@ jaspResults[["plot_estimates"]] <- plot_estimates
     axis.ticks.y = ggplot2::element_blank()
   )
   
-  plot <- JASPgraphs::themeJasp(plot, sides = "b")
+  plot <- jaspGraphs::themeJasp(plot, sides = "b")
   plot_estimates$plotObject <- plot
   
   return()
