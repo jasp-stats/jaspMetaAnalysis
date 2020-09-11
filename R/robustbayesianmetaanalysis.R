@@ -17,7 +17,7 @@
 
 
 RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
-
+  
   # clean fitted model if it was changed
   if(!.robmaReady(options))
     .robmaCleanModel(jaspResults)
@@ -312,7 +312,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   x <- x[x != ""]
   
   if (anyNA(as.numeric(x)))
-    JASP:::.quitAnalysis(gettext("The priors for publication bias were set incorrectly."))
+    .quitAnalysis(gettext("The priors for publication bias were set incorrectly."))
   return(as.numeric(x))
 }
 .robmaOptions2PriorsEval  <- function(x) {
@@ -656,7 +656,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     for (elem in options[[prior_elements[i]]]) {
       tmp_prior <- tryCatch(.robmaOptions2Priors(elem), error = function(e)e)
       if(class(tmp_prior) %in% c("simpleError", "error")){
-        JASP:::.quitAnalysis(tmp_prior$message)
+        .quitAnalysis(tmp_prior$message)
       }
       tmp <- c(tmp, list(tmp_prior))
     }
@@ -671,102 +671,127 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 # main functions
 .robmaPriorsPlots              <- function(jaspResults, options) {
   # create / access the container
-  if (!is.null(jaspResults[["prior_plots"]])) {
-    return()
-  } else{
+  if (!is.null(jaspResults[["prior_plots"]]))
+    prior_plots <- jaspResults[["prior_plots"]]
+  else{
     prior_plots <- createJaspContainer(title = gettext("Prior Plots"))
-    prior_plots$dependOn(
-      c(
-        "priors_mu",
-        "priors_tau",
-        "priors_omega",
-        "null_mu",
-        "null_tau",
-        "null_omega",
-        "priors_plot",
-        "measures",
-        "advanced_mu_transform"
-      )
-    )
+    prior_plots$dependOn(c("priors_plot", "measures", "advanced_mu_transform"))
     prior_plots$position <- 2
     jaspResults[["prior_plots"]] <- prior_plots
   }
   
-  
   # extract the priors
-  if (is.null(jaspResults[["model"]])) {
+  if (is.null(jaspResults[["model"]]))
     priors  <- jaspResults[["priors"]][["object"]]
-  } else{
+  else{
     fit     <- jaspResults[["model"]][["object"]]
     priors  <- fit[["priors"]]
   }
-  priors[["mu"]]    <- c(priors[["mu_null"]],    priors[["mu"]])
-  priors[["tau"]]   <- c(priors[["tau_null"]],   priors[["tau"]])
-  priors[["omega"]] <- c(priors[["omega_null"]], priors[["omega"]])
   
-  
-  # create plots for each of the parameters
+  # create conitainer for each of the parameters
   for (parameter in c("mu", "tau", "omega")) {
-    if (length(priors[[parameter]]) == 0)
-      next
     
-    temp_plots <- createJaspContainer(
-      title = switch(
+    if (!is.null(prior_plots[[parameter]]))
+      parameter_container <- prior_plots[[parameter]]
+    else{
+      parameter_container <- createJaspContainer(title = switch(
         parameter,
         "mu"    = gettext("Effect"),
         "tau"   = gettext("Heterogeneity"),
         "omega" = gettext("Weight Function")
       ))
-    prior_plots[[parameter]] <- temp_plots
-    
-    for (i in 1:length(priors[[parameter]])) {
-      if (parameter == "omega") {
-        temp_plot <- createJaspPlot(width = 500,  height = 400)
-      } else{
-        temp_plot <- createJaspPlot(width = 400,  height = 300)
-      }
-      temp_plots[[paste0(parameter, "_", i)]] <- temp_plot
-      
-      
-      if (is.null(jaspResults[["model"]])) {
-        p <- plot(
-          priors[[parameter]][[i]],
-          plot_type    = "ggplot",
-          par_name     = parameter,
-          effect_size  = if(parameter == "mu") switch(
-            options[["measures"]],
-            "cohensd"     = "d",
-            "correlation" = "r",
-            "OR"          = "OR",
-            "general"     = "y"
-          ),
-          mu_transform = if (options[["measures"]] %in% c("correlation", "OR") && parameter == "mu") options[["advanced_mu_transform"]],
-          samples      = 1e6,
-        )
-      } else{
-        p <- plot(
-          priors[[parameter]][[i]],
-          plot_type    = "ggplot",
-          par_name     = parameter,
-          effect_size  = if(parameter == "mu") fit[["add_info"]][["effect_size"]],
-          samples      = 1e6,
-          mu_transform = if (fit[["add_info"]][["effect_size"]] %in% c("r", "OR") && parameter == "mu") fit[["add_info"]][["mu_transform"]]
-        )
-      }
-      
-      p <- JASPgraphs::themeJasp(p)
-      
-      temp_plots[[paste0(parameter, "_", i)]][["plotObject"]] <- p
-      
+      parameter_container$position <- switch(
+        parameter,
+        "mu"    = 1,
+        "tau"   = 2,
+        "omega" = 3
+      )
+      prior_plots[[parameter]] <- parameter_container
     }
     
+    # create container for null and alternative models
+    for (type in c("null", "alternative")) {
+      
+      if (!is.null(parameter_container[[type]]))
+        next
+      else{
+        type_container <- createJaspContainer(title = switch(
+          type,
+          "null"         = gettext("Null"),
+          "alternative"  = gettext("Alternative")
+        ))
+        type_container$position <- switch(
+          type,
+          "null"         = 1,
+          "alternative"  = 2
+        )
+        type_container$dependOn(paste0("priors_", parameter, if (type == "null") "_null"))
+        parameter_container[[type]] <- type_container
+      }
+      
+      temp_priors <- switch(
+        paste0(parameter, "_", type),
+        "mu_null"           = priors[["mu_null"]],
+        "mu_alternative"    = priors[["mu"]],
+        "tau_null"          = priors[["tau_null"]],
+        "tau_alternative"   = priors[["tau"]],
+        "omega_null"        = priors[["omega_null"]],
+        "omega_alternative" = priors[["omega"]]
+      )
+      
+      if (length(temp_priors) == 0)
+        next
+      
+      # generate the actual plots
+      for (i in 1:length(temp_priors)) {
+        
+        if (parameter == "omega")
+          temp_plot <- createJaspPlot(width = 500,  height = 400)
+        else
+          temp_plot <- createJaspPlot(width = 400,  height = 300)
+        
+        type_container[[paste0(parameter, "_", type, "_", i)]] <- temp_plot
+        
+        
+        if (is.null(jaspResults[["model"]])) {
+          p <- plot(
+            temp_priors[[i]],
+            plot_type    = "ggplot",
+            par_name     = parameter,
+            effect_size  = if(parameter == "mu") switch(
+              options[["measures"]],
+              "cohensd"     = "d",
+              "correlation" = "r",
+              "OR"          = "OR",
+              "general"     = "y"
+            ),
+            mu_transform = if (options[["measures"]] %in% c("correlation", "OR") && parameter == "mu") options[["advanced_mu_transform"]],
+            samples      = 1e6,
+          )
+        } else{
+          p <- plot(
+            temp_priors[[i]],
+            plot_type    = "ggplot",
+            par_name     = parameter,
+            effect_size  = if(parameter == "mu") fit[["add_info"]][["effect_size"]],
+            samples      = 1e6,
+            mu_transform = if (fit[["add_info"]][["effect_size"]] %in% c("r", "OR") && parameter == "mu") fit[["add_info"]][["mu_transform"]]
+          )
+        }
+        
+        p <- jaspGraphs::themeJasp(p)
+        
+        type_container[[paste0(parameter, "_", type, "_", i)]][["plotObject"]] <- p
+        
+      }
+    }
   }
   
   return()
 }
 .robmaModelPreviewTable        <- function(jaspResults, options) {
   # create / access the container
-  if (!is.null(jaspResults[["prior_plots"]])) {
+  if (!is.null(jaspResults[["model_preview"]])) {
     return()
   } else{
     model_preview <- createJaspContainer(title = gettext("Model Preview"))
@@ -881,7 +906,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     fit <- tryCatch({
       fit <- readRDS(file = options[["fitted_path"]])
       if (!RoBMA::is.RoBMA(fit))
-        JASP:::.quitAnalysis(gettext("The loaded object is not a RoBMA model."))
+        .quitAnalysis(gettext("The loaded object is not a RoBMA model."))
       fit
     },error = function(e)e)
     
@@ -942,8 +967,8 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
       ),error = function(e)e)
       
     } else{
-      debug()
-      fit <- tryCatch(RoBMA::update.robma(
+
+      fit <- tryCatch(update(
         object  = fit,
         study_names  = if (options[["input_labels"]] != "") dataset[, .v(options[["input_labels"]])],
         chains  = options[["advanced_chains"]],
@@ -975,7 +1000,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   
   # error handling
   if(any(class(fit) %in% c("simpleError", "error"))){
-    JASP:::.quitAnalysis(fit[["message"]])
+    .quitAnalysis(fit[["message"]])
   }
   
   
@@ -1478,23 +1503,23 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     plots[[paste(parameters, collapse = "")]] <- temp_plot
     
     if (all(parameters %in% "theta")) {
-      p <- JASPgraphs::themeJasp(p, sides =  "b")
+      p <- jaspGraphs::themeJasp(p, sides =  "b")
     } else{
       if (!is.null(ggplot2::ggplot_build(p)[["layout"]][["panel_params"]][[1]][["y.sec.labels"]])) {
-        p <- JASPgraphs::themeJasp(p, sides =  "blr")
+        p <- jaspGraphs::themeJasp(p, sides =  "blr")
       } else{
-        p <- JASPgraphs::themeJasp(p, sides =  "bl")
+        p <- jaspGraphs::themeJasp(p, sides =  "bl")
       }
     }
     
-    # deal with JASPgraphs screwing secondary axis label distance
-    if(! (parameters == "theta" || (parameters == "omega" && options[["plots_omega_function"]]) ) ){
-      if(p$plot_env$any_density && p$plot_env$any_spikes){
-        p <- p + ggplot2::theme(
-          axis.title.y.right = ggplot2::element_text(vjust = 3),
-          plot.margin = ggplot2::margin(t = 3, r = 12, b = 0, l = 1))
-      }
-    }
+    # deal with jaspGraphs screwing secondary axis label distance
+    if (!all(parameters %in% c("mu", "tau")))
+      if (! (parameters == "theta" || (parameters == "omega" && options[["plots_omega_function"]]) ) )
+        if(p$plot_env$any_density && p$plot_env$any_spikes)
+          p <- p + ggplot2::theme(
+            axis.title.y.right = ggplot2::element_text(vjust = 3),
+            plot.margin = ggplot2::margin(t = 3, r = 12, b = 0, l = 1))
+
     
     plots[[paste(parameters, collapse = "")]][["plotObject"]] <- p
     
@@ -1509,16 +1534,16 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
       temp_plots[[paste(parameters, "_", i, collapse = "")]] <- temp_plot
       
       if (all(parameters %in% "theta")) {
-        p[[i]] <- JASPgraphs::themeJasp(p[[i]], sides =  "b")
+        p[[i]] <- jaspGraphs::themeJasp(p[[i]], sides =  "b")
       } else{
         if (!is.null(ggplot2::ggplot_build(p[[i]])[["layout"]][["panel_params"]][[1]][["y.sec.labels"]])) {
-          p[[i]] <- JASPgraphs::themeJasp(p[[i]], sides =  "blr")
+          p[[i]] <- jaspGraphs::themeJasp(p[[i]], sides =  "blr")
         } else{
-          p[[i]] <- JASPgraphs::themeJasp(p[[i]], sides =  "bl")
+          p[[i]] <- jaspGraphs::themeJasp(p[[i]], sides =  "bl")
         }
       }
       
-      # deal with JASPgraphs screwing secondary axis label distance
+      # deal with jaspGraphs screwing secondary axis label distance
       if(p[[i]]$plot_env$any_density && p[[i]]$plot_env$any_spikes){
         p[[i]] <- p[[i]] + ggplot2::theme(
           axis.title.y.right = ggplot2::element_text(vjust = 3.25),
@@ -1620,7 +1645,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
       temp_plot <- createJaspPlot(title = "", width = width, height = height)
       temp_plots[[paste0("plot_", i)]] <- temp_plot
       
-      p[[i]] <- JASPgraphs::themeJasp(p[[i]], sides = "b")
+      p[[i]] <- jaspGraphs::themeJasp(p[[i]], sides = "b")
       
       temp_plots[[paste0("plot_", i)]][["plotObject"]] <- p[[i]]
     }
@@ -1648,7 +1673,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
       return()
     }
     
-    p <- JASPgraphs::themeJasp(p, sides = "b")
+    p <- jaspGraphs::themeJasp(p, sides = "b")
     
     plots_individual[[paste(parameters, collapse = "")]][["plotObject"]] <- p
   }
@@ -1847,13 +1872,13 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
             temp_plot  <- createJaspPlot(width = 400, aspectRatio = .7)
             temp_plots[[paste0("trace_", pi)]] <- temp_plot
             temp_plot[["plotObject"]] <-
-              JASPgraphs::themeJasp(new_plots[[pi]])
+              jaspGraphs::themeJasp(new_plots[[pi]])
           }
           
         } else{
           temp_plot  <- createJaspPlot(width = 400, aspectRatio = .7)
           temp_plots[[paste0("trace_", 1)]] <- temp_plot
-          temp_plot[["plotObject"]] <- JASPgraphs::themeJasp(new_plots)
+          temp_plot[["plotObject"]] <- jaspGraphs::themeJasp(new_plots)
         }
         
       }
@@ -1892,13 +1917,13 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
             temp_plot  <- createJaspPlot(width = 400, aspectRatio = .7)
             temp_plots[[paste0("autocor_", pi)]] <- temp_plot
             temp_plot[["plotObject"]] <-
-              JASPgraphs::themeJasp(new_plots[[pi]])
+              jaspGraphs::themeJasp(new_plots[[pi]])
           }
           
         } else{
           temp_plot  <- createJaspPlot(width = 400, aspectRatio = .7)
           temp_plots[[paste0("autocor_", 1)]] <- temp_plot
-          temp_plot[["plotObject"]] <- JASPgraphs::themeJasp(new_plots)
+          temp_plot[["plotObject"]] <- jaspGraphs::themeJasp(new_plots)
         }
         
       }
@@ -1937,13 +1962,13 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
             temp_plot  <- createJaspPlot(width = 400, aspectRatio = .7)
             temp_plots[[paste0("samples_", pi)]] <- temp_plot
             temp_plot[["plotObject"]] <-
-              JASPgraphs::themeJasp(new_plots[[pi]])
+              jaspGraphs::themeJasp(new_plots[[pi]])
           }
           
         } else{
           temp_plot  <- createJaspPlot(width = 400, aspectRatio = .7)
           temp_plots[[paste0("samples_", 1)]] <- temp_plot
-          temp_plot[["plotObject"]] <- JASPgraphs::themeJasp(new_plots)
+          temp_plot[["plotObject"]] <- jaspGraphs::themeJasp(new_plots)
         }
         
       }
