@@ -453,6 +453,13 @@ Form
 			{
 				name: 	"plotCumForest"
 				label: 	qsTr("Cumulative forest plot")
+				
+				CheckBox
+				{
+					name: "addPrior"
+					label: qsTr("Add prior")
+				}
+
 			}
 
 			CheckBox
