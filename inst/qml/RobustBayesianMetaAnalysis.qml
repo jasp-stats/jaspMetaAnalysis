@@ -22,52 +22,85 @@ import JASP.Widgets 1.0
 import JASP 1.0
 Form
 {
+	property var listVisibility :
+	{
+		"input_t" :	{ values: ["cohensd"]					, id: input_t	, check2Sample: false },
+		"input_SE": { values: ["cohensd", "general"]		, id: input_SE	, check2Sample: false },
+		"input_CI":	{ values: ["cohensd", "general", "OR"]	, id: input_CI	, check2Sample: false },
+		"input_N" :	{ values: ["cohensd", "correlation"]	, id: input_N	, check2Sample: false },
+		"input_N1": { values: ["cohensd"]					, id: input_N1	, check2Sample: true  },
+		"input_N2": { values: ["cohensd"]					, id: input_N2	, check2Sample: true  },
+	}
+
+	function checkListVisibility(name)
+	{
+		var check = (listVisibility[name]["check2Sample"] ? cohensd_twoSample.checked : true)
+
+		return check && listVisibility[name]["values"].includes(measures.value);
+	}
+
 	RadioButtonGroup
 	{
+		id:						measures
 		Layout.columnSpan:		2
 		name:					"measures"
 		radioButtonsOnSameRow:	true
 		columns:				2
-		onValueChanged:	if(measures_correlation.checked) {
-			advanced_mu_transform_cohens_d.click()
-		} else if (measures_OR.checked){
-			advanced_mu_transform_log_OR.click()
+
+		onValueChanged:
+		{
+			if(measures_correlation.checked)
+				advanced_mu_transform_cohens_d.click()
+			else if (measures_OR.checked)
+				advanced_mu_transform_log_OR.click()
+
+			for (var inputName in listVisibility)
+			{
+				if (!checkListVisibility(inputName) && listVisibility[inputName]["id"].count > 0)
+					listVisibility[inputName]["id"].itemDoubleClicked(0)
+			}
+
 		}
 
 		RadioButton
 		{
-			label: qsTr("Cohen's d / t-statistics & (N / SE)")
-			value: "cohensd"
-			id: 	measures_cohensd
-			checked:true
+			label:		qsTr("Cohen's d / t-statistics & N / SE")
+			value:		"cohensd"
+			id:			measures_cohensd
+			enabled:	mainWindow.dataAvailable
+			checked:	mainWindow.dataAvailable
 		}
 
 		RadioButton
 		{
-			label: qsTr("Correlations & N")
-			value: "correlation"
-			id: 	measures_correlation
+			label:		qsTr("Correlations & N")
+			value:		"correlation"
+			id:			measures_correlation
+			enabled:	mainWindow.dataAvailable
 		}
 
 		RadioButton
 		{
-			label: qsTr("Odds ratios & CI")
-			value: "OR"
-			id: 	measures_OR
+			label:		qsTr("Odds ratios & CI")
+			value:		"OR"
+			id:			measures_OR
+			enabled:	mainWindow.dataAvailable
 		}
 
 		RadioButton
 		{
-			label: qsTr("Effect sizes & SE")
-			value: "general"
-			id: 	measures_general
+			label:		qsTr("Effect sizes & SE")
+			value:		"general"
+			id:			measures_general
+			enabled:	mainWindow.dataAvailable
 		}
 
 		RadioButton
 		{
-			label: qsTr("Fitted model")
-			value: "fitted"
-			id: 	measures_fitted
+			label:		qsTr("Fitted model")
+			value:		"fitted"
+			id:			measures_fitted
+			checked:	!mainWindow.dataAvailable
 		}
 	}
 
@@ -92,7 +125,15 @@ Form
 			id: 			input_ES
 			name: 			"input_ES"
 			enabled: 		input_t.count == 0
-			title: 			qsTr("Effect Size")
+			title: 			if (measures_cohensd.checked){
+				qsTr("Cohen's d")
+			} else if (measures_correlation.checked) {
+				qsTr("Correlation")
+			} else if (measures_OR.checked) {
+				qsTr("Odds Ratio")
+			} else {
+				qsTr("Effect Size")
+			}
 			singleVariable: true
 			allowedColumns: ["scale"]
 		}
@@ -105,8 +146,7 @@ Form
 			title: 			qsTr("t-statistic")
 			singleVariable: true
 			allowedColumns: ["scale"]
-			visible:		 measures_cohensd.checked
-			onVisibleChanged: if (!visible && count > 0) itemDoubleClicked(0);
+			visible:		checkListVisibility(name)
 		}
 
 		AssignedVariablesList
@@ -117,8 +157,7 @@ Form
 			title: 			qsTr("Effect Size Standard Error")
 			singleVariable: true
 			allowedColumns: ["scale"]
-			visible:		measures_cohensd.checked || measures_general.checked
-			onVisibleChanged: if (!visible && count > 0) itemDoubleClicked(0);
+			visible:		checkListVisibility(name)
 		}
 
 		AssignedPairsVariablesList
@@ -129,8 +168,7 @@ Form
 			title: 			qsTr("95% CI Lower and Upper Bound")
 			singleVariable: true
 			allowedColumns: ["scale"]
-			visible:		measures_cohensd.checked || measures_general.checked || measures_OR.checked
-			onVisibleChanged: if (!visible && count > 0) itemDoubleClicked(0);
+			visible:		checkListVisibility(name)
 		}
 
 		AssignedVariablesList
@@ -141,8 +179,7 @@ Form
 			title: 			qsTr("N")
 			singleVariable: true
 			allowedColumns: ["scale", "ordinal"]
-			visible:		 measures_cohensd.checked || measures_correlation.checked
-			onVisibleChanged: if (!visible && count > 0) itemDoubleClicked(0);
+			visible:		checkListVisibility(name)
 		}
 
 		AssignedVariablesList
@@ -153,8 +190,7 @@ Form
 			title: 			qsTr("N (group 1)")
 			singleVariable: true
 			allowedColumns: ["scale", "ordinal"]
-			visible:		 measures_cohensd.checked && cohensd_twoSample.checked
-			onVisibleChanged: if (!visible && count > 0) itemDoubleClicked(0);
+			visible:		 checkListVisibility(name)
 		}
 
 		AssignedVariablesList
@@ -165,8 +201,7 @@ Form
 			title: 			qsTr("N (group 2)")
 			singleVariable: true
 			allowedColumns: ["scale", "ordinal"]
-			visible:		 measures_cohensd.checked && cohensd_twoSample.checked
-			onVisibleChanged: if (!visible && count > 0) itemDoubleClicked(0);
+			visible:		 checkListVisibility(name)
 		}
 
 		AssignedVariablesList
@@ -1948,9 +1983,9 @@ Form
 
 			IntegerField
 			{
-				label:  		qsTr("Bridge sampling iterations:")
-				name:     		"advanced_bridge_iter"
-				defaultValue: 	10000
+				label:			qsTr("Bridge sampling iterations:")
+				name:			"advanced_bridge_iter"
+				defaultValue:	10000
 				max:			1000000
 				fieldWidth: 	60
 			}
@@ -1968,38 +2003,48 @@ Form
 				name:		"advanced_autofit"
 				checked:	false
 
-				Row
+				Group
 				{
-					IntegerField
+					Row
 					{
-						name:			"advanced_autofit_time"
-						label:			qsTr("Maximum fitting time")
+						IntegerField
+						{
+							name:			"advanced_autofit_time"
+							label:			qsTr("Maximum fitting time")
+							defaultValue:	1
+							min:			0
+						}
+
+						DropDown
+						{
+							name:	"advanced_autofit_time_unit"
+							values:
+							[
+								{ label: qsTr("hours"),				value: "hours"},
+								{ label: qsTr("minutes"),			value: "minutes"},
+								{ label: qsTr("seconds"),			value: "seconds"}
+
+							]
+						}
+					}
+
+					PercentField
+					{
+						name:			"advanced_autofit_error"
+						label:			qsTr("Target margin of error")
 						defaultValue:	1
-						min:			0
+						decimals:		1
+						fieldWidth:		jaspTheme.numericFieldWidth
 					}
 
-					DropDown
+					DoubleField
 					{
-						name:	"advanced_autofit_time_unit"
-						values:
-						[
-							{ label: qsTr("hours"),				value: "hours"},
-							{ label: qsTr("minutes"),			value: "minutes"},
-							{ label: qsTr("seconds"),			value: "seconds"}
-
-						]
+						name:			"advanced_autofit_rhat"
+						label:			qsTr("Target R-hat")
+						defaultValue:	1.05
+						min:			1
 					}
 				}
-
-				PercentField
-				{
-					id:				advanced_autofit_error
-					name:			"advanced_autofit_error"
-					label:			qsTr("Target margin of error")
-					defaultValue:	1
-					decimals:		1
-				}
-
 
 			}
 
