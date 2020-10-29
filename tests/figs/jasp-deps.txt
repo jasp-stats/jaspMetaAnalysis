@@ -1,1 +1,1 @@
-- jaspGraphs: 0.5
+- jaspGraphs: 0.5.1
