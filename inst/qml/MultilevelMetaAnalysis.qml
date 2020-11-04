@@ -24,7 +24,7 @@ import JASP				1.0
 // All Analysis forms must be built with the From QML item
 Form
 {
-	usesJaspResults: true
+	
 
 	VariablesForm
 	{
