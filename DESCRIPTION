@@ -8,3 +8,23 @@ Website: jasp-stats.org
 Maintainer: JASP Team <info@jasp-stats.org>
 Description: Meta-Analysis module.
 License: GPL (>= 2)
+Encoding: UTF-8
+Imports:
+  dplyr,
+  ggplot2,
+  jaspBase,
+  jaspGraphs,
+  MASS,
+  metaBMA (>= 0.6.3),
+  metafor,
+  psych,
+  purrr,
+  RoBMA (>= 1.1.1),
+  rstan,
+  stringr,
+  tibble,
+  tidyr,
+  weightr
+Remotes:
+  jasp-stats/jaspBase,
+  jasp-stats/jaspGraphs

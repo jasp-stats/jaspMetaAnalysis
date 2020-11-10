@@ -1,23 +1,23 @@
 emmeans.rma <- function(object, formula, data, conf.level = .95, contrasts = NULL, ...) {
-  if (is.null(object$call) || is.null(object$call$yi) || !inherits(object$call$yi, "formula")) 
+  if (is.null(object$call) || is.null(object$call$yi) || !inherits(object$call$yi, "formula"))
     stop("Currently this only works with rma and rma.mv objects that have specified 'yi' as a formula.")
-  
+
   mdlformula = object$call$yi
   mdlformula[[2]] = NULL # remove dependent
-  
+
   # build a new data matrix
   used_terms = all.vars(mdlformula)
   if(!(all.vars(formula) %in% used_terms)) stop("Formula is refering to factors that are not in the model.")
   factor_levels = lapply(data[, used_terms, drop=FALSE],  function(x) if (!is.numeric(x)) levels(factor(x)) ) # extract factor levels
   .grid = expand.grid(Filter(Negate(is.null), factor_levels))
-  if(nrow(.grid) == 0) stop("There are no predictors in the model that correspond to factors in '", deparse(substitute(data)), "'. Factor levels: ", paste(capture.output(str(factor_levels)), collapse = ", "), ". Data names: ", paste(names(data), collapse = ", "), "; Used Terms: ",paste(used_terms, collapse=", "), "; Data set head: ", paste(capture.output(head(data)), collapse="\n"))    
+  if(nrow(.grid) == 0) stop("There are no predictors in the model that correspond to factors in '", deparse(substitute(data)), "'. Factor levels: ", paste(capture.output(str(factor_levels)), collapse = ", "), ". Data names: ", paste(names(data), collapse = ", "), "; Used Terms: ",paste(used_terms, collapse=", "), "; Data set head: ", paste(capture.output(head(data)), collapse="\n"))
   covariate_means = colMeans(data[, names(Filter(is.null, factor_levels)), drop = FALSE], na.rm = TRUE)
   newdata = do.call(transform, c(list(.grid), as.list(covariate_means)))
-  
+
   b = coef(object)
   Vb = vcov(object)
-  
-  # compute transformation matrix: 
+
+  # compute transformation matrix:
   # - M: design matrix conforming the model for obtain cell means for all factors crossed (fixing covariates to their sample averages; should this be within cell averages?)
   # - K: matrix with dummies for picking out the means to combine
   # - K.M = (K'K)^-1 K'M is the transformation matrix for the model's regression coefficients to yield the marginal means
@@ -28,17 +28,17 @@ emmeans.rma <- function(object, formula, data, conf.level = .95, contrasts = NUL
   Kmf = model.frame(paste("~ 0 + ", factors, collapse = ":"), unique(.grid[, factors, drop = FALSE]))
   K = model.matrix(Kmf, newdata, constrasts = sapply(factors, function(...) 'contr.Treatment',simplify = F))
   K.M = MASS::ginv(K) %*% M
-  
+
   # if contrast matrix is specified, a hypothesis test on these contrasts are given
   if(!missing(contrasts) && is.matrix(contrasts)) {
     if (is.null(rownames(contrasts))) rownames(contrasts) = paste(deparse(substitute(contrasts)), "[", 1:nrow(contrasts), ", ]", sep="")
     K.M = contrasts %*% K.M
   }
-  
+
   # compute marginal means requested, plus their standard errors
   emmeans = K.M %*% b
   se = diag(K.M %*% Vb %*% t(K.M))^0.5
-  
+
   # build return structure
   if (!missing(contrasts)) {
     ret = data.frame(Contrast=rownames(K.M), Estimate = emmeans, SE = se, df = df.residual(object))
@@ -61,7 +61,7 @@ print.emmeans.rma <- function(x, ...) {
   if (length(attr(x, "collapsed")) > 0 ) {
     cat("\n\nMeans are averaged over the levels of: ")
     cat(attr(x, "collapsed"), sep = ", ")
-  }  
+  }
   if (length(attr(x,"covariate_means")) > 0) {
     cat("\nThe following means for the covariates were used:\n")
     print(attr(x,"covariate_means"), ...)
@@ -116,30 +116,30 @@ addSignifStars <- function(x, ..., column = "P(>|t|)", stars = c(' ***'=.001, ' 
   X
 }
 
-(function(conf.level = .95){
-  formula = ~  colour
-  data = carData::Arrests
-  fit = lm(checks ~ colour*sex+employed, data = data)
-  mf = if(is.data.frame(model.frame(fit))) model.frame(fit) else data[, all.vars(mdlformula)]
-  
-  mdlformula = fit$call$formula
-  mdlformula[[2]] = NULL # remove response variable
-  
-  b = coef(fit)
-  Vb = vcov(fit)
-  
-  tmp = expand.grid(Filter(Negate(is.null), lapply(mf, levels)))
-  #browser()
-  M = do.call(model.matrix, list(mdlformula, tmp)) #, contrasts = list(wool='contr.Treatment', tension='contr.Treatment')))
-  Kmf = model.frame(paste("~ 0 + ",all.vars(formula), collapse = ":"), unique(tmp[, all.vars(formula), drop = FALSE]))
-  K = model.matrix(Kmf, tmp, contrasts = as.list(setNames(rep("contr.Treatment", length(all.vars(formula))), all.vars(formula))))
-  K.M = ginv(K) %*% M
-  em = K.M %*% b
-  se = diag(K.M %*% Vb %*% t(K.M))^.5
-  ret = transform(Kmf, emmean = em, SE = se, df = df.residual(fit))
-  structure(transform(ret, lower.CL = emmean - qt(.025, df)*se, upper.CL = emmean - qt(0.5-conf.level/2, df)*se), 
-            collapsed = setdiff(all.vars(mdlformula), all.vars(formula)), conf.level = conf.level)
-})#() # () # for testing the correctness
+# (function(conf.level = .95){
+#   formula = ~  colour
+#   data = carData::Arrests
+#   fit = lm(checks ~ colour*sex+employed, data = data)
+#   mf = if(is.data.frame(model.frame(fit))) model.frame(fit) else data[, all.vars(mdlformula)]
+#
+#   mdlformula = fit$call$formula
+#   mdlformula[[2]] = NULL # remove response variable
+#
+#   b = coef(fit)
+#   Vb = vcov(fit)
+#
+#   tmp = expand.grid(Filter(Negate(is.null), lapply(mf, levels)))
+#   #browser()
+#   M = do.call(model.matrix, list(mdlformula, tmp)) #, contrasts = list(wool='contr.Treatment', tension='contr.Treatment')))
+#   Kmf = model.frame(paste("~ 0 + ",all.vars(formula), collapse = ":"), unique(tmp[, all.vars(formula), drop = FALSE]))
+#   K = model.matrix(Kmf, tmp, contrasts = as.list(setNames(rep("contr.Treatment", length(all.vars(formula))), all.vars(formula))))
+#   K.M = ginv(K) %*% M
+#   em = K.M %*% b
+#   se = diag(K.M %*% Vb %*% t(K.M))^.5
+#   ret = transform(Kmf, emmean = em, SE = se, df = df.residual(fit))
+#   structure(transform(ret, lower.CL = emmean - qt(.025, df)*se, upper.CL = emmean - qt(0.5-conf.level/2, df)*se),
+#             collapsed = setdiff(all.vars(mdlformula), all.vars(formula)), conf.level = conf.level)
+# })() # for testing the correctness
 
 
 ###
@@ -147,48 +147,48 @@ addSignifStars <- function(x, ..., column = "P(>|t|)", stars = c(' ***'=.001, ' 
 ###
 #
 # emmeans <- function(object, ...) UseMethod("emmeans")
-# 
+#
 # emmeans.default <- function(object, conditioning, contrasts = NULL) {
 #   require(tidyverse)
 #   conditioning = if (is_formula(conditioning)) all.vars(conditioning[-2]) else as.character(conditioning)
-#   
+#
 #   method = match.arg(method)
-# 
-#   mf = model.frame(object) 
+#
+#   mf = model.frame(object)
 #   used_terms = names(mf)
-#   
+#
 #   factor_levels = Filter(Negate(is.null), lapply(mf, levels)) # extract factor levels
 #   covariate_names = names(Filter(is.null, lapply(mf, levels)))
 #   .grid = expand.grid(factor_levels)
 #   covariate_means = colMeans(mf[covariate_names], na.rm = TRUE)
 #   newdata = do.call(transform, c(list(.grid), as.list(covariate_means)))
-#   
+#
 #   piv = object$qr$pivot[1:object$rank]
 #   b = coef(object)[piv]
 #   Vb = vcov(object)[piv,piv]
-#   
-#   # compute transformation matrix: 
+#
+#   # compute transformation matrix:
 #   # - M: design matrix conforming the model for obtain cell means for all factors crossed (fixing covariates to their sample averages; should this be within cell averages?)
 #   # - K: matrix with dummies for picking out the means to combine
 #   # - K.M = (K'K)^-1 K'M is the transformation matrix for the model's regression coefficients to yield the marginal means
 # #  M = do.call(model.matrix, list(mdlformula, newdata))
-#   M = model.matrix(terms(object), newdata)[, object$qr$pivot[1:object$rank], drop = FALSE] 
+#   M = model.matrix(terms(object), newdata)[, object$qr$pivot[1:object$rank], drop = FALSE]
 #   match.colnames =  max.col(-adist(names(b), colnames(M)))
 #   M = M[, match.colnames]
 #   factors = all.vars(formula)
 #   Kmf = model.frame(paste("~ 0 + ", factors, collapse = ":"), unique(.grid[, factors, drop = FALSE]))
 #   K = model.matrix(Kmf, newdata, constrasts = sapply(factors, function(...) 'contr.Treatment',simplify = F))
 #   K.M = MASS::ginv(K) %*% M
-#   
+#
 #   # if contrast matrix is specified, a hypothesis test on these contrasts are given
 #   if(!missing(contrasts) && is.matrix(contrasts)) {
 #     K.M = contrasts %*% K.M
 #   }
-#   
+#
 #   # compute marginal means requested, plus their standard errors
 #   emmeans = K.M %*% b
 #   se = diag(K.M %*% Vb %*% t(K.M))^0.5
-#   
+#
 #   # build return structure
 #   if (!missing(contrasts)) {
 #     ret = data.frame(Contrast=rownames(K.M), Estimate = emmeans, SE = se, df = df.residual(object))
@@ -205,6 +205,6 @@ addSignifStars <- function(x, ..., column = "P(>|t|)", stars = c(' ***'=.001, ' 
 #   structure(ret, collapsed = setdiff(colnames(.grid), all.vars(formula)), conf.level = conf.level,
 #             covariate_means = covariate_means, class = c("emmeans.rma","data.frame"))
 # }
-# 
-# 
-# 
+#
+#
+#

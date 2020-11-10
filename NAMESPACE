@@ -1,3 +1,4 @@
+import(jaspBase)
 export(ClassicalMetaAnalysis)
 export(SelectionModels)
 export(BayesianMetaAnalysis)
