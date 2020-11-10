@@ -59,7 +59,11 @@ Form
 		AssignedVariablesList
 		{
 			name:			"inputES"
-			title:			qsTr("Effect Size")
+			title:			if (measures_correlation.checked) {
+				qsTr("Correlation")
+			} else {
+				qsTr("Effect Size")
+			}
 			singleVariable:	true
 			allowedColumns:	["scale"]
 		}
@@ -148,7 +152,7 @@ Form
 
 		DropDown
 		{
-			enabled:	measures_correlation.checked
+			visible:	measures_correlation.checked
 			label:		qsTr("Transform correlations")
 			name:		"muTransform"
 			values:

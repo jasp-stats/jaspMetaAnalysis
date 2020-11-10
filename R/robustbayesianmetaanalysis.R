@@ -135,6 +135,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   "advanced_omit_rhat",
   "advanced_omit",
   "advanced_autofit_error",
+  "advanced_autofit_rhat",
   "advanced_autofit_time_unit",
   "advanced_autofit_time",
   "advanced_autofit",
@@ -566,14 +567,13 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     } else if (options[["cohensd_testType"]] == "two.sample") {
       ready_arg2 <- any(c(
         options[["input_SE"]] != "",
-        options[["input_N"]]) != "",
+        options[["input_N"]] != "",
         sum(unlist(options[["input_CI"]]) != "") == 2,
         all(c(options[["input_N1"]], options[["input_N2"]]) != "")
-      )
+      ))
     }
   } else if (options[["measures"]] == "correlation") {
     ready_arg1 <- options[["input_ES"]] != ""
-    ready_arg2 <- options[["input_N"]]  != ""
     ready_arg2 <- any(c(options[["input_SE"]], options[["input_N"]]) != "", sum(unlist(options[["input_CI"]]) != "") == 2)
   } else if (options[["measures"]] == "OR") {
     ready_arg1 <- options[["input_ES"]] != ""
@@ -754,7 +754,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
         
         
         if (is.null(jaspResults[["model"]])) {
-          p <- plot(
+          p <- RoBMA::plot.RoBMA.prior(
             temp_priors[[i]],
             plot_type    = "ggplot",
             par_name     = parameter,
@@ -769,7 +769,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
             samples      = 1e6,
           )
         } else{
-          p <- plot(
+          p <- RoBMA::plot.RoBMA.prior(
             temp_priors[[i]],
             plot_type    = "ggplot",
             par_name     = parameter,
@@ -834,22 +834,24 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   
   
   ### create overview table
-  overall_summary <-
-    createJaspTable(title = gettext("Model Summary"))
+  overall_summary <- createJaspTable(title = gettext("Model Summary"))
   overall_summary$position <- 1
   
   overall_summary$addColumnInfo(name = "terms",     title = "",                type = "string")
   overall_summary$addColumnInfo(name = "models",    title = gettext("Models"), type = "string")
   overall_summary$addColumnInfo(name = "priorProb", title = gettext("P(M)"),   type = "number")
-  
-  for (i in 1:nrow(fitSummary[["overview"]])) {
-    temp_row <- list(
-      terms     = if (i == 1) gettext("Effect") else if (i == 2) gettext("Heterogeneity") else if (i == 3) gettext("Publication bias"),
-      models    = paste0(fitSummary[["overview"]][["Models"]][i], "/", fitSummary[["add_info"]][["n_models"]]),
-      priorProb = fitSummary[["overview"]][["Prior prob."]][i]
-    )
-    
-    overall_summary$addRows(temp_row)
+
+  if (options[["measures"]] != "fitted") {
+    for (i in 1:nrow(fitSummary[["overview"]])) {
+      temp_row <- list(
+        terms     = if (i == 1) gettext("Effect") else if (i == 2) gettext("Heterogeneity") else if (i == 3) gettext("Publication bias"),
+        models    = paste0(fitSummary[["overview"]][["Models"]][i], "/", fitSummary[["add_info"]][["n_models"]]),
+        priorProb = fitSummary[["overview"]][["Prior prob."]][i]
+      )
+
+      overall_summary$addRows(temp_row)
+    }
+    overall_summary$addFootnote(gettext("The analysis will estimate multiple meta-analytic models using MCMC and might require a prolonged time to complete."))
   }
   
   model_preview[["overall_summary"]] <- overall_summary
@@ -866,17 +868,20 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   models_summary$addColumnInfo(name = "prior_tau",   title = gettext("Heterogeneity"),    type = "string", overtitle = prior_overtitle)
   models_summary$addColumnInfo(name = "prior_omega", title = gettext("Publication Bias"), type = "string", overtitle = prior_overtitle)
   models_summary$addColumnInfo(name = "priorProb",   title = gettext("P(M)"),             type = "number")
-  
-  for (i in 1:nrow(fitSummary[["models"]])) {
-    temp_row <- list(
-      number       = as.numeric(rownames(fitSummary[["models"]]))[i],
-      prior_mu     = fitSummary[["models"]][i, "Prior mu"],
-      prior_tau    = fitSummary[["models"]][i, "Prior tau"],
-      prior_omega  = fitSummary[["models"]][i, "Prior omega"],
-      priorProb    = fitSummary[["models"]][i, "Prior prob."]
-    )
-    
-    models_summary$addRows(temp_row)
+
+  if (options[["measures"]] != "fitted") {
+    for (i in 1:nrow(fitSummary[["models"]])) {
+      temp_row <- list(
+        number       = as.numeric(rownames(fitSummary[["models"]]))[i],
+        prior_mu     = fitSummary[["models"]][i, "Prior mu"],
+        prior_tau    = fitSummary[["models"]][i, "Prior tau"],
+        prior_omega  = fitSummary[["models"]][i, "Prior omega"],
+        priorProb    = fitSummary[["models"]][i, "Prior prob."]
+      )
+
+      models_summary$addRows(temp_row)
+    }
+    models_summary$addFootnote(gettext("The analysis will estimate multiple meta-analytic models using MCMC and might require a prolonged time to complete."))
   }
   
   model_preview[["models_summary"]] <- models_summary
@@ -950,6 +955,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
         control = list(
           autofit         = options[["advanced_autofit"]],
           max_error       = if (options[["advanced_autofit"]]) options[["advanced_autofit_error"]],
+          max_rhat        = if (options[["advanced_autofit"]]) options[["advanced_autofit_rhat"]],
           max_time        = if (options[["advanced_autofit"]]) paste0(options[["advanced_autofit_time"]], options[["advanced_autofit_time_unit"]]),
           adapt           = options[["advanced_adapt"]],
           bridge_max_iter = options[["advanced_bridge_iter"]],
@@ -958,7 +964,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
           allow_min_ESS   = if (options[["advanced_omit"]] && options[["advanced_omit_ESS"]])   options[["advanced_omit_ESS_value"]],
           allow_inc_theta = options[["advanced_omit_theta"]],
           balance_prob    = options[["advanced_omit_prior"]] == "conditional",
-          silent          = TRUE,
+          silent          = FALSE,
           progress_start  = 'startProgressbar(length(object$models))',
           progress_tick   = 'progressbarTick()'
         ),
@@ -968,7 +974,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
       
     } else{
 
-      fit <- tryCatch(update(
+      fit <- tryCatch(RoBMA::update.RoBMA(
         object  = fit,
         study_names  = if (options[["input_labels"]] != "") dataset[, .v(options[["input_labels"]])],
         chains  = options[["advanced_chains"]],
@@ -986,7 +992,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
           allow_min_ESS   = if (options[["advanced_omit_ESS"]]) options[["advanced_omit_ESS_value"]],
           allow_inc_theta = options[["advanced_omit_theta"]],
           balance_prob    = options[["advanced_omit_prior"]] == "conditional",
-          silent          = TRUE,
+          silent          = FALSE,
           progress_start  = 'startProgressbar(sum(converged_models))',
           progress_tick   = 'progressbarTick()'
         ),
@@ -1036,7 +1042,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   fit   <- jaspResults[["model"]][["object"]]
   
   # some shared info
-  fitSummary <- summary(
+  fitSummary <- RoBMA::summary.RoBMA(
     fit,
     logBF    = options[["bayesFactorType"]] == "LogBF10",
     BF01     = options[["bayesFactorType"]] == "BF01",
@@ -1159,7 +1165,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   fit   <- jaspResults[["model"]][["object"]]
   
   # some shared info
-  fitSummary <- summary(
+  fitSummary <- RoBMA::summary.RoBMA(
     fit,
     type     = "models",
     logBF    = options[["bayesFactorType"]] == "LogBF10",
@@ -1276,7 +1282,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   fit   <- jaspResults[["model"]][["object"]]
   
   # some shared info
-  fitSummary <- summary(
+  fitSummary <- RoBMA::summary.RoBMA(
     fit,
     type     = "individual",
     logBF    = options[["bayesFactorType"]] == "LogBF10",
@@ -1328,9 +1334,9 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     temp_priors$addColumnInfo(name = "prior_omega", title = gettext("Publication Bias"), type = "string")
     
     temp_row <- list(
-      prior_mu     = print(fitSummary[["overview"]][[i]][["priors"]][["mu"]], silent = TRUE),
-      prior_tau    = print(fitSummary[["overview"]][[i]][["priors"]][["tau"]], silent = TRUE),
-      prior_omega  = print(fitSummary[["overview"]][[i]][["priors"]][["omega"]], silent = TRUE)
+      prior_mu     = RoBMA::print.RoBMA.prior(fitSummary[["overview"]][[i]][["priors"]][["mu"]], silent = TRUE),
+      prior_tau    = RoBMA::print.RoBMA.prior(fitSummary[["overview"]][[i]][["priors"]][["tau"]], silent = TRUE),
+      prior_omega  = RoBMA::print.RoBMA.prior(fitSummary[["overview"]][[i]][["priors"]][["omega"]], silent = TRUE)
     )
     temp_priors$addRows(temp_row)
     
@@ -1416,7 +1422,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   
   # extract the model
   fit    <- jaspResults[["model"]][["object"]]
-  temp_s <- summary(fit)
+  temp_s <- RoBMA::summary.RoBMA(fit)
   
   # get overall settings
   dependencies <- c(
@@ -1474,7 +1480,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   
   # plot
   p <- tryCatch(
-    plot(
+    RoBMA::plot.RoBMA(
       fit,
       parameter = pars,
       type      = options[["plots_type"]],
@@ -1574,7 +1580,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   
   # extract the model
   fit    <- jaspResults[["model"]][["object"]]
-  temp_s <- summary(fit)
+  temp_s <- RoBMA::summary.RoBMA(fit)
   
   # get overall settings
   dependencies <- c(
@@ -1621,7 +1627,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     
     # nota that this creates a list of ggplot objects
     p <- tryCatch(
-      plot(
+      RoBMA::plot.RoBMA(
         fit,
         parameter = pars,
         type      = c("individual", if (options[["plots_type_individual_conditional"]]) "conditional"),
@@ -1657,7 +1663,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     plots_individual[[paste(parameters, collapse = "")]] <- temp_plot
     
     p <- tryCatch(
-      plot(
+      RoBMA::plot.RoBMA(
         fit,
         parameter = pars,
         type      = c("individual", if (options[["plots_type_individual_conditional"]]) "conditional"),
@@ -1701,7 +1707,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   
   
   # some shared info
-  fitSummary <- summary(
+  fitSummary <- RoBMA::summary.RoBMA(
     fit,
     type          = "models",
     diagnostics   = TRUE,

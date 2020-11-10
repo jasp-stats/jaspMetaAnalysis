@@ -99,6 +99,7 @@ fitted_path <- file.path("robmaFit.RDS")
   options$results_models_BF <- "inclusion"
   options$results_models_order <- "default"
   options$save_path <- ""
+  options$measures  <- "cohensd"
   set.seed(1)
   dataset <- NULL
   results <- jaspTools::runAnalysis("RobustBayesianMetaAnalysis", dataset, options)
@@ -455,6 +456,7 @@ fitted_path <- file.path("robmaFit.RDS")
   options$results_models_order <- "default"
   options$save_path <- ""
   options$setSeed   <- TRUE
+  options$measures  <- "cohensd"
   set.seed(1)
   dataset <- structure(list(study = structure(c(1L, 3L, 2L), .Label = c("study one", 
                                                                         "study three", "study two"), class = "factor"), t = c(2.51, 2.39, 
@@ -623,7 +625,8 @@ fitted_path <- file.path("robmaFit.RDS")
   options$results_models_BF <- "inclusion"
   options$results_models_order <- "default"
   options$save_path <- ""
-  options$setSeed <- TRUE
+  options$setSeed   <- TRUE
+  options$measures  <- "cohensd"
   set.seed(1)
   dataset <- structure(list(study = structure(c(1L, 3L, 2L), .Label = c("study one", 
                                                                         "study three", "study two"), class = "factor"), t = c(2.51, 2.39, 
@@ -688,6 +691,7 @@ fitted_path <- file.path("robmaFit.RDS")
   options$advanced_iteration <- 4000
   options$fitted_path <- ""
   options$input_CI <- list()
+  options$measures <- "cohensd"
   options$input_ES <- "d"
   options$input_N1 <- "N1"
   options$input_N2 <- "N2"
