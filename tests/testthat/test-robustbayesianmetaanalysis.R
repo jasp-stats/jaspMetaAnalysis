@@ -475,7 +475,7 @@ fitted_path <- file.path("robmaFit.RDS")
                                         0.308991841168739))
   })
   
-  test_that("Model Averaged Weights (Ï‰) table results match", {
+  test_that("Model Averaged Weights (omega) table results match", {
     table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_averaged_weights"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(1, 0, 1, 1, 1, 0.05, 0.00596182674913896, 0.05, 0.570655502031924,
@@ -490,7 +490,7 @@ fitted_path <- file.path("robmaFit.RDS")
                                         "Heterogeneity (<unicode><unicode>)", 0.474154155761386))
   })
   
-  test_that("Conditional Weights (Ï‰) table results match", {
+  test_that("Conditional Weights (omega) table results match", {
     table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_conditional_weights"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(1, 0, 1, 1, 1, 0.05, 0.00406094432096918, 0.05, 0.292282803470328,
@@ -837,7 +837,7 @@ fitted_path <- file.path("robmaFit.RDS")
                                         0))
   })
   
-  test_that("Model Averaged Weights (Ï‰) table results match", {
+  test_that("Model Averaged Weights (omega) table results match", {
     table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_averaged_weights"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(1, 0, 1, 1, 1, 0.05, 0.000674752411048917, 0.05, 0.0614219245352222,
@@ -941,7 +941,7 @@ fitted_path <- file.path("robmaFit.RDS")
                                         "Heterogeneity (<unicode><unicode>)", 0.249272319211574))
   })
   
-  test_that("Model Averaged Weights (Ï‰) table results match", {
+  test_that("Model Averaged Weights (omega) table results match", {
     table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_averaged_weights"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(1, 0, 1, 1, 1, 0.05, 0.118453054690182, 0.05, 0.837781600778334,
@@ -1044,7 +1044,7 @@ fitted_path <- file.path("robmaFit.RDS")
                                         "Heterogeneity (<unicode><unicode>)", 0.469638848770951))
   })
   
-  test_that("Model Averaged Weights (Ï‰) table results match", {
+  test_that("Model Averaged Weights (omega) table results match", {
     table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_averaged_weights"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(1, 0, 1, 1, 1, 0.05, 0.00582114173858658, 0.05, 0.510998270527382,
@@ -1260,7 +1260,7 @@ fitted_path <- file.path("robmaFit.RDS")
                                         "InvGamma(1, 0.15)[0, Inf]"))
   })
   
-  test_that("Estimated Studies' Effects (Î¸) table results match", {
+  test_that("Estimated Studies' Effects (theta) table results match", {
     table <- results[["results"]][["individual_models"]][["collection"]][["individual_models_model_12"]][["collection"]][["individual_models_model_12_temp_studies"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(0.00775853627019784, 855, -0.270720099051176, 0.170035632027558,
@@ -1272,7 +1272,7 @@ fitted_path <- file.path("robmaFit.RDS")
                                    ))
   })
   
-  test_that("Estimated Weights (Ï‰) table results match", {
+  test_that("Estimated Weights (omega) table results match", {
     table <- results[["results"]][["individual_models"]][["collection"]][["individual_models_model_12"]][["collection"]][["individual_models_model_12_temp_weights"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list("<unicode><unicode><unicode>", 0, 1, 0, 1, 1, 1.00014949817136,
@@ -1290,7 +1290,7 @@ fitted_path <- file.path("robmaFit.RDS")
                                         0.363308747466872))
   })
   
-  test_that("Model Averaged Weights (Ï‰) table results match", {
+  test_that("Model Averaged Weights (omega) table results match", {
     table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_averaged_weights"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(1, 0, 1, 1, 1, 0.05, 0.296099177059036, 0.05, 0.844054390777628,
@@ -1306,7 +1306,7 @@ fitted_path <- file.path("robmaFit.RDS")
                                         "8/12", 0.389824544390419, 0.5, "Publication bias"))
   })
   
-  test_that("Model Averaged Estimated Studies' Effects (Î¸) table results match", {
+  test_that("Model Averaged Estimated Studies' Effects (theta) table results match", {
     table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_studies_summary"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(-0.149488348181656, 0.0498797243212219, 0, "Study 1", 0.41948827590209,
@@ -1412,7 +1412,7 @@ fitted_path <- file.path("robmaFit.RDS")
                                         0.243290057391617))
   })
   
-  test_that("Model Averaged Weights (Ï‰) table results match", {
+  test_that("Model Averaged Weights (omega) table results match", {
     table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_averaged_weights"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(1, 0, 1, 1, 1, 0.05, 0.493442571534098, 0.05, 0.844054390777628,
@@ -1533,7 +1533,7 @@ fitted_path <- file.path("robmaFit.RDS")
                                         0.243290057391617))
   })
   
-  test_that("Model Averaged Weights (Ï‰) table results match", {
+  test_that("Model Averaged Weights (omega) table results match", {
     table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_averaged_weights"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(1, 0, 1, 1, 1, 0.05, 0.493442571534098, 0.05, 0.844054390777628,
