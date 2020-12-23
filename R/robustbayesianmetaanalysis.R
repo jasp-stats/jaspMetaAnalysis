@@ -974,7 +974,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
           progress_tick   = 'progressbarTick()'
         ),
         save    = "all",
-        seed    = if (options[["setSeed"]]) options[["seed"]],
+        seed    = .getSeedJASP(options)
       ),error = function(e)e)
       
     } else{
