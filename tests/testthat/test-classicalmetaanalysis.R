@@ -22,6 +22,13 @@ options$residualsParameters <- TRUE
 options$studyLabels  <- "contBinom"
 options$trimFillPlot <- TRUE
 options$wlsWeights   <- "debCollin1"
+
+options$regressionCoefficientsEstimates <- TRUE
+options$regressionCoefficientsConfidenceIntervalsInterval <- .95
+options$test <- "z"
+options$modelFit <- TRUE
+options$plotResidualsQQ <- TRUE
+
 set.seed(1)
 results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", "debug.csv", options)
 
@@ -410,6 +417,14 @@ options$residualsCasewiseDiagnostics <- TRUE
 options$studyLabels <- "contBinom"
 options$trimFillPlot <- TRUE
 options$wlsWeights <- "contGamma"
+
+options$regressionCoefficientsEstimates <- TRUE
+options$regressionCoefficientsConfidenceIntervalsInterval <- .95
+options$test <- "z"
+options$modelFit <- TRUE
+options$plotResidualsQQ <- TRUE
+options$residualsParameters <- TRUE
+
 set.seed(1)
 results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", "debug.csv", options)
 
@@ -854,6 +869,20 @@ options$plotResidualsQQ <- FALSE
 options$regressionCoefficientsEstimates <- FALSE
 options$residualsParameters <- FALSE
 options$wlsWeights <- "SE"
+
+
+options$regressionCoefficientsConfidenceIntervalsInterval <- .95
+options$test <- "z"
+options$modelFit <- TRUE
+options$regressionCoefficientsCovarianceMatrix <- TRUE
+options$rSquaredChange <- TRUE
+options$funnelPlotAsymmetryTest <- FALSE
+options$residualsCasewiseDiagnostics <- TRUE
+options$plotResidualsCovariates <- FALSE
+options$forestPlot <- FALSE
+options$plotResidualsPredicted <- FALSE
+options$trimFillPlot <- FALSE
+
 set.seed(1)
 results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", "BCG Vaccine", options)
 
