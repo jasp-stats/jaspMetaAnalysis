@@ -25,14 +25,14 @@ DropDown
 {
 	name: "method"; label: qsTr("Method"); currentIndex: 2
 	values: [
-		{ label: qsTr("Fixed Effects")	, value: "Fixed Effects"		},
-		{ label: qsTr("Likelihood")		, value: "Likelihood"			},
-		{ label: qsTr("Restricted ML")	, value: "Restricted ML"		},
-		{ label: "DerSimonian-Laird"	, value: "DerSimonian-Laird"	},
-		{ label: qsTr("Hedges")			, value: "Hedges"				},
-		{ label: "Hunter-Schmidt"		, value: "Hunter-Schmidt"		},
-		{ label: "Sidik-Jonkman"		, value: "Sidik-Jonkman"		},
-		{ label: qsTr("Empirical Bayes"), value: "Empirical Bayes"		},
-		{ label: "Paule-Mandel"			, value: "Paule-Mandel"			}
+		{ label: qsTr("Fixed Effects")		, value: "Fixed Effects"		},
+		{ label: qsTr("Maximum Likelihood")	, value: "Maximum Likelihood"	},
+		{ label: qsTr("Restricted ML")		, value: "Restricted ML"		},
+		{ label: qsTr("DerSimonian-Laird")	, value: "DerSimonian-Laird"	},
+		{ label: qsTr("Hedges")				, value: "Hedges"				},
+		{ label: qsTr("Hunter-Schmidt")		, value: "Hunter-Schmidt"		},
+		{ label: qsTr("Sidik-Jonkman")		, value: "Sidik-Jonkman"		},
+		{ label: qsTr("Empirical Bayes")	, value: "Empirical Bayes"		},
+		{ label: qsTr("Paule-Mandel")		, value: "Paule-Mandel"			}
 	]
 }
