@@ -23,7 +23,12 @@ import JASP				1.0
 
 DropDown
 {
-	name: "method"; label: qsTr("Method"); currentIndex: 2
+	property int defaultIndex:	2
+
+	name:			"method"
+	label:			qsTr("Method")
+	currentIndex:	defaultIndex
+
 	values: [
 		{ label: qsTr("Fixed Effects")		, value: "Fixed Effects"		},
 		{ label: qsTr("Maximum Likelihood")	, value: "Maximum Likelihood"	},
