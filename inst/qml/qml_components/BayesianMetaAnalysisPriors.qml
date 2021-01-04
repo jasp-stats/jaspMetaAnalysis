@@ -25,6 +25,9 @@ Section
 	title: 		qsTr("Priors")
 	columns:	1
 
+	property string modelTypeValue:			"BMA"
+	property string modelDirectionValue:	"allPos"
+
 	Group
 	{
 		columns: 2
@@ -135,7 +138,7 @@ Section
 			{
 				name: 				"checkLowerPrior"
 				childrenOnSameRow: 	true
-				checked: 			MA.BayesianMetaAnalysisInference.checkCRE.checked && MA.BayesianMetaAnalysisInference.checkPos.checked
+				checked: 			modelTypeValue == "CRE" && modelDirectionValue == "allPos"
 
 				DoubleField
 				{
@@ -143,9 +146,9 @@ Section
 					name: 			"lowerTrunc"
 					label: 			qsTr("Lower bound:")
 					fieldWidth: 	50
-					negativeValues: !MA.BayesianMetaAnalysisInference.checkCRE.checked && MA.BayesianMetaAnalysisInference.checkPos.checked
+					negativeValues: !(modelTypeValue == "CRE") && modelDirectionValue == "allPos"
 					defaultValue: 	0
-					max: 			MA.BayesianMetaAnalysisInference.checkCRE.checked && MA.BayesianMetaAnalysisInference.checkNeg.checked ? 0 : Infinity
+					max: 			modelTypeValue == "CRE" && modelDirectionValue == "allNeg" ? 0 : Infinity
 				}
 			}
 
@@ -153,7 +156,7 @@ Section
 			{
 				name: 				"checkUpperPrior"
 				childrenOnSameRow: 	true
-				checked: 			MA.BayesianMetaAnalysisInference.checkCRE.checked && MA.BayesianMetaAnalysisInference.checkNeg.checked
+				checked: 			modelTypeValue == "CRE" && modelDirectionValue == "allNeg"
 
 				DoubleField
 				{
@@ -161,9 +164,9 @@ Section
 					name: 			"upperTrunc"
 					label: 			qsTr("Upper bound:")
 					fieldWidth: 	50
-					negativeValues: !MA.BayesianMetaAnalysisInference.checkCRE.checked && MA.BayesianMetaAnalysisInference.checkPos.checked
+					negativeValues: !(modelTypeValue == "CRE") && modelDirectionValue == "allPos"
 					defaultValue: 	0
-					max: 			MA.BayesianMetaAnalysisInference.checkCRE.checked && MA.BayesianMetaAnalysisInference.checkNeg.checked ? 0 : Infinity
+					max: 			modelTypeValue == "CRE" && modelDirectionValue == "allNeg" ? 0 : Infinity
 				}
 			}
 		}
@@ -172,7 +175,7 @@ Section
 
 	RadioButtonGroup
 	{
-		enabled:	MA.BayesianMetaAnalysisInference.checkRE.checked || MA.BayesianMetaAnalysisInference.checkCRE.checked || MA.BayesianMetaAnalysisInference.checkBMA.checked
+		enabled:	modelTypeValue == "RE" || modelTypeValue == "CRE" || modelTypeValue == "BMA"
 		title: 		qsTr("Heterogeneity (Between study SD)")
 		name: 		"priorSE"
 
