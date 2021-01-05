@@ -552,7 +552,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   }
   
   
-  if (options[["measures"]] == "cohensd") {
+  if (options[["measures"]] == "cohensD") {
     readyArg1 <- any(c(options[["inputES"]], options[["inputT"]]) != "")
     
     if (options[["cohensDTestType"]] == "one.sample") {
@@ -764,7 +764,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
             par_name     = parameter,
             effect_size  = if(parameter == "mu") switch(
               options[["measures"]],
-              "cohensd"     = "d",
+              "cohensD"     = "d",
               "correlation" = "r",
               "OR"          = "OR",
               "general"     = "y"
@@ -928,20 +928,20 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
       fit <- tryCatch(RoBMA::RoBMA(
         likelihood = "normal",
         # data
-        t   = if (options[["measures"]] == "cohensd" && options[["inputT"]] != "")                     dataset[, .v(options[["inputT"]])],
-        d   = if (options[["measures"]] == "cohensd" && options[["inputES"]] != "")                    dataset[, .v(options[["inputES"]])],
+        t   = if (options[["measures"]] == "cohensD" && options[["inputT"]] != "")                     dataset[, .v(options[["inputT"]])],
+        d   = if (options[["measures"]] == "cohensD" && options[["inputES"]] != "")                    dataset[, .v(options[["inputES"]])],
         r   = if (options[["measures"]] == "correlation" && options[["inputES"]] != "")                dataset[, .v(options[["inputES"]])],
         OR  = if (options[["measures"]] == "OR")                                                        dataset[, .v(options[["inputES"]])],
         y   = if (options[["measures"]] == "general" && options[["inputES"]] != "")                    dataset[, .v(options[["inputES"]])],
         se  = if (options[["inputSE"]] != "")                                                          dataset[, .v(options[["inputSE"]])],
         lCI = if (sum(unlist(options[["inputCI"]]) != "") == 2)                                        dataset[, .v(options[["inputCI"]][[1]][1])],
         uCI = if (sum(unlist(options[["inputCI"]]) != "") == 2)                                        dataset[, .v(options[["inputCI"]][[1]][2])],
-        n   = if (options[["measures"]] %in% c("cohensd", "correlation") && options[["inputN"]] != "") dataset[, .v(options[["inputN"]])],
-        n1  = if (options[["measures"]] == "cohensd" && options[["inputN1"]] != "")                    dataset[, .v(options[["inputN1"]])],
-        n2  = if (options[["measures"]] == "cohensd" && options[["inputN2"]] != "")                    dataset[, .v(options[["inputN2"]])],
+        n   = if (options[["measures"]] %in% c("cohensD", "correlation") && options[["inputN"]] != "") dataset[, .v(options[["inputN"]])],
+        n1  = if (options[["measures"]] == "cohensD" && options[["inputN1"]] != "")                    dataset[, .v(options[["inputN1"]])],
+        n2  = if (options[["measures"]] == "cohensD" && options[["inputN2"]] != "")                    dataset[, .v(options[["inputN2"]])],
         study_names = if (options[["inputLabels"]] != "")                                              dataset[, .v(options[["inputLabels"]])],
         # model settings
-        test_type        = if (options[["measures"]] == "cohensd")                 options[["cohensDTestType"]],
+        test_type        = if (options[["measures"]] == "cohensD")                 options[["cohensDTestType"]],
         mu_transform     = if (options[["measures"]] %in% c("correlation", "OR"))  options[["advancedMuTransform"]],
         effect_direction = options[["effectDirection"]],
         # priors

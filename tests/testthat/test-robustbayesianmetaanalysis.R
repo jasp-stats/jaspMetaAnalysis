@@ -24,33 +24,33 @@ if (FALSE){
 }
 
 # path to the pre-fitted RoBMA model
-fitted_path <- file.path("robmaFit.RDS")
+fittedPath <- file.path("robmaFit.RDS")
 
 ### prior distibutions plots 
 {
   options <- jaspTools::analysisOptions("RobustBayesianMetaAnalysis")
-  options$.meta <- list(input_CI = list(containsColumn = TRUE), input_ES = list(
-    containsColumn = TRUE), input_N = list(containsColumn = TRUE), 
-    input_N1 = list(containsColumn = TRUE), input_N2 = list(containsColumn = TRUE), 
-    input_SE = list(containsColumn = TRUE), input_labels = list(
-      containsColumn = TRUE), input_t = list(containsColumn = TRUE), 
-    priors_mu = list(list(name = list(containsColumn = TRUE)), 
+  options$.meta <- list(inputCI = list(containsColumn = TRUE), inputSE = list(
+    containsColumn = TRUE), inputN = list(containsColumn = TRUE), 
+    inputN1 = list(containsColumn = TRUE), inputN2 = list(containsColumn = TRUE), 
+    inputSE = list(containsColumn = TRUE), inputLabels = list(
+      containsColumn = TRUE), inputT = list(containsColumn = TRUE), 
+    priorsMu = list(list(name = list(containsColumn = TRUE)), 
                      list(name = list(containsColumn = TRUE)), list(name = list(
                        containsColumn = TRUE)), list(name = list(containsColumn = TRUE)), 
                      list(name = list(containsColumn = TRUE)), list(name = list(
                        containsColumn = TRUE)), list(name = list(containsColumn = TRUE)), 
-                     list(name = list(containsColumn = TRUE))), priors_omega = list(
+                     list(name = list(containsColumn = TRUE))), priorsOmega = list(
                        list(name = list(containsColumn = TRUE)), list(name = list(
-                         containsColumn = TRUE))), priors_tau = list(list(
+                         containsColumn = TRUE))), priorsTau = list(list(
                            name = list(containsColumn = TRUE))))
-  options$advanced_control <- "clever"
-  options$fitted_path <- ""
-  options$input_CI <- list()
-  options$plots_theta_order <- "labels"
-  options$plots_theta_show <- "observed"
-  options$plots_type_individual_by <- "model"
-  options$plots_type_individual_order <- "ascending"
-  options$priors_mu <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$advancedControl <- "clever"
+  options$fittedPath <- ""
+  options$inputCI <- list()
+  options$plotsThetaOrder <- "labels"
+  options$plotsThetaShow <- "observed"
+  options$plotsTypeIndividualBy <- "model"
+  options$plotsTypeIndividualOrder <- "ascending"
+  options$priorsMu <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                  parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                  parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                  truncationLower = "2", truncationUpper = "7", type = "normal"), 
@@ -65,7 +65,7 @@ fitted_path <- file.path("robmaFit.RDS")
                             list(name = "4", parA = "0", parAlpha = "1", parB = "1", 
                                  parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                  parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
-                                 truncationLower = "-Inf", truncationUpper = "Inf", type = "gamma_k0"), 
+                                 truncationLower = "-Inf", truncationUpper = "Inf", type = "gammaK0"), 
                             list(name = "5", parA = "0", parAlpha = "1", parB = "1", 
                                  parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                  parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
@@ -81,31 +81,31 @@ fitted_path <- file.path("robmaFit.RDS")
                             list(name = "8", parA = "0", parAlpha = "1", parB = "1", 
                                  parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                  parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
-                                 truncationLower = "0", truncationUpper = "Inf", type = "gamma_ab"))
-  options$priors_mu_null <- list()
-  options$priors_null <- TRUE
-  options$priors_omega <- list(list(name = "", parAlpha = "(1,1)", parAlpha1 = "(1,1,1)", 
+                                 truncationLower = "0", truncationUpper = "Inf", type = "gammaAB"))
+  options$priorsMuNull <- list()
+  options$priorsNull <- TRUE
+  options$priorsOmega <- list(list(name = "", parAlpha = "(1,1)", parAlpha1 = "(1,1,1)", 
                                     parAlpha2 = "(1,1)", parCuts = "(.05)", priorOdds = "1/2", 
                                     type = "Two-sided"), list(name = "2", parAlpha = "(1,1,1)", 
                                                               parAlpha1 = "(1,1,1)", parAlpha2 = "(1,1)", parCuts = "(.05, .10)", 
                                                               priorOdds = "1/2", type = "Two-sided"))
-  options$priors_omega_null <- list()
-  options$priors_plot <- TRUE
-  options$priors_tau <- list(list(`	` = "1", name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsOmegaNull <- list()
+  options$priorsPlot <- TRUE
+  options$priorsTau <- list(list(`	` = "1", name = "", parA = "0", parAlpha = "1", parB = "1", 
                                   parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                   parScale2 = "1", parShape = "1", priorOdds = "1", truncationLower = "0", 
                                   truncationUpper = "Inf", type = "invgamma"))
-  options$priors_tau_null <- list()
-  options$results_models_BF <- "inclusion"
-  options$results_models_order <- "default"
-  options$save_path <- ""
-  options$measures  <- "cohensd"
+  options$priorsTauNull <- list()
+  options$resultsModelsBF <- "inclusion"
+  options$resultsModelsOrder <- "default"
+  options$savePath <- ""
+  options$measures  <- "cohensD"
   set.seed(1)
   dataset <- NULL
   results <- jaspTools::runAnalysis("RobustBayesianMetaAnalysis", dataset, options)
   
   test_that("Models Overview table results match", {
-    table <- results[["results"]][["model_preview"]][["collection"]][["model_preview_models_summary"]][["data"]]
+    table <- results[["results"]][["modelPreview"]][["collection"]][["modelPreview_modelsSummary"]][["data"]]
     expect_equal_tables(table,
                         list(1, 0.0625, "Normal(0, 1)[2, 7]", "Two-sided((0.05), (1, 1))",
                              "InvGamma(1, 0.15)[0, Inf]", 2, 0.0625, "Normal(0, 1)[2, 7]",
@@ -133,74 +133,74 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Model Summary table results match", {
-    table <- results[["results"]][["model_preview"]][["collection"]][["model_preview_overall_summary"]][["data"]]
+    table <- results[["results"]][["modelPreview"]][["collection"]][["modelPreview_overallSummary"]][["data"]]
     expect_equal_tables(table,
                         list("16/16", 1, "Effect", "16/16", 1, "Heterogeneity", "16/16", 1,
                              "Publication bias"))
   })
   
   test_that("Priors plot mu (1) matches", {
-    plotName <- results[["results"]][["prior_plots"]][["collection"]][["prior_plots_mu"]][["collection"]][["prior_plots_mu_alternative"]][["collection"]][["prior_plots_mu_alternative_mu_alternative_1"]][["data"]]
+    plotName <- results[["results"]][["priorPlots"]][["collection"]][["priorPlots_mu"]][["collection"]][["priorPlots_mu_alternative"]][["collection"]][["priorPlots_mu_alternative_mu_alternative_1"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "prior-plot-2-default", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Priors plot mu (2) matches", {
-    plotName <- results[["results"]][["prior_plots"]][["collection"]][["prior_plots_mu"]][["collection"]][["prior_plots_mu_alternative"]][["collection"]][["prior_plots_mu_alternative_mu_alternative_2"]][["data"]]
+    plotName <- results[["results"]][["priorPlots"]][["collection"]][["priorPlots_mu"]][["collection"]][["priorPlots_mu_alternative"]][["collection"]][["priorPlots_mu_alternative_mu_alternative_2"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "prior-plot-3-default", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Priors plot mu (3) matches", {
-    plotName <- results[["results"]][["prior_plots"]][["collection"]][["prior_plots_mu"]][["collection"]][["prior_plots_mu_alternative"]][["collection"]][["prior_plots_mu_alternative_mu_alternative_3"]][["data"]]
+    plotName <- results[["results"]][["priorPlots"]][["collection"]][["priorPlots_mu"]][["collection"]][["priorPlots_mu_alternative"]][["collection"]][["priorPlots_mu_alternative_mu_alternative_3"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "prior-plot-4-default", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Priors plot mu (4) matches", {
-    plotName <- results[["results"]][["prior_plots"]][["collection"]][["prior_plots_mu"]][["collection"]][["prior_plots_mu_alternative"]][["collection"]][["prior_plots_mu_alternative_mu_alternative_4"]][["data"]]
+    plotName <- results[["results"]][["priorPlots"]][["collection"]][["priorPlots_mu"]][["collection"]][["priorPlots_mu_alternative"]][["collection"]][["priorPlots_mu_alternative_mu_alternative_4"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "prior-plot-5-default", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Priors plot mu (5) matches", {
-    plotName <- results[["results"]][["prior_plots"]][["collection"]][["prior_plots_mu"]][["collection"]][["prior_plots_mu_alternative"]][["collection"]][["prior_plots_mu_alternative_mu_alternative_5"]][["data"]]
+    plotName <- results[["results"]][["priorPlots"]][["collection"]][["priorPlots_mu"]][["collection"]][["priorPlots_mu_alternative"]][["collection"]][["priorPlots_mu_alternative_mu_alternative_5"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "prior-plot-6-default", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Priors plot mu (6) matches", {
-    plotName <- results[["results"]][["prior_plots"]][["collection"]][["prior_plots_mu"]][["collection"]][["prior_plots_mu_alternative"]][["collection"]][["prior_plots_mu_alternative_mu_alternative_6"]][["data"]]
+    plotName <- results[["results"]][["priorPlots"]][["collection"]][["priorPlots_mu"]][["collection"]][["priorPlots_mu_alternative"]][["collection"]][["priorPlots_mu_alternative_mu_alternative_6"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "prior-plot-7-default", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Priors plot mu (7) matches", {
-    plotName <- results[["results"]][["prior_plots"]][["collection"]][["prior_plots_mu"]][["collection"]][["prior_plots_mu_alternative"]][["collection"]][["prior_plots_mu_alternative_mu_alternative_7"]][["data"]]
+    plotName <- results[["results"]][["priorPlots"]][["collection"]][["priorPlots_mu"]][["collection"]][["priorPlots_mu_alternative"]][["collection"]][["priorPlots_mu_alternative_mu_alternative_7"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "prior-plot-8-default", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Priors plot mu (8) matches", {
-    plotName <- results[["results"]][["prior_plots"]][["collection"]][["prior_plots_mu"]][["collection"]][["prior_plots_mu_alternative"]][["collection"]][["prior_plots_mu_alternative_mu_alternative_8"]][["data"]]
+    plotName <- results[["results"]][["priorPlots"]][["collection"]][["priorPlots_mu"]][["collection"]][["priorPlots_mu_alternative"]][["collection"]][["priorPlots_mu_alternative_mu_alternative_8"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "prior-plot-9-default", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Priors plot omega (1) matches", {
-    plotName <- results[["results"]][["prior_plots"]][["collection"]][["prior_plots_omega"]][["collection"]][["prior_plots_omega_alternative"]][["collection"]][["prior_plots_omega_alternative_omega_alternative_1"]][["data"]]
+    plotName <- results[["results"]][["priorPlots"]][["collection"]][["priorPlots_omega"]][["collection"]][["priorPlots_omega_alternative"]][["collection"]][["priorPlots_omega_alternative_omega_alternative_1"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "prior-plot-10-default", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Priors plot omega (2) matches", {
-    plotName <- results[["results"]][["prior_plots"]][["collection"]][["prior_plots_omega"]][["collection"]][["prior_plots_omega_alternative"]][["collection"]][["prior_plots_omega_alternative_omega_alternative_2"]][["data"]]
+    plotName <- results[["results"]][["priorPlots"]][["collection"]][["priorPlots_omega"]][["collection"]][["priorPlots_omega_alternative"]][["collection"]][["priorPlots_omega_alternative_omega_alternative_2"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "prior-plot-11-default", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Priors plot tau (1) matches", {
-    plotName <- results[["results"]][["prior_plots"]][["collection"]][["prior_plots_tau"]][["collection"]][["prior_plots_tau_alternative"]][["collection"]][["prior_plots_tau_alternative_tau_alternative_1"]][["data"]]
+    plotName <- results[["results"]][["priorPlots"]][["collection"]][["priorPlots_tau"]][["collection"]][["priorPlots_tau_alternative"]][["collection"]][["priorPlots_tau_alternative_tau_alternative_1"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "prior-plot-12-default", dir="RobustBayesianMetaAnalysis")
   })
@@ -208,16 +208,16 @@ fitted_path <- file.path("robmaFit.RDS")
 }
 {
   options <- jaspTools::analysisOptions("RobustBayesianMetaAnalysis")
-  options$advanced_control <- "clever"
-  options$advanced_mu_transform <- "cohens_d"
-  options$fitted_path <- ""
-  options$input_CI <- list()
+  options$advancedControl <- "clever"
+  options$advancedMuTransform <- "cohens_d"
+  options$fittedPath <- ""
+  options$inputCI <- list()
   options$measures <- "correlation"
-  options$plots_theta_order <- "labels"
-  options$plots_theta_show <- "observed"
-  options$plots_type_individual_by <- "model"
-  options$plots_type_individual_order <- "ascending"
-  options$priors_mu <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$plotsThetaOrder <- "labels"
+  options$plotsThetaShow <- "observed"
+  options$plotsTypeIndividualBy <- "model"
+  options$plotsTypeIndividualOrder <- "ascending"
+  options$priorsMu <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                  parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                  parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                  truncationLower = "-Inf", truncationUpper = "Inf", type = "normal"), 
@@ -225,33 +225,33 @@ fitted_path <- file.path("robmaFit.RDS")
                                  parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "3", 
                                  parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                  truncationLower = "-Inf", truncationUpper = "Inf", type = "normal"))
-  options$priors_mu_null <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsMuNull <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                       parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                       parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                       truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
-  options$priors_omega <- list()
-  options$priors_omega_null <- list(list(name = "", parAlpha = "(1,1,1)", parAlpha1 = "(1,1)", 
+  options$priorsOmega <- list()
+  options$priorsOmegaNull <- list(list(name = "", parAlpha = "(1,1,1)", parAlpha1 = "(1,1)", 
                                          parAlpha2 = "(1,1)", parCuts = "(.05, .95)", priorOdds = "1", 
                                          type = "spike"))
-  options$priors_plot <- TRUE
-  options$priors_tau <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsPlot <- TRUE
+  options$priorsTau <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                   parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                   parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                   truncationLower = "0", truncationUpper = "Inf", type = "invgamma"))
-  options$priors_tau_null <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsTauNull <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                        parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                        parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                        truncationLower = "0", truncationUpper = "Inf", type = "spike"))
-  options$results_models_BF <- "inclusion"
-  options$results_models_order <- "default"
-  options$save_path <- ""
+  options$resultsModelsBF <- "inclusion"
+  options$resultsModelsOrder <- "default"
+  options$savePath <- ""
   set.seed(1)
   dataset <- NULL
   results <- jaspTools::runAnalysis("RobustBayesianMetaAnalysis", dataset, options)
   
   
   test_that("Models Overview table results match", {
-    table <- results[["results"]][["model_preview"]][["collection"]][["model_preview_models_summary"]][["data"]]
+    table <- results[["results"]][["modelPreview"]][["collection"]][["modelPreview_modelsSummary"]][["data"]]
     expect_equal_tables(table,
                         list(1, 0.166666666666667, "Spike(0)", "Spike(1)", "Spike(0)", 2, 0.166666666666667,
                              "Spike(0)", "Spike(1)", "InvGamma(1, 0.15)[0, Inf]", 3, 0.166666666666667,
@@ -263,60 +263,60 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Model Summary table results match", {
-    table <- results[["results"]][["model_preview"]][["collection"]][["model_preview_overall_summary"]][["data"]]
+    table <- results[["results"]][["modelPreview"]][["collection"]][["modelPreview_overallSummary"]][["data"]]
     expect_equal_tables(table,
                         list("4/6", 0.666666666666667, "Effect", "3/6", 0.5, "Heterogeneity",
                              "0/6", 0, "Publication bias"))
   })
   
   test_that("Priors plot mu (1) (correlation) matches", {
-    plotName <- results[["results"]][["prior_plots"]][["collection"]][["prior_plots_mu"]][["collection"]][["prior_plots_mu_alternative"]][["collection"]][["prior_plots_mu_alternative_mu_alternative_1"]][["data"]]
+    plotName <- results[["results"]][["priorPlots"]][["collection"]][["priorPlots_mu"]][["collection"]][["priorPlots_mu_alternative"]][["collection"]][["priorPlots_mu_alternative_mu_alternative_1"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "prior-plot-2-correlations", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Priors plot mu (2) (correlation) matches", {
-    plotName <- results[["results"]][["prior_plots"]][["collection"]][["prior_plots_mu"]][["collection"]][["prior_plots_mu_alternative"]][["collection"]][["prior_plots_mu_alternative_mu_alternative_2"]][["data"]]
+    plotName <- results[["results"]][["priorPlots"]][["collection"]][["priorPlots_mu"]][["collection"]][["priorPlots_mu_alternative"]][["collection"]][["priorPlots_mu_alternative_mu_alternative_2"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "prior-plot-3-correlations", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Priors plot mu (3) (correlation) matches", {
-    plotName <- results[["results"]][["prior_plots"]][["collection"]][["prior_plots_mu"]][["collection"]][["prior_plots_mu_null"]][["collection"]][["prior_plots_mu_null_mu_null_1"]][["data"]]
+    plotName <- results[["results"]][["priorPlots"]][["collection"]][["priorPlots_mu"]][["collection"]][["priorPlots_mu_null"]][["collection"]][["priorPlots_mu_null_mu_null_1"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "prior-plot-4-correlations", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Priors plot omega (1) (correlation) matches", {
-    plotName <- results[["results"]][["prior_plots"]][["collection"]][["prior_plots_omega"]][["collection"]][["prior_plots_omega_null"]][["collection"]][["prior_plots_omega_null_omega_null_1"]][["data"]]
+    plotName <- results[["results"]][["priorPlots"]][["collection"]][["priorPlots_omega"]][["collection"]][["priorPlots_omega_null"]][["collection"]][["priorPlots_omega_null_omega_null_1"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "prior-plot-5-correlations", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Priors plot tau (1) (correlation) matches", {
-    plotName <- results[["results"]][["prior_plots"]][["collection"]][["prior_plots_tau"]][["collection"]][["prior_plots_tau_alternative"]][["collection"]][["prior_plots_tau_alternative_tau_alternative_1"]][["data"]]
+    plotName <- results[["results"]][["priorPlots"]][["collection"]][["priorPlots_tau"]][["collection"]][["priorPlots_tau_alternative"]][["collection"]][["priorPlots_tau_alternative_tau_alternative_1"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "prior-plot-6-correlations", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Priors plot tau (2) (correlation) matches", {
-    plotName <- results[["results"]][["prior_plots"]][["collection"]][["prior_plots_tau"]][["collection"]][["prior_plots_tau_null"]][["collection"]][["prior_plots_tau_null_tau_null_1"]][["data"]]
+    plotName <- results[["results"]][["priorPlots"]][["collection"]][["priorPlots_tau"]][["collection"]][["priorPlots_tau_null"]][["collection"]][["priorPlots_tau_null_tau_null_1"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "prior-plot-7-correlations", dir="RobustBayesianMetaAnalysis")
   })
 }
 {
   options <- jaspTools::analysisOptions("RobustBayesianMetaAnalysis")
-  options$advanced_control <- "clever"
-  options$advanced_mu_transform <- "log_OR"
-  options$fitted_path <- ""
-  options$input_CI <- list()
+  options$advancedControl <- "clever"
+  options$advancedMuTransform <- "log_OR"
+  options$fittedPath <- ""
+  options$inputCI <- list()
   options$measures <- "OR"
-  options$plots_theta_order <- "labels"
-  options$plots_theta_show <- "observed"
-  options$plots_type_individual_by <- "model"
-  options$plots_type_individual_order <- "ascending"
-  options$priors_mu <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$plotsThetaOrder <- "labels"
+  options$plotsThetaShow <- "observed"
+  options$plotsTypeIndividualBy <- "model"
+  options$plotsTypeIndividualOrder <- "ascending"
+  options$priorsMu <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                  parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                  parScale = ".3", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                  truncationLower = "-Inf", truncationUpper = "Inf", type = "normal"), 
@@ -324,31 +324,31 @@ fitted_path <- file.path("robmaFit.RDS")
                                  parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "3", 
                                  parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                  truncationLower = "-Inf", truncationUpper = "Inf", type = "uniform"))
-  options$priors_mu_null <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsMuNull <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                       parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                       parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                       truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
-  options$priors_null <- TRUE
-  options$priors_omega <- list()
-  options$priors_omega_null <- list(list(name = "", parAlpha = "(1,1,1)", parAlpha1 = "(1,1)", 
+  options$priorsNull <- TRUE
+  options$priorsOmega <- list()
+  options$priorsOmegaNull <- list(list(name = "", parAlpha = "(1,1,1)", parAlpha1 = "(1,1)", 
                                          parAlpha2 = "(1,1)", parCuts = "(.05, .95)", priorOdds = "1", 
                                          type = "spike"))
-  options$priors_plot <- TRUE
-  options$priors_tau <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsPlot <- TRUE
+  options$priorsTau <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                   parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                   parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                   truncationLower = "0", truncationUpper = "Inf", type = "invgamma"))
-  options$priors_tau_null <- list()
-  options$results_models_BF <- "inclusion"
-  options$results_models_order <- "default"
-  options$save_path <- ""
+  options$priorsTauNull <- list()
+  options$resultsModelsBF <- "inclusion"
+  options$resultsModelsOrder <- "default"
+  options$savePath <- ""
   set.seed(1)
   dataset <- NULL
   results <- jaspTools::runAnalysis("RobustBayesianMetaAnalysis", dataset, options)
   
   
   test_that("Models Overview table results match", {
-    table <- results[["results"]][["model_preview"]][["collection"]][["model_preview_models_summary"]][["data"]]
+    table <- results[["results"]][["modelPreview"]][["collection"]][["modelPreview_modelsSummary"]][["data"]]
     expect_equal_tables(table,
                         list(1, 0.333333333333333, "Spike(0)", "Spike(1)", "InvGamma(1, 0.15)[0, Inf]",
                              2, 0.333333333333333, "Normal(0, 0.3)[-Inf, Inf]", "Spike(1)",
@@ -357,38 +357,38 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Model Summary table results match", {
-    table <- results[["results"]][["model_preview"]][["collection"]][["model_preview_overall_summary"]][["data"]]
+    table <- results[["results"]][["modelPreview"]][["collection"]][["modelPreview_overallSummary"]][["data"]]
     expect_equal_tables(table,
                         list("2/3", 0.666666666666667, "Effect", "3/3", 1, "Heterogeneity",
                              "0/3", 0, "Publication bias"))
   })
   
   test_that("Priors plot mu (1) (OR) matches", {
-    plotName <- results[["results"]][["prior_plots"]][["collection"]][["prior_plots_mu"]][["collection"]][["prior_plots_mu_alternative"]][["collection"]][["prior_plots_mu_alternative_mu_alternative_1"]][["data"]]
+    plotName <- results[["results"]][["priorPlots"]][["collection"]][["priorPlots_mu"]][["collection"]][["priorPlots_mu_alternative"]][["collection"]][["priorPlots_mu_alternative_mu_alternative_1"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "prior-plot-2-OR", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Priors plot mu (2) (OR) matches", {
-    plotName <- results[["results"]][["prior_plots"]][["collection"]][["prior_plots_mu"]][["collection"]][["prior_plots_mu_alternative"]][["collection"]][["prior_plots_mu_alternative_mu_alternative_2"]][["data"]]
+    plotName <- results[["results"]][["priorPlots"]][["collection"]][["priorPlots_mu"]][["collection"]][["priorPlots_mu_alternative"]][["collection"]][["priorPlots_mu_alternative_mu_alternative_2"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "prior-plot-3-OR", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Priors plot mu (3) (OR) matches", {
-    plotName <- results[["results"]][["prior_plots"]][["collection"]][["prior_plots_mu"]][["collection"]][["prior_plots_mu_null"]][["collection"]][["prior_plots_mu_null_mu_null_1"]][["data"]]
+    plotName <- results[["results"]][["priorPlots"]][["collection"]][["priorPlots_mu"]][["collection"]][["priorPlots_mu_null"]][["collection"]][["priorPlots_mu_null_mu_null_1"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "prior-plot-4-OR", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Priors plot omega (1) (OR) matches", {
-    plotName <- results[["results"]][["prior_plots"]][["collection"]][["prior_plots_omega"]][["collection"]][["prior_plots_omega_null"]][["collection"]][["prior_plots_omega_null_omega_null_1"]][["data"]]
+    plotName <- results[["results"]][["priorPlots"]][["collection"]][["priorPlots_omega"]][["collection"]][["priorPlots_omega_null"]][["collection"]][["priorPlots_omega_null_omega_null_1"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "prior-plot-5-OR", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Priors plot tau (1) (OR) matches", {
-    plotName <- results[["results"]][["prior_plots"]][["collection"]][["prior_plots_tau"]][["collection"]][["prior_plots_tau_alternative"]][["collection"]][["prior_plots_tau_alternative_tau_alternative_1"]][["data"]]
+    plotName <- results[["results"]][["priorPlots"]][["collection"]][["priorPlots_tau"]][["collection"]][["priorPlots_tau_alternative"]][["collection"]][["priorPlots_tau_alternative_tau_alternative_1"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "prior-plot-6-OR", dir="RobustBayesianMetaAnalysis")
   })
@@ -397,66 +397,66 @@ fitted_path <- file.path("robmaFit.RDS")
 ### fit a default model using d + se, (wihout the more complex weight function) and main output
 {
   options <- jaspTools::analysisOptions("RobustBayesianMetaAnalysis")
-  options$.meta <- list(input_CI = list(containsColumn = TRUE), input_ES = list(
-    containsColumn = TRUE), input_N = list(containsColumn = TRUE), 
-    input_N1 = list(containsColumn = TRUE), input_N2 = list(containsColumn = TRUE), 
-    input_SE = list(containsColumn = TRUE), input_labels = list(
-      containsColumn = TRUE), input_t = list(containsColumn = TRUE), 
-    priors_mu = list(list(name = list(containsColumn = TRUE))), 
-    priors_mu_null = list(list(name = list(containsColumn = TRUE))), 
-    priors_omega = list(list(name = list(containsColumn = TRUE))), 
-    priors_omega_null = list(list(name = list(containsColumn = TRUE))), 
-    priors_tau = list(list(name = list(containsColumn = TRUE))), 
-    priors_tau_null = list(list(name = list(containsColumn = TRUE))))
-  options$advanced_adapt <- 500
-  options$advanced_burnin <- 1000
-  options$advanced_chains <- 2
-  options$advanced_control <- "clever"
-  options$advanced_iteration <- 4000
-  options$fitted_path <- ""
-  options$input_CI <- list()
-  options$input_ES <- "d"
-  options$input_SE <- "se"
-  options$plots_individual_mu <- TRUE
-  options$plots_individual_omega <- TRUE
-  options$plots_individual_tau <- TRUE
-  options$plots_mu <- TRUE
-  options$plots_omega <- TRUE
-  options$plots_tau <- TRUE
-  options$plots_theta <- TRUE
-  options$plots_theta_order <- "labels"
-  options$plots_theta_show <- "observed"
-  options$plots_type_individual_by <- "model"
-  options$plots_type_individual_order <- "ascending"
-  options$priors_mu <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$.meta <- list(inputCI = list(containsColumn = TRUE), inputSE = list(
+    containsColumn = TRUE), inputN = list(containsColumn = TRUE), 
+    inputN1 = list(containsColumn = TRUE), inputN2 = list(containsColumn = TRUE), 
+    inputSE = list(containsColumn = TRUE), inputLabels = list(
+      containsColumn = TRUE), inputT = list(containsColumn = TRUE), 
+    priorsMu = list(list(name = list(containsColumn = TRUE))), 
+    priorsMuNull = list(list(name = list(containsColumn = TRUE))), 
+    priorsOmega = list(list(name = list(containsColumn = TRUE))), 
+    priorsOmegaNull = list(list(name = list(containsColumn = TRUE))), 
+    priorsTau = list(list(name = list(containsColumn = TRUE))), 
+    priorsTauNull = list(list(name = list(containsColumn = TRUE))))
+  options$advancedAdapt <- 500
+  options$advancedBurnin <- 1000
+  options$advancedChains <- 2
+  options$advancedControl <- "clever"
+  options$advancedIteration <- 4000
+  options$fittedPath <- ""
+  options$inputCI <- list()
+  options$inputES <- "d"
+  options$inputSE <- "se"
+  options$plotsIndividualMu <- TRUE
+  options$plotsIndividualOmega <- TRUE
+  options$plotsIndividualTau <- TRUE
+  options$plotsMu <- TRUE
+  options$plotsOmega <- TRUE
+  options$plotsTau <- TRUE
+  options$plotsTheta <- TRUE
+  options$plotsThetaOrder <- "labels"
+  options$plotsThetaShow <- "observed"
+  options$plotsTypeIndividualBy <- "model"
+  options$plotsTypeIndividualOrder <- "ascending"
+  options$priorsMu <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                  parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                  parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                  truncationLower = "-Inf", truncationUpper = "Inf", type = "normal"))
-  options$priors_mu_null <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsMuNull <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                       parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                       parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                       truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
-  options$priors_omega <- list(list(name = "", parAlpha = "(1,1)", parAlpha1 = "(1,1,1)", 
+  options$priorsOmega <- list(list(name = "", parAlpha = "(1,1)", parAlpha1 = "(1,1,1)", 
                                     parAlpha2 = "(1,1)", parCuts = "(.05)", priorOdds = "1/2", 
                                     type = "Two-sided"))
-  options$priors_omega_null <- list(list(name = "", parAlpha = "(1,1,1)", parAlpha1 = "(1,1,1)", 
+  options$priorsOmegaNull <- list(list(name = "", parAlpha = "(1,1,1)", parAlpha1 = "(1,1,1)", 
                                          parAlpha2 = "(1,1)", parCuts = "(.05, .10)", priorOdds = "1", 
                                          type = "spike"))
-  options$priors_tau <- list(list(`	` = "1", name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsTau <- list(list(`	` = "1", name = "", parA = "0", parAlpha = "1", parB = "1", 
                                   parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                   parScale2 = "1", parShape = "1", priorOdds = "1", truncationLower = "0", 
                                   truncationUpper = "Inf", type = "invgamma"))
-  options$priors_tau_null <- list(list(`	` = "1", name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsTauNull <- list(list(`	` = "1", name = "", parA = "0", parAlpha = "1", parB = "1", 
                                        parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                        parScale2 = "1", parShape = "1", priorOdds = "1", truncationLower = "0", 
                                        truncationUpper = "Inf", type = "spike"))
-  options$results_conditional <- TRUE
-  options$results_models <- TRUE
-  options$results_models_BF <- "inclusion"
-  options$results_models_order <- "default"
-  options$save_path <- ""
+  options$resultsConditional <- TRUE
+  options$resultsModels <- TRUE
+  options$resultsModelsBF <- "inclusion"
+  options$resultsModelsOrder <- "default"
+  options$savePath  <- ""
   options$setSeed   <- TRUE
-  options$measures  <- "cohensd"
+  options$measures  <- "cohensD"
   set.seed(1)
   dataset <- structure(list(study = structure(c(1L, 3L, 2L), .Label = c("study one", 
                                                                         "study three", "study two"), class = "factor"), t = c(2.51, 2.39, 
@@ -468,7 +468,7 @@ fitted_path <- file.path("robmaFit.RDS")
   
   
   test_that("Model Averaged Estimates table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_averaged_summary"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(0, 0.169665754659546, 0.191326498116366, "Effect size (<unicode><unicode>)",
                                         0.332066667339197, 0, 0.0477941778146311, 0, "Heterogeneity (<unicode><unicode>)",
@@ -476,14 +476,14 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Model Averaged Weights (omega) table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_averaged_weights"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedWeights"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(1, 0, 1, 1, 1, 0.05, 0.00596182674913896, 0.05, 0.570655502031924,
                                         0.599436713343987, 1, 1))
   })
   
   test_that("Conditional Estimates table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_conditional_summary"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_conditionalSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(0.0631141049521503, 0.207480256967044, 0.21023752939073, "Effect size (<unicode><unicode>)",
                                         0.343879382227667, 0.0328510214539317, 0.153439804305514, 0.11916955264611,
@@ -491,14 +491,14 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Conditional Weights (omega) table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_conditional_weights"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_conditionalWeights"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(1, 0, 1, 1, 1, 0.05, 0.00406094432096918, 0.05, 0.292282803470328,
                                         0.193635893099643, 0.926616550463227, 1))
   })
   
   test_that("Models Overview table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_models_summary"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_modelsSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(0.00205868250507496, -5.25591676931767, 1, 0.000411567043840429,
                                         0.166666666666667, "Spike(0)", "Spike(1)", "Spike(0)", 0.50525583116313,
@@ -520,7 +520,7 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Model Summary table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_overall_summary"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_overallSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(4.43118258355616, "4/8", 0.815878036759863, 0.5, "Effect", 0.466562857443191,
                                         "4/8", 0.318133556345889, 0.5, "Heterogeneity", 3.09419254197774,
@@ -553,19 +553,19 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Effect size (Conditional Models) plot matches", {
-    plotName <- results[["results"]][["plots_individual"]][["collection"]][["plots_individual_mu"]][["data"]]
+    plotName <- results[["results"]][["plotsIndividual"]][["collection"]][["plotsIndividual_mu"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "effect-size-conditional-models-default-model", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Weights (Conditional Models) plot matches", {
-    plotName <- results[["results"]][["plots_individual"]][["collection"]][["plots_individual_omega"]][["data"]]
+    plotName <- results[["results"]][["plotsIndividual"]][["collection"]][["plotsIndividual_omega"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "weights-conditional-models-default-model", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Heterogeneity (Conditional Models) plot matches", {
-    plotName <- results[["results"]][["plots_individual"]][["collection"]][["plots_individual_tau"]][["data"]]
+    plotName <- results[["results"]][["plotsIndividual"]][["collection"]][["plotsIndividual_tau"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "heterogeneity-conditional-models-default-model", dir="RobustBayesianMetaAnalysis")
   })
@@ -575,58 +575,58 @@ fitted_path <- file.path("robmaFit.RDS")
 ### fit models with a truncated priors and t + se
 {
   options <- jaspTools::analysisOptions("RobustBayesianMetaAnalysis")
-  options$.meta <- list(input_CI = list(containsColumn = TRUE), input_ES = list(
-    containsColumn = TRUE), input_N = list(containsColumn = TRUE), 
-    input_N1 = list(containsColumn = TRUE), input_N2 = list(containsColumn = TRUE), 
-    input_SE = list(containsColumn = TRUE), input_labels = list(
-      containsColumn = TRUE), input_t = list(containsColumn = TRUE), 
-    priors_mu = list(list(name = list(containsColumn = TRUE))), 
-    priors_mu_null = list(list(name = list(containsColumn = TRUE))), 
-    priors_omega_null = list(list(name = list(containsColumn = TRUE))), 
-    priors_tau = list(list(name = list(containsColumn = TRUE))), 
-    priors_tau_null = list(list(name = list(containsColumn = TRUE))))
-  options$advanced_adapt <- 500
-  options$advanced_burnin <- 1000
-  options$advanced_chains <- 2
-  options$advanced_control <- "clever"
-  options$advanced_iteration <- 4000
-  options$fitted_path <- ""
-  options$input_CI <- list()
-  options$input_N <- "N"
-  options$input_t <- "t"
-  options$plots_mu <- TRUE
-  options$plots_tau <- TRUE
-  options$plots_theta <- TRUE
-  options$plots_theta_order <- "labels"
-  options$plots_theta_show <- "both"
-  options$plots_type <- "conditional"
-  options$plots_type_individual_by <- "model"
-  options$plots_type_individual_order <- "ascending"
-  options$priors_mu <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$.meta <- list(inputCI = list(containsColumn = TRUE), inputSE = list(
+    containsColumn = TRUE), inputN = list(containsColumn = TRUE), 
+    inputN1 = list(containsColumn = TRUE), inputN2 = list(containsColumn = TRUE), 
+    inputSE = list(containsColumn = TRUE), inputLabels = list(
+      containsColumn = TRUE), inputT = list(containsColumn = TRUE), 
+    priorsMu = list(list(name = list(containsColumn = TRUE))), 
+    priorsMuNull = list(list(name = list(containsColumn = TRUE))), 
+    priorsOmegaNull = list(list(name = list(containsColumn = TRUE))), 
+    priorsTau = list(list(name = list(containsColumn = TRUE))), 
+    priorsTauNull = list(list(name = list(containsColumn = TRUE))))
+  options$advancedAdapt <- 500
+  options$advancedBurnin <- 1000
+  options$advancedChains <- 2
+  options$advancedControl <- "clever"
+  options$advancedIteration <- 4000
+  options$fittedPath <- ""
+  options$inputCI <- list()
+  options$inputN <- "N"
+  options$inputT <- "t"
+  options$plotsMu <- TRUE
+  options$plotsTau <- TRUE
+  options$plotsTheta <- TRUE
+  options$plotsThetaOrder <- "labels"
+  options$plotsThetaShow <- "both"
+  options$plotsType <- "conditional"
+  options$plotsTypeIndividualBy <- "model"
+  options$plotsTypeIndividualOrder <- "ascending"
+  options$priorsMu <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                  parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                  parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                  truncationLower = ".5", truncationUpper = "Inf", type = "normal"))
-  options$priors_mu_null <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsMuNull <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                       parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                       parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                       truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
-  options$priors_omega <- list()
-  options$priors_omega_null <- list(list(name = "", parAlpha = "(1,1,1)", parAlpha1 = "(1,1)", 
+  options$priorsOmega <- list()
+  options$priorsOmegaNull <- list(list(name = "", parAlpha = "(1,1,1)", parAlpha1 = "(1,1)", 
                                          parAlpha2 = "(1,1)", parCuts = "(.05, .95)", priorOdds = "1", 
                                          type = "spike"))
-  options$priors_tau <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsTau <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                   parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                   parScale = ".3", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                   truncationLower = ".25", truncationUpper = ".50", type = "normal"))
-  options$priors_tau_null <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsTauNull <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                        parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                        parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                        truncationLower = "0", truncationUpper = "Inf", type = "spike"))
-  options$results_models_BF <- "inclusion"
-  options$results_models_order <- "default"
-  options$save_path <- ""
+  options$resultsModelsBF <- "inclusion"
+  options$resultsModelsOrder <- "default"
+  options$savePath <- ""
   options$setSeed   <- TRUE
-  options$measures  <- "cohensd"
+  options$measures  <- "cohensD"
   set.seed(1)
   dataset <- structure(list(study = structure(c(1L, 3L, 2L), .Label = c("study one", 
                                                                         "study three", "study two"), class = "factor"), t = c(2.51, 2.39, 
@@ -638,7 +638,7 @@ fitted_path <- file.path("robmaFit.RDS")
   
   
   test_that("Model Averaged Estimates table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_averaged_summary"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(0, 0.534682640935616, 0.559207684613504, "Effect size (<unicode><unicode>)",
                                         0.82869545419437, 0, 0.109533178282388, 0, "Heterogeneity (<unicode><unicode>)",
@@ -646,7 +646,7 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Model Summary table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_overall_summary"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_overallSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(9.25894234523558, "2/4", 0.902524064728328, 0.5, "Effect", 0.460233999357121,
                                         "2/4", 0.315178251951223, 0.5, "Heterogeneity", "", "0/4", 0,
@@ -675,55 +675,55 @@ fitted_path <- file.path("robmaFit.RDS")
 ### fit models with only an effect size, d + (N1 + N2) and names
 {
   options <- jaspTools::analysisOptions("RobustBayesianMetaAnalysis")
-  options$.meta <- list(input_CI = list(containsColumn = TRUE), input_ES = list(
-    containsColumn = TRUE), input_N = list(containsColumn = TRUE), 
-    input_N1 = list(containsColumn = TRUE), input_N2 = list(containsColumn = TRUE), 
-    input_SE = list(containsColumn = TRUE), input_labels = list(
-      containsColumn = TRUE), input_t = list(containsColumn = TRUE), 
-    priors_mu = list(list(name = list(containsColumn = TRUE))), 
-    priors_mu_null = list(list(name = list(containsColumn = TRUE))), 
-    priors_omega_null = list(list(name = list(containsColumn = TRUE))), 
-    priors_tau_null = list(list(name = list(containsColumn = TRUE))))
-  options$advanced_adapt <- 500
-  options$advanced_burnin <- 1000
-  options$advanced_chains <- 2
-  options$advanced_control <- "clever"
-  options$advanced_iteration <- 4000
-  options$fitted_path <- ""
-  options$input_CI <- list()
-  options$measures <- "cohensd"
-  options$input_ES <- "d"
-  options$input_N1 <- "N1"
-  options$input_N2 <- "N2"
-  options$input_labels <- "study"
-  options$plots_mu <- TRUE
-  options$plots_tau <- TRUE
-  options$plots_theta <- TRUE
-  options$plots_theta_order <- "labels"
-  options$plots_theta_show <- "observed"
-  options$plots_type_individual_by <- "model"
-  options$plots_type_individual_order <- "ascending"
-  options$priors_mu <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$.meta <- list(inputCI = list(containsColumn = TRUE), inputSE = list(
+    containsColumn = TRUE), inputN = list(containsColumn = TRUE), 
+    inputN1 = list(containsColumn = TRUE), inputN2 = list(containsColumn = TRUE), 
+    inputSE = list(containsColumn = TRUE), inputLabels = list(
+      containsColumn = TRUE), inputT = list(containsColumn = TRUE), 
+    priorsMu = list(list(name = list(containsColumn = TRUE))), 
+    priorsMuNull = list(list(name = list(containsColumn = TRUE))), 
+    priorsOmegaNull = list(list(name = list(containsColumn = TRUE))), 
+    priorsTauNull = list(list(name = list(containsColumn = TRUE))))
+  options$advancedAdapt <- 500
+  options$advancedBurnin <- 1000
+  options$advancedChains <- 2
+  options$advancedControl <- "clever"
+  options$advancedIteration <- 4000
+  options$fittedPath <- ""
+  options$inputCI <- list()
+  options$measures <- "cohensD"
+  options$inputES <- "d"
+  options$inputN1 <- "N1"
+  options$inputN2 <- "N2"
+  options$inputLabels <- "study"
+  options$plotsMu <- TRUE
+  options$plotsTau <- TRUE
+  options$plotsTheta <- TRUE
+  options$plotsThetaOrder <- "labels"
+  options$plotsThetaShow <- "observed"
+  options$plotsTypeIndividualBy <- "model"
+  options$plotsTypeIndividualOrder <- "ascending"
+  options$priorsMu <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                  parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                  parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                  truncationLower = "-Inf", truncationUpper = ".15", type = "invgamma"))
-  options$priors_mu_null <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsMuNull <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                       parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                       parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                       truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
-  options$priors_null <- TRUE
-  options$priors_omega <- list()
-  options$priors_omega_null <- list(list(name = "", parAlpha = "(1,1,1)", parAlpha1 = "(1,1)", 
+  options$priorsNull <- TRUE
+  options$priorsOmega <- list()
+  options$priorsOmegaNull <- list(list(name = "", parAlpha = "(1,1,1)", parAlpha1 = "(1,1)", 
                                          parAlpha2 = "(1,1)", parCuts = "(.05, .95)", priorOdds = "1", 
                                          type = "spike"))
-  options$priors_tau <- list()
-  options$priors_tau_null <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsTau <- list()
+  options$priorsTauNull <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                        parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                        parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                        truncationLower = "0", truncationUpper = "Inf", type = "spike"))
-  options$results_models_BF <- "inclusion"
-  options$results_models_order <- "default"
-  options$save_path <- ""
+  options$resultsModelsBF <- "inclusion"
+  options$resultsModelsOrder <- "default"
+  options$savePath <- ""
   options$setSeed <- TRUE
   set.seed(1)
   dataset <- structure(list(study = structure(c(1L, 3L, 2L), .Label = c("study one", 
@@ -736,7 +736,7 @@ fitted_path <- file.path("robmaFit.RDS")
   
   
   test_that("Model Averaged Estimates table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_averaged_summary"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(0, 0.0829965287384381, 0.0947435368896556, "Effect size (<unicode><unicode>)",
                                         0.147272648338966, 0, 0, 0, "Heterogeneity (<unicode><unicode>)",
@@ -744,7 +744,7 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Model Summary table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_overall_summary"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_overallSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(4.26762636300109, "1/2", 0.810161174865433, 0.5, "Effect", "",
                                         "0/2", 0, 0, "Heterogeneity", "", "0/2", 0, 0, "Publication bias"
@@ -773,52 +773,52 @@ fitted_path <- file.path("robmaFit.RDS")
 ### fit models with only one publication bias function, y + (lCI & uCI)
 {
   options <- jaspTools::analysisOptions("RobustBayesianMetaAnalysis")
-  options$.meta <- list(input_CI = list(containsColumn = TRUE), input_ES = list(
-    containsColumn = TRUE), input_N = list(containsColumn = TRUE), 
-    input_N1 = list(containsColumn = TRUE), input_N2 = list(containsColumn = TRUE), 
-    input_SE = list(containsColumn = TRUE), input_labels = list(
-      containsColumn = TRUE), input_t = list(containsColumn = TRUE), 
-    priors_mu_null = list(list(name = list(containsColumn = TRUE))), 
-    priors_omega = list(list(name = list(containsColumn = TRUE))), 
-    priors_omega_null = list(list(name = list(containsColumn = TRUE))), 
-    priors_tau_null = list(list(name = list(containsColumn = TRUE))))
-  options$advanced_adapt <- 500
-  options$advanced_burnin <- 1000
-  options$advanced_chains <- 2
-  options$advanced_control <- "clever"
-  options$advanced_iteration <- 4000
-  options$fitted_path <- ""
-  options$input_CI <- list(c("lCI", "uCI"))
-  options$input_ES <- "d"
+  options$.meta <- list(inputCI = list(containsColumn = TRUE), inputSE = list(
+    containsColumn = TRUE), inputN = list(containsColumn = TRUE), 
+    inputN1 = list(containsColumn = TRUE), inputN2 = list(containsColumn = TRUE), 
+    inputSE = list(containsColumn = TRUE), inputLabels = list(
+      containsColumn = TRUE), inputT = list(containsColumn = TRUE), 
+    priorsMuNull = list(list(name = list(containsColumn = TRUE))), 
+    priorsOmega = list(list(name = list(containsColumn = TRUE))), 
+    priorsOmegaNull = list(list(name = list(containsColumn = TRUE))), 
+    priorsTauNull = list(list(name = list(containsColumn = TRUE))))
+  options$advancedAdapt <- 500
+  options$advancedBurnin <- 1000
+  options$advancedChains <- 2
+  options$advancedControl <- "clever"
+  options$advancedIteration <- 4000
+  options$fittedPath <- ""
+  options$inputCI <- list(c("lCI", "uCI"))
+  options$inputES <- "d"
   options$measures <- "general"
-  options$plots_mu <- TRUE
-  options$plots_omega <- TRUE
-  options$plots_tau <- TRUE
-  options$plots_theta <- TRUE
-  options$plots_theta_order <- "labels"
-  options$plots_theta_show <- "both"
-  options$plots_type_individual_by <- "model"
-  options$plots_type_individual_order <- "ascending"
-  options$priors_mu <- list()
-  options$priors_mu_null <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$plotsMu <- TRUE
+  options$plotsOmega <- TRUE
+  options$plotsTau <- TRUE
+  options$plotsTheta <- TRUE
+  options$plotsThetaOrder <- "labels"
+  options$plotsThetaShow <- "both"
+  options$plotsTypeIndividualBy <- "model"
+  options$plotsTypeIndividualOrder <- "ascending"
+  options$priorsMu <- list()
+  options$priorsMuNull <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                       parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                       parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                       truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
-  options$priors_null <- TRUE
-  options$priors_omega <- list(list(name = "", parAlpha = "(1,1)", parAlpha1 = "(1,1)", 
+  options$priorsNull <- TRUE
+  options$priorsOmega <- list(list(name = "", parAlpha = "(1,1)", parAlpha1 = "(1,1)", 
                                     parAlpha2 = "(1,1)", parCuts = "(.05)", priorOdds = "1/2", 
                                     type = "Two-sided"))
-  options$priors_omega_null <- list(list(name = "", parAlpha = "(1,1,1)", parAlpha1 = "(1,1)", 
+  options$priorsOmegaNull <- list(list(name = "", parAlpha = "(1,1,1)", parAlpha1 = "(1,1)", 
                                          parAlpha2 = "(1,1)", parCuts = "(.05, .95)", priorOdds = "1", 
                                          type = "spike"))
-  options$priors_tau <- list()
-  options$priors_tau_null <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsTau <- list()
+  options$priorsTauNull <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                        parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                        parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                        truncationLower = "0", truncationUpper = "Inf", type = "spike"))
-  options$results_models_BF <- "inclusion"
-  options$results_models_order <- "default"
-  options$save_path <- ""
+  options$resultsModelsBF <- "inclusion"
+  options$resultsModelsOrder <- "default"
+  options$savePath <- ""
   options$setSeed <- TRUE
   set.seed(1)
   dataset <- structure(list(study = structure(c(1L, 3L, 2L), .Label = c("study one", 
@@ -831,21 +831,21 @@ fitted_path <- file.path("robmaFit.RDS")
   
   
   test_that("Model Averaged Estimates table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_averaged_summary"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(0, 0, 0, "Effect size (<unicode><unicode>)", 0, 0, 0, 0, "Heterogeneity (<unicode><unicode>)",
                                         0))
   })
   
   test_that("Model Averaged Weights (omega) table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_averaged_weights"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedWeights"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(1, 0, 1, 1, 1, 0.05, 0.000674752411048917, 0.05, 0.0614219245352222,
                                         0.0223643133148829, 0.389613651090792, 1))
   })
   
   test_that("Model Summary table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_overall_summary"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_overallSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list("", "0/2", 0, 0, "Effect", "", "0/2", 0, 0, "Heterogeneity", 208.336334775513,
                                         "1/2", 0.990491419363494, 0.333333333333333, "Publication bias"
@@ -880,48 +880,48 @@ fitted_path <- file.path("robmaFit.RDS")
 ### fit models with OR
 {
   options <- jaspTools::analysisOptions("RobustBayesianMetaAnalysis")
-  options$advanced_adapt <- 100
-  options$advanced_burnin <- 1000
-  options$advanced_chains <- 2
-  options$advanced_control <- "clever"
-  options$advanced_iteration <- 4000
-  options$advanced_mu_transform <- "cohens_d"
-  options$fitted_path <- ""
-  options$input_CI <- list(c("ORlCI", "ORuCI"))
-  options$input_ES <- "OR"
+  options$advancedAdapt <- 100
+  options$advancedBurnin <- 1000
+  options$advancedChains <- 2
+  options$advancedControl <- "clever"
+  options$advancedIteration <- 4000
+  options$advancedMuTransform <- "cohens_d"
+  options$fittedPath <- ""
+  options$inputCI <- list(c("ORlCI", "ORuCI"))
+  options$inputES <- "OR"
   options$measures <- "OR"
-  options$plots_individual_mu <- TRUE
-  options$plots_mu <- TRUE
-  options$plots_priors <- FALSE
-  options$plots_tau <- TRUE
-  options$plots_theta_order <- "labels"
-  options$plots_theta_show <- "observed"
-  options$plots_type_individual_by <- "model"
-  options$plots_type_individual_conditional <- FALSE
-  options$plots_type_individual_order <- "ascending"
-  options$priors_mu <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$plotsIndividualMu <- TRUE
+  options$plotsMu <- TRUE
+  options$plotsPriors <- FALSE
+  options$plotsTau <- TRUE
+  options$plotsThetaOrder <- "labels"
+  options$plotsThetaShow <- "observed"
+  options$plotsTypeIndividualBy <- "model"
+  options$plotsTypeIndividualConditional <- FALSE
+  options$plotsTypeIndividualOrder <- "ascending"
+  options$priorsMu <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                  parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                  parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                  truncationLower = "-Inf", truncationUpper = "Inf", type = "normal"))
-  options$priors_mu_null <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsMuNull <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                       parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                       parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                       truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
-  options$priors_null <- TRUE
-  options$priors_omega <- list(list(name = "", parAlpha = "(1,1)", parAlpha1 = "(1,1)", 
+  options$priorsNull <- TRUE
+  options$priorsOmega <- list(list(name = "", parAlpha = "(1,1)", parAlpha1 = "(1,1)", 
                                     parAlpha2 = "(1,1)", parCuts = "(.05)", priorOdds = "1/2", 
                                     type = "Two-sided"))
-  options$priors_omega_null <- list(list(name = "", parAlpha = "(1,1,1)", parAlpha1 = "(1,1)", 
+  options$priorsOmegaNull <- list(list(name = "", parAlpha = "(1,1,1)", parAlpha1 = "(1,1)", 
                                          parAlpha2 = "(1,1)", parCuts = "(.05, .95)", priorOdds = "1", 
                                          type = "spike"))
-  options$priors_tau <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsTau <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                   parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                   parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                   truncationLower = "0", truncationUpper = "Inf", type = "invgamma"))
-  options$priors_tau_null <- list()
-  options$results_models_BF <- "inclusion"
-  options$results_models_order <- "default"
-  options$save_path <- ""
+  options$priorsTauNull <- list()
+  options$resultsModelsBF <- "inclusion"
+  options$resultsModelsOrder <- "default"
+  options$savePath <- ""
   options$setSeed <- TRUE
   set.seed(1)
   dataset <- structure(list(study = c("study one", "study two", "study three"
@@ -934,7 +934,7 @@ fitted_path <- file.path("robmaFit.RDS")
   
   
   test_that("Model Averaged Estimates table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_averaged_summary"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(1, 1.01333388540875, 1, "Effect size (OR)", 1.18540483760199,
                                         0.0371927644147617, 0.0982566858849932, 0.0836211693769752,
@@ -942,14 +942,14 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Model Averaged Weights (omega) table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_averaged_weights"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedWeights"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(1, 0, 1, 1, 1, 0.05, 0.118453054690182, 0.05, 0.837781600778334,
                                         1, 1, 1))
   })
   
   test_that("Model Summary table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_overall_summary"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_overallSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(0.130780995822761, "2/4", 0.115655459638853, 0.5, "Effect", "",
                                         "4/4", 1, 1, "Heterogeneity", 0.9992699980938, "2/4", 0.333171071203623,
@@ -975,7 +975,7 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Effect size (Models) plot matches", {
-    plotName <- results[["results"]][["plots_individual"]][["collection"]][["plots_individual_mu"]][["data"]]
+    plotName <- results[["results"]][["plotsIndividual"]][["collection"]][["plotsIndividual_mu"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "effect-size-models-OR", dir="RobustBayesianMetaAnalysis")
   })
@@ -984,47 +984,47 @@ fitted_path <- file.path("robmaFit.RDS")
 ### fit models with expected negative effect sizes
 {
   options <- jaspTools::analysisOptions("RobustBayesianMetaAnalysis")
-  options$advanced_adapt <- 100
-  options$advanced_burnin <- 1000
-  options$advanced_chains <- 2
-  options$advanced_control <- "clever"
-  options$advanced_iteration <- 4000
-  options$advanced_mu_transform <- "cohens_d"
+  options$advancedAdapt <- 100
+  options$advancedBurnin <- 1000
+  options$advancedChains <- 2
+  options$advancedControl <- "clever"
+  options$advancedIteration <- 4000
+  options$advancedMuTransform <- "cohens_d"
   options$effect_direction <- "negative"
-  options$fitted_path <- ""
-  options$input_CI <- list()
-  options$input_ES <- "d"
-  options$input_SE <- "se"
+  options$fittedPath <- ""
+  options$inputCI <- list()
+  options$inputES <- "d"
+  options$inputSE <- "se"
   options$measures <- "general"
-  options$plots_mu <- TRUE
-  options$plots_priors <- FALSE
-  options$plots_theta_order <- "labels"
-  options$plots_theta_show <- "observed"
-  options$plots_type_individual_by <- "model"
-  options$plots_type_individual_order <- "ascending"
-  options$priors_mu <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$plotsMu <- TRUE
+  options$plotsPriors <- FALSE
+  options$plotsThetaOrder <- "labels"
+  options$plotsThetaShow <- "observed"
+  options$plotsTypeIndividualBy <- "model"
+  options$plotsTypeIndividualOrder <- "ascending"
+  options$priorsMu <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                  parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                  parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                  truncationLower = "-Inf", truncationUpper = "Inf", type = "normal"))
-  options$priors_mu_null <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsMuNull <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                       parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                       parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                       truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
-  options$priors_null <- TRUE
-  options$priors_omega <- list(list(name = "", parAlpha = "(1,1)", parAlpha1 = "(1,1)", 
+  options$priorsNull <- TRUE
+  options$priorsOmega <- list(list(name = "", parAlpha = "(1,1)", parAlpha1 = "(1,1)", 
                                     parAlpha2 = "(1,1)", parCuts = "(.05)", priorOdds = "1/2", 
                                     type = "Two-sided"))
-  options$priors_omega_null <- list(list(name = "", parAlpha = "(1,1,1)", parAlpha1 = "(1,1)", 
+  options$priorsOmegaNull <- list(list(name = "", parAlpha = "(1,1,1)", parAlpha1 = "(1,1)", 
                                          parAlpha2 = "(1,1)", parCuts = "(.05, .95)", priorOdds = "1", 
                                          type = "spike"))
-  options$priors_tau <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsTau <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                   parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                   parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                   truncationLower = "0", truncationUpper = "Inf", type = "invgamma"))
-  options$priors_tau_null <- list()
-  options$results_models_BF <- "inclusion"
-  options$results_models_order <- "default"
-  options$save_path <- ""
+  options$priorsTauNull <- list()
+  options$resultsModelsBF <- "inclusion"
+  options$resultsModelsOrder <- "default"
+  options$savePath <- ""
   options$setSeed <- TRUE
   set.seed(1)
   dataset <- structure(list(study = c("study one", "study two", "study three"
@@ -1037,25 +1037,25 @@ fitted_path <- file.path("robmaFit.RDS")
   
   
   test_that("Model Averaged Estimates table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_averaged_summary"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(0, 0.11826509675055, 0.0995698554410775, "Effect size (<unicode><unicode>)",
-                                        0.372134557264076, 0.035955840992465, 0.154260541029145, 0.119570139652762,
-                                        "Heterogeneity (<unicode><unicode>)", 0.469638848770951))
+                                   list(0, 0.11849465045327, 0.102774650217037, "Effect size (<unicode><unicode>)",
+                                        0.367906824223158, 0.152480112226528, 0.0343895409531826, 0.119932781605495,
+                                        "Heterogeneity (<unicode><unicode>)", 0.463396512265461))
   })
   
   test_that("Model Averaged Weights (omega) table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_averaged_weights"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedWeights"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(1, 0, 1, 1, 1, 0.05, 0.00582114173858658, 0.05, 0.510998270527382,
-                                        0.406813109412256, 1, 1))
+                                   list(1, 0, 1, 1, 1, 0.05, 0.00466462118502418, 0.05, 0.519664115759027,
+                                        0.438789179669389, 1, 1))
   })
   
   test_that("Model Summary table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_overall_summary"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_overallSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(1.27687429585802, "2/4", 0.560801401368907, 0.5, "Effect", "",
-                                        "4/4", 1, 1, "Heterogeneity", 3.76222968648841, "2/4", 0.652912134917199,
+                                   list(1.29307535860093, "2/4", 0.563904432425576, 0.5, "Effect", "",
+                                        "4/4", 1, 1, "Heterogeneity", 3.70602699822018, "2/4", 0.64949342149558,
                                         0.333333333333333, "Publication bias"))
   })
   
@@ -1069,71 +1069,71 @@ fitted_path <- file.path("robmaFit.RDS")
 ### more options tested using a preloaded model
 {
   options <- jaspTools::analysisOptions("RobustBayesianMetaAnalysis")
-  options$.meta <- list(input_CI = list(containsColumn = TRUE), input_ES = list(
-    containsColumn = TRUE), input_N = list(containsColumn = TRUE), 
-    input_N1 = list(containsColumn = TRUE), input_N2 = list(containsColumn = TRUE), 
-    input_SE = list(containsColumn = TRUE), input_labels = list(
-      containsColumn = TRUE), input_t = list(containsColumn = TRUE), 
-    priors_mu = list(list(name = list(containsColumn = TRUE))), 
-    priors_mu_null = list(list(name = list(containsColumn = TRUE))), 
-    priors_omega = list(list(name = list(containsColumn = TRUE)), 
-                        list(name = list(containsColumn = TRUE))), priors_omega_null = list(
-                          list(name = list(containsColumn = TRUE))), priors_tau = list(
-                            list(name = list(containsColumn = TRUE))), priors_tau_null = list(
+  options$.meta <- list(inputCI = list(containsColumn = TRUE), inputSE = list(
+    containsColumn = TRUE), inputN = list(containsColumn = TRUE), 
+    inputN1 = list(containsColumn = TRUE), inputN2 = list(containsColumn = TRUE), 
+    inputSE = list(containsColumn = TRUE), inputLabels = list(
+      containsColumn = TRUE), inputT = list(containsColumn = TRUE), 
+    priorsMu = list(list(name = list(containsColumn = TRUE))), 
+    priorsMuNull = list(list(name = list(containsColumn = TRUE))), 
+    priorsOmega = list(list(name = list(containsColumn = TRUE)), 
+                        list(name = list(containsColumn = TRUE))), priorsOmegaNull = list(
+                          list(name = list(containsColumn = TRUE))), priorsTau = list(
+                            list(name = list(containsColumn = TRUE))), priorsTauNull = list(
                               list(name = list(containsColumn = TRUE))))
-  options$advanced_control <- "clever"
-  options$diagnostics_autocorrelation <- TRUE
-  options$diagnostics_mu <- TRUE
-  options$diagnostics_omega <- TRUE
-  options$diagnostics_overview <- TRUE
-  options$diagnostics_samples <- TRUE
-  options$diagnostics_single <- TRUE
-  options$diagnostics_single_model <- 12
-  options$diagnostics_tau <- TRUE
-  options$diagnostics_trace <- TRUE
-  options$fitted_path <- fitted_path
-  options$input_CI <- list()
+  options$advancedControl <- "clever"
+  options$diagnosticsAutocorrelation <- TRUE
+  options$diagnosticsMu <- TRUE
+  options$diagnosticsOmega <- TRUE
+  options$diagnosticsOverview <- TRUE
+  options$diagnosticsSamples <- TRUE
+  options$diagnosticsSingle <- TRUE
+  options$diagnosticsSingleModel <- 12
+  options$diagnosticsTau <- TRUE
+  options$diagnosticsTrace <- TRUE
+  options$fittedPath <- fittedPath
+  options$inputCI <- list()
   options$measures <- "fitted"
-  options$plots_mu <- TRUE
-  options$plots_omega <- TRUE
-  options$plots_tau <- TRUE
-  options$plots_theta <- TRUE
-  options$plots_theta_order <- "labels"
-  options$plots_theta_show <- "observed"
-  options$plots_type <- "conditional"
-  options$plots_type_individual_by <- "model"
-  options$plots_type_individual_order <- "ascending"
-  options$priors_mu <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$plotsMu <- TRUE
+  options$plotsOmega <- TRUE
+  options$plotsTau <- TRUE
+  options$plotsTheta <- TRUE
+  options$plotsThetaOrder <- "labels"
+  options$plotsThetaShow <- "observed"
+  options$plotsType <- "conditional"
+  options$plotsTypeIndividualBy <- "model"
+  options$plotsTypeIndividualOrder <- "ascending"
+  options$priorsMu <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                  parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                  parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                  truncationLower = "-Inf", truncationUpper = "Inf", type = "normal"))
-  options$priors_mu_null <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsMuNull <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                       parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                       parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                       truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
-  options$priors_omega <- list(list(name = "", parAlpha = "(1,1)", parAlpha1 = "(1,1,1)", 
+  options$priorsOmega <- list(list(name = "", parAlpha = "(1,1)", parAlpha1 = "(1,1,1)", 
                                     parAlpha2 = "(1,1)", parCuts = "(.05)", priorOdds = "1/2", 
                                     type = "Two-sided"), list(name = "2", parAlpha = "(1,1,1)", 
                                                               parAlpha1 = "(1,1,1)", parAlpha2 = "(1,1)", parCuts = "(.05, .10)", 
                                                               priorOdds = "1/2", type = "Two-sided"))
-  options$priors_omega_null <- list(list(name = "", parAlpha = "(1,1,1)", parAlpha1 = "(1,1,1)", 
+  options$priorsOmegaNull <- list(list(name = "", parAlpha = "(1,1,1)", parAlpha1 = "(1,1,1)", 
                                          parAlpha2 = "(1,1)", parCuts = "(.05, .10)", priorOdds = "1", 
                                          type = "spike"))
-  options$priors_tau <- list(list(`	` = "1", name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsTau <- list(list(`	` = "1", name = "", parA = "0", parAlpha = "1", parB = "1", 
                                   parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                   parScale2 = "1", parShape = "1", priorOdds = "1", truncationLower = "0", 
                                   truncationUpper = "Inf", type = "invgamma"))
-  options$priors_tau_null <- list(list(`	` = "1", name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsTauNull <- list(list(`	` = "1", name = "", parA = "0", parAlpha = "1", parB = "1", 
                                        parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                        parScale2 = "1", parShape = "1", priorOdds = "1", truncationLower = "0", 
                                        truncationUpper = "Inf", type = "spike"))
-  options$results_individual <- TRUE
-  options$results_individual_single <- TRUE
-  options$results_individual_single_number <- 12
-  options$results_models_BF <- "inclusion"
-  options$results_models_order <- "default"
-  options$results_theta <- TRUE
-  options$save_path <- ""
+  options$resultsIndividual <- TRUE
+  options$resultsIndividualSingle <- TRUE
+  options$resultsIndividualSingleNumber <- 12
+  options$resultsModelsBF <- "inclusion"
+  options$resultsModelsOrder <- "default"
+  options$resultsTheta <- TRUE
+  options$savePath <- ""
   set.seed(1)
   dataset <- NULL
   results <- jaspTools::runAnalysis("RobustBayesianMetaAnalysis", dataset, options)
@@ -1212,7 +1212,7 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Models Diagnostics Overview table results match", {
-    table <- results[["results"]][["diagnostics"]][["collection"]][["diagnostics_models_diagnostics"]][["data"]]
+    table <- results[["results"]][["diagnostics"]][["collection"]][["diagnostics_modelsDiagnostics"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list("", "", "", 1, "Spike(0)", "Spike(1)", "Spike(0)", 2777, 1.00024441617386,
                                         0.00490177334310956, 2, "Spike(0)", "Two-sided((0.05), (1, 1))",
@@ -1237,7 +1237,7 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Model Estimates table results match", {
-    table <- results[["results"]][["individual_models"]][["collection"]][["individual_models_model_12"]][["collection"]][["individual_models_model_12_temp_coef"]][["data"]]
+    table <- results[["results"]][["individualModels"]][["collection"]][["individualModels_model_12"]][["collection"]][["individualModels_model_12_tempCoef"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(0.00740936798507717, 882, -0.298112954433753, 0.144543359786274,
                                         0.145610118691597, 1.00327918764033, "Effect size (<unicode><unicode>)",
@@ -1247,21 +1247,21 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Information table results match", {
-    table <- results[["results"]][["individual_models"]][["collection"]][["individual_models_model_12"]][["collection"]][["individual_models_model_12_temp_info"]][["data"]]
+    table <- results[["results"]][["individualModels"]][["collection"]][["individualModels_model_12"]][["collection"]][["individualModels_model_12_tempInfo"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(0.180259295733511, -2.59886113749133, 0.0118745860806326, 0.0625
                                    ))
   })
   
   test_that("Priors table results match", {
-    table <- results[["results"]][["individual_models"]][["collection"]][["individual_models_model_12"]][["collection"]][["individual_models_model_12_temp_priors"]][["data"]]
+    table <- results[["results"]][["individualModels"]][["collection"]][["individualModels_model_12"]][["collection"]][["individualModels_model_12_tempPriors"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list("Normal(0, 1)[-Inf, Inf]", "Two-sided((0.1, 0.05), (1, 1, 1))",
                                         "InvGamma(1, 0.15)[0, Inf]"))
   })
   
   test_that("Estimated Studies' Effects (theta) table results match", {
-    table <- results[["results"]][["individual_models"]][["collection"]][["individual_models_model_12"]][["collection"]][["individual_models_model_12_temp_studies"]][["data"]]
+    table <- results[["results"]][["individualModels"]][["collection"]][["individualModels_model_12"]][["collection"]][["individualModels_model_12_tempStudies"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(0.00775853627019784, 855, -0.270720099051176, 0.170035632027558,
                                         0.164009336133295, 1.00189805889533, "Study 1", 0.62568049934064,
@@ -1273,7 +1273,7 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Estimated Weights (omega) table results match", {
-    table <- results[["results"]][["individual_models"]][["collection"]][["individual_models_model_12"]][["collection"]][["individual_models_model_12_temp_weights"]][["data"]]
+    table <- results[["results"]][["individualModels"]][["collection"]][["individualModels_model_12"]][["collection"]][["individualModels_model_12_tempWeights"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list("<unicode><unicode><unicode>", 0, 1, 0, 1, 1, 1.00014949817136,
                                         1, 0.05, 0.0042290972515831, 2222, 0.279161804717707, 0.05,
@@ -1283,7 +1283,7 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Model Averaged Estimates table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_averaged_summary"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(-0.00991677655357163, 0.0479103036200819, 0, "Effect size (<unicode><unicode>)",
                                         0.383326476049302, 0, 0.0604137113604334, 0, "Heterogeneity (<unicode><unicode>)",
@@ -1291,7 +1291,7 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Model Averaged Weights (omega) table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_averaged_weights"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedWeights"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(1, 0, 1, 1, 1, 0.05, 0.296099177059036, 0.05, 0.844054390777628,
                                         1, 1, 0.1, 0.135752446058477, 0.1, 0.802984432472739, 1, 1,
@@ -1299,7 +1299,7 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Model Summary table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_overall_summary"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_overallSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(0.282649411599802, "6/12", 0.220363732321261, 0.5, "Effect", 0.571597012412967,
                                         "6/12", 0.36370456796387, 0.5, "Heterogeneity", 0.638872869773129,
@@ -1307,7 +1307,7 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Model Averaged Estimated Studies' Effects (theta) table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_studies_summary"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_studiesSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(-0.149488348181656, 0.0498797243212219, 0, "Study 1", 0.41948827590209,
                                         -0.200369344814511, 0.0409334110180495, 0, "Study 2", 0.440573849075256,
@@ -1341,71 +1341,71 @@ fitted_path <- file.path("robmaFit.RDS")
 }
 {
   options <- jaspTools::analysisOptions("RobustBayesianMetaAnalysis")
-  options$.meta <- list(input_CI = list(containsColumn = TRUE), input_ES = list(
-    containsColumn = TRUE), input_N = list(containsColumn = TRUE), 
-    input_N1 = list(containsColumn = TRUE), input_N2 = list(containsColumn = TRUE), 
-    input_SE = list(containsColumn = TRUE), input_labels = list(
-      containsColumn = TRUE), input_t = list(containsColumn = TRUE), 
-    priors_mu = list(list(name = list(containsColumn = TRUE))), 
-    priors_mu_null = list(list(name = list(containsColumn = TRUE))), 
-    priors_omega = list(list(name = list(containsColumn = TRUE)), 
-                        list(name = list(containsColumn = TRUE))), priors_omega_null = list(
-                          list(name = list(containsColumn = TRUE))), priors_tau = list(
-                            list(name = list(containsColumn = TRUE))), priors_tau_null = list(
+  options$.meta <- list(inputCI = list(containsColumn = TRUE), inputSE = list(
+    containsColumn = TRUE), inputN = list(containsColumn = TRUE), 
+    inputN1 = list(containsColumn = TRUE), inputN2 = list(containsColumn = TRUE), 
+    inputSE = list(containsColumn = TRUE), inputLabels = list(
+      containsColumn = TRUE), inputT = list(containsColumn = TRUE), 
+    priorsMu = list(list(name = list(containsColumn = TRUE))), 
+    priorsMuNull = list(list(name = list(containsColumn = TRUE))), 
+    priorsOmega = list(list(name = list(containsColumn = TRUE)), 
+                        list(name = list(containsColumn = TRUE))), priorsOmegaNull = list(
+                          list(name = list(containsColumn = TRUE))), priorsTau = list(
+                            list(name = list(containsColumn = TRUE))), priorsTauNull = list(
                               list(name = list(containsColumn = TRUE))))
-  options$advanced_control <- "clever"
+  options$advancedControl <- "clever"
   options$bayesFactorType <- "BF01"
-  options$diagnostics_single_model <- 12
-  options$diagnostics_transformed <- FALSE
-  options$fitted_path <- fitted_path
-  options$input_CI <- list()
+  options$diagnosticsSingleModel <- 12
+  options$diagnosticsTransformed <- FALSE
+  options$fittedPath <- fittedPath
+  options$inputCI <- list()
   options$measures <- "fitted"
-  options$plots_mu <- TRUE
-  options$plots_omega <- TRUE
-  options$plots_priors <- FALSE
-  options$plots_tau <- TRUE
-  options$plots_theta <- TRUE
-  options$plots_theta_order <- "ascending"
-  options$plots_theta_show <- "both"
-  options$plots_type_individual_by <- "model"
-  options$plots_type_individual_order <- "ascending"
-  options$priors_mu <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$plotsMu <- TRUE
+  options$plotsOmega <- TRUE
+  options$plotsPriors <- FALSE
+  options$plotsTau <- TRUE
+  options$plotsTheta <- TRUE
+  options$plotsThetaOrder <- "ascending"
+  options$plotsThetaShow <- "both"
+  options$plotsTypeIndividualBy <- "model"
+  options$plotsTypeIndividualOrder <- "ascending"
+  options$priorsMu <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                  parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                  parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                  truncationLower = "-Inf", truncationUpper = "Inf", type = "normal"))
-  options$priors_mu_null <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsMuNull <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                       parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                       parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                       truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
-  options$priors_omega <- list(list(name = "", parAlpha = "(1,1)", parAlpha1 = "(1,1,1)", 
+  options$priorsOmega <- list(list(name = "", parAlpha = "(1,1)", parAlpha1 = "(1,1,1)", 
                                     parAlpha2 = "(1,1)", parCuts = "(.05)", priorOdds = "1/2", 
                                     type = "Two-sided"), list(name = "2", parAlpha = "(1,1,1)", 
                                                               parAlpha1 = "(1,1,1)", parAlpha2 = "(1,1)", parCuts = "(.05, .10)", 
                                                               priorOdds = "1/2", type = "Two-sided"))
-  options$priors_omega_null <- list(list(name = "", parAlpha = "(1,1,1)", parAlpha1 = "(1,1,1)", 
+  options$priorsOmegaNull <- list(list(name = "", parAlpha = "(1,1,1)", parAlpha1 = "(1,1,1)", 
                                          parAlpha2 = "(1,1)", parCuts = "(.05, .10)", priorOdds = "1", 
                                          type = "spike"))
-  options$priors_tau <- list(list(`	` = "1", name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsTau <- list(list(`	` = "1", name = "", parA = "0", parAlpha = "1", parB = "1", 
                                   parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                   parScale2 = "1", parShape = "1", priorOdds = "1", truncationLower = "0", 
                                   truncationUpper = "Inf", type = "invgamma"))
-  options$priors_tau_null <- list(list(`	` = "1", name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsTauNull <- list(list(`	` = "1", name = "", parA = "0", parAlpha = "1", parB = "1", 
                                        parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                        parScale2 = "1", parShape = "1", priorOdds = "1", truncationLower = "0", 
                                        truncationUpper = "Inf", type = "spike"))
-  options$results_CI <- 0.8
-  options$results_individual_single <- TRUE
-  options$results_individual_single_number <- 12
-  options$results_models_BF <- "inclusion"
-  options$results_models_order <- "default"
-  options$save_path <- ""
+  options$resultsCI <- 0.8
+  options$resultsIndividualSingle <- TRUE
+  options$resultsIndividualSingleNumber <- 12
+  options$resultsModelsBF <- "inclusion"
+  options$resultsModelsOrder <- "default"
+  options$savePath <- ""
   set.seed(1)
   dataset <- NULL
   results <- jaspTools::runAnalysis("RobustBayesianMetaAnalysis", dataset, options)
   
   
   test_that("Model Averaged Estimates table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_averaged_summary"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(0, 0.0479103036200819, 0, "Effect size (<unicode><unicode>)",
                                         0.19312376220552, 0, 0.0604137113604334, 0, "Heterogeneity (<unicode><unicode>)",
@@ -1413,7 +1413,7 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Model Averaged Weights (omega) table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_averaged_weights"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedWeights"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(1, 0, 1, 1, 1, 0.05, 0.493442571534098, 0.05, 0.844054390777628,
                                         1, 1, 0.1, 0.323336867699399, 0.1, 0.802984432472739, 1, 1,
@@ -1421,7 +1421,7 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Model Summary table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_overall_summary"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_overallSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(3.53795181932266, "6/12", 0.220363732321261, 0.5, "Effect", 1.74948430149862,
                                         "6/12", 0.36370456796387, 0.5, "Heterogeneity", 1.5652566376079,
@@ -1460,65 +1460,65 @@ fitted_path <- file.path("robmaFit.RDS")
 }
 {
   options <- jaspTools::analysisOptions("RobustBayesianMetaAnalysis")
-  options$.meta <- list(input_CI = list(containsColumn = TRUE), input_ES = list(
-    containsColumn = TRUE), input_N = list(containsColumn = TRUE), 
-    input_N1 = list(containsColumn = TRUE), input_N2 = list(containsColumn = TRUE), 
-    input_SE = list(containsColumn = TRUE), input_labels = list(
-      containsColumn = TRUE), input_t = list(containsColumn = TRUE), 
-    priors_mu = list(list(name = list(containsColumn = TRUE))), 
-    priors_mu_null = list(list(name = list(containsColumn = TRUE))), 
-    priors_omega = list(list(name = list(containsColumn = TRUE)), 
-                        list(name = list(containsColumn = TRUE))), priors_omega_null = list(
-                          list(name = list(containsColumn = TRUE))), priors_tau = list(
-                            list(name = list(containsColumn = TRUE))), priors_tau_null = list(
+  options$.meta <- list(inputCI = list(containsColumn = TRUE), inputSE = list(
+    containsColumn = TRUE), inputN = list(containsColumn = TRUE), 
+    inputN1 = list(containsColumn = TRUE), inputN2 = list(containsColumn = TRUE), 
+    inputSE = list(containsColumn = TRUE), inputLabels = list(
+      containsColumn = TRUE), inputT = list(containsColumn = TRUE), 
+    priorsMu = list(list(name = list(containsColumn = TRUE))), 
+    priorsMuNull = list(list(name = list(containsColumn = TRUE))), 
+    priorsOmega = list(list(name = list(containsColumn = TRUE)), 
+                        list(name = list(containsColumn = TRUE))), priorsOmegaNull = list(
+                          list(name = list(containsColumn = TRUE))), priorsTau = list(
+                            list(name = list(containsColumn = TRUE))), priorsTauNull = list(
                               list(name = list(containsColumn = TRUE))))
-  options$advanced_control <- "clever"
+  options$advancedControl <- "clever"
   options$bayesFactorType <- "LogBF10"
-  options$diagnostics_single_model <- 12
-  options$diagnostics_transformed <- FALSE
-  options$fitted_path <- fitted_path
-  options$input_CI <- list()
+  options$diagnosticsSingleModel <- 12
+  options$diagnosticsTransformed <- FALSE
+  options$fittedPath <- fittedPath
+  options$inputCI <- list()
   options$measures <- "fitted"
-  options$plots_individual_mu <- TRUE
-  options$plots_individual_omega <- TRUE
-  options$plots_individual_tau <- TRUE
-  options$plots_priors <- FALSE
-  options$plots_theta <- TRUE
-  options$plots_theta_order <- "descending"
-  options$plots_theta_show <- "observed"
-  options$plots_type_individual_by <- "prob"
-  options$plots_type_individual_conditional <- FALSE
-  options$plots_type_individual_order <- "descending"
-  options$priors_mu <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$plotsIndividualMu <- TRUE
+  options$plotsIndividualOmega <- TRUE
+  options$plotsIndividualTau <- TRUE
+  options$plotsPriors <- FALSE
+  options$plotsTheta <- TRUE
+  options$plotsThetaOrder <- "descending"
+  options$plotsThetaShow <- "observed"
+  options$plotsTypeIndividualBy <- "prob"
+  options$plotsTypeIndividualConditional <- FALSE
+  options$plotsTypeIndividualOrder <- "descending"
+  options$priorsMu <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                  parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                  parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                  truncationLower = "-Inf", truncationUpper = "Inf", type = "normal"))
-  options$priors_mu_null <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsMuNull <- list(list(name = "", parA = "0", parAlpha = "1", parB = "1", 
                                       parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                       parScale = "1", parScale2 = "1", parShape = "1", priorOdds = "1", 
                                       truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
-  options$priors_omega <- list(list(name = "", parAlpha = "(1,1)", parAlpha1 = "(1,1,1)", 
+  options$priorsOmega <- list(list(name = "", parAlpha = "(1,1)", parAlpha1 = "(1,1,1)", 
                                     parAlpha2 = "(1,1)", parCuts = "(.05)", priorOdds = "1/2", 
                                     type = "Two-sided"), list(name = "2", parAlpha = "(1,1,1)", 
                                                               parAlpha1 = "(1,1,1)", parAlpha2 = "(1,1)", parCuts = "(.05, .10)", 
                                                               priorOdds = "1/2", type = "Two-sided"))
-  options$priors_omega_null <- list(list(name = "", parAlpha = "(1,1,1)", parAlpha1 = "(1,1,1)", 
+  options$priorsOmegaNull <- list(list(name = "", parAlpha = "(1,1,1)", parAlpha1 = "(1,1,1)", 
                                          parAlpha2 = "(1,1)", parCuts = "(.05, .10)", priorOdds = "1", 
                                          type = "spike"))
-  options$priors_tau <- list(list(`	` = "1", name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsTau <- list(list(`	` = "1", name = "", parA = "0", parAlpha = "1", parB = "1", 
                                   parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                   parScale2 = "1", parShape = "1", priorOdds = "1", truncationLower = "0", 
                                   truncationUpper = "Inf", type = "invgamma"))
-  options$priors_tau_null <- list(list(`	` = "1", name = "", parA = "0", parAlpha = "1", parB = "1", 
+  options$priorsTauNull <- list(list(`	` = "1", name = "", parA = "0", parAlpha = "1", parB = "1", 
                                        parBeta = "0.15", parDF = "2", parLocation = "0", parMean = "0", 
                                        parScale2 = "1", parShape = "1", priorOdds = "1", truncationLower = "0", 
                                        truncationUpper = "Inf", type = "spike"))
-  options$results_CI <- 0.8
-  options$results_individual_single <- TRUE
-  options$results_individual_single_number <- 12
-  options$results_models_BF <- "inclusion"
-  options$results_models_order <- "default"
-  options$save_path <- ""
+  options$resultsCI <- 0.8
+  options$resultsIndividualSingle <- TRUE
+  options$resultsIndividualSingleNumber <- 12
+  options$resultsModelsBF <- "inclusion"
+  options$resultsModelsOrder <- "default"
+  options$savePath <- ""
   set.seed(1)
   dataset <- NULL
   
@@ -1526,7 +1526,7 @@ fitted_path <- file.path("robmaFit.RDS")
   
   
   test_that("Model Averaged Estimates table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_averaged_summary"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(0, 0.0479103036200819, 0, "Effect size (<unicode><unicode>)",
                                         0.19312376220552, 0, 0.0604137113604334, 0, "Heterogeneity (<unicode><unicode>)",
@@ -1534,7 +1534,7 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Model Averaged Weights (omega) table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_averaged_weights"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedWeights"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(1, 0, 1, 1, 1, 0.05, 0.493442571534098, 0.05, 0.844054390777628,
                                         1, 1, 0.1, 0.323336867699399, 0.1, 0.802984432472739, 1, 1,
@@ -1542,7 +1542,7 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Model Summary table results match", {
-    table <- results[["results"]][["main_summary"]][["collection"]][["main_summary_overall_summary"]][["data"]]
+    table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_overallSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(-1.26354797759022, "6/12", 0.220363732321261, 0.5, "Effect", -0.559321059649379,
                                         "6/12", 0.36370456796387, 0.5, "Heterogeneity", -0.448049796239885,
@@ -1556,25 +1556,25 @@ fitted_path <- file.path("robmaFit.RDS")
   })
   
   test_that("Effect size (Models) (all models, descending by post. prob) plot matches", {
-    plotName <- results[["results"]][["plots_individual"]][["collection"]][["plots_individual_mu"]][["data"]]
+    plotName <- results[["results"]][["plotsIndividual"]][["collection"]][["plotsIndividual_mu"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "effect-size-models-prefitted-3", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Weights (Models) (all models, descending by post. prob) plot matches", {
-    plotName <- results[["results"]][["plots_individual"]][["collection"]][["plots_individual_omega"]][["collection"]][["plots_individual_omega_plot_1"]][["data"]]
+    plotName <- results[["results"]][["plotsIndividual"]][["collection"]][["plotsIndividual_omega"]][["collection"]][["plotsIndividual_omega_plot_1"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "weight-1-models-prefitted-3", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Weights (Models) (all models, descending by post. prob) plot matches", {
-    plotName <- results[["results"]][["plots_individual"]][["collection"]][["plots_individual_omega"]][["collection"]][["plots_individual_omega_plot_2"]][["data"]]
+    plotName <- results[["results"]][["plotsIndividual"]][["collection"]][["plotsIndividual_omega"]][["collection"]][["plotsIndividual_omega_plot_2"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "weight-2-models-prefitted-3", dir="RobustBayesianMetaAnalysis")
   })
   
   test_that("Heterogeneity (Models) (all models, descending by post. prob) plot matches", {
-    plotName <- results[["results"]][["plots_individual"]][["collection"]][["plots_individual_tau"]][["data"]]
+    plotName <- results[["results"]][["plotsIndividual"]][["collection"]][["plotsIndividual_tau"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "heterogeneity-models-prefitted-3", dir="RobustBayesianMetaAnalysis")
   })

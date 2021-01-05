@@ -24,12 +24,12 @@ Form
 {
 	property var listVisibility :
 	{
-		"inputT" :	{ values: ["cohensd"]					, id: inputT	, check2Sample: false },
-		"inputSE":	{ values: ["cohensd", "general"]		, id: inputSE	, check2Sample: false },
-		"inputCI":	{ values: ["cohensd", "general", "OR"]	, id: inputCI	, check2Sample: false },
-		"inputN" :	{ values: ["cohensd", "correlation"]	, id: inputN	, check2Sample: false },
-		"inputN1":	{ values: ["cohensd"]					, id: inputN1	, check2Sample: true  },
-		"inputN2":	{ values: ["cohensd"]					, id: inputN2	, check2Sample: true  },
+		"inputT" :	{ values: ["cohensD"]					, id: inputT	, check2Sample: false },
+		"inputSE":	{ values: ["cohensD", "general"]		, id: inputSE	, check2Sample: false },
+		"inputCI":	{ values: ["cohensD", "general", "OR"]	, id: inputCI	, check2Sample: false },
+		"inputN" :	{ values: ["cohensD", "correlation"]	, id: inputN	, check2Sample: false },
+		"inputN1":	{ values: ["cohensD"]					, id: inputN1	, check2Sample: true  },
+		"inputN2":	{ values: ["cohensD"]					, id: inputN2	, check2Sample: true  },
 	}
 
 	function checkListVisibility(name)
@@ -50,7 +50,7 @@ Form
 		onValueChanged:
 		{
 			if(measuresCorrelation.checked)
-				advancedMuTransformCohensD.click()
+				advancedMuTransformcohensD.click()
 			else if (measuresOR.checked)
 				advancedMuTransformLogOR.click()
 
@@ -65,7 +65,7 @@ Form
 		RadioButton
 		{
 			label:		qsTr("Cohen's d / t-statistics & N / SE")
-			value:		"cohensd"
+			value:		"cohensD"
 			id:			measuresCohensD
 			enabled:	mainWindow.dataAvailable
 			checked:	mainWindow.dataAvailable
@@ -1899,7 +1899,7 @@ Form
 				label:		qsTr("Cohen's d")
 				value:		"cohens_d"
 				visible:	measuresCorrelation.checked || measuresOR.checked
-				id:			advancedMuTransformCohensD
+				id:			advancedMuTransformcohensD
 			}
 
 			RadioButton
