@@ -29,20 +29,6 @@ fittedPath <- file.path("robmaFit.RDS")
 ### prior distibutions plots 
 {
   options <- jaspTools::analysisOptions("RobustBayesianMetaAnalysis")
-  options$.meta <- list(inputCI = list(containsColumn = TRUE), inputSE = list(
-    containsColumn = TRUE), inputN = list(containsColumn = TRUE), 
-    inputN1 = list(containsColumn = TRUE), inputN2 = list(containsColumn = TRUE), 
-    inputSE = list(containsColumn = TRUE), inputLabels = list(
-      containsColumn = TRUE), inputT = list(containsColumn = TRUE), 
-    priorsMu = list(list(name = list(containsColumn = TRUE)), 
-                     list(name = list(containsColumn = TRUE)), list(name = list(
-                       containsColumn = TRUE)), list(name = list(containsColumn = TRUE)), 
-                     list(name = list(containsColumn = TRUE)), list(name = list(
-                       containsColumn = TRUE)), list(name = list(containsColumn = TRUE)), 
-                     list(name = list(containsColumn = TRUE))), priorsOmega = list(
-                       list(name = list(containsColumn = TRUE)), list(name = list(
-                         containsColumn = TRUE))), priorsTau = list(list(
-                           name = list(containsColumn = TRUE))))
   options$advancedControl <- "clever"
   options$fittedPath <- ""
   options$inputCI <- list()
@@ -397,17 +383,6 @@ fittedPath <- file.path("robmaFit.RDS")
 ### fit a default model using d + se, (wihout the more complex weight function) and main output
 {
   options <- jaspTools::analysisOptions("RobustBayesianMetaAnalysis")
-  options$.meta <- list(inputCI = list(containsColumn = TRUE), inputSE = list(
-    containsColumn = TRUE), inputN = list(containsColumn = TRUE), 
-    inputN1 = list(containsColumn = TRUE), inputN2 = list(containsColumn = TRUE), 
-    inputSE = list(containsColumn = TRUE), inputLabels = list(
-      containsColumn = TRUE), inputT = list(containsColumn = TRUE), 
-    priorsMu = list(list(name = list(containsColumn = TRUE))), 
-    priorsMuNull = list(list(name = list(containsColumn = TRUE))), 
-    priorsOmega = list(list(name = list(containsColumn = TRUE))), 
-    priorsOmegaNull = list(list(name = list(containsColumn = TRUE))), 
-    priorsTau = list(list(name = list(containsColumn = TRUE))), 
-    priorsTauNull = list(list(name = list(containsColumn = TRUE))))
   options$advancedAdapt <- 500
   options$advancedBurnin <- 1000
   options$advancedChains <- 2
@@ -575,16 +550,6 @@ fittedPath <- file.path("robmaFit.RDS")
 ### fit models with a truncated priors and t + se
 {
   options <- jaspTools::analysisOptions("RobustBayesianMetaAnalysis")
-  options$.meta <- list(inputCI = list(containsColumn = TRUE), inputSE = list(
-    containsColumn = TRUE), inputN = list(containsColumn = TRUE), 
-    inputN1 = list(containsColumn = TRUE), inputN2 = list(containsColumn = TRUE), 
-    inputSE = list(containsColumn = TRUE), inputLabels = list(
-      containsColumn = TRUE), inputT = list(containsColumn = TRUE), 
-    priorsMu = list(list(name = list(containsColumn = TRUE))), 
-    priorsMuNull = list(list(name = list(containsColumn = TRUE))), 
-    priorsOmegaNull = list(list(name = list(containsColumn = TRUE))), 
-    priorsTau = list(list(name = list(containsColumn = TRUE))), 
-    priorsTauNull = list(list(name = list(containsColumn = TRUE))))
   options$advancedAdapt <- 500
   options$advancedBurnin <- 1000
   options$advancedChains <- 2
@@ -675,15 +640,6 @@ fittedPath <- file.path("robmaFit.RDS")
 ### fit models with only an effect size, d + (N1 + N2) and names
 {
   options <- jaspTools::analysisOptions("RobustBayesianMetaAnalysis")
-  options$.meta <- list(inputCI = list(containsColumn = TRUE), inputSE = list(
-    containsColumn = TRUE), inputN = list(containsColumn = TRUE), 
-    inputN1 = list(containsColumn = TRUE), inputN2 = list(containsColumn = TRUE), 
-    inputSE = list(containsColumn = TRUE), inputLabels = list(
-      containsColumn = TRUE), inputT = list(containsColumn = TRUE), 
-    priorsMu = list(list(name = list(containsColumn = TRUE))), 
-    priorsMuNull = list(list(name = list(containsColumn = TRUE))), 
-    priorsOmegaNull = list(list(name = list(containsColumn = TRUE))), 
-    priorsTauNull = list(list(name = list(containsColumn = TRUE))))
   options$advancedAdapt <- 500
   options$advancedBurnin <- 1000
   options$advancedChains <- 2
@@ -773,15 +729,6 @@ fittedPath <- file.path("robmaFit.RDS")
 ### fit models with only one publication bias function, y + (lCI & uCI)
 {
   options <- jaspTools::analysisOptions("RobustBayesianMetaAnalysis")
-  options$.meta <- list(inputCI = list(containsColumn = TRUE), inputSE = list(
-    containsColumn = TRUE), inputN = list(containsColumn = TRUE), 
-    inputN1 = list(containsColumn = TRUE), inputN2 = list(containsColumn = TRUE), 
-    inputSE = list(containsColumn = TRUE), inputLabels = list(
-      containsColumn = TRUE), inputT = list(containsColumn = TRUE), 
-    priorsMuNull = list(list(name = list(containsColumn = TRUE))), 
-    priorsOmega = list(list(name = list(containsColumn = TRUE))), 
-    priorsOmegaNull = list(list(name = list(containsColumn = TRUE))), 
-    priorsTauNull = list(list(name = list(containsColumn = TRUE))))
   options$advancedAdapt <- 500
   options$advancedBurnin <- 1000
   options$advancedChains <- 2
@@ -1069,18 +1016,6 @@ fittedPath <- file.path("robmaFit.RDS")
 ### more options tested using a preloaded model
 {
   options <- jaspTools::analysisOptions("RobustBayesianMetaAnalysis")
-  options$.meta <- list(inputCI = list(containsColumn = TRUE), inputSE = list(
-    containsColumn = TRUE), inputN = list(containsColumn = TRUE), 
-    inputN1 = list(containsColumn = TRUE), inputN2 = list(containsColumn = TRUE), 
-    inputSE = list(containsColumn = TRUE), inputLabels = list(
-      containsColumn = TRUE), inputT = list(containsColumn = TRUE), 
-    priorsMu = list(list(name = list(containsColumn = TRUE))), 
-    priorsMuNull = list(list(name = list(containsColumn = TRUE))), 
-    priorsOmega = list(list(name = list(containsColumn = TRUE)), 
-                        list(name = list(containsColumn = TRUE))), priorsOmegaNull = list(
-                          list(name = list(containsColumn = TRUE))), priorsTau = list(
-                            list(name = list(containsColumn = TRUE))), priorsTauNull = list(
-                              list(name = list(containsColumn = TRUE))))
   options$advancedControl <- "clever"
   options$diagnosticsAutocorrelation <- TRUE
   options$diagnosticsMu <- TRUE
@@ -1341,18 +1276,6 @@ fittedPath <- file.path("robmaFit.RDS")
 }
 {
   options <- jaspTools::analysisOptions("RobustBayesianMetaAnalysis")
-  options$.meta <- list(inputCI = list(containsColumn = TRUE), inputSE = list(
-    containsColumn = TRUE), inputN = list(containsColumn = TRUE), 
-    inputN1 = list(containsColumn = TRUE), inputN2 = list(containsColumn = TRUE), 
-    inputSE = list(containsColumn = TRUE), inputLabels = list(
-      containsColumn = TRUE), inputT = list(containsColumn = TRUE), 
-    priorsMu = list(list(name = list(containsColumn = TRUE))), 
-    priorsMuNull = list(list(name = list(containsColumn = TRUE))), 
-    priorsOmega = list(list(name = list(containsColumn = TRUE)), 
-                        list(name = list(containsColumn = TRUE))), priorsOmegaNull = list(
-                          list(name = list(containsColumn = TRUE))), priorsTau = list(
-                            list(name = list(containsColumn = TRUE))), priorsTauNull = list(
-                              list(name = list(containsColumn = TRUE))))
   options$advancedControl <- "clever"
   options$bayesFactorType <- "BF01"
   options$diagnosticsSingleModel <- 12
@@ -1460,18 +1383,6 @@ fittedPath <- file.path("robmaFit.RDS")
 }
 {
   options <- jaspTools::analysisOptions("RobustBayesianMetaAnalysis")
-  options$.meta <- list(inputCI = list(containsColumn = TRUE), inputSE = list(
-    containsColumn = TRUE), inputN = list(containsColumn = TRUE), 
-    inputN1 = list(containsColumn = TRUE), inputN2 = list(containsColumn = TRUE), 
-    inputSE = list(containsColumn = TRUE), inputLabels = list(
-      containsColumn = TRUE), inputT = list(containsColumn = TRUE), 
-    priorsMu = list(list(name = list(containsColumn = TRUE))), 
-    priorsMuNull = list(list(name = list(containsColumn = TRUE))), 
-    priorsOmega = list(list(name = list(containsColumn = TRUE)), 
-                        list(name = list(containsColumn = TRUE))), priorsOmegaNull = list(
-                          list(name = list(containsColumn = TRUE))), priorsTau = list(
-                            list(name = list(containsColumn = TRUE))), priorsTauNull = list(
-                              list(name = list(containsColumn = TRUE))))
   options$advancedControl <- "clever"
   options$bayesFactorType <- "LogBF10"
   options$diagnosticsSingleModel <- 12
