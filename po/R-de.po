@@ -1,0 +1,1008 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: R 3.6.1\n"
+"Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
+"POT-Creation-Date: 2021-01-05 09:39\n"
+"PO-Revision-Date: 2020-12-03 09:42+0000\n"
+"Last-Translator: Thomas Langkamp <thomas.lassdiesonnerein@gmx.de>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/jasp/jasp-engine/"
+"de/>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n==0 ? 0 : n==1 ? 0 : 1;\n"
+"X-Generator: Weblate 4.4-dev\n"
+
+msgid "The prior lower bound is not smaller than the upper bound."
+msgstr "Die Untergrenze des Prior ist nicht kleiner als die Obergrenze."
+
+msgid "Your prior contains negative values."
+msgstr "Dein Prior enthält negative Werte."
+
+msgid "Your prior contains positive values."
+msgstr "Dein Prior enthält positive Werte."
+
+msgid "No positive numbers found in %s"
+msgstr "Keine positiven Zahlen in %s gefunden"
+
+msgid "No negative numbers found in %s"
+msgstr "Keine negativen Zahlen in %s gefunden"
+
+msgid "The 95%% CI Lower Bound must be smaller than the Upper Bound."
+msgstr "Die 95%% GI-Untergrenze muss kleiner als die Obergrenze sein."
+
+msgid "You cannot set all the prior model probabilties to zero."
+msgstr "Du kannst nicht alle Prior-Modellwahrscheinlichkeiten auf Null setzen."
+
+#, fuzzy
+msgid ""
+"The model could not be fit. Please check the following: Do you have at least "
+"n=2 studies? If the prior is truncated, is it consistent with the data (when "
+"most effect sizes are negative, the analysis may not work when the prior is "
+"constrained to be postive)?"
+msgstr ""
+"Das Modell konnte nicht angepasst werden. Bitte überprüfe die folgenden "
+"Punkte: Sind es mindestens n=2 Studien? Falls der Prior verkürzt ist, ist er "
+"mit den Daten konsistent (wenn die meisten Effektgrößen negativ sind, "
+"funktioniert die Analyse möglicherweise nicht, wenn der Prior auf positive "
+"Werte beschränkt ist)?"
+
+msgid "Posterior Estimates per Model"
+msgstr "Posteriorschätzungen pro Modell"
+
+msgid "BF%s%s"
+msgstr "BF%s%s"
+
+msgid "Log(BF%s%s)"
+msgstr "Log(BF%s%s)"
+
+msgid "Mean"
+msgstr "Mittelwert"
+
+msgid "SD"
+msgstr "SD"
+
+msgid "Lower"
+msgstr "Untere"
+
+msgid "95%% Credible Interval"
+msgstr "95%% Glaubwürdigkeitsintervall"
+
+msgid "Upper"
+msgstr "Obere"
+
+msgid "Averaged"
+msgstr "Gemittelt"
+
+msgid "Fixed effects"
+msgstr "Feste Effekte"
+
+msgid "Random effects"
+msgstr "Zufällige Effekte"
+
+msgid "Ordered effects"
+msgstr "Geordnete Effekte"
+
+msgid ""
+"%s and %s are the group-level effect size and standard deviation, "
+"respectively."
+msgstr ""
+"%s und %s sind die Effektgröße bzw. die Standardabweichung auf Gruppenebene."
+
+msgid "%s is the group-level effect size."
+msgstr "%s ist die Effektgröße auf Gruppenebene."
+
+msgid "Bayes factor of the random effects H%1$s over the fixed effects H%1$s."
+msgstr ""
+"Bayesfaktor der zufälligen Effekte H%1$s gegenüber den festen Effekten H%1$s."
+
+msgid ""
+"Posterior estimates are based on the models that assume an effect to be "
+"present. The Bayes factor is based on all four models: fixed effects H%2$s & "
+"random effects H%2$s over the fixed effects H%1$s & random effects H%1$s."
+msgstr ""
+"Die Posterior-Schätzungen basieren auf den Modellen, die einen vorhandenen "
+"Effekt annehmen. Der Bayesfaktor basiert auf allen vier Modellen: Feste "
+"Effekte H%2$s & Zufallseffekte H%2$s gegenüber den festen Effekten H%1$s & "
+"Zufallseffekten H%1$s."
+
+msgid ""
+"Model averaged posterior estimates for %3$s are not yet available, but will "
+"be added in the future. The Bayes factor is based on all four models: random "
+"effects H%1$s & H%2$s over the fixed effects H%1$s & H%2$s."
+msgstr ""
+"Modellgemittelte Posterior-Schätzungen für %3$s sind noch nicht verfügbar, "
+"aber werden in Zukunft hinzugefügt. Der Bayesfaktor basiert auf allen vier "
+"Modellen: Zufällige Effekte H%1$s & H%2$s gegenüber den festen Effekten H"
+"%1$s & H%2$s."
+
+msgid ""
+"Bayes factor of the (unconstrained/constrained) random effects H%1$s over "
+"the fixed effects H%1$s."
+msgstr ""
+"Bayesfaktor der (uneingeschränkten/eingeschränkten) zufälligen Effekte H%1$s "
+"gegenüber den festen Effekten H%1$s."
+
+msgid "Bayes factor of the fixed effects H%1$s over the random effects H%1$s."
+msgstr ""
+"Bayesfaktor der festen Effekte H%1$s gegenüber den zufälligen Effekten H%1$s."
+
+msgid ""
+"Model averaged posterior estimates are based on the models that assume an "
+"effect to be present. The Bayes factor is based on all four models: fixed "
+"effects H%1$s & random effects H%1$s over the fixed effects H%2$s & random "
+"effects H%2$s."
+msgstr ""
+"Modellgemittelte Posterior-Schätzungen basieren auf den Modellen, die von "
+"einem vorhandenen Effekt ausgehen. Der Bayesfaktor basiert auf allen vier "
+"Modellen: Feste Effekte H%1$s & zufällige Effekte H%1$s gegenüber den festen "
+"Effekten H%2$s & zufälligen Effekten H%2$s."
+
+msgid ""
+"Model averaged posterior estimates for %3$s are not yet available, but will "
+"be added in the future. The Bayes factor is based on all four models: fixed "
+"effects H%1$s & H%2$s over the random effects H%1$s & H%2$s."
+msgstr ""
+"Modellgemittelte nachträgliche Schätzungen für %3$s sind noch nicht "
+"verfügbar, aber werden in Zukunft hinzugefügt. Der Bayesfaktor basiert auf "
+"allen vier Modellen: Feste Effekte H%1$s & H%2$s gegenüber den zufälligen "
+"Effekten H%1$s & H%2$s."
+
+msgid ""
+"Bayes factor of the fixed effects H%1$s over the (unconstrained/constrained) "
+"random effects H%1$s."
+msgstr ""
+"Bayesfaktor der festen Effekte H%1$s über den (uneingeschränkten/"
+"eingeschränkten) zufälligen Effekten H%1$s."
+
+msgid ""
+"Bayes factor of the ordered effects H%1$s over the fixed effects H%1$s. The "
+"Bayes factor for the ordered effects H%1$s versus the unconstrained (random) "
+"effects H%1$s model is %2$.3f."
+msgstr ""
+"Bayesfaktor der geordneten Effekte H%1$s gegenüber den festen Effekten H"
+"%1$s. Der Bayesfaktor für die geordneten Effekte H%1$s im Vergleich zum "
+"Modell mit uneingeschränkten (zufälligen) Effekten H%1$s beträgt %2$.3f."
+
+msgid ""
+"Bayes factor of the fixed effects H%1$s over the ordered effects H%1$s. The "
+"Bayes factor for the unconstrained (random) effects H%1$s versus the ordered "
+"effects H%1$s model is %2$.3f."
+msgstr ""
+"Bayesfaktor der festen Effekte H%1$s gegenüber den geordneten Effekten H"
+"%1$s. Der Bayesfaktor für die uneingeschränkten (zufälligen) Effekte H%1$s "
+"gegenüber dem Modell mit geordneten Effekten H%1$s beträgt %2$.3f."
+
+msgid "Model Probabilities"
+msgstr "Modellwahrscheinlichkeiten"
+
+msgid "Prior"
+msgstr "Prior"
+
+msgid "Posterior"
+msgstr "Posterior"
+
+msgid "Fixed H%s"
+msgstr "Feste H%s"
+
+msgid "Random H%s"
+msgstr "Zufällige H%s"
+
+msgid "Ordered H%s"
+msgstr "Geordende H%s"
+
+msgid "Effect Sizes per Study"
+msgstr "Effektgrößen pro Studie"
+
+msgid "Observed"
+msgstr "Beobachtet"
+
+msgid "Estimated"
+msgstr "Geschätzt"
+
+msgid "Study"
+msgstr "Studie"
+
+msgid ""
+"Posterior mean and 95%% credible interval estimates from the random effects "
+"model."
+msgstr ""
+"Posterior-Mittelwert und 95%% Glaubwürdigkeitsintervall-Schätzungen nach dem "
+"Zufallseffektmodell."
+
+msgid ""
+"Posterior mean and 95%% credible interval estimates from the constrained "
+"random effects model."
+msgstr ""
+"Posterior-Mittelwert und 95%% Glaubwürdigkeitsintervall-Schätzungen nach dem "
+"eingeschränkten Zufallseffektmodell."
+
+msgid "Effect Size"
+msgstr "Effektgröße"
+
+msgid "Heterogeneity"
+msgstr "Heterogenität"
+
+msgid "Effect size"
+msgstr "Effektgröße"
+
+msgid "Density"
+msgstr "Dichte"
+
+msgid "Prior and Posteriors"
+msgstr "Prior und Posteriors"
+
+msgid "Fixed H"
+msgstr "Feste H"
+
+msgid "Random H"
+msgstr "Zufällige H"
+
+msgid "Averaged H"
+msgstr "Gemittelte H"
+
+msgid "Prior H"
+msgstr "Prior H"
+
+msgid "Ordered H"
+msgstr "Geordnete H"
+
+msgid "Forest Plot"
+msgstr "Forest-Plot"
+
+msgid "Observed and estimated study effects"
+msgstr "Beobachtete und geschätzte Studieneffekte"
+
+msgid "Estimated study effects"
+msgstr "Geschätzte Studieneffekte"
+
+msgid "Observed study effects"
+msgstr "Beobachtete Studieneffekte"
+
+msgid "Cumulative forest plot"
+msgstr "Kumulativer Forest-Plot"
+
+msgid "Overall effect size"
+msgstr "Gesamte Effektgröße"
+
+msgid "Sequential Analysis"
+msgstr "Sequenzielle Analyse"
+
+msgid "Bayes factors effect size"
+msgstr "Bayesfaktoren Effektgröße"
+
+msgid "Bayes factors heterogeneity"
+msgstr "Bayesfaktoren Heterogenität"
+
+msgid "Posterior model probabilities"
+msgstr "Posterior Modellwahrscheinlichkeiten"
+
+msgid "Plotting failed: The Bayes factors contain infinity."
+msgstr "Grafieken faalde: De Bayes-factoren bevatten oneindig."
+
+msgid "Evidence for r H"
+msgstr "Evidenz für r H"
+
+msgid "Evidence for f H"
+msgstr "Evidenz für f H"
+
+msgid "Studies"
+msgstr "Studien"
+
+msgid ""
+"Posterior model \n"
+" probability"
+msgstr ""
+"Posterior Modell \n"
+" Wahrscheinlichkeit"
+
+msgid "The metafor package crashed with the following error: %s"
+msgstr "Das metafor-Paket stürzte mit folgendem Fehler ab: %s"
+
+msgid "Fixed and Random Effects"
+msgstr "Feste und zufällige Effekte"
+
+msgid "Q"
+msgstr "Q"
+
+msgid "df"
+msgstr "df"
+
+msgid "p"
+msgstr "p"
+
+msgid "<em>p</em>-values are approximate."
+msgstr "<em>p</em>-Werte sind angenähert."
+
+msgid "Coefficients"
+msgstr "Koeffizienten"
+
+msgid "Estimate"
+msgstr "Schätzung"
+
+msgid "Standard Error"
+msgstr "Standardfehler"
+
+msgid "z"
+msgstr "z"
+
+msgid "Wald test."
+msgstr "Wald-Test."
+
+msgid "Wald tests."
+msgstr "Wald-Tests."
+
+msgid "Fit measures"
+msgstr "Anpassungsmaße"
+
+msgid "Residual Heterogeneity Estimates"
+msgstr "Residuen-Heterogenität-Schätzungen"
+
+msgid "Parameter Covariances"
+msgstr "Parameter-Kovarianzen"
+
+msgid "Rank correlation test for Funnel plot asymmetry"
+msgstr "Rangkorrelationstest für Funnelplot-Asymmetrie"
+
+msgid "Kendall's %s"
+msgstr "Kendalls %s"
+
+msgid "Regression test for Funnel plot asymmetry (\"Egger's test\")"
+msgstr "Regressionstest für Funnelplot-Asymmetrie(\"Eggers Test\")"
+
+msgid "t"
+msgstr "t"
+
+msgid "Influence Measures"
+msgstr "Einflußmaße"
+
+msgid "Std. Residual"
+msgstr "Std. Residuum"
+
+msgid "DFFITS"
+msgstr "DEFITS"
+
+msgid "Cook's Distance"
+msgstr "Cooks Distanz"
+
+msgid "Cov. Ratio"
+msgstr "Anteil der Kovarianz"
+
+msgid "%s%s<sub>(-i)</sub>"
+msgstr "%s%s<sub>(-i)</sub>"
+
+msgid "Q<sub>E(-i)</sub>"
+msgstr "Q<sub>E(-i)</sub>"
+
+msgid "Hat"
+msgstr "Dach"
+
+msgid "Weight"
+msgstr "Gewicht"
+
+msgid "File Drawer Analysis"
+msgstr "Analyse des Publikationsbias (Schubladenproblem)"
+
+msgid "Fail-safe N"
+msgstr "optimales N"
+
+msgid "Target Significance"
+msgstr "Angestrebte Signifikanz"
+
+msgid "Observed Significance"
+msgstr "Beobachtete Signifikanz"
+
+msgid "Omnibus test of Model Coefficients"
+msgstr "Globaler Test der Modellparameter (omnibus test)"
+
+msgid "Test of Residual Heterogeneity"
+msgstr "Test auf Residuenheterogenität"
+
+msgid "Log-likelihood"
+msgstr "Log-Likelihood"
+
+msgid "Deviance"
+msgstr "Devianz"
+
+msgid "AIC"
+msgstr "AIC"
+
+msgid "BIC"
+msgstr "BIC"
+
+msgid "AICc"
+msgstr "AICc"
+
+msgid "I%s (%%)"
+msgstr "I%s (%%)"
+
+msgid "H%s"
+msgstr "H%s"
+
+msgid "Rank test"
+msgstr "Rangtest"
+
+msgid "Cases marked with %s are influential."
+msgstr "Mit %s markierte Fälle haben einen Effekt."
+
+msgid "Plot"
+msgstr "Abbildung"
+
+msgid "Forest plot"
+msgstr "Forest-Plot"
+
+msgid "Funnel Plot"
+msgstr "Funnel-Plot"
+
+msgid "Log-likelihood for %s%s"
+msgstr "Log-Likelihood für %s%s"
+
+msgid "Trim-fill Analysis"
+msgstr "Trim-fill-Analyse"
+
+msgid "Diagnostic Plots"
+msgstr "Diagnostische Abbildungen"
+
+msgid "Study %s"
+msgstr "Studie %s"
+
+msgid "FE Model"
+msgstr "FE-Modell"
+
+msgid "RE Model"
+msgstr "RE-Modell"
+
+msgid "Observed Outcome"
+msgstr "Beobachtetes Ergebnis"
+
+msgid "Cannot set 'xlim' automatically. Please set this argument manually."
+msgstr ""
+"'xlim' konnte nicht automatisch gesetzt werden. Bitte setzen Sie es händisch."
+
+msgid "Value"
+msgstr "Wert"
+
+msgid "Profile Plot for"
+msgstr "Profilplot für"
+
+msgid "Restricted Log-Likelihood"
+msgstr "Beschränkte logarithmische Wahrscheinlichkeit"
+
+msgid "Residual Value"
+msgstr "Residualwert"
+
+msgid "Argument 'x' must be an object of class \"rma\"."
+msgstr "Argument 'x' muss ein Objekt der Klasse \"rma\" sein."
+
+msgid "Function not applicable to objects of class \"robust.rma\"."
+msgstr "Funktion nicht anwendbar für Objekte der Klasse \"robust.rma\"."
+
+msgid "Function not applicable to objects of class \"rma.ls\"."
+msgstr "Funktion nicht anwendbar für Objekte der Klasse \"rma.ls\"."
+
+msgid ""
+"Setting 'xlim' and 'zlim' automatically not possible (must set axis limits "
+"manually)."
+msgstr ""
+"Die automatische Einstellung von 'xlim' und 'zlim' war nicht möglich. Bitte "
+"setzen Sie die Achsengrenzen händisch."
+
+msgid "Radial Plot"
+msgstr "Polar- / Netzdiagramm"
+
+msgid "Stopped because k = 1."
+msgstr "Gestoppt, weil k = 1."
+
+msgid "Normal Q-Q Plot"
+msgstr "Normalvert. Q-Q-Diagramm"
+
+msgid "Theoretical Quantiles"
+msgstr "Theoretische Quantile"
+
+msgid "Sample Quantiles"
+msgstr "Stichprobenquantile"
+
+msgid "Standardized Residuals"
+msgstr "Standardisierte Residuen"
+
+msgid "Fitted vs. Standardized Residuals"
+msgstr "Angepasste vs. standardisierte Residuen"
+
+msgid "Fitted Value"
+msgstr "Angepasster Wert"
+
+msgid "Standardized Residual"
+msgstr "Standardisierte Residuen"
+
+msgid "The model should contain at least one predictor or an intercept."
+msgstr "Das Modell muss mindestens einen Prädiktor oder Konstante beinhalten."
+
+msgid "FE"
+msgstr "FE"
+
+msgid "ML"
+msgstr "ML"
+
+msgid "REML"
+msgstr "REML"
+
+msgid "DL"
+msgstr "DL"
+
+msgid "HE"
+msgstr "HE"
+
+msgid "HS"
+msgstr "HS"
+
+msgid "SJ"
+msgstr "SJ"
+
+msgid "EB"
+msgstr "EB"
+
+msgid "PM"
+msgstr "PM"
+
+msgid "%g%% Confidence Interval"
+msgstr "%g%% Konfidenzintervall"
+
+msgid ""
+"Currently this only works with rma and rma.mv objects that have specified "
+"'yi' as a formula."
+msgstr ""
+"Dies funktioniert derzeit nur mit rma- und rma.mv-Objekten, die 'yi' als "
+"Formel spezifiziert haben."
+
+msgid "Formula is refering to factors that are not in the model."
+msgstr "Formel referiert auf Faktoren, die nicht im Modell sind."
+
+msgid "There are no predictors in the model that correspond to factors in '"
+msgstr "Im Modell gibt es keine passenden Prädiktoren zu Faktoren in '"
+
+msgid "'. Factor levels:"
+msgstr "'. Faktorstufen:"
+
+msgid ","
+msgstr ","
+
+msgid ". Data names:"
+msgstr ". Datennamen:"
+
+msgid "; Used Terms:"
+msgstr "; Benutzte Terme:"
+
+msgid "; Data set head:"
+msgstr "; Datensatztitel:"
+
+msgid "Argument 'contrasts' should be a matrix."
+msgstr "Argument 'Kontraste' muss eine Matrix sein."
+
+msgid "Invalid contrasts: Rows in"
+msgstr "Ungültige Kontraste: Zeilen in"
+
+msgid "do not add to 0."
+msgstr "summieren sich nicht zu 0."
+
+msgid "Only using first element of"
+msgstr "Nutze nur erstes Element von"
+
+msgid "."
+msgstr "."
+
+msgid "is smaller than 2."
+msgstr "ist kleiner als 2."
+
+msgid "Variance Components"
+msgstr "Varianz-Komponenten"
+
+msgid "Plots"
+msgstr "Abbildungen"
+
+msgid "The priors for publication bias were set incorrectly."
+msgstr "Die Prior für den Publikationsbias wurden falsch gesetzt."
+
+msgid "%s%% CI"
+msgstr "%s%% KI"
+
+msgid "Median"
+msgstr "Median"
+
+msgid "MCMC error"
+msgstr "MCMC-Fehler"
+
+msgid "ESS"
+msgstr "ESS"
+
+msgid "Rhat"
+msgstr "R-Dach"
+
+msgid "%1$s is on %2$s scale."
+msgstr "%1$s ist auf Skala %2$s."
+
+msgid "<em>p</em>-values interval %s"
+msgstr "<em>p</em>-Werte Intervall %s"
+
+msgid "The weights (%1$s) correspond to %2$s <em>p</em>-values."
+msgstr "Die Gewichte (%1$s) entsprechen den %2$s <em>p</em>-Werten."
+
+msgid "Estimated studies' effects (%1$s) correspond to effect size %2$s."
+msgstr "Geschätzten Studieneffekte (%1$s) entsprechen der Effektgröße %2$s."
+
+msgid "Effect size (%s)"
+msgstr "Effektgröße (%s)"
+
+msgid "Heterogeneity (%s)"
+msgstr "Heterogenität (%s)"
+
+msgid "Prior Plots"
+msgstr "Prior-Abbildungen"
+
+msgid "Effect"
+msgstr "Effekt"
+
+msgid "Weight Function"
+msgstr "Gewichtungsfunktion"
+
+msgid "Null"
+msgstr "Null"
+
+msgid "Alternative"
+msgstr "Alternative"
+
+msgid "Model Preview"
+msgstr "Modell-Vorschau"
+
+msgid ""
+"At least one prior distribution per parameter must be specified (either null "
+"or alternative)."
+msgstr ""
+"Es muss mindestens eine Prior-Verteilung pro Parameter angegeben werden "
+"(entweder Null oder Alternative)."
+
+msgid "Model Summary"
+msgstr "Modell-Zusammenfassung"
+
+msgid "Models"
+msgstr "Modelle"
+
+msgid "P(M)"
+msgstr "P(M)"
+
+msgid "Publication bias"
+msgstr "Publikationsbias"
+
+msgid ""
+"The analysis will estimate multiple meta-analytic models using MCMC and "
+"might require a prolonged time to complete."
+msgstr ""
+
+msgid "Models Overview"
+msgstr "Modell-Überblick"
+
+msgid "Prior Distribution"
+msgstr "Prior-Verteilung"
+
+msgid "Publication Bias"
+msgstr "Publikationsbias"
+
+msgid "The loaded object is not a RoBMA model."
+msgstr "Das geladene Objekt ist kein RoBMA-Modell."
+
+msgid "Summary"
+msgstr "Zusammenfassung"
+
+msgid "Exclusion"
+msgstr "Exklusion"
+
+msgid "Inclusion"
+msgstr "Inklusion"
+
+msgid "log(BF)"
+msgstr "Log(BF)"
+
+msgid "BF"
+msgstr "BF"
+
+msgid "P(M|data)"
+msgstr "P(M|Daten)"
+
+msgid ""
+"All models failed to converge. Please, consider inspecting the 'MCMC "
+"diagnostics' and changing the 'Advanced options'."
+msgstr ""
+"Konvergenz alle Modelle ist fehlgeschlagen. Bitte erwäge, die 'MCMC-"
+"Diagnosen' zu überprüfen und die 'Weitere Optionen' zu ändern."
+
+msgid "Warning:"
+msgstr "Warnung:"
+
+msgid "%i models failed to converge."
+msgstr "%i Modelle sind nicht konvergiert."
+
+msgid ""
+"Analyzing odds ratios is an experimental feature. The performance of default "
+"prior distributions was not evaluated."
+msgstr ""
+
+msgid "Model Averaged Estimates"
+msgstr "Modell-gemittelte Schätzungen"
+
+msgid "Model Averaged Weights (%s)"
+msgstr "Modell-gemittelte Gewichte (%s)"
+
+msgid "Model Averaged Estimated Studies' Effects (%s)"
+msgstr ""
+
+msgid "Conditional Estimates"
+msgstr "Konditionale Schätzungen"
+
+msgid ""
+"Estimates are model averaged over models assuming existence of effect / "
+"heterogeneity."
+msgstr ""
+"Schätzungen werden über Modelle gemittelt, die einen Effekt / Heterogenität "
+"annehmen."
+
+msgid "Conditional Weights (%s)"
+msgstr ""
+
+msgid ""
+"Estimated weights (%s) are model averaged over models assuming existence of "
+"publication bias."
+msgstr ""
+"Geschätzte Gewichte (%s) sind über Modelle gemittelt, die einen vorhandenen "
+"Publikationsbias annehmen."
+
+msgid "Conditional Estimated Studies' Effects (%s)"
+msgstr "Geschätzte Studieneffekte (%s)"
+
+msgid ""
+"Estimated studies effects (%s) are model averaged over models assuming "
+"existence of effect."
+msgstr ""
+"Geschätzten Studieneffekte (%s) sind modellgemittelt über Modelle, die einen "
+"vorhandenen Effekt annehmen."
+
+msgid "BF%s"
+msgstr "BF%s"
+
+msgid "log(BF%s)"
+msgstr "Log(BF%s)"
+
+msgid "log(MargLik)"
+msgstr ""
+
+msgid "Individual Models Summary"
+msgstr "Zusammenfassung einzelner Modelle"
+
+msgid "Model %i"
+msgstr "Modell %i"
+
+msgid "Model %i does not exist. Select one of the models between 1 and %i."
+msgstr "Modell %i existiert nicht. Wähle eins der Modelle zwischen 1 und %i."
+
+msgid "Priors"
+msgstr "Prior"
+
+msgid "Information"
+msgstr "Information"
+
+msgid "Model Estimates"
+msgstr "Modell-Schätzungen"
+
+msgid "Estimated Weights (%s)"
+msgstr "Geschätzte Gewichte (%s)"
+
+msgid "Estimated Studies' Effects (%s)"
+msgstr "Geschätzte Studieneffekte (%s)"
+
+msgid "Weight function"
+msgstr "Gewichtungsfunktion"
+
+msgid "Weights"
+msgstr "Gewichte"
+
+msgid "Effect size vs Heterogeneity"
+msgstr "Effektgröße vs Heterogenität"
+
+msgid "%1$s (%2$s)"
+msgstr "%1$s (%2$s)"
+
+msgid "Individual Models Plots"
+msgstr "Diagramme einzelner Modelle"
+
+msgid "Diagnostics"
+msgstr "Diagnostiken"
+
+msgid "Models Diagnostics Overview"
+msgstr "Modell-Diagnostiken-Überblick"
+
+msgid "max(MCMC error)"
+msgstr "max(MCMC-Fehler)"
+
+msgid "min(ESS)"
+msgstr "min(ESS)"
+
+msgid "max(Rhat)"
+msgstr "max(R-Dach)"
+
+msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
+msgstr ""
+"Modell %1$i existiert nicht. Wähle eines der Modelle zwischen 1 und %2$i aus."
+
+msgid "Trace plots"
+msgstr "Verlaufsdiagramme"
+
+msgid "Average autocorrelations"
+msgstr "Mittlere Autokorrelation"
+
+msgid "Posterior samples densities"
+msgstr "Dichte Posterior-Stichproben"
+
+msgid "Model %i does not contain any of the selected parameters."
+msgstr "Modell %i enthält keinen der ausgewählten Parameter."
+
+msgid "Error in %s: All p-values need to be between 0 and 1."
+msgstr "Fehler in %s: Alle p-Werte müssen zwischen 0 und 1 liegen."
+
+msgid "Error in %s: All correlation coefficients need to be between -1 and 1."
+msgstr ""
+"Fehler in %s: Alle Korrelationskoeffizienten müssen zwischen -1 und 1 liegen."
+
+msgid "The p-value cutoffs were set incorectly."
+msgstr "Die p-Wert-Grenzwerte wurden unkorrekt gesetzt."
+
+msgid "At least one p-value cutoff needs to be set."
+msgstr "Es muss mindestens ein p-Wert-Grenzwert gesetzt werden."
+
+msgid "All p-value cutoffs needs to be between 0 and 1."
+msgstr "Alle p-Wert-Grenzwerte müssen zwischen 0 und 1 liegen."
+
+msgid "No steps"
+msgstr ""
+
+msgid "95%% Confidence Interval"
+msgstr "95%% Konfidenzintervall"
+
+msgid "Note:"
+msgstr "Beachte:"
+
+msgid "%s is on %s scale."
+msgstr "%s ist auf Skala %s."
+
+msgid "<em>p</em>-values interval(one-sided)"
+msgstr "<em>p</em>-Werte-Intervall(einseitig)"
+
+msgid "Model Tests"
+msgstr "Modelltests"
+
+msgid "Test of Heterogeneity"
+msgstr "Prüfung der Heterogenität"
+
+msgid "Error:"
+msgstr "Fehler:"
+
+msgid "Test of Publication Bias"
+msgstr "Test des Publikationsbias"
+
+msgid "ChiSq"
+msgstr "ChiQu"
+
+msgid "Assuming homogeneity"
+msgstr "Homogenität angenommen"
+
+msgid "Assuming heterogeneity"
+msgstr "Heterogenität angenommen"
+
+msgid "Fixed Effects Estimates"
+msgstr "Feste Effekte Schätzungen"
+
+msgid "Mean Estimates(%s)"
+msgstr "Mittlere Schätzungen(%s)"
+
+msgid "Estimated Weights"
+msgstr "Geschätzte Gewichte"
+
+msgid "Random Effects Estimates"
+msgstr "Schätzungen zufälliger Effekte"
+
+msgid "Heterogeneity Estimates(%s)"
+msgstr "Heterogenitätsschätzungen(%s)"
+
+msgid "p-value Frequency"
+msgstr "p-Wert Häufigkeit"
+
+msgid "Frequency"
+msgstr "Häufigkeit"
+
+msgid ""
+"There were no p-value cutoffs after their automatic reduction. The displayed "
+"frequencies correspond to the non-reduced p-value cutoffs."
+msgstr ""
+"Nach ihrer automatischen Reduzierung gab es keine p-Wert-Grenzwerte. Die "
+"angezeigten Frequenzen entsprechen den nicht reduzierten p-Wert-Grenzwerten."
+
+msgid "Weight Function(%s)"
+msgstr "Gewichtungsfunktion(%s)"
+
+msgid ""
+"The figure could not be created since one of the estimates is not a number."
+msgstr ""
+"Die Abbildung konnte nicht erstellt werden, da eine der Schätzungen keine "
+"Zahl ist."
+
+msgid "P-value (One-sided)"
+msgstr "P-Wert (einseitig)"
+
+msgid "Publication Probability"
+msgstr "Publikationswahrscheinlichkeit"
+
+msgid "Mean Model Estimates (%s)"
+msgstr "Mittlere Modellschätzungen (%s)"
+
+msgid "Fixed effects (adjusted)"
+msgstr "Feste Effekte (angepasst)"
+
+msgid "Random effects (adjusted)"
+msgstr "Zufällige Effekte (angepasst)"
+
+msgid "Mean Estimates (%s)"
+msgstr "Mittlere Schätzungen (%s)"
+
+msgid "Fixed effects model:"
+msgstr "Feste-Effekte-Modell:"
+
+msgid "Random effects model:"
+msgstr "Zufällige-Effekte-Modell:"
+
+msgid ""
+"%sThe optimizer failed to find a solution. Consider re-specifying the model "
+"or the p-value cutoffs."
+msgstr ""
+"%sDer Optimierer konnte keine Lösung finden. Erwäge, das Modell oder die p-"
+"Wert Grenzwerte neu zu spezifizieren."
+
+msgid ""
+"%sThe automatic cutoffs selection did not find viable p-value cutoffs. "
+"Please, specify them manually."
+msgstr ""
+
+msgid ""
+"At least one of the p-value intervals contains no effect sizes, leading to "
+"estimation problems. Consider re-specifying the cutoffs."
+msgstr ""
+
+msgid ""
+"At least one of the p-value intervals contains three or fewer effect sizes, "
+"which may lead to estimation problems. Consider re-specifying the cutoffs."
+msgstr ""
+
+msgid ""
+"The unadjusted estimate is negative. The selection model default "
+"specification expects that the expected direction of the effect size is "
+"positive. Please, check that you specified the effect sizes correctly or "
+"change the 'Expected effect size direction' option in the 'Model' tab."
+msgstr ""
+
+msgid ""
+"The analysis requires both 'Effect Size' and 'Effect Size Standard Error' to "
+"be specified."
+msgstr ""
+"Für die Analyse müssen sowohl 'Effektgröße' als auch "
+"'Effektgrößenstandardfehler' angegeben werden."
+
+msgid "Only the following one-sided p-value cutoffs were used: %s."
+msgstr ""
+"Es wurden nur die folgenden einseitigen p-Wert-Grenzwerte verwendet: %s."
+
+msgid "No effect sizes specified to compute the studies' sample variances."
+msgstr ""
+"Es wurden keine Effektgrößen angegeben, um die Stichprobenvarianzen der "
+"Studien zu berechnen."
+
+msgid "%i observation was removed due to missing values."
+msgid_plural "%i observations were removed due to missing values."
+msgstr[0] "%i Beobachtung wurde aufgrund fehlender Werte entfernt."
+msgstr[1] "%i Beobachtungen wurden aufgrund fehlender Werte entfernt."
