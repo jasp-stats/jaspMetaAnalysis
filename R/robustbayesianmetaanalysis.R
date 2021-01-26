@@ -631,8 +631,8 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
       )
 
       if (options[["inputLabels"]] != ""){
-        dataset[[.v(options[["inputLabels"]])]] <- as.character(dataset[[.v(options[["inputLabels"]])]])
-        if (!validUTF8(dataset[[.v(options[["inputLabels"]])]]))
+        dataset[[options[["inputLabels"]]]] <- as.character(dataset[[options[["inputLabels"]]]])
+        if (!validUTF8(dataset[[options[["inputLabels"]]]]))
           .quitAnalysis(gettext("The study labels contain invalid characters. Please, remove them before running the analysis.")) 
       }
 
@@ -928,18 +928,18 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
       fit <- tryCatch(RoBMA::RoBMA(
         likelihood = "normal",
         # data
-        t   = if (options[["measures"]] == "cohensD" && options[["inputT"]] != "")                     dataset[, .v(options[["inputT"]])],
-        d   = if (options[["measures"]] == "cohensD" && options[["inputES"]] != "")                    dataset[, .v(options[["inputES"]])],
-        r   = if (options[["measures"]] == "correlation" && options[["inputES"]] != "")                dataset[, .v(options[["inputES"]])],
-        OR  = if (options[["measures"]] == "OR")                                                       dataset[, .v(options[["inputES"]])],
-        y   = if (options[["measures"]] == "general" && options[["inputES"]] != "")                    dataset[, .v(options[["inputES"]])],
-        se  = if (options[["inputSE"]] != "")                                                          dataset[, .v(options[["inputSE"]])],
-        lCI = if (sum(unlist(options[["inputCI"]]) != "") == 2)                                        dataset[, .v(options[["inputCI"]][[1]][1])],
-        uCI = if (sum(unlist(options[["inputCI"]]) != "") == 2)                                        dataset[, .v(options[["inputCI"]][[1]][2])],
-        n   = if (options[["measures"]] %in% c("cohensD", "correlation") && options[["inputN"]] != "") dataset[, .v(options[["inputN"]])],
-        n1  = if (options[["measures"]] == "cohensD" && options[["inputN1"]] != "")                    dataset[, .v(options[["inputN1"]])],
-        n2  = if (options[["measures"]] == "cohensD" && options[["inputN2"]] != "")                    dataset[, .v(options[["inputN2"]])],
-        study_names = if (options[["inputLabels"]] != "")                                              dataset[, .v(options[["inputLabels"]])],
+        t   = if (options[["measures"]] == "cohensD" && options[["inputT"]] != "")                     dataset[, options[["inputT"]]],
+        d   = if (options[["measures"]] == "cohensD" && options[["inputES"]] != "")                    dataset[, options[["inputES"]]],
+        r   = if (options[["measures"]] == "correlation" && options[["inputES"]] != "")                dataset[, options[["inputES"]]],
+        OR  = if (options[["measures"]] == "OR")                                                       dataset[, options[["inputES"]]],
+        y   = if (options[["measures"]] == "general" && options[["inputES"]] != "")                    dataset[, options[["inputES"]]],
+        se  = if (options[["inputSE"]] != "")                                                          dataset[, options[["inputSE"]]],
+        lCI = if (sum(unlist(options[["inputCI"]]) != "") == 2)                                        dataset[, options[["inputCI"]][[1]][1]],
+        uCI = if (sum(unlist(options[["inputCI"]]) != "") == 2)                                        dataset[, options[["inputCI"]][[1]][2]],
+        n   = if (options[["measures"]] %in% c("cohensD", "correlation") && options[["inputN"]] != "") dataset[, options[["inputN"]]],
+        n1  = if (options[["measures"]] == "cohensD" && options[["inputN1"]] != "")                    dataset[, options[["inputN1"]]],
+        n2  = if (options[["measures"]] == "cohensD" && options[["inputN2"]] != "")                    dataset[, options[["inputN2"]]],
+        study_names = if (options[["inputLabels"]] != "")                                              dataset[, options[["inputLabels"]]],
         # model settings
         test_type        = if (options[["measures"]] == "cohensD")                 options[["cohensDTestType"]],
         mu_transform     = if (options[["measures"]] %in% c("correlation", "OR"))  options[["advancedMuTransform"]],
@@ -981,7 +981,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
       fit <- tryCatch(RoBMA::update.RoBMA(
         object  = fit,
-        study_names  = if (options[["inputLabels"]] != "") dataset[, .v(options[["inputLabels"]])],
+        study_names  = if (options[["inputLabels"]] != "") dataset[, options[["inputLabels"]]],
         chains  = options[["advancedChains"]],
         iter    = options[["advancedIteration"]],
         burnin  = options[["advancedBurnin"]],
