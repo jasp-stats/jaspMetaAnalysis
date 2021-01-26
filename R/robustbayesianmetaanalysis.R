@@ -817,7 +817,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
        length(priors[["omega_null"]]) == 0)) {
     priorsError <- createJaspTable()
     priorsError$setError(gettext(
-        "At least one prior distribution per parameter must be specified (either null or alternative)."
+        "Please specify a prior distribution for each parameter in the Models specification section (either null or alternative)."
     ))
     modelPreview[["priorsError"]] <- priorsError
     return()
