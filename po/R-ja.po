@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
 "POT-Creation-Date: 2021-01-05 09:39\n"
-"PO-Revision-Date: 2021-02-01 08:41+0000\n"
+"PO-Revision-Date: 2021-02-03 07:41+0000\n"
 "Last-Translator: Yoshihiko Kunisato <ykunisato@psy.senshu-u.ac.jp>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/ja/>\n"
@@ -53,13 +53,13 @@ msgid "SD"
 msgstr ""
 
 msgid "Lower"
-msgstr ""
+msgstr "下"
 
 msgid "95%% Credible Interval"
 msgstr ""
 
 msgid "Upper"
-msgstr ""
+msgstr "上"
 
 msgid "Averaged"
 msgstr ""
@@ -242,7 +242,7 @@ msgid "Coefficients"
 msgstr ""
 
 msgid "Estimate"
-msgstr ""
+msgstr "推定"
 
 msgid "Standard Error"
 msgstr ""
@@ -275,7 +275,7 @@ msgid "Regression test for Funnel plot asymmetry (\"Egger's test\")"
 msgstr ""
 
 msgid "t"
-msgstr ""
+msgstr "t"
 
 msgid "Influence Measures"
 msgstr ""
