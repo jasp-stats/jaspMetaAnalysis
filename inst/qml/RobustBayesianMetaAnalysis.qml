@@ -24,17 +24,17 @@ Form
 {
 	property var listVisibility :
 	{
-		"input_t" :	{ values: ["cohensd"]					, id: input_t	, check2Sample: false },
-		"input_SE": { values: ["cohensd", "general"]		, id: input_SE	, check2Sample: false },
-		"input_CI":	{ values: ["cohensd", "general", "OR"]	, id: input_CI	, check2Sample: false },
-		"input_N" :	{ values: ["cohensd", "correlation"]	, id: input_N	, check2Sample: false },
-		"input_N1": { values: ["cohensd"]					, id: input_N1	, check2Sample: true  },
-		"input_N2": { values: ["cohensd"]					, id: input_N2	, check2Sample: true  },
+		"inputT" :	{ values: ["cohensD"]					, id: inputT	, check2Sample: false },
+		"inputSE":	{ values: ["cohensD", "general"]		, id: inputSE	, check2Sample: false },
+		"inputCI":	{ values: ["cohensD", "general", "OR"]	, id: inputCI	, check2Sample: false },
+		"inputN" :	{ values: ["cohensD", "correlation"]	, id: inputN	, check2Sample: false },
+		"inputN1":	{ values: ["cohensD"]					, id: inputN1	, check2Sample: true  },
+		"inputN2":	{ values: ["cohensD"]					, id: inputN2	, check2Sample: true  },
 	}
 
 	function checkListVisibility(name)
 	{
-		var check = (listVisibility[name]["check2Sample"] ? cohensd_twoSample.checked : true)
+		var check = (listVisibility[name]["check2Sample"] ? cohensDTwoSample.checked : true)
 
 		return check && listVisibility[name]["values"].includes(measures.value);
 	}
@@ -49,10 +49,10 @@ Form
 
 		onValueChanged:
 		{
-			if(measures_correlation.checked)
-				advanced_mu_transform_cohens_d.click()
-			else if (measures_OR.checked)
-				advanced_mu_transform_log_OR.click()
+			if(measuresCorrelation.checked)
+				advancedMuTransformcohensD.click()
+			else if (measuresOR.checked)
+				advancedMuTransformLogOR.click()
 
 			for (var inputName in listVisibility)
 			{
@@ -65,8 +65,8 @@ Form
 		RadioButton
 		{
 			label:		qsTr("Cohen's d / t-statistics & N / SE")
-			value:		"cohensd"
-			id:			measures_cohensd
+			value:		"cohensD"
+			id:			measuresCohensD
 			enabled:	mainWindow.dataAvailable
 			checked:	mainWindow.dataAvailable
 		}
@@ -75,7 +75,7 @@ Form
 		{
 			label:		qsTr("Correlations & N")
 			value:		"correlation"
-			id:			measures_correlation
+			id:			measuresCorrelation
 			enabled:	mainWindow.dataAvailable
 		}
 
@@ -83,7 +83,7 @@ Form
 		{
 			label:		qsTr("Odds ratios & CI")
 			value:		"OR"
-			id:			measures_OR
+			id:			measuresOR
 			enabled:	mainWindow.dataAvailable
 		}
 
@@ -91,7 +91,7 @@ Form
 		{
 			label:		qsTr("Effect sizes & SE")
 			value:		"general"
-			id:			measures_general
+			id:			measuresGeneral
 			enabled:	mainWindow.dataAvailable
 		}
 
@@ -99,37 +99,37 @@ Form
 		{
 			label:		qsTr("Fitted model")
 			value:		"fitted"
-			id:			measures_fitted
+			id:			measuresFitted
 			checked:	!mainWindow.dataAvailable
 		}
 	}
 
 	FileSelector
 	{
-		name:			"fitted_path"
+		name:			"fittedPath"
 		label:  		qsTr("Path to the fitted model")
 		filter:			"*.RDS"
 		save:			false
-		visible:		measures_fitted.checked
+		visible:		measuresFitted.checked
 	}
 
 	VariablesForm
 	{
 		preferredHeight:	400 * preferencesModel.uiScale
-		visible:			!measures_fitted.checked
+		visible:			!measuresFitted.checked
 
 		AvailableVariablesList {name: "variablesList"}
 
 		AssignedVariablesList
 		{
-			id: 			input_ES
-			name: 			"input_ES"
-			enabled: 		input_t.count == 0
-			title: 			if (measures_cohensd.checked){
+			id: 			inputES
+			name: 			"inputES"
+			enabled: 		inputT.count == 0
+			title: 			if (measuresCohensD.checked){
 				qsTr("Cohen's d")
-			} else if (measures_correlation.checked) {
+			} else if (measuresCorrelation.checked) {
 				qsTr("Correlation")
-			} else if (measures_OR.checked) {
+			} else if (measuresOR.checked) {
 				qsTr("Odds Ratio")
 			} else {
 				qsTr("Effect Size")
@@ -140,9 +140,9 @@ Form
 
 		AssignedVariablesList
 		{
-			name: 			"input_t"
-			id: 			input_t
-			enabled: 		input_ES.count == 0
+			name: 			"inputT"
+			id: 			inputT
+			enabled: 		inputES.count == 0
 			title: 			qsTr("t-statistic")
 			singleVariable: true
 			allowedColumns: ["scale"]
@@ -151,9 +151,9 @@ Form
 
 		AssignedVariablesList
 		{
-			id: 			input_SE
-			enabled: 		input_CI.count == 0 && input_N.count == 0 && input_N1.count == 0 && input_N2.count == 0 && input_t.count == 0
-			name: 			"input_SE"
+			id: 			inputSE
+			enabled: 		inputCI.count == 0 && inputN.count == 0 && inputN1.count == 0 && inputN2.count == 0 && inputT.count == 0
+			name: 			"inputSE"
 			title: 			qsTr("Effect Size Standard Error")
 			singleVariable: true
 			allowedColumns: ["scale"]
@@ -162,9 +162,9 @@ Form
 
 		AssignedPairsVariablesList
 		{
-			id: 			input_CI
-			enabled: 		input_SE.count == 0 && input_N.count == 0 && input_N1.count == 0 && input_N2.count == 0 && input_t.count == 0
-			name: 			"input_CI"
+			id: 			inputCI
+			enabled: 		inputSE.count == 0 && inputN.count == 0 && inputN1.count == 0 && inputN2.count == 0 && inputT.count == 0
+			name: 			"inputCI"
 			title: 			qsTr("95% CI Lower and Upper Bound")
 			singleVariable: true
 			allowedColumns: ["scale"]
@@ -173,9 +173,9 @@ Form
 
 		AssignedVariablesList
 		{
-			id: 			input_N
-			enabled: 		input_SE.count == 0 && input_CI.count == 0 && input_N1.count == 0 && input_N2.count == 0
-			name: 			"input_N"
+			id: 			inputN
+			enabled: 		inputSE.count == 0 && inputCI.count == 0 && inputN1.count == 0 && inputN2.count == 0
+			name: 			"inputN"
 			title: 			qsTr("N")
 			singleVariable: true
 			allowedColumns: ["scale", "ordinal"]
@@ -184,9 +184,9 @@ Form
 
 		AssignedVariablesList
 		{
-			id: 			input_N1
-			enabled: 		input_SE.count == 0 && input_CI.count == 0 && input_N.count == 0
-			name: 			"input_N1"
+			id: 			inputN1
+			enabled: 		inputSE.count == 0 && inputCI.count == 0 && inputN.count == 0
+			name: 			"inputN1"
 			title: 			qsTr("N (group 1)")
 			singleVariable: true
 			allowedColumns: ["scale", "ordinal"]
@@ -195,9 +195,9 @@ Form
 
 		AssignedVariablesList
 		{
-			id: 			input_N2
-			enabled: 		input_SE.count == 0 && input_CI.count == 0 && input_N.count == 0
-			name: 			"input_N2"
+			id: 			inputN2
+			enabled: 		inputSE.count == 0 && inputCI.count == 0 && inputN.count == 0
+			name: 			"inputN2"
 			title: 			qsTr("N (group 2)")
 			singleVariable: true
 			allowedColumns: ["scale", "ordinal"]
@@ -206,7 +206,7 @@ Form
 
 		AssignedVariablesList
 		{
-			name: 			"input_labels"
+			name: 			"inputLabels"
 			title: 			qsTr("Study Labels")
 			singleVariable:	true
 			allowedColumns: ["nominal","nominalText"]
@@ -215,21 +215,26 @@ Form
 
 	RadioButtonGroup
 	{
-		name:					"cohensd_testType"
-		visible:				measures_cohensd.checked
+		name:					"cohensDTestType"
+		visible:				measuresCohensD.checked
 		radioButtonsOnSameRow:	true
+		onValueChanged:
+		{
+			inputN1.itemDoubleClicked(0)
+			inputN2.itemDoubleClicked(0)
+		}
 
 		RadioButton
 		{
 			label:		qsTr("One-sample t-tests")
 			value:		"one.sample"
-			id:			cohensd_oneSample
+			id:			cohensDOneSample
 		}
 		RadioButton
 		{
 			label:		qsTr("Two-sample t-tests")
 			value: 		"two.sample"
-			id:			cohensd_twoSample
+			id:			cohensDTwoSample
 			checked:	true
 		}
 	}
@@ -243,7 +248,7 @@ Form
 
 		RadioButtonGroup
 		{
-			name:		"effect_direction"
+			name:		"effectDirection"
 			title:		qsTr("Expected effect size direction")
 
 			RadioButton
@@ -262,7 +267,7 @@ Form
 
 		CheckBox
 		{
-			name:		"priors_plot"
+			name:		"priorsPlot"
 			label:		qsTr("Plot priors")
 		}
 
@@ -271,7 +276,7 @@ Form
 		{
 			spacing:				0
 			Layout.preferredWidth:	parent.width
-			visible:				!measures_fitted.checked
+			visible:				!measuresFitted.checked
 
 			Label { text: qsTr("Effect"); Layout.preferredHeight: 20 * preferencesModel.uiScale}
 
@@ -285,7 +290,7 @@ Form
 			}
 			ComponentsList
 			{
-				name:					"priors_mu"
+				name:					"priorsMu"
 				optionKey:				"name"
 				defaultValues: 			[{"type": "normal"}]
 				rowComponent: 			RowLayout
@@ -304,8 +309,8 @@ Form
 								{ label: qsTr("Normal(μ,σ)"),			value: "normal"},
 								{ label: qsTr("Student-t(μ,σ,v)"),		value: "t"},
 								{ label: qsTr("Cauchy(x₀,θ)"),			value: "cauchy"},
-								{ label: qsTr("Gamma(α,β)"),			value: "gamma_ab"},
-								{ label: qsTr("Gamma(k,θ)"),			value: "gamma_k0"},
+								{ label: qsTr("Gamma(α,β)"),			value: "gammaAB"},
+								{ label: qsTr("Gamma(k,θ)"),			value: "gammaK0"},
 								{ label: qsTr("Inverse-Gamma(α,β)"),	value: "invgamma"},
 								{ label: qsTr("Spike(x₀)"),				value: "spike"},
 								{ label: qsTr("Uniform(a,b)"),			value: "uniform"}
@@ -358,7 +363,7 @@ Form
 						{
 							label:				"k "
 							name:				"parShape"
-							visible:			typeMuItem.currentValue === "gamma_k0"
+							visible:			typeMuItem.currentValue === "gammaK0"
 							value:				"1"
 							min:				0
 							inclusive:			JASP.None
@@ -370,7 +375,7 @@ Form
 							label:				"θ"
 							name:				"parScale2"
 							visible:			typeMuItem.currentValue === "cauchy"	||
-												typeMuItem.currentValue === "gamma_k0"
+												typeMuItem.currentValue === "gammaK0"
 							value:				"1"
 							min:				0
 							inclusive:			JASP.None
@@ -394,7 +399,7 @@ Form
 						{
 							label:				"α "
 							name:				"parAlpha"
-							visible:			typeMuItem.currentValue === "gamma_ab"	||
+							visible:			typeMuItem.currentValue === "gammaAB"	||
 												typeMuItem.currentValue === "invgamma"
 							value:				"1"
 							min:				0
@@ -407,7 +412,7 @@ Form
 						{
 							label:				"β"
 							name:				"parBeta"
-							visible:			typeMuItem.currentValue === "gamma_ab"	||
+							visible:			typeMuItem.currentValue === "gammaAB"	||
 												typeMuItem.currentValue === "invgamma"
 							value:				"0.15"
 							min:				0
@@ -454,8 +459,8 @@ Form
 							label: 				qsTr("lower")
 							name: 				"truncationLower"
 							visible:			typeMuItem.currentValue !== "spike" && typeMuItem.currentValue !== "uniform"
-							value:				if(typeMuItem.currentValue === "gamma_k0" || typeMuItem.currentValue === "gamma_ab" || typeMuItem.currentValue === "invgamma"){ 0 } else "-Inf"
-							min:				if(typeMuItem.currentValue === "gamma_k0" || typeMuItem.currentValue === "gamma_ab" || typeMuItem.currentValue === "invgamma"){ 0 } else "-Inf"
+							value:				if(typeMuItem.currentValue === "gammaK0" || typeMuItem.currentValue === "gammaAB" || typeMuItem.currentValue === "invgamma"){ 0 } else "-Inf"
+							min:				if(typeMuItem.currentValue === "gammaK0" || typeMuItem.currentValue === "gammaAB" || typeMuItem.currentValue === "invgamma"){ 0 } else "-Inf"
 							max: 				truncationMuUpper.value
 							inclusive: 			JASP.MinOnly
 							fieldWidth:			40 * preferencesModel.uiScale
@@ -497,7 +502,7 @@ Form
 		{
 			spacing: 				0
 			Layout.preferredWidth:	parent.width
-			visible:				!measures_fitted.checked
+			visible:				!measuresFitted.checked
 
 			Label { text: qsTr("Heterogeneity"); Layout.preferredHeight: 20 * preferencesModel.uiScale}
 
@@ -511,7 +516,7 @@ Form
 			}
 			ComponentsList
 			{
-				name:					"priors_tau"
+				name:					"priorsTau"
 				optionKey:				"name"
 				defaultValues: 			[{"type": "invgamma"}]
 				rowComponent: 			RowLayout
@@ -530,8 +535,8 @@ Form
 								{ label: qsTr("Normal(μ,σ)"),			value: "normal"},
 								{ label: qsTr("Student-t(μ,σ,v)"),		value: "t"},
 								{ label: qsTr("Cauchy(x₀,θ)"),			value: "cauchy"},
-								{ label: qsTr("Gamma(α,β)"),			value: "gamma_ab"},
-								{ label: qsTr("Gamma(k,θ)"),			value: "gamma_k0"},
+								{ label: qsTr("Gamma(α,β)"),			value: "gammaAB"},
+								{ label: qsTr("Gamma(k,θ)"),			value: "gammaK0"},
 								{ label: qsTr("Inverse-Gamma(α,β)"),	value: "invgamma"},
 								{ label: qsTr("Spike(x₀)"),				value: "spike"},
 								{ label: qsTr("Uniform(a,b)"),			value: "uniform"}
@@ -584,7 +589,7 @@ Form
 						{
 							label:				"k "
 							name:				"parShape"
-							visible:			typeTauItem.currentValue === "gamma_k0"
+							visible:			typeTauItem.currentValue === "gammaK0"
 							value:				"1"
 							min:				0
 							inclusive:			JASP.None
@@ -597,7 +602,7 @@ Form
 							label:				"θ"
 							name:				"parScale2"
 							visible:			typeTauItem.currentValue === "cauchy"	||
-												typeTauItem.currentValue === "gamma_k0"
+												typeTauItem.currentValue === "gammaK0"
 							value:				"1"
 							min:				0
 							inclusive:			JASP.None
@@ -621,7 +626,7 @@ Form
 						{
 							label:				"α "
 							name:				"parAlpha"
-							visible:			typeTauItem.currentValue === "gamma_ab"		||
+							visible:			typeTauItem.currentValue === "gammaAB"		||
 												typeTauItem.currentValue === "invgamma"
 							value:				"1"
 							min:				0
@@ -634,7 +639,7 @@ Form
 						{
 							label:				"β"
 							name:				"parBeta"
-							visible:			typeTauItem.currentValue === "gamma_ab"	||
+							visible:			typeTauItem.currentValue === "gammaAB"	||
 												typeTauItem.currentValue === "invgamma"
 							value:				"0.15"
 							min:				0
@@ -726,7 +731,7 @@ Form
 		{
 			spacing: 0
 			Layout.preferredWidth:	parent.width
-			visible:				!measures_fitted.checked
+			visible:				!measuresFitted.checked
 
 			Label { text: qsTr("Publication bias"); Layout.preferredHeight: 20 * preferencesModel.uiScale}
 
@@ -740,7 +745,7 @@ Form
 			}
 			ComponentsList
 			{
-				name:					"priors_omega"
+				name:					"priorsOmega"
 				optionKey:				"name"
 				defaultValues:
 				[
@@ -855,10 +860,10 @@ Form
 
 		CheckBox
 		{
-			id:						priors_null
-			name:					"priors_null"
+			id:						priorsNull
+			name:					"priorsNull"
 			label:					qsTr("Set null priors")
-			visible:				!measures_fitted.checked
+			visible:				!measuresFitted.checked
 		}
 
 
@@ -867,7 +872,7 @@ Form
 		{
 			spacing:				0
 			Layout.preferredWidth:	parent.width
-			visible:				priors_null.checked && !measures_fitted.checked
+			visible:				priorsNull.checked && !measuresFitted.checked
 
 			Label { text: qsTr("Effect (null)"); Layout.preferredHeight: 20 * preferencesModel.uiScale}
 
@@ -881,7 +886,7 @@ Form
 			}
 			ComponentsList
 			{
-				name:					"priors_mu_null"
+				name:					"priorsMuNull"
 				optionKey:				"name"
 				defaultValues: 			[{"type": "spike"}]
 				rowComponent: 			RowLayout
@@ -900,8 +905,8 @@ Form
 								{ label: qsTr("Normal(μ,σ)"),			value: "normal"},
 								{ label: qsTr("Student-t(μ,σ,v)"),		value: "t"},
 								{ label: qsTr("Cauchy(x₀,θ)"),			value: "cauchy"},
-								{ label: qsTr("Gamma(α,β)"),			value: "gamma_ab"},
-								{ label: qsTr("Gamma(k,θ)"),			value: "gamma_k0"},
+								{ label: qsTr("Gamma(α,β)"),			value: "gammaAB"},
+								{ label: qsTr("Gamma(k,θ)"),			value: "gammaK0"},
 								{ label: qsTr("Inverse-Gamma(α,β)"),	value: "invgamma"},
 								{ label: qsTr("Spike(x₀)"),				value: "spike"},
 								{ label: qsTr("Uniform(a,b)"),			value: "uniform"}
@@ -953,7 +958,7 @@ Form
 						{
 							label:				"k "
 							name:				"parShape"
-							visible:			typeMuNullItem.currentValue === "gamma_k0"
+							visible:			typeMuNullItem.currentValue === "gammaK0"
 							value:				"1"
 							min:				0
 							inclusive:			JASP.None
@@ -965,7 +970,7 @@ Form
 							label:				"θ"
 							name:				"parScale2"
 							visible:			typeMuNullItem.currentValue === "cauchy"	||
-												typeMuNullItem.currentValue === "gamma_k0"
+												typeMuNullItem.currentValue === "gammaK0"
 							value:				"1"
 							min:				0
 							inclusive:			JASP.None
@@ -989,7 +994,7 @@ Form
 						{
 							label:				"α "
 							name:				"parAlpha"
-							visible:			typeMuNullItem.currentValue === "gamma_ab"	||
+							visible:			typeMuNullItem.currentValue === "gammaAB"	||
 												typeMuNullItem.currentValue === "invgamma"
 							value:				"1"
 							min:				0
@@ -1002,7 +1007,7 @@ Form
 						{
 							label:				"β"
 							name:				"parBeta"
-							visible:			typeMuNullItem.currentValue === "gamma_ab"	||
+							visible:			typeMuNullItem.currentValue === "gammaAB"	||
 												typeMuNullItem.currentValue === "invgamma"
 							value:				"0.15"
 							min:				0
@@ -1048,8 +1053,8 @@ Form
 							label: 				qsTr("lower")
 							name: 				"truncationLower"
 							visible:			typeMuNullItem.currentValue !== "spike" && typeMuNullItem.currentValue !== "uniform"
-							value:				if(typeMuNullItem.currentValue === "gamma_k0" || typeMuNullItem.currentValue === "gamma_ab" || typeMuNullItem.currentValue === "invgamma"){ 0 } else "-Inf"
-							min:				if(typeMuNullItem.currentValue === "gamma_k0" || typeMuNullItem.currentValue === "gamma_ab" || typeMuNullItem.currentValue === "invgamma"){ 0 } else "-Inf"
+							value:				if(typeMuNullItem.currentValue === "gammaK0" || typeMuNullItem.currentValue === "gammaAB" || typeMuNullItem.currentValue === "invgamma"){ 0 } else "-Inf"
+							min:				if(typeMuNullItem.currentValue === "gammaK0" || typeMuNullItem.currentValue === "gammaAB" || typeMuNullItem.currentValue === "invgamma"){ 0 } else "-Inf"
 							max: 				truncationMuNullUpper.value
 							inclusive: 			JASP.MinOnly
 							fieldWidth:			40 * preferencesModel.uiScale
@@ -1091,7 +1096,7 @@ Form
 		{
 			spacing: 				0
 			Layout.preferredWidth:	parent.width
-			visible:				priors_null.checked && !measures_fitted.checked
+			visible:				priorsNull.checked && !measuresFitted.checked
 
 			Label { text: qsTr("Heterogeneity (null)"); Layout.preferredHeight: 20 * preferencesModel.uiScale}
 
@@ -1105,7 +1110,7 @@ Form
 			}
 			ComponentsList
 			{
-				name:					"priors_tau_null"
+				name:					"priorsTauNull"
 				optionKey:				"name"
 				defaultValues: 			[{"type": "spike"}]
 				rowComponent: 			RowLayout
@@ -1124,8 +1129,8 @@ Form
 								{ label: qsTr("Normal(μ,σ)"),			value: "normal"},
 								{ label: qsTr("Student-t(μ,σ,v)"),		value: "t"},
 								{ label: qsTr("Cauchy(x₀,θ)"),			value: "cauchy"},
-								{ label: qsTr("Gamma(α,β)"),			value: "gamma_ab"},
-								{ label: qsTr("Gamma(k,θ)"),			value: "gamma_k0"},
+								{ label: qsTr("Gamma(α,β)"),			value: "gammaAB"},
+								{ label: qsTr("Gamma(k,θ)"),			value: "gammaK0"},
 								{ label: qsTr("Inverse-Gamma(α,β)"),	value: "invgamma"},
 								{ label: qsTr("Spike(x₀)"),				value: "spike"},
 								{ label: qsTr("Uniform(a,b)"),			value: "uniform"}
@@ -1178,7 +1183,7 @@ Form
 						{
 							label:				"k"
 							name:				"parShape"
-							visible:			typeTauNullItem.currentValue === "gamma_k0"
+							visible:			typeTauNullItem.currentValue === "gammaK0"
 							value:				"1"
 							min:				0
 							inclusive:			JASP.None
@@ -1191,7 +1196,7 @@ Form
 							label:				"θ"
 							name:				"parScale2"
 							visible:			typeTauNullItem.currentValue === "cauchy"	||
-												typeTauNullItem.currentValue === "gamma_k0"
+												typeTauNullItem.currentValue === "gammaK0"
 							value:				"1"
 							min:				0
 							inclusive:			JASP.None
@@ -1215,7 +1220,7 @@ Form
 						{
 							label:				"α"
 							name:				"parAlpha"
-							visible:			typeTauNullItem.currentValue === "gamma_ab"		||
+							visible:			typeTauNullItem.currentValue === "gammaAB"		||
 												typeTauNullItem.currentValue === "invgamma"
 							value:				"1"
 							min:				0
@@ -1228,7 +1233,7 @@ Form
 						{
 							label:				"β"
 							name:				"parBeta"
-							visible:			typeTauNullItem.currentValue === "gamma_ab"	||
+							visible:			typeTauNullItem.currentValue === "gammaAB"	||
 												typeTauNullItem.currentValue === "invgamma"
 							value:				"0.15"
 							min:				0
@@ -1320,7 +1325,7 @@ Form
 		{
 			spacing: 0
 			Layout.preferredWidth:	parent.width
-			visible:				priors_null.checked && !measures_fitted.checked
+			visible:				priorsNull.checked && !measuresFitted.checked
 
 			Label { text: qsTr("Publication bias (null)"); Layout.preferredHeight: 20 * preferencesModel.uiScale}
 
@@ -1334,7 +1339,7 @@ Form
 			}
 			ComponentsList
 			{
-				name:					"priors_omega_null"
+				name:					"priorsOmegaNull"
 				optionKey:				"name"
 				defaultValues:			[{"type": "spike"}]
 				rowComponent: 			RowLayout
@@ -1439,18 +1444,18 @@ Form
 			CheckBox
 			{
 				label:		qsTr("Conditional estimates")
-				name:		"results_conditional"
+				name:		"resultsConditional"
 			}
 
 			CheckBox
 			{
 				columns:	2
 				label:		qsTr("Models overview")
-				name:		"results_models"
+				name:		"resultsModels"
 
 				RadioButtonGroup
 				{
-					name: "results_models_BF"
+					name: "resultsModelsBF"
 					title: qsTr("BF")
 
 					RadioButton
@@ -1470,13 +1475,13 @@ Form
 					{
 						name: 		"previous"
 						label: 		qsTr("vs Previous")
-						enabled:	results_models_order_marglik.checked
+						enabled:	resultsModelsOrderMarglik.checked
 					}
 				}
 
 				RadioButtonGroup
 				{
-					name: 		"results_models_order"
+					name: 		"resultsModelsOrder"
 					title:		qsTr("Order")
 
 					RadioButton
@@ -1490,7 +1495,7 @@ Form
 					{
 						name: 		"marglik"
 						label: 		qsTr("Marginal likelihood")
-						id:			results_models_order_marglik
+						id:			resultsModelsOrderMarglik
 					}
 
 					RadioButton
@@ -1505,16 +1510,16 @@ Form
 			CheckBox
 			{
 				label:		qsTr("Individual models")
-				name:		"results_individual"
+				name:		"resultsIndividual"
 
 				CheckBox
 				{
 					label:		qsTr("Single model")
-					name:		"results_individual_single"
+					name:		"resultsIndividualSingle"
 					childrenOnSameRow: true
 					IntegerField
 					{
-						name:	"results_individual_single_number"
+						name:	"resultsIndividualSingleNumber"
 						defaultValue:	1
 					}
 				}
@@ -1529,14 +1534,14 @@ Form
 
 			CIField
 			{
-				name: "results_CI"
+				name: "resultsCI"
 				label: qsTr("CI width")
 			}
 
 			CheckBox
 			{
 				label:		qsTr("Estimated studies' effects")
-				name:		"results_theta"
+				name:		"resultsTheta"
 			}
 
 
@@ -1560,11 +1565,11 @@ Form
 			{
 				columns:	2
 				label:		qsTr("Forest plot")
-				name:		"plots_theta"
+				name:		"plotsTheta"
 
 				RadioButtonGroup
 				{
-					name: "plots_theta_show"
+					name: "plotsThetaShow"
 					title: qsTr("Show")
 
 					RadioButton
@@ -1589,7 +1594,7 @@ Form
 
 				RadioButtonGroup
 				{
-					name: 		"plots_theta_order"
+					name: 		"plotsThetaOrder"
 					title:		qsTr("Order")
 
 					RadioButton
@@ -1616,29 +1621,29 @@ Form
 			CheckBox
 			{
 				label:	qsTr("Effect")
-				name:	"plots_mu"
+				name:	"plotsMu"
 			}
 
 			CheckBox
 			{
 				label:	qsTr("Heterogeneity")
-				name:	"plots_tau"
+				name:	"plotsTau"
 			}
 
 			CheckBox
 			{
 				label:	qsTr("Weights")
-				name:	"plots_omega"
+				name:	"plotsOmega"
 
 				CheckBox
 				{
 					label:	qsTr("Weight function")
-					name:	"plots_omega_function"
+					name:	"plotsOmegaFunction"
 					checked:true
 
 					CheckBox
 					{
-						name:	"rescale_weightfunction"
+						name:	"rescaleWeightfunction"
 						text:	qsTr("Rescale x-axis")
 					}
 				}
@@ -1652,7 +1657,7 @@ Form
 
 			RadioButtonGroup
 			{
-				name:	"plots_type"
+				name:	"plotsType"
 				title:	qsTr("Type")
 				RadioButton
 				{
@@ -1671,33 +1676,9 @@ Form
 			CheckBox
 			{
 				label:	qsTr("Show priors")
-				name:	"plots_priors"
+				name:	"plotsPriors"
 				checked:true
 			}
-/*************************************************** TODO: enable once/if CI are made available
-			RadioButtonGroup
-			{
-				name:	"plots_estimate"
-				title:	qsTr("Point estimate")
-				RadioButton
-				{
-					value:	"mean"
-					label:	qsTr("Mean")
-					checked:true
-				}
-				RadioButton
-				{
-					value:	"median"
-					label:	qsTr("Median")
-				}
-			}
-
-			CIField
-			{
-				name: "plots_CI"
-				label: qsTr("CI width")
-			}
-****************************************************/
 		}
 
 		Divider { }
@@ -1710,19 +1691,19 @@ Form
 			CheckBox
 			{
 				label:	qsTr("Effect")
-				name:	"plots_individual_mu"
+				name:	"plotsIndividualMu"
 			}
 
 			CheckBox
 			{
 				label:	qsTr("Heterogeneity")
-				name:	"plots_individual_tau"
+				name:	"plotsIndividualTau"
 			}
 
 			CheckBox
 			{
 				label:	qsTr("Weights")
-				name:	"plots_individual_omega"
+				name:	"plotsIndividualOmega"
 			}
 		}
 
@@ -1733,14 +1714,14 @@ Form
 
 			CheckBox
 			{
-				name:	"plots_type_individual_conditional"
+				name:	"plotsTypeIndividualConditional"
 				label:	qsTr("Conditional models only")
 				checked:true
 			}
 
 			RadioButtonGroup
 			{
-				name: 		"plots_type_individual_by"
+				name: 		"plotsTypeIndividualBy"
 				title:		qsTr("Order")
 				RadioButton
 				{
@@ -1764,7 +1745,7 @@ Form
 
 			RadioButtonGroup
 			{
-				name: 		"plots_type_individual_order"
+				name: 		"plotsTypeIndividualOrder"
 				columns: 	2
 				RadioButton
 				{
@@ -1790,12 +1771,12 @@ Form
 		{
 			Layout.columnSpan: 2
 			label:		qsTr("Overview")
-			name:		"diagnostics_overview"
+			name:		"diagnosticsOverview"
 
 				CheckBox
 				{
 					label:		qsTr("Include theta")
-					name:		"diagnostics_overview_theta"
+					name:		"diagnosticsOverviewTheta"
 				}
 		}
 
@@ -1805,25 +1786,25 @@ Form
 			CheckBox
 			{
 				label:		qsTr("Effect")
-				name:		"diagnostics_mu"
+				name:		"diagnosticsMu"
 			}
 
 			CheckBox
 			{
 				label:		qsTr("Heterogeneity")
-				name:		"diagnostics_tau"
+				name:		"diagnosticsTau"
 			}
 
 			CheckBox
 			{
 				label:		qsTr("Weights")
-				name:		"diagnostics_omega"
+				name:		"diagnosticsOmega"
 			}
 
 			CheckBox
 			{
 				label:		qsTr("Estimated studies' effects")
-				name:		"diagnostics_theta"
+				name:		"diagnosticsTheta"
 			}
 		}
 
@@ -1833,19 +1814,19 @@ Form
 			CheckBox
 			{
 				label:		qsTr("Trace")
-				name:		"diagnostics_trace"
+				name:		"diagnosticsTrace"
 			}
 
 			CheckBox
 			{
 				label:		qsTr("Autocorrelation")
-				name:		"diagnostics_autocorrelation"
+				name:		"diagnosticsAutocorrelation"
 			}
 
 			CheckBox
 			{
 				label:		qsTr("Posterior samples densities")
-				name:		"diagnostics_samples"
+				name:		"diagnosticsSamples"
 			}
 
 		}
@@ -1853,11 +1834,11 @@ Form
 		CheckBox
 		{
 			label:		qsTr("Single model")
-			name:		"diagnostics_single"
+			name:		"diagnosticsSingle"
 			childrenOnSameRow: true
 			IntegerField
 			{
-				name:	"diagnostics_single_model"
+				name:	"diagnosticsSingleModel"
 				defaultValue:	1
 			}
 		}
@@ -1865,9 +1846,9 @@ Form
 		CheckBox
 		{
 			label:		qsTr("Transform estimates")
-			name:		"diagnostics_transformed"
+			name:		"diagnosticsTransformed"
 			checked:	true
-			visible:	measures_correlation.checked | measures_fitted.checked
+			visible:	measuresCorrelation.checked | measuresFitted.checked
 		}
 
 	}
@@ -1882,11 +1863,11 @@ Form
 		DropDown
 		{
 			Layout.columnSpan: 2
-			enabled:	measures_correlation.checked || measures_OR.checked
+			enabled:	measuresCorrelation.checked || measuresOR.checked
 			label:		qsTr("Transform correlations")
-			name:		"advanced_mu_transform"
-			id:			advanced_mu_transform
-			values:		measures_correlation.checked ?
+			name:		"advancedMuTransform"
+			id:			advancedMuTransform
+			values:		measuresCorrelation.checked ?
 			[
 				{ label: qsTr("Cohen's d"),		value: "cohens_d"},
 				{ label: qsTr("Fisher's z"),	value: "fishers_z"}
@@ -1900,33 +1881,33 @@ Form
 		RadioButtonGroup
 		{
 			Layout.columnSpan:		2
-			name:					"advanced_mu_transform"
+			name:					"advancedMuTransform"
 			title:					qsTr("Transform effect sizes")
-			id:						advanced_mu_transform
-			enabled:				measures_correlation.checked || measures_OR.checked
+			id:						advancedMuTransform
+			enabled:				measuresCorrelation.checked || measuresOR.checked
 
 			RadioButton
 			{
 				label:		qsTr("log(OR)")
 				value:		"log_OR"
-				visible:	measures_OR.checked
-				id:			advanced_mu_transform_log_OR
+				visible:	measuresOR.checked
+				id:			advancedMuTransformLogOR
 			}
 
 			RadioButton
 			{
 				label:		qsTr("Cohen's d")
 				value:		"cohens_d"
-				visible:	measures_correlation.checked || measures_OR.checked
-				id:			advanced_mu_transform_cohens_d
+				visible:	measuresCorrelation.checked || measuresOR.checked
+				id:			advancedMuTransformcohensD
 			}
 
 			RadioButton
 			{
 				label:		qsTr("Fisher's z")
 				value:		"fishers_z"
-				visible:	measures_correlation.checked
-				id:			advanced_mu_transform_fishers_z
+				visible:	measuresCorrelation.checked
+				id:			advancedMuTransformFishersZ
 			}
 		}
 
@@ -1940,7 +1921,7 @@ Form
 
 				IntegerField
 				{
-					name:			"advanced_adapt"
+					name:			"advancedAdapt"
 					label:			qsTr("Adaptation")
 					defaultValue:	1000
 					min:			100
@@ -1948,7 +1929,7 @@ Form
 				}
 				IntegerField
 				{
-					name:			"advanced_burnin"
+					name:			"advancedBurnin"
 					label:			qsTr("Burnin")
 					defaultValue:	5000
 					min:			1000
@@ -1956,7 +1937,7 @@ Form
 				}
 				IntegerField
 				{
-					name:			"advanced_iteration"
+					name:			"advancedIteration"
 					label:			qsTr("Iterations")
 					defaultValue:	10000
 					min:			4000
@@ -1964,7 +1945,7 @@ Form
 				}
 				IntegerField
 				{
-					name:			"advanced_chains"
+					name:			"advancedChains"
 					label:			qsTr("Chains")
 					defaultValue:	3
 					min:			2
@@ -1972,7 +1953,7 @@ Form
 				}
 				IntegerField
 				{
-					name:			"advanced_thin"
+					name:			"advancedThin"
 					label:			qsTr("Thin")
 					defaultValue:	1
 					min:			1
@@ -1984,7 +1965,7 @@ Form
 			IntegerField
 			{
 				label:			qsTr("Bridge sampling iterations:")
-				name:			"advanced_bridge_iter"
+				name:			"advancedBridgeIter"
 				defaultValue:	10000
 				max:			1000000
 				fieldWidth: 	60
@@ -2000,7 +1981,7 @@ Form
 			CheckBox
 			{
 				label: 		qsTr("Autofit")
-				name:		"advanced_autofit"
+				name:		"advancedAutofit"
 				checked:	false
 
 				Group
@@ -2009,7 +1990,7 @@ Form
 					{
 						IntegerField
 						{
-							name:			"advanced_autofit_time"
+							name:			"advancedAutofitTime"
 							label:			qsTr("Maximum fitting time")
 							defaultValue:	1
 							min:			0
@@ -2017,7 +1998,7 @@ Form
 
 						DropDown
 						{
-							name:	"advanced_autofit_time_unit"
+							name:	"advancedAutofitTimeUnit"
 							values:
 							[
 								{ label: qsTr("hours"),				value: "hours"},
@@ -2030,7 +2011,7 @@ Form
 
 					PercentField
 					{
-						name:			"advanced_autofit_error"
+						name:			"advancedAutofitError"
 						label:			qsTr("Target margin of error")
 						defaultValue:	1
 						decimals:		1
@@ -2039,7 +2020,7 @@ Form
 
 					DoubleField
 					{
-						name:			"advanced_autofit_rhat"
+						name:			"advancedAutofitRhat"
 						label:			qsTr("Target R-hat")
 						defaultValue:	1.05
 						min:			1
@@ -2051,7 +2032,7 @@ Form
 			CheckBox
 			{
 				label:		qsTr("Exclude models")
-				name:		"advanced_omit"
+				name:		"advancedOmit"
 				checked:	false
 
 				Group
@@ -2060,16 +2041,16 @@ Form
 
 					CheckBox
 					{
-						id:					advanced_omit_error
-						name:				"advanced_omit_error"
+						id:					advancedOmitError
+						name:				"advancedOmitError"
 						label:				qsTr("error % >")
 						checked:			false
 					}
 
 					PercentField
 					{
-						enabled:		advanced_omit_error.checked
-						name: 			"advanced_omit_error_value"
+						enabled:		advancedOmitError.checked
+						name: 			"advancedOmitErrorValue"
 						defaultValue: 	1
 						decimals:		1
 						fieldWidth:		jaspTheme.numericFieldWidth
@@ -2077,31 +2058,31 @@ Form
 
 					CheckBox
 					{
-						id:					advanced_omit_rhat
-						name:				"advanced_omit_rhat"
+						id:					advancedOmitRhat
+						name:				"advancedOmitRhat"
 						label:				qsTr("R-hat >")
 						checked:			false
 					}
 
 					DoubleField
 					{
-						enabled:		advanced_omit_rhat.checked
-						name: 			"advanced_omit_rhat_value"
+						enabled:		advancedOmitRhat.checked
+						name: 			"advancedOmitRhatValue"
 						defaultValue: 	1.05
 						min:			1
 					}
 
 					CheckBox
 					{
-						id:				advanced_omit_ESS
-						name:			"advanced_omit_ESS"
+						id:				advancedOmitESS
+						name:			"advancedOmitESS"
 						label:			qsTr("Estimated sample size <")
 					}
 
 					DoubleField
 					{
-						enabled:		advanced_omit_ESS.checked
-						name: 			"advanced_omit_ESS_value"
+						enabled:		advancedOmitESS.checked
+						name: 			"advancedOmitESSValue"
 						defaultValue:	500
 						min: 			1
 					}
@@ -2110,14 +2091,14 @@ Form
 					{
 						Layout.columnSpan: 2
 						label:			qsTr("Include theta")
-						name:			"advanced_omit_theta"
+						name:			"advancedOmitTheta"
 					}
 				}
 
 				DropDown
 				{
 					label:		qsTr("Redistribute prior probability")
-					name:		"advanced_omit_prior"
+					name:		"advancedOmitPrior"
 					values:
 					[
 						{ label: qsTr("Conditional models"),	value: "conditional"},
@@ -2129,7 +2110,7 @@ Form
 			DropDown
 			{
 				label: qsTr("Control")
-				name: "advanced_control"
+				name: "advancedControl"
 				values:
 				[
 					{ label: qsTr("Clever refitting"),	value: "clever",	default: true},
@@ -2143,7 +2124,7 @@ Form
 		{
 			Layout.columnSpan:	2
 			label: 				qsTr("Save the fitted model")
-			name:				"save_path"
+			name:				"savePath"
 			filter:				"*.RDS"
 			save:				true
 		}
