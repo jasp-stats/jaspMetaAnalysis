@@ -30,7 +30,7 @@ Form
 		AvailableVariablesList { name: "allVariables" }
 		AssignedVariablesList { name: "dependent";	title: qsTr("Effect Size"); singleVariable: true; suggestedColumns: ["scale"] }
 		AssignedVariablesList { name: "wlsWeights";	title: qsTr("Effect Size Standard Error"); singleVariable: true; suggestedColumns: ["scale"] }
-		MA.ClassicalMetaAnalysisMethod{}
+		MA.ClassicalMetaAnalysisMethod{ visible: true}
 		AssignedVariablesList { name: "studyLabels";	title: qsTr("Study Labels"); singleVariable: true; suggestedColumns: ["ordinal", "nominal"] }
 		AssignedVariablesList { name: "covariates";	title: qsTr("Covariates"); suggestedColumns: ["scale"] }
 		AssignedVariablesList { name: "factors";	title: qsTr("Factors"); suggestedColumns: ["ordinal", "nominal"] }

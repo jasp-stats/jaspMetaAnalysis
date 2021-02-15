@@ -23,11 +23,10 @@ import JASP				1.0
 
 DropDown
 {
-	property int defaultIndex:	2
-
 	name:			"method"
 	label:			qsTr("Method")
-	currentIndex:	defaultIndex
+	currentIndex:	2
+	visible:		visible
 
 	values: [
 		{ label: qsTr("Fixed Effects")		, value: "Fixed Effects"		},

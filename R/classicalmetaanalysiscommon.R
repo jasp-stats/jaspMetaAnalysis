@@ -337,6 +337,9 @@
     row$pval  <- rma.fit$QEp
   }
   container[["fixRandTable"]]$addRows(row)
+  
+  if (ready)
+    container[["fixRandTable"]]$addFootnote(gettextf("The model was estimated using %1$s method.", options[["method"]]))
 }
 
 .metaAnalysisCoeffFill <- function(container, dataset, options) {

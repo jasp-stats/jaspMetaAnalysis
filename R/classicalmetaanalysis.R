@@ -17,6 +17,8 @@
 
 ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   
+  options[["module"]] <- "metaAnalysis"
+  
   ready <- options$dependent != "" && options$wlsWeights != "" && (options$includeConstant || length(options$modelTerms) > 0)
   if(ready) {
     dataset <- .metaAnalysisReadData(dataset, options)

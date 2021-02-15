@@ -17,7 +17,7 @@
 
 # Main function ----
 
-BayesianMetaAnalysisCommon <- function(jaspResults, dataset, ready, options) {
+.BayesianMetaAnalysisCommon <- function(jaspResults, dataset, ready, options) {
   
   # Table: Posterior Model Estimates
   .bmaMainTable(jaspResults, dataset, options, ready, .bmaDependencies)
@@ -1196,13 +1196,13 @@ BayesianMetaAnalysisCommon <- function(jaspResults, dataset, ready, options) {
   }
   
   # Scale the height and width of the plot
-  height <- nrow(dataset) * 50
-  width <- 500 + (nchar(max(studyLabels)) * 5)
+  height <- 100 + nrow(dataset) * 30
+  width  <- 500 + (nchar(max(studyLabels)) * 5)
   
   # title of plot based on observed/estimated 
   if(options$forestPlot == "plotForestBoth"){
-    title <- gettext("Observed and estimated study effects")
-    height <- nrow(dataset) * 50 * 1.5
+    title  <- gettext("Observed and estimated study effects")
+    height <- height + 50 + nrow(dataset) * 30
   } else  if(options$forestPlot == "plotForestEstimated"){
     title <- gettext("Estimated study effects")
   } else  if(options$forestPlot == "plotForestObserved" || options$modelSpecification == "FE"){
@@ -1220,9 +1220,9 @@ BayesianMetaAnalysisCommon <- function(jaspResults, dataset, ready, options) {
     # Fill plot
     forestPlot$dependOn(c("plotForestObserved", "plotForestEstimated", "plotForestBoth", 
                           "checkForestPlot", "ascendingForest", "labelForest",
-                          "orderForest"))
+                          "orderForest", "forestPlotOrder", "showLabels"))
     forestPlot$position <- 1
-    .bmaFillForestPlot(forestPlot, jaspResults, dataset, options, studyLabels)
+    .bmaFillForestPlot(forestPlot, jaspResults, dataset, options, studyLabels, showLabels = if(!is.null(options[["showLabels"]])) options[["showLabels"]] else TRUE)
     # Add plot to container
     forestContainer[["forestPlot"]] <- forestPlot
   }
@@ -1236,7 +1236,7 @@ BayesianMetaAnalysisCommon <- function(jaspResults, dataset, ready, options) {
   }
 }
 
-.bmaFillForestPlot <- function(forestPlot, jaspResults, dataset, options, studyLabels){
+.bmaFillForestPlot <- function(forestPlot, jaspResults, dataset, options, studyLabels, showLabels = TRUE){
   # Get analysis results from jasp state
   bmaResults <- .bmaResultsState(jaspResults, dataset, options, .bmaDependencies)
   
@@ -1412,24 +1412,62 @@ BayesianMetaAnalysisCommon <- function(jaspResults, dataset, ready, options) {
   # Get y values for the estimated points 
   yEst <- rev(seq(.6, length(varES) - .4, 1))
   
-  ranked <- rank(df$effectSize, ties.method="first")
-  if(options$orderForest == "ascendingForest"){
-    ord <- (length(varES) + 1) - ranked
-    df$y <- ord
-    yEst <- yEst[ranked]
-  } 
+  if (options[["module"]] == "metaAnalysis"){
+    
+    ranked <- rank(df$effectSize, ties.method="first")
+    if(options$orderForest == "ascendingForest"){
+      ord <- (length(varES) + 1) - ranked
+      df$y <- ord
+      yEst <- yEst[ranked]
+    } 
+    
+    if(options$orderForest == "descendingForest"){
+      ord <- ranked
+      df$y <- ord
+      yEst <- yEst[(length(varES) + 1) - ranked]
+    } 
+    
+  } else {
+    
+    if(options[["forestPlotOrder"]] == "yearAscending"){
+      ranked <- rank(dataset[,"studyYear"], ties.method="first")
+      ord    <- (length(varES) + 1) - ranked
+      df$y   <- ord
+      yEst   <- yEst[ranked] 
+    } else if(options[["forestPlotOrder"]] == "yearDescending"){
+      ranked <- rank(dataset[,"studyYear"], ties.method="first")
+      ord    <- ranked
+      df$y   <- ord
+      yEst   <- yEst[(length(varES) + 1) - ranked]
+    } else if(options[["forestPlotOrder"]] == "effectSizeAscending"){
+      ranked <- rank(dataset[,"effectSize"], ties.method="first")
+      ord    <- (length(varES) + 1) - ranked
+      df$y   <- ord
+      yEst   <- yEst[ranked] 
+    } else if(options[["forestPlotOrder"]] == "effectSizeDescending"){
+      ranked <- rank(dataset[,"effectSize"], ties.method="first")
+      ord    <- ranked
+      df$y   <- ord
+      yEst   <- yEst[(length(varES) + 1) - ranked]
+    }
+    
+  }
+
   
-  if(options$orderForest == "descendingForest"){
-    ord <- ranked
-    df$y <- ord
-    yEst <- yEst[(length(varES) + 1) - ranked]
-  } 
+  # a sneaky way of coloring user-added estimates for Cochrane 
+  df$color        <- ifelse(grepl("_add", df$studyLabels), "blue", "black")
+  df$studyLabels  <- gsub("_add", "", df$studyLabels)
+  
+  if (!showLabels) {
+    df$studyLabels   <- ""
+    df$text          <- ""
+  }
   
   # Create plot
   plot <-  ggplot2::ggplot(df, ggplot2::aes(x = effectSize, y = y)) +
     ggplot2::geom_vline(xintercept = 0, linetype = "dotted") +
-    ggplot2::geom_errorbarh(ggplot2::aes(xmin = df$lower, xmax = df$upper), height = .2) +
-    ggplot2::geom_point(shape = shape, size = df$weight_scaled) +
+    ggplot2::geom_errorbarh(ggplot2::aes(xmin = df$lower, xmax = df$upper), colour = df$color, height = .2) +
+    ggplot2::geom_point(shape = shape, size = df$weight_scaled, colour = df$color) +
     ggplot2::scale_y_continuous(breaks = c(df$y, yDiamond), labels = c(as.character(df$studyLabels), model),
                                 sec.axis = ggplot2::sec_axis(~ ., breaks = c(df$y, yDiamond), labels = c(as.character(df$text), textDiamond)), expand = c(0, 0.5)) +
     ggplot2::xlab(bquote(paste(.(gettext("Effect size")), ~mu)))

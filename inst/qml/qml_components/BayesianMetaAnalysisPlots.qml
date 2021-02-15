@@ -27,6 +27,7 @@ Section
 
 	property string modelTypeValue:			"BMA"
 	property string modelDirectionValue:	"allPos"
+	property string module:					"metaAnalysis"
 
 	Group
 	{
@@ -67,11 +68,40 @@ Section
 			}
 		}
 
+		Group
+		{
+			visible:		module == "cochrane"
+			enabled: 		checkForest.checked
+			
+			CheckBox
+			{
+				name:		"showLabels"
+				text:		qsTr("Show labels")
+				checked:	true
+				visible:	module == "cochrane"
+			}
+
+			DropDown
+			{
+				name:			"forestPlotOrder"
+				label:			qsTr("Ordering")
+				visible:		module == "cochrane"
+				currentIndex:	1
+				values: [
+					{ label: qsTr("Year (ascending)")			, value: "yearAscending"			},
+					{ label: qsTr("Year (descending)")			, value: "yearDescending"			},
+					{ label: qsTr("Effect size (ascending)")	, value: "effectSizeAscending"		},
+					{ label: qsTr("Effect size (descending)")	, value: "effectSizeDescending"		}
+				]
+			}
+		}
+
 		RadioButtonGroup
 		{
 			name: 		"orderForest"
 			title: 		qsTr("Order")
 			enabled: 	checkForest.checked
+			visible:	module == "metaAnalysis"
 
 			RadioButton
 			{

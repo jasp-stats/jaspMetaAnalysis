@@ -24,6 +24,8 @@ import JASP				1.0
 Section
 {
 	title: qsTr("Statistics")
+	property string module:	"metaAnalysis"
+
 	Group
 	{
 		title: qsTr("Regression Coefficients")
@@ -47,7 +49,36 @@ Section
 	{
 		title: qsTr("Model Fit")
 		CheckBox { name: "modelFit";				text: qsTr("Fit measures") }
-		CheckBox { name: "forestPlot";				text: qsTr("Forest plot") }
+		CheckBox
+		{
+			name: 		"forestPlot"
+			text: 		qsTr("Forest plot")
+			
+			CheckBox
+			{
+				name:		"showLabels"
+				text:		qsTr("Show labels")
+				checked:	true
+				enabled: 	forestPlot.checked	
+				visible:	module == "cochrane"
+			}
+
+			DropDown
+			{
+				name:			"forestPlotOrder"
+				label:			qsTr("Ordering")
+				enabled: 		forestPlot.checked
+				visible:		module == "cochrane"
+				currentIndex:	1
+				values: [
+					{ label: qsTr("Year (ascending)")			, value: "yearAscending"			},
+					{ label: qsTr("Year (descending)")			, value: "yearDescending"			},
+					{ label: qsTr("Effect size (ascending)")	, value: "effectSizeAscending"		},
+					{ label: qsTr("Effect size (descending)")	, value: "effectSizeDescending"		}
+				]
+			}
+		
+		}
 		CheckBox { name: "funnelPlot";				text: qsTr("Funnel plot") }
 		CheckBox { name: "rSquaredChange";			text: qsTr("Rank test for funnel plot asymmetry") }
 		CheckBox { name: "funnelPlotAsymmetryTest"; text: qsTr("Regression test for funnel plot asymmetry") }
