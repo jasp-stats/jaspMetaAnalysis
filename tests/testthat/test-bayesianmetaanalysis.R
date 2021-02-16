@@ -20,6 +20,15 @@ options$priorSE <- "inverseGamma"
 options$forestPlot <- "plotForestObserved"
 options$orderForest <- "ascendingForest"
 options$BFComputation <- "integration"
+options$bayesFactorType <- 'BF10'
+options$modelSpecification <- 'BMA'
+options$checkLowerPrior <- FALSE
+options$checkUpperPrior <- FALSE
+options$informativeCauchyLocation <- 0
+options$informativeCauchyScale    <- 0.707
+options$inverseGammaShape <- 1
+options$inverseGammaScale <- 0.15
+options$chainsMCMC        <- 4
 options$.meta <- list(confidenceInterval = list(containsColumn = TRUE), effectSize = list(
   containsColumn = TRUE), standardError = list(containsColumn = TRUE), 
   studyLabels = list(containsColumn = TRUE))
