@@ -19,7 +19,7 @@ Imports:
   metafor,
   psych,
   purrr,
-  RoBMA (>= 1.1.1),
+  RoBMA (>= 1.2.1),
   rstan,
   stringr,
   tibble,
