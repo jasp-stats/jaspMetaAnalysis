@@ -3,6 +3,8 @@ Robust Bayesian Meta-Analysis
 
 The robust Bayesian meta-analysis allows the user to specify a wide range of meta-analytic models, combine their estimates using model averaging and quantify evidence for different hypotheses using Bayes factors. The analysis allows the user to specify various prior distributions for effect sizes and heterogeneity and incorporate models correcting for publication bias by estimating a weight function on p-values. 
 
+Please note that we updated the model specification of RoBMA models with the version of JASP 0.15 (the analysis is now build on RoBMA 1.2.0 package). See the Appendix of our RoBMA preprint for more details (https://doi.org/10.31234/osf.io/u4cns).
+
 ### Input
 ---
 #### Input type
@@ -209,6 +211,7 @@ Allows modifying the fitting and refitting behavior of the analysis when 'Run An
 ### References
 ---
 Maier, M., Bartoš, F., & Wagenmakers, E. J. (2020). Robust Bayesian meta-analysis: Addressing publication bias with model-averaging. https://doi.org/10.31234/osf.io/u4cns
+Bartoš, F., Maier, M., & Wagenmakers, E. J. (2020). Adjusting for publication bias in JASP — selection models and robust Bayesian meta-analysis. https://doi.org/10.31234/osf.io/75bqn
 
 ### R-packages
 ---

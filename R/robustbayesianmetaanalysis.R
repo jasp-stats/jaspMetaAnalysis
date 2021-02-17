@@ -632,7 +632,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
       if (options[["inputLabels"]] != ""){
         dataset[[options[["inputLabels"]]]] <- as.character(dataset[[options[["inputLabels"]]]])
-        if (!validUTF8(dataset[[options[["inputLabels"]]]]))
+        if (any(!validUTF8(dataset[[options[["inputLabels"]]]])))
           .quitAnalysis(gettext("The study labels contain invalid characters. Please, remove them before running the analysis.")) 
       }
 
@@ -926,7 +926,6 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
       priors <- jaspResults[["priors"]][["object"]]
       
       fit <- tryCatch(RoBMA::RoBMA(
-        likelihood = "normal",
         # data
         t   = if (options[["measures"]] == "cohensD" && options[["inputT"]] != "")                     dataset[, options[["inputT"]]],
         d   = if (options[["measures"]] == "cohensD" && options[["inputES"]] != "")                    dataset[, options[["inputES"]]],
