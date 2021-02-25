@@ -1407,3 +1407,23 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   
   return(unlist(mapping))
 }
+
+# these functions originally lived in jaspBase/R/common.R, but are only used by this module
+as.modelTerms <- function(object, ...) UseMethod("as.modelTerms")
+as.modelTerms.list <- function(object) structure(object, class = "modelTerms")
+as.modelTerms.formula <- function(formula) structure(sapply(attr(terms(formula), "term.labels"), strsplit, ":"), class="modelTerms")
+formula.modelTerms <- function(modelTerms, env = parent.frame()) {
+  # Converts a modelTerms list into a one-side R formula
+  #
+  # Args:
+  #   modelTerms:  A list of interaction terms, each term being a list of variable names involved in the interaction
+  #   env:         An environement associated with the variables in the formula, see ?as.formula
+  #
+  # Value:
+  #   A formula. See ?formula
+  #
+  terms = sapply(modelTerms, function(x) paste0(unlist(x), collapse = ":"))
+  terms = terms[terms != ""]
+  formula.rhs = paste(terms, collapse = " + ")
+  if (formula.rhs != "") as.formula(paste(" ~ ", formula.rhs), env = env)
+}
