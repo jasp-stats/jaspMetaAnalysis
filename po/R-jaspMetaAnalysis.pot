@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
-"POT-Creation-Date: 2021-01-05 09:39\n"
+"Project-Id-Version: jaspMetaAnalysis 0.15\n"
+"POT-Creation-Date: 2021-03-06 14:59\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -547,6 +547,9 @@ msgstr ""
 msgid "Heterogeneity (%s)"
 msgstr ""
 
+msgid "The study labels contain invalid characters. Please, remove them before running the analysis."
+msgstr ""
+
 msgid "Prior Plots"
 msgstr ""
 
@@ -565,7 +568,7 @@ msgstr ""
 msgid "Model Preview"
 msgstr ""
 
-msgid "At least one prior distribution per parameter must be specified (either null or alternative)."
+msgid "Please specify a prior distribution for each parameter in the Models specification section (either null or alternative)."
 msgstr ""
 
 msgid "Model Summary"

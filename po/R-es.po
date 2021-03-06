@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
-"POT-Creation-Date: 2021-01-05 09:39\n"
+"POT-Creation-Date: 2021-03-06 14:59\n"
 "PO-Revision-Date: 2021-03-06 09:51+0000\n"
 "Last-Translator: Paulina Elizabeth Robalino <paulina.e.robalino@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
@@ -589,6 +589,11 @@ msgstr ""
 msgid "Heterogeneity (%s)"
 msgstr ""
 
+msgid ""
+"The study labels contain invalid characters. Please, remove them before "
+"running the analysis."
+msgstr ""
+
 msgid "Prior Plots"
 msgstr ""
 
@@ -608,8 +613,8 @@ msgid "Model Preview"
 msgstr ""
 
 msgid ""
-"At least one prior distribution per parameter must be specified (either null "
-"or alternative)."
+"Please specify a prior distribution for each parameter in the Models "
+"specification section (either null or alternative)."
 msgstr ""
 
 msgid "Model Summary"
