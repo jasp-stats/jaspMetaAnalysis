@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-03-06 14:59\n"
-"PO-Revision-Date: 2021-03-18 05:18+0000\n"
-"Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
+"PO-Revision-Date: 2021-03-19 18:18+0000\n"
+"Last-Translator: Alex França <alex.tonante@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/pt/>\n"
 "Language: pt\n"
@@ -61,15 +61,17 @@ msgstr "Médias"
 msgid "SD"
 msgstr ""
 
+#, fuzzy
 msgid "Lower"
-msgstr ""
+msgstr "Inferior"
 
 #, fuzzy
 msgid "95%% Credible Interval"
 msgstr "Intervalo de credibilidade"
 
+#, fuzzy
 msgid "Upper"
-msgstr ""
+msgstr "Superior"
 
 msgid "Averaged"
 msgstr ""
@@ -295,12 +297,11 @@ msgstr "efeitos aleatórios da escala r"
 msgid "Q"
 msgstr ""
 
-#, fuzzy
 msgid "df"
-msgstr "gl:"
+msgstr "gl"
 
 msgid "p"
-msgstr ""
+msgstr "p"
 
 msgid "<em>p</em>-values are approximate."
 msgstr ""
