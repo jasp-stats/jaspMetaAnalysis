@@ -192,7 +192,7 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
     anchorPoint             <- results$estimates["averaged", 1]
   if(options[["modelSpecification"]] == "CRE")
     anchorPoint             <- results$estimates["ordered", 1]
-  bma[["xPost"]]            <- seq(anchorPoint - 2, anchorPoint + 2, .001)
+  bma[["xPost"]]            <- seq(anchorPoint - 2, anchorPoint + 2, .0001)
   bma[["yPost"]]            <- results$posterior_d(bma[["xPost"]])
   bma[["yPrior"]]           <- results$meta$fixed$prior_d(bma[["xPost"]])
   bma[["dfPointsY"]]        <- data.frame(prior = results$meta$fixed$prior_d(0),
@@ -218,7 +218,7 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
   fixed[["estimates"]]      <- results$meta$fixed$estimates
   ## Prior and posterior - effect size
   anchorPoint               <- results$meta$fixed$estimates["d", 1]
-  fixed[["xPost"]]          <- seq(anchorPoint - 2, anchorPoint + 2, .001)
+  fixed[["xPost"]]          <- seq(anchorPoint - 2, anchorPoint + 2, .0001)
   fixed[["yPost"]]          <- results$meta$fixed$posterior_d(fixed[["xPost"]])
   fixed[["yPrior"]]         <- results$meta$fixed$prior_d(fixed[["xPost"]])
   fixed[["dfPointsY"]]      <- data.frame(prior = results$meta$fixed$prior_d(0),
@@ -232,12 +232,12 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
   random[["summary"]]       <- rstan::summary(results$meta$random$stanfit_dstudy)$summary
   ## Prior and posterior - effect size
   anchorPoint               <- random[["estimates"]]["d", 1]
-  random[["xPost"]]         <- seq(anchorPoint - 2, anchorPoint + 2, .001)
+  random[["xPost"]]         <- seq(anchorPoint - 2, anchorPoint + 2, .0001)
   random[["yPost"]]         <- results$meta$random$posterior_d(random[["xPost"]])
   random[["yPrior"]]        <- results$meta$random$prior_d(random[["xPost"]])
   ## Prior and posterior - heterogeneity
   anchorPoint               <- random[["estimates"]][2, "mean"]
-  random[["xPostTau"]]      <- seq(-0.05, anchorPoint + 4, .001)
+  random[["xPostTau"]]      <- seq(-0.05, anchorPoint + 4, .0001)
   random[["yPostTau"]]      <- results$meta$random$posterior_tau(random[["xPostTau"]])
   random[["yPriorTau"]]     <- results$meta$random$prior_tau(random[["xPostTau"]])
   random[["dfPointsY"]]     <- data.frame(prior = results$meta$random$prior_d(0),
@@ -253,15 +253,15 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
     ordered[["summary"]]    <- rstan::summary(results$meta$ordered$stanfit_dstudy)$summary
     ## Prior and posterior - effect size
     anchorPoint             <- results$meta$ordered$estimates[2, "mean"]
-    if(options$direction == "allPos") xSeq <- seq(-0.05, anchorPoint + 4, .001)
-    if(options$direction == "allNeg") xSeq <- seq(anchorPoint - 4, 0.05, .001)
+    if(options$direction == "allPos") xSeq <- seq(-0.05, anchorPoint + 4, .0001)
+    if(options$direction == "allNeg") xSeq <- seq(anchorPoint - 4, 0.05, .0001)
     ordered[["xPost"]]   <- xSeq
     ordered[["yPost"]]   <- results$meta$ordered$posterior_d(ordered[["xPost"]])
     ordered[["yPrior"]]  <- results$meta$ordered$prior_d(ordered[["xPost"]])
     
     ## Prior and posterior - heterogeneity
     anchorPoint             <- results$meta$ordered$estimates[2, "mean"]
-    ordered[["xPostTau"]]   <- seq(-0.05, anchorPoint + 4, .001)
+    ordered[["xPostTau"]]   <- seq(-0.05, anchorPoint + 4, .0001)
     ordered[["yPostTau"]]   <- results$meta$ordered$posterior_tau(ordered[["xPostTau"]])
     ordered[["yPriorTau"]]  <- results$meta$ordered$prior_tau(ordered[["xPostTau"]])
     ordered[["dfPointsY"]]  <- data.frame(prior = results$meta$ordered$prior_d(0),
@@ -1619,8 +1619,12 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
     yName <- "BF[italic(rf)]"
     pizzaTxt <- c("data | f", "data | r")
     bfSubscripts <-  c("BF[italic(rf)]", "BF[italic(fr)]")  
-    evidenceText <- gettext("Evidence for random:")
-    arrowLabel <- c(evidenceR, evidenceF)
+    arrowLabel <- c(evidenceF, evidenceR)
+    if(BFs[length(BFs)] >= 1){
+      evidenceText <- gettext("Evidence for random:")
+    } else {
+      evidenceText <- gettext("Evidence for fixed:")
+    }
   }
   
   BFs[1] <- 1  
@@ -1630,15 +1634,12 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
     BFs    <- 1/BFs
     bfType <- "BF01"
     yName <- "BF[italic(fr)]" 
-    # pizzaTxt <- c("data | r", "data | f")
-    # bfSubscripts <-  c("BF[italic(fr)]", "BF[italic(rf)]") 
-    arrowLabel <- c(evidenceF, evidenceR)
-    evidenceText <- gettext("Evidence for fixed:")
-  } else if(options$bayesFactorType == "LogBF10") {
-    bfType <- "LogBF10"
-    yName <- "log(BF[italic(rf)])"
-  }
-  
+    if(BFs[length(BFs)] >= 1){
+      evidenceText <- gettext("Evidence for fixed:")
+    } else {
+      evidenceText <- gettext("Evidence for random:")
+    }
+  } 
 
   
   if(options$modelSpecification == "CRE"){
@@ -1661,7 +1662,7 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
                                                  xName = "Studies",
                                                  BF = BFs[nrow(dataset)],
                                                  bfType = bfType,
-                                                 hasRightAxis = TRUE)
+                                                 hasRightAxis = FALSE)
   } else if(type == "SE"){
     plot <- JASPgraphs::PlotRobustnessSequential(dfLines = df,
                                                  xName = "Studies",
@@ -1669,7 +1670,7 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
                                                  bfType = bfType,
                                                  bfSubscripts = bfSubscripts,
                                                  pizzaTxt = pizzaTxt,
-                                                 hasRightAxis = TRUE,
+                                                 hasRightAxis = FALSE,
                                                  yName = yName,
                                                  evidenceTxt  = evidenceText,
                                                  arrowLabel  = arrowLabel   

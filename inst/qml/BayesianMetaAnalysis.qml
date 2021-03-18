@@ -27,9 +27,11 @@ Form
 //// Variable inputs ////
 	VariablesForm
 	{
+		preferredHeight: jaspTheme.smallDefaultVariablesFormHeight
+
 		AvailableVariablesList {name: "variablesList"}
 
-		AssignedVariablesList
+	AssignedVariablesList
 		{
 			name: 			"effectSize"
 			title: 			qsTr("Effect Size")
