@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-03-17 05:18+0000\n"
+"PO-Revision-Date: 2021-03-19 03:18+0000\n"
 "Last-Translator: Yoshihiko Kunisato <ykunisato@psy.senshu-u.ac.jp>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/ja/>\n"
@@ -198,203 +198,203 @@ msgstr "降順"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Row order"
-msgstr ""
+msgstr "行の順序"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Cumulative forest plot"
-msgstr ""
+msgstr "累積フォレスト プロット"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Prior and posterior"
-msgstr ""
+msgstr "事前分布と事後分布"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Additional info"
-msgstr ""
+msgstr "追加情報"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Add fixed and random effects posterior"
-msgstr ""
+msgstr "固定効果と変量効果の事後分布を追加"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Shade 95% CI"
-msgstr ""
+msgstr "95%信頼区間に影をつける"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Sequential plot"
-msgstr ""
+msgstr "逐次プロット"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Bayes factors"
-msgstr ""
+msgstr "ベイズファクター"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Posterior model probabilities"
-msgstr ""
+msgstr "事後モデル確率"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Advanced"
-msgstr ""
+msgstr "詳細"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Prior model probability"
-msgstr ""
+msgstr "事前モデル確率"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Estimation settings (MCMC)"
-msgstr ""
+msgstr "推定設定 (MCMC)"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "iterations:"
-msgstr ""
+msgstr "反復："
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "chains:"
-msgstr ""
+msgstr "チェーン："
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Bayes factor computation"
-msgstr ""
+msgstr "ベイズファクターの計算"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Integration"
-msgstr ""
+msgstr "統合"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Bridge sampling"
-msgstr ""
+msgstr "ブリッジサンプリング"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Effect Size"
-msgstr ""
+msgstr "効果量"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "効果量標準誤差"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Method"
-msgstr ""
+msgstr "方法"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Fixed Effects"
-msgstr ""
+msgstr "固定効果"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Likelihood"
-msgstr ""
+msgstr "尤度"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Restricted ML"
-msgstr ""
+msgstr "制限付き最尤法"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Hedges"
-msgstr ""
+msgstr "ヘッジ(Hedges)"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Empirical Bayes"
-msgstr ""
+msgstr "経験ベイズ"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Study Labels"
-msgstr ""
+msgstr "研究ラベル"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Covariates"
-msgstr ""
+msgstr "共変量"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Factors"
-msgstr ""
+msgstr "要因"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Model"
-msgstr ""
+msgstr "モデル"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Components"
-msgstr ""
+msgstr "コンポーネント"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Model Terms"
-msgstr ""
+msgstr "モデル項"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Include intercept"
-msgstr ""
+msgstr "切片を含む"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Statistics"
-msgstr ""
+msgstr "統計量"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Regression Coefficients"
-msgstr ""
+msgstr "回帰係数"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Estimates"
-msgstr ""
+msgstr "推定値"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Confidence intervals"
-msgstr ""
+msgstr "信頼区間"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Interval"
-msgstr ""
+msgstr "区間"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Test"
-msgstr ""
+msgstr "検定"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Covariance matrix"
-msgstr ""
+msgstr "共分散行列"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Model Fit"
-msgstr ""
+msgstr "モデルフィット"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Fit measures"
-msgstr ""
+msgstr "適合度指標"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Forest plot"
-msgstr ""
+msgstr "フォレストプロット"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Funnel plot"
-msgstr ""
+msgstr "ファンネルプロット"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Rank test for funnel plot asymmetry"
-msgstr ""
+msgstr "ファンネルプロットの非対称性に関するランク検定"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Regression test for funnel plot asymmetry"
-msgstr ""
+msgstr "ファンネルプロットの非対称性の回帰検定"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Residuals Model"
-msgstr ""
+msgstr "残差モデル"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Residuals parameters"
-msgstr ""
+msgstr "残差パラメータ"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Diagnostics"
-msgstr ""
+msgstr "診断"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Plots"
-msgstr ""
+msgstr "プロット"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Trim-fill analysis"
-msgstr ""
+msgstr "トリム-フィル分析"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Profile plot"
