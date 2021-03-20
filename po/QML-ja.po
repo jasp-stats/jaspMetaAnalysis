@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-03-19 03:18+0000\n"
+"PO-Revision-Date: 2021-03-21 05:30+0000\n"
 "Last-Translator: Yoshihiko Kunisato <ykunisato@psy.senshu-u.ac.jp>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/ja/>\n"
@@ -398,155 +398,155 @@ msgstr "トリム-フィル分析"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Profile plot"
-msgstr ""
+msgstr "プロフィールプロット"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Diagnostic plots"
-msgstr ""
+msgstr "診断プロット"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Q-Q plot standardized residuals"
-msgstr ""
+msgstr "Q-Qプロット標準化残差"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Robustness"
-msgstr ""
+msgstr "ロバスト性"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Fail-safe N"
-msgstr ""
+msgstr "フェイルセーフN"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Casewise diagnostics"
-msgstr ""
+msgstr "ケースワイズ診断"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Effect Size"
-msgstr ""
+msgstr "効果量"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Effect Size Variance"
-msgstr ""
+msgstr "効果量の分散"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fixed Effects"
-msgstr ""
+msgstr "固定効果"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Inner Grouping (Multivariate Structure)"
-msgstr ""
+msgstr "内部グループ化 (多変量構造)"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Outer Grouping (Grouping Structure)"
-msgstr ""
+msgstr "外部グループ化 (グループ化構造)"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Case labels"
-msgstr ""
+msgstr "ケースラベル"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fixed Effects Model"
-msgstr ""
+msgstr "固定効果モデル"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Predictors"
-msgstr ""
+msgstr "予測変数"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Model Terms"
-msgstr ""
+msgstr "モデル項"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Use intercept"
-msgstr ""
+msgstr "切片の使用"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Random Effects Model"
-msgstr ""
+msgstr "ランダム効果モデル"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Multivariate Covariance Model"
-msgstr ""
+msgstr "多変量共分散モデル"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Statistics"
-msgstr ""
+msgstr "統計量"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Omnibus Statistics"
-msgstr ""
+msgstr "オムニバス統計量"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Anova Table"
-msgstr ""
+msgstr "分散分析表"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fit Indices"
-msgstr ""
+msgstr "適合度指標"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Coefficients"
-msgstr ""
+msgstr "係数"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fixed Effects Coefficients Table"
-msgstr ""
+msgstr "固定効果係数表"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Random Effects Coefficients Table"
-msgstr ""
+msgstr "ランダム効果係数表"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Model Derived Statistics"
-msgstr ""
+msgstr "モデルから派生した統計量"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Estimated Marginal Means"
-msgstr ""
+msgstr "推定周辺平均"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Plots"
-msgstr ""
+msgstr "プロット"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Funnel plot"
-msgstr ""
+msgstr "ファンネルプロット"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Forest plot"
-msgstr ""
+msgstr "フォレストプロット"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Advanced"
-msgstr ""
+msgstr "詳細"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Method"
-msgstr ""
+msgstr "方法"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fixed Effects Covariance Matrix"
-msgstr ""
+msgstr "固定効果共分散行列"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Diagnostics"
-msgstr ""
+msgstr "診断"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Test for Funnel Plot Asymmetry"
-msgstr ""
+msgstr "ファンネルプロットの非対称性検定"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Rank correlation test"
-msgstr ""
+msgstr "ランク相関検定"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Egger's Regression test"
-msgstr ""
+msgstr "Eggerの回帰検定"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fail-safe-N analysis (controversial)"
-msgstr ""
+msgstr "フェイルセーフN分析(議論のある方法)"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Diagnostics Table"
