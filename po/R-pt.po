@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-03-06 14:59\n"
-"PO-Revision-Date: 2021-03-19 18:18+0000\n"
-"Last-Translator: Alex França <alex.tonante@gmail.com>\n"
+"PO-Revision-Date: 2021-03-23 19:29+0000\n"
+"Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/pt/>\n"
 "Language: pt\n"
@@ -56,12 +56,11 @@ msgstr ""
 
 #, fuzzy
 msgid "Mean"
-msgstr "Médias"
+msgstr "Média"
 
 msgid "SD"
 msgstr ""
 
-#, fuzzy
 msgid "Lower"
 msgstr "Inferior"
 
@@ -69,7 +68,6 @@ msgstr "Inferior"
 msgid "95%% Credible Interval"
 msgstr "Intervalo de credibilidade"
 
-#, fuzzy
 msgid "Upper"
 msgstr "Superior"
 
@@ -310,7 +308,6 @@ msgstr ""
 msgid "Coefficients"
 msgstr "Coeficiente de Mardia"
 
-#, fuzzy
 msgid "Estimate"
 msgstr "Estimativas"
 
@@ -409,7 +406,6 @@ msgstr "Avançado"
 msgid "AIC"
 msgstr "AIC"
 
-#, fuzzy
 msgid "BIC"
 msgstr "BIC"
 
@@ -466,7 +462,6 @@ msgstr "momentos observados"
 msgid "Cannot set 'xlim' automatically. Please set this argument manually."
 msgstr ""
 
-#, fuzzy
 msgid "Value"
 msgstr "Valor"
 
@@ -503,8 +498,9 @@ msgstr ""
 msgid "Normal Q-Q Plot"
 msgstr ""
 
+#, fuzzy
 msgid "Theoretical Quantiles"
-msgstr ""
+msgstr "Quantis teóricos"
 
 #, fuzzy
 msgid "Sample Quantiles"
@@ -599,7 +595,7 @@ msgid "Only using first element of"
 msgstr ""
 
 msgid "."
-msgstr ""
+msgstr "."
 
 msgid "is smaller than 2."
 msgstr ""
@@ -608,7 +604,6 @@ msgstr ""
 msgid "Variance Components"
 msgstr "Componentes"
 
-#, fuzzy
 msgid "Plots"
 msgstr "Diagramas"
 
@@ -619,7 +614,7 @@ msgid "%s%% CI"
 msgstr ""
 
 msgid "Median"
-msgstr ""
+msgstr "Mediana"
 
 msgid "MCMC error"
 msgstr ""
@@ -688,7 +683,7 @@ msgstr "Nome do modelo"
 
 #, fuzzy
 msgid "Models"
-msgstr "Modelo"
+msgstr "Modelos"
 
 msgid "P(M)"
 msgstr ""
@@ -947,8 +942,9 @@ msgstr "Testes de homogeneidade"
 msgid "p-value Frequency"
 msgstr ""
 
+#, fuzzy
 msgid "Frequency"
-msgstr ""
+msgstr "Frequência"
 
 msgid ""
 "There were no p-value cutoffs after their automatic reduction. The displayed "
