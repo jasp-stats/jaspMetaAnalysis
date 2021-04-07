@@ -974,7 +974,7 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
     } else if(options[["modelSpecification"]] == "RE"){
       int <- c(bmaResults[["bma"]]$estimates["random", "2.5%"], bmaResults[["bma"]]$estimates["random", "97.5%"])
       postName <- "Random"
-      labelsModel <- c(bquote(.(gettext("Random H"))[0]), bquote(.(gettext("Prior H"))[1]))
+      labelsModel <- c(bquote(.(gettext("Random H"))[1]), bquote(.(gettext("Prior H"))[1]))
       yPrior <- bmaResults[["random"]]$yPrior
       xPost <- bmaResults[["random"]]$xPost
       yPost <- bmaResults[["random"]]$yPost
