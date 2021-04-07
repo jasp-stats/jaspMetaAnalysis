@@ -898,7 +898,7 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
   x <- c(xlimLeft, xlimRight)
   df <- data.frame(x = x)
   
-  xBreaks <- JASPgraphs::getPrettyAxisBreaks(seq(xlimLeft, xlimRight, 0.5))
+  xBreaks <- jaspGraphs::getPrettyAxisBreaks(seq(xlimLeft, xlimRight, 0.5))
   
   # Plot density function
   plot <- ggplot2::ggplot(df, ggplot2::aes(x)) +
@@ -906,7 +906,7 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
     ggplot2::labs(x = xlab, y = gettext("Density")) +
     ggplot2::xlim(xlimLeft, xlimRight) +
     ggplot2::scale_x_continuous(breaks = xBreaks)
-  plot <- JASPgraphs::themeJasp(plot)
+  plot <- jaspGraphs::themeJasp(plot)
   priorPlot$plotObject <- plot
   return()
 }
@@ -1157,7 +1157,7 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
   }
   
   if(type == "ES"){
-    plot <- JASPgraphs::PlotPriorAndPosterior(dfLines = df,
+    plot <- jaspGraphs::PlotPriorAndPosterior(dfLines = df,
                                               lineColors = valuesCol, 
                                               BF = BF,
                                               CRI = CRI,
@@ -1166,7 +1166,7 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
                                               median = med,
                                               medianTxt = "Mean:")
   } else if(type == "SE"){
-    plot <- JASPgraphs::PlotPriorAndPosterior(dfLines = df,
+    plot <- jaspGraphs::PlotPriorAndPosterior(dfLines = df,
                                               lineColors = valuesCol,
                                               BF = BF,
                                               CRI = CRI,
@@ -1198,7 +1198,7 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
     return(plot)
   }
   
-  xBreaks <- JASPgraphs::getPrettyAxisBreaks(c(0, xPost))
+  xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, xPost))
 
   if(options[["addInfo"]]){
     plot$subplots$mainGraph <- plot$subplots$mainGraph + ggplot2::scale_x_continuous(name = xlab, breaks = xBreaks, limits = c(min(xPost), max(xPost)))
@@ -1487,7 +1487,7 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
       ggplot2::xlab(bquote(paste(.(gettext("Effect size")), ~mu)))
   }
   
-  plot <- JASPgraphs::themeJasp(plot, yAxis = FALSE)
+  plot <- jaspGraphs::themeJasp(plot, yAxis = FALSE)
   
   # Add other theme elements (no y axis and aligning y axis labels)
   plot <- plot + ggplot2::theme(axis.title.y = ggplot2::element_blank(),
@@ -1555,7 +1555,7 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
     ggplot2::scale_y_continuous(breaks = df$y, labels = df$studyLabels, expand = c(0, 0.5),
                                 sec.axis = ggplot2::sec_axis(~ ., breaks = df$y, labels = text))
   
-  plot <- JASPgraphs::themeJasp(plot, yAxis = FALSE)
+  plot <- jaspGraphs::themeJasp(plot, yAxis = FALSE)
   
   # Add other theme elements (no y axis and aligning y axis labels)
   plot <- plot + ggplot2::theme(axis.title.y = ggplot2::element_blank(),
@@ -1643,7 +1643,7 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
 
   
   if(options$modelSpecification == "CRE"){
-    pizzaTxt <- c("data | f H1", "data | o H1")
+    pizzaTxt <- c("data | f", "data | o")
     bfSubscripts <-  c("BF[italic(of)]", "BF[italic(fo)]")
     if(type == "SE") yName <- "BF[italic(of)]"
     if(type == "SE" && options$bayesFactorType == "BF01") yName <- "BF[italic(fo)]"
@@ -1658,13 +1658,13 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
   
   if(type == "ES"){
     
-    plot <- JASPgraphs::PlotRobustnessSequential(dfLines = df,
+    plot <- jaspGraphs::PlotRobustnessSequential(dfLines = df,
                                                  xName = "Studies",
                                                  BF = BFs[nrow(dataset)],
                                                  bfType = bfType,
                                                  hasRightAxis = FALSE)
   } else if(type == "SE"){
-    plot <- JASPgraphs::PlotRobustnessSequential(dfLines = df,
+    plot <- jaspGraphs::PlotRobustnessSequential(dfLines = df,
                                                  xName = "Studies",
                                                  BF = BFs[nrow(dataset)],
                                                  bfType = bfType,
@@ -1727,7 +1727,7 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
     
   }
   
-  xBreaks <- JASPgraphs::getPrettyAxisBreaks(x)
+  xBreaks <- jaspGraphs::getPrettyAxisBreaks(x)
   
   
   gridLines <- ggplot2::geom_segment(
@@ -1765,7 +1765,7 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
       ggplot2::scale_linetype_manual(name = "", values = lineValues, labels = labels)
   }
   
-  plot <- JASPgraphs::themeJasp(plot, legend.position = "top")
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "top")
   
   
   seqPMPlot$plotObject <- plot
