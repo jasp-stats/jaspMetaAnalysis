@@ -1620,11 +1620,24 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
     pizzaTxt <- c("data | f", "data | r")
     bfSubscripts <-  c("BF[italic(rf)]", "BF[italic(fr)]")  
     arrowLabel <- c(evidenceF, evidenceR)
-    if(BFs[length(BFs)] >= 1){
-      evidenceText <- gettext("Evidence for random:")
+    BF <- BFs[length(BFs)]
+    if(BF >= 1){
+      modelEvidence <- gettext("random")
     } else {
-      evidenceText <- gettext("Evidence for fixed:")
+      modelEvidence <- gettext("fixed")
     }
+    allEvidenceLabels <- c(gettext("Anecdotal",domain="R-jaspGraphs"), 
+                           gettext("Moderate",domain="R-jaspGraphs"),
+                           gettext("Strong",domain="R-jaspGraphs"), 
+                           gettext("Very Strong",domain="R-jaspGraphs"), 
+                           gettext("Extreme",domain="R-jaspGraphs"))
+    if(BF < 1) BF     <- 1/BF
+    idx               <- findInterval(BF, c(1, 3, 10, 30, 100), rightmost.closed = FALSE)
+    evidenceLevel     <- jaspGraphs:::fixTranslationForExpression(allEvidenceLabels[idx])
+    
+    evidenceFor <- gettextf("Evidence for %s:", modelEvidence, domain="R-jaspGraphs")
+    evidenceFor <- jaspGraphs:::fixTranslationForExpression(evidenceFor)
+    evidenceTxt <- parseThis(c(evidenceLevel, evidenceFor))
   }
   
   BFs[1] <- 1  
@@ -1634,12 +1647,8 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
     BFs    <- 1/BFs
     bfType <- "BF01"
     yName <- "BF[italic(fr)]" 
-    if(BFs[length(BFs)] >= 1){
-      evidenceText <- gettext("Evidence for fixed:")
-    } else {
-      evidenceText <- gettext("Evidence for random:")
-    }
   } 
+  
 
   
   if(options$modelSpecification == "CRE"){
@@ -1657,7 +1666,6 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
   df <- data.frame(x = 1:nrow(dataset), y = log(BFs))
   
   if(type == "ES"){
-    
     plot <- jaspGraphs::PlotRobustnessSequential(dfLines = df,
                                                  xName = "Studies",
                                                  BF = BFs[nrow(dataset)],
@@ -1672,7 +1680,7 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
                                                  pizzaTxt = pizzaTxt,
                                                  hasRightAxis = FALSE,
                                                  yName = yName,
-                                                 evidenceTxt  = evidenceText,
+                                                 evidenceTxt  = evidenceTxt,
                                                  arrowLabel  = arrowLabel   
                                                  )
   }
