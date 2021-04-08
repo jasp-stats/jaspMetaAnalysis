@@ -406,27 +406,10 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
   return(BFheterogeneity)
 }
 
-.bmaSequentialResults <- function(jaspResults, dataset, options, .bmaDependencies) {
-  
-  if(!is.null(jaspResults[["bmaSeqResults"]])) return(jaspResults[["bmaSeqResults"]]$object)
-  
-  startProgressbar(nrow(dataset)-1)
-  
-  seqResults <- list(mean=numeric(), lowerMain=numeric(), upperMain=numeric(), 
-                     BFs=numeric(1), posterior_models=list(), BFsHeterogeneity = numeric(1)) 
-  
-  d                       <- .bmaPriors(jaspResults, options)[["d"]]
-  # Fix voor truncated priors
-  priorSamples            <- sample(seq(-10, 10, by = 0.0001), size = 1e6, replace = TRUE, prob = d(seq(-10, 10, by = 0.0001)))
-  seqResults$mean[1]      <- mean(priorSamples)
-  seqResults$lowerMain[1] <- quantile(priorSamples, probs = 0.025)
-  seqResults$upperMain[1] <- quantile(priorSamples, probs = 0.975)
-  
+.bmaFillSequentialResults <- function(i, bmaResults, seqResults, options, sequential){
   modelName <- .bmaGetModelName(options)
   
-  for(i in 2:nrow(dataset)){
-    bmaResults <- .bmaResults(jaspResults, dataset[1:i, ], options)
-    
+  if(sequential){
     seqResults$mean[i]      <- bmaResults$estimates[modelName, "mean"]
     seqResults$lowerMain[i] <- bmaResults$estimates[modelName, "2.5%"]
     seqResults$upperMain[i] <- bmaResults$estimates[modelName, "97.5%"]
@@ -446,10 +429,61 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
     }
     
     seqResults$posterior_models[[i]] <- bmaResults$posterior_models
-    
+  } else {
+    seqResults$mean[i]      <- bmaResults[["bma"]]$estimates[modelName, "mean"]
+    seqResults$lowerMain[i] <- bmaResults[["bma"]]$estimates[modelName, "2.5%"]
+    seqResults$upperMain[i] <- bmaResults[["bma"]]$estimates[modelName, "97.5%"]
+  
+    if(options[["modelSpecification"]] == "BMA"){
+      seqResults$BFs[i] <- bmaResults[["bf"]]$inclusionBF
+      seqResults$BFsHeterogeneity[[i]] <- .bmaCalculateBFHeterogeneity(bmaResults[["models"]]$prior, bmaResults[["models"]]$posterior)
+    }
+    if(options[["modelSpecification"]] == "FE")  seqResults$BFs[i] <- bmaResults[["bf"]]$BF["fixed_H1", "fixed_H0"]
+    if(options[["modelSpecification"]] == "RE"){
+      seqResults$BFs[i] <- bmaResults[["bf"]]$BF["random_H1", "random_H0"]
+      seqResults$BFsHeterogeneity[[i]] <- bmaResults[["bf"]]$BF["random_H1", "fixed_H1"]
+    }
+    if(options[["modelSpecification"]] == "CRE"){
+      seqResults$BFs[i] <- bmaResults[["bf"]]$BF["ordered", "null"]
+      seqResults$BFsHeterogeneity[[i]] <- bmaResults[["bf"]]$BF["ordered", "fixed"]
+    }
+
+    seqResults$posterior_models[[i]] <- bmaResults[["models"]]$posterior
+  }
+  
+  return(seqResults)
+}
+
+.bmaSequentialResults <- function(jaspResults, dataset, options, .bmaDependencies) {
+  
+  if(!is.null(jaspResults[["bmaSeqResults"]])) return(jaspResults[["bmaSeqResults"]]$object)
+ 
+  n <- nrow(dataset)
+  startProgressbar(n-2)
+  
+  seqResults <- list(mean=numeric(), lowerMain=numeric(), upperMain=numeric(), 
+                     BFs=numeric(1), posterior_models=list(), BFsHeterogeneity = numeric(1)) 
+  
+  d                       <- .bmaPriors(jaspResults, options)[["d"]]
+  # Fix voor truncated priors
+  priorSamples            <- sample(seq(-10, 10, by = 0.0001), size = 1e6, replace = TRUE, prob = d(seq(-10, 10, by = 0.0001)))
+  seqResults$mean[1]      <- mean(priorSamples)
+  seqResults$lowerMain[1] <- quantile(priorSamples, probs = 0.025)
+  seqResults$upperMain[1] <- quantile(priorSamples, probs = 0.975)
+  
+  # meta analysis cannot run with only 1 study so it starts with 2
+  # the final result is already in the state, so we do not have to run it again
+  for(i in 2:(n-1)){
+    bmaResults <- .bmaResults(jaspResults, dataset[1:i, ], options)
+    seqResults <- .bmaFillSequentialResults(i, bmaResults, seqResults, options, sequential = TRUE)
     
     progressbarTick()
   }
+  
+  # bmaResults <- .bmaResults(jaspResults, dataset, options)
+  
+  bmaResults <- .bmaResultsState(jaspResults, dataset, options, .bmaDependencies)
+  seqResults <- .bmaFillSequentialResults(n, bmaResults, seqResults, options, sequential = F)
   
   jaspResults[["bmaSeqResults"]] <- createJaspState(object=seqResults, dependencies=.bmaDependencies)
   
