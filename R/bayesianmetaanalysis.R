@@ -430,6 +430,8 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
     
     seqResults$posterior_models[[i]] <- bmaResults$posterior_models
   } else {
+    # The results in the state are saved differently. 
+    # Therefore I need different code to extract what I need for the sequential analysis.
     seqResults$mean[i]      <- bmaResults[["bma"]]$estimates[modelName, "mean"]
     seqResults$lowerMain[i] <- bmaResults[["bma"]]$estimates[modelName, "2.5%"]
     seqResults$upperMain[i] <- bmaResults[["bma"]]$estimates[modelName, "97.5%"]
@@ -472,7 +474,7 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
   seqResults$upperMain[1] <- quantile(priorSamples, probs = 0.975)
   
   # meta analysis cannot run with only 1 study so it starts with 2
-  # the final result is already in the state, so we do not have to run it again
+  # the final result is already in the state, so we do not have to run it again (n-1)
   for(i in 2:(n-1)){
     bmaResults <- .bmaResults(jaspResults, dataset[1:i, ], options)
     seqResults <- .bmaFillSequentialResults(i, bmaResults, seqResults, options, sequential = TRUE)
@@ -480,8 +482,7 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
     progressbarTick()
   }
   
-  # bmaResults <- .bmaResults(jaspResults, dataset, options)
-  
+  # Get results from state
   bmaResults <- .bmaResultsState(jaspResults, dataset, options, .bmaDependencies)
   seqResults <- .bmaFillSequentialResults(n, bmaResults, seqResults, options, sequential = F)
   
@@ -1614,13 +1615,14 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
     return()
   }
   
-  # Fill posterior plot effect size
+  # Fill sequential plot BFs effect size
   if(options$plotSequential){
     seqPlotES <- createJaspPlot(plot = NULL, title = gettext("Bayes factors effect size"), height = 400, width = 580)
     seqPlotES$dependOn(c("plotSequential", "BF")) 
     seqPlotES$position <- 1
     seqContainer[["seqPlotES"]] <- seqPlotES
     .bmaFillSeqPlot(seqPlotES, jaspResults, dataset, options, .bmaDependencies, type = "ES")
+  # Fill sequential plot BFs standard error
     if(!options$modelSpecification == "FE"){
       seqPlotSE <- createJaspPlot(plot = NULL, title = gettext("Bayes factors heterogeneity"), height = 400, width = 580)
       seqPlotSE$dependOn(c("plotSequential", "BF")) 
@@ -1649,6 +1651,7 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
   if(type == "ES"){
     BFs <- rowResults$BFs
   } else if(type == "SE"){
+  # The BFs for heterogeneity have different labels
     BFs <- rowResults$BFsHeterogeneity
     yName <- "BF[italic(rf)]"
     pizzaTxt <- c("data | f", "data | r")
@@ -1683,8 +1686,7 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
     yName <- "BF[italic(fr)]" 
   } 
   
-
-  
+  # The BFs for constrained random effects also have different labels
   if(options$modelSpecification == "CRE"){
     pizzaTxt <- c("data | f", "data | o")
     bfSubscripts <-  c("BF[italic(of)]", "BF[italic(fo)]")
