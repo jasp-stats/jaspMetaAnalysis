@@ -694,9 +694,9 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
   
   if(options$modelSpecification == "CRE"){
     if(options[["bayesFactorType"]] == "BF01" || options[["bayesFactorType"]] == "LogBF10"){
-      footnoteCREbf <- gettextf("Bayes factor of the ordered effects H%1$s over the fixed effects H%1$s. The Bayes factor for the ordered effects H%1$s versus the unconstrained (random) effects H%1$s model is %2$.3f.", "\u2081", creBF)
+      footnoteCREbf <- gettextf("Bayes factor of the ordered effects H%1$s over the fixed effects H%0$s. The Bayes factor for the ordered effects H%1$s versus the unconstrained (random) effects H%1$s model is %2$.3f.", "\u2081", creBF)
     } else if(options[["bayesFactorType"]] == "BF10"){
-      footnoteCREbf <-gettextf("Bayes factor of the fixed effects H%1$s over the ordered effects H%1$s. The Bayes factor for the unconstrained (random) effects H%1$s versus the ordered effects H%1$s model is %2$.3f.", "\u2081", creBF)
+      footnoteCREbf <-gettextf("Bayes factor of the fixed effects H%0$s over the ordered effects H%1$s. The Bayes factor for the unconstrained (random) effects H%1$s versus the ordered effects H%1$s model is %2$.3f.", "\u2081", creBF)
     }
     
     
