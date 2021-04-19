@@ -6,7 +6,7 @@ Date: 2020-06-09
 Author: JASP Team
 Website: jasp-stats.org
 Maintainer: JASP Team <info@jasp-stats.org>
-Description: Meta-Analysis module.
+Description: Synthesize evidence across multiple studies
 License: GPL (>= 2)
 Encoding: UTF-8
 Imports:
