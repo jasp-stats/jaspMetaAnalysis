@@ -5,7 +5,7 @@ Description
 {
 	name:			"jaspMetaAnalysis"
 	title : 		qsTr("Meta-Analysis")
-	description:	qsTr("Meta-Analysis module.")
+	description:	qsTr("Synthesize evidence across multiple studies")
 	requiresData:	false
 	icon:			"meta-analysis.svg"
 	version:		"0.13"
