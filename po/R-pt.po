@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-03-06 14:59\n"
-"PO-Revision-Date: 2021-04-26 20:31+0000\n"
+"PO-Revision-Date: 2021-05-03 20:31+0000\n"
 "Last-Translator: Alex França <alex.tonante@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/pt/>\n"
@@ -469,6 +469,7 @@ msgstr "momentos observados"
 msgid "Cannot set 'xlim' automatically. Please set this argument manually."
 msgstr ""
 
+#, fuzzy
 msgid "Value"
 msgstr "Valor"
 
@@ -953,7 +954,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Frequency"
-msgstr "Frequência"
+msgstr "Fequência"
 
 msgid ""
 "There were no p-value cutoffs after their automatic reduction. The displayed "
