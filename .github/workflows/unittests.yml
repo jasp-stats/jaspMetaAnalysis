@@ -12,8 +12,9 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: windows-latest, r: "3.6.1"}
-          - {os: macOS-latest,   r: "3.6.1"}
+          - {os: windows-latest, r: "4.0.5"}
+          - {os: macOS-latest,   r: "4.0.5"}
+          - {os: ubuntu-20.04,   r: "4.0.5"}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -26,6 +27,11 @@ jobs:
       - uses: r-lib/actions/setup-r@master
         with:
           r-version: ${{ matrix.config.r }}
+
+      - name: Install dependencies on Linux
+        if: ${{ runner.os == 'Linux' }}
+        run: sudo apt-get install libv8-dev
+        shell: bash
 
       - uses: jasp-stats/jasp-actions/setup-test-env@master
         with:
