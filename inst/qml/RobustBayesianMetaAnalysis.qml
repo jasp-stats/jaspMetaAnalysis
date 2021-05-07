@@ -1542,8 +1542,8 @@ Form
 			{
 				label:		qsTr("Estimated studies' effects")
 				name:		"resultsTheta"
+				visible:	false
 			}
-
 
 		}
 
@@ -1569,6 +1569,22 @@ Form
 
 				RadioButtonGroup
 				{
+					name:		"plotsThetaShow"
+					title:		qsTr("Show")
+					visible:	false
+
+					RadioButton
+					{
+						name: 		"observed"
+						label: 		qsTr("Observed")
+						checked: 	true
+					}
+				}
+
+
+/*
+				RadioButtonGroup
+				{
 					name: "plotsThetaShow"
 					title: qsTr("Show")
 
@@ -1591,6 +1607,7 @@ Form
 						label: 		qsTr("Both")
 					}
 				}
+*/
 
 				RadioButtonGroup
 				{
@@ -1777,6 +1794,7 @@ Form
 				{
 					label:		qsTr("Include theta")
 					name:		"diagnosticsOverviewTheta"
+					visible:	false
 				}
 		}
 
@@ -1805,6 +1823,7 @@ Form
 			{
 				label:		qsTr("Estimated studies' effects")
 				name:		"diagnosticsTheta"
+				visible:	false
 			}
 		}
 
@@ -2092,6 +2111,7 @@ Form
 						Layout.columnSpan: 2
 						label:			qsTr("Include theta")
 						name:			"advancedOmitTheta"
+						visible:		false
 					}
 				}
 

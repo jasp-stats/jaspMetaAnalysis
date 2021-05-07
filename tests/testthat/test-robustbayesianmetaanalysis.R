@@ -445,61 +445,61 @@ fittedPath <- file.path("robmaFit.RDS")
   test_that("Model Averaged Estimates table results match", {
     table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(0, 0.169665754659546, 0.191326498116366, "Effect size (<unicode><unicode>)",
-                                        0.332066667339197, 0, 0.0477941778146311, 0, "Heterogeneity (<unicode><unicode>)",
-                                        0.308991841168739))
+                                   list(0, 0.169012354883644, 0.191058770286674, "Effect size (<unicode><unicode>)",
+                                        0.331442606663106, 0, 0.0461545030507955, 0, "Heterogeneity (<unicode><unicode>)",
+                                        0.294538609799362))
   })
   
   test_that("Model Averaged Weights (omega) table results match", {
     table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedWeights"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(1, 0, 1, 1, 1, 0.05, 0.00596182674913896, 0.05, 0.570655502031924,
-                                        0.599436713343987, 1, 1))
+                                   list(1, 0, 1, 1, 1, 0.05, 0.00672231535859033, 0.05, 0.570425818572795,
+                                        0.601495317746776, 1, 1))
   })
   
   test_that("Conditional Estimates table results match", {
     table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_conditionalSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(0.0631141049521503, 0.207480256967044, 0.21023752939073, "Effect size (<unicode><unicode>)",
-                                        0.343879382227667, 0.0328510214539317, 0.153439804305514, 0.11916955264611,
-                                        "Heterogeneity (<unicode><unicode>)", 0.474154155761386))
+                                   list(0.0648220927431506, 0.20775978862952, 0.209795557836815, "Effect size (<unicode><unicode>)",
+                                        0.344513330970872, 0.0334524312101734, 0.141513655239605, 0.113264874368608,
+                                        "Heterogeneity (<unicode><unicode>)", 0.42492060333899))
   })
   
   test_that("Conditional Weights (omega) table results match", {
     table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_conditionalWeights"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(1, 0, 1, 1, 1, 0.05, 0.00406094432096918, 0.05, 0.292282803470328,
-                                        0.193635893099643, 0.926616550463227, 1))
+                                   list(1, 0, 1, 1, 1, 0.05, 0.0038873186384601, 0.05, 0.293330950924731,
+                                        0.193230779638258, 0.930346780885645, 1))
   })
   
   test_that("Models Overview table results match", {
     table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_modelsSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(0.00205868250507496, -5.25591676931767, 1, 0.000411567043840429,
-                                        0.166666666666667, "Spike(0)", "Spike(1)", "Spike(0)", 0.50525583116313,
-                                        0.107274695486287, 2, 0.0439152191465916, 0.0833333333333333,
-                                        "Spike(0)", "Two-sided((0.05), (1, 1))", "Spike(0)", 0.176776772721767,
-                                        -0.83742827505857, 3, 0.0341480385349558, 0.166666666666667,
-                                        "Spike(0)", "Spike(1)", "InvGamma(1, 0.15)[0, Inf]", 1.2993959920163,
-                                        0.985118417006257, 4, 0.105647138514749, 0.0833333333333333,
-                                        "Spike(0)", "Two-sided((0.05), (1, 1))", "InvGamma(1, 0.15)[0, Inf]",
-                                        1.96127082927711, 1.27285245363283, 5, 0.281740342730032, 0.166666666666667,
-                                        "Normal(0, 1)[-Inf, Inf]", "Spike(1)", "Spike(0)", 6.07542424524418,
-                                        2.19938060712744, 6, 0.355799314733647, 0.0833333333333333,
-                                        "Normal(0, 1)[-Inf, Inf]", "Two-sided((0.05), (1, 1))", "Spike(0)",
-                                        0.413036202360501, -0.033408332340764, 7, 0.0763039793046989,
-                                        0.166666666666667, "Normal(0, 1)[-Inf, Inf]", "Spike(1)", "InvGamma(1, 0.15)[0, Inf]",
-                                        1.2499124686911, 0.950323769130184, 8, 0.102034399991485, 0.0833333333333333,
-                                        "Normal(0, 1)[-Inf, Inf]", "Two-sided((0.05), (1, 1))", "InvGamma(1, 0.15)[0, Inf]"
+                                   list(0.00205494154325941, -5.25591676931767, 1, 0.00041081946665412,
+                                        "Spike(0)", "Spike(1)", 0.166666666666667, "Spike(0)", 0.50429600154999,
+                                        0.107274695486287, 2, 0.0438354508161165, "Spike(0)", "Two-sided((0.05), (1, 1))",
+                                        0.0833333333333333, "Spike(0)", 0.17625848690762, -0.83844625671059,
+                                        3, 0.0340513301940838, "Spike(0)", "Spike(1)", 0.166666666666667,
+                                        "InvGamma(1, 0.15)[0, Inf]", 1.3458398692244, 1.01828620772,
+                                        4, 0.109011609050535, "Spike(0)", "Two-sided((0.05), (1, 1))",
+                                        0.0833333333333333, "InvGamma(1, 0.15)[0, Inf]", 1.95631447639274,
+                                        1.27285245363283, 5, 0.28122858491113, "Normal(0, 1)[-Inf, Inf]",
+                                        "Spike(1)", 0.166666666666667, "Spike(0)", 6.05831088084406,
+                                        2.19938060712744, 6, 0.355153034972962, "Normal(0, 1)[-Inf, Inf]",
+                                        "Two-sided((0.05), (1, 1))", 0.0833333333333333, "Spike(0)",
+                                        0.408181587275783, -0.0425161279106636, 7, 0.0754748302527677,
+                                        "Normal(0, 1)[-Inf, Inf]", "Spike(1)", 0.166666666666667, "InvGamma(1, 0.15)[0, Inf]",
+                                        1.23356328366391, 0.940310801665095, 8, 0.100834340335751, "Normal(0, 1)[-Inf, Inf]",
+                                        "Two-sided((0.05), (1, 1))", 0.0833333333333333, "InvGamma(1, 0.15)[0, Inf]"
                                    ))
   })
   
   test_that("Model Summary table results match", {
     table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_overallSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(4.43118258355616, "4/8", 0.815878036759863, 0.5, "Effect", 0.466562857443191,
-                                        "4/8", 0.318133556345889, 0.5, "Heterogeneity", 3.09419254197774,
-                                        "4/8", 0.607396072386473, 0.333333333333333, "Publication bias"
+                                   list(4.33876579012402, "4/8", 0.81269079047261, 0.5, "Effect", 0.469231594013641,
+                                        "4/8", 0.319372109833138, 0.5, "Heterogeneity", 3.11292450013238,
+                                        "4/8", 0.608834435175364, 0.333333333333333, "Publication bias"
                                    ))
   })
   
@@ -605,16 +605,16 @@ fittedPath <- file.path("robmaFit.RDS")
   test_that("Model Averaged Estimates table results match", {
     table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(0, 0.534682640935616, 0.559207684613504, "Effect size (<unicode><unicode>)",
-                                        0.82869545419437, 0, 0.109533178282388, 0, "Heterogeneity (<unicode><unicode>)",
-                                        0.461004655042431))
+                                   list(0, 0.532967505483498, 0.559351413613886, "Effect size (<unicode><unicode>)",
+                                        0.831234276058069, 0, 0.124766070829099, 0, "Heterogeneity (<unicode><unicode>)",
+                                        0.461003184076632))
   })
   
   test_that("Model Summary table results match", {
     table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_overallSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(9.25894234523558, "2/4", 0.902524064728328, 0.5, "Effect", 0.460233999357121,
-                                        "2/4", 0.315178251951223, 0.5, "Heterogeneity", "", "0/4", 0,
+                                   list(8.53525341784542, "2/4", 0.89512601750799, 0.5, "Effect", 0.569453434786407,
+                                        "2/4", 0.362835508314336, 0.5, "Heterogeneity", "", "0/4", 0,
                                         0, "Publication bias"))
   })
   
@@ -629,8 +629,9 @@ fittedPath <- file.path("robmaFit.RDS")
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "heterogeneity-conditional-truncated-priors", dir="RobustBayesianMetaAnalysis")
   })
-  
+
   test_that("Forest plot (Conditional) matches", {
+    skip("The individual study estimates are no longer estimated under the RoBMA 1.2.0 parametrization.")
     plotName <- results[["results"]][["plots"]][["collection"]][["plots_theta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "forest-plot-conditional-truncated-priors", dir="RobustBayesianMetaAnalysis")
@@ -816,8 +817,9 @@ fittedPath <- file.path("robmaFit.RDS")
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "heterogeneity-model-averaged-y-CI", dir="RobustBayesianMetaAnalysis")
   })
-  
+
   test_that("Forest plot (Model Averaged) matches", {
+    skip("The individual study estimates are no longer estimated under the RoBMA 1.2.0 parametrization.")
     plotName <- results[["results"]][["plots"]][["collection"]][["plots_theta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "forest-plot-model-averaged-y-CI", dir="RobustBayesianMetaAnalysis")
@@ -883,23 +885,23 @@ fittedPath <- file.path("robmaFit.RDS")
   test_that("Model Averaged Estimates table results match", {
     table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(1, 1.01333388540875, 1, "Effect size (OR)", 1.18540483760199,
-                                        0.0371927644147617, 0.0982566858849932, 0.0836211693769752,
-                                        "Heterogeneity (<unicode><unicode>)", 0.249272319211574))
+                                   list(1, 1.01405377373308, 1, "Effect size (OR)", 1.18734014384608,
+                                        0.0357214160840386, 0.0974424482453894, 0.0813968379531897,
+                                        "Heterogeneity (<unicode><unicode>)", 0.254675685828546))
   })
   
   test_that("Model Averaged Weights (omega) table results match", {
     table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedWeights"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(1, 0, 1, 1, 1, 0.05, 0.118453054690182, 0.05, 0.837781600778334,
+                                   list(1, 0, 1, 1, 1, 0.05, 0.188907801338866, 0.05, 0.875636684486605,
                                         1, 1, 1))
   })
   
   test_that("Model Summary table results match", {
     table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_overallSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(0.130780995822761, "2/4", 0.115655459638853, 0.5, "Effect", "",
-                                        "4/4", 1, 1, "Heterogeneity", 0.9992699980938, "2/4", 0.333171071203623,
+                                   list(0.133392931748063, "2/4", 0.117693456533497, 0.5, "Effect", "",
+                                        "4/4", 1, 1, "Heterogeneity", 0.822709075341436, "2/4", 0.291460810654715,
                                         0.333333333333333, "Publication bias"))
   })
   
@@ -986,23 +988,23 @@ fittedPath <- file.path("robmaFit.RDS")
   test_that("Model Averaged Estimates table results match", {
     table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(0, 0.11849465045327, 0.102774650217037, "Effect size (<unicode><unicode>)",
-                                        0.367906824223158, 0.152480112226528, 0.0343895409531826, 0.119932781605495,
-                                        "Heterogeneity (<unicode><unicode>)", 0.463396512265461))
+                                   list(0, 0.113504372519749, 0.0897456825723781, "Effect size (<unicode><unicode>)",
+                                        0.373002888896244, 0.0342506647210613, 0.144534497342568, 0.114406312065542,
+                                        "Heterogeneity (<unicode><unicode>)", 0.434639934296237))
   })
   
   test_that("Model Averaged Weights (omega) table results match", {
     table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedWeights"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(1, 0, 1, 1, 1, 0.05, 0.00466462118502418, 0.05, 0.519664115759027,
-                                        0.438789179669389, 1, 1))
+                                   list(1, 0, 1, 1, 1, 0.05, 0.00671362430311733, 0.05, 0.527043237975422,
+                                        0.45447760025244, 1, 1))
   })
   
   test_that("Model Summary table results match", {
     table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_overallSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(1.29307535860093, "2/4", 0.563904432425576, 0.5, "Effect", "",
-                                        "4/4", 1, 1, "Heterogeneity", 3.70602699822018, "2/4", 0.64949342149558,
+                                   list(1.24604189695875, "2/4", 0.554772330224985, 0.5, "Effect", "",
+                                        "4/4", 1, 1, "Heterogeneity", 3.80976336030243, "2/4", 0.655751899695982,
                                         0.333333333333333, "Publication bias"))
   })
   
@@ -1067,7 +1069,7 @@ fittedPath <- file.path("robmaFit.RDS")
   options$resultsIndividualSingleNumber <- 12
   options$resultsModelsBF <- "inclusion"
   options$resultsModelsOrder <- "default"
-  options$resultsTheta <- TRUE
+  options$resultsTheta <- FALSE
   options$savePath <- ""
   set.seed(1)
   dataset <- NULL
@@ -1194,8 +1196,9 @@ fittedPath <- file.path("robmaFit.RDS")
                                    list("Normal(0, 1)[-Inf, Inf]", "Two-sided((0.1, 0.05), (1, 1, 1))",
                                         "InvGamma(1, 0.15)[0, Inf]"))
   })
-  
+
   test_that("Estimated Studies' Effects (theta) table results match", {
+    skip("The individual study estimates are no longer estimated under the RoBMA 1.2.0 parametrization.")
     table <- results[["results"]][["individualModels"]][["collection"]][["individualModels_model_12"]][["collection"]][["individualModels_model_12_tempStudies"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(0.00775853627019784, 855, -0.270720099051176, 0.170035632027558,
@@ -1206,7 +1209,7 @@ fittedPath <- file.path("robmaFit.RDS")
                                         0.127580621830772, 1.00369316402907, "Study 3", 0.524550536497032
                                    ))
   })
-  
+
   test_that("Estimated Weights (omega) table results match", {
     table <- results[["results"]][["individualModels"]][["collection"]][["individualModels_model_12"]][["collection"]][["individualModels_model_12_tempWeights"]][["data"]]
     jaspTools::expect_equal_tables(table,
@@ -1240,8 +1243,9 @@ fittedPath <- file.path("robmaFit.RDS")
                                         "6/12", 0.36370456796387, 0.5, "Heterogeneity", 0.638872869773129,
                                         "8/12", 0.389824544390419, 0.5, "Publication bias"))
   })
-  
+
   test_that("Model Averaged Estimated Studies' Effects (theta) table results match", {
+    skip("The individual study estimates are no longer estimated under the RoBMA 1.2.0 parametrization.")
     table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_studiesSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list(-0.149488348181656, 0.0498797243212219, 0, "Study 1", 0.41948827590209,
@@ -1249,7 +1253,7 @@ fittedPath <- file.path("robmaFit.RDS")
                                         -0.175527939108198, 0.0448298037917323, 0, "Study 3", 0.426362101335361
                                    ))
   })
-  
+
   test_that("Effect size (Conditional) plot matches", {
     plotName <- results[["results"]][["plots"]][["collection"]][["plots_mu"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
@@ -1287,7 +1291,7 @@ fittedPath <- file.path("robmaFit.RDS")
   options$plotsOmega <- TRUE
   options$plotsPriors <- FALSE
   options$plotsTau <- TRUE
-  options$plotsTheta <- TRUE
+  options$plotsTheta <- FALSE # used to be TRUE
   options$plotsThetaOrder <- "ascending"
   options$plotsThetaShow <- "both"
   options$plotsTypeIndividualBy <- "model"
@@ -1374,8 +1378,9 @@ fittedPath <- file.path("robmaFit.RDS")
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "heterogeneity-model-averaged-prefitted-2", dir="RobustBayesianMetaAnalysis")
   })
-  
+
   test_that("Forest plot (Model Averaged) (observed + predicted) matches", {
+    skip("The individual study estimates are no longer estimated under the RoBMA 1.2.0 parametrization.")
     plotName <- results[["results"]][["plots"]][["collection"]][["plots_theta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     expect_equal_plots(testPlot, "forest-plot-model-averaged-prefitted-2", dir="RobustBayesianMetaAnalysis")
