@@ -13,10 +13,6 @@ msgid "Meta-Analysis"
 msgstr "Meta-Analyse"
 
 msgctxt "Description|"
-msgid "Meta-Analysis module."
-msgstr "Meta-Analyse-Modul."
-
-msgctxt "Description|"
 msgid "Classical Meta-Analysis"
 msgstr "Klassische Meta-Analyse"
 
@@ -1175,3 +1171,7 @@ msgstr "x-Achse umskalieren"
 msgctxt "SelectionModels|"
 msgid "Mean model estimates"
 msgstr "Mittlere Modellschätzungen"
+
+msgctxt "Description|"
+msgid "Synthesize evidence across multiple studies"
+msgstr ""

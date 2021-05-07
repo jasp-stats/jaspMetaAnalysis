@@ -10,10 +10,6 @@ msgid "Meta-Analysis"
 msgstr ""
 
 msgctxt "Description|"
-msgid "Meta-Analysis module."
-msgstr ""
-
-msgctxt "Description|"
 msgid "Classical Meta-Analysis"
 msgstr ""
 
@@ -1171,4 +1167,8 @@ msgstr ""
 
 msgctxt "SelectionModels|"
 msgid "Mean model estimates"
+msgstr ""
+
+msgctxt "Description|"
+msgid "Synthesize evidence across multiple studies"
 msgstr ""
