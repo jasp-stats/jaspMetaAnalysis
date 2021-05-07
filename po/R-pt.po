@@ -3,21 +3,22 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-03-06 14:59\n"
-"PO-Revision-Date: 2020-12-02 21:29+0000\n"
-"Last-Translator: JASP Stats <b.boutin@uva.nl>\n"
+"PO-Revision-Date: 2021-05-03 20:31+0000\n"
+"Last-Translator: Alex França <alex.tonante@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
-"jaspMetaAnalysis/pt/>\n"
+"jaspmetaanalysis-r/pt/>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.7-dev\n"
 "X-Language: en_US\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
 
 msgid "The prior lower bound is not smaller than the upper bound."
-msgstr ""
+msgstr "O limite inferior anterior não é menor do que o limite superior."
 
 msgid "Your prior contains negative values."
 msgstr ""
@@ -55,20 +56,23 @@ msgstr ""
 
 #, fuzzy
 msgid "Mean"
-msgstr "Médias"
+msgstr "Média"
 
+#, fuzzy
 msgid "SD"
-msgstr ""
+msgstr "DP"
 
+#, fuzzy
 msgid "Lower"
-msgstr ""
+msgstr "Inferior"
 
 #, fuzzy
 msgid "95%% Credible Interval"
 msgstr "Intervalo de credibilidade"
 
+#, fuzzy
 msgid "Upper"
-msgstr ""
+msgstr "Superior"
 
 msgid "Averaged"
 msgstr ""
@@ -175,8 +179,9 @@ msgstr "Ordem"
 msgid "Effect Sizes per Study"
 msgstr "Tamanho de efeito"
 
+#, fuzzy
 msgid "Observed"
-msgstr ""
+msgstr "Observado"
 
 #, fuzzy
 msgid "Estimated"
@@ -206,8 +211,9 @@ msgstr ""
 msgid "Effect size"
 msgstr "Tamanho do efeito"
 
+#, fuzzy
 msgid "Density"
-msgstr ""
+msgstr "Densidade"
 
 #, fuzzy
 msgid "Prior and Posteriors"
@@ -295,10 +301,11 @@ msgstr ""
 
 #, fuzzy
 msgid "df"
-msgstr "gl:"
+msgstr "gl"
 
+#, fuzzy
 msgid "p"
-msgstr ""
+msgstr "p"
 
 msgid "<em>p</em>-values are approximate."
 msgstr ""
@@ -406,7 +413,6 @@ msgstr "Avançado"
 msgid "AIC"
 msgstr "AIC"
 
-#, fuzzy
 msgid "BIC"
 msgstr "BIC"
 
@@ -500,8 +506,9 @@ msgstr ""
 msgid "Normal Q-Q Plot"
 msgstr ""
 
+#, fuzzy
 msgid "Theoretical Quantiles"
-msgstr ""
+msgstr "Quantis teóricos"
 
 #, fuzzy
 msgid "Sample Quantiles"
@@ -572,7 +579,7 @@ msgid "'. Factor levels:"
 msgstr ""
 
 msgid ","
-msgstr ""
+msgstr ","
 
 msgid ". Data names:"
 msgstr ""
@@ -596,7 +603,7 @@ msgid "Only using first element of"
 msgstr ""
 
 msgid "."
-msgstr ""
+msgstr "."
 
 msgid "is smaller than 2."
 msgstr ""
@@ -605,7 +612,6 @@ msgstr ""
 msgid "Variance Components"
 msgstr "Componentes"
 
-#, fuzzy
 msgid "Plots"
 msgstr "Diagramas"
 
@@ -616,7 +622,7 @@ msgid "%s%% CI"
 msgstr ""
 
 msgid "Median"
-msgstr ""
+msgstr "Mediana"
 
 msgid "MCMC error"
 msgstr ""
@@ -685,10 +691,11 @@ msgstr "Nome do modelo"
 
 #, fuzzy
 msgid "Models"
-msgstr "Modelo"
+msgstr "Modelos"
 
+#, fuzzy
 msgid "P(M)"
-msgstr ""
+msgstr "P(M)"
 
 msgid "Publication bias"
 msgstr ""
@@ -726,8 +733,9 @@ msgstr ""
 msgid "BF"
 msgstr ""
 
+#, fuzzy
 msgid "P(M|data)"
-msgstr ""
+msgstr "P(M|dado)"
 
 msgid ""
 "All models failed to converge. Please, consider inspecting the 'MCMC "
@@ -944,8 +952,9 @@ msgstr "Testes de homogeneidade"
 msgid "p-value Frequency"
 msgstr ""
 
+#, fuzzy
 msgid "Frequency"
-msgstr ""
+msgstr "Fequência"
 
 msgid ""
 "There were no p-value cutoffs after their automatic reduction. The displayed "

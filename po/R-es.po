@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2021-03-06 14:59\n"
-"PO-Revision-Date: 2021-03-06 09:51+0000\n"
-"Last-Translator: Paulina Elizabeth Robalino <paulina.e.robalino@gmail.com>\n"
+"PO-Revision-Date: 2021-04-23 20:31+0000\n"
+"Last-Translator: Pablo Augusto Vailati <pvailati@uade.edu.ar>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
 "Language: es\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5.1\n"
+"X-Generator: Weblate 4.7-dev\n"
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr ""
@@ -54,16 +54,16 @@ msgid "Mean"
 msgstr "Media"
 
 msgid "SD"
-msgstr ""
+msgstr "SD"
 
 msgid "Lower"
-msgstr ""
+msgstr "Inferior"
 
 msgid "95%% Credible Interval"
-msgstr ""
+msgstr "Intervalo de credibilidad del 95%%"
 
 msgid "Upper"
-msgstr ""
+msgstr "Superior"
 
 msgid "Averaged"
 msgstr ""
@@ -145,7 +145,7 @@ msgid "Prior"
 msgstr ""
 
 msgid "Posterior"
-msgstr ""
+msgstr "Posterior"
 
 msgid "Fixed H%s"
 msgstr ""
@@ -185,10 +185,10 @@ msgid "Heterogeneity"
 msgstr ""
 
 msgid "Effect size"
-msgstr ""
+msgstr "Tamaño del efecto"
 
 msgid "Density"
-msgstr ""
+msgstr "Densidad"
 
 msgid "Prior and Posteriors"
 msgstr ""
@@ -265,7 +265,7 @@ msgid "Q"
 msgstr ""
 
 msgid "df"
-msgstr ""
+msgstr "gl"
 
 msgid "p"
 msgstr "p"
@@ -277,7 +277,7 @@ msgid "Coefficients"
 msgstr ""
 
 msgid "Estimate"
-msgstr ""
+msgstr "Estimar"
 
 msgid "Standard Error"
 msgstr ""
@@ -310,7 +310,7 @@ msgid "Regression test for Funnel plot asymmetry (\"Egger's test\")"
 msgstr ""
 
 msgid "t"
-msgstr ""
+msgstr "t"
 
 msgid "Influence Measures"
 msgstr ""
@@ -358,7 +358,7 @@ msgid "Test of Residual Heterogeneity"
 msgstr ""
 
 msgid "Log-likelihood"
-msgstr ""
+msgstr "Log-likelihood"
 
 msgid "Deviance"
 msgstr ""
@@ -418,7 +418,7 @@ msgid "Cannot set 'xlim' automatically. Please set this argument manually."
 msgstr ""
 
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 msgid "Profile Plot for"
 msgstr ""
@@ -453,13 +453,13 @@ msgid "Normal Q-Q Plot"
 msgstr ""
 
 msgid "Theoretical Quantiles"
-msgstr ""
+msgstr "Cuantiles Teóricos"
 
 msgid "Sample Quantiles"
-msgstr ""
+msgstr "Cuantiles de la Muestra"
 
 msgid "Standardized Residuals"
-msgstr ""
+msgstr "Residuos Estandarizados"
 
 msgid "Fitted vs. Standardized Residuals"
 msgstr ""
@@ -560,7 +560,7 @@ msgid "%s%% CI"
 msgstr ""
 
 msgid "Median"
-msgstr ""
+msgstr "Mediana"
 
 msgid "MCMC error"
 msgstr ""
@@ -569,7 +569,7 @@ msgid "ESS"
 msgstr ""
 
 msgid "Rhat"
-msgstr ""
+msgstr "Rhat"
 
 msgid "%1$s is on %2$s scale."
 msgstr ""
@@ -861,7 +861,7 @@ msgid "p-value Frequency"
 msgstr ""
 
 msgid "Frequency"
-msgstr ""
+msgstr "Frecuencia"
 
 msgid ""
 "There were no p-value cutoffs after their automatic reduction. The displayed "
