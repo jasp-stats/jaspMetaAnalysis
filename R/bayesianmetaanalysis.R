@@ -1576,10 +1576,11 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
   df <- data.frame(effectSize = meanMain, studyLabels = studyLabels, y = length(meanMain):1)
   
   if(!options$addPrior) {
-    df <- df[-1, ]
-    text <- text[-1]
-    lowerMain  <- rowResults$lowerMain[-1]
-    upperMain  <- rowResults$upperMain[-1]
+    idx <- which(df$studyLabels == "Prior")
+    df <- df[-idx, ]
+    text <- text[-idx]
+    lowerMain  <- lowerMain[-idx]
+    upperMain  <- upperMain[-idx]
   }
   
   plot <-  ggplot2::ggplot(df, ggplot2::aes(x = effectSize, y = y))+
