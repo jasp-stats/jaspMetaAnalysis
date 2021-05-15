@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-03-06 14:59\n"
+"POT-Creation-Date: 2021-05-15 03:01\n"
 "PO-Revision-Date: 2020-12-02 21:29+0000\n"
 "Last-Translator: JASP Stats <F.A.M.Meerhoff@uva.nl>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/jasp-engine/"
@@ -401,6 +401,9 @@ msgstr "Omnibustoets van Modelcoëfficiënten"
 
 msgid "Test of Residual Heterogeneity"
 msgstr "Toets van Residuen Heterogeniteit"
+
+msgid "The model was estimated using %1$s method."
+msgstr ""
 
 msgid "Log-likelihood"
 msgstr "Log-likelihood"

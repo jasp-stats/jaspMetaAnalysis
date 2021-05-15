@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-03-06 14:59\n"
+"POT-Creation-Date: 2021-05-15 03:01\n"
 "PO-Revision-Date: 2021-05-08 16:32+0000\n"
 "Last-Translator: Johannes Keyser <johanneskeyser@posteo.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
@@ -397,6 +397,9 @@ msgstr "Globaler Test der Modellparameter (omnibus test)"
 
 msgid "Test of Residual Heterogeneity"
 msgstr "Test auf Residuenheterogenität"
+
+msgid "The model was estimated using %1$s method."
+msgstr ""
 
 msgid "Log-likelihood"
 msgstr "Log-Likelihood"
