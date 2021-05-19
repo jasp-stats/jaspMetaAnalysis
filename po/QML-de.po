@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-05-19 10:33+0000\n"
+"PO-Revision-Date: 2021-05-20 15:31+0000\n"
 "Last-Translator: Johannes Keyser <johanneskeyser@posteo.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/de/>\n"
@@ -954,7 +954,7 @@ msgstr "Beschriftungen anzeigen"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Ordering"
-msgstr ""
+msgstr "Reihenfolge"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Year (ascending)"
@@ -1001,7 +1001,6 @@ msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Additional info"
 msgstr "Weitere Infos"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Add fixed and random effects posterior"
 msgstr "Feste und zufällige Effekte-Posterior hinzufügen"
@@ -1010,10 +1009,9 @@ msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Shade 95% CI"
 msgstr "95%-GI schattieren"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Sequential plot"
-msgstr "Sequentielle Abbildung"
+msgstr "Sequentielles Diagramm"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Bayes factors"
@@ -1037,12 +1035,10 @@ msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Cauchy"
 msgstr "Cauchy"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "location:"
 msgstr "Lageparameter:"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "scale:"
 msgstr "Skalenparameter:"
@@ -1088,7 +1084,6 @@ msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Inverse gamma"
 msgstr "Inverse Gammaverteilung"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "shape:"
 msgstr "Form:"
@@ -1114,15 +1109,13 @@ msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Trim-fill analysis"
 msgstr "Trim-fill-Analyse"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Profile plot"
-msgstr "Profilplot"
+msgstr "Profildiagramm"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Diagnostic plots"
-msgstr "Diagnostische Abbildungen"
+msgstr "Diagnostische Diagramme"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Q-Q plot standardized residuals"
@@ -1150,7 +1143,7 @@ msgstr "Feste Effekte"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Maximum Likelihood"
-msgstr ""
+msgstr "Maximum-Likelihood"
 
 #, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
