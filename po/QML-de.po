@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2021-05-20 15:31+0000\n"
+"Last-Translator: Johannes Keyser <johanneskeyser@posteo.de>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.7-dev\n"
 "X-Language: en_US\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -845,36 +851,30 @@ msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Prior model probability"
 msgstr "Prior Modellwahrscheinlichkeit"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Fixed effects"
 msgstr "Feste Effekte"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Random effects"
 msgstr "Zufällige Effekte"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Estimation settings (MCMC)"
-msgstr ""
+msgstr "Schätzeinstellungen (MCMC)"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "iterations:"
 msgstr "Iterationen:"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "chains:"
 msgstr "Ketten:"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Bayes factor computation"
 msgstr "Bayesfaktorberechnung"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Integration"
 msgstr "Integration"
@@ -884,123 +884,106 @@ msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Bridge sampling"
 msgstr "Bridge-Sampling"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Inference"
 msgstr "Inferenz"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model"
 msgstr "Modell"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Fixed effects"
 msgstr "Feste Effekte"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Random effects"
 msgstr "Zufällige Effekte"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model averaging"
 msgstr "Modellmittelung"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Constrained random effects"
 msgstr "Beschränkte Zufallseffekte"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "All positive"
 msgstr "Alle positiv"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "All negative"
 msgstr "Alle negativ"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Table"
 msgstr "Tabelle"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model probabilities"
 msgstr "Modellwahrscheinlichkeiten"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Effect sizes per study"
 msgstr "Effektgrößen pro Studie"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Plots"
-msgstr "Abbildungen"
+msgstr "Diagramme"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Forest plot"
 msgstr ""
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Observed"
 msgstr "Beobachtet"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Estimated"
 msgstr "Geschätzt"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Both"
 msgstr "Beide"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Show labels"
-msgstr ""
+msgstr "Beschriftungen anzeigen"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Ordering"
-msgstr ""
+msgstr "Reihenfolge"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Year (ascending)"
-msgstr ""
+msgstr "Jahr (aufsteigend)"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Year (descending)"
-msgstr ""
+msgstr "Jahr (absteigend)"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Effect size (ascending)"
-msgstr ""
+msgstr "Effektgröße (aufsteigend)"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Effect size (descending)"
-msgstr ""
+msgstr "Effektgröße (absteigend)"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Order"
 msgstr "Reihenfolge"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Ascending"
-msgstr ""
+msgstr "Aufsteigend"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Descending"
-msgstr ""
+msgstr "Absteigend"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Row order"
 msgstr "Zeilenreihenfolge"
@@ -1010,32 +993,26 @@ msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Cumulative forest plot"
 msgstr "Kumulativer Forestplot"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Prior and posterior"
 msgstr "Prior und Posterior"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Additional info"
 msgstr "Weitere Infos"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Add fixed and random effects posterior"
 msgstr "Feste und zufällige Effekte-Posterior hinzufügen"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Shade 95% CI"
-msgstr "95%-Konfidenzintervall schattieren"
+msgstr "95%-GI schattieren"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Sequential plot"
-msgstr "Sequentielle Abbildung"
+msgstr "Sequentielles Diagramm"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Bayes factors"
 msgstr "Bayesfaktoren"
@@ -1050,47 +1027,38 @@ msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Priors"
 msgstr "Prior"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Effect size"
 msgstr "Effektgröße"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Cauchy"
 msgstr "Cauchy"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "location:"
 msgstr "Lageparameter:"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "scale:"
 msgstr "Skalenparameter:"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Normal"
 msgstr "Normal"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "mean:"
 msgstr "Mittelwert:"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "std:"
 msgstr "Std:"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "t"
 msgstr "t"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "df:"
 msgstr "df:"
@@ -1100,99 +1068,82 @@ msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Truncation"
 msgstr "Abschneiden"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Lower bound:"
 msgstr "Untergrenze:"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Upper bound:"
 msgstr "Obergrenze:"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Heterogeneity (Between study SD)"
 msgstr "Heterogenität (SD zwischen Studien)"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Inverse gamma"
 msgstr "Inverse Gammaverteilung"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "shape:"
 msgstr "Form:"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Half t"
 msgstr "Halbe t-Verteilung"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Plot prior(s)"
-msgstr "Prior plotten"
+msgstr "Prior(s) plotten"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Diagnostics"
 msgstr "Diagnostiken"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Plots"
-msgstr "Abbildungen"
+msgstr "Diagramme"
 
 #, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Trim-fill analysis"
 msgstr "Trim-fill-Analyse"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Profile plot"
-msgstr "Profilplot"
+msgstr "Profildiagramm"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Diagnostic plots"
-msgstr "Diagnostische Abbildungen"
+msgstr "Diagnostische Diagramme"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Q-Q plot standardized residuals"
-msgstr "Q-Q-Diagramm der standardisierten Residuen"
+msgstr "Q-Q-Diagramm standardisierter Residuen"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Robustness"
 msgstr "Robustheit"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Fail-safe N"
-msgstr "Optimales N"
+msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Casewise diagnostics"
 msgstr "Fallweise Diagnostiken"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Method"
 msgstr "Methode"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Fixed Effects"
 msgstr "Feste Effekte"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Maximum Likelihood"
-msgstr ""
+msgstr "Maximum-Likelihood"
 
 #, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
@@ -1201,20 +1152,19 @@ msgstr "Begrenztes ML"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "DerSimonian-Laird"
-msgstr ""
+msgstr "DerSimonian-Laird"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Hedges"
 msgstr "Hedges"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Hunter-Schmidt"
-msgstr ""
+msgstr "Hunter-Schmidt"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Sidik-Jonkman"
-msgstr ""
+msgstr "Sidik-Jonkman"
 
 #, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
@@ -1223,49 +1173,40 @@ msgstr "Empirischer Bayes"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Paule-Mandel"
-msgstr ""
+msgstr "Paule-Mandel"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Statistics"
 msgstr "Statistiken"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Regression Coefficients"
 msgstr "Regressionskoeffizienten"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Estimates"
-msgstr "Schätzer"
+msgstr "Schätzungen"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Confidence intervals"
-msgstr "Konfidenzintervall"
+msgstr "Konfidenzintervalle"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Interval"
 msgstr "Intervall"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Test"
 msgstr "Test"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Covariance matrix"
 msgstr "Kovarianzmatrix"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Model Fit"
-msgstr "Modelanpassung"
+msgstr "Modellanpassung"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Fit measures"
 msgstr "Anpassungsmaße"
@@ -1276,27 +1217,27 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Show labels"
-msgstr ""
+msgstr "Beschriftungen anzeigen"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Ordering"
-msgstr ""
+msgstr "Reihenfolge"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Year (ascending)"
-msgstr ""
+msgstr "Jahr (aufsteigend)"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Year (descending)"
-msgstr ""
+msgstr "Jahr (absteigend)"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Effect size (ascending)"
-msgstr ""
+msgstr "Effektgröße (aufsteigend)"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Effect size (descending)"
-msgstr ""
+msgstr "Effektgröße (absteigend)"
 
 #, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
@@ -1313,12 +1254,10 @@ msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Regression test for funnel plot asymmetry"
 msgstr "Regressionstest für Funnelplot-Asymmetrie"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Residuals Model"
-msgstr "Residuen-Modell"
+msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Residuals parameters"
 msgstr "Residuen-Parameter"
