@@ -856,9 +856,10 @@ msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Random effects"
 msgstr "Willekeurige effecten"
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Estimation settings (MCMC)"
-msgstr ""
+msgstr "Schattingsinstellingen (MCMC)"
 
 #, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
@@ -992,9 +993,10 @@ msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Order"
 msgstr "Volgorde"
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Ascending"
-msgstr ""
+msgstr "Toenemend"
 
 #, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
