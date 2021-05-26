@@ -1566,6 +1566,7 @@ Form
 				columns:	2
 				label:		qsTr("Forest plot")
 				name:		"plotsTheta"
+				visible:	!measuresOR.checked //fix with RoBMA 2.0
 
 				RadioButtonGroup
 				{
@@ -2009,6 +2010,7 @@ Form
 					{
 						IntegerField
 						{
+							debug: true // hiding till RoBMA 2.0
 							name:			"advancedAutofitTime"
 							label:			qsTr("Maximum fitting time")
 							defaultValue:	1
@@ -2017,6 +2019,7 @@ Form
 
 						DropDown
 						{
+							debug: true // hiding till RoBMA 2.0
 							name:	"advancedAutofitTimeUnit"
 							values:
 							[
@@ -2050,6 +2053,7 @@ Form
 
 			CheckBox
 			{
+				debug: true // hiding till RoBMA 2.0
 				label:		qsTr("Exclude models")
 				name:		"advancedOmit"
 				checked:	false
