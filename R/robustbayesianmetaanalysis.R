@@ -370,7 +370,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   if (individual) {
     jaspTable$addColumnInfo(name = "error", title = gettext("MCMC error"), type = "number")
     jaspTable$addColumnInfo(name = "ess",   title = gettext("ESS"),        type = "integer")
-    jaspTable$addColumnInfo(name = "rHat",  title = gettext("Rhat"),       type = "number")
+    jaspTable$addColumnInfo(name = "rHat",  title = gettext("R-hat"),      type = "number")
   }
   
   
@@ -430,7 +430,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   if (individual) {
     jaspTable$addColumnInfo(name = "error",   title = gettext("MCMC error"), type = "number")
     jaspTable$addColumnInfo(name = "ess",     title = gettext("ESS"),        type = "integer")
-    jaspTable$addColumnInfo(name = "rhat",    title = gettext("Rhat"),       type = "number")
+    jaspTable$addColumnInfo(name = "rhat",    title = gettext("R-hat"),      type = "number")
   }
   
   
@@ -487,7 +487,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   if (individual) {
     jaspTable$addColumnInfo(name = "error",   title = gettext("MCMC error"), type = "number")
     jaspTable$addColumnInfo(name = "ess",     title = gettext("ESS"),        type = "integer")
-    jaspTable$addColumnInfo(name = "rhat",    title = gettext("Rhat"),       type = "number")
+    jaspTable$addColumnInfo(name = "rhat",    title = gettext("R-hat"),      type = "number")
   }
   
   
@@ -1717,7 +1717,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   modelsDiagnostics$addColumnInfo(name = "priorOmega", title = gettext("Publication Bias"), type = "string", overtitle = overtitlePrior)
   modelsDiagnostics$addColumnInfo(name = "error",       title = gettext("max(MCMC error)"),  type = "number")
   modelsDiagnostics$addColumnInfo(name = "ESS",         title = gettext("min(ESS)"),         type = "integer")
-  modelsDiagnostics$addColumnInfo(name = "Rhat",        title = gettext("max(Rhat)"),        type = "number")
+  modelsDiagnostics$addColumnInfo(name = "Rhat",        title = gettext("max(R-hat)"),       type = "number")
   
   for (i in 1:nrow(fitSummary[["diagnostics"]])) {
     tempRow <- list(
