@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-05-20 15:31+0000\n"
+"PO-Revision-Date: 2021-05-27 12:33+0000\n"
 "Last-Translator: Johannes Keyser <johanneskeyser@posteo.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/de/>\n"
@@ -240,7 +240,7 @@ msgstr "Korrelationen & N"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Odds ratios & CI"
-msgstr "Odds Ratio & Konfidenzintervall"
+msgstr "Chancenverhältnisse & KI"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect sizes & SE"
@@ -264,7 +264,7 @@ msgstr "Korrelation"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Odds Ratio"
-msgstr "Quotenverhältnis"
+msgstr "Chancenverhältnis"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size"
@@ -344,7 +344,7 @@ msgstr "Abschneiden"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Prior Odds"
-msgstr "Prior Chancenverhältnis"
+msgstr "A-priori Chancen"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Normal(μ,σ)"
@@ -388,7 +388,7 @@ msgstr "obere"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Odds"
-msgstr "Chancenverhältnis"
+msgstr "Chancen"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Heterogeneity"
