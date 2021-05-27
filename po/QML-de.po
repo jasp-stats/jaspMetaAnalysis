@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-05-27 12:33+0000\n"
+"PO-Revision-Date: 2021-05-28 17:34+0000\n"
 "Last-Translator: Johannes Keyser <johanneskeyser@posteo.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/de/>\n"
@@ -842,15 +842,13 @@ msgctxt "Description|"
 msgid "Synthesize evidence across multiple studies"
 msgstr ""
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Advanced"
 msgstr "Weiteres"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Prior model probability"
-msgstr "Prior Modellwahrscheinlichkeit"
+msgstr "Prior-Modellwahrscheinlichkeit"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Fixed effects"
@@ -1019,7 +1017,6 @@ msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Bayes factors"
 msgstr "Bayesfaktoren"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Posterior model probabilities"
 msgstr "Posterior-Modellwahrscheinlichkeiten"
@@ -1065,7 +1062,6 @@ msgctxt "BayesianMetaAnalysisPriors|"
 msgid "df:"
 msgstr "df:"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Truncation"
 msgstr "Abschneiden"
@@ -1147,7 +1143,6 @@ msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Maximum Likelihood"
 msgstr "Maximum-Likelihood"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Restricted ML"
 msgstr "Begrenztes ML"
