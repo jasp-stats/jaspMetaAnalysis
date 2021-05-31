@@ -46,7 +46,7 @@ Section
 
 				RadioButton
 				{
-					id:		forestObserved
+					id:		plotForestObserved
 					name: 		"plotForestObserved"
 					label: 		qsTr("Observed")
 					checked: 	true
@@ -54,6 +54,7 @@ Section
 
 				RadioButton
 				{
+					id:		plotForestEstimated
 					enabled: 	!(modelTypeValue == "FE")
 					name: 		"plotForestEstimated"
 					label: 		qsTr("Estimated")
@@ -61,6 +62,7 @@ Section
 
 				RadioButton
 				{
+					id:		plotForestBoth
 					enabled: 	!(modelTypeValue == "FE")
 					name: 		"plotForestBoth"
 					label: 		qsTr("Both")
@@ -127,6 +129,11 @@ Section
 	{
 		name: 	"plotCumForest"
 		label: 	qsTr("Cumulative forest plot")
+		CheckBox
+		{
+			name: "addPrior"
+			label: qsTr("Add prior")
+		}
 	}
 
 	CheckBox

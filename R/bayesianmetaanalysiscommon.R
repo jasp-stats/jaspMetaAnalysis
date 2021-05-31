@@ -375,27 +375,10 @@
   return(BFheterogeneity)
 }
 
-.bmaSequentialResults <- function(jaspResults, dataset, options, .bmaDependencies) {
-  
-  if(!is.null(jaspResults[["bmaSeqResults"]])) return(jaspResults[["bmaSeqResults"]]$object)
-  
-  startProgressbar(nrow(dataset)-1)
-  
-  seqResults <- list(mean=numeric(), lowerMain=numeric(), upperMain=numeric(), 
-                     BFs=numeric(1), posterior_models=list(), BFsHeterogeneity = numeric(1)) 
-  
-  d                       <- .bmaPriors(jaspResults, options)[["d"]]
-  # Fix voor truncated priors
-  priorSamples            <- sample(seq(-10, 10, by = 0.001), size = 2e5, replace = TRUE, prob = d(seq(-10, 10, by = 0.001)))
-  seqResults$mean[1]      <- mean(priorSamples)
-  seqResults$lowerMain[1] <- quantile(priorSamples, probs = 0.025)
-  seqResults$upperMain[1] <- quantile(priorSamples, probs = 0.975)
-  
+.bmaFillSequentialResults <- function(i, bmaResults, seqResults, options, sequential){
   modelName <- .bmaGetModelName(options)
   
-  for(i in 2:nrow(dataset)){
-    bmaResults <- .bmaResults(jaspResults, dataset[1:i, ], options)
-    
+  if(sequential){
     seqResults$mean[i]      <- bmaResults$estimates[modelName, "mean"]
     seqResults$lowerMain[i] <- bmaResults$estimates[modelName, "2.5%"]
     seqResults$upperMain[i] <- bmaResults$estimates[modelName, "97.5%"]
@@ -415,10 +398,62 @@
     }
     
     seqResults$posterior_models[[i]] <- bmaResults$posterior_models
+  } else {
+    # The results in the state are saved differently. 
+    # Therefore I need different code to extract what I need for the sequential analysis.
+    seqResults$mean[i]      <- bmaResults[["bma"]]$estimates[modelName, "mean"]
+    seqResults$lowerMain[i] <- bmaResults[["bma"]]$estimates[modelName, "2.5%"]
+    seqResults$upperMain[i] <- bmaResults[["bma"]]$estimates[modelName, "97.5%"]
     
+    if(options[["modelSpecification"]] == "BMA"){
+      seqResults$BFs[i] <- bmaResults[["bf"]]$inclusionBF
+      seqResults$BFsHeterogeneity[[i]] <- .bmaCalculateBFHeterogeneity(bmaResults[["models"]]$prior, bmaResults[["models"]]$posterior)
+    }
+    if(options[["modelSpecification"]] == "FE")  seqResults$BFs[i] <- bmaResults[["bf"]]$BF["fixed_H1", "fixed_H0"]
+    if(options[["modelSpecification"]] == "RE"){
+      seqResults$BFs[i] <- bmaResults[["bf"]]$BF["random_H1", "random_H0"]
+      seqResults$BFsHeterogeneity[[i]] <- bmaResults[["bf"]]$BF["random_H1", "fixed_H1"]
+    }
+    if(options[["modelSpecification"]] == "CRE"){
+      seqResults$BFs[i] <- bmaResults[["bf"]]$BF["ordered", "null"]
+      seqResults$BFsHeterogeneity[[i]] <- bmaResults[["bf"]]$BF["ordered", "fixed"]
+    }
+    
+    seqResults$posterior_models[[i]] <- bmaResults[["models"]]$posterior
+  }
+  
+  return(seqResults)
+}
+
+.bmaSequentialResults <- function(jaspResults, dataset, options, .bmaDependencies) {
+  
+  if(!is.null(jaspResults[["bmaSeqResults"]])) return(jaspResults[["bmaSeqResults"]]$object)
+  
+  n <- nrow(dataset)
+  startProgressbar(n-2)
+  
+  seqResults <- list(mean=numeric(), lowerMain=numeric(), upperMain=numeric(), 
+                     BFs=numeric(1), posterior_models=list(), BFsHeterogeneity = numeric(1)) 
+  
+  d                       <- .bmaPriors(jaspResults, options)[["d"]]
+  # Fix voor truncated priors
+  priorSamples            <- sample(seq(-10, 10, by = 0.0001), size = 1e6, replace = TRUE, prob = d(seq(-10, 10, by = 0.0001)))
+  seqResults$mean[1]      <- mean(priorSamples)
+  seqResults$lowerMain[1] <- quantile(priorSamples, probs = 0.025)
+  seqResults$upperMain[1] <- quantile(priorSamples, probs = 0.975)
+  
+  # meta analysis cannot run with only 1 study so it starts with 2
+  # the final result is already in the state, so we do not have to run it again (n-1)
+  for(i in 2:(n-1)){
+    bmaResults <- .bmaResults(jaspResults, dataset[1:i, ], options)
+    seqResults <- .bmaFillSequentialResults(i, bmaResults, seqResults, options, sequential = TRUE)
     
     progressbarTick()
   }
+  
+  # Get results from state
+  bmaResults <- .bmaResultsState(jaspResults, dataset, options, .bmaDependencies)
+  seqResults <- .bmaFillSequentialResults(n, bmaResults, seqResults, options, sequential = F)
   
   jaspResults[["bmaSeqResults"]] <- createJaspState(object=seqResults, dependencies=.bmaDependencies)
   
@@ -629,9 +664,9 @@
   
   if(options$modelSpecification == "CRE"){
     if(options[["bayesFactorType"]] == "BF01" || options[["bayesFactorType"]] == "LogBF10"){
-      footnoteCREbf <- gettextf("Bayes factor of the ordered effects H%1$s over the fixed effects H%1$s. The Bayes factor for the ordered effects H%1$s versus the unconstrained (random) effects H%1$s model is %2$.3f.", "\u2081", creBF)
+      footnoteCREbf <- gettextf("Bayes factor of the ordered effects H%1$s over the fixed effects H%0$s. The Bayes factor for the ordered effects H%1$s versus the unconstrained (random) effects H%1$s model is %2$.3f.", "\u2081", creBF)
     } else if(options[["bayesFactorType"]] == "BF10"){
-      footnoteCREbf <-gettextf("Bayes factor of the fixed effects H%1$s over the ordered effects H%1$s. The Bayes factor for the unconstrained (random) effects H%1$s versus the ordered effects H%1$s model is %2$.3f.", "\u2081", creBF)
+      footnoteCREbf <-gettextf("Bayes factor of the fixed effects H%0$s over the ordered effects H%1$s. The Bayes factor for the unconstrained (random) effects H%1$s versus the ordered effects H%1$s model is %2$.3f.", "\u2081", creBF)
     }
     
     
@@ -943,7 +978,7 @@
     } else if(options[["modelSpecification"]] == "RE"){
       int <- c(bmaResults[["bma"]]$estimates["random", "2.5%"], bmaResults[["bma"]]$estimates["random", "97.5%"])
       postName <- "Random"
-      labelsModel <- c(bquote(.(gettext("Random H"))[0]), bquote(.(gettext("Prior H"))[1]))
+      labelsModel <- c(bquote(.(gettext("Random H"))[1]), bquote(.(gettext("Prior H"))[1]))
       yPrior <- bmaResults[["random"]]$yPrior
       xPost <- bmaResults[["random"]]$xPost
       yPost <- bmaResults[["random"]]$yPost
@@ -1009,7 +1044,7 @@
   xPost <- xPost[index]
   yPost <- yPost[index]
   yPrior <- yPrior[index]
-
+  
   df <- data.frame(x = c(xPost, xPost), y = c(yPrior, yPost), g = rep(c("Prior", postName), each = length(xPost)))
   
   if(options$addLines && (options$modelSpecification == "BMA" || options$modelSpecification == "CRE")){
@@ -1168,7 +1203,7 @@
   }
   
   xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, xPost))
-
+  
   if(options[["addInfo"]]){
     plot$subplots$mainGraph <- plot$subplots$mainGraph + ggplot2::scale_x_continuous(name = xlab, breaks = xBreaks, limits = c(min(xPost), max(xPost)))
     plot$subplots$mainGraph <- .extraPost(plot$subplots$mainGraph, int, xPost, yPost)
@@ -1185,28 +1220,14 @@
 .bmaForestPlot <- function(jaspResults, dataset, options, ready, .bmaDependencies) {
   forestContainer <- createJaspContainer(title = gettext("Forest Plot"))
   forestContainer$dependOn(c(.bmaDependencies, "studyLabels"))
+  forestContainer$position <- 6
   jaspResults[["forestContainer"]] <- forestContainer
-  jaspResults[["forestContainer"]]$position <- 6
   
   # Get studylabels
   if(options[["studyLabels"]] != ""){
-    studyLabels <- as.character(dataset[, .v(options[["studyLabels"]])])
+    studyLabels <- as.character(dataset[, options[["studyLabels"]]])
   } else {
     studyLabels <- paste(gettext("Study"), 1:nrow(dataset))
-  }
-  
-  # Scale the height and width of the plot
-  height <- 100 + nrow(dataset) * 30
-  width  <- 500 + (nchar(max(studyLabels)) * 5)
-  
-  # title of plot based on observed/estimated 
-  if(options$forestPlot == "plotForestBoth"){
-    title  <- gettext("Observed and estimated study effects")
-    height <- height + 50 + nrow(dataset) * 30
-  } else  if(options$forestPlot == "plotForestEstimated"){
-    title <- gettext("Estimated study effects")
-  } else  if(options$forestPlot == "plotForestObserved" || options$modelSpecification == "FE"){
-    title <- gettext("Observed study effects")
   }
   
   # Check if ready    
@@ -1214,12 +1235,28 @@
     return()
   } 
   
+  # Scale the height and width of the plot
+  height <- heightCum <- 100 + nrow(dataset) * 30 
+  if(options$forestPlot == "plotForestBoth") {
+    height <- 100 + nrow(dataset) * 30 + 50 + nrow(dataset) * 30
+  } 
+  width  <- 500 + (nchar(max(studyLabels)) * 5)
+  
   # Create empty plot
-  if(options$checkForestPlot){
+  if(is.null(forestContainer[["forestPlot"]]) && options$checkForestPlot) {
+    
+    # title of plot based on observed/estimated 
+    if(options$forestPlot == "plotForestObserved" || options$modelSpecification == "FE"){
+      title <- gettext("Observed study effects")
+    } else if(options$forestPlot == "plotForestEstimated"){
+      title <- gettext("Estimated study effects")
+    } else if(options$forestPlot == "plotForestBoth"){
+      title  <- gettext("Observed and estimated study effects")
+    }
+    
     forestPlot <- createJaspPlot(plot = NULL, title = title, height = height, width = width)
     # Fill plot
-    forestPlot$dependOn(c("plotForestObserved", "plotForestEstimated", "plotForestBoth", 
-                          "checkForestPlot", "ascendingForest", "labelForest",
+    forestPlot$dependOn(c("forestPlot", "checkForestPlot", 
                           "orderForest", "forestPlotOrder", "showLabels"))
     forestPlot$position <- 1
     .bmaFillForestPlot(forestPlot, jaspResults, dataset, options, studyLabels, showLabels = if(!is.null(options[["showLabels"]])) options[["showLabels"]] else TRUE)
@@ -1227,9 +1264,9 @@
     forestContainer[["forestPlot"]] <- forestPlot
   }
   
-  if(options$plotCumForest){
-    cumForestPlot <- createJaspPlot(plot = NULL, title = gettext("Cumulative forest plot"), height = height, width = width)
-    cumForestPlot$dependOn("plotCumForest")
+  if(is.null(forestContainer[["cumForestPlot"]]) && options$plotCumForest){
+    cumForestPlot <- createJaspPlot(plot = NULL, title = gettext("Cumulative forest plot"), height = heightCum, width = width)
+    cumForestPlot$dependOn(c("plotCumForest", "addPrior"))
     cumForestPlot$position <- 2
     .bmaFillCumForest(cumForestPlot, jaspResults, dataset, options, studyLabels, .bmaDependencies)
     forestContainer[["cumForestPlot"]] <- cumForestPlot
@@ -1241,15 +1278,15 @@
   bmaResults <- .bmaResultsState(jaspResults, dataset, options, .bmaDependencies)
   
   # Create effect size and standard error variable and make dataframe
-  varES <- dataset[, .v(options[["effectSize"]])]
+  varES <- dataset[, options[["effectSize"]]]
   
   if(all(unlist(options[["confidenceInterval"]]) != "") && !is.null(unlist(options[["confidenceInterval"]]))){
-    lower <- dataset[, .v(options[["confidenceInterval"]][[1]][[1]])]
-    upper <- dataset[, .v(options[["confidenceInterval"]][[1]][[2]])]
+    lower <- dataset[, options[["confidenceInterval"]][[1]][[1]]]
+    upper <- dataset[, options[["confidenceInterval"]][[1]][[2]]]
     varSE <- (upper - lower)/2/qnorm(0.975)
   }
   if(options[["standardError"]] != ""){
-    varSE <- dataset[, .v(options[["standardError"]])]
+    varSE <- dataset[, options[["standardError"]]]
   }
   
   # Assign weights for the observed point sizes
@@ -1452,7 +1489,6 @@
     }
     
   }
-
   
   # a sneaky way of coloring user-added estimates for Cochrane 
   df$color        <- ifelse(grepl("_add", df$studyLabels), "blue", "black")
@@ -1529,6 +1565,7 @@
   rowResults <- .bmaSequentialResults(jaspResults, dataset, options, .bmaDependencies)
   
   meanMain   <- rowResults$mean
+  if(round(meanMain[1], 2) == 0.00) meanMain[1] <- 0.00
   lowerMain  <- rowResults$lowerMain
   upperMain  <- rowResults$upperMain
   
@@ -1546,12 +1583,20 @@
   
   df <- data.frame(effectSize = meanMain, studyLabels = studyLabels, y = length(meanMain):1)
   
+  if(!options$addPrior) {
+    idx <- which(df$studyLabels == "Prior")
+    df <- df[-idx, ]
+    text <- text[-idx]
+    lowerMain  <- lowerMain[-idx]
+    upperMain  <- upperMain[-idx]
+  }
+  
   plot <-  ggplot2::ggplot(df, ggplot2::aes(x = effectSize, y = y))+
     ggplot2::geom_vline(xintercept = 0, linetype = "dotted")+
     ggplot2::geom_errorbarh(ggplot2::aes(xmin = lowerMain, xmax = upperMain), height = .2) +
     ggplot2::geom_point(shape = 16, size = 4) +
     ggplot2::xlab(bquote(paste(.(gettext("Overall effect size")), ~mu))) + 
-    ggplot2::scale_y_continuous(breaks = df$y, labels = studyLabels, expand = c(0, 0.5),
+    ggplot2::scale_y_continuous(breaks = df$y, labels = df$studyLabels, expand = c(0, 0.5),
                                 sec.axis = ggplot2::sec_axis(~ ., breaks = df$y, labels = text))
   
   plot <- jaspGraphs::themeJasp(plot, yAxis = FALSE)
@@ -1579,13 +1624,14 @@
     return()
   }
   
-  # Fill posterior plot effect size
+  # Fill sequential plot BFs effect size
   if(options$plotSequential){
     seqPlotES <- createJaspPlot(plot = NULL, title = gettext("Bayes factors effect size"), height = 400, width = 580)
     seqPlotES$dependOn(c("plotSequential", "BF")) 
     seqPlotES$position <- 1
     seqContainer[["seqPlotES"]] <- seqPlotES
     .bmaFillSeqPlot(seqPlotES, jaspResults, dataset, options, .bmaDependencies, type = "ES")
+    # Fill sequential plot BFs standard error
     if(!options$modelSpecification == "FE"){
       seqPlotSE <- createJaspPlot(plot = NULL, title = gettext("Bayes factors heterogeneity"), height = 400, width = 580)
       seqPlotSE$dependOn(c("plotSequential", "BF")) 
@@ -1607,32 +1653,51 @@
 
 .bmaFillSeqPlot <- function(seqPlot, jaspResults, dataset, options, .bmaDependencies, type){
   
+  evidenceR <- gettext("Evidence for random effects")
+  evidenceF <- gettext("Evidence for fixed effects")  
+  
   rowResults <- .bmaSequentialResults(jaspResults, dataset, options, .bmaDependencies)
   if(type == "ES"){
     BFs <- rowResults$BFs
   } else if(type == "SE"){
+    # The BFs for heterogeneity have different labels
     BFs <- rowResults$BFsHeterogeneity
     yName <- "BF[italic(rf)]"
+    pizzaTxt <- c("data | f", "data | r")
+    bfSubscripts <-  c("BF[italic(rf)]", "BF[italic(fr)]")  
+    arrowLabel <- c(evidenceF, evidenceR)
+    BF <- BFs[length(BFs)]
+    if(BF >= 1){
+      modelEvidence <- gettext("random")
+    } else {
+      modelEvidence <- gettext("fixed")
+    }
+    allEvidenceLabels <- c(gettext("Anecdotal",domain="R-jaspGraphs"), 
+                           gettext("Moderate",domain="R-jaspGraphs"),
+                           gettext("Strong",domain="R-jaspGraphs"), 
+                           gettext("Very Strong",domain="R-jaspGraphs"), 
+                           gettext("Extreme",domain="R-jaspGraphs"))
+    if(BF < 1) BF     <- 1/BF
+    idx               <- findInterval(BF, c(1, 3, 10, 30, 100), rightmost.closed = FALSE)
+    evidenceLevel     <- jaspGraphs:::fixTranslationForExpression(allEvidenceLabels[idx])
+    
+    evidenceFor <- gettextf("Evidence for %s:", modelEvidence, domain="R-jaspGraphs")
+    evidenceFor <- jaspGraphs:::fixTranslationForExpression(evidenceFor)
+    evidenceTxt <- jaspGraphs:::parseThis(c(evidenceLevel, evidenceFor))
   }
+  
   BFs[1] <- 1  
+  bfType <- "BF10" 
   
   if(options$bayesFactorType == "BF01") {
     BFs    <- 1/BFs
     bfType <- "BF01"
-    yName <- "BF[italic(fr)]"
-  } else if(options$bayesFactorType == "LogBF10") {
-    bfType <- "LogBF10"
-  } else {
-    bfType <- "BF10" 
-    
-    
-  }
+    yName <- "BF[italic(fr)]" 
+  } 
   
-  pizzaTxt <- c("data | f H1", "data | r H1")
-  bfSubscripts <-  c("BF[italic(rf)]", "BF[italic(fr)]")
-  
+  # The BFs for constrained random effects also have different labels
   if(options$modelSpecification == "CRE"){
-    pizzaTxt <- c("data | f H1", "data | o H1")
+    pizzaTxt <- c("data | f", "data | o")
     bfSubscripts <-  c("BF[italic(of)]", "BF[italic(fo)]")
     if(type == "SE") yName <- "BF[italic(of)]"
     if(type == "SE" && options$bayesFactorType == "BF01") yName <- "BF[italic(fo)]"
@@ -1646,12 +1711,11 @@
   df <- data.frame(x = 1:nrow(dataset), y = log(BFs))
   
   if(type == "ES"){
-    
     plot <- jaspGraphs::PlotRobustnessSequential(dfLines = df,
                                                  xName = "Studies",
                                                  BF = BFs[nrow(dataset)],
                                                  bfType = bfType,
-                                                 hasRightAxis = TRUE)
+                                                 hasRightAxis = FALSE)
   } else if(type == "SE"){
     plot <- jaspGraphs::PlotRobustnessSequential(dfLines = df,
                                                  xName = "Studies",
@@ -1659,11 +1723,11 @@
                                                  bfType = bfType,
                                                  bfSubscripts = bfSubscripts,
                                                  pizzaTxt = pizzaTxt,
-                                                 hasRightAxis = TRUE,
+                                                 hasRightAxis = FALSE,
                                                  yName = yName,
-                                                 evidenceTxt  = jaspGraphs::parseThis(paste0("paste('", gettext("Evidence for r H"), "'[1], ':')")),
-                                                 arrowLabel  = c(jaspGraphs::parseThis(paste0("'", gettext("Evidence for f H"), "'[1]")),
-                                                                 jaspGraphs::parseThis(paste0("'", gettext("Evidence for r H"), "'[1]")))    )
+                                                 evidenceTxt  = evidenceTxt,
+                                                 arrowLabel  = arrowLabel   
+    )
   }
   
   

@@ -47,7 +47,7 @@ Section
 					if (checked)
 					{
 						priorModelProbabilityGroup.resetHypotheses()
-						forestObserved.click()
+						plotForestObserved.click()
 					}
 				}
 			}
