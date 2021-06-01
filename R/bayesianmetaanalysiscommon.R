@@ -1236,25 +1236,26 @@
   } 
   
   # Scale the height and width of the plot
-  height <- heightCum <- 100 + nrow(dataset) * 30 
-  if(options$forestPlot == "plotForestBoth") {
-    height <- 100 + nrow(dataset) * 30 + 50 + nrow(dataset) * 30
-  } 
+  heightCum <- 100 + nrow(dataset) * 30 
   width  <- 500 + (nchar(max(studyLabels)) * 5)
   
   # Create empty plot
   if(is.null(forestContainer[["forestPlot"]]) && options$checkForestPlot) {
     
-    # title of plot based on observed/estimated 
-    if(options$forestPlot == "plotForestObserved" || options$modelSpecification == "FE"){
-      title <- gettext("Observed study effects")
+    # title and height of plot based on observed/estimated 
+    if(options$forestPlot == "plotForestObserved"){
+      title  <- gettext("Observed study effects")
+      height <- 100 + nrow(dataset) * 30
     } else if(options$forestPlot == "plotForestEstimated"){
-      title <- gettext("Estimated study effects")
+      title  <- gettext("Estimated study effects")
+      height <- 100 + nrow(dataset) * 30
     } else if(options$forestPlot == "plotForestBoth"){
       title  <- gettext("Observed and estimated study effects")
+      height <- 150 + 2 * (nrow(dataset) * 30)
     }
     
     forestPlot <- createJaspPlot(plot = NULL, title = title, height = height, width = width)
+    
     # Fill plot
     forestPlot$dependOn(c("forestPlot", "checkForestPlot", 
                           "orderForest", "forestPlotOrder", "showLabels"))
