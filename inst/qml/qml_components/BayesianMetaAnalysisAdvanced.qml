@@ -25,6 +25,11 @@ Section
 	columns: 	2
 	title: 		qsTr("Advanced")
 
+	property alias priorH0FEValue:		priorH0FE.value
+	property alias priorH1FEValue:		priorH1FE.value
+	property alias priorH0REValue:		priorH0RE.value
+	property alias priorH1REValue:		priorH1RE.value
+	
 	property string modelTypeValue:			"BMA"
 	property string modelDirectionValue:	"allPos"
 
@@ -34,39 +39,17 @@ Section
 		enabled: 	modelTypeValue == "FE" || modelTypeValue == "RE" || modelTypeValue == "BMA"
 		title: 		qsTr("Prior model probability")
 
-		property double fixedEffectsHypothesisVal:	modelTypeValue == "FE" ? 0.5 :
-														modelTypeValue == "RE" ? 0 :
-															modelTypeValue == "BMA" ? 0.25 : 0
-
-		property double randomEffectsHypothesisVal:	modelTypeValue == "FE" ? 0 :
-														modelTypeValue == "RE" ? 0.5 :
-															modelTypeValue == "BMA" ? 0.25 : 0
-
-		function resetHypotheses() {
-			priorH0FE.value = fixedEffectsHypothesisVal
-			priorH1FE.value = fixedEffectsHypothesisVal
-			priorH0RE.value = randomEffectsHypothesisVal
-			priorH1RE.value = randomEffectsHypothesisVal
-
-			priorH0FE.editingFinished()
-			priorH1FE.editingFinished()
-			priorH0RE.editingFinished()
-			priorH1RE.editingFinished()
-		}
-
 		Group
 		{
 			enabled: 			modelTypeValue == "FE" || modelTypeValue == "BMA"
 			title: 				qsTr("Fixed effects")
-
-			onEnabledChanged: 	if(enabled) priorModelProbabilityGroup.resetHypotheses()
 
 			DoubleField
 			{
 				id: 			priorH0FE
 				name: 			"priorH0FE"
 				label: 			"H\u2080"
-				defaultValue: 	priorModelProbabilityGroup.fixedEffectsHypothesisVal
+				defaultValue: 	0.25
 			}
 
 			DoubleField
@@ -74,7 +57,7 @@ Section
 				id: 			priorH1FE
 				name: 			"priorH1FE"
 				label: 			"H\u2081"
-				defaultValue: 	priorModelProbabilityGroup.fixedEffectsHypothesisVal
+				defaultValue: 	0.25
 			}
 		}
 
@@ -82,14 +65,13 @@ Section
 		{
 			title: 				qsTr("Random effects")
 			enabled: 			modelTypeValue == "RE" || modelTypeValue == "BMA"
-			onEnabledChanged: 	if(enabled) priorModelProbabilityGroup.resetHypotheses()
 
 			DoubleField
 			{
 				id: 			priorH0RE
 				name: 			"priorH0RE"
 				label: 			"H\u2080"
-				defaultValue: 	priorModelProbabilityGroup.randomEffectsHypothesisVal
+				defaultValue: 	0.25
 			}
 
 			DoubleField
@@ -97,7 +79,7 @@ Section
 				id: 			priorH1RE
 				name: 			"priorH1RE"
 				label: 			"H\u2081"
-				defaultValue: 	priorModelProbabilityGroup.randomEffectsHypothesisVal
+				defaultValue: 	0.25
 			}
 		}
 	}
