@@ -64,7 +64,7 @@ Section
 				id: 			priorH0FE
 				name: 			"priorH0FE"
 				label: 			"H\u2080"
-				defaultValue: 	priorModelProbabilityGroup.fixedEffectsHypothesisVal
+				defaultValue: 	0.25
 			}
 
 			DoubleField
@@ -72,7 +72,7 @@ Section
 				id: 			priorH1FE
 				name: 			"priorH1FE"
 				label: 			"H\u2081"
-				defaultValue: 	priorModelProbabilityGroup.fixedEffectsHypothesisVal
+				defaultValue: 	0.25
 			}
 		}
 
@@ -87,7 +87,7 @@ Section
 				id: 			priorH0RE
 				name: 			"priorH0RE"
 				label: 			"H\u2080"
-				defaultValue: 	priorModelProbabilityGroup.randomEffectsHypothesisVal
+				defaultValue: 	0.25
 			}
 
 			DoubleField
@@ -95,7 +95,7 @@ Section
 				id: 			priorH1RE
 				name: 			"priorH1RE"
 				label: 			"H\u2081"
-				defaultValue: 	priorModelProbabilityGroup.randomEffectsHypothesisVal
+				defaultValue: 	0.25
 			}
 		}
 	}
