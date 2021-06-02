@@ -48,6 +48,7 @@ Section
 					bayesianMetaAnalysisAdvanced.priorH1FEValue = 0.5
 					bayesianMetaAnalysisAdvanced.priorH0REValue = 0
 					bayesianMetaAnalysisAdvanced.priorH1REValue = 0
+					bayesianMetaAnalysisPlots.forestObservedClick = true
 				}
 			}
 

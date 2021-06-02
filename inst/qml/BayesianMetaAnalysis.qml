@@ -77,6 +77,7 @@ Form
 	}
 
 	MA.BayesianMetaAnalysisPlots{
+		id:						bayesianMetaAnalysisPlots
 		modelTypeValue:			bayesianMetaAnalysisInference.modelTypeValue
 		modelDirectionValue:	bayesianMetaAnalysisInference.modelDirectionValue
 	}
