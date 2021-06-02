@@ -48,7 +48,7 @@ Section
 					bayesianMetaAnalysisAdvanced.priorH1FEValue = 0.5
 					bayesianMetaAnalysisAdvanced.priorH0REValue = 0
 					bayesianMetaAnalysisAdvanced.priorH1REValue = 0
-					bayesianMetaAnalysisPlots.forestObservedClick = true
+					bayesianMetaAnalysisPlots.plotForestObservedClick = true
 				}
 			}
 
@@ -82,10 +82,10 @@ Section
 				value: 				"CRE"
 				label: 				qsTr("Constrained random effects")
 				onCheckedChanged:	if(checked) {
-					bayesianMetaAnalysisAdvanced.priorH0FEValue = 0.25
-					bayesianMetaAnalysisAdvanced.priorH1FEValue = 0.25
-					bayesianMetaAnalysisAdvanced.priorH0REValue = 0.25
-					bayesianMetaAnalysisAdvanced.priorH1REValue = 0.25
+					bayesianMetaAnalysisAdvanced.priorH0FEValue = 0
+					bayesianMetaAnalysisAdvanced.priorH1FEValue = 0
+					bayesianMetaAnalysisAdvanced.priorH0REValue = 0
+					bayesianMetaAnalysisAdvanced.priorH1REValue = 0
 				}
 
 				// Constrain effect sizes to be all positive or all negative

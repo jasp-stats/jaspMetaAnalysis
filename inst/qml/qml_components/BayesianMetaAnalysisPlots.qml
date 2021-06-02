@@ -25,7 +25,7 @@ Section
 	columns: 	1
 	title: 		qsTr("Plots")
 
-	property alias forestObservedClick:		forestObserved.checked
+	property alias plotForestObservedClick:	plotForestObserved.checked
 	property string modelTypeValue:			"BMA"
 	property string modelDirectionValue:	"allPos"
 	property string module:					"metaAnalysis"
