@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2021-03-06 14:59\n"
-"PO-Revision-Date: 2021-05-28 04:32+0000\n"
+"PO-Revision-Date: 2021-06-01 00:38+0000\n"
 "Last-Translator: Paulina Elizabeth Robalino <paulina.e.robalino@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
@@ -54,7 +54,7 @@ msgid "Mean"
 msgstr "Media"
 
 msgid "SD"
-msgstr "SD"
+msgstr "DE"
 
 msgid "Lower"
 msgstr "Inferior"
@@ -142,7 +142,7 @@ msgid "Model Probabilities"
 msgstr ""
 
 msgid "Prior"
-msgstr ""
+msgstr "Anterior"
 
 msgid "Posterior"
 msgstr "Posterior"
@@ -160,7 +160,7 @@ msgid "Effect Sizes per Study"
 msgstr ""
 
 msgid "Observed"
-msgstr ""
+msgstr "Observado"
 
 msgid "Estimated"
 msgstr ""
@@ -227,7 +227,7 @@ msgid "Overall effect size"
 msgstr ""
 
 msgid "Sequential Analysis"
-msgstr ""
+msgstr "Análisis Secuencial"
 
 msgid "Bayes factors effect size"
 msgstr ""
@@ -274,13 +274,13 @@ msgid "<em>p</em>-values are approximate."
 msgstr ""
 
 msgid "Coefficients"
-msgstr ""
+msgstr "Coeficientes"
 
 msgid "Estimate"
 msgstr "Estimar"
 
 msgid "Standard Error"
-msgstr ""
+msgstr "Error Estándar"
 
 msgid "z"
 msgstr ""
@@ -364,7 +364,7 @@ msgid "Log-likelihood"
 msgstr "Log-verosimilitud"
 
 msgid "Deviance"
-msgstr ""
+msgstr "Desviación"
 
 msgid "AIC"
 msgstr ""
@@ -560,7 +560,7 @@ msgid "The priors for publication bias were set incorrectly."
 msgstr ""
 
 msgid "%s%% CI"
-msgstr ""
+msgstr "%s%% IC"
 
 msgid "Median"
 msgstr "Mediana"
@@ -717,7 +717,7 @@ msgid ""
 msgstr ""
 
 msgid "BF%s"
-msgstr ""
+msgstr "BF%s"
 
 msgid "log(BF%s)"
 msgstr ""

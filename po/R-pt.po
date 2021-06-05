@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-03-06 14:59\n"
-"PO-Revision-Date: 2021-05-23 12:33+0000\n"
+"PO-Revision-Date: 2021-06-01 00:38+0000\n"
 "Last-Translator: Alex França <alex.tonante@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/pt/>\n"
@@ -503,9 +503,8 @@ msgstr ""
 msgid "Theoretical Quantiles"
 msgstr "Quantis teóricos"
 
-#, fuzzy
 msgid "Sample Quantiles"
-msgstr "Tamanho da amostra"
+msgstr "Quartil da amostra"
 
 msgid "Standardized Residuals"
 msgstr "Resíduos padronizados"
@@ -780,10 +779,10 @@ msgid ""
 msgstr ""
 
 msgid "BF%s"
-msgstr ""
+msgstr "BF%s"
 
 msgid "log(BF%s)"
-msgstr ""
+msgstr "log(BF%s)"
 
 msgid "log(MargLik)"
 msgstr ""
@@ -941,7 +940,6 @@ msgstr "Testes de homogeneidade"
 msgid "p-value Frequency"
 msgstr ""
 
-#, fuzzy
 msgid "Frequency"
 msgstr "Fequência"
 
