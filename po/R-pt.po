@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-03-06 14:59\n"
-"PO-Revision-Date: 2021-06-01 00:38+0000\n"
+"PO-Revision-Date: 2021-06-16 18:33+0000\n"
 "Last-Translator: Alex França <alex.tonante@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/pt/>\n"
@@ -151,13 +151,11 @@ msgstr ""
 msgid "Model Probabilities"
 msgstr "Opções de modelo"
 
-#, fuzzy
 msgid "Prior"
 msgstr "Anterior"
 
-#, fuzzy
 msgid "Posterior"
-msgstr "RÂ² Posterior"
+msgstr "Posterior"
 
 #, fuzzy
 msgid "Fixed H%s"
@@ -175,7 +173,6 @@ msgstr "Ordem"
 msgid "Effect Sizes per Study"
 msgstr "Tamanho de efeito"
 
-#, fuzzy
 msgid "Observed"
 msgstr "Observado"
 
@@ -252,9 +249,8 @@ msgstr ""
 msgid "Overall effect size"
 msgstr "Tamanho do efeito"
 
-#, fuzzy
 msgid "Sequential Analysis"
-msgstr "Removar esta análise"
+msgstr "Análise sequencial"
 
 #, fuzzy
 msgid "Bayes factors effect size"
@@ -303,14 +299,12 @@ msgstr "p"
 msgid "<em>p</em>-values are approximate."
 msgstr ""
 
-#, fuzzy
 msgid "Coefficients"
-msgstr "Coeficiente de Mardia"
+msgstr "Coeficientes"
 
 msgid "Estimate"
 msgstr "Estimativas"
 
-#, fuzzy
 msgid "Standard Error"
 msgstr "Erro padrão"
 
@@ -397,11 +391,10 @@ msgid "The model was estimated using %1$s method."
 msgstr ""
 
 msgid "Log-likelihood"
-msgstr ""
+msgstr "Log-likelihood"
 
-#, fuzzy
 msgid "Deviance"
-msgstr "Avançado"
+msgstr "Desvio"
 
 #, fuzzy
 msgid "AIC"
@@ -463,7 +456,6 @@ msgstr "momentos observados"
 msgid "Cannot set 'xlim' automatically. Please set this argument manually."
 msgstr ""
 
-#, fuzzy
 msgid "Value"
 msgstr "Valor"
 
