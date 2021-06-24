@@ -663,10 +663,10 @@
   }
   
   if(options$modelSpecification == "CRE"){
-    if(options[["bayesFactorType"]] == "BF01" || options[["bayesFactorType"]] == "LogBF10"){
-      footnoteCREbf <- gettextf("Bayes factor of the ordered effects H%1$s over the fixed effects H%0$s. The Bayes factor for the ordered effects H%1$s versus the unconstrained (random) effects H%1$s model is %2$.3f.", "\u2081", creBF)
-    } else if(options[["bayesFactorType"]] == "BF10"){
-      footnoteCREbf <-gettextf("Bayes factor of the fixed effects H%0$s over the ordered effects H%1$s. The Bayes factor for the unconstrained (random) effects H%1$s versus the ordered effects H%1$s model is %2$.3f.", "\u2081", creBF)
+    if(options[["bayesFactorType"]] == "BF10" || options[["bayesFactorType"]] == "LogBF10"){
+      footnoteCREbf <- gettextf("Bayes factor of the ordered effects H%1$s over the fixed effects H%2$s. The Bayes factor for the ordered effects H%1$s versus the unconstrained (random) effects H%1$s model is %3$.3f.", "\u2081", "\u2080", creBF)
+    } else if(options[["bayesFactorType"]] == "BF01"){
+      footnoteCREbf <-gettextf("Bayes factor of the fixed effects H%2$s over the ordered effects H%1$s. The Bayes factor for the unconstrained (random) effects H%1$s versus the ordered effects H%1$s model is %3$.3f.", "\u2081", "\u2080", creBF)
     }
     
     
@@ -1142,13 +1142,13 @@
     med <- round(med, 3)    
   }
   
-  
-  pizzaTxt <- c("data | f H1", "data | r H1")
-  bfSubscripts <-  c("BF[italic(rf)]", "BF[italic(fr)]")
+  pizzaTxt <- c("data | Hf1",
+                "data | Hr1")
+  bfSubscripts <-  c("BF[italic(r1f1)]", "BF[italic(f1r1)]")
   
   if(options$modelSpecification == "CRE"){
-    pizzaTxt <- c("data | f H1", "data | o H1")
-    bfSubscripts <-  c("BF[italic(of)]", "BF[italic(fo)]")
+    pizzaTxt <- c("data | Hf1", "data | Ho1")
+    bfSubscripts <-  c("BF[italic(o1f1)]", "BF[italic(f1o1)]")
   }
   
   xr   <- range(df$x)
@@ -1236,7 +1236,7 @@
   } 
   
   # Scale the height and width of the plot
-  heightCum <- 100 + nrow(dataset) * 30 
+  heightCumulative <- 100 + nrow(dataset) * 30 
   width  <- 500 + (nchar(max(studyLabels)) * 5)
   
   # Create empty plot
@@ -1266,7 +1266,7 @@
   }
   
   if(is.null(forestContainer[["cumForestPlot"]]) && options$plotCumForest){
-    cumForestPlot <- createJaspPlot(plot = NULL, title = gettext("Cumulative forest plot"), height = heightCum, width = width)
+    cumForestPlot <- createJaspPlot(plot = NULL, title = gettext("Cumulative forest plot"), height = heightCumulative, width = width)
     cumForestPlot$dependOn(c("plotCumForest", "addPrior"))
     cumForestPlot$position <- 2
     .bmaFillCumForest(cumForestPlot, jaspResults, dataset, options, studyLabels, .bmaDependencies)
@@ -1663,9 +1663,15 @@
   } else if(type == "SE"){
     # The BFs for heterogeneity have different labels
     BFs <- rowResults$BFsHeterogeneity
-    yName <- "BF[italic(rf)]"
-    pizzaTxt <- c("data | f", "data | r")
-    bfSubscripts <-  c("BF[italic(rf)]", "BF[italic(fr)]")  
+    if(options$modelSpecification == "BMA"){
+      yName         <- "BF[italic(rf)]"
+      pizzaTxt      <- c("data | Hf", "data | Hr")
+      bfSubscripts  <-  c("BF[italic(rf)]", "BF[italic(fr)]")  
+    } else if(options$modelSpecification == "RE"){
+      yName         <- "BF[italic(r1f1)]"
+      pizzaTxt      <- c("data | Hf1", "data | Hr1")
+      bfSubscripts  <-  c("BF[italic(r1f1)]", "BF[italic(f1r1)]")  
+    }
     arrowLabel <- c(evidenceF, evidenceR)
     BF <- BFs[length(BFs)]
     if(BF >= 1){
@@ -1693,15 +1699,16 @@
   if(options$bayesFactorType == "BF01") {
     BFs    <- 1/BFs
     bfType <- "BF01"
-    yName <- "BF[italic(fr)]" 
+    if(options$modelSpecification == "BMA") yName <- "BF[italic(fr)]" 
+    if(options$modelSpecification == "RE")  yName <- "BF[italic(f1r1)]" 
   } 
   
   # The BFs for constrained random effects also have different labels
   if(options$modelSpecification == "CRE"){
-    pizzaTxt <- c("data | f", "data | o")
-    bfSubscripts <-  c("BF[italic(of)]", "BF[italic(fo)]")
-    if(type == "SE") yName <- "BF[italic(of)]"
-    if(type == "SE" && options$bayesFactorType == "BF01") yName <- "BF[italic(fo)]"
+    pizzaTxt <- c("data | Hf1", "data | Ho1")
+    bfSubscripts <-  c("BF[italic(o1f1)]", "BF[italic(f1o1)]")
+    if(type == "SE") yName <- "BF[italic(o1f1)]"
+    if(type == "SE" && options$bayesFactorType == "BF01") yName <- "BF[italic(f1o1)]"
   }
   
   if(any(is.infinite(BFs))){
