@@ -87,7 +87,6 @@ Form
 	}
 
 	MA.BayesianMetaAnalysisAdvanced{
-		id:						bayesianMetaAnalysisAdvanced
 		modelTypeValue:			bayesianMetaAnalysisInference.modelTypeValue
 		modelDirectionValue:	bayesianMetaAnalysisInference.modelDirectionValue
 	}
