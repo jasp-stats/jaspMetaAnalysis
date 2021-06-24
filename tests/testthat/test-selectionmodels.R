@@ -38,7 +38,7 @@ context("Meta Analysis - Selection Models")
   test_that("Weight Function (Fixed Effects) plot matches", {
     plotName <- results[["results"]][["FE_weights"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-    expect_equal_plots(testPlot, "weight-function-fixed-effects-1", dir="SelectionModels")
+    expect_equal_plots(testPlot, "weight-function-fixed-effects-1")
   })
   
   test_that("Heterogeneity Estimates (tau) table results match", {
@@ -71,7 +71,7 @@ context("Meta Analysis - Selection Models")
   test_that("Weight Function (Random Effects) plot matches", {
     plotName <- results[["results"]][["RE_weights"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-    expect_equal_plots(testPlot, "weight-function-random-effects-1", dir="SelectionModels")
+    expect_equal_plots(testPlot, "weight-function-random-effects-1")
   })
   
   test_that("Test of Publication Bias table results match", {
@@ -97,7 +97,7 @@ context("Meta Analysis - Selection Models")
   test_that("Mean Model Estimates (mu) plot matches", {
     plotName <- results[["results"]][["plotEstimates"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-    expect_equal_plots(testPlot, "mean-model-estimates-mu-1", dir="SelectionModels")
+    expect_equal_plots(testPlot, "mean-model-estimates-mu-1")
   })
 }
 
@@ -119,13 +119,13 @@ context("Meta Analysis - Selection Models")
   test_that("[x-scaled] Weight Function (Fixed Effects) plot matches", {
     plotName <- results[["results"]][["FE_weights"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-    expect_equal_plots(testPlot, "weight-function-fixed-effects-2", dir="SelectionModels")
+    expect_equal_plots(testPlot, "weight-function-fixed-effects-2")
   })
   
   test_that("[x-scaled] Weight Function (Random Effects) plot matches", {
     plotName <- results[["results"]][["RE_weights"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-    expect_equal_plots(testPlot, "weight-function-random-effects-2", dir="SelectionModels")
+    expect_equal_plots(testPlot, "weight-function-random-effects-2")
   })
 }
 
@@ -244,7 +244,7 @@ context("Meta Analysis - Selection Models")
   test_that("Weight Function (Fixed Effects) plot matches", {
     plotName <- results[["results"]][["FE_weights"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-    expect_equal_plots(testPlot, "weight-function-fixed-effects-3", dir="SelectionModels")
+    expect_equal_plots(testPlot, "weight-function-fixed-effects-3")
   })
   
   test_that("Heterogeneity Estimates (tau) table results match", {
@@ -279,7 +279,7 @@ context("Meta Analysis - Selection Models")
   test_that("Weight Function (Random Effects) plot matches", {
     plotName <- results[["results"]][["RE_weights"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-    expect_equal_plots(testPlot, "weight-function-random-effects-3", dir="SelectionModels")
+    expect_equal_plots(testPlot, "weight-function-random-effects-3")
   })
   
   test_that("Test of Publication Bias table results match", {

@@ -78,21 +78,21 @@ test_that("Observed study effects plot matches", {
   skip("rstan results differ across different devices")
   plotName <- results[["results"]][["forestContainer"]][["collection"]][["forestContainer_forestPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  expect_equal_plots(testPlot, "observed-study-effects", dir="BayesianMetaAnalysis")
+  expect_equal_plots(testPlot, "observed-study-effects")
 })
 
 test_that("Effect size plot matches", {
   skip("rstan results differ across different devices")
   plotName <- results[["results"]][["postContainer"]][["collection"]][["postContainer_ES"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  expect_equal_plots(testPlot, "effect-size", dir="BayesianMetaAnalysis")
+  expect_equal_plots(testPlot, "effect-size")
 })
 
 test_that("Heterogeneity plot matches", {
   skip("rstan results differ across different devices")
   plotName <- results[["results"]][["postContainer"]][["collection"]][["postContainer_SE"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  expect_equal_plots(testPlot, "heterogeneity", dir="BayesianMetaAnalysis")
+  expect_equal_plots(testPlot, "heterogeneity")
 })
 
 test_that("Model Probabilities table results match", {
@@ -111,12 +111,12 @@ test_that("Effect Size plot matches", {
   skip("rstan results differ across different devices")
   plotName <- results[["results"]][["priorContainer"]][["collection"]][["priorContainer_ES"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  expect_equal_plots(testPlot, "effect-size", dir="BayesianMetaAnalysis")
+  expect_equal_plots(testPlot, "effect-size")
 })
 
 test_that("Heterogeneity plot matches", {
   skip("rstan results differ across different devices")
   plotName <- results[["results"]][["priorContainer"]][["collection"]][["priorContainer_SE"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  expect_equal_plots(testPlot, "heterogeneity", dir="BayesianMetaAnalysis")
+  expect_equal_plots(testPlot, "heterogeneity")
 })
