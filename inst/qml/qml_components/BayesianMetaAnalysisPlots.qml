@@ -25,6 +25,7 @@ Section
 	columns: 	1
 	title: 		qsTr("Plots")
 
+	property alias plotForestObservedClick:	plotForestObserved.checked
 	property string modelTypeValue:			"BMA"
 	property string modelDirectionValue:	"allPos"
 	property string module:					"metaAnalysis"
@@ -46,7 +47,7 @@ Section
 
 				RadioButton
 				{
-					id:		forestObserved
+					id:		plotForestObserved
 					name: 		"plotForestObserved"
 					label: 		qsTr("Observed")
 					checked: 	true
@@ -54,6 +55,7 @@ Section
 
 				RadioButton
 				{
+					id:		plotForestEstimated
 					enabled: 	!(modelTypeValue == "FE")
 					name: 		"plotForestEstimated"
 					label: 		qsTr("Estimated")
@@ -61,6 +63,7 @@ Section
 
 				RadioButton
 				{
+					id:		plotForestBoth
 					enabled: 	!(modelTypeValue == "FE")
 					name: 		"plotForestBoth"
 					label: 		qsTr("Both")
@@ -127,6 +130,11 @@ Section
 	{
 		name: 	"plotCumForest"
 		label: 	qsTr("Cumulative forest plot")
+		CheckBox
+		{
+			name: "addPrior"
+			label: qsTr("Add prior")
+		}
 	}
 
 	CheckBox

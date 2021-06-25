@@ -77,6 +77,7 @@ Form
 	}
 
 	MA.BayesianMetaAnalysisPlots{
+		id:						bayesianMetaAnalysisPlots
 		modelTypeValue:			bayesianMetaAnalysisInference.modelTypeValue
 		modelDirectionValue:	bayesianMetaAnalysisInference.modelDirectionValue
 	}
@@ -87,6 +88,7 @@ Form
 	}
 
 	MA.BayesianMetaAnalysisAdvanced{
+		id:						bayesianMetaAnalysisAdvanced
 		modelTypeValue:			bayesianMetaAnalysisInference.modelTypeValue
 		modelDirectionValue:	bayesianMetaAnalysisInference.modelDirectionValue
 	}
