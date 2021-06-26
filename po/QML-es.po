@@ -1322,11 +1322,6 @@ msgstr "Límite superior:"
 
 #, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
-msgid "Heterogeneity (Between study SD)"
-msgstr "Heterogeneidad (SD entre estudios)"
-
-#, fuzzy
-msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Inverse gamma"
 msgstr "Gamma inversa"
 
@@ -1533,3 +1528,11 @@ msgstr "Modelo de residuos"
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Residuals parameters"
 msgstr "Parámetros de residuos"
+
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Add prior"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysisPriors|"
+msgid "Heterogeneity (between-study SD)"
+msgstr ""
