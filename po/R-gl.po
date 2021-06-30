@@ -1,17 +1,23 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
+"Project-Id-Version: \n"
 "POT-Creation-Date: 2021-06-30 10:11\n"
-"PO-Revision-Date: 2021-03-12 00:02+0000\n"
-"Last-Translator: Koji Kosugi <kosugitti@gmail.com>\n"
-"Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
-"jaspmetaanalysis-r/ja/>\n"
-"Language: ja\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: gl_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.5.2-dev\n"
+"X-Virgin-Header: remove this line if you change anything in the header.\n"
+"X-Language: gl_ES\n"
+"X-Source-Language: C\n"
+"X-Generator: Poedit 2.3\n"
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr ""
@@ -28,11 +34,13 @@ msgstr ""
 msgid "No negative numbers found in %s"
 msgstr ""
 
+#, fuzzy
 msgid "The 95%% CI Lower Bound must be smaller than the Upper Bound."
-msgstr ""
+msgstr "Límites inferior e superior do intervalo de confianza do 95%"
 
+#, fuzzy
 msgid "You cannot set all the prior model probabilties to zero."
-msgstr ""
+msgstr "Probabilidades posteriores do modelo"
 
 msgid ""
 "The model could not be fit. Please check the following: Do you have at least "
@@ -41,8 +49,9 @@ msgid ""
 "constrained to be postive)?"
 msgstr ""
 
+#, fuzzy
 msgid "Posterior Estimates per Model"
-msgstr ""
+msgstr "Resumo posterior"
 
 msgid "BF%s%s"
 msgstr ""
@@ -51,39 +60,43 @@ msgid "Log(BF%s%s)"
 msgstr ""
 
 msgid "Mean"
-msgstr "平均値"
+msgstr "Media"
 
 msgid "SD"
-msgstr "標準偏差"
+msgstr ""
 
 msgid "Lower"
-msgstr "下"
+msgstr "Inferior"
 
+#, fuzzy
 msgid "95%% Credible Interval"
-msgstr "95%% 確信区間"
+msgstr "Intervalo de credibilidade"
 
 msgid "Upper"
-msgstr "上"
+msgstr "Superior"
 
+#, fuzzy
 msgid "Averaged"
-msgstr ""
+msgstr "Media"
 
 msgid "Fixed effects"
-msgstr ""
+msgstr "Efectos fixos"
 
 msgid "Random effects"
-msgstr ""
+msgstr "Efectos aleatorios"
 
+#, fuzzy
 msgid "Ordered effects"
-msgstr ""
+msgstr "Efectos fixos"
 
 msgid ""
 "%s and %s are the group-level effect size and standard deviation, "
 "respectively."
 msgstr ""
 
+#, fuzzy
 msgid "%s is the group-level effect size."
-msgstr ""
+msgstr "Estimacións da magnitude do efecto"
 
 msgid "Bayes factor of the random effects H%1$s over the fixed effects H%1$s."
 msgstr ""
@@ -138,35 +151,42 @@ msgid ""
 "effects H%1$s model is %3$.3f."
 msgstr ""
 
+#, fuzzy
 msgid "Model Probabilities"
-msgstr ""
+msgstr "Probabilidades do modelo"
 
 msgid "Prior"
-msgstr ""
+msgstr "Previo"
 
+#, fuzzy
 msgid "Posterior"
-msgstr "事後分布"
+msgstr "R² posterior"
 
+#, fuzzy
 msgid "Fixed H%s"
-msgstr ""
+msgstr "Fixo"
 
+#, fuzzy
 msgid "Random H%s"
-msgstr ""
+msgstr "Aleatorio"
 
+#, fuzzy
 msgid "Ordered H%s"
-msgstr ""
+msgstr "Ordenar os elementos"
 
+#, fuzzy
 msgid "Effect Sizes per Study"
-msgstr ""
+msgstr "Magnitudes dos efectos por estudio"
 
 msgid "Observed"
-msgstr ""
+msgstr "Observado"
 
 msgid "Estimated"
-msgstr ""
+msgstr "Estimado"
 
+#, fuzzy
 msgid "Study"
-msgstr ""
+msgstr "Student"
 
 msgid ""
 "Posterior mean and 95%% credible interval estimates from the random effects "
@@ -179,82 +199,100 @@ msgid ""
 msgstr ""
 
 msgid "Effect Size"
-msgstr ""
+msgstr "Magnitude do efecto"
 
 msgid "Heterogeneity"
-msgstr ""
+msgstr "Heteroxeneidade"
 
 msgid "Effect size"
-msgstr ""
+msgstr "Magnitude do efecto"
 
 msgid "Density"
-msgstr "密度"
+msgstr "Densidade"
 
+#, fuzzy
 msgid "Prior and Posteriors"
-msgstr ""
+msgstr "Previo e posterior"
 
+#, fuzzy
 msgid "Fixed H"
-msgstr ""
+msgstr "Fixo"
 
+#, fuzzy
 msgid "Random H"
-msgstr ""
+msgstr "Aleatorio"
 
+#, fuzzy
 msgid "Averaged H"
-msgstr ""
+msgstr "Media"
 
+#, fuzzy
 msgid "Prior H"
-msgstr ""
+msgstr "Previo"
 
+#, fuzzy
 msgid "Ordered H"
-msgstr ""
+msgstr "Orde"
 
+#, fuzzy
 msgid "Forest Plot"
-msgstr ""
+msgstr "Gráfica en bosque"
 
+#, fuzzy
 msgid "Observed study effects"
-msgstr ""
+msgstr "Efectos de estudios estimados"
 
+#, fuzzy
 msgid "Estimated study effects"
-msgstr ""
+msgstr "Efectos de estudios estimados"
 
+#, fuzzy
 msgid "Observed and estimated study effects"
-msgstr ""
+msgstr "Efectos de estudios estimados"
 
 msgid "Cumulative forest plot"
-msgstr ""
+msgstr "Gráfica acumulativa de bosque"
 
+#, fuzzy
 msgid "Overall effect size"
-msgstr ""
+msgstr "Transformar as magnitudes dos efectos"
 
 msgid "Sequential Analysis"
-msgstr ""
+msgstr "Análise secuencial"
 
+#, fuzzy
 msgid "Bayes factors effect size"
-msgstr ""
+msgstr "Transformar as magnitudes dos efectos"
 
+#, fuzzy
 msgid "Bayes factors heterogeneity"
-msgstr ""
+msgstr "Matriz de factores de Bayes"
 
 msgid "Posterior model probabilities"
-msgstr ""
+msgstr "Probabilidades posteriores do modelo"
 
+#, fuzzy
 msgid "Evidence for random effects"
-msgstr ""
+msgstr "Informar dos efectos aleatorios"
 
+#, fuzzy
 msgid "Evidence for fixed effects"
-msgstr ""
+msgstr "Informar dos efectos fixos"
 
+#, fuzzy
 msgid "random"
-msgstr ""
+msgstr "Aleatorio"
 
+#, fuzzy
 msgid "fixed"
-msgstr ""
+msgstr "Fixo"
 
 msgid "Anecdotal"
 msgstr ""
 
+#, fuzzy
 msgid "Moderate"
-msgstr ""
+msgstr "Nome do modelo"
 
 msgid "Strong"
 msgstr ""
@@ -271,25 +309,31 @@ msgstr ""
 msgid "Plotting failed: The Bayes factors contain infinity."
 msgstr ""
 
+#, fuzzy
 msgid "Studies"
-msgstr ""
+msgstr "Student"
 
+#, fuzzy
 msgid ""
 "Posterior model \n"
 " probability"
-msgstr ""
+msgstr "Probabilidades posteriores do modelo"
 
+#, fuzzy
 msgid "The metafor package crashed with the following error: %s"
 msgstr ""
+"A instalación do módulo %1 fallou coa seguinte mensaxe de fallo:\n"
+" %2"
 
+#, fuzzy
 msgid "Fixed and Random Effects"
-msgstr ""
+msgstr "Efectos aleatorios"
 
 msgid "Q"
 msgstr ""
 
 msgid "df"
-msgstr "自由度"
+msgstr "gl"
 
 msgid "p"
 msgstr "p"
@@ -298,16 +342,18 @@ msgid "<em>p</em>-values are approximate."
 msgstr ""
 
 msgid "Coefficients"
-msgstr ""
+msgstr "Coeficientes"
 
+#, fuzzy
 msgid "Estimate"
-msgstr "推定"
+msgstr "Estimado"
 
+#, fuzzy
 msgid "Standard Error"
-msgstr ""
+msgstr "Desviación padrón"
 
 msgid "z"
-msgstr "z"
+msgstr ""
 
 msgid "Wald test."
 msgstr ""
@@ -316,22 +362,26 @@ msgid "Wald tests."
 msgstr ""
 
 msgid "Fit measures"
-msgstr ""
+msgstr "Medidas de axuste"
 
 msgid "Residual Heterogeneity Estimates"
 msgstr ""
 
+#, fuzzy
 msgid "Parameter Covariances"
-msgstr ""
+msgstr "Covarianzas latentes"
 
+#, fuzzy
 msgid "Rank correlation test for Funnel plot asymmetry"
-msgstr ""
+msgstr "Proba de rangos para a asimetría con gráfica en funil"
 
+#, fuzzy
 msgid "Kendall's %s"
-msgstr ""
+msgstr "Tau de Kendall"
 
+#, fuzzy
 msgid "Regression test for Funnel plot asymmetry (\"Egger's test\")"
-msgstr ""
+msgstr "Proba da regresión para a asimetría de gráfica en funil"
 
 msgid "t"
 msgstr "t"
@@ -339,17 +389,20 @@ msgstr "t"
 msgid "Influence Measures"
 msgstr ""
 
+#, fuzzy
 msgid "Std. Residual"
-msgstr ""
+msgstr "Erros"
 
 msgid "DFFITS"
 msgstr ""
 
+#, fuzzy
 msgid "Cook's Distance"
-msgstr ""
+msgstr "Distancia de Cook >"
 
+#, fuzzy
 msgid "Cov. Ratio"
-msgstr ""
+msgstr "Proporción"
 
 msgid "%s%s<sub>(-i)</sub>"
 msgstr ""
@@ -357,38 +410,45 @@ msgstr ""
 msgid "Q<sub>E(-i)</sub>"
 msgstr ""
 
+#, fuzzy
 msgid "Hat"
-msgstr ""
+msgstr "Metade da distribución t"
 
+#, fuzzy
 msgid "Weight"
-msgstr ""
+msgstr "Ponderacións"
 
+#, fuzzy
 msgid "File Drawer Analysis"
-msgstr ""
+msgstr "Meta-análise"
 
 msgid "Fail-safe N"
-msgstr ""
+msgstr "N de seguridade"
 
+#, fuzzy
 msgid "Target Significance"
-msgstr ""
+msgstr "Informar da significación"
 
+#, fuzzy
 msgid "Observed Significance"
-msgstr ""
+msgstr "Informar da significación"
 
 msgid "Omnibus test of Model Coefficients"
 msgstr ""
 
+#, fuzzy
 msgid "Test of Residual Heterogeneity"
-msgstr ""
+msgstr "Heteroxeneidade estimada"
 
 msgid "The model was estimated using %1$s method."
 msgstr ""
 
+#, fuzzy
 msgid "Log-likelihood"
-msgstr "対数尤度"
+msgstr "Verosimilitude"
 
 msgid "Deviance"
-msgstr ""
+msgstr "Desviación"
 
 msgid "AIC"
 msgstr "AIC"
@@ -405,56 +465,68 @@ msgstr ""
 msgid "H%s"
 msgstr ""
 
+#, fuzzy
 msgid "Rank test"
-msgstr ""
+msgstr "Rango"
 
 msgid "Cases marked with %s are influential."
 msgstr ""
 
 msgid "Plot"
-msgstr ""
+msgstr "Gráfica"
 
 msgid "Forest plot"
-msgstr ""
+msgstr "Gráfica en bosque"
 
+#, fuzzy
 msgid "Funnel Plot"
-msgstr ""
+msgstr "Gráfica en funil"
 
+#, fuzzy
 msgid "Log-likelihood for %s%s"
-msgstr ""
+msgstr "Probas da proporción de verosimilitudes"
 
+#, fuzzy
 msgid "Trim-fill Analysis"
-msgstr ""
+msgstr "Análise Recortar-Encher"
 
+#, fuzzy
 msgid "Diagnostic Plots"
-msgstr ""
+msgstr "Gráficas de diagnóstico"
 
+#, fuzzy
 msgid "Study %s"
-msgstr ""
+msgstr "Etiquetas de estudo"
 
+#, fuzzy
 msgid "FE Model"
-msgstr ""
+msgstr "Modelo"
 
+#, fuzzy
 msgid "RE Model"
-msgstr ""
+msgstr "Modelo"
 
+#, fuzzy
 msgid "Observed Outcome"
-msgstr ""
+msgstr "Valores observados"
 
 msgid "Cannot set 'xlim' automatically. Please set this argument manually."
 msgstr ""
 
 msgid "Value"
-msgstr "値"
+msgstr "Valor"
 
+#, fuzzy
 msgid "Profile Plot for"
-msgstr ""
+msgstr "Perfilar a gráfica"
 
+#, fuzzy
 msgid "Restricted Log-Likelihood"
-msgstr ""
+msgstr "Pseudo-verosimilitude"
 
+#, fuzzy
 msgid "Residual Value"
-msgstr ""
+msgstr "Tipo de erros"
 
 msgid "Argument 'x' must be an object of class \"rma\"."
 msgstr ""
@@ -470,32 +542,40 @@ msgid ""
 "manually)."
 msgstr ""
 
+#, fuzzy
 msgid "Radial Plot"
-msgstr ""
+msgstr "Gráficas dos erros"
 
 msgid "Stopped because k = 1."
 msgstr ""
 
+#, fuzzy
 msgid "Normal Q-Q Plot"
-msgstr ""
+msgstr "Gráfica Q-Q"
 
+#, fuzzy
 msgid "Theoretical Quantiles"
-msgstr "理論上の分位数"
+msgstr "Eixe vertical"
 
+#, fuzzy
 msgid "Sample Quantiles"
-msgstr ""
+msgstr "Tamaño da mostra"
 
+#, fuzzy
 msgid "Standardized Residuals"
-msgstr "標準化された残差"
+msgstr "Erros tipificados"
 
+#, fuzzy
 msgid "Fitted vs. Standardized Residuals"
-msgstr ""
+msgstr "Erros tipificados"
 
+#, fuzzy
 msgid "Fitted Value"
-msgstr ""
+msgstr "Modelo axustado"
 
+#, fuzzy
 msgid "Standardized Residual"
-msgstr ""
+msgstr "Erros tipificados"
 
 msgid "The model should contain at least one predictor or an intercept."
 msgstr ""
@@ -504,13 +584,14 @@ msgid "FE"
 msgstr ""
 
 msgid "ML"
-msgstr ""
+msgstr "ML"
 
 msgid "REML"
 msgstr ""
 
+#, fuzzy
 msgid "DL"
-msgstr ""
+msgstr "DWLS"
 
 msgid "HE"
 msgstr ""
@@ -521,14 +602,16 @@ msgstr ""
 msgid "SJ"
 msgstr ""
 
+#, fuzzy
 msgid "EB"
-msgstr ""
+msgstr "EBIC"
 
 msgid "PM"
 msgstr ""
 
+#, fuzzy
 msgid "%g%% Confidence Interval"
-msgstr ""
+msgstr "Intervalo de confianza"
 
 msgid ""
 "Currently this only works with rma and rma.mv objects that have specified "
@@ -541,11 +624,12 @@ msgstr ""
 msgid "There are no predictors in the model that correspond to factors in '"
 msgstr ""
 
+#, fuzzy
 msgid "'. Factor levels:"
-msgstr ""
+msgstr "Distinguir os niveles dos factores"
 
 msgid ","
-msgstr ","
+msgstr ""
 
 msgid ". Data names:"
 msgstr ""
@@ -574,11 +658,12 @@ msgstr ""
 msgid "is smaller than 2."
 msgstr ""
 
+#, fuzzy
 msgid "Variance Components"
-msgstr ""
+msgstr "Compoñentes"
 
 msgid "Plots"
-msgstr ""
+msgstr "Gráficas"
 
 msgid "The priors for publication bias were set incorrectly."
 msgstr ""
@@ -587,16 +672,18 @@ msgid "%s%% CI"
 msgstr ""
 
 msgid "Median"
-msgstr "中央値"
+msgstr "Mediana"
 
+#, fuzzy
 msgid "MCMC error"
-msgstr ""
+msgstr "Desviación padrón"
 
+#, fuzzy
 msgid "ESS"
-msgstr ""
+msgstr "EQS"
 
 msgid "Rhat"
-msgstr "Rhat"
+msgstr ""
 
 msgid "%1$s is on %2$s scale."
 msgstr ""
@@ -610,94 +697,106 @@ msgstr ""
 msgid "Estimated studies' effects (%1$s) correspond to effect size %2$s."
 msgstr ""
 
+#, fuzzy
 msgid "Effect size (%s)"
-msgstr ""
+msgstr "Magnitude do efecto"
 
+#, fuzzy
 msgid "Heterogeneity (%s)"
-msgstr ""
+msgstr "Heteroxeneidade (nula)"
 
 msgid ""
 "The study labels contain invalid characters. Please, remove them before "
 "running the analysis."
 msgstr ""
 
+#, fuzzy
 msgid "Prior Plots"
-msgstr ""
+msgstr "Gráficas do comportamento"
 
 msgid "Effect"
-msgstr ""
+msgstr "Efecto"
 
 msgid "Weight Function"
-msgstr ""
+msgstr "Función de ponderación"
 
 msgid "Null"
 msgstr ""
 
+#, fuzzy
 msgid "Alternative"
-msgstr ""
+msgstr "Modelo alternativo"
 
+#, fuzzy
 msgid "Model Preview"
-msgstr ""
+msgstr "Revisión dos modelos"
 
 msgid ""
 "Please specify a prior distribution for each parameter in the Models "
 "specification section (either null or alternative)."
 msgstr ""
 
+#, fuzzy
 msgid "Model Summary"
-msgstr ""
+msgstr "Resumo do modelo"
 
 msgid "Models"
-msgstr "モデル"
+msgstr "Modelos"
 
 msgid "P(M)"
-msgstr "P(M)"
+msgstr ""
 
 msgid "Publication bias"
-msgstr ""
+msgstr "Nesgo de publicación"
 
 msgid ""
 "The analysis will estimate multiple meta-analytic models using MCMC and "
 "might require a prolonged time to complete."
 msgstr ""
 
+#, fuzzy
 msgid "Models Overview"
-msgstr ""
+msgstr "Revisión dos modelos"
 
+#, fuzzy
 msgid "Prior Distribution"
-msgstr ""
+msgstr "Distribución previa"
 
+#, fuzzy
 msgid "Publication Bias"
-msgstr ""
+msgstr "Nesgo de publicación"
 
 msgid "The loaded object is not a RoBMA model."
 msgstr ""
 
 msgid "Summary"
-msgstr ""
+msgstr "Resumo"
 
+#, fuzzy
 msgid "Exclusion"
-msgstr ""
+msgstr "Inclusión"
 
 msgid "Inclusion"
-msgstr ""
+msgstr "Inclusión"
 
+#, fuzzy
 msgid "log(BF)"
-msgstr ""
+msgstr "log(OR)"
 
 msgid "BF"
-msgstr ""
+msgstr "FB"
 
 msgid "P(M|data)"
-msgstr "P(M|データ)"
+msgstr ""
 
 msgid ""
 "All models failed to converge. Please, consider inspecting the 'MCMC "
 "diagnostics' and changing the 'Advanced options'."
 msgstr ""
 
+#, fuzzy
 msgid "Warning:"
-msgstr ""
+msgstr "Planificación"
 
 msgid "%i models failed to converge."
 msgstr ""
@@ -707,33 +806,39 @@ msgid ""
 "prior distributions was not evaluated."
 msgstr ""
 
+#, fuzzy
 msgid "Model Averaged Estimates"
-msgstr ""
+msgstr "Posteriores medios do modelo"
 
+#, fuzzy
 msgid "Model Averaged Weights (%s)"
-msgstr ""
+msgstr "Posteriores medios do modelo"
 
+#, fuzzy
 msgid "Model Averaged Estimated Studies' Effects (%s)"
-msgstr ""
+msgstr "Efectos de estudios estimados"
 
+#, fuzzy
 msgid "Conditional Estimates"
-msgstr ""
+msgstr "Estimacións condicionais"
 
 msgid ""
 "Estimates are model averaged over models assuming existence of effect / "
 "heterogeneity."
 msgstr ""
 
+#, fuzzy
 msgid "Conditional Weights (%s)"
-msgstr ""
+msgstr "Estimacións condicionais"
 
 msgid ""
 "Estimated weights (%s) are model averaged over models assuming existence of "
 "publication bias."
 msgstr ""
 
+#, fuzzy
 msgid "Conditional Estimated Studies' Effects (%s)"
-msgstr ""
+msgstr "Efectos de estudios estimados"
 
 msgid ""
 "Estimated studies effects (%s) are model averaged over models assuming "
@@ -743,56 +848,66 @@ msgstr ""
 msgid "BF%s"
 msgstr ""
 
+#, fuzzy
 msgid "log(BF%s)"
-msgstr ""
+msgstr "log(FB₁₀)"
 
 msgid "log(MargLik)"
 msgstr ""
 
+#, fuzzy
 msgid "Individual Models Summary"
-msgstr ""
+msgstr "Modelos individuais"
 
+#, fuzzy
 msgid "Model %i"
-msgstr ""
+msgstr "Modelo "
 
 msgid "Model %i does not exist. Select one of the models between 1 and %i."
 msgstr ""
 
 msgid "Priors"
-msgstr ""
+msgstr "Previos"
 
+#, fuzzy
 msgid "Information"
-msgstr ""
+msgstr "Información previa"
 
+#, fuzzy
 msgid "Model Estimates"
-msgstr ""
+msgstr "Estimacións do modelo medio"
 
+#, fuzzy
 msgid "Estimated Weights (%s)"
-msgstr ""
+msgstr "Ponderacións estimadas"
 
+#, fuzzy
 msgid "Estimated Studies' Effects (%s)"
-msgstr ""
+msgstr "Efectos de estudios estimados"
 
 msgid "Weight function"
-msgstr ""
+msgstr "Función de ponderación"
 
 msgid "Weights"
-msgstr ""
+msgstr "Ponderacións"
 
+#, fuzzy
 msgid "Effect size vs Heterogeneity"
-msgstr ""
+msgstr "Magnitudes dos efectos por estudio"
 
 msgid "%1$s (%2$s)"
 msgstr ""
 
+#, fuzzy
 msgid "Individual Models Plots"
-msgstr ""
+msgstr "Modelos individuais"
 
 msgid "Diagnostics"
-msgstr ""
+msgstr "Diagnósticos"
 
+#, fuzzy
 msgid "Models Diagnostics Overview"
-msgstr ""
+msgstr "Revisión dos modelos"
 
 msgid "max(MCMC error)"
 msgstr ""
@@ -806,14 +921,16 @@ msgstr ""
 msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
 msgstr ""
 
+#, fuzzy
 msgid "Trace plots"
-msgstr ""
+msgstr "Gráficas de trazado"
 
+#, fuzzy
 msgid "Average autocorrelations"
-msgstr ""
+msgstr "Autocorrelacións"
 
 msgid "Posterior samples densities"
-msgstr ""
+msgstr "Densidades posteriores das mostras"
 
 msgid "Model %i does not contain any of the selected parameters."
 msgstr ""
@@ -833,32 +950,41 @@ msgstr ""
 msgid "All p-value cutoffs needs to be between 0 and 1."
 msgstr ""
 
+#, fuzzy
 msgid "No steps"
-msgstr ""
+msgstr "Número de pasos"
 
+#, fuzzy
 msgid "95%% Confidence Interval"
-msgstr ""
+msgstr "Intervalo de confianza"
 
+#, fuzzy
 msgid "Note:"
-msgstr ""
+msgstr "Engadir comentario"
 
+#, fuzzy
 msgid "%s is on %s scale."
-msgstr ""
+msgstr "Escala de resposta"
 
+#, fuzzy
 msgid "<em>p</em>-values interval(one-sided)"
-msgstr ""
+msgstr "Valor p (unha cola)"
 
+#, fuzzy
 msgid "Model Tests"
-msgstr ""
+msgstr "Elementos do modelo"
 
+#, fuzzy
 msgid "Test of Heterogeneity"
-msgstr ""
+msgstr "Heteroxeneidade"
 
+#, fuzzy
 msgid "Error:"
-msgstr ""
+msgstr "Fallo"
 
+#, fuzzy
 msgid "Test of Publication Bias"
-msgstr ""
+msgstr "Nesgo de publicación"
 
 msgid "ChiSq"
 msgstr ""
@@ -866,66 +992,82 @@ msgstr ""
 msgid "Assuming homogeneity"
 msgstr ""
 
+#, fuzzy
 msgid "Assuming heterogeneity"
-msgstr ""
+msgstr "Heteroxeneidade estimada"
 
+#, fuzzy
 msgid "Fixed Effects Estimates"
-msgstr ""
+msgstr "Estimacións de efectos fixos"
 
+#, fuzzy
 msgid "Mean Estimates(%s)"
-msgstr ""
+msgstr "Estimacións da media"
 
+#, fuzzy
 msgid "Estimated Weights"
-msgstr ""
+msgstr "Ponderacións estimadas"
 
+#, fuzzy
 msgid "Random Effects Estimates"
-msgstr ""
+msgstr "Efectos aleatorios"
 
+#, fuzzy
 msgid "Heterogeneity Estimates(%s)"
-msgstr ""
+msgstr "Heteroxeneidade (nula)"
 
+#, fuzzy
 msgid "p-value Frequency"
-msgstr ""
+msgstr "Frecuencia do valor p"
 
 #, fuzzy
 msgid "Frequency"
-msgstr "頻度"
+msgstr "Frecuencias"
 
 msgid ""
 "There were no p-value cutoffs after their automatic reduction. The displayed "
 "frequencies correspond to the non-reduced p-value cutoffs."
 msgstr ""
 
+#, fuzzy
 msgid "Weight Function(%s)"
-msgstr ""
+msgstr "Función de ponderación"
 
 msgid ""
 "The figure could not be created since one of the estimates is not a number."
 msgstr ""
 
+#, fuzzy
 msgid "P-value (One-sided)"
-msgstr ""
+msgstr "Valor p (unha cola)"
 
+#, fuzzy
 msgid "Publication Probability"
-msgstr ""
+msgstr "Probabilidade acumulativa"
 
+#, fuzzy
 msgid "Mean Model Estimates (%s)"
-msgstr ""
+msgstr "Estimacións do modelo medio"
 
+#, fuzzy
 msgid "Fixed effects (adjusted)"
-msgstr ""
+msgstr "Estimacións de efectos fixos"
 
+#, fuzzy
 msgid "Random effects (adjusted)"
-msgstr ""
+msgstr "Efectos aleatorios"
 
+#, fuzzy
 msgid "Mean Estimates (%s)"
-msgstr ""
+msgstr "Estimacións da media"
 
+#, fuzzy
 msgid "Fixed effects model:"
-msgstr ""
+msgstr "Modelo de Efectos Fixos"
 
+#, fuzzy
 msgid "Random effects model:"
-msgstr ""
+msgstr "Modelo de efectos aleatorios"
 
 msgid ""
 "%sThe optimizer failed to find a solution. Consider re-specifying the model "
@@ -968,3 +1110,5 @@ msgstr ""
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] ""
+msgstr[1] ""
+

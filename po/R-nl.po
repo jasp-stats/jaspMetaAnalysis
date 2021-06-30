@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-05-15 03:01\n"
+"POT-Creation-Date: 2021-06-30 10:11\n"
 "PO-Revision-Date: 2020-12-02 21:29+0000\n"
 "Last-Translator: JASP Stats <F.A.M.Meerhoff@uva.nl>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/jasp-engine/"
@@ -159,19 +159,21 @@ msgstr ""
 "Bayes factor van de gefixeerde effecten H%1$s over de (onbeperkte/beperkte) "
 "aselecte effecten H%1$s."
 
+#, fuzzy
 msgid ""
-"Bayes factor of the ordered effects H%1$s over the fixed effects H%1$s. The "
+"Bayes factor of the ordered effects H%1$s over the fixed effects H%2$s. The "
 "Bayes factor for the ordered effects H%1$s versus the unconstrained (random) "
-"effects H%1$s model is %2$.3f."
+"effects H%1$s model is %3$.3f."
 msgstr ""
 "Bayes factor van de geordende effecten H%1$s over de gefixeerde effecten H"
 "%1$s. De Bayes factor voor de geordende effecten H%1$s versus de onbeperkte "
 "(aselecte) effecten H%1$s model is %2$.3f."
 
+#, fuzzy
 msgid ""
-"Bayes factor of the fixed effects H%1$s over the ordered effects H%1$s. The "
+"Bayes factor of the fixed effects H%2$s over the ordered effects H%1$s. The "
 "Bayes factor for the unconstrained (random) effects H%1$s versus the ordered "
-"effects H%1$s model is %2$.3f."
+"effects H%1$s model is %3$.3f."
 msgstr ""
 "Bayes factor van de gefixeerde effecten H%1$s over de geordende effecten H"
 "%1$s. De Bayes factor voor de onbeperkte (aselecte) effecten H%1$s versus de "
@@ -254,14 +256,14 @@ msgstr "Geordende H"
 msgid "Forest Plot"
 msgstr "Forestgrafiek"
 
-msgid "Observed and estimated study effects"
-msgstr "Geobserveerde en geschatte onderzoekseffecten"
+msgid "Observed study effects"
+msgstr "Geobserveerde onderzoekseffecten"
 
 msgid "Estimated study effects"
 msgstr "Geschatte onderzoekseffecten"
 
-msgid "Observed study effects"
-msgstr "Geobserveerde onderzoekseffecten"
+msgid "Observed and estimated study effects"
+msgstr "Geobserveerde en geschatte onderzoekseffecten"
 
 msgid "Cumulative forest plot"
 msgstr "Cumulatieve Forestgrafiek"
@@ -281,14 +283,44 @@ msgstr "Bayes factoren heterogeniteit"
 msgid "Posterior model probabilities"
 msgstr "Posterior model waarschijnlijkheden"
 
-msgid "Plotting failed: The Bayes factors contain infinity."
-msgstr "Grafieken faalde: De Bayes-factoren bevatten oneindig."
-
-msgid "Evidence for r H"
+#, fuzzy
+msgid "Evidence for random effects"
 msgstr "Bewijs voor r H"
 
-msgid "Evidence for f H"
+#, fuzzy
+msgid "Evidence for fixed effects"
 msgstr "Bewijs voor f H"
+
+#, fuzzy
+msgid "random"
+msgstr "Aselecte H"
+
+#, fuzzy
+msgid "fixed"
+msgstr "Gefixeerde H"
+
+msgid "Anecdotal"
+msgstr ""
+
+#, fuzzy
+msgid "Moderate"
+msgstr "Model Schattingen"
+
+msgid "Strong"
+msgstr ""
+
+msgid "Very Strong"
+msgstr ""
+
+msgid "Extreme"
+msgstr ""
+
+#, fuzzy
+msgid "Evidence for %s:"
+msgstr "Bewijs voor r H"
+
+msgid "Plotting failed: The Bayes factors contain infinity."
+msgstr "Grafieken faalde: De Bayes-factoren bevatten oneindig."
 
 msgid "Studies"
 msgstr "Onderzoeken"

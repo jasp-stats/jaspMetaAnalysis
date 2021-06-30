@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-03-06 14:59\n"
+"POT-Creation-Date: 2021-06-30 10:11\n"
 "PO-Revision-Date: 2021-06-16 18:33+0000\n"
 "Last-Translator: Alex França <alex.tonante@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
@@ -136,15 +136,15 @@ msgid ""
 msgstr ""
 
 msgid ""
-"Bayes factor of the ordered effects H%1$s over the fixed effects H%1$s. The "
+"Bayes factor of the ordered effects H%1$s over the fixed effects H%2$s. The "
 "Bayes factor for the ordered effects H%1$s versus the unconstrained (random) "
-"effects H%1$s model is %2$.3f."
+"effects H%1$s model is %3$.3f."
 msgstr ""
 
 msgid ""
-"Bayes factor of the fixed effects H%1$s over the ordered effects H%1$s. The "
+"Bayes factor of the fixed effects H%2$s over the ordered effects H%1$s. The "
 "Bayes factor for the unconstrained (random) effects H%1$s versus the ordered "
-"effects H%1$s model is %2$.3f."
+"effects H%1$s model is %3$.3f."
 msgstr ""
 
 #, fuzzy
@@ -232,14 +232,14 @@ msgstr "Ordem"
 msgid "Forest Plot"
 msgstr ""
 
-msgid "Observed and estimated study effects"
+msgid "Observed study effects"
 msgstr ""
 
 #, fuzzy
 msgid "Estimated study effects"
 msgstr "Estimativas de tamanho de efeito"
 
-msgid "Observed study effects"
+msgid "Observed and estimated study effects"
 msgstr ""
 
 msgid "Cumulative forest plot"
@@ -263,13 +263,41 @@ msgstr ""
 msgid "Posterior model probabilities"
 msgstr "Amostras posteriores"
 
+#, fuzzy
+msgid "Evidence for random effects"
+msgstr "efeitos aleatórios da escala r"
+
+#, fuzzy
+msgid "Evidence for fixed effects"
+msgstr "efeitos fixos da escala r"
+
+#, fuzzy
+msgid "random"
+msgstr "Fatores Aleatórios"
+
+msgid "fixed"
+msgstr ""
+
+msgid "Anecdotal"
+msgstr ""
+
+#, fuzzy
+msgid "Moderate"
+msgstr "Estimativas"
+
+msgid "Strong"
+msgstr ""
+
+msgid "Very Strong"
+msgstr ""
+
+msgid "Extreme"
+msgstr ""
+
+msgid "Evidence for %s:"
+msgstr ""
+
 msgid "Plotting failed: The Bayes factors contain infinity."
-msgstr ""
-
-msgid "Evidence for r H"
-msgstr ""
-
-msgid "Evidence for f H"
 msgstr ""
 
 msgid "Studies"
