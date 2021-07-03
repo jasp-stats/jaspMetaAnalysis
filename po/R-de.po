@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-06-30 10:11\n"
-"PO-Revision-Date: 2021-05-19 18:33+0000\n"
+"PO-Revision-Date: 2021-07-02 14:03+0000\n"
 "Last-Translator: Johannes Keyser <johanneskeyser@posteo.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/de/>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n==0 ? 0 : n==1 ? 0 : 1;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 4.8-dev\n"
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr "Die Untergrenze des Prior ist nicht kleiner als die Obergrenze."
@@ -279,41 +279,35 @@ msgstr "Bayesfaktoren Heterogenität"
 msgid "Posterior model probabilities"
 msgstr "Posterior Modellwahrscheinlichkeiten"
 
-#, fuzzy
 msgid "Evidence for random effects"
-msgstr "Evidenz für r H"
+msgstr "Evidenz für zufällige Effekte"
 
-#, fuzzy
 msgid "Evidence for fixed effects"
-msgstr "Evidenz für f H"
+msgstr "Evidenz für feste Effekte"
 
-#, fuzzy
 msgid "random"
-msgstr "Zufällige H"
+msgstr "zufällig"
 
-#, fuzzy
 msgid "fixed"
-msgstr "Feste H"
+msgstr "fest"
 
 msgid "Anecdotal"
-msgstr ""
+msgstr "Anekdotisch"
 
-#, fuzzy
 msgid "Moderate"
-msgstr "Modell-Schätzungen"
+msgstr "Moderat"
 
 msgid "Strong"
-msgstr ""
+msgstr "Stark"
 
 msgid "Very Strong"
-msgstr ""
+msgstr "Sehr stark"
 
 msgid "Extreme"
-msgstr ""
+msgstr "Extrem"
 
-#, fuzzy
 msgid "Evidence for %s:"
-msgstr "Evidenz für r H"
+msgstr "Evidenz für %s:"
 
 msgid "Plotting failed: The Bayes factors contain infinity."
 msgstr "Grafieken faalde: De Bayes-factoren bevatten oneindig."
@@ -638,7 +632,7 @@ msgid "The priors for publication bias were set incorrectly."
 msgstr "Die Prior für den Publikationsbias wurden falsch gesetzt."
 
 msgid "%s%% CI"
-msgstr "%s%% KI"
+msgstr "%s%% GI"
 
 msgid "Median"
 msgstr "Median"
