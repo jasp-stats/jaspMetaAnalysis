@@ -1,25 +1,15 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-03-21 05:30+0000\n"
-"Last-Translator: Yoshihiko Kunisato <ykunisato@psy.senshu-u.ac.jp>\n"
-"Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
-"jaspmetaanalysis-qml/ja/>\n"
-"Language: ja\n"
-"X-Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.5.2-dev\n"
+"X-Language: ja\n"
 "X-Qt-Contexts: true\n"
 
 msgctxt "Description|"
 msgid "Meta-Analysis"
 msgstr "メタ分析"
-
-msgctxt "Description|"
-msgid "Meta-Analysis module."
-msgstr "メタ分析モジュール。"
 
 msgctxt "Description|"
 msgid "Classical Meta-Analysis"
@@ -53,218 +43,6 @@ msgctxt "BayesianMetaAnalysis|"
 msgid "Study Labels"
 msgstr "研究ラベル"
 
-msgctxt "BayesianMetaAnalysis|"
-msgid "Model"
-msgstr "モデル"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Fixed effects"
-msgstr "固定効果"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Random effects"
-msgstr "ランダム効果"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Model averaging"
-msgstr "モデル平均化"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Constrained random effects"
-msgstr "制約付きランダム効果"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "All positive"
-msgstr "すべてポジティブ"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "All negative"
-msgstr "すべてネガティブ"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Table"
-msgstr "表"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Model probabilities"
-msgstr "モデルの確率"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Effect sizes per study"
-msgstr "研究ごとの効果量"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Prior"
-msgstr "事前分布"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Effect size"
-msgstr "効果量"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Cauchy"
-msgstr "コーシー(Cauchy)"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "location:"
-msgstr "位置(location)："
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "scale:"
-msgstr "尺度(scale)："
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Normal"
-msgstr "正規"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "mean:"
-msgstr "平均："
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "std:"
-msgstr "標準偏差："
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "t"
-msgstr "t"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "df:"
-msgstr "自由度："
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Truncation"
-msgstr "切断"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Lower bound:"
-msgstr "下限："
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Upper bound:"
-msgstr "上限："
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Heterogeneity (Between study SD)"
-msgstr "異質性(研究間標準偏差)"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Inverse gamma"
-msgstr "逆ガンマ"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "shape:"
-msgstr "形状："
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Half t"
-msgstr "半t"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Plot prior(s)"
-msgstr "事前分布をプロット"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Plots"
-msgstr "プロット"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Forest plot"
-msgstr "フォレストプロット"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Observed"
-msgstr "観察"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Estimated"
-msgstr "推定値"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Both"
-msgstr "両方"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Order"
-msgstr "順序"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Ascending"
-msgstr "昇順"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Descending"
-msgstr "降順"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Row order"
-msgstr "行の順序"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Cumulative forest plot"
-msgstr "累積フォレスト プロット"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Prior and posterior"
-msgstr "事前分布と事後分布"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Additional info"
-msgstr "追加情報"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Add fixed and random effects posterior"
-msgstr "固定効果と変量効果の事後分布を追加"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Shade 95% CI"
-msgstr "95%信頼区間に影をつける"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Sequential plot"
-msgstr "逐次プロット"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Bayes factors"
-msgstr "ベイズファクター"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Posterior model probabilities"
-msgstr "事後モデル確率"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Advanced"
-msgstr "詳細"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Prior model probability"
-msgstr "事前モデル確率"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Estimation settings (MCMC)"
-msgstr "推定設定 (MCMC)"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "iterations:"
-msgstr "反復："
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "chains:"
-msgstr "チェーン："
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Bayes factor computation"
-msgstr "ベイズファクターの計算"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Integration"
-msgstr "統合"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Bridge sampling"
-msgstr "ブリッジサンプリング"
-
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Effect Size"
 msgstr "効果量"
@@ -272,30 +50,6 @@ msgstr "効果量"
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Effect Size Standard Error"
 msgstr "効果量標準誤差"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Method"
-msgstr "方法"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Fixed Effects"
-msgstr "固定効果"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Likelihood"
-msgstr "尤度"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Restricted ML"
-msgstr "制限付き最尤法"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Hedges"
-msgstr "ヘッジ(Hedges)"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Empirical Bayes"
-msgstr "経験ベイズ"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Study Labels"
@@ -324,102 +78,6 @@ msgstr "モデル項"
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Include intercept"
 msgstr "切片を含む"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Statistics"
-msgstr "統計量"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Regression Coefficients"
-msgstr "回帰係数"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Estimates"
-msgstr "推定値"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Confidence intervals"
-msgstr "信頼区間"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Interval"
-msgstr "区間"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Test"
-msgstr "検定"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Covariance matrix"
-msgstr "共分散行列"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Model Fit"
-msgstr "モデルフィット"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Fit measures"
-msgstr "適合度指標"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Forest plot"
-msgstr "フォレストプロット"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Funnel plot"
-msgstr "ファンネルプロット"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Rank test for funnel plot asymmetry"
-msgstr "ファンネルプロットの非対称性に関するランク検定"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Regression test for funnel plot asymmetry"
-msgstr "ファンネルプロットの非対称性の回帰検定"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Residuals Model"
-msgstr "残差モデル"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Residuals parameters"
-msgstr "残差パラメータ"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Diagnostics"
-msgstr "診断"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Plots"
-msgstr "プロット"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Trim-fill analysis"
-msgstr "トリム-フィル分析"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Profile plot"
-msgstr "プロフィールプロット"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Diagnostic plots"
-msgstr "診断プロット"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Q-Q plot standardized residuals"
-msgstr "Q-Qプロット標準化残差"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Robustness"
-msgstr "ロバスト性"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Fail-safe N"
-msgstr "フェイルセーフN"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Casewise diagnostics"
-msgstr "ケースワイズ診断"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Effect Size"
@@ -553,9 +211,10 @@ msgctxt "MultilevelMetaAnalysis|"
 msgid "Diagnostics Table"
 msgstr ""
 
+#, fuzzy
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Diagnostic plots"
-msgstr ""
+msgstr "診断プロット"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Residual vs Dependent"
@@ -601,21 +260,24 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Odds Ratio"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size"
-msgstr ""
+msgstr "効果量"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "t-statistic"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "効果量標準誤差"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "95% CI Lower and Upper Bound"
-msgstr ""
+msgstr "95%信頼区間の上限と下限"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "N"
@@ -629,9 +291,10 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "N (group 2)"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Study Labels"
-msgstr ""
+msgstr "研究ラベル"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "One-sample t-tests"
@@ -673,9 +336,10 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Parameters"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Truncation"
-msgstr ""
+msgstr "切断"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Prior Odds"
@@ -805,9 +469,10 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "vs Previous"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Order"
-msgstr ""
+msgstr "順序"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Priors"
@@ -837,45 +502,43 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Estimated studies' effects"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Plots"
-msgstr ""
+msgstr "プロット"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Pooled estimates"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Forest plot"
-msgstr ""
+msgstr "フォレストプロット"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Show"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Observed"
-msgstr ""
+msgstr "観察"
 
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Estimated"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Both"
-msgstr ""
-
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Ascending"
-msgstr ""
+msgstr "昇順"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Descending"
-msgstr ""
+msgstr "降順"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Row order"
-msgstr ""
+msgstr "行の順序"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Weights"
@@ -941,9 +604,10 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Transform estimates"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Advanced"
-msgstr ""
+msgstr "詳細"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Transform effect sizes"
@@ -957,9 +621,10 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Fisher's z"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Estimation settings (MCMC)"
-msgstr ""
+msgstr "推定設定 (MCMC)"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Adaptation"
@@ -1073,13 +738,15 @@ msgctxt "SelectionModels|"
 msgid "Correlation"
 msgstr ""
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Effect Size"
-msgstr ""
+msgstr "効果量"
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "効果量標準誤差"
 
 msgctxt "SelectionModels|"
 msgid "N"
@@ -1089,9 +756,10 @@ msgctxt "SelectionModels|"
 msgid "P-value (one-sided)"
 msgstr ""
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Model"
-msgstr ""
+msgstr "モデル"
 
 msgctxt "SelectionModels|"
 msgid "P-value cutoffs"
@@ -1137,9 +805,10 @@ msgctxt "SelectionModels|"
 msgid "Inference"
 msgstr ""
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Fixed Effects"
-msgstr ""
+msgstr "固定効果"
 
 msgctxt "SelectionModels|"
 msgid "Mean estimates"
@@ -1157,21 +826,24 @@ msgctxt "SelectionModels|"
 msgid "Estimated heterogeneity"
 msgstr ""
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Plots"
-msgstr ""
+msgstr "プロット"
 
 msgctxt "SelectionModels|"
 msgid "Weight Function"
 msgstr ""
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Fixed effects"
-msgstr ""
+msgstr "固定効果"
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Random effects"
-msgstr ""
+msgstr "ランダム効果"
 
 msgctxt "SelectionModels|"
 msgid "Rescale x-axis"
@@ -1180,3 +852,501 @@ msgstr ""
 msgctxt "SelectionModels|"
 msgid "Mean model estimates"
 msgstr ""
+
+msgctxt "Description|"
+msgid "Synthesize evidence across multiple studies"
+msgstr ""
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisAdvanced|"
+msgid "Advanced"
+msgstr "詳細"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisAdvanced|"
+msgid "Prior model probability"
+msgstr "事前モデル確率"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisAdvanced|"
+msgid "Fixed effects"
+msgstr "固定効果"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisAdvanced|"
+msgid "Random effects"
+msgstr "ランダム効果"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisAdvanced|"
+msgid "Estimation settings (MCMC)"
+msgstr "推定設定 (MCMC)"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisAdvanced|"
+msgid "iterations:"
+msgstr "反復："
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisAdvanced|"
+msgid "chains:"
+msgstr "チェーン："
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisAdvanced|"
+msgid "Bayes factor computation"
+msgstr "ベイズファクターの計算"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisAdvanced|"
+msgid "Integration"
+msgstr "統合"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisAdvanced|"
+msgid "Bridge sampling"
+msgstr "ブリッジサンプリング"
+
+msgctxt "BayesianMetaAnalysisInference|"
+msgid "Inference"
+msgstr ""
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisInference|"
+msgid "Model"
+msgstr "モデル"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisInference|"
+msgid "Fixed effects"
+msgstr "固定効果"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisInference|"
+msgid "Random effects"
+msgstr "ランダム効果"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisInference|"
+msgid "Model averaging"
+msgstr "モデル平均化"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisInference|"
+msgid "Constrained random effects"
+msgstr "制約付きランダム効果"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisInference|"
+msgid "All positive"
+msgstr "すべてポジティブ"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisInference|"
+msgid "All negative"
+msgstr "すべてネガティブ"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisInference|"
+msgid "Table"
+msgstr "表"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisInference|"
+msgid "Model probabilities"
+msgstr "モデルの確率"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisInference|"
+msgid "Effect sizes per study"
+msgstr "研究ごとの効果量"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Plots"
+msgstr "プロット"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Forest plot"
+msgstr "フォレストプロット"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Observed"
+msgstr "観察"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Estimated"
+msgstr "推定値"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Both"
+msgstr "両方"
+
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Show labels"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Ordering"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Year (ascending)"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Year (descending)"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Effect size (ascending)"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Effect size (descending)"
+msgstr ""
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Order"
+msgstr "順序"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Ascending"
+msgstr "昇順"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Descending"
+msgstr "降順"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Row order"
+msgstr "行の順序"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Cumulative forest plot"
+msgstr "累積フォレスト プロット"
+
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Add prior"
+msgstr ""
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Prior and posterior"
+msgstr "事前分布と事後分布"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Additional info"
+msgstr "追加情報"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Add fixed and random effects posterior"
+msgstr "固定効果と変量効果の事後分布を追加"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Shade 95% CI"
+msgstr "95%信頼区間に影をつける"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Sequential plot"
+msgstr "逐次プロット"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Bayes factors"
+msgstr "ベイズファクター"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Posterior model probabilities"
+msgstr "事後モデル確率"
+
+msgctxt "BayesianMetaAnalysisPriors|"
+msgid "Priors"
+msgstr ""
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPriors|"
+msgid "Effect size"
+msgstr "効果量"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPriors|"
+msgid "Cauchy"
+msgstr "コーシー(Cauchy)"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPriors|"
+msgid "location:"
+msgstr "位置(location)："
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPriors|"
+msgid "scale:"
+msgstr "尺度(scale)："
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPriors|"
+msgid "Normal"
+msgstr "正規"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPriors|"
+msgid "mean:"
+msgstr "平均："
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPriors|"
+msgid "std:"
+msgstr "標準偏差："
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPriors|"
+msgid "t"
+msgstr "t"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPriors|"
+msgid "df:"
+msgstr "自由度："
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPriors|"
+msgid "Truncation"
+msgstr "切断"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPriors|"
+msgid "Lower bound:"
+msgstr "下限："
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPriors|"
+msgid "Upper bound:"
+msgstr "上限："
+
+msgctxt "BayesianMetaAnalysisPriors|"
+msgid "Heterogeneity (between-study SD)"
+msgstr ""
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPriors|"
+msgid "Inverse gamma"
+msgstr "逆ガンマ"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPriors|"
+msgid "shape:"
+msgstr "形状："
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPriors|"
+msgid "Half t"
+msgstr "半t"
+
+#, fuzzy
+msgctxt "BayesianMetaAnalysisPriors|"
+msgid "Plot prior(s)"
+msgstr "事前分布をプロット"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisDiagnostics|"
+msgid "Diagnostics"
+msgstr "診断"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisDiagnostics|"
+msgid "Plots"
+msgstr "プロット"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisDiagnostics|"
+msgid "Trim-fill analysis"
+msgstr "トリム-フィル分析"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisDiagnostics|"
+msgid "Profile plot"
+msgstr "プロフィールプロット"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisDiagnostics|"
+msgid "Diagnostic plots"
+msgstr "診断プロット"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisDiagnostics|"
+msgid "Q-Q plot standardized residuals"
+msgstr "Q-Qプロット標準化残差"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisDiagnostics|"
+msgid "Robustness"
+msgstr "ロバスト性"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisDiagnostics|"
+msgid "Fail-safe N"
+msgstr "フェイルセーフN"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisDiagnostics|"
+msgid "Casewise diagnostics"
+msgstr "ケースワイズ診断"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Method"
+msgstr "方法"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Fixed Effects"
+msgstr "固定効果"
+
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Maximum Likelihood"
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Restricted ML"
+msgstr "制限付き最尤法"
+
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "DerSimonian-Laird"
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Hedges"
+msgstr "ヘッジ(Hedges)"
+
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Hunter-Schmidt"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Sidik-Jonkman"
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Empirical Bayes"
+msgstr "経験ベイズ"
+
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Paule-Mandel"
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Statistics"
+msgstr "統計量"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Regression Coefficients"
+msgstr "回帰係数"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Estimates"
+msgstr "推定値"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Confidence intervals"
+msgstr "信頼区間"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Interval"
+msgstr "区間"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Test"
+msgstr "検定"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Covariance matrix"
+msgstr "共分散行列"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Model Fit"
+msgstr "モデルフィット"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Fit measures"
+msgstr "適合度指標"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Forest plot"
+msgstr "フォレストプロット"
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Show labels"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Ordering"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Year (ascending)"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Year (descending)"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Effect size (ascending)"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Effect size (descending)"
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Funnel plot"
+msgstr "ファンネルプロット"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Rank test for funnel plot asymmetry"
+msgstr "ファンネルプロットの非対称性に関するランク検定"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Regression test for funnel plot asymmetry"
+msgstr "ファンネルプロットの非対称性の回帰検定"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Residuals Model"
+msgstr "残差モデル"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Residuals parameters"
+msgstr "残差パラメータ"
