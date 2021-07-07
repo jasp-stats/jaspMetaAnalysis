@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2021-07-08 19:33+0000\n"
+"Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
+"Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/gl/>\n"
+"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.8-dev\n"
 "X-Language: gl_ES\n"
 "X-Source-Language: C\n"
 "X-Qt-Contexts: true\n"
@@ -294,7 +300,7 @@ msgstr "Máximo tempo de axuste"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr "Desviación padrón da magnitude do efecto"
+msgstr "Erro Padrón da Magnitude do Efecto"
 
 msgctxt "SelectionModels|"
 msgid "Rescale x-axis"
@@ -561,10 +567,9 @@ msgctxt "BayesianMetaAnalysis|"
 msgid "Effect Size"
 msgstr "Magnitude do efecto"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr "Desviación padrón da magnitude do efecto"
+msgstr "Erro Padrón da Magnitude do Efecto"
 
 #, fuzzy
 msgctxt "BayesianMetaAnalysis|"
@@ -916,7 +921,7 @@ msgstr "Límite superior:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Heterogeneity (between-study SD)"
-msgstr ""
+msgstr "Heteroxeneidade (EP de entre estudos)"
 
 #, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
@@ -938,47 +943,38 @@ msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Plot prior(s)"
 msgstr "Representar o(s) previo(s)"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Diagnostics"
 msgstr "Diagnósticos"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Plots"
 msgstr "Gráficas"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Trim-fill analysis"
 msgstr "Análise Recortar-Encher"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Profile plot"
 msgstr "Perfilar a gráfica"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Diagnostic plots"
 msgstr "Gráficas de diagnóstico"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Q-Q plot standardized residuals"
-msgstr "Gráfica Q-Q dos erros típicos"
+msgstr "Gráfica Q-Q dos erros tipificados"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Robustness"
 msgstr "Robustez"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Fail-safe N"
 msgstr "N de seguridade"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Casewise diagnostics"
 msgstr "Diagnósticos caso a caso"
@@ -1152,10 +1148,9 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size"
 msgstr "Magnitude do efecto"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr "Desviación padrón da magnitude do efecto"
+msgstr "Erro Padrón da Magnitude do Efecto"
 
 #, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
@@ -1362,10 +1357,9 @@ msgctxt "SelectionModels|"
 msgid "Effect Size"
 msgstr "Magnitude do efecto"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Effect Size Standard Error"
-msgstr "Desviación padrón da magnitude do efecto"
+msgstr "Erro Padrón da Magnitude do Efecto"
 
 #, fuzzy
 msgctxt "SelectionModels|"
