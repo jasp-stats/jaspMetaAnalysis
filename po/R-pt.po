@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-06-30 10:11\n"
-"PO-Revision-Date: 2021-06-16 18:33+0000\n"
-"Last-Translator: Alex França <alex.tonante@gmail.com>\n"
+"PO-Revision-Date: 2021-07-10 23:34+0000\n"
+"Last-Translator: Luanna dos Santos Silva <luannasilva91@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/pt/>\n"
 "Language: pt\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 4.8-dev\n"
 "X-Language: en_US\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -331,13 +331,13 @@ msgid "Coefficients"
 msgstr "Coeficientes"
 
 msgid "Estimate"
-msgstr "Estimativas"
+msgstr "Estimativa"
 
 msgid "Standard Error"
 msgstr "Erro padrão"
 
 msgid "z"
-msgstr ""
+msgstr "z"
 
 msgid "Wald test."
 msgstr ""
@@ -428,6 +428,7 @@ msgstr "Desvio"
 msgid "AIC"
 msgstr "AIC"
 
+#, fuzzy
 msgid "BIC"
 msgstr "BIC"
 
@@ -446,9 +447,8 @@ msgstr ""
 msgid "Cases marked with %s are influential."
 msgstr ""
 
-#, fuzzy
 msgid "Plot"
-msgstr "Diagramas"
+msgstr "Diagrama"
 
 #, fuzzy
 msgid "Forest plot"
@@ -630,7 +630,7 @@ msgid "The priors for publication bias were set incorrectly."
 msgstr ""
 
 msgid "%s%% CI"
-msgstr ""
+msgstr "%s%% IC"
 
 msgid "Median"
 msgstr "Mediana"
@@ -674,9 +674,8 @@ msgstr ""
 msgid "Prior Plots"
 msgstr "Diagramas"
 
-#, fuzzy
 msgid "Effect"
-msgstr "Efeitos"
+msgstr "Efeito"
 
 msgid "Weight Function"
 msgstr ""
@@ -752,7 +751,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Warning:"
-msgstr "Carregando:"
+msgstr "Aviso:"
 
 msgid "%i models failed to converge."
 msgstr ""
@@ -930,8 +929,9 @@ msgstr ""
 msgid "Test of Publication Bias"
 msgstr ""
 
+#, fuzzy
 msgid "ChiSq"
-msgstr ""
+msgstr "Qui-quadrado"
 
 msgid "Assuming homogeneity"
 msgstr ""
@@ -940,7 +940,7 @@ msgid "Assuming heterogeneity"
 msgstr ""
 
 msgid "Fixed Effects Estimates"
-msgstr ""
+msgstr "Estimativas de efeitos fixos"
 
 #, fuzzy
 msgid "Mean Estimates(%s)"
