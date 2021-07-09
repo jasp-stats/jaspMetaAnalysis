@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2021-06-30 10:11\n"
-"PO-Revision-Date: 2021-07-08 20:32+0000\n"
+"PO-Revision-Date: 2021-07-10 23:34+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/gl/>\n"
@@ -164,9 +164,8 @@ msgid ""
 "effects H%1$s model is %3$.3f."
 msgstr ""
 
-#, fuzzy
 msgid "Model Probabilities"
-msgstr "Probabilidades do modelo"
+msgstr "Probabilidades do Modelo"
 
 msgid "Prior"
 msgstr "Previo"
@@ -263,7 +262,7 @@ msgid "Observed and estimated study effects"
 msgstr "Efectos de estudios estimados"
 
 msgid "Cumulative forest plot"
-msgstr "Gráfica acumulativa de bosque"
+msgstr "Gráfica acumulada de bosque"
 
 #, fuzzy
 msgid "Overall effect size"
@@ -360,7 +359,7 @@ msgid "Standard Error"
 msgstr "Erro Padrón"
 
 msgid "z"
-msgstr ""
+msgstr "z"
 
 msgid "Wald test."
 msgstr ""
@@ -402,9 +401,8 @@ msgstr "Erro Típico"
 msgid "DFFITS"
 msgstr ""
 
-#, fuzzy
 msgid "Cook's Distance"
-msgstr "Distancia de Cook >"
+msgstr "Distancia de Cook"
 
 #, fuzzy
 msgid "Cov. Ratio"
@@ -469,7 +467,7 @@ msgid "I%s (%%)"
 msgstr ""
 
 msgid "H%s"
-msgstr ""
+msgstr "H%s"
 
 #, fuzzy
 msgid "Rank test"
@@ -736,9 +734,8 @@ msgstr ""
 "Por favor, indica unha distribución previa para cada parámetro no apartado "
 "de especificación de Modelos (nula ou alternativa)."
 
-#, fuzzy
 msgid "Model Summary"
-msgstr "Resumo do modelo"
+msgstr "Resumo do Modelo"
 
 msgid "Models"
 msgstr "Modelos"
@@ -1032,9 +1029,8 @@ msgstr ""
 msgid "P-value (One-sided)"
 msgstr "Valor p (unha cola)"
 
-#, fuzzy
 msgid "Publication Probability"
-msgstr "Probabilidade acumulativa"
+msgstr "Probabilidade de Publicación"
 
 #, fuzzy
 msgid "Mean Model Estimates (%s)"
