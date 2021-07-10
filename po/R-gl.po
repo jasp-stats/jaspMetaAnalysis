@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2021-06-30 10:11\n"
-"PO-Revision-Date: 2021-07-02 14:03+0000\n"
+"PO-Revision-Date: 2021-07-08 20:32+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/gl/>\n"
@@ -22,27 +22,25 @@ msgstr ""
 "X-Source-Language: C\n"
 
 msgid "The prior lower bound is not smaller than the upper bound."
-msgstr ""
+msgstr "O límite previo inferior non é menor que o límite superior."
 
 msgid "Your prior contains negative values."
-msgstr ""
+msgstr "O teu previo contén valores negativos."
 
 msgid "Your prior contains positive values."
-msgstr ""
+msgstr "O teu previo contén valores positivos."
 
 msgid "No positive numbers found in %s"
-msgstr ""
+msgstr "Non se atoparon números positivos en %s"
 
 msgid "No negative numbers found in %s"
-msgstr ""
+msgstr "Non se atoparon números negativos en %s"
 
-#, fuzzy
 msgid "The 95%% CI Lower Bound must be smaller than the Upper Bound."
-msgstr "Límites inferior e superior do intervalo de confianza do 95%"
+msgstr "O Límite Inferior do IC do 95%% debe ser menor que o Límite Superior."
 
-#, fuzzy
 msgid "You cannot set all the prior model probabilties to zero."
-msgstr "Probabilidades posteriores do modelo"
+msgstr "Non se poden poñer todas as probabilidades do modelo previo como ceros."
 
 msgid ""
 "The model could not be fit. Please check the following: Do you have at least "
@@ -50,35 +48,37 @@ msgid ""
 "most effect sizes are negative, the analysis may not work when the prior is "
 "constrained to be postive)?"
 msgstr ""
+"Non pode axustarse o modelo. Por favor, comproba o seguinte: Tes cando menos "
+"n=2 estudios? Se o previo está truncado, é consistente cos datos (cando a "
+"maioría das magnitudes dos efectos son negativas, a análise pode non "
+"funcionar cando o previo se restrinxe a que sexa positivo)?"
 
-#, fuzzy
 msgid "Posterior Estimates per Model"
-msgstr "Resumo posterior"
+msgstr "Estimacións posteriores por Modelo"
 
 msgid "BF%s%s"
-msgstr ""
+msgstr "FB%s%s"
 
 msgid "Log(BF%s%s)"
-msgstr ""
+msgstr "Log(FB%s%s)"
 
 msgid "Mean"
 msgstr "Media"
 
 msgid "SD"
-msgstr "DS"
+msgstr "EP"
 
 msgid "Lower"
 msgstr "Inferior"
 
 msgid "95%% Credible Interval"
-msgstr "Intervalo co 95%% de credibilidade"
+msgstr "Intervalo co 95%% de Credibilidade"
 
 msgid "Upper"
 msgstr "Superior"
 
-#, fuzzy
 msgid "Averaged"
-msgstr "Media"
+msgstr "Medio"
 
 msgid "Fixed effects"
 msgstr "Efectos fixos"
@@ -86,41 +86,53 @@ msgstr "Efectos fixos"
 msgid "Random effects"
 msgstr "Efectos aleatorios"
 
-#, fuzzy
 msgid "Ordered effects"
-msgstr "Efectos fixos"
+msgstr "Efectos ordenados"
 
 msgid ""
 "%s and %s are the group-level effect size and standard deviation, "
 "respectively."
 msgstr ""
+"%s e %s son a magnitude do efecto do nivel de grupo e a desviación padrón, "
+"respectivamente."
 
-#, fuzzy
 msgid "%s is the group-level effect size."
-msgstr "Estimacións da magnitude do efecto"
+msgstr "%s é a magnitude do efecto do nivel de grupo."
 
 msgid "Bayes factor of the random effects H%1$s over the fixed effects H%1$s."
 msgstr ""
+"Factor de Bayes dos efectos aleatorios H%1$s sobre os efectos fixos H%1$s."
 
 msgid ""
 "Posterior estimates are based on the models that assume an effect to be "
 "present. The Bayes factor is based on all four models: fixed effects H%2$s & "
 "random effects H%2$s over the fixed effects H%1$s & random effects H%1$s."
 msgstr ""
+"As estimacións posteriores baséanse nos modelos que asumen que existe un "
+"efecto. O factor de Bayes baséase nos catro modelos: efectos fixos H%2$s & "
+"efectos aleatorios H%2$s sobre efectos fixos H%1$s & efectos aleatorios "
+"H%1$s."
 
 msgid ""
 "Model averaged posterior estimates for %3$s are not yet available, but will "
 "be added in the future. The Bayes factor is based on all four models: random "
 "effects H%1$s & H%2$s over the fixed effects H%1$s & H%2$s."
 msgstr ""
+"As estimación posteriores medias do modelo para %3$s aínda non están "
+"dispoñibles, pero se engadirán no futuro. O factor de Bayes baséase nos "
+"catro modelos: os efectos aleatorios H%1$s & H%2$s sobre os efectos fixos "
+"H%1$s & H%2$s."
 
 msgid ""
 "Bayes factor of the (unconstrained/constrained) random effects H%1$s over "
 "the fixed effects H%1$s."
 msgstr ""
+"Factor de Bayes dos efectos aleatorios(non restrinxidos/restrinxidos) H%1$s "
+"sobre os efectos fixos H%1$s."
 
 msgid "Bayes factor of the fixed effects H%1$s over the random effects H%1$s."
 msgstr ""
+"Factor de Bayes dos efectos fixos H%1$s sobre os efectos aleatorios H%1$s."
 
 msgid ""
 "Model averaged posterior estimates are based on the models that assume an "
@@ -159,9 +171,8 @@ msgstr "Probabilidades do modelo"
 msgid "Prior"
 msgstr "Previo"
 
-#, fuzzy
 msgid "Posterior"
-msgstr "R² posterior"
+msgstr "Posterior"
 
 #, fuzzy
 msgid "Fixed H%s"
@@ -313,17 +324,15 @@ msgstr ""
 msgid "Studies"
 msgstr "Student"
 
-#, fuzzy
 msgid ""
 "Posterior model \n"
 " probability"
-msgstr "Probabilidades posteriores do modelo"
-
-#, fuzzy
-msgid "The metafor package crashed with the following error: %s"
 msgstr ""
-"A instalación do módulo %1 fallou coa seguinte mensaxe de fallo:\n"
-" %2"
+"Probabilidade do\n"
+"modelo posterior"
+
+msgid "The metafor package crashed with the following error: %s"
+msgstr "O paquete metafor rachou co seguinte fallo: %s"
 
 #, fuzzy
 msgid "Fixed and Random Effects"
@@ -347,9 +356,8 @@ msgstr "Coeficientes"
 msgid "Estimate"
 msgstr "Estimar"
 
-#, fuzzy
 msgid "Standard Error"
-msgstr "Desviación padrón"
+msgstr "Erro Padrón"
 
 msgid "z"
 msgstr ""
@@ -388,9 +396,8 @@ msgstr "t"
 msgid "Influence Measures"
 msgstr ""
 
-#, fuzzy
 msgid "Std. Residual"
-msgstr "Erros"
+msgstr "Erro Típico"
 
 msgid "DFFITS"
 msgstr ""
@@ -552,29 +559,24 @@ msgstr ""
 msgid "Normal Q-Q Plot"
 msgstr "Gráfica Q-Q"
 
-#, fuzzy
 msgid "Theoretical Quantiles"
-msgstr "Eixe vertical"
+msgstr "Cuantiles Teóricos"
 
-#, fuzzy
 msgid "Sample Quantiles"
-msgstr "Tamaño da mostra"
+msgstr "Cuantiles da Mostra"
 
-#, fuzzy
 msgid "Standardized Residuals"
-msgstr "Erros tipificados"
+msgstr "Erros Tipificados"
 
-#, fuzzy
 msgid "Fitted vs. Standardized Residuals"
-msgstr "Erros tipificados"
+msgstr "Axustados vs. Erros Tipificados"
 
 #, fuzzy
 msgid "Fitted Value"
 msgstr "Modelo axustado"
 
-#, fuzzy
 msgid "Standardized Residual"
-msgstr "Erros tipificados"
+msgstr "Erro Tipificado"
 
 msgid "The model should contain at least one predictor or an intercept."
 msgstr ""
@@ -608,9 +610,8 @@ msgstr "EBIC"
 msgid "PM"
 msgstr ""
 
-#, fuzzy
 msgid "%g%% Confidence Interval"
-msgstr "Intervalo de confianza"
+msgstr "Intervalo co %g%% de Confianza"
 
 msgid ""
 "Currently this only works with rma and rma.mv objects that have specified "
@@ -623,12 +624,11 @@ msgstr ""
 msgid "There are no predictors in the model that correspond to factors in '"
 msgstr ""
 
-#, fuzzy
 msgid "'. Factor levels:"
-msgstr "Distinguir os niveles dos factores"
+msgstr "'. Niveis dos factores:"
 
 msgid ","
-msgstr ""
+msgstr ","
 
 msgid ". Data names:"
 msgstr ""
@@ -682,7 +682,7 @@ msgid "ESS"
 msgstr "EQS"
 
 msgid "Rhat"
-msgstr ""
+msgstr "Rhat"
 
 msgid "%1$s is on %2$s scale."
 msgstr ""
@@ -722,9 +722,8 @@ msgstr "Función de ponderación"
 msgid "Null"
 msgstr ""
 
-#, fuzzy
 msgid "Alternative"
-msgstr "Modelo alternativo"
+msgstr "Alternativo"
 
 #, fuzzy
 msgid "Model Preview"
@@ -734,6 +733,8 @@ msgid ""
 "Please specify a prior distribution for each parameter in the Models "
 "specification section (either null or alternative)."
 msgstr ""
+"Por favor, indica unha distribución previa para cada parámetro no apartado "
+"de especificación de Modelos (nula ou alternativa)."
 
 #, fuzzy
 msgid "Model Summary"
@@ -743,7 +744,7 @@ msgid "Models"
 msgstr "Modelos"
 
 msgid "P(M)"
-msgstr ""
+msgstr "P(M)"
 
 msgid "Publication bias"
 msgstr "Nesgo de publicación"
@@ -786,16 +787,15 @@ msgid "BF"
 msgstr "FB"
 
 msgid "P(M|data)"
-msgstr ""
+msgstr "P(M|datos)"
 
 msgid ""
 "All models failed to converge. Please, consider inspecting the 'MCMC "
 "diagnostics' and changing the 'Advanced options'."
 msgstr ""
 
-#, fuzzy
 msgid "Warning:"
-msgstr "Planificación"
+msgstr "Aviso:"
 
 msgid "%i models failed to converge."
 msgstr ""
@@ -845,11 +845,10 @@ msgid ""
 msgstr ""
 
 msgid "BF%s"
-msgstr ""
+msgstr "FB%s"
 
-#, fuzzy
 msgid "log(BF%s)"
-msgstr "log(FB₁₀)"
+msgstr "log(FB%s)"
 
 msgid "log(MargLik)"
 msgstr ""
@@ -858,9 +857,8 @@ msgstr ""
 msgid "Individual Models Summary"
 msgstr "Modelos individuais"
 
-#, fuzzy
 msgid "Model %i"
-msgstr "Modelo "
+msgstr "Modelo %i"
 
 msgid "Model %i does not exist. Select one of the models between 1 and %i."
 msgstr ""
@@ -953,21 +951,17 @@ msgstr ""
 msgid "No steps"
 msgstr "Número de pasos"
 
-#, fuzzy
 msgid "95%% Confidence Interval"
-msgstr "Intervalo de confianza"
+msgstr "Intervalo co 95%% de Confianza"
 
-#, fuzzy
 msgid "Note:"
-msgstr "Engadir comentario"
+msgstr "Comentario:"
 
-#, fuzzy
 msgid "%s is on %s scale."
-msgstr "Escala de resposta"
+msgstr "%s está na escala %s."
 
-#, fuzzy
 msgid "<em>p</em>-values interval(one-sided)"
-msgstr "Valor p (unha cola)"
+msgstr "intervalo de valores <em>p</em> (unha cola)"
 
 #, fuzzy
 msgid "Model Tests"
@@ -977,9 +971,8 @@ msgstr "Elementos do modelo"
 msgid "Test of Heterogeneity"
 msgstr "Heteroxeneidade"
 
-#, fuzzy
 msgid "Error:"
-msgstr "Fallo"
+msgstr "Fallo:"
 
 #, fuzzy
 msgid "Test of Publication Bias"
@@ -1019,7 +1012,6 @@ msgstr "Heteroxeneidade (nula)"
 msgid "p-value Frequency"
 msgstr "Frecuencia do valor p"
 
-#, fuzzy
 msgid "Frequency"
 msgstr "Frecuencias"
 
@@ -1060,13 +1052,11 @@ msgstr "Efectos aleatorios"
 msgid "Mean Estimates (%s)"
 msgstr "Estimacións da media"
 
-#, fuzzy
 msgid "Fixed effects model:"
-msgstr "Modelo de Efectos Fixos"
+msgstr "Modelo de efectos fixos:"
 
-#, fuzzy
 msgid "Random effects model:"
-msgstr "Modelo de efectos aleatorios"
+msgstr "Modelo de efectos aleatorios:"
 
 msgid ""
 "%sThe optimizer failed to find a solution. Consider re-specifying the model "
@@ -1099,6 +1089,8 @@ msgid ""
 "The analysis requires both 'Effect Size' and 'Effect Size Standard Error' to "
 "be specified."
 msgstr ""
+"A análise necesita que se especifique tanto a 'Magnitude do Efecto' como o "
+"'Erro Padrón da Magnitude do Efecto'."
 
 msgid "Only the following one-sided p-value cutoffs were used: %s."
 msgstr ""
