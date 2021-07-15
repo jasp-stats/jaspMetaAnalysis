@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2021-06-30 10:11\n"
-"PO-Revision-Date: 2021-07-10 23:34+0000\n"
+"PO-Revision-Date: 2021-07-15 19:32+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/gl/>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.7.2-dev\n"
 "X-Virgin-Header: remove this line if you change anything in the header.\n"
 "X-Language: gl_ES\n"
 "X-Source-Language: C\n"
@@ -93,7 +93,7 @@ msgid ""
 "%s and %s are the group-level effect size and standard deviation, "
 "respectively."
 msgstr ""
-"%s e %s son a magnitude do efecto do nivel de grupo e a desviación padrón, "
+"%s e %s son a magnitude do efecto do nivel de grupo e o desvío padrón, "
 "respectivamente."
 
 msgid "%s is the group-level effect size."
@@ -221,9 +221,8 @@ msgstr "Magnitude do efecto"
 msgid "Density"
 msgstr "Densidade"
 
-#, fuzzy
 msgid "Prior and Posteriors"
-msgstr "Previo e posterior"
+msgstr "Previos e Posteriores"
 
 #, fuzzy
 msgid "Fixed H"
@@ -290,9 +289,8 @@ msgstr "Informar dos efectos aleatorios"
 msgid "Evidence for fixed effects"
 msgstr "Informar dos efectos fixos"
 
-#, fuzzy
 msgid "random"
-msgstr "Aleatorio"
+msgstr "aleatorio"
 
 #, fuzzy
 msgid "fixed"
@@ -586,7 +584,7 @@ msgid "ML"
 msgstr "ML"
 
 msgid "REML"
-msgstr ""
+msgstr "MVRE"
 
 #, fuzzy
 msgid "DL"
@@ -671,9 +669,8 @@ msgstr ""
 msgid "Median"
 msgstr "Mediana"
 
-#, fuzzy
 msgid "MCMC error"
-msgstr "Desviación padrón"
+msgstr "Erro MCMC"
 
 #, fuzzy
 msgid "ESS"
@@ -958,7 +955,7 @@ msgid "%s is on %s scale."
 msgstr "%s está na escala %s."
 
 msgid "<em>p</em>-values interval(one-sided)"
-msgstr "intervalo de valores <em>p</em> (unha cola)"
+msgstr "intervalo de valores <em>p</em> (unilateral)"
 
 #, fuzzy
 msgid "Model Tests"
@@ -1025,9 +1022,8 @@ msgid ""
 "The figure could not be created since one of the estimates is not a number."
 msgstr ""
 
-#, fuzzy
 msgid "P-value (One-sided)"
-msgstr "Valor p (unha cola)"
+msgstr "Valor p (Unilateral)"
 
 msgid "Publication Probability"
 msgstr "Probabilidade de Publicación"
@@ -1068,6 +1064,9 @@ msgid ""
 "At least one of the p-value intervals contains no effect sizes, leading to "
 "estimation problems. Consider re-specifying the cutoffs."
 msgstr ""
+"Cando menos, un dos intervalos do valor p non contén tamaños dos efectos, "
+"provocando problemas de estimación. Pensa en volver a especificar os puntos "
+"de corte."
 
 msgid ""
 "At least one of the p-value intervals contains three or fewer effect sizes, "
@@ -1090,6 +1089,7 @@ msgstr ""
 
 msgid "Only the following one-sided p-value cutoffs were used: %s."
 msgstr ""
+"Só se utilizaron os seguintes puntos de corte do valor p unilateral: %s."
 
 msgid "No effect sizes specified to compute the studies' sample variances."
 msgstr ""
