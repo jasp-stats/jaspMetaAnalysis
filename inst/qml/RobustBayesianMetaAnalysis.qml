@@ -253,9 +253,10 @@ Form
 	//// Priors ////
 	Section
 	{
-		title: 			qsTr("Models")
-		columns:		1
-		enabled:		modelType.value == "custom"
+		title: 				qsTr("Models")
+		columns:			1
+		enabled:			modelType.value == "custom"
+		onEnabledChanged:	if(!enabled) expanded = false
 
 
 		// effect prior
@@ -799,10 +800,11 @@ Form
 	//// Advanced section for prior model probabilities sampling settings ////
 	Section
 	{
-		title: 			qsTr("Advanced")
-		columns: 		2
-		enabled:		!measuresFitted.checked
-
+		title: 				qsTr("Advanced")
+		columns: 			2
+		enabled:			!measuresFitted.checked
+		onEnabledChanged:	if(!enabled) expanded = false
+		
 		Group
 		{
 			rowSpacing: 10 * preferencesModel.uiScale
