@@ -19,7 +19,6 @@ Imports:
   metafor,
   psych,
   purrr,
-  RoBMA (>= 1.2.1),
   rstan,
   stringr,
   tibble,
@@ -27,4 +26,6 @@ Imports:
   weightr
 Remotes:
   jasp-stats/jaspBase,
-  jasp-stats/jaspGraphs
+  jasp-stats/jaspGraphs,
+  FBartos/BayesTools@ebd02137ac09be2d8834d530e521d19909fed065,
+  FBartos/RoBMA@468d40518436edd76b9c958f687b449477dac6d1
