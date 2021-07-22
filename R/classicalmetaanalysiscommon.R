@@ -783,10 +783,10 @@
   
   # clip = "off" allows us to draw outside of the margins using the annotate("segment", ...) above.
   p <- p + ggplot2::coord_flip(ylim = ylims, clip = "on") +
-    ggplot2::xlab(NULL) + ggplot2::ylab(gettext("Observed Outcome")) +
+    ggplot2::xlab(NULL) + ggplot2::ylab("Effect size") + # Consistency with funnel and Bayesian forest plot
     ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(ylims),
                                 expand = ggplot2::expand_scale(mult = c(0.3,0.3), add = 0))
-  
+
   p <- p + ggplot2::scale_x_continuous(breaks   = dat$StudyNo,
                                        limits   = xlims,
                                        labels   = dat$labs,
@@ -799,7 +799,6 @@
                    axis.text.y.left  = ggplot2::element_text(hjust = 0, size = fontsize),
                    axis.text.y.right = ggplot2::element_text(hjust = 1, size = fontsize),
                    plot.margin       = ggplot2::margin(5))
-  
   return(p)
 }
 
@@ -875,8 +874,7 @@
     bg <- rep("white", x$k.all)
     if (!is.null(x$subset))
       bg <- bg[x$subset]
-  }
-  else {
+  } else {
     col <- c("black", "black")
     if (length(col) == 1L)
       col <- c(col, "black")
@@ -893,9 +891,8 @@
     ni    <- x$ni
     sei   <- sqrt(vi)
     slab  <- x$slab[x$not.na]
-    xlab  <- x$measure
-  }
-  else {
+    xlab  <- "Effect size" # this is a better title I think
+  } else {
     refline <- 0
     res     <- rstandard(x)
     not.na  <- x$not.na
@@ -905,7 +902,7 @@
     ni      <- x$ni.f[not.na]
     vi      <- sei^2
     slab    <- x$slab[not.na]
-    xlab    <- gettext("Residual Value")
+    xlab    <- gettext("Residual value") # 2nd term not capitalized for consistency other plots JASP
   }
   
   ylim <- c(0, max(sei[!is.na(sei)]))
@@ -921,32 +918,35 @@
   
   xlim    <- c(min(x.lb.bot, min(yi[!is.na(yi)])), max(x.ub.bot, max(yi[!is.na(yi)])))
   rxlim   <- xlim[2] - xlim[1]
-  xlim[2] <- xlim[1] - (rxlim * 0.1)
-  xlim[1] <- xlim[2] + (rxlim * 0.1)
+  xlim[1] <- xlim[1] - (rxlim * 0.1)
+  xlim[2] <- xlim[2] + (rxlim * 0.1)
   
   new_ylim <- c()
   rylim <- ylim[1] - ylim[2]
   new_ylim[1] <- ylim[1]
   #new_ylim[1] <- ylim[1] + (rylim * 0.1)
-  new_ylim[2] <- ylim[2]
+  # new_ylim[2] <- ylim[2] # this is not necessary I believe
   new_ylim[2] <- max(0, ylim[2] - (rylim * 0.1))
   
   yi.vals <- seq(from = new_ylim[2], to = new_ylim[1], length.out = ci.res)
-  
+
   xaxis.vals <- yi
   yaxis.vals <- sei
   
   ci.left  <- refline - qnorm(level[1]/2, lower.tail = FALSE) * yi.vals
   ci.right <- refline + qnorm(level[1]/2, lower.tail = FALSE) * yi.vals
   
-  xend <- max(abs(c(ci.left, ci.right, xlim)))
-  xlims <- c(-1*xend, xend)
+  # I don't know why this was added
+  # It makes the x-axis symmetric, but this is unusual for a funnel plot..
+  # xend <- max(abs(c(ci.left, ci.right, xlim)))
+  # xlims <- c(-1*xend, xend)
+  xlims <- xlim
   
   if(inherits(x, "rma.uni.trimfill")) {
-    fillcol <- ifelse(rma.fit$fill, "white", "black")
-    shape   <- ifelse(rma.fit$fill, 1, 19)
+    fillcol <- ifelse(x$fill, "white", "black")
+    shape   <- ifelse(x$fill, 1, 19)
   } else {
-    fillcol <- rep("black", sum(rma.fit$not.na))
+    fillcol <- rep("black", sum(x$not.na))
     shape   <- 19
   }
   
