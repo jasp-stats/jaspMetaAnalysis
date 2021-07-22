@@ -578,72 +578,78 @@ context("Meta Analysis - Selection Models")
   options$heterogeneityRE <- TRUE
   options$weightsRE <- TRUE
   options$cutoffsPVal <- "(.05, .10)"
-  options$inputES <- "debCollin1"
-  options$inputN <- "facFifty"
+  options$inputES <- "es"
+  options$inputN <- "n"
   options$measures <- "correlation"
   options$tablePVal <- TRUE
   set.seed(1)
-  results <- jaspTools::runAnalysis("SelectionModels", "debug", options)
+  dataset <- data.frame(
+    es = runif(100, .1, .3),
+    n  = rnbinom(100, 200, .5)
+  )
+  results <- jaspTools::runAnalysis("SelectionModels", dataset, options)
 
 
-  test_that("Mean Estimates (mu) table results match", {
+  test_that("Mean Estimates table results match", {
     table <- results[["results"]][["estimatesFE"]][["collection"]][["estimatesFE_meanFE"]][["data"]]
-    expect_equal_tables(table,
-                        list(0.662597315593419, 0.642551263321564, 0, 0.0470387015263903, 37.6146078689525,
-                             "Unadjusted", 0.681314124633779, 0.655407160977405, 0.633471815965987,
-                             4.47036589833477e-263, 0.050087882861576, 34.6499780541257,
-                             "Adjusted", 0.675800956676966))
+    jaspTools::expect_equal_tables(table,
+                                   list(0.204177965488621, 0.190993378036, 1.59205580346668e-187, 0.00669934469245971,
+                                        29.2067466964043, "Unadjusted", 0.217252375590527, 0.195163279975223,
+                                        0.176695769355625, 2.8851502702737e-89, 0.00937139161237495,
+                                        20.0322183701612, "Adjusted", 0.213425528679819))
   })
 
   test_that("Estimated Weights table results match", {
     table <- results[["results"]][["estimatesFE"]][["collection"]][["estimatesFE_weightsFE"]][["data"]]
-    expect_equal_tables(table,
-                        list(1, 1, 0, 0, 1, 0.025, 0.409656404820366, 0.0842244742968537, 0.025,
-                             0.0136167098971546, 0.166039750266065, 2.46721886875839, 0.735088335343878,
-                             1))
+    jaspTools::expect_equal_tables(table,
+                                   list(1, 1, 0, 0, 1, 0.025, 0.946505734640249, 0.180360120650839, 0.025,
+                                        0.0154623999208921, 0.390897802221199, 2.42136366401121, 1.71265134862966,
+                                        0.05, 0.424477454915518, 0.00516906460893385, 0.05, 0.0472418366269367,
+                                        0.213936783335834, 1.98412562952852, 0.843785845222102, 1))
   })
 
-  test_that("Heterogeneity Estimates (tau) table results match", {
+  test_that("Heterogeneity Estimates table results match", {
     table <- results[["results"]][["estimatesRE"]][["collection"]][["estimatesRE_heterogeneityRE"]][["data"]]
-    expect_equal_tables(table,
-                        list(0, 0, 1, 0, "Unadjusted", 0.256968421344323, 0, 0, 1, 0, "Adjusted",
-                             0.263359366452577))
+    jaspTools::expect_equal_tables(table,
+                                   list(0, 0, 1, 0, "Unadjusted", 0.103411887992993, 0, 0, 1, 0, "Adjusted",
+                                        0.2426036713353))
   })
 
-  test_that("Mean Estimates (rho) table results match", {
+  test_that("Mean Estimates table results match", {
     table <- results[["results"]][["estimatesRE"]][["collection"]][["estimatesRE_meanRE"]][["data"]]
-    expect_equal_tables(table,
-                        list(0.662597315593418, 0.642091807205727, 1.85168846263159e-296, 0.0101003960406904,
-                             36.7999202587027, "Unadjusted", 0.681714072749364, 0.655407161618698,
-                             0.63347147760193, 4.55117028865932e-263, 0.0107901074740218,
-                             34.6494614767693, "Adjusted", 0.67580125035602))
+    jaspTools::expect_equal_tables(table,
+                                   list(0.204177965488621, 0.190991487999372, 1.79846926082398e-187, 0.00670030120287679,
+                                        29.2025772484021, "Unadjusted", 0.217254234170054, 0.195163505879826,
+                                        0.0875521107541049, 0.000447334225995675, 0.0534773308147392,
+                                        3.51045873910709, "Adjusted", 0.296177427245501))
   })
 
   test_that("Estimated Weights table results match", {
     table <- results[["results"]][["estimatesRE"]][["collection"]][["estimatesRE_weightsRE"]][["data"]]
-    expect_equal_tables(table,
-                        list(1, 1, 0, 0, 1, 0.025, 0.409656483313485, 0.0826617356047691, 0.025,
-                             0.0140717065240502, 0.166837120624669, 2.45542767568545, 0.7366512310222,
-                             1))
+    jaspTools::expect_equal_tables(table,
+                                   list(1, 1, 0, 0, 1, 0.025, 0.946521152729813, 0, 0.025, 0.436970853703284,
+                                        1.21767472715722, 0.777318549543651, 3.3331197628426, 0.05,
+                                        0.424482984589334, 0, 0.05, 0.748207603440691, 1.32236174634355,
+                                        0.321003678277194, 3.01626438195619, 1))
   })
 
   test_that("Test of Publication Bias table results match", {
     table <- results[["results"]][["fitTests"]][["collection"]][["fitTests_biasTest"]][["data"]]
-    expect_equal_tables(table,
-                        list(1, 0.0223290789156104, 5.21995889075458, "Assuming homogeneity",
-                             1, 0.022329078915696, 5.21995889074792, "Assuming heterogeneity"
-                        ))
+    jaspTools::expect_equal_tables(table,
+                                   list(2, 0.175586023767488, 3.4792523845, "Assuming homogeneity", 2,
+                                        0.175586023955723, 3.47925238235592, "Assuming heterogeneity"
+                                   ))
   })
 
   test_that("Test of Heterogeneity table results match", {
     table <- results[["results"]][["fitTests"]][["collection"]][["fitTests_heterogeneityTest"]][["data"]]
-    expect_equal_tables(table,
-                        list(99, 0.99117220635564, 69.5499359806442))
+    jaspTools::expect_equal_tables(table,
+                                   list(99, 0.998589436447844, 62.9827988030128))
   })
 
   test_that("p-value Frequency table results match", {
     table <- results[["results"]][["pFrequency"]][["data"]]
-    expect_equal_tables(table,
-                        list(89, 0, 0.025, 11, 0.025, 1))
+    jaspTools::expect_equal_tables(table,
+                                   list(86, 0, 0.025, 8, 0.025, 0.05, 6, 0.05, 1))
   })
 }
