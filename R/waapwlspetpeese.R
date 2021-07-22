@@ -122,6 +122,10 @@ WaapWlsPetPeese <- function(jaspResults, dataset, options, state = NULL) {
   table$addColumnInfo(name = "upperCI",  title = gettext("Upper"),          type = "number", overtitle = overtitleCI)
 
 
+  if (is.null(models))
+    return(table)
+
+
   for (estimator in c("wls", "waap", "pet", "peese")) {
 
     if (length(models[[estimator]]) == 0)
@@ -160,6 +164,10 @@ WaapWlsPetPeese <- function(jaspResults, dataset, options, state = NULL) {
   table$addColumnInfo(name = "upperCI",  title = gettext("Upper"),          type = "number", overtitle = overtitleCI)
 
 
+  if (is.null(models))
+    return(table)
+
+
   for (estimator in c("pet", "peese")) {
     table$addRows(list(
       type    = toupper(estimator),
@@ -181,6 +189,10 @@ WaapWlsPetPeese <- function(jaspResults, dataset, options, state = NULL) {
 
   table$addColumnInfo(name = "type",     title = "",                        type = "string")
   table$addColumnInfo(name = "est",      title = gettext("Estimate"),       type = "number")
+
+
+  if (is.null(models))
+    return(table)
 
 
   for (estimator in c("wls", "waap", "pet", "peese")) {
