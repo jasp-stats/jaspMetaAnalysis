@@ -1,6 +1,5 @@
 import(jaspBase)
 export(ClassicalMetaAnalysis)
 export(SelectionModels)
-export(WaapWlsPetPeese)
 export(BayesianMetaAnalysis)
 export(RobustBayesianMetaAnalysis)
