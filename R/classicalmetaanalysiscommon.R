@@ -583,7 +583,7 @@
   # Compute/get model
   rma.fit    <- .metaAnalysisComputeModel(container, dataset, options, ready)
   
-  profilePlot   <- createJaspPlot(title = gettextf("Log-likelihood for %s%s", "\u3C4", "\u00B2"), width = 520, height = 520)
+  profilePlot   <- createJaspPlot(title = gettextf("Log-Likelihood for %s%s", "\u3C4", "\u00B2"), width = 520, height = 520)
   profilePlot$position <- 4
   profilePlot$dependOn(c("plotResidualsPredicted"))
   plotContainer[["profile"]] <- profilePlot
@@ -603,7 +603,7 @@
   .metaAnalysisPlotsContainer(container, options, ready)
   plotContainer <- container[["plots"]]
   # Compute/get model
-  trimFillPlot <- createJaspPlot(title = gettext("Trim-fill Analysis"), width = 820, height = 820)
+  trimFillPlot <- createJaspPlot(title = gettext("Trim-Fill Analysis"), width = 820, height = 820)
   trimFillPlot$position <- 5
   trimFillPlot$dependOn(c("trimFillPlot"))
   plotContainer[["trimFill"]] <- trimFillPlot
@@ -902,7 +902,7 @@
     ni      <- x$ni.f[not.na]
     vi      <- sei^2
     slab    <- x$slab[not.na]
-    xlab    <- gettext("Residual value") # 2nd term not capitalized for consistency other plots JASP
+    xlab    <- gettext("Residual Value")
   }
   
   ylim <- c(0, max(sei[!is.na(sei)]))
