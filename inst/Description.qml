@@ -28,13 +28,6 @@ Description
 		requiresData:	true
 	}
 
-	Analysis
-	{
-		title:			qsTr("WAAP-WLS & PET-PEESE")
-		func:			"WaapWlsPetPeese"
-		requiresData:	true
-	}
-
 	Separator{}
 
 	Analysis
