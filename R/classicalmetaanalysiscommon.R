@@ -388,7 +388,7 @@
   }
   
   # Fill table
-  container[["fitMeasuresTable"]]$addRows(list(name = gettext("Log-likelihood"), method = stats$logLik))
+  container[["fitMeasuresTable"]]$addRows(list(name = gettext("Log-Likelihood"), method = stats$logLik))
   container[["fitMeasuresTable"]]$addRows(list(name = gettext("Deviance"),       method = stats$deviance))
   container[["fitMeasuresTable"]]$addRows(list(name = gettext("AIC"),            method = stats$AIC))
   container[["fitMeasuresTable"]]$addRows(list(name = gettext("BIC"),            method = stats$BIC))
@@ -538,7 +538,7 @@
       imgWidth <- max(nchar(as.character(dataset[,options[["studyLabels"]]]))) * 5 + 500
   }
   
-  forestPlot   <- createJaspPlot(title = gettext("Forest plot"), width = imgWidth, height = imgHeight)
+  forestPlot   <- createJaspPlot(title = gettext("Forest Plot"), width = imgWidth, height = imgHeight)
   forestPlot$position <- 1
   forestPlot$dependOn(c("forestPlot"))
   plotContainer[["forest"]] <- forestPlot
@@ -783,7 +783,7 @@
   
   # clip = "off" allows us to draw outside of the margins using the annotate("segment", ...) above.
   p <- p + ggplot2::coord_flip(ylim = ylims, clip = "on") +
-    ggplot2::xlab(NULL) + ggplot2::ylab("Effect size") + # Consistency with funnel and Bayesian forest plot
+    ggplot2::xlab(NULL) + ggplot2::ylab("Effect Size") + 
     ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(ylims),
                                 expand = ggplot2::expand_scale(mult = c(0.3,0.3), add = 0))
 
@@ -891,7 +891,7 @@
     ni    <- x$ni
     sei   <- sqrt(vi)
     slab  <- x$slab[x$not.na]
-    xlab  <- "Effect size" # this is a better title I think
+    xlab  <- "Effect Size" 
   } else {
     refline <- 0
     res     <- rstandard(x)
