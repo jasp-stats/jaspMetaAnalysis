@@ -23,9 +23,11 @@ Imports:
   stringr,
   tibble,
   tidyr,
-  weightr
+  weightr,
+  BayesTools,
+  RoBMA
 Remotes:
   jasp-stats/jaspBase,
   jasp-stats/jaspGraphs,
-  FBartos/BayesTools@ebd02137ac09be2d8834d530e521d19909fed065,
-  FBartos/RoBMA@468d40518436edd76b9c958f687b449477dac6d1
+  FBartos/BayesTools@c1cd3bc535db5befff77973b9ffeae0b716cb8b4,
+  FBartos/RoBMA@d040e517299fa9b3f40c239253c249268b7ec62b
