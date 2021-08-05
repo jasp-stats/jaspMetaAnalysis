@@ -1,4 +1,4 @@
-Robust Bayesian Meta-Analysis
+Selection Models
 ===
 
 The selection models are meta-analytic methods on the fixed and random effects meta-analytic models that adjust for publication bias operating on p-values (Iyengar & Greenhouse, 1988; Vevea & Hedges, 1995). The analysis allow users to specify the selection process using either one or two-sided p-value cutoffs, which are internally transformed to one-sided p-value cutoffs prior to the fitting process.

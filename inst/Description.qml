@@ -30,8 +30,15 @@ Description
 
 	Analysis
 	{
-		title:			qsTr("WAAP-WLS & PET-PEESE")
-		func:			"WaapWlsPetPeese"
+		title:			qsTr("WAAP-WLS")
+		func:			"WaapWls"
+		requiresData:	true
+	}
+
+	Analysis
+	{
+		title:			qsTr("PET-PEESE")
+		func:			"PetPeese"
 		requiresData:	true
 	}
 

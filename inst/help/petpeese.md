@@ -1,13 +1,12 @@
-WAAP-WLS and PET-PEESE
+PET-PEESE
 ===
 
-The WAAP-WLS and PET-PEESE are meta-analytic methods based on weighted least squares. Instead of the classical (random or fixed) meta-analyses that assume additive heterogeneity, WAAP-WLS and PET-PEESE assume multiplicative heterogeneity. Furthermore, WAAP, PET, and PEESE incorporate different adjustments of selection processes. See Carter et al. (2019) for an overview of the methods.
-- WLS is the default meta-analytic model that assumes multiplicative heterogeneity (Stanley & Doucouliagos, 2017).
-- WAAP adjusts for selection processes by using only high-powered studies -- a WLS model fitted only with studies that would have at least 80% power to detect the WLS meta-analytic effect size estimate based on all studies (Ioannidis, Stanley, & Doucouliagos, 2017; Stanley et al., 2017).
+PET-PEESE is a meta-analytic method based on weighted least squares. Instead of the classical (random or fixed) meta-analyses that assume additive heterogeneity, PET-PEESE assumes multiplicative heterogeneity. Furthermore, PET and PEESE incorporate different adjustments of selection processes. See Carter et al. (2019) for an overview of the methods.
+
 - PET adjusts for selection processes by adjusting for the relationship between effect sizes and standard errors (Stanley & Doucouliagos, 2014; Stanley, 2017).
 - PEESE adjusts for selection processes by adjusting for the relationship between effect sizes and standard errors squared (Stanley & Doucouliagos, 2014; Stanley, 2017).
 
-WAAP-WLS and PET-PEESE are usually used as conditional estimators. In WAAP-WLS, WAAP is used if there are enough (at least 3) highly powered studies, otherwise WLS is used (Ioannidis, Stanley, & Doucouliagos, 2017; Stanley et al., 2017). In PET-PEESE, PET is used to test for the presence of the effect size with alpha = 0.10, the PEESE effect size estimate is used if the PET's test for effect size is significant, otherwise PET effect size estimate is used (Stanley & Doucouliagos, 2014; Stanley, 2017).
+PET-PEESE is usually used as conditional estimator. PET is used to test for the presence of the effect size with alpha = 0.10. If the PET's test for effect size is significant, PEESE effect size estimate is interpreted, if PET's test for effect size is not significant, the PET's effect size estimate is interpreted (Stanley & Doucouliagos, 2014; Stanley, 2017).
 
 ### Input
 ---
@@ -47,13 +46,7 @@ Visualizes mean effect size estimates from all fitted models.
 ---
 Carter, E. C., Schönbrodt, F. D., Gervais, W. M., & Hilgard, J. (2019). Correcting for bias in psychology: A comparison of meta-analytic methods. Advances in Methods and Practices in Psychological Science, 2(2), 115-144.
 
-Ioannidis, J. P., Stanley, T. D., & Doucouliagos, H. (2017). The power of bias in economics research.
-
-Stanley, T. D., Doucouliagos, H., & Ioannidis, J. P. (2017). Finding the power to reduce publication bias.Statistics in medicine, 36(10), 1580-1598.
-
 Stanley, T. D., & Doucouliagos, H. (2014). Meta‐regression approximations to reduce publication selection bias. Research Synthesis Methods, 5(1), 60-78.
-
-Stanley, T. D., & Doucouliagos, H. (2017). Neither fixed nor random: weighted least squares meta‐regression. Research synthesis methods, 8(1), 19-42.
 
 Stanley, T. D. (2017). Limitations of PET-PEESE and other meta-analysis methods. Social Psychological and Personality Science, 8(5), 581-591.
 

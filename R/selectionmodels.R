@@ -867,7 +867,8 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
       xmin = estimates[,"lowerCI"],
       xmax = estimates[,"upperCI"],
       y    = 1:4
-    ))
+    ),
+    height = 0.3)
   plot   <- plot + ggplot2::geom_point(
     ggplot2::aes(
       x = estimates[,"mean"],
@@ -875,9 +876,9 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     shape = 15)
   plot <- plot + ggplot2::geom_line(ggplot2::aes(x = c(0,0), y = c(.5, 4.5)), linetype = "dotted")
   plot <- plot + ggplot2::scale_x_continuous(
-    gettextf("Mean Estimates (%s)", if (options[["measures"]] == "correlation") "\u03C1" else "\u03BC"),
+    bquote("Mean Estimate"~.(if (options[["measures"]] == "correlation") bquote(rho) else bquote(mu))),
     breaks = jaspGraphs::getPrettyAxisBreaks(range(c(0, estimates[,"lowerCI"], estimates[,"upperCI"]))),
-    limits = range(c(0, estimates[,"lowerCI"], estimates[,"upperCI"])))
+    limits = range(jaspGraphs::getPrettyAxisBreaks(range(c(0, estimates[,"lowerCI"], estimates[,"upperCI"])))))
   plot <- plot + ggplot2::scale_y_continuous(
     "",
     breaks = 1:4,

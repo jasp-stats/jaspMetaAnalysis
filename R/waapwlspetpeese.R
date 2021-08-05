@@ -15,33 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-WaapWlsPetPeese <- function(jaspResults, dataset, options, state = NULL) {
-
-  if (.wwppCheckReady(options)) {
-    # get the data
-    dataset <- .wwppGetData(dataset, options)
-    dataset <- .wwppCheckData(jaspResults, dataset, options)
-
-    # fit the models
-    .wwppFit(jaspResults, dataset, options)
-  }
-
-  # main summary tables
-  .wwppMakeTestsTables(jaspResults, dataset, options)
-  .wwppMakeEstimatesTables(jaspResults, dataset, options)
-
-
-  # figures
-  if (options[["regressionPet"]])
-    .wwppRegressionPlot(jaspResults, dataset, options, "pet")
-  if (options[["regressionPeese"]])
-    .wwppRegressionPlot(jaspResults, dataset, options, "peese")
-  if (options[["plotModels"]])
-    .wwppEstimatesPlot(jaspResults, dataset, options)
-
-  return()
-}
-
+### Common functions for WAAP-WLS and PET-PEESE
 .wwppDependencies <- c("measures", "muTransform", "inputES", "inputSE", "inputN")
 # check and load functions
 .wwppCheckReady              <- function(options) {
@@ -108,7 +82,7 @@ WaapWlsPetPeese <- function(jaspResults, dataset, options, state = NULL) {
   return(dataset)
 }
 # fill tables functions
-.wwppFillEstimates           <- function(jaspResults, table, models, options) {
+.wwppFillEstimates           <- function(jaspResults, table, models, options, type) {
 
   overtitleCI <- gettextf("95%% Confidence Interval")
 
@@ -126,7 +100,7 @@ WaapWlsPetPeese <- function(jaspResults, dataset, options, state = NULL) {
     return(table)
 
 
-  for (estimator in c("wls", "waap", "pet", "peese")) {
+  for (estimator in if(type == "waapWls") c("wls", "waap") else c("pet", "peese")) {
 
     if (length(models[[estimator]]) == 0)
       table$addRows(list(
@@ -183,7 +157,7 @@ WaapWlsPetPeese <- function(jaspResults, dataset, options, state = NULL) {
 
   return(table)
 }
-.wwppFillHeterogeneity       <- function(jaspResults, table, models, options) {
+.wwppFillHeterogeneity       <- function(jaspResults, table, models, options, type) {
 
   overtitleCI <- gettextf("95%% Confidence Interval")
 
@@ -195,7 +169,7 @@ WaapWlsPetPeese <- function(jaspResults, dataset, options, state = NULL) {
     return(table)
 
 
-  for (estimator in c("wls", "waap", "pet", "peese")) {
+  for (estimator in if(type == "waapWls") c("wls", "waap") else c("pet", "peese")) {
 
     if (length(models[[estimator]]) == 0 && estimator == "waap") {
       table$addFootnote(symbol = gettextf("Error: There was not enough adequatelly powered studies (k = %1$i)", attr(models[["waap"]], "nPowered")))
@@ -212,7 +186,7 @@ WaapWlsPetPeese <- function(jaspResults, dataset, options, state = NULL) {
   return(table)
 }
 # fit models (the fitting functions are adapted from Carter et al., 2019)
-.wwppFit                     <- function(jaspResults, dataset, options) {
+.wwppFit                     <- function(jaspResults, dataset, options, type) {
 
   if (!is.null(jaspResults[["models"]])) {
     return()
@@ -222,26 +196,39 @@ WaapWlsPetPeese <- function(jaspResults, dataset, options, state = NULL) {
     jaspResults[["models"]] <- models
   }
 
-  summaryWls   <- .wwppWls(  .maGetInputEs(dataset, options), .maGetInputSe(dataset, options))
-  summaryWaap  <- .wwppWaap( .maGetInputEs(dataset, options), .maGetInputSe(dataset, options))
-  summaryPet   <- .wwppPet(  .maGetInputEs(dataset, options), .maGetInputSe(dataset, options))
-  summaryPeese <- .wwppPeese(.maGetInputEs(dataset, options), .maGetInputSe(dataset, options))
+  if (type == "waapWls") {
 
+    summaryWls   <- .wwppWls(  .maGetInputEs(dataset, options), .maGetInputSe(dataset, options))
+    summaryWaap  <- .wwppWaap( .maGetInputEs(dataset, options), .maGetInputSe(dataset, options))
 
-  # take care of the transformed estimates
-  if (options[["measures"]] == "correlation") {
-    summaryWls   <- .wwppTransformEstimates(summaryWls,   options)
-    summaryWaap  <- .wwppTransformEstimates(summaryWaap,  options)
-    summaryPet   <- .wwppTransformEstimates(summaryPet,   options)
-    summaryPeese <- .wwppTransformEstimates(summaryPeese, options)
+    # take care of the transformed estimates
+    if (options[["measures"]] == "correlation") {
+      summaryWls   <- .wwppTransformEstimates(summaryWls,   options)
+      summaryWaap  <- .wwppTransformEstimates(summaryWaap,  options)
+    }
+
+    models[["object"]] <- list(
+      wls   = summaryWls,
+      waap  = summaryWaap
+    )
+
+  } else if (type == "petPeese") {
+
+    summaryPet   <- .wwppPet(  .maGetInputEs(dataset, options), .maGetInputSe(dataset, options))
+    summaryPeese <- .wwppPeese(.maGetInputEs(dataset, options), .maGetInputSe(dataset, options))
+
+    # take care of the transformed estimates
+    if (options[["measures"]] == "correlation") {
+      summaryPet   <- .wwppTransformEstimates(summaryPet,   options)
+      summaryPeese <- .wwppTransformEstimates(summaryPeese, options)
+    }
+
+    models[["object"]] <- list(
+      pet   = summaryPet,
+      peese = summaryPeese
+    )
+
   }
-
-  models[["object"]] <- list(
-    wls   = summaryWls,
-    waap  = summaryWaap,
-    pet   = summaryPet,
-    peese = summaryPeese
-  )
 
   return()
 }
@@ -305,7 +292,7 @@ WaapWlsPetPeese <- function(jaspResults, dataset, options, state = NULL) {
   return(summaryWaap)
 }
 # create the tables
-.wwppMakeTestsTables         <- function(jaspResults, dataset, options) {
+.wwppMakeTestsTables         <- function(jaspResults, dataset, options, type) {
 
   if (!is.null(jaspResults[["fitTests"]])) {
     return()
@@ -332,59 +319,64 @@ WaapWlsPetPeese <- function(jaspResults, dataset, options, state = NULL) {
   if (!is.null(models)) {
 
     # WLS
-    effectTest$addRows(list(
-      type = "WLS",
-      stat = models[["wls"]]["(Intercept)", "t value"],
-      df   = attr(models[["wls"]], "df"),
-      pVal = models[["wls"]]["(Intercept)", "Pr(>|t|)"]
-    ))
-
-    # WAAP
-    .wwppAddWaapFootnote(effectTest, models[["waap"]])
-    if (length(models[["waap"]]) == 0)
-      effectTest$addRows(list(type = "WAAP"))
-    else
+    if (type == "waapWls") {
       effectTest$addRows(list(
-        type = "WAAP",
-        stat = models[["waap"]]["(Intercept)", "t value"],
-        df   = attr(models[["waap"]], "df"),
-        pVal = models[["waap"]]["(Intercept)", "Pr(>|t|)"]
+        type = "WLS",
+        stat = models[["wls"]]["(Intercept)", "t value"],
+        df   = attr(models[["wls"]], "df"),
+        pVal = models[["wls"]]["(Intercept)", "Pr(>|t|)"]
       ))
 
-    # PET
-    effectTest$addRows(list(
-      type = "PET",
-      stat = models[["pet"]]["(Intercept)", "t value"],
-      df   = attr(models[["pet"]], "df"),
-      pVal = models[["pet"]]["(Intercept)", "Pr(>|t|)"]
-    ))
+      # WAAP
+      .wwppAddWaapFootnote(effectTest, models[["waap"]])
+      if (length(models[["waap"]]) == 0)
+        effectTest$addRows(list(type = "WAAP"))
+      else
+        effectTest$addRows(list(
+          type = "WAAP",
+          stat = models[["waap"]]["(Intercept)", "t value"],
+          df   = attr(models[["waap"]], "df"),
+          pVal = models[["waap"]]["(Intercept)", "Pr(>|t|)"]
+        ))
+    } else if (type == "petPeese") {
+      # PET
+      effectTest$addRows(list(
+        type = "PET",
+        stat = models[["pet"]]["(Intercept)", "t value"],
+        df   = attr(models[["pet"]], "df"),
+        pVal = models[["pet"]]["(Intercept)", "Pr(>|t|)"]
+      ))
+    }
+
   }
 
 
   ### test of bias
-  biasTest <- createJaspTable(title = gettext("Test of Publication Bias"))
-  biasTest$position <- 2
-  fitTests[["biasTest"]] <- biasTest
+  if (type == "petPeese") {
+    biasTest <- createJaspTable(title = gettext("Test of Publication Bias"))
+    biasTest$position <- 2
+    fitTests[["biasTest"]] <- biasTest
 
-  biasTest$addColumnInfo(name = "type",  title = "",                type = "string")
-  biasTest$addColumnInfo(name = "stat",  title = gettext("t"),      type = "number")
-  biasTest$addColumnInfo(name = "df",    title = gettext("df"),     type = "integer")
-  biasTest$addColumnInfo(name = "pVal",  title = gettext("p"),      type = "pvalue")
+    biasTest$addColumnInfo(name = "type",  title = "",                type = "string")
+    biasTest$addColumnInfo(name = "stat",  title = gettext("t"),      type = "number")
+    biasTest$addColumnInfo(name = "df",    title = gettext("df"),     type = "integer")
+    biasTest$addColumnInfo(name = "pVal",  title = gettext("p"),      type = "pvalue")
 
-  if (!is.null(models)) {
+    if (!is.null(models)) {
 
-    biasTest$addRows(list(
-      type = "PET",
-      stat = models[["pet"]]["PET", "t value"],
-      df   = attr(models[["pet"]], "df"),
-      pVal = models[["pet"]]["PET", "Pr(>|t|)"]
-    ))
+      biasTest$addRows(list(
+        type = "PET",
+        stat = models[["pet"]]["PET", "t value"],
+        df   = attr(models[["pet"]], "df"),
+        pVal = models[["pet"]]["PET", "Pr(>|t|)"]
+      ))
 
+    }
   }
 
   return()
 }
-.wwppMakeEstimatesTables     <- function(jaspResults, dataset, options) {
+.wwppMakeEstimatesTables     <- function(jaspResults, dataset, options, type) {
 
   models   <- jaspResults[["models"]]$object
 
@@ -408,16 +400,18 @@ WaapWlsPetPeese <- function(jaspResults, dataset, options, state = NULL) {
     estimatesMean$position <- 1
     estimates$dependOn(c("estimatesMean"))
     estimates[["estimatesMean"]] <- estimatesMean
-    estimatesMean <- .wwppFillEstimates(jaspResults, estimatesMean, models, options)
+    estimatesMean <- .wwppFillEstimates(jaspResults, estimatesMean, models, options, type)
   }
 
   # PET-PEESE estimates
-  if (is.null(estimates[["petPeese"]]) && options[["estimatesPetPeese"]]) {
-    petPeese <- createJaspTable(title = gettext("PET-PEESE Regression Estimates"))
-    petPeese$position  <- 2
-    petPeese$dependOn(c("estimatesPetPeese"))
-    estimates[["petPeese"]] <- petPeese
-    petPeese <- .wwppFillPetPeese(jaspResults, petPeese, models, options)
+  if (type == "petPeese") {
+    if (is.null(estimates[["petPeese"]]) && options[["estimatesPetPeese"]]) {
+      petPeese <- createJaspTable(title = gettext("PET-PEESE Regression Estimates"))
+      petPeese$position  <- 2
+      petPeese$dependOn(c("estimatesPetPeese"))
+      estimates[["petPeese"]] <- petPeese
+      petPeese <- .wwppFillPetPeese(jaspResults, petPeese, models, options)
+    }
   }
 
   # heterogeneity estimates
@@ -426,7 +420,7 @@ WaapWlsPetPeese <- function(jaspResults, dataset, options, state = NULL) {
     heterogeneity$position <- 3
     heterogeneity$dependOn(c("estimatesSigma"))
     estimates[["heterogeneity"]] <- heterogeneity
-    heterogeneity <- .wwppFillHeterogeneity(jaspResults, heterogeneity, models, options)
+    heterogeneity <- .wwppFillHeterogeneity(jaspResults, heterogeneity, models, options, type)
   }
 
   return()
@@ -508,7 +502,7 @@ WaapWlsPetPeese <- function(jaspResults, dataset, options, state = NULL) {
 
   return()
 }
-.wwppEstimatesPlot           <- function(jaspResults, dataset, options) {
+.wwppEstimatesPlot           <- function(jaspResults, dataset, options, type) {
 
   if (!is.null(jaspResults[["plotEstimates"]])) {
     return()
@@ -532,7 +526,7 @@ WaapWlsPetPeese <- function(jaspResults, dataset, options, state = NULL) {
 
   # get the estimates
   estimates <- data.frame()
-  for (estimator in c("wls", "waap", "pet", "peese")) {
+  for (estimator in if(type == "waapWls") c("wls", "waap") else c("pet", "peese")) {
     if (length(models[[estimator]]) != 0)
       estimates <- rbind(estimates, data.frame(
         model   = toupper(estimator),
@@ -556,7 +550,8 @@ WaapWlsPetPeese <- function(jaspResults, dataset, options, state = NULL) {
       xmin = estimates[,"lowerCI"],
       xmax = estimates[,"upperCI"],
       y    = 1:nrow(estimates)
-    ))
+    ),
+    height = 0.3)
   plot   <- plot + ggplot2::geom_point(
     ggplot2::aes(
       x = estimates[,"mean"],
@@ -564,9 +559,9 @@ WaapWlsPetPeese <- function(jaspResults, dataset, options, state = NULL) {
     shape = 15)
   plot <- plot + ggplot2::geom_line(ggplot2::aes(x = c(0,0), y = c(.5, nrow(estimates) + 0.5)), linetype = "dotted")
   plot <- plot + ggplot2::scale_x_continuous(
-    gettextf("Mean Estimates (%s)", if (options[["measures"]] == "correlation") "\u03C1" else "\u03BC"),
+    bquote("Mean Estimate"~.(if (options[["measures"]] == "correlation") bquote(rho) else bquote(mu))),
     breaks = jaspGraphs::getPrettyAxisBreaks(range(c(0, estimates[,"lowerCI"], estimates[,"upperCI"]))),
-    limits = range(c(0, estimates[,"lowerCI"], estimates[,"upperCI"])))
+    limits = range(jaspGraphs::getPrettyAxisBreaks(range(c(0, estimates[,"lowerCI"], estimates[,"upperCI"])))))
   plot <- plot + ggplot2::scale_y_continuous(
     "",
     breaks = 1:nrow(estimates),
