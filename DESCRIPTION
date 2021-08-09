@@ -29,5 +29,5 @@ Imports:
 Remotes:
   jasp-stats/jaspBase,
   jasp-stats/jaspGraphs,
-  FBartos/BayesTools@918a3aab0f17f84e0e615d603a924643ee1dab77,
+  FBartos/BayesTools@3095a6d0f80348b8e274cb2e03f31c3d5f118f0b,
   FBartos/RoBMA@034ce9e159da4c460bd05edafd4c7fc1d673d0f4
