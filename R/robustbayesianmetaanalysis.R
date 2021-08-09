@@ -320,7 +320,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 }
 .robmaTableFillWeights    <- function(jaspTable, resultsTable, options, individual = FALSE) {
 
-  overtitleP  <- gettextf("<em>p</em>-values interval %s","\u002A")
+  overtitleP  <- gettext("<em>p</em>-values interval")
   overtitleCi <- gettextf("%s%% CI", 100 * options[["resultsCi"]])
   # add columns
   jaspTable$addColumnInfo(name = "lowerRange", title = gettext("Lower"),  type = "number", overtitle = overtitleP)
