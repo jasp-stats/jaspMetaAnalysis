@@ -85,9 +85,8 @@
 <text x='618.47' y='534.27' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='18.91px' lengthAdjust='spacingAndGlyphs'>30</text>
 <text x='400.89' y='566.78' text-anchor='middle' style='font-size: 20.40px; font-family: sans;' textLength='34.04px' lengthAdjust='spacingAndGlyphs'>Lag</text>
 <text transform='translate(19.02,264.29) rotate(-90)' text-anchor='middle' style='font-size: 20.40px; font-family: sans;' textLength='181.46px' lengthAdjust='spacingAndGlyphs'>Avg. autocorrelation</text>
-<text x='360.98' y='12.32' style='font-size: 17.00px; font-family: sans;' textLength='61.85px' lengthAdjust='spacingAndGlyphs'>Cohen's</text>
-<text x='422.84' y='12.32' style='font-size: 17.00px; font-family: sans;' textLength='4.25px' lengthAdjust='spacingAndGlyphs'> </text>
-<text x='427.09' y='12.32' style='font-size: 17.00px; font-style: italic; font-family: sans;' textLength='9.46px' lengthAdjust='spacingAndGlyphs'>d</text>
-<text x='436.55' y='12.32' style='font-size: 17.00px; font-family: sans;' textLength='4.25px' lengthAdjust='spacingAndGlyphs'> </text>
+<text x='363.11' y='12.32' style='font-size: 17.00px; font-family: sans;' textLength='61.85px' lengthAdjust='spacingAndGlyphs'>Cohen's</text>
+<text x='424.96' y='12.32' style='font-size: 17.00px; font-family: sans;' textLength='4.25px' lengthAdjust='spacingAndGlyphs'> </text>
+<text x='429.22' y='12.32' style='font-size: 17.00px; font-style: italic; font-family: sans;' textLength='9.46px' lengthAdjust='spacingAndGlyphs'>d</text>
 </g>
 </svg>

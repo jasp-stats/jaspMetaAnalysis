@@ -57,10 +57,9 @@
 <text x='396.52' y='534.27' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='18.91px' lengthAdjust='spacingAndGlyphs'>50</text>
 <text x='690.86' y='534.27' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='28.37px' lengthAdjust='spacingAndGlyphs'>100</text>
 <text x='399.47' y='566.78' text-anchor='middle' style='font-size: 20.40px; font-family: sans;' textLength='83.92px' lengthAdjust='spacingAndGlyphs'>Iterations</text>
-<text transform='translate(19.77,311.79) rotate(-90)' style='font-size: 20.40px; font-family: sans;' textLength='74.22px' lengthAdjust='spacingAndGlyphs'>Cohen's</text>
-<text transform='translate(19.77,237.57) rotate(-90)' style='font-size: 20.40px; font-family: sans;' textLength='5.10px' lengthAdjust='spacingAndGlyphs'> </text>
-<text transform='translate(19.77,232.46) rotate(-90)' style='font-size: 20.40px; font-style: italic; font-family: sans;' textLength='11.35px' lengthAdjust='spacingAndGlyphs'>d</text>
-<text transform='translate(19.77,221.12) rotate(-90)' style='font-size: 20.40px; font-family: sans;' textLength='5.10px' lengthAdjust='spacingAndGlyphs'> </text>
+<text transform='translate(19.77,309.24) rotate(-90)' style='font-size: 20.40px; font-family: sans;' textLength='74.22px' lengthAdjust='spacingAndGlyphs'>Cohen's</text>
+<text transform='translate(19.77,235.01) rotate(-90)' style='font-size: 20.40px; font-family: sans;' textLength='5.10px' lengthAdjust='spacingAndGlyphs'> </text>
+<text transform='translate(19.77,229.91) rotate(-90)' style='font-size: 20.40px; font-style: italic; font-family: sans;' textLength='11.35px' lengthAdjust='spacingAndGlyphs'>d</text>
 <text x='399.47' y='11.70' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='147.40px' lengthAdjust='spacingAndGlyphs'>test2-titleless-plot-6</text>
 </g>
 </svg>
