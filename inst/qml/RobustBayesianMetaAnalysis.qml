@@ -701,6 +701,26 @@ Form
 					label:		qsTr("Posterior prob.")
 				}
 			}
+
+			Group
+			{
+				title:				qsTr("Show")
+				Layout.columnSpan:	2
+
+				CheckBox
+				{
+					label:		qsTr("Bayesian updating")
+					name:		"plotModelsShowUpdating"
+					checked:	true
+				}
+
+				CheckBox
+				{
+					label:		qsTr("Posterior estimates")
+					name:		"plotModelsShowEstimates"
+					checked:	false
+				}
+			}
 		}
 	}
 
@@ -714,13 +734,6 @@ Form
 			Layout.columnSpan: 2
 			label:		qsTr("Overview")
 			name:		"diagnosticsOverview"
-
-				CheckBox
-				{
-					label:		qsTr("Include theta")
-					name:		"diagnosticsOverviewTheta"
-					visible:	false
-				}
 		}
 
 		Group

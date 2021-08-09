@@ -1258,7 +1258,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   if (is.null(jaspResults[["modelsPlots"]])) {
     modelsPlots <- createJaspContainer(title = gettext("Posterior Model Estimates Plots"))
     modelsPlots$position <- 8
-    modelsPlots$dependOn(c(.robmaDependencies, "plotModelsType", "plotModelsOrder", "plotModelsOrderBy"))
+    modelsPlots$dependOn(c(.robmaDependencies, "plotModelsType", "plotModelsOrder", "plotModelsOrderBy", "plotModelsShowUpdating", "plotModelsShowEstimates"))
     jaspResults[["modelsPlots"]] <- modelsPlots
   } else {
     modelsPlots <- jaspResults[["modelsPlots"]]
@@ -1284,7 +1284,13 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
       "mu"  = gettext("Effect Size Estimates"),
       "tau" = gettext("Heterogeneity Estimates")
     ))
-  height <- 50 + sum(sapply(fit[["models"]], function(model) RoBMA:::.is_component_null(model[["priors"]], component = switch(parameter, "mu" = "effect", "tau" = "heterogeneity")))) * 120
+
+  height_multiplier <- if(options[["plotModelsShowUpdating"]] && options[["plotModelsShowEstimates"]]) 65 else 30
+  height <- switch(
+    options[["plotModelsType"]],
+    "averaged"    = 50 + length(fit[["models"]]) * height_multiplier,
+    "conditional" = 50 + sum(sapply(fit[["models"]], function(model) RoBMA:::.is_component_null(model[["priors"]], component = switch(parameter, "mu" = "effect", "tau" = "heterogeneity")))) * height_multiplier
+  )
   width  <- 800
 
   tempPlot <- createJaspPlot(title = title, width = width, height = height)
@@ -1304,11 +1310,14 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   # plot
   p <- try(RoBMA::plot_models(
     fit,
-    parameter   = parameter,
-    order       = options[["plotModelsOrder"]],
-    order_by    = options[["plotModelsOrderBy"]],
-    conditional = options[["plotModelsType"]] == "conditional",
-    plot_type   = "ggplot"
+    parameter      = parameter,
+    order          = options[["plotModelsOrder"]],
+    order_by       = options[["plotModelsOrderBy"]],
+    conditional    = options[["plotModelsType"]] == "conditional",
+    show_updating  = options[["plotModelsShowUpdating"]],
+    show_estimates = options[["plotModelsShowEstimates"]],
+    y_axis2        = options[["plotModelsShowUpdating"]] || options[["plotModelsShowEstimates"]],
+    plot_type      = "ggplot"
   ))
 
   if (jaspBase::isTryError(p)) {
