@@ -88,7 +88,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
       options[["diagnosticsOmega"]] ||
       options[["diagnosticsPet"]]   ||
       options[["diagnosticsPeese"]]
-    ) &&
+    ) ||
     (
       options[["diagnosticsTrace"]]           ||
       options[["diagnosticsAutocorrelation"]] ||
@@ -1397,6 +1397,15 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     jaspResults[["diagnostics"]] <- diagnostics
   } else {
     diagnostics <- jaspResults[["diagnostics"]]
+  }
+
+
+  # create waiting plot
+  if (!(options[["diagnosticsMu"]] || options[["diagnosticsTau"]] || options[["diagnosticsOmega"]] || options[["diagnosticsPet"]] || options[["diagnosticsPeese"]]) && (options[["diagnosticsTrace"]] || options[["diagnosticsAutocorrelation"]] || options[["diagnosticsSamples"]])){
+    tempWait  <- createJaspPlot(title = "")
+    tempWait$dependOn(c("diagnosticsMu", "diagnosticsTau", "diagnosticsOmega", "diagnosticsPet", "diagnosticsPeese", "diagnosticsTrace", "diagnosticsAutocorrelation", "diagnosticsSamples"))
+    diagnostics[["tempWait"]] <- tempWait
+    return()
   }
 
 
