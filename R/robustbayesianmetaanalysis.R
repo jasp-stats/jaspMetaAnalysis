@@ -1149,16 +1149,17 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   forestPlot <- createJaspPlot(title = title, width = width, height = height)
   forestPlot$position <- 6
-  forestPlot$dependOn(c(.robmaDependencies, "plotForest", "plotForestOrder", "plotForestType"))
+  forestPlot$dependOn(c(.robmaDependencies, "plotForest", "plotForestOrder", "plotForestType", "resultsScale"))
   jaspResults[["forestPlot"]] <- forestPlot
 
 
   # plot
   p <- try(RoBMA::forest(
       fit,
-      conditional = options[["plotForestType"]] == "conditional",
-      order       = options[["plotForestOrder"]],
-      plot_type   = "ggplot",
+      conditional  = options[["plotForestType"]] == "conditional",
+      order        = options[["plotForestOrder"]],
+      output_scale = if (options[["measures"]] != "general") options[["resultsScale"]],
+      plot_type    = "ggplot"
   ))
 
   if (jaspBase::isTryError(p)) {
@@ -1177,7 +1178,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   if (is.null(jaspResults[["estimatesPlots"]])) {
     estimatesPlots <- createJaspContainer(title = gettext("Posterior Distribution Plots"))
     estimatesPlots$position <- 7
-    estimatesPlots$dependOn(c(.robmaDependencies, "plotEstimatesType", "plotEstimatesPriors"))
+    estimatesPlots$dependOn(c(.robmaDependencies, "plotEstimatesType", "plotEstimatesPriors", "resultsScale"))
     jaspResults[["estimatesPlots"]] <- estimatesPlots
   } else {
     estimatesPlots <- jaspResults[["estimatesPlots"]]
@@ -1229,11 +1230,12 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   # plot
   p <- try(plot(
     fit,
-    parameter   = parameter,
-    prior       = options[["plotEstimatesPriors"]],
-    rescale_x   = options[["plotEstimatesWeightFunctionRescale"]],
-    conditional = options[["plotEstimatesType"]] == "conditional",
-    plot_type   = "ggplot",
+    parameter    = parameter,
+    prior        = options[["plotEstimatesPriors"]],
+    output_scale = if (options[["measures"]] != "general") options[["resultsScale"]],
+    rescale_x    = options[["plotEstimatesWeightFunctionRescale"]],
+    conditional  = options[["plotEstimatesType"]] == "conditional",
+    plot_type    = "ggplot",
   ))
 
   if (jaspBase::isTryError(p)) {
@@ -1258,7 +1260,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   if (is.null(jaspResults[["modelsPlots"]])) {
     modelsPlots <- createJaspContainer(title = gettext("Posterior Model Estimates Plots"))
     modelsPlots$position <- 8
-    modelsPlots$dependOn(c(.robmaDependencies, "plotModelsType", "plotModelsOrder", "plotModelsOrderBy", "plotModelsShowUpdating", "plotModelsShowEstimates"))
+    modelsPlots$dependOn(c(.robmaDependencies, "plotModelsType", "plotModelsOrder", "plotModelsOrderBy", "plotModelsShowUpdating", "plotModelsShowEstimates", "resultsScale"))
     jaspResults[["modelsPlots"]] <- modelsPlots
   } else {
     modelsPlots <- jaspResults[["modelsPlots"]]
@@ -1314,6 +1316,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     order          = options[["plotModelsOrder"]],
     order_by       = options[["plotModelsOrderBy"]],
     conditional    = options[["plotModelsType"]] == "conditional",
+    output_scale   = if (options[["measures"]] != "general") options[["resultsScale"]],
     show_updating  = options[["plotModelsShowUpdating"]],
     show_estimates = options[["plotModelsShowEstimates"]],
     y_axis2        = options[["plotModelsShowUpdating"]] || options[["plotModelsShowEstimates"]],
