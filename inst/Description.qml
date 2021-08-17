@@ -8,7 +8,7 @@ Description
 	description:	qsTr("Synthesize evidence across multiple studies")
 	requiresData:	false
 	icon:			"meta-analysis.svg"
-	version:		"0.13"
+	version:		"0.15"
 	author:			"JASP Team"
 	maintainer:		"JASP Team <info@jasp-stats.org>"
 	website:		"jasp-stats.org"
