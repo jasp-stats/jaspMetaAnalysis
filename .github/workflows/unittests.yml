@@ -34,14 +34,15 @@ jobs:
         run: sudo apt-get install libv8-dev
         shell: bash
 
-      - name: Locate JAGS on Windows
-        if: runner.os == 'Windows'
-        run: |
-          path <- normalizePath(file.path("..", "pkgs", "64", "JAGS"), winslash = "/")
-          cat("\nSys.setenv(JAGS_ROOT = '", path, "')\n", file = "~/.Rprofile", sep = "", append = TRUE)
-        shell: Rscript {0}
+      - uses: jasp-stats/jasp-actions/setup-test-env@master
+        if: runner.os != 'Windows'
+        with:
+          requiresJAGS: true
 
       - uses: jasp-stats/jasp-actions/setup-test-env@master
+        if: runner.os == 'Windows'
+        env:
+          JAGS_ROOT: "C:/R-Packages/pkgs/64/JAGS"
         with:
           requiresJAGS: true
 
