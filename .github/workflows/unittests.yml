@@ -37,10 +37,8 @@ jobs:
       - name: Locate JAGS on Windows
         if: runner.os == 'Windows'
         run: |
-          if (.Platform$OS.type == "windows" && "${{ inputs.requiresJAGS }}" == "true") {
-            path <- normalizePath(file.path("..", "pkgs", "64", "JAGS"), winslash = "/")
-            cat("\nSys.setenv(JAGS_ROOT = '", path, "')\n", file = "~/.Rprofile", sep = "", append = TRUE)
-          }
+          path <- normalizePath(file.path("..", "pkgs", "64", "JAGS"), winslash = "/")
+          cat("\nSys.setenv(JAGS_ROOT = '", path, "')\n", file = "~/.Rprofile", sep = "", append = TRUE)
         shell: Rscript {0}
 
       - uses: jasp-stats/jasp-actions/setup-test-env@master
