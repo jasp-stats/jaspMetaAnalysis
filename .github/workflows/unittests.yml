@@ -35,14 +35,6 @@ jobs:
         shell: bash
 
       - uses: jasp-stats/jasp-actions/setup-test-env@master
-        if: runner.os != 'Windows'
-        with:
-          requiresJAGS: true
-
-      - uses: jasp-stats/jasp-actions/setup-test-env@master
-        if: runner.os == 'Windows'
-        env:
-          JAGS_ROOT: "C:/R-Packages/pkgs/64/JAGS"
         with:
           requiresJAGS: true
 
