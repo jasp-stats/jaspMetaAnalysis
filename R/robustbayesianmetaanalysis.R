@@ -950,11 +950,11 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   if (options[["resultsModelsBf"]] == "inclusion") {
     bf <- fitSummary[["summary"]][, 7]
   } else if (options[["resultsModelsBf"]] == "best") {
-    bf <- exp(fitSummary[["summary"]][["marglik"]]) / exp(max(fitSummary[["summary"]][["marglik"]]))
+    bf <- exp(fitSummary[["summary"]][["marglik"]] - max(fitSummary[["summary"]][["marglik"]]))
   } else if (options[["resultsModelsBf"]] == "previous") {
-    tempThisMargLik <- exp(fitSummary[["summary"]][["marglik"]])[-length(fitSummary[["summary"]][["marglik"]])]
-    tempPrevMargLik <- exp(fitSummary[["summary"]][["marglik"]])[-1]
-    bf <- c(1, tempPrevMargLik / tempThisMargLik)
+    tempThisMargLik <- fitSummary[["summary"]][["marglik"]][-length(fitSummary[["summary"]][["marglik"]])]
+    tempPrevMargLik <- fitSummary[["summary"]][["marglik"]][-1]
+    bf <- c(1, exp(tempPrevMargLik - tempThisMargLik))
   }
 
 
