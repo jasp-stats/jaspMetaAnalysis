@@ -784,7 +784,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
         min_ESS       = if (options[["autofitEss"]])         options[["autofitEssValue"]],
         max_error     = if (options[["autofitMcmcError"]])   options[["autofitMcmcErrorValue"]],
         max_SD_error  = if (options[["autofitMcmcErrorSd"]]) options[["autofitMcmcErrorSdValue"]],
-        max_time      = if (options[["autofitTime"]])        list(time = options[["autofitTimeUnit"]] , unit = options[["autofitTimeValue"]]),
+        max_time      = if (options[["autofitTime"]])        list(time = options[["autofitTimeValue"]] , unit = options[["autofitTimeUnit"]]),
         sample_extend = options[["autofitExtendSamples"]]),
       convergence_checks = RoBMA::set_convergence_checks(
         max_Rhat            = if (options[["autofitRhat"]])        options[["autofitRhatValue"]],

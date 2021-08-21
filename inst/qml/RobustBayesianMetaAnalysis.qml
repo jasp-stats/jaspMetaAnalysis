@@ -982,8 +982,8 @@ Form
 								values:
 								[
 									{ label: qsTr("hours"),				value: "hours"},
-									{ label: qsTr("minutes"),			value: "minutes"},
-									{ label: qsTr("seconds"),			value: "seconds"}
+									{ label: qsTr("minutes"),			value: "mins"},
+									{ label: qsTr("seconds"),			value: "secs"}
 								]
 							}
 						}
