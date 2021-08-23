@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
 "POT-Creation-Date: 2021-06-30 10:11\n"
 "PO-Revision-Date: 2021-08-27 20:21+0000\n"
-"Last-Translator: Koji Kosugi <kosugitti@gmail.com>\n"
+"Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/ja/>\n"
 "Language: ja\n"
@@ -298,7 +298,7 @@ msgid "<em>p</em>-values are approximate."
 msgstr ""
 
 msgid "Coefficients"
-msgstr ""
+msgstr "係数"
 
 msgid "Estimate"
 msgstr "推定"
@@ -388,7 +388,7 @@ msgid "Log-likelihood"
 msgstr "対数尤度"
 
 msgid "Deviance"
-msgstr ""
+msgstr "デビアンス"
 
 msgid "AIC"
 msgstr "AIC"
@@ -412,7 +412,7 @@ msgid "Cases marked with %s are influential."
 msgstr ""
 
 msgid "Plot"
-msgstr ""
+msgstr "プロット"
 
 msgid "Forest plot"
 msgstr ""
@@ -483,7 +483,7 @@ msgid "Theoretical Quantiles"
 msgstr "理論上の分位数"
 
 msgid "Sample Quantiles"
-msgstr ""
+msgstr "サンプル分位数"
 
 msgid "Standardized Residuals"
 msgstr "標準化された残差"
@@ -584,7 +584,7 @@ msgid "The priors for publication bias were set incorrectly."
 msgstr ""
 
 msgid "%s%% CI"
-msgstr ""
+msgstr "%s%% CI"
 
 msgid "Median"
 msgstr "中央値"
@@ -887,7 +887,6 @@ msgstr ""
 msgid "p-value Frequency"
 msgstr ""
 
-#, fuzzy
 msgid "Frequency"
 msgstr "頻度"
 
