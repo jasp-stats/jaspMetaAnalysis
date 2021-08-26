@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-06-30 10:11\n"
-"PO-Revision-Date: 2021-07-10 23:34+0000\n"
-"Last-Translator: Luanna dos Santos Silva <luannasilva91@gmail.com>\n"
+"PO-Revision-Date: 2021-08-27 20:21+0000\n"
+"Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/pt/>\n"
 "Language: pt\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.8.1-dev\n"
 "X-Language: en_US\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -63,9 +63,8 @@ msgstr "DP"
 msgid "Lower"
 msgstr "Inferior"
 
-#, fuzzy
 msgid "95%% Credible Interval"
-msgstr "Intervalo de credibilidade"
+msgstr "Intervalo de Confiança 95%%"
 
 msgid "Upper"
 msgstr "Superior"
@@ -90,7 +89,6 @@ msgid ""
 "respectively."
 msgstr ""
 
-#, fuzzy
 msgid "%s is the group-level effect size."
 msgstr "Estimativas de tamanho de efeito"
 
@@ -147,9 +145,8 @@ msgid ""
 "effects H%1$s model is %3$.3f."
 msgstr ""
 
-#, fuzzy
 msgid "Model Probabilities"
-msgstr "Opções de modelo"
+msgstr "Probabilidades do modelo"
 
 msgid "Prior"
 msgstr "Anterior"
@@ -200,7 +197,6 @@ msgstr "Tamanho de efeito"
 msgid "Heterogeneity"
 msgstr ""
 
-#, fuzzy
 msgid "Effect size"
 msgstr "Tamanho do efeito"
 
@@ -271,7 +267,6 @@ msgstr "efeitos aleatórios da escala r"
 msgid "Evidence for fixed effects"
 msgstr "efeitos fixos da escala r"
 
-#, fuzzy
 msgid "random"
 msgstr "Fatores Aleatórios"
 
@@ -279,20 +274,19 @@ msgid "fixed"
 msgstr ""
 
 msgid "Anecdotal"
-msgstr ""
+msgstr "Anedótico"
 
-#, fuzzy
 msgid "Moderate"
-msgstr "Estimativas"
+msgstr "Moderado"
 
 msgid "Strong"
-msgstr ""
+msgstr "Forte"
 
 msgid "Very Strong"
-msgstr ""
+msgstr "Muito Forte"
 
 msgid "Extreme"
-msgstr ""
+msgstr "Extremo"
 
 msgid "Evidence for %s:"
 msgstr ""
@@ -379,7 +373,7 @@ msgid "DFFITS"
 msgstr ""
 
 msgid "Cook's Distance"
-msgstr ""
+msgstr "Distância de Cook"
 
 msgid "Cov. Ratio"
 msgstr ""
@@ -439,7 +433,7 @@ msgid "I%s (%%)"
 msgstr ""
 
 msgid "H%s"
-msgstr ""
+msgstr "H%s"
 
 msgid "Rank test"
 msgstr ""
@@ -624,7 +618,7 @@ msgid "Variance Components"
 msgstr "Componentes"
 
 msgid "Plots"
-msgstr "Diagramas"
+msgstr "Gráficos"
 
 msgid "The priors for publication bias were set incorrectly."
 msgstr ""
