@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-08-26 17:35+0000\n"
-"Last-Translator: Matheus Macena <macenamt21@gmail.com>\n"
+"PO-Revision-Date: 2021-08-27 20:21+0000\n"
+"Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/pt/>\n"
 "Language: pt\n"
@@ -1046,7 +1046,6 @@ msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Effect size"
 msgstr "Tamanho de efeito"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Cauchy"
 msgstr "Cauchy"
