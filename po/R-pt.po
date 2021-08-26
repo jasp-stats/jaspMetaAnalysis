@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-06-30 10:11\n"
 "PO-Revision-Date: 2021-08-27 20:21+0000\n"
-"Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
+"Last-Translator: Alex França <alex.tonante@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/pt/>\n"
 "Language: pt\n"
@@ -365,9 +365,8 @@ msgstr "t"
 msgid "Influence Measures"
 msgstr ""
 
-#, fuzzy
 msgid "Std. Residual"
-msgstr "Resíduos"
+msgstr "Resíduos padrão"
 
 msgid "DFFITS"
 msgstr ""
@@ -418,11 +417,9 @@ msgstr "Log-likelihood"
 msgid "Deviance"
 msgstr "Desvio"
 
-#, fuzzy
 msgid "AIC"
 msgstr "AIC"
 
-#, fuzzy
 msgid "BIC"
 msgstr "BIC"
 
@@ -689,9 +686,8 @@ msgid ""
 "specification section (either null or alternative)."
 msgstr ""
 
-#, fuzzy
 msgid "Model Summary"
-msgstr "Nome do modelo"
+msgstr "Resumo do modelo"
 
 msgid "Models"
 msgstr "Modelos"
@@ -743,7 +739,6 @@ msgid ""
 "diagnostics' and changing the 'Advanced options'."
 msgstr ""
 
-#, fuzzy
 msgid "Warning:"
 msgstr "Aviso:"
 
@@ -902,7 +897,7 @@ msgid "95%% Confidence Interval"
 msgstr "Intervalo de Confiança"
 
 msgid "Note:"
-msgstr ""
+msgstr "Nota:"
 
 msgid "%s is on %s scale."
 msgstr ""
@@ -923,7 +918,6 @@ msgstr ""
 msgid "Test of Publication Bias"
 msgstr ""
 
-#, fuzzy
 msgid "ChiSq"
 msgstr "Qui-quadrado"
 
@@ -1035,5 +1029,5 @@ msgstr ""
 
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "% i observação foi removida devido a valores ausentes."
+msgstr[1] "% i observações foram removidas devido a valores ausentes."
