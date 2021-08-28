@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-06-30 10:11\n"
+"POT-Creation-Date: 2021-08-28 02:38\n"
 "PO-Revision-Date: 2021-08-27 20:21+0000\n"
 "Last-Translator: Alex França <alex.tonante@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
@@ -629,23 +629,17 @@ msgstr "Mediana"
 msgid "MCMC error"
 msgstr ""
 
+msgid "MCMC error/SD"
+msgstr ""
+
 #, fuzzy
 msgid "ESS"
 msgstr "EQS"
 
-msgid "Rhat"
+msgid "R-hat"
 msgstr ""
 
-msgid "%1$s is on %2$s scale."
-msgstr ""
-
-msgid "<em>p</em>-values interval %s"
-msgstr ""
-
-msgid "The weights (%1$s) correspond to %2$s <em>p</em>-values."
-msgstr ""
-
-msgid "Estimated studies' effects (%1$s) correspond to effect size %2$s."
+msgid "<em>p</em>-values interval"
 msgstr ""
 
 #, fuzzy
@@ -668,7 +662,7 @@ msgstr "Diagramas"
 msgid "Effect"
 msgstr "Efeito"
 
-msgid "Weight Function"
+msgid "Publication Bias"
 msgstr ""
 
 msgid "Null"
@@ -710,14 +704,40 @@ msgstr "Termos do Modelo"
 msgid "Prior Distribution"
 msgstr ""
 
-msgid "Publication Bias"
-msgstr ""
-
 msgid "The loaded object is not a RoBMA model."
 msgstr ""
 
 msgid "Summary"
 msgstr ""
+
+msgid "P(M|data)"
+msgstr "P(M|dado)"
+
+msgid "Warning:"
+msgstr "Aviso:"
+
+#, fuzzy
+msgid "Model Averaged Estimates"
+msgstr "Modelo médio posterior"
+
+#, fuzzy
+msgid "Model Averaged Weights (%s)"
+msgstr "Modelo médio posterior"
+
+#, fuzzy
+msgid "Model Averaged PET-PEESE Estimates"
+msgstr "Modelo médio posterior"
+
+#, fuzzy
+msgid "Conditional Estimates"
+msgstr "Medidas adicionais de ajuste"
+
+msgid "Conditional Weights (%s)"
+msgstr ""
+
+#, fuzzy
+msgid "Conditional PET-PEESE Estimates"
+msgstr "Medidas adicionais de ajuste"
 
 msgid "Exclusion"
 msgstr ""
@@ -729,61 +749,6 @@ msgid "log(BF)"
 msgstr ""
 
 msgid "BF"
-msgstr ""
-
-msgid "P(M|data)"
-msgstr "P(M|dado)"
-
-msgid ""
-"All models failed to converge. Please, consider inspecting the 'MCMC "
-"diagnostics' and changing the 'Advanced options'."
-msgstr ""
-
-msgid "Warning:"
-msgstr "Aviso:"
-
-msgid "%i models failed to converge."
-msgstr ""
-
-msgid ""
-"Analyzing odds ratios is an experimental feature. The performance of default "
-"prior distributions was not evaluated."
-msgstr ""
-
-#, fuzzy
-msgid "Model Averaged Estimates"
-msgstr "Modelo médio posterior"
-
-#, fuzzy
-msgid "Model Averaged Weights (%s)"
-msgstr "Modelo médio posterior"
-
-msgid "Model Averaged Estimated Studies' Effects (%s)"
-msgstr ""
-
-#, fuzzy
-msgid "Conditional Estimates"
-msgstr "Medidas adicionais de ajuste"
-
-msgid ""
-"Estimates are model averaged over models assuming existence of effect / "
-"heterogeneity."
-msgstr ""
-
-msgid "Conditional Weights (%s)"
-msgstr ""
-
-msgid ""
-"Estimated weights (%s) are model averaged over models assuming existence of "
-"publication bias."
-msgstr ""
-
-msgid "Conditional Estimated Studies' Effects (%s)"
-msgstr ""
-
-msgid ""
-"Estimated studies effects (%s) are model averaged over models assuming "
-"existence of effect."
 msgstr ""
 
 msgid "BF%s"
@@ -820,26 +785,50 @@ msgstr "Estimativas"
 msgid "Estimated Weights (%s)"
 msgstr ""
 
-#, fuzzy
-msgid "Estimated Studies' Effects (%s)"
-msgstr "Estimativas de tamanho de efeito"
-
-msgid "Weight function"
+msgid "PET-PEESE Estimates"
 msgstr ""
 
 #, fuzzy
-msgid "Weights"
-msgstr "WLS Ponderado"
+msgid "%1$s Forest Plot"
+msgstr "Gráfico do modelo"
 
-msgid "Effect size vs Heterogeneity"
-msgstr ""
-
-msgid "%1$s (%2$s)"
+msgid "Posterior Distribution Plots"
 msgstr ""
 
 #, fuzzy
-msgid "Individual Models Plots"
-msgstr "Diagrama individual por nível"
+msgid "Conditional"
+msgstr "Medidas adicionais de ajuste"
+
+#, fuzzy
+msgid "Model Averaged"
+msgstr "Modelo médio posterior"
+
+#, fuzzy
+msgid "Effect Size Estimate"
+msgstr "Tamanho de efeito"
+
+#, fuzzy
+msgid "Heterogeneity Estimate"
+msgstr "Testes de homogeneidade"
+
+#, fuzzy
+msgid "Weight Function Estimate"
+msgstr "Medidas adicionais de ajuste"
+
+msgid "PET-PEESE Regression Estimate"
+msgstr ""
+
+#, fuzzy
+msgid "Posterior Model Estimates Plots"
+msgstr "Estimativas"
+
+#, fuzzy
+msgid "Effect Size Estimates"
+msgstr "Estimativas de efeitos fixos"
+
+#, fuzzy
+msgid "Heterogeneity Estimates"
+msgstr "Testes de homogeneidade"
 
 msgid "Diagnostics"
 msgstr ""
@@ -850,13 +839,26 @@ msgstr ""
 msgid "max(MCMC error)"
 msgstr ""
 
+msgid "max(MCMC error/SD)"
+msgstr ""
+
 msgid "min(ESS)"
 msgstr ""
 
-msgid "max(Rhat)"
+msgid "max(R-hat)"
 msgstr ""
 
 msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
+msgstr ""
+
+#, fuzzy
+msgid "Weights"
+msgstr "WLS Ponderado"
+
+msgid "PET"
+msgstr ""
+
+msgid "PEESE"
 msgstr ""
 
 #, fuzzy
@@ -1031,3 +1033,11 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "% i observação foi removida devido a valores ausentes."
 msgstr[1] "% i observações foram removidas devido a valores ausentes."
+
+#, fuzzy
+#~ msgid "Estimated Studies' Effects (%s)"
+#~ msgstr "Estimativas de tamanho de efeito"
+
+#, fuzzy
+#~ msgid "Individual Models Plots"
+#~ msgstr "Diagrama individual por nível"

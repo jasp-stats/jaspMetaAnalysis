@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-06-30 10:11\n"
+"POT-Creation-Date: 2021-08-28 02:38\n"
 "PO-Revision-Date: 2021-08-27 20:21+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
@@ -40,7 +40,8 @@ msgid "The 95%% CI Lower Bound must be smaller than the Upper Bound."
 msgstr "O Límite Inferior do IC do 95%% debe ser menor que o Límite Superior."
 
 msgid "You cannot set all the prior model probabilties to zero."
-msgstr "Non se poden poñer todas as probabilidades do modelo previo como ceros."
+msgstr ""
+"Non se poden poñer todas as probabilidades do modelo previo como ceros."
 
 msgid ""
 "The model could not be fit. Please check the following: Do you have at least "
@@ -110,8 +111,8 @@ msgid ""
 msgstr ""
 "As estimacións posteriores baséanse nos modelos que asumen que existe un "
 "efecto. O factor de Bayes baséase nos catro modelos: efectos fixos H%2$s & "
-"efectos aleatorios H%2$s sobre efectos fixos H%1$s & efectos aleatorios "
-"H%1$s."
+"efectos aleatorios H%2$s sobre efectos fixos H%1$s & efectos aleatorios H"
+"%1$s."
 
 msgid ""
 "Model averaged posterior estimates for %3$s are not yet available, but will "
@@ -120,8 +121,8 @@ msgid ""
 msgstr ""
 "As estimación posteriores medias do modelo para %3$s aínda non están "
 "dispoñibles, pero se engadirán no futuro. O factor de Bayes baséase nos "
-"catro modelos: os efectos aleatorios H%1$s & H%2$s sobre os efectos fixos "
-"H%1$s & H%2$s."
+"catro modelos: os efectos aleatorios H%1$s & H%2$s sobre os efectos fixos H"
+"%1$s & H%2$s."
 
 msgid ""
 "Bayes factor of the (unconstrained/constrained) random effects H%1$s over "
@@ -152,8 +153,8 @@ msgid ""
 msgstr ""
 "As estimación posteriores medias do modelo para %3$s aínda non están "
 "dispoñibles, pero se engadirán no futuro. O factor de Bayes baséase nos "
-"catro modelos: os efectos fixos H%1$s & H%2$s sobre os efectos aleatorios "
-"H%1$s & H%2$s."
+"catro modelos: os efectos fixos H%1$s & H%2$s sobre os efectos aleatorios H"
+"%1$s & H%2$s."
 
 msgid ""
 "Bayes factor of the fixed effects H%1$s over the (unconstrained/constrained) "
@@ -649,25 +650,19 @@ msgstr "Mediana"
 msgid "MCMC error"
 msgstr "Erro MCMC"
 
+#, fuzzy
+msgid "MCMC error/SD"
+msgstr "Erro MCMC"
+
 msgid "ESS"
 msgstr "ESS"
 
-msgid "Rhat"
-msgstr "Rcircunflexo"
-
-msgid "%1$s is on %2$s scale."
-msgstr "%1$s está na escala %2$s."
-
-msgid "<em>p</em>-values interval %s"
-msgstr "intervalo %s de valores <em>p</em>"
-
-msgid "The weights (%1$s) correspond to %2$s <em>p</em>-values."
-msgstr "As ponderacións (%1$s) se corresponden a %2$s valores <em>p</em>."
-
-msgid "Estimated studies' effects (%1$s) correspond to effect size %2$s."
+msgid "R-hat"
 msgstr ""
-"Os efectos estimados do estudo (%1$s) se corresponden coa magnitude do "
-"efecto %2$s."
+
+#, fuzzy
+msgid "<em>p</em>-values interval"
+msgstr "intervalo %s de valores <em>p</em>"
 
 msgid "Effect size (%s)"
 msgstr "Magnitude do efecto (%s)"
@@ -688,8 +683,8 @@ msgstr "Gráficas Previas"
 msgid "Effect"
 msgstr "Efecto"
 
-msgid "Weight Function"
-msgstr "Función de Ponderación"
+msgid "Publication Bias"
+msgstr "Nesgo de Publicación"
 
 msgid "Null"
 msgstr "Nulo"
@@ -732,14 +727,37 @@ msgstr "Revisión dos Modelos"
 msgid "Prior Distribution"
 msgstr "Distribución Previa"
 
-msgid "Publication Bias"
-msgstr "Nesgo de Publicación"
-
 msgid "The loaded object is not a RoBMA model."
 msgstr "O obxecto cargado non é un modelo RoBMA."
 
 msgid "Summary"
 msgstr "Resumo"
+
+msgid "P(M|data)"
+msgstr "P(M|datos)"
+
+msgid "Warning:"
+msgstr "Aviso:"
+
+msgid "Model Averaged Estimates"
+msgstr "Estimacións Medias do Modelo"
+
+msgid "Model Averaged Weights (%s)"
+msgstr "Ponderacións Medias do Modelo (%s)"
+
+#, fuzzy
+msgid "Model Averaged PET-PEESE Estimates"
+msgstr "Estimacións Medias do Modelo"
+
+msgid "Conditional Estimates"
+msgstr "Estimacións Condicionadas"
+
+msgid "Conditional Weights (%s)"
+msgstr "Ponderacións Condicionadas (%s)"
+
+#, fuzzy
+msgid "Conditional PET-PEESE Estimates"
+msgstr "Estimacións Condicionadas"
 
 msgid "Exclusion"
 msgstr "Exclusión"
@@ -752,68 +770,6 @@ msgstr "log(FB)"
 
 msgid "BF"
 msgstr "FB"
-
-msgid "P(M|data)"
-msgstr "P(M|datos)"
-
-msgid ""
-"All models failed to converge. Please, consider inspecting the 'MCMC "
-"diagnostics' and changing the 'Advanced options'."
-msgstr ""
-"Fallaron tódolos modelos ao converxer. Por favor, sopesa inspeccionar os "
-"'Diagnósticos MCMC' e trocar as 'Opcións Avanzadas'."
-
-msgid "Warning:"
-msgstr "Aviso:"
-
-msgid "%i models failed to converge."
-msgstr "%i modelos fallan ao converxer."
-
-msgid ""
-"Analyzing odds ratios is an experimental feature. The performance of default "
-"prior distributions was not evaluated."
-msgstr ""
-"A análise de proporcións de posibilidades é unha función experimental. Non "
-"se avaliou o comportamento das distribucións previas predeterminadas."
-
-msgid "Model Averaged Estimates"
-msgstr "Estimacións Medias do Modelo"
-
-msgid "Model Averaged Weights (%s)"
-msgstr "Ponderacións Medias do Modelo (%s)"
-
-msgid "Model Averaged Estimated Studies' Effects (%s)"
-msgstr "Modelo Medio dos Efectos Estimados dos Estudos (%s)"
-
-msgid "Conditional Estimates"
-msgstr "Estimacións Condicionadas"
-
-msgid ""
-"Estimates are model averaged over models assuming existence of effect / "
-"heterogeneity."
-msgstr ""
-"As estimacións son medias de modelo sobre modelos nos que se asume a "
-"existencia de efecto/heteroxeneidade."
-
-msgid "Conditional Weights (%s)"
-msgstr "Ponderacións Condicionadas (%s)"
-
-msgid ""
-"Estimated weights (%s) are model averaged over models assuming existence of "
-"publication bias."
-msgstr ""
-"As ponderacións estimadas (%s) son medias de modelos asumindo a existencia "
-"de nesgo de publicación."
-
-msgid "Conditional Estimated Studies' Effects (%s)"
-msgstr "Efectos Estimados Condicionados dos Estudos (%s)"
-
-msgid ""
-"Estimated studies effects (%s) are model averaged over models assuming "
-"existence of effect."
-msgstr ""
-"Os efectos estimados dos estudos (%s) son medias de modelo sobre modelos nos "
-"que se asume a existencia do efecto."
 
 msgid "BF%s"
 msgstr "FB%s"
@@ -845,23 +801,51 @@ msgstr "Estimacións do Modelo"
 msgid "Estimated Weights (%s)"
 msgstr "Ponderacións Estimadas (%s)"
 
-msgid "Estimated Studies' Effects (%s)"
-msgstr "Efectos Estimados dos Estudos (%s)"
+msgid "PET-PEESE Estimates"
+msgstr ""
 
-msgid "Weight function"
-msgstr "Función de ponderación"
+#, fuzzy
+msgid "%1$s Forest Plot"
+msgstr "Gráfica en bosque"
 
-msgid "Weights"
-msgstr "Ponderacións"
+#, fuzzy
+msgid "Posterior Distribution Plots"
+msgstr "Distribución Previa"
 
-msgid "Effect size vs Heterogeneity"
-msgstr "Magnitude do efecto vs Heteroxeneidade"
+#, fuzzy
+msgid "Conditional"
+msgstr "Estimacións Condicionadas"
 
-msgid "%1$s (%2$s)"
-msgstr "%1$s (%2$s)"
+#, fuzzy
+msgid "Model Averaged"
+msgstr "Estimacións Medias do Modelo"
 
-msgid "Individual Models Plots"
-msgstr "Gráficas de Modelos Individuais"
+#, fuzzy
+msgid "Effect Size Estimate"
+msgstr "Magnitude do Efecto"
+
+#, fuzzy
+msgid "Heterogeneity Estimate"
+msgstr "Estimacións da Heteroxeneidade (%s)"
+
+#, fuzzy
+msgid "Weight Function Estimate"
+msgstr "Función de Ponderación"
+
+msgid "PET-PEESE Regression Estimate"
+msgstr ""
+
+#, fuzzy
+msgid "Posterior Model Estimates Plots"
+msgstr "Estimacións posteriores por Modelo"
+
+#, fuzzy
+msgid "Effect Size Estimates"
+msgstr "Estimacións dos Efectos Fixos"
+
+#, fuzzy
+msgid "Heterogeneity Estimates"
+msgstr "Estimacións da Heteroxeneidade (%s)"
 
 msgid "Diagnostics"
 msgstr "Diagnósticos"
@@ -872,14 +856,28 @@ msgstr "Revisión dos Diagnósticos dos Modelos"
 msgid "max(MCMC error)"
 msgstr "max(erro MCMC)"
 
+#, fuzzy
+msgid "max(MCMC error/SD)"
+msgstr "max(erro MCMC)"
+
 msgid "min(ESS)"
 msgstr "min(ESS)"
 
-msgid "max(Rhat)"
+#, fuzzy
+msgid "max(R-hat)"
 msgstr "máx(Rcircunflexo)"
 
 msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
 msgstr "O modelo %1$i non existe. Escolle un dos modelos entre 1 e %2$i."
+
+msgid "Weights"
+msgstr "Ponderacións"
+
+msgid "PET"
+msgstr ""
+
+msgid "PEESE"
+msgstr ""
 
 msgid "Trace plots"
 msgstr "Gráficas de trazado"
@@ -907,7 +905,8 @@ msgid "At least one p-value cutoff needs to be set."
 msgstr "Precísase establecer cando menos un punto de corte dos valores p."
 
 msgid "All p-value cutoffs needs to be between 0 and 1."
-msgstr "Precísase que tódolos puntos de corte dos valores p estean entre 0 e 1."
+msgstr ""
+"Precísase que tódolos puntos de corte dos valores p estean entre 0 e 1."
 
 msgid "No steps"
 msgstr "Sen etapas"
@@ -1068,3 +1067,76 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "a observación %i eliminouse debido a valores ausentes."
 msgstr[1] "as observacións %i elimináronse debido a valores ausentes."
+
+#~ msgid "Rhat"
+#~ msgstr "Rcircunflexo"
+
+#~ msgid "%1$s is on %2$s scale."
+#~ msgstr "%1$s está na escala %2$s."
+
+#~ msgid "The weights (%1$s) correspond to %2$s <em>p</em>-values."
+#~ msgstr "As ponderacións (%1$s) se corresponden a %2$s valores <em>p</em>."
+
+#~ msgid "Estimated studies' effects (%1$s) correspond to effect size %2$s."
+#~ msgstr ""
+#~ "Os efectos estimados do estudo (%1$s) se corresponden coa magnitude do "
+#~ "efecto %2$s."
+
+#~ msgid ""
+#~ "All models failed to converge. Please, consider inspecting the 'MCMC "
+#~ "diagnostics' and changing the 'Advanced options'."
+#~ msgstr ""
+#~ "Fallaron tódolos modelos ao converxer. Por favor, sopesa inspeccionar os "
+#~ "'Diagnósticos MCMC' e trocar as 'Opcións Avanzadas'."
+
+#~ msgid "%i models failed to converge."
+#~ msgstr "%i modelos fallan ao converxer."
+
+#~ msgid ""
+#~ "Analyzing odds ratios is an experimental feature. The performance of "
+#~ "default prior distributions was not evaluated."
+#~ msgstr ""
+#~ "A análise de proporcións de posibilidades é unha función experimental. "
+#~ "Non se avaliou o comportamento das distribucións previas predeterminadas."
+
+#~ msgid "Model Averaged Estimated Studies' Effects (%s)"
+#~ msgstr "Modelo Medio dos Efectos Estimados dos Estudos (%s)"
+
+#~ msgid ""
+#~ "Estimates are model averaged over models assuming existence of effect / "
+#~ "heterogeneity."
+#~ msgstr ""
+#~ "As estimacións son medias de modelo sobre modelos nos que se asume a "
+#~ "existencia de efecto/heteroxeneidade."
+
+#~ msgid ""
+#~ "Estimated weights (%s) are model averaged over models assuming existence "
+#~ "of publication bias."
+#~ msgstr ""
+#~ "As ponderacións estimadas (%s) son medias de modelos asumindo a "
+#~ "existencia de nesgo de publicación."
+
+#~ msgid "Conditional Estimated Studies' Effects (%s)"
+#~ msgstr "Efectos Estimados Condicionados dos Estudos (%s)"
+
+#~ msgid ""
+#~ "Estimated studies effects (%s) are model averaged over models assuming "
+#~ "existence of effect."
+#~ msgstr ""
+#~ "Os efectos estimados dos estudos (%s) son medias de modelo sobre modelos "
+#~ "nos que se asume a existencia do efecto."
+
+#~ msgid "Estimated Studies' Effects (%s)"
+#~ msgstr "Efectos Estimados dos Estudos (%s)"
+
+#~ msgid "Weight function"
+#~ msgstr "Función de ponderación"
+
+#~ msgid "Effect size vs Heterogeneity"
+#~ msgstr "Magnitude do efecto vs Heteroxeneidade"
+
+#~ msgid "%1$s (%2$s)"
+#~ msgstr "%1$s (%2$s)"
+
+#~ msgid "Individual Models Plots"
+#~ msgstr "Gráficas de Modelos Individuais"

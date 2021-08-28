@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-06-30 10:11\n"
+"POT-Creation-Date: 2021-08-28 02:38\n"
 "PO-Revision-Date: 2020-12-02 21:29+0000\n"
 "Last-Translator: JASP Stats <F.A.M.Meerhoff@uva.nl>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/jasp-engine/"
@@ -649,24 +649,19 @@ msgstr "Mediaan"
 msgid "MCMC error"
 msgstr "MCMC fout"
 
+#, fuzzy
+msgid "MCMC error/SD"
+msgstr "MCMC fout"
+
 msgid "ESS"
 msgstr "ESS"
 
-msgid "Rhat"
-msgstr "R-dakje"
-
-msgid "%1$s is on %2$s scale."
-msgstr "%1$s is op %2$s schaal."
-
-msgid "<em>p</em>-values interval %s"
-msgstr "<em>p</em>-waarden interval %s"
-
-msgid "The weights (%1$s) correspond to %2$s <em>p</em>-values."
-msgstr "De gewichten (%1$s) corresponderen met de %2$s <em>p</em>-waarden."
-
-msgid "Estimated studies' effects (%1$s) correspond to effect size %2$s."
+msgid "R-hat"
 msgstr ""
-"Geschatte onderzoekseffecten (%1$s) corresponderen met effectgrootte %2$s."
+
+#, fuzzy
+msgid "<em>p</em>-values interval"
+msgstr "<em>p</em>-waarden interval %s"
 
 msgid "Effect size (%s)"
 msgstr "Effectgrootte (%s)"
@@ -685,8 +680,8 @@ msgstr "Prior Grafieken"
 msgid "Effect"
 msgstr "Effecten"
 
-msgid "Weight Function"
-msgstr "Gewichtsfunctie"
+msgid "Publication Bias"
+msgstr "Publicatieonzuiverheid"
 
 msgid "Null"
 msgstr "Null"
@@ -730,14 +725,37 @@ msgstr "Model Overzicht"
 msgid "Prior Distribution"
 msgstr "Posterior Verdeling"
 
-msgid "Publication Bias"
-msgstr "Publicatieonzuiverheid"
-
 msgid "The loaded object is not a RoBMA model."
 msgstr "Het ingeladen object is geen RoBMA model."
 
 msgid "Summary"
 msgstr "Samenvatting"
+
+msgid "P(M|data)"
+msgstr "P(M|data)"
+
+msgid "Warning:"
+msgstr "Waarschuwing:"
+
+msgid "Model Averaged Estimates"
+msgstr "Model Gemiddelde Schattingen"
+
+msgid "Model Averaged Weights (%s)"
+msgstr "Model Gemiddelde Gewichten (%s)"
+
+#, fuzzy
+msgid "Model Averaged PET-PEESE Estimates"
+msgstr "Model Gemiddelde Schattingen"
+
+msgid "Conditional Estimates"
+msgstr "Geconditioneerde Schattingen"
+
+msgid "Conditional Weights (%s)"
+msgstr "Geconditioneerde Gewichten (%s)"
+
+#, fuzzy
+msgid "Conditional PET-PEESE Estimates"
+msgstr "Geconditioneerde Schattingen"
 
 msgid "Exclusion"
 msgstr "Uitsluiting"
@@ -750,68 +768,6 @@ msgstr "log(BF)"
 
 msgid "BF"
 msgstr "BF"
-
-msgid "P(M|data)"
-msgstr "P(M|data)"
-
-msgid ""
-"All models failed to converge. Please, consider inspecting the 'MCMC "
-"diagnostics' and changing the 'Advanced options'."
-msgstr ""
-"Geen model is geconvergeerd. Inspecteer 'MCMC diagnostiek' en verander de "
-"'Geavanceerde Opties'."
-
-msgid "Warning:"
-msgstr "Waarschuwing:"
-
-msgid "%i models failed to converge."
-msgstr "%i modellen zijn niet geconvergeerd."
-
-msgid ""
-"Analyzing odds ratios is an experimental feature. The performance of default "
-"prior distributions was not evaluated."
-msgstr ""
-"Het analyseren van odds ratio's is een experimentele functie. De prestaties "
-"van standaard prior verdelingen werden niet geëvalueerd."
-
-msgid "Model Averaged Estimates"
-msgstr "Model Gemiddelde Schattingen"
-
-msgid "Model Averaged Weights (%s)"
-msgstr "Model Gemiddelde Gewichten (%s)"
-
-msgid "Model Averaged Estimated Studies' Effects (%s)"
-msgstr "Model Gemiddelde Geschatte Onderzoekseffecten (%s)"
-
-msgid "Conditional Estimates"
-msgstr "Geconditioneerde Schattingen"
-
-msgid ""
-"Estimates are model averaged over models assuming existence of effect / "
-"heterogeneity."
-msgstr ""
-"De schattingen zijn gemiddeld over die modellen waar het effect bestaat, of "
-"waar heterogeniteit aanwezig is."
-
-msgid "Conditional Weights (%s)"
-msgstr "Geconditioneerde Gewichten (%s)"
-
-msgid ""
-"Estimated weights (%s) are model averaged over models assuming existence of "
-"publication bias."
-msgstr ""
-"Geschatten gewichten (%s) zijn gemiddeld over die modellen waarin "
-"publicatieonzuiverheid aanwezig is."
-
-msgid "Conditional Estimated Studies' Effects (%s)"
-msgstr "Geconditioneerde Geschatte Onderzoekseffecten (%s)"
-
-msgid ""
-"Estimated studies effects (%s) are model averaged over models assuming "
-"existence of effect."
-msgstr ""
-"Geschatte onderzoekseffecten (%s) zijn gemiddeld over die modellen waarin "
-"het effect bestaat."
 
 msgid "BF%s"
 msgstr "BF%s"
@@ -843,23 +799,51 @@ msgstr "Model Schattingen"
 msgid "Estimated Weights (%s)"
 msgstr "Geschatte Gewichten (%s)"
 
-msgid "Estimated Studies' Effects (%s)"
-msgstr "Geschatte Onderzoekseffecten (%s)"
+msgid "PET-PEESE Estimates"
+msgstr ""
 
-msgid "Weight function"
+#, fuzzy
+msgid "%1$s Forest Plot"
+msgstr "Forestgrafiek"
+
+#, fuzzy
+msgid "Posterior Distribution Plots"
+msgstr "Posterior Verdeling"
+
+#, fuzzy
+msgid "Conditional"
+msgstr "Geconditioneerde Schattingen"
+
+#, fuzzy
+msgid "Model Averaged"
+msgstr "Model Gemiddelde Schattingen"
+
+#, fuzzy
+msgid "Effect Size Estimate"
+msgstr "Effectgrootte"
+
+#, fuzzy
+msgid "Heterogeneity Estimate"
+msgstr "Heterogeniteitsschattingen (%s)"
+
+#, fuzzy
+msgid "Weight Function Estimate"
 msgstr "Gewichtsfunctie"
 
-msgid "Weights"
-msgstr "Gewichten"
+msgid "PET-PEESE Regression Estimate"
+msgstr ""
 
-msgid "Effect size vs Heterogeneity"
-msgstr "Effectgrootte vs Heterogeniteit"
+#, fuzzy
+msgid "Posterior Model Estimates Plots"
+msgstr "Posterior schattingen per model"
 
-msgid "%1$s (%2$s)"
-msgstr "%1$s (%2$s)"
+#, fuzzy
+msgid "Effect Size Estimates"
+msgstr "Gefixeerde Effecten Schattingen"
 
-msgid "Individual Models Plots"
-msgstr "Individuele Modellengrafiek"
+#, fuzzy
+msgid "Heterogeneity Estimates"
+msgstr "Heterogeniteitsschattingen (%s)"
 
 msgid "Diagnostics"
 msgstr "Diagnostiek"
@@ -870,14 +854,28 @@ msgstr "Modellen Diagnostiek Overzicht"
 msgid "max(MCMC error)"
 msgstr "max(MCMC fout)"
 
+#, fuzzy
+msgid "max(MCMC error/SD)"
+msgstr "max(MCMC fout)"
+
 msgid "min(ESS)"
 msgstr "min(ESS)"
 
-msgid "max(Rhat)"
+#, fuzzy
+msgid "max(R-hat)"
 msgstr "max(R-dakje)"
 
 msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
 msgstr "Model %1$i bestaat niet. Selecteer een model tussen 1 en %2$i."
+
+msgid "Weights"
+msgstr "Gewichten"
+
+msgid "PET"
+msgstr ""
+
+msgid "PEESE"
+msgstr ""
 
 msgid "Trace plots"
 msgstr "Spoordiagram"
@@ -1063,3 +1061,75 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "%i observatie is verwijderd, omdat de waarde ontbreekt."
 msgstr[1] "%i observaties zijn verwijderd omdat de waarden ontbreken."
+
+#~ msgid "Rhat"
+#~ msgstr "R-dakje"
+
+#~ msgid "%1$s is on %2$s scale."
+#~ msgstr "%1$s is op %2$s schaal."
+
+#~ msgid "The weights (%1$s) correspond to %2$s <em>p</em>-values."
+#~ msgstr "De gewichten (%1$s) corresponderen met de %2$s <em>p</em>-waarden."
+
+#~ msgid "Estimated studies' effects (%1$s) correspond to effect size %2$s."
+#~ msgstr ""
+#~ "Geschatte onderzoekseffecten (%1$s) corresponderen met effectgrootte %2$s."
+
+#~ msgid ""
+#~ "All models failed to converge. Please, consider inspecting the 'MCMC "
+#~ "diagnostics' and changing the 'Advanced options'."
+#~ msgstr ""
+#~ "Geen model is geconvergeerd. Inspecteer 'MCMC diagnostiek' en verander de "
+#~ "'Geavanceerde Opties'."
+
+#~ msgid "%i models failed to converge."
+#~ msgstr "%i modellen zijn niet geconvergeerd."
+
+#~ msgid ""
+#~ "Analyzing odds ratios is an experimental feature. The performance of "
+#~ "default prior distributions was not evaluated."
+#~ msgstr ""
+#~ "Het analyseren van odds ratio's is een experimentele functie. De "
+#~ "prestaties van standaard prior verdelingen werden niet geëvalueerd."
+
+#~ msgid "Model Averaged Estimated Studies' Effects (%s)"
+#~ msgstr "Model Gemiddelde Geschatte Onderzoekseffecten (%s)"
+
+#~ msgid ""
+#~ "Estimates are model averaged over models assuming existence of effect / "
+#~ "heterogeneity."
+#~ msgstr ""
+#~ "De schattingen zijn gemiddeld over die modellen waar het effect bestaat, "
+#~ "of waar heterogeniteit aanwezig is."
+
+#~ msgid ""
+#~ "Estimated weights (%s) are model averaged over models assuming existence "
+#~ "of publication bias."
+#~ msgstr ""
+#~ "Geschatten gewichten (%s) zijn gemiddeld over die modellen waarin "
+#~ "publicatieonzuiverheid aanwezig is."
+
+#~ msgid "Conditional Estimated Studies' Effects (%s)"
+#~ msgstr "Geconditioneerde Geschatte Onderzoekseffecten (%s)"
+
+#~ msgid ""
+#~ "Estimated studies effects (%s) are model averaged over models assuming "
+#~ "existence of effect."
+#~ msgstr ""
+#~ "Geschatte onderzoekseffecten (%s) zijn gemiddeld over die modellen waarin "
+#~ "het effect bestaat."
+
+#~ msgid "Estimated Studies' Effects (%s)"
+#~ msgstr "Geschatte Onderzoekseffecten (%s)"
+
+#~ msgid "Weight function"
+#~ msgstr "Gewichtsfunctie"
+
+#~ msgid "Effect size vs Heterogeneity"
+#~ msgstr "Effectgrootte vs Heterogeniteit"
+
+#~ msgid "%1$s (%2$s)"
+#~ msgstr "%1$s (%2$s)"
+
+#~ msgid "Individual Models Plots"
+#~ msgstr "Individuele Modellengrafiek"

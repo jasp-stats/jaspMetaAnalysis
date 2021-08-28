@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.15\n"
-"POT-Creation-Date: 2021-06-30 10:11\n"
+"POT-Creation-Date: 2021-08-28 02:38\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -550,22 +550,16 @@ msgstr ""
 msgid "MCMC error"
 msgstr ""
 
+msgid "MCMC error/SD"
+msgstr ""
+
 msgid "ESS"
 msgstr ""
 
-msgid "Rhat"
+msgid "R-hat"
 msgstr ""
 
-msgid "%1$s is on %2$s scale."
-msgstr ""
-
-msgid "<em>p</em>-values interval %s"
-msgstr ""
-
-msgid "The weights (%1$s) correspond to %2$s <em>p</em>-values."
-msgstr ""
-
-msgid "Estimated studies' effects (%1$s) correspond to effect size %2$s."
+msgid "<em>p</em>-values interval"
 msgstr ""
 
 msgid "Effect size (%s)"
@@ -583,7 +577,7 @@ msgstr ""
 msgid "Effect"
 msgstr ""
 
-msgid "Weight Function"
+msgid "Publication Bias"
 msgstr ""
 
 msgid "Null"
@@ -619,13 +613,34 @@ msgstr ""
 msgid "Prior Distribution"
 msgstr ""
 
-msgid "Publication Bias"
-msgstr ""
-
 msgid "The loaded object is not a RoBMA model."
 msgstr ""
 
 msgid "Summary"
+msgstr ""
+
+msgid "P(M|data)"
+msgstr ""
+
+msgid "Warning:"
+msgstr ""
+
+msgid "Model Averaged Estimates"
+msgstr ""
+
+msgid "Model Averaged Weights (%s)"
+msgstr ""
+
+msgid "Model Averaged PET-PEESE Estimates"
+msgstr ""
+
+msgid "Conditional Estimates"
+msgstr ""
+
+msgid "Conditional Weights (%s)"
+msgstr ""
+
+msgid "Conditional PET-PEESE Estimates"
 msgstr ""
 
 msgid "Exclusion"
@@ -638,48 +653,6 @@ msgid "log(BF)"
 msgstr ""
 
 msgid "BF"
-msgstr ""
-
-msgid "P(M|data)"
-msgstr ""
-
-msgid "All models failed to converge. Please, consider inspecting the 'MCMC diagnostics' and changing the 'Advanced options'."
-msgstr ""
-
-msgid "Warning:"
-msgstr ""
-
-msgid "%i models failed to converge."
-msgstr ""
-
-msgid "Analyzing odds ratios is an experimental feature. The performance of default prior distributions was not evaluated."
-msgstr ""
-
-msgid "Model Averaged Estimates"
-msgstr ""
-
-msgid "Model Averaged Weights (%s)"
-msgstr ""
-
-msgid "Model Averaged Estimated Studies' Effects (%s)"
-msgstr ""
-
-msgid "Conditional Estimates"
-msgstr ""
-
-msgid "Estimates are model averaged over models assuming existence of effect / heterogeneity."
-msgstr ""
-
-msgid "Conditional Weights (%s)"
-msgstr ""
-
-msgid "Estimated weights (%s) are model averaged over models assuming existence of publication bias."
-msgstr ""
-
-msgid "Conditional Estimated Studies' Effects (%s)"
-msgstr ""
-
-msgid "Estimated studies effects (%s) are model averaged over models assuming existence of effect."
 msgstr ""
 
 msgid "BF%s"
@@ -712,22 +685,40 @@ msgstr ""
 msgid "Estimated Weights (%s)"
 msgstr ""
 
-msgid "Estimated Studies' Effects (%s)"
+msgid "PET-PEESE Estimates"
 msgstr ""
 
-msgid "Weight function"
+msgid "%1$s Forest Plot"
 msgstr ""
 
-msgid "Weights"
+msgid "Posterior Distribution Plots"
 msgstr ""
 
-msgid "Effect size vs Heterogeneity"
+msgid "Conditional"
 msgstr ""
 
-msgid "%1$s (%2$s)"
+msgid "Model Averaged"
 msgstr ""
 
-msgid "Individual Models Plots"
+msgid "Effect Size Estimate"
+msgstr ""
+
+msgid "Heterogeneity Estimate"
+msgstr ""
+
+msgid "Weight Function Estimate"
+msgstr ""
+
+msgid "PET-PEESE Regression Estimate"
+msgstr ""
+
+msgid "Posterior Model Estimates Plots"
+msgstr ""
+
+msgid "Effect Size Estimates"
+msgstr ""
+
+msgid "Heterogeneity Estimates"
 msgstr ""
 
 msgid "Diagnostics"
@@ -739,13 +730,25 @@ msgstr ""
 msgid "max(MCMC error)"
 msgstr ""
 
+msgid "max(MCMC error/SD)"
+msgstr ""
+
 msgid "min(ESS)"
 msgstr ""
 
-msgid "max(Rhat)"
+msgid "max(R-hat)"
 msgstr ""
 
 msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
+msgstr ""
+
+msgid "Weights"
+msgstr ""
+
+msgid "PET"
+msgstr ""
+
+msgid "PEESE"
 msgstr ""
 
 msgid "Trace plots"
