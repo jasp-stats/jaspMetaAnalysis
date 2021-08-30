@@ -31,7 +31,6 @@ Section
 	Group
 	{
 		id:			priorModelProbabilityGroup
-		enabled: 	modelTypeValue == "FE" || modelTypeValue == "RE" || modelTypeValue == "BMA"
 		title: 		qsTr("Prior model probability")
 
 		property double fixedEffectsHypothesisVal:	modelTypeValue == "FE" ? 0.5 :
@@ -55,7 +54,7 @@ Section
 		
 		Group
 		{
-			enabled: 			modelTypeValue == "FE" || modelTypeValue == "BMA"
+			enabled: 			modelTypeValue == "FE" || modelTypeValue == "BMA" || modelTypeValue == "CRE"
 			title: 				qsTr("Fixed effects")
 			onEnabledChanged: 	priorModelProbabilityGroup.resetHypotheses()
 
@@ -79,13 +78,14 @@ Section
 		Group
 		{
 			title: 				qsTr("Random effects")
-			enabled: 			modelTypeValue == "RE" || modelTypeValue == "BMA"
+			enabled: 			modelTypeValue == "RE" || modelTypeValue == "BMA" || modelTypeValue == "CRE"
 			onEnabledChanged: 	priorModelProbabilityGroup.resetHypotheses()
 
 			DoubleField
 			{
 				id: 			priorH0RE
 				name: 			"priorH0RE"
+				enabled: 		modelTypeValue == "RE" || modelTypeValue == "BMA"
 				label: 			"H\u2080"
 				defaultValue: 	priorModelProbabilityGroup.randomEffectsHypothesisVal
 			}
@@ -98,12 +98,24 @@ Section
 				defaultValue: 	priorModelProbabilityGroup.randomEffectsHypothesisVal
 			}
 		}
+
+		Group
+		{
+			title: 				qsTr("Ordered effects")
+			visible: 			modelTypeValue == "CRE"
+
+			DoubleField
+			{
+				id: 			priorH1CRE
+				name: 			"priorH1CRE"
+				label: 			"H\u2081"
+				defaultValue: 	0.25
+			}
+		}
 	}
 
 	Group
 	{
-		enabled: !(modelTypeValue == "CRE")
-
 		Group
 		{
 			title: 		qsTr("Estimation settings (MCMC)")

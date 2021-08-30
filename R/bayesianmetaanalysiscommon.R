@@ -54,7 +54,7 @@
 }
 
 .bmaDependencies <- c("effectSize", "standardError", "confidenceInterval", "modelSpecification",
-                      "allPos", "allNeg", "priorH0FE", "priorH1FE", "priorH0RE", "priorH1RE",
+                      "allPos", "allNeg", "priorH0FE", "priorH1FE", "priorH0RE", "priorH1RE", "priorH1CRE",
                       "priorES", "informativeCauchyLocation", "informativeCauchyScale",
                       "checkLowerPrior", "checkUpperPrior", "lowerTrunc", "upperTrunc",
                       "informativeNormalMean", "informativeNormalStd",
@@ -315,7 +315,9 @@
   prior <- c(options[["priorH0FE"]], options[["priorH1FE"]], 
              options[["priorH0RE"]], options[["priorH1RE"]])
   
-  if(all(prior == 0) && options[["modelSpecification"]] != "CRE") 
+  if(options[["modelSpecification"]] == "CRE")
+    prior[3] <- options[["priorH1CRE"]]
+  if(all(prior == 0)) 
     .quitAnalysis(gettext("You cannot set all the prior model probabilties to zero."))
   
   # Get priors from jasp state
@@ -343,13 +345,15 @@
     p <- try({
       # Ordered effects
       results <- metaBMA::meta_ordered(y = y, 
-                                       SE = SE, 
+                                       SE = SE,
+                                       prior = prior,
                                        d = d, 
                                        tau = tau,
-                                       # logml = logml,
-                                       # logml_iter = logml_iter,
-                                       iter = 10000 # because of an issue with stored variables, it is not yet possible to make it reactive.
-                                       # chains = chains
+                                       logml = logml,
+                                       logml_iter = logml_iter,
+                                       iter = iter, ## TEMP!!!!
+                                       # iter = 10000 # because of an issue with stored variables, it is not yet possible to make it reactive.
+                                       chains = chains
       )
     })
   }
@@ -1653,10 +1657,15 @@
 }
 
 .bmaFillSeqPlot <- function(seqPlot, jaspResults, dataset, options, .bmaDependencies, type){
-  
+  # create model dependent evidence labels
   evidenceR <- gettext("Evidence for random effects")
-  evidenceF <- gettext("Evidence for fixed effects")  
-  
+  evidenceF <- gettext("Evidence for fixed effects") 
+
+  evidenceBase <- jaspGraphs:::fixTranslationForExpression(gettext("Evidence for %s H%s",domain="R-jaspGraphs"))
+  evidenceF1   <- sprintf(evidenceBase, "fixed","[1]")
+  evidenceF0   <- sprintf(evidenceBase, "fixed","[0]")
+  evidenceR1   <- sprintf(evidenceBase, "random","[1]")
+
   rowResults <- .bmaSequentialResults(jaspResults, dataset, options, .bmaDependencies)
   if(type == "ES"){
     BFs <- rowResults$BFs
@@ -1664,53 +1673,61 @@
     # The BFs for heterogeneity have different labels
     BFs <- rowResults$BFsHeterogeneity
     if(options$modelSpecification == "BMA"){
-      yName         <- "BF[italic(rf)]"
+      arrowLabel    <- c(evidenceF, evidenceR)
       pizzaTxt      <- c("data | Hf", "data | Hr")
       bfSubscripts  <-  c("BF[italic(rf)]", "BF[italic(fr)]")  
     } else if(options$modelSpecification == "RE"){
-      yName         <- "BF[italic(r1f1)]"
+      arrowLabel    <- jaspGraphs:::parseThis(c(evidenceF1, evidenceR1))
       pizzaTxt      <- c("data | Hf1", "data | Hr1")
       bfSubscripts  <-  c("BF[italic(r1f1)]", "BF[italic(f1r1)]")  
     }
-    arrowLabel <- c(evidenceF, evidenceR)
-    BF <- BFs[length(BFs)]
-    if(BF >= 1){
-      modelEvidence <- gettext("random")
-    } else {
-      modelEvidence <- gettext("fixed")
-    }
-    allEvidenceLabels <- c(gettext("Anecdotal",domain="R-jaspGraphs"), 
-                           gettext("Moderate",domain="R-jaspGraphs"),
-                           gettext("Strong",domain="R-jaspGraphs"), 
-                           gettext("Very Strong",domain="R-jaspGraphs"), 
-                           gettext("Extreme",domain="R-jaspGraphs"))
-    if(BF < 1) BF     <- 1/BF
-    idx               <- findInterval(BF, c(1, 3, 10, 30, 100), rightmost.closed = FALSE)
-    evidenceLevel     <- jaspGraphs:::fixTranslationForExpression(allEvidenceLabels[idx])
-    
-    evidenceFor <- gettextf("Evidence for %s:", modelEvidence, domain="R-jaspGraphs")
-    evidenceFor <- jaspGraphs:::fixTranslationForExpression(evidenceFor)
-    evidenceTxt <- jaspGraphs:::parseThis(c(evidenceLevel, evidenceFor))
   }
+
+  # get evidence text
+  BF <- BFs[length(BFs)]
+  if(BF >= 1){
+    modelEvidence <- gettext("random")
+    if(options$modelSpecification == "CRE") modelEvidence <- gettext("ordered")
+  } else {
+    modelEvidence <- gettext("fixed")
+  }
+  allEvidenceLabels <- c(gettext("Anecdotal",domain="R-jaspGraphs"), 
+                         gettext("Moderate",domain="R-jaspGraphs"),
+                         gettext("Strong",domain="R-jaspGraphs"), 
+                         gettext("Very Strong",domain="R-jaspGraphs"), 
+                         gettext("Extreme",domain="R-jaspGraphs"))
+  if(BF < 1) BF     <- 1/BF
+  idx               <- findInterval(BF, c(1, 3, 10, 30, 100), rightmost.closed = FALSE)
+  evidenceLevel     <- jaspGraphs:::fixTranslationForExpression(allEvidenceLabels[idx])
   
-  BFs[1] <- 1  
+  evidenceFor <- gettextf("Evidence for %s:", modelEvidence, domain="R-jaspGraphs")
+  evidenceFor <- jaspGraphs:::fixTranslationForExpression(evidenceFor)
+  evidenceTxt <- jaspGraphs:::parseThis(c(evidenceLevel, evidenceFor))
+  
+  BFs[1] <- 1 # the analysis does not work for one study, so BF is unfavoured 
   bfType <- "BF10" 
   
   if(options$bayesFactorType == "BF01") {
     BFs    <- 1/BFs
     bfType <- "BF01"
-    if(options$modelSpecification == "BMA") yName <- "BF[italic(fr)]" 
-    if(options$modelSpecification == "RE")  yName <- "BF[italic(f1r1)]" 
   } 
   
   # The BFs for constrained random effects also have different labels
   if(options$modelSpecification == "CRE"){
-    pizzaTxt <- c("data | Hf1", "data | Ho1")
-    bfSubscripts <-  c("BF[italic(o1f1)]", "BF[italic(f1o1)]")
-    if(type == "SE") yName <- "BF[italic(o1f1)]"
+    evidenceO1 <- sprintf(evidenceBase, "ordered", "[1]")
+    if(type == "SE"){
+      pizzaTxt <- c("data | Hf1", "data | Ho1")
+      bfSubscripts <- c("BF[italic(o1f1)]", "BF[italic(f1o1)]")
+      arrowLabel <- jaspGraphs:::parseThis(c(evidenceF1, evidenceO1))
+    }
     if(type == "SE" && options$bayesFactorType == "BF01") yName <- "BF[italic(f1o1)]"
+    if(type == "ES"){
+      pizzaTxt <- c("data | Hf0", "data | Ho1")
+      bfSubscripts <-  c("BF[italic(o1f0)]", "BF[italic(f0o1)]")
+      arrowLabel <- jaspGraphs:::parseThis(c(evidenceF0, evidenceO1))
+   }
   }
-  
+
   if(any(is.infinite(BFs))){
     seqPlot$setError(gettext("Plotting failed: The Bayes factors contain infinity."))
     return()
@@ -1718,26 +1735,27 @@
   
   df <- data.frame(x = 1:nrow(dataset), y = log(BFs))
   
-  if(type == "ES"){
-    plot <- jaspGraphs::PlotRobustnessSequential(dfLines = df,
-                                                 xName = "Studies",
-                                                 BF = BFs[nrow(dataset)],
-                                                 bfType = bfType,
-                                                 hasRightAxis = FALSE)
-  } else if(type == "SE"){
-    plot <- jaspGraphs::PlotRobustnessSequential(dfLines = df,
-                                                 xName = "Studies",
-                                                 BF = BFs[nrow(dataset)],
-                                                 bfType = bfType,
-                                                 bfSubscripts = bfSubscripts,
-                                                 pizzaTxt = pizzaTxt,
-                                                 hasRightAxis = FALSE,
-                                                 yName = yName,
-                                                 evidenceTxt  = evidenceTxt,
-                                                 arrowLabel  = arrowLabel   
-    )
+  if(type == "ES" && options$modelSpecification != "CRE"){
+    bfSubscripts <- NULL
+    pizzaTxt <- jaspGraphs:::hypothesis2BFtxt(c("equal", "smaller", "greater"))$pizzaTxt
+    yName <- NULL
+    evidenceTxt <- NULL
+    arrowLabel <- NULL
   }
+  if(!is.null(bfSubscripts))
+    ifelse(options$bayesFactorType == "BF01", yName <- bfSubscripts[2], yName <- bfSubscripts[1])
   
+  plot <- jaspGraphs::PlotRobustnessSequential(dfLines = df,
+                                                xName = "Studies",
+                                                BF = BFs[nrow(dataset)],
+                                                bfType = bfType,
+                                                bfSubscripts = bfSubscripts,
+                                                pizzaTxt = pizzaTxt,
+                                                hasRightAxis = FALSE,
+                                                yName = yName,
+                                                evidenceTxt  = evidenceTxt,
+                                                arrowLabel  = arrowLabel  
+  )  
   
   seqPlot$plotObject <- plot
   return()
@@ -1762,12 +1780,17 @@
   
   if(options[["modelSpecification"]] == "BMA" || options[["modelSpecification"]] == "CRE"){
     
-    labels <- c(bquote(.(gettext("Fixed H"))[0]),bquote(.(gettext("Fixed H"))[1]),
+    labels <- c(bquote(.(gettext("Fixed H"))[0]), bquote(.(gettext("Fixed H"))[1]),
                 bquote(.(gettext("Random H"))[0]), bquote(.(gettext("Random H"))[1]))
     colorValues <- c("#fcae91ff", "#fcae91ff", "#009E73", "#009E73")
     linetypeValues <- rep("solid", 4)
     pointValues <- c(21, 19, 21, 19)
     lineValues <- c("dotted", "solid", "dotted", "solid")
+    if(options[["modelSpecification"]] == "CRE") {
+      labels[[3]]    <- bquote(.(gettext("Ordered H"))[1])
+      colorValues[3] <- "#0072B2"
+      pointValues[3] <- 19
+    }
     
   } else if(options[["modelSpecification"]] == "FE"){
     labels <- c(bquote(.(gettext("Fixed H"))[0]), bquote(.(gettext("Fixed H"))[1]))
