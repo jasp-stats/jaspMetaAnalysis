@@ -351,8 +351,7 @@
                                        tau = tau,
                                        logml = logml,
                                        logml_iter = logml_iter,
-                                       iter = iter, ## TEMP!!!!
-                                       # iter = 10000 # because of an issue with stored variables, it is not yet possible to make it reactive.
+                                       iter = iter,
                                        chains = chains
       )
     })
