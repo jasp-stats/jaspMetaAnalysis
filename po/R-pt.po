@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-08-28 02:38\n"
-"PO-Revision-Date: 2021-08-27 20:21+0000\n"
-"Last-Translator: Alex França <alex.tonante@gmail.com>\n"
+"PO-Revision-Date: 2021-09-03 13:34+0000\n"
+"Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/pt/>\n"
 "Language: pt\n"
@@ -90,7 +90,7 @@ msgid ""
 msgstr ""
 
 msgid "%s is the group-level effect size."
-msgstr "Estimativas de tamanho de efeito"
+msgstr "%s é o tamanho do efeito a nível de grupo."
 
 msgid "Bayes factor of the random effects H%1$s over the fixed effects H%1$s."
 msgstr ""
@@ -268,7 +268,7 @@ msgid "Evidence for fixed effects"
 msgstr "efeitos fixos da escala r"
 
 msgid "random"
-msgstr "Fatores Aleatórios"
+msgstr "aleatório"
 
 msgid "fixed"
 msgstr ""
@@ -951,7 +951,7 @@ msgid "p-value Frequency"
 msgstr ""
 
 msgid "Frequency"
-msgstr "Fequência"
+msgstr "Frequência"
 
 msgid ""
 "There were no p-value cutoffs after their automatic reduction. The displayed "
@@ -987,9 +987,8 @@ msgstr "Estimativas"
 msgid "Fixed effects model:"
 msgstr ""
 
-#, fuzzy
 msgid "Random effects model:"
-msgstr "efeitos aleatórios da escala r"
+msgstr "Modelo de efeitos aleatórios:"
 
 msgid ""
 "%sThe optimizer failed to find a solution. Consider re-specifying the model "
