@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
 "POT-Creation-Date: 2021-08-28 02:38\n"
-"PO-Revision-Date: 2021-08-27 20:21+0000\n"
-"Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
+"PO-Revision-Date: 2021-09-03 13:34+0000\n"
+"Last-Translator: Koji Kosugi <kosugitti@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/ja/>\n"
 "Language: ja\n"
@@ -139,7 +139,7 @@ msgid ""
 msgstr ""
 
 msgid "Model Probabilities"
-msgstr ""
+msgstr "モデルの確率"
 
 msgid "Prior"
 msgstr ""
@@ -304,7 +304,7 @@ msgid "Estimate"
 msgstr "推定"
 
 msgid "Standard Error"
-msgstr ""
+msgstr "標準誤差"
 
 msgid "z"
 msgstr "z"
@@ -340,13 +340,13 @@ msgid "Influence Measures"
 msgstr ""
 
 msgid "Std. Residual"
-msgstr ""
+msgstr "標準的な残差"
 
 msgid "DFFITS"
 msgstr ""
 
 msgid "Cook's Distance"
-msgstr ""
+msgstr "クックの距離"
 
 msgid "Cov. Ratio"
 msgstr ""
@@ -403,7 +403,7 @@ msgid "I%s (%%)"
 msgstr ""
 
 msgid "H%s"
-msgstr ""
+msgstr "H%s"
 
 msgid "Rank test"
 msgstr ""
@@ -639,7 +639,7 @@ msgid ""
 msgstr ""
 
 msgid "Model Summary"
-msgstr ""
+msgstr "モデルの概要"
 
 msgid "Models"
 msgstr "モデル"
