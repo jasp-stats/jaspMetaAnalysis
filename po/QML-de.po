@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-08-28 12:21+0000\n"
+"PO-Revision-Date: 2021-09-04 02:37+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/de/>\n"
@@ -44,7 +44,7 @@ msgstr "Effektgröße des Standardfehlers"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "95% CI Lower and Upper Bound"
-msgstr "95% Konfidenzintervall Unter- und Obergrenze"
+msgstr "95% GI Unter- und Obergrenze"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Study Labels"
@@ -256,7 +256,7 @@ msgstr "Effektgröße Standardfehler"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "95% CI Lower and Upper Bound"
-msgstr "95% KI untere und obere Grenze"
+msgstr "95% GI untere und obere Grenze"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "N"
@@ -340,7 +340,7 @@ msgstr "Einzelmodell"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "CI width"
-msgstr "KI-Breite"
+msgstr "GI-Breite"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Plots"
@@ -380,7 +380,7 @@ msgstr "x-Achse umskalieren"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Type"
-msgstr "Type"
+msgstr "Typ"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Model averaged"
@@ -456,7 +456,7 @@ msgstr "Ketten"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Thin"
-msgstr "Dünn"
+msgstr "Ausdünnung"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Autofit"
@@ -1212,7 +1212,7 @@ msgstr "Benutzerdefiniert"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Prior scale"
-msgstr ""
+msgstr "Prior-Skala"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "vs. Best"
@@ -1228,7 +1228,7 @@ msgstr "Bayesfaktor"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Output scale"
-msgstr ""
+msgstr "Ergebnisskala"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Shorten prior names"
@@ -1264,7 +1264,7 @@ msgstr "PEESE"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Estimation scale"
-msgstr ""
+msgstr "Schätzungsskala"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "R-hat"
@@ -1284,7 +1284,7 @@ msgstr "MCMC-Fehler / SD"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Extend samples"
-msgstr ""
+msgstr "Stichprobe erweitern"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Remove failed models"
