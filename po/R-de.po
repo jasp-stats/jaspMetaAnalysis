@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-08-28 02:38\n"
-"PO-Revision-Date: 2021-08-27 20:21+0000\n"
+"PO-Revision-Date: 2021-08-28 12:21+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/de/>\n"
@@ -638,19 +638,17 @@ msgstr "Median"
 msgid "MCMC error"
 msgstr "MCMC-Fehler"
 
-#, fuzzy
 msgid "MCMC error/SD"
-msgstr "MCMC-Fehler"
+msgstr "MCMC-Fehler / SD"
 
 msgid "ESS"
 msgstr "ESS"
 
 msgid "R-hat"
-msgstr ""
+msgstr "R-Dach"
 
-#, fuzzy
 msgid "<em>p</em>-values interval"
-msgstr "<em>p</em>-Werte Intervall %s"
+msgstr "<em>p</em>-Werte-Intervall"
 
 msgid "Effect size (%s)"
 msgstr "Effektgröße (%s)"
@@ -733,9 +731,8 @@ msgstr "Modellgemittelte Schätzungen"
 msgid "Model Averaged Weights (%s)"
 msgstr "Modell-gemittelte Gewichte (%s)"
 
-#, fuzzy
 msgid "Model Averaged PET-PEESE Estimates"
-msgstr "Modellgemittelte Schätzungen"
+msgstr "Modellgemittelte PET-PEESE-Schätzungen"
 
 msgid "Conditional Estimates"
 msgstr "Konditionale Schätzungen"
@@ -743,9 +740,8 @@ msgstr "Konditionale Schätzungen"
 msgid "Conditional Weights (%s)"
 msgstr "Bedingte Gewichtungen (%s)"
 
-#, fuzzy
 msgid "Conditional PET-PEESE Estimates"
-msgstr "Konditionale Schätzungen"
+msgstr "Konditionale PET-PEESE-Schätzungen"
 
 msgid "Exclusion"
 msgstr "Exklusion"
@@ -790,50 +786,40 @@ msgid "Estimated Weights (%s)"
 msgstr "Geschätzte Gewichte (%s)"
 
 msgid "PET-PEESE Estimates"
-msgstr ""
+msgstr "PET-PEESE Schätzungen"
 
-#, fuzzy
 msgid "%1$s Forest Plot"
-msgstr "Forest-Plot"
+msgstr "%1$s Forestplot"
 
-#, fuzzy
 msgid "Posterior Distribution Plots"
-msgstr "Prior-Verteilung"
+msgstr "Posteriorverteilung-Diagramme"
 
-#, fuzzy
 msgid "Conditional"
-msgstr "Konditionale Schätzungen"
+msgstr "Konditional"
 
-#, fuzzy
 msgid "Model Averaged"
-msgstr "Modellgemittelte Schätzungen"
+msgstr "Modellgemittelt"
 
-#, fuzzy
 msgid "Effect Size Estimate"
-msgstr "Effektgröße"
+msgstr "Schätzung Effektgröße"
 
-#, fuzzy
 msgid "Heterogeneity Estimate"
-msgstr "Heterogenitätsschätzungen(%s)"
+msgstr "Schätzung Heterogenität"
 
-#, fuzzy
 msgid "Weight Function Estimate"
-msgstr "Gewichtungsfunktion"
+msgstr "Schätzung Gewichtungsfunktion"
 
 msgid "PET-PEESE Regression Estimate"
-msgstr ""
+msgstr "Schätzung PET-PEESE-Regression"
 
-#, fuzzy
 msgid "Posterior Model Estimates Plots"
-msgstr "Posteriorschätzungen pro Modell"
+msgstr "Posterior-Modellschätzungen Abbildungen"
 
-#, fuzzy
 msgid "Effect Size Estimates"
 msgstr "Schätzungen fester Effekte"
 
-#, fuzzy
 msgid "Heterogeneity Estimates"
-msgstr "Heterogenitätsschätzungen(%s)"
+msgstr "Schätzungen Heterogenität"
 
 msgid "Diagnostics"
 msgstr "Diagnostiken"
@@ -844,14 +830,12 @@ msgstr "Modell-Diagnostiken-Überblick"
 msgid "max(MCMC error)"
 msgstr "max(MCMC-Fehler)"
 
-#, fuzzy
 msgid "max(MCMC error/SD)"
-msgstr "max(MCMC-Fehler)"
+msgstr "max(MCMC-Fehler/SD)"
 
 msgid "min(ESS)"
 msgstr "min(ESS)"
 
-#, fuzzy
 msgid "max(R-hat)"
 msgstr "max(R-Dach)"
 
@@ -863,10 +847,10 @@ msgid "Weights"
 msgstr "Gewichte"
 
 msgid "PET"
-msgstr ""
+msgstr "PET"
 
 msgid "PEESE"
-msgstr ""
+msgstr "PEESE"
 
 msgid "Trace plots"
 msgstr "Verlaufsdiagramme"
