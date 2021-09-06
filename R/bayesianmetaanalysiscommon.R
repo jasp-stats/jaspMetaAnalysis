@@ -1762,20 +1762,21 @@
 
 .bmaFillSeqPM <- function(seqPMPlot, jaspResults, dataset, options, .bmaDependencies){
   n     <- nrow(dataset)
-  x     <- 0:n
-  x     <- x[-2]
-  dfPMP <- data.frame(prob = 0, g = rep(c("FE0", "FE1", "RE0", "RE1"), each = n))
+  x     <- rep(0:n, each = 4)
+  g     <- rep(c("FE0", "FE1", "RE0", "RE1"), n + 1)
+
   bmaResults     <- .bmaResultsState(jaspResults, dataset, options, .bmaDependencies)
   pM    <- bmaResults[["models"]]$prior
-  
-  dfPMP[c(1, 1 + n, 1 + 2*n, 1 + 3*n), 1] <- pM
+  pM    <- c(pM, pM) # x = 1 should be same as x = 0 as there are no results for when there is only 1 study
   
   rowResults <- .bmaSequentialResults(jaspResults, dataset, options, .bmaDependencies)
   
-  for(i in 2:nrow(dataset)){
+  for(i in 2:n){
     posterior_models <- rowResults$posterior_models[[i]]
-    dfPMP[c(i, i + n, i + 2*n, i + 3*n), 1] <- posterior_models
+    pM <- c(pM, posterior_models)
   }
+
+  dfPMP <- data.frame(x = x, y = pM, g = g)
   
   if(options[["modelSpecification"]] == "BMA" || options[["modelSpecification"]] == "CRE"){
     
@@ -1821,8 +1822,7 @@
     linetype    = rep("dashed", 5),
     size        = 0.85)
   
-  df <- data.frame(x = x, y = dfPMP$prob, g = dfPMP$g)
-  plot <- ggplot2::ggplot(df, ggplot2::aes(x = x, y = y, colour = g, linetype = g)) +
+  plot <- ggplot2::ggplot(dfPMP, ggplot2::aes(x = x, y = y, colour = g, linetype = g)) +
     gridLines + 
     ggplot2::geom_line(size = 1.5) +
     ggplot2::scale_y_continuous(limits = c(0,1.05), breaks = c(0, .25, .5, .75, 1)) +
