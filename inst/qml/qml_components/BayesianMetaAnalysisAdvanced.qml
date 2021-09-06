@@ -33,18 +33,24 @@ Section
 		id:			priorModelProbabilityGroup
 		title: 		qsTr("Prior model probability")
 
-		property double fixedEffectsHypothesisVal:	modelTypeValue == "FE" ? 0.5 :
-														modelTypeValue == "RE" ? 0 :
-															modelTypeValue == "BMA" ? 0.25 : 0
+		property double fixedEffectsHypothesisVal:		modelTypeValue == "FE" ? 0.5 :
+															modelTypeValue == "RE" ? 0 :
+																modelTypeValue == "BMA" ? 0.25 : 0.25
 
-		property double randomEffectsHypothesisVal:	modelTypeValue == "FE" ? 0 :
-														modelTypeValue == "RE" ? 0.5 :
-															modelTypeValue == "BMA" ? 0.25 : 0
+		property double randomEffectsNullHypothesisVal:	modelTypeValue == "FE" ? 0 :
+															modelTypeValue == "RE" ? 0.5 :
+																modelTypeValue == "BMA" ? 0.25 : 0
+
+		property double randomEffectsAltHypothesisVal:	modelTypeValue == "FE" ? 0 :
+															modelTypeValue == "RE" ? 0.5 :
+																modelTypeValue == "BMA" ? 0.25 : 0.25
+
+		
 		function resetHypotheses() {
 			priorH0FE.value = fixedEffectsHypothesisVal
 			priorH1FE.value = fixedEffectsHypothesisVal
-			priorH0RE.value = randomEffectsHypothesisVal
-			priorH1RE.value = randomEffectsHypothesisVal
+			priorH0RE.value = randomEffectsNullHypothesisVal
+			priorH1RE.value = randomEffectsAltHypothesisVal
 
 			priorH0FE.editingFinished()
 			priorH1FE.editingFinished()
@@ -87,7 +93,7 @@ Section
 				name: 			"priorH0RE"
 				enabled: 		modelTypeValue == "RE" || modelTypeValue == "BMA"
 				label: 			"H\u2080"
-				defaultValue: 	priorModelProbabilityGroup.randomEffectsHypothesisVal
+				defaultValue: 	priorModelProbabilityGroup.randomEffectsNullHypothesisVal
 			}
 
 			DoubleField
@@ -95,7 +101,7 @@ Section
 				id: 			priorH1RE
 				name: 			"priorH1RE"
 				label: 			"H\u2081"
-				defaultValue: 	priorModelProbabilityGroup.randomEffectsHypothesisVal
+				defaultValue: 	priorModelProbabilityGroup.randomEffectsAltHypothesisVal
 			}
 		}
 
@@ -115,7 +121,7 @@ Section
 	}
 
 	Group
-	{
+	{		
 		Group
 		{
 			title: 		qsTr("Estimation settings (MCMC)")
