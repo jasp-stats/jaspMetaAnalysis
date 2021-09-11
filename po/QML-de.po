@@ -1287,3 +1287,11 @@ msgstr "Fehlgeschlagene Modelle entfernen"
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Rebalance component probability on model failure"
 msgstr "Neugewichtung der Komponentenwahrscheinlichkeit bei Modellfehlschlag"
+
+msgctxt "Description|"
+msgid "Classical"
+msgstr ""
+
+msgctxt "Description|"
+msgid "Bayesian"
+msgstr ""

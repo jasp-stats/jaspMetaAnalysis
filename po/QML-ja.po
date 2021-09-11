@@ -1389,3 +1389,11 @@ msgstr ""
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Rebalance component probability on model failure"
 msgstr ""
+
+msgctxt "Description|"
+msgid "Classical"
+msgstr ""
+
+msgctxt "Description|"
+msgid "Bayesian"
+msgstr ""
