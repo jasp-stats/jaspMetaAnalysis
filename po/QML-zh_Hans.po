@@ -4,6 +4,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
+"X-Language: zh_Hans\n"
 
 msgctxt "Description|"
 msgid "Meta-Analysis"
