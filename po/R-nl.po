@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-08-28 02:38\n"
-"PO-Revision-Date: 2021-09-07 11:34+0000\n"
-"Last-Translator: DanaJohanna <dana__@live.nl>\n"
+"PO-Revision-Date: 2021-09-11 22:43+0000\n"
+"Last-Translator: D.J. Dekker <dj_dekker@hotmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/nl/>\n"
 "Language: nl\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n==0 ? 0 : n==1 ? 0 : 1;\n"
-"X-Generator: Weblate 4.8.1-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr "De prior ondergrens is niet kleiner dan de bovengrens."
@@ -35,7 +35,6 @@ msgstr "Het 95%% betrouwbaarheidsinterval moet kleiner zijn dan de Bovengrens."
 msgid "You cannot set all the prior model probabilties to zero."
 msgstr "U kan niet alle prior modelkansen gelijk aan nul zetten."
 
-#, fuzzy
 msgid ""
 "The model could not be fit. Please check the following: Do you have at least "
 "n=2 studies? If the prior is truncated, is it consistent with the data (when "
@@ -159,25 +158,23 @@ msgstr ""
 "Bayes factor van de gefixeerde effecten H%1$s over de (onbeperkte/beperkte) "
 "aselecte effecten H%1$s."
 
-#, fuzzy
 msgid ""
 "Bayes factor of the ordered effects H%1$s over the fixed effects H%2$s. The "
 "Bayes factor for the ordered effects H%1$s versus the unconstrained (random) "
 "effects H%1$s model is %3$.3f."
 msgstr ""
-"Bayes factor van de geordende effecten H%1$s over de gefixeerde effecten H"
-"%1$s. De Bayes factor voor de geordende effecten H%1$s versus de onbeperkte "
-"(aselecte) effecten H%1$s model is %2$.3f."
+"Bayes factor van de geordende effecten H%1$s over de gefixeerde effecten H%2$"
+"s. De Bayes factor voor de geordende effecten H%1$s versus de onbeperkte "
+"(aselecte) effecten H%1$s model is %3$.3f."
 
-#, fuzzy
 msgid ""
 "Bayes factor of the fixed effects H%2$s over the ordered effects H%1$s. The "
 "Bayes factor for the unconstrained (random) effects H%1$s versus the ordered "
 "effects H%1$s model is %3$.3f."
 msgstr ""
-"Bayes factor van de gefixeerde effecten H%1$s over de geordende effecten H"
-"%1$s. De Bayes factor voor de onbeperkte (aselecte) effecten H%1$s versus de "
-"geordendeeffecten H%1$s model is %2$.3f."
+"Bayes factor van de gefixeerde effecten H%2$s over de geordende effecten H%1$"
+"s. De Bayes factor voor de onbeperkte (aselecte) effecten H%1$s versus het "
+"geordende effecten model H%1$s is %3$.3f."
 
 msgid "Model Probabilities"
 msgstr "Modelkansen"
@@ -198,7 +195,7 @@ msgid "Ordered H%s"
 msgstr "Geordende H%s"
 
 msgid "Effect Sizes per Study"
-msgstr "Effect groottes per studie"
+msgstr "Effectgroottes per studie"
 
 msgid "Observed"
 msgstr "Geobserveerd"
@@ -283,41 +280,35 @@ msgstr "Bayes factoren heterogeniteit"
 msgid "Posterior model probabilities"
 msgstr "Posterior model waarschijnlijkheden"
 
-#, fuzzy
 msgid "Evidence for random effects"
-msgstr "Bewijs voor r H"
+msgstr "Bewijs voor toevallige effecten"
 
-#, fuzzy
 msgid "Evidence for fixed effects"
-msgstr "Bewijs voor f H"
+msgstr "Bewijs voor gefixeerde effecten"
 
-#, fuzzy
 msgid "random"
-msgstr "Aselecte H"
+msgstr "aselect"
 
-#, fuzzy
 msgid "fixed"
-msgstr "Gefixeerde H"
+msgstr "gefixeerd"
 
 msgid "Anecdotal"
-msgstr ""
+msgstr "Anekdotisch"
 
-#, fuzzy
 msgid "Moderate"
-msgstr "Model Schattingen"
+msgstr "Matig"
 
 msgid "Strong"
-msgstr ""
+msgstr "Sterk"
 
 msgid "Very Strong"
-msgstr ""
+msgstr "Zeer Sterk"
 
 msgid "Extreme"
-msgstr ""
+msgstr "Extreem"
 
-#, fuzzy
 msgid "Evidence for %s:"
-msgstr "Bewijs voor r H"
+msgstr "Bewijs voor %s:"
 
 msgid "Plotting failed: The Bayes factors contain infinity."
 msgstr "Grafieken faalde: De Bayes-factoren bevatten oneindig."
@@ -435,7 +426,7 @@ msgid "Test of Residual Heterogeneity"
 msgstr "Toets van Residuen Heterogeniteit"
 
 msgid "The model was estimated using %1$s method."
-msgstr ""
+msgstr "Het model werd geschat met de %1$s methode."
 
 msgid "Log-likelihood"
 msgstr "Log-likelihood"
@@ -649,9 +640,8 @@ msgstr "Mediaan"
 msgid "MCMC error"
 msgstr "MCMC fout"
 
-#, fuzzy
 msgid "MCMC error/SD"
-msgstr "MCMC fout"
+msgstr "MCMC fout/SD"
 
 msgid "ESS"
 msgstr "ESS"
@@ -659,9 +649,8 @@ msgstr "ESS"
 msgid "R-hat"
 msgstr "R-dakje"
 
-#, fuzzy
 msgid "<em>p</em>-values interval"
-msgstr "<em>p</em>-waarden interval %s"
+msgstr "<em>p</em>-waarden interval"
 
 msgid "Effect size (%s)"
 msgstr "Effectgrootte (%s)"
@@ -673,6 +662,8 @@ msgid ""
 "The study labels contain invalid characters. Please, remove them before "
 "running the analysis."
 msgstr ""
+"De studielabels bevatten ongeldige tekens. Verwijder deze alvorens de "
+"analyse uit te voeren."
 
 msgid "Prior Plots"
 msgstr "Prior Grafieken"
@@ -692,13 +683,12 @@ msgstr "Alternatief"
 msgid "Model Preview"
 msgstr "Model Voorvertoning"
 
-#, fuzzy
 msgid ""
 "Please specify a prior distribution for each parameter in the Models "
 "specification section (either null or alternative)."
 msgstr ""
-"Er moet tenminste één prior verdeling gespecificeerd zijn per parameter (in "
-"het null of alternatief model)."
+"Specificeer een priorverdeling voor elke parameter in de modelspecificatie ("
+"in het nul- of alternatieve model)."
 
 msgid "Model Summary"
 msgstr "Model Samenvatting"
@@ -743,9 +733,8 @@ msgstr "Model Gemiddelde Schattingen"
 msgid "Model Averaged Weights (%s)"
 msgstr "Model Gemiddelde Gewichten (%s)"
 
-#, fuzzy
 msgid "Model Averaged PET-PEESE Estimates"
-msgstr "Model Gemiddelde Schattingen"
+msgstr "Model Gemiddelde PET-PEESE-Schattingen"
 
 msgid "Conditional Estimates"
 msgstr "Geconditioneerde Schattingen"
@@ -753,9 +742,8 @@ msgstr "Geconditioneerde Schattingen"
 msgid "Conditional Weights (%s)"
 msgstr "Geconditioneerde Gewichten (%s)"
 
-#, fuzzy
 msgid "Conditional PET-PEESE Estimates"
-msgstr "Geconditioneerde Schattingen"
+msgstr "Conditionele PET-PEESE Schattingen"
 
 msgid "Exclusion"
 msgstr "Uitsluiting"
@@ -800,50 +788,40 @@ msgid "Estimated Weights (%s)"
 msgstr "Geschatte Gewichten (%s)"
 
 msgid "PET-PEESE Estimates"
-msgstr ""
+msgstr "PET-PEESE Schattingen"
 
-#, fuzzy
 msgid "%1$s Forest Plot"
-msgstr "Forestgrafiek"
+msgstr "%1$s Forestgrafiek"
 
-#, fuzzy
 msgid "Posterior Distribution Plots"
-msgstr "Posterior Verdeling"
+msgstr "Posterior Verdeling Grafieken"
 
-#, fuzzy
 msgid "Conditional"
-msgstr "Geconditioneerde Schattingen"
+msgstr "Conditioneel"
 
-#, fuzzy
 msgid "Model Averaged"
-msgstr "Model Gemiddelde Schattingen"
+msgstr "Model Gemiddeld"
 
-#, fuzzy
 msgid "Effect Size Estimate"
-msgstr "Effectgrootte"
+msgstr "Geschatte effectgrootte"
 
-#, fuzzy
 msgid "Heterogeneity Estimate"
-msgstr "Heterogeniteitsschattingen (%s)"
+msgstr "Geschatte heterogeniteit"
 
-#, fuzzy
 msgid "Weight Function Estimate"
-msgstr "Gewichtsfunctie"
+msgstr "Geschatte gewichtsfunctie"
 
 msgid "PET-PEESE Regression Estimate"
-msgstr ""
+msgstr "PET-PEESE Regressie Schatting"
 
-#, fuzzy
 msgid "Posterior Model Estimates Plots"
-msgstr "Posterior schattingen per model"
+msgstr "Grafieken van Posteriormodel Schatting"
 
-#, fuzzy
 msgid "Effect Size Estimates"
-msgstr "Gefixeerde Effecten Schattingen"
+msgstr "Geschatte effectgroottes"
 
-#, fuzzy
 msgid "Heterogeneity Estimates"
-msgstr "Heterogeniteitsschattingen (%s)"
+msgstr "Geschatte heterogeniteit"
 
 msgid "Diagnostics"
 msgstr "Diagnostiek"
@@ -854,14 +832,12 @@ msgstr "Modellen Diagnostiek Overzicht"
 msgid "max(MCMC error)"
 msgstr "max(MCMC fout)"
 
-#, fuzzy
 msgid "max(MCMC error/SD)"
-msgstr "max(MCMC fout)"
+msgstr "max(MCMC fout/SD)"
 
 msgid "min(ESS)"
 msgstr "min(ESS)"
 
-#, fuzzy
 msgid "max(R-hat)"
 msgstr "max(R-dakje)"
 
@@ -872,10 +848,10 @@ msgid "Weights"
 msgstr "Gewichten"
 
 msgid "PET"
-msgstr ""
+msgstr "PET"
 
 msgid "PEESE"
-msgstr ""
+msgstr "PEESE"
 
 msgid "Trace plots"
 msgstr "Spoordiagram"
@@ -908,7 +884,7 @@ msgid "No steps"
 msgstr "Geen stappen"
 
 msgid "95%% Confidence Interval"
-msgstr "95%% Betrouwbaarheidsintervallen"
+msgstr "95%% Betrouwbaarheidsinterval"
 
 msgid "Note:"
 msgstr "Opmerking:"

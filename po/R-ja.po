@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
 "POT-Creation-Date: 2021-08-28 02:38\n"
-"PO-Revision-Date: 2021-09-11 02:37+0000\n"
+"PO-Revision-Date: 2021-09-11 22:43+0000\n"
 "Last-Translator: Koji Kosugi <kosugitti@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/ja/>\n"
@@ -251,19 +251,19 @@ msgid "fixed"
 msgstr ""
 
 msgid "Anecdotal"
-msgstr ""
+msgstr "事例"
 
 msgid "Moderate"
-msgstr ""
+msgstr "モデレート"
 
 msgid "Strong"
-msgstr ""
+msgstr "強い"
 
 msgid "Very Strong"
-msgstr ""
+msgstr "非常に強い"
 
 msgid "Extreme"
-msgstr ""
+msgstr "極端"
 
 msgid "Evidence for %s:"
 msgstr ""
@@ -569,7 +569,7 @@ msgid "Only using first element of"
 msgstr ""
 
 msgid "."
-msgstr ""
+msgstr "."
 
 msgid "is smaller than 2."
 msgstr ""
@@ -578,7 +578,7 @@ msgid "Variance Components"
 msgstr ""
 
 msgid "Plots"
-msgstr ""
+msgstr "プロット"
 
 msgid "The priors for publication bias were set incorrectly."
 msgstr ""
@@ -599,7 +599,7 @@ msgid "ESS"
 msgstr ""
 
 msgid "R-hat"
-msgstr ""
+msgstr "R-hat"
 
 msgid "<em>p</em>-values interval"
 msgstr ""
@@ -619,7 +619,7 @@ msgid "Prior Plots"
 msgstr ""
 
 msgid "Effect"
-msgstr ""
+msgstr "効果"
 
 msgid "Publication Bias"
 msgstr ""
@@ -671,7 +671,7 @@ msgid "P(M|data)"
 msgstr "P(M|データ)"
 
 msgid "Warning:"
-msgstr ""
+msgstr "警告:"
 
 msgid "Model Averaged Estimates"
 msgstr ""
@@ -707,7 +707,7 @@ msgid "BF%s"
 msgstr "BF%s"
 
 msgid "log(BF%s)"
-msgstr ""
+msgstr "log(BF%s)"
 
 msgid "log(MargLik)"
 msgstr ""
@@ -830,10 +830,10 @@ msgid "No steps"
 msgstr ""
 
 msgid "95%% Confidence Interval"
-msgstr ""
+msgstr "95%% 信頼区間"
 
 msgid "Note:"
-msgstr ""
+msgstr "注意:"
 
 msgid "%s is on %s scale."
 msgstr ""
@@ -854,7 +854,7 @@ msgid "Test of Publication Bias"
 msgstr ""
 
 msgid "ChiSq"
-msgstr ""
+msgstr "カイ二乗"
 
 msgid "Assuming homogeneity"
 msgstr ""
@@ -863,7 +863,7 @@ msgid "Assuming heterogeneity"
 msgstr ""
 
 msgid "Fixed Effects Estimates"
-msgstr ""
+msgstr "固定効果の推定値"
 
 msgid "Mean Estimates(%s)"
 msgstr ""
@@ -959,7 +959,7 @@ msgstr ""
 
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
-msgstr[0] ""
+msgstr[0] "%i の観測値が欠損しているため削除されました。"
 
 #~ msgid "Rhat"
 #~ msgstr "Rhat"
