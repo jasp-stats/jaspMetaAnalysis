@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
-"POT-Creation-Date: 2021-06-30 10:11\n"
-"PO-Revision-Date: 2021-06-01 00:38+0000\n"
-"Last-Translator: Paulina Elizabeth Robalino <paulina.e.robalino@gmail.com>\n"
+"POT-Creation-Date: 2021-08-28 02:38\n"
+"PO-Revision-Date: 2021-08-09 00:37+0000\n"
+"Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
 "Language: es\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 4.8-dev\n"
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr ""
@@ -60,7 +60,7 @@ msgid "Lower"
 msgstr "Inferior"
 
 msgid "95%% Credible Interval"
-msgstr "Intervalo de credibilidad del 95%%"
+msgstr "Intervalo de Credibilidad del 95%%"
 
 msgid "Upper"
 msgstr "Superior"
@@ -172,11 +172,15 @@ msgid ""
 "Posterior mean and 95%% credible interval estimates from the random effects "
 "model."
 msgstr ""
+"Estimaciones de la media posterior y del intervalo de credibilidade del 95%% "
+"del modelo de efectos aleatorios."
 
 msgid ""
 "Posterior mean and 95%% credible interval estimates from the constrained "
 "random effects model."
 msgstr ""
+"Estimaciones de la media posterior y del intervalo de credibilidade del 95%% "
+"del modelo de efectos aleatorios restringido."
 
 msgid "Effect Size"
 msgstr ""
@@ -221,7 +225,7 @@ msgid "Observed and estimated study effects"
 msgstr ""
 
 msgid "Cumulative forest plot"
-msgstr ""
+msgstr "Gráfico forestal acumulativo"
 
 msgid "Overall effect size"
 msgstr ""
@@ -367,7 +371,7 @@ msgid "File Drawer Analysis"
 msgstr ""
 
 msgid "Fail-safe N"
-msgstr ""
+msgstr "N a prueba de fallos"
 
 msgid "Target Significance"
 msgstr ""
@@ -415,7 +419,7 @@ msgid "Plot"
 msgstr ""
 
 msgid "Forest plot"
-msgstr ""
+msgstr "Gráfico forestal"
 
 msgid "Funnel Plot"
 msgstr ""
@@ -592,22 +596,16 @@ msgstr "Mediana"
 msgid "MCMC error"
 msgstr ""
 
+msgid "MCMC error/SD"
+msgstr ""
+
 msgid "ESS"
 msgstr ""
 
-msgid "Rhat"
-msgstr "Rhat"
-
-msgid "%1$s is on %2$s scale."
+msgid "R-hat"
 msgstr ""
 
-msgid "<em>p</em>-values interval %s"
-msgstr ""
-
-msgid "The weights (%1$s) correspond to %2$s <em>p</em>-values."
-msgstr ""
-
-msgid "Estimated studies' effects (%1$s) correspond to effect size %2$s."
+msgid "<em>p</em>-values interval"
 msgstr ""
 
 msgid "Effect size (%s)"
@@ -627,7 +625,7 @@ msgstr ""
 msgid "Effect"
 msgstr ""
 
-msgid "Weight Function"
+msgid "Publication Bias"
 msgstr ""
 
 msgid "Null"
@@ -667,13 +665,34 @@ msgstr ""
 msgid "Prior Distribution"
 msgstr ""
 
-msgid "Publication Bias"
-msgstr ""
-
 msgid "The loaded object is not a RoBMA model."
 msgstr ""
 
 msgid "Summary"
+msgstr ""
+
+msgid "P(M|data)"
+msgstr "P(M|datos)"
+
+msgid "Warning:"
+msgstr ""
+
+msgid "Model Averaged Estimates"
+msgstr ""
+
+msgid "Model Averaged Weights (%s)"
+msgstr ""
+
+msgid "Model Averaged PET-PEESE Estimates"
+msgstr ""
+
+msgid "Conditional Estimates"
+msgstr ""
+
+msgid "Conditional Weights (%s)"
+msgstr ""
+
+msgid "Conditional PET-PEESE Estimates"
 msgstr ""
 
 msgid "Exclusion"
@@ -687,58 +706,6 @@ msgstr ""
 
 msgid "BF"
 msgstr "BF"
-
-msgid "P(M|data)"
-msgstr "P(M|datos)"
-
-msgid ""
-"All models failed to converge. Please, consider inspecting the 'MCMC "
-"diagnostics' and changing the 'Advanced options'."
-msgstr ""
-
-msgid "Warning:"
-msgstr ""
-
-msgid "%i models failed to converge."
-msgstr ""
-
-msgid ""
-"Analyzing odds ratios is an experimental feature. The performance of default "
-"prior distributions was not evaluated."
-msgstr ""
-
-msgid "Model Averaged Estimates"
-msgstr ""
-
-msgid "Model Averaged Weights (%s)"
-msgstr ""
-
-msgid "Model Averaged Estimated Studies' Effects (%s)"
-msgstr ""
-
-msgid "Conditional Estimates"
-msgstr ""
-
-msgid ""
-"Estimates are model averaged over models assuming existence of effect / "
-"heterogeneity."
-msgstr ""
-
-msgid "Conditional Weights (%s)"
-msgstr ""
-
-msgid ""
-"Estimated weights (%s) are model averaged over models assuming existence of "
-"publication bias."
-msgstr ""
-
-msgid "Conditional Estimated Studies' Effects (%s)"
-msgstr ""
-
-msgid ""
-"Estimated studies effects (%s) are model averaged over models assuming "
-"existence of effect."
-msgstr ""
 
 msgid "BF%s"
 msgstr "BF%s"
@@ -770,22 +737,43 @@ msgstr ""
 msgid "Estimated Weights (%s)"
 msgstr ""
 
-msgid "Estimated Studies' Effects (%s)"
+msgid "PET-PEESE Estimates"
 msgstr ""
 
-msgid "Weight function"
+#, fuzzy
+msgid "%1$s Forest Plot"
+msgstr "Gráfico forestal"
+
+msgid "Posterior Distribution Plots"
 msgstr ""
 
-msgid "Weights"
+msgid "Conditional"
 msgstr ""
 
-msgid "Effect size vs Heterogeneity"
+msgid "Model Averaged"
 msgstr ""
 
-msgid "%1$s (%2$s)"
+#, fuzzy
+msgid "Effect Size Estimate"
+msgstr "Tamaño del efecto"
+
+msgid "Heterogeneity Estimate"
 msgstr ""
 
-msgid "Individual Models Plots"
+msgid "Weight Function Estimate"
+msgstr ""
+
+msgid "PET-PEESE Regression Estimate"
+msgstr ""
+
+msgid "Posterior Model Estimates Plots"
+msgstr ""
+
+#, fuzzy
+msgid "Effect Size Estimates"
+msgstr "Tamaño del efecto"
+
+msgid "Heterogeneity Estimates"
 msgstr ""
 
 msgid "Diagnostics"
@@ -797,13 +785,25 @@ msgstr ""
 msgid "max(MCMC error)"
 msgstr ""
 
+msgid "max(MCMC error/SD)"
+msgstr ""
+
 msgid "min(ESS)"
 msgstr ""
 
-msgid "max(Rhat)"
+msgid "max(R-hat)"
 msgstr ""
 
 msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
+msgstr ""
+
+msgid "Weights"
+msgstr "Ponderaciones"
+
+msgid "PET"
+msgstr ""
+
+msgid "PEESE"
 msgstr ""
 
 msgid "Trace plots"
@@ -968,3 +968,6 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid "Rhat"
+#~ msgstr "Rhat"

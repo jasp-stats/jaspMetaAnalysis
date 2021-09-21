@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
-"POT-Creation-Date: 2021-06-30 10:11\n"
-"PO-Revision-Date: 2021-03-12 00:02+0000\n"
+"POT-Creation-Date: 2021-08-28 02:38\n"
+"PO-Revision-Date: 2021-09-11 22:43+0000\n"
 "Last-Translator: Koji Kosugi <kosugitti@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/ja/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.5.2-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr ""
@@ -139,10 +139,10 @@ msgid ""
 msgstr ""
 
 msgid "Model Probabilities"
-msgstr ""
+msgstr "モデルの確率"
 
 msgid "Prior"
-msgstr ""
+msgstr "事前分布"
 
 msgid "Posterior"
 msgstr "事後分布"
@@ -160,7 +160,7 @@ msgid "Effect Sizes per Study"
 msgstr ""
 
 msgid "Observed"
-msgstr ""
+msgstr "観測された変数"
 
 msgid "Estimated"
 msgstr ""
@@ -179,13 +179,13 @@ msgid ""
 msgstr ""
 
 msgid "Effect Size"
-msgstr ""
+msgstr "効果量"
 
 msgid "Heterogeneity"
 msgstr ""
 
 msgid "Effect size"
-msgstr ""
+msgstr "効果量"
 
 msgid "Density"
 msgstr "密度"
@@ -227,7 +227,7 @@ msgid "Overall effect size"
 msgstr ""
 
 msgid "Sequential Analysis"
-msgstr ""
+msgstr "逐次解析"
 
 msgid "Bayes factors effect size"
 msgstr ""
@@ -251,19 +251,19 @@ msgid "fixed"
 msgstr ""
 
 msgid "Anecdotal"
-msgstr ""
+msgstr "事例"
 
 msgid "Moderate"
-msgstr ""
+msgstr "モデレート"
 
 msgid "Strong"
-msgstr ""
+msgstr "強い"
 
 msgid "Very Strong"
-msgstr ""
+msgstr "非常に強い"
 
 msgid "Extreme"
-msgstr ""
+msgstr "極端"
 
 msgid "Evidence for %s:"
 msgstr ""
@@ -298,13 +298,13 @@ msgid "<em>p</em>-values are approximate."
 msgstr ""
 
 msgid "Coefficients"
-msgstr ""
+msgstr "係数"
 
 msgid "Estimate"
 msgstr "推定"
 
 msgid "Standard Error"
-msgstr ""
+msgstr "標準誤差"
 
 msgid "z"
 msgstr "z"
@@ -340,13 +340,13 @@ msgid "Influence Measures"
 msgstr ""
 
 msgid "Std. Residual"
-msgstr ""
+msgstr "標準的な残差"
 
 msgid "DFFITS"
 msgstr ""
 
 msgid "Cook's Distance"
-msgstr ""
+msgstr "クックの距離"
 
 msgid "Cov. Ratio"
 msgstr ""
@@ -388,7 +388,7 @@ msgid "Log-likelihood"
 msgstr "対数尤度"
 
 msgid "Deviance"
-msgstr ""
+msgstr "デビアンス"
 
 msgid "AIC"
 msgstr "AIC"
@@ -403,7 +403,7 @@ msgid "I%s (%%)"
 msgstr ""
 
 msgid "H%s"
-msgstr ""
+msgstr "H%s"
 
 msgid "Rank test"
 msgstr ""
@@ -412,7 +412,7 @@ msgid "Cases marked with %s are influential."
 msgstr ""
 
 msgid "Plot"
-msgstr ""
+msgstr "プロット"
 
 msgid "Forest plot"
 msgstr ""
@@ -483,7 +483,7 @@ msgid "Theoretical Quantiles"
 msgstr "理論上の分位数"
 
 msgid "Sample Quantiles"
-msgstr ""
+msgstr "サンプル分位数"
 
 msgid "Standardized Residuals"
 msgstr "標準化された残差"
@@ -569,7 +569,7 @@ msgid "Only using first element of"
 msgstr ""
 
 msgid "."
-msgstr ""
+msgstr "."
 
 msgid "is smaller than 2."
 msgstr ""
@@ -578,13 +578,13 @@ msgid "Variance Components"
 msgstr ""
 
 msgid "Plots"
-msgstr ""
+msgstr "プロット"
 
 msgid "The priors for publication bias were set incorrectly."
 msgstr ""
 
 msgid "%s%% CI"
-msgstr ""
+msgstr "%s%% CI"
 
 msgid "Median"
 msgstr "中央値"
@@ -592,22 +592,16 @@ msgstr "中央値"
 msgid "MCMC error"
 msgstr ""
 
+msgid "MCMC error/SD"
+msgstr ""
+
 msgid "ESS"
 msgstr ""
 
-msgid "Rhat"
-msgstr "Rhat"
+msgid "R-hat"
+msgstr "R-hat"
 
-msgid "%1$s is on %2$s scale."
-msgstr ""
-
-msgid "<em>p</em>-values interval %s"
-msgstr ""
-
-msgid "The weights (%1$s) correspond to %2$s <em>p</em>-values."
-msgstr ""
-
-msgid "Estimated studies' effects (%1$s) correspond to effect size %2$s."
+msgid "<em>p</em>-values interval"
 msgstr ""
 
 msgid "Effect size (%s)"
@@ -625,9 +619,9 @@ msgid "Prior Plots"
 msgstr ""
 
 msgid "Effect"
-msgstr ""
+msgstr "効果"
 
-msgid "Weight Function"
+msgid "Publication Bias"
 msgstr ""
 
 msgid "Null"
@@ -645,7 +639,7 @@ msgid ""
 msgstr ""
 
 msgid "Model Summary"
-msgstr ""
+msgstr "モデルの概要"
 
 msgid "Models"
 msgstr "モデル"
@@ -667,13 +661,34 @@ msgstr ""
 msgid "Prior Distribution"
 msgstr ""
 
-msgid "Publication Bias"
-msgstr ""
-
 msgid "The loaded object is not a RoBMA model."
 msgstr ""
 
 msgid "Summary"
+msgstr ""
+
+msgid "P(M|data)"
+msgstr "P(M|データ)"
+
+msgid "Warning:"
+msgstr "警告:"
+
+msgid "Model Averaged Estimates"
+msgstr ""
+
+msgid "Model Averaged Weights (%s)"
+msgstr ""
+
+msgid "Model Averaged PET-PEESE Estimates"
+msgstr ""
+
+msgid "Conditional Estimates"
+msgstr ""
+
+msgid "Conditional Weights (%s)"
+msgstr ""
+
+msgid "Conditional PET-PEESE Estimates"
 msgstr ""
 
 msgid "Exclusion"
@@ -686,65 +701,13 @@ msgid "log(BF)"
 msgstr ""
 
 msgid "BF"
-msgstr ""
-
-msgid "P(M|data)"
-msgstr "P(M|データ)"
-
-msgid ""
-"All models failed to converge. Please, consider inspecting the 'MCMC "
-"diagnostics' and changing the 'Advanced options'."
-msgstr ""
-
-msgid "Warning:"
-msgstr ""
-
-msgid "%i models failed to converge."
-msgstr ""
-
-msgid ""
-"Analyzing odds ratios is an experimental feature. The performance of default "
-"prior distributions was not evaluated."
-msgstr ""
-
-msgid "Model Averaged Estimates"
-msgstr ""
-
-msgid "Model Averaged Weights (%s)"
-msgstr ""
-
-msgid "Model Averaged Estimated Studies' Effects (%s)"
-msgstr ""
-
-msgid "Conditional Estimates"
-msgstr ""
-
-msgid ""
-"Estimates are model averaged over models assuming existence of effect / "
-"heterogeneity."
-msgstr ""
-
-msgid "Conditional Weights (%s)"
-msgstr ""
-
-msgid ""
-"Estimated weights (%s) are model averaged over models assuming existence of "
-"publication bias."
-msgstr ""
-
-msgid "Conditional Estimated Studies' Effects (%s)"
-msgstr ""
-
-msgid ""
-"Estimated studies effects (%s) are model averaged over models assuming "
-"existence of effect."
-msgstr ""
+msgstr "BF"
 
 msgid "BF%s"
-msgstr ""
+msgstr "BF%s"
 
 msgid "log(BF%s)"
-msgstr ""
+msgstr "log(BF%s)"
 
 msgid "log(MargLik)"
 msgstr ""
@@ -770,22 +733,40 @@ msgstr ""
 msgid "Estimated Weights (%s)"
 msgstr ""
 
-msgid "Estimated Studies' Effects (%s)"
+msgid "PET-PEESE Estimates"
 msgstr ""
 
-msgid "Weight function"
+msgid "%1$s Forest Plot"
 msgstr ""
 
-msgid "Weights"
+msgid "Posterior Distribution Plots"
 msgstr ""
 
-msgid "Effect size vs Heterogeneity"
+msgid "Conditional"
 msgstr ""
 
-msgid "%1$s (%2$s)"
+msgid "Model Averaged"
 msgstr ""
 
-msgid "Individual Models Plots"
+msgid "Effect Size Estimate"
+msgstr ""
+
+msgid "Heterogeneity Estimate"
+msgstr ""
+
+msgid "Weight Function Estimate"
+msgstr ""
+
+msgid "PET-PEESE Regression Estimate"
+msgstr ""
+
+msgid "Posterior Model Estimates Plots"
+msgstr ""
+
+msgid "Effect Size Estimates"
+msgstr ""
+
+msgid "Heterogeneity Estimates"
 msgstr ""
 
 msgid "Diagnostics"
@@ -797,13 +778,25 @@ msgstr ""
 msgid "max(MCMC error)"
 msgstr ""
 
+msgid "max(MCMC error/SD)"
+msgstr ""
+
 msgid "min(ESS)"
 msgstr ""
 
-msgid "max(Rhat)"
+msgid "max(R-hat)"
 msgstr ""
 
 msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
+msgstr ""
+
+msgid "Weights"
+msgstr ""
+
+msgid "PET"
+msgstr ""
+
+msgid "PEESE"
 msgstr ""
 
 msgid "Trace plots"
@@ -837,10 +830,10 @@ msgid "No steps"
 msgstr ""
 
 msgid "95%% Confidence Interval"
-msgstr ""
+msgstr "95%% 信頼区間"
 
 msgid "Note:"
-msgstr ""
+msgstr "注意:"
 
 msgid "%s is on %s scale."
 msgstr ""
@@ -861,7 +854,7 @@ msgid "Test of Publication Bias"
 msgstr ""
 
 msgid "ChiSq"
-msgstr ""
+msgstr "カイ二乗"
 
 msgid "Assuming homogeneity"
 msgstr ""
@@ -870,7 +863,7 @@ msgid "Assuming heterogeneity"
 msgstr ""
 
 msgid "Fixed Effects Estimates"
-msgstr ""
+msgstr "固定効果の推定値"
 
 msgid "Mean Estimates(%s)"
 msgstr ""
@@ -887,7 +880,6 @@ msgstr ""
 msgid "p-value Frequency"
 msgstr ""
 
-#, fuzzy
 msgid "Frequency"
 msgstr "頻度"
 
@@ -967,4 +959,7 @@ msgstr ""
 
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
-msgstr[0] ""
+msgstr[0] "%i の観測値が欠損しているため削除されました。"
+
+#~ msgid "Rhat"
+#~ msgstr "Rhat"

@@ -2,17 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-06-30 10:11\n"
-"PO-Revision-Date: 2020-12-02 21:29+0000\n"
-"Last-Translator: JASP Stats <F.A.M.Meerhoff@uva.nl>\n"
-"Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/jasp-engine/"
-"nl/>\n"
+"POT-Creation-Date: 2021-08-28 02:38\n"
+"PO-Revision-Date: 2021-09-11 22:43+0000\n"
+"Last-Translator: D.J. Dekker <dj_dekker@hotmail.com>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-r/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n==0 ? 0 : n==1 ? 0 : 1;\n"
-"X-Generator: Weblate 4.4-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr "De prior ondergrens is niet kleiner dan de bovengrens."
@@ -35,7 +35,6 @@ msgstr "Het 95%% betrouwbaarheidsinterval moet kleiner zijn dan de Bovengrens."
 msgid "You cannot set all the prior model probabilties to zero."
 msgstr "U kan niet alle prior modelkansen gelijk aan nul zetten."
 
-#, fuzzy
 msgid ""
 "The model could not be fit. Please check the following: Do you have at least "
 "n=2 studies? If the prior is truncated, is it consistent with the data (when "
@@ -159,25 +158,23 @@ msgstr ""
 "Bayes factor van de gefixeerde effecten H%1$s over de (onbeperkte/beperkte) "
 "aselecte effecten H%1$s."
 
-#, fuzzy
 msgid ""
 "Bayes factor of the ordered effects H%1$s over the fixed effects H%2$s. The "
 "Bayes factor for the ordered effects H%1$s versus the unconstrained (random) "
 "effects H%1$s model is %3$.3f."
 msgstr ""
-"Bayes factor van de geordende effecten H%1$s over de gefixeerde effecten H"
-"%1$s. De Bayes factor voor de geordende effecten H%1$s versus de onbeperkte "
-"(aselecte) effecten H%1$s model is %2$.3f."
+"Bayes factor van de geordende effecten H%1$s over de gefixeerde effecten H%2$"
+"s. De Bayes factor voor de geordende effecten H%1$s versus de onbeperkte "
+"(aselecte) effecten H%1$s model is %3$.3f."
 
-#, fuzzy
 msgid ""
 "Bayes factor of the fixed effects H%2$s over the ordered effects H%1$s. The "
 "Bayes factor for the unconstrained (random) effects H%1$s versus the ordered "
 "effects H%1$s model is %3$.3f."
 msgstr ""
-"Bayes factor van de gefixeerde effecten H%1$s over de geordende effecten H"
-"%1$s. De Bayes factor voor de onbeperkte (aselecte) effecten H%1$s versus de "
-"geordendeeffecten H%1$s model is %2$.3f."
+"Bayes factor van de gefixeerde effecten H%2$s over de geordende effecten H%1$"
+"s. De Bayes factor voor de onbeperkte (aselecte) effecten H%1$s versus het "
+"geordende effecten model H%1$s is %3$.3f."
 
 msgid "Model Probabilities"
 msgstr "Modelkansen"
@@ -198,7 +195,7 @@ msgid "Ordered H%s"
 msgstr "Geordende H%s"
 
 msgid "Effect Sizes per Study"
-msgstr "Effect groottes per studie"
+msgstr "Effectgroottes per studie"
 
 msgid "Observed"
 msgstr "Geobserveerd"
@@ -283,41 +280,35 @@ msgstr "Bayes factoren heterogeniteit"
 msgid "Posterior model probabilities"
 msgstr "Posterior model waarschijnlijkheden"
 
-#, fuzzy
 msgid "Evidence for random effects"
-msgstr "Bewijs voor r H"
+msgstr "Bewijs voor toevallige effecten"
 
-#, fuzzy
 msgid "Evidence for fixed effects"
-msgstr "Bewijs voor f H"
+msgstr "Bewijs voor gefixeerde effecten"
 
-#, fuzzy
 msgid "random"
-msgstr "Aselecte H"
+msgstr "aselect"
 
-#, fuzzy
 msgid "fixed"
-msgstr "Gefixeerde H"
+msgstr "gefixeerd"
 
 msgid "Anecdotal"
-msgstr ""
+msgstr "Anekdotisch"
 
-#, fuzzy
 msgid "Moderate"
-msgstr "Model Schattingen"
+msgstr "Matig"
 
 msgid "Strong"
-msgstr ""
+msgstr "Sterk"
 
 msgid "Very Strong"
-msgstr ""
+msgstr "Zeer Sterk"
 
 msgid "Extreme"
-msgstr ""
+msgstr "Extreem"
 
-#, fuzzy
 msgid "Evidence for %s:"
-msgstr "Bewijs voor r H"
+msgstr "Bewijs voor %s:"
 
 msgid "Plotting failed: The Bayes factors contain infinity."
 msgstr "Grafieken faalde: De Bayes-factoren bevatten oneindig."
@@ -435,7 +426,7 @@ msgid "Test of Residual Heterogeneity"
 msgstr "Toets van Residuen Heterogeniteit"
 
 msgid "The model was estimated using %1$s method."
-msgstr ""
+msgstr "Het model werd geschat met de %1$s methode."
 
 msgid "Log-likelihood"
 msgstr "Log-likelihood"
@@ -536,7 +527,7 @@ msgid "Theoretical Quantiles"
 msgstr "Theoretische Kwantielen"
 
 msgid "Sample Quantiles"
-msgstr "Steekproef Kwantielen"
+msgstr "Steekproefkwantielen"
 
 msgid "Standardized Residuals"
 msgstr "Gestandaardiseerde Residuen"
@@ -649,24 +640,17 @@ msgstr "Mediaan"
 msgid "MCMC error"
 msgstr "MCMC fout"
 
+msgid "MCMC error/SD"
+msgstr "MCMC fout/SD"
+
 msgid "ESS"
 msgstr "ESS"
 
-msgid "Rhat"
+msgid "R-hat"
 msgstr "R-dakje"
 
-msgid "%1$s is on %2$s scale."
-msgstr "%1$s is op %2$s schaal."
-
-msgid "<em>p</em>-values interval %s"
-msgstr "<em>p</em>-waarden interval %s"
-
-msgid "The weights (%1$s) correspond to %2$s <em>p</em>-values."
-msgstr "De gewichten (%1$s) corresponderen met de %2$s <em>p</em>-waarden."
-
-msgid "Estimated studies' effects (%1$s) correspond to effect size %2$s."
-msgstr ""
-"Geschatte onderzoekseffecten (%1$s) corresponderen met effectgrootte %2$s."
+msgid "<em>p</em>-values interval"
+msgstr "<em>p</em>-waarden interval"
 
 msgid "Effect size (%s)"
 msgstr "Effectgrootte (%s)"
@@ -678,6 +662,8 @@ msgid ""
 "The study labels contain invalid characters. Please, remove them before "
 "running the analysis."
 msgstr ""
+"De studielabels bevatten ongeldige tekens. Verwijder deze alvorens de "
+"analyse uit te voeren."
 
 msgid "Prior Plots"
 msgstr "Prior Grafieken"
@@ -685,8 +671,8 @@ msgstr "Prior Grafieken"
 msgid "Effect"
 msgstr "Effecten"
 
-msgid "Weight Function"
-msgstr "Gewichtsfunctie"
+msgid "Publication Bias"
+msgstr "Publicatieonzuiverheid"
 
 msgid "Null"
 msgstr "Null"
@@ -697,13 +683,12 @@ msgstr "Alternatief"
 msgid "Model Preview"
 msgstr "Model Voorvertoning"
 
-#, fuzzy
 msgid ""
 "Please specify a prior distribution for each parameter in the Models "
 "specification section (either null or alternative)."
 msgstr ""
-"Er moet tenminste één prior verdeling gespecificeerd zijn per parameter (in "
-"het null of alternatief model)."
+"Specificeer een priorverdeling voor elke parameter in de modelspecificatie ("
+"in het nul- of alternatieve model)."
 
 msgid "Model Summary"
 msgstr "Model Samenvatting"
@@ -730,14 +715,35 @@ msgstr "Model Overzicht"
 msgid "Prior Distribution"
 msgstr "Posterior Verdeling"
 
-msgid "Publication Bias"
-msgstr "Publicatieonzuiverheid"
-
 msgid "The loaded object is not a RoBMA model."
 msgstr "Het ingeladen object is geen RoBMA model."
 
 msgid "Summary"
 msgstr "Samenvatting"
+
+msgid "P(M|data)"
+msgstr "P(M|data)"
+
+msgid "Warning:"
+msgstr "Waarschuwing:"
+
+msgid "Model Averaged Estimates"
+msgstr "Model Gemiddelde Schattingen"
+
+msgid "Model Averaged Weights (%s)"
+msgstr "Model Gemiddelde Gewichten (%s)"
+
+msgid "Model Averaged PET-PEESE Estimates"
+msgstr "Model Gemiddelde PET-PEESE-Schattingen"
+
+msgid "Conditional Estimates"
+msgstr "Geconditioneerde Schattingen"
+
+msgid "Conditional Weights (%s)"
+msgstr "Geconditioneerde Gewichten (%s)"
+
+msgid "Conditional PET-PEESE Estimates"
+msgstr "Conditionele PET-PEESE Schattingen"
 
 msgid "Exclusion"
 msgstr "Uitsluiting"
@@ -750,68 +756,6 @@ msgstr "log(BF)"
 
 msgid "BF"
 msgstr "BF"
-
-msgid "P(M|data)"
-msgstr "P(M|data)"
-
-msgid ""
-"All models failed to converge. Please, consider inspecting the 'MCMC "
-"diagnostics' and changing the 'Advanced options'."
-msgstr ""
-"Geen model is geconvergeerd. Inspecteer 'MCMC diagnostiek' en verander de "
-"'Geavanceerde Opties'."
-
-msgid "Warning:"
-msgstr "Waarschuwing:"
-
-msgid "%i models failed to converge."
-msgstr "%i modellen zijn niet geconvergeerd."
-
-msgid ""
-"Analyzing odds ratios is an experimental feature. The performance of default "
-"prior distributions was not evaluated."
-msgstr ""
-"Het analyseren van odds ratio's is een experimentele functie. De prestaties "
-"van standaard prior verdelingen werden niet geëvalueerd."
-
-msgid "Model Averaged Estimates"
-msgstr "Model Gemiddelde Schattingen"
-
-msgid "Model Averaged Weights (%s)"
-msgstr "Model Gemiddelde Gewichten (%s)"
-
-msgid "Model Averaged Estimated Studies' Effects (%s)"
-msgstr "Model Gemiddelde Geschatte Onderzoekseffecten (%s)"
-
-msgid "Conditional Estimates"
-msgstr "Geconditioneerde Schattingen"
-
-msgid ""
-"Estimates are model averaged over models assuming existence of effect / "
-"heterogeneity."
-msgstr ""
-"De schattingen zijn gemiddeld over die modellen waar het effect bestaat, of "
-"waar heterogeniteit aanwezig is."
-
-msgid "Conditional Weights (%s)"
-msgstr "Geconditioneerde Gewichten (%s)"
-
-msgid ""
-"Estimated weights (%s) are model averaged over models assuming existence of "
-"publication bias."
-msgstr ""
-"Geschatten gewichten (%s) zijn gemiddeld over die modellen waarin "
-"publicatieonzuiverheid aanwezig is."
-
-msgid "Conditional Estimated Studies' Effects (%s)"
-msgstr "Geconditioneerde Geschatte Onderzoekseffecten (%s)"
-
-msgid ""
-"Estimated studies effects (%s) are model averaged over models assuming "
-"existence of effect."
-msgstr ""
-"Geschatte onderzoekseffecten (%s) zijn gemiddeld over die modellen waarin "
-"het effect bestaat."
 
 msgid "BF%s"
 msgstr "BF%s"
@@ -843,23 +787,41 @@ msgstr "Model Schattingen"
 msgid "Estimated Weights (%s)"
 msgstr "Geschatte Gewichten (%s)"
 
-msgid "Estimated Studies' Effects (%s)"
-msgstr "Geschatte Onderzoekseffecten (%s)"
+msgid "PET-PEESE Estimates"
+msgstr "PET-PEESE Schattingen"
 
-msgid "Weight function"
-msgstr "Gewichtsfunctie"
+msgid "%1$s Forest Plot"
+msgstr "%1$s Forestgrafiek"
 
-msgid "Weights"
-msgstr "Gewichten"
+msgid "Posterior Distribution Plots"
+msgstr "Posterior Verdeling Grafieken"
 
-msgid "Effect size vs Heterogeneity"
-msgstr "Effectgrootte vs Heterogeniteit"
+msgid "Conditional"
+msgstr "Conditioneel"
 
-msgid "%1$s (%2$s)"
-msgstr "%1$s (%2$s)"
+msgid "Model Averaged"
+msgstr "Model Gemiddeld"
 
-msgid "Individual Models Plots"
-msgstr "Individuele Modellengrafiek"
+msgid "Effect Size Estimate"
+msgstr "Geschatte effectgrootte"
+
+msgid "Heterogeneity Estimate"
+msgstr "Geschatte heterogeniteit"
+
+msgid "Weight Function Estimate"
+msgstr "Geschatte gewichtsfunctie"
+
+msgid "PET-PEESE Regression Estimate"
+msgstr "PET-PEESE Regressie Schatting"
+
+msgid "Posterior Model Estimates Plots"
+msgstr "Grafieken van Posteriormodel Schatting"
+
+msgid "Effect Size Estimates"
+msgstr "Geschatte effectgroottes"
+
+msgid "Heterogeneity Estimates"
+msgstr "Geschatte heterogeniteit"
 
 msgid "Diagnostics"
 msgstr "Diagnostiek"
@@ -870,14 +832,26 @@ msgstr "Modellen Diagnostiek Overzicht"
 msgid "max(MCMC error)"
 msgstr "max(MCMC fout)"
 
+msgid "max(MCMC error/SD)"
+msgstr "max(MCMC fout/SD)"
+
 msgid "min(ESS)"
 msgstr "min(ESS)"
 
-msgid "max(Rhat)"
+msgid "max(R-hat)"
 msgstr "max(R-dakje)"
 
 msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
 msgstr "Model %1$i bestaat niet. Selecteer een model tussen 1 en %2$i."
+
+msgid "Weights"
+msgstr "Gewichten"
+
+msgid "PET"
+msgstr "PET"
+
+msgid "PEESE"
+msgstr "PEESE"
 
 msgid "Trace plots"
 msgstr "Spoordiagram"
@@ -910,7 +884,7 @@ msgid "No steps"
 msgstr "Geen stappen"
 
 msgid "95%% Confidence Interval"
-msgstr "95%% Betrouwbaarheidsintervallen"
+msgstr "95%% Betrouwbaarheidsinterval"
 
 msgid "Note:"
 msgstr "Opmerking:"
@@ -1063,3 +1037,75 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "%i observatie is verwijderd, omdat de waarde ontbreekt."
 msgstr[1] "%i observaties zijn verwijderd omdat de waarden ontbreken."
+
+#~ msgid "Rhat"
+#~ msgstr "R-dakje"
+
+#~ msgid "%1$s is on %2$s scale."
+#~ msgstr "%1$s is op %2$s schaal."
+
+#~ msgid "The weights (%1$s) correspond to %2$s <em>p</em>-values."
+#~ msgstr "De gewichten (%1$s) corresponderen met de %2$s <em>p</em>-waarden."
+
+#~ msgid "Estimated studies' effects (%1$s) correspond to effect size %2$s."
+#~ msgstr ""
+#~ "Geschatte onderzoekseffecten (%1$s) corresponderen met effectgrootte %2$s."
+
+#~ msgid ""
+#~ "All models failed to converge. Please, consider inspecting the 'MCMC "
+#~ "diagnostics' and changing the 'Advanced options'."
+#~ msgstr ""
+#~ "Geen model is geconvergeerd. Inspecteer 'MCMC diagnostiek' en verander de "
+#~ "'Geavanceerde Opties'."
+
+#~ msgid "%i models failed to converge."
+#~ msgstr "%i modellen zijn niet geconvergeerd."
+
+#~ msgid ""
+#~ "Analyzing odds ratios is an experimental feature. The performance of "
+#~ "default prior distributions was not evaluated."
+#~ msgstr ""
+#~ "Het analyseren van odds ratio's is een experimentele functie. De "
+#~ "prestaties van standaard prior verdelingen werden niet geëvalueerd."
+
+#~ msgid "Model Averaged Estimated Studies' Effects (%s)"
+#~ msgstr "Model Gemiddelde Geschatte Onderzoekseffecten (%s)"
+
+#~ msgid ""
+#~ "Estimates are model averaged over models assuming existence of effect / "
+#~ "heterogeneity."
+#~ msgstr ""
+#~ "De schattingen zijn gemiddeld over die modellen waar het effect bestaat, "
+#~ "of waar heterogeniteit aanwezig is."
+
+#~ msgid ""
+#~ "Estimated weights (%s) are model averaged over models assuming existence "
+#~ "of publication bias."
+#~ msgstr ""
+#~ "Geschatten gewichten (%s) zijn gemiddeld over die modellen waarin "
+#~ "publicatieonzuiverheid aanwezig is."
+
+#~ msgid "Conditional Estimated Studies' Effects (%s)"
+#~ msgstr "Geconditioneerde Geschatte Onderzoekseffecten (%s)"
+
+#~ msgid ""
+#~ "Estimated studies effects (%s) are model averaged over models assuming "
+#~ "existence of effect."
+#~ msgstr ""
+#~ "Geschatte onderzoekseffecten (%s) zijn gemiddeld over die modellen waarin "
+#~ "het effect bestaat."
+
+#~ msgid "Estimated Studies' Effects (%s)"
+#~ msgstr "Geschatte Onderzoekseffecten (%s)"
+
+#~ msgid "Weight function"
+#~ msgstr "Gewichtsfunctie"
+
+#~ msgid "Effect size vs Heterogeneity"
+#~ msgstr "Effectgrootte vs Heterogeniteit"
+
+#~ msgid "%1$s (%2$s)"
+#~ msgstr "%1$s (%2$s)"
+
+#~ msgid "Individual Models Plots"
+#~ msgstr "Individuele Modellengrafiek"

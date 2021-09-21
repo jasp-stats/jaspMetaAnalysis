@@ -1,17 +1,19 @@
 Robust Bayesian Meta-Analysis
 ===
 
-The robust Bayesian meta-analysis allows the user to specify a wide range of meta-analytic models, combine their estimates using model averaging and quantify evidence for different hypotheses using Bayes factors. The analysis allows the user to specify various prior distributions for effect sizes and heterogeneity and incorporate models correcting for publication bias by estimating a weight function on p-values. 
+The robust Bayesian meta-analysis allows the user to specify a wide range of meta-analytic models, combine their estimates using model averaging, and quantify evidence for different hypotheses using Bayes factors. The analysis allows the user to specify various prior distributions for effect sizes and heterogeneity and incorporate models correcting for publication bias with selection models and PET-PEESE. 
 
-Please note that we updated the model specification of RoBMA models with the version of JASP 0.15 (the analysis is now build on RoBMA 1.2.0 package). See the Appendix of our RoBMA preprint for more details (https://doi.org/10.31234/osf.io/u4cns).
+Please note that we updated the model specification of RoBMA models with the version of JASP 0.15 (the analysis is now built on RoBMA 2.0 package). See our new RoBMA preprint for more details (https://doi.org/10.31234/osf.io/kvsp7).
 
 ### Input
 ---
+The input supplied as standardized effect sizes are internally transformed to Fisher's z statistics (as a variance stabilizing transformation). The results are shown the same scale that is used to specify the prior distributions (Cohen's d by default, can be changed only for the "Custom" `model type`.)
+
 #### Input type
-- Cohen's d / t-statistics & N / SE: Specifying input using either Cohen's d effect sizes and the sample size or standard errors, or reported t-statistics and sample sizes.
-- Correlations & N: Specifying input using correlations and the sample size. Note that the effect size is internally transformed to Cohen's d scale for model estimation (see Advanced tab for additional options). The prior distributions are specified on the transformed scale, with the provided visualization transforming the priors back to the correlation scale. The output for the mean parameter is transformed back for easier interpretability, however, the heterogeneity parameter is always summarized on the transformed scale.
-- Odds ratios & CI: Specifying input using odds rations and their confidence intervals. Note that the effect size is internally transformed to log odds ratios for model estimation (see Advanced tab for additional options). The prior distributions are specified on the transformed scale, with the provided visualization transforming the priors back to the correlation scale. Analyzing odds ratios is an experimental feature and the default prior distributions were not verified to work with them. The output for the mean parameter is transformed back for easier interpretability, however, the heterogeneity parameter is always summarized on the transformed scale.
-- Effect sizes & SE: Specifying input using any other types of effect sizes and standard errors. Note that effect sizes supplied in this way will result in approximating the corresponding test statistics distribution using a normal distribution.
+- Cohen's d: Specifying input using either Cohen's d effect sizes and the sample size or standard errors.
+- Correlations: Specifying input using correlations and the sample size or standard errors. 
+- Log odds ratios: Specifying input using log odds ratios and the standard errors.
+- General effect sizes & SE: Specifying input using any other, unstandardized, types of effect sizes and the corresponding standard errors. 
 - Fitted model: Specify a path to already fitted RoBMA model using R. The model must be saved as an RDS file.
 
 #### Data
@@ -23,22 +25,29 @@ Please note that we updated the model specification of RoBMA models with the ver
 - N (group 1) / N (group 2): Sample sizes of each group of the studies. Only possible if the studies effect sizes are measured by Cohen's d and correspond to two-sample t-tests. Overall sample sizes or Effect Size Standard Errors can be provided instead.
 - Study Labels: Optional argument that will add study labels to the output.
 
-#### Input test type
-Only for 'Cohen's d / t-statistics & (N / SE)' input type. 
-
-
-### Models
----
-The individual models that form up the robust Bayesian meta-analysis are defined by creating combinations of all specified priors for the effect size / heterogeneity / publication bias. The individual models' prior odds are obtained by multiplying the prior odds of prior distributions for each of the parameter that forms the model. Note that the prior distributions for the mean parameter are transformed into the correlation scale using a selected transformation if correlations are supplied as input.
-
 #### Expected effect size direction
-The direction of the expected effect size (the publication bias adjusted models with one-sided selection processes are not symmetrical around zero due to the estimation of weights).
+The direction of the expected effect size (the publication bias adjusted models with one-sided weight functions and PET-PEESE publication bias adjustments are not symmetrical around zero).
+
+#### Model type
+Either one of the three pre-specified model types corresponding to the models introduced in Bartoš et al. (2021) and Maier, Bartoš & Wagenmakers (in press), or a custom ensemble.
+- RoBMA-PSMA corresponds to the 36 model ensemble that combines selection models and PET-PEESE adjustment for publication bias adjustment component (from Bartoš et al., 2021)
+- RoBMA-PP corresponds to the 12 model ensemble that uses PET-PEESE adjustment for publication bias adjustment component (from Bartoš et al., 2021)
+- RoBMA-old corresponds to the 12 model ensemble that uses two two-sided weight functions for publication bias adjustment component (from Maier, Bartoš & Wagenmakers, in press)
+- Custom allows specifying a custom model ensemble under the `Models` section
+
+#### Prior scale
+Scale that will be used for specifying the prior distributions. Defaults to Cohen's d and can be changed only with a "Custom" `Model type` .
 
 #### Plot priors
 Displays the specified prior density function(s).
 
+
+### Models
+---
+The individual models that form up the robust Bayesian meta-analysis are defined by creating combinations of all specified priors for the effect size/heterogeneity/publication bias. The individual models' prior odds are obtained by multiplying the prior odds of prior distributions for each of the parameter that forms the model.
+
 #### Effect / Heterogeneity
-Set a prior distribution(s) for the Effect size or heterogeneity.
+Sets a prior distribution(s) for the effect size or heterogeneity.
 - Distribution: Name and parametrization of the distribution.
   - Normal(μ,σ): Normal distribution parametrized by mean (μ) and standard deviation (σ).
   - Student's t(μ,σ,v): Generalized Student's t distribution parametrized by location (μ), scale (σ), and degrees of freedom (v).
@@ -46,22 +55,43 @@ Set a prior distribution(s) for the Effect size or heterogeneity.
   - Gamma(α,β): Gamma distribution parametrized by shape (α) and rate (β).
   - Gamma(k,θ): Gamma distribution parametrized by shape (k) and scale (θ).
   - Inverse-Gamma(α,β): Inverse-Gamma distribution parametrized by shape (α) and scale (β).
+  - Log-Normal(μ,σ): Lognormal distribution parametrized by mean (μ) and standard deviation (σ) on the log scale.
+  - Beta(α,β): Beta distribution parametrized by alpha (α) and beta (β)
   - Spike(x₀): Point density parametrized by location (x₀).
   - Uniform(a,b): Uniform distribution parametrized by lower bound (a) and upper bound (b).
+  - None: Absence of the parameter, defaults to a Spike(0).
 - Parameters: Values for parameters of the selected distribution.
 - Truncation: Lower and upper truncation of the distribution.
-- Prior Odds: Prior odds of the distribution.
+- Prior Weights: Prior weight of the distribution.
 
-#### Publication bias
-Set a prior distribution(s) for the parameters of the weight function modeling the publication bias. α α₁ α₂ p-values
+#### Publication bias: selection models
+Sets a prior distribution(s) for the parameters of the weight function specifying the publication bias adjustment component.
 - Distribution: Name and parametrization of the distribution.
-    - Two-sided: Prior distribution for a two-sided weight function characterized by vector of cut points on p-values (p-values) and vector alpha (α). The vector alpha (α) determines an alpha parameter of Dirichlet distribution which cumulative sum is used for the weights omega. The first element of α corresponds to the weight for the highest p-value interval.
-  - One-sided (mon.): Prior distribution for a monotonic one-sided weight function characterized by vector of cut points on p-values (p-values) and vector alpha (α). The vector alpha (α) determines the alpha parameter of Dirichlet distribution which cumulative sum is used for the weights omega. The first element of α corresponds to the weight for the highest p-value interval.
-  - One-sided: Prior distribution for a non-monotonic one-sided weight function characterized by vector of cut points on p-values (p-values) and two vectors alpha (α₁ α₂). The vectors alpha (α₁ α₂) determine the alpha parameters of Dirichlet distribution which cumulative sum is used for the weights omega - α₁ determines the omegas for p-value intervals starting at = .50 and decreasing and α₂ determines the omegas for p-value intervals = .50 and increasing.
-  - None: Prior distribution assuming complete lack of publication bias - the probability of publication is the same for all p-values.
+  - Two-sided: Prior distribution for a two-sided weight function characterized by a vector of cut points on p-values (p-values) and vector alpha (α). The vector alpha (α) determines the alpha parameter of Dirichlet distribution which cumulative sum is used for the weights omega. The first element of α corresponds to the weight for the highest p-value interval.
+  - One-sided: Prior distribution for a one-sided weight function characterized by a vector of cut points on p-values (p-values) and vector alpha (α). The vector alpha (α) determines the alpha parameter of Dirichlet distribution which cumulative sum is used for the weights omega. The first element of α corresponds to the weight for the highest p-value interval.
+  - Two-sided-fixed: Prior distribution for a two-sided weight function characterized by a vector of cut points on p-values (p-values) and vector of weights omega (ω).
+  - One-sided-fixed: Prior distribution for a one-sided weight function characterized by a vector of cut points on p-values (p-values) and vector of weights omega (ω).
+  - None: Prior distribution assuming lack of publication bias.
+- Parameters: Values for parameters of the selected distribution.
+- Prior Weights: Prior weight of the distribution.
+
+#### Publication bias: PET / PEESE
+Sets a prior distribution(s) for the parameters of the PET / PEESE regression coefficient specifying the publication bias adjustment component.
+- Distribution: Name and parametrization of the distribution.
+  - Normal(μ,σ): Normal distribution parametrized by mean (μ) and standard deviation (σ).
+  - Student's t(μ,σ,v): Generalized Student's t distribution parametrized by location (μ), scale (σ), and degrees of freedom (v).
+  - Cauchy(x₀,θ): Cauchy distribution parametrized by location (μ) and scale (σ).
+  - Gamma(α,β): Gamma distribution parametrized by shape (α) and rate (β).
+  - Gamma(k,θ): Gamma distribution parametrized by shape (k) and scale (θ).
+  - Inverse-Gamma(α,β): Inverse-Gamma distribution parametrized by shape (α) and scale (β).
+  - Log-Normal(μ,σ): Lognormal distribution parametrized by mean (μ) and standard deviation (σ) on the log scale.
+  - Beta(α,β): Beta distribution parametrized by alpha (α) and beta (β)
+  - Spike(x₀): Point density parametrized by location (x₀).
+  - Uniform(a,b): Uniform distribution parametrized by lower bound (a) and upper bound (b).
+  - None: Prior distribution assuming lack of publication bias.
 - Parameters: Values for parameters of the selected distribution.
 - Truncation: Lower and upper truncation of the distribution.
-- Prior Odds: Prior odds of the distribution.
+- Prior Weights: Prior weight of the distribution.
 
 #### Set null priors
 Allows specifying prior distributions for the null models.
@@ -73,18 +103,18 @@ Allows specifying prior distributions for the null models.
 Displays estimates assuming that the alternative models are true.
 
 #### Models overview
-Display overview of the specified models.
+Displays overview of the specified models.
 - BF: Show different types of Bayes factors
   - Inclusion: Change from prior to posterior odds for each individual model.
-  - vs Best: Bayes factor comparing to the best fitting model.
-  - vs Previous: Bayes factor comparing to a better fitting model.
+  - vs. Best: Bayes factor comparing to the best fitting model.
+  - vs. Previous: Bayes factor comparing to a better fitting model.
 - Order: Order the overview of displayed models.
-  - Priors: Based on the priors distribution specification.
-  - Marginal likelihood: Based on the marginal likelihood of each model.
+  - Model number: Based on the order of each model.
+  - Bayes factor: Based on the inclusion Bayes factor of each model.
   - Posterior prob.: Based on the posterior probability of each model.
 
 #### Individual models
-Display a detailed overview of each specified model.
+Displays a detailed overview of each specified model.
 - Single model: Display the overview for only one of the specified models.
 
 #### Bayes Factor
@@ -95,69 +125,83 @@ Display a detailed overview of each specified model.
 #### CI width
 Width of the credible intervals.
 
-#### Estimated studies' effects
-Display the estimated effects of individual studies. These correspond to the 'random effect estimates' for models assuming a distribution over the heterogeneity parameter tau. They are substituted with the overall mean parameter mu for models assuming the heterogeneity parameter to be 0 when model averaging over all models.
+#### Output scale
+Effect size scale for summarizing the numerical estimates. Only available for standardized effect sizes.
+
+#### Shorten prior names
+Abbriviates names of the prior distributions.
 
 
 ### Plots
 ---
-#### Pooled estimates
-- Forest plot
-  - Observed: Displays a forest plot with the observed effect sizes and the estimated overall effect size(s).
-  - Estimated: Displays a forest plot with the estimated effect sizes and the estimated overall effect size(s).
-  - Both: Displays a forest plot with both the observed and estimated effect sizes and the estimated overall effect size(s).
-  - Order
-    - Ascending: Displays the effect sizes in the forest plot in ascending order.
-    - Descending: Displays the effect sizes in the forest plot in descending order.
-    - Row order: Displays the effect sizes in the forest plot in the same order as in the provided data.
-- Effect: Display a plot with the estimated pooled effect size.
-- Heterogeneity: Display a plot with the estimated heterogeneity parameter tau.
-- Weights: Display a plot with the estimated weights corresponding to the p-values cut-offs.
-  - Weight function: Combine the weights into a weight function and display that instead.
-    - Rescale x-axis: Make the differences between the individual ticks on x-axis equal for easier interpretability. 
+
+#### Forest plot
+Displays a forest plot with the observed effect sizes and the estimated overall effect size(s).
+- Order
+  - Ascending: Displays the effect sizes in the forest plot in ascending order.
+  - Descending: Displays the effect sizes in the forest plot in descending order.
+  - Row order: Displays the effect sizes in the forest plot in the same order as in the provided data.
 
 #### Type
-- Model averaged: Pooled estimates will contain model averaged estimates across all models.
-- Conditional: Pooled estimates will contain model averaged estimates across models assuming that the alternative hypothesis is true models.
+  - Model-averaged: Shows the model-averaged effect size estimate based on all specified models.
+  - Conditional: Shows the conditional effect size estimate based on models assuming the presence of the effect.
+
+---
+#### Pooled estimates
+- Effect: Displays a plot with the estimated pooled effect size.
+- Heterogeneity: Displays a plot with the estimated heterogeneity parameter tau.
+- Weights function: Displays the estimated weight function (the grey area corresponds to a 95% credible interval).
+  - Rescale x-axis: Makes the differences between the individual ticks on x-axis equal for easier interpretability. 
+- PET-PEESE: Displays the estimated PET-PEESE regression line.
+
+#### Type
+  - Model-averaged: Shows the model-averaged effect size/heterogeneity/weights function/PET-PEESE estimate based on all specified models.
+  - Conditional: Shows the conditional effect size/heterogeneity/weights function/PET-PEESE estimate based on models assuming presence of the effect/heterogeneity/weights functions/PET-PEESE.
 
 #### Show priors
 Displays prior distribution density on top of the pooled estimates figures.
 
+---
 #### Individual models
-Display estimates from each individual model included in the ensemble.
-- Effect: Display a plot with the estimated pooled effect size for each individual model.
-- Heterogeneity: Display a plot with the estimated heterogeneity parameter tau for each individual model.
-- Weights: Display a plot with the estimated weights corresponding to the p-values cut-offs for each individual model.
+Displays estimates from each individual model included in the ensemble.
+- Effect: Display the estimated pooled effect size for each individual model.
+- Heterogeneity: Display the estimated heterogeneity parameter tau for each individual model.
 
-#### Omit null models
-The individual models will only display that assume non-zero Effect / Heterogeneity / Publication bias. The displayed posterior probabilities and the overall estimate corresponds to the Conditional model (assuming that the alternative hypothesis is true).
+#### Type
+  - Model-averaged: Shows estimates from all models and the model-averaged effect size/heterogeneity estimate based on all specified models.
+  - Conditional: Shows estimates from models assuming presence of the effect/heterogeneity and the conditional effect size/heterogeneity estimate based on models assuming presence of the effect/heterogeneity/weights functions/PET-PEESE.
 
 #### Order
-Order the displayed individual models according to:
-- Model number
-- Posterior probability
-- Marginal likelihood
-in either Ascending or Descending manner.
+Order the displayed individual model estimates the following order:
+- Ascending
+- Descending
+
+#### Order by
+Orders the displayed individual model estimates according to:
+- Model number: Based on the order of each model.
+- Estimate: Based on the estimated parameter of each model
+- Bayes factor: Based on the inclusion Bayes factor of each model.
+- Posterior prob.: Based on the posterior probability of each model.
 
 
 ### MCMC Diagnostics
 ---
 #### Overview
-Display overview of the individual model diagnostics. The table summarizes the minimal Estimated Sample Size and maximum R-hat per model. More details can be accessed by displaying individual model summary in the Inference tab.
-- Include theta: Whether the random effect estimates theta should be included in the diagnostics overview.
+Displays overview of the individual model diagnostics. The table summarizes the maximum MCMC error, the maximum of MCMC error divided by SD, the minimal estimated sample size, and maximum R-hat per model. More detailed, per-parameter, fit diagnostics can be accessed by displaying individual model summary in the `Inference` tab.
 
 #### Plot
-Display chains summaries according to the selected type for each of the models for the selected parameters:
+Displays chains summaries according to the selected type for each of the models for the selected parameters:
 - Effect: The pooled effect size estimate.
 - Heterogeneity: The estimated heterogeneity parameter tau.
 - Weights: The estimated weights corresponding to the p-values cut-offs.
-- Estimated studies' effects: The estimated effects of individual studies. These correspond to the 'random effect estimates' for models assuming a distribution over the heterogeneity parameter tau.
+- PET: The estimated PET regression coefficients.
+- PEESE: The estimated PEESE regression coefficients.
 
 #### Type
 Type of the chains summaries to be displayed.
-- Trace: Displays the overlaying traces of each chain for the selected parameters. Different chains are visualized with a different color.
+- Trace: Displays the overlaying traces of each chain for the selected parameters. Different chains are visualized with a different colors.
 - Autocorrelation: Displays the average autocorrelations of the chains for the selected parameters.
-- Posterior sample densities: Displays the overlaying densities of samples from each chain for the selected parameters. Different chains are visualized with a different color.
+- Posterior sample densities: Displays the overlaying densities of samples from each chain for the selected parameters. Different chains are visualized with a different colors.
 
 #### Single model
 Display chains summaries for only a specific model.
@@ -165,10 +209,8 @@ Display chains summaries for only a specific model.
 
 ### Advanced
 ---
-#### Transform effect sizes
-- Cohen's d: Supplied correlations / odds ratios will be transformed and modeled on Cohen's d scale. The default transformation for correlations.
-- log(OR): Supplied odds ratios will be transformed and modeled on log scale. The default transformation for odds ratios.
-- Fisher's z: Supplied correlations will be transformed and modeled on Fisher's z scale. We advise for using Cohen's d transformation since it preserves the proper distribution of test statistics important for the publication bias adjusted models.
+#### Estimation scale
+Effect size scale to be used when estimating the models. We advise using Fisher's z transformation since it acts as a variance stabilizing transformation (BF for the presence of publication bias might be biased under the PET-PEESE adjustment for publication bias otherwise). Only available for the standardized effect sizes.
 
 #### Estimation settings (MCMC)
 - Adaptation: Sets the number of iterations to be used for adapting the MCMC chains.
@@ -177,32 +219,20 @@ Display chains summaries for only a specific model.
 - Chains: Sets the number of chains for the MCMC estimation.
 - Thin: Sets the thinning of the MCMC chains.
 
-#### Bridge sampling iterations
-A number of iterations for computing the marginal likelihood.
-
 #### Autofit
-When turned on, the MCMC estimation for each model continues until the maximum fitting time was reached or the target MCMC margin of error for parameters was obtained.
+The MCMC estimation for each model continues until the maximum fitting time or MCMC diagnostics criterion was reached.
+- R-hat: The target R-hat of parameter estimates for terminating the automatic estimation procedure.
+- ESS: The target estimated sample size of parameter estimates for terminating the automatic estimation procedure.
+- MCMC error: The target MCMC error of parameter estimates for terminating the automatic estimation procedure (note that PEESE regression coefficient has usually much larger scale than the rest of the ensemble and using this option might significantly prolong the fitting time).
+- MCMC error / SD: The target MCMC error standardized by the standard deviation of the posterior distribution of parameter estimates for terminating the automatic estimation procedure.
 - Maximum fitting time: The maximum fitting time per model.
-- Target margin of error: The target MCMC margin of error of parameter estimates for terminating the automatic estimation procedure.
-- Target R-hat: The target R-hat of parameter estimates for terminating the automatic estimation procedure.
+- Extend samples: The number of samples to be added on each autofit iteration.
 
-#### Exclude models
-Allows excluding individual models from the overall ensemble based on MCMC diagnostics.
-- error %: All models whose parameters have MCMC error higher than the specified value will be excluded.
-- R-hat: All models whose parameters have R-hat error higher than the specified value will be excluded.
-- Estimated sample site %: All models whose parameters have smaller estimated sample sizes lower than the specified value will be excluded.
-- Include theta: Whether random effect estimates theta should be included in the considered parameters.
+#### Remove failed models
+Removes models that do not satisfy the convergence checks (specified under `Autofit`)
 
-#### Redistribute prior probability
-Allows respecifying how should be the prior probabilities of individual models changed in case that some of them fail to converge.
-- Conditional models: The prior model probability of a non-converged model will be transferred to a model with the same the type of priors if possible. Meaning that if there are two models with non-null prior on effect size, heterogeneity, and publication bias and one of them fails to converge, the other one will gain the prior probability of the non-converged one. If there is no such model, the prior probability will be redistributed equally across all models.
-- Model space: If there is a non-converged model, the prior probability will be redistributed equally across all models.
-
-#### Control
-Allows modifying the fitting and refitting behavior of the analysis when 'Run Analysis' is clicked.
-- Clever refitting: The whole ensemble is refitted only if prior distributions change, otherwise, only the non-converged models are refitted.
-- Always refit: Always refits the whole ensemble.
-- Never refit: Never refits the ensemble or the individual models.
+#### Rebalance component probability on model failure
+Balances the prior model probability across models with the same combinations of compontents assuming the presence/absence of the effect/heterogeneity/publication bias in the case of non-convergence (if possible).
 
 #### Repeatability
 - Set seed: Gives the option to set a seed for your analysis. Setting a seed will exclude random processes influencing an analysis.
@@ -210,9 +240,11 @@ Allows modifying the fitting and refitting behavior of the analysis when 'Run An
 
 ### References
 ---
-Maier, M., Bartoš, F., & Wagenmakers, E. J. (2020). Robust Bayesian meta-analysis: Addressing publication bias with model-averaging. https://doi.org/10.31234/osf.io/u4cns
+Maier, M., Bartoš, F., & Wagenmakers, E. J. (in press). Robust Bayesian meta-analysis: Addressing publication bias with model-averaging. Psychological Methods. https://doi.org/10.31234/osf.io/u4cns
+Bartoš, F., Maier, M., Wagenmakers, E. J., Doucouliagos, H., & Stanley, T. D. (2021). No need to choose: Robust Bayesian meta-analysis with competing publication bias adjustment methods. https://doi.org/10.31234/osf.io/kvsp7
 Bartoš, F., Maier, M., & Wagenmakers, E. J. (2020). Adjusting for publication bias in JASP — selection models and robust Bayesian meta-analysis. https://doi.org/10.31234/osf.io/75bqn
 
 ### R-packages
 ---
 - RoBMA
+- BayesTools
