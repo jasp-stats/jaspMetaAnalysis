@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
 "POT-Creation-Date: 2021-08-28 02:38\n"
-"PO-Revision-Date: 2021-09-11 22:43+0000\n"
-"Last-Translator: Koji Kosugi <kosugitti@gmail.com>\n"
+"PO-Revision-Date: 2021-09-22 07:14+0000\n"
+"Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/ja/>\n"
 "Language: ja\n"
@@ -14,25 +14,25 @@ msgstr ""
 "X-Generator: Weblate 4.9-dev\n"
 
 msgid "The prior lower bound is not smaller than the upper bound."
-msgstr ""
+msgstr "事前分布の下限値が上限値よりも小さくない."
 
 msgid "Your prior contains negative values."
-msgstr ""
+msgstr "事前分布に負の値が含まれている."
 
 msgid "Your prior contains positive values."
-msgstr ""
+msgstr "事前分布に正の値が含まれている."
 
 msgid "No positive numbers found in %s"
-msgstr ""
+msgstr "%sに正の数が見つかりませんでした"
 
 msgid "No negative numbers found in %s"
-msgstr ""
+msgstr "%sに負の数が見つかりませんでした"
 
 msgid "The 95%% CI Lower Bound must be smaller than the Upper Bound."
-msgstr ""
+msgstr "95%% CI 下限値は上限値よりも小さくなければならない."
 
 msgid "You cannot set all the prior model probabilties to zero."
-msgstr ""
+msgstr "すべての事前モデルの確率をゼロに設定することはできません."
 
 msgid ""
 "The model could not be fit. Please check the following: Do you have at least "
@@ -40,15 +40,17 @@ msgid ""
 "most effect sizes are negative, the analysis may not work when the prior is "
 "constrained to be postive)?"
 msgstr ""
+"モデルが適合しませんでした。以下をご確認ください。少なくともn=2の研究がありますか？事前分布が切断されている場合、それはデータと一致していますか（ほとん"
+"どの効果量が負である場合、事前分布が正であるように制約されると、分析がうまくいかないことがあります.）?"
 
 msgid "Posterior Estimates per Model"
-msgstr ""
+msgstr "モデルごとの事後推定値"
 
 msgid "BF%s%s"
-msgstr ""
+msgstr "BF%s%s"
 
 msgid "Log(BF%s%s)"
-msgstr ""
+msgstr "Log(BF%s%s)"
 
 msgid "Mean"
 msgstr "平均値"
@@ -66,27 +68,27 @@ msgid "Upper"
 msgstr "上"
 
 msgid "Averaged"
-msgstr ""
+msgstr "平均"
 
 msgid "Fixed effects"
-msgstr ""
+msgstr "固定効果"
 
 msgid "Random effects"
-msgstr ""
+msgstr "変量効果"
 
 msgid "Ordered effects"
-msgstr ""
+msgstr "順序効果"
 
 msgid ""
 "%s and %s are the group-level effect size and standard deviation, "
 "respectively."
-msgstr ""
+msgstr "%sと%sは、それぞれグループレベルの効果量と標準偏差です。"
 
 msgid "%s is the group-level effect size."
-msgstr ""
+msgstr "%s はグループレベルの効果量です."
 
 msgid "Bayes factor of the random effects H%1$s over the fixed effects H%1$s."
-msgstr ""
+msgstr "固定効果H%1$sに対する変量効果H%1$sのベイズファクター."
 
 msgid ""
 "Posterior estimates are based on the models that assume an effect to be "
