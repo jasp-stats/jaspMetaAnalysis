@@ -79,25 +79,30 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
 }
 .metamiscGetData             <- function(options, dataset) {
 
-  if (!is.null(dataset)) {
+  if (!is.null(dataset))
     return(dataset)
-  } else{
-    varNames <- c(options[["inputMeasure"]], options[["inputSE"]], unlist(options[["inputCI"]]),
-                  options[["inputN"]], options[["inputO"]], options[["inputE"]])
-    varNames <- varNames[varNames != ""]
 
-    dataset <- readDataSetToEnd(
-      columns.as.numeric = varNames,
-      columns            = if (options[["inputLabels"]] != "") options[["inputLabels"]]
-    )
 
-    if (options[["inputLabels"]] != "") {
-      dataset[[options[["inputLabels"]]]] <- as.character(dataset[[options[["inputLabels"]]]])
-      if (!validUTF8(dataset[[options[["inputLabels"]]]]))
-        .quitAnalysis(gettext("The study labels contain invalid characters. Please, remove them before running the analysis."))
-    }
+  varNames <- c(options[["inputMeasure"]], options[["inputSE"]], unlist(options[["inputCI"]]),
+                options[["inputN"]], options[["inputO"]], options[["inputE"]])
+  varNames <- varNames[varNames != ""]
 
+  dataset <- readDataSetToEnd(
+    columns.as.numeric = varNames,
+    columns            = if (options[["inputLabels"]] != "") options[["inputLabels"]]
+  )
+
+  if (options[["inputLabels"]] != "") {
+    dataset[[options[["inputLabels"]]]] <- as.character(dataset[[options[["inputLabels"]]]])
+    if (!validUTF8(dataset[[options[["inputLabels"]]]]))
+      .quitAnalysis(gettext("The study labels contain invalid characters. Please, remove them before running the analysis."))
   }
+
+  .hasErrors(dataset               = dataset,
+             type                  = c("infinity", "observations", "negativeValues"),
+             observations.amount   = "< 2",
+             exitAnalysisIfErrors  = TRUE)
+
 
   return(dataset)
 }
