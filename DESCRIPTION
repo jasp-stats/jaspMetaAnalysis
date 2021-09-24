@@ -25,7 +25,9 @@ Imports:
   tidyr,
   weightr,
   BayesTools,
-  RoBMA
+  RoBMA,
+  metamisc (>= 0.2.5),
+  ggmcmc
 Remotes:
   jasp-stats/jaspBase,
   jasp-stats/jaspGraphs,

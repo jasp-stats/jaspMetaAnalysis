@@ -27,6 +27,13 @@ Description
 		func:			"ClassicalMetaAnalysis"
 		requiresData:	true
 	}
+
+	Analysis
+	{
+		title:			qsTr("Classical Prediction Model Performance")
+		func:			"ClassicalPredictionPerformance"
+		requiresData:	true
+	}
 	
 	Analysis
 	{
@@ -46,6 +53,13 @@ Description
 		menu:			qsTr("Meta-Analysis")
 		title:			qsTr("Bayesian Meta-Analysis")
 		func:			"BayesianMetaAnalysis"
+		requiresData:	true
+	}
+
+	Analysis
+	{
+		title:			qsTr("Bayesian Prediction Model Performance")
+		func:			"BayesianPredictionPerformance"
 		requiresData:	true
 	}
 	
