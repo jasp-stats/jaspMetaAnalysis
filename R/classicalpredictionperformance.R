@@ -225,7 +225,8 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
     return()
   }
 
-  p <- jaspGraphs::themeJasp(p, sides = "b") +
+  p <- p + jaspGraphs::geom_rangeframe(sides = "b") +
+    jaspGraphs::themeJaspRaw() +
     ggplot2::ylab(switch(options[["measure"]],
                          "OE"    = gettext("Observed-Expected Ratio"),
                          "cstat" = gettext("Concordance Statistic"))) +
@@ -450,7 +451,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
       if (any(class(tempPlot) %in% c("simpleError", "error"))) {
         tempFunnelPlot$setError(tempPlot$message)
       } else{
-        tempPlot <- jaspGraphs::themeJasp(tempPlot)
+        tempPlot <- tempPlot + jaspGraphs::geom_rangeframe() + jaspGraphs::themeJaspRaw()
         tempFunnelPlot$plotObject <- tempPlot
       }
 

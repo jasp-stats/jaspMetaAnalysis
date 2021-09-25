@@ -145,7 +145,9 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
     return()
   }
 
-  p <- jaspGraphs::themeJasp(p, sides = "bl") + ggplot2::xlab(gettext("Value")) + ggplot2::ylab(gettext("Density"))
+  p <- p + jaspGraphs::geom_rangeframe() +
+    jaspGraphs::themeJaspRaw() +
+    ggplot2::xlab(gettext("Value")) + ggplot2::ylab(gettext("Density"))
 
   priorAndPosteriorPlot$plotObject <- p
   return()
@@ -173,8 +175,7 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
     return()
   }
 
-  p <- p +
-    jaspGraphs::geom_rangeframe() +
+  p <- p + jaspGraphs::geom_rangeframe() +
     jaspGraphs::themeJaspRaw() +
     ggplot2::xlab(gettext("Iteration")) + ggplot2::ylab(gettext("Running mean"))
 
@@ -205,7 +206,9 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
     return()
   }
 
-  p <- jaspGraphs::themeJasp(p, sides = "bl") + ggplot2::xlab(gettext("Lag")) + ggplot2::ylab(gettext("Autocorrelation"))
+  p <- p + jaspGraphs::geom_rangeframe() +
+    jaspGraphs::themeJaspRaw() +
+    ggplot2::xlab(gettext("Lag")) + ggplot2::ylab(gettext("Autocorrelation"))
 
   acPlot$plotObject <- p
 
@@ -234,7 +237,9 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
     return()
   }
 
-  p <- jaspGraphs::themeJasp(p, sides = "bl") + ggplot2::xlab(gettext("Last iteration in chain")) + ggplot2::ylab(gettext("Shrink factor"))
+  p <- p + jaspGraphs::geom_rangeframe() +
+    jaspGraphs::themeJaspRaw() +
+    ggplot2::xlab(gettext("Last iteration in chain")) + ggplot2::ylab(gettext("Shrink factor"))
 
   gRPlot$plotObject <- p
   return()
