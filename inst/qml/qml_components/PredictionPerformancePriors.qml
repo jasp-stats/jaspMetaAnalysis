@@ -32,12 +32,12 @@ Section
 	Group
 	{
 
-		title: 				if(measure == "OE"){qsTr("Summary estimate (O:E Ratio)")}else{qsTr("Summary estimate (C statistic)")}
+		title: 				measure === "OE" ? qsTr("Summary estimate (O:E Ratio)") :  qsTr("Summary estimate (C statistic)")
 		columns:			2
 
 			DoubleField
 			{
-				label: 			qsTr("Normal   mean:")
+				label: 			qsTr("Normal mean:")
 				name: 			"priorMuNMeam"
 				defaultValue: 	0
 				fieldWidth: 	50

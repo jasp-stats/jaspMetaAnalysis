@@ -20,11 +20,10 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
   options[["method"]] <- "BAYES"
   ready <- .metamiscReady(options)
 
-  if (ready)
+  if (ready) {
     dataset <- .metamiscGetData(options, dataset)
-
-  if (ready)
     .metamiscFitModelBayesian(jaspResults, options, dataset)
+  }
 
   .metamiscSummaryTable(jaspResults, options)
 
@@ -174,7 +173,10 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
     return()
   }
 
-  p <- jaspGraphs::themeJasp(p, sides = "bl") + ggplot2::xlab(gettext("Iteration")) + ggplot2::ylab(gettext("Running mean"))
+  p <- p + 
+    jaspGraphs::geom_rangeframe() +
+    jaspGraphs::themeJaspRaw() + 
+    ggplot2::xlab(gettext("Iteration")) + ggplot2::ylab(gettext("Running mean"))
 
   rmPlot$plotObject <- p
 
@@ -239,21 +241,22 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
 }
 .metamiscOmitNAs               <- function(dataset, options) {
 
-  dataset$computable <- FALSE
+  
+  computable <- rep(FALSE, nrow(dataset))
 
   if (options[["inputMeasure"]] != "" && options[["inputSE"]] != "")
-    dataset$computable <- ifelse(!is.na(dataset[, options[["inputMeasure"]]]) & !is.na(dataset[, options[["inputSE"]]]), TRUE, dataset$computable)
+    computable <- computable | (!is.na(dataset[, options[["inputMeasure"]]]) & !is.na(dataset[, options[["inputSE"]]])
 
   if (options[["inputMeasure"]] != "" && sum(unlist(options[["inputCI"]]) != "") == 2)
-    dataset$computable <- ifelse(!is.na(dataset[,options[["inputMeasure"]]]) & !is.na(dataset[, options[["inputCI"]][[1]][1]]) & !is.na(dataset[, options[["inputCI"]][[1]][2]]), TRUE, dataset$computable)
+    computable <- computable | (!is.na(dataset[,options[["inputMeasure"]]]) & !is.na(dataset[, options[["inputCI"]][[1]][1]]) & !is.na(dataset[, options[["inputCI"]][[1]][2]])
 
   if (options[["measure"]] == "cstat" && options[["inputMeasure"]] != "" && options[["inputN"]] != "" && options[["inputO"]] != "")
-    dataset$computable <- ifelse(!is.na(dataset[, options[["inputMeasure"]]]) & !is.na(dataset[, options[["inputN"]]]) & !is.na(dataset[, options[["inputO"]]]), TRUE, dataset$computable)
+    computable <- computable | (!is.na(dataset[, options[["inputMeasure"]]]) & !is.na(dataset[, options[["inputN"]]]) & !is.na(dataset[, options[["inputO"]]]))
 
   if (options[["measure"]] == "OE" && options[["inputE"]] != "" && options[["inputO"]] != "")
-    dataset$computable <- ifelse(!is.na(dataset[, options[["inputE"]]]) & !is.na(dataset[, options[["inputO"]]]), TRUE, dataset$computable)
+    computable <- computable | (!is.na(dataset[, options[["inputE"]]]) & !is.na(dataset[, options[["inputO"]]]))
 
-  dataset <- dataset[dataset$computable, ]
+  dataset <- dataset[computable, ]
 
   return(dataset)
 }
