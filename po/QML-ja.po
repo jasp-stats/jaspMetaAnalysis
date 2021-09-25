@@ -13,7 +13,7 @@ msgstr "メタ分析"
 
 msgctxt "Description|"
 msgid "Classical Meta-Analysis"
-msgstr "古典的メタ分析"
+msgstr "伝統的メタ分析"
 
 msgctxt "Description|"
 msgid "Selection Models"
@@ -1392,8 +1392,8 @@ msgstr ""
 
 msgctxt "Description|"
 msgid "Classical"
-msgstr ""
+msgstr "伝統的"
 
 msgctxt "Description|"
 msgid "Bayesian"
-msgstr ""
+msgstr "ベイジアン"
