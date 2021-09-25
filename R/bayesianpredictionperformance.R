@@ -173,9 +173,9 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
     return()
   }
 
-  p <- p + 
+  p <- p +
     jaspGraphs::geom_rangeframe() +
-    jaspGraphs::themeJaspRaw() + 
+    jaspGraphs::themeJaspRaw() +
     ggplot2::xlab(gettext("Iteration")) + ggplot2::ylab(gettext("Running mean"))
 
   rmPlot$plotObject <- p
@@ -241,14 +241,13 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
 }
 .metamiscOmitNAs               <- function(dataset, options) {
 
-  
   computable <- rep(FALSE, nrow(dataset))
 
   if (options[["inputMeasure"]] != "" && options[["inputSE"]] != "")
-    computable <- computable | (!is.na(dataset[, options[["inputMeasure"]]]) & !is.na(dataset[, options[["inputSE"]]])
+    computable <- computable | (!is.na(dataset[, options[["inputMeasure"]]]) & !is.na(dataset[, options[["inputSE"]]]))
 
   if (options[["inputMeasure"]] != "" && sum(unlist(options[["inputCI"]]) != "") == 2)
-    computable <- computable | (!is.na(dataset[,options[["inputMeasure"]]]) & !is.na(dataset[, options[["inputCI"]][[1]][1]]) & !is.na(dataset[, options[["inputCI"]][[1]][2]])
+    computable <- computable | (!is.na(dataset[,options[["inputMeasure"]]]) & !is.na(dataset[, options[["inputCI"]][[1]][1]]) & !is.na(dataset[, options[["inputCI"]][[1]][2]]))
 
   if (options[["measure"]] == "cstat" && options[["inputMeasure"]] != "" && options[["inputN"]] != "" && options[["inputO"]] != "")
     computable <- computable | (!is.na(dataset[, options[["inputMeasure"]]]) & !is.na(dataset[, options[["inputN"]]]) & !is.na(dataset[, options[["inputO"]]]))
