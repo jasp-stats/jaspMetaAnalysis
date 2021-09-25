@@ -103,11 +103,7 @@ Section
 	CheckBox
 	{
 		name:	"exportColumns"
-		label: if (measure == "OE"){
-			qsTr("Export O:E ratios")
-		} else if (measure == "cstat") {
-			qsTr("Export C-statistics")
-		}
+		label:	measure === "OE" ? qsTr("Export O:E ratios") : qsTr("Export C-statistics")
 
 		// need to be each set of the variables separatelly, they will get overwriten otherwise
 		ComputedColumnField

@@ -47,9 +47,9 @@ Section
 			{
 				label: 			qsTr("sd:")
 				name: 			"priorMuNSD"
-				defaultValue:	if(measure == "OE"){10}else{100} 
+				defaultValue:	measure === "OE" ? 10 : 100
 				min:			0
-				max:			if(measure == "OE"){10}else{100} 
+				max:			measure === "OE" ? 10 : 100
 				fieldWidth: 	50
 			}
 	}
