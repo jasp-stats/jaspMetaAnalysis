@@ -30,6 +30,7 @@ Description
 
 	Analysis
 	{
+		menu:			qsTr("Prediction Model Performance")
 		title:			qsTr("Classical Prediction Model Performance")
 		func:			"ClassicalPredictionPerformance"
 		requiresData:	true
@@ -58,6 +59,7 @@ Description
 
 	Analysis
 	{
+		menu:			qsTr("Prediction Model Performance")
 		title:			qsTr("Bayesian Prediction Model Performance")
 		func:			"BayesianPredictionPerformance"
 		requiresData:	true
