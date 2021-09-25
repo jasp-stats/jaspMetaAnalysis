@@ -436,7 +436,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   fatFits <- jaspResults[["modelsFat"]]$object
 
   for(i in seq_along(fatFits)) {
-    if (!any(class(fatFits[[i]]) %in% c("simpleError", "error")) && is.null(funnelTestPlots[[.metamiscFitFunnelAsymmetryNames(fatFits[[i]]$method)]])) {
+    if (!inherits(fatFits[[i]], c("simpleError", "error")) && is.null(funnelTestPlots[[.metamiscFitFunnelAsymmetryNames(fatFits[[i]]$method)]])) {
 
       tempFunnelPlot   <- createJaspPlot(
         title  = .metamiscFitFunnelAsymmetryNames(fatFits[[i]]$method),
@@ -495,17 +495,17 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   if (x$method %in% c("E-UW", "E-FIV")) {
     ylab <- "Standard error"
     yval <- (x$model$data[, "x"])
-    ylim <- rev(c(0, max(yval, na.rm = T)))
+    ylim <- rev(c(0, max(yval, na.rm = TRUE)))
     xlim <- c(min(c(0, xval)), max(xval))
   } else if (x$method %in% c("M-FIV")) {
     ylab <- "Sample size"
     yval <- (x$model$data[, "x"])
-    ylim <- (c(0, max(yval, na.rm = T)))
+    ylim <- (c(0, max(yval, na.rm = TRUE)))
     xlim <- c(min(c(0, xval)), max(xval))
   } else if (x$method == "P-FPV") {
     ylab <- "Sample size"
     yval <- (x$model$data[, "x"])
-    ylim <- rev(c(0, max(yval, na.rm = T)))
+    ylim <- rev(c(0, max(yval, na.rm = TRUE)))
     xlim <- c(min(c(0, xval)), max(xval))
     step <- ((max(yval) - min(yval))/5)
     yax  <- c(plyr::round_any(1/min(yval), 10^(sapply(round(1/min(yval)), nchar) - 1)),
@@ -513,7 +513,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   } else if (x$method == "D-FIV") {
     ylab <- "Total events"
     yval <- (x$model$data[, "x"])
-    ylim <- rev(c(0, max(yval, na.rm = T)))
+    ylim <- rev(c(0, max(yval, na.rm = TRUE)))
     xlim <- c(min(c(0, xval)), max(xval))
     step <- ((max(yval) - min(yval))/4)
     yax  <- c(plyr::round_any(1/min(yval), 10^(sapply(round(1/min(yval)), nchar) - 1)),
@@ -521,7 +521,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   } else if (x$method == "D-FAV") {
     ylab <- "Total events"
     yval <- (x$model$data[, "x"])
-    ylim <- rev(c(0, max(yval, na.rm = T)))
+    ylim <- rev(c(0, max(yval, na.rm = TRUE)))
     xlim <- c(min(c(0, xval)), max(xval))
     step <- ((max(yval) - min(yval))/4)
     yax  <- c(plyr::round_any(1/min(yval),10^(sapply(round(1/min(yval)), nchar) - 1)),
