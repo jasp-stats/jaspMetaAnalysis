@@ -20,13 +20,15 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
 
   ready <- .metamiscReady(options)
 
-  if (ready)
+  if (ready) {
     dataset <- .metamiscGetData(options, dataset)
-
-  if (ready)
     .metamiscFitModel(jaspResults, options, dataset)
+  }
 
   .metamiscSummaryTable(jaspResults, options)
+
+  if (jaspResults[["summaryTable"]]$getError())
+    return()
 
   if (options[["forestPlot"]])
     .metamiscForestPlot(jaspResults, options, dataset, ready)
@@ -133,12 +135,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
     pars       = list(
       model.oe    = if (options[["measure"]] == "OE")    options[["linkOE"]],
       model.cstat = if (options[["measure"]] == "cstat") options[["linkCstat"]])
-  ),error = function(e)e)
-
-  # error handling
-  if (any(class(fit) %in% c("simpleError", "error"))) {
-    .quitAnalysis(paste0("metamisc package failed with the following error: '", fit[["message"]], "'"))
-  }
+  ), error = function(e) e )
 
   model[["object"]] <- fit
 
@@ -172,6 +169,11 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
 
   if (is.null(fit))
     return()
+
+  if (inherits(fit, c("simpleError", "error"))){
+    summaryTable$setError(gettextf("metamisc package failed with the following error: '%s'", fit[["message"]]))
+    return()
+  }
 
   summaryTable$addRows(list(
     estimate = fit[["est"]],

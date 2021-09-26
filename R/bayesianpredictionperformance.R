@@ -27,6 +27,9 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
 
   .metamiscSummaryTable(jaspResults, options)
 
+  if (jaspResults[["summaryTable"]]$getError())
+    return()
+
   if (options[["forestPlot"]])
     .metamiscForestPlot(jaspResults, options, dataset, ready)
 
