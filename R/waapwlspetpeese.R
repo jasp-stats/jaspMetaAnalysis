@@ -497,7 +497,7 @@
     shape = 18
   )
 
-  plot <- jaspGraphs::themeJasp(plot)
+  plot <- plot + jaspGraphs::geom_rangeframe() + jaspGraphs::themeJaspRaw()
   plotRegression$plotObject <- plot
 
   return()
@@ -571,7 +571,7 @@
     axis.ticks.y = ggplot2::element_blank()
   )
 
-  plot <- jaspGraphs::themeJasp(plot, sides = "b")
+  plot <- plot + jaspGraphs::geom_rangeframe(sides = "b") + jaspGraphs::themeJaspRaw()
   plotEstimates$plotObject <- plot
 
   return()

@@ -802,7 +802,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     breaks = yTics,
     limits = range(yTics))
 
-  plot <- jaspGraphs::themeJasp(plot)
+  plot <- plot + jaspGraphs::geom_rangeframe() + jaspGraphs::themeJaspRaw()
   plotWeights$plotObject <- plot
 
   return()
@@ -888,7 +888,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     axis.ticks.y = ggplot2::element_blank()
   )
 
-  plot <- jaspGraphs::themeJasp(plot, sides = "b")
+  plot <- plot + jaspGraphs::geom_rangeframe(sides = "b") + jaspGraphs::themeJaspRaw()
   plotEstimates$plotObject <- plot
 
   return()

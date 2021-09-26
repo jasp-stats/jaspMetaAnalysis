@@ -18,40 +18,40 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-<rect x='0.00' y='0.00' width='720.00' height='576.00' style='stroke-width: 10.67; stroke: none;' />
+<rect x='-0.000000000000064' y='0.00' width='720.00' height='576.00' style='stroke-width: 10.67; stroke: none;' />
 </g>
 <defs>
-  <clipPath id='cpODUuNTR8NzIwLjAwfDIwLjcxfDUwMi4xOQ=='>
-    <rect x='85.54' y='20.71' width='634.46' height='481.48' />
+  <clipPath id='cpODIuNDl8NzIwLjAwfDIwLjcxfDUwNi4wNQ=='>
+    <rect x='82.49' y='20.71' width='637.51' height='485.34' />
   </clipPath>
 </defs>
-<g clip-path='url(#cpODUuNTR8NzIwLjAwfDIwLjcxfDUwMi4xOQ==)'>
-<rect x='85.54' y='20.71' width='634.46' height='481.48' style='stroke-width: 10.67; stroke: none;' />
-<polyline points='567.97,327.10 567.97,195.79 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='567.97,261.45 537.81,261.45 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='537.81,327.10 537.81,195.79 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polygon points='550.94,263.40 554.85,263.40 554.85,259.49 550.94,259.49 ' style='stroke-width: 0.71; stroke: none; fill: #000000;' />
-<polyline points='114.38,480.30 114.38,42.59 ' style='stroke-width: 1.07; stroke-dasharray: 1.42,4.27; stroke-linecap: butt;' />
-<line x1='114.06' y1='502.19' x2='691.48' y2='502.19' style='stroke-width: 0.64; stroke-linecap: butt;' />
-<rect x='85.54' y='20.71' width='634.46' height='481.48' style='stroke-width: 0.00; stroke: none;' />
+<g clip-path='url(#cpODIuNDl8NzIwLjAwfDIwLjcxfDUwNi4wNQ==)'>
+<rect x='82.49' y='20.71' width='637.51' height='485.34' style='stroke-width: 10.67; stroke: none;' />
+<polyline points='567.24,329.56 567.24,197.20 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<polyline points='567.24,263.38 536.93,263.38 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<polyline points='536.93,329.56 536.93,197.20 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<polygon points='550.14,265.33 554.05,265.33 554.05,261.42 550.14,261.42 ' style='stroke-width: 0.71; stroke: none; fill: #000000;' />
+<polyline points='111.47,483.99 111.47,42.77 ' style='stroke-width: 1.07; stroke-dasharray: 1.42,4.27; stroke-linecap: butt;' />
+<line x1='111.15' y1='506.05' x2='691.34' y2='506.05' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<rect x='82.49' y='20.71' width='637.51' height='485.34' style='stroke-width: 0.00; stroke: none;' />
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-<polyline points='85.54,502.19 85.54,20.71 ' style='stroke-width: 0.00; stroke: none; stroke-linecap: butt;' />
-<text x='70.06' y='267.30' text-anchor='end' style='font-size: 17.00px; font-family: sans;' textLength='36.84px' lengthAdjust='spacingAndGlyphs'>WLS</text>
-<polyline points='85.54,502.19 720.00,502.19 ' style='stroke-width: 0.00; stroke: none; stroke-linecap: butt;' />
-<polyline points='114.38,510.69 114.38,502.19 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
-<polyline points='258.57,510.69 258.57,502.19 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
-<polyline points='402.77,510.69 402.77,502.19 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
-<polyline points='546.97,510.69 546.97,502.19 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
-<polyline points='691.16,510.69 691.16,502.19 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
-<text x='114.38' y='529.36' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>0.00</text>
-<text x='258.57' y='529.36' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>0.05</text>
-<text x='402.77' y='529.36' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>0.10</text>
-<text x='546.97' y='529.36' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>0.15</text>
-<text x='691.16' y='529.36' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>0.20</text>
-<text x='327.25' y='562.62' style='font-size: 20.40px; font-family: sans;' textLength='136.08px' lengthAdjust='spacingAndGlyphs'>Mean Estimate</text>
-<text x='463.33' y='562.62' style='font-size: 20.40px; font-family: sans;' textLength='5.10px' lengthAdjust='spacingAndGlyphs'> </text>
-<text x='468.44' y='562.62' style='font-size: 20.40px; font-family: sans;' textLength='9.85px' lengthAdjust='spacingAndGlyphs'>ρ</text>
-<text x='402.77' y='11.70' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='203.16px' lengthAdjust='spacingAndGlyphs'>mean-model-estimates-rho</text>
+<polyline points='82.49,506.05 82.49,20.71 ' style='stroke-width: 0.00; stroke: none; stroke-linecap: butt;' />
+<text x='67.01' y='269.23' text-anchor='end' style='font-size: 17.00px; font-family: sans;' textLength='36.84px' lengthAdjust='spacingAndGlyphs'>WLS</text>
+<polyline points='82.49,506.05 720.00,506.05 ' style='stroke-width: 0.00; stroke: none; stroke-linecap: butt;' />
+<polyline points='111.47,514.55 111.47,506.05 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='256.36,514.55 256.36,506.05 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='401.25,514.55 401.25,506.05 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='546.13,514.55 546.13,506.05 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='691.02,514.55 691.02,506.05 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<text x='111.47' y='533.23' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>0.00</text>
+<text x='256.36' y='533.23' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>0.05</text>
+<text x='401.25' y='533.23' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>0.10</text>
+<text x='546.13' y='533.23' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>0.15</text>
+<text x='691.02' y='533.23' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>0.20</text>
+<text x='338.31' y='564.02' style='font-size: 17.00px; font-family: sans;' textLength='113.40px' lengthAdjust='spacingAndGlyphs'>Mean Estimate</text>
+<text x='451.72' y='564.02' style='font-size: 17.00px; font-family: sans;' textLength='4.25px' lengthAdjust='spacingAndGlyphs'> </text>
+<text x='455.97' y='564.02' style='font-size: 17.00px; font-family: sans;' textLength='8.21px' lengthAdjust='spacingAndGlyphs'>ρ</text>
+<text x='401.25' y='11.70' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='203.16px' lengthAdjust='spacingAndGlyphs'>mean-model-estimates-rho</text>
 </g>
 </svg>
