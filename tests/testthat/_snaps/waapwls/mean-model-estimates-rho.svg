@@ -30,8 +30,8 @@
 <polyline points='567.24,329.56 567.24,197.20 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
 <polyline points='567.24,263.38 536.93,263.38 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
 <polyline points='536.93,329.56 536.93,197.20 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polygon points='550.14,265.33 554.05,265.33 554.05,261.42 550.14,261.42 ' style='stroke-width: 0.71; stroke: none; fill: #000000;' />
-<polyline points='111.47,483.99 111.47,42.77 ' style='stroke-width: 1.07; stroke-dasharray: 1.42,4.27; stroke-linecap: butt;' />
+<polygon points='548.54,266.93 555.65,266.93 555.65,259.82 548.54,259.82 ' style='stroke-width: 0.71; stroke: none; fill: #000000;' />
+<polyline points='111.47,483.99 111.47,42.77 ' style='stroke-width: 2.13; stroke-dasharray: 2.85,8.54; stroke-linecap: butt;' />
 <line x1='111.15' y1='506.05' x2='691.34' y2='506.05' style='stroke-width: 0.64; stroke-linecap: butt;' />
 <rect x='82.49' y='20.71' width='637.51' height='485.34' style='stroke-width: 0.00; stroke: none;' />
 </g>

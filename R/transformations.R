@@ -22,7 +22,7 @@
   if (options[["inputPVal"]] == "")
     return(pnorm(.maGetInputEs(dataset, options) /.maGetInputSe(dataset, options), lower.tail = FALSE))
   else
-    return(dataset[, .v(options[["inputPVal"]])])
+    return(dataset[, options[["inputPVal"]]])
 }
 .maTransformEs             <- function(es, transformation) {
   switch(

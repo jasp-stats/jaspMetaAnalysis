@@ -47,7 +47,7 @@
       nOmitted <- jaspResults[["nOmitted"]]
     } else {
       nOmitted <- createJaspState()
-      nOmitted$dependOn(c(.wwppDependencies))
+      nOmitted$dependOn(.wwppDependencies)
       jaspResults[["nOmitted"]] <- nOmitted
     }
     nOmitted$object <- nrow(dataset_old) - nrow(dataset)
@@ -73,10 +73,10 @@
 
   if (options[["inputES"]] != "" && options[["measures"]] == "correlation")
     if (any(dataset[, options[["inputES"]]] <= -1) || any(dataset[, options[["inputES"]]] >= 1))
-      .quitAnalysis(gettextf("Error in %s: All correlation coefficients need to be between -1 and 1.", options[["inputES"]]))
+      .quitAnalysis(gettextf("Cannot compute results. All entries of the correlation coefficient variable (%s) must be between -1 and 1.", options[["inputES"]]))
 
   if (options[["inputN"]] != "" && any(dataset[, options[["inputN"]]] < 4))
-    .quitAnalysis(gettextf("Error in %s: All sample sizes need to be larger than 4.", options[["inputN"]]))
+    .quitAnalysis(gettextf("Cannot compute results. All entries of the sample size variable (%s) must be greater than four.", options[["inputN"]]))
 
 
   return(dataset)
@@ -89,9 +89,9 @@
   table$addColumnInfo(name = "type",     title = "",                        type = "string")
   table$addColumnInfo(name = "est",      title = gettext("Estimate"),       type = "number")
   table$addColumnInfo(name = "se",       title = gettext("Standard Error"), type = "number")
-  table$addColumnInfo(name = "stat",     title = gettext("t"),              type = "number")
-  table$addColumnInfo(name = "df",       title = gettext("df"),             type = "integer")
-  table$addColumnInfo(name = "pVal",     title = gettext("p"),              type = "pvalue")
+  table$addColumnInfo(name = "stat",     title = "t",                       type = "number")
+  table$addColumnInfo(name = "df",       title = "df",                      type = "integer")
+  table$addColumnInfo(name = "pVal",     title = "p",                       type = "pvalue")
   table$addColumnInfo(name = "lowerCI",  title = gettext("Lower"),          type = "number", overtitle = overtitleCI)
   table$addColumnInfo(name = "upperCI",  title = gettext("Upper"),          type = "number", overtitle = overtitleCI)
 
@@ -131,9 +131,9 @@
   table$addColumnInfo(name = "type",     title = "",                        type = "string")
   table$addColumnInfo(name = "est",      title = gettext("Estimate"),       type = "number")
   table$addColumnInfo(name = "se",       title = gettext("Standard Error"), type = "number")
-  table$addColumnInfo(name = "stat",     title = gettext("t"),              type = "number")
-  table$addColumnInfo(name = "df",       title = gettext("df"),             type = "integer")
-  table$addColumnInfo(name = "pVal",     title = gettext("p"),              type = "pvalue")
+  table$addColumnInfo(name = "stat",     title = "t",                       type = "number")
+  table$addColumnInfo(name = "df",       title = "df",                      type = "integer")
+  table$addColumnInfo(name = "pVal",     title = "p",                       type = "pvalue")
   table$addColumnInfo(name = "lowerCI",  title = gettext("Lower"),          type = "number", overtitle = overtitleCI)
   table$addColumnInfo(name = "upperCI",  title = gettext("Upper"),          type = "number", overtitle = overtitleCI)
 
@@ -311,10 +311,10 @@
   effectTest$position <- 1
   fitTests[["effectTest"]] <- effectTest
 
-  effectTest$addColumnInfo(name = "type",  title = "",            type = "string")
-  effectTest$addColumnInfo(name = "stat",  title = gettext("t"),  type = "number")
-  effectTest$addColumnInfo(name = "df",    title = gettext("df"), type = "integer")
-  effectTest$addColumnInfo(name = "pVal",  title = gettext("p"),  type = "pvalue")
+  effectTest$addColumnInfo(name = "type",  title = "",   type = "string")
+  effectTest$addColumnInfo(name = "stat",  title = "t",  type = "number")
+  effectTest$addColumnInfo(name = "df",    title = "df", type = "integer")
+  effectTest$addColumnInfo(name = "pVal",  title = "p",  type = "pvalue")
 
   if (!is.null(models)) {
 
@@ -357,10 +357,10 @@
     biasTest$position <- 2
     fitTests[["biasTest"]] <- biasTest
 
-    biasTest$addColumnInfo(name = "type",  title = "",                type = "string")
-    biasTest$addColumnInfo(name = "stat",  title = gettext("t"),      type = "number")
-    biasTest$addColumnInfo(name = "df",    title = gettext("df"),     type = "integer")
-    biasTest$addColumnInfo(name = "pVal",  title = gettext("p"),      type = "pvalue")
+    biasTest$addColumnInfo(name = "type",  title = "",       type = "string")
+    biasTest$addColumnInfo(name = "stat",  title = "t",      type = "number")
+    biasTest$addColumnInfo(name = "df",    title = "df",     type = "integer")
+    biasTest$addColumnInfo(name = "pVal",  title = "p",      type = "pvalue")
 
     if (!is.null(models)) {
 
@@ -394,11 +394,11 @@
   # mean estimates
   if (is.null(estimates[["mean"]]) && options[["estimatesMean"]]) {
     estimatesMean <- createJaspTable(title = gettextf(
-      "Mean Estimates(%s)",
+      "Mean Estimates (%s)",
       if (options[["measures"]] == "correlation") "\u03C1" else "\u03BC"
     ))
     estimatesMean$position <- 1
-    estimates$dependOn(c("estimatesMean"))
+    estimates$dependOn("estimatesMean")
     estimates[["estimatesMean"]] <- estimatesMean
     estimatesMean <- .wwppFillEstimates(jaspResults, estimatesMean, models, options, type)
   }
@@ -408,7 +408,7 @@
     if (is.null(estimates[["petPeese"]]) && options[["estimatesPetPeese"]]) {
       petPeese <- createJaspTable(title = gettext("PET-PEESE Regression Estimates"))
       petPeese$position  <- 2
-      petPeese$dependOn(c("estimatesPetPeese"))
+      petPeese$dependOn("estimatesPetPeese")
       estimates[["petPeese"]] <- petPeese
       petPeese <- .wwppFillPetPeese(jaspResults, petPeese, models, options)
     }
@@ -418,7 +418,7 @@
   if (is.null(estimates[["heterogeneity"]]) && options[["estimatesSigma"]]) {
     heterogeneity <- createJaspTable(title = gettext("Multiplicative Heterogeneity Estimates"))
     heterogeneity$position <- 3
-    heterogeneity$dependOn(c("estimatesSigma"))
+    heterogeneity$dependOn("estimatesSigma")
     estimates[["heterogeneity"]] <- heterogeneity
     heterogeneity <- .wwppFillHeterogeneity(jaspResults, heterogeneity, models, options, type)
   }
@@ -462,42 +462,42 @@
   else
     yLabel <- gettext("Effect Size")
 
+  xTicks <- jaspGraphs::getPrettyAxisBreaks(c(0, fitSe))
+  yTicks <- jaspGraphs::getPrettyAxisBreaks(c(fitPrediction[,"fit"], fitEs))
+
   # make the plot happen
-  plot <- ggplot2::ggplot()
-  # mean
-  plot <- plot + ggplot2::geom_polygon(
-    ggplot2::aes(
-      x = c(fitSeSequence, rev(fitSeSequence)),
-      y = c(fitPrediction[,"lwr"], rev(fitPrediction[,"upr"]))
-    ),
-    fill = "grey80")
-  # CI
-  plot <- plot +ggplot2::geom_path(
-    ggplot2::aes(
-      x = fitSeSequence,
-      y = fitPrediction[,"fit"]
-    ),
-    size = 1.25)
+  plot <- ggplot2::ggplot() +
+    ggplot2::geom_polygon(
+      ggplot2::aes(
+        x = c(fitSeSequence, rev(fitSeSequence)),
+        y = c(fitPrediction[,"lwr"], rev(fitPrediction[,"upr"]))
+      ),
+      fill = "grey80") +
+    ggplot2::geom_path(
+      ggplot2::aes(
+        x = fitSeSequence,
+        y = fitPrediction[,"fit"]
+      ),
+      size = 1.25) +
+    ggplot2::scale_x_continuous(
+      gettext("Standard Error"),
+      breaks = xTicks,
+      limits = range(xTicks),
+      oob    = scales::oob_keep) +
+    ggplot2::scale_y_continuous(
+      yLabel,
+      breaks = yTicks,
+      limits = range(yTicks),
+      oob    = scales::oob_keep) +
+    jaspGraphs::geom_point(
+      ggplot2::aes(
+        x  = fitSe,
+        y  = fitEs),
+      size  = 2,
+      shape = 18) +
+    jaspGraphs::geom_rangeframe() +
+    jaspGraphs::themeJaspRaw()
 
-  plot <- plot + ggplot2::scale_x_continuous(
-    gettext("Standard Error"),
-    breaks = jaspGraphs::getPrettyAxisBreaks(c(0, fitSe)),
-    limits = range(jaspGraphs::getPrettyAxisBreaks(c(0, fitSe))),
-    oob    = scales::oob_keep)
-  plot <- plot + ggplot2::scale_y_continuous(
-    yLabel,
-    breaks = jaspGraphs::getPrettyAxisBreaks(c(fitPrediction[,"fit"], fitEs)),
-    limits = range(jaspGraphs::getPrettyAxisBreaks(c(fitPrediction[,"fit"], fitEs))),
-    oob    = scales::oob_keep)
-  plot <- plot + ggplot2::geom_point(
-    ggplot2::aes(
-      x  = fitSe,
-      y  = fitEs),
-    size  = 2,
-    shape = 18
-  )
-
-  plot <- plot + jaspGraphs::geom_rangeframe() + jaspGraphs::themeJaspRaw()
   plotRegression$plotObject <- plot
 
   return()
@@ -541,37 +541,37 @@
   if (any(c(is.nan(estimates[,"mean"]), is.nan(estimates[,"lowerCI"]), is.nan(estimates[,"upperCI"]))))
     plotEstimates$setError(gettext("The figure could not be created since one of the estimates is not a number."))
 
+  xTicks <- jaspGraphs::getPrettyAxisBreaks(range(c(0, estimates[,"lowerCI"], estimates[,"upperCI"])))
 
   # make the plot happen
-  plot <- ggplot2::ggplot()
-
-  plot <- plot + ggplot2::geom_errorbarh(
+  plot <- ggplot2::ggplot() +
+    ggplot2::geom_errorbarh(
     ggplot2::aes(
       xmin = estimates[,"lowerCI"],
       xmax = estimates[,"upperCI"],
       y    = 1:nrow(estimates)
     ),
-    height = 0.3)
-  plot   <- plot + ggplot2::geom_point(
-    ggplot2::aes(
-      x = estimates[,"mean"],
-      y = 1:nrow(estimates)),
-    shape = 15)
-  plot <- plot + ggplot2::geom_line(ggplot2::aes(x = c(0,0), y = c(.5, nrow(estimates) + 0.5)), linetype = "dotted")
-  plot <- plot + ggplot2::scale_x_continuous(
-    bquote("Mean Estimate"~.(if (options[["measures"]] == "correlation") bquote(rho) else bquote(mu))),
-    breaks = jaspGraphs::getPrettyAxisBreaks(range(c(0, estimates[,"lowerCI"], estimates[,"upperCI"]))),
-    limits = range(jaspGraphs::getPrettyAxisBreaks(range(c(0, estimates[,"lowerCI"], estimates[,"upperCI"])))))
-  plot <- plot + ggplot2::scale_y_continuous(
-    "",
-    breaks = 1:nrow(estimates),
-    labels = estimates[,"model"],
-    limits = c(0.5, nrow(estimates) + 0.5))
-  plot <- plot + ggplot2::theme(
-    axis.ticks.y = ggplot2::element_blank()
-  )
+    height = 0.3) +
+    jaspGraphs::geom_point(
+      ggplot2::aes(
+        x = estimates[,"mean"],
+        y = 1:nrow(estimates)),
+      shape = 15) +
+    jaspGraphs::geom_line(ggplot2::aes(x = c(0,0), y = c(.5, nrow(estimates) + 0.5)), linetype = "dotted") +
+    ggplot2::scale_x_continuous(
+      bquote("Mean Estimate"~.(if (options[["measures"]] == "correlation") bquote(rho) else bquote(mu))),
+      breaks = xTicks,
+      limits = range(xTicks)) +
+    ggplot2::scale_y_continuous(
+      "",
+      breaks = 1:nrow(estimates),
+      labels = estimates[,"model"],
+      limits = c(0.5, nrow(estimates) + 0.5)) +
+    ggplot2::theme(
+      axis.ticks.y = ggplot2::element_blank()) +
+    jaspGraphs::geom_rangeframe(sides = "b") +
+    jaspGraphs::themeJaspRaw()
 
-  plot <- plot + jaspGraphs::geom_rangeframe(sides = "b") + jaspGraphs::themeJaspRaw()
   plotEstimates$plotObject <- plot
 
   return()
@@ -604,7 +604,7 @@
   if (is.null(waap))
     return()
   else if (length(waap) == 0)
-    table$addFootnote(symbol = gettext("Warning:") , gettextf("There were only %1$i adequatelly powered studies. WAAP was not estimated.", attr(waap, "nPowered")))
+    table$addFootnote(symbol = gettext("Warning:") , gettextf("WAAP was not estimated: there were only %1$i adequatelly powered studies.", attr(waap, "nPowered")))
   else
     table$addFootnote(gettextf("There were %1$i adequatelly powered studies", attr(waap, "nPowered")))
 }

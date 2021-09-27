@@ -33,9 +33,9 @@
 <polyline points='658.46,186.17 658.46,119.98 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
 <polyline points='658.46,153.07 591.31,153.07 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
 <polyline points='591.31,186.17 591.31,119.98 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polygon points='631.92,375.64 635.83,375.64 635.83,371.73 631.92,371.73 ' style='stroke-width: 0.71; stroke: none; fill: #000000;' />
-<polygon points='622.93,155.03 626.84,155.03 626.84,151.12 622.93,151.12 ' style='stroke-width: 0.71; stroke: none; fill: #000000;' />
-<polyline points='124.10,483.99 124.10,42.77 ' style='stroke-width: 1.07; stroke-dasharray: 1.42,4.27; stroke-linecap: butt;' />
+<polygon points='630.32,377.24 637.43,377.24 637.43,370.13 630.32,370.13 ' style='stroke-width: 0.71; stroke: none; fill: #000000;' />
+<polygon points='621.33,156.63 628.44,156.63 628.44,149.52 621.33,149.52 ' style='stroke-width: 0.71; stroke: none; fill: #000000;' />
+<polyline points='124.10,483.99 124.10,42.77 ' style='stroke-width: 2.13; stroke-dasharray: 2.85,8.54; stroke-linecap: butt;' />
 <line x1='123.78' y1='506.05' x2='691.94' y2='506.05' style='stroke-width: 0.64; stroke-linecap: butt;' />
 <rect x='95.72' y='20.71' width='624.28' height='485.34' style='stroke-width: 0.00; stroke: none;' />
 </g>

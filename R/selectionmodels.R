@@ -80,7 +80,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
       nOmitted <- jaspResults[["nOmitted"]]
     } else {
       nOmitted <- createJaspState()
-      nOmitted$dependOn(c(.smDependencies))
+      nOmitted$dependOn(.smDependencies)
       jaspResults[["nOmitted"]] <- nOmitted
     }
     nOmitted$object <- nrow(dataset_old) - nrow(dataset)
@@ -107,14 +107,14 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
 
   if (options[["inputPVal"]] != "")
     if (any(dataset[, options[["inputPVal"]]] < 0) || any(dataset[, options[["inputPVal"]]] > 1))
-      .quitAnalysis(gettextf("Error in %s: All p-values need to be between 0 and 1.", options[["inputPVal"]]))
+      .quitAnalysis(gettextf("Cannot compute results. All entries of the p-value variable (%s) must be between 0 and 1.", options[["inputPVal"]]))
 
   if (options[["inputES"]] != "" && options[["measures"]] == "correlation")
     if (any(dataset[, options[["inputES"]]] <= -1) || any(dataset[, options[["inputES"]]] >= 1))
-      .quitAnalysis(gettextf("Error in %s: All correlation coefficients need to be between -1 and 1.", options[["inputES"]]))
+      .quitAnalysis(gettextf("Cannot compute results. All entries of the correlation coefficient variable (%s) must be between -1 and 1.", options[["inputES"]]))
 
   if (options[["inputN"]] != "" && any(dataset[, options[["inputN"]]] < 4))
-    .quitAnalysis(gettextf("Error in %s: All sample sizes need to be larger than 4.", options[["inputN"]]))
+    .quitAnalysis(gettextf("Cannot compute results. All entries of the sample size variable (%s) must be greater than four.", options[["inputN"]]))
 
 
   return(dataset)
@@ -196,8 +196,8 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   table$addColumnInfo(name = "type",     title = "",                        type = "string")
   table$addColumnInfo(name = "est",      title = gettext("Estimate"),       type = "number")
   table$addColumnInfo(name = "se",       title = gettext("Standard Error"), type = "number")
-  table$addColumnInfo(name = "stat",     title = gettext("z"),              type = "number")
-  table$addColumnInfo(name = "pVal",     title = gettext("p"),              type = "pvalue")
+  table$addColumnInfo(name = "stat",     title = "z",                       type = "number")
+  table$addColumnInfo(name = "pVal",     title = "p",                       type = "pvalue")
   table$addColumnInfo(name = "lowerCI",  title = gettext("Lower"),          type = "number", overtitle = overtitleCI)
   table$addColumnInfo(name = "upperCI",  title = gettext("Upper"),          type = "number", overtitle = overtitleCI)
 
@@ -257,8 +257,8 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
 
   table$addColumnInfo(name = "type",     title = "",                    type = "string")
   table$addColumnInfo(name = "est",      title = gettext("Estimate"),   type = "number")
-  table$addColumnInfo(name = "stat",     title = gettext("z"),          type = "number")
-  table$addColumnInfo(name = "pVal",     title = gettext("p"),          type = "pvalue")
+  table$addColumnInfo(name = "stat",     title = "z",                   type = "number")
+  table$addColumnInfo(name = "pVal",     title = "p",                   type = "pvalue")
   table$addColumnInfo(name = "lowerCI",  title = gettext("Lower"),      type = "number", overtitle = overtitleCI)
   table$addColumnInfo(name = "upperCI",  title = gettext("Upper"),      type = "number", overtitle = overtitleCI)
 
@@ -320,8 +320,8 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   table$addColumnInfo(name = "ur",       title = gettext("Upper"),          type = "number", overtitle = overtitleP)
   table$addColumnInfo(name = "est",      title = gettext("Estimate"),       type = "number")
   table$addColumnInfo(name = "se",       title = gettext("Standard Error"), type = "number")
-  table$addColumnInfo(name = "stat",     title = gettext("z"),              type = "number")
-  table$addColumnInfo(name = "pVal",     title = gettext("p"),              type = "pvalue")
+  table$addColumnInfo(name = "stat",     title = "z",                       type = "number")
+  table$addColumnInfo(name = "pVal",     title = "p",                       type = "pvalue")
   table$addColumnInfo(name = "lowerCI",  title = gettext("Lower"),          type = "number", overtitle = overtitleCI)
   table$addColumnInfo(name = "upperCI",  title = gettext("Upper"),          type = "number", overtitle = overtitleCI)
 
@@ -467,9 +467,9 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   heterogeneityTest$position <- 1
   fitTests[["heterogeneityTest"]] <- heterogeneityTest
 
-  heterogeneityTest$addColumnInfo(name = "stat",  title = gettext("Q"),  type = "number")
-  heterogeneityTest$addColumnInfo(name = "df",    title = gettext("df"), type = "integer")
-  heterogeneityTest$addColumnInfo(name = "pVal",  title = gettext("p"),  type = "pvalue")
+  heterogeneityTest$addColumnInfo(name = "stat",  title = "Q",  type = "number")
+  heterogeneityTest$addColumnInfo(name = "df",    title = "df", type = "integer")
+  heterogeneityTest$addColumnInfo(name = "pVal",  title = "p",  type = "pvalue")
 
   if (!is.null(models)) {
 
@@ -520,10 +520,10 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   biasTest$position <- 2
   fitTests[["biasTest"]] <- biasTest
 
-  biasTest$addColumnInfo(name = "type",  title = "",                type = "string")
-  biasTest$addColumnInfo(name = "stat",  title = gettext("ChiSq"),  type = "number")
-  biasTest$addColumnInfo(name = "df",    title = gettext("df"),     type = "integer")
-  biasTest$addColumnInfo(name = "pVal",  title = gettext("p"),      type = "pvalue")
+  biasTest$addColumnInfo(name = "type",  title = "",       type = "string")
+  biasTest$addColumnInfo(name = "stat",  title = "ChiSq",  type = "number")
+  biasTest$addColumnInfo(name = "df",    title = "df",     type = "integer")
+  biasTest$addColumnInfo(name = "pVal",  title = "p",      type = "pvalue")
 
   if (!is.null(models)) {
 
@@ -600,7 +600,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   # mean estimates
   if (is.null(estimatesFE[["estimatesFE"]]) && options[["estimatesFE"]]) {
     estimatesMeanFE <- createJaspTable(title = gettextf(
-      "Mean Estimates(%s)",
+      "Mean Estimates (%s)",
       if (options[["measures"]] == "correlation") "\u03C1" else "\u03BC"
     ))
     estimatesMeanFE$position  <- 1
@@ -612,7 +612,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   if (is.null(estimatesFE[["weightsFE"]]) && options[["weightsFE"]] && options[["estimatesFE"]]) {
     weightsFE <- createJaspTable(title = gettext("Estimated Weights"))
     weightsFE$position  <- 2
-    weightsFE$dependOn(c("weightsFE"))
+    weightsFE$dependOn("weightsFE")
     estimatesFE[["weightsFE"]] <- weightsFE
     weightsFE <- .smFillWeights(jaspResults, weightsFE, models[["FE"]], options)
   }
@@ -632,7 +632,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   # mean estimates
   if (is.null(estimatesRE[["meanRE"]]) && options[["estimatesRE"]]) {
     estimatesMeanRE <- createJaspTable(title = gettextf(
-      "Mean Estimates(%s)",
+      "Mean Estimates (%s)",
       if (options[["measures"]] == "correlation") "\u03C1" else "\u03BC"
     ))
     estimatesMeanRE$position <- 1
@@ -644,7 +644,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   if (is.null(estimatesRE[["heterogeneityRE"]]) && options[["heterogeneityRE"]] && options[["estimatesRE"]]) {
     heterogeneityRE <- createJaspTable(title = gettextf("Heterogeneity Estimates(%s)", "\u03C4"))
     heterogeneityRE$position <- 2
-    heterogeneityRE$dependOn(c("heterogeneityRE"))
+    heterogeneityRE$dependOn("heterogeneityRE")
     estimatesRE[["heterogeneityRE"]] <- heterogeneityRE
     heterogeneityRE <- .smFillHeterogeneity(jaspResults, heterogeneityRE, models[["RE"]], options)
   }
@@ -653,7 +653,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   if (is.null(estimatesRE[["weightsRE"]]) && options[["weightsRE"]] && options[["estimatesRE"]]) {
     weightsRE <- createJaspTable(title = gettext("Estimated Weights"))
     weightsRE$position  <- 3
-    weightsRE$dependOn(c("weightsRE"))
+    weightsRE$dependOn("weightsRE")
     estimatesRE[["weightsRE"]] <- weightsRE
     weightsRE <- .smFillWeights(jaspResults, weightsRE, models[["RE"]], options)
   }
@@ -727,7 +727,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   } else {
     plotWeights <- createJaspPlot(
       title  = gettextf(
-        "Weight Function(%s)",
+        "Weight Function (%s)",
         ifelse(type == "FE", gettext("Fixed Effects"), gettext("Random Effects"))
       ),
       width  = 500,
@@ -770,39 +770,37 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   stepsOrder <- c(1, sort(rep(2:(length(steps)-1), 2)), length(steps))
 
   # axis ticks
-  xTics    <- trimws(steps, which = "both", whitespace = "0")
-  xTics[1] <- 0
-  yTics    <- jaspGraphs::getPrettyAxisBreaks(range(c(weightsMean, weightsLowerCI, weightsupperCI)))
-  xSteps   <- if (options[["weightFunctionRescale"]]) seq(0, 1, length.out = length(steps)) else steps
+  xTicks    <- trimws(steps, which = "both", whitespace = "0")
+  xTicks[1] <- 0
+  yTicks    <- jaspGraphs::getPrettyAxisBreaks(range(c(weightsMean, weightsLowerCI, weightsupperCI)))
+  xSteps    <- if (options[["weightFunctionRescale"]]) seq(0, 1, length.out = length(steps)) else steps
 
   # make the plot happen
-  plot <- ggplot2::ggplot()
-  # mean
-  plot <- plot + ggplot2::geom_polygon(
-    ggplot2::aes(
-      x = c(xSteps[stepsOrder], rev(xSteps[stepsOrder])),
-      y = c(weightsLowerCI[coordOrder], rev(weightsupperCI[coordOrder]))
-    ),
-    fill = "grey80")
-  # CI
-  plot <- plot +ggplot2::geom_path(
-    ggplot2::aes(
-      x = xSteps[stepsOrder],
-      y = weightsMean[coordOrder]
-    ),
-    size = 1.25)
+  plot <- ggplot2::ggplot() +
+    ggplot2::geom_polygon(
+      ggplot2::aes(
+        x = c(xSteps[stepsOrder], rev(xSteps[stepsOrder])),
+        y = c(weightsLowerCI[coordOrder], rev(weightsupperCI[coordOrder]))
+      ),
+      fill = "grey80") +
+    ggplot2::geom_path(
+      ggplot2::aes(
+        x = xSteps[stepsOrder],
+        y = weightsMean[coordOrder]
+      ),
+      size = 1.25) +
+    ggplot2::scale_x_continuous(
+      gettext("P-value (One-sided)"),
+      breaks = xSteps,
+      labels = xTicks,
+      limits = c(0, 1)) +
+    ggplot2::scale_y_continuous(
+      gettext("Publication Probability"),
+      breaks = yTicks,
+      limits = range(yTicks))+
+    jaspGraphs::geom_rangeframe() +
+    jaspGraphs::themeJaspRaw()
 
-  plot <- plot + ggplot2::scale_x_continuous(
-    gettext("P-value (One-sided)"),
-    breaks = xSteps,
-    labels = xTics,
-    limits = c(0, 1))
-  plot <- plot + ggplot2::scale_y_continuous(
-    gettext("Publication Probability"),
-    breaks = yTics,
-    limits = range(yTics))
-
-  plot <- plot + jaspGraphs::geom_rangeframe() + jaspGraphs::themeJaspRaw()
   plotWeights$plotObject <- plot
 
   return()
@@ -858,37 +856,35 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   if (any(c(is.nan(estimates[,"mean"]), is.nan(estimates[,"lowerCI"]), is.nan(estimates[,"upperCI"]))))
     plotEstimates$setError(gettext("The figure could not be created since one of the estimates is not a number."))
 
+  xTicks <- jaspGraphs::getPrettyAxisBreaks(range(c(0, estimates[,"lowerCI"], estimates[,"upperCI"])))
 
   # make the plot happen
-  plot <- ggplot2::ggplot()
+  plot <- ggplot2::ggplot() +
+    ggplot2::geom_errorbarh(
+      ggplot2::aes(
+        xmin = estimates[,"lowerCI"],
+        xmax = estimates[,"upperCI"],
+        y    = 1:4
+      ),
+      height = 0.3) +
+    ggplot2::geom_point(
+      ggplot2::aes(
+        x = estimates[,"mean"],
+        y = 1:4),
+      shape = 15) +
+    ggplot2::geom_line(ggplot2::aes(x = c(0,0), y = c(.5, 4.5)), linetype = "dotted") +
+    ggplot2::scale_x_continuous(
+      bquote("Mean Estimate"~.(if (options[["measures"]] == "correlation") bquote(rho) else bquote(mu))),
+      breaks = xTicks,
+      limits = range(xTicks)) +
+    ggplot2::scale_y_continuous(
+      "",
+      breaks = 1:4,
+      labels = estimates[,"model"],
+      limits = c(0.5, 4.5)) +
+    ggplot2::theme(axis.ticks.y = ggplot2::element_blank()) +
+    jaspGraphs::geom_rangeframe(sides = "b") + jaspGraphs::themeJaspRaw()
 
-  plot <- plot + ggplot2::geom_errorbarh(
-    ggplot2::aes(
-      xmin = estimates[,"lowerCI"],
-      xmax = estimates[,"upperCI"],
-      y    = 1:4
-    ),
-    height = 0.3)
-  plot   <- plot + ggplot2::geom_point(
-    ggplot2::aes(
-      x = estimates[,"mean"],
-      y = 1:4),
-    shape = 15)
-  plot <- plot + ggplot2::geom_line(ggplot2::aes(x = c(0,0), y = c(.5, 4.5)), linetype = "dotted")
-  plot <- plot + ggplot2::scale_x_continuous(
-    bquote("Mean Estimate"~.(if (options[["measures"]] == "correlation") bquote(rho) else bquote(mu))),
-    breaks = jaspGraphs::getPrettyAxisBreaks(range(c(0, estimates[,"lowerCI"], estimates[,"upperCI"]))),
-    limits = range(jaspGraphs::getPrettyAxisBreaks(range(c(0, estimates[,"lowerCI"], estimates[,"upperCI"])))))
-  plot <- plot + ggplot2::scale_y_continuous(
-    "",
-    breaks = 1:4,
-    labels = estimates[,"model"],
-    limits = c(0.5, 4.5))
-  plot <- plot + ggplot2::theme(
-    axis.ticks.y = ggplot2::element_blank()
-  )
-
-  plot <- plot + jaspGraphs::geom_rangeframe(sides = "b") + jaspGraphs::themeJaspRaw()
   plotEstimates$plotObject <- plot
 
   return()

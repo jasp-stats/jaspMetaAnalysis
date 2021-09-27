@@ -1,7 +1,7 @@
 WAAP-WLS
 ===
 
-The WAAP-WLS is a meta-analytic method based on weighted least squares. Instead of the classical (random or fixed) meta-analyses that assume additive heterogeneity, WAAP-WLS assumes multiplicative heterogeneity. Furthermore, WAAP incorporates  adjustments of selection processes. See Carter et al. (2019) for an overview of the methods.
+WAAP-WLS is a meta-analytic method based on weighted least squares. Instead of the classical (random or fixed) meta-analyses that assume additive heterogeneity, WAAP-WLS assumes multiplicative heterogeneity. Furthermore, WAAP incorporates  adjustments of selection processes. See Carter et al. (2019) for an overview of the methods.
 - WLS is the default meta-analytic model that assumes multiplicative heterogeneity (Stanley & Doucouliagos, 2017).
 - WAAP adjusts for selection processes by using only high-powered studies -- a WLS model fitted only with studies that would have at least 80% power to detect the WLS meta-analytic effect size estimate based on all studies (Ioannidis, Stanley, & Doucouliagos, 2017; Stanley et al., 2017).
 
@@ -38,13 +38,10 @@ Visualizes mean effect size estimates from all fitted models.
 
 ### References
 ---
-Carter, E. C., Schönbrodt, F. D., Gervais, W. M., & Hilgard, J. (2019). Correcting for bias in psychology: A comparison of meta-analytic methods. Advances in Methods and Practices in Psychological Science, 2(2), 115-144.
-
-Ioannidis, J. P., Stanley, T. D., & Doucouliagos, H. (2017). The power of bias in economics research.
-
-Stanley, T. D., Doucouliagos, H., & Ioannidis, J. P. (2017). Finding the power to reduce publication bias. Statistics in Medicine, 36(10), 1580-1598.
-
-Stanley, T. D., & Doucouliagos, H. (2017). Neither fixed nor random: weighted least squares meta‐regression. Research Synthesis Methods, 8(1), 19-42.
+- Carter, E. C., Schönbrodt, F. D., Gervais, W. M., & Hilgard, J. (2019). Correcting for bias in psychology: A comparison of meta-analytic methods. Advances in Methods and Practices in Psychological Science, 2(2), 115-144.
+- Ioannidis, J. P., Stanley, T. D., & Doucouliagos, H. (2017). The power of bias in economics research.
+- Stanley, T. D., Doucouliagos, H., & Ioannidis, J. P. (2017). Finding the power to reduce publication bias. Statistics in Medicine, 36(10), 1580-1598.
+- Stanley, T. D., & Doucouliagos, H. (2017). Neither fixed nor random: weighted least squares meta‐regression. Research Synthesis Methods, 8(1), 19-42.
 
 
 ### R-packages

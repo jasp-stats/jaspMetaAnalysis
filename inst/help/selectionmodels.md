@@ -1,7 +1,7 @@
 Selection Models
 ===
 
-The selection models are meta-analytic methods on the fixed and random effects meta-analytic models that adjust for publication bias operating on p-values (Iyengar & Greenhouse, 1988; Vevea & Hedges, 1995). The analysis allow users to specify the selection process using either one or two-sided p-value cutoffs, which are internally transformed to one-sided p-value cutoffs prior to the fitting process.
+Selection models are meta-analytic methods on the fixed and random effects meta-analytic models that adjust for publication bias operating on p-values (Iyengar & Greenhouse, 1988; Vevea & Hedges, 1995). The analysis allow users to specify the selection process using either one or two-sided p-value cutoffs, which are internally transformed to one-sided p-value cutoffs prior to the fitting process.
 
 ### Input
 ---
@@ -52,9 +52,8 @@ Visualizes mean effect size estimates from all fitted models.
 
 ### References
 ---
-Iyengar, S., & Greenhouse, J. B. (1988). Selection models and the file drawer problem. Statistical Science, 109-117.
-
-Vevea, J. L., & Hedges, L. V. (1995). A general linear model for estimating effect size in the presence of publication bias. Psychometrika, 60(3), 419-435.
+- Iyengar, S., & Greenhouse, J. B. (1988). Selection models and the file drawer problem. Statistical Science, 109-117.
+- Vevea, J. L., & Hedges, L. V. (1995). A general linear model for estimating effect size in the presence of publication bias. Psychometrika, 60(3), 419-435.
 
 
 ### R-packages
