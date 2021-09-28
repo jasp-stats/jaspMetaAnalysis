@@ -225,7 +225,7 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
   imgHeight  <- 250
   imgWidth   <- 600
 
-  gRPlot   <- createJaspPlot(title = gettext("Autocorrelations plot"), width = imgWidth, height = imgHeight)
+  gRPlot   <- createJaspPlot(title = gettext("Gelman-Rubin plot"), width = imgWidth, height = imgHeight)
   gRPlot$position <- 7
   gRPlot$dependOn(c("gelmanRubinPlot", c(.metamiscDependencies, .metamiscDependenciesBayesian)))
   jaspResults[["gRPlot"]] <- gRPlot
