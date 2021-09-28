@@ -40,7 +40,7 @@ Section
 				label: 			qsTr("Normal mean:")
 				name: 			"priorMuNMeam"
 				defaultValue: 	0
-				fieldWidth: 	50
+				fieldWidth: 	40 * preferencesModel.uiScale
 			}
 
 			DoubleField
@@ -50,7 +50,7 @@ Section
 				defaultValue:	measure === "OE" ? 10 : 100
 				min:			0
 				max:			measure === "OE" ? 10 : 100
-				fieldWidth: 	50
+				fieldWidth: 	40 * preferencesModel.uiScale
 			}
 	}
 
@@ -74,7 +74,7 @@ Section
 				defaultValue: 	0
 				min:			0
 				max:			priorTauUMax
-				fieldWidth: 	50
+				fieldWidth: 	40 * preferencesModel.uiScale
 			}
 
 			DoubleField
@@ -84,7 +84,7 @@ Section
 				id:				priorTauUMax
 				defaultValue:	2
 				min:			priorTauUMin.value
-				fieldWidth: 	50
+				fieldWidth: 	40 * preferencesModel.uiScale
 			}
 		}
 
@@ -99,7 +99,7 @@ Section
 				label: 			qsTr("location:")
 				name: 			"priorTauTLocation"
 				defaultValue: 	0
-				fieldWidth: 	50
+				fieldWidth: 	40 * preferencesModel.uiScale
 			}
 
 			DoubleField
@@ -108,7 +108,7 @@ Section
 				name: 			"priorTauTScale"
 				defaultValue: 	1.5
 				min:			0
-				fieldWidth: 	50
+				fieldWidth: 	40 * preferencesModel.uiScale
 			}
 
 			IntegerField
@@ -117,6 +117,7 @@ Section
 				name: 			"priorTauTDf"
 				defaultValue: 	3
 				min:			1
+				fieldWidth: 	40 * preferencesModel.uiScale
 			}
 
 			DoubleField
@@ -127,7 +128,7 @@ Section
 				defaultValue: 	0
 				min:			0
 				max:			priorTauTMax.value
-				fieldWidth: 	50
+				fieldWidth: 	40 * preferencesModel.uiScale
 			}
 
 			DoubleField
@@ -137,7 +138,7 @@ Section
 				defaultValue:	10
 				id:				priorTauTMax
 				min:			priorTauTMin
-				fieldWidth: 	50
+				fieldWidth: 	40 * preferencesModel.uiScale
 			}
 		}
 	}
