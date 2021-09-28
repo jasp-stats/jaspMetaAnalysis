@@ -100,7 +100,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
       .quitAnalysis(gettext("The study labels contain invalid characters. Please, remove them before running the analysis."))
   }
 
-  .hasErrors(dataset               = dataset,
+  .hasErrors(dataset               = dataset[,!grepl(colnames(dataset), options[["inputLabels"]])],
              type                  = c("infinity", "observations", "negativeValues"),
              observations.amount   = "< 2",
              exitAnalysisIfErrors  = TRUE)
