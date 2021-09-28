@@ -223,7 +223,7 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
     return()
 
   imgHeight  <- 250
-  imgWidth   <- 600
+  imgWidth   <- 750
 
   gRPlot   <- createJaspPlot(title = gettext("Gelman-Rubin plot"), width = imgWidth, height = imgHeight)
   gRPlot$position <- 7
@@ -241,7 +241,7 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
   }
 
   p <- p + jaspGraphs::geom_rangeframe() +
-    jaspGraphs::themeJaspRaw() +
+    jaspGraphs::themeJaspRaw(legend.position = "right") +
     ggplot2::xlab(gettext("Last iteration in chain")) + ggplot2::ylab(gettext("Shrink factor"))
 
   gRPlot$plotObject <- p
