@@ -27,6 +27,9 @@ Section
 	expanded:	true
 
 	property alias measure:		measure.value
+	property alias inputN:		inputN.count
+	property alias inputO:		inputO.count
+	property alias inputE:		inputE.count
 
 	RadioButtonGroup
 	{
@@ -102,6 +105,7 @@ Section
 		AssignedVariablesList
 		{
 			name:				"inputN"
+			id: 				inputN
 			title:				qsTr("Number of Participants")
 			singleVariable:		true
 			allowedColumns: 	["scale", "ordinal"]
@@ -110,6 +114,7 @@ Section
 		AssignedVariablesList
 		{
 			name:				"inputO"
+			id: 				inputO
 			title:				qsTr("Number of Observed Events")
 			singleVariable:		true
 			allowedColumns: 	["scale", "ordinal"]
@@ -118,6 +123,7 @@ Section
 		AssignedVariablesList
 		{
 			name:				"inputE"
+			id: 				inputE
 			title:				qsTr("Number of Expected Events")
 			singleVariable:		true
 			allowedColumns: 	["scale", "ordinal"]

@@ -33,6 +33,9 @@ Form {
 	{
 		analysisType:		"classical"
 		measure:			predictionPerformanceData.measure
+		inputN:				predictionPerformanceData.inputN
+		inputO:				predictionPerformanceData.inputO
+		inputE:				predictionPerformanceData.inputE
 	}
 
 }

@@ -29,6 +29,9 @@ Section
 
 	property string analysisType:		"classical"
 	property string	measure:			"OE"
+	property int inputN:				0
+	property int inputO:				0
+	property int inputE:				0
 
 	Group
 	{
@@ -192,6 +195,7 @@ Section
 			name:	"funnelAsymmetryTestMacaskillFIV"
 			label:	qsTr("Macaskill")
 			checked: false
+			enabled: inputN === 1
 		}
 
 		CheckBox
@@ -199,6 +203,7 @@ Section
 			name:	"funnelAsymmetryTestMacaskillFPV"
 			label:	qsTr("Macaskill (pooled)")
 			checked: false
+			enabled: inputN === 1 && inputO === 1
 		}
 
 		CheckBox
@@ -206,6 +211,7 @@ Section
 			name:	"funnelAsymmetryTestPeters"
 			label:	qsTr("Peters")
 			checked: false
+			enabled: inputN === 1 && inputO === 1
 		}
 
 		CheckBox
@@ -213,6 +219,7 @@ Section
 			name:	"funnelAsymmetryTestDebrayFIV"
 			label:	qsTr("Debray")
 			checked: false
+			enabled: inputO === 1
 		}
 
 		/* Not implemented
