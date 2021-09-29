@@ -338,8 +338,12 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
     fatFits[["M-FIV"]] <- tryCatch({
       if (options[["inputN"]] == "")
         stop("The number of participants must be specified.")
-      metamisc::fat(b = fit$data[,theta], b.se = fit$data[,theta.se], method = "M-FIV",
-                    n.total = dataset[, options[["inputN"]]])
+      fitFat <- metamisc::fat(b = fit$data[,theta], b.se = fit$data[,theta.se], method = "M-FIV",
+                              n.total = dataset[, options[["inputN"]]])
+      if (is.na(fitFat$pval))
+        stop("The regression model could not be estimated.")
+      else
+        fitFat
     }, error = function(e)e)
 
   if (is.null(fatFits[["M-FPV"]]) && options[["funnelAsymmetryTestMacaskillFPV"]])
@@ -348,8 +352,12 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
         stop("The number of participants must be specified.")
       else if (options[["inputO"]] == "")
         stop("The number of observed events must be specified.")
-      metamisc::fat(b = fit$data[,theta], b.se = fit$data[,theta.se], method = "M-FPV",
-                    n.total = dataset[, options[["inputN"]]], d.total = dataset[, options[["inputO"]]])
+      fitFat <- metamisc::fat(b = fit$data[,theta], b.se = fit$data[,theta.se], method = "M-FPV",
+                              n.total = dataset[, options[["inputN"]]], d.total = dataset[, options[["inputO"]]])
+      if (is.na(fitFat$pval))
+        stop("The regression model could not be estimated.")
+      else
+        fitFat
     }, error = function(e)e)
 
   if (is.null(fatFits[["P-FPV"]]) && options[["funnelAsymmetryTestPeters"]])
@@ -358,16 +366,24 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
         stop("The number of participants must be specified.")
       else if (options[["inputO"]] == "")
         stop("The number of observed events must be specified.")
-      metamisc::fat(b = fit$data[,theta], b.se = fit$data[,theta.se], method = "P-FPV",
-                    n.total = dataset[, options[["inputN"]]], d.total = dataset[, options[["inputO"]]])
+      fitFat <- metamisc::fat(b = fit$data[,theta], b.se = fit$data[,theta.se], method = "P-FPV",
+                              n.total = dataset[, options[["inputN"]]], d.total = dataset[, options[["inputO"]]])
+      if (is.na(fitFat$pval))
+        stop("The regression model could not be estimated.")
+      else
+        fitFat
     }, error = function(e)e)
 
   if (is.null(fatFits[["D-FIV"]]) && options[["funnelAsymmetryTestDebrayFIV"]])
     fatFits[["D-FIV"]] <- tryCatch({
       if (options[["inputO"]] == "")
         stop("The number of observed events must be specified.")
-      metamisc::fat(b = fit$data[,theta], b.se = fit$data[,theta.se], method = "D-FIV",
-                    d.total = dataset[, options[["inputO"]]])
+      fitFat <- metamisc::fat(b = fit$data[,theta], b.se = fit$data[,theta.se], method = "D-FIV",
+                              d.total = dataset[, options[["inputO"]]])
+      if (is.na(fitFat$pval))
+        stop("The regression model could not be estimated.")
+      else
+        fitFat
     }, error = function(e)e)
 
   # if (is.null(fatFits[["D-FAV"]]) && options[["funnelAsymmetryTestDebrayFAV"]])
@@ -405,14 +421,14 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
     return()
 
   for(i in seq_along(fatFits)) {
-    if (any(class(fatFits[[i]]) %in% c("simpleError", "error"))) {
+    if (inherits(fatFits[[i]], c("simpleError", "error"))) {
       funnelTestTable$addRows(list(
         method  = .metamiscFitFunnelAsymmetryNames(names(fatFits)[i])
       ))
       funnelTestTable$addFootnote(gettextf("The %1$s test failed with the following error: %2$s",
                                            .metamiscFitFunnelAsymmetryNames(names(fatFits)[i]),
                                            fatFits[[i]]$message))
-    } else{
+    } else {
       funnelTestTable$addRows(list(
         method  = .metamiscFitFunnelAsymmetryNames(fatFits[[i]]$method),
         t       = fatFits[[i]]$tval,
