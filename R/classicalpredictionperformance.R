@@ -27,9 +27,6 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
 
   .metamiscSummaryTable(jaspResults, options)
 
-  if (jaspResults[["summaryTable"]]$getError())
-    return()
-
   if (options[["forestPlot"]])
     .metamiscForestPlot(jaspResults, options, dataset, ready)
 
@@ -167,13 +164,12 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   summaryTable$addColumnInfo(name = "upperPI",     title = gettext("Upper"), type = "number", overtitle = overtitlePI)
   jaspResults[["summaryTable"]] <- summaryTable
 
-  if (is.null(fit))
-    return()
 
-  if (inherits(fit, c("simpleError", "error"))){
-    summaryTable$setError(gettextf("metamisc package failed with the following error: '%s'", fit[["message"]]))
+  if (inherits(fit, c("simpleError", "error")))
+    jaspResults[["summaryTable"]]$setError(gettextf("metamisc package failed with the following error: '%s'", fit[["message"]]))
+
+  if (is.null(fit) || jaspResults[["summaryTable"]]$getError())
     return()
-  }
 
   summaryTable$addRows(list(
     estimate = fit[["est"]],
@@ -206,7 +202,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
 
   imgHeight  <- 400
   imgWidth   <- 520
-  if (ready) {
+  if (ready && !jaspResults[["summaryTable"]]$getError()) {
     imgHeight <- jaspResults[["model"]][["object"]][["numstudies"]] * 25 + 50
     if (!is.null(options[["studyLabels"]]))
       imgWidth <- max(nchar(as.character(dataset[,options[["studyLabels"]]]))) * 5 + 1100
@@ -217,7 +213,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   forestPlot$dependOn(c("forestPlot", "forestPlotLabels", "forestPlotEstimates", .metamiscDependencies, if (options[["method"]] == "BAYES") .metamiscDependenciesBayesian))
   jaspResults[["forestPlot"]] <- forestPlot
 
-  if (!ready)
+  if (!ready || jaspResults[["summaryTable"]]$getError())
     return()
 
   p <- plot(jaspResults[["model"]][["object"]])
@@ -252,6 +248,9 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   return()
 }
 .metamiscAddColumn           <- function(jaspResults, options, dataset) {
+
+  if (jaspResults[["summaryTable"]]$getError())
+    return()
 
   if (options[["measure"]] == "OE")
     if ((options[["exportOE"]] == "" || !is.null(jaspResults[["exportOE"]])) || (options[["exportOElCI"]] == "" || !is.null(jaspResults[["exportOElCI"]])) || (options[["exportOEuCI"]] == "" || !is.null(jaspResults[["exportOEuCI"]])))
@@ -306,6 +305,9 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   return()
 }
 .metamiscFitFunnelAsymmetryTest  <- function(jaspResults, options, dataset) {
+
+  if (jaspResults[["summaryTable"]]$getError())
+    return()
 
   if (is.null(jaspResults[["modelsFat"]])) {
     modelsFat <- createJaspState()
@@ -399,7 +401,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   funnelTestTable$addColumnInfo(name = "p",      title = gettext("p"),            type = "pvalue")
   jaspResults[["funnelTestTable"]] <- funnelTestTable
 
-  if (is.null(fatFits))
+  if (is.null(fatFits) || jaspResults[["summaryTable"]]$getError())
     return()
 
   for(i in seq_along(fatFits)) {

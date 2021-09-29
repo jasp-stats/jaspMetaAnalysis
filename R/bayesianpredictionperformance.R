@@ -27,9 +27,6 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
 
   .metamiscSummaryTable(jaspResults, options)
 
-  if (jaspResults[["summaryTable"]]$getError())
-    return()
-
   if (options[["forestPlot"]])
     .metamiscForestPlot(jaspResults, options, dataset, ready)
 
@@ -116,11 +113,6 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
     n.chains   = options[["chains"]]
   ),error = function(e)e)
 
-  # error handling
-  if (any(class(fit) %in% c("simpleError", "error"))) {
-    .quitAnalysis(paste0("metamisc package failed with the following error: '", fit[["message"]], "'"))
-  }
-
   model[["object"]] <- fit
 
   return()
@@ -138,7 +130,7 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
   priorAndPosteriorPlot$dependOn(c("priorAndPosteriorPlot", c(.metamiscDependencies, .metamiscDependenciesBayesian)))
   jaspResults[["priorAndPosteriorPlot"]] <- priorAndPosteriorPlot
 
-  if (!ready)
+  if (!ready || jaspResults[["summaryTable"]]$getError())
     return()
 
   p <- try(metamisc::dplot(jaspResults[["model"]][["object"]]))
@@ -168,7 +160,7 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
   rmPlot$dependOn(c("diagnosticsRmPlot", c(.metamiscDependencies, .metamiscDependenciesBayesian)))
   jaspResults[["rmPlot"]] <- rmPlot
 
-  if (!ready)
+  if (!ready || jaspResults[["summaryTable"]]$getError())
     return()
 
   p <- try(metamisc::rmplot(jaspResults[["model"]][["object"]]))
@@ -199,7 +191,7 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
   acPlot$dependOn(c("diagnosticsAcPlot", c(.metamiscDependencies, .metamiscDependenciesBayesian)))
   jaspResults[["acPlot"]] <- acPlot
 
-  if (!ready)
+  if (!ready || jaspResults[["summaryTable"]]$getError())
     return()
 
   p <- try(metamisc::acplot(jaspResults[["model"]][["object"]]))
@@ -230,7 +222,7 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
   gRPlot$dependOn(c("gelmanRubinPlot", c(.metamiscDependencies, .metamiscDependenciesBayesian)))
   jaspResults[["gRPlot"]] <- gRPlot
 
-  if (!ready)
+  if (!ready || jaspResults[["summaryTable"]]$getError())
     return()
 
   p <- try(metamisc:::gelmanplot(jaspResults[["model"]][["object"]]))
