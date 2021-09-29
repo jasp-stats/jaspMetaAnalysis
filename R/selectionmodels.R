@@ -467,9 +467,9 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   heterogeneityTest$position <- 1
   fitTests[["heterogeneityTest"]] <- heterogeneityTest
 
-  heterogeneityTest$addColumnInfo(name = "stat",  title = "Q",  type = "number")
-  heterogeneityTest$addColumnInfo(name = "df",    title = "df", type = "integer")
-  heterogeneityTest$addColumnInfo(name = "pVal",  title = "p",  type = "pvalue")
+  heterogeneityTest$addColumnInfo(name = "stat",  title = "Q",           type = "number")
+  heterogeneityTest$addColumnInfo(name = "df",    title = gettext("df"), type = "integer")
+  heterogeneityTest$addColumnInfo(name = "pVal",  title = "p",           type = "pvalue")
 
   if (!is.null(models)) {
 
@@ -520,10 +520,10 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   biasTest$position <- 2
   fitTests[["biasTest"]] <- biasTest
 
-  biasTest$addColumnInfo(name = "type",  title = "",       type = "string")
-  biasTest$addColumnInfo(name = "stat",  title = "ChiSq",  type = "number")
-  biasTest$addColumnInfo(name = "df",    title = "df",     type = "integer")
-  biasTest$addColumnInfo(name = "pVal",  title = "p",      type = "pvalue")
+  biasTest$addColumnInfo(name = "type",  title = "",                type = "string")
+  biasTest$addColumnInfo(name = "stat",  title = gettext("ChiSq"),  type = "number")
+  biasTest$addColumnInfo(name = "df",    title = gettext("df"),     type = "integer")
+  biasTest$addColumnInfo(name = "pVal",  title = "p",               type = "pvalue")
 
   if (!is.null(models)) {
 

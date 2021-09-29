@@ -90,7 +90,7 @@
   table$addColumnInfo(name = "est",      title = gettext("Estimate"),       type = "number")
   table$addColumnInfo(name = "se",       title = gettext("Standard Error"), type = "number")
   table$addColumnInfo(name = "stat",     title = "t",                       type = "number")
-  table$addColumnInfo(name = "df",       title = "df",                      type = "integer")
+  table$addColumnInfo(name = "df",       title = gettext("df"),             type = "integer")
   table$addColumnInfo(name = "pVal",     title = "p",                       type = "pvalue")
   table$addColumnInfo(name = "lowerCI",  title = gettext("Lower"),          type = "number", overtitle = overtitleCI)
   table$addColumnInfo(name = "upperCI",  title = gettext("Upper"),          type = "number", overtitle = overtitleCI)
@@ -132,7 +132,7 @@
   table$addColumnInfo(name = "est",      title = gettext("Estimate"),       type = "number")
   table$addColumnInfo(name = "se",       title = gettext("Standard Error"), type = "number")
   table$addColumnInfo(name = "stat",     title = "t",                       type = "number")
-  table$addColumnInfo(name = "df",       title = "df",                      type = "integer")
+  table$addColumnInfo(name = "df",       title = gettext("df"),             type = "integer")
   table$addColumnInfo(name = "pVal",     title = "p",                       type = "pvalue")
   table$addColumnInfo(name = "lowerCI",  title = gettext("Lower"),          type = "number", overtitle = overtitleCI)
   table$addColumnInfo(name = "upperCI",  title = gettext("Upper"),          type = "number", overtitle = overtitleCI)
@@ -311,10 +311,10 @@
   effectTest$position <- 1
   fitTests[["effectTest"]] <- effectTest
 
-  effectTest$addColumnInfo(name = "type",  title = "",   type = "string")
-  effectTest$addColumnInfo(name = "stat",  title = "t",  type = "number")
-  effectTest$addColumnInfo(name = "df",    title = "df", type = "integer")
-  effectTest$addColumnInfo(name = "pVal",  title = "p",  type = "pvalue")
+  effectTest$addColumnInfo(name = "type",  title = "",            type = "string")
+  effectTest$addColumnInfo(name = "stat",  title = "t",           type = "number")
+  effectTest$addColumnInfo(name = "df",    title = gettext("df"), type = "integer")
+  effectTest$addColumnInfo(name = "pVal",  title = "p",           type = "pvalue")
 
   if (!is.null(models)) {
 
@@ -357,10 +357,10 @@
     biasTest$position <- 2
     fitTests[["biasTest"]] <- biasTest
 
-    biasTest$addColumnInfo(name = "type",  title = "",       type = "string")
-    biasTest$addColumnInfo(name = "stat",  title = "t",      type = "number")
-    biasTest$addColumnInfo(name = "df",    title = "df",     type = "integer")
-    biasTest$addColumnInfo(name = "pVal",  title = "p",      type = "pvalue")
+    biasTest$addColumnInfo(name = "type",  title = "",            type = "string")
+    biasTest$addColumnInfo(name = "stat",  title = "t",           type = "number")
+    biasTest$addColumnInfo(name = "df",    title = gettext("df"), type = "integer")
+    biasTest$addColumnInfo(name = "pVal",  title = "p",           type = "pvalue")
 
     if (!is.null(models)) {
 
