@@ -414,7 +414,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   funnelTestTable$addColumnInfo(name = "method", title = gettext("Method"),       type = "string")
   funnelTestTable$addColumnInfo(name = "t",      title = gettext("t-statistic"),  type = "number")
   funnelTestTable$addColumnInfo(name = "df",     title = gettext("df"),           type = "integer")
-  funnelTestTable$addColumnInfo(name = "p",      title = gettext("p"),            type = "pvalue")
+  funnelTestTable$addColumnInfo(name = "p",      title = "p",                     type = "pvalue")
   jaspResults[["funnelTestTable"]] <- funnelTestTable
 
   if (is.null(fatFits) || jaspResults[["summaryTable"]]$getError())
