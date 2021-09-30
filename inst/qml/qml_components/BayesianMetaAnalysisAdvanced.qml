@@ -64,7 +64,7 @@ Section
 				id: 			priorH0FE
 				name: 			"priorH0FE"
 				label: 			"H\u2080"
-				defaultValue: 	priorModelProbabilityGroup.fixedEffectsHypothesisVal
+				defaultValue: 	0.25
 			}
 
 			DoubleField
@@ -72,7 +72,7 @@ Section
 				id: 			priorH1FE
 				name: 			"priorH1FE"
 				label: 			"H\u2081"
-				defaultValue: 	priorModelProbabilityGroup.fixedEffectsHypothesisVal
+				defaultValue: 	0.25
 			}
 		}
 
@@ -87,7 +87,7 @@ Section
 				id: 			priorH0RE
 				name: 			"priorH0RE"
 				label: 			"H\u2080"
-				defaultValue: 	priorModelProbabilityGroup.randomEffectsHypothesisVal
+				defaultValue: 	0.25
 			}
 
 			DoubleField
@@ -95,7 +95,7 @@ Section
 				id: 			priorH1RE
 				name: 			"priorH1RE"
 				label: 			"H\u2081"
-				defaultValue: 	priorModelProbabilityGroup.randomEffectsHypothesisVal
+				defaultValue: 	0.25
 			}
 		}
 	}
@@ -111,7 +111,7 @@ Section
 
 			IntegerField
 			{
-				label: 			qsTr("iterations:")
+				label: 			qsTr("Iterations:")
 				name: 			"iterMCMC"
 				defaultValue: 	!(modelTypeValue == "CRE") ? 2000 : 10000
 				min:			100
@@ -121,13 +121,18 @@ Section
 
 			IntegerField
 			{
-				label: 			qsTr("chains:")
+				label: 			qsTr("Chains:")
 				name: 			"chainsMCMC"
 				defaultValue: 	4
 				min:			1
 				max: 			10
 				fieldWidth: 	50
 			}
+		}
+
+		Group
+		{
+			SetSeed {  }
 		}
 
 		Group

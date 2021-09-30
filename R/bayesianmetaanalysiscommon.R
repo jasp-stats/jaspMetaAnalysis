@@ -19,6 +19,8 @@
 
 .BayesianMetaAnalysisCommon <- function(jaspResults, dataset, ready, options) {
   
+  .setSeedJASP(options)
+
   # Table: Posterior Model Estimates
   .bmaMainTable(jaspResults, dataset, options, ready, .bmaDependencies)
   
@@ -61,7 +63,8 @@
                       "informativeTLocation", "informativeTScale", "informativeTDf",
                       "priorSE", "inverseGammaShape", "inverseGammaScale",
                       "informativehalfTScale", "informativehalfTDf",
-                      "BFComputation", "iterBridge", "iterMCMC", "chainsMCMC")
+                      "BFComputation", "iterBridge", "iterMCMC", "chainsMCMC",
+                      "seed", "setSeed")
 
 # Save priors for later use (without data)
 .bmaPriors <- function(jaspResults, options) {
@@ -334,21 +337,22 @@
                                    prior = prior, 
                                    d     = d, 
                                    tau   = tau,
-                                   logml   = logml,
+                                   logml = logml,
                                    logml_iter = logml_iter,
-                                   iter     = iter,
-                                   chains = chains)
+                                   iter       = iter,
+                                   chains     = chains,
+      )
     })
   } else {
     p <- try({
       # Ordered effects
-      results <- metaBMA::meta_ordered(y = y, 
-                                       SE = SE, 
-                                       d = d, 
-                                       tau = tau,
+      results <- metaBMA::meta_ordered(y    = y, 
+                                       SE   = SE, 
+                                       d    = d, 
+                                       tau  = tau,
                                        # logml = logml,
                                        # logml_iter = logml_iter,
-                                       iter = 10000 # because of an issue with stored variables, it is not yet possible to make it reactive.
+                                       iter = 10000, # because of an issue with stored variables, it is not yet possible to make it reactive.
                                        # chains = chains
       )
     })
