@@ -41,31 +41,31 @@ test_that("Forest plot matches", {
 })
 
 test_that("Debray plot matches", {
-  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_Debray"]][["data"]]
+  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_D-FIV"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "debray-1")
 })
 
 test_that("Egger (multiplicative overdispersion) plot matches", {
-  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_Egger (multiplicative overdispersion)"]][["data"]]
+  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_E-FIV"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "egger-multiplicative-overdispersion-1")
 })
 
 test_that("Egger (unweighted) plot matches", {
-  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_Egger (unweighted)"]][["data"]]
+  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_E-UW"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "egger-unweighted-1")
 })
 
 test_that("Macaskill plot matches", {
-  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_Macaskill"]][["data"]]
+  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_M-FIV"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "macaskill-1")
 })
 
 test_that("Peters plot matches", {
-  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_Peters"]][["data"]]
+  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_P-FPV"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "peters-1")
 })
@@ -128,31 +128,31 @@ test_that("Forest plot matches", {
 })
 
 test_that("Debray plot matches", {
-  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_Debray"]][["data"]]
+  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_D-FIV"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "debray-2")
 })
 
 test_that("Egger (multiplicative overdispersion) plot matches", {
-  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_Egger (multiplicative overdispersion)"]][["data"]]
+  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_E-FIV"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "egger-multiplicative-overdispersion-2")
 })
 
 test_that("Egger (unweighted) plot matches", {
-  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_Egger (unweighted)"]][["data"]]
+  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_E-UW"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "egger-unweighted-2")
 })
 
 test_that("Macaskill plot matches", {
-  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_Macaskill"]][["data"]]
+  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_M-FIV"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "macaskill-2")
 })
 
 test_that("Peters plot matches", {
-  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_Peters"]][["data"]]
+  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_P-FPV"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "peters-2")
 })
@@ -215,31 +215,31 @@ test_that("Forest plot matches", {
 })
 
 test_that("Debray plot matches", {
-  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_Debray"]][["data"]]
+  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_D-FIV"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "debray-3")
 })
 
 test_that("Egger (multiplicative overdispersion) plot matches", {
-  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_Egger (multiplicative overdispersion)"]][["data"]]
+  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_E-FIV"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "egger-multiplicative-overdispersion-3")
 })
 
 test_that("Egger (unweighted) plot matches", {
-  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_Egger (unweighted)"]][["data"]]
+  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_E-UW"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "egger-unweighted-3")
 })
 
 test_that("Macaskill plot matches", {
-  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_Macaskill"]][["data"]]
+  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_M-FIV"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "macaskill-3")
 })
 
 test_that("Peters plot matches", {
-  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_Peters"]][["data"]]
+  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_P-FPV"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "peters-3")
 })
@@ -301,19 +301,19 @@ test_that("Forest plot matches", {
 })
 
 test_that("Debray plot matches", {
-  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_Debray"]][["data"]]
+  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_D-FIV"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "debray-4")
 })
 
 test_that("Egger (multiplicative overdispersion) plot matches", {
-  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_Egger (multiplicative overdispersion)"]][["data"]]
+  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_E-FIV"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "egger-multiplicative-overdispersion-4")
 })
 
 test_that("Egger (unweighted) plot matches", {
-  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_Egger (unweighted)"]][["data"]]
+  plotName <- results[["results"]][["funnelTestPlots"]][["collection"]][["funnelTestPlots_E-UW"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "egger-unweighted-4")
 })

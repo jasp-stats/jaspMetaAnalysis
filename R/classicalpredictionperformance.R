@@ -97,7 +97,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
       .quitAnalysis(gettext("The study labels contain invalid characters. Please, remove them before running the analysis."))
   }
 
-  .hasErrors(dataset               = dataset[,!grepl(colnames(dataset), options[["inputLabels"]])],
+  .hasErrors(dataset               = dataset[,!grepl(options[["inputLabels"]], colnames(dataset))],
              type                  = c("infinity", "observations", "negativeValues"),
              observations.amount   = "< 2",
              exitAnalysisIfErrors  = TRUE)
@@ -337,11 +337,11 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   if (is.null(fatFits[["M-FIV"]]) && options[["funnelAsymmetryTestMacaskillFIV"]])
     fatFits[["M-FIV"]] <- tryCatch({
       if (options[["inputN"]] == "")
-        stop("The number of participants must be specified.")
+        stop("The number of participants must be specified.", domain = NA)
       fitFat <- metamisc::fat(b = fit$data[,theta], b.se = fit$data[,theta.se], method = "M-FIV",
                               n.total = dataset[, options[["inputN"]]])
       if (is.na(fitFat$pval))
-        stop("The regression model could not be estimated.")
+        stop("The regression model could not be estimated.", domain = NA)
       else
         fitFat
     }, error = function(e)e)
@@ -349,13 +349,13 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   if (is.null(fatFits[["M-FPV"]]) && options[["funnelAsymmetryTestMacaskillFPV"]])
     fatFits[["M-FPV"]] <- tryCatch({
       if (options[["inputN"]] == "")
-        stop("The number of participants must be specified.")
+        stop("The number of participants must be specified.", domain = NA)
       else if (options[["inputO"]] == "")
-        stop("The number of observed events must be specified.")
+        stop("The number of observed events must be specified.", domain = NA)
       fitFat <- metamisc::fat(b = fit$data[,theta], b.se = fit$data[,theta.se], method = "M-FPV",
                               n.total = dataset[, options[["inputN"]]], d.total = dataset[, options[["inputO"]]])
       if (is.na(fitFat$pval))
-        stop("The regression model could not be estimated.")
+        stop("The regression model could not be estimated.", domain = NA)
       else
         fitFat
     }, error = function(e)e)
@@ -363,13 +363,13 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   if (is.null(fatFits[["P-FPV"]]) && options[["funnelAsymmetryTestPeters"]])
     fatFits[["P-FPV"]] <- tryCatch({
       if (options[["inputN"]] == "")
-        stop("The number of participants must be specified.")
+        stop("The number of participants must be specified.", domain = NA)
       else if (options[["inputO"]] == "")
-        stop("The number of observed events must be specified.")
+        stop("The number of observed events must be specified.", domain = NA)
       fitFat <- metamisc::fat(b = fit$data[,theta], b.se = fit$data[,theta.se], method = "P-FPV",
                               n.total = dataset[, options[["inputN"]]], d.total = dataset[, options[["inputO"]]])
       if (is.na(fitFat$pval))
-        stop("The regression model could not be estimated.")
+        stop("The regression model could not be estimated.", domain = NA)
       else
         fitFat
     }, error = function(e)e)
@@ -381,7 +381,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
       fitFat <- metamisc::fat(b = fit$data[,theta], b.se = fit$data[,theta.se], method = "D-FIV",
                               d.total = dataset[, options[["inputO"]]])
       if (is.na(fitFat$pval))
-        stop("The regression model could not be estimated.")
+        stop("The regression model could not be estimated.", domain = NA)
       else
         fitFat
     }, error = function(e)e)
@@ -456,7 +456,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   fatFits <- jaspResults[["modelsFat"]]$object
 
   for(i in seq_along(fatFits)) {
-    if (!inherits(fatFits[[i]], c("simpleError", "error")) && is.null(funnelTestPlots[[.metamiscFitFunnelAsymmetryNames(fatFits[[i]]$method)]])) {
+    if (!inherits(fatFits[[i]], c("simpleError", "error")) && is.null(funnelTestPlots[[fatFits[[i]]$method]])) {
 
       tempFunnelPlot   <- createJaspPlot(
         title  = .metamiscFitFunnelAsymmetryNames(fatFits[[i]]$method),
@@ -464,7 +464,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
         height = 300)
       tempFunnelPlot$position <- i
       tempFunnelPlot$dependOn(.metamiscFitFunnelAsymmetryOptions(fatFits[[i]]$method))
-      funnelTestPlots[[.metamiscFitFunnelAsymmetryNames(fatFits[[i]]$method)]] <- tempFunnelPlot
+      funnelTestPlots[[fatFits[[i]]$method]] <- tempFunnelPlot
 
       tempPlot <- tryCatch(.metamiscFitFunnelAsymmetryggPlot(fatFits[[i]]), error = function(e)e)
 
@@ -483,12 +483,12 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
 .metamiscFitFunnelAsymmetryNames <- function(shortcut) {
   switch(
     shortcut,
-    "E-UW"  = "Egger (unweighted)",
-    "E-FIV" = "Egger (multiplicative overdispersion)",
-    "M-FIV" = "Macaskill",
-    "M-FPV" = "Macaskill (pooled)",
-    "P-FPV" = "Peters",
-    "D-FIV" = "Debray"
+    "E-UW"  = gettext("Egger (unweighted)"),
+    "E-FIV" = gettext("Egger (multiplicative overdispersion)"),
+    "M-FIV" = gettext("Macaskill"),
+    "M-FPV" = gettext("Macaskill (pooled)"),
+    "P-FPV" = gettext("Peters"),
+    "D-FIV" = gettext("Debray")
   )
 }
 .metamiscFitFunnelAsymmetryOptions <- function(shortcut) {
@@ -502,52 +502,47 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
     "D-FIV" = "funnelAsymmetryTestDebrayFIV"
   )
 }
-.metamiscFitFunnelAsymmetryggPlot  <- function(x, ref, xlab = "Effect size",
+.metamiscFitFunnelAsymmetryggPlot  <- function(x, ref, xlab = gettext("Effect size"),
                                                confint = TRUE, confint.level = 0.1, confint.alpha = .50, confint.col = "skyblue") {
 
   if (!inherits(x, "fat"))
-    stop("Argument 'x' must be an object of class \"fat\".")
+    stop("Argument 'x' must be an object of class \"fat\".", domain = NA)
   if (confint.level < 0 | confint.level > 1) {
-    stop("Argument 'confint.level' must be between 0 and 1.")
+    stop("Argument 'confint.level' must be between 0 and 1.", domain = NA)
   }
 
   xval <- x$model$data[, "y"]
   if (x$method %in% c("E-UW", "E-FIV")) {
-    ylab <- "Standard error"
+    ylab <- gettext("Standard error")
     yval <- (x$model$data[, "x"])
     ylim <- rev(c(0, max(yval, na.rm = TRUE)))
     xlim <- c(min(c(0, xval)), max(xval))
   } else if (x$method %in% c("M-FIV")) {
-    ylab <- "Sample size"
-    yval <- (x$model$data[, "x"])
-    ylim <- (c(0, max(yval, na.rm = TRUE)))
+    ylab <- gettext("Sample size")
     xlim <- c(min(c(0, xval)), max(xval))
+    yval <- (x$model$data[, "x"])
+    yax  <- jaspGraphs::getPrettyAxisBreaks(range(yval, na.rm = TRUE))
+    ylim <- range(c(yval, yax))
   } else if (x$method == "P-FPV") {
-    ylab <- "Sample size"
-    yval <- (x$model$data[, "x"])
-    ylim <- rev(c(0, max(yval, na.rm = TRUE)))
+    ylab <- gettext("Sample size")
     xlim <- c(min(c(0, xval)), max(xval))
-    step <- ((max(yval) - min(yval))/5)
-    yax  <- c(plyr::round_any(1/min(yval), 10^(sapply(round(1/min(yval)), nchar) - 1)),
-              plyr::round_any(1/seq(step, 4 * step, by = step), 10), plyr::round_any(1/max(yval), 10))
+    yval <- (x$model$data[, "x"])
+    yax  <- unique(round(1/jaspGraphs::getPrettyAxisBreaks(range(yval, na.rm = TRUE))))
+    ylim <- range(c(yval, 1/yax))
   } else if (x$method == "D-FIV") {
-    ylab <- "Total events"
-    yval <- (x$model$data[, "x"])
-    ylim <- rev(c(0, max(yval, na.rm = TRUE)))
+    ylab <- gettext("Total events")
     xlim <- c(min(c(0, xval)), max(xval))
-    step <- ((max(yval) - min(yval))/4)
-    yax  <- c(plyr::round_any(1/min(yval), 10^(sapply(round(1/min(yval)), nchar) - 1)),
-              plyr::round_any(1/seq(step, 4 * step, by = step), 10), plyr::round_any(1/max(yval), 10))
+    yval <- (x$model$data[, "x"])
+    yax  <- unique(round(1/jaspGraphs::getPrettyAxisBreaks(range(yval, na.rm = TRUE))))
+    ylim <- range(c(yval, 1/yax))
   } else if (x$method == "D-FAV") {
-    ylab <- "Total events"
-    yval <- (x$model$data[, "x"])
-    ylim <- rev(c(0, max(yval, na.rm = TRUE)))
+    ylab <- gettext("Total events")
     xlim <- c(min(c(0, xval)), max(xval))
-    step <- ((max(yval) - min(yval))/4)
-    yax  <- c(plyr::round_any(1/min(yval),10^(sapply(round(1/min(yval)), nchar) - 1)),
-              plyr::round_any(1/seq(step, 4 * step, by = step), 10), plyr::round_any(1/max(yval), 10))
+    yval <- (x$model$data[, "x"])
+    yax  <- unique(round(1/jaspGraphs::getPrettyAxisBreaks(range(yval, na.rm = TRUE))))
+    ylim <- range(c(yval, 1/yax))
   } else {
-    stop("Plot not supported!")
+    stop("Plot not supported!", domain = NA)
   }
 
   newdata <- sort(c(-max(x$model$data[, "x"]), x$model$data[,"x"], 2 * max(x$model$data[, "x"])))
@@ -557,14 +552,6 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   predy.mean <- predy$fit
   predy.lowerInt <- as.vector(predy$fit + qt(confint.level/2,  df = x$df) * predy$se.fit)
   predy.upperInt <- as.vector(predy$fit + qt((1 - confint.level/2),  df = x$df) * predy$se.fit)
-
-  # restricting plotting range to the selection
-  predy.upperInt[predy.upperInt < min(pretty(range(xlim)))] <- min(pretty(range(xlim)))
-  predy.upperInt[predy.upperInt > max(pretty(range(xlim)))] <- max(pretty(range(xlim)))
-  predy.lowerInt[predy.lowerInt < min(pretty(range(xlim)))] <- min(pretty(range(xlim)))
-  predy.lowerInt[predy.lowerInt > max(pretty(range(xlim)))] <- max(pretty(range(xlim)))
-  newdata[, "x"][newdata[, "x"] < min(pretty(range(ylim)))] <- min(pretty(range(ylim)))
-  newdata[, "x"][newdata[, "x"] > max(pretty(range(ylim)))] <- max(pretty(range(ylim)))
 
   p <- ggplot2::ggplot(data = data.frame(x = xval, y = yval))
 
@@ -613,13 +600,14 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   p <- p + ggplot2::scale_x_continuous(
     name   = xlab,
     limits = range(pretty(range(xlim))),
-    breaks = pretty(range(xlim)))
+    breaks = pretty(range(xlim)),
+    oob    = scales::oob_keep)
   if (x$method %in% c("P-FPV", "D-FAV", "D-FIV")) {
-    p <- p + ggplot2::scale_y_reverse(name = ylab, breaks = 1/yax, labels = yax, limits = rev(range(pretty(ylim))))
+    p <- p + ggplot2::scale_y_reverse(name = ylab, breaks = 1/yax, labels = yax, limits = rev(ylim), oob = scales::oob_keep)
   } else if (x$method %in% c("E-UW", "E-FIV")) {
-    p <- p + ggplot2::scale_y_reverse(name = ylab, limits = rev(range(pretty(ylim))), breaks = pretty(range(ylim)))
+    p <- p + ggplot2::scale_y_reverse(name = ylab, limits = rev(range(pretty(ylim))), breaks = pretty(range(ylim)), oob = scales::oob_keep)
   } else {
-    p <- p + ggplot2::scale_y_continuous(name = ylab, limits = range(pretty(ylim)), breaks = pretty(range(ylim)))
+    p <- p + ggplot2::scale_y_continuous(name = ylab, breaks = yax, labels = yax, limits = ylim, oob = scales::oob_keep)
   }
 
   return(p)
