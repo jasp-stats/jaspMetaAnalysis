@@ -132,6 +132,11 @@ Section
 
 		Group
 		{
+			SetSeed { }
+		}
+
+		Group
+		{
 			title: qsTr("Bayes factor computation")
 
 			RadioButtonGroup
