@@ -39,10 +39,10 @@
 <polyline points='645.03,114.47 645.03,81.38 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
 <polyline points='645.03,97.92 529.60,97.92 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
 <polyline points='529.60,114.47 529.60,81.38 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polygon points='502.46,430.79 506.37,430.79 506.37,426.88 502.46,426.88 ' style='stroke-width: 0.71; stroke: none; fill: #000000;' />
-<polygon points='572.37,320.49 576.28,320.49 576.28,316.58 572.37,316.58 ' style='stroke-width: 0.71; stroke: none; fill: #000000;' />
-<polygon points='582.34,210.18 586.25,210.18 586.25,206.27 582.34,206.27 ' style='stroke-width: 0.71; stroke: none; fill: #000000;' />
-<polygon points='585.36,99.88 589.27,99.88 589.27,95.97 585.36,95.97 ' style='stroke-width: 0.71; stroke: none; fill: #000000;' />
+<circle cx='504.42' cy='428.84' r='3.56' style='stroke-width: 0.71; fill: #BEBEBE;' />
+<circle cx='574.32' cy='318.53' r='3.56' style='stroke-width: 0.71; fill: #BEBEBE;' />
+<circle cx='584.30' cy='208.23' r='3.56' style='stroke-width: 0.71; fill: #BEBEBE;' />
+<circle cx='587.31' cy='97.92' r='3.56' style='stroke-width: 0.71; fill: #BEBEBE;' />
 <polyline points='626.45,483.99 626.45,42.77 ' style='stroke-width: 1.07; stroke-dasharray: 1.42,4.27; stroke-linecap: butt;' />
 <line x1='266.33' y1='506.05' x2='698.73' y2='506.05' style='stroke-width: 0.64; stroke-linecap: butt;' />
 <rect x='245.06' y='20.71' width='474.94' height='485.34' style='stroke-width: 0.00; stroke: none;' />

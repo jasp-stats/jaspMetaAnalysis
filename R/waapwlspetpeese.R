@@ -492,9 +492,7 @@
     jaspGraphs::geom_point(
       ggplot2::aes(
         x  = fitSe,
-        y  = fitEs),
-      size  = 2,
-      shape = 18) +
+        y  = fitEs)) +
     jaspGraphs::geom_rangeframe() +
     jaspGraphs::themeJaspRaw()
 
@@ -555,8 +553,7 @@
     jaspGraphs::geom_point(
       ggplot2::aes(
         x = estimates[,"mean"],
-        y = 1:nrow(estimates)),
-      shape = 15) +
+        y = 1:nrow(estimates))) +
     jaspGraphs::geom_line(ggplot2::aes(x = c(0,0), y = c(.5, nrow(estimates) + 0.5)), linetype = "dotted") +
     ggplot2::scale_x_continuous(
       bquote("Mean Estimate"~.(if (options[["measures"]] == "correlation") bquote(rho) else bquote(mu))),

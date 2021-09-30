@@ -867,11 +867,10 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
         y    = 1:4
       ),
       height = 0.3) +
-    ggplot2::geom_point(
+    jaspGraphs::geom_point(
       ggplot2::aes(
         x = estimates[,"mean"],
-        y = 1:4),
-      shape = 15) +
+        y = 1:4)) +
     ggplot2::geom_line(ggplot2::aes(x = c(0,0), y = c(.5, 4.5)), linetype = "dotted") +
     ggplot2::scale_x_continuous(
       bquote("Mean Estimate"~.(if (options[["measures"]] == "correlation") bquote(rho) else bquote(mu))),
