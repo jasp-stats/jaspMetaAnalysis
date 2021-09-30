@@ -33,6 +33,20 @@ Description
 		menu:			qsTr("Prediction Model Performance")
 		title:			qsTr("Classical Prediction Model Performance")
 		func:			"ClassicalPredictionPerformance"
+    requiresData:	true
+  }
+  
+  Analysis
+	{
+		title:			qsTr("WAAP-WLS")
+		func:			"WaapWls"
+		requiresData:	true
+	}
+
+	Analysis
+	{
+		title:			qsTr("PET-PEESE")
+		func:			"PetPeese"
 		requiresData:	true
 	}
 	

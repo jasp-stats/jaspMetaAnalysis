@@ -1,7 +1,7 @@
 Robust Bayesian Meta-Analysis
 ===
 
-The robust Bayesian meta-analysis allows the user to specify a wide range of meta-analytic models, combine their estimates using model averaging, and quantify evidence for different hypotheses using Bayes factors. The analysis allows the user to specify various prior distributions for effect sizes and heterogeneity and incorporate models correcting for publication bias with selection models and PET-PEESE. 
+Robust Bayesian meta-analysis allows the user to specify a wide range of meta-analytic models, combine their estimates using model averaging, and quantify evidence for different hypotheses using Bayes factors. The analysis allows the user to specify various prior distributions for effect sizes and heterogeneity and incorporate models correcting for publication bias with selection models and PET-PEESE. 
 
 Please note that we updated the model specification of RoBMA models with the version of JASP 0.15 (the analysis is now built on RoBMA 2.0 package). See our new RoBMA preprint for more details (https://doi.org/10.31234/osf.io/kvsp7).
 
@@ -240,9 +240,9 @@ Balances the prior model probability across models with the same combinations of
 
 ### References
 ---
-Maier, M., Bartoš, F., & Wagenmakers, E. J. (in press). Robust Bayesian meta-analysis: Addressing publication bias with model-averaging. Psychological Methods. https://doi.org/10.31234/osf.io/u4cns
-Bartoš, F., Maier, M., Wagenmakers, E. J., Doucouliagos, H., & Stanley, T. D. (2021). No need to choose: Robust Bayesian meta-analysis with competing publication bias adjustment methods. https://doi.org/10.31234/osf.io/kvsp7
-Bartoš, F., Maier, M., & Wagenmakers, E. J. (2020). Adjusting for publication bias in JASP — selection models and robust Bayesian meta-analysis. https://doi.org/10.31234/osf.io/75bqn
+- Maier, M., Bartoš, F., & Wagenmakers, E. J. (in press). Robust Bayesian meta-analysis: Addressing publication bias with model-averaging. Psychological Methods. https://doi.org/10.31234/osf.io/u4cns
+- Bartoš, F., Maier, M., Wagenmakers, E. J., Doucouliagos, H., & Stanley, T. D. (2021). No need to choose: Robust Bayesian meta-analysis with competing publication bias adjustment methods. https://doi.org/10.31234/osf.io/kvsp7
+- Bartoš, F., Maier, M., & Wagenmakers, E. J. (2020). Adjusting for publication bias in JASP — selection models and robust Bayesian meta-analysis. https://doi.org/10.31234/osf.io/75bqn
 
 ### R-packages
 ---
