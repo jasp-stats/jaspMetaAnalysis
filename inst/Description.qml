@@ -27,6 +27,20 @@ Description
 		func:			"ClassicalMetaAnalysis"
 		requiresData:	true
 	}
+
+	Analysis
+	{
+		title:			qsTr("WAAP-WLS")
+		func:			"WaapWls"
+		requiresData:	true
+	}
+
+	Analysis
+	{
+		title:			qsTr("PET-PEESE")
+		func:			"PetPeese"
+		requiresData:	true
+	}
 	
 	Analysis
 	{

@@ -1,7 +1,7 @@
 Bayesian Meta-Analysis
 ===
 
-The Bayesian meta-analysis allows the user to estimate an overall effect size estimate from multiple studies and test whether the effect size estimate deviates from zero. 
+Bayesian meta-analysis allows the user to estimate an overall effect size estimate from multiple studies and test whether the effect size estimate deviates from zero. 
 
 ### Input
 ---
