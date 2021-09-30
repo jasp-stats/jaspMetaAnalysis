@@ -27,13 +27,6 @@ Description
 		func:			"ClassicalMetaAnalysis"
 		requiresData:	true
 	}
-	
-	Analysis
-	{
-		title:			qsTr("Selection Models")
-		func:			"SelectionModels"
-		requiresData:	true
-	}
 
 	Analysis
 	{
@@ -48,7 +41,13 @@ Description
 		func:			"PetPeese"
 		requiresData:	true
 	}
-
+	
+	Analysis
+	{
+		title:			qsTr("Selection Models")
+		func:			"SelectionModels"
+		requiresData:	true
+	}
 
 	GroupTitle
 	{
