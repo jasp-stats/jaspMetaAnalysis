@@ -42,6 +42,11 @@ options$confidenceInterval        <- list()
 set.seed(1)
 results <- jaspTools::runAnalysis("BayesianMetaAnalysis", "BCG Vaccine.csv", options)
 
+############################ NOTE ############################
+# unit tests currently only work for Windows due to rstan seed
+# when they start failing it might be due to seed issues
+# you can skip the tests if this is the case
+##############################################################
 
 test_that("Posterior Estimates per Model table results match", {
   testthat::skip_on_os(c("mac", "linux", "solaris"))
