@@ -313,7 +313,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   if (options[[optionsVariable]] != "") {
     jaspResults[[optionsVariable]] <- createJaspColumn(
       columnName   = options[[optionsVariable]],
-      dependencies = c("optionsVariable", .metamiscDependencies, if (options[["method"]] == "BAYES") .metamiscDependenciesBayesian))
+      dependencies = c(optionsVariable, .metamiscDependencies, if (options[["method"]] == "BAYES") .metamiscDependenciesBayesian))
     jaspResults[[optionsVariable]]$setScale(data[[dataVariable]])
   }
 
