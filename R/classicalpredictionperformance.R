@@ -201,11 +201,11 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
     return()
 
   imgHeight  <- 400
-  imgWidth   <- 520
+  imgWidth   <- 650
   if (ready && !jaspResults[["summaryTable"]]$getError()) {
     imgHeight <- jaspResults[["model"]][["object"]][["numstudies"]] * 25 + 50
     if (!is.null(options[["studyLabels"]]))
-      imgWidth <- max(nchar(as.character(dataset[,options[["studyLabels"]]]))) * 5 + 1100
+      imgWidth <- max(nchar(as.character(dataset[,options[["studyLabels"]]]))) * 5 + 1200
   }
 
   forestPlot   <- createJaspPlot(title = gettext("Forest plot"), width = imgWidth, height = imgHeight)
