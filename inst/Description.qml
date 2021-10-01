@@ -30,6 +30,14 @@ Description
 
 	Analysis
 	{
+		menu:			qsTr("Prediction Model Performance")
+		title:			qsTr("Classical Prediction Model Performance")
+		func:			"ClassicalPredictionPerformance"
+    requiresData:	true
+  }
+  
+  Analysis
+	{
 		title:			qsTr("WAAP-WLS")
 		func:			"WaapWls"
 		requiresData:	true
@@ -60,6 +68,14 @@ Description
 		menu:			qsTr("Meta-Analysis")
 		title:			qsTr("Bayesian Meta-Analysis")
 		func:			"BayesianMetaAnalysis"
+		requiresData:	true
+	}
+
+	Analysis
+	{
+		menu:			qsTr("Prediction Model Performance")
+		title:			qsTr("Bayesian Prediction Model Performance")
+		func:			"BayesianPredictionPerformance"
 		requiresData:	true
 	}
 	
