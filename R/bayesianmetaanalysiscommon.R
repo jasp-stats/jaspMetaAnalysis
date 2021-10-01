@@ -18,7 +18,7 @@
 # Main function ----
 
 .BayesianMetaAnalysisCommon <- function(jaspResults, dataset, ready, options) {
-  
+
   # Table: Posterior Model Estimates
   .bmaMainTable(jaspResults, dataset, options, ready, .bmaDependencies)
   
@@ -61,7 +61,7 @@
                       "informativeTLocation", "informativeTScale", "informativeTDf",
                       "priorSE", "inverseGammaShape", "inverseGammaScale",
                       "informativehalfTScale", "informativehalfTDf",
-                      "BFComputation", "iterBridge", "iterMCMC", "chainsMCMC")
+                      "BFComputation", "iterBridge", "iterMCMC", "chainsMCMC", "seed", "setSeed")
 
 # Save priors for later use (without data)
 .bmaPriors <- function(jaspResults, options) {
@@ -326,6 +326,7 @@
   
   
   # Bayesian meta analysis
+  .setSeedJASP(options)
   if(options$modelSpecification != "CRE"){
     p <- try({
       # Bayesian model averaging (includes fixed and random effects)

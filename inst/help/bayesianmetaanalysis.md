@@ -90,6 +90,9 @@ Displays the prior and posterior distribution of the effect size/heterogeneity u
 - Iterations: Sets the number of iterations for the MCMC estimation.
 - Chains: Sets the number of chains for the MCMC estimation.
 
+#### Repeatability
+- Set seed: Gives the option to set a seed for your analysis. Setting a seed will exclude random processes influencing an analysis. Note, however, that the seed may not reproduce the same results across operating systems.
+
 #### Bayes factor computation
 - Integration: Use integration to compute the Bayes factor.
 - Bridge sampling: Use bridge sampling to compute the Bayes factor. 

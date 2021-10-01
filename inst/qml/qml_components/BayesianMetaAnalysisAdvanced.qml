@@ -130,6 +130,8 @@ Section
 			}
 		}
 
+		SetSeed { }
+
 		Group
 		{
 			title: qsTr("Bayes factor computation")
