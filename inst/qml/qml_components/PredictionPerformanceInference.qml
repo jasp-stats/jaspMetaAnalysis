@@ -106,6 +106,7 @@ Section
 	CheckBox
 	{
 		name:	"exportColumns"
+		id:		exportColumns
 		label:	measure === "OE" ? qsTr("Export O:E ratios") : qsTr("Export C-statistics")
 
 		// need to be each set of the variables separatelly, they will get overwriten otherwise
@@ -114,9 +115,9 @@ Section
 			name: 				"exportOE"
 			text: 				qsTr("Column name")
 			fieldWidth: 		150 * preferencesModel.uiScale
-			value: 				qsTr("O:E ratios")
+			placeholderText: 	qsTr("O:E ratios")
 			visible:			measure == "OE"
-			enabled:			measure == "OE"
+			enabled:			measure == "OE" && exportColumns.checked
 		}
 
 		ComputedColumnField
@@ -124,9 +125,9 @@ Section
 			name: 				"exportOElCI"
 			text: 				qsTr("Column name (lCI)")
 			fieldWidth: 		150 * preferencesModel.uiScale
-			value: 				qsTr("O:E ratios (lCI)")
+			placeholderText:	qsTr("O:E ratios (lCI)")
 			visible:			measure == "OE"
-			enabled:			measure == "OE"
+			enabled:			measure == "OE" && exportColumns.checked
 		}
 
 		ComputedColumnField
@@ -134,9 +135,9 @@ Section
 			name: 				"exportOEuCI"
 			text: 				qsTr("Column name (uCI)")
 			fieldWidth: 		150 * preferencesModel.uiScale
-			value: 				qsTr("O:E ratios (uCI)")
+			placeholderText:	qsTr("O:E ratios (uCI)")
 			visible:			measure == "OE"
-			enabled:			measure == "OE"
+			enabled:			measure == "OE" && exportColumns.checked
 		}
 
 		ComputedColumnField
@@ -145,9 +146,9 @@ Section
 			id:					newColumnName
 			text: 				qsTr("Column name")
 			fieldWidth: 		150 * preferencesModel.uiScale
-			value: 				qsTr("C-statistics")
+			placeholderText:	qsTr("C-statistics")
 			visible:			measure == "cstat"
-			enabled:			measure == "cstat"
+			enabled:			measure == "cstat" && exportColumns.checked
 		}
 
 		ComputedColumnField
@@ -155,9 +156,9 @@ Section
 			name: 				"exportCstatlCI"
 			text: 				qsTr("Column name (lCI)")
 			fieldWidth: 		150 * preferencesModel.uiScale
-			value: 				qsTr("C-statistics (lCI)")
+			placeholderText:	qsTr("C-statistics (lCI)")
 			visible:			measure == "cstat"
-			enabled:			measure == "cstat"
+			enabled:			measure == "cstat" && exportColumns.checked
 		}
 
 		ComputedColumnField
@@ -165,9 +166,9 @@ Section
 			name: 				"exportCstatuCI"
 			text: 				qsTr("Column name (uCI)")
 			fieldWidth: 		150 * preferencesModel.uiScale
-			value: 				qsTr("C-statistics (uCI)")
+			placeholderText: 	qsTr("C-statistics (uCI)")
 			visible:			measure == "cstat"
-			enabled:			measure == "cstat"
+			enabled:			measure == "cstat" && exportColumns.checked
 		}
 	}
 

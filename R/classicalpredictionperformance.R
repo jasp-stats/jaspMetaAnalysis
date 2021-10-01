@@ -252,14 +252,6 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   if (jaspResults[["summaryTable"]]$getError())
     return()
 
-  if (options[["measure"]] == "OE")
-    if ((options[["exportOE"]] == "" || !is.null(jaspResults[["exportOE"]])) || (options[["exportOElCI"]] == "" || !is.null(jaspResults[["exportOElCI"]])) || (options[["exportOEuCI"]] == "" || !is.null(jaspResults[["exportOEuCI"]])))
-      return()
-
-  if (options[["measure"]] == "cstat")
-    if ((options[["exportCstat"]] == "" || !is.null(jaspResults[["exportCstat"]])) || (options[["exportCstatlCI"]] == "" || !is.null(jaspResults[["exportCstatlCI"]])) || (options[["exportCstatuCI"]] == "" || !is.null(jaspResults[["exportCstatuCI"]])))
-      return()
-
   # # computing the effect sizes based on input
   # if (options[["measure"]] == "cstat") {
   #   computedMeasure <- metamisc::ccalc(
@@ -287,20 +279,43 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   fit     <- jaspResults[["model"]]$object
   fitData <- .metamiscExportData(fit)
 
-  jaspResults[[if (options[["measure"]] == "OE") "exportOE" else "exportCstat"]] <- createJaspColumn(
-    columnName   = if (options[["measure"]] == "OE") options[["exportOE"]] else options[["exportCstat"]],
-    dependencies = c(if (options[["measure"]] == "OE") "exportOE" else "exportCstat", .metamiscDependencies, if (options[["method"]] == "BAYES") .metamiscDependenciesBayesian))
-  jaspResults[[if (options[["measure"]] == "OE") "exportOE" else "exportCstat"]]$setScale(fitData[["yi"]])
+  .metamiscAddColumnVariable(jaspResults, options, fitData, "estimate")
+  .metamiscAddColumnVariable(jaspResults, options, fitData, "lCI")
+  .metamiscAddColumnVariable(jaspResults, options, fitData, "uCI")
 
-  jaspResults[[if (options[["measure"]] == "OE") "exportOElCI" else "exportCstatlCI"]] <- createJaspColumn(
-    columnName   = if (options[["measure"]] == "OE") options[["exportOElCI"]] else options[["exportCstatlCI"]],
-    dependencies = c(if (options[["measure"]] == "OE") "exportOElCI" else "exportCstatlCI", .metamiscDependencies, if (options[["method"]] == "BAYES") .metamiscDependenciesBayesian))
-  jaspResults[[if (options[["measure"]] == "OE") "exportOElCI" else "exportCstatlCI"]]$setScale(fitData[["yi.lci"]])
+  return()
+}
+.metamiscAddColumnVariable   <- function(jaspResults, options, data, variable) {
 
-  jaspResults[[if (options[["measure"]] == "OE") "exportOEuCI" else "exportCstatuCI"]] <- createJaspColumn(
-    columnName   = if (options[["measure"]] == "OE") options[["exportOEuCI"]] else options[["exportCstatuCI"]],
-    dependencies = c(if (options[["measure"]] == "OE") "exportOEuCI" else "exportCstatuCI", .metamiscDependencies, if (options[["method"]] == "BAYES") .metamiscDependenciesBayesian))
-  jaspResults[[if (options[["measure"]] == "OE") "exportOEuCI" else "exportCstatuCI"]]$setScale(fitData[["yi.uci"]])
+  if (options[["measure"]] == "OE")
+    optionsVariable <- switch(
+      variable,
+      "estimate" = "exportOE",
+      "lCI"      = "exportOElCI",
+      "uCI"      = "exportOEuCI"
+    )
+  else if (options[["measure"]] == "cstat")
+    optionsVariable <- switch(
+      variable,
+      "estimate" = "exportCstat",
+      "lCI"      = "exportCstatlCI",
+      "uCI"      = "exportCstatuCI"
+    )
+
+  dataVariable <- switch(
+    variable,
+    "estimate" = "yi",
+    "lCI"      = "yi.lci",
+    "uCI"      = "yi.uci"
+  )
+
+
+  if (options[[optionsVariable]] != "") {
+    jaspResults[[optionsVariable]] <- createJaspColumn(
+      columnName   = options[[optionsVariable]],
+      dependencies = c("optionsVariable", .metamiscDependencies, if (options[["method"]] == "BAYES") .metamiscDependenciesBayesian))
+    jaspResults[[optionsVariable]]$setScale(data[[dataVariable]])
+  }
 
   return()
 }
