@@ -130,10 +130,7 @@ Section
 			}
 		}
 
-		Group
-		{
-			SetSeed { }
-		}
+		SetSeed { }
 
 		Group
 		{
