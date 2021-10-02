@@ -1295,3 +1295,446 @@ msgstr "Klassisch"
 msgctxt "Description|"
 msgid "Bayesian"
 msgstr "Bayesianisch"
+
+msgctxt "Description|"
+msgid "Prediction Model Performance"
+msgstr ""
+
+msgctxt "Description|"
+msgid "Classical Prediction Model Performance"
+msgstr ""
+
+msgctxt "Description|"
+msgid "WAAP-WLS"
+msgstr ""
+
+#, fuzzy
+msgctxt "Description|"
+msgid "PET-PEESE"
+msgstr "PET-PEESE"
+
+msgctxt "Description|"
+msgid "Bayesian Prediction Model Performance"
+msgstr ""
+
+#, fuzzy
+msgctxt "BayesianPredictionPerformance|"
+msgid "MCMC Diagnostics"
+msgstr "MCMC-Diagnostiken"
+
+msgctxt "BayesianPredictionPerformance|"
+msgid "Plots"
+msgstr ""
+
+msgctxt "BayesianPredictionPerformance|"
+msgid "Running means"
+msgstr ""
+
+#, fuzzy
+msgctxt "BayesianPredictionPerformance|"
+msgid "Autocorrelation"
+msgstr "Autokorrelation"
+
+msgctxt "BayesianPredictionPerformance|"
+msgid "Gelman Rubin"
+msgstr ""
+
+#, fuzzy
+msgctxt "BayesianPredictionPerformance|"
+msgid "Advanced"
+msgstr "Weiteres"
+
+msgctxt "BayesianPredictionPerformance|"
+msgid "Adapt"
+msgstr ""
+
+#, fuzzy
+msgctxt "BayesianPredictionPerformance|"
+msgid "Burnin"
+msgstr "Aufwärmphase"
+
+msgctxt "BayesianPredictionPerformance|"
+msgid "Sample"
+msgstr ""
+
+#, fuzzy
+msgctxt "BayesianPredictionPerformance|"
+msgid "Chains"
+msgstr "Ketten"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Effect sizes & SE"
+msgstr "Effektgrößen & Std.-Fehler"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Correlations & N"
+msgstr "Korrelationen & N"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Correlation"
+msgstr "Korrelation"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Effect Size"
+msgstr "Effektgröße"
+
+msgctxt "PetPeese|"
+msgid "Effect Size Standard Error"
+msgstr ""
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "N"
+msgstr "N"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Transform correlations"
+msgstr "Korrelationen transformieren"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Fisher's z"
+msgstr "Fishers z"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Cohen's d"
+msgstr "Cohens d"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Inference"
+msgstr "Inferenz"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Mean estimates"
+msgstr "Mittlere Schätzungen"
+
+msgctxt "PetPeese|"
+msgid "PET-PEESE regression estimates"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Multiplicative heterogeneity estimates"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Plots"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Meta-Regression Estimate"
+msgstr ""
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "PET"
+msgstr "PET"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "PEESE"
+msgstr "PEESE"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Mean model estimates"
+msgstr "Mittlere Modellschätzungen"
+
+msgctxt "PredictionPerformanceData|"
+msgid "Data"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "Measure"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "O:E ratio"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "C statistic"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "O:E Ratio"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "C-statistic"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "Standard Error"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "95% CI Lower and Upper Bound"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "Number of Participants"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "Number of Observed Events"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "Number of Expected Events"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "Study Labels"
+msgstr ""
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Inference"
+msgstr "Inferenz"
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Within-study variation"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Normal/Log"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Normal/Identity"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Poisson/Log"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Normal/Logit"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Prior and posterior plot"
+msgstr ""
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Forest plot"
+msgstr "Forestplot"
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Labels"
+msgstr ""
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Estimates"
+msgstr "Schätzungen"
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Export O:E ratios"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Export C-statistics"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Column name"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "O:E ratios"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Column name (lCI)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "O:E ratios (lCI)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Column name (uCI)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "O:E ratios (uCI)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "C-statistics"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "C-statistics (lCI)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "C-statistics (uCI)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Funnel plot asymmetry test"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Egger (unweighted)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Egger (multiplicative overdispersion)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Macaskill"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Macaskill (pooled)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Peters"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Debray"
+msgstr ""
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Plot"
+msgstr "Abbildung"
+
+#, fuzzy
+msgctxt "PredictionPerformancePriors|"
+msgid "Priors"
+msgstr "Prior"
+
+msgctxt "PredictionPerformancePriors|"
+msgid "Summary estimate (O:E Ratio)"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "Summary estimate (C statistic)"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "Normal mean:"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "sd:"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "Heterogeneity (Between study SD)"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "Uniform"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "min:"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "max:"
+msgstr ""
+
+#, fuzzy
+msgctxt "PredictionPerformancePriors|"
+msgid "Half t"
+msgstr "Halbe t-Verteilung"
+
+#, fuzzy
+msgctxt "PredictionPerformancePriors|"
+msgid "location:"
+msgstr "Lageparameter:"
+
+#, fuzzy
+msgctxt "PredictionPerformancePriors|"
+msgid "scale:"
+msgstr "Skalenparameter:"
+
+#, fuzzy
+msgctxt "PredictionPerformancePriors|"
+msgid "df:"
+msgstr "df:"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Effect sizes & SE"
+msgstr "Effektgrößen & Std.-Fehler"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Correlations & N"
+msgstr "Korrelationen & N"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Correlation"
+msgstr "Korrelation"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Effect Size"
+msgstr "Effektgröße"
+
+msgctxt "WaapWls|"
+msgid "Effect Size Standard Error"
+msgstr ""
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "N"
+msgstr "N"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Transform correlations"
+msgstr "Korrelationen transformieren"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Fisher's z"
+msgstr "Fishers z"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Cohen's d"
+msgstr "Cohens d"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Inference"
+msgstr "Inferenz"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Mean estimates"
+msgstr "Mittlere Schätzungen"
+
+msgctxt "WaapWls|"
+msgid "Multiplicative heterogeneity estimates"
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid "Plots"
+msgstr ""
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Mean model estimates"
+msgstr "Mittlere Modellschätzungen"

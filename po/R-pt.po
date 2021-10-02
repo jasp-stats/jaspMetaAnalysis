@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-08-28 02:38\n"
+"POT-Creation-Date: 2021-10-02 02:38\n"
 "PO-Revision-Date: 2021-09-11 02:37+0000\n"
 "Last-Translator: JASP Stats <b.boutin@uva.nl>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
@@ -302,6 +302,43 @@ msgid ""
 " probability"
 msgstr ""
 
+#, fuzzy
+msgid "Prior and posterior plot"
+msgstr "Posteriores marginal"
+
+msgid "Value"
+msgstr "Valor"
+
+msgid "Running means plot"
+msgstr ""
+
+#, fuzzy
+msgid "Iteration"
+msgstr "Informado"
+
+msgid "Running mean"
+msgstr ""
+
+#, fuzzy
+msgid "Autocorrelations plot"
+msgstr "Covariâncias / correlações observadas"
+
+msgid "Lag"
+msgstr ""
+
+#, fuzzy
+msgid "Autocorrelation"
+msgstr "Covariâncias / correlações observadas"
+
+msgid "Gelman-Rubin plot"
+msgstr ""
+
+msgid "Last iteration in chain"
+msgstr ""
+
+msgid "Shrink factor"
+msgstr ""
+
 msgid "The metafor package crashed with the following error: %s"
 msgstr ""
 
@@ -475,9 +512,6 @@ msgstr "momentos observados"
 msgid "Cannot set 'xlim' automatically. Please set this argument manually."
 msgstr ""
 
-msgid "Value"
-msgstr "Valor"
-
 msgid "Profile Plot for"
 msgstr ""
 
@@ -567,6 +601,87 @@ msgid "%g%% Confidence Interval"
 msgstr "Intervalo de Confiança"
 
 msgid ""
+"The study labels contain invalid characters. Please, remove them before "
+"running the analysis."
+msgstr ""
+
+msgid "%s%% CI"
+msgstr "%s%% IC"
+
+#, fuzzy
+msgid "%s%% PI"
+msgstr "%s%% IC"
+
+#, fuzzy
+msgid "%s Summary"
+msgstr "Resumo do modelo"
+
+msgid "metamisc package failed with the following error: '%s'"
+msgstr ""
+
+msgid "Based on %i studies."
+msgstr ""
+
+msgid "The model was estimated using %1$s method with %2$s link function."
+msgstr ""
+
+msgid "The model was estimated using MCMC with %1$s link function."
+msgstr ""
+
+msgid "Observed-Expected Ratio"
+msgstr ""
+
+msgid "Concordance Statistic"
+msgstr ""
+
+msgid "The number of observed events must be specified."
+msgstr ""
+
+msgid "Funnel Plot Asymmetry Tests"
+msgstr ""
+
+msgid "Method"
+msgstr ""
+
+msgid "t-statistic"
+msgstr ""
+
+msgid "The %1$s test failed with the following error: %2$s"
+msgstr ""
+
+msgid "Funnel Plot Asymmetry Plots"
+msgstr ""
+
+msgid "Egger (unweighted)"
+msgstr ""
+
+msgid "Egger (multiplicative overdispersion)"
+msgstr ""
+
+msgid "Macaskill"
+msgstr ""
+
+msgid "Macaskill (pooled)"
+msgstr ""
+
+msgid "Peters"
+msgstr ""
+
+msgid "Debray"
+msgstr ""
+
+#, fuzzy
+msgid "Standard error"
+msgstr "Erro padrão"
+
+#, fuzzy
+msgid "Sample size"
+msgstr "Quartil da amostra"
+
+msgid "Total events"
+msgstr ""
+
+msgid ""
 "Currently this only works with rma and rma.mv objects that have specified "
 "'yi' as a formula."
 msgstr ""
@@ -620,9 +735,6 @@ msgstr "Gráficos"
 msgid "The priors for publication bias were set incorrectly."
 msgstr ""
 
-msgid "%s%% CI"
-msgstr "%s%% IC"
-
 msgid "Median"
 msgstr "Mediana"
 
@@ -649,11 +761,6 @@ msgstr "Tamanho do efeito"
 #, fuzzy
 msgid "Heterogeneity (%s)"
 msgstr "Testes de homogeneidade"
-
-msgid ""
-"The study labels contain invalid characters. Please, remove them before "
-"running the analysis."
-msgstr ""
 
 #, fuzzy
 msgid "Prior Plots"
@@ -876,10 +983,19 @@ msgstr "Amostras posteriores"
 msgid "Model %i does not contain any of the selected parameters."
 msgstr ""
 
-msgid "Error in %s: All p-values need to be between 0 and 1."
+msgid ""
+"Cannot compute results. All entries of the p-value variable (%s) must be "
+"between 0 and 1."
 msgstr ""
 
-msgid "Error in %s: All correlation coefficients need to be between -1 and 1."
+msgid ""
+"Cannot compute results. All entries of the correlation coefficient variable "
+"(%s) must be between -1 and 1."
+msgstr ""
+
+msgid ""
+"Cannot compute results. All entries of the sample size variable (%s) must be "
+"greater than four."
 msgstr ""
 
 msgid "The p-value cutoffs were set incorectly."
@@ -933,7 +1049,7 @@ msgid "Fixed Effects Estimates"
 msgstr "Estimativas de efeitos fixos"
 
 #, fuzzy
-msgid "Mean Estimates(%s)"
+msgid "Mean Estimates (%s)"
 msgstr "Estimativas"
 
 #, fuzzy
@@ -958,8 +1074,9 @@ msgid ""
 "frequencies correspond to the non-reduced p-value cutoffs."
 msgstr ""
 
-msgid "Weight Function(%s)"
-msgstr ""
+#, fuzzy
+msgid "Weight Function (%s)"
+msgstr "Medidas adicionais de ajuste"
 
 msgid ""
 "The figure could not be created since one of the estimates is not a number."
@@ -979,10 +1096,6 @@ msgstr ""
 
 msgid "Random effects (adjusted)"
 msgstr ""
-
-#, fuzzy
-msgid "Mean Estimates (%s)"
-msgstr "Estimativas"
 
 msgid "Fixed effects model:"
 msgstr ""
@@ -1025,13 +1138,53 @@ msgstr ""
 msgid "Only the following one-sided p-value cutoffs were used: %s."
 msgstr ""
 
-msgid "No effect sizes specified to compute the studies' sample variances."
+msgid "Error: There was not enough adequatelly powered studies (k = %1$i)"
+msgstr ""
+
+msgid "Note: There were %1$i adequatelly powered studies"
+msgstr ""
+
+#, fuzzy
+msgid "Test of Effect"
+msgstr "Efeito"
+
+#, fuzzy
+msgid "Estimates"
+msgstr "Estimativa"
+
+#, fuzzy
+msgid "PET-PEESE Regression Estimates"
+msgstr "Medidas adicionais de ajuste"
+
+#, fuzzy
+msgid "Multiplicative Heterogeneity Estimates"
+msgstr "Testes de homogeneidade"
+
+#, fuzzy
+msgid "Estimated %1$s Regression"
+msgstr "Estimativas de tamanho de efeito"
+
+msgid "Cohen's d"
+msgstr ""
+
+msgid "Fisher's z"
+msgstr ""
+
+msgid ""
+"WAAP was not estimated: there were only %1$i adequatelly powered studies."
+msgstr ""
+
+msgid "There were %1$i adequatelly powered studies"
 msgstr ""
 
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "%i observação foi removida devido a valores ausentes."
 msgstr[1] "%i observações foram removidas devido a valores ausentes."
+
+#, fuzzy
+#~ msgid "Mean Estimates(%s)"
+#~ msgstr "Estimativas"
 
 #, fuzzy
 #~ msgid "Estimated Studies' Effects (%s)"

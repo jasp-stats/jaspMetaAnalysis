@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
-"POT-Creation-Date: 2021-08-28 02:38\n"
+"POT-Creation-Date: 2021-10-02 02:38\n"
 "PO-Revision-Date: 2021-09-24 01:33+0000\n"
 "Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -40,8 +40,10 @@ msgid ""
 "most effect sizes are negative, the analysis may not work when the prior is "
 "constrained to be postive)?"
 msgstr ""
-"モデルが適合しませんでした。以下をご確認ください。少なくともn=2の研究がありますか？事前分布が切断されている場合、それはデータと一致していますか（ほとん"
-"どの効果量が負である場合、事前分布が正であるように制約されると、分析がうまくいかないことがあります.）?"
+"モデルが適合しませんでした。以下をご確認ください。少なくともn=2の研究がありま"
+"すか？事前分布が切断されている場合、それはデータと一致していますか（ほとんど"
+"の効果量が負である場合、事前分布が正であるように制約されると、分析がうまくい"
+"かないことがあります.）?"
 
 msgid "Posterior Estimates per Model"
 msgstr "モデルごとの事後推定値"
@@ -283,6 +285,43 @@ msgstr ""
 "事後モデル \n"
 " 確率"
 
+#, fuzzy
+msgid "Prior and posterior plot"
+msgstr "事前分布と事後分布"
+
+msgid "Value"
+msgstr "値"
+
+msgid "Running means plot"
+msgstr ""
+
+#, fuzzy
+msgid "Iteration"
+msgstr "情報"
+
+msgid "Running mean"
+msgstr ""
+
+#, fuzzy
+msgid "Autocorrelations plot"
+msgstr "平均自己相関"
+
+msgid "Lag"
+msgstr ""
+
+#, fuzzy
+msgid "Autocorrelation"
+msgstr "平均自己相関"
+
+msgid "Gelman-Rubin plot"
+msgstr ""
+
+msgid "Last iteration in chain"
+msgstr ""
+
+msgid "Shrink factor"
+msgstr ""
+
 msgid "The metafor package crashed with the following error: %s"
 msgstr "metaforパッケージが次のエラーでクラッシュしました: %s"
 
@@ -447,10 +486,8 @@ msgid "Observed Outcome"
 msgstr "観察されたアウトカム"
 
 msgid "Cannot set 'xlim' automatically. Please set this argument manually."
-msgstr "'xlim' を自動的に設定することはできません。この引数は手動で設定してください."
-
-msgid "Value"
-msgstr "値"
+msgstr ""
+"'xlim' を自動的に設定することはできません。この引数は手動で設定してください."
 
 msgid "Profile Plot for"
 msgstr "プロファイルプロット"
@@ -473,7 +510,9 @@ msgstr "\"rma.ls\" クラスのオブジェクトには適用できない関数�
 msgid ""
 "Setting 'xlim' and 'zlim' automatically not possible (must set axis limits "
 "manually)."
-msgstr "'xlim' と 'zlim' を自動的に設定することはできません (軸の制限を手動で設定する必要があります)."
+msgstr ""
+"'xlim' と 'zlim' を自動的に設定することはできません (軸の制限を手動で設定する"
+"必要があります)."
 
 msgid "Radial Plot"
 msgstr "Radial プロット"
@@ -503,7 +542,8 @@ msgid "Standardized Residual"
 msgstr "標準化残差"
 
 msgid "The model should contain at least one predictor or an intercept."
-msgstr "モデルには、少なくとも 1 つの予測変数または切片が含まれている必要があります."
+msgstr ""
+"モデルには、少なくとも 1 つの予測変数または切片が含まれている必要があります."
 
 msgid "FE"
 msgstr "FE"
@@ -536,9 +576,97 @@ msgid "%g%% Confidence Interval"
 msgstr "%g %% 信頼区間"
 
 msgid ""
+"The study labels contain invalid characters. Please, remove them before "
+"running the analysis."
+msgstr ""
+"研究ラベルに無効な文字が含まれています. 分析を実行する前に削除してください."
+
+msgid "%s%% CI"
+msgstr "%s%% CI"
+
+#, fuzzy
+msgid "%s%% PI"
+msgstr "%s%% CI"
+
+#, fuzzy
+msgid "%s Summary"
+msgstr "要約"
+
+#, fuzzy
+msgid "metamisc package failed with the following error: '%s'"
+msgstr "metaforパッケージが次のエラーでクラッシュしました: %s"
+
+msgid "Based on %i studies."
+msgstr ""
+
+#, fuzzy
+msgid "The model was estimated using %1$s method with %2$s link function."
+msgstr "モデルは %1$s 法で推定されました."
+
+#, fuzzy
+msgid "The model was estimated using MCMC with %1$s link function."
+msgstr "モデルは %1$s 法で推定されました."
+
+msgid "Observed-Expected Ratio"
+msgstr ""
+
+msgid "Concordance Statistic"
+msgstr ""
+
+msgid "The number of observed events must be specified."
+msgstr ""
+
+msgid "Funnel Plot Asymmetry Tests"
+msgstr ""
+
+msgid "Method"
+msgstr ""
+
+msgid "t-statistic"
+msgstr ""
+
+#, fuzzy
+msgid "The %1$s test failed with the following error: %2$s"
+msgstr "metaforパッケージが次のエラーでクラッシュしました: %s"
+
+msgid "Funnel Plot Asymmetry Plots"
+msgstr ""
+
+msgid "Egger (unweighted)"
+msgstr ""
+
+msgid "Egger (multiplicative overdispersion)"
+msgstr ""
+
+msgid "Macaskill"
+msgstr ""
+
+msgid "Macaskill (pooled)"
+msgstr ""
+
+msgid "Peters"
+msgstr ""
+
+msgid "Debray"
+msgstr ""
+
+#, fuzzy
+msgid "Standard error"
+msgstr "標準誤差"
+
+#, fuzzy
+msgid "Sample size"
+msgstr "サンプル分位数"
+
+msgid "Total events"
+msgstr ""
+
+msgid ""
 "Currently this only works with rma and rma.mv objects that have specified "
 "'yi' as a formula."
-msgstr "現在、この機能は、数式として'yi'を指定したrmaおよびrma.mvオブジェクトでのみ動作します."
+msgstr ""
+"現在、この機能は、数式として'yi'を指定したrmaおよびrma.mvオブジェクトでのみ動"
+"作します."
 
 msgid "Formula is refering to factors that are not in the model."
 msgstr "式は、モデルにない要素を参照しています."
@@ -589,9 +717,6 @@ msgstr "プロット"
 msgid "The priors for publication bias were set incorrectly."
 msgstr "出版バイアスの事前確率が正しく設定されていません."
 
-msgid "%s%% CI"
-msgstr "%s%% CI"
-
 msgid "Median"
 msgstr "中央値"
 
@@ -616,11 +741,6 @@ msgstr "効果量（%s）"
 msgid "Heterogeneity (%s)"
 msgstr "異質性(%s)"
 
-msgid ""
-"The study labels contain invalid characters. Please, remove them before "
-"running the analysis."
-msgstr "研究ラベルに無効な文字が含まれています. 分析を実行する前に削除してください."
-
 msgid "Prior Plots"
 msgstr "事前分布プロット"
 
@@ -642,7 +762,9 @@ msgstr "モデルプレビュー"
 msgid ""
 "Please specify a prior distribution for each parameter in the Models "
 "specification section (either null or alternative)."
-msgstr "モデル指定セクションで、各パラメータの事前分布を指定してください (null または対立)."
+msgstr ""
+"モデル指定セクションで、各パラメータの事前分布を指定してください (null または"
+"対立)."
 
 msgid "Model Summary"
 msgstr "モデルの概要"
@@ -659,7 +781,9 @@ msgstr "出版バイアス(Publication Bias)"
 msgid ""
 "The analysis will estimate multiple meta-analytic models using MCMC and "
 "might require a prolonged time to complete."
-msgstr "この解析では、MCMCを用いて複数のメタ解析モデルを推定するため、完了までに長時間を要する可能性があります."
+msgstr ""
+"この解析では、MCMCを用いて複数のメタ解析モデルを推定するため、完了までに長時"
+"間を要する可能性があります."
 
 msgid "Models Overview"
 msgstr "モデルの概要"
@@ -725,7 +849,8 @@ msgid "Model %i"
 msgstr "モデル %i"
 
 msgid "Model %i does not exist. Select one of the models between 1 and %i."
-msgstr "モデル %i は存在しません。1 ~ %i の間のモデルのうち一つを選択してください."
+msgstr ""
+"モデル %i は存在しません。1 ~ %i の間のモデルのうち一つを選択してください."
 
 msgid "Priors"
 msgstr "事前"
@@ -794,7 +919,9 @@ msgid "max(R-hat)"
 msgstr "max(R-hat)"
 
 msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
-msgstr "モデル %1$i は存在しません。1 から %2$i までのモデルのうち 1 つを選択してください."
+msgstr ""
+"モデル %1$i は存在しません。1 から %2$i までのモデルのうち 1 つを選択してくだ"
+"さい."
 
 msgid "Weights"
 msgstr "ウェイト"
@@ -817,11 +944,21 @@ msgstr "事後サンプル密度"
 msgid "Model %i does not contain any of the selected parameters."
 msgstr "モデル %i には、選択したパラメータが含まれていません."
 
-msgid "Error in %s: All p-values need to be between 0 and 1."
-msgstr "%s でエラー: すべての p 値は 0 ~ 1 の間である必要があります."
+msgid ""
+"Cannot compute results. All entries of the p-value variable (%s) must be "
+"between 0 and 1."
+msgstr ""
 
-msgid "Error in %s: All correlation coefficients need to be between -1 and 1."
+#, fuzzy
+msgid ""
+"Cannot compute results. All entries of the correlation coefficient variable "
+"(%s) must be between -1 and 1."
 msgstr "%s のエラー: すべての相関係数は -1 から 1 の間にする必要があります."
+
+msgid ""
+"Cannot compute results. All entries of the sample size variable (%s) must be "
+"greater than four."
+msgstr ""
 
 msgid "The p-value cutoffs were set incorectly."
 msgstr "p値のカットオフが正しく設定されていませんでした."
@@ -871,7 +1008,7 @@ msgstr "異質性を仮定"
 msgid "Fixed Effects Estimates"
 msgstr "固定効果の推定値"
 
-msgid "Mean Estimates(%s)"
+msgid "Mean Estimates (%s)"
 msgstr "平均推定値(%s)"
 
 msgid "Estimated Weights"
@@ -893,9 +1030,11 @@ msgid ""
 "There were no p-value cutoffs after their automatic reduction. The displayed "
 "frequencies correspond to the non-reduced p-value cutoffs."
 msgstr ""
-"自動減少(automatic reduction)後、p値のカットオフはありませんでした。表示される度数は、減少していないp値のカットオフに対応します."
+"自動減少(automatic reduction)後、p値のカットオフはありませんでした。表示され"
+"る度数は、減少していないp値のカットオフに対応します."
 
-msgid "Weight Function(%s)"
+#, fuzzy
+msgid "Weight Function (%s)"
 msgstr "重み関数(%s)"
 
 msgid ""
@@ -917,9 +1056,6 @@ msgstr "固定効果 (調整済み)"
 msgid "Random effects (adjusted)"
 msgstr "変量効果（調整済み）"
 
-msgid "Mean Estimates (%s)"
-msgstr "平均推定値(%s)"
-
 msgid "Fixed effects model:"
 msgstr "固定効果モデル:"
 
@@ -929,22 +1065,30 @@ msgstr "変量効果モデル:"
 msgid ""
 "%sThe optimizer failed to find a solution. Consider re-specifying the model "
 "or the p-value cutoffs."
-msgstr "%s最適化は解を見つけることができませんでした。モデルまたは p 値カットオフを再指定することを検討してください."
+msgstr ""
+"%s最適化は解を見つけることができませんでした。モデルまたは p 値カットオフを再"
+"指定することを検討してください."
 
 msgid ""
 "%sThe automatic cutoffs selection did not find viable p-value cutoffs. "
 "Please, specify them manually."
-msgstr "%s自動カットオフ選択は、実行可能な p 値カットオフを検出できませんでした。手動で指定してください."
+msgstr ""
+"%s自動カットオフ選択は、実行可能な p 値カットオフを検出できませんでした。手動"
+"で指定してください."
 
 msgid ""
 "At least one of the p-value intervals contains no effect sizes, leading to "
 "estimation problems. Consider re-specifying the cutoffs."
-msgstr "p値区間の少なくとも1つに効果量が含まれていないため、推定に問題がある。カットオフの再設定を検討してください."
+msgstr ""
+"p値区間の少なくとも1つに効果量が含まれていないため、推定に問題がある。カット"
+"オフの再設定を検討してください."
 
 msgid ""
 "At least one of the p-value intervals contains three or fewer effect sizes, "
 "which may lead to estimation problems. Consider re-specifying the cutoffs."
-msgstr "p値区間の少なくとも1つに3つ以下の効果量が含まれており、推定問題につながる可能性があります。カットオフの再設定を検討してください."
+msgstr ""
+"p値区間の少なくとも1つに3つ以下の効果量が含まれており、推定問題につながる可能"
+"性があります。カットオフの再設定を検討してください."
 
 msgid ""
 "The unadjusted estimate is negative. The selection model default "
@@ -952,23 +1096,70 @@ msgid ""
 "positive. Please, check that you specified the effect sizes correctly or "
 "change the 'Expected effect size direction' option in the 'Model' tab."
 msgstr ""
-"調整前の推定値は負である。選択モデルのデフォルト指定では、効果量の期待される方向が正であることを期待しています。効果量が正しく指定されているか確認するか、"
-"「モデル」タブの「期待される効果量の方向」オプションを変更してください."
+"調整前の推定値は負である。選択モデルのデフォルト指定では、効果量の期待される"
+"方向が正であることを期待しています。効果量が正しく指定されているか確認する"
+"か、「モデル」タブの「期待される効果量の方向」オプションを変更してください."
 
 msgid ""
 "The analysis requires both 'Effect Size' and 'Effect Size Standard Error' to "
 "be specified."
-msgstr "この分析では、「効果量」と「効果量の標準誤差」の両方を指定する必要があります."
+msgstr ""
+"この分析では、「効果量」と「効果量の標準誤差」の両方を指定する必要があります."
 
 msgid "Only the following one-sided p-value cutoffs were used: %s."
 msgstr "次の片側 p 値カットオフのみが使用されました: %s."
 
-msgid "No effect sizes specified to compute the studies' sample variances."
-msgstr "研究の標本分散を計算するための効果量が指定されていません."
+msgid "Error: There was not enough adequatelly powered studies (k = %1$i)"
+msgstr ""
+
+msgid "Note: There were %1$i adequatelly powered studies"
+msgstr ""
+
+#, fuzzy
+msgid "Test of Effect"
+msgstr "効果"
+
+#, fuzzy
+msgid "Estimates"
+msgstr "推定"
+
+#, fuzzy
+msgid "PET-PEESE Regression Estimates"
+msgstr "PET-PEESE回帰推定"
+
+#, fuzzy
+msgid "Multiplicative Heterogeneity Estimates"
+msgstr "異質性の推定値"
+
+#, fuzzy
+msgid "Estimated %1$s Regression"
+msgstr "推定された研究効果"
+
+msgid "Cohen's d"
+msgstr ""
+
+msgid "Fisher's z"
+msgstr ""
+
+msgid ""
+"WAAP was not estimated: there were only %1$i adequatelly powered studies."
+msgstr ""
+
+msgid "There were %1$i adequatelly powered studies"
+msgstr ""
 
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "%i の観測値が欠損しているため削除されました。"
+
+#~ msgid "Error in %s: All p-values need to be between 0 and 1."
+#~ msgstr "%s でエラー: すべての p 値は 0 ~ 1 の間である必要があります."
+
+#~ msgid "Mean Estimates(%s)"
+#~ msgstr "平均推定値(%s)"
+
+#~ msgid "No effect sizes specified to compute the studies' sample variances."
+#~ msgstr "研究の標本分散を計算するための効果量が指定されていません."
 
 #~ msgid "Rhat"
 #~ msgstr "Rhat"

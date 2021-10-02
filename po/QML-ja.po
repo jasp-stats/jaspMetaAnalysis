@@ -1397,3 +1397,423 @@ msgstr "伝統的"
 msgctxt "Description|"
 msgid "Bayesian"
 msgstr "ベイジアン"
+
+msgctxt "Description|"
+msgid "Prediction Model Performance"
+msgstr ""
+
+msgctxt "Description|"
+msgid "Classical Prediction Model Performance"
+msgstr ""
+
+msgctxt "Description|"
+msgid "WAAP-WLS"
+msgstr ""
+
+msgctxt "Description|"
+msgid "PET-PEESE"
+msgstr ""
+
+msgctxt "Description|"
+msgid "Bayesian Prediction Model Performance"
+msgstr ""
+
+msgctxt "BayesianPredictionPerformance|"
+msgid "MCMC Diagnostics"
+msgstr ""
+
+#, fuzzy
+msgctxt "BayesianPredictionPerformance|"
+msgid "Plots"
+msgstr "プロット"
+
+msgctxt "BayesianPredictionPerformance|"
+msgid "Running means"
+msgstr ""
+
+msgctxt "BayesianPredictionPerformance|"
+msgid "Autocorrelation"
+msgstr ""
+
+msgctxt "BayesianPredictionPerformance|"
+msgid "Gelman Rubin"
+msgstr ""
+
+#, fuzzy
+msgctxt "BayesianPredictionPerformance|"
+msgid "Advanced"
+msgstr "詳細"
+
+msgctxt "BayesianPredictionPerformance|"
+msgid "Adapt"
+msgstr ""
+
+msgctxt "BayesianPredictionPerformance|"
+msgid "Burnin"
+msgstr ""
+
+msgctxt "BayesianPredictionPerformance|"
+msgid "Sample"
+msgstr ""
+
+msgctxt "BayesianPredictionPerformance|"
+msgid "Chains"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Effect sizes & SE"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Correlations & N"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Correlation"
+msgstr ""
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Effect Size"
+msgstr "効果量"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Effect Size Standard Error"
+msgstr "効果量標準誤差"
+
+msgctxt "PetPeese|"
+msgid "N"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Transform correlations"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Fisher's z"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Cohen's d"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Inference"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Mean estimates"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "PET-PEESE regression estimates"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Multiplicative heterogeneity estimates"
+msgstr ""
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Plots"
+msgstr "プロット"
+
+msgctxt "PetPeese|"
+msgid "Meta-Regression Estimate"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "PET"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "PEESE"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Mean model estimates"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "Data"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "Measure"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "O:E ratio"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "C statistic"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "O:E Ratio"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "C-statistic"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "Standard Error"
+msgstr ""
+
+#, fuzzy
+msgctxt "PredictionPerformanceData|"
+msgid "95% CI Lower and Upper Bound"
+msgstr "95%信頼区間の上限と下限"
+
+msgctxt "PredictionPerformanceData|"
+msgid "Number of Participants"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "Number of Observed Events"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "Number of Expected Events"
+msgstr ""
+
+#, fuzzy
+msgctxt "PredictionPerformanceData|"
+msgid "Study Labels"
+msgstr "研究ラベル"
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Inference"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Within-study variation"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Normal/Log"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Normal/Identity"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Poisson/Log"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Normal/Logit"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Prior and posterior plot"
+msgstr ""
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Forest plot"
+msgstr "フォレストプロット"
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Labels"
+msgstr ""
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Estimates"
+msgstr "推定値"
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Export O:E ratios"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Export C-statistics"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Column name"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "O:E ratios"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Column name (lCI)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "O:E ratios (lCI)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Column name (uCI)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "O:E ratios (uCI)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "C-statistics"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "C-statistics (lCI)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "C-statistics (uCI)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Funnel plot asymmetry test"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Egger (unweighted)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Egger (multiplicative overdispersion)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Macaskill"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Macaskill (pooled)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Peters"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Debray"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Plot"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "Priors"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "Summary estimate (O:E Ratio)"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "Summary estimate (C statistic)"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "Normal mean:"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "sd:"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "Heterogeneity (Between study SD)"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "Uniform"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "min:"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "max:"
+msgstr ""
+
+#, fuzzy
+msgctxt "PredictionPerformancePriors|"
+msgid "Half t"
+msgstr "半t"
+
+#, fuzzy
+msgctxt "PredictionPerformancePriors|"
+msgid "location:"
+msgstr "位置(location)："
+
+#, fuzzy
+msgctxt "PredictionPerformancePriors|"
+msgid "scale:"
+msgstr "尺度(scale)："
+
+#, fuzzy
+msgctxt "PredictionPerformancePriors|"
+msgid "df:"
+msgstr "自由度："
+
+msgctxt "WaapWls|"
+msgid "Effect sizes & SE"
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid "Correlations & N"
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid "Correlation"
+msgstr ""
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Effect Size"
+msgstr "効果量"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Effect Size Standard Error"
+msgstr "効果量標準誤差"
+
+msgctxt "WaapWls|"
+msgid "N"
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid "Transform correlations"
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid "Fisher's z"
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid "Cohen's d"
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid "Inference"
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid "Mean estimates"
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid "Multiplicative heterogeneity estimates"
+msgstr ""
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Plots"
+msgstr "プロット"
+
+msgctxt "WaapWls|"
+msgid "Mean model estimates"
+msgstr ""

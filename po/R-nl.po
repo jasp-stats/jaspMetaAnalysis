@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-08-28 02:38\n"
+"POT-Creation-Date: 2021-10-02 02:38\n"
 "PO-Revision-Date: 2021-09-11 22:43+0000\n"
 "Last-Translator: D.J. Dekker <dj_dekker@hotmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
@@ -163,8 +163,8 @@ msgid ""
 "Bayes factor for the ordered effects H%1$s versus the unconstrained (random) "
 "effects H%1$s model is %3$.3f."
 msgstr ""
-"Bayes factor van de geordende effecten H%1$s over de gefixeerde effecten H%2$"
-"s. De Bayes factor voor de geordende effecten H%1$s versus de onbeperkte "
+"Bayes factor van de geordende effecten H%1$s over de gefixeerde effecten H"
+"%2$s. De Bayes factor voor de geordende effecten H%1$s versus de onbeperkte "
 "(aselecte) effecten H%1$s model is %3$.3f."
 
 msgid ""
@@ -172,9 +172,9 @@ msgid ""
 "Bayes factor for the unconstrained (random) effects H%1$s versus the ordered "
 "effects H%1$s model is %3$.3f."
 msgstr ""
-"Bayes factor van de gefixeerde effecten H%2$s over de geordende effecten H%1$"
-"s. De Bayes factor voor de onbeperkte (aselecte) effecten H%1$s versus het "
-"geordende effecten model H%1$s is %3$.3f."
+"Bayes factor van de gefixeerde effecten H%2$s over de geordende effecten H"
+"%1$s. De Bayes factor voor de onbeperkte (aselecte) effecten H%1$s versus "
+"het geordende effecten model H%1$s is %3$.3f."
 
 msgid "Model Probabilities"
 msgstr "Modelkansen"
@@ -322,6 +322,43 @@ msgid ""
 msgstr ""
 "Posterior model \n"
 " kans"
+
+#, fuzzy
+msgid "Prior and posterior plot"
+msgstr "Prior en Posteriors"
+
+msgid "Value"
+msgstr "Waarde"
+
+msgid "Running means plot"
+msgstr ""
+
+#, fuzzy
+msgid "Iteration"
+msgstr "Informatie"
+
+msgid "Running mean"
+msgstr ""
+
+#, fuzzy
+msgid "Autocorrelations plot"
+msgstr "Gemiddelde autocorrelatie"
+
+msgid "Lag"
+msgstr ""
+
+#, fuzzy
+msgid "Autocorrelation"
+msgstr "Gemiddelde autocorrelatie"
+
+msgid "Gelman-Rubin plot"
+msgstr ""
+
+msgid "Last iteration in chain"
+msgstr ""
+
+msgid "Shrink factor"
+msgstr ""
 
 msgid "The metafor package crashed with the following error: %s"
 msgstr "Het metafor package is gecrasht met de volgende foutmelding: %s"
@@ -488,9 +525,6 @@ msgstr "Geobserveerde Uitkomst"
 msgid "Cannot set 'xlim' automatically. Please set this argument manually."
 msgstr "Kan 'xlim' niet automatisch instelllen. Stel argument handmatig in."
 
-msgid "Value"
-msgstr "Waarde"
-
 msgid "Profile Plot for"
 msgstr "Profielgrafiek voor"
 
@@ -575,6 +609,93 @@ msgid "%g%% Confidence Interval"
 msgstr "%g%% Betrouwbaarheidsinterval"
 
 msgid ""
+"The study labels contain invalid characters. Please, remove them before "
+"running the analysis."
+msgstr ""
+"De studielabels bevatten ongeldige tekens. Verwijder deze alvorens de "
+"analyse uit te voeren."
+
+msgid "%s%% CI"
+msgstr "%s%% BI"
+
+#, fuzzy
+msgid "%s%% PI"
+msgstr "%s%% BI"
+
+#, fuzzy
+msgid "%s Summary"
+msgstr "Samenvatting"
+
+#, fuzzy
+msgid "metamisc package failed with the following error: '%s'"
+msgstr "Het metafor package is gecrasht met de volgende foutmelding: %s"
+
+msgid "Based on %i studies."
+msgstr ""
+
+#, fuzzy
+msgid "The model was estimated using %1$s method with %2$s link function."
+msgstr "Het model werd geschat met de %1$s methode."
+
+#, fuzzy
+msgid "The model was estimated using MCMC with %1$s link function."
+msgstr "Het model werd geschat met de %1$s methode."
+
+msgid "Observed-Expected Ratio"
+msgstr ""
+
+msgid "Concordance Statistic"
+msgstr ""
+
+msgid "The number of observed events must be specified."
+msgstr ""
+
+msgid "Funnel Plot Asymmetry Tests"
+msgstr ""
+
+msgid "Method"
+msgstr ""
+
+msgid "t-statistic"
+msgstr ""
+
+#, fuzzy
+msgid "The %1$s test failed with the following error: %2$s"
+msgstr "Het metafor package is gecrasht met de volgende foutmelding: %s"
+
+msgid "Funnel Plot Asymmetry Plots"
+msgstr ""
+
+msgid "Egger (unweighted)"
+msgstr ""
+
+msgid "Egger (multiplicative overdispersion)"
+msgstr ""
+
+msgid "Macaskill"
+msgstr ""
+
+msgid "Macaskill (pooled)"
+msgstr ""
+
+msgid "Peters"
+msgstr ""
+
+msgid "Debray"
+msgstr ""
+
+#, fuzzy
+msgid "Standard error"
+msgstr "Standaardfout"
+
+#, fuzzy
+msgid "Sample size"
+msgstr "Steekproefkwantielen"
+
+msgid "Total events"
+msgstr ""
+
+msgid ""
 "Currently this only works with rma and rma.mv objects that have specified "
 "'yi' as a formula."
 msgstr ""
@@ -631,9 +752,6 @@ msgid "The priors for publication bias were set incorrectly."
 msgstr ""
 "De a priori verdeling voor publicatieonzuiverheid is verkeerd ingesteld."
 
-msgid "%s%% CI"
-msgstr "%s%% BI"
-
 msgid "Median"
 msgstr "Mediaan"
 
@@ -658,13 +776,6 @@ msgstr "Effectgrootte (%s)"
 msgid "Heterogeneity (%s)"
 msgstr "Heterogeniteit (%s)"
 
-msgid ""
-"The study labels contain invalid characters. Please, remove them before "
-"running the analysis."
-msgstr ""
-"De studielabels bevatten ongeldige tekens. Verwijder deze alvorens de "
-"analyse uit te voeren."
-
 msgid "Prior Plots"
 msgstr "Prior Grafieken"
 
@@ -687,8 +798,8 @@ msgid ""
 "Please specify a prior distribution for each parameter in the Models "
 "specification section (either null or alternative)."
 msgstr ""
-"Specificeer een priorverdeling voor elke parameter in de modelspecificatie ("
-"in het nul- of alternatieve model)."
+"Specificeer een priorverdeling voor elke parameter in de modelspecificatie "
+"(in het nul- of alternatieve model)."
 
 msgid "Model Summary"
 msgstr "Model Samenvatting"
@@ -865,11 +976,21 @@ msgstr "Posterior kansen"
 msgid "Model %i does not contain any of the selected parameters."
 msgstr "De geselecteerd parameter zit niet in Model %i."
 
-msgid "Error in %s: All p-values need to be between 0 and 1."
-msgstr "Fout in %s: Alle p-waarden moeten tussen 0 en 1 liggen."
+msgid ""
+"Cannot compute results. All entries of the p-value variable (%s) must be "
+"between 0 and 1."
+msgstr ""
 
-msgid "Error in %s: All correlation coefficients need to be between -1 and 1."
+#, fuzzy
+msgid ""
+"Cannot compute results. All entries of the correlation coefficient variable "
+"(%s) must be between -1 and 1."
 msgstr "Fout in %s: Alle correlatiecoëfficiënten moeten tussen -1 en 1 liggen."
+
+msgid ""
+"Cannot compute results. All entries of the sample size variable (%s) must be "
+"greater than four."
+msgstr ""
 
 msgid "The p-value cutoffs were set incorectly."
 msgstr "De p-afkapwaarden waren verkeerd ingesteld."
@@ -919,8 +1040,8 @@ msgstr "Heterogeniteit Aannemende"
 msgid "Fixed Effects Estimates"
 msgstr "Gefixeerde Effecten Schattingen"
 
-msgid "Mean Estimates(%s)"
-msgstr "Gemiddelde Schattingen(%s)"
+msgid "Mean Estimates (%s)"
+msgstr "Gemiddelde Schattingen (%s)"
 
 msgid "Estimated Weights"
 msgstr "Geschatte Gewichten"
@@ -944,7 +1065,8 @@ msgstr ""
 "Er waren geen p-afkapwaarden na hun automatische reductie. De weergegeven "
 "frequenties komen overeen met de niet-gereduceerde p-afkapwaarden."
 
-msgid "Weight Function(%s)"
+#, fuzzy
+msgid "Weight Function (%s)"
 msgstr "Gewichtsfunctie(%s)"
 
 msgid ""
@@ -967,9 +1089,6 @@ msgstr "Gefixeerde effecten (aangepast)"
 
 msgid "Random effects (adjusted)"
 msgstr "Aselecte effecten (aangepast)"
-
-msgid "Mean Estimates (%s)"
-msgstr "Gemiddelde Schattingen (%s)"
 
 msgid "Fixed effects model:"
 msgstr "Gefixeerde effecten model:"
@@ -1028,15 +1147,60 @@ msgstr ""
 msgid "Only the following one-sided p-value cutoffs were used: %s."
 msgstr "Alleen de volgende eenzijdige p-afkapwaarden werden gebruikt: %s."
 
-msgid "No effect sizes specified to compute the studies' sample variances."
+msgid "Error: There was not enough adequatelly powered studies (k = %1$i)"
 msgstr ""
-"Er zijn geen effectgroottes gespecificeerd om de steekproefvariantie van de "
-"onderzoeken te berekenen."
+
+msgid "Note: There were %1$i adequatelly powered studies"
+msgstr ""
+
+#, fuzzy
+msgid "Test of Effect"
+msgstr "Effecten"
+
+#, fuzzy
+msgid "Estimates"
+msgstr "Schatting"
+
+#, fuzzy
+msgid "PET-PEESE Regression Estimates"
+msgstr "PET-PEESE Regressie Schatting"
+
+#, fuzzy
+msgid "Multiplicative Heterogeneity Estimates"
+msgstr "Geschatte heterogeniteit"
+
+#, fuzzy
+msgid "Estimated %1$s Regression"
+msgstr "Geschatte onderzoekseffecten"
+
+msgid "Cohen's d"
+msgstr ""
+
+msgid "Fisher's z"
+msgstr ""
+
+msgid ""
+"WAAP was not estimated: there were only %1$i adequatelly powered studies."
+msgstr ""
+
+msgid "There were %1$i adequatelly powered studies"
+msgstr ""
 
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "%i observatie is verwijderd, omdat de waarde ontbreekt."
 msgstr[1] "%i observaties zijn verwijderd omdat de waarden ontbreken."
+
+#~ msgid "Error in %s: All p-values need to be between 0 and 1."
+#~ msgstr "Fout in %s: Alle p-waarden moeten tussen 0 en 1 liggen."
+
+#~ msgid "Mean Estimates(%s)"
+#~ msgstr "Gemiddelde Schattingen(%s)"
+
+#~ msgid "No effect sizes specified to compute the studies' sample variances."
+#~ msgstr ""
+#~ "Er zijn geen effectgroottes gespecificeerd om de steekproefvariantie van "
+#~ "de onderzoeken te berekenen."
 
 #~ msgid "Rhat"
 #~ msgstr "R-dakje"
