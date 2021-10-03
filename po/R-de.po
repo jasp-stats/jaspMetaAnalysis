@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-10-02 02:38\n"
-"PO-Revision-Date: 2021-10-01 10:39+0000\n"
+"PO-Revision-Date: 2021-10-03 14:07+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/de/>\n"
@@ -377,7 +377,7 @@ msgid "<em>p</em>-values are approximate."
 msgstr "<em>p</em>-Werte sind angenähert."
 
 msgid "Coefficients"
-msgstr "Koeffizienten"
+msgstr "Koeffzienten"
 
 msgid "Estimate"
 msgstr "Schätzung"
@@ -440,7 +440,7 @@ msgid "Hat"
 msgstr "Dach"
 
 msgid "Weight"
-msgstr "Gewicht"
+msgstr "Gewichtung"
 
 msgid "File Drawer Analysis"
 msgstr "Analyse des Publikationsbias (Schubladenproblem)"
@@ -801,7 +801,7 @@ msgstr ""
 "Verteilung an (entweder Null oder alternativ)."
 
 msgid "Model Summary"
-msgstr "Modell-Zusammenfassung"
+msgstr "Modellzusammenfassung"
 
 msgid "Models"
 msgstr "Modelle"
@@ -1158,9 +1158,8 @@ msgstr ""
 msgid "Test of Effect"
 msgstr "Effekt"
 
-#, fuzzy
 msgid "Estimates"
-msgstr "Schätzung"
+msgstr "Schätzungen"
 
 #, fuzzy
 msgid "PET-PEESE Regression Estimates"
