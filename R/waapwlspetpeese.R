@@ -172,14 +172,14 @@
   for (estimator in if(type == "waapWls") c("wls", "waap") else c("pet", "peese")) {
 
     if (length(models[[estimator]]) == 0 && estimator == "waap") {
-      table$addFootnote(symbol = gettextf("Error: There was not enough adequatelly powered studies (k = %1$i)", attr(models[["waap"]], "nPowered")))
+      table$addFootnote(symbol = gettextf("Error: There were not enough adequately powered studies (k = %1$i)", attr(models[["waap"]], "nPowered")))
     } else {
       table$addRows(list(
         type    = toupper(estimator),
         est     = attr(models[[estimator]], "sigma")
       ))
       if (estimator == "waap")
-        table$addFootnote(symbol = gettextf("Note: There were %1$i adequatelly powered studies", attr(models[["waap"]], "nPowered")))
+        table$addFootnote(symbol = gettextf("Note: There were %1$i adequately powered studies", attr(models[["waap"]], "nPowered")))
     }
   }
 
@@ -601,7 +601,7 @@
   if (is.null(waap))
     return()
   else if (length(waap) == 0)
-    table$addFootnote(symbol = gettext("Warning:") , gettextf("WAAP was not estimated: there were only %1$i adequatelly powered studies.", attr(waap, "nPowered")))
+    table$addFootnote(symbol = gettext("Warning:") , gettextf("WAAP was not estimated: There were only %1$i adequately powered studies.", attr(waap, "nPowered")))
   else
-    table$addFootnote(gettextf("There were %1$i adequatelly powered studies", attr(waap, "nPowered")))
+    table$addFootnote(gettextf("There were %1$i adequately powered studies", attr(waap, "nPowered")))
 }
