@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-10-02 02:38\n"
-"PO-Revision-Date: 2021-10-03 14:07+0000\n"
+"PO-Revision-Date: 2021-10-05 13:03+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/de/>\n"
@@ -321,42 +321,38 @@ msgstr ""
 "Posterior Modell \n"
 " Wahrscheinlichkeit"
 
-#, fuzzy
 msgid "Prior and posterior plot"
-msgstr "Prior und Posteriors"
+msgstr "Diagramm Prior und Posterior"
 
 msgid "Value"
 msgstr "Wert"
 
 msgid "Running means plot"
-msgstr ""
+msgstr "Diagramm gleitender Mittelwerte"
 
-#, fuzzy
 msgid "Iteration"
-msgstr "Information"
+msgstr "Iteration"
 
 msgid "Running mean"
-msgstr ""
+msgstr "Gleitender Mittelwert"
 
-#, fuzzy
 msgid "Autocorrelations plot"
-msgstr "Mittlere Autokorrelation"
+msgstr "Diagramm Autokorrelationen"
 
 msgid "Lag"
-msgstr ""
+msgstr "Verzögerung"
 
-#, fuzzy
 msgid "Autocorrelation"
-msgstr "Mittlere Autokorrelation"
+msgstr "Autokorrelation"
 
 msgid "Gelman-Rubin plot"
-msgstr ""
+msgstr "Gelman-Rubin-Diagramm"
 
 msgid "Last iteration in chain"
-msgstr ""
+msgstr "Letzte Iteration in Kette"
 
 msgid "Shrink factor"
-msgstr ""
+msgstr "Schrumpffaktor"
 
 msgid "The metafor package crashed with the following error: %s"
 msgstr "Das metafor-Paket stürzte mit folgendem Fehler ab: %s"
@@ -377,7 +373,7 @@ msgid "<em>p</em>-values are approximate."
 msgstr "<em>p</em>-Werte sind angenähert."
 
 msgid "Coefficients"
-msgstr "Koeffzienten"
+msgstr "Koeffizienten"
 
 msgid "Estimate"
 msgstr "Schätzung"
@@ -619,82 +615,74 @@ msgstr ""
 msgid "%s%% CI"
 msgstr "%s%% KI"
 
-#, fuzzy
 msgid "%s%% PI"
-msgstr "%s%% KI"
+msgstr "%s%% PI"
 
-#, fuzzy
 msgid "%s Summary"
-msgstr "Zusammenfassung"
+msgstr "%s Zusammenfassung"
 
-#, fuzzy
 msgid "metamisc package failed with the following error: '%s'"
-msgstr "Das metafor-Paket stürzte mit folgendem Fehler ab: %s"
+msgstr "Das metamisc-Paket stürzte mit folgendem Fehler ab: '%s'"
 
 msgid "Based on %i studies."
-msgstr ""
+msgstr "Basierend auf %i Studien."
 
-#, fuzzy
 msgid "The model was estimated using %1$s method with %2$s link function."
-msgstr "Das Modell wurde mit der %1$s-Methode geschätzt."
+msgstr "Das Modell wurde mit der %1$s-Methode und %2$s-Link-Funktion geschätzt."
 
-#, fuzzy
 msgid "The model was estimated using MCMC with %1$s link function."
-msgstr "Das Modell wurde mit der %1$s-Methode geschätzt."
+msgstr "Das Modell wurde mit MCMC und %1$s Link-Funktion geschätzt."
 
 msgid "Observed-Expected Ratio"
-msgstr ""
+msgstr "Beobachtet-Erwartet-Verhältnis"
 
 msgid "Concordance Statistic"
-msgstr ""
+msgstr "Konkordanzstatistik"
 
 msgid "The number of observed events must be specified."
-msgstr ""
+msgstr "Die Anzahl der beobachteten Ereignisse muss angegeben werden."
 
 msgid "Funnel Plot Asymmetry Tests"
-msgstr ""
+msgstr "Funnelplot Asymmetrie-Tests"
 
 msgid "Method"
-msgstr ""
+msgstr "Methode"
 
 msgid "t-statistic"
-msgstr ""
+msgstr "t-Statistik"
 
-#, fuzzy
 msgid "The %1$s test failed with the following error: %2$s"
-msgstr "Das metafor-Paket stürzte mit folgendem Fehler ab: %s"
+msgstr "Der %1$s-Test stürzte mit folgendem Fehler ab: %2$s"
 
 msgid "Funnel Plot Asymmetry Plots"
-msgstr ""
+msgstr "Funnelplot Asymmetrie-Diagramme"
 
 msgid "Egger (unweighted)"
-msgstr ""
+msgstr "Egger (ungewichtet)"
 
 msgid "Egger (multiplicative overdispersion)"
-msgstr ""
+msgstr "Egger (multiplikative Überdispersion)"
 
 msgid "Macaskill"
-msgstr ""
+msgstr "Macaskill"
 
 msgid "Macaskill (pooled)"
-msgstr ""
+msgstr "Macaskill (gepoolt)"
 
 msgid "Peters"
-msgstr ""
+msgstr "Peters"
 
 msgid "Debray"
-msgstr ""
+msgstr "Debray"
 
-#, fuzzy
 msgid "Standard error"
 msgstr "Standardfehler"
 
-#, fuzzy
 msgid "Sample size"
-msgstr "Stichprobenquantile"
+msgstr "Stichprobenumfang"
 
 msgid "Total events"
-msgstr ""
+msgstr "Ereignisse gesamt"
 
 msgid ""
 "Currently this only works with rma and rma.mv objects that have specified "
@@ -980,18 +968,22 @@ msgid ""
 "Cannot compute results. All entries of the p-value variable (%s) must be "
 "between 0 and 1."
 msgstr ""
+"Ergebnisse können nicht berechnet werden. Alle Einträge der Variable p-Wert "
+"(%s) müssen zwischen 0 und 1 liegen."
 
-#, fuzzy
 msgid ""
 "Cannot compute results. All entries of the correlation coefficient variable "
 "(%s) must be between -1 and 1."
 msgstr ""
-"Fehler in %s: Alle Korrelationskoeffizienten müssen zwischen -1 und 1 liegen."
+"Ergebnisse können nicht berechnet werden. Alle Einträge der "
+"Korrelationskoeffizienten-Variable (%s) müssen zwischen -1 und 1 liegen."
 
 msgid ""
 "Cannot compute results. All entries of the sample size variable (%s) must be "
 "greater than four."
 msgstr ""
+"Die Ergebnisse können nicht berechnet werden. Alle Einträge der Variablen "
+"für den Stichprobenumfang (%s) müssen größer als vier sein."
 
 msgid "The p-value cutoffs were set incorectly."
 msgstr "Die p-Wert-Grenzwerte wurden unkorrekt gesetzt."
@@ -1066,9 +1058,8 @@ msgstr ""
 "Nach ihrer automatischen Reduzierung gab es keine p-Wert-Grenzwerte. Die "
 "angezeigten Frequenzen entsprechen den nicht reduzierten p-Wert-Grenzwerten."
 
-#, fuzzy
 msgid "Weight Function (%s)"
-msgstr "Gewichtungsfunktion(%s)"
+msgstr "Gewichtungsfunktion (%s)"
 
 msgid ""
 "The figure could not be created since one of the estimates is not a number."
@@ -1150,41 +1141,40 @@ msgstr ""
 
 msgid "Error: There was not enough adequatelly powered studies (k = %1$i)"
 msgstr ""
+"Fehler: Es gab nicht genügend Studien mit angemessener Teststärke (k = %1$i)"
 
 msgid "Note: There were %1$i adequatelly powered studies"
-msgstr ""
+msgstr "Hinweis: Es gab %1$i Studien mit angemessener Teststärke"
 
-#, fuzzy
 msgid "Test of Effect"
-msgstr "Effekt"
+msgstr "Test des Effekts"
 
 msgid "Estimates"
 msgstr "Schätzungen"
 
-#, fuzzy
 msgid "PET-PEESE Regression Estimates"
-msgstr "Schätzung PET-PEESE-Regression"
+msgstr "Schätzungen PET-PEESE-Regression"
 
-#, fuzzy
 msgid "Multiplicative Heterogeneity Estimates"
-msgstr "Schätzungen Heterogenität"
+msgstr "Schätzungen Multiplikativer Heterogenität"
 
-#, fuzzy
 msgid "Estimated %1$s Regression"
-msgstr "Geschätzte Studieneffekte"
+msgstr "Geschätzte %1$s Regression"
 
 msgid "Cohen's d"
-msgstr ""
+msgstr "Cohens d"
 
 msgid "Fisher's z"
-msgstr ""
+msgstr "Fishers z"
 
 msgid ""
 "WAAP was not estimated: there were only %1$i adequatelly powered studies."
 msgstr ""
+"WAAP wurde nicht geschätzt: Es gab nur %1$i Studien mit angemessener "
+"Teststärke."
 
 msgid "There were %1$i adequatelly powered studies"
-msgstr ""
+msgstr "Es gab %1$i Studien mit angemessener Teststärke"
 
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
