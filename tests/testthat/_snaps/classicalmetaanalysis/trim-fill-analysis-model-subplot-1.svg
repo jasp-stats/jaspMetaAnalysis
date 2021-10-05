@@ -783,7 +783,7 @@
 <text x='327.83' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='9.46px' lengthAdjust='spacingAndGlyphs'>0</text>
 <text x='411.50' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='18.91px' lengthAdjust='spacingAndGlyphs'>10</text>
 <text x='495.17' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='18.91px' lengthAdjust='spacingAndGlyphs'>20</text>
-<text x='329.05' y='567.49' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='147.44px' lengthAdjust='spacingAndGlyphs'>Observed Outcome</text>
+<text x='329.05' y='567.49' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='81.27px' lengthAdjust='spacingAndGlyphs'>Effect Size</text>
 <text x='329.05' y='16.68' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='244.70px' lengthAdjust='spacingAndGlyphs'>trim-fill-analysis-model-subplot-1</text>
 </g>
 </svg>

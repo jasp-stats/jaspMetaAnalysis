@@ -131,7 +131,7 @@
 <text x='361.94' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='9.46px' lengthAdjust='spacingAndGlyphs'>0</text>
 <text x='432.33' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='9.46px' lengthAdjust='spacingAndGlyphs'>1</text>
 <text x='502.72' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='9.46px' lengthAdjust='spacingAndGlyphs'>2</text>
-<text x='333.87' y='567.49' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='147.44px' lengthAdjust='spacingAndGlyphs'>Observed Outcome</text>
+<text x='333.87' y='567.49' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='81.27px' lengthAdjust='spacingAndGlyphs'>Effect Size</text>
 <text x='333.87' y='16.68' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='242.88px' lengthAdjust='spacingAndGlyphs'>diagnostic-plots-no-qq-subplot-1</text>
 </g>
 </svg>
