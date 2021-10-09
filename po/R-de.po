@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-10-02 02:38\n"
+"POT-Creation-Date: 2021-10-09 02:38\n"
 "PO-Revision-Date: 2021-10-05 13:03+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
@@ -459,7 +459,8 @@ msgstr "Test auf Residuenheterogenität"
 msgid "The model was estimated using %1$s method."
 msgstr "Das Modell wurde mit der %1$s-Methode geschätzt."
 
-msgid "Log-likelihood"
+#, fuzzy
+msgid "Log-Likelihood"
 msgstr "Log-Likelihood"
 
 msgid "Deviance"
@@ -489,16 +490,15 @@ msgstr "Mit %s markierte Fälle haben einen Effekt."
 msgid "Plot"
 msgstr "Abbildung"
 
-msgid "Forest plot"
-msgstr "Forest-Plot"
-
 msgid "Funnel Plot"
 msgstr "Funnel-Plot"
 
-msgid "Log-likelihood for %s%s"
+#, fuzzy
+msgid "Log-Likelihood for %s%s"
 msgstr "Log-Likelihood für %s%s"
 
-msgid "Trim-fill Analysis"
+#, fuzzy
+msgid "Trim-Fill Analysis"
 msgstr "Trim-fill-Analyse"
 
 msgid "Diagnostic Plots"
@@ -512,9 +512,6 @@ msgstr "FE-Modell"
 
 msgid "RE Model"
 msgstr "RE-Modell"
-
-msgid "Observed Outcome"
-msgstr "Beobachtetes Ergebnis"
 
 msgid "Cannot set 'xlim' automatically. Please set this argument manually."
 msgstr ""
@@ -628,10 +625,14 @@ msgid "Based on %i studies."
 msgstr "Basierend auf %i Studien."
 
 msgid "The model was estimated using %1$s method with %2$s link function."
-msgstr "Das Modell wurde mit der %1$s-Methode und %2$s-Link-Funktion geschätzt."
+msgstr ""
+"Das Modell wurde mit der %1$s-Methode und %2$s-Link-Funktion geschätzt."
 
 msgid "The model was estimated using MCMC with %1$s link function."
 msgstr "Das Modell wurde mit MCMC und %1$s Link-Funktion geschätzt."
+
+msgid "Forest plot"
+msgstr "Forest-Plot"
 
 msgid "Observed-Expected Ratio"
 msgstr "Beobachtet-Erwartet-Verhältnis"
@@ -1180,6 +1181,9 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "%i Beobachtung wurde aufgrund fehlender Werte entfernt."
 msgstr[1] "%i Beobachtungen wurden aufgrund fehlender Werte entfernt."
+
+#~ msgid "Observed Outcome"
+#~ msgstr "Beobachtetes Ergebnis"
 
 #~ msgid "Error in %s: All p-values need to be between 0 and 1."
 #~ msgstr "Fehler in %s: Alle p-Werte müssen zwischen 0 und 1 liegen."

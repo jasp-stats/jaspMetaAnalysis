@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-10-02 02:38\n"
+"POT-Creation-Date: 2021-10-09 02:38\n"
 "PO-Revision-Date: 2021-10-02 22:44+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
@@ -468,7 +468,8 @@ msgstr "Proba da Heteroxeneidade dos Erros"
 msgid "The model was estimated using %1$s method."
 msgstr "O modelo estimouse utilizando o método %1$s."
 
-msgid "Log-likelihood"
+#, fuzzy
+msgid "Log-Likelihood"
 msgstr "Log-Verosimilitude"
 
 msgid "Deviance"
@@ -498,16 +499,15 @@ msgstr "Os casos marcados con %s son influentes."
 msgid "Plot"
 msgstr "Gráfica"
 
-msgid "Forest plot"
-msgstr "Gráfica en bosque"
-
 msgid "Funnel Plot"
 msgstr "Gráfica en Funil"
 
-msgid "Log-likelihood for %s%s"
+#, fuzzy
+msgid "Log-Likelihood for %s%s"
 msgstr "Log-Verosimilitude para %s%s"
 
-msgid "Trim-fill Analysis"
+#, fuzzy
+msgid "Trim-Fill Analysis"
 msgstr "Análise Recortar-Encher"
 
 msgid "Diagnostic Plots"
@@ -521,9 +521,6 @@ msgstr "Modelo de EF"
 
 msgid "RE Model"
 msgstr "Modelo de EA"
-
-msgid "Observed Outcome"
-msgstr "Resultado Observado"
 
 msgid "Cannot set 'xlim' automatically. Please set this argument manually."
 msgstr ""
@@ -638,10 +635,15 @@ msgid "Based on %i studies."
 msgstr "Baseado en %i estudos."
 
 msgid "The model was estimated using %1$s method with %2$s link function."
-msgstr "O modelo estimouse utilizando o método %1$s coa función %2$s de enlace."
+msgstr ""
+"O modelo estimouse utilizando o método %1$s coa función %2$s de enlace."
 
 msgid "The model was estimated using MCMC with %1$s link function."
-msgstr "O modelo estimouse utilizando o método MCMC coa función %1$s de enlace."
+msgstr ""
+"O modelo estimouse utilizando o método MCMC coa función %1$s de enlace."
+
+msgid "Forest plot"
+msgstr "Gráfica en bosque"
 
 msgid "Observed-Expected Ratio"
 msgstr "Proporción Observado-Agardado"
@@ -1191,6 +1193,9 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "a observación %i eliminouse debido a valores ausentes."
 msgstr[1] "as observacións %i elimináronse debido a valores ausentes."
+
+#~ msgid "Observed Outcome"
+#~ msgstr "Resultado Observado"
 
 #~ msgid "Error in %s: All p-values need to be between 0 and 1."
 #~ msgstr "Fallo en %s: Tódolos valores p precisan estar entre 0 e 1."

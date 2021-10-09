@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.15\n"
-"POT-Creation-Date: 2021-10-02 02:38\n"
+"POT-Creation-Date: 2021-10-09 02:38\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -379,7 +379,7 @@ msgstr ""
 msgid "The model was estimated using %1$s method."
 msgstr ""
 
-msgid "Log-likelihood"
+msgid "Log-Likelihood"
 msgstr ""
 
 msgid "Deviance"
@@ -409,16 +409,13 @@ msgstr ""
 msgid "Plot"
 msgstr ""
 
-msgid "Forest plot"
-msgstr ""
-
 msgid "Funnel Plot"
 msgstr ""
 
-msgid "Log-likelihood for %s%s"
+msgid "Log-Likelihood for %s%s"
 msgstr ""
 
-msgid "Trim-fill Analysis"
+msgid "Trim-Fill Analysis"
 msgstr ""
 
 msgid "Diagnostic Plots"
@@ -431,9 +428,6 @@ msgid "FE Model"
 msgstr ""
 
 msgid "RE Model"
-msgstr ""
-
-msgid "Observed Outcome"
 msgstr ""
 
 msgid "Cannot set 'xlim' automatically. Please set this argument manually."
@@ -542,6 +536,9 @@ msgid "The model was estimated using %1$s method with %2$s link function."
 msgstr ""
 
 msgid "The model was estimated using MCMC with %1$s link function."
+msgstr ""
+
+msgid "Forest plot"
 msgstr ""
 
 msgid "Observed-Expected Ratio"

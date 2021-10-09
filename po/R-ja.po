@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
-"POT-Creation-Date: 2021-10-02 02:38\n"
+"POT-Creation-Date: 2021-10-09 02:38\n"
 "PO-Revision-Date: 2021-09-24 01:33+0000\n"
 "Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -428,7 +428,8 @@ msgstr "残差異質性の検定"
 msgid "The model was estimated using %1$s method."
 msgstr "モデルは %1$s 法で推定されました."
 
-msgid "Log-likelihood"
+#, fuzzy
+msgid "Log-Likelihood"
 msgstr "対数尤度"
 
 msgid "Deviance"
@@ -458,16 +459,15 @@ msgstr "%s でマークされたケースは影響力があります."
 msgid "Plot"
 msgstr "プロット"
 
-msgid "Forest plot"
-msgstr "フォレストプロット"
-
 msgid "Funnel Plot"
 msgstr "ファンネルプロット"
 
-msgid "Log-likelihood for %s%s"
+#, fuzzy
+msgid "Log-Likelihood for %s%s"
 msgstr "%s%s の対数尤度"
 
-msgid "Trim-fill Analysis"
+#, fuzzy
+msgid "Trim-Fill Analysis"
 msgstr "Trim-fill 分析"
 
 msgid "Diagnostic Plots"
@@ -481,9 +481,6 @@ msgstr "FEモデル"
 
 msgid "RE Model"
 msgstr "REモデル"
-
-msgid "Observed Outcome"
-msgstr "観察されたアウトカム"
 
 msgid "Cannot set 'xlim' automatically. Please set this argument manually."
 msgstr ""
@@ -606,6 +603,9 @@ msgstr "モデルは %1$s 法で推定されました."
 #, fuzzy
 msgid "The model was estimated using MCMC with %1$s link function."
 msgstr "モデルは %1$s 法で推定されました."
+
+msgid "Forest plot"
+msgstr "フォレストプロット"
 
 msgid "Observed-Expected Ratio"
 msgstr ""
@@ -1151,6 +1151,9 @@ msgstr ""
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "%i の観測値が欠損しているため削除されました。"
+
+#~ msgid "Observed Outcome"
+#~ msgstr "観察されたアウトカム"
 
 #~ msgid "Error in %s: All p-values need to be between 0 and 1."
 #~ msgstr "%s でエラー: すべての p 値は 0 ~ 1 の間である必要があります."

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
-"POT-Creation-Date: 2021-10-02 02:38\n"
+"POT-Creation-Date: 2021-10-09 02:38\n"
 "PO-Revision-Date: 2021-08-09 00:37+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
@@ -421,7 +421,8 @@ msgstr ""
 msgid "The model was estimated using %1$s method."
 msgstr ""
 
-msgid "Log-likelihood"
+#, fuzzy
+msgid "Log-Likelihood"
 msgstr "Log-verosimilitud"
 
 msgid "Deviance"
@@ -451,16 +452,14 @@ msgstr ""
 msgid "Plot"
 msgstr ""
 
-msgid "Forest plot"
-msgstr "Gráfico forestal"
-
 msgid "Funnel Plot"
 msgstr ""
 
-msgid "Log-likelihood for %s%s"
-msgstr ""
+#, fuzzy
+msgid "Log-Likelihood for %s%s"
+msgstr "Log-verosimilitud"
 
-msgid "Trim-fill Analysis"
+msgid "Trim-Fill Analysis"
 msgstr ""
 
 msgid "Diagnostic Plots"
@@ -473,9 +472,6 @@ msgid "FE Model"
 msgstr ""
 
 msgid "RE Model"
-msgstr ""
-
-msgid "Observed Outcome"
 msgstr ""
 
 msgid "Cannot set 'xlim' automatically. Please set this argument manually."
@@ -590,6 +586,9 @@ msgstr ""
 
 msgid "The model was estimated using MCMC with %1$s link function."
 msgstr ""
+
+msgid "Forest plot"
+msgstr "Gráfico forestal"
 
 msgid "Observed-Expected Ratio"
 msgstr ""

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-10-02 02:38\n"
+"POT-Creation-Date: 2021-10-09 02:38\n"
 "PO-Revision-Date: 2021-10-03 14:07+0000\n"
 "Last-Translator: Koen Derks <koen-derks@hotmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
@@ -465,7 +465,8 @@ msgstr "Toets van Residuen Heterogeniteit"
 msgid "The model was estimated using %1$s method."
 msgstr "Het model werd geschat met de %1$s methode."
 
-msgid "Log-likelihood"
+#, fuzzy
+msgid "Log-Likelihood"
 msgstr "Log-likelihood"
 
 msgid "Deviance"
@@ -495,16 +496,15 @@ msgstr "Waarnemingen gemarkeerd met %s zijn invloedrijk."
 msgid "Plot"
 msgstr "Grafiek"
 
-msgid "Forest plot"
-msgstr "Forestgrafiek"
-
 msgid "Funnel Plot"
 msgstr "Funnelgrafiek"
 
-msgid "Log-likelihood for %s%s"
+#, fuzzy
+msgid "Log-Likelihood for %s%s"
 msgstr "Log-likelihood voor %s%s"
 
-msgid "Trim-fill Analysis"
+#, fuzzy
+msgid "Trim-Fill Analysis"
 msgstr "Trim-fill Analyse"
 
 msgid "Diagnostic Plots"
@@ -518,9 +518,6 @@ msgstr "FE Model"
 
 msgid "RE Model"
 msgstr "RE Model"
-
-msgid "Observed Outcome"
-msgstr "Geobserveerde Uitkomst"
 
 msgid "Cannot set 'xlim' automatically. Please set this argument manually."
 msgstr "Kan 'xlim' niet automatisch instelllen. Stel argument handmatig in."
@@ -640,6 +637,9 @@ msgstr "Het model werd geschat met de %1$s methode."
 #, fuzzy
 msgid "The model was estimated using MCMC with %1$s link function."
 msgstr "Het model werd geschat met de %1$s methode."
+
+msgid "Forest plot"
+msgstr "Forestgrafiek"
 
 msgid "Observed-Expected Ratio"
 msgstr ""
@@ -1190,6 +1190,9 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "%i observatie is verwijderd, omdat de waarde ontbreekt."
 msgstr[1] "%i observaties zijn verwijderd omdat de waarden ontbreken."
+
+#~ msgid "Observed Outcome"
+#~ msgstr "Geobserveerde Uitkomst"
 
 #~ msgid "Error in %s: All p-values need to be between 0 and 1."
 #~ msgstr "Fout in %s: Alle p-waarden moeten tussen 0 en 1 liggen."
