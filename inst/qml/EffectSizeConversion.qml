@@ -28,20 +28,86 @@ Form
     {
         name:                   "EffectSizeType"
         title:                  qsTr("Choose your prefered effect size measure!")
-        radioButtonsOnSameRow:  true
-        RadioButton{ value: "fisherZ"; label: qsTr("Fisher Z"); checked: true }
-        RadioButton{ value: "cohenD"; label: qsTr("Cohen D") }
-        RadioButton{ value: "corr"; label: qsTr("Correlation") }
-        RadioButton{ value: "logOR"; label: qsTr("Log odds ratio") }
+        RadioButton{ value: "fisherZ"; label: qsTr("Fisher's Z"); checked: true }
+        RadioButton{ value: "cohenD";  label: qsTr("Cohen's D")                 }
+        RadioButton{ value: "corr";    label: qsTr("Correlation")               }
+        RadioButton{ value: "logOR";   label: qsTr("Log odds ratio")            }
     }
 
-    VariablesForm
-    {
-        AvailableVariablesList{ name: "allVariables" }
-        AssignedVariablesList{ name: "fisherZs"; label: qsTr("Fisher's Z"); allowedColumns: ["scale", "ordinal"] }
-        AssignedVariablesList{ name: "cohenDs"; label: qsTr("Cohen's D"); allowedColumns: ["scale", "ordinal"] }
-        AssignedVariablesList{ name: "corrs"; label: qsTr("Correlation"); allowedColumns: ["scale", "ordinal"] }
-        AssignedVariablesList{ name: "logORs"; label: qsTr("Log odds ratio"); allowedColumns: ["scale", "ordinal"] }
+    Section
+    {   
+        title: qsTr("Data")
+        VariablesForm
+        {
+            height: 8000
+                AvailableVariablesList{name: "allVariables"}
+
+                AssignedVariablesList
+                {
+                    name:           "fisherZs"
+                    label:          qsTr("Fisher's Z")
+                    allowedColumns: ["scale", "ordinal"]
+                    singleVariable: true
+                }
+
+                AssignedVariablesList
+                { 
+                    name:           "cohenDs"
+                    label:          qsTr("Cohen's D")
+                    allowedColumns: ["scale", "ordinal"]
+                    singleVariable: true
+                }
+
+                AssignedVariablesList
+                {
+                    name:           "corrs"
+                    label:          qsTr("Correlation")
+                    allowedColumns: ["scale", "ordinal"]
+                    singleVariable: true
+                }
+
+                AssignedVariablesList
+                {
+                    name:           "logORs"
+                    label:          qsTr("Log odds ratio")
+                    allowedColumns: ["scale", "ordinal"]
+                    singleVariable: true
+                }
+                
+                 AssignedVariablesList
+                { 
+                    name:           "varMeasures"
+                    label:          qsTr("Variability Measures")
+                    allowedColumns: ["scale", "ordinal"]
+                    rowComponent:   DropDown
+                                    {
+                                        name:   "ddVarMeasures"
+                                        label:  ""
+                                        values: ["Standard Error", "Variance", "Sample size", "T or Z statistics", "CI Lower Bound", "CI Upper Bound"]
+                                    }
+                }
+        }
     }
+    
+
+    Section
+    {
+        title: qsTr("Save")
+
+        Group
+        {
+            title: qsTr("Save the new measure!")
+            TextField
+            {
+                name:            "newName"
+                label:           qsTr("Name of the variable:")
+                placeholderText: qsTr("New_Variable") 
+            }
+        }
+
+
+    }
+
+    
 
 }
