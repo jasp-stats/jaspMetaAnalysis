@@ -85,4 +85,18 @@ Description
 		func:			"RobustBayesianMetaAnalysis"
 		requiresData:	false
 	}
+
+	GroupTitle
+	{
+		title: qsTr("Preparation tools")
+	}
+
+	Analysis
+	{
+		menu:			qsTr("Effect size conversion")
+		title:			qsTr("Effect size conversion")
+		func:			"EffectSizeConversion"
+		requiresData:	true
+	}
+
 }
