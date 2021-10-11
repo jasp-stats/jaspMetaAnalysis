@@ -86,11 +86,6 @@ Description
 		requiresData:	false
 	}
 
-	GroupTitle
-	{
-		title: qsTr("Preparation tools")
-	}
-
 	Analysis
 	{
 		menu:			qsTr("Effect size conversion")
