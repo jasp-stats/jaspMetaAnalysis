@@ -28,10 +28,10 @@ Form
     {
         name:                   "EffectSizeType"
         title:                  qsTr("Choose your prefered effect size measure!")
-        RadioButton{ value: "fisherZ"; label: qsTr("Fisher's Z"); checked: true }
-        RadioButton{ value: "cohenD";  label: qsTr("Cohen's D")                 }
-        RadioButton{ value: "corr";    label: qsTr("Correlation")               }
-        RadioButton{ value: "logOR";   label: qsTr("Log odds ratio")            }
+        RadioButton{ name: "fisherZ"; label: qsTr("Fisher's Z"); checked: true }
+        RadioButton{ name: "cohenD";  label: qsTr("Cohen's D")                 }
+        RadioButton{ name: "corr";    label: qsTr("Correlation")               }
+        RadioButton{ name: "logOR";   label: qsTr("Log odds ratio")            }
     }
 
     Section
