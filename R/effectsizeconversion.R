@@ -17,7 +17,29 @@
 
 #main
 EffectSizeConversion <- function(jaspResults, dataset, options) {
+  
+  .showOptions(jaspResults, options)
+  dataset <- .readData(dataset, options)
+  showHead(jaspResults, dataset)  
+}
 
+.showOptions <- function(jaspResults, options) {
+
+  options[["variables"]] <- c(options$fisherZs, options$cohenDs, options$corrs, options$logORs, options$varMeasures)
+  
+  baseTable <- createJaspTable(title = "Variables to convert")
+  baseTable$addColumnInfo(name = "baseTableCl", title = "Variables", type = "string")
+  baseTable[["baseTableCl"]] <- options$variables
+
+  jaspResults[["baseTable"]] <- baseTable
+
+}
+
+.readData <- function(dataset, options) {
+
+  if(!is.null(dataset)) return(dataset)
+
+  return(.readDataSetToEnd(columns = options$variables))
 }
 
 
