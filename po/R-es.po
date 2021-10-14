@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2021-10-09 02:38\n"
-"PO-Revision-Date: 2021-10-11 20:05+0000\n"
+"PO-Revision-Date: 2021-10-14 01:51+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
@@ -450,20 +450,19 @@ msgid "Cases marked with %s are influential."
 msgstr ""
 
 msgid "Plot"
-msgstr ""
+msgstr "Gráfico"
 
 msgid "Funnel Plot"
-msgstr ""
+msgstr "Gráfico de Embudo"
 
-#, fuzzy
 msgid "Log-Likelihood for %s%s"
-msgstr "Log-verosimilitud"
+msgstr "Log-Verosimilitud para %s%s"
 
 msgid "Trim-Fill Analysis"
-msgstr ""
+msgstr "Análisis Recortar-Llenar"
 
 msgid "Diagnostic Plots"
-msgstr ""
+msgstr "Gráficos de Diagnóstico"
 
 msgid "Study %s"
 msgstr ""
@@ -534,31 +533,31 @@ msgid "FE"
 msgstr ""
 
 msgid "ML"
-msgstr ""
+msgstr "MV"
 
 msgid "REML"
-msgstr ""
+msgstr "MVRE"
 
 msgid "DL"
-msgstr ""
+msgstr "DL"
 
 msgid "HE"
-msgstr ""
+msgstr "HE"
 
 msgid "HS"
-msgstr ""
+msgstr "HS"
 
 msgid "SJ"
-msgstr ""
+msgstr "SJ"
 
 msgid "EB"
-msgstr ""
+msgstr "EB"
 
 msgid "PM"
-msgstr ""
+msgstr "PM"
 
 msgid "%g%% Confidence Interval"
-msgstr ""
+msgstr "Intervalo con el %g%% de Confianza"
 
 msgid ""
 "The study labels contain invalid characters. Please, remove them before "
@@ -603,10 +602,10 @@ msgid "Funnel Plot Asymmetry Tests"
 msgstr ""
 
 msgid "Method"
-msgstr ""
+msgstr "Método"
 
 msgid "t-statistic"
-msgstr ""
+msgstr "estadístico t"
 
 msgid "The %1$s test failed with the following error: %2$s"
 msgstr ""
@@ -708,34 +707,34 @@ msgid "ESS"
 msgstr ""
 
 msgid "R-hat"
-msgstr ""
+msgstr "R-circunflejo"
 
 msgid "<em>p</em>-values interval"
-msgstr ""
+msgstr "intervalo de valores <em>p</em>"
 
 msgid "Effect size (%s)"
-msgstr ""
+msgstr "Magnitud del efecto (%s)"
 
 msgid "Heterogeneity (%s)"
-msgstr ""
+msgstr "Heterogeneidad (%s)"
 
 msgid "Prior Plots"
-msgstr ""
+msgstr "Gráficos Previos"
 
 msgid "Effect"
-msgstr ""
+msgstr "Efecto"
 
 msgid "Publication Bias"
-msgstr ""
+msgstr "Sesgo de Publicación"
 
 msgid "Null"
-msgstr ""
+msgstr "Nulo"
 
 msgid "Alternative"
-msgstr ""
+msgstr "Alternativo"
 
 msgid "Model Preview"
-msgstr ""
+msgstr "Vista Previa del Modelo"
 
 msgid ""
 "Please specify a prior distribution for each parameter in the Models "
@@ -799,19 +798,19 @@ msgid "Exclusion"
 msgstr ""
 
 msgid "Inclusion"
-msgstr ""
+msgstr "Inclusión"
 
 msgid "log(BF)"
-msgstr ""
+msgstr "log(FB)"
 
 msgid "BF"
-msgstr "BF"
+msgstr "FB"
 
 msgid "BF%s"
-msgstr "BF%s"
+msgstr "FB%s"
 
 msgid "log(BF%s)"
-msgstr ""
+msgstr "log(FB%s)"
 
 msgid "log(MargLik)"
 msgstr ""
@@ -848,7 +847,7 @@ msgid "Posterior Distribution Plots"
 msgstr ""
 
 msgid "Conditional"
-msgstr ""
+msgstr "Condicionado"
 
 msgid "Model Averaged"
 msgstr ""
@@ -877,10 +876,10 @@ msgid "Heterogeneity Estimates"
 msgstr ""
 
 msgid "Diagnostics"
-msgstr ""
+msgstr "Diagnósticos"
 
 msgid "Models Diagnostics Overview"
-msgstr ""
+msgstr "Revisión de los Diagnósticos de los Modelos"
 
 msgid "max(MCMC error)"
 msgstr ""
@@ -913,7 +912,7 @@ msgid "Average autocorrelations"
 msgstr ""
 
 msgid "Posterior samples densities"
-msgstr ""
+msgstr "Densidades posteriores de muestras"
 
 msgid "Model %i does not contain any of the selected parameters."
 msgstr ""
@@ -946,10 +945,10 @@ msgid "No steps"
 msgstr ""
 
 msgid "95%% Confidence Interval"
-msgstr ""
+msgstr "Intervalo de Confianza del %s%%"
 
 msgid "Note:"
-msgstr ""
+msgstr "Nota:"
 
 msgid "%s is on %s scale."
 msgstr ""
