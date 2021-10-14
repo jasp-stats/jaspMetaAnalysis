@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2021-10-09 02:38\n"
-"PO-Revision-Date: 2021-10-14 01:51+0000\n"
+"PO-Revision-Date: 2021-10-14 20:07+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
@@ -565,20 +565,19 @@ msgid ""
 msgstr ""
 
 msgid "%s%% CI"
-msgstr "%s%% IC"
+msgstr "IC del %s%%"
 
-#, fuzzy
 msgid "%s%% PI"
-msgstr "%s%% IC"
+msgstr "IP del %s%%"
 
 msgid "%s Summary"
-msgstr ""
+msgstr "Resumen de %s"
 
 msgid "metamisc package failed with the following error: '%s'"
-msgstr ""
+msgstr "el paquete metamisc falló con el siguiente error: '%s'"
 
 msgid "Based on %i studies."
-msgstr ""
+msgstr "Basado en %i estudios."
 
 msgid "The model was estimated using %1$s method with %2$s link function."
 msgstr ""
@@ -656,7 +655,7 @@ msgid "'. Factor levels:"
 msgstr ""
 
 msgid ","
-msgstr ""
+msgstr ","
 
 msgid ". Data names:"
 msgstr ""
