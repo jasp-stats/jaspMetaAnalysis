@@ -20,7 +20,7 @@ EffectSizeConversion <- function(jaspResults, dataset, options) {
   
   .showOptions(jaspResults, options)
   dataset <- .readData(dataset, options)
-  showHead(jaspResults, dataset)  
+ 
 }
 
 .showOptions <- function(jaspResults, options) {
