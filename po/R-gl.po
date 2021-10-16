@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2021-10-09 02:38\n"
-"PO-Revision-Date: 2021-10-02 22:44+0000\n"
+"PO-Revision-Date: 2021-10-15 11:32+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/gl/>\n"
@@ -468,7 +468,6 @@ msgstr "Proba da Heteroxeneidade dos Erros"
 msgid "The model was estimated using %1$s method."
 msgstr "O modelo estimouse utilizando o método %1$s."
 
-#, fuzzy
 msgid "Log-Likelihood"
 msgstr "Log-Verosimilitude"
 
@@ -491,7 +490,7 @@ msgid "H%s"
 msgstr "H%s"
 
 msgid "Rank test"
-msgstr "Proba de rango"
+msgstr "Proba de rangos"
 
 msgid "Cases marked with %s are influential."
 msgstr "Os casos marcados con %s son influentes."
@@ -502,11 +501,9 @@ msgstr "Gráfica"
 msgid "Funnel Plot"
 msgstr "Gráfica en Funil"
 
-#, fuzzy
 msgid "Log-Likelihood for %s%s"
 msgstr "Log-Verosimilitude para %s%s"
 
-#, fuzzy
 msgid "Trim-Fill Analysis"
 msgstr "Análise Recortar-Encher"
 
