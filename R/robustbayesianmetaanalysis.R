@@ -604,7 +604,12 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
         typeContainer[[paste0(parameter, type, i)]] <- tempPlot
 
-        p <- plot(tempPriors[[i]], plot_type = "ggplot", rescale_x = TRUE)
+        p <- plot(tempPriors[[i]], plot_type = "ggplot", rescale_x = TRUE, par_name = switch(
+          parameter,
+          "effect"        = bquote(mu),
+          "heterogeneity" = bquote(tau),
+          NULL
+        ))
         p <- jaspGraphs::themeJasp(p)
 
         typeContainer[[paste0(parameter, type, i)]][["plotObject"]] <- p
