@@ -60,9 +60,12 @@
 <text x='455.04' y='529.29' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='29.29px' lengthAdjust='spacingAndGlyphs'>-0.4</text>
 <text x='572.80' y='529.29' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='29.29px' lengthAdjust='spacingAndGlyphs'>-0.2</text>
 <text x='690.56' y='529.29' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='23.63px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='354.80' y='562.55' style='font-size: 20.40px; font-family: sans;' textLength='5.10px' lengthAdjust='spacingAndGlyphs'> </text>
-<text x='359.91' y='562.55' style='font-size: 20.40px; font-style: italic; font-family: sans;' textLength='51.04px' lengthAdjust='spacingAndGlyphs'>Spike</text>
-<text x='412.59' y='562.55' style='font-size: 20.40px; font-family: sans;' textLength='24.93px' lengthAdjust='spacingAndGlyphs'>(0)</text>
+<text x='341.63' y='562.55' style='font-size: 20.40px; font-family: sans;' textLength='9.33px' lengthAdjust='spacingAndGlyphs'>τ</text>
+<text x='350.95' y='562.55' style='font-size: 20.40px; font-family: sans;' textLength='5.10px' lengthAdjust='spacingAndGlyphs'> </text>
+<text x='356.06' y='562.55' style='font-size: 20.40px; font-family: sans;' textLength='11.92px' lengthAdjust='spacingAndGlyphs'>~</text>
+<text x='367.98' y='562.55' style='font-size: 20.40px; font-family: sans;' textLength='5.10px' lengthAdjust='spacingAndGlyphs'> </text>
+<text x='373.08' y='562.55' style='font-size: 20.40px; font-style: italic; font-family: sans;' textLength='51.04px' lengthAdjust='spacingAndGlyphs'>Spike</text>
+<text x='425.77' y='562.55' style='font-size: 20.40px; font-family: sans;' textLength='24.93px' lengthAdjust='spacingAndGlyphs'>(0)</text>
 <text transform='translate(19.02,261.41) rotate(-90)' text-anchor='middle' style='font-size: 20.40px; font-family: sans;' textLength='95.25px' lengthAdjust='spacingAndGlyphs'>Probability</text>
 </g>
 </svg>
