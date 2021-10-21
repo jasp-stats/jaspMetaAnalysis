@@ -694,7 +694,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
 
   ### create models overview table
-  modelsSummary <- createJaspTable(title = gettext("Models Overview"))
+  modelsSummary <- createJaspTable(title = gettext("Model Specification Preview"))
   modelsSummary$position <- 2
 
   overtitlePrior <- gettext("Prior Distribution")
