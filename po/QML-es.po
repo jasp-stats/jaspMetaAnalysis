@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-10-21 11:48+0000\n"
+"PO-Revision-Date: 2021-10-21 17:02+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/es/>\n"
@@ -303,20 +303,17 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Set null priors"
 msgstr "Establecer a priori nulos"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Inference"
 msgstr "Inferencia"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Conditional estimates"
-msgstr "Estimaciones condicionales"
+msgstr "Estimaciones condicionadas"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Models overview"
-msgstr "Resumen de modelos"
+msgstr "Revisión de modelos"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "BF"
@@ -522,42 +519,34 @@ msgctxt "SelectionModels|"
 msgid "P-value (one-sided)"
 msgstr "Valor p (unilateral)"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Model"
 msgstr "Modelo"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "P-value cutoffs"
 msgstr "Puntos de corte del valor p"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Two-sided selection"
-msgstr "Selección de dos caras"
+msgstr "Selección bilateral"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "P-value frequency"
 msgstr "Frecuencia del valor p"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Automatically join p-value intervals"
 msgstr "Unir intervalos de valor p automáticamente"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Expected effect size direction"
 msgstr "Dirección del tamaño del efecto esperado"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Positive"
 msgstr "Positivo"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Negative"
 msgstr "Negativo"
@@ -574,7 +563,6 @@ msgctxt "SelectionModels|"
 msgid "Fisher's z"
 msgstr "Z de Fisher"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Inference"
 msgstr "Inferencia"
@@ -681,42 +669,34 @@ msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Bridge sampling"
 msgstr "Muestreo de puente"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Inference"
 msgstr "Inferencia"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model"
 msgstr "Modelo"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Fixed effects"
 msgstr "Efectos fijos"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Random effects"
 msgstr "Efectos aleatorios"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model averaging"
 msgstr "Promedio del modelo"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Constrained random effects"
 msgstr "Efectos aleatorios restringidos"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "All positive"
 msgstr "Todo positivo"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "All negative"
 msgstr "Todo negativo"
@@ -725,15 +705,13 @@ msgctxt "BayesianMetaAnalysisInference|"
 msgid "Table"
 msgstr "Tabla"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model probabilities"
 msgstr "Probabilidades del modelo"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Effect sizes per study"
-msgstr "Tamaños de efecto por estudio"
+msgstr "Magnitudes de los efectos por estudio"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Plots"
@@ -1586,14 +1564,13 @@ msgctxt "PredictionPerformanceInference|"
 msgid "Prior and posterior plot"
 msgstr ""
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Forest plot"
 msgstr "Gráfico forestal"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Labels"
-msgstr ""
+msgstr "Etiquetas"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Estimates"
