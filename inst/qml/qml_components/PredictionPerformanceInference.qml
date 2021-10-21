@@ -180,6 +180,7 @@ Section
 		CheckBox
 		{
 			name:	"funnelAsymmetryTestEggerUW"
+			id:		funnelAsymmetryTestEggerUW
 			label:	qsTr("Egger (unweighted)")
 			checked: true
 		}
@@ -187,6 +188,7 @@ Section
 		CheckBox
 		{
 			name:	"funnelAsymmetryTestEggerFIV"
+			id:		funnelAsymmetryTestEggerFIV
 			label:	qsTr("Egger (multiplicative overdispersion)")
 			checked: false
 		}
@@ -194,6 +196,7 @@ Section
 		CheckBox
 		{
 			name:	"funnelAsymmetryTestMacaskillFIV"
+			id:		funnelAsymmetryTestMacaskillFIV
 			label:	qsTr("Macaskill")
 			checked: false
 			enabled: inputN === 1
@@ -202,6 +205,7 @@ Section
 		CheckBox
 		{
 			name:	"funnelAsymmetryTestMacaskillFPV"
+			id:		funnelAsymmetryTestMacaskillFPV
 			label:	qsTr("Macaskill (pooled)")
 			checked: false
 			enabled: inputN === 1 && inputO === 1
@@ -210,6 +214,7 @@ Section
 		CheckBox
 		{
 			name:	"funnelAsymmetryTestPeters"
+			id:		funnelAsymmetryTestPeters
 			label:	qsTr("Peters")
 			checked: false
 			enabled: inputN === 1 && inputO === 1
@@ -218,6 +223,7 @@ Section
 		CheckBox
 		{
 			name:	"funnelAsymmetryTestDebrayFIV"
+			id:		funnelAsymmetryTestDebrayFIV
 			label:	qsTr("Debray")
 			checked: false
 			enabled: inputO === 1
@@ -236,6 +242,7 @@ Section
 		{
 			name:	"funnelAsymmetryTestPlot"
 			label:	qsTr("Plot")
+			enabled: funnelAsymmetryTestEggerUW.checked || funnelAsymmetryTestEggerFIV.checked || funnelAsymmetryTestMacaskillFIV.checked || funnelAsymmetryTestMacaskillFPV.checked || funnelAsymmetryTestPeters.checked || funnelAsymmetryTestDebrayFIV.checked
 			checked: false
 		}
 	}
