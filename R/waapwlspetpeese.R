@@ -601,7 +601,7 @@
   if (is.null(waap))
     return()
   else if (length(waap) == 0)
-    table$addFootnote(symbol = gettext("Warning:") , gettextf("WAAP was not estimated: there were only %1$i adequatelly powered studies.", attr(waap, "nPowered")))
+    table$addFootnote(symbol = gettext("Warning:") , gettextf("WAAP was not estimated: there were only %1$i adequatelly powered studies (power > 80%%).", attr(waap, "nPowered")))
   else
-    table$addFootnote(gettextf("There were %1$i adequatelly powered studies", attr(waap, "nPowered")))
+    table$addFootnote(gettextf("There were %1$i adequatelly powered studies (power > 80%%).", attr(waap, "nPowered")))
 }
