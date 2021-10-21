@@ -38,69 +38,6 @@ Form
 		return check && listVisibility[name]["values"].includes(measures.value);
 	}
 
-	RadioButtonGroup
-	{
-		id:						measures
-		Layout.columnSpan:		2
-		name:					"measures"
-		radioButtonsOnSameRow:	true
-		columns:				2
-
-		onValueChanged:
-		{
-			for (var inputName in listVisibility)
-			{
-				if (!checkListVisibility(inputName) && listVisibility[inputName]["id"].count > 0)
-					listVisibility[inputName]["id"].itemDoubleClicked(0)
-			}
-
-			if(measuresGeneral.checked)
-				modelType.value = "custom"
-			else
-				modelType.value = "PSMA"
-		}
-
-		RadioButton
-		{
-			label:		qsTr("Cohen's d")
-			value:		"cohensD"
-			id:			measuresCohensD
-			enabled:	mainWindow.dataAvailable
-			checked:	mainWindow.dataAvailable
-		}
-
-		RadioButton
-		{
-			label:		qsTr("Correlations")
-			value:		"correlation"
-			id:			measuresCorrelation
-			enabled:	mainWindow.dataAvailable
-		}
-
-		RadioButton
-		{
-			label:		qsTr("Log odds ratios")
-			value:		"logOR"
-			id:			measureslogOR
-			enabled:	mainWindow.dataAvailable
-		}
-
-		RadioButton
-		{
-			label:		qsTr("Unstandardized effect sizes")
-			value:		"general"
-			id:			measuresGeneral
-			enabled:	mainWindow.dataAvailable
-		}
-
-		RadioButton
-		{
-			label:		qsTr("Fitted model")
-			value:		"fitted"
-			id:			measuresFitted
-			checked:	!mainWindow.dataAvailable
-		}
-	}
 
 	FileSelector
 	{
@@ -182,6 +119,70 @@ Form
 		}
 	}
 
+	RadioButtonGroup
+	{
+		id:						measures
+		Layout.columnSpan:		2
+		name:					"measures"
+		radioButtonsOnSameRow:	true
+		columns:				2
+
+		onValueChanged:
+		{
+			for (var inputName in listVisibility)
+			{
+				if (!checkListVisibility(inputName) && listVisibility[inputName]["id"].count > 0)
+					listVisibility[inputName]["id"].itemDoubleClicked(0)
+			}
+
+			if(measuresGeneral.checked)
+				modelType.value = "custom"
+			else
+				modelType.value = "PSMA"
+		}
+
+		RadioButton
+		{
+			label:		qsTr("Cohen's d")
+			value:		"cohensD"
+			id:			measuresCohensD
+			enabled:	mainWindow.dataAvailable
+			checked:	mainWindow.dataAvailable
+		}
+
+		RadioButton
+		{
+			label:		qsTr("Correlations")
+			value:		"correlation"
+			id:			measuresCorrelation
+			enabled:	mainWindow.dataAvailable
+		}
+
+		RadioButton
+		{
+			label:		qsTr("Log odds ratios")
+			value:		"logOR"
+			id:			measureslogOR
+			enabled:	mainWindow.dataAvailable
+		}
+
+		RadioButton
+		{
+			label:		qsTr("Unstandardized effect sizes")
+			value:		"general"
+			id:			measuresGeneral
+			enabled:	mainWindow.dataAvailable
+		}
+
+		RadioButton
+		{
+			label:		qsTr("Fitted model")
+			value:		"fitted"
+			id:			measuresFitted
+			checked:	!mainWindow.dataAvailable
+		}
+	}
+	
 	RadioButtonGroup
 	{
 		name:		"effectDirection"
