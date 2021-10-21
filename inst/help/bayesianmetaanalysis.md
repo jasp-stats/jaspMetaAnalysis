@@ -1,7 +1,7 @@
 Bayesian Meta-Analysis
 ===
 
-The Bayesian meta-analysis allows the user to estimate an overall effect size estimate from multiple studies and test whether the effect size estimate deviates from zero. 
+Bayesian meta-analysis allows the user to estimate an overall effect size estimate from multiple studies and test whether the effect size estimate deviates from zero. 
 
 ### Input
 ---
@@ -89,6 +89,9 @@ Displays the prior and posterior distribution of the effect size/heterogeneity u
 #### Estimation settings (MCMC)
 - Iterations: Sets the number of iterations for the MCMC estimation.
 - Chains: Sets the number of chains for the MCMC estimation.
+
+#### Repeatability
+- Set seed: Gives the option to set a seed for your analysis. Setting a seed will exclude random processes influencing an analysis. Note, however, that the seed may not reproduce the same results across operating systems.
 
 #### Bayes factor computation
 - Integration: Use integration to compute the Bayes factor.

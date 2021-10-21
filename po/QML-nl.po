@@ -4,7 +4,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Language: en_US\n"
+"X-Language: nl\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
 
@@ -225,22 +225,6 @@ msgid "Profile Random Effects Parameters (takes time)"
 msgstr "Portretteer aselecte-effectenparameters (kost tijd)"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Cohen's d / t-statistics & N / SE"
-msgstr "Cohen's d / t-statistiek & (N / SE)"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Correlations & N"
-msgstr "Correlaties & N"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Odds ratios & CI"
-msgstr "Odds ratio & BI"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Effect sizes & SE"
-msgstr "Effectgrootte & SE"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Fitted model"
 msgstr "Gepaste model"
 
@@ -257,16 +241,8 @@ msgid "Correlation"
 msgstr "Correlatie"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Odds Ratio"
-msgstr "Odds Ratio"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size"
 msgstr "Effectgrootte"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "t-statistic"
-msgstr "t-statistiek"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
@@ -281,24 +257,8 @@ msgid "N"
 msgstr "N"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "N (group 1)"
-msgstr "N (groep 1)"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "N (group 2)"
-msgstr "N (groep 2)"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Study Labels"
-msgstr "Onderzoeksnamen"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "One-sample t-tests"
-msgstr "T-toets voor één gemiddelde"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Two-sample t-tests"
-msgstr "Onafhankelijke steekproeven t-toets"
+msgstr "Onderzoeklabels"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Models"
@@ -325,116 +285,16 @@ msgid "Effect"
 msgstr "Effect"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Distribution"
-msgstr "Verdeling"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Parameters"
-msgstr "Parameters"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Truncation"
-msgstr "Afkapping"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Prior Odds"
-msgstr "Prior Kansratio"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Normal(μ,σ)"
-msgstr "Normaal(μ,σ)"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Student-t(μ,σ,v)"
-msgstr "Student-t(μ,σ,v)"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Cauchy(x₀,θ)"
-msgstr "Cauchy(x₀,θ)"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Gamma(α,β)"
-msgstr "Gamma(α,β)"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Gamma(k,θ)"
-msgstr "Gamma(k,θ)"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Inverse-Gamma(α,β)"
-msgstr "Inverse-Gamma(α,β)"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Spike(x₀)"
-msgstr "Puntmassa(x₀)"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Uniform(a,b)"
-msgstr "Uniform(a,b)"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "lower"
-msgstr "onder"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "upper"
-msgstr "boven"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Odds"
-msgstr "Kansratio"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Heterogeneity"
 msgstr "Heterogeniteit"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Publication bias"
-msgstr "Publicatieonzuiverheid"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Weight function"
 msgstr "Gewichtsfunctie"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Cut-points"
-msgstr "Afkappunten"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Two-sided"
-msgstr "Twee-zijdig"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "One-sided (mon.)"
-msgstr "Een-zijdig (mon.)"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "One-sided"
-msgstr "Een-zijdig"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "None"
-msgstr "Geen"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "p-values"
-msgstr "p-waarden"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Set null priors"
 msgstr "Zet null priors"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Effect (null)"
-msgstr "Effect (null)"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Heterogeneity (null)"
-msgstr "Heterogeniteit (null)"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Publication bias (null)"
-msgstr "Publicatieonzuiverheid (null)"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Inference"
@@ -457,24 +317,8 @@ msgid "Inclusion"
 msgstr "Inclusie"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "vs Best"
-msgstr "vs Beste"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "vs Previous"
-msgstr "vs Vorige"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Order"
 msgstr "Volgorde"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Priors"
-msgstr "Priors"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Marginal likelihood"
-msgstr "Marginale waarschijnlijkheid"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Posterior prob."
@@ -493,10 +337,6 @@ msgid "CI width"
 msgstr "CI breedte"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Estimated studies' effects"
-msgstr "Geschatte onderzoekseffecten"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Plots"
 msgstr "Grafieken"
 
@@ -511,10 +351,6 @@ msgstr "Bosgrafiek"
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Show"
 msgstr "Toon"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Observed"
-msgstr "Waargenomen"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Ascending"
@@ -553,10 +389,6 @@ msgid "Show priors"
 msgstr "Toon priors"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Conditional models only"
-msgstr "Alleen de geconditioneerde modellen"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Model number"
 msgstr "Model nummer"
 
@@ -567,10 +399,6 @@ msgstr "MCMC Diagnostiek"
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Overview"
 msgstr "Overzicht"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Include theta"
-msgstr "Includeer theta"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Plot"
@@ -589,16 +417,8 @@ msgid "Posterior samples densities"
 msgstr "Posterior steekproefdichtheid"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Transform estimates"
-msgstr "Transformeer schattingen"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Advanced"
 msgstr "Geavanceerd"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Transform effect sizes"
-msgstr "Transformeer effectgroottes"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "log(OR)"
@@ -633,10 +453,6 @@ msgid "Thin"
 msgstr "Dun"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Bridge sampling iterations:"
-msgstr "Bridge sampling iteraties:"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Autofit"
 msgstr "Autopassing"
 
@@ -655,58 +471,6 @@ msgstr "minuten"
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "seconds"
 msgstr "seconden"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Target margin of error"
-msgstr "Doelwit foutmarge"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Target R-hat"
-msgstr "Doel R-hat"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Exclude models"
-msgstr "Sluit modellen uit"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "error % >"
-msgstr "fout % >"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "R-hat >"
-msgstr "R-dakje >"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Estimated sample size <"
-msgstr "Geschatte steekproefgrootte <"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Redistribute prior probability"
-msgstr "Herverdeel prior kans"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Conditional models"
-msgstr "Conditionele modellen"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Model space"
-msgstr "Modelruimte"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Control"
-msgstr "Controle"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Clever refitting"
-msgstr "Slim opnieuw passen"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Do not refit"
-msgstr "Pas het niet opnieuw"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Always refit"
-msgstr "Pas het altijd opnieuw"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Save the fitted model"
@@ -834,493 +598,1146 @@ msgstr "Gemiddelde model schattingen"
 
 msgctxt "Description|"
 msgid "Synthesize evidence across multiple studies"
-msgstr ""
+msgstr "Voeg bewijs samen van verschillende studies"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Advanced"
 msgstr "Geavanceerd"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Prior model probability"
 msgstr "Prior model waarschijnlijkheid"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Fixed effects"
 msgstr "Gefixeerde effecten"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Random effects"
 msgstr "Willekeurige effecten"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Estimation settings (MCMC)"
 msgstr "Schattingsinstellingen (MCMC)"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "iterations:"
 msgstr "iteraties:"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "chains:"
 msgstr "kettingen:"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Bayes factor computation"
 msgstr "Bayes factor berekening"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Integration"
 msgstr "Integratie"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Bridge sampling"
 msgstr "Bridge sampling"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Inference"
 msgstr "Inferentie"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model"
 msgstr "Model"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Fixed effects"
 msgstr "Gefixeerde effecten"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Random effects"
 msgstr "Willekeurige effecten"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model averaging"
 msgstr "Model middeling"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Constrained random effects"
 msgstr "Beperkte willekeurige effecten"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "All positive"
 msgstr "Allen positief"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "All negative"
 msgstr "Allen negatief"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Table"
 msgstr "Tabel"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model probabilities"
 msgstr "Model kansen"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Effect sizes per study"
 msgstr "Effectgroottes per onderzoek"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Plots"
 msgstr "Grafieken"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Forest plot"
-msgstr ""
+msgstr "Forest plot"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Observed"
 msgstr "Waargenomen"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Estimated"
 msgstr "Geschat"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Both"
-msgstr ""
+msgstr "Beide"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Show labels"
-msgstr ""
+msgstr "Toon labels"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Ordering"
-msgstr ""
+msgstr "Ordening"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Year (ascending)"
-msgstr ""
+msgstr "Jaar (toenemend)"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Year (descending)"
-msgstr ""
+msgstr "Jaar (afnemend)"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Effect size (ascending)"
-msgstr ""
+msgstr "Effectgrootte (toenemend)"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Effect size (descending)"
-msgstr ""
+msgstr "Effectgrootte (afnemend)"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Order"
 msgstr "Volgorde"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Ascending"
 msgstr "Toenemend"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Descending"
 msgstr "Afnemend"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Row order"
 msgstr "Rijvolgorde"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Cumulative forest plot"
-msgstr "Cumulatieve forestgrafiek"
+msgstr "Cumulatieve forest plot"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Prior and posterior"
 msgstr "Prior en posterior"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Additional info"
 msgstr "Aanvullende info"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Add fixed and random effects posterior"
 msgstr "Voeg gefixeerde en willekeurige effecten posterior toe"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Shade 95% CI"
 msgstr "Markeer 95% Geloofwaardigheidsinterval"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Sequential plot"
 msgstr "Sequentiële grafiek"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Bayes factors"
 msgstr "Bayes factoren"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Posterior model probabilities"
 msgstr "Posterior model waarschijnlijkheden"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Priors"
 msgstr "Priors"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Effect size"
 msgstr "Effectgrootte"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Cauchy"
 msgstr "Cauchy"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "location:"
 msgstr "locatie:"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "scale:"
 msgstr "Schaal:"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Normal"
 msgstr "Normaal"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "mean:"
 msgstr "Gemiddelde:"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "std:"
 msgstr "std:"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "t"
 msgstr "t"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "df:"
 msgstr "vg:"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Truncation"
 msgstr "Afkapping"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Lower bound:"
 msgstr "Ondergrens:"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Upper bound:"
 msgstr "Bovengrens:"
 
-#, fuzzy
-msgctxt "BayesianMetaAnalysisPriors|"
-msgid "Heterogeneity (Between study SD)"
-msgstr "Heterogeniteit (Tussen-studie SD)"
-
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Inverse gamma"
 msgstr "Inverse gamma-verdeling"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "shape:"
 msgstr "vorm:"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Half t"
 msgstr "Halve t-verdeling"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Plot prior(s)"
 msgstr "Plot prior(s)"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Diagnostics"
 msgstr "Diagnostieken"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Plots"
 msgstr "Grafieken"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Trim-fill analysis"
 msgstr "Trim-fill analyse"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Profile plot"
 msgstr "Profielgrafiek"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Diagnostic plots"
 msgstr "Diagnostische grafieken"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Q-Q plot standardized residuals"
 msgstr "Q-Q plot gestandaardiseerde residuen"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Robustness"
 msgstr "Robuustheid"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Fail-safe N"
 msgstr "Fail-safe N"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Casewise diagnostics"
 msgstr "Diagnostieken per observatie"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Method"
 msgstr "Methode"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Fixed Effects"
-msgstr ""
+msgstr "Gefixeerde effecten"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Maximum Likelihood"
-msgstr ""
+msgstr "Maximum aannemelijkheid"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Restricted ML"
 msgstr "Restricted ML"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "DerSimonian-Laird"
-msgstr ""
+msgstr "DerSimonian-Laird"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Hedges"
 msgstr "Hedges"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Hunter-Schmidt"
-msgstr ""
+msgstr "Hunter-Schmidt"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Sidik-Jonkman"
-msgstr ""
+msgstr "Sidik-Jonkman"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Empirical Bayes"
 msgstr "Empirische Bayes"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Paule-Mandel"
-msgstr ""
+msgstr "Paule-Mandel"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Statistics"
 msgstr "Statistieken"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Regression Coefficients"
 msgstr "Regressiecoëfficiënten"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Estimates"
 msgstr "Schattingen"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Confidence intervals"
 msgstr "Betrouwbaarheidsintervallen"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Interval"
 msgstr "Interval"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Test"
 msgstr "Toets"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Covariance matrix"
 msgstr "Covariantiematrix"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Model Fit"
 msgstr "Model Passing"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Fit measures"
 msgstr "Pasmaten"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Forest plot"
-msgstr ""
+msgstr "Forest plot"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Show labels"
-msgstr ""
+msgstr "Toon labels"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Ordering"
-msgstr ""
+msgstr "Ordening"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Year (ascending)"
-msgstr ""
+msgstr "Jaar (toenemend)"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Year (descending)"
-msgstr ""
+msgstr "Jaar (afnemend)"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Effect size (ascending)"
-msgstr ""
+msgstr "Effectgrootte (toenemend)"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Effect size (descending)"
-msgstr ""
+msgstr "Effectgrootte (afnemend)"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Funnel plot"
 msgstr "Funnelgrafiek"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Rank test for funnel plot asymmetry"
 msgstr "Rangordetoets voor funnelgrafiek-asymmetrie"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Regression test for funnel plot asymmetry"
 msgstr "Regressietoets voor funnelgrafiek-asymmetrie"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Residuals Model"
 msgstr "Residuen Model"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Residuals parameters"
 msgstr "Residuen Parameters"
+
+msgctxt "BayesianMetaAnalysisPlots|"
+msgid "Add prior"
+msgstr "Voeg prior toe"
+
+msgctxt "BayesianMetaAnalysisPriors|"
+msgid "Heterogeneity (between-study SD)"
+msgstr "Heterogeniteit (interstudie SD)"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "Effect"
+msgstr "Effect"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "Effect (null)"
+msgstr "Effect (nul)"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "Heterogeneity"
+msgstr "Heterogeniteit"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "Heterogeneity (null)"
+msgstr "Heterogeniteit (null)"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "Publication bias: PET"
+msgstr "Publicatie bias: PET"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "Publication bias: PET (null)"
+msgstr "Publicatie bias: PET (null)"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "Publication bias: PEESE"
+msgstr "Publicatie bias: PEESE"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "Publication bias: PEESE (null)"
+msgstr "Publicatie bias: PEESE (null)"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "Distribution"
+msgstr "Verdeling"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "Parameters"
+msgstr "Parameters"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "Truncation"
+msgstr "Afkapping"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "Prior weights"
+msgstr "Prior gewichten"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "Normal(μ,σ)"
+msgstr "Normaal(μ,σ)"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "Student-t(μ,σ,v)"
+msgstr "Student-t(μ,σ,v)"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "Cauchy(x₀,θ)"
+msgstr "Cauchy(x₀,θ)"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "Gamma(α,β)"
+msgstr "Gamma(α,β)"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "Gamma(k,θ)"
+msgstr "Gamma(k,θ)"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "Inverse-Gamma(α,β)"
+msgstr "Inverse-Gamma(α,β)"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "Log-Normal(μ,σ)"
+msgstr "Log-Normaal(μ,σ)"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "Beta(α,β)"
+msgstr "Beta(α,β)"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "Uniform(a,b)"
+msgstr "Uniform(a,b)"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "Spike(x₀)"
+msgstr "Puntmassa(x₀)"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "None"
+msgstr "Geen"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "lower"
+msgstr "onder"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "upper"
+msgstr "boven"
+
+msgctxt "RobustBayesianMetaAnalysisPriors|"
+msgid "Weight"
+msgstr "Gewicht"
+
+msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
+msgid "Publication bias: selection models"
+msgstr "Publicatie bias: selectie modellen"
+
+msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
+msgid "Publication bias: selection models (null)"
+msgstr "Publicatie bias: selectie modellen (null)"
+
+msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
+msgid "Weight function"
+msgstr "Gewichtsfunctie"
+
+msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
+msgid "Cut-points"
+msgstr "Afkappunten"
+
+msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
+msgid "Parameters"
+msgstr "Parameters"
+
+msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
+msgid "Prior weights"
+msgstr "Prior gewichten"
+
+msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
+msgid "Two-sided"
+msgstr "Twee-zijdig"
+
+msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
+msgid "One-sided"
+msgstr "Een-zijdig"
+
+msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
+msgid "Two-sided (fixed)"
+msgstr "Twee-zijdig (gefixeerd)"
+
+msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
+msgid "One-sided (fixed)"
+msgstr "Een-zijdig (gefixeerd)"
+
+msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
+msgid "None"
+msgstr "Geen"
+
+msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
+msgid "p-values"
+msgstr "p-waarden"
+
+msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
+msgid "Weight"
+msgstr "Gewicht"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Correlations"
+msgstr "Correlaties"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Log odds ratios"
+msgstr "Log odds ratio's"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Unstandardized effect sizes"
+msgstr "Ongestandaardizeerde effectgroottes"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Log Odds Ratio"
+msgstr "Log Odds Ratio"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Model type"
+msgstr "Model type"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "RoBMA-PSMA"
+msgstr "RoBMA-PSMA"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "RoBMA-PP"
+msgstr "RoBMA-PP"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "RoBMA-old"
+msgstr "RoBMA-oud"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Custom"
+msgstr "Aangepast"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Prior scale"
+msgstr "Prior schaal"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "vs. Best"
+msgstr "vs. Beste"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "vs. Previous"
+msgstr "vs. Vorige"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Bayes factor"
+msgstr "Bayes factor"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Output scale"
+msgstr "Output schaal"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Shorten prior names"
+msgstr "Verkort prior namen"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "PET-PEESE"
+msgstr "PET-PEESE"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Order by"
+msgstr "Sorteer op"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Estimate"
+msgstr "Schatting"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Bayesian updating"
+msgstr "Bayesiaanse updating"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Posterior estimates"
+msgstr "Posterior schattingen"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "PET"
+msgstr "PET"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "PEESE"
+msgstr "PEESE"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Estimation scale"
+msgstr "Schatting schaal"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "R-hat"
+msgstr "R-dakje"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Effective sample size"
+msgstr "Effectieve steekproefgrootte"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "MCMC error"
+msgstr "MCMC fout"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "MCMC error / SD"
+msgstr "MCMC fout / SD"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Extend samples"
+msgstr "Verleng steekproeven"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Remove failed models"
+msgstr "Verwijder gefaalde modellen"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Rebalance component probability on model failure"
+msgstr "Herbalanseer component kans wanneer model faalt"
+
+msgctxt "Description|"
+msgid "Classical"
+msgstr "Klassiek"
+
+msgctxt "Description|"
+msgid "Bayesian"
+msgstr "Bayesiaans"
+
+msgctxt "Description|"
+msgid "Prediction Model Performance"
+msgstr ""
+
+msgctxt "Description|"
+msgid "Classical Prediction Model Performance"
+msgstr ""
+
+msgctxt "Description|"
+msgid "WAAP-WLS"
+msgstr ""
+
+#, fuzzy
+msgctxt "Description|"
+msgid "PET-PEESE"
+msgstr "PET-PEESE"
+
+msgctxt "Description|"
+msgid "Bayesian Prediction Model Performance"
+msgstr ""
+
+#, fuzzy
+msgctxt "BayesianPredictionPerformance|"
+msgid "MCMC Diagnostics"
+msgstr "MCMC Diagnostiek"
+
+#, fuzzy
+msgctxt "BayesianPredictionPerformance|"
+msgid "Plots"
+msgstr "Grafieken"
+
+msgctxt "BayesianPredictionPerformance|"
+msgid "Running means"
+msgstr ""
+
+#, fuzzy
+msgctxt "BayesianPredictionPerformance|"
+msgid "Autocorrelation"
+msgstr "Autocorrelatie"
+
+msgctxt "BayesianPredictionPerformance|"
+msgid "Gelman Rubin"
+msgstr ""
+
+#, fuzzy
+msgctxt "BayesianPredictionPerformance|"
+msgid "Advanced"
+msgstr "Geavanceerd"
+
+msgctxt "BayesianPredictionPerformance|"
+msgid "Adapt"
+msgstr ""
+
+#, fuzzy
+msgctxt "BayesianPredictionPerformance|"
+msgid "Burnin"
+msgstr "Opwarming"
+
+msgctxt "BayesianPredictionPerformance|"
+msgid "Sample"
+msgstr ""
+
+#, fuzzy
+msgctxt "BayesianPredictionPerformance|"
+msgid "Chains"
+msgstr "Ketens"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Effect sizes & SE"
+msgstr "Effectgroottes & SE"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Correlations & N"
+msgstr "Correlaties & N"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Correlation"
+msgstr "Correlatie"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Effect Size"
+msgstr "Effectgrootte"
+
+msgctxt "PetPeese|"
+msgid "Effect Size Standard Error"
+msgstr ""
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "N"
+msgstr "N"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Transform correlations"
+msgstr "Transformeer correlaties"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Fisher's z"
+msgstr "Fisher's z"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Cohen's d"
+msgstr "Cohen's d"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Inference"
+msgstr "Inferentie"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Mean estimates"
+msgstr "Gemiddelde schattingen"
+
+msgctxt "PetPeese|"
+msgid "PET-PEESE regression estimates"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Multiplicative heterogeneity estimates"
+msgstr ""
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Plots"
+msgstr "Grafieken"
+
+msgctxt "PetPeese|"
+msgid "Meta-Regression Estimate"
+msgstr ""
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "PET"
+msgstr "PET"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "PEESE"
+msgstr "PEESE"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Mean model estimates"
+msgstr "Gemiddelde model schattingen"
+
+msgctxt "PredictionPerformanceData|"
+msgid "Data"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "Measure"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "O:E ratio"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "C statistic"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "O:E Ratio"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "C-statistic"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "Standard Error"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "95% CI Lower and Upper Bound"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "Number of Participants"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "Number of Observed Events"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "Number of Expected Events"
+msgstr ""
+
+#, fuzzy
+msgctxt "PredictionPerformanceData|"
+msgid "Study Labels"
+msgstr "Onderzoeklabels"
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Inference"
+msgstr "Inferentie"
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Within-study variation"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Normal/Log"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Normal/Identity"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Poisson/Log"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Normal/Logit"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Prior and posterior plot"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Forest plot"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Labels"
+msgstr ""
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Estimates"
+msgstr "Schattingen"
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Export O:E ratios"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Export C-statistics"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Column name"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "O:E ratios"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Column name (lCI)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "O:E ratios (lCI)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Column name (uCI)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "O:E ratios (uCI)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "C-statistics"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "C-statistics (lCI)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "C-statistics (uCI)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Funnel plot asymmetry test"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Egger (unweighted)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Egger (multiplicative overdispersion)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Macaskill"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Macaskill (pooled)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Peters"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Debray"
+msgstr ""
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Plot"
+msgstr "Grafiek"
+
+#, fuzzy
+msgctxt "PredictionPerformancePriors|"
+msgid "Priors"
+msgstr "Priors"
+
+msgctxt "PredictionPerformancePriors|"
+msgid "Summary estimate (O:E Ratio)"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "Summary estimate (C statistic)"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "Normal mean:"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "sd:"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "Heterogeneity (Between study SD)"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "Uniform"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "min:"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "max:"
+msgstr ""
+
+#, fuzzy
+msgctxt "PredictionPerformancePriors|"
+msgid "Half t"
+msgstr "Halve t-verdeling"
+
+#, fuzzy
+msgctxt "PredictionPerformancePriors|"
+msgid "location:"
+msgstr "locatie:"
+
+#, fuzzy
+msgctxt "PredictionPerformancePriors|"
+msgid "scale:"
+msgstr "Schaal:"
+
+#, fuzzy
+msgctxt "PredictionPerformancePriors|"
+msgid "df:"
+msgstr "vg:"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Effect sizes & SE"
+msgstr "Effectgroottes & SE"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Correlations & N"
+msgstr "Correlaties & N"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Correlation"
+msgstr "Correlatie"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Effect Size"
+msgstr "Effectgrootte"
+
+msgctxt "WaapWls|"
+msgid "Effect Size Standard Error"
+msgstr ""
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "N"
+msgstr "N"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Transform correlations"
+msgstr "Transformeer correlaties"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Fisher's z"
+msgstr "Fisher's z"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Cohen's d"
+msgstr "Cohen's d"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Inference"
+msgstr "Inferentie"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Mean estimates"
+msgstr "Gemiddelde schattingen"
+
+msgctxt "WaapWls|"
+msgid "Multiplicative heterogeneity estimates"
+msgstr ""
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Plots"
+msgstr "Grafieken"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Mean model estimates"
+msgstr "Gemiddelde model schattingen"

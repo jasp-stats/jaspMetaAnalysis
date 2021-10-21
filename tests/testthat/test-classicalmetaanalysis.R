@@ -304,31 +304,31 @@ test_that("Fixed and Random Effects table results match", {
 test_that("Diagnostic Plots matches", {
   plotName <- results[["results"]][["modelContainer"]][["collection"]][["modelContainer_plots"]][["collection"]][["modelContainer_plots_diagnosticPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  expect_equal_plots(testPlot, "diagnostic-plots", dir="ClassicalMetaAnalysis")
+  expect_equal_plots(testPlot, "diagnostic-plots")
 })
 
 test_that("Forest plot matches", {
   plotName <- results[["results"]][["modelContainer"]][["collection"]][["modelContainer_plots"]][["collection"]][["modelContainer_plots_forest"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  expect_equal_plots(testPlot, "forest-plot", dir="ClassicalMetaAnalysis")
+  expect_equal_plots(testPlot, "forest-plot")
 })
 
 test_that("Funnel Plot matches", {
   plotName <- results[["results"]][["modelContainer"]][["collection"]][["modelContainer_plots"]][["collection"]][["modelContainer_plots_funnel"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  expect_equal_plots(testPlot, "funnel-plot", dir="ClassicalMetaAnalysis")
+  expect_equal_plots(testPlot, "funnel-plot")
 })
 
 test_that("Profile plot matches", {
   plotName <- results[["results"]][["modelContainer"]][["collection"]][["modelContainer_plots"]][["collection"]][["modelContainer_plots_profile"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  expect_equal_plots(testPlot, "profile", dir="ClassicalMetaAnalysis")
+  expect_equal_plots(testPlot, "profile")
 })
 
 test_that("Trim-fill Analysis plot matches", {
   plotName <- results[["results"]][["modelContainer"]][["collection"]][["modelContainer_plots"]][["collection"]][["modelContainer_plots_trimFill"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  expect_equal_plots(testPlot, "trim-fill-analysis", dir="ClassicalMetaAnalysis")
+  expect_equal_plots(testPlot, "trim-fill-analysis")
 })
 
 test_that("Rank correlation test for Funnel plot asymmetry table results match", {
@@ -806,31 +806,31 @@ test_that("Fixed and Random Effects table results match - model interactions", {
 test_that("Diagnostic Plots matches - model interactions", {
   plotName <- results[["results"]][["modelContainer"]][["collection"]][["modelContainer_plots"]][["collection"]][["modelContainer_plots_diagnosticPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  expect_equal_plots(testPlot, "diagnostic-plots-model", dir="ClassicalMetaAnalysis")
+  expect_equal_plots(testPlot, "diagnostic-plots-model")
 })
 
 test_that("Forest plot matches - model interactions", {
   plotName <- results[["results"]][["modelContainer"]][["collection"]][["modelContainer_plots"]][["collection"]][["modelContainer_plots_forest"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  expect_equal_plots(testPlot, "forest-plot-model", dir="ClassicalMetaAnalysis")
+  expect_equal_plots(testPlot, "forest-plot-model")
 })
 
 test_that("Funnel Plot matches - model interactions", {
   plotName <- results[["results"]][["modelContainer"]][["collection"]][["modelContainer_plots"]][["collection"]][["modelContainer_plots_funnel"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  expect_equal_plots(testPlot, "funnel-plot-model", dir="ClassicalMetaAnalysis")
+  expect_equal_plots(testPlot, "funnel-plot-model")
 })
 
 test_that("Profile plot matches - model interactions", {
   plotName <- results[["results"]][["modelContainer"]][["collection"]][["modelContainer_plots"]][["collection"]][["modelContainer_plots_profile"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  expect_equal_plots(testPlot, "profile-model", dir="ClassicalMetaAnalysis")
+  expect_equal_plots(testPlot, "profile-model")
 })
 
 test_that("Trim-fill Analysis plot matches - model interactions", {
   plotName <- results[["results"]][["modelContainer"]][["collection"]][["modelContainer_plots"]][["collection"]][["modelContainer_plots_trimFill"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  expect_equal_plots(testPlot, "trim-fill-analysis-model", dir="ClassicalMetaAnalysis")
+  expect_equal_plots(testPlot, "trim-fill-analysis-model")
 })
 
 test_that("Rank correlation test for Funnel plot asymmetry table results match - model interactions", {
@@ -889,5 +889,5 @@ results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", "BCG Vaccine", option
 test_that("Diagnostic Plots matches without Q-Q plot", {
   plotName <- results[["results"]][["modelContainer"]][["collection"]][["modelContainer_plots"]][["collection"]][["modelContainer_plots_diagnosticPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  expect_equal_plots(testPlot, "diagnostic-plots-no-qq", dir="ClassicalMetaAnalysis")
+  expect_equal_plots(testPlot, "diagnostic-plots-no-qq")
 })

@@ -1,0 +1,8 @@
+module <jaspMetaAnalysis>
+BayesianMetaAnalysisAdvanced		1.0		qml/qml_components/BayesianMetaAnalysisAdvanced.qml
+BayesianMetaAnalysisInference		1.0		qml/qml_components/BayesianMetaAnalysisInference.qml
+BayesianMetaAnalysisPlots			1.0 	qml/qml_components/BayesianMetaAnalysisPlots.qml
+BayesianMetaAnalysisPriors			1.0 	qml/qml_components/BayesianMetaAnalysisPriors.qml
+ClassicalMetaAnalysisDiagnostics	1.0		qml/qml_components/ClassicalMetaAnalysisDiagnostics.qml
+ClassicalMetaAnalysisMethod 		1.0		qml/qml_components/ClassicalMetaAnalysisMethod.qml
+ClassicalMetaAnalysisStatistics 	1.0		qml/qml_components/ClassicalMetaAnalysisStatistics.qml

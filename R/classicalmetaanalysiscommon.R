@@ -388,7 +388,7 @@
   }
   
   # Fill table
-  container[["fitMeasuresTable"]]$addRows(list(name = gettext("Log-likelihood"), method = stats$logLik))
+  container[["fitMeasuresTable"]]$addRows(list(name = gettext("Log-Likelihood"), method = stats$logLik))
   container[["fitMeasuresTable"]]$addRows(list(name = gettext("Deviance"),       method = stats$deviance))
   container[["fitMeasuresTable"]]$addRows(list(name = gettext("AIC"),            method = stats$AIC))
   container[["fitMeasuresTable"]]$addRows(list(name = gettext("BIC"),            method = stats$BIC))
@@ -538,7 +538,7 @@
       imgWidth <- max(nchar(as.character(dataset[,options[["studyLabels"]]]))) * 5 + 500
   }
   
-  forestPlot   <- createJaspPlot(title = gettext("Forest plot"), width = imgWidth, height = imgHeight)
+  forestPlot   <- createJaspPlot(title = gettext("Forest Plot"), width = imgWidth, height = imgHeight)
   forestPlot$position <- 1
   forestPlot$dependOn(c("forestPlot"))
   plotContainer[["forest"]] <- forestPlot
@@ -583,7 +583,7 @@
   # Compute/get model
   rma.fit    <- .metaAnalysisComputeModel(container, dataset, options, ready)
   
-  profilePlot   <- createJaspPlot(title = gettextf("Log-likelihood for %s%s", "\u3C4", "\u00B2"), width = 520, height = 520)
+  profilePlot   <- createJaspPlot(title = gettextf("Log-Likelihood for %s%s", "\u3C4", "\u00B2"), width = 520, height = 520)
   profilePlot$position <- 4
   profilePlot$dependOn(c("plotResidualsPredicted"))
   plotContainer[["profile"]] <- profilePlot
@@ -603,7 +603,7 @@
   .metaAnalysisPlotsContainer(container, options, ready)
   plotContainer <- container[["plots"]]
   # Compute/get model
-  trimFillPlot <- createJaspPlot(title = gettext("Trim-fill Analysis"), width = 820, height = 820)
+  trimFillPlot <- createJaspPlot(title = gettext("Trim-Fill Analysis"), width = 820, height = 820)
   trimFillPlot$position <- 5
   trimFillPlot$dependOn(c("trimFillPlot"))
   plotContainer[["trimFill"]] <- trimFillPlot
@@ -783,10 +783,10 @@
   
   # clip = "off" allows us to draw outside of the margins using the annotate("segment", ...) above.
   p <- p + ggplot2::coord_flip(ylim = ylims, clip = "on") +
-    ggplot2::xlab(NULL) + ggplot2::ylab(gettext("Observed Outcome")) +
+    ggplot2::xlab(NULL) + ggplot2::ylab("Effect Size") + 
     ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(ylims),
                                 expand = ggplot2::expand_scale(mult = c(0.3,0.3), add = 0))
-  
+
   p <- p + ggplot2::scale_x_continuous(breaks   = dat$StudyNo,
                                        limits   = xlims,
                                        labels   = dat$labs,
@@ -799,7 +799,6 @@
                    axis.text.y.left  = ggplot2::element_text(hjust = 0, size = fontsize),
                    axis.text.y.right = ggplot2::element_text(hjust = 1, size = fontsize),
                    plot.margin       = ggplot2::margin(5))
-  
   return(p)
 }
 
@@ -875,8 +874,7 @@
     bg <- rep("white", x$k.all)
     if (!is.null(x$subset))
       bg <- bg[x$subset]
-  }
-  else {
+  } else {
     col <- c("black", "black")
     if (length(col) == 1L)
       col <- c(col, "black")
@@ -893,9 +891,8 @@
     ni    <- x$ni
     sei   <- sqrt(vi)
     slab  <- x$slab[x$not.na]
-    xlab  <- x$measure
-  }
-  else {
+    xlab  <- "Effect Size" 
+  } else {
     refline <- 0
     res     <- rstandard(x)
     not.na  <- x$not.na
@@ -921,32 +918,35 @@
   
   xlim    <- c(min(x.lb.bot, min(yi[!is.na(yi)])), max(x.ub.bot, max(yi[!is.na(yi)])))
   rxlim   <- xlim[2] - xlim[1]
-  xlim[2] <- xlim[1] - (rxlim * 0.1)
-  xlim[1] <- xlim[2] + (rxlim * 0.1)
+  xlim[1] <- xlim[1] - (rxlim * 0.1)
+  xlim[2] <- xlim[2] + (rxlim * 0.1)
   
   new_ylim <- c()
   rylim <- ylim[1] - ylim[2]
   new_ylim[1] <- ylim[1]
   #new_ylim[1] <- ylim[1] + (rylim * 0.1)
-  new_ylim[2] <- ylim[2]
+  # new_ylim[2] <- ylim[2] # this is not necessary I believe
   new_ylim[2] <- max(0, ylim[2] - (rylim * 0.1))
   
   yi.vals <- seq(from = new_ylim[2], to = new_ylim[1], length.out = ci.res)
-  
+
   xaxis.vals <- yi
   yaxis.vals <- sei
   
   ci.left  <- refline - qnorm(level[1]/2, lower.tail = FALSE) * yi.vals
   ci.right <- refline + qnorm(level[1]/2, lower.tail = FALSE) * yi.vals
   
-  xend <- max(abs(c(ci.left, ci.right, xlim)))
-  xlims <- c(-1*xend, xend)
+  # I don't know why this was added
+  # It makes the x-axis symmetric, but this is unusual for a funnel plot..
+  # xend <- max(abs(c(ci.left, ci.right, xlim)))
+  # xlims <- c(-1*xend, xend)
+  xlims <- xlim
   
   if(inherits(x, "rma.uni.trimfill")) {
-    fillcol <- ifelse(rma.fit$fill, "white", "black")
-    shape   <- ifelse(rma.fit$fill, 1, 19)
+    fillcol <- ifelse(x$fill, "white", "black")
+    shape   <- ifelse(x$fill, 1, 19)
   } else {
-    fillcol <- rep("black", sum(rma.fit$not.na))
+    fillcol <- rep("black", sum(x$not.na))
     shape   <- 19
   }
   

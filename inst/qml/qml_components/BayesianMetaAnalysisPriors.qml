@@ -176,7 +176,7 @@ Section
 	RadioButtonGroup
 	{
 		enabled:	modelTypeValue == "RE" || modelTypeValue == "CRE" || modelTypeValue == "BMA"
-		title: 		qsTr("Heterogeneity (Between study SD)")
+		title: 		qsTr("Heterogeneity (between-study SD)")
 		name: 		"priorSE"
 
 		RadioButton

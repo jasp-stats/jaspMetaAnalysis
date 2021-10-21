@@ -51,6 +51,7 @@ Section
 		CheckBox { name: "modelFit";				text: qsTr("Fit measures") }
 		CheckBox
 		{
+			id:			forestPlot
 			name: 		"forestPlot"
 			text: 		qsTr("Forest plot")
 			
