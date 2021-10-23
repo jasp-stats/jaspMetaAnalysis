@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2021-10-22 11:38+0000\n"
+"Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
+"Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/gl/>\n"
+"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.9-dev\n"
 "X-Language: gl_ES\n"
 "X-Source-Language: C\n"
 "X-Qt-Contexts: true\n"
@@ -114,7 +120,7 @@ msgstr "segundos"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Forest plot"
-msgstr "Gráfica en bosque"
+msgstr "Gráfica forestal"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Inclusion"
@@ -138,7 +144,7 @@ msgstr "Volver escalar o eixe x"
 
 msgctxt "SelectionModels|"
 msgid "Expected effect size direction"
-msgstr "Dirección agardada da magnitude do efecto"
+msgstr "Dirección da magnitude do efecto agardada"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "95% CI Lower and Upper Bound"
@@ -206,7 +212,7 @@ msgstr "Puntos de corte do valor p"
 
 msgctxt "SelectionModels|"
 msgid "Automatically join p-value intervals"
-msgstr "Intervalos que automaticamente acadan o valor p"
+msgstr "Unir intervalos de valor p automáticamente"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fixed Effects"
@@ -506,7 +512,7 @@ msgstr "Gráficas"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Forest plot"
-msgstr "Gráfica en bosque"
+msgstr "Gráfica forestal"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Observed"
@@ -662,7 +668,7 @@ msgstr "forma:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Half t"
-msgstr "Metade da distribución t"
+msgstr "Metade t"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Plot prior(s)"
@@ -782,7 +788,7 @@ msgstr "Medidas de axuste"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Forest plot"
-msgstr "Gráfica en bosque"
+msgstr "Gráfica forestal"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Show labels"
@@ -862,7 +868,7 @@ msgstr "Modelos"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Expected effect size direction"
-msgstr "Dirección agardada da magnitude do efecto"
+msgstr "Dirección da magnitude do efecto agardada"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Positive"
@@ -898,7 +904,7 @@ msgstr "Gráficas"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Forest plot"
-msgstr "Gráfica en bosque"
+msgstr "Gráfica forestal"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Show"
@@ -962,7 +968,7 @@ msgstr "Configuracións da estimación (MCMC)"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Burnin"
-msgstr "Queimado"
+msgstr "Quecemento"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Iterations"
@@ -1174,7 +1180,7 @@ msgstr "Correlacións"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Log odds ratios"
-msgstr "Logaritmo das proporcións de posibilidades"
+msgstr "Logaritmo das razóns de probabilidades"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Unstandardized effect sizes"
@@ -1182,7 +1188,7 @@ msgstr "Dimensións dos efectos non tipificados"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Log Odds Ratio"
-msgstr "Logaritmo da Proporción de Posibilidades"
+msgstr "Logaritmo da Razón de Probabilidades"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Model type"
@@ -1346,7 +1352,7 @@ msgstr "Adaptar"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Burnin"
-msgstr "Queimado"
+msgstr "Quecemento"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Sample"
@@ -1506,7 +1512,7 @@ msgstr "Gráfica previa e posterior"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Forest plot"
-msgstr "Gráfica en bosque"
+msgstr "Gráfica forestal"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Labels"
@@ -1630,7 +1636,7 @@ msgstr "máx:"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "Half t"
-msgstr "Metade da distribución t"
+msgstr "Metade t"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "location:"
