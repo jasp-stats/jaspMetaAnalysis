@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2021-10-09 02:38\n"
-"PO-Revision-Date: 2021-10-15 19:45+0000\n"
+"PO-Revision-Date: 2021-10-21 17:02+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
@@ -305,16 +305,16 @@ msgid "Lag"
 msgstr ""
 
 msgid "Autocorrelation"
-msgstr ""
+msgstr "Autocorrelación"
 
 msgid "Gelman-Rubin plot"
-msgstr ""
+msgstr "Gráfico de Gelman-Rubin"
 
 msgid "Last iteration in chain"
-msgstr ""
+msgstr "Última iteración de la cadea"
 
 msgid "Shrink factor"
-msgstr ""
+msgstr "Factor de contracción"
 
 msgid "The metafor package crashed with the following error: %s"
 msgstr ""
@@ -589,10 +589,10 @@ msgid "Forest plot"
 msgstr "Gráfico forestal"
 
 msgid "Observed-Expected Ratio"
-msgstr ""
+msgstr "Proporción Observado-Esperado"
 
 msgid "Concordance Statistic"
-msgstr ""
+msgstr "Estadístico de Coincidencia"
 
 msgid "The number of observed events must be specified."
 msgstr ""
@@ -741,7 +741,7 @@ msgid ""
 msgstr ""
 
 msgid "Model Summary"
-msgstr ""
+msgstr "Resumen del Modelo"
 
 msgid "Models"
 msgstr "Modelos"
