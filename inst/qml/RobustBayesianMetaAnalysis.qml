@@ -124,7 +124,8 @@ Form
 		id:						measures
 		Layout.columnSpan:		2
 		name:					"measures"
-		radioButtonsOnSameRow:	true
+		title:					qsTr("Input type")
+		radioButtonsOnSameRow:	false
 		columns:				2
 
 		onValueChanged:
