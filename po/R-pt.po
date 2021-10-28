@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-10-02 02:38\n"
+"POT-Creation-Date: 2021-10-09 02:38\n"
 "PO-Revision-Date: 2021-09-11 02:37+0000\n"
 "Last-Translator: JASP Stats <b.boutin@uva.nl>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
@@ -448,7 +448,8 @@ msgstr ""
 msgid "The model was estimated using %1$s method."
 msgstr ""
 
-msgid "Log-likelihood"
+#, fuzzy
+msgid "Log-Likelihood"
 msgstr "Log-likelihood"
 
 msgid "Deviance"
@@ -478,17 +479,14 @@ msgstr ""
 msgid "Plot"
 msgstr "Diagrama"
 
-#, fuzzy
-msgid "Forest plot"
-msgstr "Gráfico do modelo"
-
 msgid "Funnel Plot"
 msgstr ""
 
-msgid "Log-likelihood for %s%s"
-msgstr ""
+#, fuzzy
+msgid "Log-Likelihood for %s%s"
+msgstr "Log-likelihood"
 
-msgid "Trim-fill Analysis"
+msgid "Trim-Fill Analysis"
 msgstr ""
 
 msgid "Diagnostic Plots"
@@ -504,10 +502,6 @@ msgstr "Modelo"
 #, fuzzy
 msgid "RE Model"
 msgstr "Modelo"
-
-#, fuzzy
-msgid "Observed Outcome"
-msgstr "momentos observados"
 
 msgid "Cannot set 'xlim' automatically. Please set this argument manually."
 msgstr ""
@@ -627,6 +621,10 @@ msgstr ""
 
 msgid "The model was estimated using MCMC with %1$s link function."
 msgstr ""
+
+#, fuzzy
+msgid "Forest plot"
+msgstr "Gráfico do modelo"
 
 msgid "Observed-Expected Ratio"
 msgstr ""
@@ -1181,6 +1179,10 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "%i observação foi removida devido a valores ausentes."
 msgstr[1] "%i observações foram removidas devido a valores ausentes."
+
+#, fuzzy
+#~ msgid "Observed Outcome"
+#~ msgstr "momentos observados"
 
 #, fuzzy
 #~ msgid "Mean Estimates(%s)"

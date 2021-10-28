@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
-"POT-Creation-Date: 2021-10-02 02:38\n"
-"PO-Revision-Date: 2021-08-09 00:37+0000\n"
+"POT-Creation-Date: 2021-10-09 02:38\n"
+"PO-Revision-Date: 2021-10-21 17:02+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr ""
@@ -54,7 +54,7 @@ msgid "Mean"
 msgstr "Media"
 
 msgid "SD"
-msgstr "DE"
+msgstr "DT"
 
 msgid "Lower"
 msgstr "Inferior"
@@ -142,7 +142,7 @@ msgid "Model Probabilities"
 msgstr ""
 
 msgid "Prior"
-msgstr "Anterior"
+msgstr "Previo"
 
 msgid "Posterior"
 msgstr "Posterior"
@@ -183,13 +183,13 @@ msgstr ""
 "del modelo de efectos aleatorios restringido."
 
 msgid "Effect Size"
-msgstr ""
+msgstr "Magnitud del Efecto"
 
 msgid "Heterogeneity"
-msgstr ""
+msgstr "Heterogeneidad"
 
 msgid "Effect size"
-msgstr "Tamaño del efecto"
+msgstr "Magnitud del efecto"
 
 msgid "Density"
 msgstr "Densidad"
@@ -305,16 +305,16 @@ msgid "Lag"
 msgstr ""
 
 msgid "Autocorrelation"
-msgstr ""
+msgstr "Autocorrelación"
 
 msgid "Gelman-Rubin plot"
-msgstr ""
+msgstr "Gráfico de Gelman-Rubin"
 
 msgid "Last iteration in chain"
-msgstr ""
+msgstr "Última iteración de la cadea"
 
 msgid "Shrink factor"
-msgstr ""
+msgstr "Factor de contracción"
 
 msgid "The metafor package crashed with the following error: %s"
 msgstr ""
@@ -398,7 +398,7 @@ msgid "Hat"
 msgstr ""
 
 msgid "Weight"
-msgstr ""
+msgstr "Ponderación"
 
 msgid "File Drawer Analysis"
 msgstr ""
@@ -421,50 +421,48 @@ msgstr ""
 msgid "The model was estimated using %1$s method."
 msgstr ""
 
-msgid "Log-likelihood"
+#, fuzzy
+msgid "Log-Likelihood"
 msgstr "Log-verosimilitud"
 
 msgid "Deviance"
 msgstr "Desviación"
 
 msgid "AIC"
-msgstr ""
+msgstr "AIC"
 
 msgid "BIC"
 msgstr "BIC"
 
 msgid "AICc"
-msgstr ""
+msgstr "AICc"
 
 msgid "I%s (%%)"
-msgstr ""
+msgstr "I%s (%%)"
 
 msgid "H%s"
-msgstr ""
+msgstr "H%s"
 
 msgid "Rank test"
-msgstr ""
+msgstr "Contraste de rangos"
 
 msgid "Cases marked with %s are influential."
-msgstr ""
+msgstr "Los casos marcados con %s son influyentes."
 
 msgid "Plot"
-msgstr ""
-
-msgid "Forest plot"
-msgstr "Gráfico forestal"
+msgstr "Gráfico"
 
 msgid "Funnel Plot"
-msgstr ""
+msgstr "Gráfico de Embudo"
 
-msgid "Log-likelihood for %s%s"
-msgstr ""
+msgid "Log-Likelihood for %s%s"
+msgstr "Log-Verosimilitud para %s%s"
 
-msgid "Trim-fill Analysis"
-msgstr ""
+msgid "Trim-Fill Analysis"
+msgstr "Análisis Recortar-Llenar"
 
 msgid "Diagnostic Plots"
-msgstr ""
+msgstr "Gráficos de Diagnóstico"
 
 msgid "Study %s"
 msgstr ""
@@ -473,9 +471,6 @@ msgid "FE Model"
 msgstr ""
 
 msgid "RE Model"
-msgstr ""
-
-msgid "Observed Outcome"
 msgstr ""
 
 msgid "Cannot set 'xlim' automatically. Please set this argument manually."
@@ -520,7 +515,7 @@ msgid "Sample Quantiles"
 msgstr "Cuantiles de la Muestra"
 
 msgid "Standardized Residuals"
-msgstr "Residuos Estandarizados"
+msgstr "Residuos Tipificados"
 
 msgid "Fitted vs. Standardized Residuals"
 msgstr ""
@@ -538,31 +533,31 @@ msgid "FE"
 msgstr ""
 
 msgid "ML"
-msgstr ""
+msgstr "MV"
 
 msgid "REML"
-msgstr ""
+msgstr "MVRE"
 
 msgid "DL"
-msgstr ""
+msgstr "DL"
 
 msgid "HE"
-msgstr ""
+msgstr "HE"
 
 msgid "HS"
-msgstr ""
+msgstr "HS"
 
 msgid "SJ"
-msgstr ""
+msgstr "SJ"
 
 msgid "EB"
-msgstr ""
+msgstr "EB"
 
 msgid "PM"
-msgstr ""
+msgstr "PM"
 
 msgid "%g%% Confidence Interval"
-msgstr ""
+msgstr "Intervalo con el %g%% de Confianza"
 
 msgid ""
 "The study labels contain invalid characters. Please, remove them before "
@@ -570,20 +565,19 @@ msgid ""
 msgstr ""
 
 msgid "%s%% CI"
-msgstr "%s%% IC"
+msgstr "IC del %s%%"
 
-#, fuzzy
 msgid "%s%% PI"
-msgstr "%s%% IC"
+msgstr "IP del %s%%"
 
 msgid "%s Summary"
-msgstr ""
+msgstr "Resumen de %s"
 
 msgid "metamisc package failed with the following error: '%s'"
-msgstr ""
+msgstr "el paquete metamisc falló con el siguiente error: '%s'"
 
 msgid "Based on %i studies."
-msgstr ""
+msgstr "Basado en %i estudios."
 
 msgid "The model was estimated using %1$s method with %2$s link function."
 msgstr ""
@@ -591,11 +585,14 @@ msgstr ""
 msgid "The model was estimated using MCMC with %1$s link function."
 msgstr ""
 
+msgid "Forest plot"
+msgstr "Gráfico forestal"
+
 msgid "Observed-Expected Ratio"
-msgstr ""
+msgstr "Proporción Observado-Esperado"
 
 msgid "Concordance Statistic"
-msgstr ""
+msgstr "Estadístico de Coincidencia"
 
 msgid "The number of observed events must be specified."
 msgstr ""
@@ -604,10 +601,10 @@ msgid "Funnel Plot Asymmetry Tests"
 msgstr ""
 
 msgid "Method"
-msgstr ""
+msgstr "Método"
 
 msgid "t-statistic"
-msgstr ""
+msgstr "estadístico t"
 
 msgid "The %1$s test failed with the following error: %2$s"
 msgstr ""
@@ -637,9 +634,8 @@ msgstr ""
 msgid "Standard error"
 msgstr "Error Estándar"
 
-#, fuzzy
 msgid "Sample size"
-msgstr "Cuantiles de la Muestra"
+msgstr "Tamaño de la muestra"
 
 msgid "Total events"
 msgstr ""
@@ -659,7 +655,7 @@ msgid "'. Factor levels:"
 msgstr ""
 
 msgid ","
-msgstr ""
+msgstr ","
 
 msgid ". Data names:"
 msgstr ""
@@ -710,34 +706,34 @@ msgid "ESS"
 msgstr ""
 
 msgid "R-hat"
-msgstr ""
+msgstr "R-circunflejo"
 
 msgid "<em>p</em>-values interval"
-msgstr ""
+msgstr "intervalo de valores <em>p</em>"
 
 msgid "Effect size (%s)"
-msgstr ""
+msgstr "Magnitud del efecto (%s)"
 
 msgid "Heterogeneity (%s)"
-msgstr ""
+msgstr "Heterogeneidad (%s)"
 
 msgid "Prior Plots"
-msgstr ""
+msgstr "Gráficos Previos"
 
 msgid "Effect"
-msgstr ""
+msgstr "Efecto"
 
 msgid "Publication Bias"
-msgstr ""
+msgstr "Sesgo de Publicación"
 
 msgid "Null"
-msgstr ""
+msgstr "Nulo"
 
 msgid "Alternative"
-msgstr ""
+msgstr "Alternativo"
 
 msgid "Model Preview"
-msgstr ""
+msgstr "Vista Previa del Modelo"
 
 msgid ""
 "Please specify a prior distribution for each parameter in the Models "
@@ -745,7 +741,7 @@ msgid ""
 msgstr ""
 
 msgid "Model Summary"
-msgstr ""
+msgstr "Resumen del Modelo"
 
 msgid "Models"
 msgstr "Modelos"
@@ -801,19 +797,19 @@ msgid "Exclusion"
 msgstr ""
 
 msgid "Inclusion"
-msgstr ""
+msgstr "Inclusión"
 
 msgid "log(BF)"
-msgstr ""
+msgstr "log(FB)"
 
 msgid "BF"
-msgstr "BF"
+msgstr "FB"
 
 msgid "BF%s"
-msgstr "BF%s"
+msgstr "FB%s"
 
 msgid "log(BF%s)"
-msgstr ""
+msgstr "log(FB%s)"
 
 msgid "log(MargLik)"
 msgstr ""
@@ -850,7 +846,7 @@ msgid "Posterior Distribution Plots"
 msgstr ""
 
 msgid "Conditional"
-msgstr ""
+msgstr "Condicionado"
 
 msgid "Model Averaged"
 msgstr ""
@@ -879,10 +875,10 @@ msgid "Heterogeneity Estimates"
 msgstr ""
 
 msgid "Diagnostics"
-msgstr ""
+msgstr "Diagnósticos"
 
 msgid "Models Diagnostics Overview"
-msgstr ""
+msgstr "Revisión de los Diagnósticos de los Modelos"
 
 msgid "max(MCMC error)"
 msgstr ""
@@ -915,7 +911,7 @@ msgid "Average autocorrelations"
 msgstr ""
 
 msgid "Posterior samples densities"
-msgstr ""
+msgstr "Densidades posteriores de muestras"
 
 msgid "Model %i does not contain any of the selected parameters."
 msgstr ""
@@ -948,10 +944,10 @@ msgid "No steps"
 msgstr ""
 
 msgid "95%% Confidence Interval"
-msgstr ""
+msgstr "Intervalo de Confianza del %s%%"
 
 msgid "Note:"
-msgstr ""
+msgstr "Nota:"
 
 msgid "%s is on %s scale."
 msgstr ""
@@ -1078,9 +1074,8 @@ msgstr ""
 msgid "Test of Effect"
 msgstr ""
 
-#, fuzzy
 msgid "Estimates"
-msgstr "Estimar"
+msgstr "Estimaciones"
 
 msgid "PET-PEESE Regression Estimates"
 msgstr ""
@@ -1092,10 +1087,10 @@ msgid "Estimated %1$s Regression"
 msgstr ""
 
 msgid "Cohen's d"
-msgstr ""
+msgstr "D de Cohen"
 
 msgid "Fisher's z"
-msgstr ""
+msgstr "Z de Fisher"
 
 msgid ""
 "WAAP was not estimated: there were only %1$i adequatelly powered studies."
