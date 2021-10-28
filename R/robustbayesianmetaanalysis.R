@@ -692,7 +692,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
       overallSummary$addRows(tempRow)
     }
-    overallSummary$addFootnote(gettext("The analysis will estimate multiple meta-analytic models using MCMC and might require a prolonged time to complete."))
+    overallSummary$addFootnote(gettext("The analysis will estimate multiple meta-analytic models using MCMC and might require a prolonged time to complete."), symbol = "\u26A0")
   }
 
   modelPreview[["overallSummary"]] <- overallSummary
@@ -722,7 +722,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
       modelsSummary$addRows(tempRow)
     }
-    modelsSummary$addFootnote(gettext("The analysis will estimate multiple meta-analytic models using MCMC and might require a prolonged time to complete."))
+    modelsSummary$addFootnote(gettext("The analysis will estimate multiple meta-analytic models using MCMC and might require a prolonged time to complete."), symbol = "\u26A0")
   }
 
   modelPreview[["modelsSummary"]] <- modelsSummary
