@@ -186,7 +186,7 @@ Form
 	RadioButtonGroup
 	{
 		name:		"effectDirection"
-		title:		qsTr("Expected effect size direction")
+		title:		qsTr("Expected direction of effect sizes")
 		columns:	1
 		visible:	!measuresFitted.checked
 
@@ -210,12 +210,12 @@ Form
 		{
 			id:			modelType
 			name:		"modelType"
-			label:		qsTr("Model type")
+			label:		qsTr("Model ensemble")
 			visible:	!measuresFitted.checked && !measuresGeneral.checked
 			values: [
 				{ label: qsTr("RoBMA-PSMA"),		value: "PSMA"},
 				{ label: qsTr("RoBMA-PP"),			value: "PP"},
-				{ label: qsTr("RoBMA-old"),			value: "2w"},
+				{ label: qsTr("RoBMA-original"),	value: "2w"},
 				{ label: qsTr("Custom"),			value: "custom"}
 			]
 		}
@@ -246,98 +246,7 @@ Form
 		CheckBox
 		{
 			name:		"plotPriors"
-			label:		qsTr("Plot priors")
-		}
-	}
-
-
-	//// Priors ////
-	Section
-	{
-		title: 				qsTr("Models")
-		columns:			1
-		enabled:			modelType.value == "custom"
-		onEnabledChanged:	if(!enabled) expanded = false
-
-
-		// effect prior
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"effect"
-		}
-
-		// effect prior
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"heterogeneity"
-		}
-
-		// bias priors
-		MA.RobustBayesianMetaAnalysisWeightfunctions
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"omega"
-		}
-
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"pet"
-		}
-
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"peese"
-		}
-
-		Divider { }
-
-		CheckBox
-		{
-			id:						priorsNull
-			name:					"priorsNull"
-			label:					qsTr("Set null priors")
-		}
-
-		// effect prior
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"effectNull"
-			visible:				priorsNull.checked
-		}
-
-		// effect prior
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"heterogeneityNull"
-			visible:				priorsNull.checked
-		}
-
-		// bias priors
-		MA.RobustBayesianMetaAnalysisWeightfunctions
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"omegaNull"
-			visible:				priorsNull.checked
-		}
-
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"petNull"
-			visible:				priorsNull.checked
-		}
-
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"peeseNull"
-			visible:				priorsNull.checked
+			label:		qsTr("Plot prior distributions")
 		}
 	}
 
@@ -809,6 +718,96 @@ Form
 			}
 		}
 
+	}
+
+	//// Priors ////
+	Section
+	{
+		title: 				qsTr("Models (Custom Ensemble Only)")
+		columns:			1
+		enabled:			modelType.value == "custom"
+		onEnabledChanged:	if(!enabled) expanded = false
+
+
+		// effect prior
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			Layout.preferredWidth:	parent.width
+			componentType:			"effect"
+		}
+
+		// effect prior
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			Layout.preferredWidth:	parent.width
+			componentType:			"heterogeneity"
+		}
+
+		// bias priors
+		MA.RobustBayesianMetaAnalysisWeightfunctions
+		{
+			Layout.preferredWidth:	parent.width
+			componentType:			"omega"
+		}
+
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			Layout.preferredWidth:	parent.width
+			componentType:			"pet"
+		}
+
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			Layout.preferredWidth:	parent.width
+			componentType:			"peese"
+		}
+
+		Divider { }
+
+		CheckBox
+		{
+			id:						priorsNull
+			name:					"priorsNull"
+			label:					qsTr("Set null priors")
+		}
+
+		// effect prior
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			Layout.preferredWidth:	parent.width
+			componentType:			"effectNull"
+			visible:				priorsNull.checked
+		}
+
+		// effect prior
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			Layout.preferredWidth:	parent.width
+			componentType:			"heterogeneityNull"
+			visible:				priorsNull.checked
+		}
+
+		// bias priors
+		MA.RobustBayesianMetaAnalysisWeightfunctions
+		{
+			Layout.preferredWidth:	parent.width
+			componentType:			"omegaNull"
+			visible:				priorsNull.checked
+		}
+
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			Layout.preferredWidth:	parent.width
+			componentType:			"petNull"
+			visible:				priorsNull.checked
+		}
+
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			Layout.preferredWidth:	parent.width
+			componentType:			"peeseNull"
+			visible:				priorsNull.checked
+		}
 	}
 
 	//// Advanced section for prior model probabilities sampling settings ////

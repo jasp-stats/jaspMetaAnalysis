@@ -133,7 +133,7 @@ Form
 		{
 			columns:	2
 			name:		"effectDirection"
-			title:		qsTr("Expected effect size direction")
+			title:		qsTr("Expected direction of effect sizes")
 
 			RadioButton
 			{

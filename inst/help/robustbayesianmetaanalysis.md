@@ -25,20 +25,20 @@ The input supplied as standardized effect sizes are internally transformed to Fi
 - N (group 1) / N (group 2): Sample sizes of each group of the studies. Only possible if the studies effect sizes are measured by Cohen's d and correspond to two-sample t-tests. Overall sample sizes or Effect Size Standard Errors can be provided instead.
 - Study Labels: Optional argument that will add study labels to the output.
 
-#### Expected effect size direction
+#### Expected direction of effect sizes
 The direction of the expected effect size (the publication bias adjusted models with one-sided weight functions and PET-PEESE publication bias adjustments are not symmetrical around zero).
 
 #### Model type
 Either one of the three pre-specified model types corresponding to the models introduced in Bartoš et al. (2021) and Maier, Bartoš & Wagenmakers (in press), or a custom ensemble.
 - RoBMA-PSMA corresponds to the 36 model ensemble that combines selection models and PET-PEESE adjustment for publication bias adjustment component (from Bartoš et al., 2021)
 - RoBMA-PP corresponds to the 12 model ensemble that uses PET-PEESE adjustment for publication bias adjustment component (from Bartoš et al., 2021)
-- RoBMA-old corresponds to the 12 model ensemble that uses two two-sided weight functions for publication bias adjustment component (from Maier, Bartoš & Wagenmakers, in press)
+- RoBMA-original corresponds to the 12 model ensemble that uses two two-sided weight functions for publication bias adjustment component (from Maier, Bartoš & Wagenmakers, in press)
 - Custom allows specifying a custom model ensemble under the `Models` section
 
 #### Prior scale
 Scale that will be used for specifying the prior distributions. Defaults to Cohen's d and can be changed only with a "Custom" `Model type` .
 
-#### Plot priors
+#### Plot prior distributions
 Displays the specified prior density function(s).
 
 
