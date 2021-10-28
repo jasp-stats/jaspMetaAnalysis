@@ -221,28 +221,39 @@ Form
 			]
 		}
 
-		DropDown
+		Group
 		{
-			id:			priorScale
-			name:		"priorScale"
-			label:		qsTr("Prior scale")
-			visible:	!measuresFitted.checked && !measuresGeneral.checked
-			enabled:	modelType.value == "custom"
-			values: [
-				{ label: qsTr("Cohen's d"),			value: "cohens_d"},
-				{ label: qsTr("Fisher's z"),		value: "fishers_z"},
-				{ label: qsTr("log(OR)"),			value: "logOR"}
-			]
-			onCurrentValueChanged: 			
+			columns:	2
+
+			DropDown
 			{
-				if(priorScale.currentValue == "cohens_d")
-					resultsScale.currentValue = "cohens_d"
-				else if(priorScale.currentValue == "fishers_z")
-					resultsScale.currentValue = "fishers_z"
-				else if(priorScale.currentValue == "logOR")
-					resultsScale.currentValue = "logOR"
+				id:			priorScale
+				name:		"priorScale"
+				label:		qsTr("Prior scale")
+				visible:	!measuresFitted.checked && !measuresGeneral.checked
+				enabled:	modelType.value == "custom"
+				values: [
+					{ label: qsTr("Cohen's d"),			value: "cohens_d"},
+					{ label: qsTr("Fisher's z"),		value: "fishers_z"},
+					{ label: qsTr("log(OR)"),			value: "logOR"}
+				]
+				onCurrentValueChanged: 			
+				{
+					if(priorScale.currentValue == "cohens_d")
+						resultsScale.currentValue = "cohens_d"
+					else if(priorScale.currentValue == "fishers_z")
+						resultsScale.currentValue = "fishers_z"
+					else if(priorScale.currentValue == "logOR")
+						resultsScale.currentValue = "logOR"
+				}
+			}
+
+			HelpButton
+			{
+				toolTip:	qsTr("Prior scale can be changed only when specifying a 'Custom' Model ensemble.")
 			}
 		}
+
 
 		CheckBox
 		{
