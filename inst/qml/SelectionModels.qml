@@ -153,7 +153,7 @@ Form
 		DropDown
 		{
 			visible:	measures_correlation.checked
-			label:		qsTr("Transform correlations")
+			label:		qsTr("Transform correlations to")
 			name:		"muTransform"
 			values:
 			[
