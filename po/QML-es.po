@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2021-10-29 15:08+0000\n"
+"Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/es/>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.9-dev\n"
 "X-Language: es\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -590,17 +596,14 @@ msgctxt "SelectionModels|"
 msgid "Weight Function"
 msgstr "Función de peso"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Fixed effects"
 msgstr "Efectos fijos"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Random effects"
 msgstr "Efectos aleatorios"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Rescale x-axis"
 msgstr "Cambiar la escala del eje x"
@@ -611,57 +614,47 @@ msgstr "Estimaciones del modelo medio"
 
 msgctxt "Description|"
 msgid "Synthesize evidence across multiple studies"
-msgstr ""
+msgstr "Sintetizar la evidencia de varios estudios"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Advanced"
 msgstr "Avanzado"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Prior model probability"
-msgstr "Probabilidad del modelo anterior"
+msgstr "Probabilidad previa del modelo"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Fixed effects"
 msgstr "Efectos fijos"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Random effects"
 msgstr "Efectos aleatorios"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Estimation settings (MCMC)"
 msgstr "Configuración de estimación (MCMC)"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "iterations:"
 msgstr "iteraciones:"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "chains:"
 msgstr "cadenas:"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Bayes factor computation"
 msgstr "Cálculo del factor de Bayes"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Integration"
 msgstr "Integración"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Bridge sampling"
-msgstr "Muestreo de puente"
+msgstr "Muestreo puente"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Inference"
@@ -1383,14 +1376,13 @@ msgctxt "BayesianPredictionPerformance|"
 msgid "Gelman Rubin"
 msgstr ""
 
-#, fuzzy
 msgctxt "BayesianPredictionPerformance|"
 msgid "Advanced"
 msgstr "Avanzado"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Adapt"
-msgstr ""
+msgstr "Adaptar"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Burnin"
@@ -1398,9 +1390,8 @@ msgstr "Calentamiento"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Sample"
-msgstr ""
+msgstr "Muestra"
 
-#, fuzzy
 msgctxt "BayesianPredictionPerformance|"
 msgid "Chains"
 msgstr "Cadenas"
