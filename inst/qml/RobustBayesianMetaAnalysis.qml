@@ -189,7 +189,7 @@ Form
 		name:		"effectDirection"
 		title:		qsTr("Expected direction of effect sizes")
 		columns:	1
-		visible:	!measuresFitted.checked
+		enabled:	!measuresFitted.checked
 
 		RadioButton
 		{
@@ -212,7 +212,7 @@ Form
 			id:			modelType
 			name:		"modelType"
 			label:		qsTr("Model ensemble")
-			visible:	!measuresFitted.checked && !measuresGeneral.checked
+			enabled:	!measuresFitted.checked && !measuresGeneral.checked
 			values: [
 				{ label: qsTr("RoBMA-PSMA"),		value: "PSMA"},
 				{ label: qsTr("RoBMA-PP"),			value: "PP"},
@@ -224,15 +224,14 @@ Form
 		Group
 		{
 			columns:	2
-			visible:	!measuresFitted.checked && !measuresGeneral.checked
 
 			DropDown
 			{
 				id:			priorScale
 				name:		"priorScale"
 				label:		qsTr("Prior scale")
-				
-				enabled:	modelType.value == "custom"
+				enabled:	!measuresFitted.checked && !measuresGeneral.checked && !modelType.value == "custom"
+
 				values: [
 					{ label: qsTr("Cohen's d"),			value: "cohens_d"},
 					{ label: qsTr("Fisher's z"),		value: "fishers_z"},
