@@ -224,13 +224,14 @@ Form
 		Group
 		{
 			columns:	2
+			visible:	!measuresFitted.checked && !measuresGeneral.checked
 
 			DropDown
 			{
 				id:			priorScale
 				name:		"priorScale"
 				label:		qsTr("Prior scale")
-				visible:	!measuresFitted.checked && !measuresGeneral.checked
+				
 				enabled:	modelType.value == "custom"
 				values: [
 					{ label: qsTr("Cohen's d"),			value: "cohens_d"},
@@ -250,7 +251,7 @@ Form
 
 			HelpButton
 			{
-				toolTip:	qsTr("Prior scale can be changed only when specifying a 'Custom' Model ensemble.")
+				toolTip:	qsTr("Prior scale can be changed only when specifying a 'Custom' Model ensemble for standardized effect size measures.")
 			}
 		}
 
