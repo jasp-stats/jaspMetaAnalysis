@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-10-09 02:38\n"
-"PO-Revision-Date: 2021-10-10 15:04+0000\n"
-"Last-Translator: Koen Derks <koen-derks@hotmail.com>\n"
+"PO-Revision-Date: 2021-10-29 10:56+0000\n"
+"Last-Translator: Sophie Berkhout <s.w.berkhout@uu.nl>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/nl/>\n"
 "Language: nl\n"
@@ -333,9 +333,8 @@ msgstr "Waarde"
 msgid "Running means plot"
 msgstr ""
 
-#, fuzzy
 msgid "Iteration"
-msgstr "Informatie"
+msgstr "Iteratie"
 
 msgid "Running mean"
 msgstr ""
@@ -347,9 +346,8 @@ msgstr "Gemiddelde autocorrelatie"
 msgid "Lag"
 msgstr ""
 
-#, fuzzy
 msgid "Autocorrelation"
-msgstr "Gemiddelde autocorrelatie"
+msgstr "Autocorrelatie"
 
 msgid "Gelman-Rubin plot"
 msgstr ""
@@ -1156,9 +1154,8 @@ msgstr ""
 msgid "Test of Effect"
 msgstr "Effecten"
 
-#, fuzzy
 msgid "Estimates"
-msgstr "Schatting"
+msgstr "Schattingen"
 
 #, fuzzy
 msgid "PET-PEESE Regression Estimates"
