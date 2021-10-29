@@ -247,11 +247,12 @@ Form
 						resultsScale.currentValue = "logOR"
 				}
 			}
-
+			/*
 			HelpButton
 			{
 				toolTip:	qsTr("Prior scale can be changed only when specifying a 'Custom' Model ensemble for standardized effect size measures.")
 			}
+			*/
 		}
 
 
