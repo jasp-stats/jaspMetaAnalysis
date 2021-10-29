@@ -836,7 +836,9 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   if (is.null(jaspResults[["model"]])) {
     if (options[["resultsConditional"]]) {
-      jaspResults[["mainSummary"]][["conditionalSummary"]] <- createJaspTable(title = gettext("Conditional Estimates"), dependencies = "resultsConditional")
+      conditionalSummary <- createJaspTable(title = gettext("Conditional Estimates"), dependencies = "resultsConditional")
+      conditionalSummary <- .robmaTableFillCoef(conditionalSummary, NULL, options)
+      jaspResults[["mainSummary"]][["conditionalSummary"]] <- conditionalSummary
     }
     return()
   }
@@ -857,15 +859,22 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     output_scale = if (options[["measures"]] != "general") options[["resultsScale"]]
   )
 
+  titleBF <- switch(
+    options[["bayesFactorType"]],
+    "BF10"    = gettext("Inclusion BF"),
+    "BF01"    = gettext("Exclusion BF"),
+    "LogBF10" = gettext("log(Inclusion BF)")
+  )
+
   ### create overview table
   overallSummary <- createJaspTable(title = gettext("Model Summary"))
   overallSummary$position <- 1
 
-  overallSummary$addColumnInfo(name = "terms",     title = "",                                               type = "string")
-  overallSummary$addColumnInfo(name = "models",    title = gettext("Models"),                                type = "string")
-  overallSummary$addColumnInfo(name = "priorProb", title = gettext("P(M)"),                                  type = "number")
-  overallSummary$addColumnInfo(name = "postProb",  title = gettext("P(M|data)"),                             type = "number")
-  overallSummary$addColumnInfo(name = "BF",        title = attr(fitSummary[["components"]][["BF"]], "name"), type = "number")
+  overallSummary$addColumnInfo(name = "terms",     title = "",                   type = "string")
+  overallSummary$addColumnInfo(name = "models",    title = gettext("Models"),    type = "string")
+  overallSummary$addColumnInfo(name = "priorProb", title = gettext("P(M)"),      type = "number")
+  overallSummary$addColumnInfo(name = "postProb",  title = gettext("P(M|data)"), type = "number")
+  overallSummary$addColumnInfo(name = "BF",        title = titleBF,              type = "number")
 
   for (i in 1:nrow(fitSummary[["components"]])) {
     overallSummary$addRows(list(
@@ -940,10 +949,40 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 }
 .robmaModelsOvervievTable      <- function(jaspResults, options) {
 
-  if (is.null(jaspResults[["model"]])) {
-    jaspResults[["mainSummary"]][["modelsSummary"]] <- createJaspTable(title = gettext("Models Overview"), dependencies = "resultsModels")
+  ### create overview table
+  modelsSummary <- createJaspTable(title = gettext("Models Overview"))
+  modelsSummary$position <- 6
+  modelsSummary$dependOn(c(.robmaDependencies, "bayesFactorType", "resultsModels", "resultsModelsBF", "resultsModelsOrder", "shortNames"))
+  jaspResults[["mainSummary"]][["modelsSummary"]] <- modelsSummary
+
+  if (options[["resultsModelsBf"]] == "inclusion")
+    titleBF <- switch(
+      options[["bayesFactorType"]],
+      "BF10"    = gettext("Inclusion BF"),
+      "BF01"    = gettext("Exclusion BF"),
+      "LogBF10" = gettext("log(Inclusion BF)")
+    )
+  else
+    titleBF <- switch(
+      options[["bayesFactorType"]],
+      "BF10"    = gettextf("BF%s",     "\u2081\u2080"),
+      "BF01"    = gettextf("BF%s",     "\u2080\u2081"),
+      "LogBF10" = gettextf("log(BF%s)","\u2081\u2080")
+    )
+
+  overtitlePrior <- gettext("Prior Distribution")
+
+  modelsSummary$addColumnInfo(name = "number",             title = "#",                        type = "integer")
+  modelsSummary$addColumnInfo(name = "priorEffect",        title = gettext("Effect Size"),      type = "string",  overtitle = overtitlePrior)
+  modelsSummary$addColumnInfo(name = "priorHeterogeneity", title = gettext("Heterogeneity"),    type = "string",  overtitle = overtitlePrior)
+  modelsSummary$addColumnInfo(name = "priorBias",          title = gettext("Publication Bias"), type = "string",  overtitle = overtitlePrior)
+  modelsSummary$addColumnInfo(name = "priorProb",          title = gettext("P(M)"),             type = "number")
+  modelsSummary$addColumnInfo(name = "postProb",           title = gettext("P(M|data)"),        type = "number")
+  modelsSummary$addColumnInfo(name = "marglik",            title = gettext("log(MargLik)"),     type = "number")
+  modelsSummary$addColumnInfo(name = "BF",                 title = titleBF,                     type = "number")
+
+  if (is.null(jaspResults[["model"]]))
     return()
-  }
 
   # extract the model
   fit   <- jaspResults[["model"]][["object"]]
@@ -972,37 +1011,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     bf <- c(1, exp(tempPrevMargLik - tempThisMargLik))
   }
 
-
-  ### create overview table
-  modelsSummary <- createJaspTable(title = gettext("Models Overview"))
-  modelsSummary$position <- 6
-  modelsSummary$dependOn(c(.robmaDependencies, "bayesFactorType", "resultsModels", "resultsModelsBF", "resultsModelsOrder", "shortNames"))
-
-  if (options[["resultsModelsBf"]] == "inclusion")
-    titleBF <- paste0(
-      ifelse(options[["bayesFactorType"]] == "BF01",    gettext("Exclusion"), gettext("Inclusion")),
-      " ",
-      ifelse(options[["bayesFactorType"]] == "LogBF10", gettext("log(BF)"),   gettext("BF"))
-    )
-  else
-    titleBF <- switch(
-      options[["bayesFactorType"]],
-      "BF10"    = gettextf("BF%s",     "\u2081\u2080"),
-      "BF01"    = gettextf("BF%s",     "\u2080\u2081"),
-      "LogBF10" = gettextf("log(BF%s)","\u2081\u2080")
-    )
-
-  overtitlePrior <- gettext("Prior Distribution")
-
-  modelsSummary$addColumnInfo(name = "number",             title = "#",                        type = "integer")
-  modelsSummary$addColumnInfo(name = "priorEffect",        title = gettext("Effect Size"),      type = "string",  overtitle = overtitlePrior)
-  modelsSummary$addColumnInfo(name = "priorHeterogeneity", title = gettext("Heterogeneity"),    type = "string",  overtitle = overtitlePrior)
-  modelsSummary$addColumnInfo(name = "priorBias",          title = gettext("Publication Bias"), type = "string",  overtitle = overtitlePrior)
-  modelsSummary$addColumnInfo(name = "priorProb",          title = gettext("P(M)"),             type = "number")
-  modelsSummary$addColumnInfo(name = "postProb",           title = gettext("P(M|data)"),        type = "number")
-  modelsSummary$addColumnInfo(name = "marglik",            title = gettext("log(MargLik)"),     type = "number")
-  modelsSummary$addColumnInfo(name = "BF",                 title = titleBF,                     type = "number")
-
+  # fill the rows
   for (i in 1:nrow(fitSummary[["summary"]])) {
     modelsSummary$addRows(list(
       number             = fitSummary[["summary"]][i, "Model"],
@@ -1015,8 +1024,6 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
       BF                 = BayesTools::format_BF(bf[i], logBF = options[["bayesFactorType"]] == "LogBF10", BF01 = options[["bayesFactorType"]] == "BF01")
     ))
   }
-
-  jaspResults[["mainSummary"]][["modelsSummary"]] <-  modelsSummary
 
   return()
 }
@@ -1031,8 +1038,35 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     jaspResults[["individualModels"]] <- individualModels
   }
 
+  titleBF <- switch(
+    options[["bayesFactorType"]],
+    "BF10"    = gettext("Inclusion BF"),
+    "BF01"    = gettext("Exclusion BF"),
+    "LogBF10" = gettext("log(Inclusion BF)")
+  )
+
   if (is.null(jaspResults[["model"]])) {
-    jaspResults[["individualModels"]][["summary"]] <- createJaspTable(title = "Summary")
+
+    tempModel <- createJaspContainer(title = gettext("Model #"))
+    individualModels[["modelI"]] <- tempModel
+
+    tempPriors <- createJaspTable(title = gettext("Priors"))
+    tempPriors$addColumnInfo(name = "priorMu",    title = gettext("Effect Size"),      type = "string")
+    tempPriors$addColumnInfo(name = "priorTau",   title = gettext("Heterogeneity"),    type = "string")
+    tempPriors$addColumnInfo(name = "priorBias",  title = gettext("Publication Bias"), type = "string")
+    tempModel[["tempPriors"]] <- tempPriors
+
+    tempInfo <- createJaspTable(title = gettext("Information"))
+    tempInfo$addColumnInfo(name = "priorProb",   title = gettext("P(M)"),          type = "number")
+    tempInfo$addColumnInfo(name = "postProb",    title = gettext("P(M|data)"),     type = "number")
+    tempInfo$addColumnInfo(name = "marglik",     title = gettext("log(MargLik)"),  type = "number")
+    tempInfo$addColumnInfo(name = "BF",          title = titleBF,                  type = "number")
+    tempModel[["tempInfo"]] <- tempInfo
+
+    tempCoef <- createJaspTable(title = gettext("Model Estimates"))
+    tempCoef <- .robmaTableFillCoef(tempCoef, NULL, options, individual = TRUE)
+    tempModel[["tempCoef"]] <- tempCoef
+
     return()
   }
 
@@ -1045,20 +1079,6 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     type          = "individual",
     output_scale  = if (options[["measures"]] != "general") options[["resultsScale"]],
     short_name    = options[["shortNames"]]
-  )
-
-  titleBF <- paste0(
-    ifelse(
-      options[["bayesFactorType"]] == "BF01",
-      gettext("Exclusion"),
-      gettext("Inclusion")
-    ),
-    " ",
-    ifelse(
-      options[["bayesFactorType"]] == "LogBF10",
-      gettext("log(BF)"),
-      gettext("BF")
-    )
   )
 
   ### create tables for individual models
@@ -1386,29 +1406,12 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     return()
   }
 
-  if (is.null(jaspResults[["model"]])) {
-    diagnostics[["diagosticsTable"]] <- createJaspTable(title = gettext("Models Diagnostics Overview"), dependencies = "diagnosticsOverview")
-    return()
-  }
-
-  # extract the model
-  fit   <- jaspResults[["model"]][["object"]]
-
-
-  # some shared info
-  fitSummary <- summary(
-    fit,
-    type       = "diagnostics",
-    short_name = options[["shortNames"]]
-  )
-
-  # do ordering
-  diagnostics_dependencies <- c(.robmaDependencies, "diagnosticsOverview", "shortNames")
 
   ### create overview table
   diagosticsTable <-  createJaspTable(title = gettext("Models Diagnostics Overview"))
   diagosticsTable$position <- 1
-  diagosticsTable$dependOn(diagnostics_dependencies)
+  diagosticsTable$dependOn(c(.robmaDependencies, "diagnosticsOverview", "shortNames"))
+  diagnostics[["diagosticsTable"]] <- diagosticsTable
 
   overtitlePrior <- gettext("Prior Distribution")
 
@@ -1422,6 +1425,18 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   diagosticsTable$addColumnInfo(name = "rHat",               title = gettext("max(R-hat)"),         type = "number")
 
 
+  if (is.null(jaspResults[["model"]]))
+    return()
+
+  # extract the model
+  fit   <- jaspResults[["model"]][["object"]]
+
+  # get the diagnostics summary
+  fitSummary <- summary(
+    fit,
+    type       = "diagnostics",
+    short_name = options[["shortNames"]]
+  )
 
   for (i in 1:nrow(fitSummary[["diagnostics"]])) {
     diagosticsTable$addRows(list(
@@ -1435,8 +1450,6 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
       rHat               = fitSummary[["diagnostics"]][i, "max_R_hat"]
     ))
   }
-
-  diagnostics[["diagosticsTable"]] <- diagosticsTable
 
   return()
 }
