@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2021-10-30 02:37+0000\n"
+"Last-Translator: Johnny van Doorn <johnnydoorn@gmail.com>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/nl/>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.9-dev\n"
 "X-Language: nl\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -690,7 +696,7 @@ msgstr "Grafieken"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Forest plot"
-msgstr "Forest plot"
+msgstr "Forest grafiek"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Observed"
@@ -894,7 +900,7 @@ msgstr "Maximum aannemelijkheid"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Restricted ML"
-msgstr "Restricted ML"
+msgstr "Beperkte ML"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "DerSimonian-Laird"
@@ -958,7 +964,7 @@ msgstr "Pasmaten"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Forest plot"
-msgstr "Forest plot"
+msgstr "Forest grafiek"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Show labels"
@@ -1298,446 +1304,404 @@ msgstr "Bayesiaans"
 
 msgctxt "Description|"
 msgid "Prediction Model Performance"
-msgstr ""
+msgstr "Prestatie van Voorspellingsmodel"
 
 msgctxt "Description|"
 msgid "Classical Prediction Model Performance"
-msgstr ""
+msgstr "Prestatie van Klassiek Voorspellingsmodel"
 
 msgctxt "Description|"
 msgid "WAAP-WLS"
-msgstr ""
+msgstr "WAAP-WLS"
 
-#, fuzzy
 msgctxt "Description|"
 msgid "PET-PEESE"
 msgstr "PET-PEESE"
 
 msgctxt "Description|"
 msgid "Bayesian Prediction Model Performance"
-msgstr ""
+msgstr "Prestatie Bayesiaans Voorspellingsmodel"
 
-#, fuzzy
 msgctxt "BayesianPredictionPerformance|"
 msgid "MCMC Diagnostics"
 msgstr "MCMC Diagnostiek"
 
-#, fuzzy
 msgctxt "BayesianPredictionPerformance|"
 msgid "Plots"
 msgstr "Grafieken"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Running means"
-msgstr ""
+msgstr "Lopende gemiddelden"
 
-#, fuzzy
 msgctxt "BayesianPredictionPerformance|"
 msgid "Autocorrelation"
 msgstr "Autocorrelatie"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Gelman Rubin"
-msgstr ""
+msgstr "Gelman Rubin"
 
-#, fuzzy
 msgctxt "BayesianPredictionPerformance|"
 msgid "Advanced"
 msgstr "Geavanceerd"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Adapt"
-msgstr ""
+msgstr "Aanpassen"
 
-#, fuzzy
 msgctxt "BayesianPredictionPerformance|"
 msgid "Burnin"
 msgstr "Opwarming"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Sample"
-msgstr ""
+msgstr "Steekproef"
 
-#, fuzzy
 msgctxt "BayesianPredictionPerformance|"
 msgid "Chains"
 msgstr "Ketens"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Effect sizes & SE"
 msgstr "Effectgroottes & SE"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Correlations & N"
 msgstr "Correlaties & N"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Correlation"
 msgstr "Correlatie"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Effect Size"
 msgstr "Effectgrootte"
 
 msgctxt "PetPeese|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "Standaardfout van Effectgrootte"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "N"
 msgstr "N"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Transform correlations"
 msgstr "Transformeer correlaties"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Fisher's z"
 msgstr "Fisher's z"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Cohen's d"
 msgstr "Cohen's d"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Inference"
-msgstr "Inferentie"
+msgstr "Gevolgtrekking"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Mean estimates"
 msgstr "Gemiddelde schattingen"
 
 msgctxt "PetPeese|"
 msgid "PET-PEESE regression estimates"
-msgstr ""
+msgstr "PET-PEESE regressie schattingen"
 
 msgctxt "PetPeese|"
 msgid "Multiplicative heterogeneity estimates"
-msgstr ""
+msgstr "Multiplicatieve heterogeniteitsschattingen"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Plots"
 msgstr "Grafieken"
 
 msgctxt "PetPeese|"
 msgid "Meta-Regression Estimate"
-msgstr ""
+msgstr "Meta-Regressie Schatting"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "PET"
 msgstr "PET"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "PEESE"
 msgstr "PEESE"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Mean model estimates"
-msgstr "Gemiddelde model schattingen"
+msgstr "Gemiddelde modelschattingen"
 
 msgctxt "PredictionPerformanceData|"
 msgid "Data"
-msgstr ""
+msgstr "Data"
 
 msgctxt "PredictionPerformanceData|"
 msgid "Measure"
-msgstr ""
+msgstr "Maat"
 
 msgctxt "PredictionPerformanceData|"
 msgid "O:E ratio"
-msgstr ""
+msgstr "O:E verhouding"
 
 msgctxt "PredictionPerformanceData|"
 msgid "C statistic"
-msgstr ""
+msgstr "C statistiek"
 
 msgctxt "PredictionPerformanceData|"
 msgid "O:E Ratio"
-msgstr ""
+msgstr "O:E Verhouding"
 
 msgctxt "PredictionPerformanceData|"
 msgid "C-statistic"
-msgstr ""
+msgstr "C-statistiek"
 
 msgctxt "PredictionPerformanceData|"
 msgid "Standard Error"
-msgstr ""
+msgstr "Standaardfout"
 
 msgctxt "PredictionPerformanceData|"
 msgid "95% CI Lower and Upper Bound"
-msgstr ""
+msgstr "95% CI Onder- en Bovengrens"
 
 msgctxt "PredictionPerformanceData|"
 msgid "Number of Participants"
-msgstr ""
+msgstr "Aantal Proefpersonen"
 
 msgctxt "PredictionPerformanceData|"
 msgid "Number of Observed Events"
-msgstr ""
+msgstr "Aantal Geobserveerde Gebeurtenissen"
 
 msgctxt "PredictionPerformanceData|"
 msgid "Number of Expected Events"
-msgstr ""
+msgstr "Aantal Verwachte Gebeurtenissen"
 
-#, fuzzy
 msgctxt "PredictionPerformanceData|"
 msgid "Study Labels"
-msgstr "Onderzoeklabels"
+msgstr "Studielabels"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Inference"
-msgstr "Inferentie"
+msgstr "Gevolgtrekking"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Within-study variation"
-msgstr ""
+msgstr "Variantie binnen de studies"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Normal/Log"
-msgstr ""
+msgstr "Normaal/Log"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Normal/Identity"
-msgstr ""
+msgstr "Normaal/Identiteit"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Poisson/Log"
-msgstr ""
+msgstr "Poisson/Log"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Normal/Logit"
-msgstr ""
+msgstr "Normaal/Logit"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Prior and posterior plot"
-msgstr ""
+msgstr "Prior en posterior grafiek"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Forest plot"
-msgstr ""
+msgstr "Forest grafiek"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Labels"
-msgstr ""
+msgstr "Labels"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Estimates"
 msgstr "Schattingen"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Export O:E ratios"
-msgstr ""
+msgstr "Exporteer O:E verhoudingen"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Export C-statistics"
-msgstr ""
+msgstr "Exporteer C-statistieken"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Column name"
-msgstr ""
+msgstr "Kolomnaam"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "O:E ratios"
-msgstr ""
+msgstr "O:E verhoudingen"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Column name (lCI)"
-msgstr ""
+msgstr "Kolomnaam (ICI)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "O:E ratios (lCI)"
-msgstr ""
+msgstr "O:E verhoudingen (ICI)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Column name (uCI)"
-msgstr ""
+msgstr "Kolomnaam (uCI)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "O:E ratios (uCI)"
-msgstr ""
+msgstr "O:E verhoudingen (uCI)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "C-statistics"
-msgstr ""
+msgstr "C-statistieken"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "C-statistics (lCI)"
-msgstr ""
+msgstr "C-statistieken (ICI)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "C-statistics (uCI)"
-msgstr ""
+msgstr "C-statistieken (uCI)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Funnel plot asymmetry test"
-msgstr ""
+msgstr "Trechtergrafiek asymmetrie toets"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Egger (unweighted)"
-msgstr ""
+msgstr "Egger (ongewogen)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Egger (multiplicative overdispersion)"
-msgstr ""
+msgstr "Egger (multiplicatieve overdispersie)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Macaskill"
-msgstr ""
+msgstr "Macaskill"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Macaskill (pooled)"
-msgstr ""
+msgstr "Macaskill (samengevoegd)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Peters"
-msgstr ""
+msgstr "Peters"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Debray"
-msgstr ""
+msgstr "Debray"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Plot"
 msgstr "Grafiek"
 
-#, fuzzy
 msgctxt "PredictionPerformancePriors|"
 msgid "Priors"
 msgstr "Priors"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "Summary estimate (O:E Ratio)"
-msgstr ""
+msgstr "Samenvatting schatting (O:E Verhouding)"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "Summary estimate (C statistic)"
-msgstr ""
+msgstr "Samenvatting schatting (C-statistiek)"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "Normal mean:"
-msgstr ""
+msgstr "Normaal gemiddelde:"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "sd:"
-msgstr ""
+msgstr "sd:"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "Heterogeneity (Between study SD)"
-msgstr ""
+msgstr "Heterogeniteit (SD tussen studies)"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "Uniform"
-msgstr ""
+msgstr "Uniform"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "min:"
-msgstr ""
+msgstr "min:"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "max:"
-msgstr ""
+msgstr "max:"
 
-#, fuzzy
 msgctxt "PredictionPerformancePriors|"
 msgid "Half t"
 msgstr "Halve t-verdeling"
 
-#, fuzzy
 msgctxt "PredictionPerformancePriors|"
 msgid "location:"
 msgstr "locatie:"
 
-#, fuzzy
 msgctxt "PredictionPerformancePriors|"
 msgid "scale:"
-msgstr "Schaal:"
+msgstr "schaal:"
 
-#, fuzzy
 msgctxt "PredictionPerformancePriors|"
 msgid "df:"
 msgstr "vg:"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Effect sizes & SE"
 msgstr "Effectgroottes & SE"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Correlations & N"
 msgstr "Correlaties & N"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Correlation"
 msgstr "Correlatie"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Effect Size"
 msgstr "Effectgrootte"
 
 msgctxt "WaapWls|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "Effectgrootte Standaardfout"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "N"
 msgstr "N"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Transform correlations"
 msgstr "Transformeer correlaties"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Fisher's z"
 msgstr "Fisher's z"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Cohen's d"
 msgstr "Cohen's d"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Inference"
-msgstr "Inferentie"
+msgstr "Gevolgtrekking"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Mean estimates"
 msgstr "Gemiddelde schattingen"
 
 msgctxt "WaapWls|"
 msgid "Multiplicative heterogeneity estimates"
-msgstr ""
+msgstr "Multiplicatieve heterogeniteitsschattingen"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Plots"
 msgstr "Grafieken"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Mean model estimates"
-msgstr "Gemiddelde model schattingen"
+msgstr "Gemiddelde modelschattingen"
