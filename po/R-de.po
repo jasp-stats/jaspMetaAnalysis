@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-10-30 02:39\n"
-"PO-Revision-Date: 2021-10-24 08:53+0000\n"
+"PO-Revision-Date: 2021-10-30 19:47+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/de/>\n"
@@ -1137,12 +1137,10 @@ msgid "Only the following one-sided p-value cutoffs were used: %s."
 msgstr ""
 "Es wurden nur die folgenden einseitigen p-Wert-Grenzwerte verwendet: %s."
 
-#, fuzzy
 msgid "Error: There were not enough adequately powered studies (k = %1$i)"
 msgstr ""
 "Fehler: Es gab nicht genügend Studien mit angemessener Teststärke (k = %1$i)"
 
-#, fuzzy
 msgid "Note: There were %1$i adequately powered studies"
 msgstr "Hinweis: Es gab %1$i Studien mit angemessener Teststärke"
 
@@ -1167,17 +1165,15 @@ msgstr "Cohens d"
 msgid "Fisher's z"
 msgstr "Fishers z"
 
-#, fuzzy
 msgid ""
 "WAAP was not estimated: There were only %1$i adequately powered studies "
 "(power > 80%%)."
 msgstr ""
 "WAAP wurde nicht geschätzt: Es gab nur %1$i Studien mit angemessener "
-"Teststärke."
+"Teststärke (Teststärke > 80%%)."
 
-#, fuzzy
 msgid "There were %1$i adequately powered studies (power > 80%%)."
-msgstr "Es gab %1$i Studien mit angemessener Teststärke"
+msgstr "Es gab %1$i Studien mit angemessener Teststärke (Teststärke > 80%%)."
 
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
