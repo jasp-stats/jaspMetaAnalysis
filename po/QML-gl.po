@@ -185,10 +185,6 @@ msgid "Mean estimates"
 msgstr "Estimacións da media"
 
 msgctxt "SelectionModels|"
-msgid "Transform correlations"
-msgstr "Transformar as correlacións"
-
-msgctxt "SelectionModels|"
 msgid "Random Effects"
 msgstr "Efectos aleatorios"
 
@@ -1381,10 +1377,6 @@ msgid "N"
 msgstr "N"
 
 msgctxt "PetPeese|"
-msgid "Transform correlations"
-msgstr "Transformar as correlacións"
-
-msgctxt "PetPeese|"
 msgid "Fisher's z"
 msgstr "Z de Fisher"
 
@@ -1669,10 +1661,6 @@ msgid "N"
 msgstr "N"
 
 msgctxt "WaapWls|"
-msgid "Transform correlations"
-msgstr "Transformar as correlacións"
-
-msgctxt "WaapWls|"
 msgid "Fisher's z"
 msgstr "Z de Fisher"
 
@@ -1699,3 +1687,15 @@ msgstr "Gráficas"
 msgctxt "WaapWls|"
 msgid "Mean model estimates"
 msgstr "Estimacións do modelo medio"
+
+msgctxt "PetPeese|"
+msgid "Transform correlations to"
+msgstr ""
+
+msgctxt "SelectionModels|"
+msgid "Transform correlations to"
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid "Transform correlations to"
+msgstr ""

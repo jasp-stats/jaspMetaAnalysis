@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-10-09 02:38\n"
+"POT-Creation-Date: 2021-10-30 02:39\n"
 "PO-Revision-Date: 2021-10-29 10:56+0000\n"
 "Last-Translator: JASP Stats <b.boutin@uva.nl>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
@@ -1151,11 +1151,13 @@ msgid "Only the following one-sided p-value cutoffs were used: %s."
 msgstr ""
 "Só se utilizaron os seguintes puntos de corte do valor p unilateral: %s."
 
-msgid "Error: There was not enough adequatelly powered studies (k = %1$i)"
+#, fuzzy
+msgid "Error: There were not enough adequately powered studies (k = %1$i)"
 msgstr ""
 "Fallo: Non había suficientes estudos promovidos axeitadamente (k = %1$i)"
 
-msgid "Note: There were %1$i adequatelly powered studies"
+#, fuzzy
+msgid "Note: There were %1$i adequately powered studies"
 msgstr "Nota: Había %1$i estudos promovidos axeitadamente"
 
 msgid "Test of Effect"
@@ -1179,11 +1181,14 @@ msgstr "D de Cohen"
 msgid "Fisher's z"
 msgstr "Z de Fisher"
 
+#, fuzzy
 msgid ""
-"WAAP was not estimated: there were only %1$i adequatelly powered studies."
+"WAAP was not estimated: There were only %1$i adequately powered studies "
+"(power > 80%%)."
 msgstr "Non se estimou o WAAP: só había %1$i estudos promovidos axeitadamente."
 
-msgid "There were %1$i adequatelly powered studies"
+#, fuzzy
+msgid "There were %1$i adequately powered studies (power > 80%%)."
 msgstr "Só había %1$i estudos promovidos axeitadamente"
 
 msgid "%i observation was removed due to missing values."

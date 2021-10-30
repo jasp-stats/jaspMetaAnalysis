@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-10-09 02:38\n"
+"POT-Creation-Date: 2021-10-30 02:39\n"
 "PO-Revision-Date: 2021-10-30 02:37+0000\n"
 "Last-Translator: Johnny van Doorn <johnnydoorn@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
@@ -1138,12 +1138,14 @@ msgstr ""
 msgid "Only the following one-sided p-value cutoffs were used: %s."
 msgstr "Alleen de volgende eenzijdige p-afkapwaarden werden gebruikt: %s."
 
-msgid "Error: There was not enough adequatelly powered studies (k = %1$i)"
+#, fuzzy
+msgid "Error: There were not enough adequately powered studies (k = %1$i)"
 msgstr ""
 "Fout: Er waren niet genoeg studies met voldoende statistische kracht (k = "
 "%1$i)"
 
-msgid "Note: There were %1$i adequatelly powered studies"
+#, fuzzy
+msgid "Note: There were %1$i adequately powered studies"
 msgstr "Opmerking: Er waren %1$i studies met voldoende statistische kracht"
 
 msgid "Test of Effect"
@@ -1167,13 +1169,16 @@ msgstr "Cohen's d"
 msgid "Fisher's z"
 msgstr "Fisher's z"
 
+#, fuzzy
 msgid ""
-"WAAP was not estimated: there were only %1$i adequatelly powered studies."
+"WAAP was not estimated: There were only %1$i adequately powered studies "
+"(power > 80%%)."
 msgstr ""
 "WAAP werd niet geschat: er waren slechts %1$i studies met voldoende "
 "statistische kracht."
 
-msgid "There were %1$i adequatelly powered studies"
+#, fuzzy
+msgid "There were %1$i adequately powered studies (power > 80%%)."
 msgstr "Er waren %1$i studies met voldoende statistische kracht"
 
 msgid "%i observation was removed due to missing values."

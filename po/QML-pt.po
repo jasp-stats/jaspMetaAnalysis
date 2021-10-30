@@ -537,10 +537,6 @@ msgid "Negative"
 msgstr ""
 
 msgctxt "SelectionModels|"
-msgid "Transform correlations"
-msgstr ""
-
-msgctxt "SelectionModels|"
 msgid "Cohen's d"
 msgstr ""
 
@@ -1385,10 +1381,6 @@ msgid "N"
 msgstr ""
 
 msgctxt "PetPeese|"
-msgid "Transform correlations"
-msgstr ""
-
-msgctxt "PetPeese|"
 msgid "Fisher's z"
 msgstr ""
 
@@ -1680,10 +1672,6 @@ msgid "N"
 msgstr ""
 
 msgctxt "WaapWls|"
-msgid "Transform correlations"
-msgstr ""
-
-msgctxt "WaapWls|"
 msgid "Fisher's z"
 msgstr ""
 
@@ -1710,4 +1698,16 @@ msgstr "Diagramas"
 
 msgctxt "WaapWls|"
 msgid "Mean model estimates"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Transform correlations to"
+msgstr ""
+
+msgctxt "SelectionModels|"
+msgid "Transform correlations to"
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid "Transform correlations to"
 msgstr ""

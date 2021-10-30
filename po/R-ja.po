@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
-"POT-Creation-Date: 2021-10-09 02:38\n"
+"POT-Creation-Date: 2021-10-30 02:39\n"
 "PO-Revision-Date: 2021-09-24 01:33+0000\n"
 "Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -1109,10 +1109,10 @@ msgstr ""
 msgid "Only the following one-sided p-value cutoffs were used: %s."
 msgstr "次の片側 p 値カットオフのみが使用されました: %s."
 
-msgid "Error: There was not enough adequatelly powered studies (k = %1$i)"
+msgid "Error: There were not enough adequately powered studies (k = %1$i)"
 msgstr ""
 
-msgid "Note: There were %1$i adequatelly powered studies"
+msgid "Note: There were %1$i adequately powered studies"
 msgstr ""
 
 #, fuzzy
@@ -1142,10 +1142,11 @@ msgid "Fisher's z"
 msgstr ""
 
 msgid ""
-"WAAP was not estimated: there were only %1$i adequatelly powered studies."
+"WAAP was not estimated: There were only %1$i adequately powered studies "
+"(power > 80%%)."
 msgstr ""
 
-msgid "There were %1$i adequatelly powered studies"
+msgid "There were %1$i adequately powered studies (power > 80%%)."
 msgstr ""
 
 msgid "%i observation was removed due to missing values."
