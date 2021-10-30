@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-10-09 02:38\n"
-"PO-Revision-Date: 2021-10-05 13:03+0000\n"
+"PO-Revision-Date: 2021-10-24 08:53+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/de/>\n"
@@ -459,7 +459,6 @@ msgstr "Test auf Residuenheterogenität"
 msgid "The model was estimated using %1$s method."
 msgstr "Das Modell wurde mit der %1$s-Methode geschätzt."
 
-#, fuzzy
 msgid "Log-Likelihood"
 msgstr "Log-Likelihood"
 
@@ -493,11 +492,9 @@ msgstr "Abbildung"
 msgid "Funnel Plot"
 msgstr "Funnel-Plot"
 
-#, fuzzy
 msgid "Log-Likelihood for %s%s"
 msgstr "Log-Likelihood für %s%s"
 
-#, fuzzy
 msgid "Trim-Fill Analysis"
 msgstr "Trim-fill-Analyse"
 
