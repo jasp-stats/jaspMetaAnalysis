@@ -59,9 +59,12 @@
 <text x='494.30' y='529.30' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='9.46px' lengthAdjust='spacingAndGlyphs'>1</text>
 <text x='592.43' y='529.30' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='9.46px' lengthAdjust='spacingAndGlyphs'>2</text>
 <text x='690.56' y='529.30' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='9.46px' lengthAdjust='spacingAndGlyphs'>3</text>
-<text x='335.82' y='562.56' style='font-size: 20.40px; font-family: sans;' textLength='5.10px' lengthAdjust='spacingAndGlyphs'> </text>
-<text x='340.92' y='562.56' style='font-size: 20.40px; font-style: italic; font-family: sans;' textLength='65.75px' lengthAdjust='spacingAndGlyphs'>Normal</text>
-<text x='408.90' y='562.56' style='font-size: 20.40px; font-family: sans;' textLength='47.61px' lengthAdjust='spacingAndGlyphs'>(0, 1)</text>
+<text x='321.73' y='562.56' style='font-size: 20.40px; font-family: sans;' textLength='11.15px' lengthAdjust='spacingAndGlyphs'>μ</text>
+<text x='332.88' y='562.56' style='font-size: 20.40px; font-family: sans;' textLength='5.10px' lengthAdjust='spacingAndGlyphs'> </text>
+<text x='337.99' y='562.56' style='font-size: 20.40px; font-family: sans;' textLength='11.92px' lengthAdjust='spacingAndGlyphs'>~</text>
+<text x='349.91' y='562.56' style='font-size: 20.40px; font-family: sans;' textLength='5.10px' lengthAdjust='spacingAndGlyphs'> </text>
+<text x='355.01' y='562.56' style='font-size: 20.40px; font-style: italic; font-family: sans;' textLength='65.75px' lengthAdjust='spacingAndGlyphs'>Normal</text>
+<text x='422.98' y='562.56' style='font-size: 20.40px; font-family: sans;' textLength='47.61px' lengthAdjust='spacingAndGlyphs'>(0, 1)</text>
 <text transform='translate(19.02,261.42) rotate(-90)' text-anchor='middle' style='font-size: 20.40px; font-family: sans;' textLength='68.04px' lengthAdjust='spacingAndGlyphs'>Density</text>
 </g>
 </svg>

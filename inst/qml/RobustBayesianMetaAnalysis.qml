@@ -38,69 +38,6 @@ Form
 		return check && listVisibility[name]["values"].includes(measures.value);
 	}
 
-	RadioButtonGroup
-	{
-		id:						measures
-		Layout.columnSpan:		2
-		name:					"measures"
-		radioButtonsOnSameRow:	true
-		columns:				2
-
-		onValueChanged:
-		{
-			for (var inputName in listVisibility)
-			{
-				if (!checkListVisibility(inputName) && listVisibility[inputName]["id"].count > 0)
-					listVisibility[inputName]["id"].itemDoubleClicked(0)
-			}
-
-			if(measuresGeneral.checked)
-				modelType.value = "custom"
-			else
-				modelType.value = "PSMA"
-		}
-
-		RadioButton
-		{
-			label:		qsTr("Cohen's d")
-			value:		"cohensD"
-			id:			measuresCohensD
-			enabled:	mainWindow.dataAvailable
-			checked:	mainWindow.dataAvailable
-		}
-
-		RadioButton
-		{
-			label:		qsTr("Correlations")
-			value:		"correlation"
-			id:			measuresCorrelation
-			enabled:	mainWindow.dataAvailable
-		}
-
-		RadioButton
-		{
-			label:		qsTr("Log odds ratios")
-			value:		"logOR"
-			id:			measureslogOR
-			enabled:	mainWindow.dataAvailable
-		}
-
-		RadioButton
-		{
-			label:		qsTr("Unstandardized effect sizes")
-			value:		"general"
-			id:			measuresGeneral
-			enabled:	mainWindow.dataAvailable
-		}
-
-		RadioButton
-		{
-			label:		qsTr("Fitted model")
-			value:		"fitted"
-			id:			measuresFitted
-			checked:	!mainWindow.dataAvailable
-		}
-	}
 
 	FileSelector
 	{
@@ -184,10 +121,75 @@ Form
 
 	RadioButtonGroup
 	{
+		id:						measures
+		Layout.columnSpan:		2
+		name:					"measures"
+		title:					qsTr("Input type")
+		radioButtonsOnSameRow:	false
+		columns:				2
+
+		onValueChanged:
+		{
+			for (var inputName in listVisibility)
+			{
+				if (!checkListVisibility(inputName) && listVisibility[inputName]["id"].count > 0)
+					listVisibility[inputName]["id"].itemDoubleClicked(0)
+			}
+
+			if(measuresGeneral.checked)
+				modelType.value = "custom"
+			else
+				modelType.value = "PSMA"
+		}
+
+		RadioButton
+		{
+			label:		qsTr("Cohen's d")
+			value:		"cohensD"
+			id:			measuresCohensD
+			enabled:	mainWindow.dataAvailable
+			checked:	mainWindow.dataAvailable
+		}
+
+		RadioButton
+		{
+			label:		qsTr("Correlations")
+			value:		"correlation"
+			id:			measuresCorrelation
+			enabled:	mainWindow.dataAvailable
+		}
+
+		RadioButton
+		{
+			label:		qsTr("Log odds ratios")
+			value:		"logOR"
+			id:			measureslogOR
+			enabled:	mainWindow.dataAvailable
+		}
+
+		RadioButton
+		{
+			label:		qsTr("Unstandardized effect sizes")
+			value:		"general"
+			id:			measuresGeneral
+			enabled:	mainWindow.dataAvailable
+		}
+
+		RadioButton
+		{
+			label:		qsTr("Fitted model")
+			value:		"fitted"
+			id:			measuresFitted
+			checked:	!mainWindow.dataAvailable
+		}
+	}
+	
+	RadioButtonGroup
+	{
 		name:		"effectDirection"
-		title:		qsTr("Expected effect size direction")
+		title:		qsTr("Expected direction of effect sizes")
 		columns:	1
-		visible:	!measuresFitted.checked
+		enabled:	!measuresFitted.checked
 
 		RadioButton
 		{
@@ -209,134 +211,55 @@ Form
 		{
 			id:			modelType
 			name:		"modelType"
-			label:		qsTr("Model type")
-			visible:	!measuresFitted.checked && !measuresGeneral.checked
+			label:		qsTr("Model ensemble")
+			enabled:	!measuresFitted.checked && !measuresGeneral.checked
 			values: [
 				{ label: qsTr("RoBMA-PSMA"),		value: "PSMA"},
 				{ label: qsTr("RoBMA-PP"),			value: "PP"},
-				{ label: qsTr("RoBMA-old"),			value: "2w"},
+				{ label: qsTr("RoBMA-original"),	value: "2w"},
 				{ label: qsTr("Custom"),			value: "custom"}
 			]
 		}
 
-		DropDown
+		Group
 		{
-			id:			priorScale
-			name:		"priorScale"
-			label:		qsTr("Prior scale")
-			visible:	!measuresFitted.checked && !measuresGeneral.checked
-			enabled:	modelType.value == "custom"
-			values: [
-				{ label: qsTr("Cohen's d"),			value: "cohens_d"},
-				{ label: qsTr("Fisher's z"),		value: "fishers_z"},
-				{ label: qsTr("log(OR)"),			value: "logOR"}
-			]
-			onCurrentValueChanged: 			
+			columns:	2
+
+			DropDown
 			{
-				if(priorScale.currentValue == "cohens_d")
-					resultsScale.currentValue = "cohens_d"
-				else if(priorScale.currentValue == "fishers_z")
-					resultsScale.currentValue = "fishers_z"
-				else if(priorScale.currentValue == "logOR")
-					resultsScale.currentValue = "logOR"
+				id:			priorScale
+				name:		"priorScale"
+				label:		qsTr("Prior scale")
+				enabled:	!measuresFitted.checked && !measuresGeneral.checked && !modelType.value == "custom"
+
+				values: [
+					{ label: qsTr("Cohen's d"),			value: "cohens_d"},
+					{ label: qsTr("Fisher's z"),		value: "fishers_z"},
+					{ label: qsTr("log(OR)"),			value: "logOR"}
+				]
+				onCurrentValueChanged: 			
+				{
+					if(priorScale.currentValue == "cohens_d")
+						resultsScale.currentValue = "cohens_d"
+					else if(priorScale.currentValue == "fishers_z")
+						resultsScale.currentValue = "fishers_z"
+					else if(priorScale.currentValue == "logOR")
+						resultsScale.currentValue = "logOR"
+				}
 			}
+			/*
+			HelpButton
+			{
+				toolTip:	qsTr("Prior scale can be changed only when specifying a 'Custom' Model ensemble for standardized effect size measures.")
+			}
+			*/
 		}
+
 
 		CheckBox
 		{
 			name:		"plotPriors"
-			label:		qsTr("Plot priors")
-		}
-	}
-
-
-	//// Priors ////
-	Section
-	{
-		title: 				qsTr("Models")
-		columns:			1
-		enabled:			modelType.value == "custom"
-		onEnabledChanged:	if(!enabled) expanded = false
-
-
-		// effect prior
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"effect"
-		}
-
-		// effect prior
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"heterogeneity"
-		}
-
-		// bias priors
-		MA.RobustBayesianMetaAnalysisWeightfunctions
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"omega"
-		}
-
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"pet"
-		}
-
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"peese"
-		}
-
-		Divider { }
-
-		CheckBox
-		{
-			id:						priorsNull
-			name:					"priorsNull"
-			label:					qsTr("Set null priors")
-		}
-
-		// effect prior
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"effectNull"
-			visible:				priorsNull.checked
-		}
-
-		// effect prior
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"heterogeneityNull"
-			visible:				priorsNull.checked
-		}
-
-		// bias priors
-		MA.RobustBayesianMetaAnalysisWeightfunctions
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"omegaNull"
-			visible:				priorsNull.checked
-		}
-
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"petNull"
-			visible:				priorsNull.checked
-		}
-
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"peeseNull"
-			visible:				priorsNull.checked
+			label:		qsTr("Plot prior distributions")
 		}
 	}
 
@@ -808,6 +731,96 @@ Form
 			}
 		}
 
+	}
+
+	//// Priors ////
+	Section
+	{
+		title: 				qsTr("Models (Custom Ensemble Only)")
+		columns:			1
+		enabled:			modelType.value == "custom"
+		onEnabledChanged:	if(!enabled) expanded = false
+
+
+		// effect prior
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			Layout.preferredWidth:	parent.width
+			componentType:			"effect"
+		}
+
+		// effect prior
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			Layout.preferredWidth:	parent.width
+			componentType:			"heterogeneity"
+		}
+
+		// bias priors
+		MA.RobustBayesianMetaAnalysisWeightfunctions
+		{
+			Layout.preferredWidth:	parent.width
+			componentType:			"omega"
+		}
+
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			Layout.preferredWidth:	parent.width
+			componentType:			"pet"
+		}
+
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			Layout.preferredWidth:	parent.width
+			componentType:			"peese"
+		}
+
+		Divider { }
+
+		CheckBox
+		{
+			id:						priorsNull
+			name:					"priorsNull"
+			label:					qsTr("Set null priors")
+		}
+
+		// effect prior
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			Layout.preferredWidth:	parent.width
+			componentType:			"effectNull"
+			visible:				priorsNull.checked
+		}
+
+		// effect prior
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			Layout.preferredWidth:	parent.width
+			componentType:			"heterogeneityNull"
+			visible:				priorsNull.checked
+		}
+
+		// bias priors
+		MA.RobustBayesianMetaAnalysisWeightfunctions
+		{
+			Layout.preferredWidth:	parent.width
+			componentType:			"omegaNull"
+			visible:				priorsNull.checked
+		}
+
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			Layout.preferredWidth:	parent.width
+			componentType:			"petNull"
+			visible:				priorsNull.checked
+		}
+
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			Layout.preferredWidth:	parent.width
+			componentType:			"peeseNull"
+			visible:				priorsNull.checked
+		}
 	}
 
 	//// Advanced section for prior model probabilities sampling settings ////

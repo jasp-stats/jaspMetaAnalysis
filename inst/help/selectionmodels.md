@@ -20,7 +20,7 @@ Selection models are meta-analytic methods on the fixed and random effects meta-
 ---
 - P-value cutoffs: A vector of p-value cutoffs that separate intervals with different publication probabilities (estimated by the weights).
 - P-value frequency: Creates a table with frequencies of p-values in each p-value interval, specified by the p-value cutoffs.
-- Expected effect size direction: The direction of the expected effect size (the publication bias adjusted models are not symmetrical around zero due to the estimation of weights).
+- Expected direction of effect sizes: The direction of the expected effect size (the publication bias adjusted models are not symmetrical around zero due to the estimation of weights).
 - Two-sided selection: Whether the specified p-values cutoffs correspond to one-sided or two-sided values. Note that the two-sided p-values cutoffs are internally transformed into one-sided p-values cutoffs with different weights at each side of the p-value distribution.
 - Automatically join p-value intervals: Automatically joins p-value intervals with fewer than 4 p-values to reduce estimation issues.
 - Transform correlations: Type of transformation to be applied prior to estimating models when correlation coefficients are supplied as input. The estimates and figures display mean estimates transformed back to the correlation scale (apart from the heterogeneity parameter tau that is always summarized on the transformed scale).
