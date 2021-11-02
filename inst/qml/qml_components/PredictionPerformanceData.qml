@@ -21,49 +21,22 @@ import JASP.Widgets		1.0
 import JASP				1.0
 import QtQuick.Layouts	1.3
 
-Section
+Item
 {
-	title:		qsTr("Data")
-	expanded:	true
+
+	// Item is not as smart as the Section, so, you need to make sure that 
+	// it knows its size.
+	implicitHeight: measure.height + variableForm.height + jaspTheme.generalAnchorMargin * 2
+	implicitWidth: measure.width + variableForm.width
 
 	property alias measure:		measure.value
 	property alias inputN:		inputN.count
 	property alias inputO:		inputO.count
 	property alias inputE:		inputE.count
 
-	RadioButtonGroup
-	{
-		title:					qsTr("Measure")
-		name:					"measure"
-		id:						measure
-		Layout.columnSpan:		2
-		radioButtonsOnSameRow:	true
-		columns:				2
-		onValueChanged:
-		{
-			inputMeasure.itemDoubleClicked(0)
-			inputSE.itemDoubleClicked(0)
-			inputCI.itemDoubleClicked(0)
-			inputCI.itemDoubleClicked(1)
-		}
-
-		RadioButton
-		{
-			label:		qsTr("O:E ratio")
-			value:		"OE"
-			id:			measuresOE
-		}
-
-		RadioButton
-		{
-			label:		qsTr("C statistic")
-			value:		"cstat"
-			id:			measuresC
-		}
-	}
-
 	VariablesForm
 	{
+		id: variableForm
 		preferredHeight: 360 * preferencesModel.uiScale
 		
 		AvailableVariablesList
@@ -131,10 +104,51 @@ Section
 
 		AssignedVariablesList
 		{
+			id: 				inputLabels
 			name: 				"inputLabels"
 			title: 				qsTr("Study Labels")
 			singleVariable:		true
 			allowedColumns:		["nominal","nominalText"]
+		}
+	}
+
+	RadioButtonGroup
+	{
+		title:					qsTr("Measure")
+		name:					"measure"
+		id:						measure
+		Layout.columnSpan:		1
+		radioButtonsOnSameRow:	false
+		columns:				1
+
+		// When you do this, you need to make sure that the RadioButtonGroup 
+		// attaches to the bottom of the variableForm, and add some extra 
+		// margin to the bottom because Item doesn't do that.
+		anchors {
+			top: variableForm.bottom
+			topMargin: jaspTheme.generalAnchorMargin * 2
+		}
+
+		onValueChanged:
+		{
+			inputMeasure.itemDoubleClicked(0)
+			inputSE.itemDoubleClicked(0)
+			inputCI.itemDoubleClicked(0)
+			inputCI.itemDoubleClicked(1)
+		}
+
+		RadioButton
+		{
+			label:		qsTr("O:E ratio")
+			value:		"OE"
+			id:			measuresOE
+		}
+
+		RadioButton
+		{
+			label:		qsTr("C statistic")
+			value:		"cstat"
+			id:			measuresC
 		}
 	}
 
