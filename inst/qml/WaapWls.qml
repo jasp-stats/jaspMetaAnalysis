@@ -24,29 +24,6 @@ import JASP				1.0
 Form
 {
 
-	RadioButtonGroup
-	{
-		Layout.columnSpan:		2
-		name:					"measures"
-		radioButtonsOnSameRow:	true
-		columns:				2
-
-		RadioButton
-		{
-			label: qsTr("Effect sizes & SE")
-			value: "general"
-			id: 	measuresGeneral
-			checked:true
-		}
-
-		RadioButton
-		{
-			label: qsTr("Correlations & N")
-			value: "correlation"
-			id: 	measuresCorrelation
-		}
-	}
-
 	VariablesForm
 	{
 		preferredHeight: 200 * preferencesModel.uiScale
@@ -103,6 +80,26 @@ Form
 		}
 	}
 
+	RadioButtonGroup
+	{
+		name:					"measures"
+		title:					qsTr("Measure")
+
+		RadioButton
+		{
+			label: qsTr("Effect sizes & SE")
+			value: "general"
+			id: 	measuresGeneral
+			checked:true
+		}
+
+		RadioButton
+		{
+			label: qsTr("Correlations & N")
+			value: "correlation"
+			id: 	measuresCorrelation
+		}
+	}
 
 	Section
 	{

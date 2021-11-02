@@ -24,29 +24,6 @@ import JASP				1.0
 Form
 {
 
-	RadioButtonGroup
-	{
-		Layout.columnSpan:		2
-		name:					"measures"
-		radioButtonsOnSameRow:	true
-		columns:				2
-
-		RadioButton
-		{
-			label: qsTr("Effect sizes & SE")
-			value: "general"
-			id: 	measures_general
-			checked:true
-		}
-
-		RadioButton
-		{
-			label: qsTr("Correlations & N")
-			value: "correlation"
-			id: 	measures_correlation
-		}
-	}
-
 	VariablesForm
 	{
 		preferredHeight: 200 * preferencesModel.uiScale
@@ -94,6 +71,27 @@ Form
 			title:			qsTr("P-value (one-sided)")
 			singleVariable:	true
 			allowedColumns:	["scale"]
+		}
+	}
+
+	RadioButtonGroup
+	{
+		name:					"measures"
+		title:					qsTr("Measure")
+
+		RadioButton
+		{
+			label: qsTr("Effect sizes & SE")
+			value: "general"
+			id: 	measures_general
+			checked:true
+		}
+
+		RadioButton
+		{
+			label: qsTr("Correlations & N")
+			value: "correlation"
+			id: 	measures_correlation
 		}
 	}
 
