@@ -87,7 +87,7 @@ Form
 			singleVariable: true
 			allowedColumns: ["scale", "ordinal"]
 			visible:		 measuresCorrelation.checked
-			onVisibleChanged: if (!visible && count > 0) itemDoubleClicked(0);
+			onVisibleChanged: if (!measuresGeneral.checked && count > 0) itemDoubleClicked(0);
 		}
 
 		DropDown
