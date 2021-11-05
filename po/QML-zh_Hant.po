@@ -1,1086 +1,1092 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2021-11-05 07:13+0000\n"
+"Last-Translator: yenyu chen <swallow499@gmail.com>\n"
+"Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
+"jasp/jaspmetaanalysis-qml/zh_Hant/>\n"
 "Language: zh_Hant\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.9-dev\n"
 "X-Qt-Contexts: true\n"
 
 msgctxt "Description|"
 msgid "Meta-Analysis"
-msgstr ""
+msgstr "後設分析"
 
 msgctxt "Description|"
 msgid "Classical Meta-Analysis"
-msgstr ""
+msgstr "傳統後設分析"
 
 msgctxt "Description|"
 msgid "Selection Models"
-msgstr ""
+msgstr "選擇模型"
 
 msgctxt "Description|"
 msgid "Bayesian Meta-Analysis"
-msgstr ""
+msgstr "貝氏後設分析"
 
 msgctxt "Description|"
 msgid "Robust Bayesian Meta-Analysis"
-msgstr ""
+msgstr "穩健貝氏後設分析"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Effect Size"
-msgstr ""
+msgstr "效果量"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "效果量標準誤差"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "95% CI Lower and Upper Bound"
-msgstr ""
+msgstr "95% 信賴區間的下界與上界"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Study Labels"
-msgstr ""
+msgstr "研究標籤"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Effect Size"
-msgstr ""
+msgstr "效果量"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "效果量標準誤差"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Study Labels"
-msgstr ""
+msgstr "研究標籤"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Covariates"
-msgstr ""
+msgstr "共變數"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Factors"
-msgstr ""
+msgstr "因素"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Model"
-msgstr ""
+msgstr "模型"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Components"
-msgstr ""
+msgstr "成份"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Model Terms"
-msgstr ""
+msgstr "模型"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Include intercept"
-msgstr ""
+msgstr "包含截距"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Effect Size"
-msgstr ""
+msgstr "效果量"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Effect Size Variance"
-msgstr ""
+msgstr "效果量變異數"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fixed Effects"
-msgstr ""
+msgstr "固定效果"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Inner Grouping (Multivariate Structure)"
-msgstr ""
+msgstr "內部分組(多元結構)"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Outer Grouping (Grouping Structure)"
-msgstr ""
+msgstr "外部分組(分組結構)"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Case labels"
-msgstr ""
+msgstr "個案標籤"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fixed Effects Model"
-msgstr ""
+msgstr "固定效果模型"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Predictors"
-msgstr ""
+msgstr "預測變項"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Model Terms"
-msgstr ""
+msgstr "模型"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Use intercept"
-msgstr ""
+msgstr "使用截距"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Random Effects Model"
-msgstr ""
+msgstr "隨機效果模型"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Multivariate Covariance Model"
-msgstr ""
+msgstr "多變項共變異數模型"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Statistics"
-msgstr ""
+msgstr "統計數據"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Omnibus Statistics"
-msgstr ""
+msgstr "Omnibus統計"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Anova Table"
-msgstr ""
+msgstr "Anova表格"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fit Indices"
-msgstr ""
+msgstr "適配指標"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Coefficients"
-msgstr ""
+msgstr "係數"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fixed Effects Coefficients Table"
-msgstr ""
+msgstr "固定效果係數表"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Random Effects Coefficients Table"
-msgstr ""
+msgstr "隨機效果係數表"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Model Derived Statistics"
-msgstr ""
+msgstr "模型導出統計量"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Estimated Marginal Means"
-msgstr ""
+msgstr "估計邊際平均值"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Plots"
-msgstr ""
+msgstr "圖"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Funnel plot"
-msgstr ""
+msgstr "漏斗圖"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Forest plot"
-msgstr ""
+msgstr "森林圖"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Advanced"
-msgstr ""
+msgstr "進階的"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Method"
-msgstr ""
+msgstr "方法"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fixed Effects Covariance Matrix"
-msgstr ""
+msgstr "固定效果共變異數矩陣"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Diagnostics"
-msgstr ""
+msgstr "診斷"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Test for Funnel Plot Asymmetry"
-msgstr ""
+msgstr "檢驗漏斗圖的對稱性"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Rank correlation test"
-msgstr ""
+msgstr "等級相關檢驗"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Egger's Regression test"
-msgstr ""
+msgstr "Egger的迴歸檢定"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fail-safe-N analysis (controversial)"
-msgstr ""
+msgstr "失敗安全數分析 (有爭議)"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Diagnostics Table"
-msgstr ""
+msgstr "診斷表格"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Diagnostic plots"
-msgstr ""
+msgstr "診斷圖"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Residual vs Dependent"
-msgstr ""
+msgstr "殘差 vs 非獨立"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Profile Random Effects Parameters (takes time)"
-msgstr ""
+msgstr "剖面隨機效果參數 (耗時)"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Fitted model"
-msgstr ""
+msgstr "適配模型"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Path to the fitted model"
-msgstr ""
+msgstr "適配模型的路徑"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Cohen's d"
-msgstr ""
+msgstr "Cohen's d 效果量"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Correlation"
-msgstr ""
+msgstr "相關係數"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size"
-msgstr ""
+msgstr "效果量"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "效果量標準誤"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "95% CI Lower and Upper Bound"
-msgstr ""
+msgstr "95% 信賴區間的下界與上界"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "N"
-msgstr ""
+msgstr "樣本數"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Study Labels"
-msgstr ""
+msgstr "研究標籤"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Models"
-msgstr ""
+msgstr "模型"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Expected effect size direction"
-msgstr ""
+msgstr "預期效果量方向"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Positive"
-msgstr ""
+msgstr "正向"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Negative"
-msgstr ""
+msgstr "負向"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Plot priors"
-msgstr ""
+msgstr "繪圖前"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect"
-msgstr ""
+msgstr "效果"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Heterogeneity"
-msgstr ""
+msgstr "異質性"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Weight function"
-msgstr ""
+msgstr "加權函數"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Set null priors"
-msgstr ""
+msgstr "設定虛無先驗"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Inference"
-msgstr ""
+msgstr "推論"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Conditional estimates"
-msgstr ""
+msgstr "有條件估計"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Models overview"
-msgstr ""
+msgstr "模型概述"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "BF"
-msgstr ""
+msgstr "BF"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Inclusion"
-msgstr ""
+msgstr "包含"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Order"
-msgstr ""
+msgstr "制定"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Posterior prob."
-msgstr ""
+msgstr "後驗機率."
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Individual models"
-msgstr ""
+msgstr "個體模型"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Single model"
-msgstr ""
+msgstr "單一模型"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "CI width"
-msgstr ""
+msgstr "信賴區間寬度"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Plots"
-msgstr ""
+msgstr "圖"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Pooled estimates"
-msgstr ""
+msgstr "綜合估計"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Forest plot"
-msgstr ""
+msgstr "森林圖"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Show"
-msgstr ""
+msgstr "展現"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Ascending"
-msgstr ""
+msgstr "上升的"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Descending"
-msgstr ""
+msgstr "下降的"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Row order"
-msgstr ""
+msgstr "行序"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Weights"
-msgstr ""
+msgstr "權重"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Rescale x-axis"
-msgstr ""
+msgstr "重新縮放x軸"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Type"
-msgstr ""
+msgstr "類型"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Model averaged"
-msgstr ""
+msgstr "模型平均"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Conditional"
-msgstr ""
+msgstr "有條件的"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Show priors"
-msgstr ""
+msgstr "顯示先前"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Model number"
-msgstr ""
+msgstr "模型號碼"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "MCMC Diagnostics"
-msgstr ""
+msgstr "馬可夫鏈蒙特卡羅診斷"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Overview"
-msgstr ""
+msgstr "概述"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Plot"
-msgstr ""
+msgstr "圖"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Trace"
-msgstr ""
+msgstr "痕跡"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Autocorrelation"
-msgstr ""
+msgstr "自相關"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Posterior samples densities"
-msgstr ""
+msgstr "事後樣本密度"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Advanced"
-msgstr ""
+msgstr "進階的"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "log(OR)"
-msgstr ""
+msgstr "對數"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Fisher's z"
-msgstr ""
+msgstr "費雪z檢定"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Estimation settings (MCMC)"
-msgstr ""
+msgstr "估計設定 (馬可夫鏈蒙特卡羅)"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Adaptation"
-msgstr ""
+msgstr "適應"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Burnin"
-msgstr ""
+msgstr "伯寧(Burnin)"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Iterations"
-msgstr ""
+msgstr "迭代"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Chains"
-msgstr ""
+msgstr "鏈"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Thin"
-msgstr ""
+msgstr "薄的"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Autofit"
-msgstr ""
+msgstr "自動調整"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Maximum fitting time"
-msgstr ""
+msgstr "最大適配時間"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "hours"
-msgstr ""
+msgstr "小時"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "minutes"
-msgstr ""
+msgstr "分鐘"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "seconds"
-msgstr ""
+msgstr "秒數"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Save the fitted model"
-msgstr ""
+msgstr "儲存最適模型"
 
 msgctxt "SelectionModels|"
 msgid "Effect sizes & SE"
-msgstr ""
+msgstr "效果量和標準誤"
 
 msgctxt "SelectionModels|"
 msgid "Correlations & N"
-msgstr ""
+msgstr "相關係數和樣本數"
 
 msgctxt "SelectionModels|"
 msgid "Correlation"
-msgstr ""
+msgstr "相關係數"
 
 msgctxt "SelectionModels|"
 msgid "Effect Size"
-msgstr ""
+msgstr "效果量"
 
 msgctxt "SelectionModels|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "效果量和標準誤"
 
 msgctxt "SelectionModels|"
 msgid "N"
-msgstr ""
+msgstr "樣本數"
 
 msgctxt "SelectionModels|"
 msgid "P-value (one-sided)"
-msgstr ""
+msgstr "p值 (單尾)"
 
 msgctxt "SelectionModels|"
 msgid "Model"
-msgstr ""
+msgstr "模型"
 
 msgctxt "SelectionModels|"
 msgid "P-value cutoffs"
-msgstr ""
+msgstr "p值切截點分數"
 
 msgctxt "SelectionModels|"
 msgid "Two-sided selection"
-msgstr ""
+msgstr "雙尾檢定選擇"
 
 msgctxt "SelectionModels|"
 msgid "P-value frequency"
-msgstr ""
+msgstr "p值頻率"
 
 msgctxt "SelectionModels|"
 msgid "Automatically join p-value intervals"
-msgstr ""
+msgstr "自動連結p值區間"
 
 msgctxt "SelectionModels|"
 msgid "Expected effect size direction"
-msgstr ""
+msgstr "期待效果量方向"
 
 msgctxt "SelectionModels|"
 msgid "Positive"
-msgstr ""
+msgstr "正向"
 
 msgctxt "SelectionModels|"
 msgid "Negative"
-msgstr ""
+msgstr "負向"
 
 msgctxt "SelectionModels|"
 msgid "Cohen's d"
-msgstr ""
+msgstr "Cohen's 效果量"
 
 msgctxt "SelectionModels|"
 msgid "Fisher's z"
-msgstr ""
+msgstr "費雪z檢定"
 
 msgctxt "SelectionModels|"
 msgid "Inference"
-msgstr ""
+msgstr "推論"
 
 msgctxt "SelectionModels|"
 msgid "Fixed Effects"
-msgstr ""
+msgstr "固定效果"
 
 msgctxt "SelectionModels|"
 msgid "Mean estimates"
-msgstr ""
+msgstr "平均數估計"
 
 msgctxt "SelectionModels|"
 msgid "Estimated weights"
-msgstr ""
+msgstr "估計權重"
 
 msgctxt "SelectionModels|"
 msgid "Random Effects"
-msgstr ""
+msgstr "隨機效果"
 
 msgctxt "SelectionModels|"
 msgid "Estimated heterogeneity"
-msgstr ""
+msgstr "估計異質性"
 
 msgctxt "SelectionModels|"
 msgid "Plots"
-msgstr ""
+msgstr "圖"
 
 msgctxt "SelectionModels|"
 msgid "Weight Function"
-msgstr ""
+msgstr "加權函數"
 
 msgctxt "SelectionModels|"
 msgid "Fixed effects"
-msgstr ""
+msgstr "固定效果"
 
 msgctxt "SelectionModels|"
 msgid "Random effects"
-msgstr ""
+msgstr "隨機效果"
 
 msgctxt "SelectionModels|"
 msgid "Rescale x-axis"
-msgstr ""
+msgstr "重新縮放x軸"
 
 msgctxt "SelectionModels|"
 msgid "Mean model estimates"
-msgstr ""
+msgstr "平均模型估計"
 
 msgctxt "Description|"
 msgid "Synthesize evidence across multiple studies"
-msgstr ""
+msgstr "彙整多項研究的證據"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Advanced"
-msgstr ""
+msgstr "進階的"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Prior model probability"
-msgstr ""
+msgstr "先驗模型機率"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Fixed effects"
-msgstr ""
+msgstr "固定效果"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Random effects"
-msgstr ""
+msgstr "隨機效果"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Estimation settings (MCMC)"
-msgstr ""
+msgstr "估計設定 (馬可夫鏈蒙特卡羅)"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "iterations:"
-msgstr ""
+msgstr "迭代:"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "chains:"
-msgstr ""
+msgstr "鏈:"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Bayes factor computation"
-msgstr ""
+msgstr "貝氏因子計算"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Integration"
-msgstr ""
+msgstr "積分"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Bridge sampling"
-msgstr ""
+msgstr "Bridge抽樣"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Inference"
-msgstr ""
+msgstr "推論"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model"
-msgstr ""
+msgstr "模型"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Fixed effects"
-msgstr ""
+msgstr "固定效果"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Random effects"
-msgstr ""
+msgstr "隨機效果"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model averaging"
-msgstr ""
+msgstr "模型平均"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Constrained random effects"
-msgstr ""
+msgstr "限制的隨機效果"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "All positive"
-msgstr ""
+msgstr "全部正向"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "All negative"
-msgstr ""
+msgstr "全部負向"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Table"
-msgstr ""
+msgstr "表"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model probabilities"
-msgstr ""
+msgstr "模型機率"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Effect sizes per study"
-msgstr ""
+msgstr "每個研究的效果量"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Plots"
-msgstr ""
+msgstr "圖"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Forest plot"
-msgstr ""
+msgstr "森林圖"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Observed"
-msgstr ""
+msgstr "觀察"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Estimated"
-msgstr ""
+msgstr "估計"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Both"
-msgstr ""
+msgstr "都"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Show labels"
-msgstr ""
+msgstr "顯示標籤"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Ordering"
-msgstr ""
+msgstr "訂製"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Year (ascending)"
-msgstr ""
+msgstr "年 (遞增)"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Year (descending)"
-msgstr ""
+msgstr "年 (遞減)"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Effect size (ascending)"
-msgstr ""
+msgstr "效果量 (遞增)"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Effect size (descending)"
-msgstr ""
+msgstr "效果量 (遞減)"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Order"
-msgstr ""
+msgstr "制訂"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Ascending"
-msgstr ""
+msgstr "上升的"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Descending"
-msgstr ""
+msgstr "下降的"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Row order"
-msgstr ""
+msgstr "行序"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Cumulative forest plot"
-msgstr ""
+msgstr "累積森林圖"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Prior and posterior"
-msgstr ""
+msgstr "先驗和後驗"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Additional info"
-msgstr ""
+msgstr "其他資訊"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Add fixed and random effects posterior"
-msgstr ""
+msgstr "增加固定和隨機效果後驗"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Shade 95% CI"
-msgstr ""
+msgstr "95%信賴區間陰影"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Sequential plot"
-msgstr ""
+msgstr "趨勢圖"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Bayes factors"
-msgstr ""
+msgstr "貝氏因子"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Posterior model probabilities"
-msgstr ""
+msgstr "後驗模型機率"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Priors"
-msgstr ""
+msgstr "先驗"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Effect size"
-msgstr ""
+msgstr "效果量"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Cauchy"
-msgstr ""
+msgstr "柯西"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "location:"
-msgstr ""
+msgstr "地點:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "scale:"
-msgstr ""
+msgstr "量表:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Normal"
-msgstr ""
+msgstr "常態"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "mean:"
-msgstr ""
+msgstr "平均數:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "std:"
-msgstr ""
+msgstr "標準差:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "t"
-msgstr ""
+msgstr "t值"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "df:"
-msgstr ""
+msgstr "自由度:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Truncation"
-msgstr ""
+msgstr "捨去"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Lower bound:"
-msgstr ""
+msgstr "下界:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Upper bound:"
-msgstr ""
+msgstr "上界:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Inverse gamma"
-msgstr ""
+msgstr "反伽瑪"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "shape:"
-msgstr ""
+msgstr "偏態:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Half t"
-msgstr ""
+msgstr "半數t檢驗"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Plot prior(s)"
-msgstr ""
+msgstr "先驗圖"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Diagnostics"
-msgstr ""
+msgstr "診斷指標"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Plots"
-msgstr ""
+msgstr "圖"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Trim-fill analysis"
-msgstr ""
+msgstr "修剪填補分析"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Profile plot"
-msgstr ""
+msgstr "剖面圖"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Diagnostic plots"
-msgstr ""
+msgstr "診斷圖"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Q-Q plot standardized residuals"
-msgstr ""
+msgstr "Q-Q標準化的殘差圖"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Robustness"
-msgstr ""
+msgstr "穩健性"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Fail-safe N"
-msgstr ""
+msgstr "成敗估計數"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Casewise diagnostics"
-msgstr ""
+msgstr "全部觀察值診斷"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Method"
-msgstr ""
+msgstr "方法"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Fixed Effects"
-msgstr ""
+msgstr "固定效果"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Maximum Likelihood"
-msgstr ""
+msgstr "最大概似法"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Restricted ML"
-msgstr ""
+msgstr "限制性最大似似法"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "DerSimonian-Laird"
-msgstr ""
+msgstr "DerSimonian-Laird法"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Hedges"
-msgstr ""
+msgstr "黑吉斯(Hedges)"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Hunter-Schmidt"
-msgstr ""
+msgstr "亨特(Hunter)-施密特(Schmidt)"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Sidik-Jonkman"
-msgstr ""
+msgstr "Sidik和Jonkman"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Empirical Bayes"
-msgstr ""
+msgstr "經驗貝氏"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Paule-Mandel"
-msgstr ""
+msgstr "Paule和Mandel"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Statistics"
-msgstr ""
+msgstr "統計數"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Regression Coefficients"
-msgstr ""
+msgstr "迴歸係數"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Estimates"
-msgstr ""
+msgstr "估計值"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Confidence intervals"
-msgstr ""
+msgstr "信賴區間"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Interval"
-msgstr ""
+msgstr "區間"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Test"
-msgstr ""
+msgstr "檢定"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Covariance matrix"
-msgstr ""
+msgstr "共變異數矩陣"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Model Fit"
-msgstr ""
+msgstr "模型適配"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Fit measures"
-msgstr ""
+msgstr "適配測量"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Forest plot"
-msgstr ""
+msgstr "森林圖"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Show labels"
-msgstr ""
+msgstr "顯示標籤"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Ordering"
-msgstr ""
+msgstr "訂製"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Year (ascending)"
-msgstr ""
+msgstr "年 (遞增)"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Year (descending)"
-msgstr ""
+msgstr "年 (遞減)"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Effect size (ascending)"
-msgstr ""
+msgstr "效果量 (遞增)"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Effect size (descending)"
-msgstr ""
+msgstr "效果量 (遞減)"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Funnel plot"
-msgstr ""
+msgstr "漏斗圖"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Rank test for funnel plot asymmetry"
-msgstr ""
+msgstr "漏斗圖對稱性的等級檢驗"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Regression test for funnel plot asymmetry"
-msgstr ""
+msgstr "迴歸分析檢驗漏斗圖不對稱性"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Residuals Model"
-msgstr ""
+msgstr "殘差模型"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Residuals parameters"
-msgstr ""
+msgstr "殘差參數"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Add prior"
-msgstr ""
+msgstr "增加先驗"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Heterogeneity (between-study SD)"
-msgstr ""
+msgstr "異質性(研究間的標準差)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Effect"
-msgstr ""
+msgstr "效果"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Effect (null)"
-msgstr ""
+msgstr "效果(null)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Heterogeneity"
-msgstr ""
+msgstr "異質性"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Heterogeneity (null)"
-msgstr ""
+msgstr "異質性(null)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Publication bias: PET"
-msgstr ""
+msgstr "出版偏誤:PET"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Publication bias: PET (null)"
-msgstr ""
+msgstr "出版偏誤:PET(null)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Publication bias: PEESE"
-msgstr ""
+msgstr "出版偏誤: PEESE"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Publication bias: PEESE (null)"
-msgstr ""
+msgstr "出版偏誤: PEESE (null)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Distribution"
-msgstr ""
+msgstr "分布"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Parameters"
-msgstr ""
+msgstr "參數"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Truncation"
-msgstr ""
+msgstr "捨去"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Prior weights"
-msgstr ""
+msgstr "先驗權重"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Normal(μ,σ)"
-msgstr ""
+msgstr "常態(平均數、變異數)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Student-t(μ,σ,v)"
-msgstr ""
+msgstr "學生-t檢定(母體平均數、母體標準差、母體變異數)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Cauchy(x₀,θ)"
-msgstr ""
+msgstr "柯西(x₀,θ)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Gamma(α,β)"
-msgstr ""
+msgstr "伽瑪(α,β)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Gamma(k,θ)"
-msgstr ""
+msgstr "伽瑪(k,θ)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Inverse-Gamma(α,β)"
-msgstr ""
+msgstr "反伽瑪(α,β)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Log-Normal(μ,σ)"
-msgstr ""
+msgstr "對數常態(μ,σ)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Beta(α,β)"
@@ -1096,91 +1102,91 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "None"
-msgstr ""
+msgstr "無"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "lower"
-msgstr ""
+msgstr "下介"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "upper"
-msgstr ""
+msgstr "上介"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Weight"
-msgstr ""
+msgstr "權重"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "Publication bias: selection models"
-msgstr ""
+msgstr "出版偏誤: 選擇模型"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "Publication bias: selection models (null)"
-msgstr ""
+msgstr "出版偏誤: 選擇模型(null)"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "Weight function"
-msgstr ""
+msgstr "加權函數"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "Cut-points"
-msgstr ""
+msgstr "切截點"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "Parameters"
-msgstr ""
+msgstr "參數"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "Prior weights"
-msgstr ""
+msgstr "先驗權重"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "Two-sided"
-msgstr ""
+msgstr "雙側"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "One-sided"
-msgstr ""
+msgstr "單側"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "Two-sided (fixed)"
-msgstr ""
+msgstr "雙側(固定)"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "One-sided (fixed)"
-msgstr ""
+msgstr "單側(固定)"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "None"
-msgstr ""
+msgstr "無"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "p-values"
-msgstr ""
+msgstr "p值"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "Weight"
-msgstr ""
+msgstr "權重"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Correlations"
-msgstr ""
+msgstr "相關"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Log odds ratios"
-msgstr ""
+msgstr "對數勝算比"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Unstandardized effect sizes"
-msgstr ""
+msgstr "未標準化效果量"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Log Odds Ratio"
-msgstr ""
+msgstr "對數勝算比"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Model type"
-msgstr ""
+msgstr "模型類型"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "RoBMA-PSMA"
@@ -1212,7 +1218,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Bayes factor"
-msgstr ""
+msgstr "貝氏因子"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Output scale"
@@ -1232,15 +1238,15 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Estimate"
-msgstr ""
+msgstr "估計值"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Bayesian updating"
-msgstr ""
+msgstr "貝氏更新"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Posterior estimates"
-msgstr ""
+msgstr "後驗估計"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "PET"
@@ -1256,7 +1262,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "R-hat"
-msgstr ""
+msgstr "R-hat 向量"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effective sample size"
@@ -1284,11 +1290,11 @@ msgstr ""
 
 msgctxt "Description|"
 msgid "Classical"
-msgstr ""
+msgstr "古典"
 
 msgctxt "Description|"
 msgid "Bayesian"
-msgstr ""
+msgstr "貝氏"
 
 msgctxt "Description|"
 msgid "Prediction Model Performance"
@@ -1312,11 +1318,11 @@ msgstr ""
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "MCMC Diagnostics"
-msgstr ""
+msgstr "馬可夫鏈蒙特卡羅診斷"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Plots"
-msgstr ""
+msgstr "圖"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Running means"
@@ -1324,7 +1330,7 @@ msgstr ""
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Autocorrelation"
-msgstr ""
+msgstr "自相關"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Gelman Rubin"
@@ -1360,11 +1366,11 @@ msgstr ""
 
 msgctxt "PetPeese|"
 msgid "Correlation"
-msgstr ""
+msgstr "相關係數"
 
 msgctxt "PetPeese|"
 msgid "Effect Size"
-msgstr ""
+msgstr "效果量"
 
 msgctxt "PetPeese|"
 msgid "Effect Size Standard Error"
@@ -1380,7 +1386,7 @@ msgstr ""
 
 msgctxt "PetPeese|"
 msgid "Cohen's d"
-msgstr ""
+msgstr "Cohen's d 效果量"
 
 msgctxt "PetPeese|"
 msgid "Inference"
@@ -1644,7 +1650,7 @@ msgstr ""
 
 msgctxt "WaapWls|"
 msgid "Correlation"
-msgstr ""
+msgstr "相關係數"
 
 msgctxt "WaapWls|"
 msgid "Effect Size"
@@ -1660,11 +1666,11 @@ msgstr ""
 
 msgctxt "WaapWls|"
 msgid "Fisher's z"
-msgstr ""
+msgstr "費雪z檢定"
 
 msgctxt "WaapWls|"
 msgid "Cohen's d"
-msgstr ""
+msgstr "Cohen's d 效果量"
 
 msgctxt "WaapWls|"
 msgid "Inference"
@@ -1696,4 +1702,4 @@ msgstr ""
 
 msgctxt "WaapWls|"
 msgid "Transform correlations to"
-msgstr ""
+msgstr "將相關係數轉換成"
