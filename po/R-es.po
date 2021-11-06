@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2021-10-30 02:39\n"
-"PO-Revision-Date: 2021-10-29 15:08+0000\n"
+"PO-Revision-Date: 2021-10-30 20:58+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
@@ -344,28 +344,29 @@ msgid "Standard Error"
 msgstr "Error Estándar"
 
 msgid "z"
-msgstr ""
+msgstr "z"
 
 msgid "Wald test."
-msgstr ""
+msgstr "Contraste de Wald."
 
 msgid "Wald tests."
-msgstr ""
+msgstr "Contrastes de Wald."
 
 msgid "Fit measures"
-msgstr ""
+msgstr "Medidas de ajuste"
 
 msgid "Residual Heterogeneity Estimates"
-msgstr ""
+msgstr "Estimaciones de la Heterogeneidad de los Residuos"
 
 msgid "Parameter Covariances"
-msgstr ""
+msgstr "Covarianzas de los Parámetros"
 
 msgid "Rank correlation test for Funnel plot asymmetry"
 msgstr ""
+"Contraste de correlación de rangos para la asimetría con gráfico en embudo"
 
 msgid "Kendall's %s"
-msgstr ""
+msgstr "%s de Kendall"
 
 msgid "Regression test for Funnel plot asymmetry (\"Egger's test\")"
 msgstr ""
