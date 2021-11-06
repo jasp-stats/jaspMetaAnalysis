@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-10-30 02:39\n"
+"POT-Creation-Date: 2021-11-06 02:39\n"
 "PO-Revision-Date: 2021-10-30 19:47+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
@@ -817,8 +817,9 @@ msgstr ""
 "A análise estimará modelos meta-analíticos múltiples utilizando MCMC e "
 "podería requirir un tempo longo para completarse."
 
-msgid "Models Overview"
-msgstr "Revisión dos Modelos"
+#, fuzzy
+msgid "Model Specification Preview"
+msgstr "Vista Previa do Modelo"
 
 msgid "Prior Distribution"
 msgstr "Distribución Previa"
@@ -828,6 +829,21 @@ msgstr "O obxecto cargado non é un modelo RoBMA."
 
 msgid "Summary"
 msgstr "Resumo"
+
+msgid "Conditional Estimates"
+msgstr "Estimacións Condicionadas"
+
+#, fuzzy
+msgid "Inclusion BF"
+msgstr "Inclusión"
+
+#, fuzzy
+msgid "Exclusion BF"
+msgstr "Exclusión"
+
+#, fuzzy
+msgid "log(Inclusion BF)"
+msgstr "Inclusión"
 
 msgid "P(M|data)"
 msgstr "P(M|datos)"
@@ -844,26 +860,14 @@ msgstr "Ponderacións Medias do Modelo (%s)"
 msgid "Model Averaged PET-PEESE Estimates"
 msgstr "Estimacións Medias do Modelo PET-PEESE"
 
-msgid "Conditional Estimates"
-msgstr "Estimacións Condicionadas"
-
 msgid "Conditional Weights (%s)"
 msgstr "Ponderacións Condicionadas (%s)"
 
 msgid "Conditional PET-PEESE Estimates"
 msgstr "Estimacións Condicionadas PET-PEESE"
 
-msgid "Exclusion"
-msgstr "Exclusión"
-
-msgid "Inclusion"
-msgstr "Inclusión"
-
-msgid "log(BF)"
-msgstr "log(FB)"
-
-msgid "BF"
-msgstr "FB"
+msgid "Models Overview"
+msgstr "Revisión dos Modelos"
 
 msgid "BF%s"
 msgstr "FB%s"
@@ -877,11 +881,9 @@ msgstr "log(VerMarx)"
 msgid "Individual Models Summary"
 msgstr "Resumo de Modelos Individuais"
 
-msgid "Model %i"
+#, fuzzy
+msgid "Model #"
 msgstr "Modelo %i"
-
-msgid "Model %i does not exist. Select one of the models between 1 and %i."
-msgstr "O modelo %i non existe. Escolle un dos modelos entre 1 e %i."
 
 msgid "Priors"
 msgstr "Previos"
@@ -891,6 +893,12 @@ msgstr "Información"
 
 msgid "Model Estimates"
 msgstr "Estimacións do Modelo"
+
+msgid "Model %i"
+msgstr "Modelo %i"
+
+msgid "Model %i does not exist. Select one of the models between 1 and %i."
+msgstr "O modelo %i non existe. Escolle un dos modelos entre 1 e %i."
 
 msgid "Estimated Weights (%s)"
 msgstr "Ponderacións Estimadas (%s)"
@@ -1183,8 +1191,8 @@ msgid ""
 "WAAP was not estimated: There were only %1$i adequately powered studies "
 "(power > 80%%)."
 msgstr ""
-"Non se estimou o WAAP: Só había %1$i estudos promovidos axeitadamente ("
-"potencia > 80%%)."
+"Non se estimou o WAAP: Só había %1$i estudos promovidos axeitadamente "
+"(potencia > 80%%)."
 
 msgid "There were %1$i adequately powered studies (power > 80%%)."
 msgstr "Só había %1$i estudos promovidos axeitadamente (potencia > 80%%)."
@@ -1193,6 +1201,12 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "a observación %i eliminouse debido a valores ausentes."
 msgstr[1] "as observacións %i elimináronse debido a valores ausentes."
+
+#~ msgid "log(BF)"
+#~ msgstr "log(FB)"
+
+#~ msgid "BF"
+#~ msgstr "FB"
 
 #~ msgid "Observed Outcome"
 #~ msgstr "Resultado Observado"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
-"POT-Creation-Date: 2021-10-30 02:39\n"
+"POT-Creation-Date: 2021-11-06 02:39\n"
 "PO-Revision-Date: 2021-09-24 01:33+0000\n"
 "Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -785,8 +785,9 @@ msgstr ""
 "この解析では、MCMCを用いて複数のメタ解析モデルを推定するため、完了までに長時"
 "間を要する可能性があります."
 
-msgid "Models Overview"
-msgstr "モデルの概要"
+#, fuzzy
+msgid "Model Specification Preview"
+msgstr "モデルプレビュー"
 
 msgid "Prior Distribution"
 msgstr "事前分布"
@@ -796,6 +797,21 @@ msgstr "読み込まれたオブジェクトは、RoBMAモデルではありま�
 
 msgid "Summary"
 msgstr "要約"
+
+msgid "Conditional Estimates"
+msgstr "条件付き推定値"
+
+#, fuzzy
+msgid "Inclusion BF"
+msgstr "包含"
+
+#, fuzzy
+msgid "Exclusion BF"
+msgstr "除外"
+
+#, fuzzy
+msgid "log(Inclusion BF)"
+msgstr "包含"
 
 msgid "P(M|data)"
 msgstr "P(M|データ)"
@@ -812,26 +828,14 @@ msgstr "モデルアベレージウエイト(%s)"
 msgid "Model Averaged PET-PEESE Estimates"
 msgstr "モデルアベレージ PET-PEESE 推定値"
 
-msgid "Conditional Estimates"
-msgstr "条件付き推定値"
-
 msgid "Conditional Weights (%s)"
 msgstr "条件付きウェイト (%s)"
 
 msgid "Conditional PET-PEESE Estimates"
 msgstr "条件付き PET-PEESE 推定値"
 
-msgid "Exclusion"
-msgstr "除外"
-
-msgid "Inclusion"
-msgstr "包含"
-
-msgid "log(BF)"
-msgstr "log(BF)"
-
-msgid "BF"
-msgstr "BF"
+msgid "Models Overview"
+msgstr "モデルの概要"
 
 msgid "BF%s"
 msgstr "BF%s"
@@ -845,12 +849,9 @@ msgstr "log(MargLik)"
 msgid "Individual Models Summary"
 msgstr "個別モデルの要約"
 
-msgid "Model %i"
+#, fuzzy
+msgid "Model #"
 msgstr "モデル %i"
-
-msgid "Model %i does not exist. Select one of the models between 1 and %i."
-msgstr ""
-"モデル %i は存在しません。1 ~ %i の間のモデルのうち一つを選択してください."
 
 msgid "Priors"
 msgstr "事前"
@@ -860,6 +861,13 @@ msgstr "情報"
 
 msgid "Model Estimates"
 msgstr "モデル推定値"
+
+msgid "Model %i"
+msgstr "モデル %i"
+
+msgid "Model %i does not exist. Select one of the models between 1 and %i."
+msgstr ""
+"モデル %i は存在しません。1 ~ %i の間のモデルのうち一つを選択してください."
 
 msgid "Estimated Weights (%s)"
 msgstr "推定ウェイト(%s)"
@@ -1152,6 +1160,12 @@ msgstr ""
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "%i の観測値が欠損しているため削除されました。"
+
+#~ msgid "log(BF)"
+#~ msgstr "log(BF)"
+
+#~ msgid "BF"
+#~ msgstr "BF"
 
 #~ msgid "Observed Outcome"
 #~ msgstr "観察されたアウトカム"

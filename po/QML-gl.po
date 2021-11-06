@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-10-30 19:46+0000\n"
-"Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
-"Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
-"jaspmetaanalysis-qml/gl/>\n"
-"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Language: gl_ES\n"
 "X-Source-Language: C\n"
 "X-Qt-Contexts: true\n"
@@ -95,10 +89,6 @@ msgid "Show priors"
 msgstr "Amosar os previos"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Plot priors"
-msgstr "Representar os previos"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Adaptation"
 msgstr "Adaptación"
 
@@ -141,10 +131,6 @@ msgstr "Erro Padrón da Magnitude do Efecto"
 msgctxt "SelectionModels|"
 msgid "Rescale x-axis"
 msgstr "Volver escalar o eixe x"
-
-msgctxt "SelectionModels|"
-msgid "Expected effect size direction"
-msgstr "Dirección da magnitude do efecto agardada"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "95% CI Lower and Upper Bound"
@@ -859,14 +845,6 @@ msgid "Study Labels"
 msgstr "Etiquetas dos Estudos"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Models"
-msgstr "Modelos"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Expected effect size direction"
-msgstr "Dirección da magnitude do efecto agardada"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Positive"
 msgstr "Positivo"
 
@@ -1187,20 +1165,12 @@ msgid "Log Odds Ratio"
 msgstr "Logaritmo da Razón de Probabilidades"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Model type"
-msgstr "Tipo de modelo"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "RoBMA-PSMA"
 msgstr "RoBMA-PSMA"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "RoBMA-PP"
 msgstr "RoBMA-PP"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "RoBMA-old"
-msgstr "RoBMA-anterior"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Custom"
@@ -1705,3 +1675,31 @@ msgstr "Transformar as correlacións a"
 msgctxt "WaapWls|"
 msgid "Transform correlations to"
 msgstr "Transformar as correlacións a"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Input type"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Expected direction of effect sizes"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Model ensemble"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "RoBMA-original"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Plot prior distributions"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Models (Custom Ensemble Only)"
+msgstr ""
+
+msgctxt "SelectionModels|"
+msgid "Expected direction of effect sizes"
+msgstr ""

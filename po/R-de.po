@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-10-30 02:39\n"
+"POT-Creation-Date: 2021-11-06 02:39\n"
 "PO-Revision-Date: 2021-10-30 19:47+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
@@ -805,8 +805,9 @@ msgstr ""
 "Die Analyse wird mehrere meta-analytische Modelle mithilfe von MCMC schätzen "
 "und könnte eine längere Zeit benötigen."
 
-msgid "Models Overview"
-msgstr "Modell-Überblick"
+#, fuzzy
+msgid "Model Specification Preview"
+msgstr "Modell-Vorschau"
 
 msgid "Prior Distribution"
 msgstr "Prior-Verteilung"
@@ -816,6 +817,21 @@ msgstr "Das geladene Objekt ist kein RoBMA-Modell."
 
 msgid "Summary"
 msgstr "Zusammenfassung"
+
+msgid "Conditional Estimates"
+msgstr "Konditionale Schätzungen"
+
+#, fuzzy
+msgid "Inclusion BF"
+msgstr "Inklusion"
+
+#, fuzzy
+msgid "Exclusion BF"
+msgstr "Exklusion"
+
+#, fuzzy
+msgid "log(Inclusion BF)"
+msgstr "Inklusion"
 
 msgid "P(M|data)"
 msgstr "P(M|Daten)"
@@ -832,26 +848,14 @@ msgstr "Modell-gemittelte Gewichte (%s)"
 msgid "Model Averaged PET-PEESE Estimates"
 msgstr "Modellgemittelte PET-PEESE-Schätzungen"
 
-msgid "Conditional Estimates"
-msgstr "Konditionale Schätzungen"
-
 msgid "Conditional Weights (%s)"
 msgstr "Bedingte Gewichtungen (%s)"
 
 msgid "Conditional PET-PEESE Estimates"
 msgstr "Konditionale PET-PEESE-Schätzungen"
 
-msgid "Exclusion"
-msgstr "Exklusion"
-
-msgid "Inclusion"
-msgstr "Inklusion"
-
-msgid "log(BF)"
-msgstr "Log(BF)"
-
-msgid "BF"
-msgstr "BF"
+msgid "Models Overview"
+msgstr "Modell-Überblick"
 
 msgid "BF%s"
 msgstr "BF%s"
@@ -865,11 +869,9 @@ msgstr "log(MargLik)"
 msgid "Individual Models Summary"
 msgstr "Zusammenfassung einzelner Modelle"
 
-msgid "Model %i"
+#, fuzzy
+msgid "Model #"
 msgstr "Modell %i"
-
-msgid "Model %i does not exist. Select one of the models between 1 and %i."
-msgstr "Modell %i existiert nicht. Wähle eins der Modelle zwischen 1 und %i."
 
 msgid "Priors"
 msgstr "Prior"
@@ -879,6 +881,12 @@ msgstr "Information"
 
 msgid "Model Estimates"
 msgstr "Modell-Schätzungen"
+
+msgid "Model %i"
+msgstr "Modell %i"
+
+msgid "Model %i does not exist. Select one of the models between 1 and %i."
+msgstr "Modell %i existiert nicht. Wähle eins der Modelle zwischen 1 und %i."
 
 msgid "Estimated Weights (%s)"
 msgstr "Geschätzte Gewichte (%s)"
@@ -1179,6 +1187,12 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "%i Beobachtung wurde aufgrund fehlender Werte entfernt."
 msgstr[1] "%i Beobachtungen wurden aufgrund fehlender Werte entfernt."
+
+#~ msgid "log(BF)"
+#~ msgstr "Log(BF)"
+
+#~ msgid "BF"
+#~ msgstr "BF"
 
 #~ msgid "Observed Outcome"
 #~ msgstr "Beobachtetes Ergebnis"

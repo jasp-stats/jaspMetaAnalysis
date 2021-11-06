@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-10-30 02:39\n"
+"POT-Creation-Date: 2021-11-06 02:39\n"
 "PO-Revision-Date: 2021-10-30 02:37+0000\n"
 "Last-Translator: Johnny van Doorn <johnnydoorn@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
@@ -807,8 +807,9 @@ msgstr ""
 "De analyse zal meerdere meta-analytische modellen schatten met behulp van "
 "MCMC en kan een langere tijd nodig hebben om te voltooien."
 
-msgid "Models Overview"
-msgstr "Model Overzicht"
+#, fuzzy
+msgid "Model Specification Preview"
+msgstr "Model Voorvertoning"
 
 msgid "Prior Distribution"
 msgstr "Posterior Verdeling"
@@ -818,6 +819,21 @@ msgstr "Het ingeladen object is geen RoBMA model."
 
 msgid "Summary"
 msgstr "Samenvatting"
+
+msgid "Conditional Estimates"
+msgstr "Geconditioneerde Schattingen"
+
+#, fuzzy
+msgid "Inclusion BF"
+msgstr "Inclusie"
+
+#, fuzzy
+msgid "Exclusion BF"
+msgstr "Uitsluiting"
+
+#, fuzzy
+msgid "log(Inclusion BF)"
+msgstr "Inclusie"
 
 msgid "P(M|data)"
 msgstr "P(M|data)"
@@ -834,26 +850,14 @@ msgstr "Model Gemiddelde Gewichten (%s)"
 msgid "Model Averaged PET-PEESE Estimates"
 msgstr "Model Gemiddelde PET-PEESE-Schattingen"
 
-msgid "Conditional Estimates"
-msgstr "Geconditioneerde Schattingen"
-
 msgid "Conditional Weights (%s)"
 msgstr "Geconditioneerde Gewichten (%s)"
 
 msgid "Conditional PET-PEESE Estimates"
 msgstr "Conditionele PET-PEESE Schattingen"
 
-msgid "Exclusion"
-msgstr "Uitsluiting"
-
-msgid "Inclusion"
-msgstr "Inclusie"
-
-msgid "log(BF)"
-msgstr "log(BF)"
-
-msgid "BF"
-msgstr "BF"
+msgid "Models Overview"
+msgstr "Model Overzicht"
 
 msgid "BF%s"
 msgstr "BF%s"
@@ -867,11 +871,9 @@ msgstr "log(MargWaarschijn)"
 msgid "Individual Models Summary"
 msgstr "Individuele Model Samenvatting"
 
-msgid "Model %i"
+#, fuzzy
+msgid "Model #"
 msgstr "Model %i"
-
-msgid "Model %i does not exist. Select one of the models between 1 and %i."
-msgstr "Model %i bestaat niet. Selecteer een model tussen 1 en %i."
 
 msgid "Priors"
 msgstr "Priors"
@@ -881,6 +883,12 @@ msgstr "Informatie"
 
 msgid "Model Estimates"
 msgstr "Model Schattingen"
+
+msgid "Model %i"
+msgstr "Model %i"
+
+msgid "Model %i does not exist. Select one of the models between 1 and %i."
+msgstr "Model %i bestaat niet. Selecteer een model tussen 1 en %i."
 
 msgid "Estimated Weights (%s)"
 msgstr "Geschatte Gewichten (%s)"
@@ -1185,6 +1193,12 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "%i observatie is verwijderd, omdat de waarde ontbreekt."
 msgstr[1] "%i observaties zijn verwijderd omdat de waarden ontbreken."
+
+#~ msgid "log(BF)"
+#~ msgstr "log(BF)"
+
+#~ msgid "BF"
+#~ msgstr "BF"
 
 #~ msgid "Observed Outcome"
 #~ msgstr "Geobserveerde Uitkomst"

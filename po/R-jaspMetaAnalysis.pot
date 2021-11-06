@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.15\n"
-"POT-Creation-Date: 2021-10-30 02:39\n"
+"POT-Creation-Date: 2021-11-06 02:39\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -703,7 +703,7 @@ msgstr ""
 msgid "The analysis will estimate multiple meta-analytic models using MCMC and might require a prolonged time to complete."
 msgstr ""
 
-msgid "Models Overview"
+msgid "Model Specification Preview"
 msgstr ""
 
 msgid "Prior Distribution"
@@ -713,6 +713,18 @@ msgid "The loaded object is not a RoBMA model."
 msgstr ""
 
 msgid "Summary"
+msgstr ""
+
+msgid "Conditional Estimates"
+msgstr ""
+
+msgid "Inclusion BF"
+msgstr ""
+
+msgid "Exclusion BF"
+msgstr ""
+
+msgid "log(Inclusion BF)"
 msgstr ""
 
 msgid "P(M|data)"
@@ -730,25 +742,13 @@ msgstr ""
 msgid "Model Averaged PET-PEESE Estimates"
 msgstr ""
 
-msgid "Conditional Estimates"
-msgstr ""
-
 msgid "Conditional Weights (%s)"
 msgstr ""
 
 msgid "Conditional PET-PEESE Estimates"
 msgstr ""
 
-msgid "Exclusion"
-msgstr ""
-
-msgid "Inclusion"
-msgstr ""
-
-msgid "log(BF)"
-msgstr ""
-
-msgid "BF"
+msgid "Models Overview"
 msgstr ""
 
 msgid "BF%s"
@@ -763,10 +763,7 @@ msgstr ""
 msgid "Individual Models Summary"
 msgstr ""
 
-msgid "Model %i"
-msgstr ""
-
-msgid "Model %i does not exist. Select one of the models between 1 and %i."
+msgid "Model #"
 msgstr ""
 
 msgid "Priors"
@@ -776,6 +773,12 @@ msgid "Information"
 msgstr ""
 
 msgid "Model Estimates"
+msgstr ""
+
+msgid "Model %i"
+msgstr ""
+
+msgid "Model %i does not exist. Select one of the models between 1 and %i."
 msgstr ""
 
 msgid "Estimated Weights (%s)"

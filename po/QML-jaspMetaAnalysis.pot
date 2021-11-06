@@ -258,23 +258,11 @@ msgid "Study Labels"
 msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Models"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Expected effect size direction"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Positive"
 msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Negative"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Plot priors"
 msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
@@ -519,10 +507,6 @@ msgstr ""
 
 msgctxt "SelectionModels|"
 msgid "Automatically join p-value intervals"
-msgstr ""
-
-msgctxt "SelectionModels|"
-msgid "Expected effect size direction"
 msgstr ""
 
 msgctxt "SelectionModels|"
@@ -1178,19 +1162,11 @@ msgid "Log Odds Ratio"
 msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Model type"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "RoBMA-PSMA"
 msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "RoBMA-PP"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "RoBMA-old"
 msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
@@ -1695,4 +1671,32 @@ msgstr ""
 
 msgctxt "WaapWls|"
 msgid "Transform correlations to"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Input type"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Expected direction of effect sizes"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Model ensemble"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "RoBMA-original"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Plot prior distributions"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Models (Custom Ensemble Only)"
+msgstr ""
+
+msgctxt "SelectionModels|"
+msgid "Expected direction of effect sizes"
 msgstr ""
