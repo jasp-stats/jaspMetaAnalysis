@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
 "POT-Creation-Date: 2021-11-06 02:39\n"
-"PO-Revision-Date: 2021-09-24 01:33+0000\n"
+"PO-Revision-Date: 2021-11-08 13:05+0000\n"
 "Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/ja/>\n"
@@ -97,20 +97,24 @@ msgid ""
 "present. The Bayes factor is based on all four models: fixed effects H%2$s & "
 "random effects H%2$s over the fixed effects H%1$s & random effects H%1$s."
 msgstr ""
+"事後推定値は、効果が存在すると仮定したモデルに基づいています。ベイズファクターは4つのモデルすべてに基づいています: 固定効果 H%2$s & "
+"ランダム効果 H%2$s よりも固定効果 H%1$s & ランダム効果 H%1$s."
 
 msgid ""
 "Model averaged posterior estimates for %3$s are not yet available, but will "
 "be added in the future. The Bayes factor is based on all four models: random "
 "effects H%1$s & H%2$s over the fixed effects H%1$s & H%2$s."
 msgstr ""
+"3$s におけるモデル平均事後推定値はまだありませんが、今後追加される予定です。ベイズファクターは、4つのモデルすべてに基づいています: 固定効果H%1$"
+"s & H%2$sよりも変量効果H%1$s & H%2$s."
 
 msgid ""
 "Bayes factor of the (unconstrained/constrained) random effects H%1$s over "
 "the fixed effects H%1$s."
-msgstr ""
+msgstr "固定効果 H%1$s に対する (制約なし/制約あり) 変量効果 H%1$s のベイズファクター."
 
 msgid "Bayes factor of the fixed effects H%1$s over the random effects H%1$s."
-msgstr ""
+msgstr "変量効果 H%1$s に対する (制約なし/制約あり) 固定効果 H%1$s のベイズファクター."
 
 msgid ""
 "Model averaged posterior estimates are based on the models that assume an "
@@ -118,29 +122,37 @@ msgid ""
 "effects H%1$s & random effects H%1$s over the fixed effects H%2$s & random "
 "effects H%2$s."
 msgstr ""
+"モデル平均事後推定値は効果が存在すると仮定したモデルに基づいています。ベイズファクターは、4つのモデルすべてに基づいています: 固定効果H%2$s & "
+"変量効果H%2$s よりも固定効果H%1$s & 変量効果 H%2$s."
 
 msgid ""
 "Model averaged posterior estimates for %3$s are not yet available, but will "
 "be added in the future. The Bayes factor is based on all four models: fixed "
 "effects H%1$s & H%2$s over the random effects H%1$s & H%2$s."
 msgstr ""
+"3$s におけるモデル平均事後推定値はまだありませんが、今後追加される予定です。ベイズファクターは、4つのモデルすべてに基づいています: 変量効果H%1$"
+"s & H%2$sよりも固定効果H%1$s & H%2$s."
 
 msgid ""
 "Bayes factor of the fixed effects H%1$s over the (unconstrained/constrained) "
 "random effects H%1$s."
-msgstr ""
+msgstr "（制約なし/制約付き）変量効果H%1$sに対する固定効果H%1$sのベイズファクター."
 
 msgid ""
 "Bayes factor of the ordered effects H%1$s over the fixed effects H%2$s. The "
 "Bayes factor for the ordered effects H%1$s versus the unconstrained (random) "
 "effects H%1$s model is %3$.3f."
 msgstr ""
+"固定効果 H%2$s に対する順序効果 H%1$s のベイズファクター. 制約のない(変量)効果 H%1$s モデルに対する順序効果 H%1$s "
+"のベイズファクターは %3$.3f."
 
 msgid ""
 "Bayes factor of the fixed effects H%2$s over the ordered effects H%1$s. The "
 "Bayes factor for the unconstrained (random) effects H%1$s versus the ordered "
 "effects H%1$s model is %3$.3f."
 msgstr ""
+"順序効果 H%1$s に対する固定効果 H%2$s のベイズファクター. 順序効果 H%1$s モデルに対する制約のない(変量)効果 H%1$s "
+"のベイズファクターは %3$.3f."
 
 msgid "Model Probabilities"
 msgstr "モデルの確率"
@@ -293,34 +305,34 @@ msgid "Value"
 msgstr "値"
 
 msgid "Running means plot"
-msgstr ""
+msgstr "移動平均プロット"
 
 #, fuzzy
 msgid "Iteration"
 msgstr "情報"
 
 msgid "Running mean"
-msgstr ""
+msgstr "移動平均"
 
 #, fuzzy
 msgid "Autocorrelations plot"
 msgstr "平均自己相関"
 
 msgid "Lag"
-msgstr ""
+msgstr "ラグ"
 
 #, fuzzy
 msgid "Autocorrelation"
 msgstr "平均自己相関"
 
 msgid "Gelman-Rubin plot"
-msgstr ""
+msgstr "Gelman-Rubinプロット"
 
 msgid "Last iteration in chain"
-msgstr ""
+msgstr "チェーンの最後のiteration"
 
 msgid "Shrink factor"
-msgstr ""
+msgstr "Shrink factor"
 
 msgid "The metafor package crashed with the following error: %s"
 msgstr "metaforパッケージが次のエラーでクラッシュしました: %s"
@@ -594,7 +606,7 @@ msgid "metamisc package failed with the following error: '%s'"
 msgstr "metaforパッケージが次のエラーでクラッシュしました: %s"
 
 msgid "Based on %i studies."
-msgstr ""
+msgstr "%i の研究に基づいています."
 
 #, fuzzy
 msgid "The model was estimated using %1$s method with %2$s link function."
@@ -608,58 +620,56 @@ msgid "Forest plot"
 msgstr "フォレストプロット"
 
 msgid "Observed-Expected Ratio"
-msgstr ""
+msgstr "観測-期待比"
 
 msgid "Concordance Statistic"
 msgstr ""
 
 msgid "The number of observed events must be specified."
-msgstr ""
+msgstr "観察されたイベントの数を指定する必要があります."
 
 msgid "Funnel Plot Asymmetry Tests"
-msgstr ""
+msgstr "ファンネルプロットの非対称性検定"
 
 msgid "Method"
-msgstr ""
+msgstr "方法"
 
 msgid "t-statistic"
-msgstr ""
+msgstr "t統計量"
 
 #, fuzzy
 msgid "The %1$s test failed with the following error: %2$s"
 msgstr "metaforパッケージが次のエラーでクラッシュしました: %s"
 
 msgid "Funnel Plot Asymmetry Plots"
-msgstr ""
+msgstr "ファンネルプロット非対称プロット"
 
 msgid "Egger (unweighted)"
-msgstr ""
+msgstr "Egger (重みなし)"
 
 msgid "Egger (multiplicative overdispersion)"
 msgstr ""
 
 msgid "Macaskill"
-msgstr ""
+msgstr "マカスキル(Macaskill)"
 
 msgid "Macaskill (pooled)"
-msgstr ""
+msgstr "マカスキル (Macaskill; プールされた)"
 
 msgid "Peters"
-msgstr ""
+msgstr "ピーターズ(Peters)"
 
 msgid "Debray"
-msgstr ""
+msgstr "デブレイ(Debray)"
 
-#, fuzzy
 msgid "Standard error"
 msgstr "標準誤差"
 
-#, fuzzy
 msgid "Sample size"
-msgstr "サンプル分位数"
+msgstr "サンプルサイズ"
 
 msgid "Total events"
-msgstr ""
+msgstr "イベントの合計数"
 
 msgid ""
 "Currently this only works with rma and rma.mv objects that have specified "
