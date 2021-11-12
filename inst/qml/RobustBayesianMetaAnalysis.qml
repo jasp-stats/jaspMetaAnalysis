@@ -102,7 +102,7 @@ Form
 		AssignedVariablesList
 		{
 			id: 			inputN
-			enabled: 		inputSE.count == 0 && inputCI.count == 0 && inputN.count == 0
+			enabled: 		inputSE.count == 0 && inputCI.count == 0
 			name: 			"inputN"
 			title: 			qsTr("N")
 			singleVariable: true
