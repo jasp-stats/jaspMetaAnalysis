@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-11-06 02:39\n"
-"PO-Revision-Date: 2021-10-30 19:47+0000\n"
+"PO-Revision-Date: 2021-11-07 16:52+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/de/>\n"
@@ -805,9 +805,8 @@ msgstr ""
 "Die Analyse wird mehrere meta-analytische Modelle mithilfe von MCMC schätzen "
 "und könnte eine längere Zeit benötigen."
 
-#, fuzzy
 msgid "Model Specification Preview"
-msgstr "Modell-Vorschau"
+msgstr "Vorschau der Modellspezifikation"
 
 msgid "Prior Distribution"
 msgstr "Prior-Verteilung"
@@ -821,17 +820,14 @@ msgstr "Zusammenfassung"
 msgid "Conditional Estimates"
 msgstr "Konditionale Schätzungen"
 
-#, fuzzy
 msgid "Inclusion BF"
-msgstr "Inklusion"
+msgstr "Inklusion BF"
 
-#, fuzzy
 msgid "Exclusion BF"
-msgstr "Exklusion"
+msgstr "Exklusion BF"
 
-#, fuzzy
 msgid "log(Inclusion BF)"
-msgstr "Inklusion"
+msgstr "log(Inklusion BF)"
 
 msgid "P(M|data)"
 msgstr "P(M|Daten)"
@@ -869,9 +865,8 @@ msgstr "log(MargLik)"
 msgid "Individual Models Summary"
 msgstr "Zusammenfassung einzelner Modelle"
 
-#, fuzzy
 msgid "Model #"
-msgstr "Modell %i"
+msgstr "Modell #"
 
 msgid "Priors"
 msgstr "Prior"
@@ -1181,7 +1176,7 @@ msgstr ""
 "Teststärke (Teststärke > 80%%)."
 
 msgid "There were %1$i adequately powered studies (power > 80%%)."
-msgstr "Es gab %1$i Studien mit angemessener Teststärke (Teststärke > 80%%)."
+msgstr "Es gab %1$i angemessen gepowerte Studien (Teststärke > 80%%)."
 
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
