@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2021-11-21 19:40+0000\n"
+"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.10-dev\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -30,11 +36,11 @@ msgstr "Robuste Bayessche Meta-Analyse"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Effect Size"
-msgstr "Effektgröße"
+msgstr "Effektstärke"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr "Effektgröße des Standardfehlers"
+msgstr "Effektstärke Standardfehler"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "95% CI Lower and Upper Bound"
@@ -46,11 +52,11 @@ msgstr "Studiennamen"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Effect Size"
-msgstr "Effektgröße"
+msgstr "Effektstärke"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr "Effektgröße Standardfehler"
+msgstr "Effektstärke Standardfehler"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Study Labels"
@@ -82,11 +88,11 @@ msgstr "Konstante einbeziehen"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Effect Size"
-msgstr "Effektgröße"
+msgstr "Effektstärke"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Effect Size Variance"
-msgstr "Effektgröße Varianz"
+msgstr "Effektstärke Varianz"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fixed Effects"
@@ -174,7 +180,7 @@ msgstr "Funnelplot"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Forest plot"
-msgstr "Forestplot"
+msgstr "Forest-Plot"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Advanced"
@@ -242,11 +248,11 @@ msgstr "Korrelation"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size"
-msgstr "Effektgröße"
+msgstr "Effektstärke"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr "Effektgröße Standardfehler"
+msgstr "Effektstärke Standardfehler"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "95% CI Lower and Upper Bound"
@@ -334,7 +340,7 @@ msgstr "Gepoolte Schätzungen"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Forest plot"
-msgstr "Forestplot"
+msgstr "Forest-Plot"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Show"
@@ -466,7 +472,7 @@ msgstr "Angepasstes Modell speichern"
 
 msgctxt "SelectionModels|"
 msgid "Effect sizes & SE"
-msgstr "Effektgrößen & Std.-Fehler"
+msgstr "Effektstärken & SF"
 
 msgctxt "SelectionModels|"
 msgid "Correlations & N"
@@ -478,11 +484,11 @@ msgstr "Korrelation"
 
 msgctxt "SelectionModels|"
 msgid "Effect Size"
-msgstr "Effektgröße"
+msgstr "Effektstärke"
 
 msgctxt "SelectionModels|"
 msgid "Effect Size Standard Error"
-msgstr "Effektgröße Standardfehler"
+msgstr "Effektstärke Standardfehler"
 
 msgctxt "SelectionModels|"
 msgid "N"
@@ -662,7 +668,7 @@ msgstr "Modellwahrscheinlichkeiten"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Effect sizes per study"
-msgstr "Effektgrößen pro Studie"
+msgstr "Effektstärken pro Studie"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Plots"
@@ -670,7 +676,7 @@ msgstr "Diagramme"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Forest plot"
-msgstr "Forestplot"
+msgstr "Forest-Plot"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Observed"
@@ -702,11 +708,11 @@ msgstr "Jahr (absteigend)"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Effect size (ascending)"
-msgstr "Effektgröße (aufsteigend)"
+msgstr "Effektstärke (aufsteigend)"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Effect size (descending)"
-msgstr "Effektgröße (absteigend)"
+msgstr "Effektstärke (absteigend)"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Order"
@@ -726,7 +732,7 @@ msgstr "Zeilenreihenfolge"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Cumulative forest plot"
-msgstr "Kumulativer Forestplot"
+msgstr "Kumulativer Forest-Plot"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Prior and posterior"
@@ -762,7 +768,7 @@ msgstr "Prior"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Effect size"
-msgstr "Effektgröße"
+msgstr "Effektstärke"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Cauchy"
@@ -938,7 +944,7 @@ msgstr "Anpassungsmaße"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Forest plot"
-msgstr "Forestplot"
+msgstr "Forest-Plot"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Show labels"
@@ -958,11 +964,11 @@ msgstr "Jahr (absteigend)"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Effect size (ascending)"
-msgstr "Effektgröße (aufsteigend)"
+msgstr "Effektstärke (aufsteigend)"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Effect size (descending)"
-msgstr "Effektgröße (absteigend)"
+msgstr "Effektstärke (absteigend)"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Funnel plot"
@@ -1158,7 +1164,7 @@ msgstr "Log-Chancenverhältnisse"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Unstandardized effect sizes"
-msgstr "Unstandardisierte Effektgrößen"
+msgstr "Unstandardisierte Effektstärken"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Log Odds Ratio"
@@ -1330,7 +1336,7 @@ msgstr "Ketten"
 
 msgctxt "PetPeese|"
 msgid "Effect sizes & SE"
-msgstr "Effektgrößen & SF"
+msgstr "Effektstärken & SF"
 
 msgctxt "PetPeese|"
 msgid "Correlations & N"
@@ -1342,11 +1348,11 @@ msgstr "Korrelation"
 
 msgctxt "PetPeese|"
 msgid "Effect Size"
-msgstr "Effektgröße"
+msgstr "Effektstärke"
 
 msgctxt "PetPeese|"
 msgid "Effect Size Standard Error"
-msgstr "Effektgröße Standardfehler"
+msgstr "Effektstärke Standardfehler"
 
 msgctxt "PetPeese|"
 msgid "N"
@@ -1434,7 +1440,7 @@ msgstr "Anzahl der Teilnehmer"
 
 msgctxt "PredictionPerformanceData|"
 msgid "Number of Observed Events"
-msgstr "Anzahl beobachteter Ereignisse"
+msgstr "Anzahl Beobachteter Ereignisse"
 
 msgctxt "PredictionPerformanceData|"
 msgid "Number of Expected Events"
@@ -1474,7 +1480,7 @@ msgstr "Diagramm Prior und Posterior"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Forest plot"
-msgstr "Forestplot"
+msgstr "Forest-Plot"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Labels"
@@ -1614,7 +1620,7 @@ msgstr "df:"
 
 msgctxt "WaapWls|"
 msgid "Effect sizes & SE"
-msgstr "Effektgrößen & SF"
+msgstr "Effektstärken & SF"
 
 msgctxt "WaapWls|"
 msgid "Correlations & N"
@@ -1626,11 +1632,11 @@ msgstr "Korrelation"
 
 msgctxt "WaapWls|"
 msgid "Effect Size"
-msgstr "Effektgröße"
+msgstr "Effektstärke"
 
 msgctxt "WaapWls|"
 msgid "Effect Size Standard Error"
-msgstr "Effektgröße Standardfehler"
+msgstr "Effektstärke Standardfehler"
 
 msgctxt "WaapWls|"
 msgid "N"
