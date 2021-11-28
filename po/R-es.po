@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2021-11-06 02:39\n"
-"PO-Revision-Date: 2021-11-25 12:05+0000\n"
+"PO-Revision-Date: 2021-11-29 00:22+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
@@ -774,38 +774,35 @@ msgstr ""
 msgid "Conditional Estimates"
 msgstr ""
 
-#, fuzzy
 msgid "Inclusion BF"
-msgstr "Inclusión"
+msgstr "FB de la Inclusión"
 
-#, fuzzy
 msgid "Exclusion BF"
-msgstr "Inclusión"
+msgstr "FB de la Exclusión"
 
-#, fuzzy
 msgid "log(Inclusion BF)"
-msgstr "Inclusión"
+msgstr "log(FB de la Inclusión)"
 
 msgid "P(M|data)"
 msgstr "P(M|datos)"
 
 msgid "Warning:"
-msgstr ""
+msgstr "Advertencia:"
 
 msgid "Model Averaged Estimates"
-msgstr ""
+msgstr "Estimaciones Medias del Modelo"
 
 msgid "Model Averaged Weights (%s)"
-msgstr ""
+msgstr "Ponderaciones Medias del Modelo (%s)"
 
 msgid "Model Averaged PET-PEESE Estimates"
-msgstr ""
+msgstr "Estimaciones Medias del Modelo PET-PEESE"
 
 msgid "Conditional Weights (%s)"
-msgstr ""
+msgstr "Ponderaciones Condicionadas (%s)"
 
 msgid "Conditional PET-PEESE Estimates"
-msgstr ""
+msgstr "Estimaciones Condicionadas PET-PEESE"
 
 msgid "Models Overview"
 msgstr ""
