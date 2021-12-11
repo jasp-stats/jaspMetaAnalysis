@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-12-07 14:52+0000\n"
-"Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
-"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
-"jasp/jaspmetaanalysis-qml/zh_Hans/>\n"
-"Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.10-dev\n"
 "X-Language: zh_Hans\n"
 "X-Qt-Contexts: true\n"
 
@@ -53,9 +47,10 @@ msgctxt "BayesianMetaAnalysis|"
 msgid "Study Labels"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Effect Size"
-msgstr ""
+msgstr "效应量"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Effect Size Standard Error"
@@ -89,9 +84,10 @@ msgctxt "ClassicalMetaAnalysis|"
 msgid "Include intercept"
 msgstr ""
 
+#, fuzzy
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Effect Size"
-msgstr ""
+msgstr "效应量"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Effect Size Variance"
@@ -661,9 +657,10 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Correlation"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size"
-msgstr ""
+msgstr "效应量"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
@@ -897,9 +894,10 @@ msgctxt "SelectionModels|"
 msgid "Correlation"
 msgstr ""
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Effect Size"
-msgstr ""
+msgstr "效应量"
 
 msgctxt "SelectionModels|"
 msgid "Effect Size Standard Error"
@@ -1345,9 +1343,10 @@ msgctxt "PetPeese|"
 msgid "Correlation"
 msgstr ""
 
+#, fuzzy
 msgctxt "PetPeese|"
 msgid "Effect Size"
-msgstr ""
+msgstr "效应量"
 
 msgctxt "PetPeese|"
 msgid "Effect Size Standard Error"
@@ -1629,9 +1628,10 @@ msgctxt "WaapWls|"
 msgid "Correlation"
 msgstr ""
 
+#, fuzzy
 msgctxt "WaapWls|"
 msgid "Effect Size"
-msgstr ""
+msgstr "效应量"
 
 msgctxt "WaapWls|"
 msgid "Effect Size Standard Error"
