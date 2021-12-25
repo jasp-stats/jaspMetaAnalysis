@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-12-19 02:19+0000\n"
-"Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
-"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
-"jasp/jaspmetaanalysis-qml/zh_Hans/>\n"
-"Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.10\n"
 "X-Language: zh_Hans\n"
 "X-Qt-Contexts: true\n"
 
@@ -49,9 +43,10 @@ msgctxt "BayesianMetaAnalysis|"
 msgid "95% CI Lower and Upper Bound"
 msgstr "95% 可信区间的上界和下界"
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Study Labels"
-msgstr ""
+msgstr "研究标签"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Effect Size"
@@ -121,9 +116,10 @@ msgctxt "MultilevelMetaAnalysis|"
 msgid "Predictors"
 msgstr ""
 
+#, fuzzy
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Model Terms"
-msgstr ""
+msgstr "模型的项(Terms)"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Use intercept"
@@ -277,9 +273,10 @@ msgctxt "BayesianMetaAnalysisInference|"
 msgid "Inference"
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model"
-msgstr ""
+msgstr "模型"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Fixed effects"
@@ -666,21 +663,24 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size"
 msgstr "效应量"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "效应量标准误差"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "95% CI Lower and Upper Bound"
-msgstr ""
+msgstr "95% 可信区间的上界和下界"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "N"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Study Labels"
-msgstr ""
+msgstr "研究标签"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Positive"
@@ -903,9 +903,10 @@ msgctxt "SelectionModels|"
 msgid "Effect Size"
 msgstr "效应量"
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "效应量标准误差"
 
 msgctxt "SelectionModels|"
 msgid "N"
@@ -915,9 +916,10 @@ msgctxt "SelectionModels|"
 msgid "P-value (one-sided)"
 msgstr ""
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Model"
-msgstr ""
+msgstr "模型"
 
 msgctxt "SelectionModels|"
 msgid "P-value cutoffs"
@@ -1352,9 +1354,10 @@ msgctxt "PetPeese|"
 msgid "Effect Size"
 msgstr "效应量"
 
+#, fuzzy
 msgctxt "PetPeese|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "效应量标准误差"
 
 msgctxt "PetPeese|"
 msgid "N"
@@ -1432,9 +1435,10 @@ msgctxt "PredictionPerformanceData|"
 msgid "Standard Error"
 msgstr ""
 
+#, fuzzy
 msgctxt "PredictionPerformanceData|"
 msgid "95% CI Lower and Upper Bound"
-msgstr ""
+msgstr "95% 可信区间的上界和下界"
 
 msgctxt "PredictionPerformanceData|"
 msgid "Number of Participants"
@@ -1448,9 +1452,10 @@ msgctxt "PredictionPerformanceData|"
 msgid "Number of Expected Events"
 msgstr ""
 
+#, fuzzy
 msgctxt "PredictionPerformanceData|"
 msgid "Study Labels"
-msgstr ""
+msgstr "研究标签"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Inference"
@@ -1637,9 +1642,10 @@ msgctxt "WaapWls|"
 msgid "Effect Size"
 msgstr "效应量"
 
+#, fuzzy
 msgctxt "WaapWls|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "效应量标准误差"
 
 msgctxt "WaapWls|"
 msgid "N"
