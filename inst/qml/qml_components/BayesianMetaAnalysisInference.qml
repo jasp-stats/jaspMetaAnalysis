@@ -43,12 +43,24 @@ Section
 			{
 				value: 				"FE"
 				label: 				qsTr("Fixed effects")
+				onCheckedChanged:	{
+					bayesianMetaAnalysisAdvanced.priorH0FEValue = 0.5
+					bayesianMetaAnalysisAdvanced.priorH1FEValue = 0.5
+					bayesianMetaAnalysisAdvanced.priorH0REValue = 0
+					bayesianMetaAnalysisAdvanced.priorH1REValue = 0
+				}
 			}
 
 			RadioButton
 			{
 				value: 				"RE"
 				label: 				qsTr("Random effects")
+				onCheckedChanged:	if(checked) {
+					bayesianMetaAnalysisAdvanced.priorH0FEValue = 0
+					bayesianMetaAnalysisAdvanced.priorH1FEValue = 0
+					bayesianMetaAnalysisAdvanced.priorH0REValue = 0.5
+					bayesianMetaAnalysisAdvanced.priorH1REValue = 0.5
+				}
 			}
 
 			RadioButton
@@ -56,12 +68,24 @@ Section
 				value: 				"BMA"
 				label: 				qsTr("Model averaging")
 				checked: 			true
+				onCheckedChanged:	if(checked) {
+					bayesianMetaAnalysisAdvanced.priorH0FEValue = 0.25
+					bayesianMetaAnalysisAdvanced.priorH1FEValue = 0.25
+					bayesianMetaAnalysisAdvanced.priorH0REValue = 0.25
+					bayesianMetaAnalysisAdvanced.priorH1REValue = 0.25
+				}
 			}
 
 			RadioButton
 			{
 				value: 				"CRE"
 				label: 				qsTr("Constrained random effects")
+				onCheckedChanged:	if(checked) {
+					bayesianMetaAnalysisAdvanced.priorH0FEValue = 0.25
+					bayesianMetaAnalysisAdvanced.priorH1FEValue = 0.25
+					bayesianMetaAnalysisAdvanced.priorH0REValue = 0.25
+					bayesianMetaAnalysisAdvanced.priorH1REValue = 0.25
+				}
 
 				// Constrain effect sizes to be all positive or all negative
 				RadioButtonGroup
