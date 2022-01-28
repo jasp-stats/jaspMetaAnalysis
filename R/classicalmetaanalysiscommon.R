@@ -472,7 +472,7 @@
 
 .metaAnalysisCasewiseFill <- function(container, dataset, options) {
   rma.fit       <- .metaAnalysisComputeModel(container, dataset, options, ready = TRUE)
-  influ <- influence(rma.fit)
+  influ         <- metafor::influence.rma.uni(rma.fit)
   influenceVals <- influ$inf
   isInfluential <- influ$is.infl
   
