@@ -1530,11 +1530,12 @@
       ggplot2::theme(axis.text.y.right = ggplot2::element_text(colour = c(rep(c("black", "slategrey"), each = nrow(df)), rep("black", 3))))
   }
 
+  xBreaks <- jaspGraphs::getPrettyAxisBreaks(range(df$lower, df$upper))
   plot <- plot +
     ggplot2::scale_x_continuous(
       name = bquote(paste(.(gettext("Effect size")), ~mu)),
-      breaks = jaspGraphs::getPrettyAxisBreaks(range(c(df$lower, df$upper))),
-      limits = range(jaspGraphs::getPrettyAxisBreaks(range(c(df$lower, df$upper)))))
+      breaks = xBreaks,
+      limits = range(xBreaks))
 
   plot <- jaspGraphs::themeJasp(plot, yAxis = FALSE)
   
