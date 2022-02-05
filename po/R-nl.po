@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-11-06 02:39\n"
-"PO-Revision-Date: 2021-10-30 02:37+0000\n"
-"Last-Translator: Johnny van Doorn <johnnydoorn@gmail.com>\n"
+"PO-Revision-Date: 2022-02-05 02:30+0000\n"
+"Last-Translator: Sophie Berkhout <s.w.berkhout@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/nl/>\n"
 "Language: nl\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n==0 ? 0 : n==1 ? 0 : 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.11-dev\n"
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr "De prior ondergrens is niet kleiner dan de bovengrens."
@@ -807,9 +807,8 @@ msgstr ""
 "De analyse zal meerdere meta-analytische modellen schatten met behulp van "
 "MCMC en kan een langere tijd nodig hebben om te voltooien."
 
-#, fuzzy
 msgid "Model Specification Preview"
-msgstr "Model Voorvertoning"
+msgstr "Model Specificatie Voorvertoning"
 
 msgid "Prior Distribution"
 msgstr "Posterior Verdeling"
@@ -823,17 +822,14 @@ msgstr "Samenvatting"
 msgid "Conditional Estimates"
 msgstr "Geconditioneerde Schattingen"
 
-#, fuzzy
 msgid "Inclusion BF"
-msgstr "Inclusie"
+msgstr "Inclusie BF"
 
-#, fuzzy
 msgid "Exclusion BF"
-msgstr "Uitsluiting"
+msgstr "Exclusie BF"
 
-#, fuzzy
 msgid "log(Inclusion BF)"
-msgstr "Inclusie"
+msgstr "log(Inclusie BF)"
 
 msgid "P(M|data)"
 msgstr "P(M|data)"
@@ -871,9 +867,8 @@ msgstr "log(MargWaarschijn)"
 msgid "Individual Models Summary"
 msgstr "Individuele Model Samenvatting"
 
-#, fuzzy
 msgid "Model #"
-msgstr "Model %i"
+msgstr "Model #"
 
 msgid "Priors"
 msgstr "Priors"
@@ -1146,13 +1141,11 @@ msgstr ""
 msgid "Only the following one-sided p-value cutoffs were used: %s."
 msgstr "Alleen de volgende eenzijdige p-afkapwaarden werden gebruikt: %s."
 
-#, fuzzy
 msgid "Error: There were not enough adequately powered studies (k = %1$i)"
 msgstr ""
 "Fout: Er waren niet genoeg studies met voldoende statistische kracht (k = "
 "%1$i)"
 
-#, fuzzy
 msgid "Note: There were %1$i adequately powered studies"
 msgstr "Opmerking: Er waren %1$i studies met voldoende statistische kracht"
 
@@ -1177,17 +1170,15 @@ msgstr "Cohen's d"
 msgid "Fisher's z"
 msgstr "Fisher's z"
 
-#, fuzzy
 msgid ""
 "WAAP was not estimated: There were only %1$i adequately powered studies "
 "(power > 80%%)."
 msgstr ""
-"WAAP werd niet geschat: er waren slechts %1$i studies met voldoende "
+"WAAP werd niet geschat: Er waren slechts %1$i studies met voldoende "
 "statistische kracht."
 
-#, fuzzy
 msgid "There were %1$i adequately powered studies (power > 80%%)."
-msgstr "Er waren %1$i studies met voldoende statistische kracht"
+msgstr "Er waren %1$i studies met voldoende statistische kracht (power > 80%%)."
 
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
