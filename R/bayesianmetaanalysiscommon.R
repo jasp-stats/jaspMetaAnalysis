@@ -1507,9 +1507,8 @@
     ggplot2::geom_errorbarh(ggplot2::aes(xmin = df$lower, xmax = df$upper), colour = df$color, height = .2) +
     ggplot2::geom_point(shape = shape, size = df$weight_scaled, colour = df$color) +
     ggplot2::scale_y_continuous(breaks = c(df$y, yDiamond), labels = c(as.character(df$studyLabels), model),
-                                sec.axis = ggplot2::sec_axis(~ ., breaks = c(df$y, yDiamond), labels = c(as.character(df$text), textDiamond)), expand = c(0, 0.5)) +
-    ggplot2::xlab(bquote(paste(.(gettext("Effect size")), ~mu)))
-  
+                                sec.axis = ggplot2::sec_axis(~ ., breaks = c(df$y, yDiamond), labels = c(as.character(df$text), textDiamond)), expand = c(0, 0.5))
+
   if(options$forestPlot == "plotForestBoth"){
     dfBoth <- data.frame(effectSize = c(varES, mean_estimates),
                          y = c(df$y, yEst),
@@ -1528,10 +1527,16 @@
       ggplot2::scale_color_manual("", values = c("slategrey", "black"), labels = c(gettext("Estimated"), gettext("Observed"))) +
       ggplot2::scale_shape_manual("", values = c(16, 15)) +
       ggplot2::guides(shape = ggplot2::guide_legend(reverse=TRUE, override.aes = list(size=3)), colour = ggplot2::guide_legend(reverse=TRUE)) +
-      ggplot2::theme(axis.text.y.right = ggplot2::element_text(colour = c(rep(c("black", "slategrey"), each = nrow(df)), rep("black", 3)))) +
-      ggplot2::xlab(bquote(paste(.(gettext("Effect size")), ~mu)))
+      ggplot2::theme(axis.text.y.right = ggplot2::element_text(colour = c(rep(c("black", "slategrey"), each = nrow(df)), rep("black", 3))))
   }
-  
+
+  xBreaks <- jaspGraphs::getPrettyAxisBreaks(range(df$lower, df$upper))
+  plot <- plot +
+    ggplot2::scale_x_continuous(
+      name = bquote(paste(.(gettext("Effect size")), ~mu)),
+      breaks = xBreaks,
+      limits = range(xBreaks))
+
   plot <- jaspGraphs::themeJasp(plot, yAxis = FALSE)
   
   # Add other theme elements (no y axis and aligning y axis labels)
