@@ -119,7 +119,7 @@ Form
 						
 			CheckBox
 			{
-				text:		qsTr("PET-PEESE regression estimates")
+				text:		qsTr("Regression estimates")
 				name:		"estimatesPetPeese"
 				checked:	false
 			}

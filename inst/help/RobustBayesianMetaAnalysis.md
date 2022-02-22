@@ -17,12 +17,10 @@ The input supplied as standardized effect sizes are internally transformed to Fi
 - Fitted model: Specify a path to already fitted RoBMA model using R. The model must be saved as an RDS file.
 
 #### Data
-- Effect Size: Effect sizes of the studies. In case that the effect sizes are measured by Cohen's d t-statistics can be provided instead.
-- t-statistic: t-statistics of the studies. Only possible if the studies effect sizes are measured by Cohen's d or correlations. Effect sizes can be provided instead. 
+- Effect Size: Effect sizes of the studies.
 - Effect Size Standard Error: Standard errors of the effect sizes per study. Must always be positive. A 95% CI for the effect sizes can be provided instead. In case that the effect sizes are measured by Cohen's d the sample sizes can be provided instead.
 - 95% CI Lower and Upper Bound: 95% CI lower and upper bounds of the effect sizes per study. Must be separated into two columns. The standard errors of the effect sizes can be provided instead.
-- N: Overall sample sizes of the studies. Only possible if the studies effect sizes are measured by Cohen's d or correlations. Effect Size Standard Errors can be provided instead. In the case of two-sample t-tests, sample sizes per group can be provided as well.
-- N (group 1) / N (group 2): Sample sizes of each group of the studies. Only possible if the studies effect sizes are measured by Cohen's d and correspond to two-sample t-tests. Overall sample sizes or Effect Size Standard Errors can be provided instead.
+- N: Overall sample sizes of the studies. Only possible if the studies effect sizes are measured by Cohen's d or correlations. Effect Size Standard Errors can be provided instead.
 - Study Labels: Optional argument that will add study labels to the output.
 
 #### Expected direction of effect sizes
@@ -242,7 +240,7 @@ Balances the prior model probability across models with the same combinations of
 ---
 - Maier, M., Bartoš, F., & Wagenmakers, E. J. (in press). Robust Bayesian meta-analysis: Addressing publication bias with model-averaging. Psychological Methods. https://doi.org/10.31234/osf.io/u4cns
 - Bartoš, F., Maier, M., Wagenmakers, E. J., Doucouliagos, H., & Stanley, T. D. (2021). No need to choose: Robust Bayesian meta-analysis with competing publication bias adjustment methods. https://doi.org/10.31234/osf.io/kvsp7
-- Bartoš, F., Maier, M., & Wagenmakers, E. J. (2020). Adjusting for publication bias in JASP — selection models and robust Bayesian meta-analysis. https://doi.org/10.31234/osf.io/75bqn
+- Bartoš, F., Maier, M., Quintana, D. S., & Wagenmakers, E. J. (2020). Adjusting for publication bias in JASP & R — selection models, PET-PEESE, and robust Bayesian meta-analysis. https://doi.org/10.31234/osf.io/75bqn
 
 ### R-packages
 ---

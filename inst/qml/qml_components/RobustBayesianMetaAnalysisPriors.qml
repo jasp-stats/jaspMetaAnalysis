@@ -73,11 +73,11 @@ ColumnLayout
 			else if (componentType == "heterogeneityNull")
 				[{"type": "spike"}]
 			else if (componentType == "pet")
-				[{"type": "cauchy", "priorWeights": "1/4"}]
+				[{"type": "cauchy", "priorWeight": "1/4"}]
 			else if (componentType == "petNull")
 				[]
 			else if (componentType == "peese")
-				[{"type": "cauchy", "parScale2": "5", "priorWeights": "1/4"}]
+				[{"type": "cauchy", "parScale2": "5", "priorWeight": "1/4"}]
 			else if (componentType == "peeseNull")
 				[]
 		}
