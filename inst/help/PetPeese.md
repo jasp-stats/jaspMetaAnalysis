@@ -26,7 +26,7 @@ PET-PEESE is usually used as conditional estimator. PET is used to test for the 
 #### Mean Estimates
 Summarizes the mean effect size estimates.
 
-#### PET-PEESE Regression Estimates
+#### Regression Estimates
 Summarizes the regression coefficients of the relationship between effect sizes and standard errors (PET) and effect sizes and standard errors squared (PEESE).
 
 #### Multiplicative Heterogeneity Estimates

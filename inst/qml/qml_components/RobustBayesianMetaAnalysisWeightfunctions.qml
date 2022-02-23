@@ -55,12 +55,12 @@ ColumnLayout
 		{
 			if (componentType == "omega")
 				[
-					{"type": "two-sided",	"parCuts": "(.05)",				"parAlpha": "(1,1)",	"priorWeights": "1/12"},
-					{"type": "two-sided",	"parCuts": "(.05, .10)",		"parAlpha": "(1,1,1)",	"priorWeights": "1/12"},
-					{"type": "one-sided",	"parCuts": "(.05)",				"parAlpha": "(1,1)",	"priorWeights": "1/12"},
-					{"type": "one-sided",	"parCuts": "(.025, .05)",		"parAlpha": "(1,1,1)",	"priorWeights": "1/12"},
-					{"type": "one-sided",	"parCuts": "(.05, .50)",		"parAlpha": "(1,1,1)",	"priorWeights": "1/12"},
-					{"type": "one-sided",	"parCuts": "(.025, .05, .10)",	"parAlpha": "(1,1,1,1)","priorWeights": "1/12"}
+					{"type": "two-sided",	"parCuts": "(.05)",				"parAlpha": "(1,1)",	"priorWeight": "1/12"},
+					{"type": "two-sided",	"parCuts": "(.05, .10)",		"parAlpha": "(1,1,1)",	"priorWeight": "1/12"},
+					{"type": "one-sided",	"parCuts": "(.05)",				"parAlpha": "(1,1)",	"priorWeight": "1/12"},
+					{"type": "one-sided",	"parCuts": "(.025, .05)",		"parAlpha": "(1,1,1)",	"priorWeight": "1/12"},
+					{"type": "one-sided",	"parCuts": "(.05, .50)",		"parAlpha": "(1,1,1)",	"priorWeight": "1/12"},
+					{"type": "one-sided",	"parCuts": "(.025, .05, .10)",	"parAlpha": "(1,1,1,1)","priorWeight": "1/12"}
 				]
 			else if (componentType == "omegaNull")
 				[{"type": "none"}]

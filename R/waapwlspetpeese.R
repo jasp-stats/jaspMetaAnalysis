@@ -406,7 +406,7 @@
   # PET-PEESE estimates
   if (type == "petPeese") {
     if (is.null(estimates[["petPeese"]]) && options[["estimatesPetPeese"]]) {
-      petPeese <- createJaspTable(title = gettext("PET-PEESE Regression Estimates"))
+      petPeese <- createJaspTable(title = gettext("Regression Estimates"))
       petPeese$position  <- 2
       petPeese$dependOn("estimatesPetPeese")
       estimates[["petPeese"]] <- petPeese
