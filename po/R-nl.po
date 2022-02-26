@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-11-06 02:39\n"
+"POT-Creation-Date: 2022-02-26 02:41\n"
 "PO-Revision-Date: 2022-02-05 02:30+0000\n"
 "Last-Translator: Sophie Berkhout <s.w.berkhout@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
@@ -1155,7 +1155,8 @@ msgstr "Toets van Effect"
 msgid "Estimates"
 msgstr "Schattingen"
 
-msgid "PET-PEESE Regression Estimates"
+#, fuzzy
+msgid "Regression Estimates"
 msgstr "PET-PEESE Regressieschattingen"
 
 msgid "Multiplicative Heterogeneity Estimates"
@@ -1178,7 +1179,8 @@ msgstr ""
 "statistische kracht."
 
 msgid "There were %1$i adequately powered studies (power > 80%%)."
-msgstr "Er waren %1$i studies met voldoende statistische kracht (power > 80%%)."
+msgstr ""
+"Er waren %1$i studies met voldoende statistische kracht (power > 80%%)."
 
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."

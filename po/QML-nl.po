@@ -1369,10 +1369,6 @@ msgid "Mean estimates"
 msgstr "Gemiddelde schattingen"
 
 msgctxt "PetPeese|"
-msgid "PET-PEESE regression estimates"
-msgstr "PET-PEESE regressie schattingen"
-
-msgctxt "PetPeese|"
 msgid "Multiplicative heterogeneity estimates"
 msgstr "Multiplicatieve heterogeniteitsschattingen"
 
@@ -1703,3 +1699,7 @@ msgstr "Modellen (Alleen Aangepaste Ensemble)"
 msgctxt "SelectionModels|"
 msgid "Expected direction of effect sizes"
 msgstr "Verwachte richting van de effectgroottes"
+
+msgctxt "PetPeese|"
+msgid "Regression estimates"
+msgstr ""

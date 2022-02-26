@@ -1368,10 +1368,6 @@ msgid "Mean estimates"
 msgstr "平均推定値"
 
 msgctxt "PetPeese|"
-msgid "PET-PEESE regression estimates"
-msgstr "PET-PEESE 回帰推定値"
-
-msgctxt "PetPeese|"
 msgid "Multiplicative heterogeneity estimates"
 msgstr "乗法異質性の推定値"
 
@@ -1702,3 +1698,7 @@ msgstr "モデル(カスタムアンサンブルのみ)"
 msgctxt "SelectionModels|"
 msgid "Expected direction of effect sizes"
 msgstr "効果量の期待される方向"
+
+msgctxt "PetPeese|"
+msgid "Regression estimates"
+msgstr ""

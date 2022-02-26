@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-11-06 02:39\n"
+"POT-Creation-Date: 2022-02-26 02:41\n"
 "PO-Revision-Date: 2021-09-11 02:37+0000\n"
 "Last-Translator: JASP Stats <b.boutin@uva.nl>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
@@ -1156,7 +1156,7 @@ msgid "Estimates"
 msgstr "Estimativa"
 
 #, fuzzy
-msgid "PET-PEESE Regression Estimates"
+msgid "Regression Estimates"
 msgstr "Medidas adicionais de ajuste"
 
 #, fuzzy

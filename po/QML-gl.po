@@ -1369,10 +1369,6 @@ msgid "Mean estimates"
 msgstr "Estimacións da media"
 
 msgctxt "PetPeese|"
-msgid "PET-PEESE regression estimates"
-msgstr "Estimacións da regresión PET-PEESE"
-
-msgctxt "PetPeese|"
 msgid "Multiplicative heterogeneity estimates"
 msgstr "Estimacións da heteroxeneidade multiplicativa"
 
@@ -1703,3 +1699,7 @@ msgstr "Modelos (Só Feixe Habitual)"
 msgctxt "SelectionModels|"
 msgid "Expected direction of effect sizes"
 msgstr "Dirección agardada das magnitudes dos efectos"
+
+msgctxt "PetPeese|"
+msgid "Regression estimates"
+msgstr ""
