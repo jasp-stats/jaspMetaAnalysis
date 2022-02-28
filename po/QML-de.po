@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-02-27 10:58+0000\n"
+"PO-Revision-Date: 2022-03-01 13:16+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/de/>\n"
@@ -816,7 +816,7 @@ msgstr "Obergrenze:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Inverse gamma"
-msgstr "Inverse Gammaverteilung"
+msgstr "Inverse Gamma"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "shape:"
@@ -824,7 +824,7 @@ msgstr "Form:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Half t"
-msgstr "Halbe t-Verteilung"
+msgstr "Halbe t"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Plot prior(s)"
