@@ -206,8 +206,8 @@ Form
 
 	Section
 	{
-		title:	qsTr("Inference")
-
+		title:		qsTr("Inference")
+		columns:	1
 		Group
 		{
 			CheckBox
@@ -224,6 +224,31 @@ Form
 				checked:	false
 			}
 		}
+
+		Group
+		{
+			title:				qsTr("Posterior plots")
+			
+			VariablesForm
+			{
+				
+				preferredHeight:	250 * preferencesModel.uiScale
+
+				AvailableVariablesList
+				{
+					name:	"availableModelComponentsPlot"
+					title:	qsTr("Model terms")
+					source:	[ { name: "modelTerms"} ]
+				}
+
+				AssignedVariablesList
+				{
+					name:	"plotPosterior"
+					title:	qsTr("Plotted term")
+				}
+			}
+		}
+
 	}
 
 

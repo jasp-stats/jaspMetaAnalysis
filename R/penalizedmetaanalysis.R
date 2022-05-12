@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-# TODO: make tau2 or tau2_w and tau2_b always available for diagnostics
+# TODO: make tau2 or tau2_w and tau2_b always available for diagnostics & posterior plots
 PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   library(pema)
@@ -26,7 +26,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     # get the data
     dataset <- .pemaGetData(dataset, options)
     dataset <- .pemaCheckData(jaspResults, dataset, options)
-
+    saveRDS(dataset, file = "C:/JASP/jaspMetaAnalysis/dataset.RDS")
     # fit the models
     .pemaFit(jaspResults, dataset, options)
   }
@@ -37,6 +37,9 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   if (options[["estimatesTau"]])
     .pemaSummaryTableTau(jaspResults, options)
 
+  if (length(options[["plotPosterior"]]) > 0)
+    .pemaPlotPosterior(jaspResults, options)
+
   if (length(options[["diagnosticsVariable1"]]) > 0)
     .pemaDiagnostics(jaspResults, options)
 
@@ -46,7 +49,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 .pemaDependencies <- c(
   "effectSize", "standardError", "method", "studyLabels", "covariates", "factors", "clustering", "components", "modelTerms", "includeConstant",
   "priorHsDf", "priorHsScale", "priorLassoDf", "priorLassoDfGlobal", "priorLassoDfSlab", "priorLassoScaleGlobal", "priorLassoScaleSlab",
-  "mcmcWarmup", "mcmcIter", "mcmcChains", "mcmcDelta", "mcmcTreedepth"
+  "mcmcWarmup", "mcmcIter", "mcmcChains", "mcmcDelta", "mcmcTreedepth", "setSeed", "seed"
 )
 
 # check and load functions
@@ -229,7 +232,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   #   chains    = options[["mcmcChains"]],
   #   warmup    = options[["mcmcWarmup"]],
   #   iter      = options[["mcmcWarmup"]] + options[["mcmcIter"]],
-  #   seed      = if (options[["setSeed]]) .getSeedJASP(options) else sample.int(.Machine$integer.max, 1),
+  #   seed      = if (options[["setSeed"]]) .getSeedJASP(options) else sample.int(.Machine$integer.max, 1),
   #   control   = list(adapt_delta = options[["mcmcDelta"]], max_treedepth = options[["mcmcTreedepth"]])
   # ))
   fit <- readRDS(file = "C:/JASP/jaspMetaAnalysis/fit.RDS")
@@ -369,19 +372,66 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   return()
 }
+.pemaPlotPosterior             <- function(jaspResults, options) {
+
+  if (!is.null(jaspResults[["posteriorPlots"]]))
+    return()
+
+  posteriorPlots <- createJaspContainer(title = gettext("Posterior distribution"))
+  posteriorPlots$position <- 4
+  posteriorPlots$dependOn(c(.pemaDependencies, "plotPosterior"))
+  jaspResults[["posteriorPlots"]] <- posteriorPlots
+
+  model <- jaspResults[["model"]]$object
+
+  stanFit          <- pema::as.stan(model)
+  stanSamples      <- rstan::extract(stanFit)
+  coefficientNames <- rownames(model$coefficients)
+
+  posteriorVariables <- lapply(options[["plotPosterior"]], function(var) var$variable)
+  coefficients       <- lapply(posteriorVariables, function(posteriorVariable).pemaPredictorCoefficientNames(paste0(posteriorVariable, collapse = ":"), coefficientNames, options))
+  coefficients       <- do.call(c, coefficients)
+
+  for(i in seq_along(coefficients)){
+
+    tempPlot <- rstan::stan_dens(stanFit, coefficients[i], separate_chains = FALSE)
+
+    parTicks <- jaspGraphs::getPrettyAxisBreaks(range(stanSamples[[coefficients[i]]]))
+
+    tempPlot <- tempPlot +
+      ggplot2::scale_x_continuous(.pemaVariableNames(
+        coefficients[i],
+        sapply(options[["modelTerms"]], function(term) paste0(term[[1]], collapse = ":"))),
+        breaks = parTicks,
+        limits = range(parTicks))
+    tempPlot <- tempPlot + jaspGraphs::geom_rangeframe(sides = "b") + jaspGraphs::themeJaspRaw() +
+      ggplot2::theme(
+        axis.title.y = ggplot2::element_blank(),
+        axis.text.y  = ggplot2::element_blank(),
+        axis.ticks.y = ggplot2::element_blank()
+      )
+
+    tempJaspPlot            <- createJaspPlot(title = "", width = 400, height = 300)
+    tempJaspPlot$plotObject <- tempPlot
+
+    posteriorPlots[[paste0("posterior", "_", i)]] <- tempJaspPlot
+  }
+
+  return()
+}
 .pemaDiagnostics               <- function(jaspResults, options) {
 
   if (!is.null(jaspResults[["diagnosticPlots"]]))
     return()
 
   diagnosticPlots <- createJaspContainer(title = gettext("Sampling diagnostics"))
-  diagnosticPlots$position <- 4
+  diagnosticPlots$position <- 5
   diagnosticPlots$dependOn(c(.pemaDependencies, "diagnosticsType", "diagnosticsVariable1", "diagnosticsVariable2"))
   jaspResults[["diagnosticPlots"]] <- diagnosticPlots
 
   model <- jaspResults[["model"]]$object
 
-  if ((options$samplingPlot == "stan_scat" && length(options[["diagnosticsVariable2"]]) == 0) || is.null(model) || jaspBase::isTryError(model)) {
+  if ((options[["diagnosticsType"]] == "stan_scat" && length(options[["diagnosticsVariable2"]]) == 0) || is.null(model) || jaspBase::isTryError(model)) {
     diagnosticPlots[["emptyPlot"]] <- createJaspPlot()
     return()
   }
