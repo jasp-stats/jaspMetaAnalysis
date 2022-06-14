@@ -544,12 +544,12 @@
   # make the plot happen
   plot <- ggplot2::ggplot() +
     ggplot2::geom_errorbarh(
-    ggplot2::aes(
-      xmin = estimates[,"lowerCI"],
-      xmax = estimates[,"upperCI"],
-      y    = 1:nrow(estimates)
-    ),
-    height = 0.3) +
+      ggplot2::aes(
+        xmin = estimates[,"lowerCI"],
+        xmax = estimates[,"upperCI"],
+        y    = 1:nrow(estimates)
+      ),
+      height = 0.3) +
     jaspGraphs::geom_point(
       ggplot2::aes(
         x = estimates[,"mean"],

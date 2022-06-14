@@ -18,21 +18,21 @@
 # Main function ----
 
 BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
-  
+
   options[["module"]] <- "metaAnalysis"
-  
+
   # Ready: variables needed for the analysis (confidence interval missing)
-  ready <- options[["effectSize"]] != "" && (options[["standardError"]] != "" || (all(unlist(options$confidenceInterval) != "")  && !is.null(unlist(options[["confidenceInterval"]])))) 
-  
+  ready <- options[["effectSize"]] != "" && (options[["standardError"]] != "" || (all(unlist(options$confidenceInterval) != "")  && !is.null(unlist(options[["confidenceInterval"]]))))
+
   # Dependencies: basically everything
   # dependencies <- .bmaDependencies
-  
+
   # Dataset with effectSize, standardError, and studyLabels
   # If data is null stuff is missing
   dataset <- .bmaReadData(jaspResults, options)
-  
+
   .BayesianMetaAnalysisCommon(jaspResults, dataset, ready, options)
-  
+
 }
 
 .bmaDependencies <- c("effectSize", "standardError", "confidenceInterval", "modelSpecification",
@@ -61,7 +61,7 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
   }
   if(study == "") study <- NULL
   variables.to.read <- c(varES, varSE, lower, upper, study)
-  dataset <- .readDataSetToEnd(columns.as.numeric = variables.to.read, 
+  dataset <- .readDataSetToEnd(columns.as.numeric = variables.to.read,
                                exclude.na.listwise = variables.to.read)
   return(dataset)
 }
