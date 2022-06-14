@@ -78,6 +78,7 @@
     argList <- list(
       yi      = dataset[,options$dependent],
       sei     = dataset[,options$wlsWeights],
+      slab    = if(options$studyLabels != "") dataset[,options$studyLabels],
       method  = .metaAnalysisGetMethod(options),
       mods    = .metaAnalysisFormula(options),
       data    = dataset,
@@ -86,9 +87,8 @@
       level   = options$regressionCoefficientsConfidenceIntervalsInterval + 1e-9,
       control = list(maxiter = 500)
     )
+    argList <- argList[!sapply(argList, is.null)]
 
-    if(options$studyLabels != "")
-      argList$slab <- dataset[,options$studyLabels]
 
     # analysis
     rma.fit <- tryCatch(
@@ -836,6 +836,7 @@
     argList <- list(
       yi = x$yi,
       vi = x$vi,
+      weights = x$weights,
       mods = x$X,
       intercept = FALSE,
       method = x$method,
@@ -845,9 +846,7 @@
       control = x$control,
       tau2 = vcs[i]
     )
-
-    if(!is.null(x$weights))
-      argList$weights = x$weights
+    argList <- argList[!sapply(argList, is.null)]
 
     res <- try(suppressWarnings(do.call(metafor::rma.uni, argList)), silent = TRUE)
     if (isTryError(res))
