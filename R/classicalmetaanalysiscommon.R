@@ -74,21 +74,28 @@
                             'pval'  = numeric()),
                        class = c("dummy", "rma"))
   if (ready) {
+
+    argList <- list(
+      yi      = dataset[,.v(options$dependent)],
+      sei     = dataset[,.v(options$wlsWeights)],
+      method  = .metaAnalysisGetMethod(options),
+      mods    = .metaAnalysisFormula(options),
+      data    = dataset,
+      test    = options$test,
+      # add tiny amount because 1 is treated by rma() as 100% whereas values > 1 as percentages
+      level   = options$regressionCoefficientsConfidenceIntervalsInterval + 1e-9,
+      control = list(maxiter = 500)
+    )
+
+    if(options$studyLabels != "")
+      argList$slab <- dataset[,.v(options$studyLabels)]
+
     # analysis
-    rma.fit <- tryCatch( # rma generates informative error messages; use them!
-      metafor::rma(
-        yi      = get(.v(options$dependent)),
-        sei     = get(.v(options$wlsWeights)),
-        data    = dataset,
-        method  = .metaAnalysisGetMethod(options),
-        mods    = .metaAnalysisFormula(options),
-        test    = options$test,
-        slab    = if(options$studyLabels != "") paste0(get(.v(options$studyLabels))),
-        # add tiny amount because 1 is treated by rma() as 100% whereas values > 1 as percentages
-        level   = options$regressionCoefficientsConfidenceIntervalsInterval + 1e-9,
-        control = list(maxiter = 500)),
-      error = function(e) .quitAnalysis(gettextf("The metafor package crashed with the following error: %s", e$message)))
-    
+    rma.fit <- tryCatch(
+      do.call(metafor::rma, argList),
+      error = function(e) .quitAnalysis(gettextf("The metafor package crashed with the following error: %s", e$message))
+    )
+
     rma.fit <- .unv(rma.fit)
   }
   
@@ -827,10 +834,24 @@
   vcs  <- seq(xlim[1], xlim[2], length = 20)
   lls  <- rep(NA_real_, length(vcs))
   for (i in seq_along(vcs)) {
-    res <- try(suppressWarnings(metafor::rma.uni(x$yi, x$vi, weights = x$weights,
-                                                 mods = x$X, intercept = FALSE, method = x$method,
-                                                 weighted = x$weighted, test = x$test, level = x$level,
-                                                 control = x$control, tau2 = vcs[i])), silent = TRUE)
+
+    argList <- list(
+      yi = x$yi,
+      vi = x$vi,
+      mods = x$X,
+      intercept = FALSE,
+      method = x$method,
+      weighted = x$weighted,
+      test = x$test,
+      level = x$level,
+      control = x$control,
+      tau2 = vcs[i]
+      )
+
+    if(!is.null(x$weights))
+      argList$weights = x$weights
+
+    res <- try(suppressWarnings(do.call(metafor::rma.uni, argList)), silent = TRUE)
     if (isTryError(res))
       next
     lls[i] <- c(logLik(res))
