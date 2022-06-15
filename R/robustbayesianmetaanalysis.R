@@ -1201,11 +1201,11 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   # plot
   p <- try(RoBMA::forest(
-      fit,
-      conditional  = options[["plotForestType"]] == "conditional",
-      order        = options[["plotForestOrder"]],
-      output_scale = if (options[["measures"]] != "general") options[["resultsScale"]],
-      plot_type    = "ggplot"
+    fit,
+    conditional  = options[["plotForestType"]] == "conditional",
+    order        = options[["plotForestOrder"]],
+    output_scale = if (options[["measures"]] != "general") options[["resultsScale"]],
+    plot_type    = "ggplot"
   ))
 
   if (jaspBase::isTryError(p)) {

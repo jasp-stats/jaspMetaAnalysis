@@ -1391,27 +1391,27 @@ fittedPath <- file.path("robmaFit.RDS")
   test_that("Model Estimates table results match", {
     table <- results[["results"]][["individualModels"]][["collection"]][["individualModels_model36"]][["collection"]][["individualModels_model36_tempCoef"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(1063, -0.570968391822972, 0.0070765552324961, 0.000351792694415455,
-                                        -0.135423666312138, -0.100838440755961, 1.00414026743074, "Effect size (<unicode><unicode>)",
-                                        0.214339985481033, 7349, 0.0707115108303571, 0.00438517855012114,
-                                        0.000116650520110571, 0.372599805926027, 0.267212292653967,
-                                        1.00040132060602, "Heterogeneity (<unicode><unicode>)", 1.32862804855319
+                                   list(1208, -0.55265224544879, 0.00640202639197792, 0.000324591007338291,
+                                        -0.138684314718299, -0.107475461708634, 1.00082978808933, "Effect size (<unicode>)",
+                                        0.216973334570519, 5728, 0.0174537799642739, 0.0012522327854329,
+                                        0.000132131883778871, 0.0927573625888651, 0.0659913245690277,
+                                        1.0007087635349, "Heterogeneity (<unicode>)", 0.324255793050251
                                    ))
   })
 
   test_that("Information table results match", {
     table <- results[["results"]][["individualModels"]][["collection"]][["individualModels_model36"]][["collection"]][["individualModels_model36_tempInfo"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(3.79523630032357, -0.0740837863291979, 0.0084279848489026, 0.03125
+                                   list(3.72727569165726, -0.0560597740495541, 0.0085803364481458, 0.03125
                                    ))
   })
 
   test_that("PET-PEESE Estimates table results match", {
     table <- results[["results"]][["individualModels"]][["collection"]][["individualModels_model36"]][["collection"]][["individualModels_model36_tempPetPeese"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(946, 0.141055034547105, 0.107966855769831, 0.033, 3.83276489153726,
-                                        2.92901493534874, 1.00072841601143, "PEESE", 12.5696891763832
-                                   ))
+                                   list(1025, 0.296957780781618, 0.200721180153232, 0.000312344511712233,
+                                        7.80944540517883, 6.21826436865384, 1.00022266168806, "PEESE",
+                                        23.8723910117661))
   })
 
   test_that("Priors table results match", {
@@ -1423,34 +1423,34 @@ fittedPath <- file.path("robmaFit.RDS")
   test_that("Model Averaged PET-PEESE Estimates table results match", {
     table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedPetPeese"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(0, 0.0491685106719388, 0, "PET", 0.407026173612685, 0, 0.340439386388007,
-                                        0, "PEESE", 0.376245088125935))
+                                   list(0, 0.0381605068045753, 0, "PET", 0.023616278744856, 0, 0.328659845818013,
+                                        0, "PEESE", 2.71010683008597))
   })
 
   test_that("Model Averaged Estimates table results match", {
     table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(-0.0124955689943, 0.0153574455512189, 0, "Effect size (<unicode><unicode>)",
-                                        0.131910137645727, 0, 0.0236170517979166, 0, "Heterogeneity (<unicode><unicode>)",
-                                        0.112342480347445))
+                                   list(-0.0568053720471119, 0.0106824496399714, 0, "Effect size (<unicode>)",
+                                        0.134825866250297, 0, 0.048035807303762, 0, "Heterogeneity (<unicode>)",
+                                        0.212800710036252))
   })
 
-  test_that("Model Averaged Weights (Ï‰) table results match", {
+  test_that("Model Averaged Weights (ω) table results match", {
     table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_averagedWeights"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(1, 0, 1, 1, 1, 0.025, 0.650701112224693, 0.025, 0.956384738529737,
-                                        1, 1, 0.05, 0.448292838218116, 0.05, 0.886860946148118, 1, 1,
-                                        0.5, 0.0361168070054189, 0.5, 0.775751792421011, 1, 1, 0.95,
-                                        0.0361168070054189, 0.95, 0.785022454645265, 1, 1, 0.975, 0.0361168070054189,
-                                        0.975, 0.802500630157873, 1, 1, 1))
+                                   list(1, 0, 1, 1, 1, 0.025, 0.623198762393136, 0.025, 0.950451745491881,
+                                        1, 1, 0.05, 0.391378018345742, 0.05, 0.892700675024233, 1, 1,
+                                        0.5, 0.0128411575295533, 0.5, 0.80972860730324, 1, 1, 0.95,
+                                        0.0128411575295533, 0.95, 0.80972860730324, 1, 1, 0.975, 0.0128411575295533,
+                                        0.975, 0.814995515093576, 1, 1, 1))
   })
 
   test_that("Model Summary table results match", {
     table <- results[["results"]][["mainSummary"]][["collection"]][["mainSummary_overallSummary"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(3.35030941940925, "18/36", 0.229868706703579, 0.5, "Effect", 1.72313479527089,
-                                        "18/36", 0.367223833993323, 0.5, "Heterogeneity", 1.06145512479029,
-                                        "32/36", 0.485094236578024, 0.5, "Publication bias"))
+                                   list(3.34694629322749, "18/36", 0.23004655050788, 0.5, "Effect", 1.72485968725674,
+                                        "18/36", 0.366991373785838, 0.5, "Heterogeneity", 1.06264271661404,
+                                        "32/36", 0.484814937626021, 0.5, "Publication bias"))
   })
 
   test_that("Conditional Effect Size Estimates plot matches", {

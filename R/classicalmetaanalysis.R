@@ -22,17 +22,17 @@ gettextf <- function(fmt, ..., domain = NULL)  {
 }
 
 ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
-  
+
   options[["module"]] <- "metaAnalysis"
-  
+
   ready <- options$dependent != "" && options$wlsWeights != "" && (options$includeConstant || length(options$modelTerms) > 0)
   if(ready) {
     dataset <- .metaAnalysisReadData(dataset, options)
     .metaAnalysisCheckErrors(dataset, options)
   }
-  
+
   container <- .metaAnalysisGetOutputContainer(jaspResults)
-  
+
   .ClassicalMetaAnalysisCommon(container, dataset, ready, options)
 
   return()
