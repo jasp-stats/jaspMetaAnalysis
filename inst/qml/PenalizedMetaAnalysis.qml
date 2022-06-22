@@ -72,6 +72,7 @@ Form
 */
 		AssignedVariablesList
 		{
+			id:					covariates
 			name:				"covariates"
 			title:				qsTr("Covariates")
 			suggestedColumns:	["scale"]
@@ -96,6 +97,7 @@ Form
 	Section
 	{
 		title: qsTr("Model")
+		columns:	1
 
 		VariablesForm
 		{
@@ -121,6 +123,23 @@ Form
 			name:		"includeConstant"
 			label:		qsTr("Include intercept")
 			checked:	true
+		}
+
+		VariablesList
+		{
+			title:				qsTr("Rescale continuous predictors")
+			id:					modelRescale
+			name:				"modelRescale"
+			source:				"covariates"
+			listViewType:		JASP.AssignedVariables
+			preferredHeight:	120 * preferencesModel.uiScale
+			draggable:			false
+
+			rowComponent:	CheckBox
+			{
+				name:		"covariate"
+				checked:	true
+			}
 		}
 	}
 
@@ -208,6 +227,7 @@ Form
 	{
 		title:		qsTr("Inference")
 		columns:	1
+
 		Group
 		{
 			CheckBox
@@ -222,6 +242,13 @@ Form
 				name:		"estimatesTau"
 				label:		qsTr("Heterogeneity")
 				checked:	false
+
+				CheckBox
+				{
+					name:		"estimatesI2"
+					label:		qsTr("I²")
+					checked:	false
+				}
 			}
 		}
 
@@ -231,14 +258,19 @@ Form
 			
 			VariablesForm
 			{
-				
 				preferredHeight:	250 * preferencesModel.uiScale
+				id:					availableModelComponentsForms
+				property var alwaysAvailable:
+					[
+						{ label:	qsTr("Intercept"),		value: "Intercept"},
+						{ label:	qsTr("Heterogeneity"),	value: "Heterogeneity"}
+					]
 
 				AvailableVariablesList
 				{
 					name:	"availableModelComponentsPlot"
 					title:	qsTr("Model terms")
-					source:	[ { name: "modelTerms"} ]
+					source:	["modelTerms", {values: availableModelComponentsForms.alwaysAvailable}]
 				}
 
 				AssignedVariablesList
@@ -259,12 +291,19 @@ Form
 		VariablesForm
 		{
 			preferredHeight: 200 * preferencesModel.uiScale
+			id:				diagnosticsForms
+			property var alwaysAvailable:
+				[
+					{ label:	qsTr("Intercept"),		value: "Intercept"},
+					{ label:	qsTr("Heterogeneity"),	value: "Heterogeneity"}
+				]
 
 			AvailableVariablesList
 			{
 				name:	"diagnosticsVariables"
 				title:	qsTr("Model terms")
-				source:	"modelTerms"
+				
+				source:	["modelTerms", {values: diagnosticsForms.alwaysAvailable}]
 			}
 
 			AssignedVariablesList

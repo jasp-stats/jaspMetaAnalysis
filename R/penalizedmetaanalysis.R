@@ -15,18 +15,20 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-# TODO: make tau2 or tau2_w and tau2_b always available for diagnostics & posterior plots
+# TODO:
+# - centering
+# - different CI widths
+
 PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
+  # keep this till the CRAN version is updated and contains proper exports
   library(pema)
-  saveRDS(options, file = "C:/JASP/jaspMetaAnalysis/options.RDS")
 
 
   if (.pemaCheckReady(options)) {
     # get the data
     dataset <- .pemaGetData(dataset, options)
-    dataset <- .pemaCheckData(jaspResults, dataset, options)
-    saveRDS(dataset, file = "C:/JASP/jaspMetaAnalysis/dataset.RDS")
+
     # fit the models
     .pemaFit(jaspResults, dataset, options)
   }
@@ -36,6 +38,9 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   if (options[["estimatesTau"]])
     .pemaSummaryTableTau(jaspResults, options)
+
+  if (options[["estimatesTau"]] && options[["estimatesI2"]])
+    .pemaSummaryTableI2(jaspResults, options)
 
   if (length(options[["plotPosterior"]]) > 0)
     .pemaPlotPosterior(jaspResults, options)
@@ -54,7 +59,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
 # check and load functions
 .pemaCheckReady                <- function(options) {
-  return(options[["effectSize"]] != "" && options[["standardError"]] != "")
+  return(options[["effectSize"]] != "" && options[["standardError"]] != "" && length(options[["modelTerms"]]) > 0)
 }
 .pemaGetData                   <- function(dataset, options) {
 
@@ -77,6 +82,9 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
     # precompute variance
     dataset$JASP_computed_variance__ <- dataset[,stderrName]^2
+
+    # check the data
+    dataset <- .pemaCheckData(jaspResults, dataset, options)
 
     return(dataset)
   }
@@ -129,6 +137,12 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   if (varName == "Intercept")
     return(gettext("Intercept"))
+  else if(varName == "tau2")
+    return("\U1D6D5\U00B2")
+  else if(varName == "tau2_w")
+    return("\U1D6D5\U00B2 (within)")
+  else if(varName == "tau2_b")
+    return("\U1D6D5\U00B2 (between)")
 
   for (vn in terms) {
     inf <- regexpr(vn, varName, fixed = TRUE)
@@ -153,6 +167,12 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 .pemaPredictorCoefficientNames <- function(predictor, coefficientNames, options){
   # this functions find coefficients matching to the given predictor
   # i.e., what are the dummy coefficients for a given factor parameter
+
+  if (predictor == "Intercept")
+    return("Intercept")
+  else if(predictor == "Heterogeneity")
+    return("tau2")
+
 
   predictors <- sapply(options[["modelTerms"]], function(term) paste0(term[[1]], collapse = ":"))
   predictors <- predictors[predictor != predictors]
@@ -215,29 +235,21 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     jaspResults[["model"]] <- model
   }
 
-  saveRDS(list(
-    formula = .pemaFormula(options),
-    dataset = dataset
-  ), file = "C:/JASP/jaspMetaAnalysis/inf.RDS")
-
   .setSeedJASP(options)
-  # fit <- try(pema::brma(
-  #   formula   = .pemaFormula(options),
-  #   data      = dataset,
-  #   vi        = "JASP_computed_variance__",
-  #   study     = if (options[["clustering]] != "") options[["clustering]],
-  #   method    = options[["method"]],
-  #   prior     = .pemaPriors(options),
-  #   mute_stan = TRUE,
-  #   chains    = options[["mcmcChains"]],
-  #   warmup    = options[["mcmcWarmup"]],
-  #   iter      = options[["mcmcWarmup"]] + options[["mcmcIter"]],
-  #   seed      = if (options[["setSeed"]]) .getSeedJASP(options) else sample.int(.Machine$integer.max, 1),
-  #   control   = list(adapt_delta = options[["mcmcDelta"]], max_treedepth = options[["mcmcTreedepth"]])
-  # ))
-  fit <- readRDS(file = "C:/JASP/jaspMetaAnalysis/fit.RDS")
-  #  saveRDS(fit, file = "C:/JASP/jaspMetaAnalysis/fit.RDS")
-
+  fit <- try(pema::brma(
+    formula   = .pemaFormula(options),
+    data      = dataset,
+    vi        = "JASP_computed_variance__",
+    study     = if (options[["clustering"]] != "") options[["clustering"]],
+    method    = options[["method"]],
+    prior     = .pemaPriors(options),
+    mute_stan = TRUE,
+    chains    = options[["mcmcChains"]],
+    warmup    = options[["mcmcWarmup"]],
+    iter      = options[["mcmcWarmup"]] + options[["mcmcIter"]],
+    seed      = if (options[["setSeed"]]) .getSeedJASP(options) else sample.int(.Machine$integer.max, 1),
+    control   = list(adapt_delta = options[["mcmcDelta"]], max_treedepth = options[["mcmcTreedepth"]])
+  ))
   model[["object"]] <- fit
 
   return()
@@ -372,6 +384,68 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   return()
 }
+.pemaSummaryTableI2            <- function(jaspResults, options) {
+
+  if (!is.null(jaspResults[["summaryI2Table"]]))
+    return()
+
+  model <- jaspResults[["model"]]$object
+
+  summaryI2Table <- createJaspTable(title = "I\U00B2")
+  summaryI2Table$position <- 3
+  summaryI2Table$dependOn(c(.pemaDependencies, "estimatesTau", "estimatesI2"))
+
+  summaryI2Table$addColumnInfo(name = "term",     title = "Term",           type = "string")
+  summaryI2Table$addColumnInfo(name = "estimate", title = "Estimate",       type = "number")
+  summaryI2Table$addColumnInfo(name = "lowerCI",  title = gettext("Lower"), type = "number", overtitle = gettextf("%s%% CI", 100 * .95))
+  summaryI2Table$addColumnInfo(name = "upperCI",  title = gettext("Upper"), type = "number", overtitle = gettextf("%s%% CI", 100 * .95))
+
+  jaspResults[["summaryI2Table"]] <- summaryI2Table
+
+  if (is.null(model))
+    return()
+  else if (jaspBase::isTryError(model)) {
+    summaryTable$setError(model)
+    return()
+  }
+
+  summaryI2 <- pema::I2(model)
+
+  if (options[["clustering"]] == "") {
+
+    summaryI2Table$addRows(list(
+      term     = "I\U00B2",
+      estimate = summaryI2["I2", "mean"],
+      lowerCI  = summaryI2["I2", "2.5%"],
+      upperCI  = summaryI2["I2", "97.5%"]
+    ))
+
+  } else {
+
+    summaryI2Table$addRows(list(
+      term     = "I\U00B2 (within)",
+      estimate = summaryI2["I2_w", "mean"],
+      lowerCI  = summaryI2["I2_w", "2.5%"],
+      upperCI  = summaryI2["I2_w", "97.5%"]
+    ))
+    summaryI2Table$addRows(list(
+      term     = "I\U00B2 (between)",
+      estimate = summaryI2["I2_b", "mean"],
+      lowerCI  = summaryI2["I2_b", "2.5%"],
+      upperCI  = summaryI2["I2_b", "97.5%"]
+    ))
+    summaryI2Table$addRows(list(
+      term     = "I\U00B2",
+      estimate = summaryI2["I2mat", "mean"],
+      lowerCI  = summaryI2["I2mat", "2.5%"],
+      upperCI  = summaryI2["I2mat", "97.5%"]
+    ))
+
+  }
+
+
+  return()
+}
 .pemaPlotPosterior             <- function(jaspResults, options) {
 
   if (!is.null(jaspResults[["posteriorPlots"]]))
@@ -391,6 +465,13 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   posteriorVariables <- lapply(options[["plotPosterior"]], function(var) var$variable)
   coefficients       <- lapply(posteriorVariables, function(posteriorVariable).pemaPredictorCoefficientNames(paste0(posteriorVariable, collapse = ":"), coefficientNames, options))
   coefficients       <- do.call(c, coefficients)
+
+  # deal with two heterogeneity estimates in case that clustering is set
+  if(any(coefficients == "tau2") && options[["clustering"]] != ""){
+    coefficients <- coefficients[coefficients != "tau2"]
+    coefficients <- c(coefficients, "tau2_w", "tau2_b")
+  }
+
 
   for(i in seq_along(coefficients)){
 
@@ -445,6 +526,15 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     coefficients1 <- .pemaPredictorCoefficientNames(paste0(options[["diagnosticsVariable1"]][[1]]$variable, collapse = ":"), coefficientNames, options)
     coefficients2 <- .pemaPredictorCoefficientNames(paste0(options[["diagnosticsVariable2"]][[1]]$variable, collapse = ":"), coefficientNames, options)
 
+    # deal with two heterogeneity estimates in case that clustering is set
+    if(coefficients1 == "tau2" && options[["clustering"]] != ""){
+      coefficients1 <- c("tau2_w", "tau2_b")
+    }
+    if(coefficients2 == "tau2" && options[["clustering"]] != ""){
+      coefficients2 <- c("tau2_w", "tau2_b")
+    }
+
+
     for(i in seq_along(coefficients1)){
       for(j in seq_along(coefficients2)){
 
@@ -476,6 +566,12 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   } else {
 
     coefficients <- .pemaPredictorCoefficientNames(paste0(options[["diagnosticsVariable1"]][[1]]$variable, collapse = ":"), coefficientNames, options)
+
+    # deal with two heterogeneity estimates in case that clustering is set
+    if(coefficients == "tau2" && options[["clustering"]] != ""){
+      coefficients <- c("tau2_w", "tau2_b")
+    }
+
 
     for(i in seq_along(coefficients)){
 
