@@ -1393,10 +1393,6 @@ msgid "Mean model estimates"
 msgstr "Mittlere Modellschätzungen"
 
 msgctxt "PredictionPerformanceData|"
-msgid "Data"
-msgstr "Daten"
-
-msgctxt "PredictionPerformanceData|"
 msgid "Measure"
 msgstr "Maß"
 
