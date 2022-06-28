@@ -1,43 +1,18 @@
-on: [push, pull_request]
+on:
+  push:
+    paths: ['**.R', 'tests/**', '**.Rd', '**.c', '**.cpp', '**.h', '**.hpp', 'DESCRIPTION', 'NAMESPACE', 'MAKEVARS', 'MAKEVARS.win', '**.yml']
+  pull_request:
+    paths: ['**.R', 'tests/**', '**.Rd', '**.c', '**.cpp', '**.h', '**.hpp', 'DESCRIPTION', 'NAMESPACE', 'MAKEVARS', 'MAKEVARS.win']
+  schedule:
+    - cron:  '13 12 * * 1-5'
 
 name: unit-tests
 
 jobs:
+
   unit-tests:
-    runs-on: ${{ matrix.config.os }}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
-
-    strategy:
-      fail-fast: false
-      matrix:
-        config:
-          - {os: windows-latest, r: "4.1.0"}
-          - {os: macOS-latest,   r: "4.1.0"}
-          - {os: ubuntu-20.04,   r: "4.1.0"}
-
-    env:
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      R_REMOTES_UPGRADE: never
-      VDIFFR_RUN_TESTS: true
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - uses: r-lib/actions/setup-r@master
-        with:
-          r-version: ${{ matrix.config.r }}
-
-      - name: Install dependencies on Linux
-        if: ${{ runner.os == 'Linux' }}
-        run: sudo apt-get install libv8-dev
-        shell: bash
-
-      - uses: jasp-stats/jasp-actions/setup-test-env@master
-        with:
-          requiresJAGS: true
-
-      - name: Run unit tests
-        run: source("tests/testthat.R")
-        shell: Rscript {0}
+    uses: jasp-stats/jasp-actions/.github/workflows/unittests.yml@master
+    with:
+      needs_JAGS:   true
+      needs_igraph: false
