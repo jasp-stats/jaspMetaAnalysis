@@ -43,8 +43,8 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     modelContainer <- jaspResults[["modelContainer"]]
   } else {
     modelContainer <- createJaspContainer()
-    modelContainer$dependOn(c("effectSize", "effectSizeStandardError", "method", "studyLabels", "covariates", "test",
-                              "factors", "modelTerms", "includeIntercept", "regressionCoefficientsConfidenceIntervalsInterval"))
+    modelContainer$dependOn(c("effectSize", "effectSizeStandardError", "method", "studyLabels", "covariates", "regressionCoefficientEstimateTest",
+                              "factors", "modelTerms", "includeIntercept", "regressionCoefficientEstimateCiLevel"))
     jaspResults[["modelContainer"]] <- modelContainer
   }
   return(modelContainer)
