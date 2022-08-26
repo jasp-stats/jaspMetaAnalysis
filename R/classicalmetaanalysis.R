@@ -25,7 +25,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   options[["module"]] <- "metaAnalysis"
 
-  ready <- options$dependent != "" && options$wlsWeights != "" && (options$includeConstant || length(options$modelTerms) > 0)
+  ready <- options$effectSize != "" && options$effectSizeStandardError != "" && (options$includeIntercept || length(options$modelTerms) > 0)
   if(ready) {
     dataset <- .metaAnalysisReadData(dataset, options)
     .metaAnalysisCheckErrors(dataset, options)
@@ -43,8 +43,8 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     modelContainer <- jaspResults[["modelContainer"]]
   } else {
     modelContainer <- createJaspContainer()
-    modelContainer$dependOn(c("dependent", "wlsWeights", "method", "studyLabels", "covariates", "test",
-                              "factors", "modelTerms", "includeConstant", "regressionCoefficientsConfidenceIntervalsInterval"))
+    modelContainer$dependOn(c("effectSize", "effectSizeStandardError", "method", "studyLabels", "covariates", "test",
+                              "factors", "modelTerms", "includeIntercept", "regressionCoefficientsConfidenceIntervalsInterval"))
     jaspResults[["modelContainer"]] <- modelContainer
   }
   return(modelContainer)
@@ -54,8 +54,8 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   if (!is.null(dataset))
     return(dataset)
   else {
-    effsizeName <- unlist(options$dependent)
-    stderrName  <- unlist(options$wlsWeights)
+    effsizeName <- unlist(options$effectSize)
+    stderrName  <- unlist(options$effectSizeStandardError)
     covarNames  <- if (length(options$covariates) > 0) unlist(options$covariates)
     factNames   <- if (length(options$factors) > 0) unlist(options$factors)
 
@@ -68,8 +68,8 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 }
 
 .metaAnalysisCheckErrors <- function(dataset, options){
-  effsizeName <- unlist(options$dependent)
-  stderrName  <- unlist(options$wlsWeights)
+  effsizeName <- unlist(options$effectSize)
+  stderrName  <- unlist(options$effectSizeStandardError)
   covarNames  <- if (length(options$covariates) > 0) unlist(options$covariates)
   numeric.variables <- Filter(function(s) s != "", c(effsizeName, covarNames, stderrName))
   .hasErrors(dataset              = dataset,
