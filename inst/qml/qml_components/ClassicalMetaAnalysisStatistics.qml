@@ -30,25 +30,25 @@ Section
 	{
 		title: qsTr("Regression Coefficients")
 		CheckBox
-		{   name: "regressionCoefficientsEstimates";
+		{   name: "regressionCoefficientEstimate";
 			text: qsTr("Estimates");
 			checked: true
 			onClicked: { if (!checked && estimatesConfInt.checked) estimatesConfInt.click() }
 			CheckBox
 			{
 				id: estimatesConfInt
-				name: "regressionCoefficientsConfidenceIntervals"; text: qsTr("Confidence intervals")
-				CIField { name: "regressionCoefficientsConfidenceIntervalsInterval"; label: qsTr("Interval") }
-				DropDown { name: "test"; label: qsTr("Test"); values: [ "z", "knha"]; }
+				name: "regressionCoefficientEstimateCi"; text: qsTr("Confidence intervals")
+				CIField { name: "regressionCoefficientEstimateCiLevel"; label: qsTr("Interval") }
+				DropDown { name: "regressionCoefficientEstimateTest"; label: qsTr("Test"); values: [ "z", "knha"]; }
 			}
 		}
-		CheckBox { name: "regressionCoefficientsCovarianceMatrix"; text: qsTr("Covariance matrix") }
+		CheckBox { name: "regressionCoefficientCovarianceMatrix"; text: qsTr("Covariance matrix") }
 
 	}
 	Group
 	{
 		title: qsTr("Model Fit")
-		CheckBox { name: "modelFit";				text: qsTr("Fit measures") }
+		CheckBox { name: "fitMeasure";				text: qsTr("Fit measures") }
 		CheckBox
 		{
 			id:			forestPlot
@@ -57,7 +57,7 @@ Section
 			
 			CheckBox
 			{
-				name:		"showLabels"
+				name:		"forestPlotLabel"
 				text:		qsTr("Show labels")
 				checked:	true
 				enabled: 	forestPlot.checked	
@@ -66,7 +66,7 @@ Section
 
 			DropDown
 			{
-				name:			"forestPlotOrder"
+				name:			"forestPlotOrdering"
 				label:			qsTr("Ordering")
 				enabled: 		forestPlot.checked
 				visible:		module == "cochrane"
@@ -81,13 +81,13 @@ Section
 		
 		}
 		CheckBox { name: "funnelPlot";				text: qsTr("Funnel plot") }
-		CheckBox { name: "rSquaredChange";			text: qsTr("Rank test for funnel plot asymmetry") }
-		CheckBox { name: "funnelPlotAsymmetryTest"; text: qsTr("Regression test for funnel plot asymmetry") }
+		CheckBox { name: "funnelPlotRankTestAsymmetry";			text: qsTr("Rank test for funnel plot asymmetry") }
+		CheckBox { name: "funnelPlotRegressionAsymmetryTest"; text: qsTr("Regression test for funnel plot asymmetry") }
 	}
 
 	Group
 	{
 		title: qsTr("Residuals Model")
-		CheckBox { name: "residualsParameters"; text: qsTr("Residuals parameters"); checked: true;}
+		CheckBox { name: "residualParameter"; text: qsTr("Residuals parameters"); checked: true;}
 	}
 }

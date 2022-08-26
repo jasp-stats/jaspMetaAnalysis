@@ -82,9 +82,9 @@
       method  = .metaAnalysisGetMethod(options),
       mods    = .metaAnalysisFormula(options),
       data    = dataset,
-      test    = options$test,
+      test    = options$regressionCoefficientEstimateTest,
       # add tiny amount because 1 is treated by rma() as 100% whereas values > 1 as percentages
-      level   = options$regressionCoefficientsConfidenceIntervalsInterval + 1e-9,
+      level   = options$regressionCoefficientEstimateCiLevel + 1e-9,
       control = list(maxiter = 500)
     )
     argList <- argList[!sapply(argList, is.null)]
@@ -127,11 +127,11 @@
 }
 
 .metaAnalysisCoeffTable <- function(container, dataset, options, ready) {
-  if (!options$regressionCoefficientsEstimates || !is.null(container[["coeffTable"]]))
+  if (!options$regressionCoefficientEstimate || !is.null(container[["coeffTable"]]))
     return()
 
   coeffTable <- createJaspTable(gettext("Coefficients"))
-  coeffTable$dependOn(c("regressionCoefficientsEstimates", "regressionCoefficientsConfidenceIntervals"))
+  coeffTable$dependOn(c("regressionCoefficientEstimate", "regressionCoefficientEstimateCi"))
   coeffTable$position <- 2
   coeffTable$showSpecifiedColumnsOnly <- TRUE
   coeffTable$addCitation("Viechtbauer, W. (2010). Conducting meta-analyses in R with the metafor package. Journal of Statistical Software, 36(3), 1-48. URL: http://www.jstatsoft.org/v36/i03/")
@@ -143,7 +143,7 @@
   coeffTable$addColumnInfo(name = "pval",  type = "pvalue", title = gettext("p"))
   .metaAnalysisConfidenceInterval(options, coeffTable)
 
-  coeffTable$addFootnote(switch(options$test, z = gettext("Wald test."), gettext("Wald tests.")))
+  coeffTable$addFootnote(switch(options$regressionCoefficientEstimateTest, z = gettext("Wald test."), gettext("Wald tests.")))
 
   container[["coeffTable"]] <- coeffTable
   if(!ready)
@@ -155,11 +155,11 @@
 }
 
 .metaAnalysisFitMeasuresTable <- function(container, dataset, options, ready) {
-  if (!options$modelFit || !is.null(container[["fitMeasuresTable"]]))
+  if (!options$fitMeasure || !is.null(container[["fitMeasuresTable"]]))
     return()
 
   fitMeasuresTable <- createJaspTable(gettext("Fit measures"))
-  fitMeasuresTable$dependOn("modelFit")
+  fitMeasuresTable$dependOn("fitMeasure")
   fitMeasuresTable$position <- 3
 
   method <- .metaAnalysisGetTranslatedMethod(options)
@@ -177,11 +177,11 @@
 .metaAnalysisResidualTable <- function(container, dataset, options, ready) {
   method <- .metaAnalysisGetMethod(options)
 
-  if (!options$residualsParameters || method == "FE" || !is.null(container[["residualTable"]]))
+  if (!options$residualParameter || method == "FE" || !is.null(container[["residualTable"]]))
     return()
 
   residualTable <- createJaspTable(gettext("Residual Heterogeneity Estimates"))
-  residualTable$dependOn(c("residualsParameters", "regressionCoefficientsConfidenceIntervals"))
+  residualTable$dependOn(c("residualParameter", "regressionCoefficientEstimateCi"))
   residualTable$position <- 4
   residualTable$showSpecifiedColumnsOnly <- TRUE
 
@@ -197,11 +197,11 @@
 }
 
 .metaAnalysisCovMatTable <- function(container, dataset, options, ready) {
-  if (!options$regressionCoefficientsCovarianceMatrix || !is.null(container[["covMatTable"]]))
+  if (!options$regressionCoefficientCovarianceMatrix || !is.null(container[["covMatTable"]]))
     return()
 
   covMatTable <- createJaspTable(gettext("Parameter Covariances"))
-  covMatTable$dependOn("regressionCoefficientsCovarianceMatrix")
+  covMatTable$dependOn("regressionCoefficientCovarianceMatrix")
   covMatTable$position <- 5
   covMatTable$showSpecifiedColumnsOnly <- TRUE
 
@@ -225,11 +225,11 @@
 }
 
 .metaAnalysisRankTestTable <- function(container, dataset, options, ready) {
-  if (!options$rSquaredChange || !is.null(container[["rankTestTable"]]))
+  if (!options$funnelPlotRankTestAsymmetry || !is.null(container[["rankTestTable"]]))
     return()
 
   rankTestTable <- createJaspTable(gettext("Rank correlation test for Funnel plot asymmetry"))
-  rankTestTable$dependOn("rSquaredChange")
+  rankTestTable$dependOn("funnelPlotRankTestAsymmetry")
   rankTestTable$position <- 6
   rankTestTable$showSpecifiedColumnsOnly <- TRUE
 
@@ -246,16 +246,16 @@
 }
 
 .metaAnalysisRegTestTable <- function(container, dataset, options, ready) {
-  if (!options$funnelPlotAsymmetryTest || !is.null(container[["regTestTable"]]))
+  if (!options$funnelPlotRegressionAsymmetryTest || !is.null(container[["regTestTable"]]))
     return()
   regTestTable <- createJaspTable(gettext("Regression test for Funnel plot asymmetry (\"Egger's test\")"))
-  regTestTable$dependOn("funnelPlotAsymmetryTest")
+  regTestTable$dependOn("funnelPlotRegressionAsymmetryTest")
   regTestTable$position <- 6
   regTestTable$showSpecifiedColumnsOnly <- TRUE
   regTestTable$addCitation("Viechtbauer, W. (2010). Conducting meta-analyses in R with the metafor package. <em>Journal of Statistical Software</em>, <b>36</b>(3), 1-48.")
 
   regTestTable$addColumnInfo(name = "name",    type = "string", title = "")
-  if (options$test == "knha")
+  if (options$regressionCoefficientEstimateTest == "knha")
     title <- gettext("t")
   else
     title <- gettext("z")
@@ -412,7 +412,7 @@
   if (ready) {
     # Compute/get model
     rma.fit   <- .metaAnalysisComputeModel(container, dataset, options, ready)
-    confInt   <- options$regressionCoefficientsConfidenceIntervalsInterval
+    confInt   <- options$regressionCoefficientEstimateCiLevel
     residPars <- try(confint(rma.fit, digits = 12, level = confInt)$random)
 
     est$tau2 <- residPars[1,1]
@@ -548,7 +548,7 @@
   forestPlot$dependOn(c("forestPlot"))
   plotContainer[["forest"]] <- forestPlot
   if (ready){
-    p <- try(.metaAnalysisForestPlotFill(rma.fit, showLabels = if(!is.null(options[["showLabels"]])) options[["showLabels"]] else TRUE))
+    p <- try(.metaAnalysisForestPlotFill(rma.fit, showLabels = if(!is.null(options[["forestPlotLabel"]])) options[["forestPlotLabel"]] else TRUE))
     if(isTryError(p))
       forestPlot$setError(.extractErrorMessage(p))
     else
@@ -841,7 +841,7 @@
       intercept = FALSE,
       method = x$method,
       weighted = x$weighted,
-      test = x$test,
+      test = x$regressionCoefficientEstimateTest,
       level = x$level,
       control = x$control,
       tau2 = vcs[i]
@@ -1326,8 +1326,8 @@
 }
 
 .metaAnalysisConfidenceInterval <- function(options, table) {
-  if(options$regressionCoefficientsConfidenceIntervals) {
-    ci <- gettextf("%g%% Confidence Interval", 100 * options$regressionCoefficientsConfidenceIntervalsInterval)
+  if(options$regressionCoefficientEstimateCi) {
+    ci <- gettextf("%g%% Confidence Interval", 100 * options$regressionCoefficientEstimateCiLevel)
     table$addColumnInfo(name = "lower", type = "number", title = "Lower", overtitle = ci)
     table$addColumnInfo(name = "upper", type = "number", title = "Upper", overtitle = ci)
   }
