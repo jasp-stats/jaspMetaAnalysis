@@ -76,8 +76,8 @@
   if (ready) {
 
     argList <- list(
-      yi      = dataset[,options$dependent],
-      sei     = dataset[,options$wlsWeights],
+      yi      = dataset[,options$effectSize],
+      sei     = dataset[,options$effectSizeStandardError],
       slab    = if(options$studyLabels != "") dataset[,options$studyLabels],
       method  = .metaAnalysisGetMethod(options),
       mods    = .metaAnalysisFormula(options),
@@ -353,7 +353,7 @@
   rma.fit <- .metaAnalysisComputeModel(container, dataset, options, ready = TRUE)
   coeff   <- coef(summary(rma.fit))
   cov     <-.metaAnalysisMakePrettyCoeffNames(rownames(coeff), dataset)
-  if (options$includeConstant) {
+  if (options$includeIntercept) {
     start <- 1
   } else {
     if (length(cov) == 1)
@@ -507,8 +507,8 @@
 .metaAnalysisFailSafeFill <- function(container, dataset, options) {
   # Compute/get model
   rma.fit <- .metaAnalysisComputeModel(container, dataset, options, ready)
-  fsn.fit <- metafor::fsn(yi   = get(options$dependent),
-                          sei  = get(options$wlsWeights),
+  fsn.fit <- metafor::fsn(yi   = get(options$effectSize),
+                          sei  = get(options$effectSizeStandardError),
                           data = dataset)
   container[["failSafeTable"]]$addRows(list("name" = fsn.fit$type,
                                             "fsnum" = fsn.fit$fsnum,
@@ -519,7 +519,7 @@
 # Plots
 .metaAnalysisPlotsContainer <- function(container, options, ready)  {
   if(!ready) return()
-  if(!options$forestPlot && !options$funnelPlot && !options$plotResidualsDependent &&
+  if(!options$forestPlot && !options$funnelPlot && !options$plotResidualseffectSize &&
      !options$plotResidualsPredicted && !options$trimFillPlot)
     return()
   if (is.null(container[["plots"]])) {
@@ -1287,7 +1287,7 @@
 
   if (is.null(formula.rhs))
     formula.rhs <- ~1
-  if (!options$includeConstant)
+  if (!options$includeIntercept)
     formula.rhs <- update(formula.rhs, ~ . + 0)
 
   if (identical(formula.rhs, ~ 1 - 1))
