@@ -26,5 +26,13 @@ Upgrades
         ChangeRename { from: "rSquaredChange"; to: "funnelPlotRankTestAsymmetry" }
         ChangeRename { from: "funnelPlotAsymmetryTest"; to: "funnelPlotRegressionAsymmetryTest" }
         ChangeRename { from: "residualsParameters"; to: "residualParameter" }
+
+        // ClassicalMetaAnalysisDiagnostics.qml
+        ChangeRename { from: "trimFillPlot"; to: "trimFillAnalysis" }
+        ChangeRename { from: "plotResidualsPredicted"; to: "profilePlot" }
+        ChangeRename { from: "plotResidualsDependent"; to: "diagnosticPlot" }
+        ChangeRename { from: "plotResidualsQQ"; to: "diagnosticQqPlot" }
+        ChangeRename { from: "plotResidualsCovariates"; to: "failSafeN" }
+        ChangeRename { from: "residualsCasewiseDiagnostics"; to: "casewiseDiagnostics" }
 	}
 }
