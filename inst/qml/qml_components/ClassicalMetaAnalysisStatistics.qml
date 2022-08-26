@@ -30,7 +30,8 @@ Section
 	{
 		title: qsTr("Regression Coefficients")
 		CheckBox
-		{   name: "estimate";
+		{
+			name: "estimate";
 			text: qsTr("Estimates");
 			checked: true
 			onClicked: { if (!checked && estimatesConfInt.checked) estimatesConfInt.click() }
@@ -57,7 +58,7 @@ Section
 			
 			CheckBox
 			{
-				name:		"showLabels"
+				name:		"forestPlotLabel"
 				text:		qsTr("Show labels")
 				checked:	true
 				enabled: 	forestPlot.checked	
@@ -66,7 +67,7 @@ Section
 
 			DropDown
 			{
-				name:			"forestPlotOrder"
+				name:			"forestPlotOrdering"
 				label:			qsTr("Ordering")
 				enabled: 		forestPlot.checked
 				visible:		module == "cochrane"
