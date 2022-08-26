@@ -273,11 +273,11 @@
 }
 
 .metaAnalysisCasewiseTable <- function(container, dataset, options, ready) {
-  if (!options$residualsCasewiseDiagnostics || !is.null(container[["casewiseTable"]]))
+  if (!options$casewiseDiagnostics || !is.null(container[["casewiseTable"]]))
     return()
 
   casewiseTable <- createJaspTable(gettext("Influence Measures"))
-  casewiseTable$dependOn("residualsCasewiseDiagnostics")
+  casewiseTable$dependOn("casewiseDiagnostics")
   casewiseTable$position <- 6
   casewiseTable$showSpecifiedColumnsOnly <- TRUE
 
@@ -302,11 +302,11 @@
 }
 
 .metaAnalysisFailSafeTable <- function(container, dataset, options, ready) {
-  if (!options$plotResidualsCovariates || !is.null(container[["failSafeTable"]]) || !ready)
+  if (!options$failSafeN || !is.null(container[["failSafeTable"]]) || !ready)
     return()
 
   failSafeTable <- createJaspTable(gettext("File Drawer Analysis"))
-  failSafeTable$dependOn("plotResidualsCovariates")
+  failSafeTable$dependOn("failSafeN")
   failSafeTable$position <- 6
   failSafeTable$showSpecifiedColumnsOnly <- TRUE
 
@@ -520,7 +520,7 @@
 .metaAnalysisPlotsContainer <- function(container, options, ready)  {
   if(!ready) return()
   if(!options$forestPlot && !options$funnelPlot && !options$plotResidualseffectSize &&
-     !options$plotResidualsPredicted && !options$trimFillPlot)
+     !options$profilePlot && !options$trimFillAnalysis)
     return()
   if (is.null(container[["plots"]])) {
     plotContainer <- createJaspContainer(gettext("Plot"))
@@ -581,7 +581,7 @@
 }
 
 .metaAnalysisProfilePlot <- function(container, dataset, options, ready) {
-  if(!options$plotResidualsPredicted)
+  if(!options$profilePlot)
     return()
   .metaAnalysisPlotsContainer(container, options, ready)
   plotContainer <- container[["plots"]]
@@ -590,7 +590,7 @@
 
   profilePlot   <- createJaspPlot(title = gettextf("Log-Likelihood for %s%s", "\u3C4", "\u00B2"), width = 520, height = 520)
   profilePlot$position <- 4
-  profilePlot$dependOn(c("plotResidualsPredicted"))
+  profilePlot$dependOn(c("profilePlot"))
   plotContainer[["profile"]] <- profilePlot
   if(ready){
     p <- try(.metaAnalysisProfilePlotFill(rma.fit))
@@ -603,14 +603,14 @@
 }
 
 .metaAnalysisTrimFillPlot <- function(container, dataset, options, ready) {
-  if(!options$trimFillPlot)
+  if(!options$trimFillAnalysis)
     return()
   .metaAnalysisPlotsContainer(container, options, ready)
   plotContainer <- container[["plots"]]
   # Compute/get model
   trimFillPlot <- createJaspPlot(title = gettext("Trim-Fill Analysis"), width = 820, height = 820)
   trimFillPlot$position <- 5
-  trimFillPlot$dependOn(c("trimFillPlot"))
+  trimFillPlot$dependOn(c("trimFillAnalysis"))
   plotContainer[["trimFill"]] <- trimFillPlot
 
   if (ready) {
@@ -627,7 +627,7 @@
 }
 
 .metaAnalysisDiagnosticPlot <- function(container, dataset, options, ready) {
-  if(!options$plotResidualsDependent)
+  if(!options$diagnosticPlot)
     return()
   .metaAnalysisPlotsContainer(container, options, ready)
   plotContainer <- container[["plots"]]
@@ -635,11 +635,11 @@
   rma.fit   <- .metaAnalysisComputeModel(container, dataset, options, ready)
   diagnosticPlot <- createJaspPlot(title = gettext("Diagnostic Plots"), width = 820, height = 820)
   diagnosticPlot$position <- 3
-  diagnosticPlot$dependOn(c("plotResidualsDependent", "plotResidualsQQ"))
+  diagnosticPlot$dependOn(c("diagnosticPlot", "diagnosticQqPlot"))
   plotContainer[["diagnosticPlot"]] <- diagnosticPlot
   if(ready){
     p <- try(.metaAnalysisDiagnosticPlotFill(plotContainer, rma.fit,
-                                             qqplot = options$plotResidualsQQ,
+                                             qqplot = options$diagnosticQqPlot,
                                              radial = rma.fit$int.only))
     if(isTryError(p))
       diagnosticPlot$setError(.extractErrorMessage(p))
