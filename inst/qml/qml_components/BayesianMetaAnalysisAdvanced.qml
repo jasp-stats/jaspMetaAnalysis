@@ -25,22 +25,22 @@ Section
 	columns: 	2
 	title: 		qsTr("Advanced")
 	
-	property string modelTypeValue:			"BMA"
-	property string modelDirectionValue:	"allPos"
+	property string modelTypeValue:			"averaging"
+	property string modelDirectionValue:	"positive"
 
 	Group
 	{
 		id:			priorModelProbabilityGroup
-		enabled: 	modelTypeValue == "FE" || modelTypeValue == "RE" || modelTypeValue == "BMA"
+		enabled: 	modelTypeValue == "fixed" || modelTypeValue == "random" || modelTypeValue == "averaging"
 		title: 		qsTr("Prior model probability")
 
-		property double fixedEffectsHypothesisVal:	modelTypeValue == "FE" ? 0.5 :
-														modelTypeValue == "RE" ? 0 :
-															modelTypeValue == "BMA" ? 0.25 : 0
+		property double fixedEffectsHypothesisVal:	modelTypeValue == "fixed" ? 0.5 :
+														modelTypeValue == "random" ? 0 :
+															modelTypeValue == "averaging" ? 0.25 : 0
 
-		property double randomEffectsHypothesisVal:	modelTypeValue == "FE" ? 0 :
-														modelTypeValue == "RE" ? 0.5 :
-															modelTypeValue == "BMA" ? 0.25 : 0
+		property double randomEffectsHypothesisVal:	modelTypeValue == "fixed" ? 0 :
+														modelTypeValue == "random" ? 0.5 :
+															modelTypeValue == "averaging" ? 0.25 : 0
 		function resetHypotheses() {
 			priorH0FE.value = fixedEffectsHypothesisVal
 			priorH1FE.value = fixedEffectsHypothesisVal
@@ -55,14 +55,14 @@ Section
 		
 		Group
 		{
-			enabled: 			modelTypeValue == "FE" || modelTypeValue == "BMA"
+			enabled: 			modelTypeValue == "fixed" || modelTypeValue == "averaging"
 			title: 				qsTr("Fixed effects")
 			onEnabledChanged: 	priorModelProbabilityGroup.resetHypotheses()
 
 			DoubleField
 			{
 				id: 			priorH0FE
-				name: 			"priorH0FE"
+				name: 			"priorModelProbabilityFixedNull"
 				label: 			"H\u2080"
 				defaultValue: 	priorModelProbabilityGroup.fixedEffectsHypothesisVal
 			}
@@ -70,7 +70,7 @@ Section
 			DoubleField
 			{
 				id: 			priorH1FE
-				name: 			"priorH1FE"
+				name: 			"priorModelProbabilityFixedAlternative"
 				label: 			"H\u2081"
 				defaultValue: 	priorModelProbabilityGroup.fixedEffectsHypothesisVal
 			}
@@ -79,13 +79,13 @@ Section
 		Group
 		{
 			title: 				qsTr("Random effects")
-			enabled: 			modelTypeValue == "RE" || modelTypeValue == "BMA"
+			enabled: 			modelTypeValue == "random" || modelTypeValue == "averaging"
 			onEnabledChanged: 	priorModelProbabilityGroup.resetHypotheses()
 
 			DoubleField
 			{
 				id: 			priorH0RE
-				name: 			"priorH0RE"
+				name: 			"priorModelProbabilityRandomNull"
 				label: 			"H\u2080"
 				defaultValue: 	priorModelProbabilityGroup.randomEffectsHypothesisVal
 			}
@@ -93,7 +93,7 @@ Section
 			DoubleField
 			{
 				id: 			priorH1RE
-				name: 			"priorH1RE"
+				name: 			"priorModelProbabilityRandomAlternative"
 				label: 			"H\u2081"
 				defaultValue: 	priorModelProbabilityGroup.randomEffectsHypothesisVal
 			}
@@ -102,7 +102,7 @@ Section
 
 	Group
 	{
-		enabled: !(modelTypeValue == "CRE")
+		enabled: !(modelTypeValue == "constrainedRandom")
 
 		Group
 		{
@@ -111,9 +111,9 @@ Section
 
 			IntegerField
 			{
-				label: 			qsTr("iterations:")
-				name: 			"iterMCMC"
-				defaultValue: 	!(modelTypeValue == "CRE") ? 2000 : 10000
+				label: 			qsTr("samples:")
+				name: 			"samples"
+				defaultValue: 	!(modelTypeValue == "constrainedRandom") ? 2000 : 10000
 				min:			100
 				max: 			1000000
 				fieldWidth: 	100
@@ -122,7 +122,7 @@ Section
 			IntegerField
 			{
 				label: 			qsTr("chains:")
-				name: 			"chainsMCMC"
+				name: 			"chains"
 				defaultValue: 	4
 				min:			1
 				max: 			10
@@ -138,7 +138,7 @@ Section
 
 			RadioButtonGroup
 			{
-				name: "BFComputation"
+				name: "bayesFactorComputation"
 
 				RadioButton
 				{
@@ -157,7 +157,7 @@ Section
 					IntegerField
 					{
 						label:  		qsTr("iterations:")
-						name:     		"iterBridge"
+						name:     		"bridgeSamplingSamples"
 						visible:      	bridge.checked
 						defaultValue: 	5000
 						max:			1000000

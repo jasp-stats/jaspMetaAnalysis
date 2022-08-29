@@ -56,7 +56,7 @@ Section
 				RadioButton
 				{
 					id:		plotForestEstimated
-					enabled: 	!(modelTypeValue == "FE")
+					enabled: 	!(modelTypeValue == "fixed")
 					name: 		"estimated"
 					label: 		qsTr("Estimated")
 				}
@@ -64,7 +64,7 @@ Section
 				RadioButton
 				{
 					id:		plotForestBoth
-					enabled: 	!(modelTypeValue == "FE")
+					enabled: 	!(modelTypeValue == "fixed")
 					name: 		"both"
 					label: 		qsTr("Both")
 				}
@@ -151,7 +151,7 @@ Section
 		CheckBox
 		{
 			name: "priorAndPosteriorFixedAndRandom"
-			enabled: modelTypeValue == "BMA" || modelTypeValue == "CRE"
+			enabled: modelTypeValue == "averaging" || modelTypeValue == "constrainedRandom"
 			label: qsTr("Add fixed and random effects posterior")
 		}
 		CheckBox
