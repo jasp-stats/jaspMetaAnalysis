@@ -30,19 +30,19 @@ Section
 	{
 		title: qsTr("Regression Coefficients")
 		CheckBox
-		{   name: "regressionCoefficientEstimate";
+		{   name: "estimate";
 			text: qsTr("Estimates");
 			checked: true
 			onClicked: { if (!checked && estimatesConfInt.checked) estimatesConfInt.click() }
 			CheckBox
 			{
 				id: estimatesConfInt
-				name: "regressionCoefficientEstimateCi"; text: qsTr("Confidence intervals")
-				CIField { name: "regressionCoefficientEstimateCiLevel"; label: qsTr("Interval") }
-				DropDown { name: "regressionCoefficientEstimateTest"; label: qsTr("Test"); values: [ "z", "knha"]; }
+				name: "estimateCi"; text: qsTr("Confidence intervals")
+				CIField { name: "estimateCiLevel"; label: qsTr("Interval") }
+				DropDown { name: "estimateTest"; label: qsTr("Test"); values: [ "z", "knha"]; }
 			}
 		}
-		CheckBox { name: "regressionCoefficientCovarianceMatrix"; text: qsTr("Covariance matrix") }
+		CheckBox { name: "covarianceMatrix"; text: qsTr("Covariance matrix") }
 
 	}
 	Group

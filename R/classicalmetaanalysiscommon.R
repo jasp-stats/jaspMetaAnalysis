@@ -82,9 +82,9 @@
       method  = .metaAnalysisGetMethod(options),
       mods    = .metaAnalysisFormula(options),
       data    = dataset,
-      test    = options$regressionCoefficientEstimateTest,
+      test    = options$estimateTest,
       # add tiny amount because 1 is treated by rma() as 100% whereas values > 1 as percentages
-      level   = options$regressionCoefficientEstimateCiLevel + 1e-9,
+      level   = options$estimateCiLevel + 1e-9,
       control = list(maxiter = 500)
     )
     argList <- argList[!sapply(argList, is.null)]
@@ -127,11 +127,11 @@
 }
 
 .metaAnalysisCoeffTable <- function(container, dataset, options, ready) {
-  if (!options$regressionCoefficientEstimate || !is.null(container[["coeffTable"]]))
+  if (!options$estimate || !is.null(container[["coeffTable"]]))
     return()
 
   coeffTable <- createJaspTable(gettext("Coefficients"))
-  coeffTable$dependOn(c("regressionCoefficientEstimate", "regressionCoefficientEstimateCi"))
+  coeffTable$dependOn(c("estimate", "estimateCi"))
   coeffTable$position <- 2
   coeffTable$showSpecifiedColumnsOnly <- TRUE
   coeffTable$addCitation("Viechtbauer, W. (2010). Conducting meta-analyses in R with the metafor package. Journal of Statistical Software, 36(3), 1-48. URL: http://www.jstatsoft.org/v36/i03/")
@@ -143,7 +143,7 @@
   coeffTable$addColumnInfo(name = "pval",  type = "pvalue", title = gettext("p"))
   .metaAnalysisConfidenceInterval(options, coeffTable)
 
-  coeffTable$addFootnote(switch(options$regressionCoefficientEstimateTest, z = gettext("Wald test."), gettext("Wald tests.")))
+  coeffTable$addFootnote(switch(options$estimateTest, z = gettext("Wald test."), gettext("Wald tests.")))
 
   container[["coeffTable"]] <- coeffTable
   if(!ready)
@@ -181,7 +181,7 @@
     return()
 
   residualTable <- createJaspTable(gettext("Residual Heterogeneity Estimates"))
-  residualTable$dependOn(c("residualParameter", "regressionCoefficientEstimateCi"))
+  residualTable$dependOn(c("residualParameter", "estimateCi"))
   residualTable$position <- 4
   residualTable$showSpecifiedColumnsOnly <- TRUE
 
@@ -197,11 +197,11 @@
 }
 
 .metaAnalysisCovMatTable <- function(container, dataset, options, ready) {
-  if (!options$regressionCoefficientCovarianceMatrix || !is.null(container[["covMatTable"]]))
+  if (!options$covarianceMatrix || !is.null(container[["covMatTable"]]))
     return()
 
   covMatTable <- createJaspTable(gettext("Parameter Covariances"))
-  covMatTable$dependOn("regressionCoefficientCovarianceMatrix")
+  covMatTable$dependOn("covarianceMatrix")
   covMatTable$position <- 5
   covMatTable$showSpecifiedColumnsOnly <- TRUE
 
@@ -255,7 +255,7 @@
   regTestTable$addCitation("Viechtbauer, W. (2010). Conducting meta-analyses in R with the metafor package. <em>Journal of Statistical Software</em>, <b>36</b>(3), 1-48.")
 
   regTestTable$addColumnInfo(name = "name",    type = "string", title = "")
-  if (options$regressionCoefficientEstimateTest == "knha")
+  if (options$estimateTest == "knha")
     title <- gettext("t")
   else
     title <- gettext("z")
@@ -412,7 +412,7 @@
   if (ready) {
     # Compute/get model
     rma.fit   <- .metaAnalysisComputeModel(container, dataset, options, ready)
-    confInt   <- options$regressionCoefficientEstimateCiLevel
+    confInt   <- options$estimateCiLevel
     residPars <- try(confint(rma.fit, digits = 12, level = confInt)$random)
 
     est$tau2 <- residPars[1,1]
@@ -841,7 +841,7 @@
       intercept = FALSE,
       method = x$method,
       weighted = x$weighted,
-      test = x$regressionCoefficientEstimateTest,
+      test = x$estimateTest,
       level = x$level,
       control = x$control,
       tau2 = vcs[i]
@@ -1326,8 +1326,8 @@
 }
 
 .metaAnalysisConfidenceInterval <- function(options, table) {
-  if(options$regressionCoefficientEstimateCi) {
-    ci <- gettextf("%g%% Confidence Interval", 100 * options$regressionCoefficientEstimateCiLevel)
+  if(options$estimateCi) {
+    ci <- gettextf("%g%% Confidence Interval", 100 * options$estimateCiLevel)
     table$addColumnInfo(name = "lower", type = "number", title = "Lower", overtitle = ci)
     table$addColumnInfo(name = "upper", type = "number", title = "Upper", overtitle = ci)
   }
