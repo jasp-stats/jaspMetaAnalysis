@@ -26,8 +26,8 @@ Section
 	title: 		qsTr("Plots")
 
 	property alias plotForestObservedClick:	plotForestObserved.checked
-	property string modelTypeValue:			"BMA"
-	property string modelDirectionValue:	"allPos"
+	property string modelTypeValue:			"averaging"
+	property string modelDirectionValue:	"positive"
 	property string module:					"metaAnalysis"
 
 	Group
@@ -37,18 +37,18 @@ Section
 		CheckBox
 		{
 			id: 		checkForest
-			name: 		"checkForestPlot"
+			name: 		"forestPlot"
 			label: 		qsTr("Forest plot")
 			checked: 	true
 
 			RadioButtonGroup
 			{
-				name: "forestPlot"
+				name: "forestPlotEffect"
 
 				RadioButton
 				{
 					id:		plotForestObserved
-					name: 		"plotForestObserved"
+					name: 		"observed"
 					label: 		qsTr("Observed")
 					checked: 	true
 				}
@@ -57,7 +57,7 @@ Section
 				{
 					id:		plotForestEstimated
 					enabled: 	!(modelTypeValue == "FE")
-					name: 		"plotForestEstimated"
+					name: 		"estimated"
 					label: 		qsTr("Estimated")
 				}
 
@@ -65,7 +65,7 @@ Section
 				{
 					id:		plotForestBoth
 					enabled: 	!(modelTypeValue == "FE")
-					name: 		"plotForestBoth"
+					name: 		"both"
 					label: 		qsTr("Both")
 				}
 			}
@@ -101,26 +101,26 @@ Section
 
 		RadioButtonGroup
 		{
-			name: 		"orderForest"
+			name: 		"forestPlotOrder"
 			title: 		qsTr("Order")
 			enabled: 	checkForest.checked
 			visible:	module == "metaAnalysis"
 
 			RadioButton
 			{
-				name: 	"ascendingForest"
+				name: 	"ascending"
 				label: 	qsTr("Ascending")
 			}
 
 			RadioButton
 			{
-				name: 	"descendingForest"
+				name: 	"descending"
 				label: 	qsTr("Descending")
 			}
 
 			RadioButton
 			{
-				name: 	"labelForest"
+				name: 	"rowOrder"
 				label: 	qsTr("Row order")
 			}
 		}
@@ -128,35 +128,35 @@ Section
 
 	CheckBox
 	{
-		name: 	"plotCumForest"
+		name: 	"cumulativeForestPlot"
 		label: 	qsTr("Cumulative forest plot")
 		CheckBox
 		{
-			name: "addPrior"
+			name: "cumulativeForestPlotPrior"
 			label: qsTr("Add prior")
 		}
 	}
 
 	CheckBox
 	{
-		name: 		"plotPosterior"
+		name: 		"priorAndPosterior"
 		label: 		qsTr("Prior and posterior")
 
 		CheckBox
 		{
-			name: "addInfo"
+			name: "priorAndPosteriorInfo"
 			label: qsTr("Additional info")
 		}
 
 		CheckBox
 		{
-			name: "addLines"
+			name: "priorAndPosteriorFixedAndRandom"
 			enabled: modelTypeValue == "BMA" || modelTypeValue == "CRE"
 			label: qsTr("Add fixed and random effects posterior")
 		}
 		CheckBox
 		{
-			name: 	"shade"
+			name: 	"priorAndPosteriorShade"
 			label: 	qsTr("Shade 95% CI")
 		}
 	}
@@ -167,13 +167,13 @@ Section
 
 		CheckBox
 		{
-			name: 	"plotSequential"
+			name: 	"sequentialPlotBayesFactor"
 			label: 	qsTr("Bayes factors")
 		}
 
 		CheckBox
 		{
-			name: 	"plotSeqPM"
+			name: 	"sequentialPlotModelProbability"
 			label: 	qsTr("Posterior model probabilities")
 		}
 	}

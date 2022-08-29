@@ -38,17 +38,17 @@
   }
 
   # Plot: Prior(s) and Posterior(s); only when checked
-  if(options$plotPosterior){
+  if(options$priorAndPosterior){
     .bmaPriorAndPosteriorPlot(jaspResults, dataset, options, ready, .bmaDependencies)
   }
 
   # Plot: Forest plot; only when checked
-  if(options$checkForestPlot || options$plotCumForest){
+  if(options$forestPlot || options$cumulativeForestPlot){
     .bmaForestPlot(jaspResults, dataset, options, ready, .bmaDependencies)
   }
 
   # Plot: Cumulative forest plot and sequential; only when checked
-  if(options$plotSequential || options$plotSeqPM){
+  if(options$sequentialPlotBayesFactor || options$sequentialPlotModelProbability){
     .bmaSequentialPlot(jaspResults, dataset, options, ready, .bmaDependencies)
   }
 }
@@ -919,7 +919,7 @@
 # Plot: Prior and Posterior
 .bmaPriorAndPosteriorPlot <- function(jaspResults, dataset, options, ready, .bmaDependencies) {
   postContainer <- createJaspContainer(title = gettext("Prior and Posteriors"))
-  postContainer$dependOn(c(.bmaDependencies, "plotPosterior", "shade", "addInfo", "addLines"))
+  postContainer$dependOn(c(.bmaDependencies, "priorAndPosterior", "priorAndPosteriorShade", "priorAndPosteriorInfo", "priorAndPosteriorFixedAndRandom"))
   jaspResults[["postContainer"]] <- postContainer
   jaspResults[["postContainer"]]$position <- 5
 
@@ -964,7 +964,7 @@
     if(options[["model"]] == "averaging"){
       int <- c(bmaResults[["bma"]]$estimates["averaged", "2.5%"], bmaResults[["bma"]]$estimates["averaged", "97.5%"])
       postName <- "Averaged"
-      if(options[["addLines"]]){
+      if(options[["priorAndPosteriorFixedAndRandom"]]){
         labelsModel <- c(bquote(.(gettext("Fixed H"))[1]),
                          bquote(.(gettext("Random H"))[1]),
                          bquote(.(gettext("Averaged H"))[1]),
@@ -995,7 +995,7 @@
     } else if(options[["model"]] == "constrainedRandom"){
       int <- c(bmaResults[["bma"]]$estimates["ordered", "2.5%"], bmaResults[["bma"]]$estimates["ordered", "97.5%"])
       postName <- "Ordered"
-      if(options[["addLines"]]){
+      if(options[["priorAndPosteriorFixedAndRandom"]]){
         labelsModel <- c(bquote(.(gettext("Fixed H"))[1]),
                          bquote(.(gettext("Ordered H"))[1]),
                          bquote(.(gettext("Random H"))[1]),
@@ -1048,7 +1048,7 @@
 
   df <- data.frame(x = c(xPost, xPost), y = c(yPrior, yPost), g = rep(c("Prior", postName), each = length(xPost)))
 
-  if(options$addLines && (options$model == "averaging" || options$model == "constrainedRandom")){
+  if(options$priorAndPosteriorFixedAndRandom && (options$model == "averaging" || options$model == "constrainedRandom")){
     if(type == "ES"){
       yPostES <- c(bmaResults[["fixed"]]$yPost, bmaResults[["random"]]$yPost)
       xPostES <- c(bmaResults[["fixed"]]$xPost, bmaResults[["random"]]$xPost)
@@ -1076,9 +1076,9 @@
     df <- rbind(df, dfPost)
   }
 
-  if(!options$addLines || options$model == "random" || options$model == "fixed"){
+  if(!options$priorAndPosteriorFixedAndRandom || options$model == "random" || options$model == "fixed"){
     df$g <- factor(df$g, levels = c(postName, "Prior"))
-  } else if(options$addLines){
+  } else if(options$priorAndPosteriorFixedAndRandom){
     if(type == "ES"){
       if(options$model == "averaging") df$g <- factor(df$g, levels = c("Fixed", "Random", "Averaged", "Prior"))
       if(options$model == "constrainedRandom") df$g <- factor(df$g, levels = c("Fixed", "Ordered", "Random", "Prior"))
@@ -1120,7 +1120,7 @@
 
 
 
-  if(!options[["addInfo"]]){
+  if(!options[["priorAndPosteriorInfo"]]){
     BF <- NULL
     CRI <- NULL
     bfType <- NULL
@@ -1137,7 +1137,7 @@
     }
   }
 
-  if(options[["addInfo"]]){
+  if(options[["priorAndPosteriorInfo"]]){
     BF <- round(BF, 3)
     CRI <- round(CRI, 3)
     med <- round(med, 3)
@@ -1186,12 +1186,12 @@
   .extraPost <- function(plot, int, xPost, yPost){
 
 
-    if(options[["shade"]]){
+    if(options[["priorAndPosteriorShade"]]){
       shadeData <- data.frame(x = xPost[xPost < max(int) & xPost > min(int)], y = yPost[xPost < max(int) & xPost > min(int)])
       plot <- plot + ggplot2::geom_area(data = shadeData, mapping = ggplot2::aes(x = x, y = y), fill = "grey", group = 1, linetype = 1, color = NA, alpha = 0.5)
     }
 
-    if(options[["addLines"]] && options[["model"]] == "averaging"){
+    if(options[["priorAndPosteriorFixedAndRandom"]] && options[["model"]] == "averaging"){
       plot <- plot + ggplot2::scale_linetype_manual(values = valuesLine)
     }
 
@@ -1205,7 +1205,7 @@
 
   xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, xPost))
 
-  if(options[["addInfo"]]){
+  if(options[["priorAndPosteriorInfo"]]){
     plot$subplots$mainGraph <- plot$subplots$mainGraph + ggplot2::scale_x_continuous(name = xlab, breaks = xBreaks, limits = c(min(xPost), max(xPost)))
     plot$subplots$mainGraph <- .extraPost(plot$subplots$mainGraph, int, xPost, yPost)
   } else {
@@ -1241,16 +1241,16 @@
   width  <- 500 + (nchar(max(studyLabels)) * 5)
 
   # Create empty plot
-  if(is.null(forestContainer[["forestPlot"]]) && options$checkForestPlot) {
+  if(is.null(forestContainer[["forestPlot"]]) && options$forestPlot) {
 
     # title and height of plot based on observed/estimated
-    if(options$forestPlot == "plotForestObserved"){
+    if(options$forestPlotEffect == "observed"){
       title  <- gettext("Observed study effects")
       height <- 100 + nrow(dataset) * 30
-    } else if(options$forestPlot == "plotForestEstimated"){
+    } else if(options$forestPlotEffect == "estimated"){
       title  <- gettext("Estimated study effects")
       height <- 100 + nrow(dataset) * 30
-    } else if(options$forestPlot == "plotForestBoth"){
+    } else if(options$forestPlotEffect == "both"){
       title  <- gettext("Observed and estimated study effects")
       height <- 150 + 2 * (nrow(dataset) * 30)
     }
@@ -1258,17 +1258,17 @@
     forestPlot <- createJaspPlot(plot = NULL, title = title, height = height, width = width)
 
     # Fill plot
-    forestPlot$dependOn(c("forestPlot", "checkForestPlot",
-                          "orderForest", "forestPlotOrder", "showLabels"))
+    forestPlot$dependOn(c("forestPlotEffect", "forestPlot",
+                          "forestPlotOrder", "forestPlotOrder", "showLabels"))
     forestPlot$position <- 1
     .bmaFillForestPlot(forestPlot, jaspResults, dataset, options, studyLabels, showLabels = if(!is.null(options[["showLabels"]])) options[["showLabels"]] else TRUE)
     # Add plot to container
-    forestContainer[["forestPlot"]] <- forestPlot
+    forestContainer[["forestPlotEffect"]] <- forestPlot
   }
 
-  if(is.null(forestContainer[["cumForestPlot"]]) && options$plotCumForest){
+  if(is.null(forestContainer[["cumForestPlot"]]) && options$cumulativeForestPlot){
     cumForestPlot <- createJaspPlot(plot = NULL, title = gettext("Cumulative forest plot"), height = heightCumulative, width = width)
-    cumForestPlot$dependOn(c("plotCumForest", "addPrior"))
+    cumForestPlot$dependOn(c("cumulativeForestPlot", "cumulativeForestPlotPrior"))
     cumForestPlot$position <- 2
     .bmaFillCumForest(cumForestPlot, jaspResults, dataset, options, studyLabels, .bmaDependencies)
     forestContainer[["cumForestPlot"]] <- cumForestPlot
@@ -1351,7 +1351,7 @@
   yDiamond <- -0.5
 
   if (options$model == "averaging" || options$model == "constrainedRandom") {
-    if (options$forestPlot == "plotForestBoth")
+    if (options$forestPlotEffect == "both")
       yDiamond <- c(-0.5, -1.1, -1.7)
     else
       yDiamond <- c(-0.5, -1.5, -2.5)
@@ -1439,7 +1439,7 @@
                    text = text_observed)
 
   # Change objects if only estimated points
-  if(options$forestPlot == "plotForestEstimated"){
+  if(options$forestPlotEffect == "estimated"){
     df <- data.frame(effectSize = mean_estimates, y = length(varES):1,
                      studyLabels = studyLabels,
                      weight_scaled = weight_estimated_scaled,
@@ -1454,13 +1454,13 @@
   if (options[["module"]] == "metaAnalysis"){
 
     ranked <- rank(df$effectSize, ties.method="first")
-    if(options$orderForest == "ascendingForest"){
+    if(options$forestPlotOrder == "ascending"){
       ord <- (length(varES) + 1) - ranked
       df$y <- ord
       yEst <- yEst[ranked]
     }
 
-    if(options$orderForest == "descendingForest"){
+    if(options$forestPlotOrder == "descending"){
       ord <- ranked
       df$y <- ord
       yEst <- yEst[(length(varES) + 1) - ranked]
@@ -1509,7 +1509,7 @@
     ggplot2::scale_y_continuous(breaks = c(df$y, yDiamond), labels = c(as.character(df$studyLabels), model),
                                 sec.axis = ggplot2::sec_axis(~ ., breaks = c(df$y, yDiamond), labels = c(as.character(df$text), textDiamond)), expand = c(0, 0.5))
 
-  if(options$forestPlot == "plotForestBoth"){
+  if(options$forestPlotEffect == "both"){
     dfBoth <- data.frame(effectSize = c(varES, mean_estimates),
                          y = c(df$y, yEst),
                          studyLabels = c(studyLabels, studyLabels),
@@ -1546,7 +1546,7 @@
                                 axis.text.y = ggplot2::element_text(hjust = 0),
                                 axis.text.y.right = ggplot2::element_text(hjust = 1))
 
-  if(options$forestPlot == "plotForestBoth"){
+  if(options$forestPlotEffect == "both"){
     plot <- plot + ggplot2::theme(
       legend.position = c(1, 1),
       legend.justification=c(0, 0),
@@ -1590,7 +1590,7 @@
 
   df <- data.frame(effectSize = meanMain, studyLabels = studyLabels, y = length(meanMain):1)
 
-  if(!options$addPrior) {
+  if(!options$cumulativeForestPlotPrior) {
     idx <- which(df$studyLabels == "Prior")
     df <- df[-idx, ]
     text <- text[-idx]
@@ -1632,25 +1632,25 @@
   }
 
   # Fill sequential plot BFs effect size
-  if(options$plotSequential){
+  if(options$sequentialPlotBayesFactor){
     seqPlotES <- createJaspPlot(plot = NULL, title = gettext("Bayes factors effect size"), height = 400, width = 580)
-    seqPlotES$dependOn(c("plotSequential", "BF"))
+    seqPlotES$dependOn(c("sequentialPlotBayesFactor", "BF"))
     seqPlotES$position <- 1
     seqContainer[["seqPlotES"]] <- seqPlotES
     .bmaFillSeqPlot(seqPlotES, jaspResults, dataset, options, .bmaDependencies, type = "ES")
     # Fill sequential plot BFs standard error
     if(!options$model == "fixed"){
       seqPlotSE <- createJaspPlot(plot = NULL, title = gettext("Bayes factors heterogeneity"), height = 400, width = 580)
-      seqPlotSE$dependOn(c("plotSequential", "BF"))
+      seqPlotSE$dependOn(c("sequentialPlotBayesFactor", "BF"))
       seqPlotSE$position <- 2
       seqContainer[["seqPlotSE"]] <- seqPlotSE
       .bmaFillSeqPlot(seqPlotSE, jaspResults, dataset, options, .bmaDependencies, type = "SE")
     }
   }
 
-  if(options$plotSeqPM){
+  if(options$sequentialPlotModelProbability){
     seqPMPlot <- createJaspPlot(plot = NULL, title = gettext("Posterior model probabilities"), height = 400, width = 580)
-    seqPMPlot$dependOn("plotSeqPM")
+    seqPMPlot$dependOn("sequentialPlotModelProbability")
     seqPMPlot$position <- 3
     .bmaFillSeqPM(seqPMPlot, jaspResults, dataset, options, .bmaDependencies)
     seqContainer[["seqPMPlot"]] <- seqPMPlot
