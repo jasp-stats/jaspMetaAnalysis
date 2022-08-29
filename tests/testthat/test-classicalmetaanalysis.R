@@ -2,32 +2,32 @@ context("Meta Analysis")
 
 options <- jaspTools::analysisOptions("ClassicalMetaAnalysis")
 options$covariates <- "contcor2"
-options$dependent  <- "contNormal"
+options$effectSize <- "contNormal"
 options$factors    <- c("facGender", "facExperim")
 options$forestPlot <- TRUE
 options$funnelPlot <- TRUE
-options$funnelPlotAsymmetryTest <- TRUE
+options$funnelPlotRegressionAsymmetryTest <- TRUE
 options$method     <- "Restricted ML"
 options$modelTerms <- list(list(components = "contcor2"), 
                            list(components = "facGender"), 
                            list(components = "facExperim"))
-options$plotResidualsCovariates <- TRUE
-options$plotResidualsDependent  <- TRUE
-options$plotResidualsPredicted  <- TRUE
-options$rSquaredChange <- TRUE
-options$regressionCoefficientsConfidenceIntervals <- TRUE
-options$regressionCoefficientsCovarianceMatrix <- TRUE
-options$residualsCasewiseDiagnostics <- TRUE
-options$residualsParameters <- TRUE
-options$studyLabels  <- "contBinom"
-options$trimFillPlot <- TRUE
-options$wlsWeights   <- "debCollin1"
+options$failSafeN <- TRUE
+options$diagnosticPlot <- TRUE
+options$profilePlot <- TRUE
+options$funnelPlotRankTestAsymmetry <- TRUE
+options$estimateCi <- TRUE
+options$covarianceMatrix <- TRUE
+options$casewiseDiagnostics <- TRUE
+options$residualParameter <- TRUE
+options$studyLabel <- "contBinom"
+options$trimFillAnalysis <- TRUE
+options$effectSizeStandardError <- "debCollin1"
 
-options$regressionCoefficientsEstimates <- TRUE
-options$regressionCoefficientsConfidenceIntervalsInterval <- .95
+options$estimate <- TRUE
+options$estimateCiLevel <- .95
 options$test <- "z"
-options$modelFit <- TRUE
-options$plotResidualsQQ <- TRUE
+options$fitMeasure <- TRUE
+options$diagnosticQqPlot <- TRUE
 
 set.seed(1)
 results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", "debug.csv", options)
