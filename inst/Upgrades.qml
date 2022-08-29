@@ -16,11 +16,11 @@ Upgrades
         ChangeRename { from: "includeConstant"; to: "includeIntercept" }
 
         // ClassicalMetaAnalysisStatistics.qml
-        ChangeRename { from: "regressionCoefficientsEstimates"; to: "regressionCoefficientEstimate" }
-        ChangeRename { from: "regressionCoefficientsConfidenceIntervals"; to: "regressionCoefficientEstimateCi" }
-        ChangeRename { from: "regressionCoefficientsConfidenceIntervalsInterval"; to: "regressionCoefficientEstimateCiLevel" }
-        ChangeRename { from: "test"; to: "regressionCoefficientEstimateTest" }
-        ChangeRename { from: "regressionCoefficientsCovarianceMatrix"; to: "regressionCoefficientCovarianceMatrix" }
+        ChangeRename { from: "regressionCoefficientsEstimates"; to: "estimate" }
+        ChangeRename { from: "regressionCoefficientsConfidenceIntervals"; to: "estimateCi" }
+        ChangeRename { from: "regressionCoefficientsConfidenceIntervalsInterval"; to: "estimateCiLevel" }
+        ChangeRename { from: "test"; to: "estimateTest" }
+        ChangeRename { from: "regressionCoefficientsCovarianceMatrix"; to: "covarianceMatrix" }
         ChangeRename { from: "modelFit"; to: "fitMeasure" }
         ChangeRename { from: "rSquaredChange"; to: "funnelPlotRankTestAsymmetry" }
         ChangeRename { from: "funnelPlotAsymmetryTest"; to: "funnelPlotRegressionAsymmetryTest" }
