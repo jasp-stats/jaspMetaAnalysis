@@ -33,7 +33,7 @@
   }
 
   # Plot: Prior(s); only when checked
-  if(options$plotPrior){
+  if(options$priorPlot){
     .bmaPriorPlot(jaspResults, dataset, options, ready)
   }
 
@@ -54,14 +54,14 @@
 }
 
 .bmaDependencies <- c("effectSize", "effectSizeStandardError", "effectSizeCi", "model",
-                      "positive", "negative", "priorH0FE", "priorH1FE", "priorH0RE", "priorH1RE",
-                      "priorES", "informativeCauchyLocation", "informativeCauchyScale",
-                      "checkLowerPrior", "checkUpperPrior", "lowerTrunc", "upperTrunc",
-                      "informativeNormalMean", "informativeNormalStd",
-                      "informativeTLocation", "informativeTScale", "informativeTDf",
-                      "priorSE", "inverseGammaShape", "inverseGammaScale",
-                      "informativehalfTScale", "informativehalfTDf",
-                      "BFComputation", "iterBridge", "iterMCMC", "chainsMCMC", "seed", "setSeed")
+                      "positive", "negative", "priorModelProbabilityFixedNull", "priorModelProbabilityFixedAlternative", "priorModelProbabilityRandomNull", "priorModelProbabilityRandomAlternative",
+                      "priorEffectSize", "cauchyLocation", "cauchyScale",
+                      "truncationLowerBound", "truncationUpperBound", "truncationLowerBoundValue", "truncationUpperBoundValue",
+                      "normalMean", "normalStd",
+                      "tLocation", "tScale", "tDf",
+                      "priorStandardError", "inverseGammaShape", "inverseGammaScale",
+                      "halfTScale", "halfTDf",
+                      "bayesFactorComputation", "bridgeSamplingSamples", "samples", "chains", "seed", "setSeed")
 
 # Save priors for later use (without data)
 .bmaPriors <- function(jaspResults, options) {
@@ -73,27 +73,27 @@
   upperES <- Inf
 
   # prior distribution
-  if(options$priorES == "cauchy"){
+  if(options$priorEffectSize == "cauchy"){
     familyES <- "t"
-    paramES <- c(options$informativeCauchyLocation,
-                 options$informativeCauchyScale, 1)
-  } else if(options$priorES == "normal"){
+    paramES <- c(options$cauchyLocation,
+                 options$cauchyScale, 1)
+  } else if(options$priorEffectSize == "normal"){
     familyES <- "norm"
-    paramES <- c(options$informativeNormalMean,
-                 options$informativeNormalStd)
-  } else if(options$priorES == "t"){
+    paramES <- c(options$normalMean,
+                 options$normalStd)
+  } else if(options$priorEffectSize == "t"){
     familyES <- "t"
-    paramES <- c(options$informativeTLocation,
-                 options$informativeTScale,
-                 options$informativeTDf)
+    paramES <- c(options$tLocation,
+                 options$tScale,
+                 options$tDf)
   }
 
   # If truncated is checked
-  if(options$checkLowerPrior){
-    lowerES <- options$lowerTrunc
+  if(options$truncationLowerBound){
+    lowerES <- options$truncationLowerBoundValue
   }
-  if(options$checkUpperPrior){
-    upperES <- options$upperTrunc
+  if(options$truncationUpperBound){
+    upperES <- options$truncationUpperBoundValue
   }
 
   if (lowerES >= upperES)
@@ -101,17 +101,17 @@
 
   # Heterogeneity prior parameters
   # Inverse gamma prior
-  if(options$priorSE == "inverseGamma"){
+  if(options$priorStandardError == "inverseGamma"){
     familySE <- "invgamma"
     paramSE <- c(options$inverseGammaShape,
                  options$inverseGammaScale)
   }
   # Half t prior
-  if(options$priorSE == "halfT"){
+  if(options$priorStandardError == "halfT"){
     familySE <- "t"
     paramSE <- c(0, # location is always zero
-                 options$informativehalfTScale,
-                 options$informativehalfTDf)
+                 options$halfTScale,
+                 options$halfTDf)
   }
 
   # Make priors (probability density functions)
@@ -133,13 +133,13 @@
   # Save priors
   jaspResults[["bmaPriors"]] <- createJaspState(
     object=list(d = d, tau = tau),
-    dependencies=c("priorES",
-                   "cauchy", "informativeCauchyLocation", "informativeCauchyScale",
-                   "checkLowerPrior", "lowerTrunc", "checkUpperPrior", "upperTrunc",
-                   "normal", "informativeNormalMean", "informativeNormalStd",
-                   "t", "informativeTLocation", "informativeTScale","informativeTDf",
-                   "priorSE", "inverseGamma", "inverseGammaShape", "inverseGammaScale",
-                   "halfT", "informativehalfTScale", "informativehalfTDf"))
+    dependencies=c("priorEffectSize",
+                   "cauchy", "cauchyLocation", "cauchyScale",
+                   "truncationLowerBound", "truncationLowerBoundValue", "truncationUpperBound", "truncationUpperBoundValue",
+                   "normal", "normalMean", "normalStd",
+                   "t", "tLocation", "tScale","tDf",
+                   "priorStandardError", "inverseGamma", "inverseGammaShape", "inverseGammaScale",
+                   "halfT", "halfTScale", "halfTDf"))
 
   return(jaspResults[["bmaPriors"]]$object)
 }
@@ -299,21 +299,21 @@
 
 
   # Advanced: estimation settings
-  iter <- options[["iterMCMC"]]
-  chains <- options[["chainsMCMC"]]
+  iter <- options[["samples"]]
+  chains <- options[["chains"]]
 
   # Advanced: bayes factor computation
-  if(options$BFComputation == "integration"){
+  if(options$bayesFactorComputation == "integration"){
     logml <- "integrate"
     logml_iter <- 5000
-  } else if(options$BFComputation == "bridgeSampling"){
+  } else if(options$bayesFactorComputation == "bridgeSampling"){
     logml <- "stan"
-    logml_iter <- options[["iterBridge"]]
+    logml_iter <- options[["bridgeSamplingSamples"]]
   }
 
   # Prior model probabilities
-  prior <- c(options[["priorH0FE"]], options[["priorH1FE"]],
-             options[["priorH0RE"]], options[["priorH1RE"]])
+  prior <- c(options[["priorModelProbabilityFixedNull"]], options[["priorModelProbabilityFixedAlternative"]],
+             options[["priorModelProbabilityRandomNull"]], options[["priorModelProbabilityRandomAlternative"]])
 
   if(all(prior == 0) && options[["model"]] != "constrainedRandom")
     .quitAnalysis(gettext("You cannot set all the prior model probabilties to zero."))
@@ -836,7 +836,7 @@
 # Plot: prior(s)
 .bmaPriorPlot <- function(jaspResults, dataset, options, ready) {
   priorContainer <- createJaspContainer(title = gettext("Prior"))
-  priorContainer$dependOn("plotPrior")
+  priorContainer$dependOn("priorPlot")
   jaspResults[["priorContainer"]] <- priorContainer
   jaspResults[["priorContainer"]]$position <- 4
 
@@ -845,11 +845,11 @@
   priorPlot$position <- 1
 
   # Custom dependencies (only dependent on prior settings)
-  priorPlot$dependOn(c("priorES",
-                       "cauchy", "informativeCauchyLocation", "informativeCauchyScale",
-                       "checkLowerPrior", "lowerTrunc", "checkUpperPrior", "upperTrunc",
-                       "normal", "informativeNormalMean", "informativeNormalStd",
-                       "t", "informativeTLocation", "informativeTScale","informativeTDf"
+  priorPlot$dependOn(c("priorEffectSize",
+                       "cauchy", "cauchyLocation", "cauchyScale",
+                       "truncationLowerBound", "truncationLowerBoundValue", "truncationUpperBound", "truncationUpperBoundValue",
+                       "normal", "normalMean", "normalStd",
+                       "t", "tLocation", "tScale","tDf"
   ))
 
   # Fill plot with effect size prior
@@ -859,8 +859,8 @@
   # Make plot hetergeneity prior
   if(options[["model"]] != "fixed"){
     priorPlotSE <- createJaspPlot(plot = NULL, title = gettext("Heterogeneity"), width = 350, height = 350)
-    priorPlotSE$dependOn(c("priorSE", "inverseGamma", "inverseGammaShape", "inverseGammaScale",
-                           "halfT", "informativehalfTScale", "informativehalfTDf"))
+    priorPlotSE$dependOn(c("priorStandardError", "inverseGamma", "inverseGammaShape", "inverseGammaScale",
+                           "halfT", "halfTScale", "halfTDf"))
     priorPlotSE$position <- 2
     .bmaFillPriorPlot(priorPlotSE, jaspResults, dataset, options, type = "SE")
     priorContainer[["SE"]] <- priorPlotSE
