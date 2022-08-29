@@ -295,6 +295,13 @@
                custom               = .metaAnalysisCheckSE,
                exitAnalysisIfErrors = TRUE)
   }
+
+  # Advanced: estimation settings
+  iter <- options[["samples"]]
+  chains <- options[["chains"]]
+
+  # Advanced: bayes factor computation
+  if(options$bayesFactorComputation == "integration"){
     logml <- "integrate"
     logml_iter <- 5000
   } else if(options$bayesFactorComputation == "bridgeSampling"){

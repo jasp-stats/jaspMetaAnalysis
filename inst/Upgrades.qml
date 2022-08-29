@@ -225,5 +225,33 @@ Upgrades
         ChangeRename { from: "shade"; to: "priorAndPosteriorShade" }
         ChangeRename { from: "plotSequential"; to: "sequentialPlotBayesFactor" }
         ChangeRename { from: "plotSeqPM"; to: "sequentialPlotModelProbability" }
+
+        // BayesianMetaAnalysisPriors.qml
+        ChangeRename { from: "priorES"; to: "priorEffectSize" }
+        ChangeRename { from: "informativeCauchyLocation"; to: "cauchyLocation" }
+        ChangeRename { from: "informativeCauchyScale"; to: "cauchyScale" }
+        ChangeRename { from: "informativeNormalMean"; to: "normalMean" }
+        ChangeRename { from: "informativeNormalStd"; to: "normalStd" }
+        ChangeRename { from: "informativeTLocation"; to: "tLocation" }
+        ChangeRename { from: "informativeTScale"; to: "tScale" }
+        ChangeRename { from: "informativeTDf"; to: "tDf" }
+        ChangeRename { from: "checkLowerPrior"; to: "truncationLowerBound" }
+        ChangeRename { from: "lowerTrunc"; to: "truncationLowerBoundValue" }
+        ChangeRename { from: "checkUpperPrior"; to: "truncationUpperBound" }
+        ChangeRename { from: "upperTrunc"; to: "truncationUpperBoundValue" }
+        ChangeRename { from: "priorSE"; to: "priorStandardError" }
+        ChangeRename { from: "informativehalfTScale"; to: "halfTScale" }
+        ChangeRename { from: "informativehalfTDf"; to: "halfTDf" }
+        ChangeRename { from: "plotPrior"; to: "priorPlot" }
+
+        // BayesianMetaAnalysisAdvanced.qml
+        ChangeRename { from: "priorH0FE"; to: "priorModelProbabilityFixedNull" }
+        ChangeRename { from: "priorH1FE"; to: "priorModelProbabilityFixedAlternative" }
+        ChangeRename { from: "priorH0RE"; to: "priorModelProbabilityRandomNull" }
+        ChangeRename { from: "priorH1RE"; to: "priorModelProbabilityRandomAlternative" }
+        ChangeRename { from: "iterMCMC"; to: "samples" }
+        ChangeRename { from: "chainsMCMC"; to: "chains" }
+        ChangeRename { from: "BFComputation"; to: "bayesFactorComputation" }
+        ChangeRename { from: "iterBridge"; to: "bridgeSamplingSamples" }
 	}
 }
