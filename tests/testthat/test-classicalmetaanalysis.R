@@ -25,7 +25,7 @@ options$effectSizeStandardError <- "debCollin1"
 
 options$estimate <- TRUE
 options$estimateCiLevel <- .95
-options$test <- "z"
+options$estimateTest <- "z"
 options$fitMeasure <- TRUE
 options$diagnosticQqPlot <- TRUE
 
