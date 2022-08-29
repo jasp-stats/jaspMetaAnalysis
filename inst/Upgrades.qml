@@ -12,6 +12,7 @@ Upgrades
         // ClassicalMetaAnalysis.qml
 		ChangeRename { from: "dependent"; to: "effectSize" }
         ChangeRename { from: "wlsWeights"; to: "effectSizeStandardError" }
+        ChangeRename { from: "studyLabels"; to: "studyLabel" }
         ChangeRename { from: "includeConstant"; to: "includeIntercept" }
 
         // ClassicalMetaAnalysisStatistics.qml

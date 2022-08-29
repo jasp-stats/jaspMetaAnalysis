@@ -78,7 +78,7 @@
     argList <- list(
       yi      = dataset[,options$effectSize],
       sei     = dataset[,options$effectSizeStandardError],
-      slab    = if(options$studyLabels != "") dataset[,options$studyLabels],
+      slab    = if(options$studyLabel != "") dataset[,options$studyLabel],
       method  = .metaAnalysisGetMethod(options),
       mods    = .metaAnalysisFormula(options),
       data    = dataset,
@@ -539,8 +539,8 @@
   imgWidth   <- 520
   if (ready){
     imgHeight <- nobs(rma.fit) * 30 + 100
-    if(options[["studyLabels"]] != "")
-      imgWidth <- max(nchar(as.character(dataset[,options[["studyLabels"]]]))) * 5 + 500
+    if(options[["studyLabel"]] != "")
+      imgWidth <- max(nchar(as.character(dataset[,options[["studyLabel"]]]))) * 5 + 500
   }
 
   forestPlot   <- createJaspPlot(title = gettext("Forest Plot"), width = imgWidth, height = imgHeight)
