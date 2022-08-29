@@ -36,14 +36,14 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
 }
 
 .bmaDependencies <- c("effectSize", "effectSizeStandardError", "effectSizeCi", "model",
-                      "positive", "negative", "priorH0FE", "priorH1FE", "priorH0RE", "priorH1RE",
-                      "priorES", "informativeCauchyLocation", "informativeCauchyScale",
-                      "checkLowerPrior", "checkUpperPrior", "lowerTrunc", "upperTrunc",
-                      "informativeNormalMean", "informativeNormalStd",
-                      "informativeTLocation", "informativeTScale", "informativeTDf",
-                      "priorSE", "inverseGammaShape", "inverseGammaScale",
-                      "informativehalfTScale", "informativehalfTDf",
-                      "BFComputation", "iterBridge", "iterMCMC", "chainsMCMC")
+                      "positive", "negative", "priorModelProbabilityFixedNull", "priorModelProbabilityFixedAlternative", "priorModelProbabilityRandomNull", "priorModelProbabilityRandomAlternative",
+                      "priorEffectSize", "cauchyLocation", "cauchyScale",
+                      "truncationLowerBound", "truncationUpperBound", "truncationLowerBoundValue", "truncationUpperBoundValue",
+                      "normalMean", "normalStd",
+                      "tLocation", "tScale", "tDf",
+                      "priorStandardError", "inverseGammaShape", "inverseGammaScale",
+                      "halfTScale", "halfTDf",
+                      "bayesFactorComputation", "bridgeSamplingSamples", "samples", "chains")
 
 # Get dataset
 .bmaReadData <- function(jaspResults, options){

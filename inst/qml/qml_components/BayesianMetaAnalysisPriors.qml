@@ -25,8 +25,8 @@ Section
 	title: 		qsTr("Priors")
 	columns:	1
 
-	property string modelTypeValue:			"BMA"
-	property string modelDirectionValue:	"allPos"
+	property string modelTypeValue:			"averaging"
+	property string modelDirectionValue:	"positive"
 
 	Group
 	{
@@ -35,7 +35,7 @@ Section
 		RadioButtonGroup
 		{
 			title: 	qsTr("Effect size")
-			name: 	"priorES"
+			name: 	"priorEffectSize"
 
 			RadioButton
 			{
@@ -48,7 +48,7 @@ Section
 				DoubleField
 				{
 					label: 			qsTr("location:")
-					name: 			"informativeCauchyLocation"
+					name: 			"cauchyLocation"
 					visible: 		cauchyInformative.checked
 					defaultValue: 	0
 					negativeValues: true
@@ -57,7 +57,7 @@ Section
 				DoubleField
 				{
 					label: 			qsTr("scale:");
-					name: 			"informativeCauchyScale"
+					name: 			"cauchyScale"
 					visible: 		cauchyInformative.checked
 					defaultValue: 	0.707
 					fieldWidth: 	50
@@ -76,7 +76,7 @@ Section
 				DoubleField
 				{
 					label: 			qsTr("mean:")
-					name: 			"informativeNormalMean"
+					name: 			"normalMean"
 					visible: 		normalInformative.checked
 					defaultValue: 	0
 					negativeValues: true
@@ -85,7 +85,7 @@ Section
 				DoubleField
 				{
 					label: 			qsTr("std:")
-					name: 			"informativeNormalStd"
+					name: 			"normalStd"
 					visible: 		normalInformative.checked
 					defaultValue: 	0.707
 					fieldWidth: 	50
@@ -104,7 +104,7 @@ Section
 				DoubleField
 				{
 					label: 			qsTr("location:")
-					name: 			"informativeTLocation"
+					name: 			"tLocation"
 					visible: 		tInformative.checked
 					defaultValue: 	0
 					negativeValues: true
@@ -113,7 +113,7 @@ Section
 				DoubleField
 				{
 					label: 			qsTr("scale:")
-					name: 			"informativeTScale"
+					name: 			"tScale"
 					visible: 		tInformative.checked
 					defaultValue: 	0.707
 					fieldWidth: 	50
@@ -122,7 +122,7 @@ Section
 				IntegerField
 				{
 					label: 			qsTr("df:");
-					name: 			"informativeTDf";
+					name: 			"tDf";
 					visible: 		tInformative.checked;
 					min:			1
 					defaultValue: 	1
@@ -136,37 +136,37 @@ Section
 			title: qsTr("Truncation")
 			CheckBox
 			{
-				name: 				"checkLowerPrior"
+				name: 				"truncationLowerBound"
 				childrenOnSameRow: 	true
-				checked: 			modelTypeValue == "CRE" && modelDirectionValue == "allPos"
+				checked: 			modelTypeValue == "constrainedRandom" && modelDirectionValue == "positive"
 
 				DoubleField
 				{
 					id: 			lowerTT
-					name: 			"lowerTrunc"
+					name: 			"truncationLowerBoundValue"
 					label: 			qsTr("Lower bound:")
 					fieldWidth: 	50
-					negativeValues: !(modelTypeValue == "CRE") && modelDirectionValue == "allPos"
+					negativeValues: !(modelTypeValue == "constrainedRandom") && modelDirectionValue == "positive"
 					defaultValue: 	0
-					max: 			modelTypeValue == "CRE" && modelDirectionValue == "allNeg" ? 0 : Infinity
+					max: 			modelTypeValue == "constrainedRandom" && modelDirectionValue == "negative" ? 0 : Infinity
 				}
 			}
 
 			CheckBox
 			{
-				name: 				"checkUpperPrior"
+				name: 				"truncationUpperBound"
 				childrenOnSameRow: 	true
-				checked: 			modelTypeValue == "CRE" && modelDirectionValue == "allNeg"
+				checked: 			modelTypeValue == "constrainedRandom" && modelDirectionValue == "negative"
 
 				DoubleField
 				{
 					id: upperTT
-					name: 			"upperTrunc"
+					name: 			"truncationUpperBoundValue"
 					label: 			qsTr("Upper bound:")
 					fieldWidth: 	50
-					negativeValues: !(modelTypeValue == "CRE") && modelDirectionValue == "allPos"
+					negativeValues: !(modelTypeValue == "constrainedRandom") && modelDirectionValue == "positive"
 					defaultValue: 	0
-					max: 			modelTypeValue == "CRE" && modelDirectionValue == "allNeg" ? 0 : Infinity
+					max: 			modelTypeValue == "constrainedRandom" && modelDirectionValue == "negative" ? 0 : Infinity
 				}
 			}
 		}
@@ -175,9 +175,9 @@ Section
 
 	RadioButtonGroup
 	{
-		enabled:	modelTypeValue == "RE" || modelTypeValue == "CRE" || modelTypeValue == "BMA"
+		enabled:	modelTypeValue == "random" || modelTypeValue == "constrainedRandom" || modelTypeValue == "averaging"
 		title: 		qsTr("Heterogeneity (between-study SD)")
-		name: 		"priorSE"
+		name: 		"priorStandardError"
 
 		RadioButton
 		{
@@ -216,7 +216,7 @@ Section
 			DoubleField
 			{
 				label: 			qsTr("scale:")
-				name: 			"informativehalfTScale"
+				name: 			"halfTScale"
 				visible: 		halfTInformative.checked
 				defaultValue: 	0.707
 				fieldWidth: 	50
@@ -225,7 +225,7 @@ Section
 			IntegerField
 			{
 				label: 			qsTr("df:")
-				name: 			"informativehalfTDf"
+				name: 			"halfTDf"
 				visible: 		halfTInformative.checked
 				min:			1
 				defaultValue: 	1
@@ -235,7 +235,7 @@ Section
 
 	CheckBox
 	{
-		name: 	"plotPrior"
+		name: 	"priorPlot"
 		label: 	qsTr("Plot prior(s)")
 	}
 }
