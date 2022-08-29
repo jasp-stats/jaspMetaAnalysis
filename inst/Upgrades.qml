@@ -78,8 +78,8 @@ Upgrades
         ChangeRename { from: "esTable"; to: "effectSizePerStudy" }
 
         // BayesianMetaAnalysisPlots.qml
-        ChangeRename { from: "checkForestPlot"; to: "forestPlot" }
         ChangeRename { from: "forestPlot"; to: "forestPlotEffect" }
+        ChangeRename { from: "checkForestPlot"; to: "forestPlot" }     
         ChangeJS
         {
             name:		"forestPlotEffect"
@@ -93,13 +93,13 @@ Upgrades
                 }
             }
         }
-        ChangeRename { from: "orderForest"; to: "forestPlotOrder" }
+        ChangeRename { from: "orderForest"; to: "forestPlotRowOrder" }
         ChangeJS
         {
-            name:		"forestPlotOrder"
+            name:		"forestPlotRowOrder"
             jsFunction:	function(options)
             {
-                switch(options["forestPlotOrder"])
+                switch(options["forestPlotRowOrder"])
                 {
                     case "ascendingForest":	    return "ascending";
                     case "descendingForest":	return "descending";

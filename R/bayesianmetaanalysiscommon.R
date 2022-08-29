@@ -1259,7 +1259,7 @@
 
     # Fill plot
     forestPlot$dependOn(c("forestPlotEffect", "forestPlot",
-                          "forestPlotOrder", "forestPlotOrder", "showLabels"))
+                          "forestPlotRowOrder", "forestPlotOrder", "showLabels"))
     forestPlot$position <- 1
     .bmaFillForestPlot(forestPlot, jaspResults, dataset, options, studyLabels, showLabels = if(!is.null(options[["showLabels"]])) options[["showLabels"]] else TRUE)
     # Add plot to container
@@ -1454,13 +1454,13 @@
   if (options[["module"]] == "metaAnalysis"){
 
     ranked <- rank(df$effectSize, ties.method="first")
-    if(options$forestPlotOrder == "ascending"){
+    if(options$forestPlotRowOrder == "ascending"){
       ord <- (length(varES) + 1) - ranked
       df$y <- ord
       yEst <- yEst[ranked]
     }
 
-    if(options$forestPlotOrder == "descending"){
+    if(options$forestPlotRowOrder == "descending"){
       ord <- ranked
       df$y <- ord
       yEst <- yEst[(length(varES) + 1) - ranked]
