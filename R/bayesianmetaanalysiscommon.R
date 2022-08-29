@@ -289,21 +289,12 @@
 
     SE <- (upper - lower)/2/qnorm(0.975)
   }
-  if(options$standardError != ""){
     SE <- dataset[, options[["standardError"]]]
     .hasErrors(dataset              = dataset,
                seCheck.target       = options[["standardError"]],
                custom               = .metaAnalysisCheckSE,
                exitAnalysisIfErrors = TRUE)
   }
-
-
-  # Advanced: estimation settings
-  iter <- options[["samples"]]
-  chains <- options[["chains"]]
-
-  # Advanced: bayes factor computation
-  if(options$bayesFactorComputation == "integration"){
     logml <- "integrate"
     logml_iter <- 5000
   } else if(options$bayesFactorComputation == "bridgeSampling"){

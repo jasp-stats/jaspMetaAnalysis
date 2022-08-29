@@ -144,4 +144,47 @@ Upgrades
 		ChangeRename { from: "BFComputation"; to: "bayesFactorComputation" }
 		ChangeRename { from: "iterBridge"; to: "bridgeSamplingSamples" }
 	}
+    Upgrade
+	{
+		functionName:	"BayesianMetaAnalysis"
+		fromVersion:	"0.15"
+		toVersion:		"0.16.4"
+
+        // BayesianMetaAnalysis.qml
+		ChangeRename { from: "standardError"; to: "effectSizeStandardError" }
+        ChangeRename { from: "confidenceInterval"; to: "effectSizeCi" }
+        ChangeRename { from: "studyLabels"; to: "studyLabel" }
+
+        // BayesianMetaAnalysisInference.qml
+        ChangeRename { from: "modelSpecification"; to: "model" }
+        ChangeJS
+        {
+            name:		"model"
+            jsFunction:	function(options)
+            {
+                switch(options["model"])
+                {
+                    case "FE":	return "fixed";
+                    case "RE":	return "random";
+                    case "BMA":	return "averaging";
+                    case "CRE":	return "constrainedRandom";
+                }
+            }
+        }
+        ChangeRename { from: "direction"; to: "constrainedRandomDirection" }
+        ChangeJS
+        {
+            name:		"constrainedRandomDirection"
+            jsFunction:	function(options)
+            {
+                switch(options["constrainedRandomDirection"])
+                {
+                    case "allPos":	return "positive";
+                    case "allNeg":	return "negative";
+                }
+            }
+        }
+        ChangeRename { from: "postTable"; to: "modelProbability" }
+        ChangeRename { from: "esTable"; to: "effectSizePerStudy" }
+	}
 }
