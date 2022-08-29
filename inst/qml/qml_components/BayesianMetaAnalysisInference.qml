@@ -26,7 +26,7 @@ Section
 	expanded:	true
 
 	property alias modelTypeValue:			modelType.value
-	property alias modelDirectionValue:		constrainedRandomDirection.value
+	property alias modelDirectionValue:		modelDirection.value
 
 	GridLayout
 	{
@@ -67,7 +67,7 @@ Section
 				RadioButtonGroup
 				{
 					name:	"constrainedRandomDirection"
-					id:		constrainedRandomDirection
+					id:		modelDirection
 
 					columns: 2
 
