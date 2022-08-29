@@ -26,7 +26,7 @@ Section
 	expanded:	true
 
 	property alias modelTypeValue:			modelType.value
-	property alias modelDirectionValue:		modelDirection.value
+	property alias modelDirectionValue:		constrainedRandomDirection.value
 
 	GridLayout
 	{
@@ -35,52 +35,52 @@ Section
 		//// Analysis choices ////
 		RadioButtonGroup
 		{
-			name: 	"modelSpecification"
+			name: 	"model"
 			title: 	qsTr("Model")
 			id:		modelType
 
 			RadioButton
 			{
-				value: 				"FE"
+				value: 				"fixed"
 				label: 				qsTr("Fixed effects")
 			}
 
 			RadioButton
 			{
-				value: 				"RE"
+				value: 				"random"
 				label: 				qsTr("Random effects")
 			}
 
 			RadioButton
 			{
-				value: 				"BMA"
+				value: 				"averaging"
 				label: 				qsTr("Model averaging")
 				checked: 			true
 			}
 
 			RadioButton
 			{
-				value: 				"CRE"
+				value: 				"constrainedRandom"
 				label: 				qsTr("Constrained random effects")
 
 				// Constrain effect sizes to be all positive or all negative
 				RadioButtonGroup
 				{
-					name:	"direction"
-					id:		modelDirection
+					name:	"constrainedRandomDirection"
+					id:		constrainedRandomDirection
 
 					columns: 2
 
 					RadioButton
 					{
-						value: 		"allPos"
+						value: 		"positive"
 						label: 		qsTr("All positive")
 						checked:	true
 					}
 
 					RadioButton
 					{
-						value: 	"allNeg"
+						value: 	"negative"
 						label: 	qsTr("All negative")
 					}
 				}
@@ -94,13 +94,13 @@ Section
 
 			CheckBox
 			{
-				name: 	"postTable";
+				name: 	"modelProbability";
 				label: 	qsTr("Model probabilities")
 			}
 
 			CheckBox
 			{
-				name: 	"esTable";
+				name: 	"effectSizePerStudy";
 				label: 	qsTr("Effect sizes per study")
 			}
 		}

@@ -23,12 +23,12 @@
   .bmaMainTable(jaspResults, dataset, options, ready, .bmaDependencies)
 
   # Table: Model Probabilities
-  if(options$postTable){
+  if(options$modelProbability){
     .bmaPostModelTable(jaspResults, dataset, options, ready, .bmaDependencies)
   }
 
   # Table: Effect Sizes per Study
-  if(options$esTable){
+  if(options$effectSizePerStudy){
     .bmaEffectSizeTable(jaspResults, dataset, options, ready, .bmaDependencies)
   }
 
@@ -53,8 +53,8 @@
   }
 }
 
-.bmaDependencies <- c("effectSize", "standardError", "confidenceInterval", "modelSpecification",
-                      "allPos", "allNeg", "priorH0FE", "priorH1FE", "priorH0RE", "priorH1RE",
+.bmaDependencies <- c("effectSize", "effectSizeStandardError", "effectSizeCi", "model",
+                      "positive", "negative", "priorH0FE", "priorH1FE", "priorH0RE", "priorH1RE",
                       "priorES", "informativeCauchyLocation", "informativeCauchyScale",
                       "checkLowerPrior", "checkUpperPrior", "lowerTrunc", "upperTrunc",
                       "informativeNormalMean", "informativeNormalStd",
@@ -118,12 +118,12 @@
   d <- metaBMA::prior(familyES, paramES, lowerES, upperES)
   tau <- metaBMA::prior(familySE, paramSE, 0)
 
-  if(options[["modelSpecification"]] == "CRE" && options$direction == "allPos"){
+  if(options[["model"]] == "constrainedRandom" && options$constrainedRandomDirection == "positive"){
     x <- seq(-1, -1e-05, 0.001)
     if(any(d(x) > 0))
       .quitAnalysis(gettext("Your prior contains negative values."))
   }
-  if(options[["modelSpecification"]] == "CRE" && options$direction == "allNeg"){
+  if(options[["model"]] == "constrainedRandom" && options$constrainedRandomDirection == "negative"){
     x <- seq(1e-05, 1, 0.001)
     if(any(d(x) > 0))
       .quitAnalysis(gettext("Your prior contains positive values."))
@@ -157,9 +157,9 @@
   # Averaged model
   bma                       <- list()
   bma[["estimates"]]        <- results$estimates
-  if(options[["modelSpecification"]] != "CRE")
+  if(options[["model"]] != "constrainedRandom")
     anchorPoint             <- results$estimates["averaged", 1]
-  if(options[["modelSpecification"]] == "CRE")
+  if(options[["model"]] == "constrainedRandom")
     anchorPoint             <- results$estimates["ordered", 1]
   bma[["xPost"]]            <- seq(anchorPoint - 2, anchorPoint + 2, .001)
   bma[["yPost"]]            <- results$posterior_d(bma[["xPost"]])
@@ -215,15 +215,15 @@
   bmaResults[["random"]]    <- random
 
   # Ordered effects model
-  if(options[["modelSpecification"]] == "CRE"){
+  if(options[["model"]] == "constrainedRandom"){
 
     ordered                 <- list()
     ordered[["estimates"]]  <- results$meta$ordered$estimates
     ordered[["summary"]]    <- rstan::summary(results$meta$ordered$stanfit_dstudy)$summary
     ## Prior and posterior - effect size
     anchorPoint             <- results$meta$ordered$estimates[2, "mean"]
-    if(options$direction == "allPos") xSeq <- seq(-0.05, anchorPoint + 4, .001)
-    if(options$direction == "allNeg") xSeq <- seq(anchorPoint - 4, 0.05, .001)
+    if(options$constrainedRandomDirection == "positive") xSeq <- seq(-0.05, anchorPoint + 4, .001)
+    if(options$constrainedRandomDirection == "negative") xSeq <- seq(anchorPoint - 4, 0.05, .001)
     ordered[["xPost"]]   <- xSeq
     ordered[["yPost"]]   <- results$meta$ordered$posterior_d(ordered[["xPost"]])
     ordered[["yPrior"]]  <- results$meta$ordered$prior_d(ordered[["xPost"]])
@@ -253,7 +253,7 @@
   # Get necessary variables
   y <- dataset[, options[["effectSize"]]]
 
-  if(options[["modelSpecification"]] == "CRE" && options[["direction"]] == "allPos"){
+  if(options[["model"]] == "constrainedRandom" && options[["constrainedRandomDirection"]] == "positive"){
 
     negativeValues <- function(){
       if(all(dataset[, options[["effectSize"]]] < 0))
@@ -264,7 +264,7 @@
                exitAnalysisIfErrors= TRUE,
                custom = negativeValues)
 
-  } else if(options[["modelSpecification"]] == "CRE" && options[["direction"]] == "allNeg"){
+  } else if(options[["model"]] == "constrainedRandom" && options[["constrainedRandomDirection"]] == "negative"){
 
     positiveValues <- function(){
       if(all(dataset[, options[["effectSize"]]] > 0))
@@ -276,9 +276,9 @@
                custom = positiveValues)
   }
 
-  if(all(unlist(options[["confidenceInterval"]]) != "") && !is.null(unlist(options[["confidenceInterval"]]))){
-    lower <- dataset[, options$confidenceInterval[[1]][[1]]]
-    upper <- dataset[, options$confidenceInterval[[1]][[2]]]
+  if(all(unlist(options[["effectSizeCi"]]) != "") && !is.null(unlist(options[["effectSizeCi"]]))){
+    lower <- dataset[, options$effectSizeCi[[1]][[1]]]
+    upper <- dataset[, options$effectSizeCi[[1]][[2]]]
 
     .hasErrors(dataset = dataset,
                exitAnalysisIfErrors= TRUE,
@@ -315,7 +315,7 @@
   prior <- c(options[["priorH0FE"]], options[["priorH1FE"]],
              options[["priorH0RE"]], options[["priorH1RE"]])
 
-  if(all(prior == 0) && options[["modelSpecification"]] != "CRE")
+  if(all(prior == 0) && options[["model"]] != "constrainedRandom")
     .quitAnalysis(gettext("You cannot set all the prior model probabilties to zero."))
 
   # Get priors from jasp state
@@ -327,7 +327,7 @@
 
   # Bayesian meta analysis
   .setSeedJASP(options)
-  if(options$modelSpecification != "CRE"){
+  if(options$model != "constrainedRandom"){
     p <- try({
       # Bayesian model averaging (includes fixed and random effects)
       results <- metaBMA::meta_bma(y     = y,
@@ -363,9 +363,9 @@
 }
 
 .bmaGetModelName <- function(options) {
-  if(options[["modelSpecification"]] == "CRE") return("ordered")
-  if(options[["modelSpecification"]] == "BMA") return("averaged")
-  if(options[["modelSpecification"]] == "RE")  return("random")
+  if(options[["model"]] == "constrainedRandom") return("ordered")
+  if(options[["model"]] == "averaging") return("averaged")
+  if(options[["model"]] == "random")  return("random")
   return("fixed")
 }
 
@@ -384,16 +384,16 @@
     seqResults$lowerMain[i] <- bmaResults$estimates[modelName, "2.5%"]
     seqResults$upperMain[i] <- bmaResults$estimates[modelName, "97.5%"]
 
-    if(options[["modelSpecification"]] == "BMA"){
+    if(options[["model"]] == "averaging"){
       seqResults$BFs[i] <- bmaResults$inclusion$incl.BF
       seqResults$BFsHeterogeneity[[i]] <- .bmaCalculateBFHeterogeneity(bmaResults$prior_models, bmaResults$posterior_models)
     }
-    if(options[["modelSpecification"]] == "FE")  seqResults$BFs[i] <- bmaResults$BF["fixed_H1", "fixed_H0"]
-    if(options[["modelSpecification"]] == "RE"){
+    if(options[["model"]] == "fixed")  seqResults$BFs[i] <- bmaResults$BF["fixed_H1", "fixed_H0"]
+    if(options[["model"]] == "random"){
       seqResults$BFs[i] <- bmaResults$BF["random_H1", "random_H0"]
       seqResults$BFsHeterogeneity[[i]] <- bmaResults$BF["random_H1", "fixed_H1"]
     }
-    if(options[["modelSpecification"]] == "CRE"){
+    if(options[["model"]] == "constrainedRandom"){
       seqResults$BFs[i] <- bmaResults$BF["ordered", "null"]
       seqResults$BFsHeterogeneity[[i]] <- bmaResults$BF["ordered", "fixed"]
     }
@@ -406,16 +406,16 @@
     seqResults$lowerMain[i] <- bmaResults[["bma"]]$estimates[modelName, "2.5%"]
     seqResults$upperMain[i] <- bmaResults[["bma"]]$estimates[modelName, "97.5%"]
 
-    if(options[["modelSpecification"]] == "BMA"){
+    if(options[["model"]] == "averaging"){
       seqResults$BFs[i] <- bmaResults[["bf"]]$inclusionBF
       seqResults$BFsHeterogeneity[[i]] <- .bmaCalculateBFHeterogeneity(bmaResults[["models"]]$prior, bmaResults[["models"]]$posterior)
     }
-    if(options[["modelSpecification"]] == "FE")  seqResults$BFs[i] <- bmaResults[["bf"]]$BF["fixed_H1", "fixed_H0"]
-    if(options[["modelSpecification"]] == "RE"){
+    if(options[["model"]] == "fixed")  seqResults$BFs[i] <- bmaResults[["bf"]]$BF["fixed_H1", "fixed_H0"]
+    if(options[["model"]] == "random"){
       seqResults$BFs[i] <- bmaResults[["bf"]]$BF["random_H1", "random_H0"]
       seqResults$BFsHeterogeneity[[i]] <- bmaResults[["bf"]]$BF["random_H1", "fixed_H1"]
     }
-    if(options[["modelSpecification"]] == "CRE"){
+    if(options[["model"]] == "constrainedRandom"){
       seqResults$BFs[i] <- bmaResults[["bf"]]$BF["ordered", "null"]
       seqResults$BFsHeterogeneity[[i]] <- bmaResults[["bf"]]$BF["ordered", "fixed"]
     }
@@ -497,32 +497,32 @@
   tau <- "\u03C4"
   mu <- "\u03BC"
 
-  if(options[["modelSpecification"]] == "FE"){
+  if(options[["model"]] == "fixed"){
     model <- modelFE
     parameter <- mu
     group <- T
     bmaTable$setExpectedSize(1)
   }
-  if(options[["modelSpecification"]] == "RE"){
+  if(options[["model"]] == "random"){
     model <- c(modelRE, modelRE)
     parameter <- c(mu, tau)
     group <- c(T, F)
     bmaTable$setExpectedSize(2)
   }
-  if(options[["modelSpecification"]] == "BMA"){
+  if(options[["model"]] == "averaging"){
     model <- c(modelFE, modelRE, modelRE, modelBMA, modelBMA)
     parameter <- c(mu, mu, tau, mu, tau)
     group <- c(T, T, F, T, F)
     bmaTable$setExpectedSize(5)
   }
-  if(options[["modelSpecification"]] == "CRE"){
+  if(options[["model"]] == "constrainedRandom"){
     model <- c(modelFE, modelCRE, modelCRE, modelRE, modelRE)
     parameter <- c(mu, mu, tau, mu, tau)
     group <- c(T, T, F, T, F)
     bmaTable$setExpectedSize(5)
   }
 
-  if(options$modelSpecification != "FE"){
+  if(options$model != "fixed"){
     bmaTable$addFootnote(gettextf("%s and %s are the group-level effect size and standard deviation, respectively.", "\u03BC", "\u03C4"))
   } else {
     bmaTable$addFootnote(gettextf("%s is the group-level effect size.", "\u03BC"))
@@ -549,7 +549,7 @@
   bmaResults <- .bmaResultsState(jaspResults, dataset, options, .bmaDependencies)
 
   # Get results per column (different per model)
-  if(options[["modelSpecification"]] == "BMA"){
+  if(options[["model"]] == "averaging"){
     meanES <- c(bmaResults[["bma"]]$estimates["fixed", "mean"],
                 bmaResults[["bma"]]$estimates["random", "mean"],
                 bmaResults[["random"]]$estimates["tau", "mean"],
@@ -577,7 +577,7 @@
             .bmaCalculateBFHeterogeneity(prior_models = bmaResults[["models"]]$prior,
                                          posterior_models = bmaResults[["models"]]$posterior))
   }
-  else if(options[["modelSpecification"]] == "RE"){
+  else if(options[["model"]] == "random"){
     meanES <- bmaResults[["random"]]$estimates[, "mean"]
     meanSD <- bmaResults[["random"]]$estimates[, "sd"]
     lower <- bmaResults[["random"]]$estimates[, "2.5%"]
@@ -585,14 +585,14 @@
     BF <- c(bmaResults[["bf"]]$BF["random_H1", "random_H0"],
             bmaResults[["bf"]]$BF["random_H1", "fixed_H1"])
   }
-  else if(options[["modelSpecification"]] == "FE"){
+  else if(options[["model"]] == "fixed"){
     meanES <- bmaResults[["fixed"]]$estimates[, "mean"]
     meanSD <- bmaResults[["fixed"]]$estimates[, "sd"]
     lower <- bmaResults[["fixed"]]$estimates[, "2.5%"]
     upper <- bmaResults[["fixed"]]$estimates[, "97.5%"]
     BF <- bmaResults[["bf"]]$BF["fixed_H1", "fixed_H0"]
   }
-  else if(options[["modelSpecification"]] == "CRE"){
+  else if(options[["model"]] == "constrainedRandom"){
     meanES <- c(bmaResults[["bma"]]$estimates["fixed", "mean"],
                 bmaResults[["ordered"]]$estimates[c("average_effect", "tau"), "mean"],
                 bmaResults[["random"]]$estimates[, "mean"])
@@ -619,7 +619,7 @@
   footnoteAverageBFtau <- gettextf("Model averaged posterior estimates for %3$s are not yet available, but will be added in the future. The Bayes factor is based on all four models: random effects H%1$s & H%2$s over the fixed effects H%1$s & H%2$s.", "\u2080", "\u2081", "\u03C4")
   footnoteOrderedBFtau <- gettextf("Bayes factor of the (unconstrained/constrained) random effects H%1$s over the fixed effects H%1$s.", "\u2081")
 
-  if(options[["modelSpecification"]] == "CRE")
+  if(options[["model"]] == "constrainedRandom")
     creBF <- bmaResults[["bf"]]$BF["ordered", "random"]
 
   if(options[["bayesFactorType"]] == "BF01"){
@@ -629,13 +629,13 @@
     footnoteAverageBFtau <- gettextf("Model averaged posterior estimates for %3$s are not yet available, but will be added in the future. The Bayes factor is based on all four models: fixed effects H%1$s & H%2$s over the random effects H%1$s & H%2$s.", "\u2080", "\u2081", "\u03C4")
     footnoteOrderedBFtau <- gettextf("Bayes factor of the fixed effects H%1$s over the (unconstrained/constrained) random effects H%1$s.", "\u2081")
 
-    if(options[["modelSpecification"]] == "CRE"){
+    if(options[["model"]] == "constrainedRandom"){
       creBF <- 1/bmaResults[["bf"]]$BF["ordered", "random"]
     }
   }
   if(options[["bayesFactorType"]] == "LogBF10"){
     BF <- log(BF)
-    if(options[["modelSpecification"]] == "CRE"){
+    if(options[["model"]] == "constrainedRandom"){
       creBF <- log(bmaResults[["bf"]]$BF["ordered", "random"])
     }
   }
@@ -652,9 +652,9 @@
 
   bmaTable$addRows(rows)
 
-  if(options$modelSpecification == "RE") bmaTable$addFootnote(footnoteRandomBFtau, colNames = "BF", rowNames = "row1")
+  if(options$model == "random") bmaTable$addFootnote(footnoteRandomBFtau, colNames = "BF", rowNames = "row1")
 
-  if(options$modelSpecification == "BMA") {
+  if(options$model == "averaging") {
     bmaTable$addFootnote(footnoteAverage,
                          colNames = "parameter", rowNames="row3")
     bmaTable$addFootnote(footnoteRandomBFtau,
@@ -663,7 +663,7 @@
                          colNames = "parameter", rowNames = "row4")
   }
 
-  if(options$modelSpecification == "CRE"){
+  if(options$model == "constrainedRandom"){
     if(options[["bayesFactorType"]] == "BF10" || options[["bayesFactorType"]] == "LogBF10"){
       footnoteCREbf <- gettextf("Bayes factor of the ordered effects H%1$s over the fixed effects H%2$s. The Bayes factor for the ordered effects H%1$s versus the unconstrained (random) effects H%1$s model is %3$.3f.", "\u2081", "\u2080", creBF)
     } else if(options[["bayesFactorType"]] == "BF01"){
@@ -679,9 +679,9 @@
 
 # Table: Model Probabilities
 .bmaPostModelTable <- function(jaspResults, dataset, options, ready, .bmaDependencies) {
-  if (!is.null(jaspResults[["postTable"]])) return()
+  if (!is.null(jaspResults[["modelProbability"]])) return()
   postTable <- createJaspTable(title = gettext("Model Probabilities"))
-  postTable$dependOn(c(.bmaDependencies, "postTable"))
+  postTable$dependOn(c(.bmaDependencies, "modelProbability"))
   postTable$position <- 2
 
   # Add columns
@@ -690,7 +690,7 @@
   postTable$addColumnInfo(name = "postProb",   title = gettext("Posterior"),   type = "number")
 
   # Add table to output
-  jaspResults[["postTable"]] <- postTable
+  jaspResults[["modelProbability"]] <- postTable
 
   modelFixedH0 <- gettextf("Fixed H%s", "\u2080")
   modelFixedH1 <- gettextf("Fixed H%s", "\u2081")
@@ -698,16 +698,16 @@
   modelRandomH1 <- gettextf("Random H%s", "\u2081")
   modelOrderedH1 <- gettextf("Ordered H%s", "\u2081")
 
-  if(options$modelSpecification == "BMA"){
+  if(options$model == "averaging"){
     model <- c(modelFixedH0, modelFixedH1, modelRandomH0, "Random H\u2081")
   }
-  if(options$modelSpecification == "FE"){
+  if(options$model == "fixed"){
     model <- c(modelFixedH0, modelFixedH1)
   }
-  if(options$modelSpecification == "RE"){
+  if(options$model == "random"){
     model <- c(modelRandomH0, "Random H\u2081")
   }
-  if(options$modelSpecification == "CRE"){
+  if(options$model == "constrainedRandom"){
     model <- c(modelFixedH0, modelFixedH1, modelOrderedH1, modelRandomH1)
   }
 
@@ -722,19 +722,19 @@
   bmaResults <- .bmaResultsState(jaspResults, dataset, options, .bmaDependencies)
 
   # Get results per column (different per model)
-  if(options$modelSpecification == "BMA"){
+  if(options$model == "averaging"){
     postProb <- bmaResults[["models"]]$posterior
     priorProb <- bmaResults[["models"]]$prior
   }
-  if(options$modelSpecification == "FE"){
+  if(options$model == "fixed"){
     postProb <- bmaResults[["models"]]$posterior[c("fixed_H0", "fixed_H1")]
     priorProb <- bmaResults[["models"]]$prior[1:2]
   }
-  if(options$modelSpecification == "RE"){
+  if(options$model == "random"){
     postProb <- bmaResults[["models"]]$posterior[c("random_H0", "random_H1")]
     priorProb <- bmaResults[["models"]]$prior[3:4]
   }
-  if(options$modelSpecification == "CRE"){
+  if(options$model == "constrainedRandom"){
     postProb <- bmaResults[["models"]]$posterior
     priorProb <- bmaResults[["models"]]$prior
   }
@@ -746,9 +746,9 @@
 
 # Table: Effect Sizes per Study
 .bmaEffectSizeTable <- function(jaspResults, dataset, options, ready, .bmaDependencies) {
-  if (!is.null(jaspResults[["esTable"]])) return()
+  if (!is.null(jaspResults[["effectSizePerStudy"]])) return()
   esTable <- createJaspTable(title = gettext("Effect Sizes per Study"))
-  esTable$dependOn(c(.bmaDependencies, "esTable", "studyLabels"))
+  esTable$dependOn(c(.bmaDependencies, "effectSizePerStudy", "studyLabel"))
   esTable$position <- 3
 
   # Add standard columns
@@ -756,7 +756,7 @@
   esTable$addColumnInfo(name = "observedES", title = gettext("Observed"), type = "number")
 
   # Add conditional columns
-  if(options$modelSpecification != "FE"){
+  if(options$model != "fixed"){
     esTable$addColumnInfo(name = "estimatedES", title = gettext("Mean"), type = "number",
                           overtitle = gettext("Estimated"))
     esTable$addColumnInfo(name = "estimatedLower", title = gettext("Lower"), type = "number",
@@ -769,12 +769,12 @@
   esTable$showSpecifiedColumnsOnly <- TRUE
 
   # Add table to output
-  jaspResults[["esTable"]] <- esTable
+  jaspResults[["effectSizePerStudy"]] <- esTable
 
   # Check if ready
   if(!ready){
-    if(options[["studyLabels"]] != ""){
-      studyLabels <- dataset[, options[["studyLabels"]]]
+    if(options[["studyLabel"]] != ""){
+      studyLabels <- dataset[, options[["studyLabel"]]]
       row <- data.frame(study = studyLabels,
                         observedES = ".",
                         estimatedES = ".",
@@ -796,22 +796,22 @@
   estimatedLower <- rep(NA, length(varES))
   estimatedUpper <- rep(NA, length(varES))
 
-  # Fill vectors with estimation variables if not FE
-  if(options$modelSpecification != "FE"){
+  # Fill vectors with estimation variables if not fixed
+  if(options$model != "fixed"){
     estimatedES    <- bmaResults[["random"]]$summary[3:(length(varES) + 2), "mean"]
     estimatedLower <- bmaResults[["random"]]$summary[3:(length(varES) + 2), "2.5%"]
     estimatedUpper <- bmaResults[["random"]]$summary[3:(length(varES) + 2), "97.5%"]
   }
 
-  if(options$modelSpecification == "CRE"){
+  if(options$model == "constrainedRandom"){
     estimatedES <- bmaResults[["ordered"]]$summary[3:(length(varES) + 2), "mean"]
     estimatedLower <- bmaResults[["ordered"]]$summary[3:(length(varES) + 2), "2.5%"]
     estimatedUpper <- bmaResults[["ordered"]]$summary[3:(length(varES) + 2), "97.5%"]
   }
 
   # Add studylabels when given, otherwise use "Study n"
-  if(options[["studyLabels"]] != ""){
-    studyLabels <- dataset[, options[["studyLabels"]]]
+  if(options[["studyLabel"]] != ""){
+    studyLabels <- dataset[, options[["studyLabel"]]]
   } else {
     studyLabels <- paste(gettext("Study"), 1:length(varES))
   }
@@ -824,10 +824,10 @@
                     estimatedUpper = estimatedUpper)
   esTable$addRows(row)
 
-  if(options$modelSpecification != "FE"){
+  if(options$model != "fixed"){
     esTable$addFootnote(gettextf("Posterior mean and 95%% credible interval estimates from the random effects model."),
                         colNames = c("estimatedES", "estimatedLower", "estimatedUpper"))
-  } else if(options$modelSpecification == "CRE"){
+  } else if(options$model == "constrainedRandom"){
     esTable$addFootnote(gettextf("Posterior mean and 95%% credible interval estimates from the constrained random effects model."),
                         colNames = c("estimatedES", "estimatedLower", "estimatedUpper"))
   }
@@ -857,7 +857,7 @@
   priorContainer[["ES"]] <- priorPlot
 
   # Make plot hetergeneity prior
-  if(options[["modelSpecification"]] != "FE"){
+  if(options[["model"]] != "fixed"){
     priorPlotSE <- createJaspPlot(plot = NULL, title = gettext("Heterogeneity"), width = 350, height = 350)
     priorPlotSE$dependOn(c("priorSE", "inverseGamma", "inverseGammaShape", "inverseGammaScale",
                            "halfT", "informativehalfTScale", "informativehalfTDf"))
@@ -889,9 +889,9 @@
     xlab <- bquote(paste(.(gettext("Heterogeneity")), ~tau))
   }
 
-  if(options$modelSpecification == "CRE" && options$direction == "allPos"){
+  if(options$model == "constrainedRandom" && options$constrainedRandomDirection == "positive"){
     xlimLeft <- 0
-  } else if(options$modelSpecification == "CRE" && options$direction == "allNeg"){
+  } else if(options$model == "constrainedRandom" && options$constrainedRandomDirection == "negative"){
     xlimRight <- 0
   }
 
@@ -939,7 +939,7 @@
   postContainer[["ES"]] <- postPlotES
 
   # Make posterior plot heterogeneity
-  if(options$modelSpecification != "FE"){
+  if(options$model != "fixed"){
     postPlotSE <- createJaspPlot(plot = NULL, title = gettext("Heterogeneity"), width = 500, height = 350)
     postPlotSE$position <- 2
     postContainer[["SE"]] <- postPlotSE
@@ -961,7 +961,7 @@
   if(type == "ES"){
     xlab <- bquote(paste(.(gettext("Effect size")), ~mu))
     xlim <- c(-4, 4)
-    if(options[["modelSpecification"]] == "BMA"){
+    if(options[["model"]] == "averaging"){
       int <- c(bmaResults[["bma"]]$estimates["averaged", "2.5%"], bmaResults[["bma"]]$estimates["averaged", "97.5%"])
       postName <- "Averaged"
       if(options[["addLines"]]){
@@ -976,7 +976,7 @@
       xPost <- bmaResults[["bma"]]$xPost
       yPost <- bmaResults[["bma"]]$yPost
       dfPointsY <- bmaResults[["bma"]]$dfPointsY
-    } else if(options[["modelSpecification"]] == "RE"){
+    } else if(options[["model"]] == "random"){
       int <- c(bmaResults[["bma"]]$estimates["random", "2.5%"], bmaResults[["bma"]]$estimates["random", "97.5%"])
       postName <- "Random"
       labelsModel <- c(bquote(.(gettext("Random H"))[1]), bquote(.(gettext("Prior H"))[1]))
@@ -984,7 +984,7 @@
       xPost <- bmaResults[["random"]]$xPost
       yPost <- bmaResults[["random"]]$yPost
       dfPointsY <- bmaResults[["random"]]$dfPointsY
-    } else if(options[["modelSpecification"]] == "FE"){
+    } else if(options[["model"]] == "fixed"){
       int <- c(bmaResults[["bma"]]$estimates["fixed", "2.5%"], bmaResults[["bma"]]$estimates["fixed", "97.5%"])
       postName <- "Fixed"
       labelsModel <- c(bquote(.(gettext("Fixed H"))[1]), bquote(.(gettext("Prior H"))[1]))
@@ -992,7 +992,7 @@
       xPost <- bmaResults[["fixed"]]$xPost
       yPost <- bmaResults[["fixed"]]$yPost
       dfPointsY <- bmaResults[["fixed"]]$dfPointsY
-    } else if(options[["modelSpecification"]] == "CRE"){
+    } else if(options[["model"]] == "constrainedRandom"){
       int <- c(bmaResults[["bma"]]$estimates["ordered", "2.5%"], bmaResults[["bma"]]$estimates["ordered", "97.5%"])
       postName <- "Ordered"
       if(options[["addLines"]]){
@@ -1012,14 +1012,14 @@
     }
     # Heterogeneity priors
   } else if(type == "SE"){
-    if(options[["modelSpecification"]] == "BMA" || options[["modelSpecification"]] == "RE"){
+    if(options[["model"]] == "averaging" || options[["model"]] == "random"){
       int <- c(bmaResults[["random"]]$estimates["tau", "2.5%"], bmaResults[["random"]]$estimates["tau", "97.5%"])
       postName <- "Random"
       yPrior <- bmaResults[["random"]]$yPriorTau
       xPost <- bmaResults[["random"]]$xPostTau
       yPost <- bmaResults[["random"]]$yPostTau
       dfPointsY <- data.frame(prior = yPrior[which(xPost == 0)], posterior = yPost[which(xPost == 0)])
-    } else if (options[["modelSpecification"]] == "CRE"){
+    } else if (options[["model"]] == "constrainedRandom"){
       int <- c(bmaResults[["ordered"]]$estimates["tau", "2.5%"], bmaResults[["ordered"]]$estimates["tau", "97.5%"])
       postName <- "Ordered"
       yPrior <- bmaResults[["ordered"]]$yPriorTau
@@ -1028,17 +1028,17 @@
       dfPointsY <- data.frame(prior = yPrior[which(xPost == 0)], posterior = yPost[which(xPost == 0)])
     }
 
-    if(options[["modelSpecification"]] == "BMA") valuesCol <- c("#009E73", "black")
+    if(options[["model"]] == "averaging") valuesCol <- c("#009E73", "black")
 
 
     xlab <- bquote(paste(.(gettext("Heterogeneity")), ~tau))
     xlim <- c(0, 3)
     alpha <- 0.3
 
-    if(options[["modelSpecification"]] == "BMA") labelsModel <- c(bquote(.(gettext("Random H"))[1]), bquote(.(gettext("Prior H"))[1]))
-    if(options[["modelSpecification"]] == "CRE") labelsModel <- c(bquote(.(gettext("Ordered H"))[1]), bquote(.(gettext("Prior H"))[1]))
-    if(options[["modelSpecification"]] == "FE") labelsModel <- c(bquote(.(gettext("Fixed H"))[1]), bquote(.(gettext("Prior H"))[1]))
-    if(options[["modelSpecification"]] == "RE") labelsModel <- c(bquote(.(gettext("Random H"))[1]), bquote(.(gettext("Prior H"))[1]))
+    if(options[["model"]] == "averaging") labelsModel <- c(bquote(.(gettext("Random H"))[1]), bquote(.(gettext("Prior H"))[1]))
+    if(options[["model"]] == "constrainedRandom") labelsModel <- c(bquote(.(gettext("Ordered H"))[1]), bquote(.(gettext("Prior H"))[1]))
+    if(options[["model"]] == "fixed") labelsModel <- c(bquote(.(gettext("Fixed H"))[1]), bquote(.(gettext("Prior H"))[1]))
+    if(options[["model"]] == "random") labelsModel <- c(bquote(.(gettext("Random H"))[1]), bquote(.(gettext("Prior H"))[1]))
   }
 
   index <- which(yPost > 0.0001)
@@ -1048,15 +1048,15 @@
 
   df <- data.frame(x = c(xPost, xPost), y = c(yPrior, yPost), g = rep(c("Prior", postName), each = length(xPost)))
 
-  if(options$addLines && (options$modelSpecification == "BMA" || options$modelSpecification == "CRE")){
+  if(options$addLines && (options$model == "averaging" || options$model == "constrainedRandom")){
     if(type == "ES"){
       yPostES <- c(bmaResults[["fixed"]]$yPost, bmaResults[["random"]]$yPost)
       xPostES <- c(bmaResults[["fixed"]]$xPost, bmaResults[["random"]]$xPost)
       gPostES <- c(rep("Fixed", length(bmaResults[["fixed"]]$xPost)), rep("Random", length(bmaResults[["random"]]$xPost)))
       dfPost <- data.frame(x = xPostES,  y = yPostES, g = gPostES)
-      if(options[["modelSpecification"]] == "BMA"){
+      if(options[["model"]] == "averaging"){
         valuesCol <- c("#fcae91ff", "#009E73", "black", "black")
-      } else if(options[["modelSpecification"]] == "CRE"){
+      } else if(options[["model"]] == "constrainedRandom"){
         valuesCol <- c("#fcae91ff", "black", "#009E73", "black")
       }
       valuesLine <- c("solid", "solid", "solid", "dotted")
@@ -1065,7 +1065,7 @@
       xPostSE <- bmaResults[["random"]]$xPostTau
       gPostSE <- rep("Random", length(bmaResults[["random"]]$xPostTau))
       dfPost <- data.frame(x = xPostSE,  y = yPostSE, g = gPostSE)
-      if(options[["modelSpecification"]] == "CRE"){
+      if(options[["model"]] == "constrainedRandom"){
         valuesCol <- c("black", "#009E73", "black")
         valuesLine <- c("solid", "solid", "dotted")
         labelsModel <- c(bquote(.(gettext("Ordered H"))[1]),
@@ -1076,46 +1076,46 @@
     df <- rbind(df, dfPost)
   }
 
-  if(!options$addLines || options$modelSpecification == "RE" || options$modelSpecification == "FE"){
+  if(!options$addLines || options$model == "random" || options$model == "fixed"){
     df$g <- factor(df$g, levels = c(postName, "Prior"))
   } else if(options$addLines){
     if(type == "ES"){
-      if(options$modelSpecification == "BMA") df$g <- factor(df$g, levels = c("Fixed", "Random", "Averaged", "Prior"))
-      if(options$modelSpecification == "CRE") df$g <- factor(df$g, levels = c("Fixed", "Ordered", "Random", "Prior"))
+      if(options$model == "averaging") df$g <- factor(df$g, levels = c("Fixed", "Random", "Averaged", "Prior"))
+      if(options$model == "constrainedRandom") df$g <- factor(df$g, levels = c("Fixed", "Ordered", "Random", "Prior"))
     } else if(type == "SE"){
-      if(options$modelSpecification == "BMA") df$g <- factor(df$g, levels = c("Random", "Prior"))
-      if(options$modelSpecification == "CRE") df$g <- factor(df$g, levels = c("Ordered", "Random", "Prior"))
+      if(options$model == "averaging") df$g <- factor(df$g, levels = c("Random", "Prior"))
+      if(options$model == "constrainedRandom") df$g <- factor(df$g, levels = c("Ordered", "Random", "Prior"))
     }
   }
 
   if(type == "ES"){
-    if(options$modelSpecification == "FE") BF <- bmaResults[["bf"]]$fixedBF["fixed_H1", "fixed_H0"]
-    if(options$modelSpecification == "RE") BF <- bmaResults[["bf"]]$randomBF["random_H1", "random_H0"]
-    if(options$modelSpecification == "BMA") BF <- bmaResults[["bf"]]$inclusionBF
-    if(options$modelSpecification == "CRE") BF <- bmaResults[["bf"]]$BF["ordered", "null"]
+    if(options$model == "fixed") BF <- bmaResults[["bf"]]$fixedBF["fixed_H1", "fixed_H0"]
+    if(options$model == "random") BF <- bmaResults[["bf"]]$randomBF["random_H1", "random_H0"]
+    if(options$model == "averaging") BF <- bmaResults[["bf"]]$inclusionBF
+    if(options$model == "constrainedRandom") BF <- bmaResults[["bf"]]$BF["ordered", "null"]
 
-    if(options$modelSpecification == "FE") CRI <- bmaResults[["bma"]]$estimates["fixed", c("2.5%", "97.5%")]
-    if(options$modelSpecification == "RE") CRI <- bmaResults[["bma"]]$estimates["random", c("2.5%", "97.5%")]
-    if(options$modelSpecification == "BMA") CRI <- bmaResults[["bma"]]$estimates["averaged", c("2.5%", "97.5%")]
-    if(options$modelSpecification == "CRE") CRI <- bmaResults[["ordered"]]$estimates["average_effect", c("2.5%", "97.5%")]
+    if(options$model == "fixed") CRI <- bmaResults[["bma"]]$estimates["fixed", c("2.5%", "97.5%")]
+    if(options$model == "random") CRI <- bmaResults[["bma"]]$estimates["random", c("2.5%", "97.5%")]
+    if(options$model == "averaging") CRI <- bmaResults[["bma"]]$estimates["averaged", c("2.5%", "97.5%")]
+    if(options$model == "constrainedRandom") CRI <- bmaResults[["ordered"]]$estimates["average_effect", c("2.5%", "97.5%")]
 
-    if(options$modelSpecification == "FE") med <- bmaResults[["bma"]]$estimates["fixed", "mean"]
-    if(options$modelSpecification == "RE") med <- bmaResults[["bma"]]$estimates["random", "mean"]
-    if(options$modelSpecification == "BMA") med <- bmaResults[["bma"]]$estimates["averaged", "mean"]
-    if(options$modelSpecification == "CRE") med <- bmaResults[["ordered"]]$estimates["average_effect", "mean"]
+    if(options$model == "fixed") med <- bmaResults[["bma"]]$estimates["fixed", "mean"]
+    if(options$model == "random") med <- bmaResults[["bma"]]$estimates["random", "mean"]
+    if(options$model == "averaging") med <- bmaResults[["bma"]]$estimates["averaged", "mean"]
+    if(options$model == "constrainedRandom") med <- bmaResults[["ordered"]]$estimates["average_effect", "mean"]
 
   } else if (type == "SE"){
-    if(options$modelSpecification == "RE") BF <- bmaResults[["bf"]]$BF["random_H1", "fixed_H1"]
-    if(options$modelSpecification == "BMA") BF <- bmaResults[["bf"]]$BF["random_H1", "fixed_H1"]
-    if(options$modelSpecification == "CRE") BF <- bmaResults[["bf"]]$BF["ordered", "fixed"]
+    if(options$model == "random") BF <- bmaResults[["bf"]]$BF["random_H1", "fixed_H1"]
+    if(options$model == "averaging") BF <- bmaResults[["bf"]]$BF["random_H1", "fixed_H1"]
+    if(options$model == "constrainedRandom") BF <- bmaResults[["bf"]]$BF["ordered", "fixed"]
 
-    if(options$modelSpecification == "RE") CRI <- bmaResults[["random"]]$estimates["tau", c("2.5%", "97.5%")]
-    if(options$modelSpecification == "BMA") CRI <- bmaResults[["random"]]$estimates["tau", c("2.5%", "97.5%")]
-    if(options$modelSpecification == "CRE") CRI <- bmaResults[["ordered"]]$estimates["tau", c("2.5%", "97.5%")]
+    if(options$model == "random") CRI <- bmaResults[["random"]]$estimates["tau", c("2.5%", "97.5%")]
+    if(options$model == "averaging") CRI <- bmaResults[["random"]]$estimates["tau", c("2.5%", "97.5%")]
+    if(options$model == "constrainedRandom") CRI <- bmaResults[["ordered"]]$estimates["tau", c("2.5%", "97.5%")]
 
 
-    if(options$modelSpecification == "RE" || options$modelSpecification == "BMA")  med <- bmaResults[["random"]]$estimates["tau", "mean"]
-    if(options$modelSpecification == "CRE") med <- bmaResults[["ordered"]]$estimates["tau", "mean"]
+    if(options$model == "random" || options$model == "averaging")  med <- bmaResults[["random"]]$estimates["tau", "mean"]
+    if(options$model == "constrainedRandom") med <- bmaResults[["ordered"]]$estimates["tau", "mean"]
   }
 
 
@@ -1147,7 +1147,7 @@
                 "data | Hr1")
   bfSubscripts <-  c("BF[italic(r1f1)]", "BF[italic(f1r1)]")
 
-  if(options$modelSpecification == "CRE"){
+  if(options$model == "constrainedRandom"){
     pizzaTxt <- c("data | Hf1", "data | Ho1")
     bfSubscripts <-  c("BF[italic(o1f1)]", "BF[italic(f1o1)]")
   }
@@ -1191,7 +1191,7 @@
       plot <- plot + ggplot2::geom_area(data = shadeData, mapping = ggplot2::aes(x = x, y = y), fill = "grey", group = 1, linetype = 1, color = NA, alpha = 0.5)
     }
 
-    if(options[["addLines"]] && options[["modelSpecification"]] == "BMA"){
+    if(options[["addLines"]] && options[["model"]] == "averaging"){
       plot <- plot + ggplot2::scale_linetype_manual(values = valuesLine)
     }
 
@@ -1220,13 +1220,13 @@
 # Plot: Forest plot
 .bmaForestPlot <- function(jaspResults, dataset, options, ready, .bmaDependencies) {
   forestContainer <- createJaspContainer(title = gettext("Forest Plot"))
-  forestContainer$dependOn(c(.bmaDependencies, "studyLabels"))
+  forestContainer$dependOn(c(.bmaDependencies, "studyLabel"))
   forestContainer$position <- 6
   jaspResults[["forestContainer"]] <- forestContainer
 
   # Get studylabels
-  if(options[["studyLabels"]] != ""){
-    studyLabels <- as.character(dataset[, options[["studyLabels"]]])
+  if(options[["studyLabel"]] != ""){
+    studyLabels <- as.character(dataset[, options[["studyLabel"]]])
   } else {
     studyLabels <- paste(gettext("Study"), 1:nrow(dataset))
   }
@@ -1282,13 +1282,13 @@
   # Create effect size and standard error variable and make dataframe
   varES <- dataset[, options[["effectSize"]]]
 
-  if(all(unlist(options[["confidenceInterval"]]) != "") && !is.null(unlist(options[["confidenceInterval"]]))){
-    lower <- dataset[, options[["confidenceInterval"]][[1]][[1]]]
-    upper <- dataset[, options[["confidenceInterval"]][[1]][[2]]]
+  if(all(unlist(options[["effectSizeCi"]]) != "") && !is.null(unlist(options[["effectSizeCi"]]))){
+    lower <- dataset[, options[["effectSizeCi"]][[1]][[1]]]
+    upper <- dataset[, options[["effectSizeCi"]][[1]][[2]]]
     varSE <- (upper - lower)/2/qnorm(0.975)
   }
-  if(options[["standardError"]] != ""){
-    varSE <- dataset[, options[["standardError"]]]
+  if(options[["effectSizeStandardError"]] != ""){
+    varSE <- dataset[, options[["effectSizeStandardError"]]]
   }
 
   # Assign weights for the observed point sizes
@@ -1297,7 +1297,7 @@
 
   # Assign weights for the estimated point sizes
   # Should be different for ordered analysis
-  if(options[["modelSpecification"]] == "CRE"){
+  if(options[["model"]] == "constrainedRandom"){
     se_estimated <- bmaResults[["ordered"]]$summary[3:(length(varES) + 2), "se_mean"]
   } else {
     se_estimated <- bmaResults[["random"]]$summary[3:(length(varES) + 2), "se_mean"]
@@ -1321,20 +1321,20 @@
                          sep = "")
 
   # Get estimated points and CI's
-  if(options$modelSpecification == "BMA" || options$modelSpecification == "RE" || options$modelSpecification == "CRE"){
+  if(options$model == "averaging" || options$model == "random" || options$model == "constrainedRandom"){
     mean_estimates <- bmaResults[["random"]]$summary[3:(length(varES) + 2), "mean"]
     lower_estimates <- bmaResults[["random"]]$summary[3:(length(varES) + 2), "2.5%"]
     upper_estimates <- bmaResults[["random"]]$summary[3:(length(varES) + 2), "97.5%"]
   }
   # The estimates for the ordered analysis are not always saved
-  if(options$modelSpecification == "CRE"){
+  if(options$model == "constrainedRandom"){
     mean_estimates <- bmaResults[["ordered"]]$summary[1:length(varES) + 2, "mean"]
     lower_estimates <- bmaResults[["ordered"]]$summary[1:length(varES) + 2, "2.5%"]
     upper_estimates <- bmaResults[["ordered"]]$summary[1:length(varES) + 2, "97.5%"]
   }
 
   # Create text object for estimated points
-  if(options$modelSpecification != "FE"){
+  if(options$model != "fixed"){
     text_estimated <- paste(sprintf('%.2f', mean_estimates),
                             " [",
                             sprintf('%.2f', lower_estimates),
@@ -1350,7 +1350,7 @@
 
   yDiamond <- -0.5
 
-  if (options$modelSpecification == "BMA" || options$modelSpecification == "CRE") {
+  if (options$model == "averaging" || options$model == "constrainedRandom") {
     if (options$forestPlot == "plotForestBoth")
       yDiamond <- c(-0.5, -1.1, -1.7)
     else
@@ -1363,7 +1363,7 @@
   upperMain <- bmaResults[["bma"]]$estimates[modelIndex, "97.5%"]
   if(modelIndex == "ordered"){
     yMain <- yDiamond[2]
-  } else if(options$modelSpecification == "BMA"){
+  } else if(options$model == "averaging"){
     yMain <- yDiamond[3]
   } else yMain <- -0.5
 
@@ -1397,11 +1397,11 @@
   meanRandom <- bmaResults[["bma"]]$estimates["random", "mean"]
   lowerRandom <- bmaResults[["bma"]]$estimates["random", "2.5%"]
   upperRandom <- bmaResults[["bma"]]$estimates["random", "97.5%"]
-  if(options$modelSpecification == "RE"){
+  if(options$model == "random"){
     yRandom <- -0.5
-  } else if(options$modelSpecification == "BMA"){
+  } else if(options$model == "averaging"){
     yRandom <- yDiamond[2]
-  } else if(options$modelSpecification == "CRE"){
+  } else if(options$model == "constrainedRandom"){
     yRandom <- yDiamond[3]
   } else yRandom <- 0
 
@@ -1415,16 +1415,16 @@
                         sprintf('%.2f', upperRandom), "]")
 
   # Get y coordinates, labels, and text for diamonds
-  if(options$modelSpecification == "BMA"){
+  if(options$model == "averaging"){
     model <- c(gettext("Fixed effects"), gettext("Random effects"), gettext("Averaged"))
     textDiamond <- c(text_fixed, text_random, textMain)
-  } else if(options$modelSpecification == "RE"){
+  } else if(options$model == "random"){
     model <- gettext("Random effects")
     textDiamond <- text_random
-  } else if(options$modelSpecification == "FE"){
+  } else if(options$model == "fixed"){
     model <- gettext("Fixed effects")
     textDiamond <- text_fixed
-  } else if(options$modelSpecification == "CRE"){
+  } else if(options$model == "constrainedRandom"){
     model <- c(gettext("Fixed effects"), gettext("Ordered effects"), gettext("Random effects"))
     textDiamond <- c(text_fixed, textMain, text_random)
   }
@@ -1557,8 +1557,8 @@
   # Add the model diamond
   plot <- plot + ggplot2::geom_polygon(data = d, ggplot2::aes(x = x, y = y))
 
-  # Add the diamonds of the other models for BMA or ordered analysis
-  if(options$modelSpecification == "BMA" || options$modelSpecification == "CRE"){
+  # Add the diamonds of the other models for averaging or ordered analysis
+  if(options$model == "averaging" || options$model == "constrainedRandom"){
     plot <- plot + ggplot2::geom_polygon(data = d.fixed, ggplot2::aes(x = x, y = y)) +
       ggplot2::geom_polygon(data = d.random, ggplot2::aes(x = x, y = y))
   }
@@ -1639,7 +1639,7 @@
     seqContainer[["seqPlotES"]] <- seqPlotES
     .bmaFillSeqPlot(seqPlotES, jaspResults, dataset, options, .bmaDependencies, type = "ES")
     # Fill sequential plot BFs standard error
-    if(!options$modelSpecification == "FE"){
+    if(!options$model == "fixed"){
       seqPlotSE <- createJaspPlot(plot = NULL, title = gettext("Bayes factors heterogeneity"), height = 400, width = 580)
       seqPlotSE$dependOn(c("plotSequential", "BF"))
       seqPlotSE$position <- 2
@@ -1669,11 +1669,11 @@
   } else if(type == "SE"){
     # The BFs for heterogeneity have different labels
     BFs <- rowResults$BFsHeterogeneity
-    if(options$modelSpecification == "BMA"){
+    if(options$model == "averaging"){
       yName         <- "BF[italic(rf)]"
       pizzaTxt      <- c("data | Hf", "data | Hr")
       bfSubscripts  <-  c("BF[italic(rf)]", "BF[italic(fr)]")
-    } else if(options$modelSpecification == "RE"){
+    } else if(options$model == "random"){
       yName         <- "BF[italic(r1f1)]"
       pizzaTxt      <- c("data | Hf1", "data | Hr1")
       bfSubscripts  <-  c("BF[italic(r1f1)]", "BF[italic(f1r1)]")
@@ -1705,12 +1705,12 @@
   if(options$bayesFactorType == "BF01") {
     BFs    <- 1/BFs
     bfType <- "BF01"
-    if(options$modelSpecification == "BMA") yName <- "BF[italic(fr)]"
-    if(options$modelSpecification == "RE")  yName <- "BF[italic(f1r1)]"
+    if(options$model == "averaging") yName <- "BF[italic(fr)]"
+    if(options$model == "random")  yName <- "BF[italic(f1r1)]"
   }
 
   # The BFs for constrained random effects also have different labels
-  if(options$modelSpecification == "CRE"){
+  if(options$model == "constrainedRandom"){
     pizzaTxt <- c("data | Hf1", "data | Ho1")
     bfSubscripts <-  c("BF[italic(o1f1)]", "BF[italic(f1o1)]")
     if(type == "SE") yName <- "BF[italic(o1f1)]"
@@ -1766,7 +1766,7 @@
     dfPMP[c(i, i + n, i + 2*n, i + 3*n), 1] <- posterior_models
   }
 
-  if(options[["modelSpecification"]] == "BMA" || options[["modelSpecification"]] == "CRE"){
+  if(options[["model"]] == "averaging" || options[["model"]] == "constrainedRandom"){
 
     labels <- c(bquote(.(gettext("Fixed H"))[0]),bquote(.(gettext("Fixed H"))[1]),
                 bquote(.(gettext("Random H"))[0]), bquote(.(gettext("Random H"))[1]))
@@ -1775,7 +1775,7 @@
     pointValues <- c(21, 19, 21, 19)
     lineValues <- c("dotted", "solid", "dotted", "solid")
 
-  } else if(options[["modelSpecification"]] == "FE"){
+  } else if(options[["model"]] == "fixed"){
     labels <- c(bquote(.(gettext("Fixed H"))[0]), bquote(.(gettext("Fixed H"))[1]))
     colorValues <- c("#fcae91ff", "#fcae91ff")
     linetypeValues <- rep("solid", 2)
@@ -1783,7 +1783,7 @@
     lineValues <- c("dotted", "solid")
     dfPMP <- subset(dfPMP, dfPMP$g == "FE0" | dfPMP$g == "FE1")
 
-  } else if(options[["modelSpecification"]] == "RE"){
+  } else if(options[["model"]] == "random"){
 
     labels <- c(bquote(.(gettext("Random H"))[0]), bquote(.(gettext("Random H"))[1]))
     colorValues <- c("#009E73", "#009E73")
