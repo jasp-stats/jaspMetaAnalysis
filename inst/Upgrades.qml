@@ -78,5 +78,44 @@ Upgrades
         }
         ChangeRename { from: "postTable"; to: "modelProbability" }
         ChangeRename { from: "esTable"; to: "effectSizePerStudy" }
+
+        // BayesianMetaAnalysisPlots.qml
+        ChangeRename { from: "checkForestPlot"; to: "forestPlot" }
+        ChangeRename { from: "forestPlot"; to: "forestPlotEffect" }
+        ChangeJS
+        {
+            name:		"forestPlotEffect"
+            jsFunction:	function(options)
+            {
+                switch(options["forestPlotEffect"])
+                {
+                    case "plotForestObserved":	return "observed";
+                    case "plotForestEstimated":	return "estimated";
+                    case "plotForestBoth":	    return "both";
+                }
+            }
+        }
+        ChangeRename { from: "orderForest"; to: "forestPlotOrder" }
+        ChangeJS
+        {
+            name:		"forestPlotOrder"
+            jsFunction:	function(options)
+            {
+                switch(options["forestPlotOrder"])
+                {
+                    case "ascendingForest":	    return "ascending";
+                    case "descendingForest":	return "descending";
+                    case "labelForest":	        return "rowOrder";
+                }
+            }
+        }
+        ChangeRename { from: "plotCumForest"; to: "cumulativeForestPlot" }
+        ChangeRename { from: "addPrior"; to: "cumulativeForestPlotPrior" }
+        ChangeRename { from: "plotPosterior"; to: "priorAndPosterior" }
+        ChangeRename { from: "addInfo"; to: "priorAndPosteriorInfo" }
+        ChangeRename { from: "addLines"; to: "priorAndPosteriorFixedAndRandom" }
+        ChangeRename { from: "shade"; to: "priorAndPosteriorShade" }
+        ChangeRename { from: "plotSequential"; to: "sequentialPlotBayesFactor" }
+        ChangeRename { from: "plotSeqPM"; to: "sequentialPlotModelProbability" }
 	}
 }
