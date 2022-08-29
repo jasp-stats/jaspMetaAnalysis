@@ -124,7 +124,7 @@ Upgrades
 		ChangeRename { from: "informativeNormalStd"; to: "normalStd" }
 		ChangeRename { from: "informativeTLocation"; to: "tLocation" }
 		ChangeRename { from: "informativeTScale"; to: "tScale" }
-		ChangeRename { from: "informativeTDf"; to: "tDf" }
+		ChangeRename { from: "informsTDf"; to: "tDf" }
 		ChangeRename { from: "checkLowerPrior"; to: "truncationLowerBound" }
 		ChangeRename { from: "lowerTrunc"; to: "truncationLowerBoundValue" }
 		ChangeRename { from: "checkUpperPrior"; to: "truncationUpperBound" }
