@@ -1,44 +1,44 @@
 context("Bayesian Meta Analysis")
 
 options <- jaspTools::analysisOptions("BayesianMetaAnalysis")
-options$effectSize                <- "ES"
-options$standardError             <- "SE"
-options$postTable                 <- TRUE
-options$esTable                   <- TRUE
-options$plotPrior                 <- TRUE
-options$plotPosterior             <- TRUE
-options$checkForestPlot           <- TRUE
-options$plotCumForest             <- FALSE
-options$plotSequential            <- FALSE
-options$plotSeqPM                 <- FALSE
-options$addInfo                   <- TRUE
-options$addLines                  <- TRUE
-options$shade                     <- TRUE
-options$priorH0FE                 <- 0.25
-options$priorH1FE                 <- 0.25
-options$priorH0RE                 <- 0.25
-options$priorH1RE                 <- 0.25
-options$iterMCMC                  <- 2000
-options$priorES                   <- "cauchy"
-options$priorSE                   <- "inverseGamma"
-options$forestPlot                <- "plotForestObserved"
-options$orderForest               <- "ascendingForest"
-options$BFComputation             <- "integration"
-options$bayesFactorType           <- "BF10"
-options$modelSpecification        <- "BMA"
-options$checkLowerPrior           <- FALSE
-options$checkUpperPrior           <- FALSE
-options$informativeCauchyLocation <- 0
-options$informativeCauchyScale    <- 0.707
-options$inverseGammaShape         <- 1
-options$inverseGammaScale         <- 0.15
-options$chainsMCMC                <- 4
-options$seed                      <- 1
-options$.meta                     <- list(confidenceInterval = list(containsColumn = TRUE), 
-                                          effectSize = list(containsColumn = TRUE), 
-                                          standardError = list(containsColumn = TRUE), 
-                                          studyLabels = list(containsColumn = TRUE))
-options$confidenceInterval        <- list()
+options$effectSize                              <- "ES"
+options$effectSizeStandardError                 <- "SE"
+options$modelProbability                        <- TRUE
+options$effectSizePerStudy                      <- TRUE
+options$priorPlot                               <-  TRUE
+options$priorAndPosterior                       <- TRUE
+options$forestPlot                              <- TRUE
+options$cumulativeForestPlot                    <- FALSE
+options$sequentialPlotBayesFactor               <- FALSE
+options$sequentialPlotModelProbability          <- FALSE
+options$priorAndPosteriorInfo                   <- TRUE
+options$priorAndPosteriorFixedAndRandom         <- TRUE
+options$priorAndPosteriorShade                  <- TRUE
+options$priorModelProbabilityFixedNull          <- 0.25
+options$priorModelProbabilityFixedAlternative   <- 0.25
+options$priorModelProbabilityRandomNull         <- 0.25
+options$priorModelProbabilityRandomAlternative  <- 0.25
+options$samples                                 <- 2000
+options$priorEffectSize                         <- "cauchy"
+options$priorStandardError                      <- "inverseGamma"
+options$forestPlotEffect                        <- "observed"
+options$forestPlotRowOrder                      <- "ascending"
+options$bayesFactorComputation                  <- "integration"
+options$bayesFactorType                         <- "BF10"
+options$model                                   <- "averaging"
+options$truncationLowerBound                    <- FALSE
+options$truncationUpperBound                    <- FALSE
+options$cauchyLocation                          <- 0
+options$cauchyScale                             <- 0.707
+options$inverseGammaShape                       <- 1
+options$inverseGammaScale                       <- 0.15
+options$chains                                  <- 4
+options$seed                                    <- 1
+options$.meta <- list(effectSizeCi = list(containsColumn = TRUE), 
+                      effectSize = list(containsColumn = TRUE), 
+                      effectSizeStandardError = list(containsColumn = TRUE), 
+                      studyLabel = list(containsColumn = TRUE))
+options$effectSizeCi <- list()
 set.seed(1)
 results <- jaspTools::runAnalysis("BayesianMetaAnalysis", "BCG Vaccine.csv", options)
 
