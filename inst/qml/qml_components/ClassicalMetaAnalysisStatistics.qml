@@ -58,7 +58,7 @@ Section
 			
 			CheckBox
 			{
-				name:		"forestPlotLabel"
+				name:		"showLabels"
 				text:		qsTr("Show labels")
 				checked:	true
 				enabled: 	forestPlot.checked	
@@ -67,7 +67,7 @@ Section
 
 			DropDown
 			{
-				name:			"forestPlotOrdering"
+				name:			"forestPlotOrder"
 				label:			qsTr("Ordering")
 				enabled: 		forestPlot.checked
 				visible:		module == "cochrane"
