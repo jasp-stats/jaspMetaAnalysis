@@ -101,7 +101,7 @@ Section
 
 		RadioButtonGroup
 		{
-			name: 		"forestPlotOrder"
+			name: 		"forestPlotRowOrder"
 			title: 		qsTr("Order")
 			enabled: 	checkForest.checked
 			visible:	module == "metaAnalysis"
