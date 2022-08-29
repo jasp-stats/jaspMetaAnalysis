@@ -22,8 +22,6 @@ Upgrades
         ChangeRename { from: "test"; to: "regressionCoefficientEstimateTest" }
         ChangeRename { from: "regressionCoefficientsCovarianceMatrix"; to: "regressionCoefficientCovarianceMatrix" }
         ChangeRename { from: "modelFit"; to: "fitMeasure" }
-        ChangeRename { from: "showLabels"; to: "forestPlotLabel" }
-        ChangeRename { from: "forestPlotOrder"; to: "forestPlotOrdering" }
         ChangeRename { from: "rSquaredChange"; to: "funnelPlotRankTestAsymmetry" }
         ChangeRename { from: "funnelPlotAsymmetryTest"; to: "funnelPlotRegressionAsymmetryTest" }
         ChangeRename { from: "residualsParameters"; to: "residualParameter" }
