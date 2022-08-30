@@ -23,7 +23,7 @@ Upgrades
         ChangeRename { from: "regressionCoefficientsCovarianceMatrix"; to: "covarianceMatrix" }
         ChangeRename { from: "modelFit"; to: "fitMeasure" }
         ChangeRename { from: "rSquaredChange"; to: "funnelPlotRankTestAsymmetry" }
-        ChangeRename { from: "funnelPlotAsymmetryTest"; to: "funnelPlotRegressionAsymmetryTest" }
+        ChangeRename { from: "funnelPlotAsymmetryTest"; to: "funnelPlotRegressionTestAsymmetry" }
         ChangeRename { from: "residualsParameters"; to: "residualParameter" }
 
         // ClassicalMetaAnalysisDiagnostics.qml
