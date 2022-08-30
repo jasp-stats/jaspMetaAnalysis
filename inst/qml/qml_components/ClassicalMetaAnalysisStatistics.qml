@@ -82,7 +82,7 @@ Section
 		}
 		CheckBox { name: "funnelPlot";				text: qsTr("Funnel plot") }
 		CheckBox { name: "funnelPlotRankTestAsymmetry";			text: qsTr("Rank test for funnel plot asymmetry") }
-		CheckBox { name: "funnelPlotRegressionAsymmetryTest"; text: qsTr("Regression test for funnel plot asymmetry") }
+		CheckBox { name: "funnelPlotRegressionTestAsymmetry"; text: qsTr("Regression test for funnel plot asymmetry") }
 	}
 
 	Group
