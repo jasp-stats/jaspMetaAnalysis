@@ -66,7 +66,7 @@ test_that("Posterior Estimates per Model table results match", {
 
 test_that("Effect Sizes per Study table results match", {
   testthat::skip_on_os(c("mac", "linux", "solaris"))
-  table <- results[["results"]][["esTable"]][["data"]]
+  table <- results[["results"]][["effectSizePerStudy"]][["data"]]
   jaspTools::expect_equal_tables(table,
                                 list(-0.810675161337492, -1.68394255502823, 0.00390957421349684, -0.9387,
                                       "Study 1", -1.28269463814809, -2.02557257455892, -0.578076727966483,
@@ -87,7 +87,7 @@ test_that("Effect Sizes per Study table results match", {
 
 test_that("Observed study effects plot matches", {
   testthat::skip_on_os(c("mac", "linux", "solaris"))
-  plotName <- results[["results"]][["forestContainer"]][["collection"]][["forestContainer_forestPlot"]][["data"]]
+  plotName <- results[["results"]][["forestContainer"]][["collection"]][["forestContainer_forestPlotEffect"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "observed-study-effects")
 })
@@ -110,7 +110,7 @@ test_that("Model Probabilities table results match", {
   if (Sys.info()["sysname"] == "Darwin")
     testthat::skip("this test doesn't work on macOS + maybe a reason for future us to look at")
 
-  table <- results[["results"]][["postTable"]][["data"]]
+  table <- results[["results"]][["modelProbability"]][["data"]]
   jaspTools::expect_equal_tables(table,
                                  list("Fixed H<unicode><unicode><unicode>", 2.40853635687008e-49, 0.25,
                                       "Fixed H<unicode><unicode><unicode>", 1.13292249023919e-27,

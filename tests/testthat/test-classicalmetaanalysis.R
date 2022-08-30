@@ -6,7 +6,7 @@ options$effectSize <- "contNormal"
 options$factors    <- c("facGender", "facExperim")
 options$forestPlot <- TRUE
 options$funnelPlot <- TRUE
-options$funnelPlotRegressionAsymmetryTest <- TRUE
+options$funnelPlotRegressionTestAsymmetry <- TRUE
 options$method     <- "Restricted ML"
 options$modelTerms <- list(list(components = "contcor2"), 
                            list(components = "facGender"), 
@@ -356,28 +356,28 @@ test_that("Residual Heterogeneity Estimates table results match", {
 test_that("Analysis handles errors", {
   options <- jaspTools::analysisOptions("ClassicalMetaAnalysis")
   
-  options$dependent  <- "debInf"
-  options$wlsWeights <- "contGamma"
+  options$effectSize  <- "debInf"
+  options$effectSizeStandardError <- "contGamma"
   results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", "test.csv", options)
   expect_identical(results[["status"]], "validationError", label="Inf dependent check")
   
-  options$dependent <- "contNormal"
-  options$wlsWeights <- "debInf"
+  options$effectSize <- "contNormal"
+  options$effectSizeStandardError <- "debInf"
   results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", "test.csv", options)
   expect_identical(results[["status"]], "validationError", label="Inf covariate check")
   
-  options$dependent <- "debSame"
-  options$wlsWeights <- "contGamma"
+  options$effectSize <- "debSame"
+  options$effectSizeStandardError <- "contGamma"
   results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", "test.csv", options)
   expect_identical(results[["status"]], "validationError", label="No variance dependent check")
   
-  options$dependent <- "contNormal"
-  options$wlsWeights <- "debSame"
+  options$effectSize <- "contNormal"
+  options$effectSizeStandardError <- "debSame"
   results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", "test.csv", options)
   expect_identical(results[["status"]], "validationError", label="No variance covariate check")
   
-  options$dependent <- "contGamma"
-  options$wlsWeights <- "contcor1"
+  options$effectSize <- "contGamma"
+  options$effectSizeStandardError <- "contcor1"
   results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", "test.csv", options)
   expect_identical(results[["status"]], "validationError", label="Negative wlsWeights check")
   
@@ -386,11 +386,11 @@ test_that("Analysis handles errors", {
 #model interaction tests
 options <- jaspTools::analysisOptions("ClassicalMetaAnalysis")
 options$covariates <- c("contcor1", "contcor2")
-options$dependent <- "contNormal"
+options$effectSize <- "contNormal"
 options$factors <- c("facGender", "facExperim")
 options$forestPlot <- TRUE
 options$funnelPlot <- TRUE
-options$funnelPlotAsymmetryTest <- TRUE
+options$funnelPlotRegressionTestAsymmetry <- TRUE
 options$method <- "Restricted ML"
 options$modelTerms <- list(list(components = "contcor1"), 
                            list(components = "contcor2"), 
@@ -407,23 +407,23 @@ options$modelTerms <- list(list(components = "contcor1"),
                            list(components = c("contcor1", "facGender", "facExperim")), 
                            list(components = c("contcor2", "facGender", "facExperim")), 
                            list(components = c("contcor1", "contcor2", "facGender", "facExperim")))
-options$plotResidualsCovariates <- TRUE
-options$plotResidualsDependent <- TRUE
-options$plotResidualsPredicted <- TRUE
-options$rSquaredChange <- TRUE
-options$regressionCoefficientsConfidenceIntervals <- TRUE
-options$regressionCoefficientsCovarianceMatrix <- TRUE
-options$residualsCasewiseDiagnostics <- TRUE
-options$studyLabels <- "contBinom"
-options$trimFillPlot <- TRUE
-options$wlsWeights <- "contGamma"
+options$failSafeN <- TRUE
+options$diagnosticPlot <- TRUE
+options$profilePlot <- TRUE
+options$funnelPlotRankTestAsymmetry <- TRUE
+options$estimateCi <- TRUE
+options$covarianceMatrix <- TRUE
+options$casewiseDiagnostics <- TRUE
+options$studyLabel <- "contBinom"
+options$trimFillAnalysis <- TRUE
+options$effectSizeStandardError <- "contGamma"
 
-options$regressionCoefficientsEstimates <- TRUE
-options$regressionCoefficientsConfidenceIntervalsInterval <- .95
-options$test <- "z"
-options$modelFit <- TRUE
-options$plotResidualsQQ <- TRUE
-options$residualsParameters <- TRUE
+options$estimate <- TRUE
+options$estimateCiLevel <- .95
+options$estimateTest <- "z"
+options$fitMeasure <- TRUE
+options$diagnosticQqPlot <- TRUE
+options$residualParameter <- TRUE
 
 set.seed(1)
 results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", "debug.csv", options)
@@ -858,30 +858,30 @@ test_that("Residual Heterogeneity Estimates table results match - model interact
 
 # test the diagnostic plot without the Q-Q plot
 options <- jaspTools::analysisOptions("ClassicalMetaAnalysis")
-options$.meta <- list(covariates = list(containsColumn = TRUE), dependent = list(
+options$.meta <- list(covariates = list(containsColumn = TRUE), effectSize = list(
   containsColumn = TRUE), factors = list(containsColumn = TRUE), 
-  studyLabels = list(containsColumn = TRUE), wlsWeights = list(
+  studyLabel = list(containsColumn = TRUE), effectSizeStandardError = list(
     containsColumn = TRUE))
-options$dependent <- "ES"
+options$effectSize <- "ES"
 options$method <- "Fixed Effects"
-options$plotResidualsDependent <- TRUE
-options$plotResidualsQQ <- FALSE
-options$regressionCoefficientsEstimates <- FALSE
-options$residualsParameters <- FALSE
-options$wlsWeights <- "SE"
+options$diagnosticPlot <- TRUE
+options$diagnosticQqPlot <- FALSE
+options$estimate <- FALSE
+options$residualParameter <- FALSE
+options$effectSizeStandardError <- "SE"
+options$funnelPlot <- TRUE
 
-
-options$regressionCoefficientsConfidenceIntervalsInterval <- .95
-options$test <- "z"
-options$modelFit <- TRUE
-options$regressionCoefficientsCovarianceMatrix <- TRUE
-options$rSquaredChange <- TRUE
-options$funnelPlotAsymmetryTest <- FALSE
-options$residualsCasewiseDiagnostics <- TRUE
-options$plotResidualsCovariates <- FALSE
+options$estimateCiLevel <- .95
+options$estimateTest <- "z"
+options$fitMeasure <- TRUE
+options$covarianceMatrix <- TRUE
+options$funnelPlotRankTestAsymmetry <- TRUE
+options$funnelPlotRegressionTestAsymmetry <- FALSE
+options$casewiseDiagnostics <- TRUE
+options$failSafeN <- FALSE
 options$forestPlot <- FALSE
-options$plotResidualsPredicted <- FALSE
-options$trimFillPlot <- FALSE
+options$profilePlot <- FALSE
+options$trimFillAnalysis <- FALSE
 
 set.seed(1)
 results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", "BCG Vaccine", options)

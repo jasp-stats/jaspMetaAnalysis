@@ -246,10 +246,10 @@
 }
 
 .metaAnalysisRegTestTable <- function(container, dataset, options, ready) {
-  if (!options$funnelPlotRegressionAsymmetryTest || !is.null(container[["regTestTable"]]))
+  if (!options$funnelPlotRegressionTestAsymmetry || !is.null(container[["regTestTable"]]))
     return()
   regTestTable <- createJaspTable(gettext("Regression test for Funnel plot asymmetry (\"Egger's test\")"))
-  regTestTable$dependOn("funnelPlotRegressionAsymmetryTest")
+  regTestTable$dependOn("funnelPlotRegressionTestAsymmetry")
   regTestTable$position <- 6
   regTestTable$showSpecifiedColumnsOnly <- TRUE
   regTestTable$addCitation("Viechtbauer, W. (2010). Conducting meta-analyses in R with the metafor package. <em>Journal of Statistical Software</em>, <b>36</b>(3), 1-48.")
