@@ -272,9 +272,12 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   jaspResults[["summaryTable"]] <- summaryTable
 
-  if (is.null(model))
+  if (is.null(model)) {
+    if (options[["effectSize"]] != "" && options[["standardError"]] != "" && length(options[["modelTerms"]]) == 0)
+      summaryTable$addFootnote(gettext("At least one predictor needs to be specified."))
+
     return()
-  else if (jaspBase::isTryError(model)) {
+  } else if (jaspBase::isTryError(model)) {
     summaryTable$setError(model)
     return()
   }
