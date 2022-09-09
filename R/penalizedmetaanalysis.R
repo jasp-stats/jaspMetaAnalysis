@@ -301,6 +301,33 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     summaryTable$addRows(tempRow)
   }
 
+  # check model fit
+  parNames      <- rownames(rstan::summary(model$fit)$summary)
+  divIterations <- rstan::get_num_divergent(model$fit)
+  lowBmfi       <- rstan::get_low_bfmi_chains(model$fit)
+  maxTreedepth  <- rstan::get_num_max_treedepth(model$fit)
+  minESS        <- min(rstan::summary(model$fit)$summary[parNames != "sigma", "n_eff"])
+
+  if (any(is.infinite(rstan::summary(model$fit)$summary[parNames != "sigma", "Rhat"])))
+    maxRhat     <- Inf
+  else
+    maxRhat     <- max(rstan::summary(model$fit)$summary[parNames != "sigma", "Rhat"])
+
+  if (divIterations != 0)
+    summaryTable$addFootnote(.pemaMessageDivergentIter(divIterations), symbol = gettext("Warning:"))
+
+  if (length(lowBmfi) != 0)
+    summaryTable$addFootnote(.pemaMessageLowBMFI(length(lowBmfi)), symbol = gettext("Warning:"))
+
+  if (maxTreedepth != 0)
+    summaryTable$addFootnote(.pemaMessageMaxTreedepth(maxTreedepth))
+
+  if (maxRhat > 1.01)
+    summaryTable$addFootnote(.pemaMessageMaxRhat(maxRhat), symbol = gettext("Warning:"))
+
+  if (minESS < 100 * options$mcmcChains || is.nan(minESS))
+    summaryTable$addFootnote(.pemaMessageMinESS(minESS, 100 * options$chains), symbol = gettext("Warning:"))
+
   return()
 }
 .pemaSummaryTableTau           <- function(jaspResults, options) {
@@ -618,3 +645,49 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   return()
 }
+
+
+.pemaMessageDivergentIter <- function(iterations) {
+  sprintf(
+    ngettext(
+      iterations,
+      "The Hamiltonian Monte Carlo procedure might be invalid -- There was %i divergent transition after warmup. This can be solved by carefully increasing 'Adapt delta' until there are no divergent transitions.",
+      "The Hamiltonian Monte Carlo procedure might be invalid -- There were %i divergent transitions after warmup. This can be solved by carefully increasing 'Adapt delta' until there are no divergent transitions."
+    ),
+    iterations
+  )
+}
+.pemaMessageLowBMFI       <- function(nChains) {
+  sprintf(
+    ngettext(
+      nChains,
+      "Bayesian Fraction of Missing Information (BFMI) that was too low in %i chain indicating that the posterior distribution was not explored efficiently. Try increasing number of 'Burnin' and 'Iterations'.",
+      "Bayesian Fraction of Missing Information (BFMI) that was too low in %i chains indicating that the posterior distribution was not explored efficiently. Try increasing number of 'Burnin' and 'Iterations'."
+    ),
+    nChains
+  )
+}
+.pemaMessageMaxTreedepth  <- function(iterations) {
+  sprintf(
+    ngettext(
+      iterations,
+      "The Hamiltonian Monte Carlo procedure might be inefficient -- %i transition exceeded the maximum tree depth. This can be solved by carefully increasing 'Maximum tree depth'.",
+      "The Hamiltonian Monte Carlo procedure might be inefficient -- %i transitions exceeded the maximum tree depth. This can be solved by carefully increasing 'Maximum tree depth'."
+    ),
+    iterations
+  )
+}
+.pemaMessageMaxRhat       <- function(Rhat) {
+  gettextf(
+    "Inference possibly unreliable -- MCMC chains might not have converged; The largest R-hat is %.3f > 1.01. To lower R-hat please increase 'Iterations', or 'Adapt delta' in the Options section.",
+    Rhat
+  )
+}
+.pemaMessageMinESS        <- function(ESS, treshold) {
+  gettextf(
+    "Low estimation accuracy -- The smallest Effective Sample Size (ESS) is %.2f < %1.0f. To increase accuracy please increase 'Iterations', or 'Adapt delta' in the Options section.",
+    ESS,
+    treshold
+  )
+}
+
