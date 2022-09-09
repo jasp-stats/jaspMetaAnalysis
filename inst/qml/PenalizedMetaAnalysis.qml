@@ -125,6 +125,14 @@ Form
 			checked:	true
 		}
 
+		CheckBox
+		{
+			name:		"scalePredictors"
+			label:		qsTr("Scale predictors")
+			checked:	true
+		}
+
+		/* Requires a different functionality of the pema interface 
 		VariablesList
 		{
 			title:				qsTr("Rescale continuous predictors")
@@ -141,6 +149,7 @@ Form
 				checked:	true
 			}
 		}
+		*/
 	}
 
 	Section

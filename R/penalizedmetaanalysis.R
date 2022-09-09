@@ -48,7 +48,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 }
 
 .pemaDependencies <- c(
-  "effectSize", "standardError", "method", "studyLabels", "covariates", "factors", "clustering", "components", "modelTerms", "includeConstant",
+  "effectSize", "standardError", "method", "studyLabels", "covariates", "factors", "clustering", "components", "modelTerms", "includeConstant", "scalePredictors",
   "priorHsDf", "priorHsScale", "priorLassoDf", "priorLassoDfGlobal", "priorLassoDfSlab", "priorLassoScaleGlobal", "priorLassoScaleSlab",
   "mcmcWarmup", "mcmcIter", "mcmcChains", "mcmcDelta", "mcmcTreedepth", "setSeed", "seed"
 )
@@ -233,18 +233,19 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   .setSeedJASP(options)
   fit <- try(pema::brma(
-    formula   = .pemaFormula(options),
-    data      = dataset,
-    vi        = "JASP_computed_variance__",
-    study     = if (options[["clustering"]] != "") options[["clustering"]],
-    method    = options[["method"]],
-    prior     = .pemaPriors(options),
-    mute_stan = TRUE,
-    chains    = options[["mcmcChains"]],
-    warmup    = options[["mcmcWarmup"]],
-    iter      = options[["mcmcWarmup"]] + options[["mcmcIter"]],
-    seed      = if (options[["setSeed"]]) .getSeedJASP(options) else sample.int(.Machine$integer.max, 1),
-    control   = list(adapt_delta = options[["mcmcDelta"]], max_treedepth = options[["mcmcTreedepth"]])
+    formula     = .pemaFormula(options),
+    data        = dataset,
+    vi          = "JASP_computed_variance__",
+    study       = if (options[["clustering"]] != "") options[["clustering"]],
+    method      = options[["method"]],
+    prior       = .pemaPriors(options),
+    standardize = options[["scalePredictors"]],
+    mute_stan   = TRUE,
+    chains      = options[["mcmcChains"]],
+    warmup      = options[["mcmcWarmup"]],
+    iter        = options[["mcmcWarmup"]] + options[["mcmcIter"]],
+    seed        = if (options[["setSeed"]]) .getSeedJASP(options) else sample.int(.Machine$integer.max, 1),
+    control     = list(adapt_delta = options[["mcmcDelta"]], max_treedepth = options[["mcmcTreedepth"]])
   ))
   model[["object"]] <- fit
 
