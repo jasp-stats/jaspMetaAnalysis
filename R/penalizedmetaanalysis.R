@@ -471,7 +471,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   for(i in seq_along(coefficients)){
 
-    tempPlot <- rstan::stan_dens(stanFit, coefficients[i], separate_chains = FALSE)
+    tempPlot <- rstan::stan_dens(stanFit, coefficients[i], separate_chains = FALSE, fill = NA, size = 1)
 
     parTicks <- jaspGraphs::getPrettyAxisBreaks(range(stanSamples[[coefficients[i]]]))
 
