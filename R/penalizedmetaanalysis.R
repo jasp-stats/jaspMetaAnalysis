@@ -21,10 +21,6 @@
 
 PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
-  # keep this till the CRAN version is updated and contains proper exports
-  library(pema)
-
-
   if (.pemaCheckReady(options)) {
     # get the data
     dataset <- .pemaGetData(dataset, options)
@@ -227,7 +223,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 }
 .pemaFit                       <- function(jaspResults, dataset, options) {
 
-  if (!is.null(jaspResults[["models"]])) {
+  if (!is.null(jaspResults[["model"]])) {
     return()
   } else {
     model <- createJaspState()

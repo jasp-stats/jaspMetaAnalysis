@@ -262,8 +262,8 @@ Form
 				id:					availableModelComponentsForms
 				property var alwaysAvailable:
 					[
-						{ label:	qsTr("Intercept"),		value: "Intercept"},
-						{ label:	qsTr("Heterogeneity"),	value: "Heterogeneity"}
+						{ label:	"Intercept",		value: "Intercept"},
+						{ label:	"Heterogeneity",	value: "Heterogeneity"}
 					]
 
 				AvailableVariablesList
@@ -294,8 +294,8 @@ Form
 			id:				diagnosticsForms
 			property var alwaysAvailable:
 				[
-					{ label:	qsTr("Intercept"),		value: "Intercept"},
-					{ label:	qsTr("Heterogeneity"),	value: "Heterogeneity"}
+					{ label:	"Intercept",		value: "Intercept"},
+					{ label:	"Heterogeneity",	value: "Heterogeneity"}
 				]
 
 			AvailableVariablesList
