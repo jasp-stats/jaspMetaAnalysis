@@ -1698,3 +1698,18 @@ msgstr "効果量の期待される方向"
 msgctxt "PetPeese|"
 msgid "Regression estimates"
 msgstr ""
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Measure"
+msgstr "測定"
+
+#, fuzzy
+msgctxt "SelectionModels|"
+msgid "Measure"
+msgstr "測定"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Measure"
+msgstr "測定"

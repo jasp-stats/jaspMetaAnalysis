@@ -1699,3 +1699,18 @@ msgstr "Verwachte richting van de effectgroottes"
 msgctxt "PetPeese|"
 msgid "Regression estimates"
 msgstr "Regressie schattingen"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Measure"
+msgstr "Maat"
+
+#, fuzzy
+msgctxt "SelectionModels|"
+msgid "Measure"
+msgstr "Maat"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Measure"
+msgstr "Maat"

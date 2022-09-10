@@ -1699,3 +1699,18 @@ msgstr "Dirección esperada de las magnitudes de los efectos"
 msgctxt "PetPeese|"
 msgid "Regression estimates"
 msgstr "Estimaciones de la regresión"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Measure"
+msgstr "Medida"
+
+#, fuzzy
+msgctxt "SelectionModels|"
+msgid "Measure"
+msgstr "Medida"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Measure"
+msgstr "Medida"

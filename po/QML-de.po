@@ -1699,3 +1699,18 @@ msgstr "Erwartete Richtung der Effektstärken"
 msgctxt "PetPeese|"
 msgid "Regression estimates"
 msgstr "Regressions-Schätzungen"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Measure"
+msgstr "Maß"
+
+#, fuzzy
+msgctxt "SelectionModels|"
+msgid "Measure"
+msgstr "Maß"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Measure"
+msgstr "Maß"

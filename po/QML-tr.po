@@ -1698,3 +1698,15 @@ msgstr ""
 msgctxt "PetPeese|"
 msgid "Regression estimates"
 msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Measure"
+msgstr ""
+
+msgctxt "SelectionModels|"
+msgid "Measure"
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid "Measure"
+msgstr ""
