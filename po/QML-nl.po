@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2022-09-28 09:55+0000\n"
+"Last-Translator: Alexander Ly <a.ly@uva.nl>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/nl/>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.1\n"
 "X-Language: nl\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -582,7 +588,7 @@ msgstr "Voeg bewijs samen van verschillende studies"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Advanced"
-msgstr "Geavanceerd"
+msgstr "Geadvanceerd"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Prior model probability"
@@ -594,7 +600,7 @@ msgstr "Gefixeerde effecten"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Random effects"
-msgstr "Willekeurige effecten"
+msgstr "Aselecte effecten"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Estimation settings (MCMC)"
@@ -670,11 +676,11 @@ msgstr "Grafieken"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Forest plot"
-msgstr "Forest grafiek"
+msgstr "Bosgrafiek"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Observed"
-msgstr "Waargenomen"
+msgstr "Geobserveerd"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Estimated"
@@ -726,7 +732,7 @@ msgstr "Rijvolgorde"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Cumulative forest plot"
-msgstr "Cumulatieve forest plot"
+msgstr "Cumulatieve bosgrafiek"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Prior and posterior"
@@ -774,7 +780,7 @@ msgstr "locatie:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "scale:"
-msgstr "Schaal:"
+msgstr "schaal:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Normal"
@@ -782,7 +788,7 @@ msgstr "Normaal"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "mean:"
-msgstr "Gemiddelde:"
+msgstr "gemiddelde:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "std:"
@@ -822,7 +828,7 @@ msgstr "Halve t-verdeling"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Plot prior(s)"
-msgstr "Plot prior(s)"
+msgstr "Grafiek prior(s)"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Diagnostics"
@@ -846,7 +852,7 @@ msgstr "Diagnostische grafieken"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Q-Q plot standardized residuals"
-msgstr "Q-Q plot gestandaardiseerde residuen"
+msgstr "Q-Q grafiek gestandaardiseerde residuen"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Robustness"
@@ -870,7 +876,7 @@ msgstr "Gefixeerde effecten"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Maximum Likelihood"
-msgstr "Maximum aannemelijkheid"
+msgstr "Maximale aannemelijkheid"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Restricted ML"
@@ -966,15 +972,15 @@ msgstr "Effectgrootte (afnemend)"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Funnel plot"
-msgstr "Funnelgrafiek"
+msgstr "Trechtergrafiek"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Rank test for funnel plot asymmetry"
-msgstr "Rangordetoets voor funnelgrafiek-asymmetrie"
+msgstr "Rangordetoets voor trechtergrafiek-asymmetrie"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Regression test for funnel plot asymmetry"
-msgstr "Regressietoets voor funnelgrafiek-asymmetrie"
+msgstr "Regressietoets voor trechtergrafiek-asymmetrie"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Residuals Model"
