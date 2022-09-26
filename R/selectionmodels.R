@@ -92,13 +92,15 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
              exitAnalysisIfErrors  = TRUE)
 
   if (options[["inputSE"]] != "")
-    .hasErrors(dataset              = dataset[,"inputSE"],
+    .hasErrors(dataset              = dataset,
+               seCheck.target       = options[["inputSE"]],
                custom               = .metaAnalysisCheckSE,
                exitAnalysisIfErrors = TRUE)
 
 
   if (options[["inputN"]] != "")
-    .hasErrors(dataset              = dataset[,"inputN"],
+    .hasErrors(dataset              = dataset,
+               seCheck.target       = options[["inputN"]],
                custom               = .metaAnalysisCheckSE,
                exitAnalysisIfErrors = TRUE)
 

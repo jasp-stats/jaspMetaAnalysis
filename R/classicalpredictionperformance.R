@@ -102,7 +102,8 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
              observations.amount   = "< 2",
              exitAnalysisIfErrors  = TRUE)
 
-  .hasErrors(dataset              = dataset[,varNames %in% c("inputSE","inputN")],
+  .hasErrors(dataset              = dataset,
+             seCheck.target       = varNames[varNames %in% c(options[["inputSE"]],options[["inputN"]])],
              custom               = .metaAnalysisCheckSE,
              exitAnalysisIfErrors = TRUE)
 

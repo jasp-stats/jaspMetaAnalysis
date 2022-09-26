@@ -291,7 +291,8 @@
   }
   if(options$standardError != ""){
     SE <- dataset[, options[["standardError"]]]
-    .hasErrors(dataset              = dataset[,"standardError"],
+    .hasErrors(dataset              = dataset,
+               seCheck.target       = options[["standardError"]],
                custom               = .metaAnalysisCheckSE,
                exitAnalysisIfErrors = TRUE)
   }
