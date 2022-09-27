@@ -82,7 +82,16 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
              modelInteractions.modelTerms = options$modelTerms,
              exitAnalysisIfErrors = TRUE)
   .hasErrors(dataset              = dataset,
-             type                 = c("negativeValues"),
-             negativeValues.target= options$wlsWeights,
+             seCheck.target       = options[["wlsWeights"]],
+             custom               = .metaAnalysisCheckSE,
              exitAnalysisIfErrors = TRUE)
 }
+
+.metaAnalysisCheckSE <- list(
+  seCheck = function(dataset, target) {
+    nonPositive <- !all(na.omit(dataset[,target]) > 0)
+    if (nonPositive) {
+      return(gettext("All standard errors/sample sizes must be positive."))
+    }
+  }
+)

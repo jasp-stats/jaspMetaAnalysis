@@ -93,7 +93,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
 
   if (options[["inputLabels"]] != "") {
     dataset[[options[["inputLabels"]]]] <- as.character(dataset[[options[["inputLabels"]]]])
-    if (!validUTF8(dataset[[options[["inputLabels"]]]]))
+    if (any(!validUTF8(dataset[[options[["inputLabels"]]]])))
       .quitAnalysis(gettext("The study labels contain invalid characters. Please, remove them before running the analysis."))
   }
 
@@ -101,6 +101,11 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
              type                  = c("infinity", "observations", "negativeValues"),
              observations.amount   = "< 2",
              exitAnalysisIfErrors  = TRUE)
+
+  .hasErrors(dataset              = dataset,
+             seCheck.target       = varNames[varNames %in% c(options[["inputSE"]],options[["inputN"]])],
+             custom               = .metaAnalysisCheckSE,
+             exitAnalysisIfErrors = TRUE)
 
 
   return(dataset)

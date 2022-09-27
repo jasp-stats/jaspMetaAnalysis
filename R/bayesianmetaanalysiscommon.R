@@ -291,10 +291,10 @@
   }
   if(options$standardError != ""){
     SE <- dataset[, options[["standardError"]]]
-    .hasErrors(dataset = dataset,
-               exitAnalysisIfErrors= TRUE,
-               type = "negativeValues",
-               negativeValues.target = options$standardError)
+    .hasErrors(dataset              = dataset,
+               seCheck.target       = options[["standardError"]],
+               custom               = .metaAnalysisCheckSE,
+               exitAnalysisIfErrors = TRUE)
   }
 
 
