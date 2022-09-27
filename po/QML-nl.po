@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "PO-Revision-Date: 2022-09-28 09:55+0000\n"
-"Last-Translator: Alexander Ly <a.ly@uva.nl>\n"
+"Last-Translator: Sophie Berkhout <s.w.berkhout@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/nl/>\n"
 "Language: nl\n"
@@ -1706,17 +1706,14 @@ msgctxt "PetPeese|"
 msgid "Regression estimates"
 msgstr "Regressie schattingen"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Measure"
 msgstr "Maat"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Measure"
 msgstr "Maat"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Measure"
 msgstr "Maat"
