@@ -205,7 +205,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   rowAdjusted   <- list(type = "Adjusted")
 
   if (!is.null(fit)) {
-    if (!class(fit) %in% c("simpleError","error")) {
+    if (!jaspBase::isTryError(fit)) {
 
       if (fit[["fe"]]) {
         posMean <- 1
@@ -266,7 +266,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   rowREAdjustedTau   <- list(type = "Adjusted")
 
   if (!is.null(fit)) {
-    if (!class(fit) %in% c("simpleError","error")) {
+    if (!jaspBase::isTryError(fit)) {
       rowREUnadjustedTau  <- c(rowREUnadjustedTau, list(
         est  = sqrt(fit[["unadj_est"]][1, 1]),
         stat = fit[["z_unadj"]][1, 1],
@@ -326,7 +326,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   table$addColumnInfo(name = "upperCI",  title = gettext("Upper"),          type = "number", overtitle = overtitleCI)
 
   if (!is.null(fit)) {
-    if (!class(fit) %in% c("simpleError","error")) {
+    if (!jaspBase::isTryError(fit)) {
 
       if (fit[["fe"]]) {
         weightsAdd <- 0
@@ -396,9 +396,9 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
 
   # remove intervals that do not contain enought(3) p-values
   if (options[["joinPVal"]]) {
-    steps <- tryCatch(.smJoinCutoffs(steps, pVal), error = function(e)e)
+    steps <- try(.smJoinCutoffs(steps, pVal))
 
-    if (class(steps) %in% c("simpleError", "error")) {
+    if (jaspBase::isTryError(steps)) {
       models[["object"]] <- list(
         FE = steps,
         RE = steps
@@ -409,21 +409,21 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
 
 
   # fit the models
-  fitFE <- tryCatch(weightr::weightfunct(
+  fitFE <- try(weightr::weightfunct(
     effect = .maGetInputEs(dataset, options),
     v      = .maGetInputSe(dataset, options)^2,
     pval   = pVal,
     steps  = steps,
     fe     = TRUE
-  ),error = function(e)e)
+  ))
 
-  fitRE <- tryCatch(weightr::weightfunct(
+  fitRE <- try(weightr::weightfunct(
     effect = .maGetInputEs(dataset, options),
     v      = .maGetInputSe(dataset, options)^2,
     pval   = pVal,
     steps  = steps,
     fe     = FALSE
-  ),error = function(e)e)
+  ))
 
   # take care of the possibly turned estimates
   if (options[["effectDirection"]] == "negative") {
@@ -458,8 +458,8 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   }
 
   models   <- jaspResults[["models"]]$object
-  errorFE <- class(models$FE) %in% c("simpleError","error")
-  errorRE <- class(models$RE) %in% c("simpleError","error")
+  errorFE <- jaspBase::isTryError(models[["FE"]])
+  errorRE <- jaspBase::isTryError(models[["RE"]])
 
 
   ### test of heterogeneity
@@ -688,11 +688,11 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   pVal  <- .maGetInputPVal(dataset, options)
 
   # add a note in case that the models failed to conver due to autoreduce
-  if (class(models[["FE"]]) %in% c("simpleError","error") || class(models[["RE"]]) %in% c("simpleError","error")) {
+  if (jaspBase::isTryError(models[["FE"]]) || jaspBase::isTryError(models[["RE"]])) {
 
     if (options[["joinPVal"]]) {
-      if (class(models[["FE"]]) %in% c("simpleError","error") && class(models[["RE"]]) %in% c("simpleError","error")) {
-        if (models[["FE"]]$message == "No steps") {
+      if (jaspBase::isTryError(models[["FE"]]) && jaspBase::isTryError(models[["RE"]])) {
+        if (grepl("No steps", models[["FE"]])) {
           pFrequency$addFootnote(gettext("There were no p-value cutoffs after their automatic reduction. The displayed frequencies correspond to the non-reduced p-value cutoffs."))
         }
       } else {
@@ -743,7 +743,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
 
   # handle errors
   fit <- jaspResults[["models"]]$object[[type]]
-  if (class(fit) %in% c("simpleError","error")) {
+  if (jaspBase::isTryError(fit)) {
     errorMessage <- .smSetErrorMessage(fit)
     if (!is.null(errorMessage))
       plotWeights$setError(errorMessage)
@@ -830,13 +830,13 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   FE <- jaspResults[["models"]]$object[["FE"]]
   RE <- jaspResults[["models"]]$object[["RE"]]
 
-  if (class(FE) %in% c("simpleError","error")) {
+  if (jaspBase::isTryError(FE)) {
     errorMessage <- .smSetErrorMessage(FE)
     if (!is.null(errorMessage))
       plotEstimates$setError(errorMessage)
     return()
   }
-  if (class(RE) %in% c("simpleError","error")) {
+  if (jaspBase::isTryError(RE)) {
     errorMessage <- .smSetErrorMessage(RE)
     if (!is.null(errorMessage))
       plotEstimates$setError(errorMessage)
@@ -891,7 +891,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
 # some additional helpers
 .smSetErrorMessage         <- function(fit, type = NULL) {
 
-  if (class(fit) %in% c("simpleError","error")) {
+  if (jaspBase::isTryError(fit)) {
     if (!is.null(type)) {
       model_type <- switch(
         type,
@@ -903,15 +903,15 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     }
 
     # add more error messages as we find them I guess
-    if (fit$message == "non-finite value supplied by optim" || grepl("singular", fit$message)) {
+    if (grepl("non-finite value supplied by optim", fit) || grepl("singular", fit)) {
       message <- gettextf("%sThe optimizer failed to find a solution. Consider re-specifying the model or the p-value cutoffs.", model_type)
-    } else if (fit$message == "No steps") {
+    } else if (grepl("No steps", fit)) {
       if (model_type != "")
         message <- gettextf("%sThe automatic cutoffs selection did not find viable p-value cutoffs. Please, specify them manually.", model_type)
       else
         message <- NULL
     } else {
-      message <- paste0(model_type, fit$message)
+      message <- paste0(model_type, fit)
     }
   } else {
     message <- NULL
@@ -923,7 +923,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
 
   messages   <- NULL
 
-  if (!class(fit) %in% c("simpleError","error")) {
+  if (!jaspBase::isTryError(fit)) {
 
     ### check for no p-value in cutoffs
     steps <- c(0, fit[["steps"]])
@@ -959,7 +959,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
 
     messages <- gettext("The analysis requires both 'Effect Size' and 'Effect Size Standard Error' to be specified.")
 
-  } else if (!class(fit) %in% c("simpleError","error")) {
+  } else if (!jaspBase::isTryError(fit)) {
 
     # add note about the ommited steps
     steps <- fit[["steps"]]
@@ -996,7 +996,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   # in the case that the expected direction was negative, the estimated effect sizes will be in the opposite direction
   # this function turns them around
 
-  if (!class(fit) %in% c("simpleError","error")) {
+  if (!jaspBase::isTryError(fit)) {
 
     if (fit[["fe"]]) {
       posMean <- 1
@@ -1032,7 +1032,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   # in the case that correlation input was used, this part will transform the results back
   # from the estimation scale to the outcome scale
 
-  if (!class(fit) %in% c("simpleError","error")) {
+  if (!jaspBase::isTryError(fit)) {
 
     if (fit[["fe"]]) {
       posMean <- 1
