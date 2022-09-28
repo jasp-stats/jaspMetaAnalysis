@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.16.4\n"
-"POT-Creation-Date: 2022-09-17 03:20\n"
+"POT-Creation-Date: 2022-09-28 09:57\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -272,6 +272,9 @@ msgid "Last iteration in chain"
 msgstr ""
 
 msgid "Shrink factor"
+msgstr ""
+
+msgid "All standard errors/sample sizes must be positive."
 msgstr ""
 
 msgid "The metafor package crashed with the following error: %s"

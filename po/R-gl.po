@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-02-26 02:41\n"
+"POT-Creation-Date: 2022-09-28 09:57\n"
 "PO-Revision-Date: 2022-06-14 21:04+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
@@ -361,6 +361,9 @@ msgstr "Derradeira iteración da cadea"
 
 msgid "Shrink factor"
 msgstr "Factor de contracción"
+
+msgid "All standard errors/sample sizes must be positive."
+msgstr ""
 
 msgid "The metafor package crashed with the following error: %s"
 msgstr "O paquete metafor rachou co seguinte fallo: %s"

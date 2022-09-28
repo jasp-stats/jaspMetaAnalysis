@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
-"POT-Creation-Date: 2022-02-26 02:41\n"
+"POT-Creation-Date: 2022-09-28 09:57\n"
 "PO-Revision-Date: 2022-02-05 02:30+0000\n"
 "Last-Translator: JASP Stats <b.boutin@uva.nl>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -338,6 +338,9 @@ msgstr "チェーンの最後のiteration"
 
 msgid "Shrink factor"
 msgstr "Shrink factor"
+
+msgid "All standard errors/sample sizes must be positive."
+msgstr ""
 
 msgid "The metafor package crashed with the following error: %s"
 msgstr "metaforパッケージが次のエラーでクラッシュしました: %s"
