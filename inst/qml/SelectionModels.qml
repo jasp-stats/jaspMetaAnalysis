@@ -47,22 +47,22 @@ Form
 
 		AssignedVariablesList
 		{
+			input:			inputSE
 			name:			"inputSE"
 			title:			qsTr("Effect Size Standard Error")
 			singleVariable:	true
 			allowedColumns:	["scale"]
 			visible:		 measures_general.checked
-			onVisibleChanged: if (!visible && count > 0) itemDoubleClicked(0);
 		}
 
 		AssignedVariablesList
 		{
+			id:				inputN
 			name: 			"inputN"
 			title: 			qsTr("N")
 			singleVariable: true
 			allowedColumns: ["scale", "ordinal"]
 			visible:		 measures_correlation.checked
-			onVisibleChanged: if (!visible && count > 0) itemDoubleClicked(0);
 		}
 
 		AssignedVariablesList
@@ -85,6 +85,7 @@ Form
 			value: "general"
 			id: 	measures_general
 			checked:true
+			onCheckedChanged: if (!checked && inputSE.count > 0) inputSE.itemDoubleClicked(0);
 		}
 
 		RadioButton
@@ -92,6 +93,7 @@ Form
 			label: qsTr("Correlations & N")
 			value: "correlation"
 			id: 	measures_correlation
+			onCheckedChanged: if (!checked && inputN.count > 0) inputN.itemDoubleClicked(0);
 		}
 	}
 
