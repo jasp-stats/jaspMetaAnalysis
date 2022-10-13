@@ -286,8 +286,8 @@
   casewiseTable$addColumnInfo(name = "dfFits", type = "number",  title = gettext("DFFITS"))
   casewiseTable$addColumnInfo(name = "cook",   type = "number",  title = gettext("Cook's Distance"))
   casewiseTable$addColumnInfo(name = "cov",    type = "number",  title = gettext("Cov. Ratio"))
-  casewiseTable$addColumnInfo(name = "tau2",   type = "number",  title = gettextf("%s%s<sub>(-i)</sub>", "\u3C4", "\u00B2"))
-  casewiseTable$addColumnInfo(name = "QE",     type = "number",  title = gettext("Q<sub>E(-i)</sub>"))
+  casewiseTable$addColumnInfo(name = "tau2",   type = "number",  title = "\u3C4\u00B2<sub>(-i)</sub>"
+  casewiseTable$addColumnInfo(name = "QE",     type = "number",  title = "Q<sub>E(-i)</sub>"
   casewiseTable$addColumnInfo(name = "hat",    type = "number",  title = gettext("Hat"))
   casewiseTable$addColumnInfo(name = "weight", type = "number",  title = gettext("Weight"))
 

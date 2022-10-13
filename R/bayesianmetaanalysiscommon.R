@@ -471,11 +471,11 @@
   bmaTable$dependOn(options = c(.bmaDependencies, "bayesFactorType"))
 
   if (options$bayesFactorType == "BF10")
-    bfTitle <- gettextf("BF%s%s", "\u2081", "\u2080")
+    bfTitle <- "BF\u2081\u2080"
   else if (options$bayesFactorType == "BF01")
-    bfTitle <- gettextf("BF%s%s", "\u2080", "\u2081")
+    bfTitle <- "BF\u2080\u2081"
   else
-    bfTitle <- gettextf("Log(BF%s%s)", "\u2081", "\u2080")
+    bfTitle <- "Log(BF\u2081\u2080)"
 
   # Add columns
   bmaTable$addColumnInfo(name = "model", title = "", type = "string", combine = TRUE)
