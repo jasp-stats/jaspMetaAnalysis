@@ -85,7 +85,7 @@ Section
 				DoubleField
 				{
 					label: 			qsTr("std:")
-					name: 			"normalStd"
+					name: 			"normalSd"
 					visible: 		normalInformative.checked
 					defaultValue: 	0.707
 					fieldWidth: 	50

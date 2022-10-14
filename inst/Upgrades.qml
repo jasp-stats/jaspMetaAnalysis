@@ -7,7 +7,7 @@ Upgrades
 	{
 		functionName:	"ClassicalMetaAnalysis"
 		fromVersion:	"0.15"
-		toVersion:		"0.16.4"
+		toVersion:		"0.17"
 
 				// ClassicalMetaAnalysis.qml
 		ChangeRename { from: "dependent"; to: "effectSize" }
@@ -25,6 +25,7 @@ Upgrades
 				ChangeRename { from: "rSquaredChange"; to: "funnelPlotRankTestAsymmetry" }
 				ChangeRename { from: "funnelPlotAsymmetryTest"; to: "funnelPlotRegressionTestAsymmetry" }
 				ChangeRename { from: "residualsParameters"; to: "residualParameter" }
+				ChangeRename { from: "showLabels"; to: "forestPlotLabel" }
 
 				// ClassicalMetaAnalysisDiagnostics.qml
 				ChangeRename { from: "trimFillPlot"; to: "trimFillAnalysis" }
@@ -79,7 +80,7 @@ Upgrades
 
 				// BayesianMetaAnalysisPlots.qml
 				ChangeRename { from: "forestPlot"; to: "forestPlotEffect" }
-				ChangeRename { from: "checkForestPlot"; to: "forestPlot" }     
+				ChangeRename { from: "checkForestPlot"; to: "forestPlot" }
 				ChangeJS
 				{
 						name:		"forestPlotEffect"
@@ -93,6 +94,7 @@ Upgrades
 								}
 						}
 				}
+				ChangeRename { from: "showLabels"; to: "forestPlotLabel" }
 				ChangeRename { from: "orderForest"; to: "forestPlotRowOrder" }
 				ChangeJS
 				{
@@ -121,7 +123,7 @@ Upgrades
 				ChangeRename { from: "informativeCauchyLocation"; to: "cauchyLocation" }
 				ChangeRename { from: "informativeCauchyScale"; to: "cauchyScale" }
 				ChangeRename { from: "informativeNormalMean"; to: "normalMean" }
-				ChangeRename { from: "informativeNormalStd"; to: "normalStd" }
+				ChangeRename { from: "informativeNormalStd"; to: "normalSd" }
 				ChangeRename { from: "informativeTLocation"; to: "tLocation" }
 				ChangeRename { from: "informativeTScale"; to: "tScale" }
 				ChangeRename { from: "informativeTDf"; to: "tDf" }
