@@ -58,7 +58,7 @@ Section
 			
 			CheckBox
 			{
-				name:		"showLabels"
+				name:		"forestPlotLabel"
 				text:		qsTr("Show labels")
 				checked:	true
 				enabled: 	forestPlot.checked	
