@@ -289,6 +289,7 @@
 
     SE <- (upper - lower)/2/qnorm(0.975)
   }
+  if(options$standardError != ""){
     SE <- dataset[, options[["standardError"]]]
     .hasErrors(dataset              = dataset,
                seCheck.target       = options[["standardError"]],
