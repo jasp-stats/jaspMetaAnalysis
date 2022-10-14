@@ -1259,9 +1259,9 @@
 
     # Fill plot
     forestPlot$dependOn(c("forestPlotEffect", "forestPlot",
-                          "forestPlotRowOrder", "forestPlotOrder", "showLabels"))
+                          "forestPlotRowOrder", "forestPlotOrder", "forestPlotLabel"))
     forestPlot$position <- 1
-    .bmaFillForestPlot(forestPlot, jaspResults, dataset, options, studyLabels, showLabels = if(!is.null(options[["showLabels"]])) options[["showLabels"]] else TRUE)
+    .bmaFillForestPlot(forestPlot, jaspResults, dataset, options, studyLabels, showLabels = if (!is.null(options[["forestPlotLabel"]])) options[["forestPlotLabel"]] else TRUE)
     # Add plot to container
     forestContainer[["forestPlotEffect"]] <- forestPlot
   }
