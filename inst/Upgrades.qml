@@ -34,13 +34,13 @@ Upgrades
 		ChangeRename { from: "plotResidualsCovariates"; to: "failSafeN" }
 		ChangeRename { from: "residualsCasewiseDiagnostics"; to: "casewiseDiagnostics" }
 	}
-  Upgrade
+	Upgrade
 	{
 		functionName:	"BayesianMetaAnalysis"
 		fromVersion:	"0.15"
-		toVersion:		"0.16.4"
+		toVersion:		"0.17"
 
-    // BayesianMetaAnalysis.qml
+		// BayesianMetaAnalysis.qml
 		ChangeRename { from: "standardError"; to: "effectSizeStandardError" }
 		ChangeRename { from: "confidenceInterval"; to: "effectSizeCi" }
 		ChangeRename { from: "studyLabels"; to: "studyLabel" }
@@ -79,7 +79,7 @@ Upgrades
 
 		// BayesianMetaAnalysisPlots.qml
 		ChangeRename { from: "forestPlot"; to: "forestPlotEffect" }
-		ChangeRename { from: "checkForestPlot"; to: "forestPlot" }     
+		ChangeRename { from: "checkForestPlot"; to: "forestPlot" }
 		ChangeJS
 		{
 				name:		"forestPlotEffect"
@@ -93,6 +93,7 @@ Upgrades
 						}
 				}
 		}
+		ChangeRename { from: "showLabels"; to: "forestPlotLabel" }
 		ChangeRename { from: "orderForest"; to: "forestPlotRowOrder" }
 		ChangeJS
 		{
@@ -121,10 +122,10 @@ Upgrades
 		ChangeRename { from: "informativeCauchyLocation"; to: "cauchyLocation" }
 		ChangeRename { from: "informativeCauchyScale"; to: "cauchyScale" }
 		ChangeRename { from: "informativeNormalMean"; to: "normalMean" }
-		ChangeRename { from: "informativeNormalStd"; to: "normalStd" }
+		ChangeRename { from: "informativeNormalStd"; to: "normalSd" }
 		ChangeRename { from: "informativeTLocation"; to: "tLocation" }
 		ChangeRename { from: "informativeTScale"; to: "tScale" }
-		ChangeRename { from: "informsTDf"; to: "tDf" }
+		ChangeRename { from: "informativeTDf"; to: "tDf" }
 		ChangeRename { from: "checkLowerPrior"; to: "truncationLowerBound" }
 		ChangeRename { from: "lowerTrunc"; to: "truncationLowerBoundValue" }
 		ChangeRename { from: "checkUpperPrior"; to: "truncationUpperBound" }
@@ -143,116 +144,5 @@ Upgrades
 		ChangeRename { from: "chainsMCMC"; to: "chains" }
 		ChangeRename { from: "BFComputation"; to: "bayesFactorComputation" }
 		ChangeRename { from: "iterBridge"; to: "bridgeSamplingSamples" }
-	}
-		Upgrade
-	{
-		functionName:	"BayesianMetaAnalysis"
-		fromVersion:	"0.15"
-		toVersion:		"0.16.4"
-
-				// BayesianMetaAnalysis.qml
-		ChangeRename { from: "standardError"; to: "effectSizeStandardError" }
-				ChangeRename { from: "confidenceInterval"; to: "effectSizeCi" }
-				ChangeRename { from: "studyLabels"; to: "studyLabel" }
-
-				// BayesianMetaAnalysisInference.qml
-				ChangeRename { from: "modelSpecification"; to: "model" }
-				ChangeJS
-				{
-						name:		"model"
-						jsFunction:	function(options)
-						{
-								switch(options["model"])
-								{
-										case "FE":	return "fixed";
-										case "RE":	return "random";
-										case "BMA":	return "averaging";
-										case "CRE":	return "constrainedRandom";
-								}
-						}
-				}
-				ChangeRename { from: "direction"; to: "constrainedRandomDirection" }
-				ChangeJS
-				{
-						name:		"constrainedRandomDirection"
-						jsFunction:	function(options)
-						{
-								switch(options["constrainedRandomDirection"])
-								{
-										case "allPos":	return "positive";
-										case "allNeg":	return "negative";
-								}
-						}
-				}
-				ChangeRename { from: "postTable"; to: "modelProbability" }
-				ChangeRename { from: "esTable"; to: "effectSizePerStudy" }
-
-				// BayesianMetaAnalysisPlots.qml
-				ChangeRename { from: "forestPlot"; to: "forestPlotEffect" }
-				ChangeRename { from: "checkForestPlot"; to: "forestPlot" }
-				ChangeJS
-				{
-						name:		"forestPlotEffect"
-						jsFunction:	function(options)
-						{
-								switch(options["forestPlotEffect"])
-								{
-										case "plotForestObserved":	return "observed";
-										case "plotForestEstimated":	return "estimated";
-										case "plotForestBoth":	    return "both";
-								}
-						}
-				}
-				ChangeRename { from: "showLabels"; to: "forestPlotLabel" }
-				ChangeRename { from: "orderForest"; to: "forestPlotRowOrder" }
-				ChangeJS
-				{
-						name:		"forestPlotRowOrder"
-						jsFunction:	function(options)
-						{
-								switch(options["forestPlotRowOrder"])
-								{
-										case "ascendingForest":	    return "ascending";
-										case "descendingForest":	return "descending";
-										case "labelForest":	        return "rowOrder";
-								}
-						}
-				}
-				ChangeRename { from: "plotCumForest"; to: "cumulativeForestPlot" }
-				ChangeRename { from: "addPrior"; to: "cumulativeForestPlotPrior" }
-				ChangeRename { from: "plotPosterior"; to: "priorAndPosterior" }
-				ChangeRename { from: "addInfo"; to: "priorAndPosteriorInfo" }
-				ChangeRename { from: "addLines"; to: "priorAndPosteriorFixedAndRandom" }
-				ChangeRename { from: "shade"; to: "priorAndPosteriorShade" }
-				ChangeRename { from: "plotSequential"; to: "sequentialPlotBayesFactor" }
-				ChangeRename { from: "plotSeqPM"; to: "sequentialPlotModelProbability" }
-
-				// BayesianMetaAnalysisPriors.qml
-				ChangeRename { from: "priorES"; to: "priorEffectSize" }
-				ChangeRename { from: "informativeCauchyLocation"; to: "cauchyLocation" }
-				ChangeRename { from: "informativeCauchyScale"; to: "cauchyScale" }
-				ChangeRename { from: "informativeNormalMean"; to: "normalMean" }
-				ChangeRename { from: "informativeNormalStd"; to: "normalSd" }
-				ChangeRename { from: "informativeTLocation"; to: "tLocation" }
-				ChangeRename { from: "informativeTScale"; to: "tScale" }
-				ChangeRename { from: "informativeTDf"; to: "tDf" }
-				ChangeRename { from: "checkLowerPrior"; to: "truncationLowerBound" }
-				ChangeRename { from: "lowerTrunc"; to: "truncationLowerBoundValue" }
-				ChangeRename { from: "checkUpperPrior"; to: "truncationUpperBound" }
-				ChangeRename { from: "upperTrunc"; to: "truncationUpperBoundValue" }
-				ChangeRename { from: "priorSE"; to: "priorStandardError" }
-				ChangeRename { from: "informativehalfTScale"; to: "halfTScale" }
-				ChangeRename { from: "informativehalfTDf"; to: "halfTDf" }
-				ChangeRename { from: "plotPrior"; to: "priorPlot" }
-
-				// BayesianMetaAnalysisAdvanced.qml
-				ChangeRename { from: "priorH0FE"; to: "priorModelProbabilityFixedNull" }
-				ChangeRename { from: "priorH1FE"; to: "priorModelProbabilityFixedAlternative" }
-				ChangeRename { from: "priorH0RE"; to: "priorModelProbabilityRandomNull" }
-				ChangeRename { from: "priorH1RE"; to: "priorModelProbabilityRandomAlternative" }
-				ChangeRename { from: "iterMCMC"; to: "samples" }
-				ChangeRename { from: "chainsMCMC"; to: "chains" }
-				ChangeRename { from: "BFComputation"; to: "bayesFactorComputation" }
-				ChangeRename { from: "iterBridge"; to: "bridgeSamplingSamples" }
 	}
 }
