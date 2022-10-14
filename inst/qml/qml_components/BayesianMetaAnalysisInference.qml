@@ -90,7 +90,7 @@ Section
 		//// Tables ////
 		Group
 		{
-		    title: qsTr("Table")
+				title: qsTr("Table")
 
 			CheckBox
 			{
