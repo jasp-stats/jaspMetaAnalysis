@@ -35,52 +35,52 @@ Section
 		//// Analysis choices ////
 		RadioButtonGroup
 		{
-			name: 	"modelSpecification"
+			name: 	"model"
 			title: 	qsTr("Model")
 			id:		modelType
 
 			RadioButton
 			{
-				value: 				"FE"
+				value: 				"fixed"
 				label: 				qsTr("Fixed effects")
 			}
 
 			RadioButton
 			{
-				value: 				"RE"
+				value: 				"random"
 				label: 				qsTr("Random effects")
 			}
 
 			RadioButton
 			{
-				value: 				"BMA"
+				value: 				"averaging"
 				label: 				qsTr("Model averaging")
 				checked: 			true
 			}
 
 			RadioButton
 			{
-				value: 				"CRE"
+				value: 				"constrainedRandom"
 				label: 				qsTr("Constrained random effects")
 
 				// Constrain effect sizes to be all positive or all negative
 				RadioButtonGroup
 				{
-					name:	"direction"
+					name:	"constrainedRandomDirection"
 					id:		modelDirection
 
 					columns: 2
 
 					RadioButton
 					{
-						value: 		"allPos"
+						value: 		"positive"
 						label: 		qsTr("All positive")
 						checked:	true
 					}
 
 					RadioButton
 					{
-						value: 	"allNeg"
+						value: 	"negative"
 						label: 	qsTr("All negative")
 					}
 				}
@@ -90,17 +90,17 @@ Section
 		//// Tables ////
 		Group
 		{
-		    title: qsTr("Table")
+		  title: qsTr("Table")
 
 			CheckBox
 			{
-				name: 	"postTable";
+				name: 	"modelProbability";
 				label: 	qsTr("Model probabilities")
 			}
 
 			CheckBox
 			{
-				name: 	"esTable";
+				name: 	"effectSizePerStudy";
 				label: 	qsTr("Effect sizes per study")
 			}
 		}

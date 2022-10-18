@@ -22,37 +22,41 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
   options[["module"]] <- "metaAnalysis"
 
   # Ready: variables needed for the analysis (confidence interval missing)
-  ready <- options[["effectSize"]] != "" && (options[["standardError"]] != "" || (all(unlist(options$confidenceInterval) != "")  && !is.null(unlist(options[["confidenceInterval"]]))))
+  ready <- options[["effectSize"]] != "" && (options[["effectSizeStandardError"]] != "" || (all(unlist(options$effectSizeCi) != "") && !is.null(unlist(options[["effectSizeCi"]]))))
 
   # Dependencies: basically everything
   # dependencies <- .bmaDependencies
 
-  # Dataset with effectSize, standardError, and studyLabels
+  # Dataset with effectSize, effectSizeStandardError, and studyLabel
   # If data is null stuff is missing
   dataset <- .bmaReadData(jaspResults, options)
 
   .BayesianMetaAnalysisCommon(jaspResults, dataset, ready, options)
-
 }
 
-.bmaDependencies <- c("effectSize", "standardError", "confidenceInterval", "modelSpecification",
-                      "allPos", "allNeg", "priorH0FE", "priorH1FE", "priorH0RE", "priorH1RE",
-                      "priorES", "informativeCauchyLocation", "informativeCauchyScale",
-                      "checkLowerPrior", "checkUpperPrior", "lowerTrunc", "upperTrunc",
-                      "informativeNormalMean", "informativeNormalStd",
-                      "informativeTLocation", "informativeTScale", "informativeTDf",
-                      "priorSE", "inverseGammaShape", "inverseGammaScale",
-                      "informativehalfTScale", "informativehalfTDf",
-                      "BFComputation", "iterBridge", "iterMCMC", "chainsMCMC")
+.bmaDependencies <- c(
+  "effectSize", "effectSizeStandardError", "effectSizeCi", "model",
+  "positive", "negative",
+  "priorModelProbabilityFixedNull", "priorModelProbabilityFixedAlternative",
+  "priorModelProbabilityRandomNull", "priorModelProbabilityRandomAlternative",
+  "priorEffectSize", "cauchyLocation", "cauchyScale",
+  "truncationLowerBound", "truncationUpperBound",
+  "truncationLowerBoundValue", "truncationUpperBoundValue",
+  "normalMean", "normalSd",
+  "tLocation", "tScale", "tDf",
+  "priorStandardError", "inverseGammaShape", "inverseGammaScale",
+  "halfTScale", "halfTDf",
+  "bayesFactorComputation", "bridgeSamplingSamples", "samples", "chains"
+)
 
 # Get dataset
 .bmaReadData <- function(jaspResults, options){
   varES <- options[["effectSize"]]
-  varSE <- options[["standardError"]]
-  CI <- unlist(options$confidenceInterval)
+  varSE <- options[["effectSizeStandardError"]]
+  CI <- unlist(options$effectSizeCi)
   lower <- CI[[1]]
   upper <- CI[[2]]
-  study <- options[["studyLabels"]]
+  study <- options[["studyLabel"]]
   if(varES == "") varES <- NULL
   if(varSE == "") varSE <- NULL
   if(CI[[1]] == ""  || CI[[2]] == "" || is.null(CI)) {

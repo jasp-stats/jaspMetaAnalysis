@@ -28,12 +28,12 @@ Form
 	{
 		preferredHeight: 400 * preferencesModel.uiScale
 		AvailableVariablesList { name: "allVariables" }
-		AssignedVariablesList { name: "dependent";	title: qsTr("Effect Size"); singleVariable: true; suggestedColumns: ["scale"] }
-		AssignedVariablesList { name: "wlsWeights";	title: qsTr("Effect Size Standard Error"); singleVariable: true; suggestedColumns: ["scale"] }
+		AssignedVariablesList { name: "effectSize";	title: qsTr("Effect Size"); singleVariable: true; suggestedColumns: ["scale"] }
+		AssignedVariablesList { name: "effectSizeStandardError"; title: qsTr("Effect Size Standard Error"); singleVariable: true; suggestedColumns: ["scale"] }
 		MA.ClassicalMetaAnalysisMethod{ visible: true}
-		AssignedVariablesList { name: "studyLabels";	title: qsTr("Study Labels"); singleVariable: true; suggestedColumns: ["ordinal", "nominal"] }
+		AssignedVariablesList { name: "studyLabel"; title: qsTr("Study Labels"); singleVariable: true; suggestedColumns: ["ordinal", "nominal"] }
 		AssignedVariablesList { name: "covariates";	title: qsTr("Covariates"); suggestedColumns: ["scale"] }
-		AssignedVariablesList { name: "factors";	title: qsTr("Factors"); suggestedColumns: ["ordinal", "nominal"] }
+		AssignedVariablesList { name: "factors"; title: qsTr("Factors"); suggestedColumns: ["ordinal", "nominal"] }
 	}
 
 	Section
@@ -42,10 +42,10 @@ Form
 		VariablesForm
 		{
 			preferredHeight: 150 * preferencesModel.uiScale
-			AvailableVariablesList { name: "components"; title: qsTr("Components"); source: ["covariates","factors"]}
+			AvailableVariablesList { name: "modelComponents"; title: qsTr("Components"); source: ["covariates","factors"]}
 			AssignedVariablesList  { name: "modelTerms"; title: qsTr("Model Terms"); listViewType: JASP.Interaction }
 		}
-		CheckBox { name: "includeConstant"; label: qsTr("Include intercept"); checked: true }
+		CheckBox { name: "includeIntercept"; label: qsTr("Include intercept"); checked: true }
 	}
 
 	MA.ClassicalMetaAnalysisStatistics{}
