@@ -17,13 +17,5 @@ jobs:
 
     steps:
       - uses: jasp-stats/jasp-actions/wlcLock@master
-      
-      - uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.REPO_KEY }}
-
-      - uses: r-lib/actions/setup-r@master
-        with:
-          r-version: "4.0.5"
 
       - uses: jasp-stats/jasp-actions/translations@master
