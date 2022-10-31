@@ -326,7 +326,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     summaryTable$addFootnote(.pemaMessageMaxRhat(maxRhat), symbol = gettext("Warning:"))
 
   if (minESS < 100 * options$mcmcChains || is.nan(minESS))
-    summaryTable$addFootnote(.pemaMessageMinESS(minESS, 100 * options$chains), symbol = gettext("Warning:"))
+    summaryTable$addFootnote(.pemaMessageMinESS(minESS, 100 * options$mcmcChains), symbol = gettext("Warning:"))
 
   return()
 }
