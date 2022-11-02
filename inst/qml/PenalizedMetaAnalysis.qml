@@ -43,7 +43,7 @@ Form
 
 		AssignedVariablesList
 		{
-			name:				"standardError"
+			name:				"effectSizeSe"
 			title:				qsTr("Effect Size Standard Error")
 			singleVariable:		true
 			suggestedColumns:	["scale"]
@@ -57,7 +57,7 @@ Form
 			currentIndex:	2
 
 			values: [
-				{ label: qsTr("Horseshoe"),	value: "hs"		},
+				{ label: qsTr("Horseshoe"),	value: "horseshoe"		},
 				{ label: qsTr("Lasso"),		value: "lasso"	}
 			]
 		}
@@ -120,7 +120,7 @@ Form
 
 		CheckBox
 		{
-			name:		"includeConstant"
+			name:		"interceptTerm"
 			label:		qsTr("Include intercept")
 			checked:	true
 		}
@@ -163,7 +163,7 @@ Form
 			
 			DoubleField
 			{
-				name:			"priorHsDf"
+				name:			"horseshoePriorDf"
 				label:			qsTr("Df")
 				defaultValue:	1
 				min:			1
@@ -172,7 +172,7 @@ Form
 
 			DoubleField
 			{
-				name:			"priorHsScale"
+				name:			"horseshoePriorScale"
 				label:			qsTr("Scale")
 				defaultValue:	1
 				min:			0
@@ -187,7 +187,7 @@ Form
 			
 			DoubleField
 			{
-				name:			"priorLassoDf"
+				name:			"lassoPriorDf"
 				label:			qsTr("Df")
 				defaultValue:	1
 				min:			1
@@ -339,11 +339,11 @@ Form
 			label:	qsTr("Plot type")
 			values:
 			[
-				{ label: qsTr("Traceplot"),			value: "stan_trace"},
-				{ label: qsTr("Scatterplot"),		value: "stan_scat"},
-				{ label: qsTr("Histogram"),			value: "stan_hist"},
-				{ label: qsTr("Density"),			value: "stan_dens"},
-				{ label: qsTr("Autocorrelations"),	value: "stan_ac"}
+				{ label: qsTr("Traceplot"),			value: "trace"},
+				{ label: qsTr("Scatterplot"),		value: "scatter"},
+				{ label: qsTr("Histogram"),			value: "histogram"},
+				{ label: qsTr("Density"),			value: "density"},
+				{ label: qsTr("Autocorrelations"),	value: "autocorrelation"}
 			]
 		}
 	}
@@ -362,7 +362,7 @@ Form
 			IntegerField
 			{
 				label: 			qsTr("Warmup")
-				name: 			"mcmcWarmup"
+				name: 			"mcmcBurnin"
 				defaultValue: 	2000
 				min:			100
 				max: 			1000000
@@ -372,7 +372,7 @@ Form
 			IntegerField
 			{
 				label: 			qsTr("Iterations")
-				name: 			"mcmcIter"
+				name: 			"mcmcSamples"
 				defaultValue: 	2000
 				min:			100
 				max: 			1000000
@@ -392,7 +392,7 @@ Form
 			DoubleField
 			{
 				label: 			qsTr("Adapt delta")
-				name: 			"mcmcDelta"
+				name: 			"mcmcAdaptDelta"
 				defaultValue: 	0.80
 				min:			0.05
 				max: 			1
@@ -402,7 +402,7 @@ Form
 			IntegerField
 			{
 				label: 			qsTr("Maximum treedepth")
-				name: 			"mcmcTreedepth"
+				name: 			"mcmcMaxTreedepth"
 				defaultValue: 	15
 				min:			5
 				max: 			100
