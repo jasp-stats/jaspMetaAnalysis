@@ -41,21 +41,21 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   if (length(options[["plotPosterior"]]) > 0)
     .pemaPlotPosterior(jaspResults, options)
 
-  if (length(options[["diagnosticsVariable1"]]) > 0)
+  if (length(options[["scatterVariableX"]]) > 0)
     .pemaDiagnostics(jaspResults, options)
 
   return()
 }
 
 .pemaDependencies <- c(
-  "effectSize", "standardError", "method", "studyLabels", "covariates", "factors", "clustering", "components", "modelTerms", "includeConstant", "scalePredictors",
-  "priorHsDf", "priorHsScale", "priorLassoDf", "priorLassoDfGlobal", "priorLassoDfSlab", "priorLassoScaleGlobal", "priorLassoScaleSlab",
-  "mcmcWarmup", "mcmcIter", "mcmcChains", "mcmcDelta", "mcmcTreedepth", "setSeed", "seed"
+  "effectSize", "effectSizeSe", "method", "studyLabels", "covariates", "factors", "clustering", "components", "modelTerms", "interceptTerm", "scalePredictors",
+  "horseshoePriorDf", "horseshoePriorScale", "lassoPriorDf", "lassoPriorDfGlobal", "lassoPriorDfSlab", "lassoPriorScaleGlobal", "lassoPriorScaleSlab",
+  "mcmcBurnin", "mcmcSamples", "mcmcChains", "mcmcAdaptDelta", "mcmcMaxTreedepth", "setSeed", "seed"
 )
 
 # check and load functions
 .pemaCheckReady                <- function(options) {
-  return(options[["effectSize"]] != "" && options[["standardError"]] != "" && length(options[["modelTerms"]]) > 0)
+  return(options[["effectSize"]] != "" && options[["effectSizeSe"]] != "" && length(options[["modelTerms"]]) > 0)
 }
 .pemaGetData                   <- function(dataset, options) {
 
@@ -63,7 +63,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     return(dataset)
   else {
     effsizeName <- unlist(options$effectSize)
-    stderrName  <- unlist(options$standardError)
+    stderrName  <- unlist(options$effectSizeSe)
     covarNames  <- if (length(options$covariates)  > 0) unlist(options$covariates)
     factNames   <- if (length(options$factors)     > 0) unlist(options$factors)
     clustNames  <- if (length(options$clustering)  > 0) unlist(options$clustering)
@@ -107,7 +107,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
              observations.amount   = "< 2",
              exitAnalysisIfErrors  = TRUE)
 
-  if (options[["standardError"]] != "")
+  if (options[["effectSizeSe"]] != "")
     .hasErrors(dataset               = dataset,
                type                  = c("negativeValues"),
                negativeValues.target = options[["inputSE"]],
@@ -117,11 +117,11 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 }
 .pemaFormula                   <- function(options) {
 
-  if (length(options[["modelTerms"]]) == 0 && options[["includeConstant"]])
+  if (length(options[["modelTerms"]]) == 0 && options[["interceptTerm"]])
     formula <- paste(options[["effectSize"]], "~", "1")
-  else if (length(options[["modelTerms"]]) > 0 && options[["includeConstant"]])
+  else if (length(options[["modelTerms"]]) > 0 && options[["interceptTerm"]])
     formula <- paste(options[["effectSize"]], "~", paste0(sapply(options[["modelTerms"]], function(term) paste0(term[[1]], collapse = ":")), collapse = "+"))
-  else if (length(options[["modelTerms"]]) > 0 && !options[["includeConstant"]])
+  else if (length(options[["modelTerms"]]) > 0 && !options[["interceptTerm"]])
     formula <- paste(options[["effectSize"]], "~", paste0(sapply(options[["modelTerms"]], function(term) paste0(term[[1]], collapse = ":")), collapse = "+"), "-1")
   else
     .quitAnalysis(gettext("The model should contain at least one predictor or an intercept."))
@@ -209,15 +209,15 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 .pemaPriors                    <- function(options) {
   switch(
     options[["method"]],
+    horseshoe = c(
+      df    = options[["horseshoePriorDf"]],
+      scale = options[["horseshoePriorScale"]]),
     lasso = c(
-      df    = options[["priorHsDf"]],
-      scale = options[["priorHsScale"]]),
-    hs    = c(
-      df            = options[["priorLassoDf"]],
-      df_global     = options[["priorLassoDfGlobal"]],
-      df_slab       = options[["priorLassoDfSlab"]],
-      scale_global  = options[["priorLassoScaleGlobal"]],
-      scale_slab    = options[["priorLassoScaleSlab"]],
+      df            = options[["lassoPriorDf"]],
+      df_global     = options[["lassoPriorDfGlobal"]],
+      df_slab       = options[["lassoPriorDfSlab"]],
+      scale_global  = options[["lassoPriorScaleGlobal"]],
+      scale_slab    = options[["lassoPriorScaleSlab"]],
       relevant_pars = NULL)
   )
 }
@@ -237,15 +237,15 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     data        = dataset,
     vi          = "JASP_computed_variance__",
     study       = if (options[["clustering"]] != "") options[["clustering"]],
-    method      = options[["method"]],
+    method      = .pemaMethod(options),
     prior       = .pemaPriors(options),
     standardize = options[["scalePredictors"]],
     mute_stan   = TRUE,
     chains      = options[["mcmcChains"]],
-    warmup      = options[["mcmcWarmup"]],
-    iter        = options[["mcmcWarmup"]] + options[["mcmcIter"]],
+    warmup      = options[["mcmcBurnin"]],
+    iter        = options[["mcmcBurnin"]] + options[["mcmcSamples"]],
     seed        = if (options[["setSeed"]]) .getSeedJASP(options) else sample.int(.Machine$integer.max, 1),
-    control     = list(adapt_delta = options[["mcmcDelta"]], max_treedepth = options[["mcmcTreedepth"]])
+    control     = list(adapt_delta = options[["mcmcAdaptDelta"]], max_treedepth = options[["mcmcMaxTreedepth"]])
   ))
   model[["object"]] <- fit
 
@@ -273,7 +273,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   jaspResults[["summaryTable"]] <- summaryTable
 
   if (is.null(model)) {
-    if (options[["effectSize"]] != "" && options[["standardError"]] != "" && length(options[["modelTerms"]]) == 0)
+    if (options[["effectSize"]] != "" && options[["effectSizeSe"]] != "" && length(options[["modelTerms"]]) == 0)
       summaryTable$addFootnote(gettext("At least one predictor needs to be specified."))
 
     return()
@@ -534,12 +534,12 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   diagnosticPlots <- createJaspContainer(title = gettext("Sampling diagnostics"))
   diagnosticPlots$position <- 5
-  diagnosticPlots$dependOn(c(.pemaDependencies, "diagnosticsType", "diagnosticsVariable1", "diagnosticsVariable2"))
+  diagnosticPlots$dependOn(c(.pemaDependencies, "diagnosticsType", "scatterVariableX", "scatterVariableY"))
   jaspResults[["diagnosticPlots"]] <- diagnosticPlots
 
   model <- jaspResults[["model"]]$object
 
-  if ((options[["diagnosticsType"]] == "stan_scat" && length(options[["diagnosticsVariable2"]]) == 0) || is.null(model) || jaspBase::isTryError(model)) {
+  if ((options[["diagnosticsType"]] == "scatter" && length(options[["scatterVariableY"]]) == 0) || is.null(model) || jaspBase::isTryError(model)) {
     diagnosticPlots[["emptyPlot"]] <- createJaspPlot()
     return()
   }
@@ -548,10 +548,10 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   stanSamples      <- rstan::extract(stanFit)
   coefficientNames <- rownames(model$coefficients)
 
-  if (options[["diagnosticsType"]] == "stan_scat") {
+  if (options[["diagnosticsType"]] == "scatter") {
 
-    coefficients1 <- .pemaPredictorCoefficientNames(paste0(options[["diagnosticsVariable1"]][[1]]$variable, collapse = ":"), coefficientNames, options)
-    coefficients2 <- .pemaPredictorCoefficientNames(paste0(options[["diagnosticsVariable2"]][[1]]$variable, collapse = ":"), coefficientNames, options)
+    coefficients1 <- .pemaPredictorCoefficientNames(paste0(options[["scatterVariableX"]][[1]]$variable, collapse = ":"), coefficientNames, options)
+    coefficients2 <- .pemaPredictorCoefficientNames(paste0(options[["scatterVariableY"]][[1]]$variable, collapse = ":"), coefficientNames, options)
 
     # deal with two heterogeneity estimates in case that clustering is set
     if(coefficients1 == "tau2" && options[["clustering"]] != ""){
@@ -592,7 +592,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   } else {
 
-    coefficients <- .pemaPredictorCoefficientNames(paste0(options[["diagnosticsVariable1"]][[1]]$variable, collapse = ":"), coefficientNames, options)
+    coefficients <- .pemaPredictorCoefficientNames(paste0(options[["scatterVariableX"]][[1]]$variable, collapse = ":"), coefficientNames, options)
 
     # deal with two heterogeneity estimates in case that clustering is set
     if(coefficients == "tau2" && options[["clustering"]] != ""){
@@ -604,15 +604,15 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
       tempPlot <- switch(
         options[["diagnosticsType"]],
-        "stan_trace" = rstan::traceplot(stanFit, coefficients[i]),
-        "stan_hist"  = rstan::stan_hist(stanFit, coefficients[i]),
-        "stan_dens"  = rstan::stan_dens(stanFit, coefficients[i], separate_chains = TRUE),
-        "stan_ac"    = rstan::stan_ac(stanFit, coefficients[i])
+        "trace"           = rstan::traceplot(stanFit, coefficients[i]),
+        "histogram"       = rstan::stan_hist(stanFit, coefficients[i]),
+        "density"         = rstan::stan_dens(stanFit, coefficients[i], separate_chains = TRUE),
+        "autocorrelation" = rstan::stan_ac(stanFit, coefficients[i])
       )
 
       parTicks <- jaspGraphs::getPrettyAxisBreaks(range(stanSamples[[coefficients[i]]]))
 
-      if (options[["diagnosticsType"]] %in% c("stan_hist", "stan_dens")) {
+      if (options[["diagnosticsType"]] %in% c("histogram", "density")) {
         tempPlot <- tempPlot +
           ggplot2::scale_x_continuous(.pemaVariableNames(
             coefficients[i],
@@ -625,7 +625,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
             axis.text.y  = ggplot2::element_blank(),
             axis.ticks.y = ggplot2::element_blank()
           )
-      } else if (options[["diagnosticsType"]] %in% c("stan_trace")) {
+      } else if (options[["diagnosticsType"]] %in% c("trace")) {
         tempPlot <- tempPlot +
           ggplot2::scale_y_continuous(.pemaVariableNames(
             coefficients[i],
@@ -633,7 +633,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
             breaks = parTicks,
             limits = range(parTicks))
         tempPlot <- tempPlot + jaspGraphs::geom_rangeframe(sides = "bl") + jaspGraphs::themeJaspRaw() +
-          ggplot2::theme(plot.margin = ggplot2::margin(r = 10 * (nchar(options[["mcmcWarmup"]] + options[["mcmcIter"]]) - 2)))
+          ggplot2::theme(plot.margin = ggplot2::margin(r = 10 * (nchar(options[["mcmcBurnin"]] + options[["mcmcSamples"]]) - 2)))
       }
 
       tempJaspPlot            <- createJaspPlot(title = "", width = 400, height = 300)
@@ -645,7 +645,12 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   return()
 }
-
+.pemaMethod <- function(options){
+  return(switch(options[["method"]],
+    "horseshoe" = "hs",
+    "lasso"     = "lasso"
+  ))
+}
 
 .pemaMessageDivergentIter <- function(iterations) {
   sprintf(

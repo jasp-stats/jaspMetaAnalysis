@@ -159,7 +159,7 @@ Form
 		Group
 		{
 			title:		qsTr("Horseshoe")
-			visible:	method.currentValue == "hs"
+            visible:	method.currentValue == "horseshoe"
 			
 			DoubleField
 			{
@@ -196,7 +196,7 @@ Form
 
 			DoubleField
 			{
-				name:			"priorLassoDfGlobal"
+                name:			"lassoPriorDfGlobal"
 				label:			qsTr("Df (global)")
 				defaultValue:	1
 				min:			1
@@ -205,7 +205,7 @@ Form
 
 			DoubleField
 			{
-				name:			"priorLassoDfSlab"
+                name:			"lassoPriorDfSlab"
 				label:			qsTr("Df (slab)")
 				defaultValue:	4
 				min:			1
@@ -214,7 +214,7 @@ Form
 
 			DoubleField
 			{
-				name:			"priorLassoScaleGlobal"
+                name:			"lassoPriorScaleGlobal"
 				label:			qsTr("Scale (global)")
 				defaultValue:	1
 				min:			0
@@ -223,7 +223,7 @@ Form
 
 			DoubleField
 			{
-				name:			"priorLassoScaleSlab"
+                name:			"lassoPriorScaleSlab"
 				label:			qsTr("Scale (slab)")
 				defaultValue:	1
 				min:			0
@@ -318,16 +318,16 @@ Form
 			AssignedVariablesList
 			{
 				singleVariable:	true
-				name:			"diagnosticsVariable1"
-				title:			samplingPlot.currentValue == "stan_scat" ? qsTr("Horizontal axis") : qsTr("Plotted term")
+                name:			"scatterVariableX"
+                title:			samplingPlot.currentValue == "scatter" ? qsTr("Horizontal axis") : qsTr("Plotted term")
 			}
 
 			AssignedVariablesList
 			{
 				singleVariable:	true
-				name:			"diagnosticsVariable2"
+                name:			"scatterVariableY"
 				title:			qsTr("Vertical axis")
-				visible:		samplingPlot.currentValue == "stan_scat"
+                visible:		samplingPlot.currentValue == "scatter"
 				onVisibleChanged: if (!visible && count > 0) itemDoubleClicked(0)
 			}
 		}
