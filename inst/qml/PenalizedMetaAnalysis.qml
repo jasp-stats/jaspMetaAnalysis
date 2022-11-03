@@ -121,6 +121,7 @@ Form
 		CheckBox
 		{
 			name:		"interceptTerm"
+			id:         interceptTerm
 			label:		qsTr("Include intercept")
 			checked:	true
 		}
@@ -159,7 +160,7 @@ Form
 		Group
 		{
 			title:		qsTr("Horseshoe")
-            visible:	method.currentValue == "horseshoe"
+			visible:	method.currentValue == "horseshoe"
 			
 			DoubleField
 			{
@@ -196,7 +197,7 @@ Form
 
 			DoubleField
 			{
-                name:			"lassoPriorDfGlobal"
+				name:			"lassoPriorDfGlobal"
 				label:			qsTr("Df (global)")
 				defaultValue:	1
 				min:			1
@@ -205,7 +206,7 @@ Form
 
 			DoubleField
 			{
-                name:			"lassoPriorDfSlab"
+				name:			"lassoPriorDfSlab"
 				label:			qsTr("Df (slab)")
 				defaultValue:	4
 				min:			1
@@ -214,7 +215,7 @@ Form
 
 			DoubleField
 			{
-                name:			"lassoPriorScaleGlobal"
+				name:			"lassoPriorScaleGlobal"
 				label:			qsTr("Scale (global)")
 				defaultValue:	1
 				min:			0
@@ -223,7 +224,7 @@ Form
 
 			DoubleField
 			{
-                name:			"lassoPriorScaleSlab"
+				name:			"lassoPriorScaleSlab"
 				label:			qsTr("Scale (slab)")
 				defaultValue:	1
 				min:			0
@@ -267,13 +268,15 @@ Form
 			
 			VariablesForm
 			{
-				preferredHeight:	250 * preferencesModel.uiScale
-				id:					availableModelComponentsForms
-				property var alwaysAvailable:
-					[
-						{ label:	"Intercept",		value: "Intercept"},
-						{ label:	"Heterogeneity",	value: "Heterogeneity"}
-					]
+				preferredHeight:				250 * preferencesModel.uiScale
+				id:								availableModelComponentsForms
+				property var alwaysAvailable:	interceptTerm.checked ?
+				[
+					{ label:	"Intercept",		value: "Intercept"},
+					{ label:	"Heterogeneity",	value: "Heterogeneity"}
+				] : [
+					{ label:	"Heterogeneity",	value: "Heterogeneity"}
+				]
 
 				AvailableVariablesList
 				{
@@ -301,11 +304,13 @@ Form
 		{
 			preferredHeight: 200 * preferencesModel.uiScale
 			id:				diagnosticsForms
-			property var alwaysAvailable:
-				[
-					{ label:	"Intercept",		value: "Intercept"},
-					{ label:	"Heterogeneity",	value: "Heterogeneity"}
-				]
+			property var alwaysAvailable:	interceptTerm.checked ?
+			[
+				{ label:	"Intercept",		value: "Intercept"},
+				{ label:	"Heterogeneity",	value: "Heterogeneity"}
+			] : [
+				{ label:	"Heterogeneity",	value: "Heterogeneity"}
+			]
 
 			AvailableVariablesList
 			{
@@ -318,16 +323,16 @@ Form
 			AssignedVariablesList
 			{
 				singleVariable:	true
-                name:			"scatterVariableX"
-                title:			samplingPlot.currentValue == "scatter" ? qsTr("Horizontal axis") : qsTr("Plotted term")
+				name:			"scatterVariableX"
+				title:			samplingPlot.currentValue == "scatter" ? qsTr("Horizontal axis") : qsTr("Plotted term")
 			}
 
 			AssignedVariablesList
 			{
 				singleVariable:	true
-                name:			"scatterVariableY"
+				name:			"scatterVariableY"
 				title:			qsTr("Vertical axis")
-                visible:		samplingPlot.currentValue == "scatter"
+				visible:		samplingPlot.currentValue == "scatter"
 				onVisibleChanged: if (!visible && count > 0) itemDoubleClicked(0)
 			}
 		}

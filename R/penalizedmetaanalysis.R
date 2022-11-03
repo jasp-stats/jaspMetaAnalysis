@@ -284,7 +284,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
 
   modelSummary <- model[["coefficients"]]
-  modelSummary <- modelSummary[!rownames(modelSummary) %in% c("tau2", "tau2_w", "tau2_b"),]
+  modelSummary <- modelSummary[!rownames(modelSummary) %in% c("tau2", "tau2_w", "tau2_b"),,drop=FALSE]
 
   for (i in 1:nrow(modelSummary)) {
 
