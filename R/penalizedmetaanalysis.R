@@ -607,7 +607,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
         "trace"           = rstan::traceplot(stanFit, coefficients[i]),
         "histogram"       = rstan::stan_hist(stanFit, coefficients[i]),
         "density"         = rstan::stan_dens(stanFit, coefficients[i], separate_chains = TRUE),
-        "autocorrelation" = rstan::stan_ac(stanFit, coefficients[i])
+        "autocorrelation" = .fixStanAc(rstan::stan_ac(stanFit, coefficients[i]))
       )
 
       parTicks <- jaspGraphs::getPrettyAxisBreaks(range(stanSamples[[coefficients[i]]]))
@@ -634,6 +634,18 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
             limits = range(parTicks))
         tempPlot <- tempPlot + jaspGraphs::geom_rangeframe(sides = "bl") + jaspGraphs::themeJaspRaw() +
           ggplot2::theme(plot.margin = ggplot2::margin(r = 10 * (nchar(options[["mcmcBurnin"]] + options[["mcmcSamples"]]) - 2)))
+      } else if (options[["diagnosticsType"]] == "autocorrelation") {
+        tempPlot <- tempPlot +
+          ggplot2::scale_x_continuous(
+            gettext("Lag"),
+            breaks = jaspGraphs::getPrettyAxisBreaks(c(0, 25)),
+            limits = c(-1, 26)) +
+          ggplot2::scale_y_continuous(gettextf("Autocorrelation (%1$s)", .pemaVariableNames(
+            coefficients[i],
+            sapply(options[["modelTerms"]], function(term) paste0(term[[1]], collapse = ":")))),
+            breaks = jaspGraphs::getPrettyAxisBreaks(c(0, 1)),
+            limits = c(0, 1))
+        tempPlot <- tempPlot + jaspGraphs::geom_rangeframe(sides = "bl") + jaspGraphs::themeJaspRaw()
       }
 
       tempJaspPlot            <- createJaspPlot(title = "", width = 400, height = 300)
@@ -645,11 +657,24 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   return()
 }
-.pemaMethod <- function(options){
+.pemaMethod                    <- function(options){
   return(switch(options[["method"]],
     "horseshoe" = "hs",
     "lasso"     = "lasso"
   ))
+}
+.fixStanAc <- function(gg) {
+
+  if (identical(gg$layers[[1]]$stat_params[["fun.data"]], "mean_se")) {
+    # fixes missing export from rstan:
+    gg$layers[[1]]$stat_params[["fun.data"]] <- function(y) {
+      data.frame(y = mean(y))
+    }
+  } else {
+    warning("Rstan got updated! Check if results still work!", domain = NA)
+  }
+
+  return(gg)
 }
 
 .pemaMessageDivergentIter <- function(iterations) {
