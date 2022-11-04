@@ -22,12 +22,12 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
   options[["module"]] <- "metaAnalysis"
 
   # Ready: variables needed for the analysis (confidence interval missing)
-  ready <- options[["effectSize"]] != "" && (options[["effectSizeStandardError"]] != "" || (all(unlist(options$effectSizeCi) != "") && !is.null(unlist(options[["effectSizeCi"]]))))
+  ready <- options[["effectSize"]] != "" && (options[["effectSizeSe"]] != "" || (all(unlist(options$effectSizeCi) != "") && !is.null(unlist(options[["effectSizeCi"]]))))
 
   # Dependencies: basically everything
   # dependencies <- .bmaDependencies
 
-  # Dataset with effectSize, effectSizeStandardError, and studyLabel
+  # Dataset with effectSize, effectSizeSe, and studyLabel
   # If data is null stuff is missing
   dataset <- .bmaReadData(jaspResults, options)
 
@@ -35,7 +35,7 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
 }
 
 .bmaDependencies <- c(
-  "effectSize", "effectSizeStandardError", "effectSizeCi", "model",
+  "effectSize", "effectSizeSe", "effectSizeCi", "model",
   "positive", "negative",
   "priorModelProbabilityFixedNull", "priorModelProbabilityFixedAlternative",
   "priorModelProbabilityRandomNull", "priorModelProbabilityRandomAlternative",
@@ -52,7 +52,7 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
 # Get dataset
 .bmaReadData <- function(jaspResults, options){
   varES <- options[["effectSize"]]
-  varSE <- options[["effectSizeStandardError"]]
+  varSE <- options[["effectSizeSe"]]
   CI <- unlist(options$effectSizeCi)
   lower <- CI[[1]]
   upper <- CI[[2]]

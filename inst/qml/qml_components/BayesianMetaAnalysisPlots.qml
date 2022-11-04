@@ -139,24 +139,24 @@ Section
 
 	CheckBox
 	{
-		name: 		"priorAndPosterior"
+		name: 		"priorPosterior"
 		label: 		qsTr("Prior and posterior")
 
 		CheckBox
 		{
-			name: "priorAndPosteriorInfo"
+			name: "priorPosteriorAdditionalInfo"
 			label: qsTr("Additional info")
 		}
 
 		CheckBox
 		{
-			name: "priorAndPosteriorFixedAndRandom"
+			name: "priorPosteriorFixedAndRandom"
 			enabled: modelTypeValue == "averaging" || modelTypeValue == "constrainedRandom"
 			label: qsTr("Add fixed and random effects posterior")
 		}
 		CheckBox
 		{
-			name: 	"priorAndPosteriorShade"
+			name: 	"priorPosteriorCi"
 			label: 	qsTr("Shade 95% CI")
 		}
 	}
@@ -167,13 +167,13 @@ Section
 
 		CheckBox
 		{
-			name: 	"sequentialPlotBayesFactor"
+			name: 	"bfSequentialPlot"
 			label: 	qsTr("Bayes factors")
 		}
 
 		CheckBox
 		{
-			name: 	"sequentialPlotModelProbability"
+			name: 	"modelProbabilitySequentialPlot"
 			label: 	qsTr("Posterior model probabilities")
 		}
 	}

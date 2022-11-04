@@ -77,7 +77,7 @@
 
     argList <- list(
       yi      = dataset[,options$effectSize],
-      sei     = dataset[,options$effectSizeStandardError],
+      sei     = dataset[,options$effectSizeSe],
       slab    = if(options$studyLabel != "") dataset[,options$studyLabel],
       method  = .metaAnalysisGetMethod(options),
       mods    = .metaAnalysisFormula(options),
@@ -353,7 +353,7 @@
   rma.fit <- .metaAnalysisComputeModel(container, dataset, options, ready = TRUE)
   coeff   <- coef(summary(rma.fit))
   cov     <-.metaAnalysisMakePrettyCoeffNames(rownames(coeff), dataset)
-  if (options$includeIntercept) {
+  if (options$interceptTerm) {
     start <- 1
   } else {
     if (length(cov) == 1)
@@ -508,7 +508,7 @@
   # Compute/get model
   rma.fit <- .metaAnalysisComputeModel(container, dataset, options, ready)
   fsn.fit <- metafor::fsn(yi   = get(options$effectSize),
-                          sei  = get(options$effectSizeStandardError),
+                          sei  = get(options$effectSizeSe),
                           data = dataset)
   container[["failSafeTable"]]$addRows(list("name" = fsn.fit$type,
                                             "fsnum" = fsn.fit$fsnum,
@@ -1287,7 +1287,7 @@
 
   if (is.null(formula.rhs))
     formula.rhs <- ~1
-  if (!options$includeIntercept)
+  if (!options$interceptTerm)
     formula.rhs <- update(formula.rhs, ~ . + 0)
 
   if (identical(formula.rhs, ~ 1 - 1))

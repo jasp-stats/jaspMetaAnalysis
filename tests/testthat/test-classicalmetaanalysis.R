@@ -21,7 +21,7 @@ options$casewiseDiagnostics <- TRUE
 options$residualParameter <- TRUE
 options$studyLabel <- "contBinom"
 options$trimFillAnalysis <- TRUE
-options$effectSizeStandardError <- "debCollin1"
+options$effectSizeSe <- "debCollin1"
 
 options$estimate <- TRUE
 options$estimateCiLevel <- .95
@@ -357,29 +357,29 @@ test_that("Analysis handles errors", {
   options <- jaspTools::analysisOptions("ClassicalMetaAnalysis")
   
   options$effectSize  <- "debInf"
-  options$effectSizeStandardError <- "contGamma"
+  options$effectSizeSe <- "contGamma"
   results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", "test.csv", options)
   expect_identical(results[["status"]], "validationError", label="Inf dependent check")
   
   options$effectSize <- "contNormal"
-  options$effectSizeStandardError <- "debInf"
+  options$effectSizeSe <- "debInf"
   results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", "test.csv", options)
   expect_identical(results[["status"]], "validationError", label="Inf covariate check")
   
   options$effectSize <- "debSame"
-  options$effectSizeStandardError <- "contGamma"
+  options$effectSizeSe <- "contGamma"
   results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", "test.csv", options)
   expect_identical(results[["status"]], "validationError", label="No variance dependent check")
   
   options$effectSize <- "contNormal"
-  options$effectSizeStandardError <- "debSame"
+  options$effectSizeSe <- "debSame"
   results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", "test.csv", options)
   expect_identical(results[["status"]], "validationError", label="No variance covariate check")
   
   options$effectSize <- "contGamma"
-  options$effectSizeStandardError <- "contcor1"
+  options$effectSizeSe <- "contcor1"
   results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", "test.csv", options)
-  expect_identical(results[["status"]], "validationError", label = "Negative effectSizeStandardError check")
+  expect_identical(results[["status"]], "validationError", label = "Negative effectSizeSe check")
   
 })
 
@@ -416,7 +416,7 @@ options$covarianceMatrix <- TRUE
 options$casewiseDiagnostics <- TRUE
 options$studyLabel <- "contBinom"
 options$trimFillAnalysis <- TRUE
-options$effectSizeStandardError <- "contGamma"
+options$effectSizeSe <- "contGamma"
 
 options$estimate <- TRUE
 options$estimateCiLevel <- .95
@@ -860,7 +860,7 @@ test_that("Residual Heterogeneity Estimates table results match - model interact
 options <- jaspTools::analysisOptions("ClassicalMetaAnalysis")
 options$.meta <- list(covariates = list(containsColumn = TRUE), effectSize = list(
   containsColumn = TRUE), factors = list(containsColumn = TRUE), 
-  studyLabel = list(containsColumn = TRUE), effectSizeStandardError = list(
+  studyLabel = list(containsColumn = TRUE), effectSizeSe = list(
     containsColumn = TRUE))
 options$effectSize <- "ES"
 options$method <- "Fixed Effects"
@@ -868,7 +868,7 @@ options$diagnosticPlot <- TRUE
 options$diagnosticQqPlot <- FALSE
 options$estimate <- FALSE
 options$residualParameter <- FALSE
-options$effectSizeStandardError <- "SE"
+options$effectSizeSe <- "SE"
 options$funnelPlot <- TRUE
 
 options$estimateCiLevel <- .95

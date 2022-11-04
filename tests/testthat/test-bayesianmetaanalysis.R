@@ -2,18 +2,18 @@ context("Bayesian Meta Analysis")
 
 options <- jaspTools::analysisOptions("BayesianMetaAnalysis")
 options$effectSize                              <- "ES"
-options$effectSizeStandardError                 <- "SE"
+options$effectSizeSe                            <- "SE"
 options$modelProbability                        <- TRUE
 options$effectSizePerStudy                      <- TRUE
 options$priorPlot                               <-  TRUE
-options$priorAndPosterior                       <- TRUE
+options$priorPosterior                          <- TRUE
 options$forestPlot                              <- TRUE
 options$cumulativeForestPlot                    <- FALSE
-options$sequentialPlotBayesFactor               <- FALSE
-options$sequentialPlotModelProbability          <- FALSE
-options$priorAndPosteriorInfo                   <- TRUE
-options$priorAndPosteriorFixedAndRandom         <- TRUE
-options$priorAndPosteriorShade                  <- TRUE
+options$bfSequentialPlot                        <- FALSE
+options$modelProbabilitySequentialPlot          <- FALSE
+options$priorPosteriorAdditionalInfo            <- TRUE
+options$priorPosteriorFixedAndRandom            <- TRUE
+options$priorPosteriorCi                        <- TRUE
 options$priorModelProbabilityFixedNull          <- 0.25
 options$priorModelProbabilityFixedAlternative   <- 0.25
 options$priorModelProbabilityRandomNull         <- 0.25
@@ -36,7 +36,7 @@ options$chains                                  <- 4
 options$seed                                    <- 1
 options$.meta <- list(effectSizeCi = list(containsColumn = TRUE), 
                       effectSize = list(containsColumn = TRUE), 
-                      effectSizeStandardError = list(containsColumn = TRUE), 
+                      effectSizeSe = list(containsColumn = TRUE), 
                       studyLabel = list(containsColumn = TRUE))
 options$effectSizeCi <- list()
 set.seed(1)

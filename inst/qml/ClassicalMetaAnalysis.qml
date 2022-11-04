@@ -29,7 +29,7 @@ Form
 		preferredHeight: 400 * preferencesModel.uiScale
 		AvailableVariablesList { name: "allVariables" }
 		AssignedVariablesList { name: "effectSize";	title: qsTr("Effect Size"); singleVariable: true; suggestedColumns: ["scale"] }
-		AssignedVariablesList { name: "effectSizeStandardError"; title: qsTr("Effect Size Standard Error"); singleVariable: true; suggestedColumns: ["scale"] }
+		AssignedVariablesList { name: "effectSizeSe"; title: qsTr("Effect Size Standard Error"); singleVariable: true; suggestedColumns: ["scale"] }
 		MA.ClassicalMetaAnalysisMethod{ visible: true}
 		AssignedVariablesList { name: "studyLabel"; title: qsTr("Study Labels"); singleVariable: true; suggestedColumns: ["ordinal", "nominal"] }
 		AssignedVariablesList { name: "covariates";	title: qsTr("Covariates"); suggestedColumns: ["scale"] }
@@ -45,7 +45,7 @@ Form
 			AvailableVariablesList { name: "modelComponents"; title: qsTr("Components"); source: ["covariates","factors"]}
 			AssignedVariablesList  { name: "modelTerms"; title: qsTr("Model Terms"); listViewType: JASP.Interaction }
 		}
-		CheckBox { name: "includeIntercept"; label: qsTr("Include intercept"); checked: true }
+		CheckBox { name: "interceptTerm"; label: qsTr("Include intercept"); checked: true }
 	}
 
 	MA.ClassicalMetaAnalysisStatistics{}

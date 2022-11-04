@@ -38,7 +38,7 @@
   }
 
   # Plot: Prior(s) and Posterior(s); only when checked
-  if(options$priorAndPosterior){
+  if(options$priorPosterior){
     .bmaPriorAndPosteriorPlot(jaspResults, dataset, options, ready, .bmaDependencies)
   }
 
@@ -48,13 +48,13 @@
   }
 
   # Plot: Cumulative forest plot and sequential; only when checked
-  if(options$sequentialPlotBayesFactor || options$sequentialPlotModelProbability){
+  if(options$bfSequentialPlot || options$modelProbabilitySequentialPlot){
     .bmaSequentialPlot(jaspResults, dataset, options, ready, .bmaDependencies)
   }
 }
 
 .bmaDependencies <- c(
-  "effectSize", "effectSizeStandardError", "effectSizeCi", "model",
+  "effectSize", "effectSizeSe", "effectSizeCi", "model",
   "positive", "negative",
   "priorModelProbabilityFixedNull", "priorModelProbabilityFixedAlternative",
   "priorModelProbabilityRandomNull", "priorModelProbabilityRandomAlternative",
@@ -297,10 +297,10 @@
 
     SE <- (upper - lower)/2/qnorm(0.975)
   }
-  if(options$effectSizeStandardError != ""){
-    SE <- dataset[, options[["effectSizeStandardError"]]]
+  if(options$effectSizeSe != ""){
+    SE <- dataset[, options[["effectSizeSe"]]]
     .hasErrors(dataset              = dataset,
-               seCheck.target       = options[["effectSizeStandardError"]],
+               seCheck.target       = options[["effectSizeSe"]],
                custom               = .metaAnalysisCheckSE,
                exitAnalysisIfErrors = TRUE)
   }
@@ -929,8 +929,8 @@
 .bmaPriorAndPosteriorPlot <- function(jaspResults, dataset, options, ready, .bmaDependencies) {
   postContainer <- createJaspContainer(title = gettext("Prior and Posteriors"))
   postContainer$dependOn(c(
-    .bmaDependencies, "priorAndPosterior",
-    "priorAndPosteriorShade", "priorAndPosteriorInfo", "priorAndPosteriorFixedAndRandom"
+    .bmaDependencies, "priorPosterior",
+    "priorPosteriorCi", "priorPosteriorAdditionalInfo", "priorPosteriorFixedAndRandom"
   ))
   jaspResults[["postContainer"]] <- postContainer
   jaspResults[["postContainer"]]$position <- 5
@@ -976,7 +976,7 @@
     if(options[["model"]] == "averaging"){
       int <- c(bmaResults[["bma"]]$estimates["averaged", "2.5%"], bmaResults[["bma"]]$estimates["averaged", "97.5%"])
       postName <- "Averaged"
-      if(options[["priorAndPosteriorFixedAndRandom"]]){
+      if(options[["priorPosteriorFixedAndRandom"]]){
         labelsModel <- c(bquote(.(gettext("Fixed H"))[1]),
                          bquote(.(gettext("Random H"))[1]),
                          bquote(.(gettext("Averaged H"))[1]),
@@ -1007,7 +1007,7 @@
     } else if(options[["model"]] == "constrainedRandom"){
       int <- c(bmaResults[["bma"]]$estimates["ordered", "2.5%"], bmaResults[["bma"]]$estimates["ordered", "97.5%"])
       postName <- "Ordered"
-      if(options[["priorAndPosteriorFixedAndRandom"]]){
+      if(options[["priorPosteriorFixedAndRandom"]]){
         labelsModel <- c(bquote(.(gettext("Fixed H"))[1]),
                          bquote(.(gettext("Ordered H"))[1]),
                          bquote(.(gettext("Random H"))[1]),
@@ -1060,7 +1060,7 @@
 
   df <- data.frame(x = c(xPost, xPost), y = c(yPrior, yPost), g = rep(c("Prior", postName), each = length(xPost)))
 
-  if(options$priorAndPosteriorFixedAndRandom && (options$model == "averaging" || options$model == "constrainedRandom")){
+  if(options$priorPosteriorFixedAndRandom && (options$model == "averaging" || options$model == "constrainedRandom")){
     if(type == "ES"){
       yPostES <- c(bmaResults[["fixed"]]$yPost, bmaResults[["random"]]$yPost)
       xPostES <- c(bmaResults[["fixed"]]$xPost, bmaResults[["random"]]$xPost)
@@ -1088,9 +1088,9 @@
     df <- rbind(df, dfPost)
   }
 
-  if(!options$priorAndPosteriorFixedAndRandom || options$model == "random" || options$model == "fixed"){
+  if(!options$priorPosteriorFixedAndRandom || options$model == "random" || options$model == "fixed"){
     df$g <- factor(df$g, levels = c(postName, "Prior"))
-  } else if(options$priorAndPosteriorFixedAndRandom){
+  } else if(options$priorPosteriorFixedAndRandom){
     if(type == "ES"){
       if(options$model == "averaging") df$g <- factor(df$g, levels = c("Fixed", "Random", "Averaged", "Prior"))
       if(options$model == "constrainedRandom") df$g <- factor(df$g, levels = c("Fixed", "Ordered", "Random", "Prior"))
@@ -1132,7 +1132,7 @@
 
 
 
-  if(!options[["priorAndPosteriorInfo"]]){
+  if(!options[["priorPosteriorAdditionalInfo"]]){
     BF <- NULL
     CRI <- NULL
     bfType <- NULL
@@ -1149,7 +1149,7 @@
     }
   }
 
-  if(options[["priorAndPosteriorInfo"]]){
+  if(options[["priorPosteriorAdditionalInfo"]]){
     BF <- round(BF, 3)
     CRI <- round(CRI, 3)
     med <- round(med, 3)
@@ -1198,12 +1198,12 @@
   .extraPost <- function(plot, int, xPost, yPost){
 
 
-    if(options[["priorAndPosteriorShade"]]){
+    if(options[["priorPosteriorCi"]]){
       shadeData <- data.frame(x = xPost[xPost < max(int) & xPost > min(int)], y = yPost[xPost < max(int) & xPost > min(int)])
       plot <- plot + ggplot2::geom_area(data = shadeData, mapping = ggplot2::aes(x = x, y = y), fill = "grey", group = 1, linetype = 1, color = NA, alpha = 0.5)
     }
 
-    if(options[["priorAndPosteriorFixedAndRandom"]] && options[["model"]] == "averaging"){
+    if(options[["priorPosteriorFixedAndRandom"]] && options[["model"]] == "averaging"){
       plot <- plot + ggplot2::scale_linetype_manual(values = valuesLine)
     }
 
@@ -1217,7 +1217,7 @@
 
   xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, xPost))
 
-  if(options[["priorAndPosteriorInfo"]]){
+  if(options[["priorPosteriorAdditionalInfo"]]){
     plot$subplots$mainGraph <- plot$subplots$mainGraph + ggplot2::scale_x_continuous(name = xlab, breaks = xBreaks, limits = c(min(xPost), max(xPost)))
     plot$subplots$mainGraph <- .extraPost(plot$subplots$mainGraph, int, xPost, yPost)
   } else {
@@ -1299,8 +1299,8 @@
     upper <- dataset[, options[["effectSizeCi"]][[1]][[2]]]
     varSE <- (upper - lower)/2/qnorm(0.975)
   }
-  if(options[["effectSizeStandardError"]] != ""){
-    varSE <- dataset[, options[["effectSizeStandardError"]]]
+  if(options[["effectSizeSe"]] != ""){
+    varSE <- dataset[, options[["effectSizeSe"]]]
   }
 
   # Assign weights for the observed point sizes
@@ -1644,25 +1644,25 @@
   }
 
   # Fill sequential plot BFs effect size
-  if(options$sequentialPlotBayesFactor){
+  if(options$bfSequentialPlot){
     seqPlotES <- createJaspPlot(plot = NULL, title = gettext("Bayes factors effect size"), height = 400, width = 580)
-    seqPlotES$dependOn(c("sequentialPlotBayesFactor", "BF"))
+    seqPlotES$dependOn(c("bfSequentialPlot", "BF"))
     seqPlotES$position <- 1
     seqContainer[["seqPlotES"]] <- seqPlotES
     .bmaFillSeqPlot(seqPlotES, jaspResults, dataset, options, .bmaDependencies, type = "ES")
     # Fill sequential plot BFs standard error
     if(!options$model == "fixed"){
       seqPlotSE <- createJaspPlot(plot = NULL, title = gettext("Bayes factors heterogeneity"), height = 400, width = 580)
-      seqPlotSE$dependOn(c("sequentialPlotBayesFactor", "BF"))
+      seqPlotSE$dependOn(c("bfSequentialPlot", "BF"))
       seqPlotSE$position <- 2
       seqContainer[["seqPlotSE"]] <- seqPlotSE
       .bmaFillSeqPlot(seqPlotSE, jaspResults, dataset, options, .bmaDependencies, type = "SE")
     }
   }
 
-  if(options$sequentialPlotModelProbability){
+  if(options$modelProbabilitySequentialPlot){
     seqPMPlot <- createJaspPlot(plot = NULL, title = gettext("Posterior model probabilities"), height = 400, width = 580)
-    seqPMPlot$dependOn("sequentialPlotModelProbability")
+    seqPMPlot$dependOn("modelProbabilitySequentialPlot")
     seqPMPlot$position <- 3
     .bmaFillSeqPM(seqPMPlot, jaspResults, dataset, options, .bmaDependencies)
     seqContainer[["seqPMPlot"]] <- seqPMPlot

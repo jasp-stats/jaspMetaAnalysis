@@ -25,7 +25,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   options[["module"]] <- "metaAnalysis"
 
-  ready <- options$effectSize != "" && options$effectSizeStandardError != "" && (options$includeIntercept || length(options$modelTerms) > 0)
+  ready <- options$effectSize != "" && options$effectSizeSe != "" && (options$interceptTerm || length(options$modelTerms) > 0)
   if(ready) {
     dataset <- .metaAnalysisReadData(dataset, options)
     .metaAnalysisCheckErrors(dataset, options)
@@ -43,8 +43,8 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     modelContainer <- jaspResults[["modelContainer"]]
   } else {
     modelContainer <- createJaspContainer()
-    modelContainer$dependOn(c("effectSize", "effectSizeStandardError", "method", "studyLabel", "covariates", "estimateTest",
-                              "factors", "modelTerms", "includeIntercept", "estimateCiLevel"))
+    modelContainer$dependOn(c("effectSize", "effectSizeSe", "method", "studyLabel", "covariates", "estimateTest",
+                              "factors", "modelTerms", "interceptTerm", "estimateCiLevel"))
     jaspResults[["modelContainer"]] <- modelContainer
   }
   return(modelContainer)
@@ -55,7 +55,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     return(dataset)
   else {
     effsizeName <- unlist(options$effectSize)
-    stderrName  <- unlist(options$effectSizeStandardError)
+    stderrName  <- unlist(options$effectSizeSe)
     covarNames  <- if (length(options$covariates) > 0) unlist(options$covariates)
     factNames   <- if (length(options$factors) > 0) unlist(options$factors)
 
@@ -69,7 +69,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
 .metaAnalysisCheckErrors <- function(dataset, options){
   effsizeName <- unlist(options$effectSize)
-  stderrName  <- unlist(options$effectSizeStandardError)
+  stderrName  <- unlist(options$effectSizeSe)
   covarNames  <- if (length(options$covariates) > 0) unlist(options$covariates)
   numeric.variables <- Filter(function(s) s != "", c(effsizeName, covarNames, stderrName))
   .hasErrors(dataset              = dataset,
@@ -82,7 +82,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
              modelInteractions.modelTerms = options$modelTerms,
              exitAnalysisIfErrors = TRUE)
   .hasErrors(dataset              = dataset,
-             seCheck.target       = options[["effectSizeStandardError"]],
+             seCheck.target       = options[["effectSizeSe"]],
              custom               = .metaAnalysisCheckSE,
              exitAnalysisIfErrors = TRUE)
 }

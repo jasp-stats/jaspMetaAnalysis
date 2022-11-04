@@ -6,14 +6,14 @@ Upgrades
 	Upgrade
 	{
 		functionName:	"ClassicalMetaAnalysis"
-		fromVersion:	"0.15"
+		fromVersion:	"0.16.4"
 		toVersion:		"0.17"
 
 		// ClassicalMetaAnalysis.qml
 		ChangeRename { from: "dependent"; to: "effectSize" }
-		ChangeRename { from: "wlsWeights"; to: "effectSizeStandardError" }
+		ChangeRename { from: "wlsWeights"; to: "effectSizeSe" }
 		ChangeRename { from: "studyLabels"; to: "studyLabel" }
-		ChangeRename { from: "includeConstant"; to: "includeIntercept" }
+		ChangeRename { from: "includeConstant"; to: "interceptTerm" }
 
 		// ClassicalMetaAnalysisStatistics.qml
 		ChangeRename { from: "regressionCoefficientsEstimates"; to: "estimate" }
@@ -37,11 +37,11 @@ Upgrades
 	Upgrade
 	{
 		functionName:	"BayesianMetaAnalysis"
-		fromVersion:	"0.15"
+		fromVersion:	"0.16.4"
 		toVersion:		"0.17"
 
 		// BayesianMetaAnalysis.qml
-		ChangeRename { from: "standardError"; to: "effectSizeStandardError" }
+		ChangeRename { from: "standardError"; to: "effectSizeSe" }
 		ChangeRename { from: "confidenceInterval"; to: "effectSizeCi" }
 		ChangeRename { from: "studyLabels"; to: "studyLabel" }
 
@@ -110,12 +110,12 @@ Upgrades
 		}
 		ChangeRename { from: "plotCumForest"; to: "cumulativeForestPlot" }
 		ChangeRename { from: "addPrior"; to: "cumulativeForestPlotPrior" }
-		ChangeRename { from: "plotPosterior"; to: "priorAndPosterior" }
-		ChangeRename { from: "addInfo"; to: "priorAndPosteriorInfo" }
-		ChangeRename { from: "addLines"; to: "priorAndPosteriorFixedAndRandom" }
-		ChangeRename { from: "shade"; to: "priorAndPosteriorShade" }
-		ChangeRename { from: "plotSequential"; to: "sequentialPlotBayesFactor" }
-		ChangeRename { from: "plotSeqPM"; to: "sequentialPlotModelProbability" }
+		ChangeRename { from: "plotPosterior"; to: "priorPosterior" }
+		ChangeRename { from: "addInfo"; to: "priorPosteriorAdditionalInfo" }
+		ChangeRename { from: "addLines"; to: "priorPosteriorFixedAndRandom" }
+		ChangeRename { from: "shade"; to: "priorPosteriorCi" }
+		ChangeRename { from: "plotSequential"; to: "bfSequentialPlot" }
+		ChangeRename { from: "plotSeqPM"; to: "modelProbabilitySequentialPlot" }
 
 		// BayesianMetaAnalysisPriors.qml
 		ChangeRename { from: "priorES"; to: "priorEffectSize" }
