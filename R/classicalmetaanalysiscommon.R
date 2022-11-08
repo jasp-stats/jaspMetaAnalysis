@@ -84,7 +84,7 @@
       data    = dataset,
       test    = options$estimateTest,
       # add tiny amount because 1 is treated by rma() as 100% whereas values > 1 as percentages
-      level   = options$estimateCiLevel + 1e-9,
+      level   = options$coefficientCiLevel + 1e-9,
       control = list(maxiter = 500)
     )
     argList <- argList[!sapply(argList, is.null)]
@@ -127,11 +127,11 @@
 }
 
 .metaAnalysisCoeffTable <- function(container, dataset, options, ready) {
-  if (!options$estimate || !is.null(container[["coeffTable"]]))
+  if (!options$coefficientEstimate || !is.null(container[["coeffTable"]]))
     return()
 
   coeffTable <- createJaspTable(gettext("Coefficients"))
-  coeffTable$dependOn(c("estimate", "estimateCi"))
+  coeffTable$dependOn(c("coefficientEstimate", "coefficientCi"))
   coeffTable$position <- 2
   coeffTable$showSpecifiedColumnsOnly <- TRUE
   coeffTable$addCitation("Viechtbauer, W. (2010). Conducting meta-analyses in R with the metafor package. Journal of Statistical Software, 36(3), 1-48. URL: http://www.jstatsoft.org/v36/i03/")
@@ -181,7 +181,7 @@
     return()
 
   residualTable <- createJaspTable(gettext("Residual Heterogeneity Estimates"))
-  residualTable$dependOn(c("residualParameter", "estimateCi"))
+  residualTable$dependOn(c("residualParameter", "coefficientCi"))
   residualTable$position <- 4
   residualTable$showSpecifiedColumnsOnly <- TRUE
 
@@ -412,7 +412,7 @@
   if (ready) {
     # Compute/get model
     rma.fit   <- .metaAnalysisComputeModel(container, dataset, options, ready)
-    confInt   <- options$estimateCiLevel
+    confInt   <- options$coefficientCiLevel
     residPars <- try(confint(rma.fit, digits = 12, level = confInt)$random)
 
     est$tau2 <- residPars[1,1]
@@ -1326,8 +1326,8 @@
 }
 
 .metaAnalysisConfidenceInterval <- function(options, table) {
-  if(options$estimateCi) {
-    ci <- gettextf("%g%% Confidence Interval", 100 * options$estimateCiLevel)
+  if(options$coefficientCi) {
+    ci <- gettextf("%g%% Confidence Interval", 100 * options$coefficientCiLevel)
     table$addColumnInfo(name = "lower", type = "number", title = "Lower", overtitle = ci)
     table$addColumnInfo(name = "upper", type = "number", title = "Upper", overtitle = ci)
   }

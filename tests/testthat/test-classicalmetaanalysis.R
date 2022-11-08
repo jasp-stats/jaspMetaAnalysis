@@ -15,7 +15,7 @@ options$failSafeN <- TRUE
 options$diagnosticPlot <- TRUE
 options$profilePlot <- TRUE
 options$funnelPlotRankTestAsymmetry <- TRUE
-options$estimateCi <- TRUE
+options$coefficientCi <- TRUE
 options$covarianceMatrix <- TRUE
 options$casewiseDiagnostics <- TRUE
 options$residualParameter <- TRUE
@@ -23,8 +23,8 @@ options$studyLabel <- "contBinom"
 options$trimFillAnalysis <- TRUE
 options$effectSizeSe <- "debCollin1"
 
-options$estimate <- TRUE
-options$estimateCiLevel <- .95
+options$coefficientEstimate <- TRUE
+options$coefficientCiLevel <- .95
 options$estimateTest <- "z"
 options$fitMeasure <- TRUE
 options$diagnosticQqPlot <- TRUE
@@ -411,15 +411,15 @@ options$failSafeN <- TRUE
 options$diagnosticPlot <- TRUE
 options$profilePlot <- TRUE
 options$funnelPlotRankTestAsymmetry <- TRUE
-options$estimateCi <- TRUE
+options$coefficientCi <- TRUE
 options$covarianceMatrix <- TRUE
 options$casewiseDiagnostics <- TRUE
 options$studyLabel <- "contBinom"
 options$trimFillAnalysis <- TRUE
 options$effectSizeSe <- "contGamma"
 
-options$estimate <- TRUE
-options$estimateCiLevel <- .95
+options$coefficientEstimate <- TRUE
+options$coefficientCiLevel <- .95
 options$estimateTest <- "z"
 options$fitMeasure <- TRUE
 options$diagnosticQqPlot <- TRUE
@@ -866,12 +866,12 @@ options$effectSize <- "ES"
 options$method <- "Fixed Effects"
 options$diagnosticPlot <- TRUE
 options$diagnosticQqPlot <- FALSE
-options$estimate <- FALSE
+options$coefficientEstimate <- FALSE
 options$residualParameter <- FALSE
 options$effectSizeSe <- "SE"
 options$funnelPlot <- TRUE
 
-options$estimateCiLevel <- .95
+options$coefficientCiLevel <- .95
 options$estimateTest <- "z"
 options$fitMeasure <- TRUE
 options$covarianceMatrix <- TRUE

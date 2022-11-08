@@ -31,15 +31,15 @@ Section
 		title: qsTr("Regression Coefficients")
 		CheckBox
 		{
-			name: "estimate";
+			name: "coefficientEstimate";
 			text: qsTr("Estimates");
 			checked: true
 			onClicked: { if (!checked && estimatesConfInt.checked) estimatesConfInt.click() }
 			CheckBox
 			{
 				id: estimatesConfInt
-				name: "estimateCi"; text: qsTr("Confidence intervals")
-				CIField { name: "estimateCiLevel"; label: qsTr("Interval") }
+				name: "coefficientCi"; text: qsTr("Confidence intervals")
+				CIField { name: "coefficientCiLevel"; label: qsTr("Interval") }
 				DropDown { name: "estimateTest"; label: qsTr("Test"); values: [ "z", "knha"]; }
 			}
 		}

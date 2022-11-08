@@ -16,9 +16,9 @@ Upgrades
 		ChangeRename { from: "includeConstant"; to: "interceptTerm" }
 
 		// ClassicalMetaAnalysisStatistics.qml
-		ChangeRename { from: "regressionCoefficientsEstimates"; to: "estimate" }
-		ChangeRename { from: "regressionCoefficientsConfidenceIntervals"; to: "estimateCi" }
-		ChangeRename { from: "regressionCoefficientsConfidenceIntervalsInterval"; to: "estimateCiLevel" }
+		ChangeRename { from: "regressionCoefficientsEstimates"; to: "coefficientEstimate" }
+		ChangeRename { from: "regressionCoefficientsConfidenceIntervals"; to: "coefficientCi" }
+		ChangeRename { from: "regressionCoefficientsConfidenceIntervalsInterval"; to: "coefficientCiLevel" }
 		ChangeRename { from: "test"; to: "estimateTest" }
 		ChangeRename { from: "regressionCoefficientsCovarianceMatrix"; to: "covarianceMatrix" }
 		ChangeRename { from: "modelFit"; to: "fitMeasure" }
