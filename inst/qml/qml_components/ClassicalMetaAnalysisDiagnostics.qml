@@ -27,18 +27,18 @@ Section
 	Group
 	{
 		title: qsTr("Plots")
-		CheckBox { name: "trimFillPlot";			text: qsTr("Trim-fill analysis")	}
-		CheckBox { name: "plotResidualsPredicted";	text: qsTr("Profile plot")			}
+		CheckBox { name: "trimFillAnalysis";			text: qsTr("Trim-fill analysis")	}
+		CheckBox { name: "profilePlot";	text: qsTr("Profile plot")			}
 		CheckBox
 		{
-			name: "plotResidualsDependent"; text: qsTr("Diagnostic plots")
-			CheckBox { name: "plotResidualsQQ"; text: qsTr("Q-Q plot standardized residuals"); checked: true }
+			name: "diagnosticPlot"; text: qsTr("Diagnostic plots")
+			CheckBox { name: "diagnosticQqPlot"; text: qsTr("Q-Q plot standardized residuals"); checked: true }
 		}
 	}
 	Group
 	{
 		title: qsTr("Robustness")
-		CheckBox { name: "plotResidualsCovariates";			text: qsTr("Fail-safe N")			}
-		CheckBox { name: "residualsCasewiseDiagnostics";	text: qsTr("Casewise diagnostics")	}
+		CheckBox { name: "failSafeN";			text: qsTr("Fail-safe N")			}
+		CheckBox { name: "casewiseDiagnostics";	text: qsTr("Casewise diagnostics")	}
 	}
 }

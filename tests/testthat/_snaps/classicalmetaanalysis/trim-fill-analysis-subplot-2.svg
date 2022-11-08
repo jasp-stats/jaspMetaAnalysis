@@ -26,7 +26,7 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMTA3LjQxfDcyMC4wMHwyMC43MXw0OTAuMDg=)'>
-<polygon points='135.25,214.43 535.42,205.09 535.42,372.35 135.25,381.70 ' style='stroke-width: 1.07; stroke: none; fill: #D3D3D3;' />
+<polygon points='135.25,214.43 535.42,205.09 535.42,372.35 135.25,381.70 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #D3D3D3;' />
 <circle cx='421.92' cy='264.59' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
 <circle cx='436.06' cy='367.29' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
 <circle cx='443.08' cy='240.90' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
