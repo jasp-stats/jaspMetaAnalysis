@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-10-26 20:27+0000\n"
+"PO-Revision-Date: 2022-11-14 06:44+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "jasp/jaspmetaanalysis-qml/zh_Hans/>\n"
@@ -9,7 +9,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.14.2-dev\n"
+"X-Generator: Weblate 4.15-dev\n"
 "X-Language: zh_Hans\n"
 "X-Qt-Contexts: true\n"
 
@@ -143,27 +143,27 @@ msgstr "统计量"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Omnibus Statistics"
-msgstr ""
+msgstr "Omnibus 综合统计"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Anova Table"
-msgstr ""
+msgstr "方差分析表"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fit Indices"
-msgstr ""
+msgstr "拟合指数"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Coefficients"
-msgstr ""
+msgstr "系数"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fixed Effects Coefficients Table"
-msgstr ""
+msgstr "固定效应系数表"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Random Effects Coefficients Table"
-msgstr ""
+msgstr "随机效应系数表"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Model Derived Statistics"
@@ -171,59 +171,59 @@ msgstr ""
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Estimated Marginal Means"
-msgstr ""
+msgstr "边际均值估计"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Plots"
-msgstr ""
+msgstr "绘图"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Funnel plot"
-msgstr ""
+msgstr "漏斗图"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Forest plot"
-msgstr ""
+msgstr "森林图"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Advanced"
-msgstr ""
+msgstr "高级"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Method"
-msgstr ""
+msgstr "方法"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fixed Effects Covariance Matrix"
-msgstr ""
+msgstr "固定效应协方差矩阵"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Diagnostics"
-msgstr ""
+msgstr "诊断"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Test for Funnel Plot Asymmetry"
-msgstr ""
+msgstr "漏斗图不对称性检验"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Rank correlation test"
-msgstr ""
+msgstr "秩相关检验"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Egger's Regression test"
-msgstr ""
+msgstr "Egger's 回归检验"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fail-safe-N analysis (controversial)"
-msgstr ""
+msgstr "失效安全数分析（有争议）"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Diagnostics Table"
-msgstr ""
+msgstr "诊断表"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Diagnostic plots"
-msgstr ""
+msgstr "诊断图"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Residual vs Dependent"
@@ -231,39 +231,39 @@ msgstr ""
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Profile Random Effects Parameters (takes time)"
-msgstr ""
+msgstr "配置文件随机效应参数（较为耗时）"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Advanced"
-msgstr ""
+msgstr "高级选项"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Prior model probability"
-msgstr ""
+msgstr "先验模型概率"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Fixed effects"
-msgstr ""
+msgstr "固定效应"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Random effects"
-msgstr ""
+msgstr "随机效应"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Estimation settings (MCMC)"
-msgstr ""
+msgstr "估计设置 (MCMC)"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "iterations:"
-msgstr ""
+msgstr "迭代："
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "chains:"
-msgstr ""
+msgstr "链："
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Bayes factor computation"
-msgstr ""
+msgstr "贝叶斯因子计算"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Integration"
@@ -275,60 +275,59 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Inference"
-msgstr ""
+msgstr "推断"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model"
 msgstr "模型"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Fixed effects"
-msgstr ""
+msgstr "固定效应"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Random effects"
-msgstr ""
+msgstr "随机效应"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model averaging"
-msgstr ""
+msgstr "模型平均"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Constrained random effects"
-msgstr ""
+msgstr "受约束的随机效应"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "All positive"
-msgstr ""
+msgstr "全部为正"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "All negative"
-msgstr ""
+msgstr "全部为负"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Table"
-msgstr ""
+msgstr "表"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model probabilities"
-msgstr ""
+msgstr "模型概率"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Effect sizes per study"
-msgstr ""
+msgstr "每项研究的效应量"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Plots"
-msgstr ""
+msgstr "绘图"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Forest plot"
-msgstr ""
+msgstr "森林图"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Observed"
-msgstr ""
+msgstr "观测值"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Estimated"
