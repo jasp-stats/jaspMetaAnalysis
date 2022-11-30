@@ -1711,3 +1711,200 @@ msgstr "Medida"
 msgctxt "WaapWls|"
 msgid "Measure"
 msgstr "Medida"
+
+msgctxt "Description|"
+msgid "Penalized Meta-Analysis"
+msgstr ""
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Effect Size"
+msgstr "Magnitud del Efecto"
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Effect Size Standard Error"
+msgstr "Error Típico de la Magnitud del Efecto"
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Method"
+msgstr "Método"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Horseshoe"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Lasso"
+msgstr ""
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Covariates"
+msgstr "Covariables"
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Factors"
+msgstr "Factores"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Clustering"
+msgstr ""
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Model"
+msgstr "Modelo"
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Components"
+msgstr "Componentes"
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Model Terms"
+msgstr "Elementos del Modelo"
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Include intercept"
+msgstr "Incluir constante"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Scale predictors"
+msgstr ""
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Priors"
+msgstr "Previos"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Df"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Scale"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Df (global)"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Df (slab)"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Scale (global)"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Scale (slab)"
+msgstr ""
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Inference"
+msgstr "Inferencia"
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Estimates"
+msgstr "Estimaciones"
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Heterogeneity"
+msgstr "Heterogeneidad"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "I²"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Posterior plots"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Model terms"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Plotted term"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "MCMC diagnostics"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Horizontal axis"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Vertical axis"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Plot type"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Traceplot"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Scatterplot"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Histogram"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Density"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Autocorrelations"
+msgstr ""
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Advanced"
+msgstr "Avanzado"
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Estimation settings (MCMC)"
+msgstr "Configuraciones de la estimación (MCMC)"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Warmup"
+msgstr ""
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Iterations"
+msgstr "Iteraciones"
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Chains"
+msgstr "Cadenas"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Adapt delta"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Maximum treedepth"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysisAdvanced|"
+msgid "samples:"
+msgstr ""

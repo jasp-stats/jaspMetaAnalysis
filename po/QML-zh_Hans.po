@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-11-19 08:33+0000\n"
-"Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
-"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
-"jasp/jaspmetaanalysis-qml/zh_Hans/>\n"
-"Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.15-dev\n"
 "X-Language: zh_Hans\n"
 "X-Qt-Contexts: true\n"
 
@@ -485,13 +479,15 @@ msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Plot prior(s)"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Diagnostics"
-msgstr ""
+msgstr "诊断"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Plots"
-msgstr ""
+msgstr "绘图"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Trim-fill analysis"
@@ -501,9 +497,10 @@ msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Profile plot"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Diagnostic plots"
-msgstr ""
+msgstr "诊断图"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Q-Q plot standardized residuals"
@@ -521,9 +518,10 @@ msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Casewise diagnostics"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Method"
-msgstr ""
+msgstr "方法"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Fixed Effects"
@@ -561,9 +559,10 @@ msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Paule-Mandel"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Statistics"
-msgstr ""
+msgstr "统计量"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Regression Coefficients"
@@ -597,37 +596,44 @@ msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Fit measures"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Forest plot"
-msgstr ""
+msgstr "森林图"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Show labels"
-msgstr ""
+msgstr "显示标签"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Ordering"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Year (ascending)"
-msgstr ""
+msgstr "年份（升序）"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Year (descending)"
-msgstr ""
+msgstr "年份（降序）"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Effect size (ascending)"
-msgstr ""
+msgstr "效应量（升序）"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Effect size (descending)"
-msgstr ""
+msgstr "效应量（降序）"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Funnel plot"
-msgstr ""
+msgstr "漏斗图"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Rank test for funnel plot asymmetry"
@@ -709,9 +715,10 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Set null priors"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Inference"
-msgstr ""
+msgstr "推断"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Conditional estimates"
@@ -749,29 +756,33 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "CI width"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Plots"
-msgstr ""
+msgstr "绘图"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Pooled estimates"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Forest plot"
-msgstr ""
+msgstr "森林图"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Show"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Ascending"
-msgstr ""
+msgstr "升序"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Descending"
-msgstr ""
+msgstr "降序"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Row order"
@@ -841,9 +852,10 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Fisher's z"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Estimation settings (MCMC)"
-msgstr ""
+msgstr "估计设置 (MCMC)"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Adaptation"
@@ -956,9 +968,10 @@ msgctxt "SelectionModels|"
 msgid "Fisher's z"
 msgstr ""
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Inference"
-msgstr ""
+msgstr "推断"
 
 msgctxt "SelectionModels|"
 msgid "Fixed Effects"
@@ -980,21 +993,24 @@ msgctxt "SelectionModels|"
 msgid "Estimated heterogeneity"
 msgstr ""
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Plots"
-msgstr ""
+msgstr "绘图"
 
 msgctxt "SelectionModels|"
 msgid "Weight Function"
 msgstr ""
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Fixed effects"
-msgstr ""
+msgstr "固定效应"
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Random effects"
-msgstr ""
+msgstr "随机效应"
 
 msgctxt "SelectionModels|"
 msgid "Rescale x-axis"
@@ -1304,9 +1320,10 @@ msgctxt "BayesianPredictionPerformance|"
 msgid "MCMC Diagnostics"
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianPredictionPerformance|"
 msgid "Plots"
-msgstr ""
+msgstr "绘图"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Running means"
@@ -1374,9 +1391,10 @@ msgctxt "PetPeese|"
 msgid "Cohen's d"
 msgstr ""
 
+#, fuzzy
 msgctxt "PetPeese|"
 msgid "Inference"
-msgstr ""
+msgstr "推断"
 
 msgctxt "PetPeese|"
 msgid "Mean estimates"
@@ -1386,9 +1404,10 @@ msgctxt "PetPeese|"
 msgid "Multiplicative heterogeneity estimates"
 msgstr ""
 
+#, fuzzy
 msgctxt "PetPeese|"
 msgid "Plots"
-msgstr ""
+msgstr "绘图"
 
 msgctxt "PetPeese|"
 msgid "Meta-Regression Estimate"
@@ -1452,9 +1471,10 @@ msgctxt "PredictionPerformanceData|"
 msgid "Study Labels"
 msgstr "研究标签"
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Inference"
-msgstr ""
+msgstr "推断"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Within-study variation"
@@ -1480,9 +1500,10 @@ msgctxt "PredictionPerformanceInference|"
 msgid "Prior and posterior plot"
 msgstr ""
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Forest plot"
-msgstr ""
+msgstr "森林图"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Labels"
@@ -1568,9 +1589,10 @@ msgctxt "PredictionPerformanceInference|"
 msgid "Plot"
 msgstr ""
 
+#, fuzzy
 msgctxt "PredictionPerformancePriors|"
 msgid "Priors"
-msgstr ""
+msgstr "先验"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "Summary estimate (O:E Ratio)"
@@ -1654,9 +1676,10 @@ msgctxt "WaapWls|"
 msgid "Cohen's d"
 msgstr ""
 
+#, fuzzy
 msgctxt "WaapWls|"
 msgid "Inference"
-msgstr ""
+msgstr "推断"
 
 msgctxt "WaapWls|"
 msgid "Mean estimates"
@@ -1666,9 +1689,10 @@ msgctxt "WaapWls|"
 msgid "Multiplicative heterogeneity estimates"
 msgstr ""
 
+#, fuzzy
 msgctxt "WaapWls|"
 msgid "Plots"
-msgstr ""
+msgstr "绘图"
 
 msgctxt "WaapWls|"
 msgid "Mean model estimates"
@@ -1728,4 +1752,195 @@ msgstr ""
 
 msgctxt "WaapWls|"
 msgid "Measure"
+msgstr ""
+
+msgctxt "Description|"
+msgid "Penalized Meta-Analysis"
+msgstr ""
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Effect Size"
+msgstr "效应量"
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Effect Size Standard Error"
+msgstr "效应量标准误差"
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Method"
+msgstr "方法"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Horseshoe"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Lasso"
+msgstr ""
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Covariates"
+msgstr "协变量"
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Factors"
+msgstr "因子"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Clustering"
+msgstr ""
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Model"
+msgstr "模型"
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Components"
+msgstr "成分"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Model Terms"
+msgstr ""
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Include intercept"
+msgstr "包括截距"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Scale predictors"
+msgstr ""
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Priors"
+msgstr "先验"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Df"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Scale"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Df (global)"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Df (slab)"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Scale (global)"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Scale (slab)"
+msgstr ""
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Inference"
+msgstr "推断"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Estimates"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Heterogeneity"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "I²"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Posterior plots"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Model terms"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Plotted term"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "MCMC diagnostics"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Horizontal axis"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Vertical axis"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Plot type"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Traceplot"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Scatterplot"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Histogram"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Density"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Autocorrelations"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Advanced"
+msgstr ""
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Estimation settings (MCMC)"
+msgstr "估计设置 (MCMC)"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Warmup"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Iterations"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Chains"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Adapt delta"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Maximum treedepth"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysisAdvanced|"
+msgid "samples:"
 msgstr ""

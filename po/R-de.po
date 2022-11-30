@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2022-09-28 09:57\n"
+"POT-Creation-Date: 2022-11-30 10:33\n"
 "PO-Revision-Date: 2022-10-02 20:23+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
@@ -737,6 +737,40 @@ msgstr "Varianz-Komponenten"
 msgid "Plots"
 msgstr "Abbildungen"
 
+msgid "Intercept"
+msgstr ""
+
+#, fuzzy
+msgid "At least one predictor needs to be specified."
+msgstr "Es muss mindestens ein p-Wert-Grenzwert gesetzt werden."
+
+msgid "Warning:"
+msgstr "Warnung:"
+
+#, fuzzy
+msgid "Posterior distribution"
+msgstr "Prior-Verteilung"
+
+#, fuzzy
+msgid "Sampling diagnostics"
+msgstr "Diagnostiken"
+
+#, fuzzy
+msgid "Autocorrelation (%1$s)"
+msgstr "Autokorrelation"
+
+msgid ""
+"Inference possibly unreliable -- MCMC chains might not have converged; The "
+"largest R-hat is %.3f > 1.01. To lower R-hat please increase 'Iterations', "
+"or 'Adapt delta' in the Options section."
+msgstr ""
+
+msgid ""
+"Low estimation accuracy -- The smallest Effective Sample Size (ESS) is %.2f "
+"< %1.0f. To increase accuracy please increase 'Iterations', or 'Adapt delta' "
+"in the Options section."
+msgstr ""
+
 msgid "The priors for publication bias were set incorrectly."
 msgstr "Die Prior für den Publikationsbias wurden falsch gesetzt."
 
@@ -834,9 +868,6 @@ msgstr "log(Inklusion BF)"
 
 msgid "P(M|data)"
 msgstr "P(M|Daten)"
-
-msgid "Warning:"
-msgstr "Warnung:"
 
 msgid "Model Averaged Estimates"
 msgstr "Modellgemittelte Schätzungen"
@@ -1181,6 +1212,39 @@ msgstr ""
 
 msgid "There were %1$i adequately powered studies (power > 80%%)."
 msgstr "Es gab %1$i angemessen gepowerte Studien (Teststärke > 80%%)."
+
+msgid ""
+"The Hamiltonian Monte Carlo procedure might be invalid -- There was %i "
+"divergent transition after warmup. This can be solved by carefully "
+"increasing 'Adapt delta' until there are no divergent transitions."
+msgid_plural ""
+"The Hamiltonian Monte Carlo procedure might be invalid -- There were %i "
+"divergent transitions after warmup. This can be solved by carefully "
+"increasing 'Adapt delta' until there are no divergent transitions."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid ""
+"Bayesian Fraction of Missing Information (BFMI) that was too low in %i chain "
+"indicating that the posterior distribution was not explored efficiently. Try "
+"increasing number of 'Burnin' and 'Iterations'."
+msgid_plural ""
+"Bayesian Fraction of Missing Information (BFMI) that was too low in %i "
+"chains indicating that the posterior distribution was not explored "
+"efficiently. Try increasing number of 'Burnin' and 'Iterations'."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid ""
+"The Hamiltonian Monte Carlo procedure might be inefficient -- %i transition "
+"exceeded the maximum tree depth. This can be solved by carefully increasing "
+"'Maximum tree depth'."
+msgid_plural ""
+"The Hamiltonian Monte Carlo procedure might be inefficient -- %i transitions "
+"exceeded the maximum tree depth. This can be solved by carefully increasing "
+"'Maximum tree depth'."
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."

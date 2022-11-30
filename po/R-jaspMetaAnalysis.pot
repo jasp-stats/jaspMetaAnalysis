@@ -1,14 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.0\n"
-"POT-Creation-Date: 2022-10-08 03:11\n"
+"POT-Creation-Date: 2022-11-30 10:33\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr ""
@@ -643,6 +644,30 @@ msgstr ""
 msgid "Plots"
 msgstr ""
 
+msgid "Intercept"
+msgstr ""
+
+msgid "At least one predictor needs to be specified."
+msgstr ""
+
+msgid "Warning:"
+msgstr ""
+
+msgid "Posterior distribution"
+msgstr ""
+
+msgid "Sampling diagnostics"
+msgstr ""
+
+msgid "Autocorrelation (%1$s)"
+msgstr ""
+
+msgid "Inference possibly unreliable -- MCMC chains might not have converged; The largest R-hat is %.3f > 1.01. To lower R-hat please increase 'Iterations', or 'Adapt delta' in the Options section."
+msgstr ""
+
+msgid "Low estimation accuracy -- The smallest Effective Sample Size (ESS) is %.2f < %1.0f. To increase accuracy please increase 'Iterations', or 'Adapt delta' in the Options section."
+msgstr ""
+
 msgid "The priors for publication bias were set incorrectly."
 msgstr ""
 
@@ -731,9 +756,6 @@ msgid "log(Inclusion BF)"
 msgstr ""
 
 msgid "P(M|data)"
-msgstr ""
-
-msgid "Warning:"
 msgstr ""
 
 msgid "Model Averaged Estimates"
@@ -1023,6 +1045,21 @@ msgstr ""
 
 msgid "There were %1$i adequately powered studies (power > 80%%)."
 msgstr ""
+
+msgid        "The Hamiltonian Monte Carlo procedure might be invalid -- There was %i divergent transition after warmup. This can be solved by carefully increasing 'Adapt delta' until there are no divergent transitions."
+msgid_plural "The Hamiltonian Monte Carlo procedure might be invalid -- There were %i divergent transitions after warmup. This can be solved by carefully increasing 'Adapt delta' until there are no divergent transitions."
+msgstr[0]    ""
+msgstr[1]    ""
+
+msgid        "Bayesian Fraction of Missing Information (BFMI) that was too low in %i chain indicating that the posterior distribution was not explored efficiently. Try increasing number of 'Burnin' and 'Iterations'."
+msgid_plural "Bayesian Fraction of Missing Information (BFMI) that was too low in %i chains indicating that the posterior distribution was not explored efficiently. Try increasing number of 'Burnin' and 'Iterations'."
+msgstr[0]    ""
+msgstr[1]    ""
+
+msgid        "The Hamiltonian Monte Carlo procedure might be inefficient -- %i transition exceeded the maximum tree depth. This can be solved by carefully increasing 'Maximum tree depth'."
+msgid_plural "The Hamiltonian Monte Carlo procedure might be inefficient -- %i transitions exceeded the maximum tree depth. This can be solved by carefully increasing 'Maximum tree depth'."
+msgstr[0]    ""
+msgstr[1]    ""
 
 msgid        "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
