@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2022-11-30 10:33\n"
+"POT-Creation-Date: 2022-12-17 02:39\n"
 "PO-Revision-Date: 2022-12-13 09:50+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
@@ -114,8 +114,8 @@ msgid ""
 msgstr ""
 "Modellgemittelte Posterior-Schätzungen für %3$s sind noch nicht verfügbar, "
 "aber werden in Zukunft hinzugefügt. Der Bayesfaktor basiert auf allen vier "
-"Modellen: Zufällige Effekte H%1$s & H%2$s gegenüber den festen Effekten H"
-"%1$s & H%2$s."
+"Modellen: Zufällige Effekte H%1$s & H%2$s gegenüber den festen Effekten "
+"H%1$s & H%2$s."
 
 msgid ""
 "Bayes factor of the (unconstrained/constrained) random effects H%1$s over "
@@ -146,8 +146,8 @@ msgid ""
 msgstr ""
 "Modellgemittelte Posterior-Schätzungen für %3$s sind noch nicht verfügbar, "
 "aber werden in Zukunft hinzugefügt. Der Bayesfaktor basiert auf allen vier "
-"Modellen: Feste Effekte H%1$s & H%2$s gegenüber den zufälligen Effekten H"
-"%1$s & H%2$s."
+"Modellen: Feste Effekte H%1$s & H%2$s gegenüber den zufälligen Effekten "
+"H%1$s & H%2$s."
 
 msgid ""
 "Bayes factor of the fixed effects H%1$s over the (unconstrained/constrained) "
@@ -161,17 +161,18 @@ msgid ""
 "Bayes factor for the ordered effects H%1$s versus the unconstrained (random) "
 "effects H%1$s model is %3$.3f."
 msgstr ""
-"Bayesfaktor der geordneten Effekte H%1$s gegenüber den festen Effekten H"
-"%2$s. Der Bayesfaktor für das Modell mit geordneten Effekten H%1$s gegenüber "
-"dem Modell mit unbeschränkten (zufälligen) Effekten H%1$s beträgt %3$.3f."
+"Bayesfaktor der geordneten Effekte H%1$s gegenüber den festen Effekten "
+"H%2$s. Der Bayesfaktor für das Modell mit geordneten Effekten H%1$s "
+"gegenüber dem Modell mit unbeschränkten (zufälligen) Effekten H%1$s beträgt "
+"%3$.3f."
 
 msgid ""
 "Bayes factor of the fixed effects H%2$s over the ordered effects H%1$s. The "
 "Bayes factor for the unconstrained (random) effects H%1$s versus the ordered "
 "effects H%1$s model is %3$.3f."
 msgstr ""
-"Bayesfaktor der festen Effekte H%2$s gegenüber den geordneten Effekten H"
-"%1$s. Der Bayesfaktor für das Modell mit unbeschränkten (zufälligen) "
+"Bayesfaktor der festen Effekte H%2$s gegenüber den geordneten Effekten "
+"H%1$s. Der Bayesfaktor für das Modell mit unbeschränkten (zufälligen) "
 "Effekten H%1$s gegenüber dem Modell mit geordneten Effekten H%1$s ist %3$.3f."
 
 msgid "Model Probabilities"
@@ -513,10 +514,6 @@ msgstr "FE-Modell"
 msgid "RE Model"
 msgstr "RE-Modell"
 
-msgid "Cannot set 'xlim' automatically. Please set this argument manually."
-msgstr ""
-"'xlim' konnte nicht automatisch gesetzt werden. Bitte setzen Sie es händisch."
-
 msgid "Profile Plot for"
 msgstr "Profilplot für"
 
@@ -525,22 +522,6 @@ msgstr "Beschränkte logarithmische Wahrscheinlichkeit"
 
 msgid "Residual Value"
 msgstr "Residualwert"
-
-msgid "Argument 'x' must be an object of class \"rma\"."
-msgstr "Argument 'x' muss ein Objekt der Klasse \"rma\" sein."
-
-msgid "Function not applicable to objects of class \"robust.rma\"."
-msgstr "Funktion nicht anwendbar für Objekte der Klasse \"robust.rma\"."
-
-msgid "Function not applicable to objects of class \"rma.ls\"."
-msgstr "Funktion nicht anwendbar für Objekte der Klasse \"rma.ls\"."
-
-msgid ""
-"Setting 'xlim' and 'zlim' automatically not possible (must set axis limits "
-"manually)."
-msgstr ""
-"Die automatische Einstellung von 'xlim' und 'zlim' war nicht möglich. Bitte "
-"setzen Sie die Achsengrenzen händisch."
 
 msgid "Radial Plot"
 msgstr "Polar- / Netzdiagramm"
@@ -640,9 +621,6 @@ msgstr "Beobachtet-Erwartet-Verhältnis"
 msgid "Concordance Statistic"
 msgstr "Konkordanzstatistik"
 
-msgid "The number of observed events must be specified."
-msgstr "Die Anzahl der beobachteten Ereignisse muss angegeben werden."
-
 msgid "Funnel Plot Asymmetry Tests"
 msgstr "Funnelplot Asymmetrie-Tests"
 
@@ -684,52 +662,6 @@ msgstr "Stichprobenumfang"
 
 msgid "Total events"
 msgstr "Ereignisse gesamt"
-
-msgid ""
-"Currently this only works with rma and rma.mv objects that have specified "
-"'yi' as a formula."
-msgstr ""
-"Dies funktioniert derzeit nur mit rma- und rma.mv-Objekten, die 'yi' als "
-"Formel spezifiziert haben."
-
-msgid "Formula is refering to factors that are not in the model."
-msgstr "Formel referiert auf Faktoren, die nicht im Modell sind."
-
-msgid "There are no predictors in the model that correspond to factors in '"
-msgstr "Im Modell gibt es keine passenden Prädiktoren zu Faktoren in '"
-
-msgid "'. Factor levels:"
-msgstr "'. Faktorstufen:"
-
-msgid ","
-msgstr ","
-
-msgid ". Data names:"
-msgstr ". Datennamen:"
-
-msgid "; Used Terms:"
-msgstr "; Benutzte Terme:"
-
-msgid "; Data set head:"
-msgstr "; Datensatztitel:"
-
-msgid "Argument 'contrasts' should be a matrix."
-msgstr "Argument 'Kontraste' muss eine Matrix sein."
-
-msgid "Invalid contrasts: Rows in"
-msgstr "Ungültige Kontraste: Zeilen in"
-
-msgid "do not add to 0."
-msgstr "summieren sich nicht zu 0."
-
-msgid "Only using first element of"
-msgstr "Nutze nur erstes Element von"
-
-msgid "."
-msgstr "."
-
-msgid "is smaller than 2."
-msgstr "ist kleiner als 2."
 
 msgid "Variance Components"
 msgstr "Varianz-Komponenten"
@@ -1031,9 +963,6 @@ msgstr "Es muss mindestens ein p-Wert-Grenzwert gesetzt werden."
 msgid "All p-value cutoffs needs to be between 0 and 1."
 msgstr "Alle p-Wert-Grenzwerte müssen zwischen 0 und 1 liegen."
 
-msgid "No steps"
-msgstr "Keine Schritte"
-
 msgid "95%% Confidence Interval"
 msgstr "95%% Konfidenzintervall"
 
@@ -1274,6 +1203,79 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "%i Beobachtung wurde aufgrund fehlender Werte entfernt."
 msgstr[1] "%i Beobachtungen wurden aufgrund fehlender Werte entfernt."
+
+#~ msgid "Cannot set 'xlim' automatically. Please set this argument manually."
+#~ msgstr ""
+#~ "'xlim' konnte nicht automatisch gesetzt werden. Bitte setzen Sie es "
+#~ "händisch."
+
+#~ msgid "Argument 'x' must be an object of class \"rma\"."
+#~ msgstr "Argument 'x' muss ein Objekt der Klasse \"rma\" sein."
+
+#~ msgid "Function not applicable to objects of class \"robust.rma\"."
+#~ msgstr "Funktion nicht anwendbar für Objekte der Klasse \"robust.rma\"."
+
+#~ msgid "Function not applicable to objects of class \"rma.ls\"."
+#~ msgstr "Funktion nicht anwendbar für Objekte der Klasse \"rma.ls\"."
+
+#~ msgid ""
+#~ "Setting 'xlim' and 'zlim' automatically not possible (must set axis "
+#~ "limits manually)."
+#~ msgstr ""
+#~ "Die automatische Einstellung von 'xlim' und 'zlim' war nicht möglich. "
+#~ "Bitte setzen Sie die Achsengrenzen händisch."
+
+#~ msgid "The number of observed events must be specified."
+#~ msgstr "Die Anzahl der beobachteten Ereignisse muss angegeben werden."
+
+#~ msgid ""
+#~ "Currently this only works with rma and rma.mv objects that have specified "
+#~ "'yi' as a formula."
+#~ msgstr ""
+#~ "Dies funktioniert derzeit nur mit rma- und rma.mv-Objekten, die 'yi' als "
+#~ "Formel spezifiziert haben."
+
+#~ msgid "Formula is refering to factors that are not in the model."
+#~ msgstr "Formel referiert auf Faktoren, die nicht im Modell sind."
+
+#~ msgid "There are no predictors in the model that correspond to factors in '"
+#~ msgstr "Im Modell gibt es keine passenden Prädiktoren zu Faktoren in '"
+
+#~ msgid "'. Factor levels:"
+#~ msgstr "'. Faktorstufen:"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid ". Data names:"
+#~ msgstr ". Datennamen:"
+
+#~ msgid "; Used Terms:"
+#~ msgstr "; Benutzte Terme:"
+
+#~ msgid "; Data set head:"
+#~ msgstr "; Datensatztitel:"
+
+#~ msgid "Argument 'contrasts' should be a matrix."
+#~ msgstr "Argument 'Kontraste' muss eine Matrix sein."
+
+#~ msgid "Invalid contrasts: Rows in"
+#~ msgstr "Ungültige Kontraste: Zeilen in"
+
+#~ msgid "do not add to 0."
+#~ msgstr "summieren sich nicht zu 0."
+
+#~ msgid "Only using first element of"
+#~ msgstr "Nutze nur erstes Element von"
+
+#~ msgid "."
+#~ msgstr "."
+
+#~ msgid "is smaller than 2."
+#~ msgstr "ist kleiner als 2."
+
+#~ msgid "No steps"
+#~ msgstr "Keine Schritte"
 
 #~ msgid "log(BF)"
 #~ msgstr "Log(BF)"

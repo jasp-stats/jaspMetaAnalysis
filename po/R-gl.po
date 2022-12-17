@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-11-30 10:33\n"
+"POT-Creation-Date: 2022-12-17 02:39\n"
 "PO-Revision-Date: 2022-12-10 12:02+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
@@ -111,8 +111,8 @@ msgid ""
 msgstr ""
 "As estimacións posteriores baséanse nos modelos que asumen que existe un "
 "efecto. O factor de Bayes baséase nos catro modelos: efectos fixos H%2$s & "
-"efectos aleatorios H%2$s sobre efectos fixos H%1$s & efectos aleatorios H"
-"%1$s."
+"efectos aleatorios H%2$s sobre efectos fixos H%1$s & efectos aleatorios "
+"H%1$s."
 
 msgid ""
 "Model averaged posterior estimates for %3$s are not yet available, but will "
@@ -121,8 +121,8 @@ msgid ""
 msgstr ""
 "As estimacións posteriores medias do modelo para %3$s aínda non están "
 "dispoñibles, pero se engadirán no futuro. O factor de Bayes baséase nos "
-"catro modelos: os efectos aleatorios H%1$s & H%2$s sobre os efectos fixos H"
-"%1$s & H%2$s."
+"catro modelos: os efectos aleatorios H%1$s & H%2$s sobre os efectos fixos "
+"H%1$s & H%2$s."
 
 msgid ""
 "Bayes factor of the (unconstrained/constrained) random effects H%1$s over "
@@ -153,8 +153,8 @@ msgid ""
 msgstr ""
 "As estimacións posteriores medias do modelo para %3$s aínda non están "
 "dispoñibles, pero se engadirán no futuro. O factor de Bayes baséase nos "
-"catro modelos: os efectos fixos H%1$s & H%2$s sobre os efectos aleatorios H"
-"%1$s & H%2$s."
+"catro modelos: os efectos fixos H%1$s & H%2$s sobre os efectos aleatorios "
+"H%1$s & H%2$s."
 
 msgid ""
 "Bayes factor of the fixed effects H%1$s over the (unconstrained/constrained) "
@@ -522,11 +522,6 @@ msgstr "Modelo de EF"
 msgid "RE Model"
 msgstr "Modelo de EA"
 
-msgid "Cannot set 'xlim' automatically. Please set this argument manually."
-msgstr ""
-"Non se pode establecer 'xlim' automaticamente. Por favor, determina este "
-"argumento manualmente."
-
 msgid "Profile Plot for"
 msgstr "Gráfica de Perfil para"
 
@@ -535,22 +530,6 @@ msgstr "Log-Verosimilitude Restrinxida"
 
 msgid "Residual Value"
 msgstr "Valor do Erro"
-
-msgid "Argument 'x' must be an object of class \"rma\"."
-msgstr "O argumento 'x' debe ser un obxecto de clase \"rma\"."
-
-msgid "Function not applicable to objects of class \"robust.rma\"."
-msgstr "Función no aplicable a obxectos de clase \"robust.rma\"."
-
-msgid "Function not applicable to objects of class \"rma.ls\"."
-msgstr "Función no aplicable a obxectos de clase \"rma.ls\"."
-
-msgid ""
-"Setting 'xlim' and 'zlim' automatically not possible (must set axis limits "
-"manually)."
-msgstr ""
-"Non é posible establecer 'xlim' e 'zlim' automaticamente (debes establecer "
-"os límites dos eixes manualmente)."
 
 msgid "Radial Plot"
 msgstr "Gráfica Radial"
@@ -651,9 +630,6 @@ msgstr "Proporción Observado-Agardado"
 msgid "Concordance Statistic"
 msgstr "Estatístico de Coincidencia"
 
-msgid "The number of observed events must be specified."
-msgstr "Debe especificarse o número de eventos observados."
-
 msgid "Funnel Plot Asymmetry Tests"
 msgstr "Probas de Asimetría de Gráficas en Funil"
 
@@ -695,52 +671,6 @@ msgstr "Tamaño da mostra"
 
 msgid "Total events"
 msgstr "Eventos totais"
-
-msgid ""
-"Currently this only works with rma and rma.mv objects that have specified "
-"'yi' as a formula."
-msgstr ""
-"Actualmente, isto só funciona con obxectos rma e rma.mv que teñan indicado a "
-"'yi' como unha fórmula."
-
-msgid "Formula is refering to factors that are not in the model."
-msgstr "A fórmula refírese a factores que non están no modelo."
-
-msgid "There are no predictors in the model that correspond to factors in '"
-msgstr "Non hai preditores no modelo que se correspondan con factores en '"
-
-msgid "'. Factor levels:"
-msgstr "'. Niveis dos factores:"
-
-msgid ","
-msgstr ","
-
-msgid ". Data names:"
-msgstr ". Nomes dos datos:"
-
-msgid "; Used Terms:"
-msgstr "; Termos Utilizados:"
-
-msgid "; Data set head:"
-msgstr "; Cabeceira do conxunto de datos:"
-
-msgid "Argument 'contrasts' should be a matrix."
-msgstr "O argumento 'contrastes' debe ser unha matriz."
-
-msgid "Invalid contrasts: Rows in"
-msgstr "Contrastes incorrectos: Filas en"
-
-msgid "do not add to 0."
-msgstr "non engadir a 0."
-
-msgid "Only using first element of"
-msgstr "Utilizando só o primeiro elemento de"
-
-msgid "."
-msgstr "."
-
-msgid "is smaller than 2."
-msgstr "é menor que 2."
 
 msgid "Variance Components"
 msgstr "Compoñentes de Varianza"
@@ -1044,9 +974,6 @@ msgid "All p-value cutoffs needs to be between 0 and 1."
 msgstr ""
 "Precísase que tódolos puntos de corte dos valores p estean entre 0 e 1."
 
-msgid "No steps"
-msgstr "Sen etapas"
-
 msgid "95%% Confidence Interval"
 msgstr "Intervalo co 95%% de Confianza"
 
@@ -1286,6 +1213,79 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "a observación %i eliminouse debido a valores ausentes."
 msgstr[1] "as observacións %i elimináronse debido a valores ausentes."
+
+#~ msgid "Cannot set 'xlim' automatically. Please set this argument manually."
+#~ msgstr ""
+#~ "Non se pode establecer 'xlim' automaticamente. Por favor, determina este "
+#~ "argumento manualmente."
+
+#~ msgid "Argument 'x' must be an object of class \"rma\"."
+#~ msgstr "O argumento 'x' debe ser un obxecto de clase \"rma\"."
+
+#~ msgid "Function not applicable to objects of class \"robust.rma\"."
+#~ msgstr "Función no aplicable a obxectos de clase \"robust.rma\"."
+
+#~ msgid "Function not applicable to objects of class \"rma.ls\"."
+#~ msgstr "Función no aplicable a obxectos de clase \"rma.ls\"."
+
+#~ msgid ""
+#~ "Setting 'xlim' and 'zlim' automatically not possible (must set axis "
+#~ "limits manually)."
+#~ msgstr ""
+#~ "Non é posible establecer 'xlim' e 'zlim' automaticamente (debes "
+#~ "establecer os límites dos eixes manualmente)."
+
+#~ msgid "The number of observed events must be specified."
+#~ msgstr "Debe especificarse o número de eventos observados."
+
+#~ msgid ""
+#~ "Currently this only works with rma and rma.mv objects that have specified "
+#~ "'yi' as a formula."
+#~ msgstr ""
+#~ "Actualmente, isto só funciona con obxectos rma e rma.mv que teñan "
+#~ "indicado a 'yi' como unha fórmula."
+
+#~ msgid "Formula is refering to factors that are not in the model."
+#~ msgstr "A fórmula refírese a factores que non están no modelo."
+
+#~ msgid "There are no predictors in the model that correspond to factors in '"
+#~ msgstr "Non hai preditores no modelo que se correspondan con factores en '"
+
+#~ msgid "'. Factor levels:"
+#~ msgstr "'. Niveis dos factores:"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid ". Data names:"
+#~ msgstr ". Nomes dos datos:"
+
+#~ msgid "; Used Terms:"
+#~ msgstr "; Termos Utilizados:"
+
+#~ msgid "; Data set head:"
+#~ msgstr "; Cabeceira do conxunto de datos:"
+
+#~ msgid "Argument 'contrasts' should be a matrix."
+#~ msgstr "O argumento 'contrastes' debe ser unha matriz."
+
+#~ msgid "Invalid contrasts: Rows in"
+#~ msgstr "Contrastes incorrectos: Filas en"
+
+#~ msgid "do not add to 0."
+#~ msgstr "non engadir a 0."
+
+#~ msgid "Only using first element of"
+#~ msgstr "Utilizando só o primeiro elemento de"
+
+#~ msgid "."
+#~ msgstr "."
+
+#~ msgid "is smaller than 2."
+#~ msgstr "é menor que 2."
+
+#~ msgid "No steps"
+#~ msgstr "Sen etapas"
 
 #~ msgid "log(BF)"
 #~ msgstr "log(FB)"

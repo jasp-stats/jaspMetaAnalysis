@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2022-11-30 10:33\n"
+"POT-Creation-Date: 2022-12-17 02:39\n"
 "PO-Revision-Date: 2022-09-28 12:22+0000\n"
 "Last-Translator: Jill de Ron <jillderon93@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
@@ -95,8 +95,8 @@ msgstr "%s is het groepsniveau effectgrootte."
 
 msgid "Bayes factor of the random effects H%1$s over the fixed effects H%1$s."
 msgstr ""
-"Bayes factor van de aselecte effecten H%1$s over de gefixeerde effecten H"
-"%1$s."
+"Bayes factor van de aselecte effecten H%1$s over de gefixeerde effecten "
+"H%1$s."
 
 msgid ""
 "Posterior estimates are based on the models that assume an effect to be "
@@ -127,8 +127,8 @@ msgstr ""
 
 msgid "Bayes factor of the fixed effects H%1$s over the random effects H%1$s."
 msgstr ""
-"Bayes factor van de gefixeerde effecten H%1$s over de aselecte effecten H"
-"%1$s."
+"Bayes factor van de gefixeerde effecten H%1$s over de aselecte effecten "
+"H%1$s."
 
 msgid ""
 "Model averaged posterior estimates are based on the models that assume an "
@@ -163,8 +163,8 @@ msgid ""
 "Bayes factor for the ordered effects H%1$s versus the unconstrained (random) "
 "effects H%1$s model is %3$.3f."
 msgstr ""
-"Bayes factor van de geordende effecten H%1$s over de gefixeerde effecten H"
-"%2$s. De Bayes factor voor de geordende effecten H%1$s versus de onbeperkte "
+"Bayes factor van de geordende effecten H%1$s over de gefixeerde effecten "
+"H%2$s. De Bayes factor voor de geordende effecten H%1$s versus de onbeperkte "
 "(aselecte) effecten H%1$s model is %3$.3f."
 
 msgid ""
@@ -172,8 +172,8 @@ msgid ""
 "Bayes factor for the unconstrained (random) effects H%1$s versus the ordered "
 "effects H%1$s model is %3$.3f."
 msgstr ""
-"Bayes factor van de gefixeerde effecten H%2$s over de geordende effecten H"
-"%1$s. De Bayes factor voor de onbeperkte (aselecte) effecten H%1$s versus "
+"Bayes factor van de gefixeerde effecten H%2$s over de geordende effecten "
+"H%1$s. De Bayes factor voor de onbeperkte (aselecte) effecten H%1$s versus "
 "het geordende effecten model H%1$s is %3$.3f."
 
 msgid "Model Probabilities"
@@ -515,9 +515,6 @@ msgstr "FE Model"
 msgid "RE Model"
 msgstr "RE Model"
 
-msgid "Cannot set 'xlim' automatically. Please set this argument manually."
-msgstr "Kan 'xlim' niet automatisch instelllen. Stel argument handmatig in."
-
 msgid "Profile Plot for"
 msgstr "Profielgrafiek voor"
 
@@ -526,20 +523,6 @@ msgstr "Beperkte Log-likelihood"
 
 msgid "Residual Value"
 msgstr "Residuen Waarde"
-
-msgid "Argument 'x' must be an object of class \"rma\"."
-msgstr "Argument 'x' moet een object van klasse \"rma\" zijn."
-
-msgid "Function not applicable to objects of class \"robust.rma\"."
-msgstr "Functie niet toepasbaar op objecten van klasse \"robust.rma\"."
-
-msgid "Function not applicable to objects of class \"rma.ls\"."
-msgstr "Functie niet toepasbaar op objecten van klasse \"rma.ls\"."
-
-msgid ""
-"Setting 'xlim' and 'zlim' automatically not possible (must set axis limits "
-"manually)."
-msgstr "Automatisch instellen 'xlim' en 'zlim' niet mogelijk (moet handmatig)."
 
 msgid "Radial Plot"
 msgstr "Radiaal Grafiek"
@@ -640,9 +623,6 @@ msgstr "Geobserveerd-Verwacht Verhouding"
 msgid "Concordance Statistic"
 msgstr "Overeenstemmingsstatistiek"
 
-msgid "The number of observed events must be specified."
-msgstr "Het aantal geobserveerde gebeurtenissen moet worden gespecificeerd."
-
 msgid "Funnel Plot Asymmetry Tests"
 msgstr "Trechtergrafiek Asymmetrie Toetsen"
 
@@ -684,53 +664,6 @@ msgstr "Steekproefomvang"
 
 msgid "Total events"
 msgstr "Totaal gebeurtenissen"
-
-msgid ""
-"Currently this only works with rma and rma.mv objects that have specified "
-"'yi' as a formula."
-msgstr ""
-"Dit werkt momenteel alleen met rma en rma.mv objecten die een "
-"gespecificeerde 'yi' als formule hebben."
-
-msgid "Formula is refering to factors that are not in the model."
-msgstr "Formule refereert naar factoren die zich niet in het model bevinden."
-
-msgid "There are no predictors in the model that correspond to factors in '"
-msgstr ""
-"Er zijn geen predictoren in het model die overeenkomen met factoren in '"
-
-msgid "'. Factor levels:"
-msgstr "'. Factorniveaus:"
-
-msgid ","
-msgstr ","
-
-msgid ". Data names:"
-msgstr ". Data namen:"
-
-msgid "; Used Terms:"
-msgstr "; Gebruikte termen:"
-
-msgid "; Data set head:"
-msgstr "; Gegevens titel:"
-
-msgid "Argument 'contrasts' should be a matrix."
-msgstr "Argument 'contrasten' moet een matrix zijn."
-
-msgid "Invalid contrasts: Rows in"
-msgstr "Invalide contrasten: Rijen in"
-
-msgid "do not add to 0."
-msgstr "telt niet op tot 0."
-
-msgid "Only using first element of"
-msgstr "Gebruik alleen het eerste element van"
-
-msgid "."
-msgstr "."
-
-msgid "is smaller than 2."
-msgstr "is kleiner dan 2."
 
 msgid "Variance Components"
 msgstr "Variantie Componenten"
@@ -1030,9 +963,6 @@ msgstr "Er moet minstens één p-afkapwaarde worden ingesteld."
 msgid "All p-value cutoffs needs to be between 0 and 1."
 msgstr "Alle p-afkapwaarden moeten tussen 0 en 1 liggen."
 
-msgid "No steps"
-msgstr "Geen stappen"
-
 msgid "95%% Confidence Interval"
 msgstr "95%% Betrouwbaarheidsinterval"
 
@@ -1252,6 +1182,78 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "%i observatie is verwijderd, omdat de waarde ontbreekt."
 msgstr[1] "%i observaties zijn verwijderd omdat de waarden ontbreken."
+
+#~ msgid "Cannot set 'xlim' automatically. Please set this argument manually."
+#~ msgstr "Kan 'xlim' niet automatisch instelllen. Stel argument handmatig in."
+
+#~ msgid "Argument 'x' must be an object of class \"rma\"."
+#~ msgstr "Argument 'x' moet een object van klasse \"rma\" zijn."
+
+#~ msgid "Function not applicable to objects of class \"robust.rma\"."
+#~ msgstr "Functie niet toepasbaar op objecten van klasse \"robust.rma\"."
+
+#~ msgid "Function not applicable to objects of class \"rma.ls\"."
+#~ msgstr "Functie niet toepasbaar op objecten van klasse \"rma.ls\"."
+
+#~ msgid ""
+#~ "Setting 'xlim' and 'zlim' automatically not possible (must set axis "
+#~ "limits manually)."
+#~ msgstr ""
+#~ "Automatisch instellen 'xlim' en 'zlim' niet mogelijk (moet handmatig)."
+
+#~ msgid "The number of observed events must be specified."
+#~ msgstr "Het aantal geobserveerde gebeurtenissen moet worden gespecificeerd."
+
+#~ msgid ""
+#~ "Currently this only works with rma and rma.mv objects that have specified "
+#~ "'yi' as a formula."
+#~ msgstr ""
+#~ "Dit werkt momenteel alleen met rma en rma.mv objecten die een "
+#~ "gespecificeerde 'yi' als formule hebben."
+
+#~ msgid "Formula is refering to factors that are not in the model."
+#~ msgstr ""
+#~ "Formule refereert naar factoren die zich niet in het model bevinden."
+
+#~ msgid "There are no predictors in the model that correspond to factors in '"
+#~ msgstr ""
+#~ "Er zijn geen predictoren in het model die overeenkomen met factoren in '"
+
+#~ msgid "'. Factor levels:"
+#~ msgstr "'. Factorniveaus:"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid ". Data names:"
+#~ msgstr ". Data namen:"
+
+#~ msgid "; Used Terms:"
+#~ msgstr "; Gebruikte termen:"
+
+#~ msgid "; Data set head:"
+#~ msgstr "; Gegevens titel:"
+
+#~ msgid "Argument 'contrasts' should be a matrix."
+#~ msgstr "Argument 'contrasten' moet een matrix zijn."
+
+#~ msgid "Invalid contrasts: Rows in"
+#~ msgstr "Invalide contrasten: Rijen in"
+
+#~ msgid "do not add to 0."
+#~ msgstr "telt niet op tot 0."
+
+#~ msgid "Only using first element of"
+#~ msgstr "Gebruik alleen het eerste element van"
+
+#~ msgid "."
+#~ msgstr "."
+
+#~ msgid "is smaller than 2."
+#~ msgstr "is kleiner dan 2."
+
+#~ msgid "No steps"
+#~ msgstr "Geen stappen"
 
 #~ msgid "log(BF)"
 #~ msgstr "log(BF)"

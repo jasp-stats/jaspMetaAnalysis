@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2022-11-30 10:33\n"
+"POT-Creation-Date: 2022-12-17 02:39\n"
 "PO-Revision-Date: 2022-08-29 00:27+0000\n"
 "Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
@@ -506,9 +506,6 @@ msgstr "Modelo"
 msgid "RE Model"
 msgstr "Modelo"
 
-msgid "Cannot set 'xlim' automatically. Please set this argument manually."
-msgstr ""
-
 msgid "Profile Plot for"
 msgstr ""
 
@@ -518,20 +515,6 @@ msgstr ""
 #, fuzzy
 msgid "Residual Value"
 msgstr "Resíduos"
-
-msgid "Argument 'x' must be an object of class \"rma\"."
-msgstr ""
-
-msgid "Function not applicable to objects of class \"robust.rma\"."
-msgstr ""
-
-msgid "Function not applicable to objects of class \"rma.ls\"."
-msgstr ""
-
-msgid ""
-"Setting 'xlim' and 'zlim' automatically not possible (must set axis limits "
-"manually)."
-msgstr ""
 
 msgid "Radial Plot"
 msgstr ""
@@ -635,9 +618,6 @@ msgstr ""
 msgid "Concordance Statistic"
 msgstr ""
 
-msgid "The number of observed events must be specified."
-msgstr ""
-
 msgid "Funnel Plot Asymmetry Tests"
 msgstr ""
 
@@ -680,50 +660,6 @@ msgid "Sample size"
 msgstr "Quartil da amostra"
 
 msgid "Total events"
-msgstr ""
-
-msgid ""
-"Currently this only works with rma and rma.mv objects that have specified "
-"'yi' as a formula."
-msgstr ""
-
-msgid "Formula is refering to factors that are not in the model."
-msgstr ""
-
-msgid "There are no predictors in the model that correspond to factors in '"
-msgstr ""
-
-msgid "'. Factor levels:"
-msgstr ""
-
-msgid ","
-msgstr ","
-
-msgid ". Data names:"
-msgstr ""
-
-msgid "; Used Terms:"
-msgstr ""
-
-msgid "; Data set head:"
-msgstr ""
-
-msgid "Argument 'contrasts' should be a matrix."
-msgstr ""
-
-msgid "Invalid contrasts: Rows in"
-msgstr ""
-
-msgid "do not add to 0."
-msgstr ""
-
-msgid "Only using first element of"
-msgstr ""
-
-msgid "."
-msgstr "."
-
-msgid "is smaller than 2."
 msgstr ""
 
 #, fuzzy
@@ -1043,9 +979,6 @@ msgstr ""
 msgid "All p-value cutoffs needs to be between 0 and 1."
 msgstr ""
 
-msgid "No steps"
-msgstr ""
-
 msgid "95%% Confidence Interval"
 msgstr "Intervalo de Confiança 95%%"
 
@@ -1250,6 +1183,12 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "%i observação foi removida devido a valores ausentes."
 msgstr[1] "%i observações foram removidas devido a valores ausentes."
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "."
+#~ msgstr "."
 
 #, fuzzy
 #~ msgid "Observed Outcome"

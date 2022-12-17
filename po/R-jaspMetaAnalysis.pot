@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.0\n"
-"POT-Creation-Date: 2022-11-30 10:33\n"
+"POT-Creation-Date: 2022-12-17 02:39\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -434,9 +434,6 @@ msgstr ""
 msgid "RE Model"
 msgstr ""
 
-msgid "Cannot set 'xlim' automatically. Please set this argument manually."
-msgstr ""
-
 msgid "Profile Plot for"
 msgstr ""
 
@@ -444,18 +441,6 @@ msgid "Restricted Log-Likelihood"
 msgstr ""
 
 msgid "Residual Value"
-msgstr ""
-
-msgid "Argument 'x' must be an object of class \"rma\"."
-msgstr ""
-
-msgid "Function not applicable to objects of class \"robust.rma\"."
-msgstr ""
-
-msgid "Function not applicable to objects of class \"rma.ls\"."
-msgstr ""
-
-msgid "Setting 'xlim' and 'zlim' automatically not possible (must set axis limits manually)."
 msgstr ""
 
 msgid "Radial Plot"
@@ -551,9 +536,6 @@ msgstr ""
 msgid "Concordance Statistic"
 msgstr ""
 
-msgid "The number of observed events must be specified."
-msgstr ""
-
 msgid "Funnel Plot Asymmetry Tests"
 msgstr ""
 
@@ -594,48 +576,6 @@ msgid "Sample size"
 msgstr ""
 
 msgid "Total events"
-msgstr ""
-
-msgid "Currently this only works with rma and rma.mv objects that have specified 'yi' as a formula."
-msgstr ""
-
-msgid "Formula is refering to factors that are not in the model."
-msgstr ""
-
-msgid "There are no predictors in the model that correspond to factors in '"
-msgstr ""
-
-msgid "'. Factor levels:"
-msgstr ""
-
-msgid ","
-msgstr ""
-
-msgid ". Data names:"
-msgstr ""
-
-msgid "; Used Terms:"
-msgstr ""
-
-msgid "; Data set head:"
-msgstr ""
-
-msgid "Argument 'contrasts' should be a matrix."
-msgstr ""
-
-msgid "Invalid contrasts: Rows in"
-msgstr ""
-
-msgid "do not add to 0."
-msgstr ""
-
-msgid "Only using first element of"
-msgstr ""
-
-msgid "."
-msgstr ""
-
-msgid "is smaller than 2."
 msgstr ""
 
 msgid "Variance Components"
@@ -903,9 +843,6 @@ msgid "At least one p-value cutoff needs to be set."
 msgstr ""
 
 msgid "All p-value cutoffs needs to be between 0 and 1."
-msgstr ""
-
-msgid "No steps"
 msgstr ""
 
 msgid "95%% Confidence Interval"
