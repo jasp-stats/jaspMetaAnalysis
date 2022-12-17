@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2022-12-10 12:02+0000\n"
+"Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
+"Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/gl/>\n"
+"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.15-dev\n"
 "X-Language: gl_ES\n"
 "X-Source-Language: C\n"
 "X-Qt-Contexts: true\n"
@@ -586,7 +592,7 @@ msgstr "Probabilidades posteriores do modelo"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Priors"
-msgstr "Previos"
+msgstr "Previas"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Effect size"
@@ -1554,7 +1560,7 @@ msgstr "Gráfica"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "Priors"
-msgstr "Previos"
+msgstr "Previas"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "Summary estimate (O:E Ratio)"
@@ -1714,197 +1720,180 @@ msgstr "Medida"
 
 msgctxt "Description|"
 msgid "Penalized Meta-Analysis"
-msgstr ""
+msgstr "Meta-Análise penalizada"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Effect Size"
 msgstr "Magnitude do Efecto"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Effect Size Standard Error"
 msgstr "Erro Padrón da Magnitude do Efecto"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Method"
 msgstr "Método"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Horseshoe"
-msgstr ""
+msgstr "Ferradura"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Lasso"
-msgstr ""
+msgstr "Lasso"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Covariates"
 msgstr "Covariantes"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Factors"
 msgstr "Factores"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Clustering"
-msgstr ""
+msgstr "Conglomerados"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Model"
 msgstr "Modelo"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Components"
 msgstr "Compoñentes"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Model Terms"
 msgstr "Elementos do Modelo"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Include intercept"
 msgstr "Incluír a constante"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale predictors"
-msgstr ""
+msgstr "Escalar predictores"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Priors"
-msgstr "Previos"
+msgstr "Previas"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Df"
-msgstr ""
+msgstr "GL"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale"
-msgstr ""
+msgstr "Escala"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Df (global)"
-msgstr ""
+msgstr "GL (total)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Df (slab)"
-msgstr ""
+msgstr "GL (slab)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale (global)"
-msgstr ""
+msgstr "Escala (total)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale (slab)"
-msgstr ""
+msgstr "Escala (slab)"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Inference"
 msgstr "Inferencia"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Estimates"
 msgstr "Estimacións"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Heterogeneity"
 msgstr "Heteroxeneidade"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "I²"
-msgstr ""
+msgstr "I²"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Posterior plots"
-msgstr ""
+msgstr "Gráficas posteriores"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Model terms"
-msgstr ""
+msgstr "Elementos do modelo"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Plotted term"
-msgstr ""
+msgstr "Elemento representado"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "MCMC diagnostics"
-msgstr ""
+msgstr "Diagnósticos MCMC"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Horizontal axis"
-msgstr ""
+msgstr "Eixe horizontal"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Vertical axis"
-msgstr ""
+msgstr "Eixe vertical"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Plot type"
-msgstr ""
+msgstr "Tipo de gráfica"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Traceplot"
-msgstr ""
+msgstr "Gráfica de trazado"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scatterplot"
-msgstr ""
+msgstr "Gráfica de dispersión"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Histogram"
-msgstr ""
+msgstr "Histograma"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Density"
-msgstr ""
+msgstr "Densidade"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Autocorrelations"
-msgstr ""
+msgstr "Autocorrelacións"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Advanced"
 msgstr "Avanzado"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Estimation settings (MCMC)"
 msgstr "Configuracións da estimación (MCMC)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Warmup"
-msgstr ""
+msgstr "Quecemento"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Iterations"
 msgstr "Iteracións"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Chains"
 msgstr "Cadeas"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Adapt delta"
-msgstr ""
+msgstr "Delta de axuste"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Maximum treedepth"
-msgstr ""
+msgstr "Máxima profundidade da árbore"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "samples:"
-msgstr ""
+msgstr "mostras:"
