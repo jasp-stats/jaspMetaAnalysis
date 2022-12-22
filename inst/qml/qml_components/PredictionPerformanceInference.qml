@@ -47,7 +47,7 @@ Section
 			name:		"linkOE"
 			visible:	measure == "OE"
 			label:		qsTr("Within-study variation")
-			values: 	if (method.value == "Fixed Effects" || method.value == "Maximum Likelihood" || analysisType == "bayesian"){
+			values: 	if (analysisType == "bayesian"){ // removing as metamisc's link function is broken for frequentist option: method.value == "Fixed Effects" || method.value == "Maximum Likelihood" || 
 				[
 					{ label: qsTr("Normal/Log"),		value: "normal/log"			},
 					{ label: qsTr("Normal/Identity"),	value: "normal/identity"	},
