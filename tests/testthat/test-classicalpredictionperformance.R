@@ -5,28 +5,28 @@ data("EuroSCORE", package = "metamisc")
 
 # OE: default settings all output ----
 options <- analysisOptions("ClassicalPredictionPerformance")
-options$exportColumns <- FALSE
+options$exportComputedEffectSize <- FALSE
 options$forestPlot <- TRUE
 options$forestPlotEstimates <- TRUE
 options$forestPlotLabels <- TRUE
-options$funnelAsymmetryTest <- TRUE
-options$funnelAsymmetryTestDebrayFIV <- TRUE
-options$funnelAsymmetryTestEggerFIV <- TRUE
-options$funnelAsymmetryTestEggerUW <- TRUE
-options$funnelAsymmetryTestMacaskillFIV <- TRUE
-options$funnelAsymmetryTestMacaskillFPV <- TRUE
-options$funnelAsymmetryTestPeters <- TRUE
-options$funnelAsymmetryTestPlot <- TRUE
-options$inputCI <- list()
-options$inputE <- "e.events"
-options$inputLabels <- ""
-options$inputMeasure <- ""
-options$inputN <- "n"
-options$inputO <- "n.events"
-options$inputSE <- ""
-options$linkCstat <- "normal/logit"
-options$linkOE <- "normal/log"
-options$measure <- "OE"
+options$funnelPlotAsymmetryTest <- TRUE
+options$funnelPlotAsymmetryTestDebray <- TRUE
+options$funnelPlotAsymmetryTestEggerMultiplicativeOverdispersion <- TRUE
+options$funnelPlotAsymmetryTestEggerUnweighted <- TRUE
+options$funnelPlotAsymmetryTestMacaskill <- TRUE
+options$funnelPlotAsymmetryTestMacaskillPooled <- TRUE
+options$funnelPlotAsymmetryTestPeters <- TRUE
+options$funnelPlotAsymmetryTestPlot <- TRUE
+options$effectSizeCi <- list()
+options$numberOfExpectedEvents <- "e.events"
+options$studyLabel <- ""
+options$effectSize <- ""
+options$numberOfParticipants <- "n"
+options$numberOfObservedEvents <- "n.events"
+options$effectSizeSe <- ""
+options$withinStudyVariation <- "normal/logit"
+options$withinStudyVariation <- "normal/log"
+options$measure <- "oeRatio"
 options$method <- "Restricted ML"
 options$priorAndPosteriorPlot <- FALSE
 set.seed(1)
@@ -92,28 +92,28 @@ test_that("Observed-Expected Ratio Meta-Analysis Summary table results match", {
 # OE: ML, Poisson/log (the most likely to break, treated differently internally in metamisc), no labels & no estimates in forest ----
 
 # options <- analysisOptions("ClassicalPredictionPerformance")
-# options$exportColumns <- FALSE
+# options$exportComputedEffectSize <- FALSE
 # options$forestPlot <- TRUE
 # options$forestPlotEstimates <- FALSE
 # options$forestPlotLabels <- FALSE
-# options$funnelAsymmetryTest <- TRUE
-# options$funnelAsymmetryTestDebrayFIV <- TRUE
-# options$funnelAsymmetryTestEggerFIV <- TRUE
-# options$funnelAsymmetryTestEggerUW <- TRUE
-# options$funnelAsymmetryTestMacaskillFIV <- TRUE
-# options$funnelAsymmetryTestMacaskillFPV <- TRUE
-# options$funnelAsymmetryTestPeters <- TRUE
-# options$funnelAsymmetryTestPlot <- TRUE
-# options$inputCI <- list()
-# options$inputE <- "e.events"
-# options$inputLabels <- ""
-# options$inputMeasure <- ""
-# options$inputN <- "n"
-# options$inputO <- "n.events"
-# options$inputSE <- ""
-# options$linkCstat <- "normal/logit"
-# options$linkOE <- "poisson/log"
-# options$measure <- "OE"
+# options$funnelPlotAsymmetryTest <- TRUE
+# options$funnelPlotAsymmetryTestDebray <- TRUE
+# options$funnelPlotAsymmetryTestEggerMultiplicativeOverdispersion <- TRUE
+# options$funnelPlotAsymmetryTestEggerUnweighted <- TRUE
+# options$funnelPlotAsymmetryTestMacaskill <- TRUE
+# options$funnelPlotAsymmetryTestMacaskillPooled <- TRUE
+# options$funnelPlotAsymmetryTestPeters <- TRUE
+# options$funnelPlotAsymmetryTestPlot <- TRUE
+# options$effectSizeCi <- list()
+# options$numberOfExpectedEvents <- "e.events"
+# options$studyLabel <- ""
+# options$effectSize <- ""
+# options$numberOfParticipants <- "n"
+# options$numberOfObservedEvents <- "n.events"
+# options$effectSizeSe <- ""
+# options$withinStudyVariation <- "normal/logit"
+# options$withinStudyVariation <- "poisson/log"
+# options$measure <- "oeRatio"
 # options$method <- "Maximum Likelihood"
 # options$priorAndPosteriorPlot <- FALSE
 # set.seed(1)
@@ -179,28 +179,27 @@ test_that("Observed-Expected Ratio Meta-Analysis Summary table results match", {
 # cstat: FE, Normal/logit (with CI) ----
 
 options <- analysisOptions("ClassicalPredictionPerformance")
-options$exportColumns <- FALSE
+options$exportComputedEffectSize <- FALSE
 options$forestPlot <- TRUE
 options$forestPlotEstimates <- TRUE
 options$forestPlotLabels <- TRUE
-options$funnelAsymmetryTest <- TRUE
-options$funnelAsymmetryTestDebrayFIV <- TRUE
-options$funnelAsymmetryTestEggerFIV <- TRUE
-options$funnelAsymmetryTestEggerUW <- TRUE
-options$funnelAsymmetryTestMacaskillFIV <- TRUE
-options$funnelAsymmetryTestMacaskillFPV <- TRUE
-options$funnelAsymmetryTestPeters <- TRUE
-options$funnelAsymmetryTestPlot <- TRUE
-options$inputCI <- list(c("c.index.95CIl", "c.index.95CIu"))
-options$inputE <- "e.events"
-options$inputLabels <- ""
-options$inputMeasure <- "c.index"
-options$inputN <- "n"
-options$inputO <- "n.events"
-options$inputSE <- ""
-options$linkCstat <- "normal/logit"
-options$linkOE <- "poisson/log"
-options$measure <- "cstat"
+options$funnelPlotAsymmetryTest <- TRUE
+options$funnelPlotAsymmetryTestDebray <- TRUE
+options$funnelPlotAsymmetryTestEggerMultiplicativeOverdispersion <- TRUE
+options$funnelPlotAsymmetryTestEggerUnweighted <- TRUE
+options$funnelPlotAsymmetryTestMacaskill <- TRUE
+options$funnelPlotAsymmetryTestMacaskillPooled <- TRUE
+options$funnelPlotAsymmetryTestPeters <- TRUE
+options$funnelPlotAsymmetryTestPlot <- TRUE
+options$effectSizeCi <- list(c("c.index.95CIl", "c.index.95CIu"))
+options$numberOfExpectedEvents <- "e.events"
+options$studyLabel <- ""
+options$effectSize <- "c.index"
+options$numberOfParticipants <- "n"
+options$numberOfObservedEvents <- "n.events"
+options$effectSizeSe <- ""
+options$withinStudyVariation <- "normal/logit"
+options$measure <- "cStatistic"
 options$method <- "Fixed Effects"
 options$priorAndPosteriorPlot <- FALSE
 set.seed(1)
@@ -265,28 +264,27 @@ test_that("Concordance Statistic Meta-Analysis Summary table results match", {
 
 # cstat: ML, Normal/identity (incomplete data) ----
 options <- analysisOptions("ClassicalPredictionPerformance")
-options$exportColumns <- FALSE
+options$exportComputedEffectSize <- FALSE
 options$forestPlot <- TRUE
 options$forestPlotEstimates <- FALSE
 options$forestPlotLabels <- FALSE
-options$funnelAsymmetryTest <- TRUE
-options$funnelAsymmetryTestDebrayFIV <- TRUE
-options$funnelAsymmetryTestEggerFIV <- TRUE
-options$funnelAsymmetryTestEggerUW <- TRUE
-options$funnelAsymmetryTestMacaskillFIV <- TRUE
-options$funnelAsymmetryTestMacaskillFPV <- TRUE
-options$funnelAsymmetryTestPeters <- TRUE
-options$funnelAsymmetryTestPlot <- TRUE
-options$inputCI <- list()
-options$inputE <- "e.events"
-options$inputLabels <- ""
-options$inputMeasure <- "c.index"
-options$inputN <- ""
-options$inputO <- "n.events"
-options$inputSE <- "se.c.index"
-options$linkCstat <- "normal/identity"
-options$linkOE <- "poisson/log"
-options$measure <- "cstat"
+options$funnelPlotAsymmetryTest <- TRUE
+options$funnelPlotAsymmetryTestDebray <- TRUE
+options$funnelPlotAsymmetryTestEggerMultiplicativeOverdispersion <- TRUE
+options$funnelPlotAsymmetryTestEggerUnweighted <- TRUE
+options$funnelPlotAsymmetryTestMacaskill <- TRUE
+options$funnelPlotAsymmetryTestMacaskillPooled <- TRUE
+options$funnelPlotAsymmetryTestPeters <- TRUE
+options$funnelPlotAsymmetryTestPlot <- TRUE
+options$effectSizeCi <- list()
+options$numberOfExpectedEvents <- "e.events"
+options$studyLabel <- ""
+options$effectSize <- "c.index"
+options$numberOfParticipants <- ""
+options$numberOfObservedEvents <- "n.events"
+options$effectSizeSe <- "se.c.index"
+options$withinStudyVariation <- "normal/identity"
+options$measure <- "cStatistic"
 options$method <- "Maximum Likelihood"
 options$priorAndPosteriorPlot <- FALSE
 set.seed(1)

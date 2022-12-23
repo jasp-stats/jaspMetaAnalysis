@@ -145,4 +145,123 @@ Upgrades
 		ChangeRename { from: "BFComputation"; to: "bayesFactorComputation" }
 		ChangeRename { from: "iterBridge"; to: "bridgeSamplingSamples" }
 	}
+	Upgrade
+	{
+		functionName:	"ClassicalPredictionPerformance"
+		fromVersion:	"0.16.4"
+		toVersion:		"0.17"
+
+		// PredictionPerformanceData.qml
+		ChangeRename { from: "inputMeasure"; to: "effectSize" }
+		ChangeRename { from: "inputSE"; to: "effectSizeSe" }
+		ChangeRename { from: "inputCI"; to: "effectSizeCi" }
+		ChangeRename { from: "inputN"; to: "numberOfParticipants" }
+		ChangeRename { from: "inputO"; to: "numberOfObservedEvents" }
+		ChangeRename { from: "inputE"; to: "numberOfExpectedEvents" }
+		ChangeRename { from: "inputLabels"; to: "studyLabel" }
+
+		ChangeJS
+		{
+			name:		"measure"
+			jsFunction:	function(options)
+			{
+				switch(options["measure"])
+				{
+					case "OE":		return "oeRatio";
+					case "cstat":	return "cStatistic";
+				}
+			}
+		}
+
+		// PredictionPerformanceInference
+		ChangeRename { from: "linkOE"; to: "withinStudyVariation" }
+		ChangeRename { from: "linkCstat"; to: "withinStudyVariation" }
+		ChangeRename { from: "exportColumns"; to: "exportComputedEffectSize" }
+		ChangeRename { from: "exportOE"; to: "exportComputedEffectSizeOeRatioColumnName" }
+		ChangeRename { from: "exportOElCI"; to: "exportComputedEffectSizeOeRatioLCiColumnName" }
+		ChangeRename { from: "exportOEuCI"; to: "exportComputedEffectSizeOeRatioUCiColumnName" }
+		ChangeRename { from: "exportCstat"; to: "exportComputedEffectSizeCStatisticColumnName" }
+		ChangeRename { from: "exportCstatlCI"; to: "exportComputedEffectSizeCStatisticLCiColumnName" }
+		ChangeRename { from: "exportCstatuCI"; to: "exportComputedEffectSizeCStatisticUCiColumnName" }
+		ChangeRename { from: "funnelAsymmetryTest"; to: "funnelPlotAsymmetryTest" }
+		ChangeRename { from: "funnelAsymmetryTestEggerUW"; to: "funnelPlotAsymmetryTestEggerUnweighted" }
+		ChangeRename { from: "funnelAsymmetryTestEggerFIV"; to: "funnelPlotAsymmetryTestEggerMultiplicativeOverdispersion" }
+		ChangeRename { from: "funnelAsymmetryTestMacaskillFIV"; to: "funnelPlotAsymmetryTestMacaskill" }
+		ChangeRename { from: "funnelAsymmetryTestMacaskillFPV"; to: "funnelPlotAsymmetryTestMacaskillPooled" }
+		ChangeRename { from: "funnelAsymmetryTestPeters"; to: "funnelPlotAsymmetryTestPeters" }
+		ChangeRename { from: "funnelAsymmetryTestDebrayFIV"; to: "funnelPlotAsymmetryTestDebray" }
+		ChangeRename { from: "funnelAsymmetryTestPlot"; to: "funnelPlotAsymmetryTestPlot" }
+	}
+
+	Upgrade
+	{
+		functionName:	"BayesianPredictionPerformance"
+		fromVersion:	"0.16.4"
+		toVersion:		"0.17"
+
+		// PredictionPerformanceData.qml
+		ChangeRename { from: "inputMeasure"; to: "effectSize" }
+		ChangeRename { from: "inputSE"; to: "effectSizeSe" }
+		ChangeRename { from: "inputCI"; to: "effectSizeCi" }
+		ChangeRename { from: "inputN"; to: "numberOfParticipants" }
+		ChangeRename { from: "inputO"; to: "numberOfObservedEvents" }
+		ChangeRename { from: "inputE"; to: "numberOfExpectedEvents" }
+		ChangeRename { from: "inputLabels"; to: "studyLabel" }
+
+		ChangeJS
+		{
+			name:		"measure"
+			jsFunction:	function(options)
+			{
+				switch(options["measure"])
+				{
+					case "OE":		return "oeRatio";
+					case "cstat":	return "cStatistic";
+				}
+			}
+		}
+
+		// PredictionPerformanceInference
+		ChangeRename { from: "linkOE"; to: "withinStudyVariation" }
+		ChangeRename { from: "linkCstat"; to: "withinStudyVariation" }
+		ChangeRename { from: "exportColumns"; to: "exportComputedEffectSize" }
+		ChangeRename { from: "exportOE"; to: "exportComputedEffectSizeOeRatioColumnName" }
+		ChangeRename { from: "exportOElCI"; to: "exportComputedEffectSizeOeRatioLCiColumnName" }
+		ChangeRename { from: "exportOEuCI"; to: "exportComputedEffectSizeOeRatioUCiColumnName" }
+		ChangeRename { from: "exportCstat"; to: "exportComputedEffectSizeCStatisticColumnName" }
+		ChangeRename { from: "exportCstatlCI"; to: "exportComputedEffectSizeCStatisticLCiColumnName" }
+		ChangeRename { from: "exportCstatuCI"; to: "exportComputedEffectSizeCStatisticUCiColumnName" }
+		ChangeRename { from: "funnelAsymmetryTest"; to: "funnelPlotAsymmetryTest" }
+		ChangeRename { from: "funnelAsymmetryTestEggerUW"; to: "funnelPlotAsymmetryTestEggerUnweighted" }
+		ChangeRename { from: "funnelAsymmetryTestEggerFIV"; to: "funnelPlotAsymmetryTestEggerMultiplicativeOverdispersion" }
+		ChangeRename { from: "funnelAsymmetryTestMacaskillFIV"; to: "funnelPlotAsymmetryTestMacaskill" }
+		ChangeRename { from: "funnelAsymmetryTestMacaskillFPV"; to: "funnelPlotAsymmetryTestMacaskillPooled" }
+		ChangeRename { from: "funnelAsymmetryTestPeters"; to: "funnelPlotAsymmetryTestPeters" }
+		ChangeRename { from: "funnelAsymmetryTestDebrayFIV"; to: "funnelPlotAsymmetryTestDebray" }
+		ChangeRename { from: "funnelAsymmetryTestPlot"; to: "funnelPlotAsymmetryTestPlot" }
+	
+		// PredictionPerformancePriors
+		ChangeRename { from: "priorMuNMeam"; to: "muNormalPriorMean" }
+		ChangeRename { from: "priorMuNSD"; to: "muNormalPriorSd" }
+		ChangeRename { from: "priorTau"; to: "tauPrior" }
+		ChangeJS
+		{
+			name:		"tauPrior"
+			jsFunction:	function(options)
+			{
+				switch(options["measure"])
+				{
+					case "priorTauU":	return "uniformPrior";
+					case "priorTauT":	return "tPrior";
+				}
+			}
+		}
+		ChangeRename { from: "priorTauUMin"; to: "tauUniformPriorMin" }
+		ChangeRename { from: "priorTauUMax"; to: "tauUniformPriorMax" }
+		ChangeRename { from: "priorTauTLocation"; to: "tauTPriorLocation" }
+		ChangeRename { from: "priorTauTScale"; to: "tauTPriorScale" }
+		ChangeRename { from: "priorTauTDf"; to: "tauTPriorDf" }
+		ChangeRename { from: "priorTauTMin"; to: "tauTPriorMin" }
+		ChangeRename { from: "priorTauTMax"; to: "tauTPriorMax" }
+	}
 }
