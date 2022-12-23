@@ -264,4 +264,72 @@ Upgrades
 		ChangeRename { from: "priorTauTMin"; to: "tauTPriorMin" }
 		ChangeRename { from: "priorTauTMax"; to: "tauTPriorMax" }
 	}
+
+	Upgrade
+	{
+		functionName:	"WaapWls"
+		fromVersion:	"0.16.4"
+		toVersion:		"0.17"
+
+		// WaapWls.qml
+		ChangeRename { from: "inputES"; to: "effectSize" }
+		ChangeRename { from: "inputSE"; to: "effectSizeSe" }
+		ChangeRename { from: "inputCI"; to: "effectSizeCi" }
+		ChangeRename { from: "inputN"; to: "sampleSize" }
+		ChangeRename { from: "inputLabels"; to: "studyLabel" }
+		ChangeRename { from: "muTransform"; to: "transformCorrelationsTo" }
+		ChangeRename { from: "estimatesMean"; to: "inferenceMeanEstimatesTable" }
+		ChangeRename { from: "estimatesSigma"; to: "inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable" }
+		ChangeRename { from: "plotModels"; to: "plotsMeanModelEstimatesPlot" }
+	}
+
+	Upgrade
+	{
+		functionName:	"PetPeese"
+		fromVersion:	"0.16.4"
+		toVersion:		"0.17"
+
+		// PetPeese.qml
+		ChangeRename { from: "inputES"; to: "effectSize" }
+		ChangeRename { from: "inputSE"; to: "effectSizeSe" }
+		ChangeRename { from: "inputCI"; to: "effectSizeCi" }
+		ChangeRename { from: "inputN"; to: "sampleSize" }
+		ChangeRename { from: "inputLabels"; to: "studyLabel" }
+		ChangeRename { from: "muTransform"; to: "transformCorrelationsTo" }
+		ChangeRename { from: "estimatesMean"; to: "inferenceMeanEstimatesTable" }
+		ChangeRename { from: "estimatesPetPeese"; to: "inferenceRegressionEstimatesTable" }
+		ChangeRename { from: "estimatesSigma"; to: "inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable" }
+		ChangeRename { from: "regressionPeese"; to: "plotsRegressionEstimatePeesePlot" }
+		ChangeRename { from: "regressionPet"; to: "plotsRegressionEstimatePetPlot" }
+		ChangeRename { from: "plotModels"; to: "plotsMeanModelEstimatesPlot" }	
+	}
+
+	Upgrade
+	{
+		functionName:	"SelectionModels"
+		fromVersion:	"0.16.4"
+		toVersion:		"0.17"
+
+		// SelectionModels.qml
+		ChangeRename { from: "inputES"; to: "effectSize" }
+		ChangeRename { from: "inputSE"; to: "effectSizeSe" }
+		ChangeRename { from: "inputCI"; to: "effectSizeCi" }
+		ChangeRename { from: "inputN"; to: "sampleSize" }
+		ChangeRename { from: "inputPVal"; to: "pValue" }	
+		ChangeRename { from: "inputLabels"; to: "studyLabel" }
+		ChangeRename { from: "muTransform"; to: "transformCorrelationsTo" }
+
+		ChangeRename { from: "cutoffsPVal"; to: "modelPValueCutoffs" }
+		ChangeRename { from: "selectionTwosided"; to: "modelTwoSidedSelection" }
+		ChangeRename { from: "tablePVal"; to: "modelPValueFrequencyTable" }
+		ChangeRename { from: "joinPVal"; to: "modelAutomaticallyJoinPValueIntervals" }
+		ChangeRename { from: "effectDirection"; to: "modelExpectedDirectionOfEffectSizes" }
+
+		ChangeRename { from: "estimatesMean"; to: "inferenceMeanEstimatesTable" }
+		ChangeRename { from: "estimatesPetPeese"; to: "inferenceRegressionEstimatesTable" }
+		ChangeRename { from: "estimatesSigma"; to: "inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable" }
+		ChangeRename { from: "regressionPeese"; to: "plotsRegressionEstimatePeesePlot" }
+		ChangeRename { from: "regressionPet"; to: "plotsRegressionEstimatePetPlot" }
+		ChangeRename { from: "plotModels"; to: "plotsMeanModelEstimatesPlot" }	
+	}	
 }

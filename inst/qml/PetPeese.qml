@@ -35,7 +35,7 @@ Form
 
 		AssignedVariablesList
 		{
-			name:			"inputES"
+			name:			"effectSize"
 			title:
 			{
 				if (measuresCorrelation.checked)
@@ -49,7 +49,7 @@ Form
 
 		AssignedVariablesList
 		{
-			name:			"inputSE"
+			name:			"effectSizeSe"
 			title:			qsTr("Effect Size Standard Error")
 			singleVariable:	true
 			allowedColumns:	["scale"]
@@ -61,8 +61,8 @@ Form
 
 		AssignedVariablesList
 		{
-			name: 			"inputN"
-			title: 			qsTr("N")
+			name: 			"sampleSize"
+			title: 			qsTr("Sample size")
 			singleVariable: true
 			allowedColumns: ["scale", "ordinal"]
 			visible:		active
@@ -75,7 +75,7 @@ Form
 		{
 			visible:	measuresCorrelation.checked
 			label:		qsTr("Transform correlations to")
-			name:		"muTransform"
+			name:		"transformCorrelationsTo"
 			values:
 			[
 				{ label: qsTr("Fisher's z"),	value: "fishersZ"},
@@ -113,22 +113,22 @@ Form
 		{
 			CheckBox
 			{
-				text:		qsTr("Mean estimates")
-				name:		"estimatesMean"
+				text:		qsTr("Mean estimates table")
+				name:		"inferenceMeanEstimatesTable"
 				checked:	true
 			}
 						
 			CheckBox
 			{
-				text:		qsTr("Regression estimates")
-				name:		"estimatesPetPeese"
+				text:		qsTr("Regression estimates table")
+				name:		"inferenceRegressionEstimatesTable"
 				checked:	false
 			}
 
 			CheckBox
 			{
 				text:		qsTr("Multiplicative heterogeneity estimates")
-				name:		"estimatesSigma"
+				name:		"inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable"
 				checked:	false
 			}
 		}
@@ -140,25 +140,25 @@ Form
 
 		Group
 		{
-			title: qsTr("Meta-Regression Estimate")
+			title: qsTr("Regression Estimate")
 
 			CheckBox
 			{
 				text:	qsTr("PET")
-				name:	"regressionPet"
+				name:	"plotsRegressionEstimatePetPlot"
 			}
 
 			CheckBox
 			{
 				text:	qsTr("PEESE")
-				name:	"regressionPeese"
+				name:	"plotsRegressionEstimatePeesePlot"
 			}
 		}
 
 		CheckBox
 		{
 			text:	qsTr("Mean model estimates")
-			name:	"plotModels"
+			name:	"plotsMeanModelEstimatesPlot"
 		}
 
 	}

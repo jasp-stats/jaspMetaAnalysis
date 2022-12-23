@@ -32,11 +32,11 @@ PetPeese <- function(jaspResults, dataset, options, state = NULL) {
 
 
   # figures
-  if (options[["regressionPet"]])
+  if (options[["plotsRegressionEstimatePetPlot"]])
     .wwppRegressionPlot(jaspResults, dataset, options, "pet")
-  if (options[["regressionPeese"]])
+  if (options[["plotsRegressionEstimatePeesePlot"]])
     .wwppRegressionPlot(jaspResults, dataset, options, "peese")
-  if (options[["plotModels"]])
+  if (options[["plotsMeanModelEstimatesPlot"]])
     .wwppEstimatesPlot(jaspResults, dataset, options, "petPeese")
 
   return()

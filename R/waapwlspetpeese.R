@@ -16,13 +16,13 @@
 #
 
 ### Common functions for WAAP-WLS and PET-PEESE
-.wwppDependencies <- c("measures", "muTransform", "inputES", "inputSE", "inputN")
+.wwppDependencies <- c("measures", "transformCorrelationsTo", "effectSize", "effectSizeSe", "sampleSize")
 # check and load functions
 .wwppCheckReady              <- function(options) {
   if (options[["measures"]] == "general") {
-    return(options[["inputES"]] != "" && options[["inputSE"]] != "")
+    return(options[["effectSize"]] != "" && options[["effectSizeSe"]] != "")
   } else if (options[["measures"]] == "correlation") {
-    return(options[["inputES"]] != "" && options[["inputN"]] != "")
+    return(options[["effectSize"]] != "" && options[["sampleSize"]] != "")
   }
 }
 .wwppGetData                 <- function(dataset, options) {
@@ -30,9 +30,9 @@
     return(dataset)
   } else {
     return(.readDataSetToEnd(columns.as.numeric = c(
-      options[["inputES"]],
-      if (options[["inputSE"]] != "") options[["inputSE"]],
-      if (options[["inputN"]]  != "") options[["inputN"]]
+      options[["effectSize"]],
+      if (options[["effectSizeSe"]] != "") options[["effectSizeSe"]],
+      if (options[["sampleSize"]]  != "") options[["sampleSize"]]
     )))
   }
 }
@@ -58,25 +58,25 @@
              observations.amount   = "< 2",
              exitAnalysisIfErrors  = TRUE)
 
-  if (options[["inputSE"]] != "")
+  if (options[["effectSizeSe"]] != "")
     .hasErrors(dataset              = dataset,
-               seCheck.target       = options[["inputSE"]],
+               seCheck.target       = options[["effectSizeSe"]],
                custom               = .metaAnalysisCheckSE,
                exitAnalysisIfErrors = TRUE)
 
-  if (options[["inputN"]] != "")
+  if (options[["sampleSize"]] != "")
     .hasErrors(dataset              = dataset,
-               seCheck.target       = options[["inputN"]],
+               seCheck.target       = options[["sampleSize"]],
                custom               = .metaAnalysisCheckSE,
                exitAnalysisIfErrors = TRUE)
 
 
-  if (options[["inputES"]] != "" && options[["measures"]] == "correlation")
-    if (any(dataset[, options[["inputES"]]] <= -1) || any(dataset[, options[["inputES"]]] >= 1))
-      .quitAnalysis(gettextf("Cannot compute results. All entries of the correlation coefficient variable (%s) must be between -1 and 1.", options[["inputES"]]))
+  if (options[["effectSize"]] != "" && options[["measures"]] == "correlation")
+    if (any(dataset[, options[["effectSize"]]] <= -1) || any(dataset[, options[["effectSize"]]] >= 1))
+      .quitAnalysis(gettextf("Cannot compute results. All entries of the correlation coefficient variable (%s) must be between -1 and 1.", options[["effectSize"]]))
 
-  if (options[["inputN"]] != "" && any(dataset[, options[["inputN"]]] < 4))
-    .quitAnalysis(gettextf("Cannot compute results. All entries of the sample size variable (%s) must be greater than four.", options[["inputN"]]))
+  if (options[["sampleSize"]] != "" && any(dataset[, options[["sampleSize"]]] < 4))
+    .quitAnalysis(gettextf("Cannot compute results. All entries of the sample size variable (%s) must be greater than four.", options[["sampleSize"]]))
 
 
   return(dataset)
@@ -192,7 +192,7 @@
     return()
   } else {
     models <- createJaspState()
-    models$dependOn(c(.wwppDependencies, "tablePVal"))
+    models$dependOn(c(.wwppDependencies, "modelPValueFrequencyTable"))
     jaspResults[["models"]] <- models
   }
 
@@ -392,33 +392,33 @@
   }
 
   # mean estimates
-  if (is.null(estimates[["mean"]]) && options[["estimatesMean"]]) {
+  if (is.null(estimates[["mean"]]) && options[["inferenceMeanEstimatesTable"]]) {
     estimatesMean <- createJaspTable(title = gettextf(
       "Mean Estimates (%s)",
       if (options[["measures"]] == "correlation") "\u03C1" else "\u03BC"
     ))
     estimatesMean$position <- 1
-    estimates$dependOn("estimatesMean")
-    estimates[["estimatesMean"]] <- estimatesMean
+    estimates$dependOn("inferenceMeanEstimatesTable")
+    estimates[["inferenceMeanEstimatesTable"]] <- estimatesMean
     estimatesMean <- .wwppFillEstimates(jaspResults, estimatesMean, models, options, type)
   }
 
   # PET-PEESE estimates
   if (type == "petPeese") {
-    if (is.null(estimates[["petPeese"]]) && options[["estimatesPetPeese"]]) {
+    if (is.null(estimates[["petPeese"]]) && options[["inferenceRegressionEstimatesTable"]]) {
       petPeese <- createJaspTable(title = gettext("Regression Estimates"))
       petPeese$position  <- 2
-      petPeese$dependOn("estimatesPetPeese")
+      petPeese$dependOn("inferenceRegressionEstimatesTable")
       estimates[["petPeese"]] <- petPeese
       petPeese <- .wwppFillPetPeese(jaspResults, petPeese, models, options)
     }
   }
 
   # heterogeneity estimates
-  if (is.null(estimates[["heterogeneity"]]) && options[["estimatesSigma"]]) {
+  if (is.null(estimates[["heterogeneity"]]) && options[["inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable"]]) {
     heterogeneity <- createJaspTable(title = gettext("Multiplicative Heterogeneity Estimates"))
     heterogeneity$position <- 3
-    heterogeneity$dependOn("estimatesSigma")
+    heterogeneity$dependOn("inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable")
     estimates[["heterogeneity"]] <- heterogeneity
     heterogeneity <- .wwppFillHeterogeneity(jaspResults, heterogeneity, models, options, type)
   }
@@ -435,7 +435,7 @@
       title  = gettextf("Estimated %1$s Regression", toupper(type)),
       width  = 500,
       height = 400)
-    plotRegression$dependOn(c(.wwppDependencies, switch(type, "pet" = "regressionPet", "peese" = "regressionPeese")))
+    plotRegression$dependOn(c(.wwppDependencies, switch(type, "pet" = "plotsRegressionEstimatePetPlot", "peese" = "plotsRegressionEstimatePeesePlot")))
     plotRegression$position <- switch(type, "pet" = 5, "peese" = 6)
     jaspResults[[paste0(type, "Regression")]] <- plotRegression
   }
@@ -456,7 +456,7 @@
 
   if (options[["measures"]] == "correlation")
     yLabel <- switch(
-      options[["muTransform"]],
+      options[["transformCorrelationsTo"]],
       "cohensD"  = gettext("Cohen's d"),
       "fishersZ" = gettext("Fisher's z"))
   else
@@ -512,7 +512,7 @@
       ),
       width  = 500,
       height = 200)
-    plotEstimates$dependOn(c(.wwppDependencies, "plotModels"))
+    plotEstimates$dependOn(c(.wwppDependencies, "plotsMeanModelEstimatesPlot"))
     plotEstimates$position <- 7
     jaspResults[["plotEstimates"]] <- plotEstimates
   }
@@ -582,8 +582,8 @@
   # in the case that correlation input was used, this part will transform the results back
   # from the estimation scale to the outcome scale
   for (i in 1:nrow(fit)) {
-    fit["(Intercept)", "Std. Error"]                <- .maInvTransformSe(fit["(Intercept)", "Estimate"], fit["(Intercept)", "Std. Error"], options[["muTransform"]])
-    fit["(Intercept)", c("Estimate", "lCI", "uCI")] <- .maInvTransformEs(fit["(Intercept)", c("Estimate", "lCI", "uCI")],      options[["muTransform"]])
+    fit["(Intercept)", "Std. Error"]                <- .maInvTransformSe(fit["(Intercept)", "Estimate"], fit["(Intercept)", "Std. Error"], options[["transformCorrelationsTo"]])
+    fit["(Intercept)", c("Estimate", "lCI", "uCI")] <- .maInvTransformEs(fit["(Intercept)", c("Estimate", "lCI", "uCI")],      options[["transformCorrelationsTo"]])
   }
 
   return(fit)
