@@ -105,7 +105,7 @@ Form
 
 			AvailableVariablesList
 			{
-				name:		"components"
+				name:		"modelComponents"
 				title:		qsTr("Components")
 				source:		["covariates","factors"]
 			}
@@ -113,22 +113,22 @@ Form
 			AssignedVariablesList
 			{
 				name:			"modelTerms"
-				title:			qsTr("Model Terms")
+				title:			qsTr("Terms")
 				listViewType:	JASP.Interaction
 			}
 		}
 
 		CheckBox
 		{
-			name:		"interceptTerm"
-			id:         interceptTerm
+			name:		"modelIncludeIntercept"
+			id:			modelIncludeIntercept
 			label:		qsTr("Include intercept")
 			checked:	true
 		}
 
 		CheckBox
 		{
-			name:		"scalePredictors"
+			name:		"modelScalePredictors"
 			label:		qsTr("Scale predictors")
 			checked:	true
 		}
@@ -242,20 +242,20 @@ Form
 		{
 			CheckBox
 			{
-				name:		"estimatesCoefficients"
-				label:		qsTr("Estimates")
+				name:		"inferenceEstimatesTable"
+				label:		qsTr("Estimates table")
 				checked:	true
 			}
 
 			CheckBox
 			{
-				name:		"estimatesTau"
-				label:		qsTr("Heterogeneity")
+				name:		"inferenceHeterogeneityTable"
+				label:		qsTr("Heterogeneity table")
 				checked:	false
 
 				CheckBox
 				{
-					name:		"estimatesI2"
+					name:		"InferenceHeterogeneityI2"
 					label:		qsTr("I²")
 					checked:	false
 				}
@@ -270,7 +270,7 @@ Form
 			{
 				preferredHeight:				250 * preferencesModel.uiScale
 				id:								availableModelComponentsForms
-				property var alwaysAvailable:	interceptTerm.checked ?
+				property var alwaysAvailable:	modelIncludeIntercept.checked ?
 				[
 					{ label:	"Intercept",		value: "Intercept"},
 					{ label:	"Heterogeneity",	value: "Heterogeneity"}
@@ -280,15 +280,15 @@ Form
 
 				AvailableVariablesList
 				{
-					name:	"availableModelComponentsPlot"
-					title:	qsTr("Model terms")
+					name:	"posteriorPlotsAvailableTerms"
+					title:	qsTr("Available terms")
 					source:	["modelTerms", {values: availableModelComponentsForms.alwaysAvailable}]
 				}
 
 				AssignedVariablesList
 				{
-					name:	"plotPosterior"
-					title:	qsTr("Plotted term")
+					name:	"posteriorPlotsSelectedTerms"
+					title:	qsTr("Selected terms")
 				}
 			}
 		}
@@ -304,7 +304,7 @@ Form
 		{
 			preferredHeight: 200 * preferencesModel.uiScale
 			id:				diagnosticsForms
-			property var alwaysAvailable:	interceptTerm.checked ?
+			property var alwaysAvailable:	modelIncludeIntercept.checked ?
 			[
 				{ label:	"Intercept",		value: "Intercept"},
 				{ label:	"Heterogeneity",	value: "Heterogeneity"}

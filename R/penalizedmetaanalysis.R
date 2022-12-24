@@ -29,17 +29,17 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     .pemaFit(jaspResults, dataset, options)
   }
 
-  if (options[["estimatesCoefficients"]])
+  if (options[["inferenceEstimatesTable"]])
     .pemaSummaryTable(jaspResults, options)
 
-  if (options[["estimatesTau"]])
+  if (options[["inferenceHeterogeneityTable"]])
     .pemaSummaryTableTau(jaspResults, options)
 
-  if (options[["estimatesTau"]] && options[["estimatesI2"]])
+  if (options[["inferenceHeterogeneityTable"]] && options[["InferenceHeterogeneityI2"]])
     .pemaSummaryTableI2(jaspResults, options)
 
-  if (length(options[["plotPosterior"]]) > 0)
-    .pemaPlotPosterior(jaspResults, options)
+  if (length(options[["posteriorPlotsSelectedTerms"]]) > 0)
+    .pemaposteriorPlotsSelectedTerms(jaspResults, options)
 
   if (length(options[["scatterVariableX"]]) > 0)
     .pemaDiagnostics(jaspResults, options)
@@ -48,7 +48,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 }
 
 .pemaDependencies <- c(
-  "effectSize", "effectSizeSe", "method", "studyLabels", "covariates", "factors", "clustering", "components", "modelTerms", "interceptTerm", "scalePredictors",
+  "effectSize", "effectSizeSe", "method", "studyLabels", "covariates", "factors", "clustering", "modelComponents", "modelTerms", "modelIncludeIntercept", "modelScalePredictors",
   "horseshoePriorDf", "horseshoePriorScale", "lassoPriorDf", "lassoPriorDfGlobal", "lassoPriorDfSlab", "lassoPriorScaleGlobal", "lassoPriorScaleSlab",
   "mcmcBurnin", "mcmcSamples", "mcmcChains", "mcmcAdaptDelta", "mcmcMaxTreedepth", "setSeed", "seed"
 )
@@ -117,11 +117,11 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 }
 .pemaFormula                   <- function(options) {
 
-  if (length(options[["modelTerms"]]) == 0 && options[["interceptTerm"]])
+  if (length(options[["modelTerms"]]) == 0 && options[["modelIncludeIntercept"]])
     formula <- paste(options[["effectSize"]], "~", "1")
-  else if (length(options[["modelTerms"]]) > 0 && options[["interceptTerm"]])
+  else if (length(options[["modelTerms"]]) > 0 && options[["modelIncludeIntercept"]])
     formula <- paste(options[["effectSize"]], "~", paste0(sapply(options[["modelTerms"]], function(term) paste0(term[[1]], collapse = ":")), collapse = "+"))
-  else if (length(options[["modelTerms"]]) > 0 && !options[["interceptTerm"]])
+  else if (length(options[["modelTerms"]]) > 0 && !options[["modelIncludeIntercept"]])
     formula <- paste(options[["effectSize"]], "~", paste0(sapply(options[["modelTerms"]], function(term) paste0(term[[1]], collapse = ":")), collapse = "+"), "-1")
   else
     .quitAnalysis(gettext("The model should contain at least one predictor or an intercept."))
@@ -239,7 +239,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     study       = if (options[["clustering"]] != "") options[["clustering"]],
     method      = .pemaMethod(options),
     prior       = .pemaPriors(options),
-    standardize = options[["scalePredictors"]],
+    standardize = options[["modelScalePredictors"]],
     mute_stan   = TRUE,
     chains      = options[["mcmcChains"]],
     warmup      = options[["mcmcBurnin"]],
@@ -260,7 +260,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   summaryTable <- createJaspTable(title = gettext("Coefficients"))
   summaryTable$position <- 1
-  summaryTable$dependOn(c(.pemaDependencies, "estimatesCoefficients"))
+  summaryTable$dependOn(c(.pemaDependencies, "inferenceEstimatesTable"))
 
   summaryTable$addColumnInfo(name = "term",     title = "Term",           type = "string")
   summaryTable$addColumnInfo(name = "estimate", title = "Estimate",       type = "number")
@@ -339,7 +339,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   summaryTauTable <- createJaspTable(title = gettext("Heterogeneity"))
   summaryTauTable$position <- 2
-  summaryTauTable$dependOn(c(.pemaDependencies, "estimatesTau"))
+  summaryTauTable$dependOn(c(.pemaDependencies, "inferenceHeterogeneityTable"))
 
   summaryTauTable$addColumnInfo(name = "term",     title = "Term",           type = "string")
   summaryTauTable$addColumnInfo(name = "estimate", title = "Estimate",       type = "number")
@@ -420,7 +420,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   summaryI2Table <- createJaspTable(title = "I\U00B2")
   summaryI2Table$position <- 3
-  summaryI2Table$dependOn(c(.pemaDependencies, "estimatesTau", "estimatesI2"))
+  summaryI2Table$dependOn(c(.pemaDependencies, "inferenceHeterogeneityTable", "InferenceHeterogeneityI2"))
 
   summaryI2Table$addColumnInfo(name = "term",     title = "Term",           type = "string")
   summaryI2Table$addColumnInfo(name = "estimate", title = "Estimate",       type = "number")
@@ -473,14 +473,14 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   return()
 }
-.pemaPlotPosterior             <- function(jaspResults, options) {
+.pemaposteriorPlotsSelectedTerms             <- function(jaspResults, options) {
 
   if (!is.null(jaspResults[["posteriorPlots"]]))
     return()
 
   posteriorPlots <- createJaspContainer(title = gettext("Posterior distribution"))
   posteriorPlots$position <- 4
-  posteriorPlots$dependOn(c(.pemaDependencies, "plotPosterior"))
+  posteriorPlots$dependOn(c(.pemaDependencies, "posteriorPlotsSelectedTerms"))
   jaspResults[["posteriorPlots"]] <- posteriorPlots
 
   model <- jaspResults[["model"]]$object
@@ -489,7 +489,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   stanSamples      <- rstan::extract(stanFit)
   coefficientNames <- rownames(model$coefficients)
 
-  posteriorVariables <- lapply(options[["plotPosterior"]], function(var) var$variable)
+  posteriorVariables <- lapply(options[["posteriorPlotsSelectedTerms"]], function(var) var$variable)
   coefficients       <- lapply(posteriorVariables, function(posteriorVariable).pemaPredictorCoefficientNames(paste0(posteriorVariable, collapse = ":"), coefficientNames, options))
   coefficients       <- do.call(c, coefficients)
 

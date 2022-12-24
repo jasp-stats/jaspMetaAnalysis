@@ -12,19 +12,19 @@ options$.meta <- list(clustering = list(shouldEncode = TRUE), covariates = list(
   shouldEncode = TRUE), effectSize = list(shouldEncode = TRUE),
   effectSizeSe = list(shouldEncode = TRUE), factors = list(
     shouldEncode = TRUE), modelTerms = list(shouldEncode = TRUE),
-  plotPosterior = list(shouldEncode = TRUE), scatterVariableX = list(
+  posteriorPlotsSelectedTerms = list(shouldEncode = TRUE), scatterVariableX = list(
     shouldEncode = TRUE), scatterVariableY = list(shouldEncode = TRUE))
 options$covariates <- "tneg"
 options$effectSize <- "ES"
 options$effectSizeSe <- "SE"
-options$estimatesI2 <- TRUE
-options$estimatesTau <- TRUE
+options$InferenceHeterogeneityI2 <- TRUE
+options$inferenceHeterogeneityTable <- TRUE
 options$factors <- "alloc"
 options$mcmcBurnin <- 400
 options$mcmcChains <- 2
 options$mcmcSamples <- 400
-options$modelTerms <- list(list(components = "tneg"), list(components = "alloc"))
-options$plotPosterior <- list(list(variable = "tneg"), list(variable = "alloc"))
+options$modelTerms <- list(list(modelComponents = "tneg"), list(modelComponents = "alloc"))
+options$posteriorPlotsSelectedTerms <- list(list(variable = "tneg"), list(variable = "alloc"))
 options$scatterVariableX <- list(list(variable = "JaspColumn_4_Encoded"))
 options$scatterVariableY <- list()
 options$setSeed <- TRUE
@@ -90,16 +90,16 @@ options$.meta <- list(clustering = list(shouldEncode = TRUE), covariates = list(
   shouldEncode = TRUE), effectSize = list(shouldEncode = TRUE),
   effectSizeSe = list(shouldEncode = TRUE), factors = list(
     shouldEncode = TRUE), modelTerms = list(shouldEncode = TRUE),
-  plotPosterior = list(shouldEncode = TRUE), scatterVariableX = list(
+  posteriorPlotsSelectedTerms = list(shouldEncode = TRUE), scatterVariableX = list(
     shouldEncode = TRUE), scatterVariableY = list(shouldEncode = TRUE))
 options$clustering <- "ablat"
 options$covariates <- ""
 options$effectSize <- "ES"
 options$effectSizeSe <- "SE"
-options$estimatesI2 <- TRUE
-options$estimatesTau <- TRUE
+options$InferenceHeterogeneityI2 <- TRUE
+options$inferenceHeterogeneityTable <- TRUE
 options$factors <- "alloc"
-options$interceptTerm <- FALSE
+options$modelIncludeIntercept <- FALSE
 options$lassoPriorDf <- 5
 options$lassoPriorDfGlobal <- 2
 options$lassoPriorDfSlab <- 1
@@ -109,8 +109,8 @@ options$mcmcBurnin <- 500
 options$mcmcChains <- 1
 options$mcmcSamples <- 500
 options$method <- "lasso"
-options$modelTerms <- list(list(components = "alloc"))
-options$plotPosterior <- list(list(variable = "Heterogeneity"))
+options$modelTerms <- list(list(modelComponents = "alloc"))
+options$posteriorPlotsSelectedTerms <- list(list(variable = "Heterogeneity"))
 options$scatterVariableX <- list(list(variable = "Heterogeneity"))
 options$scatterVariableY <- list()
 options$setSeed <- TRUE

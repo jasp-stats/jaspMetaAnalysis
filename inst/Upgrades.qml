@@ -512,6 +512,22 @@ Upgrades
 		ChangeRename { from: "removeFailed"; to: "advancedAutofitRemoveFailedModels" }
 		ChangeRename { from: "balanceProbability"; to: "advancedAutofitRebalanceComponentProbabilityOnModelFailure" }
 		ChangeRename { from: "savePath"; to: "advancedSaveFittedModel" }
+	}
 
+	Upgrade
+	{
+		functionName:	"PenalizedMetaAnalysis"
+		fromVersion:	"0.16.4"
+		toVersion:		"0.17"
+
+
+		ChangeRename { from: "components"; to: "modelComponents" }
+		ChangeRename { from: "interceptTerm"; to: "modelIncludeIntercept" }
+		ChangeRename { from: "scalePredictors"; to: "modelScalePredictors" }
+		ChangeRename { from: "estimatesCoefficients"; to: "inferenceEstimatesTable" }
+		ChangeRename { from: "estimatesTau"; to: "inferenceHeterogeneityTable" }
+		ChangeRename { from: "estimatesI2"; to: "inferenceHeterogeneityI2" }
+		ChangeRename { from: "availableModelComponentsPlot"; to: "posteriorPlotsAvailableTerms" }
+		ChangeRename { from: "plotPosterior"; to: "posteriorPlotsSelectedTerms" }
 	}
 }
