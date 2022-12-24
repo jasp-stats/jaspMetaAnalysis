@@ -457,7 +457,7 @@ Upgrades
 				{
 					case "model":		return "modelNumber";
 					case "BF":			return "bayesFactor";
-					case "probability":	return "posteriorProbability"
+					case "probability":	return "posteriorProbability";
 				}
 			}
 		}
@@ -490,7 +490,7 @@ Upgrades
 					case "fishers_z":	return "fishersZ";
 					case "logOR":		return "logOr";
 				}
-			}.
+			}
 		}
 		ChangeRename { from: "advancedAdapt"; to: "advancedMcmcAdaptation" }
 		ChangeRename { from: "advancedBurnin"; to: "advancedMcmcBurnin" }
