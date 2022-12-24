@@ -249,7 +249,7 @@ Upgrades
 			name:		"tauPrior"
 			jsFunction:	function(options)
 			{
-				switch(options["measure"])
+				switch(options["tauPrior"])
 				{
 					case "priorTauU":	return "uniformPrior";
 					case "priorTauT":	return "tPrior";
@@ -325,11 +325,193 @@ Upgrades
 		ChangeRename { from: "joinPVal"; to: "modelAutomaticallyJoinPValueIntervals" }
 		ChangeRename { from: "effectDirection"; to: "modelExpectedDirectionOfEffectSizes" }
 
-		ChangeRename { from: "estimatesMean"; to: "inferenceMeanEstimatesTable" }
-		ChangeRename { from: "estimatesPetPeese"; to: "inferenceRegressionEstimatesTable" }
-		ChangeRename { from: "estimatesSigma"; to: "inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable" }
-		ChangeRename { from: "regressionPeese"; to: "plotsRegressionEstimatePeesePlot" }
-		ChangeRename { from: "regressionPet"; to: "plotsRegressionEstimatePetPlot" }
+		ChangeRename { from: "estimatesFE"; to: "inferenceFixedEffectsMeanEstimatesTable" }
+		ChangeRename { from: "weightsFE"; to: "inferenceFixedEffectsEstimatedWeightsTable" }
+		ChangeRename { from: "estimatesRE"; to: "inferenceRandomEffectsMeanEstimatesTable" }
+		ChangeRename { from: "heterogeneityRE"; to: "inferenceRandomEffectsEstimatedHeterogeneityTable" }
+		ChangeRename { from: "weightsRE"; to: "inferenceRandomEffectsEstimatedWeightsTable" }
+
+		ChangeRename { from: "weightFunctionFE"; to: "plotsWeightFunctionFixedEffectsPlot" }
+		ChangeRename { from: "weightFunctionRE"; to: "plotsWeightFunctionRandomEffectsPlot" }
+		ChangeRename { from: "weightFunctionRescale"; to: "plotsWeightFunctionRescaleXAxis" }
 		ChangeRename { from: "plotModels"; to: "plotsMeanModelEstimatesPlot" }	
 	}	
+
+
+	Upgrade
+	{
+		functionName:	"RobustBayesianMetaAnalysis"
+		fromVersion:	"0.16.4"
+		toVersion:		"0.17"
+
+		// RobustBayesianMetaAnalysis.qml
+		ChangeRename { from: "fittedPath"; to: "pathToFittedModel" }
+		ChangeRename { from: "inputES"; to: "effectSize" }
+		ChangeRename { from: "inputSE"; to: "effectSizeSe" }
+		ChangeRename { from: "inputCI"; to: "effectSizeCi" }
+		ChangeRename { from: "inputN"; to: "sampleSize" }
+		ChangeRename { from: "inputPVal"; to: "pValue" }	
+		ChangeRename { from: "inputLabels"; to: "studyLabel" }
+		ChangeRename { from: "measures"; to: "inputType" }
+		ChangeJS
+		{
+			name:		"inputType"
+			jsFunction:	function(options)
+			{
+				switch(options["inputType"])
+				{
+					case "logOR":	return "logOr";
+					case "general":	return "unstandardizedEffectSizes";
+					case "fitted":	return "fittedModel";
+				}
+			}
+		}
+		ChangeRename { from: "modelType"; to: "modelEnsembleType" }
+		ChangeJS
+		{
+			name:		"modelEnsembleType"
+			jsFunction:	function(options)
+			{
+				switch(options["modelEnsembleType"])
+				{
+					case "2w":	return "original";
+				}
+			}
+		}
+		ChangeJS
+		{
+			name:		"priorScale"
+			jsFunction:	function(options)
+			{
+				switch(options["priorScale"])
+				{
+					case "cohens_d":	return "cohensD";
+					case "fishers_z":	return "fishersZ";
+					case "logOR":		return "logOr";
+				}
+			}
+		}
+		ChangeRename { from: "plotPriors"; to: "priorDistributionPlot" }
+		// inference section
+		ChangeRename { from: "resultsConditional"; to: "inferenceConditionalParameterEstimates" }
+		ChangeRename { from: "resultsModels"; to: "inferenceModelsOverview" }
+		ChangeRename { from: "resultsModelsBf"; to: "inferenceModelsOverviewBfComparison" }
+		ChangeRename { from: "resultsModelsOrder"; to: "inferenceModelsOverviewOrder" }
+		ChangeJS
+		{
+			name:		"inferenceModelsOverviewOrder"
+			jsFunction:	function(options)
+			{
+				switch(options["inferenceModelsOverviewOrder"])
+				{
+					case "default":	return "modelNumber";
+					case "marglik":	return "marginalLikelihood";
+					case "posterior": return "posteriorProbability";
+				}
+			}
+		}
+		ChangeRename { from: "resultsIndividual"; to: "inferenceIndividualModels" }
+		ChangeRename { from: "resultsIndividualSingle"; to: "inferenceIndividualModelsSingleModel" }
+		ChangeRename { from: "resultsIndividualSingleNumber"; to: "inferenceIndividualModelsSingleModelNumber" }
+		ChangeRename { from: "resultsCi"; to: "inferenceCiWidth" }
+		ChangeRename { from: "resultsScale"; to: "inferenceOutputScale" }
+		ChangeJS
+		{
+			name:		"inferenceOutputScale"
+			jsFunction:	function(options)
+			{
+				switch(options["inferenceOutputScale"])
+				{
+					case "cohens_d":	return "cohensD";
+					case "fishers_z":	return "fishersZ";
+					case "logOR":		return "logOr";
+					case "r":			return "correlation";
+				}
+			}
+		}
+		ChangeRename { from: "shortNames"; to: "inferenceShortenPriorName" }
+		// Plots section
+		ChangeRename { from: "plotForest"; to: "plotsForestPlot" }
+		ChangeRename { from: "plotForestOrder"; to: "plotsForestPlotOrder" }
+		ChangeRename { from: "plotForestType"; to: "plotsForestPlotType" }
+
+		ChangeRename { from: "plotEstimatesMu"; to: "plotsPooledEstimatesEffect" }
+		ChangeRename { from: "plotEstimatesTau"; to: "plotsPooledEstimatesHeterogeneity" }
+		ChangeRename { from: "plotEstimatesWeightFunction"; to: "plotsPooledEstimatesWeightFunction" }
+		ChangeRename { from: "plotEstimatesWeightFunctionRescale"; to: "plotsPooledEstimatesWeightFunctionRescaleXAxis" }
+		ChangeRename { from: "plotEstimatesPetPeese"; to: "plotsPooledEstimatesPetPeese" }
+		ChangeRename { from: "plotEstimatesType"; to: "plotsPooledEstimatesType" }
+		ChangeRename { from: "plotEstimatesPriors"; to: "plotsPooledEstimatesPriorDistribution" }
+		
+		ChangeRename { from: "plotModelsMu"; to: "plotsIndividualModelsEffect" }
+		ChangeRename { from: "plotModelsTau"; to: "plotsIndividualModelsHeterogeneity" }
+		ChangeRename { from: "plotModelsType"; to: "plotsIndividualModelsType" }
+		ChangeRename { from: "plotModelsOrder"; to: "plotsIndividualModelsOrder" }
+		ChangeRename { from: "plotModelsOrderBy"; to: "plotsIndividualModelsOrderBy" }
+		ChangeJS
+		{
+			name:		"plotsIndividualModelsOrderBy"
+			jsFunction:	function(options)
+			{
+				switch(options["plotsIndividualModelsOrderBy"])
+				{
+					case "model":		return "modelNumber";
+					case "BF":			return "bayesFactor";
+					case "probability":	return "posteriorProbability"
+				}
+			}
+		}
+		ChangeRename { from: "plotModelsShowUpdating"; to: "plotsIndividualModelsShowBayesianUpdating" }
+		ChangeRename { from: "plotModelsShowEstimates"; to: "plotsIndividualModelsShowPosteriorEstimates" }
+		// MCMC Diagnostics section
+		ChangeRename { from: "diagnosticsOverview"; to: "mcmcDiagnosticsOverviewTable" }
+		ChangeRename { from: "diagnosticsMu"; to: "mcmcDiagnosticsPlotEffect" }
+		ChangeRename { from: "diagnosticsTau"; to: "mcmcDiagnosticsPlotHeterogeneity" }
+		ChangeRename { from: "diagnosticsOmega"; to: "mcmcDiagnosticsPlotWeights" }
+		ChangeRename { from: "diagnosticsPet"; to: "mcmcDiagnosticsPlotPet" }
+		ChangeRename { from: "diagnosticsPeese"; to: "mcmcDiagnosticsPlotPeese" }
+		ChangeRename { from: "diagnosticsTrace"; to: "mcmcDiagnosticsPlotTypeTrace" }
+		ChangeRename { from: "diagnosticsAutocorrelation"; to: "mcmcDiagnosticsPlotTypeAutocorrelation" }
+		ChangeRename { from: "diagnosticsSamples"; to: "mcmcDiagnosticsPlotTypePosteriorSamplesDensity" }
+		ChangeRename { from: "diagnosticsSingle"; to: "mcmcDiagnosticsPlotSingleModel" }
+		ChangeRename { from: "diagnosticsSingleModel"; to: "mcmcDiagnosticsPlotSingleModelNumber" }
+		// Priors section
+
+		// Advanced section
+		ChangeRename { from: "fittingScale"; to: "advancedEstimationScale" }
+		ChangeJS
+		{
+			name:		"advancedEstimationScale"
+			jsFunction:	function(options)
+			{
+				switch(options["advancedEstimationScale"])
+				{
+					case "cohens_d":	return "cohensD";
+					case "fishers_z":	return "fishersZ";
+					case "logOR":		return "logOr";
+				}
+			}.
+		}
+		ChangeRename { from: "advancedAdapt"; to: "advancedMcmcAdaptation" }
+		ChangeRename { from: "advancedBurnin"; to: "advancedMcmcBurnin" }
+		ChangeRename { from: "advancedIteration"; to: "advancedMcmcSamples" }
+		ChangeRename { from: "advancedChains"; to: "advancedMcmcChains" }
+		ChangeRename { from: "advancedThin"; to: "advancedMcmcThin" }
+		ChangeRename { from: "autofitRhat"; to: "advancedAutofitRHat" }
+		ChangeRename { from: "autofitRhatValue"; to: "advancedAutofitRHatTarget" }
+		ChangeRename { from: "autofitEss"; to: "advancedAutofitEss" }
+		ChangeRename { from: "autofitEssValue"; to: "advancedAutofitEssTarget" }
+		ChangeRename { from: "autofitMcmcError"; to: "advancedAutofitMcmcError" }
+		ChangeRename { from: "autofitMcmcErrorValue"; to: "advancedAutofitMcmcErrorTarget" }
+		ChangeRename { from: "autofitMcmcErrorSd"; to: "advancedAutofitMcmcErrorSd" }
+		ChangeRename { from: "autofitMcmcErrorSdValue"; to: "advancedAutofitMcmcErrorSdTarget" }
+		ChangeRename { from: "autofitTime"; to: "advancedAutofitMaximumFittingTime" }
+		ChangeRename { from: "autofitTimeValue"; to: "advancedAutofitMaximumFittingTimeTarget" }
+		ChangeRename { from: "autofitTimeUnit"; to: "advancedAutofitMaximumFittingTimeTargetUnit" }
+		ChangeRename { from: "autofitExtendSamples"; to: "advancedAutofitExtendSamples" }
+		ChangeRename { from: "removeFailed"; to: "advancedAutofitRemoveFailedModels" }
+		ChangeRename { from: "balanceProbability"; to: "advancedAutofitRebalanceComponentProbabilityOnModelFailure" }
+		ChangeRename { from: "savePath"; to: "advancedSaveFittedModel" }
+
+	}
 }

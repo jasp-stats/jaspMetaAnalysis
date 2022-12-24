@@ -26,9 +26,9 @@ Form
 {
 	property var listVisibility :
 	{
-		"inputSE":	{ values: ["cohensD", "general", "logOR"],	id: inputSE},
-		"inputCI":	{ values: ["cohensD", "general", "logOR"],	id: inputCI},
-		"inputN" :	{ values: ["cohensD", "correlation"],		id: inputN}
+		"effectSizeSe":	{ values: ["cohensD", "unstandardizedEffectSizes", "logOr"],	id: inputSE},
+		"effectSizeCi":	{ values: ["cohensD", "unstandardizedEffectSizes", "logOr"],	id: inputCI},
+		"sampleSize" :	{ values: ["cohensD", "correlation"],		id: inputN}
 	}
 
 	function checkListVisibility(name)
@@ -42,7 +42,7 @@ Form
 	FileSelector
 	{
 		Layout.columnSpan:	2
-		name:				"fittedPath"
+		name:				"pathToFittedModel"
 		label:  			qsTr("Path to the fitted model")
 		filter:				"*.RDS"
 		save:				false
@@ -60,7 +60,7 @@ Form
 		AssignedVariablesList
 		{
 			id: 			inputES
-			name: 			"inputES"
+			name: 			"effectSize"
 			enabled: 		inputT.count == 0
 			title: 			
 			{
@@ -68,7 +68,7 @@ Form
 				qsTr("Cohen's d")
 			else if (measuresCorrelation.checked)
 				qsTr("Correlation")
-			else if (measureslogOR.checked)
+			else if (measureslogOr.checked)
 				qsTr("Log Odds Ratio")
 			else
 				qsTr("Effect Size")
@@ -81,7 +81,7 @@ Form
 		{
 			id: 			inputSE
 			enabled: 		inputCI.count == 0 && inputN.count == 0
-			name: 			"inputSE"
+			name: 			"effectSizeSe"
 			title: 			qsTr("Effect Size Standard Error")
 			singleVariable: true
 			allowedColumns: ["scale"]
@@ -92,7 +92,7 @@ Form
 		{
 			id: 			inputCI
 			enabled: 		inputSE.count == 0 && inputN.count == 0 && inputN.count == 0 
-			name: 			"inputCI"
+			name: 			"effectSizeCi"
 			title: 			qsTr("95% CI Lower and Upper Bound")
 			singleVariable: true
 			allowedColumns: ["scale"]
@@ -103,7 +103,7 @@ Form
 		{
 			id: 			inputN
 			enabled: 		inputSE.count == 0 && inputCI.count == 0
-			name: 			"inputN"
+			name: 			"sampleSize"
 			title: 			qsTr("N")
 			singleVariable: true
 			allowedColumns: ["scale", "ordinal"]
@@ -112,7 +112,7 @@ Form
 
 		AssignedVariablesList
 		{
-			name: 			"inputLabels"
+			name: 			"studyLabel"
 			title: 			qsTr("Study Labels")
 			singleVariable:	true
 			allowedColumns: ["nominal","nominalText"]
@@ -123,7 +123,7 @@ Form
 	{
 		id:						measures
 		Layout.columnSpan:		2
-		name:					"measures"
+		name:					"inputType"
 		title:					qsTr("Input type")
 		radioButtonsOnSameRow:	false
 		columns:				2
@@ -162,15 +162,15 @@ Form
 		RadioButton
 		{
 			label:		qsTr("Log odds ratios")
-			value:		"logOR"
-			id:			measureslogOR
+			value:		"logOr"
+			id:			measureslogOr
 			enabled:	mainWindow.dataAvailable
 		}
 
 		RadioButton
 		{
 			label:		qsTr("Unstandardized effect sizes")
-			value:		"general"
+			value:		"unstandardizedEffectSizes"
 			id:			measuresGeneral
 			enabled:	mainWindow.dataAvailable
 		}
@@ -178,7 +178,7 @@ Form
 		RadioButton
 		{
 			label:		qsTr("Fitted model")
-			value:		"fitted"
+			value:		"fittedModel"
 			id:			measuresFitted
 			checked:	!mainWindow.dataAvailable
 		}
@@ -186,7 +186,7 @@ Form
 	
 	RadioButtonGroup
 	{
-		name:		"effectDirection"
+		name:		"modelExpectedDirectionOfEffectSizes"
 		title:		qsTr("Expected direction of effect sizes")
 		columns:	1
 		enabled:	!measuresFitted.checked
@@ -210,13 +210,13 @@ Form
 		DropDown
 		{
 			id:			modelType
-			name:		"modelType"
-			label:		qsTr("Model ensemble")
+			name:		"modelEnsembleType"
+			label:		qsTr("Model ensemble type")
 			enabled:	!measuresFitted.checked && !measuresGeneral.checked
 			values: [
 				{ label: qsTr("RoBMA-PSMA"),		value: "PSMA"},
 				{ label: qsTr("RoBMA-PP"),			value: "PP"},
-				{ label: qsTr("RoBMA-original"),	value: "2w"},
+				{ label: qsTr("RoBMA-original"),	value: "original"},
 				{ label: qsTr("Custom"),			value: "custom"}
 			]
 		}
@@ -233,18 +233,18 @@ Form
 				enabled:	!measuresFitted.checked && !measuresGeneral.checked && !modelType.value == "custom"
 
 				values: [
-					{ label: qsTr("Cohen's d"),			value: "cohens_d"},
-					{ label: qsTr("Fisher's z"),		value: "fishers_z"},
-					{ label: qsTr("log(OR)"),			value: "logOR"}
+					{ label: qsTr("Cohen's d"),			value: "cohensD"},
+					{ label: qsTr("Fisher's z"),		value: "fishersZ"},
+					{ label: qsTr("log(OR)"),			value: "logOr"}
 				]
 				onCurrentValueChanged: 			
 				{
-					if(priorScale.currentValue == "cohens_d")
-						resultsScale.currentValue = "cohens_d"
-					else if(priorScale.currentValue == "fishers_z")
-						resultsScale.currentValue = "fishers_z"
-					else if(priorScale.currentValue == "logOR")
-						resultsScale.currentValue = "logOR"
+					if(priorScale.currentValue == "cohensD")
+						inferenceOutputScale.currentValue = "cohensD"
+					else if(priorScale.currentValue == "fishersZ")
+						inferenceOutputScale.currentValue = "fishersZ"
+					else if(priorScale.currentValue == "logOr")
+						inferenceOutputScale.currentValue = "logOr"
 				}
 			}
 			/*
@@ -258,8 +258,8 @@ Form
 
 		CheckBox
 		{
-			name:		"plotPriors"
-			label:		qsTr("Plot prior distributions")
+			name:		"priorDistributionPlot"
+			label:		qsTr("Prior distribution plots")
 		}
 	}
 
@@ -274,20 +274,20 @@ Form
 
 			CheckBox
 			{
-				label:		qsTr("Conditional estimates")
-				name:		"resultsConditional"
+				label:		qsTr("Conditional parameter estimates")
+				name:		"inferenceConditionalParameterEstimates"
 			}
 
 			CheckBox
 			{
 				columns:	2
 				label:		qsTr("Models overview")
-				name:		"resultsModels"
+				name:		"inferenceModelsOverview"
 
 				RadioButtonGroup
 				{
-					name: "resultsModelsBf"
-					title: qsTr("BF")
+					name: "inferenceModelsOverviewBfComparison"
+					title: qsTr("BF comparison")
 
 					RadioButton
 					{
@@ -306,33 +306,33 @@ Form
 					{
 						name: 		"previous"
 						label: 		qsTr("vs. Previous")
-						enabled:	resultsModelsOrderMarglik.checked
+						enabled:	inferenceModelsOverviewOrderMarglik.checked
 					}
 				}
 
 				RadioButtonGroup
 				{
-					name: 		"resultsModelsOrder"
+					name: 		"inferenceModelsOverviewOrder"
 					title:		qsTr("Order")
 
 					RadioButton
 					{
-						name: 		"default"
+						name: 		"modelNumber"
 						label: 		qsTr("Model number")
 						checked:	true
 					}
 
 					RadioButton
 					{
-						name: 		"marglik"
-						label: 		qsTr("Bayes factor")
-						id:			resultsModelsOrderMarglik
+						name: 		"marginalLikelihood"
+						label: 		qsTr("Marginal likelihood")
+						id:			inferenceModelsOverviewOrderMarglik
 					}
 
 					RadioButton
 					{
-						name: 		"posterior"
-						label: 		qsTr("Posterior prob.")
+						name: 		"posteriorProbability"
+						label: 		qsTr("Posterior probability")
 
 					}
 				}
@@ -341,16 +341,16 @@ Form
 			CheckBox
 			{
 				label:		qsTr("Individual models")
-				name:		"resultsIndividual"
+				name:		"inferenceIndividualModels"
 
 				CheckBox
 				{
 					label:		qsTr("Single model")
-					name:		"resultsIndividualSingle"
+					name:		"inferenceIndividualModelsSingleModel"
 					childrenOnSameRow: true
 					IntegerField
 					{
-						name:	"resultsIndividualSingleNumber"
+						name:	"inferenceIndividualModelsSingleModelNumber"
 						defaultValue:	1
 					}
 				}
@@ -365,20 +365,20 @@ Form
 
 			CIField
 			{
-				name: "resultsCi"
+				name: "inferenceCiWidth"
 				label: qsTr("CI width")
 			}
 
 			DropDown
 			{
-				name:		"resultsScale"
-				id:			resultsScale
+				name:		"inferenceOutputScale"
+				id:			inferenceOutputScale
 				label:		qsTr("Output scale")
 				visible:	!measuresGeneral.checked
 				values: [
-					{ label: qsTr("Cohen's d"),			value: "cohens_d"},
-					{ label: qsTr("Fisher's z"),		value: "fishers_z"},
-					{ label: qsTr("log(OR)"),			value: "logOR"},
+					{ label: qsTr("Cohen's d"),			value: "cohensD"},
+					{ label: qsTr("Fisher's z"),		value: "fishersZ"},
+					{ label: qsTr("logOR"),				value: "logOr"},
 					{ label: qsTr("Correlation"),		value: "r"}
 				]
 			}
@@ -386,7 +386,7 @@ Form
 			CheckBox
 			{
 				label:		qsTr("Shorten prior names")
-				name:		"shortNames"
+				name:		"inferenceShortenPriorName"
 			}
 
 		}
@@ -402,11 +402,11 @@ Form
 		{
 			columns:	2
 			label:		qsTr("Forest plot")
-			name:		"plotForest"
+			name:		"plotsForestPlot"
 
 			RadioButtonGroup
 			{
-				name: 		"plotForestOrder"
+				name: 		"plotsForestPlotOrder"
 				title:		qsTr("Order")
 
 				RadioButton
@@ -424,7 +424,7 @@ Form
 				RadioButton
 				{
 					name: 	"alphabetical"
-					label: 	qsTr("Row order")
+					label: 	qsTr("Alphabetical")
 					checked:true
 				}
 			}
@@ -437,7 +437,7 @@ Form
 
 			RadioButtonGroup
 			{
-				name:				"plotForestType"
+				name:				"plotsForestPlotType"
 				title:				qsTr("Type")
 				columns:			2
 
@@ -467,23 +467,23 @@ Form
 			CheckBox
 			{
 				label:	qsTr("Effect")
-				name:	"plotEstimatesMu"
+				name:	"plotsPooledEstimatesEffect"
 			}
 
 			CheckBox
 			{
 				label:	qsTr("Heterogeneity")
-				name:	"plotEstimatesTau"
+				name:	"plotsPooledEstimatesHeterogeneity"
 			}
 
 			CheckBox
 			{
 				label:	qsTr("Weight function")
-				name:	"plotEstimatesWeightFunction"
+				name:	"plotsPooledEstimatesWeightFunction"
 
 				CheckBox
 				{
-					name:		"plotEstimatesWeightFunctionRescale"
+					name:		"plotsPooledEstimatesWeightFunctionRescaleXAxis"
 					text:		qsTr("Rescale x-axis")
 					checked:	true
 				}
@@ -492,7 +492,7 @@ Form
 			CheckBox
 			{
 				label:	qsTr("PET-PEESE")
-				name:	"plotEstimatesPetPeese"
+				name:	"plotsPooledEstimatesPetPeese"
 			}
 		}
 
@@ -503,7 +503,7 @@ Form
 
 			RadioButtonGroup
 			{
-				name:		"plotEstimatesType"
+				name:		"plotsPooledEstimatesType"
 				title:		qsTr("Type")
 				columns:	2
 
@@ -524,8 +524,8 @@ Form
 
 			CheckBox
 			{
-				label:		qsTr("Show priors")
-				name:		"plotEstimatesPriors"
+				label:		qsTr("Prior distribution")
+				name:		"plotsPooledEstimatesPriorDistribution"
 				checked:	true
 			}
 		}
@@ -540,13 +540,13 @@ Form
 			CheckBox
 			{
 				label:	qsTr("Effect")
-				name:	"plotModelsMu"
+				name:	"plotsIndividualModelsEffect"
 			}
 
 			CheckBox
 			{
 				label:	qsTr("Heterogeneity")
-				name:	"plotModelsTau"
+				name:	"plotsIndividualModelsHeterogeneity"
 			}
 		}
 
@@ -557,7 +557,7 @@ Form
 
 			RadioButtonGroup
 			{
-				name:				"plotModelsType"
+				name:				"plotsIndividualModelsType"
 				title:				qsTr("Type")
 				Layout.columnSpan:	2
 				columns:			2
@@ -578,7 +578,7 @@ Form
 
 			RadioButtonGroup
 			{
-				name: 		"plotModelsOrder"
+				name: 		"plotsIndividualModelsOrderelsOrderBy"
 				title:		qsTr("Order")
 
 				RadioButton
@@ -596,12 +596,12 @@ Form
 
 			RadioButtonGroup
 			{
-				name: 		"plotModelsOrderBy"
+				name: 		"plotsIndividualModelsOrderBy"
 				title:		qsTr("Order by")
 
 				RadioButton
 				{
-					name:		"model"
+					name:		"modelNumber"
 					label:		qsTr("Model number")
 					checked:	true
 				}
@@ -614,13 +614,13 @@ Form
 
 				RadioButton
 				{
-					name:		"BF"
+					name:		"bayesFactor"
 					label:		qsTr("Bayes factor")
 				}
 
 				RadioButton
 				{
-					name:		"probability"
+					name:		"posteriorProbability"
 					label:		qsTr("Posterior prob.")
 				}
 			}
@@ -633,14 +633,14 @@ Form
 				CheckBox
 				{
 					label:		qsTr("Bayesian updating")
-					name:		"plotModelsShowUpdating"
+					name:		"plotsIndividualModelsShowBayesianUpdating"
 					checked:	true
 				}
 
 				CheckBox
 				{
 					label:		qsTr("Posterior estimates")
-					name:		"plotModelsShowEstimates"
+					name:		"plotsIndividualModelsShowPosteriorEstimates"
 					checked:	false
 				}
 			}
@@ -655,8 +655,8 @@ Form
 		CheckBox
 		{
 			Layout.columnSpan: 2
-			label:		qsTr("Overview")
-			name:		"diagnosticsOverview"
+			label:		qsTr("Overview table")
+			name:		"mcmcDiagnosticsOverviewTable"
 		}
 
 		Group
@@ -665,31 +665,31 @@ Form
 			CheckBox
 			{
 				label:		qsTr("Effect")
-				name:		"diagnosticsMu"
+				name:		"mcmcDiagnosticsPlotEffect"
 			}
 
 			CheckBox
 			{
 				label:		qsTr("Heterogeneity")
-				name:		"diagnosticsTau"
+				name:		"mcmcDiagnosticsPlotHeterogeneity"
 			}
 
 			CheckBox
 			{
 				label:		qsTr("Weights")
-				name:		"diagnosticsOmega"
+				name:		"mcmcDiagnosticsPlotWeights"
 			}
 
 			CheckBox
 			{
 				label:		qsTr("PET")
-				name:		"diagnosticsPet"
+				name:		"mcmcDiagnosticsPlotPet"
 			}
 
 			CheckBox
 			{
 				label:		qsTr("PEESE")
-				name:		"diagnosticsPeese"
+				name:		"mcmcDiagnosticsPlotPeese"
 			}
 		}
 
@@ -701,31 +701,31 @@ Form
 				CheckBox
 				{
 					label:		qsTr("Trace")
-					name:		"diagnosticsTrace"
+					name:		"mcmcDiagnosticsPlotTypeTrace"
 				}
 
 				CheckBox
 				{
 					label:		qsTr("Autocorrelation")
-					name:		"diagnosticsAutocorrelation"
+					name:		"mcmcDiagnosticsPlotTypeAutocorrelation"
 				}
 
 				CheckBox
 				{
-					label:		qsTr("Posterior samples densities")
-					name:		"diagnosticsSamples"
+					label:		qsTr("Posterior samples density")
+					name:		"mcmcDiagnosticsPlotTypePosteriorSamplesDensity"
 				}
 			}
 
 			CheckBox
 			{
 				label:		qsTr("Single model")
-				name:		"diagnosticsSingle"
+				name:		"mcmcDiagnosticsPlotSingleModel"
 				childrenOnSameRow: true
 
 				IntegerField
 				{
-					name:			"diagnosticsSingleModel"
+					name:			"mcmcDiagnosticsPlotSingleModelNumber"
 					defaultValue:	1
 				}
 			}
@@ -837,23 +837,23 @@ Form
 
 			DropDown
 			{
-				name:		"fittingScale"
+				name:		"advancedEstimationScale"
 				label:		qsTr("Estimation scale")
 				visible:	!measuresGeneral.checked
 				values: [
-					{ label: qsTr("Fisher's z"),		value: "fishers_z"},
-					{ label: qsTr("Cohen's d"),			value: "cohens_d"},
-					{ label: qsTr("log(OR)"),			value: "logOR"}
+					{ label: qsTr("Fisher's z"),		value: "fishersZ"},
+					{ label: qsTr("Cohen's d"),			value: "cohensD"},
+					{ label: qsTr("logOR"),				value: "logOr"}
 				]
 			}
 
 			Group
 			{
-				title: 		qsTr("Estimation settings (MCMC)")
+				title: 		qsTr("MCMC")
 
 				IntegerField
 				{
-					name:			"advancedAdapt"
+					name:			"advancedMcmcAdaptation"
 					label:			qsTr("Adaptation")
 					defaultValue:	500
 					min:			100
@@ -861,7 +861,7 @@ Form
 				}
 				IntegerField
 				{
-					name:			"advancedBurnin"
+					name:			"advancedMcmcBurnin"
 					label:			qsTr("Burnin")
 					defaultValue:	2000
 					min:			100
@@ -869,15 +869,15 @@ Form
 				}
 				IntegerField
 				{
-					name:			"advancedIteration"
-					label:			qsTr("Iterations")
+					name:			"advancedMcmcSamples"
+					label:			qsTr("Samples")
 					defaultValue:	5000
 					min:			100
 					fieldWidth:		55 * preferencesModel.uiScale
 				}
 				IntegerField
 				{
-					name:			"advancedChains"
+					name:			"advancedMcmcChains"
 					label:			qsTr("Chains")
 					defaultValue:	3
 					min:			1
@@ -885,7 +885,7 @@ Form
 				}
 				IntegerField
 				{
-					name:			"advancedThin"
+					name:			"advancedMcmcThin"
 					label:			qsTr("Thin")
 					defaultValue:	1
 					min:			1
@@ -910,13 +910,13 @@ Form
 				CheckBox
 				{
 					label: 				qsTr("R-hat")
-					name:				"autofitRhat"
+					name:				"advancedAutofitRHat"
 					checked:			true
 					childrenOnSameRow:	true
 
 					DoubleField
 					{
-						name:			"autofitRhatValue"
+						name:			"advancedAutofitRHatTarget"
 						defaultValue:	1.05
 						min:			1
 						inclusive:		JASP.None
@@ -926,13 +926,13 @@ Form
 				CheckBox
 				{
 					label: 				qsTr("Effective sample size")
-					name:				"autofitEss"
+					name:				"advancedAutofitEss"
 					checked:			true
 					childrenOnSameRow:	true
 
 					DoubleField
 					{
-						name:			"autofitEssValue"
+						name:			"advancedAutofitEssTarget"
 						defaultValue:	500
 						min:			1
 						inclusive:		JASP.None
@@ -942,13 +942,13 @@ Form
 				CheckBox
 				{
 					label: 				qsTr("MCMC error")
-					name:				"autofitMcmcError"
+					name:				"advancedAutofitMcmcError"
 					checked:			false
 					childrenOnSameRow:	true
 
 					DoubleField
 					{
-						name:			"autofitMcmcErrorValue"
+						name:			"advancedAutofitMcmcErrorTarget"
 						defaultValue:	0.001
 						min:			0
 						inclusive:		JASP.None
@@ -958,13 +958,13 @@ Form
 				CheckBox
 				{
 					label: 				qsTr("MCMC error / SD")
-					name:				"autofitMcmcErrorSd"
+					name:				"advancedAutofitMcmcErrorSd"
 					checked:			false
 					childrenOnSameRow:	true
 
 					DoubleField
 					{
-						name:			"autofitMcmcErrorSdValue"
+						name:			"advancedAutofitMcmcErrorSdTarget"
 						defaultValue:	0.01
 						min:			0
 						inclusive:		JASP.None
@@ -974,7 +974,7 @@ Form
 				CheckBox
 				{
 					label: 				qsTr("Maximum fitting time")
-					name:				"autofitTime"
+					name:				"advancedAutofitMaximumFittingTime"
 					checked:			false
 					childrenOnSameRow:	true
 
@@ -984,14 +984,14 @@ Form
 						{
 							IntegerField
 							{
-								name:			"autofitTimeValue"
+								name:			"advancedAutofitMaximumFittingTimeTarget"
 								defaultValue:	1
 								min:			0
 							}
 
 							DropDown
 							{
-								name:			"autofitTimeUnit"
+								name:			"advancedAutofitMaximumFittingTimeTargetUnit"
 								values:
 								[
 									{ label: qsTr("hours"),				value: "hours"},
@@ -1006,7 +1006,7 @@ Form
 				IntegerField
 				{
 					label: 			qsTr("Extend samples")
-					name:			"autofitExtendSamples"
+					name:			"advancedAutofitExtendSamples"
 					defaultValue:	1000
 					min:			100
 				}
@@ -1015,14 +1015,14 @@ Form
 			CheckBox
 			{
 				label: 				qsTr("Remove failed models")
-				name:				"removeFailed"
+				name:				"advancedAutofitRemoveFailedModels"
 				checked:			false
 			}
 
 			CheckBox
 			{
 				label: 				qsTr("Rebalance component probability on model failure")
-				name:				"balanceProbability"
+				name:				"advancedAutofitRebalanceComponentProbabilityOnModelFailure"
 				checked:			true
 			}
 
@@ -1032,7 +1032,7 @@ Form
 		{
 			Layout.columnSpan:	2
 			label: 				qsTr("Save the fitted model")
-			name:				"savePath"
+			name:				"advancedSaveFittedModel"
 			filter:				"*.RDS"
 			save:				true
 		}

@@ -24,14 +24,14 @@ if (FALSE){
 }
 
 # path to the pre-fitted RoBMA model
-fittedPath <- file.path("robmaFit.RDS")
+pathToFittedModel <- file.path("robmaFit.RDS")
 
 ### RoBMA-PP/RoBMA-old model settings
 {
   options <- analysisOptions("RobustBayesianMetaAnalysis")
-  options$autofitMcmcError <- FALSE
-  options$autofitMcmcErrorSd <- FALSE
-  options$autofitTime <- FALSE
+  options$advancedAutofitMcmcError <- FALSE
+  options$advancedAutofitMcmcErrorSd <- FALSE
+  options$advancedAutofitMaximumFittingTime <- FALSE
   options$effect <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
                               parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                               parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
@@ -40,7 +40,7 @@ fittedPath <- file.path("robmaFit.RDS")
                                   parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                                   parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
                                   truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
-  options$fittedPath <- ""
+  options$pathToFittedModel <- ""
   options$heterogeneity <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
                                      parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                                      parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
@@ -49,9 +49,9 @@ fittedPath <- file.path("robmaFit.RDS")
                                          parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                                          parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
                                          truncationLower = "0", truncationUpper = "Inf", type = "spike"))
-  options$inputCI <- list()
-  options$measures <- "cohensD"
-  options$modelType <- "PP"
+  options$effectSizeCi <- list()
+  options$inputType <- "cohensD"
+  options$modelEnsembleType <- "PP"
   options$omega <- list(list(name = "#", parAlpha = "(1,1)", parCuts = "(.05)",
                              parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "two-sided"),
                         list(name = "#2", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
@@ -76,12 +76,12 @@ fittedPath <- file.path("robmaFit.RDS")
                            parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
                            truncationLower = "0", truncationUpper = "Inf", type = "cauchy"))
   options$petNull <- list()
-  options$plotForestOrder <- "alphabetical"
-  options$plotModelsOrder <- "decreasing"
-  options$plotModelsOrderBy <- "model"
-  options$resultsModelsBf <- "inclusion"
-  options$resultsModelsOrder <- "default"
-  options$savePath <- ""
+  options$plotsForestPlotOrder <- "alphabetical"
+  options$plotsIndividualModelsOrder <- "decreasing"
+  options$plotsIndividualModelsOrderBy <- "modelNumber"
+  options$inferenceModelsOverviewBfComparison <- "inclusion"
+  options$inferenceModelsOverviewOrder <- "default"
+  options$advancedSaveFittedModel <- ""
   set.seed(1)
   dataset <- NULL
   results <- runAnalysis("RobustBayesianMetaAnalysis", dataset, options)
@@ -112,9 +112,9 @@ fittedPath <- file.path("robmaFit.RDS")
 }
 {
   options <- analysisOptions("RobustBayesianMetaAnalysis")
-  options$autofitMcmcError <- FALSE
-  options$autofitMcmcErrorSd <- FALSE
-  options$autofitTime <- FALSE
+  options$advancedAutofitMcmcError <- FALSE
+  options$advancedAutofitMcmcErrorSd <- FALSE
+  options$advancedAutofitMaximumFittingTime <- FALSE
   options$effect <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
                               parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                               parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
@@ -123,7 +123,7 @@ fittedPath <- file.path("robmaFit.RDS")
                                   parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                                   parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
                                   truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
-  options$fittedPath <- ""
+  options$pathToFittedModel <- ""
   options$heterogeneity <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
                                      parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                                      parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
@@ -132,9 +132,9 @@ fittedPath <- file.path("robmaFit.RDS")
                                          parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                                          parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
                                          truncationLower = "0", truncationUpper = "Inf", type = "spike"))
-  options$inputCI <- list()
-  options$measures <- "cohensD"
-  options$modelType <- "2w"
+  options$effectSizeCi <- list()
+  options$inputType <- "cohensD"
+  options$modelEnsembleType <- "original"
   options$omega <- list(list(name = "#", parAlpha = "(1,1)", parCuts = "(.05)",
                              parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "two-sided"),
                         list(name = "#2", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
@@ -159,12 +159,12 @@ fittedPath <- file.path("robmaFit.RDS")
                            parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
                            truncationLower = "0", truncationUpper = "Inf", type = "cauchy"))
   options$petNull <- list()
-  options$plotForestOrder <- "alphabetical"
-  options$plotModelsOrder <- "decreasing"
-  options$plotModelsOrderBy <- "model"
-  options$resultsModelsBf <- "inclusion"
-  options$resultsModelsOrder <- "default"
-  options$savePath <- ""
+  options$plotsForestPlotOrder <- "alphabetical"
+  options$plotsIndividualModelsOrder <- "decreasing"
+  options$plotsIndividualModelsOrderBy <- "modelNumber"
+  options$inferenceModelsOverviewBfComparison <- "inclusion"
+  options$inferenceModelsOverviewOrder <- "default"
+  options$advancedSaveFittedModel <- ""
   set.seed(1)
   dataset <- NULL
   results <- runAnalysis("RobustBayesianMetaAnalysis", dataset, options)
@@ -198,9 +198,9 @@ fittedPath <- file.path("robmaFit.RDS")
 ### custom model settings (testing out the distributions)
 {
   options <- analysisOptions("RobustBayesianMetaAnalysis")
-  options$autofitMcmcError <- FALSE
-  options$autofitMcmcErrorSd <- FALSE
-  options$autofitTime <- FALSE
+  options$advancedAutofitMcmcError <- FALSE
+  options$advancedAutofitMcmcErrorSd <- FALSE
+  options$advancedAutofitMaximumFittingTime <- FALSE
   options$effect <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
                               parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                               parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
@@ -249,7 +249,7 @@ fittedPath <- file.path("robmaFit.RDS")
                                   parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                                   parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
                                   truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
-  options$fittedPath <- ""
+  options$pathToFittedModel <- ""
   options$heterogeneity <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
                                      parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                                      parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
@@ -258,9 +258,9 @@ fittedPath <- file.path("robmaFit.RDS")
                                          parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                                          parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
                                          truncationLower = "0", truncationUpper = "Inf", type = "spike"))
-  options$inputCI <- list()
-  options$measures <- "cohensD"
-  options$modelType <- "custom"
+  options$effectSizeCi <- list()
+  options$inputType <- "cohensD"
+  options$modelEnsembleType <- "custom"
   options$omega <- list(list(name = "#", parAlpha = "(1,1)", parCuts = "(.05)",
                              parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "two-sided"),
                         list(name = "#2", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
@@ -277,12 +277,12 @@ fittedPath <- file.path("robmaFit.RDS")
   options$peeseNull <- list()
   options$pet <- list()
   options$petNull <- list()
-  options$plotForestOrder <- "alphabetical"
-  options$plotModelsOrder <- "decreasing"
-  options$plotModelsOrderBy <- "model"
-  options$resultsModelsBf <- "inclusion"
-  options$resultsModelsOrder <- "default"
-  options$savePath <- ""
+  options$plotsForestPlotOrder <- "alphabetical"
+  options$plotsIndividualModelsOrder <- "decreasing"
+  options$plotsIndividualModelsOrderBy <- "modelNumber"
+  options$inferenceModelsOverviewBfComparison <- "inclusion"
+  options$inferenceModelsOverviewOrder <- "default"
+  options$advancedSaveFittedModel <- ""
   set.seed(1)
   dataset <- NULL
   results <- runAnalysis("RobustBayesianMetaAnalysis", dataset, options)
@@ -469,9 +469,9 @@ fittedPath <- file.path("robmaFit.RDS")
 ### prior distributions plots (via RoBMA-PSMA)
 {
   options <- analysisOptions("RobustBayesianMetaAnalysis")
-  options$autofitMcmcError <- FALSE
-  options$autofitMcmcErrorSd <- FALSE
-  options$autofitTime <- FALSE
+  options$advancedAutofitMcmcError <- FALSE
+  options$advancedAutofitMcmcErrorSd <- FALSE
+  options$advancedAutofitMaximumFittingTime <- FALSE
   options$effect <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
                               parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                               parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
@@ -480,7 +480,7 @@ fittedPath <- file.path("robmaFit.RDS")
                                   parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                                   parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
                                   truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
-  options$fittedPath <- ""
+  options$pathToFittedModel <- ""
   options$heterogeneity <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
                                      parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                                      parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
@@ -489,8 +489,8 @@ fittedPath <- file.path("robmaFit.RDS")
                                          parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                                          parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
                                          truncationLower = "0", truncationUpper = "Inf", type = "spike"))
-  options$inputCI <- list()
-  options$measures <- "cohensD"
+  options$effectSizeCi <- list()
+  options$inputType <- "cohensD"
   options$omega <- list(list(name = "#", parAlpha = "(1,1)", parCuts = "(.05)",
                              parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "two-sided"),
                         list(name = "#2", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
@@ -515,13 +515,13 @@ fittedPath <- file.path("robmaFit.RDS")
                            parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
                            truncationLower = "0", truncationUpper = "Inf", type = "cauchy"))
   options$petNull <- list()
-  options$plotForestOrder <- "alphabetical"
-  options$plotModelsOrder <- "decreasing"
-  options$plotModelsOrderBy <- "model"
-  options$plotPriors <- TRUE
-  options$resultsModelsBf <- "inclusion"
-  options$resultsModelsOrder <- "default"
-  options$savePath <- ""
+  options$plotsForestPlotOrder <- "alphabetical"
+  options$plotsIndividualModelsOrder <- "decreasing"
+  options$plotsIndividualModelsOrderBy <- "modelNumber"
+  options$priorDistributionPlot <- TRUE
+  options$inferenceModelsOverviewBfComparison <- "inclusion"
+  options$inferenceModelsOverviewOrder <- "default"
+  options$advancedSaveFittedModel <- ""
   set.seed(1)
   dataset <- NULL
   results <- runAnalysis("RobustBayesianMetaAnalysis", dataset, options)
@@ -655,25 +655,25 @@ fittedPath <- file.path("robmaFit.RDS")
 ### fit a default model using d + se, with minimum samples, no autofit, & and the complete output
 {
   options <- analysisOptions("RobustBayesianMetaAnalysis")
-  options$advancedAdapt <- 100
-  options$advancedBurnin <- 100
-  options$advancedChains <- 2
-  options$advancedIteration <- 100
+  options$advancedMcmcAdaptation <- 100
+  options$advancedMcmcBurnin <- 100
+  options$advancedMcmcChains <- 2
+  options$advancedMcmcSamples <- 100
   options$autofit <- FALSE
-  options$autofitMcmcError <- FALSE
-  options$autofitMcmcErrorSd <- FALSE
-  options$autofitTime <- FALSE
-  options$diagnosticsAutocorrelation <- TRUE
-  options$diagnosticsMu <- TRUE
-  options$diagnosticsOmega <- TRUE
-  options$diagnosticsOverview <- TRUE
-  options$diagnosticsPeese <- TRUE
-  options$diagnosticsPet <- TRUE
-  options$diagnosticsSamples <- TRUE
-  options$diagnosticsSingle <- TRUE
-  options$diagnosticsSingleModel <- 36
-  options$diagnosticsTau <- TRUE
-  options$diagnosticsTrace <- TRUE
+  options$advancedAutofitMcmcError <- FALSE
+  options$advancedAutofitMcmcErrorSd <- FALSE
+  options$advancedAutofitMaximumFittingTime <- FALSE
+  options$mcmcDiagnosticsPlotTypeAutocorrelation <- TRUE
+  options$mcmcDiagnosticsPlotEffect <- TRUE
+  options$mcmcDiagnosticsPlotWeights <- TRUE
+  options$mcmcDiagnosticsOverviewTable <- TRUE
+  options$mcmcDiagnosticsPlotPeese <- TRUE
+  options$mcmcDiagnosticsPlotPet <- TRUE
+  options$mcmcDiagnosticsPlotTypePosteriorSamplesDensity <- TRUE
+  options$mcmcDiagnosticsPlotSingleModel <- TRUE
+  options$mcmcDiagnosticsPlotSingleModelNumber <- 36
+  options$mcmcDiagnosticsPlotHeterogeneity <- TRUE
+  options$mcmcDiagnosticsPlotTypeTrace <- TRUE
   options$effect <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
                               parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                               parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
@@ -682,7 +682,7 @@ fittedPath <- file.path("robmaFit.RDS")
                                   parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                                   parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
                                   truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
-  options$fittedPath <- ""
+  options$pathToFittedModel <- ""
   options$heterogeneity <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
                                      parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                                      parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
@@ -691,10 +691,10 @@ fittedPath <- file.path("robmaFit.RDS")
                                          parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                                          parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
                                          truncationLower = "0", truncationUpper = "Inf", type = "spike"))
-  options$inputCI <- list()
-  options$inputES <- "d"
-  options$inputSE <- "se"
-  options$measures <- "cohensD"
+  options$effectSizeCi <- list()
+  options$effectSize <- "d"
+  options$effectSizeSe <- "se"
+  options$inputType <- "cohensD"
   options$omega <- list(list(name = "#", parAlpha = "(1,1)", parCuts = "(.05)",
                              parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "two-sided"),
                         list(name = "#2", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
@@ -719,24 +719,24 @@ fittedPath <- file.path("robmaFit.RDS")
                            parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
                            truncationLower = "0", truncationUpper = "Inf", type = "cauchy"))
   options$petNull <- list()
-  options$plotEstimatesMu <- TRUE
-  options$plotEstimatesPetPeese <- TRUE
-  options$plotEstimatesTau <- TRUE
-  options$plotEstimatesWeightFunction <- TRUE
-  options$plotForest <- TRUE
-  options$plotForestOrder <- "alphabetical"
-  options$plotModelsMu <- TRUE
-  options$plotModelsOrder <- "decreasing"
-  options$plotModelsOrderBy <- "model"
-  options$plotModelsTau <- TRUE
-  options$resultsConditional <- TRUE
-  options$resultsIndividual <- TRUE
-  options$resultsIndividualSingle <- TRUE
-  options$resultsIndividualSingleNumber <- 36
-  options$resultsModels <- TRUE
-  options$resultsModelsBf <- "inclusion"
-  options$resultsModelsOrder <- "default"
-  options$savePath <- ""
+  options$plotsPooledEstimatesEffect <- TRUE
+  options$plotsPooledEstimatesPetPeese <- TRUE
+  options$plotsPooledEstimatesHeterogeneity <- TRUE
+  options$plotsPooledEstimatesWeightFunction <- TRUE
+  options$plotsForestPlot <- TRUE
+  options$plotsForestPlotOrder <- "alphabetical"
+  options$plotsIndividualModelsEffect <- TRUE
+  options$plotsIndividualModelsOrder <- "decreasing"
+  options$plotsIndividualModelsOrderBy <- "modelNumber"
+  options$plotsIndividualModelsHeterogeneity <- TRUE
+  options$inferenceConditionalParameterEstimates <- TRUE
+  options$inferenceIndividualModels <- TRUE
+  options$inferenceIndividualModelsSingleModel <- TRUE
+  options$inferenceIndividualModelsSingleModelNumber <- 36
+  options$inferenceModelsOverview <- TRUE
+  options$inferenceModelsOverviewBfComparison <- "inclusion"
+  options$inferenceModelsOverviewOrder <- "default"
+  options$advancedSaveFittedModel <- ""
   options$setSeed <- TRUE
   set.seed(1)
   dataset <- structure(list(study = c("study one", "study two", "study three"
@@ -1086,14 +1086,14 @@ fittedPath <- file.path("robmaFit.RDS")
 ### fit a minimum model using r + N, with autofit & check diagnostics
 {
   options <- analysisOptions("RobustBayesianMetaAnalysis")
-  options$advancedAdapt <- 100
-  options$advancedBurnin <- 100
-  options$advancedChains <- 2
-  options$advancedIteration <- 100
-  options$autofitMcmcError <- FALSE
-  options$autofitMcmcErrorSd <- FALSE
-  options$autofitTime <- FALSE
-  options$diagnosticsOverview <- TRUE
+  options$advancedMcmcAdaptation <- 100
+  options$advancedMcmcBurnin <- 100
+  options$advancedMcmcChains <- 2
+  options$advancedMcmcSamples <- 100
+  options$advancedAutofitMcmcError <- FALSE
+  options$advancedAutofitMcmcErrorSd <- FALSE
+  options$advancedAutofitMaximumFittingTime <- FALSE
+  options$mcmcDiagnosticsOverviewTable <- TRUE
   options$effect <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
                               parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                               parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
@@ -1102,17 +1102,17 @@ fittedPath <- file.path("robmaFit.RDS")
                                   parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                                   parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
                                   truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
-  options$fittedPath <- ""
+  options$pathToFittedModel <- ""
   options$heterogeneity <- list()
   options$heterogeneityNull <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
                                          parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                                          parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
                                          truncationLower = "0", truncationUpper = "Inf", type = "spike"))
-  options$inputCI <- list()
-  options$inputES <- "d"
-  options$inputN <- "N"
-  options$measures <- "correlation"
-  options$modelType <- "custom"
+  options$effectSizeCi <- list()
+  options$effectSize <- "d"
+  options$sampleSize <- "N"
+  options$inputType <- "correlation"
+  options$modelEnsembleType <- "custom"
   options$omega <- list()
   options$omegaNull <- list(list(name = "#", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
                                  parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "none"))
@@ -1120,12 +1120,12 @@ fittedPath <- file.path("robmaFit.RDS")
   options$peeseNull <- list()
   options$pet <- list()
   options$petNull <- list()
-  options$plotForestOrder <- "alphabetical"
-  options$plotModelsOrder <- "decreasing"
-  options$plotModelsOrderBy <- "model"
-  options$resultsModelsBf <- "inclusion"
-  options$resultsModelsOrder <- "default"
-  options$savePath <- ""
+  options$plotsForestPlotOrder <- "alphabetical"
+  options$plotsIndividualModelsOrder <- "decreasing"
+  options$plotsIndividualModelsOrderBy <- "modelNumber"
+  options$inferenceModelsOverviewBfComparison <- "inclusion"
+  options$inferenceModelsOverviewOrder <- "default"
+  options$advancedSaveFittedModel <- ""
   options$setSeed <- TRUE
   set.seed(1)
   dataset <- structure(list(study = c("study one", "study two", "study three"
@@ -1160,35 +1160,35 @@ fittedPath <- file.path("robmaFit.RDS")
   })
 }
 
-### fit a minimum model using logOR + CI, with autofit & check diagnostics
+### fit a minimum model using logOr + CI, with autofit & check diagnostics
 {
   options <- analysisOptions("RobustBayesianMetaAnalysis")
-  options$advancedAdapt <- 100
-  options$advancedBurnin <- 100
-  options$advancedChains <- 2
-  options$advancedIteration <- 100
-  options$autofitEss <- FALSE
-  options$autofitExtendSamples <- 100
-  options$autofitMcmcErrorSdValue <- 0.05
-  options$autofitMcmcErrorValue <- 0.01
-  options$autofitRhat <- FALSE
-  options$autofitTime <- FALSE
-  options$diagnosticsOverview <- TRUE
+  options$advancedMcmcAdaptation <- 100
+  options$advancedMcmcBurnin <- 100
+  options$advancedMcmcChains <- 2
+  options$advancedMcmcSamples <- 100
+  options$advancedAutofitEss <- FALSE
+  options$advancedAutofitExtendSamples <- 100
+  options$advancedAutofitMcmcErrorSdTarget <- 0.05
+  options$advancedAutofitMcmcErrorTarget <- 0.01
+  options$advancedAutofitRHat <- FALSE
+  options$advancedAutofitMaximumFittingTime <- FALSE
+  options$mcmcDiagnosticsOverviewTable <- TRUE
   options$effect <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
                               parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                               parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
                               truncationLower = "-Inf", truncationUpper = "Inf", type = "normal"))
   options$effectNull <- list()
-  options$fittedPath <- ""
+  options$pathToFittedModel <- ""
   options$heterogeneity <- list()
   options$heterogeneityNull <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
                                          parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                                          parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
                                          truncationLower = "0", truncationUpper = "Inf", type = "spike"))
-  options$inputCI <- list(c("lCI", "uCI"))
-  options$inputES <- "d"
-  options$measures <- "logOR"
-  options$modelType <- "custom"
+  options$effectSizeCi <- list(c("lCI", "uCI"))
+  options$effectSize <- "d"
+  options$inputType <- "logOr"
+  options$modelEnsembleType <- "custom"
   options$omega <- list()
   options$omegaNull <- list(list(name = "#", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
                                  parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "none"))
@@ -1196,13 +1196,13 @@ fittedPath <- file.path("robmaFit.RDS")
   options$peeseNull <- list()
   options$pet <- list()
   options$petNull <- list()
-  options$plotForestOrder <- "alphabetical"
-  options$plotModelsOrder <- "decreasing"
-  options$plotModelsOrderBy <- "model"
+  options$plotsForestPlotOrder <- "alphabetical"
+  options$plotsIndividualModelsOrder <- "decreasing"
+  options$plotsIndividualModelsOrderBy <- "modelNumber"
   options$priorsNull <- TRUE
-  options$resultsModelsBf <- "inclusion"
-  options$resultsModelsOrder <- "default"
-  options$savePath <- ""
+  options$inferenceModelsOverviewBfComparison <- "inclusion"
+  options$inferenceModelsOverviewOrder <- "default"
+  options$advancedSaveFittedModel <- ""
   options$setSeed <- TRUE
   set.seed(1)
   dataset <- structure(list(study = c("study one", "study two", "study three"
@@ -1239,32 +1239,32 @@ fittedPath <- file.path("robmaFit.RDS")
 ### fit a minimum model using general effect sizes, with autofit & check diagnostics
 {
   options <- analysisOptions("RobustBayesianMetaAnalysis")
-  options$advancedAdapt <- 100
-  options$advancedBurnin <- 100
-  options$advancedChains <- 2
-  options$advancedIteration <- 100
-  options$autofitEss <- FALSE
-  options$autofitExtendSamples <- 100
-  options$autofitMcmcErrorSdValue <- 0.05
-  options$autofitMcmcErrorValue <- 0.01
-  options$autofitRhat <- FALSE
-  options$autofitTime <- FALSE
-  options$diagnosticsOverview <- TRUE
+  options$advancedMcmcAdaptation <- 100
+  options$advancedMcmcBurnin <- 100
+  options$advancedMcmcChains <- 2
+  options$advancedMcmcSamples <- 100
+  options$advancedAutofitEss <- FALSE
+  options$advancedAutofitExtendSamples <- 100
+  options$advancedAutofitMcmcErrorSdTarget <- 0.05
+  options$advancedAutofitMcmcErrorTarget <- 0.01
+  options$advancedAutofitRHat <- FALSE
+  options$advancedAutofitMaximumFittingTime <- FALSE
+  options$mcmcDiagnosticsOverviewTable <- TRUE
   options$effect <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
                               parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                               parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
                               truncationLower = "-Inf", truncationUpper = "Inf", type = "normal"))
   options$effectNull <- list()
-  options$fittedPath <- ""
+  options$pathToFittedModel <- ""
   options$heterogeneity <- list()
   options$heterogeneityNull <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
                                          parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                                          parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
                                          truncationLower = "0", truncationUpper = "Inf", type = "spike"))
-  options$inputCI <- list(c("lCI", "uCI"))
-  options$inputES <- "d"
-  options$measures <- "general"
-  options$modelType <- "custom"
+  options$effectSizeCi <- list(c("lCI", "uCI"))
+  options$effectSize <- "d"
+  options$inputType <- "unstandardizedEffectSizes"
+  options$modelEnsembleType <- "custom"
   options$omega <- list()
   options$omegaNull <- list(list(name = "#", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
                                  parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "none"))
@@ -1272,13 +1272,13 @@ fittedPath <- file.path("robmaFit.RDS")
   options$peeseNull <- list()
   options$pet <- list()
   options$petNull <- list()
-  options$plotForestOrder <- "alphabetical"
-  options$plotModelsOrder <- "decreasing"
-  options$plotModelsOrderBy <- "model"
+  options$plotsForestPlotOrder <- "alphabetical"
+  options$plotsIndividualModelsOrder <- "decreasing"
+  options$plotsIndividualModelsOrderBy <- "modelNumber"
   options$priorsNull <- TRUE
-  options$resultsModelsBf <- "inclusion"
-  options$resultsModelsOrder <- "default"
-  options$savePath <- ""
+  options$inferenceModelsOverviewBfComparison <- "inclusion"
+  options$inferenceModelsOverviewOrder <- "default"
+  options$advancedSaveFittedModel <- ""
   options$setSeed <- TRUE
   set.seed(1)
   dataset <- structure(list(study = c("study one", "study two", "study three"
@@ -1315,9 +1315,9 @@ fittedPath <- file.path("robmaFit.RDS")
 ### more options tested using a pre-loaded model
 {
   options <- analysisOptions("RobustBayesianMetaAnalysis")
-  options$autofitMcmcError <- FALSE
-  options$autofitMcmcErrorSd <- FALSE
-  options$autofitTime <- FALSE
+  options$advancedAutofitMcmcError <- FALSE
+  options$advancedAutofitMcmcErrorSd <- FALSE
+  options$advancedAutofitMaximumFittingTime <- FALSE
   options$bayesFactorType <- "BF01"
   options$effect <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
                               parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
@@ -1327,7 +1327,7 @@ fittedPath <- file.path("robmaFit.RDS")
                                   parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                                   parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
                                   truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
-  options$fittedPath <- fittedPath
+  options$pathToFittedModel <- pathToFittedModel
   options$heterogeneity <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
                                      parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                                      parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
@@ -1336,8 +1336,8 @@ fittedPath <- file.path("robmaFit.RDS")
                                          parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
                                          parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
                                          truncationLower = "0", truncationUpper = "Inf", type = "spike"))
-  options$inputCI <- list()
-  options$measures <- "fitted"
+  options$effectSizeCi <- list()
+  options$inputType <- "fittedModel"
   options$omega <- list(list(name = "#", parAlpha = "(1,1)", parCuts = "(.05)",
                              parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "two-sided"),
                         list(name = "#2", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
@@ -1362,21 +1362,21 @@ fittedPath <- file.path("robmaFit.RDS")
                            parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
                            truncationLower = "0", truncationUpper = "Inf", type = "cauchy"))
   options$petNull <- list()
-  options$plotForest <- TRUE
-  options$plotForestOrder <- "increasing"
-  options$plotForestType <- "conditional"
-  options$plotModelsMu <- TRUE
-  options$plotModelsOrder <- "decreasing"
-  options$plotModelsOrderBy <- "BF"
-  options$resultsCi <- 0.9
-  options$resultsIndividual <- TRUE
-  options$resultsIndividualSingle <- TRUE
-  options$resultsIndividualSingleNumber <- 36
-  options$resultsModelsBf <- "inclusion"
-  options$resultsModelsOrder <- "default"
-  options$resultsScale <- "r"
-  options$savePath <- ""
-  options$shortNames <- TRUE
+  options$plotsForestPlot <- TRUE
+  options$plotsForestPlotOrder <- "increasing"
+  options$plotsForestPlotType <- "conditional"
+  options$plotsIndividualModelsEffect <- TRUE
+  options$plotsIndividualModelsOrder <- "decreasing"
+  options$plotsIndividualModelsOrderBy <- "bayesFactor"
+  options$inferenceCiWidth <- 0.9
+  options$inferenceIndividualModels <- TRUE
+  options$inferenceIndividualModelsSingleModel <- TRUE
+  options$inferenceIndividualModelsSingleModelNumber <- 36
+  options$inferenceModelsOverviewBfComparison <- "inclusion"
+  options$inferenceModelsOverviewOrder <- "default"
+  options$inferenceOutputScale <- "correlation"
+  options$advancedSaveFittedModel <- ""
+  options$inferenceShortenPriorName <- TRUE
   set.seed(1)
   dataset <- NULL
   results <- runAnalysis("RobustBayesianMetaAnalysis", dataset, options)
