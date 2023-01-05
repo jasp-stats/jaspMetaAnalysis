@@ -30,21 +30,21 @@ ColumnLayout
 	{
 		text:					
 		{
-			if (componentType == "effect")
+			if (componentType == "modelsEffect")
 				qsTr("Effect")
-			else if (componentType == "effectNull")
+			else if (componentType == "modelsEffectNull")
 				qsTr("Effect (null)")
-			else if (componentType == "heterogeneity")
+			else if (componentType == "modelsHeterogeneity")
 				qsTr("Heterogeneity")
-			else if (componentType == "heterogeneityNull")
+			else if (componentType == "modelsHeterogeneityNull")
 				qsTr("Heterogeneity (null)")
-			else if (componentType == "pet")
+			else if (componentType == "modelsPet")
 				qsTr("Publication bias: PET")
-			else if (componentType == "petNull")
+			else if (componentType == "modelsPetNull")
 				qsTr("Publication bias: PET (null)")
-			else if (componentType == "peese")
+			else if (componentType == "modelsPeese")
 				qsTr("Publication bias: PEESE")
-			else if (componentType == "peeseNull")
+			else if (componentType == "modelsPeeseNull")
 				qsTr("Publication bias: PEESE (null)")
 		}
 		Layout.preferredHeight:	20 * preferencesModel.uiScale
@@ -64,21 +64,21 @@ ColumnLayout
 		optionKey:				"name"
 		defaultValues:				
 		{
-			if (componentType == "effect")
+			if (componentType == "modelsEffect")
 				[{"type": "normal"}]
-			else if (componentType == "effectNull")
+			else if (componentType == "modelsEffectNull")
 				[{"type": "spike"}]
-			else if (componentType == "heterogeneity")
+			else if (componentType == "modelsHeterogeneity")
 				[{"type": "invgamma"}]
-			else if (componentType == "heterogeneityNull")
+			else if (componentType == "modelsHeterogeneityNull")
 				[{"type": "spike"}]
-			else if (componentType == "pet")
+			else if (componentType == "modelsPet")
 				[{"type": "cauchy", "priorWeight": "1/4"}]
-			else if (componentType == "petNull")
+			else if (componentType == "modelsPetNull")
 				[]
-			else if (componentType == "peese")
-				[{"type": "cauchy", "parScale2": "5", "priorWeight": "1/4"}]
-			else if (componentType == "peeseNull")
+			else if (componentType == "modelsPeese")
+				[{"type": "cauchy", "theta": "5", "priorWeight": "1/4"}]
+			else if (componentType == "modelsPeeseNull")
 				[]
 		}
 		rowComponent: 			RowLayout
@@ -118,7 +118,7 @@ ColumnLayout
 				FormulaField
 				{
 					label:				"μ "
-					name:				"parMean"
+					name:				"mu"
 					visible:			typeItem.currentValue === "normal"		||
 										typeItem.currentValue === "lognormal"	||
 										typeItem.currentValue === "t"
@@ -131,7 +131,7 @@ ColumnLayout
 				FormulaField
 				{
 					label:				"x₀"
-					name:				"parLocation"
+					name:				"x0"
 					visible:			typeItem.currentValue === "cauchy"	||
 										typeItem.currentValue === "spike"
 					value:				"0"
@@ -143,8 +143,8 @@ ColumnLayout
 				FormulaField
 				{
 					label:				"σ"
-					name:				"parScale"
-					id:					parScale
+					name:				"sigma"
+					id:					sigma
 					visible:			typeItem.currentValue === "normal"		||
 										typeItem.currentValue === "lognormal"	||
 										typeItem.currentValue === "t"
@@ -158,7 +158,7 @@ ColumnLayout
 				FormulaField
 				{
 					label:				"k "
-					name:				"parShape"
+					name:				"k"
 					visible:			typeItem.currentValue === "gammaK0"
 					value:				"1"
 					min:				0
@@ -169,7 +169,7 @@ ColumnLayout
 				FormulaField
 				{
 					label:				"θ"
-					name:				"parScale2"
+					name:				"theta"
 					visible:			typeItem.currentValue === "cauchy"	||
 										typeItem.currentValue === "gammaK0"
 					value:				"1"
@@ -182,7 +182,7 @@ ColumnLayout
 				FormulaField
 				{
 					label:				"ν"
-					name:				"parDf"
+					name:				"nu"
 					visible:			typeItem.currentValue === "t"
 					value:				"2"
 					min:				1
@@ -194,7 +194,7 @@ ColumnLayout
 				FormulaField
 				{
 					label:				"α "
-					name:				"parAlpha"
+					name:				"alpha"
 					visible:			typeItem.currentValue === "gammaAB"	 ||
 										typeItem.currentValue === "invgamma" ||
 										typeItem.currentValue === "beta"
@@ -208,7 +208,7 @@ ColumnLayout
 				FormulaField
 				{
 					label:				"β"
-					name:				"parBeta"
+					name:				"beta"
 					visible:			typeItem.currentValue === "gammaAB"	 ||
 										typeItem.currentValue === "invgamma" ||
 										typeItem.currentValue === "beta"
@@ -222,11 +222,11 @@ ColumnLayout
 				FormulaField
 				{
 					label:				"a "
-					name:				"parA"
-					id:					parA
+					name:				"a"
+					id:					a
 					visible:			typeItem.currentValue === "uniform"
 					value:				"0"
-					max:				parB.value
+					max:				b.value
 					inclusive:			JASP.None
 					fieldWidth: 		40 * preferencesModel.uiScale
 					useExternalBorder:	false
@@ -235,11 +235,11 @@ ColumnLayout
 				FormulaField
 				{
 					label:				"b"
-					name:				"parB"
-					id:					parB
+					name:				"b"
+					id:					b
 					visible:			typeItem.currentValue === "uniform"
 					value:				"1"
-					min:				parA.value
+					min:				a.value
 					inclusive:			JASP.None
 					fieldWidth: 		40 * preferencesModel.uiScale
 					useExternalBorder:	false
@@ -260,7 +260,7 @@ ColumnLayout
 					visible:			typeItem.currentValue !== "spike" && typeItem.currentValue !== "uniform"
 					value:				
 					{
-						if(componentType == "heterogeneity" || componentType == "heterogeneityNull" || componentType == "pet" || componentType == "petNull" || componentType == "peese" || componentType == "peeseNull")
+						if(componentType == "modelsHeterogeneity" || componentType == "modelsHeterogeneityNull" || componentType == "modelsPet" || componentType == "modelsPetNull" || componentType == "modelsPeese" || componentType == "modelsPeeseNull")
 							0
 						else if (typeItem.currentValue === "gammaK0" || typeItem.currentValue === "gammaAB" || typeItem.currentValue === "invgamma" || typeItem.currentValue === "lognormal" || typeItem.currentValue === "beta")
 							0
@@ -269,7 +269,7 @@ ColumnLayout
 					}	
 					min:				
 					{
-						if(componentType == "heterogeneity" || componentType == "heterogeneityNull" || componentType == "pet" || componentType == "petNull" || componentType == "peese" || componentType == "peeseNull")
+						if(componentType == "modelsHeterogeneity" || componentType == "modelsHeterogeneityNull" || componentType == "modelsPet" || componentType == "modelsPetNull" || componentType == "modelsPeese" || componentType == "modelsPeeseNull")
 							0
 						else if (typeItem.currentValue === "gammaK0" || typeItem.currentValue === "gammaAB" || typeItem.currentValue === "invgamma" || typeItem.currentValue === "lognormal" || typeItem.currentValue === "beta")
 							0

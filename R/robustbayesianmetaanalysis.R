@@ -74,7 +74,6 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   if (options[["plotsIndividualModelsHeterogeneity"]])
     .robmaModelsPlot(jaspResults, options, "tau")
 
-
   ### Diagnostics
   # overview
   if (options[["mcmcDiagnosticsOverviewTable"]])
@@ -106,7 +105,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   "inputType", "pathToFittedModel",
   "effectSize", "effectSizeSe", "effectSizeCi", "sampleSize", "studyLabel",
   "modelExpectedDirectionOfEffectSizes", "modelEnsembleType", "priorScale", "advancedEstimationScale",
-  "effect", "effectNull", "heterogeneity", "heterogeneityNull", "omega", "omegaNull", "pet", "petNull", "peese", "peeseNull",
+  "modelsEffect", "modelsEffectNull", "modelsHeterogeneity", "modelsHeterogeneityNull", "modelsSelectionModels", "modelsSelectionModelsNull", "modelsPet", "modelsPetNull", "modelsPeese", "modelsPeeseNull",
   "advancedMcmcAdaptation", "advancedMcmcBurnin", "advancedMcmcSamples", "advancedMcmcChains", "advancedMcmcThin",
   "autofit", "advancedAutofitRHat", "advancedAutofitRHatTarget", "advancedAutofitEss", "advancedAutofitEssTarget", "advancedAutofitMcmcError", "advancedAutofitMcmcErrorTarget", "advancedAutofitMcmcErrorSd", "advancedAutofitMcmcErrorSdTarget", "advancedAutofitMaximumFittingTime", "advancedAutofitMaximumFittingTimeTarget", "advancedAutofitMaximumFittingTimeTargetUnit", "advancedAutofitExtendSamples",
   "advancedAutofitRemoveFailedModels", "advancedAutofitRebalanceComponentProbabilityOnModelFailure", "seed", "setSeed"
@@ -122,10 +121,10 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     return(do.call(
       what = switch(
         parameter,
-        "normal" = RoBMA::prior,
-        "omega"  = RoBMA::prior_weightfunction,
-        "pet"    = RoBMA::prior_PET,
-        "peese"  = RoBMA::prior_PEESE
+        "normal"                 = RoBMA::prior,
+        "modelsSelectionModels"  = RoBMA::prior_weightfunction,
+        "modelsPet"              = RoBMA::prior_PET,
+        "modelsPeese"            = RoBMA::prior_PEESE
       ),
       args = .robmaMapOptionsToPriors(optionsPrior)
     ))
@@ -149,29 +148,29 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 }
 .robmaEvalOptionsToPriors      <- function(x) {
 
-  if (x[["type"]] %in% c("two-sided", "one-sided")) {
+  if (x[["type"]] %in% c("twoSided", "oneSided")) {
     x[["priorWeight"]] <- eval(parse(text = x[["priorWeight"]]))
-    x[["parAlpha"]]    <- .robmaCleanOptionsToPriors(x[["parAlpha"]])
-    x[["parCuts"]]     <- .robmaCleanOptionsToPriors(x[["parCuts"]])
-  } else if (x[["type"]] %in% c("two-sided-fixed", "one-sided-fixed")) {
+    x[["alpha"]]    <- .robmaCleanOptionsToPriors(x[["alpha"]])
+    x[["pValues"]]     <- .robmaCleanOptionsToPriors(x[["pValues"]])
+  } else if (x[["type"]] %in% c("twoSidedFixed", "oneSidedFixed")) {
     x[["priorWeight"]] <- eval(parse(text = x[["priorWeight"]]))
-    x[["parOmega"]]    <- .robmaCleanOptionsToPriors(x[["parOmega"]])
-    x[["parCuts"]]     <- .robmaCleanOptionsToPriors(x[["parCuts"]])
+    x[["omega"]]    <- .robmaCleanOptionsToPriors(x[["omega"]])
+    x[["pValues"]]     <- .robmaCleanOptionsToPriors(x[["pValues"]])
   } else if (x[["type"]] == "none") {
     x[["priorWeight"]] <- eval(parse(text = x[["priorWeight"]]))
   } else {
     evalNames <-
       c(
-        "parA",
-        "parB",
-        "parAlpha",
-        "parBeta",
-        "parDf",
-        "parLocation",
-        "parMean",
-        "parScale",
-        "parScale2",
-        "parShape",
+        "a",
+        "b",
+        "alpha",
+        "beta",
+        "nu",
+        "x0",
+        "mu",
+        "sigma",
+        "theta",
+        "k",
         "priorWeight",
         "truncationLower",
         "truncationUpper"
@@ -197,23 +196,23 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   arguments[["parameters"]] <- switch(
     optionsPrior[["type"]],
-    "normal"    = list("mean" = optionsPrior[["parMean"]], "sd" = optionsPrior[["parScale"]]),
-    "t"         = list("location" = optionsPrior[["parMean"]], "scale" = optionsPrior[["parScale"]], "df" = optionsPrior[["parDf"]]),
-    "cauchy"    = list("location" = optionsPrior[["parMean"]], "scale" = optionsPrior[["parScale2"]]),
-    "gammaAB"   = list("shape" = optionsPrior[["parAlpha"]], "rate" = optionsPrior[["parBeta"]]),
-    "gammaK0"   = list("shape" = optionsPrior[["parShape"]], "rate" = 1/optionsPrior[["parScale2"]]),
-    "invgamma"  = list("shape" = optionsPrior[["parAlpha"]], "scale" = optionsPrior[["parBeta"]]),
-    "lognormal" = list("meanlog" = optionsPrior[["parMean"]], "sdlog" = optionsPrior[["parScale"]]),
-    "beta"      = list("alpha" = optionsPrior[["parAlpha"]], "beta" = optionsPrior[["parBeta"]]),
-    "uniform"   = list("a" = optionsPrior[["parA"]], "b" = optionsPrior[["parB"]]),
-    "spike"     = list("location" = optionsPrior[["parLocation"]]),
-    "one-sided" = list("steps" = optionsPrior[["parCuts"]], alpha = optionsPrior[["parAlpha"]]),
-    "two-sided" = list("steps" = optionsPrior[["parCuts"]], alpha = optionsPrior[["parAlpha"]]),
-    "one-sided-fixed" = list("steps" = optionsPrior[["parCuts"]], omega = optionsPrior[["parOmega"]]),
-    "two-sided-fixed" = list("steps" = optionsPrior[["parCuts"]], omega = optionsPrior[["parOmega"]])
+    "normal"    = list("mean" = optionsPrior[["mu"]], "sd" = optionsPrior[["sigma"]]),
+    "t"         = list("location" = optionsPrior[["mu"]], "scale" = optionsPrior[["sigma"]], "df" = optionsPrior[["nu"]]),
+    "cauchy"    = list("location" = optionsPrior[["mu"]], "scale" = optionsPrior[["theta"]]),
+    "gammaAB"   = list("shape" = optionsPrior[["alpha"]], "rate" = optionsPrior[["beta"]]),
+    "gammaK0"   = list("shape" = optionsPrior[["k"]], "rate" = 1/optionsPrior[["theta"]]),
+    "invgamma"  = list("shape" = optionsPrior[["alpha"]], "scale" = optionsPrior[["beta"]]),
+    "lognormal" = list("meanlog" = optionsPrior[["mu"]], "sdlog" = optionsPrior[["sigma"]]),
+    "beta"      = list("alpha" = optionsPrior[["alpha"]], "beta" = optionsPrior[["beta"]]),
+    "uniform"   = list("a" = optionsPrior[["a"]], "b" = optionsPrior[["b"]]),
+    "spike"     = list("location" = optionsPrior[["x0"]]),
+    "oneSided"  = list("steps" = optionsPrior[["pValues"]], alpha = optionsPrior[["alpha"]]),
+    "twoSided"  = list("steps" = optionsPrior[["pValues"]], alpha = optionsPrior[["alpha"]]),
+    "oneSidedFixed" = list("steps" = optionsPrior[["pValues"]], omega = optionsPrior[["omega"]]),
+    "twoSidedFixed" = list("steps" = optionsPrior[["pValues"]], omega = optionsPrior[["omega"]])
   )
 
-  if(!arguments[["distribution"]] %in% c("one-sided", "two-sided", "one-sided-fixed", "two-sided-fixed", "spike", "uniform")) {
+  if(!arguments[["distribution"]] %in% c("oneSided", "twoSided", "oneSidedFixed", "twoSidedFixed", "spike", "uniform")) {
     arguments[["truncation"]] <- list(
       lower   = optionsPrior[["truncationLower"]],
       upper   = optionsPrior[["truncationUpper"]]
@@ -478,7 +477,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
     # effect and heterogeneity are simply
     for(type in c("", "Null")) {
-      priorElements <- paste0(c("effect", "heterogeneity"), type)
+      priorElements <- paste0(c("modelsEffect", "modelsHeterogeneity"), type)
       for (i in seq_along(priorElements)) {
         tmp <- NULL
         for (j in seq_along(options[[priorElements[i]]])) {
@@ -495,7 +494,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     # publication bias can be composite
     for(type in c("", "Null")) {
       tmp <- NULL
-      for (parameter in c("omega", "pet", "peese")) {
+      for (parameter in c("modelsSelectionModels", "modelsPet", "modelsPeese")) {
         priorElements <- paste0(parameter, type)
         for (i in seq_along(priorElements)) {
           for (j in seq_along(options[[priorElements[i]]])) {
@@ -507,7 +506,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
           }
         }
       }
-      object[[paste0("bias", type)]] <- tmp
+      object[[paste0("modelsBias", type)]] <- tmp
     }
   }
 
@@ -577,9 +576,9 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
         )
         typeContainer$dependOn(switch(
           parameter,
-          "effect"        = c("effect", "effectNull"),
-          "heterogeneity" = c("heterogeneity", "heterogeneityNull"),
-          "bias"          = c("omega", "omegaNull", "pet", "petNull", "peese", "peeseNull")
+          "effect"        = c("modelsEffect", "modelsEffectNull"),
+          "heterogeneity" = c("modelsHeterogeneity", "modelsHeterogeneityNull"),
+          "bias"          = c("modelsSelectionModels", "modelsSelectionModelsNull", "modelsPet", "modelsPetNull", "modelsPeese", "modelsPeeseNull")
         ))
         parameterContainer[[type]] <- typeContainer
       }
@@ -639,9 +638,9 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
     # set error if no priors are specified
     if (
-      (length(priors[["effect"]])        == 0 && length(priors[["effectNull"]])        == 0) ||
-      (length(priors[["heterogeneity"]]) == 0 && length(priors[["heterogeneityNull"]]) == 0) ||
-      (length(priors[["bias"]])          == 0 && length(priors[["biasNull"]])          == 0)
+      (length(priors[["modelsEffect"]])        == 0 && length(priors[["modelsEffectNull"]])        == 0) ||
+      (length(priors[["modelsHeterogeneity"]]) == 0 && length(priors[["modelsHeterogeneityNull"]]) == 0) ||
+      (length(priors[["modelsBias"]])          == 0 && length(priors[["modelsBiasNull"]])          == 0)
     ) {
       priorsError <- createJaspTable()
       priorsError$setError(gettext("Please specify a prior distribution for each parameter in the Models specification section (either null or alternative)."))
@@ -651,12 +650,12 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
     # create the setup table
     fitSummary   <- RoBMA::check_setup(
-      priors_effect             = priors[["effect"]],
-      priors_heterogeneity      = priors[["heterogeneity"]],
-      priors_bias               = priors[["bias"]],
-      priors_effect_null        = priors[["effectNull"]],
-      priors_heterogeneity_null = priors[["heterogeneityNull"]],
-      priors_bias_null          = priors[["biasNull"]],
+      priors_effect             = priors[["modelsEffect"]],
+      priors_heterogeneity      = priors[["modelsHeterogeneity"]],
+      priors_bias               = priors[["modelsBias"]],
+      priors_effect_null        = priors[["modelsEffectNull"]],
+      priors_heterogeneity_null = priors[["modelsHeterogeneityNull"]],
+      priors_bias_null          = priors[["modelsBiasNull"]],
       models                    = TRUE,
       silent                    = TRUE
     )
@@ -768,12 +767,12 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
       effect_direction = options[["modelExpectedDirectionOfEffectSizes"]],
       # priors
       model_type                = if (options[["modelEnsembleType"]] != "custom") .robmaGetModelTypeOption(options),
-      priors_effect             = if (options[["modelEnsembleType"]] == "custom") priors[["effect"]],
-      priors_heterogeneity      = if (options[["modelEnsembleType"]] == "custom") priors[["heterogeneity"]],
-      priors_bias               = if (options[["modelEnsembleType"]] == "custom") priors[["bias"]],
-      priors_effect_null        = if (options[["modelEnsembleType"]] == "custom") priors[["effectNull"]],
-      priors_heterogeneity_null = if (options[["modelEnsembleType"]] == "custom") priors[["heterogeneityNull"]],
-      priors_bias_null          = if (options[["modelEnsembleType"]] == "custom") priors[["biasNull"]],
+      priors_effect             = if (options[["modelEnsembleType"]] == "custom") priors[["modelsEffect"]],
+      priors_heterogeneity      = if (options[["modelEnsembleType"]] == "custom") priors[["modelsHeterogeneity"]],
+      priors_bias               = if (options[["modelEnsembleType"]] == "custom") priors[["modelsBias"]],
+      priors_effect_null        = if (options[["modelEnsembleType"]] == "custom") priors[["modelsEffectNull"]],
+      priors_heterogeneity_null = if (options[["modelEnsembleType"]] == "custom") priors[["modelsHeterogeneityNull"]],
+      priors_bias_null          = if (options[["modelEnsembleType"]] == "custom") priors[["modelsBiasNull"]],
       # sampling settings
       chains  = options[["advancedMcmcChains"]],
       adapt   = options[["advancedMcmcAdaptation"]],
@@ -1114,7 +1113,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     tempPriors$addRows(list(
       priorMu     = print(fit[["models"]][[i]][["priors"]][["mu"]],    silent = TRUE, short_name = options[["inferenceShortenPriorName"]]),
       priorTau    = print(fit[["models"]][[i]][["priors"]][["tau"]],   silent = TRUE, short_name = options[["inferenceShortenPriorName"]]),
-      priorBias   =  if (!is.null(fit[["models"]][[i]][["priors"]][["omega"]]))
+      priorBias   = if (!is.null(fit[["models"]][[i]][["priors"]][["omega"]]))
         print(fit[["models"]][[i]][["priors"]][["omega"]], silent = TRUE, short_name = options[["inferenceShortenPriorName"]])
       else if (!is.null(fit[["models"]][[i]][["priors"]][["PET"]]))
         print(fit[["models"]][[i]][["priors"]][["PET"]],   silent = TRUE, short_name = options[["inferenceShortenPriorName"]])
@@ -1676,8 +1675,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
           for (pi in 1:length(newPlots)) {
             tempPlot  <- createJaspPlot(width = 400, aspectRatio = .7)
             tempPlots[[paste0("samples", pi)]] <- tempPlot
-            tempPlot[["plotObject"]] <-
-              jaspGraphs::themeJasp(newPlots[[pi]])
+            tempPlot[["plotObject"]] <- jaspGraphs::themeJasp(newPlots[[pi]])
           }
 
         } else {

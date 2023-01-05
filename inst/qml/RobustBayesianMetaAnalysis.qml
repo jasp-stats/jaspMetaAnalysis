@@ -746,33 +746,33 @@ Form
 		MA.RobustBayesianMetaAnalysisPriors
 		{
 			Layout.preferredWidth:	parent.width
-			componentType:			"effect"
+			componentType:			"modelsEffect"
 		}
 
 		// effect prior
 		MA.RobustBayesianMetaAnalysisPriors
 		{
 			Layout.preferredWidth:	parent.width
-			componentType:			"heterogeneity"
+			componentType:			"modelsHeterogeneity"
 		}
 
 		// bias priors
 		MA.RobustBayesianMetaAnalysisWeightfunctions
 		{
 			Layout.preferredWidth:	parent.width
-			componentType:			"omega"
+			componentType:			"modelsSelectionModels"
 		}
 
 		MA.RobustBayesianMetaAnalysisPriors
 		{
 			Layout.preferredWidth:	parent.width
-			componentType:			"pet"
+			componentType:			"modelsPet"
 		}
 
 		MA.RobustBayesianMetaAnalysisPriors
 		{
 			Layout.preferredWidth:	parent.width
-			componentType:			"peese"
+			componentType:			"modelsPeese"
 		}
 
 		Divider { }
@@ -788,7 +788,7 @@ Form
 		MA.RobustBayesianMetaAnalysisPriors
 		{
 			Layout.preferredWidth:	parent.width
-			componentType:			"effectNull"
+			componentType:			"modelsEffectNull"
 			visible:				priorsNull.checked
 		}
 
@@ -796,7 +796,7 @@ Form
 		MA.RobustBayesianMetaAnalysisPriors
 		{
 			Layout.preferredWidth:	parent.width
-			componentType:			"heterogeneityNull"
+			componentType:			"modelsHeterogeneityNull"
 			visible:				priorsNull.checked
 		}
 
@@ -804,21 +804,21 @@ Form
 		MA.RobustBayesianMetaAnalysisWeightfunctions
 		{
 			Layout.preferredWidth:	parent.width
-			componentType:			"omegaNull"
+			componentType:			"modelsSelectionModelsNull"
 			visible:				priorsNull.checked
 		}
 
 		MA.RobustBayesianMetaAnalysisPriors
 		{
 			Layout.preferredWidth:	parent.width
-			componentType:			"petNull"
+			componentType:			"modelsPetNull"
 			visible:				priorsNull.checked
 		}
 
 		MA.RobustBayesianMetaAnalysisPriors
 		{
 			Layout.preferredWidth:	parent.width
-			componentType:			"peeseNull"
+			componentType:			"modelsPeeseNull"
 			visible:				priorsNull.checked
 		}
 	}

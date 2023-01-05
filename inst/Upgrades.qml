@@ -476,7 +476,45 @@ Upgrades
 		ChangeRename { from: "diagnosticsSingle"; to: "mcmcDiagnosticsPlotSingleModel" }
 		ChangeRename { from: "diagnosticsSingleModel"; to: "mcmcDiagnosticsPlotSingleModelNumber" }
 		// Priors section
+		ChangeRename { from: "effect"; to: "modelsEffect" }
+		ChangeRename { from: "heterogeneity"; to: "modelsHeterogeneity" }
+		ChangeRename { from: "omega"; to: "modelsSelectionModels" }
+		ChangeRename { from: "pet"; to: "modelsPet" }
+		ChangeRename { from: "peese"; to: "modelsPeese" }
+		ChangeRename { from: "effectNull"; to: "modelsEffectNull" }
+		ChangeRename { from: "heterogeneityNull"; to: "modelsHeterogeneityNull" }
+		ChangeRename { from: "omegaNull"; to: "modelsSelectionModelsNull" }
+		ChangeRename { from: "petNull"; to: "modelsPetNull" }
+		ChangeRename { from: "peeseNull"; to: "modelsPeeseNull" }
+		// qml_components/RobustBayesianMetaAnalysisPriors.qml
+		ChangeRename { from: "parMean"; to: "mu" }
+		ChangeRename { from: "parLocation"; to: "x0" }
+		ChangeRename { from: "parScale"; to: "sigma" }
+		ChangeRename { from: "parShape"; to: "k" }
+		ChangeRename { from: "parScale2"; to: "theta" }
+		ChangeRename { from: "parDf"; to: "nu" }
+		ChangeRename { from: "parAlpha"; to: "alpha" }
+		ChangeRename { from: "parBeta"; to: "beta" }
+		ChangeRename { from: "parA"; to: "a" }
+		ChangeRename { from: "parB"; to: "b" }
+		// qml_components/RobustBayesianMetaAnalysisWeightunctions.qml
+		ChangeJS
+		{
+			name:		"type"
+			jsFunction:	function(options)
+			{
+				switch(options["type"])
+				{
+					case "two-sided":	return "twoSided";
+					case "one-sided":	return "oneSided";
+					case "two-sided-fixed":	return "twoSidedFixed";
+					case "one-sided-fixed":	return "oneSidedFixed";
 
+				}
+			}
+		}
+		ChangeRename { from: "parCuts"; to: "pValues" }
+		ChangeRename { from: "parOmega"; to: "omega" }
 		// Advanced section
 		ChangeRename { from: "fittingScale"; to: "advancedEstimationScale" }
 		ChangeJS

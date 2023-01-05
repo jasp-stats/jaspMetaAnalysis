@@ -16,7 +16,7 @@ if (FALSE){
     for(p in c("mu", "tau", "PET", "PEESE")){
       fit$RoBMA$posteriors[[p]] <- sample(fit$RoBMA$posteriors[[p]], 100)
     }
-    for(p in c("omega")){
+    for(p in c("modelsSelectionModels")){
       fit$RoBMA$posteriors[[p]] <- fit$RoBMA$posteriors[[p]][sample(nrow(fit$RoBMA$posteriors[[p]]), 100),]
     }
   }
@@ -32,50 +32,50 @@ pathToFittedModel <- file.path("robmaFit.RDS")
   options$advancedAutofitMcmcError <- FALSE
   options$advancedAutofitMcmcErrorSd <- FALSE
   options$advancedAutofitMaximumFittingTime <- FALSE
-  options$effect <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                              parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                              parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsEffect <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                              beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                              sigma = "1", theta = "1", k = "1", priorWeight = "1",
                               truncationLower = "-Inf", truncationUpper = "Inf", type = "normal"))
-  options$effectNull <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                                  parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                                  parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsEffectNull <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                                  beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                                  sigma = "1", theta = "1", k = "1", priorWeight = "1",
                                   truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
   options$pathToFittedModel <- ""
-  options$heterogeneity <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                                     parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                                     parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsHeterogeneity <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                                     beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                                     sigma = "1", theta = "1", k = "1", priorWeight = "1",
                                      truncationLower = "0", truncationUpper = "Inf", type = "invgamma"))
-  options$heterogeneityNull <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                                         parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                                         parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsHeterogeneityNull <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                                         beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                                         sigma = "1", theta = "1", k = "1", priorWeight = "1",
                                          truncationLower = "0", truncationUpper = "Inf", type = "spike"))
   options$effectSizeCi <- list()
   options$inputType <- "cohensD"
   options$modelEnsembleType <- "PP"
-  options$omega <- list(list(name = "#", parAlpha = "(1,1)", parCuts = "(.05)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "two-sided"),
-                        list(name = "#2", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "two-sided"),
-                        list(name = "#3", parAlpha = "(1,1)", parCuts = "(.05)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "one-sided"),
-                        list(name = "#4", parAlpha = "(1,1,1)", parCuts = "(.025, .05)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "one-sided"),
-                        list(name = "#5", parAlpha = "(1,1,1)", parCuts = "(.05, .50)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "one-sided"),
-                        list(name = "#6", parAlpha = "(1,1,1,1)", parCuts = "(.025, .05, .10)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "one-sided"))
-  options$omegaNull <- list(list(name = "#", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
-                                 parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "none"))
-  options$peese <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                             parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                             parScale = "1", parScale2 = "5", parShape = "1", priorWeight = "1",
+  options$modelsSelectionModels <- list(list(name = "#", alpha = "(1,1)", pValues = "(.05)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "twoSided"),
+                        list(name = "#2", alpha = "(1,1,1)", pValues = "(.05, .10)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "twoSided"),
+                        list(name = "#3", alpha = "(1,1)", pValues = "(.05)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "oneSided"),
+                        list(name = "#4", alpha = "(1,1,1)", pValues = "(.025, .05)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "oneSided"),
+                        list(name = "#5", alpha = "(1,1,1)", pValues = "(.05, .50)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "oneSided"),
+                        list(name = "#6", alpha = "(1,1,1,1)", pValues = "(.025, .05, .10)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "oneSided"))
+  options$modelsSelectionModelsNull <- list(list(name = "#", alpha = "(1,1,1)", pValues = "(.05, .10)",
+                                 omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "none"))
+  options$modelsPeese <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                             beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                             sigma = "1", theta = "5", k = "1", priorWeight = "1",
                              truncationLower = "0", truncationUpper = "Inf", type = "cauchy"))
-  options$peeseNull <- list()
-  options$pet <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                           parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                           parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsPeeseNull <- list()
+  options$modelsPet <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                           beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                           sigma = "1", theta = "1", k = "1", priorWeight = "1",
                            truncationLower = "0", truncationUpper = "Inf", type = "cauchy"))
-  options$petNull <- list()
+  options$modelsPetNull <- list()
   options$plotsForestPlotOrder <- "alphabetical"
   options$plotsIndividualModelsOrder <- "decreasing"
   options$plotsIndividualModelsOrderBy <- "modelNumber"
@@ -115,50 +115,50 @@ pathToFittedModel <- file.path("robmaFit.RDS")
   options$advancedAutofitMcmcError <- FALSE
   options$advancedAutofitMcmcErrorSd <- FALSE
   options$advancedAutofitMaximumFittingTime <- FALSE
-  options$effect <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                              parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                              parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsEffect <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                              beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                              sigma = "1", theta = "1", k = "1", priorWeight = "1",
                               truncationLower = "-Inf", truncationUpper = "Inf", type = "normal"))
-  options$effectNull <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                                  parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                                  parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsEffectNull <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                                  beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                                  sigma = "1", theta = "1", k = "1", priorWeight = "1",
                                   truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
   options$pathToFittedModel <- ""
-  options$heterogeneity <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                                     parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                                     parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsHeterogeneity <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                                     beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                                     sigma = "1", theta = "1", k = "1", priorWeight = "1",
                                      truncationLower = "0", truncationUpper = "Inf", type = "invgamma"))
-  options$heterogeneityNull <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                                         parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                                         parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsHeterogeneityNull <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                                         beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                                         sigma = "1", theta = "1", k = "1", priorWeight = "1",
                                          truncationLower = "0", truncationUpper = "Inf", type = "spike"))
   options$effectSizeCi <- list()
   options$inputType <- "cohensD"
   options$modelEnsembleType <- "original"
-  options$omega <- list(list(name = "#", parAlpha = "(1,1)", parCuts = "(.05)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "two-sided"),
-                        list(name = "#2", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "two-sided"),
-                        list(name = "#3", parAlpha = "(1,1)", parCuts = "(.05)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "one-sided"),
-                        list(name = "#4", parAlpha = "(1,1,1)", parCuts = "(.025, .05)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "one-sided"),
-                        list(name = "#5", parAlpha = "(1,1,1)", parCuts = "(.05, .50)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "one-sided"),
-                        list(name = "#6", parAlpha = "(1,1,1,1)", parCuts = "(.025, .05, .10)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "one-sided"))
-  options$omegaNull <- list(list(name = "#", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
-                                 parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "none"))
-  options$peese <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                             parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                             parScale = "1", parScale2 = "5", parShape = "1", priorWeight = "1",
+  options$modelsSelectionModels <- list(list(name = "#", alpha = "(1,1)", pValues = "(.05)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "twoSided"),
+                        list(name = "#2", alpha = "(1,1,1)", pValues = "(.05, .10)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "twoSided"),
+                        list(name = "#3", alpha = "(1,1)", pValues = "(.05)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "oneSided"),
+                        list(name = "#4", alpha = "(1,1,1)", pValues = "(.025, .05)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "oneSided"),
+                        list(name = "#5", alpha = "(1,1,1)", pValues = "(.05, .50)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "oneSided"),
+                        list(name = "#6", alpha = "(1,1,1,1)", pValues = "(.025, .05, .10)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "oneSided"))
+  options$modelsSelectionModelsNull <- list(list(name = "#", alpha = "(1,1,1)", pValues = "(.05, .10)",
+                                 omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "none"))
+  options$modelsPeese <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                             beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                             sigma = "1", theta = "5", k = "1", priorWeight = "1",
                              truncationLower = "0", truncationUpper = "Inf", type = "cauchy"))
-  options$peeseNull <- list()
-  options$pet <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                           parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                           parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsPeeseNull <- list()
+  options$modelsPet <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                           beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                           sigma = "1", theta = "1", k = "1", priorWeight = "1",
                            truncationLower = "0", truncationUpper = "Inf", type = "cauchy"))
-  options$petNull <- list()
+  options$modelsPetNull <- list()
   options$plotsForestPlotOrder <- "alphabetical"
   options$plotsIndividualModelsOrder <- "decreasing"
   options$plotsIndividualModelsOrderBy <- "modelNumber"
@@ -201,82 +201,82 @@ pathToFittedModel <- file.path("robmaFit.RDS")
   options$advancedAutofitMcmcError <- FALSE
   options$advancedAutofitMcmcErrorSd <- FALSE
   options$advancedAutofitMaximumFittingTime <- FALSE
-  options$effect <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                              parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                              parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsEffect <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                              beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                              sigma = "1", theta = "1", k = "1", priorWeight = "1",
                               truncationLower = "-Inf", truncationUpper = "Inf", type = "normal"),
-                         list(name = "#2", parA = "0", parAlpha = "1", parB = "1",
-                              parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                              parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+                         list(name = "#2", a = "0", alpha = "1", b = "1",
+                              beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                              sigma = "1", theta = "1", k = "1", priorWeight = "1",
                               truncationLower = "-Inf", truncationUpper = "Inf", type = "t"),
-                         list(name = "#3", parA = "0", parAlpha = "1", parB = "1",
-                              parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                              parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+                         list(name = "#3", a = "0", alpha = "1", b = "1",
+                              beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                              sigma = "1", theta = "1", k = "1", priorWeight = "1",
                               truncationLower = "-Inf", truncationUpper = "Inf", type = "cauchy"),
-                         list(name = "#4", parA = "0", parAlpha = "1", parB = "1",
-                              parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                              parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+                         list(name = "#4", a = "0", alpha = "1", b = "1",
+                              beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                              sigma = "1", theta = "1", k = "1", priorWeight = "1",
                               truncationLower = "-Inf", truncationUpper = "Inf", type = "gammaAB"),
-                         list(name = "#5", parA = "0", parAlpha = "1", parB = "1",
-                              parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                              parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+                         list(name = "#5", a = "0", alpha = "1", b = "1",
+                              beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                              sigma = "1", theta = "1", k = "1", priorWeight = "1",
                               truncationLower = "-Inf", truncationUpper = "Inf", type = "gammaK0"),
-                         list(name = "#6", parA = "0", parAlpha = "1", parB = "1",
-                              parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                              parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+                         list(name = "#6", a = "0", alpha = "1", b = "1",
+                              beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                              sigma = "1", theta = "1", k = "1", priorWeight = "1",
                               truncationLower = "-Inf", truncationUpper = "Inf", type = "invgamma"),
-                         list(name = "#7", parA = "0", parAlpha = "1", parB = "1",
-                              parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                              parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+                         list(name = "#7", a = "0", alpha = "1", b = "1",
+                              beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                              sigma = "1", theta = "1", k = "1", priorWeight = "1",
                               truncationLower = "-Inf", truncationUpper = "Inf", type = "lognormal"),
-                         list(name = "#8", parA = "0", parAlpha = "1", parB = "1",
-                              parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                              parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+                         list(name = "#8", a = "0", alpha = "1", b = "1",
+                              beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                              sigma = "1", theta = "1", k = "1", priorWeight = "1",
                               truncationLower = "-Inf", truncationUpper = "Inf", type = "beta"),
-                         list(name = "#9", parA = "0", parAlpha = "1", parB = "1",
-                              parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                              parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+                         list(name = "#9", a = "0", alpha = "1", b = "1",
+                              beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                              sigma = "1", theta = "1", k = "1", priorWeight = "1",
                               truncationLower = "-Inf", truncationUpper = "Inf", type = "uniform"),
-                         list(name = "#10", parA = "0", parAlpha = "1", parB = "1",
-                              parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                              parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+                         list(name = "#10", a = "0", alpha = "1", b = "1",
+                              beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                              sigma = "1", theta = "1", k = "1", priorWeight = "1",
                               truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"),
-                         list(name = "#11", parA = "0", parAlpha = "1", parB = "1",
-                              parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                              parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+                         list(name = "#11", a = "0", alpha = "1", b = "1",
+                              beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                              sigma = "1", theta = "1", k = "1", priorWeight = "1",
                               truncationLower = "-Inf", truncationUpper = "Inf", type = "none"))
-  options$effectNull <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                                  parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                                  parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsEffectNull <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                                  beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                                  sigma = "1", theta = "1", k = "1", priorWeight = "1",
                                   truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
   options$pathToFittedModel <- ""
-  options$heterogeneity <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                                     parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                                     parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsHeterogeneity <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                                     beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                                     sigma = "1", theta = "1", k = "1", priorWeight = "1",
                                      truncationLower = "0", truncationUpper = "Inf", type = "invgamma"))
-  options$heterogeneityNull <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                                         parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                                         parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsHeterogeneityNull <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                                         beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                                         sigma = "1", theta = "1", k = "1", priorWeight = "1",
                                          truncationLower = "0", truncationUpper = "Inf", type = "spike"))
   options$effectSizeCi <- list()
   options$inputType <- "cohensD"
   options$modelEnsembleType <- "custom"
-  options$omega <- list(list(name = "#", parAlpha = "(1,1)", parCuts = "(.05)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "two-sided"),
-                        list(name = "#2", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "one-sided"),
-                        list(name = "#3", parAlpha = "(1,1)", parCuts = "(.05, .10)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "two-sided-fixed"),
-                        list(name = "#4", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "one-sided-fixed"),
-                        list(name = "#5", parAlpha = "(1,1,1)", parCuts = "(.05, .50)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "none"))
-  options$omegaNull <- list(list(name = "#", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
-                                 parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "none"))
-  options$peese <- list()
-  options$peeseNull <- list()
-  options$pet <- list()
-  options$petNull <- list()
+  options$modelsSelectionModels <- list(list(name = "#", alpha = "(1,1)", pValues = "(.05)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "twoSided"),
+                        list(name = "#2", alpha = "(1,1,1)", pValues = "(.05, .10)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "oneSided"),
+                        list(name = "#3", alpha = "(1,1)", pValues = "(.05, .10)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "twoSidedFixed"),
+                        list(name = "#4", alpha = "(1,1,1)", pValues = "(.05, .10)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "oneSidedFixed"),
+                        list(name = "#5", alpha = "(1,1,1)", pValues = "(.05, .50)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "none"))
+  options$modelsSelectionModelsNull <- list(list(name = "#", alpha = "(1,1,1)", pValues = "(.05, .10)",
+                                 omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "none"))
+  options$modelsPeese <- list()
+  options$modelsPeeseNull <- list()
+  options$modelsPet <- list()
+  options$modelsPetNull <- list()
   options$plotsForestPlotOrder <- "alphabetical"
   options$plotsIndividualModelsOrder <- "decreasing"
   options$plotsIndividualModelsOrderBy <- "modelNumber"
@@ -472,49 +472,49 @@ pathToFittedModel <- file.path("robmaFit.RDS")
   options$advancedAutofitMcmcError <- FALSE
   options$advancedAutofitMcmcErrorSd <- FALSE
   options$advancedAutofitMaximumFittingTime <- FALSE
-  options$effect <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                              parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                              parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsEffect <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                              beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                              sigma = "1", theta = "1", k = "1", priorWeight = "1",
                               truncationLower = "-Inf", truncationUpper = "Inf", type = "normal"))
-  options$effectNull <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                                  parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                                  parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsEffectNull <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                                  beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                                  sigma = "1", theta = "1", k = "1", priorWeight = "1",
                                   truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
   options$pathToFittedModel <- ""
-  options$heterogeneity <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                                     parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                                     parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsHeterogeneity <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                                     beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                                     sigma = "1", theta = "1", k = "1", priorWeight = "1",
                                      truncationLower = "0", truncationUpper = "Inf", type = "invgamma"))
-  options$heterogeneityNull <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                                         parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                                         parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsHeterogeneityNull <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                                         beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                                         sigma = "1", theta = "1", k = "1", priorWeight = "1",
                                          truncationLower = "0", truncationUpper = "Inf", type = "spike"))
   options$effectSizeCi <- list()
   options$inputType <- "cohensD"
-  options$omega <- list(list(name = "#", parAlpha = "(1,1)", parCuts = "(.05)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "two-sided"),
-                        list(name = "#2", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "two-sided"),
-                        list(name = "#3", parAlpha = "(1,1)", parCuts = "(.05)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "one-sided"),
-                        list(name = "#4", parAlpha = "(1,1,1)", parCuts = "(.025, .05)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "one-sided"),
-                        list(name = "#5", parAlpha = "(1,1,1)", parCuts = "(.05, .50)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "one-sided"),
-                        list(name = "#6", parAlpha = "(1,1,1,1)", parCuts = "(.025, .05, .10)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "one-sided"))
-  options$omegaNull <- list(list(name = "#", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
-                                 parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "none"))
-  options$peese <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                             parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                             parScale = "1", parScale2 = "5", parShape = "1", priorWeight = "1",
+  options$modelsSelectionModels <- list(list(name = "#", alpha = "(1,1)", pValues = "(.05)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "twoSided"),
+                        list(name = "#2", alpha = "(1,1,1)", pValues = "(.05, .10)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "twoSided"),
+                        list(name = "#3", alpha = "(1,1)", pValues = "(.05)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "oneSided"),
+                        list(name = "#4", alpha = "(1,1,1)", pValues = "(.025, .05)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "oneSided"),
+                        list(name = "#5", alpha = "(1,1,1)", pValues = "(.05, .50)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "oneSided"),
+                        list(name = "#6", alpha = "(1,1,1,1)", pValues = "(.025, .05, .10)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "oneSided"))
+  options$modelsSelectionModelsNull <- list(list(name = "#", alpha = "(1,1,1)", pValues = "(.05, .10)",
+                                 omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "none"))
+  options$modelsPeese <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                             beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                             sigma = "1", theta = "5", k = "1", priorWeight = "1",
                              truncationLower = "0", truncationUpper = "Inf", type = "cauchy"))
-  options$peeseNull <- list()
-  options$pet <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                           parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                           parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsPeeseNull <- list()
+  options$modelsPet <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                           beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                           sigma = "1", theta = "1", k = "1", priorWeight = "1",
                            truncationLower = "0", truncationUpper = "Inf", type = "cauchy"))
-  options$petNull <- list()
+  options$modelsPetNull <- list()
   options$plotsForestPlotOrder <- "alphabetical"
   options$plotsIndividualModelsOrder <- "decreasing"
   options$plotsIndividualModelsOrderBy <- "modelNumber"
@@ -674,51 +674,51 @@ pathToFittedModel <- file.path("robmaFit.RDS")
   options$mcmcDiagnosticsPlotSingleModelNumber <- 36
   options$mcmcDiagnosticsPlotHeterogeneity <- TRUE
   options$mcmcDiagnosticsPlotTypeTrace <- TRUE
-  options$effect <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                              parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                              parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsEffect <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                              beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                              sigma = "1", theta = "1", k = "1", priorWeight = "1",
                               truncationLower = "-Inf", truncationUpper = "Inf", type = "normal"))
-  options$effectNull <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                                  parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                                  parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsEffectNull <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                                  beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                                  sigma = "1", theta = "1", k = "1", priorWeight = "1",
                                   truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
   options$pathToFittedModel <- ""
-  options$heterogeneity <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                                     parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                                     parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsHeterogeneity <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                                     beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                                     sigma = "1", theta = "1", k = "1", priorWeight = "1",
                                      truncationLower = "0", truncationUpper = "Inf", type = "invgamma"))
-  options$heterogeneityNull <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                                         parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                                         parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsHeterogeneityNull <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                                         beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                                         sigma = "1", theta = "1", k = "1", priorWeight = "1",
                                          truncationLower = "0", truncationUpper = "Inf", type = "spike"))
   options$effectSizeCi <- list()
   options$effectSize <- "d"
   options$effectSizeSe <- "se"
   options$inputType <- "cohensD"
-  options$omega <- list(list(name = "#", parAlpha = "(1,1)", parCuts = "(.05)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "two-sided"),
-                        list(name = "#2", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "two-sided"),
-                        list(name = "#3", parAlpha = "(1,1)", parCuts = "(.05)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "one-sided"),
-                        list(name = "#4", parAlpha = "(1,1,1)", parCuts = "(.025, .05)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "one-sided"),
-                        list(name = "#5", parAlpha = "(1,1,1)", parCuts = "(.05, .50)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "one-sided"),
-                        list(name = "#6", parAlpha = "(1,1,1,1)", parCuts = "(.025, .05, .10)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "one-sided"))
-  options$omegaNull <- list(list(name = "#", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
-                                 parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "none"))
-  options$peese <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                             parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                             parScale = "1", parScale2 = "5", parShape = "1", priorWeight = "1",
+  options$modelsSelectionModels <- list(list(name = "#", alpha = "(1,1)", pValues = "(.05)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "twoSided"),
+                        list(name = "#2", alpha = "(1,1,1)", pValues = "(.05, .10)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "twoSided"),
+                        list(name = "#3", alpha = "(1,1)", pValues = "(.05)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "oneSided"),
+                        list(name = "#4", alpha = "(1,1,1)", pValues = "(.025, .05)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "oneSided"),
+                        list(name = "#5", alpha = "(1,1,1)", pValues = "(.05, .50)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "oneSided"),
+                        list(name = "#6", alpha = "(1,1,1,1)", pValues = "(.025, .05, .10)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "oneSided"))
+  options$modelsSelectionModelsNull <- list(list(name = "#", alpha = "(1,1,1)", pValues = "(.05, .10)",
+                                 omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "none"))
+  options$modelsPeese <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                             beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                             sigma = "1", theta = "5", k = "1", priorWeight = "1",
                              truncationLower = "0", truncationUpper = "Inf", type = "cauchy"))
-  options$peeseNull <- list()
-  options$pet <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                           parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                           parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsPeeseNull <- list()
+  options$modelsPet <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                           beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                           sigma = "1", theta = "1", k = "1", priorWeight = "1",
                            truncationLower = "0", truncationUpper = "Inf", type = "cauchy"))
-  options$petNull <- list()
+  options$modelsPetNull <- list()
   options$plotsPooledEstimatesEffect <- TRUE
   options$plotsPooledEstimatesPetPeese <- TRUE
   options$plotsPooledEstimatesHeterogeneity <- TRUE
@@ -1094,32 +1094,32 @@ pathToFittedModel <- file.path("robmaFit.RDS")
   options$advancedAutofitMcmcErrorSd <- FALSE
   options$advancedAutofitMaximumFittingTime <- FALSE
   options$mcmcDiagnosticsOverviewTable <- TRUE
-  options$effect <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                              parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                              parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsEffect <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                              beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                              sigma = "1", theta = "1", k = "1", priorWeight = "1",
                               truncationLower = "-Inf", truncationUpper = "Inf", type = "normal"))
-  options$effectNull <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                                  parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                                  parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsEffectNull <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                                  beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                                  sigma = "1", theta = "1", k = "1", priorWeight = "1",
                                   truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
   options$pathToFittedModel <- ""
-  options$heterogeneity <- list()
-  options$heterogeneityNull <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                                         parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                                         parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsHeterogeneity <- list()
+  options$modelsHeterogeneityNull <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                                         beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                                         sigma = "1", theta = "1", k = "1", priorWeight = "1",
                                          truncationLower = "0", truncationUpper = "Inf", type = "spike"))
   options$effectSizeCi <- list()
   options$effectSize <- "d"
   options$sampleSize <- "N"
   options$inputType <- "correlation"
   options$modelEnsembleType <- "custom"
-  options$omega <- list()
-  options$omegaNull <- list(list(name = "#", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
-                                 parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "none"))
-  options$peese <- list()
-  options$peeseNull <- list()
-  options$pet <- list()
-  options$petNull <- list()
+  options$modelsSelectionModels <- list()
+  options$modelsSelectionModelsNull <- list(list(name = "#", alpha = "(1,1,1)", pValues = "(.05, .10)",
+                                 omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "none"))
+  options$modelsPeese <- list()
+  options$modelsPeeseNull <- list()
+  options$modelsPet <- list()
+  options$modelsPetNull <- list()
   options$plotsForestPlotOrder <- "alphabetical"
   options$plotsIndividualModelsOrder <- "decreasing"
   options$plotsIndividualModelsOrderBy <- "modelNumber"
@@ -1174,28 +1174,28 @@ pathToFittedModel <- file.path("robmaFit.RDS")
   options$advancedAutofitRHat <- FALSE
   options$advancedAutofitMaximumFittingTime <- FALSE
   options$mcmcDiagnosticsOverviewTable <- TRUE
-  options$effect <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                              parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                              parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsEffect <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                              beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                              sigma = "1", theta = "1", k = "1", priorWeight = "1",
                               truncationLower = "-Inf", truncationUpper = "Inf", type = "normal"))
-  options$effectNull <- list()
+  options$modelsEffectNull <- list()
   options$pathToFittedModel <- ""
-  options$heterogeneity <- list()
-  options$heterogeneityNull <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                                         parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                                         parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsHeterogeneity <- list()
+  options$modelsHeterogeneityNull <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                                         beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                                         sigma = "1", theta = "1", k = "1", priorWeight = "1",
                                          truncationLower = "0", truncationUpper = "Inf", type = "spike"))
   options$effectSizeCi <- list(c("lCI", "uCI"))
   options$effectSize <- "d"
   options$inputType <- "logOr"
   options$modelEnsembleType <- "custom"
-  options$omega <- list()
-  options$omegaNull <- list(list(name = "#", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
-                                 parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "none"))
-  options$peese <- list()
-  options$peeseNull <- list()
-  options$pet <- list()
-  options$petNull <- list()
+  options$modelsSelectionModels <- list()
+  options$modelsSelectionModelsNull <- list(list(name = "#", alpha = "(1,1,1)", pValues = "(.05, .10)",
+                                 omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "none"))
+  options$modelsPeese <- list()
+  options$modelsPeeseNull <- list()
+  options$modelsPet <- list()
+  options$modelsPetNull <- list()
   options$plotsForestPlotOrder <- "alphabetical"
   options$plotsIndividualModelsOrder <- "decreasing"
   options$plotsIndividualModelsOrderBy <- "modelNumber"
@@ -1250,28 +1250,28 @@ pathToFittedModel <- file.path("robmaFit.RDS")
   options$advancedAutofitRHat <- FALSE
   options$advancedAutofitMaximumFittingTime <- FALSE
   options$mcmcDiagnosticsOverviewTable <- TRUE
-  options$effect <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                              parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                              parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsEffect <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                              beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                              sigma = "1", theta = "1", k = "1", priorWeight = "1",
                               truncationLower = "-Inf", truncationUpper = "Inf", type = "normal"))
-  options$effectNull <- list()
+  options$modelsEffectNull <- list()
   options$pathToFittedModel <- ""
-  options$heterogeneity <- list()
-  options$heterogeneityNull <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                                         parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                                         parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsHeterogeneity <- list()
+  options$modelsHeterogeneityNull <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                                         beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                                         sigma = "1", theta = "1", k = "1", priorWeight = "1",
                                          truncationLower = "0", truncationUpper = "Inf", type = "spike"))
   options$effectSizeCi <- list(c("lCI", "uCI"))
   options$effectSize <- "d"
   options$inputType <- "unstandardizedEffectSizes"
   options$modelEnsembleType <- "custom"
-  options$omega <- list()
-  options$omegaNull <- list(list(name = "#", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
-                                 parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "none"))
-  options$peese <- list()
-  options$peeseNull <- list()
-  options$pet <- list()
-  options$petNull <- list()
+  options$modelsSelectionModels <- list()
+  options$modelsSelectionModelsNull <- list(list(name = "#", alpha = "(1,1,1)", pValues = "(.05, .10)",
+                                 omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "none"))
+  options$modelsPeese <- list()
+  options$modelsPeeseNull <- list()
+  options$modelsPet <- list()
+  options$modelsPetNull <- list()
   options$plotsForestPlotOrder <- "alphabetical"
   options$plotsIndividualModelsOrder <- "decreasing"
   options$plotsIndividualModelsOrderBy <- "modelNumber"
@@ -1319,49 +1319,49 @@ pathToFittedModel <- file.path("robmaFit.RDS")
   options$advancedAutofitMcmcErrorSd <- FALSE
   options$advancedAutofitMaximumFittingTime <- FALSE
   options$bayesFactorType <- "BF01"
-  options$effect <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                              parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                              parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsEffect <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                              beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                              sigma = "1", theta = "1", k = "1", priorWeight = "1",
                               truncationLower = "-Inf", truncationUpper = "Inf", type = "normal"))
-  options$effectNull <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                                  parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                                  parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsEffectNull <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                                  beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                                  sigma = "1", theta = "1", k = "1", priorWeight = "1",
                                   truncationLower = "-Inf", truncationUpper = "Inf", type = "spike"))
   options$pathToFittedModel <- pathToFittedModel
-  options$heterogeneity <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                                     parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                                     parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsHeterogeneity <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                                     beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                                     sigma = "1", theta = "1", k = "1", priorWeight = "1",
                                      truncationLower = "0", truncationUpper = "Inf", type = "invgamma"))
-  options$heterogeneityNull <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                                         parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                                         parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsHeterogeneityNull <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                                         beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                                         sigma = "1", theta = "1", k = "1", priorWeight = "1",
                                          truncationLower = "0", truncationUpper = "Inf", type = "spike"))
   options$effectSizeCi <- list()
   options$inputType <- "fittedModel"
-  options$omega <- list(list(name = "#", parAlpha = "(1,1)", parCuts = "(.05)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "two-sided"),
-                        list(name = "#2", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "two-sided"),
-                        list(name = "#3", parAlpha = "(1,1)", parCuts = "(.05)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "one-sided"),
-                        list(name = "#4", parAlpha = "(1,1,1)", parCuts = "(.025, .05)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "one-sided"),
-                        list(name = "#5", parAlpha = "(1,1,1)", parCuts = "(.05, .50)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "one-sided"),
-                        list(name = "#6", parAlpha = "(1,1,1,1)", parCuts = "(.025, .05, .10)",
-                             parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "one-sided"))
-  options$omegaNull <- list(list(name = "#", parAlpha = "(1,1,1)", parCuts = "(.05, .10)",
-                                 parOmega = "(1, 0.5, 0.1)", priorWeight = "1", type = "none"))
-  options$peese <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                             parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                             parScale = "1", parScale2 = "5", parShape = "1", priorWeight = "1",
+  options$modelsSelectionModels <- list(list(name = "#", alpha = "(1,1)", pValues = "(.05)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "twoSided"),
+                        list(name = "#2", alpha = "(1,1,1)", pValues = "(.05, .10)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "twoSided"),
+                        list(name = "#3", alpha = "(1,1)", pValues = "(.05)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "oneSided"),
+                        list(name = "#4", alpha = "(1,1,1)", pValues = "(.025, .05)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "oneSided"),
+                        list(name = "#5", alpha = "(1,1,1)", pValues = "(.05, .50)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "oneSided"),
+                        list(name = "#6", alpha = "(1,1,1,1)", pValues = "(.025, .05, .10)",
+                             omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "oneSided"))
+  options$modelsSelectionModelsNull <- list(list(name = "#", alpha = "(1,1,1)", pValues = "(.05, .10)",
+                                 omega = "(1, 0.5, 0.1)", priorWeight = "1", type = "none"))
+  options$modelsPeese <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                             beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                             sigma = "1", theta = "5", k = "1", priorWeight = "1",
                              truncationLower = "0", truncationUpper = "Inf", type = "cauchy"))
-  options$peeseNull <- list()
-  options$pet <- list(list(name = "#", parA = "0", parAlpha = "1", parB = "1",
-                           parBeta = "0.15", parDf = "2", parLocation = "0", parMean = "0",
-                           parScale = "1", parScale2 = "1", parShape = "1", priorWeight = "1",
+  options$modelsPeeseNull <- list()
+  options$modelsPet <- list(list(name = "#", a = "0", alpha = "1", b = "1",
+                           beta = "0.15", nu = "2", x0 = "0", mu = "0",
+                           sigma = "1", theta = "1", k = "1", priorWeight = "1",
                            truncationLower = "0", truncationUpper = "Inf", type = "cauchy"))
-  options$petNull <- list()
+  options$modelsPetNull <- list()
   options$plotsForestPlot <- TRUE
   options$plotsForestPlotOrder <- "increasing"
   options$plotsForestPlotType <- "conditional"
