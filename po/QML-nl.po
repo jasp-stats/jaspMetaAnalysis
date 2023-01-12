@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2023-01-12 09:51+0000\n"
+"Last-Translator: Sophie Berkhout <s.w.berkhout@gmail.com>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/nl/>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.15.1-dev\n"
 "X-Language: nl\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -1714,18 +1720,16 @@ msgstr "Maat"
 
 msgctxt "Description|"
 msgid "Penalized Meta-Analysis"
-msgstr ""
+msgstr "Bestrafte Meta-Analyse"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Effect Size"
 msgstr "Effectgrootte"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "Standaardfout van Effectgrootte"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Method"
 msgstr "Methode"
