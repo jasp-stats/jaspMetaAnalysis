@@ -332,8 +332,10 @@ Form
 				singleVariable:	true
 				name:			"scatterVariableY"
 				title:			qsTr("Vertical axis")
-				visible:		samplingPlot.currentValue == "scatter"
-				onVisibleChanged: if (!visible && count > 0) itemDoubleClicked(0)
+				visible:		active
+				
+				property bool active:	samplingPlot.currentValue == "scatter"
+				onActiveChanged: if (!active && count > 0) itemDoubleClicked(0);
 			}
 		}
 

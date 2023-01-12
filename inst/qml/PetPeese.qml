@@ -53,8 +53,10 @@ Form
 			title:			qsTr("Effect Size Standard Error")
 			singleVariable:	true
 			allowedColumns:	["scale"]
-			visible:		 measuresGeneral.checked
-			onVisibleChanged: if (!visible && count > 0) itemDoubleClicked(0);
+			visible:		active
+			
+			property bool active:	measuresGeneral.checked
+			onActiveChanged: if (!active && count > 0) itemDoubleClicked(0);
 		}
 
 		AssignedVariablesList
@@ -63,8 +65,10 @@ Form
 			title: 			qsTr("N")
 			singleVariable: true
 			allowedColumns: ["scale", "ordinal"]
-			visible:		 measuresCorrelation.checked
-			onVisibleChanged: if (!measuresGeneral.checked && count > 0) itemDoubleClicked(0);
+			visible:		active
+			
+			property bool active:	measuresCorrelation.checked
+			onActiveChanged: if (!active && count > 0) itemDoubleClicked(0);
 		}
 
 		DropDown
