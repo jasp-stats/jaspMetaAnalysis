@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2023-01-13 12:30+0000\n"
+"Last-Translator: Sophie Berkhout <s.w.berkhout@gmail.com>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/nl/>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.15.1-dev\n"
 "X-Language: nl\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -1714,194 +1720,180 @@ msgstr "Maat"
 
 msgctxt "Description|"
 msgid "Penalized Meta-Analysis"
-msgstr ""
+msgstr "Bestrafte Meta-Analyse"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Effect Size"
 msgstr "Effectgrootte"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "Standaardfout van Effectgrootte"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Method"
 msgstr "Methode"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Horseshoe"
-msgstr ""
+msgstr "Hoefijzer"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Lasso"
-msgstr ""
+msgstr "Lasso"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Covariates"
 msgstr "Covariaten"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Factors"
 msgstr "Factoren"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Clustering"
-msgstr ""
+msgstr "Clustering"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Model"
 msgstr "Model"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Components"
 msgstr "Componenten"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Model Terms"
 msgstr "Modeltermen"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Include intercept"
 msgstr "Voeg intercept toe"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale predictors"
-msgstr ""
+msgstr "Schaal voorspellers"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Priors"
 msgstr "Priors"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Df"
-msgstr ""
+msgstr "Vg"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale"
-msgstr ""
+msgstr "Schaal"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Df (global)"
-msgstr ""
+msgstr "Vg (globaal)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Df (slab)"
-msgstr ""
+msgstr "Vg (plaat)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale (global)"
-msgstr ""
+msgstr "Schaal (globaal)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale (slab)"
-msgstr ""
+msgstr "Schaal (plaat)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Inference"
-msgstr ""
+msgstr "Inferentie"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Estimates"
 msgstr "Schattingen"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Heterogeneity"
 msgstr "Heterogeniteit"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "I²"
-msgstr ""
+msgstr "I²"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Posterior plots"
-msgstr ""
+msgstr "Posterior grafieken"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Model terms"
-msgstr ""
+msgstr "Modeltermen"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Plotted term"
-msgstr ""
+msgstr "Geplotte term"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "MCMC diagnostics"
-msgstr ""
+msgstr "MCMC diagnostiek"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Horizontal axis"
-msgstr ""
+msgstr "Horizontale as"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Vertical axis"
-msgstr ""
+msgstr "Verticale as"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Plot type"
-msgstr ""
+msgstr "Grafiektype"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Traceplot"
-msgstr ""
+msgstr "Spoordiagram"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scatterplot"
-msgstr ""
+msgstr "Spreidingsdiagram"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Histogram"
-msgstr ""
+msgstr "Histogram"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Density"
-msgstr ""
+msgstr "Dichtheid"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Autocorrelations"
-msgstr ""
+msgstr "Autocorrelatie"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Advanced"
-msgstr ""
+msgstr "Geavanceerd"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Estimation settings (MCMC)"
 msgstr "Schattingsinstellingen (MCMC)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Warmup"
-msgstr ""
+msgstr "Opwarmen"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Iterations"
 msgstr "Iteraties"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Chains"
 msgstr "Ketens"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Adapt delta"
-msgstr ""
+msgstr "Aanpassingsdelta"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Maximum treedepth"
-msgstr ""
+msgstr "Maximale boomdieptie"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "samples:"
-msgstr ""
+msgstr "steekproeven:"
