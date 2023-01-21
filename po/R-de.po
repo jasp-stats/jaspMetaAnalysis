@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2022-12-17 02:39\n"
-"PO-Revision-Date: 2022-12-25 18:49+0000\n"
+"PO-Revision-Date: 2023-01-15 11:50+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/de/>\n"
@@ -491,7 +491,7 @@ msgid "Cases marked with %s are influential."
 msgstr "Mit %s markierte Fälle haben einen Effekt."
 
 msgid "Plot"
-msgstr "Abbildung"
+msgstr "Diagramm"
 
 msgid "Funnel Plot"
 msgstr "Funnel-Plot"
@@ -503,7 +503,7 @@ msgid "Trim-Fill Analysis"
 msgstr "Trim-fill-Analyse"
 
 msgid "Diagnostic Plots"
-msgstr "Diagnostische Abbildungen"
+msgstr "Diagnostische Diagramme"
 
 msgid "Study %s"
 msgstr "Studie %s"
@@ -667,7 +667,7 @@ msgid "Variance Components"
 msgstr "Varianz-Komponenten"
 
 msgid "Plots"
-msgstr "Abbildungen"
+msgstr "Diagramme"
 
 msgid "Intercept"
 msgstr "Konstante"
@@ -733,7 +733,7 @@ msgid "Heterogeneity (%s)"
 msgstr "Heterogenität (%s)"
 
 msgid "Prior Plots"
-msgstr "Prior-Abbildungen"
+msgstr "Prior-Diagramme"
 
 msgid "Effect"
 msgstr "Effekt"
@@ -882,7 +882,7 @@ msgid "PET-PEESE Regression Estimate"
 msgstr "Schätzung PET-PEESE-Regression"
 
 msgid "Posterior Model Estimates Plots"
-msgstr "Posterior-Modellschätzungen Abbildungen"
+msgstr "Posterior-Modellschätzungen Diagramme"
 
 msgid "Effect Size Estimates"
 msgstr "Schätzungen fester Effekte"
