@@ -1,19 +1,25 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2023-02-01 03:03+0000\n"
+"Last-Translator: Ünal Halit ÖZDEN <uozden@ticaret.edu.tr>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/tr/>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.16-dev\n"
 "X-Language: tr\n"
 "X-Qt-Contexts: true\n"
 
 msgctxt "Description|"
 msgid "Meta-Analysis"
-msgstr ""
+msgstr "Meta Analizi"
 
 msgctxt "Description|"
 msgid "Classical Meta-Analysis"
-msgstr ""
+msgstr "Klasik Meta-Analizi"
 
 msgctxt "Description|"
 msgid "Selection Models"
@@ -21,7 +27,7 @@ msgstr ""
 
 msgctxt "Description|"
 msgid "Bayesian Meta-Analysis"
-msgstr ""
+msgstr "Bayesçi Meta Analizi"
 
 msgctxt "Description|"
 msgid "Robust Bayesian Meta-Analysis"
@@ -29,11 +35,11 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Effect Size"
-msgstr ""
+msgstr "Etki Boyutu"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "Etki Boyutu Standart Hatası"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "95% CI Lower and Upper Bound"
@@ -45,11 +51,11 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Effect Size"
-msgstr ""
+msgstr "Etki Boyutu"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "Etki Boyutu Standart Hatası"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Study Labels"
@@ -61,7 +67,7 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Factors"
-msgstr ""
+msgstr "Faktörler"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Model"
@@ -69,11 +75,11 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Components"
-msgstr ""
+msgstr "Bileşenler"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Model Terms"
-msgstr ""
+msgstr "Model Terimleri"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Include intercept"
@@ -81,7 +87,7 @@ msgstr ""
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Effect Size"
-msgstr ""
+msgstr "Etki Boyutu"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Effect Size Variance"
@@ -105,11 +111,11 @@ msgstr ""
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fixed Effects Model"
-msgstr ""
+msgstr "Sabit Etkiler Modeli"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Predictors"
-msgstr ""
+msgstr "Tahminciler"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Model Terms"
@@ -125,7 +131,7 @@ msgstr ""
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Multivariate Covariance Model"
-msgstr ""
+msgstr "Çok Değişkenli Kovaryans Modeli"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Statistics"
@@ -613,7 +619,7 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Integration"
-msgstr ""
+msgstr "Entegrasyon"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Bridge sampling"
@@ -625,7 +631,7 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model"
-msgstr ""
+msgstr "Model"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Fixed effects"
@@ -665,7 +671,7 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Plots"
-msgstr ""
+msgstr "Grafikler"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Forest plot"
@@ -1261,11 +1267,11 @@ msgstr ""
 
 msgctxt "Description|"
 msgid "Classical"
-msgstr ""
+msgstr "Classical"
 
 msgctxt "Description|"
 msgid "Bayesian"
-msgstr ""
+msgstr "Bayesçi"
 
 msgctxt "Description|"
 msgid "Prediction Model Performance"
