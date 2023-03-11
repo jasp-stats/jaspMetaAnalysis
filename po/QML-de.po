@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-03-11 16:45+0000\n"
+"PO-Revision-Date: 2023-03-12 20:08+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/de/>\n"
@@ -1792,15 +1792,15 @@ msgstr "Df (global)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Df (slab)"
-msgstr ""
+msgstr "Df (Plateau)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale (global)"
-msgstr ""
+msgstr "Skalenparameter (global)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale (slab)"
-msgstr ""
+msgstr "Skalenparameter (Plateau)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Inference"
