@@ -1,0 +1,14 @@
+on: 
+  push:
+    paths: ['**.R', '**.qml', '**.yml']
+ 
+  pull_request:
+    paths: ['**.R', '**.qml', '**.yml']
+  
+  workflow_dispatch:
+
+name: i18n-check
+
+jobs:
+  i18n-check:
+    uses: jasp-stats/jasp-actions/.github/workflows/i18nCheck.yml@master
