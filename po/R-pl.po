@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.0\n"
 "POT-Creation-Date: 2022-12-17 02:39\n"
-"PO-Revision-Date: 2023-04-05 21:51+0000\n"
+"PO-Revision-Date: 2023-04-14 22:51+0000\n"
 "Last-Translator: Tomasz Misiuro <tomaszmisiuro@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/pl/>\n"
@@ -117,7 +117,7 @@ msgid "Prior"
 msgstr "Prior"
 
 msgid "Posterior"
-msgstr ""
+msgstr "Posterior"
 
 msgid "Fixed H%s"
 msgstr ""
@@ -249,7 +249,7 @@ msgid "Prior and posterior plot"
 msgstr ""
 
 msgid "Value"
-msgstr ""
+msgstr "Wartość"
 
 msgid "Running means plot"
 msgstr ""
@@ -303,7 +303,7 @@ msgid "Coefficients"
 msgstr ""
 
 msgid "Estimate"
-msgstr ""
+msgstr "Oszacowanie"
 
 msgid "Standard Error"
 msgstr ""
@@ -390,13 +390,13 @@ msgid "Log-Likelihood"
 msgstr ""
 
 msgid "Deviance"
-msgstr ""
+msgstr "Odchylanie"
 
 msgid "AIC"
-msgstr ""
+msgstr "AIC"
 
 msgid "BIC"
-msgstr ""
+msgstr "BIC"
 
 msgid "AICc"
 msgstr ""
@@ -414,7 +414,7 @@ msgid "Cases marked with %s are influential."
 msgstr ""
 
 msgid "Plot"
-msgstr ""
+msgstr "Wykres"
 
 msgid "Funnel Plot"
 msgstr ""
@@ -510,7 +510,7 @@ msgid "The study labels contain invalid characters. Please, remove them before r
 msgstr ""
 
 msgid "%s%% CI"
-msgstr ""
+msgstr "%s%% PU"
 
 msgid "%s%% PI"
 msgstr ""
@@ -588,13 +588,13 @@ msgid "Plots"
 msgstr ""
 
 msgid "Intercept"
-msgstr ""
+msgstr "Wyraz wolny"
 
 msgid "At least one predictor needs to be specified."
 msgstr ""
 
 msgid "Warning:"
-msgstr ""
+msgstr "Ostrzeżenie:"
 
 msgid "Posterior distribution"
 msgstr ""
@@ -615,7 +615,7 @@ msgid "The priors for publication bias were set incorrectly."
 msgstr ""
 
 msgid "Median"
-msgstr ""
+msgstr "Mediana"
 
 msgid "MCMC error"
 msgstr ""
@@ -627,7 +627,7 @@ msgid "ESS"
 msgstr ""
 
 msgid "R-hat"
-msgstr ""
+msgstr "R-hat"
 
 msgid "<em>p</em>-values interval"
 msgstr ""
@@ -642,7 +642,7 @@ msgid "Prior Plots"
 msgstr ""
 
 msgid "Effect"
-msgstr ""
+msgstr "Efekt"
 
 msgid "Publication Bias"
 msgstr ""
@@ -852,7 +852,7 @@ msgid "95%% Confidence Interval"
 msgstr ""
 
 msgid "Note:"
-msgstr ""
+msgstr "Uwaga:"
 
 msgid "%s is on %s scale."
 msgstr ""
@@ -873,7 +873,7 @@ msgid "Test of Publication Bias"
 msgstr ""
 
 msgid "ChiSq"
-msgstr ""
+msgstr "Chi-kwadrat"
 
 msgid "Assuming homogeneity"
 msgstr ""
@@ -882,7 +882,7 @@ msgid "Assuming heterogeneity"
 msgstr ""
 
 msgid "Fixed Effects Estimates"
-msgstr ""
+msgstr "Oszacowania efektów stałych"
 
 msgid "Mean Estimates (%s)"
 msgstr ""
