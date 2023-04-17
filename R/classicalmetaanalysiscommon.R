@@ -352,18 +352,10 @@
   # Compute/get model
   rma.fit <- .metaAnalysisComputeModel(container, dataset, options, ready = TRUE)
   coeff   <- coef(summary(rma.fit))
-  cov     <-.metaAnalysisMakePrettyCoeffNames(rownames(coeff), dataset)
-  if (options$interceptTerm) {
-    start <- 1
-  } else {
-    if (length(cov) == 1)
-      return()
-    else
-      start <- 2
-  }
-  for (i in start:length(cov)) {
+
+  for (i in 1:nrow(coeff)) {
     container[["coeffTable"]]$addRows(list(
-      name  = cov[[i]],
+      name  = .metaAnalysisMakePrettyCoeffNames(rownames(coeff)[i], dataset),
       est   = coeff[i,1],
       se    = coeff[i,2],
       zval  = coeff[i,3],
