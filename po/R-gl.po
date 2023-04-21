@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2022-12-17 02:39\n"
-"PO-Revision-Date: 2023-04-20 16:37+0000\n"
+"PO-Revision-Date: 2023-04-21 21:08+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/gl/>\n"
@@ -244,19 +244,19 @@ msgid "Fixed H"
 msgstr "H fixo"
 
 msgid "Random H"
-msgstr "H Aleatorio"
+msgstr "H aleatorio"
 
 msgid "Averaged H"
-msgstr "H Media"
+msgstr "H media"
 
 msgid "Prior H"
-msgstr "H Previo"
+msgstr "H previo"
 
 msgid "Ordered H"
-msgstr "H Ordenado"
+msgstr "H ordenado"
 
 msgid "Forest Plot"
-msgstr "Gráfica en bosque"
+msgstr "Gráfica de bosque"
 
 msgid "Observed study effects"
 msgstr "Efectos observados do estudo"
@@ -301,7 +301,7 @@ msgid "Anecdotal"
 msgstr "Anecdótico"
 
 msgid "Moderate"
-msgstr "Moderar"
+msgstr "Moderado"
 
 msgid "Strong"
 msgstr "Forte"
@@ -622,7 +622,7 @@ msgstr ""
 "O modelo estimouse utilizando o método MCMC coa función %1$s de enlace."
 
 msgid "Forest plot"
-msgstr "Gráfica forestal"
+msgstr "Gráfica de bosque"
 
 msgid "Observed-Expected Ratio"
 msgstr "Proporción Observado-Agardado"
@@ -869,7 +869,7 @@ msgid "PET-PEESE Estimates"
 msgstr "Estimacións PET-PEESE"
 
 msgid "%1$s Forest Plot"
-msgstr "Gráfica en Bosque %1$s"
+msgstr "Gráfica de Bosque %1$s"
 
 msgid "Posterior Distribution Plots"
 msgstr "Gráficas de Distribucións Posteriores"
