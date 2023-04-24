@@ -139,11 +139,16 @@
   coeffTable$addColumnInfo(name = "name",  type = "string", title = "")
   coeffTable$addColumnInfo(name = "est",   type = "number", title = gettext("Estimate"))
   coeffTable$addColumnInfo(name = "se",    type = "number", title = gettext("Standard Error"))
-  coeffTable$addColumnInfo(name = "zval",  type = "number", title = gettext("z"))
+  if (options[["estimateTest"]] == "z")
+    coeffTable$addColumnInfo(name = "zval",  type = "number", title = gettext("z"))
+  else if (options[["estimateTest"]] == "knha") {
+    coeffTable$addColumnInfo(name = "tval",  type = "number", title = gettext("t"))
+    coeffTable$addColumnInfo(name = "df",    type = "number", title = gettext("df"))
+  }
   coeffTable$addColumnInfo(name = "pval",  type = "pvalue", title = gettext("p"))
   .metaAnalysisConfidenceInterval(options, coeffTable)
 
-  coeffTable$addFootnote(switch(options$estimateTest, z = gettext("Wald test."), gettext("Wald tests.")))
+  coeffTable$addFootnote(switch(options$estimateTest, z = gettext("Wald test."), knha = gettext("Knapp and Hartung test adjustment.")))
 
   container[["coeffTable"]] <- coeffTable
   if(!ready)
@@ -353,16 +358,31 @@
   rma.fit <- .metaAnalysisComputeModel(container, dataset, options, ready = TRUE)
   coeff   <- coef(summary(rma.fit))
 
-  for (i in 1:nrow(coeff)) {
-    container[["coeffTable"]]$addRows(list(
-      name  = .metaAnalysisMakePrettyCoeffNames(rownames(coeff)[i], dataset),
-      est   = coeff[i,1],
-      se    = coeff[i,2],
-      zval  = coeff[i,3],
-      pval  = coeff[i,4],
-      lower = coeff[i,5],
-      upper = coeff[i,6]
-    ))
+  if (options[["estimateTest"]] == "z") {
+    for (i in 1:nrow(coeff)) {
+      container[["coeffTable"]]$addRows(list(
+        name  = .metaAnalysisMakePrettyCoeffNames(rownames(coeff)[i], dataset),
+        est   = coeff[i,"estimate"],
+        se    = coeff[i,"se"],
+        zval  = coeff[i,"zval"],
+        pval  = coeff[i,"pval"],
+        lower = coeff[i,"ci.lb"],
+        upper = coeff[i,"ci.ub"]
+      ))
+    }
+  } else if (options[["estimateTest"]] == "knha") {
+    for (i in 1:nrow(coeff)) {
+      container[["coeffTable"]]$addRows(list(
+        name  = .metaAnalysisMakePrettyCoeffNames(rownames(coeff)[i], dataset),
+        est   = coeff[i,"estimate"],
+        se    = coeff[i,"se"],
+        tval  = coeff[i,"tval"],
+        df    = coeff[i,"df"],
+        pval  = coeff[i,"pval"],
+        lower = coeff[i,"ci.lb"],
+        upper = coeff[i,"ci.ub"]
+      ))
+    }
   }
 }
 
