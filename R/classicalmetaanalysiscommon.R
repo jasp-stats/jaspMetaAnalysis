@@ -511,7 +511,7 @@
 # Plots
 .metaAnalysisPlotsContainer <- function(container, options, ready)  {
   if(!ready) return()
-  if(!options$forestPlot && !options$funnelPlot && !options$plotResidualseffectSize &&
+  if(!options$forestPlot && !options$funnelPlot && !options$diagnosticPlot &&
      !options$profilePlot && !options$trimFillAnalysis)
     return()
   if (is.null(container[["plots"]])) {
