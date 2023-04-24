@@ -84,7 +84,7 @@
       data    = dataset,
       test    = options$estimateTest,
       # add tiny amount because 1 is treated by rma() as 100% whereas values > 1 as percentages
-      level   = options$coefficientCiLevel + 1e-9,
+      level   = options$coefficientCiLevel * 100,
       control = list(maxiter = 500)
     )
     argList <- argList[!sapply(argList, is.null)]
