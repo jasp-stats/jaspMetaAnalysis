@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2022-12-17 02:39\n"
+"POT-Creation-Date: 2023-04-29 02:38\n"
 "PO-Revision-Date: 2022-08-29 00:27+0000\n"
 "Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
@@ -373,10 +373,13 @@ msgstr "Erro padrão"
 msgid "z"
 msgstr "z"
 
+msgid "t"
+msgstr "t"
+
 msgid "Wald test."
 msgstr ""
 
-msgid "Wald tests."
+msgid "Knapp and Hartung test adjustment."
 msgstr ""
 
 #, fuzzy
@@ -398,9 +401,6 @@ msgstr ""
 
 msgid "Regression test for Funnel plot asymmetry (\"Egger's test\")"
 msgstr ""
-
-msgid "t"
-msgstr "t"
 
 msgid "Influence Measures"
 msgstr ""

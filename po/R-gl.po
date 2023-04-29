@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-12-17 02:39\n"
+"POT-Creation-Date: 2023-04-29 02:38\n"
 "PO-Revision-Date: 2023-04-21 21:08+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
@@ -395,11 +395,14 @@ msgstr "Erro Padrón"
 msgid "z"
 msgstr "z"
 
+msgid "t"
+msgstr "t"
+
 msgid "Wald test."
 msgstr "Proba de Wald."
 
-msgid "Wald tests."
-msgstr "Probas de Wald."
+msgid "Knapp and Hartung test adjustment."
+msgstr ""
 
 msgid "Fit measures"
 msgstr "Medidas de axuste"
@@ -419,9 +422,6 @@ msgstr "%s de Kendall"
 msgid "Regression test for Funnel plot asymmetry (\"Egger's test\")"
 msgstr ""
 "Proba da regresión para a asimetría de gráfica en funil (\"Proba de Egger\")"
-
-msgid "t"
-msgstr "t"
 
 msgid "Influence Measures"
 msgstr "Medidas de Influencia"
@@ -1213,6 +1213,9 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "a observación %i eliminouse debido a valores ausentes."
 msgstr[1] "as observacións %i elimináronse debido a valores ausentes."
+
+#~ msgid "Wald tests."
+#~ msgstr "Probas de Wald."
 
 #~ msgid "Cannot set 'xlim' automatically. Please set this argument manually."
 #~ msgstr ""
