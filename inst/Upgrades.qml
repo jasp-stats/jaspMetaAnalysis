@@ -58,6 +58,7 @@ Upgrades
 								case "RE":	return "random";
 								case "BMA":	return "averaging";
 								case "CRE":	return "constrainedRandom";
+								default:	return options["model"];
 						}
 				}
 		}
@@ -71,6 +72,7 @@ Upgrades
 						{
 								case "allPos":	return "positive";
 								case "allNeg":	return "negative";
+								default:		return options["constrainedRandomDirection"];
 						}
 				}
 		}
@@ -89,7 +91,8 @@ Upgrades
 						{
 								case "plotForestObserved":	return "observed";
 								case "plotForestEstimated":	return "estimated";
-								case "plotForestBoth":	    return "both";
+								case "plotForestBoth":		return "both";
+								default:					options["forestPlotEffect"];
 						}
 				}
 		}
@@ -105,6 +108,7 @@ Upgrades
 								case "ascendingForest":	    return "ascending";
 								case "descendingForest":	return "descending";
 								case "labelForest":	        return "rowOrder";
+								default:					return options["forestPlotRowOrder"]
 						}
 				}
 		}
@@ -169,6 +173,7 @@ Upgrades
 				{
 					case "OE":		return "oeRatio";
 					case "cstat":	return "cStatistic";
+					default:		return options["measure"];
 				}
 			}
 		}
@@ -182,6 +187,7 @@ Upgrades
 				{
 					case "oeRatio":	return options["linkOE"];
 					case "cstat":	return options["linkCstat"];
+					default:		return options["linkOE"];
 				}
 			}
 		}
@@ -226,6 +232,7 @@ Upgrades
 				{
 					case "OE":		return "oeRatio";
 					case "cstat":	return "cStatistic";
+					default:		return options["measure"];
 				}
 			}
 		}
@@ -239,6 +246,7 @@ Upgrades
 				{
 					case "oeRatio":	return options["linkOE"];
 					case "cstat":	return options["linkCstat"];
+					default:		return options["linkOE"];
 				}
 			}
 		}
@@ -271,6 +279,7 @@ Upgrades
 				{
 					case "priorTauU":	return "uniformPrior";
 					case "priorTauT":	return "tPrior";
+					default:			return options["tauPrior"];
 				}
 			}
 		}
@@ -381,6 +390,7 @@ Upgrades
 					case "logOR":	return "logOr";
 					case "general":	return "unstandardizedEffectSizes";
 					case "fitted":	return "fittedModel";
+					default:		return options["inputType"];
 				}
 			}
 		}
@@ -393,6 +403,7 @@ Upgrades
 				switch(options["modelEnsembleType"])
 				{
 					case "2w":	return "original";
+					default:	return options["modelEnsembleType"];
 				}
 			}
 		}
@@ -406,6 +417,7 @@ Upgrades
 					case "cohens_d":	return "cohensD";
 					case "fishers_z":	return "fishersZ";
 					case "logOR":		return "logOr";
+					default:			return options["priorScale"];
 				}
 			}
 		}
@@ -422,9 +434,10 @@ Upgrades
 			{
 				switch(options["inferenceModelsOverviewOrder"])
 				{
-					case "default":	return "modelNumber";
-					case "marglik":	return "marginalLikelihood";
-					case "posterior": return "posteriorProbability";
+					case "default":		return "modelNumber";
+					case "marglik":		return "marginalLikelihood";
+					case "posterior": 	return "posteriorProbability";
+					default:			return options["inferenceModelsOverviewOrder"];
 				}
 			}
 		}
@@ -444,6 +457,7 @@ Upgrades
 					case "fishers_z":	return "fishersZ";
 					case "logOR":		return "logOr";
 					case "r":			return "correlation";
+					default:			return options["inferenceOutputScale"];
 				}
 			}
 		}
@@ -476,6 +490,7 @@ Upgrades
 					case "model":		return "modelNumber";
 					case "BF":			return "bayesFactor";
 					case "probability":	return "posteriorProbability";
+					default:			return options["plotsIndividualModelsOrderBy"];
 				}
 			}
 		}
@@ -523,11 +538,11 @@ Upgrades
 			{
 				switch(options["type"])
 				{
-					case "two-sided":	return "twoSided";
-					case "one-sided":	return "oneSided";
+					case "two-sided":		return "twoSided";
+					case "one-sided":		return "oneSided";
 					case "two-sided-fixed":	return "twoSidedFixed";
 					case "one-sided-fixed":	return "oneSidedFixed";
-
+					default:				return options["type"];
 				}
 			}
 		}
@@ -545,6 +560,7 @@ Upgrades
 					case "cohens_d":	return "cohensD";
 					case "fishers_z":	return "fishersZ";
 					case "logOR":		return "logOr";
+					default:			return options["advancedEstimationScale"];
 				}
 			}
 		}
