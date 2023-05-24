@@ -255,7 +255,7 @@ Form
 
 				CheckBox
 				{
-					name:		"InferenceHeterogeneityI2"
+					name:		"inferenceHeterogeneityI2"
 					label:		qsTr("I²")
 					checked:	false
 				}

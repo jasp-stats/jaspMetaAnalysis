@@ -17,7 +17,7 @@ options$.meta <- list(clustering = list(shouldEncode = TRUE), covariates = list(
 options$covariates <- "tneg"
 options$effectSize <- "ES"
 options$effectSizeSe <- "SE"
-options$InferenceHeterogeneityI2 <- TRUE
+options$inferenceHeterogeneityI2 <- TRUE
 options$inferenceHeterogeneityTable <- TRUE
 options$factors <- "alloc"
 options$mcmcBurnin <- 400
@@ -96,7 +96,7 @@ options$clustering <- "ablat"
 options$covariates <- ""
 options$effectSize <- "ES"
 options$effectSizeSe <- "SE"
-options$InferenceHeterogeneityI2 <- TRUE
+options$inferenceHeterogeneityI2 <- TRUE
 options$inferenceHeterogeneityTable <- TRUE
 options$factors <- "alloc"
 options$modelIncludeIntercept <- FALSE

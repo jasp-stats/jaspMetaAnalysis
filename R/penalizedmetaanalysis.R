@@ -35,7 +35,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   if (options[["inferenceHeterogeneityTable"]])
     .pemaSummaryTableTau(jaspResults, options)
 
-  if (options[["inferenceHeterogeneityTable"]] && options[["InferenceHeterogeneityI2"]])
+  if (options[["inferenceHeterogeneityTable"]] && options[["inferenceHeterogeneityI2"]])
     .pemaSummaryTableI2(jaspResults, options)
 
   if (length(options[["posteriorPlotsSelectedTerms"]]) > 0)
@@ -420,7 +420,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   summaryI2Table <- createJaspTable(title = "I\U00B2")
   summaryI2Table$position <- 3
-  summaryI2Table$dependOn(c(.pemaDependencies, "inferenceHeterogeneityTable", "InferenceHeterogeneityI2"))
+  summaryI2Table$dependOn(c(.pemaDependencies, "inferenceHeterogeneityTable", "inferenceHeterogeneityI2"))
 
   summaryI2Table$addColumnInfo(name = "term",     title = "Term",           type = "string")
   summaryI2Table$addColumnInfo(name = "estimate", title = "Estimate",       type = "number")

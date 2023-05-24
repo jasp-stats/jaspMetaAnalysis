@@ -148,8 +148,8 @@ Upgrades
 	Upgrade
 	{
 		functionName:	"ClassicalPredictionPerformance"
-		fromVersion:	"0.16.4"
-		toVersion:		"0.17"
+		fromVersion:	"0.17.2"
+		toVersion:		"0.17.3"
 
 		// PredictionPerformanceData.qml
 		ChangeRename { from: "inputMeasure"; to: "effectSize" }
@@ -174,8 +174,17 @@ Upgrades
 		}
 
 		// PredictionPerformanceInference
-		ChangeRename { from: "linkOE"; to: "withinStudyVariation" }
-		ChangeRename { from: "linkCstat"; to: "withinStudyVariation" }
+		ChangeJS
+		{
+			name:		"withinStudyVariation"
+			jsFunction:	function(options) {
+				switch(options["measure"])
+				{
+					case "oeRatio":	return options["linkOE"];
+					case "cstat":	return options["linkCstat"];
+				}
+			}
+		}
 		ChangeRename { from: "exportColumns"; to: "exportComputedEffectSize" }
 		ChangeRename { from: "exportOE"; to: "exportComputedEffectSizeOeRatioColumnName" }
 		ChangeRename { from: "exportOElCI"; to: "exportComputedEffectSizeOeRatioLCiColumnName" }
@@ -196,8 +205,8 @@ Upgrades
 	Upgrade
 	{
 		functionName:	"BayesianPredictionPerformance"
-		fromVersion:	"0.16.4"
-		toVersion:		"0.17"
+		fromVersion:	"0.17.2"
+		toVersion:		"0.17.3"
 
 		// PredictionPerformanceData.qml
 		ChangeRename { from: "inputMeasure"; to: "effectSize" }
@@ -222,8 +231,17 @@ Upgrades
 		}
 
 		// PredictionPerformanceInference
-		ChangeRename { from: "linkOE"; to: "withinStudyVariation" }
-		ChangeRename { from: "linkCstat"; to: "withinStudyVariation" }
+		ChangeJS
+		{
+			name:		"withinStudyVariation"
+			jsFunction:	function(options) {
+				switch(options["measure"])
+				{
+					case "oeRatio":	return options["linkOE"];
+					case "cstat":	return options["linkCstat"];
+				}
+			}
+		}
 		ChangeRename { from: "exportColumns"; to: "exportComputedEffectSize" }
 		ChangeRename { from: "exportOE"; to: "exportComputedEffectSizeOeRatioColumnName" }
 		ChangeRename { from: "exportOElCI"; to: "exportComputedEffectSizeOeRatioLCiColumnName" }
@@ -268,8 +286,8 @@ Upgrades
 	Upgrade
 	{
 		functionName:	"WaapWls"
-		fromVersion:	"0.16.4"
-		toVersion:		"0.17"
+		fromVersion:	"0.17.2"
+		toVersion:		"0.17.3"
 
 		// WaapWls.qml
 		ChangeRename { from: "inputES"; to: "effectSize" }
@@ -286,8 +304,8 @@ Upgrades
 	Upgrade
 	{
 		functionName:	"PetPeese"
-		fromVersion:	"0.16.4"
-		toVersion:		"0.17"
+		fromVersion:	"0.17.2"
+		toVersion:		"0.17.3"
 
 		// PetPeese.qml
 		ChangeRename { from: "inputES"; to: "effectSize" }
@@ -307,8 +325,8 @@ Upgrades
 	Upgrade
 	{
 		functionName:	"SelectionModels"
-		fromVersion:	"0.16.4"
-		toVersion:		"0.17"
+		fromVersion:	"0.17.2"
+		toVersion:		"0.17.3"
 
 		// SelectionModels.qml
 		ChangeRename { from: "inputES"; to: "effectSize" }
@@ -341,8 +359,8 @@ Upgrades
 	Upgrade
 	{
 		functionName:	"RobustBayesianMetaAnalysis"
-		fromVersion:	"0.16.4"
-		toVersion:		"0.17"
+		fromVersion:	"0.17.2"
+		toVersion:		"0.17.3"
 
 		// RobustBayesianMetaAnalysis.qml
 		ChangeRename { from: "fittedPath"; to: "pathToFittedModel" }
@@ -555,8 +573,8 @@ Upgrades
 	Upgrade
 	{
 		functionName:	"PenalizedMetaAnalysis"
-		fromVersion:	"0.16.4"
-		toVersion:		"0.17"
+		fromVersion:	"0.17.2"
+		toVersion:		"0.17.3"
 
 
 		ChangeRename { from: "components"; to: "modelComponents" }
