@@ -3,6 +3,71 @@ import JASP.Module	1.0
 
 Upgrades
 {
+
+	// These functions are used to make upgraders for reusable components that are, well, actually reused multiple times. 
+	// So instead of copy pasting the upgrade code we reuse these upgrader functions
+
+	// Priors in robma
+	// qml_components/RobustBayesianMetaAnalysisPriors.qml
+	function robmaPriorsUpgrader(name) {
+		return function(options) {
+			let newModels = options[name].map(model => {
+					let newModel = {};
+					newModel.name				= model.name;
+					newModel.type				= model.type;
+					newModel.mu					= model.parMean;
+					newModel.x0					= model.parLocation;
+					newModel.sigma				= model.parScale;
+					newModel.k					= model.parShape;
+					newModel.theta				= model.parScale2;
+					newModel.nu					= model.parDf;
+					newModel.alpha				= model.parAlpha;
+					newModel.beta				= model.parBeta;
+					newModel.a					= model.parA;
+					newModel.b					= model.parB;
+					newModel.truncationLower	= model.truncationLower;
+					newModel.truncationUpper	= model.truncationUpper;
+					newModel.priorWeight		= model.priorWeight;
+
+					return newModel;
+				});
+
+			return newModels;
+		}
+	}
+
+	// Weight functions in robma
+	// qml_components/RobustBayesianMetaAnalysisWeightunctions.qml
+	function robmaWeightFunctionsUpgrader(name) {
+		return function(options) {
+			// helper function to upgrade model type
+			function typeSwitcher(type) {
+				switch(type) {
+					case "two-sided":		return "twoSided";
+					case "one-sided":		return "oneSided";
+					case "two-sided-fixed":	return "twoSidedFixed";
+					case "one-sided-fixed":	return "oneSidedFixed";
+					default:				return type;
+				}
+			}
+
+			let newModels = options[name].map(model => {
+				let newModel = {};
+				newModel.name			= model.name;
+				newModel.type			= typeSwitcher(model.type);
+				newModel.pValues		= model.parCuts;
+				newModel.alpha			= model.parAlpha;
+				newModel.omega			= model.parOmega;
+				newModel.priorWeight	= model.priorWeight;
+
+				return newModel;
+
+			});
+
+			return newModels;
+		}
+	}
+
 	Upgrade
 	{
 		functionName:	"ClassicalMetaAnalysis"
@@ -519,35 +584,20 @@ Upgrades
 		ChangeRename { from: "omegaNull"; to: "modelsSelectionModelsNull" }
 		ChangeRename { from: "petNull"; to: "modelsPetNull" }
 		ChangeRename { from: "peeseNull"; to: "modelsPeeseNull" }
-		// qml_components/RobustBayesianMetaAnalysisPriors.qml
-		ChangeRename { from: "parMean"; to: "mu" }
-		ChangeRename { from: "parLocation"; to: "x0" }
-		ChangeRename { from: "parScale"; to: "sigma" }
-		ChangeRename { from: "parShape"; to: "k" }
-		ChangeRename { from: "parScale2"; to: "theta" }
-		ChangeRename { from: "parDf"; to: "nu" }
-		ChangeRename { from: "parAlpha"; to: "alpha" }
-		ChangeRename { from: "parBeta"; to: "beta" }
-		ChangeRename { from: "parA"; to: "a" }
-		ChangeRename { from: "parB"; to: "b" }
-		// qml_components/RobustBayesianMetaAnalysisWeightunctions.qml
-		ChangeJS
+
+		// apply the upgrader functions on the repeated components
+		Repeater
 		{
-			name:		"type"
-			jsFunction:	function(options)
-			{
-				switch(options["type"])
-				{
-					case "two-sided":		return "twoSided";
-					case "one-sided":		return "oneSided";
-					case "two-sided-fixed":	return "twoSidedFixed";
-					case "one-sided-fixed":	return "oneSidedFixed";
-					default:				return options["type"];
-				}
-			}
+			model: ["modelsEffect", "modelsHeterogeneity", "modelsPet", "modelsPeese", "modelsEffectNull", "modelsHeterogeneityNull", "modelsPetNull", "modelsPeeseNull"]
+			ChangeJS { name: modelData; jsFunction: robmaPriorsUpgrader(modelData) }
 		}
-		ChangeRename { from: "parCuts"; to: "pValues" }
-		ChangeRename { from: "parOmega"; to: "omega" }
+
+		Repeater
+		{
+			model: ["modelsSelectionModels", "modelsSelectionModelsNull"]
+			ChangeJS { name: modelData; jsFunction: robmaWeightFunctionsUpgrader(modelData) }
+		}
+
 		// Advanced section
 		ChangeRename { from: "fittingScale"; to: "advancedEstimationScale" }
 		ChangeJS
