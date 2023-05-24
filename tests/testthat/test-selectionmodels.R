@@ -2,22 +2,22 @@ context("Meta Analysis - Selection Models")
 
 # output for all default settings ----
 options <- jaspTools::analysisOptions("SelectionModels")
-options$weightFunctionFE <- TRUE
-options$weightsFE <- TRUE
-options$heterogeneityRE <- TRUE
-options$weightFunctionRE <- TRUE
-options$weightsRE <- TRUE
-options$cutoffsPVal <- "(.05)"
-options$inputES <- "contNormal"
-options$inputSE <- "contGamma"
-options$tablePVal <- TRUE
-options$plotModels <- TRUE
+options$plotsWeightFunctionFixedEffectsPlot <- TRUE
+options$inferenceFixedEffectsEstimatedWeightsTable <- TRUE
+options$inferenceRandomEffectsEstimatedHeterogeneityTable <- TRUE
+options$plotsWeightFunctionRandomEffectsPlot <- TRUE
+options$inferenceRandomEffectsEstimatedWeightsTable <- TRUE
+options$modelPValueCutoffs <- "(.05)"
+options$effectSize <- "contNormal"
+options$effectSizeSe <- "contGamma"
+options$modelPValueFrequencyTable <- TRUE
+options$plotsMeanModelEstimatesPlot <- TRUE
 set.seed(1)
 results <- jaspTools::runAnalysis("SelectionModels", "debug.csv", options)
 
 
 test_that("Mean Estimates (mu) table results match", {
-  table <- results[["results"]][["estimatesFE"]][["collection"]][["estimatesFE_meanFE"]][["data"]]
+  table <- results[["results"]][["inferenceFixedEffectsMeanEstimatesTable"]][["collection"]][["inferenceFixedEffectsMeanEstimatesTable_meanFE"]][["data"]]
   expect_equal_tables(table,
                       list(-0.108777577319928, -0.269189581303854, 0.183822096876851, 0.0818443630848501,
                            -1.32907842666153, "Unadjusted", 0.0516344266639978, -0.11716380673004,
@@ -26,7 +26,7 @@ test_that("Mean Estimates (mu) table results match", {
 })
 
 test_that("Estimated Weights table results match", {
-  table <- results[["results"]][["estimatesFE"]][["collection"]][["estimatesFE_weightsFE"]][["data"]]
+  table <- results[["results"]][["inferenceFixedEffectsMeanEstimatesTable"]][["collection"]][["inferenceFixedEffectsMeanEstimatesTable_inferenceFixedEffectsEstimatedWeightsTable"]][["data"]]
   expect_equal_tables(table,
                       list(1, 1, 0, 0, 1, 0.025, 0.376326541603695, 0.01803538997387, 0.025,
                            0.0395303509582151, 0.182804967058569, 2.0586231745176, 0.734617693233521,
@@ -41,7 +41,7 @@ test_that("Weight Function (Fixed Effects) plot matches", {
 })
 
 test_that("Heterogeneity Estimates (tau) table results match", {
-  table <- results[["results"]][["estimatesRE"]][["collection"]][["estimatesRE_heterogeneityRE"]][["data"]]
+  table <- results[["results"]][["inferenceRandomEffectsMeanEstimatesTable"]][["collection"]][["inferenceRandomEffectsMeanEstimatesTable_inferenceRandomEffectsEstimatedHeterogeneityTable"]][["data"]]
   expect_equal_tables(table,
                       list(0.827282385784749, 0.532667964302723, 0.000814125410133252, 3.34794713005884,
                            "Unadjusted", 1.04166075641977, 0.943446276464169, 0.491474185571525,
@@ -50,7 +50,7 @@ test_that("Heterogeneity Estimates (tau) table results match", {
 })
 
 test_that("Mean Estimates (mu) table results match", {
-  table <- results[["results"]][["estimatesRE"]][["collection"]][["estimatesRE_meanRE"]][["data"]]
+  table <- results[["results"]][["inferenceRandomEffectsMeanEstimatesTable"]][["collection"]][["inferenceRandomEffectsMeanEstimatesTable_meanRE"]][["data"]]
   expect_equal_tables(table,
                       list(-0.144884644995104, -0.441684070668495, 0.338683528291211, 0.151431060986072,
                            -0.956769661730296, "Unadjusted", 0.151914780678286, -0.339172712645018,
@@ -59,7 +59,7 @@ test_that("Mean Estimates (mu) table results match", {
 })
 
 test_that("Estimated Weights table results match", {
-  table <- results[["results"]][["estimatesRE"]][["collection"]][["estimatesRE_weightsRE"]][["data"]]
+  table <- results[["results"]][["inferenceRandomEffectsMeanEstimatesTable"]][["collection"]][["inferenceRandomEffectsMeanEstimatesTable_inferenceRandomEffectsEstimatedWeightsTable"]][["data"]]
   expect_equal_tables(table,
                       list(1, 1, 0, 0, 1, 0.025, 1.14398176102268, 0, 0.025, 0.111466938672115,
                            0.71874669301328, 1.59163412109298, 2.55269939333597, 0.975,
@@ -102,14 +102,14 @@ test_that("Mean Model Estimates (mu) plot matches", {
 
 # weight function scaling works ----
 options <- jaspTools::analysisOptions("SelectionModels")
-options$estimatesFE <- FALSE
-options$weightFunctionFE <- TRUE
-options$estimatesRE <- FALSE
-options$weightFunctionRE <- TRUE
-options$cutoffsPVal <- "(.05)"
-options$inputES <- "contNormal"
-options$inputSE <- "contGamma"
-options$weightFunctionRescale <- TRUE
+options$inferenceFixedEffectsMeanEstimatesTable <- FALSE
+options$plotsWeightFunctionFixedEffectsPlot <- TRUE
+options$inferenceRandomEffectsMeanEstimatesTable <- FALSE
+options$plotsWeightFunctionRandomEffectsPlot <- TRUE
+options$modelPValueCutoffs <- "(.05)"
+options$effectSize <- "contNormal"
+options$effectSizeSe <- "contGamma"
+options$plotsWeightFunctionRescaleXAxis <- TRUE
 set.seed(1)
 results <- jaspTools::runAnalysis("SelectionModels", "debug.csv", options)
 
@@ -129,20 +129,20 @@ test_that("[x-scaled] Weight Function (Random Effects) plot matches", {
 
 # one sided selection & expected negative direction works ----
 options <- jaspTools::analysisOptions("SelectionModels")
-options$weightsFE <- TRUE
-options$heterogeneityRE <- TRUE
-options$weightsRE <- TRUE
-options$cutoffsPVal <- "(.05)"
-options$effectDirection <- "negative"
-options$inputES <- "contNormal"
-options$inputSE <- "contGamma"
-options$selectionTwosided <- FALSE
+options$inferenceFixedEffectsEstimatedWeightsTable <- TRUE
+options$inferenceRandomEffectsEstimatedHeterogeneityTable <- TRUE
+options$inferenceRandomEffectsEstimatedWeightsTable <- TRUE
+options$modelPValueCutoffs <- "(.05)"
+options$modelExpectedDirectionOfEffectSizes <- "negative"
+options$effectSize <- "contNormal"
+options$effectSizeSe <- "contGamma"
+options$modelTwoSidedSelection <- FALSE
 set.seed(1)
 results <- jaspTools::runAnalysis("SelectionModels", "debug.csv", options)
 
 
 test_that("Mean Estimates (mu) table results match", {
-  table <- results[["results"]][["estimatesFE"]][["collection"]][["estimatesFE_meanFE"]][["data"]]
+  table <- results[["results"]][["inferenceFixedEffectsMeanEstimatesTable"]][["collection"]][["inferenceFixedEffectsMeanEstimatesTable_meanFE"]][["data"]]
   expect_equal_tables(table,
                       list(-0.108777577319928, -0.269189581303854, 0.183822096876851, 0.0818443630848501,
                            -1.32907842666153, "Unadjusted", 0.0516344266639978, -0.111944393246252,
@@ -151,7 +151,7 @@ test_that("Mean Estimates (mu) table results match", {
 })
 
 test_that("Estimated Weights table results match", {
-  table <- results[["results"]][["estimatesFE"]][["collection"]][["estimatesFE_weightsFE"]][["data"]]
+  table <- results[["results"]][["inferenceFixedEffectsMeanEstimatesTable"]][["collection"]][["inferenceFixedEffectsMeanEstimatesTable_inferenceFixedEffectsEstimatedWeightsTable"]][["data"]]
   expect_equal_tables(table,
                       list(1, 1, 0, 0, 1, 0.05, 1.0390114365016, 0.0922569515176939, 0.05,
                            0.0314798599518836, 0.48304687864256, 2.15095362881009, 1.98576592148551,
@@ -159,7 +159,7 @@ test_that("Estimated Weights table results match", {
 })
 
 test_that("Heterogeneity Estimates (Ď„) table results match", {
-  table <- results[["results"]][["estimatesRE"]][["collection"]][["estimatesRE_heterogeneityRE"]][["data"]]
+  table <- results[["results"]][["inferenceRandomEffectsMeanEstimatesTable"]][["collection"]][["inferenceRandomEffectsMeanEstimatesTable_inferenceRandomEffectsEstimatedHeterogeneityTable"]][["data"]]
   expect_equal_tables(table,
                       list(0.827282385784749, 0.532667964302723, 0.000814125410133252, 3.34794713005884,
                            "Unadjusted", 1.04166075641977, 0.984135311386007, 0.579148049074138,
@@ -168,7 +168,7 @@ test_that("Heterogeneity Estimates (Ď„) table results match", {
 })
 
 test_that("Mean Estimates (mu) table results match", {
-  table <- results[["results"]][["estimatesRE"]][["collection"]][["estimatesRE_meanRE"]][["data"]]
+  table <- results[["results"]][["inferenceRandomEffectsMeanEstimatesTable"]][["collection"]][["inferenceRandomEffectsMeanEstimatesTable_meanRE"]][["data"]]
   expect_equal_tables(table,
                       list(-0.144884644995104, -0.441684070668495, 0.338683528291211, 0.151431060986072,
                            -0.956769661730296, "Unadjusted", 0.151914780678286, -0.558733086935526,
@@ -177,7 +177,7 @@ test_that("Mean Estimates (mu) table results match", {
 })
 
 test_that("Estimated Weights table results match", {
-  table <- results[["results"]][["estimatesRE"]][["collection"]][["estimatesRE_weightsRE"]][["data"]]
+  table <- results[["results"]][["inferenceRandomEffectsMeanEstimatesTable"]][["collection"]][["inferenceRandomEffectsMeanEstimatesTable_inferenceRandomEffectsEstimatedWeightsTable"]][["data"]]
   expect_equal_tables(table,
                       list(1, 1, 0, 0, 1, 0.05, 4.05572161073559, 0, 0.05, 0.0710518148153868,
                            2.24675526054569, 1.80514615096553, 8.45928100348104, 1))
@@ -199,25 +199,25 @@ test_that("Test of Heterogeneity table results match", {
 
 # different cutoffs without automatic joining works ----
 options <- jaspTools::analysisOptions("SelectionModels")
-options$weightFunctionFE <- TRUE
-options$weightsFE <- TRUE
-options$heterogeneityRE <- TRUE
-options$weightFunctionRE <- TRUE
-options$weightsRE <- TRUE
-options$joinPVal <- FALSE
-options$cutoffsPVal <- "(.3, .8, .999)"
-options$effectDirection <- "negative"
-options$inputES <- "contNormal"
-options$inputSE <- "contGamma"
-options$tablePVal <- TRUE
-options$weightFunctionRescale <- TRUE
-options$selectionTwosided <- FALSE
+options$plotsWeightFunctionFixedEffectsPlot <- TRUE
+options$inferenceFixedEffectsEstimatedWeightsTable <- TRUE
+options$inferenceRandomEffectsEstimatedHeterogeneityTable <- TRUE
+options$plotsWeightFunctionRandomEffectsPlot <- TRUE
+options$inferenceRandomEffectsEstimatedWeightsTable <- TRUE
+options$modelAutomaticallyJoinPValueIntervals <- FALSE
+options$modelPValueCutoffs <- "(.3, .8, .999)"
+options$modelExpectedDirectionOfEffectSizes <- "negative"
+options$effectSize <- "contNormal"
+options$effectSizeSe <- "contGamma"
+options$modelPValueFrequencyTable <- TRUE
+options$plotsWeightFunctionRescaleXAxis <- TRUE
+options$modelTwoSidedSelection <- FALSE
 set.seed(1)
 results <- jaspTools::runAnalysis("SelectionModels", "debug.csv", options)
 
 
 test_that("Mean Estimates (mu) table results match", {
-  table <- results[["results"]][["estimatesFE"]][["collection"]][["estimatesFE_meanFE"]][["data"]]
+  table <- results[["results"]][["inferenceFixedEffectsMeanEstimatesTable"]][["collection"]][["inferenceFixedEffectsMeanEstimatesTable_meanFE"]][["data"]]
   expect_equal_tables(table,
                       list(-0.108777577319928, -0.269189581303854, 0.183822096876851, 0.0818443630848501,
                            -1.32907842666153, "Unadjusted", 0.0516344266639978, -0.153847941286966,
@@ -226,7 +226,7 @@ test_that("Mean Estimates (mu) table results match", {
 })
 
 test_that("Estimated Weights table results match", {
-  table <- results[["results"]][["estimatesFE"]][["collection"]][["estimatesFE_weightsFE"]][["data"]]
+  table <- results[["results"]][["inferenceFixedEffectsMeanEstimatesTable"]][["collection"]][["inferenceFixedEffectsMeanEstimatesTable_inferenceFixedEffectsEstimatedWeightsTable"]][["data"]]
   expect_equal_tables(table,
                       list(1, 1, 0, 0, 1, 0.3, 1.69565266908451, 0.782559612780323, 0.3,
                            0.00027291713359262, 0.465872364750855, 3.63973654026748, 2.60874572538869,
@@ -243,7 +243,7 @@ test_that("Weight Function (Fixed Effects) plot matches", {
 })
 
 test_that("Heterogeneity Estimates (tau) table results match", {
-  table <- results[["results"]][["estimatesRE"]][["collection"]][["estimatesRE_heterogeneityRE"]][["data"]]
+  table <- results[["results"]][["inferenceRandomEffectsMeanEstimatesTable"]][["collection"]][["inferenceRandomEffectsMeanEstimatesTable_inferenceRandomEffectsEstimatedHeterogeneityTable"]][["data"]]
   expect_equal_tables(table,
                       list(0.827282385784749, 0.532667964302723, 0.000814125410133252, 3.34794713005884,
                            "Unadjusted", 1.04166075641977, 1.0747401921054, 0.525845482178296,
@@ -252,7 +252,7 @@ test_that("Heterogeneity Estimates (tau) table results match", {
 })
 
 test_that("Mean Estimates (mu) table results match", {
-  table <- results[["results"]][["estimatesRE"]][["collection"]][["estimatesRE_meanRE"]][["data"]]
+  table <- results[["results"]][["inferenceRandomEffectsMeanEstimatesTable"]][["collection"]][["inferenceRandomEffectsMeanEstimatesTable_meanRE"]][["data"]]
   expect_equal_tables(table,
                       list(-0.144884644995104, -0.441684070668495, 0.338683528291211, 0.151431060986072,
                            -0.956769661730296, "Unadjusted", 0.151914780678286, 0.0918536888331539,
@@ -261,7 +261,7 @@ test_that("Mean Estimates (mu) table results match", {
 })
 
 test_that("Estimated Weights table results match", {
-  table <- results[["results"]][["estimatesRE"]][["collection"]][["estimatesRE_weightsRE"]][["data"]]
+  table <- results[["results"]][["inferenceRandomEffectsMeanEstimatesTable"]][["collection"]][["inferenceRandomEffectsMeanEstimatesTable_inferenceRandomEffectsEstimatedWeightsTable"]][["data"]]
   expect_equal_tables(table,
                       list(1, 1, 0, 0, 1, 0.3, 2.04088487425868, 0.668265339061214, 0.3,
                            0.00356623838422433, 0.700328958095412, 2.91418033006802, 3.41350440945615,
@@ -299,24 +299,24 @@ test_that("p-value Frequency table results match", {
 
 # different cutoffs with automatic joining works ----
 options <- jaspTools::analysisOptions("SelectionModels")
-options$weightFunctionFE <- TRUE
-options$weightsFE <- TRUE
-options$heterogeneityRE <- TRUE
-options$weightFunctionRE <- TRUE
-options$weightsRE <- TRUE
-options$cutoffsPVal <- "(.3, .8, .999)"
-options$effectDirection <- "negative"
-options$inputES <- "contNormal"
-options$inputSE <- "contGamma"
-options$tablePVal <- TRUE
-options$weightFunctionRescale <- TRUE
-options$selectionTwosided <- FALSE
+options$plotsWeightFunctionFixedEffectsPlot <- TRUE
+options$inferenceFixedEffectsEstimatedWeightsTable <- TRUE
+options$inferenceRandomEffectsEstimatedHeterogeneityTable <- TRUE
+options$plotsWeightFunctionRandomEffectsPlot <- TRUE
+options$inferenceRandomEffectsEstimatedWeightsTable <- TRUE
+options$modelPValueCutoffs <- "(.3, .8, .999)"
+options$modelExpectedDirectionOfEffectSizes <- "negative"
+options$effectSize <- "contNormal"
+options$effectSizeSe <- "contGamma"
+options$modelPValueFrequencyTable <- TRUE
+options$plotsWeightFunctionRescaleXAxis <- TRUE
+options$modelTwoSidedSelection <- FALSE
 set.seed(1)
 results <- jaspTools::runAnalysis("SelectionModels", "debug.csv", options)
 
 
 test_that("Mean Estimates (mu) table results match", {
-  table <- results[["results"]][["estimatesFE"]][["collection"]][["estimatesFE_meanFE"]][["data"]]
+  table <- results[["results"]][["inferenceFixedEffectsMeanEstimatesTable"]][["collection"]][["inferenceFixedEffectsMeanEstimatesTable_meanFE"]][["data"]]
   expect_equal_tables(table,
                       list(-0.108777577319928, -0.269189581303854, 0.183822096876851, 0.0818443630848501,
                            -1.32907842666153, "Unadjusted", 0.0516344266639978, -0.12253530646152,
@@ -325,7 +325,7 @@ test_that("Mean Estimates (mu) table results match", {
 })
 
 test_that("Estimated Weights table results match", {
-  table <- results[["results"]][["estimatesFE"]][["collection"]][["estimatesFE_weightsFE"]][["data"]]
+  table <- results[["results"]][["inferenceFixedEffectsMeanEstimatesTable"]][["collection"]][["inferenceFixedEffectsMeanEstimatesTable_inferenceFixedEffectsEstimatedWeightsTable"]][["data"]]
   expect_equal_tables(table,
                       list(1, 1, 0, 0, 1, 0.3, 1.6273645316654, 0.745760379455773, 0.3, 0.000296976802455585,
                            0.449806302138001, 3.61792292355682, 2.50896868387502, 0.8,
@@ -335,7 +335,7 @@ test_that("Estimated Weights table results match", {
 
 
 test_that("Heterogeneity Estimates (tau) table results match", {
-  table <- results[["results"]][["estimatesRE"]][["collection"]][["estimatesRE_heterogeneityRE"]][["data"]]
+  table <- results[["results"]][["inferenceRandomEffectsMeanEstimatesTable"]][["collection"]][["inferenceRandomEffectsMeanEstimatesTable_inferenceRandomEffectsEstimatedHeterogeneityTable"]][["data"]]
   expect_equal_tables(table,
                       list(0.827282385784749, 0.532667964302723, 0.000814125410133252, 3.34794713005884,
                            "Unadjusted", 1.04166075641977, 1.12013432591779, 0.653723752589082,
@@ -344,7 +344,7 @@ test_that("Heterogeneity Estimates (tau) table results match", {
 })
 
 test_that("Mean Estimates (mu) table results match", {
-  table <- results[["results"]][["estimatesRE"]][["collection"]][["estimatesRE_meanRE"]][["data"]]
+  table <- results[["results"]][["inferenceRandomEffectsMeanEstimatesTable"]][["collection"]][["inferenceRandomEffectsMeanEstimatesTable_meanRE"]][["data"]]
   expect_equal_tables(table,
                       list(-0.144884644995104, -0.441684070668495, 0.338683528291211, 0.151431060986072,
                            -0.956769661730296, "Unadjusted", 0.151914780678286, 0.205359892764449,
@@ -353,7 +353,7 @@ test_that("Mean Estimates (mu) table results match", {
 })
 
 test_that("Estimated Weights table results match", {
-  table <- results[["results"]][["estimatesRE"]][["collection"]][["estimatesRE_weightsRE"]][["data"]]
+  table <- results[["results"]][["inferenceRandomEffectsMeanEstimatesTable"]][["collection"]][["inferenceRandomEffectsMeanEstimatesTable_inferenceRandomEffectsEstimatedWeightsTable"]][["data"]]
   expect_equal_tables(table,
                       list(1, 1, 0, 0, 1, 0.3, 1.95909314883835, 0.681531198843923, 0.3,
                            0.00265117591129094, 0.651829298942061, 3.00553097569873, 3.23665509883278,
@@ -383,14 +383,14 @@ test_that("p-value Frequency table results match", {
 
 # supplying p-values work ----
 options <- jaspTools::analysisOptions("SelectionModels")
-options$joinPVal <- FALSE
-options$cutoffsPVal <- "(.01)"
-options$effectDirection <- "negative"
-options$inputES <- "ES"
-options$inputSE <- "SE"
-options$inputPVal <- "pval"
-options$tablePVal <- TRUE
-options$selectionTwosided <- FALSE
+options$modelAutomaticallyJoinPValueIntervals <- FALSE
+options$modelPValueCutoffs <- "(.01)"
+options$modelExpectedDirectionOfEffectSizes <- "negative"
+options$effectSize <- "ES"
+options$effectSizeSe <- "SE"
+options$pValue <- "pval"
+options$modelPValueFrequencyTable <- TRUE
+options$modelTwoSidedSelection <- FALSE
 set.seed(1)
 dataset <-
   structure(
@@ -523,7 +523,7 @@ results <- jaspTools::runAnalysis("SelectionModels", dataset, options)
 
 
 test_that("Mean Estimates (mu) table results match", {
-  table <- results[["results"]][["estimatesFE"]][["collection"]][["estimatesFE_meanFE"]][["data"]]
+  table <- results[["results"]][["inferenceFixedEffectsMeanEstimatesTable"]][["collection"]][["inferenceFixedEffectsMeanEstimatesTable_meanFE"]][["data"]]
   expect_equal_tables(table,
                       list(-0.436205104253414, -0.519035731383147, 5.62654240706622e-25,
                            0.0422613006070984, -10.3216204420397, "Unadjusted", -0.35337447712368,
@@ -533,7 +533,7 @@ test_that("Mean Estimates (mu) table results match", {
 })
 
 test_that("Mean Estimates (mu) table results match", {
-  table <- results[["results"]][["estimatesRE"]][["collection"]][["estimatesRE_meanRE"]][["data"]]
+  table <- results[["results"]][["inferenceRandomEffectsMeanEstimatesTable"]][["collection"]][["inferenceRandomEffectsMeanEstimatesTable_meanRE"]][["data"]]
   expect_equal_tables(table,
                       list(-0.741950442278819, -1.0920698068352, 3.27528956955066e-05, 0.178635611326573,
                            -4.15342963684, "Unadjusted", -0.391831077722441, 0.380984681788735,
@@ -563,14 +563,14 @@ test_that("p-value Frequency table results match", {
 
 ### output of the default settings with correlations as an input
 options <- jaspTools::analysisOptions("SelectionModels")
-options$weightsFE <- TRUE
-options$heterogeneityRE <- TRUE
-options$weightsRE <- TRUE
-options$cutoffsPVal <- "(.05, .10)"
-options$inputES <- "es"
-options$inputN <- "n"
+options$inferenceFixedEffectsEstimatedWeightsTable <- TRUE
+options$inferenceRandomEffectsEstimatedHeterogeneityTable <- TRUE
+options$inferenceRandomEffectsEstimatedWeightsTable <- TRUE
+options$modelPValueCutoffs <- "(.05, .10)"
+options$effectSize <- "es"
+options$sampleSize <- "n"
 options$measures <- "correlation"
-options$tablePVal <- TRUE
+options$modelPValueFrequencyTable <- TRUE
 set.seed(1)
 dataset <- data.frame(
   es = runif(100, .1, .3),
@@ -580,7 +580,7 @@ results <- jaspTools::runAnalysis("SelectionModels", dataset, options)
 
 
 test_that("Mean Estimates table results match", {
-  table <- results[["results"]][["estimatesFE"]][["collection"]][["estimatesFE_meanFE"]][["data"]]
+  table <- results[["results"]][["inferenceFixedEffectsMeanEstimatesTable"]][["collection"]][["inferenceFixedEffectsMeanEstimatesTable_meanFE"]][["data"]]
   jaspTools::expect_equal_tables(table,
                                  list(0.204177965488621, 0.190993378036, 1.59205580346668e-187, 0.00669934469245971,
                                       29.2067466964043, "Unadjusted", 0.217252375590527, 0.195163279975223,
@@ -589,7 +589,7 @@ test_that("Mean Estimates table results match", {
 })
 
 test_that("Estimated Weights table results match", {
-  table <- results[["results"]][["estimatesFE"]][["collection"]][["estimatesFE_weightsFE"]][["data"]]
+  table <- results[["results"]][["inferenceFixedEffectsMeanEstimatesTable"]][["collection"]][["inferenceFixedEffectsMeanEstimatesTable_inferenceFixedEffectsEstimatedWeightsTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
                                  list(1, 1, 0, 0, 1, 0.025, 0.946505734640249, 0.180360120650839, 0.025,
                                       0.0154623999208921, 0.390897802221199, 2.42136366401121, 1.71265134862966,
@@ -598,14 +598,14 @@ test_that("Estimated Weights table results match", {
 })
 
 test_that("Heterogeneity Estimates table results match", {
-  table <- results[["results"]][["estimatesRE"]][["collection"]][["estimatesRE_heterogeneityRE"]][["data"]]
+  table <- results[["results"]][["inferenceRandomEffectsMeanEstimatesTable"]][["collection"]][["inferenceRandomEffectsMeanEstimatesTable_inferenceRandomEffectsEstimatedHeterogeneityTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
                                  list(0, 0, 1, 0, "Unadjusted", 0.103411887992993, 0, 0, 1, 0, "Adjusted",
                                       0.2426036713353))
 })
 
 test_that("Mean Estimates table results match", {
-  table <- results[["results"]][["estimatesRE"]][["collection"]][["estimatesRE_meanRE"]][["data"]]
+  table <- results[["results"]][["inferenceRandomEffectsMeanEstimatesTable"]][["collection"]][["inferenceRandomEffectsMeanEstimatesTable_meanRE"]][["data"]]
   jaspTools::expect_equal_tables(table,
                                  list(0.204177965488621, 0.190991487999372, 1.79846926082398e-187, 0.00670030120287679,
                                       29.2025772484021, "Unadjusted", 0.217254234170054, 0.195163505879826,
@@ -614,7 +614,7 @@ test_that("Mean Estimates table results match", {
 })
 
 test_that("Estimated Weights table results match", {
-  table <- results[["results"]][["estimatesRE"]][["collection"]][["estimatesRE_weightsRE"]][["data"]]
+  table <- results[["results"]][["inferenceRandomEffectsMeanEstimatesTable"]][["collection"]][["inferenceRandomEffectsMeanEstimatesTable_inferenceRandomEffectsEstimatedWeightsTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
                                  list(1, 1, 0, 0, 1, 0.025, 0.946521152729813, 0, 0.025, 0.436970853703284,
                                       1.21767472715722, 0.777318549543651, 3.3331197628426, 0.05,

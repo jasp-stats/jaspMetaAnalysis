@@ -46,10 +46,10 @@ Item
 		
 		AssignedVariablesList
 		{
-			name:				"inputMeasure"
+			name:				"effectSize"
 			id:					inputMeasure
 			title:				if (measuresOE.checked){
-				qsTr("O:E Ratio")
+				qsTr("O/E Ratio")
 			} else if (measuresC.checked) {
 				qsTr("C-statistic")
 			}
@@ -59,7 +59,7 @@ Item
 
 		AssignedVariablesList
 		{
-			name:				"inputSE"
+			name:				"effectSizeSe"
 			id:					inputSE
 			title:				qsTr("Standard Error")
 			singleVariable:		true
@@ -68,7 +68,7 @@ Item
 
 		AssignedPairsVariablesList
 		{
-			name: 				"inputCI"
+			name: 				"effectSizeCi"
 			id: 				inputCI
 			title: 				qsTr("95% CI Lower and Upper Bound")
 			singleVariable: 	true
@@ -77,7 +77,7 @@ Item
 
 		AssignedVariablesList
 		{
-			name:				"inputN"
+			name:				"numberOfParticipants"
 			id: 				inputN
 			title:				qsTr("Number of Participants")
 			singleVariable:		true
@@ -86,7 +86,7 @@ Item
 
 		AssignedVariablesList
 		{
-			name:				"inputO"
+			name:				"numberOfObservedEvents"
 			id: 				inputO
 			title:				qsTr("Number of Observed Events")
 			singleVariable:		true
@@ -95,7 +95,7 @@ Item
 
 		AssignedVariablesList
 		{
-			name:				"inputE"
+			name:				"numberOfExpectedEvents"
 			id: 				inputE
 			title:				qsTr("Number of Expected Events")
 			singleVariable:		true
@@ -105,7 +105,7 @@ Item
 		AssignedVariablesList
 		{
 			id: 				inputLabels
-			name: 				"inputLabels"
+			name: 				"studyLabel"
 			title: 				qsTr("Study Labels")
 			singleVariable:		true
 			allowedColumns:		["nominal","nominalText"]
@@ -139,15 +139,15 @@ Item
 
 		RadioButton
 		{
-			label:		qsTr("O:E ratio")
-			value:		"OE"
+			label:		qsTr("O/E ratio")
+			value:		"oeRatio"
 			id:			measuresOE
 		}
 
 		RadioButton
 		{
 			label:		qsTr("C statistic")
-			value:		"cstat"
+			value:		"cStatistic"
 			id:			measuresC
 		}
 	}
