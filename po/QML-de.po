@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2023-05-28 00:24+0000\n"
+"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.18-dev\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -1746,39 +1752,41 @@ msgstr "Stichproben:"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Terms"
-msgstr ""
+msgstr "Terme"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Estimates table"
-msgstr ""
+msgstr "Schätzungen-Tabelle"
 
+#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Heterogeneity table"
-msgstr ""
+msgstr "Heterogenitäten-Tabelle"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Available terms"
-msgstr ""
+msgstr "Verfügbare Terme"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Selected terms"
-msgstr ""
+msgstr "Ausgewählte Terme"
 
 msgctxt "PetPeese|"
 msgid "Sample size"
-msgstr ""
+msgstr "Stichprobenumfang"
 
+#, fuzzy
 msgctxt "PetPeese|"
 msgid "Mean estimates table"
-msgstr ""
+msgstr "Tabelle mittlerer Schätzungen"
 
 msgctxt "PetPeese|"
 msgid "Regression estimates table"
-msgstr ""
+msgstr "Tabelle Regressionsschätzungen"
 
 msgctxt "PetPeese|"
 msgid "Regression Estimate"
-msgstr ""
+msgstr "Regressionsschätzung"
 
 msgctxt "PredictionPerformanceData|"
 msgid "O/E Ratio"
@@ -1790,11 +1798,11 @@ msgstr ""
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Export computed effect size"
-msgstr ""
+msgstr "Berechnete Effektstärke exportieren"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Column name (effect size)"
-msgstr ""
+msgstr "Spaltenname (Effektstärke)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "O/E ratios"
@@ -1812,41 +1820,45 @@ msgctxt "PredictionPerformancePriors|"
 msgid "mu: summary estimate (O/E Ratio)"
 msgstr ""
 
+#, fuzzy
 msgctxt "PredictionPerformancePriors|"
 msgid "mu: summary estimate (C statistic)"
-msgstr ""
+msgstr "mu: zusammenfassende Schätzung (C-Statistik)"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "tau: heterogeneity (Between study SD)"
-msgstr ""
+msgstr "tau: Heterogenität (SD zwischen Studien)"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "T"
-msgstr ""
+msgstr "T"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Model ensemble type"
-msgstr ""
+msgstr "Modell-Ensemble-Typ"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Prior distribution plots"
-msgstr ""
+msgstr "Prior-Verteilungsdiagramme"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Conditional parameter estimates"
-msgstr ""
+msgstr "Bedingte Parameterschätzungen"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "BF comparison"
-msgstr ""
+msgstr "BF-Vergleich"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Marginal likelihood"
-msgstr ""
+msgstr "Marginale Likelihood"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Posterior probability"
-msgstr ""
+msgstr "Posterior-Wahrscheinlichkeit"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "logOR"
@@ -1854,52 +1866,56 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Alphabetical"
-msgstr ""
+msgstr "Alphabetisch"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Prior distribution"
-msgstr ""
+msgstr "Prior-Verteilung"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Overview table"
-msgstr ""
+msgstr "Übersichtstabelle"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Posterior samples density"
-msgstr ""
+msgstr "Dichte Posterior-Stichprobe"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "MCMC"
-msgstr ""
+msgstr "MCMC"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Samples"
-msgstr ""
+msgstr "Stichproben"
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "P-value frequency table"
-msgstr ""
+msgstr "P-Wert Häufigkeitstabelle"
 
 msgctxt "SelectionModels|"
 msgid "Mean estimates table"
-msgstr ""
+msgstr "Tabelle mittlerer Schätzungen"
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Estimated weights table"
-msgstr ""
+msgstr "Tabelle geschätzter Gewichte"
 
 msgctxt "SelectionModels|"
 msgid "Estimated heterogeneity table"
-msgstr ""
+msgstr "Tabelle geschätzter Heterogenität"
 
 msgctxt "WaapWls|"
 msgid "Sample size"
-msgstr ""
+msgstr "Stichprobenumfang"
 
 msgctxt "WaapWls|"
 msgid "Mean estimates table"
-msgstr ""
+msgstr "Tabelle mittlerer Schätzungen"
 
+#, fuzzy
 msgctxt "WaapWls|"
 msgid "Multiplicative heterogeneity estimates table"
-msgstr ""
+msgstr "Tabelle multiplikativer Heterogenitätsschätzungen"
