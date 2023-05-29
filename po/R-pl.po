@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.0\n"
 "POT-Creation-Date: 2023-04-29 02:38\n"
-"PO-Revision-Date: 2023-05-28 00:24+0000\n"
+"PO-Revision-Date: 2023-05-30 19:51+0000\n"
 "Last-Translator: Tomasz Misiuro <tomaszmisiuro@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/pl/>\n"
@@ -18,19 +18,19 @@ msgid "The prior lower bound is not smaller than the upper bound."
 msgstr ""
 
 msgid "Your prior contains negative values."
-msgstr ""
+msgstr "Zdefiniowany prior zawiera wartości ujemne."
 
 msgid "Your prior contains positive values."
 msgstr "Twój prior zawiera pozytywne wartości."
 
 msgid "No positive numbers found in %s"
-msgstr ""
+msgstr "W %s nie znaleziono liczb dodatnich"
 
 msgid "No negative numbers found in %s"
-msgstr ""
+msgstr "W %s nie znaleziono liczb ujemnych"
 
 msgid "The 95%% CI Lower Bound must be smaller than the Upper Bound."
-msgstr ""
+msgstr "95%% dolna granica PU musi być mniejsza niż górna granica."
 
 msgid "You cannot set all the prior model probabilties to zero."
 msgstr ""
@@ -43,7 +43,7 @@ msgid ""
 msgstr ""
 
 msgid "Posterior Estimates per Model"
-msgstr ""
+msgstr "Oszacowania a posteriori dla modeli"
 
 msgid "BF%s%s"
 msgstr "BF%s%s"
@@ -52,7 +52,7 @@ msgid "Log(BF%s%s)"
 msgstr "Log(BF%s%s)"
 
 msgid "Mean"
-msgstr ""
+msgstr "Średnia"
 
 msgid "SD"
 msgstr "Odch. stand."
@@ -61,7 +61,7 @@ msgid "Lower"
 msgstr "Dolna granica"
 
 msgid "95%% Credible Interval"
-msgstr ""
+msgstr "95%% przedział wiarygodności"
 
 msgid "Upper"
 msgstr "Górna granica"
@@ -161,7 +161,7 @@ msgid "Effect Sizes per Study"
 msgstr ""
 
 msgid "Observed"
-msgstr ""
+msgstr "Obserwowane"
 
 msgid "Estimated"
 msgstr "Oszacowane"
@@ -347,7 +347,7 @@ msgid "z"
 msgstr "z"
 
 msgid "t"
-msgstr ""
+msgstr "t"
 
 msgid "Wald test."
 msgstr ""
@@ -857,7 +857,7 @@ msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
 msgstr ""
 
 msgid "Weights"
-msgstr ""
+msgstr "Wagi"
 
 msgid "PET"
 msgstr ""
@@ -902,7 +902,7 @@ msgid "All p-value cutoffs needs to be between 0 and 1."
 msgstr ""
 
 msgid "95%% Confidence Interval"
-msgstr ""
+msgstr "95%% przedział ufności"
 
 msgid "Note:"
 msgstr "Uwaga:"
