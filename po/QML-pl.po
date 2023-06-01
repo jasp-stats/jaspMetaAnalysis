@@ -1,10 +1,16 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2023-06-02 20:51+0000\n"
+"Last-Translator: Tomasz Misiuro <tomaszmisiuro@gmail.com>\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/pl/>\n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.18-dev\n"
 "X-Language: pl\n"
 "X-Qt-Contexts: true\n"
 
@@ -274,7 +280,7 @@ msgstr ""
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Rank correlation test"
-msgstr ""
+msgstr "Korelacja rangowa"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Egger's Regression test"
@@ -290,7 +296,7 @@ msgstr ""
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Diagnostic plots"
-msgstr ""
+msgstr "Wykresy diagnostyczne"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Residual vs Dependent"
@@ -362,7 +368,7 @@ msgstr "Skala"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Df (global)"
-msgstr ""
+msgstr "Df (globalne)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Df (slab)"
@@ -370,7 +376,7 @@ msgstr ""
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale (global)"
-msgstr ""
+msgstr "Skala (globalnie)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale (slab)"
@@ -686,11 +692,11 @@ msgstr "Dodatkowe informacje"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Add fixed and random effects posterior"
-msgstr ""
+msgstr "Podaj posterior dla efektów stałych i losowych"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Shade 95% CI"
-msgstr ""
+msgstr "Oznacz 95% PU"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Sequential plot"
@@ -794,7 +800,7 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Diagnostic plots"
-msgstr ""
+msgstr "Wykresy diagnostyczne"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Q-Q plot standardized residuals"
