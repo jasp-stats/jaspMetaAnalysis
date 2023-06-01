@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.0\n"
 "POT-Creation-Date: 2023-04-29 02:38\n"
-"PO-Revision-Date: 2023-05-30 19:51+0000\n"
+"PO-Revision-Date: 2023-06-02 20:48+0000\n"
 "Last-Translator: Tomasz Misiuro <tomaszmisiuro@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/pl/>\n"
@@ -204,7 +204,7 @@ msgid "Averaged H"
 msgstr ""
 
 msgid "Prior H"
-msgstr ""
+msgstr "Prior H"
 
 msgid "Ordered H"
 msgstr ""
@@ -246,10 +246,10 @@ msgid "Evidence for fixed effects"
 msgstr ""
 
 msgid "random"
-msgstr ""
+msgstr "losowy"
 
 msgid "fixed"
-msgstr ""
+msgstr "stałe"
 
 msgid "Anecdotal"
 msgstr ""
@@ -261,7 +261,7 @@ msgid "Strong"
 msgstr ""
 
 msgid "Very Strong"
-msgstr ""
+msgstr "Bardzo mocne"
 
 msgid "Extreme"
 msgstr ""
@@ -273,7 +273,7 @@ msgid "Plotting failed: The Bayes factors contain infinity."
 msgstr ""
 
 msgid "Studies"
-msgstr ""
+msgstr "Badania"
 
 msgid ""
 "Posterior model \n"
@@ -281,7 +281,7 @@ msgid ""
 msgstr ""
 
 msgid "Prior and posterior plot"
-msgstr ""
+msgstr "Wykres prawd. a priori i a posteriori"
 
 msgid "Value"
 msgstr "Wartość"
@@ -290,22 +290,22 @@ msgid "Running means plot"
 msgstr ""
 
 msgid "Iteration"
-msgstr ""
+msgstr "Iretacja"
 
 msgid "Running mean"
 msgstr ""
 
 msgid "Autocorrelations plot"
-msgstr ""
+msgstr "Wykresy autokorelacji"
 
 msgid "Lag"
 msgstr ""
 
 msgid "Autocorrelation"
-msgstr ""
+msgstr "Autokorelacja"
 
 msgid "Gelman-Rubin plot"
-msgstr ""
+msgstr "Wykres Gelmana-Rubina"
 
 msgid "Last iteration in chain"
 msgstr ""
@@ -314,13 +314,13 @@ msgid "Shrink factor"
 msgstr ""
 
 msgid "All standard errors/sample sizes must be positive."
-msgstr ""
+msgstr "Wszystkie błędy standardowe/wielkości prób muszą być dodatnie."
 
 msgid "The metafor package crashed with the following error: %s"
 msgstr ""
 
 msgid "Fixed and Random Effects"
-msgstr ""
+msgstr "Efekty stałe i losowe"
 
 msgid "Q"
 msgstr ""
@@ -335,13 +335,13 @@ msgid "<em>p</em>-values are approximate."
 msgstr ""
 
 msgid "Coefficients"
-msgstr ""
+msgstr "Współczynniki"
 
 msgid "Estimate"
 msgstr "Oszacowanie"
 
 msgid "Standard Error"
-msgstr ""
+msgstr "Błąd standardowy"
 
 msgid "z"
 msgstr "z"
@@ -350,13 +350,13 @@ msgid "t"
 msgstr "t"
 
 msgid "Wald test."
-msgstr ""
+msgstr "Test Walda."
 
 msgid "Knapp and Hartung test adjustment."
 msgstr ""
 
 msgid "Fit measures"
-msgstr ""
+msgstr "Miary dopasowania"
 
 msgid "Residual Heterogeneity Estimates"
 msgstr ""
@@ -368,7 +368,7 @@ msgid "Rank correlation test for Funnel plot asymmetry"
 msgstr ""
 
 msgid "Kendall's %s"
-msgstr ""
+msgstr "%s Kendalla"
 
 msgid "Regression test for Funnel plot asymmetry (\"Egger's test\")"
 msgstr ""
@@ -377,13 +377,13 @@ msgid "Influence Measures"
 msgstr ""
 
 msgid "Std. Residual"
-msgstr ""
+msgstr "Reszty stand."
 
 msgid "DFFITS"
-msgstr ""
+msgstr "DFFITS"
 
 msgid "Cook's Distance"
-msgstr ""
+msgstr "Dystans Cooka"
 
 msgid "Cov. Ratio"
 msgstr ""
@@ -392,7 +392,7 @@ msgid "%s%s<sub>(-i)</sub>"
 msgstr ""
 
 msgid "Q<sub>E(-i)</sub>"
-msgstr ""
+msgstr "Q<sub>E(-i)</sub>"
 
 msgid "Hat"
 msgstr ""
@@ -410,7 +410,7 @@ msgid "Target Significance"
 msgstr ""
 
 msgid "Observed Significance"
-msgstr ""
+msgstr "Istotność obserwowana"
 
 msgid "Omnibus test of Model Coefficients"
 msgstr ""
@@ -434,13 +434,13 @@ msgid "BIC"
 msgstr "BIC"
 
 msgid "AICc"
-msgstr ""
+msgstr "AICc"
 
 msgid "I%s (%%)"
-msgstr ""
+msgstr "I%s (%%)"
 
 msgid "H%s"
-msgstr ""
+msgstr "H%s"
 
 msgid "Rank test"
 msgstr ""
@@ -461,7 +461,7 @@ msgid "Trim-Fill Analysis"
 msgstr ""
 
 msgid "Diagnostic Plots"
-msgstr ""
+msgstr "Wykresy diagnostyczne"
 
 msgid "Study %s"
 msgstr ""
@@ -622,7 +622,7 @@ msgid "Variance Components"
 msgstr ""
 
 msgid "Plots"
-msgstr ""
+msgstr "Wykresy"
 
 msgid "Intercept"
 msgstr "Wyraz wolny"
@@ -637,7 +637,7 @@ msgid "Posterior distribution"
 msgstr "Rozkład posterior"
 
 msgid "Sampling diagnostics"
-msgstr ""
+msgstr "Diagnostyka próbkowania"
 
 msgid "Autocorrelation (%1$s)"
 msgstr ""
@@ -953,7 +953,7 @@ msgid "p-value Frequency"
 msgstr ""
 
 msgid "Frequency"
-msgstr ""
+msgstr "Częstości"
 
 msgid ""
 "There were no p-value cutoffs after their automatic reduction. The displayed "
@@ -1033,7 +1033,7 @@ msgid "Test of Effect"
 msgstr ""
 
 msgid "Estimates"
-msgstr ""
+msgstr "Oszacowania"
 
 msgid "Regression Estimates"
 msgstr ""
@@ -1045,7 +1045,7 @@ msgid "Estimated %1$s Regression"
 msgstr ""
 
 msgid "Cohen's d"
-msgstr ""
+msgstr "d Cohena"
 
 msgid "Fisher's z"
 msgstr ""
