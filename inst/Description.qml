@@ -73,6 +73,14 @@ Description
 
 	Analysis
 	{
+		menu:			qsTr("Meta-Analysis (Binomial)")
+		title:			qsTr("Bayesian Meta-Analysis (Binomial)")
+		func:			"BayesianMetaAnalysisBinomial"
+		requiresData:	true
+	}
+
+	Analysis
+	{
 		menu:			qsTr("Penalized Meta-Analysis")
 		title:			qsTr("Penalized Meta-Analysis")
 		func:			"PenalizedMetaAnalysis"
