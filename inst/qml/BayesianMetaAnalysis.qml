@@ -46,8 +46,8 @@ Form
 		AssignedVariablesList
 		{
 			id: 			standardError
-			enabled: 		confidenceInterval.count < 1 // Only if no confidence interval input
-			name: 			"standardError"
+			enabled: 		effectSizeCi.count < 1 // Only if no confidence interval input
+			name: 			"effectSizeSe"
 			title: 			qsTr("Effect Size Standard Error")
 			singleVariable: true
 			allowedColumns: ["scale"]
@@ -55,9 +55,9 @@ Form
 
 		AssignedPairsVariablesList
 		{
-			id: 			confidenceInterval
-			enabled: 		standardError.count == 0 // Only if no standard error input (only one of the two is necessary)
-			name: 			"confidenceInterval"
+			id: 			effectSizeCi
+			enabled: 		effectSizeSe.count == 0 // Only if no standard error input (only one of the two is necessary)
+			name: 			"effectSizeCi"
 			title: 			qsTr("95% CI Lower and Upper Bound")
 			singleVariable: true
 			allowedColumns: ["scale"]
@@ -65,7 +65,7 @@ Form
 
 		AssignedVariablesList
 		{
-			name: 			"studyLabels"
+			name: 			"studyLabel"
 			title: 			qsTr("Study Labels")
 			singleVariable:	true
 			allowedColumns: ["nominalText"]

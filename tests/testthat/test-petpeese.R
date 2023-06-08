@@ -2,13 +2,13 @@ context("Meta Analysis - PET-PEESE")
 
 # normal input ----
 options <- analysisOptions("PetPeese")
-options$estimatesPetPeese <- TRUE
-options$estimatesSigma <- TRUE
-options$inputES <- "es"
-options$inputSE <- "se"
-options$plotModels <- TRUE
-options$regressionPeese <- TRUE
-options$regressionPet <- TRUE
+options$inferenceRegressionEstimatesTable <- TRUE
+options$inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable <- TRUE
+options$effectSize <- "es"
+options$effectSizeSe <- "se"
+options$plotsMeanModelEstimatesPlot <- TRUE
+options$plotsRegressionEstimatePeesePlot <- TRUE
+options$plotsRegressionEstimatePetPlot <- TRUE
 set.seed(1)
 dataset <- data.frame(
   es = runif(100, .1, .5),
@@ -75,13 +75,13 @@ test_that("Mean Model Estimates (mu) plot matches", {
 
 # correlation input ----
 options <- analysisOptions("PetPeese")
-options$estimatesPetPeese <- TRUE
-options$estimatesSigma <- TRUE
-options$inputES <- "es"
-options$inputN  <- "n"
-options$plotModels <- TRUE
-options$regressionPeese <- TRUE
-options$regressionPet <- TRUE
+options$inferenceRegressionEstimatesTable <- TRUE
+options$inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable <- TRUE
+options$effectSize <- "es"
+options$sampleSize  <- "n"
+options$plotsMeanModelEstimatesPlot <- TRUE
+options$plotsRegressionEstimatePeesePlot <- TRUE
+options$plotsRegressionEstimatePetPlot <- TRUE
 options$measures <- "correlation"
 set.seed(1)
 dataset <- data.frame(

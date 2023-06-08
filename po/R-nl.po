@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-11-06 02:39\n"
-"PO-Revision-Date: 2021-10-30 02:37+0000\n"
-"Last-Translator: Johnny van Doorn <johnnydoorn@gmail.com>\n"
+"POT-Creation-Date: 2023-04-29 02:38\n"
+"PO-Revision-Date: 2023-04-20 11:52+0000\n"
+"Last-Translator: Koen Derks <koen-derks@hotmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/nl/>\n"
 "Language: nl\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n==0 ? 0 : n==1 ? 0 : 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr "De prior ondergrens is niet kleiner dan de bovengrens."
@@ -95,8 +95,8 @@ msgstr "%s is het groepsniveau effectgrootte."
 
 msgid "Bayes factor of the random effects H%1$s over the fixed effects H%1$s."
 msgstr ""
-"Bayes factor van de aselecte effecten H%1$s over de gefixeerde effecten H"
-"%1$s."
+"Bayes factor van de aselecte effecten H%1$s over de gefixeerde effecten "
+"H%1$s."
 
 msgid ""
 "Posterior estimates are based on the models that assume an effect to be "
@@ -127,8 +127,8 @@ msgstr ""
 
 msgid "Bayes factor of the fixed effects H%1$s over the random effects H%1$s."
 msgstr ""
-"Bayes factor van de gefixeerde effecten H%1$s over de aselecte effecten H"
-"%1$s."
+"Bayes factor van de gefixeerde effecten H%1$s over de aselecte effecten "
+"H%1$s."
 
 msgid ""
 "Model averaged posterior estimates are based on the models that assume an "
@@ -163,8 +163,8 @@ msgid ""
 "Bayes factor for the ordered effects H%1$s versus the unconstrained (random) "
 "effects H%1$s model is %3$.3f."
 msgstr ""
-"Bayes factor van de geordende effecten H%1$s over de gefixeerde effecten H"
-"%2$s. De Bayes factor voor de geordende effecten H%1$s versus de onbeperkte "
+"Bayes factor van de geordende effecten H%1$s over de gefixeerde effecten "
+"H%2$s. De Bayes factor voor de geordende effecten H%1$s versus de onbeperkte "
 "(aselecte) effecten H%1$s model is %3$.3f."
 
 msgid ""
@@ -172,8 +172,8 @@ msgid ""
 "Bayes factor for the unconstrained (random) effects H%1$s versus the ordered "
 "effects H%1$s model is %3$.3f."
 msgstr ""
-"Bayes factor van de gefixeerde effecten H%2$s over de geordende effecten H"
-"%1$s. De Bayes factor voor de onbeperkte (aselecte) effecten H%1$s versus "
+"Bayes factor van de gefixeerde effecten H%2$s over de geordende effecten "
+"H%1$s. De Bayes factor voor de onbeperkte (aselecte) effecten H%1$s versus "
 "het geordende effecten model H%1$s is %3$.3f."
 
 msgid "Model Probabilities"
@@ -251,7 +251,7 @@ msgid "Ordered H"
 msgstr "Geordende H"
 
 msgid "Forest Plot"
-msgstr "Forestgrafiek"
+msgstr "Forest Grafiek"
 
 msgid "Observed study effects"
 msgstr "Geobserveerde onderzoekseffecten"
@@ -263,7 +263,7 @@ msgid "Observed and estimated study effects"
 msgstr "Geobserveerde en geschatte onderzoekseffecten"
 
 msgid "Cumulative forest plot"
-msgstr "Cumulatieve Forestgrafiek"
+msgstr "Cumulatieve forest grafiek"
 
 msgid "Overall effect size"
 msgstr "Totale effectgrootte"
@@ -356,6 +356,9 @@ msgstr "Laatste iteratie in de keten"
 msgid "Shrink factor"
 msgstr "Krimpfactor"
 
+msgid "All standard errors/sample sizes must be positive."
+msgstr "Alle standaardfouten/steekproefgroottes moeten positief zijn."
+
 msgid "The metafor package crashed with the following error: %s"
 msgstr "Het metafor package is gecrasht met de volgende foutmelding: %s"
 
@@ -386,11 +389,14 @@ msgstr "Standaardfout"
 msgid "z"
 msgstr "z"
 
+msgid "t"
+msgstr "t"
+
 msgid "Wald test."
 msgstr "Wald toets."
 
-msgid "Wald tests."
-msgstr "Wald toetsen."
+msgid "Knapp and Hartung test adjustment."
+msgstr ""
 
 msgid "Fit measures"
 msgstr "Pasmaten"
@@ -409,9 +415,6 @@ msgstr "Kendall's %s"
 
 msgid "Regression test for Funnel plot asymmetry (\"Egger's test\")"
 msgstr "Regressietoets voor Funnelgrafiek-asymmetrie(\"Egger's toets\")"
-
-msgid "t"
-msgstr "t"
 
 msgid "Influence Measures"
 msgstr "Invloedmetingen"
@@ -512,9 +515,6 @@ msgstr "FE Model"
 msgid "RE Model"
 msgstr "RE Model"
 
-msgid "Cannot set 'xlim' automatically. Please set this argument manually."
-msgstr "Kan 'xlim' niet automatisch instelllen. Stel argument handmatig in."
-
 msgid "Profile Plot for"
 msgstr "Profielgrafiek voor"
 
@@ -523,20 +523,6 @@ msgstr "Beperkte Log-likelihood"
 
 msgid "Residual Value"
 msgstr "Residuen Waarde"
-
-msgid "Argument 'x' must be an object of class \"rma\"."
-msgstr "Argument 'x' moet een object van klasse \"rma\" zijn."
-
-msgid "Function not applicable to objects of class \"robust.rma\"."
-msgstr "Functie niet toepasbaar op objecten van klasse \"robust.rma\"."
-
-msgid "Function not applicable to objects of class \"rma.ls\"."
-msgstr "Functie niet toepasbaar op objecten van klasse \"rma.ls\"."
-
-msgid ""
-"Setting 'xlim' and 'zlim' automatically not possible (must set axis limits "
-"manually)."
-msgstr "Automatisch instellen 'xlim' en 'zlim' niet mogelijk (moet handmatig)."
 
 msgid "Radial Plot"
 msgstr "Radiaal Grafiek"
@@ -606,7 +592,7 @@ msgstr ""
 "analyse uit te voeren."
 
 msgid "%s%% CI"
-msgstr "%s%% BI"
+msgstr "%s%% CI"
 
 msgid "%s%% PI"
 msgstr "%s%% PI"
@@ -629,16 +615,13 @@ msgid "The model was estimated using MCMC with %1$s link function."
 msgstr "Het model werd geschat met behulp van MCMC met %1$s koppelingsfunctie."
 
 msgid "Forest plot"
-msgstr "Forestgrafiek"
+msgstr "Forest grafiek"
 
 msgid "Observed-Expected Ratio"
 msgstr "Geobserveerd-Verwacht Verhouding"
 
 msgid "Concordance Statistic"
 msgstr "Overeenstemmingsstatistiek"
-
-msgid "The number of observed events must be specified."
-msgstr "Het aantal geobserveerde gebeurtenissen moet worden gespecificeerd."
 
 msgid "Funnel Plot Asymmetry Tests"
 msgstr "Trechtergrafiek Asymmetrie Toetsen"
@@ -674,7 +657,7 @@ msgid "Debray"
 msgstr "Debray"
 
 msgid "Standard error"
-msgstr "Standaardfout"
+msgstr "Standaard fout"
 
 msgid "Sample size"
 msgstr "Steekproefomvang"
@@ -682,58 +665,47 @@ msgstr "Steekproefomvang"
 msgid "Total events"
 msgstr "Totaal gebeurtenissen"
 
-msgid ""
-"Currently this only works with rma and rma.mv objects that have specified "
-"'yi' as a formula."
-msgstr ""
-"Dit werkt momenteel alleen met rma en rma.mv objecten die een "
-"gespecificeerde 'yi' als formule hebben."
-
-msgid "Formula is refering to factors that are not in the model."
-msgstr "Formule refereert naar factoren die zich niet in het model bevinden."
-
-msgid "There are no predictors in the model that correspond to factors in '"
-msgstr ""
-"Er zijn geen predictoren in het model die overeenkomen met factoren in '"
-
-msgid "'. Factor levels:"
-msgstr "'. Factorniveaus:"
-
-msgid ","
-msgstr ","
-
-msgid ". Data names:"
-msgstr ". Data namen:"
-
-msgid "; Used Terms:"
-msgstr "; Gebruikte termen:"
-
-msgid "; Data set head:"
-msgstr "; Gegevens titel:"
-
-msgid "Argument 'contrasts' should be a matrix."
-msgstr "Argument 'contrasten' moet een matrix zijn."
-
-msgid "Invalid contrasts: Rows in"
-msgstr "Invalide contrasten: Rijen in"
-
-msgid "do not add to 0."
-msgstr "telt niet op tot 0."
-
-msgid "Only using first element of"
-msgstr "Gebruik alleen het eerste element van"
-
-msgid "."
-msgstr "."
-
-msgid "is smaller than 2."
-msgstr "is kleiner dan 2."
-
 msgid "Variance Components"
 msgstr "Variantie Componenten"
 
 msgid "Plots"
 msgstr "Grafieken"
+
+msgid "Intercept"
+msgstr "Intercept"
+
+msgid "At least one predictor needs to be specified."
+msgstr "Er moet minstens één voorspeller worden ingesteld."
+
+msgid "Warning:"
+msgstr "Waarschuwing:"
+
+msgid "Posterior distribution"
+msgstr "Posterior verdeling"
+
+msgid "Sampling diagnostics"
+msgstr "Steekproef diagnostieken"
+
+msgid "Autocorrelation (%1$s)"
+msgstr "Autocorrelatie (%1$s)"
+
+msgid ""
+"Inference possibly unreliable -- MCMC chains might not have converged; The "
+"largest R-hat is %.3f > 1.01. To lower R-hat please increase 'Iterations', "
+"or 'Adapt delta' in the Options section."
+msgstr ""
+"Inferentie mogelijk onbetrouwbaar -- MCMC ketens mogelijk niet "
+"geconvergeerd; De hoogste R-dakje is %.3f > 1.01. Om R-dakje te verlagen "
+"kunt u 'Iteraties' of 'Aanpassingsdelta' in de Opties sectie verhogen."
+
+msgid ""
+"Low estimation accuracy -- The smallest Effective Sample Size (ESS) is %.2f "
+"< %1.0f. To increase accuracy please increase 'Iterations', or 'Adapt delta' "
+"in the Options section."
+msgstr ""
+"Lage schattingsaccuratesse -- De kleinste effectieve steekproefgrootte (ESS) "
+"is %.2f< %1.0f. Verhoog a.u.b. het aantal 'Iteraties', of 'Aanpassingsdelta' "
+"in de Opties sectie."
 
 msgid "The priors for publication bias were set incorrectly."
 msgstr ""
@@ -807,12 +779,11 @@ msgstr ""
 "De analyse zal meerdere meta-analytische modellen schatten met behulp van "
 "MCMC en kan een langere tijd nodig hebben om te voltooien."
 
-#, fuzzy
 msgid "Model Specification Preview"
-msgstr "Model Voorvertoning"
+msgstr "Model Specificatie Voorvertoning"
 
 msgid "Prior Distribution"
-msgstr "Posterior Verdeling"
+msgstr "Prior-verdeling"
 
 msgid "The loaded object is not a RoBMA model."
 msgstr "Het ingeladen object is geen RoBMA model."
@@ -823,23 +794,17 @@ msgstr "Samenvatting"
 msgid "Conditional Estimates"
 msgstr "Geconditioneerde Schattingen"
 
-#, fuzzy
 msgid "Inclusion BF"
-msgstr "Inclusie"
+msgstr "Inclusie BF"
 
-#, fuzzy
 msgid "Exclusion BF"
-msgstr "Uitsluiting"
+msgstr "Exclusie BF"
 
-#, fuzzy
 msgid "log(Inclusion BF)"
-msgstr "Inclusie"
+msgstr "log(Inclusie BF)"
 
 msgid "P(M|data)"
 msgstr "P(M|data)"
-
-msgid "Warning:"
-msgstr "Waarschuwing:"
 
 msgid "Model Averaged Estimates"
 msgstr "Model Gemiddelde Schattingen"
@@ -871,9 +836,8 @@ msgstr "log(MargWaarschijn)"
 msgid "Individual Models Summary"
 msgstr "Individuele Model Samenvatting"
 
-#, fuzzy
 msgid "Model #"
-msgstr "Model %i"
+msgstr "Model #"
 
 msgid "Priors"
 msgstr "Priors"
@@ -897,7 +861,7 @@ msgid "PET-PEESE Estimates"
 msgstr "PET-PEESE Schattingen"
 
 msgid "%1$s Forest Plot"
-msgstr "%1$s Forestgrafiek"
+msgstr "%1$s Forest Grafiek"
 
 msgid "Posterior Distribution Plots"
 msgstr "Posterior Verdeling Grafieken"
@@ -930,7 +894,7 @@ msgid "Heterogeneity Estimates"
 msgstr "Geschatte heterogeniteit"
 
 msgid "Diagnostics"
-msgstr "Diagnostiek"
+msgstr "Diagnostieken"
 
 msgid "Models Diagnostics Overview"
 msgstr "Modellen Diagnostiek Overzicht"
@@ -1000,9 +964,6 @@ msgstr "Er moet minstens één p-afkapwaarde worden ingesteld."
 
 msgid "All p-value cutoffs needs to be between 0 and 1."
 msgstr "Alle p-afkapwaarden moeten tussen 0 en 1 liggen."
-
-msgid "No steps"
-msgstr "Geen stappen"
 
 msgid "95%% Confidence Interval"
 msgstr "95%% Betrouwbaarheidsinterval"
@@ -1146,13 +1107,11 @@ msgstr ""
 msgid "Only the following one-sided p-value cutoffs were used: %s."
 msgstr "Alleen de volgende eenzijdige p-afkapwaarden werden gebruikt: %s."
 
-#, fuzzy
 msgid "Error: There were not enough adequately powered studies (k = %1$i)"
 msgstr ""
 "Fout: Er waren niet genoeg studies met voldoende statistische kracht (k = "
 "%1$i)"
 
-#, fuzzy
 msgid "Note: There were %1$i adequately powered studies"
 msgstr "Opmerking: Er waren %1$i studies met voldoende statistische kracht"
 
@@ -1162,8 +1121,8 @@ msgstr "Toets van Effect"
 msgid "Estimates"
 msgstr "Schattingen"
 
-msgid "PET-PEESE Regression Estimates"
-msgstr "PET-PEESE Regressieschattingen"
+msgid "Regression Estimates"
+msgstr "Regressie Schattingen"
 
 msgid "Multiplicative Heterogeneity Estimates"
 msgstr "Multiplicatieve Heterogeniteitsschattingen"
@@ -1177,22 +1136,150 @@ msgstr "Cohen's d"
 msgid "Fisher's z"
 msgstr "Fisher's z"
 
-#, fuzzy
 msgid ""
 "WAAP was not estimated: There were only %1$i adequately powered studies "
 "(power > 80%%)."
 msgstr ""
-"WAAP werd niet geschat: er waren slechts %1$i studies met voldoende "
+"WAAP werd niet geschat: Er waren slechts %1$i studies met voldoende "
 "statistische kracht."
 
-#, fuzzy
 msgid "There were %1$i adequately powered studies (power > 80%%)."
-msgstr "Er waren %1$i studies met voldoende statistische kracht"
+msgstr ""
+"Er waren %1$i studies met voldoende statistische kracht (power > 80%%)."
+
+msgid ""
+"The Hamiltonian Monte Carlo procedure might be invalid -- There was %i "
+"divergent transition after warmup. This can be solved by carefully "
+"increasing 'Adapt delta' until there are no divergent transitions."
+msgid_plural ""
+"The Hamiltonian Monte Carlo procedure might be invalid -- There were %i "
+"divergent transitions after warmup. This can be solved by carefully "
+"increasing 'Adapt delta' until there are no divergent transitions."
+msgstr[0] ""
+"De Hamiltoniaanse Monte Carlo procedure is mogelijk invalide -- Er was %i "
+"divergente transitie na het opwarmen. Dit kan opgelost worden door "
+"voorzichtig de 'Aanpassingsdelta' te verhogen totdat er geen divergente "
+"transities meer zijn."
+msgstr[1] ""
+"De Hamiltoniaanse Monte Carlo procedure is mogelijk invalide -- Er waren %i "
+"divergente transities na het opwarmen. Dit kan opgelost worden door "
+"voorzichtig de 'Aanpassingsdelta' te verhogen totdat er geen divergente "
+"transities meer zijn."
+
+msgid ""
+"Bayesian Fraction of Missing Information (BFMI) that was too low in %i chain "
+"indicating that the posterior distribution was not explored efficiently. Try "
+"increasing number of 'Burnin' and 'Iterations'."
+msgid_plural ""
+"Bayesian Fraction of Missing Information (BFMI) that was too low in %i "
+"chains indicating that the posterior distribution was not explored "
+"efficiently. Try increasing number of 'Burnin' and 'Iterations'."
+msgstr[0] ""
+"Bayesiaanse Fractie van Ontbrekende Informatie (BFMI) was te laag in %i "
+"keten wat er op duidt dat de keten de parameterruimte niet efficiënt verkend "
+"heeft. Probeer het verhogen van het aantal 'Opwarming' en 'Iteraties'."
+msgstr[1] ""
+"Bayesiaanse Fractie van Ontbrekende Informatie (BFMI) was te laag in %i "
+"ketens wat er op duidt dat de keten de parameterruimte niet efficiënt "
+"verkend heeft. Probeer het verhogen van het aantal 'Opwarming' en "
+"'Iteraties'."
+
+msgid ""
+"The Hamiltonian Monte Carlo procedure might be inefficient -- %i transition "
+"exceeded the maximum tree depth. This can be solved by carefully increasing "
+"'Maximum tree depth'."
+msgid_plural ""
+"The Hamiltonian Monte Carlo procedure might be inefficient -- %i transitions "
+"exceeded the maximum tree depth. This can be solved by carefully increasing "
+"'Maximum tree depth'."
+msgstr[0] ""
+"De Hamiltoniaanse Monte Carlo procedure zou inefficiënt kunnen zijn -- %i "
+"transitie overschreed de maximum boomdieptie. Dit kan opgelost worden door "
+"voorzichtig de 'Maximum boomdiepte' te verhogen."
+msgstr[1] ""
+"De Hamiltoniaanse Monte Carlo procedure zou inefficiënt kunnen zijn -- %i "
+"transities overschreed de maximum boomdieptie. Dit kan opgelost worden door "
+"voorzichtig de 'Maximum boomdiepte' te verhogen."
 
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "%i observatie is verwijderd, omdat de waarde ontbreekt."
 msgstr[1] "%i observaties zijn verwijderd omdat de waarden ontbreken."
+
+#~ msgid "Wald tests."
+#~ msgstr "Wald toetsen."
+
+#~ msgid "Cannot set 'xlim' automatically. Please set this argument manually."
+#~ msgstr "Kan 'xlim' niet automatisch instelllen. Stel argument handmatig in."
+
+#~ msgid "Argument 'x' must be an object of class \"rma\"."
+#~ msgstr "Argument 'x' moet een object van klasse \"rma\" zijn."
+
+#~ msgid "Function not applicable to objects of class \"robust.rma\"."
+#~ msgstr "Functie niet toepasbaar op objecten van klasse \"robust.rma\"."
+
+#~ msgid "Function not applicable to objects of class \"rma.ls\"."
+#~ msgstr "Functie niet toepasbaar op objecten van klasse \"rma.ls\"."
+
+#~ msgid ""
+#~ "Setting 'xlim' and 'zlim' automatically not possible (must set axis "
+#~ "limits manually)."
+#~ msgstr ""
+#~ "Automatisch instellen 'xlim' en 'zlim' niet mogelijk (moet handmatig)."
+
+#~ msgid "The number of observed events must be specified."
+#~ msgstr "Het aantal geobserveerde gebeurtenissen moet worden gespecificeerd."
+
+#~ msgid ""
+#~ "Currently this only works with rma and rma.mv objects that have specified "
+#~ "'yi' as a formula."
+#~ msgstr ""
+#~ "Dit werkt momenteel alleen met rma en rma.mv objecten die een "
+#~ "gespecificeerde 'yi' als formule hebben."
+
+#~ msgid "Formula is refering to factors that are not in the model."
+#~ msgstr ""
+#~ "Formule refereert naar factoren die zich niet in het model bevinden."
+
+#~ msgid "There are no predictors in the model that correspond to factors in '"
+#~ msgstr ""
+#~ "Er zijn geen predictoren in het model die overeenkomen met factoren in '"
+
+#~ msgid "'. Factor levels:"
+#~ msgstr "'. Factorniveaus:"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid ". Data names:"
+#~ msgstr ". Data namen:"
+
+#~ msgid "; Used Terms:"
+#~ msgstr "; Gebruikte termen:"
+
+#~ msgid "; Data set head:"
+#~ msgstr "; Gegevens titel:"
+
+#~ msgid "Argument 'contrasts' should be a matrix."
+#~ msgstr "Argument 'contrasten' moet een matrix zijn."
+
+#~ msgid "Invalid contrasts: Rows in"
+#~ msgstr "Invalide contrasten: Rijen in"
+
+#~ msgid "do not add to 0."
+#~ msgstr "telt niet op tot 0."
+
+#~ msgid "Only using first element of"
+#~ msgstr "Gebruik alleen het eerste element van"
+
+#~ msgid "."
+#~ msgstr "."
+
+#~ msgid "is smaller than 2."
+#~ msgstr "is kleiner dan 2."
+
+#~ msgid "No steps"
+#~ msgstr "Geen stappen"
 
 #~ msgid "log(BF)"
 #~ msgstr "log(BF)"

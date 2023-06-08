@@ -27,18 +27,18 @@ Section
 	expanded:	false
 	columns:	1
 	
-	property string	measure:			"OE"
+	property string	measure:			"oeRatio"
 
 	Group
 	{
 
-		title: 				measure === "OE" ? qsTr("Summary estimate (O:E Ratio)") :  qsTr("Summary estimate (C statistic)")
+		title: 				measure === "oeRatio" ? qsTr("mu: summary estimate (O/E Ratio)") :  qsTr("mu: summary estimate (C statistic)")
 		columns:			2
 
 			DoubleField
 			{
 				label: 			qsTr("Normal mean:")
-				name: 			"priorMuNMeam"
+				name: 			"muNormalPriorMean"
 				defaultValue: 	0
 				fieldWidth: 	40 * preferencesModel.uiScale
 			}
@@ -46,22 +46,22 @@ Section
 			DoubleField
 			{
 				label: 			qsTr("sd:")
-				name: 			"priorMuNSD"
-				defaultValue:	measure === "OE" ? 10 : 100
+				name: 			"muNormalPriorSd"
+				defaultValue:	measure === "oeRatio" ? 10 : 100
 				min:			0
-				max:			measure === "OE" ? 10 : 100
+				max:			measure === "oeRatio" ? 10 : 100
 				fieldWidth: 	40 * preferencesModel.uiScale
 			}
 	}
 
 	RadioButtonGroup
 	{
-		title: 		qsTr("Heterogeneity (Between study SD)")
-		name: 		"priorTau"
+		title: 		qsTr("tau: heterogeneity (Between study SD)")
+		name: 		"tauPrior"
 
 		RadioButton
 		{
-			name: 				"priorTauU"
+			name: 				"uniformPrior"
 			label: 				qsTr("Uniform")
 			childrenOnSameRow: 	true
 			checked: 			true
@@ -69,7 +69,7 @@ Section
 			DoubleField
 			{
 				label: 			qsTr("min:")
-				name: 			"priorTauUMin"
+				name: 			"tauUniformPriorMin"
 				id:				priorTauUMin
 				defaultValue: 	0
 				min:			0
@@ -80,7 +80,7 @@ Section
 			DoubleField
 			{
 				label: 			qsTr("max:")
-				name: 			"priorTauUMax"
+				name: 			"tauUniformPriorMax"
 				id:				priorTauUMax
 				defaultValue:	2
 				min:			priorTauUMin.value
@@ -90,14 +90,14 @@ Section
 
 		RadioButton
 		{
-			name: 				"priorTauT"
-			label: 				qsTr("Half t")
+			name: 				"tPrior"
+			label: 				qsTr("T")
 			childrenOnSameRow: 	true
 
 			DoubleField
 			{
 				label: 			qsTr("location:")
-				name: 			"priorTauTLocation"
+				name: 			"tauTPriorLocation"
 				defaultValue: 	0
 				fieldWidth: 	40 * preferencesModel.uiScale
 			}
@@ -105,7 +105,7 @@ Section
 			DoubleField
 			{
 				label: 			qsTr("scale:")
-				name: 			"priorTauTScale"
+				name: 			"tauTPriorScale"
 				defaultValue: 	1.5
 				min:			0
 				fieldWidth: 	40 * preferencesModel.uiScale
@@ -114,7 +114,7 @@ Section
 			IntegerField
 			{
 				label: 			qsTr("df:")
-				name: 			"priorTauTDf"
+				name: 			"tauTPriorDf"
 				defaultValue: 	3
 				min:			1
 				fieldWidth: 	40 * preferencesModel.uiScale
@@ -123,7 +123,7 @@ Section
 			DoubleField
 			{
 				label: 			qsTr("min:")
-				name: 			"priorTauTMin"
+				name: 			"tauTPriorMin"
 				id:				priorTauTMin
 				defaultValue: 	0
 				min:			0
@@ -134,7 +134,7 @@ Section
 			DoubleField
 			{
 				label: 			qsTr("max:")
-				name: 			"priorTauTMax"
+				name: 			"tauTPriorMax"
 				defaultValue:	10
 				id:				priorTauTMax
 				min:			priorTauTMin

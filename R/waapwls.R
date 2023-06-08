@@ -32,7 +32,7 @@ WaapWls <- function(jaspResults, dataset, options, state = NULL) {
 
 
   # figures
-  if (options[["plotModels"]])
+  if (options[["plotsMeanModelEstimatesPlot"]])
     .wwppEstimatesPlot(jaspResults, dataset, options, "waapWls")
 
   return()

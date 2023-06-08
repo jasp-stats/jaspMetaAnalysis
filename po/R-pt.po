@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-11-06 02:39\n"
-"PO-Revision-Date: 2021-09-11 02:37+0000\n"
-"Last-Translator: JASP Stats <b.boutin@uva.nl>\n"
+"POT-Creation-Date: 2023-04-29 02:38\n"
+"PO-Revision-Date: 2022-08-29 00:27+0000\n"
+"Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/pt/>\n"
 "Language: pt\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.14.1-dev\n"
 "X-Language: en_US\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -198,7 +198,7 @@ msgid "Heterogeneity"
 msgstr ""
 
 msgid "Effect size"
-msgstr "Tamanho do efeito"
+msgstr "Tamanho do Efeito"
 
 msgid "Density"
 msgstr "Densidade"
@@ -339,6 +339,9 @@ msgstr ""
 msgid "Shrink factor"
 msgstr ""
 
+msgid "All standard errors/sample sizes must be positive."
+msgstr ""
+
 msgid "The metafor package crashed with the following error: %s"
 msgstr ""
 
@@ -370,10 +373,13 @@ msgstr "Erro padrão"
 msgid "z"
 msgstr "z"
 
+msgid "t"
+msgstr "t"
+
 msgid "Wald test."
 msgstr ""
 
-msgid "Wald tests."
+msgid "Knapp and Hartung test adjustment."
 msgstr ""
 
 #, fuzzy
@@ -395,9 +401,6 @@ msgstr ""
 
 msgid "Regression test for Funnel plot asymmetry (\"Egger's test\")"
 msgstr ""
-
-msgid "t"
-msgstr "t"
 
 msgid "Influence Measures"
 msgstr ""
@@ -503,9 +506,6 @@ msgstr "Modelo"
 msgid "RE Model"
 msgstr "Modelo"
 
-msgid "Cannot set 'xlim' automatically. Please set this argument manually."
-msgstr ""
-
 msgid "Profile Plot for"
 msgstr ""
 
@@ -515,20 +515,6 @@ msgstr ""
 #, fuzzy
 msgid "Residual Value"
 msgstr "Resíduos"
-
-msgid "Argument 'x' must be an object of class \"rma\"."
-msgstr ""
-
-msgid "Function not applicable to objects of class \"robust.rma\"."
-msgstr ""
-
-msgid "Function not applicable to objects of class \"rma.ls\"."
-msgstr ""
-
-msgid ""
-"Setting 'xlim' and 'zlim' automatically not possible (must set axis limits "
-"manually)."
-msgstr ""
 
 msgid "Radial Plot"
 msgstr ""
@@ -632,9 +618,6 @@ msgstr ""
 msgid "Concordance Statistic"
 msgstr ""
 
-msgid "The number of observed events must be specified."
-msgstr ""
-
 msgid "Funnel Plot Asymmetry Tests"
 msgstr ""
 
@@ -679,56 +662,45 @@ msgstr "Quartil da amostra"
 msgid "Total events"
 msgstr ""
 
-msgid ""
-"Currently this only works with rma and rma.mv objects that have specified "
-"'yi' as a formula."
-msgstr ""
-
-msgid "Formula is refering to factors that are not in the model."
-msgstr ""
-
-msgid "There are no predictors in the model that correspond to factors in '"
-msgstr ""
-
-msgid "'. Factor levels:"
-msgstr ""
-
-msgid ","
-msgstr ","
-
-msgid ". Data names:"
-msgstr ""
-
-msgid "; Used Terms:"
-msgstr ""
-
-msgid "; Data set head:"
-msgstr ""
-
-msgid "Argument 'contrasts' should be a matrix."
-msgstr ""
-
-msgid "Invalid contrasts: Rows in"
-msgstr ""
-
-msgid "do not add to 0."
-msgstr ""
-
-msgid "Only using first element of"
-msgstr ""
-
-msgid "."
-msgstr "."
-
-msgid "is smaller than 2."
-msgstr ""
-
 #, fuzzy
 msgid "Variance Components"
 msgstr "Componentes"
 
 msgid "Plots"
 msgstr "Gráficos"
+
+msgid "Intercept"
+msgstr ""
+
+msgid "At least one predictor needs to be specified."
+msgstr ""
+
+msgid "Warning:"
+msgstr "Aviso:"
+
+#, fuzzy
+msgid "Posterior distribution"
+msgstr "Amostras posteriores"
+
+#, fuzzy
+msgid "Sampling diagnostics"
+msgstr "Quartil da amostra"
+
+#, fuzzy
+msgid "Autocorrelation (%1$s)"
+msgstr "Covariâncias / correlações observadas"
+
+msgid ""
+"Inference possibly unreliable -- MCMC chains might not have converged; The "
+"largest R-hat is %.3f > 1.01. To lower R-hat please increase 'Iterations', "
+"or 'Adapt delta' in the Options section."
+msgstr ""
+
+msgid ""
+"Low estimation accuracy -- The smallest Effective Sample Size (ESS) is %.2f "
+"< %1.0f. To increase accuracy please increase 'Iterations', or 'Adapt delta' "
+"in the Options section."
+msgstr ""
 
 msgid "The priors for publication bias were set incorrectly."
 msgstr ""
@@ -830,9 +802,6 @@ msgstr ""
 
 msgid "P(M|data)"
 msgstr "P(M|dado)"
-
-msgid "Warning:"
-msgstr "Aviso:"
 
 #, fuzzy
 msgid "Model Averaged Estimates"
@@ -1010,12 +979,8 @@ msgstr ""
 msgid "All p-value cutoffs needs to be between 0 and 1."
 msgstr ""
 
-msgid "No steps"
-msgstr ""
-
-#, fuzzy
 msgid "95%% Confidence Interval"
-msgstr "Intervalo de Confiança"
+msgstr "Intervalo de Confiança 95%%"
 
 msgid "Note:"
 msgstr "Nota:"
@@ -1156,7 +1121,7 @@ msgid "Estimates"
 msgstr "Estimativa"
 
 #, fuzzy
-msgid "PET-PEESE Regression Estimates"
+msgid "Regression Estimates"
 msgstr "Medidas adicionais de ajuste"
 
 #, fuzzy
@@ -1181,10 +1146,49 @@ msgstr ""
 msgid "There were %1$i adequately powered studies (power > 80%%)."
 msgstr ""
 
+msgid ""
+"The Hamiltonian Monte Carlo procedure might be invalid -- There was %i "
+"divergent transition after warmup. This can be solved by carefully "
+"increasing 'Adapt delta' until there are no divergent transitions."
+msgid_plural ""
+"The Hamiltonian Monte Carlo procedure might be invalid -- There were %i "
+"divergent transitions after warmup. This can be solved by carefully "
+"increasing 'Adapt delta' until there are no divergent transitions."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid ""
+"Bayesian Fraction of Missing Information (BFMI) that was too low in %i chain "
+"indicating that the posterior distribution was not explored efficiently. Try "
+"increasing number of 'Burnin' and 'Iterations'."
+msgid_plural ""
+"Bayesian Fraction of Missing Information (BFMI) that was too low in %i "
+"chains indicating that the posterior distribution was not explored "
+"efficiently. Try increasing number of 'Burnin' and 'Iterations'."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid ""
+"The Hamiltonian Monte Carlo procedure might be inefficient -- %i transition "
+"exceeded the maximum tree depth. This can be solved by carefully increasing "
+"'Maximum tree depth'."
+msgid_plural ""
+"The Hamiltonian Monte Carlo procedure might be inefficient -- %i transitions "
+"exceeded the maximum tree depth. This can be solved by carefully increasing "
+"'Maximum tree depth'."
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "%i observação foi removida devido a valores ausentes."
 msgstr[1] "%i observações foram removidas devido a valores ausentes."
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "."
+#~ msgstr "."
 
 #, fuzzy
 #~ msgid "Observed Outcome"

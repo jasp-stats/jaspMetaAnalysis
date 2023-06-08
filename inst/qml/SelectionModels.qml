@@ -24,12 +24,64 @@ import JASP				1.0
 Form
 {
 
+	VariablesForm
+	{
+		preferredHeight: 200 * preferencesModel.uiScale
+
+		AvailableVariablesList
+		{
+			name: "allVariables"
+		}
+
+		AssignedVariablesList
+		{
+			name:			"effectSize"
+			title:			if (measures_correlation.checked) {
+				qsTr("Correlation")
+			} else {
+				qsTr("Effect Size")
+			}
+			singleVariable:	true
+			allowedColumns:	["scale"]
+		}
+
+		AssignedVariablesList
+		{
+			name:			"effectSizeSe"
+			title:			qsTr("Effect Size Standard Error")
+			singleVariable:	true
+			allowedColumns:	["scale"]
+			visible:		active
+			
+			property bool active:   measures_general.checked
+			onActiveChanged: if (!active && count > 0) itemDoubleClicked(0);
+		}
+
+		AssignedVariablesList
+		{
+			name: 			"sampleSize"
+			title: 			qsTr("N")
+			singleVariable: true
+			allowedColumns: ["scale", "ordinal"]
+			visible:		active
+			
+			property bool active:   measures_correlation.checked
+			onActiveChanged: if (!active && count > 0) itemDoubleClicked(0);
+		}
+
+		AssignedVariablesList
+		{
+			name:			"pValue"
+			title:			qsTr("P-value (one-sided)")
+			singleVariable:	true
+			allowedColumns:	["scale"]
+		}
+	}
+
 	RadioButtonGroup
 	{
-		Layout.columnSpan:		2
 		name:					"measures"
-		radioButtonsOnSameRow:	true
-		columns:				2
+		title:					qsTr("Measure")
 
 		RadioButton
 		{
@@ -47,63 +99,13 @@ Form
 		}
 	}
 
-	VariablesForm
-	{
-		preferredHeight: 200 * preferencesModel.uiScale
-
-		AvailableVariablesList
-		{
-			name: "allVariables"
-		}
-
-		AssignedVariablesList
-		{
-			name:			"inputES"
-			title:			if (measures_correlation.checked) {
-				qsTr("Correlation")
-			} else {
-				qsTr("Effect Size")
-			}
-			singleVariable:	true
-			allowedColumns:	["scale"]
-		}
-
-		AssignedVariablesList
-		{
-			name:			"inputSE"
-			title:			qsTr("Effect Size Standard Error")
-			singleVariable:	true
-			allowedColumns:	["scale"]
-			visible:		 measures_general.checked
-			onVisibleChanged: if (!visible && count > 0) itemDoubleClicked(0);
-		}
-
-		AssignedVariablesList
-		{
-			name: 			"inputN"
-			title: 			qsTr("N")
-			singleVariable: true
-			allowedColumns: ["scale", "ordinal"]
-			visible:		 measures_correlation.checked
-			onVisibleChanged: if (!visible && count > 0) itemDoubleClicked(0);
-		}
-
-		AssignedVariablesList
-		{
-			name:			"inputPVal"
-			title:			qsTr("P-value (one-sided)")
-			singleVariable:	true
-			allowedColumns:	["scale"]
-		}
-	}
-
 	Section
 	{
 		title: qsTr("Model")
 
 		TextField
 		{
-			name:		"cutoffsPVal"
+			name:		"modelPValueCutoffs"
 			text:		qsTr("P-value cutoffs")
 			value:		"(.05, .10)"
 			fieldWidth:	150
@@ -111,20 +113,20 @@ Form
 
 		CheckBox
 		{
-			name:		"selectionTwosided"
+			name:		"modelTwoSidedSelection"
 			text:		qsTr("Two-sided selection")
 			checked:	true
 		}
 
 		CheckBox
 		{
-			name:	"tablePVal"
-			text:	qsTr("P-value frequency")
+			name:	"modelPValueFrequencyTable"
+			text:	qsTr("P-value frequency table")
 		}
 		
 		CheckBox
 		{
-			name:		"joinPVal"
+			name:		"modelAutomaticallyJoinPValueIntervals"
 			text:		qsTr("Automatically join p-value intervals")
 			checked:	true
 		}
@@ -132,7 +134,7 @@ Form
 		RadioButtonGroup
 		{
 			columns:	2
-			name:		"effectDirection"
+			name:		"modelExpectedDirectionOfEffectSizes"
 			title:		qsTr("Expected direction of effect sizes")
 
 			RadioButton
@@ -154,7 +156,7 @@ Form
 		{
 			visible:	measures_correlation.checked
 			label:		qsTr("Transform correlations to")
-			name:		"muTransform"
+			name:		"transformCorrelationsTo"
 			values:
 			[
 				{ label: qsTr("Cohen's d"),		value: "cohensD"},
@@ -173,15 +175,15 @@ Form
 			
 			CheckBox
 			{
-				name:	"estimatesFE"
-				text:	qsTr("Mean estimates")
+				name:	"inferenceFixedEffectsMeanEstimatesTable"
+				text:	qsTr("Mean estimates table")
 				checked: true
 			}
 
 			CheckBox
 			{
-				name:	"weightsFE"
-				text:	qsTr("Estimated weights")
+				name:	"inferenceFixedEffectsEstimatedWeightsTable"
+				text:	qsTr("Estimated weights table")
 			}
 		
 		}
@@ -192,21 +194,21 @@ Form
 		
 			CheckBox
 			{
-				name:	"estimatesRE"
-				text:	qsTr("Mean estimates")
+				name:	"inferenceRandomEffectsMeanEstimatesTable"
+				text:	qsTr("Mean estimates table")
 				checked: true
 			}
 
 			CheckBox
 			{
-				name:	"heterogeneityRE"
-				text:	qsTr("Estimated heterogeneity")
+				name:	"inferenceRandomEffectsEstimatedHeterogeneityTable"
+				text:	qsTr("Estimated heterogeneity table")
 			}
 
 			CheckBox
 			{
-				name:	"weightsRE"
-				text:	qsTr("Estimated weights")
+				name:	"inferenceRandomEffectsEstimatedWeightsTable"
+				text:	qsTr("Estimated weights table")
 			}
 	
 		}
@@ -222,26 +224,26 @@ Form
 
 			CheckBox
 			{
-				name:	"weightFunctionFE"
+				name:	"plotsWeightFunctionFixedEffectsPlot"
 				text:	qsTr("Fixed effects")
 			}
 
 			CheckBox
 			{
-				name:	"weightFunctionRE"
+				name:	"plotsWeightFunctionRandomEffectsPlot"
 				text:	qsTr("Random effects")
 			}
 
 			CheckBox
 			{
-				name:	"weightFunctionRescale"
+				name:	"plotsWeightFunctionRescaleXAxis"
 				text:	qsTr("Rescale x-axis")
 			}
 		}
 
 		CheckBox
 		{
-			name: "plotModels"
+			name: "plotsMeanModelEstimatesPlot"
 			text:	qsTr("Mean model estimates")
 		}
 

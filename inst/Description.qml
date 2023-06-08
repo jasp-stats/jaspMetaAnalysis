@@ -8,7 +8,7 @@ Description
 	description:	qsTr("Synthesize evidence across multiple studies")
 	requiresData:	false
 	icon:			"meta-analysis.svg"
-	version:		"0.15"
+	version:		"0.17.3"
 	author:			"JASP Team"
 	maintainer:		"JASP Team <info@jasp-stats.org>"
 	website:		"jasp-stats.org"
@@ -33,10 +33,10 @@ Description
 		menu:			qsTr("Prediction Model Performance")
 		title:			qsTr("Classical Prediction Model Performance")
 		func:			"ClassicalPredictionPerformance"
-    requiresData:	true
-  }
+    	requiresData:	true
+	}
   
-  Analysis
+  	Analysis
 	{
 		title:			qsTr("WAAP-WLS")
 		func:			"WaapWls"
@@ -71,6 +71,14 @@ Description
 		requiresData:	true
 	}
 
+	Analysis
+	{
+		menu:			qsTr("Penalized Meta-Analysis")
+		title:			qsTr("Penalized Meta-Analysis")
+		func:			"PenalizedMetaAnalysis"
+		requiresData:	true
+	}
+	
 	Analysis
 	{
 		menu:			qsTr("Prediction Model Performance")

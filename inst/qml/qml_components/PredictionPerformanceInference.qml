@@ -28,7 +28,7 @@ Section
 	expanded:	true
 
 	property string analysisType:		"classical"
-	property string	measure:			"OE"
+	property string	measure:			"oeRatio"
 	property int inputN:				0
 	property int inputO:				0
 	property int inputE:				0
@@ -44,10 +44,9 @@ Section
 
 		DropDown
 		{
-			name:		"linkOE"
-			visible:	measure == "OE"
+			name:		"withinStudyVariation"
 			label:		qsTr("Within-study variation")
-			values: 	if (method.value == "Fixed Effects" || method.value == "Maximum Likelihood" || analysisType == "bayesian"){
+			values: 	if (analysisType == "bayesian" && measure == "oeRatio"){ // removing as metamisc's link function is broken for frequentist option: method.value == "Fixed Effects" || method.value == "Maximum Likelihood" || 
 				[
 					{ label: qsTr("Normal/Log"),		value: "normal/log"			},
 					{ label: qsTr("Normal/Identity"),	value: "normal/identity"	},
@@ -59,17 +58,6 @@ Section
 					{ label: qsTr("Normal/Identity"),	value: "normal/identity"	}
 				]
 			}
-		}
-
-		DropDown
-		{
-			name:		"linkCstat"
-			label:		qsTr("Within-study variation")
-			visible:	measure == "cstat"
-			values: 	[
-				{ label: qsTr("Normal/Logit"),		value: "normal/logit"		},
-				{ label: qsTr("Normal/Identity"),	value: "normal/identity"	}
-			]
 		}
 	}
 
@@ -105,98 +93,98 @@ Section
 
 	CheckBox
 	{
-		name:	"exportColumns"
+		name:	"exportComputedEffectSize"
 		id:		exportColumns
-		label:	measure === "OE" ? qsTr("Export O:E ratios") : qsTr("Export C-statistics")
+		label:	qsTr("Export computed effect size")
 
 		// need to be each set of the variables separatelly, they will get overwriten otherwise
 		ComputedColumnField
 		{
-			name: 				"exportOE"
-			text: 				qsTr("Column name")
+			name: 				"exportComputedEffectSizeOeRatioColumnName"
+			text: 				qsTr("Column name (effect size)")
 			fieldWidth: 		150 * preferencesModel.uiScale
-			placeholderText: 	qsTr("O:E ratios")
-			visible:			measure == "OE"
-			enabled:			measure == "OE" && exportColumns.checked
+			placeholderText: 	qsTr("O/E ratios")
+			visible:			measure == "oeRatio"
+			enabled:			measure == "oeRatio" && exportColumns.checked
 		}
 
 		ComputedColumnField
 		{
-			name: 				"exportOElCI"
+			name: 				"exportComputedEffectSizeOeRatioLCiColumnName"
 			text: 				qsTr("Column name (lCI)")
 			fieldWidth: 		150 * preferencesModel.uiScale
-			placeholderText:	qsTr("O:E ratios (lCI)")
-			visible:			measure == "OE"
-			enabled:			measure == "OE" && exportColumns.checked
+			placeholderText:	qsTr("O/E ratios (lCI)")
+			visible:			measure == "oeRatio"
+			enabled:			measure == "oeRatio" && exportColumns.checked
 		}
 
 		ComputedColumnField
 		{
-			name: 				"exportOEuCI"
+			name: 				"exportComputedEffectSizeOeRatioUCiColumnName"
 			text: 				qsTr("Column name (uCI)")
 			fieldWidth: 		150 * preferencesModel.uiScale
-			placeholderText:	qsTr("O:E ratios (uCI)")
-			visible:			measure == "OE"
-			enabled:			measure == "OE" && exportColumns.checked
+			placeholderText:	qsTr("O/E ratios (uCI)")
+			visible:			measure == "oeRatio"
+			enabled:			measure == "oeRatio" && exportColumns.checked
 		}
 
 		ComputedColumnField
 		{
-			name: 				"exportCstat"
+			name: 				"exportComputedEffectSizeCStatisticColumnName"
 			id:					newColumnName
-			text: 				qsTr("Column name")
+			text: 				qsTr("Column name (effect size)")
 			fieldWidth: 		150 * preferencesModel.uiScale
 			placeholderText:	qsTr("C-statistics")
-			visible:			measure == "cstat"
-			enabled:			measure == "cstat" && exportColumns.checked
+			visible:			measure == "cStatistic"
+			enabled:			measure == "cStatistic" && exportColumns.checked
 		}
 
 		ComputedColumnField
 		{
-			name: 				"exportCstatlCI"
+			name: 				"exportComputedEffectSizeCStatisticLCiColumnName"
 			text: 				qsTr("Column name (lCI)")
 			fieldWidth: 		150 * preferencesModel.uiScale
 			placeholderText:	qsTr("C-statistics (lCI)")
-			visible:			measure == "cstat"
-			enabled:			measure == "cstat" && exportColumns.checked
+			visible:			measure == "cStatistic"
+			enabled:			measure == "cStatistic" && exportColumns.checked
 		}
 
 		ComputedColumnField
 		{
-			name: 				"exportCstatuCI"
+			name: 				"exportComputedEffectSizeCStatisticUCiColumnName"
 			text: 				qsTr("Column name (uCI)")
 			fieldWidth: 		150 * preferencesModel.uiScale
 			placeholderText: 	qsTr("C-statistics (uCI)")
-			visible:			measure == "cstat"
-			enabled:			measure == "cstat" && exportColumns.checked
+			visible:			measure == "cStatistic"
+			enabled:			measure == "cStatistic" && exportColumns.checked
 		}
 	}
 
 	CheckBox
 	{
-		name:	"funnelAsymmetryTest"
+		name:	"funnelPlotAsymmetryTest"
 		label:	qsTr("Funnel plot asymmetry test")
 
 		CheckBox
 		{
-			name:	"funnelAsymmetryTestEggerUW"
-			id:		funnelAsymmetryTestEggerUW
+			name:	"funnelPlotAsymmetryTestEggerUnweighted"
+			id:		funnelPlotAsymmetryTestEggerUW
 			label:	qsTr("Egger (unweighted)")
 			checked: true
 		}
 
 		CheckBox
 		{
-			name:	"funnelAsymmetryTestEggerFIV"
-			id:		funnelAsymmetryTestEggerFIV
+			name:	"funnelPlotAsymmetryTestEggerMultiplicativeOverdispersion"
+			id:		funnelPlotAsymmetryTestEggerFIV
 			label:	qsTr("Egger (multiplicative overdispersion)")
 			checked: false
 		}
 
 		CheckBox
 		{
-			name:	"funnelAsymmetryTestMacaskillFIV"
-			id:		funnelAsymmetryTestMacaskillFIV
+			name:	"funnelPlotAsymmetryTestMacaskill"
+			id:		funnelPlotAsymmetryTestMacaskillFIV
 			label:	qsTr("Macaskill")
 			checked: false
 			enabled: inputN === 1
@@ -204,8 +192,8 @@ Section
 
 		CheckBox
 		{
-			name:	"funnelAsymmetryTestMacaskillFPV"
-			id:		funnelAsymmetryTestMacaskillFPV
+			name:	"funnelPlotAsymmetryTestMacaskillPooled"
+			id:		funnelPlotAsymmetryTestMacaskillFPV
 			label:	qsTr("Macaskill (pooled)")
 			checked: false
 			enabled: inputN === 1 && inputO === 1
@@ -213,8 +201,8 @@ Section
 
 		CheckBox
 		{
-			name:	"funnelAsymmetryTestPeters"
-			id:		funnelAsymmetryTestPeters
+			name:	"funnelPlotAsymmetryTestPeters"
+			id:		funnelPlotAsymmetryTestPeters
 			label:	qsTr("Peters")
 			checked: false
 			enabled: inputN === 1 && inputO === 1
@@ -222,8 +210,8 @@ Section
 
 		CheckBox
 		{
-			name:	"funnelAsymmetryTestDebrayFIV"
-			id:		funnelAsymmetryTestDebrayFIV
+			name:	"funnelPlotAsymmetryTestDebray"
+			id:		funnelPlotAsymmetryTestDebrayFIV
 			label:	qsTr("Debray")
 			checked: false
 			enabled: inputO === 1
@@ -232,7 +220,7 @@ Section
 		/* Not implemented
 		CheckBox
 		{
-			name:	"funnelAsymmetryTestDebrayFAV"
+			name:	"funnelPlotAsymmetryTestDebrayFAV"
 			label:	qsTr("Debray (FAV)")
 			checked: false
 		}
@@ -240,9 +228,9 @@ Section
 
 		CheckBox
 		{
-			name:	"funnelAsymmetryTestPlot"
+			name:	"funnelPlotAsymmetryTestPlot"
 			label:	qsTr("Plot")
-			enabled: funnelAsymmetryTestEggerUW.checked || funnelAsymmetryTestEggerFIV.checked || funnelAsymmetryTestMacaskillFIV.checked || funnelAsymmetryTestMacaskillFPV.checked || funnelAsymmetryTestPeters.checked || funnelAsymmetryTestDebrayFIV.checked
+			enabled: funnelPlotAsymmetryTestEggerUW.checked || funnelPlotAsymmetryTestEggerFIV.checked || funnelPlotAsymmetryTestMacaskillFIV.checked || funnelPlotAsymmetryTestMacaskillFPV.checked || funnelPlotAsymmetryTestPeters.checked || funnelPlotAsymmetryTestDebrayFIV.checked
 			checked: false
 		}
 	}

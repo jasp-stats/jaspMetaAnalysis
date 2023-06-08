@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
-"POT-Creation-Date: 2021-11-06 02:39\n"
-"PO-Revision-Date: 2021-11-16 04:40+0000\n"
+"POT-Creation-Date: 2023-04-29 02:38\n"
+"PO-Revision-Date: 2023-04-21 17:51+0000\n"
 "Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/ja/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.9.1-dev\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr "事前分布の下限値が上限値よりも小さくない."
@@ -61,13 +61,13 @@ msgid "SD"
 msgstr "標準偏差"
 
 msgid "Lower"
-msgstr "下"
+msgstr "下限"
 
 msgid "95%% Credible Interval"
 msgstr "95%% 信用区間"
 
 msgid "Upper"
-msgstr "上"
+msgstr "上限"
 
 msgid "Averaged"
 msgstr "平均"
@@ -97,24 +97,30 @@ msgid ""
 "present. The Bayes factor is based on all four models: fixed effects H%2$s & "
 "random effects H%2$s over the fixed effects H%1$s & random effects H%1$s."
 msgstr ""
-"事後推定値は、効果が存在すると仮定したモデルに基づいています。ベイズファクターは4つのモデルすべてに基づいています: 固定効果 H%2$s & "
-"ランダム効果 H%2$s よりも固定効果 H%1$s & ランダム効果 H%1$s."
+"事後推定値は、効果が存在すると仮定したモデルに基づいています。ベイズファク"
+"ターは4つのモデルすべてに基づいています: 固定効果 H%2$s & ランダム効果 H%2$s "
+"よりも固定効果 H%1$s & ランダム効果 H%1$s."
 
 msgid ""
 "Model averaged posterior estimates for %3$s are not yet available, but will "
 "be added in the future. The Bayes factor is based on all four models: random "
 "effects H%1$s & H%2$s over the fixed effects H%1$s & H%2$s."
 msgstr ""
-"3$s におけるモデル平均事後推定値はまだありませんが、今後追加される予定です。ベイズファクターは、4つのモデルすべてに基づいています: 固定効果H%1$"
-"s & H%2$sよりも変量効果H%1$s & H%2$s."
+"%3$s におけるモデル平均事後推定値はまだありませんが、今後追加される予定です。"
+"ベイズファクターは、4つのモデルすべてに基づいています: 固定効果H%1$s & H%2$s"
+"よりも変量効果H%1$s & H%2$s."
 
 msgid ""
 "Bayes factor of the (unconstrained/constrained) random effects H%1$s over "
 "the fixed effects H%1$s."
-msgstr "固定効果 H%1$s に対する (制約なし/制約あり) 変量効果 H%1$s のベイズファクター."
+msgstr ""
+"固定効果 H%1$s に対する (制約なし/制約あり) 変量効果 H%1$s のベイズファク"
+"ター."
 
 msgid "Bayes factor of the fixed effects H%1$s over the random effects H%1$s."
-msgstr "変量効果 H%1$s に対する (制約なし/制約あり) 固定効果 H%1$s のベイズファクター."
+msgstr ""
+"変量効果 H%1$s に対する (制約なし/制約あり) 固定効果 H%1$s のベイズファク"
+"ター."
 
 msgid ""
 "Model averaged posterior estimates are based on the models that assume an "
@@ -122,37 +128,40 @@ msgid ""
 "effects H%1$s & random effects H%1$s over the fixed effects H%2$s & random "
 "effects H%2$s."
 msgstr ""
-"モデル平均事後推定値は効果が存在すると仮定したモデルに基づいています。ベイズファクターは、4つのモデルすべてに基づいています: 固定効果H%2$s & "
-"変量効果H%2$s よりも固定効果H%1$s & 変量効果 H%2$s."
+"モデル平均事後推定値は効果が存在すると仮定したモデルに基づいています。ベイズ"
+"ファクターは、4つのモデルすべてに基づいています: 固定効果H%2$s & 変量効果"
+"H%2$s よりも固定効果H%1$s & 変量効果 H%2$s."
 
 msgid ""
 "Model averaged posterior estimates for %3$s are not yet available, but will "
 "be added in the future. The Bayes factor is based on all four models: fixed "
 "effects H%1$s & H%2$s over the random effects H%1$s & H%2$s."
 msgstr ""
-"3$s におけるモデル平均事後推定値はまだありませんが、今後追加される予定です。ベイズファクターは、4つのモデルすべてに基づいています: 変量効果H%1$"
-"s & H%2$sよりも固定効果H%1$s & H%2$s."
+"%3$s におけるモデル平均事後推定値はまだありませんが、今後追加される予定です。"
+"ベイズファクターは、4つのモデルすべてに基づいています: 変量効果H%1$s & H%2$s"
+"よりも固定効果H%1$s & H%2$s."
 
 msgid ""
 "Bayes factor of the fixed effects H%1$s over the (unconstrained/constrained) "
 "random effects H%1$s."
-msgstr "（制約なし/制約付き）変量効果H%1$sに対する固定効果H%1$sのベイズファクター."
+msgstr ""
+"（制約なし/制約付き）変量効果H%1$sに対する固定効果H%1$sのベイズファクター."
 
 msgid ""
 "Bayes factor of the ordered effects H%1$s over the fixed effects H%2$s. The "
 "Bayes factor for the ordered effects H%1$s versus the unconstrained (random) "
 "effects H%1$s model is %3$.3f."
 msgstr ""
-"固定効果 H%2$s に対する順序効果 H%1$s のベイズファクター. 制約のない(変量)効果 H%1$s モデルに対する順序効果 H%1$s "
-"のベイズファクターは %3$.3f."
+"固定効果 H%2$s に対する順序効果 H%1$s のベイズファクター. 制約のない(変量)効"
+"果 H%1$s モデルに対する順序効果 H%1$s のベイズファクターは %3$.3f."
 
 msgid ""
 "Bayes factor of the fixed effects H%2$s over the ordered effects H%1$s. The "
 "Bayes factor for the unconstrained (random) effects H%1$s versus the ordered "
 "effects H%1$s model is %3$.3f."
 msgstr ""
-"順序効果 H%1$s に対する固定効果 H%2$s のベイズファクター. 順序効果 H%1$s モデルに対する制約のない(変量)効果 H%1$s "
-"のベイズファクターは %3$.3f."
+"順序効果 H%1$s に対する固定効果 H%2$s のベイズファクター. 順序効果 H%1$s モデ"
+"ルに対する制約のない(変量)効果 H%1$s のベイズファクターは %3$.3f."
 
 msgid "Model Probabilities"
 msgstr "モデルの確率"
@@ -330,6 +339,9 @@ msgstr "チェーンの最後のiteration"
 msgid "Shrink factor"
 msgstr "Shrink factor"
 
+msgid "All standard errors/sample sizes must be positive."
+msgstr ""
+
 msgid "The metafor package crashed with the following error: %s"
 msgstr "metaforパッケージが次のエラーでクラッシュしました: %s"
 
@@ -360,11 +372,14 @@ msgstr "標準誤差"
 msgid "z"
 msgstr "z"
 
+msgid "t"
+msgstr "t"
+
 msgid "Wald test."
 msgstr "Wald検定."
 
-msgid "Wald tests."
-msgstr "Wald検定."
+msgid "Knapp and Hartung test adjustment."
+msgstr ""
 
 msgid "Fit measures"
 msgstr "適合度指標"
@@ -383,9 +398,6 @@ msgstr "Kendallの %s"
 
 msgid "Regression test for Funnel plot asymmetry (\"Egger's test\")"
 msgstr "ファンネルプロットの非対称性の回帰検定（\"Eggerの検定\"）"
-
-msgid "t"
-msgstr "t"
 
 msgid "Influence Measures"
 msgstr "影響力の測定"
@@ -486,10 +498,6 @@ msgstr "FEモデル"
 msgid "RE Model"
 msgstr "REモデル"
 
-msgid "Cannot set 'xlim' automatically. Please set this argument manually."
-msgstr ""
-"'xlim' を自動的に設定することはできません。この引数は手動で設定してください."
-
 msgid "Profile Plot for"
 msgstr "プロファイルプロット"
 
@@ -498,22 +506,6 @@ msgstr "制約付き対数尤度"
 
 msgid "Residual Value"
 msgstr "残差値"
-
-msgid "Argument 'x' must be an object of class \"rma\"."
-msgstr "引数 'x' はクラス \"rma\" のオブジェクトでなければなりません."
-
-msgid "Function not applicable to objects of class \"robust.rma\"."
-msgstr "\"robust.rma\" クラスのオブジェクトには適用できない関数です."
-
-msgid "Function not applicable to objects of class \"rma.ls\"."
-msgstr "\"rma.ls\" クラスのオブジェクトには適用できない関数です."
-
-msgid ""
-"Setting 'xlim' and 'zlim' automatically not possible (must set axis limits "
-"manually)."
-msgstr ""
-"'xlim' と 'zlim' を自動的に設定することはできません (軸の制限を手動で設定する"
-"必要があります)."
 
 msgid "Radial Plot"
 msgstr "Radial プロット"
@@ -612,9 +604,6 @@ msgstr "観測-期待比"
 msgid "Concordance Statistic"
 msgstr "C統計量"
 
-msgid "The number of observed events must be specified."
-msgstr "観察されたイベントの数を指定する必要があります."
-
 msgid "Funnel Plot Asymmetry Tests"
 msgstr "ファンネルプロットの非対称性検定"
 
@@ -657,57 +646,45 @@ msgstr "サンプルサイズ"
 msgid "Total events"
 msgstr "イベントの合計数"
 
-msgid ""
-"Currently this only works with rma and rma.mv objects that have specified "
-"'yi' as a formula."
-msgstr ""
-"現在、この機能は、数式として'yi'を指定したrmaおよびrma.mvオブジェクトでのみ動"
-"作します."
-
-msgid "Formula is refering to factors that are not in the model."
-msgstr "式は、モデルにない要素を参照しています."
-
-msgid "There are no predictors in the model that correspond to factors in '"
-msgstr "次の要因に対応するモデルには予測子はありません"
-
-msgid "'. Factor levels:"
-msgstr "'. 因子水準:"
-
-msgid ","
-msgstr ","
-
-msgid ". Data names:"
-msgstr ". データ 名:"
-
-msgid "; Used Terms:"
-msgstr "; 使用項(Used Terms):"
-
-msgid "; Data set head:"
-msgstr "; データセットの上部(head):"
-
-msgid "Argument 'contrasts' should be a matrix."
-msgstr "引数 'contrasts' は行列である必要があります."
-
-msgid "Invalid contrasts: Rows in"
-msgstr "無効なコントラスト: 行(Rows in)"
-
-msgid "do not add to 0."
-msgstr "0に加えないでください."
-
-msgid "Only using first element of"
-msgstr "次の最初の要素のみを使用"
-
-msgid "."
-msgstr "."
-
-msgid "is smaller than 2."
-msgstr "は 2 より小さい."
-
 msgid "Variance Components"
 msgstr "分散成分"
 
 msgid "Plots"
 msgstr "プロット"
+
+msgid "Intercept"
+msgstr ""
+
+#, fuzzy
+msgid "At least one predictor needs to be specified."
+msgstr "少なくとも1つのp値カットオフを設定する必要があります."
+
+msgid "Warning:"
+msgstr "警告:"
+
+#, fuzzy
+msgid "Posterior distribution"
+msgstr "事前分布"
+
+#, fuzzy
+msgid "Sampling diagnostics"
+msgstr "診断"
+
+#, fuzzy
+msgid "Autocorrelation (%1$s)"
+msgstr "自己相関"
+
+msgid ""
+"Inference possibly unreliable -- MCMC chains might not have converged; The "
+"largest R-hat is %.3f > 1.01. To lower R-hat please increase 'Iterations', "
+"or 'Adapt delta' in the Options section."
+msgstr ""
+
+msgid ""
+"Low estimation accuracy -- The smallest Effective Sample Size (ESS) is %.2f "
+"< %1.0f. To increase accuracy please increase 'Iterations', or 'Adapt delta' "
+"in the Options section."
+msgstr ""
 
 msgid "The priors for publication bias were set incorrectly."
 msgstr "出版バイアスの事前確率が正しく設定されていません."
@@ -806,9 +783,6 @@ msgstr "log(包含BF)"
 
 msgid "P(M|data)"
 msgstr "P(M|データ)"
-
-msgid "Warning:"
-msgstr "警告:"
 
 msgid "Model Averaged Estimates"
 msgstr "モデルアベレージ推定値"
@@ -945,17 +919,23 @@ msgstr "モデル %i には、選択したパラメータが含まれていま�
 msgid ""
 "Cannot compute results. All entries of the p-value variable (%s) must be "
 "between 0 and 1."
-msgstr "結果を計算できません。p値変数 (%s) のすべてのエントリは 0 と 1 の間でなければなりません."
+msgstr ""
+"結果を計算できません。p値変数 (%s) のすべてのエントリは 0 と 1 の間でなければ"
+"なりません."
 
 msgid ""
 "Cannot compute results. All entries of the correlation coefficient variable "
 "(%s) must be between -1 and 1."
-msgstr "結果を計算できません。相関係数変数 (%s) のすべてのエントリは -1 から 1 の間でなければなりません."
+msgstr ""
+"結果を計算できません。相関係数変数 (%s) のすべてのエントリは -1 から 1 の間で"
+"なければなりません."
 
 msgid ""
 "Cannot compute results. All entries of the sample size variable (%s) must be "
 "greater than four."
-msgstr "結果を計算できません。サンプルサイズ変数 (%s) のすべてのエントリは 4 より大きい値でなければなりません."
+msgstr ""
+"結果を計算できません。サンプルサイズ変数 (%s) のすべてのエントリは 4 より大き"
+"い値でなければなりません."
 
 msgid "The p-value cutoffs were set incorectly."
 msgstr "p値のカットオフが正しく設定されていませんでした."
@@ -965,9 +945,6 @@ msgstr "少なくとも1つのp値カットオフを設定する必要があり�
 
 msgid "All p-value cutoffs needs to be between 0 and 1."
 msgstr "すべてのp値のカットオフは0から1の間である必要があります."
-
-msgid "No steps"
-msgstr "ステップなし"
 
 msgid "95%% Confidence Interval"
 msgstr "95%% 信頼区間"
@@ -1117,7 +1094,8 @@ msgstr "効果量の検定"
 msgid "Estimates"
 msgstr "推定値"
 
-msgid "PET-PEESE Regression Estimates"
+#, fuzzy
+msgid "Regression Estimates"
 msgstr "PET-PEESE回帰推定値"
 
 msgid "Multiplicative Heterogeneity Estimates"
@@ -1135,14 +1113,122 @@ msgstr "フィッシャー(Fisher)のz"
 msgid ""
 "WAAP was not estimated: There were only %1$i adequately powered studies "
 "(power > 80%%)."
-msgstr "WAAP は推定されなかった: 十分な検出力を持つ研究は %1$i のみであった(検出力>80%%)."
+msgstr ""
+"WAAP は推定されなかった: 十分な検出力を持つ研究は %1$i のみであった(検出力"
+">80%%)."
 
 msgid "There were %1$i adequately powered studies (power > 80%%)."
 msgstr "十分な検出力を持つ研究は %1$i あった(検出力>80%%)."
 
+msgid ""
+"The Hamiltonian Monte Carlo procedure might be invalid -- There was %i "
+"divergent transition after warmup. This can be solved by carefully "
+"increasing 'Adapt delta' until there are no divergent transitions."
+msgid_plural ""
+"The Hamiltonian Monte Carlo procedure might be invalid -- There were %i "
+"divergent transitions after warmup. This can be solved by carefully "
+"increasing 'Adapt delta' until there are no divergent transitions."
+msgstr[0] ""
+
+msgid ""
+"Bayesian Fraction of Missing Information (BFMI) that was too low in %i chain "
+"indicating that the posterior distribution was not explored efficiently. Try "
+"increasing number of 'Burnin' and 'Iterations'."
+msgid_plural ""
+"Bayesian Fraction of Missing Information (BFMI) that was too low in %i "
+"chains indicating that the posterior distribution was not explored "
+"efficiently. Try increasing number of 'Burnin' and 'Iterations'."
+msgstr[0] ""
+
+msgid ""
+"The Hamiltonian Monte Carlo procedure might be inefficient -- %i transition "
+"exceeded the maximum tree depth. This can be solved by carefully increasing "
+"'Maximum tree depth'."
+msgid_plural ""
+"The Hamiltonian Monte Carlo procedure might be inefficient -- %i transitions "
+"exceeded the maximum tree depth. This can be solved by carefully increasing "
+"'Maximum tree depth'."
+msgstr[0] ""
+
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "%i の観測値が欠損しているため削除されました。"
+
+#~ msgid "Wald tests."
+#~ msgstr "Wald検定."
+
+#~ msgid "Cannot set 'xlim' automatically. Please set this argument manually."
+#~ msgstr ""
+#~ "'xlim' を自動的に設定することはできません。この引数は手動で設定してくださ"
+#~ "い."
+
+#~ msgid "Argument 'x' must be an object of class \"rma\"."
+#~ msgstr "引数 'x' はクラス \"rma\" のオブジェクトでなければなりません."
+
+#~ msgid "Function not applicable to objects of class \"robust.rma\"."
+#~ msgstr "\"robust.rma\" クラスのオブジェクトには適用できない関数です."
+
+#~ msgid "Function not applicable to objects of class \"rma.ls\"."
+#~ msgstr "\"rma.ls\" クラスのオブジェクトには適用できない関数です."
+
+#~ msgid ""
+#~ "Setting 'xlim' and 'zlim' automatically not possible (must set axis "
+#~ "limits manually)."
+#~ msgstr ""
+#~ "'xlim' と 'zlim' を自動的に設定することはできません (軸の制限を手動で設定"
+#~ "する必要があります)."
+
+#~ msgid "The number of observed events must be specified."
+#~ msgstr "観察されたイベントの数を指定する必要があります."
+
+#~ msgid ""
+#~ "Currently this only works with rma and rma.mv objects that have specified "
+#~ "'yi' as a formula."
+#~ msgstr ""
+#~ "現在、この機能は、数式として'yi'を指定したrmaおよびrma.mvオブジェクトでの"
+#~ "み動作します."
+
+#~ msgid "Formula is refering to factors that are not in the model."
+#~ msgstr "式は、モデルにない要素を参照しています."
+
+#~ msgid "There are no predictors in the model that correspond to factors in '"
+#~ msgstr "次の要因に対応するモデルには予測子はありません"
+
+#~ msgid "'. Factor levels:"
+#~ msgstr "'. 因子水準:"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid ". Data names:"
+#~ msgstr ". データ 名:"
+
+#~ msgid "; Used Terms:"
+#~ msgstr "; 使用項(Used Terms):"
+
+#~ msgid "; Data set head:"
+#~ msgstr "; データセットの上部(head):"
+
+#~ msgid "Argument 'contrasts' should be a matrix."
+#~ msgstr "引数 'contrasts' は行列である必要があります."
+
+#~ msgid "Invalid contrasts: Rows in"
+#~ msgstr "無効なコントラスト: 行(Rows in)"
+
+#~ msgid "do not add to 0."
+#~ msgstr "0に加えないでください."
+
+#~ msgid "Only using first element of"
+#~ msgstr "次の最初の要素のみを使用"
+
+#~ msgid "."
+#~ msgstr "."
+
+#~ msgid "is smaller than 2."
+#~ msgstr "は 2 より小さい."
+
+#~ msgid "No steps"
+#~ msgstr "ステップなし"
 
 #~ msgid "log(BF)"
 #~ msgstr "log(BF)"

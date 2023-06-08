@@ -1,11 +1,7 @@
 .onLoad <- function(libname, pkgname) {
 
-  # function from zzzWrappers.R inside jaspResults
-  jaspResultsCalledFromJasp <- mget("jaspResultsCalledFromJasp", envir = .GlobalEnv, mode = "function", ifnotfound = NA)
-
-  if (!is.na(jaspResultsCalledFromJasp) &&
-      jaspBase:::getOS() == "osx" &&
-      isTRUE(try(jaspResultsCalledFromJasp()))
+  if (jaspBase:::getOS() == "osx" &&
+      isTRUE(try(jaspBase::jaspResultsCalledFromJasp()))
   ) {
 
     jagsHome <- Sys.getenv("JAGS_HOME")

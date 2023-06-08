@@ -27,7 +27,7 @@
 </defs>
 <g clip-path='url(#cpNzIuMzN8NzIwLjAwfDI5LjM5fDUwMi4xMQ==)'>
 <rect x='72.33' y='29.39' width='647.67' height='472.72' style='stroke-width: 10.67; stroke: none;' />
-<polygon points='101.77,50.88 298.03,50.88 298.03,412.68 494.30,412.68 494.30,475.22 690.56,475.22 690.56,118.83 494.30,118.83 494.30,56.28 298.03,56.28 298.03,50.88 101.77,50.88 ' style='stroke-width: 1.07; stroke: none; fill: #CCCCCC;' />
+<polygon points='101.77,50.88 298.03,50.88 298.03,412.68 494.30,412.68 494.30,475.22 690.56,475.22 690.56,118.83 494.30,118.83 494.30,56.28 298.03,56.28 298.03,50.88 101.77,50.88 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #CCCCCC;' />
 <polyline points='101.77,50.88 298.03,50.88 298.03,194.13 494.30,194.13 494.30,337.38 690.56,337.38 ' style='stroke-width: 2.13; stroke-linecap: butt;' />
 <line x1='101.45' y1='502.11' x2='690.88' y2='502.11' style='stroke-width: 0.64; stroke-linecap: butt;' />
 <line x1='72.33' y1='480.94' x2='72.33' y2='50.56' style='stroke-width: 0.64; stroke-linecap: butt;' />

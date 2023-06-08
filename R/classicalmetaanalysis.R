@@ -22,17 +22,17 @@ gettextf <- function(fmt, ..., domain = NULL)  {
 }
 
 ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
-  
+
   options[["module"]] <- "metaAnalysis"
-  
-  ready <- options$dependent != "" && options$wlsWeights != "" && (options$includeConstant || length(options$modelTerms) > 0)
+
+  ready <- options$effectSize != "" && options$effectSizeSe != "" && (options$interceptTerm || length(options$modelTerms) > 0)
   if(ready) {
     dataset <- .metaAnalysisReadData(dataset, options)
     .metaAnalysisCheckErrors(dataset, options)
   }
-  
+
   container <- .metaAnalysisGetOutputContainer(jaspResults)
-  
+
   .ClassicalMetaAnalysisCommon(container, dataset, ready, options)
 
   return()
@@ -43,8 +43,8 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     modelContainer <- jaspResults[["modelContainer"]]
   } else {
     modelContainer <- createJaspContainer()
-    modelContainer$dependOn(c("dependent", "wlsWeights", "method", "studyLabels", "covariates", "test",
-                              "factors", "modelTerms", "includeConstant", "regressionCoefficientsConfidenceIntervalsInterval"))
+    modelContainer$dependOn(c("effectSize", "effectSizeSe", "method", "studyLabel", "covariates", "estimateTest",
+                              "factors", "modelTerms", "interceptTerm", "coefficientCiLevel"))
     jaspResults[["modelContainer"]] <- modelContainer
   }
   return(modelContainer)
@@ -54,13 +54,13 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   if (!is.null(dataset))
     return(dataset)
   else {
-    effsizeName <- unlist(options$dependent)
-    stderrName  <- unlist(options$wlsWeights)
+    effsizeName <- unlist(options$effectSize)
+    stderrName  <- unlist(options$effectSizeSe)
     covarNames  <- if (length(options$covariates) > 0) unlist(options$covariates)
     factNames   <- if (length(options$factors) > 0) unlist(options$factors)
 
     numeric.variables <- Filter(function(s) s != "", c(effsizeName, covarNames, stderrName))
-    factor.variables  <- Filter(function(s) s != "", c(factNames, options$studyLabels))
+    factor.variables  <- Filter(function(s) s != "", c(factNames, options$studyLabel))
     return(.readDataSetToEnd(columns.as.factor   = factor.variables,
                              columns.as.numeric  = numeric.variables,
                              exclude.na.listwise = numeric.variables))
@@ -68,8 +68,8 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 }
 
 .metaAnalysisCheckErrors <- function(dataset, options){
-  effsizeName <- unlist(options$dependent)
-  stderrName  <- unlist(options$wlsWeights)
+  effsizeName <- unlist(options$effectSize)
+  stderrName  <- unlist(options$effectSizeSe)
   covarNames  <- if (length(options$covariates) > 0) unlist(options$covariates)
   numeric.variables <- Filter(function(s) s != "", c(effsizeName, covarNames, stderrName))
   .hasErrors(dataset              = dataset,
@@ -82,7 +82,16 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
              modelInteractions.modelTerms = options$modelTerms,
              exitAnalysisIfErrors = TRUE)
   .hasErrors(dataset              = dataset,
-             type                 = c("negativeValues"),
-             negativeValues.target= options$wlsWeights,
+             seCheck.target       = options[["effectSizeSe"]],
+             custom               = .metaAnalysisCheckSE,
              exitAnalysisIfErrors = TRUE)
 }
+
+.metaAnalysisCheckSE <- list(
+  seCheck = function(dataset, target) {
+    nonPositive <- !all(na.omit(dataset[,target]) > 0)
+    if (nonPositive) {
+      return(gettext("All standard errors/sample sizes must be positive."))
+    }
+  }
+)

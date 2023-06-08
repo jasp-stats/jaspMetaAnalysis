@@ -24,12 +24,70 @@ import JASP				1.0
 Form
 {
 
+	VariablesForm
+	{
+		preferredHeight: 200 * preferencesModel.uiScale
+
+		AvailableVariablesList
+		{
+			name: "allVariables"
+		}
+
+		AssignedVariablesList
+		{
+			name:			"effectSize"
+			title:
+			{
+				if (measuresCorrelation.checked)
+					qsTr("Correlation")
+				else
+					qsTr("Effect Size")
+			}
+			singleVariable:	true
+			allowedColumns:	["scale"]
+		}
+
+		AssignedVariablesList
+		{
+			name:			"effectSizeSe"
+			title:			qsTr("Effect Size Standard Error")
+			singleVariable:	true
+			allowedColumns:	["scale"]
+			visible:		active
+
+			property bool active:   measuresGeneral.checked
+			onActiveChanged: if (!active && count > 0) itemDoubleClicked(0);
+		}
+
+		AssignedVariablesList
+		{
+			name: 			"sampleSize"
+			title: 			qsTr("Sample size")
+			singleVariable: true
+			allowedColumns: ["scale", "ordinal"]
+			visible:		active
+
+			property bool active:   measuresCorrelation.checked
+			onActiveChanged: if (!active && count > 0) itemDoubleClicked(0);
+		}
+
+		DropDown
+		{
+			visible:	measuresCorrelation.checked
+			label:		qsTr("Transform correlations to")
+			name:		"transformCorrelationsTo"
+			values:
+			[
+				{ label: qsTr("Fisher's z"),	value: "fishersZ"},
+				{ label: qsTr("Cohen's d"),		value: "cohensD"}
+			]
+		}
+	}
+
 	RadioButtonGroup
 	{
-		Layout.columnSpan:		2
 		name:					"measures"
-		radioButtonsOnSameRow:	true
-		columns:				2
+		title:					qsTr("Measure")
 
 		RadioButton
 		{
@@ -47,63 +105,6 @@ Form
 		}
 	}
 
-	VariablesForm
-	{
-		preferredHeight: 200 * preferencesModel.uiScale
-
-		AvailableVariablesList
-		{
-			name: "allVariables"
-		}
-
-		AssignedVariablesList
-		{
-			name:			"inputES"
-			title:
-			{
-				if (measuresCorrelation.checked)
-					qsTr("Correlation")
-				else
-					qsTr("Effect Size")
-			}
-			singleVariable:	true
-			allowedColumns:	["scale"]
-		}
-
-		AssignedVariablesList
-		{
-			name:			"inputSE"
-			title:			qsTr("Effect Size Standard Error")
-			singleVariable:	true
-			allowedColumns:	["scale"]
-			visible:		 measuresGeneral.checked
-			onVisibleChanged: if (!visible && count > 0) itemDoubleClicked(0);
-		}
-
-		AssignedVariablesList
-		{
-			name: 			"inputN"
-			title: 			qsTr("N")
-			singleVariable: true
-			allowedColumns: ["scale", "ordinal"]
-			visible:		 measuresCorrelation.checked
-			onVisibleChanged: if (!visible && count > 0) itemDoubleClicked(0);
-		}
-
-		DropDown
-		{
-			visible:	measuresCorrelation.checked
-			label:		qsTr("Transform correlations to")
-			name:		"muTransform"
-			values:
-			[
-				{ label: qsTr("Fisher's z"),	value: "fishersZ"},
-				{ label: qsTr("Cohen's d"),		value: "cohensD"}
-			]
-		}
-	}
-
-
 	Section
 	{
 		title: qsTr("Inference")
@@ -112,15 +113,15 @@ Form
 		{
 			CheckBox
 			{
-				text:		qsTr("Mean estimates")
-				name:		"estimatesMean"
+				text:		qsTr("Mean estimates table")
+				name:		"inferenceMeanEstimatesTable"
 				checked:	true
 			}
 
 			CheckBox
 			{
-				text:		qsTr("Multiplicative heterogeneity estimates")
-				name:		"estimatesSigma"
+				text:		qsTr("Multiplicative heterogeneity estimates table")
+				name:		"inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable"
 				checked:	false
 			}
 		}
@@ -133,7 +134,7 @@ Form
 		CheckBox
 		{
 			text:	qsTr("Mean model estimates")
-			name:	"plotModels"
+			name:	"plotsMeanModelEstimatesPlot"
 		}
 
 	}

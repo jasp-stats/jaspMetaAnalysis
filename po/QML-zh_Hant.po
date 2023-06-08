@@ -1,15 +1,10 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-11-05 07:13+0000\n"
-"Last-Translator: yenyu chen <swallow499@gmail.com>\n"
-"Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
-"jasp/jaspmetaanalysis-qml/zh_Hant/>\n"
-"Language: zh_Hant\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Language: zh_Hant\n"
 "X-Qt-Contexts: true\n"
 
 msgctxt "Description|"
@@ -265,24 +260,12 @@ msgid "Study Labels"
 msgstr "研究標籤"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Models"
-msgstr "模型"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Expected effect size direction"
-msgstr "預期效果量方向"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Positive"
 msgstr "正向"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Negative"
 msgstr "負向"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Plot priors"
-msgstr "繪圖前"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect"
@@ -305,16 +288,8 @@ msgid "Inference"
 msgstr "推論"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Conditional estimates"
-msgstr "有條件估計"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Models overview"
 msgstr "模型概述"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "BF"
-msgstr "BF"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Inclusion"
@@ -365,10 +340,6 @@ msgid "Descending"
 msgstr "下降的"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Row order"
-msgstr "行序"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Weights"
 msgstr "權重"
 
@@ -389,20 +360,12 @@ msgid "Conditional"
 msgstr "有條件的"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Show priors"
-msgstr "顯示先前"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Model number"
 msgstr "模型號碼"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "MCMC Diagnostics"
 msgstr "馬可夫鏈蒙特卡羅診斷"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Overview"
-msgstr "概述"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Plot"
@@ -417,10 +380,6 @@ msgid "Autocorrelation"
 msgstr "自相關"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Posterior samples densities"
-msgstr "事後樣本密度"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Advanced"
 msgstr "進階的"
 
@@ -433,20 +392,12 @@ msgid "Fisher's z"
 msgstr "費雪z檢定"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Estimation settings (MCMC)"
-msgstr "估計設定 (馬可夫鏈蒙特卡羅)"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Adaptation"
 msgstr "適應"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Burnin"
 msgstr "伯寧(Burnin)"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Iterations"
-msgstr "迭代"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Chains"
@@ -521,16 +472,8 @@ msgid "Two-sided selection"
 msgstr "雙尾檢定選擇"
 
 msgctxt "SelectionModels|"
-msgid "P-value frequency"
-msgstr "p值頻率"
-
-msgctxt "SelectionModels|"
 msgid "Automatically join p-value intervals"
 msgstr "自動連結p值區間"
-
-msgctxt "SelectionModels|"
-msgid "Expected effect size direction"
-msgstr "期待效果量方向"
 
 msgctxt "SelectionModels|"
 msgid "Positive"
@@ -557,20 +500,8 @@ msgid "Fixed Effects"
 msgstr "固定效果"
 
 msgctxt "SelectionModels|"
-msgid "Mean estimates"
-msgstr "平均數估計"
-
-msgctxt "SelectionModels|"
-msgid "Estimated weights"
-msgstr "估計權重"
-
-msgctxt "SelectionModels|"
 msgid "Random Effects"
 msgstr "隨機效果"
-
-msgctxt "SelectionModels|"
-msgid "Estimated heterogeneity"
-msgstr "估計異質性"
 
 msgctxt "SelectionModels|"
 msgid "Plots"
@@ -1185,19 +1116,11 @@ msgid "Log Odds Ratio"
 msgstr "對數勝算比"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Model type"
-msgstr "模型類型"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "RoBMA-PSMA"
 msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "RoBMA-PP"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "RoBMA-old"
 msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
@@ -1336,33 +1259,38 @@ msgctxt "BayesianPredictionPerformance|"
 msgid "Gelman Rubin"
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianPredictionPerformance|"
 msgid "Advanced"
-msgstr ""
+msgstr "進階的"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Adapt"
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianPredictionPerformance|"
 msgid "Burnin"
-msgstr ""
+msgstr "伯寧(Burnin)"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Sample"
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianPredictionPerformance|"
 msgid "Chains"
-msgstr ""
+msgstr "鏈"
 
+#, fuzzy
 msgctxt "PetPeese|"
 msgid "Effect sizes & SE"
-msgstr ""
+msgstr "效果量和標準誤"
 
+#, fuzzy
 msgctxt "PetPeese|"
 msgid "Correlations & N"
-msgstr ""
+msgstr "相關係數和樣本數"
 
 msgctxt "PetPeese|"
 msgid "Correlation"
@@ -1376,41 +1304,28 @@ msgctxt "PetPeese|"
 msgid "Effect Size Standard Error"
 msgstr ""
 
-msgctxt "PetPeese|"
-msgid "N"
-msgstr ""
-
+#, fuzzy
 msgctxt "PetPeese|"
 msgid "Fisher's z"
-msgstr ""
+msgstr "費雪z檢定"
 
 msgctxt "PetPeese|"
 msgid "Cohen's d"
 msgstr "Cohen's d 效果量"
 
+#, fuzzy
 msgctxt "PetPeese|"
 msgid "Inference"
-msgstr ""
-
-msgctxt "PetPeese|"
-msgid "Mean estimates"
-msgstr ""
-
-msgctxt "PetPeese|"
-msgid "PET-PEESE regression estimates"
-msgstr ""
+msgstr "推論"
 
 msgctxt "PetPeese|"
 msgid "Multiplicative heterogeneity estimates"
 msgstr ""
 
+#, fuzzy
 msgctxt "PetPeese|"
 msgid "Plots"
-msgstr ""
-
-msgctxt "PetPeese|"
-msgid "Meta-Regression Estimate"
-msgstr ""
+msgstr "圖"
 
 msgctxt "PetPeese|"
 msgid "PET"
@@ -1420,28 +1335,17 @@ msgctxt "PetPeese|"
 msgid "PEESE"
 msgstr ""
 
+#, fuzzy
 msgctxt "PetPeese|"
 msgid "Mean model estimates"
-msgstr ""
-
-msgctxt "PredictionPerformanceData|"
-msgid "Data"
-msgstr ""
+msgstr "平均模型估計"
 
 msgctxt "PredictionPerformanceData|"
 msgid "Measure"
 msgstr ""
 
 msgctxt "PredictionPerformanceData|"
-msgid "O:E ratio"
-msgstr ""
-
-msgctxt "PredictionPerformanceData|"
 msgid "C statistic"
-msgstr ""
-
-msgctxt "PredictionPerformanceData|"
-msgid "O:E Ratio"
 msgstr ""
 
 msgctxt "PredictionPerformanceData|"
@@ -1452,9 +1356,10 @@ msgctxt "PredictionPerformanceData|"
 msgid "Standard Error"
 msgstr ""
 
+#, fuzzy
 msgctxt "PredictionPerformanceData|"
 msgid "95% CI Lower and Upper Bound"
-msgstr ""
+msgstr "95% 信賴區間的下界與上界"
 
 msgctxt "PredictionPerformanceData|"
 msgid "Number of Participants"
@@ -1468,13 +1373,15 @@ msgctxt "PredictionPerformanceData|"
 msgid "Number of Expected Events"
 msgstr ""
 
+#, fuzzy
 msgctxt "PredictionPerformanceData|"
 msgid "Study Labels"
-msgstr ""
+msgstr "研究標籤"
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Inference"
-msgstr ""
+msgstr "推論"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Within-study variation"
@@ -1493,55 +1400,29 @@ msgid "Poisson/Log"
 msgstr ""
 
 msgctxt "PredictionPerformanceInference|"
-msgid "Normal/Logit"
-msgstr ""
-
-msgctxt "PredictionPerformanceInference|"
 msgid "Prior and posterior plot"
 msgstr ""
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Forest plot"
-msgstr ""
+msgstr "森林圖"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Labels"
 msgstr ""
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Estimates"
-msgstr ""
-
-msgctxt "PredictionPerformanceInference|"
-msgid "Export O:E ratios"
-msgstr ""
-
-msgctxt "PredictionPerformanceInference|"
-msgid "Export C-statistics"
-msgstr ""
-
-msgctxt "PredictionPerformanceInference|"
-msgid "Column name"
-msgstr ""
-
-msgctxt "PredictionPerformanceInference|"
-msgid "O:E ratios"
-msgstr ""
+msgstr "估計值"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Column name (lCI)"
 msgstr ""
 
 msgctxt "PredictionPerformanceInference|"
-msgid "O:E ratios (lCI)"
-msgstr ""
-
-msgctxt "PredictionPerformanceInference|"
 msgid "Column name (uCI)"
-msgstr ""
-
-msgctxt "PredictionPerformanceInference|"
-msgid "O:E ratios (uCI)"
 msgstr ""
 
 msgctxt "PredictionPerformanceInference|"
@@ -1584,21 +1465,15 @@ msgctxt "PredictionPerformanceInference|"
 msgid "Debray"
 msgstr ""
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Plot"
-msgstr ""
+msgstr "圖"
 
+#, fuzzy
 msgctxt "PredictionPerformancePriors|"
 msgid "Priors"
-msgstr ""
-
-msgctxt "PredictionPerformancePriors|"
-msgid "Summary estimate (O:E Ratio)"
-msgstr ""
-
-msgctxt "PredictionPerformancePriors|"
-msgid "Summary estimate (C statistic)"
-msgstr ""
+msgstr "先驗"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "Normal mean:"
@@ -1606,10 +1481,6 @@ msgstr ""
 
 msgctxt "PredictionPerformancePriors|"
 msgid "sd:"
-msgstr ""
-
-msgctxt "PredictionPerformancePriors|"
-msgid "Heterogeneity (Between study SD)"
 msgstr ""
 
 msgctxt "PredictionPerformancePriors|"
@@ -1624,44 +1495,42 @@ msgctxt "PredictionPerformancePriors|"
 msgid "max:"
 msgstr ""
 
-msgctxt "PredictionPerformancePriors|"
-msgid "Half t"
-msgstr ""
-
+#, fuzzy
 msgctxt "PredictionPerformancePriors|"
 msgid "location:"
-msgstr ""
+msgstr "地點:"
 
+#, fuzzy
 msgctxt "PredictionPerformancePriors|"
 msgid "scale:"
-msgstr ""
+msgstr "量表:"
 
+#, fuzzy
 msgctxt "PredictionPerformancePriors|"
 msgid "df:"
-msgstr ""
+msgstr "自由度:"
 
+#, fuzzy
 msgctxt "WaapWls|"
 msgid "Effect sizes & SE"
-msgstr ""
+msgstr "效果量和標準誤"
 
+#, fuzzy
 msgctxt "WaapWls|"
 msgid "Correlations & N"
-msgstr ""
+msgstr "相關係數和樣本數"
 
 msgctxt "WaapWls|"
 msgid "Correlation"
 msgstr "相關係數"
 
+#, fuzzy
 msgctxt "WaapWls|"
 msgid "Effect Size"
-msgstr ""
+msgstr "效果量"
 
 msgctxt "WaapWls|"
 msgid "Effect Size Standard Error"
-msgstr ""
-
-msgctxt "WaapWls|"
-msgid "N"
 msgstr ""
 
 msgctxt "WaapWls|"
@@ -1672,34 +1541,404 @@ msgctxt "WaapWls|"
 msgid "Cohen's d"
 msgstr "Cohen's d 效果量"
 
+#, fuzzy
 msgctxt "WaapWls|"
 msgid "Inference"
-msgstr ""
+msgstr "推論"
 
-msgctxt "WaapWls|"
-msgid "Mean estimates"
-msgstr ""
-
-msgctxt "WaapWls|"
-msgid "Multiplicative heterogeneity estimates"
-msgstr ""
-
+#, fuzzy
 msgctxt "WaapWls|"
 msgid "Plots"
-msgstr ""
+msgstr "圖"
 
+#, fuzzy
 msgctxt "WaapWls|"
 msgid "Mean model estimates"
-msgstr ""
+msgstr "平均模型估計"
 
+#, fuzzy
 msgctxt "PetPeese|"
 msgid "Transform correlations to"
-msgstr ""
+msgstr "將相關係數轉換成"
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Transform correlations to"
-msgstr ""
+msgstr "將相關係數轉換成"
 
 msgctxt "WaapWls|"
 msgid "Transform correlations to"
 msgstr "將相關係數轉換成"
+
+msgctxt "Description|"
+msgid "Penalized Meta-Analysis"
+msgstr ""
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Effect Size"
+msgstr "效果量"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Effect Size Standard Error"
+msgstr ""
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Method"
+msgstr "方法"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Horseshoe"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Lasso"
+msgstr ""
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Covariates"
+msgstr "共變數"
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Factors"
+msgstr "因素"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Clustering"
+msgstr ""
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Model"
+msgstr "模型"
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Components"
+msgstr "成份"
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Include intercept"
+msgstr "包含截距"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Scale predictors"
+msgstr ""
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Priors"
+msgstr "先驗"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Df"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Scale"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Df (global)"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Df (slab)"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Scale (global)"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Scale (slab)"
+msgstr ""
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Inference"
+msgstr "推論"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "I²"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Posterior plots"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Model terms"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Plotted term"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "MCMC diagnostics"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Horizontal axis"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Vertical axis"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Plot type"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Traceplot"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Scatterplot"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Histogram"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Density"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Autocorrelations"
+msgstr ""
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Advanced"
+msgstr "進階的"
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Estimation settings (MCMC)"
+msgstr "估計設定 (馬可夫鏈蒙特卡羅)"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Warmup"
+msgstr ""
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Iterations"
+msgstr "迭代"
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Chains"
+msgstr "鏈"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Adapt delta"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Maximum treedepth"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Measure"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysisAdvanced|"
+msgid "samples:"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Input type"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Expected direction of effect sizes"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "RoBMA-original"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Models (Custom Ensemble Only)"
+msgstr ""
+
+msgctxt "SelectionModels|"
+msgid "Measure"
+msgstr ""
+
+msgctxt "SelectionModels|"
+msgid "Expected direction of effect sizes"
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid "Measure"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Terms"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Estimates table"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Heterogeneity table"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Available terms"
+msgstr ""
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Selected terms"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Sample size"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Mean estimates table"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Regression estimates table"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Regression Estimate"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "O/E Ratio"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "O/E ratio"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Export computed effect size"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Column name (effect size)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "O/E ratios"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "O/E ratios (lCI)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "O/E ratios (uCI)"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "mu: summary estimate (O/E Ratio)"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "mu: summary estimate (C statistic)"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "tau: heterogeneity (Between study SD)"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "T"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Model ensemble type"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Prior distribution plots"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Conditional parameter estimates"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "BF comparison"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Marginal likelihood"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Posterior probability"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "logOR"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Alphabetical"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Prior distribution"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Overview table"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Posterior samples density"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "MCMC"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Samples"
+msgstr ""
+
+msgctxt "SelectionModels|"
+msgid "P-value frequency table"
+msgstr ""
+
+msgctxt "SelectionModels|"
+msgid "Mean estimates table"
+msgstr ""
+
+msgctxt "SelectionModels|"
+msgid "Estimated weights table"
+msgstr ""
+
+msgctxt "SelectionModels|"
+msgid "Estimated heterogeneity table"
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid "Sample size"
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid "Mean estimates table"
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid "Multiplicative heterogeneity estimates table"
+msgstr ""

@@ -30,9 +30,9 @@ ColumnLayout
 	{
 		text:					
 		{
-			if (componentType == "omega")
+			if (componentType == "modelsSelectionModels")
 				qsTr("Publication bias: selection models")
-			else if (componentType == "omegaNull")
+			else if (componentType == "modelsSelectionModelsNull")
 				qsTr("Publication bias: selection models (null)")
 		}
 		Layout.preferredHeight:	20 * preferencesModel.uiScale
@@ -53,16 +53,16 @@ ColumnLayout
 		optionKey:				"name"
 		defaultValues:
 		{
-			if (componentType == "omega")
+			if (componentType == "modelsSelectionModels")
 				[
-					{"type": "two-sided",	"parCuts": "(.05)",				"parAlpha": "(1,1)",	"priorWeights": "1/12"},
-					{"type": "two-sided",	"parCuts": "(.05, .10)",		"parAlpha": "(1,1,1)",	"priorWeights": "1/12"},
-					{"type": "one-sided",	"parCuts": "(.05)",				"parAlpha": "(1,1)",	"priorWeights": "1/12"},
-					{"type": "one-sided",	"parCuts": "(.025, .05)",		"parAlpha": "(1,1,1)",	"priorWeights": "1/12"},
-					{"type": "one-sided",	"parCuts": "(.05, .50)",		"parAlpha": "(1,1,1)",	"priorWeights": "1/12"},
-					{"type": "one-sided",	"parCuts": "(.025, .05, .10)",	"parAlpha": "(1,1,1,1)","priorWeights": "1/12"}
+					{"type": "twoSided",	"pValues": "(.05)",				"alpha": "(1,1)",	"priorWeight": "1/12"},
+					{"type": "twoSided",	"pValues": "(.05, .10)",		"alpha": "(1,1,1)",	"priorWeight": "1/12"},
+					{"type": "oneSided",	"pValues": "(.05)",				"alpha": "(1,1)",	"priorWeight": "1/12"},
+					{"type": "oneSided",	"pValues": "(.025, .05)",		"alpha": "(1,1,1)",	"priorWeight": "1/12"},
+					{"type": "oneSided",	"pValues": "(.05, .50)",		"alpha": "(1,1,1)",	"priorWeight": "1/12"},
+					{"type": "oneSided",	"pValues": "(.025, .05, .10)",	"alpha": "(1,1,1,1)","priorWeight": "1/12"}
 				]
-			else if (componentType == "omegaNull")
+			else if (componentType == "modelsSelectionModelsNull")
 				[{"type": "none"}]
 		}
 		rowComponent: 			RowLayout
@@ -79,27 +79,27 @@ ColumnLayout
 					useExternalBorder:	true
 					values:
 					[
-						{ label: qsTr("Two-sided"),			value: "two-sided"},
-						{ label: qsTr("One-sided"),			value: "one-sided"},
-						{ label: qsTr("Two-sided (fixed)"),	value: "two-sided-fixed"},
-						{ label: qsTr("One-sided (fixed)"),	value: "one-sided-fixed"},
+						{ label: qsTr("Two-sided"),			value: "twoSided"},
+						{ label: qsTr("One-sided"),			value: "oneSided"},
+						{ label: qsTr("Two-sided (fixed)"),	value: "twoSidedFixed"},
+						{ label: qsTr("One-sided (fixed)"),	value: "oneSidedFixed"},
 						{ label: qsTr("None"),				value: "none"}
 					]
 					onCurrentValueChanged: 
 					{
-						if (currentValue == "two-sided" || currentValue == "one-sided")
+						if (currentValue == "twoSided" || currentValue == "oneSided")
 						{
-							parCuts.value  = "(.05, .10)";
-							parAlpha.value = "(1,1,1)";
-							parCuts.editingFinished();
-							parAlpha.editingFinished();
+							pValues.value  = "(.05, .10)";
+							alpha.value = "(1,1,1)";
+							pValues.editingFinished();
+							alpha.editingFinished();
 						}
-						if (currentValue == "two-sided-fixed" || currentValue == "one-sided-fixed")
+						if (currentValue == "twoSidedFixed" || currentValue == "oneSidedFixed")
 						{
-							parCuts.value  = "(.05, .10)";
-							parOmega.value = "(1, 0.5, 0.1)";
-							parCuts.editingFinished();
-							parAlpha.editingFinished();
+							pValues.value  = "(.05, .10)";
+							omega.value = "(1, 0.5, 0.1)";
+							pValues.editingFinished();
+							alpha.editingFinished();
 						}
 					}
 				}
@@ -113,12 +113,12 @@ ColumnLayout
 				TextField
 				{
 					label:				qsTr("p-values")
-					id:					parCuts
-					name:				"parCuts"
-					visible:			typeItem.currentValue === "two-sided"		||
-										typeItem.currentValue === "one-sided"       ||
-										typeItem.currentValue === "two-sided-fixed" ||
-										typeItem.currentValue === "one-sided-fixed"
+					id:					pValues
+					name:				"pValues"
+					visible:			typeItem.currentValue === "twoSided"		||
+										typeItem.currentValue === "oneSided"		||
+										typeItem.currentValue === "twoSidedFixed"	||
+										typeItem.currentValue === "oneSidedFixed"
 					value:				"(.05, .10)"
 					fieldWidth: 		100 * preferencesModel.uiScale
 					useExternalBorder:	false
@@ -134,10 +134,10 @@ ColumnLayout
 				TextField
 				{
 					label:				"α"
-					id:					parAlpha
-					name:				"parAlpha"
-					visible:			typeItem.currentValue === "two-sided" ||
-										typeItem.currentValue === "one-sided"
+					id:					alpha
+					name:				"alpha"
+					visible:			typeItem.currentValue === "twoSided" ||
+										typeItem.currentValue === "oneSided"
 					value:				"(1,1,1)"
 					fieldWidth: 		120 * preferencesModel.uiScale
 					useExternalBorder:	false
@@ -146,10 +146,10 @@ ColumnLayout
 				TextField
 				{
 					label:				"ω"
-					id:					parOmega
-					name:				"parOmega"
-					visible:			typeItem.currentValue === "two-sided-fixed" ||
-										typeItem.currentValue === "one-sided-fixed"
+					id:					omega
+					name:				"omega"
+					visible:			typeItem.currentValue === "twoSidedFixed" ||
+										typeItem.currentValue === "oneSidedFixed"
 					value:				"(1, 0.5, 0.1)"
 					fieldWidth: 		70 * preferencesModel.uiScale
 					useExternalBorder:	false

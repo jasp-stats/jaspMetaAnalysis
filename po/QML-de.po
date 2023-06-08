@@ -166,7 +166,7 @@ msgstr "Geschätzte Randmittelwerte"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Plots"
-msgstr "Abbildungen"
+msgstr "Diagramme"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Funnel plot"
@@ -214,7 +214,7 @@ msgstr "Diagnostische Tabelle"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Diagnostic plots"
-msgstr "Diagnostische Abbildungen"
+msgstr "Diagnostische Diagramme"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Residual vs Dependent"
@@ -289,16 +289,8 @@ msgid "Inference"
 msgstr "Inferenz"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Conditional estimates"
-msgstr "Konditionale Schätzungen"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Models overview"
 msgstr "Modellübersicht"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "BF"
-msgstr "BF"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Inclusion"
@@ -326,7 +318,7 @@ msgstr "GI-Breite"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Plots"
-msgstr "Abbildungen"
+msgstr "Diagramme"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Pooled estimates"
@@ -349,10 +341,6 @@ msgid "Descending"
 msgstr "Absteigend"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Row order"
-msgstr "Zeilenreihenfolge"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Weights"
 msgstr "Gewichte"
 
@@ -373,10 +361,6 @@ msgid "Conditional"
 msgstr "Konditional"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Show priors"
-msgstr "Prior anzeigen"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Model number"
 msgstr "Modellnummer"
 
@@ -385,12 +369,8 @@ msgid "MCMC Diagnostics"
 msgstr "MCMC-Diagnostiken"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Overview"
-msgstr "Übersicht"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Plot"
-msgstr "Abbildung"
+msgstr "Diagramm"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Trace"
@@ -399,10 +379,6 @@ msgstr "Spur"
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Autocorrelation"
 msgstr "Autokorrelation"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Posterior samples densities"
-msgstr "Posterior-Stichprobendichten"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Advanced"
@@ -417,20 +393,12 @@ msgid "Fisher's z"
 msgstr "Fishers z"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Estimation settings (MCMC)"
-msgstr "Schätzungseinstellungen (MCMC)"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Adaptation"
 msgstr "Anpassung"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Burnin"
 msgstr "Aufwärmphase"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Iterations"
-msgstr "Iterationen"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Chains"
@@ -505,10 +473,6 @@ msgid "Two-sided selection"
 msgstr "Zweiseitige Auswahl"
 
 msgctxt "SelectionModels|"
-msgid "P-value frequency"
-msgstr "p-Wert Häufigkeit"
-
-msgctxt "SelectionModels|"
 msgid "Automatically join p-value intervals"
 msgstr "P-Wert-Intervalle automatisch verbinden"
 
@@ -537,24 +501,12 @@ msgid "Fixed Effects"
 msgstr "Feste Effekte"
 
 msgctxt "SelectionModels|"
-msgid "Mean estimates"
-msgstr "Mittlere Schätzungen"
-
-msgctxt "SelectionModels|"
-msgid "Estimated weights"
-msgstr "Geschätzte Gewichte"
-
-msgctxt "SelectionModels|"
 msgid "Random Effects"
 msgstr "Zufällige Effekte"
 
 msgctxt "SelectionModels|"
-msgid "Estimated heterogeneity"
-msgstr "Geschätzte Heterogenität"
-
-msgctxt "SelectionModels|"
 msgid "Plots"
-msgstr "Abbildungen"
+msgstr "Diagramme"
 
 msgctxt "SelectionModels|"
 msgid "Weight Function"
@@ -810,7 +762,7 @@ msgstr "Obergrenze:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Inverse gamma"
-msgstr "Inverse Gammaverteilung"
+msgstr "Inverse Gamma"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "shape:"
@@ -818,7 +770,7 @@ msgstr "Form:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Half t"
-msgstr "Halbe t-Verteilung"
+msgstr "Halbe t"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Plot prior(s)"
@@ -1238,7 +1190,7 @@ msgstr "R-Dach"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effective sample size"
-msgstr "Effektive Stichprobengröße"
+msgstr "Effektiver Stichprobenumfang"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "MCMC error"
@@ -1270,11 +1222,11 @@ msgstr "Bayesianisch"
 
 msgctxt "Description|"
 msgid "Prediction Model Performance"
-msgstr ""
+msgstr "Leistung des Vorhersagemodells"
 
 msgctxt "Description|"
 msgid "Classical Prediction Model Performance"
-msgstr ""
+msgstr "Leistung klassischer Vorhersagemodelle"
 
 msgctxt "Description|"
 msgid "WAAP-WLS"
@@ -1286,7 +1238,7 @@ msgstr "PET-PEESE"
 
 msgctxt "Description|"
 msgid "Bayesian Prediction Model Performance"
-msgstr ""
+msgstr "Leistung des Bayes'schen Vorhersagemodells"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "MCMC Diagnostics"
@@ -1294,7 +1246,7 @@ msgstr "MCMC-Diagnostiken"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Plots"
-msgstr "Abbildungen"
+msgstr "Diagramme"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Running means"
@@ -1349,10 +1301,6 @@ msgid "Effect Size Standard Error"
 msgstr "Effektstärke Standardfehler"
 
 msgctxt "PetPeese|"
-msgid "N"
-msgstr "N"
-
-msgctxt "PetPeese|"
 msgid "Fisher's z"
 msgstr "Fishers z"
 
@@ -1365,24 +1313,12 @@ msgid "Inference"
 msgstr "Inferenz"
 
 msgctxt "PetPeese|"
-msgid "Mean estimates"
-msgstr "Mittlere Schätzungen"
-
-msgctxt "PetPeese|"
-msgid "PET-PEESE regression estimates"
-msgstr "Schätzungen PET-PEESE-Regression"
-
-msgctxt "PetPeese|"
 msgid "Multiplicative heterogeneity estimates"
 msgstr "Schätzungen Multiplikativer Heterogenität"
 
 msgctxt "PetPeese|"
 msgid "Plots"
-msgstr "Abbildungen"
-
-msgctxt "PetPeese|"
-msgid "Meta-Regression Estimate"
-msgstr "Schätzungen Meta-Regression"
+msgstr "Diagramme"
 
 msgctxt "PetPeese|"
 msgid "PET"
@@ -1397,24 +1333,12 @@ msgid "Mean model estimates"
 msgstr "Mittlere Modellschätzungen"
 
 msgctxt "PredictionPerformanceData|"
-msgid "Data"
-msgstr "Daten"
-
-msgctxt "PredictionPerformanceData|"
 msgid "Measure"
 msgstr "Maß"
 
 msgctxt "PredictionPerformanceData|"
-msgid "O:E ratio"
-msgstr "B:E-Verhältnis"
-
-msgctxt "PredictionPerformanceData|"
 msgid "C statistic"
 msgstr "K-Statistik"
-
-msgctxt "PredictionPerformanceData|"
-msgid "O:E Ratio"
-msgstr "B:E-Verhältnis"
 
 msgctxt "PredictionPerformanceData|"
 msgid "C-statistic"
@@ -1465,10 +1389,6 @@ msgid "Poisson/Log"
 msgstr "Poisson/Log"
 
 msgctxt "PredictionPerformanceInference|"
-msgid "Normal/Logit"
-msgstr "Normal/Logit"
-
-msgctxt "PredictionPerformanceInference|"
 msgid "Prior and posterior plot"
 msgstr "Diagramm Prior und Posterior"
 
@@ -1485,36 +1405,12 @@ msgid "Estimates"
 msgstr "Schätzungen"
 
 msgctxt "PredictionPerformanceInference|"
-msgid "Export O:E ratios"
-msgstr "B:E-Verhältnisse exportieren"
-
-msgctxt "PredictionPerformanceInference|"
-msgid "Export C-statistics"
-msgstr "K-Statistiken exportieren"
-
-msgctxt "PredictionPerformanceInference|"
-msgid "Column name"
-msgstr "Spaltenname"
-
-msgctxt "PredictionPerformanceInference|"
-msgid "O:E ratios"
-msgstr "B:E-Verhältnisse"
-
-msgctxt "PredictionPerformanceInference|"
 msgid "Column name (lCI)"
 msgstr "Spaltenname (lCI)"
 
 msgctxt "PredictionPerformanceInference|"
-msgid "O:E ratios (lCI)"
-msgstr "B:E-Verhältnisse (lCI)"
-
-msgctxt "PredictionPerformanceInference|"
 msgid "Column name (uCI)"
 msgstr "Spaltenname (uCI)"
-
-msgctxt "PredictionPerformanceInference|"
-msgid "O:E ratios (uCI)"
-msgstr "B:E-Verhältnisse (uCI)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "C-statistics"
@@ -1558,19 +1454,11 @@ msgstr "Debray"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Plot"
-msgstr "Abbildung"
+msgstr "Diagramm"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "Priors"
 msgstr "Prior"
-
-msgctxt "PredictionPerformancePriors|"
-msgid "Summary estimate (O:E Ratio)"
-msgstr "Schätzungszusammenfassung (B:E-Verhältnis)"
-
-msgctxt "PredictionPerformancePriors|"
-msgid "Summary estimate (C statistic)"
-msgstr "Schätzungszusammenfassung (K-Statistik)"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "Normal mean:"
@@ -1579,10 +1467,6 @@ msgstr "Normaler Mittelwert:"
 msgctxt "PredictionPerformancePriors|"
 msgid "sd:"
 msgstr "SD:"
-
-msgctxt "PredictionPerformancePriors|"
-msgid "Heterogeneity (Between study SD)"
-msgstr "Heterogenität (SD zwischen Studien)"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "Uniform"
@@ -1595,10 +1479,6 @@ msgstr "Min:"
 msgctxt "PredictionPerformancePriors|"
 msgid "max:"
 msgstr "Max:"
-
-msgctxt "PredictionPerformancePriors|"
-msgid "Half t"
-msgstr "Halbe t"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "location:"
@@ -1633,10 +1513,6 @@ msgid "Effect Size Standard Error"
 msgstr "Effektstärke Standardfehler"
 
 msgctxt "WaapWls|"
-msgid "N"
-msgstr "N"
-
-msgctxt "WaapWls|"
 msgid "Fisher's z"
 msgstr "Fishers z"
 
@@ -1649,16 +1525,8 @@ msgid "Inference"
 msgstr "Inferenz"
 
 msgctxt "WaapWls|"
-msgid "Mean estimates"
-msgstr "Mittlere Schätzungen"
-
-msgctxt "WaapWls|"
-msgid "Multiplicative heterogeneity estimates"
-msgstr "Schätzungen Multiplikativer Heterogenität"
-
-msgctxt "WaapWls|"
 msgid "Plots"
-msgstr "Abbildungen"
+msgstr "Diagramme"
 
 msgctxt "WaapWls|"
 msgid "Mean model estimates"
@@ -1685,16 +1553,8 @@ msgid "Expected direction of effect sizes"
 msgstr "Erwartete Richtung der Effektstärken"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Model ensemble"
-msgstr "Modell-Ensemble"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "RoBMA-original"
 msgstr "RoBMA-original"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Plot prior distributions"
-msgstr "Prior-Verteilungen plotten"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Models (Custom Ensemble Only)"
@@ -1703,3 +1563,353 @@ msgstr "Modelle (nur benutzerdefiniertes Ensemble)"
 msgctxt "SelectionModels|"
 msgid "Expected direction of effect sizes"
 msgstr "Erwartete Richtung der Effektstärken"
+
+msgctxt "PetPeese|"
+msgid "Measure"
+msgstr "Maß"
+
+msgctxt "SelectionModels|"
+msgid "Measure"
+msgstr "Maß"
+
+msgctxt "WaapWls|"
+msgid "Measure"
+msgstr "Maß"
+
+msgctxt "Description|"
+msgid "Penalized Meta-Analysis"
+msgstr "Bestrafende Meta-Analyse"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Effect Size"
+msgstr "Effektstärke"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Effect Size Standard Error"
+msgstr "Effektstärke Standardfehler"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Method"
+msgstr "Methode"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Horseshoe"
+msgstr "Hufeisen"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Lasso"
+msgstr "Lasso"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Covariates"
+msgstr "Kovariaten"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Factors"
+msgstr "Faktoren"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Clustering"
+msgstr "Clustering"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Model"
+msgstr "Modell"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Components"
+msgstr "Komponenten"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Include intercept"
+msgstr "Konstante einbeziehen"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Scale predictors"
+msgstr "Prädiktoren skalieren"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Priors"
+msgstr "Prior"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Df"
+msgstr "Df"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Scale"
+msgstr "Skalenparameter"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Df (global)"
+msgstr "Df (global)"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Df (slab)"
+msgstr "Df (Plateau)"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Scale (global)"
+msgstr "Skalenparameter (global)"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Scale (slab)"
+msgstr "Skalenparameter (Plateau)"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Inference"
+msgstr "Inferenz"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "I²"
+msgstr "I²"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Posterior plots"
+msgstr "Posterior-Diagramme"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Model terms"
+msgstr "Modellterme"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Plotted term"
+msgstr "Abgebildeter Term"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "MCMC diagnostics"
+msgstr "MCMC-Diagnostik"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Horizontal axis"
+msgstr "Horizontale Achse"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Vertical axis"
+msgstr "Vertikale Achse"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Plot type"
+msgstr "Diagrammtyp"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Traceplot"
+msgstr "Verlaufsdiagramm"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Scatterplot"
+msgstr "Streudiagramm"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Histogram"
+msgstr "Histogramm"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Density"
+msgstr "Dichte"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Autocorrelations"
+msgstr "Autokorrelationen"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Advanced"
+msgstr "Erweitert"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Estimation settings (MCMC)"
+msgstr "Schätzeinstellungen (MCMC)"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Warmup"
+msgstr "Aufwärmphase"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Iterations"
+msgstr "Iterationen"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Chains"
+msgstr "Ketten"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Adapt delta"
+msgstr "Delta anpassen"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Maximum treedepth"
+msgstr "Maximale Baumtiefe"
+
+msgctxt "BayesianMetaAnalysisAdvanced|"
+msgid "samples:"
+msgstr "Stichproben:"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Terms"
+msgstr "Terme"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Estimates table"
+msgstr "Schätzungen-Tabelle"
+
+#, fuzzy
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Heterogeneity table"
+msgstr "Heterogenitäten-Tabelle"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Available terms"
+msgstr "Verfügbare Terme"
+
+msgctxt "PenalizedMetaAnalysis|"
+msgid "Selected terms"
+msgstr "Ausgewählte Terme"
+
+msgctxt "PetPeese|"
+msgid "Sample size"
+msgstr "Stichprobenumfang"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Mean estimates table"
+msgstr "Tabelle mittlerer Schätzungen"
+
+msgctxt "PetPeese|"
+msgid "Regression estimates table"
+msgstr "Tabelle Regressionsschätzungen"
+
+msgctxt "PetPeese|"
+msgid "Regression Estimate"
+msgstr "Regressionsschätzung"
+
+msgctxt "PredictionPerformanceData|"
+msgid "O/E Ratio"
+msgstr ""
+
+msgctxt "PredictionPerformanceData|"
+msgid "O/E ratio"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Export computed effect size"
+msgstr "Berechnete Effektstärke exportieren"
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Column name (effect size)"
+msgstr "Spaltenname (Effektstärke)"
+
+msgctxt "PredictionPerformanceInference|"
+msgid "O/E ratios"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "O/E ratios (lCI)"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "O/E ratios (uCI)"
+msgstr ""
+
+msgctxt "PredictionPerformancePriors|"
+msgid "mu: summary estimate (O/E Ratio)"
+msgstr ""
+
+#, fuzzy
+msgctxt "PredictionPerformancePriors|"
+msgid "mu: summary estimate (C statistic)"
+msgstr "mu: zusammenfassende Schätzung (C-Statistik)"
+
+msgctxt "PredictionPerformancePriors|"
+msgid "tau: heterogeneity (Between study SD)"
+msgstr "tau: Heterogenität (SD zwischen Studien)"
+
+msgctxt "PredictionPerformancePriors|"
+msgid "T"
+msgstr "T"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Model ensemble type"
+msgstr "Modell-Ensemble-Typ"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Prior distribution plots"
+msgstr "Prior-Verteilungsdiagramme"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Conditional parameter estimates"
+msgstr "Bedingte Parameterschätzungen"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "BF comparison"
+msgstr "BF-Vergleich"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Marginal likelihood"
+msgstr "Marginale Likelihood"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Posterior probability"
+msgstr "Posterior-Wahrscheinlichkeit"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "logOR"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Alphabetical"
+msgstr "Alphabetisch"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Prior distribution"
+msgstr "Prior-Verteilung"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Overview table"
+msgstr "Übersichtstabelle"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Posterior samples density"
+msgstr "Dichte Posterior-Stichprobe"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "MCMC"
+msgstr "MCMC"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Samples"
+msgstr "Stichproben"
+
+#, fuzzy
+msgctxt "SelectionModels|"
+msgid "P-value frequency table"
+msgstr "P-Wert Häufigkeitstabelle"
+
+msgctxt "SelectionModels|"
+msgid "Mean estimates table"
+msgstr "Tabelle mittlerer Schätzungen"
+
+#, fuzzy
+msgctxt "SelectionModels|"
+msgid "Estimated weights table"
+msgstr "Tabelle geschätzter Gewichte"
+
+msgctxt "SelectionModels|"
+msgid "Estimated heterogeneity table"
+msgstr "Tabelle geschätzter Heterogenität"
+
+msgctxt "WaapWls|"
+msgid "Sample size"
+msgstr "Stichprobenumfang"
+
+msgctxt "WaapWls|"
+msgid "Mean estimates table"
+msgstr "Tabelle mittlerer Schätzungen"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Multiplicative heterogeneity estimates table"
+msgstr "Tabelle multiplikativer Heterogenitätsschätzungen"

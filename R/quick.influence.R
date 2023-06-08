@@ -37,7 +37,7 @@ quick.influence <- function(x, ...) {
   mahdist = mahalanobis.significance(x)
   p.mahdist = attr(mahdist, 'p.value')
   structure(
-    data.frame(#` ` = "|", 
+    data.frame(#` ` = "|",
       studentized = rstud, stud.pval = p.rstud, #` ` = marks[findInterval(p.rstud, cutof)],
       hatvalues = hat, hat.pval=p.hat, #` `= marks[findInterval(p.hat, cutof)],
       mahalanobis = mahdist, manh.pval = p.mahdist, #` ` = marks[findInterval(p.mahdist, cutof)],
@@ -48,12 +48,12 @@ quick.influence <- function(x, ...) {
 print.quick.influence <- function(x, ...) {
   marks = c('***  \u23B9 ','**  \u23B9 ','*  \u23B9 ','.  \u23B9 ','  \u23B9 ')
   cutof = c(0,.001,.01,.05,.1,1)
-  M = with(x, data.frame(` ` = "\u23B8", 
-            studentized = studentized, `p-value` = stud.pval, ` ` = marks[findInterval(stud.pval, cutof)],
-            hatvalues = hatvalues, `p-value` = hat.pval, ` ` = marks[findInterval(hat.pval, cutof)],
-            mahalanobis = mahalanobis, `p-value` = manh.pval, ` ` = marks[findInterval(manh.pval, cutof)],
-            check.names = FALSE)
-           )
+  M = with(x, data.frame(` ` = "\u23B8",
+                         studentized = studentized, `p-value` = stud.pval, ` ` = marks[findInterval(stud.pval, cutof)],
+                         hatvalues = hatvalues, `p-value` = hat.pval, ` ` = marks[findInterval(hat.pval, cutof)],
+                         mahalanobis = mahalanobis, `p-value` = manh.pval, ` ` = marks[findInterval(manh.pval, cutof)],
+                         check.names = FALSE)
+  )
   rownames(M) = rownames(x)
   print(M, ...)
 }

@@ -33,16 +33,16 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
   if (options[["priorAndPosteriorPlot"]])
     .metamiscPriorAndPosteriorPlot(jaspResults, options, dataset, ready)
 
-  if (ready && options[["exportColumns"]])
+  if (ready && options[["exportComputedEffectSize"]])
     .metamiscAddColumn(jaspResults, options, dataset)
 
   if (ready)
     .metamiscFitFunnelAsymmetryTest(jaspResults, options, dataset)
 
-  if (options[["funnelAsymmetryTest"]])
+  if (options[["funnelPlotAsymmetryTest"]])
     .metamiscFitFunnelAsymmetryTable(jaspResults, options)
 
-  if (options[["funnelAsymmetryTest"]] && options[["funnelAsymmetryTestPlot"]])
+  if (options[["funnelPlotAsymmetryTest"]] && options[["funnelPlotAsymmetryTestPlot"]])
     .metamiscFitFunnelAsymmetryPlot(jaspResults, options)
 
   if (options[["diagnosticsRmPlot"]])
@@ -69,42 +69,42 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
 
 
   pars <- list(
-    model.oe    = if (options[["measure"]] == "OE")    options[["linkOE"]],
-    model.cstat = if (options[["measure"]] == "cstat") options[["linkCstat"]]
+    model.oe    = if (options[["measure"]] == "oeRatio")    options[["withinStudyVariation"]],
+    model.cstat = if (options[["measure"]] == "cStatistic") options[["withinStudyVariation"]]
   )
 
-  pars$hp.mu.mean <- options[["priorMuNMeam"]]
-  pars$hp.mu.var  <- options[["priorMuNSD"]]^2
+  pars$hp.mu.mean <- options[["muNormalPriorMean"]]
+  pars$hp.mu.var  <- options[["muNormalPriorSd"]]^2
 
-  if (options[["priorTau"]] == "priorTauU") {
-    pars$hp.tau.min <- options[["priorTauUMin"]]
-    pars$hp.tau.max <- options[["priorTauUMax"]]
+  if (options[["tauPrior"]] == "uniformPrior") {
+    pars$hp.tau.min <- options[["tauUniformPriorMin"]]
+    pars$hp.tau.max <- options[["tauUniformPriorMax"]]
     pars$hp.tau.dist="dunif"
-  } else if (options[["priorTau"]] == "priorTauT") {
+  } else if (options[["tauPrior"]] == "tPrior") {
     pars$hp.tau.dist  <- "dhalft"
-    pars$hp.tau.mean  <- options[["priorTauTLocation"]]
-    pars$hp.tau.sigma <- options[["priorTauTScale"]]
-    pars$hp.tau.df    <- options[["priorTauTDf"]]
-    pars$hp.tau.min   <- options[["priorTauTMin"]]
-    pars$hp.tau.max   <- options[["priorTauTMax"]]
+    pars$hp.tau.mean  <- options[["tauTPriorLocation"]]
+    pars$hp.tau.sigma <- options[["tauTPriorScale"]]
+    pars$hp.tau.df    <- options[["tauTPriorDf"]]
+    pars$hp.tau.min   <- options[["tauTPriorMin"]]
+    pars$hp.tau.max   <- options[["tauTPriorMax"]]
   }
 
   dataset <- .metamiscOmitNAs(dataset, options)
 
   fit <- tryCatch(metamisc::valmeta(
-    measure    = options[["measure"]],
-    cstat      = if (options[["measure"]] == "cstat" && options[["inputMeasure"]] != "")              dataset[, options[["inputMeasure"]]],
-    cstat.se   = if (options[["measure"]] == "cstat" && options[["inputSE"]] != "")                   dataset[, options[["inputSE"]]],
-    cstat.cilb = if (options[["measure"]] == "cstat" && sum(unlist(options[["inputCI"]]) != "") == 2) dataset[, options[["inputCI"]][[1]][1]],
-    cstat.ciub = if (options[["measure"]] == "cstat" && sum(unlist(options[["inputCI"]]) != "") == 2) dataset[, options[["inputCI"]][[1]][2]],
-    OE         = if (options[["measure"]] == "OE" && options[["inputMeasure"]] != "")                 dataset[, options[["inputMeasure"]]],
-    OE.se      = if (options[["measure"]] == "OE" && options[["inputSE"]] != "")                      dataset[, options[["inputSE"]]],
-    OE.cilb    = if (options[["measure"]] == "OE" && sum(unlist(options[["inputCI"]]) != "") == 2)    dataset[, options[["inputCI"]][[1]][1]],
-    OE.ciub    = if (options[["measure"]] == "OE" && sum(unlist(options[["inputCI"]]) != "") == 2)    dataset[, options[["inputCI"]][[1]][2]],
-    N          = if (options[["inputN"]] != "")      dataset[, options[["inputN"]]],
-    O          = if (options[["inputO"]] != "")      dataset[, options[["inputO"]]],
-    E          = if (options[["inputE"]] != "")      dataset[, options[["inputE"]]],
-    slab       = if (options[["inputLabels"]] != "") dataset[, options[["inputLabels"]]],
+    measure    = .metamiscGetMeasureOption(options),
+    cstat      = if (options[["measure"]] == "cStatistic" && options[["effectSize"]] != "")              dataset[, options[["effectSize"]]],
+    cstat.se   = if (options[["measure"]] == "cStatistic" && options[["effectSizeSe"]] != "")                   dataset[, options[["effectSizeSe"]]],
+    cstat.cilb = if (options[["measure"]] == "cStatistic" && sum(unlist(options[["effectSizeCi"]]) != "") == 2) dataset[, options[["effectSizeCi"]][[1]][1]],
+    cstat.ciub = if (options[["measure"]] == "cStatistic" && sum(unlist(options[["effectSizeCi"]]) != "") == 2) dataset[, options[["effectSizeCi"]][[1]][2]],
+    OE         = if (options[["measure"]] == "oeRatio" && options[["effectSize"]] != "")                 dataset[, options[["effectSize"]]],
+    OE.se      = if (options[["measure"]] == "oeRatio" && options[["effectSizeSe"]] != "")                      dataset[, options[["effectSizeSe"]]],
+    OE.cilb    = if (options[["measure"]] == "oeRatio" && sum(unlist(options[["effectSizeCi"]]) != "") == 2)    dataset[, options[["effectSizeCi"]][[1]][1]],
+    OE.ciub    = if (options[["measure"]] == "oeRatio" && sum(unlist(options[["effectSizeCi"]]) != "") == 2)    dataset[, options[["effectSizeCi"]][[1]][2]],
+    N          = if (options[["numberOfParticipants"]] != "")      dataset[, options[["numberOfParticipants"]]],
+    O          = if (options[["numberOfObservedEvents"]] != "")      dataset[, options[["numberOfObservedEvents"]]],
+    E          = if (options[["numberOfExpectedEvents"]] != "")      dataset[, options[["numberOfExpectedEvents"]]],
+    slab       = if (options[["studyLabel"]] != "") dataset[, options[["studyLabel"]]],
     method     = "BAYES",
     pars       = pars,
     adapt      = options[["adapt"]],
@@ -243,17 +243,17 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
 
   computable <- rep(FALSE, nrow(dataset))
 
-  if (options[["inputMeasure"]] != "" && options[["inputSE"]] != "")
-    computable <- computable | (!is.na(dataset[, options[["inputMeasure"]]]) & !is.na(dataset[, options[["inputSE"]]]))
+  if (options[["effectSize"]] != "" && options[["effectSizeSe"]] != "")
+    computable <- computable | (!is.na(dataset[, options[["effectSize"]]]) & !is.na(dataset[, options[["effectSizeSe"]]]))
 
-  if (options[["inputMeasure"]] != "" && sum(unlist(options[["inputCI"]]) != "") == 2)
-    computable <- computable | (!is.na(dataset[,options[["inputMeasure"]]]) & !is.na(dataset[, options[["inputCI"]][[1]][1]]) & !is.na(dataset[, options[["inputCI"]][[1]][2]]))
+  if (options[["effectSize"]] != "" && sum(unlist(options[["effectSizeCi"]]) != "") == 2)
+    computable <- computable | (!is.na(dataset[,options[["effectSize"]]]) & !is.na(dataset[, options[["effectSizeCi"]][[1]][1]]) & !is.na(dataset[, options[["effectSizeCi"]][[1]][2]]))
 
-  if (options[["measure"]] == "cstat" && options[["inputMeasure"]] != "" && options[["inputN"]] != "" && options[["inputO"]] != "")
-    computable <- computable | (!is.na(dataset[, options[["inputMeasure"]]]) & !is.na(dataset[, options[["inputN"]]]) & !is.na(dataset[, options[["inputO"]]]))
+  if (options[["measure"]] == "cStatistic" && options[["effectSize"]] != "" && options[["numberOfParticipants"]] != "" && options[["numberOfObservedEvents"]] != "")
+    computable <- computable | (!is.na(dataset[, options[["effectSize"]]]) & !is.na(dataset[, options[["numberOfParticipants"]]]) & !is.na(dataset[, options[["numberOfObservedEvents"]]]))
 
-  if (options[["measure"]] == "OE" && options[["inputE"]] != "" && options[["inputO"]] != "")
-    computable <- computable | (!is.na(dataset[, options[["inputE"]]]) & !is.na(dataset[, options[["inputO"]]]))
+  if (options[["measure"]] == "oeRatio" && options[["numberOfExpectedEvents"]] != "" && options[["numberOfObservedEvents"]] != "")
+    computable <- computable | (!is.na(dataset[, options[["numberOfExpectedEvents"]]]) & !is.na(dataset[, options[["numberOfObservedEvents"]]]))
 
   dataset <- dataset[computable, ]
 

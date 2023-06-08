@@ -30,48 +30,48 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   if (options[["forestPlot"]])
     .metamiscForestPlot(jaspResults, options, dataset, ready)
 
-  if (ready && options[["exportColumns"]])
+  if (ready && options[["exportComputedEffectSize"]])
     .metamiscAddColumn(jaspResults, options, dataset)
 
-  if (ready && options[["funnelAsymmetryTest"]])
+  if (ready && options[["funnelPlotAsymmetryTest"]])
     .metamiscFitFunnelAsymmetryTest(jaspResults, options, dataset)
 
-  if (options[["funnelAsymmetryTest"]])
+  if (options[["funnelPlotAsymmetryTest"]])
     .metamiscFitFunnelAsymmetryTable(jaspResults, options)
 
-  if (options[["funnelAsymmetryTest"]] && options[["funnelAsymmetryTestPlot"]])
+  if (options[["funnelPlotAsymmetryTest"]] && options[["funnelPlotAsymmetryTestPlot"]])
     .metamiscFitFunnelAsymmetryPlot(jaspResults, options)
 
   return()
 }
 
-.metamiscDependencies        <- c("measure", "inputMeasure", "inputSE", "inputCI", "inputN", "inputO", "inputE", "inputLabels",
-                                  "method", "linkOE", "linkCstat")
+.metamiscDependencies        <- c("measure", "effectSize", "effectSizeSe", "effectSizeCi", "numberOfParticipants", "numberOfObservedEvents", "numberOfExpectedEvents", "studyLabel",
+                                  "method", "withinStudyVariation")
 .metamiscDependenciesBayesian<- c("adapt", "burnin", "sample", "chains",
-                                  "priorMuNMeam","priorMuNSD",
-                                  "priorTau",
-                                  "priorTauU", "priorTauUMin", "priorTauUMax",
-                                  "priorTauT", "priorTauTLocation", "priorTauTScale", "priorTauTDf", "priorTauTMin", "priorTauTMax")
+                                  "muNormalPriorMean","muNormalPriorSd",
+                                  "tauPrior",
+                                  "uniformPrior", "tauUniformPriorMin", "tauUniformPriorMax",
+                                  "tPrior", "tauTPriorLocation", "tauTPriorScale", "tauTPriorDf", "tauTPriorMin", "tauTPriorMax")
 .metamiscFunnelTests         <- c(
-  "funnelAsymmetryTest",
-  "funnelAsymmetryTestEggerUW",
-  "funnelAsymmetryTestEggerFIV",
-  "funnelAsymmetryTestMacaskillFIV",
-  "funnelAsymmetryTestMacaskillFPV",
-  "funnelAsymmetryTestPeters",
-  "funnelAsymmetryTestDebrayFIV")
+  "funnelPlotAsymmetryTest",
+  "funnelPlotAsymmetryTestEggerUnweighted",
+  "funnelPlotAsymmetryTestEggerMultiplicativeOverdispersion",
+  "funnelPlotAsymmetryTestMacaskill",
+  "funnelPlotAsymmetryTestMacaskillPooled",
+  "funnelPlotAsymmetryTestPeters",
+  "funnelPlotAsymmetryTestDebray")
 .metamiscReady               <- function(options) {
 
-  if (options[["inputMeasure"]] != "" && options[["inputSE"]] != "")
+  if (options[["effectSize"]] != "" && options[["effectSizeSe"]] != "")
     return(TRUE)
 
-  if (options[["inputMeasure"]] != "" && sum(unlist(options[["inputCI"]]) != "") == 2)
+  if (options[["effectSize"]] != "" && sum(unlist(options[["effectSizeCi"]]) != "") == 2)
     return(TRUE)
 
-  if (options[["measure"]] == "cstat" && options[["inputMeasure"]] != "" && options[["inputN"]] != "" && options[["inputO"]] != "")
+  if (options[["measure"]] == "cStatistic" && options[["effectSize"]] != "" && options[["numberOfParticipants"]] != "" && options[["numberOfObservedEvents"]] != "")
     return(TRUE)
 
-  if (options[["measure"]] == "OE" && options[["inputE"]] != "" && options[["inputO"]] != "")
+  if (options[["measure"]] == "oeRatio" && options[["numberOfExpectedEvents"]] != "" && options[["numberOfObservedEvents"]] != "")
     return(TRUE)
 
   return(FALSE)
@@ -82,25 +82,30 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
     return(dataset)
 
 
-  varNames <- c(options[["inputMeasure"]], options[["inputSE"]], unlist(options[["inputCI"]]),
-                options[["inputN"]], options[["inputO"]], options[["inputE"]])
+  varNames <- c(options[["effectSize"]], options[["effectSizeSe"]], unlist(options[["effectSizeCi"]]),
+                options[["numberOfParticipants"]], options[["numberOfObservedEvents"]], options[["numberOfExpectedEvents"]])
   varNames <- varNames[varNames != ""]
 
   dataset <- readDataSetToEnd(
     columns.as.numeric = varNames,
-    columns            = if (options[["inputLabels"]] != "") options[["inputLabels"]]
+    columns            = if (options[["studyLabel"]] != "") options[["studyLabel"]]
   )
 
-  if (options[["inputLabels"]] != "") {
-    dataset[[options[["inputLabels"]]]] <- as.character(dataset[[options[["inputLabels"]]]])
-    if (!validUTF8(dataset[[options[["inputLabels"]]]]))
+  if (options[["studyLabel"]] != "") {
+    dataset[[options[["studyLabel"]]]] <- as.character(dataset[[options[["studyLabel"]]]])
+    if (any(!validUTF8(dataset[[options[["studyLabel"]]]])))
       .quitAnalysis(gettext("The study labels contain invalid characters. Please, remove them before running the analysis."))
   }
 
-  .hasErrors(dataset               = dataset[,!grepl(options[["inputLabels"]], colnames(dataset))],
+  .hasErrors(dataset               = dataset[,!grepl(options[["studyLabel"]], colnames(dataset))],
              type                  = c("infinity", "observations", "negativeValues"),
              observations.amount   = "< 2",
              exitAnalysisIfErrors  = TRUE)
+
+  .hasErrors(dataset              = dataset,
+             seCheck.target       = varNames[varNames %in% c(options[["effectSizeSe"]],options[["numberOfParticipants"]])],
+             custom               = .metaAnalysisCheckSE,
+             exitAnalysisIfErrors = TRUE)
 
 
   return(dataset)
@@ -114,25 +119,25 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   } else
     return()
 
-  fit <- tryCatch(metamisc::valmeta(
-    measure    = options[["measure"]],
-    cstat      = if (options[["measure"]] == "cstat" && options[["inputMeasure"]] != "")              dataset[, options[["inputMeasure"]]],
-    cstat.se   = if (options[["measure"]] == "cstat" && options[["inputSE"]] != "")                   dataset[, options[["inputSE"]]],
-    cstat.cilb = if (options[["measure"]] == "cstat" && sum(unlist(options[["inputCI"]]) != "") == 2) dataset[, options[["inputCI"]][[1]][1]],
-    cstat.ciub = if (options[["measure"]] == "cstat" && sum(unlist(options[["inputCI"]]) != "") == 2) dataset[, options[["inputCI"]][[1]][2]],
-    OE         = if (options[["measure"]] == "OE" && options[["inputMeasure"]] != "")                 dataset[, options[["inputMeasure"]]],
-    OE.se      = if (options[["measure"]] == "OE" && options[["inputSE"]] != "")                      dataset[, options[["inputSE"]]],
-    OE.cilb    = if (options[["measure"]] == "OE" && sum(unlist(options[["inputCI"]]) != "") == 2)    dataset[, options[["inputCI"]][[1]][1]],
-    OE.ciub    = if (options[["measure"]] == "OE" && sum(unlist(options[["inputCI"]]) != "") == 2)    dataset[, options[["inputCI"]][[1]][2]],
-    N          = if (options[["inputN"]] != "")      dataset[, options[["inputN"]]],
-    O          = if (options[["inputO"]] != "")      dataset[, options[["inputO"]]],
-    E          = if (options[["inputE"]] != "")      dataset[, options[["inputE"]]],
-    slab       = if (options[["inputLabels"]] != "") dataset[, options[["inputLabels"]]],
+  fit <- try(metamisc::valmeta(
+    measure    = .metamiscGetMeasureOption(options),
+    cstat      = if (options[["measure"]] == "cStatistic" && options[["effectSize"]] != "")              dataset[, options[["effectSize"]]],
+    cstat.se   = if (options[["measure"]] == "cStatistic" && options[["effectSizeSe"]] != "")                   dataset[, options[["effectSizeSe"]]],
+    cstat.cilb = if (options[["measure"]] == "cStatistic" && sum(unlist(options[["effectSizeCi"]]) != "") == 2) dataset[, options[["effectSizeCi"]][[1]][1]],
+    cstat.ciub = if (options[["measure"]] == "cStatistic" && sum(unlist(options[["effectSizeCi"]]) != "") == 2) dataset[, options[["effectSizeCi"]][[1]][2]],
+    OE         = if (options[["measure"]] == "oeRatio" && options[["effectSize"]] != "")                 dataset[, options[["effectSize"]]],
+    OE.se      = if (options[["measure"]] == "oeRatio" && options[["effectSizeSe"]] != "")                      dataset[, options[["effectSizeSe"]]],
+    OE.cilb    = if (options[["measure"]] == "oeRatio" && sum(unlist(options[["effectSizeCi"]]) != "") == 2)    dataset[, options[["effectSizeCi"]][[1]][1]],
+    OE.ciub    = if (options[["measure"]] == "oeRatio" && sum(unlist(options[["effectSizeCi"]]) != "") == 2)    dataset[, options[["effectSizeCi"]][[1]][2]],
+    N          = if (options[["numberOfParticipants"]] != "")      dataset[, options[["numberOfParticipants"]]],
+    O          = if (options[["numberOfObservedEvents"]] != "")      dataset[, options[["numberOfObservedEvents"]]],
+    E          = if (options[["numberOfExpectedEvents"]] != "")      dataset[, options[["numberOfExpectedEvents"]]],
+    slab       = if (options[["studyLabel"]] != "") dataset[, options[["studyLabel"]]],
     method     = .metaAnalysisGetMethod(options),
     pars       = list(
-      model.oe    = if (options[["measure"]] == "OE")    options[["linkOE"]],
-      model.cstat = if (options[["measure"]] == "cstat") options[["linkCstat"]])
-  ), error = function(e) e )
+      model.oe    = if (options[["measure"]] == "oeRatio")    options[["withinStudyVariation"]],
+      model.cstat = if (options[["measure"]] == "cStatistic") options[["withinStudyVariation"]])
+  ))
 
   model[["object"]] <- fit
 
@@ -151,8 +156,8 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   summaryTable <- createJaspTable(title = gettextf(
     "%s Summary",
     switch(options[["measure"]],
-           "OE"    = gettext("Observed-Expected Ratio Meta-Analysis"),
-           "cstat" = gettext("Concordance Statistic Meta-Analysis"))))
+           "oeRatio"    = gettext("Observed-Expected Ratio Meta-Analysis"),
+           "cStatistic" = gettext("Concordance Statistic Meta-Analysis"))))
   summaryTable$dependOn(c(.metamiscDependencies, if (options[["method"]] == "BAYES") .metamiscDependenciesBayesian))
   summaryTable$position <- 1
 
@@ -165,8 +170,8 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   jaspResults[["summaryTable"]] <- summaryTable
 
 
-  if (inherits(fit, c("simpleError", "error")))
-    jaspResults[["summaryTable"]]$setError(gettextf("metamisc package failed with the following error: '%s'", fit[["message"]]))
+  if (jaspBase::isTryError(fit))
+    jaspResults[["summaryTable"]]$setError(gettextf("metamisc package failed with the following error: '%s'", fit))
 
   if (is.null(fit) || jaspResults[["summaryTable"]]$getError())
     return()
@@ -184,12 +189,12 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
     summaryTable$addFootnote(gettextf(
       "The model was estimated using %1$s method with %2$s link function.",
       options[["method"]],
-      if (options[["measure"]] == "OE") { options[["linkOE"]] } else if (options[["measure"]] == "cstat") {options[["linkCstat"]]}
+      options[["withinStudyVariation"]]
     ))
   } else{
     summaryTable$addFootnote(gettextf(
       "The model was estimated using MCMC with %1$s link function.",
-      if (options[["measure"]] == "OE") { options[["linkOE"]] } else if (options[["measure"]] == "cstat") {options[["linkCstat"]]}
+      options[["withinStudyVariation"]]
     ))
   }
 
@@ -226,8 +231,8 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   p <- p + jaspGraphs::geom_rangeframe(sides = "b") +
     jaspGraphs::themeJaspRaw() +
     ggplot2::ylab(switch(options[["measure"]],
-                         "OE"    = gettext("Observed-Expected Ratio"),
-                         "cstat" = gettext("Concordance Statistic"))) +
+                         "oeRatio"    = gettext("Observed-Expected Ratio"),
+                         "cStatistic" = gettext("Concordance Statistic"))) +
     ggplot2::theme(
       axis.ticks.y = ggplot2::element_blank()
     )
@@ -253,25 +258,25 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
     return()
 
   # # computing the effect sizes based on input
-  # if (options[["measure"]] == "cstat") {
+  # if (options[["measure"]] == "cStatistic") {
   #   computedMeasure <- metamisc::ccalc(
-  #     cstat      = if (options[["inputMeasure"]] != "")              dataset[, options[["inputMeasure"]]],
-  #     cstat.se   = if (options[["inputSE"]] != "")                   dataset[, options[["inputSE"]]],
-  #     cstat.cilb = if (sum(unlist(options[["inputCI"]]) != "") == 2) dataset[, options[["inputCI"]][[1]][1]],
-  #     cstat.ciub = if (sum(unlist(options[["inputCI"]]) != "") == 2) dataset[, options[["inputCI"]][[1]][2]],
-  #     N          = if (options[["inputN"]] != "")      dataset[, options[["inputN"]]],
-  #     O          = if (options[["inputO"]] != "")      dataset[, options[["inputO"]]],
-  #     E          = if (options[["inputE"]] != "")      dataset[, options[["inputE"]]]
+  #     cstat      = if (options[["effectSize"]] != "")              dataset[, options[["effectSize"]]],
+  #     cstat.se   = if (options[["effectSizeSe"]] != "")                   dataset[, options[["effectSizeSe"]]],
+  #     cstat.cilb = if (sum(unlist(options[["effectSizeCi"]]) != "") == 2) dataset[, options[["effectSizeCi"]][[1]][1]],
+  #     cstat.ciub = if (sum(unlist(options[["effectSizeCi"]]) != "") == 2) dataset[, options[["effectSizeCi"]][[1]][2]],
+  #     N          = if (options[["numberOfParticipants"]] != "")      dataset[, options[["numberOfParticipants"]]],
+  #     O          = if (options[["numberOfObservedEvents"]] != "")      dataset[, options[["numberOfObservedEvents"]]],
+  #     E          = if (options[["numberOfExpectedEvents"]] != "")      dataset[, options[["numberOfExpectedEvents"]]]
   #   )
-  # } else if (options[["measure"]] == "OE") {
+  # } else if (options[["measure"]] == "oeRatio") {
   #   computedMeasure <- metamisc::oecalc(
-  #     OE         = if (options[["inputMeasure"]] != "")                 dataset[, options[["inputMeasure"]]],
-  #     OE.se      = if (options[["inputSE"]] != "")                      dataset[, options[["inputSE"]]],
-  #     OE.cilb    = if (sum(unlist(options[["inputCI"]]) != "") == 2)    dataset[, options[["inputCI"]][[1]][1]],
-  #     OE.ciub    = if (sum(unlist(options[["inputCI"]]) != "") == 2)    dataset[, options[["inputCI"]][[1]][2]],
-  #     N          = if (options[["inputN"]] != "")      dataset[, options[["inputN"]]],
-  #     O          = if (options[["inputO"]] != "")      dataset[, options[["inputO"]]],
-  #     E          = if (options[["inputE"]] != "")      dataset[, options[["inputE"]]]
+  #     OE         = if (options[["effectSize"]] != "")                 dataset[, options[["effectSize"]]],
+  #     OE.se      = if (options[["effectSizeSe"]] != "")                      dataset[, options[["effectSizeSe"]]],
+  #     OE.cilb    = if (sum(unlist(options[["effectSizeCi"]]) != "") == 2)    dataset[, options[["effectSizeCi"]][[1]][1]],
+  #     OE.ciub    = if (sum(unlist(options[["effectSizeCi"]]) != "") == 2)    dataset[, options[["effectSizeCi"]][[1]][2]],
+  #     N          = if (options[["numberOfParticipants"]] != "")      dataset[, options[["numberOfParticipants"]]],
+  #     O          = if (options[["numberOfObservedEvents"]] != "")      dataset[, options[["numberOfObservedEvents"]]],
+  #     E          = if (options[["numberOfExpectedEvents"]] != "")      dataset[, options[["numberOfExpectedEvents"]]]
   #   )
   # }
 
@@ -287,19 +292,19 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
 }
 .metamiscAddColumnVariable   <- function(jaspResults, options, data, variable) {
 
-  if (options[["measure"]] == "OE")
+  if (options[["measure"]] == "oeRatio")
     optionsVariable <- switch(
       variable,
-      "estimate" = "exportOE",
-      "lCI"      = "exportOElCI",
-      "uCI"      = "exportOEuCI"
+      "estimate" = "exportComputedEffectSizeOeRatioColumnName",
+      "lCI"      = "exportComputedEffectSizeOeRatioLCiColumnName",
+      "uCI"      = "exportComputedEffectSizeOeRatioUCiColumnName"
     )
-  else if (options[["measure"]] == "cstat")
+  else if (options[["measure"]] == "cStatistic")
     optionsVariable <- switch(
       variable,
-      "estimate" = "exportCstat",
-      "lCI"      = "exportCstatlCI",
-      "uCI"      = "exportCstatuCI"
+      "estimate" = "exportComputedEffectSizeCStatisticColumnName",
+      "lCI"      = "exportComputedEffectSizeCStatisticLCiColumnName",
+      "uCI"      = "exportComputedEffectSizeCStatisticUCiColumnName"
     )
 
   dataVariable <- switch(
@@ -335,7 +340,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   fatFits <- modelsFat[["object"]]
 
   # switch the theta / theta.se location according to the link (poisson/log derives and stores the values at different place)
-  if (options[[switch(options[["measure"]], "OE" = "linkOE", "cstat" = "linkCstat")]] == "poisson/log" && options$method != "BAYES" && .metaAnalysisGetMethod(options) != "FE") {
+  if (options[["withinStudyVariation"]] == "poisson/log" && options$method != "BAYES" && .metaAnalysisGetMethod(options) != "FE") {
     theta    <- "theta.blup"
     theta.se <- "theta.se.blup"
   } else {
@@ -343,69 +348,68 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
     theta.se <- "theta.se"
   }
 
-  if (is.null(fatFits[["E-UW"]]) && options[["funnelAsymmetryTestEggerUW"]])
+  if (is.null(fatFits[["E-UW"]]) && options[["funnelPlotAsymmetryTestEggerUnweighted"]])
     fatFits[["E-UW"]] <- metamisc::fat(b = fit$data[,theta], b.se = fit$data[,theta.se], method = "E-UW")
 
-  if (is.null(fatFits[["E-FIV"]]) && options[["funnelAsymmetryTestEggerFIV"]])
+  if (is.null(fatFits[["E-FIV"]]) && options[["funnelPlotAsymmetryTestEggerMultiplicativeOverdispersion"]])
     fatFits[["E-FIV"]] <- metamisc::fat(b = fit$data[,theta], b.se = fit$data[,theta.se], method = "E-FIV")
 
-  if (is.null(fatFits[["M-FIV"]]) && options[["funnelAsymmetryTestMacaskillFIV"]])
-    fatFits[["M-FIV"]] <- tryCatch({
-      if (options[["inputN"]] == "")
+  if (is.null(fatFits[["M-FIV"]]) && options[["funnelPlotAsymmetryTestMacaskill"]])
+    fatFits[["M-FIV"]] <- try({
+      if (options[["numberOfParticipants"]] == "")
         stop("The number of participants must be specified.", domain = NA)
       fitFat <- metamisc::fat(b = fit$data[,theta], b.se = fit$data[,theta.se], method = "M-FIV",
-                              n.total = dataset[, options[["inputN"]]])
+                              n.total = dataset[, options[["numberOfParticipants"]]])
       if (is.na(fitFat$pval))
         stop("The regression model could not be estimated.", domain = NA)
       else
         fitFat
-    }, error = function(e)e)
+    })
 
-  if (is.null(fatFits[["M-FPV"]]) && options[["funnelAsymmetryTestMacaskillFPV"]])
-    fatFits[["M-FPV"]] <- tryCatch({
-      if (options[["inputN"]] == "")
+  if (is.null(fatFits[["M-FPV"]]) && options[["funnelPlotAsymmetryTestMacaskillPooled"]])
+    fatFits[["M-FPV"]] <- try({
+      if (options[["numberOfParticipants"]] == "")
         stop("The number of participants must be specified.", domain = NA)
-      else if (options[["inputO"]] == "")
+      else if (options[["numberOfObservedEvents"]] == "")
         stop("The number of observed events must be specified.", domain = NA)
       fitFat <- metamisc::fat(b = fit$data[,theta], b.se = fit$data[,theta.se], method = "M-FPV",
-                              n.total = dataset[, options[["inputN"]]], d.total = dataset[, options[["inputO"]]])
+                              n.total = dataset[, options[["numberOfParticipants"]]], d.total = dataset[, options[["numberOfObservedEvents"]]])
       if (is.na(fitFat$pval))
         stop("The regression model could not be estimated.", domain = NA)
       else
         fitFat
-    }, error = function(e)e)
+    })
 
-  if (is.null(fatFits[["P-FPV"]]) && options[["funnelAsymmetryTestPeters"]])
-    fatFits[["P-FPV"]] <- tryCatch({
-      if (options[["inputN"]] == "")
+  if (is.null(fatFits[["P-FPV"]]) && options[["funnelPlotAsymmetryTestPeters"]])
+    fatFits[["P-FPV"]] <- try({
+      if (options[["numberOfParticipants"]] == "")
         stop("The number of participants must be specified.", domain = NA)
-      else if (options[["inputO"]] == "")
+      else if (options[["numberOfObservedEvents"]] == "")
         stop("The number of observed events must be specified.", domain = NA)
       fitFat <- metamisc::fat(b = fit$data[,theta], b.se = fit$data[,theta.se], method = "P-FPV",
-                              n.total = dataset[, options[["inputN"]]], d.total = dataset[, options[["inputO"]]])
+                              n.total = dataset[, options[["numberOfParticipants"]]], d.total = dataset[, options[["numberOfObservedEvents"]]])
       if (is.na(fitFat$pval))
         stop("The regression model could not be estimated.", domain = NA)
       else
         fitFat
-    }, error = function(e)e)
+    })
 
-  if (is.null(fatFits[["D-FIV"]]) && options[["funnelAsymmetryTestDebrayFIV"]])
-    fatFits[["D-FIV"]] <- tryCatch({
-      if (options[["inputO"]] == "")
+  if (is.null(fatFits[["D-FIV"]]) && options[["funnelPlotAsymmetryTestDebray"]])
+    fatFits[["D-FIV"]] <- try({
+      if (options[["numberOfObservedEvents"]] == "")
         stop("The number of observed events must be specified.")
       fitFat <- metamisc::fat(b = fit$data[,theta], b.se = fit$data[,theta.se], method = "D-FIV",
-                              d.total = dataset[, options[["inputO"]]])
+                              d.total = dataset[, options[["numberOfObservedEvents"]]])
       if (is.na(fitFat$pval))
         stop("The regression model could not be estimated.", domain = NA)
       else
         fitFat
-    }, error = function(e)e)
+    })
 
-  # if (is.null(fatFits[["D-FAV"]]) && options[["funnelAsymmetryTestDebrayFAV"]])
-  #   fatFits[["D-FAV"]] <- tryCatch(
+  # if (is.null(fatFits[["D-FAV"]]) && options[["funnelPlotAsymmetryTestDebrayFAV"]])
+  #   fatFits[["D-FAV"]] <- try(
   #     metamisc::fat(b = fit$data[,theta], b.se = fit$data[,theta.se], method = "D-FAV",
-  #                   d1 = dataset[, options[["inputO1"]]], d2 = dataset[, options[["inputO2"]]]),
-  #     error = function(e)e
+  #                   d1 = dataset[, options[["inputO1"]]], d2 = dataset[, options[["inputO2"]]])
   #   )
 
 
@@ -422,7 +426,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
 
 
   funnelTestTable <- createJaspTable(title = gettext("Funnel Plot Asymmetry Tests"))
-  funnelTestTable$dependOn(c(.metamiscDependencies, .metamiscFunnelTests, "funnelAsymmetryTest"))
+  funnelTestTable$dependOn(c(.metamiscDependencies, .metamiscFunnelTests, "funnelPlotAsymmetryTest"))
   funnelTestTable$position <- 3
 
   # add columns
@@ -436,13 +440,13 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
     return()
 
   for(i in seq_along(fatFits)) {
-    if (inherits(fatFits[[i]], c("simpleError", "error"))) {
+    if (jaspBase::isTryError(fatFits[[i]])) {
       funnelTestTable$addRows(list(
         method  = .metamiscFitFunnelAsymmetryNames(names(fatFits)[i])
       ))
       funnelTestTable$addFootnote(gettextf("The %1$s test failed with the following error: %2$s",
                                            .metamiscFitFunnelAsymmetryNames(names(fatFits)[i]),
-                                           fatFits[[i]]$message))
+                                           fatFits[[i]]))
     } else {
       funnelTestTable$addRows(list(
         method  = .metamiscFitFunnelAsymmetryNames(fatFits[[i]]$method),
@@ -463,7 +467,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
     funnelTestPlots <- jaspResults[["funnelTestPlots"]]
   } else{
     funnelTestPlots <- createJaspContainer(title = gettext("Funnel Plot Asymmetry Plots"))
-    funnelTestPlots$dependOn(c(.metamiscDependencies, "funnelAsymmetryTestPlot", "funnelAsymmetryTest", if (options[["method"]] == "BAYES") .metamiscDependenciesBayesian))
+    funnelTestPlots$dependOn(c(.metamiscDependencies, "funnelPlotAsymmetryTestPlot", "funnelPlotAsymmetryTest", if (options[["method"]] == "BAYES") .metamiscDependenciesBayesian))
     funnelTestPlots$position <- 4
     jaspResults[["funnelTestPlots"]] <- funnelTestPlots
   }
@@ -471,7 +475,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   fatFits <- jaspResults[["modelsFat"]]$object
 
   for(i in seq_along(fatFits)) {
-    if (!inherits(fatFits[[i]], c("simpleError", "error")) && is.null(funnelTestPlots[[fatFits[[i]]$method]])) {
+    if (!jaspBase::isTryError(fatFits[[i]]) && is.null(funnelTestPlots[[fatFits[[i]]$method]])) {
 
       tempFunnelPlot   <- createJaspPlot(
         title  = .metamiscFitFunnelAsymmetryNames(fatFits[[i]]$method),
@@ -481,10 +485,10 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
       tempFunnelPlot$dependOn(.metamiscFitFunnelAsymmetryOptions(fatFits[[i]]$method))
       funnelTestPlots[[fatFits[[i]]$method]] <- tempFunnelPlot
 
-      tempPlot <- tryCatch(.metamiscFitFunnelAsymmetryggPlot(fatFits[[i]]), error = function(e)e)
+      tempPlot <- try(.metamiscFitFunnelAsymmetryggPlot(fatFits[[i]]))
 
-      if (any(class(tempPlot) %in% c("simpleError", "error"))) {
-        tempFunnelPlot$setError(tempPlot$message)
+      if (any(jaspBase::isTryError(tempPlot))) {
+        tempFunnelPlot$setError(tempPlot)
       } else{
         tempPlot <- tempPlot + jaspGraphs::geom_rangeframe() + jaspGraphs::themeJaspRaw()
         tempFunnelPlot$plotObject <- tempPlot
@@ -509,12 +513,12 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
 .metamiscFitFunnelAsymmetryOptions <- function(shortcut) {
   switch(
     shortcut,
-    "E-UW"  = "funnelAsymmetryTestEggerUW",
-    "E-FIV" = "funnelAsymmetryTestEggerFIV",
-    "M-FIV" = "funnelAsymmetryTestMacaskillFIV",
-    "M-FPV" = "funnelAsymmetryTestMacaskillFPV",
-    "P-FPV" = "funnelAsymmetryTestPeters",
-    "D-FIV" = "funnelAsymmetryTestDebrayFIV"
+    "E-UW"  = "funnelPlotAsymmetryTestEggerUnweighted",
+    "E-FIV" = "funnelPlotAsymmetryTestEggerMultiplicativeOverdispersion",
+    "M-FIV" = "funnelPlotAsymmetryTestMacaskill",
+    "M-FPV" = "funnelPlotAsymmetryTestMacaskillPooled",
+    "P-FPV" = "funnelPlotAsymmetryTestPeters",
+    "D-FIV" = "funnelPlotAsymmetryTestDebray"
   )
 }
 .metamiscFitFunnelAsymmetryggPlot  <- function(x, ref, xlab = gettext("Effect size"),
@@ -650,7 +654,13 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
     yi.uci = yi.uci
   ))
 }
-
+.metamiscGetMeasureOption <- function(options){
+  return(switch(
+    options[["measure"]],
+    "oeRatio"    = "OE",
+    "cStatistic" = "cstat"
+  ))
+}
 
 
 

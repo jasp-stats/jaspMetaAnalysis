@@ -10,20 +10,12 @@ jobs:
   generate-translations:
     runs-on: ubuntu-latest
     env:
-      GITHUB_TOKEN: ${{ secrets.REPO_KEY }}
+      REPO_KEY: ${{ secrets.REPOS_KEY }}
       WEBLATE_KEY: ${{ secrets.WEBLATE_KEY }}
       QML_REPO: jaspmetaanalysis-qml
       R_REPO: jaspmetaanalysis-r
 
     steps:
       - uses: jasp-stats/jasp-actions/wlcLock@master
-      
-      - uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.REPO_KEY }}
-
-      - uses: r-lib/actions/setup-r@master
-        with:
-          r-version: "4.0.5"
 
       - uses: jasp-stats/jasp-actions/translations@master

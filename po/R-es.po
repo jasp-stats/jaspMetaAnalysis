@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
-"POT-Creation-Date: 2021-11-06 02:39\n"
-"PO-Revision-Date: 2021-12-08 21:09+0000\n"
-"Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
+"POT-Creation-Date: 2023-04-29 02:38\n"
+"PO-Revision-Date: 2023-05-01 11:48+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
 "Language: es\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.10-dev\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr "El límite previo inferior no es menor que el límite superior."
@@ -34,7 +34,7 @@ msgstr ""
 
 msgid "You cannot set all the prior model probabilties to zero."
 msgstr ""
-"Non se pueden poner todas las probabilidades del modelo previo como ceros."
+"No se pueden poner todas las probabilidades del modelo previo como ceros."
 
 msgid ""
 "The model could not be fit. Please check the following: Do you have at least "
@@ -123,8 +123,8 @@ msgid ""
 "Bayes factor of the (unconstrained/constrained) random effects H%1$s over "
 "the fixed effects H%1$s."
 msgstr ""
-"Factor de Bayes de los efectos aleatorios(no restringidos/restringidos) H%1$"
-"s sobre los efectos fijos H%1$s."
+"Factor de Bayes de los efectos aleatorios(no restringidos/restringidos) "
+"H%1$s sobre los efectos fijos H%1$s."
 
 msgid "Bayes factor of the fixed effects H%1$s over the random effects H%1$s."
 msgstr ""
@@ -164,18 +164,18 @@ msgid ""
 "Bayes factor for the ordered effects H%1$s versus the unconstrained (random) "
 "effects H%1$s model is %3$.3f."
 msgstr ""
-"Factor de Bayes de los efectos ordenados H%1$s sobre los efectos fijos H%2$"
-"s. El factor de Bayes del modelo de efectos ordenados H%1$s frente a efectos "
-"no restringidos (aleatorios) H%1$s es %3$.3f."
+"Factor de Bayes de los efectos ordenados H%1$s sobre los efectos fijos "
+"H%2$s. El factor de Bayes del modelo de efectos ordenados H%1$s frente a "
+"efectos no restringidos (aleatorios) H%1$s es %3$.3f."
 
 msgid ""
 "Bayes factor of the fixed effects H%2$s over the ordered effects H%1$s. The "
 "Bayes factor for the unconstrained (random) effects H%1$s versus the ordered "
 "effects H%1$s model is %3$.3f."
 msgstr ""
-"Factor de Bayes de los efectos fijos H%2$s sobre los efectos ordenados H%1$"
-"s. El factor de Bayes del modelo de efectos no restringidos (aleatorios) H%1$"
-"s frente al modelo de efectos ordenados H%1$s es %3$.3f."
+"Factor de Bayes de los efectos fijos H%2$s sobre los efectos ordenados "
+"H%1$s. El factor de Bayes del modelo de efectos no restringidos (aleatorios) "
+"H%1$s frente al modelo de efectos ordenados H%1$s es %3$.3f."
 
 msgid "Model Probabilities"
 msgstr "Probabilidades del Modelo"
@@ -358,6 +358,9 @@ msgstr "Última iteración de la cadena"
 msgid "Shrink factor"
 msgstr "Factor de contracción"
 
+msgid "All standard errors/sample sizes must be positive."
+msgstr "Todos los errores típicos/tamaños muestrales deben ser positivos."
+
 msgid "The metafor package crashed with the following error: %s"
 msgstr "El paquete metafor se quebró con el siguiente fallo: %s"
 
@@ -388,11 +391,14 @@ msgstr "Error Típico"
 msgid "z"
 msgstr "z"
 
+msgid "t"
+msgstr "t"
+
 msgid "Wald test."
 msgstr "Contraste de Wald."
 
-msgid "Wald tests."
-msgstr "Contrastes de Wald."
+msgid "Knapp and Hartung test adjustment."
+msgstr "Ajuste de la prueba de Knapp y Hartung."
 
 msgid "Fit measures"
 msgstr "Medidas de ajuste"
@@ -415,9 +421,6 @@ msgstr ""
 "Contraste de la regresión para la asimetría del gráfico en embudo (\"Proba "
 "de Egger\")"
 
-msgid "t"
-msgstr "t"
-
 msgid "Influence Measures"
 msgstr "Medidas de Influencia"
 
@@ -425,7 +428,7 @@ msgid "Std. Residual"
 msgstr "Error Típico"
 
 msgid "DFFITS"
-msgstr "DFFITS"
+msgstr "GLFITS"
 
 msgid "Cook's Distance"
 msgstr "Distancia de Cook"
@@ -517,11 +520,6 @@ msgstr "Modelo de EF"
 msgid "RE Model"
 msgstr "Modelo de EA"
 
-msgid "Cannot set 'xlim' automatically. Please set this argument manually."
-msgstr ""
-"No se puede establecer 'xlim' automáticamente. Por favor, determina este "
-"argumento manualmente."
-
 msgid "Profile Plot for"
 msgstr "Gráfico de Perfil para"
 
@@ -530,22 +528,6 @@ msgstr "Log-Verosimilitud Restringida"
 
 msgid "Residual Value"
 msgstr "Valor del Error"
-
-msgid "Argument 'x' must be an object of class \"rma\"."
-msgstr "El argumento 'x' debe ser un objeto de clase \"rma\"."
-
-msgid "Function not applicable to objects of class \"robust.rma\"."
-msgstr "Función no aplicable a objetos de clase \"robust.rma\"."
-
-msgid "Function not applicable to objects of class \"rma.ls\"."
-msgstr "Función no aplicable a objetos de clase \"rma.ls\"."
-
-msgid ""
-"Setting 'xlim' and 'zlim' automatically not possible (must set axis limits "
-"manually)."
-msgstr ""
-"No es posible establecer 'xlim' y 'zlim' automáticamente (debes establecer "
-"los límites de los ejes manualmente)."
 
 msgid "Radial Plot"
 msgstr "Gráfico Radial"
@@ -563,7 +545,7 @@ msgid "Sample Quantiles"
 msgstr "Cuantiles de la Muestra"
 
 msgid "Standardized Residuals"
-msgstr "Residuos Tipificados"
+msgstr "Errores Tipificados"
 
 msgid "Fitted vs. Standardized Residuals"
 msgstr "Ajustados vs. Errores Tipificados"
@@ -646,9 +628,6 @@ msgstr "Proporción Observado-Esperado"
 msgid "Concordance Statistic"
 msgstr "Estadístico de Coincidencia"
 
-msgid "The number of observed events must be specified."
-msgstr "Debe especificarse el número de eventos observados."
-
 msgid "Funnel Plot Asymmetry Tests"
 msgstr "Contrastes de Asimetría de Gráficos en Embudo"
 
@@ -691,57 +670,48 @@ msgstr "Tamaño de la muestra"
 msgid "Total events"
 msgstr "Eventos totales"
 
-msgid ""
-"Currently this only works with rma and rma.mv objects that have specified "
-"'yi' as a formula."
-msgstr ""
-"Actualmente, esto solo funciona con objetos rma y rma.mv que tengan indicado "
-"a 'yi' como una fórmula."
-
-msgid "Formula is refering to factors that are not in the model."
-msgstr "La fórmula se refiere a factores que no están en el modelo."
-
-msgid "There are no predictors in the model that correspond to factors in '"
-msgstr "No hay predictores en el modelo que se correspondan con factores en '"
-
-msgid "'. Factor levels:"
-msgstr "'. Niveles de los factores:"
-
-msgid ","
-msgstr ","
-
-msgid ". Data names:"
-msgstr ". Nombres de datos:"
-
-msgid "; Used Terms:"
-msgstr "; Términos Utilizados:"
-
-msgid "; Data set head:"
-msgstr "; Cabecera del conjunto de datos:"
-
-msgid "Argument 'contrasts' should be a matrix."
-msgstr "El argumento 'contrastes' debe ser una matriz."
-
-msgid "Invalid contrasts: Rows in"
-msgstr "Contrastes incorrectos: Filas en"
-
-msgid "do not add to 0."
-msgstr "no añadir a 0."
-
-msgid "Only using first element of"
-msgstr "Utilizando solo el primer elemento de"
-
-msgid "."
-msgstr "."
-
-msgid "is smaller than 2."
-msgstr "es menor que 2."
-
 msgid "Variance Components"
 msgstr "Componentes de Varianza"
 
 msgid "Plots"
 msgstr "Gráficos"
+
+msgid "Intercept"
+msgstr "Constante"
+
+msgid "At least one predictor needs to be specified."
+msgstr "Se necesita establecer al menos un predictor."
+
+msgid "Warning:"
+msgstr "Advertencia:"
+
+msgid "Posterior distribution"
+msgstr "Distribución posterior"
+
+msgid "Sampling diagnostics"
+msgstr "Diagnósticos del muestreo"
+
+msgid "Autocorrelation (%1$s)"
+msgstr "Autocorrelación (%1$s)"
+
+msgid ""
+"Inference possibly unreliable -- MCMC chains might not have converged; The "
+"largest R-hat is %.3f > 1.01. To lower R-hat please increase 'Iterations', "
+"or 'Adapt delta' in the Options section."
+msgstr ""
+"Inferencia posiblemente poco fiable -- las cadenas MCMC pudieron no "
+"converger. El mayor R-circunflejo es %.3f > 1.01. Para reducir el R-"
+"circunflejo, por favor, aumenta las 'Iteraciones' o 'Delta de ajuste' en la "
+"sección de Opciones."
+
+msgid ""
+"Low estimation accuracy -- The smallest Effective Sample Size (ESS) is %.2f "
+"< %1.0f. To increase accuracy please increase 'Iterations', or 'Adapt delta' "
+"in the Options section."
+msgstr ""
+"Precisión baja de la estimación -- El Tamaño de la Muestra Efectivo (ESS) "
+"más pequeño es %.2f < %1.0f. Para aumentar la precisión, por favor, aumenta "
+"'Iteraciones', o 'Delta de ajuste' en la sección Opciones."
 
 msgid "The priors for publication bias were set incorrectly."
 msgstr ""
@@ -820,7 +790,7 @@ msgid "Model Specification Preview"
 msgstr "Vista Previa de la Especificación del Modelo"
 
 msgid "Prior Distribution"
-msgstr "Distribución Previa"
+msgstr "Distribución previa"
 
 msgid "The loaded object is not a RoBMA model."
 msgstr "El objeto cargado no es un modelo RoBMA."
@@ -842,9 +812,6 @@ msgstr "log(FB de la Inclusión)"
 
 msgid "P(M|data)"
 msgstr "P(M|datos)"
-
-msgid "Warning:"
-msgstr "Advertencia:"
 
 msgid "Model Averaged Estimates"
 msgstr "Estimaciones Medias del Modelo"
@@ -880,7 +847,7 @@ msgid "Model #"
 msgstr "Modelo #"
 
 msgid "Priors"
-msgstr "Previos"
+msgstr "Previas"
 
 msgid "Information"
 msgstr "Información"
@@ -910,7 +877,7 @@ msgid "Conditional"
 msgstr "Condicionado"
 
 msgid "Model Averaged"
-msgstr "Modelo Medio"
+msgstr "Modelo Promediado"
 
 msgid "Effect Size Estimate"
 msgstr "Estimación de la Magnitud del Efecto"
@@ -1005,9 +972,6 @@ msgstr "Se necesita establecer al menos un punto de corte de los valores p."
 msgid "All p-value cutoffs needs to be between 0 and 1."
 msgstr ""
 "Se necesita que todos los puntos de corte de los valores p estén entre 0 e 1."
-
-msgid "No steps"
-msgstr "Sin etapas"
 
 msgid "95%% Confidence Interval"
 msgstr "Intervalo con el 95%% de Confianza"
@@ -1167,8 +1131,8 @@ msgstr "Prueba del Efecto"
 msgid "Estimates"
 msgstr "Estimaciones"
 
-msgid "PET-PEESE Regression Estimates"
-msgstr "Estimaciones de la Regresión PET-PEESE"
+msgid "Regression Estimates"
+msgstr "Estimaciones de la Regresión"
 
 msgid "Multiplicative Heterogeneity Estimates"
 msgstr "Estimaciones de la Heterogeneidad Multiplicativa"
@@ -1186,16 +1150,148 @@ msgid ""
 "WAAP was not estimated: There were only %1$i adequately powered studies "
 "(power > 80%%)."
 msgstr ""
-"No se estimó el WAAP: Solo había %1$i estudios promovidos adecuadamente ("
-"potencia > 80%%)."
+"No se estimó el WAAP: Solo había %1$i estudios promovidos adecuadamente "
+"(potencia > 80%%)."
 
 msgid "There were %1$i adequately powered studies (power > 80%%)."
 msgstr "Solo había %1$i estudios promovidos adecuadamente (potencia > 80%%)."
+
+msgid ""
+"The Hamiltonian Monte Carlo procedure might be invalid -- There was %i "
+"divergent transition after warmup. This can be solved by carefully "
+"increasing 'Adapt delta' until there are no divergent transitions."
+msgid_plural ""
+"The Hamiltonian Monte Carlo procedure might be invalid -- There were %i "
+"divergent transitions after warmup. This can be solved by carefully "
+"increasing 'Adapt delta' until there are no divergent transitions."
+msgstr[0] ""
+"El procedimiento de Monte Carlo del Hamiltoniano podría ser incorrecto -- "
+"Había %i transición divergente después del calentamiento. Esto se puede "
+"resolver aumentando cuidadosamente 'Delta de ajuste' hasta que no haya "
+"transiciones divergentes."
+msgstr[1] ""
+"El procedimiento de Monte Carlo del Hamiltoniano podría ser incorrecto -- "
+"Había %i transiciones divergentes después del calentamiento. Esto se puede "
+"resolver aumentando cuidadosamente 'Delta de ajuste' hasta que no haya "
+"transiciones divergentes."
+
+msgid ""
+"Bayesian Fraction of Missing Information (BFMI) that was too low in %i chain "
+"indicating that the posterior distribution was not explored efficiently. Try "
+"increasing number of 'Burnin' and 'Iterations'."
+msgid_plural ""
+"Bayesian Fraction of Missing Information (BFMI) that was too low in %i "
+"chains indicating that the posterior distribution was not explored "
+"efficiently. Try increasing number of 'Burnin' and 'Iterations'."
+msgstr[0] ""
+"La Fracción Bayesiana de la Información Perdida (BFMI) era muy baja en la "
+"cadena %i, indicando que la distribución posterior no se exploró "
+"eficientemente. Intenta aumentar el número de 'Calentamiento' e "
+"'Iteraciones'."
+msgstr[1] ""
+"La Fracción Bayesiana de la Información Perdida (BFMI) era muy baja en %i "
+"cadenas, indicando que la distribución posterior no se exploró "
+"eficientemente. Intenta aumentar el número de 'Calentamiento' e "
+"'Iteraciones'."
+
+msgid ""
+"The Hamiltonian Monte Carlo procedure might be inefficient -- %i transition "
+"exceeded the maximum tree depth. This can be solved by carefully increasing "
+"'Maximum tree depth'."
+msgid_plural ""
+"The Hamiltonian Monte Carlo procedure might be inefficient -- %i transitions "
+"exceeded the maximum tree depth. This can be solved by carefully increasing "
+"'Maximum tree depth'."
+msgstr[0] ""
+"El procedimiento de Monte Carlo del Hamiltoniano podría ser ineficiente -- "
+"La transición %i supera la máxima profundidad del árbol. Esto se puede "
+"resolver aumentando cuidadosamente 'Máxima profundidad del árbol'."
+msgstr[1] ""
+"El procedimiento de Monte Carlo del Hamiltoniano podría ser ineficiente -- "
+"%i transiciones superan la máxima profundidad del árbol. Esto se puede "
+"resolver aumentando cuidadosamente 'Máxima profundidad del árbol'."
 
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "la observación %i se eliminó debido a valores ausentes."
 msgstr[1] "las observaciones %i se eliminaron debido a valores ausentes."
+
+#~ msgid "Wald tests."
+#~ msgstr "Contrastes de Wald."
+
+#~ msgid "Cannot set 'xlim' automatically. Please set this argument manually."
+#~ msgstr ""
+#~ "No se puede establecer 'xlim' automáticamente. Por favor, determina este "
+#~ "argumento manualmente."
+
+#~ msgid "Argument 'x' must be an object of class \"rma\"."
+#~ msgstr "El argumento 'x' debe ser un objeto de clase \"rma\"."
+
+#~ msgid "Function not applicable to objects of class \"robust.rma\"."
+#~ msgstr "Función no aplicable a objetos de clase \"robust.rma\"."
+
+#~ msgid "Function not applicable to objects of class \"rma.ls\"."
+#~ msgstr "Función no aplicable a objetos de clase \"rma.ls\"."
+
+#~ msgid ""
+#~ "Setting 'xlim' and 'zlim' automatically not possible (must set axis "
+#~ "limits manually)."
+#~ msgstr ""
+#~ "No es posible establecer 'xlim' y 'zlim' automáticamente (debes "
+#~ "establecer los límites de los ejes manualmente)."
+
+#~ msgid "The number of observed events must be specified."
+#~ msgstr "Debe especificarse el número de eventos observados."
+
+#~ msgid ""
+#~ "Currently this only works with rma and rma.mv objects that have specified "
+#~ "'yi' as a formula."
+#~ msgstr ""
+#~ "Actualmente, esto solo funciona con objetos rma y rma.mv que tengan "
+#~ "indicado a 'yi' como una fórmula."
+
+#~ msgid "Formula is refering to factors that are not in the model."
+#~ msgstr "La fórmula se refiere a factores que no están en el modelo."
+
+#~ msgid "There are no predictors in the model that correspond to factors in '"
+#~ msgstr ""
+#~ "No hay predictores en el modelo que se correspondan con factores en '"
+
+#~ msgid "'. Factor levels:"
+#~ msgstr "'. Niveles de los factores:"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid ". Data names:"
+#~ msgstr ". Nombres de datos:"
+
+#~ msgid "; Used Terms:"
+#~ msgstr "; Términos Utilizados:"
+
+#~ msgid "; Data set head:"
+#~ msgstr "; Cabecera del conjunto de datos:"
+
+#~ msgid "Argument 'contrasts' should be a matrix."
+#~ msgstr "El argumento 'contrastes' debe ser una matriz."
+
+#~ msgid "Invalid contrasts: Rows in"
+#~ msgstr "Contrastes incorrectos: Filas en"
+
+#~ msgid "do not add to 0."
+#~ msgstr "no añadir a 0."
+
+#~ msgid "Only using first element of"
+#~ msgstr "Utilizando solo el primer elemento de"
+
+#~ msgid "."
+#~ msgstr "."
+
+#~ msgid "is smaller than 2."
+#~ msgstr "es menor que 2."
+
+#~ msgid "No steps"
+#~ msgstr "Sin etapas"
 
 #~ msgid "log(BF)"
 #~ msgstr "log(FB)"

@@ -24,69 +24,85 @@ Section
 {
 	columns: 	2
 	title: 		qsTr("Advanced")
-
-	property alias priorH0FEValue:		priorH0FE.value
-	property alias priorH1FEValue:		priorH1FE.value
-	property alias priorH0REValue:		priorH0RE.value
-	property alias priorH1REValue:		priorH1RE.value
 	
-	property string modelTypeValue:			"BMA"
-	property string modelDirectionValue:	"allPos"
+	property string modelTypeValue:			"averaging"
+	property string modelDirectionValue:	"positive"
 
 	Group
 	{
 		id:			priorModelProbabilityGroup
-		enabled: 	modelTypeValue == "FE" || modelTypeValue == "RE" || modelTypeValue == "BMA"
+		enabled: 	modelTypeValue == "fixed" || modelTypeValue == "random" || modelTypeValue == "averaging"
 		title: 		qsTr("Prior model probability")
 
+		property double fixedEffectsHypothesisVal:	modelTypeValue == "fixed" ? 0.5 :
+														modelTypeValue == "random" ? 0 :
+															modelTypeValue == "averaging" ? 0.25 : 0
+
+		property double randomEffectsHypothesisVal:	modelTypeValue == "fixed" ? 0 :
+														modelTypeValue == "random" ? 0.5 :
+															modelTypeValue == "averaging" ? 0.25 : 0
+		function resetHypotheses() {
+			priorH0FE.value = fixedEffectsHypothesisVal
+			priorH1FE.value = fixedEffectsHypothesisVal
+			priorH0RE.value = randomEffectsHypothesisVal
+			priorH1RE.value = randomEffectsHypothesisVal
+
+			priorH0FE.editingFinished()
+			priorH1FE.editingFinished()
+			priorH0RE.editingFinished()
+			priorH1RE.editingFinished()
+		}
+		
 		Group
 		{
-			enabled: 			modelTypeValue == "FE" || modelTypeValue == "BMA"
+			enabled: 			modelTypeValue == "fixed" || modelTypeValue == "averaging"
 			title: 				qsTr("Fixed effects")
+			onEnabledChanged: 	priorModelProbabilityGroup.resetHypotheses()
 
 			DoubleField
 			{
 				id: 			priorH0FE
-				name: 			"priorH0FE"
+				name: 			"priorModelProbabilityFixedNull"
 				label: 			"H\u2080"
-				defaultValue: 	0.25
+				defaultValue: 	priorModelProbabilityGroup.fixedEffectsHypothesisVal
 			}
 
 			DoubleField
 			{
 				id: 			priorH1FE
-				name: 			"priorH1FE"
+				name: 			"priorModelProbabilityFixedAlternative"
 				label: 			"H\u2081"
-				defaultValue: 	0.25
+				defaultValue: 	priorModelProbabilityGroup.fixedEffectsHypothesisVal
 			}
 		}
 
 		Group
 		{
 			title: 				qsTr("Random effects")
-			enabled: 			modelTypeValue == "RE" || modelTypeValue == "BMA"
+			enabled: 			modelTypeValue == "random" || modelTypeValue == "averaging"
+			onEnabledChanged: 	priorModelProbabilityGroup.resetHypotheses()
 
 			DoubleField
 			{
 				id: 			priorH0RE
-				name: 			"priorH0RE"
+				name: 			"priorModelProbabilityRandomNull"
 				label: 			"H\u2080"
-				defaultValue: 	0.25
+				defaultValue: 	priorModelProbabilityGroup.randomEffectsHypothesisVal
 			}
 
 			DoubleField
 			{
 				id: 			priorH1RE
-				name: 			"priorH1RE"
+				name: 			"priorModelProbabilityRandomAlternative"
 				label: 			"H\u2081"
-				defaultValue: 	0.25
+				defaultValue: 	priorModelProbabilityGroup.randomEffectsHypothesisVal
 			}
 		}
 	}
 
 	Group
 	{
-		enabled: !(modelTypeValue == "CRE")
+		enabled: !(modelTypeValue == "constrainedRandom")
 
 		Group
 		{
@@ -95,9 +111,9 @@ Section
 
 			IntegerField
 			{
-				label: 			qsTr("iterations:")
-				name: 			"iterMCMC"
-				defaultValue: 	!(modelTypeValue == "CRE") ? 2000 : 10000
+				label: 			qsTr("samples:")
+				name: 			"samples"
+				defaultValue: 	!(modelTypeValue == "constrainedRandom") ? 2000 : 10000
 				min:			100
 				max: 			1000000
 				fieldWidth: 	100
@@ -106,7 +122,7 @@ Section
 			IntegerField
 			{
 				label: 			qsTr("chains:")
-				name: 			"chainsMCMC"
+				name: 			"chains"
 				defaultValue: 	4
 				min:			1
 				max: 			10
@@ -114,13 +130,15 @@ Section
 			}
 		}
 
+		SetSeed { }
+
 		Group
 		{
 			title: qsTr("Bayes factor computation")
 
 			RadioButtonGroup
 			{
-				name: "BFComputation"
+				name: "bayesFactorComputation"
 
 				RadioButton
 				{
@@ -139,7 +157,7 @@ Section
 					IntegerField
 					{
 						label:  		qsTr("iterations:")
-						name:     		"iterBridge"
+						name:     		"bridgeSamplingSamples"
 						visible:      	bridge.checked
 						defaultValue: 	5000
 						max:			1000000
@@ -150,4 +168,3 @@ Section
 		}
 	}
 }
- 	

@@ -21,24 +21,114 @@ import JASP.Widgets		1.0
 import JASP				1.0
 import QtQuick.Layouts	1.3
 
-Section
+Item
 {
-	title:		qsTr("Data")
-	expanded:	true
+
+	// Item is not as smart as the Section, so, you need to make sure that 
+	// it knows its size.
+	implicitHeight: measure.height + variableForm.height + jaspTheme.generalAnchorMargin * 2
+	implicitWidth: measure.width + variableForm.width
 
 	property alias measure:		measure.value
 	property alias inputN:		inputN.count
 	property alias inputO:		inputO.count
 	property alias inputE:		inputE.count
 
+	VariablesForm
+	{
+		id: variableForm
+		preferredHeight: 360 * preferencesModel.uiScale
+		
+		AvailableVariablesList
+		{
+			name: "allVariables"
+		}
+		
+		AssignedVariablesList
+		{
+			name:				"effectSize"
+			id:					inputMeasure
+			title:				if (measuresOE.checked){
+				qsTr("O/E Ratio")
+			} else if (measuresC.checked) {
+				qsTr("C-statistic")
+			}
+			singleVariable:		true
+			allowedColumns: 	["scale"]
+		}
+
+		AssignedVariablesList
+		{
+			name:				"effectSizeSe"
+			id:					inputSE
+			title:				qsTr("Standard Error")
+			singleVariable:		true
+			allowedColumns: 	["scale"]
+		}
+
+		AssignedPairsVariablesList
+		{
+			name: 				"effectSizeCi"
+			id: 				inputCI
+			title: 				qsTr("95% CI Lower and Upper Bound")
+			singleVariable: 	true
+			allowedColumns: 	["scale"]
+		}
+
+		AssignedVariablesList
+		{
+			name:				"numberOfParticipants"
+			id: 				inputN
+			title:				qsTr("Number of Participants")
+			singleVariable:		true
+			allowedColumns: 	["scale", "ordinal"]
+		}
+
+		AssignedVariablesList
+		{
+			name:				"numberOfObservedEvents"
+			id: 				inputO
+			title:				qsTr("Number of Observed Events")
+			singleVariable:		true
+			allowedColumns: 	["scale", "ordinal"]
+		}
+
+		AssignedVariablesList
+		{
+			name:				"numberOfExpectedEvents"
+			id: 				inputE
+			title:				qsTr("Number of Expected Events")
+			singleVariable:		true
+			allowedColumns: 	["scale", "ordinal"]
+		}
+
+		AssignedVariablesList
+		{
+			id: 				inputLabels
+			name: 				"studyLabel"
+			title: 				qsTr("Study Labels")
+			singleVariable:		true
+			allowedColumns:		["nominal","nominalText"]
+		}
+	}
+
 	RadioButtonGroup
 	{
 		title:					qsTr("Measure")
 		name:					"measure"
 		id:						measure
-		Layout.columnSpan:		2
-		radioButtonsOnSameRow:	true
-		columns:				2
+		Layout.columnSpan:		1
+		radioButtonsOnSameRow:	false
+		columns:				1
+
+		// When you do this, you need to make sure that the RadioButtonGroup 
+		// attaches to the bottom of the variableForm, and add some extra 
+		// margin to the bottom because Item doesn't do that.
+		anchors {
+			top: variableForm.bottom
+			topMargin: jaspTheme.generalAnchorMargin * 2
+		}
+
 		onValueChanged:
 		{
 			inputMeasure.itemDoubleClicked(0)
@@ -49,92 +139,16 @@ Section
 
 		RadioButton
 		{
-			label:		qsTr("O:E ratio")
-			value:		"OE"
+			label:		qsTr("O/E ratio")
+			value:		"oeRatio"
 			id:			measuresOE
 		}
 
 		RadioButton
 		{
 			label:		qsTr("C statistic")
-			value:		"cstat"
+			value:		"cStatistic"
 			id:			measuresC
-		}
-	}
-
-	VariablesForm
-	{
-		preferredHeight: 360 * preferencesModel.uiScale
-		
-		AvailableVariablesList
-		{
-			name: "allVariables"
-		}
-		
-		AssignedVariablesList
-		{
-			name:				"inputMeasure"
-			id:					inputMeasure
-			title:				if (measuresOE.checked){
-				qsTr("O:E Ratio")
-			} else if (measuresC.checked) {
-				qsTr("C-statistic")
-			}
-			singleVariable:		true
-			allowedColumns: 	["scale"]
-		}
-
-		AssignedVariablesList
-		{
-			name:				"inputSE"
-			id:					inputSE
-			title:				qsTr("Standard Error")
-			singleVariable:		true
-			allowedColumns: 	["scale"]
-		}
-
-		AssignedPairsVariablesList
-		{
-			name: 				"inputCI"
-			id: 				inputCI
-			title: 				qsTr("95% CI Lower and Upper Bound")
-			singleVariable: 	true
-			allowedColumns: 	["scale"]
-		}
-
-		AssignedVariablesList
-		{
-			name:				"inputN"
-			id: 				inputN
-			title:				qsTr("Number of Participants")
-			singleVariable:		true
-			allowedColumns: 	["scale", "ordinal"]
-		}
-
-		AssignedVariablesList
-		{
-			name:				"inputO"
-			id: 				inputO
-			title:				qsTr("Number of Observed Events")
-			singleVariable:		true
-			allowedColumns: 	["scale", "ordinal"]
-		}
-
-		AssignedVariablesList
-		{
-			name:				"inputE"
-			id: 				inputE
-			title:				qsTr("Number of Expected Events")
-			singleVariable:		true
-			allowedColumns: 	["scale", "ordinal"]
-		}
-
-		AssignedVariablesList
-		{
-			name: 				"inputLabels"
-			title: 				qsTr("Study Labels")
-			singleVariable:		true
-			allowedColumns:		["nominal","nominalText"]
 		}
 	}
 
