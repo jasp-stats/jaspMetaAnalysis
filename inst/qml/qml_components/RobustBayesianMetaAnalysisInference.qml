@@ -143,13 +143,13 @@ Section
 					{ label: qsTr("Cohen's d"),			value: "cohensD"},
 					{ label: qsTr("Fisher's z"),		value: "fishersZ"},
 					{ label: qsTr("logOR"),				value: "logOr"},
-					{ label: qsTr("OR"),				value: "Or"},
+					{ label: qsTr("OR"),				value: "or"},
 					{ label: qsTr("Correlation"),		value: "r"}
 				]
 			else if (analysisType === "BiBMA")
 				[
 					{ label: qsTr("logOR"),				value: "logOr"},
-					{ label: qsTr("OR"),				value: "Or"}
+					{ label: qsTr("OR"),				value: "or"}
 				]
 		}
 
