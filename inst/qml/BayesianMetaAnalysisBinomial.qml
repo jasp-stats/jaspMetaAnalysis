@@ -63,6 +63,15 @@ Form
 			singleVariable: true
 			allowedColumns: ["ordinal", "scale"]
 		}
+
+		
+		AssignedVariablesList
+		{
+			name: 			"studyLabel"
+			title: 			qsTr("Study Labels")
+			singleVariable:	true
+			allowedColumns: ["nominal","nominalText"]
+		}
 	}
 
 	CheckBox
@@ -100,13 +109,22 @@ Form
 		{
 			Layout.preferredWidth:	parent.width
 			componentType:			"modelsEffect"
+			analysisType:			"binomial"
 		}
 
-		// effect prior
+		// heterogeneity prior
 		MA.RobustBayesianMetaAnalysisPriors
 		{
 			Layout.preferredWidth:	parent.width
 			componentType:			"modelsHeterogeneity"
+			analysisType:			"binomial"
+		}
+
+		// baseline prior
+		MA.RobustBayesianMetaAnalysisBaseline
+		{
+			Layout.preferredWidth:	parent.width
+			componentType:			"modelsBaseline"
 		}
 
 		Divider { }
@@ -123,6 +141,7 @@ Form
 		{
 			Layout.preferredWidth:	parent.width
 			componentType:			"modelsEffectNull"
+			analysisType:			"binomial"
 			visible:				priorsNull.checked
 		}
 
@@ -131,6 +150,15 @@ Form
 		{
 			Layout.preferredWidth:	parent.width
 			componentType:			"modelsHeterogeneityNull"
+			analysisType:			"binomial"
+			visible:				priorsNull.checked
+		}
+
+		// baseline prior
+		MA.RobustBayesianMetaAnalysisBaseline
+		{
+			Layout.preferredWidth:	parent.width
+			componentType:			"modelsBaselineNull"
 			visible:				priorsNull.checked
 		}
 	}

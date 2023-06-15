@@ -297,6 +297,7 @@ Form
 		{
 			Layout.preferredWidth:	parent.width
 			componentType:			"modelsEffect"
+			analysisType:			"normal"
 		}
 
 		// effect prior
@@ -304,6 +305,7 @@ Form
 		{
 			Layout.preferredWidth:	parent.width
 			componentType:			"modelsHeterogeneity"
+			analysisType:			"normal"
 		}
 
 		// bias priors
@@ -317,12 +319,14 @@ Form
 		{
 			Layout.preferredWidth:	parent.width
 			componentType:			"modelsPet"
+			analysisType:			"normal"
 		}
 
 		MA.RobustBayesianMetaAnalysisPriors
 		{
 			Layout.preferredWidth:	parent.width
 			componentType:			"modelsPeese"
+			analysisType:			"normal"
 		}
 
 		Divider { }
@@ -339,6 +343,7 @@ Form
 		{
 			Layout.preferredWidth:	parent.width
 			componentType:			"modelsEffectNull"
+			analysisType:			"normal"
 			visible:				priorsNull.checked
 		}
 
@@ -347,6 +352,7 @@ Form
 		{
 			Layout.preferredWidth:	parent.width
 			componentType:			"modelsHeterogeneityNull"
+			analysisType:			"normal"
 			visible:				priorsNull.checked
 		}
 
@@ -362,6 +368,7 @@ Form
 		{
 			Layout.preferredWidth:	parent.width
 			componentType:			"modelsPetNull"
+			analysisType:			"normal"
 			visible:				priorsNull.checked
 		}
 
@@ -369,6 +376,7 @@ Form
 		{
 			Layout.preferredWidth:	parent.width
 			componentType:			"modelsPeeseNull"
+			analysisType:			"normal"
 			visible:				priorsNull.checked
 		}
 	}
