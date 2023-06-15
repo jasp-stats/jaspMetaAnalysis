@@ -51,7 +51,7 @@ ColumnLayout
 		defaultValues:			switch (componentType) 		
 		{
 			case "modelsBaseline":				[]; break;
-			case "modelsBaselineNull":			[{"type": "beta"}]; break;
+			case "modelsBaselineNull":			[{"type": "beta", "alpha": "1", "beta": "1"}]; break;
 		}
 		rowComponent: 			RowLayout
 		{

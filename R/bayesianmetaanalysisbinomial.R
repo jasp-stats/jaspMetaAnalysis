@@ -65,15 +65,15 @@ BayesianMetaAnalysisBinomial <- function(jaspResults, dataset, options, state = 
 
   # pooled estimates plots
   if (options[["plotsPooledEstimatesEffect"]])
-    .robmaEstimatesPlot(jaspResults, options, "mu")
+    .robmaEstimatesPlot(jaspResults, options, "mu", type = "BiBMA")
   if (options[["plotsPooledEstimatesHeterogeneity"]])
-    .robmaEstimatesPlot(jaspResults, options, "tau")
+    .robmaEstimatesPlot(jaspResults, options, "tau", type = "BiBMA")
 
   # individual models
   if (options[["plotsIndividualModelsEffect"]])
-    .robmaModelsPlot(jaspResults, options, "mu")
+    .robmaModelsPlot(jaspResults, options, "mu", type = "BiBMA")
   if (options[["plotsIndividualModelsHeterogeneity"]])
-    .robmaModelsPlot(jaspResults, options, "tau")
+    .robmaModelsPlot(jaspResults, options, "tau", type = "BiBMA")
 
   ### Diagnostics
   # overview

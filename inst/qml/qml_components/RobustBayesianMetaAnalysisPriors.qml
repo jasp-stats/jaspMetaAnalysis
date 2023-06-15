@@ -60,7 +60,7 @@ ColumnLayout
 			case "modelsEffect":				switch(analysisType)
 			{
 				case "normal":		[{"type": "normal", "mu": "0", "sigma": "1"}]; break;
-				case "binomial":	[{"type": "t", "mu": "0", "sigma": "0.58", "nu": 4}]; break;
+				case "binomial":	[{"type": "t", "mu": "0", "sigma": "0.58", "nu": "4"}]; break;
 			}; break;
 			case "modelsEffectNull":			[{"type": "spike", "x0": "0"}]; break;
 			case "modelsHeterogeneity":			switch(analysisType)
