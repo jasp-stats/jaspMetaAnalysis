@@ -122,11 +122,12 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
       what = switch(
         parameter,
         "normal"                 = RoBMA::prior,
+        "factor"                 = RoBMA::prior_factor,
         "modelsSelectionModels"  = RoBMA::prior_weightfunction,
         "modelsPet"              = RoBMA::prior_PET,
         "modelsPeese"            = RoBMA::prior_PEESE
       ),
-      args = .robmaMapOptionsToPriors(optionsPrior)
+      args = .robmaMapOptionsToPriors(optionsPrior, parameter)
     ))
 }
 .robmaCleanOptionsToPriors     <- function(x) {
@@ -183,7 +184,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   return(x)
 }
-.robmaMapOptionsToPriors       <- function(optionsPrior) {
+.robmaMapOptionsToPriors       <- function(optionsPrior, parameter) {
 
   arguments <- list()
 
@@ -219,7 +220,11 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     )
   }
 
-  arguments[["prior_weights"]] = optionsPrior[["priorWeight"]]
+  arguments[["prior_weights"]] <- optionsPrior[["priorWeight"]]
+
+  if(parameter == "factor") {
+    arguments[["contrast"]] <- "independent"
+  }
 
   return(arguments)
 }
@@ -381,13 +386,23 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   else if (coefficient == "tau")
     return(gettextf("Heterogeneity (%s)","\u03C4"))
 }
+.robmaCompNames           <- function(component) {
+  return(switch(
+    component,
+    "Effect"        = gettext("Effect"),
+    "Heterogeneity" = gettext("Heterogeneity"),
+    "Bias"          = gettext("Publication bias"),
+    "Baseline"      = gettext("Baseline")
+  ))
+}
 .robmaCoefLetters         <- function(effectSize) {
   return(switch(
     effectSize,
     "correlation" = "\u03C1",
     "cohensD"     = "\u03B4",
     "fishersZ"    = "\u007a",
-    "logOr"       = "log(OR)"
+    "logOr"       = "log(OR)",
+    "or"          = "OR"
   ))
 }
 # helper functions
@@ -682,7 +697,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   if (options[["inputType"]] != "fittedModel") {
     for (i in 1:nrow(fitSummary[["components"]])) {
       tempRow <- list(
-        terms     = if (i == 1) gettext("Effect") else if (i == 2) gettext("Heterogeneity") else if (i == 3) gettext("Publication bias"),
+        terms     = .robmaCompNames(rownames(fitSummary[["components"]])[i]),
         models    = paste0(fitSummary[["components"]][[i, "models"]], "/", attr(fitSummary[["components"]], "n_models")),
         priorProb = fitSummary[["components"]][[i, "prior_prob"]]
       )
@@ -877,7 +892,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   for (i in 1:nrow(fitSummary[["components"]])) {
     overallSummary$addRows(list(
-      terms     = if (i == 1) gettext("Effect") else if (i == 2) gettext("Heterogeneity") else if (i == 3) gettext("Publication bias"),
+      terms     = .robmaCompNames(rownames(fitSummary[["components"]])[i]),
       models    = paste0(fitSummary[["components"]][i, "models"], "/",  attr(fitSummary[["components"]], "n_models")[i]),
       priorProb = fitSummary[["components"]][i, "prior_prob"],
       postProb  = fitSummary[["components"]][i, "post_prob"],
@@ -1736,6 +1751,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     "cohensD"     = "cohens_d",
     "fishersZ"    = "fishers_z",
     "logOr"       = "logOR",
+    "or"          = "OR",
     "correlation" = "r"
   ))
 }
