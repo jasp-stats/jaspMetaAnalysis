@@ -31,4 +31,5 @@ Imports:
   pema
 Remotes:
   jasp-stats/jaspBase,
-  jasp-stats/jaspGraphs
+  jasp-stats/jaspGraphs,
+  FBartos/RoBMA
