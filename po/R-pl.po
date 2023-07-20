@@ -45,11 +45,11 @@ msgstr ""
 msgid "Posterior Estimates per Model"
 msgstr "Oszacowania a posteriori dla modeli"
 
-msgid "BF%s%s"
-msgstr "BF%s%s"
+msgid "BF%1$s%2$s"
+msgstr "BF%1$s%2$s"
 
-msgid "Log(BF%s%s)"
-msgstr "Log(BF%s%s)"
+msgid "Log(BF%1$s%2$s)"
+msgstr "Log(BF%1$s%2$s)"
 
 msgid "Mean"
 msgstr "Średnia"
@@ -79,7 +79,7 @@ msgid "Ordered effects"
 msgstr ""
 
 msgid ""
-"%s and %s are the group-level effect size and standard deviation, "
+"%1$s and %2$s are the group-level effect size and standard deviation, "
 "respectively."
 msgstr ""
 
@@ -388,7 +388,7 @@ msgstr "Dystans Cooka"
 msgid "Cov. Ratio"
 msgstr ""
 
-msgid "%s%s<sub>(-i)</sub>"
+msgid "%1$s%2$s<sub>(-i)</sub>"
 msgstr ""
 
 msgid "Q<sub>E(-i)</sub>"
@@ -454,7 +454,7 @@ msgstr "Wykres"
 msgid "Funnel Plot"
 msgstr ""
 
-msgid "Log-Likelihood for %s%s"
+msgid "Log-Likelihood for %1$s%2$s"
 msgstr ""
 
 msgid "Trim-Fill Analysis"
@@ -793,7 +793,7 @@ msgstr ""
 msgid "Model %i"
 msgstr ""
 
-msgid "Model %i does not exist. Select one of the models between 1 and %i."
+msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
 msgstr ""
 
 msgid "Estimated Weights (%s)"
@@ -907,7 +907,7 @@ msgstr "95%% przedział ufności"
 msgid "Note:"
 msgstr "Uwaga:"
 
-msgid "%s is on %s scale."
+msgid "%1$s is on %2$s scale."
 msgstr ""
 
 msgid "<em>p</em>-values interval(one-sided)"
