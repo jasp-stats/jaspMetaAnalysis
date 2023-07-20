@@ -48,10 +48,10 @@ msgstr ""
 msgid "Posterior Estimates per Model"
 msgstr ""
 
-msgid "BF%s%s"
+msgid "BF%1$s%2$s"
 msgstr ""
 
-msgid "Log(BF%s%s)"
+msgid "Log(BF%1$s%2$s)"
 msgstr ""
 
 msgid "Mean"
@@ -85,7 +85,7 @@ msgid "Ordered effects"
 msgstr "efeitos fixos da escala r"
 
 msgid ""
-"%s and %s are the group-level effect size and standard deviation, "
+"%1$s and %2$s are the group-level effect size and standard deviation, "
 "respectively."
 msgstr ""
 
@@ -417,7 +417,7 @@ msgstr "Distância de Cook"
 msgid "Cov. Ratio"
 msgstr ""
 
-msgid "%s%s<sub>(-i)</sub>"
+msgid "%1$s%2$s<sub>(-i)</sub>"
 msgstr ""
 
 msgid "Q<sub>E(-i)</sub>"
@@ -486,7 +486,7 @@ msgid "Funnel Plot"
 msgstr ""
 
 #, fuzzy
-msgid "Log-Likelihood for %s%s"
+msgid "Log-Likelihood for %1$s%2$s"
 msgstr "Log-likelihood"
 
 msgid "Trim-Fill Analysis"
@@ -858,7 +858,7 @@ msgstr "Estimativas"
 msgid "Model %i"
 msgstr "Modelo"
 
-msgid "Model %i does not exist. Select one of the models between 1 and %i."
+msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
 msgstr ""
 
 msgid "Estimated Weights (%s)"
@@ -985,7 +985,7 @@ msgstr "Intervalo de Confiança 95%%"
 msgid "Note:"
 msgstr "Nota:"
 
-msgid "%s is on %s scale."
+msgid "%1$s is on %2$s scale."
 msgstr ""
 
 msgid "<em>p</em>-values interval(one-sided)"

@@ -478,11 +478,11 @@
   bmaTable$dependOn(options = c(.bmaDependencies, "bayesFactorType"))
 
   if (options$bayesFactorType == "BF10")
-    bfTitle <- gettextf("BF%s%s", "\u2081", "\u2080")
+    bfTitle <- gettextf("BF%1$s%2$s", "\u2081", "\u2080")
   else if (options$bayesFactorType == "BF01")
-    bfTitle <- gettextf("BF%s%s", "\u2080", "\u2081")
+    bfTitle <- gettextf("BF%1$s%2$s", "\u2080", "\u2081")
   else
-    bfTitle <- gettextf("Log(BF%s%s)", "\u2081", "\u2080")
+    bfTitle <- gettextf("Log(BF%1$s%2$s)", "\u2081", "\u2080")
 
   # Add columns
   bmaTable$addColumnInfo(name = "model", title = "", type = "string", combine = TRUE)
@@ -530,7 +530,7 @@
   }
 
   if(options$model != "fixed"){
-    bmaTable$addFootnote(gettextf("%s and %s are the group-level effect size and standard deviation, respectively.", "\u03BC", "\u03C4"))
+    bmaTable$addFootnote(gettextf("%1$s and %2$s are the group-level effect size and standard deviation, respectively.", "\u03BC", "\u03C4"))
   } else {
     bmaTable$addFootnote(gettextf("%s is the group-level effect size.", "\u03BC"))
   }

@@ -1088,7 +1088,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     if (modelsI < 1 || modelsI > length(fit[["models"]])) {
       tempModel  <- createJaspContainer(title = gettextf("Model %i", modelsI))
       tempError  <- createJaspTable(title = "")
-      tempError$setError(gettextf("Model %i does not exist. Select one of the models between 1 and %i.", modelsI, length(fit[["models"]])))
+      tempError$setError(gettextf("Model %1$i does not exist. Select one of the models between 1 and %2$i.", modelsI, length(fit[["models"]])))
       tempModel[["tempError"]]                     <- tempError
       individualModels[[paste0("model", modelsI)]] <- tempModel
       return()
