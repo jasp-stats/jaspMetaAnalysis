@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.3\n"
-"POT-Creation-Date: 2023-05-27 02:39\n"
+"POT-Creation-Date: 2023-07-20 11:27\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -801,9 +801,6 @@ msgid "min(ESS)"
 msgstr ""
 
 msgid "max(R-hat)"
-msgstr ""
-
-msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
 msgstr ""
 
 msgid "Weights"
