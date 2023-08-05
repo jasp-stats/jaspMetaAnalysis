@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2023-04-29 02:38\n"
-"PO-Revision-Date: 2023-05-01 11:48+0000\n"
-"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
+"PO-Revision-Date: 2023-08-04 12:02+0000\n"
+"Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
 "Language: es\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr "El límite previo inferior no es menor que el límite superior."
@@ -73,7 +73,7 @@ msgid "Upper"
 msgstr "Superior"
 
 msgid "Averaged"
-msgstr "Medio"
+msgstr "Promedio"
 
 msgid "Fixed effects"
 msgstr "Efectos fijos"
@@ -222,7 +222,7 @@ msgstr ""
 "del modelo de efectos aleatorios restringido."
 
 msgid "Effect Size"
-msgstr "Magnitud del Efecto"
+msgstr "Tamaño del efecto"
 
 msgid "Heterogeneity"
 msgstr "Heterogeneidad"
@@ -243,7 +243,7 @@ msgid "Random H"
 msgstr "H Aleatorio"
 
 msgid "Averaged H"
-msgstr "H Media"
+msgstr "H Promedio"
 
 msgid "Prior H"
 msgstr "H Previo"
@@ -294,19 +294,19 @@ msgid "fixed"
 msgstr "fjo"
 
 msgid "Anecdotal"
-msgstr "Anecdótico"
+msgstr "Anecdótica"
 
 msgid "Moderate"
-msgstr "Moderar"
+msgstr "Moderada"
 
 msgid "Strong"
 msgstr "Fuerte"
 
 msgid "Very Strong"
-msgstr "Muy Fuerte"
+msgstr "Muy fuerte"
 
 msgid "Extreme"
-msgstr "Extremo"
+msgstr "Extrema"
 
 msgid "Evidence for %s:"
 msgstr "Evidencia de %s:"
@@ -587,7 +587,7 @@ msgid "PM"
 msgstr "PM"
 
 msgid "%g%% Confidence Interval"
-msgstr "Intervalo con el %g%% de Confianza"
+msgstr "%g%% Intervalo de Confianza"
 
 msgid ""
 "The study labels contain invalid characters. Please, remove them before "
@@ -814,13 +814,13 @@ msgid "P(M|data)"
 msgstr "P(M|datos)"
 
 msgid "Model Averaged Estimates"
-msgstr "Estimaciones Medias del Modelo"
+msgstr "Estimaciones Promedio del Modelo"
 
 msgid "Model Averaged Weights (%s)"
-msgstr "Ponderaciones Medias del Modelo (%s)"
+msgstr "Ponderaciones Promedio del Modelo (%s)"
 
 msgid "Model Averaged PET-PEESE Estimates"
-msgstr "Estimaciones Medias del Modelo PET-PEESE"
+msgstr "Estimaciones Promedio del Modelo PET-PEESE"
 
 msgid "Conditional Weights (%s)"
 msgstr "Ponderaciones Condicionadas (%s)"
