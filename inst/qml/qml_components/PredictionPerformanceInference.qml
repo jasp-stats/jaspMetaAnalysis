@@ -46,15 +46,20 @@ Section
 		{
 			name:		"withinStudyVariation"
 			label:		qsTr("Within-study variation")
-			values: 	if (analysisType == "bayesian" && measure == "oeRatio"){ // removing as metamisc's link function is broken for frequentist option: method.value == "Fixed Effects" || method.value == "Maximum Likelihood" || 
+			values: 	if (analysisType == "bayesian" && measure == "oeRatio"){ // removing as metamisc's link function is broken for frequentist option: method.value == "Fixed Effects" || method.value == "Maximum Likelihood" ||
 				[
 					{ label: qsTr("Normal/Log"),		value: "normal/log"			},
 					{ label: qsTr("Normal/Identity"),	value: "normal/identity"	},
 					{ label: qsTr("Poisson/Log"),		value: "poisson/log"		}
 				]
-			} else {
+			} else if (measure == "oeRatio"){
 				[
 					{ label: qsTr("Normal/Log"),		value: "normal/log"			},
+					{ label: qsTr("Normal/Identity"),	value: "normal/identity"	}
+				]
+			} else {
+				[
+					{ label: qsTr("Normal/Logit"),		value: "normal/logit"			},
 					{ label: qsTr("Normal/Identity"),	value: "normal/identity"	}
 				]
 			}
