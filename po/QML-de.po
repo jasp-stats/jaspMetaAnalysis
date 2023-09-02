@@ -1919,3 +1919,7 @@ msgstr "Tabelle mittlerer Schätzungen"
 msgctxt "WaapWls|"
 msgid "Multiplicative heterogeneity estimates table"
 msgstr "Tabelle multiplikativer Heterogenitätsschätzungen"
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Normal/Logit"
+msgstr ""

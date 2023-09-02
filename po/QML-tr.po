@@ -1925,3 +1925,7 @@ msgstr ""
 msgctxt "WaapWls|"
 msgid "Multiplicative heterogeneity estimates table"
 msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Normal/Logit"
+msgstr ""
