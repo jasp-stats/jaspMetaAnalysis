@@ -1006,7 +1006,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   # compute the BF requested
   if (options[["inferenceModelsOverviewBfComparison"]] == "inclusion") {
-    bf <- fitSummary[["summary"]][, 7]
+    bf <- fitSummary[["summary"]][, 8]
   } else if (options[["inferenceModelsOverviewBfComparison"]] == "best") {
     bf <- exp(fitSummary[["summary"]][["marglik"]] - max(fitSummary[["summary"]][["marglik"]]))
   } else if (options[["inferenceModelsOverviewBfComparison"]] == "previous") {
