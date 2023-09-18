@@ -530,11 +530,11 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   # extract the priors
   if (is.null(jaspResults[["model"]]) && options[["modelEnsembleType"]] != "custom")
-    priors <- RoBMA::check_setup(model_type = options[["modelEnsembleType"]], silent = TRUE)$priors
+    priors <- .robmaPriorsToOptionsNames(RoBMA::check_setup(model_type = .robmaGetModelTypeOption(options), silent = TRUE)$priors)
   else if (is.null(jaspResults[["model"]]))
     priors <- jaspResults[["priors"]][["object"]]
   else
-    priors <- jaspResults[["model"]][["object"]][["priors"]]
+    priors <- .robmaPriorsToOptionsNames(jaspResults[["model"]][["object"]][["priors"]])
 
 
   # create container for each of the parameters
@@ -583,7 +583,12 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
         parameterContainer[[type]] <- typeContainer
       }
 
-      tempPriors <- priors[[paste0(parameter, if (type == "null") "Null")]]
+      tempPriors <- priors[[paste0(switch(
+        parameter,
+        "effect"        = "modelsEffect",
+        "heterogeneity" = "modelsHeterogeneity",
+        "bias"          = "modelsBias"
+      ), if (type == "null") "Null")]]
 
       if (length(tempPriors) == 0)
         next
@@ -1769,4 +1774,11 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   modelSaved[["object"]] <- TRUE
 
+}
+.robmaPriorsToOptionsNames     <- function(priors) {
+  priorNames               <- names(priors)
+  substr(priorNames, 1, 1) <- toupper(substr(priorNames, 1, 1))
+  priorNames               <- paste0("models", priorNames)
+  names(priors)            <- priorNames
+  return(priors)
 }
