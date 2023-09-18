@@ -950,7 +950,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   ### create overview table
   modelsSummary <- createJaspTable(title = gettext("Models Overview"))
-  modelsSummary$position <- 6
+  modelsSummary$position <- 8
   modelsSummary$dependOn(c(.robmaDependencies, "bayesFactorType", "inferenceModelsOverview", "inferenceModelsOverviewBF", "inferenceModelsOverviewOrder", "inferenceShortenPriorName"))
   jaspResults[["mainSummary"]][["modelsSummary"]] <- modelsSummary
 
@@ -1032,7 +1032,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     return()
   } else {
     individualModels <- createJaspContainer(title = gettext("Individual Models Summary"))
-    individualModels$position <- 5
+    individualModels$position <- 9
     individualModels$dependOn(c(.robmaDependencies, "bayesFactorType", "inferenceIndividualModels", "inferenceIndividualModelsSingleModel", "inferenceIndividualModelsSingleModelNumber", "inferenceShortenPriorName", "inferenceOutputScale"))
     jaspResults[["individualModels"]] <- individualModels
   }
@@ -1193,7 +1193,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   width  <- 800
 
   forestPlot <- createJaspPlot(title = title, width = width, height = height)
-  forestPlot$position <- 6
+  forestPlot$position <- 10
   forestPlot$dependOn(c(.robmaDependencies, "plotsForestPlot", "plotsForestPlotOrder", "plotsForestPlotType", "inferenceOutputScale"))
   jaspResults[["forestPlot"]] <- forestPlot
 
@@ -1222,7 +1222,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   # create / access the container
   if (is.null(jaspResults[["estimatesPlots"]])) {
     estimatesPlots <- createJaspContainer(title = gettext("Posterior Distribution Plots"))
-    estimatesPlots$position <- 7
+    estimatesPlots$position <- 11
     estimatesPlots$dependOn(c(.robmaDependencies, "plotsPooledEstimatesType", "plotsPooledEstimatesPriorDistribution", "inferenceOutputScale"))
     jaspResults[["estimatesPlots"]] <- estimatesPlots
   } else {
@@ -1306,7 +1306,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   # create / access the container
   if (is.null(jaspResults[["modelsPlots"]])) {
     modelsPlots <- createJaspContainer(title = gettext("Posterior Model Estimates Plots"))
-    modelsPlots$position <- 8
+    modelsPlots$position <- 12
     modelsPlots$dependOn(c(.robmaDependencies, "plotsIndividualModelsType", "plotsIndividualModelsOrder", "plotsIndividualModelsOrderBy", "plotsIndividualModelsShowBayesianUpdating", "plotsIndividualModelsShowPosteriorEstimates", "inferenceOutputScale"))
     jaspResults[["modelsPlots"]] <- modelsPlots
   } else {
@@ -1394,7 +1394,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   # create / access the container
   if (is.null(jaspResults[["diagnostics"]])) {
     diagnostics <- createJaspContainer(title = gettext("Diagnostics"))
-    diagnostics$position <- 9
+    diagnostics$position <- 13
     diagnostics$dependOn(.robmaDependencies)
     jaspResults[["diagnostics"]] <- diagnostics
   } else {
@@ -1457,7 +1457,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   # create / access the container
   if (is.null(jaspResults[["diagnostics"]])) {
     diagnostics <- createJaspContainer(title = gettext("Diagnostics"))
-    diagnostics$position <- 9
+    diagnostics$position <- 14
     diagnostics$dependOn(.robmaDependencies)
     jaspResults[["diagnostics"]] <- diagnostics
   } else {
