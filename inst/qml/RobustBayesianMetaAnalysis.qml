@@ -379,7 +379,7 @@ Form
 					{ label: qsTr("Cohen's d"),			value: "cohensD"},
 					{ label: qsTr("Fisher's z"),		value: "fishersZ"},
 					{ label: qsTr("logOR"),				value: "logOr"},
-					{ label: qsTr("Correlation"),		value: "r"}
+					{ label: qsTr("Correlation"),		value: "correlation"}
 				]
 			}
 
