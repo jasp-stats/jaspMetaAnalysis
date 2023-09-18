@@ -1576,7 +1576,10 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
           title         = FALSE
         )
 
-        if (is.null(newPlots))
+        # (temporal) fix for the package returning a list with empty plots on the remaining spots
+        newPlots <- newPlots[!sapply(newPlots, is.null)]
+
+        if (length(newPlots) == 0)
           next
 
         noPars <- FALSE
@@ -1620,7 +1623,10 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
           title         = FALSE
         )
 
-        if (is.null(newPlots))
+        # (temporal) fix for the package returning a list with empty plots on the remaining spots
+        newPlots <- newPlots[!sapply(newPlots, is.null)]
+
+        if (length(newPlots) == 0)
           next
 
         noPars <- FALSE
@@ -1665,7 +1671,10 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
           title         = FALSE
         )
 
-        if (is.null(newPlots))
+        # (temporal) fix for the package returning a list with empty plots on the remaining spots
+        newPlots <- newPlots[!sapply(newPlots, is.null)]
+
+        if (length(newPlots) == 0)
           next
 
         noPars <- FALSE
