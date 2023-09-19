@@ -230,7 +230,7 @@ Form
 				id:			priorScale
 				name:		"priorScale"
 				label:		qsTr("Prior scale")
-				enabled:	!measuresFitted.checked && !measuresGeneral.checked && !modelType.value == "custom"
+				enabled:	!measuresFitted.checked && !measuresGeneral.checked && modelType.value == "custom"
 
 				values: [
 					{ label: qsTr("Cohen's d"),			value: "cohensD"},
