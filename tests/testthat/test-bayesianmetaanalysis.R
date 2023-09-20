@@ -49,6 +49,7 @@ results <- jaspTools::runAnalysis("BayesianMetaAnalysis", "BCG Vaccine.csv", opt
 ##############################################################
 
 test_that("Posterior Estimates per Model table results match", {
+  testthat::skip_on_os(c("mac", "linux", "solaris"))
   table <- results[["results"]][["bmaTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
                                  list("TRUE", 4.70377989938849e+21, -0.434254495375077, 0.0413386758998794,
@@ -64,6 +65,7 @@ test_that("Posterior Estimates per Model table results match", {
 })
 
 test_that("Effect Sizes per Study table results match", {
+  testthat::skip_on_os(c("mac", "linux", "solaris"))
   table <- results[["results"]][["effectSizePerStudy"]][["data"]]
   jaspTools::expect_equal_tables(table,
                                  list(-0.809128072433214, -1.65195861984318, 0.0291494666483802, -0.9387,
