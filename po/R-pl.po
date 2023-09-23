@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.0\n"
 "POT-Creation-Date: 2023-04-29 02:38\n"
-"PO-Revision-Date: 2023-09-06 15:49+0000\n"
+"PO-Revision-Date: 2023-09-20 11:21+0000\n"
 "Last-Translator: Tomasz Misiuro <tomaszmisiuro@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/pl/>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.0.1-dev\n"
+"X-Generator: Weblate 5.1-dev\n"
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr ""
@@ -58,13 +58,13 @@ msgid "SD"
 msgstr "Odch. stand."
 
 msgid "Lower"
-msgstr "Dolna granica"
+msgstr "Dolny"
 
 msgid "95%% Credible Interval"
 msgstr "95%% przedział wiarygodności"
 
 msgid "Upper"
-msgstr "Górna granica"
+msgstr "Górny"
 
 msgid "Averaged"
 msgstr ""
@@ -329,13 +329,13 @@ msgid "df"
 msgstr "df"
 
 msgid "p"
-msgstr "<em>p</em>"
+msgstr "p"
 
 msgid "<em>p</em>-values are approximate."
 msgstr ""
 
 msgid "Coefficients"
-msgstr "Współczynniki"
+msgstr "Współczyniki"
 
 msgid "Estimate"
 msgstr "Oszacowanie"
@@ -422,7 +422,7 @@ msgid "The model was estimated using %1$s method."
 msgstr ""
 
 msgid "Log-Likelihood"
-msgstr ""
+msgstr "Log. prawdopodobieństwo"
 
 msgid "Deviance"
 msgstr "Odchylanie"
