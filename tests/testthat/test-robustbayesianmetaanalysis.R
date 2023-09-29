@@ -156,52 +156,6 @@ pathToFittedModel <- file.path("robmaFit.RDS")
 }
 {
   options <- analysisOptions("RobustBayesianMetaAnalysis")
-  options$.meta <- list(effectSize = list(shouldEncode = TRUE), effectSizeCi = list(
-    shouldEncode = TRUE), effectSizeSe = list(shouldEncode = TRUE),
-    modelsEffect = list(a = list(isRCode = TRUE), alpha = list(
-      isRCode = TRUE), b = list(isRCode = TRUE), beta = list(
-        isRCode = TRUE), k = list(isRCode = TRUE), mu = list(
-          isRCode = TRUE), nu = list(isRCode = TRUE), priorWeight = list(
-            isRCode = TRUE), sigma = list(isRCode = TRUE), theta = list(
-              isRCode = TRUE), truncationLower = list(isRCode = TRUE),
-      truncationUpper = list(isRCode = TRUE), x0 = list(isRCode = TRUE)),
-    modelsEffectNull = list(a = list(isRCode = TRUE), alpha = list(
-      isRCode = TRUE), b = list(isRCode = TRUE), beta = list(
-        isRCode = TRUE), k = list(isRCode = TRUE), mu = list(
-          isRCode = TRUE), nu = list(isRCode = TRUE), priorWeight = list(
-            isRCode = TRUE), sigma = list(isRCode = TRUE), theta = list(
-              isRCode = TRUE), truncationLower = list(isRCode = TRUE),
-      truncationUpper = list(isRCode = TRUE), x0 = list(isRCode = TRUE)),
-    modelsHeterogeneity = list(a = list(isRCode = TRUE), alpha = list(
-      isRCode = TRUE), b = list(isRCode = TRUE), beta = list(
-        isRCode = TRUE), k = list(isRCode = TRUE), mu = list(
-          isRCode = TRUE), nu = list(isRCode = TRUE), priorWeight = list(
-            isRCode = TRUE), sigma = list(isRCode = TRUE), theta = list(
-              isRCode = TRUE), truncationLower = list(isRCode = TRUE),
-      truncationUpper = list(isRCode = TRUE), x0 = list(isRCode = TRUE)),
-    modelsHeterogeneityNull = list(a = list(isRCode = TRUE),
-                                   alpha = list(isRCode = TRUE), b = list(isRCode = TRUE),
-                                   beta = list(isRCode = TRUE), k = list(isRCode = TRUE),
-                                   mu = list(isRCode = TRUE), nu = list(isRCode = TRUE),
-                                   priorWeight = list(isRCode = TRUE), sigma = list(isRCode = TRUE),
-                                   theta = list(isRCode = TRUE), truncationLower = list(
-                                     isRCode = TRUE), truncationUpper = list(isRCode = TRUE),
-                                   x0 = list(isRCode = TRUE)), modelsPeese = list(a = list(
-                                     isRCode = TRUE), alpha = list(isRCode = TRUE), b = list(
-                                       isRCode = TRUE), beta = list(isRCode = TRUE), k = list(
-                                         isRCode = TRUE), mu = list(isRCode = TRUE), nu = list(
-                                           isRCode = TRUE), sigma = list(isRCode = TRUE), truncationLower = list(
-                                             isRCode = TRUE), truncationUpper = list(isRCode = TRUE),
-                                     x0 = list(isRCode = TRUE)), modelsPet = list(a = list(
-                                       isRCode = TRUE), alpha = list(isRCode = TRUE), b = list(
-                                         isRCode = TRUE), beta = list(isRCode = TRUE), k = list(
-                                           isRCode = TRUE), mu = list(isRCode = TRUE), nu = list(
-                                             isRCode = TRUE), sigma = list(isRCode = TRUE), theta = list(
-                                               isRCode = TRUE), truncationLower = list(isRCode = TRUE),
-                                       truncationUpper = list(isRCode = TRUE), x0 = list(isRCode = TRUE)),
-    modelsSelectionModelsNull = list(priorWeight = list(isRCode = TRUE)),
-    sampleSize = list(shouldEncode = TRUE), studyLabel = list(
-      shouldEncode = TRUE))
   options$advancedAutofitMaximumFittingTime <- FALSE
   options$advancedAutofitMcmcError <- FALSE
   options$advancedAutofitMcmcErrorSd <- FALSE
@@ -288,52 +242,6 @@ pathToFittedModel <- file.path("robmaFit.RDS")
 ### custom model settings (testing different distributions and prior plots)
 {
   options <- analysisOptions("RobustBayesianMetaAnalysis")
-  options$.meta <- list(a = list(isRCode = TRUE), effectSize = list(shouldEncode = TRUE),
-                        effectSizeCi = list(shouldEncode = TRUE), effectSizeSe = list(
-                          shouldEncode = TRUE), modelsEffect = list(a = list(isRCode = TRUE),
-                                                                    alpha = list(isRCode = TRUE), b = list(isRCode = TRUE),
-                                                                    beta = list(isRCode = TRUE), k = list(isRCode = TRUE),
-                                                                    mu = list(isRCode = TRUE), nu = list(isRCode = TRUE),
-                                                                    priorWeight = list(isRCode = TRUE), sigma = list(isRCode = TRUE),
-                                                                    theta = list(isRCode = TRUE), truncationLower = list(
-                                                                      isRCode = TRUE), truncationUpper = list(isRCode = TRUE),
-                                                                    x0 = list(isRCode = TRUE)), modelsEffectNull = list(a = list(
-                                                                      isRCode = TRUE), alpha = list(isRCode = TRUE), b = list(
-                                                                        isRCode = TRUE), beta = list(isRCode = TRUE), k = list(
-                                                                          isRCode = TRUE), mu = list(isRCode = TRUE), nu = list(
-                                                                            isRCode = TRUE), priorWeight = list(isRCode = TRUE),
-                                                                      sigma = list(isRCode = TRUE), theta = list(isRCode = TRUE),
-                                                                      truncationLower = list(isRCode = TRUE), truncationUpper = list(
-                                                                        isRCode = TRUE), x0 = list(isRCode = TRUE)), modelsHeterogeneity = list(
-                                                                          a = list(isRCode = TRUE), alpha = list(isRCode = TRUE),
-                                                                          b = list(isRCode = TRUE), beta = list(isRCode = TRUE),
-                                                                          k = list(isRCode = TRUE), mu = list(isRCode = TRUE),
-                                                                          nu = list(isRCode = TRUE), priorWeight = list(isRCode = TRUE),
-                                                                          sigma = list(isRCode = TRUE), theta = list(isRCode = TRUE),
-                                                                          truncationLower = list(isRCode = TRUE), truncationUpper = list(
-                                                                            isRCode = TRUE), x0 = list(isRCode = TRUE)), modelsHeterogeneityNull = list(
-                                                                              a = list(isRCode = TRUE), alpha = list(isRCode = TRUE),
-                                                                              b = list(isRCode = TRUE), beta = list(isRCode = TRUE),
-                                                                              k = list(isRCode = TRUE), mu = list(isRCode = TRUE),
-                                                                              nu = list(isRCode = TRUE), priorWeight = list(isRCode = TRUE),
-                                                                              sigma = list(isRCode = TRUE), theta = list(isRCode = TRUE),
-                                                                              truncationLower = list(isRCode = TRUE), truncationUpper = list(
-                                                                                isRCode = TRUE), x0 = list(isRCode = TRUE)), modelsPeese = list(
-                                                                                  a = list(isRCode = TRUE), alpha = list(isRCode = TRUE),
-                                                                                  b = list(isRCode = TRUE), beta = list(isRCode = TRUE),
-                                                                                  k = list(isRCode = TRUE), mu = list(isRCode = TRUE),
-                                                                                  nu = list(isRCode = TRUE), sigma = list(isRCode = TRUE),
-                                                                                  truncationLower = list(isRCode = TRUE), truncationUpper = list(
-                                                                                    isRCode = TRUE), x0 = list(isRCode = TRUE)), modelsPet = list(
-                                                                                      a = list(isRCode = TRUE), alpha = list(isRCode = TRUE),
-                                                                                      b = list(isRCode = TRUE), beta = list(isRCode = TRUE),
-                                                                                      k = list(isRCode = TRUE), mu = list(isRCode = TRUE),
-                                                                                      nu = list(isRCode = TRUE), sigma = list(isRCode = TRUE),
-                                                                                      theta = list(isRCode = TRUE), truncationLower = list(
-                                                                                        isRCode = TRUE), truncationUpper = list(isRCode = TRUE),
-                                                                                      x0 = list(isRCode = TRUE)), modelsSelectionModelsNull = list(
-                                                                                        priorWeight = list(isRCode = TRUE)), sampleSize = list(
-                                                                                          shouldEncode = TRUE), studyLabel = list(shouldEncode = TRUE))
   options$advancedAutofitMaximumFittingTime <- FALSE
   options$advancedAutofitMcmcError <- FALSE
   options$advancedAutofitMcmcErrorSd <- FALSE
@@ -599,53 +507,6 @@ pathToFittedModel <- file.path("robmaFit.RDS")
 ### fit a small model using d + se, with minimum samples, no autofit, & and the complete output
 {
   options <- analysisOptions("RobustBayesianMetaAnalysis")
-  options$.meta <- list(effectSize = list(shouldEncode = FALSE), effectSizeCi = list(
-    shouldEncode = TRUE), effectSizeSe = list(shouldEncode = FALSE),
-    modelsEffect = list(a = list(isRCode = TRUE), alpha = list(
-      isRCode = TRUE), b = list(isRCode = TRUE), beta = list(
-        isRCode = TRUE), k = list(isRCode = TRUE), mu = list(
-          isRCode = TRUE), nu = list(isRCode = TRUE), priorWeight = list(
-            isRCode = TRUE), sigma = list(isRCode = TRUE), theta = list(
-              isRCode = TRUE), truncationLower = list(isRCode = TRUE),
-      truncationUpper = list(isRCode = TRUE), x0 = list(isRCode = TRUE)),
-    modelsEffectNull = list(a = list(isRCode = TRUE), alpha = list(
-      isRCode = TRUE), b = list(isRCode = TRUE), beta = list(
-        isRCode = TRUE), k = list(isRCode = TRUE), mu = list(
-          isRCode = TRUE), nu = list(isRCode = TRUE), priorWeight = list(
-            isRCode = TRUE), sigma = list(isRCode = TRUE), theta = list(
-              isRCode = TRUE), truncationLower = list(isRCode = TRUE),
-      truncationUpper = list(isRCode = TRUE), x0 = list(isRCode = TRUE)),
-    modelsHeterogeneity = list(a = list(isRCode = TRUE), alpha = list(
-      isRCode = TRUE), b = list(isRCode = TRUE), beta = list(
-        isRCode = TRUE), k = list(isRCode = TRUE), mu = list(
-          isRCode = TRUE), nu = list(isRCode = TRUE), priorWeight = list(
-            isRCode = TRUE), sigma = list(isRCode = TRUE), theta = list(
-              isRCode = TRUE), truncationLower = list(isRCode = TRUE),
-      truncationUpper = list(isRCode = TRUE), x0 = list(isRCode = TRUE)),
-    modelsHeterogeneityNull = list(a = list(isRCode = TRUE),
-                                   alpha = list(isRCode = TRUE), b = list(isRCode = TRUE),
-                                   beta = list(isRCode = TRUE), k = list(isRCode = TRUE),
-                                   mu = list(isRCode = TRUE), nu = list(isRCode = TRUE),
-                                   priorWeight = list(isRCode = TRUE), sigma = list(isRCode = TRUE),
-                                   theta = list(isRCode = TRUE), truncationLower = list(
-                                     isRCode = TRUE), truncationUpper = list(isRCode = TRUE),
-                                   x0 = list(isRCode = TRUE)), modelsPeese = list(a = list(
-                                     isRCode = TRUE), alpha = list(isRCode = TRUE), b = list(
-                                       isRCode = TRUE), beta = list(isRCode = TRUE), k = list(
-                                         isRCode = TRUE), mu = list(isRCode = TRUE), nu = list(
-                                           isRCode = TRUE), sigma = list(isRCode = TRUE), truncationLower = list(
-                                             isRCode = TRUE), truncationUpper = list(isRCode = TRUE),
-                                     x0 = list(isRCode = TRUE)), modelsPet = list(a = list(
-                                       isRCode = TRUE), alpha = list(isRCode = TRUE), b = list(
-                                         isRCode = TRUE), beta = list(isRCode = TRUE), k = list(
-                                           isRCode = TRUE), mu = list(isRCode = TRUE), nu = list(
-                                             isRCode = TRUE), priorWeight = list(isRCode = TRUE),
-                                       sigma = list(isRCode = TRUE), theta = list(isRCode = TRUE),
-                                       truncationLower = list(isRCode = TRUE), truncationUpper = list(
-                                         isRCode = TRUE), x0 = list(isRCode = TRUE)), modelsSelectionModels = list(
-                                           priorWeight = list(isRCode = TRUE)), modelsSelectionModelsNull = list(
-                                             priorWeight = list(isRCode = TRUE)), sampleSize = list(
-                                               shouldEncode = TRUE), studyLabel = list(shouldEncode = FALSE))
   options$advancedAutofitMaximumFittingTime <- FALSE
   options$advancedAutofitMcmcError <- FALSE
   options$advancedAutofitMcmcErrorSd <- FALSE
@@ -953,52 +814,6 @@ pathToFittedModel <- file.path("robmaFit.RDS")
 ### more options tested using a pre-loaded model: modify BF type, CI width, model ordering, output scale
 {
   options <- analysisOptions("RobustBayesianMetaAnalysis")
-  options$.meta <- list(effectSize = list(shouldEncode = TRUE), effectSizeCi = list(
-    shouldEncode = TRUE), effectSizeSe = list(shouldEncode = TRUE),
-    modelsEffect = list(a = list(isRCode = TRUE), alpha = list(
-      isRCode = TRUE), b = list(isRCode = TRUE), beta = list(
-        isRCode = TRUE), k = list(isRCode = TRUE), mu = list(
-          isRCode = TRUE), nu = list(isRCode = TRUE), priorWeight = list(
-            isRCode = TRUE), sigma = list(isRCode = TRUE), theta = list(
-              isRCode = TRUE), truncationLower = list(isRCode = TRUE),
-      truncationUpper = list(isRCode = TRUE), x0 = list(isRCode = TRUE)),
-    modelsEffectNull = list(a = list(isRCode = TRUE), alpha = list(
-      isRCode = TRUE), b = list(isRCode = TRUE), beta = list(
-        isRCode = TRUE), k = list(isRCode = TRUE), mu = list(
-          isRCode = TRUE), nu = list(isRCode = TRUE), priorWeight = list(
-            isRCode = TRUE), sigma = list(isRCode = TRUE), theta = list(
-              isRCode = TRUE), truncationLower = list(isRCode = TRUE),
-      truncationUpper = list(isRCode = TRUE), x0 = list(isRCode = TRUE)),
-    modelsHeterogeneity = list(a = list(isRCode = TRUE), alpha = list(
-      isRCode = TRUE), b = list(isRCode = TRUE), beta = list(
-        isRCode = TRUE), k = list(isRCode = TRUE), mu = list(
-          isRCode = TRUE), nu = list(isRCode = TRUE), priorWeight = list(
-            isRCode = TRUE), sigma = list(isRCode = TRUE), theta = list(
-              isRCode = TRUE), truncationLower = list(isRCode = TRUE),
-      truncationUpper = list(isRCode = TRUE), x0 = list(isRCode = TRUE)),
-    modelsHeterogeneityNull = list(a = list(isRCode = TRUE),
-                                   alpha = list(isRCode = TRUE), b = list(isRCode = TRUE),
-                                   beta = list(isRCode = TRUE), k = list(isRCode = TRUE),
-                                   mu = list(isRCode = TRUE), nu = list(isRCode = TRUE),
-                                   priorWeight = list(isRCode = TRUE), sigma = list(isRCode = TRUE),
-                                   theta = list(isRCode = TRUE), truncationLower = list(
-                                     isRCode = TRUE), truncationUpper = list(isRCode = TRUE),
-                                   x0 = list(isRCode = TRUE)), modelsPeese = list(a = list(
-                                     isRCode = TRUE), alpha = list(isRCode = TRUE), b = list(
-                                       isRCode = TRUE), beta = list(isRCode = TRUE), k = list(
-                                         isRCode = TRUE), mu = list(isRCode = TRUE), nu = list(
-                                           isRCode = TRUE), sigma = list(isRCode = TRUE), truncationLower = list(
-                                             isRCode = TRUE), truncationUpper = list(isRCode = TRUE),
-                                     x0 = list(isRCode = TRUE)), modelsPet = list(a = list(
-                                       isRCode = TRUE), alpha = list(isRCode = TRUE), b = list(
-                                         isRCode = TRUE), beta = list(isRCode = TRUE), k = list(
-                                           isRCode = TRUE), mu = list(isRCode = TRUE), nu = list(
-                                             isRCode = TRUE), sigma = list(isRCode = TRUE), theta = list(
-                                               isRCode = TRUE), truncationLower = list(isRCode = TRUE),
-                                       truncationUpper = list(isRCode = TRUE), x0 = list(isRCode = TRUE)),
-    modelsSelectionModelsNull = list(priorWeight = list(isRCode = TRUE)),
-    sampleSize = list(shouldEncode = TRUE), studyLabel = list(
-      shouldEncode = TRUE))
   options$advancedAutofitMaximumFittingTime <- FALSE
   options$advancedAutofitMcmcError <- FALSE
   options$advancedAutofitMcmcErrorSd <- FALSE
