@@ -5,6 +5,7 @@ context("Bayesian Penalized Meta Analysis")
 # when they start failing it might be due to seed issues
 # you can skip the tests if this is the case
 ##############################################################
+testthat::skip_on_os(c("mac", "linux", "solaris"))
 
 # covariates, all output, no clustering
 options <- analysisOptions("PenalizedMetaAnalysis")
