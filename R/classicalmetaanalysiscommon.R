@@ -519,7 +519,7 @@
 .metaAnalysisFailSafeFill <- function(container, dataset, options) {
   # Compute/get model
   rma.fit <- .metaAnalysisComputeModel(container, dataset, options, ready)
-  fsn.fit <- metafor::fsn(yi   = get(options$effectSize),
+  fsn.fit <- metafor::fsn(x    = get(options$effectSize),
                           sei  = get(options$effectSizeSe),
                           data = dataset)
   container[["failSafeTable"]]$addRows(list("name" = fsn.fit$type,
