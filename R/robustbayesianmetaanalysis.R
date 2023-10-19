@@ -747,8 +747,12 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   if (options[["inputType"]] == "fittedModel") {
 
-    fit <- readRDS(file = options[["pathToFittedModel"]])
+    fit <- try(readRDS(file = options[["pathToFittedModel"]]))
 
+    if (jaspBase::isTryError(fit) && grepl("cannot open the connection", fit))
+      .quitAnalysis(gettext("The specified path does not lead to an existing file."))
+    if (jaspBase::isTryError(fit))
+      .quitAnalysis(.quitAnalysis(gettextf("An error occurred while reading the model file: %1$s", jaspBase:::.extractErrorMessage(fit))))
     if (!RoBMA::is.RoBMA(fit))
       .quitAnalysis(gettext("The loaded object is not a RoBMA model."))
 
