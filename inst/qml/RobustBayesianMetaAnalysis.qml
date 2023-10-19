@@ -147,8 +147,8 @@ Form
 			label:		qsTr("Cohen's d")
 			value:		"cohensD"
 			id:			measuresCohensD
-			enabled:	mainWindow.dataAvailable
-			checked:	mainWindow.dataAvailable
+			enabled:	dataSetInfo.dataAvailable
+			checked:	dataSetInfo.dataAvailable
 		}
 
 		RadioButton
@@ -156,7 +156,7 @@ Form
 			label:		qsTr("Correlations")
 			value:		"correlation"
 			id:			measuresCorrelation
-			enabled:	mainWindow.dataAvailable
+			enabled:	dataSetInfo.dataAvailable
 		}
 
 		RadioButton
@@ -164,7 +164,7 @@ Form
 			label:		qsTr("Log odds ratios")
 			value:		"logOr"
 			id:			measureslogOr
-			enabled:	mainWindow.dataAvailable
+			enabled:	dataSetInfo.dataAvailable
 		}
 
 		RadioButton
@@ -172,7 +172,7 @@ Form
 			label:		qsTr("Unstandardized effect sizes")
 			value:		"unstandardizedEffectSizes"
 			id:			measuresGeneral
-			enabled:	mainWindow.dataAvailable
+			enabled:	dataSetInfo.dataAvailable
 		}
 
 		RadioButton
@@ -180,7 +180,7 @@ Form
 			label:		qsTr("Fitted model")
 			value:		"fittedModel"
 			id:			measuresFitted
-			checked:	!mainWindow.dataAvailable
+			checked:	!dataSetInfo.dataAvailable
 		}
 	}
 	
