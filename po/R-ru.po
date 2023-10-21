@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.3\n"
-"POT-Creation-Date: 2023-07-20 11:27\n"
+"POT-Creation-Date: 2023-10-21 02:33\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -723,6 +723,12 @@ msgid "Model Specification Preview"
 msgstr ""
 
 msgid "Prior Distribution"
+msgstr ""
+
+msgid "The specified path does not lead to an existing file."
+msgstr ""
+
+msgid "An error occurred while reading the model file: %1$s"
 msgstr ""
 
 msgid "The loaded object is not a RoBMA model."
