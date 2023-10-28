@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2023-10-24 04:02+0000\n"
+"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.1.1-dev\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -1785,12 +1791,12 @@ msgstr "Regressionsschätzung"
 #, fuzzy
 msgctxt "PredictionPerformanceData|"
 msgid "O/E Ratio"
-msgstr "O/E Verhältnis"
+msgstr "O/E-Verhältnis"
 
 #, fuzzy
 msgctxt "PredictionPerformanceData|"
 msgid "O/E ratio"
-msgstr "O/E Verhältnis"
+msgstr "O/E-Verhältnis"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Export computed effect size"
@@ -1803,17 +1809,17 @@ msgstr "Spaltenname (Effektstärke)"
 #, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "O/E ratios"
-msgstr "O/E Verhältnisse"
+msgstr "O/E-Verhältnisse"
 
 #, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "O/E ratios (lCI)"
-msgstr "O/E Verhältnisse (lCI)"
+msgstr "O/E-Verhältnisse (lCI)"
 
 #, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "O/E ratios (uCI)"
-msgstr "O/E Verhältnisse (uCI)"
+msgstr "O/E-Verhältnisse (uCI)"
 
 #, fuzzy
 msgctxt "PredictionPerformancePriors|"
@@ -1922,4 +1928,4 @@ msgstr "Tabelle multiplikativer Heterogenitätsschätzungen"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Normal/Logit"
-msgstr ""
+msgstr "Normal/Logit"
