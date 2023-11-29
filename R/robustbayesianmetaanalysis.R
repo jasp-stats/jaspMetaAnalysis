@@ -1475,9 +1475,15 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
 
   # create waiting plot
-  if (!(options[["mcmcDiagnosticsPlotEffect"]] || options[["mcmcDiagnosticsPlotHeterogeneity"]] || options[["mcmcDiagnosticsPlotWeights"]] || options[["mcmcDiagnosticsPlotPet"]] || options[["mcmcDiagnosticsPlotPeese"]]) && (options[["mcmcDiagnosticsPlotTypeTrace"]] || options[["mcmcDiagnosticsPlotTypeAutocorrelation"]] || options[["mcmcDiagnosticsPlotTypePosteriorSamplesDensity"]]) || is.null(jaspResults[["model"]])) {
+  if (
+    (!(options[["mcmcDiagnosticsPlotEffect"]] || options[["mcmcDiagnosticsPlotHeterogeneity"]] || options[["mcmcDiagnosticsPlotWeights"]] || options[["mcmcDiagnosticsPlotPet"]] || options[["mcmcDiagnosticsPlotPeese"]]) &&
+      (options[["mcmcDiagnosticsPlotTypeTrace"]] || options[["mcmcDiagnosticsPlotTypeAutocorrelation"]] || options[["mcmcDiagnosticsPlotTypePosteriorSamplesDensity"]])) ||
+    ((options[["mcmcDiagnosticsPlotEffect"]] || options[["mcmcDiagnosticsPlotHeterogeneity"]] || options[["mcmcDiagnosticsPlotWeights"]] || options[["mcmcDiagnosticsPlotPet"]] || options[["mcmcDiagnosticsPlotPeese"]]) &&
+     !(options[["mcmcDiagnosticsPlotTypeTrace"]] || options[["mcmcDiagnosticsPlotTypeAutocorrelation"]] || options[["mcmcDiagnosticsPlotTypePosteriorSamplesDensity"]])) ||
+      is.null(jaspResults[["model"]])) {
     tempWait  <- createJaspPlot(title = "")
-    tempWait$dependOn(c("mcmcDiagnosticsPlotEffect", "mcmcDiagnosticsPlotHeterogeneity", "mcmcDiagnosticsPlotWeights", "mcmcDiagnosticsPlotPet", "mcmcDiagnosticsPlotPeese", "mcmcDiagnosticsPlotTypeTrace", "mcmcDiagnosticsPlotTypeAutocorrelation", "mcmcDiagnosticsPlotTypePosteriorSamplesDensity"))
+    tempWait$dependOn(c("mcmcDiagnosticsPlotEffect", "mcmcDiagnosticsPlotHeterogeneity", "mcmcDiagnosticsPlotWeights", "mcmcDiagnosticsPlotPet", "mcmcDiagnosticsPlotPeese",
+                        "mcmcDiagnosticsPlotTypeTrace", "mcmcDiagnosticsPlotTypeAutocorrelation", "mcmcDiagnosticsPlotTypePosteriorSamplesDensity"))
     diagnostics[["tempWait"]] <- tempWait
     return()
   }
@@ -1554,8 +1560,8 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
           "mu"    = "mcmcDiagnosticsPlotEffect",
           "tau"   = "mcmcDiagnosticsPlotHeterogeneity",
           "omega" = "mcmcDiagnosticsPlotWeights",
-          "PET"   = "diagnosticsPET",
-          "PEESE" = "diagnosticsPEESE"
+          "PET"   = "mcmcDiagnosticsPlotPet",
+          "PEESE" = "mcmcDiagnosticsPlotPeese"
         ))
         tempModel[[par]] <- tempPar
       } else {
@@ -1709,7 +1715,8 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     # show error if only one model is selected but doesn't contain any of the diagnostics
     if (noPars && options[["mcmcDiagnosticsPlotSingleModelNumber"]]) {
       tempError  <- createJaspPlot(title = "")
-      tempError$dependOn(c("mcmcDiagnosticsPlotEffect", "mcmcDiagnosticsPlotHeterogeneity", "mcmcDiagnosticsPlotWeights", "diagnosticsPET", "diagnosticsPEESE", "mcmcDiagnosticsPlotTypeTrace", "mcmcDiagnosticsPlotTypeAutocorrelation", "mcmcDiagnosticsPlotTypePosteriorSamplesDensity"))
+      tempError$dependOn(c("mcmcDiagnosticsPlotEffect", "mcmcDiagnosticsPlotHeterogeneity", "mcmcDiagnosticsPlotWeights", "mcmcDiagnosticsPlotPet", "mcmcDiagnosticsPlotPeese",
+                           "mcmcDiagnosticsPlotTypeTrace", "mcmcDiagnosticsPlotTypeAutocorrelation", "mcmcDiagnosticsPlotTypePosteriorSamplesDensity"))
       tempError$setError(gettextf("Model %i does not contain any of the selected parameters.", i))
       tempModel[["tempError"]] <- tempError
     }
