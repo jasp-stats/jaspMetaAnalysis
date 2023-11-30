@@ -23,7 +23,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   if (.pemaCheckReady(options)) {
     # get the data
-    dataset <- .pemaGetData(dataset, options)
+    dataset <- .pemaGetData(jaspResults, dataset, options)
 
     # fit the models
     .pemaFit(jaspResults, dataset, options)
@@ -57,7 +57,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 .pemaCheckReady                <- function(options) {
   return(options[["effectSize"]] != "" && options[["effectSizeSe"]] != "" && length(options[["modelTerms"]]) > 0)
 }
-.pemaGetData                   <- function(dataset, options) {
+.pemaGetData                   <- function(jaspResults, dataset, options) {
 
   if (!is.null(dataset))
     return(dataset)
@@ -73,8 +73,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     factor.variables  <- Filter(function(s) s != "", c(factNames, studyLabels, clustNames))
 
     dataset <- .readDataSetToEnd(columns.as.factor   = factor.variables,
-                                 columns.as.numeric  = numeric.variables,
-                                 exclude.na.listwise = numeric.variables)
+                                 columns.as.numeric  = numeric.variables)
 
     # precompute variance
     dataset$JASP_computed_variance__ <- dataset[,stderrName]^2
@@ -327,6 +326,9 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   if (minESS < 100 * options$mcmcChains || is.nan(minESS))
     summaryTable$addFootnote(.pemaMessageMinESS(minESS, 100 * options$mcmcChains), symbol = gettext("Warning:"))
+
+  if (!is.null(jaspResults[["nOmitted"]]))
+    summaryTable$addFootnote(gettextf("%1$s observations were ommited due to missing values.", jaspResults[["nOmitted"]]$object))
 
   return()
 }
