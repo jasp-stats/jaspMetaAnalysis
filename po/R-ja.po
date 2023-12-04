@@ -890,11 +890,6 @@ msgstr "min(ESS)"
 msgid "max(R-hat)"
 msgstr "max(R-hat)"
 
-msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
-msgstr ""
-"モデル %1$i は存在しません。1 から %2$i までのモデルのうち 1 つを選択してくだ"
-"さい."
-
 msgid "Weights"
 msgstr "ウェイト"
 
