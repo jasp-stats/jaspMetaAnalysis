@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
-"POT-Creation-Date: 2023-04-29 02:38\n"
+"POT-Creation-Date: 2023-12-02 02:34\n"
 "PO-Revision-Date: 2023-10-06 11:11+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
@@ -685,6 +685,10 @@ msgstr "Se necesita establecer al menos un predictor."
 msgid "Warning:"
 msgstr "Advertencia:"
 
+#, fuzzy
+msgid "%1$s observations were ommited due to missing values."
+msgstr "la observación %i se eliminó debido a valores ausentes."
+
 msgid "Posterior distribution"
 msgstr "Distribución posterior"
 
@@ -792,6 +796,12 @@ msgstr "Vista Previa de la Especificación del Modelo"
 msgid "Prior Distribution"
 msgstr "Distribución previa"
 
+msgid "The specified path does not lead to an existing file."
+msgstr ""
+
+msgid "An error occurred while reading the model file: %1$s"
+msgstr ""
+
 msgid "The loaded object is not a RoBMA model."
 msgstr "El objeto cargado no es un modelo RoBMA."
 
@@ -859,7 +869,8 @@ msgid "Model %i"
 msgstr "Modelo %i"
 
 msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
-msgstr "El modelo %1$i no existe. Selecciona uno de los modelos entre 1 y %2$i."
+msgstr ""
+"El modelo %1$i no existe. Selecciona uno de los modelos entre 1 y %2$i."
 
 msgid "Estimated Weights (%s)"
 msgstr "Ponderaciones Estimadas (%s)"

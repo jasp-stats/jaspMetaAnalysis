@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
-"POT-Creation-Date: 2023-04-29 02:38\n"
+"POT-Creation-Date: 2023-12-02 02:34\n"
 "PO-Revision-Date: 2023-04-21 17:51+0000\n"
 "Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -663,6 +663,10 @@ msgid "Warning:"
 msgstr "警告:"
 
 #, fuzzy
+msgid "%1$s observations were ommited due to missing values."
+msgstr "%i の観測値が欠損しているため削除されました。"
+
+#, fuzzy
 msgid "Posterior distribution"
 msgstr "事前分布"
 
@@ -763,6 +767,12 @@ msgstr "モデル仕様のプレビュー"
 msgid "Prior Distribution"
 msgstr "事前分布"
 
+msgid "The specified path does not lead to an existing file."
+msgstr ""
+
+msgid "An error occurred while reading the model file: %1$s"
+msgstr ""
+
 msgid "The loaded object is not a RoBMA model."
 msgstr "読み込まれたオブジェクトは、RoBMAモデルではありません."
 
@@ -831,7 +841,8 @@ msgstr "モデル %i"
 
 msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
 msgstr ""
-"モデル %1$i は存在しません。1 ~ %2$i の間のモデルのうち一つを選択してください."
+"モデル %1$i は存在しません。1 ~ %2$i の間のモデルのうち一つを選択してくださ"
+"い."
 
 msgid "Estimated Weights (%s)"
 msgstr "推定ウェイト(%s)"

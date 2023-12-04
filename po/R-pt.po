@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2023-04-29 02:38\n"
+"POT-Creation-Date: 2023-12-02 02:34\n"
 "PO-Revision-Date: 2022-08-29 00:27+0000\n"
 "Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
@@ -679,6 +679,10 @@ msgid "Warning:"
 msgstr "Aviso:"
 
 #, fuzzy
+msgid "%1$s observations were ommited due to missing values."
+msgstr "%i observação foi removida devido a valores ausentes."
+
+#, fuzzy
 msgid "Posterior distribution"
 msgstr "Amostras posteriores"
 
@@ -779,6 +783,12 @@ msgid "Model Specification Preview"
 msgstr "Nome do modelo"
 
 msgid "Prior Distribution"
+msgstr ""
+
+msgid "The specified path does not lead to an existing file."
+msgstr ""
+
+msgid "An error occurred while reading the model file: %1$s"
 msgstr ""
 
 msgid "The loaded object is not a RoBMA model."

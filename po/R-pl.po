@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.0\n"
-"POT-Creation-Date: 2023-04-29 02:38\n"
+"POT-Creation-Date: 2023-12-02 02:34\n"
 "PO-Revision-Date: 2023-12-02 02:33+0000\n"
 "Last-Translator: Tomasz Misiuro <tomaszmisiuro@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
@@ -633,6 +633,9 @@ msgstr ""
 msgid "Warning:"
 msgstr "Ostrzeżenie:"
 
+msgid "%1$s observations were ommited due to missing values."
+msgstr ""
+
 msgid "Posterior distribution"
 msgstr "Rozkład posterior"
 
@@ -725,6 +728,12 @@ msgid "Model Specification Preview"
 msgstr ""
 
 msgid "Prior Distribution"
+msgstr ""
+
+msgid "The specified path does not lead to an existing file."
+msgstr ""
+
+msgid "An error occurred while reading the model file: %1$s"
 msgstr ""
 
 msgid "The loaded object is not a RoBMA model."
