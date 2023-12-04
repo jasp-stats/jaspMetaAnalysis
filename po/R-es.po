@@ -918,9 +918,6 @@ msgstr "min(ESS)"
 msgid "max(R-hat)"
 msgstr "máx(R-circunflejo)"
 
-msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
-msgstr "El modelo %1$i no existe. Escoge uno de los modelos entre 1 y %2$i."
-
 msgid "Weights"
 msgstr "Ponderaciones"
 

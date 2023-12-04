@@ -927,9 +927,6 @@ msgstr ""
 msgid "max(R-hat)"
 msgstr ""
 
-msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
-msgstr ""
-
 #, fuzzy
 msgid "Weights"
 msgstr "WLS Ponderado"
