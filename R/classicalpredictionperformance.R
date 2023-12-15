@@ -171,7 +171,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
 
 
   if (jaspBase::isTryError(fit))
-    jaspResults[["summaryTable"]]$setError(gettextf("metamisc package failed with the following error: '%s'", fit))
+    jaspResults[["summaryTable"]]$setError(gettextf("metamisc package failed with the following error: '%s'", .extractErrorMessage(fit)))
 
   if (is.null(fit) || jaspResults[["summaryTable"]]$getError())
     return()
@@ -357,11 +357,11 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   if (is.null(fatFits[["M-FIV"]]) && options[["funnelPlotAsymmetryTestMacaskill"]])
     fatFits[["M-FIV"]] <- try({
       if (options[["numberOfParticipants"]] == "")
-        stop("The number of participants must be specified.", domain = NA)
+        stop("The number of participants must be specified.", call. = FALSE)
       fitFat <- metamisc::fat(b = fit$data[,theta], b.se = fit$data[,theta.se], method = "M-FIV",
                               n.total = dataset[, options[["numberOfParticipants"]]])
       if (is.na(fitFat$pval))
-        stop("The regression model could not be estimated.", domain = NA)
+        stop("The regression model could not be estimated.", call. = FALSE)
       else
         fitFat
     })
@@ -369,13 +369,13 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   if (is.null(fatFits[["M-FPV"]]) && options[["funnelPlotAsymmetryTestMacaskillPooled"]])
     fatFits[["M-FPV"]] <- try({
       if (options[["numberOfParticipants"]] == "")
-        stop("The number of participants must be specified.", domain = NA)
+        stop("The number of participants must be specified.", call. = FALSE)
       else if (options[["numberOfObservedEvents"]] == "")
-        stop("The number of observed events must be specified.", domain = NA)
+        stop("The number of observed events must be specified.", call. = FALSE)
       fitFat <- metamisc::fat(b = fit$data[,theta], b.se = fit$data[,theta.se], method = "M-FPV",
                               n.total = dataset[, options[["numberOfParticipants"]]], d.total = dataset[, options[["numberOfObservedEvents"]]])
       if (is.na(fitFat$pval))
-        stop("The regression model could not be estimated.", domain = NA)
+        stop("The regression model could not be estimated.", call. = FALSE)
       else
         fitFat
     })
@@ -383,13 +383,13 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   if (is.null(fatFits[["P-FPV"]]) && options[["funnelPlotAsymmetryTestPeters"]])
     fatFits[["P-FPV"]] <- try({
       if (options[["numberOfParticipants"]] == "")
-        stop("The number of participants must be specified.", domain = NA)
+        stop("The number of participants must be specified.", call. = FALSE)
       else if (options[["numberOfObservedEvents"]] == "")
-        stop("The number of observed events must be specified.", domain = NA)
+        stop("The number of observed events must be specified.", call. = FALSE)
       fitFat <- metamisc::fat(b = fit$data[,theta], b.se = fit$data[,theta.se], method = "P-FPV",
                               n.total = dataset[, options[["numberOfParticipants"]]], d.total = dataset[, options[["numberOfObservedEvents"]]])
       if (is.na(fitFat$pval))
-        stop("The regression model could not be estimated.", domain = NA)
+        stop("The regression model could not be estimated.", call. = FALSE)
       else
         fitFat
     })
@@ -401,7 +401,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
       fitFat <- metamisc::fat(b = fit$data[,theta], b.se = fit$data[,theta.se], method = "D-FIV",
                               d.total = dataset[, options[["numberOfObservedEvents"]]])
       if (is.na(fitFat$pval))
-        stop("The regression model could not be estimated.", domain = NA)
+        stop("The regression model could not be estimated.", call. = FALSE)
       else
         fitFat
     })
@@ -446,7 +446,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
       ))
       funnelTestTable$addFootnote(gettextf("The %1$s test failed with the following error: %2$s",
                                            .metamiscFitFunnelAsymmetryNames(names(fatFits)[i]),
-                                           fatFits[[i]]))
+                                           .extractErrorMessage(fatFits[[i]])))
     } else {
       funnelTestTable$addRows(list(
         method  = .metamiscFitFunnelAsymmetryNames(fatFits[[i]]$method),
@@ -561,7 +561,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
     yax  <- unique(round(1/jaspGraphs::getPrettyAxisBreaks(range(yval, na.rm = TRUE))))
     ylim <- range(c(yval, 1/yax))
   } else {
-    stop("Plot not supported!", domain = NA)
+    stop("Plot is not supported.", call. = FALSE)
   }
 
   newdata <- sort(c(-max(x$model$data[, "x"]), x$model$data[,"x"], 2 * max(x$model$data[, "x"])))
