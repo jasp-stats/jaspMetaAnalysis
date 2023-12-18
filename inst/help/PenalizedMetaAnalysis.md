@@ -9,7 +9,7 @@ Penalized meta-analysis allows the user to estimate Bayesian horseshoe and lasso
 - Effect Size: Effect size of the studies. 
 - Effect Size Standard Error: Standard errors of the effect sizes per study. Must always be positive. A 95% CI for the effect sizes can be provided instead. 
 - Method: Specify the regularization method for meta-regression.
-	- Horseshoe: Regularization using the horseshoe prior.
+  - Horseshoe: Regularization using the horseshoe prior.
   - Lasso: Regularization using the lasso prior.
 - Covariates: Continuous predictor variable(s). If ordinal variables are entered it is assumed that their levels are equidistant. Hence, ordinal variables are treated as continuous predictor variables.
 - Factors: Categorical predictors variable(s). Ordinal variables here are treated as categorical predictor variables, thus, the ordinal information is ignored.
