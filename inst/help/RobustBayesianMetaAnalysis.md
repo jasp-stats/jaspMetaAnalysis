@@ -3,7 +3,7 @@ Robust Bayesian Meta-Analysis
 
 Robust Bayesian meta-analysis allows the user to specify a wide range of meta-analytic models, combine their estimates using model averaging, and quantify evidence for different hypotheses using Bayes factors. The analysis allows the user to specify various prior distributions for effect sizes and heterogeneity and incorporate models correcting for publication bias with selection models and PET-PEESE. 
 
-Please note that we updated the model specification of RoBMA models with the version of JASP 0.15 (the analysis is now built on RoBMA 2.0 package). See our new RoBMA preprint for more details (https://doi.org/10.31234/osf.io/kvsp7).
+Please note that we updated the model specification of RoBMA models with the version of JASP 0.15. The default model specification corresponds to RoBMA-PSMA described in Bartoš and colleagues (2023).
 
 ### Input
 ---
@@ -27,10 +27,10 @@ The input supplied as standardized effect sizes are internally transformed to Fi
 The direction of the expected effect size (the publication bias adjusted models with one-sided weight functions and PET-PEESE publication bias adjustments are not symmetrical around zero).
 
 #### Model type
-Either one of the three pre-specified model types corresponding to the models introduced in Bartoš et al. (2021) and Maier, Bartoš & Wagenmakers (in press), or a custom ensemble.
-- RoBMA-PSMA corresponds to the 36 model ensemble that combines selection models and PET-PEESE adjustment for publication bias adjustment component (from Bartoš et al., 2021)
-- RoBMA-PP corresponds to the 12 model ensemble that uses PET-PEESE adjustment for publication bias adjustment component (from Bartoš et al., 2021)
-- RoBMA-original corresponds to the 12 model ensemble that uses two two-sided weight functions for publication bias adjustment component (from Maier, Bartoš & Wagenmakers, in press)
+Either one of the three pre-specified model types corresponding to the models introduced in Bartoš et al. (2023) and Maier, Bartoš & Wagenmakers (2023), or a custom ensemble.
+- RoBMA-PSMA corresponds to the 36 model ensemble that combines selection models and PET-PEESE adjustment for publication bias adjustment component (from Bartoš et al., 2023)
+- RoBMA-PP corresponds to the 12 model ensemble that uses PET-PEESE adjustment for publication bias adjustment component (from Bartoš et al., 2023)
+- RoBMA-original corresponds to the 12 model ensemble that uses two two-sided weight functions for publication bias adjustment component (from Maier, Bartoš & Wagenmakers, 2023)
 - Custom allows specifying a custom model ensemble under the `Models` section
 
 #### Prior scale
@@ -238,9 +238,9 @@ Balances the prior model probability across models with the same combinations of
 
 ### References
 ---
-- Maier, M., Bartoš, F., & Wagenmakers, E. J. (in press). Robust Bayesian meta-analysis: Addressing publication bias with model-averaging. Psychological Methods. https://doi.org/10.31234/osf.io/u4cns
-- Bartoš, F., Maier, M., Wagenmakers, E. J., Doucouliagos, H., & Stanley, T. D. (2021). No need to choose: Robust Bayesian meta-analysis with competing publication bias adjustment methods. https://doi.org/10.31234/osf.io/kvsp7
-- Bartoš, F., Maier, M., Quintana, D. S., & Wagenmakers, E. J. (2020). Adjusting for publication bias in JASP & R — selection models, PET-PEESE, and robust Bayesian meta-analysis. https://doi.org/10.31234/osf.io/75bqn
+- Maier, M., Bartoš, F., & Wagenmakers, E. J. (2023). Robust Bayesian meta-analysis: Addressing publication bias with model-averaging. Psychological Methods 28 (1), 107-122.  https://doi.org/10.1037/met0000405
+- Bartoš, F., Maier, M., Wagenmakers, E. J., Doucouliagos, H., & Stanley, T. D. (2023). Robust Bayesian meta-analysis: Model-averaging across complementary publication bias adjustment methods. Research Synthesis Methods 14 (1), 99-116. https://doi.org/10.1002/jrsm.1594
+- Bartoš, F., Maier, M., Quintana, D. S., & Wagenmakers, E. J. (2022). Adjusting for publication bias in JASP & R: Selection models, PET-PEESE, and robust Bayesian meta-analysis. Advances in Methods and Practices in Psychological Science 5 (3), 1-19. https://doi.org/10.1177/25152459221109259
 
 ### R-packages
 ---
