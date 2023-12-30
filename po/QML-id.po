@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2023-12-27 16:06+0000\n"
+"Last-Translator: Rania Rahida <raniarahida@gmail.com>\n"
+"Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/id/>\n"
+"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.4-dev\n"
 "X-Language: id\n"
 "X-Qt-Contexts: true\n"
 
@@ -61,7 +67,7 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Effect Size"
-msgstr ""
+msgstr "Ukuran Efek"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
@@ -90,7 +96,7 @@ msgstr ""
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Autocorrelation"
-msgstr ""
+msgstr "Autokorelasi"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Gelman Rubin"
@@ -111,15 +117,15 @@ msgstr ""
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Sample"
-msgstr ""
+msgstr "Sampel"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Chains"
-msgstr ""
+msgstr "Rantai"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Effect Size"
-msgstr ""
+msgstr "Ukuran Efek"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Effect Size Standard Error"
@@ -131,19 +137,19 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Covariates"
-msgstr ""
+msgstr "Kovariat"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Factors"
-msgstr ""
+msgstr "Faktor"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Model"
-msgstr ""
+msgstr "Model"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Components"
-msgstr ""
+msgstr "Komponen"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Model Terms"
@@ -155,7 +161,7 @@ msgstr ""
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Effect Size"
-msgstr ""
+msgstr "Ukuran Efek"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Effect Size Variance"
@@ -163,7 +169,7 @@ msgstr ""
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fixed Effects"
-msgstr ""
+msgstr "Efek Tetap"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Inner Grouping (Multivariate Structure)"
@@ -183,7 +189,7 @@ msgstr ""
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Predictors"
-msgstr ""
+msgstr "Prediktor"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Model Terms"
@@ -203,7 +209,7 @@ msgstr ""
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Statistics"
-msgstr ""
+msgstr "Statistik"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Omnibus Statistics"
@@ -211,7 +217,7 @@ msgstr ""
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Anova Table"
-msgstr ""
+msgstr "Tabel Anova"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fit Indices"
@@ -219,7 +225,7 @@ msgstr ""
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Coefficients"
-msgstr ""
+msgstr "Koefisien"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fixed Effects Coefficients Table"
@@ -257,7 +263,7 @@ msgstr "Tingkat Lanjut"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Method"
-msgstr ""
+msgstr "Metode"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fixed Effects Covariance Matrix"
@@ -265,7 +271,7 @@ msgstr ""
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Diagnostics"
-msgstr ""
+msgstr "Diagnostik"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Test for Funnel Plot Asymmetry"
@@ -285,11 +291,11 @@ msgstr ""
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Diagnostics Table"
-msgstr ""
+msgstr "Tabel Diagnostik"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Diagnostic plots"
-msgstr ""
+msgstr "Plot diagnostik"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Residual vs Dependent"
@@ -309,11 +315,11 @@ msgstr ""
 
 msgctxt "PetPeese|"
 msgid "Correlation"
-msgstr ""
+msgstr "Korelasi"
 
 msgctxt "PetPeese|"
 msgid "Effect Size"
-msgstr ""
+msgstr "Ukuran Efek"
 
 msgctxt "PetPeese|"
 msgid "Effect Size Standard Error"
@@ -329,11 +335,11 @@ msgstr ""
 
 msgctxt "PetPeese|"
 msgid "Cohen's d"
-msgstr ""
+msgstr "d cohen"
 
 msgctxt "PetPeese|"
 msgid "Inference"
-msgstr ""
+msgstr "Kesimpulan"
 
 msgctxt "PetPeese|"
 msgid "Multiplicative heterogeneity estimates"
@@ -378,7 +384,7 @@ msgstr "Pengaturan estimasi (MCMC)"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "iterations:"
-msgstr ""
+msgstr "iterasi:"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "chains:"
@@ -390,7 +396,7 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Integration"
-msgstr ""
+msgstr "Integrasi"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Bridge sampling"
@@ -398,11 +404,11 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Inference"
-msgstr ""
+msgstr "Kesimpulan"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model"
-msgstr ""
+msgstr "Model"
 
 #, fuzzy
 msgctxt "BayesianMetaAnalysisInference|"
@@ -424,15 +430,15 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "All positive"
-msgstr ""
+msgstr "Semua positif"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "All negative"
-msgstr ""
+msgstr "Semua negatif"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Table"
-msgstr ""
+msgstr "Tabel"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model probabilities"
@@ -452,15 +458,15 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Observed"
-msgstr ""
+msgstr "Diamati"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Estimated"
-msgstr ""
+msgstr "Diperkirakan"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Both"
-msgstr ""
+msgstr "Keduanya"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Show labels"
@@ -468,7 +474,7 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Ordering"
-msgstr ""
+msgstr "Pemesanan"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Year (ascending)"
@@ -492,11 +498,11 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Ascending"
-msgstr ""
+msgstr "Naik"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Descending"
-msgstr ""
+msgstr "Turun"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Row order"
@@ -544,7 +550,7 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Effect size"
-msgstr ""
+msgstr "Ukuran efek"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Cauchy"
@@ -552,19 +558,19 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "location:"
-msgstr ""
+msgstr "lokasi:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "scale:"
-msgstr ""
+msgstr "skala:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "mean:"
-msgstr ""
+msgstr "rata-rata:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "std:"
@@ -576,7 +582,7 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "df:"
-msgstr ""
+msgstr "df:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Truncation"
@@ -584,11 +590,11 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Lower bound:"
-msgstr ""
+msgstr "Batas bawah:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Upper bound:"
-msgstr ""
+msgstr "Batas atas:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Heterogeneity (between-study SD)"
@@ -600,7 +606,7 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "shape:"
-msgstr ""
+msgstr "bentuk:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Half t"
@@ -612,7 +618,7 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Diagnostics"
-msgstr ""
+msgstr "Diagnostik"
 
 #, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
@@ -629,7 +635,7 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Diagnostic plots"
-msgstr ""
+msgstr "Plot diagnostik"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Q-Q plot standardized residuals"
@@ -649,11 +655,11 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Method"
-msgstr ""
+msgstr "Metode"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Fixed Effects"
-msgstr ""
+msgstr "Efek Tetap"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Maximum Likelihood"
@@ -689,19 +695,19 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Statistics"
-msgstr ""
+msgstr "Statistik"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Regression Coefficients"
-msgstr ""
+msgstr "Koefisien Regresi"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Estimates"
-msgstr ""
+msgstr "Perkiraan"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Confidence intervals"
-msgstr ""
+msgstr "Interval kepercayaan diri"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Interval"
@@ -709,7 +715,7 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Test"
-msgstr ""
+msgstr "Uji"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Covariance matrix"
@@ -773,7 +779,7 @@ msgstr ""
 
 msgctxt "PredictionPerformanceData|"
 msgid "Measure"
-msgstr ""
+msgstr "Mengukur"
 
 msgctxt "PredictionPerformanceData|"
 msgid "C statistic"
@@ -913,23 +919,23 @@ msgstr ""
 
 msgctxt "PredictionPerformancePriors|"
 msgid "min:"
-msgstr ""
+msgstr "minimal:"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "max:"
-msgstr ""
+msgstr "maksimal:"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "location:"
-msgstr ""
+msgstr "lokasi:"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "scale:"
-msgstr ""
+msgstr "skala:"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "df:"
-msgstr ""
+msgstr "df:"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Effect"
@@ -965,7 +971,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Distribution"
-msgstr ""
+msgstr "Distribusi"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Parameters"
@@ -1021,19 +1027,19 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "None"
-msgstr ""
+msgstr "Tidak ada"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "lower"
-msgstr ""
+msgstr "bawah"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "upper"
-msgstr ""
+msgstr "atas"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Weight"
-msgstr ""
+msgstr "Berat"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "Publication bias: selection models"
@@ -1077,7 +1083,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "None"
-msgstr ""
+msgstr "Tidak ada"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "p-values"
@@ -1085,15 +1091,15 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "Weight"
-msgstr ""
+msgstr "Berat"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Cohen's d"
-msgstr ""
+msgstr "d cohen"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Correlations"
-msgstr ""
+msgstr "Korelasi"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Log odds ratios"
@@ -1121,7 +1127,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size"
-msgstr ""
+msgstr "Ukuran Efek"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
@@ -1141,11 +1147,11 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Positive"
-msgstr ""
+msgstr "Positif"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Negative"
-msgstr ""
+msgstr "Negatif"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "RoBMA-PSMA"
@@ -1157,7 +1163,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Custom"
-msgstr ""
+msgstr "Kustom"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Prior scale"
@@ -1177,7 +1183,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Inference"
-msgstr ""
+msgstr "Kesimpulan"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Models overview"
@@ -1242,11 +1248,11 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Ascending"
-msgstr ""
+msgstr "Menaik"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Descending"
-msgstr ""
+msgstr "Menurun"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Type"
@@ -1258,7 +1264,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Conditional"
-msgstr ""
+msgstr "Bersyarat"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Pooled estimates"
@@ -1266,7 +1272,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect"
-msgstr ""
+msgstr "Efek"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Heterogeneity"
@@ -1290,11 +1296,11 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Estimate"
-msgstr ""
+msgstr "Memperkirakan"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Show"
-msgstr ""
+msgstr "Tampilkan"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Bayesian updating"
@@ -1310,11 +1316,11 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Plot"
-msgstr ""
+msgstr "Plot"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Weights"
-msgstr ""
+msgstr "Bobot"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "PET"
@@ -1330,7 +1336,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Autocorrelation"
-msgstr ""
+msgstr "Autokorelasi"
 
 #, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
@@ -1339,11 +1345,11 @@ msgstr "Tingkat Lanjut"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Estimation scale"
-msgstr ""
+msgstr "Skala estimasi"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Adaptation"
-msgstr ""
+msgstr "Adaptasi"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Burnin"
@@ -1355,7 +1361,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Thin"
-msgstr ""
+msgstr "Tipis"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Autofit"
@@ -1383,19 +1389,19 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "hours"
-msgstr ""
+msgstr "jam"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "minutes"
-msgstr ""
+msgstr "menit"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "seconds"
-msgstr ""
+msgstr "detik"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Extend samples"
-msgstr ""
+msgstr "Perluas sampel"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Remove failed models"
@@ -1419,11 +1425,11 @@ msgstr ""
 
 msgctxt "SelectionModels|"
 msgid "Correlation"
-msgstr ""
+msgstr "Korelasi"
 
 msgctxt "SelectionModels|"
 msgid "Effect Size"
-msgstr ""
+msgstr "Ukuran Efek"
 
 msgctxt "SelectionModels|"
 msgid "Effect Size Standard Error"
@@ -1455,11 +1461,11 @@ msgstr ""
 
 msgctxt "SelectionModels|"
 msgid "Positive"
-msgstr ""
+msgstr "Positif"
 
 msgctxt "SelectionModels|"
 msgid "Negative"
-msgstr ""
+msgstr "Negatif"
 
 msgctxt "SelectionModels|"
 msgid "Transform correlations to"
@@ -1467,7 +1473,7 @@ msgstr ""
 
 msgctxt "SelectionModels|"
 msgid "Cohen's d"
-msgstr ""
+msgstr "d cohen"
 
 msgctxt "SelectionModels|"
 msgid "Fisher's z"
@@ -1479,11 +1485,11 @@ msgstr ""
 
 msgctxt "SelectionModels|"
 msgid "Fixed Effects"
-msgstr ""
+msgstr "Efek Tetap"
 
 msgctxt "SelectionModels|"
 msgid "Random Effects"
-msgstr ""
+msgstr "Efek Acak"
 
 #, fuzzy
 msgctxt "SelectionModels|"
@@ -1522,11 +1528,11 @@ msgstr ""
 
 msgctxt "WaapWls|"
 msgid "Correlation"
-msgstr ""
+msgstr "Korelasi"
 
 msgctxt "WaapWls|"
 msgid "Effect Size"
-msgstr ""
+msgstr "Ukuran Efek"
 
 msgctxt "WaapWls|"
 msgid "Effect Size Standard Error"
@@ -1542,11 +1548,11 @@ msgstr ""
 
 msgctxt "WaapWls|"
 msgid "Cohen's d"
-msgstr ""
+msgstr "d cohen"
 
 msgctxt "WaapWls|"
 msgid "Inference"
-msgstr ""
+msgstr "Kesimpulan"
 
 #, fuzzy
 msgctxt "WaapWls|"
@@ -1583,7 +1589,7 @@ msgstr ""
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Effect Size"
-msgstr ""
+msgstr "Ukuran Efek"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Effect Size Standard Error"
@@ -1591,7 +1597,7 @@ msgstr ""
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Method"
-msgstr ""
+msgstr "Metode"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Horseshoe"
@@ -1603,11 +1609,11 @@ msgstr ""
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Covariates"
-msgstr ""
+msgstr "Kovariat"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Factors"
-msgstr ""
+msgstr "Faktor"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Clustering"
@@ -1615,11 +1621,11 @@ msgstr ""
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Model"
-msgstr ""
+msgstr "Model"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Components"
-msgstr ""
+msgstr "Komponen"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Include intercept"
@@ -1639,7 +1645,7 @@ msgstr ""
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale"
-msgstr ""
+msgstr "Skala"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Df (global)"
@@ -1659,7 +1665,7 @@ msgstr ""
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Inference"
-msgstr ""
+msgstr "Kesimpulan"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "I²"
@@ -1683,11 +1689,11 @@ msgstr ""
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Horizontal axis"
-msgstr ""
+msgstr "Sumbu horizontal"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Vertical axis"
-msgstr ""
+msgstr "Sumbu vertikal"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Plot type"
@@ -1707,11 +1713,11 @@ msgstr ""
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Density"
-msgstr ""
+msgstr "Kepadatan"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Autocorrelations"
-msgstr ""
+msgstr "Autokorelasi"
 
 #, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
@@ -1725,11 +1731,11 @@ msgstr "Pengaturan estimasi (MCMC)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Warmup"
-msgstr ""
+msgstr "Pemanasan"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Iterations"
-msgstr ""
+msgstr "Iterasi"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Chains"
@@ -1745,27 +1751,27 @@ msgstr ""
 
 msgctxt "PetPeese|"
 msgid "Measure"
-msgstr ""
+msgstr "Mengukur"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "samples:"
-msgstr ""
+msgstr "sampel:"
 
 msgctxt "SelectionModels|"
 msgid "Measure"
-msgstr ""
+msgstr "Mengukur"
 
 msgctxt "WaapWls|"
 msgid "Measure"
-msgstr ""
+msgstr "Mengukur"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Terms"
-msgstr ""
+msgstr "Ketentuan"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Estimates table"
-msgstr ""
+msgstr "Tabel perkiraan"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Heterogeneity table"
@@ -1781,7 +1787,7 @@ msgstr ""
 
 msgctxt "PetPeese|"
 msgid "Sample size"
-msgstr ""
+msgstr "Ukuran sampel"
 
 msgctxt "PetPeese|"
 msgid "Mean estimates table"
@@ -1889,7 +1895,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Samples"
-msgstr ""
+msgstr "Sampel"
 
 msgctxt "SelectionModels|"
 msgid "P-value frequency table"
