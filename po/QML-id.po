@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-12-27 16:06+0000\n"
-"Last-Translator: Rania Rahida <raniarahida@gmail.com>\n"
-"Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
-"jaspmetaanalysis-qml/id/>\n"
-"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.4-dev\n"
 "X-Language: id\n"
 "X-Qt-Contexts: true\n"
 
@@ -737,9 +731,10 @@ msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Show labels"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Ordering"
-msgstr ""
+msgstr "Pemesanan"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Year (ascending)"
@@ -813,9 +808,10 @@ msgctxt "PredictionPerformanceData|"
 msgid "Study Labels"
 msgstr ""
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Inference"
-msgstr ""
+msgstr "Kesimpulan"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Within-study variation"
@@ -845,9 +841,10 @@ msgctxt "PredictionPerformanceInference|"
 msgid "Labels"
 msgstr ""
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Estimates"
-msgstr ""
+msgstr "Perkiraan"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Column name (lCI)"
@@ -897,9 +894,10 @@ msgctxt "PredictionPerformanceInference|"
 msgid "Debray"
 msgstr ""
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Plot"
-msgstr ""
+msgstr "Plot"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "Priors"
@@ -937,9 +935,10 @@ msgctxt "PredictionPerformancePriors|"
 msgid "df:"
 msgstr "df:"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Effect"
-msgstr ""
+msgstr "Efek"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Effect (null)"
@@ -1117,9 +1116,10 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Path to the fitted model"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Correlation"
-msgstr ""
+msgstr "Korelasi"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Log Odds Ratio"
@@ -1355,9 +1355,10 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Burnin"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Chains"
-msgstr ""
+msgstr "Rantai"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Thin"
@@ -1443,9 +1444,10 @@ msgctxt "SelectionModels|"
 msgid "P-value (one-sided)"
 msgstr ""
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Model"
-msgstr ""
+msgstr "Model"
 
 msgctxt "SelectionModels|"
 msgid "P-value cutoffs"
@@ -1479,9 +1481,10 @@ msgctxt "SelectionModels|"
 msgid "Fisher's z"
 msgstr ""
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Inference"
-msgstr ""
+msgstr "Kesimpulan"
 
 msgctxt "SelectionModels|"
 msgid "Fixed Effects"
@@ -1737,9 +1740,10 @@ msgctxt "PenalizedMetaAnalysis|"
 msgid "Iterations"
 msgstr "Iterasi"
 
+#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Chains"
-msgstr ""
+msgstr "Rantai"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Adapt delta"
@@ -1913,9 +1917,10 @@ msgctxt "SelectionModels|"
 msgid "Estimated heterogeneity table"
 msgstr ""
 
+#, fuzzy
 msgctxt "WaapWls|"
 msgid "Sample size"
-msgstr ""
+msgstr "Ukuran sampel"
 
 msgctxt "WaapWls|"
 msgid "Mean estimates table"
