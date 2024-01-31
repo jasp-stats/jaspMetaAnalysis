@@ -56,7 +56,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   ### Plots
   # forest plot
   if (options[["plotsForestPlot"]])
-    .robmaForestPlot(jaspResults, options)
+    .robmaForestPlot(jaspResults, options, type = "RoBMA")
 
   # pooled estimates plots
   if (options[["plotsPooledEstimatesEffect"]])
@@ -1113,13 +1113,13 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
     tempPriors <- createJaspTable(title = gettext("Priors"))
     if (type == "RoBMA") {
-      tempPriors$addColumnInfo(name = "priorMu",    title = gettext("Effect Size"),      type = "string")
-      tempPriors$addColumnInfo(name = "priorTau",   title = gettext("Heterogeneity"),    type = "string")
-      tempPriors$addColumnInfo(name = "priorBias",  title = gettext("Publication Bias"), type = "string")
+      tempPriors$addColumnInfo(name = "priorMu",       title = gettext("Effect Size"),      type = "string")
+      tempPriors$addColumnInfo(name = "priorTau",      title = gettext("Heterogeneity"),    type = "string")
+      tempPriors$addColumnInfo(name = "priorBias",     title = gettext("Publication Bias"), type = "string")
     } else if (type == "BiBMA") {
-      tempPriors$addColumnInfo(name = "priorMu",    title = gettext("Effect Size"),      type = "string")
-      tempPriors$addColumnInfo(name = "priorTau",   title = gettext("Heterogeneity"),    type = "string")
-      tempPriors$addColumnInfo(name = "priorPi",    title = gettext("Baseline"),         type = "string")
+      tempPriors$addColumnInfo(name = "priorMu",       title = gettext("Effect Size"),      type = "string")
+      tempPriors$addColumnInfo(name = "priorTau",      title = gettext("Heterogeneity"),    type = "string")
+      tempPriors$addColumnInfo(name = "priorBaseline", title = gettext("Baseline"),         type = "string")
     }
     tempModel[["tempPriors"]] <- tempPriors
 
@@ -1194,9 +1194,9 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
     } else if (type == "BiBMA") {
 
-      tempPriors$addColumnInfo(name = "priorMu",    title = gettext("Effect Size"),      type = "string")
-      tempPriors$addColumnInfo(name = "priorTau",   title = gettext("Heterogeneity"),    type = "string")
-      tempPriors$addColumnInfo(name = "priorPi",    title = gettext("Baseline"),         type = "string")
+      tempPriors$addColumnInfo(name = "priorMu",       title = gettext("Effect Size"),      type = "string")
+      tempPriors$addColumnInfo(name = "priorTau",      title = gettext("Heterogeneity"),    type = "string")
+      tempPriors$addColumnInfo(name = "priorBaseline", title = gettext("Baseline"),         type = "string")
 
       tempPriors$addRows(list(
         priorMu       = print(fit[["models"]][[i]][["priors"]][["mu"]],   silent = TRUE, short_name = options[["inferenceShortenPriorName"]]),
@@ -1367,7 +1367,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     output_scale = .robmaGetOutputScaleOption(options),
     rescale_x    = options[["plotsPooledEstimatesWeightFunctionRescaleXAxis"]],
     conditional  = options[["plotsPooledEstimatesType"]] == "conditional",
-    plot_type    = "ggplot",
+    plot_type    = "ggplot"
   ))
 
   if (jaspBase::isTryError(p)) {
@@ -1449,13 +1449,12 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   ))
   modelsPlots[[parameter]] <- tempPlot
 
-
   # plot
   p <- try(RoBMA::plot_models(
     fit,
     parameter      = parameter,
     order          = options[["plotsIndividualModelsOrder"]],
-    order_by       = .robmaGerIndividualModelOrderOption(options),
+    order_by       = .robmaGetIndividualModelOrderOption(options),
     conditional    = options[["plotsIndividualModelsType"]] == "conditional",
     output_scale   = .robmaGetOutputScaleOption(options),
     show_updating  = options[["plotsIndividualModelsShowBayesianUpdating"]],
@@ -1552,9 +1551,9 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   ### create waiting plot
   if (is.null(jaspResults[["model"]]))
     wait <- TRUE
-  else if (type == "RoBMA" && .robmaCheckDiagnostics(options, any = FALSE))
+  else if (type == "RoBMA" && !.robmaCheckDiagnostics(options, any = FALSE))
     wait <- TRUE
-  else if (type == "BiBMA" && .bibmaCheckDiagnostics(options, any = FALSE))
+  else if (type == "BiBMA" && !.bibmaCheckDiagnostics(options, any = FALSE))
     wait <- TRUE
   else
     wait <- FALSE
@@ -1836,7 +1835,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
       "correlation" = "r"
     ))
 }
-.robmaGerIndividualModelOrderOption <- function(options){
+.robmaGetIndividualModelOrderOption <- function(options){
   return(switch(
     options[["plotsIndividualModelsOrderBy"]],
     "modelNumber"          = "model",
@@ -1853,8 +1852,5 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   }
 
-  saveRDS(jaspResults[["model"]][["object"]], file = options[["advancedSaveFittedModel"]])
-
   modelSaved[["object"]] <- TRUE
-
 }

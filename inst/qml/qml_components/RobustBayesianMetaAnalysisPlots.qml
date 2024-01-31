@@ -212,7 +212,7 @@ Section
 
 		RadioButtonGroup
 		{
-			name: 		"plotsIndividualModelsOrderelsOrderBy"
+			name: 		"plotsIndividualModelsOrder"
 			title:		qsTr("Order")
 
 			RadioButton

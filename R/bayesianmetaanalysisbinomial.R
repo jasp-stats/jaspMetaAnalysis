@@ -17,7 +17,7 @@
 
 
 BayesianMetaAnalysisBinomial <- function(jaspResults, dataset, options, state = NULL) {
-  .libPaths("/home/frantisek/R/x86_64-pc-linux-gnu-library/4.2/")
+
   # clean fitted model if it was changed
   if (!.bibmaCheckReady(options))
     .bibmaCleanModel(jaspResults)
@@ -25,14 +25,10 @@ BayesianMetaAnalysisBinomial <- function(jaspResults, dataset, options, state = 
   # load data
   if (.bibmaCheckReady(options))
     dataset <- .bibmaGetData(options, dataset)
-
+  saveRDS(options, file = "C:/JASP/options.RDS")
+  saveRDS(dataset, file = "C:/JASP/dataset.RDS")
   # get the priors
   .bibmaGetPriors(jaspResults, options)
-
-  home_dir <- "/home/frantisek/Documents/GitHub/" # "C:/JASP/"
-  saveRDS(options,                             file = file.path(home_dir, "options.RDS"))
-  saveRDS(jaspResults[["priors"]][["object"]], file = file.path(home_dir, "priors.RDS"))
-  saveRDS(dataset,                             file = file.path(home_dir, "dataset.RDS"))
 
   # show the model preview
   if (is.null(jaspResults[["model"]]))
@@ -61,7 +57,7 @@ BayesianMetaAnalysisBinomial <- function(jaspResults, dataset, options, state = 
   ### Plots
   # forest plot
   if (options[["plotsForestPlot"]])
-    .robmaForestPlot(jaspResults, options)
+    .robmaForestPlot(jaspResults, options, type = "BiBMA")
 
   # pooled estimates plots
   if (options[["plotsPooledEstimatesEffect"]])
@@ -424,8 +420,10 @@ BayesianMetaAnalysisBinomial <- function(jaspResults, dataset, options, state = 
         min_ESS       = if (options[["advancedAutofitEss"]])         options[["advancedAutofitEssTarget"]],
         max_error     = if (options[["advancedAutofitMcmcError"]])   options[["advancedAutofitMcmcErrorTarget"]],
         max_SD_error  = if (options[["advancedAutofitMcmcErrorSd"]]) options[["advancedAutofitMcmcErrorSdTarget"]],
-        max_time      = if (options[["advancedAutofitMaximumFittingTime"]])        list(time = options[["advancedAutofitMaximumFittingTimeTarget"]] , unit = options[["advancedAutofitMaximumFittingTimeTargetUnit"]]),
-        sample_extend = options[["advancedAutofitExtendSamples"]]),
+        max_time      = if (options[["advancedAutofitMaximumFittingTime"]]) list(
+          time = options[["advancedAutofitMaximumFittingTimeTarget"]],
+          unit = options[["advancedAutofitMaximumFittingTimeTargetUnit"]]),
+          sample_extend = options[["advancedAutofitExtendSamples"]]),
       convergence_checks = RoBMA::set_convergence_checks(
         max_Rhat            = if (options[["advancedAutofitRHat"]])        options[["advancedAutofitRHatTarget"]],
         min_ESS             = if (options[["advancedAutofitEss"]])         options[["advancedAutofitEssTarget"]],
