@@ -378,7 +378,7 @@ msgstr ""
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Inference"
-msgstr "Przedziały"
+msgstr "Wnioskowanie"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "I²"
@@ -498,7 +498,7 @@ msgstr "Korelacje i N"
 
 msgctxt "PetPeese|"
 msgid "Inference"
-msgstr "Przedziały"
+msgstr "Wnioskowanie"
 
 msgctxt "PetPeese|"
 msgid "Multiplicative heterogeneity estimates"
@@ -566,7 +566,7 @@ msgstr "iteracje:"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Inference"
-msgstr "Przedziały"
+msgstr "Wnioskowanie"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model"
@@ -974,7 +974,7 @@ msgstr ""
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Inference"
-msgstr "Przedziały"
+msgstr "Wnioskowanie"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Within-study variation"
@@ -1353,7 +1353,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Inference"
-msgstr "Przedziały"
+msgstr "Wnioskowanie"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Models overview"
@@ -1676,7 +1676,7 @@ msgstr "Z Fishera"
 
 msgctxt "SelectionModels|"
 msgid "Inference"
-msgstr "Przedziały"
+msgstr "Wnioskowanie"
 
 #, fuzzy
 msgctxt "SelectionModels|"
@@ -1756,7 +1756,7 @@ msgstr "Korelacje i N"
 
 msgctxt "WaapWls|"
 msgid "Inference"
-msgstr "Przedziały"
+msgstr "Wnioskowanie"
 
 msgctxt "WaapWls|"
 msgid "Plots"
@@ -1812,7 +1812,7 @@ msgstr ""
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Export computed effect size"
-msgstr ""
+msgstr "Wyeksportuj obliczoną wielkość efektu"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Column name (effect size)"

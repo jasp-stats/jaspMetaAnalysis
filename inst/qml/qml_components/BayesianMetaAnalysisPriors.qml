@@ -146,7 +146,7 @@ Section
 					name: 			"truncationLowerBoundValue"
 					label: 			qsTr("Lower bound:")
 					fieldWidth: 	50
-					negativeValues: !(modelTypeValue == "constrainedRandom") && modelDirectionValue == "positive"
+					negativeValues: !(modelTypeValue == "constrainedRandom" && modelDirectionValue == "positive")
 					defaultValue: 	0
 					max: 			modelTypeValue == "constrainedRandom" && modelDirectionValue == "negative" ? 0 : Infinity
 				}

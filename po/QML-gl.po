@@ -1610,7 +1610,7 @@ msgstr "Factores"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Clustering"
-msgstr "Conglomerados"
+msgstr "Conglomeración"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Model"

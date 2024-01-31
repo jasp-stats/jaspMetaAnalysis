@@ -908,10 +908,6 @@ msgstr "min(ESS)"
 msgid "max(R-hat)"
 msgstr "max(R-Dach)"
 
-msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
-msgstr ""
-"Modell %1$i existiert nicht. Wähle eines der Modelle zwischen 1 und %2$i aus."
-
 msgid "Weights"
 msgstr "Gewichte"
 
