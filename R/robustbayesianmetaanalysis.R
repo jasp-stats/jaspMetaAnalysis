@@ -601,11 +601,11 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   # extract the priors
   if (is.null(jaspResults[["model"]]) && options[["modelEnsembleType"]] != "custom")
-    priors <- RoBMA::check_setup(model_type = .robmaGetModelTypeOption(options), silent = TRUE)$priors
+    priors <- .robmaPriorsToOptionsNames(RoBMA::check_setup(model_type = .robmaGetModelTypeOption(options), silent = TRUE)$priors)
   else if (is.null(jaspResults[["model"]]))
     priors <- jaspResults[["priors"]][["object"]]
   else
-    priors <- jaspResults[["model"]][["object"]][["priors"]]
+    priors <- .robmaPriorsToOptionsNames(jaspResults[["model"]][["object"]][["priors"]])
 
 
   # create container for each of the parameters
@@ -654,7 +654,12 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
         parameterContainer[[type]] <- typeContainer
       }
 
-      tempPriors <- priors[[paste0(parameter, if (type == "null") "Null")]]
+      tempPriors <- priors[[paste0(switch(
+        parameter,
+        "effect"        = "modelsEffect",
+        "heterogeneity" = "modelsHeterogeneity",
+        "bias"          = "modelsBias"
+      ), if (type == "null") "Null")]]
 
       if (length(tempPriors) == 0)
         next
@@ -808,8 +813,12 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   if (options[["inputType"]] == "fittedModel") {
 
-    fit <- readRDS(file = options[["pathToFittedModel"]])
+    fit <- try(readRDS(file = options[["pathToFittedModel"]]))
 
+    if (jaspBase::isTryError(fit) && grepl("cannot open the connection", fit))
+      .quitAnalysis(gettext("The specified path does not lead to an existing file."))
+    if (jaspBase::isTryError(fit))
+      .quitAnalysis(.quitAnalysis(gettextf("An error occurred while reading the model file: %1$s", jaspBase:::.extractErrorMessage(fit))))
     if (!RoBMA::is.RoBMA(fit))
       .quitAnalysis(gettext("The loaded object is not a RoBMA model."))
 
@@ -1015,7 +1024,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   ### create overview table
   modelsSummary <- createJaspTable(title = gettext("Models Overview"))
-  modelsSummary$position <- 6
+  modelsSummary$position <- 8
   modelsSummary$dependOn(c(.robmaTypeDependencies(type), "bayesFactorType", "inferenceModelsOverview", "inferenceModelsOverviewBF", "inferenceModelsOverviewOrder", "inferenceShortenPriorName"))
   jaspResults[["mainSummary"]][["modelsSummary"]] <- modelsSummary
 
@@ -1064,7 +1073,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   # compute the BF requested
   if (options[["inferenceModelsOverviewBfComparison"]] == "inclusion") {
-    bf <- fitSummary[["summary"]][, 7]
+    bf <- fitSummary[["summary"]][, 8]
   } else if (options[["inferenceModelsOverviewBfComparison"]] == "best") {
     bf <- exp(fitSummary[["summary"]][["marglik"]] - max(fitSummary[["summary"]][["marglik"]]))
   } else if (options[["inferenceModelsOverviewBfComparison"]] == "previous") {
@@ -1094,7 +1103,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     return()
   } else {
     individualModels <- createJaspContainer(title = gettext("Individual Models Summary"))
-    individualModels$position <- 5
+    individualModels$position <- 9
     individualModels$dependOn(c(.robmaTypeDependencies(type), "bayesFactorType", "inferenceIndividualModels", "inferenceIndividualModelsSingleModel", "inferenceIndividualModelsSingleModelNumber", "inferenceShortenPriorName", "inferenceOutputScale"))
     jaspResults[["individualModels"]] <- individualModels
   }
@@ -1156,7 +1165,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     if (modelsI < 1 || modelsI > length(fit[["models"]])) {
       tempModel  <- createJaspContainer(title = gettextf("Model %i", modelsI))
       tempError  <- createJaspTable(title = "")
-      tempError$setError(gettextf("Model %i does not exist. Select one of the models between 1 and %i.", modelsI, length(fit[["models"]])))
+      tempError$setError(gettextf("Model %1$i does not exist. Select one of the models between 1 and %2$i.", modelsI, length(fit[["models"]])))
       tempModel[["tempError"]]                     <- tempError
       individualModels[[paste0("model", modelsI)]] <- tempModel
       return()
@@ -1278,7 +1287,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   width  <- 800
 
   forestPlot <- createJaspPlot(title = title, width = width, height = height)
-  forestPlot$position <- 6
+  forestPlot$position <- 10
   forestPlot$dependOn(c(.robmaTypeDependencies(type), "plotsForestPlot", "plotsForestPlotOrder", "plotsForestPlotType", "inferenceOutputScale"))
   jaspResults[["forestPlot"]] <- forestPlot
 
@@ -1307,7 +1316,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   # create / access the container
   if (is.null(jaspResults[["estimatesPlots"]])) {
     estimatesPlots <- createJaspContainer(title = gettext("Posterior Distribution Plots"))
-    estimatesPlots$position <- 7
+    estimatesPlots$position <- 11
     estimatesPlots$dependOn(c(.robmaTypeDependencies(type), "plotsPooledEstimatesType", "plotsPooledEstimatesPriorDistribution", "inferenceOutputScale"))
     jaspResults[["estimatesPlots"]] <- estimatesPlots
   } else {
@@ -1391,7 +1400,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   # create / access the container
   if (is.null(jaspResults[["modelsPlots"]])) {
     modelsPlots <- createJaspContainer(title = gettext("Posterior Model Estimates Plots"))
-    modelsPlots$position <- 8
+    modelsPlots$position <- 12
     modelsPlots$dependOn(c(.robmaTypeDependencies(type), "plotsIndividualModelsType", "plotsIndividualModelsOrder", "plotsIndividualModelsOrderBy", "plotsIndividualModelsShowBayesianUpdating", "plotsIndividualModelsShowPosteriorEstimates", "inferenceOutputScale"))
     jaspResults[["modelsPlots"]] <- modelsPlots
   } else {
@@ -1478,7 +1487,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   # create / access the container
   if (is.null(jaspResults[["diagnostics"]])) {
     diagnostics <- createJaspContainer(title = gettext("Diagnostics"))
-    diagnostics$position <- 9
+    diagnostics$position <- 13
     diagnostics$dependOn(.robmaTypeDependencies(type))
     jaspResults[["diagnostics"]] <- diagnostics
   } else {
@@ -1540,7 +1549,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   # create / access the container
   if (is.null(jaspResults[["diagnostics"]])) {
     diagnostics <- createJaspContainer(title = gettext("Diagnostics"))
-    diagnostics$position <- 9
+    diagnostics$position <- 14
     diagnostics$dependOn(.robmaTypeDependencies(type))
     jaspResults[["diagnostics"]] <- diagnostics
   } else {
@@ -1560,7 +1569,8 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   if (wait) {
     tempWait  <- createJaspPlot(title = "")
-    tempWait$dependOn(c("mcmcDiagnosticsPlotEffect", "mcmcDiagnosticsPlotHeterogeneity", "mcmcDiagnosticsPlotWeights", "mcmcDiagnosticsPlotPet", "mcmcDiagnosticsPlotPeese", "mcmcDiagnosticsPlotTypeTrace", "mcmcDiagnosticsPlotTypeAutocorrelation", "mcmcDiagnosticsPlotTypePosteriorSamplesDensity"))
+    tempWait$dependOn(c("mcmcDiagnosticsPlotEffect", "mcmcDiagnosticsPlotHeterogeneity", "mcmcDiagnosticsPlotWeights", "mcmcDiagnosticsPlotPet", "mcmcDiagnosticsPlotPeese",
+                        "mcmcDiagnosticsPlotTypeTrace", "mcmcDiagnosticsPlotTypeAutocorrelation", "mcmcDiagnosticsPlotTypePosteriorSamplesDensity"))
     diagnostics[["tempWait"]] <- tempWait
     return()
   }
@@ -1637,8 +1647,8 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
           "mu"    = "mcmcDiagnosticsPlotEffect",
           "tau"   = "mcmcDiagnosticsPlotHeterogeneity",
           "omega" = "mcmcDiagnosticsPlotWeights",
-          "PET"   = "diagnosticsPET",
-          "PEESE" = "diagnosticsPEESE"
+          "PET"   = "mcmcDiagnosticsPlotPet",
+          "PEESE" = "mcmcDiagnosticsPlotPeese"
         ))
         tempModel[[par]] <- tempPar
       } else {
@@ -1668,7 +1678,10 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
           title         = FALSE
         )
 
-        if (is.null(newPlots))
+        # (temporal) fix for the package returning a list with empty plots on the remaining spots
+        newPlots <- newPlots[!sapply(newPlots, is.null)]
+
+        if (length(newPlots) == 0)
           next
 
         noPars <- FALSE
@@ -1712,7 +1725,10 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
           title         = FALSE
         )
 
-        if (is.null(newPlots))
+        # (temporal) fix for the package returning a list with empty plots on the remaining spots
+        newPlots <- newPlots[!sapply(newPlots, is.null)]
+
+        if (length(newPlots) == 0)
           next
 
         noPars <- FALSE
@@ -1757,7 +1773,10 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
           title         = FALSE
         )
 
-        if (is.null(newPlots))
+        # (temporal) fix for the package returning a list with empty plots on the remaining spots
+        newPlots <- newPlots[!sapply(newPlots, is.null)]
+
+        if (length(newPlots) == 0)
           next
 
         noPars <- FALSE
@@ -1783,7 +1802,8 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     # show error if only one model is selected but doesn't contain any of the diagnostics
     if (noPars && options[["mcmcDiagnosticsPlotSingleModelNumber"]]) {
       tempError  <- createJaspPlot(title = "")
-      tempError$dependOn(c("mcmcDiagnosticsPlotEffect", "mcmcDiagnosticsPlotHeterogeneity", "mcmcDiagnosticsPlotWeights", "diagnosticsPET", "diagnosticsPEESE", "mcmcDiagnosticsPlotTypeTrace", "mcmcDiagnosticsPlotTypeAutocorrelation", "mcmcDiagnosticsPlotTypePosteriorSamplesDensity"))
+      tempError$dependOn(c("mcmcDiagnosticsPlotEffect", "mcmcDiagnosticsPlotHeterogeneity", "mcmcDiagnosticsPlotWeights", "mcmcDiagnosticsPlotPet", "mcmcDiagnosticsPlotPeese",
+                           "mcmcDiagnosticsPlotTypeTrace", "mcmcDiagnosticsPlotTypeAutocorrelation", "mcmcDiagnosticsPlotTypePosteriorSamplesDensity"))
       tempError$setError(gettextf("Model %i does not contain any of the selected parameters.", i))
       tempModel[["tempError"]] <- tempError
     }
@@ -1853,4 +1873,11 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   }
 
   modelSaved[["object"]] <- TRUE
+}
+.robmaPriorsToOptionsNames     <- function(priors) {
+  priorNames               <- names(priors)
+  substr(priorNames, 1, 1) <- toupper(substr(priorNames, 1, 1))
+  priorNames               <- paste0("models", priorNames)
+  names(priors)            <- priorNames
+  return(priors)
 }

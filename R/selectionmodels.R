@@ -285,7 +285,7 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
       # add info that tau is on different scale if correlations were used
       if (options[["measures"]] == "correlation")
         table$addFootnote(symbol = gettext("Note:"), gettextf(
-          "%s is on %s scale.",
+          "%1$s is on %2$s scale.",
           "\u03C4",
           if (options[["transformCorrelationsTo"]] == "cohensD") gettext("Cohen's <em>d</em>") else gettext("Fisher's <em>z</em>")
         ))

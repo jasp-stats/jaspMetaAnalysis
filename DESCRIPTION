@@ -1,7 +1,7 @@
 Package: jaspMetaAnalysis
 Type: Package
 Title: Meta-Analysis Module for JASP
-Version: 0.17.3
+Version: 0.18.3
 Date: 2022-10-05
 Author: JASP Team
 Website: jasp-stats.org

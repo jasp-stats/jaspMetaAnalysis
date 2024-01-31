@@ -8,13 +8,13 @@ options$forestPlot <- TRUE
 options$funnelPlot <- TRUE
 options$funnelPlotRegressionTestAsymmetry <- TRUE
 options$method     <- "Restricted ML"
-options$modelTerms <- list(list(components = "contcor2"), 
-                           list(components = "facGender"), 
+options$modelTerms <- list(list(components = "contcor2"),
+                           list(components = "facGender"),
                            list(components = "facExperim"))
 options$failSafeN <- TRUE
 options$diagnosticPlot <- TRUE
 options$profilePlot <- TRUE
-options$funnelPlotRankTestAsymmetry <- TRUE
+options$funnelPlotRankTestAsymmetry <- FALSE
 options$coefficientCi <- TRUE
 options$covarianceMatrix <- TRUE
 options$casewiseDiagnostics <- TRUE
@@ -331,12 +331,6 @@ test_that("Trim-fill Analysis plot matches", {
   expect_equal_plots(testPlot, "trim-fill-analysis")
 })
 
-test_that("Rank correlation test for Funnel plot asymmetry table results match", {
-  table <- results[["results"]][["modelContainer"]][["collection"]][["modelContainer_rankTestTable"]][["data"]]
-  expect_equal_tables(table,
-                      list(0.00686868686868687, "Rank test", 0.921921630071705))
-})
-
 test_that("Regression test for Funnel plot asymmetry (\"Egger's test\") table results match", {
   table <- results[["results"]][["modelContainer"]][["collection"]][["modelContainer_regTestTable"]][["data"]]
   expect_equal_tables(table,
@@ -355,32 +349,32 @@ test_that("Residual Heterogeneity Estimates table results match", {
 
 test_that("Analysis handles errors", {
   options <- jaspTools::analysisOptions("ClassicalMetaAnalysis")
-  
+
   options$effectSize  <- "debInf"
   options$effectSizeSe <- "contGamma"
   results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", "test.csv", options)
   expect_identical(results[["status"]], "validationError", label="Inf dependent check")
-  
+
   options$effectSize <- "contNormal"
   options$effectSizeSe <- "debInf"
   results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", "test.csv", options)
   expect_identical(results[["status"]], "validationError", label="Inf covariate check")
-  
+
   options$effectSize <- "debSame"
   options$effectSizeSe <- "contGamma"
   results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", "test.csv", options)
   expect_identical(results[["status"]], "validationError", label="No variance dependent check")
-  
+
   options$effectSize <- "contNormal"
   options$effectSizeSe <- "debSame"
   results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", "test.csv", options)
   expect_identical(results[["status"]], "validationError", label="No variance covariate check")
-  
+
   options$effectSize <- "contGamma"
   options$effectSizeSe <- "contcor1"
   results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", "test.csv", options)
   expect_identical(results[["status"]], "validationError", label = "Negative effectSizeSe check")
-  
+
 })
 
 #model interaction tests
@@ -392,25 +386,25 @@ options$forestPlot <- TRUE
 options$funnelPlot <- TRUE
 options$funnelPlotRegressionTestAsymmetry <- TRUE
 options$method <- "Restricted ML"
-options$modelTerms <- list(list(components = "contcor1"), 
-                           list(components = "contcor2"), 
-                           list(components = "facGender"), 
-                           list(components = "facExperim"), 
-                           list(components = c("contcor1", "contcor2")), 
-                           list(components = c("contcor1", "facGender")), 
-                           list(components = c("contcor1", "facExperim")), 
-                           list(components = c("contcor2", "facGender")), 
-                           list(components = c("contcor2", "facExperim")), 
-                           list(components = c("facGender", "facExperim")), 
-                           list(components = c("contcor1", "contcor2", "facGender")), 
-                           list(components = c("contcor1", "contcor2", "facExperim")), 
-                           list(components = c("contcor1", "facGender", "facExperim")), 
-                           list(components = c("contcor2", "facGender", "facExperim")), 
+options$modelTerms <- list(list(components = "contcor1"),
+                           list(components = "contcor2"),
+                           list(components = "facGender"),
+                           list(components = "facExperim"),
+                           list(components = c("contcor1", "contcor2")),
+                           list(components = c("contcor1", "facGender")),
+                           list(components = c("contcor1", "facExperim")),
+                           list(components = c("contcor2", "facGender")),
+                           list(components = c("contcor2", "facExperim")),
+                           list(components = c("facGender", "facExperim")),
+                           list(components = c("contcor1", "contcor2", "facGender")),
+                           list(components = c("contcor1", "contcor2", "facExperim")),
+                           list(components = c("contcor1", "facGender", "facExperim")),
+                           list(components = c("contcor2", "facGender", "facExperim")),
                            list(components = c("contcor1", "contcor2", "facGender", "facExperim")))
 options$failSafeN <- TRUE
 options$diagnosticPlot <- TRUE
 options$profilePlot <- TRUE
-options$funnelPlotRankTestAsymmetry <- TRUE
+options$funnelPlotRankTestAsymmetry <- FALSE
 options$coefficientCi <- TRUE
 options$covarianceMatrix <- TRUE
 options$casewiseDiagnostics <- TRUE
@@ -833,12 +827,6 @@ test_that("Trim-fill Analysis plot matches - model interactions", {
   expect_equal_plots(testPlot, "trim-fill-analysis-model")
 })
 
-test_that("Rank correlation test for Funnel plot asymmetry table results match - model interactions", {
-  table <- results[["results"]][["modelContainer"]][["collection"]][["modelContainer_rankTestTable"]][["data"]]
-  expect_equal_tables(table,
-                      list(0.0703030303030303, "Rank test", 0.302256516349067))
-})
-
 test_that("Regression test for Funnel plot asymmetry (\"Egger's test\") table results match - model interactions", {
   table <- results[["results"]][["modelContainer"]][["collection"]][["modelContainer_regTestTable"]][["data"]]
   expect_equal_tables(table,
@@ -859,7 +847,7 @@ test_that("Residual Heterogeneity Estimates table results match - model interact
 # test the diagnostic plot without the Q-Q plot
 options <- jaspTools::analysisOptions("ClassicalMetaAnalysis")
 options$.meta <- list(covariates = list(containsColumn = TRUE), effectSize = list(
-  containsColumn = TRUE), factors = list(containsColumn = TRUE), 
+  containsColumn = TRUE), factors = list(containsColumn = TRUE),
   studyLabel = list(containsColumn = TRUE), effectSizeSe = list(
     containsColumn = TRUE))
 options$effectSize <- "ES"

@@ -57,11 +57,11 @@ msgstr ""
 msgid "Posterior Estimates per Model"
 msgstr "Estimacións posteriores por Modelo"
 
-msgid "BF%s%s"
-msgstr "FB%s%s"
+msgid "BF%1$s%2$s"
+msgstr "FB%1$s%2$s"
 
-msgid "Log(BF%s%s)"
-msgstr "Log(FB%s%s)"
+msgid "Log(BF%1$s%2$s)"
+msgstr "Log(FB%1$s%2$s)"
 
 msgid "Mean"
 msgstr "Media"
@@ -91,10 +91,10 @@ msgid "Ordered effects"
 msgstr "Efectos ordenados"
 
 msgid ""
-"%s and %s are the group-level effect size and standard deviation, "
+"%1$s and %2$s are the group-level effect size and standard deviation, "
 "respectively."
 msgstr ""
-"%s e %s son a magnitude do efecto do nivel de grupo e o desvío padrón, "
+"%1$s e %2$s son a magnitude do efecto do nivel de grupo e o desvío padrón, "
 "respectivamente."
 
 msgid "%s is the group-level effect size."
@@ -438,8 +438,8 @@ msgstr "Distancia de Cook"
 msgid "Cov. Ratio"
 msgstr "Proporción de Cov"
 
-msgid "%s%s<sub>(-i)</sub>"
-msgstr "%s%s<sub>(-i)</sub>"
+msgid "%1$s%2$s<sub>(-i)</sub>"
+msgstr "%1$s%2$s<sub>(-i)</sub>"
 
 msgid "Q<sub>E(-i)</sub>"
 msgstr "Q<sub>E(-i)</sub>"
@@ -504,8 +504,8 @@ msgstr "Gráfica"
 msgid "Funnel Plot"
 msgstr "Gráfica en Funil"
 
-msgid "Log-Likelihood for %s%s"
-msgstr "Log-Verosimilitude para %s%s"
+msgid "Log-Likelihood for %1$s%2$s"
+msgstr "Log-Verosimilitude para %1$s%2$s"
 
 msgid "Trim-Fill Analysis"
 msgstr "Análise Recortar-Encher"
@@ -859,8 +859,8 @@ msgstr "Estimacións do Modelo"
 msgid "Model %i"
 msgstr "Modelo %i"
 
-msgid "Model %i does not exist. Select one of the models between 1 and %i."
-msgstr "O modelo %i non existe. Escolle un dos modelos entre 1 e %i."
+msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
+msgstr "O modelo %1$i non existe. Escolle un dos modelos entre 1 e %2$i."
 
 msgid "Estimated Weights (%s)"
 msgstr "Ponderacións Estimadas (%s)"
@@ -918,9 +918,6 @@ msgstr "min(ESS)"
 
 msgid "max(R-hat)"
 msgstr "máx(R-circunflexo)"
-
-msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
-msgstr "O modelo %1$i non existe. Escolle un dos modelos entre 1 e %2$i."
 
 msgid "Weights"
 msgstr "Ponderacións"
@@ -980,8 +977,8 @@ msgstr "Intervalo co 95%% de Confianza"
 msgid "Note:"
 msgstr "Comentario:"
 
-msgid "%s is on %s scale."
-msgstr "%s está na escala %s."
+msgid "%1$s is on %2$s scale."
+msgstr "%1$s está na escala %2$s."
 
 msgid "<em>p</em>-values interval(one-sided)"
 msgstr "intervalo de valores <em>p</em> (unilateral)"

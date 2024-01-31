@@ -291,7 +291,7 @@
   casewiseTable$addColumnInfo(name = "dfFits", type = "number",  title = gettext("DFFITS"))
   casewiseTable$addColumnInfo(name = "cook",   type = "number",  title = gettext("Cook's Distance"))
   casewiseTable$addColumnInfo(name = "cov",    type = "number",  title = gettext("Cov. Ratio"))
-  casewiseTable$addColumnInfo(name = "tau2",   type = "number",  title = gettextf("%s%s<sub>(-i)</sub>", "\u3C4", "\u00B2"))
+  casewiseTable$addColumnInfo(name = "tau2",   type = "number",  title = gettextf("%1$s%2$s<sub>(-i)</sub>", "\u3C4", "\u00B2"))
   casewiseTable$addColumnInfo(name = "QE",     type = "number",  title = gettext("Q<sub>E(-i)</sub>"))
   casewiseTable$addColumnInfo(name = "hat",    type = "number",  title = gettext("Hat"))
   casewiseTable$addColumnInfo(name = "weight", type = "number",  title = gettext("Weight"))
@@ -519,7 +519,7 @@
 .metaAnalysisFailSafeFill <- function(container, dataset, options) {
   # Compute/get model
   rma.fit <- .metaAnalysisComputeModel(container, dataset, options, ready)
-  fsn.fit <- metafor::fsn(yi   = get(options$effectSize),
+  fsn.fit <- metafor::fsn(x    = get(options$effectSize),
                           sei  = get(options$effectSizeSe),
                           data = dataset)
   container[["failSafeTable"]]$addRows(list("name" = fsn.fit$type,
@@ -600,7 +600,7 @@
   # Compute/get model
   rma.fit    <- .metaAnalysisComputeModel(container, dataset, options, ready)
 
-  profilePlot   <- createJaspPlot(title = gettextf("Log-Likelihood for %s%s", "\u3C4", "\u00B2"), width = 520, height = 520)
+  profilePlot   <- createJaspPlot(title = gettextf("Log-Likelihood for %1$s%2$s", "\u3C4", "\u00B2"), width = 520, height = 520)
   profilePlot$position <- 4
   profilePlot$dependOn(c("profilePlot"))
   plotContainer[["profile"]] <- profilePlot

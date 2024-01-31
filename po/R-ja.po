@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
-"POT-Creation-Date: 2023-04-29 02:38\n"
+"POT-Creation-Date: 2023-12-02 02:34\n"
 "PO-Revision-Date: 2023-04-21 17:51+0000\n"
 "Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -48,11 +48,11 @@ msgstr ""
 msgid "Posterior Estimates per Model"
 msgstr "モデルごとの事後推定値"
 
-msgid "BF%s%s"
-msgstr "BF%s%s"
+msgid "BF%1$s%2$s"
+msgstr "BF%1$s%2$s"
 
-msgid "Log(BF%s%s)"
-msgstr "Log(BF%s%s)"
+msgid "Log(BF%1$s%2$s)"
+msgstr "Log(BF%1$s%2$s)"
 
 msgid "Mean"
 msgstr "平均値"
@@ -82,9 +82,9 @@ msgid "Ordered effects"
 msgstr "順序効果"
 
 msgid ""
-"%s and %s are the group-level effect size and standard deviation, "
+"%1$s and %2$s are the group-level effect size and standard deviation, "
 "respectively."
-msgstr "%sと%sは、それぞれグループレベルの効果量と標準偏差です。"
+msgstr "%1$sと%2$sは、それぞれグループレベルの効果量と標準偏差です。"
 
 msgid "%s is the group-level effect size."
 msgstr "%s はグループレベルの効果量です."
@@ -414,8 +414,8 @@ msgstr "クックの距離"
 msgid "Cov. Ratio"
 msgstr "共分散比"
 
-msgid "%s%s<sub>(-i)</sub>"
-msgstr "%s%s<sub>(-i)</sub>"
+msgid "%1$s%2$s<sub>(-i)</sub>"
+msgstr "%1$s%2$s<sub>(-i)</sub>"
 
 msgid "Q<sub>E(-i)</sub>"
 msgstr "Q<sub>E(-i)</sub>"
@@ -480,8 +480,8 @@ msgstr "プロット"
 msgid "Funnel Plot"
 msgstr "ファンネルプロット"
 
-msgid "Log-Likelihood for %s%s"
-msgstr "%s%s の対数尤度"
+msgid "Log-Likelihood for %1$s%2$s"
+msgstr "%1$s%2$s の対数尤度"
 
 msgid "Trim-Fill Analysis"
 msgstr "Trim-fill 分析"
@@ -663,6 +663,10 @@ msgid "Warning:"
 msgstr "警告:"
 
 #, fuzzy
+msgid "%1$s observations were ommited due to missing values."
+msgstr "%i の観測値が欠損しているため削除されました。"
+
+#, fuzzy
 msgid "Posterior distribution"
 msgstr "事前分布"
 
@@ -763,6 +767,12 @@ msgstr "モデル仕様のプレビュー"
 msgid "Prior Distribution"
 msgstr "事前分布"
 
+msgid "The specified path does not lead to an existing file."
+msgstr ""
+
+msgid "An error occurred while reading the model file: %1$s"
+msgstr ""
+
 msgid "The loaded object is not a RoBMA model."
 msgstr "読み込まれたオブジェクトは、RoBMAモデルではありません."
 
@@ -829,9 +839,10 @@ msgstr "モデル推定値"
 msgid "Model %i"
 msgstr "モデル %i"
 
-msgid "Model %i does not exist. Select one of the models between 1 and %i."
+msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
 msgstr ""
-"モデル %i は存在しません。1 ~ %i の間のモデルのうち一つを選択してください."
+"モデル %1$i は存在しません。1 ~ %2$i の間のモデルのうち一つを選択してくださ"
+"い."
 
 msgid "Estimated Weights (%s)"
 msgstr "推定ウェイト(%s)"
@@ -890,11 +901,6 @@ msgstr "min(ESS)"
 msgid "max(R-hat)"
 msgstr "max(R-hat)"
 
-msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
-msgstr ""
-"モデル %1$i は存在しません。1 から %2$i までのモデルのうち 1 つを選択してくだ"
-"さい."
-
 msgid "Weights"
 msgstr "ウェイト"
 
@@ -952,8 +958,8 @@ msgstr "95%% 信頼区間"
 msgid "Note:"
 msgstr "注意:"
 
-msgid "%s is on %s scale."
-msgstr "%sは%sのスケールです."
+msgid "%1$s is on %2$s scale."
+msgstr "%1$sは%2$sのスケールです."
 
 msgid "<em>p</em>-values interval(one-sided)"
 msgstr "<em>p</em>値の区間(片側)"
