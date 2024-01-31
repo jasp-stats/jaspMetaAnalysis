@@ -25,8 +25,7 @@ BayesianMetaAnalysisBinomial <- function(jaspResults, dataset, options, state = 
   # load data
   if (.bibmaCheckReady(options))
     dataset <- .bibmaGetData(options, dataset)
-  saveRDS(options, file = "C:/JASP/options.RDS")
-  saveRDS(dataset, file = "C:/JASP/dataset.RDS")
+
   # get the priors
   .bibmaGetPriors(jaspResults, options)
 
