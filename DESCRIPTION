@@ -32,3 +32,6 @@ Imports:
 Remotes:
   jasp-stats/jaspBase,
   jasp-stats/jaspGraphs
+Depends: 
+    R (>= 2.10)
+LazyData: true

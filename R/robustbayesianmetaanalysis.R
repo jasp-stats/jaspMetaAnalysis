@@ -732,6 +732,14 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   return()
 }
+.robmaReadFittedModel          <- function(options) {
+  if (tolower(gsub(" ", "", options[["pathToFittedModel"]])) == "examplerobmalui2015") {
+    data("exampleRobmaLui2015")
+    return(exampleRobmaLui2015)
+  } else {
+    try(readRDS(file = options[["pathToFittedModel"]]))
+  }
+}
 .robmaFitModel                 <- function(jaspResults, dataset, options) {
 
   if (is.null(jaspResults[["model"]])) {
@@ -747,7 +755,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   if (options[["inputType"]] == "fittedModel") {
 
-    fit <- try(readRDS(file = options[["pathToFittedModel"]]))
+    fit <- .robmaReadFittedModel(options)
 
     if (jaspBase::isTryError(fit) && grepl("cannot open the connection", fit))
       .quitAnalysis(gettext("The specified path does not lead to an existing file."))
@@ -1793,3 +1801,4 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   names(priors)            <- priorNames
   return(priors)
 }
+
