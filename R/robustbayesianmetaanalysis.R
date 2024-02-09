@@ -1568,7 +1568,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     wait <- FALSE
 
   if (wait) {
-    tempWait  <- createJaspPlot(title = "")
+    tempWait  <- createJaspHtml(text = gettext("MCMC Diagnostics plots are created once both the plotted parameter ('Plot') and the plot type ('Type') options are selected."))
     tempWait$dependOn(c("mcmcDiagnosticsPlotEffect", "mcmcDiagnosticsPlotHeterogeneity", "mcmcDiagnosticsPlotWeights", "mcmcDiagnosticsPlotPet", "mcmcDiagnosticsPlotPeese",
                         "mcmcDiagnosticsPlotTypeTrace", "mcmcDiagnosticsPlotTypeAutocorrelation", "mcmcDiagnosticsPlotTypePosteriorSamplesDensity"))
     diagnostics[["tempWait"]] <- tempWait
@@ -1801,10 +1801,9 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
     # show error if only one model is selected but doesn't contain any of the diagnostics
     if (noPars && options[["mcmcDiagnosticsPlotSingleModelNumber"]]) {
-      tempError  <- createJaspPlot(title = "")
+      tempError  <- createJaspHtml(text = gettextf("Model %i does not contain any of the selected parameters.", i))
       tempError$dependOn(c("mcmcDiagnosticsPlotEffect", "mcmcDiagnosticsPlotHeterogeneity", "mcmcDiagnosticsPlotWeights", "mcmcDiagnosticsPlotPet", "mcmcDiagnosticsPlotPeese",
                            "mcmcDiagnosticsPlotTypeTrace", "mcmcDiagnosticsPlotTypeAutocorrelation", "mcmcDiagnosticsPlotTypePosteriorSamplesDensity"))
-      tempError$setError(gettextf("Model %i does not contain any of the selected parameters.", i))
       tempModel[["tempError"]] <- tempError
     }
   }
