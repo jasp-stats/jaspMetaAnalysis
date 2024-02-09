@@ -47,7 +47,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   .robmaSummaryTable(jaspResults, options, type = "RoBMA")
   # models overview
   if (options[["inferenceModelsOverview"]])
-    .robmaModelsOvervievTable(jaspResults, options, type = "RoBMA")
+    .robmaModelsOverviewTable(jaspResults, options, type = "RoBMA")
   # models summary
   if (options[["inferenceIndividualModels"]])
     .robmaModelsSummaryTable(jaspResults, options, type = "RoBMA")
@@ -426,8 +426,8 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     "correlation" = "\u03C1",
     "cohensD"     = "\u03B4",
     "fishersZ"    = "\u007a",
-    "logOr"       = "log(OR)",
-    "or"          = "OR"
+    "logOr"       = gettext("log(OR)"),
+    "or"          = gettext("OR")
   ))
 }
 # helper functions
@@ -1020,7 +1020,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   return()
 }
-.robmaModelsOvervievTable      <- function(jaspResults, options, type) {
+.robmaModelsOverviewTable      <- function(jaspResults, options, type) {
 
   ### create overview table
   modelsSummary <- createJaspTable(title = gettext("Models Overview"))

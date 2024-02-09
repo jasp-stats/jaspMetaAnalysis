@@ -47,7 +47,7 @@ BayesianMetaAnalysisBinomial <- function(jaspResults, dataset, options, state = 
   .robmaSummaryTable(jaspResults, options, type = "BiBMA")
   # models overview
   if (options[["inferenceModelsOverview"]])
-    .robmaModelsOvervievTable(jaspResults, options, type = "BiBMA")
+    .robmaModelsOverviewTable(jaspResults, options, type = "BiBMA")
   # models summary
   if (options[["inferenceIndividualModels"]])
     .robmaModelsSummaryTable(jaspResults, options, type = "BiBMA")
@@ -199,9 +199,9 @@ BayesianMetaAnalysisBinomial <- function(jaspResults, dataset, options, state = 
 .bibmaPriorsPlots              <- function(jaspResults, options) {
 
   # create / access the container
-  if (!is.null(jaspResults[["priorPlots"]]))
+  if (!is.null(jaspResults[["priorPlots"]])) {
     priorPlots <- jaspResults[["priorPlots"]]
-  else {
+  } else {
     priorPlots <- createJaspContainer(title = gettext("Prior Plots"))
     priorPlots$dependOn("priorDistributionPlot")
     priorPlots$position <- 2
