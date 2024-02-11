@@ -219,14 +219,78 @@ Section
 		CheckBox
 		{
 			label: 				qsTr("Remove failed models")
-			name:				"advancedAutofitRemoveFailedModels"
+			name:				"advancedRemoveFailedModels"
 			checked:			false
+
+			CheckBox
+			{
+				label: 				qsTr("R-hat")
+				name:				"advancedRemoveFailedModelsRHat"
+				checked:			true
+				childrenOnSameRow:	true
+
+				DoubleField
+				{
+					name:			"advancedRemoveFailedModelsRHatTarget"
+					defaultValue:	1.05
+					min:			1
+					inclusive:		JASP.None
+				}
+			}
+
+			CheckBox
+			{
+				label: 				qsTr("Effective sample size")
+				name:				"advancedRemoveFailedModelsEss"
+				checked:			true
+				childrenOnSameRow:	true
+
+				DoubleField
+				{
+					name:			"advancedRemoveFailedModelsEssTarget"
+					defaultValue:	500
+					min:			1
+					inclusive:		JASP.None
+				}
+			}
+
+			CheckBox
+			{
+				label: 				qsTr("MCMC error")
+				name:				"advancedRemoveFailedModelsMcmcError"
+				checked:			false
+				childrenOnSameRow:	true
+
+				DoubleField
+				{
+					name:			"advancedRemoveFailedModelsMcmcErrorTarget"
+					defaultValue:	0.001
+					min:			0
+					inclusive:		JASP.None
+				}
+			}
+
+			CheckBox
+			{
+				label: 				qsTr("MCMC error / SD")
+				name:				"advancedRemoveFailedModelsMcmcErrorSd"
+				checked:			false
+				childrenOnSameRow:	true
+
+				DoubleField
+				{
+					name:			"advancedRemoveFailedModelsMcmcErrorSdTarget"
+					defaultValue:	0.01
+					min:			0
+					inclusive:		JASP.None
+				}
+			}
 		}
 
 		CheckBox
 		{
 			label: 				qsTr("Rebalance component probability on model failure")
-			name:				"advancedAutofitRebalanceComponentProbabilityOnModelFailure"
+			name:				"advancedRebalanceComponentProbabilityOnModelFailure"
 			checked:			true
 		}
 

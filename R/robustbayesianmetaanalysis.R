@@ -97,7 +97,8 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   "modelsEffect", "modelsEffectNull", "modelsHeterogeneity", "modelsHeterogeneityNull", "modelsSelectionModels", "modelsSelectionModelsNull", "modelsPet", "modelsPetNull", "modelsPeese", "modelsPeeseNull",
   "advancedMcmcAdaptation", "advancedMcmcBurnin", "advancedMcmcSamples", "advancedMcmcChains", "advancedMcmcThin",
   "autofit", "advancedAutofitRHat", "advancedAutofitRHatTarget", "advancedAutofitEss", "advancedAutofitEssTarget", "advancedAutofitMcmcError", "advancedAutofitMcmcErrorTarget", "advancedAutofitMcmcErrorSd", "advancedAutofitMcmcErrorSdTarget", "advancedAutofitMaximumFittingTime", "advancedAutofitMaximumFittingTimeTarget", "advancedAutofitMaximumFittingTimeTargetUnit", "advancedAutofitExtendSamples",
-  "advancedAutofitRemoveFailedModels", "advancedAutofitRebalanceComponentProbabilityOnModelFailure", "seed", "setSeed"
+  "advancedRemoveFailedModels", "advancedRemoveFailedModelsRHat",  "advancedRemoveFailedModelsRHatTarget", "advancedRemoveFailedModelsEss", "advancedRemoveFailedModelsEssTarget", "advancedRemoveFailedModelsMcmcError", "advancedRemoveFailedModelsMcmcErrorTarget", "advancedRemoveFailedModelsMcmcErrorSd", "advancedRemoveFailedModelsMcmcErrorSdTarget",
+  "advancedRebalanceComponentProbabilityOnModelFailure", "seed", "setSeed"
 )
 # priors related functions
 .robmaExtractPriorsFromOptions <- function(optionsPrior, parameter) {
@@ -861,15 +862,15 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
         min_ESS       = if (options[["advancedAutofitEss"]])         options[["advancedAutofitEssTarget"]],
         max_error     = if (options[["advancedAutofitMcmcError"]])   options[["advancedAutofitMcmcErrorTarget"]],
         max_SD_error  = if (options[["advancedAutofitMcmcErrorSd"]]) options[["advancedAutofitMcmcErrorSdTarget"]],
-        max_time      = if (options[["advancedAutofitMaximumFittingTime"]])        list(time = options[["advancedAutofitMaximumFittingTimeTarget"]] , unit = options[["advancedAutofitMaximumFittingTimeTargetUnit"]]),
+        max_time      = if (options[["advancedAutofitMaximumFittingTime"]]) list(time = options[["advancedAutofitMaximumFittingTimeTarget"]] , unit = options[["advancedAutofitMaximumFittingTimeTargetUnit"]]),
         sample_extend = options[["advancedAutofitExtendSamples"]]),
       convergence_checks = RoBMA::set_convergence_checks(
-        max_Rhat            = if (options[["advancedAutofitRHat"]])        options[["advancedAutofitRHatTarget"]],
-        min_ESS             = if (options[["advancedAutofitEss"]])         options[["advancedAutofitEssTarget"]],
-        max_error           = if (options[["advancedAutofitMcmcError"]])   options[["advancedAutofitMcmcErrorTarget"]],
-        max_SD_error        = if (options[["advancedAutofitMcmcErrorSd"]]) options[["advancedAutofitMcmcErrorSdTarget"]],
-        remove_failed       = options[["advancedAutofitRemoveFailedModels"]],
-        balance_probability = options[["advancedAutofitRebalanceComponentProbabilityOnModelFailure"]]
+        max_Rhat            = if (options[["advancedRemoveFailedModelsRHat"]])        options[["advancedRemoveFailedModelsRHatTarget"]],
+        min_ESS             = if (options[["advancedRemoveFailedModelsEss"]])         options[["advancedRemoveFailedModelsEssTarget"]],
+        max_error           = if (options[["advancedRemoveFailedModelsMcmcError"]])   options[["advancedRemoveFailedModelsMcmcErrorTarget"]],
+        max_SD_error        = if (options[["advancedRemoveFailedModelsMcmcErrorSd"]]) options[["advancedRemoveFailedModelsMcmcErrorSdTarget"]],
+        remove_failed       = options[["advancedRemoveFailedModels"]],
+        balance_probability = options[["advancedRebalanceComponentProbabilityOnModelFailure"]]
       ),
       save     = "all",
       seed     = .getSeedJASP(options),
@@ -883,11 +884,8 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   }
 
-
   # error handling
-  if (jaspBase::isTryError(fit))
-    .quitAnalysis(fit)
-
+  .robmaErrorHandling(fit, options)
 
   # update the fit and reset notifier
   model[["object"]] <- fit
@@ -1879,4 +1877,18 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   priorNames               <- paste0("models", priorNames)
   names(priors)            <- priorNames
   return(priors)
+}
+.robmaErrorHandling            <- function(fit, options) {
+
+  if (all(!RoBMA:::.get_model_convergence(fit))) {
+    if (options[["advancedRemoveFailedModels"]])
+      .quitAnalysis(gettext("All models failed to converge under the MCMC convergence criteria. Please update the MCMC settings."))
+    else
+      .quitAnalysis(gettext("All models failed to converge. Please update the MCMC settings."))
+  }
+
+  if (jaspBase::isTryError(fit))
+    .quitAnalysis(fit)
+
+  return()
 }
