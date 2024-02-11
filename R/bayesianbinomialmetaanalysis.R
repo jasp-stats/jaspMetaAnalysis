@@ -16,7 +16,7 @@
 #
 
 
-BayesianMetaAnalysisBinomial <- function(jaspResults, dataset, options, state = NULL) {
+BayesianBinomialMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
   # clean fitted model if it was changed
   if (!.bibmaCheckReady(options))

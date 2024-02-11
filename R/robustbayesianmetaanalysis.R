@@ -1880,15 +1880,15 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 }
 .robmaErrorHandling            <- function(fit, options) {
 
+  if (jaspBase::isTryError(fit))
+    .quitAnalysis(fit)
+
   if (all(!RoBMA:::.get_model_convergence(fit))) {
     if (options[["advancedRemoveFailedModels"]])
       .quitAnalysis(gettext("All models failed to converge under the MCMC convergence criteria. Please update the MCMC settings."))
     else
       .quitAnalysis(gettext("All models failed to converge. Please update the MCMC settings."))
   }
-
-  if (jaspBase::isTryError(fit))
-    .quitAnalysis(fit)
 
   return()
 }
