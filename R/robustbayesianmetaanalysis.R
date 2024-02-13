@@ -604,7 +604,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   if (is.null(jaspResults[["model"]]) && options[["modelEnsembleType"]] != "custom")
     priors <- .robmaPriorsToOptionsNames(RoBMA::check_setup(model_type = .robmaGetModelTypeOption(options), silent = TRUE)$priors)
   else if (is.null(jaspResults[["model"]]))
-    priors <- jaspResults[["priors"]][["object"]]
+    priors <- .robmaPriorsToOptionsNames(jaspResults[["priors"]][["object"]])
   else
     priors <- .robmaPriorsToOptionsNames(jaspResults[["model"]][["object"]][["priors"]])
 
