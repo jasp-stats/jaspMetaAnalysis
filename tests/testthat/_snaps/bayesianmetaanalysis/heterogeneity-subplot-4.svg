@@ -67,16 +67,16 @@
 <text x='452.46' y='562.55' style='font-size: 20.40px; font-family: sans;' textLength='5.10px' lengthAdjust='spacingAndGlyphs'> </text>
 <text x='457.57' y='562.55' style='font-size: 20.40px; font-family: sans;' textLength='9.33px' lengthAdjust='spacingAndGlyphs'>τ</text>
 <text transform='translate(19.02,261.41) rotate(-90)' text-anchor='middle' style='font-size: 20.40px; font-family: sans;' textLength='68.04px' lengthAdjust='spacingAndGlyphs'>Density</text>
-<rect x='515.55' y='80.88' width='149.84' height='76.12' style='stroke-width: 0.75; stroke: none;' />
-<rect x='515.55' y='80.88' width='149.84' height='76.12' style='stroke-width: 10.67; stroke: none;' />
-<rect x='521.03' y='94.83' width='42.52' height='28.35' style='stroke-width: 10.67; stroke: none;' />
-<line x1='525.28' y1='109.00' x2='559.29' y2='109.00' style='stroke-width: 2.13; stroke: #009E73; stroke-linecap: butt;' />
-<rect x='521.03' y='123.18' width='42.52' height='28.35' style='stroke-width: 10.67; stroke: none;' />
-<line x1='525.28' y1='137.35' x2='559.29' y2='137.35' style='stroke-width: 2.13; stroke-dasharray: 2.85,8.54; stroke-linecap: butt;' />
-<text x='572.01' y='112.60' style='font-size: 17.00px; font-family: sans;' textLength='81.27px' lengthAdjust='spacingAndGlyphs'>Random H</text>
-<text x='653.29' y='115.74' style='font-size: 11.90px; font-family: sans;' textLength='6.62px' lengthAdjust='spacingAndGlyphs'>1</text>
-<text x='572.01' y='140.94' style='font-size: 17.00px; font-family: sans;' textLength='52.90px' lengthAdjust='spacingAndGlyphs'>Prior H</text>
-<text x='624.91' y='144.09' style='font-size: 11.90px; font-family: sans;' textLength='6.62px' lengthAdjust='spacingAndGlyphs'>1</text>
+<rect x='519.78' y='80.88' width='141.37' height='67.65' style='stroke-width: 0.75; stroke: none;' />
+<rect x='519.78' y='80.88' width='141.37' height='67.65' style='stroke-width: 10.67; stroke: none;' />
+<rect x='525.26' y='86.36' width='42.52' height='28.35' style='stroke-width: 10.67; stroke: none;' />
+<line x1='529.51' y1='100.54' x2='563.53' y2='100.54' style='stroke-width: 2.13; stroke: #009E73; stroke-linecap: butt;' />
+<rect x='525.26' y='114.71' width='42.52' height='28.35' style='stroke-width: 10.67; stroke: none;' />
+<line x1='529.51' y1='128.88' x2='563.53' y2='128.88' style='stroke-width: 2.13; stroke-dasharray: 2.85,8.54; stroke-linecap: butt;' />
+<text x='567.78' y='104.13' style='font-size: 17.00px; font-family: sans;' textLength='81.27px' lengthAdjust='spacingAndGlyphs'>Random H</text>
+<text x='649.05' y='107.27' style='font-size: 11.90px; font-family: sans;' textLength='6.62px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='567.78' y='132.47' style='font-size: 17.00px; font-family: sans;' textLength='52.90px' lengthAdjust='spacingAndGlyphs'>Prior H</text>
+<text x='620.68' y='135.62' style='font-size: 11.90px; font-family: sans;' textLength='6.62px' lengthAdjust='spacingAndGlyphs'>1</text>
 <text x='396.16' y='11.70' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='178.63px' lengthAdjust='spacingAndGlyphs'>heterogeneity-subplot-4</text>
 </g>
 </svg>
