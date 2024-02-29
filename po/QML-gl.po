@@ -378,7 +378,7 @@ msgstr "Avanzado"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Prior model probability"
-msgstr "Probabilidade previa do modelo"
+msgstr "Probabilidade do Modelo Previo"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Fixed effects"
