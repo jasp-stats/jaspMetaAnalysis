@@ -265,472 +265,22 @@ Form
 
 
 	//// Inference ////
-	Section
+	MA.RobustBayesianMetaAnalysisInference
 	{
-		title: qsTr("Inference")
-
-		Group
-		{
-
-			CheckBox
-			{
-				label:		qsTr("Conditional parameter estimates")
-				name:		"inferenceConditionalParameterEstimates"
-			}
-
-			CheckBox
-			{
-				columns:	2
-				label:		qsTr("Models overview")
-				name:		"inferenceModelsOverview"
-
-				RadioButtonGroup
-				{
-					name: "inferenceModelsOverviewBfComparison"
-					title: qsTr("BF comparison")
-
-					RadioButton
-					{
-						name: 		"inclusion"
-						label: 		qsTr("Inclusion")
-						checked: 	true
-					}
-
-					RadioButton
-					{
-						name: 		"best"
-						label: 		qsTr("vs. Best")
-					}
-
-					RadioButton
-					{
-						name: 		"previous"
-						label: 		qsTr("vs. Previous")
-						enabled:	inferenceModelsOverviewOrderMarglik.checked
-					}
-				}
-
-				RadioButtonGroup
-				{
-					name: 		"inferenceModelsOverviewOrder"
-					title:		qsTr("Order")
-
-					RadioButton
-					{
-						name: 		"modelNumber"
-						label: 		qsTr("Model number")
-						checked:	true
-					}
-
-					RadioButton
-					{
-						name: 		"marginalLikelihood"
-						label: 		qsTr("Marginal likelihood")
-						id:			inferenceModelsOverviewOrderMarglik
-					}
-
-					RadioButton
-					{
-						name: 		"posteriorProbability"
-						label: 		qsTr("Posterior probability")
-
-					}
-				}
-			}
-
-			CheckBox
-			{
-				label:		qsTr("Individual models")
-				name:		"inferenceIndividualModels"
-
-				CheckBox
-				{
-					label:		qsTr("Single model")
-					name:		"inferenceIndividualModelsSingleModel"
-					childrenOnSameRow: true
-					IntegerField
-					{
-						name:	"inferenceIndividualModelsSingleModelNumber"
-						defaultValue:	1
-					}
-				}
-			}
-
-		}
-
-		Group
-		{
-
-			BayesFactorType{}
-
-			CIField
-			{
-				name: "inferenceCiWidth"
-				label: qsTr("CI width")
-			}
-
-			DropDown
-			{
-				name:		"inferenceOutputScale"
-				id:			inferenceOutputScale
-				label:		qsTr("Output scale")
-				visible:	!measuresGeneral.checked
-				values: [
-					{ label: qsTr("Cohen's d"),			value: "cohensD"},
-					{ label: qsTr("Fisher's z"),		value: "fishersZ"},
-					{ label: qsTr("logOR"),				value: "logOr"},
-					{ label: qsTr("Correlation"),		value: "correlation"}
-				]
-			}
-
-			CheckBox
-			{
-				label:		qsTr("Shorten prior names")
-				name:		"inferenceShortenPriorName"
-			}
-
-		}
+		analysisType:				"RoBMA"
+		measuresGeneralChecked: 	measuresGeneral.checked
 	}
 
 	//// Plots section ////
-	Section
+	MA.RobustBayesianMetaAnalysisPlots
 	{
-		title: 		qsTr("Plots")
-
-
-		CheckBox
-		{
-			columns:	2
-			label:		qsTr("Forest plot")
-			name:		"plotsForestPlot"
-
-			RadioButtonGroup
-			{
-				name: 		"plotsForestPlotOrder"
-				title:		qsTr("Order")
-
-				RadioButton
-				{
-					name: 	"increasing"
-					label: 	qsTr("Ascending")
-				}
-
-				RadioButton
-				{
-					name: 	"decreasing"
-					label: 	qsTr("Descending")
-				}
-
-				RadioButton
-				{
-					name: 	"alphabetical"
-					label: 	qsTr("Alphabetical")
-					checked:true
-				}
-			}
-		}
-
-		Group
-		{
-			title:		" " // Add a line to align with the first column
-			columns:	1
-
-			RadioButtonGroup
-			{
-				name:				"plotsForestPlotType"
-				title:				qsTr("Type")
-				columns:			2
-
-				RadioButton
-				{
-					value:		"averaged"
-					label:		qsTr("Model averaged")
-					checked:	true
-				}
-
-				RadioButton
-				{
-					value:		"conditional"
-					label:		qsTr("Conditional")
-				}
-
-			}
-		}
-
-		Divider { }
-
-		Group
-		{
-			title:	qsTr("Pooled estimates")
-			columns: 1
-
-			CheckBox
-			{
-				label:	qsTr("Effect")
-				name:	"plotsPooledEstimatesEffect"
-			}
-
-			CheckBox
-			{
-				label:	qsTr("Heterogeneity")
-				name:	"plotsPooledEstimatesHeterogeneity"
-			}
-
-			CheckBox
-			{
-				label:	qsTr("Weight function")
-				name:	"plotsPooledEstimatesWeightFunction"
-
-				CheckBox
-				{
-					name:		"plotsPooledEstimatesWeightFunctionRescaleXAxis"
-					text:		qsTr("Rescale x-axis")
-					checked:	true
-				}
-			}
-
-			CheckBox
-			{
-				label:	qsTr("PET-PEESE")
-				name:	"plotsPooledEstimatesPetPeese"
-			}
-		}
-
-		Group
-		{
-			title:		" " // Add a line to align with the first column
-			columns:	1
-
-			RadioButtonGroup
-			{
-				name:		"plotsPooledEstimatesType"
-				title:		qsTr("Type")
-				columns:	2
-
-				RadioButton
-				{
-					value:		"averaged"
-					label:		qsTr("Model averaged")
-					checked:	true
-				}
-
-				RadioButton
-				{
-					value:		"conditional"
-					label:		qsTr("Conditional")
-				}
-
-			}
-
-			CheckBox
-			{
-				label:		qsTr("Prior distribution")
-				name:		"plotsPooledEstimatesPriorDistribution"
-				checked:	true
-			}
-		}
-
-		Divider { }
-
-		Group
-		{
-			title:	qsTr("Individual models")
-			columns: 1
-
-			CheckBox
-			{
-				label:	qsTr("Effect")
-				name:	"plotsIndividualModelsEffect"
-			}
-
-			CheckBox
-			{
-				label:	qsTr("Heterogeneity")
-				name:	"plotsIndividualModelsHeterogeneity"
-			}
-		}
-
-		Group
-		{
-			title:		" "
-			columns:	2
-
-			RadioButtonGroup
-			{
-				name:				"plotsIndividualModelsType"
-				title:				qsTr("Type")
-				Layout.columnSpan:	2
-				columns:			2
-
-				RadioButton
-				{
-					value:		"averaged"
-					label:		qsTr("Model averaged")
-				}
-
-				RadioButton
-				{
-					value:		"conditional"
-					label:		qsTr("Conditional")
-					checked:	true
-				}
-			}
-
-			RadioButtonGroup
-			{
-				name: 		"plotsIndividualModelsOrder"
-				title:		qsTr("Order")
-
-				RadioButton
-				{
-					name: 	"increasing"
-					label: 	qsTr("Ascending")
-				}
-
-				RadioButton
-				{
-					name: 	"decreasing"
-					label: 	qsTr("Descending")
-				}
-			}
-
-			RadioButtonGroup
-			{
-				name: 		"plotsIndividualModelsOrderBy"
-				title:		qsTr("Order by")
-
-				RadioButton
-				{
-					name:		"modelNumber"
-					label:		qsTr("Model number")
-					checked:	true
-				}
-
-				RadioButton
-				{
-					name:		"estimate"
-					label:		qsTr("Estimate")
-				}
-
-				RadioButton
-				{
-					name:		"bayesFactor"
-					label:		qsTr("Bayes factor")
-				}
-
-				RadioButton
-				{
-					name:		"posteriorProbability"
-					label:		qsTr("Posterior prob.")
-				}
-			}
-
-			Group
-			{
-				title:				qsTr("Show")
-				Layout.columnSpan:	2
-
-				CheckBox
-				{
-					label:		qsTr("Bayesian updating")
-					name:		"plotsIndividualModelsShowBayesianUpdating"
-					checked:	true
-				}
-
-				CheckBox
-				{
-					label:		qsTr("Posterior estimates")
-					name:		"plotsIndividualModelsShowPosteriorEstimates"
-					checked:	false
-				}
-			}
-		}
+		analysisType:	"RoBMA"
 	}
 
 	//// Diagnostics section ////
-	Section
+	MA.RobustBayesianMetaAnalysisDiagnostics
 	{
-		title: qsTr("MCMC Diagnostics")
-
-		CheckBox
-		{
-			Layout.columnSpan: 2
-			label:		qsTr("Overview table")
-			name:		"mcmcDiagnosticsOverviewTable"
-		}
-
-		Group
-		{
-			title:			qsTr("Plot")
-			CheckBox
-			{
-				label:		qsTr("Effect")
-				name:		"mcmcDiagnosticsPlotEffect"
-			}
-
-			CheckBox
-			{
-				label:		qsTr("Heterogeneity")
-				name:		"mcmcDiagnosticsPlotHeterogeneity"
-			}
-
-			CheckBox
-			{
-				label:		qsTr("Weights")
-				name:		"mcmcDiagnosticsPlotWeights"
-			}
-
-			CheckBox
-			{
-				label:		qsTr("PET")
-				name:		"mcmcDiagnosticsPlotPet"
-			}
-
-			CheckBox
-			{
-				label:		qsTr("PEESE")
-				name:		"mcmcDiagnosticsPlotPeese"
-			}
-		}
-
-		Group
-		{
-			Group
-			{
-				title:			qsTr("Type")
-				CheckBox
-				{
-					label:		qsTr("Trace")
-					name:		"mcmcDiagnosticsPlotTypeTrace"
-				}
-
-				CheckBox
-				{
-					label:		qsTr("Autocorrelation")
-					name:		"mcmcDiagnosticsPlotTypeAutocorrelation"
-				}
-
-				CheckBox
-				{
-					label:		qsTr("Posterior samples density")
-					name:		"mcmcDiagnosticsPlotTypePosteriorSamplesDensity"
-				}
-			}
-
-			CheckBox
-			{
-				label:		qsTr("Single model")
-				name:		"mcmcDiagnosticsPlotSingleModel"
-				childrenOnSameRow: true
-
-				IntegerField
-				{
-					name:			"mcmcDiagnosticsPlotSingleModelNumber"
-					defaultValue:	1
-				}
-			}
-		}
-
+		analysisType:	"RoBMA"
 	}
 
 	//// Priors ////
@@ -747,6 +297,7 @@ Form
 		{
 			Layout.preferredWidth:	parent.width
 			componentType:			"modelsEffect"
+			analysisType:			"normal"
 		}
 
 		// effect prior
@@ -754,6 +305,7 @@ Form
 		{
 			Layout.preferredWidth:	parent.width
 			componentType:			"modelsHeterogeneity"
+			analysisType:			"normal"
 		}
 
 		// bias priors
@@ -767,12 +319,14 @@ Form
 		{
 			Layout.preferredWidth:	parent.width
 			componentType:			"modelsPet"
+			analysisType:			"normal"
 		}
 
 		MA.RobustBayesianMetaAnalysisPriors
 		{
 			Layout.preferredWidth:	parent.width
 			componentType:			"modelsPeese"
+			analysisType:			"normal"
 		}
 
 		Divider { }
@@ -789,6 +343,7 @@ Form
 		{
 			Layout.preferredWidth:	parent.width
 			componentType:			"modelsEffectNull"
+			analysisType:			"normal"
 			visible:				priorsNull.checked
 		}
 
@@ -797,6 +352,7 @@ Form
 		{
 			Layout.preferredWidth:	parent.width
 			componentType:			"modelsHeterogeneityNull"
+			analysisType:			"normal"
 			visible:				priorsNull.checked
 		}
 
@@ -812,6 +368,7 @@ Form
 		{
 			Layout.preferredWidth:	parent.width
 			componentType:			"modelsPetNull"
+			analysisType:			"normal"
 			visible:				priorsNull.checked
 		}
 
@@ -819,223 +376,17 @@ Form
 		{
 			Layout.preferredWidth:	parent.width
 			componentType:			"modelsPeeseNull"
+			analysisType:			"normal"
 			visible:				priorsNull.checked
 		}
 	}
 
 	//// Advanced section for prior model probabilities sampling settings ////
-	Section
+	MA.RobustBayesianMetaAnalysisAdvanced
 	{
-		title: 				qsTr("Advanced")
-		columns: 			2
-		enabled:			!measuresFitted.checked
-		onEnabledChanged:	if(!enabled) expanded = false
-		
-		Group
-		{
-			rowSpacing: 10 * preferencesModel.uiScale
-
-			DropDown
-			{
-				name:		"advancedEstimationScale"
-				label:		qsTr("Estimation scale")
-				visible:	!measuresGeneral.checked
-				values: [
-					{ label: qsTr("Fisher's z"),		value: "fishersZ"},
-					{ label: qsTr("Cohen's d"),			value: "cohensD"},
-					{ label: qsTr("logOR"),				value: "logOr"}
-				]
-			}
-
-			Group
-			{
-				title: 		qsTr("MCMC")
-
-				IntegerField
-				{
-					name:			"advancedMcmcAdaptation"
-					label:			qsTr("Adaptation")
-					defaultValue:	500
-					min:			100
-					fieldWidth:		55 * preferencesModel.uiScale
-				}
-				IntegerField
-				{
-					name:			"advancedMcmcBurnin"
-					label:			qsTr("Burnin")
-					defaultValue:	2000
-					min:			100
-					fieldWidth:		55 * preferencesModel.uiScale
-				}
-				IntegerField
-				{
-					name:			"advancedMcmcSamples"
-					label:			qsTr("Samples")
-					defaultValue:	5000
-					min:			100
-					fieldWidth:		55 * preferencesModel.uiScale
-				}
-				IntegerField
-				{
-					name:			"advancedMcmcChains"
-					label:			qsTr("Chains")
-					defaultValue:	3
-					min:			1
-					fieldWidth:		55 * preferencesModel.uiScale
-				}
-				IntegerField
-				{
-					name:			"advancedMcmcThin"
-					label:			qsTr("Thin")
-					defaultValue:	1
-					min:			1
-					fieldWidth:		55 * preferencesModel.uiScale
-				}
-
-			}
-
-			SetSeed{}
-		}
-
-		
-		Group
-		{
-
-			CheckBox
-			{
-				label:			qsTr("Autofit")
-				name:			"autofit"
-				checked:		true
-
-				CheckBox
-				{
-					label: 				qsTr("R-hat")
-					name:				"advancedAutofitRHat"
-					checked:			true
-					childrenOnSameRow:	true
-
-					DoubleField
-					{
-						name:			"advancedAutofitRHatTarget"
-						defaultValue:	1.05
-						min:			1
-						inclusive:		JASP.None
-					}
-				}
-
-				CheckBox
-				{
-					label: 				qsTr("Effective sample size")
-					name:				"advancedAutofitEss"
-					checked:			true
-					childrenOnSameRow:	true
-
-					DoubleField
-					{
-						name:			"advancedAutofitEssTarget"
-						defaultValue:	500
-						min:			1
-						inclusive:		JASP.None
-					}
-				}
-
-				CheckBox
-				{
-					label: 				qsTr("MCMC error")
-					name:				"advancedAutofitMcmcError"
-					checked:			false
-					childrenOnSameRow:	true
-
-					DoubleField
-					{
-						name:			"advancedAutofitMcmcErrorTarget"
-						defaultValue:	0.001
-						min:			0
-						inclusive:		JASP.None
-					}
-				}
-
-				CheckBox
-				{
-					label: 				qsTr("MCMC error / SD")
-					name:				"advancedAutofitMcmcErrorSd"
-					checked:			false
-					childrenOnSameRow:	true
-
-					DoubleField
-					{
-						name:			"advancedAutofitMcmcErrorSdTarget"
-						defaultValue:	0.01
-						min:			0
-						inclusive:		JASP.None
-					}
-				}
-
-				CheckBox
-				{
-					label: 				qsTr("Maximum fitting time")
-					name:				"advancedAutofitMaximumFittingTime"
-					checked:			false
-					childrenOnSameRow:	true
-
-					Group
-					{
-						Row
-						{
-							IntegerField
-							{
-								name:			"advancedAutofitMaximumFittingTimeTarget"
-								defaultValue:	1
-								min:			0
-							}
-
-							DropDown
-							{
-								name:			"advancedAutofitMaximumFittingTimeTargetUnit"
-								values:
-								[
-									{ label: qsTr("hours"),				value: "hours"},
-									{ label: qsTr("minutes"),			value: "mins"},
-									{ label: qsTr("seconds"),			value: "secs"}
-								]
-							}
-						}
-					}
-				}
-
-				IntegerField
-				{
-					label: 			qsTr("Extend samples")
-					name:			"advancedAutofitExtendSamples"
-					defaultValue:	1000
-					min:			100
-				}
-			}
-
-			CheckBox
-			{
-				label: 				qsTr("Remove failed models")
-				name:				"advancedAutofitRemoveFailedModels"
-				checked:			false
-			}
-
-			CheckBox
-			{
-				label: 				qsTr("Rebalance component probability on model failure")
-				name:				"advancedAutofitRebalanceComponentProbabilityOnModelFailure"
-				checked:			true
-			}
-
-		}
-
-		FileSelector
-		{
-			Layout.columnSpan:	2
-			label: 				qsTr("Save the fitted model")
-			name:				"advancedSaveFittedModel"
-			filter:				"*.RDS"
-			save:				true
-		}
+		analysisType:				"RoBMA"
+		measuresGeneralChecked: 	measuresGeneral.checked
+		measuresFittedChecked: 		measuresFitted.checked
 	}
 
 }

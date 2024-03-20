@@ -28,12 +28,10 @@ ColumnLayout
 
 	Label
 	{
-		text:					
+		text:	switch (componentType) 
 		{
-			if (componentType == "modelsSelectionModels")
-				qsTr("Publication bias: selection models")
-			else if (componentType == "modelsSelectionModelsNull")
-				qsTr("Publication bias: selection models (null)")
+			case "modelsSelectionModels":		qsTr("Publication bias: selection models"); break;
+			case "modelsSelectionModelsNull":	qsTr("Publication bias: selection models (null)"); break;
 		}
 		Layout.preferredHeight:	20 * preferencesModel.uiScale
 	}
@@ -51,9 +49,9 @@ ColumnLayout
 	{
 		name:					componentType
 		optionKey:				"name"
-		defaultValues:
+		defaultValues:			switch (componentType) 
 		{
-			if (componentType == "modelsSelectionModels")
+			case "modelsSelectionModels":
 				[
 					{"type": "twoSided",	"pValues": "(.05)",				"alpha": "(1,1)",	"priorWeight": "1/12"},
 					{"type": "twoSided",	"pValues": "(.05, .10)",		"alpha": "(1,1,1)",	"priorWeight": "1/12"},
@@ -61,9 +59,11 @@ ColumnLayout
 					{"type": "oneSided",	"pValues": "(.025, .05)",		"alpha": "(1,1,1)",	"priorWeight": "1/12"},
 					{"type": "oneSided",	"pValues": "(.05, .50)",		"alpha": "(1,1,1)",	"priorWeight": "1/12"},
 					{"type": "oneSided",	"pValues": "(.025, .05, .10)",	"alpha": "(1,1,1,1)","priorWeight": "1/12"}
-				]
-			else if (componentType == "modelsSelectionModelsNull")
-				[{"type": "none"}]
+				];
+				break;
+			case "modelsSelectionModelsNull":
+				[{"type": "none"}];
+				break;
 		}
 		rowComponent: 			RowLayout
 		{

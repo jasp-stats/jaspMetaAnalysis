@@ -8,7 +8,7 @@ Description
 	description:	qsTr("Synthesize evidence across multiple studies")
 	requiresData:	false
 	icon:			"meta-analysis.svg"
-	version			: "0.18.3"
+	version			: "0.19"
 	author:			"JASP Team"
 	maintainer:		"JASP Team <info@jasp-stats.org>"
 	website:		"jasp-stats.org"
@@ -68,6 +68,14 @@ Description
 		menu:			qsTr("Meta-Analysis")
 		title:			qsTr("Bayesian Meta-Analysis")
 		func:			"BayesianMetaAnalysis"
+		requiresData:	true
+	}
+
+	Analysis
+	{
+		menu:			qsTr("Binomial Meta-Analysis")
+		title:			qsTr("Bayesian Binomial Meta-Analysis")
+		func:			"BayesianBinomialMetaAnalysis"
 		requiresData:	true
 	}
 

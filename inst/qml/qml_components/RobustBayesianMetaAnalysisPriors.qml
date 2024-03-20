@@ -25,27 +25,20 @@ ColumnLayout
 {
 	spacing: 						0
 	property string componentType:	"Default type"
+	property string analysisType:	"normal"
 
 	Label
 	{
-		text:					
+		text:	switch (componentType) 
 		{
-			if (componentType == "modelsEffect")
-				qsTr("Effect")
-			else if (componentType == "modelsEffectNull")
-				qsTr("Effect (null)")
-			else if (componentType == "modelsHeterogeneity")
-				qsTr("Heterogeneity")
-			else if (componentType == "modelsHeterogeneityNull")
-				qsTr("Heterogeneity (null)")
-			else if (componentType == "modelsPet")
-				qsTr("Publication bias: PET")
-			else if (componentType == "modelsPetNull")
-				qsTr("Publication bias: PET (null)")
-			else if (componentType == "modelsPeese")
-				qsTr("Publication bias: PEESE")
-			else if (componentType == "modelsPeeseNull")
-				qsTr("Publication bias: PEESE (null)")
+			case "modelsEffect":				qsTr("Effect"); break;
+			case "modelsEffectNull":			qsTr("Effect (null)"); break;
+			case "modelsHeterogeneity":			qsTr("Heterogeneity"); break;
+			case "modelsHeterogeneityNull":		qsTr("Heterogeneity (null)"); break;
+			case "modelsPet":					qsTr("Publication bias: PET"); break;
+			case "modelsPetNull":				qsTr("Publication bias: PET (null)"); break;
+			case "modelsPeese":					qsTr("Publication bias: PEESE"); break;
+			case "modelsPeeseNull":				qsTr("Publication bias: PEESE (null)"); break;
 		}
 		Layout.preferredHeight:	20 * preferencesModel.uiScale
 	}
@@ -62,24 +55,24 @@ ColumnLayout
 	{
 		name:					componentType
 		optionKey:				"name"
-		defaultValues:				
+		defaultValues:			switch (componentType)
 		{
-			if (componentType == "modelsEffect")
-				[{"type": "normal"}]
-			else if (componentType == "modelsEffectNull")
-				[{"type": "spike"}]
-			else if (componentType == "modelsHeterogeneity")
-				[{"type": "invgamma"}]
-			else if (componentType == "modelsHeterogeneityNull")
-				[{"type": "spike"}]
-			else if (componentType == "modelsPet")
-				[{"type": "cauchy", "priorWeight": "1/4"}]
-			else if (componentType == "modelsPetNull")
-				[]
-			else if (componentType == "modelsPeese")
-				[{"type": "cauchy", "theta": "5", "priorWeight": "1/4"}]
-			else if (componentType == "modelsPeeseNull")
-				[]
+			case "modelsEffect":				switch(analysisType)
+			{
+				case "normal":		[{"type": "normal", "mu": "0", "sigma": "1"}]; break;
+				case "binomial":	[{"type": "t", "mu": "0", "sigma": "0.58", "nu": "4"}]; break;
+			}; break;
+			case "modelsEffectNull":			[{"type": "spike", "x0": "0"}]; break;
+			case "modelsHeterogeneity":			switch(analysisType)
+			{
+				case "normal":		[{"type": "invgamma", "alpha": "1", "beta": "0.15"}]; break;
+				case "binomial":	[{"type": "invgamma", "alpha": "1.77", "beta": "0.55"}]; break;
+			}; break;
+			case "modelsHeterogeneityNull":		[{"type": "spike", "x0": "0"}]; break;
+			case "modelsPet":					[{"type": "cauchy", "x0": "0", "theta": "1", "priorWeight": "1/4"}]; break;
+			case "modelsPetNull":				[]; break;
+			case "modelsPeese":					[{"type": "cauchy", "x0": "0", "theta": "5", "priorWeight": "1/4"}]; break;
+			case "modelsPeeseNull":				[]; break;
 		}
 		rowComponent: 			RowLayout
 		{
