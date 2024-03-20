@@ -90,7 +90,6 @@ BayesianBinomialMetaAnalysis <- function(jaspResults, dataset, options, state = 
   "advancedRemoveFailedModels", "advancedRemoveFailedModelsRHat",  "advancedRemoveFailedModelsRHatTarget", "advancedRemoveFailedModelsEss", "advancedRemoveFailedModelsEssTarget", "advancedRemoveFailedModelsMcmcError", "advancedRemoveFailedModelsMcmcErrorTarget", "advancedRemoveFailedModelsMcmcErrorSd", "advancedRemoveFailedModelsMcmcErrorSdTarget",
   "advancedRebalanceComponentProbabilityOnModelFailure", "seed", "setSeed"
 )
-
 # helper functions
 .bibmaCheckReady          <- function(options) {
   return(options[["successesGroup1"]] != "" && options[["successesGroup2"]] != "" && options[["observationsGroup1"]] != "" && options[["observationsGroup2"]] != "")
@@ -112,7 +111,7 @@ BayesianBinomialMetaAnalysis <- function(jaspResults, dataset, options, state = 
   # We don't wanna delete the bibma modele every time settings is change since bibma takes a lot of time to fit.
   # Therefore, we don't create dependencies on the fitted model (in cases when the model can be updated), but
   # on a notifier that tells us when there was the change. If possible, we don't refit the whole model,
-  # just update the neccessary parts.
+  # just update the necessary parts.
 
   if (is.null(jaspResults[["modelNotifier"]])) {
     modelNotifier <- createJaspState()
@@ -121,7 +120,6 @@ BayesianBinomialMetaAnalysis <- function(jaspResults, dataset, options, state = 
   }
 
   return()
-
 }
 .bibmaCleanModel          <- function(jaspResults) {
 
@@ -382,7 +380,14 @@ BayesianBinomialMetaAnalysis <- function(jaspResults, dataset, options, state = 
 
   if (is.null(jaspResults[["model"]])) {
     model <- createJaspState()
-    model$dependOn(.bibmaDependencies[.bibmaDependencies != "studyLabel"])
+    model$dependOn(.bibmaDependencies[!.bibmaDependencies %in% c(
+      # the excluded dependencies can be handled via the update function
+      "studyLabel",
+      "advancedRemoveFailedModels", "advancedRemoveFailedModelsRHat",  "advancedRemoveFailedModelsRHatTarget", "advancedRemoveFailedModelsEss", "advancedRemoveFailedModelsEssTarget",
+      "advancedRemoveFailedModelsMcmcError", "advancedRemoveFailedModelsMcmcErrorTarget", "advancedRemoveFailedModelsMcmcErrorSd", "advancedRemoveFailedModelsMcmcErrorSdTarget",
+      "advancedRebalanceComponentProbabilityOnModelFailure"
+    )]
+    )
     jaspResults[["model"]] <- model
     fit                    <- NULL
   } else {
@@ -439,9 +444,18 @@ BayesianBinomialMetaAnalysis <- function(jaspResults, dataset, options, state = 
     ))
 
   } else {
-    # only tries to update labels if they weren't supplied originally
-    fit <- update(fit, study_names = if (options[["studyLabel"]] != "") dataset[, options[["studyLabel"]]])
-
+    # only tries to update labels / convergence checks if the model is fitted
+    fit <- update(
+      fit,
+      study_names        = if (options[["studyLabel"]] != "") dataset[, options[["studyLabel"]]],
+      convergence_checks = RoBMA::set_convergence_checks(
+        max_Rhat            = if (options[["advancedRemoveFailedModelsRHat"]])        options[["advancedRemoveFailedModelsRHatTarget"]],
+        min_ESS             = if (options[["advancedRemoveFailedModelsEss"]])         options[["advancedRemoveFailedModelsEssTarget"]],
+        max_error           = if (options[["advancedRemoveFailedModelsMcmcError"]])   options[["advancedRemoveFailedModelsMcmcErrorTarget"]],
+        max_SD_error        = if (options[["advancedRemoveFailedModelsMcmcErrorSd"]]) options[["advancedRemoveFailedModelsMcmcErrorSdTarget"]],
+        remove_failed       = options[["advancedRemoveFailedModels"]],
+        balance_probability = options[["advancedRebalanceComponentProbabilityOnModelFailure"]]
+    ))
   }
 
   # error handling

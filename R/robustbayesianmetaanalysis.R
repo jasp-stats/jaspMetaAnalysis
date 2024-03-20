@@ -811,7 +811,14 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   if (is.null(jaspResults[["model"]])) {
     model <- createJaspState()
-    model$dependOn(.robmaDependencies[.robmaDependencies != "studyLabel"])
+    model$dependOn(.robmaDependencies[!.robmaDependencies %in% c(
+      # the excluded dependencies can be handled via the update function
+      "studyLabel",
+      "advancedRemoveFailedModels", "advancedRemoveFailedModelsRHat",  "advancedRemoveFailedModelsRHatTarget", "advancedRemoveFailedModelsEss", "advancedRemoveFailedModelsEssTarget",
+      "advancedRemoveFailedModelsMcmcError", "advancedRemoveFailedModelsMcmcErrorTarget", "advancedRemoveFailedModelsMcmcErrorSd", "advancedRemoveFailedModelsMcmcErrorSdTarget",
+      "advancedRebalanceComponentProbabilityOnModelFailure"
+    )]
+    )
     jaspResults[["model"]] <- model
     fit                    <- NULL
   } else {
@@ -888,8 +895,17 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   } else {
     # only tries to update labels if they weren't supplied originally
-    fit <- update(fit, study_names = if (options[["studyLabel"]] != "") dataset[, options[["studyLabel"]]])
-
+    fit <- update(
+      fit,
+      study_names        = if (options[["studyLabel"]] != "") dataset[, options[["studyLabel"]]],
+      convergence_checks = RoBMA::set_convergence_checks(
+        max_Rhat            = if (options[["advancedRemoveFailedModelsRHat"]])        options[["advancedRemoveFailedModelsRHatTarget"]],
+        min_ESS             = if (options[["advancedRemoveFailedModelsEss"]])         options[["advancedRemoveFailedModelsEssTarget"]],
+        max_error           = if (options[["advancedRemoveFailedModelsMcmcError"]])   options[["advancedRemoveFailedModelsMcmcErrorTarget"]],
+        max_SD_error        = if (options[["advancedRemoveFailedModelsMcmcErrorSd"]]) options[["advancedRemoveFailedModelsMcmcErrorSdTarget"]],
+        remove_failed       = options[["advancedRemoveFailedModels"]],
+        balance_probability = options[["advancedRebalanceComponentProbabilityOnModelFailure"]]
+      ))
   }
 
   # error handling
