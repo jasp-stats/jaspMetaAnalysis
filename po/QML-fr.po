@@ -21,11 +21,11 @@ msgstr "Classique"
 
 msgctxt "Description|"
 msgid "Classical Meta-Analysis"
-msgstr ""
+msgstr "Méta-Analyse Classique"
 
 msgctxt "Description|"
 msgid "Prediction Model Performance"
-msgstr ""
+msgstr "Performance du Modèle de Prédiction"
 
 msgctxt "Description|"
 msgid "Classical Prediction Model Performance"

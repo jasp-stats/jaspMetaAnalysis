@@ -1768,7 +1768,6 @@ msgctxt "PetPeese|"
 msgid "Sample size"
 msgstr "Stichprobenumfang"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Mean estimates table"
 msgstr "Tabelle mittlerer Schätzungen"
