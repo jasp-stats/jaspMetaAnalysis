@@ -652,4 +652,14 @@ Upgrades
 		ChangeRename { from: "availableModelComponentsPlot"; to: "posteriorPlotsAvailableTerms" }
 		ChangeRename { from: "plotPosterior"; to: "posteriorPlotsSelectedTerms" }
 	}
+
+	Upgrade
+	{
+		functionName:	"RobustBayesianMetaAnalysis"
+		fromVersion:	"0.18.3"
+		toVersion:		"0.19"
+
+		ChangeRename { from: "advancedAutofitRemoveFailedModels"; to: "advancedRemoveFailedModels" }
+		ChangeRename { from: "advancedAutofitRebalanceComponentProbabilityOnModelFailure"; to: "advancedRebalanceComponentProbabilityOnModelFailure" }
+	}
 }
