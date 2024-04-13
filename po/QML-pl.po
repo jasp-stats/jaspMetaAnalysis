@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2024-04-06 02:31+0000\n"
+"PO-Revision-Date: 2024-04-09 13:34+0000\n"
 "Last-Translator: Tomasz Misiuro <tomaszmisiuro@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/pl/>\n"
@@ -336,7 +336,7 @@ msgstr "Czynniki"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Clustering"
-msgstr ""
+msgstr "Skupienia"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Model"
