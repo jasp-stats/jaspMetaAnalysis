@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2024-03-24 12:01+0000\n"
-"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
-"jaspmetaanalysis-qml/de/>\n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -275,120 +269,8 @@ msgid "Negative"
 msgstr "Negativ"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Effect"
-msgstr "Effekt"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Heterogeneity"
-msgstr "Heterogenität"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Weight function"
-msgstr "Gewichtungsfunktion"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Set null priors"
 msgstr "Null-Prior setzen"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Inference"
-msgstr "Inferenz"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Models overview"
-msgstr "Modellübersicht"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Inclusion"
-msgstr "Inklusion"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Order"
-msgstr "Reihenfolge"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Posterior prob."
-msgstr "Posterior Wahrsch."
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Individual models"
-msgstr "Individuelle Modelle"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Single model"
-msgstr "Einzelmodell"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "CI width"
-msgstr "GI-Breite"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Plots"
-msgstr "Diagramme"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Pooled estimates"
-msgstr "Gepoolte Schätzungen"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Forest plot"
-msgstr "Forest-Plot"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Show"
-msgstr "Anzeigen"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Ascending"
-msgstr "Aufsteigend"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Descending"
-msgstr "Absteigend"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Weights"
-msgstr "Gewichte"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Rescale x-axis"
-msgstr "x-Achse umskalieren"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Type"
-msgstr "Typ"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Model averaged"
-msgstr "Modell-gemittelt"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Conditional"
-msgstr "Konditional"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Model number"
-msgstr "Modellnummer"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "MCMC Diagnostics"
-msgstr "MCMC-Diagnostiken"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Plot"
-msgstr "Diagramm"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Trace"
-msgstr "Spur"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Autocorrelation"
-msgstr "Autokorrelation"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Advanced"
-msgstr "Weiteres"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "log(OR)"
@@ -397,46 +279,6 @@ msgstr "log(OR)"
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Fisher's z"
 msgstr "Fishers z"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Adaptation"
-msgstr "Anpassung"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Burnin"
-msgstr "Aufwärmphase"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Chains"
-msgstr "Ketten"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Thin"
-msgstr "Ausdünnung"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Autofit"
-msgstr "Auto-Anpassung"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Maximum fitting time"
-msgstr "Maximale Anpassungsdauer"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "hours"
-msgstr "Stunden"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "minutes"
-msgstr "Minuten"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "seconds"
-msgstr "Sekunden"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Save the fitted model"
-msgstr "Angepasstes Modell speichern"
 
 msgctxt "SelectionModels|"
 msgid "Effect sizes & SE"
@@ -1138,86 +980,6 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Prior scale"
 msgstr "Prior-Skala"
 
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "vs. Best"
-msgstr "vs. Bestes"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "vs. Previous"
-msgstr "vs. Vorheriges"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Bayes factor"
-msgstr "Bayesfaktor"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Output scale"
-msgstr "Ergebnisskala"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Shorten prior names"
-msgstr "Prior-Namen kürzen"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "PET-PEESE"
-msgstr "PET-PEESE"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Order by"
-msgstr "Sortieren nach"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Estimate"
-msgstr "Schätzung"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Bayesian updating"
-msgstr "Bayessche Aktualisierung"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Posterior estimates"
-msgstr "Posterior-Schätzungen"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "PET"
-msgstr "PET"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "PEESE"
-msgstr "PEESE"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Estimation scale"
-msgstr "Schätzungsskala"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "R-hat"
-msgstr "R-Dach"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Effective sample size"
-msgstr "Effektiver Stichprobenumfang"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "MCMC error"
-msgstr "MCMC-Fehler"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "MCMC error / SD"
-msgstr "MCMC-Fehler / SD"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Extend samples"
-msgstr "Stichprobe erweitern"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Remove failed models"
-msgstr "Fehlgeschlagene Modelle entfernen"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Rebalance component probability on model failure"
-msgstr "Neugewichtung der Komponentenwahrscheinlichkeit bei Modellfehlschlag"
-
 msgctxt "Description|"
 msgid "Classical"
 msgstr "Klassisch"
@@ -1846,51 +1608,6 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Prior distribution plots"
 msgstr "Prior-Verteilungsdiagramme"
 
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Conditional parameter estimates"
-msgstr "Bedingte Parameterschätzungen"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "BF comparison"
-msgstr "BF-Vergleich"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Marginal likelihood"
-msgstr "Marginale Likelihood"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Posterior probability"
-msgstr "Posterior-Wahrscheinlichkeit"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "logOR"
-msgstr "Log-OR"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Alphabetical"
-msgstr "Alphabetisch"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Prior distribution"
-msgstr "Prior-Verteilung"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Overview table"
-msgstr "Übersichtstabelle"
-
-#, fuzzy
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Posterior samples density"
-msgstr "Dichte Posterior-Stichprobe"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "MCMC"
-msgstr "MCMC"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Samples"
-msgstr "Stichproben"
-
 msgctxt "SelectionModels|"
 msgid "P-value frequency table"
 msgstr "P-Wert Häufigkeitstabelle"
@@ -1922,3 +1639,506 @@ msgstr "Tabelle multiplikativer Heterogenitätsschätzungen"
 msgctxt "PredictionPerformanceInference|"
 msgid "Normal/Logit"
 msgstr "Normal/Logit"
+
+msgctxt "Description|"
+msgid "Binomial Meta-Analysis"
+msgstr ""
+
+msgctxt "Description|"
+msgid "Bayesian Binomial Meta-Analysis"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Successes (group 1)"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Successes (group 2)"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Observations (group 1)"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Observations (group 2)"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Study Labels"
+msgstr ""
+
+#, fuzzy
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Prior distribution plots"
+msgstr "Prior-Verteilungsdiagramme"
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Models"
+msgstr ""
+
+#, fuzzy
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Set null priors"
+msgstr "Null-Prior setzen"
+
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Advanced"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Estimation scale"
+msgstr "Schätzungsskala"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Fisher's z"
+msgstr "Fishers z"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Cohen's d"
+msgstr "Cohens d"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "logOR"
+msgstr "Log-OR"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "MCMC"
+msgstr "MCMC"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Adaptation"
+msgstr "Anpassung"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Burnin"
+msgstr "Aufwärmphase"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Samples"
+msgstr "Stichproben"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Chains"
+msgstr "Ketten"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Thin"
+msgstr "Ausdünnung"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Autofit"
+msgstr "Auto-Anpassung"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "R-hat"
+msgstr "R-Dach"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Effective sample size"
+msgstr "Effektiver Stichprobenumfang"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "MCMC error"
+msgstr "MCMC-Fehler"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "MCMC error / SD"
+msgstr "MCMC-Fehler / SD"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Maximum fitting time"
+msgstr "Maximale Anpassungsdauer"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "hours"
+msgstr "Stunden"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "minutes"
+msgstr "Minuten"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "seconds"
+msgstr "Sekunden"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Extend samples"
+msgstr "Stichprobe erweitern"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Remove failed models"
+msgstr "Fehlgeschlagene Modelle entfernen"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Rebalance component probability on model failure"
+msgstr "Neugewichtung der Komponentenwahrscheinlichkeit bei Modellfehlschlag"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Save the fitted model"
+msgstr "Angepasstes Modell speichern"
+
+msgctxt "RobustBayesianMetaAnalysisBaseline|"
+msgid "Baseline"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisBaseline|"
+msgid "Baseline (null)"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisBaseline|"
+msgid "Distribution"
+msgstr "Verteilung"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisBaseline|"
+msgid "Parameters"
+msgstr "Parameter"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisBaseline|"
+msgid "Truncation"
+msgstr "Abschneiden"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisBaseline|"
+msgid "Prior weights"
+msgstr "Prior-Gewichte"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisBaseline|"
+msgid "Beta(α,β)"
+msgstr "Beta(α,β)"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisBaseline|"
+msgid "lower"
+msgstr "untere"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisBaseline|"
+msgid "upper"
+msgstr "obere"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisBaseline|"
+msgid "Weight"
+msgstr "Gewicht"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "MCMC Diagnostics"
+msgstr "MCMC-Diagnostiken"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "Overview table"
+msgstr "Übersichtstabelle"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "Plot"
+msgstr "Diagramm"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "Effect"
+msgstr "Effekt"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "Heterogeneity"
+msgstr "Heterogenität"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "Weights"
+msgstr "Gewichte"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "PET"
+msgstr "PET"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "PEESE"
+msgstr "PEESE"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "Type"
+msgstr "Typ"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "Trace"
+msgstr "Spur"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "Autocorrelation"
+msgstr "Autokorrelation"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "Posterior samples density"
+msgstr "Dichte Posterior-Stichprobe"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "Single model"
+msgstr "Einzelmodell"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Inference"
+msgstr "Inferenz"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Conditional parameter estimates"
+msgstr "Bedingte Parameterschätzungen"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Models overview"
+msgstr "Modellübersicht"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "BF comparison"
+msgstr "BF-Vergleich"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Inclusion"
+msgstr "Inklusion"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "vs. Best"
+msgstr "vs. Bestes"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "vs. Previous"
+msgstr "vs. Vorheriges"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Order"
+msgstr "Reihenfolge"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Model number"
+msgstr "Modellnummer"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Marginal likelihood"
+msgstr "Marginale Likelihood"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Posterior probability"
+msgstr "Posterior-Wahrscheinlichkeit"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Individual models"
+msgstr "Individuelle Modelle"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Single model"
+msgstr "Einzelmodell"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "CI width"
+msgstr "GI-Breite"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Output scale"
+msgstr "Ergebnisskala"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Cohen's d"
+msgstr "Cohens d"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Fisher's z"
+msgstr "Fishers z"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "logOR"
+msgstr "Log-OR"
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "OR"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Correlation"
+msgstr "Korrelation"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Shorten prior names"
+msgstr "Prior-Namen kürzen"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Plots"
+msgstr "Diagramme"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Forest plot"
+msgstr "Forest-Plot"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Order"
+msgstr "Reihenfolge"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Ascending"
+msgstr "Aufsteigend"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Descending"
+msgstr "Absteigend"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Alphabetical"
+msgstr "Alphabetisch"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Type"
+msgstr "Typ"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Model averaged"
+msgstr "Modell-gemittelt"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Conditional"
+msgstr "Konditional"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Pooled estimates"
+msgstr "Gepoolte Schätzungen"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Effect"
+msgstr "Effekt"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Heterogeneity"
+msgstr "Heterogenität"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Weight function"
+msgstr "Gewichtungsfunktion"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Rescale x-axis"
+msgstr "x-Achse umskalieren"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "PET-PEESE"
+msgstr "PET-PEESE"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Prior distribution"
+msgstr "Prior-Verteilung"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Individual models"
+msgstr "Individuelle Modelle"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Order by"
+msgstr "Sortieren nach"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Model number"
+msgstr "Modellnummer"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Estimate"
+msgstr "Schätzung"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Bayes factor"
+msgstr "Bayesfaktor"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Posterior prob."
+msgstr "Posterior Wahrsch."
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Show"
+msgstr "Anzeigen"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Bayesian updating"
+msgstr "Bayessche Aktualisierung"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Posterior estimates"
+msgstr "Posterior-Schätzungen"

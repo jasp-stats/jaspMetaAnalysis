@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: jaspMetaAnalysis 0.18.3\n"
-"POT-Creation-Date: 2024-01-13 02:36\n"
+"Project-Id-Version: jaspMetaAnalysis 0.19\n"
+"POT-Creation-Date: 2024-04-20 02:33\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -10,6 +10,48 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+msgid "The study labels contain invalid characters. Please, remove them before running the analysis."
+msgstr ""
+
+msgid "Prior Plots"
+msgstr ""
+
+msgid "Effect"
+msgstr ""
+
+msgid "Heterogeneity"
+msgstr ""
+
+msgid "Null"
+msgstr ""
+
+msgid "Alternative"
+msgstr ""
+
+msgid "Model Preview"
+msgstr ""
+
+msgid "Please specify a prior distribution for each parameter in the Models specification section (either null or alternative)."
+msgstr ""
+
+msgid "Model Summary"
+msgstr ""
+
+msgid "Models"
+msgstr ""
+
+msgid "P(M)"
+msgstr ""
+
+msgid "The analysis will estimate multiple meta-analytic models using MCMC and might require a prolonged time to complete."
+msgstr ""
+
+msgid "Model Specification Preview"
+msgstr ""
+
+msgid "Prior Distribution"
+msgstr ""
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr ""
@@ -144,9 +186,6 @@ msgid "Posterior mean and 95%% credible interval estimates from the constrained 
 msgstr ""
 
 msgid "Effect Size"
-msgstr ""
-
-msgid "Heterogeneity"
 msgstr ""
 
 msgid "Effect size"
@@ -503,9 +542,6 @@ msgstr ""
 msgid "%g%% Confidence Interval"
 msgstr ""
 
-msgid "The study labels contain invalid characters. Please, remove them before running the analysis."
-msgstr ""
-
 msgid "%s%% CI"
 msgstr ""
 
@@ -614,6 +650,12 @@ msgstr ""
 msgid "The priors for publication bias were set incorrectly."
 msgstr ""
 
+msgid "Publication Bias"
+msgstr ""
+
+msgid "Baseline"
+msgstr ""
+
 msgid "Median"
 msgstr ""
 
@@ -638,46 +680,13 @@ msgstr ""
 msgid "Heterogeneity (%s)"
 msgstr ""
 
-msgid "Prior Plots"
-msgstr ""
-
-msgid "Effect"
-msgstr ""
-
-msgid "Publication Bias"
-msgstr ""
-
-msgid "Null"
-msgstr ""
-
-msgid "Alternative"
-msgstr ""
-
-msgid "Model Preview"
-msgstr ""
-
-msgid "Please specify a prior distribution for each parameter in the Models specification section (either null or alternative)."
-msgstr ""
-
-msgid "Model Summary"
-msgstr ""
-
-msgid "Models"
-msgstr ""
-
-msgid "P(M)"
-msgstr ""
-
 msgid "Publication bias"
 msgstr ""
 
-msgid "The analysis will estimate multiple meta-analytic models using MCMC and might require a prolonged time to complete."
+msgid "log(OR)"
 msgstr ""
 
-msgid "Model Specification Preview"
-msgstr ""
-
-msgid "Prior Distribution"
+msgid "OR"
 msgstr ""
 
 msgid "The specified path does not lead to an existing file."
@@ -812,6 +821,9 @@ msgstr ""
 msgid "max(R-hat)"
 msgstr ""
 
+msgid "MCMC Diagnostics plots are created once both the plotted parameter ('Plot') and the plot type ('Type') options are selected."
+msgstr ""
+
 msgid "Weights"
 msgstr ""
 
@@ -831,6 +843,12 @@ msgid "Posterior samples densities"
 msgstr ""
 
 msgid "Model %i does not contain any of the selected parameters."
+msgstr ""
+
+msgid "All models failed to converge under the MCMC convergence criteria. Please update the MCMC settings."
+msgstr ""
+
+msgid "All models failed to converge. Please update the MCMC settings."
 msgstr ""
 
 msgid "Cannot compute results. All entries of the p-value variable (%s) must be between 0 and 1."

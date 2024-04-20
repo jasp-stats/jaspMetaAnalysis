@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.0\n"
-"POT-Creation-Date: 2023-12-02 02:34\n"
+"POT-Creation-Date: 2024-04-20 02:33\n"
 "PO-Revision-Date: 2024-04-06 02:31+0000\n"
 "Last-Translator: Tomasz Misiuro <tomaszmisiuro@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
@@ -13,6 +13,54 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Weblate 5.5-dev\n"
+
+msgid ""
+"The study labels contain invalid characters. Please, remove them before "
+"running the analysis."
+msgstr ""
+
+msgid "Prior Plots"
+msgstr ""
+
+msgid "Effect"
+msgstr "Efekt"
+
+msgid "Heterogeneity"
+msgstr ""
+
+msgid "Null"
+msgstr ""
+
+msgid "Alternative"
+msgstr ""
+
+msgid "Model Preview"
+msgstr ""
+
+msgid ""
+"Please specify a prior distribution for each parameter in the Models "
+"specification section (either null or alternative)."
+msgstr ""
+
+msgid "Model Summary"
+msgstr "Podsumowanie modelu"
+
+msgid "Models"
+msgstr ""
+
+msgid "P(M)"
+msgstr ""
+
+msgid ""
+"The analysis will estimate multiple meta-analytic models using MCMC and "
+"might require a prolonged time to complete."
+msgstr ""
+
+msgid "Model Specification Preview"
+msgstr ""
+
+msgid "Prior Distribution"
+msgstr ""
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr ""
@@ -180,9 +228,6 @@ msgid ""
 msgstr ""
 
 msgid "Effect Size"
-msgstr ""
-
-msgid "Heterogeneity"
 msgstr ""
 
 msgid "Effect size"
@@ -541,11 +586,6 @@ msgstr ""
 msgid "%g%% Confidence Interval"
 msgstr ""
 
-msgid ""
-"The study labels contain invalid characters. Please, remove them before "
-"running the analysis."
-msgstr ""
-
 msgid "%s%% CI"
 msgstr "%s%% PU"
 
@@ -660,6 +700,12 @@ msgstr ""
 msgid "The priors for publication bias were set incorrectly."
 msgstr ""
 
+msgid "Publication Bias"
+msgstr ""
+
+msgid "Baseline"
+msgstr ""
+
 msgid "Median"
 msgstr "Mediana"
 
@@ -684,50 +730,14 @@ msgstr "Wielkość efektu (%s)"
 msgid "Heterogeneity (%s)"
 msgstr ""
 
-msgid "Prior Plots"
-msgstr ""
-
-msgid "Effect"
-msgstr "Efekt"
-
-msgid "Publication Bias"
-msgstr ""
-
-msgid "Null"
-msgstr ""
-
-msgid "Alternative"
-msgstr ""
-
-msgid "Model Preview"
-msgstr ""
-
-msgid ""
-"Please specify a prior distribution for each parameter in the Models "
-"specification section (either null or alternative)."
-msgstr ""
-
-msgid "Model Summary"
-msgstr "Podsumowanie modelu"
-
-msgid "Models"
-msgstr ""
-
-msgid "P(M)"
-msgstr ""
-
 msgid "Publication bias"
 msgstr ""
 
-msgid ""
-"The analysis will estimate multiple meta-analytic models using MCMC and "
-"might require a prolonged time to complete."
-msgstr ""
+#, fuzzy
+msgid "log(OR)"
+msgstr "log(BF%s)"
 
-msgid "Model Specification Preview"
-msgstr ""
-
-msgid "Prior Distribution"
+msgid "OR"
 msgstr ""
 
 msgid "The specified path does not lead to an existing file."
@@ -862,6 +872,11 @@ msgstr ""
 msgid "max(R-hat)"
 msgstr ""
 
+msgid ""
+"MCMC Diagnostics plots are created once both the plotted parameter ('Plot') "
+"and the plot type ('Type') options are selected."
+msgstr ""
+
 msgid "Weights"
 msgstr "Wagi"
 
@@ -881,6 +896,14 @@ msgid "Posterior samples densities"
 msgstr ""
 
 msgid "Model %i does not contain any of the selected parameters."
+msgstr ""
+
+msgid ""
+"All models failed to converge under the MCMC convergence criteria. Please "
+"update the MCMC settings."
+msgstr ""
+
+msgid "All models failed to converge. Please update the MCMC settings."
 msgstr ""
 
 msgid ""

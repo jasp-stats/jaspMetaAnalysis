@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
-"POT-Creation-Date: 2023-12-02 02:34\n"
+"POT-Creation-Date: 2024-04-20 02:33\n"
 "PO-Revision-Date: 2023-04-21 17:51+0000\n"
 "Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -12,6 +12,59 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 4.18-dev\n"
+
+msgid ""
+"The study labels contain invalid characters. Please, remove them before "
+"running the analysis."
+msgstr ""
+"研究ラベルに無効な文字が含まれています. 分析を実行する前に削除してください."
+
+msgid "Prior Plots"
+msgstr "事前分布プロット"
+
+msgid "Effect"
+msgstr "効果"
+
+msgid "Heterogeneity"
+msgstr "異質性"
+
+msgid "Null"
+msgstr "Null"
+
+msgid "Alternative"
+msgstr "対立"
+
+msgid "Model Preview"
+msgstr "モデルプレビュー"
+
+msgid ""
+"Please specify a prior distribution for each parameter in the Models "
+"specification section (either null or alternative)."
+msgstr ""
+"モデル指定セクションで、各パラメータの事前分布を指定してください (null または"
+"対立)."
+
+msgid "Model Summary"
+msgstr "モデルの概要"
+
+msgid "Models"
+msgstr "モデル"
+
+msgid "P(M)"
+msgstr "P(M)"
+
+msgid ""
+"The analysis will estimate multiple meta-analytic models using MCMC and "
+"might require a prolonged time to complete."
+msgstr ""
+"この解析では、MCMCを用いて複数のメタ解析モデルを推定するため、完了までに長時"
+"間を要する可能性があります."
+
+msgid "Model Specification Preview"
+msgstr "モデル仕様のプレビュー"
+
+msgid "Prior Distribution"
+msgstr "事前分布"
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr "事前分布の下限値が上限値よりも小さくない."
@@ -205,9 +258,6 @@ msgstr "制約付き変量効果モデルからの事後平均と95 %%の信頼�
 
 msgid "Effect Size"
 msgstr "効果量"
-
-msgid "Heterogeneity"
-msgstr "異質性"
 
 msgid "Effect size"
 msgstr "効果量"
@@ -568,12 +618,6 @@ msgstr "PM"
 msgid "%g%% Confidence Interval"
 msgstr "%g %% 信頼区間"
 
-msgid ""
-"The study labels contain invalid characters. Please, remove them before "
-"running the analysis."
-msgstr ""
-"研究ラベルに無効な文字が含まれています. 分析を実行する前に削除してください."
-
 msgid "%s%% CI"
 msgstr "%s%% CI"
 
@@ -693,6 +737,12 @@ msgstr ""
 msgid "The priors for publication bias were set incorrectly."
 msgstr "出版バイアスの事前確率が正しく設定されていません."
 
+msgid "Publication Bias"
+msgstr "出版バイアス(Publication Bias)"
+
+msgid "Baseline"
+msgstr ""
+
 msgid "Median"
 msgstr "中央値"
 
@@ -717,55 +767,15 @@ msgstr "効果量（%s）"
 msgid "Heterogeneity (%s)"
 msgstr "異質性(%s)"
 
-msgid "Prior Plots"
-msgstr "事前分布プロット"
-
-msgid "Effect"
-msgstr "効果"
-
-msgid "Publication Bias"
-msgstr "出版バイアス(Publication Bias)"
-
-msgid "Null"
-msgstr "Null"
-
-msgid "Alternative"
-msgstr "対立"
-
-msgid "Model Preview"
-msgstr "モデルプレビュー"
-
-msgid ""
-"Please specify a prior distribution for each parameter in the Models "
-"specification section (either null or alternative)."
-msgstr ""
-"モデル指定セクションで、各パラメータの事前分布を指定してください (null または"
-"対立)."
-
-msgid "Model Summary"
-msgstr "モデルの概要"
-
-msgid "Models"
-msgstr "モデル"
-
-msgid "P(M)"
-msgstr "P(M)"
-
 msgid "Publication bias"
 msgstr "出版バイアス(Publication Bias)"
 
-msgid ""
-"The analysis will estimate multiple meta-analytic models using MCMC and "
-"might require a prolonged time to complete."
+#, fuzzy
+msgid "log(OR)"
+msgstr "log(BF)"
+
+msgid "OR"
 msgstr ""
-"この解析では、MCMCを用いて複数のメタ解析モデルを推定するため、完了までに長時"
-"間を要する可能性があります."
-
-msgid "Model Specification Preview"
-msgstr "モデル仕様のプレビュー"
-
-msgid "Prior Distribution"
-msgstr "事前分布"
 
 msgid "The specified path does not lead to an existing file."
 msgstr ""
@@ -901,6 +911,11 @@ msgstr "min(ESS)"
 msgid "max(R-hat)"
 msgstr "max(R-hat)"
 
+msgid ""
+"MCMC Diagnostics plots are created once both the plotted parameter ('Plot') "
+"and the plot type ('Type') options are selected."
+msgstr ""
+
 msgid "Weights"
 msgstr "ウェイト"
 
@@ -921,6 +936,14 @@ msgstr "事後サンプル密度"
 
 msgid "Model %i does not contain any of the selected parameters."
 msgstr "モデル %i には、選択したパラメータが含まれていません."
+
+msgid ""
+"All models failed to converge under the MCMC convergence criteria. Please "
+"update the MCMC settings."
+msgstr ""
+
+msgid "All models failed to converge. Please update the MCMC settings."
+msgstr ""
 
 msgid ""
 "Cannot compute results. All entries of the p-value variable (%s) must be "
@@ -1235,9 +1258,6 @@ msgstr[0] "%i の観測値が欠損しているため削除されました。"
 
 #~ msgid "No steps"
 #~ msgstr "ステップなし"
-
-#~ msgid "log(BF)"
-#~ msgstr "log(BF)"
 
 #~ msgid "BF"
 #~ msgstr "BF"
