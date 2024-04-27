@@ -1961,9 +1961,10 @@ msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "vs. Previous"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Order"
-msgstr ""
+msgstr "制訂"
 
 #, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
@@ -2033,9 +2034,10 @@ msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Forest plot"
 msgstr "森林圖"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Order"
-msgstr ""
+msgstr "制訂"
 
 #, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"

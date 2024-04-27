@@ -2002,13 +2002,15 @@ msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Order"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Ascending"
-msgstr ""
+msgstr "Naik"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Descending"
-msgstr ""
+msgstr "Turun"
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Alphabetical"
