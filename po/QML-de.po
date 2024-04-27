@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2024-04-25 08:07+0000\n"
+"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.5.1-dev\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -1599,7 +1605,6 @@ msgctxt "PredictionPerformancePriors|"
 msgid "T"
 msgstr "T"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Model ensemble type"
 msgstr "Modell-Ensemble-Typ"
@@ -1642,161 +1647,137 @@ msgstr "Normal/Logit"
 
 msgctxt "Description|"
 msgid "Binomial Meta-Analysis"
-msgstr ""
+msgstr "Binomiale Metaanalyse"
 
 msgctxt "Description|"
 msgid "Bayesian Binomial Meta-Analysis"
-msgstr ""
+msgstr "Bayessche Binomiale Metaanalyse"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Successes (group 1)"
-msgstr ""
+msgstr "Erfolge (Gruppe 1)"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Successes (group 2)"
-msgstr ""
+msgstr "Erfolge (Gruppe 2)"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Observations (group 1)"
-msgstr ""
+msgstr "Beobachtungen (Gruppe 1)"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Observations (group 2)"
-msgstr ""
+msgstr "Beobachtungen (Gruppe 2)"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Study Labels"
-msgstr ""
+msgstr "Studienamen"
 
-#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Prior distribution plots"
 msgstr "Prior-Verteilungsdiagramme"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Models"
-msgstr ""
+msgstr "Modelle"
 
-#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Set null priors"
 msgstr "Null-Prior setzen"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Advanced"
-msgstr ""
+msgstr "Weiteres"
 
 #, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Estimation scale"
 msgstr "Schätzungsskala"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Fisher's z"
 msgstr "Fishers z"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Cohen's d"
 msgstr "Cohens d"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "logOR"
 msgstr "Log-OR"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "MCMC"
 msgstr "MCMC"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Adaptation"
 msgstr "Anpassung"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Burnin"
 msgstr "Aufwärmphase"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Samples"
 msgstr "Stichproben"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Chains"
 msgstr "Ketten"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Thin"
 msgstr "Ausdünnung"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Autofit"
 msgstr "Auto-Anpassung"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "R-hat"
 msgstr "R-Dach"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Effective sample size"
 msgstr "Effektiver Stichprobenumfang"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "MCMC error"
 msgstr "MCMC-Fehler"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "MCMC error / SD"
 msgstr "MCMC-Fehler / SD"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Maximum fitting time"
 msgstr "Maximale Anpassungsdauer"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "hours"
 msgstr "Stunden"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "minutes"
 msgstr "Minuten"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "seconds"
 msgstr "Sekunden"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Extend samples"
 msgstr "Stichprobe erweitern"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Remove failed models"
 msgstr "Fehlgeschlagene Modelle entfernen"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Rebalance component probability on model failure"
 msgstr "Neugewichtung der Komponentenwahrscheinlichkeit bei Modellfehlschlag"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Save the fitted model"
 msgstr "Angepasstes Modell speichern"
@@ -1809,102 +1790,82 @@ msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Baseline (null)"
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Distribution"
 msgstr "Verteilung"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Parameters"
 msgstr "Parameter"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Truncation"
 msgstr "Abschneiden"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Prior weights"
 msgstr "Prior-Gewichte"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Beta(α,β)"
 msgstr "Beta(α,β)"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "lower"
 msgstr "untere"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "upper"
 msgstr "obere"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Weight"
 msgstr "Gewicht"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "MCMC Diagnostics"
 msgstr "MCMC-Diagnostiken"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Overview table"
 msgstr "Übersichtstabelle"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Plot"
 msgstr "Diagramm"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Effect"
 msgstr "Effekt"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Heterogeneity"
 msgstr "Heterogenität"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Weights"
 msgstr "Gewichte"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "PET"
 msgstr "PET"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "PEESE"
 msgstr "PEESE"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Type"
 msgstr "Typ"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Trace"
 msgstr "Spur"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Autocorrelation"
 msgstr "Autokorrelation"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Posterior samples density"
 msgstr "Dichte Posterior-Stichprobe"
