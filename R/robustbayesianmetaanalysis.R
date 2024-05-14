@@ -436,15 +436,15 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 
   if (options[["inputType"]] == "fittedModel") {
     return(options[["pathToFittedModel"]] != "")
-  } else if (options[["inputType"]] == "unstandardizedEffectSizes") {
+  } else if (options[["inputType"]] %in% c("logOr", "unstandardizedEffectSizes")) {
     readyArg1 <- options[["effectSize"]] != ""
     readyArg2 <- any(options[["effectSizeSe"]] != "", sum(unlist(options[["effectSizeCi"]]) != "") == 2)
     return(readyArg1 && readyArg2)
-  } else if (options[["inputType"]] == "logOr") {
+  } else if (options[["inputType"]] == "correlation") {
     readyArg1 <- options[["effectSize"]] != ""
-    readyArg2 <- sum(unlist(options[["effectSizeCi"]]) != "") == 2
+    readyArg2 <- any(options[["sampleSize"]] != "", sum(unlist(options[["effectSizeCi"]]) != "") == 2)
     return(readyArg1 && readyArg2)
-  } else {
+  } else if (options[["inputType"]] == "cohensD") {
     readyArg1 <- options[["effectSize"]] != ""
     readyArg2 <- any(c(options[["effectSizeSe"]], options[["sampleSize"]]) != "", sum(unlist(options[["effectSizeCi"]]) != "") == 2)
     return(readyArg1 && readyArg2)
