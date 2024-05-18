@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2024-05-12 07:16+0000\n"
+"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.5.4\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -1869,7 +1875,6 @@ msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Single model"
 msgstr "Einzelmodell"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Inference"
 msgstr "Inferenz"
@@ -1879,37 +1884,30 @@ msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Conditional parameter estimates"
 msgstr "Bedingte Parameterschätzungen"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Models overview"
 msgstr "Modellübersicht"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "BF comparison"
 msgstr "BF-Vergleich"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Inclusion"
 msgstr "Inklusion"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "vs. Best"
 msgstr "vs. Bestes"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "vs. Previous"
 msgstr "vs. Vorheriges"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Order"
 msgstr "Reihenfolge"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Model number"
 msgstr "Modellnummer"
@@ -1919,17 +1917,14 @@ msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Marginal likelihood"
 msgstr "Marginale Likelihood"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Posterior probability"
 msgstr "Posterior-Wahrscheinlichkeit"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Individual models"
 msgstr "Individuelle Modelle"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Single model"
 msgstr "Einzelmodell"
@@ -1939,17 +1934,14 @@ msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "CI width"
 msgstr "GI-Breite"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Output scale"
 msgstr "Ergebnisskala"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Cohen's d"
 msgstr "Cohens d"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Fisher's z"
 msgstr "Fishers z"
@@ -1963,47 +1955,38 @@ msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "OR"
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Correlation"
 msgstr "Korrelation"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Shorten prior names"
 msgstr "Prior-Namen kürzen"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Plots"
 msgstr "Diagramme"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Forest plot"
 msgstr "Forest-Plot"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Order"
 msgstr "Reihenfolge"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Ascending"
 msgstr "Aufsteigend"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Descending"
 msgstr "Absteigend"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Alphabetical"
 msgstr "Alphabetisch"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Type"
 msgstr "Typ"
@@ -2018,27 +2001,22 @@ msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Conditional"
 msgstr "Konditional"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Pooled estimates"
 msgstr "Gepoolte Schätzungen"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Effect"
 msgstr "Effekt"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Heterogeneity"
 msgstr "Heterogenität"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Weight function"
 msgstr "Gewichtungsfunktion"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Rescale x-axis"
 msgstr "x-Achse umskalieren"
@@ -2048,42 +2026,34 @@ msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "PET-PEESE"
 msgstr "PET-PEESE"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Prior distribution"
 msgstr "Prior-Verteilung"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Individual models"
 msgstr "Individuelle Modelle"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Order by"
 msgstr "Sortieren nach"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Model number"
 msgstr "Modellnummer"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Estimate"
 msgstr "Schätzung"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Bayes factor"
 msgstr "Bayesfaktor"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Posterior prob."
-msgstr "Posterior Wahrsch."
+msgstr "Posterior-Wahrsch."
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Show"
 msgstr "Anzeigen"
@@ -2093,7 +2063,6 @@ msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Bayesian updating"
 msgstr "Bayessche Aktualisierung"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Posterior estimates"
 msgstr "Posterior-Schätzungen"
