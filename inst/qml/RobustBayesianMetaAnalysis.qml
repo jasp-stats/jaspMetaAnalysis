@@ -62,7 +62,7 @@ Form
 			id: 			inputES
 			name: 			"effectSize"
 			enabled: 		inputT.count == 0
-			title: 			
+			title:
 			{
 			if (measuresCohensD.checked)
 				qsTr("Cohen's d")
@@ -91,7 +91,7 @@ Form
 		AssignedPairsVariablesList
 		{
 			id: 			inputCI
-			enabled: 		inputSE.count == 0 && inputN.count == 0 && inputN.count == 0 
+			enabled: 		inputSE.count == 0 && inputN.count == 0 && inputN.count == 0
 			name: 			"effectSizeCi"
 			title: 			qsTr("95% CI Lower and Upper Bound")
 			singleVariable: true
@@ -127,6 +127,7 @@ Form
 		title:					qsTr("Input type")
 		radioButtonsOnSameRow:	false
 		columns:				2
+		defaultValue:			dataSetInfo.dataAvailable ? "cohensD" : "fittedModel"
 
 		onValueChanged:
 		{
@@ -148,7 +149,6 @@ Form
 			value:		"cohensD"
 			id:			measuresCohensD
 			enabled:	dataSetInfo.dataAvailable
-			checked:	dataSetInfo.dataAvailable
 		}
 
 		RadioButton
@@ -180,10 +180,9 @@ Form
 			label:		qsTr("Fitted model")
 			value:		"fittedModel"
 			id:			measuresFitted
-			checked:	!dataSetInfo.dataAvailable
 		}
 	}
-	
+
 	RadioButtonGroup
 	{
 		name:		"modelExpectedDirectionOfEffectSizes"
@@ -237,7 +236,7 @@ Form
 					{ label: qsTr("Fisher's z"),		value: "fishersZ"},
 					{ label: qsTr("log(OR)"),			value: "logOr"}
 				]
-				onCurrentValueChanged: 			
+				onCurrentValueChanged:
 				{
 					if(priorScale.currentValue == "cohensD")
 						inferenceOutputScale.currentValue = "cohensD"
