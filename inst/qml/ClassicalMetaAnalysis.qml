@@ -27,28 +27,266 @@ Form
 	VariablesForm
 	{
 		preferredHeight: 400 * preferencesModel.uiScale
-		AvailableVariablesList { name: "allVariables" }
-		AssignedVariablesList { name: "effectSize";	title: qsTr("Effect Size"); singleVariable: true; allowedColumns: ["scale"] }
-		AssignedVariablesList { name: "effectSizeSe"; title: qsTr("Effect Size Standard Error"); singleVariable: true; allowedColumns: ["scale"] }
-		MA.ClassicalMetaAnalysisMethod{ visible: true}
-		AssignedVariablesList { name: "studyLabel"; title: qsTr("Study Labels"); singleVariable: true; allowedColumns: ["nominal"] }
-		AssignedVariablesList { name: "covariates";	title: qsTr("Covariates"); allowedColumns: ["scale"] }
-		AssignedVariablesList { name: "factors"; title: qsTr("Factors"); allowedColumns: ["nominal"] }
+
+		AvailableVariablesList
+		{
+			name:				"allVariables"
+		}
+
+		AssignedVariablesList
+		{
+			name:				"effectSize"
+			title:				qsTr("Effect Size")
+			singleVariable:		true
+			suggestedColumns:	["scale"]
+		}
+		AssignedVariablesList
+		{	
+			name:				"effectSizeStandardError"
+			title:				qsTr("Effect Size Standard Error")
+			singleVariable:		true
+			suggestedColumns:	["scale"]
+		}
+		
+		MA.ClassicalMetaAnalysisMethod{visible: true}
+		
+		AssignedVariablesList
+		{
+			name:				"covariates"
+			title:				qsTr("Covariates")
+			suggestedColumns:	["scale"]
+		}
+		AssignedVariablesList
+		{
+			name:				"factors"
+			title:				qsTr("Factors")
+			suggestedColumns:	["nominal"]
+		}
+
+		AssignedVariablesList
+		{
+			name:				"clusters"
+			title:				qsTr("Clusters")
+			singleVariable:		true
+			suggestedColumns:	["nominal"]
+		}
+
+		AssignedVariablesList
+		{
+			name:				"studyLabel"
+			title:				qsTr("Study Label")
+			singleVariable:		true
+			suggestedColumns:	["nominal"]
+		}
 	}
 
 	Section
 	{
-		title: qsTr("Model")
-		VariablesForm
+		title:	qsTr("Model")
+
+		Group
 		{
-			preferredHeight: 150 * preferencesModel.uiScale
-			AvailableVariablesList { name: "modelComponents"; title: qsTr("Components"); source: ["covariates","factors"]}
-			AssignedVariablesList  { name: "modelTerms"; title: qsTr("Model Terms"); listViewType: JASP.Interaction }
+			title: qsTr("Effect size model")
+
+			VariablesForm
+			{
+				preferredHeight:	150 * preferencesModel.uiScale
+
+				AvailableVariablesList
+				{
+					name:			"effectSizeModelComponents"
+					title:			qsTr("Components")
+					source:			["covariates","factors"]
+				}
+
+				AssignedVariablesList
+				{
+					name:			"effectSizeModelTerms";
+					title:			qsTr("Model Terms")
+					listViewType:	JASP.Interaction
+				}
+			}
+
+			CheckBox
+			{
+				name:				"effectSizeModelIncludeIntercept";
+				label:				qsTr("Include intercept")
+				checked:			true
+			}
 		}
-		CheckBox { name: "interceptTerm"; label: qsTr("Include intercept"); checked: true }
+
+		Group
+		{
+			title: qsTr("Heterogeneity model")
+
+			VariablesForm
+			{
+				preferredHeight:	150 * preferencesModel.uiScale
+
+				AvailableVariablesList
+				{
+					name:			"heterogeneityModelComponents"
+					title:			qsTr("Components")
+					source:			["covariates","factors"]
+				}
+
+				AssignedVariablesList
+				{
+					name:			"heterogeneityModelTerms";
+					title:			qsTr("Model Terms")
+					listViewType:	JASP.Interaction
+				}
+			}
+
+			CheckBox
+			{
+				name:				"heterogeneityModelIncludeIntercept";
+				label:				qsTr("Include intercept")
+				checked:			true
+			}
+		}
 	}
 
-	MA.ClassicalMetaAnalysisStatistics{}
+	Section
+	{
+		title:	qsTr("Statistics")
+
+		Group
+		{
+			title: qsTr("Meta-Regression")
+
+			CheckBox
+			{
+				name:		"metaregressionTermsTests"
+				text:		qsTr("Terms tests")
+				checked:	true
+			}
+
+			CheckBox
+			{
+				name:		"metaregressionCoefficientsEstimates"
+				text:		qsTr("Coefficients estimates")
+				checked:	true
+			}
+
+			DropDown
+			{	
+				name:		"metaregressionCoefficientsTest"
+				label:		qsTr("Coefficients test")
+				values:		[ "z", "t", "knha"]
+			}
+
+			CheckBox
+			{
+				name:		"metaregressionCoefficientsCovarianceMatrix"
+				text:		qsTr("Coefficients covariance matrix")
+				checked:	false
+			}
+		}
+
+		Group
+		{
+			title: qsTr("Hetereogeneity")
+
+			CheckBox
+			{
+				name:		"𝜏"
+				text:		qsTr("heterogeneityTau")
+				checked:	true
+			}
+
+			CheckBox
+			{
+				name:		"𝜏²"
+				text:		qsTr("heterogeneityTau2")
+				checked:	false
+			}
+
+			CheckBox
+			{
+				name:		"I²"
+				text:		qsTr("heterogeneityI2")
+				checked:	false
+			}
+
+			CheckBox
+			{
+				name:		"H²"
+				text:		qsTr("heterogeneityH2")
+				checked:	false
+			}
+
+			CheckBox
+			{
+				name:		"Prediction Interval"
+				text:		qsTr("heterogeneityPredictionInterval")
+				checked:	false
+			}
+		}
+
+		CheckBox
+		{
+			name:				"cconfidenceIntervals"
+			text:				qsTr("Confidence intervals")
+			childrenOnSameRow:	true
+
+			CIField
+			{
+				name:		"confidenceIntervalsLevel"
+			}
+		}
+
+		CheckBox
+		{
+			name:				"modelFit"
+			text:				qsTr("Pooled estimate")
+			checked:			true
+		}
+
+
+		Group
+		{
+			title:	qsTr("Model Fit")
+
+			CheckBox
+			{
+				name:		"fitMeasure"
+				text:		qsTr("Fit measures")
+			}
+		}
+	}
+
+	Section
+	{
+		title:	qsTr("Plots")
+
+		CheckBox
+		{
+			id:			forestPlot
+			name: 		"forestPlot"
+			text: 		qsTr("Forest plot")
+			
+			CheckBox
+			{
+				name:		"forestPlotLabel"
+				text:		qsTr("Show labels")
+			}
+
+			DropDown
+			{
+				name:			"forestPlotOrder"
+				label:			qsTr("Ordering")
+				currentIndex:	1
+				values: [
+					{ label: qsTr("Year (ascending)")			, value: "yearAscending"			},
+					{ label: qsTr("Year (descending)")			, value: "yearDescending"			},
+					{ label: qsTr("Effect size (ascending)")	, value: "effectSizeAscending"		},
+					{ label: qsTr("Effect size (descending)")	, value: "effectSizeDescending"		}
+				]
+			}
+		
+		}
+	}
 
 	MA.ClassicalMetaAnalysisDiagnostics{}
 }
