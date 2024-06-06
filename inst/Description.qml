@@ -14,6 +14,21 @@ Description
 	website:		"jasp-stats.org"
 	license:		"GPL (>= 2)"
 
+
+	GroupTitle
+	{
+		title:	qsTr("Miscellaneous")
+		icon:	"meta-analysis.svg"
+	}
+
+	Analysis
+	{
+		menu:			qsTr("Effect Size Computation")
+		title:			qsTr("Effect Size Computation")
+		func:			"EffectSizeComputation"
+		requiresData:	false
+	}
+
 	GroupTitle
 	{
 		title:	qsTr("Classical")
