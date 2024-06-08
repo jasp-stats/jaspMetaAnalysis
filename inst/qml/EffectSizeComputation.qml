@@ -720,7 +720,7 @@ Form
 
 				AssignedPairsVariablesList
 				{
-					name: "95ConfidenceInterval"
+					name: "confidenceInterval"
 					title: qsTr("95% Confidence Interval")
 					singleVariable: true
 					visible: designValue == "reportedEffectSizes"
