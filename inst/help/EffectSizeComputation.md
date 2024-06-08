@@ -1,7 +1,11 @@
 Effect Size Computation
 ==========================
 --------------------------
-This analysis allows users to compute effect sizes based on the design and measurement of their experiment. In case multiple types of designs and measurements are included in the data set, the user can specify the order in which the effect sizes are calculated (the effect size from the following option is filled in only if it was computed in the previous step).
+This analysis allows users to compute effect sizes based on the design and measurement of their experiment. In case multiple types of designs and measurements are included in the data set, the user can specify the order in which the effect sizes are calculated (the effect size from the following option is filled in only if it was computed in the previous step). 
+
+Already included effect sizes can be passed forward using the Reported effect sizes option. 
+
+The selected effect size can be computed only for a subset of the dataset using the Subset indicator variable.. 
 
 See [metafor's documentation](https://wviechtb.github.io/metafor/reference/escalc.html) for more detail about the effect sizes.
 
@@ -13,8 +17,9 @@ The design dropdown allows users to select the type of effect size based on the 
 - Independent groups: This option is for analyzing data comparing two independent groups. The groups may be experimentally defined or naturally occurring.
 - Variable association: This option is for examining the direction and strength of the association between two variables measured concurrently and/or without manipulation by experimenters.
 - Single group: This option is for summarizing characteristics of individual groups based on either quantitative or dichotomous variables.
-- Repeated measures/matched groups: This option is for assessing change within a single group over time or comparing two matched/paired samples.
+- Repeated measures (or matched groups): This option is for assessing change within a single group over time or comparing two matched samples.
 - Other: This option includes specific effect sizes that do not fit into the other categories, such as reliability or partial correlations.
+- Reported effect sizes: This option allows to directly pass effect sizes and their standard errors or condifidence interval if they were already reported in the original studies. (When condifence interval is passed, normal approximation is used to compute the standard error.)
 
 #### Measurement
 
@@ -37,34 +42,45 @@ The measurement dropdown is enabled only when a design type other than "Other" i
 #### Effect size
 The Effect size dropdown allows users to select the specific effect size or outcome measure to be calculated based on the chosen design and measurement type. The available options are dynamically adjusted according to the selected design and measurement type.
 
-##### Independent groups
+#### Independent groups
 - Quantitative:
   - MD: Mean Difference
-  - SMD: Standardized Mean Difference
-  - SMDH: Standardized Mean Difference with heteroscedastic variances
-  - SMD1: Standardized Mean Difference using standard deviation of second group
-  - SMD1H: Standardized Mean Difference using standard deviation of second group with heteroscedastic variances
+  - SMD: Standardized Mean Difference (bias corrected, i.e., Hedges' g)
+  - SMDH: Standardized Mean Difference with heteroscedastic variances (bias corrected)
+  - SMD1: Standardized Mean Difference using standard deviation of second group (bias corrected)
+  - SMD1H: Standardized Mean Difference using standard deviation of second group with heteroscedastic variances (bias corrected)
   - ROM: Ratio of Means
   - CVR: Coefficient of Variation Ratio
   - VR: Variability Ratio
 - Binary:
-  - RR: Risk Ratio
-  - OR: Odds Ratio
+  - RR: Log Risk Ratio
+  - OR: Log Odds Ratio
   - RD: Risk Difference
   - AS: Arcsine Square Root Transformed Risk Difference
   - PETO: Log Odds Ratio estimated with Peto's method
 - Counts per time:
-  - IRR: Incidence Rate Ratio
+  - IRR: Log Incidence Rate Ratio
   - IRD: Incidence Rate Difference
   - IRSD: Square Root Transformed Incidence Rate Difference
 - Mixed:
-  - D2ORN: Transformed Standardized Mean Difference assuming normal distributions
-  - D2ORL: Transformed Standardized Mean Difference assuming logistic distributions
+  - D2ORN: transformed Standardized Mean Difference to Log Odds Ratio assuming normal distributions
+  - D2ORL: transformed Standardized Mean Difference to Log Odds Ratio assuming logistic distributions
   - PBIT: Probit Transformed Risk Difference
-  - OR2DN: Transformed Odds Ratio assuming normal distributions
-  - OR2DL: Transformed Odds Ratio assuming logistic distributions
+  - OR2DN: Transformed Log Odds Ratio to Standardized Mean Difference assuming normal distributions
+  - OR2DL: Transformed Log Odds Ratio to Standardized Mean Difference assuming logistic distributions
 
-##### Variable association
+For SMD (including D2ORN, D2ORL) the Cohen's d, T-Statistics from an independent samples t-test, or (signed) P-Values together with the group sizes are sufficient statistics.
+
+For Binary designs (and the corresponding Mixed designs) the table frequencies (Group 1/Outcome +, Group 1/Outcome -, Group 2/Outcome +, and Group 2/Outcome -) or the first column (Group 1/Outcome + and Group 2/Outcome +) with sample sizes (Sample Size Group 1 and Sample Size Group 2) are sufficient statistics.
+
+The Binary design uses the corresponding table:
+|              |  **Outcome +**    |  **Outcome -**    |  **Sample Size**    |
+| :---         |       :----:      |     :----:        |                ---: |
+| **Group 1**  | Group 1/Outcome + | Group 1/Outcome - | Sample Size Group 1 |
+| **Group 2**  | Group 2/Outcome + | Group 2/Outcome - | Sample Size Group 2 |
+
+
+#### Variable association
 - Quantitative:
   - COR: Raw Correlation Coefficient
   - UCOR: Bias-Corrected Correlation Coefficient
@@ -75,13 +91,28 @@ The Effect size dropdown allows users to select the specific effect size or outc
   - YUQ: Yule's Q
   - YUY: Yule's Y
   - RTET: Tetrachoric Correlation Coefficient
+  - ZPHI: Fisher's r-to-z Phi Coefficient
+  - ZTET: Fisher's r-to-z Tetrachoric Correlation Coefficient
 - Mixed:
   - RPB: Point-Biserial Correlation Coefficient
   - RBIS: Biserial Correlation Coefficient
   - ZPB: Fisher's r-to-z Transformed Point-Biserial Correlation Coefficient
   - ZBIS: Fisher's r-to-z Transformed Biserial Correlation Coefficient
 
-##### Single group
+For PHI, ZPHI, RPB, and ZPB the Sampling Variance Type specifies ST = stratified vs CS = cross-sectional design, the Mixed option allows passing of character vector specifying ST/CS for each study.
+
+For Binary designs the table frequencies (Outcome +/+, Outcome +/-, Outcome -/+, and Outcome -/-) or the first column (Outcome +/+ and Outcome -/+) with the total +/. and -/. outcomes (Outcome +/+ and Outcome +/-, and Outcome -/+ and Outcome -/-) are sufficient statistics. 
+
+For RPB, RBIS, ZPB, and ZBIS the Cohen's d, T-Statistics from an independent samples t-test, or (signed) P-Values together with the group sizes are sufficient statistics.
+
+The Binary design uses the corresponding table:
+|                            | **Variable 2, Outcome +** | **Variable 2, Outcome +** |  **Sample Size**    |
+| :---                       |       :----:              |       :----:              |               ---:  |
+| **Variable 1, Outcome +**  | Outcome +/+               | Outcome +/-               | Outcome +/+ and +/- |
+| **Variable 1, Outcome -**  | Outcome -/+               | Outcome -/-               | Outcome -/+ and -/- |
+
+
+#### Single group
 - Quantitative:
   - MN: Raw Mean
   - SMN: Single-Group Standardized Mean
@@ -100,7 +131,10 @@ The Effect size dropdown allows users to select the specific effect size or outc
   - IRS: Square Root Transformed Incidence Rate
   - IRFT: Freeman-Tukey Transformed Incidence Rate
 
-##### Repeated measures/matched groups
+For Binary designs the Events and Sample Size or the Events and Non-Events are sufficient statistics.
+
+
+#### Repeated measures (matched groups)
 - Quantitative:
   - MC: Mean Change
   - SMCC: Standardized Mean Change using Change Score Standardization
@@ -118,142 +152,189 @@ The Effect size dropdown allows users to select the specific effect size or outc
   - MPORC: Conditional Log Odds Ratio
   - MPPETO: Conditional Log Odds Ratio estimated with Peto's method
   - MPORM: Marginal Log Odds Ratio using known/guestimated correlations
+- Binary (marginal):
+  - MPORM: Matched Pairs Marginal Log Odds Ratio estimated from marginal table
 
-##### Other
-- ARAW: Raw Cronbach's Alpha
-- AHW: Transformed Cronbach's Alpha (Hakstian & Whalen)
-- ABT: Transformed Cronbach's Alpha (Bonett)
-- PCOR: Partial Correlation Coefficient
-- ZPCOR: Fisher's r-to-z Transformed Partial Correlation Coefficient
-- SPCOR: Semi-Partial Correlation Coefficient
-- ZSPCOR: Fisher's r-to-z Transformed Semi-Partial Correlation Coefficient
-- R2: Raw Coefficient of Determination
-- ZR2: r-to-z Transformed Coefficient of Determination
-- REH: Relative Excess Heterozygosity
+Correlation refers to between measures or between groups correlation.
 
+For SMCC the Cohen's d, T-Statistics from paired-samples t-test, or (signed) P-Values together with the group sizes and correlation are sufficient statistics.
+
+The Binary design uses the corresponding table (Time can reffer to different treatments or matched groups):
+|                        | **Time 2, Outcome +** | **Time 2, Outcome +** |
+| :---                   |       :----:          |                  ---: |
+| **Time 1, Outcome +**  | Outcome +/+           | Outcome +/-           |
+| **Time 1, Outcome -**  | Outcome -/+           | Outcome -/-           |
+
+The Binary design can be also reported marginally which results in the following table:
+|             | **Outcome +**    | **Outcome -**    |
+| :---        |       :----:     |         ---:     |
+| **Time 1**  | Time 1/Outcome + | Time 1/Outcome - |
+| **Time 2**  | Time 2/Outcome + | Time 2/Outcome - |
+
+In the Binary Marginal design the user also has to supply either the Correlation or Proportion of +/+ outcomes in the binary design. If an impossible value is supplied (the correlation/proportion is restricted by the possible binary tables) the effect size is not calculated. 
+
+
+#### Other
+- Reliability
+  - ARAW: Raw Cronbach's Alpha
+  - AHW: Transformed Cronbach's Alpha (Hakstian & Whalen)
+  - ABT: Transformed Cronbach's Alpha (Bonett)
+- Partial and Semi-Partial Correlations
+  - PCOR: Partial Correlation Coefficient
+  - ZPCOR: Fisher's r-to-z Transformed Partial Correlation Coefficient
+  - SPCOR: Semi-Partial Correlation Coefficient
+  - ZSPCOR: Fisher's r-to-z Transformed Semi-Partial Correlation Coefficient
+- Model fit
+  - R2: Raw Coefficient of Determination
+  - ZR2: r-to-z Transformed Coefficient of Determination
+- Heterozygosity
+  - REH: Relative Excess Heterozygosity
+
+Note that (Semi)Partial Correlation in the input does NOT correspond to the raw correlation between the variables. The input can be used when e.g., the partial eta2 is known.
+
+For Partial and Semi-Partial Correlations the P-Value can be supplied instead of the T-Statistic. 
+
+For Model fit only one of the R-Squared, F-Statistic, and P-Value is required.
 
 --------------------------
 
 ### Variable Inputs
+The specific variable inputs are based on selected effect sizes.
+
+Note that users can supply "signed" P-Value (e.g., p = -0.01, 0.95) where the sign determines the sign of the resulting  effect size (p = -0.01 leads to a negative effect size and p = 0.95 leads to a positive effect size). Sign of T-Statistics is used in the same manner.
 
 #### Independent Groups
 
 - Quantitative Measurement
-  - N: Group 1: Total sample size of Group 1.
-  - N: Group 2: Total sample size of Group 2.
-  - Mean: Group 1: Mean value for Group 1.
-  - Mean: Group 2: Mean value for Group 2.
-  - SD: Group 1: Standard deviation for Group 1.
-  - SD: Group 2: Standard deviation for Group 2.
+  - Mean Group 1: Means for group 1.
+  - Mean Group 2: Means for group 2.
+  - SD Group 1: Standard deviations for group 1.
+  - SD Group 2: Standard deviations for group 2.
+  - Sample Size Group 1: Total sample sizes of group 1.
+  - Sample Size Group 2: Total sample sizes of group 2.
+  - T-Statistic: T-test statistics for the variables (for SMD only).
+  - P-Value: P-values from a t-test (for SMD only).
+  - Cohen's d: Already reported Cohen's d (for SMD only).
 
 - Binary Measurement
-  - N: Group 1/Outcome 1: Number of individuals in Group 1 with Outcome 1.
-  - N: Group 1/Outcome 2: Number of individuals in Group 1 with Outcome 2.
-  - N: Group 2/Outcome 1: Number of individuals in Group 2 with Outcome 1.
-  - N: Group 2/Outcome 2: Number of individuals in Group 2 with Outcome 2.
-  - Events: Group 1: Number of events in Group 1.
-  - Events: Group 2: Number of events in Group 2.
+  - Group 1/Outcome +: Number of individuals in Group 1 with Outcome +.
+  - Group 1/Outcome -: Number of individuals in Group 1 with Outcome -.
+  - Group 2/Outcome +: Number of individuals in Group 2 with Outcome +.
+  - Group 2/Outcome -: Number of individuals in Group 2 with Outcome -.
+  - Sample Size Group 1: Total sample size of Group 1.
+  - Sample Size Group 2: Total sample size of Group 2.
 
 - Counts Per Time Measurement
-  - Total Person-Time: Group 1: Total person-time for Group 1.
-  - Total Person-Time: Group 2: Total person-time for Group 2.
-  - Events: Group 1: Number of events in Group 1.
-  - Events: Group 2: Number of events in Group 2.
+  - Person-Time Group 1: Total person-time for Group 1.
+  - Person-Time Group 2: Total person-time for Group 2.
+  - Events Group 1: Number of events in Group 1.
+  - Events Group 2: Number of events in Group 2.
 
 - Mixed Measurement
-  - For Effect Sizes D2ORN, D2ORL:
-    - N: Group 1/Outcome 1: Number of individuals in Group 1 with Outcome 1.
-    - N: Group 1/Outcome 2: Number of individuals in Group 1 with Outcome 2.
-    - N: Group 2/Outcome 1: Number of individuals in Group 2 with Outcome 1.
-    - N: Group 2/Outcome 2: Number of individuals in Group 2 with Outcome 2.
-    - N: Group 1: Total sample size of Group 1.
-    - N: Group 2: Total sample size of Group 2.
   - For Effect Sizes PBIT, OR2DN, OR2DL:
-    - Mean: Group 1: Mean value for Group 1.
-    - Mean: Group 2: Mean value for Group 2.
-    - SD: Group 1: Standard deviation for Group 1.
-    - SD: Group 2: Standard deviation for Group 2.
-    - N: Group 1: Total sample size of Group 1.
-    - N: Group 2: Total sample size of Group 2.
+    - Group 1/Outcome +: Number of individuals in group 1 with outcome +.
+    - Group 1/Outcome -: Number of individuals in group 1 with outcome -.
+    - Group 2/Outcome +: Number of individuals in group 2 with outcome +.
+    - Group 2/Outcome -: Number of individuals in group 2 with outcome -.
+    - Group 1: Total sample size of group 1.
+    - Group 2: Total sample size of group 2.
+  - For Effect Sizes D2ORN, D2ORL:
+    - Mean Group 1: Means for group 1.
+    - Mean Group 2: Means for group 2.
+    - SD Group 1: Standard deviations for group 1.
+    - SD Group 2: Standard deviations for group 2.
+    - Sample Size Group 1: Total sample sizes of group 1.
+    - Sample Size Group 2: Total sample sizes of group 2.
+    - T-Statistic: T-test statistics for the variables.
+    - P-Value: P-values from a t-test.
+    - Cohen's d: Already reported Cohen's d.
 
 #### Variable Association
 
 - Quantitative Measurement
-  - Raw Correlation Coefficients: Correlation coefficients between two variables.
-  - Sample/Group Sizes: Total sample sizes.
-  - T-Test Statistics: T-test statistics for the variables.
-  - P-Values: P-values for the correlation coefficients.
-  - F-Test Statistics: F-test statistics for the variables.
+  - Correlation Coefficient: Correlation coefficients between the two variables.
+  - Sample Size: Total sample sizes.
+  - T-Statistic: T-test statistics for the variables.
+  - P-Value: P-values for the correlation coefficients.
 
 - Binary Measurement
-  - N: Variable 1/Outcome +: Number of individuals with Outcome + for Variable 1.
-  - N: Variable 1/Outcome -: Number of individuals with Outcome - for Variable 1.
-  - N: Variable 2/Outcome +: Number of individuals with Outcome + for Variable 2.
-  - N: Variable 2/Outcome -: Number of individuals with Outcome - for Variable 2.
+  - Variable 1/Outcome +: Number of individuals with outcome + for variable 1.
+  - Variable 1/Outcome -: Number of individuals with outcome - for variable 1.
+  - Variable 2/Outcome +: Number of individuals with outcome + for variable 2.
+  - Variable 2/Outcome -: Number of individuals with outcome - for variable 2.
 
 #### Single Group
 
 - Quantitative Measurement
-  - Mean: Sample 1: Mean value for Sample 1.
-  - Standard Deviations: Standard deviations for the samples.
-  - Sample/Group Sizes: Total sample sizes.
-  - Observed Effect Sizes/Outcomes: Observed effect sizes or outcomes.
-  - Sampling Variances: Sampling variances for the effect sizes.
-  - Standard Errors: Standard errors for the effect sizes.
+  - Mean: Means.
+  - Standard Deviation: Standard deviations.
+  - Sample Size: Total sample sizes.
 
 - Binary Measurement
-  - Event Frequencies: Frequencies of the event of interest.
-  - Complement Frequencies / Group Means: Frequencies of the complement event or group means.
-  - Sample/Group Sizes: Total sample sizes.
-  - Observed Effect Sizes/Outcomes: Observed effect sizes or outcomes.
-  - Sampling Variances: Sampling variances for the effect sizes.
-  - Standard Errors: Standard errors for the effect sizes.
+  - Events: Frequencies of the event of interest.
+  - Non-Events: Frequencies of the complement event or group means.
+  - Sample Size: Total sample sizes.
 
 - Counts Per Time Measurement
-  - Events: Sample 1: Number of events in Sample 1.
-  - Total Person-Times: Total person-times for the samples.
+  - Events: Number of events.
+  - Person-Time: Total person-times.
 
 #### Repeated Measures/Matched Groups
 
 - Quantitative Measurement
-  - N: Time Point 1: Total sample size at Time Point 1.
-  - N: Time Point 2: Total sample size at Time Point 2.
-  - Mean: Time Point 1: Mean value at Time Point 1.
-  - Mean: Time Point 2: Mean value at Time Point 2.
-  - SD: Time Point 1: Standard deviation at Time Point 1.
-  - SD: Time Point 2: Standard deviation at Time Point 2.
+  - Mean Time 1: Means at time point 1.
+  - Mean Time 2: Means at time point 2.
+  - SD Time 1: Standard deviations at time point 1.
+  - SD Time 2: Standard deviations at time point 2.
+  - Sample Size: Total sample sizes. 
 
 - Binary Measurement
-  - N: Treatment 1 + Outcome 1 / Treatment 2 + Outcome 1: Number of individuals with Treatment 1 + Outcome 1 and Treatment 2 + Outcome 1.
-  - N: Treatment 1 + Outcome 2 / Treatment 2 + Outcome 1: Number of individuals with Treatment 1 + Outcome 2 and Treatment 2 + Outcome 1.
-  - N: Treatment 2 + Outcome 1 / Treatment 1 + Outcome 2: Number of individuals with Treatment 2 + Outcome 1 and Treatment 1 + Outcome 2.
-  - N: Treatment 2 + Outcome 2 / Treatment 1 + Outcome 1: Number of individuals with Treatment 2 + Outcome 2 and Treatment 1 + Outcome 1.
-  - Events: Time Point 1: Number of events at Time Point 1.
-  - Events: Time Point 2: Number of events at Time Point 2.
+  - Time 1/Outcome +: Number of individuals with outcome + at time point 1.
+  - Time 1/Outcome -: Number of individuals with outcome - at time point 1.
+  - Time 2/Outcome +: Number of individuals with outcome + at time point 2.
+  - Time 2/Outcome -: Number of individuals with outcome - at time point 2.
+
 
 #### Other
 
-- Reliability (ARAW, AHW, ABT)
-  - Alpha: Reliability (Cronbach's alpha) value.
-  - Beta: Beta value.
-  - Gamma: Gamma value.
-  - Delta: Delta value.
+- Reliability
+  - Cronbach's alpha: Cronbach's alpha.
+  - Items: Items or replications or parts of the measurement instrument.
+  - Sample Size: Total sample sizes.
+
+- Partial and Semi-Partial Correlations
+  - Predictors: Number of regression predictors.
+  - Sample Size: Total sample sizes.
+  - R-Squared: R-squared values (for semi-partial correlation only).
+  - T-Statistic: T-test statistics for the regression coefficient.
+  - P-Value: P-values for the regression coefficient.
+  - (Semi)Partial Correlation: Semi(partial) correlations of the regression coefficient.
+
+- Model fit
+  - Predictors: Number of regression predictors.
+  - Sample Size: Total sample sizes.
+  - R-Squared: R-squared values.
+  - F-Statistic: F-test statistics for the regression coefficients.
+  - P-Value: P-values for the F-test of regression coefficients.
 
 - Relative Excess Heterozygosity (REH)
-  - N: Homozygous Dominant Alleles: Number of individuals with homozygous dominant alleles.
-  - N: Homozygous Recessive Alleles: Number of individuals with homozygous recessive alleles.
-  - N: Heterozygous Alleles: Number of individuals with heterozygous alleles.
-  - N: Non-Events: Number of non-events.
+  - Homozygous Dominant Alleles: Number of individuals with homozygous dominant alleles.
+  - Heterozygous Alleles: Number of individuals with heterozygous alleles.
+  - Homozygous Recessive Alleles: Number of individuals with homozygous recessive alleles.
 
-- R-Squared Values (R2, ZR2)
-  - R-Squared Values: R-squared values.
-  - Sample/Group Sizes: Total sample sizes.
+
+#### Reported effect sizes
+- Effect size: The reported effect sizes.
+- Standard error: Standard errors of the reported effect sizes.
+- Sampling Variance: Sampling variances of the reported effect sizes.
+- 95% Confidence Interval: Lower and upper bound of the 95% CI of the reported effect sizes. 
+
 
 --------------------------
 
 #### Frequency/event cell adjustment 
 
-##### Add
+#### Add
 The Add field allows you to specify the amount to add to zero cells, counts, or frequencies when calculating effect sizes or outcomes.
 
 Default Values:
@@ -269,7 +350,7 @@ Default Values:
   - Independent groups with binary measurement (RD, AS, PETO).
   - Single group with binary measurement (PLN, PLO, PAS).
 
-##### To
+#### To
 The To dropdown allows you to specify when the values under the Add option should be added to 
 
 Options
@@ -293,8 +374,8 @@ Options:
 - LS2: Alternative large-sample approximation.
 - UB: Unbiased estimates of the sampling variances.
 - AV: Sampling variances with the sample-size weighted average.
-- HO*: Homoscedastic variances assumption.
-
+- HO: Homoscedastic variances assumption.
+- AVHO: Homoscedasticity variances assumption for both groups across studies.
 
 ### R Packages
 ---

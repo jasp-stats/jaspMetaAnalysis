@@ -44,12 +44,14 @@ Form
 			{
 				id:			design
 				name:		"design"
+				label:		qsTr("Design")
 				values: [
-				{ label: qsTr("Independent groups"),				value: "independentGroups"},
-				{ label: qsTr("Variable association"),				value: "variableAssociation"},
-				{ label: qsTr("Single group"),						value: "singleGroup"},
-				{ label: qsTr("Repeated measures/matched groups"),	value: "repeatedMeasuresOrMatchedGroups"},
-				{ label: qsTr("Other"),								value: "other"}
+				{ label: qsTr("Independent groups"),		value: "independentGroups"},
+				{ label: qsTr("Variable association"),		value: "variableAssociation"},
+				{ label: qsTr("Single group"),				value: "singleGroup"},
+				{ label: qsTr("Repeated measures"),			value: "repeatedMeasures"},
+				{ label: qsTr("Other"),						value: "other"},
+				{ label: qsTr("Reported effect sizes"),		value: "reportedEffectSizes"}
 			]
 			}
 
@@ -57,7 +59,8 @@ Form
 			{
 				id:			measurement
 				name:		"measurement"
-				enabled:	design.value != "other"
+				label:		qsTr("Measurement")
+				visible:	design.value != "reportedEffectSizes"
 				values: (function() {
 					if (design.value == "independentGroups") {
 						return [
@@ -78,10 +81,18 @@ Form
 							{ label: qsTr("Binary"), value: "binary"},
 							{ label: qsTr("Counts per time"), value: "countsPerTime"}
 						];
-					} else if (design.value == "repeatedMeasuresOrMatchedGroups") {
+					} else if (design.value == "repeatedMeasures") {
 						return [
 							{ label: qsTr("Quantitative"), value: "quantitative"},
-							{ label: qsTr("Binary"), value: "binary"}
+							{ label: qsTr("Binary"), value: "binary"},
+							{ label: qsTr("Binary (marginal)"), value: "binaryMarginal"}
+						];
+					} else if (design.value == "other") {
+						return [
+							{ label: qsTr("Reliability"), value: "reliability"},
+							{ label: qsTr("Partial correlation"), value: "partialCorrelation"},
+							{ label: qsTr("Model fit"), value: "modelFit"},
+							{ label: qsTr("Heterozygosity"), value: "heterozygosity"}
 						];
 					} else {
 						return [];
@@ -91,13 +102,15 @@ Form
 
 			DropDown
 			{
-				id: effectSize
-				name: "effectSize"
+				id:			effectSize
+				name:		"effectSize"
+				label:		qsTr("Effect size")
+				visible:	design.value != "reportedEffectSizes"
 				values: (function() {
 					if (design.value == "independentGroups" && measurement.value == "quantitative") {
 						return [
 							{ label: qsTr("MD"), value: "MD"},
-							{ label: qsTr("SMD"), value: "SMD"},
+							{ label: qsTr("SMD"), value: "SMD"}, // TODO: make default
 							{ label: qsTr("SMDH"), value: "SMDH"},
 							{ label: qsTr("SMD1"), value: "SMD1"},
 							{ label: qsTr("SMD1H"), value: "SMD1H"},
@@ -108,7 +121,7 @@ Form
 					} else if (design.value == "independentGroups" && measurement.value == "binary") {
 						return [
 							{ label: qsTr("RR"), value: "RR"},
-							{ label: qsTr("OR"), value: "OR"},
+							{ label: qsTr("OR"), value: "OR"}, // TODO: make default
 							{ label: qsTr("RD"), value: "RD"},
 							{ label: qsTr("AS"), value: "AS"},
 							{ label: qsTr("PETO"), value: "PETO"}
@@ -131,7 +144,7 @@ Form
 						return [
 							{ label: qsTr("COR"), value: "COR"},
 							{ label: qsTr("UCOR"), value: "UCOR"},
-							{ label: qsTr("ZCOR"), value: "ZCOR"}
+							{ label: qsTr("ZCOR"), value: "ZCOR"} // TODO: make default
 						];
 					} else if (design.value == "variableAssociation" && measurement.value == "binary") {
 						return [
@@ -139,13 +152,15 @@ Form
 							{ label: qsTr("PHI"), value: "PHI"},
 							{ label: qsTr("YUQ"), value: "YUQ"},
 							{ label: qsTr("YUY"), value: "YUY"},
-							{ label: qsTr("RTET"), value: "RTET"}
+							{ label: qsTr("RTET"), value: "RTET"},
+							{ label: qsTr("ZPHI"), value: "ZPHI"},
+							{ label: qsTr("ZTET"), value: "ZTET"}
 						];
 					} else if (design.value == "variableAssociation" && measurement.value == "mixed") {
 						return [
 							{ label: qsTr("RPB"), value: "RPB"},
 							{ label: qsTr("RBIS"), value: "RBIS"},
-							{ label: qsTr("ZPB"), value: "ZPB"},
+							{ label: qsTr("ZPB"), value: "ZPB"}, // TODO: make default
 							{ label: qsTr("ZBIS"), value: "ZBIS"}
 						];
 					} else if (design.value == "singleGroup" && measurement.value == "quantitative") {
@@ -171,10 +186,10 @@ Form
 							{ label: qsTr("IRS"), value: "IRS"},
 							{ label: qsTr("IRFT"), value: "IRFT"}
 						];
-					} else if (design.value == "repeatedMeasuresOrMatchedGroups" && measurement.value == "quantitative") {
+					} else if (design.value == "repeatedMeasures" && measurement.value == "quantitative") {
 						return [
 							{ label: qsTr("MC"), value: "MC"},
-							{ label: qsTr("SMCC"), value: "SMCC"},
+							{ label: qsTr("SMCC"), value: "SMCC"}, // TODO: make default
 							{ label: qsTr("SMCR"), value: "SMCR"},
 							{ label: qsTr("SMCRH"), value: "SMCRH"},
 							{ label: qsTr("SMCRP"), value: "SMCRP"},
@@ -183,29 +198,41 @@ Form
 							{ label: qsTr("CVRC"), value: "CVRC"},
 							{ label: qsTr("VRC"), value: "VRC"}
 						];
-					} else if (design.value == "repeatedMeasuresOrMatchedGroups" && measurement.value == "binary") {
+					} else if (design.value == "repeatedMeasures" && measurement.value == "binary") {
 						return [
 							{ label: qsTr("MPRR"), value: "MPRR"},
 							{ label: qsTr("MPOR"), value: "MPOR"},
 							{ label: qsTr("MPRD"), value: "MPRD"},
 							{ label: qsTr("MPORC"), value: "MPORC"},
-							{ label: qsTr("MPPETO"), value: "MPPETO"},
+							{ label: qsTr("MPPETO"), value: "MPPETO"}
+						];
+					} else if (design.value == "repeatedMeasures" && measurement.value == "binaryMarginal") {
+						return [
 							{ label: qsTr("MPORM"), value: "MPORM"}
 						];
-					} else if (design.value == "other") {
+					}else if (design.value == "other" && measurement.value == "reliability") {
 						return [
 							{ label: qsTr("ARAW"), value: "ARAW"},
 							{ label: qsTr("AHW"), value: "AHW"},
-							{ label: qsTr("ABT"), value: "ABT"},
+							{ label: qsTr("ABT"), value: "ABT"}
+						];
+					} else if (design.value == "other" && measurement.value == "partialCorrelation") {
+						return [
 							{ label: qsTr("PCOR"), value: "PCOR"},
-							{ label: qsTr("ZPCOR"), value: "ZPCOR"},
+							{ label: qsTr("ZPCOR"), value: "ZPCOR"}, // TODO: make default
 							{ label: qsTr("SPCOR"), value: "SPCOR"},
-							{ label: qsTr("ZSPCOR"), value: "ZSPCOR"},
+							{ label: qsTr("ZSPCOR"), value: "ZSPCOR"}
+						];
+					} else if (design.value == "other" && measurement.value == "modelFit") {
+						return [
 							{ label: qsTr("R2"), value: "R2"},
-							{ label: qsTr("ZR2"), value: "ZR2"},
+							{ label: qsTr("ZR2"), value: "ZR2"} // TODO: make default
+						];
+					} else if (design.value == "other" && measurement.value == "heterozygosity") {
+						return [
 							{ label: qsTr("REH"), value: "REH"}
 						];
-					} else {
+					}  else {
 						return [];
 					}
 				})();
@@ -219,8 +246,9 @@ Form
 	{
 		name:		"vars"
 		source:		"effectSizeType"
+		rowSpacing: 20
 
-		rowComponent: 	VariablesForm
+		rowComponent: 	ColumnLayout
 		{
 			property var designValue:		effectSizeType.rowAt(rowIndex).designValue
 			property var measurementValue:	effectSizeType.rowAt(rowIndex).measurementValue
@@ -228,660 +256,684 @@ Form
 			property var designLabel:		effectSizeType.rowAt(rowIndex).designLabel
 			property var measurementLabel:	effectSizeType.rowAt(rowIndex).measurementLabel
 			property var effectSizeLabel:	effectSizeType.rowAt(rowIndex).effectSizeLabel
-
-			AvailableVariablesList
+			
+			VariablesForm
 			{
-				name:		"allVars"
-				title:		"" + effectSizeValue + " (" + designValue + "/" + measurementValue + ")"
-			}
+				removeInvisibles: true
+				// TODO: dynamically set proper height
 
-			AssignedVariablesList
-			{ // metafor: ai
-				name: "nGroup1Outcome1"
-				title: qsTr("N: Group 1/Outcome 1")
-				singleVariable: true
-				visible: (designValue == "independentGroups" && measurementValue == "binary") ||
-						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "D2ORN" || effectSizeValue == "D2ORL"))
-			}
+				AvailableVariablesList
+				{
+					name:		"allVars"
+					title:		"" + effectSizeValue + " (" + designValue + "/" + measurementValue + ")"
+				}
 
-			AssignedVariablesList
-			{ // metafor: ai
-				name: "nVariable1Outcome+"
-				title: qsTr("N: Variable 1/Outcome +")
-				singleVariable: true
-				visible: (designValue == "variableAssociation" && measurementValue == "binary")
-			}
+				AssignedVariablesList
+				{ // metafor: ai
+					name: "group1OutcomePlus"
+					title: qsTr("Group 1/Outcome +")
+					singleVariable: true
+					visible: (designValue == "independentGroups" && measurementValue == "binary") ||
+						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "PBIT" || effectSizeValue == "OR2DN" || effectSizeValue == "OR2DL"))
+				}
 
-			AssignedVariablesList
-			{ // metafor: ai
-				name: "nTreatment1Outcome1Treatment2Outcome2+"
-				title: qsTr("N: Treatment 1 + Outcome 1 / Treatment 2 + Outcome 1")
-				singleVariable: true
-				visible: (designValue == "repeatedMeasuresOrMatchedGroups" && measurementValue == "binary")
-			}
+				AssignedVariablesList
+				{ // metafor: ai
+					name: "time1OutcomePlus"
+					title: qsTr("Time 1/Outcome +")
+					singleVariable: true
+					visible: (designValue == "repeatedMeasures" && measurementValue == "binaryMarginal")
+				}
 
-			AssignedVariablesList
-			{ // metafor: ai
-				name: "alpha"
-				title: qsTr("Alpha")
-				singleVariable: true
-				visible: (designValue == "other" && (effectSizeValue == "ARAW" || effectSizeValue == "AHW" || effectSizeValue == "ABT"))
-			}
+				AssignedVariablesList
+				{ // metafor: ai
+					name: "outcomePlusPlus"
+					title: qsTr("Outcome +/+")
+					singleVariable: true
+					visible: (designValue == "variableAssociation" && measurementValue == "binary") ||
+						(designValue == "repeatedMeasures" && measurementValue == "binary")
+				}
 
-			AssignedVariablesList
-			{ // metafor: ai
-				name: "nHomozygousDominantAlleles"
-				title: qsTr("N: Homozygous Dominant Alleles")
-				singleVariable: true
-				visible: (designValue == "other" && effectSizeValue == "REH")
-			}
+				AssignedVariablesList
+				{ // metafor: ai
+					name: "cronbachsAlpha"
+					title: qsTr("Cronbach's alpha")
+					singleVariable: true
+					visible: (designValue == "other" &&  measurementValue == "reliability")
+				}
 
-			AssignedVariablesList
-			{ // metafor: bi
-				name: "nGroup1Outcome2"
-				title: qsTr("N: Group 1/Outcome 2")
-				singleVariable: true
-				visible: (designValue == "independentGroups" && measurementValue == "binary") ||
-						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "D2ORN" || effectSizeValue == "D2ORL"))
-			}
+				AssignedVariablesList
+				{ // metafor: ai
+					name: "homozygousDominantAlleles"
+					title: qsTr("Homozygous Dominant Alleles")
+					singleVariable: true
+					visible: (designValue == "other" && measurementValue == "heterozygosity")
+				}
 
-			AssignedVariablesList
-			{ // metafor: bi
-				name: "nVariable1Outcome-"
-				title: qsTr("N: Variable 1/Outcome -")
-				singleVariable: true
-				visible: (designValue == "variableAssociation" && measurementValue == "binary")
-			}
+				AssignedVariablesList
+				{ // metafor: bi
+					name: "group1OutcomeMinus"
+					title: qsTr("Group 1/Outcome -")
+					singleVariable: true
+					visible: (designValue == "independentGroups" && measurementValue == "binary") ||
+						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "PBIT" || effectSizeValue == "OR2DN" || effectSizeValue == "OR2DL"))
+				}
 
-			AssignedVariablesList
-			{ // metafor: bi
-				name: "nTreatment1Outcome2Treatment2Outcome1+"
-				title: qsTr("N: Treatment 1 + Outcome 2 / Treatment 2 + Outcome 1")
-				singleVariable: true
-				visible: (designValue == "repeatedMeasuresOrMatchedGroups" && measurementValue == "binary")
-			}
+				AssignedVariablesList
+				{ // metafor: bi
+					name: "time1OutcomeMinus"
+					title: qsTr("Time 1/Outcome -")
+					singleVariable: true
+					visible: (designValue == "repeatedMeasures" && measurementValue == "binaryMarginal")
+				}
 
-			AssignedVariablesList
-			{ // metafor: bi
-				name: "beta"
-				title: qsTr("Beta")
-				singleVariable: true
-				visible: (designValue == "other" && (effectSizeValue == "ARAW" || effectSizeValue == "AHW" || effectSizeValue == "ABT"))
-			}
+				AssignedVariablesList
+				{ // metafor: bi
+					name: "outcomePlusMinus"
+					title: qsTr("Outcome +/-")
+					singleVariable: true
+					visible: (designValue == "variableAssociation" && measurementValue == "binary") ||
+						(designValue == "repeatedMeasures" && measurementValue == "binary")
+				}
 
-			AssignedVariablesList
-			{ // metafor: bi
-				name: "nHomozygousRecessiveAlleles"
-				title: qsTr("N: Homozygous Recessive Alleles")
-				singleVariable: true
-				visible: (designValue == "other" && effectSizeValue == "REH")
-			}
+				AssignedVariablesList
+				{ // metafor: bi
+					name: "heterozygousAlleles"
+					title: qsTr("Heterozygous Alleles")
+					singleVariable: true
+					visible: (designValue == "other" && measurementValue == "heterozygosity")
+				}
 
-			AssignedVariablesList
-			{ // metafor: ci
-				name: "nGroup2Outcome1"
-				title: qsTr("N: Group 2/Outcome 1")
-				singleVariable: true
-				visible: (designValue == "independentGroups" && measurementValue == "binary") ||
-						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "D2ORN" || effectSizeValue == "D2ORL"))
-			}
+				AssignedVariablesList
+				{ // metafor: ci
+					name: "group2OutcomePlus"
+					title: qsTr("Group 2/Outcome +")
+					singleVariable: true
+					visible: (designValue == "independentGroups" && measurementValue == "binary") ||
+						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "PBIT" || effectSizeValue == "OR2DN" || effectSizeValue == "OR2DL"))
+				}
 
-			AssignedVariablesList
-			{ // metafor: ci
-				name: "nVariable2Outcome+"
-				title: qsTr("N: Variable 2/Outcome +")
-				singleVariable: true
-				visible: (designValue == "variableAssociation" && measurementValue == "binary")
-			}
+				AssignedVariablesList
+				{ // metafor: ci
+					name: "time2OutcomePlus"
+					title: qsTr("Time 2/Outcome +")
+					singleVariable: true
+					visible: (designValue == "repeatedMeasures" && measurementValue == "binaryMarginal")
+				}
 
-			AssignedVariablesList
-			{ // metafor: ci
-				name: "nTreatment2Outcome1Treatment1Outcome2+"
-				title: qsTr("N: Treatment 2 + Outcome 1 / Treatment 1 + Outcome 2")
-				singleVariable: true
-				visible: (designValue == "repeatedMeasuresOrMatchedGroups" && measurementValue == "binary")
-			}
+				AssignedVariablesList
+				{ // metafor: ci
+					name: "outcomeMinusPlus"
+					title: qsTr("Outcome -/+")
+					singleVariable: true
+					visible: (designValue == "variableAssociation" && measurementValue == "binary") ||
+						(designValue == "repeatedMeasures" && measurementValue == "binary")
+				}
 
-			AssignedVariablesList
-			{ // metafor: ci
-				name: "gamma"
-				title: qsTr("Gamma")
-				singleVariable: true
-				visible: (designValue == "other" && (effectSizeValue == "ARAW" || effectSizeValue == "AHW" || effectSizeValue == "ABT"))
-			}
+				AssignedVariablesList
+				{ // metafor: ci
+					name: "homozygousRecessiveAlleles"
+					title: qsTr("Homozygous Recessive Alleles")
+					singleVariable: true
+					visible: (designValue == "other" && measurementValue == "heterozygosity")
+				}
 
-			AssignedVariablesList
-			{ // metafor: ci
-				name: "nHeterozygousAlleles"
-				title: qsTr("N: Heterozygous Alleles")
-				singleVariable: true
-				visible: (designValue == "other" && effectSizeValue == "REH")
-			}
+				AssignedVariablesList
+				{ // metafor: di
+					name: "group2Outcome2"
+					title: qsTr("Group 2/Outcome Minus")
+					singleVariable: true
+					visible: (designValue == "independentGroups" && measurementValue == "binary") ||
+						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "PBIT" || effectSizeValue == "OR2DN" || effectSizeValue == "OR2DL"))
+				}
 
-			AssignedVariablesList
-			{ // metafor: di
-				name: "nGroup2Outcome2"
-				title: qsTr("N: Group 2/Outcome 2")
-				singleVariable: true
-				visible: (designValue == "independentGroups" && measurementValue == "binary") ||
-						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "D2ORN" || effectSizeValue == "D2ORL"))
-			}
+				AssignedVariablesList
+				{ // metafor: di
+					name: "time2OutcomeMinus"
+					title: qsTr("Time 2/Outcome -")
+					singleVariable: true
+					visible: (designValue == "repeatedMeasures" && measurementValue == "binaryMarginal")
+				}
 
-			AssignedVariablesList
-			{ // metafor: di
-				name: "nVariable2Outcome-"
-				title: qsTr("N: Variable 2/Outcome -")
-				singleVariable: true
-				visible: (designValue == "variableAssociation" && measurementValue == "binary")
-			}
+				AssignedVariablesList
+				{ // metafor: di
+					name: "outcomeMinusMinus"
+					title: qsTr("Outcome -/-")
+					singleVariable: true
+					visible: (designValue == "variableAssociation" && measurementValue == "binary") ||
+						(designValue == "repeatedMeasures" && measurementValue == "binary")
+				}
 
-			AssignedVariablesList
-			{ // metafor: di
-				name: "nTreatment2Outcome2Treatment1Outcome1+"
-				title: qsTr("N: Treatment 2 + Outcome 2 / Treatment 1 + Outcome 1")
-				singleVariable: true
-				visible: (designValue == "repeatedMeasuresOrMatchedGroups" && measurementValue == "binary")
-			}
+				AssignedVariablesList
+				{ // metafor: n1i
+					name: "outcomePlusPlusAndPlusMinus"
+					title: qsTr("Outcome +/+ and +/-")
+					singleVariable: true
+					visible: (designValue == "variableAssociation" && measurementValue == "binary")
+				}
 
-			AssignedVariablesList
-			{ // metafor: di
-				name: "delta"
-				title: qsTr("Delta")
-				singleVariable: true
-				visible: (designValue == "other" && (effectSizeValue == "ARAW" || effectSizeValue == "AHW" || effectSizeValue == "ABT"))
-			}
+				AssignedVariablesList
+				{ // metafor: n2i
+					name: "outcomeMinusPlusAndMinusMinus"
+					title: qsTr("Outcome -/+ and -/-")
+					singleVariable: true
+					visible: (designValue == "variableAssociation" && measurementValue == "binary")
+				}
 
-			AssignedVariablesList
-			{ // metafor: n1i
-				name: "nGroup1"
-				title: qsTr("N: Group 1")
-				singleVariable: true
-				visible: (designValue == "independentGroups" && measurementValue == "quantitative") ||
-				 (designValue == "independentGroups" && measurementValue == "binary")  || 
-				 (designValue == "independentGroups" && measurementValue == "countsPerTime") || 
-				 (designValue == "independentGroups" && measurementValue == "mixed")
-			}
+				AssignedVariablesList
+				{ // metafor: x1i
+					name: "eventsGroup1"
+					title: qsTr("Events Group 1")
+					singleVariable: true
+					visible: (designValue == "independentGroups" && measurementValue == "countsPerTime")
+				}
 
-			AssignedVariablesList
-			{ // metafor: n1i
-				name: "nRow1"
-				title: qsTr("N: Row 1")
-				singleVariable: true
-				visible: (designValue == "variableAssociation" && measurementValue == "binary")
-			}
+				AssignedVariablesList
+				{ // metafor: xi
+					name: "events"
+					title: qsTr("Events")
+					singleVariable: true
+					visible: (designValue == "singleGroup" && (measurementValue == "binary" || measurementValue == "countsPerTime"))
+				}
 
-			AssignedVariablesList
-			{ // metafor: n1i
-				name: "nSample1"
-				title: qsTr("N: Sample 1")
-				singleVariable: true
-				visible: (designValue == "singleGroup" && (measurementValue == "quantitative" || measurementValue == "binary" || measurementValue == "countsPerTime"))
-			}
+				AssignedVariablesList
+				{ // metafor: mi
+					name: "nonEvents"
+					title: qsTr("Non-Events")
+					singleVariable: true
+					visible: (designValue == "singleGroup" && measurementValue == "binary")
+				}
 
-			AssignedVariablesList
-			{ // metafor: n1i
-				name: "nTimePoint1"
-				title: qsTr("N: Time Point 1")
-				singleVariable: true
-				visible: (designValue == "repeatedMeasuresOrMatchedGroups" && (measurementValue == "quantitative" || measurementValue == "binary"))
-			}
+				AssignedVariablesList
+				{ // metafor: mi
+					name: "items"
+					title: qsTr("Items")
+					singleVariable: true
+					visible: (designValue == "other" &&  measurementValue == "reliability")
+				}
 
-			AssignedVariablesList
-			{ // metafor: n2i
-				name: "nGroup2"
-				title: qsTr("N: Group 2")
-				singleVariable: true
-				visible: (designValue == "independentGroups" && measurementValue == "quantitative") ||
-				 (designValue == "independentGroups" && measurementValue == "binary")  || 
-				 (designValue == "independentGroups" && measurementValue == "countsPerTime") || 
-				 (designValue == "independentGroups" && measurementValue == "mixed")
-			}
+				AssignedVariablesList
+				{ // metafor: mi
+					name: "predictors"
+					title: qsTr("Predictors")
+					singleVariable: true
+					visible: (designValue == "other" &&  measurementValue == "partialCorrelation") ||
+						(designValue == "other" && measurementValue == "modelFit")
+				}
 
-			AssignedVariablesList
-			{ // metafor: n2i
-				name: "nRow2"
-				title: qsTr("N: Row 2")
-				singleVariable: true
-				visible: (designValue == "variableAssociation" && measurementValue == "binary")
-			}
+				AssignedVariablesList
+				{ // metafor: x2i
+					name: "eventsGroup2"
+					title: qsTr("Events Group 2")
+					singleVariable: true
+					visible: (designValue == "independentGroups" && measurementValue == "countsPerTime")
+				}
 
-			AssignedVariablesList
-			{ // metafor: n2i
-				name: "nSample2"
-				title: qsTr("N: Sample 2")
-				singleVariable: true
-				visible: (designValue == "singleGroup" && (measurementValue == "quantitative" || measurementValue == "binary" || measurementValue == "countsPerTime"))
-			}
+				AssignedVariablesList
+				{ // metafor: t1i
+					name: "personTimeGroup1"
+					title: qsTr("Person-Time Group 1")
+					singleVariable: true
+					visible: (designValue == "independentGroups" && measurementValue == "countsPerTime")
+				}
 
-			AssignedVariablesList
-			{ // metafor: n2i
-				name: "nTimePoint2"
-				title: qsTr("N: Time Point 2")
-				singleVariable: true
-				visible: (designValue == "repeatedMeasuresOrMatchedGroups" && (measurementValue == "quantitative" || measurementValue == "binary"))
-			}
+				AssignedVariablesList
+				{ // metafor: ti
+					name: "personTime"
+					title: qsTr("Person-Time")
+					singleVariable: true
+					visible: (designValue == "singleGroup" && measurementValue == "countsPerTime")
+				}
 
-			AssignedVariablesList
-			{ // metafor: x1i
-				name: "eventsGroup1"
-				title: qsTr("Events: Group 1")
-				singleVariable: true
-				visible: (designValue == "independentGroups" && (measurementValue == "binary" || measurementValue == "countsPerTime" || measurementValue == "mixed"))
-			}
+				AssignedVariablesList
+				{ // metafor: t2i
+					name: "personTimeGroup2"
+					title: qsTr("Person-Time Group 2")
+					singleVariable: true
+					visible: (designValue == "independentGroups" && measurementValue == "countsPerTime")
+				}
 
-			AssignedVariablesList
-			{ // metafor: x1i
-				name: "eventsSample1"
-				title: qsTr("Events: Sample 1")
-				singleVariable: true
-				visible: (designValue == "singleGroup" && (measurementValue == "binary" || measurementValue == "countsPerTime"))
-			}
+				AssignedVariablesList
+				{ // metafor: m1i
+					name: "meanGroup1"
+					title: qsTr("Mean Group 1")
+					singleVariable: true
+					visible: (designValue == "independentGroups" && measurementValue == "quantitative" && (effectSizeValue != "CVR" && effectSizeValue != "VR")) || 
+						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "D2ORN" || effectSizeValue == "D2ORL")) ||
+						(designValue == "variableAssociation" && measurementValue == "mixed")
+				}
 
-			AssignedVariablesList
-			{ // metafor: x1i
-				name: "eventsTimePoint1"
-				title: qsTr("Events: Time Point 1")
-				singleVariable: true
-				visible: (designValue == "repeatedMeasuresOrMatchedGroups" && measurementValue == "binary")
-			}
+				AssignedVariablesList
+				{ // metafor: m1i
+					name: "meanTime1"
+					title: qsTr("Mean Time 1 (or Group 1)")
+					singleVariable: true
+					visible: (designValue == "repeatedMeasures" && measurementValue == "quantitative" && (effectSizeValue != "CVRC" && effectSizeValue != "VRC"))
+				}
 
-			AssignedVariablesList
-			{ // metafor: x2i
-				name: "eventsGroup2"
-				title: qsTr("Events: Group 2")
-				singleVariable: true
-				visible: (designValue == "independentGroups" && (measurementValue == "binary" || measurementValue == "countsPerTime" || measurementValue == "mixed"))
-			}
+				AssignedVariablesList
+				{ // metafor: m2i
+					name: "meanGroup2"
+					title: qsTr("Mean Group 2")
+					singleVariable: true
+					visible: (designValue == "independentGroups" && measurementValue == "quantitative" && (effectSizeValue != "CVR" && effectSizeValue != "VR")) || 
+						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "D2ORN" || effectSizeValue == "D2ORL")) ||
+						(designValue == "variableAssociation" && measurementValue == "mixed")
+				}
 
-			AssignedVariablesList
-			{ // metafor: x2i
-				name: "eventsSample2"
-				title: qsTr("Events: Sample 2")
-				singleVariable: true
-				visible: (designValue == "singleGroup" && (measurementValue == "binary" || measurementValue == "countsPerTime"))
-			}
+				AssignedVariablesList
+				{ // metafor: m2i
+					name: "meanTime2"
+					title: qsTr("Mean Time 2 (or Group 2)")
+					singleVariable: true
+					visible: (designValue == "repeatedMeasures" && measurementValue == "quantitative" && (effectSizeValue != "CVRC" && effectSizeValue != "VRC"))
+				}
 
-			AssignedVariablesList
-			{ // metafor: x2i
-				name: "eventsTimePoint2"
-				title: qsTr("Events: Time Point 2")
-				singleVariable: true
-				visible: (designValue == "repeatedMeasuresOrMatchedGroups" && measurementValue == "binary")
-			}
+				AssignedVariablesList
+				{ // metafor: mi
+					name: "mean"
+					title: qsTr("Mean")
+					singleVariable: true
+					visible: (designValue == "singleGroup" && measurementValue == "quantitative" && effectSizeValue != "SDLN")
+				}
 
-			AssignedVariablesList
-			{ // metafor: t1i
-				name: "personTimeGroup1"
-				title: qsTr("Total Person-Time: Group 1")
-				singleVariable: true
-				visible: (designValue == "independentGroups" && measurementValue == "countsPerTime")
-			}
+				AssignedVariablesList
+				{ // metafor: sd1i
+					name: "sdGroup1"
+					title: qsTr("SD Group 1")
+					singleVariable: true
+					visible: (designValue == "independentGroups" && measurementValue == "quantitative" && (effectSizeValue != "SMD1" && effectSizeValue != "SMDH1")) || 
+						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "D2ORN" || effectSizeValue == "D2ORL")) ||
+						(designValue == "variableAssociation" && measurementValue == "mixed")
+				}
 
-			AssignedVariablesList
-			{ // metafor: t1i
-				name: "personTimeSample1"
-				title: qsTr("Total Person-Time: Sample 1")
-				singleVariable: true
-				visible: (designValue == "singleGroup" && measurementValue == "countsPerTime")
-			}
+				AssignedVariablesList
+				{ // metafor: sd1i
+					name: "sdTime1"
+					title: qsTr("SD Time 1 (or Group 1)")
+					singleVariable: true
+					visible: (designValue == "repeatedMeasures" && measurementValue == "quantitative")
+				}
 
-			AssignedVariablesList
-			{ // metafor: t2i
-				name: "personTimeGroup2"
-				title: qsTr("Total Person-Time: Group 2")
-				singleVariable: true
-				visible: (designValue == "independentGroups" && measurementValue == "countsPerTime")
-			}
+				AssignedVariablesList
+				{ // metafor: sd2i
+					name: "sdGroup2"
+					title: qsTr("SD Group 2")
+					singleVariable: true
+					visible: (designValue == "independentGroups" && measurementValue == "quantitative") || 
+						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "D2ORN" || effectSizeValue == "D2ORL")) ||
+						(designValue == "variableAssociation" && measurementValue == "mixed")
+				}
 
-			AssignedVariablesList
-			{ // metafor: t2i
-				name: "personTimeSample2"
-				title: qsTr("Total Person-Time: Sample 2")
-				singleVariable: true
-				visible: (designValue == "singleGroup" && measurementValue == "countsPerTime")
-			}
+				AssignedVariablesList
+				{ // metafor: sd2i
+					name: "sdTime2"
+					title: qsTr("SD Time 2 (or Group 2)")
+					singleVariable: true
+					visible: (designValue == "repeatedMeasures" && measurementValue == "quantitative"  && effectSizeValue != "SMCR")
+				}
 
-			AssignedVariablesList
-			{ // metafor: m1i
-				name: "meanGroup1"
-				title: qsTr("Mean: Group 1")
-				singleVariable: true
-				visible: (designValue == "independentGroups" && measurementValue == "quantitative") || 
-				(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "PBIT" || effectSizeValue == "OR2DN" || effectSizeValue == "OR2DL"))
-			}
+				AssignedVariablesList
+				{ // metafor: sdi
+					name: "sd"
+					title: qsTr("SD")
+					singleVariable: true
+					visible: (designValue == "singleGroup" && measurementValue == "quantitative")
+				}
+				AssignedVariablesList
+				{ // metafor: n1i
+					name: "sampleSizeGroup1"
+					title: qsTr("Sample Size Group 1")
+					singleVariable: true
+					visible: (designValue == "independentGroups" && measurementValue != "countsPerTime") ||
+						(designValue == "variableAssociation" && measurementValue == "mixed")
+				}
+				
+				AssignedVariablesList
+				{ // metafor: n2i
+					name: "sampleSizeGroup2"
+					title: qsTr("Sample Size Group 2")
+					singleVariable: true
+					visible: (designValue == "independentGroups" && measurementValue != "countsPerTime") ||
+						(designValue == "variableAssociation" && measurementValue == "mixed")
+				}
+				
+				AssignedVariablesList
+				{ // metafor: ri
+					name: "correlation"
+					title: qsTr("Correlation")
+					singleVariable: true
+					visible: (designValue == "variableAssociation" && measurementValue == "quantitative") ||
+						(designValue == "repeatedMeasures" && measurementValue == "quantitative") ||
+						(designValue == "repeatedMeasures" && measurementValue == "binaryMarginal")
+				}
 
-			AssignedVariablesList
-			{ // metafor: m1i
-				name: "meanSample1"
-				title: qsTr("Mean: Sample 1")
-				singleVariable: true
-				visible: (designValue == "singleGroup" && measurementValue == "quantitative")
-			}
+				AssignedVariablesList
+				{ // metafor: pi
+					name: "proportionPlusPlus"
+					title: qsTr("Proportion +/+")
+					singleVariable: true
+					visible: (designValue == "repeatedMeasures" && measurementValue == "binaryMarginal")
+				}
 
-			AssignedVariablesList
-			{ // metafor: m1i
-				name: "meanTimePoint1"
-				title: qsTr("Mean: Time Point 1")
-				singleVariable: true
-				visible: (designValue == "repeatedMeasuresOrMatchedGroups" && measurementValue == "quantitative")
-			}
+				AssignedVariablesList
+				{ // metafor: ni
+					name: "sampleSize"
+					title: qsTr("Sample Size")
+					singleVariable: true
+					visible: (designValue == "variableAssociation" && measurementValue == "quantitative") ||
+						(designValue == "singleGroup" && (measurementValue == "quantitative" || measurementValue == "binary")) ||
+						(designValue == "repeatedMeasures" && measurementValue == "quantitative") ||
+						(designValue == "other" && measurementValue == "reliability") ||
+						(designValue == "other" && measurementValue == "partialCorrelation") ||
+						(designValue == "other" && measurementValue == "modelFit")
 
-			AssignedVariablesList
-			{ // metafor: m2i
-				name: "meanGroup2"
-				title: qsTr("Mean: Group 2")
-				singleVariable: true
-				visible: (designValue == "independentGroups" && measurementValue == "quantitative") || 
-				(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "PBIT" || effectSizeValue == "OR2DN" || effectSizeValue == "OR2DL"))
-			}
+				}
 
-			AssignedVariablesList
-			{ // metafor: m2i
-				name: "meanSample2"
-				title: qsTr("Mean: Sample 2")
-				singleVariable: true
-				visible: (designValue == "singleGroup" && measurementValue == "quantitative")
-			}
+				AssignedVariablesList
+				{ // metafor: di
+					name: "cohensD"
+					title: qsTr("Cohen's d")
+					singleVariable: true
+					visible: (designValue == "independentGroups" && measurementValue == "quantitative" && effectSizeValue == "SMD") ||
+						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "D2ORN" || effectSizeValue == "D2ORL")) ||
+						(designValue == "variableAssociation" && measurementValue == "mixed") ||
+						(designValue == "repeatedMeasures" && measurementValue == "quantitative" && effectSizeValue == "SMCC")
+				}
 
-			AssignedVariablesList
-			{ // metafor: m2i
-				name: "meanTimePoint2"
-				title: qsTr("Mean: Time Point 2")
-				singleVariable: true
-				visible: (designValue == "repeatedMeasuresOrMatchedGroups" && measurementValue == "quantitative")
-			}
+				AssignedVariablesList
+				{ // metafor: r2i
+					name: "rSquared"
+					title: qsTr("R-Squared")
+					singleVariable: true
+					visible: (designValue == "other" && measurementValue == "partialCorrelation" && (effectSizeValue == "SPCOR" || effectSizeValue == "ZSPCOR")) ||
+						(designValue == "other" && measurementValue == "modelFit")
+				}
 
-			AssignedVariablesList
-			{ // metafor: sd1i
-				name: "sdGroup1"
-				title: qsTr("SD: Group 1")
-				singleVariable: true
-				visible: (designValue == "independentGroups" && measurementValue == "quantitative") || 
-				(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "PBIT" || effectSizeValue == "OR2DN" || effectSizeValue == "OR2DL"))
-			}
+				AssignedVariablesList
+				{ // metafor: ti
+					name: "tStatistic"
+					title: qsTr("T-Statistic")
+					singleVariable: true
+					visible: (designValue == "independentGroups" && measurementValue == "quantitative" && effectSizeValue == "SMD") ||
+						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "D2ORN" || effectSizeValue == "D2ORL")) ||
+						(designValue == "variableAssociation" && measurementValue == "quantitative") ||
+						(designValue == "variableAssociation" && measurementValue == "mixed") ||
+						(designValue == "repeatedMeasures" && measurementValue == "quantitative" && effectSizeValue == "SMCC") ||
+						(designValue == "other" && measurementValue == "partialCorrelation")
+				}
 
-			AssignedVariablesList
-			{ // metafor: sd1i
-				name: "sdSample1"
-				title: qsTr("SD: Sample 1")
-				singleVariable: true
-				visible: (designValue == "singleGroup" && measurementValue == "quantitative")
-			}
+				AssignedVariablesList
+				{ // metafor: fi
+					name: "fStatistic"
+					title: qsTr("F-Statistic")
+					singleVariable: true
+					visible: (designValue == "other" && measurementValue == "modelFit")
+				}
 
-			AssignedVariablesList
-			{ // metafor: sd1i
-				name: "sdTimePoint1"
-				title: qsTr("SD: Time Point 1")
-				singleVariable: true
-				visible: (designValue == "repeatedMeasuresOrMatchedGroups" && measurementValue == "quantitative")
-			}
+				AssignedVariablesList
+				{ // metafor: ri
+					name: "semipartialCorrelation"
+					title: qsTr("(Semi)Partial Correlation")
+					singleVariable: true
+					visible: (designValue == "other" && measurementValue == "partialCorrelation")
+				}
 
-			AssignedVariablesList
-			{ // metafor: sd2i
-				name: "sdGroup2"
-				title: qsTr("SD: Group 2")
-				singleVariable: true
-				visible: (designValue == "independentGroups" && measurementValue == "quantitative") || 
-				(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "PBIT" || effectSizeValue == "OR2DN" || effectSizeValue == "OR2DL"))
-			}
+				AssignedVariablesList
+				{ // metafor: pi
+					name: "pValue"
+					title: qsTr("P-Value")
+					singleVariable: true
+					visible: (designValue == "independentGroups" && measurementValue == "quantitative" && effectSizeValue == "SMD") ||
+						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "D2ORN" || effectSizeValue == "D2ORL")) ||
+						(designValue == "variableAssociation" && measurementValue == "quantitative") ||
+						(designValue == "variableAssociation" && measurementValue == "mixed") ||
+						(designValue == "repeatedMeasures" && measurementValue == "quantitative" && effectSizeValue == "SMCC") ||
+						(designValue == "other" && measurementValue == "partialCorrelation") ||
+						(designValue == "other" && measurementValue == "modelFit")
+				}
 
-			AssignedVariablesList
-			{ // metafor: sd2i
-				name: "sdSample2"
-				title: qsTr("SD: Sample 2")
-				singleVariable: true
-				visible: (designValue == "singleGroup" && measurementValue == "quantitative")
-			}
 
-			AssignedVariablesList
-			{ // metafor: sd2i
-				name: "sdTimePoint2"
-				title: qsTr("SD: Time Point 2")
-				singleVariable: true
-				visible: (designValue == "repeatedMeasuresOrMatchedGroups" && measurementValue == "quantitative")
-			}
+				AssignedVariablesList
+				{ // metafor: yi
+					name: "effectSize"
+					title: qsTr("Effect Size")
+					singleVariable: true
+					visible: designValue == "reportedEffectSizes"
+				}
 
-			AssignedVariablesList
-			{ // metafor: xi
-				name: "eventFrequencies"
-				title: qsTr("Event Frequencies")
-				singleVariable: true
-				visible: (designValue == "singleGroup" && measurementValue == "binary")
-			}
+				AssignedVariablesList
+				{ // metafor: sei
+					name: "standardError"
+					title: qsTr("Standard Error")
+					singleVariable: true
+					visible: designValue == "reportedEffectSizes"
+				}
 
-			AssignedVariablesList
-			{ // metafor: mi
-				name: "complementFrequencies"
-				title: qsTr("Complement Frequencies / Group Means")
-				singleVariable: true
-				visible: (designValue == "singleGroup" && (measurementValue == "binary" || measurementValue == "quantitative"))
-			}
+				AssignedVariablesList
+				{ // metafor: vi
+					name: "samplingVariance"
+					title: qsTr("Sampling Variance")
+					singleVariable: true
+					visible: designValue == "reportedEffectSizes"
+				}
 
-			AssignedVariablesList
-			{ // metafor: ri
-				name: "rawCorrelations"
-				title: qsTr("Raw Correlation Coefficients")
-				singleVariable: true
-				visible: (designValue == "variableAssociation" && measurementValue == "quantitative")
-			}
+				AssignedPairsVariablesList
+				{
+					name: "95ConfidenceInterval"
+					title: qsTr("95% Confidence Interval")
+					singleVariable: true
+					visible: designValue == "reportedEffectSizes"
+				}
 
-			AssignedVariablesList
-			{ // metafor: ti
-				name: "tStatistics"
-				title: qsTr("T-Test Statistics")
-				singleVariable: true
-				visible: (designValue == "variableAssociation" && measurementValue == "quantitative")
-			}
+				AssignedVariablesList
+				{ // metafor: vtype for mixed designs with PHI or ZPHI
+					name: "samplingVarianceTypeMixed"
+					title: qsTr("Sampling Variance Type Mixed")
+					singleVariable: true
+					visible:  (designValue == "variableAssociation" && measurementValue == "binary" && (effectSizeValue == "PHI" || effectSizeValue == "ZPHI") && samplingVarianceType.value == "mixed") ||
+						(designValue == "variableAssociation" && measurementValue == "mixed" && (effectSizeValue == "RPB" || effectSizeValue == "ZPB") && samplingVarianceType.value == "mixed")
+				}
 
-			AssignedVariablesList
-			{ // metafor: ti
-				name: "totalPersonTimes"
-				title: qsTr("Total Person-Times")
-				singleVariable: true
-				visible: (designValue == "singleGroup" && measurementValue == "countsPerTime")
-			}
-
-			AssignedVariablesList
-			{ // metafor: fi
-				name: "fStatistics"
-				title: qsTr("F-Test Statistics")
-				singleVariable: true
-				visible: (designValue == "variableAssociation" && measurementValue == "quantitative")
-			}
-
-			AssignedVariablesList
-			{ // metafor: pi
-				name: "pValues"
-				title: qsTr("P-Values")
-				singleVariable: true
-				visible: (designValue == "variableAssociation" && measurementValue == "quantitative")
-			}
-
-			AssignedVariablesList
-			{ // metafor: sdi
-				name: "standardDeviations"
-				title: qsTr("Standard Deviations")
-				singleVariable: true
-				visible: (designValue == "singleGroup" && measurementValue == "quantitative")
-			}
-
-			AssignedVariablesList
-			{ // metafor: r2i
-				name: "rSquared"
-				title: qsTr("R-Squared Values")
-				singleVariable: true
-				visible: (designValue == "other" && (effectSizeValue == "R2" || effectSizeValue == "ZR2"))
-			}
-
-			AssignedVariablesList
-			{ // metafor: ni
-				name: "sampleSizes"
-				title: qsTr("Sample/Group Sizes")
-				singleVariable: true
-				visible: (designValue == "singleGroup" && (measurementValue == "quantitative" || measurementValue == "binary"))
-			}
-
-			AssignedVariablesList
-			{ // metafor: yi
-				name: "observedEffectSizes"
-				title: qsTr("Observed Effect Sizes/Outcomes")
-				singleVariable: true
-				visible: (designValue == "singleGroup" && (measurementValue == "quantitative" || measurementValue == "binary"))
-			}
-
-			AssignedVariablesList
-			{ // metafor: vi
-				name: "samplingVariances"
-				title: qsTr("Sampling Variances")
-				singleVariable: true
-				visible: (designValue == "singleGroup" && (measurementValue == "quantitative" || measurementValue == "binary"))
-			}
-
-			AssignedVariablesList
-			{ // metafor: sei
-				name: "standardErrors"
-				title: qsTr("Standard Errors")
-				singleVariable: true
-				visible: (designValue == "singleGroup" && (measurementValue == "quantitative" || measurementValue == "binary"))
+				AssignedVariablesList
+				{
+					name: "selected"
+					title: qsTr("Subset")
+					singleVariable: true
+				}
 			}
 
 			Group
 			{
 				title: qsTr("Frequency/event cell adjustment")
+				columns: 3
+				visible: (designValue == "independentGroups" && measurementValue == "binary") ||
+						(designValue == "independentGroups" && measurementValue == "countsPerTime") ||
+						(designValue == "independentGroups" && measurementValue == "mixed"  && (effectSizeValue == "PBIT" || effectSizeValue == "OR2DN" || effectSizeValue == "OR2DL")) ||
+						(designValue == "variableAssociation" && measurementValue == "binary") ||
+						(designValue == "singleGroup" && measurementValue == "binary") ||
+						(designValue == "singleGroup" && measurementValue == "countsPerTime")
 
 				DoubleField
 				{
 					label: qsTr("Add")
 					name: "add"
-					visible: (designValue == "independentGroups" && measurementValue == "binary") ||
-							(designValue == "independentGroups" && measurementValue == "countsPerTime") ||
-							(designValue == "repeatedMeasuresOrMatchedGroups" && measurementValue == "binary") ||
-							(designValue == "singleGroup" && measurementValue == "binary") ||
-							(designValue == "singleGroup" && measurementValue == "countsPerTime") ||
-							(designValue == "variableAssociation" && measurementValue == "binary") ||
-							(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "D2ORN" || effectSizeValue == "D2ORL"))
-
-					defaultValue: (designValue == "independentGroups" && measurementValue == "binary" && effectSizeValue == "RR") ? 0.5 :
-								(designValue == "independentGroups" && measurementValue == "binary" && effectSizeValue == "OR") ? 0.5 :
-								(designValue == "independentGroups" && measurementValue == "binary" && effectSizeValue == "RD") ? 0 :
-								(designValue == "independentGroups" && measurementValue == "binary" && effectSizeValue == "AS") ? 0 :
-								(designValue == "independentGroups" && measurementValue == "binary" && effectSizeValue == "PETO") ? 0.5 :
-								(designValue == "independentGroups" && measurementValue == "countsPerTime") ? 0.5 :
-								(designValue == "repeatedMeasuresOrMatchedGroups" && measurementValue == "binary") ? 0.5 :
-								(designValue == "singleGroup" && measurementValue == "binary" && effectSizeValue == "PR") ? 0.5 :
-								(designValue == "singleGroup" && measurementValue == "binary" && effectSizeValue == "PLN") ? 0 :
-								(designValue == "singleGroup" && measurementValue == "binary" && effectSizeValue == "PLO") ? 0 :
-								(designValue == "singleGroup" && measurementValue == "binary" && effectSizeValue == "PAS") ? 0 :
-								(designValue == "singleGroup" && measurementValue == "binary" && effectSizeValue == "PFT") ? 0.5 :
-								(designValue == "singleGroup" && measurementValue == "countsPerTime") ? 0.5 :
-								(designValue == "variableAssociation" && measurementValue == "binary") ? 0.5 :
-								(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "D2ORN" || effectSizeValue == "D2ORL")) ? 0.5 :
-								0
-				}	
+					enabled: to.value != "none"
+					defaultValue: (effectSizeValue == "AS" || effectSizeValue == "PHI" || effectSizeValue == "ZPHI" || 
+					effectSizeValue == "RTET" || effectSizeValue == "ZTET" || effectSizeValue == "IRSD" ||
+					effectSizeValue == "PAS" || effectSizeValue == "PFT" || effectSizeValue == "IRS"  || effectSizeValue == "IRFT" ) ? 0 : 0.5
+				}
 
 				DropDown
 				{
 					name: "to"
+					id: to
 					label: qsTr("To")
+					startValue: "onlyZero"
 					values: [
 						{ label: qsTr("All"), value: "all" },
 						{ label: qsTr("Only zero"), value: "onlyZero" },
 						{ label: qsTr("If any zero"), value: "ifAnyZero" },
 						{ label: qsTr("None"), value: "none" }
 					]
-					visible: (design.value == "independentGroups" && measurement.value == "binary") ||
-							(design.value == "independentGroups" && measurement.value == "countsPerTime") ||
-							(design.value == "repeatedMeasuresOrMatchedGroups" && measurement.value == "binary") ||
-							(design.value == "singleGroup" && measurement.value == "binary") ||
-							(design.value == "singleGroup" && measurement.value == "countsPerTime") ||
-							(design.value == "variableAssociation" && measurement.value == "binary") ||
-							(design.value == "independentGroups" && measurement.value == "mixed" && (effectSize.value == "D2ORN" || effectSize.value == "D2ORL"))
-					//defaultValue: "onlyZero"
+					//TODO: defaultValue: "onlyZero"
 				}
 
 				RadioButtonGroup
 				{
 					name: "dropStudiesWithNoCasesOrEvents"
 					title: qsTr("Drop studies with no cases/events")
-					columns: 1
-					visible: (design.value == "independentGroups" && measurement.value == "binary") ||
-							(design.value == "independentGroups" && measurement.value == "countsPerTime") ||
-							(design.value == "repeatedMeasuresOrMatchedGroups" && measurement.value == "binary") ||
-							(design.value == "singleGroup" && measurement.value == "binary") ||
-							(design.value == "singleGroup" && measurement.value == "countsPerTime") ||
-							(design.value == "variableAssociation" && measurement.value == "binary") ||
-							(design.value == "independentGroups" && measurement.value == "mixed" && (effectSize.value == "D2ORN" || effectSize.value == "D2ORL"))
+					columns: 2
+					radioButtonsOnSameRow: true
 
 					RadioButton
 					{
-						value: "true"
+						value: "yes"
 						label: qsTr("Yes")
-						checked: true
 					}
 
 					RadioButton
 					{
-						value: "false"
+						value: "no"
 						label: qsTr("No")
+						checked: true
 					}
 				}
 			}
 
 			DropDown
 			{
-				name: "samplingVarianceType"
-				label: qsTr("Sampling variance type")
+				name:		"samplingVarianceType"
+				id:			samplingVarianceType
+				label:		qsTr("Sampling variance type")
 				values: (function() {
-					if ((design.value == "independentGroups" && measurement.value == "quantitative") ||
-						(design.value == "independentGroups" && measurement.value == "mixed" && (effectSize.value == "PBIT" || effectSize.value == "OR2DN" || effectSize.value == "OR2DL")) ||
-						(design.value == "independentGroups" && measurement.value == "binary" && effectSize.value == "RR") ||
-						(design.value == "independentGroups" && measurement.value == "binary" && effectSize.value == "OR") ||
-						(design.value == "independentGroups" && measurement.value == "countsPerTime")) {
+					if (designValue == "independentGroups" && measurementValue == "quantitative") {
+						if (effectSizeValue == "MD") {
+							return [
+									{ label: qsTr("LS"), value: "LS" },
+									{ label: qsTr("HO"), value: "HO" }
+								];	
+						} else if (effectSizeValue == "SMD" || effectSizeValue == "SMD1") {
+							return [
+									{ label: qsTr("LS"), value: "LS" },
+									{ label: qsTr("LS2"), value: "LS2" },
+									{ label: qsTr("UB"), value: "UB" },
+									{ label: qsTr("AV"), value: "AV" }
+								];	
+						}  else if (effectSizeValue == "ROM") {
+							return [
+									{ label: qsTr("LS"), value: "LS" },
+									{ label: qsTr("HO"), value: "HO" },
+									{ label: qsTr("AV"), value: "AV" },
+									{ label: qsTr("AVHO"), value: "AVHO" }
+								];	
+						} else {
+							return [];
+						}
+					} else if (designValue == "variableAssociation" && measurementValue == "quantitative") {
+						if (effectSizeValue == "COR" || effectSizeValue == "ZCOR") {
+							return [
+									{ label: qsTr("LS"), value: "LS" },
+									{ label: qsTr("AV"), value: "AV" }
+								];	
+						} else if (effectSizeValue == "UCOR") {
+							return [
+									{ label: qsTr("LS"), value: "LS" },
+									{ label: qsTr("UB"), value: "UB" },
+									{ label: qsTr("AV"), value: "AV" }
+								];
+						} else {
+							return [];
+						} 
+					} else if (designValue == "variableAssociation" && measurementValue == "binary") {
+						if (effectSizeValue == "PHI" || effectSizeValue == "ZPHI") {
+							return [
+									{ label: qsTr("ST"), value: "ST" },
+									{ label: qsTr("CS"), value: "CS" },
+									{ label: qsTr("mixed"), value: "mixed" }
+								];	
+						} else {
+							return [];
+						} 
+					} else if (designValue == "variableAssociation" && measurementValue == "mixed") {
+						if (effectSizeValue == "RPB" || effectSizeValue == "ZPB") {
+							return [
+									{ label: qsTr("ST"), value: "ST" },
+									{ label: qsTr("CS"), value: "CS" },
+									{ label: qsTr("mixed"), value: "mixed" }
+								];	
+						} else {
+							return [];
+						}
+					} else if (designValue == "other" && measurementValue == "modelFit") {
 						return [
-							{ label: qsTr("LS"), value: "LS" },
-							{ label: qsTr("LS2"), value: "LS2" },
-							{ label: qsTr("UB"), value: "UB" },
-							{ label: qsTr("AV"), value: "AV" },
-							{ label: qsTr("HO"), value: "HO" }
-						];
-					} else if ((design.value == "variableAssociation" && measurement.value == "quantitative") ||
-							(design.value == "variableAssociation" && measurement.value == "binary") ||
-							(design.value == "variableAssociation" && measurement.value == "mixed") ||
-							(design.value == "singleGroup" && measurement.value == "quantitative") ||
-							(design.value == "repeatedMeasuresOrMatchedGroups" && measurement.value == "quantitative") ||
-							(design.value == "singleGroup" && measurement.value == "binary") ||
-							(design.value == "singleGroup" && measurement.value == "countsPerTime") ||
-							(design.value == "independentGroups" && measurement.value == "mixed" && (effectSize.value == "D2ORN" || effectSize.value == "D2ORL"))) {
-						return [
-							{ label: qsTr("LS"), value: "LS" },
-							{ label: qsTr("AV"), value: "AV" }
-						];
-					} else if ((design.value == "repeatedMeasuresOrMatchedGroups" && measurement.value == "binary") ||
-							(design.value == "singleGroup" && measurement.value == "binary" && effectSize.value == "PLN") ||
-							(design.value == "singleGroup" && measurement.value == "binary" && effectSize.value == "PLO")) {
-						return [
-							{ label: qsTr("LS"), value: "LS" },
-							{ label: qsTr("AV"), value: "AV" },
-							{ label: qsTr("HO"), value: "HO" }
-						];
+									{ label: qsTr("LS"), value: "LS" },
+									{ label: qsTr("LS2"), value: "LS2" },
+									{ label: qsTr("AV"), value: "AV" },
+									{ label: qsTr("A2"), value: "AV2" }
+								];	
 					} else {
 						return [];
 					}
 				})()
-				visible: (design.value == "independentGroups" && measurement.value == "quantitative") ||
-						(design.value == "independentGroups" && measurement.value == "binary") ||
-						(design.value == "independentGroups" && measurement.value == "countsPerTime") ||
-						(design.value == "independentGroups" && measurement.value == "mixed") ||
-						(design.value == "variableAssociation" && measurement.value == "quantitative") ||
-						(design.value == "variableAssociation" && measurement.value == "binary") ||
-						(design.value == "variableAssociation" && measurement.value == "mixed") ||
-						(design.value == "singleGroup" && measurement.value == "quantitative") ||
-						(design.value == "repeatedMeasuresOrMatchedGroups" && measurement.value == "quantitative") ||
-						(design.value == "singleGroup" && measurement.value == "binary") ||
-						(design.value == "singleGroup" && measurement.value == "countsPerTime")
+				visible: (designValue == "independentGroups" && measurementValue == "quantitative" && (effectSizeValue == "MD" || effectSizeValue == "SMD" || effectSizeValue == "SMD1" || effectSizeValue == "ROM")) ||
+						(designValue == "variableAssociation" && measurementValue == "quantitative" && (effectSizeValue == "COR" || effectSizeValue == "ZCOR" || effectSizeValue == "UCOR")) ||
+						(designValue == "variableAssociation" && measurementValue == "binary"  && (effectSizeValue == "PHI" || effectSizeValue == "ZPHI")) ||
+						(designValue == "variableAssociation" && measurementValue == "mixed"  && (effectSizeValue == "RPB" || effectSizeValue == "ZPB")) ||
+						(designValue == "other" && measurementValue == "modelFit")
 			}
 			
+			Divider { }
 
+		}
+
+	}
+
+	Section
+	{
+		title: qsTr("Options")
+
+		CheckBox
+		{
+			id:			computeSamplingVariance
+			name:		"computeSamplingVariance"
+			text:		qsTr("Compute sampling variance")
+			checked:	false
+		}
+
+		Group
+		{
+			title:	qsTr("Computed Columns Names")
+
+			TextField
+			{
+				name:			"computedcolumnsNamesEffectSize"
+				label:			qsTr("Effect size")
+				defaultValue:	"computed effect size"
+			}
+
+			TextField
+			{
+				name:			"computedcolumnsNamesStandardError"
+				label:			qsTr("Standard error")
+				defaultValue:	"computed standard error"
+				visible:		!computeSamplingVariance.checked
+			}
+
+			TextField
+			{
+				name:			"computedcolumnsNamesSamplingVariance"
+				label:			qsTr("Sampling variance")
+				defaultValue:	"computed sampling variance"
+				visible:		computeSamplingVariance.checked
+			}
+
+			TextField
+			{
+				name:			"computedcolumnsNamesEffectSizeType"
+				label:			qsTr("Effect size type")
+				defaultValue:	"computed effect size type"
+			}
 
 		}
 
