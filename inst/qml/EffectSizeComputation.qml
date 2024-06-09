@@ -244,7 +244,7 @@ Form
 
 	ComponentsList
 	{
-		name:		"vars"
+		name:		"variables"
 		source:		"effectSizeType"
 		rowSpacing: 20
 
@@ -380,7 +380,7 @@ Form
 
 				AssignedVariablesList
 				{ // metafor: di
-					name: "group2Outcome2"
+					name: "group2OutcomeMinus"
 					title: qsTr("Group 2/Outcome Minus")
 					singleVariable: true
 					visible: (designValue == "independentGroups" && measurementValue == "binary") ||
