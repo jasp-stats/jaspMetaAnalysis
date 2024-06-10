@@ -1,12 +1,13 @@
 
 EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
 
-  saveRDS(options, file = "C:/JASP/options.RDS")
-  saveRDS(dataset, file = "C:/JASP/dataset.RDS")
+#  saveRDS(options, file = "C:/JASP/options.RDS")
+#  saveRDS(dataset, file = "C:/JASP/dataset.RDS")
 
-  return(NULL)
+
 
   dataset     <- .escReadDataset(dataset, options)
+  return(NULL)
   dataOutput  <- .escComputeEffectSizes(dataset, options)
 
   .escComputeSummaryTable(jaspResults, dataset, options, dataOutput)
