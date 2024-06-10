@@ -29,6 +29,7 @@ Form
 	{
 		id:		effectSizeType
 		name:	"effectSizeType"
+		headerLabels:	["Design", "Measurement", "Effect size"]
 
 		rowComponent: RowLayout
 		{
@@ -40,11 +41,15 @@ Form
 			property string measurementLabel:	measurement.label
 			property string effectSizeLabel:	effectSize.label
 
+			Text
+			{
+				text: qsTr("Step %1").arg((rowIndex + 1))
+			}
+
 			DropDown
 			{
 				id:			design
 				name:		"design"
-				label:		qsTr("Design")
 				values: [
 				{ label: qsTr("Independent groups"),		value: "independentGroups"},
 				{ label: qsTr("Variable association"),		value: "variableAssociation"},
@@ -59,7 +64,6 @@ Form
 			{
 				id:			measurement
 				name:		"measurement"
-				label:		qsTr("Measurement")
 				visible:	design.value != "reportedEffectSizes"
 				values: (function() {
 					if (design.value == "independentGroups") {
@@ -104,7 +108,6 @@ Form
 			{
 				id:			effectSize
 				name:		"effectSize"
-				label:		qsTr("Effect size")
 				visible:	design.value != "reportedEffectSizes"
 				values: (function() {
 					if (design.value == "independentGroups" && measurement.value == "quantitative") {
@@ -260,6 +263,7 @@ Form
 			VariablesForm
 			{
 				removeInvisibles: true
+				preferredWidth: parent.width - 2 * jaspTheme.contentMargin
 				// TODO: dynamically set proper height
 
 				AvailableVariablesList
