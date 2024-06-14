@@ -38,7 +38,7 @@ Form
 			name:				"effectSize"
 			title:				qsTr("Effect Size")
 			singleVariable:		true
-			suggestedColumns:	["scale"]
+			allowedColumns:		["scale"]
 		}
 
 		AssignedVariablesList
@@ -46,7 +46,7 @@ Form
 			name:				"effectSizeSe"
 			title:				qsTr("Effect Size Standard Error")
 			singleVariable:		true
-			suggestedColumns:	["scale"]
+			allowedColumns:		["scale"]
 		}
 
 		DropDown
@@ -75,14 +75,14 @@ Form
 			id:					covariates
 			name:				"covariates"
 			title:				qsTr("Covariates")
-			suggestedColumns:	["scale"]
+			allowedColumns:		["scale"]
 		}
 
 		AssignedVariablesList
 		{
 			name:				"factors"
 			title:				qsTr("Factors")
-			suggestedColumns:	["ordinal", "nominal"]
+			allowedColumns:		["nominal"]
 		}
 
 		AssignedVariablesList
@@ -90,7 +90,7 @@ Form
 			name:				"clustering"
 			title:				qsTr("Clustering")
 			singleVariable:		true
-			suggestedColumns:	["ordinal", "nominal"]
+			allowedColumns:		["nominal"]
 		}	
 	}
 

@@ -28,12 +28,12 @@ Form
 	{
 		preferredHeight: 400 * preferencesModel.uiScale
 		AvailableVariablesList { name: "allVariables" }
-		AssignedVariablesList { name: "effectSize";	title: qsTr("Effect Size"); singleVariable: true; suggestedColumns: ["scale"] }
-		AssignedVariablesList { name: "effectSizeSe"; title: qsTr("Effect Size Standard Error"); singleVariable: true; suggestedColumns: ["scale"] }
+		AssignedVariablesList { name: "effectSize";	title: qsTr("Effect Size"); singleVariable: true; allowedColumns: ["scale"] }
+		AssignedVariablesList { name: "effectSizeSe"; title: qsTr("Effect Size Standard Error"); singleVariable: true; allowedColumns: ["scale"] }
 		MA.ClassicalMetaAnalysisMethod{ visible: true}
-		AssignedVariablesList { name: "studyLabel"; title: qsTr("Study Labels"); singleVariable: true; suggestedColumns: ["ordinal", "nominal"] }
-		AssignedVariablesList { name: "covariates";	title: qsTr("Covariates"); suggestedColumns: ["scale"] }
-		AssignedVariablesList { name: "factors"; title: qsTr("Factors"); suggestedColumns: ["ordinal", "nominal"] }
+		AssignedVariablesList { name: "studyLabel"; title: qsTr("Study Labels"); singleVariable: true; allowedColumns: ["nominal"] }
+		AssignedVariablesList { name: "covariates";	title: qsTr("Covariates"); allowedColumns: ["scale"] }
+		AssignedVariablesList { name: "factors"; title: qsTr("Factors"); allowedColumns: ["nominal"] }
 	}
 
 	Section
