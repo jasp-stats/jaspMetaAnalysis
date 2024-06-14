@@ -268,120 +268,8 @@ msgid "Negative"
 msgstr "負向"
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Effect"
-msgstr "效果"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Heterogeneity"
-msgstr "異質性"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Weight function"
-msgstr "加權函數"
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Set null priors"
 msgstr "設定虛無先驗"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Inference"
-msgstr "推論"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Models overview"
-msgstr "模型概述"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Inclusion"
-msgstr "包含"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Order"
-msgstr "制定"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Posterior prob."
-msgstr "後驗機率."
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Individual models"
-msgstr "個體模型"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Single model"
-msgstr "單一模型"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "CI width"
-msgstr "信賴區間寬度"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Plots"
-msgstr "圖"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Pooled estimates"
-msgstr "綜合估計"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Forest plot"
-msgstr "森林圖"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Show"
-msgstr "展現"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Ascending"
-msgstr "上升的"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Descending"
-msgstr "下降的"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Weights"
-msgstr "權重"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Rescale x-axis"
-msgstr "重新縮放x軸"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Type"
-msgstr "類型"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Model averaged"
-msgstr "模型平均"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Conditional"
-msgstr "有條件的"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Model number"
-msgstr "模型號碼"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "MCMC Diagnostics"
-msgstr "馬可夫鏈蒙特卡羅診斷"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Plot"
-msgstr "圖"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Trace"
-msgstr "痕跡"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Autocorrelation"
-msgstr "自相關"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Advanced"
-msgstr "進階的"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "log(OR)"
@@ -390,46 +278,6 @@ msgstr "對數"
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Fisher's z"
 msgstr "費雪z檢定"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Adaptation"
-msgstr "適應"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Burnin"
-msgstr "伯寧(Burnin)"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Chains"
-msgstr "鏈"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Thin"
-msgstr "薄的"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Autofit"
-msgstr "自動調整"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Maximum fitting time"
-msgstr "最大適配時間"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "hours"
-msgstr "小時"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "minutes"
-msgstr "分鐘"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "seconds"
-msgstr "秒數"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Save the fitted model"
-msgstr "儲存最適模型"
 
 msgctxt "SelectionModels|"
 msgid "Effect sizes & SE"
@@ -1131,86 +979,6 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Prior scale"
 msgstr ""
 
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "vs. Best"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "vs. Previous"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Bayes factor"
-msgstr "貝氏因子"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Output scale"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Shorten prior names"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "PET-PEESE"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Order by"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Estimate"
-msgstr "估計值"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Bayesian updating"
-msgstr "貝氏更新"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Posterior estimates"
-msgstr "後驗估計"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "PET"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "PEESE"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Estimation scale"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "R-hat"
-msgstr "R-hat 向量"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Effective sample size"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "MCMC error"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "MCMC error / SD"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Extend samples"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Remove failed models"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Rebalance component probability on model failure"
-msgstr ""
-
 msgctxt "Description|"
 msgid "Classical"
 msgstr "古典"
@@ -1871,50 +1639,6 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Prior distribution plots"
 msgstr ""
 
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Conditional parameter estimates"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "BF comparison"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Marginal likelihood"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Posterior probability"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "logOR"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Alphabetical"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Prior distribution"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Overview table"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Posterior samples density"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "MCMC"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Samples"
-msgstr ""
-
 msgctxt "SelectionModels|"
 msgid "P-value frequency table"
 msgstr ""
@@ -1946,3 +1670,477 @@ msgstr ""
 msgctxt "PredictionPerformanceInference|"
 msgid "Normal/Logit"
 msgstr ""
+
+msgctxt "Description|"
+msgid "Binomial Meta-Analysis"
+msgstr ""
+
+msgctxt "Description|"
+msgid "Bayesian Binomial Meta-Analysis"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Successes (group 1)"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Successes (group 2)"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Observations (group 1)"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Observations (group 2)"
+msgstr ""
+
+#, fuzzy
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Study Labels"
+msgstr "研究標籤"
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Prior distribution plots"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Models"
+msgstr ""
+
+#, fuzzy
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Set null priors"
+msgstr "設定虛無先驗"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Advanced"
+msgstr "進階的"
+
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Estimation scale"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Fisher's z"
+msgstr "費雪z檢定"
+
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Cohen's d"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "logOR"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "MCMC"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Adaptation"
+msgstr "適應"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Burnin"
+msgstr "伯寧(Burnin)"
+
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Samples"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Chains"
+msgstr "鏈"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Thin"
+msgstr "薄的"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Autofit"
+msgstr "自動調整"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "R-hat"
+msgstr "R-hat 向量"
+
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Effective sample size"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "MCMC error"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "MCMC error / SD"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Maximum fitting time"
+msgstr "最大適配時間"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "hours"
+msgstr "小時"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "minutes"
+msgstr "分鐘"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "seconds"
+msgstr "秒數"
+
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Extend samples"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Remove failed models"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Rebalance component probability on model failure"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Save the fitted model"
+msgstr "儲存最適模型"
+
+msgctxt "RobustBayesianMetaAnalysisBaseline|"
+msgid "Baseline"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisBaseline|"
+msgid "Baseline (null)"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisBaseline|"
+msgid "Distribution"
+msgstr "分布"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisBaseline|"
+msgid "Parameters"
+msgstr "參數"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisBaseline|"
+msgid "Truncation"
+msgstr "捨去"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisBaseline|"
+msgid "Prior weights"
+msgstr "先驗權重"
+
+msgctxt "RobustBayesianMetaAnalysisBaseline|"
+msgid "Beta(α,β)"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisBaseline|"
+msgid "lower"
+msgstr "下介"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisBaseline|"
+msgid "upper"
+msgstr "上介"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisBaseline|"
+msgid "Weight"
+msgstr "權重"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "MCMC Diagnostics"
+msgstr "馬可夫鏈蒙特卡羅診斷"
+
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "Overview table"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "Plot"
+msgstr "圖"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "Effect"
+msgstr "效果"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "Heterogeneity"
+msgstr "異質性"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "Weights"
+msgstr "權重"
+
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "PET"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "PEESE"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "Type"
+msgstr "類型"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "Trace"
+msgstr "痕跡"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "Autocorrelation"
+msgstr "自相關"
+
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "Posterior samples density"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "Single model"
+msgstr "單一模型"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Inference"
+msgstr "推論"
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Conditional parameter estimates"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Models overview"
+msgstr "模型概述"
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "BF comparison"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Inclusion"
+msgstr "包含"
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "vs. Best"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "vs. Previous"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Order"
+msgstr "制訂"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Model number"
+msgstr "模型號碼"
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Marginal likelihood"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Posterior probability"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Individual models"
+msgstr "個體模型"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Single model"
+msgstr "單一模型"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "CI width"
+msgstr "信賴區間寬度"
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Output scale"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Cohen's d"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Fisher's z"
+msgstr "費雪z檢定"
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "logOR"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "OR"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Correlation"
+msgstr "相關係數"
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Shorten prior names"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Plots"
+msgstr "圖"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Forest plot"
+msgstr "森林圖"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Order"
+msgstr "制訂"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Ascending"
+msgstr "上升的"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Descending"
+msgstr "下降的"
+
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Alphabetical"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Type"
+msgstr "類型"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Model averaged"
+msgstr "模型平均"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Conditional"
+msgstr "有條件的"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Pooled estimates"
+msgstr "綜合估計"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Effect"
+msgstr "效果"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Heterogeneity"
+msgstr "異質性"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Weight function"
+msgstr "加權函數"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Rescale x-axis"
+msgstr "重新縮放x軸"
+
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "PET-PEESE"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Prior distribution"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Individual models"
+msgstr "個體模型"
+
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Order by"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Model number"
+msgstr "模型號碼"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Estimate"
+msgstr "估計值"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Bayes factor"
+msgstr "貝氏因子"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Posterior prob."
+msgstr "後驗機率."
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Show"
+msgstr "展現"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Bayesian updating"
+msgstr "貝氏更新"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Posterior estimates"
+msgstr "後驗估計"

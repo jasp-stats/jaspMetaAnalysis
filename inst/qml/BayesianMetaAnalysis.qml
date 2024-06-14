@@ -68,7 +68,7 @@ Form
 			name: 			"studyLabel"
 			title: 			qsTr("Study Labels")
 			singleVariable:	true
-			allowedColumns: ["nominalText"]
+			allowedColumns: ["nominal"]
 		}
 	}
 

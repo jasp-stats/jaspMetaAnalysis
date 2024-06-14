@@ -108,7 +108,7 @@ Item
 			name: 				"studyLabel"
 			title: 				qsTr("Study Labels")
 			singleVariable:		true
-			allowedColumns:		["nominal","nominalText"]
+			allowedColumns:		["nominal"]
 		}
 	}
 

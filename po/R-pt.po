@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2023-12-02 02:34\n"
+"POT-Creation-Date: 2024-04-20 02:33\n"
 "PO-Revision-Date: 2022-08-29 00:27+0000\n"
 "Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
@@ -16,6 +16,57 @@ msgstr ""
 "X-Language: en_US\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
+
+msgid ""
+"The study labels contain invalid characters. Please, remove them before "
+"running the analysis."
+msgstr ""
+
+#, fuzzy
+msgid "Prior Plots"
+msgstr "Diagramas"
+
+msgid "Effect"
+msgstr "Efeito"
+
+msgid "Heterogeneity"
+msgstr ""
+
+msgid "Null"
+msgstr ""
+
+msgid "Alternative"
+msgstr ""
+
+#, fuzzy
+msgid "Model Preview"
+msgstr "Nome do modelo"
+
+msgid ""
+"Please specify a prior distribution for each parameter in the Models "
+"specification section (either null or alternative)."
+msgstr ""
+
+msgid "Model Summary"
+msgstr "Resumo do modelo"
+
+msgid "Models"
+msgstr "Modelos"
+
+msgid "P(M)"
+msgstr "P(M)"
+
+msgid ""
+"The analysis will estimate multiple meta-analytic models using MCMC and "
+"might require a prolonged time to complete."
+msgstr ""
+
+#, fuzzy
+msgid "Model Specification Preview"
+msgstr "Nome do modelo"
+
+msgid "Prior Distribution"
+msgstr ""
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr "O limite inferior anterior não é menor do que o limite superior."
@@ -193,9 +244,6 @@ msgstr ""
 #, fuzzy
 msgid "Effect Size"
 msgstr "Tamanho de efeito"
-
-msgid "Heterogeneity"
-msgstr ""
 
 msgid "Effect size"
 msgstr "Tamanho do Efeito"
@@ -580,11 +628,6 @@ msgstr ""
 msgid "%g%% Confidence Interval"
 msgstr "Intervalo de Confiança"
 
-msgid ""
-"The study labels contain invalid characters. Please, remove them before "
-"running the analysis."
-msgstr ""
-
 msgid "%s%% CI"
 msgstr "%s%% IC"
 
@@ -709,6 +752,12 @@ msgstr ""
 msgid "The priors for publication bias were set incorrectly."
 msgstr ""
 
+msgid "Publication Bias"
+msgstr ""
+
+msgid "Baseline"
+msgstr ""
+
 msgid "Median"
 msgstr "Mediana"
 
@@ -736,53 +785,14 @@ msgstr "Tamanho do efeito"
 msgid "Heterogeneity (%s)"
 msgstr "Testes de homogeneidade"
 
-#, fuzzy
-msgid "Prior Plots"
-msgstr "Diagramas"
-
-msgid "Effect"
-msgstr "Efeito"
-
-msgid "Publication Bias"
-msgstr ""
-
-msgid "Null"
-msgstr ""
-
-msgid "Alternative"
-msgstr ""
-
-#, fuzzy
-msgid "Model Preview"
-msgstr "Nome do modelo"
-
-msgid ""
-"Please specify a prior distribution for each parameter in the Models "
-"specification section (either null or alternative)."
-msgstr ""
-
-msgid "Model Summary"
-msgstr "Resumo do modelo"
-
-msgid "Models"
-msgstr "Modelos"
-
-msgid "P(M)"
-msgstr "P(M)"
-
 msgid "Publication bias"
 msgstr ""
 
-msgid ""
-"The analysis will estimate multiple meta-analytic models using MCMC and "
-"might require a prolonged time to complete."
-msgstr ""
-
 #, fuzzy
-msgid "Model Specification Preview"
-msgstr "Nome do modelo"
+msgid "log(OR)"
+msgstr "log(BF%s)"
 
-msgid "Prior Distribution"
+msgid "OR"
 msgstr ""
 
 msgid "The specified path does not lead to an existing file."
@@ -937,6 +947,11 @@ msgstr ""
 msgid "max(R-hat)"
 msgstr ""
 
+msgid ""
+"MCMC Diagnostics plots are created once both the plotted parameter ('Plot') "
+"and the plot type ('Type') options are selected."
+msgstr ""
+
 #, fuzzy
 msgid "Weights"
 msgstr "WLS Ponderado"
@@ -960,6 +975,14 @@ msgid "Posterior samples densities"
 msgstr "Amostras posteriores"
 
 msgid "Model %i does not contain any of the selected parameters."
+msgstr ""
+
+msgid ""
+"All models failed to converge under the MCMC convergence criteria. Please "
+"update the MCMC settings."
+msgstr ""
+
+msgid "All models failed to converge. Please update the MCMC settings."
 msgstr ""
 
 msgid ""
