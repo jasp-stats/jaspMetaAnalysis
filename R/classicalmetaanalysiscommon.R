@@ -19,8 +19,20 @@
 
   .maFitModel(jaspResults, dataset, options)
   .maSummaryTable(jaspResults, dataset, options)
-  .maCoefficientTable(jaspResults, dataset, options, "effectSize")
-  .maCoefficientTable(jaspResults, dataset, options, "heterogeneity")
+
+  # meta-regression tables
+  if (options[["metaregressionTermsTests"]]) {
+    .maTermsTable(jaspResults, dataset, options, "effectSize")
+    .maTermsTable(jaspResults, dataset, options, "heterogeneity")
+  }
+  if (options[["metaregressionCoefficientEstimates"]]) {
+    .maCoefficientEstimatesTable(jaspResults, dataset, options, "effectSize")
+    .maCoefficientEstimatesTable(jaspResults, dataset, options, "heterogeneity")
+  }
+  if (options[["metaregressionCoefficientCorrelationMatrix"]]) {
+    .maCoefficientCorrelationMatrixTable(jaspResults, dataset, options, "effectSize")
+    .maCoefficientCorrelationMatrixTable(jaspResults, dataset, options, "heterogeneity")
+  }
 
   return()
 }
@@ -136,9 +148,8 @@
     # dispatch columns based on the test type
     moderatorsTable$addColumnInfo(name = "stat", type = "number",   title = if(.maIsMetaregressionFtest(options)) gettext("F")   else gettext("QM"))
     moderatorsTable$addColumnInfo(name = "df1",  type = "integer",  title = if(.maIsMetaregressionFtest(options)) gettext("df1") else gettext("df"))
-    if (.maIsMetaregressionFtest(options)) {
+    if (.maIsMetaregressionFtest(options))
       moderatorsTable$addColumnInfo(name = "df2", type = "number", title = gettext("df2"))
-    }
     moderatorsTable$addColumnInfo(name = "pval",  type = "pvalue",  title = gettext("p"))
 
     modelSummaryContainer[["moderatorsTable"]] <- moderatorsTable
@@ -172,21 +183,25 @@
     row1 <- list(
       stat = fit[["QM"]],
       df1   = fit[["QMdf"]][1],
-      df2   = if(.maIsMetaregressionFtest(options)) fit[["QMdf"]][2],
       pval  = fit[["QMp"]]
     )
+
+    if (.maIsMetaregressionFtest(options))
+      row1$df2 <- fit[["QMdf"]][2]
 
     if (.maIsMetaregressionHeterogeneity(options)) {
 
       row2 <- list(
         stat  = fit[["QS"]],
         df1   = fit[["QSdf"]][1],
-        df2   = if(.maIsMetaregressionFtest(options)) fit[["QSdf"]][2],
         pval  = fit[["QSp"]]
       )
 
+      if (.maIsMetaregressionFtest(options))
+        row2$df2 <- fit[["QSdf"]][2]
+
       row1$parameter <- gettext("Effect size")
-      row2$parameter <- gettext("heterogeneity")
+      row2$parameter <- gettext("Heterogeneity")
     }
 
     moderatorsTable$addRows(row1)
@@ -197,12 +212,101 @@
     if (options[["clustering"]] != "")
       moderatorsTable$addFootnote(.maClusteringMessage(fit), symbol = gettext("Clustering:"))
   }
+
+  return()
 }
-.maCoefficientTable <- function(jaspResults, dataset, options, parameter = "effectSize") {
+.maTermsTable                         <- function(jaspResults, dataset, options, parameter = "effectSize") {
 
   metaregressionContainer <- .maExtractMetaregressionContainer(jaspResults)
 
-  if (!is.null(metaregressionContainer[["coefficientsTable"]]))
+  if (!is.null(metaregressionContainer[[paste0(parameter, "TermsTable")]]))
+    return()
+
+  if (parameter == "heterogeneity" && !.maIsMetaregressionHeterogeneity(options))
+    return()
+
+  fit <- .maExtractFit(jaspResults, options)
+
+  termsTable <- createJaspTable(switch(
+    parameter,
+    effectSize    = gettext("Effect Size Meta-Regression Terms Tests"),
+    heterogeneity = gettext("Heterogeneity Meta-Regression Terms Tests")
+  ))
+  termsTable$position <- switch(
+    parameter,
+    effectSize    = 1,
+    heterogeneity = 2
+  )
+  termsTable$dependOn("metaregressionTermsTests")
+  metaregressionContainer[[paste0(parameter, "TermsTable")]] <- termsTable
+
+  termsTable$addColumnInfo(name = "term",  type = "string", title = "")
+  termsTable$addColumnInfo(name = "stat", type = "number",   title = if(.maIsMetaregressionFtest(options)) gettext("F")   else gettext("QM"))
+  termsTable$addColumnInfo(name = "df1",  type = "integer",  title = if(.maIsMetaregressionFtest(options)) gettext("df1") else gettext("df"))
+  if (.maIsMetaregressionFtest(options)) {
+    termsTable$addColumnInfo(name = "df2", type = "number", title = gettext("df2"))
+  }
+  termsTable$addColumnInfo(name = "pval",  type = "pvalue", title = gettext("p"))
+  termsTable$addFootnote(.maFixedEffectTextMessage(options))
+
+  if (is.null(fit) || jaspBase::isTryError(fit))
+    return()
+
+  if (parameter == "effectSize") {
+
+    terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")
+    termsIndex <- attr(model.matrix(fit[["formula.mods"]], data = fit[["data"]]), "assign")
+    termsTests <- do.call(rbind.data.frame, lapply(seq_along(terms), function(i) {
+
+      termsAnova <- anova(fit, btt = seq_along(termsIndex)[termsIndex == i])
+
+      out <- list(
+        term = .maVariableNames(terms[i], options[["predictors"]]),
+        stat = termsAnova[["QM"]],
+        df1  = termsAnova[["QMdf"]][1],
+        pval = termsAnova[["QMp"]]
+      )
+
+      if (.maIsMetaregressionFtest(options))
+        out$df2 <- termsAnova[["QMdf"]][2]
+
+      return(out)
+    }))
+
+    termsTable$setData(termsTests)
+
+  } else if (parameter == "heterogeneity") {
+
+    terms      <- attr(terms(fit[["formula.scale"]], data = fit[["data"]]),"term.labels")
+    termsIndex <- attr(model.matrix(fit[["formula.scale"]], data = fit[["data"]]), "assign")
+    termsTests <- do.call(rbind.data.frame, lapply(seq_along(terms), function(i) {
+
+      termsAnova <- anova(fit, btt = seq_along(termsIndex)[termsIndex == i])
+
+      out <- list(
+        term = .maVariableNames(terms[i], options[["predictors"]]),
+        stat = termsAnova[["QM"]],
+        df1  = termsAnova[["QMdf"]][1],
+        pval = termsAnova[["QMp"]]
+      )
+
+      if (.maIsMetaregressionFtest(options))
+        out$df2 <- termsAnova[["QMdf"]][2]
+
+      return(out)
+    }))
+
+    termsTable$setData(termsTests)
+
+  }
+
+  return()
+}
+.maCoefficientEstimatesTable          <- function(jaspResults, dataset, options, parameter = "effectSize") {
+
+  metaregressionContainer <- .maExtractMetaregressionContainer(jaspResults)
+
+  if (!is.null(metaregressionContainer[[paste0(parameter, "CoefficientTable")]]))
     return()
 
   if (parameter == "heterogeneity" && !.maIsMetaregressionHeterogeneity(options))
@@ -220,7 +324,8 @@
     effectSize    = 3,
     heterogeneity = 4
   )
-  metaregressionContainer[[parameter]] <- coefficientsTable
+  coefficientsTable$dependOn(c("metaregressionCoefficientEstimates", "confidenceIntervals"))
+  metaregressionContainer[[paste0(parameter, "CoefficientTable")]] <- coefficientsTable
 
   coefficientsTable$addColumnInfo(name = "name",  type = "string", title = "")
   coefficientsTable$addColumnInfo(name = "est",   type = "number", title = gettext("Estimate"))
@@ -244,7 +349,7 @@
   if (parameter == "effectSize") {
 
     estimates <- data.frame(
-      name = rownames(fit[["beta"]]),
+      name = .maVariableNames(rownames(fit[["beta"]]), options[["predictors"]]),
       est  = fit[["beta"]][,1],
       se   = fit[["se"]],
       stat = fit[["zval"]],
@@ -264,7 +369,7 @@
   } else if (parameter == "heterogeneity") {
 
     estimates <- data.frame(
-      name = rownames(fit[["alpha"]]),
+      name = .maVariableNames(rownames(fit[["alpha"]]), options[["predictors"]]),
       est  = fit[["alpha"]][,1],
       se   = fit[["se.alpha"]],
       stat = fit[["zval.alpha"]],
@@ -282,8 +387,55 @@
     coefficientsTable$setData(estimates)
 
   }
-}
 
+  return()
+}
+.maCoefficientCorrelationMatrixTable  <- function(jaspResults, dataset, options, parameter = "effectSize") {
+
+  metaregressionContainer <- .maExtractMetaregressionContainer(jaspResults)
+
+  if (!is.null(metaregressionContainer[[paste0(parameter, "CorrelationTable")]]))
+    return()
+
+  if (parameter == "heterogeneity" && !.maIsMetaregressionHeterogeneity(options))
+    return()
+
+  fit <- .maExtractFit(jaspResults, options)
+
+  correlationMatrixTable <- createJaspTable(switch(
+    parameter,
+    effectSize    = gettext("Effect Size Meta-Regression Correlation Matrix"),
+    heterogeneity = gettext("Heterogeneity Meta-Regression Correlation Matrix")
+  ))
+  correlationMatrixTable$position <- switch(
+    parameter,
+    effectSize    = 5,
+    heterogeneity = 6
+  )
+  correlationMatrixTable$dependOn("metaregressionCoefficientCorrelationMatrix")
+  metaregressionContainer[[paste0(parameter, "CorrelationTable")]] <- correlationMatrixTable
+
+
+  if (is.null(fit) || jaspBase::isTryError(fit))
+    return()
+
+  if (parameter == "effectSize")
+    correlationMatrix <- data.frame(cov2cor(fit[["vb"]]))
+  else if (parameter == "heterogeneity")
+    correlationMatrix <- data.frame(cov2cor(fit[["va"]]))
+
+  correlationMatrixNames      <- .maVariableNames(colnames(correlationMatrix), options[["predictors"]])
+  colnames(correlationMatrix) <- correlationMatrixNames
+  correlationMatrix$name      <- correlationMatrixNames
+
+  correlationMatrixTable$addColumnInfo(name = "name", type = "string", title = "")
+  for (correlationMatrixName in correlationMatrixNames)
+    correlationMatrixTable$addColumnInfo(name = correlationMatrixName, type = "number")
+
+  correlationMatrixTable$setData(correlationMatrix)
+
+  return()
+}
 
 .maExtractFit                     <- function(jaspResults, options) {
 
@@ -342,7 +494,7 @@
     "knha" = gettext("Fixed effect tested using Knapp and Hartung adjustment.")
   ))
 }
-.maGetMethodOptions <- function(options) {
+.maGetMethodOptions               <- function(options) {
   switch(
     options[["method"]],
     "fixedEffects"       = "FE",
@@ -359,4 +511,33 @@
     "qeneralizedQStatMu" = "GENQM",
     NA
   )
+}
+.maVariableNames                  <- function(varNames, variables) {
+
+  return(sapply(varNames, function(varName){
+
+    if (varName == "intrcpt")
+      return("Intercept")
+
+    for (vn in variables) {
+      inf <- regexpr(vn, varName, fixed = TRUE)
+
+      if (inf[1] != -1) {
+        varName <- paste0(
+          substr(varName, 0, inf[1] - 1),
+          substr(varName, inf[1], inf[1] + attr(inf, "match.length") - 1),
+          " (",
+          substr(varName, inf[1] + attr(inf, "match.length"), nchar(varName))
+        )
+      }
+
+    }
+
+    varName <- gsub(":", paste0(")", jaspBase::interactionSymbol), varName, fixed = TRUE)
+    varName <- paste0(varName, ")")
+    varName <- gsub(" ()", "", varName, fixed = TRUE)
+
+    return(varName)
+
+  }))
 }

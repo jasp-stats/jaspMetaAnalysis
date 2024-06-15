@@ -170,7 +170,6 @@ Form
 		}
 	}
 
-
 	Section
 	{
 		title:	qsTr("Statistics")
@@ -195,8 +194,8 @@ Form
 
 			CheckBox
 			{
-				name:		"metaregressionCoefficientCovarianceMatrix"
-				text:		qsTr("Coefficient covariance matrix")
+				name:		"metaregressionCoefficientCorrelationMatrix"
+				text:		qsTr("Coefficient correlation matrix")
 				checked:	false
 			}
 		}
