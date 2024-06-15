@@ -19,13 +19,14 @@
 
   .maFitModel(jaspResults, dataset, options)
   .maSummaryTable(jaspResults, dataset, options)
-
+  .maCoefficientTable(jaspResults, dataset, options, "effectSize")
+  .maCoefficientTable(jaspResults, dataset, options, "heterogeneity")
 
   return()
 }
 
 
-.maGetFormula      <- function(modelTerms, includeIntercept) {
+.maGetFormula       <- function(modelTerms, includeIntercept) {
 
   predictors <- unlist(lapply(modelTerms, function(x) {
     if (length(x[["components"]]) > 1)
@@ -44,7 +45,7 @@
 
   return(as.formula(formula, env = parent.frame(1)))
 }
-.maFitModel        <- function(jaspResults, dataset, options) {
+.maFitModel         <- function(jaspResults, dataset, options) {
 
   if (!.maReady(options) || !is.null(jaspResults[["fit"]]))
     return()
@@ -73,6 +74,9 @@
   rmaInput$method <- .maGetMethodOptions(options)
   rmaInput$test   <- options[["fixedEffectTest"]]
 
+  # additional input
+  rmaInput$level <- 100 * options[["confidenceIntervalsLevel"]]
+
   # fit the model
   fit <- try(do.call(metafor::rma, rmaInput))
 
@@ -96,16 +100,16 @@
 
   return()
 }
-.maSummaryTable    <- function(jaspResults, dataset, options) {
+.maSummaryTable     <- function(jaspResults, dataset, options) {
 
-  if (!is.null(jaspResults[["modelSummary"]]))
+  if (!is.null(jaspResults[["modelSummaryContainer"]]))
     return()
 
   fit <- .maExtractFit(jaspResults, options)
 
-  modelSummary <- createJaspContainer(gettext("Model Summary"))
-  modelSummary$dependOn(.maDependencies)
-  jaspResults[["modelSummary"]] <- modelSummary
+  modelSummaryContainer <- createJaspContainer(gettext("Model Summary"))
+  modelSummaryContainer$dependOn(.maDependencies)
+  jaspResults[["modelSummaryContainer"]] <- modelSummaryContainer
 
 
   ### residual heterogeneity table
@@ -116,7 +120,7 @@
   residualHeterogeneityTable$addColumnInfo(name = "df",    type = "integer", title = gettext("df"))
   residualHeterogeneityTable$addColumnInfo(name = "pval",  type = "pvalue",  title = gettext("p"))
 
-  modelSummary[["residualHeterogeneityTable"]] <- residualHeterogeneityTable
+  modelSummaryContainer[["residualHeterogeneityTable"]] <- residualHeterogeneityTable
 
 
   ### moderators table
@@ -133,11 +137,11 @@
     moderatorsTable$addColumnInfo(name = "stat", type = "number",   title = if(.maIsMetaregressionFtest(options)) gettext("F")   else gettext("QM"))
     moderatorsTable$addColumnInfo(name = "df1",  type = "integer",  title = if(.maIsMetaregressionFtest(options)) gettext("df1") else gettext("df"))
     if (.maIsMetaregressionFtest(options)) {
-      moderatorsTable$addColumnInfo(name = "df2", type = if(options$clustering == "") "integer" else "number", title = gettext("df2"))
+      moderatorsTable$addColumnInfo(name = "df2", type = "number", title = gettext("df2"))
     }
     moderatorsTable$addColumnInfo(name = "pval",  type = "pvalue",  title = gettext("p"))
 
-    modelSummary[["moderatorsTable"]] <- moderatorsTable
+    modelSummaryContainer[["moderatorsTable"]] <- moderatorsTable
   }
 
 
@@ -182,7 +186,7 @@
       )
 
       row1$parameter <- gettext("Effect size")
-      row2$parameter <- gettext("Hetereogeneity")
+      row2$parameter <- gettext("heterogeneity")
     }
 
     moderatorsTable$addRows(row1)
@@ -194,41 +198,94 @@
       moderatorsTable$addFootnote(.maClusteringMessage(fit), symbol = gettext("Clustering:"))
   }
 }
-.maCoeffTable      <- function(container, dataset, options, ready) {
-  if (!options$coefficientEstimate || !is.null(container[["coeffTable"]]))
+.maCoefficientTable <- function(jaspResults, dataset, options, parameter = "effectSize") {
+
+  metaregressionContainer <- .maExtractMetaregressionContainer(jaspResults)
+
+  if (!is.null(metaregressionContainer[["coefficientsTable"]]))
     return()
 
-  coeffTable <- createJaspTable(gettext("Coefficients"))
-  coeffTable$dependOn(c("coefficientEstimate", "coefficientCi"))
-  coeffTable$position <- 2
-  coeffTable$showSpecifiedColumnsOnly <- TRUE
-  coeffTable$addCitation("Viechtbauer, W. (2010). Conducting meta-analyses in R with the metafor package. Journal of Statistical Software, 36(3), 1-48. URL: http://www.jstatsoft.org/v36/i03/")
+  if (parameter == "heterogeneity" && !.maIsMetaregressionHeterogeneity(options))
+    return()
 
-  coeffTable$addColumnInfo(name = "name",  type = "string", title = "")
-  coeffTable$addColumnInfo(name = "est",   type = "number", title = gettext("Estimate"))
-  coeffTable$addColumnInfo(name = "se",    type = "number", title = gettext("Standard Error"))
-  if (options[["estimateTest"]] == "z")
-    coeffTable$addColumnInfo(name = "zval",  type = "number", title = gettext("z"))
-  else if (options[["estimateTest"]] == "knha") {
-    coeffTable$addColumnInfo(name = "tval",  type = "number", title = gettext("t"))
-    coeffTable$addColumnInfo(name = "df",    type = "number", title = gettext("df"))
+  fit <- .maExtractFit(jaspResults, options)
+
+  coefficientsTable <- createJaspTable(switch(
+    parameter,
+    effectSize    = gettext("Effect Size Meta-Regression Coefficients"),
+    heterogeneity = gettext("Heterogeneity Meta-Regression Coefficients")
+  ))
+  coefficientsTable$position <- switch(
+    parameter,
+    effectSize    = 3,
+    heterogeneity = 4
+  )
+  metaregressionContainer[[parameter]] <- coefficientsTable
+
+  coefficientsTable$addColumnInfo(name = "name",  type = "string", title = "")
+  coefficientsTable$addColumnInfo(name = "est",   type = "number", title = gettext("Estimate"))
+  coefficientsTable$addColumnInfo(name = "se",    type = "number", title = gettext("Standard Error"))
+  coefficientsTable$addColumnInfo(name = "stat",  type = "number", title = if(.maIsMetaregressionFtest(options)) gettext("t") else gettext("z"))
+  if (.maIsMetaregressionFtest(options))
+    coefficientsTable$addColumnInfo(name = "df",  type = "number", title = gettext("df"))
+  coefficientsTable$addColumnInfo(name = "pval",  type = "pvalue", title = gettext("p"))
+
+  if (options[["confidenceIntervals"]]) {
+    overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
+    coefficientsTable$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
+    coefficientsTable$addColumnInfo(name = "uCi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
   }
-  coeffTable$addColumnInfo(name = "pval",  type = "pvalue", title = gettext("p"))
-  .metaAnalysisConfidenceInterval(options, coeffTable)
 
-  coeffTable$addFootnote(switch(options$estimateTest, z = gettext("Wald test."), knha = gettext("Knapp and Hartung test adjustment.")))
+  coefficientsTable$addFootnote(.maFixedEffectTextMessage(options))
 
-  container[["coeffTable"]] <- coeffTable
-  if(!ready)
+  if (is.null(fit) || jaspBase::isTryError(fit))
     return()
 
-  res <- try(.metaAnalysisCoeffFill(container, dataset, options))
+  if (parameter == "effectSize") {
 
-  .metaAnalysisSetError(res, coeffTable)
+    estimates <- data.frame(
+      name = rownames(fit[["beta"]]),
+      est  = fit[["beta"]][,1],
+      se   = fit[["se"]],
+      stat = fit[["zval"]],
+      pval = fit[["pval"]]
+    )
+
+    if (.maIsMetaregressionFtest(options))
+      estimates$df <- fit[["ddf"]]
+
+    if (options[["confidenceIntervals"]]) {
+      estimates$lCi <- fit[["ci.lb"]]
+      estimates$uCi <- fit[["ci.ub"]]
+    }
+
+    coefficientsTable$setData(estimates)
+
+  } else if (parameter == "heterogeneity") {
+
+    estimates <- data.frame(
+      name = rownames(fit[["alpha"]]),
+      est  = fit[["alpha"]][,1],
+      se   = fit[["se.alpha"]],
+      stat = fit[["zval.alpha"]],
+      pval = fit[["pval.alpha"]]
+    )
+
+    if (.maIsMetaregressionFtest(options))
+      estimates$df <- fit[["ddf.alpha"]]
+
+    if (options[["confidenceIntervals"]]) {
+      estimates$lCi <- fit[["ci.lb.alpha"]]
+      estimates$uCi <- fit[["ci.ub.alpha"]]
+    }
+
+    coefficientsTable$setData(estimates)
+
+  }
 }
 
 
-.maExtractFit                    <- function(jaspResults, options) {
+.maExtractFit                     <- function(jaspResults, options) {
 
   if (is.null(jaspResults[["fit"]]$object))
     return()
@@ -240,16 +297,28 @@
     return(jaspResults[["fit"]]$object[["fit"]])
   }
 }
-.maIsMetaregression              <- function(options) {
+.maExtractMetaregressionContainer <- function(jaspResults) {
+
+  if (!is.null(jaspResults[["metaregressionContainer"]]))
+    return(jaspResults[["metaregressionContainer"]])
+
+  # create the output container
+  metaregressionContainer <- createJaspContainer(gettext("Meta-Regression Summary"))
+  metaregressionContainer$dependOn(c(.maDependencies, "confidenceInterval"))
+  jaspResults[["metaregressionContainer"]] <- metaregressionContainer
+
+  return(metaregressionContainer)
+}
+.maIsMetaregression               <- function(options) {
   return(length(options[["effectSizeModelTerms"]]) > 0)
 }
-.maIsMetaregressionHeterogeneity <- function(options) {
+.maIsMetaregressionHeterogeneity  <- function(options) {
   return(length(options[["heterogeneityModelTerms"]]) > 0)
 }
-.maIsMetaregressionFtest         <- function(options) {
-  return(options[["fixedEffectTest"]] %in% c("knha", "r"))
+.maIsMetaregressionFtest          <- function(options) {
+  return(options[["fixedEffectTest"]] %in% c("knha", "t"))
 }
-.maCheckIsPossibleOptions        <- function(options) {
+.maCheckIsPossibleOptions         <- function(options) {
 
   if (length(options[["heterogeneityModelTerms"]]) > 0 && options[["clustering"]] != "") {
     return(gettext("Clustering is not supported when specifying a heterogeneity meta-regression model."))
@@ -257,13 +326,21 @@
 
   return(NULL)
 }
-.maClusteringMessage             <- function(fit) {
+.maClusteringMessage              <- function(fit) {
 
   if (all(fit[["tcl"]][1] == fit[["tcl"]])) {
     return(gettextf("%1$i clusters with %2$i estimates each.", fit[["n"]],  fit[["tcl"]][1]))
   } else {
     return(gettextf("%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates.", fit[["n"]],  min(fit[["tcl"]]), median(fit[["tcl"]]), max(fit[["tcl"]])))
   }
+}
+.maFixedEffectTextMessage         <- function(options) {
+  return(switch(
+    options[["fixedEffectTest"]],
+    "z"    = gettext("Fixed effect tested using z-distribution."),
+    "t"    = gettext("Fixed effect tested using t-distribution."),
+    "knha" = gettext("Fixed effect tested using Knapp and Hartung adjustment.")
+  ))
 }
 .maGetMethodOptions <- function(options) {
   switch(

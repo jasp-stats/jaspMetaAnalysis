@@ -45,7 +45,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "effectSize", "effectSizeStandardError", "effectSizeModelTerms", "effectSizeModelIncludeIntercept",
   "heterogeneityModelTerms", "heterogeneityModelIncludeIntercept", "predictors", "predictors.types",
   "clustering", "studyLabel",
-  "method", "fixedEffectTest",
+  "method", "fixedEffectTest", "confidenceIntervalsLevel",
   "clusteringUseClubSandwich", "clusteringSmallSampleCorrection"
 )
 
