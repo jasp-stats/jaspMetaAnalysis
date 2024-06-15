@@ -26,128 +26,206 @@ Form
 {
 	
 
-	VariablesForm
+	ComponentsList
 	{
-		preferredHeight: 400 * preferencesModel.uiScale
-		AvailableVariablesList { name: "allVariables" }
-		AssignedVariablesList { name: "ES_name";	title: qsTr("Effect Size"); singleVariable: true; suggestedColumns: ["scale"] }
-		AssignedVariablesList { name: "SE_name";	title: qsTr("Effect Size Variance"); singleVariable: true; suggestedColumns: ["scale"] }
-		AssignedVariablesList { name: "fixedEffects";	title: qsTr("Fixed Effects") }
-		AssignedVariablesList { name: "inner_grouping";	title: qsTr("Inner Grouping (Multivariate Structure)"); singleVariable: true; suggestedColumns: ["ordinal", "nominal"] }
-		AssignedVariablesList { name: "outer_grouping";	title: qsTr("Outer Grouping (Grouping Structure)"); singleVariable: false; suggestedColumns: ["ordinal", "nominal"] }
-	}
-	
+		id:		randomEffects
+		name:	"randomEffects"
+		title:	qsTr("Random effects")
 
-	//	VariablesForm
-	//	{
-	//		AssignedVariablesList { name: "variables";	title: qsTr("Variables") }
-	//		AssignedVariablesList { name: "splitby";	title: qsTr("Split"); singleVariable: true; suggestedColumns: ["ordinal", "nominal"] }
-	//		AssignedVariablesList { name: "test";	title: qsTr("Test"); singleVariable: true; suggestedColumns: ["ordinal", "nominal"] }
-	//	}
-
-	DropDown { name: "labels_variable"; label: qsTr("Case labels"); values: allAvailableVariables; }
-
-
-	Section
-	{
-		title: qsTr("Fixed Effects Model")
-		Group
+		rowComponent: RowLayout
 		{
-			title: qsTr("Fixed Effects Model")
-			columns: 2
+			property string typeValue:		type.value
+			property string structureValue:	structure.value
+			property string spatialInputTypeValue:	spatialInputType.value
+
+			DropDown
+			{
+				id:			type
+				name:		"type"
+				label:		qsTr("Type")
+				values: [
+				{ label: qsTr("Simple"),				value: "simple"},
+				{ label: qsTr("Nested (multilevel)"),	value: "nested"},
+				{ label: qsTr("Random slopes"),			value: "randomSlopes"},
+				{ label: qsTr("Structured"),			value: "structured"},
+				{ label: qsTr("Autoregressive"),		value: "autoregressive"},
+				{ label: qsTr("Spatial"),				value: "spatial"},
+				{ label: qsTr("Known correlation"),		value: "knownCorrelation"}
+				]
+			}
+
+			DropDown
+			{
+				id:			structure
+				name:		"structure"
+				label:		qsTr("Structure")
+				visible:	type.value == "structured" || type.value == "autoregressive" || type.value == "spatial"
+				values: (function() {
+					if (type.value == "structured") {
+						return [
+							{ label: qsTr("Compound symmetry"),						value: "compoundSymmetry"},
+							{ label: qsTr("Heteroscedastic compound symmetry"),		value: "heteroscedasticCompoundSymmetry"},
+							{ label: qsTr("Unstructured "),							value: "Unstructured"},
+							{ label: qsTr("Identity"),								value: "identity"},
+							{ label: qsTr("Diagonal"),								value: "diagonal"}
+						];
+					} else if (type.value == "autoregressive") {
+						return [
+							{ label: qsTr("AR(1)"),					value: "ar1"},
+							{ label: qsTr("Heteroscedastic AR(1)"),	value: "heteroskedasticAr1"},
+							{ label: qsTr("Continuous-time AR"),	value: "continuousTimeAr"}
+						];
+					} else if (type.value == "spatial") {
+						return [
+							{ label: qsTr("Exponential"),			value: "exponential"},
+							{ label: qsTr("Gaussian"),				value: "gaussian"},
+							{ label: qsTr("Linear"),				value: "linear"},
+							{ label: qsTr("Rational quadratic"),	value: "rationalQuadratic"},
+							{ label: qsTr("Spherical"),				value: "spherical"}
+						];
+					} else {
+						return [];
+					}
+				})()
+			}
+
+			DropDown
+			{
+				id:			spatialInputType
+				name:		"spatialInputType"
+				label:		qsTr("Spatial input type")
+				visible:	type.value == "spatial"
+				values: (function() {
+					if (type.value == "spatial") {
+						return [
+							{ label: qsTr("Compute from variables"),	value: "computeFromVariables"},
+							{ label: qsTr("Load from file"),			value: "loadFromFile"}
+						];
+					} else {
+						return [];
+					}
+				})()
+			}
+
+		}
+	}
+
+		ComponentsList
+	{
+		name:		"randomEffectsSpecification"
+		source:		"randomEffects"
+		title:		qsTr("Random effects specification")
+		rowSpacing: 20
+
+		rowComponent: 	ColumnLayout
+		{
+			property var typeValue:				randomEffects.rowAt(rowIndex).typeValue
+			property var structureValue:		randomEffects.rowAt(rowIndex).structureValue
+			property var spatialInputTypeValue:	randomEffects.rowAt(rowIndex).spatialInputTypeValue
+
 			VariablesForm
 			{
-				preferredHeight: 100 * preferencesModel.uiScale
-				AvailableVariablesList { name: "predictors"; title: qsTr("Predictors"); source: "fixedEffects"}
-				AssignedVariablesList  { name: "fixed_predictor_terms"; title: qsTr("Model Terms"); listViewType: JASP.Interaction }
+				removeInvisibles:	true
+				preferredHeight:	(typeValue == "randomSlopes" || typeValue == "spatial") ? 250 * preferencesModel.uiScale : 200 * preferencesModel.uiScale
+				visible:			typeValue == "simple" || typeValue == "randomSlopes" || typeValue == "structured" || typeValue == "autoregressive" || (typeValue == "spatial" && spatialInputTypeValue == "computeFromVariables") || typeValue == "knownCorrelation"
+
+				AvailableVariablesList
+				{
+					name:		"allVars"
+					title:		typeValue + ": " + structureValue
+				}
+
+				AssignedVariablesList
+				{
+					name:				"randomSlopeTerms"
+					title:				qsTr("Random Slope Terms")
+					visible:			typeValue == "randomSlopes"
+					listViewType:		JASP.Interaction
+					suggestedColumns:	["nominal", "scale"] // this should be choose on assignment 
+				}
+
+				AssignedVariablesList
+				{
+					name:				"randomLevels"
+					title:				qsTr("Random Levels")
+					visible:			typeValue == "structured"
+					singleVariable:		true
+					suggestedColumns:	["nominal"]
+				}
+
+				AssignedVariablesList
+				{
+					name:				"time"
+					title:				qsTr("Time")
+					visible:			typeValue == "autoregressive"
+					singleVariable:		true
+					suggestedColumns:	["ordinal", "scale"] // scale for continuous time AR otherwise ordinal
+				}
+
+				AssignedVariablesList
+				{
+					name:				"spatialCoordinates"
+					title:				qsTr("Spatial Coordinates")
+					visible:			typeValue == "spatial" && spatialInputTypeValue == "computeFromVariables"
+					suggestedColumns:	["nominal"] 
+				}
+
+				AssignedVariablesList
+				{
+					name:				"groupingFactor"
+					title:				qsTr("Grouping Factor")
+					singleVariable:		true
+					suggestedColumns:	["nominal"]
+				}
 			}
-			CheckBox { name: "intercept"; text: qsTr("Use intercept"); checked: true;}
-		}
-	}
 
-	Section
-	{
-		title: qsTr("Random Effects Model")
-		Group
-		{
-			title: qsTr("Random Effects Model")
-			columns: 2
-			DropDown { name: "inner_cov_struct"; label: qsTr("Multivariate Covariance Model"); values: ["CS","HCS","UN","ID","DIAG","AR","HAR"]}
-		}
-	}
-
-	Section
-	{
-		title: qsTr("Statistics")
-		Group
-		{
-			title: qsTr("Omnibus Statistics")
-			CheckBox
+			// TODO: Bruno -- adding variable crashes the qml
+			// TODO: Bruno -- allow single variable only, set-type to nominal
+			FactorsForm
 			{
-				name: "anova_table"; text: qsTr("Anova Table"); checked: true;
-				//CheckBox { name: "add_robust_qtest"; text: qsTr("Include robust tests");}
+				name:				"nestedGroupingFactors"
+				id:					nestedGroupingFactors
+				title:				qsTr("Nested Grouping Factors")
+				preferredHeight:	200 * preferencesModel.uiScale 
+				initNumberFactors:	1
+				allowAll:			true
+				visible:			typeValue == "nested"
 			}
-			CheckBox { name: "fit_measures_table"; text: qsTr("Fit Indices")}
-		}
-		Group
-		{
-			title: qsTr("Coefficients")
-			CheckBox { name: "FE_coef_table"; text: qsTr("Fixed Effects Coefficients Table"); checked: true;}
-			CheckBox { name: "varComp_params_table"; text: qsTr("Random Effects Coefficients Table")}
-		}
 
-		Group
-		{
-			title: qsTr("Model Derived Statistics")
-			CheckBox { name: "emmeans_table"; text: qsTr("Estimated Marginal Means")}
-		}
-	}
-
-	Section
-	{
-		title: qsTr("Plots")
-
-		CheckBox { name: "funnel_plot"; text: qsTr("Funnel plot") }
-		CheckBox { name: "forest_plot"; text: qsTr("Forest plot"); checked: true; }
-	}
-
-	Section
-	{
-		title: qsTr("Advanced")
-		DropDown { name: "method"; label: qsTr("Method"); values: ["ML", "REML"]; }
-		CheckBox { name: "FE_vcov_table"; text: qsTr("Fixed Effects Covariance Matrix")}
-		//RadioButtonGroup {
-		//  title: qsTr("Test of coefficients")
-		//  name: "coeftest_type"
-		//  RadioButton { value: "z"; label: qsTr("Wald type (asymptotic <em>z</em>-test)"); checked: true }
-		//  RadioButton { value: "t"; label: qsTr("<em>t</em>-test (assuming normality)") }
-		//}
-	}
-
-	Section
-	{
-		title: qsTr("Diagnostics")
-		Group
-		{
-			CheckBox
+			DropDown
 			{
-				name: "funnelPlotAsymmetry"; text: qsTr("Test for Funnel Plot Asymmetry")
-				CheckBox { name: "ranktest_table"; text: qsTr("Rank correlation test")}
-				CheckBox { name: "regtest_table"; text: qsTr("Egger's Regression test")}
+				name:		"distanceMetric"
+				id:			distanceMetric
+				label:		qsTr("Distance metric")
+				visible:	typeValue == "spatial" && spatialInputTypeValue == "computeFromVariables"
+				values:		[
+					{ label: qsTr("Euclidean"),			value: "euclidean" },
+					{ label: qsTr("Manhattan"),			value: "manhattan" },
+					{ label: qsTr("Maximum"),			value: "maximum" },
+					{ label: qsTr("Great-circle"),		value: "greatCircle"}
+				]
 			}
-			CheckBox { name: "failsafe_n_table"; text: qsTr("Fail-safe-N analysis (controversial)")}
-		}
-		Group
-		{
-			CheckBox { name: "diagnostics_table"; text: qsTr("Diagnostics Table")}
-			CheckBox
+
+			FileSelector
 			{
-				name: "diagnosticPlots"; text: qsTr("Diagnostic plots")
-				CheckBox { name: "residual_dependent_plot"; text: qsTr("Residual vs Dependent") }
-				CheckBox { name: "profile_plot"; text: qsTr("Profile Random Effects Parameters (takes time)") }
+				name:		"distanceMatrixFile"
+				label:		qsTr("Distance matrix file")
+				visible:	typeValue == "spatial" && spatialInputTypeValue == "loadFromFile"
+				filter:		"*.csv"
 			}
+
+			FileSelector
+			{
+				name:		"knownCorrelationMatrixFile"
+				label:		qsTr("Known correlation matrix file")
+				visible:	typeValue == "knownCorrelation"
+				filter:		"*.csv"
+			}
+
 		}
 	}
+
+
 
 
 }

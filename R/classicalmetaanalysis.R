@@ -25,73 +25,92 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   options[["module"]] <- "metaAnalysis"
 
-  ready <- options$effectSize != "" && options$effectSizeSe != "" && (options$interceptTerm || length(options$modelTerms) > 0)
-  if(ready) {
-    dataset <- .metaAnalysisReadData(dataset, options)
-    .metaAnalysisCheckErrors(dataset, options)
+  if (.maReady(options)) {
+    dataset <- .maReadData(dataset, options)
+    .maCheckErrors(dataset, options)
   }
 
-  container <- .metaAnalysisGetOutputContainer(jaspResults)
+  saveRDS(options, file = "C:/JASP/options.RDS")
+  saveRDS(dataset, file = "C:/JASP/dataset.RDS")
 
-  .ClassicalMetaAnalysisCommon(container, dataset, ready, options)
+  .ClassicalMetaAnalysisCommon(jaspResults, dataset, options)
 
+  return()
+  options <- readRDS(file = "C:/JASP/options.RDS")
+  dataset <- readRDS(file = "C:/JASP/dataset.RDS")
   return()
 }
 
-.metaAnalysisGetOutputContainer <- function(jaspResults) {
-  if (!is.null(jaspResults[["modelContainer"]])) {
-    modelContainer <- jaspResults[["modelContainer"]]
-  } else {
-    modelContainer <- createJaspContainer()
-    modelContainer$dependOn(c("effectSize", "effectSizeSe", "method", "studyLabel", "covariates", "estimateTest",
-                              "factors", "modelTerms", "interceptTerm", "coefficientCiLevel"))
-    jaspResults[["modelContainer"]] <- modelContainer
-  }
-  return(modelContainer)
-}
+.maDependencies        <- c(
+  "effectSize", "effectSizeStandardError", "effectSizeModelTerms", "effectSizeModelIncludeIntercept",
+  "heterogeneityModelTerms", "heterogeneityModelIncludeIntercept", "predictors", "predictors.types",
+  "clustering", "studyLabel",
+  "method", "fixedEffectTest",
+  "clusteringUseClubSandwich", "clusteringSmallSampleCorrection"
+)
 
-.metaAnalysisReadData <- function(dataset, options) {
+.maReady               <- function(options) {
+
+  inputReady <- options[["effectSize"]] != "" && options[["effectSizeStandardError"]] != ""
+  termsEffectSizeReady    <- length(options[["effectSizeModelTerms"]]) > 0    || options[["effectSizeModelIncludeIntercept"]]
+  termsHeterogeneityReady <- length(options[["heterogeneityModelTerms"]]) > 0 || options[["heterogeneityModelIncludeIntercept"]]
+
+  return(inputReady && termsEffectSizeReady && termsHeterogeneityReady)
+}
+.maReadData            <- function(dataset, options) {
+
   if (!is.null(dataset))
     return(dataset)
-  else {
-    effsizeName <- unlist(options$effectSize)
-    stderrName  <- unlist(options$effectSizeSe)
-    covarNames  <- if (length(options$covariates) > 0) unlist(options$covariates)
-    factNames   <- if (length(options$factors) > 0) unlist(options$factors)
 
-    numeric.variables <- Filter(function(s) s != "", c(effsizeName, covarNames, stderrName))
-    factor.variables  <- Filter(function(s) s != "", c(factNames, options$studyLabel))
-    return(.readDataSetToEnd(columns.as.factor   = factor.variables,
-                             columns.as.numeric  = numeric.variables,
-                             exclude.na.listwise = numeric.variables))
-  }
+  predictorsNominal <- options[["predictors"]][options[["predictors.types"]] == "nominal"]
+  predictorsScale   <- options[["predictors"]][options[["predictors.types"]] == "scale"]
+
+  # load data
+  dataset <- .readDataSetToEnd(
+    columns.as.factor = c(
+      if (length(predictorsNominal) > 0) predictorsNominal,
+      if (options[["clustering"]] != "") options[["clustering"]],
+      if (options[["studyLabel"]] != "") options[["studyLabel"]]
+    ),
+    columns.as.numeric  = c(
+      options[["effectSize"]],
+      options[["effectSizeStandardError"]],
+      if (length(predictorsScale) > 0) predictorsScale
+    ))
+
+  # omit NAs
+  dataset  <- na.omit(dataset)
+
+  return(dataset)
 }
+.maCheckErrors         <- function(dataset, options) {
 
-.metaAnalysisCheckErrors <- function(dataset, options){
-  effsizeName <- unlist(options$effectSize)
-  stderrName  <- unlist(options$effectSizeSe)
-  covarNames  <- if (length(options$covariates) > 0) unlist(options$covariates)
-  numeric.variables <- Filter(function(s) s != "", c(effsizeName, covarNames, stderrName))
-  .hasErrors(dataset              = dataset,
-             type                 = c("infinity", "observations", "variance"),
-             all.target           = numeric.variables,
-             observations.amount  = "< 2",
-             exitAnalysisIfErrors = TRUE)
-  .hasErrors(dataset              = dataset,
-             type                 = c("modelInteractions"),
-             modelInteractions.modelTerms = options$modelTerms,
-             exitAnalysisIfErrors = TRUE)
-  .hasErrors(dataset              = dataset,
-             seCheck.target       = options[["effectSizeSe"]],
-             custom               = .metaAnalysisCheckSE,
-             exitAnalysisIfErrors = TRUE)
+  .hasErrors(
+    dataset              = dataset,
+    type                 = c("infinity", "observations", "variance"),
+    all.target           = c(
+      options[["effectSize"]],
+      options[["effectSizeStandardError"]],
+      options[["predictors"]][options[["predictors.types"]] == "scale"]
+    ),
+    observations.amount  = "< 2",
+    exitAnalysisIfErrors = TRUE)
+
+  .hasErrors(
+    dataset              = dataset,
+    type                 = c("modelInteractions"),
+    modelInteractions.modelTerms = c(options[["effectSizeModelTerms"]], options[["heterogeneityModelTerms"]]),
+    exitAnalysisIfErrors = TRUE)
+
+  .hasErrors(
+    dataset              = dataset,
+    seCheck.target       = options[["effectSizeStandardError"]],
+    custom               = .maCheckStandardErrors,
+    exitAnalysisIfErrors = TRUE)
 }
-
-.metaAnalysisCheckSE <- list(
-  seCheck = function(dataset, target) {
-    nonPositive <- !all(na.omit(dataset[,target]) > 0)
+.maCheckStandardErrors <- list(seCheck = function(dataset, target) {
+    nonPositive <- !all(dataset[,target] > 0)
     if (nonPositive) {
-      return(gettext("All standard errors/sample sizes must be positive."))
+      return(gettext("All standard errors must be positive."))
     }
-  }
-)
+  })
