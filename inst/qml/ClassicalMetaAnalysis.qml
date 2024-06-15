@@ -298,20 +298,25 @@ Form
 
 	Section
 	{
-		title:	qsTr("Clustering")
+		title:	qsTr("Advanced")
 
-		CheckBox
+		Group
 		{
-			name:		"clusteringUseClubSandwich"
-			text:		qsTr("Use clubSandwich")
-			checked:	true
-		}
+			title: qsTr("Clustering")
 
-		CheckBox
-		{
-			name:		"clusteringSmallSampleCorrection"
-			text:		qsTr("Small sample correction")
-			checked:	true
+			CheckBox
+			{
+				name:		"clusteringUseClubSandwich"
+				text:		qsTr("Use clubSandwich")
+				checked:	true
+			}
+
+			CheckBox
+			{
+				name:		"clusteringSmallSampleCorrection"
+				text:		qsTr("Small sample correction")
+				checked:	true
+			}
 		}
 	}
 }
