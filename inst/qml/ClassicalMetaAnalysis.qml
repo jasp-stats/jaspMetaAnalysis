@@ -26,7 +26,7 @@ Form
 {
 	VariablesForm
 	{
-		preferredHeight: 400 * preferencesModel.uiScale
+		preferredHeight: 425 * preferencesModel.uiScale
 
 		AvailableVariablesList
 		{
@@ -38,37 +38,59 @@ Form
 			name:				"effectSize"
 			title:				qsTr("Effect Size")
 			singleVariable:		true
-			suggestedColumns:	["scale"]
+			allowedColumns:		["scale"]
 		}
 		AssignedVariablesList
 		{	
 			name:				"effectSizeStandardError"
 			title:				qsTr("Effect Size Standard Error")
 			singleVariable:		true
-			suggestedColumns:	["scale"]
+			allowedColumns:		["scale"]
 		}
 		
-		MA.ClassicalMetaAnalysisMethod{visible: true}
+		DropDown
+		{
+			name:			"method"
+			label:			qsTr("Method")
+			startValue:		"restrictedML"
+			values: [
+				{ label: qsTr("Fixed Effects")			, value: "fixedEffects"		},
+				{ label: qsTr("Maximum Likelihood")		, value: "maximumLikelihood"},
+				{ label: qsTr("Restricted ML")			, value: "restrictedML"		},
+				{ label: qsTr("DerSimonian-Laird")		, value: "derSimonianLaird"	},
+				{ label: qsTr("Hedges")					, value: "hedges"			},
+				{ label: qsTr("Hunter-Schmidt")			, value: "hunterSchmidt"	},
+				{ label: qsTr("Hunter-Schmidt (SSC)")	, value: "hunterSchmidtSsc"	},
+				{ label: qsTr("Sidik-Jonkman")			, value: "sidikJonkman"		},
+				{ label: qsTr("Empirical Bayes")		, value: "empiricalBayes"	},
+				{ label: qsTr("Paule-Mandel")			, value: "pauleMandel"		},
+				{ label: qsTr("Paule-Mandel (MU)")		, value: "pauleMandelMu"	},
+				{ label: qsTr("Generalized Q-stat")		, value: "qeneralizedQStat"	},
+				{ label: qsTr("Generalized Q-stat (MU)"), value: "qeneralizedQStatMu"	}
+			]
+		}
+
+		DropDown
+		{	
+			name:		"fixedEffectTest"
+			label:		qsTr("Fixed effect test")
+			startValue:	"knha"
+			values:		[ "z", "t", "knha"]
+		}
 		
 		AssignedVariablesList
 		{
-			name:				"covariates"
-			title:				qsTr("Covariates")
-			suggestedColumns:	["scale"]
-		}
-		AssignedVariablesList
-		{
-			name:				"factors"
-			title:				qsTr("Factors")
-			suggestedColumns:	["nominal"]
+			name:				"predictors"
+			title:				qsTr("Predictors")
+			allowedColumns:		["nominal", "scale"]
 		}
 
 		AssignedVariablesList
 		{
-			name:				"clusters"
-			title:				qsTr("Clusters")
+			name:				"clustering"
+			title:				qsTr("Clustering")
 			singleVariable:		true
-			suggestedColumns:	["nominal"]
+			allowedColumns:		["nominal"]
 		}
 
 		AssignedVariablesList
@@ -96,7 +118,7 @@ Form
 				{
 					name:			"effectSizeModelAvailableComponents"
 					title:			qsTr("Available Components")
-					source:			["covariates","factors"]
+					source:			["predictors"]
 				}
 
 				AssignedVariablesList
@@ -105,13 +127,13 @@ Form
 					title:			qsTr("Model Terms")
 					listViewType:	JASP.Interaction
 				}
-			}
 
-			CheckBox
-			{
-				name:				"effectSizeModelIncludeIntercept";
-				label:				qsTr("Include intercept")
-				checked:			true
+				CheckBox
+				{
+					name:				"effectSizeModelIncludeIntercept";
+					label:				qsTr("Include intercept")
+					checked:			true
+				}
 			}
 		}
 
@@ -127,225 +149,27 @@ Form
 				{
 					name:			"heterogeneityModelAvailableComponents"
 					title:			qsTr("Available Components")
-					source:			["covariates","factors"]
+					source:			["predictors"]
 				}
 
+				// TODO: start empty
 				AssignedVariablesList
 				{
 					name:			"heterogeneityModelTerms";
 					title:			qsTr("Model Terms")
 					listViewType:	JASP.Interaction
 				}
-			}
 
-			CheckBox
-			{
-				name:				"heterogeneityModelIncludeIntercept";
-				label:				qsTr("Include intercept")
-				checked:			true
+				CheckBox
+				{
+					name:				"heterogeneityModelIncludeIntercept";
+					label:				qsTr("Include intercept")
+					checked:			true
+				}
 			}
 		}
 	}
 
-	ComponentsList
-	{
-		id:		randomEffects
-		name:	"randomEffects"
-		title:	qsTr("Random effects")
-
-		rowComponent: RowLayout
-		{
-			property string typeValue:		type.value
-			property string structureValue:	structure.value
-			property string spatialInputTypeValue:	spatialInputType.value
-
-			DropDown
-			{
-				id:			type
-				name:		"type"
-				label:		qsTr("Type")
-				values: [
-				{ label: qsTr("Simple"),				value: "simple"},
-				{ label: qsTr("Nested (multilevel)"),	value: "nested"},
-				{ label: qsTr("Random slopes"),			value: "randomSlopes"},
-				{ label: qsTr("Structured"),			value: "structured"},
-				{ label: qsTr("Autoregressive"),		value: "autoregressive"},
-				{ label: qsTr("Spatial"),				value: "spatial"},
-				{ label: qsTr("Known correlation"),		value: "knownCorrelation"}
-				]
-			}
-
-			DropDown
-			{
-				id:			structure
-				name:		"structure"
-				label:		qsTr("Structure")
-				visible:	type.value == "structured" || type.value == "autoregressive" || type.value == "spatial"
-				values: (function() {
-					if (type.value == "structured") {
-						return [
-							{ label: qsTr("Compound symmetry"),						value: "compoundSymmetry"},
-							{ label: qsTr("Heteroscedastic compound symmetry"),		value: "heteroscedasticCompoundSymmetry"},
-							{ label: qsTr("Unstructured "),							value: "Unstructured"},
-							{ label: qsTr("Identity"),								value: "identity"},
-							{ label: qsTr("Diagonal"),								value: "diagonal"}
-						];
-					} else if (type.value == "autoregressive") {
-						return [
-							{ label: qsTr("AR(1)"),					value: "ar1"},
-							{ label: qsTr("Heteroscedastic AR(1)"),	value: "heteroskedasticAr1"},
-							{ label: qsTr("Continuous-time AR"),	value: "continuousTimeAr"}
-						];
-					} else if (type.value == "spatial") {
-						return [
-							{ label: qsTr("Exponential"),			value: "exponential"},
-							{ label: qsTr("Gaussian"),				value: "gaussian"},
-							{ label: qsTr("Linear"),				value: "linear"},
-							{ label: qsTr("Rational quadratic"),	value: "rationalQuadratic"},
-							{ label: qsTr("Spherical"),				value: "spherical"}
-						];
-					} else {
-						return [];
-					}
-				})()
-			}
-
-			DropDown
-			{
-				id:			spatialInputType
-				name:		"spatialInputType"
-				label:		qsTr("Spatial input type")
-				visible:	type.value == "spatial"
-				values: (function() {
-					if (type.value == "spatial") {
-						return [
-							{ label: qsTr("Compute from variables"),	value: "computeFromVariables"},
-							{ label: qsTr("Load from file"),			value: "loadFromFile"}
-						];
-					} else {
-						return [];
-					}
-				})()
-			}
-
-		}
-	}
-
-
-	ComponentsList
-	{
-		name:		"randomEffectsSpecification"
-		source:		"randomEffects"
-		title:		qsTr("Random effects specification")
-		rowSpacing: 20
-
-		rowComponent: 	ColumnLayout
-		{
-			property var typeValue:				randomEffects.rowAt(rowIndex).typeValue
-			property var structureValue:		randomEffects.rowAt(rowIndex).structureValue
-			property var spatialInputTypeValue:	randomEffects.rowAt(rowIndex).spatialInputTypeValue
-
-			VariablesForm
-			{
-				removeInvisibles:	true
-				preferredHeight:	(typeValue == "randomSlopes" || typeValue == "spatial") ? 250 * preferencesModel.uiScale : 200 * preferencesModel.uiScale
-				visible:			typeValue == "simple" || typeValue == "randomSlopes" || typeValue == "structured" || typeValue == "autoregressive" || (typeValue == "spatial" && spatialInputTypeValue == "computeFromVariables") || typeValue == "knownCorrelation"
-
-				AvailableVariablesList
-				{
-					name:		"allVars"
-					title:		typeValue + ": " + structureValue
-				}
-
-				AssignedVariablesList
-				{
-					name:				"randomSlopeTerms"
-					title:				qsTr("Random Slope Terms")
-					visible:			typeValue == "randomSlopes"
-					listViewType:		JASP.Interaction
-					suggestedColumns:	["nominal", "scale"] // this should be choose on assignment 
-				}
-
-				AssignedVariablesList
-				{
-					name:				"randomLevels"
-					title:				qsTr("Random Levels")
-					visible:			typeValue == "structured"
-					singleVariable:		true
-					suggestedColumns:	["nominal"]
-				}
-
-				AssignedVariablesList
-				{
-					name:				"time"
-					title:				qsTr("Time")
-					visible:			typeValue == "autoregressive"
-					singleVariable:		true
-					suggestedColumns:	["ordinal", "scale"] // scale for continuous time AR otherwise ordinal
-				}
-
-				AssignedVariablesList
-				{
-					name:				"spatialCoordinates"
-					title:				qsTr("Spatial Coordinates")
-					visible:			typeValue == "spatial" && spatialInputTypeValue == "computeFromVariables"
-					suggestedColumns:	["nominal"] 
-				}
-
-				AssignedVariablesList
-				{
-					name:				"groupingFactor"
-					title:				qsTr("Grouping Factor")
-					singleVariable:		true
-					suggestedColumns:	["nominal"]
-				}
-			}
-
-			// TODO: Bruno -- adding variable crashes the qml
-			// TODO: Bruno -- allow single variable only, set-type to nominal
-			FactorsForm
-			{
-				name:				"nestedGroupingFactors"
-				id:					nestedGroupingFactors
-				title:				qsTr("Nested Grouping Factors")
-				preferredHeight:	200 * preferencesModel.uiScale 
-				initNumberFactors:	1
-				allowAll:			true
-				visible:			typeValue == "nested"
-			}
-
-			DropDown
-			{
-				name:		"distanceMetric"
-				id:			distanceMetric
-				label:		qsTr("Distance metric")
-				visible:	typeValue == "spatial" && spatialInputTypeValue == "computeFromVariables"
-				values:		[
-					{ label: qsTr("Euclidean"),			value: "euclidean" },
-					{ label: qsTr("Manhattan"),			value: "manhattan" },
-					{ label: qsTr("Maximum"),			value: "maximum" },
-					{ label: qsTr("Great-circle"),		value: "greatCircle"}
-				]
-			}
-
-			FileSelector
-			{
-				name:		"distanceMatrixFile"
-				label:		qsTr("Distance matrix file")
-				visible:	typeValue == "spatial" && spatialInputTypeValue == "loadFromFile"
-				filter:		"*.csv"
-			}
-
-			FileSelector
-			{
-				name:		"knownCorrelationMatrixFile"
-				label:		qsTr("Known correlation matrix file")
-				visible:	typeValue == "knownCorrelation"
-				filter:		"*.csv"
-			}
-
-		}
-	}
 
 	Section
 	{
@@ -364,22 +188,15 @@ Form
 
 			CheckBox
 			{
-				name:		"metaregressionCoefficientsEstimates"
-				text:		qsTr("Coefficients estimates")
+				name:		"metaregressionCoefficientEstimates"
+				text:		qsTr("Coefficient estimates")
 				checked:	true
-			}
-
-			DropDown
-			{	
-				name:		"metaregressionCoefficientsTest"
-				label:		qsTr("Coefficients test")
-				values:		[ "z", "t", "knha"]
 			}
 
 			CheckBox
 			{
-				name:		"metaregressionCoefficientsCovarianceMatrix"
-				text:		qsTr("Coefficients covariance matrix")
+				name:		"metaregressionCoefficientCovarianceMatrix"
+				text:		qsTr("Coefficient covariance matrix")
 				checked:	false
 			}
 		}
@@ -387,47 +204,49 @@ Form
 		Group
 		{
 			title: qsTr("Hetereogeneity")
+			columns: 2
 
 			CheckBox
 			{
-				name:		"𝜏"
-				text:		qsTr("heterogeneityTau")
+				text:		qsTr("𝜏")
+				name:		"heterogeneityTau"
 				checked:	true
 			}
 
 			CheckBox
 			{
-				name:		"𝜏²"
-				text:		qsTr("heterogeneityTau2")
+				text:		qsTr("𝜏²")
+				name:		"heterogeneityTau2"
+				checked:	true
+			}
+
+			CheckBox
+			{
+				text:		qsTr("I²")
+				name:		"heterogeneityI2"
 				checked:	false
 			}
 
 			CheckBox
 			{
-				name:		"I²"
-				text:		qsTr("heterogeneityI2")
+				text:		qsTr("H²")
+				name:		"heterogeneityH2"
 				checked:	false
 			}
 
 			CheckBox
 			{
-				name:		"H²"
-				text:		qsTr("heterogeneityH2")
-				checked:	false
-			}
-
-			CheckBox
-			{
-				name:		"Prediction Interval"
-				text:		qsTr("heterogeneityPredictionInterval")
+				text:		qsTr("Prediction Interval")
+				name:		"heterogeneityPredictionInterval"
 				checked:	false
 			}
 		}
 
 		CheckBox
 		{
-			name:				"cconfidenceIntervals"
+			name:				"confidenceIntervals"
 			text:				qsTr("Confidence intervals")
+			checked:			true
 			childrenOnSameRow:	true
 
 			CIField
@@ -438,21 +257,8 @@ Form
 
 		CheckBox
 		{
-			name:				"modelFit"
-			text:				qsTr("Pooled estimate")
-			checked:			true
-		}
-
-
-		Group
-		{
-			title:	qsTr("Model Fit")
-
-			CheckBox
-			{
-				name:		"fitMeasure"
-				text:		qsTr("Fit measures")
-			}
+			name:		"fitMeasure"
+			text:		qsTr("Fit measures")
 		}
 	}
 
@@ -489,4 +295,23 @@ Form
 	}
 
 	MA.ClassicalMetaAnalysisDiagnostics{}
+
+	Section
+	{
+		title:	qsTr("Clustering")
+
+		CheckBox
+		{
+			name:		"clusteringUseClubSandwich"
+			text:		qsTr("Use clubSandwich")
+			checked:	true
+		}
+
+		CheckBox
+		{
+			name:		"clusteringSmallSampleCorrection"
+			text:		qsTr("Small sample correction")
+			checked:	true
+		}
+	}
 }
