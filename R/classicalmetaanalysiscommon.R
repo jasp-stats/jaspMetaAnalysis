@@ -23,23 +23,26 @@
   .maResidualHeterogeneityTable(jaspResults, dataset, options)
   .maModeratorsTable(jaspResults, dataset, options)
   .maPooledEstimatesTable(jaspResults, dataset, options)
-
-  # meta-regression tables
-  if (options[["metaregressionTermsTests"]]) {
-    .maTermsTable(jaspResults, dataset, options, "effectSize")
-    .maTermsTable(jaspResults, dataset, options, "heterogeneity")
-  }
-  if (options[["metaregressionCoefficientEstimates"]]) {
-    .maCoefficientEstimatesTable(jaspResults, dataset, options, "effectSize")
-    .maCoefficientEstimatesTable(jaspResults, dataset, options, "heterogeneity")
-  }
-  if (options[["metaregressionCoefficientCorrelationMatrix"]]) {
-    .maCoefficientCorrelationMatrixTable(jaspResults, dataset, options, "effectSize")
-    .maCoefficientCorrelationMatrixTable(jaspResults, dataset, options, "heterogeneity")
-  }
-
   if (options[["fitMeasures"]])
     .maFitMeasuresTable(jaspResults, dataset, options)
+
+  # meta-regression tables
+  if (.maIsMetaregression(options)) {
+    if (options[["metaregressionTermsTests"]]) {
+      .maTermsTable(jaspResults, dataset, options, "effectSize")
+      .maTermsTable(jaspResults, dataset, options, "heterogeneity")
+    }
+    if (options[["metaregressionCoefficientEstimates"]]) {
+      .maCoefficientEstimatesTable(jaspResults, dataset, options, "effectSize")
+      .maCoefficientEstimatesTable(jaspResults, dataset, options, "heterogeneity")
+    }
+    if (options[["metaregressionCoefficientCorrelationMatrix"]]) {
+      .maCoefficientCorrelationMatrixTable(jaspResults, dataset, options, "effectSize")
+      .maCoefficientCorrelationMatrixTable(jaspResults, dataset, options, "heterogeneity")
+    }
+  }
+
+
 
   return()
 }
@@ -86,7 +89,7 @@
     rmaInput$weights <- as.name(options[["fixParametersWeightsVariable"]])
   if (options[["fixParametersTau2"]])
     rmaInput$tau2 <- .maGetFixedTau2Options(options)
-
+# TODO: add link: heterogeneityModelLink
   # add labels if specified
   if (options[["studyLabel"]] != "")
     rmaInput$slab <- as.name(options[["studyLabel"]])
@@ -189,9 +192,9 @@
 
   moderatorsTable$addColumnInfo(name = "parameter", type = "string",  title = gettext("Parameter"))
   moderatorsTable$addColumnInfo(name = "stat", type = "number",   title = if(.maIsMetaregressionFtest(options)) gettext("F")   else gettext("QM"))
-  moderatorsTable$addColumnInfo(name = "df1",  type = "integer",  title = if(.maIsMetaregressionFtest(options)) gettext("df1") else gettext("df"))
+  moderatorsTable$addColumnInfo(name = "df1",  type = "integer",  title = if(.maIsMetaregressionFtest(options)) gettext("df\U2081") else gettext("df"))
   if (.maIsMetaregressionFtest(options))
-    moderatorsTable$addColumnInfo(name = "df2", type = "number", title = gettext("df2"))
+    moderatorsTable$addColumnInfo(name = "df2", type = "number", title = gettext("df\U2082"))
   moderatorsTable$addColumnInfo(name = "pval",  type = "pvalue",  title = gettext("p"))
 
   # stop on error
@@ -231,9 +234,6 @@
       }
     }
   }
-
-  if (options[["clustering"]] != "")
-    moderatorsTable$addFootnote(.maClusteringMessage(fit), symbol = gettext("Clustering:"))
 
   return()
 }
@@ -295,13 +295,18 @@
 }
 .maFitMeasuresTable                   <- function(jaspResults, dataset, options) {
 
+  modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults)
+
+  if (!is.null(modelSummaryContainer[["fitMeasuresTable"]]))
+    return()
+
   fit <- .maExtractFit(jaspResults, options)
 
   # fit measures table
   fitMeasuresTable          <- createJaspTable(gettext("Fit Measures"))
-  fitMeasuresTable$position <- 3
+  fitMeasuresTable$position <- 4
   fitMeasuresTable$dependOn(c(.maDependencies, "fitMeasures"))
-  jaspResults[["fitMeasuresTable"]] <- fitMeasuresTable
+  modelSummaryContainer[["fitMeasuresTable"]] <- fitMeasuresTable
 
 
   fitMeasuresTable$addColumnInfo(name = "ll",   title = gettext("Log Lik."), type = "number")
@@ -343,11 +348,11 @@
   termsTable$dependOn("metaregressionTermsTests")
   metaregressionContainer[[paste0(parameter, "TermsTable")]] <- termsTable
 
-  termsTable$addColumnInfo(name = "term",  type = "string", title = "")
-  termsTable$addColumnInfo(name = "stat", type = "number",   title = if(.maIsMetaregressionFtest(options)) gettext("F")   else gettext("QM"))
-  termsTable$addColumnInfo(name = "df1",  type = "integer",  title = if(.maIsMetaregressionFtest(options)) gettext("df1") else gettext("df"))
+  termsTable$addColumnInfo(name = "term",  type = "string",  title = "")
+  termsTable$addColumnInfo(name = "stat",  type = "number",  title = if(.maIsMetaregressionFtest(options)) gettext("F")   else gettext("QM"))
+  termsTable$addColumnInfo(name = "df1",   type = "integer", title = if(.maIsMetaregressionFtest(options)) gettext("df\U2081") else gettext("df"))
   if (.maIsMetaregressionFtest(options)) {
-    termsTable$addColumnInfo(name = "df2", type = "number", title = gettext("df2"))
+    termsTable$addColumnInfo(name = "df2", type = "number", title = gettext("df\U2082"))
   }
   termsTable$addColumnInfo(name = "pval",  type = "pvalue", title = gettext("p"))
   termsTable$addFootnote(.maFixedEffectTextMessage(options))
@@ -699,7 +704,7 @@
 
   if (parameter == "effectSize") {
     row <- list(
-      parameter = gettext("Effect size"),
+      parameter = gettext("Effect Size"),
       stat      = fit[["QM"]],
       df1       = fit[["QMdf"]][1],
       pval      = fit[["QMp"]]
@@ -753,7 +758,7 @@
     row$df2 <- fit[["QMdf"]][2]
 
   if (.maIsMetaregressionHeterogeneity(options))
-    row$parameter <- gettextf("Effect size (coef: %1$s)", paste(selCoef, collapse = ","))
+    row$parameter <- gettextf("Effect Size (coef: %1$s)", paste(selCoef, collapse = ","))
   else if (.maIsMetaregressionEffectSize(options))
     row$parameter <- gettextf("Heterogeneity (coef: %1$s)", paste(selCoef, collapse = ","))
 
@@ -844,13 +849,6 @@
 }
 
 # messages
-.maClusteringMessage              <- function(fit) {
-  if (all(fit[["tcl"]][1] == fit[["tcl"]])) {
-    return(gettextf("%1$i clusters with %2$i estimates each.", fit[["n"]],  fit[["tcl"]][1]))
-  } else {
-    return(gettextf("%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates.", fit[["n"]],  min(fit[["tcl"]]), median(fit[["tcl"]]), max(fit[["tcl"]])))
-  }
-}
 .maFixedEffectTextMessage         <- function(options) {
   return(switch(
     options[["fixedEffectTest"]],
@@ -862,6 +860,13 @@
 .maPooledEstimatesMessages        <- function(fit, dataset, options) {
 
   messages <- NULL
+
+  if (options[["clustering"]] != "") {
+    if (all(fit[["tcl"]][1] == fit[["tcl"]]))
+      messages <- c(messages, gettextf("%1$i clusters with %2$i estimates each.", fit[["n"]],  fit[["tcl"]][1]))
+    else
+      messages <- c(messages, gettextf("%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates.", fit[["n"]],  min(fit[["tcl"]]), median(fit[["tcl"]]), max(fit[["tcl"]])))
+  }
 
   if (.maIsMetaregressionEffectSize(options))
     messages <- c(messages, gettext("The pooled effect size corresponds to the weighted average effect across studies."))

@@ -48,7 +48,8 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "method", "fixedEffectTest", "confidenceIntervalsLevel",
   "clusteringUseClubSandwich", "clusteringSmallSampleCorrection",
   "fixParametersTau2", "fixParametersTau2Value",
-  "fixParametersWeights", "fixParametersWeightsVariable"
+  "fixParametersWeights", "fixParametersWeightsVariable",
+  "heterogeneityModelLink"
 )
 
 .maReady               <- function(options) {

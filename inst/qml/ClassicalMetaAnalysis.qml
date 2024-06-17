@@ -83,6 +83,7 @@ Form
 		AssignedVariablesList
 		{
 			name:				"predictors"
+			id:					predictors
 			title:				qsTr("Predictors")
 			allowedColumns:		["nominal", "scale"]
 		}
@@ -90,6 +91,7 @@ Form
 		AssignedVariablesList
 		{
 			name:				"clustering"
+			id:					clustering
 			title:				qsTr("Clustering")
 			singleVariable:		true
 			allowedColumns:		["nominal"]
@@ -125,23 +127,26 @@ Form
 
 				AssignedVariablesList
 				{
-					name:			"effectSizeModelTerms";
+					name:			"effectSizeModelTerms"
+					id:				effectSizeModelTerms
 					title:			qsTr("Model Terms")
 					listViewType:	JASP.Interaction
+					allowTypeChange:false
 				}
-
-				CheckBox
-				{
-					name:				"effectSizeModelIncludeIntercept";
-					label:				qsTr("Include intercept")
-					checked:			true
-				}
+			}
+			
+			CheckBox
+			{
+				name:				"effectSizeModelIncludeIntercept"
+				label:				qsTr("Include intercept")
+				checked:			true
 			}
 		}
 
 		Group
 		{
-			title: qsTr("Heterogeneity model")
+			title:			qsTr("Heterogeneity model")
+			columns:	2
 
 			VariablesForm
 			{
@@ -154,20 +159,29 @@ Form
 					source:			["predictors"]
 				}
 
-				// TODO: start empty
 				AssignedVariablesList
 				{
-					name:			"heterogeneityModelTerms";
+					name:			"heterogeneityModelTerms"
+					id:				heterogeneityModelTerms
 					title:			qsTr("Model Terms")
 					listViewType:	JASP.Interaction
-				}
+					allowTypeChange:false
+					addAvailableVariablesToAssigned: false
+				}			
+			}
 
-				CheckBox
-				{
-					name:				"heterogeneityModelIncludeIntercept";
-					label:				qsTr("Include intercept")
-					checked:			true
-				}
+			CheckBox
+			{
+				name:		"heterogeneityModelIncludeIntercept";
+				label:		qsTr("Include intercept")
+				checked:	true
+			}
+
+			DropDown
+			{
+				name:		"heterogeneityModelLink"
+				label:		qsTr("Link")
+				values:		["log", "identity"]
 			}
 		}
 	}
@@ -178,13 +192,14 @@ Form
 
 		Group
 		{
-			title: qsTr("Meta-Regression")
+			title:		qsTr("Meta-Regression")
+			enabled:	predictors.count > 0
 
 			CheckBox
 			{
 				name:		"metaregressionTermsTests"
 				text:		qsTr("Terms tests")
-				checked:	true // TODO: Enable once at least one term is selected
+				checked:	true
 			}
 
 			CheckBox
@@ -304,7 +319,8 @@ Form
 
 		Group
 		{
-			title:	qsTr("Clustering")
+			title:		qsTr("Clustering")
+			enabled:	clustering.count == 1
 
 			CheckBox
 			{
@@ -325,10 +341,11 @@ Form
 		{
 			title:	qsTr("Fix Parameters")
 
-			CheckBox // TODO: remove all items form heterogeneity model when specified
+			CheckBox
 			{
 				name:	"fixParametersTau2"
 				text:	qsTr("𝜏²")
+				enabled:			heterogeneityModelTerms.count == 0
 				childrenOnSameRow:	true
 
 				FormulaField
@@ -358,15 +375,16 @@ Form
 
 		Group
 		{
-			title:	qsTr("Add Omibus Moderator Test")
+			title:		qsTr("Add Omibus Moderator Test")
+			enabled:	effectSizeModelTerms.count > 0 || heterogeneityModelTerms.count > 0
 			
 			CheckBox
-			{ // TODO: enable only if metaregression specified
+			{
 				text:	qsTr("Effect size coefficients")
 				name:	"addOmnibusModeratorTestEffectSizeCoefficients"
+				enabled:			effectSizeModelTerms.count > 0
 				childrenOnSameRow:	false
 
-				// TODO: remove check for a number
 				TextField
 				{
 					label: 				""
@@ -379,6 +397,7 @@ Form
 			{
 				text:	qsTr("Heterogeneity coefficients")
 				name:	"addOmnibusModeratorTestHeterogeneityCoefficients"
+				enabled:			heterogeneityModelTerms.count > 0
 				childrenOnSameRow:	false
 
 				TextField
