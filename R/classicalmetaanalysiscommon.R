@@ -18,7 +18,12 @@
 .ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   .maFitModel(jaspResults, dataset, options)
-  .maSummaryTable(jaspResults, dataset, options)
+  #.maSummaryTable(jaspResults, dataset, options)
+
+  # model summary
+  .maResidualHeterogeneityTable(jaspResults, dataset, options)
+  .maModeratorsTable(jaspResults, dataset, options)
+  .maPooledEstimatesTable(jaspResults, dataset, options)
 
   # meta-regression tables
   if (options[["metaregressionTermsTests"]]) {
@@ -120,11 +125,11 @@
   fit <- .maExtractFit(jaspResults, options)
 
   modelSummaryContainer <- createJaspContainer(gettext("Model Summary"))
-  modelSummaryContainer$dependOn(.maDependencies)
+  modelSummaryContainer$dependOn(c(.maDependencies, "confidenceIntervals", ))
   jaspResults[["modelSummaryContainer"]] <- modelSummaryContainer
 
 
-  ### residual heterogeneity table
+  ### residual heterogeneity table ----
   residualHeterogeneityTable          <- createJaspTable(gettext("Residual Heterogeneity Test"))
   residualHeterogeneityTable$position <- 1
 
@@ -135,7 +140,7 @@
   modelSummaryContainer[["residualHeterogeneityTable"]] <- residualHeterogeneityTable
 
 
-  ### moderators table
+  ### moderators table ----
   if (.maIsMetaregression(options)) {
 
     moderatorsTable          <- createJaspTable(gettext("Omnibus Moderation Test"))
@@ -156,7 +161,21 @@
   }
 
 
-  ### stop on error
+  ### pooled results table ----
+  pooledResultsTable          <- createJaspTable(gettext("Pooled Results"))
+  pooledResultsTable$position <- 3
+
+  pooledResultsTable$addColumnInfo(name = "par",  type = "string", title = "")
+  pooledResultsTable$addColumnInfo(name = "est",  type = "number", title = "")
+  if (options[["confidenceIntervals"]]) {
+    overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
+    pooledResultsTable$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
+    pooledResultsTable$addColumnInfo(name = "uCi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
+  }
+  modelSummaryContainer[["pooledResultsTable"]] <- pooledResultsTable
+
+
+  ### stop on error ----
   if (is.null(fit))
     return()
 
@@ -171,13 +190,17 @@
   }
 
 
-  ### fill tables
+  ### fill tables ----
+
+  ### residual heterogeneity ----
   residualHeterogeneityTable$addRows(list(
     qstat = fit[["QE"]],
     df    = fit[["k"]] - fit[["p"]],
     pval  = fit[["QEp"]]
   ))
 
+
+  ### meta-regression ----
   if (.maIsMetaregression(options)) {
 
     row1 <- list(
@@ -211,6 +234,206 @@
 
     if (options[["clustering"]] != "")
       moderatorsTable$addFootnote(.maClusteringMessage(fit), symbol = gettext("Clustering:"))
+  }
+
+
+
+
+  return()
+}
+
+.maResidualHeterogeneityTable         <- function(jaspResults, dataset, options) {
+
+  modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults)
+
+  if (!is.null(modelSummaryContainer[["residualHeterogeneityTable"]]))
+    return()
+
+  fit <- .maExtractFit(jaspResults, options)
+
+  # residual heterogeneity table
+  residualHeterogeneityTable          <- createJaspTable(gettext("Residual Heterogeneity Test"))
+  residualHeterogeneityTable$position <- 1
+  modelSummaryContainer[["residualHeterogeneityTable"]] <- residualHeterogeneityTable
+
+  residualHeterogeneityTable$addColumnInfo(name = "qstat", type = "number",  title = gettext("QE"))
+  residualHeterogeneityTable$addColumnInfo(name = "df",    type = "integer", title = gettext("df"))
+  residualHeterogeneityTable$addColumnInfo(name = "pval",  type = "pvalue",  title = gettext("p"))
+
+  # stop and display errors
+  if (is.null(fit))
+    return()
+
+  if (!is.null(.maCheckIsPossibleOptions(options))) {
+    residualHeterogeneityTable$setError(.maCheckIsPossibleOptions(options))
+    return()
+  }
+
+  if (jaspBase::isTryError(fit)) {
+    residualHeterogeneityTable$setError(fit)
+    return()
+  }
+
+  # residual heterogeneity
+  residualHeterogeneityTable$addRows(list(
+    qstat = fit[["QE"]],
+    df    = fit[["k"]] - fit[["p"]],
+    pval  = fit[["QEp"]]
+  ))
+
+  return()
+}
+.maModeratorsTable                    <- function(jaspResults, dataset, options) {
+
+  modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults)
+
+  if (!is.null(modelSummaryContainer[["moderatorsTable"]]))
+    return()
+
+  if (!.maIsMetaregression(options))
+    return()
+
+  fit <- .maExtractFit(jaspResults, options)
+
+  # omnibus moderator table
+  moderatorsTable          <- createJaspTable(gettext("Omnibus Moderation Test"))
+  moderatorsTable$position <- 2
+  modelSummaryContainer[["moderatorsTable"]] <- moderatorsTable
+
+  if (.maIsMetaregressionHeterogeneity(options))   # add column name for the omnibus test if both effect size and scale moderators are specified
+    moderatorsTable$addColumnInfo(name = "parameter", type = "string",  title = gettext("Parameter"))
+  moderatorsTable$addColumnInfo(name = "stat", type = "number",   title = if(.maIsMetaregressionFtest(options)) gettext("F")   else gettext("QM"))
+  moderatorsTable$addColumnInfo(name = "df1",  type = "integer",  title = if(.maIsMetaregressionFtest(options)) gettext("df1") else gettext("df"))
+  if (.maIsMetaregressionFtest(options))
+    moderatorsTable$addColumnInfo(name = "df2", type = "number", title = gettext("df2"))
+  moderatorsTable$addColumnInfo(name = "pval",  type = "pvalue",  title = gettext("p"))
+
+  # stop on error
+  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+    return()
+
+  # effect size moderation
+  if (.maIsMetaregression(options)) {
+
+    row1 <- list(
+      stat = fit[["QM"]],
+      df1   = fit[["QMdf"]][1],
+      pval  = fit[["QMp"]]
+    )
+
+    if (.maIsMetaregressionFtest(options))
+      row1$df2 <- fit[["QMdf"]][2]
+
+    if (.maIsMetaregressionHeterogeneity(options))
+      row1$parameter <- gettext("Effect size")
+
+    moderatorsTable$addRows(row1)
+  }
+
+  # heterogeneity moderation
+  if (.maIsMetaregressionHeterogeneity(options)) {
+
+    row2 <- list(
+      stat  = fit[["QS"]],
+      df1   = fit[["QSdf"]][1],
+      pval  = fit[["QSp"]]
+    )
+
+    if (.maIsMetaregressionFtest(options))
+      row2$df2 <- fit[["QSdf"]][2]
+
+    row2$parameter <- gettext("Heterogeneity")
+    moderatorsTable$addRows(row2)
+  }
+
+
+  if (options[["clustering"]] != "")
+    moderatorsTable$addFootnote(.maClusteringMessage(fit), symbol = gettext("Clustering:"))
+
+  return()
+}
+.maPooledEstimatesTable               <- function(jaspResults, dataset, options) {
+
+  modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults)
+
+  if (!is.null(modelSummaryContainer[["pooledEstimatesTable"]]))
+    return()
+
+  if (!.maIsMetaregression(options))
+    return()
+
+  fit <- .maExtractFit(jaspResults, options)
+
+  # pooled estimates
+  pooledEstimatesTable          <- createJaspTable(gettext("Pooled Estimates"))
+  pooledEstimatesTable$position <- 3
+  pooledEstimatesTable$dependOn(c("heterogeneityTau", "heterogeneityTau2", "heterogeneityI2", "heterogeneityH2", "confidenceIntervals", "confidenceIntervalsLevel"))
+  modelSummaryContainer[["pooledEstimatesTable"]] <- pooledEstimatesTable
+
+  pooledEstimatesTable$addColumnInfo(name = "par",  type = "string", title = "")
+  pooledEstimatesTable$addColumnInfo(name = "est",  type = "number", title = gettext("Estimate"))
+  if (options[["confidenceIntervals"]]) {
+    overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
+    pooledEstimatesTable$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
+    pooledEstimatesTable$addColumnInfo(name = "uCi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
+  }
+
+
+  # stop on error
+  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+    return()
+
+  # pooled estimates
+  emmPrepFit <- metafor::emmprep(fit)
+  emmResults <- data.frame(emmeans::emmeans(
+    emmPrepFit,
+    specs   = "1",
+    type    = "response",
+    weights = "proportional",
+    level   = options[["confidenceIntervalsLevel"]]
+  ))
+
+  if (options[["confidenceIntervals"]]) {
+    pooledEstimatesTable$addRows(list(
+      par = "Effect Size",
+      est = emmResults$emmean,
+      lCi = emmResults[1,ncol(emmResults) - 1],
+      uCi = emmResults[1,ncol(emmResults)]
+    ))
+  } else {
+    pooledEstimatesTable$addRows(list(
+      par = "Effect Size",
+      est = emmResults$emmean
+    ))
+  }
+
+
+  if (.maGetMethodOptions(options) != "FE") {
+
+    heterogeneityShow <- c(
+      if (options[["heterogeneityTau"]])  1,
+      if (options[["heterogeneityTau2"]]) 2,
+      if (options[["heterogeneityI2"]])   3,
+      if (options[["heterogeneityH2"]])   4
+    )
+
+    if (length(heterogeneityShow) > 0) {
+
+      confIntHeterogeneity <- confint(
+        jaspResults[["fit"]]$object[["fit"]], # requires non-clustered fit
+        level = 100 * options[["confidenceIntervalsLevel"]]
+      )
+      confIntHeterogeneity <- data.frame(confIntHeterogeneity[["random"]])[c(2,1,3,4),]
+      colnames(confIntHeterogeneity) <- c("est", "lCi", "uCi")
+      confIntHeterogeneity$par       <- c("\U1D70F", "\U1D70F\U00B2", "I\U00B2", "H\U00B2")
+
+      if (!options[["confidenceIntervals"]])
+        confIntHeterogeneity <- confIntHeterogeneity[,c("par", "est")]
+
+      for (i in heterogeneityShow)
+        pooledEstimatesTable$addRows(confIntHeterogeneity[i,])
+
+    }
   }
 
   return()
@@ -254,6 +477,9 @@
 
   if (parameter == "effectSize") {
 
+    if (!.maIsMetaregressionEffectSize(options))
+      return()
+
     terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")
     termsIndex <- attr(model.matrix(fit[["formula.mods"]], data = fit[["data"]]), "assign")
     termsTests <- do.call(rbind.data.frame, lapply(seq_along(terms), function(i) {
@@ -276,6 +502,9 @@
     termsTable$setData(termsTests)
 
   } else if (parameter == "heterogeneity") {
+
+    if (!.maIsMetaregressionHeterogeneity(options))
+      return()
 
     terms      <- attr(terms(fit[["formula.scale"]], data = fit[["data"]]),"term.labels")
     termsIndex <- attr(model.matrix(fit[["formula.scale"]], data = fit[["data"]]), "assign")
@@ -449,6 +678,18 @@
     return(jaspResults[["fit"]]$object[["fit"]])
   }
 }
+.maExtractModelSummaryContainer   <- function(jaspResults) {
+
+  if (!is.null(jaspResults[["modelSummaryContainer"]]))
+    return(jaspResults[["modelSummaryContainer"]])
+
+  # create the output container
+  modelSummaryContainer <- createJaspContainer(gettext("Model Summary"))
+  modelSummaryContainer$dependOn(.maDependencies)
+  jaspResults[["modelSummaryContainer"]] <- modelSummaryContainer
+
+  return(modelSummaryContainer)
+}
 .maExtractMetaregressionContainer <- function(jaspResults) {
 
   if (!is.null(jaspResults[["metaregressionContainer"]]))
@@ -462,6 +703,9 @@
   return(metaregressionContainer)
 }
 .maIsMetaregression               <- function(options) {
+  return(.maIsMetaregressionEffectSize(options) || .maIsMetaregressionHeterogeneity(options))
+}
+.maIsMetaregressionEffectSize     <- function(options) {
   return(length(options[["effectSizeModelTerms"]]) > 0)
 }
 .maIsMetaregressionHeterogeneity  <- function(options) {

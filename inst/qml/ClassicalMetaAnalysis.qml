@@ -182,7 +182,7 @@ Form
 			{
 				name:		"metaregressionTermsTests"
 				text:		qsTr("Terms tests")
-				checked:	true
+				checked:	true // TODO: Enable once at least one term is selected
 			}
 
 			CheckBox
