@@ -18,7 +18,6 @@
 .ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   .maFitModel(jaspResults, dataset, options)
-  #.maSummaryTable(jaspResults, dataset, options)
 
   # model summary
   .maResidualHeterogeneityTable(jaspResults, dataset, options)
@@ -39,10 +38,13 @@
     .maCoefficientCorrelationMatrixTable(jaspResults, dataset, options, "heterogeneity")
   }
 
+  if (options[["fitMeasures"]])
+    .maFitMeasuresTable(jaspResults, dataset, options)
+
   return()
 }
 
-
+# fitting functions
 .maGetFormula       <- function(modelTerms, includeIntercept) {
 
   predictors <- unlist(lapply(modelTerms, function(x) {
@@ -123,131 +125,8 @@
 
   return()
 }
-.maSummaryTable     <- function(jaspResults, dataset, options) {
 
-  if (!is.null(jaspResults[["modelSummaryContainer"]]))
-    return()
-
-  fit <- .maExtractFit(jaspResults, options)
-
-  modelSummaryContainer <- createJaspContainer(gettext("Model Summary"))
-  modelSummaryContainer$dependOn(c(.maDependencies, "confidenceIntervals", ))
-  jaspResults[["modelSummaryContainer"]] <- modelSummaryContainer
-
-
-  ### residual heterogeneity table ----
-  residualHeterogeneityTable          <- createJaspTable(gettext("Residual Heterogeneity Test"))
-  residualHeterogeneityTable$position <- 1
-
-  residualHeterogeneityTable$addColumnInfo(name = "qstat", type = "number",  title = gettext("QE"))
-  residualHeterogeneityTable$addColumnInfo(name = "df",    type = "integer", title = gettext("df"))
-  residualHeterogeneityTable$addColumnInfo(name = "pval",  type = "pvalue",  title = gettext("p"))
-
-  modelSummaryContainer[["residualHeterogeneityTable"]] <- residualHeterogeneityTable
-
-
-  ### moderators table ----
-  if (.maIsMetaregression(options)) {
-
-    moderatorsTable          <- createJaspTable(gettext("Omnibus Moderation Test"))
-    moderatorsTable$position <- 2
-
-    # add column name for the omnibus test if both effect size and scale moderators are specified
-    if (.maIsMetaregressionHeterogeneity(options))
-      moderatorsTable$addColumnInfo(name = "parameter", type = "string",  title = gettext("Parameter"))
-
-    # dispatch columns based on the test type
-    moderatorsTable$addColumnInfo(name = "stat", type = "number",   title = if(.maIsMetaregressionFtest(options)) gettext("F")   else gettext("QM"))
-    moderatorsTable$addColumnInfo(name = "df1",  type = "integer",  title = if(.maIsMetaregressionFtest(options)) gettext("df1") else gettext("df"))
-    if (.maIsMetaregressionFtest(options))
-      moderatorsTable$addColumnInfo(name = "df2", type = "number", title = gettext("df2"))
-    moderatorsTable$addColumnInfo(name = "pval",  type = "pvalue",  title = gettext("p"))
-
-    modelSummaryContainer[["moderatorsTable"]] <- moderatorsTable
-  }
-
-
-  ### pooled results table ----
-  pooledResultsTable          <- createJaspTable(gettext("Pooled Results"))
-  pooledResultsTable$position <- 3
-
-  pooledResultsTable$addColumnInfo(name = "par",  type = "string", title = "")
-  pooledResultsTable$addColumnInfo(name = "est",  type = "number", title = "")
-  if (options[["confidenceIntervals"]]) {
-    overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
-    pooledResultsTable$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
-    pooledResultsTable$addColumnInfo(name = "uCi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
-  }
-  modelSummaryContainer[["pooledResultsTable"]] <- pooledResultsTable
-
-
-  ### stop on error ----
-  if (is.null(fit))
-    return()
-
-  if (!is.null(.maCheckIsPossibleOptions(options))) {
-    residualHeterogeneityTable$setError(.maCheckIsPossibleOptions(options))
-    return()
-  }
-
-  if (jaspBase::isTryError(fit)) {
-    residualHeterogeneityTable$setError(fit)
-    return()
-  }
-
-
-  ### fill tables ----
-
-  ### residual heterogeneity ----
-  residualHeterogeneityTable$addRows(list(
-    qstat = fit[["QE"]],
-    df    = fit[["k"]] - fit[["p"]],
-    pval  = fit[["QEp"]]
-  ))
-
-
-  ### meta-regression ----
-  if (.maIsMetaregression(options)) {
-
-    row1 <- list(
-      stat = fit[["QM"]],
-      df1   = fit[["QMdf"]][1],
-      pval  = fit[["QMp"]]
-    )
-
-    if (.maIsMetaregressionFtest(options))
-      row1$df2 <- fit[["QMdf"]][2]
-
-    if (.maIsMetaregressionHeterogeneity(options)) {
-
-      row2 <- list(
-        stat  = fit[["QS"]],
-        df1   = fit[["QSdf"]][1],
-        pval  = fit[["QSp"]]
-      )
-
-      if (.maIsMetaregressionFtest(options))
-        row2$df2 <- fit[["QSdf"]][2]
-
-      row1$parameter <- gettext("Effect size")
-      row2$parameter <- gettext("Heterogeneity")
-    }
-
-    moderatorsTable$addRows(row1)
-
-    if (.maIsMetaregressionHeterogeneity(options))
-      moderatorsTable$addRows(row2)
-
-    if (options[["clustering"]] != "")
-      moderatorsTable$addFootnote(.maClusteringMessage(fit), symbol = gettext("Clustering:"))
-  }
-
-
-
-
-  return()
-}
-
+# output tables
 .maResidualHeterogeneityTable         <- function(jaspResults, dataset, options) {
 
   modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults)
@@ -304,10 +183,11 @@
   # omnibus moderator table
   moderatorsTable          <- createJaspTable(gettext("Omnibus Moderation Test"))
   moderatorsTable$position <- 2
+  moderatorsTable$dependOn(c("addOmnibusModeratorTestEffectSizeCoefficients", "addOmnibusModeratorTestEffectSizeCoefficientsValues",
+                             "addOmnibusModeratorTestHeterogeneityCoefficients", "addOmnibusModeratorTestHeterogeneityCoefficientsValues"))
   modelSummaryContainer[["moderatorsTable"]] <- moderatorsTable
 
-  if (.maIsMetaregressionHeterogeneity(options))   # add column name for the omnibus test if both effect size and scale moderators are specified
-    moderatorsTable$addColumnInfo(name = "parameter", type = "string",  title = gettext("Parameter"))
+  moderatorsTable$addColumnInfo(name = "parameter", type = "string",  title = gettext("Parameter"))
   moderatorsTable$addColumnInfo(name = "stat", type = "number",   title = if(.maIsMetaregressionFtest(options)) gettext("F")   else gettext("QM"))
   moderatorsTable$addColumnInfo(name = "df1",  type = "integer",  title = if(.maIsMetaregressionFtest(options)) gettext("df1") else gettext("df"))
   if (.maIsMetaregressionFtest(options))
@@ -321,37 +201,36 @@
   # effect size moderation
   if (.maIsMetaregression(options)) {
 
-    row1 <- list(
-      stat = fit[["QM"]],
-      df1   = fit[["QMdf"]][1],
-      pval  = fit[["QMp"]]
-    )
+    testEffectSize <- .maOmnibusTest(fit, options, parameter = "effectSize")
+    moderatorsTable$addRows(testEffectSize)
 
-    if (.maIsMetaregressionFtest(options))
-      row1$df2 <- fit[["QMdf"]][2]
-
-    if (.maIsMetaregressionHeterogeneity(options))
-      row1$parameter <- gettext("Effect size")
-
-    moderatorsTable$addRows(row1)
+    if (options[["addOmnibusModeratorTestEffectSizeCoefficients"]]) {
+      testEffectSizeCoefficients <- .maOmnibusTestCoefficients(fit, options, parameter = "effectSize")
+      if (length(testEffectSizeCoefficients) == 1) {
+        moderatorsTable$setError(testEffectSizeCoefficients)
+        return()
+      } else {
+        moderatorsTable$addRows(testEffectSizeCoefficients)
+      }
+    }
   }
 
   # heterogeneity moderation
   if (.maIsMetaregressionHeterogeneity(options)) {
 
-    row2 <- list(
-      stat  = fit[["QS"]],
-      df1   = fit[["QSdf"]][1],
-      pval  = fit[["QSp"]]
-    )
+    testHeterogeneity <- .maOmnibusTest(fit, options, parameter = "heterogeneity")
+    moderatorsTable$addRows(testHeterogeneity)
 
-    if (.maIsMetaregressionFtest(options))
-      row2$df2 <- fit[["QSdf"]][2]
-
-    row2$parameter <- gettext("Heterogeneity")
-    moderatorsTable$addRows(row2)
+    if (options[["addOmnibusModeratorTestHeterogeneityCoefficients"]]) {
+      testHeterogeneityCoefficients <- .maOmnibusTestCoefficients(fit, options, parameter = "heterogeneity")
+      if (length(testHeterogeneityCoefficients) == 1) {
+        moderatorsTable$setError(testHeterogeneityCoefficients)
+        return()
+      } else {
+        moderatorsTable$addRows(testHeterogeneityCoefficients)
+      }
+    }
   }
-
 
   if (options[["clustering"]] != "")
     moderatorsTable$addFootnote(.maClusteringMessage(fit), symbol = gettext("Clustering:"))
@@ -411,6 +290,31 @@
   pooledEstimatesMessages <- .maPooledEstimatesMessages(fit, dataset, options)
   for (i in seq_along(pooledEstimatesMessages))
     pooledEstimatesTable$addFootnote(pooledEstimatesMessages[i])
+
+  return()
+}
+.maFitMeasuresTable                   <- function(jaspResults, dataset, options) {
+
+  fit <- .maExtractFit(jaspResults, options)
+
+  # fit measures table
+  fitMeasuresTable          <- createJaspTable(gettext("Fit Measures"))
+  fitMeasuresTable$position <- 3
+  fitMeasuresTable$dependOn(c(.maDependencies, "fitMeasures"))
+  jaspResults[["fitMeasuresTable"]] <- fitMeasuresTable
+
+
+  fitMeasuresTable$addColumnInfo(name = "ll",   title = gettext("Log Lik."), type = "number")
+  fitMeasuresTable$addColumnInfo(name = "dev",  title = gettext("Deviance"), type = "number")
+  fitMeasuresTable$addColumnInfo(name = "AIC",  title = gettext("AIC"),      type = "number")
+  fitMeasuresTable$addColumnInfo(name = "BIC",  title = gettext("BIC"),      type = "number")
+  fitMeasuresTable$addColumnInfo(name = "AICc", title = gettext("AICc"),     type = "number")
+
+  # stop on error
+  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+    return()
+
+  fitMeasuresTable$setData(t(fit[["fit.stats"]]))
 
   return()
 }
@@ -642,6 +546,7 @@
   return()
 }
 
+# containers/state functions
 .maExtractFit                     <- function(jaspResults, options) {
 
   if (is.null(jaspResults[["fit"]]$object))
@@ -662,6 +567,7 @@
   # create the output container
   modelSummaryContainer <- createJaspContainer(gettext("Model Summary"))
   modelSummaryContainer$dependOn(.maDependencies)
+  modelSummaryContainer$position <- 1
   jaspResults[["modelSummaryContainer"]] <- modelSummaryContainer
 
   return(modelSummaryContainer)
@@ -674,11 +580,13 @@
   # create the output container
   metaregressionContainer <- createJaspContainer(gettext("Meta-Regression Summary"))
   metaregressionContainer$dependOn(c(.maDependencies, "confidenceInterval"))
+  metaregressionContainer$position <- 2
   jaspResults[["metaregressionContainer"]] <- metaregressionContainer
 
   return(metaregressionContainer)
 }
 
+# help compute functions
 .maComputePooledEffect            <- function(fit, options) {
 
   if (!.maIsMetaregressionEffectSize(options)) {
@@ -695,12 +603,21 @@
       predictedEffect <- predict(
         fit,
         newmods = colMeans(model.matrix(fit))[-1],
-        evel    = 100 * options[["confidenceIntervalsLevel"]]
+        level   = 100 * options[["confidenceIntervalsLevel"]]
       )
     }
   }
 
+  # to data.frame
   predictedEffect <- data.frame(predictedEffect)
+
+  # add empty prediction interval for FE
+  if (.maGetMethodOptions(options) == "FE") {
+    predictedEffect$pi.lb <- NA
+    predictedEffect$pi.ub <- NA
+  }
+
+  # fix column names
   colnames(predictedEffect) <- c("est", "se", "lCi", "uCi", "lPi", "uPi")
   predictedEffect$par       <- "Effect Size"
 
@@ -778,7 +695,72 @@
 
   return(confIntHeterogeneity)
 }
+.maOmnibusTest                    <- function(fit, options, parameter = "effectSize") {
 
+  if (parameter == "effectSize") {
+    row <- list(
+      parameter = gettext("Effect size"),
+      stat      = fit[["QM"]],
+      df1       = fit[["QMdf"]][1],
+      pval      = fit[["QMp"]]
+    )
+  } else if (parameter == "heterogeneity") {
+    row <- list(
+      parameter = gettext("Heterogeneity"),
+      stat      = fit[["QS"]],
+      df1       = fit[["QSdf"]][1],
+      pval      = fit[["QSp"]]
+    )
+  }
+
+  if (.maIsMetaregressionFtest(options)) {
+    if (parameter == "effectSize")
+      row$df2 <- fit[["QMdf"]][2]
+    else if (parameter == "heterogeneity")
+      row$df2 <- fit[["QSdf"]][2]
+  }
+
+  return(row)
+}
+.maOmnibusTestCoefficients        <- function(fit, options, parameter = "effectSize") {
+
+  if (parameter == "effectSize") {
+    maxCoef <- nrow(fit$beta)
+    selCoef <- .parseRCodeInOptions(options[["addOmnibusModeratorTestEffectSizeCoefficientsValues"]])
+  } else if (parameter == "heterogeneity") {
+    maxCoef <- nrow(fit$alpha)
+    selCoef <- .parseRCodeInOptions(options[["addOmnibusModeratorTestHeterogeneityCoefficientsValues"]])
+  }
+
+  if (!is.numeric(selCoef) || any(!(abs(selCoef - round(selCoef)) < .Machine$double.eps^0.5)))
+    return(gettext("The selected coefficients must be an integer vector."))
+  if (any(selCoef < 1) || any(selCoef > maxCoef))
+    return(gettextf("The selected coefficients must be between 1 and %1$i (i.e., the number of regression parameters).", maxCoef))
+
+  if (parameter == "effectSize") {
+    out <- anova(fit, btt = selCoef)
+  } else if (parameter == "heterogeneity") {
+    out <- anova(fit, btt = selCoef)
+  }
+
+  row <- list(
+    stat = out[["QM"]],
+    df1  = out[["QMdf"]][1],
+    pval = out[["QMp"]]
+  )
+
+  if (.maIsMetaregressionFtest(options))
+    row$df2 <- fit[["QMdf"]][2]
+
+  if (.maIsMetaregressionHeterogeneity(options))
+    row$parameter <- gettextf("Effect size (coef: %1$s)", paste(selCoef, collapse = ","))
+  else if (.maIsMetaregressionEffectSize(options))
+    row$parameter <- gettextf("Heterogeneity (coef: %1$s)", paste(selCoef, collapse = ","))
+
+  return(row)
+}
+
+# check functions
 .maIsMetaregression               <- function(options) {
   return(.maIsMetaregressionEffectSize(options) || .maIsMetaregressionHeterogeneity(options))
 }
@@ -800,6 +782,7 @@
   return(NULL)
 }
 
+# extract options
 .maGetMethodOptions               <- function(options) {
   switch(
     options[["method"]],
@@ -828,6 +811,7 @@
     return(tau2)
 }
 
+# misc
 .maVariableNames                  <- function(varNames, variables) {
 
   return(sapply(varNames, function(varName){
@@ -858,7 +842,7 @@
   }))
 }
 
-
+# messages
 .maClusteringMessage              <- function(fit) {
   if (all(fit[["tcl"]][1] == fit[["tcl"]])) {
     return(gettextf("%1$i clusters with %2$i estimates each.", fit[["n"]],  fit[["tcl"]][1]))

@@ -51,6 +51,7 @@ Form
 		DropDown
 		{
 			name:			"method"
+			id:				method
 			label:			qsTr("Method")
 			startValue:		"restrictedML"
 			values: [
@@ -202,8 +203,9 @@ Form
 
 		Group
 		{
-			title: qsTr("Hetereogeneity")
-			columns: 2
+			title:		qsTr("Hetereogeneity")
+			columns:	2
+			enabled:	method.value != "fixedEffects"
 
 			CheckBox
 			{
@@ -256,7 +258,7 @@ Form
 
 		CheckBox
 		{
-			name:		"fitMeasure"
+			name:		"fitMeasures"
 			text:		qsTr("Fit measures")
 		}
 	}
@@ -349,6 +351,40 @@ Form
 					label: 				""
 					name: 				"fixParametersWeightsVariable"
 					source:				"allVariables"
+				}
+			}
+		}
+
+		Group
+		{
+			title:	qsTr("Add Omibus Moderator Test")
+			
+			CheckBox
+			{ // TODO: enable only if metaregression specified
+				text:	qsTr("Effect size coefficients")
+				name:	"addOmnibusModeratorTestEffectSizeCoefficients"
+				childrenOnSameRow:	false
+
+				// TODO: remove check for a number
+				TextField
+				{
+					label: 				""
+					name: 				"addOmnibusModeratorTestEffectSizeCoefficientsValues"
+					value:				"c(1, 2)"
+				}
+			}
+
+			CheckBox
+			{
+				text:	qsTr("Heterogeneity coefficients")
+				name:	"addOmnibusModeratorTestHeterogeneityCoefficients"
+				childrenOnSameRow:	false
+
+				TextField
+				{
+					label: 				""
+					name: 				"addOmnibusModeratorTestHeterogeneityCoefficientsValues"
+					value:				"c(1, 2)"
 				}
 			}
 		}
