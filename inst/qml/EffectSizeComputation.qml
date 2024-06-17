@@ -30,6 +30,7 @@ Form
 		id:		effectSizeType
 		name:	"effectSizeType"
 		headerLabels:	["Design", "Measurement", "Effect size"]
+		defaultValues:	[{"design": "independentGroups"}]
 
 		rowComponent: RowLayout
 		{
