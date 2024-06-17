@@ -291,6 +291,12 @@ Form
 
 	Section
 	{
+		title:	qsTr("Estimated Marginal Means")
+		
+	}
+
+	Section
+	{
 		title:	qsTr("Plots")
 
 		CheckBox
