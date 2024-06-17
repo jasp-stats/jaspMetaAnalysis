@@ -275,7 +275,7 @@
   pooledEstimatesTable$addRows(pooledEffect)
 
   # pooled heterogeneity
-  if (.maGetMethodOptions(options) != "FE") {
+  if (!.maGetMethodOptions(options) %in% c("EE", "FE")) {
 
     # requires non-clustered fit
     pooledHeterogeneity <- .maComputePooledHeterogeneity(jaspResults[["fit"]]$object[["fit"]], options)
@@ -611,8 +611,8 @@
   # to data.frame
   predictedEffect <- data.frame(predictedEffect)
 
-  # add empty prediction interval for FE
-  if (.maGetMethodOptions(options) == "FE") {
+  # add empty prediction interval for FE and EE
+  if (.maGetMethodOptions(options) %in% c("FE", "EE")) {
     predictedEffect$pi.lb <- NA
     predictedEffect$pi.ub <- NA
   }
@@ -786,6 +786,7 @@
 .maGetMethodOptions               <- function(options) {
   switch(
     options[["method"]],
+    "equalEffects"       = "EE",
     "fixedEffects"       = "FE",
     "maximumLikelihood"  = "ML",
     "restrictedML"       = "REML",

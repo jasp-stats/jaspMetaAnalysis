@@ -55,6 +55,7 @@ Form
 			label:			qsTr("Method")
 			startValue:		"restrictedML"
 			values: [
+				{ label: qsTr("Equal Effects")			, value: "equalEffects"		},
 				{ label: qsTr("Fixed Effects")			, value: "fixedEffects"		},
 				{ label: qsTr("Maximum Likelihood")		, value: "maximumLikelihood"},
 				{ label: qsTr("Restricted ML")			, value: "restrictedML"		},
@@ -205,7 +206,7 @@ Form
 		{
 			title:		qsTr("Hetereogeneity")
 			columns:	2
-			enabled:	method.value != "fixedEffects"
+			enabled:	method.value != "fixedEffects" && method.value != "equalEffects"
 
 			CheckBox
 			{
