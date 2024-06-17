@@ -46,7 +46,9 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "heterogeneityModelTerms", "heterogeneityModelIncludeIntercept", "predictors", "predictors.types",
   "clustering", "studyLabel",
   "method", "fixedEffectTest", "confidenceIntervalsLevel",
-  "clusteringUseClubSandwich", "clusteringSmallSampleCorrection"
+  "clusteringUseClubSandwich", "clusteringSmallSampleCorrection",
+  "fixParametersTau2", "fixParametersTau2Value",
+  "fixParametersWeights", "fixParametersWeightsVariable"
 )
 
 .maReady               <- function(options) {
@@ -75,7 +77,8 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     columns.as.numeric  = c(
       options[["effectSize"]],
       options[["effectSizeStandardError"]],
-      if (length(predictorsScale) > 0) predictorsScale
+      if (length(predictorsScale) > 0) predictorsScale,
+      if (options[["fixParametersWeights"]]) options[["fixParametersWeightsVariable"]]
     ))
 
   # omit NAs

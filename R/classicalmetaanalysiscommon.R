@@ -79,6 +79,12 @@
     data = dataset
   )
 
+  # add fixed parameters if needed
+  if (options[["fixParametersWeights"]])
+    rmaInput$weights <- as.name(options[["fixParametersWeightsVariable"]])
+  if (options[["fixParametersTau2"]])
+    rmaInput$tau2 <- .maGetFixedTau2Options(options)
+
   # add labels if specified
   if (options[["studyLabel"]] != "")
     rmaInput$slab <- as.name(options[["studyLabel"]])
@@ -359,15 +365,12 @@
   if (!is.null(modelSummaryContainer[["pooledEstimatesTable"]]))
     return()
 
-  if (!.maIsMetaregression(options))
-    return()
-
   fit <- .maExtractFit(jaspResults, options)
 
   # pooled estimates
   pooledEstimatesTable          <- createJaspTable(gettext("Pooled Estimates"))
   pooledEstimatesTable$position <- 3
-  pooledEstimatesTable$dependOn(c("heterogeneityTau", "heterogeneityTau2", "heterogeneityI2", "heterogeneityH2", "confidenceIntervals", "confidenceIntervalsLevel"))
+  pooledEstimatesTable$dependOn(c("heterogeneityTau", "heterogeneityTau2", "heterogeneityI2", "heterogeneityH2", "confidenceIntervals", "confidenceIntervalsLevel", "heterogeneityPredictionInterval"))
   modelSummaryContainer[["pooledEstimatesTable"]] <- pooledEstimatesTable
 
   pooledEstimatesTable$addColumnInfo(name = "par",  type = "string", title = "")
@@ -377,64 +380,37 @@
     pooledEstimatesTable$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
     pooledEstimatesTable$addColumnInfo(name = "uCi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
   }
+  if (options[["heterogeneityPredictionInterval"]]) {
+    overtitleCi <- gettextf("%s%% PI", 100 * options[["confidenceIntervalsLevel"]])
+    pooledEstimatesTable$addColumnInfo(name = "lPi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
+    pooledEstimatesTable$addColumnInfo(name = "uPi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
+  }
 
 
   # stop on error
   if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
-  # pooled estimates
-  emmPrepFit <- metafor::emmprep(fit)
-  emmResults <- data.frame(emmeans::emmeans(
-    emmPrepFit,
-    specs   = "1",
-    type    = "response",
-    weights = "proportional",
-    level   = options[["confidenceIntervalsLevel"]]
-  ))
+  # pooled effect size
+  pooledEffect <- .maComputePooledEffect(fit, options)
+  pooledEstimatesTable$addRows(pooledEffect)
 
-  if (options[["confidenceIntervals"]]) {
-    pooledEstimatesTable$addRows(list(
-      par = "Effect Size",
-      est = emmResults$emmean,
-      lCi = emmResults[1,ncol(emmResults) - 1],
-      uCi = emmResults[1,ncol(emmResults)]
-    ))
-  } else {
-    pooledEstimatesTable$addRows(list(
-      par = "Effect Size",
-      est = emmResults$emmean
-    ))
-  }
-
-
+  # pooled heterogeneity
   if (.maGetMethodOptions(options) != "FE") {
 
-    heterogeneityShow <- c(
-      if (options[["heterogeneityTau"]])  1,
-      if (options[["heterogeneityTau2"]]) 2,
-      if (options[["heterogeneityI2"]])   3,
-      if (options[["heterogeneityH2"]])   4
-    )
+    # requires non-clustered fit
+    pooledHeterogeneity <- .maComputePooledHeterogeneity(jaspResults[["fit"]]$object[["fit"]], options)
 
-    if (length(heterogeneityShow) > 0) {
-
-      confIntHeterogeneity <- confint(
-        jaspResults[["fit"]]$object[["fit"]], # requires non-clustered fit
-        level = 100 * options[["confidenceIntervalsLevel"]]
-      )
-      confIntHeterogeneity <- data.frame(confIntHeterogeneity[["random"]])[c(2,1,3,4),]
-      colnames(confIntHeterogeneity) <- c("est", "lCi", "uCi")
-      confIntHeterogeneity$par       <- c("\U1D70F", "\U1D70F\U00B2", "I\U00B2", "H\U00B2")
-
-      if (!options[["confidenceIntervals"]])
-        confIntHeterogeneity <- confIntHeterogeneity[,c("par", "est")]
-
-      for (i in heterogeneityShow)
-        pooledEstimatesTable$addRows(confIntHeterogeneity[i,])
-
+    if (nrow(pooledHeterogeneity) > 0) {
+      for (i in 1:nrow(pooledHeterogeneity))
+        pooledEstimatesTable$addRows(pooledHeterogeneity[i,])
     }
   }
+
+  # add messages
+  pooledEstimatesMessages <- .maPooledEstimatesMessages(fit, dataset, options)
+  for (i in seq_along(pooledEstimatesMessages))
+    pooledEstimatesTable$addFootnote(pooledEstimatesMessages[i])
 
   return()
 }
@@ -702,6 +678,107 @@
 
   return(metaregressionContainer)
 }
+
+.maComputePooledEffect            <- function(fit, options) {
+
+  if (!.maIsMetaregressionEffectSize(options)) {
+    predictedEffect <- predict(fit, level = 100 * options[["confidenceIntervalsLevel"]])
+  } else {
+    if (.maIsMetaregressionHeterogeneity(options)) {
+      predictedEffect <- predict(
+        fit,
+        newmods  = colMeans(model.matrix(fit)$location)[-1],
+        newscale = colMeans(model.matrix(fit)$scale)[-1],
+        level    = 100 * options[["confidenceIntervalsLevel"]]
+      )
+    } else {
+      predictedEffect <- predict(
+        fit,
+        newmods = colMeans(model.matrix(fit))[-1],
+        evel    = 100 * options[["confidenceIntervalsLevel"]]
+      )
+    }
+  }
+
+  predictedEffect <- data.frame(predictedEffect)
+  colnames(predictedEffect) <- c("est", "se", "lCi", "uCi", "lPi", "uPi")
+  predictedEffect$par       <- "Effect Size"
+
+  keepResults <- c(
+    "par",
+    "est",
+    if (options[["confidenceIntervals"]]) "lCi",
+    if (options[["confidenceIntervals"]]) "uCi",
+    if (options[["heterogeneityPredictionInterval"]]) "lPi",
+    if (options[["heterogeneityPredictionInterval"]]) "uPi"
+  )
+
+  predictedEffect <- predictedEffect[,keepResults]
+  return(as.list(predictedEffect))
+}
+.maComputePooledHeterogeneity     <- function(fit, options) {
+
+  if (options[["fixParametersTau2"]]) {
+
+    confIntHeterogeneity <- data.frame(
+      par = c("\U1D70F", "\U1D70F\U00B2"),
+      est = c(sqrt(.maGetFixedTau2Options(options)), .maGetFixedTau2Options(options)),
+      lCi = c(NA, NA),
+      uCi = c(NA, NA)
+    )
+
+    # keep only the requested parameters (other than tau and tau^2 are not possible)
+    heterogeneityShow <- c(
+      if (options[["heterogeneityTau"]])  1,
+      if (options[["heterogeneityTau2"]]) 2
+    )
+
+    confIntHeterogeneity <- confIntHeterogeneity[heterogeneityShow,,drop = FALSE]
+
+  } else if (.maIsMetaregressionHeterogeneity(options)) {
+    # no confint support
+    # predict the scale on the average value
+    predScale <- predict(fit, newscale = colMeans(model.matrix(fit)$scale)[-1], level = 100 * options[["confidenceIntervalsLevel"]])
+
+    confIntHeterogeneity <- data.frame(
+      par = c("\U1D70F", "\U1D70F\U00B2"),
+      est = exp(c(predScale[["pred"]]  / 2, predScale[["pred"]])),
+      lCi = exp(c(predScale[["ci.lb"]] / 2, predScale[["ci.lb"]])),
+      uCi = exp(c(predScale[["ci.ub"]] / 2, predScale[["ci.ub"]]))
+    )
+
+    # keep only the requested parameters (other than tau and tau^2 are not possible)
+    heterogeneityShow <- c(
+      if (options[["heterogeneityTau"]])  1,
+      if (options[["heterogeneityTau2"]]) 2
+    )
+
+    confIntHeterogeneity <- confIntHeterogeneity[heterogeneityShow,,drop = FALSE]
+
+  } else {
+
+    confIntHeterogeneity <- confint(fit, level = 100 * options[["confidenceIntervalsLevel"]])
+    confIntHeterogeneity <- data.frame(confIntHeterogeneity[["random"]])[c(2,1,3,4),]
+    colnames(confIntHeterogeneity) <- c("est", "lCi", "uCi")
+    confIntHeterogeneity$par       <- c("\U1D70F", "\U1D70F\U00B2", "I\U00B2", "H\U00B2")
+
+    # keep only the requested parameters
+    heterogeneityShow <- c(
+      if (options[["heterogeneityTau"]])  1,
+      if (options[["heterogeneityTau2"]]) 2,
+      if (options[["heterogeneityI2"]])   3,
+      if (options[["heterogeneityH2"]])   4
+    )
+
+    confIntHeterogeneity <- confIntHeterogeneity[heterogeneityShow,,drop = FALSE]
+  }
+
+  if (!options[["confidenceIntervals"]])
+    confIntHeterogeneity <- confIntHeterogeneity[,c("par", "est")]
+
+  return(confIntHeterogeneity)
+}
+
 .maIsMetaregression               <- function(options) {
   return(.maIsMetaregressionEffectSize(options) || .maIsMetaregressionHeterogeneity(options))
 }
@@ -722,22 +799,7 @@
 
   return(NULL)
 }
-.maClusteringMessage              <- function(fit) {
 
-  if (all(fit[["tcl"]][1] == fit[["tcl"]])) {
-    return(gettextf("%1$i clusters with %2$i estimates each.", fit[["n"]],  fit[["tcl"]][1]))
-  } else {
-    return(gettextf("%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates.", fit[["n"]],  min(fit[["tcl"]]), median(fit[["tcl"]]), max(fit[["tcl"]])))
-  }
-}
-.maFixedEffectTextMessage         <- function(options) {
-  return(switch(
-    options[["fixedEffectTest"]],
-    "z"    = gettext("Fixed effect tested using z-distribution."),
-    "t"    = gettext("Fixed effect tested using t-distribution."),
-    "knha" = gettext("Fixed effect tested using Knapp and Hartung adjustment.")
-  ))
-}
 .maGetMethodOptions               <- function(options) {
   switch(
     options[["method"]],
@@ -756,6 +818,16 @@
     NA
   )
 }
+.maGetFixedTau2Options            <- function(options) {
+
+  tau2 <- .parseRCodeInOptions(options[["fixParametersTau2Value"]])
+
+  if (!is.numeric(tau2) || length(tau2) != 1 || tau2 < 0)
+    .quitAnalysis(gettext("The fixed value for tau2 must be a positive number."))
+  else
+    return(tau2)
+}
+
 .maVariableNames                  <- function(varNames, variables) {
 
   return(sapply(varNames, function(varName){
@@ -784,4 +856,39 @@
     return(varName)
 
   }))
+}
+
+
+.maClusteringMessage              <- function(fit) {
+  if (all(fit[["tcl"]][1] == fit[["tcl"]])) {
+    return(gettextf("%1$i clusters with %2$i estimates each.", fit[["n"]],  fit[["tcl"]][1]))
+  } else {
+    return(gettextf("%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates.", fit[["n"]],  min(fit[["tcl"]]), median(fit[["tcl"]]), max(fit[["tcl"]])))
+  }
+}
+.maFixedEffectTextMessage         <- function(options) {
+  return(switch(
+    options[["fixedEffectTest"]],
+    "z"    = gettext("Fixed effect tested using z-distribution."),
+    "t"    = gettext("Fixed effect tested using t-distribution."),
+    "knha" = gettext("Fixed effect tested using Knapp and Hartung adjustment.")
+  ))
+}
+.maPooledEstimatesMessages        <- function(fit, dataset, options) {
+
+  messages <- NULL
+
+  if (.maIsMetaregressionEffectSize(options))
+    messages <- c(messages, gettext("The pooled effect size corresponds to the weighted average effect across studies."))
+
+  if (.maIsMetaregressionHeterogeneity(options))
+    messages <- c(messages, gettext("The pooled heterogeneity estimate corresponds to the weighted average heterogeneity across studies."))
+
+  if (.maIsMetaregressionHeterogeneity(options) && (options[["heterogeneityI2"]] || options[["heterogeneityH2"]]))
+    messages <- c(messages, gettext("The I² and H² statistics are not available for heterogeneity models."))
+
+  if (length(attr(dataset, "na.action")) > 0)
+    messages <- c(messages, gettextf("%1$i observations were ommited due to missing values.", length(attr(dataset, "na.action"))))
+
+  return(messages)
 }
