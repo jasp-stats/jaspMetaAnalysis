@@ -235,7 +235,7 @@ Form
 
 			CheckBox
 			{
-				text:		qsTr("Prediction Interval")
+				text:		qsTr("Prediction interval")
 				name:		"heterogeneityPredictionInterval"
 				checked:	false
 			}
@@ -301,7 +301,7 @@ Form
 
 		Group
 		{
-			title: qsTr("Clustering")
+			title:	qsTr("Clustering")
 
 			CheckBox
 			{
@@ -315,6 +315,41 @@ Form
 				name:		"clusteringSmallSampleCorrection"
 				text:		qsTr("Small sample correction")
 				checked:	true
+			}
+		}
+
+		Group
+		{
+			title:	qsTr("Fix Parameters")
+
+			CheckBox // TODO: remove all items form heterogeneity model when specified
+			{
+				name:	"fixParametersTau2"
+				text:	qsTr("𝜏²")
+				childrenOnSameRow:	true
+
+				FormulaField
+				{
+					label: 				""
+					name: 				"fixParametersTau2Value"
+					value:				"1"
+					min: 				0
+					inclusive: 			JASP.None
+				}
+			}
+
+			CheckBox
+			{
+				name:	"fixParametersWeights"
+				text:	qsTr("Weights")
+				childrenOnSameRow:	true
+
+				DropDown
+				{
+					label: 				""
+					name: 				"fixParametersWeightsVariable"
+					source:				"allVariables"
+				}
 			}
 		}
 	}
