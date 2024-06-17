@@ -54,22 +54,31 @@ Form
 			id:				method
 			label:			qsTr("Method")
 			startValue:		"restrictedML"
-			values: [
-				{ label: qsTr("Equal Effects")			, value: "equalEffects"		},
-				{ label: qsTr("Fixed Effects")			, value: "fixedEffects"		},
-				{ label: qsTr("Maximum Likelihood")		, value: "maximumLikelihood"},
-				{ label: qsTr("Restricted ML")			, value: "restrictedML"		},
-				{ label: qsTr("DerSimonian-Laird")		, value: "derSimonianLaird"	},
-				{ label: qsTr("Hedges")					, value: "hedges"			},
-				{ label: qsTr("Hunter-Schmidt")			, value: "hunterSchmidt"	},
-				{ label: qsTr("Hunter-Schmidt (SSC)")	, value: "hunterSchmidtSsc"	},
-				{ label: qsTr("Sidik-Jonkman")			, value: "sidikJonkman"		},
-				{ label: qsTr("Empirical Bayes")		, value: "empiricalBayes"	},
-				{ label: qsTr("Paule-Mandel")			, value: "pauleMandel"		},
-				{ label: qsTr("Paule-Mandel (MU)")		, value: "pauleMandelMu"	},
-				{ label: qsTr("Generalized Q-stat")		, value: "qeneralizedQStat"	},
-				{ label: qsTr("Generalized Q-stat (MU)"), value: "qeneralizedQStatMu"	}
-			]
+			values:			(function() {
+				if (heterogeneityModelTerms.count == 0) {
+					return [
+						{ label: qsTr("Equal Effects")			, value: "equalEffects"		},
+						{ label: qsTr("Fixed Effects")			, value: "fixedEffects"		},
+						{ label: qsTr("Maximum Likelihood")		, value: "maximumLikelihood"},
+						{ label: qsTr("Restricted ML")			, value: "restrictedML"		},
+						{ label: qsTr("DerSimonian-Laird")		, value: "derSimonianLaird"	},
+						{ label: qsTr("Hedges")					, value: "hedges"			},
+						{ label: qsTr("Hunter-Schmidt")			, value: "hunterSchmidt"	},
+						{ label: qsTr("Hunter-Schmidt (SSC)")	, value: "hunterSchmidtSsc"	},
+						{ label: qsTr("Sidik-Jonkman")			, value: "sidikJonkman"		},
+						{ label: qsTr("Empirical Bayes")		, value: "empiricalBayes"	},
+						{ label: qsTr("Paule-Mandel")			, value: "pauleMandel"		},
+						{ label: qsTr("Paule-Mandel (MU)")		, value: "pauleMandelMu"	},
+						{ label: qsTr("Generalized Q-stat")		, value: "qeneralizedQStat"	},
+						{ label: qsTr("Generalized Q-stat (MU)"), value: "qeneralizedQStatMu"}
+					];
+				} else {
+					return [
+						{ label: qsTr("Maximum Likelihood")		, value: "maximumLikelihood"},
+						{ label: qsTr("Restricted ML")			, value: "restrictedML"		},
+						{ label: qsTr("Empirical Bayes")		, value: "empiricalBayes"	}
+					];
+				}})()
 		}
 
 		DropDown
