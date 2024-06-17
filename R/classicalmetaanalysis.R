@@ -49,7 +49,11 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "clusteringUseClubSandwich", "clusteringSmallSampleCorrection",
   "fixParametersTau2", "fixParametersTau2Value",
   "fixParametersWeights", "fixParametersWeightsVariable",
-  "heterogeneityModelLink"
+  "heterogeneityModelLink", "weightedEstimation",
+  "optimizerMethod", "optimizerInitialTau2", "optimizerInitialTau2Value",
+  "optimizerMinimumTau2", "optimizerMinimumTau2Value", "optimizerMaximumTau2", "optimizerMaximumTau2Value",
+  "optimizerMaximumIterations", "optimizerMaximumIterationsValue", "optimizerConvergenceTolerance", "optimizerConvergenceToleranceValue",
+  "optimizerConvergenceRelativeTolerance", "optimizerConvergenceRelativeToleranceValue", "optimizerStepAdjustment", "optimizerStepAdjustmentValue"
 )
 
 .maReady               <- function(options) {

@@ -84,12 +84,6 @@
     data = dataset
   )
 
-  # add fixed parameters if needed
-  if (options[["fixParametersWeights"]])
-    rmaInput$weights <- as.name(options[["fixParametersWeightsVariable"]])
-  if (options[["fixParametersTau2"]])
-    rmaInput$tau2 <- .maGetFixedTau2Options(options)
-# TODO: add link: heterogeneityModelLink
   # add labels if specified
   if (options[["studyLabel"]] != "")
     rmaInput$slab <- as.name(options[["studyLabel"]])
@@ -102,10 +96,28 @@
   rmaInput$method <- .maGetMethodOptions(options)
   rmaInput$test   <- options[["fixedEffectTest"]]
 
+  if (!options[["weightedEstimation"]])
+    rmaInput$weighted <- FALSE
+
+  # add fixed parameters if needed
+  if (options[["fixParametersWeights"]])
+    rmaInput$weights <- as.name(options[["fixParametersWeightsVariable"]])
+  if (options[["fixParametersTau2"]])
+    rmaInput$tau2 <- .maGetFixedTau2Options(options)
+
+  # add link function if needed
+  if (.maIsMetaregressionHeterogeneity(options))
+    rmaInput$link <- options[["heterogeneityModelLink"]]
+
+  # add control options if needed
+  control <- .maGetControlOptions(options)
+  if (length(control) != 0)
+    rmaInput$control <- control
+
   # additional input
   rmaInput$level <- 100 * options[["confidenceIntervalsLevel"]]
 
-  # fit the model
+  ### fit the model
   fit <- try(do.call(metafor::rma, rmaInput))
 
   # add clustering if specified
@@ -502,6 +514,9 @@
 
   }
 
+  if (parameter == "heterogeneity")
+    coefficientsTable$addFootnote(.meMetaregressionHeterogeneityMessages(options))
+
   return()
 }
 .maCoefficientCorrelationMatrixTable  <- function(jaspResults, dataset, options, parameter = "effectSize") {
@@ -662,12 +677,21 @@
     # predict the scale on the average value
     predScale <- predict(fit, newscale = colMeans(model.matrix(fit)$scale)[-1], level = 100 * options[["confidenceIntervalsLevel"]])
 
-    confIntHeterogeneity <- data.frame(
-      par = c("\U1D70F", "\U1D70F\U00B2"),
-      est = exp(c(predScale[["pred"]]  / 2, predScale[["pred"]])),
-      lCi = exp(c(predScale[["ci.lb"]] / 2, predScale[["ci.lb"]])),
-      uCi = exp(c(predScale[["ci.ub"]] / 2, predScale[["ci.ub"]]))
-    )
+    if (options[["heterogeneityModelLink"]] == "log") {
+      confIntHeterogeneity <- data.frame(
+        par = c("\U1D70F", "\U1D70F\U00B2"),
+        est = exp(c(predScale[["pred"]]  / 2, predScale[["pred"]])),
+        lCi = exp(c(predScale[["ci.lb"]] / 2, predScale[["ci.lb"]])),
+        uCi = exp(c(predScale[["ci.ub"]] / 2, predScale[["ci.ub"]]))
+      )
+    } else if (options[["heterogeneityModelLink"]] == "identity") {
+      confIntHeterogeneity <- data.frame(
+        par = c("\U1D70F", "\U1D70F\U00B2"),
+        est = c(sqrt(predScale[["pred"]]),  predScale[["pred"]]),
+        lCi = c(sqrt(predScale[["ci.lb"]]), predScale[["ci.lb"]]),
+        uCi = c(sqrt(predScale[["ci.ub"]]), predScale[["ci.ub"]])
+      )
+    }
 
     # keep only the requested parameters (other than tau and tau^2 are not possible)
     heterogeneityShow <- c(
@@ -789,6 +813,7 @@
 
 # extract options
 .maGetMethodOptions               <- function(options) {
+
   switch(
     options[["method"]],
     "equalEffects"       = "EE",
@@ -815,6 +840,39 @@
     .quitAnalysis(gettext("The fixed value for tau2 must be a positive number."))
   else
     return(tau2)
+}
+.maGetControlOptions              <- function(options) {
+
+  if (.maIsMetaregressionHeterogeneity(options)) {
+    out <- list(
+      optimizer = options[["optimizerMethod"]],
+      iter.max  = if (options[["optimizerMaximumIterations"]]) options[["optimizerMaximumIterationsValue"]],
+      rel.tol   = if (options[["optimizerConvergenceRelativeTolerance"]]) options[["optimizerConvergenceRelativeToleranceValue"]]
+    )
+  } else {
+    if (.maGetMethodOptions(options) %in% c("REML", "ML", "EB")) {
+      out <- list(
+        tau2.init = if (options[["optimizerInitialTau2"]]) options[["optimizerInitialTau2Value"]],
+        iter.max  = if (options[["optimizerMaximumIterations"]]) options[["optimizerMaximumIterationsValue"]],
+        threshold = if (options[["optimizerConvergenceTolerance"]]) options[["optimizerConvergenceToleranceValue"]],
+        stepadj   = if (options[["optimizerStepAdjustment"]]) options[["optimizerStepAdjustmentValue"]]
+      )
+    } else if (.maGetMethodOptions(options) %in% c("PM", "PMM", "GENQM")) {
+      out <- list(
+        iter.max  = if (options[["optimizerMaximumIterations"]]) options[["optimizerMaximumIterationsValue"]],
+        tol       = if (options[["optimizerConvergenceTolerance"]]) options[["optimizerConvergenceToleranceValue"]],
+        tau2.min  = if (options[["optimizerMinimumTau2"]]) options[["optimizerMinimumTau2Value"]],
+        tau2.max  = if (options[["optimizerMaximumTau2"]]) options[["optimizerMaximumTau2Value"]]
+      )
+    } else if (.maGetMethodOptions(options) %in% c("SD")) {
+      out <- list(
+        tau2.init = if (options[["optimizerInitialTau2"]]) options[["optimizerInitialTau2Value"]]
+      )
+    } else {
+      out <- list()
+    }
+  }
+  return(out[!sapply(out, is.null)])
 }
 
 # misc
@@ -849,7 +907,7 @@
 }
 
 # messages
-.maFixedEffectTextMessage         <- function(options) {
+.maFixedEffectTextMessage              <- function(options) {
   return(switch(
     options[["fixedEffectTest"]],
     "z"    = gettext("Fixed effect tested using z-distribution."),
@@ -857,7 +915,14 @@
     "knha" = gettext("Fixed effect tested using Knapp and Hartung adjustment.")
   ))
 }
-.maPooledEstimatesMessages        <- function(fit, dataset, options) {
+.meMetaregressionHeterogeneityMessages <- function(options) {
+
+  if (options[["heterogeneityModelLink"]] == "log")
+    return(gettext("The heterogeneity model for \U1D70F\U00B2 is specified on the log scale."))
+  else if (options[["heterogeneityModelLink"]] == "identity")
+    return(gettext("The heterogeneity model for \U1D70F\U00B2 is specified on the identity scale."))
+}
+.maPooledEstimatesMessages             <- function(fit, dataset, options) {
 
   messages <- NULL
 
