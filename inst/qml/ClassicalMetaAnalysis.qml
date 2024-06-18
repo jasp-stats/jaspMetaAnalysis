@@ -260,25 +260,28 @@ Form
 				name:		"heterogeneityH2"
 				checked:	false
 			}
+		}
+
+		Group
+		{
+			CheckBox
+			{
+				name:				"confidenceIntervals"
+				text:				qsTr("Confidence intervals")
+				checked:			true
+				childrenOnSameRow:	true
+
+				CIField
+				{
+					name:		"confidenceIntervalsLevel"
+				}
+			}
 
 			CheckBox
 			{
-				text:		qsTr("Prediction interval")
-				name:		"heterogeneityPredictionInterval"
-				checked:	false
-			}
-		}
-
-		CheckBox
-		{
-			name:				"confidenceIntervals"
-			text:				qsTr("Confidence intervals")
-			checked:			true
-			childrenOnSameRow:	true
-
-			CIField
-			{
-				name:		"confidenceIntervalsLevel"
+				text:		qsTr("Prediction intervals")
+				name:		"predictionIntervals"
+				checked:	true
 			}
 		}
 
@@ -292,7 +295,122 @@ Form
 	Section
 	{
 		title:	qsTr("Estimated Marginal Means")
-		
+
+		Group
+		{
+			title:		qsTr("Effect size")
+			enabled:	effectSizeModelTerms.count > 0
+
+			VariablesForm
+			{
+				preferredHeight:	250
+
+				AvailableVariablesList
+				{
+					name:			"estimatedMarginalMeansEffectSizeModelVariables"
+					title:			qsTr("Model variables")
+					source:			[{ name: "effectSizeModelTerms", use: "noInteraction" }]
+				}
+
+				AssignedVariablesList
+				{
+					id:				estimatedMarginalMeansEffectSizeSelectedVariables
+					name:			"estimatedMarginalMeansEffectSizeSelectedVariables"
+					title:			qsTr("Selected variables")
+					allowTypeChange:false
+				}
+			}
+
+			DropDown
+			{
+				name:			"estimatedMarginalMeansEffectSizeTransformation"
+				label:			qsTr("Effect size transformation")
+				values:			[
+						{ label: qsTr("None")								, value: "none"							},  // NULL
+						{ label: qsTr("Fisher's z to r")					, value: "fishersZToCorrelation"		},  // transf.ztor
+						{ label: qsTr("Exponential")						, value: "exponential"					},  // exp
+						{ label: qsTr("Log odds to proportions")			, value: "logOddsToProportions"			},  // transf.logit
+						{ label: qsTr("Log odds to SMD (normal)")			, value: "logOddsToSmdNormal"			},  // transf.lnortod.norm
+						{ label: qsTr("Log odds to SMD (logistic)")			, value: "logOddsToSmdLogistic"			},  // transf.lnortod.logis
+						{ label: qsTr("SMD to log odds (normal)")			, value: "smdToLogOddsNormal"			},  // transf.dtolnor.norm
+						{ label: qsTr("SMD to log odds (logistic)")			, value: "smdToLogOddsLogistic"			},  // transf.dtolnor.logis
+						{ label: qsTr("Hakstian & Whalen inverse α")		, value: "hakstianAndWhalenInverseAlpha"},  // transf.iahw 
+						{ label: qsTr("Bonett inverse α")					, value: "bonettInverseAlpha"			},  // transf.iabt
+						{ label: qsTr("Z to R²")							, value: "zToR2"						}, 	// transf.ztor2
+						{ label: qsTr("SMD to Cohen's U₁")					, value: "smdToCohensU1"				},  // transf.dtou1
+						{ label: qsTr("SMD to Cohen's U₂")					, value: "smdToCohensU2"				},  // transf.dtou2
+						{ label: qsTr("SMD to Cohen's U₃")					, value: "smdToCohensU3"				},  // transf.dtou3
+						{ label: qsTr("SMD to CLES, Pr(supperiority)")		, value: "smdToCles"					},  // transf.dtocles
+					]
+			}
+
+			DoubleField
+			{
+				name:			"estimatedMarginalMeansEffectSizeSdFactorCovariates"
+				label:			qsTr("SD factor covariates")
+				defaultValue: 	1
+				min:			0
+				enabled:		estimatedMarginalMeansEffectSizeSelectedVariables.columnsTypes.includes("scale")
+			}
+
+			CheckBox
+			{
+				name:				"estimatedMarginalMeansEffectSizeTestAgainst"
+				label:				qsTr("Test against")
+				childrenOnSameRow:	true
+
+				DoubleField
+				{
+					name:		"estimatedMarginalMeansEffectSizeTestAgainstValue"
+				}
+			}
+		}
+
+		Group
+		{
+			title:		qsTr("Heterogeneity")
+			enabled:	heterogeneityModelTerms.count > 0
+
+			VariablesForm
+			{
+				preferredHeight:	250
+
+				AvailableVariablesList
+				{
+					name:			"estimatedMarginalHeterogeneityModelVariables"
+					title:			qsTr("Model variables")
+					source:			[{ name: "heterogeneityModelTerms", use: "noInteraction" }]
+				}
+
+				AssignedVariablesList
+				{
+					id:				estimatedMarginalMeansHeterogeneitySelectedVariables
+					name:			"estimatedMarginalMeansHeterogeneitySelectedVariables"
+					title:			qsTr("Selected variables")
+					allowTypeChange:false
+				}
+			}
+
+			DropDown
+			{
+				name:			"estimatedMarginalMeansHeterogeneityTransformation"
+				label:			qsTr("Heterogeneity transformation")
+				values:			[
+						{ label: qsTr("𝜏")		, value: "tau"	},
+						{ label: qsTr("𝜏²")	, value: "tau2"	}
+					]
+			}
+
+			DoubleField
+			{
+				name:			"estimatedMarginalMeansHeterogeneitySdFactorCovariates"
+				label:			qsTr("SD factor covariates")
+				defaultValue: 	1
+				min:			0
+				enabled:		estimatedMarginalMeansHeterogeneitySelectedVariables.columnsTypes.includes("scale")
+			}
+		}
+
 	}
 
 	Section
