@@ -42,7 +42,9 @@
     }
   }
 
-
+  # estimated marginal means
+  .maEstimatedMarginalMeansTable(jaspResults, dataset, options, "effectSize")
+  .maEstimatedMarginalMeansTable(jaspResults, dataset, options, "heterogeneity")
 
   return()
 }
@@ -261,7 +263,7 @@
   # pooled estimates
   pooledEstimatesTable          <- createJaspTable(gettext("Pooled Estimates"))
   pooledEstimatesTable$position <- 3
-  pooledEstimatesTable$dependOn(c("heterogeneityTau", "heterogeneityTau2", "heterogeneityI2", "heterogeneityH2", "confidenceIntervals", "confidenceIntervalsLevel", "heterogeneityPredictionInterval"))
+  pooledEstimatesTable$dependOn(c("heterogeneityTau", "heterogeneityTau2", "heterogeneityI2", "heterogeneityH2", "confidenceIntervals", "confidenceIntervalsLevel", "predictionIntervals"))
   modelSummaryContainer[["pooledEstimatesTable"]] <- pooledEstimatesTable
 
   pooledEstimatesTable$addColumnInfo(name = "par",  type = "string", title = "")
@@ -271,7 +273,7 @@
     pooledEstimatesTable$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
     pooledEstimatesTable$addColumnInfo(name = "uCi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
   }
-  if (options[["heterogeneityPredictionInterval"]]) {
+  if (options[["predictionIntervals"]]) {
     overtitleCi <- gettextf("%s%% PI", 100 * options[["confidenceIntervalsLevel"]])
     pooledEstimatesTable$addColumnInfo(name = "lPi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
     pooledEstimatesTable$addColumnInfo(name = "uPi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
@@ -565,9 +567,86 @@
 
   return()
 }
+.maEstimatedMarginalMeansTable        <- function(jaspResults, dataset, options, parameter = "effectSize") {
+
+  estimatedMarginalMeansContainer <- .maExtractEstimatedMarginalMeansContainer(jaspResults)
+
+  if (!is.null(estimatedMarginalMeansContainer[[parameter]]))
+    return()
+
+  if (parameter == "effectSize" && length(options[["estimatedMarginalMeansEffectSizeSelectedVariables"]]) == 0)
+    return()
+  if (parameter == "heterogeneity" && length(options[["estimatedMarginalMeansHeterogeneitySelectedVariables"]]) == 0)
+    return()
+
+  fit <- .maExtractFit(jaspResults, options)
+
+  estimatedMarginalMeansTable <- createJaspTable(switch(
+    parameter,
+    effectSize    = gettext("Estimated Marginal Means: Effect Size"),
+    heterogeneity = gettext("Estimated Marginal Means: Heterogeneity")
+  ))
+  estimatedMarginalMeansTable$position <- switch(
+    parameter,
+    effectSize    = 1,
+    heterogeneity = 2
+  )
+  estimatedMarginalMeansTable$dependOn(switch(
+    parameter,
+    effectSize    = c("estimatedMarginalMeansEffectSizeSelectedVariables", "estimatedMarginalMeansEffectSizeTransformation", "estimatedMarginalMeansEffectSizeSdFactorCovariates",
+                      "estimatedMarginalMeansEffectSizeTestAgainst", "estimatedMarginalMeansEffectSizeTestAgainstValue", "predictionIntervals"),
+    heterogeneity = c("estimatedMarginalMeansHeterogeneitySelectedVariables", "estimatedMarginalMeansHeterogeneityTransformation", "estimatedMarginalMeansHeterogeneitySdFactorCovariates")
+  ))
+  estimatedMarginalMeansContainer[[parameter]] <- estimatedMarginalMeansTable
+
+
+  if (is.null(fit) || jaspBase::isTryError(fit))
+    return()
+
+
+  estimatedMarginalMeansTable$addColumnInfo(name = "variable",  type = "string", title = gettext("Variable"))
+  estimatedMarginalMeansTable$addColumnInfo(name = "value",     type = "string", title = gettext("Level"))
+  estimatedMarginalMeansTable$addColumnInfo(name = "est",       type = "number", title = gettext("Estimate"))
+
+  if (options[["confidenceIntervals"]]) {
+    overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
+    estimatedMarginalMeansTable$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
+    estimatedMarginalMeansTable$addColumnInfo(name = "uCi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
+  }
+
+  if (parameter == "effectSize") {
+
+    if (options[["predictionIntervals"]]) {
+      overtitleCi <- gettextf("%s%% PI", 100 * options[["confidenceIntervalsLevel"]])
+      estimatedMarginalMeansTable$addColumnInfo(name = "lPi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
+      estimatedMarginalMeansTable$addColumnInfo(name = "uPi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
+    }
+
+    if (options[["estimatedMarginalMeansEffectSizeTestAgainst"]]) {
+      estimatedMarginalMeansTable$addColumnInfo(name = "stat",  type = "number", title = if(.maIsMetaregressionFtest(options)) gettext("t") else gettext("z"))
+      if (.maIsMetaregressionFtest(options))
+        estimatedMarginalMeansTable$addColumnInfo(name = "df",  type = "number", title = gettext("df"))
+
+      estimatedMarginalMeansTable$addColumnInfo(name = "pval",  type = "pvalue", title = gettext("p"))
+    }
+  }
+
+
+  selectedVariables <- switch(
+    parameter,
+    effectSize    = unlist(options[["estimatedMarginalMeansEffectSizeSelectedVariables"]]),
+    heterogeneity = unlist(options[["estimatedMarginalMeansHeterogeneitySelectedVariables"]])
+  )
+  estimatedMarginalMeans <- do.call(rbind, lapply(selectedVariables, function(selectedVariable)
+    .maComputeMarginalMeansVariable(fit, options, dataset, selectedVariable, parameter)))
+
+  estimatedMarginalMeansTable$setData(estimatedMarginalMeans)
+
+  return()
+}
 
 # containers/state functions
-.maExtractFit                     <- function(jaspResults, options) {
+.maExtractFit                             <- function(jaspResults, options) {
 
   if (is.null(jaspResults[["fit"]]$object))
     return()
@@ -579,7 +658,7 @@
     return(jaspResults[["fit"]]$object[["fit"]])
   }
 }
-.maExtractModelSummaryContainer   <- function(jaspResults) {
+.maExtractModelSummaryContainer           <- function(jaspResults) {
 
   if (!is.null(jaspResults[["modelSummaryContainer"]]))
     return(jaspResults[["modelSummaryContainer"]])
@@ -592,7 +671,7 @@
 
   return(modelSummaryContainer)
 }
-.maExtractMetaregressionContainer <- function(jaspResults) {
+.maExtractMetaregressionContainer         <- function(jaspResults) {
 
   if (!is.null(jaspResults[["metaregressionContainer"]]))
     return(jaspResults[["metaregressionContainer"]])
@@ -605,9 +684,22 @@
 
   return(metaregressionContainer)
 }
+.maExtractEstimatedMarginalMeansContainer <- function(jaspResults) {
+
+  if (!is.null(jaspResults[["estimatedMarginalMeansContainer"]]))
+    return(jaspResults[["estimatedMarginalMeansContainer"]])
+
+  # create the output container
+  estimatedMarginalMeansContainer <- createJaspContainer(gettext("Meta-Regression Summary"))
+  estimatedMarginalMeansContainer$dependOn(c(.maDependencies, "confidenceIntervals", "confidenceIntervalsLevel"))
+  estimatedMarginalMeansContainer$position <- 3
+  jaspResults[["estimatedMarginalMeansContainer"]] <- estimatedMarginalMeansContainer
+
+  return(estimatedMarginalMeansContainer)
+}
 
 # help compute functions
-.maComputePooledEffect            <- function(fit, options) {
+.maComputePooledEffect             <- function(fit, options) {
 
   if (!.maIsMetaregressionEffectSize(options)) {
     predictedEffect <- predict(fit, level = 100 * options[["confidenceIntervalsLevel"]])
@@ -646,14 +738,14 @@
     "est",
     if (options[["confidenceIntervals"]]) "lCi",
     if (options[["confidenceIntervals"]]) "uCi",
-    if (options[["heterogeneityPredictionInterval"]]) "lPi",
-    if (options[["heterogeneityPredictionInterval"]]) "uPi"
+    if (options[["predictionIntervals"]]) "lPi",
+    if (options[["predictionIntervals"]]) "uPi"
   )
 
   predictedEffect <- predictedEffect[,keepResults]
   return(as.list(predictedEffect))
 }
-.maComputePooledHeterogeneity     <- function(fit, options) {
+.maComputePooledHeterogeneity      <- function(fit, options) {
 
   if (options[["fixParametersTau2"]]) {
 
@@ -724,7 +816,7 @@
 
   return(confIntHeterogeneity)
 }
-.maOmnibusTest                    <- function(fit, options, parameter = "effectSize") {
+.maOmnibusTest                     <- function(fit, options, parameter = "effectSize") {
 
   if (parameter == "effectSize") {
     row <- list(
@@ -751,7 +843,7 @@
 
   return(row)
 }
-.maOmnibusTestCoefficients        <- function(fit, options, parameter = "effectSize") {
+.maOmnibusTestCoefficients         <- function(fit, options, parameter = "effectSize") {
 
   if (parameter == "effectSize") {
     maxCoef <- nrow(fit$beta)
@@ -788,6 +880,156 @@
 
   return(row)
 }
+.maGetMarginalMeansPredictorMatrix <- function(fit, options, dataset, selectedVariable, parameter) {
+
+  variablesContinuous <- options[["predictors"]][options[["predictors.types"]] == "scale"]
+  variablesFactors    <- options[["predictors"]][options[["predictors.types"]] == "nominal"]
+
+  # extract the corresponding formula
+  formula <- switch(
+    parameter,
+    effectSize    = fit[["formula.mods"]],
+    heterogeneity = fit[["formula.scale"]]
+  )
+
+  # select SD factor for covariates
+  sdFactor <- switch(
+    parameter,
+    effectSize    = options[["estimatedMarginalMeansEffectSizeSdFactorCovariates"]],
+    heterogeneity = options[["estimatedMarginalMeansHeterogeneitySdFactorCovariates"]]
+  )
+
+  # extract the used variables
+  terms     <- attr(terms(formula, data = fit[["data"]]), "term.labels")
+  variables <- terms[!grepl(":", terms)]
+
+  # average across remaining variables
+  remainingVariables <- variables[variables != selectedVariable]
+
+  ### create model matrix for the remaining predictors
+  # (use all factors for levels to average out the predictor matrix later)
+  predictorsRemaining <- list()
+  for (i in seq_along(remainingVariables)) {
+    if (remainingVariables[[i]] %in% variablesFactors) {
+      predictorsRemaining[[remainingVariables[i]]] <- factor(levels(dataset[[remainingVariables[[i]]]]), levels = levels(dataset[[remainingVariables[[i]]]]))
+    } else if (remainingVariables[[i]] %in% variablesContinuous) {
+      predictorsRemaining[[remainingVariables[i]]] <- mean(dataset[[remainingVariables[[i]]]])
+    }
+  }
+
+  # create complete model matrices including the specified variable
+  if (selectedVariable %in% variablesFactors) {
+    selectedPredictor <- factor(levels(dataset[[selectedVariable]]), levels = levels(dataset[[selectedVariable]]))
+  } else if (selectedVariable %in% variablesContinuous) {
+    selectedPredictor <- c(
+      mean(dataset[[selectedVariable]]) - sdFactor * sd(dataset[[selectedVariable]]),
+      mean(dataset[[selectedVariable]]),
+      mean(dataset[[selectedVariable]]) + sdFactor * sd(dataset[[selectedVariable]])
+    )
+  }
+
+  # add the specified variable and pool across the combinations of the remaining values
+  outMatrix <- do.call(rbind, lapply(seq_along(selectedPredictor), function(i) {
+    predictorsRemaining[[selectedVariable]] <- selectedPredictor[i]
+    outMatrix <- model.matrix(formula, data = expand.grid(predictorsRemaining))
+    return(colMeans(outMatrix)[-1])
+  }))
+
+  # keep information about the variable and levels
+  attr(outMatrix, "variable") <- selectedVariable
+  if (selectedVariable %in% variablesFactors)
+    attr(outMatrix, "at") <- selectedPredictor
+  else if (selectedVariable %in% variablesContinuous)
+    attr(outMatrix, "at") <- c(
+      gettextf("Mean - %1$sSD", sdFactor),
+      gettext("Mean"),
+      gettextf("Mean + %1$sSD", sdFactor))
+
+  return(outMatrix)
+}
+.maComputeMarginalMeansVariable    <- function(fit, options, dataset, selectedVariable, parameter) {
+
+  if (parameter == "effectSize") {
+    predictorMatrixEffectSize <- .maGetMarginalMeansPredictorMatrix(fit, options, dataset, selectedVariable, "effectSize")
+
+    if (.maIsMetaregressionHeterogeneity(options)) {
+
+      predictorMatrixHeterogeneity <- .maGetMarginalMeansPredictorMatrix(fit, options, dataset, selectedVariable, "heterogeneity")
+      computedMarginalMeans <- predict(
+        fit,
+        newmods  = predictorMatrixEffectSize,
+        newscale = predictorMatrixHeterogeneity,
+        level    = 100 * options[["confidenceIntervalsLevel"]]
+      )
+    } else {
+
+      computedMarginalMeans <- predict(
+        fit,
+        newmods = predictorMatrixEffectSize,
+        level   = 100 * options[["confidenceIntervalsLevel"]]
+      )
+    }
+
+    # compute test against specified value
+    if (.maIsMetaregressionFtest(options)) {
+      computedMarginalMeans      <- cbind(data.frame(computedMarginalMeans), "df" = computedMarginalMeans$ddf)
+      computedMarginalMeans$stat <- (computedMarginalMeans$pred - options[["estimatedMarginalMeansEffectSizeTestAgainstValue"]])  / computedMarginalMeans$se
+      computedMarginalMeans$pval <- 2 * pt(abs(computedMarginalMeans$stat), computedMarginalMeans$df, lower.tail = FALSE)
+      colnames(computedMarginalMeans) <- c("est", "se", "lCi", "uCi", "lPi", "uPi", "df", "stat", "pval")
+    } else {
+      computedMarginalMeans      <- data.frame(computedMarginalMeans)
+      computedMarginalMeans$stat <- (computedMarginalMeans$pred - options[["estimatedMarginalMeansEffectSizeTestAgainstValue"]])  / computedMarginalMeans$se
+      computedMarginalMeans$pval <- 2 * pnorm(abs(computedMarginalMeans$stat), lower.tail = FALSE)
+      colnames(computedMarginalMeans) <- c("est", "se", "lCi", "uCi", "lPi", "uPi", "stat", "pval")
+    }
+
+    # TODO: apply effect size transformation
+    .maGetEffectSizeTransformationOptions(options)
+
+    # create full data frame
+    computedMarginalMeans <- cbind(data.frame("variable" = selectedVariable, "value" = attr(predictorMatrixEffectSize, "at")), computedMarginalMeans)
+
+  } else if (parameter == "heterogeneity") {
+
+    predictorMatrixHeterogeneity <- .maGetMarginalMeansPredictorMatrix(fit, options, dataset, selectedVariable, "heterogeneity")
+
+    computedMarginalMeans <- predict(
+      fit,
+      newscale = predictorMatrixHeterogeneity,
+      level    = 100 * options[["confidenceIntervalsLevel"]]
+    )
+
+    computedMarginalMeans <- data.frame(computedMarginalMeans)
+    colnames(computedMarginalMeans) <- c("est", "se", "lCi", "uCi")
+
+    # apply link transform
+    if (options[["heterogeneityModelLink"]] == "log") {
+      computedMarginalMeans <- exp(computedMarginalMeans)
+    }
+
+    # apply tau / tau2 transform
+    if (options[["estimatedMarginalMeansHeterogeneityTransformation"]] == "tau")
+      computedMarginalMeans <- sqrt(computedMarginalMeans)
+
+    # create full data frame
+    computedMarginalMeans <- cbind(data.frame("variable" = selectedVariable, "value" = attr(predictorMatrixHeterogeneity, "at")), computedMarginalMeans)
+  }
+
+
+  # remove unnecessary columns
+  computedMarginalMeans <- computedMarginalMeans[,!colnames(computedMarginalMeans) %in% "se"]
+
+  if (!options[["confidenceIntervals"]])
+    computedMarginalMeans <- computedMarginalMeans[,!colnames(computedMarginalMeans) %in% c("lCi", "uCi")]
+
+  if (!options[["predictionIntervals"]])
+    computedMarginalMeans <- computedMarginalMeans[,!colnames(computedMarginalMeans) %in% c("lPi", "uPi")]
+
+  if (!options[["estimatedMarginalMeansEffectSizeTestAgainst"]])
+    computedMarginalMeans <- computedMarginalMeans[,!colnames(computedMarginalMeans) %in% c("df", "stat", "pval")]
+
+  return(computedMarginalMeans)
+}
 
 # check functions
 .maIsMetaregression               <- function(options) {
@@ -812,7 +1054,7 @@
 }
 
 # extract options
-.maGetMethodOptions               <- function(options) {
+.maGetMethodOptions                   <- function(options) {
 
   switch(
     options[["method"]],
@@ -832,7 +1074,7 @@
     NA
   )
 }
-.maGetFixedTau2Options            <- function(options) {
+.maGetFixedTau2Options                <- function(options) {
 
   tau2 <- .parseRCodeInOptions(options[["fixParametersTau2Value"]])
 
@@ -841,7 +1083,7 @@
   else
     return(tau2)
 }
-.maGetControlOptions              <- function(options) {
+.maGetControlOptions                  <- function(options) {
 
   if (.maIsMetaregressionHeterogeneity(options)) {
     out <- list(
@@ -874,7 +1116,28 @@
   }
   return(out[!sapply(out, is.null)])
 }
+.maGetEffectSizeTransformationOptions <- function(options) {
 
+  switch(
+    options[["estimatedMarginalMeansEffectSizeTransformation"]],
+    none                          = NULL,
+    fishersZToCorrelation         = metafor::transf.ztor,
+    exponential                   = exp,
+    logOddsToProportions          = metafor::transf.logit,
+    logOddsToSmdNormal            = metafor::transf.lnortod.norm,
+    logOddsToSmdLogistic          = metafor::transf.lnortod.logis,
+    smdToLogOddsNormal            = metafor::transf.dtolnor.norm,
+    smdToLogOddsLogistic          = metafor::transf.dtolnor.logis,
+    hakstianAndWhalenInverseAlpha = metafor::transf.iahw,
+    bonettInverseAlpha            = metafor::transf.iabt,
+    zToR2                         = metafor::transf.ztor2,
+    smdToCohensU1                 = metafor::transf.dtou1,
+    smdToCohensU2                 = metafor::transf.dtou2,
+    smdToCohensU3                 = metafor::transf.dtou3,
+    smdToCles                     = metafor::transf.dtocles,
+    stop("Unknown transformation")
+  )
+}
 # misc
 .maVariableNames                  <- function(varNames, variables) {
 
@@ -937,7 +1200,7 @@
     messages <- c(messages, gettext("The pooled effect size corresponds to the weighted average effect across studies."))
 
   if (.maIsMetaregressionHeterogeneity(options))
-    messages <- c(messages, gettext("The pooled heterogeneity estimate corresponds to the weighted average heterogeneity across studies."))
+    messages <- c(messages, gettext("The pooled heterogeneity estimate corresponds to the heterogeneity at the average of predictor values."))
 
   if (.maIsMetaregressionHeterogeneity(options) && (options[["heterogeneityI2"]] || options[["heterogeneityH2"]]))
     messages <- c(messages, gettext("The I² and H² statistics are not available for heterogeneity models."))
