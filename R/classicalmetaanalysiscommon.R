@@ -912,6 +912,7 @@
   for (i in seq_along(remainingVariables)) {
     if (remainingVariables[[i]] %in% variablesFactors) {
       predictorsRemaining[[remainingVariables[i]]] <- factor(levels(dataset[[remainingVariables[[i]]]]), levels = levels(dataset[[remainingVariables[[i]]]]))
+      contrasts(predictorsRemaining[[remainingVariables[i]]]) <- contrasts(dataset[[remainingVariables[[i]]]])
     } else if (remainingVariables[[i]] %in% variablesContinuous) {
       predictorsRemaining[[remainingVariables[i]]] <- mean(dataset[[remainingVariables[[i]]]])
     }
@@ -920,6 +921,7 @@
   # create complete model matrices including the specified variable
   if (selectedVariable %in% variablesFactors) {
     selectedPredictor <- factor(levels(dataset[[selectedVariable]]), levels = levels(dataset[[selectedVariable]]))
+    contrasts(selectedPredictor) <- contrasts(dataset[[selectedVariable]])
   } else if (selectedVariable %in% variablesContinuous) {
     selectedPredictor <- c(
       mean(dataset[[selectedVariable]]) - sdFactor * sd(dataset[[selectedVariable]]),
