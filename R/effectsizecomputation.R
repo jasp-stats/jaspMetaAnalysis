@@ -1,13 +1,10 @@
 
 EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
 
-#  saveRDS(options, file = "C:/JASP/options.RDS")
-#  saveRDS(dataset, file = "C:/JASP/dataset.RDS")
-
-
+  # TODO: remove once Bruno fixes flattening and renaming
+  options <- .HOTFIX_flatten_options(options)
 
   dataset     <- .escReadDataset(dataset, options)
-  return(NULL)
   dataOutput  <- .escComputeEffectSizes(dataset, options)
 
   .escComputeSummaryTable(jaspResults, dataset, options, dataOutput)
@@ -33,17 +30,15 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
       # all possible variables
       selectedVariables <- options[["variables"]][[i]]
 
-      # remove auxiliary objects
-      selectedVariables <- selectedVariables[!names(selectedVariables) %in% c("value")]
-
-      # remove Frequency/event cell adjustment
-      selectedVariables <- selectedVariables[!names(selectedVariables) %in% c("add", "to", "dropStudiesWithNoCasesOrEvents", "samplingVarianceType")]
+      # extract variable inputs
+      # TODO: remove once variable inputs are properly flattened
+      selectedVariables <- c(
+        unlist(selectedVariables[.escVariableInputs]),
+        if(length(selectedVariables[["confidenceInterval"]]) != 0) selectedVariables[["confidenceInterval"]][[1]]
+      )
 
       # remove empty variables
-      selectedVariables <- selectedVariables[!(selectedVariables == "" | lengths(selectedVariables) == 0)]
-
-      # unlist
-      selectedVariables <- unname(unlist(selectedVariables))
+      selectedVariables <- selectedVariables[!selectedVariables == ""]
 
       return(selectedVariables)
     })
@@ -130,10 +125,10 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
     # set the data
     computeSummary$setData(computeSummaryData)
 
-    if (nrow(dataset == sum(computeSummaryData[["computed"]])))
-      addFootnote(computeSummary, gettext("Note: Effect sizes were successfully computed for each data entry."))
+    if (nrow(dataset) == sum(computeSummaryData[["computed"]]))
+      computeSummary$addFootnote(gettext("Effect sizes were successfully computed for each data entry."))
     else
-      addFootnote(computeSummary, gettextf(
+      computeSummary$addFootnote(gettextf(
         "Note: Effect sizes were successfully computed for %1$i out of %2$i data entries.",
         sum(computeSummaryData[["computed"]]),
         nrow(dataset)))
@@ -141,7 +136,7 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
 
   computeErrors <- attr(dataOutput, "errors")
   for (i in seq_along(computeErrors)) {
-    addFootnote(computeSummary, with(computeErrors[[i]], gettextf("Error in step %1$i: %2$s", step, error)))
+    computeSummary$addFootnote(computeErrors[[i]]$error, symbol = gettextf("Error in step %1$i:", computeErrors[[i]]$step))
   }
 
   return()
@@ -784,8 +779,6 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
   # remove new lines
   errorMessage <- gsub("\\n ", "", errorMessage)
 
-  errorMessage <- attr(newDataOutput, "condition")$message
-
   if (grepl("via the appropriate arguments", errorMessage)) {
 
     # split the message at 'via the appropriate arguments'
@@ -821,4 +814,78 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
   inputs$lci <- NULL
 
   return(inputs)
+}
+.escVariableInputs                    <- c(
+  "group1OutcomePlus",
+  "time1OutcomePlus",
+  "outcomePlusPlus",
+  "cronbachsAlpha",
+  "homozygousDominantAlleles",
+  "group1OutcomeMinus",
+  "time1OutcomeMinus",
+  "outcomePlusMinus",
+  "heterozygousAlleles",
+  "group2OutcomePlus",
+  "time2OutcomePlus",
+  "outcomeMinusPlus",
+  "homozygousRecessiveAlleles",
+  "group2OutcomeMinus",
+  "time2OutcomeMinus",
+  "outcomeMinusMinus",
+  "outcomePlusPlusAndPlusMinus",
+  "outcomeMinusPlusAndMinusMinus",
+  "eventsGroup1",
+  "events",
+  "nonEvents",
+  "items",
+  "predictors",
+  "eventsGroup2",
+  "personTimeGroup1",
+  "personTime",
+  "personTimeGroup2",
+  "meanGroup1",
+  "meanTime1",
+  "meanGroup2",
+  "meanTime2",
+  "mean",
+  "sdGroup1",
+  "sdTime1",
+  "sdGroup2",
+  "sdTime2",
+  "sd",
+  "sampleSizeGroup1",
+  "sampleSizeGroup2",
+  "correlation",
+  "proportionPlusPlus",
+  "sampleSize",
+  "cohensD",
+  "rSquared",
+  "tStatistic",
+  "fStatistic",
+  "semipartialCorrelation",
+  "pValue",
+  "effectSize",
+  "standardError",
+  "samplingVariance",
+  "samplingVarianceTypeMixed"
+)
+
+.HOTFIX_flatten_options <- function(options) {
+
+  for(i in seq_along(options[["variables"]])) {
+    options[["variables"]][[i]][.escVariableInputs] <- lapply(options[["variables"]][[i]][.escVariableInputs], function(x) x[["value"]])
+
+    to_decode <- .escVariableInputs[sapply(options[["variables"]][[i]][.escVariableInputs], function(x) x != "")]
+    if(length(to_decode) != 0) {
+      for(j in seq_along(to_decode)) {
+        options[["variables"]][[i]][[to_decode[j]]] <- .encodeColNamesLax(options[["variables"]][[i]][[to_decode[j]]])
+      }
+    }
+
+    if(length(options[["variables"]][["confidenceInterval"]]) != 0) {
+      options[["variables"]][["confidenceInterval"]][[1]] <- .encodeColNamesLax(options[["variables"]][["confidenceInterval"]][[1]])
+    }
+  }
+
+  return(options)
 }
