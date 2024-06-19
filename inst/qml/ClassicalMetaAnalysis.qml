@@ -26,7 +26,7 @@ Form
 {
 	VariablesForm
 	{
-		preferredHeight: 425 * preferencesModel.uiScale
+		preferredHeight: 400 * preferencesModel.uiScale
 
 		AvailableVariablesList
 		{
@@ -104,14 +104,6 @@ Form
 			title:				qsTr("Clustering")
 			singleVariable:		true
 			allowedColumns:		["nominal"]
-		}
-
-		AssignedVariablesList
-		{
-			name:				"studyLabel"
-			title:				qsTr("Study Label")
-			singleVariable:		true
-			suggestedColumns:	["nominal"]
 		}
 	}
 
@@ -283,11 +275,11 @@ Form
 				name:		"predictionIntervals"
 				checked:	true
 			}
-/* TODO: add with fixed width (now it's too wide!)
+
 			DropDown
-			{
-				name:			"transformPooledEstimate"
-				label:			qsTr("Transform pooled estimate")
+			{//TODO: make shorter or across both rows?
+				name:			"transformEffectSize"
+				label:			qsTr("Transform effect size")
 				values:			[
 						{ label: qsTr("None")								, value: "none"							},  // NULL
 						{ label: qsTr("Fisher's z to r")					, value: "fishersZToCorrelation"		},  // transf.ztor
@@ -306,7 +298,6 @@ Form
 						{ label: qsTr("SMD to CLES, Pr(supperiority)")		, value: "smdToCles"					},  // transf.dtocles
 					]
 			}
-*/
 		}
 
 		CheckBox
@@ -350,7 +341,7 @@ Form
 				name:		"estimatedMarginalMeansEffectSizeAddAdjustedEstimate"
 				label:		qsTr("Add adjusted estimate")
 			}
-
+/*
 			DropDown
 			{
 				name:			"estimatedMarginalMeansEffectSizeTransformation"
@@ -373,7 +364,7 @@ Form
 						{ label: qsTr("SMD to CLES, Pr(supperiority)")		, value: "smdToCles"					},  // transf.dtocles
 					]
 			}
-
+*/
 			DoubleField
 			{
 				name:			"estimatedMarginalMeansEffectSizeSdFactorCovariates"
@@ -391,7 +382,8 @@ Form
 
 				DoubleField
 				{
-					name:		"estimatedMarginalMeansEffectSizeTestAgainstValue"
+					name:			"estimatedMarginalMeansEffectSizeTestAgainstValue"
+					defaultValue:	0
 				}
 			}
 		}
@@ -451,34 +443,367 @@ Form
 
 	Section
 	{
-		title:	qsTr("Plots")
+		title:	qsTr("Forest Plot")
+		columns:2
 
 		CheckBox
 		{
 			id:			forestPlot
 			name: 		"forestPlot"
 			text: 		qsTr("Forest plot")
+		}
 
-			CheckBox
+		VariablesForm
+		{
+			preferredHeight: 	150 * preferencesModel.uiScale
+
+			AvailableVariablesList
+			{			
+				name:				"forestPlotLeftPanelVariablesAll"
+			}
+
+			AssignedVariablesList
 			{
-				name:		"forestPlotLabel"
-				text:		qsTr("Show labels")
+				name:				"forestPlotLeftPanelVariablesSelected"
+				title:				qsTr("Left Panel Variables") //TODO: make the VariablesForm title
+				allowedColumns:		["nominal"]
+			}
+		}
+
+		ComponentsList
+		{
+			name:				"forestPlotLeftPanelVariableSettings"
+			source:				"forestPlotLeftPanelVariablesSelected"
+			headerLabels:		[qsTr("Title"), qsTr("Column width")]
+
+			rowComponent: 			RowLayout
+			{
+				Text
+				{
+					text:					rowValue
+					Layout.preferredWidth:	100 * preferencesModel.uiScale
+					elide:					Text.ElideRight
+				}
+
+				TextField
+				{
+					label:				""
+					name:				"title"
+					value:				""
+					fieldWidth: 		100 * preferencesModel.uiScale
+					useExternalBorder:	false
+					showBorder: 		true
+				}
+
+				DoubleField
+				{
+					label: 				""
+					name: 				"width"
+					value:				"1"
+					min: 				0
+					inclusive: 			JASP.None
+					fieldWidth:			40 * preferencesModel.uiScale
+					useExternalBorder:	false
+					showBorder:			true
+				}
+			}
+		}
+
+		Group
+		{
+			title:	qsTr("Mapping")
+
+			DropDown
+			{
+				name:			"forestPlotMappingColor"
+				label:			qsTr("Color")
+				addEmptyValue:	true
+				source:			"forestPlotLeftPanelVariablesAll"
 			}
 
 			DropDown
 			{
-				name:			"forestPlotOrder"
-				label:			qsTr("Ordering")
-				currentIndex:	1
-				values: [
-					{ label: qsTr("Year (ascending)")			, value: "yearAscending"			},
-					{ label: qsTr("Year (descending)")			, value: "yearDescending"			},
-					{ label: qsTr("Effect size (ascending)")	, value: "effectSizeAscending"		},
-					{ label: qsTr("Effect size (descending)")	, value: "effectSizeDescending"		}
-				]
+				name:			"forestPlotMappingShape"
+				label:			qsTr("Shape")
+				addEmptyValue:	true
+				source:			"forestPlotLeftPanelVariablesAll"
+			}
+		}
+
+		Group
+		{
+			title:	qsTr("Order")
+
+			DropDown
+			{
+				name:			"forestPlotOrderBy"
+				label:			qsTr("By")
+				addEmptyValue:	true
+				source:			"forestPlotLeftPanelVariablesAll"
 			}
 
+			CheckBox
+			{
+				name:		"forestPlotAscending"
+				text:		qsTr("Ascending")
+			}
 		}
+
+
+		Group
+		{
+			title:		qsTr("Right Panel")
+
+			CheckBox
+			{
+				name:			"forestPlotRightPanelEstimate"
+				text:			qsTr("Estimate")
+				checked:		true
+			}
+
+			CheckBox
+			{
+				name:			"forestPlotRightPanelConfidenceInterval"
+				text:			qsTr("Confidence interval")
+				checked:		true
+			}
+
+			CheckBox
+			{
+				name:			"forestPlotRightPanelWeights"
+				text:			qsTr("Weights")
+			}
+
+			IntegerField
+			{
+				name:			"forestPlotRightPanelDigits"
+				text:			qsTr("Digits")
+				min:			1
+				value:			2
+				inclusive: 		JASP.None
+			}
+		}
+
+
+		Group
+		{
+			title:		qsTr("Model Information")
+
+			CheckBox
+			{
+				name:		"forestPlotPredictedEffects"
+				text:		qsTr("Predicted effects")
+				checked:	false
+
+				CheckBox
+				{
+					name:		"forestPlotPredictedEffectsPredictionInterval"
+					text:		qsTr("Prediction interval")
+					checked:	false
+				}
+			}
+
+			CheckBox
+			{
+				name:		"forestPlotPooledEffectSizeEstimate"
+				text:		qsTr("Pooled effect size estimate")
+				checked:	true
+
+				CheckBox
+				{
+					name:		"forestPlotPooledEffectSizeEstimatePredictionInterval"
+					text:		qsTr("Prediction interval")
+				}
+			}
+
+			CheckBox
+			{
+				name:		"forestPlotResidualHeterogeneityTest"
+				text:		qsTr("Residual heterogeneity test")
+				checked:	true
+			}
+
+			CheckBox
+			{
+				name:		"forestPlotResidualHeterogeneityEstimate"
+				text:		qsTr("Residual heterogeneity estimate")
+				enabled:	method.value != "fixedEffects" || method.value != "equalEffects"
+				checked:	true
+			}
+
+			CheckBox
+			{
+				name:		"forestPlotEffectSizeModerationTest"
+				text:		qsTr("Effect size moderation test")
+				enabled:	effectSizeModelTerms.count > 0
+				checked:	true
+			}
+
+			CheckBox
+			{
+				name:		"forestPlotHeterogeneityModerationTest"
+				text:		qsTr("Heterogeneity moderation test")
+				enabled:	heterogeneityModelTerms.count > 0
+				checked:	true
+			}
+		}
+
+		Group
+		{
+			title:		qsTr("Relative Size")
+
+			DoubleField
+			{
+				name:			"forestPlotRelativeSizeEstimates"
+				text:			qsTr("Estimates")
+				defaultValue:	1
+				min:			0
+				inclusive: 		JASP.None
+			}
+
+			DoubleField
+			{
+				name:			"forestPlotRelativeSizeText"
+				text:			qsTr("Text")
+				defaultValue:	1
+				min:			0
+				inclusive: 		JASP.None
+			}
+
+			DoubleField
+			{
+				name:			"forestPlotRelativeSizeRow"
+				text:			qsTr("Row")
+				defaultValue:	1
+				min:			0
+				inclusive: 		JASP.None
+			}
+		}
+
+		Group
+		{
+			title:		qsTr("Auxiliary")
+
+			DropDown
+			{
+				name:			"forestPlotAuxiliaryPlotColor"
+				label:			qsTr("Color")
+				values:			[
+						{ label: qsTr("Black")		, value: "black"},
+						{ label: qsTr("Blue")		, value: "blue"	},
+						{ label: qsTr("Red")		, value: "red"	}
+					]
+			}
+
+			CheckBox
+			{
+				name:			"forestPlotAuxiliaryAddVerticalLine"
+				text:			qsTr("Add vertical line")
+
+				DoubleField
+				{
+					name:			"forestPlotAuxiliaryAddVerticalLineValue"
+					defaultValue:	0
+					negativeValues:	true
+				}
+			}
+
+			TextField
+			{
+				name:			"forestPlotAuxiliaryEffectLabel"
+				text:			qsTr("X-axis label")
+				value:			"Effect Size"
+			}
+
+			CheckBox
+			{
+				name:			"forestPlotAuxiliarySetXAxisLimit"
+				text:			qsTr("X-axis limits")
+				childrenOnSameRow:	true
+
+				DoubleField
+				{
+					name:			"forestPlotAuxiliarySetXAxisLimitLower"
+					id:				forestPlotAuxiliarySetXAxisLimitLower
+					text:			qsTr("Lower")
+					defaultValue:	-1
+					negativeValues:	true
+					max:			forestPlotAuxiliarySetXAxisLimitUpper
+					inclusive: 		JASP.None
+				}
+
+				DoubleField
+				{
+					name:			"forestPlotAuxiliarySetXAxisLimitUpper"
+					id:				forestPlotAuxiliarySetXAxisLimitUpper
+					text:			qsTr("Upper")
+					defaultValue:	1
+					min:			forestPlotAuxiliarySetXAxisLimitLower			
+					inclusive: 		JASP.None
+				}
+			}
+		}
+
+
+
+		Group
+		{
+			columns:	2
+			enabled:	effectSizeModelTerms.count > 0
+			
+			CheckBox
+			{
+				name:			"forestPlotAddEstimatedMarginalMeans"
+				text:			qsTr("Add Estimated Marginal Means")
+			}
+
+			VariablesForm
+			{
+
+				preferredHeight:	250
+
+				AvailableVariablesList
+				{
+					name:			"forestPlotEstimatedMarginalMeansModelVariables"
+					title:			qsTr("Model variables")
+					source:			[{ name: "effectSizeModelTerms", use: "noInteraction" }]
+				}
+
+				AssignedVariablesList
+				{
+					id:				forestPlotEstimatedMarginalMeansSelectedVariables
+					name:			"forestPlotEstimatedMarginalMeansSelectedVariables"
+					title:			qsTr("Selected variables")
+					allowTypeChange:false
+				}
+			}
+
+			CheckBox
+			{
+				name:		"forestPlotEstimatedMarginalMeansAddAdjustedEstimate"
+				label:		qsTr("Add adjusted estimate")
+			}
+
+			CheckBox
+			{
+				name:		"forestPlotEstimatedMarginalMeansTermsTest"
+				label:		qsTr("Terms test")
+			}
+
+			CheckBox
+			{
+				name:		"forestPlotEstimatedMarginalMeansCoefficientTests"
+				label:		qsTr("Coefficient test")
+
+				DoubleField
+				{
+					name:			"forestPlotEstimatedMarginalMeansCoefficientTestsAgainst"
+					text:			qsTr("Against")
+					defaultValue:	0
+				}
+			}
+		}
+
 	}
 
 	MA.ClassicalMetaAnalysisDiagnostics{}
@@ -618,8 +943,8 @@ Form
 				DoubleField
 				{
 					label: 				""
-					name: 				"optimizerInitialTau2Value"
-					value:				1
+					name:				"optimizerInitialTau2Value"
+					defaultValue:		1
 					min: 				0
 					inclusive: 			JASP.None
 				}
@@ -639,7 +964,7 @@ Form
 					label: 				""
 					name: 				"optimizerMinimumTau2Value"
 					id:					optimizerMinimumTau2Value
-					value:				1e-6
+					defaultValue:		1e-6
 					min: 				0
 					max: 				optimizerMaximumTau2Value.value
 				}
@@ -659,7 +984,7 @@ Form
 					label: 				""
 					name: 				"optimizerMaximumTau2Value"
 					id:					optimizerMaximumTau2Value
-					value:				100
+					defaultValue:		100
 					min: 				optimizerMinimumTau2Value.value
 					inclusive: 			JASP.None
 				}
@@ -703,7 +1028,7 @@ Form
 				{
 					label: 				""
 					name: 				"optimizerConvergenceToleranceValue"
-					value:				{
+					defaultValue:		{
 						if (method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes")
 							1e-5
 						else if (method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu")
@@ -728,7 +1053,7 @@ Form
 				{
 					label: 				""
 					name: 				"optimizerConvergenceRelativeToleranceValue"
-					value:				1e-8
+					defaultValue:		1e-8
 					min: 				0
 					inclusive: 			JASP.None
 				}
@@ -747,7 +1072,7 @@ Form
 				{
 					label: 				""
 					name: 				"optimizerStepAdjustmentValue"
-					value:				1
+					defaultValue:		1
 					min: 				0
 					inclusive: 			JASP.None
 				}
