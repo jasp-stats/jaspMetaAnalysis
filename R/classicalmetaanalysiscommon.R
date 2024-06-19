@@ -1267,8 +1267,8 @@
   if (.maIsMetaregressionHeterogeneity(options) && (options[["heterogeneityI2"]] || options[["heterogeneityH2"]]))
     messages <- c(messages, gettext("The I² and H² statistics are not available for heterogeneity models."))
 
-  if (length(attr(dataset, "na.action")) > 0)
-    messages <- c(messages, gettextf("%1$i observations were ommited due to missing values.", length(attr(dataset, "na.action"))))
+  if (attr(dataset, "NAs") > 0)
+    messages <- c(messages, gettextf("%1$i observations were ommited due to missing values.", attr(dataset, "NAs")))
 
   return(messages)
 }

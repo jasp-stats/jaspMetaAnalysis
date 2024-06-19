@@ -69,14 +69,23 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   if (!is.null(dataset))
     return(dataset)
 
+  # model data
   predictorsNominal <- options[["predictors"]][options[["predictors.types"]] == "nominal"]
   predictorsScale   <- options[["predictors"]][options[["predictors.types"]] == "scale"]
+
+  # forest plotting data
+  forestPlotVariables <- c(
+    if (length(options[["forestPlotLeftPanelVariablesSelected"]]) > 0) unlist(options[["forestPlotLeftPanelVariablesSelected"]]),
+    if (options[["forestPlotMappingColor"]] != "") options[["forestPlotMappingColor"]],
+    if (options[["forestPlotMappingShape"]] != "") options[["forestPlotMappingShape"]]
+  )
 
   # load data
   dataset <- .readDataSetToEnd(
     columns.as.factor = c(
       if (length(predictorsNominal) > 0) predictorsNominal,
-      if (options[["clustering"]] != "") options[["clustering"]]
+      if (options[["clustering"]] != "") options[["clustering"]],
+      forestPlotVariables
     ),
     columns.as.numeric  = c(
       options[["effectSize"]],
@@ -86,7 +95,16 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     ))
 
   # omit NAs
-  dataset  <- na.omit(dataset)
+  omitOnVariables <- c(
+    options[["effectSize"]],
+    options[["effectSizeStandardError"]],
+    if (options[["clustering"]] != "") options[["clustering"]],
+    if (length(predictorsNominal) > 0) predictorsNominal,
+    if (length(predictorsScale) > 0)   predictorsScale
+  )
+  anyNaByRows <- apply(dataset[,omitOnVariables], 1, function(x) anyNA(x))
+  dataset     <- dataset[!anyNaByRows,]
+  attr(dataset, "NAs") <- sum(anyNaByRows)
 
   return(dataset)
 }
