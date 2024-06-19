@@ -283,6 +283,30 @@ Form
 				name:		"predictionIntervals"
 				checked:	true
 			}
+/* TODO: add with fixed width (now it's too wide!)
+			DropDown
+			{
+				name:			"transformPooledEstimate"
+				label:			qsTr("Transform pooled estimate")
+				values:			[
+						{ label: qsTr("None")								, value: "none"							},  // NULL
+						{ label: qsTr("Fisher's z to r")					, value: "fishersZToCorrelation"		},  // transf.ztor
+						{ label: qsTr("Exponential")						, value: "exponential"					},  // exp
+						{ label: qsTr("Log odds to proportions")			, value: "logOddsToProportions"			},  // transf.logit
+						{ label: qsTr("Log odds to SMD (normal)")			, value: "logOddsToSmdNormal"			},  // transf.lnortod.norm
+						{ label: qsTr("Log odds to SMD (logistic)")			, value: "logOddsToSmdLogistic"			},  // transf.lnortod.logis
+						{ label: qsTr("SMD to log odds (normal)")			, value: "smdToLogOddsNormal"			},  // transf.dtolnor.norm
+						{ label: qsTr("SMD to log odds (logistic)")			, value: "smdToLogOddsLogistic"			},  // transf.dtolnor.logis
+						{ label: qsTr("Hakstian & Whalen inverse α")		, value: "hakstianAndWhalenInverseAlpha"},  // transf.iahw 
+						{ label: qsTr("Bonett inverse α")					, value: "bonettInverseAlpha"			},  // transf.iabt
+						{ label: qsTr("Z to R²")							, value: "zToR2"						}, 	// transf.ztor2
+						{ label: qsTr("SMD to Cohen's U₁")					, value: "smdToCohensU1"				},  // transf.dtou1
+						{ label: qsTr("SMD to Cohen's U₂")					, value: "smdToCohensU2"				},  // transf.dtou2
+						{ label: qsTr("SMD to Cohen's U₃")					, value: "smdToCohensU3"				},  // transf.dtou3
+						{ label: qsTr("SMD to CLES, Pr(supperiority)")		, value: "smdToCles"					},  // transf.dtocles
+					]
+			}
+*/
 		}
 
 		CheckBox
@@ -319,6 +343,12 @@ Form
 					title:			qsTr("Selected variables")
 					allowTypeChange:false
 				}
+			}
+
+			CheckBox
+			{
+				name:		"estimatedMarginalMeansEffectSizeAddAdjustedEstimate"
+				label:		qsTr("Add adjusted estimate")
 			}
 
 			DropDown
@@ -389,6 +419,12 @@ Form
 					title:			qsTr("Selected variables")
 					allowTypeChange:false
 				}
+			}
+
+			CheckBox
+			{
+				name:		"estimatedMarginalMeansHeterogeneityAddAdjustedEstimate"
+				label:		qsTr("Add adjusted estimate")
 			}
 
 			DropDown
