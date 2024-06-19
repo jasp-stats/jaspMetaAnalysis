@@ -86,10 +86,6 @@
     data = dataset
   )
 
-  # add labels if specified
-  if (options[["studyLabel"]] != "")
-    rmaInput$slab <- as.name(options[["studyLabel"]])
-
   # add formulas if specified
   rmaInput$mods  <- .maGetFormula(options[["effectSizeModelTerms"]], options[["effectSizeModelIncludeIntercept"]])
   rmaInput$scale <- .maGetFormula(options[["heterogeneityModelTerms"]], options[["heterogeneityModelIncludeIntercept"]])
@@ -263,7 +259,8 @@
   # pooled estimates
   pooledEstimatesTable          <- createJaspTable(gettext("Pooled Estimates"))
   pooledEstimatesTable$position <- 3
-  pooledEstimatesTable$dependOn(c("heterogeneityTau", "heterogeneityTau2", "heterogeneityI2", "heterogeneityH2", "confidenceIntervals", "confidenceIntervalsLevel", "predictionIntervals"))
+  pooledEstimatesTable$dependOn(c("heterogeneityTau", "heterogeneityTau2", "heterogeneityI2", "heterogeneityH2",
+                                  "confidenceIntervals", "confidenceIntervalsLevel", "predictionIntervals", "transformEffectSize"))
   modelSummaryContainer[["pooledEstimatesTable"]] <- pooledEstimatesTable
 
   pooledEstimatesTable$addColumnInfo(name = "par",  type = "string", title = "")
@@ -593,7 +590,7 @@
   )
   estimatedMarginalMeansTable$dependOn(switch(
     parameter,
-    effectSize    = c("estimatedMarginalMeansEffectSizeSelectedVariables", "estimatedMarginalMeansEffectSizeTransformation", "estimatedMarginalMeansEffectSizeSdFactorCovariates",
+    effectSize    = c("estimatedMarginalMeansEffectSizeSelectedVariables", "transformEffectSize", "estimatedMarginalMeansEffectSizeSdFactorCovariates",
                       "estimatedMarginalMeansEffectSizeTestAgainst", "estimatedMarginalMeansEffectSizeTestAgainstValue", "predictionIntervals",
                       "estimatedMarginalMeansEffectSizeAddAdjustedEstimate"),
     heterogeneity = c("estimatedMarginalMeansHeterogeneitySelectedVariables", "estimatedMarginalMeansHeterogeneityTransformation", "estimatedMarginalMeansHeterogeneitySdFactorCovariates",
@@ -745,6 +742,13 @@
   colnames(predictedEffect) <- c("est", "se", "lCi", "uCi", "lPi", "uPi")
   predictedEffect$par       <- "Effect Size"
 
+  # apply effect size transformation
+  if (options[["transformEffectSize"]] != "none")
+    predictedEffect[,c("est", "lCi", "uCi", "lPi", "uPi")] <- do.call(
+      .maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]),
+      list(predictedEffect[,c("est", "lCi", "uCi", "lPi", "uPi")]))
+
+  # remove non-requested columns
   keepResults <- c(
     "par",
     "est",
@@ -1010,9 +1014,9 @@
     }
 
     # apply effect size transformation
-    if (options[["estimatedMarginalMeansEffectSizeTransformation"]] != "none")
+    if (options[["transformEffectSize"]] != "none")
       computedMarginalMeans[,c("est", "lCi", "uCi", "lPi", "uPi")] <- do.call(
-        .maGetEffectSizeTransformationOptions(options[["estimatedMarginalMeansEffectSizeTransformation"]]),
+        .maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]),
         list(computedMarginalMeans[,c("est", "lCi", "uCi", "lPi", "uPi")]))
 
     # create full data frame
@@ -1251,6 +1255,9 @@
       messages <- c(messages, gettextf("%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates.", fit[["n"]],  min(fit[["tcl"]]), median(fit[["tcl"]]), max(fit[["tcl"]])))
   }
 
+  if (options[["transformEffectSize"]] != "none")
+    messages <- c(messages, gettextf("The pooled effect size is transformed using %1$s transformation.", .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
+
   if (.maIsMetaregressionEffectSize(options))
     messages <- c(messages, gettext("The pooled effect size corresponds to the weighted average effect across studies."))
 
@@ -1269,8 +1276,8 @@
 
   messages <- gettext("Each marginal mean estimate is averaged across the levels of the remaining predictors.")
 
-  if (parameter == "effectSize" && options[["estimatedMarginalMeansEffectSizeTransformation"]] != "none")
-    messages <- c(messages, gettextf("The estimates and intervals are transformed using %1$s transformation.", .maGetOptionsNameEffectSizeTransformation(options[["estimatedMarginalMeansEffectSizeTransformation"]])))
+  if (parameter == "effectSize" && options[["transformEffectSize"]] != "none")
+    messages <- c(messages, gettextf("The estimates and intervals are transformed using %1$s transformation.", .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
 
   if (parameter == "heterogeneity")
     messages <- c(messages, gettextf("The estimates and intervals correspond to %1$s.", switch(
