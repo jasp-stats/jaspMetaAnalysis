@@ -106,7 +106,7 @@ Form
 			name: 			"sampleSize"
 			title: 			qsTr("N")
 			singleVariable: true
-			allowedColumns: ["scale", "ordinal"]
+			allowedColumns: ["scale"]
 			visible:		checkListVisibility(name)
 		}
 
