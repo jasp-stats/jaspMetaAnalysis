@@ -594,8 +594,10 @@
   estimatedMarginalMeansTable$dependOn(switch(
     parameter,
     effectSize    = c("estimatedMarginalMeansEffectSizeSelectedVariables", "estimatedMarginalMeansEffectSizeTransformation", "estimatedMarginalMeansEffectSizeSdFactorCovariates",
-                      "estimatedMarginalMeansEffectSizeTestAgainst", "estimatedMarginalMeansEffectSizeTestAgainstValue", "predictionIntervals"),
-    heterogeneity = c("estimatedMarginalMeansHeterogeneitySelectedVariables", "estimatedMarginalMeansHeterogeneityTransformation", "estimatedMarginalMeansHeterogeneitySdFactorCovariates")
+                      "estimatedMarginalMeansEffectSizeTestAgainst", "estimatedMarginalMeansEffectSizeTestAgainstValue", "predictionIntervals",
+                      "estimatedMarginalMeansEffectSizeAddAdjustedEstimate"),
+    heterogeneity = c("estimatedMarginalMeansHeterogeneitySelectedVariables", "estimatedMarginalMeansHeterogeneityTransformation", "estimatedMarginalMeansHeterogeneitySdFactorCovariates",
+                      "estimatedMarginalMeansHeterogeneityAddAdjustedEstimate")
   ))
   estimatedMarginalMeansContainer[[parameter]] <- estimatedMarginalMeansTable
 
@@ -634,13 +636,23 @@
 
   selectedVariables <- switch(
     parameter,
-    effectSize    = unlist(options[["estimatedMarginalMeansEffectSizeSelectedVariables"]]),
-    heterogeneity = unlist(options[["estimatedMarginalMeansHeterogeneitySelectedVariables"]])
+    effectSize    = c(
+      if (options[["estimatedMarginalMeansEffectSizeAddAdjustedEstimate"]]) "",
+      unlist(options[["estimatedMarginalMeansEffectSizeSelectedVariables"]])
+    ),
+    heterogeneity = c(
+      if (options[["estimatedMarginalMeansHeterogeneityAddAdjustedEstimate"]]) "",
+      unlist(options[["estimatedMarginalMeansHeterogeneitySelectedVariables"]])
+    )
   )
   estimatedMarginalMeans <- do.call(rbind, lapply(selectedVariables, function(selectedVariable)
     .maComputeMarginalMeansVariable(fit, options, dataset, selectedVariable, parameter)))
 
   estimatedMarginalMeansTable$setData(estimatedMarginalMeans)
+
+  estimatedMarginalMeansMessages <- .maEstimatedMarginalMeansMessages(options, parameter)
+  for (i in seq_along(estimatedMarginalMeansMessages))
+    estimatedMarginalMeansTable$addFootnote(estimatedMarginalMeansMessages[i])
 
   return()
 }
@@ -931,14 +943,24 @@
   }
 
   # add the specified variable and pool across the combinations of the remaining values
-  outMatrix <- do.call(rbind, lapply(seq_along(selectedPredictor), function(i) {
-    predictorsRemaining[[selectedVariable]] <- selectedPredictor[i]
-    outMatrix <- model.matrix(formula, data = expand.grid(predictorsRemaining))
-    return(colMeans(outMatrix)[-1])
-  }))
+  if (selectedVariable == "") {
+    # empty string creates overall adjusted estimate
+    outMatrix <- colMeans(model.matrix(formula, data = expand.grid(predictorsRemaining)))[-1]
+  } else {
+    outMatrix <- do.call(rbind, lapply(seq_along(selectedPredictor), function(i) {
+      predictorsRemaining[[selectedVariable]] <- selectedPredictor[i]
+      outMatrix <- model.matrix(formula, data = expand.grid(predictorsRemaining))
+      return(colMeans(outMatrix)[-1])
+    }))
+  }
+
 
   # keep information about the variable and levels
-  attr(outMatrix, "variable") <- selectedVariable
+  if (selectedVariable == "")
+    attr(outMatrix, "variable") <- gettext("Adjusted Estimate")
+  else
+    attr(outMatrix, "variable") <- selectedVariable
+
   if (selectedVariable %in% variablesFactors)
     attr(outMatrix, "at") <- selectedPredictor
   else if (selectedVariable %in% variablesContinuous)
@@ -946,6 +968,8 @@
       gettextf("Mean - %1$sSD", sdFactor),
       gettext("Mean"),
       gettextf("Mean + %1$sSD", sdFactor))
+  else
+    attr(outMatrix, "at") <- ""
 
   return(outMatrix)
 }
@@ -985,11 +1009,14 @@
       colnames(computedMarginalMeans) <- c("est", "se", "lCi", "uCi", "lPi", "uPi", "stat", "pval")
     }
 
-    # TODO: apply effect size transformation
-    .maGetEffectSizeTransformationOptions(options)
+    # apply effect size transformation
+    if (options[["estimatedMarginalMeansEffectSizeTransformation"]] != "none")
+      computedMarginalMeans[,c("est", "lCi", "uCi", "lPi", "uPi")] <- do.call(
+        .maGetEffectSizeTransformationOptions(options[["estimatedMarginalMeansEffectSizeTransformation"]]),
+        list(computedMarginalMeans[,c("est", "lCi", "uCi", "lPi", "uPi")]))
 
     # create full data frame
-    computedMarginalMeans <- cbind(data.frame("variable" = selectedVariable, "value" = attr(predictorMatrixEffectSize, "at")), computedMarginalMeans)
+    computedMarginalMeans <- cbind(data.frame("variable" = attr(predictorMatrixEffectSize, "variable"), "value" = attr(predictorMatrixEffectSize, "at")), computedMarginalMeans)
 
   } else if (parameter == "heterogeneity") {
 
@@ -1014,7 +1041,7 @@
       computedMarginalMeans <- sqrt(computedMarginalMeans)
 
     # create full data frame
-    computedMarginalMeans <- cbind(data.frame("variable" = selectedVariable, "value" = attr(predictorMatrixHeterogeneity, "at")), computedMarginalMeans)
+    computedMarginalMeans <- cbind(data.frame("variable" = attr(predictorMatrixHeterogeneity, "variable"), "value" = attr(predictorMatrixHeterogeneity, "at")), computedMarginalMeans)
   }
 
 
@@ -1118,10 +1145,10 @@
   }
   return(out[!sapply(out, is.null)])
 }
-.maGetEffectSizeTransformationOptions <- function(options) {
+.maGetEffectSizeTransformationOptions <- function(effectSizeTransformation) {
 
   switch(
-    options[["estimatedMarginalMeansEffectSizeTransformation"]],
+    effectSizeTransformation,
     none                          = NULL,
     fishersZToCorrelation         = metafor::transf.ztor,
     exponential                   = exp,
@@ -1137,9 +1164,33 @@
     smdToCohensU2                 = metafor::transf.dtou2,
     smdToCohensU3                 = metafor::transf.dtou3,
     smdToCles                     = metafor::transf.dtocles,
-    stop("Unknown transformation")
+    stop(paste0("Unknown effect size transformation: ", effectSizeTransformation))
   )
 }
+
+# options names
+.maGetOptionsNameEffectSizeTransformation <- function(effectSizeTransformation) {
+
+  return(switch(
+    effectSizeTransformation,
+    "none"                           = NULL,
+    "fishersZToCorrelation"          = gettext("Fisher's z to r"),
+    "exponential"                    = gettext("Exponential"),
+    "logOddsToProportions"           = gettext("Log odds to proportions"),
+    "logOddsToSmdNormal"             = gettext("Log odds to SMD (normal)"),
+    "logOddsToSmdLogistic"           = gettext("Log odds to SMD (logistic)"),
+    "smdToLogOddsNormal"             = gettext("SMD to log odds (normal)"),
+    "smdToLogOddsLogistic"           = gettext("SMD to log odds (logistic)"),
+    "hakstianAndWhalenInverseAlpha"  = gettext("Hakstian & Whalen inverse α"),
+    "bonettInverseAlpha"             = gettext("Bonett inverse α"),
+    "zToR2"                          = gettext("Z to R²"),
+    "smdToCohensU1"                  = gettext("SMD to Cohen's U₁"),
+    "smdToCohensU2"                  = gettext("SMD to Cohen's U₂"),
+    "smdToCohensU3"                  = gettext("SMD to Cohen's U₃"),
+    "smdToCles"                      = gettext("SMD to CLES, Pr(supperiority)")
+  ))
+}
+
 # misc
 .maVariableNames                  <- function(varNames, variables) {
 
@@ -1171,13 +1222,15 @@
   }))
 }
 
+
 # messages
 .maFixedEffectTextMessage              <- function(options) {
   return(switch(
     options[["fixedEffectTest"]],
     "z"    = gettext("Fixed effect tested using z-distribution."),
     "t"    = gettext("Fixed effect tested using t-distribution."),
-    "knha" = gettext("Fixed effect tested using Knapp and Hartung adjustment.")
+    "knha" = gettext("Fixed effect tested using Knapp and Hartung adjustment."),
+    stop(paste0("Unknown fixed effect test.", options[["fixedEffectTest"]]))
   ))
 }
 .meMetaregressionHeterogeneityMessages <- function(options) {
@@ -1209,6 +1262,22 @@
 
   if (length(attr(dataset, "na.action")) > 0)
     messages <- c(messages, gettextf("%1$i observations were ommited due to missing values.", length(attr(dataset, "na.action"))))
+
+  return(messages)
+}
+.maEstimatedMarginalMeansMessages      <- function(options, parameter) {
+
+  messages <- gettext("Each marginal mean estimate is averaged across the levels of the remaining predictors.")
+
+  if (parameter == "effectSize" && options[["estimatedMarginalMeansEffectSizeTransformation"]] != "none")
+    messages <- c(messages, gettextf("The estimates and intervals are transformed using %1$s transformation.", .maGetOptionsNameEffectSizeTransformation(options[["estimatedMarginalMeansEffectSizeTransformation"]])))
+
+  if (parameter == "heterogeneity")
+    messages <- c(messages, gettextf("The estimates and intervals correspond to %1$s.", switch(
+      options[["estimatedMarginalMeansHeterogeneityTransformation"]],
+      "tau"  = gettext("\U1D70F"),
+      "tau2" = gettext("\U1D70F\U00B2")
+    )))
 
   return(messages)
 }
