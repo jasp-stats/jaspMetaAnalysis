@@ -28,7 +28,7 @@
 
   # meta-regression tables
   if (.maIsMetaregression(options)) {
-    if (options[["metaregressionTermsTests"]]) {
+    if (options[["metaregressionTermTests"]]) {
       .maTermsTable(jaspResults, dataset, options, "effectSize")
       .maTermsTable(jaspResults, dataset, options, "heterogeneity")
     }
@@ -154,7 +154,7 @@
   residualHeterogeneityTable$position <- 1
   modelSummaryContainer[["residualHeterogeneityTable"]] <- residualHeterogeneityTable
 
-  residualHeterogeneityTable$addColumnInfo(name = "qstat", type = "number",  title = gettext("QE"))
+  residualHeterogeneityTable$addColumnInfo(name = "qstat", type = "number",  title = gettext("Q\U2091"))
   residualHeterogeneityTable$addColumnInfo(name = "df",    type = "integer", title = gettext("df"))
   residualHeterogeneityTable$addColumnInfo(name = "pval",  type = "pvalue",  title = gettext("p"))
 
@@ -201,7 +201,7 @@
   modelSummaryContainer[["moderatorsTable"]] <- moderatorsTable
 
   moderatorsTable$addColumnInfo(name = "parameter", type = "string",  title = gettext("Parameter"))
-  moderatorsTable$addColumnInfo(name = "stat", type = "number",   title = if(.maIsMetaregressionFtest(options)) gettext("F")   else gettext("QM"))
+  moderatorsTable$addColumnInfo(name = "stat", type = "number",   title = if(.maIsMetaregressionFtest(options)) gettext("F")   else gettext("Q\U2098"))
   moderatorsTable$addColumnInfo(name = "df1",  type = "integer",  title = if(.maIsMetaregressionFtest(options)) gettext("df\U2081") else gettext("df"))
   if (.maIsMetaregressionFtest(options))
     moderatorsTable$addColumnInfo(name = "df2", type = "number", title = gettext("df\U2082"))
@@ -356,11 +356,11 @@
     effectSize    = 1,
     heterogeneity = 2
   )
-  termsTable$dependOn("metaregressionTermsTests")
+  termsTable$dependOn("metaregressionTermTests")
   metaregressionContainer[[paste0(parameter, "TermsTable")]] <- termsTable
 
   termsTable$addColumnInfo(name = "term",  type = "string",  title = "")
-  termsTable$addColumnInfo(name = "stat",  type = "number",  title = if(.maIsMetaregressionFtest(options)) gettext("F")   else gettext("QM"))
+  termsTable$addColumnInfo(name = "stat",  type = "number",  title = if(.maIsMetaregressionFtest(options)) gettext("F")   else gettext("Q\U2098"))
   termsTable$addColumnInfo(name = "df1",   type = "integer", title = if(.maIsMetaregressionFtest(options)) gettext("df\U2081") else gettext("df"))
   if (.maIsMetaregressionFtest(options)) {
     termsTable$addColumnInfo(name = "df2", type = "number", title = gettext("df\U2082"))
@@ -377,24 +377,9 @@
       return()
 
     terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")
-    termsIndex <- attr(model.matrix(fit[["formula.mods"]], data = fit[["data"]]), "assign")
-    termsTests <- do.call(rbind.data.frame, lapply(seq_along(terms), function(i) {
-
-      termsAnova <- anova(fit, btt = seq_along(termsIndex)[termsIndex == i])
-
-      out <- list(
-        term = .maVariableNames(terms[i], options[["predictors"]]),
-        stat = termsAnova[["QM"]],
-        df1  = termsAnova[["QMdf"]][1],
-        pval = termsAnova[["QMp"]]
-      )
-
-      if (.maIsMetaregressionFtest(options))
-        out$df2 <- termsAnova[["QMdf"]][2]
-
-      return(out)
-    }))
-
+    termsTests <- do.call(rbind.data.frame, lapply(terms, function(term)
+      .maTermTests(fit, options, term, parameter = "effectSize")
+    ))
     termsTable$setData(termsTests)
 
   } else if (parameter == "heterogeneity") {
@@ -403,24 +388,9 @@
       return()
 
     terms      <- attr(terms(fit[["formula.scale"]], data = fit[["data"]]),"term.labels")
-    termsIndex <- attr(model.matrix(fit[["formula.scale"]], data = fit[["data"]]), "assign")
-    termsTests <- do.call(rbind.data.frame, lapply(seq_along(terms), function(i) {
-
-      termsAnova <- anova(fit, btt = seq_along(termsIndex)[termsIndex == i])
-
-      out <- list(
-        term = .maVariableNames(terms[i], options[["predictors"]]),
-        stat = termsAnova[["QM"]],
-        df1  = termsAnova[["QMdf"]][1],
-        pval = termsAnova[["QMp"]]
-      )
-
-      if (.maIsMetaregressionFtest(options))
-        out$df2 <- termsAnova[["QMdf"]][2]
-
-      return(out)
-    }))
-
+    termsTests <- do.call(rbind.data.frame, lapply(terms, function(term)
+      .maTermTests(fit, options, term, parameter = "heterogeneity")
+    ))
     termsTable$setData(termsTests)
 
   }
@@ -643,7 +613,11 @@
     )
   )
   estimatedMarginalMeans <- do.call(rbind, lapply(selectedVariables, function(selectedVariable)
-    .maComputeMarginalMeansVariable(fit, options, dataset, selectedVariable, parameter)))
+    .maComputeMarginalMeansVariable(fit, options, dataset, selectedVariable, options[["estimatedMarginalMeansEffectSizeTestAgainstValue"]], parameter)))
+
+  # drop non-required columns
+  if (parameter == "effectSize" && !options[["estimatedMarginalMeansEffectSizeTestAgainst"]])
+    estimatedMarginalMeans <- estimatedMarginalMeans[,!colnames(estimatedMarginalMeans) %in% c("df", "stat", "pval")]
 
   estimatedMarginalMeansTable$setData(estimatedMarginalMeans)
 
@@ -761,6 +735,64 @@
   predictedEffect <- predictedEffect[,keepResults]
   return(as.list(predictedEffect))
 }
+.maComputePooledEffectPlot         <- function(fit, options) {
+
+  if (!.maIsMetaregressionEffectSize(options)) {
+    predictedEffect <- predict(fit)
+  } else {
+    if (.maIsMetaregressionHeterogeneity(options)) {
+      predictedEffect <- predict(
+        fit,
+        newmods  = colMeans(model.matrix(fit)$location)[-1],
+        newscale = colMeans(model.matrix(fit)$scale)[-1]
+      )
+    } else {
+      predictedEffect <- predict(
+        fit,
+        newmods = colMeans(model.matrix(fit))[-1]
+      )
+    }
+  }
+
+  # compute test against specified value
+  if (.maIsMetaregressionFtest(options)) {
+    predictedEffect      <- cbind(data.frame(predictedEffect), "df" = predictedEffect$ddf)
+    predictedEffect$stat <- (predictedEffect$pred - 0)  / predictedEffect$se
+    predictedEffect$pval <- 2 * pt(abs(predictedEffect$stat), predictedEffect$df, lower.tail = FALSE)
+
+    # add empty prediction interval for FE and EE
+    if (.maGetMethodOptions(options) %in% c("FE", "EE")) {
+      predictedEffect$pi.lb <- predictedEffect$ci.lb
+      predictedEffect$pi.ub <- predictedEffect$ci.ub
+    }
+
+    colnames(predictedEffect) <- c("est", "se", "lCi", "uCi", "lPi", "uPi", "df", "stat", "pval")
+  } else {
+    predictedEffect      <- data.frame(predictedEffect)
+    predictedEffect$stat <- (predictedEffect$pred - 0)  / predictedEffect$se
+    predictedEffect$pval <- 2 * pnorm(abs(predictedEffect$stat), lower.tail = FALSE)
+
+    # add empty prediction interval for FE and EE
+    if (.maGetMethodOptions(options) %in% c("FE", "EE")) {
+      predictedEffect$pi.lb <- predictedEffect$ci.lb
+      predictedEffect$pi.ub <- predictedEffect$ci.ub
+    }
+
+    colnames(predictedEffect) <- c("est", "se", "lCi", "uCi", "lPi", "uPi", "stat", "pval")
+  }
+
+  # fix column names
+  predictedEffect$par       <- "Effect Size"
+
+  # apply effect size transformation
+  if (options[["transformEffectSize"]] != "none")
+    predictedEffect[,c("est", "lCi", "uCi", "lPi", "uPi")] <- do.call(
+      .maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]),
+      list(predictedEffect[,c("est", "lCi", "uCi", "lPi", "uPi")]))
+
+
+  return(as.list(predictedEffect))
+}
 .maComputePooledHeterogeneity      <- function(fit, options) {
 
   if (options[["fixParametersTau2"]]) {
@@ -832,6 +864,45 @@
 
   return(confIntHeterogeneity)
 }
+.maComputePooledHeterogeneityPlot  <- function(fit, options) {
+
+  if (options[["fixParametersTau2"]]) {
+
+    confIntHeterogeneity <- list(
+      est = sqrt(.maGetFixedTau2Options(options)),
+      lCi = NA,
+      uCi = NA
+    )
+
+  } else if (.maIsMetaregressionHeterogeneity(options)) {
+
+    # no confint support
+    # predict the scale on the average value
+    predScale <- predict(fit, newscale = colMeans(model.matrix(fit)$scale)[-1], level = 100 * options[["confidenceIntervalsLevel"]])
+
+    if (options[["heterogeneityModelLink"]] == "log") {
+      confIntHeterogeneity <- data.frame(
+        est = exp(predScale[["pred"]]  / 2),
+        lCi = exp(predScale[["ci.lb"]] / 2),
+        uCi = exp(predScale[["ci.ub"]] / 2)
+      )
+    } else if (options[["heterogeneityModelLink"]] == "identity") {
+      confIntHeterogeneity <- data.frame(
+        est = sqrt(predScale[["pred"]]),
+        lCi = sqrt(predScale[["ci.lb"]]),
+        uCi = sqrt(predScale[["ci.ub"]])
+      )
+    }
+
+  } else {
+
+    confIntHeterogeneity <- confint(fit)
+    confIntHeterogeneity <- data.frame(confIntHeterogeneity[["random"]])[2,]
+    colnames(confIntHeterogeneity) <- c("est", "lCi", "uCi")
+  }
+
+  return(confIntHeterogeneity)
+}
 .maOmnibusTest                     <- function(fit, options, parameter = "effectSize") {
 
   if (parameter == "effectSize") {
@@ -895,6 +966,31 @@
     row$parameter <- gettextf("Heterogeneity (coef: %1$s)", paste(selCoef, collapse = ","))
 
   return(row)
+}
+.maTermTests                       <- function(fit, options, term, parameter = "effectSize") {
+
+  # obtain terms indicies
+  if (parameter == "effectSize") {
+    terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")
+    termsIndex <- attr(model.matrix(fit[["formula.mods"]], data = fit[["data"]]), "assign")
+    termsAnova <- anova(fit, btt = seq_along(termsIndex)[termsIndex == which(terms == term)])
+  } else if (parameter == "heterogeneity") {
+    terms      <- attr(terms(fit[["formula.scale"]], data = fit[["data"]]),"term.labels")
+    termsIndex <- attr(model.matrix(fit[["formula.scale"]], data = fit[["data"]]), "assign")
+    termsAnova <- anova(fit, att = seq_along(termsIndex)[termsIndex == which(terms == term)])
+  }
+
+  out <- list(
+    term = .maVariableNames(term, options[["predictors"]]),
+    stat = termsAnova[["QM"]],
+    df1  = termsAnova[["QMdf"]][1],
+    pval = termsAnova[["QMp"]]
+  )
+
+  if (.maIsMetaregressionFtest(options))
+    out$df2 <- termsAnova[["QMdf"]][2]
+
+  return(out)
 }
 .maGetMarginalMeansPredictorMatrix <- function(fit, options, dataset, selectedVariable, parameter) {
 
@@ -977,7 +1073,7 @@
 
   return(outMatrix)
 }
-.maComputeMarginalMeansVariable    <- function(fit, options, dataset, selectedVariable, parameter) {
+.maComputeMarginalMeansVariable    <- function(fit, options, dataset, selectedVariable, testAgainst = 0, parameter) {
 
   if (parameter == "effectSize") {
     predictorMatrixEffectSize <- .maGetMarginalMeansPredictorMatrix(fit, options, dataset, selectedVariable, "effectSize")
@@ -1003,12 +1099,12 @@
     # compute test against specified value
     if (.maIsMetaregressionFtest(options)) {
       computedMarginalMeans      <- cbind(data.frame(computedMarginalMeans), "df" = computedMarginalMeans$ddf)
-      computedMarginalMeans$stat <- (computedMarginalMeans$pred - options[["estimatedMarginalMeansEffectSizeTestAgainstValue"]])  / computedMarginalMeans$se
+      computedMarginalMeans$stat <- (computedMarginalMeans$pred - testAgainst)  / computedMarginalMeans$se
       computedMarginalMeans$pval <- 2 * pt(abs(computedMarginalMeans$stat), computedMarginalMeans$df, lower.tail = FALSE)
       colnames(computedMarginalMeans) <- c("est", "se", "lCi", "uCi", "lPi", "uPi", "df", "stat", "pval")
     } else {
       computedMarginalMeans      <- data.frame(computedMarginalMeans)
-      computedMarginalMeans$stat <- (computedMarginalMeans$pred - options[["estimatedMarginalMeansEffectSizeTestAgainstValue"]])  / computedMarginalMeans$se
+      computedMarginalMeans$stat <- (computedMarginalMeans$pred - testAgainst)  / computedMarginalMeans$se
       computedMarginalMeans$pval <- 2 * pnorm(abs(computedMarginalMeans$stat), lower.tail = FALSE)
       colnames(computedMarginalMeans) <- c("est", "se", "lCi", "uCi", "lPi", "uPi", "stat", "pval")
     }
@@ -1057,9 +1153,6 @@
 
   if (!options[["predictionIntervals"]])
     computedMarginalMeans <- computedMarginalMeans[,!colnames(computedMarginalMeans) %in% c("lPi", "uPi")]
-
-  if (!options[["estimatedMarginalMeansEffectSizeTestAgainst"]])
-    computedMarginalMeans <- computedMarginalMeans[,!colnames(computedMarginalMeans) %in% c("df", "stat", "pval")]
 
   return(computedMarginalMeans)
 }
@@ -1224,6 +1317,123 @@
     return(varName)
 
   }))
+}
+.maPrintQTest                     <- function(fit) {
+
+  return(sprintf("Heterogeneity: Q(%1$i) = %2$.2f, %3$s", fit[["k"]] - fit[["p"]], fit[["QE"]], .maPrintPValue(fit[["QEp"]])))
+}
+.maPrintModerationTest            <- function(fit, options, parameter) {
+
+  out      <- .maOmnibusTest(fit, options, parameter)
+  outPrint <- .maPrintTermTest(out, testStatistic = TRUE)
+
+  if (parameter == "effectSize")
+    return(gettextf("Moderation: %1$s", outPrint))
+  else if (parameter == "effectSize")
+    return(gettextf("Moderation (Heterogeneity): %1$s", outPrint))
+}
+.maPrintHeterogeneityEstimate     <- function(fit, options, digits, keepText) {
+
+  out <- .maComputePooledHeterogeneityPlot(fit, options)
+
+  if (keepText)
+    prefix <- gettext("Heterogeneity: ")
+  else
+    prefix <- paste0(rep(" ", nchar(gettext("Heterogeneity: "))), collapse = "")
+
+  return(sprintf(paste0(
+    "%1$s \U1D70F = ",
+    "%2$.", digits, "f",
+    " [",
+    "%3$.", digits, "f",
+    ", ",
+    "%4$.", digits, "f",
+    "]"
+    ), prefix, out$est, out$lCi, out$uCi))
+}
+.maPrintTermTest                  <- function(out, testStatistic = TRUE) {
+
+  if (testStatistic) {
+    if (!is.null(out[["df2"]])) {
+      return(sprintf("F(%1$i, %2$.2f) = %3$.2f, %4$s", out[["df1"]], out[["df2"]], out[["stat"]], .maPrintPValue(out[["pval"]])))
+    } else {
+      return(sprintf("Q\U2098(%1$i) = %2$.2f, %3$s", out[["df1"]], out[["stat"]], .maPrintPValue(out[["pval"]])))
+    }
+  } else {
+    return(.maPrintPValue(out[["pval"]]))
+  }
+}
+.maPrintCoefficientTest           <- function(out, testStatistic = TRUE) {
+
+  if (testStatistic) {
+    if (!is.null(out[["df"]])) {
+      return(sprintf("t(%1$.2f) = %2$.2f, %3$s", out[["df"]], out[["stat"]], .maPrintPValue(out[["pval"]])))
+    } else {
+      return(sprintf("z = %1$.2f, %2$s", out[["df1"]], out[["stat"]], .maPrintPValue(out[["pval"]])))
+    }
+  } else {
+    return(.maPrintPValue(out[["pval"]]))
+  }
+}
+.maPrintPValue                    <- function(pValue) {
+  if (pValue < 0.001) {
+    return("p < 0.001")
+  } else {
+    return(sprintf("p = %.3f", pValue))
+  }
+}
+.maPrintEstimateAndInterval       <- function(est, lCi, uCi, digits) {
+  return(sprintf(paste0(
+    .maAddSpaceForPositiveValue(est), "%1$.", digits, "f",
+    " [",
+    .maAddSpaceForPositiveValue(lCi), "%2$.", digits, "f",
+    ", ",
+    .maAddSpaceForPositiveValue(uCi), "%3$.", digits, "f",
+    "]"), est, lCi, uCi))
+}
+.maPrintPredictionInterval        <- function(est, lCi, uCi, digits) {
+  return(sprintf(paste0(
+    "   ", "%1$.", digits, "f",
+    " [",
+    .maAddSpaceForPositiveValue(lCi), "%2$.", digits, "f",
+    ", ",
+    .maAddSpaceForPositiveValue(uCi), "%3$.", digits, "f",
+    "]"), est, lCi, uCi))
+}
+.maAddSpaceForPositiveValue       <- function(value) {
+  if (value >= 0)
+    return(" ")
+  else
+    return("")
+}
+.maMakeDiamondDataFrame           <- function(est, lCi, uCi, row, id, adj = 1/3) {
+  return(data.frame(
+    id       = id,
+    x        = c(lCi,  est,     uCi,  est),
+    y        = c(row,  row-adj, row,  row+adj),
+    type     = "diamond",
+    mapColor = NA
+  ))
+}
+.maMakeRectangleDataFrame         <- function(lCi, uCi, row, id, adj = 1/4) {
+  return(data.frame(
+    id       = id,
+    x        = c(lCi,     uCi,      uCi,      lCi),
+    y        = c(row-adj, row-adj,  row+adj,  row+adj),
+    type     = "rectangle",
+    mapColor = NA
+  ))
+}
+.maGetMaxDigitsBeforeDecimal      <- function(x) {
+
+  dPos <- floor(log10(x[x >= 0])) + 1
+  dNeg <- floor(log10(-x[x < 0])) + 2 # (+2 because of minus sign)
+
+  # account for missing zeros
+  dPos[dPos == 0] <- 1
+  dNeg[dNeg == 0] <- 1
+
+  return(max(c(dPos, dNeg)))
 }
 
 

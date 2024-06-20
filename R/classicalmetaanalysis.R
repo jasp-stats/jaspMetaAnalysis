@@ -75,10 +75,16 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   # forest plotting data
   forestPlotVariables <- c(
-    if (length(options[["forestPlotLeftPanelVariablesSelected"]]) > 0) unlist(options[["forestPlotLeftPanelVariablesSelected"]]),
+    if (length(options[["forestPlotStudyInformationSelectedVariables"]]) > 0) unlist(options[["forestPlotStudyInformationSelectedVariables"]]),
     if (options[["forestPlotMappingColor"]] != "") options[["forestPlotMappingColor"]],
     if (options[["forestPlotMappingShape"]] != "") options[["forestPlotMappingShape"]]
   )
+  # remove variables already specified in the model
+  forestPlotVariables <- setdiff(
+    forestPlotVariables,
+    c(predictorsNominal, predictorsScale, options[["effectSize"]], options[["effectSizeStandardError"]], options[["clustering"]])
+  )
+
 
   # load data
   dataset <- .readDataSetToEnd(
