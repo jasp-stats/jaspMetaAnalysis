@@ -36,6 +36,7 @@ Form
 		AssignedVariablesList
 		{
 			name:				"effectSize"
+			id:					effectSize
 			title:				qsTr("Effect Size")
 			singleVariable:		true
 			allowedColumns:		["scale"]
@@ -43,6 +44,7 @@ Form
 		AssignedVariablesList
 		{
 			name:				"effectSizeStandardError"
+			id:					effectSizeStandardError
 			title:				qsTr("Effect Size Standard Error")
 			singleVariable:		true
 			allowedColumns:		["scale"]
@@ -199,8 +201,8 @@ Form
 
 			CheckBox
 			{
-				name:		"metaregressionTermsTests"
-				text:		qsTr("Terms tests")
+				name:		"metaregressionTermTests"
+				text:		qsTr("Term tests")
 				checked:	true
 			}
 
@@ -448,33 +450,35 @@ Form
 
 		CheckBox
 		{
-			id:			forestPlot
-			name: 		"forestPlot"
-			text: 		qsTr("Forest plot")
+			id:			forestPlotStudyInformation
+			name: 		"forestPlotStudyInformation"
+			text: 		qsTr("Study information")
 		}
 
 		VariablesForm
 		{
 			preferredHeight: 	150 * preferencesModel.uiScale
+			enabled:			forestPlotStudyInformation.checked
 
 			AvailableVariablesList
 			{			
-				name:				"forestPlotLeftPanelVariablesAll"
+				name:				"forestPlotStudyInformationAllVariables"
 			}
 
 			AssignedVariablesList
 			{
-				name:				"forestPlotLeftPanelVariablesSelected"
-				title:				qsTr("Left Panel Variables") //TODO: make the VariablesForm title
+				name:				"forestPlotStudyInformationSelectedVariables"
+				title:				qsTr("Selected Variables") //TODO: make the VariablesForm title
 				allowedColumns:		["nominal"]
 			}
 		}
 
 		ComponentsList
 		{
-			name:				"forestPlotLeftPanelVariableSettings"
-			source:				"forestPlotLeftPanelVariablesSelected"
-			headerLabels:		[qsTr("Title"), qsTr("Column width")]
+			name:				"forestPlotStudyInformationSelectedVariablesSettings"
+			source:				"forestPlotStudyInformationSelectedVariables"
+			enabled:			forestPlotStudyInformation.checked
+			headerLabels:		[qsTr("Title"), qsTr("Column width"), qsTr("Alignment")]
 
 			rowComponent: 			RowLayout
 			{
@@ -506,114 +510,136 @@ Form
 					useExternalBorder:	false
 					showBorder:			true
 				}
+
+				DropDown
+				{
+					label: 				""
+					name: 				"alignment"
+					values:				[
+							{ label: qsTr("Left")		, value: "left"		},
+							{ label: qsTr("Center")		, value: "center"	},
+							{ label: qsTr("Right")		, value: "right"	}
+						]
+					fieldWidth:			40 * preferencesModel.uiScale
+					useExternalBorder:	false
+					showBorder:			true
+				}
 			}
 		}
 
 		Group
 		{
-			title:	qsTr("Mapping")
+			title:		qsTr("Order")
+			enabled:	forestPlotStudyInformation.checked
 
 			DropDown
 			{
-				name:			"forestPlotMappingColor"
-				label:			qsTr("Color")
-				addEmptyValue:	true
-				source:			"forestPlotLeftPanelVariablesAll"
-			}
-
-			DropDown
-			{
-				name:			"forestPlotMappingShape"
-				label:			qsTr("Shape")
-				addEmptyValue:	true
-				source:			"forestPlotLeftPanelVariablesAll"
-			}
-		}
-
-		Group
-		{
-			title:	qsTr("Order")
-
-			DropDown
-			{
-				name:			"forestPlotOrderBy"
+				name:			"forestPlotStudyInformationOrderBy"
 				label:			qsTr("By")
 				addEmptyValue:	true
-				source:			"forestPlotLeftPanelVariablesAll"
+				source:			"allVariables"
 			}
 
 			CheckBox
 			{
-				name:		"forestPlotAscending"
+				name:		"forestPlotStudyInformationOrderAscending"
 				text:		qsTr("Ascending")
 			}
 		}
 
-
-		Group
+		CheckBox
 		{
-			title:		qsTr("Right Panel")
+			name:		"forestPlotStudyInformationPredictedEffects"
+			text:		qsTr("Predicted effects")
+			enabled:	effectSize.count == 1 && effectSizeStandardError.count == 1
+			checked:	false
+		}
 
-			CheckBox
+		Divider { }
+
+		CheckBox
+		{
+			name:		"forestPlotEstimatedMarginalMeans"
+			id:			forestPlotEstimatedMarginalMeans
+			text:		qsTr("Estimated marginal means")
+			enabled:	effectSizeModelTerms.count > 0
+		}
+
+		VariablesForm
+		{
+			preferredHeight:	250
+			enabled:			forestPlotEstimatedMarginalMeans.checked
+
+			AvailableVariablesList
 			{
-				name:			"forestPlotRightPanelEstimate"
-				text:			qsTr("Estimate")
-				checked:		true
+				name:			"forestPlotEstimatedMarginalMeansModelVariables"
+				title:			qsTr("Model variables")
+				source:			[{ name: "effectSizeModelTerms", use: "noInteraction" }]
 			}
 
-			CheckBox
+			AssignedVariablesList
 			{
-				name:			"forestPlotRightPanelConfidenceInterval"
-				text:			qsTr("Confidence interval")
-				checked:		true
-			}
-
-			CheckBox
-			{
-				name:			"forestPlotRightPanelWeights"
-				text:			qsTr("Weights")
-			}
-
-			IntegerField
-			{
-				name:			"forestPlotRightPanelDigits"
-				text:			qsTr("Digits")
-				min:			1
-				value:			2
-				inclusive: 		JASP.None
+				id:				forestPlotEstimatedMarginalMeansSelectedVariables
+				name:			"forestPlotEstimatedMarginalMeansSelectedVariables"
+				title:			qsTr("Selected variables")
+				allowTypeChange:false
 			}
 		}
 
-
-		Group
+		CheckBox
 		{
-			title:		qsTr("Model Information")
+			name:		"forestPlotEstimatedMarginalMeansAdjustedEffectSizeEstimate"
+			label:		qsTr("Adjusted effect size estimate")
+			enabled:	forestPlotEstimatedMarginalMeans.checked
+		}
 
-			CheckBox
+		CheckBox
+		{
+			name:		"forestPlotEstimatedMarginalMeansTermTests"
+			id:			forestPlotEstimatedMarginalMeansTermTests
+			enabled:	forestPlotEstimatedMarginalMeans.checked
+			label:		qsTr("Term tests")
+			checked:	true
+		}
+
+		CheckBox
+		{
+			name:		"forestPlotEstimatedMarginalMeansCoefficientTests"
+			id:			forestPlotEstimatedMarginalMeansCoefficientTests
+			enabled:	forestPlotEstimatedMarginalMeans.checked
+			label:		qsTr("Coefficient tests")
+			checked:	true
+
+			DoubleField
 			{
-				name:		"forestPlotPredictedEffects"
-				text:		qsTr("Predicted effects")
-				checked:	false
-
-				CheckBox
-				{
-					name:		"forestPlotPredictedEffectsPredictionInterval"
-					text:		qsTr("Prediction interval")
-					checked:	false
-				}
+				name:			"forestPlotEstimatedMarginalMeansCoefficientTestsAgainst"
+				text:			qsTr("Against")
+				defaultValue:	0
 			}
+		}
+
+		Divider { }
+
+		CheckBox
+		{
+			name:		"forestPlotModelInformation"
+			id:			forestPlotModelInformation
+			enabled:	effectSize.count == 1 && effectSizeStandardError.count == 1
+			text:		qsTr("Model information")
+			columns:	2
 
 			CheckBox
 			{
 				name:		"forestPlotPooledEffectSizeEstimate"
 				text:		qsTr("Pooled effect size estimate")
 				checked:	true
+			}
 
-				CheckBox
-				{
-					name:		"forestPlotPooledEffectSizeEstimatePredictionInterval"
-					text:		qsTr("Prediction interval")
-				}
+			CheckBox
+			{
+				name:		"forestPlotPooledEffectSizeTest"
+				text:		qsTr("Pooled effect size test")
+				checked:	true
 			}
 
 			CheckBox
@@ -627,7 +653,7 @@ Form
 			{
 				name:		"forestPlotResidualHeterogeneityEstimate"
 				text:		qsTr("Residual heterogeneity estimate")
-				enabled:	method.value != "fixedEffects" || method.value != "equalEffects"
+				enabled:	(method.value != "fixedEffects" || method.value != "equalEffects")
 				checked:	true
 			}
 
@@ -645,6 +671,63 @@ Form
 				text:		qsTr("Heterogeneity moderation test")
 				enabled:	heterogeneityModelTerms.count > 0
 				checked:	true
+			}
+		}
+
+
+		Divider {}
+
+		Text
+		{
+			text:	qsTr("Settings")
+		}
+
+		CheckBox
+		{
+			name:		"forestPlotPredictionIntervals"
+			text:		qsTr("Prediction intervals")
+			checked:	true
+		}
+
+		Group
+		{
+			title:	qsTr("Mapping")
+
+			DropDown
+			{
+				name:			"forestPlotMappingColor"
+				label:			qsTr("Color")
+				addEmptyValue:	true
+				source:			"allVariables"
+			}
+
+			DropDown
+			{
+				name:			"forestPlotMappingShape"
+				label:			qsTr("Shape")
+				addEmptyValue:	true
+				source:			"allVariables"
+			}
+		}
+
+		CheckBox
+		{
+			name:		"forestPlotRightPanel"
+			text:		qsTr("Right Panel")
+			checked:	true
+
+			CheckBox
+			{
+				name:			"forestPlotRightPanelEstimate"
+				text:			qsTr("Estimates and confidence intervals")
+				checked:		true
+			}
+
+			CheckBox
+			{
+				name:			"forestPlotRightPanelWeights"
+				text:			qsTr("Weights")
+				enabled:		forestPlotStudyInformation.checked
 			}
 		}
 
@@ -683,6 +766,25 @@ Form
 		Group
 		{
 			title:		qsTr("Auxiliary")
+
+			IntegerField
+			{
+				name:			"forestPlotAuxiliaryDigits"
+				text:			qsTr("Digits")
+				min:			1
+				value:			2
+				inclusive: 		JASP.None
+			}
+
+			DropDown
+			{
+				label:		qsTr("Tests information")
+				name:		"forestPlotAuxiliaryTestsInformation"
+				values:		[
+						{ label: qsTr("Statistic and p-value")		, value: "statisticAndPValue"	},
+						{ label: qsTr("P-value")					, value: "pValue"				}
+				]
+			}
 
 			DropDown
 			{
@@ -746,63 +848,6 @@ Form
 
 
 
-		Group
-		{
-			columns:	2
-			enabled:	effectSizeModelTerms.count > 0
-			
-			CheckBox
-			{
-				name:			"forestPlotAddEstimatedMarginalMeans"
-				text:			qsTr("Add Estimated Marginal Means")
-			}
-
-			VariablesForm
-			{
-
-				preferredHeight:	250
-
-				AvailableVariablesList
-				{
-					name:			"forestPlotEstimatedMarginalMeansModelVariables"
-					title:			qsTr("Model variables")
-					source:			[{ name: "effectSizeModelTerms", use: "noInteraction" }]
-				}
-
-				AssignedVariablesList
-				{
-					id:				forestPlotEstimatedMarginalMeansSelectedVariables
-					name:			"forestPlotEstimatedMarginalMeansSelectedVariables"
-					title:			qsTr("Selected variables")
-					allowTypeChange:false
-				}
-			}
-
-			CheckBox
-			{
-				name:		"forestPlotEstimatedMarginalMeansAddAdjustedEstimate"
-				label:		qsTr("Add adjusted estimate")
-			}
-
-			CheckBox
-			{
-				name:		"forestPlotEstimatedMarginalMeansTermsTest"
-				label:		qsTr("Terms test")
-			}
-
-			CheckBox
-			{
-				name:		"forestPlotEstimatedMarginalMeansCoefficientTests"
-				label:		qsTr("Coefficient test")
-
-				DoubleField
-				{
-					name:			"forestPlotEstimatedMarginalMeansCoefficientTestsAgainst"
-					text:			qsTr("Against")
-					defaultValue:	0
-				}
-			}
-		}
 
 	}
 
