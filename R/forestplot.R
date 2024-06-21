@@ -43,6 +43,9 @@ if(FALSE){
     if (length(additionalVariables) > 0)
       dfForrest <- cbind(dfForrest, dataset[,additionalVariables,drop=FALSE])
 
+    # combine left panel information
+    leftPanelStudyInformation <- do.call(rbind.data.frame, options[["forestPlotStudyInformationSelectedVariablesSettings"]])
+
     ### add predicted effects
     if (options[["forestPlotStudyInformationPredictedEffects"]]) {
 
@@ -362,7 +365,7 @@ if(FALSE){
 
   # specify y-axis limits
   if (options[["forestPlotStudyInformation"]]) {
-    yRange <- c(0, max(dfForrest$y) + relativeRowSize)
+    yRange <- c(0, max(dfForrest$y) + relativeRowSize + any(leftPanelStudyInformation$title != ""))
   } else {
     yRange <- c(0, 0)
   }
@@ -438,7 +441,7 @@ if(FALSE){
     # dispatch the aes call based on color mapping
     if (any(!is.na(additionalObjects$mapColor))) {
       plotForrest <- plotForrest + ggplot2::geom_polygon(
-        data    = additionalObjects[is.na(additionalObjects$mapColor),],
+        data    = additionalObjects[!is.na(additionalObjects$mapColor),],
         mapping = ggplot2::aes(
           x     = x,
           y     = y,
@@ -474,7 +477,92 @@ if(FALSE){
   # plotForrest <- plotForrest + jaspGraphs::geom_rangeframe(sides = "b") + jaspGraphs::themeJaspRaw()
 
   ### Make the left information panel ----
-  plotLeft <- ggplot2::ggplot() + ggplot2::xlim(xRange) + ggplot2::ylim(yRange)
+  if (length(options[["forestPlotStudyInformationSelectedVariablesSettings"]]) > 0 || length(additionalInformation) > 0) {
+
+    # determine number of columns and study information
+    leftPanelStudyInformation   <- do.call(rbind.data.frame, options[["forestPlotStudyInformationSelectedVariablesSettings"]])
+
+    columnsAdd <- max(c(
+      if (length(additionalInformation) > 0)   1,
+      if (!is.null(leftPanelStudyInformation)) sum(leftPanelStudyInformation$width)
+    ))
+
+    xRangeLeftPanel <- c(0, columnsAdd)
+
+
+    plotLeft <- ggplot2::ggplot() + ggplot2::ylim(yRange) + ggplot2::xlim(xRangeLeftPanel)
+
+    if (!is.null(leftPanelStudyInformation)) {
+
+      # compute study information coordinates
+      leftPanelStudyInformation$y         <- (max(dfForrest$row) + 1) * relativeRowSize
+      leftPanelStudyInformation$xStart    <- c(0, cumsum(leftPanelStudyInformation$width[-length(leftPanelStudyInformation$width)]))
+      leftPanelStudyInformation$xEnd      <- cumsum(leftPanelStudyInformation$width)
+      leftPanelStudyInformation$x         <- ifelse(
+        leftPanelStudyInformation$alignment == "left", leftPanelStudyInformation$xStart, ifelse(
+          leftPanelStudyInformation$alignment == "middle", (leftPanelStudyInformation$xStart + leftPanelStudyInformation$xEnd) / 2, leftPanelStudyInformation$xEnd
+      ))
+
+      # add titles
+      plotLeft <- plotLeft + ggplot2::geom_text(
+        data    = leftPanelStudyInformation,
+        mapping = ggplot2::aes(
+          x     = 0,
+          y     = y,
+          label = title,
+          hjust = alignment
+        ),
+        vjust    = "midle",
+        fontface = "bold"
+      )
+
+      # add information
+      if (any(leftPanelStudyInformation$value == options[["forestPlotMappingColor"]])) {
+        leftPanelStudyDataColored <- data.frame(
+          x         = leftPanelStudyInformation$x[leftPanelStudyInformation$value == options[["forestPlotMappingColor"]]],
+          y         = dfForrest$y,
+          label     = dfForrest[[options[["forestPlotMappingColor"]]]],
+          alignment = leftPanelStudyInformation$alignment[leftPanelStudyInformation$value == options[["forestPlotMappingColor"]]]
+        )
+        plotLeft <- plotLeft + ggplot2::geom_text(
+          data    = leftPanelStudyDataColored,
+          mapping = ggplot2::aes(
+            x     = x,
+            y     = y,
+            label = label,
+            hjust = alignment,
+            color = label
+          ),
+          vjust    = "midle",
+        )
+      }
+      if (any(leftPanelStudyInformation$value != options[["forestPlotMappingColor"]])) {
+        tempVariables <- leftPanelStudyInformation$value[leftPanelStudyInformation$value != options[["forestPlotMappingColor"]]]
+        leftPanelStudyData <- do.call(rbind.data.frame, lapply(tempVariables, function(variable) {
+          data.frame(
+            x         = leftPanelStudyInformation$x[leftPanelStudyInformation$value == tempVariables],
+            y         = dfForrest$y,
+            label     = dfForrest[[tempVariables]],
+            alignment = leftPanelStudyInformation$alignment[leftPanelStudyInformation$value == tempVariables]
+          )
+        }))
+        plotLeft <- plotLeft + ggplot2::geom_text(
+          data    = leftPanelStudyData,
+          mapping = ggplot2::aes(
+            x     = x,
+            y     = y,
+            label = label,
+            hjust = alignment
+          ),
+          vjust    = "midle",
+        )
+      }
+
+    }
+
+
+  }
+
 
 
 
