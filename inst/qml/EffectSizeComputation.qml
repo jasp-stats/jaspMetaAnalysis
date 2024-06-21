@@ -263,9 +263,20 @@ Form
 			
 			VariablesForm
 			{
-				removeInvisibles: true
-				preferredWidth: parent.width - 2 * jaspTheme.contentMargin
 				// TODO: dynamically set proper height
+				removeInvisibles:	true
+				preferredWidth:		parent.width - 6 * jaspTheme.contentMargin
+				preferredHeight:	(function() {
+					if (effectSizeValue == "SMD" || effectSizeValue == "D2ORL" || effectSizeValue == "D2ORN") {
+						return 500 * preferencesModel.uiScale
+					} else if (effectSizeValue == "CVR" || effectSizeValue == "VR") {
+						return 250 * preferencesModel.uiScale
+					} else if (measurementValue == "quantitative") {
+						return 350 * preferencesModel.uiScale
+					} else {
+						return 350 * preferencesModel.uiScale
+					}
+				})()
 
 				AvailableVariablesList
 				{
