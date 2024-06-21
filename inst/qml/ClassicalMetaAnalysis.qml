@@ -193,33 +193,7 @@ Form
 	Section
 	{
 		title:	qsTr("Statistics")
-
-		Group
-		{
-			title:		qsTr("Meta-Regression")
-			enabled:	predictors.count > 0
-
-			CheckBox
-			{
-				name:		"metaregressionTermTests"
-				text:		qsTr("Term tests")
-				checked:	true
-			}
-
-			CheckBox
-			{
-				name:		"metaregressionCoefficientEstimates"
-				text:		qsTr("Coefficient estimates")
-				checked:	true
-			}
-
-			CheckBox
-			{
-				name:		"metaregressionCoefficientCorrelationMatrix"
-				text:		qsTr("Coefficient correlation matrix")
-				checked:	false
-			}
-		}
+		columns: 2
 
 		Group
 		{
@@ -258,6 +232,33 @@ Form
 
 		Group
 		{
+			title:		qsTr("Meta-Regression")
+			enabled:	predictors.count > 0
+
+			CheckBox
+			{
+				name:		"metaregressionTermTests"
+				text:		qsTr("Term tests")
+				checked:	true
+			}
+
+			CheckBox
+			{
+				name:		"metaregressionCoefficientEstimates"
+				text:		qsTr("Coefficient estimates")
+				checked:	true
+			}
+
+			CheckBox
+			{
+				name:		"metaregressionCoefficientCorrelationMatrix"
+				text:		qsTr("Coefficient correlation matrix")
+				checked:	false
+			}
+		}
+
+		Group
+		{
 			CheckBox
 			{
 				name:				"confidenceIntervals"
@@ -282,6 +283,7 @@ Form
 			{//TODO: make shorter or across both rows?
 				name:			"transformEffectSize"
 				label:			qsTr("Transform effect size")
+				setLabelAbove:	true
 				values:			[
 						{ label: qsTr("None")								, value: "none"							},  // NULL
 						{ label: qsTr("Fisher's z to r")					, value: "fishersZToCorrelation"		},  // transf.ztor
@@ -311,7 +313,8 @@ Form
 
 	Section
 	{
-		title:	qsTr("Estimated Marginal Means")
+		title:		qsTr("Estimated Marginal Means")
+		columns:	1
 
 		Group
 		{
@@ -338,54 +341,37 @@ Form
 				}
 			}
 
-			CheckBox
+			Group
 			{
-				name:		"estimatedMarginalMeansEffectSizeAddAdjustedEstimate"
-				label:		qsTr("Add adjusted estimate")
-			}
-/*
-			DropDown
-			{
-				name:			"estimatedMarginalMeansEffectSizeTransformation"
-				label:			qsTr("Effect size transformation")
-				values:			[
-						{ label: qsTr("None")								, value: "none"							},  // NULL
-						{ label: qsTr("Fisher's z to r")					, value: "fishersZToCorrelation"		},  // transf.ztor
-						{ label: qsTr("Exponential")						, value: "exponential"					},  // exp
-						{ label: qsTr("Log odds to proportions")			, value: "logOddsToProportions"			},  // transf.logit
-						{ label: qsTr("Log odds to SMD (normal)")			, value: "logOddsToSmdNormal"			},  // transf.lnortod.norm
-						{ label: qsTr("Log odds to SMD (logistic)")			, value: "logOddsToSmdLogistic"			},  // transf.lnortod.logis
-						{ label: qsTr("SMD to log odds (normal)")			, value: "smdToLogOddsNormal"			},  // transf.dtolnor.norm
-						{ label: qsTr("SMD to log odds (logistic)")			, value: "smdToLogOddsLogistic"			},  // transf.dtolnor.logis
-						{ label: qsTr("Hakstian & Whalen inverse α")		, value: "hakstianAndWhalenInverseAlpha"},  // transf.iahw 
-						{ label: qsTr("Bonett inverse α")					, value: "bonettInverseAlpha"			},  // transf.iabt
-						{ label: qsTr("Z to R²")							, value: "zToR2"						}, 	// transf.ztor2
-						{ label: qsTr("SMD to Cohen's U₁")					, value: "smdToCohensU1"				},  // transf.dtou1
-						{ label: qsTr("SMD to Cohen's U₂")					, value: "smdToCohensU2"				},  // transf.dtou2
-						{ label: qsTr("SMD to Cohen's U₃")					, value: "smdToCohensU3"				},  // transf.dtou3
-						{ label: qsTr("SMD to CLES, Pr(supperiority)")		, value: "smdToCles"					},  // transf.dtocles
-					]
-			}
-*/
-			DoubleField
-			{
-				name:			"estimatedMarginalMeansEffectSizeSdFactorCovariates"
-				label:			qsTr("SD factor covariates")
-				defaultValue: 	1
-				min:			0
-				enabled:		estimatedMarginalMeansEffectSizeSelectedVariables.columnsTypes.includes("scale")
-			}
-
-			CheckBox
-			{
-				name:				"estimatedMarginalMeansEffectSizeTestAgainst"
-				label:				qsTr("Test against")
-				childrenOnSameRow:	true
+				columns:	2
 
 				DoubleField
 				{
-					name:			"estimatedMarginalMeansEffectSizeTestAgainstValue"
-					defaultValue:	0
+					name:			"estimatedMarginalMeansEffectSizeSdFactorCovariates"
+					label:			qsTr("SD factor covariates")
+					defaultValue: 	1
+					min:			0
+					enabled:		estimatedMarginalMeansEffectSizeSelectedVariables.columnsTypes.includes("scale")
+					Layout.preferredWidth: 350 * jaspTheme.uiScale
+				}
+
+				CheckBox
+				{
+					name:		"estimatedMarginalMeansEffectSizeAddAdjustedEstimate"
+					label:		qsTr("Add adjusted estimate")
+				}
+
+				CheckBox
+				{
+					name:				"estimatedMarginalMeansEffectSizeTestAgainst"
+					label:				qsTr("Test against")
+					childrenOnSameRow:	true
+
+					DoubleField
+					{
+						name:			"estimatedMarginalMeansEffectSizeTestAgainstValue"
+						defaultValue:	0
+					}
 				}
 			}
 		}
@@ -415,38 +401,43 @@ Form
 				}
 			}
 
-			CheckBox
+			Group
 			{
-				name:		"estimatedMarginalMeansHeterogeneityAddAdjustedEstimate"
-				label:		qsTr("Add adjusted estimate")
-			}
+				columns:	2
 
-			DropDown
-			{
-				name:			"estimatedMarginalMeansHeterogeneityTransformation"
-				label:			qsTr("Heterogeneity transformation")
-				values:			[
-						{ label: qsTr("𝜏")		, value: "tau"	},
-						{ label: qsTr("𝜏²")	, value: "tau2"	}
-					]
-			}
+				DoubleField
+				{
+					name:			"estimatedMarginalMeansHeterogeneitySdFactorCovariates"
+					label:			qsTr("SD factor covariates")
+					defaultValue: 	1
+					min:			0
+					enabled:		estimatedMarginalMeansHeterogeneitySelectedVariables.columnsTypes.includes("scale")
+					Layout.preferredWidth: 350 * jaspTheme.uiScale
+				}
 
-			DoubleField
-			{
-				name:			"estimatedMarginalMeansHeterogeneitySdFactorCovariates"
-				label:			qsTr("SD factor covariates")
-				defaultValue: 	1
-				min:			0
-				enabled:		estimatedMarginalMeansHeterogeneitySelectedVariables.columnsTypes.includes("scale")
+				CheckBox
+				{
+					name:		"estimatedMarginalMeansHeterogeneityAddAdjustedEstimate"
+					label:		qsTr("Add adjusted estimate")
+				}
+
+				DropDown
+				{
+					name:			"estimatedMarginalMeansHeterogeneityTransformation"
+					label:			qsTr("Heterogeneity transformation")
+					values:			[
+							{ label: qsTr("𝜏")		, value: "tau"	},
+							{ label: qsTr("𝜏²")	, value: "tau2"	}
+						]
+				}
 			}
 		}
-
 	}
 
 	Section
 	{
-		title:	qsTr("Forest Plot")
-		columns:2
+		title:		qsTr("Forest Plot")
+		columns:	1
 
 		CheckBox
 		{
@@ -468,7 +459,8 @@ Form
 			AssignedVariablesList
 			{
 				name:				"forestPlotStudyInformationSelectedVariables"
-				title:				qsTr("Selected Variables") //TODO: make the VariablesForm title
+				id:					forestPlotStudyInformationSelectedVariables
+				title:				qsTr("Selected Variables")
 				allowedColumns:		["nominal"]
 			}
 		}
@@ -478,6 +470,7 @@ Form
 			name:				"forestPlotStudyInformationSelectedVariablesSettings"
 			source:				"forestPlotStudyInformationSelectedVariables"
 			enabled:			forestPlotStudyInformation.checked
+			visible:			forestPlotStudyInformationSelectedVariables.count > 0
 			headerLabels:		[qsTr("Title"), qsTr("Width"), qsTr("Alignment")]
 
 			rowComponent: 			RowLayout
@@ -529,30 +522,37 @@ Form
 
 		Group
 		{
-			title:		qsTr("Order")
 			enabled:	forestPlotStudyInformation.checked
-
-			DropDown
-			{
-				name:			"forestPlotStudyInformationOrderBy"
-				label:			qsTr("By")
-				addEmptyValue:	true
-			}
+			columns:	2
 
 			CheckBox
 			{
-				name:		"forestPlotStudyInformationOrderAscending"
-				text:		qsTr("Ascending")
+				name:		"forestPlotStudyInformationPredictedEffects"
+				text:		qsTr("Predicted effects")
+				enabled:	effectSize.count == 1 && effectSizeStandardError.count == 1
+				checked:	false
+				Layout.preferredWidth: 300 * jaspTheme.uiScale
+			}
+
+			Group
+			{
+				title:		qsTr("Order")
+				DropDown
+				{
+					name:			"forestPlotStudyInformationOrderBy"
+					label:			qsTr("By")
+					addEmptyValue:	true
+				}
+
+				CheckBox
+				{
+					name:		"forestPlotStudyInformationOrderAscending"
+					text:		qsTr("Ascending")
+				}
 			}
 		}
 
-		CheckBox
-		{
-			name:		"forestPlotStudyInformationPredictedEffects"
-			text:		qsTr("Predicted effects")
-			enabled:	effectSize.count == 1 && effectSizeStandardError.count == 1
-			checked:	false
-		}
+
 
 		Divider { }
 
@@ -585,37 +585,48 @@ Form
 			}
 		}
 
-		CheckBox
+		Group
 		{
-			name:		"forestPlotEstimatedMarginalMeansAdjustedEffectSizeEstimate"
-			label:		qsTr("Adjusted effect size estimate")
-			enabled:	forestPlotEstimatedMarginalMeans.checked
-		}
+			columns:	2
 
-		CheckBox
-		{
-			name:		"forestPlotEstimatedMarginalMeansTermTests"
-			id:			forestPlotEstimatedMarginalMeansTermTests
-			enabled:	forestPlotEstimatedMarginalMeans.checked
-			label:		qsTr("Term tests")
-			checked:	true
-		}
-
-		CheckBox
-		{
-			name:		"forestPlotEstimatedMarginalMeansCoefficientTests"
-			id:			forestPlotEstimatedMarginalMeansCoefficientTests
-			enabled:	forestPlotEstimatedMarginalMeans.checked
-			label:		qsTr("Coefficient tests")
-			checked:	true
-
-			DoubleField
+			Group
 			{
-				name:			"forestPlotEstimatedMarginalMeansCoefficientTestsAgainst"
-				text:			qsTr("Against")
-				defaultValue:	0
+				CheckBox
+				{
+					name:		"forestPlotEstimatedMarginalMeansTermTests"
+					id:			forestPlotEstimatedMarginalMeansTermTests
+					enabled:	forestPlotEstimatedMarginalMeans.checked
+					label:		qsTr("Term tests")
+					checked:	true
+					Layout.preferredWidth: 350 * jaspTheme.uiScale
+				}
+
+				CheckBox
+				{
+					name:		"forestPlotEstimatedMarginalMeansCoefficientTests"
+					id:			forestPlotEstimatedMarginalMeansCoefficientTests
+					enabled:	forestPlotEstimatedMarginalMeans.checked
+					label:		qsTr("Coefficient tests")
+					checked:	true
+
+					DoubleField
+					{
+						name:			"forestPlotEstimatedMarginalMeansCoefficientTestsAgainst"
+						text:			qsTr("Against")
+						defaultValue:	0
+					}
+				}
+
+			}
+
+			CheckBox
+			{
+				name:		"forestPlotEstimatedMarginalMeansAdjustedEffectSizeEstimate"
+				label:		qsTr("Adjusted effect size estimate")
+				enabled:	forestPlotEstimatedMarginalMeans.checked
 			}
 		}
+
 
 		Divider { }
 
@@ -625,13 +636,19 @@ Form
 			id:			forestPlotModelInformation
 			enabled:	effectSize.count == 1 && effectSizeStandardError.count == 1
 			text:		qsTr("Model information")
+		}
+
+		Group
+		{
+			enabled:	forestPlotModelInformation.checked
 			columns:	2
 
 			CheckBox
 			{
 				name:		"forestPlotPooledEffectSizeEstimate"
 				text:		qsTr("Pooled effect size estimate")
-				checked:	true
+				checked:	true				
+				Layout.preferredWidth: 300 * jaspTheme.uiScale
 			}
 
 			CheckBox
@@ -681,82 +698,124 @@ Form
 			text:	qsTr("Settings")
 		}
 
-		CheckBox
-		{
-			name:		"forestPlotPredictionIntervals"
-			text:		qsTr("Prediction intervals")
-			checked:	true
-		}
-
 		Group
 		{
-			title:	qsTr("Mapping")
-
-			DropDown
-			{
-				name:			"forestPlotMappingColor"
-				label:			qsTr("Color")
-				addEmptyValue:	true
-			}
-
-			DropDown
-			{
-				name:			"forestPlotMappingShape"
-				label:			qsTr("Shape")
-				addEmptyValue:	true
-			}
-		}
-
-		CheckBox
-		{
-			name:		"forestPlotRightPanel"
-			text:		qsTr("Right Panel")
-			checked:	true
+			columns:	2
 
 			CheckBox
 			{
-				name:			"forestPlotRightPanelEstimate"
-				text:			qsTr("Estimates and confidence intervals")
-				checked:		true
+				name:		"forestPlotPredictionIntervals"
+				text:		qsTr("Prediction intervals")
+				checked:	true
+				Layout.preferredWidth: 300 * jaspTheme.uiScale
+			}
+
+			Group
+			{
+				title:	qsTr("Mapping")
+
+				DropDown
+				{
+					name:			"forestPlotMappingColor"
+					label:			qsTr("Color")
+					addEmptyValue:	true
+				}
+
+				DropDown
+				{
+					name:			"forestPlotMappingShape"
+					label:			qsTr("Shape")
+					addEmptyValue:	true
+				}
 			}
 
 			CheckBox
 			{
-				name:			"forestPlotRightPanelWeights"
-				text:			qsTr("Weights")
-				enabled:		forestPlotStudyInformation.checked
-			}
-		}
+				name:		"forestPlotRightPanel"
+				text:		qsTr("Right Panel")
+				checked:	true
 
-		Group
-		{
-			title:		qsTr("Relative Size")
+				CheckBox
+				{
+					name:			"forestPlotRightPanelEstimate"
+					text:			qsTr("Estimates and confidence intervals")
+					checked:		true
+				}
 
-			DoubleField
-			{
-				name:			"forestPlotRelativeSizeEstimates"
-				text:			qsTr("Estimates")
-				defaultValue:	1
-				min:			0
-				inclusive: 		JASP.None
-			}
-
-			DoubleField
-			{
-				name:			"forestPlotRelativeSizeText"
-				text:			qsTr("Text")
-				defaultValue:	1
-				min:			0
-				inclusive: 		JASP.None
+				CheckBox
+				{
+					name:			"forestPlotRightPanelWeights"
+					text:			qsTr("Weights")
+					enabled:		forestPlotStudyInformation.checked
+				}
 			}
 
-			DoubleField
+			Group
 			{
-				name:			"forestPlotRelativeSizeRow"
-				text:			qsTr("Row")
-				defaultValue:	1
-				min:			0
-				inclusive: 		JASP.None
+				title:		qsTr("Relative Size")
+
+				DoubleField
+				{
+					name:			"forestPlotRelativeSizeEstimates"
+					text:			qsTr("Estimates")
+					defaultValue:	1
+					min:			0
+					inclusive: 		JASP.None
+				}
+
+				DoubleField
+				{
+					name:			"forestPlotRelativeSizeText"
+					text:			qsTr("Text")
+					defaultValue:	1
+					min:			0
+					inclusive: 		JASP.None
+				}
+
+				DoubleField
+				{
+					name:			"forestPlotRelativeSizeAxisLabels"
+					text:			qsTr("Axis labels")
+					defaultValue:	1
+					min:			0
+					inclusive: 		JASP.None
+				}
+
+				DoubleField
+				{
+					name:			"forestPlotRelativeSizeRow"
+					text:			qsTr("Row")
+					defaultValue:	1
+					min:			0
+					inclusive: 		JASP.None
+				}
+
+				DoubleField
+				{
+					name:			"forestPlotRelativeSizeLeftPanel"
+					text:			qsTr("Left panel")
+					defaultValue:	1
+					min:			0
+					inclusive: 		JASP.None
+				}
+
+				DoubleField
+				{
+					name:			"forestPlotRelativeSizeMiddlePanel"
+					text:			qsTr("Middle panel")
+					defaultValue:	1
+					min:			0
+					inclusive: 		JASP.None
+				}
+
+				DoubleField
+				{
+					name:			"forestPlotRelativeSizeRightPanel"
+					text:			qsTr("Right panel")
+					defaultValue:	1
+					min:			0
+					inclusive: 		JASP.None
+				}
 			}
 		}
 
@@ -855,6 +914,14 @@ Form
 					min:			forestPlotAuxiliarySetXAxisLimitLower			
 					inclusive: 		JASP.None
 				}
+			}
+
+			
+			CheckBox
+			{
+				name:			"forestPlotAuxiliaryGuessTextWidth"
+				text:			qsTr("Guess text width")
+				checked:		true
 			}
 		}
 

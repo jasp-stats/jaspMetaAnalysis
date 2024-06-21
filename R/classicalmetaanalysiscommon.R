@@ -1339,10 +1339,10 @@
   if (keepText)
     prefix <- gettext("Heterogeneity: ")
   else
-    prefix <- paste0(rep(" ", nchar(gettext("Heterogeneity: "))), collapse = "")
+    prefix <- "" # paste0(rep(" ", nchar(gettext("Heterogeneity: "))), collapse = "")
 
   return(sprintf(paste0(
-    "%1$s \U1D70F = ",
+    "%1$s tau = ",
     "%2$.", digits, "f",
     " [",
     "%3$.", digits, "f",
@@ -1415,7 +1415,7 @@
     mapColor = NA
   ))
 }
-.maMakeRectangleDataFrame         <- function(lCi, uCi, row, id, adj = 1/4) {
+.maMakeRectangleDataFrame         <- function(lCi, uCi, row, id, adj = 1/5) {
   return(data.frame(
     id       = id,
     x        = c(lCi,     uCi,      uCi,      lCi),

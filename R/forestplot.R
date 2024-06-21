@@ -112,7 +112,7 @@ if(FALSE){
         "lCi"    = NA,
         "uCi"    = NA,
         "test"   = "",
-        "print"  = "bold"
+        "face"   = "bold"
       )
       tempRow <- tempRow + 1
     }
@@ -132,7 +132,7 @@ if(FALSE){
         "lCi"    = NA,
         "uCi"    = NA,
         "test"   = if (estimatedMarginalMeansTermsTestsRight) tempTestText else "",
-        "print"  = NA
+        "face"   = NA
       )
       tempRow <- tempRow + 1
 
@@ -148,7 +148,7 @@ if(FALSE){
           "lCi"    = tempEstimatedMarginalMeans$lCi[j],
           "uCi"    = tempEstimatedMarginalMeans$uCi[j],
           "test"   = if (estimatedMarginalMeansCoefficientTestsRight) tempCoefficientTest else "",
-          "print"  = "italic"
+          "face"   = "italic"
         )
         additionalObjects[[tempRow]] <- with(tempEstimatedMarginalMeans[j,], .maMakeDiamondDataFrame(est = est, lCi = lCi, uCi = uCi, row = tempRow, id = tempRow))
         additionalObjects[[tempRow]]$mapColor <- if(options[["forestPlotMappingColor"]] == estimatedMarginalMeansVariables[i]) tempEstimatedMarginalMeans$value[j] else NA
@@ -158,13 +158,13 @@ if(FALSE){
         if (options[["forestPlotPredictionIntervals"]] || estimatedMarginalMeansCoefficientTestsBelow) {
 
           additionalInformation[[tempRow]] <- data.frame(
-            "label"  = if (estimatedMarginalMeansCoefficientTestsBelow) tempCoefficientTest else "",
+            "label"  = if (estimatedMarginalMeansCoefficientTestsBelow) tempCoefficientTest else NA,
             "row"    = tempRow,
             "est"    = NA,
             "lCi"    = if (options[["forestPlotPredictionIntervals"]]) tempEstimatedMarginalMeans$lPi[j] else NA,
             "uCi"    = if (options[["forestPlotPredictionIntervals"]]) tempEstimatedMarginalMeans$uPi[j] else NA,
             "test"   = "",
-            "print"  = NA
+            "face"   = NA
           )
           if (options[["forestPlotPredictionIntervals"]]) {
             additionalObjects[[tempRow]] <- with(tempEstimatedMarginalMeans[j,], .maMakeRectangleDataFrame(lCi = lPi, uCi = uPi, row = tempRow, id = tempRow))
@@ -193,7 +193,7 @@ if(FALSE){
         "lCi"   = tempEstimatedMarginalMeans$lCi,
         "uCi"   = tempEstimatedMarginalMeans$uCi,
         "test"  = if (estimatedMarginalMeansCoefficientTestsRight) tempCoefficientTest else "",
-        "print" = NA
+        "face"  = NA
       )
       additionalObjects[[tempRow]] <- with(tempEstimatedMarginalMeans, .maMakeDiamondDataFrame(est = est, lCi = lCi, uCi = uCi, row = tempRow, id = tempRow))
       tempRow <- tempRow + 1
@@ -201,13 +201,13 @@ if(FALSE){
       if (options[["forestPlotPredictionIntervals"]] || estimatedMarginalMeansCoefficientTestsBelow) {
 
         additionalInformation[[tempRow]] <- data.frame(
-          "label" = if(estimatedMarginalMeansCoefficientTestsBelow) tempCoefficientTest else "",
+          "label" = if(estimatedMarginalMeansCoefficientTestsBelow) tempCoefficientTest else NA,
           "row"   = tempRow,
           "est"   = NA,
           "lCi"   = if (options[["forestPlotPredictionIntervals"]]) tempEstimatedMarginalMeans$lPi else NA,
           "uCi"   = if (options[["forestPlotPredictionIntervals"]]) tempEstimatedMarginalMeans$uPi else NA,
           "test"  = "",
-          "print" = NA
+          "face"  = NA
         )
 
         if (options[["forestPlotPredictionIntervals"]])
@@ -239,7 +239,7 @@ if(FALSE){
         "lCi"   = NA,
         "uCi"   = NA,
         "test"  = "",
-        "print" = "bold"
+        "face"  = "bold"
       )
       tempRow <- tempRow + 1
     }
@@ -252,7 +252,7 @@ if(FALSE){
         "lCi"   = NA,
         "uCi"   = NA,
         "test"  = "",
-        "print" = NA
+        "face"  = NA
       )
       tempRow <- tempRow + 1
     }
@@ -265,7 +265,7 @@ if(FALSE){
         "lCi"   = NA,
         "uCi"   = NA,
         "test"  = "",
-        "print" = NA
+        "face"  = NA
       )
       tempRow <- tempRow + 1
     }
@@ -278,7 +278,7 @@ if(FALSE){
         "lCi"   = NA,
         "uCi"   = NA,
         "test"  = "",
-        "print" = NA
+        "face"  = NA
       )
       tempRow <- tempRow + 1
     }
@@ -291,7 +291,7 @@ if(FALSE){
         "lCi"   = NA,
         "uCi"   = NA,
         "test"  = "",
-        "print" = NA
+        "face"  = NA
       )
       tempRow <- tempRow + 1
     }
@@ -312,24 +312,24 @@ if(FALSE){
         "lCi"   = tempPooledEstimate$lCi,
         "uCi"   = tempPooledEstimate$uCi,
         "test"  = if (pooledEffectSizeTestsRight) tempTestText else "",
-        "print" = NA
+        "face"  = NA
       )
-      additionalObjects[[tempRow]] <- with(tempEstimatedMarginalMeans, .maMakeDiamondDataFrame(est = est, lCi = lCi, uCi = uCi, row = tempRow, id = tempRow))
+      additionalObjects[[tempRow]] <- with(tempPooledEstimate, .maMakeDiamondDataFrame(est = est, lCi = lCi, uCi = uCi, row = tempRow, id = tempRow))
       tempRow <- tempRow + 1
 
       if (pooledEffectSizeTestsBelow || options[["forestPlotPredictionIntervals"]]) {
         additionalInformation[[tempRow]] <- data.frame(
-          "label" = if (pooledEffectSizeTestsBelow) tempTestText else "",
+          "label" = if (pooledEffectSizeTestsBelow) tempTestText else NA,
           "row"   = tempRow,
           "est"   = NA,
           "lCi"   = if (options[["forestPlotPredictionIntervals"]]) tempPooledEstimate$lPi else NA,
           "uCi"   = if (options[["forestPlotPredictionIntervals"]]) tempPooledEstimate$uPi else NA,
           "test"  = "",
-          "print" = NA
+          "face"  = NA
         )
 
         if (options[["forestPlotPredictionIntervals"]])
-          additionalObjects[[tempRow]] <- with(tempEstimatedMarginalMeans, .maMakeRectangleDataFrame(lCi = lPi, uCi = uPi, row = tempRow, id = tempRow))
+          additionalObjects[[tempRow]] <- with(tempPooledEstimate, .maMakeRectangleDataFrame(lCi = lPi, uCi = uPi, row = tempRow, id = tempRow))
 
         tempRow <- tempRow + 1
       }
@@ -377,7 +377,7 @@ if(FALSE){
   }
 
   ### Make the forest plot ----
-  plotForrest <- ggplot2::ggplot()
+  plotForest <- ggplot2::ggplot()
 
   # study information panel estimates
   if (options[["forestPlotStudyInformation"]]) {
@@ -397,7 +397,7 @@ if(FALSE){
         fill    = if (options[["forestPlotMappingColor"]] == "") "grey20",
         alpha   = 0.8
       )
-      plotForrest <- plotForrest + do.call(ggplot2::geom_polygon, geomCall[!sapply(geomCall, is.null)])
+      plotForest <- plotForest + do.call(ggplot2::geom_polygon, geomCall[!sapply(geomCall, is.null)])
     }
 
     ### add estimates
@@ -415,15 +415,15 @@ if(FALSE){
       shape   = if (options[["forestPlotMappingShape"]] == "") 15,
       size    = dfForrest[["weights"]] * options[["forestPlotRelativeSizeEstimates"]]
     )
-    plotForrest <- plotForrest + do.call(ggplot2::geom_point, geomCall[!sapply(geomCall, is.null)])
+    plotForest <- plotForest + do.call(ggplot2::geom_point, geomCall[!sapply(geomCall, is.null)])
 
     # change scale for shapes to full shapes if used
     if (options[["forestPlotMappingShape"]] != "")
-      plotForrest <- plotForrest + ggplot2::scale_shape_manual(values = rep(c(15:18, 21:25), length.out = length(unique(dfForrest[[options[["forestPlotMappingShape"]]]]))))
+      plotForest <- plotForest + ggplot2::scale_shape_manual(values = rep(c(15:18, 21:25), length.out = length(unique(dfForrest[[options[["forestPlotMappingShape"]]]]))))
 
 
     ### add CIs
-    plotForrest <- plotForrest + ggplot2::geom_errorbarh(
+    plotForest <- plotForest + ggplot2::geom_errorbarh(
       data    = dfForrest,
       mapping = ggplot2::aes(
         xmin = lCi,
@@ -440,7 +440,7 @@ if(FALSE){
 
     # dispatch the aes call based on color mapping
     if (any(!is.na(additionalObjects$mapColor))) {
-      plotForrest <- plotForrest + ggplot2::geom_polygon(
+      plotForest <- plotForest + ggplot2::geom_polygon(
         data    = additionalObjects[!is.na(additionalObjects$mapColor),],
         mapping = ggplot2::aes(
           x     = x,
@@ -452,7 +452,7 @@ if(FALSE){
     }
 
     if (any(is.na(additionalObjects$mapColor))) {
-      plotForrest <- plotForrest + ggplot2::geom_polygon(
+      plotForest <- plotForest + ggplot2::geom_polygon(
         data    = additionalObjects[is.na(additionalObjects$mapColor),],
         mapping = ggplot2::aes(
           x     = x,
@@ -465,22 +465,28 @@ if(FALSE){
 
   # add vertical line
   if (options[["forestPlotAuxiliaryAddVerticalLine"]])
-    plotForrest <- plotForrest + ggplot2::geom_vline(xintercept = options[["forestPlotAuxiliaryAddVerticalLineValue"]], linetype = "dashed")
+    plotForest <- plotForest + ggplot2::geom_vline(xintercept = options[["forestPlotAuxiliaryAddVerticalLineValue"]], linetype = "dashed")
+  if (options[["forestPlotAuxiliaryAddVerticalLine2"]])
+    plotForest <- plotForest + ggplot2::geom_vline(xintercept = options[["forestPlotAuxiliaryAddVerticalLineValue2"]], linetype = "dotted")
 
-  # fix plotting range
-  plotForrest <- plotForrest + jaspGraphs::scale_x_continuous(
-    name   = options[["forestPlotAuxiliaryEffectLabel"]],
-    breaks = xBreaks,
-    limits = xRange
-  ) + ggplot2::ylim(yRange)
-
-  # plotForrest <- plotForrest + jaspGraphs::geom_rangeframe(sides = "b") + jaspGraphs::themeJaspRaw()
 
   ### Make the left information panel ----
   if (length(options[["forestPlotStudyInformationSelectedVariablesSettings"]]) > 0 || length(additionalInformation) > 0) {
 
-    # determine number of columns and study information
+    ### determine number of columns and study information
     leftPanelStudyInformation   <- do.call(rbind.data.frame, options[["forestPlotStudyInformationSelectedVariablesSettings"]])
+
+    # compute the total character width
+    maxChars <- 0
+    if (length(leftPanelStudyInformation) != 0)
+      leftPanelStudyInformationChars <- apply(dfForrest[,leftPanelStudyInformation$value], 2, function(x) max(nchar(x), na.rm = TRUE))
+    else
+      leftPanelStudyInformationChars <- 0
+    if (length(additionalInformation) != 0)
+      additionalInformationChars <- max(nchar(additionalInformation$label), na.rm = TRUE)
+    else
+      additionalInformationChars <- 0
+
 
     columnsAdd <- max(c(
       if (length(additionalInformation) > 0)   1,
@@ -490,9 +496,12 @@ if(FALSE){
     xRangeLeftPanel <- c(0, columnsAdd)
 
 
-    plotLeft <- ggplot2::ggplot() + ggplot2::ylim(yRange) + ggplot2::xlim(xRangeLeftPanel)
 
-    if (!is.null(leftPanelStudyInformation)) {
+
+    plotLeft <- ggplot2::ggplot()
+
+    ### add the subplots
+    if (length(leftPanelStudyInformation) > 0) {
 
       # compute study information coordinates
       leftPanelStudyInformation$y         <- (max(dfForrest$row) + 1) * relativeRowSize
@@ -512,6 +521,7 @@ if(FALSE){
           label = title,
           hjust = alignment
         ),
+        size     = 11 * options[["forestPlotRelativeSizeText"]],
         vjust    = "midle",
         fontface = "bold"
       )
@@ -533,6 +543,7 @@ if(FALSE){
             hjust = alignment,
             color = label
           ),
+          size     = 11 * options[["forestPlotRelativeSizeText"]],
           vjust    = "midle",
         )
       }
@@ -540,10 +551,10 @@ if(FALSE){
         tempVariables <- leftPanelStudyInformation$value[leftPanelStudyInformation$value != options[["forestPlotMappingColor"]]]
         leftPanelStudyData <- do.call(rbind.data.frame, lapply(tempVariables, function(variable) {
           data.frame(
-            x         = leftPanelStudyInformation$x[leftPanelStudyInformation$value == tempVariables],
+            x         = leftPanelStudyInformation$x[leftPanelStudyInformation$value == variable],
             y         = dfForrest$y,
-            label     = dfForrest[[tempVariables]],
-            alignment = leftPanelStudyInformation$alignment[leftPanelStudyInformation$value == tempVariables]
+            label     = dfForrest[[variable]],
+            alignment = leftPanelStudyInformation$alignment[leftPanelStudyInformation$value == variable]
           )
         }))
         plotLeft <- plotLeft + ggplot2::geom_text(
@@ -554,16 +565,92 @@ if(FALSE){
             label = label,
             hjust = alignment
           ),
+          size     = 11 * options[["forestPlotRelativeSizeText"]],
           vjust    = "midle",
         )
       }
 
     }
 
+    if (length(additionalInformation) > 0) {
+
+      # subset left panel information only
+      leftPanelAdditionalInformation   <- additionalInformation[!is.na(additionalInformation$label),]
+      leftPanelAdditionalInformation$x <- 2
+      leftPanelAdditionalInformation$face[is.na(leftPanelAdditionalInformation$face)] <- "plain"
+
+      # add titles
+      plotLeft <- plotLeft + ggplot2::geom_text(
+        data    = leftPanelAdditionalInformation,
+        mapping     = ggplot2::aes(
+          x         = x,
+          y         = y,
+          label     = label,
+          fontface  = face
+        ),
+        size     = 11 * options[["forestPlotRelativeSizeText"]],
+        hjust    = "right",
+        vjust    = "midle",
+      )
+    }
+
+
 
   }
 
+  ### adjust axis, themes, and labels
 
+
+  # fix plotting range
+  plotForest1 <- plotForest + ggplot2::scale_x_continuous(
+    name   = options[["forestPlotAuxiliaryEffectLabel"]],
+    breaks = xBreaks,
+    limits = xRange,
+    expand = c(0,0)
+  ) + ggplot2::scale_y_continuous(
+    limits = yRange,
+    expand = c(0,0)
+  ) + ggplot2::theme(
+    axis.line.y       = ggplot2::element_blank(),
+    axis.line.x       = ggplot2::element_line(color = "black"),
+    axis.text.y       = ggplot2::element_blank(),
+    axis.text.x       = ggplot2::element_text(color = "black", size = 12 * options[["forestPlotRelativeSizeAxisLabels"]]),
+    axis.ticks.y      = ggplot2::element_blank(),
+    axis.title.y      = ggplot2::element_blank(),
+    axis.title.x      = ggplot2::element_text(color = "black", size = 12 * options[["forestPlotRelativeSizeAxisLabels"]]),
+    legend.position   = "none",
+    panel.background  = ggplot2::element_blank(),
+    panel.border      = ggplot2::element_blank(),
+    panel.grid.major  = ggplot2::element_blank(),
+    panel.grid.minor  = ggplot2::element_blank(),
+    plot.background   = ggplot2::element_blank()
+  )
+
+  plotLeft1 <- plotLeft + ggplot2::scale_x_continuous(
+    name   = options[["forestPlotAuxiliaryEffectLabel"]],
+    breaks = xBreaks,
+    limits = xRangeLeftPanel,
+    expand = c(0,0)
+  ) + ggplot2::scale_y_continuous(
+    limits = yRange,
+    expand = c(0,0)
+  ) + ggplot2::theme(
+    axis.line         = ggplot2::element_blank(),
+    axis.text.y       = ggplot2::element_blank(),
+    axis.text.x       = ggplot2::element_text(color = NA, size = 12 * options[["forestPlotRelativeSizeAxisLabels"]]),
+    axis.ticks        = ggplot2::element_blank(),
+    axis.title.y      = ggplot2::element_blank(),
+    axis.title.x      = ggplot2::element_text(color = NA, size = 12 * options[["forestPlotRelativeSizeAxisLabels"]]),
+    legend.position   = "none",
+    panel.background  = ggplot2::element_blank(),
+    panel.border      = ggplot2::element_blank(),
+    panel.grid.major  = ggplot2::element_blank(),
+    panel.grid.minor  = ggplot2::element_blank(),
+    plot.background   = ggplot2::element_blank()
+  )
+
+
+  gridExtra ::grid.arrange(plotLeft1, plotForest1, nrow = 1)
 
 
 
