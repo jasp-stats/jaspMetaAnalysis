@@ -478,7 +478,7 @@ Form
 			name:				"forestPlotStudyInformationSelectedVariablesSettings"
 			source:				"forestPlotStudyInformationSelectedVariables"
 			enabled:			forestPlotStudyInformation.checked
-			headerLabels:		[qsTr("Title"), qsTr("Column width"), qsTr("Alignment")]
+			headerLabels:		[qsTr("Title"), qsTr("Width"), qsTr("Alignment")]
 
 			rowComponent: 			RowLayout
 			{
@@ -494,7 +494,7 @@ Form
 					label:				""
 					name:				"title"
 					value:				""
-					fieldWidth: 		100 * preferencesModel.uiScale
+					fieldWidth: 		120 * preferencesModel.uiScale
 					useExternalBorder:	false
 					showBorder: 		true
 				}
@@ -517,7 +517,7 @@ Form
 					name: 				"alignment"
 					values:				[
 							{ label: qsTr("Left")		, value: "left"		},
-							{ label: qsTr("Center")		, value: "center"	},
+							{ label: qsTr("Middle")		, value: "middle"	},
 							{ label: qsTr("Right")		, value: "right"	}
 						]
 					fieldWidth:			40 * preferencesModel.uiScale
@@ -537,7 +537,6 @@ Form
 				name:			"forestPlotStudyInformationOrderBy"
 				label:			qsTr("By")
 				addEmptyValue:	true
-				source:			"allVariables"
 			}
 
 			CheckBox
@@ -698,7 +697,6 @@ Form
 				name:			"forestPlotMappingColor"
 				label:			qsTr("Color")
 				addEmptyValue:	true
-				source:			"allVariables"
 			}
 
 			DropDown
@@ -706,7 +704,6 @@ Form
 				name:			"forestPlotMappingShape"
 				label:			qsTr("Shape")
 				addEmptyValue:	true
-				source:			"allVariables"
 			}
 		}
 
@@ -799,12 +796,27 @@ Form
 
 			CheckBox
 			{
-				name:			"forestPlotAuxiliaryAddVerticalLine"
-				text:			qsTr("Add vertical line")
+				name:				"forestPlotAuxiliaryAddVerticalLine"
+				text:				qsTr("Add vertical line")
+				childrenOnSameRow:	true
 
 				DoubleField
 				{
 					name:			"forestPlotAuxiliaryAddVerticalLineValue"
+					defaultValue:	0
+					negativeValues:	true
+				}
+			}
+
+			CheckBox
+			{
+				name:				"forestPlotAuxiliaryAddVerticalLine2"
+				text:				qsTr("Add vertical line (2)")
+				childrenOnSameRow:	true
+
+				DoubleField
+				{
+					name:			"forestPlotAuxiliaryAddVerticalLineValue2"
 					defaultValue:	0
 					negativeValues:	true
 				}
