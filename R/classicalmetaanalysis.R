@@ -51,7 +51,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "optimizerConvergenceRelativeTolerance", "optimizerConvergenceRelativeToleranceValue", "optimizerStepAdjustment", "optimizerStepAdjustmentValue"
 )
 .maForestPlotDependencies <- c(
-  .maDependencies,
+  .maDependencies, "transformEffectSize", "confidenceIntervalsLevel",
   "forestPlotStudyInformation",
   "forestPlotStudyInformationAllVariables",
   "forestPlotStudyInformationSelectedVariables",
@@ -98,6 +98,19 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotAuxiliarySetXAxisLimit",
   "forestPlotAuxiliarySetXAxisLimitLower",
   "forestPlotAuxiliarySetXAxisLimitUpper"
+)
+.maBubblePlotDependencies <- c(
+  .maDependencies, "transformEffectSize", "confidenceIntervalsLevel",
+  "bubblePlotSelectedVariable",
+  "bubblePlotSeparateLines",
+  "bubblePlotSeparatePlots",
+  "bubblePlotSdFactorCovariates",
+  "bubblePlotBubbleSize",
+  "bubblePlotRelativeBubbleSize",
+  "bubblePlotCondifenceIntervals",
+  "bubblePlotCondifenceIntervalsTransparency",
+  "bubblePlotPredictionIntervals",
+  "bubblePlotPredictionIntervalsTransparency"
 )
 .maReady               <- function(options) {
 

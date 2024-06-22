@@ -46,9 +46,9 @@
   .maEstimatedMarginalMeansTable(jaspResults, dataset, options, "effectSize")
   .maEstimatedMarginalMeansTable(jaspResults, dataset, options, "heterogeneity")
 
-  # forest plot
+  # plots
   #.maUltimateForestPlot(jaspResults, dataset, options)
-
+  .maBubblePlot(jaspResults, dataset, options)
 
   return()
 }
@@ -680,7 +680,68 @@
 
   return()
 }
+.maBubblePlot                         <- function(jaspResults, dataset, options) {
+# TODO: effect size transformation, separate plots, legend
+  if (!is.null(jaspResults[["bubblePlot"]]))
+    return()
 
+  if (length(options[["bubblePlotSelectedVariable"]]) == 0)
+    return()
+
+  fit <- .maExtractFit(jaspResults, options)
+
+  if (length(options[["bubblePlotSeparatePlots"]]) > 0) {
+    bubblePlotContainer <- createJaspContainer(gettext("Bubble Plots"))
+    bubblePlotContainer$dependOn(.maBubblePlotDependencies)
+    bubblePlotContainer$position <- 5
+    jaspResults[["bubblePlot"]] <- bubblePlotContainer
+  } else {
+    bubblePlot <- createJaspPlot(gettext("Bubble Plot"), width = 450, height = 350)
+    bubblePlot$dependOn(.maBubblePlotDependencies)
+    bubblePlot$position <- 5
+    jaspResults[["bubblePlot"]] <- bubblePlot
+  }
+
+  # make bubble plots
+  dfPlot <- .maMakeBubblePlotDataset(fit, options, dataset)
+
+  if (attr(dfPlot, "separatePlots") == "") {
+    tempPlots <- list(.maMakeBubblePlot(fit, options, dfPlot))
+  } else {
+    tempPlots <- lapply(unique(dfPlot[["separatePlots"]]), function(lvl) {
+      .maMakeBubblePlot(fit, options, dfPlot[dfPlot[["separatePlots"]] == lvl,])
+    })
+  }
+
+  yRange <- do.call(rbind, lapply(tempPlots, attr, which = "yRange"))
+  yRange <- c(min(yRange[, 1]), max(yRange[, 2]))
+  yRange <- range(jaspGraphs::getPrettyAxisBreaks(yRange))
+
+  tempPlots <- lapply(tempPlots, function(plot) {
+    plot + jaspGraphs::scale_x_continuous(
+      name   = attr(dfPlot, "selectedVariable"),
+      breaks = jaspGraphs::getPrettyAxisBreaks(attr(dfPlot, "xRange")),
+      limits = attr(dfPlot, "xRange")
+    ) + jaspGraphs::scale_y_continuous(
+      name   = if (options[["transformEffectSize"]] == "none") gettext("Effect Size") else .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]]),
+      breaks = jaspGraphs::getPrettyAxisBreaks(yRange),
+      limits = yRange
+    ) + jaspGraphs::geom_rangeframe() + jaspGraphs::themeJaspRaw()
+  })
+
+  if (length(options[["bubblePlotSeparatePlots"]]) > 0) {
+    for (i in seq_along(tempPlots)) {
+      bubblePlot <- createJaspPlot(gettextf("%1$s (%2$s)", attr(dfPlot, "separatePlots"), unique(dfPlot[["separatePlots"]])[i]), width = 450, height = 350)
+      bubblePlot$position      <- i
+      bubblePlot$plotObject    <- tempPlots[[i]]
+      bubblePlotContainer[[i]] <- bubblePlot
+    }
+  } else {
+    bubblePlot$plotObject <- tempPlots[[1]]
+  }
+
+  return()
+}
 
 # containers/state functions
 .maExtractFit                             <- function(jaspResults, options) {
@@ -1046,7 +1107,7 @@
 
   return(out)
 }
-.maGetMarginalMeansPredictorMatrix <- function(fit, options, dataset, selectedVariable, parameter) {
+.maGetMarginalMeansPredictorMatrix <- function(fit, options, dataset, selectedVariables, trendVarible = NULL, trendSequence = NULL, sdFactor, parameter) {
 
   variablesContinuous <- options[["predictors"]][options[["predictors.types"]] == "scale"]
   variablesFactors    <- options[["predictors"]][options[["predictors.types"]] == "nominal"]
@@ -1058,19 +1119,12 @@
     heterogeneity = fit[["formula.scale"]]
   )
 
-  # select SD factor for covariates
-  sdFactor <- switch(
-    parameter,
-    effectSize    = options[["estimatedMarginalMeansEffectSizeSdFactorCovariates"]],
-    heterogeneity = options[["estimatedMarginalMeansHeterogeneitySdFactorCovariates"]]
-  )
-
   # extract the used variables
   terms     <- attr(terms(formula, data = fit[["data"]]), "term.labels")
   variables <- terms[!grepl(":", terms)]
 
   # average across remaining variables
-  remainingVariables <- variables[variables != selectedVariable]
+  remainingVariables <- setdiff(variables, c(selectedVariables, trendVarible))
 
   ### create model matrix for the remaining predictors
   # (use all factors for levels to average out the predictor matrix later)
@@ -1085,56 +1139,98 @@
   }
 
   # create complete model matrices including the specified variable
-  if (selectedVariable %in% variablesFactors) {
-    selectedPredictor <- factor(levels(dataset[[selectedVariable]]), levels = levels(dataset[[selectedVariable]]))
-    contrasts(selectedPredictor) <- contrasts(dataset[[selectedVariable]])
-  } else if (selectedVariable %in% variablesContinuous) {
-    selectedPredictor <- c(
-      mean(dataset[[selectedVariable]]) - sdFactor * sd(dataset[[selectedVariable]]),
-      mean(dataset[[selectedVariable]]),
-      mean(dataset[[selectedVariable]]) + sdFactor * sd(dataset[[selectedVariable]])
-    )
+  predictorsSelected <- list()
+  if (length(selectedVariables) > 0) {
+    for (selectedVariable in selectedVariables) {
+      if (selectedVariable %in% variablesFactors) {
+        predictorsSelected[[selectedVariable]] <- factor(levels(dataset[[selectedVariable]]), levels = levels(dataset[[selectedVariable]]))
+        contrasts(predictorsSelected[[selectedVariable]]) <- contrasts(dataset[[selectedVariable]])
+      } else if (selectedVariable %in% variablesContinuous) {
+        predictorsSelected[[selectedVariable]] <- c(
+          mean(dataset[[selectedVariable]]) - sdFactor * sd(dataset[[selectedVariable]]),
+          mean(dataset[[selectedVariable]]),
+          mean(dataset[[selectedVariable]]) + sdFactor * sd(dataset[[selectedVariable]])
+        )
+      }
+    }
+  }
+
+
+  # create model matrix for the trend variable
+  if (length(trendVarible) != 0) {
+    predictorsSelected[[trendVarible]] <- trendSequence
   }
 
   # add the specified variable and pool across the combinations of the remaining values
-  if (selectedVariable == "") {
+  if (length(selectedVariables) == 1 && selectedVariables == "") {
     # empty string creates overall adjusted estimate
     outMatrix <- colMeans(model.matrix(formula, data = expand.grid(predictorsRemaining)))[-1]
   } else {
-    outMatrix <- do.call(rbind, lapply(seq_along(selectedPredictor), function(i) {
-      predictorsRemaining[[selectedVariable]] <- selectedPredictor[i]
-      outMatrix <- model.matrix(formula, data = expand.grid(predictorsRemaining))
-      return(colMeans(outMatrix)[-1])
+    predictorsSelectedGrid <- expand.grid(predictorsSelected)
+    outMatrix <- do.call(rbind, lapply(1:nrow(predictorsSelectedGrid), function(i) {
+      colMeans(model.matrix(formula, data = expand.grid(c(predictorsRemaining,  predictorsSelectedGrid[i,,drop = FALSE]))))[-1]
     }))
   }
 
 
   # keep information about the variable and levels
-  if (selectedVariable == "")
-    attr(outMatrix, "variable") <- gettext("Adjusted Estimate")
-  else
-    attr(outMatrix, "variable") <- selectedVariable
+  if (length(selectedVariables) == 1 && selectedVariables == "") {
 
-  if (selectedVariable %in% variablesFactors)
-    attr(outMatrix, "at") <- selectedPredictor
-  else if (selectedVariable %in% variablesContinuous)
-    attr(outMatrix, "at") <- c(
-      gettextf("Mean - %1$sSD", sdFactor),
-      gettext("Mean"),
-      gettextf("Mean + %1$sSD", sdFactor))
-  else
-    attr(outMatrix, "at") <- ""
+    # add intercept
+    attr(outMatrix, "variable") <- gettext("Adjusted Estimate")
+    attr(outMatrix, gettext("Adjusted Estimate")) <- ""
+
+  } else {
+
+    # selected variables grid
+    attr(outMatrix, "selectedGrid") <- predictorsSelectedGrid
+
+    # add remaining variables
+    attr(outMatrix, "variable") <- c(selectedVariables, trendVarible)
+
+    for (selectedVariable in selectedVariables) {
+      if (selectedVariable %in% variablesFactors) {
+        attr(outMatrix, selectedVariable) <- predictorsSelected[[selectedVariable]]
+      } else if (selectedVariable %in% variablesContinuous) {
+        attr(outMatrix, selectedVariable) <- c(
+          gettextf("Mean - %1$sSD", sdFactor),
+          gettext("Mean"),
+          gettextf("Mean + %1$sSD", sdFactor))
+      }
+    }
+  }
+
+  if (length(trendVarible) != 0) {
+    attr(outMatrix, "trend") <- trendVarible
+    attr(outMatrix, "trend") <- trendSequence
+  }
 
   return(outMatrix)
+
 }
 .maComputeMarginalMeansVariable    <- function(fit, options, dataset, selectedVariable, testAgainst = 0, parameter) {
 
   if (parameter == "effectSize") {
-    predictorMatrixEffectSize <- .maGetMarginalMeansPredictorMatrix(fit, options, dataset, selectedVariable, "effectSize")
+
+    predictorMatrixEffectSize <- .maGetMarginalMeansPredictorMatrix(
+      fit               = fit,
+      options           = options,
+      dataset           = dataset,
+      selectedVariables = selectedVariable,
+      sdFactor          = options[["estimatedMarginalMeansEffectSizeSdFactorCovariates"]],
+      parameter         = "effectSize"
+    )
 
     if (.maIsMetaregressionHeterogeneity(options)) {
 
-      predictorMatrixHeterogeneity <- .maGetMarginalMeansPredictorMatrix(fit, options, dataset, selectedVariable, "heterogeneity")
+      predictorMatrixHeterogeneity <- .maGetMarginalMeansPredictorMatrix(
+        fit               = fit,
+        options           = options,
+        dataset           = dataset,
+        selectedVariables = selectedVariable,
+        sdFactor          = options[["estimatedMarginalMeansEffectSizeSdFactorCovariates"]],
+        parameter         = "heterogeneity"
+      )
       computedMarginalMeans <- predict(
         fit,
         newmods  = predictorMatrixEffectSize,
@@ -1170,11 +1266,22 @@
         list(computedMarginalMeans[,c("est", "lCi", "uCi", "lPi", "uPi")]))
 
     # create full data frame
-    computedMarginalMeans <- cbind(data.frame("variable" = attr(predictorMatrixEffectSize, "variable"), "value" = attr(predictorMatrixEffectSize, "at")), computedMarginalMeans)
+    computedMarginalMeans <- data.frame(
+      "variable" = attr(predictorMatrixEffectSize, "variable"),
+      "value"    = attr(predictorMatrixEffectSize, attr(predictorMatrixEffectSize, "variable")),
+      computedMarginalMeans
+    )
 
   } else if (parameter == "heterogeneity") {
 
-    predictorMatrixHeterogeneity <- .maGetMarginalMeansPredictorMatrix(fit, options, dataset, selectedVariable, "heterogeneity")
+    predictorMatrixHeterogeneity <- .maGetMarginalMeansPredictorMatrix(
+      fit               = fit,
+      options           = options,
+      dataset           = dataset,
+      selectedVariables = selectedVariable,
+      sdFactor          = options[["estimatedMarginalMeansHeterogeneitySdFactorCovariates"]],
+      parameter         = "heterogeneity"
+    )
 
     computedMarginalMeans <- predict(
       fit,
@@ -1195,7 +1302,11 @@
       computedMarginalMeans <- sqrt(computedMarginalMeans)
 
     # create full data frame
-    computedMarginalMeans <- cbind(data.frame("variable" = attr(predictorMatrixHeterogeneity, "variable"), "value" = attr(predictorMatrixHeterogeneity, "at")), computedMarginalMeans)
+    computedMarginalMeans <- data.frame(
+      "variable" = attr(predictorMatrixHeterogeneity, "variable"),
+      "value"    = attr(predictorMatrixHeterogeneity, attr(predictorMatrixHeterogeneity, "variable")),
+      computedMarginalMeans
+    )
   }
 
 
@@ -1210,6 +1321,185 @@
 
   return(computedMarginalMeans)
 }
+.maMakeBubblePlotDataset           <- function(fit, options, dataset) {
+
+  # extract options
+  separateLines     <- unlist(options[["bubblePlotSeparateLines"]])
+  separatePlots     <- unlist(options[["bubblePlotSeparatePlots"]])
+  selectedVariable  <- options[["bubblePlotSelectedVariable"]][[1]][["variable"]]
+
+  # create nice plotting range
+  xRange <- range(jaspGraphs::getPrettyAxisBreaks(range(dataset[[selectedVariable]])))
+  trendSequence <- seq(xRange[1], xRange[2], length.out =  101)
+
+  predictorMatrixEffectSize <- .maGetMarginalMeansPredictorMatrix(
+    fit               = fit,
+    options           = options,
+    dataset           = dataset,
+    selectedVariables = c(separateLines, separatePlots),
+    sdFactor          = options[["bubblePlotSdFactorCovariates"]],
+    trendVarible      = selectedVariable,
+    trendSequence     = trendSequence,
+    parameter         = "effectSize"
+  )
+
+  if (.maIsMetaregressionHeterogeneity(options)) {
+
+    predictorMatrixHeterogeneity <- .maGetMarginalMeansPredictorMatrix(
+      fit               = fit,
+      options           = options,
+      dataset           = dataset,
+      selectedVariables = c(separateLines, separatePlots),
+      sdFactor          = options[["bubblePlotSdFactorCovariates"]],
+      trendVarible      = selectedVariable,
+      trendSequence     = trendSequence,
+      parameter         = "heterogeneity"
+    )
+
+    computedMarginalMeans <- predict(
+      fit,
+      newmods  = predictorMatrixEffectSize,
+      newscale = predictorMatrixHeterogeneity,
+      level    = 100 * options[["confidenceIntervalsLevel"]]
+    )
+  } else {
+
+    computedMarginalMeans <- predict(
+      fit,
+      newmods = predictorMatrixEffectSize,
+      level   = 100 * options[["confidenceIntervalsLevel"]]
+    )
+  }
+
+  ### modify and rename selectedGrid
+  selectedGrid <- attr(predictorMatrixEffectSize, "selectedGrid")
+  selectedGrid$selectedVariable <- selectedGrid[,selectedVariable]
+
+  if (length(separateLines) == 1) {
+    selectedGrid$separateLines <- selectedGrid[,separateLines]
+  } else if (length(separateLines) > 1) {
+    selectedGrid$separateLines <- apply(selectedGrid[,separateLines], 1, function(x) paste(x, collapse = " | "))
+  }
+
+  if (length(separatePlots) == 1) {
+    selectedGrid$separatePlots <- selectedGrid[,separatePlots]
+  } else if (length(separatePlots) > 1) {
+    selectedGrid$separateFigures <- apply(selectedGrid[,separatePlots], 1, function(x) paste(x, collapse = " | "))
+  }
+
+  selectedGrid <- selectedGrid[,setdiff(names(selectedGrid), c(selectedVariable, separateLines, separatePlots)),drop = FALSE]
+
+  ### modify marginal means
+  computedMarginalMeans <- data.frame(computedMarginalMeans)
+  colnames(computedMarginalMeans) <- c("y", "se", "lCi", "uCi", "lPi", "uPi")
+
+  ### merge and add attributes
+  dfPlot <- cbind.data.frame(selectedGrid, computedMarginalMeans)
+
+  attr(dfPlot, "selectedVariable") <- selectedVariable
+  attr(dfPlot, "separateLines")  <- paste(separateLines, collapse = " | ")
+  attr(dfPlot, "separatePlots")  <- paste(separatePlots, collapse = " | ")
+  attr(dfPlot, "variablesLines") <- separateLines
+  attr(dfPlot, "variablesPlots") <- separatePlots
+  attr(dfPlot, "xRange")         <- xRange
+
+  return(dfPlot)
+}
+.maMakeBubblePlot                  <- function(fit, options, dfPlot) {
+
+  bubblePlot <- ggplot2::ggplot()
+  yRange     <- NULL
+
+  hasSeparateLines <- attr(dfPlot, "separateLines") != ""
+
+  ### add prediction bads
+  if (options[["bubblePlotPredictionIntervals"]]) {
+    aesCall <- list(
+      x     = as.name("selectedVariable"),
+      y     = as.name("y"),
+      fill  = if (hasSeparateLines) as.name("separateLines"),
+      group = if (hasSeparateLines) as.name("separateLines")
+    )
+    dfPiBands <-  .maBubblePlotMakeConfidenceBands(dfPlot, lCi = "lPi", uCi = "uPi")
+    geomCall <- list(
+      data    = dfPiBands,
+      mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
+      alpha   = options[["bubblePlotPredictionIntervalsTransparency"]]
+    )
+    bubblePlot <- bubblePlot + do.call(ggplot2::geom_polygon, geomCall)
+    yRange <- range(c(yRange, dfPiBands$y))
+  }
+
+  ### add confidence bands
+  if (options[["bubblePlotCondifenceIntervals"]]) {
+    aesCall <- list(
+      x     = as.name("selectedVariable"),
+      y     = as.name("y"),
+      fill  = if (hasSeparateLines) as.name("separateLines"),
+      group = if (hasSeparateLines) as.name("separateLines")
+    )
+    dfCiBands <- .maBubblePlotMakeConfidenceBands(dfPlot)
+    geomCall <- list(
+      data    = dfCiBands,
+      mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
+      alpha   = options[["bubblePlotCondifenceIntervalsTransparency"]]
+    )
+    bubblePlot <- bubblePlot + do.call(ggplot2::geom_polygon, geomCall)
+    yRange <- range(c(yRange, dfCiBands$y))
+  }
+
+  ### add predictiction line
+  aesCall <- list(
+    x     = as.name("selectedVariable"),
+    y     = as.name("y"),
+    color = if (hasSeparateLines) as.name("separateLines")
+  )
+  geomCall <- list(
+    data    = dfPlot,
+    mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)])
+  )
+  bubblePlot <- bubblePlot + do.call(jaspGraphs::geom_line, geomCall)
+  yRange <- range(c(yRange, dfPlot$pred))
+
+  ### add studies as bubbles
+  dfStudies <- data.frame(
+    effectSize       = fit[["yi"]],
+    inverseVariance  = 1/fit[["vi"]],
+    weight           = weights(fit),
+    selectedVariable = fit[["data"]][[attr(dfPlot, "selectedVariable")]]
+  )
+  variablesLines <- attr(dfPlot, "variablesLines")
+  if (length(variablesLines) == 1) {
+    dfStudies$separateLines <- fit[["data"]][,variablesLines]
+  } else if (length(variablesLines) > 1) {
+    dfStudies$separateLines <- apply(fit[["data"]][,variablesLines], 1, function(x) paste(x, collapse = " | "))
+  }
+
+  aesCall <- list(
+    x     = as.name("selectedVariable"),
+    y     = as.name("effectSize"),
+    size  = switch(
+      options[["bubblePlotBubbleSize"]],
+      "weight"          = as.name("weight"),
+      "inverseVariance" = as.name("inverseVariance"),
+      "equal"           = NULL
+    ),
+    color = if (hasSeparateLines) as.name("separateLines"),
+    fill  = if (hasSeparateLines) as.name("separateLines")
+  )
+  geomCall <- list(
+    data    = dfStudies,
+    mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
+    show.legend = FALSE
+  )
+  bubblePlot <- bubblePlot + do.call(jaspGraphs::geom_point, geomCall)
+  yRange     <- range(c(yRange, dfStudies[["effectSize"]]))
+
+
+  attr(bubblePlot, "yRange") <- yRange
+  return(bubblePlot)
+}
+
 
 # check functions
 .maIsMetaregression               <- function(options) {
@@ -1509,6 +1799,27 @@
   xOut[ xNa] <- paste(rep(" ", nDigitsMax + 1 + digits), collapse = "")
 
   return(xOut)
+}
+.maBubblePlotMakeConfidenceBands  <- function(dfPlot, lCi = "lCi", uCi = "uCi") {
+
+  if (!is.null(dfPlot[["separateLines"]])) {
+    dfBands <- do.call(rbind, lapply(unique(dfPlot[["separateLines"]]), function(lvl) {
+      dfSubset  <- dfPlot[dfPlot[["separateLines"]] == lvl,]
+      dfPolygon <- data.frame(
+        selectedVariable  = c(dfSubset$selectedVariable, rev(dfSubset$selectedVariable)),
+        y                 = c(dfSubset[[lCi]],           rev(dfSubset[[uCi]]))
+      )
+      dfPolygon$separateLines <- lvl
+      return(dfPolygon)
+    }))
+  } else {
+    dfBands <- data.frame(
+      selectedVariable = c(dfPlot$selectedVariable, rev(dfPlot$selectedVariable)),
+      y                = c(dfPlot[[lCi]],           rev(dfPlot[[uCi]]))
+    )
+  }
+
+  return(dfBands)
 }
 
 # messages
