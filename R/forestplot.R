@@ -829,7 +829,6 @@
 
   return(list())
 }
-
 .maForestPlotMakeRightPannel <- function(options, additionalInformation) {
 
   if (!options[["forestPlotStudyInformation"]] && length(additionalInformation) == 0)

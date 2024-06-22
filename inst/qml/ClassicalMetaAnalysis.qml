@@ -323,7 +323,7 @@ Form
 
 			VariablesForm
 			{
-				preferredHeight:	250
+				preferredHeight:	250  * preferencesModel.uiScale
 
 				AvailableVariablesList
 				{
@@ -383,7 +383,7 @@ Form
 
 			VariablesForm
 			{
-				preferredHeight:	250
+				preferredHeight:	250 * preferencesModel.uiScale
 
 				AvailableVariablesList
 				{
@@ -576,7 +576,7 @@ Form
 
 		VariablesForm
 		{
-			preferredHeight:	250
+			preferredHeight:	250 * preferencesModel.uiScale
 			enabled:			forestPlotEstimatedMarginalMeans.checked
 
 			AvailableVariablesList
@@ -938,36 +938,151 @@ Form
 
 	}
 
+	Section
+	{
+		title:	qsTr("Bubble Plot")
+
+		VariablesForm
+		{
+			preferredHeight:	200 * preferencesModel.uiScale
+
+			AvailableVariablesList
+			{
+				name:			"bubblePlotModelVariables"
+				title:			qsTr("Model variables")
+				source:			[{ name: "effectSizeModelTerms", use: "noInteraction" }]
+			}
+
+			AssignedVariablesList
+			{
+				name:			"bubblePlotSelectedVariable"
+				title:			qsTr("Selected variable")
+				singleVariable:	true
+				allowTypeChange:false
+			}
+
+			AssignedVariablesList
+			{
+				name:			"bubblePlotSeparateLines"
+				id:				bubblePlotSeparateLines
+				title:			qsTr("Separate Lines")
+				allowTypeChange:false
+			}
+
+			AssignedVariablesList
+			{
+				name:			"bubblePlotSeparatePlots"
+				id:				bubblePlotSeparatePlots
+				title:			qsTr("Separate Plots")
+				allowTypeChange:false
+			}
+		}
+
+		Group
+		{
+			columns:	2
+
+			Group
+			{
+				DoubleField
+				{
+					name:			"bubblePlotSdFactorCovariates"
+					label:			qsTr("SD factor covariates")
+					defaultValue: 	1
+					min:			0
+					enabled:		bubblePlotSeparateLines.columnsTypes.includes("scale") || bubblePlotSeparatePlots.columnsTypes.includes("scale")
+					Layout.preferredWidth: 350 * jaspTheme.uiScale
+				}
+
+				DropDown
+				{
+					name:		"bubblePlotBubbleSize"
+					label:		qsTr("Bubble size")
+					values:		[
+						{ label: qsTr("Weight")				, value: "weight"},
+						{ label: qsTr("Inverse variance")	, value: "inverseVariance"	},
+						{ label: qsTr("Equal")				, value: "equal"	}
+					]
+				}
+
+				DoubleField
+				{
+					name:		"bubblePlotRelativeBubbleSize"
+					label:		qsTr("Relative bubble size")
+				}
+			}
+
+			Group
+			{
+				CheckBox
+				{
+					name:		"bubblePlotCondifenceIntervals"
+					label:		qsTr("Condifence intervals")
+
+					DoubleField
+					{
+						name:			"bubblePlotCondifenceIntervalsTransparency"
+						label:			qsTr("Transparency")
+						defaultValue:	0.30
+						min:			0
+						max:			1
+						inclusive: 		JASP.None
+					}
+				}
+
+				CheckBox
+				{
+					name:		"bubblePlotPredictionIntervals"
+					label:		qsTr("Prediction intervals")
+
+					DoubleField
+					{
+						name:			"bubblePlotPredictionIntervalsTransparency"
+						label:			qsTr("Transparency")
+						defaultValue:	0.10
+						min:			0
+						max:			1
+						inclusive: 		JASP.None
+					}
+				}
+			}
+		}
+
+	}
+
 	MA.ClassicalMetaAnalysisDiagnostics{}
 
 	Section
 	{
 		title:	qsTr("Advanced")
 
-		CheckBox
-		{
-			name:		"weightedEstimation"
-			text:		qsTr("Weighted estimation")
-			checked:	true
-		}
-
 		Group
 		{
-			title:		qsTr("Clustering")
-			enabled:	clustering.count == 1
-
 			CheckBox
 			{
-				name:		"clusteringUseClubSandwich"
-				text:		qsTr("Use clubSandwich")
+				name:		"weightedEstimation"
+				text:		qsTr("Weighted estimation")
 				checked:	true
 			}
 
-			CheckBox
+			Group
 			{
-				name:		"clusteringSmallSampleCorrection"
-				text:		qsTr("Small sample correction")
-				checked:	true
+				title:		qsTr("Clustering")
+				enabled:	clustering.count == 1
+
+				CheckBox
+				{
+					name:		"clusteringUseClubSandwich"
+					text:		qsTr("Use clubSandwich")
+					checked:	true
+				}
+
+				CheckBox
+				{
+					name:		"clusteringSmallSampleCorrection"
+					text:		qsTr("Small sample correction")
+					checked:	true
+				}
 			}
 		}
 
