@@ -110,11 +110,35 @@ Form
 				id:			effectSize
 				name:		"effectSize"
 				visible:	design.value != "reportedEffectSizes"
+				indexDefaultValue: (function() {
+					if (design.value == "independentGroups" && measurement.value == "quantitative")
+						return 1;
+					else if (design.value == "independentGroups" && measurement.value == "binary")
+						return 1;
+					else if (design.value == "variableAssociation" && measurement.value == "quantitative")
+						return 2;
+					else if (design.value == "variableAssociation" && measurement.value == "mixed")
+						return 2;
+					else if (design.value == "singleGroup")
+						return 1;
+					else if (design.value == "repeatedMeasures" && measurement.value == "quantitative")
+						return 1;
+					else if (design.value == "repeatedMeasures" && measurement.value == "binary")
+						return 1;
+					else if (design.value == "other" && measurement.value == "reliability")
+						return 1;
+					else if (design.value == "other" && measurement.value == "partialCorrelation")
+						return 1;
+					else if (design.value == "other" && measurement.value == "modelFit")
+						return 1;
+					else
+						return 0;
+				})()
 				values: (function() {
 					if (design.value == "independentGroups" && measurement.value == "quantitative") {
 						return [
 							{ label: qsTr("MD"), value: "MD"},
-							{ label: qsTr("SMD"), value: "SMD"}, // TODO: make default
+							{ label: qsTr("SMD"), value: "SMD"},
 							{ label: qsTr("SMDH"), value: "SMDH"},
 							{ label: qsTr("SMD1"), value: "SMD1"},
 							{ label: qsTr("SMD1H"), value: "SMD1H"},
@@ -125,7 +149,7 @@ Form
 					} else if (design.value == "independentGroups" && measurement.value == "binary") {
 						return [
 							{ label: qsTr("RR"), value: "RR"},
-							{ label: qsTr("OR"), value: "OR"}, // TODO: make default
+							{ label: qsTr("OR"), value: "OR"},
 							{ label: qsTr("RD"), value: "RD"},
 							{ label: qsTr("AS"), value: "AS"},
 							{ label: qsTr("PETO"), value: "PETO"}
@@ -148,7 +172,7 @@ Form
 						return [
 							{ label: qsTr("COR"), value: "COR"},
 							{ label: qsTr("UCOR"), value: "UCOR"},
-							{ label: qsTr("ZCOR"), value: "ZCOR"} // TODO: make default
+							{ label: qsTr("ZCOR"), value: "ZCOR"}
 						];
 					} else if (design.value == "variableAssociation" && measurement.value == "binary") {
 						return [
@@ -164,7 +188,7 @@ Form
 						return [
 							{ label: qsTr("RPB"), value: "RPB"},
 							{ label: qsTr("RBIS"), value: "RBIS"},
-							{ label: qsTr("ZPB"), value: "ZPB"}, // TODO: make default
+							{ label: qsTr("ZPB"), value: "ZPB"},
 							{ label: qsTr("ZBIS"), value: "ZBIS"}
 						];
 					} else if (design.value == "singleGroup" && measurement.value == "quantitative") {
@@ -193,7 +217,7 @@ Form
 					} else if (design.value == "repeatedMeasures" && measurement.value == "quantitative") {
 						return [
 							{ label: qsTr("MC"), value: "MC"},
-							{ label: qsTr("SMCC"), value: "SMCC"}, // TODO: make default
+							{ label: qsTr("SMCC"), value: "SMCC"},
 							{ label: qsTr("SMCR"), value: "SMCR"},
 							{ label: qsTr("SMCRH"), value: "SMCRH"},
 							{ label: qsTr("SMCRP"), value: "SMCRP"},
@@ -223,14 +247,14 @@ Form
 					} else if (design.value == "other" && measurement.value == "partialCorrelation") {
 						return [
 							{ label: qsTr("PCOR"), value: "PCOR"},
-							{ label: qsTr("ZPCOR"), value: "ZPCOR"}, // TODO: make default
+							{ label: qsTr("ZPCOR"), value: "ZPCOR"},
 							{ label: qsTr("SPCOR"), value: "SPCOR"},
 							{ label: qsTr("ZSPCOR"), value: "ZSPCOR"}
 						];
 					} else if (design.value == "other" && measurement.value == "modelFit") {
 						return [
 							{ label: qsTr("R2"), value: "R2"},
-							{ label: qsTr("ZR2"), value: "ZR2"} // TODO: make default
+							{ label: qsTr("ZR2"), value: "ZR2"}
 						];
 					} else if (design.value == "other" && measurement.value == "heterozygosity") {
 						return [
@@ -267,14 +291,30 @@ Form
 				removeInvisibles:	true
 				preferredWidth:		parent.width - 6 * jaspTheme.contentMargin
 				preferredHeight:	(function() {
-					if (effectSizeValue == "SMD" || effectSizeValue == "D2ORL" || effectSizeValue == "D2ORN") {
-						return 500 * preferencesModel.uiScale
-					} else if (effectSizeValue == "CVR" || effectSizeValue == "VR") {
-						return 250 * preferencesModel.uiScale
-					} else if (measurementValue == "quantitative") {
-						return 350 * preferencesModel.uiScale
+					if ((designValue == "variableAssociation" && measurementValue == "mixed" && samplingVarianceType.value == "mixed")) {
+						return 11 * 50 * preferencesModel.uiScale
+					} else if (effectSizeValue == "SMD" || effectSizeValue == "D2ORL" || effectSizeValue == "D2ORN" || effectSizeValue == "SMCC" || 
+						(designValue == "variableAssociation" && measurementValue == "mixed")) {
+						return 10 * 50 * preferencesModel.uiScale
+					} else if (effectSizeValue == "CVR" || effectSizeValue == "VR" || effectSizeValue == "CVRC"  || effectSizeValue == "VRC" || 
+						(designValue == "independentGroups" && measurementValue == "countsPerTime") ||
+						(designValue == "repeatedMeasures" && measurementValue == "binary") ||
+						(designValue == "variableAssociation" && measurementValue == "quantitative") ||
+						(designValue == "reportedEffectSizes")) {
+						return  5 * 50 * preferencesModel.uiScale
+					} else if (effectSizeValue == "SDLN" || (designValue == "singleGroup" && measurementValue == "countsPerTime")) {
+						return  3 * 50 * preferencesModel.uiScale
+					} else if (effectSizeValue == "SMD1" || effectSizeValue == "SMCR" || effectSizeValue == "PCOR" || effectSizeValue == "ZPCOR" ||
+						(designValue == "other" && measurementValue == "modelFit")) {
+						return  6 * 50 * preferencesModel.uiScale
+					} else if ((designValue == "independentGroups" && measurementValue == "quantitative") ||
+						(designValue == "other" && measurementValue == "partialCorrelation")) {
+						return  7 * 50 * preferencesModel.uiScale
+					} else if ((designValue == "singleGroup" && (measurementValue == "quantitative" || measurementValue == "binary")) ||
+						(designValue == "other" && (measurementValue == "reliability" ||  measurementValue == "heterozygosity"))) {
+						return  4 * 50 * preferencesModel.uiScale
 					} else {
-						return 350 * preferencesModel.uiScale
+						return 7 * 50 * preferencesModel.uiScale
 					}
 				})()
 

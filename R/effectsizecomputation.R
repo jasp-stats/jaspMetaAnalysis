@@ -5,6 +5,8 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
   options <- .HOTFIX_flatten_options(options)
 
   dataset     <- .escReadDataset(dataset, options)
+  saveRDS(options, file = "C:/JASP/options.RDS")
+  saveRDS(dataset, file = "C:/JASP/dataset.RDS")
   dataOutput  <- .escComputeEffectSizes(dataset, options)
 
   .escComputeSummaryTable(jaspResults, dataset, options, dataOutput)
@@ -59,18 +61,25 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
     effectSizeType <- options[["effectSizeType"]][[i]]
     variables      <- options[["variables"]][[i]]
 
-    # set escalc input
-    escalcInput <- c(
-      .escGetEscalcDataOptions(dataset, effectSizeType, variables),
-      .escGetEscalcAdjustFrequenciesOptions(effectSizeType, variables),
-      .escGetEscalcVtypeOption(effectSizeType, variables),
-      measure     = if (effectSizeType[["effectSize"]] == "reportedEffectSizes") "GEN" else effectSizeType[["effectSize"]],
-      replace     = i == 1,
-      add.measure = TRUE,
-      data        = if (!is.null(dataOutput)) list(dataOutput)
-    )
+    # dispatch
+    if (!.escReportedEffectSizesReady(variables)) {
+      newDataOutput <- try(stop(gettext("Cannot compute outcomes. Chech that all of the required information is specified via the appropriate arguments (i.e. an Effect Size and either Standard Error, Sampling Variance, or 95% Confidence Interval).")))
+    } else {
+      # set escalc input
+      escalcInput <- c(
+        .escGetEscalcDataOptions(dataset, effectSizeType, variables),
+        .escGetEscalcAdjustFrequenciesOptions(effectSizeType, variables),
+        .escGetEscalcVtypeOption(effectSizeType, variables),
+        measure     = if (effectSizeType[["design"]] == "reportedEffectSizes") "GEN" else effectSizeType[["effectSize"]],
+        replace     = i == 1,
+        add.measure = TRUE,
+        data        = if (!is.null(dataOutput)) list(dataOutput)
+      )
 
-    newDataOutput <- try(do.call(metafor::escalc, escalcInput))
+      newDataOutput <- try(do.call(metafor::escalc, escalcInput))
+    }
+
+
 
     if (inherits(newDataOutput, "try-error")) {
       errors[[paste0("i",i)]] <- list(
@@ -129,7 +138,7 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
       computeSummary$addFootnote(gettext("Effect sizes were successfully computed for each data entry."))
     else
       computeSummary$addFootnote(gettextf(
-        "Note: Effect sizes were successfully computed for %1$i out of %2$i data entries.",
+        "Effect sizes were successfully computed for %1$i out of %2$i data entries.",
         sum(computeSummaryData[["computed"]]),
         nrow(dataset)))
   }
@@ -269,7 +278,7 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
         pi = dataset[[variables[["pValue"]]]]
       )
     } else if (measurement == "binary") {
-      if (effectSize %in% c("OR", "YUQ", "YUY", "RTET")) {
+      if (effectSize %in% c("OR", "YUQ", "YUY", "RTET", "ZTET")) {
         inputs <- list(
           ai  = dataset[[variables[["outcomePlusPlus"]]]],
           bi  = dataset[[variables[["outcomePlusMinus"]]]],
@@ -285,9 +294,10 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
           ci    = dataset[[variables[["outcomeMinusPlus"]]]],
           di    = dataset[[variables[["outcomeMinusMinus"]]]],
           n1i   = dataset[[variables[["outcomePlusPlusAndPlusMinus"]]]],
-          n2i   = dataset[[variables[["outcomeMinusPlusAndMinusMinus"]]]],
-          vtype = if(length(variables[["samplingVarianceTypeMixed"]]) != 0) dataset[[variables[["samplingVarianceTypeMixed"]]]] else NULL
+          n2i   = dataset[[variables[["outcomeMinusPlusAndMinusMinus"]]]]
         )
+        if (variables[["samplingVarianceTypeMixed"]] != "")
+          inputs$vtype <- dataset[[variables[["samplingVarianceTypeMixed"]]]]
       }
     } else if (measurement == "mixed") {
       if (effectSize %in% c("RBIS", "ZBIS")) {
@@ -312,9 +322,10 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
           n2i   = dataset[[variables[["sampleSizeGroup2"]]]],
           ti    = dataset[[variables[["tStatistic"]]]],
           pi    = dataset[[variables[["pValue"]]]],
-          di    = dataset[[variables[["cohensD"]]]],
-          vtype = if(length(variables[["samplingVarianceTypeMixed"]]) != 0) dataset[[variables[["samplingVarianceTypeMixed"]]]] else NULL
+          di    = dataset[[variables[["cohensD"]]]]
         )
+        if (variables[["samplingVarianceTypeMixed"]] != "")
+          inputs$vtype <- dataset[[variables[["samplingVarianceTypeMixed"]]]]
       }
     }
   } else if (design == "singleGroup") {
@@ -347,7 +358,7 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
   } else if (design == "repeatedMeasures") {
     if (measurement == "quantitative") {
       if (effectSize %in% c("MC", "SMCR", "SMCRH", "SMCRP", "SMCRPH", "ROMC")) {
-        input <- list(
+        inputs <- list(
           m1i  = dataset[[variables[["meanTime1"]]]],
           m2i  = dataset[[variables[["meanTime2"]]]],
           sd1i = dataset[[variables[["sdTime1"]]]],
@@ -356,7 +367,7 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
           ri   = dataset[[variables[["correlation"]]]]
         )
       } else if (effectSize == "SMCC") {
-        input <- list(
+        inputs <- list(
           m1i  = dataset[[variables[["meanTime1"]]]],
           m2i  = dataset[[variables[["meanTime2"]]]],
           sd1i = dataset[[variables[["sdTime1"]]]],
@@ -368,7 +379,7 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
           di   = dataset[[variables[["cohensD"]]]]
         )
       } else if (effectSize %in% c("CVRC", "VRC")) {
-        input <- list(
+        inputs <- list(
           sd1i = dataset[[variables[["sdTime1"]]]],
           sd2i = dataset[[variables[["sdTime2"]]]],
           ni   = dataset[[variables[["sampleSize"]]]],
@@ -440,8 +451,8 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
       yi  = dataset[[variables[["effectSize"]]]],
       sei = dataset[[variables[["standardError"]]]],
       vi  = dataset[[variables[["samplingVariance"]]]],
-      lci = dataset[[variables[["confidenceInterval"]][[1]][1]]],
-      uci = dataset[[variables[["confidenceInterval"]][[1]][2]]]
+      lci = if (length(variables[["confidenceInterval"]]) != 0) dataset[[variables[["confidenceInterval"]][[1]][1]]],
+      uci = if (length(variables[["confidenceInterval"]]) != 0) dataset[[variables[["confidenceInterval"]][[1]][2]]]
     )
     inputs <- .escReportedEffectSizesInput(inputs)
   }
@@ -494,12 +505,11 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
   # Conditions for when vtype is appropriate
   if ((design == "independentGroups"   && measurement == "quantitative" && effectSize %in% c("MD", "SMD", "SMD1", "ROM")) ||
       (design == "variableAssociation" && measurement == "quantitative") ||
-      (design == "variableAssociation" && measurement == "binary") ||
-      (design == "variableAssociation" && measurement == "mixed") ||
-      (design == "other" && measurement == "modelFit")) {
-    return(list(
-      vtype = variables[["samplingVarianceType"]]
-    ))
+      (design == "variableAssociation" && measurement == "binary" && effectSize %in% c("PHI", "ZHI")) ||
+      (design == "variableAssociation" && measurement == "mixed" && effectSize %in% c("RPB", "ZPB")) ||
+      (design == "other" && measurement == "modelFit") &&
+      variables[["samplingVarianceType"]] != "mixed") {
+    return(list(vtype = variables[["samplingVarianceType"]]))
   } else {
     return(NULL)
   }
@@ -598,7 +608,7 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
         pi = "P-Value"
       )
     } else if (measurement == "binary") {
-      if (effectSize %in% c("OR", "YUQ", "YUY", "RTET")) {
+      if (effectSize %in% c("OR", "YUQ", "YUY", "RTET", "ZTET")) {
         inputs <- list(
           ai  = "Outcome +/+",
           bi  = "Outcome +/-",
@@ -615,7 +625,7 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
           di    = "Outcome -/-",
           n1i   = "Outcome +/+ and +/-",
           n2i   = "Outcome -/+ and -/-",
-          vtype = if(length(variables[["samplingVarianceTypeMixed"]]) != 0) "samplingVarianceTypeMixed" else NULL
+          vtype = "Sampling Variance Type Mixed"
         )
       }
     } else if (measurement == "mixed") {
@@ -642,7 +652,7 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
           ti    = "T-Statistic",
           pi    = "P-Value",
           di    = "Cohen's d",
-          vtype = if(length(variables[["samplingVarianceTypeMixed"]]) != 0) "samplingVarianceTypeMixed" else NULL
+          vtype = "Sampling Variance Type Mixed"
         )
       }
     }
@@ -802,11 +812,25 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
 }
 .escReportedEffectSizesInput          <- function(inputs) {
 
+  inputs <- inputs[!sapply(inputs, is.null)]
+  inputs <- do.call(cbind.data.frame, inputs)
+
+  if (is.null(inputs$sei))
+    inputs$sei <- NA
+  if (is.null(inputs$vi))
+    inputs$vi <- NA
+  if (is.null(inputs$uci))
+    inputs$uci <- NA
+  if (is.null(inputs$lci))
+    inputs$lci <- NA
+
   # add standard error when missing and CI is available
-  inputs$sei[[is.na(inputs$sei)]] <- (inputs$uci[[is.na(inputs$sei)]] - inputs$lci[[is.na(inputs$sei)]]) / (2 * stats::qnorm(0.975))
+  if (length((inputs$uci[is.na(inputs$sei)] - inputs$lci[is.na(inputs$sei)]) ) != 0)
+    inputs$sei[is.na(inputs$sei)] <- (inputs$uci[is.na(inputs$sei)] - inputs$lci[is.na(inputs$sei)]) / (2 * stats::qnorm(0.975))
 
   # add variance when missing and standard error is available
-  inputs$vi[[is.na(input$vi)]] <- inputs$sei[[is.na(inputs$vi)]]^2
+  if (length(inputs$sei[is.na(inputs$vi)]) != 0)
+    inputs$vi[is.na(inputs$vi)] <- inputs$sei[is.na(inputs$vi)]^2
 
   # remove sei and cis
   inputs$sei <- NULL
@@ -814,6 +838,14 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
   inputs$lci <- NULL
 
   return(inputs)
+}
+.escReportedEffectSizesReady          <- function(variables){
+  if (variables[["effectSize"]] == "")
+    return(FALSE)
+  else if (length(variables[["confidenceInterval"]]) == 0 && variables[["standardError"]] == "" && variables[["samplingVariance"]] == "")
+    return(FALSE)
+  else
+    return(TRUE)
 }
 .escVariableInputs                    <- c(
   "group1OutcomePlus",
@@ -882,8 +914,8 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
       }
     }
 
-    if(length(options[["variables"]][["confidenceInterval"]]) != 0) {
-      options[["variables"]][["confidenceInterval"]][[1]] <- .encodeColNamesLax(options[["variables"]][["confidenceInterval"]][[1]])
+    if(length(options[["variables"]][[i]][["confidenceInterval"]]) != 0) {
+      options[["variables"]][[i]][["confidenceInterval"]][[1]] <- .encodeColNamesLax(options[["variables"]][["confidenceInterval"]][[1]])
     }
   }
 
