@@ -525,13 +525,23 @@ Form
 			enabled:	forestPlotStudyInformation.checked
 			columns:	2
 
-			CheckBox
+			Group
 			{
-				name:		"forestPlotStudyInformationPredictedEffects"
-				text:		qsTr("Predicted effects")
-				enabled:	effectSize.count == 1 && effectSizeStandardError.count == 1
-				checked:	false
-				Layout.preferredWidth: 300 * jaspTheme.uiScale
+				CheckBox
+				{
+					name:		"forestPlotStudyInformationPredictedEffects"
+					text:		qsTr("Predicted effects")
+					enabled:	effectSize.count == 1 && effectSizeStandardError.count == 1
+					checked:	false
+					Layout.preferredWidth: 300 * jaspTheme.uiScale
+				}
+
+				CheckBox
+				{
+					name:			"forestPlotStudyInformationStudyWeights"
+					text:			qsTr("Study weights")
+					enabled:		forestPlotStudyInformation.checked
+				}
 			}
 
 			Group
@@ -702,12 +712,30 @@ Form
 		{
 			columns:	2
 
-			CheckBox
+
+			Group
 			{
-				name:		"forestPlotPredictionIntervals"
-				text:		qsTr("Prediction intervals")
-				checked:	true
-				Layout.preferredWidth: 300 * jaspTheme.uiScale
+				CheckBox
+				{
+					name:		"forestPlotPredictionIntervals"
+					text:		qsTr("Prediction intervals")
+					checked:	true
+					Layout.preferredWidth: 300 * jaspTheme.uiScale
+				}
+
+				CheckBox
+				{
+					name:			"forestPlotEstimatesAndConfidenceIntervals"
+					text:			qsTr("Estimates and confidence intervals")
+					checked:		true
+				}
+
+				CheckBox
+				{
+					name:			"forestPlotTestsInRightPanel"
+					text:			qsTr("Tests in right panel")
+					checked:		false
+				}
 			}
 
 			Group
@@ -728,27 +756,8 @@ Form
 					addEmptyValue:	true
 				}
 			}
+		
 
-			CheckBox
-			{
-				name:		"forestPlotRightPanel"
-				text:		qsTr("Right Panel")
-				checked:	true
-
-				CheckBox
-				{
-					name:			"forestPlotRightPanelEstimate"
-					text:			qsTr("Estimates and confidence intervals")
-					checked:		true
-				}
-
-				CheckBox
-				{
-					name:			"forestPlotRightPanelWeights"
-					text:			qsTr("Weights")
-					enabled:		forestPlotStudyInformation.checked
-				}
-			}
 
 			Group
 			{
@@ -816,116 +825,115 @@ Form
 					min:			0
 					inclusive: 		JASP.None
 				}
-			}
-		}
 
-		Group
-		{
-			title:		qsTr("Auxiliary")
-
-			IntegerField
-			{
-				name:			"forestPlotAuxiliaryDigits"
-				text:			qsTr("Digits")
-				min:			1
-				value:			2
-				inclusive: 		JASP.None
+				CheckBox
+				{
+					name:			"forestPlotAuxiliaryAdjustWidthBasedOnText"
+					text:			qsTr("Adjust width based on text")
+					checked:		true
+				}
 			}
 
-			DropDown
+			Group
 			{
-				label:		qsTr("Tests information")
-				name:		"forestPlotAuxiliaryTestsInformation"
-				values:		[
-						{ label: qsTr("Statistic and p-value")		, value: "statisticAndPValue"	},
-						{ label: qsTr("P-value")					, value: "pValue"				}
-				]
-			}
+				title:		qsTr("Auxiliary")
 
-			DropDown
-			{
-				name:			"forestPlotAuxiliaryPlotColor"
-				label:			qsTr("Color")
-				values:			[
-						{ label: qsTr("Black")		, value: "black"},
-						{ label: qsTr("Blue")		, value: "blue"	},
-						{ label: qsTr("Red")		, value: "red"	}
+				IntegerField
+				{
+					name:			"forestPlotAuxiliaryDigits"
+					text:			qsTr("Digits")
+					min:			1
+					value:			2
+					inclusive: 		JASP.None
+				}
+
+				DropDown
+				{
+					label:		qsTr("Tests information")
+					name:		"forestPlotAuxiliaryTestsInformation"
+					values:		[
+							{ label: qsTr("Statistic and p-value")		, value: "statisticAndPValue"	},
+							{ label: qsTr("P-value")					, value: "pValue"				}
 					]
-			}
-
-			CheckBox
-			{
-				name:				"forestPlotAuxiliaryAddVerticalLine"
-				text:				qsTr("Add vertical line")
-				childrenOnSameRow:	true
-
-				DoubleField
-				{
-					name:			"forestPlotAuxiliaryAddVerticalLineValue"
-					defaultValue:	0
-					negativeValues:	true
-				}
-			}
-
-			CheckBox
-			{
-				name:				"forestPlotAuxiliaryAddVerticalLine2"
-				text:				qsTr("Add vertical line (2)")
-				childrenOnSameRow:	true
-
-				DoubleField
-				{
-					name:			"forestPlotAuxiliaryAddVerticalLineValue2"
-					defaultValue:	0
-					negativeValues:	true
-				}
-			}
-
-			TextField
-			{
-				name:			"forestPlotAuxiliaryEffectLabel"
-				text:			qsTr("X-axis label")
-				value:			"Effect Size"
-			}
-
-			CheckBox
-			{
-				name:			"forestPlotAuxiliarySetXAxisLimit"
-				text:			qsTr("X-axis limits")
-				childrenOnSameRow:	true
-
-				DoubleField
-				{
-					name:			"forestPlotAuxiliarySetXAxisLimitLower"
-					id:				forestPlotAuxiliarySetXAxisLimitLower
-					text:			qsTr("Lower")
-					defaultValue:	-1
-					negativeValues:	true
-					max:			forestPlotAuxiliarySetXAxisLimitUpper
-					inclusive: 		JASP.None
 				}
 
-				DoubleField
+				DropDown
 				{
-					name:			"forestPlotAuxiliarySetXAxisLimitUpper"
-					id:				forestPlotAuxiliarySetXAxisLimitUpper
-					text:			qsTr("Upper")
-					defaultValue:	1
-					min:			forestPlotAuxiliarySetXAxisLimitLower			
-					inclusive: 		JASP.None
+					name:			"forestPlotAuxiliaryPlotColor"
+					label:			qsTr("Color")
+					values:			[
+							{ label: qsTr("Black")		, value: "black"},
+							{ label: qsTr("Blue")		, value: "blue"	},
+							{ label: qsTr("Red")		, value: "red"	}
+						]
 				}
+
+				CheckBox
+				{
+					name:				"forestPlotAuxiliaryAddVerticalLine"
+					text:				qsTr("Add vertical line")
+					childrenOnSameRow:	true
+
+					DoubleField
+					{
+						name:			"forestPlotAuxiliaryAddVerticalLineValue"
+						defaultValue:	0
+						negativeValues:	true
+					}
+				}
+
+				CheckBox
+				{
+					name:				"forestPlotAuxiliaryAddVerticalLine2"
+					text:				qsTr("Add vertical line (2)")
+					childrenOnSameRow:	true
+
+					DoubleField
+					{
+						name:			"forestPlotAuxiliaryAddVerticalLineValue2"
+						defaultValue:	0
+						negativeValues:	true
+					}
+				}
+
+				TextField
+				{
+					name:			"forestPlotAuxiliaryEffectLabel"
+					text:			qsTr("X-axis label")
+					value:			"Effect Size"
+				}
+
+				CheckBox
+				{
+					name:			"forestPlotAuxiliarySetXAxisLimit"
+					text:			qsTr("X-axis limits")
+					childrenOnSameRow:	true
+
+					DoubleField
+					{
+						name:			"forestPlotAuxiliarySetXAxisLimitLower"
+						id:				forestPlotAuxiliarySetXAxisLimitLower
+						text:			qsTr("Lower")
+						defaultValue:	-1
+						negativeValues:	true
+						max:			forestPlotAuxiliarySetXAxisLimitUpper
+						inclusive: 		JASP.None
+					}
+
+					DoubleField
+					{
+						name:			"forestPlotAuxiliarySetXAxisLimitUpper"
+						id:				forestPlotAuxiliarySetXAxisLimitUpper
+						text:			qsTr("Upper")
+						defaultValue:	1
+						min:			forestPlotAuxiliarySetXAxisLimitLower			
+						inclusive: 		JASP.None
+					}
+				}
+
 			}
 
-			
-			CheckBox
-			{
-				name:			"forestPlotAuxiliaryGuessTextWidth"
-				text:			qsTr("Guess text width")
-				checked:		true
-			}
 		}
-
-
 
 
 	}
