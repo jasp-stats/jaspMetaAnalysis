@@ -46,6 +46,10 @@
   .maEstimatedMarginalMeansTable(jaspResults, dataset, options, "effectSize")
   .maEstimatedMarginalMeansTable(jaspResults, dataset, options, "heterogeneity")
 
+  # forest plot
+  #.maUltimateForestPlot(jaspResults, dataset, options)
+
+
   return()
 }
 
@@ -627,6 +631,56 @@
 
   return()
 }
+.maUltimateForestPlot                 <- function(jaspResults, dataset, options) {
+
+  if (!is.null(jaspResults[["forestPlot"]]))
+    return()
+
+  if (!any(c(
+    options[["forestPlotStudyInformation"]],
+    (options[["forestPlotEstimatedMarginalMeans"]] && (
+      length(options[["forestPlotEstimatedMarginalMeansSelectedVariables"]]) > 0 ||
+      options[["forestPlotEstimatedMarginalMeansAdjustedEffectSizeEstimate"]]
+    )),
+    options[["forestPlotModelInformation"]]
+  )))
+    return()
+
+  # try execute!
+  fit <- .maExtractFit(jaspResults, options)
+  out <- try(.maMakeTheUltimateForestPlot(fit, dataset, options))
+
+  if (jaspBase::isTryError(out)) {
+    forestPlot <- createJaspPlot("Forest Plot")
+    forestPlot$position <- 4
+    forestPlot$dependOn(.maForestPlotDependencies)
+    forestPlot$setError(out)
+    jaspResults[["forestPlot"]] <- forestPlot
+    return()
+  }
+
+  # try adjusting height and width
+  height <- (attr(out, "rows") + 3) * 40
+  if (attr(out, "isPanel"))
+    width <- 500
+  else
+    width <- 500 + 500 * attr(out, "panelRatio")
+
+  attr(plotOut, "nCharsLeft") + attr(plotOut, "nCharsRight")
+
+  forestPlot <- createJaspPlot(
+    plot   = out,
+    title  = gettext("Forest Plot"),
+    width  = width,
+    height = height
+  )
+  forestPlot$position <- 4
+  forestPlot$dependOn(.maForestPlotDependencies)
+  jaspResults[["forestPlot"]] <- forestPlot
+
+  return()
+}
+
 
 # containers/state functions
 .maExtractFit                             <- function(jaspResults, options) {
@@ -1424,18 +1478,38 @@
     mapColor = NA
   ))
 }
-.maGetMaxDigitsBeforeDecimal      <- function(x) {
+.maGetDigitsBeforeDecimal         <- function(x) {
 
-  dPos <- floor(log10(x[x >= 0])) + 1
-  dNeg <- floor(log10(-x[x < 0])) + 2 # (+2 because of minus sign)
+  dNAs <- is.na(x)
+  dPos <- floor(log10(x[!dNAs & x >= 0])) + 1
+  dNeg <- floor(log10(-x[!dNAs & x < 0])) + 2
 
   # account for missing zeros
-  dPos[dPos == 0] <- 1
-  dNeg[dNeg == 0] <- 1
+  dPos[dPos <= 1] <- 1
+  dNeg[dNeg <= 1] <- 2 # (+2 because of minus sign)
 
-  return(max(c(dPos, dNeg)))
+  nDigits <- rep(NA, length(x))
+  nDigits[!dNAs & x >= 0] <- dPos
+  nDigits[!dNAs & x < 0]  <- dNeg
+
+  return(nDigits)
 }
+.maFormatDigits                   <- function(x, digits) {
 
+  xOut <- rep("", length(x))
+  xNa  <- is.na(x)
+
+  # compute the character width
+  nDigits    <- .maGetDigitsBeforeDecimal(x[!xNa])
+  nDigitsMax <- max(nDigits, na.rm = TRUE)
+  addDigits  <- nDigitsMax - nDigits
+
+  # add the missing widths
+  xOut[!xNa] <- sprintf(paste0("%1$s%2$.", digits,"f"), sapply(addDigits, function(i) paste(rep(" ", i), collapse = "")), x[!xNa])
+  xOut[ xNa] <- paste(rep(" ", nDigitsMax + 1 + digits), collapse = "")
+
+  return(xOut)
+}
 
 # messages
 .maFixedEffectTextMessage              <- function(options) {

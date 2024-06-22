@@ -15,11 +15,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-# This is a temporary fix
-# TODO: remove it when R will solve this problem!
-gettextf <- function(fmt, ..., domain = NULL)  {
-  return(sprintf(gettext(fmt, domain = domain), ...))
-}
 
 ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
@@ -55,7 +50,55 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "optimizerMaximumIterations", "optimizerMaximumIterationsValue", "optimizerConvergenceTolerance", "optimizerConvergenceToleranceValue",
   "optimizerConvergenceRelativeTolerance", "optimizerConvergenceRelativeToleranceValue", "optimizerStepAdjustment", "optimizerStepAdjustmentValue"
 )
-
+.maForestPlotDependencies <- c(
+  .maDependencies,
+  "forestPlotStudyInformation",
+  "forestPlotStudyInformationAllVariables",
+  "forestPlotStudyInformationSelectedVariables",
+  "forestPlotStudyInformationSelectedVariablesSettings",
+  "forestPlotStudyInformationPredictedEffects",
+  "forestPlotStudyInformationStudyWeights",
+  "forestPlotStudyInformationOrderBy",
+  "forestPlotStudyInformationOrderAscending",
+  "forestPlotEstimatedMarginalMeans",
+  "forestPlotEstimatedMarginalMeansModelVariables",
+  "forestPlotEstimatedMarginalMeansSelectedVariables",
+  "forestPlotEstimatedMarginalMeansTermTests",
+  "forestPlotEstimatedMarginalMeansCoefficientTests",
+  "forestPlotEstimatedMarginalMeansCoefficientTestsAgainst",
+  "forestPlotEstimatedMarginalMeansAdjustedEffectSizeEstimate",
+  "forestPlotModelInformation",
+  "forestPlotPooledEffectSizeEstimate",
+  "forestPlotPooledEffectSizeTest",
+  "forestPlotResidualHeterogeneityTest",
+  "forestPlotResidualHeterogeneityEstimate",
+  "forestPlotEffectSizeModerationTest",
+  "forestPlotHeterogeneityModerationTest",
+  "forestPlotPredictionIntervals",
+  "forestPlotEstimatesAndConfidenceIntervals",
+  "forestPlotTestsInRightPanel",
+  "forestPlotMappingColor",
+  "forestPlotMappingShape",
+  "forestPlotRelativeSizeEstimates",
+  "forestPlotRelativeSizeText",
+  "forestPlotRelativeSizeAxisLabels",
+  "forestPlotRelativeSizeRow",
+  "forestPlotRelativeSizeLeftPanel",
+  "forestPlotRelativeSizeMiddlePanel",
+  "forestPlotRelativeSizeRightPanel",
+  "forestPlotAuxiliaryAdjustWidthBasedOnText",
+  "forestPlotAuxiliaryDigits",
+  "forestPlotAuxiliaryTestsInformation",
+  "forestPlotAuxiliaryPlotColor",
+  "forestPlotAuxiliaryAddVerticalLine",
+  "forestPlotAuxiliaryAddVerticalLineValue",
+  "forestPlotAuxiliaryAddVerticalLine2",
+  "forestPlotAuxiliaryAddVerticalLineValue2",
+  "forestPlotAuxiliaryEffectLabel",
+  "forestPlotAuxiliarySetXAxisLimit",
+  "forestPlotAuxiliarySetXAxisLimitLower",
+  "forestPlotAuxiliarySetXAxisLimitUpper"
+)
 .maReady               <- function(options) {
 
   inputReady <- options[["effectSize"]] != "" && options[["effectSizeStandardError"]] != ""
@@ -77,7 +120,8 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   forestPlotVariables <- c(
     if (length(options[["forestPlotStudyInformationSelectedVariables"]]) > 0) unlist(options[["forestPlotStudyInformationSelectedVariables"]]),
     if (options[["forestPlotMappingColor"]] != "") options[["forestPlotMappingColor"]],
-    if (options[["forestPlotMappingShape"]] != "") options[["forestPlotMappingShape"]]
+    if (options[["forestPlotMappingShape"]] != "") options[["forestPlotMappingShape"]],
+    if (options[["forestPlotStudyInformationOrderBy"]] != "") options[["forestPlotStudyInformationOrderBy"]]
   )
   # remove variables already specified in the model
   forestPlotVariables <- setdiff(
