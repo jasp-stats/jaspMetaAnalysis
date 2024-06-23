@@ -1210,10 +1210,15 @@ Form
 				}
 			}
 
-			CheckBox
+			Group
 			{
-				name:		"diagnosticsProfilePlot"
-				text:		qsTr("Profile plot")
+				title:		qsTr("Plots")
+
+				CheckBox
+				{
+					name:		"diagnosticsPlotsProfileLikelihood"
+					text:		qsTr("Profile likelihood")
+				}
 			}
 		}
 	}
