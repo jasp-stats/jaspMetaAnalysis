@@ -15,6 +15,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+# TODO:
+# Bubble plot
+# - binning of continuous covariates (requires returning continous levels returned in gridMatrix)
+# - allow factors as dependent variables
+
 .ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   .maFitModel(jaspResults, dataset, options)
@@ -646,12 +651,17 @@
   )))
     return()
 
-  # try execute!
   fit <- .maExtractFit(jaspResults, options)
+
+  # stop on error
+  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+    return()
+
+  # try execute!
   out <- try(.maMakeTheUltimateForestPlot(fit, dataset, options))
 
   if (jaspBase::isTryError(out)) {
-    forestPlot <- createJaspPlot("Forest Plot")
+    forestPlot <- createJaspPlot(title = gettext("Forest Plot"))
     forestPlot$position <- 4
     forestPlot$dependOn(.maForestPlotDependencies)
     forestPlot$setError(out)
@@ -681,7 +691,7 @@
   return()
 }
 .maBubblePlot                         <- function(jaspResults, dataset, options) {
-# TODO: effect size transformation, separate plots, legend
+
   if (!is.null(jaspResults[["bubblePlot"]]))
     return()
 
@@ -690,13 +700,22 @@
 
   fit <- .maExtractFit(jaspResults, options)
 
+  # stop on error
+  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+    return()
+
+  # set dimensions
+  width  <- if (length(options[["bubblePlotSeparateLines"]]) == 0 || options[["bubblePlotLegendPosition"]] == "none") 450 else 550
+  height <- 350
+
+  # create containers / figure
   if (length(options[["bubblePlotSeparatePlots"]]) > 0) {
-    bubblePlotContainer <- createJaspContainer(gettext("Bubble Plots"))
+    bubblePlotContainer <- createJaspContainer(title = gettext("Bubble Plots"))
     bubblePlotContainer$dependOn(.maBubblePlotDependencies)
     bubblePlotContainer$position <- 5
     jaspResults[["bubblePlot"]] <- bubblePlotContainer
   } else {
-    bubblePlot <- createJaspPlot(gettext("Bubble Plot"), width = 450, height = 350)
+    bubblePlot <- createJaspPlot(title = gettext("Bubble Plot"), width = width, height = height)
     bubblePlot$dependOn(.maBubblePlotDependencies)
     bubblePlot$position <- 5
     jaspResults[["bubblePlot"]] <- bubblePlot
@@ -709,32 +728,25 @@
     tempPlots <- list(.maMakeBubblePlot(fit, options, dfPlot))
   } else {
     tempPlots <- lapply(unique(dfPlot[["separatePlots"]]), function(lvl) {
-      .maMakeBubblePlot(fit, options, dfPlot[dfPlot[["separatePlots"]] == lvl,])
+      .maMakeBubblePlot(fit, options, dfPlot[dfPlot[["separatePlots"]] == lvl,], separatePlotsLvl = lvl)
     })
   }
 
+  # modify all generated plots simultaneously
   yRange <- do.call(rbind, lapply(tempPlots, attr, which = "yRange"))
   yRange <- c(min(yRange[, 1]), max(yRange[, 2]))
   yRange <- range(jaspGraphs::getPrettyAxisBreaks(yRange))
 
   tempPlots <- lapply(tempPlots, function(plot) {
-    plot + jaspGraphs::scale_x_continuous(
-      name   = attr(dfPlot, "selectedVariable"),
-      breaks = jaspGraphs::getPrettyAxisBreaks(attr(dfPlot, "xRange")),
-      limits = attr(dfPlot, "xRange")
-    ) + jaspGraphs::scale_y_continuous(
-      name   = if (options[["transformEffectSize"]] == "none") gettext("Effect Size") else .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]]),
-      breaks = jaspGraphs::getPrettyAxisBreaks(yRange),
-      limits = yRange
-    ) + jaspGraphs::geom_rangeframe() + jaspGraphs::themeJaspRaw()
+    .maAddBubblePlotTheme(plot, options, dfPlot, yRange)
   })
 
   if (length(options[["bubblePlotSeparatePlots"]]) > 0) {
     for (i in seq_along(tempPlots)) {
-      bubblePlot <- createJaspPlot(gettextf("%1$s (%2$s)", attr(dfPlot, "separatePlots"), unique(dfPlot[["separatePlots"]])[i]), width = 450, height = 350)
+      bubblePlot <- createJaspPlot(title = gettextf("%1$s (%2$s)", attr(dfPlot, "separatePlots"), unique(dfPlot[["separatePlots"]])[i]), width = width, height = height)
       bubblePlot$position      <- i
       bubblePlot$plotObject    <- tempPlots[[i]]
-      bubblePlotContainer[[i]] <- bubblePlot
+      bubblePlotContainer[[paste0("plot", i)]] <- bubblePlot
     }
   } else {
     bubblePlot$plotObject <- tempPlots[[1]]
@@ -1374,19 +1386,10 @@
   ### modify and rename selectedGrid
   selectedGrid <- attr(predictorMatrixEffectSize, "selectedGrid")
   selectedGrid$selectedVariable <- selectedGrid[,selectedVariable]
-
-  if (length(separateLines) == 1) {
-    selectedGrid$separateLines <- selectedGrid[,separateLines]
-  } else if (length(separateLines) > 1) {
-    selectedGrid$separateLines <- apply(selectedGrid[,separateLines], 1, function(x) paste(x, collapse = " | "))
-  }
-
-  if (length(separatePlots) == 1) {
-    selectedGrid$separatePlots <- selectedGrid[,separatePlots]
-  } else if (length(separatePlots) > 1) {
-    selectedGrid$separateFigures <- apply(selectedGrid[,separatePlots], 1, function(x) paste(x, collapse = " | "))
-  }
-
+  # collapse factor levels if multiple selected
+  selectedGrid <- .maMergeVariablesLevels(selectedGrid, separateLines, "separateLines")
+  selectedGrid <- .maMergeVariablesLevels(selectedGrid, separatePlots, "separatePlots")
+  # remove original names
   selectedGrid <- selectedGrid[,setdiff(names(selectedGrid), c(selectedVariable, separateLines, separatePlots)),drop = FALSE]
 
   ### modify marginal means
@@ -1405,12 +1408,13 @@
 
   return(dfPlot)
 }
-.maMakeBubblePlot                  <- function(fit, options, dfPlot) {
+.maMakeBubblePlot                  <- function(fit, options, dfPlot, separatePlotsLvl = NULL) {
 
   bubblePlot <- ggplot2::ggplot()
   yRange     <- NULL
 
   hasSeparateLines <- attr(dfPlot, "separateLines") != ""
+  hasSeparatePlots <- attr(dfPlot, "separatePlots") != ""
 
   ### add prediction bads
   if (options[["bubblePlotPredictionIntervals"]]) {
@@ -1421,6 +1425,7 @@
       group = if (hasSeparateLines) as.name("separateLines")
     )
     dfPiBands <-  .maBubblePlotMakeConfidenceBands(dfPlot, lCi = "lPi", uCi = "uPi")
+    dfPiBands[["y"]] <- do.call(.maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]), list(dfPiBands[["y"]]))
     geomCall <- list(
       data    = dfPiBands,
       mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
@@ -1439,6 +1444,7 @@
       group = if (hasSeparateLines) as.name("separateLines")
     )
     dfCiBands <- .maBubblePlotMakeConfidenceBands(dfPlot)
+    dfCiBands[["y"]] <- do.call(.maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]), list(dfCiBands[["y"]]))
     geomCall <- list(
       data    = dfCiBands,
       mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
@@ -1454,6 +1460,7 @@
     y     = as.name("y"),
     color = if (hasSeparateLines) as.name("separateLines")
   )
+  dfPlot[["y"]] <- do.call(.maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]), list(dfPlot[["y"]]))
   geomCall <- list(
     data    = dfPlot,
     mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)])
@@ -1464,29 +1471,40 @@
   ### add studies as bubbles
   dfStudies <- data.frame(
     effectSize       = fit[["yi"]],
-    inverseVariance  = 1/fit[["vi"]],
-    weight           = weights(fit),
+    inverseVariance  = 1/fit[["vi"]] * options[["bubblePlotBubblesRelativeSize"]],
+    weight           = weights(fit)  * options[["bubblePlotBubblesRelativeSize"]],
+    constant         = rep(options[["bubblePlotBubblesRelativeSize"]], nrow(fit[["data"]])),
     selectedVariable = fit[["data"]][[attr(dfPlot, "selectedVariable")]]
   )
-  variablesLines <- attr(dfPlot, "variablesLines")
-  if (length(variablesLines) == 1) {
-    dfStudies$separateLines <- fit[["data"]][,variablesLines]
-  } else if (length(variablesLines) > 1) {
-    dfStudies$separateLines <- apply(fit[["data"]][,variablesLines], 1, function(x) paste(x, collapse = " | "))
-  }
+
+  # add separate lines and plots
+  if (hasSeparateLines)
+    dfStudies[attr(dfPlot, "variablesLines")] <- fit[["data"]][attr(dfPlot, "variablesLines")]
+  if (hasSeparatePlots)
+    dfStudies[attr(dfPlot, "variablesPlots")] <- fit[["data"]][attr(dfPlot, "variablesPlots")]
+
+  # make same encoding
+  dfStudies <- .maMergeVariablesLevels(dfStudies, variablesLines <- attr(dfPlot, "variablesLines"), "separateLines")
+  dfStudies <- .maMergeVariablesLevels(dfStudies, variablesLines <- attr(dfPlot, "variablesPlots"), "separatePlots")
+
+  # subset original data across plots
+  if (!is.null(separatePlotsLvl))
+    dfStudies <- dfStudies[dfStudies$separatePlots == separatePlotsLvl,]
 
   aesCall <- list(
     x     = as.name("selectedVariable"),
     y     = as.name("effectSize"),
     size  = switch(
-      options[["bubblePlotBubbleSize"]],
+      options[["bubblePlotBubblesSize"]],
       "weight"          = as.name("weight"),
       "inverseVariance" = as.name("inverseVariance"),
       "equal"           = NULL
     ),
     color = if (hasSeparateLines) as.name("separateLines"),
-    fill  = if (hasSeparateLines) as.name("separateLines")
+    fill  = if (hasSeparateLines) as.name("separateLines"),
+    alpha = options[["bubblePlotBubblesTransparency"]]
   )
+  dfStudies[["effectSize"]] <- do.call(.maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]), list(dfStudies[["effectSize"]]))
   geomCall <- list(
     data    = dfStudies,
     mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
@@ -1495,11 +1513,64 @@
   bubblePlot <- bubblePlot + do.call(jaspGraphs::geom_point, geomCall)
   yRange     <- range(c(yRange, dfStudies[["effectSize"]]))
 
+  # add color palette
+  bubblePlot <- bubblePlot +
+    jaspGraphs::scale_JASPcolor_discrete(options[["colorPalette"]]) +
+    jaspGraphs::scale_JASPfill_discrete(options[["colorPalette"]])
 
   attr(bubblePlot, "yRange") <- yRange
   return(bubblePlot)
 }
+.maAddBubblePlotTheme              <- function(plot, options, dfPlot, yRange) {
 
+  plot <- plot +
+    jaspGraphs::scale_x_continuous(
+      name   = attr(dfPlot, "selectedVariable"),
+      breaks = jaspGraphs::getPrettyAxisBreaks(attr(dfPlot, "xRange")),
+      limits = attr(dfPlot, "xRange")
+    ) +
+    jaspGraphs::scale_y_continuous(
+      name   = if (options[["transformEffectSize"]] == "none") gettext("Effect Size") else .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]]),
+      breaks = jaspGraphs::getPrettyAxisBreaks(yRange),
+      limits = yRange
+    )  +
+    ggplot2::labs(fill = attr(dfPlot, "separateLines"), color = attr(dfPlot, "separateLines"))
+
+  if (options[["bubblePlotTheme"]] == "jasp") {
+
+    plot <- plot +
+      jaspGraphs::geom_rangeframe() +
+      jaspGraphs::themeJaspRaw(legend.position = if (attr(dfPlot, "separateLines") == "") "none" else options[["bubblePlotLegendPosition"]])
+
+  } else {
+
+    plot <- plot +
+      switch(
+        options[["bubblePlotTheme"]],
+        "whiteBackground" = ggplot2::theme_bw()       + ggplot2::theme(legend.position = "bottom"),
+        "light"           = ggplot2::theme_light()    + ggplot2::theme(legend.position = "bottom"),
+        "minimal"         = ggplot2::theme_minimal()  + ggplot2::theme(legend.position = "bottom"),
+        "pubr"            = jaspGraphs::themePubrRaw(legend = options[["bubblePlotLegendPosition"]]),
+        "apa"             = jaspGraphs::themeApaRaw(legend.pos = switch(
+          options[["bubblePlotLegendPosition"]],
+          "none"   = "none",
+          "bottom" = "bottommiddle",
+          "right"  = "bottomright",
+          "top"    = "topmiddle",
+          "left"   = "bottomleft"
+        ))
+      )
+
+    plot <- plot + ggplot2::theme(
+      legend.text  = ggplot2::element_text(size = ggplot2::rel(options[["bubblePlotRelativeSizeText"]])),
+      legend.title = ggplot2::element_text(size = ggplot2::rel(options[["bubblePlotRelativeSizeText"]])),
+      axis.text    = ggplot2::element_text(size = ggplot2::rel(options[["bubblePlotRelativeSizeText"]])),
+      axis.title   = ggplot2::element_text(size = ggplot2::rel(options[["bubblePlotRelativeSizeText"]])),
+      legend.position = if (attr(dfPlot, "separateLines") == "") "none" else options[["bubblePlotLegendPosition"]])
+  }
+
+  return(plot)
+}
 
 # check functions
 .maIsMetaregression               <- function(options) {
@@ -1590,7 +1661,7 @@
 
   switch(
     effectSizeTransformation,
-    none                          = NULL,
+    none                          = function(x) x,
     fishersZToCorrelation         = metafor::transf.ztor,
     exponential                   = exp,
     logOddsToProportions          = metafor::transf.logit,
@@ -1820,6 +1891,14 @@
   }
 
   return(dfBands)
+}
+.maMergeVariablesLevels           <- function(df, variables, mergedName) {
+  if (length(variables) == 1) {
+    df[[mergedName]] <- df[,variables]
+  } else if (length(variables) > 1) {
+    df[[mergedName]] <- apply(df[,variables], 1, function(x) paste(x, collapse = " | "))
+  }
+  return(df)
 }
 
 # messages

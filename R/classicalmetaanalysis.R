@@ -105,12 +105,18 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "bubblePlotSeparateLines",
   "bubblePlotSeparatePlots",
   "bubblePlotSdFactorCovariates",
-  "bubblePlotBubbleSize",
-  "bubblePlotRelativeBubbleSize",
+  "bubblePlotBubblesSize",
+  "bubblePlotBubblesRelativeSize",
+  "bubblePlotBubblesTransparency",
+  "bubblePlotBubblesJitter",
   "bubblePlotCondifenceIntervals",
   "bubblePlotCondifenceIntervalsTransparency",
   "bubblePlotPredictionIntervals",
-  "bubblePlotPredictionIntervalsTransparency"
+  "bubblePlotPredictionIntervalsTransparency",
+  "colorPallete",
+  "bubblePlotTheme",
+  "bubblePlotLegendPosition",
+  "bubblePlotRelativeSizeText"
 )
 .maReady               <- function(options) {
 
