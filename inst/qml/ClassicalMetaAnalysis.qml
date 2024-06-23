@@ -956,6 +956,7 @@ Form
 			AssignedVariablesList
 			{
 				name:			"bubblePlotSelectedVariable"
+				id:				bubblePlotSelectedVariable
 				title:			qsTr("Selected variable")
 				singleVariable:	true
 				allowTypeChange:false
@@ -991,24 +992,48 @@ Form
 					defaultValue: 	1
 					min:			0
 					enabled:		bubblePlotSeparateLines.columnsTypes.includes("scale") || bubblePlotSeparatePlots.columnsTypes.includes("scale")
-					Layout.preferredWidth: 350 * jaspTheme.uiScale
+					Layout.preferredWidth: 300 * jaspTheme.uiScale
 				}
 
-				DropDown
+				Group
 				{
-					name:		"bubblePlotBubbleSize"
-					label:		qsTr("Bubble size")
-					values:		[
-						{ label: qsTr("Weight")				, value: "weight"},
-						{ label: qsTr("Inverse variance")	, value: "inverseVariance"	},
-						{ label: qsTr("Equal")				, value: "equal"	}
-					]
-				}
+					title:		qsTr("Bubles")
 
-				DoubleField
-				{
-					name:		"bubblePlotRelativeBubbleSize"
-					label:		qsTr("Relative bubble size")
+					DropDown
+					{
+						name:		"bubblePlotBubblesSize"
+						label:		qsTr("Size")
+						values:		[
+							{ label: qsTr("Weight")				, value: "weight"},
+							{ label: qsTr("Inverse variance")	, value: "inverseVariance"	},
+							{ label: qsTr("Equal")				, value: "equal"	}
+						]
+					}
+
+					DoubleField
+					{
+						name:		"bubblePlotBubblesRelativeSize"
+						label:		qsTr("Relative size")
+					}
+
+					DoubleField
+					{
+						name:			"bubblePlotBubblesTransparency"
+						label:			qsTr("Transparency")
+						defaultValue:	0.90
+						min:			0
+						max:			1
+						inclusive: 		JASP.None
+					}
+
+					DoubleField
+					{
+						enabled:		bubblePlotSelectedVariable.columnsTypes.includes("nominal")
+						name:			"bubblePlotBubblesJitter"
+						label:			qsTr("Jitter")
+						defaultValue:	0.1
+						min:			0
+					}
 				}
 			}
 
@@ -1018,6 +1043,7 @@ Form
 				{
 					name:		"bubblePlotCondifenceIntervals"
 					label:		qsTr("Condifence intervals")
+					checked:	true
 
 					DoubleField
 					{
@@ -1034,6 +1060,7 @@ Form
 				{
 					name:		"bubblePlotPredictionIntervals"
 					label:		qsTr("Prediction intervals")
+					checked:	true
 
 					DoubleField
 					{
@@ -1044,6 +1071,54 @@ Form
 						max:			1
 						inclusive: 		JASP.None
 					}
+				}
+			}
+
+			Group
+			{
+
+				ColorPalette{}
+
+				DropDown
+				{
+					name:			"bubblePlotTheme"
+					id:				bubblePlotTheme	
+					label:			qsTr("Theme")
+					startValue:		"jasp"
+					values:
+					[
+						{ label: "JASP",					value: "jasp"},
+						{ label: qsTr("White background"),	value: "whiteBackground"},
+						{ label: qsTr("Light"),				value: "light"},
+						{ label: qsTr("Minimal")	,		value: "minimal"},
+						{ label: "APA",						value: "apa"},
+						{ label: "pubr",					value: "pubr"}
+					]
+				}
+
+				DoubleField
+				{
+					enabled:		bubblePlotTheme.value != "jasp"
+					name:			"bubblePlotRelativeSizeText"
+					label:			qsTr("Relative text size")
+					defaultValue:	1.5
+					min:			0
+					inclusive: 		JASP.None
+				}
+
+				DropDown
+				{
+					name:			"bubblePlotLegendPosition"
+					label:			qsTr("Legend position")
+					startValue:		"right"
+					values:
+					[
+						{ label: qsTr("None"),			value: "none"},
+						{ label: qsTr("Bottom"),		value: "bottom"},
+						{ label: qsTr("Right"),			value: "right"},
+						{ label: qsTr("Top"),			value: "top"},
+						{ label: qsTr("Left"), 			value: "left"}
+					]
 				}
 			}
 		}
