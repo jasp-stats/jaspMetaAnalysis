@@ -1012,8 +1012,11 @@ Form
 
 					DoubleField
 					{
-						name:		"bubblePlotBubblesRelativeSize"
-						label:		qsTr("Relative size")
+						name:			"bubblePlotBubblesRelativeSize"
+						label:			qsTr("Relative size")
+						defaultValue:	1
+						min:			0
+						inclusive: 		JASP.None
 					}
 
 					DoubleField

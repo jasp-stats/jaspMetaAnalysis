@@ -1185,21 +1185,33 @@
     terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")
     termsIndex <- attr(model.matrix(fit[["formula.mods"]], data = fit[["data"]]), "assign")
     termsAnova <- anova(fit, btt = seq_along(termsIndex)[termsIndex == which(terms == term)])
+
+    out <- list(
+      term = .maVariableNames(term, options[["predictors"]]),
+      stat = termsAnova[["QM"]],
+      df1  = termsAnova[["QMdf"]][1],
+      pval = termsAnova[["QMp"]]
+    )
+
+    if (.maIsMetaregressionFtest(options))
+      out$df2 <- termsAnova[["QMdf"]][2]
+
   } else if (parameter == "heterogeneity") {
     terms      <- attr(terms(fit[["formula.scale"]], data = fit[["data"]]),"term.labels")
     termsIndex <- attr(model.matrix(fit[["formula.scale"]], data = fit[["data"]]), "assign")
     termsAnova <- anova(fit, att = seq_along(termsIndex)[termsIndex == which(terms == term)])
+
+    out <- list(
+      term = .maVariableNames(term, options[["predictors"]]),
+      stat = termsAnova[["QS"]],
+      df1  = termsAnova[["QSdf"]][1],
+      pval = termsAnova[["QSp"]]
+    )
+
+    if (.maIsMetaregressionFtest(options))
+      out$df2 <- termsAnova[["QSdf"]][2]
+
   }
-
-  out <- list(
-    term = .maVariableNames(term, options[["predictors"]]),
-    stat = termsAnova[["QM"]],
-    df1  = termsAnova[["QMdf"]][1],
-    pval = termsAnova[["QMp"]]
-  )
-
-  if (.maIsMetaregressionFtest(options))
-    out$df2 <- termsAnova[["QMdf"]][2]
 
   return(out)
 }
@@ -1555,8 +1567,8 @@
   ### add studies as bubbles
   dfStudies <- data.frame(
     effectSize       = fit[["yi"]],
-    inverseVariance  = 1/fit[["vi"]] * options[["bubblePlotBubblesRelativeSize"]],
-    weight           = weights(fit)  * options[["bubblePlotBubblesRelativeSize"]],
+    inverseVariance  = 1/fit[["vi"]],
+    weight           = weights(fit),
     constant         = rep(options[["bubblePlotBubblesRelativeSize"]], nrow(fit[["data"]])),
     selectedVariable = fit[["data"]][[attr(dfPlot, "selectedVariable")]]
   )
@@ -1582,7 +1594,7 @@
       options[["bubblePlotBubblesSize"]],
       "weight"          = as.name("weight"),
       "inverseVariance" = as.name("inverseVariance"),
-      "equal"           = NULL
+      "equal"           = as.name("constant")
     ),
     color = if (hasSeparateLines) as.name("separateLines"),
     fill  = if (hasSeparateLines) as.name("separateLines"),
@@ -1594,7 +1606,7 @@
     mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
     show.legend = FALSE
   )
-  bubblePlot <- bubblePlot + do.call(jaspGraphs::geom_point, geomCall)
+  bubblePlot <- bubblePlot + do.call(jaspGraphs::geom_point, geomCall) + ggplot2::scale_size(range = c(1, 6 * options[["bubblePlotBubblesRelativeSize"]]))
   yRange     <- range(c(yRange, dfStudies[["effectSize"]]))
 
   # add color palette
