@@ -113,7 +113,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "bubblePlotCondifenceIntervalsTransparency",
   "bubblePlotPredictionIntervals",
   "bubblePlotPredictionIntervalsTransparency",
-  "colorPallete",
+  "colorPalette",
   "bubblePlotTheme",
   "bubblePlotLegendPosition",
   "bubblePlotRelativeSizeText"
