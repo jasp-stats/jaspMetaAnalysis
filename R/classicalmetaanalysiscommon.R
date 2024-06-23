@@ -81,6 +81,8 @@
   }
   if (options[["diagnosticsPlotsProfileLikelihood"]])
     .maProfileLikelihoodPlot(jaspResults, dataset, options)
+  if (options[["diagnosticsPlotsBaujat"]])
+    .maBaujatPlot(jaspResults, dataset, options)
 
 
   # additional
@@ -1086,6 +1088,72 @@
     jaspGraphs::themeJaspRaw()
 
   profileLikelihoodPlot$plotObject <- plotOut
+
+  return()
+}
+.maBaujatPlot                         <- function(jaspResults, dataset, options) {
+
+  if (!is.null(jaspResults[["baujatPlot"]]))
+    return()
+
+  fit <- .maExtractFit(jaspResults, options)
+
+  # stop on error
+  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+    return()
+
+  # create plot
+  baujatPlot <- createJaspPlot(title = gettext("Baujat Plot"), width = 400, height = 320)
+  baujatPlot$dependOn(c(.maDependencies, "diagnosticsPlotsBaujat", "diagnosticsPlotsBaujatIncludeLabel", "diagnosticsPlotsBaujatIncludeLabelVariable"))
+  baujatPlot$position <- 9
+  jaspResults[["baujatPlot"]] <- baujatPlot
+
+  # if (.maIsMetaregressionHeterogeneity(options)) {
+  #   baujatPlot$setError(gettext("Baujat plot is not available for models that contain meta-regression on heterogeneity."))
+  #   return()
+  # }
+
+  # obtain Baujat plot
+  dfBaujat <- try(.maSuppressPlot(metafor::baujat(fit)))
+
+  if (jaspBase::isTryError(dfBaujat)) {
+    dfBaujat$setError(dfBaujat)
+    return()
+  }
+  if (options[["diagnosticsPlotsBaujatIncludeLabel"]])
+    dfBaujat$label <- dataset[[options[["diagnosticsPlotsBaujatIncludeLabelVariable"]]]]
+
+  xTicks <- jaspGraphs::getPrettyAxisBreaks(range(dfBaujat$x))
+  yTicks <- jaspGraphs::getPrettyAxisBreaks(range(dfBaujat$y))
+
+
+  aesCall <- list(
+    x     = as.name("x"),
+    y     = as.name("y"),
+    label = if (options[["diagnosticsPlotsBaujatIncludeLabel"]]) as.name("label")
+  )
+  geomCall <- list(
+    data    = dfBaujat,
+    mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)])
+  )
+
+  # create plot
+  plotOut <- do.call(ggplot2::ggplot, geomCall) +
+    jaspGraphs::geom_point(
+      size = if (options[["diagnosticsPlotsBaujatIncludeLabel"]]) 2 else 3
+    )
+
+  if (options[["diagnosticsPlotsBaujatIncludeLabel"]])
+    plotOut + ggplot2::geom_text(hjust = 0, vjust = 0)
+
+  plotOut <- plotOut +
+    ggplot2::labs(x = gettext("Squared Pearson Residual"), y = gettext("Influence on Fitted Value")) +
+    jaspGraphs::scale_x_continuous(breaks = xTicks, limits = range(xTicks)) +
+    jaspGraphs::scale_y_continuous(breaks = yTicks, limits = range(yTicks)) +
+    jaspGraphs::geom_rangeframe() +
+    jaspGraphs::themeJaspRaw()
+
+  baujatPlot$plotObject <- plotOut
 
   return()
 }
@@ -2430,6 +2498,14 @@
   } else {
     return("string")
   }
+}
+.maSuppressPlot                   <- function(plotExpression) {
+  temp <- tempfile()
+  pdf(file = temp)
+  dfOut <- plotExpression
+  dev.off()
+  unlink(temp)
+  return(dfOut)
 }
 
 # messages
