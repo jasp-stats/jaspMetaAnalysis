@@ -1169,6 +1169,7 @@ Form
 					{
 						name:		"diagnosticsCasewiseDiagnosticsIncludeLabel"
 						text:		qsTr("Include label")
+						childrenOnSameRow:	true
 
 						DropDown
 						{
@@ -1218,6 +1219,24 @@ Form
 				{
 					name:		"diagnosticsPlotsProfileLikelihood"
 					text:		qsTr("Profile likelihood")
+				}
+
+				CheckBox
+				{
+					name:		"diagnosticsPlotsBaujat"
+					text:		qsTr("Baujat")
+
+					CheckBox
+					{
+						name:		"diagnosticsPlotsBaujatIncludeLabel"
+						text:		qsTr("Include label")
+						childrenOnSameRow:	true
+
+						DropDown
+						{
+							name:		"diagnosticsPlotsBaujatIncludeLabelVariable"
+						}
+					}
 				}
 			}
 		}
