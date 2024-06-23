@@ -1133,6 +1133,13 @@ Form
 
 		Group
 		{
+
+			CheckBox
+			{
+				name:		"showMetaforRCode"
+				text:		qsTr("Show metafor R code")
+			}
+
 			CheckBox
 			{
 				name:		"weightedEstimation"

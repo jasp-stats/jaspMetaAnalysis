@@ -55,6 +55,11 @@
   #.maUltimateForestPlot(jaspResults, dataset, options)
   .maBubblePlot(jaspResults, dataset, options)
 
+
+  # additional
+  if (options[["showMetaforRCode"]])
+    .maShowMetaforRCode(jaspResults, options)
+
   return()
 }
 
@@ -79,7 +84,9 @@
   return(as.formula(formula, env = parent.frame(1)))
 }
 .maFitModel         <- function(jaspResults, dataset, options) {
-
+  # --------------------------------------------------------------------------- #
+  # when updating don't forget to update the '.maMakeMetaforCallText' function! #
+  # --------------------------------------------------------------------------- #
   if (!.maReady(options) || !is.null(jaspResults[["fit"]]))
     return()
 
@@ -751,6 +758,21 @@
   } else {
     bubblePlot$plotObject <- tempPlots[[1]]
   }
+
+  return()
+}
+.maShowMetaforRCode                   <- function(jaspResults, options) {
+
+  if (!.maReady(options) || !is.null(jaspResults[["metaforRCode"]]))
+    return()
+
+  metaforRCode <- createJaspHtml(title = gettext("Metafor R Code"))
+  metaforRCode$dependOn(c(.maDependencies, "showMetaforRCode"))
+  metaforRCode$position <- 99
+
+  metaforRCode$text <- .maTransformToHtml(.maMakeMetaforCallText(options))
+
+  jaspResults[['metaforRCode']] <- metaforRCode
 
   return()
 }
@@ -1571,6 +1593,65 @@
 
   return(plot)
 }
+.maMakeMetaforCallText             <- function(options) {
+
+  rmaInput <- list(
+    yi   = as.name(options[["effectSize"]]),
+    sei  = as.name(options[["effectSizeStandardError"]]),
+    data = as.name("dataset")
+  )
+
+  # add formulas if specified
+  rmaInput$mods  <- .maGetFormula(options[["effectSizeModelTerms"]], options[["effectSizeModelIncludeIntercept"]])
+  rmaInput$scale <- .maGetFormula(options[["heterogeneityModelTerms"]], options[["heterogeneityModelIncludeIntercept"]])
+
+  # specify method and fixed effect terms test
+  rmaInput$method <- paste0("'", .maGetMethodOptions(options), "'")
+  rmaInput$test   <- paste0("'", options[["fixedEffectTest"]], "'")
+
+  if (!options[["weightedEstimation"]])
+    rmaInput$weighted <- FALSE
+
+  # add fixed parameters if needed
+  if (options[["fixParametersWeights"]])
+    rmaInput$weights <- as.name(options[["fixParametersWeightsVariable"]])
+  if (options[["fixParametersTau2"]])
+    rmaInput$tau2 <- .maGetFixedTau2Options(options)
+
+  # add link function if needed
+  if (.maIsMetaregressionHeterogeneity(options))
+    rmaInput$link <- paste0("'", options[["heterogeneityModelLink"]], "'")
+
+  # add control options if needed
+  control <- .maGetControlOptions(options)
+  if (length(control) != 0)
+    rmaInput$control <- control
+
+  # additional input
+  rmaInput$level <- 100 * options[["confidenceIntervalsLevel"]]
+
+  ### fit the model
+  fit <- paste0("fit <- rma(\n\t", paste(names(rmaInput), "=", rmaInput, collapse = ",\n\t"), "\n)")
+
+  # add clustering if specified
+  if (options[["clustering"]] != "") {
+
+    robustInput <- list(
+      cluster      = as.name(options[["clustering"]]),
+      clubSandwich = options[["clusteringUseClubSandwich"]],
+      adjust       = options[["clusteringSmallSampleCorrection"]]
+    )
+
+    fit <- paste0(
+      fit, "\n\n",
+      "fit <- robust(\n",
+      "\tfit,\n\t",
+      paste(names(robustInput), "=", robustInput, collapse = ",\n\t"), "\n)"
+    )
+  }
+
+  return(fit)
+}
 
 # check functions
 .maIsMetaregression               <- function(options) {
@@ -1899,6 +1980,20 @@
     df[[mergedName]] <- apply(df[,variables], 1, function(x) paste(x, collapse = " | "))
   }
   return(df)
+}
+.maTransformToHtml                <- function(rCode) {
+
+  # Replace special characters with HTML entities
+  htmlCode <- gsub("&", "&amp;", rCode)
+  htmlCode <- gsub("<", "&lt;", htmlCode)
+  htmlCode <- gsub(">", "&gt;", htmlCode)
+
+  # Wrap the code in <pre> and <code> tags
+  htmlCode <- paste0(
+    "<pre><code>", htmlCode, "\n</code></pre>"
+  )
+
+  return(htmlCode)
 }
 
 # messages
