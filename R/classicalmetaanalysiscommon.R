@@ -28,7 +28,14 @@
 
 .ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
+  # fit the model
   .maFitModel(jaspResults, dataset, options)
+
+  # # remove influential observations and refit the model if requested
+  # if (options[["diagnosticsCasewiseDiagnostics"]] && options[["diagnosticsCasewiseDiagnosticsRerunWithoutInfluentialCases"]]) {
+  #   dataset <- .maRemoveInfluentialObservations(jaspResults, dataset, options)
+  #   .maFitModel(jaspResults, dataset, options, objectName = "fitNoInfluence")
+  # }
 
   # model summary
   .maResidualHeterogeneityTable(jaspResults, dataset, options)
@@ -66,6 +73,11 @@
     .maVarianceInflationTable(jaspResults, dataset, options, "effectSize")
     .maVarianceInflationTable(jaspResults, dataset, options, "heterogeneity")
   }
+  if (options[["diagnosticsCasewiseDiagnostics"]]) {
+    .maCasewiseDiagnosticsTable(jaspResults, dataset, options)
+    .maCasewiseDiagnosticsExportColumns(jaspResults, dataset, options)
+  }
+
 
   # additional
   if (options[["showMetaforRCode"]])
@@ -75,7 +87,7 @@
 }
 
 # fitting functions
-.maGetFormula       <- function(modelTerms, includeIntercept) {
+.maGetFormula                    <- function(modelTerms, includeIntercept) {
 
   predictors <- unlist(lapply(modelTerms, function(x) {
     if (length(x[["components"]]) > 1)
@@ -94,17 +106,17 @@
 
   return(as.formula(formula, env = parent.frame(1)))
 }
-.maFitModel         <- function(jaspResults, dataset, options) {
+.maFitModel                      <- function(jaspResults, dataset, options, objectName = "fit") {
   # --------------------------------------------------------------------------- #
   # when updating don't forget to update the '.maMakeMetaforCallText' function! #
   # --------------------------------------------------------------------------- #
-  if (!.maReady(options) || !is.null(jaspResults[["fit"]]))
+  if (!.maReady(options) || !is.null(jaspResults[[objectName]]))
     return()
 
   # create the output container
   fitContainer <- createJaspState()
   fitContainer$dependOn(.maDependencies)
-  jaspResults[["fit"]] <- fitContainer
+  jaspResults[[objectName]] <- fitContainer
 
   # specify the effect size and outcome
   rmaInput <- list(
@@ -158,12 +170,34 @@
   }
 
   # return the results
-  jaspResults[["fit"]]$object <- list(
+  jaspResults[[objectName]]$object <- list(
     fit          = fit,
     fitClustered = fitClustered
   )
 
   return()
+}
+.maRemoveInfluentialObservations <- function(jaspResults, dataset, options) {
+
+  if (!.maReady(options) || !is.null(jaspResults[["fit"]]))
+    return()
+
+  fit <- .maExtractFit(jaspResults, options)
+
+  if (jaspBase::isTryError(fit))
+    return()
+
+  # remove influential observations
+  influenceResults       <- influence.rma.uni(fit)
+  influentialObservation <- influenceResults$inf$inf == "*"
+
+  dataset <- dataset[!influentialObservation, ]
+  attr(dataset, "influentialObservations") <- sum(influentialObservation)
+
+  if (nrow(dataset) == 0)
+    return(.quitAnalysis(gettext("All observations were removed as influential.")))
+
+  return(dataset)
 }
 
 # output tables
@@ -316,7 +350,7 @@
   if (!.maGetMethodOptions(options) %in% c("EE", "FE")) {
 
     # requires non-clustered fit
-    pooledHeterogeneity <- .maComputePooledHeterogeneity(jaspResults[["fit"]]$object[["fit"]], options)
+    pooledHeterogeneity <- .maComputePooledHeterogeneity(.maExtractFit(jaspResults, options, nonClustered = TRUE), options)
 
     if (nrow(pooledHeterogeneity) > 0) {
       for (i in 1:nrow(pooledHeterogeneity))
@@ -834,18 +868,180 @@
 
   return()
 }
+.maCasewiseDiagnosticsTable           <- function(jaspResults, dataset, options) {
+
+  if (!is.null(jaspResults[["casewiseDiagnosticsTable"]]))
+    return()
+
+  fit <- .maExtractFit(jaspResults, options)
+
+  # stop on error
+  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+    return()
+
+  # extract precomputed diagnostics if done before:
+  if (!is.null(jaspResults[["diagnosticsResults"]])) {
+
+    diagnosticsResults <- jaspResults[["diagnosticsResults"]]$object
+
+    influenceResultsDfbs <- diagnosticsResults[["influenceResultsDfbs"]]
+    influenceResultsInf  <- diagnosticsResults[["influenceResultsInf"]]
+
+  } else {
+
+    # create the output container
+    fitContainer <- createJaspState()
+    fitContainer$dependOn(.maDependencies)
+    jaspResults[["diagnosticsResults"]] <- fitContainer
+
+    # extract results
+    influenceResults     <- influence(fit)
+    influenceResultsDfbs <- data.frame(influenceResults$dfbs)
+    influenceResultsInf  <- data.frame(influenceResults$inf)
+    influenceResultsInf$tau.del <- sqrt(influenceResultsInf$tau2.del)
+    influenceResultsInf$inf[influenceResultsInf$inf == "*"] <- "Yes"
+
+    jaspResults[["diagnosticsResults"]]$object <- list(
+      "influenceResultsDfbs" = influenceResultsDfbs,
+      "influenceResultsInf"  = influenceResultsInf
+    )
+  }
+
+  # extract fit data
+  fitData <- fit[["data"]]
+
+  # fit measures table
+  casewiseDiagnosticsTable          <- createJaspTable(gettext("Casewise Diagnostics Table"))
+  casewiseDiagnosticsTable$position <- 7
+  casewiseDiagnosticsTable$dependOn(c(.maDependencies, "diagnosticsCasewiseDiagnostics", "diagnosticsCasewiseDiagnosticsShowInfluentialOnly",
+                                      "diagnosticsCasewiseDiagnosticsIncludeLabel", "diagnosticsCasewiseDiagnosticsIncludeLabelVariable",
+                                      "diagnosticsCasewiseDiagnosticsIncludePredictors",
+                                      "diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"))
+  jaspResults[["casewiseDiagnosticsTable"]] <- casewiseDiagnosticsTable
+
+  if (options[["diagnosticsCasewiseDiagnosticsShowInfluentialOnly"]] && sum(influenceResultsInf$inf != "Yes") == 0) {
+    casewiseDiagnosticsTable$addFootnote(gettext("No influential cases found."))
+    return()
+  }
+
+  if (options[["diagnosticsCasewiseDiagnosticsIncludeLabel"]]) {
+    influenceResultsInf$label <- dataset[[options[["diagnosticsCasewiseDiagnosticsIncludeLabelVariable"]]]]
+    casewiseDiagnosticsTable$addColumnInfo(name = "label", type  = "string", title = gettext("Label"))
+  }
+
+  if (options[["diagnosticsCasewiseDiagnosticsIncludePredictors"]]) {
+    for (var in colnames(fitData)) {
+      casewiseDiagnosticsTable$addColumnInfo(name = paste0("pred_", var), type  = .maGetVariableColumnType(var, options), title = var, overtitle = gettext("Predictor"))
+    }
+    colnames(fitData)   <- paste0("pred_", colnames(fitData))
+    influenceResultsInf <- cbind(fitData, influenceResultsInf)
+  }
+
+  casewiseDiagnosticsTable$addColumnInfo(name = "rstudent",  title = gettext("Standardized Residual"),  type = "number")
+  casewiseDiagnosticsTable$addColumnInfo(name = "dffits",    title = gettext("DFFITS"),                 type = "number")
+  casewiseDiagnosticsTable$addColumnInfo(name = "cook.d",    title = gettext("Cook's Distance"),        type = "number")
+  casewiseDiagnosticsTable$addColumnInfo(name = "cov.r",     title = gettext("Covariance ratio"),       type = "number")
+  casewiseDiagnosticsTable$addColumnInfo(name = "tau.del",   title = gettext("\U1D70F"),                type = "number", overtitle = gettext("Leave One Out"))
+  casewiseDiagnosticsTable$addColumnInfo(name = "tau2.del",  title = gettext("\U1D70F\U00B2"),          type = "number", overtitle = gettext("Leave One Out"))
+  casewiseDiagnosticsTable$addColumnInfo(name = "QE.del",    title = gettext("Q\U2091"),                type = "number", overtitle = gettext("Leave One Out"))
+  casewiseDiagnosticsTable$addColumnInfo(name = "hat",       title = gettext("Hat"),                    type = "number")
+  casewiseDiagnosticsTable$addColumnInfo(name = "weight",    title = gettext("Weight"),                 type = "number")
+
+  if (options[["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"]]) {
+    for (par in colnames(influenceResultsDfbs)) {
+      casewiseDiagnosticsTable$addColumnInfo(name = par, title = .maVariableNames(par, options[["predictors"]]), type = "number", overtitle = gettext("Difference in coefficients"))
+    }
+    influenceResultsInf <- cbind(influenceResultsInf, influenceResultsDfbs)
+  }
+
+  casewiseDiagnosticsTable$addColumnInfo(name = "inf", title = gettext("Influential"), type = "string")
+
+  if (options[["diagnosticsCasewiseDiagnosticsShowInfluentialOnly"]])
+      influenceResultsInf <- influenceResultsInf[influenceResultsInf$inf == "Yes",,drop=FALSE]
+
+  casewiseDiagnosticsTable$setData(influenceResultsInf)
+
+  return()
+}
+.maCasewiseDiagnosticsExportColumns   <- function(jaspResults, dataset, options) {
+
+  if (!options[["diagnosticsCasewiseDiagnosticsExportToDataset"]])
+    return()
+
+  # extract diagnostics already computed in '.maCasewiseDiagnosticsTable'
+  diagnosticsResults <- jaspResults[["diagnosticsResults"]]$object
+
+  influenceResultsDfbs <- diagnosticsResults[["influenceResultsDfbs"]]
+  influenceResultsInf  <- diagnosticsResults[["influenceResultsInf"]]
+
+  # export columns:
+  if (options[["diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"]]) {
+
+    columnName <- "Diagnostics: Influential"
+    if (jaspBase:::columnExists(columnName) && !jaspBase:::columnIsMine(columnName))
+      .quitAnalysis(gettextf("Column name %s already exists in the dataset.", columnName))
+
+    jaspResults[[columnName]] <- createJaspColumn(columnName = columnName, dependencies = .maDependencies)
+    jaspResults[[columnName]]$setNominal(influenceResultsInf[["inf"]])
+
+  } else {
+
+    # export diagnostics
+    for (diagnosticName in colnames(influenceResultsInf)) {
+
+      columnName <- paste0("Diagnostics: ", .maCasewiseDiagnosticsExportColumnsNames(diagnosticName))
+
+      if (jaspBase:::columnExists(columnName) && !jaspBase:::columnIsMine(columnName))
+        .quitAnalysis(gettextf("Column name %s already exists in the dataset.", columnName))
+
+      jaspResults[[columnName]] <- createJaspColumn(columnName = columnName, dependencies = .maDependencies)
+      if (diagnosticName == "inf") {
+        jaspResults[[columnName]]$setNominal(influenceResultsInf[[diagnosticName]])
+      } else {
+        jaspResults[[columnName]]$setScale(influenceResultsInf[[diagnosticName]])
+      }
+    }
+
+    # export change in coefficients
+    if (options[["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"]]) {
+
+      for (diagnosticName in colnames(influenceResultsDfbs)) {
+
+        columnName <- decodeColNames(paste0("Difference in coefficients: ", .maVariableNames(diagnosticName, options[["predictors"]])))
+
+        if (jaspBase:::columnExists(columnName) && !jaspBase:::columnIsMine(columnName))
+          .quitAnalysis(gettextf("Column name %s already exists in the dataset.", columnName))
+
+        jaspResults[[columnName]] <- createJaspColumn(columnName = columnName, dependencies = .maDependencies)
+        jaspResults[[columnName]]$setScale(influenceResultsDfbs[[diagnosticName]])
+      }
+    }
+
+  }
+
+  return()
+}
 
 # containers/state functions
-.maExtractFit                             <- function(jaspResults, options) {
+.maExtractFit                             <- function(jaspResults, options, nonClustered = FALSE) {
 
   if (is.null(jaspResults[["fit"]]$object))
     return()
 
-  # extract clustered model if specified
-  if (options[["clustering"]] != "") {
-    return(jaspResults[["fit"]]$object[["fitClustered"]])
+  if (!is.null(jaspResults[["fitNoInfluence"]]$object)) {
+    # extract clustered model if specified
+    if (options[["clustering"]] == "" || nonClustered) {
+      return(jaspResults[["fitNoInfluence"]]$object[["fit"]])
+    } else {
+      return(jaspResults[["fitNoInfluence"]]$object[["fitClustered"]])
+    }
   } else {
-    return(jaspResults[["fit"]]$object[["fit"]])
+    # extract clustered model if specified
+    if (options[["clustering"]] == "" || nonClustered) {
+      return(jaspResults[["fit"]]$object[["fit"]])
+    } else {
+      return(jaspResults[["fit"]]$object[["fitClustered"]])
+    }
   }
 }
 .maExtractModelSummaryContainer           <- function(jaspResults) {
@@ -900,6 +1096,7 @@
 
   return(varianceInflationContainer)
 }
+
 
 # help compute functions
 .maComputePooledEffect             <- function(fit, options) {
@@ -1904,6 +2101,22 @@
     "smdToCles"                      = gettext("SMD to CLES, Pr(supperiority)")
   ))
 }
+.maCasewiseDiagnosticsExportColumnsNames  <- function(columnName) {
+
+  return(switch(
+    columnName,
+    "rstudent"  = "Standardized Residual",
+    "dffits"    = "DFFITS",
+    "cook.d"    = "Cook's Distance",
+    "cov.r"     = "Covariance Ratio",
+    "tau.del"   = "Tau",
+    "tau2.del"  = "Tau2 LOO",
+    "QE.del"    = "QE LOO",
+    "hat"       = "Hat",
+    "weight"    = "Weight",
+    "inf"       = "Influential"
+  ))
+}
 
 # misc
 .maVariableNames                  <- function(varNames, variables) {
@@ -2134,6 +2347,22 @@
 
   return(vifResults)
 }
+.maGetVariableColumnType          <- function(variable, options) {
+
+  if (variable %in% c(options[["effectSize"]], options[["effectSizeStandardError"]])) {
+    return("number")
+  } else if (variable == options[["clustering"]]) {
+    return("string")
+  } else if (variable %in% options[["predictors"]]){
+    return(switch(
+      options[["predictors.types"]][variable == options[["predictors"]]],
+      "scale"   = "number",
+      "nominal" = "string"
+    ))
+  } else {
+    return("string")
+  }
+}
 
 # messages
 .maFixedEffectTextMessage              <- function(options) {
@@ -2177,6 +2406,9 @@
 
   if (attr(dataset, "NAs") > 0)
     messages <- c(messages, gettextf("%1$i observations were ommited due to missing values.", attr(dataset, "NAs")))
+
+  if (!is.null(attr(dataset, "influentialObservations")) && attr(dataset, "influentialObservations") > 0)
+    messages <- c(messages, gettextf("%1$i influential observations were detected and removed.", attr(dataset, "influentialObservations")))
 
   return(messages)
 }

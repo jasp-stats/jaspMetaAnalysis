@@ -1156,8 +1156,57 @@ Form
 
 				CheckBox
 				{
-					name:		"diagnosticsCaseWiseDiagnostics"
-					text:		qsTr("Case wise diagnostics")
+					name:		"diagnosticsCasewiseDiagnostics"
+					text:		qsTr("Casewise diagnostics")
+
+					CheckBox
+					{
+						name:		"diagnosticsCasewiseDiagnosticsShowInfluentialOnly"
+						text:		qsTr("Show influential only")
+					}
+
+					CheckBox
+					{
+						name:		"diagnosticsCasewiseDiagnosticsIncludeLabel"
+						text:		qsTr("Include label")
+
+						DropDown
+						{
+							name:		"diagnosticsCasewiseDiagnosticsIncludeLabelVariable"
+						}
+					}
+
+					CheckBox
+					{
+						name:		"diagnosticsCasewiseDiagnosticsIncludePredictors"
+						text:		qsTr("Include predictors")
+					}
+
+					CheckBox
+					{
+						name:		"diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"
+						text:		qsTr("Difference in coefficients")
+					}
+
+					CheckBox
+					{
+						name:		"diagnosticsCasewiseDiagnosticsExportToDataset"
+						text:		qsTr("Export to dataset")
+
+						CheckBox
+						{
+							name:		"diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"
+							text:		qsTr("Influential indicator only")
+							checked:	true
+						}
+					}
+
+					CheckBox
+					{
+						name:		"diagnosticsCasewiseDiagnosticsRerunWithoutInfluentialCases"
+						text:		qsTr("Rerun without influential cases")
+						visible:	false
+					}
 				}
 			}
 
