@@ -347,17 +347,26 @@
   modelSummaryContainer[["fitMeasuresTable"]] <- fitMeasuresTable
 
 
-  fitMeasuresTable$addColumnInfo(name = "ll",   title = gettext("Log Lik."), type = "number")
-  fitMeasuresTable$addColumnInfo(name = "dev",  title = gettext("Deviance"), type = "number")
-  fitMeasuresTable$addColumnInfo(name = "AIC",  title = gettext("AIC"),      type = "number")
-  fitMeasuresTable$addColumnInfo(name = "BIC",  title = gettext("BIC"),      type = "number")
-  fitMeasuresTable$addColumnInfo(name = "AICc", title = gettext("AICc"),     type = "number")
+  fitMeasuresTable$addColumnInfo(name = "model", title = "",                  type = "string")
+  fitMeasuresTable$addColumnInfo(name = "ll",    title = gettext("Log Lik."), type = "number")
+  fitMeasuresTable$addColumnInfo(name = "dev",   title = gettext("Deviance"), type = "number")
+  fitMeasuresTable$addColumnInfo(name = "AIC",   title = gettext("AIC"),      type = "number")
+  fitMeasuresTable$addColumnInfo(name = "BIC",   title = gettext("BIC"),      type = "number")
+  fitMeasuresTable$addColumnInfo(name = "AICc",  title = gettext("AICc"),     type = "number")
+
+  if (.maIsMetaregressionEffectSize(options))
+    fitMeasuresTable$addColumnInfo(name = "R2",  title = gettext("R\U00B2"),   type = "number")
 
   # stop on error
   if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
-  fitMeasuresTable$setData(t(fit[["fit.stats"]]))
+  fitSummary <- cbind("model" = colnames(fit[["fit.stats"]]), data.frame(t(fit[["fit.stats"]])))
+
+  if (.maIsMetaregressionEffectSize(options))
+    fitSummary$R2 <- fit[["R2"]]
+
+  fitMeasuresTable$setData(fitSummary)
 
   return()
 }
@@ -1489,6 +1498,10 @@
   selectedGrid <- selectedGrid[,setdiff(names(selectedGrid), c(selectedVariable, separateLines, separatePlots)),drop = FALSE]
 
   ### modify marginal means
+  if (.maGetMethodOptions(options) %in% c("EE", "FE")) {
+    computedMarginalMeans$pi.lb <- computedMarginalMeans$ci.lb
+    computedMarginalMeans$pi.ub <- computedMarginalMeans$ci.ub
+  }
   computedMarginalMeans <- data.frame(computedMarginalMeans)
   colnames(computedMarginalMeans) <- c("y", "se", "lCi", "uCi", "lPi", "uPi")
 
@@ -1606,7 +1619,8 @@
     mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
     show.legend = FALSE
   )
-  bubblePlot <- bubblePlot + do.call(jaspGraphs::geom_point, geomCall) + ggplot2::scale_size(range = c(1, 6 * options[["bubblePlotBubblesRelativeSize"]]))
+  bubblePlot <- bubblePlot + do.call(jaspGraphs::geom_point, geomCall) +
+    ggplot2::scale_size(range = c(1.5, 10) * options[["bubblePlotBubblesRelativeSize"]])
   yRange     <- range(c(yRange, dfStudies[["effectSize"]]))
 
   # add color palette
