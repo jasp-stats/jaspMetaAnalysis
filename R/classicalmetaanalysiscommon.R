@@ -23,6 +23,8 @@
 # - binning of continuous covariates (requires returning continous levels returned in gridMatrix)
 # - allow factors as dependent variables
 # AIC/BIC Model-averaging
+# Diagnostics
+# - model re-run on presence of influential cases
 # Generic
 # - allow different covariates factoring across all settings
 
