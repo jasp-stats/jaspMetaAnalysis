@@ -16,9 +16,15 @@
 #
 
 # TODO:
+# Estimated Marginal Means
+# - add variable interactions
+# - specify and test contrasts
 # Bubble plot
 # - binning of continuous covariates (requires returning continous levels returned in gridMatrix)
 # - allow factors as dependent variables
+# AIC/BIC Model-averaging
+# Generic
+# - allow different covariates factoring across all settings
 
 .ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
@@ -52,7 +58,7 @@
   .maEstimatedMarginalMeansTable(jaspResults, dataset, options, "heterogeneity")
 
   # plots
-  #.maUltimateForestPlot(jaspResults, dataset, options)
+  .maUltimateForestPlot(jaspResults, dataset, options)
   .maBubblePlot(jaspResults, dataset, options)
 
 
@@ -665,34 +671,34 @@
     return()
 
   # try execute!
-  out <- try(.maMakeTheUltimateForestPlot(fit, dataset, options))
+  plotOut <- try(.maMakeTheUltimateForestPlot(fit, dataset, options))
 
-  if (jaspBase::isTryError(out)) {
+  if (jaspBase::isTryError(plotOut)) {
     forestPlot <- createJaspPlot(title = gettext("Forest Plot"))
     forestPlot$position <- 4
     forestPlot$dependOn(.maForestPlotDependencies)
-    forestPlot$setError(out)
+    forestPlot$setError(plotOut)
     jaspResults[["forestPlot"]] <- forestPlot
     return()
   }
 
   # try adjusting height and width
-  height <- (attr(out, "rows") + 3) * 40
-  if (attr(out, "isPanel"))
+  height <- 200 + (attr(plotOut, "rows")) * 10
+  if (!attr(plotOut, "isPanel"))
     width <- 500
   else
-    width <- 500 + 500 * attr(out, "panelRatio")
+    width <- 500 + 500 * attr(plotOut, "panelRatio")
 
   attr(plotOut, "nCharsLeft") + attr(plotOut, "nCharsRight")
 
   forestPlot <- createJaspPlot(
-    plot   = out,
     title  = gettext("Forest Plot"),
     width  = width,
     height = height
   )
   forestPlot$position <- 4
   forestPlot$dependOn(.maForestPlotDependencies)
+  forestPlot$plotObject <- plotOut
   jaspResults[["forestPlot"]] <- forestPlot
 
   return()
