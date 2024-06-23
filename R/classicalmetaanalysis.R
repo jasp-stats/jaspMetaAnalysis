@@ -137,13 +137,13 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   predictorsScale   <- options[["predictors"]][options[["predictors.types"]] == "scale"]
 
   # forest plotting data
-  additionalVariables <- c(
+  additionalVariables <- unique(c(
     if (length(options[["forestPlotStudyInformationSelectedVariables"]]) > 0) unlist(options[["forestPlotStudyInformationSelectedVariables"]]),
     if (options[["forestPlotMappingColor"]] != "") options[["forestPlotMappingColor"]],
     if (options[["forestPlotMappingShape"]] != "") options[["forestPlotMappingShape"]],
     if (options[["forestPlotStudyInformationOrderBy"]] != "") options[["forestPlotStudyInformationOrderBy"]],
     if (options[["diagnosticsCasewiseDiagnosticsIncludeLabelVariable"]] != "") options[["diagnosticsCasewiseDiagnosticsIncludeLabelVariable"]]
-  )
+  ))
   # remove variables already specified in the model
   additionalVariables <- setdiff(
     additionalVariables,

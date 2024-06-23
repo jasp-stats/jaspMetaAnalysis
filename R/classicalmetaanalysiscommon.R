@@ -79,6 +79,8 @@
     .maCasewiseDiagnosticsTable(jaspResults, dataset, options)
     .maCasewiseDiagnosticsExportColumns(jaspResults, dataset, options)
   }
+  if (options[["diagnosticsPlotsProfileLikelihood"]])
+    .maProfileLikelihoodPlot(jaspResults, dataset, options)
 
 
   # additional
@@ -1020,6 +1022,70 @@
     }
 
   }
+
+  return()
+}
+.maProfileLikelihoodPlot              <- function(jaspResults, dataset, options) {
+
+  if (!is.null(jaspResults[["profileLikelihoodPlot"]]))
+    return()
+
+  fit <- .maExtractFit(jaspResults, options)
+
+  # stop on error
+  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+    return()
+
+  # create plot
+  profileLikelihoodPlot <- createJaspPlot(title = gettext("Profile Likelihood Plot"), width = 400, height = 320)
+  profileLikelihoodPlot$dependOn(c(.maDependencies, "diagnosticsPlotsProfileLikelihood"))
+  profileLikelihoodPlot$position <- 8
+  jaspResults[["profileLikelihoodPlot"]] <- profileLikelihoodPlot
+
+  if (.maIsMetaregressionHeterogeneity(options)) {
+    profileLikelihoodPlot$setError(gettext("Profile likelihood is not available for models that contain meta-regression on heterogeneity."))
+    return()
+  }
+
+  # obtain profile likelihood
+  xTicks <- jaspGraphs::getPrettyAxisBreaks(c(0, 2*fit[["tau2"]]))
+  dfProfile <- try(profile(fit, xlim = range(xTicks), plot = FALSE, progbar = FALSE))
+  if (jaspBase::isTryError(dfProfile)) {
+    profileLikelihoodPlot$setError(dfProfile)
+    return()
+  }
+
+  yTicks <- jaspGraphs::getPrettyAxisBreaks(c(min(dfProfile$ll), max(dfProfile$ll)))
+
+  # create plot
+  plotOut <- ggplot2::ggplot(
+    data = data.frame(
+      x = dfProfile$tau2,
+      y = dfProfile$ll
+    ),
+    ggplot2::aes(
+      x = x,
+      y = y)
+    ) +
+    jaspGraphs::geom_line() +
+    jaspGraphs::geom_point() +
+    ggplot2::geom_line(
+      data = data.frame(
+        x = rep(fit[["tau2"]], 2),
+        y = range(yTicks)),
+      linetype = "dotted") +
+    ggplot2::geom_line(
+      data = data.frame(
+        x = range(xTicks),
+        y = rep(max(dfProfile$ll), 2)),
+      linetype = "dotted") +
+    ggplot2::labs(x = expression(tau^2), y = gettext("Profile Likelihood")) +
+    jaspGraphs::scale_x_continuous(breaks = xTicks, limits = range(xTicks)) +
+    jaspGraphs::scale_y_continuous(breaks = yTicks, limits = range(yTicks)) +
+    jaspGraphs::geom_rangeframe() +
+    jaspGraphs::themeJaspRaw()
+
+  profileLikelihoodPlot$plotObject <- plotOut
 
   return()
 }
