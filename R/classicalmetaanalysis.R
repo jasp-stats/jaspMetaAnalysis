@@ -48,7 +48,8 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "optimizerMethod", "optimizerInitialTau2", "optimizerInitialTau2Value",
   "optimizerMinimumTau2", "optimizerMinimumTau2Value", "optimizerMaximumTau2", "optimizerMaximumTau2Value",
   "optimizerMaximumIterations", "optimizerMaximumIterationsValue", "optimizerConvergenceTolerance", "optimizerConvergenceToleranceValue",
-  "optimizerConvergenceRelativeTolerance", "optimizerConvergenceRelativeToleranceValue", "optimizerStepAdjustment", "optimizerStepAdjustmentValue"
+  "optimizerConvergenceRelativeTolerance", "optimizerConvergenceRelativeToleranceValue", "optimizerStepAdjustment", "optimizerStepAdjustmentValue",
+  "diagnosticsCasewiseDiagnosticsRerunWithoutInfluentialCases"
 )
 .maForestPlotDependencies <- c(
   .maDependencies, "transformEffectSize", "confidenceIntervalsLevel",
@@ -136,15 +137,16 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   predictorsScale   <- options[["predictors"]][options[["predictors.types"]] == "scale"]
 
   # forest plotting data
-  forestPlotVariables <- c(
+  additionalVariables <- c(
     if (length(options[["forestPlotStudyInformationSelectedVariables"]]) > 0) unlist(options[["forestPlotStudyInformationSelectedVariables"]]),
     if (options[["forestPlotMappingColor"]] != "") options[["forestPlotMappingColor"]],
     if (options[["forestPlotMappingShape"]] != "") options[["forestPlotMappingShape"]],
-    if (options[["forestPlotStudyInformationOrderBy"]] != "") options[["forestPlotStudyInformationOrderBy"]]
+    if (options[["forestPlotStudyInformationOrderBy"]] != "") options[["forestPlotStudyInformationOrderBy"]],
+    if (options[["diagnosticsCasewiseDiagnosticsIncludeLabelVariable"]] != "") options[["diagnosticsCasewiseDiagnosticsIncludeLabelVariable"]]
   )
   # remove variables already specified in the model
-  forestPlotVariables <- setdiff(
-    forestPlotVariables,
+  additionalVariables <- setdiff(
+    additionalVariables,
     c(predictorsNominal, predictorsScale, options[["effectSize"]], options[["effectSizeStandardError"]], options[["clustering"]])
   )
 
@@ -154,7 +156,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     columns.as.factor = c(
       if (length(predictorsNominal) > 0) predictorsNominal,
       if (options[["clustering"]] != "") options[["clustering"]],
-      forestPlotVariables
+      additionalVariables
     ),
     columns.as.numeric  = c(
       options[["effectSize"]],
