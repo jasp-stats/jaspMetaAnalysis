@@ -96,7 +96,9 @@
   ### Estimated marginal means panel ----
 
   ### compute and add marginal estimates
-  if (options[["forestPlotEstimatedMarginalMeans"]]) {
+  if (options[["forestPlotEstimatedMarginalMeans"]] && (
+    length(options[["forestPlotEstimatedMarginalMeansSelectedVariables"]]) > 0 || options[["forestPlotEstimatedMarginalMeansAdjustedEffectSizeEstimate"]]
+  )) {
 
     # terms and levels information
     estimatedMarginalMeansTestsStaistics   <- options[["forestPlotAuxiliaryTestsInformation"]] == "statisticAndPValue"
@@ -341,7 +343,6 @@
         tempRow <- tempRow + 1
       }
     }
-
 
   }
 
@@ -648,7 +649,7 @@
 
     ### tests and weights right panel
     rightPanelTestsAndWeights <- rbind(
-      if (options[["forestPlotStudyInformation"]] && length(options[["forestPlotStudyInformationSelectedVariablesSettings"]]) > 0 && options[["forestPlotStudyInformationStudyWeights"]]) {
+      if (options[["forestPlotStudyInformation"]] > 0 && options[["forestPlotStudyInformationStudyWeights"]]) {
         tempDf <- dfForrest[,c("y", "weights")]
         tempDf$label <- paste0(sprintf(paste0("%1$.", options[["forestPlotAuxiliaryDigits"]], "f"), tempDf$weights), " %")
         tempDf[,c("y", "label")]
@@ -660,7 +661,7 @@
       }
     )
     rightPanelTestsAndWeights <- rightPanelTestsAndWeights[rightPanelTestsAndWeights$label != "",]
-    if (nrow(rightPanelTestsAndWeights) == 0)
+    if (length(rightPanelTestsAndWeights) == 0 || nrow(rightPanelTestsAndWeights) == 0)
       rightPanelTestsAndWeights <- NULL
 
     ### compute the total character width
@@ -792,8 +793,8 @@
     if (!is.null(plotRight)) options[["forestPlotRelativeSizeRightPanel"]]
   )
   if (options[["forestPlotAuxiliaryAdjustWidthBasedOnText"]] && length(plotsWidths) == 3) {
-    plotsWidths[1] <- plotsWidths[1] * maxCharsLeft  / maxCharsRight
-    plotsWidths[3] <- plotsWidths[3] * maxCharsRight / maxCharsLeft
+    plotsWidths[1] <- plotsWidths[1] * 2 * maxCharsLeft  / (maxCharsRight + maxCharsLeft)
+    plotsWidths[3] <- plotsWidths[3] * 2 * maxCharsRight / (maxCharsRight + maxCharsLeft)
   }
   # compute ratio of main panel to side panels
   if (length(plotsWidths) != 1) {
@@ -816,7 +817,7 @@
       plotsCall <- c(plotsCall, list(plotRight))
     plotsCall$widths <- plotsWidths
     plotsCall$nrow   <- 1
-    plotOut <- do.call(gridExtra::grid.arrange, plotsCall)
+    plotOut <- do.call(gridExtra::arrangeGrob, plotsCall)
 #    plotOut <- jaspGraphsPlot$new(subplots = list(
 #      if (!is.null(plotLeft)) plotLeft,
 #      plotForest,
@@ -827,7 +828,7 @@
     attr(plotOut, "rows")        <- tempRow + if(!is.null(dfForrest)) max(dfForrest$row) else 0
   }
 
-  return(list())
+  return(plotOut)
 }
 .maForestPlotMakeRightPannel <- function(options, additionalInformation) {
 
