@@ -61,6 +61,11 @@
   .maUltimateForestPlot(jaspResults, dataset, options)
   .maBubblePlot(jaspResults, dataset, options)
 
+  # diagnostics
+  if (.maIsMetaregression(options) && options[["diagnosticsVarianceInflationFactor"]]) {
+    .maVarianceInflationTable(jaspResults, dataset, options, "effectSize")
+    .maVarianceInflationTable(jaspResults, dataset, options, "heterogeneity")
+  }
 
   # additional
   if (options[["showMetaforRCode"]])
@@ -782,6 +787,44 @@
 
   return()
 }
+.maVarianceInflationTable             <- function(jaspResults, dataset, options, parameter = "effectSize") {
+
+  varianceInflationContainer <- .maExtractVarianceInflationContainer(jaspResults)
+
+  if (!is.null(varianceInflationContainer[[parameter]]))
+    return()
+
+  if (parameter == "heterogeneity" && !.maIsMetaregressionHeterogeneity(options))
+    return()
+
+  fit <- .maExtractFit(jaspResults, options)
+
+  termsTable <- createJaspTable(switch(
+    parameter,
+    effectSize    = gettext("Effect Size Meta-Regression Variance Inflation"),
+    heterogeneity = gettext("Heterogeneity Meta-Regression Variance Inflation")
+  ))
+  termsTable$position <- switch(
+    parameter,
+    effectSize    = 1,
+    heterogeneity = 2
+  )
+  varianceInflationContainer[[parameter]] <- termsTable
+
+  termsTable$addColumnInfo(name = "term",  type = "string",  title = "")
+  if (options[["diagnosticsVarianceInflationFactorAggregate"]])
+    termsTable$addColumnInfo(name = "m", type = "integer", title = gettext("Parameters"))
+
+  termsTable$addColumnInfo(name = "vif",  type = "number", title = gettext("VIF"))
+  termsTable$addColumnInfo(name = "sif",  type = "number", title = gettext("SIF"))
+
+  if (is.null(fit) || jaspBase::isTryError(fit))
+    return()
+
+  termsTable$setData(.maComputeVifSummary(fit, options, parameter))
+
+  return()
+}
 
 # containers/state functions
 .maExtractFit                             <- function(jaspResults, options) {
@@ -834,6 +877,19 @@
   jaspResults[["estimatedMarginalMeansContainer"]] <- estimatedMarginalMeansContainer
 
   return(estimatedMarginalMeansContainer)
+}
+.maExtractVarianceInflationContainer      <- function(jaspResults) {
+
+  if (!is.null(jaspResults[["varianceInflationContainer"]]))
+    return(jaspResults[["varianceInflationContainer"]])
+
+  # create the output container
+  varianceInflationContainer <- createJaspContainer(gettext("Variance Inflation Summary"))
+  varianceInflationContainer$dependOn(c(.maDependencies, "diagnosticsVarianceInflationFactor", "diagnosticsVarianceInflationFactorAggregate"))
+  varianceInflationContainer$position <- 6
+  jaspResults[["varianceInflationContainer"]] <- varianceInflationContainer
+
+  return(varianceInflationContainer)
 }
 
 # help compute functions
@@ -1658,6 +1714,39 @@
 
   return(fit)
 }
+.maComputeVifSummary               <- function(fit, options, parameter = "effectSize") {
+
+  if (options[["diagnosticsVarianceInflationFactorAggregate"]]) {
+
+    # obtain terms indicies
+    if (parameter == "effectSize") {
+      terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")
+      termsIndex <- attr(model.matrix(fit[["formula.mods"]], data = fit[["data"]]), "assign")
+      tableVif   <- do.call(rbind, lapply(seq_along(terms), function(i) {
+        cbind.data.frame(
+          term = terms[i],
+          .maExtractVifResults(metafor::vif(fit, btt = seq_along(termsIndex)[termsIndex == i]), options, parameter)
+        )
+      }))
+    } else if (parameter == "heterogeneity") {
+      terms      <- attr(terms(fit[["formula.scale"]], data = fit[["data"]]),"term.labels")
+      termsIndex <- attr(model.matrix(fit[["formula.scale"]], data = fit[["data"]]), "assign")
+      tableVif   <- do.call(rbind, lapply(seq_along(terms), function(i) {
+        cbind.data.frame(
+          term = terms[i],
+          .maExtractVifResults(metafor::vif(fit, att = seq_along(termsIndex)[termsIndex == i]), options, parameter)
+        )
+      }))
+    }
+
+  } else {
+
+    tableVif      <- .maExtractVifResults(metafor::vif(fit), options, parameter)
+    tableVif$term <- .maVariableNames(rownames(tableVif), options[["predictors"]])
+  }
+
+  return(tableVif)
+}
 
 # check functions
 .maIsMetaregression               <- function(options) {
@@ -2000,6 +2089,24 @@
   )
 
   return(htmlCode)
+}
+.maExtractVifResults              <- function(vifResults, options, parameter) {
+
+  if (.maIsMetaregressionHeterogeneity(options))
+    vifResults <- vifResults[[switch(
+      parameter,
+      "effectSize"    = "beta",
+      "heterogeneity" = "alpha"
+    )]]
+
+  vifResults <- data.frame(vifResults)
+
+  if (options[["diagnosticsVarianceInflationFactorAggregate"]])
+    vifResults <- vifResults[,c("m", "vif", "sif"),drop = FALSE]
+  else
+    vifResults <- vifResults[,c("vif", "sif"),drop = FALSE]
+
+  return(vifResults)
 }
 
 # messages

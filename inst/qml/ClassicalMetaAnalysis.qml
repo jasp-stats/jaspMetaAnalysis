@@ -1125,285 +1125,331 @@ Form
 
 	}
 
-	MA.ClassicalMetaAnalysisDiagnostics{}
-
 	Section
 	{
-		title:	qsTr("Advanced")
+		title:		qsTr("Diagnostics")
+		columns:	1
 
 		Group
 		{
+			columns:	2
 
-			CheckBox
+			Group
 			{
-				name:		"showMetaforRCode"
-				text:		qsTr("Show metafor R code")
+				CheckBox
+				{
+					name:		"diagnosticsVarianceInflationFactor"
+					text:		qsTr("Variace inflation factor")
+					Layout.preferredWidth: 300 * jaspTheme.uiScale
+					enabled:	predictors.count > 0
+
+					CheckBox
+					{
+						name:		"diagnosticsVarianceInflationFactorAggregate"
+						text:		qsTr("Aggregate by terms")
+						checked:	true
+					}
+				}
+
+				CheckBox
+				{
+					name:		"diagnosticsCaseWiseDiagnostics"
+					text:		qsTr("Case wise diagnostics")
+				}
 			}
 
 			CheckBox
 			{
-				name:		"weightedEstimation"
-				text:		qsTr("Weighted estimation")
-				checked:	true
+				name:		"diagnosticsProfilePlot"
+				text:		qsTr("Profile plot")
+			}
+		}
+	}
+
+	Section
+	{
+		title:		qsTr("Advanced")
+		columns:	1
+
+		Group
+		{
+			columns:	2
+
+			Group
+			{
+
+				CheckBox
+				{
+					name:		"showMetaforRCode"
+					text:		qsTr("Show metafor R code")
+					Layout.preferredWidth: 300 * jaspTheme.uiScale
+				}
+
+				CheckBox
+				{
+					name:		"weightedEstimation"
+					text:		qsTr("Weighted estimation")
+					checked:	true
+				}
+
+				Group
+				{
+					title:		qsTr("Clustering")
+					enabled:	clustering.count == 1
+
+					CheckBox
+					{
+						name:		"clusteringUseClubSandwich"
+						text:		qsTr("Use clubSandwich")
+						checked:	true
+					}
+
+					CheckBox
+					{
+						name:		"clusteringSmallSampleCorrection"
+						text:		qsTr("Small sample correction")
+						checked:	true
+					}
+				}
 			}
 
 			Group
 			{
-				title:		qsTr("Clustering")
-				enabled:	clustering.count == 1
+				title:	qsTr("Fix Parameters")
 
 				CheckBox
 				{
-					name:		"clusteringUseClubSandwich"
-					text:		qsTr("Use clubSandwich")
-					checked:	true
+					name:	"fixParametersTau2"
+					text:	qsTr("𝜏²")
+					enabled:			heterogeneityModelTerms.count == 0
+					childrenOnSameRow:	true
+
+					FormulaField
+					{
+						label: 				""
+						name: 				"fixParametersTau2Value"
+						value:				"1"
+						min: 				0
+						inclusive: 			JASP.None
+					}
 				}
 
 				CheckBox
 				{
-					name:		"clusteringSmallSampleCorrection"
-					text:		qsTr("Small sample correction")
-					checked:	true
+					name:	"fixParametersWeights"
+					text:	qsTr("Weights")
+					childrenOnSameRow:	true
+
+					DropDown
+					{
+						label: 				""
+						name: 				"fixParametersWeightsVariable"
+						source:				"allVariables"
+					}
 				}
 			}
-		}
 
-		Group
-		{
-			title:	qsTr("Fix Parameters")
-
-			CheckBox
+			Group
 			{
-				name:	"fixParametersTau2"
-				text:	qsTr("𝜏²")
-				enabled:			heterogeneityModelTerms.count == 0
-				childrenOnSameRow:	true
+				title:		qsTr("Add Omibus Moderator Test")
+				enabled:	effectSizeModelTerms.count > 0 || heterogeneityModelTerms.count > 0
 
-				FormulaField
+				CheckBox
 				{
-					label: 				""
-					name: 				"fixParametersTau2Value"
-					value:				"1"
-					min: 				0
-					inclusive: 			JASP.None
+					text:	qsTr("Effect size coefficients")
+					name:	"addOmnibusModeratorTestEffectSizeCoefficients"
+					enabled:			effectSizeModelTerms.count > 0
+					childrenOnSameRow:	false
+
+					TextField
+					{
+						label: 				""
+						name: 				"addOmnibusModeratorTestEffectSizeCoefficientsValues"
+						value:				"c(1, 2)"
+					}
+				}
+
+				CheckBox
+				{
+					text:	qsTr("Heterogeneity coefficients")
+					name:	"addOmnibusModeratorTestHeterogeneityCoefficients"
+					enabled:			heterogeneityModelTerms.count > 0
+					childrenOnSameRow:	false
+
+					TextField
+					{
+						label: 				""
+						name: 				"addOmnibusModeratorTestHeterogeneityCoefficientsValues"
+						value:				"c(1, 2)"
+					}
 				}
 			}
 
-			CheckBox
+			Group
 			{
-				name:	"fixParametersWeights"
-				text:	qsTr("Weights")
-				childrenOnSameRow:	true
+				title:		qsTr("Optimizer")
+				enabled:	method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes" ||
+							method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu" ||
+							method.value == "sidikJonkman"
 
 				DropDown
 				{
-					label: 				""
-					name: 				"fixParametersWeightsVariable"
-					source:				"allVariables"
-				}
-			}
-		}
-
-		Group
-		{
-			title:		qsTr("Add Omibus Moderator Test")
-			enabled:	effectSizeModelTerms.count > 0 || heterogeneityModelTerms.count > 0
-
-			CheckBox
-			{
-				text:	qsTr("Effect size coefficients")
-				name:	"addOmnibusModeratorTestEffectSizeCoefficients"
-				enabled:			effectSizeModelTerms.count > 0
-				childrenOnSameRow:	false
-
-				TextField
-				{
-					label: 				""
-					name: 				"addOmnibusModeratorTestEffectSizeCoefficientsValues"
-					value:				"c(1, 2)"
-				}
-			}
-
-			CheckBox
-			{
-				text:	qsTr("Heterogeneity coefficients")
-				name:	"addOmnibusModeratorTestHeterogeneityCoefficients"
-				enabled:			heterogeneityModelTerms.count > 0
-				childrenOnSameRow:	false
-
-				TextField
-				{
-					label: 				""
-					name: 				"addOmnibusModeratorTestHeterogeneityCoefficientsValues"
-					value:				"c(1, 2)"
-				}
-			}
-		}
-
-		Group
-		{
-			title:		qsTr("Optimizer")
-			enabled:	method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes" ||
-						method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu" ||
-						method.value == "sidikJonkman"
-
-			DropDown
-			{
-				name:		"optimizerMethod"
-				label:		qsTr("Method") // TODO: switch default value on heterogeneityModelLink change
-				values:		{
-					if (heterogeneityModelLink.value == "log")
-						["nlminb", "BFGS", "Nelder-Mead", "uobyqa", "newuoa", "bobyqa", "nloptr", "nlm"]
-					else
-						["constrOptim", "nlminb", "BFGS", "Nelder-Mead", "uobyqa", "newuoa", "bobyqa", "nloptr", "nlm"]
-				}
-				visible:	heterogeneityModelTerms.count > 0
-			}
-
-			CheckBox
-			{
-				name:		"optimizerInitialTau2"
-				text:		qsTr("Initial 𝜏²")
-				checked:	false
-				childrenOnSameRow:	true
-				visible:	(method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes" ||
-							method.value == "sidikJonkman") && heterogeneityModelTerms.count == 0
-
-				DoubleField
-				{
-					label: 				""
-					name:				"optimizerInitialTau2Value"
-					defaultValue:		1
-					min: 				0
-					inclusive: 			JASP.None
-				}
-			}
-
-			CheckBox
-			{
-				name:		"optimizerMinimumTau2"
-				text:		qsTr("Minimum 𝜏²")
-				checked:	false
-				childrenOnSameRow:	true
-				visible:	(method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu") &&
-							heterogeneityModelTerms.count == 0
-
-				DoubleField
-				{
-					label: 				""
-					name: 				"optimizerMinimumTau2Value"
-					id:					optimizerMinimumTau2Value
-					defaultValue:		1e-6
-					min: 				0
-					max: 				optimizerMaximumTau2Value.value
-				}
-			}
-
-			CheckBox
-			{
-				name:		"optimizerMaximumTau2"
-				text:		qsTr("Maximum 𝜏²")
-				checked:	false
-				childrenOnSameRow:	true
-				visible:	(method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu") &&
-							heterogeneityModelTerms.count == 0
-
-				DoubleField
-				{
-					label: 				""
-					name: 				"optimizerMaximumTau2Value"
-					id:					optimizerMaximumTau2Value
-					defaultValue:		100
-					min: 				optimizerMinimumTau2Value.value
-					inclusive: 			JASP.None
-				}
-			}
-
-			CheckBox
-			{
-				name:		"optimizerMaximumIterations"
-				text:		qsTr("Maximum iterations")
-				checked:	false
-				childrenOnSameRow:	true
-				visible:	method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes" ||
-							method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu"
-
-				IntegerField
-				{
-					label: 				""
-					name: 				"optimizerMaximumIterationsValue"
-					value:				{
-						if (heterogeneityModelTerms.count == 0)
-							100
+					name:		"optimizerMethod"
+					label:		qsTr("Method") // TODO: switch default value on heterogeneityModelLink change
+					values:		{
+						if (heterogeneityModelLink.value == "log")
+							["nlminb", "BFGS", "Nelder-Mead", "uobyqa", "newuoa", "bobyqa", "nloptr", "nlm"]
 						else
-							1000
+							["constrOptim", "nlminb", "BFGS", "Nelder-Mead", "uobyqa", "newuoa", "bobyqa", "nloptr", "nlm"]
 					}
-					min: 				1
-					inclusive: 			JASP.None
+					visible:	heterogeneityModelTerms.count > 0
 				}
-			}
 
-			CheckBox
-			{
-				name:		"optimizerConvergenceTolerance"
-				text:		qsTr("Convergence tolerance")
-				checked:	false
-				childrenOnSameRow:	true
-				visible:	(method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes" ||
-							method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu") &&
-							heterogeneityModelTerms.count == 0
-
-				DoubleField
+				CheckBox
 				{
-					label: 				""
-					name: 				"optimizerConvergenceToleranceValue"
-					defaultValue:		{
-						if (method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes")
-							1e-5
-						else if (method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu")
-							1e-4
-						else
-							1
+					name:		"optimizerInitialTau2"
+					text:		qsTr("Initial 𝜏²")
+					checked:	false
+					childrenOnSameRow:	true
+					visible:	(method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes" ||
+								method.value == "sidikJonkman") && heterogeneityModelTerms.count == 0
+
+					DoubleField
+					{
+						label: 				""
+						name:				"optimizerInitialTau2Value"
+						defaultValue:		1
+						min: 				0
+						inclusive: 			JASP.None
 					}
-					min: 				0
-					inclusive: 			JASP.None
 				}
-			}
 
-			CheckBox
-			{
-				name:		"optimizerConvergenceRelativeTolerance"
-				text:		qsTr("Convergence relative tolerance")
-				checked:	false
-				childrenOnSameRow:	true
-				visible:	heterogeneityModelTerms.count > 0
-
-				DoubleField
+				CheckBox
 				{
-					label: 				""
-					name: 				"optimizerConvergenceRelativeToleranceValue"
-					defaultValue:		1e-8
-					min: 				0
-					inclusive: 			JASP.None
+					name:		"optimizerMinimumTau2"
+					text:		qsTr("Minimum 𝜏²")
+					checked:	false
+					childrenOnSameRow:	true
+					visible:	(method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu") &&
+								heterogeneityModelTerms.count == 0
+
+					DoubleField
+					{
+						label: 				""
+						name: 				"optimizerMinimumTau2Value"
+						id:					optimizerMinimumTau2Value
+						defaultValue:		1e-6
+						min: 				0
+						max: 				optimizerMaximumTau2Value.value
+					}
 				}
-			}
 
-			CheckBox
-			{
-				name:		"optimizerStepAdjustment"
-				text:		qsTr("Step adjustment")
-				checked:	false
-				childrenOnSameRow:	true
-				visible:	(method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes") &&
-							heterogeneityModelTerms.count == 0
-
-				DoubleField
+				CheckBox
 				{
-					label: 				""
-					name: 				"optimizerStepAdjustmentValue"
-					defaultValue:		1
-					min: 				0
-					inclusive: 			JASP.None
+					name:		"optimizerMaximumTau2"
+					text:		qsTr("Maximum 𝜏²")
+					checked:	false
+					childrenOnSameRow:	true
+					visible:	(method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu") &&
+								heterogeneityModelTerms.count == 0
+
+					DoubleField
+					{
+						label: 				""
+						name: 				"optimizerMaximumTau2Value"
+						id:					optimizerMaximumTau2Value
+						defaultValue:		100
+						min: 				optimizerMinimumTau2Value.value
+						inclusive: 			JASP.None
+					}
+				}
+
+				CheckBox
+				{
+					name:		"optimizerMaximumIterations"
+					text:		qsTr("Maximum iterations")
+					checked:	false
+					childrenOnSameRow:	true
+					visible:	method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes" ||
+								method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu"
+
+					IntegerField
+					{
+						label: 				""
+						name: 				"optimizerMaximumIterationsValue"
+						value:				{
+							if (heterogeneityModelTerms.count == 0)
+								100
+							else
+								1000
+						}
+						min: 				1
+						inclusive: 			JASP.None
+					}
+				}
+
+				CheckBox
+				{
+					name:		"optimizerConvergenceTolerance"
+					text:		qsTr("Convergence tolerance")
+					checked:	false
+					childrenOnSameRow:	true
+					visible:	(method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes" ||
+								method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu") &&
+								heterogeneityModelTerms.count == 0
+
+					DoubleField
+					{
+						label: 				""
+						name: 				"optimizerConvergenceToleranceValue"
+						defaultValue:		{
+							if (method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes")
+								1e-5
+							else if (method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu")
+								1e-4
+							else
+								1
+						}
+						min: 				0
+						inclusive: 			JASP.None
+					}
+				}
+
+				CheckBox
+				{
+					name:		"optimizerConvergenceRelativeTolerance"
+					text:		qsTr("Convergence relative tolerance")
+					checked:	false
+					childrenOnSameRow:	true
+					visible:	heterogeneityModelTerms.count > 0
+
+					DoubleField
+					{
+						label: 				""
+						name: 				"optimizerConvergenceRelativeToleranceValue"
+						defaultValue:		1e-8
+						min: 				0
+						inclusive: 			JASP.None
+					}
+				}
+
+				CheckBox
+				{
+					name:		"optimizerStepAdjustment"
+					text:		qsTr("Step adjustment")
+					checked:	false
+					childrenOnSameRow:	true
+					visible:	(method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes") &&
+								heterogeneityModelTerms.count == 0
+
+					DoubleField
+					{
+						label: 				""
+						name: 				"optimizerStepAdjustmentValue"
+						defaultValue:		1
+						min: 				0
+						inclusive: 			JASP.None
+					}
 				}
 			}
 		}
