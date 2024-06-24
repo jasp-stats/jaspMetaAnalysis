@@ -23,22 +23,91 @@ import JASP				1.0
 
 Section
 {
-	title: qsTr("Diagnostics")
+	title:						qsTr("Diagnostics")
+	property string module:		"metaAnalysis"
+	columns:					1
+
 	Group
 	{
-		title: qsTr("Plots")
-		CheckBox { name: "trimFillAnalysis";			text: qsTr("Trim-fill analysis")	}
-		CheckBox { name: "profilePlot";	text: qsTr("Profile plot")			}
-		CheckBox
+		columns:	2
+
+		Group
 		{
-			name: "diagnosticPlot"; text: qsTr("Diagnostic plots")
-			CheckBox { name: "diagnosticQqPlot"; text: qsTr("Q-Q plot standardized residuals"); checked: true }
+			CheckBox
+			{
+				name:		"diagnosticsVarianceInflationFactor"
+				text:		qsTr("Variace inflation factor")
+				Layout.preferredWidth: 300 * jaspTheme.uiScale
+				enabled:	predictors.count > 0
+
+				CheckBox
+				{
+					name:		"diagnosticsVarianceInflationFactorAggregate"
+					text:		qsTr("Aggregate by terms")
+					checked:	true
+				}
+			}
+
+			CheckBox
+			{
+				name:		"diagnosticsCasewiseDiagnostics"
+				text:		qsTr("Casewise diagnostics")
+
+				CheckBox
+				{
+					name:		"diagnosticsCasewiseDiagnosticsShowInfluentialOnly"
+					text:		qsTr("Show influential only")
+				}
+
+				CheckBox
+				{
+					name:		"diagnosticsCasewiseDiagnosticsIncludePredictors"
+					text:		qsTr("Include predictors")
+				}
+
+				CheckBox
+				{
+					name:		"diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"
+					text:		qsTr("Difference in coefficients")
+				}
+
+				CheckBox
+				{
+					name:		"diagnosticsCasewiseDiagnosticsExportToDataset"
+					text:		qsTr("Export to dataset")
+
+					CheckBox
+					{
+						name:		"diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"
+						text:		qsTr("Influential indicator only")
+						checked:	true
+					}
+				}
+
+				CheckBox
+				{
+					name:		"diagnosticsCasewiseDiagnosticsRerunWithoutInfluentialCases"
+					text:		qsTr("Rerun without influential cases")
+					visible:	false
+				}
+			}
 		}
-	}
-	Group
-	{
-		title: qsTr("Robustness")
-		CheckBox { name: "failSafeN";			text: qsTr("Fail-safe N")			}
-		CheckBox { name: "casewiseDiagnostics";	text: qsTr("Casewise diagnostics")	}
+
+		Group
+		{
+			title:		qsTr("Plots")
+
+			CheckBox
+			{
+				name:		"diagnosticsPlotsProfileLikelihood"
+				text:		qsTr("Profile likelihood")
+			}
+
+			CheckBox
+			{
+				name:		"diagnosticsPlotsBaujat"
+				text:		qsTr("Baujat")
+			}
+		}
 	}
 }

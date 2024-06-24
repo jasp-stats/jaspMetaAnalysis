@@ -23,72 +23,123 @@ import JASP				1.0
 
 Section
 {
-	title: qsTr("Statistics")
-	property string module:	"metaAnalysis"
+	title:						qsTr("Statistics")
+	columns: 					2
+	property string module:		"metaAnalysis"
 
 	Group
 	{
-		title: qsTr("Regression Coefficients")
+		title:		qsTr("Heterogeneity")
+		columns:	2
+		enabled:	method.value != "fixedEffects" && method.value != "equalEffects"
+
 		CheckBox
 		{
-			name: "coefficientEstimate";
-			text: qsTr("Estimates");
-			checked: true
-			onClicked: { if (!checked && estimatesConfInt.checked) estimatesConfInt.click() }
-			CheckBox
+			text:		qsTr("𝜏")
+			name:		"heterogeneityTau"
+			checked:	true
+		}
+
+		CheckBox
+		{
+			text:		qsTr("𝜏²")
+			name:		"heterogeneityTau2"
+			checked:	true
+		}
+
+		CheckBox
+		{
+			text:		qsTr("I²")
+			name:		"heterogeneityI2"
+			checked:	false
+		}
+
+		CheckBox
+		{
+			text:		qsTr("H²")
+			name:		"heterogeneityH2"
+			checked:	false
+		}
+	}
+
+	Group
+	{
+		title:		qsTr("Meta-Regression")
+		enabled:	predictors.count > 0
+
+		CheckBox
+		{
+			name:		"metaregressionTermTests"
+			text:		qsTr("Term tests")
+			checked:	true
+		}
+
+		CheckBox
+		{
+			name:		"metaregressionCoefficientEstimates"
+			text:		qsTr("Coefficient estimates")
+			checked:	true
+		}
+
+		CheckBox
+		{
+			name:		"metaregressionCoefficientCorrelationMatrix"
+			text:		qsTr("Coefficient correlation matrix")
+			checked:	false
+		}
+	}
+
+	Group
+	{
+		CheckBox
+		{
+			name:				"confidenceIntervals"
+			text:				qsTr("Confidence intervals")
+			checked:			true
+			childrenOnSameRow:	true
+
+			CIField
 			{
-				id: estimatesConfInt
-				name: "coefficientCi"; text: qsTr("Confidence intervals")
-				CIField { name: "coefficientCiLevel"; label: qsTr("Interval") }
+				name:		"confidenceIntervalsLevel"
 			}
 		}
-		DropDown { name: "estimateTest"; label: qsTr("Test"); values: [ "z", "knha"]; }
-		CheckBox { name: "covarianceMatrix"; text: qsTr("Covariance matrix") }
 
-	}
-	Group
-	{
-		title: qsTr("Model Fit")
-		CheckBox { name: "fitMeasure";				text: qsTr("Fit measures") }
 		CheckBox
 		{
-			id:			forestPlot
-			name: 		"forestPlot"
-			text: 		qsTr("Forest plot")
-			
-			CheckBox
-			{
-				name:		"forestPlotLabel"
-				text:		qsTr("Show labels")
-				checked:	true
-				enabled: 	forestPlot.checked	
-				visible:	module == "cochrane"
-			}
+			text:		qsTr("Prediction intervals")
+			name:		"predictionIntervals"
+			checked:	true
+		}
 
-			DropDown
-			{
-				name:			"forestPlotOrder"
-				label:			qsTr("Ordering")
-				enabled: 		forestPlot.checked
-				visible:		module == "cochrane"
-				currentIndex:	1
-				values: [
-					{ label: qsTr("Year (ascending)")			, value: "yearAscending"			},
-					{ label: qsTr("Year (descending)")			, value: "yearDescending"			},
-					{ label: qsTr("Effect size (ascending)")	, value: "effectSizeAscending"		},
-					{ label: qsTr("Effect size (descending)")	, value: "effectSizeDescending"		}
+		DropDown
+		{//TODO: make shorter or across both rows?
+			name:			"transformEffectSize"
+			label:			qsTr("Transform effect size")
+			setLabelAbove:	true
+			values:			[
+					{ label: qsTr("None")								, value: "none"							},  // NULL
+					{ label: qsTr("Fisher's z to r")					, value: "fishersZToCorrelation"		},  // transf.ztor
+					{ label: qsTr("Exponential")						, value: "exponential"					},  // exp
+					{ label: qsTr("Log odds to proportions")			, value: "logOddsToProportions"			},  // transf.logit
+					{ label: qsTr("Log odds to SMD (normal)")			, value: "logOddsToSmdNormal"			},  // transf.lnortod.norm
+					{ label: qsTr("Log odds to SMD (logistic)")			, value: "logOddsToSmdLogistic"			},  // transf.lnortod.logis
+					{ label: qsTr("SMD to log odds (normal)")			, value: "smdToLogOddsNormal"			},  // transf.dtolnor.norm
+					{ label: qsTr("SMD to log odds (logistic)")			, value: "smdToLogOddsLogistic"			},  // transf.dtolnor.logis
+					{ label: qsTr("Hakstian & Whalen inverse α")		, value: "hakstianAndWhalenInverseAlpha"},  // transf.iahw 
+					{ label: qsTr("Bonett inverse α")					, value: "bonettInverseAlpha"			},  // transf.iabt
+					{ label: qsTr("Z to R²")							, value: "zToR2"						}, 	// transf.ztor2
+					{ label: qsTr("SMD to Cohen's U₁")					, value: "smdToCohensU1"				},  // transf.dtou1
+					{ label: qsTr("SMD to Cohen's U₂")					, value: "smdToCohensU2"				},  // transf.dtou2
+					{ label: qsTr("SMD to Cohen's U₃")					, value: "smdToCohensU3"				},  // transf.dtou3
+					{ label: qsTr("SMD to CLES, Pr(supperiority)")		, value: "smdToCles"					},  // transf.dtocles
 				]
-			}
-		
 		}
-		CheckBox { name: "funnelPlot";				text: qsTr("Funnel plot") }
-		CheckBox { name: "funnelPlotRankTestAsymmetry";			text: qsTr("Rank test for funnel plot asymmetry") }
-		CheckBox { name: "funnelPlotRegressionTestAsymmetry"; text: qsTr("Regression test for funnel plot asymmetry") }
 	}
 
-	Group
+	CheckBox
 	{
-		title: qsTr("Residuals Model")
-		CheckBox { name: "residualParameter"; text: qsTr("Residuals parameters"); checked: true;}
+		name:		"fitMeasures"
+		text:		qsTr("Fit measures")
 	}
+
 }
