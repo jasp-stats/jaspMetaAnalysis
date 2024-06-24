@@ -907,17 +907,18 @@
   } else {
 
     # create the output container
-    fitContainer <- createJaspState()
-    fitContainer$dependOn(.maDependencies)
-    jaspResults[["diagnosticsResults"]] <- fitContainer
+    diagnosticsResults <- createJaspState()
+    diagnosticsResults$dependOn(.maDependencies)
+    jaspResults[["diagnosticsResults"]] <- diagnosticsResults
 
-    # extract results
+    # compute the results
     influenceResults     <- influence(fit)
     influenceResultsDfbs <- data.frame(influenceResults$dfbs)
     influenceResultsInf  <- data.frame(influenceResults$inf)
     influenceResultsInf$tau.del <- sqrt(influenceResultsInf$tau2.del)
     influenceResultsInf$inf[influenceResultsInf$inf == "*"] <- "Yes"
 
+    # store the results
     jaspResults[["diagnosticsResults"]]$object <- list(
       "influenceResultsDfbs" = influenceResultsDfbs,
       "influenceResultsInf"  = influenceResultsInf
@@ -1118,13 +1119,30 @@
   baujatPlot$position <- 9
   jaspResults[["baujatPlot"]] <- baujatPlot
 
+  # extract precomputed baujat data if done before:
+  if (!is.null(jaspResults[["baujatResults"]])) {
+
+    dfBaujat <- jaspResults[["baujatResults"]]$object
+
+  } else {
+
+    # create the output container
+    baujatResults <- createJaspState()
+    baujatResults$dependOn(.maDependencies)
+    jaspResults[["baujatResults"]] <- baujatResults
+
+    # compute the results and save them in the container
+    dfBaujat <- try(.maSuppressPlot(metafor::baujat(fit)))
+
+    # store in the container
+    jaspResults[["baujatResults"]]$object <- dfBaujat
+  }
+
+
   # if (.maIsMetaregressionHeterogeneity(options)) {
   #   baujatPlot$setError(gettext("Baujat plot is not available for models that contain meta-regression on heterogeneity."))
   #   return()
   # }
-
-  # obtain Baujat plot
-  dfBaujat <- try(.maSuppressPlot(metafor::baujat(fit)))
 
   if (jaspBase::isTryError(dfBaujat)) {
     dfBaujat$setError(dfBaujat)
@@ -1132,7 +1150,7 @@
   }
 
   if (options[["studyLabels"]] != "")
-    dfBaujat$label <- dataset[[options[["studyLabels"]]]]
+    dfBaujat$label <- as.character(dataset[[options[["studyLabels"]]]])
 
   xTicks <- jaspGraphs::getPrettyAxisBreaks(range(dfBaujat$x))
   yTicks <- jaspGraphs::getPrettyAxisBreaks(range(dfBaujat$y))
@@ -1151,11 +1169,11 @@
   # create plot
   plotOut <- do.call(ggplot2::ggplot, geomCall) +
     jaspGraphs::geom_point(
-      size = if (options[["studyLabels" != ""]]) 2 else 3
+      size = if (options[["studyLabels"]] != "") 2 else 3
     )
 
   if (options[["studyLabels"]] != "")
-    plotOut + ggplot2::geom_text(hjust = 0, vjust = 0)
+    plotOut <- plotOut + ggplot2::geom_text(hjust = 0, vjust = 0)
 
   plotOut <- plotOut +
     ggplot2::labs(x = gettext("Squared Pearson Residual"), y = gettext("Influence on Fitted Value")) +
