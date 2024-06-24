@@ -28,6 +28,10 @@
 # Generic
 # - allow different covariates factoring across all settings
 
+# TODO fix QML
+# - remove selected variables in estimated marginal means when removed from the model components
+# - check that the variables types are always propagated throughout the options
+
 .ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # fit the model
@@ -1261,7 +1265,6 @@
 
   return(varianceInflationContainer)
 }
-
 
 # help compute functions
 .maComputePooledEffect             <- function(fit, options) {
