@@ -45,6 +45,14 @@ Description
 
 	Analysis
 	{
+		menu:			qsTr("Meta-Analysis (Multilevel/Multivariate)")
+		title:			qsTr("Classical Meta-Analysis (Multilevel/Multivariate)")
+		func:			"ClassicalMetaAnalysisMultilevelMultivariate"
+		requiresData:	true
+	}
+
+	Analysis
+	{
 		menu:			qsTr("Prediction Model Performance")
 		title:			qsTr("Classical Prediction Model Performance")
 		func:			"ClassicalPredictionPerformance"

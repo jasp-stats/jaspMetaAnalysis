@@ -31,7 +31,6 @@ Section
 	property alias effectSizeModelTermsCount:			effectSizeModelTerms.count
 	property alias heterogeneityModelTermsCount:		heterogeneityModelTerms.count
 	property alias heterogeneityModelLinkValue:			heterogeneityModelLink.value
-
 	
 
 	Group
@@ -70,7 +69,8 @@ Section
 	Group
 	{
 		title:			qsTr("Heterogeneity model")
-		columns:	2
+		visible:		module =="metaAnalysis"
+		columns:		2
 
 		VariablesForm
 		{

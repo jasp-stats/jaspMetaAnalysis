@@ -49,7 +49,9 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "optimizerMinimumTau2", "optimizerMinimumTau2Value", "optimizerMaximumTau2", "optimizerMaximumTau2Value",
   "optimizerMaximumIterations", "optimizerMaximumIterationsValue", "optimizerConvergenceTolerance", "optimizerConvergenceToleranceValue",
   "optimizerConvergenceRelativeTolerance", "optimizerConvergenceRelativeToleranceValue", "optimizerStepAdjustment", "optimizerStepAdjustmentValue",
-  "diagnosticsCasewiseDiagnosticsRerunWithoutInfluentialCases"
+  "diagnosticsCasewiseDiagnosticsRerunWithoutInfluentialCases",
+  # multilevel/multivariate specific
+  "randomEffects", "randomEffectsSpecification"
 )
 .maForestPlotDependencies <- c(
   .maDependencies, "transformEffectSize", "confidenceIntervalsLevel",
