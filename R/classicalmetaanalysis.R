@@ -138,12 +138,11 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   # forest plotting data
   additionalVariables <- unique(c(
+    if (options[["studyLabels"]] != "") options[["studyLabels"]],
     if (length(options[["forestPlotStudyInformationSelectedVariables"]]) > 0) unlist(options[["forestPlotStudyInformationSelectedVariables"]]),
     if (options[["forestPlotMappingColor"]] != "") options[["forestPlotMappingColor"]],
     if (options[["forestPlotMappingShape"]] != "") options[["forestPlotMappingShape"]],
-    if (options[["forestPlotStudyInformationOrderBy"]] != "")    options[["forestPlotStudyInformationOrderBy"]],
-    if (options[["diagnosticsCasewiseDiagnosticsIncludeLabel"]]) options[["diagnosticsCasewiseDiagnosticsIncludeLabelVariable"]],
-    if (options[["diagnosticsPlotsBaujatIncludeLabel"]])         options[["diagnosticsPlotsBaujatIncludeLabelVariable"]]
+    if (options[["forestPlotStudyInformationOrderBy"]] != "")    options[["forestPlotStudyInformationOrderBy"]]
   ))
   # remove variables already specified in the model
   additionalVariables <- setdiff(
