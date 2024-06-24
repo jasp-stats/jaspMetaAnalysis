@@ -15,6 +15,12 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+# This analysis runs
+# - classical meta-analysis (using rma.uni)
+# - classical multilevel/multivariate meta-analysis (using rma.mv; custom function prefix .mamm)
+# - classical binimal meta-analysis (using rma.; custom function prefix .mab)
+
+
 # TODO:
 # Estimated Marginal Means
 # - add variable interactions
@@ -46,6 +52,8 @@
   # model summary
   .maResidualHeterogeneityTable(jaspResults, dataset, options)
   .maModeratorsTable(jaspResults, dataset, options)
+  if (.maIsMultilevelMultivariate(options))
+    .mammRandomEstimatesTable(jaspResults, dataset, options)
   .maPooledEstimatesTable(jaspResults, dataset, options)
   if (options[["fitMeasures"]])
     .maFitMeasuresTable(jaspResults, dataset, options)
@@ -129,15 +137,33 @@
   jaspResults[[objectName]] <- fitContainer
 
   # specify the effect size and outcome
-  rmaInput <- list(
-    yi   = as.name(options[["effectSize"]]),
-    sei  = as.name(options[["effectSizeStandardError"]]),
-    data = dataset
-  )
+  if (options[["module"]] == "metaAnalysis") {
+    rmaInput <- list(
+      yi   = as.name(options[["effectSize"]]),
+      sei  = as.name(options[["effectSizeStandardError"]]),
+      data = dataset
+    )
+  } else if (options[["module"]] == "metaAnalysisMultilevelMultivariate") {
+    # TODO: extend to covariance matrices
+    rmaInput <- list(
+      yi   = as.name(options[["effectSize"]]),
+      V    = as.name("samplingVariance"), # precomputed on data load
+      data = dataset
+    )
+  }
 
   # add formulas if specified
   rmaInput$mods  <- .maGetFormula(options[["effectSizeModelTerms"]], options[["effectSizeModelIncludeIntercept"]])
   rmaInput$scale <- .maGetFormula(options[["heterogeneityModelTerms"]], options[["heterogeneityModelIncludeIntercept"]])
+
+  # add random effects
+  if (.maIsMultilevelMultivariate(options)) {
+    randomFormulaList <- .mammGetRandomFormulaList(options)
+    if (length(randomFormulaList) != 0) {
+      rmaInput$random <- randomFormulaList
+      rmaInput$struct <- do.call(c, sapply(randomFormulaList, attr, "structure"))
+    }
+  }
 
   # specify method and fixed effect terms test
   rmaInput$method <- .maGetMethodOptions(options)
@@ -150,7 +176,7 @@
   if (options[["fixParametersWeights"]])
     rmaInput$weights <- as.name(options[["fixParametersWeightsVariable"]])
   if (options[["fixParametersTau2"]])
-    rmaInput$tau2 <- .maGetFixedTau2Options(options)
+    rmaInput$tau2 <- .maGetFixedTau2Options(options) # TODO: add multiple possible fixed taus
 
   # add link function if needed
   if (.maIsMetaregressionHeterogeneity(options))
@@ -165,7 +191,12 @@
   rmaInput$level <- 100 * options[["confidenceIntervalsLevel"]]
 
   ### fit the model
-  fit <- try(do.call(metafor::rma, rmaInput))
+  if (options[["module"]] == "metaAnalysis") {
+    fit <- try(do.call(metafor::rma, rmaInput))
+  } else if (options[["module"]] == "metaAnalysisMultilevelMultivariate") {
+    fit <- try(do.call(metafor::rma.mv, rmaInput))
+  }
+
 
   # add clustering if specified
   if (options[["clustering"]] != "") {
@@ -179,12 +210,22 @@
     fitClustered <- NULL
   }
 
+
+  # add information about dropped levels to the fit
+  if (.maIsMultilevelMultivariate(options)) {
+    attr(fit, "skipped") <- attr(randomFormulaList, "skipped")
+    if (options[["clustering"]] != "") {
+      attr(fitClustered, "skipped") <- attr(randomFormulaList, "skipped")
+    }
+  }
+
+
   # return the results
   jaspResults[[objectName]]$object <- list(
     fit          = fit,
     fitClustered = fitClustered
   )
-
+  saveRDS(fit, file = "C:/JASP/fit.RDS")
   return()
 }
 .maRemoveInfluentialObservations <- function(jaspResults, dataset, options) {
@@ -329,7 +370,7 @@
 
   # pooled estimates
   pooledEstimatesTable          <- createJaspTable(gettext("Pooled Estimates"))
-  pooledEstimatesTable$position <- 3
+  pooledEstimatesTable$position <- 4
   pooledEstimatesTable$dependOn(c("heterogeneityTau", "heterogeneityTau2", "heterogeneityI2", "heterogeneityH2",
                                   "confidenceIntervals", "confidenceIntervalsLevel", "predictionIntervals", "transformEffectSize"))
   modelSummaryContainer[["pooledEstimatesTable"]] <- pooledEstimatesTable
@@ -357,7 +398,7 @@
   pooledEstimatesTable$addRows(pooledEffect)
 
   # pooled heterogeneity
-  if (!.maGetMethodOptions(options) %in% c("EE", "FE")) {
+  if (!.maGetMethodOptions(options) %in% c("EE", "FE") && !.maIsMultilevelMultivariate(options)) {
 
     # requires non-clustered fit
     pooledHeterogeneity <- .maComputePooledHeterogeneity(.maExtractFit(jaspResults, options, nonClustered = TRUE), options)
@@ -398,7 +439,7 @@
   fitMeasuresTable$addColumnInfo(name = "BIC",   title = gettext("BIC"),      type = "number")
   fitMeasuresTable$addColumnInfo(name = "AICc",  title = gettext("AICc"),     type = "number")
 
-  if (.maIsMetaregressionEffectSize(options))
+  if (.maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options))
     fitMeasuresTable$addColumnInfo(name = "R2",  title = gettext("R\U00B2"),   type = "number")
 
   # stop on error
@@ -407,7 +448,7 @@
 
   fitSummary <- cbind("model" = colnames(fit[["fit.stats"]]), data.frame(t(fit[["fit.stats"]])))
 
-  if (.maIsMetaregressionEffectSize(options))
+  if (.maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options))
     fitSummary$R2 <- fit[["R2"]]
 
   fitMeasuresTable$setData(fitSummary)
@@ -1291,8 +1332,8 @@
   # to data.frame
   predictedEffect <- data.frame(predictedEffect)
 
-  # add empty prediction interval for FE and EE
-  if (.maGetMethodOptions(options) %in% c("FE", "EE")) {
+  # add empty prediction interval for FE and EE, or models without
+  if (!"pi.lb" %in% colnames(predictedEffect)) {
     predictedEffect$pi.lb <- NA
     predictedEffect$pi.ub <- NA
   }
@@ -1442,6 +1483,7 @@
     )
 
     confIntHeterogeneity <- confIntHeterogeneity[heterogeneityShow,,drop = FALSE]
+
   }
 
   if (!options[["confidenceIntervals"]])
@@ -2048,15 +2090,36 @@
 }
 .maMakeMetaforCallText             <- function(options) {
 
-  rmaInput <- list(
-    yi   = as.name(options[["effectSize"]]),
-    sei  = as.name(options[["effectSizeStandardError"]]),
-    data = as.name("dataset")
-  )
+  if (options[["module"]] == "metaAnalysis") {
+    rmaInput <- list(
+      yi   = as.name(options[["effectSize"]]),
+      sei  = as.name(options[["effectSizeStandardError"]]),
+      data = as.name("dataset")
+    )
+  } else if (options[["module"]] == "metaAnalysisMultilevelMultivariate") {
+    # TODO: extend to covariance matrices
+    rmaInput <- list(
+      yi   = as.name(options[["effectSize"]]),
+      V    = paste0(options[["effectSizeStandardError"]], "^2"), # precomputed on data load
+      data = as.name("dataset")
+    )
+  }
 
   # add formulas if specified
   rmaInput$mods  <- .maGetFormula(options[["effectSizeModelTerms"]], options[["effectSizeModelIncludeIntercept"]])
   rmaInput$scale <- .maGetFormula(options[["heterogeneityModelTerms"]], options[["heterogeneityModelIncludeIntercept"]])
+
+  # add random effects
+  if (.maIsMultilevelMultivariate(options)) {
+    randomFormulaList <- .mammGetRandomFormulaList(options)
+    if (length(randomFormulaList) != 0) {
+      struct <- do.call(c, sapply(randomFormulaList, attr, "structure"))
+      if (length(randomFormulaList) > 1)
+        randomFormulaList <- paste0("list(\n\t\t", paste0("'", names(randomFormulaList), "' = ", randomFormulaList, collapse = "\n\t\t"),")")
+      rmaInput$random <- randomFormulaList
+      rmaInput$struct <- struct
+    }
+  }
 
   # specify method and fixed effect terms test
   rmaInput$method <- paste0("'", .maGetMethodOptions(options), "'")
@@ -2151,6 +2214,9 @@
 }
 .maIsMetaregressionFtest          <- function(options) {
   return(options[["fixedEffectTest"]] %in% c("knha", "t"))
+}
+.maIsMultilevelMultivariate       <- function(options) {
+  return(options[["module"]] == "metaAnalysisMultilevelMultivariate")
 }
 .maCheckIsPossibleOptions         <- function(options) {
 
@@ -2585,6 +2651,9 @@
 
   if (!is.null(attr(dataset, "influentialObservations")) && attr(dataset, "influentialObservations") > 0)
     messages <- c(messages, gettextf("%1$i influential observations were detected and removed.", attr(dataset, "influentialObservations")))
+
+  if (.maIsMultilevelMultivariate(options) && any(attr(fit, "skipped")))
+    messages <- c(messages, gettextf("The random component %1$s was not completely specified and was skipped.", paste0(which(attr(fit, "skipped")), collapse = " and ")))
 
   return(messages)
 }

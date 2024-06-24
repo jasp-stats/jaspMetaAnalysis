@@ -91,6 +91,7 @@ Section
 	{
 		title:		qsTr("Heterogeneity")
 		enabled:	heterogeneityModelTerms.count > 0
+		visible:	module == "metaAnalysis"
 
 		VariablesForm
 		{
