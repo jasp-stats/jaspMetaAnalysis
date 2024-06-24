@@ -547,7 +547,7 @@
         leftPanelStudyDataColored <- data.frame(
           x         = leftPanelStudyInformation$x[leftPanelStudyInformation$value == options[["forestPlotMappingColor"]]],
           y         = dfForrest$y,
-          label     = dfForrest[[options[["forestPlotMappingColor"]]]],
+          label     = as.character(dfForrest[[options[["forestPlotMappingColor"]]]]),
           alignment = leftPanelStudyInformation$alignment[leftPanelStudyInformation$value == options[["forestPlotMappingColor"]]]
         )
         plotLeft <- plotLeft + ggplot2::geom_text(
@@ -569,7 +569,7 @@
           data.frame(
             x         = leftPanelStudyInformation$x[leftPanelStudyInformation$value == variable],
             y         = dfForrest$y,
-            label     = dfForrest[[variable]],
+            label     = as.character(dfForrest[[variable]]),
             alignment = leftPanelStudyInformation$alignment[leftPanelStudyInformation$value == variable]
           )
         }))
@@ -805,27 +805,26 @@
   }
 
   if (length(plotsWidths) == 1) {
+
     plotOut <- plotForest
     attr(plotOut, "isPanel") <- FALSE
     attr(plotOut, "rows")    <- tempRow + max(dfForrest$row)
+
   } else {
-    plotsCall <- list()
+
+    plotOut <- list()
     if (!is.null(plotLeft))
-      plotsCall <-  c(plotsCall, list(plotLeft))
-    plotsCall <-  c(plotsCall, list(plotForest))
+      plotOut <-  c(plotOut, list(plotLeft))
+    plotOut <-  c(plotOut, list(plotForest))
     if (!is.null(plotRight))
-      plotsCall <- c(plotsCall, list(plotRight))
-    plotsCall$widths <- plotsWidths
-    plotsCall$nrow   <- 1
-    plotOut <- do.call(gridExtra::arrangeGrob, plotsCall)
-#    plotOut <- jaspGraphsPlot$new(subplots = list(
-#      if (!is.null(plotLeft)) plotLeft,
-#      plotForest,
-#      if (!is.null(plotRight)) plotRight),
-#      layout = matrix(1:length(plotsWidths), nrow = 1), widths = plotsWidths)
+      plotOut <- c(plotOut, list(plotRight))
+
     attr(plotOut, "isPanel")     <- TRUE
     attr(plotOut, "panelRatio")  <- panelRatio
     attr(plotOut, "rows")        <- tempRow + if(!is.null(dfForrest)) max(dfForrest$row) else 0
+    attr(plotOut, "widths")      <- plotsWidths
+    attr(plotOut, "layout")      <- matrix(1:length(plotOut), nrow = 1, ncol = length(plotOut), byrow = TRUE)
+
   }
 
   return(plotOut)

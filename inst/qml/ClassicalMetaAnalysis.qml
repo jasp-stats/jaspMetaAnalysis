@@ -26,7 +26,7 @@ Form
 {
 	VariablesForm
 	{
-		preferredHeight: 400 * preferencesModel.uiScale
+		preferredHeight: 450 * preferencesModel.uiScale
 
 		AvailableVariablesList
 		{
@@ -104,6 +104,14 @@ Form
 			name:				"clustering"
 			id:					clustering
 			title:				qsTr("Clustering")
+			singleVariable:		true
+			allowedColumns:		["nominal"]
+		}
+
+		AssignedVariablesList
+		{
+			name:				"studyLabels"
+			title:				qsTr("Study Labels")
 			singleVariable:		true
 			allowedColumns:		["nominal"]
 		}
@@ -803,7 +811,7 @@ Form
 				{
 					name:			"forestPlotRelativeSizeLeftPanel"
 					text:			qsTr("Left panel")
-					defaultValue:	1
+					defaultValue:	0.5
 					min:			0
 					inclusive: 		JASP.None
 				}
@@ -821,7 +829,7 @@ Form
 				{
 					name:			"forestPlotRelativeSizeRightPanel"
 					text:			qsTr("Right panel")
-					defaultValue:	1
+					defaultValue:	0.5
 					min:			0
 					inclusive: 		JASP.None
 				}
@@ -1167,18 +1175,6 @@ Form
 
 					CheckBox
 					{
-						name:		"diagnosticsCasewiseDiagnosticsIncludeLabel"
-						text:		qsTr("Include label")
-						childrenOnSameRow:	true
-
-						DropDown
-						{
-							name:		"diagnosticsCasewiseDiagnosticsIncludeLabelVariable"
-						}
-					}
-
-					CheckBox
-					{
 						name:		"diagnosticsCasewiseDiagnosticsIncludePredictors"
 						text:		qsTr("Include predictors")
 					}
@@ -1225,18 +1221,6 @@ Form
 				{
 					name:		"diagnosticsPlotsBaujat"
 					text:		qsTr("Baujat")
-
-					CheckBox
-					{
-						name:		"diagnosticsPlotsBaujatIncludeLabel"
-						text:		qsTr("Include label")
-						childrenOnSameRow:	true
-
-						DropDown
-						{
-							name:		"diagnosticsPlotsBaujatIncludeLabelVariable"
-						}
-					}
 				}
 			}
 		}

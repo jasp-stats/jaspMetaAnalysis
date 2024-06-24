@@ -727,7 +727,7 @@
   # try execute!
   plotOut <- try(.maMakeTheUltimateForestPlot(fit, dataset, options))
 
-  if (jaspBase::isTryError(plotOut)) {
+  if (inherits(plotOut, "try-error")) {
     forestPlot <- createJaspPlot(title = gettext("Forest Plot"))
     forestPlot$position <- 4
     forestPlot$dependOn(.maForestPlotDependencies)
@@ -743,8 +743,6 @@
   else
     width <- 500 + 500 * attr(plotOut, "panelRatio")
 
-  attr(plotOut, "nCharsLeft") + attr(plotOut, "nCharsRight")
-
   forestPlot <- createJaspPlot(
     title  = gettext("Forest Plot"),
     width  = width,
@@ -752,8 +750,21 @@
   )
   forestPlot$position <- 4
   forestPlot$dependOn(.maForestPlotDependencies)
-  forestPlot$plotObject <- plotOut
+
+  if (!attr(plotOut, "isPanel")) {
+    forestPlot$plotObject <- plotOut
+  } else {
+    plotOut <- jaspGraphs:::jaspGraphsPlot$new(
+      subplots = plotOut,
+      layout   = attr(plotOut, "layout"),
+      heights  = 1,
+      widths   = attr(plotOut, "widths")
+    )
+    forestPlot$plotObject <- plotOut
+  }
+
   jaspResults[["forestPlot"]] <- forestPlot
+
 
   return()
 }
@@ -920,9 +931,8 @@
   casewiseDiagnosticsTable          <- createJaspTable(gettext("Casewise Diagnostics Table"))
   casewiseDiagnosticsTable$position <- 7
   casewiseDiagnosticsTable$dependOn(c(.maDependencies, "diagnosticsCasewiseDiagnostics", "diagnosticsCasewiseDiagnosticsShowInfluentialOnly",
-                                      "diagnosticsCasewiseDiagnosticsIncludeLabel", "diagnosticsCasewiseDiagnosticsIncludeLabelVariable",
-                                      "diagnosticsCasewiseDiagnosticsIncludePredictors",
-                                      "diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"))
+                                      "diagnosticsCasewiseDiagnosticsIncludePredictors", "diagnosticsCasewiseDiagnosticsDifferenceInCoefficients",
+                                      "studyLabels"))
   jaspResults[["casewiseDiagnosticsTable"]] <- casewiseDiagnosticsTable
 
   if (options[["diagnosticsCasewiseDiagnosticsShowInfluentialOnly"]] && sum(influenceResultsInf$inf != "Yes") == 0) {
@@ -930,8 +940,8 @@
     return()
   }
 
-  if (options[["diagnosticsCasewiseDiagnosticsIncludeLabel"]]) {
-    influenceResultsInf$label <- dataset[[options[["diagnosticsCasewiseDiagnosticsIncludeLabelVariable"]]]]
+  if (options[["studyLabels"]] != "") {
+    influenceResultsInf$label <- dataset[[options[["studyLabels"]]]]
     casewiseDiagnosticsTable$addColumnInfo(name = "label", type  = "string", title = gettext("Label"))
   }
 
@@ -1104,7 +1114,7 @@
 
   # create plot
   baujatPlot <- createJaspPlot(title = gettext("Baujat Plot"), width = 400, height = 320)
-  baujatPlot$dependOn(c(.maDependencies, "diagnosticsPlotsBaujat", "diagnosticsPlotsBaujatIncludeLabel", "diagnosticsPlotsBaujatIncludeLabelVariable"))
+  baujatPlot$dependOn(c(.maDependencies, "diagnosticsPlotsBaujat", "studyLabels"))
   baujatPlot$position <- 9
   jaspResults[["baujatPlot"]] <- baujatPlot
 
@@ -1120,8 +1130,9 @@
     dfBaujat$setError(dfBaujat)
     return()
   }
-  if (options[["diagnosticsPlotsBaujatIncludeLabel"]])
-    dfBaujat$label <- dataset[[options[["diagnosticsPlotsBaujatIncludeLabelVariable"]]]]
+
+  if (options[["studyLabels"]] != "")
+    dfBaujat$label <- dataset[[options[["studyLabels"]]]]
 
   xTicks <- jaspGraphs::getPrettyAxisBreaks(range(dfBaujat$x))
   yTicks <- jaspGraphs::getPrettyAxisBreaks(range(dfBaujat$y))
@@ -1130,7 +1141,7 @@
   aesCall <- list(
     x     = as.name("x"),
     y     = as.name("y"),
-    label = if (options[["diagnosticsPlotsBaujatIncludeLabel"]]) as.name("label")
+    label = if (options[["studyLabels"]] != "") as.name("label")
   )
   geomCall <- list(
     data    = dfBaujat,
@@ -1140,10 +1151,10 @@
   # create plot
   plotOut <- do.call(ggplot2::ggplot, geomCall) +
     jaspGraphs::geom_point(
-      size = if (options[["diagnosticsPlotsBaujatIncludeLabel"]]) 2 else 3
+      size = if (options[["studyLabels" != ""]]) 2 else 3
     )
 
-  if (options[["diagnosticsPlotsBaujatIncludeLabel"]])
+  if (options[["studyLabels"]] != "")
     plotOut + ggplot2::geom_text(hjust = 0, vjust = 0)
 
   plotOut <- plotOut +

@@ -29,7 +29,8 @@ Imports:
   metamisc (>= 0.2.5),
   ggmcmc,
   pema,
-  clubSandwich
+  clubSandwich,
+  patchwork
 Remotes:
   jasp-stats/jaspBase,
   jasp-stats/jaspGraphs
