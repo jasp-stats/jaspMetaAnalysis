@@ -161,7 +161,7 @@
     randomFormulaList <- .mammGetRandomFormulaList(options)
     if (length(randomFormulaList) != 0) {
       rmaInput$random <- randomFormulaList
-      rmaInput$struct <- do.call(c, sapply(randomFormulaList, attr, "structure"))
+      rmaInput$struct <- do.call(c, lapply(randomFormulaList, attr, which = "structure"))
     }
   }
 
@@ -2117,6 +2117,8 @@
       if (length(randomFormulaList) > 1)
         randomFormulaList <- paste0("list(\n\t\t", paste0("'", names(randomFormulaList), "' = ", randomFormulaList, collapse = "\n\t\t"),")")
       rmaInput$random <- randomFormulaList
+      if (length(struct) != 0)
+        struct <- paste0("c(", paste0("'", names(struct), "' = '", struct, "'", collapse = ""),")")
       rmaInput$struct <- struct
     }
   }
@@ -2377,6 +2379,7 @@
     varName <- gsub(":", paste0(")", jaspBase::interactionSymbol), varName, fixed = TRUE)
     varName <- paste0(varName, ")")
     varName <- gsub(" ()", "", varName, fixed = TRUE)
+    varName <- gsub(" (/", "/", varName, fixed = TRUE)
 
     return(varName)
 

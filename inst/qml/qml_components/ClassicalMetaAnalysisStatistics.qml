@@ -32,6 +32,7 @@ Section
 		title:		qsTr("Heterogeneity")
 		columns:	2
 		enabled:	method.value != "fixedEffects" && method.value != "equalEffects"
+		visible:	module == "metaAnalysis"
 
 		CheckBox
 		{

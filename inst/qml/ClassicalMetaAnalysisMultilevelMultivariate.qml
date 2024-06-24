@@ -143,7 +143,7 @@ Form
 							return [
 								{ label: qsTr("Compound symmetry"),						value: "compoundSymmetry"},
 								{ label: qsTr("Heteroscedastic compound symmetry"),		value: "heteroscedasticCompoundSymmetry"},
-								{ label: qsTr("Unstructured "),							value: "Unstructured"},
+								{ label: qsTr("Unstructured "),							value: "unstructured"},
 								{ label: qsTr("Identity"),								value: "identity"},
 								{ label: qsTr("Diagonal"),								value: "diagonal"}
 							];
