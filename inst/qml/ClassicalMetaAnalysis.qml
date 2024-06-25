@@ -57,12 +57,7 @@ Form
 			label:			qsTr("Method")
 			startValue:		"restrictedML"
 			values:			(function() {
-				if (module == "metaAnalysisMultilevelMultivariate") {
-					return [
-						{ label: qsTr("Maximum Likelihood")		, value: "maximumLikelihood"},
-						{ label: qsTr("Restricted ML")			, value: "restrictedML"		}
-					];
-				} else if (sectionModel.heterogeneityModelTermsCount == 0) {
+				if (sectionModel.heterogeneityModelTermsCount == 0) {
 					return [
 						{ label: qsTr("Equal Effects")			, value: "equalEffects"		},
 						{ label: qsTr("Fixed Effects")			, value: "fixedEffects"		},
@@ -132,6 +127,8 @@ Form
 	MA.ClassicalMetaAnalysisEstimatedMarginalMeans {}
 
 	MA.ClassicalMetaAnalysisForestPlot {}
+
+	MA.ClassicalMetaAnalysisBubblePlot {}
 
 	MA.ClassicalMetaAnalysisDiagnostics {}
 

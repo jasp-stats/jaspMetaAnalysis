@@ -352,7 +352,10 @@ Form
 		module:		"metaAnalysisMultilevelMultivariate"
 	}
 
-	MA.ClassicalMetaAnalysisStatistics {}
+	MA.ClassicalMetaAnalysisStatistics 
+	{
+		module:		"metaAnalysisMultilevelMultivariate"
+	}
 
 	MA.ClassicalMetaAnalysisEstimatedMarginalMeans
 	{
@@ -360,6 +363,8 @@ Form
 	}
 
 	MA.ClassicalMetaAnalysisForestPlot {}
+
+	MA.ClassicalMetaAnalysisBubblePlot {}
 
 	MA.ClassicalMetaAnalysisDiagnostics {}
 

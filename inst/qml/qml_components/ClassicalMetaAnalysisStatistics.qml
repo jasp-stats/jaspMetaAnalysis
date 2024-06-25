@@ -65,6 +65,26 @@ Section
 
 	Group
 	{
+		text:		qsTr("Random effects / model structure")
+		visible:	module == "metaAnalysisMultilevelMultivariate"
+
+		CheckBox
+		{
+			text:		qsTr("Test inclusion")
+			name:		"randomEffectsTestInclusion"
+			checked:	false
+		}
+
+		CheckBox
+		{
+			text:		qsTr("Confidence intervals")
+			name:		"randomEffectsConfidenceIntervals"
+			checked:	false
+		}	
+	}
+
+	Group
+	{
 		title:		qsTr("Meta-Regression")
 		enabled:	predictors.count > 0
 
