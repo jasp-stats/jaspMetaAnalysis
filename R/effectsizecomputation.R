@@ -62,7 +62,7 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
     variables      <- options[["variables"]][[i]]
 
     # dispatch
-    if (!.escReportedEffectSizesReady(variables)) {
+    if (effectSizeType[["design"]] == "reportedEffectSizes" && !.escReportedEffectSizesReady(variables)) {
       newDataOutput <- try(stop(gettext("Cannot compute outcomes. Chech that all of the required information is specified via the appropriate arguments (i.e. an Effect Size and either Standard Error, Sampling Variance, or 95% Confidence Interval).")))
     } else {
       # set escalc input
@@ -839,13 +839,9 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
 
   return(inputs)
 }
-.escReportedEffectSizesReady          <- function(variables){
-  if (variables[["effectSize"]] == "")
-    return(FALSE)
-  else if (length(variables[["confidenceInterval"]]) == 0 && variables[["standardError"]] == "" && variables[["samplingVariance"]] == "")
-    return(FALSE)
-  else
-    return(TRUE)
+.escReportedEffectSizesReady          <- function(.escReportedEffectSizesReady, variables){
+
+  return(!(length(variables[["confidenceInterval"]]) == 0 && variables[["standardError"]] == "" && variables[["samplingVariance"]] == ""))
 }
 .escVariableInputs                    <- c(
   "group1OutcomePlus",

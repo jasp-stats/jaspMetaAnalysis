@@ -306,7 +306,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
   randomEstimatesContainer <- createJaspContainer(title = gettext("Random Effects / Model Stucture Summary"))
   randomEstimatesContainer$dependOn(.maDependencies)
-  randomEstimatesContainer$position <- 1.1
+  randomEstimatesContainer$position <- 2
   jaspResults[["randomEstimatesContainer"]] <- randomEstimatesContainer
 
   fit <- .maExtractFit(jaspResults, options)
@@ -318,14 +318,16 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
   ### create table for nested random effects
   if (fit[["withS"]]) {
 
-    tableS <- createJaspTable(gettext("Simple / Nested Estimates"))
+    tableS <- createJaspTable(title = gettext("Simple / Nested Estimates"))
     tableS$position <- 1
 
     tableS$addColumnInfo(name = "factor",  type = "string",  title = "")
     tableS$addColumnInfo(name = "sigma2",  type = "number",  title = gettext("\U03C3\U00B2"))
     tableS$addColumnInfo(name = "sigma",   type = "number",  title = gettext("\U03C3"))
     tableS$addColumnInfo(name = "nlvls",   type = "integer", title = gettext("Levels"))
-    tableS$addColumnInfo(name = "fixed",   type = "string",  title = gettext("Fixed"))
+    if (.mammAddIsFixedRandom(options, 3))
+      tableS$addColumnInfo(name = "fixed",   type = "string",  title = gettext("Fixed"))
+
     # tableS$addColumnInfo(name = "R",       type = "string",  title = gettext("R")) # whether supplied via known correlation matrix
     randomEstimatesContainer[["tableS"]] <- tableS
 
@@ -338,24 +340,31 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
       # R      = ifelse(fit[["Rfix"]] , "yes", "no")
     )
 
+    if (!.mammAddIsFixedRandom(options, indx))
+      resultsS <- resultsS[,colnames(resultsS) != "fixed", drop = FALSE]
+
     tableS$setData(resultsS)
   }
-
+  return()
   ### create summary for the remaining types
   if (fit[["withG"]]) {
 
-    containerG <- .mammExtractRandomTable(options, fit, indx = 1)
+    # create jasp containers
+    containerG <- createJaspContainer(title = paste0(.mammGetOptionsNameStructure(fit[["struct"]][1]), gettext(" Summary")))
+    containerG$position <- 2
     randomEstimatesContainer[["containerG"]] <- containerG
+    .mammExtractRandomTables(containerG, options, fit, indx = 1)
 
   }
 
   if (fit[["withH"]]) {
 
-    containerH <- .mammExtractRandomTable(options, fit, indx = 2)
+    containerH <- createJaspContainer(title = paste0(.mammGetOptionsNameStructure(fit[["struct"]][2]), gettext(" Summary")))
+    containerH$position <- 3
     randomEstimatesContainer[["containerH"]] <- containerH
+    .mammExtractRandomTables(containerH, options, fit, indx = 3)
 
   }
-
 
   return()
 }
@@ -400,7 +409,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     stop(paste0("Unknown value: ", structure))
   ))
 }
-.mammExtractRandomTable          <- function(options, x, indx = 1) {
+.mammExtractRandomTables         <- function(tempContainer, options, x, indx = 1) {
 
   # dispatching
   struct <- x$struct[indx]
@@ -435,10 +444,6 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
   message1 <- paste0(x[[g.nlevels.fName]][1], " | ", outerLvl)
   message2 <- paste0(inner, " | ", outer)
 
-  # create jasp containers
-  jaspContainer <- createJaspContainer(title = gettextf(.mammGetOptionsNameStructure(struct), "Summary"))
-  jaspContainer$dependOn(.maDependencies)
-
   if (is.element(struct, c("CS", "AR", "CAR", "ID", "SPEXP", "SPGAU", "SPLIN", "SPRAT", "SPSPH", "PHYBM", "PHYPL", "PHYPD"))) {
 
     vc <- cbind(tau2, tau, ifelse(x$vc.fix[[tau2Name]], "yes", "no"))
@@ -452,17 +457,24 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
       vc <- vc[1, , drop = FALSE]
     }
 
+   if (!.mammAddIsFixedRandom(options, indx))
+     vc <- vc[,colnames(vc) != "fixed", drop = FALSE]
+
     tempTable <- createJaspTable(title = gettext("Estimates"))
     tempTable$position <- 1
     tempTable$addColumnInfo(name = "parameter",      type = "string",  title = "")
     tempTable$addColumnInfo(name = "estimate",       type = "number",  title = gettext("Estimate"))
     tempTable$addColumnInfo(name = "estimateSqrt",   type = "number",  title = gettext("Sqrt. Estimate"))
-    tempTable$addColumnInfo(name = "fixed",          type = "string",  title = gettext("Fixed"))
+    if (.mammAddIsFixedRandom(options, indx))
+      tempTable$addColumnInfo(name = "fixed",          type = "string",  title = gettext("Fixed"))
+    tempContainer[["table1"]] <- tempTable
 
     tempTable$setData(vc)
     tempTable$addFootnote(message1, symbol = gettext("Levels: "))
     tempTable$addFootnote(message2, symbol = gettext("Component: "))
-    jaspContainer[["table1"]] <- tempTable
+
+
+
   }
 
   if (is.element(struct, c("HCS", "HAR", "DIAG"))) {
@@ -482,6 +494,9 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     if (struct == "DIAG")
       vc <- vc[seq_along(tau2), , drop = FALSE]
 
+    if (!.mammAddIsFixedRandom(options, indx))
+      vc <- vc[,colnames(vc) != "fixed", drop = FALSE]
+
     tempTable <- createJaspTable(title = gettext("Estimates"))
     tempTable$position <- 1
     tempTable$addColumnInfo(name = "parameter",      type = "string",  title = "")
@@ -489,12 +504,13 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     tempTable$addColumnInfo(name = "estimate",       type = "number",  title = gettext("Estimate"))
     tempTable$addColumnInfo(name = "estimateSqrt",   type = "number",  title = gettext("Sqrt. Estimate"))
     tempTable$addColumnInfo(name = "nLevels",        type = "integer", title = gettext("Levels"))
-    tempTable$addColumnInfo(name = "fixed",          type = "string",  title = gettext("Fixed"))
+    if (.mammAddIsFixedRandom(options, indx))
+      tempTable$addColumnInfo(name = "fixed",          type = "string",  title = gettext("Fixed"))
 
     tempTable$setData(vc)
     tempTable$addFootnote(message1, symbol = gettext("Levels: "))
     tempTable$addFootnote(message2, symbol = gettext("Component: "))
-    jaspContainer[["table1"]] <- tempTable
+    tempContainer[["table1"]] <- tempTable
 
   }
 
@@ -517,6 +533,9 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
       vc$parameter <-paste0("\U1D70F\U00B2[",seq_along(x[[g.levels.kName]]),"]")
     }
 
+    if (!.mammAddIsFixedRandom(options, indx))
+      vc <- vc[,colnames(vc) != "fixed", drop = FALSE]
+
     tempTable <- createJaspTable(title = gettext("Estimates \U1D70F\U00B2"))
     tempTable$position <- 1
     tempTable$addColumnInfo(name = "parameter",      type = "string",  title = "")
@@ -524,12 +543,13 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     tempTable$addColumnInfo(name = "estimate",       type = "number",  title = gettext("Estimate"))
     tempTable$addColumnInfo(name = "estimateSqrt",   type = "number",  title = gettext("Sqrt. Estimate"))
     tempTable$addColumnInfo(name = "nLevels",        type = "string",  title = gettext("Levels"))
-    tempTable$addColumnInfo(name = "fixed",          type = "string",  title = gettext("Fixed"))
+    if (.mammAddIsFixedRandom(options, indx))
+      tempTable$addColumnInfo(name = "fixed",          type = "string",  title = gettext("Fixed"))
 
     tempTable$setData(vc)
     tempTable$addFootnote(message1, symbol = gettext("Levels: "))
     tempTable$addFootnote(message2, symbol = gettext("Component: "))
-    jaspContainer[["table1"]] <- tempTable
+    tempContainer[["table1"]] <- tempTable
 
 
     if (length(x[[rhoName]]) == 1L) {
@@ -568,7 +588,10 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     G.infoEstimated <- data.frame(G.infoEstimated)
     colnames(G.infoEstimated) <- paste0("rhoEstimated", 1:ncol(G.infoEstimated))
 
-    Gmat <- cbind(G, G.infoLevels, G.infoEstimated)
+    if (!.mammAddIsFixedRandom(options, indx))
+      Gmat <- cbind(G, G.infoLevels)
+    else
+      Gmat <- cbind(G, G.infoLevels, G.infoEstimated)
 
     tempTable2 <- createJaspTable(title = gettext("Estimates \U03C1"))
     tempTable2$position <- 2
@@ -579,14 +602,16 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     for(i in 1:ncol(G.infoLevels)){
       tempTable2$addColumnInfo(name = paste0("rhoLevel",i), type = "integer", title = sprintf("[,%1$i]", i), overtitle = gettext("Levels"))
     }
-    for(i in 1:ncol(G.infoEstimated)){
-      tempTable2$addColumnInfo(name = paste0("rhoEstimated",i), type = "string", title = sprintf("[,%1$i]", i), overtitle = gettext("Fixed"))
+    if (.mammAddIsFixedRandom(options, indx)) {
+      for(i in 1:ncol(G.infoEstimated)){
+        tempTable2$addColumnInfo(name = paste0("rhoEstimated",i), type = "string", title = sprintf("[,%1$i]", i), overtitle = gettext("Fixed"))
+      }
     }
 
     tempTable2$setData(Gmat)
     tempTable2$addFootnote(message1, symbol = gettext("Levels: "))
     tempTable2$addFootnote(message2, symbol = gettext("Component: "))
-    jaspContainer[["table2"]] <- tempTable2
+    tempContainer[["table2"]] <- tempTable2
   }
 
   if (struct == "GEN") {
@@ -597,18 +622,21 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     colnames(vc) <- c("estimate", "estimateSqrt", "fixed")
     vc$parameter <- .maVariableNames(x[[g.namesName]][-length(x[[g.namesName]])], unlist(.mammExtractRandomVariableNames(options)))
 
+    if (!.mammAddIsFixedRandom(options, indx))
+      vc <- vc[,colnames(vc) != "fixed", drop = FALSE]
 
     tempTable <- createJaspTable(title = gettext("Estimates \U1D70F\U00B2"))
     tempTable$position <- 1
     tempTable$addColumnInfo(name = "parameter",      type = "string",  title = "")
     tempTable$addColumnInfo(name = "estimate",       type = "number",  title = gettext("Estimate"))
     tempTable$addColumnInfo(name = "estimateSqrt",   type = "number",  title = gettext("Sqrt. Estimate"))
-    tempTable$addColumnInfo(name = "fixed",          type = "string",  title = gettext("Fixed"))
+    if (.mammAddIsFixedRandom(options, indx))
+      tempTable$addColumnInfo(name = "fixed",          type = "string",  title = gettext("Fixed"))
 
     tempTable$setData(vc)
     tempTable$addFootnote(message1, symbol = gettext("Levels: "))
     tempTable$addFootnote(message2, symbol = gettext("Component: "))
-    jaspContainer[["table1"]] <- tempTable
+    tempContainer[["table1"]] <- tempTable
 
 
     G.info <- cov2cor(x[[GName]])
@@ -626,24 +654,30 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     G.infoFixed <- data.frame(G.infoFixed)
     colnames(G.infoFixed) <- paste0("rhoFixed", 1:ncol(G.infoFixed))
 
-    Gmat <- cbind(G.info, G.infoFixed)
+    if (!.mammAddIsFixedRandom(options, indx))
+      Gmat <- G.info
+    else
+      Gmat <- cbind(G.info, G.infoFixed)
+
     Gmat$parameter <- .maVariableNames(x[[g.namesName]][-length(x[[g.namesName]])], unlist(.mammExtractRandomVariableNames(options)))
 
 
     tempTable2 <- createJaspTable(title = gettext("Estimates \U03C1"))
     tempTable2$position <- 2
-    tempTable$addColumnInfo(name = "parameter", type = "string",  title = "")
+    tempTable2$addColumnInfo(name = "parameter", type = "string",  title = "")
     for(i in 1:ncol(G.info)){
       tempTable2$addColumnInfo(name = paste0("rho",i), type = "number", title = Gmat$parameter[i], overtitle = gettext("Estimates"))
     }
-    for(i in 1:ncol(G.infoFixed)){
-      tempTable2$addColumnInfo(name = paste0("rhoFixed",i), type = "string", title = Gmat$parameter[i], overtitle = gettext("Fixed"))
+    if (.mammAddIsFixedRandom(options, indx)) {
+      for(i in 1:ncol(G.infoFixed)){
+        tempTable2$addColumnInfo(name = paste0("rhoFixed",i), type = "string", title = Gmat$parameter[i], overtitle = gettext("Fixed"))
+      }
     }
 
     tempTable2$setData(Gmat)
     tempTable2$addFootnote(message1, symbol = gettext("Levels: "))
     tempTable2$addFootnote(message2, symbol = gettext("Component: "))
-    jaspContainer[["table2"]] <- tempTable2
+    tempContainer[["table2"]] <- tempTable2
   }
 
 
@@ -655,19 +689,30 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     colnames(vc) <- c("estimate", "estimateSqrt", "fixed")
     vc$parameter <- .maVariableNames(x[[g.namesName]][-length(x[[g.namesName]])], unlist(.mammExtractRandomVariableNames(options)))
 
+    if (!.mammAddIsFixedRandom(options, indx))
+      vc <- vc[,colnames(vc) != "fixed", drop = FALSE]
+
     tempTable <- createJaspTable(title = gettext("Estimates \U1D70F\U00B2"))
     tempTable$position <- 1
     tempTable$addColumnInfo(name = "parameter",      type = "string",  title = "")
     tempTable$addColumnInfo(name = "estimate",       type = "number",  title = gettext("Estimate"))
     tempTable$addColumnInfo(name = "estimateSqrt",   type = "number",  title = gettext("Sqrt. Estimate"))
-    tempTable$addColumnInfo(name = "fixed",          type = "string",  title = gettext("Fixed"))
+    if (.mammAddIsFixedRandom(options, indx))
+      tempTable$addColumnInfo(name = "fixed",          type = "string",  title = gettext("Fixed"))
+
 
     tempTable$setData(vc)
     tempTable$addFootnote(message1, symbol = gettext("Levels: "))
     tempTable$addFootnote(message2, symbol = gettext("Component: "))
-    jaspContainer[["table1"]] <- tempTable
+    tempContainer[["table1"]] <- tempTable
   }
 
-  return(jaspContainer)
+  return()
+}
+.mammAddIsFixedRandom            <- function(options, indx) {
+
+  return(FALSE)
+
+  # TODO: show / hide information on whether the random effects are fixed by the user
 }
 

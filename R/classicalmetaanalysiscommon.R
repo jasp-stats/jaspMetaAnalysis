@@ -52,9 +52,10 @@
   # model summary
   .maResidualHeterogeneityTable(jaspResults, dataset, options)
   .maModeratorsTable(jaspResults, dataset, options)
+  .maPooledEstimatesTable(jaspResults, dataset, options)
   if (.maIsMultilevelMultivariate(options))
     .mammRandomEstimatesTable(jaspResults, dataset, options)
-  .maPooledEstimatesTable(jaspResults, dataset, options)
+
   if (options[["fitMeasures"]])
     .maFitMeasuresTable(jaspResults, dataset, options)
 
@@ -793,7 +794,7 @@
     width  = width,
     height = height
   )
-  forestPlot$position <- 4
+  forestPlot$position <- 5
   forestPlot$dependOn(.maForestPlotDependencies)
 
   if (!attr(plotOut, "isPanel")) {
@@ -840,7 +841,7 @@
   } else {
     bubblePlot <- createJaspPlot(title = gettext("Bubble Plot"), width = width, height = height)
     bubblePlot$dependOn(.maBubblePlotDependencies)
-    bubblePlot$position <- 5
+    bubblePlot$position <- 6
     jaspResults[["bubblePlot"]] <- bubblePlot
   }
 
@@ -1275,7 +1276,7 @@
   # create the output container
   metaregressionContainer <- createJaspContainer(gettext("Meta-Regression Summary"))
   metaregressionContainer$dependOn(c(.maDependencies, "confidenceInterval"))
-  metaregressionContainer$position <- 2
+  metaregressionContainer$position <- 3
   jaspResults[["metaregressionContainer"]] <- metaregressionContainer
 
   return(metaregressionContainer)
@@ -1288,7 +1289,7 @@
   # create the output container
   estimatedMarginalMeansContainer <- createJaspContainer(gettext("Meta-Regression Summary"))
   estimatedMarginalMeansContainer$dependOn(c(.maDependencies, "confidenceIntervals", "confidenceIntervalsLevel"))
-  estimatedMarginalMeansContainer$position <- 3
+  estimatedMarginalMeansContainer$position <- 4
   jaspResults[["estimatedMarginalMeansContainer"]] <- estimatedMarginalMeansContainer
 
   return(estimatedMarginalMeansContainer)
@@ -1301,7 +1302,7 @@
   # create the output container
   varianceInflationContainer <- createJaspContainer(gettext("Variance Inflation Summary"))
   varianceInflationContainer$dependOn(c(.maDependencies, "diagnosticsVarianceInflationFactor", "diagnosticsVarianceInflationFactorAggregate"))
-  varianceInflationContainer$position <- 6
+  varianceInflationContainer$position <- 7
   jaspResults[["varianceInflationContainer"]] <- varianceInflationContainer
 
   return(varianceInflationContainer)
@@ -2113,7 +2114,7 @@
   if (.maIsMultilevelMultivariate(options)) {
     randomFormulaList <- .mammGetRandomFormulaList(options)
     if (length(randomFormulaList) != 0) {
-      struct <- do.call(c, sapply(randomFormulaList, attr, "structure"))
+      struct <- do.call(c, lapply(randomFormulaList, attr, "structure"))
       if (length(randomFormulaList) > 1)
         randomFormulaList <- paste0("list(\n\t\t", paste0("'", names(randomFormulaList), "' = ", randomFormulaList, collapse = "\n\t\t"),")")
       rmaInput$random <- randomFormulaList
