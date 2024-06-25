@@ -65,7 +65,7 @@ Section
 
 	Group
 	{
-		text:		qsTr("Random effects / model structure")
+		title:		qsTr("Random Effects / Model Structure")
 		visible:	module == "metaAnalysisMultilevelMultivariate"
 
 		CheckBox
