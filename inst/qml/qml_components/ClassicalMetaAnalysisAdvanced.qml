@@ -67,6 +67,26 @@ Section
 					checked:	true
 				}
 			}
+
+			Group
+			{
+				visible:	module == "metaAnalysisMultilevelMultivariate"
+				title:		qsTr("Random Effects / Modele Structure")
+
+				CheckBox
+				{
+					name:		"useSparseMatricies"
+					text:		qsTr("Use sparse matricies")
+					checked:	false
+				}
+
+				CheckBox
+				{
+					name:		"computeCovarianceMatrix"
+					text:		qsTr("Compute covariance matrix")
+					checked:	true
+				}
+			}
 		}
 
 		Group
@@ -74,11 +94,12 @@ Section
 			title:	qsTr("Fix Parameters")
 
 			CheckBox
-			{
-				name:	"fixParametersTau2"
-				text:	qsTr("𝜏²")
+			{	// TODO: allow fixing in multivariate models
+				name:				"fixParametersTau2"
+				text:				qsTr("𝜏²")
 				enabled:			sectionModel.heterogeneityModelTermsCount == 0
 				childrenOnSameRow:	true
+				visible:			module == "metaAnalysis"
 
 				FormulaField
 				{
@@ -131,6 +152,7 @@ Section
 				name:	"addOmnibusModeratorTestHeterogeneityCoefficients"
 				enabled:			sectionModel.heterogeneityModelTermsCount > 0
 				childrenOnSameRow:	false
+				visible:			module == "metaAnalysis"
 
 				TextField
 				{
@@ -153,12 +175,17 @@ Section
 				name:		"optimizerMethod"
 				label:		qsTr("Method") // TODO: switch default value on heterogeneityModelLink change
 				values:		{
-					if (sectionModel.heterogeneityModelLinkValue == "log")
-						["nlminb", "BFGS", "Nelder-Mead", "uobyqa", "newuoa", "bobyqa", "nloptr", "nlm"]
-					else
-						["constrOptim", "nlminb", "BFGS", "Nelder-Mead", "uobyqa", "newuoa", "bobyqa", "nloptr", "nlm"]
+					if (module == "metaAnalysis") {
+						if (sectionModel.heterogeneityModelLinkValue == "log")
+							["nlminb", "BFGS", "Nelder-Mead", "uobyqa", "newuoa", "bobyqa", "nloptr", "nlm"]
+						else
+							["constrOptim", "nlminb", "BFGS", "Nelder-Mead", "uobyqa", "newuoa", "bobyqa", "nloptr", "nlm"]
+					} else	if (module == "metaAnalysisMultilevelMultivariate") {
+							["nlminb", "BFGS", "Nelder-Mead", "uobyqa", "newuoa", "bobyqa", "nloptr", "nlm", "hjk", "nmk", "mads", "ucminf", "lbfgsb3c", "BBoptim"]
+					}
+
 				}
-				visible:	sectionModel.heterogeneityModelTermsCount > 0
+				visible:	module == "metaAnalysisMultilevelMultivariate" || sectionModel.heterogeneityModelTermsCount > 0
 			}
 
 			CheckBox
@@ -168,7 +195,7 @@ Section
 				checked:	false
 				childrenOnSameRow:	true
 				visible:	(method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes" ||
-							method.value == "sidikJonkman") && sectionModel.heterogeneityModelTermsCount == 0
+							method.value == "sidikJonkman") && sectionModel.heterogeneityModelTermsCount == 0 && module == "metaAnalysis"
 
 				DoubleField
 				{
@@ -187,7 +214,7 @@ Section
 				checked:	false
 				childrenOnSameRow:	true
 				visible:	(method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu") &&
-							sectionModel.heterogeneityModelTermsCount == 0
+							sectionModel.heterogeneityModelTermsCount == 0 && module == "metaAnalysis"
 
 				DoubleField
 				{
@@ -207,7 +234,7 @@ Section
 				checked:	false
 				childrenOnSameRow:	true
 				visible:	(method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu") &&
-							sectionModel.heterogeneityModelTermsCount == 0
+							sectionModel.heterogeneityModelTermsCount == 0 && module == "metaAnalysis"
 
 				DoubleField
 				{

@@ -183,6 +183,11 @@
   if (.maIsMetaregressionHeterogeneity(options))
     rmaInput$link <- options[["heterogeneityModelLink"]]
 
+  if (.maIsMultilevelMultivariate(options)) {
+    rmaInput$sparse <- if (options[["useSparseMatricies"]])       options[["useSparseMatricies"]]
+    rmaInput$cvvc   <- if (!options[["computeCovarianceMatrix"]]) !options[["computeCovarianceMatrix"]]
+  }
+
   # add control options if needed
   control <- .maGetControlOptions(options)
   if (length(control) != 0)
@@ -2140,6 +2145,11 @@
   # add link function if needed
   if (.maIsMetaregressionHeterogeneity(options))
     rmaInput$link <- paste0("'", options[["heterogeneityModelLink"]], "'")
+
+  if (.maIsMultilevelMultivariate(options)) {
+    rmaInput$sparse <- if (options[["useSparseMatricies"]])       options[["useSparseMatricies"]]
+    rmaInput$cvvc   <- if (!options[["computeCovarianceMatrix"]]) !options[["computeCovarianceMatrix"]]
+  }
 
   # add control options if needed
   control <- .maGetControlOptions(options)

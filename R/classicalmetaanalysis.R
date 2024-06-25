@@ -51,7 +51,8 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "optimizerConvergenceRelativeTolerance", "optimizerConvergenceRelativeToleranceValue", "optimizerStepAdjustment", "optimizerStepAdjustmentValue",
   "diagnosticsCasewiseDiagnosticsRerunWithoutInfluentialCases",
   # multilevel/multivariate specific
-  "randomEffects", "randomEffectsSpecification"
+  "randomEffects", "randomEffectsSpecification",
+  "computeCovarianceMatrix", "computeCovarianceMatrix"
 )
 .maForestPlotDependencies <- c(
   .maDependencies, "transformEffectSize", "confidenceIntervalsLevel",
