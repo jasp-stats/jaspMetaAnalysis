@@ -53,6 +53,8 @@
   .maResidualHeterogeneityTable(jaspResults, dataset, options)
   .maModeratorsTable(jaspResults, dataset, options)
   .maPooledEstimatesTable(jaspResults, dataset, options)
+
+  # random effects
   if (.maIsMultilevelMultivariate(options))
     .mammRandomEstimatesTable(jaspResults, dataset, options)
 
@@ -1936,7 +1938,10 @@
       mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
       alpha   = options[["bubblePlotPredictionIntervalsTransparency"]]
     )
-    bubblePlot <- bubblePlot + do.call(ggplot2::geom_polygon, geomCall)
+
+    if (any(!is.na(dfPiBands[["y"]])))
+      bubblePlot <- bubblePlot + do.call(ggplot2::geom_polygon, geomCall)
+
     yRange <- range(c(yRange, dfPiBands$y))
   }
 
@@ -1955,14 +1960,17 @@
       mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
       alpha   = options[["bubblePlotCondifenceIntervalsTransparency"]]
     )
-    bubblePlot <- bubblePlot + do.call(ggplot2::geom_polygon, geomCall)
-    yRange <- range(c(yRange, dfCiBands$y))
+
+    if (any(!is.na(dfCiBands[["y"]])))
+      bubblePlot <- bubblePlot + do.call(ggplot2::geom_polygon, geomCall)
+
+    yRange <- range(c(yRange, dfCiBands$y), na.rm = TRUE)
   }
 
   ### add predictiction line
   aesCall <- list(
     x     = as.name("selectedVariable"),
-    y     = as.name("y"),
+    y     = as.name("est"),
     color = if (hasSeparateLines) as.name("separateLines")
   )
   dfPlot[["y"]] <- do.call(.maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]), list(dfPlot[["y"]]))
@@ -1971,7 +1979,7 @@
     mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)])
   )
   bubblePlot <- bubblePlot + do.call(jaspGraphs::geom_line, geomCall)
-  yRange <- range(c(yRange, dfPlot$pred))
+  yRange <- range(c(yRange, dfPlot$pred), na.rm = TRUE)
 
   ### add studies as bubbles
   dfStudies <- data.frame(
@@ -2039,8 +2047,10 @@
       name   = if (options[["transformEffectSize"]] == "none") gettext("Effect Size") else .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]]),
       breaks = jaspGraphs::getPrettyAxisBreaks(yRange),
       limits = yRange
-    )  +
-    ggplot2::labs(fill = attr(dfPlot, "separateLines"), color = attr(dfPlot, "separateLines"))
+    )
+
+  if (attr(dfPlot, "separateLines") != "")
+    plot <- plot + ggplot2::labs(fill = attr(dfPlot, "separateLines"), color = attr(dfPlot, "separateLines"))
 
   if (options[["bubblePlotTheme"]] == "jasp") {
 
@@ -2610,8 +2620,10 @@
   # TODO: decide whether those should be added as NAs or CIs
   # - if NAs, need to be adjusted for in the rest of the code / GUI
   if (!"pi.lb" %in% colnames(out)) {
-    out$pi.lb <- out$ci.lb
-    out$pi.ub <- out$ci.ub
+    out$pi.lb <- NA
+    out$pi.ub <- NA
+    #out$pi.lb <- out$ci.lb
+    #out$pi.ub <- out$ci.ub
   }
 
   # rename into a consistent format
