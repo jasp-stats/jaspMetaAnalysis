@@ -345,7 +345,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
     tableS$setData(resultsS)
   }
-  return()
+
   ### create summary for the remaining types
   if (fit[["withG"]]) {
 
@@ -375,7 +375,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     "compoundSymmetry"                  = "CS",
     "heteroscedasticCompoundSymmetry"   = "HCS",
     "unstructured"                      = "UN",
-    "identity"                          = "UD",
+    "identity"                          = "ID",
     "diagonal"                          = "DIAG",
     "ar1"                               = "AR",
     "heteroskedasticAr1"                = "HAR",
@@ -396,7 +396,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     "CS"    = gettextf("Compound Symmetry"),
     "HCS"   = gettextf("Heteroscedastic Compound Symmetry"),
     "UN"    = gettextf("Unstructured"),
-    "UD"    = gettextf("Identity"),
+    "ID"    = gettextf("Identity"),
     "DIAG"  = gettextf("Diagonal"),
     "AR1"   = gettextf("AR(1)"),
     "HAR"   = gettextf("heteroskedastic AR(1)"),
@@ -452,6 +452,9 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     vc <- data.frame(vc)
     colnames(vc) <- c("estimate", "estimateSqrt", "fixed")
     vc$parameter <- c("\U1D70F\U00B2", "\U03C1")
+    for(colName in c("estimate", "estimateSqrt")) {
+      vc[,colName] <- as.numeric(vc[,colName])
+    }
 
     if (struct == "ID") {
       vc <- vc[1, , drop = FALSE]
@@ -473,9 +476,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     tempTable$addFootnote(message1, symbol = gettext("Levels: "))
     tempTable$addFootnote(message2, symbol = gettext("Component: "))
 
-
-
-  }
+    }
 
   if (is.element(struct, c("HCS", "HAR", "DIAG"))) {
 
@@ -484,6 +485,9 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
     vc <- data.frame(vc)
     colnames(vc) <- c("estimate", "estimateSqrt", "nLevels", "fixed", "level")
+    for(colName in c("estimate", "estimateSqrt", "nLevels")) {
+      vc[,colName] <- as.numeric(vc[,colName])
+    }
 
     if (length(x[[tau2Name]]) == 1L) {
       vc$parameter <- c("\U1D70F\U00B2", "\U03C1")
@@ -526,6 +530,9 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     }
     vc <- data.frame(vc)
     colnames(vc) <- c("estimate", "estimateSqrt", "nLevels", "fixed", "level")
+    for(colName in c("estimate", "estimateSqrt", "nLevels")) {
+      vc[,colName] <- as.numeric(vc[,colName])
+    }
 
     if (length(x[[g.levels.kName]]) == 1L) {
       vc$parameter <- c("\U1D70F\U00B2")
@@ -614,13 +621,16 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     tempContainer[["table2"]] <- tempTable2
   }
 
-  if (struct == "GEN") {
+  if (is.element(struct, c("GEN"))) {
 
     vc <- cbind(tau2, tau, ifelse(x$vc.fix[[tau2Name]], "yes", "no"))
 
     vc <- data.frame(vc)
     colnames(vc) <- c("estimate", "estimateSqrt", "fixed")
     vc$parameter <- .maVariableNames(x[[g.namesName]][-length(x[[g.namesName]])], unlist(.mammExtractRandomVariableNames(options)))
+    for(colName in c("estimate", "estimateSqrt")) {
+      vc[,colName] <- as.numeric(vc[,colName])
+    }
 
     if (!.mammAddIsFixedRandom(options, indx))
       vc <- vc[,colnames(vc) != "fixed", drop = FALSE]
@@ -680,7 +690,6 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     tempContainer[["table2"]] <- tempTable2
   }
 
-
   if (is.element(struct, c("GDIAG"))) {
 
     vc <- cbind(tau2, tau, ifelse(x$vc.fix[["tau2"]], "yes", "no"))
@@ -688,6 +697,9 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     vc <- data.frame(vc)
     colnames(vc) <- c("estimate", "estimateSqrt", "fixed")
     vc$parameter <- .maVariableNames(x[[g.namesName]][-length(x[[g.namesName]])], unlist(.mammExtractRandomVariableNames(options)))
+    for(colName in c("estimate", "estimateSqrt")) {
+      vc[,colName] <- as.numeric(vc[,colName])
+    }
 
     if (!.mammAddIsFixedRandom(options, indx))
       vc <- vc[,colnames(vc) != "fixed", drop = FALSE]
