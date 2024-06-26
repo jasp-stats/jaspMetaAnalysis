@@ -1336,17 +1336,8 @@
   }
 
   # to data.frame
-  predictedEffect <- data.frame(predictedEffect)
-
-  # add empty prediction interval for FE and EE, or models without
-  if (!"pi.lb" %in% colnames(predictedEffect)) {
-    predictedEffect$pi.lb <- NA
-    predictedEffect$pi.ub <- NA
-  }
-
-  # fix column names
-  colnames(predictedEffect) <- c("est", "se", "lCi", "uCi", "lPi", "uPi")
-  predictedEffect$par       <- "Effect Size"
+  predictedEffect      <- .maExtractAndFormatPrediction(predictedEffect)
+  predictedEffect$par  <- "Effect Size"
 
   # apply effect size transformation
   if (options[["transformEffectSize"]] != "none")
@@ -1388,29 +1379,20 @@
 
   # compute test against specified value
   if (.maIsMetaregressionFtest(options)) {
-    predictedEffect      <- cbind(data.frame(predictedEffect), "df" = predictedEffect$ddf)
-    predictedEffect$stat <- (predictedEffect$pred - 0)  / predictedEffect$se
+
+    # to extract the degrees of freedom
+    tempDf <- predictedEffect$ddf
+    predictedEffect      <- .maExtractAndFormatPrediction(predictedEffect)
+    predictedEffect$df   <- tempDf
+    predictedEffect$stat <- (predictedEffect$est - 0)  / predictedEffect$se
     predictedEffect$pval <- 2 * pt(abs(predictedEffect$stat), predictedEffect$df, lower.tail = FALSE)
 
-    # add empty prediction interval for FE and EE
-    if (.maGetMethodOptions(options) %in% c("FE", "EE")) {
-      predictedEffect$pi.lb <- predictedEffect$ci.lb
-      predictedEffect$pi.ub <- predictedEffect$ci.ub
-    }
-
-    colnames(predictedEffect) <- c("est", "se", "lCi", "uCi", "lPi", "uPi", "df", "stat", "pval")
   } else {
-    predictedEffect      <- data.frame(predictedEffect)
-    predictedEffect$stat <- (predictedEffect$pred - 0)  / predictedEffect$se
+
+    predictedEffect      <- .maExtractAndFormatPrediction(predictedEffect)
+    predictedEffect$stat <- (predictedEffect$est - 0)  / predictedEffect$se
     predictedEffect$pval <- 2 * pnorm(abs(predictedEffect$stat), lower.tail = FALSE)
 
-    # add empty prediction interval for FE and EE
-    if (.maGetMethodOptions(options) %in% c("FE", "EE")) {
-      predictedEffect$pi.lb <- predictedEffect$ci.lb
-      predictedEffect$pi.ub <- predictedEffect$ci.ub
-    }
-
-    colnames(predictedEffect) <- c("est", "se", "lCi", "uCi", "lPi", "uPi", "stat", "pval")
   }
 
   # fix column names
@@ -1776,17 +1758,23 @@
       )
     }
 
+
     # compute test against specified value
     if (.maIsMetaregressionFtest(options)) {
-      computedMarginalMeans      <- cbind(data.frame(computedMarginalMeans), "df" = computedMarginalMeans$ddf)
-      computedMarginalMeans$stat <- (computedMarginalMeans$pred - testAgainst)  / computedMarginalMeans$se
+
+      # extract degrees of freedom
+      tempDf                     <- computedMarginalMeans$ddf
+      computedMarginalMeans      <- .maExtractAndFormatPrediction(computedMarginalMeans)
+      computedMarginalMeans$df   <- tempDf
+      computedMarginalMeans$stat <- (computedMarginalMeans$est - testAgainst)  / computedMarginalMeans$se
       computedMarginalMeans$pval <- 2 * pt(abs(computedMarginalMeans$stat), computedMarginalMeans$df, lower.tail = FALSE)
-      colnames(computedMarginalMeans) <- c("est", "se", "lCi", "uCi", "lPi", "uPi", "df", "stat", "pval")
+
     } else {
-      computedMarginalMeans      <- data.frame(computedMarginalMeans)
-      computedMarginalMeans$stat <- (computedMarginalMeans$pred - testAgainst)  / computedMarginalMeans$se
+
+      computedMarginalMeans      <- .maExtractAndFormatPrediction(computedMarginalMeans)
+      computedMarginalMeans$stat <- (computedMarginalMeans$est - testAgainst)  / computedMarginalMeans$se
       computedMarginalMeans$pval <- 2 * pnorm(abs(computedMarginalMeans$stat), lower.tail = FALSE)
-      colnames(computedMarginalMeans) <- c("est", "se", "lCi", "uCi", "lPi", "uPi", "stat", "pval")
+
     }
 
     # apply effect size transformation
@@ -1819,8 +1807,8 @@
       level    = 100 * options[["confidenceIntervalsLevel"]]
     )
 
-    computedMarginalMeans <- data.frame(computedMarginalMeans)
-    colnames(computedMarginalMeans) <- c("est", "se", "lCi", "uCi")
+    computedMarginalMeans <- .maExtractAndFormatPrediction(computedMarginalMeans)
+
 
     # apply link transform
     if (options[["heterogeneityModelLink"]] == "log") {
@@ -1911,12 +1899,7 @@
   selectedGrid <- selectedGrid[,setdiff(names(selectedGrid), c(selectedVariable, separateLines, separatePlots)),drop = FALSE]
 
   ### modify marginal means
-  if (.maGetMethodOptions(options) %in% c("EE", "FE")) {
-    computedMarginalMeans$pi.lb <- computedMarginalMeans$ci.lb
-    computedMarginalMeans$pi.ub <- computedMarginalMeans$ci.ub
-  }
-  computedMarginalMeans <- data.frame(computedMarginalMeans)
-  colnames(computedMarginalMeans) <- c("y", "se", "lCi", "uCi", "lPi", "uPi")
+  computedMarginalMeans <- .maExtractAndFormatPrediction(computedMarginalMeans)
 
   ### merge and add attributes
   dfPlot <- cbind.data.frame(selectedGrid, computedMarginalMeans)
@@ -2366,7 +2349,7 @@
 }
 
 # misc
-.maVariableNames                  <- function(varNames, variables) {
+.maVariableNames                      <- function(varNames, variables) {
 
   return(sapply(varNames, function(varName){
 
@@ -2396,11 +2379,11 @@
 
   }))
 }
-.maPrintQTest                     <- function(fit) {
+.maPrintQTest                         <- function(fit) {
 
   return(sprintf("Heterogeneity: Q(%1$i) = %2$.2f, %3$s", fit[["k"]] - fit[["p"]], fit[["QE"]], .maPrintPValue(fit[["QEp"]])))
 }
-.maPrintModerationTest            <- function(fit, options, parameter) {
+.maPrintModerationTest                <- function(fit, options, parameter) {
 
   out      <- .maOmnibusTest(fit, options, parameter)
   outPrint <- .maPrintTermTest(out, testStatistic = TRUE)
@@ -2410,7 +2393,7 @@
   else if (parameter == "effectSize")
     return(gettextf("Moderation (Heterogeneity): %1$s", outPrint))
 }
-.maPrintHeterogeneityEstimate     <- function(fit, options, digits, keepText) {
+.maPrintHeterogeneityEstimate         <- function(fit, options, digits, keepText) {
 
   out <- .maComputePooledHeterogeneityPlot(fit, options)
 
@@ -2429,7 +2412,7 @@
     "]"
     ), prefix, out$est, out$lCi, out$uCi))
 }
-.maPrintTermTest                  <- function(out, testStatistic = TRUE) {
+.maPrintTermTest                      <- function(out, testStatistic = TRUE) {
 
   if (testStatistic) {
     if (!is.null(out[["df2"]])) {
@@ -2441,7 +2424,7 @@
     return(.maPrintPValue(out[["pval"]]))
   }
 }
-.maPrintCoefficientTest           <- function(out, testStatistic = TRUE) {
+.maPrintCoefficientTest               <- function(out, testStatistic = TRUE) {
 
   if (testStatistic) {
     if (!is.null(out[["df"]])) {
@@ -2453,14 +2436,14 @@
     return(.maPrintPValue(out[["pval"]]))
   }
 }
-.maPrintPValue                    <- function(pValue) {
+.maPrintPValue                        <- function(pValue) {
   if (pValue < 0.001) {
     return("p < 0.001")
   } else {
     return(sprintf("p = %.3f", pValue))
   }
 }
-.maPrintEstimateAndInterval       <- function(est, lCi, uCi, digits) {
+.maPrintEstimateAndInterval           <- function(est, lCi, uCi, digits) {
   return(sprintf(paste0(
     .maAddSpaceForPositiveValue(est), "%1$.", digits, "f",
     " [",
@@ -2469,7 +2452,7 @@
     .maAddSpaceForPositiveValue(uCi), "%3$.", digits, "f",
     "]"), est, lCi, uCi))
 }
-.maPrintPredictionInterval        <- function(est, lCi, uCi, digits) {
+.maPrintPredictionInterval            <- function(est, lCi, uCi, digits) {
   return(sprintf(paste0(
     "   ", "%1$.", digits, "f",
     " [",
@@ -2478,13 +2461,13 @@
     .maAddSpaceForPositiveValue(uCi), "%3$.", digits, "f",
     "]"), est, lCi, uCi))
 }
-.maAddSpaceForPositiveValue       <- function(value) {
+.maAddSpaceForPositiveValue           <- function(value) {
   if (value >= 0)
     return(" ")
   else
     return("")
 }
-.maMakeDiamondDataFrame           <- function(est, lCi, uCi, row, id, adj = 1/3) {
+.maMakeDiamondDataFrame               <- function(est, lCi, uCi, row, id, adj = 1/3) {
   return(data.frame(
     id       = id,
     x        = c(lCi,  est,     uCi,  est),
@@ -2493,7 +2476,7 @@
     mapColor = NA
   ))
 }
-.maMakeRectangleDataFrame         <- function(lCi, uCi, row, id, adj = 1/5) {
+.maMakeRectangleDataFrame             <- function(lCi, uCi, row, id, adj = 1/5) {
   return(data.frame(
     id       = id,
     x        = c(lCi,     uCi,      uCi,      lCi),
@@ -2502,7 +2485,7 @@
     mapColor = NA
   ))
 }
-.maGetDigitsBeforeDecimal         <- function(x) {
+.maGetDigitsBeforeDecimal             <- function(x) {
 
   dNAs <- is.na(x)
   dPos <- floor(log10(x[!dNAs & x >= 0])) + 1
@@ -2518,7 +2501,7 @@
 
   return(nDigits)
 }
-.maFormatDigits                   <- function(x, digits) {
+.maFormatDigits                       <- function(x, digits) {
 
   xOut <- rep("", length(x))
   xNa  <- is.na(x)
@@ -2534,7 +2517,7 @@
 
   return(xOut)
 }
-.maBubblePlotMakeConfidenceBands  <- function(dfPlot, lCi = "lCi", uCi = "uCi") {
+.maBubblePlotMakeConfidenceBands      <- function(dfPlot, lCi = "lCi", uCi = "uCi") {
 
   if (!is.null(dfPlot[["separateLines"]])) {
     dfBands <- do.call(rbind, lapply(unique(dfPlot[["separateLines"]]), function(lvl) {
@@ -2555,7 +2538,7 @@
 
   return(dfBands)
 }
-.maMergeVariablesLevels           <- function(df, variables, mergedName) {
+.maMergeVariablesLevels               <- function(df, variables, mergedName) {
   if (length(variables) == 1) {
     df[[mergedName]] <- df[,variables]
   } else if (length(variables) > 1) {
@@ -2563,7 +2546,7 @@
   }
   return(df)
 }
-.maTransformToHtml                <- function(rCode) {
+.maTransformToHtml                    <- function(rCode) {
 
   # Replace special characters with HTML entities
   htmlCode <- gsub("&", "&amp;", rCode)
@@ -2577,7 +2560,7 @@
 
   return(htmlCode)
 }
-.maExtractVifResults              <- function(vifResults, options, parameter) {
+.maExtractVifResults                  <- function(vifResults, options, parameter) {
 
   if (.maIsMetaregressionHeterogeneity(options))
     vifResults <- vifResults[[switch(
@@ -2595,7 +2578,7 @@
 
   return(vifResults)
 }
-.maGetVariableColumnType          <- function(variable, options) {
+.maGetVariableColumnType              <- function(variable, options) {
 
   if (variable %in% c(options[["effectSize"]], options[["effectSizeStandardError"]])) {
     return("number")
@@ -2611,13 +2594,31 @@
     return("string")
   }
 }
-.maSuppressPlot                   <- function(plotExpression) {
+.maSuppressPlot                       <- function(plotExpression) {
   temp <- tempfile()
   pdf(file = temp)
   dfOut <- plotExpression
   dev.off()
   unlink(temp)
   return(dfOut)
+}
+.maExtractAndFormatPrediction         <- function(out) {
+
+  # save as a data.frame
+  out <- data.frame(out)
+
+  # TODO: decide whether those should be added as NAs or CIs
+  # - if NAs, need to be adjusted for in the rest of the code / GUI
+  if (!"pi.lb" %in% colnames(out)) {
+    out$pi.lb <- out$ci.lb
+    out$pi.ub <- out$ci.ub
+  }
+
+  # rename into a consistent format
+  out           <- out[,c("pred", "se", "ci.lb", "ci.ub", "pi.lb", "pi.ub")]
+  colnames(out) <- c("est", "se", "lCi", "uCi", "lPi", "uPi")
+
+  return(out)
 }
 
 # messages

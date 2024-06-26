@@ -130,6 +130,21 @@ Section
 				text:			qsTr("Study weights")
 				enabled:		forestPlotStudyInformation.checked
 			}
+
+			CheckBox
+			{
+				name:			"forestPlotStudyInformationSecondaryConfidenceInterval"
+				text:			qsTr("Secondary confidence interval")
+				enabled:		forestPlotStudyInformation.checked
+				childrenOnSameRow:	true
+
+				CIField
+				{ 
+					name:			"forestPlotStudyInformationSecondaryConfidenceIntervalLevel"
+					text:			""
+					defaultValue:	89
+				}
+			}
 		}
 
 		Group
@@ -268,7 +283,8 @@ Section
 			name:		"forestPlotResidualHeterogeneityEstimate"
 			text:		qsTr("Residual heterogeneity estimate")
 			enabled:	(method.value != "fixedEffects" || method.value != "equalEffects")
-			checked:	true
+			visible:	module == "metaAnalysis"
+			checked:	module == "metaAnalysis"
 		}
 
 		CheckBox
@@ -284,7 +300,8 @@ Section
 			name:		"forestPlotHeterogeneityModerationTest"
 			text:		qsTr("Heterogeneity moderation test")
 			enabled:	sectionModel.heterogeneityModelTermsCount > 0
-			checked:	true
+			visible:	module == "metaAnalysis"
+			checked:	module == "metaAnalysis"
 		}
 	}
 

@@ -20,14 +20,26 @@
     )
 
     # add CI using normal approximation
-    dfForrest$lCi <- dfForrest$effectSize - 1.96 * dfForrest$standardError
-    dfForrest$uCi <- dfForrest$effectSize + 1.96 * dfForrest$standardError
+    dfForrest$lCi <- dfForrest$effectSize - qnorm((1 - options[["confidenceIntervalsLevel"]]) / 2, lower.tail = F) * dfForrest$standardError
+    dfForrest$uCi <- dfForrest$effectSize + qnorm((1 - options[["confidenceIntervalsLevel"]]) / 2, lower.tail = F) * dfForrest$standardError
+
+    if (options[["forestPlotStudyInformationSecondaryConfidenceInterval"]]) {
+      dfForrest$lCi2 <- dfForrest$effectSize - qnorm((1 - options[["forestPlotStudyInformationSecondaryConfidenceIntervalLevel"]]) / 2, lower.tail = F) * dfForrest$standardError
+      dfForrest$uCi2 <- dfForrest$effectSize + qnorm((1 - options[["forestPlotStudyInformationSecondaryConfidenceIntervalLevel"]]) / 2, lower.tail = F) * dfForrest$standardError
+    }
+
 
     # transform effect size when requested
-    if (options[["transformEffectSize"]] != "none")
-      dfForrest[,c("effectSize", "lCi", "uCi")] <- do.call(
-        .maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]),
-        list(dfForrest[,c("effectSize", "lCi", "uCi")]))
+    if (options[["transformEffectSize"]] != "none") {
+
+      dfForrest[,c(
+        "effectSize", "lCi", "uCi",
+        if (options[["forestPlotStudyInformationSecondaryConfidenceInterval"]]) c("lCi2", "uCi2"))] <- do.call(
+          .maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]),
+          list(dfForrest[,c(
+              "effectSize", "lCi", "uCi",
+              if (options[["forestPlotStudyInformationSecondaryConfidenceInterval"]]) c("lCi2", "uCi2"))]))
+    }
 
     xRangeStudyInformationPanel <- range(c(dfForrest$lCi, dfForrest$uCi))
 
@@ -67,7 +79,7 @@
 
       # create prediction diamond coordinates for each estimate
       fitPrediction <- do.call(rbind, lapply(1:nrow(fitPrediction), function(i) {
-        with(fitPrediction[i,], .maMakeDiamondDataFrame(est = pred,lCi = pi.lb, uCi = pi.ub, row = row, id = id))
+        with(fitPrediction[i,], .maMakeDiamondDataFrame(est = pred, lCi = pi.lb, uCi = pi.ub, row = row, id = id))
       }))
 
       fitPrediction <- merge(fitPrediction, dfForrest[,!colnames(dfForrest) %in% c("effectSize", "standardError", "weights", "lCi", "uCi")], by = "id")
@@ -414,16 +426,18 @@
       x     = as.name("effectSize"),
       y     = as.name("y"),
       color = if (options[["forestPlotMappingColor"]] != "") as.name(options[["forestPlotMappingColor"]]),
-      shape = if (options[["forestPlotMappingShape"]] != "") as.name(options[["forestPlotMappingShape"]])
+      shape = if (options[["forestPlotMappingShape"]] != "") as.name(options[["forestPlotMappingShape"]]),
+      size  = as.name("weights")
     )
     geomCall <- list(
       data    = dfForrest,
       mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
       color   = if (options[["forestPlotMappingColor"]] == "") options[["forestPlotAuxiliaryPlotColor"]],
-      shape   = if (options[["forestPlotMappingShape"]] == "") 15,
-      size    = dfForrest[["weights"]] * options[["forestPlotRelativeSizeEstimates"]]
+      shape   = if (options[["forestPlotMappingShape"]] == "") 15
     )
-    plotForest <- plotForest + do.call(ggplot2::geom_point, geomCall[!sapply(geomCall, is.null)])
+    plotForest <- plotForest + do.call(ggplot2::geom_point, geomCall[!sapply(geomCall, is.null)]) +
+      ggplot2::scale_size(range = c(1, 6) * options[["forestPlotRelativeSizeEstimates"]])
+
 
     # change scale for shapes to full shapes if used
     if (options[["forestPlotMappingShape"]] != "")
@@ -440,6 +454,19 @@
       ),
       height = 0
     )
+
+    if (options[["forestPlotStudyInformationSecondaryConfidenceInterval"]]) {
+      plotForest <- plotForest + ggplot2::geom_errorbarh(
+        data    = dfForrest,
+        mapping = ggplot2::aes(
+          xmin = lCi2,
+          xmax = uCi2,
+          y    = y
+        ),
+        color  = "darkblue",
+        height = 0.3
+      )
+    }
 
   }
 
