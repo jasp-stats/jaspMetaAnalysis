@@ -1844,24 +1844,41 @@
 .maMakeBubblePlotDataset           <- function(fit, options, dataset) {
 
   # extract options
-  separateLines     <- unlist(options[["bubblePlotSeparateLines"]])
-  separatePlots     <- unlist(options[["bubblePlotSeparatePlots"]])
-  selectedVariable  <- options[["bubblePlotSelectedVariable"]][[1]][["variable"]]
+  separateLines        <- unlist(options[["bubblePlotSeparateLines"]])
+  separatePlots        <- unlist(options[["bubblePlotSeparatePlots"]])
+  selectedVariable     <- options[["bubblePlotSelectedVariable"]][[1]][["variable"]]
+  selectedVariableType <- options[["predictors.types"]][options[["predictors"]] == selectedVariable]
 
-  # create nice plotting range
-  xRange <- range(jaspGraphs::getPrettyAxisBreaks(range(dataset[[selectedVariable]])))
-  trendSequence <- seq(xRange[1], xRange[2], length.out =  101)
+  # create a range of values for continuous predictors to plot the trend but use lvls for factors
+  if (selectedVariableType == "scale") {
 
-  predictorMatrixEffectSize <- .maGetMarginalMeansPredictorMatrix(
-    fit               = fit,
-    options           = options,
-    dataset           = dataset,
-    selectedVariables = c(separateLines, separatePlots),
-    sdFactor          = options[["bubblePlotSdFactorCovariates"]],
-    trendVarible      = selectedVariable,
-    trendSequence     = trendSequence,
-    parameter         = "effectSize"
-  )
+    xRange <- range(jaspGraphs::getPrettyAxisBreaks(range(dataset[[selectedVariable]])))
+    trendSequence <- seq(xRange[1], xRange[2], length.out =  101)
+
+    predictorMatrixEffectSize <- .maGetMarginalMeansPredictorMatrix(
+      fit               = fit,
+      options           = options,
+      dataset           = dataset,
+      selectedVariables = c(separateLines, separatePlots),
+      sdFactor          = options[["bubblePlotSdFactorCovariates"]],
+      trendVarible      = selectedVariable,
+      trendSequence     = trendSequence,
+      parameter         = "effectSize"
+    )
+
+  } else if (selectedVariableType == "nominal") {
+
+    predictorMatrixEffectSize <- .maGetMarginalMeansPredictorMatrix(
+      fit               = fit,
+      options           = options,
+      dataset           = dataset,
+      selectedVariables = c(selectedVariable, separateLines, separatePlots),
+      sdFactor          = options[["bubblePlotSdFactorCovariates"]],
+      parameter         = "effectSize"
+    )
+
+  }
+
 
   if (.maIsMetaregressionHeterogeneity(options)) {
 
@@ -1906,12 +1923,13 @@
   ### merge and add attributes
   dfPlot <- cbind.data.frame(selectedGrid, computedMarginalMeans)
 
-  attr(dfPlot, "selectedVariable") <- selectedVariable
+  attr(dfPlot, "selectedVariable")     <- selectedVariable
+  attr(dfPlot, "selectedVariableType") <- selectedVariableType
   attr(dfPlot, "separateLines")  <- paste(separateLines, collapse = " | ")
   attr(dfPlot, "separatePlots")  <- paste(separatePlots, collapse = " | ")
   attr(dfPlot, "variablesLines") <- separateLines
   attr(dfPlot, "variablesPlots") <- separatePlots
-  attr(dfPlot, "xRange")         <- xRange
+  attr(dfPlot, "xRange")         <- if (selectedVariableType == "scale") xRange
 
   return(dfPlot)
 }
@@ -2529,21 +2547,58 @@
 }
 .maBubblePlotMakeConfidenceBands      <- function(dfPlot, lCi = "lCi", uCi = "uCi") {
 
-  if (!is.null(dfPlot[["separateLines"]])) {
-    dfBands <- do.call(rbind, lapply(unique(dfPlot[["separateLines"]]), function(lvl) {
-      dfSubset  <- dfPlot[dfPlot[["separateLines"]] == lvl,]
-      dfPolygon <- data.frame(
-        selectedVariable  = c(dfSubset$selectedVariable, rev(dfSubset$selectedVariable)),
-        y                 = c(dfSubset[[lCi]],           rev(dfSubset[[uCi]]))
+  if (attr(dfPlot, "selectedVariableType") == "scale") {
+
+    if (!is.null(dfPlot[["separateLines"]])) {
+      dfBands <- do.call(rbind, lapply(unique(dfPlot[["separateLines"]]), function(lvl) {
+        dfSubset  <- dfPlot[dfPlot[["separateLines"]] == lvl,]
+        dfPolygon <- data.frame(
+          selectedVariable  = c(dfSubset$selectedVariable, rev(dfSubset$selectedVariable)),
+          y                 = c(dfSubset[[lCi]],           rev(dfSubset[[uCi]]))
+        )
+        dfPolygon$separateLines <- lvl
+        return(dfPolygon)
+      }))
+    } else {
+      dfBands <- data.frame(
+        selectedVariable = c(dfPlot$selectedVariable, rev(dfPlot$selectedVariable)),
+        y                = c(dfPlot[[lCi]],           rev(dfPlot[[uCi]]))
       )
-      dfPolygon$separateLines <- lvl
-      return(dfPolygon)
-    }))
+    }
+
   } else {
-    dfBands <- data.frame(
-      selectedVariable = c(dfPlot$selectedVariable, rev(dfPlot$selectedVariable)),
-      y                = c(dfPlot[[lCi]],           rev(dfPlot[[uCi]]))
-    )
+
+    selectedLevels <- levels(dfPlot[["selectedVariable"]])
+    nLevels        <- length(selectedLevels)
+    xWidth         <- 0.20
+
+    if (!is.null(dfPlot[["separateLines"]])) {
+      dfBands <- do.call(rbind, lapply(unique(dfPlot[["separateLines"]]), function(lvl) {
+        dfSubset  <- dfPlot[dfPlot[["separateLines"]] == lvl,]
+        dfPolygon <- do.call(rbind, lapply(seq_along(selectedLevels), function(i) {
+          dfSubset  <- dfPlot[dfPlot[["selectedVariable"]] == selectedLevels[i],]
+          dfPolygon <- data.frame(
+            selectedVariable  = c(i - xWidth, i + xWidth,   i + xWidth, i - xWidth),
+            y                 = c(rep(dfSubset[[lCi]], 2),  rep(dfSubset[[uCi]], 2))
+          )
+          dfPolygon$selectedLevel <- selectedLevels[i]
+          return(dfPolygon)
+        }))
+        dfPolygon$separateLines <- lvl
+        return(dfPolygon)
+      }))
+    } else {
+      dfBands <- do.call(rbind, lapply(seq_along(selectedLevels), function(i) {
+        dfSubset  <- dfPlot[dfPlot[["selectedVariable"]] == selectedLevels[i],]
+        dfPolygon <- data.frame(
+          selectedVariable  = c(i - xWidth, i + xWidth,   i + xWidth, i - xWidth),
+          y                 = c(rep(dfSubset[[lCi]], 2),  rep(dfSubset[[uCi]], 2))
+        )
+        dfPolygon$selectedLevel <- selectedLevels[i]
+        return(dfPolygon)
+      }))
+    }
+
   }
 
   return(dfBands)
