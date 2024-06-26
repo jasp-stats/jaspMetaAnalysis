@@ -101,7 +101,9 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotAuxiliaryEffectLabel",
   "forestPlotAuxiliarySetXAxisLimit",
   "forestPlotAuxiliarySetXAxisLimitLower",
-  "forestPlotAuxiliarySetXAxisLimitUpper"
+  "forestPlotAuxiliarySetXAxisLimitUpper",
+  "forestPlotStudyInformationSecondaryConfidenceInterval",
+  "forestPlotStudyInformationSecondaryConfidenceIntervalLevel"
 )
 .maBubblePlotDependencies <- c(
   .maDependencies, "transformEffectSize", "confidenceIntervalsLevel",

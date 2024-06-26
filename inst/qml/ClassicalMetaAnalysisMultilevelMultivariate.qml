@@ -362,7 +362,10 @@ Form
 		module:		"metaAnalysisMultilevelMultivariate"
 	}
 
-	MA.ClassicalMetaAnalysisForestPlot {}
+	MA.ClassicalMetaAnalysisForestPlot
+	{
+		module:		"metaAnalysisMultilevelMultivariate"
+	}
 
 	MA.ClassicalMetaAnalysisBubblePlot {}
 
