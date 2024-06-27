@@ -22,15 +22,25 @@
 
 
 # TODO:
+# Coefficient tests
+# - parwise() from new metafor version
+# - add permutaion test
 # Estimated Marginal Means
 # - add variable interactions
 # - specify and test contrasts
+# Forest plot
+# - allow aggregation of studies by a factor (then show simple REML aggregation within and overlaying shaded estimates)
 # Bubble plot
 # - binning of continuous covariates (requires returning continous levels returned in gridMatrix)
 # - allow factors as dependent variables
 # AIC/BIC Model-averaging
 # Diagnostics
 # - model re-run on presence of influential cases
+# - residual
+#   - forest plot
+#   - vs predicted
+#   - vs outcome
+#   - vs covariates
 # Generic
 # - allow different covariates factoring across all settings
 
@@ -1943,46 +1953,28 @@
 
   ### add prediction bads
   if (options[["bubblePlotPredictionIntervals"]]) {
-    aesCall <- list(
-      x     = as.name("selectedVariable"),
-      y     = as.name("y"),
-      fill  = if (hasSeparateLines) as.name("separateLines"),
-      group = if (hasSeparateLines) as.name("separateLines")
-    )
-    dfPiBands <-  .maBubblePlotMakeConfidenceBands(dfPlot, lCi = "lPi", uCi = "uPi")
-    dfPiBands[["y"]] <- do.call(.maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]), list(dfPiBands[["y"]]))
-    geomCall <- list(
-      data    = dfPiBands,
-      mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
-      alpha   = options[["bubblePlotPredictionIntervalsTransparency"]]
-    )
 
-    if (any(!is.na(dfPiBands[["y"]])))
-      bubblePlot <- bubblePlot + do.call(ggplot2::geom_polygon, geomCall)
+    geomPi <- .maBubblePlotMakeCiGeom(dfPlot, options, ci = FALSE)
 
-    yRange <- range(c(yRange, dfPiBands$y))
+    if (!is.null(geomPi)) {
+      bubblePlot <- bubblePlot + do.call(geomPi$what, geomPi$args)
+      yRange     <- attr(geomPi, "yRange")
+    } else {
+      yRange     <- NA
+    }
+
   }
 
   ### add confidence bands
   if (options[["bubblePlotCondifenceIntervals"]]) {
-    aesCall <- list(
-      x     = as.name("selectedVariable"),
-      y     = as.name("y"),
-      fill  = if (hasSeparateLines) as.name("separateLines"),
-      group = if (hasSeparateLines) as.name("separateLines")
-    )
-    dfCiBands <- .maBubblePlotMakeConfidenceBands(dfPlot)
-    dfCiBands[["y"]] <- do.call(.maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]), list(dfCiBands[["y"]]))
-    geomCall <- list(
-      data    = dfCiBands,
-      mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
-      alpha   = options[["bubblePlotCondifenceIntervalsTransparency"]]
-    )
 
-    if (any(!is.na(dfCiBands[["y"]])))
-      bubblePlot <- bubblePlot + do.call(ggplot2::geom_polygon, geomCall)
+    geomCi <- .maBubblePlotMakeCiGeom(dfPlot, options, ci = TRUE)
 
-    yRange <- range(c(yRange, dfCiBands$y), na.rm = TRUE)
+    if (!is.null(geomCi)) {
+      bubblePlot <- bubblePlot + do.call(geomCi$what, geomCi$args)
+      yRange     <- range(c(yRange, attr(geomCi, "yRange")), na.rm = TRUE)
+    }
+
   }
 
   ### add predictiction line
@@ -2035,12 +2027,26 @@
     fill  = if (hasSeparateLines) as.name("separateLines"),
     alpha = options[["bubblePlotBubblesTransparency"]]
   )
+
   dfStudies[["effectSize"]] <- do.call(.maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]), list(dfStudies[["effectSize"]]))
+
   geomCall <- list(
     data    = dfStudies,
     mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
     show.legend = FALSE
   )
+  if (attr(dfPlot, "selectedVariableType") == "nominal" && hasSeparateLines) {
+    geomCall$position <- ggplot2::position_jitterdodge(
+      jitter.width  = 0.2 * options[["bubblePlotBubblesJitter"]],
+      jitter.height = 0
+    )
+  }else if (attr(dfPlot, "selectedVariableType") == "nominal") {
+    geomCall$position <- ggplot2::position_jitter(
+      width  = 0.2 * options[["bubblePlotBubblesJitter"]],
+      height = 0
+    )
+  }
+
   bubblePlot <- bubblePlot + do.call(jaspGraphs::geom_point, geomCall) +
     ggplot2::scale_size(range = c(1.5, 10) * options[["bubblePlotBubblesRelativeSize"]])
   yRange     <- range(c(yRange, dfStudies[["effectSize"]]))
@@ -2055,12 +2061,24 @@
 }
 .maAddBubblePlotTheme              <- function(plot, options, dfPlot, yRange) {
 
+
+  selectedVariableType <- attr(dfPlot, "selectedVariableType")
+
+  if (selectedVariableType == "scale") {
+    plot <- plot +
+      jaspGraphs::scale_x_continuous(
+        name   = attr(dfPlot, "selectedVariable"),
+        breaks = jaspGraphs::getPrettyAxisBreaks(attr(dfPlot, "xRange")),
+        limits = attr(dfPlot, "xRange")
+      )
+  } else if (selectedVariableType == "nominal") {
+    plot <- plot +
+      ggplot2::scale_x_discrete(
+        name   = attr(dfPlot, "selectedVariable")
+      )
+  }
+
   plot <- plot +
-    jaspGraphs::scale_x_continuous(
-      name   = attr(dfPlot, "selectedVariable"),
-      breaks = jaspGraphs::getPrettyAxisBreaks(attr(dfPlot, "xRange")),
-      limits = attr(dfPlot, "xRange")
-    ) +
     jaspGraphs::scale_y_continuous(
       name   = if (options[["transformEffectSize"]] == "none") gettext("Effect Size") else .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]]),
       breaks = jaspGraphs::getPrettyAxisBreaks(yRange),
@@ -2224,6 +2242,73 @@
   }
 
   return(tableVif)
+}
+.maBubblePlotMakeCiGeom            <- function(dfPlot, options, ci = TRUE) {
+
+  hasSeparateLines     <- attr(dfPlot, "separateLines") != ""
+  hasSeparatePlots     <- attr(dfPlot, "separatePlots") != ""
+  selectedVariableType <- attr(dfPlot, "selectedVariableType")
+
+  aesCall <- list(
+    x      = as.name("selectedVariable"),
+    fill   = if (hasSeparateLines) as.name("separateLines"),
+    group  = if (hasSeparateLines && selectedVariableType == "scale") as.name("separateLines")
+  )
+
+  if (selectedVariableType == "scale") {
+    aesCall$y      <- as.name("y")
+  } else if (selectedVariableType == "nominal") {
+    aesCall$lower   <- as.name("lower")
+    aesCall$upper   <- as.name("upper")
+    aesCall$ymin    <- as.name("lower")
+    aesCall$ymax    <- as.name("upper")
+    aesCall$middle  <- as.name("middle")
+  }
+
+  dfBands <-  .maBubblePlotMakeConfidenceBands(
+    dfPlot,
+    lCi = if (ci) "lCi" else "lPi",
+    uCi = if (ci) "uCi" else "uPi"
+  )
+
+  if (selectedVariableType == "scale") {
+    dfBands[["y"]] <- do.call(.maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]), list(dfBands[["y"]]))
+  } else if (selectedVariableType == "nominal") {
+    dfBands[,c("lower","middle","upper")]  <- do.call(
+      .maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]),
+      list(dfBands[,c("lower","middle","upper")]))
+  }
+
+  geomCall <- list(
+    data    = dfBands,
+    mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
+    alpha   = options[["bubblePlotPredictionIntervalsTransparency"]]
+  )
+
+  if (selectedVariableType == "nominal") {
+    geomCall$stat = "identity"
+    if (!hasSeparateLines)
+      geomCall$fill = "grey"
+  }
+
+
+  if (selectedVariableType == "scale" && any(!is.na(dfBands[["y"]]))) {
+    geom <- list(
+      what = ggplot2::geom_polygon,
+      args = geomCall
+    )
+    attr(geom, "yRange") <- range(c(dfBands$y))
+  } else if (selectedVariableType == "nominal" && any(!is.na(dfBands[["lower"]]))) {
+    geom <- list(
+      what = ggplot2::geom_boxplot,
+      args = geomCall
+    )
+    attr(geom, "yRange") <- range(c(dfBands$lower, dfBands$upper))
+  } else {
+    geom <- NULL
+  }
+
+  return(geom)
 }
 
 # check functions
@@ -2568,36 +2653,13 @@
 
   } else {
 
-    selectedLevels <- levels(dfPlot[["selectedVariable"]])
-    nLevels        <- length(selectedLevels)
-    xWidth         <- 0.20
-
-    if (!is.null(dfPlot[["separateLines"]])) {
-      dfBands <- do.call(rbind, lapply(unique(dfPlot[["separateLines"]]), function(lvl) {
-        dfSubset  <- dfPlot[dfPlot[["separateLines"]] == lvl,]
-        dfPolygon <- do.call(rbind, lapply(seq_along(selectedLevels), function(i) {
-          dfSubset  <- dfPlot[dfPlot[["selectedVariable"]] == selectedLevels[i],]
-          dfPolygon <- data.frame(
-            selectedVariable  = c(i - xWidth, i + xWidth,   i + xWidth, i - xWidth),
-            y                 = c(rep(dfSubset[[lCi]], 2),  rep(dfSubset[[uCi]], 2))
-          )
-          dfPolygon$selectedLevel <- selectedLevels[i]
-          return(dfPolygon)
-        }))
-        dfPolygon$separateLines <- lvl
-        return(dfPolygon)
-      }))
-    } else {
-      dfBands <- do.call(rbind, lapply(seq_along(selectedLevels), function(i) {
-        dfSubset  <- dfPlot[dfPlot[["selectedVariable"]] == selectedLevels[i],]
-        dfPolygon <- data.frame(
-          selectedVariable  = c(i - xWidth, i + xWidth,   i + xWidth, i - xWidth),
-          y                 = c(rep(dfSubset[[lCi]], 2),  rep(dfSubset[[uCi]], 2))
-        )
-        dfPolygon$selectedLevel <- selectedLevels[i]
-        return(dfPolygon)
-      }))
-    }
+    dfBands <- data.frame(
+      lower            = dfPlot[[lCi]],
+      upper            = dfPlot[[uCi]],
+      middle           = dfPlot[["est"]],
+      selectedVariable = dfPlot[["selectedVariable"]],
+      separateLines    = if (!is.null(dfPlot[["separateLines"]])) dfPlot[["separateLines"]]
+    )
 
   }
 
