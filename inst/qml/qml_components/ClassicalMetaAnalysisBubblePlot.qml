@@ -118,7 +118,7 @@ Section
 					enabled:		bubblePlotSelectedVariable.columnsTypes.includes("nominal")
 					name:			"bubblePlotBubblesJitter"
 					label:			qsTr("Jitter")
-					defaultValue:	0.1
+					defaultValue:	1
 					min:			0
 				}
 			}
