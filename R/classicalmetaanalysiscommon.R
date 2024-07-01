@@ -2037,13 +2037,14 @@
   )
   if (attr(dfPlot, "selectedVariableType") == "nominal" && hasSeparateLines) {
     geomCall$position <- ggplot2::position_jitterdodge(
-      jitter.width  = 0.2 * options[["bubblePlotBubblesJitter"]],
-      jitter.height = 0
+      jitter.width  = 0.35 * options[["bubblePlotBubblesJitter"]],
+      jitter.height = 0,
+      dodge.width   = 0.9
     )
   }else if (attr(dfPlot, "selectedVariableType") == "nominal") {
     geomCall$position <- ggplot2::position_jitter(
-      width  = 0.2 * options[["bubblePlotBubblesJitter"]],
-      height = 0
+      width       = 0.35 * options[["bubblePlotBubblesJitter"]],
+      height      = 0
     )
   }
 
@@ -2286,9 +2287,10 @@
   )
 
   if (selectedVariableType == "nominal") {
-    geomCall$stat = "identity"
+    geomCall$stat     <- "identity"
+    geomCall$position <- ggplot2::position_dodge2(width = 0.9)
     if (!hasSeparateLines)
-      geomCall$fill = "grey"
+      geomCall$fill <- "grey"
   }
 
 
@@ -2635,6 +2637,7 @@
   if (attr(dfPlot, "selectedVariableType") == "scale") {
 
     if (!is.null(dfPlot[["separateLines"]])) {
+
       dfBands <- do.call(rbind, lapply(unique(dfPlot[["separateLines"]]), function(lvl) {
         dfSubset  <- dfPlot[dfPlot[["separateLines"]] == lvl,]
         dfPolygon <- data.frame(
@@ -2644,11 +2647,14 @@
         dfPolygon$separateLines <- lvl
         return(dfPolygon)
       }))
+
     } else {
+
       dfBands <- data.frame(
         selectedVariable = c(dfPlot$selectedVariable, rev(dfPlot$selectedVariable)),
         y                = c(dfPlot[[lCi]],           rev(dfPlot[[uCi]]))
       )
+
     }
 
   } else {
@@ -2657,9 +2663,11 @@
       lower            = dfPlot[[lCi]],
       upper            = dfPlot[[uCi]],
       middle           = dfPlot[["est"]],
-      selectedVariable = dfPlot[["selectedVariable"]],
-      separateLines    = if (!is.null(dfPlot[["separateLines"]])) dfPlot[["separateLines"]]
+      selectedVariable = dfPlot[["selectedVariable"]]
     )
+
+    if (!is.null(dfPlot[["separateLines"]]))
+      dfBands$separateLines <- dfPlot[["separateLines"]]
 
   }
 
