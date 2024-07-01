@@ -30,9 +30,6 @@
 # - specify and test contrasts
 # Forest plot
 # - allow aggregation of studies by a factor (then show simple REML aggregation within and overlaying shaded estimates)
-# Bubble plot
-# - binning of continuous covariates (requires returning continous levels returned in gridMatrix)
-# - allow factors as dependent variables
 # AIC/BIC Model-averaging
 # Diagnostics
 # - model re-run on presence of influential cases
@@ -1921,6 +1918,9 @@
   ### modify and rename selectedGrid
   selectedGrid <- attr(predictorMatrixEffectSize, "selectedGrid")
   selectedGrid$selectedVariable <- selectedGrid[,selectedVariable]
+  # deal with continuous variables dichotomization
+  selectedGrid     <- .maDichotomizeVariablesLevels(selectedGrid, c(separateLines, separatePlots), options)
+  continuousLevels <- attr(selectedGrid, "continuousLevels")
   # collapse factor levels if multiple selected
   selectedGrid <- .maMergeVariablesLevels(selectedGrid, separateLines, "separateLines")
   selectedGrid <- .maMergeVariablesLevels(selectedGrid, separatePlots, "separatePlots")
@@ -1935,11 +1935,12 @@
 
   attr(dfPlot, "selectedVariable")     <- selectedVariable
   attr(dfPlot, "selectedVariableType") <- selectedVariableType
-  attr(dfPlot, "separateLines")  <- paste(separateLines, collapse = " | ")
-  attr(dfPlot, "separatePlots")  <- paste(separatePlots, collapse = " | ")
-  attr(dfPlot, "variablesLines") <- separateLines
-  attr(dfPlot, "variablesPlots") <- separatePlots
-  attr(dfPlot, "xRange")         <- if (selectedVariableType == "scale") xRange
+  attr(dfPlot, "separateLines")    <- paste(separateLines, collapse = " | ")
+  attr(dfPlot, "separatePlots")    <- paste(separatePlots, collapse = " | ")
+  attr(dfPlot, "variablesLines")   <- separateLines
+  attr(dfPlot, "variablesPlots")   <- separatePlots
+  attr(dfPlot, "continuousLevels") <- continuousLevels[!sapply(continuousLevels, is.null)]
+  attr(dfPlot, "xRange")           <- if (selectedVariableType == "scale") xRange
 
   return(dfPlot)
 }
@@ -1977,19 +1978,21 @@
 
   }
 
-  ### add predictiction line
-  aesCall <- list(
-    x     = as.name("selectedVariable"),
-    y     = as.name("est"),
-    color = if (hasSeparateLines) as.name("separateLines")
-  )
-  dfPlot[["y"]] <- do.call(.maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]), list(dfPlot[["y"]]))
-  geomCall <- list(
-    data    = dfPlot,
-    mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)])
-  )
-  bubblePlot <- bubblePlot + do.call(jaspGraphs::geom_line, geomCall)
-  yRange <- range(c(yRange, dfPlot$pred), na.rm = TRUE)
+  ### add prediction line
+  if (attr(dfPlot, "selectedVariableType") == "scale") {
+    aesCall <- list(
+      x     = as.name("selectedVariable"),
+      y     = as.name("est"),
+      color = if (hasSeparateLines) as.name("separateLines")
+    )
+    dfPlot[["y"]] <- do.call(.maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]), list(dfPlot[["y"]]))
+    geomCall <- list(
+      data    = dfPlot,
+      mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)])
+    )
+    bubblePlot <- bubblePlot + do.call(jaspGraphs::geom_line, geomCall)
+    yRange <- range(c(yRange, dfPlot$pred), na.rm = TRUE)
+  }
 
   ### add studies as bubbles
   dfStudies <- data.frame(
@@ -2007,8 +2010,11 @@
     dfStudies[attr(dfPlot, "variablesPlots")] <- fit[["data"]][attr(dfPlot, "variablesPlots")]
 
   # make same encoding
+  dfStudies <- .maDichotomizeVariablesDataset(dfStudies, c(attr(dfPlot, "variablesLines"), attr(dfPlot, "variablesPlots")), attr(dfPlot, "continuousLevels"), options)
   dfStudies <- .maMergeVariablesLevels(dfStudies, variablesLines <- attr(dfPlot, "variablesLines"), "separateLines")
   dfStudies <- .maMergeVariablesLevels(dfStudies, variablesLines <- attr(dfPlot, "variablesPlots"), "separatePlots")
+  if (hasSeparateLines)
+    levels(dfStudies[,"separateLines"]) <- levels(dfPlot[,"separateLines"])
 
   # subset original data across plots
   if (!is.null(separatePlotsLvl))
@@ -2675,9 +2681,15 @@
 }
 .maMergeVariablesLevels               <- function(df, variables, mergedName) {
   if (length(variables) == 1) {
-    df[[mergedName]] <- df[,variables]
+    df[[mergedName]] <- factor(
+      df[,variables],
+      levels = unique(df[,variables])
+    )
   } else if (length(variables) > 1) {
-    df[[mergedName]] <- apply(df[,variables], 1, function(x) paste(x, collapse = " | "))
+    df[[mergedName]] <- factor(
+      apply(df[,variables], 1, function(x) paste(x, collapse = " | ")),
+      levels = unique(apply(df[,variables], 1, function(x) paste(x, collapse = " | ")))
+    )
   }
   return(df)
 }
@@ -2756,6 +2768,44 @@
   colnames(out) <- c("est", "se", "lCi", "uCi", "lPi", "uPi")
 
   return(out)
+}
+.maDichotomizeVariablesLevels         <- function(df, variables, options) {
+
+  variablesContinuous <- variables[variables %in% options[["predictors"]][options[["predictors.types"]] == "scale"]]
+  for (i in seq_along(variablesContinuous)){
+    tempUnique <- sort(unique(df[[variablesContinuous[i]]]))
+    df[[variablesContinuous[i]]] <- as.character(factor(
+      df[[variablesContinuous[i]]],
+      levels = tempUnique,
+      labels = c(paste0("Mean - ", options[["bubblePlotSdFactorCovariates"]], "SD"), "Mean", paste0("Mean + ", options[["bubblePlotSdFactorCovariates"]], "SD"))
+    ))
+    attr(df, "continuousLevels") <- list(
+      attr(df, "continuousLevels"),
+      list(
+        variable = variablesContinuous[i],
+        levels   = tempUnique
+      )
+    )
+  }
+  return(df)
+}
+.maDichotomizeVariablesDataset        <- function(df, variables, variablesInformation, options) {
+
+  variablesContinuous  <- variables[variables %in% options[["predictors"]][options[["predictors.types"]] == "scale"]]
+
+  for (i in seq_along(variablesContinuous)){
+
+    tempUnique <- variablesInformation[[sapply(variablesInformation, function(x) x[["variable"]]) == variablesContinuous[i]]]
+
+    df[[variablesContinuous[i]]] <- cut(
+      df[[variablesContinuous[i]]],
+      breaks = c(-Inf, mean(tempUnique[["levels"]][1:2]), mean(tempUnique[["levels"]][2:3]), Inf),
+      labels = c(paste0("Mean - ", options[["bubblePlotSdFactorCovariates"]], "SD"), "Mean", paste0("Mean + ", options[["bubblePlotSdFactorCovariates"]], "SD"))
+    )
+
+  }
+
+  return(df)
 }
 
 # messages
