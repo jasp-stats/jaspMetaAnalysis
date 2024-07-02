@@ -34,7 +34,6 @@
 # Diagnostics
 # - model re-run on presence of influential cases
 # - residual
-#   - forest plot
 #   - vs predicted
 #   - vs outcome
 #   - vs covariates
@@ -105,6 +104,8 @@
     .maProfileLikelihoodPlot(jaspResults, dataset, options)
   if (options[["diagnosticsPlotsBaujat"]])
     .maBaujatPlot(jaspResults, dataset, options)
+  if (options[["diagnosticsResidualFunnel"]])
+    .maResidualFunnelPlot(jaspResults, dataset, options)
 
 
   # additional
@@ -1246,6 +1247,30 @@
 
   return()
 }
+.maResidualFunnelPlot                 <- function(jaspResults, dataset, options) {
+
+  if (!is.null(jaspResults[["residualFunnelPlot"]]))
+    return()
+
+  fit <- .maExtractFit(jaspResults, options)
+
+  # stop on error
+  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+    return()
+
+  # create plot
+  residualFunnelPlot <- createJaspPlot(title = gettext("Residual Funnel Plot"), width = 480, height = 480)
+  residualFunnelPlot$dependOn(c(.maDependencies, "diagnosticsResidualFunnel", "studyLabels"))
+  residualFunnelPlot$position <- 10
+  jaspResults[["residualFunnelPlot"]] <- residualFunnelPlot
+
+  # obtain residual funnel plot
+  plotOut <- .maMakeResidualFunnelPlot(fit, options, dataset)
+
+  residualFunnelPlot$plotObject <- plotOut
+
+  return()
+}
 
 # containers/state functions
 .maExtractFit                             <- function(jaspResults, options, nonClustered = FALSE) {
@@ -2317,6 +2342,92 @@
   }
 
   return(geom)
+}
+.maMakeResidualFunnelPlot          <- function(fit, options, dataset) {
+
+  dfPlot <- data.frame(
+    x  = resid(fit),
+    y  = sqrt(fit[["vi"]])
+  )
+
+  yTicks <- jaspGraphs::getPrettyAxisBreaks(range(dfPlot$y))
+
+  dfFunnel <- data.frame(
+    x = c(-max(yTicks), 0, max(yTicks)) / 1.96,
+    y = c(max(yTicks),  0, max(yTicks))
+  )
+  dfFunnelEdge1 <- dfFunnel[1:2,]
+  dfFunnelEdge2 <- dfFunnel[2:3,]
+
+  xTicks <- jaspGraphs::getPrettyAxisBreaks(range(c(dfPlot$x, dfFunnel$x)))
+
+  dfBackground <- data.frame(
+    x = c(min(xTicks), max(xTicks), max(xTicks), min(xTicks)),
+    y = c(min(yTicks), min(yTicks), max(yTicks), max(yTicks))
+  )
+
+  out <- ggplot2::ggplot() +
+    ggplot2::geom_polygon(
+      data    = dfBackground,
+      mapping = ggplot2::aes(x = x, y = y),
+      fill    = "grey",
+    ) +
+    ggplot2::geom_polygon(
+      data    = dfFunnel,
+      mapping = ggplot2::aes(x = x, y = y),
+      fill    = "white",
+    ) +
+    ggplot2::geom_line(
+      mapping = ggplot2::aes(
+        x = c(0, 0),
+        y = range(yTicks)
+      ), linetype = "dotted"
+    ) +
+    ggplot2::geom_line(
+      data    = dfFunnelEdge1,
+      mapping = ggplot2::aes(x = x, y = y), linetype = "dotted"
+    ) +
+    ggplot2::geom_line(
+      data    = dfFunnelEdge2,
+      mapping = ggplot2::aes(x = x, y = y), linetype = "dotted"
+    ) +
+    ggplot2::geom_line(
+      mapping = ggplot2::aes(
+        x = c(0, 0),
+        y = range(yTicks)
+      ), linetype = "dotted"
+    ) +
+    jaspGraphs::geom_point(
+      data    = dfPlot,
+      mapping = ggplot2::aes(x = x, y = y),
+      fill    = "black"
+    )
+
+  # add labels if specified
+  if (options[["studyLabels"]] != "") {
+
+    dfLabels <- cbind(
+      dfPlot,
+      label = dataset[[options[["studyLabels"]]]]
+    )
+    dfLabels <- dfLabels[abs(dfLabels$y/1.96) < abs(dfLabels$x),]
+    dfLabels$position <- ifelse(dfLabels$x < 0, "right", "left")
+    dfLabels$nudge_x  <- ifelse(dfLabels$x < 0, -0.1, 0.1)
+
+    out <- out +
+      ggplot2::geom_text(
+        data    = dfLabels,
+        mapping = ggplot2::aes(x = x, y = y, label = label, hjust = position), nudge_x = dfLabels$nudge_x
+      )
+  }
+
+  out <- out +
+    jaspGraphs::scale_x_continuous(breaks = xTicks, limits = range(xTicks), name = gettext("Residual Value")) +
+    ggplot2::scale_y_reverse(breaks = rev(yTicks), limits = rev(range(yTicks)), name = gettext("Standard Error")) +
+    jaspGraphs::geom_rangeframe() +
+    jaspGraphs::themeJaspRaw()
+
+  return(out)
 }
 
 # check functions

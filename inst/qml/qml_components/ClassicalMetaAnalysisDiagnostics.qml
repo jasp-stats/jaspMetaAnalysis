@@ -108,6 +108,12 @@ Section
 				name:		"diagnosticsPlotsBaujat"
 				text:		qsTr("Baujat")
 			}
+
+			CheckBox
+			{
+				name:		"diagnosticsResidualFunnel"
+				text:		qsTr("Residual funnel")
+			}
 		}
 	}
 }
