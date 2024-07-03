@@ -1259,7 +1259,7 @@
     return()
 
   # create plot
-  residualFunnelPlot <- createJaspPlot(title = gettext("Residual Funnel Plot"), width = 480, height = 480)
+  residualFunnelPlot <- createJaspPlot(title = gettext("Residual Funnel Plot"), width = 550, height = 480)
   residualFunnelPlot$dependOn(c(.maDependencies, "diagnosticsResidualFunnel", "studyLabels"))
   residualFunnelPlot$position <- 10
   jaspResults[["residualFunnelPlot"]] <- residualFunnelPlot
