@@ -37,7 +37,7 @@ Form
 			name: 			"successesGroup1"
 			title: 			qsTr("Successes (group 1)")
 			singleVariable: true
-			allowedColumns: ["ordinal", "scale"]
+			allowedColumns: ["scale"]
 		}
 
 		AssignedVariablesList
@@ -45,7 +45,7 @@ Form
 			name: 			"successesGroup2"
 			title: 			qsTr("Successes (group 2)")
 			singleVariable: true
-			allowedColumns: ["ordinal", "scale"]
+			allowedColumns: ["scale"]
 		}
 
 		AssignedVariablesList
@@ -53,7 +53,7 @@ Form
 			name: 			"observationsGroup1"
 			title: 			qsTr("Observations (group 1)")
 			singleVariable: true
-			allowedColumns: ["ordinal", "scale"]
+			allowedColumns: ["scale"]
 		}
 
 		AssignedVariablesList
@@ -61,7 +61,7 @@ Form
 			name: 			"observationsGroup2"
 			title: 			qsTr("Observations (group 2)")
 			singleVariable: true
-			allowedColumns: ["ordinal", "scale"]
+			allowedColumns: ["scale"]
 		}
 
 		

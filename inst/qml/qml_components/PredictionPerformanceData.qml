@@ -81,7 +81,7 @@ Item
 			id: 				inputN
 			title:				qsTr("Number of Participants")
 			singleVariable:		true
-			allowedColumns: 	["scale", "ordinal"]
+			allowedColumns: 	["scale"]
 		}
 
 		AssignedVariablesList
@@ -90,7 +90,7 @@ Item
 			id: 				inputO
 			title:				qsTr("Number of Observed Events")
 			singleVariable:		true
-			allowedColumns: 	["scale", "ordinal"]
+			allowedColumns: 	["scale"]
 		}
 
 		AssignedVariablesList
@@ -99,7 +99,7 @@ Item
 			id: 				inputE
 			title:				qsTr("Number of Expected Events")
 			singleVariable:		true
-			allowedColumns: 	["scale", "ordinal"]
+			allowedColumns: 	["scale"]
 		}
 
 		AssignedVariablesList

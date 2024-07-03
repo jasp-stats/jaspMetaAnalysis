@@ -64,7 +64,7 @@ Form
 			name: 			"sampleSize"
 			title: 			qsTr("Sample size")
 			singleVariable: true
-			allowedColumns: ["scale", "ordinal"]
+			allowedColumns: ["scale"]
 			visible:		active
 
 			property bool active:   measuresCorrelation.checked

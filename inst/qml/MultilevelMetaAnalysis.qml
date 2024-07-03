@@ -30,11 +30,11 @@ Form
 	{
 		preferredHeight: 400 * preferencesModel.uiScale
 		AvailableVariablesList { name: "allVariables" }
-		AssignedVariablesList { name: "ES_name";	title: qsTr("Effect Size"); singleVariable: true; suggestedColumns: ["scale"] }
-		AssignedVariablesList { name: "SE_name";	title: qsTr("Effect Size Variance"); singleVariable: true; suggestedColumns: ["scale"] }
+		AssignedVariablesList { name: "ES_name";	title: qsTr("Effect Size"); singleVariable: true; allowedColumns: ["scale"] }
+		AssignedVariablesList { name: "SE_name";	title: qsTr("Effect Size Variance"); singleVariable: true; allowedColumns: ["scale"] }
 		AssignedVariablesList { name: "fixedEffects";	title: qsTr("Fixed Effects") }
-		AssignedVariablesList { name: "inner_grouping";	title: qsTr("Inner Grouping (Multivariate Structure)"); singleVariable: true; suggestedColumns: ["ordinal", "nominal"] }
-		AssignedVariablesList { name: "outer_grouping";	title: qsTr("Outer Grouping (Grouping Structure)"); singleVariable: false; suggestedColumns: ["ordinal", "nominal"] }
+		AssignedVariablesList { name: "inner_grouping";	title: qsTr("Inner Grouping (Multivariate Structure)"); singleVariable: true; allowedColumns: ["nominal"] }
+		AssignedVariablesList { name: "outer_grouping";	title: qsTr("Outer Grouping (Grouping Structure)"); singleVariable: false; allowedColumns: ["nominal"] }
 	}
 	
 
