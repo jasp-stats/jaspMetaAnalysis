@@ -63,9 +63,9 @@ BayesianMetaAnalysis <- function(jaspResults, dataset, options) {
     lower <- NULL
     upper <- NULL
   }
-  if(study == "") study <- NULL
-  variables.to.read <- c(varES, varSE, lower, upper, study)
+  variables.to.read <- c(varES, varSE, lower, upper)
   dataset <- .readDataSetToEnd(columns.as.numeric = variables.to.read,
+                               columns.as.factor  = if(study != "") study,
                                exclude.na.listwise = variables.to.read)
   return(dataset)
 }
