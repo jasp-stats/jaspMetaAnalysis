@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2024-07-02 17:09+0000\n"
+"Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/ja/>\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.7-dev\n"
 "X-Language: ja\n"
 "X-Qt-Contexts: true\n"
 
@@ -1747,7 +1753,6 @@ msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Autofit"
 msgstr "オートフィット"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "R-hat"
 msgstr "R-hat"
@@ -2120,7 +2125,6 @@ msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Bayes factor"
 msgstr "ベイズファクター"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Posterior prob."
 msgstr "事後確率"
