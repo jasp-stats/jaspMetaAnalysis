@@ -91,7 +91,7 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
 
   dataset <- .metamiscOmitNAs(dataset, options)
 
-  fit <- tryCatch(metamisc::valmeta(
+  fit <- try(metamisc::valmeta(
     measure    = .metamiscGetMeasureOption(options),
     cstat      = if (options[["measure"]] == "cStatistic" && options[["effectSize"]] != "")              dataset[, options[["effectSize"]]],
     cstat.se   = if (options[["measure"]] == "cStatistic" && options[["effectSizeSe"]] != "")                   dataset[, options[["effectSizeSe"]]],
@@ -111,7 +111,7 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
     burnin     = options[["burnin"]],
     sample     = options[["sample"]],
     n.chains   = options[["chains"]]
-  ),error = function(e)e)
+  ))
 
   model[["object"]] <- fit
 
