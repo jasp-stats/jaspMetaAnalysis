@@ -67,7 +67,7 @@ Form
 			name:				"studyLabels"
 			title:				qsTr("Study Labels")
 			singleVariable:		true
-			suggestedColumns:	["ordinal", "nominal"]
+			allowedColumns:	["ordinal", "nominal"]
 		}
 */
 		AssignedVariablesList
