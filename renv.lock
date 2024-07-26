@@ -49,6 +49,16 @@
       "Version": "16.1.6",
       "Source": "Repository"
     },
+    "MASS": {
+      "Package": "MASS",
+      "Version": "7.3-61",
+      "Source": "Repository"
+    },
+    "Matrix": {
+      "Package": "Matrix",
+      "Version": "1.7-0",
+      "Source": "Repository"
+    },
     "MatrixModels": {
       "Package": "MatrixModels",
       "Version": "0.5-3",
@@ -56,7 +66,7 @@
     },
     "QuickJSR": {
       "Package": "QuickJSR",
-      "Version": "1.3.0",
+      "Version": "1.3.1",
       "Source": "Repository"
     },
     "R6": {
@@ -71,7 +81,7 @@
     },
     "Rcpp": {
       "Package": "Rcpp",
-      "Version": "1.0.12",
+      "Version": "1.0.13",
       "Source": "Repository"
     },
     "RcppEigen": {
@@ -96,12 +106,12 @@
     },
     "SparseM": {
       "Package": "SparseM",
-      "Version": "1.84",
+      "Version": "1.84-2",
       "Source": "Repository"
     },
     "StanHeaders": {
       "Package": "StanHeaders",
-      "Version": "2.32.9",
+      "Version": "2.32.10",
       "Source": "Repository"
     },
     "abind": {
@@ -132,6 +142,11 @@
     "bit64": {
       "Package": "bit64",
       "Version": "4.0.5",
+      "Source": "Repository"
+    },
+    "boot": {
+      "Package": "boot",
+      "Version": "1.3-30",
       "Source": "Repository"
     },
     "bridgesampling": {
@@ -179,9 +194,19 @@
       "Version": "0.8.0",
       "Source": "Repository"
     },
+    "cluster": {
+      "Package": "cluster",
+      "Version": "2.1.6",
+      "Source": "Repository"
+    },
     "coda": {
       "Package": "coda",
       "Version": "0.19-4.1",
+      "Source": "Repository"
+    },
+    "codetools": {
+      "Package": "codetools",
+      "Version": "0.2-20",
       "Source": "Repository"
     },
     "colorspace": {
@@ -211,7 +236,7 @@
     },
     "crul": {
       "Package": "crul",
-      "Version": "1.4.2",
+      "Version": "1.5.0",
       "Source": "Repository"
     },
     "curl": {
@@ -299,6 +324,11 @@
       "Version": "1.0.0",
       "Source": "Repository"
     },
+    "foreign": {
+      "Package": "foreign",
+      "Version": "0.8-87",
+      "Source": "Repository"
+    },
     "fs": {
       "Package": "fs",
       "Version": "1.6.4",
@@ -381,7 +411,7 @@
     },
     "htmlTable": {
       "Package": "htmlTable",
-      "Version": "2.4.2",
+      "Version": "2.4.3",
       "Source": "Repository"
     },
     "htmltools": {
@@ -476,6 +506,11 @@
       "Version": "1.3.2",
       "Source": "Repository"
     },
+    "lattice": {
+      "Package": "lattice",
+      "Version": "0.22-6",
+      "Source": "Repository"
+    },
     "lavaan": {
       "Package": "lavaan",
       "Version": "0.6-18",
@@ -541,6 +576,11 @@
       "Version": "0.4.0",
       "Source": "Repository"
     },
+    "mgcv": {
+      "Package": "mgcv",
+      "Version": "1.9-1",
+      "Source": "Repository"
+    },
     "mime": {
       "Package": "mime",
       "Version": "0.12",
@@ -571,9 +611,19 @@
       "Version": "1.2-5",
       "Source": "Repository"
     },
+    "nlme": {
+      "Package": "nlme",
+      "Version": "3.1-165",
+      "Source": "Repository"
+    },
     "nloptr": {
       "Package": "nloptr",
       "Version": "2.1.1",
+      "Source": "Repository"
+    },
+    "nnet": {
+      "Package": "nnet",
+      "Version": "7.3-19",
       "Source": "Repository"
     },
     "numDeriv": {
@@ -746,6 +796,11 @@
       "Version": "2.27",
       "Source": "Repository"
     },
+    "rpart": {
+      "Package": "rpart",
+      "Version": "4.1.23",
+      "Source": "Repository"
+    },
     "rstan": {
       "Package": "rstan",
       "Version": "2.32.6",
@@ -806,6 +861,11 @@
       "Version": "1.5.1",
       "Source": "Repository"
     },
+    "survival": {
+      "Package": "survival",
+      "Version": "3.7-0",
+      "Source": "Repository"
+    },
     "svglite": {
       "Package": "svglite",
       "Version": "2.1.3",
@@ -848,7 +908,7 @@
     },
     "tinytex": {
       "Package": "tinytex",
-      "Version": "0.51",
+      "Version": "0.52",
       "Source": "Repository"
     },
     "triebeard": {
@@ -908,7 +968,7 @@
     },
     "xfun": {
       "Package": "xfun",
-      "Version": "0.45",
+      "Version": "0.46",
       "Source": "Repository"
     },
     "xml2": {
@@ -923,7 +983,7 @@
     },
     "yaml": {
       "Package": "yaml",
-      "Version": "2.3.9",
+      "Version": "2.3.10",
       "Source": "Repository"
     },
     "zip": {
