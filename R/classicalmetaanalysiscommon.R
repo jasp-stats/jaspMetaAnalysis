@@ -39,6 +39,7 @@
 #   - vs covariates
 # Generic
 # - allow different covariates factoring across all settings
+# Power-enhanced funnel plot
 
 # TODO fix QML
 # - remove selected variables in estimated marginal means when removed from the model components
