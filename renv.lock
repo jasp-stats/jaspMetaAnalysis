@@ -442,7 +442,7 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspBase",
-      "RemoteSha": "f12f1ffb8b2310c249fbe674596f5a08b3aac606"
+      "RemoteSha": "24d4ae8eb2efcaae974b6c900ebf1c64020bb90e"
     },
     "jaspGraphs": {
       "Package": "jaspGraphs",
@@ -731,7 +731,7 @@
     },
     "ragg": {
       "Package": "ragg",
-      "Version": "1.3.2",
+      "Version": "1.3.3",
       "Source": "Repository"
     },
     "rappdirs": {
