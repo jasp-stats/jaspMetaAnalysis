@@ -7,6 +7,7 @@ Description
 	title : 		qsTr("Meta-Analysis")
 	description:	qsTr("Synthesize evidence across multiple studies")
 	requiresData:	false
+	preloadData:	true
 	icon:			"meta-analysis.svg"
 	version			: "0.19.2"
 	author:			"JASP Team"
