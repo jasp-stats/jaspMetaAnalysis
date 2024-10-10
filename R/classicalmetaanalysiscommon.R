@@ -3047,7 +3047,7 @@
   return(messages)
 }
 .maPermutationMessage                  <- function(options) {
-  return(gettext("Permutation p-value is based on %1$s permutations.", switch(
+  return(gettextf("Permutation p-value is based on %1$s permutations.", switch(
     options[["permutationTestType"]],
     "exact"       = gettext("exact"),
     "approximate" = options[["permutationTestIteration"]]
