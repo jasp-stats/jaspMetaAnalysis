@@ -37,19 +37,22 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 }
 
 .maDependencies        <- c(
-  "effectSize", "effectSizeStandardError", "effectSizeModelTerms", "effectSizeModelIncludeIntercept",
-  "heterogeneityModelTerms", "heterogeneityModelIncludeIntercept", "predictors", "predictors.types",
-  "clustering",
-  "method", "fixedEffectTest", "confidenceIntervalsLevel",
+  "effectSize", "effectSizeStandardError", "predictors", "predictors.types", "clustering", "method", "fixedEffectTest",
+  "effectSizeModelTerms", "effectSizeModelIncludeIntercept",
   "clusteringUseClubSandwich", "clusteringSmallSampleCorrection",
+  "confidenceIntervalsLevel",
   "fixParametersTau2", "fixParametersTau2Value",
   "fixParametersWeights", "fixParametersWeightsVariable",
-  "heterogeneityModelLink", "weightedEstimation",
+  "weightedEstimation",
+  "diagnosticsCasewiseDiagnosticsRerunWithoutInfluentialCases",
+  # optimizer settings
   "optimizerMethod", "optimizerInitialTau2", "optimizerInitialTau2Value",
   "optimizerMinimumTau2", "optimizerMinimumTau2Value", "optimizerMaximumTau2", "optimizerMaximumTau2Value",
   "optimizerMaximumIterations", "optimizerMaximumIterationsValue", "optimizerConvergenceTolerance", "optimizerConvergenceToleranceValue",
   "optimizerConvergenceRelativeTolerance", "optimizerConvergenceRelativeToleranceValue", "optimizerStepAdjustment", "optimizerStepAdjustmentValue",
-  "diagnosticsCasewiseDiagnosticsRerunWithoutInfluentialCases",
+  # simple ma specific
+  "heterogeneityModelTerms", "heterogeneityModelIncludeIntercept", "heterogeneityModelLink",
+  "permutationTest", "permutationTestIteration", "permutationTestType",
   # multilevel/multivariate specific
   "randomEffects", "randomEffectsSpecification",
   "computeCovarianceMatrix", "computeCovarianceMatrix"

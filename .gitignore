@@ -48,3 +48,5 @@ Thumbs.db
 # RStudio files
 .Rproj.user
 _processedLockFile.lock
+renv/activate.R
+.Rprofile

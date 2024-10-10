@@ -29,6 +29,13 @@ Description
 		requiresData:	false
 	}
 
+	Analysis
+	{
+		menu:			qsTr("Funnel Plot")
+		title:			qsTr("Funnel Plot")
+		func:			"FunnelPlot"
+	}
+
 	GroupTitle
 	{
 		title:	qsTr("Classical")
