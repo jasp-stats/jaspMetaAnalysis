@@ -335,5 +335,52 @@ Section
 				}
 			}
 		}
+
+		CheckBox
+		{
+			text:		qsTr("Permutation test")
+			name:		"permutationTest"
+			visible:	module == "metaAnalysis"
+			enabled:	clustering.count == 0
+
+			RadioButtonGroup
+			{
+				name:		"permutationTestType"
+				title:		qsTr("Type")
+				columns:	2
+				radioButtonsOnSameRow: true
+
+				RadioButton
+				{
+					value:	"approximate"
+					label:	qsTr("Approximate")
+					checked: true
+					id:		approximate
+				}
+
+				RadioButton
+				{
+					value:	"exact"
+					label:	qsTr("Exact")
+				}
+			}
+
+			Group
+			{
+				visible:	approximate.checked
+
+				IntegerField
+				{
+					label: 				qsTr("Iteration")
+					name: 				"permutationTestIteration"
+					value:				1000
+					min: 				10
+					inclusive: 			JASP.None
+				}
+
+				SetSeed{}
+			}
+
+		}
 	}
 }

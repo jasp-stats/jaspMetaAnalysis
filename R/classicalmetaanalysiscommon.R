@@ -24,7 +24,7 @@
 # TODO:
 # Coefficient tests
 # - parwise() from new metafor version
-# - add permutaion test
+# - add permutation test for omnibus moderation tests if this is implemented: https://github.com/wviechtb/metafor/issues/88
 # Estimated Marginal Means
 # - add variable interactions
 # - specify and test contrasts
@@ -228,6 +228,20 @@
   }
 
 
+  # add permutation test if requested (only available for non-clustered fits)
+  if (options[["permutationTest"]]) {
+    .setSeedJASP(options)
+    fitPermutation <- try(metafor::permutest(
+      fit,
+      exact = options[["permutationTestType"]] == "exact",
+      iter  = options[["permutationTestIteration"]]
+    ))
+    fit <- .maFitAddPermutationPValues(fit, fitPermutation, options)
+  } else {
+    fitPermutation <- NULL
+  }
+
+
   # add information about dropped levels to the fit
   if (.maIsMultilevelMultivariate(options)) {
     attr(fit, "skipped") <- attr(randomFormulaList, "skipped")
@@ -236,14 +250,32 @@
     }
   }
 
-
   # return the results
   jaspResults[[objectName]]$object <- list(
-    fit          = fit,
-    fitClustered = fitClustered
+    fit            = fit,
+    fitClustered   = fitClustered,
+    fitPermutation = fitPermutation
   )
   saveRDS(fit, file = "C:/JASP/fit.RDS")
   return()
+}
+.maFitAddPermutationPValues      <- function(fit, fitPerumation, options) {
+
+  # stores the permutation p-values in the fit object
+  # this simplifies object dispatching later in the code
+  # the whole fitPermutation object can be essentially forgotten
+
+  if (.maIsMetaregressionEffectSize(options)) {
+    attr(fit[["QMp"]],  "permutation") <- fitPerumation[["QMp"]]
+    attr(fit[["pval"]], "permutation") <- fitPerumation[["pval"]]
+  }
+
+  if (.maIsMetaregressionEffectSize(options)) {
+    attr(fit[["QSp"]], "permutation")        <- fitPerumation[["QSp"]]
+    attr(fit[["pval.alpha"]], "permutation") <- fitPerumation[["pval.alpha"]]
+  }
+
+  return(fit)
 }
 .maRemoveInfluentialObservations <- function(jaspResults, dataset, options) {
 
@@ -336,12 +368,18 @@
     moderatorsTable$addColumnInfo(name = "df2", type = "number", title = gettext("df\U2082"))
   moderatorsTable$addColumnInfo(name = "pval",  type = "pvalue",  title = gettext("p"))
 
+  if (.maIsPermutation(options)) {
+    moderatorsTable$addColumnInfo(name = "pval2",  type = "pvalue",  title = gettext("p (permutation)"))
+    moderatorsTable$addFootnote(.maPermutationMessage(options))
+  }
+
+
   # stop on error
   if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
   # effect size moderation
-  if (.maIsMetaregression(options)) {
+  if (.maIsMetaregressionEffectSize(options)) {
 
     testEffectSize <- .maOmnibusTest(fit, options, parameter = "effectSize")
     moderatorsTable$addRows(testEffectSize)
@@ -568,6 +606,11 @@
     coefficientsTable$addColumnInfo(name = "df",  type = "number", title = gettext("df"))
   coefficientsTable$addColumnInfo(name = "pval",  type = "pvalue", title = gettext("p"))
 
+  if (.maIsPermutation(options)) {
+    coefficientsTable$addColumnInfo(name = "pval2",  type = "pvalue",  title = gettext("p (permutation)"))
+    coefficientsTable$addFootnote(.maPermutationMessage(options))
+  }
+
   if (options[["confidenceIntervals"]]) {
     overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
     coefficientsTable$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
@@ -589,6 +632,9 @@
       pval = fit[["pval"]]
     )
 
+    if (.maIsPermutation(options))
+      estimates$pval2 <- attr(fit[["pval"]], "permutation")
+
     if (.maIsMetaregressionFtest(options))
       estimates$df <- fit[["ddf"]]
 
@@ -608,6 +654,9 @@
       stat = fit[["zval.alpha"]],
       pval = fit[["pval.alpha"]]
     )
+
+    if (.maIsPermutation(options))
+      estimates$pval2 <- attr(fit[["pval.alpha"]], "permutation")
 
     if (.maIsMetaregressionFtest(options))
       estimates$df <- fit[["ddf.alpha"]]
@@ -1578,6 +1627,13 @@
       row$df2 <- fit[["QSdf"]][2]
   }
 
+  if (options[["permutationTest"]]) {
+    if (parameter == "effectSize")
+      row$pval2 <- attr(fit[["QMp"]], "permutation")
+    else if (parameter == "heterogeneity")
+      row$pval2 <- attr(fit[["QSp"]], "permutation")
+  }
+
   return(row)
 }
 .maOmnibusTestCoefficients         <- function(fit, options, parameter = "effectSize") {
@@ -2447,6 +2503,9 @@
 .maIsMultilevelMultivariate       <- function(options) {
   return(options[["module"]] == "metaAnalysisMultilevelMultivariate")
 }
+.maIsPermutation                  <- function(options) {
+  return(options[["clustering"]] == "" && options[["permutationTest"]])
+}
 .maCheckIsPossibleOptions         <- function(options) {
 
   if (length(options[["heterogeneityModelTerms"]]) > 0 && options[["clustering"]] != "") {
@@ -2986,4 +3045,11 @@
     )))
 
   return(messages)
+}
+.maPermutationMessage                  <- function(options) {
+  return(gettext("Permutation p-value is based on %1$s permutations.", switch(
+    options[["permutationTestType"]],
+    "exact"       = gettext("exact"),
+    "approximate" = options[["permutationTestIteration"]]
+  )))
 }
