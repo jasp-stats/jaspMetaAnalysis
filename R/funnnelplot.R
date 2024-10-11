@@ -17,14 +17,6 @@
 
 FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
-  saveRDS(options, file = "C:/JASP/options.RDS")
-  saveRDS(dataset, file = "C:/JASP/dataset.RDS")
-
-  if(FALSE){
-    options <- readRDS(file = "C:/JASP/options.RDS")
-    dataset <- readRDS(file = "C:/JASP/dataset.RDS")
-  }
-
   if (.fpReady(options))
     .fpH1Fits(jaspResults, dataset, options)
 
@@ -75,7 +67,6 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     })
     names(fits) <- splitLevels
     fitContainer$object <- fits
-    saveRDS(fits, file = "C:/JASP/fits.RDS")
   }
 
   return()
