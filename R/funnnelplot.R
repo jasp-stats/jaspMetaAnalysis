@@ -159,22 +159,15 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
   # y-axis plotting range (based on the common data set to make them common across figures)
   yTicks <- jaspGraphs::getPrettyAxisBreaks(range(c(0, dataset[[options[["effectSizeStandardError"]]]])))
+  # a sequence of points must be used if tau is included in the confidence bands (PI is a nonlinear function of se)
+  ySeqH0 <- if (options[["funnelUnderH0ParametersFixedTau"]] == 0) range(yTicks) else seq(from = min(yTicks), to = max(yTicks), length.out = 100)
+  ySeqH1 <- if (!options[["funnelUnderH1IncludeHeterogeneity"]])   range(yTicks) else seq(from = min(yTicks), to = max(yTicks), length.out = 100)
 
   ### specify zero-centered funnels
   if (options[["funnelUnderH0"]]) {
-    dfsFunnel0 <- list()
     adjustFunnel0Mean          <- options[["funnelUnderH0ParametersFixedMu"]]
     adjustFunnel0Heterogeneity <- options[["funnelUnderH0ParametersFixedTau"]]
-    for (i in seq_along(funnelLevels)) {
-      dfsFunnel0[[i]] <- data.frame(
-        x   = c(-max(yTicks), 0, 0, max(yTicks)) * qnorm(funnelLevels[i], lower.tail = FALSE),
-        y   = c(max(yTicks),  0, 0, max(yTicks)),
-        p   = 2*funnelLevels[i],
-        lvl = 1-2*funnelLevels[i]
-      )
-      dfsFunnel0[[i]]$x[1:2] <- dfsFunnel0[[i]]$x[1:2] + adjustFunnel0Mean - 1.96 * adjustFunnel0Heterogeneity
-      dfsFunnel0[[i]]$x[3:4] <- dfsFunnel0[[i]]$x[3:4] + adjustFunnel0Mean + 1.96 * adjustFunnel0Heterogeneity
-    }
+    dfsFunnel0 <- .fpComputeFunnelDf(ySeqH0, adjustFunnel0Mean, adjustFunnel0Heterogeneity, funnelLevels)
   }
 
   ### specify meta-analysis centered funnels
@@ -196,17 +189,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
       adjustFunnel1Heterogeneity <- if(options[["funnelUnderH1IncludeHeterogeneity"]]) sqrt(fit$tau2) else 0
     }
 
-    dfsFunnel1 <- list()
-    for (i in seq_along(funnelLevels)) {
-      dfsFunnel1[[i]] <- data.frame(
-        x   = c(-max(yTicks), 0, 0, max(yTicks)) * qnorm(funnelLevels[i], lower.tail = FALSE),
-        y   = c(max(yTicks),  0, 0, max(yTicks)),
-        p   = (1-funnelLevels[i]/100),
-        lvl = funnelLevels[i]
-      )
-      dfsFunnel1[[i]]$x[1:2] <- dfsFunnel1[[i]]$x[1:2] + adjustFunnel1Mean - 1.96 * adjustFunnel1Heterogeneity
-      dfsFunnel1[[i]]$x[3:4] <- dfsFunnel1[[i]]$x[3:4] + adjustFunnel1Mean + 1.96 * adjustFunnel1Heterogeneity
-    }
+    dfsFunnel1 <- .fpComputeFunnelDf(ySeqH1, adjustFunnel1Mean, adjustFunnel1Heterogeneity, funnelLevels)
 
     # get maximum x value across all funnels in case of a split
     if (options[["split"]] == "" || options[["funnelUnderH1Parameters"]] == "fixed") {
@@ -214,16 +197,14 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     } else {
       dfsFunnel1XMax <- list()
       for (i in seq_along(jaspResults[["fitContainer"]]$object)) {
-
+        # extract each fit
         tempFit <- jaspResults[["fitContainer"]]$object[[i]]
         tempAdjustFunnel1Mean          <- tempFit$b[1]
         tempAdjustFunnel1Heterogeneity <- if(options[["funnelUnderH1IncludeHeterogeneity"]]) sqrt(tempFit$tau2) else 0
 
-        tempFitX <- c(-max(yTicks), 0, 0, max(yTicks)) * qnorm(funnelLevels[i], lower.tail = FALSE)
-        tempFitX[1:2] <- tempFitX[1:2] + tempAdjustFunnel1Mean - 1.96 * tempAdjustFunnel1Heterogeneity
-        tempFitX[3:4] <- tempFitX[3:4] + tempAdjustFunnel1Mean + 1.96 * tempAdjustFunnel1Heterogeneity
-
-        dfsFunnel1XMax[[i]] <- range(tempFitX)
+        # compute the maximum funnel width
+        tempFitX <- .fpComputeFunnelDf(max(ySeqH1), tempAdjustFunnel1Mean, tempAdjustFunnel1Heterogeneity, max(funnelLevels))
+        dfsFunnel1XMax[[i]] <- range(tempFitX[[1]])
       }
       dfsFunnel1XRange <- range(unlist(dfsFunnel1XMax))
     }
@@ -277,6 +258,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
     dfLabels <- dfPlot
 
+    # exclusion of data points outside the funnel (if requested) and alignment with the appropriate funnel
     if (options[["estimatesMappingLabel"]] == "outsideH0") {
       dfLabels$position <- ifelse(dfLabels$x < adjustFunnel0Mean, "right", "left")
       dfLabels$nudge_x  <- ifelse(dfLabels$x < adjustFunnel0Mean, -0.05, 0.05)
@@ -433,7 +415,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   jaspResults[["funnelParametersTable"]] <- funnelParametersTable
 
   if (options[["split"]] != "")
-    funnelParametersTable$addColumnInfo(name = "split", title = "",                 type = "string")
+    funnelParametersTable$addColumnInfo(name = "split", title = options[["split"]], type = "string")
   funnelParametersTable$addColumnInfo(name = "k",     title = gettext("Estimates"), type = "integer")
   funnelParametersTable$addColumnInfo(name = "mu",    title = gettext("\U03BC"),    type = "number")
   if (!.maGetMethodOptions(options) %in% c("EE", "FE"))
@@ -510,7 +492,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     funnelAsymetryTests[["metaRegressionTable"]] <- metaRegressionTable
 
     if (options[["split"]] != "")
-      metaRegressionTable$addColumnInfo(name = "split", title = "",                 type = "string")
+      metaRegressionTable$addColumnInfo(name = "split", title = options[["split"]], type = "string")
     metaRegressionTable$addColumnInfo(name = "k",     title = gettext("Estimates"), type = "integer")
     metaRegressionTable$addColumnInfo(name = "z", title = gettext("z"), type = "number", overtitle = gettext("Asymmetry Test"))
     metaRegressionTable$addColumnInfo(name = "p", title = gettext("p"), type = "pvalue", overtitle = gettext("Asymmetry Test"))
@@ -521,46 +503,33 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     if (.fpReady(options)) {
       if (options[["split"]] == "") {
 
-        fit <- jaspResults[["fitContainer"]]$object
-        fitTest <- try(metafor::regtest(fit))
+        fit        <- jaspResults[["fitContainer"]]$object
+        fitTest    <- try(metafor::regtest(fit))
+        fitSummary <- .dpExtractAsymmetryTest(fitTest, testType = "metaRegression")
 
-        if (jaspBase::isTryError(fitTest)) {
+        if (jaspBase::isTryError(fitTest))
           metaRegressionTable$addFootnote(fit, symbol = gettext("The funnel plot assymetry test failed with the following error: "))
-        } else {
-          fitSummary <- data.frame(
-            k   = fit$k,
-            z   = fitTest$zval,
-            p   = fitTest$pval,
-            est = fitTest$est,
-            lCI = fitTest$ci.lb,
-            uCI = fitTest$ci.ub
-          )
-        }
+
+        metaRegressionTable$setData(fitSummary)
 
       } else {
 
-        fits       <- jaspResults[["fitContainer"]]$object
-        fitSummary <- do.call(rbind, lapply(fits, function(fit) {
+        fits         <- jaspResults[["fitContainer"]]$object
+        fitSummaries <- do.call(rbind, lapply(seq_along(fits), function(i) {
 
-          fitTest <- try(metafor::regtest(fit))
-          if (jaspBase::isTryError(fitTest)) {
-            metaRegressionTable$addFootnote(fit, symbol = gettext("The funnel plot assymetry test failed with the following error: "))
-            return(data.frame(k = NA, z = NA, p = NA, est = NA, lCI = NA, uCI = NA))
-          }
-          return(data.frame(
-            k   = fit$k,
-            z   = fitTest$zval,
-            p   = fitTest$pval,
-            est = fitTest$est,
-            lCI = fitTest$ci.lb,
-            uCI = fitTest$ci.ub
-          ))
+          fitTest    <- try(metafor::regtest(fits[[i]]))
+          fitSummary <- .dpExtractAsymmetryTest(fitTest, testType = "metaRegression")
+          fitSummary$split <- names(fits)[i]
+
+          if (jaspBase::isTryError(fitTest))
+            metaRegressionTable$addFootnote(fitTest, symbol = gettext("The funnel plot assymetry test failed with the following error: "))
+
+          return(fitSummary)
         }))
-        fitSummary <- data.frame(split = names(fits), fitSummary)
+
+        metaRegressionTable$setData(fitSummaries)
 
       }
-
-      metaRegressionTable$setData(fitSummary)
     }
   }
 
@@ -573,7 +542,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     funnelAsymetryTests[["weightedRegressionTable"]] <- weightedRegressionTable
 
     if (options[["split"]] != "")
-      weightedRegressionTable$addColumnInfo(name = "split", title = "",                 type = "string")
+      weightedRegressionTable$addColumnInfo(name = "split", title = options[["split"]], type = "string")
     weightedRegressionTable$addColumnInfo(name = "k",     title = gettext("Estimates"), type = "integer")
     weightedRegressionTable$addColumnInfo(name = "t",  title = gettext("t"),  type = "number",  overtitle = gettext("Asymmetry Test"))
     weightedRegressionTable$addColumnInfo(name = "df", title = gettext("df"), type = "integer", overtitle = gettext("Asymmetry Test"))
@@ -585,48 +554,33 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     if (.fpReady(options)) {
       if (options[["split"]] == "") {
 
-        fit <- jaspResults[["fitContainer"]]$object
-        fitTest <- try(metafor::regtest(fit, model = "lm"))
+        fit        <- jaspResults[["fitContainer"]]$object
+        fitTest    <- try(metafor::regtest(fit, model = "lm"))
+        fitSummary <- .dpExtractAsymmetryTest(fitTest, testType = "weightedRegression")
 
-        if (jaspBase::isTryError(fitTest)) {
-          weightedRegressionTable$addFootnote(fit, symbol = gettext("The funnel plot assymetry test failed with the following error: "))
-        } else {
-          fitSummary <- data.frame(
-            k   = fit$k,
-            t   = fitTest$zval,
-            df  = fitTest$dfs,
-            p   = fitTest$pval,
-            est = fitTest$est,
-            lCI = fitTest$ci.lb,
-            uCI = fitTest$ci.ub
-          )
-        }
+        if (jaspBase::isTryError(fitTest))
+          weightedRegressionTable$addFootnote(fitTest, symbol = gettext("The funnel plot assymetry test failed with the following error: "))
+
+        weightedRegressionTable$setData(fitSummary)
 
       } else {
 
-        fits       <- jaspResults[["fitContainer"]]$object
-        fitSummary <- do.call(rbind, lapply(fits, function(fit) {
+        fits         <- jaspResults[["fitContainer"]]$object
+        fitSummaries <- do.call(rbind, lapply(seq_along(fits), function(i) {
 
-          fitTest <- try(metafor::regtest(fit, model = "lm"))
-          if (jaspBase::isTryError(fitTest)) {
-            weightedRegressionTable$addFootnote(fit, symbol = gettext("The funnel plot assymetry test failed with the following error: "))
-            return(data.frame(k = NA, t = NA, df = NA, p = NA, est = NA, lCI = NA, uCI = NA))
-          }
-          return(data.frame(
-            k   = fit$k,
-            t   = fitTest$zval,
-            df  = fitTest$dfs,
-            p   = fitTest$pval,
-            est = fitTest$est,
-            lCI = fitTest$ci.lb,
-            uCI = fitTest$ci.ub
-          ))
+          fitTest    <- try(metafor::regtest(fits[[i]], model = "lm"))
+          fitSummary <- .dpExtractAsymmetryTest(fitTest, testType = "weightedRegression")
+          fitSummary$split <- names(fits)[i]
+
+          if (jaspBase::isTryError(fitTest))
+            weightedRegressionTable$addFootnote(fitTest, symbol = gettext("The funnel plot assymetry test failed with the following error: "))
+
+          return(fitSummary)
         }))
-        fitSummary <- data.frame(split = names(fits), fitSummary)
+
+        weightedRegressionTable$setData(fitSummaries)
 
       }
-
-      weightedRegressionTable$setData(fitSummary)
     }
   }
 
@@ -639,7 +593,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     funnelAsymetryTests[["rankCorrelationTable"]] <- rankCorrelationTable
 
     if (options[["split"]] != "")
-      rankCorrelationTable$addColumnInfo(name = "split", title = "",                 type = "string")
+      rankCorrelationTable$addColumnInfo(name = "split", title = options[["split"]], type = "string")
     rankCorrelationTable$addColumnInfo(name = "k",     title = gettext("Estimates"), type = "integer")
     rankCorrelationTable$addColumnInfo(name = "tau",   title = gettext("\U1D70F"),   type = "number")
     rankCorrelationTable$addColumnInfo(name = "p",     title = gettext("p"),         type = "pvalue")
@@ -648,43 +602,82 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
       if (options[["split"]] == "") {
 
-        fit <- jaspResults[["fitContainer"]]$object
-        fitTest <- try(metafor::ranktest(fit))
+        fit        <- jaspResults[["fitContainer"]]$object
+        fitTest    <- try(metafor::ranktest(fit))
+        fitSummary <- .dpExtractAsymmetryTest(fitTest, testType = "rankCorrelation")
 
-        if (jaspBase::isTryError(fitTest)) {
+        if (jaspBase::isTryError(fitTest))
           rankCorrelationTable$addFootnote(fit, symbol = gettext("The funnel plot assymetry test failed with the following error: "))
-        } else {
-          fitSummary <- data.frame(
-            k   = fit$k,
-            tau = fitTest$tau,
-            p   = fitTest$pval
-          )
-        }
+        else
+          fitSummary$k <- fit$k
+
+        rankCorrelationTable$setData(fitSummary)
+
       } else {
 
-        fits       <- jaspResults[["fitContainer"]]$object
-        fitSummary <- do.call(rbind, lapply(fits, function(fit) {
+        fits         <- jaspResults[["fitContainer"]]$object
+        fitSummaries <- do.call(rbind, lapply(seq_along(fits), function(i) {
 
-          fitTest <- try(metafor::ranktest(fit))
-          if (jaspBase::isTryError(fitTest)) {
+          fitTest    <- try(metafor::ranktest(fits[[i]]))
+          fitSummary <- .dpExtractAsymmetryTest(fitTest, testType = "rankCorrelation")
+          fitSummary$split <- names(fits)[i]
+
+          if (jaspBase::isTryError(fitTest))
             rankCorrelationTable$addFootnote(fit, symbol = gettext("The funnel plot assymetry test failed with the following error: "))
-            return(data.frame(k = NA, tau = NA, p = NA))
-          }
-          return(data.frame(
-            k   = fit$k,
-            tau = fitTest$tau,
-            p   = fitTest$pval
-          ))
+          else
+            fitSummary$k <- fits[[i]]$k
+
+          return(fitSummary)
         }))
-        fitSummary <- data.frame(split = names(fits), fitSummary)
+
+        rankCorrelationTable$setData(fitSummaries)
 
       }
-
-      rankCorrelationTable$setData(fitSummary)
     }
   }
 
   return()
+}
+
+.fpComputeFunnelDf      <- function(seSeq, mean, heterogeneity, funnelLevels) {
+  dfs <- list()
+  for (i in seq_along(funnelLevels)) {
+    tempZ <- qnorm(funnelLevels[i], lower.tail = FALSE)
+    dfs[[i]] <- data.frame(
+      x = c(rev(mean - tempZ * sqrt(heterogeneity^2 + seSeq^2)), mean + tempZ * sqrt(heterogeneity^2 + seSeq^2)),
+      y = c(rev(seSeq), seSeq),
+      p = 2*funnelLevels[i],
+      lvl = 1-2*funnelLevels[i]
+    )
+  }
+  return(dfs)
+}
+.dpExtractAsymmetryTest <- function(fitTest, testType) {
+  if (testType == "metaRegression") {
+    return(data.frame(
+      k   = if (jaspBase::isTryError(fitTest)) NA else fitTest$fit$k, # nobs will be fixed in the next release
+      z   = if (jaspBase::isTryError(fitTest)) NA else fitTest$zval,
+      p   = if (jaspBase::isTryError(fitTest)) NA else fitTest$pval,
+      est = if (jaspBase::isTryError(fitTest)) NA else fitTest$est,
+      lCI = if (jaspBase::isTryError(fitTest)) NA else fitTest$ci.lb,
+      uCI = if (jaspBase::isTryError(fitTest)) NA else fitTest$ci.ub
+    ))
+  } else if (testType == "weightedRegression") {
+    return(data.frame(
+      k   = if (jaspBase::isTryError(fitTest)) NA else nobs(fitTest$fit),
+      t   = if (jaspBase::isTryError(fitTest)) NA else fitTest$zval,
+      df  = if (jaspBase::isTryError(fitTest)) NA else fitTest$dfs,
+      p   = if (jaspBase::isTryError(fitTest)) NA else fitTest$pval,
+      est = if (jaspBase::isTryError(fitTest)) NA else fitTest$est,
+      lCI = if (jaspBase::isTryError(fitTest)) NA else fitTest$ci.lb,
+      uCI = if (jaspBase::isTryError(fitTest)) NA else fitTest$ci.ub
+    ))
+  } else if (testType == "rankCorrelation") {
+    return(data.frame(
+      tau = if (jaspBase::isTryError(fitTest)) NA else fitTest$tau,
+      p   = if (jaspBase::isTryError(fitTest)) NA else fitTest$pval
+    ))
+  }
 }
 
 # compute power enhancement contours (lifted from zcurve)
