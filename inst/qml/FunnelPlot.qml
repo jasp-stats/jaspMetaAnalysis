@@ -51,13 +51,20 @@ Form
 
 		AssignedVariablesList
 		{
-			name:				"studyLabels"
-			id:					studyLabels
-			title:				qsTr("Study Labels")
+			name:				"studyLabel"
+			id:					studyLabel
+			title:				qsTr("Study Label")
 			singleVariable:		true
 			allowedColumns:		["nominal"]
 		}
 
+		AssignedVariablesList
+		{
+			name:				"split"
+			title:				qsTr("Split")
+			singleVariable:		true
+			allowedColumns:		["nominal"]
+		}
 	}
 
 	CheckBox
@@ -145,6 +152,7 @@ Form
 			DropDown
 			{
 				name:			"method"
+				id:				method
 				label:			qsTr("Method")
 				startValue:		"restrictedML"
 				values:			[
@@ -169,6 +177,7 @@ Form
 			{
 				name:		"funnelUnderH1IncludeHeterogeneity"
 				label:		qsTr("Include heterogeneity")
+				enabled:	method.value != "fixedEffects" && method.value != "equalEffects" 
 			}
 
 			CheckBox
@@ -217,6 +226,21 @@ Form
 				{ label: qsTr("Dotted"),	value: "dotted"	}
 			]
 		}
+
+		CheckBox
+		{
+			name:		"funnelUnderH1PowerEnhancement"
+			enabled:	funnelUnderH1.checked
+			label:		qsTr("Power enhancement")
+
+			TextField
+			{
+				label: 				qsTr("Breaks")
+				name: 				"funnelUnderH1PowerEnhancementBreaks"
+				value:				"(0.15, 0.30, 0.50, 0.70, 0.90)"
+				fieldWidth: 		200 * preferencesModel.uiScale
+			}
+		}
 	}
 
 
@@ -228,7 +252,7 @@ Form
 		{
 			label:		qsTr("Label")
 			name:		"estimatesMappingLabel"
-			enabled: 	studyLabels.count > 0
+			enabled: 	studyLabel.count > 0
 			values:		{
 				if (funnelUnderH0.checked && funnelUnderH1.checked) {
 					[
@@ -261,6 +285,7 @@ Form
 		DropDown
 		{
 			name:			"estimatesMappingColor"
+			id:				estimatesMappingColor
 			label:			qsTr("Color")
 			addEmptyValue:	true
 		}
@@ -268,8 +293,25 @@ Form
 		DropDown
 		{
 			name:			"estimatesMappingShape"
+			id:				estimatesMappingShape
 			label:			qsTr("Shape")
 			addEmptyValue:	true
+		}
+
+		DropDown
+		{
+			name:			"estimatesLegendPosition"
+			enabled:		estimatesMappingColor.checked || estimatesMappingShape.checked
+			label:			qsTr("Legend position")
+			startValue:		"right"
+			values:
+			[
+				{ label: qsTr("None"),			value: "none"},
+				{ label: qsTr("Bottom"),		value: "bottom"},
+				{ label: qsTr("Right"),			value: "right"},
+				{ label: qsTr("Top"),			value: "top"},
+				{ label: qsTr("Left"), 			value: "left"}
+			]
 		}
 	}
 	
@@ -286,31 +328,33 @@ Form
 
 		CheckBox
 		{
-			name:		"powerEnhancement"
-			id:			powerEnhancement
-			label:		qsTr("Power enhancement")
+			name:		"invertColors"
+			label:		qsTr("Invert colors")
+		}
+	}
 
-			CheckBox
-			{
-				name:		"powerEnhancementSecondaryAxis"
-				label:		qsTr("Secondary y-axis")
-			}
+	CheckBox
+	{
+		name:		"funnelPlotAsymmetryTests"
+		label:		qsTr("Funnel plot asymmetry tests")
 
-			TextField
-			{
-				label: 				qsTr("Breaks")
-				name: 				"powerEnhancementBreaks"
-				value:				"(0.15, 0.30, 0.50, 0.70, 0.90)"
-				fieldWidth: 		120 * preferencesModel.uiScale
-			}
+		CheckBox
+		{
+			name:		"funnelPlotAsymmetryTestsMetaRegression"
+			label:		qsTr("Meta-regression")
+			checked:	true
 		}
 
 		CheckBox
 		{
-			name:		"invertColors"
-			label:		qsTr("Invert colors")
-			enabled:	!powerEnhancement.checked
+			name:		"funnelPlotAsymmetryTestsWeightedRegression"
+			label:		qsTr("Weighted regression")
+		}
+
+		CheckBox
+		{
+			name:		"funnelPlotAsymmetryTestsRankCorrelation"
+			label:		qsTr("Rank correlation")
 		}
 	}
-
 }

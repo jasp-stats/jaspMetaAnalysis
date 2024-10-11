@@ -120,7 +120,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
       args = .robmaMapOptionsToPriors(optionsPrior, parameter)
     ))
 }
-.robmaCleanOptionsToPriors     <- function(x) {
+.robmaCleanOptionsToPriors     <- function(x, message = gettext("The priors for publication bias were set incorrectly.")) {
 
   x <- trimws(x, which = "both")
   x <- trimws(x, which = "both", whitespace = "c")
@@ -134,7 +134,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   x <- x[x != ""]
 
   if (anyNA(as.numeric(x)))
-    .quitAnalysis(gettext("The priors for publication bias were set incorrectly."))
+    .quitAnalysis(message)
   return(as.numeric(x))
 }
 .robmaEvalOptionsToPriors      <- function(x) {
