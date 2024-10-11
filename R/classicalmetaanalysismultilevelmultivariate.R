@@ -19,21 +19,14 @@
 ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = NULL, options, ...) {
 
   options[["module"]] <- "metaAnalysisMultilevelMultivariate"
-  saveRDS(options, file = "C:/JASP/options.RDS")
 
   if (.maReady(options)) {
     dataset <- .mammReadData(dataset, options)
     .mammCheckErrors(dataset, options)
   }
 
-  saveRDS(options, file = "C:/JASP/options.RDS")
-  saveRDS(dataset, file = "C:/JASP/dataset.RDS")
-
   .ClassicalMetaAnalysisCommon(jaspResults, dataset, options)
 
-  return()
-  options <- readRDS(file = "C:/JASP/options.RDS")
-  dataset <- readRDS(file = "C:/JASP/dataset.RDS")
   return()
 }
 

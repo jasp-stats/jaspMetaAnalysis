@@ -256,7 +256,7 @@
     fitClustered   = fitClustered,
     fitPermutation = fitPermutation
   )
-  saveRDS(fit, file = "C:/JASP/fit.RDS")
+
   return()
 }
 .maFitAddPermutationPValues      <- function(fit, fitPerumation, options) {

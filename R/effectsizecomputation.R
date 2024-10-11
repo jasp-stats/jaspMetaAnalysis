@@ -5,8 +5,6 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
   options <- .HOTFIX_flatten_options(options)
 
   dataset     <- .escReadDataset(dataset, options)
-  saveRDS(options, file = "C:/JASP/options.RDS")
-  saveRDS(dataset, file = "C:/JASP/dataset.RDS")
   dataOutput  <- .escComputeEffectSizes(dataset, options)
 
   .escComputeSummaryTable(jaspResults, dataset, options, dataOutput)
