@@ -259,26 +259,23 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     dfLabels <- dfPlot
 
     # exclusion of data points outside the funnel (if requested) and alignment with the appropriate funnel
-    if (options[["estimatesMappingLabel"]] == "outsideH0") {
-      dfLabels$position <- ifelse(dfLabels$x < adjustFunnel0Mean, "right", "left")
-      dfLabels$nudge_x  <- ifelse(dfLabels$x < adjustFunnel0Mean, -0.05, 0.05)
-      tempDiff <- abs(dfLabels$x - adjustFunnel0Mean)
-      tempDiff[tempDiff < 1.96 * adjustFunnel0Heterogeneity] <- 0
+    if (options[["estimatesMappingLabel"]] %in% c("outsideH0", "outsideH1")) {
+      # get the appropriate funnel parameters
+      tempAdjustMean          <- if (options[["estimatesMappingLabel"]] == "outsideH0") adjustFunnel0Mean          else adjustFunnel1Mean
+      tempAdjustHeterogeneity <- if (options[["estimatesMappingLabel"]] == "outsideH0") adjustFunnel0Heterogeneity else adjustFunnel1Heterogeneity
+      # exclusion of data points outside the funnel 
+      tempDiff <- abs(dfLabels$x - tempAdjustMean)
+      tempDiff[tempDiff < 1.96 * tempAdjustHeterogeneity] <- 0
       tempZ    <- tempDiff / dfLabels$y
       dfLabels <- dfLabels[tempZ > max(qnorm(funnelLevels, lower.tail = FALSE)),]
-    } else if (options[["estimatesMappingLabel"]] == "outsideH1") {
-      dfLabels$position <- ifelse(dfLabels$x < adjustFunnel1Mean, "right", "left")
-      dfLabels$nudge_x  <- ifelse(dfLabels$x < adjustFunnel1Mean, -0.05, 0.05)
-      tempDiff <- abs(dfLabels$x - adjustFunnel1Mean)
-      tempDiff[tempDiff < 1.96 * adjustFunnel1Heterogeneity] <- 0
-      tempZ    <- tempDiff / dfLabels$y
-      dfLabels <- dfLabels[tempZ > max(qnorm(funnelLevels, lower.tail = FALSE)),]
-    } else if (options[["estimatesMappingLabel"]] == "all") {
-      dfLabels$position <- ifelse(dfLabels$x < 0, "right", "left")
-      dfLabels$nudge_x  <- ifelse(dfLabels$x < 0, -0.05, 0.05)
+    } else {
+      # use H1 -> H0 -> mean to align the if the funnels are present
+      tempAdjustMean <- if (options[["funnelUnderH1"]]) adjustFunnel1Mean else if (options[["funnelUnderH0"]]) adjustFunnel0Mean else 0
     }
+    # specify the position of the labels
+    dfLabels$position <- ifelse(dfLabels$x < tempAdjustMean, "right", "left")
+    dfLabels$nudge_x  <- ifelse(dfLabels$x < tempAdjustMean, -0.05, 0.05)
   }
-
 
   ### specify "background" for the funnel plot
   dfBackground <- data.frame(
