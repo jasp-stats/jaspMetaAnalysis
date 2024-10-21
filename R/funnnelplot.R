@@ -14,9 +14,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-# TODO:
-# - funnel plot asymmetry tests fail with split
-# - check that sequence se sequence is generated with fixed mu and tau under null
 
 FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   if (.fpReady(options))
@@ -169,7 +166,9 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   yTicks <- jaspGraphs::getPrettyAxisBreaks(range(c(0, dataset[[options[["effectSizeStandardError"]]]])))
   # a sequence of points must be used if tau is included in the confidence bands (PI is a nonlinear function of se)
   ySeqH0 <- if (options[["funnelUnderH0ParametersFixedTau"]] == 0) range(yTicks) else seq(from = min(yTicks), to = max(yTicks), length.out = 100)
-  ySeqH1 <- if (!options[["funnelUnderH1IncludeHeterogeneity"]])   range(yTicks) else seq(from = min(yTicks), to = max(yTicks), length.out = 100)
+  ySeqH1 <- if ((options[["funnelUnderH1Parameters"]] == "estimated" && !options[["funnelUnderH1IncludeHeterogeneity"]])
+                || (options[["funnelUnderH1Parameters"]] == "fixed"  && options[["funnelUnderH1ParametersFixedTau"]] == 0))
+    range(yTicks) else seq(from = min(yTicks), to = max(yTicks), length.out = 100)
 
   ### specify zero-centered funnels
   if (options[["funnelUnderH0"]]) {
@@ -455,7 +454,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
       if (jaspBase::isTryError(fit)) {
         funnelParametersTable$addFootnote(fit, symbol = gettext("The funnel plot parameter estimation failed with the following error: "))
-        if (!.maGetMethodOptions(options) %in% c("EE", "FE"))
+        if (.maGetMethodOptions(options) %in% c("EE", "FE"))
           return(data.frame(k = NA, mu = NA))
         else
           return(data.frame(k = NA, mu = NA, tau = NA))
