@@ -256,27 +256,27 @@ Form
 			values:		{
 				if (funnelUnderH0.checked && funnelUnderH1.checked) {
 					[
-						{ label: qsTr("None"),			value: "none"		},
 						{ label: qsTr("All"),			value: "all"		},
+						{ label: qsTr("None"),			value: "none"		},
 						{ label: qsTr("Outside H₀"),	value: "outsideH0"	},
 						{ label: qsTr("Outside H₁"),	value: "outsideH1"	}
 					]
 				} else if (funnelUnderH0.checked) {
 					[
-						{ label: qsTr("None"),			value: "none"		},
 						{ label: qsTr("All"),			value: "all"		},
+						{ label: qsTr("None"),			value: "none"		},
 						{ label: qsTr("Outside H₀"),	value: "outsideH0"	}
 					]
 				} else if (funnelUnderH1.checked) {
 					[
-						{ label: qsTr("None"),			value: "none"		},
 						{ label: qsTr("All"),			value: "all"		},
+						{ label: qsTr("None"),			value: "none"		},
 						{ label: qsTr("Outside H₁"),	value: "outsideH1"	}
 					]
 				} else {
 					[
-						{ label: qsTr("None"),			value: "none"		},
-						{ label: qsTr("All"),			value: "all"		}
+						{ label: qsTr("All"),			value: "all"		},
+						{ label: qsTr("None"),			value: "none"		}
 					]
 				}
 			}
