@@ -18,8 +18,8 @@ Description
 
 	GroupTitle
 	{
-		title:	qsTr("Miscellaneous")
-		icon:	"meta-analysis.svg"
+		title:		qsTr("Miscellaneous")
+		icon:		"meta-analysis.svg"
 	}
 
 	Analysis
@@ -27,7 +27,7 @@ Description
 		menu:			qsTr("Effect Size Computation")
 		title:			qsTr("Effect Size Computation")
 		func:			"EffectSizeComputation"
-		requiresData:	false
+		requiresData:	true
 	}
 
 	Analysis
@@ -35,12 +35,13 @@ Description
 		menu:			qsTr("Funnel Plot")
 		title:			qsTr("Funnel Plot")
 		func:			"FunnelPlot"
+		requiresData:	true
 	}
 
 	GroupTitle
 	{
-		title:	qsTr("Classical")
-		icon:	"meta-analysis.svg"
+		title:		qsTr("Classical")
+		icon:		"meta-analysis.svg"
 	}
 
 	Analysis
@@ -90,8 +91,8 @@ Description
 
 	GroupTitle
 	{
-		title: 	qsTr("Bayesian")
-		icon:	"meta-analysis-bayesian.svg"
+		title:	 	qsTr("Bayesian")
+		icon:		"meta-analysis-bayesian.svg"
 	}
 
 	Analysis

@@ -131,8 +131,8 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 }
 .maReadData            <- function(dataset, options) {
 
-  if (!is.null(dataset))
-    return(dataset)
+#  if (!is.null(dataset))
+#    return(dataset)
 
   # model data
   predictorsNominal <- options[["predictors"]][options[["predictors.types"]] == "nominal"]
