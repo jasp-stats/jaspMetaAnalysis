@@ -15,12 +15,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 # TODO:
-# - simulatanous mapping overrides one of them
 # - funnel plot asymmetry tests fail with split
 # - check that sequence se sequence is generated with fixed mu and tau under null
 
 FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
-
   if (.fpReady(options))
     .fpH1Fits(jaspResults, dataset, options)
 
@@ -155,7 +153,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     y  = dataset[[options[["effectSizeStandardError"]]]]
   )
   if (options[["estimatesMappingShape"]] != "") dfPlot$shape <- dataset[[options[["estimatesMappingShape"]]]]
-  if (options[["estimatesMappingColor"]] != "") dfPlot$fill  <- dataset[[options[["estimatesMappingColor"]]]]
+  if (options[["estimatesMappingColor"]] != "") dfPlot$color <- dataset[[options[["estimatesMappingColor"]]]]
   if (options[["studyLabel"]] != "")            dfPlot$label <- dataset[[options[["studyLabel"]]]]
 
   if (!is.null(splitLevel))
@@ -361,7 +359,8 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     y = as.name("y")
   )
   if (options[["estimatesMappingShape"]] != "") pointAes$shape <- as.name("shape")
-  if (options[["estimatesMappingColor"]] != "") pointAes$fill  <- as.name("fill")
+  if (options[["estimatesMappingColor"]] != "") pointAes$color <- as.name("color")
+  if (options[["estimatesMappingColor"]] != "") pointAes$fill  <- as.name("color")
 
   out <- out + jaspGraphs::geom_point(
     data    = dfPlot,
@@ -371,7 +370,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   if (options[["estimatesMappingShape"]] != "")
     out <- out + ggplot2::labs(shape = options[["estimatesMappingShape"]])
   if (options[["estimatesMappingColor"]] != "")
-    out <- out + ggplot2::labs(fill = options[["estimatesMappingColor"]])
+    out <- out + ggplot2::labs(color = options[["estimatesMappingColor"]], fill = options[["estimatesMappingColor"]])
 
 
   # add labels
