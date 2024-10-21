@@ -14,6 +14,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
+# TODO:
+# - simulatanous mapping overrides one of them
+# - funnel plot asymmetry tests fail with split
+# - check that sequence se sequence is generated with fixed mu and tau under null
 
 FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
@@ -263,7 +267,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
       # get the appropriate funnel parameters
       tempAdjustMean          <- if (options[["estimatesMappingLabel"]] == "outsideH0") adjustFunnel0Mean          else adjustFunnel1Mean
       tempAdjustHeterogeneity <- if (options[["estimatesMappingLabel"]] == "outsideH0") adjustFunnel0Heterogeneity else adjustFunnel1Heterogeneity
-      # exclusion of data points outside the funnel 
+      # exclusion of data points outside the funnel
       tempDiff <- abs(dfLabels$x - tempAdjustMean)
       tempDiff[tempDiff < 1.96 * tempAdjustHeterogeneity] <- 0
       tempZ    <- tempDiff / dfLabels$y

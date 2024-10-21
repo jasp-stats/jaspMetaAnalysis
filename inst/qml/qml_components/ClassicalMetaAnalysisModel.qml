@@ -31,7 +31,7 @@ Section
 	property alias effectSizeModelTermsCount:			effectSizeModelTerms.count
 	property alias heterogeneityModelTermsCount:		heterogeneityModelTerms.count
 	property alias heterogeneityModelLinkValue:			heterogeneityModelLink.value
-	
+
 
 	Group
 	{

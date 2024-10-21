@@ -97,6 +97,7 @@ Form
 			id:					predictors
 			title:				qsTr("Predictors")
 			allowedColumns:		["nominal", "scale"]
+			allowTypeChange:	true
 		}
 
 		AssignedVariablesList

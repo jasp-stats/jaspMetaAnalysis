@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.3.2",
+    "Version": "4.4.1",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -139,7 +139,7 @@
     },
     "MASS": {
       "Package": "MASS",
-      "Version": "7.3-60.0.1",
+      "Version": "7.3-61",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -150,11 +150,11 @@
         "stats",
         "utils"
       ],
-      "Hash": "b765b28387acc8ec9e9c1530713cb19c"
+      "Hash": "0cafd6f0500e5deba33be22c46bf6055"
     },
     "Matrix": {
       "Package": "Matrix",
-      "Version": "1.6-5",
+      "Version": "1.7-1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -167,7 +167,7 @@
         "stats",
         "utils"
       ],
-      "Hash": "8c7115cd3a0e048bda2a7cd110549f7a"
+      "Hash": "5122bb14d8736372411f955e1b16bc8a"
     },
     "MatrixModels": {
       "Package": "MatrixModels",
@@ -1079,7 +1079,7 @@
     },
     "igraph": {
       "Package": "igraph",
-      "Version": "2.0.3",
+      "Version": "2.1.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1098,7 +1098,7 @@
         "utils",
         "vctrs"
       ],
-      "Hash": "c3b7d801d722e26e4cd888e042bf9af5"
+      "Hash": "c03878b48737a0e2da3b772d7b2e22da"
     },
     "inline": {
       "Package": "inline",
@@ -1123,14 +1123,14 @@
     },
     "jaspBase": {
       "Package": "jaspBase",
-      "Version": "0.19.0",
+      "Version": "0.19.2",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspBase",
       "RemoteRef": "master",
-      "RemoteSha": "79632a237c7bf6bb9b6c8fdf30cc59abccb923d1",
+      "RemoteSha": "490c3729f1c34406fc662bb20aa872c99a88eeac",
+      "RemoteHost": "api.github.com",
       "Requirements": [
         "R6",
         "Rcpp",
@@ -1159,18 +1159,18 @@
         "systemfonts",
         "withr"
       ],
-      "Hash": "5e3804868e93e304cb776be34f1d7a18"
+      "Hash": "240b27a199461a7365b77a3aa0917fef"
     },
     "jaspGraphs": {
       "Package": "jaspGraphs",
-      "Version": "0.19.0",
+      "Version": "0.19.2",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspGraphs",
       "RemoteRef": "master",
-      "RemoteSha": "b2e1799265a0741b49a1ca356f96448091dd8db0",
+      "RemoteSha": "550191feb1f662ba400e9b96617050aad4927048",
+      "RemoteHost": "api.github.com",
       "Requirements": [
         "R6",
         "RColorBrewer",
@@ -1183,17 +1183,18 @@
         "scales",
         "viridisLite"
       ],
-      "Hash": "31b0c580c325e5f061d6f7ea8a65a31d"
+      "Hash": "4459270f4582584f4426db85d0f55fa4"
     },
     "jaspTools": {
       "Package": "jaspTools",
-      "Version": "0.19.0",
+      "Version": "0.19.2",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "jaspTools",
       "RemoteUsername": "jasp-stats",
-      "RemoteSha": "15aefc36a9add2b7772529bcdd4b9a7271c4f8e4",
+      "RemoteRepo": "jaspTools",
+      "RemoteRef": "master",
+      "RemoteSha": "eb0224a398719ca9dc2fbfebcf325e7f06bb467c",
+      "RemoteHost": "api.github.com",
       "Requirements": [
         "archive",
         "data.table",
@@ -1208,7 +1209,7 @@
         "testthat",
         "vdiffr"
       ],
-      "Hash": "fa44fa714920e3cbcc1e07358b4534dc"
+      "Hash": "eb3e2504ed7480d69d2b7bdfeb42138f"
     },
     "jpeg": {
       "Package": "jpeg",
@@ -2053,13 +2054,13 @@
     },
     "renv": {
       "Package": "renv",
-      "Version": "1.0.10",
+      "Version": "1.0.11",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "utils"
       ],
-      "Hash": "d0387d5687ec933dd7587efd4cfa2d85"
+      "Hash": "47623f66b4e80b3b0587bc5d7b309888"
     },
     "reshape2": {
       "Package": "reshape2",
@@ -2191,10 +2192,10 @@
     },
     "rstudioapi": {
       "Package": "rstudioapi",
-      "Version": "0.16.0",
+      "Version": "0.17.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "96710351d642b70e8f02ddeb237c46a7"
+      "Hash": "fb9f5fce8f609e9b66f0bea5c783f88a"
     },
     "runjags": {
       "Package": "runjags",
