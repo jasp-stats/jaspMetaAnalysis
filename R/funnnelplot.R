@@ -16,8 +16,11 @@
 #
 
 FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
-  if (.fpReady(options))
+
+  if (.fpReady(options)) {
+    dataset <- .fpCheckDataset(jaspResults, dataset, options)
     .fpH1Fits(jaspResults, dataset, options)
+  }
 
   # make the funnel plots
   .fpPlot(jaspResults, dataset, options)
@@ -34,6 +37,38 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 .fpDependencies <- c("effectSize", "effectSizeStandardError", "split")
 .fpReady        <- function(options) {
   return(options[["effectSize"]] != "" && options[["effectSizeStandardError"]] != "")
+}
+.fpCheckDataset <- function(jaspResults, dataset, options) {
+
+  # omit NAs
+  dataset <- na.omit(dataset)
+
+  # add a warning message
+  if (!is.null(attr(dataset, "na.action")) && is.null(jaspResults[["missingDataInformation"]])) {
+    missingDataInformation <- createJaspHtml(gettext("Missing Data Summary"))
+    missingDataInformation$position <- 0.1
+    missingDataInformation$dependOn(c(.fpDependencies, "estimatesMappingColor", "estimatesMappingShape", "studyLabel"))
+    missingDataInformation$text <- gettextf("The dataset contains missing values: %1$i missing values were removed from the analysis.", length(attr(dataset, "na.action")))
+    jaspResults[["missingDataInformation"]] <- missingDataInformation
+  }
+
+  .hasErrors(
+    dataset              = dataset,
+    type                 = c("infinity", "observations", "variance"),
+    all.target           = c(
+      options[["effectSize"]],
+      options[["effectSizeStandardError"]]
+    ),
+    observations.amount  = "< 2",
+    exitAnalysisIfErrors = TRUE)
+
+  .hasErrors(
+    dataset              = dataset,
+    seCheck.target       = options[["effectSizeStandardError"]],
+    custom               = .maCheckStandardErrors,
+    exitAnalysisIfErrors = TRUE)
+
+  return(dataset)
 }
 
 .fpH1Fits                       <- function(jaspResults, dataset, options) {
