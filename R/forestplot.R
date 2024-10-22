@@ -755,7 +755,11 @@
     xlim   = xRange,
     ylim   = yRange,
     expand = FALSE
-  ) + ggplot2::xlab(options[["forestPlotAuxiliaryEffectLabel"]]) + ggplot2::theme(
+  ) + ggplot2::xlab(
+    if (options[["forestPlotAuxiliaryEffectLabel"]] != "Effect Size")  options[["forestPlotAuxiliaryEffectLabel"]]
+    else if (options[["transformEffectSize"]] == "none")               gettext("Effect Size")
+    else                                                               .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])
+  ) + ggplot2::theme(
     axis.line.y       = ggplot2::element_blank(),
     axis.line.x       = ggplot2::element_line(color = "black"),
     axis.text.y       = ggplot2::element_blank(),
