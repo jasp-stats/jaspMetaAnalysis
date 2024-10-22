@@ -1378,7 +1378,7 @@
     return(jaspResults[["estimatedMarginalMeansContainer"]])
 
   # create the output container
-  estimatedMarginalMeansContainer <- createJaspContainer(gettext("Meta-Regression Summary"))
+  estimatedMarginalMeansContainer <- createJaspContainer(gettext("Estimated Marginal Means Summary"))
   estimatedMarginalMeansContainer$dependOn(c(.maDependencies, "confidenceIntervals", "confidenceIntervalsLevel"))
   estimatedMarginalMeansContainer$position <- 4
   jaspResults[["estimatedMarginalMeansContainer"]] <- estimatedMarginalMeansContainer
