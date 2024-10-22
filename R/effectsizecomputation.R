@@ -8,9 +8,8 @@
 EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
 
   # TODO: remove once Bruno fixes flattening and renaming
-  options <- .HOTFIX_flatten_options(options)
-
-  dataset     <- .escReadDataset(dataset, options)
+  # options <- .HOTFIX_flatten_options(options)
+  # dataset     <- .escReadDataset(dataset, options)
   dataOutput  <- .escComputeEffectSizes(dataset, options)
 
   .escComputeSummaryTable(jaspResults, dataset, options, dataOutput)
@@ -461,8 +460,8 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
     inputs <- .escReportedEffectSizesInput(inputs)
   }
 
-  if (length(variables[["subset"]]) == 1)
-    inputs[["subset"]] <- dataset[[variables[["subset"]]]]
+  if (variables[["subset"]] != "")
+    inputs[["subset"]] <- dataset[[variables[["subset"]]]] == variables[["subsetLevel"]]
 
   inputs <- inputs[!sapply(inputs, is.null)]
 
@@ -899,7 +898,8 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
   "effectSize",
   "standardError",
   "samplingVariance",
-  "samplingVarianceTypeMixed"
+  "samplingVarianceTypeMixed",
+  "subset", "subsetLevel"
 )
 
 .HOTFIX_flatten_options <- function(options) {

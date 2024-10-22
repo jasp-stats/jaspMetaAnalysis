@@ -294,29 +294,29 @@ Form
 				preferredWidth:		parent.width - 6 * jaspTheme.contentMargin
 				preferredHeight:	(function() {
 					if ((designValue == "variableAssociation" && measurementValue == "mixed" && samplingVarianceType.value == "mixed")) {
-						return 11 * 50 * preferencesModel.uiScale
+						return 12 * 50 * preferencesModel.uiScale
 					} else if (effectSizeValue == "SMD" || effectSizeValue == "D2ORL" || effectSizeValue == "D2ORN" || effectSizeValue == "SMCC" || 
 						(designValue == "variableAssociation" && measurementValue == "mixed")) {
-						return 10 * 50 * preferencesModel.uiScale
+						return 11 * 50 * preferencesModel.uiScale
 					} else if (effectSizeValue == "CVR" || effectSizeValue == "VR" || effectSizeValue == "CVRC"  || effectSizeValue == "VRC" || 
 						(designValue == "independentGroups" && measurementValue == "countsPerTime") ||
 						(designValue == "repeatedMeasures" && measurementValue == "binary") ||
 						(designValue == "variableAssociation" && measurementValue == "quantitative") ||
 						(designValue == "reportedEffectSizes")) {
-						return  5 * 50 * preferencesModel.uiScale
+						return  6 * 50 * preferencesModel.uiScale
 					} else if (effectSizeValue == "SDLN" || (designValue == "singleGroup" && measurementValue == "countsPerTime")) {
-						return  3 * 50 * preferencesModel.uiScale
+						return  4 * 50 * preferencesModel.uiScale
 					} else if (effectSizeValue == "SMD1" || effectSizeValue == "SMCR" || effectSizeValue == "PCOR" || effectSizeValue == "ZPCOR" ||
 						(designValue == "other" && measurementValue == "modelFit")) {
-						return  6 * 50 * preferencesModel.uiScale
+						return  7 * 50 * preferencesModel.uiScale
 					} else if ((designValue == "independentGroups" && measurementValue == "quantitative") ||
 						(designValue == "other" && measurementValue == "partialCorrelation")) {
-						return  7 * 50 * preferencesModel.uiScale
+						return  8 * 50 * preferencesModel.uiScale
 					} else if ((designValue == "singleGroup" && (measurementValue == "quantitative" || measurementValue == "binary")) ||
 						(designValue == "other" && (measurementValue == "reliability" ||  measurementValue == "heterozygosity"))) {
-						return  4 * 50 * preferencesModel.uiScale
+						return  5 * 50 * preferencesModel.uiScale
 					} else {
-						return 7 * 50 * preferencesModel.uiScale
+						return 8 * 50 * preferencesModel.uiScale
 					}
 				})()
 
@@ -848,10 +848,18 @@ Form
 
 				AssignedVariablesList
 				{
-					name: "selected"
+					name: "subset"
+					id: subset
 					title: qsTr("Subset")
 					singleVariable: true
 					allowedColumns:	["nominal"]
+				}
+
+				DropDown
+				{
+					name:				"subsetLevel"
+					label:				qsTr("Subset Level")
+					source:				[{name: "subset", use: "levels"}]
 				}
 			}
 
