@@ -38,13 +38,14 @@ Form
 			property string designValue:		design.value
 			property string measurementValue:	measurement.value
 			property string effectSizeValue:	effectSize.value
-			property string designLabel:		design.label
-			property string measurementLabel:	measurement.label
-			property string effectSizeLabel:	effectSize.label
+			property string stepCounterValue:	stepCounter.text
+			property string designLabel:		design.currentLabel
+			property string measurementLabel:	measurement.currentLabel
 
 			Text
 			{
-				text: qsTr("Step %1").arg((rowIndex + 1))
+				text:	qsTr("Step %1").arg((rowIndex + 1))
+				id:		stepCounter
 			}
 
 			DropDown
@@ -284,6 +285,7 @@ Form
 			property var designLabel:		effectSizeType.rowAt(rowIndex).designLabel
 			property var measurementLabel:	effectSizeType.rowAt(rowIndex).measurementLabel
 			property var effectSizeLabel:	effectSizeType.rowAt(rowIndex).effectSizeLabel
+			property var stepCounterValue:	effectSizeType.rowAt(rowIndex).stepCounterValue
 			
 			VariablesForm
 			{
@@ -321,7 +323,7 @@ Form
 				AvailableVariablesList
 				{
 					name:		"allVars"
-					title:		"" + effectSizeValue + " (" + designValue + "/" + measurementValue + ")"
+					title:		stepCounterValue + ": " + effectSizeValue + " (" + designLabel + "/" + measurementLabel + ")"
 				}
 
 				AssignedVariablesList
