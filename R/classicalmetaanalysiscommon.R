@@ -37,9 +37,11 @@
 #   - vs predicted
 #   - vs outcome
 #   - vs covariates
+# Advanced
+# - change specification of Omnibus moderation tests (do not include bracket and c, show an information message about which coefficients are included in the test in a table note)
 # Generic
 # - allow different covariates factoring across all settings
-# Power-enhanced funnel plot
+
 
 # TODO fix QML
 # - remove selected variables in estimated marginal means when removed from the model components
@@ -1666,9 +1668,9 @@
   if (.maIsMetaregressionFtest(options))
     row$df2 <- fit[["QMdf"]][2]
 
-  if (.maIsMetaregressionHeterogeneity(options))
+  if (parameter == "effectSize")
     row$parameter <- gettextf("Effect Size (coef: %1$s)", paste(selCoef, collapse = ","))
-  else if (.maIsMetaregressionEffectSize(options))
+  else if (parameter == "heterogeneity")
     row$parameter <- gettextf("Heterogeneity (coef: %1$s)", paste(selCoef, collapse = ","))
 
   return(row)
