@@ -329,6 +329,7 @@ Form
 					name: "group1OutcomePlus"
 					title: qsTr("Group 1/Outcome +")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "independentGroups" && measurementValue == "binary") ||
 						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "PBIT" || effectSizeValue == "OR2DN" || effectSizeValue == "OR2DL"))
 				}
@@ -338,6 +339,7 @@ Form
 					name: "time1OutcomePlus"
 					title: qsTr("Time 1/Outcome +")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "repeatedMeasures" && measurementValue == "binaryMarginal")
 				}
 
@@ -346,6 +348,7 @@ Form
 					name: "outcomePlusPlus"
 					title: qsTr("Outcome +/+")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "variableAssociation" && measurementValue == "binary") ||
 						(designValue == "repeatedMeasures" && measurementValue == "binary")
 				}
@@ -355,6 +358,7 @@ Form
 					name: "cronbachsAlpha"
 					title: qsTr("Cronbach's alpha")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "other" &&  measurementValue == "reliability")
 				}
 
@@ -363,6 +367,7 @@ Form
 					name: "homozygousDominantAlleles"
 					title: qsTr("Homozygous Dominant Alleles")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "other" && measurementValue == "heterozygosity")
 				}
 
@@ -371,6 +376,7 @@ Form
 					name: "group1OutcomeMinus"
 					title: qsTr("Group 1/Outcome -")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "independentGroups" && measurementValue == "binary") ||
 						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "PBIT" || effectSizeValue == "OR2DN" || effectSizeValue == "OR2DL"))
 				}
@@ -380,6 +386,7 @@ Form
 					name: "time1OutcomeMinus"
 					title: qsTr("Time 1/Outcome -")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "repeatedMeasures" && measurementValue == "binaryMarginal")
 				}
 
@@ -388,6 +395,7 @@ Form
 					name: "outcomePlusMinus"
 					title: qsTr("Outcome +/-")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "variableAssociation" && measurementValue == "binary") ||
 						(designValue == "repeatedMeasures" && measurementValue == "binary")
 				}
@@ -397,6 +405,7 @@ Form
 					name: "heterozygousAlleles"
 					title: qsTr("Heterozygous Alleles")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "other" && measurementValue == "heterozygosity")
 				}
 
@@ -405,6 +414,7 @@ Form
 					name: "group2OutcomePlus"
 					title: qsTr("Group 2/Outcome +")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "independentGroups" && measurementValue == "binary") ||
 						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "PBIT" || effectSizeValue == "OR2DN" || effectSizeValue == "OR2DL"))
 				}
@@ -414,6 +424,7 @@ Form
 					name: "time2OutcomePlus"
 					title: qsTr("Time 2/Outcome +")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "repeatedMeasures" && measurementValue == "binaryMarginal")
 				}
 
@@ -422,6 +433,7 @@ Form
 					name: "outcomeMinusPlus"
 					title: qsTr("Outcome -/+")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "variableAssociation" && measurementValue == "binary") ||
 						(designValue == "repeatedMeasures" && measurementValue == "binary")
 				}
@@ -431,6 +443,7 @@ Form
 					name: "homozygousRecessiveAlleles"
 					title: qsTr("Homozygous Recessive Alleles")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "other" && measurementValue == "heterozygosity")
 				}
 
@@ -439,6 +452,7 @@ Form
 					name: "group2OutcomeMinus"
 					title: qsTr("Group 2/Outcome Minus")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "independentGroups" && measurementValue == "binary") ||
 						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "PBIT" || effectSizeValue == "OR2DN" || effectSizeValue == "OR2DL"))
 				}
@@ -448,6 +462,7 @@ Form
 					name: "time2OutcomeMinus"
 					title: qsTr("Time 2/Outcome -")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "repeatedMeasures" && measurementValue == "binaryMarginal")
 				}
 
@@ -456,6 +471,7 @@ Form
 					name: "outcomeMinusMinus"
 					title: qsTr("Outcome -/-")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "variableAssociation" && measurementValue == "binary") ||
 						(designValue == "repeatedMeasures" && measurementValue == "binary")
 				}
@@ -465,6 +481,7 @@ Form
 					name: "outcomePlusPlusAndPlusMinus"
 					title: qsTr("Outcome +/+ and +/-")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "variableAssociation" && measurementValue == "binary")
 				}
 
@@ -473,6 +490,7 @@ Form
 					name: "outcomeMinusPlusAndMinusMinus"
 					title: qsTr("Outcome -/+ and -/-")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "variableAssociation" && measurementValue == "binary")
 				}
 
@@ -481,6 +499,7 @@ Form
 					name: "eventsGroup1"
 					title: qsTr("Events Group 1")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "independentGroups" && measurementValue == "countsPerTime")
 				}
 
@@ -489,6 +508,7 @@ Form
 					name: "events"
 					title: qsTr("Events")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "singleGroup" && (measurementValue == "binary" || measurementValue == "countsPerTime"))
 				}
 
@@ -497,6 +517,7 @@ Form
 					name: "nonEvents"
 					title: qsTr("Non-Events")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "singleGroup" && measurementValue == "binary")
 				}
 
@@ -505,6 +526,7 @@ Form
 					name: "items"
 					title: qsTr("Items")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "other" &&  measurementValue == "reliability")
 				}
 
@@ -513,6 +535,7 @@ Form
 					name: "predictors"
 					title: qsTr("Predictors")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "other" &&  measurementValue == "partialCorrelation") ||
 						(designValue == "other" && measurementValue == "modelFit")
 				}
@@ -522,6 +545,7 @@ Form
 					name: "eventsGroup2"
 					title: qsTr("Events Group 2")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "independentGroups" && measurementValue == "countsPerTime")
 				}
 
@@ -530,6 +554,7 @@ Form
 					name: "personTimeGroup1"
 					title: qsTr("Person-Time Group 1")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "independentGroups" && measurementValue == "countsPerTime")
 				}
 
@@ -538,6 +563,7 @@ Form
 					name: "personTime"
 					title: qsTr("Person-Time")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "singleGroup" && measurementValue == "countsPerTime")
 				}
 
@@ -546,6 +572,7 @@ Form
 					name: "personTimeGroup2"
 					title: qsTr("Person-Time Group 2")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "independentGroups" && measurementValue == "countsPerTime")
 				}
 
@@ -554,6 +581,7 @@ Form
 					name: "meanGroup1"
 					title: qsTr("Mean Group 1")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "independentGroups" && measurementValue == "quantitative" && (effectSizeValue != "CVR" && effectSizeValue != "VR")) || 
 						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "D2ORN" || effectSizeValue == "D2ORL")) ||
 						(designValue == "variableAssociation" && measurementValue == "mixed")
@@ -564,6 +592,7 @@ Form
 					name: "meanTime1"
 					title: qsTr("Mean Time 1 (or Group 1)")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "repeatedMeasures" && measurementValue == "quantitative" && (effectSizeValue != "CVRC" && effectSizeValue != "VRC"))
 				}
 
@@ -572,6 +601,7 @@ Form
 					name: "meanGroup2"
 					title: qsTr("Mean Group 2")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "independentGroups" && measurementValue == "quantitative" && (effectSizeValue != "CVR" && effectSizeValue != "VR")) || 
 						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "D2ORN" || effectSizeValue == "D2ORL")) ||
 						(designValue == "variableAssociation" && measurementValue == "mixed")
@@ -582,6 +612,7 @@ Form
 					name: "meanTime2"
 					title: qsTr("Mean Time 2 (or Group 2)")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "repeatedMeasures" && measurementValue == "quantitative" && (effectSizeValue != "CVRC" && effectSizeValue != "VRC"))
 				}
 
@@ -590,6 +621,7 @@ Form
 					name: "mean"
 					title: qsTr("Mean")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "singleGroup" && measurementValue == "quantitative" && effectSizeValue != "SDLN")
 				}
 
@@ -598,6 +630,7 @@ Form
 					name: "sdGroup1"
 					title: qsTr("SD Group 1")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "independentGroups" && measurementValue == "quantitative" && (effectSizeValue != "SMD1" && effectSizeValue != "SMDH1")) || 
 						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "D2ORN" || effectSizeValue == "D2ORL")) ||
 						(designValue == "variableAssociation" && measurementValue == "mixed")
@@ -608,6 +641,7 @@ Form
 					name: "sdTime1"
 					title: qsTr("SD Time 1 (or Group 1)")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "repeatedMeasures" && measurementValue == "quantitative")
 				}
 
@@ -616,6 +650,7 @@ Form
 					name: "sdGroup2"
 					title: qsTr("SD Group 2")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "independentGroups" && measurementValue == "quantitative") || 
 						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "D2ORN" || effectSizeValue == "D2ORL")) ||
 						(designValue == "variableAssociation" && measurementValue == "mixed")
@@ -626,6 +661,7 @@ Form
 					name: "sdTime2"
 					title: qsTr("SD Time 2 (or Group 2)")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "repeatedMeasures" && measurementValue == "quantitative"  && effectSizeValue != "SMCR")
 				}
 
@@ -634,6 +670,7 @@ Form
 					name: "sd"
 					title: qsTr("SD")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "singleGroup" && measurementValue == "quantitative")
 				}
 				AssignedVariablesList
@@ -641,6 +678,7 @@ Form
 					name: "sampleSizeGroup1"
 					title: qsTr("Sample Size Group 1")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "independentGroups" && measurementValue != "countsPerTime") ||
 						(designValue == "variableAssociation" && measurementValue == "mixed")
 				}
@@ -650,6 +688,7 @@ Form
 					name: "sampleSizeGroup2"
 					title: qsTr("Sample Size Group 2")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "independentGroups" && measurementValue != "countsPerTime") ||
 						(designValue == "variableAssociation" && measurementValue == "mixed")
 				}
@@ -659,6 +698,7 @@ Form
 					name: "correlation"
 					title: qsTr("Correlation")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "variableAssociation" && measurementValue == "quantitative") ||
 						(designValue == "repeatedMeasures" && measurementValue == "quantitative") ||
 						(designValue == "repeatedMeasures" && measurementValue == "binaryMarginal")
@@ -669,6 +709,7 @@ Form
 					name: "proportionPlusPlus"
 					title: qsTr("Proportion +/+")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "repeatedMeasures" && measurementValue == "binaryMarginal")
 				}
 
@@ -677,6 +718,7 @@ Form
 					name: "sampleSize"
 					title: qsTr("Sample Size")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "variableAssociation" && measurementValue == "quantitative") ||
 						(designValue == "singleGroup" && (measurementValue == "quantitative" || measurementValue == "binary")) ||
 						(designValue == "repeatedMeasures" && measurementValue == "quantitative") ||
@@ -691,6 +733,7 @@ Form
 					name: "cohensD"
 					title: qsTr("Cohen's d")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "independentGroups" && measurementValue == "quantitative" && effectSizeValue == "SMD") ||
 						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "D2ORN" || effectSizeValue == "D2ORL")) ||
 						(designValue == "variableAssociation" && measurementValue == "mixed") ||
@@ -702,6 +745,7 @@ Form
 					name: "rSquared"
 					title: qsTr("R-Squared")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "other" && measurementValue == "partialCorrelation" && (effectSizeValue == "SPCOR" || effectSizeValue == "ZSPCOR")) ||
 						(designValue == "other" && measurementValue == "modelFit")
 				}
@@ -711,6 +755,7 @@ Form
 					name: "tStatistic"
 					title: qsTr("T-Statistic")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "independentGroups" && measurementValue == "quantitative" && effectSizeValue == "SMD") ||
 						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "D2ORN" || effectSizeValue == "D2ORL")) ||
 						(designValue == "variableAssociation" && measurementValue == "quantitative") ||
@@ -724,6 +769,7 @@ Form
 					name: "fStatistic"
 					title: qsTr("F-Statistic")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "other" && measurementValue == "modelFit")
 				}
 
@@ -732,6 +778,7 @@ Form
 					name: "semipartialCorrelation"
 					title: qsTr("(Semi)Partial Correlation")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "other" && measurementValue == "partialCorrelation")
 				}
 
@@ -740,6 +787,7 @@ Form
 					name: "pValue"
 					title: qsTr("P-Value")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: (designValue == "independentGroups" && measurementValue == "quantitative" && effectSizeValue == "SMD") ||
 						(designValue == "independentGroups" && measurementValue == "mixed" && (effectSizeValue == "D2ORN" || effectSizeValue == "D2ORL")) ||
 						(designValue == "variableAssociation" && measurementValue == "quantitative") ||
@@ -755,6 +803,7 @@ Form
 					name: "effectSize"
 					title: qsTr("Effect Size")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: designValue == "reportedEffectSizes"
 				}
 
@@ -763,6 +812,7 @@ Form
 					name: "standardError"
 					title: qsTr("Standard Error")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: designValue == "reportedEffectSizes"
 				}
 
@@ -771,6 +821,7 @@ Form
 					name: "samplingVariance"
 					title: qsTr("Sampling Variance")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: designValue == "reportedEffectSizes"
 				}
 
@@ -779,6 +830,7 @@ Form
 					name: "confidenceInterval"
 					title: qsTr("95% Confidence Interval")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible: designValue == "reportedEffectSizes"
 				}
 
@@ -787,6 +839,7 @@ Form
 					name: "samplingVarianceTypeMixed"
 					title: qsTr("Sampling Variance Type Mixed")
 					singleVariable: true
+					allowedColumns:	["scale"]
 					visible:  (designValue == "variableAssociation" && measurementValue == "binary" && (effectSizeValue == "PHI" || effectSizeValue == "ZPHI") && samplingVarianceType.value == "mixed") ||
 						(designValue == "variableAssociation" && measurementValue == "mixed" && (effectSizeValue == "RPB" || effectSizeValue == "ZPB") && samplingVarianceType.value == "mixed")
 				}
@@ -796,6 +849,7 @@ Form
 					name: "selected"
 					title: qsTr("Subset")
 					singleVariable: true
+					allowedColumns:	["nominal"]
 				}
 			}
 

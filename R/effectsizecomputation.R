@@ -1,4 +1,10 @@
 
+# TODO:
+# - fix crash when second column is exported
+# - GUI scaling issues
+# - add dropdown to specify which subset is selected (i.e., event indicator in survival)
+# - add input checks in GUI / R code
+
 EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
 
   # TODO: remove once Bruno fixes flattening and renaming
@@ -20,9 +26,9 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
 }
 .escReadDataset         <- function(dataset, options) {
 
-  if (!is.null(dataset)) {
-    return(dataset)
-  } else {
+  # if (!is.null(dataset)) {
+  #   return(dataset)
+  # } else {
 
     # collect all selected variables
     selectedVariables <- lapply(seq_along(options[["variables"]]), function(i) {
@@ -46,7 +52,7 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
     selectedVariables <- unique(selectedVariables)
 
     return(.readDataSetToEnd(columns.as.numeric = selectedVariables))
-  }
+  # }
 }
 .escComputeEffectSizes  <- function(dataset, options) {
 
