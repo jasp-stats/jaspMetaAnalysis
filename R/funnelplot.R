@@ -172,14 +172,14 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
       .quitAnalysis(gettext("Funnel plot prediction intervals must be between 0 and 1."))
     if (length(funnelLevels) < 1)
       .quitAnalysis(gettext("Funnel plot prediction intervals must be specified."))
-    funnelLevels <- (1-funnelLevels)/2
+    funnelLevels <- (1 - funnelLevels) / 2
     funnelLevels <- sort(funnelLevels)
 
     # funnel colors
-    funnelColorsSteps <- 2*length(funnelLevels) + 1
+    funnelColorsSteps <- 2 * length(funnelLevels) + 1
     funnelColorsSteps <- seq(0, 1, length.out = funnelColorsSteps)
     funnelColorsSteps <- funnelColorsSteps[-c(1, length(funnelColorsSteps))]
-    funnelColors      <- paste0("grey", round(funnelColorsSteps*100))
+    funnelColors      <- paste0("grey", round(funnelColorsSteps * 100))
 
     if (options[["invertColors"]])
       funnelColors <- rev(funnelColors)
@@ -703,8 +703,8 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     dfs[[i]] <- data.frame(
       x = c(rev(mean - tempZ * sqrt(heterogeneity^2 + seSeq^2)), mean + tempZ * sqrt(heterogeneity^2 + seSeq^2)),
       y = c(rev(seSeq), seSeq),
-      p = 2*funnelLevels[i],
-      lvl = 1-2*funnelLevels[i]
+      p = 2 * funnelLevels[i],
+      lvl = 1 - 2 * funnelLevels[i]
     )
   }
   return(dfs)
