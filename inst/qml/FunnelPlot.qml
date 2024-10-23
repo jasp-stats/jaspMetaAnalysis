@@ -288,6 +288,7 @@ Form
 			id:				estimatesMappingColor
 			label:			qsTr("Color")
 			addEmptyValue:	true
+			allowedColumns:	["nominal"]
 		}
 
 		DropDown
@@ -296,6 +297,7 @@ Form
 			id:				estimatesMappingShape
 			label:			qsTr("Shape")
 			addEmptyValue:	true
+			allowedColumns:	["nominal"]
 		}
 
 		DropDown
