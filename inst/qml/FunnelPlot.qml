@@ -167,9 +167,7 @@ Form
 					{ label: qsTr("Sidik-Jonkman")			, value: "sidikJonkman"		},
 					{ label: qsTr("Empirical Bayes")		, value: "empiricalBayes"	},
 					{ label: qsTr("Paule-Mandel")			, value: "pauleMandel"		},
-					{ label: qsTr("Paule-Mandel (MU)")		, value: "pauleMandelMu"	},
-					{ label: qsTr("Generalized Q-stat")		, value: "qeneralizedQStat"	},
-					{ label: qsTr("Generalized Q-stat (MU)"), value: "qeneralizedQStatMu"}
+					{ label: qsTr("Paule-Mandel (MU)")		, value: "pauleMandelMu"	}
 				]
 			}
 
