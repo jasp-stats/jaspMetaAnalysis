@@ -550,9 +550,9 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
         fitSummary <- .dpExtractAsymmetryTest(fitTest, testType = "metaRegression")
 
         if (jaspBase::isTryError(fit))
-          metaRegressionTable$addFootnote(fit, symbol = .fpAssymetryTestErrorMessage())
+          metaRegressionTable$addFootnote(fit, symbol = .fpAsymmetryTestErrorMessage())
         else if (jaspBase::isTryError(fitTest))
-          metaRegressionTable$addFootnote(fit, symbol = .fpAssymetryTestErrorMessage())
+          metaRegressionTable$addFootnote(fit, symbol = .fpAsymmetryTestErrorMessage())
 
         metaRegressionTable$setData(fitSummary)
 
@@ -566,9 +566,9 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
           fitSummary$split <- names(fits)[i]
 
           if (jaspBase::isTryError(fits[[i]]))
-            metaRegressionTable$addFootnote(fits[[i]], symbol = .fpAssymetryTestErrorMessage(names(fits)[i]))
+            metaRegressionTable$addFootnote(fits[[i]], symbol = .fpAsymmetryTestErrorMessage(names(fits)[i]))
           else if (jaspBase::isTryError(fitTest))
-            metaRegressionTable$addFootnote(fitTest, symbol = .fpAssymetryTestErrorMessage(names(fits)[i]))
+            metaRegressionTable$addFootnote(fitTest, symbol = .fpAsymmetryTestErrorMessage(names(fits)[i]))
 
           return(fitSummary)
         }))
@@ -605,9 +605,9 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
         fitSummary <- .dpExtractAsymmetryTest(fitTest, testType = "weightedRegression")
 
         if (jaspBase::isTryError(fit))
-          weightedRegressionTable$addFootnote(fit, symbol = .fpAssymetryTestErrorMessage())
+          weightedRegressionTable$addFootnote(fit, symbol = .fpAsymmetryTestErrorMessage())
         else if (jaspBase::isTryError(fitTest))
-          weightedRegressionTable$addFootnote(fitTest, symbol = .fpAssymetryTestErrorMessage())
+          weightedRegressionTable$addFootnote(fitTest, symbol = .fpAsymmetryTestErrorMessage())
 
         weightedRegressionTable$setData(fitSummary)
 
@@ -621,9 +621,9 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
           fitSummary$split <- names(fits)[i]
 
           if (jaspBase::isTryError(fits[[i]]))
-            weightedRegressionTable$addFootnote(fits[[i]], symbol = .fpAssymetryTestErrorMessage(names(fits)[i]))
+            weightedRegressionTable$addFootnote(fits[[i]], symbol = .fpAsymmetryTestErrorMessage(names(fits)[i]))
           else if (jaspBase::isTryError(fitTest))
-            weightedRegressionTable$addFootnote(fitTest, symbol = .fpAssymetryTestErrorMessage(names(fits)[i]))
+            weightedRegressionTable$addFootnote(fitTest, symbol = .fpAsymmetryTestErrorMessage(names(fits)[i]))
 
           return(fitSummary)
         }))
@@ -657,9 +657,9 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
         fitSummary <- .dpExtractAsymmetryTest(fitTest, testType = "rankCorrelation")
 
         if (jaspBase::isTryError(fit))
-          rankCorrelationTable$addFootnote(fit, symbol = .fpAssymetryTestErrorMessage())
+          rankCorrelationTable$addFootnote(fit, symbol = .fpAsymmetryTestErrorMessage())
         else if (jaspBase::isTryError(fitTest))
-          rankCorrelationTable$addFootnote(fit, symbol = .fpAssymetryTestErrorMessage())
+          rankCorrelationTable$addFootnote(fit, symbol = .fpAsymmetryTestErrorMessage())
         else
           fitSummary$k <- fit$k
 
@@ -676,10 +676,10 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
           if (jaspBase::isTryError(fits[[i]])) {
             fitSummary$k <- NA
-            rankCorrelationTable$addFootnote(fits[[i]], symbol = .fpAssymetryTestErrorMessage(names(fits)[i]))
+            rankCorrelationTable$addFootnote(fits[[i]], symbol = .fpAsymmetryTestErrorMessage(names(fits)[i]))
           } else if (jaspBase::isTryError(fitTest)) {
             fitSummary$k <- fits[[i]]$k
-            rankCorrelationTable$addFootnote(fit, symbol = .fpAssymetryTestErrorMessage(names(fits)[i]))
+            rankCorrelationTable$addFootnote(fit, symbol = .fpAsymmetryTestErrorMessage(names(fits)[i]))
           } else {
             fitSummary$k <- fits[[i]]$k
           }
@@ -709,11 +709,11 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   }
   return(dfs)
 }
-.fpAssymetryTestErrorMessage <- function(level = NULL) {
+.fpAsymmetryTestErrorMessage <- function(level = NULL) {
   if (is.null(level))
-    return(gettext("The funnel plot assymetry test failed with the following error: "))
+    return(gettext("The funnel plot asymmetry test failed with the following error: "))
   else
-    return(gettextf("The funnel plot assymetry test at level %1$s failed with the following error: ", level))
+    return(gettextf("The funnel plot asymmetry test at level %1$s failed with the following error: ", level))
 }
 .dpExtractAsymmetryTest      <- function(fitTest, testType) {
   if (testType == "metaRegression") {
