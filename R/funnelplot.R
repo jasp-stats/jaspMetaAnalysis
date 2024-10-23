@@ -21,6 +21,8 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     dataset <- .fpCheckDataset(jaspResults, dataset, options)
     .fpH1Fits(jaspResults, dataset, options)
   }
+  saveRDS(options, file = "C:/JASP/options.RDS")
+  saveRDS(dataset, file = "C:/JASP/dataset.RDS")
 
   # make the funnel plots
   .fpPlot(jaspResults, dataset, options)
@@ -139,7 +141,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
     fit <- jaspResults[["fitState"]]$object
     if (options[["funnelUnderH1"]] && options[["funnelUnderH1Parameters"]] == "estimated" && jaspBase::isTryError(fit))
-      funnelPlot$setError(gettextf("The H\U2081 model failed with the following message: %1$s.", fit))
+      funnelPlot$setError(.fpMetaforTranslateErrorMessage(fit))
     else
       funnelPlot$plotObject <- .fpMakeFunnelPlot(jaspResults, dataset, options)
 
@@ -153,7 +155,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
       fit <- jaspResults[["fitState"]]$object[[splitLevel]]
       if (options[["funnelUnderH1"]] && options[["funnelUnderH1Parameters"]] == "estimated" && jaspBase::isTryError(fit))
-        funnelPlot$setError(gettextf("The H\U2081 model failed with the following message: %1$s.", fit))
+        funnelPlot$setError(.fpMetaforTranslateErrorMessage(fit))
       else
         funnelPlot$plotObject <- .fpMakeFunnelPlot(jaspResults, dataset, options, splitLevel = splitLevel)
 
@@ -472,7 +474,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     fit <- jaspResults[["fitState"]]$object
     if (jaspBase::isTryError(fit)) {
       fitSummary <- data.frame(k = NA, mu = NA)
-      funnelParametersTable$addFootnote(fit, symbol = gettext("The funnel plot parameter estimation failed with the following error: "))
+      funnelParametersTable$addFootnote(.fpMetaforTranslateErrorMessage(fit), symbol = gettext("The funnel plot parameter estimation failed with the following error: "))
     } else {
       fitSummary <- data.frame(
         k   = fit$k,
@@ -488,7 +490,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     fitSummary <- do.call(rbind, lapply(fits, function(fit) {
 
       if (jaspBase::isTryError(fit)) {
-        funnelParametersTable$addFootnote(fit, symbol = gettext("The funnel plot parameter estimation failed with the following error: "))
+        funnelParametersTable$addFootnote(.fpMetaforTranslateErrorMessage(fit), symbol = gettext("The funnel plot parameter estimation failed with the following error: "))
         if (.maGetMethodOptions(options) %in% c("EE", "FE"))
           return(data.frame(k = NA, mu = NA))
         else
@@ -550,9 +552,9 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
         fitSummary <- .dpExtractAsymmetryTest(fitTest, testType = "metaRegression")
 
         if (jaspBase::isTryError(fit))
-          metaRegressionTable$addFootnote(fit, symbol = .fpAsymmetryTestErrorMessage())
+          metaRegressionTable$addFootnote(.fpMetaforTranslateErrorMessage(fit), symbol = .fpAsymmetryTestErrorMessage())
         else if (jaspBase::isTryError(fitTest))
-          metaRegressionTable$addFootnote(fit, symbol = .fpAsymmetryTestErrorMessage())
+          metaRegressionTable$addFootnote(fitTest, symbol = .fpAsymmetryTestErrorMessage())
 
         metaRegressionTable$setData(fitSummary)
 
@@ -566,7 +568,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
           fitSummary$split <- names(fits)[i]
 
           if (jaspBase::isTryError(fits[[i]]))
-            metaRegressionTable$addFootnote(fits[[i]], symbol = .fpAsymmetryTestErrorMessage(names(fits)[i]))
+            metaRegressionTable$addFootnote(.fpMetaforTranslateErrorMessage(fits[[i]]), symbol = .fpAsymmetryTestErrorMessage(names(fits)[i]))
           else if (jaspBase::isTryError(fitTest))
             metaRegressionTable$addFootnote(fitTest, symbol = .fpAsymmetryTestErrorMessage(names(fits)[i]))
 
@@ -605,7 +607,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
         fitSummary <- .dpExtractAsymmetryTest(fitTest, testType = "weightedRegression")
 
         if (jaspBase::isTryError(fit))
-          weightedRegressionTable$addFootnote(fit, symbol = .fpAsymmetryTestErrorMessage())
+          weightedRegressionTable$addFootnote(.fpMetaforTranslateErrorMessage(fit), symbol = .fpAsymmetryTestErrorMessage())
         else if (jaspBase::isTryError(fitTest))
           weightedRegressionTable$addFootnote(fitTest, symbol = .fpAsymmetryTestErrorMessage())
 
@@ -621,7 +623,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
           fitSummary$split <- names(fits)[i]
 
           if (jaspBase::isTryError(fits[[i]]))
-            weightedRegressionTable$addFootnote(fits[[i]], symbol = .fpAsymmetryTestErrorMessage(names(fits)[i]))
+            weightedRegressionTable$addFootnote(.fpMetaforTranslateErrorMessage(fits[[i]]), symbol = .fpAsymmetryTestErrorMessage(names(fits)[i]))
           else if (jaspBase::isTryError(fitTest))
             weightedRegressionTable$addFootnote(fitTest, symbol = .fpAsymmetryTestErrorMessage(names(fits)[i]))
 
@@ -657,9 +659,9 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
         fitSummary <- .dpExtractAsymmetryTest(fitTest, testType = "rankCorrelation")
 
         if (jaspBase::isTryError(fit))
-          rankCorrelationTable$addFootnote(fit, symbol = .fpAsymmetryTestErrorMessage())
+          rankCorrelationTable$addFootnote(.fpMetaforTranslateErrorMessage(fit), symbol = .fpAsymmetryTestErrorMessage())
         else if (jaspBase::isTryError(fitTest))
-          rankCorrelationTable$addFootnote(fit, symbol = .fpAsymmetryTestErrorMessage())
+          rankCorrelationTable$addFootnote(fitTest, symbol = .fpAsymmetryTestErrorMessage())
         else
           fitSummary$k <- fit$k
 
@@ -676,10 +678,10 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
           if (jaspBase::isTryError(fits[[i]])) {
             fitSummary$k <- NA
-            rankCorrelationTable$addFootnote(fits[[i]], symbol = .fpAsymmetryTestErrorMessage(names(fits)[i]))
+            rankCorrelationTable$addFootnote(.fpMetaforTranslateErrorMessage(fits[[i]]), symbol = .fpAsymmetryTestErrorMessage(names(fits)[i]))
           } else if (jaspBase::isTryError(fitTest)) {
             fitSummary$k <- fits[[i]]$k
-            rankCorrelationTable$addFootnote(fit, symbol = .fpAsymmetryTestErrorMessage(names(fits)[i]))
+            rankCorrelationTable$addFootnote(fitTest, symbol = .fpAsymmetryTestErrorMessage(names(fits)[i]))
           } else {
             fitSummary$k <- fits[[i]]$k
           }
@@ -696,7 +698,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   return()
 }
 
-.fpComputeFunnelDf           <- function(seSeq, mean, heterogeneity, funnelLevels) {
+.fpComputeFunnelDf              <- function(seSeq, mean, heterogeneity, funnelLevels) {
   dfs <- list()
   for (i in seq_along(funnelLevels)) {
     tempZ <- qnorm(funnelLevels[i], lower.tail = FALSE)
@@ -709,13 +711,19 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   }
   return(dfs)
 }
-.fpAsymmetryTestErrorMessage <- function(level = NULL) {
+.fpAsymmetryTestErrorMessage    <- function(level = NULL) {
   if (is.null(level))
     return(gettext("The funnel plot asymmetry test failed with the following error: "))
   else
     return(gettextf("The funnel plot asymmetry test at level %1$s failed with the following error: ", level))
 }
-.dpExtractAsymmetryTest      <- function(fitTest, testType) {
+.fpMetaforTranslateErrorMessage <- function(fit) {
+  if (grepl("did not converge", fit))
+    return(gettext("The meta-analytic model did not converge. Try modifying the 'Method' option for the 'Funnel under H\U2081' settings."))
+  else
+    return(fit)
+}
+.dpExtractAsymmetryTest         <- function(fitTest, testType) {
   if (testType == "metaRegression") {
     return(data.frame(
       k   = if (jaspBase::isTryError(fitTest)) NA else fitTest$fit$k, # nobs will be fixed in the next release
