@@ -2529,10 +2529,11 @@
     "derSimonianLaird"   = "DL",
     "hedges"             = "HE",
     "hunterSchmidt"      = "HS",
-    "hunterSchmidtSSC"   = "HSk",
+    "hunterSchmidtSsc"   = "HSk",
     "sidikJonkman"       = "SJ",
     "empiricalBayes"     = "EB",
     "pauleMandel"        = "PM",
+    "pauleMandelMu"      = "PMM",
     "qeneralizedQStat"   = "GENQ",
     "qeneralizedQStatMu" = "GENQM",
     NA
