@@ -73,16 +73,16 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
 .fpH1Fits                       <- function(jaspResults, dataset, options) {
 
-  if (!is.null(jaspResults[["fitContainer"]]))
+  if (!is.null(jaspResults[["fitState"]]))
     return()
 
-  fitContainer <- createJaspState()
-  fitContainer$dependOn(c(.fpDependencies, "method"))
-  jaspResults[["fitContainer"]] <- fitContainer
+  fitState <- createJaspState()
+  fitState$dependOn(c(.fpDependencies, "method"))
+  jaspResults[["fitState"]] <- fitState
 
   if (options[["split"]] == "") {
 
-    fitContainer$object <- try(metafor::rma(
+    fitState$object <- try(metafor::rma(
       yi     = dataset[[options[["effectSize"]]]],
       sei    = dataset[[options[["effectSizeStandardError"]]]],
       method = .maGetMethodOptions(options)
@@ -100,7 +100,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
       ))
     })
     names(fits) <- splitLevels
-    fitContainer$object <- fits
+    fitState$object <- fits
   }
 
   return()
@@ -137,7 +137,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     funnelPlot <- createJaspPlot(width = 550, height = 480)
     funnelPlotContainer[["funnelPlot"]] <- funnelPlot
 
-    fit <- jaspResults[["fitContainer"]]$object
+    fit <- jaspResults[["fitState"]]$object
     if (options[["funnelUnderH1"]] && options[["funnelUnderH1Parameters"]] == "estimated" && jaspBase::isTryError(fit))
       funnelPlot$setError(gettextf("The H\U2081 model failed with the following message: %1$s.", fit))
     else
@@ -151,7 +151,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
       funnelPlot <- createJaspPlot(title = paste0(options[["split"]], " = ", splitLevel), width = 550, height = 480)
       funnelPlotContainer[[splitLevel]] <- funnelPlot
 
-      fit <- jaspResults[["fitContainer"]]$object[[splitLevel]]
+      fit <- jaspResults[["fitState"]]$object[[splitLevel]]
       if (options[["funnelUnderH1"]] && options[["funnelUnderH1Parameters"]] == "estimated" && jaspBase::isTryError(fit))
         funnelPlot$setError(gettextf("The H\U2081 model failed with the following message: %1$s.", fit))
       else
@@ -222,9 +222,9 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     } else if (options[["funnelUnderH1Parameters"]] == "estimated"){
 
       if (options[["split"]] == "") {
-        fit <- jaspResults[["fitContainer"]]$object
+        fit <- jaspResults[["fitState"]]$object
       } else {
-        fit <- jaspResults[["fitContainer"]]$object[[splitLevel]]
+        fit <- jaspResults[["fitState"]]$object[[splitLevel]]
       }
 
       adjustFunnel1Mean          <- fit$b[1]
@@ -238,9 +238,9 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
       dfsFunnel1XRange <- range(sapply(dfsFunnel1, function(x) x$x))
     } else {
       dfsFunnel1XMax <- list()
-      for (i in seq_along(jaspResults[["fitContainer"]]$object)) {
+      for (i in seq_along(jaspResults[["fitState"]]$object)) {
         # extract each fit
-        tempFit <- jaspResults[["fitContainer"]]$object[[i]]
+        tempFit <- jaspResults[["fitState"]]$object[[i]]
         if (jaspBase::isTryError(tempFit))
           next
         tempAdjustFunnel1Mean          <- tempFit$b[1]
@@ -469,7 +469,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
   if (options[["split"]] == "") {
 
-    fit <- jaspResults[["fitContainer"]]$object
+    fit <- jaspResults[["fitState"]]$object
     if (jaspBase::isTryError(fit)) {
       fitSummary <- data.frame(k = NA, mu = NA)
       funnelParametersTable$addFootnote(fit, symbol = gettext("The funnel plot parameter estimation failed with the following error: "))
@@ -484,7 +484,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
   } else {
 
-    fits       <- jaspResults[["fitContainer"]]$object
+    fits       <- jaspResults[["fitState"]]$object
     fitSummary <- do.call(rbind, lapply(fits, function(fit) {
 
       if (jaspBase::isTryError(fit)) {
@@ -545,7 +545,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     if (.fpReady(options)) {
       if (options[["split"]] == "") {
 
-        fit        <- jaspResults[["fitContainer"]]$object
+        fit        <- jaspResults[["fitState"]]$object
         fitTest    <- try(metafor::regtest(fit))
         fitSummary <- .dpExtractAsymmetryTest(fitTest, testType = "metaRegression")
 
@@ -558,7 +558,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
       } else {
 
-        fits         <- jaspResults[["fitContainer"]]$object
+        fits         <- jaspResults[["fitState"]]$object
         fitSummaries <- do.call(rbind, lapply(seq_along(fits), function(i) {
 
           fitTest    <- try(metafor::regtest(fits[[i]]))
@@ -600,7 +600,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     if (.fpReady(options)) {
       if (options[["split"]] == "") {
 
-        fit        <- jaspResults[["fitContainer"]]$object
+        fit        <- jaspResults[["fitState"]]$object
         fitTest    <- try(metafor::regtest(fit, model = "lm"))
         fitSummary <- .dpExtractAsymmetryTest(fitTest, testType = "weightedRegression")
 
@@ -613,7 +613,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
       } else {
 
-        fits         <- jaspResults[["fitContainer"]]$object
+        fits         <- jaspResults[["fitState"]]$object
         fitSummaries <- do.call(rbind, lapply(seq_along(fits), function(i) {
 
           fitTest    <- try(metafor::regtest(fits[[i]], model = "lm"))
@@ -652,7 +652,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
       if (options[["split"]] == "") {
 
-        fit        <- jaspResults[["fitContainer"]]$object
+        fit        <- jaspResults[["fitState"]]$object
         fitTest    <- try(metafor::ranktest(fit))
         fitSummary <- .dpExtractAsymmetryTest(fitTest, testType = "rankCorrelation")
 
@@ -667,7 +667,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
       } else {
 
-        fits         <- jaspResults[["fitContainer"]]$object
+        fits         <- jaspResults[["fitState"]]$object
         fitSummaries <- do.call(rbind, lapply(seq_along(fits), function(i) {
 
           fitTest    <- try(metafor::ranktest(fits[[i]]))
