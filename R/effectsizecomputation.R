@@ -1,15 +1,24 @@
-
-# TODO:
-# - fix crash when second column is exported
-# - GUI scaling issues
-# - add dropdown to specify which subset is selected (i.e., event indicator in survival)
-# - add input checks in GUI / R code
+#
+# Copyright (C) 2013-2018 University of Amsterdam
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
 
 EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
 
-  # TODO: remove once Bruno fixes flattening and renaming
-  # options <- .HOTFIX_flatten_options(options)
-  # dataset     <- .escReadDataset(dataset, options)
+  # all input checking is done within the escalc function
+  # - error messages are cleaned and forwarded to the user
   dataOutput  <- .escComputeEffectSizes(dataset, options)
 
   .escComputeSummaryTable(jaspResults, dataset, options, dataOutput)
@@ -18,41 +27,6 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
   return()
 }
 
-.escCheckReady          <- function(options, type = "readData") {
-
-
-  return(TRUE)
-}
-.escReadDataset         <- function(dataset, options) {
-
-  # if (!is.null(dataset)) {
-  #   return(dataset)
-  # } else {
-
-    # collect all selected variables
-    selectedVariables <- lapply(seq_along(options[["variables"]]), function(i) {
-
-      # all possible variables
-      selectedVariables <- options[["variables"]][[i]]
-
-      # extract variable inputs
-      # TODO: remove once variable inputs are properly flattened
-      selectedVariables <- c(
-        unlist(selectedVariables[.escVariableInputs]),
-        if(length(selectedVariables[["confidenceInterval"]]) != 0) selectedVariables[["confidenceInterval"]][[1]]
-      )
-
-      # remove empty variables
-      selectedVariables <- selectedVariables[!selectedVariables == ""]
-
-      return(selectedVariables)
-    })
-    selectedVariables <- do.call(c, selectedVariables)
-    selectedVariables <- unique(selectedVariables)
-
-    return(.readDataSetToEnd(columns.as.numeric = selectedVariables))
-  # }
-}
 .escComputeEffectSizes  <- function(dataset, options) {
 
   # proceed with the escal in order
@@ -901,23 +875,3 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
   "samplingVarianceTypeMixed",
   "subset", "subsetLevel"
 )
-
-.HOTFIX_flatten_options <- function(options) {
-
-  for(i in seq_along(options[["variables"]])) {
-    options[["variables"]][[i]][.escVariableInputs] <- lapply(options[["variables"]][[i]][.escVariableInputs], function(x) x[["value"]])
-
-    to_decode <- .escVariableInputs[sapply(options[["variables"]][[i]][.escVariableInputs], function(x) x != "")]
-    if(length(to_decode) != 0) {
-      for(j in seq_along(to_decode)) {
-        options[["variables"]][[i]][[to_decode[j]]] <- .encodeColNamesLax(options[["variables"]][[i]][[to_decode[j]]])
-      }
-    }
-
-    if(length(options[["variables"]][[i]][["confidenceInterval"]]) != 0) {
-      options[["variables"]][[i]][["confidenceInterval"]][[1]] <- .encodeColNamesLax(options[["variables"]][["confidenceInterval"]][[1]])
-    }
-  }
-
-  return(options)
-}
