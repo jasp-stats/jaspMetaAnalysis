@@ -2299,6 +2299,22 @@
     )
   }
 
+  # add permutation if specified
+  if (options[["permutationTest"]]) {
+
+    if (options[["setSeed"]])
+      fit <- paste0("set.seed(", options[["seed"]], ")\n\n", fit)
+
+    fit <- paste0(
+      fit, "\n\n",
+      "fitPermutation <- permutest(\n",
+      "\tfit,\n",
+      "\texact = ", options[["permutationTestType"]] == "exact", ",\n",
+      "\titer  = ", options[["permutationTestIteration"]], "\n",
+      ")\n"
+    )
+  }
+
   return(fit)
 }
 .maComputeVifSummary               <- function(fit, options, parameter = "effectSize") {
