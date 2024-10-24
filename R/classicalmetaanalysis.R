@@ -46,7 +46,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "optimizerConvergenceRelativeTolerance", "optimizerConvergenceRelativeToleranceValue", "optimizerStepAdjustment", "optimizerStepAdjustmentValue",
   # simple ma specific
   "heterogeneityModelTerms", "heterogeneityModelIncludeIntercept", "heterogeneityModelLink",
-  "permutationTest", "permutationTestIteration", "permutationTestType",
+  "permutationTest", "permutationTestIteration", "permutationTestType", "setSeed", "seed",
   # multilevel/multivariate specific
   "randomEffects", "randomEffectsSpecification",
   "computeCovarianceMatrix", "computeCovarianceMatrix"
