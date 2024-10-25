@@ -21,7 +21,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   options[["module"]] <- "metaAnalysis"
 
   if (.maReady(options)) {
-    dataset <- .maReadData(dataset, options)
+    dataset <- .maCheckData(dataset, options)
     .maCheckErrors(dataset, options)
   }
 
@@ -129,43 +129,11 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   return(inputReady && termsEffectSizeReady && termsHeterogeneityReady)
 }
-.maReadData            <- function(dataset, options) {
-
-#  if (!is.null(dataset))
-#    return(dataset)
+.maCheckData           <- function(dataset, options) {
 
   # model data
   predictorsNominal <- options[["predictors"]][options[["predictors.types"]] == "nominal"]
   predictorsScale   <- options[["predictors"]][options[["predictors.types"]] == "scale"]
-
-  # forest plotting data
-  additionalVariables <- unique(c(
-    if (options[["studyLabels"]] != "") options[["studyLabels"]],
-    if (length(options[["forestPlotStudyInformationSelectedVariables"]]) > 0) unlist(options[["forestPlotStudyInformationSelectedVariables"]]),
-    if (options[["forestPlotMappingColor"]] != "") options[["forestPlotMappingColor"]],
-    if (options[["forestPlotMappingShape"]] != "") options[["forestPlotMappingShape"]],
-    if (options[["forestPlotStudyInformationOrderBy"]] != "")    options[["forestPlotStudyInformationOrderBy"]]
-  ))
-  # remove variables already specified in the model
-  additionalVariables <- setdiff(
-    additionalVariables,
-    c(predictorsNominal, predictorsScale, options[["effectSize"]], options[["effectSizeStandardError"]], options[["clustering"]])
-  )
-
-
-  # load data
-  dataset <- .readDataSetToEnd(
-    columns.as.factor = c(
-      if (length(predictorsNominal) > 0) predictorsNominal,
-      if (options[["clustering"]] != "") options[["clustering"]],
-      additionalVariables
-    ),
-    columns.as.numeric  = c(
-      options[["effectSize"]],
-      options[["effectSizeStandardError"]],
-      if (length(predictorsScale) > 0) predictorsScale,
-      if (options[["fixParametersWeights"]]) options[["fixParametersWeightsVariable"]]
-    ))
 
   # omit NAs
   omitOnVariables <- c(
@@ -194,11 +162,19 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     observations.amount  = "< 2",
     exitAnalysisIfErrors = TRUE)
 
-  .hasErrors(
-    dataset              = dataset,
-    type                 = c("modelInteractions"),
-    modelInteractions.modelTerms = c(options[["effectSizeModelTerms"]], options[["heterogeneityModelTerms"]]),
-    exitAnalysisIfErrors = TRUE)
+  if (length(options[["effectSizeModelTerms"]]) > 0)
+    .hasErrors(
+      dataset              = dataset,
+      type                 = c("modelInteractions"),
+      modelInteractions.modelTerms = options[["effectSizeModelTerms"]],
+      exitAnalysisIfErrors = TRUE)
+
+  if (length(options[["heterogeneityModelTerms"]]) > 0)
+    .hasErrors(
+      dataset              = dataset,
+      type                 = c("modelInteractions"),
+      modelInteractions.modelTerms = options[["heterogeneityModelTerms"]],
+      exitAnalysisIfErrors = TRUE)
 
   .hasErrors(
     dataset              = dataset,
