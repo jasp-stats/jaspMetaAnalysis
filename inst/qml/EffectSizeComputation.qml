@@ -286,7 +286,7 @@ Form
 			property var measurementLabel:	effectSizeType.rowAt(rowIndex).measurementLabel
 			property var effectSizeLabel:	effectSizeType.rowAt(rowIndex).effectSizeLabel
 			property var stepCounterValue:	effectSizeType.rowAt(rowIndex).stepCounterValue
-			
+
 			VariablesForm
 			{
 				// TODO: dynamically set proper height
@@ -859,7 +859,7 @@ Form
 				{
 					name:				"subsetLevel"
 					label:				qsTr("Subset Level")
-					source:				[{name: "subset", use: "levels"}]
+					values:				subset.levels
 				}
 			}
 

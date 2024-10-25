@@ -57,7 +57,6 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
     }
 
 
-
     if (inherits(newDataOutput, "try-error")) {
       errors[[paste0("i",i)]] <- list(
         step  = i,
@@ -122,7 +121,7 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
 
   computeErrors <- attr(dataOutput, "errors")
   for (i in seq_along(computeErrors)) {
-    computeSummary$addFootnote(computeErrors[[i]]$error, symbol = gettextf("Error in step %1$i:", computeErrors[[i]]$step))
+    computeSummary$addFootnote(computeErrors[[i]]$error, symbol = gettextf("Error in Step %1$i:", computeErrors[[i]]$step))
   }
 
   return()
@@ -434,8 +433,15 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
     inputs <- .escReportedEffectSizesInput(inputs)
   }
 
-  if (variables[["subset"]] != "")
-    inputs[["subset"]] <- dataset[[variables[["subset"]]]] == variables[["subsetLevel"]]
+  if (variables[["subset"]] != "") {
+    # subset should not be added to the dataset - escalc returns only the subset rows
+    # we need the whole data set to facilitate merging across the steps
+    # therefore, we set all non-subset columns to NAs
+    for (i in seq_along(inputs)) {
+      if (length(inputs[[i]]) != 0)
+        inputs[[i]][dataset[[variables[["subset"]]]] != variables[["subsetLevel"]]] <- NA
+    }
+  }
 
   inputs <- inputs[!sapply(inputs, is.null)]
 
