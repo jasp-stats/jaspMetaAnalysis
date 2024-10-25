@@ -1567,6 +1567,12 @@
 }
 .maComputePooledHeterogeneityPlot  <- function(fit, options) {
 
+  # don't use the confint on robust.rma objects (they are not implemented)
+  # the clustering works only on the fixed effect estimates
+  # -> we can drop the class and compute confint and get the heterogeneity from the original fit
+  if (inherits(fit, "robust.rma"))
+    class(fit) <- class(fit)[!class(fit) %in% "robust.rma"]
+
   if (options[["fixParametersTau2"]]) {
 
     confIntHeterogeneity <- list(

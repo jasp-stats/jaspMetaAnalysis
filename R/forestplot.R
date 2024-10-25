@@ -46,11 +46,17 @@
     # add variables used for either color, shape, order or Left panel information
     additionalVariables <- c(
       if (length(options[["forestPlotStudyInformationSelectedVariables"]]) > 0) unlist(options[["forestPlotStudyInformationSelectedVariables"]]),
-      if (options[["forestPlotMappingColor"]] != "") options[["forestPlotMappingColor"]],
-      if (options[["forestPlotMappingShape"]] != "") options[["forestPlotMappingShape"]]
+      if (options[["forestPlotStudyInformationOrderBy"]] != "") options[["forestPlotStudyInformationOrderBy"]],
+      if (options[["forestPlotMappingColor"]] != "")            options[["forestPlotMappingColor"]],
+      if (options[["forestPlotMappingShape"]] != "")            options[["forestPlotMappingShape"]]
     )
     if (length(additionalVariables) > 0)
       dfForrest <- cbind(dfForrest, dataset[,additionalVariables,drop=FALSE])
+
+    # TODO: temporal fix for the variable names in the Component list not being properly translated
+    for (i in seq_along(options[["forestPlotStudyInformationSelectedVariables"]])) {
+      options[["forestPlotStudyInformationSelectedVariablesSettings"]][[i]][["value"]] <- options[["forestPlotStudyInformationSelectedVariables"]][[i]]
+    }
 
     # combine left panel information
     leftPanelStudyInformation <- do.call(rbind.data.frame, options[["forestPlotStudyInformationSelectedVariablesSettings"]])

@@ -350,8 +350,10 @@ Section
 			DropDown
 			{
 				name:			"forestPlotMappingColor"
+				id:				forestPlotMappingColor
 				label:			qsTr("Color")
 				addEmptyValue:	true
+				allowedColumns:	["nominal"]
 			}
 
 			DropDown
@@ -359,6 +361,7 @@ Section
 				name:			"forestPlotMappingShape"
 				label:			qsTr("Shape")
 				addEmptyValue:	true
+				allowedColumns:	["nominal"]
 			}
 		}
 	
@@ -465,6 +468,7 @@ Section
 			DropDown
 			{
 				name:			"forestPlotAuxiliaryPlotColor"
+				enabled:		forestPlotMappingColor.value == ""
 				label:			qsTr("Color")
 				values:			[
 						{ label: qsTr("Black")		, value: "black"},
