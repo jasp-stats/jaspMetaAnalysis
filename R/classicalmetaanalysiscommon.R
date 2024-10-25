@@ -231,7 +231,7 @@
 
 
   # add permutation test if requested (only available for non-clustered fits)
-  if (options[["permutationTest"]]) {
+  if (.maIsPermutation(options)) {
     .setSeedJASP(options)
     fitPermutation <- try(metafor::permutest(
       fit,
@@ -1629,7 +1629,7 @@
       row$df2 <- fit[["QSdf"]][2]
   }
 
-  if (options[["permutationTest"]]) {
+  if (.maIsPermutation(options)) {
     if (parameter == "effectSize")
       row$pval2 <- attr(fit[["QMp"]], "permutation")
     else if (parameter == "heterogeneity")
@@ -2280,7 +2280,7 @@
   rmaInput$level <- 100 * options[["confidenceIntervalsLevel"]]
 
   ### fit the model
-  fit <- paste0("fit <- rma(\n\t", paste(names(rmaInput), "=", rmaInput, collapse = ",\n\t"), "\n)")
+  fit <- paste0("fit <- rma(\n\t", paste(names(rmaInput), "=", rmaInput, collapse = ",\n\t"), "\n)\n")
 
   # add clustering if specified
   if (options[["clustering"]] != "") {
@@ -2292,21 +2292,21 @@
     )
 
     fit <- paste0(
-      fit, "\n\n",
+      fit, "\n",
       "fit <- robust(\n",
       "\tfit,\n\t",
-      paste(names(robustInput), "=", robustInput, collapse = ",\n\t"), "\n)"
+      paste(names(robustInput), "=", robustInput, collapse = ",\n\t"), "\n)\n"
     )
   }
 
   # add permutation if specified
-  if (options[["permutationTest"]]) {
+  if (.maIsPermutation(options)) {
 
     if (options[["setSeed"]])
-      fit <- paste0("set.seed(", options[["seed"]], ")\n\n", fit)
+      fit <- paste0(fit, "\nset.seed(", options[["seed"]], ")\n")
 
     fit <- paste0(
-      fit, "\n\n",
+      fit, "\n",
       "fitPermutation <- permutest(\n",
       "\tfit,\n",
       "\texact = ", options[["permutationTestType"]] == "exact", ",\n",

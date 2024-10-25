@@ -106,6 +106,7 @@ Form
 			id:					clustering
 			title:				qsTr("Clustering")
 			singleVariable:		true
+			enabled:			!sectionAdvanced.permutationTestChecked
 			allowedColumns:		["nominal"]
 		}
 
@@ -133,5 +134,8 @@ Form
 
 	MA.ClassicalMetaAnalysisDiagnostics {}
 
-	MA.ClassicalMetaAnalysisAdvanced {}
+	MA.ClassicalMetaAnalysisAdvanced
+	{
+		id:		sectionAdvanced
+	}
 }

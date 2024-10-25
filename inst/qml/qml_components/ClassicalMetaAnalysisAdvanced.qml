@@ -27,6 +27,9 @@ Section
 	property string module:		"metaAnalysis"
 	columns:					1
 
+	
+	property alias permutationTestChecked:		permutationTest.checked
+
 	Group
 	{
 		columns:	2
@@ -340,6 +343,7 @@ Section
 		{
 			text:		qsTr("Permutation test")
 			name:		"permutationTest"
+			id:			permutationTest
 			visible:	module == "metaAnalysis"
 			enabled:	clustering.count == 0
 
