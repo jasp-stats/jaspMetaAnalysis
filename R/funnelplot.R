@@ -21,8 +21,6 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     dataset <- .fpCheckDataset(jaspResults, dataset, options)
     .fpH1Fits(jaspResults, dataset, options)
   }
-  saveRDS(options, file = "C:/JASP/options.RDS")
-  saveRDS(dataset, file = "C:/JASP/dataset.RDS")
 
   # make the funnel plots
   .fpPlot(jaspResults, dataset, options)

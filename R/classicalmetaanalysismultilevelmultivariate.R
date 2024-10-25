@@ -21,7 +21,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
   options[["module"]] <- "metaAnalysisMultilevelMultivariate"
 
   if (.maReady(options)) {
-    dataset <- .mammReadData(dataset, options)
+    dataset <- .mammCheckData(dataset, options)
     .mammCheckErrors(dataset, options)
   }
 
@@ -30,63 +30,26 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
   return()
 }
 
-.mammReadData                    <- function(dataset, options) {
-
-#  if (!is.null(dataset))
-#    return(dataset)
+.mammCheckData                   <- function(dataset, options) {
 
   # model data
   predictorsNominal <- options[["predictors"]][options[["predictors.types"]] == "nominal"]
   predictorsScale   <- options[["predictors"]][options[["predictors.types"]] == "scale"]
 
-  ### main model variables
-  asFactors <- c(
-    if (length(predictorsNominal) > 0) predictorsNominal,
-    if (options[["clustering"]] != "") options[["clustering"]]
-  )
-  asNumeric <- c(
-    options[["effectSize"]],
-    options[["effectSizeStandardError"]],
-    if (length(predictorsScale) > 0) predictorsScale,
-    if (options[["fixParametersWeights"]]) options[["fixParametersWeightsVariable"]]
-  )
-
-  ### add random effects variables
+  # random effects variables
   randomVariables <- .mammExtractRandomVariableNames(options)
 
-  # check variable types cross-loading
-  if (length(randomVariables$nominal) > 0 && any(randomVariables$nominal %in% c(randomVariables$scale, randomVariables$ordinal, asNumeric)))
-    .quitAnalysis(gettextf("The following variable was specified both as nominal and scale: %1$s", randomVariables$nominal[randomVariables$nominal %in% c(randomVariables$scale, randomVariables$ordinal, asNumeric)]))
-  if (length(randomVariables$scale) > 0 && any(randomVariables$scale %in% c(randomVariables$nominal, asFactors)))
-    .quitAnalysis(gettextf("The following variable was specified both as scale and nominal: %1$s", randomVariables$nominal[randomVariables$scale %in% c(randomVariables$nominal, asFactors)]))
-
-  asNumeric <- c(asNumeric, randomVariables$scale, randomVariables$ordinal)
-  asFactors <- c(asFactors, randomVariables$nominal)
-
-  # forest plotting data
-  additionalVariables <- unique(c(
-    if (options[["studyLabels"]] != "") options[["studyLabels"]],
-    if (length(options[["forestPlotStudyInformationSelectedVariables"]]) > 0) unlist(options[["forestPlotStudyInformationSelectedVariables"]]),
-    if (options[["forestPlotMappingColor"]] != "") options[["forestPlotMappingColor"]],
-    if (options[["forestPlotMappingShape"]] != "") options[["forestPlotMappingShape"]],
-    if (options[["forestPlotStudyInformationOrderBy"]] != "")    options[["forestPlotStudyInformationOrderBy"]]
-  ))
-  # remove variables already specified in the model
-  additionalVariables <- setdiff(
-    additionalVariables,
-    c(asNumeric, asFactors)
-  )
-
-
-  # load data
-  dataset <- .readDataSetToEnd(
-    columns.as.factor   = c(asFactors, additionalVariables),
-    columns.as.numeric  = asNumeric)
-
   # omit NAs
-  omitOnVariables <- c(asNumeric, asFactors)
-  anyNaByRows     <- apply(dataset[,omitOnVariables], 1, function(x) anyNA(x))
-  dataset         <- dataset[!anyNaByRows,]
+  omitOnVariables <- c(
+    options[["effectSize"]],
+    options[["effectSizeStandardError"]],
+    unlist(randomVariables),
+    if (options[["clustering"]] != "") options[["clustering"]],
+    if (length(predictorsNominal) > 0) predictorsNominal,
+    if (length(predictorsScale) > 0)   predictorsScale
+  )
+  anyNaByRows <- apply(dataset[,omitOnVariables], 1, function(x) anyNA(x))
+  dataset     <- dataset[!anyNaByRows,]
   attr(dataset, "NAs") <- sum(anyNaByRows)
 
   # add se^2 for V^2 input
@@ -113,7 +76,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
   .hasErrors(
     dataset              = dataset,
     type                 = c("modelInteractions"),
-    modelInteractions.modelTerms = c(options[["effectSizeModelTerms"]], options[["heterogeneityModelTerms"]]),
+    modelInteractions.modelTerms = options[["effectSizeModelTerms"]],
     exitAnalysisIfErrors = TRUE)
 
   .hasErrors(
@@ -135,19 +98,20 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
     if (tempType == "simple") {
 
-      tempValue <- options[["randomEffectsSpecification"]][[i]][["groupingFactor"]][["value"]]
+      tempValue <- options[["randomEffectsSpecification"]][[i]][["groupingFactor"]]
 
       if (tempValue != "") {
-        randomFormulas[[i]] <- as.formula(paste0("~ 1 | ", .encodeColNamesLax(tempValue)), env = parent.frame(1))
+        randomFormulas[[i]] <- as.formula(paste0("~ 1 | ", tempValue), env = parent.frame(1))
       }
 
     } else if (tempType == "nested") {
 
       tempValues <- c(
-        options[["randomEffectsSpecification"]][[i]][["level1"]][["value"]],
-        options[["randomEffectsSpecification"]][[i]][["level2"]][["value"]],
-        options[["randomEffectsSpecification"]][[i]][["level3"]][["value"]],
-        options[["randomEffectsSpecification"]][[i]][["level4"]][["value"]]
+        options[["randomEffectsSpecification"]][[i]][["level1"]],
+        options[["randomEffectsSpecification"]][[i]][["level2"]],
+        options[["randomEffectsSpecification"]][[i]][["level3"]],
+        options[["randomEffectsSpecification"]][[i]][["level4"]],
+        options[["randomEffectsSpecification"]][[i]][["level5"]]
       )
       tempValues <- tempValues[tempValues != ""]
 
@@ -157,8 +121,8 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
     } else if (tempType == "randomSlopes") {
 
-      tempValuesSlopes  <- unlist(options[["randomEffectsSpecification"]][[i]][["randomSlopeTerms"]][["value"]])
-      tempValueGrouping <- options[["randomEffectsSpecification"]][[i]][["groupingFactor"]][["value"]]
+      tempValuesSlopes  <- unlist(options[["randomEffectsSpecification"]][[i]][["randomSlopeTerms"]])
+      tempValueGrouping <- options[["randomEffectsSpecification"]][[i]][["groupingFactor"]]
 
       if (length(tempValuesSlopes) > 0 && tempValueGrouping != "") {
         randomFormulas[[i]] <- as.formula(paste0("~ ", paste(sapply(tempValuesSlopes, .encodeColNamesLax), collapse = "+")," | ", .encodeColNamesLax(tempValueGrouping)), env = parent.frame(1))
@@ -169,10 +133,10 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
       tempValueInner <- switch(
         tempType,
-        "structured"     = options[["randomEffectsSpecification"]][[i]][["factorLevels"]][["value"]],
-        "autoregressive" = options[["randomEffectsSpecification"]][[i]][["time"]][["value"]]
+        "structured"     = options[["randomEffectsSpecification"]][[i]][["factorLevels"]],
+        "autoregressive" = options[["randomEffectsSpecification"]][[i]][["time"]]
       )
-      tempValueOuter <- options[["randomEffectsSpecification"]][[i]][["groupingFactor"]][["value"]]
+      tempValueOuter <- options[["randomEffectsSpecification"]][[i]][["groupingFactor"]]
 
       if (tempValueInner != "" && tempValueOuter != "") {
         randomFormulas[[i]] <- as.formula(paste0("~ ", .encodeColNamesLax(tempValueInner), " | ", .encodeColNamesLax(tempValueOuter)), env = parent.frame(1))
@@ -182,9 +146,9 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     }  else if (tempType == "spatial") {
 
       tempValueInner <- paste0("computedSpatialDistance", i)
-      tempValueOuter <- options[["randomEffectsSpecification"]][[i]][["groupingFactor"]][["value"]]
+      tempValueOuter <- options[["randomEffectsSpecification"]][[i]][["groupingFactor"]]
 
-      if (!is.null(unlist(options[["randomEffectsSpecification"]][[i]][["spatialCoordinates"]][["value"]])) && tempValueOuter != "") {
+      if (!is.null(unlist(options[["randomEffectsSpecification"]][[i]][["spatialCoordinates"]])) && tempValueOuter != "") {
         randomFormulas[[i]] <- as.formula(paste0("~ ", .encodeColNamesLax(tempValueInner), " | ", .encodeColNamesLax(tempValueOuter)), env = parent.frame(1))
         attr(randomFormulas[[i]], "structure") <-  .mammGetStructureOptions(options[["randomEffects"]][[i]][["structure"]])
       }
@@ -226,48 +190,49 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
     if (tempType == "simple") {
 
-      variablesNominal <- c(variablesNominal, options[["randomEffectsSpecification"]][[i]][["groupingFactor"]][["value"]])
+      variablesNominal <- c(variablesNominal, options[["randomEffectsSpecification"]][[i]][["groupingFactor"]])
 
     } else if (tempType == "nested") {
 
       variablesNominal <- c(
         variablesNominal,
-        options[["randomEffectsSpecification"]][[i]][["level1"]][["value"]],
-        options[["randomEffectsSpecification"]][[i]][["level2"]][["value"]],
-        options[["randomEffectsSpecification"]][[i]][["level3"]][["value"]],
-        options[["randomEffectsSpecification"]][[i]][["level4"]][["value"]]
+        options[["randomEffectsSpecification"]][[i]][["level1"]],
+        options[["randomEffectsSpecification"]][[i]][["level2"]],
+        options[["randomEffectsSpecification"]][[i]][["level3"]],
+        options[["randomEffectsSpecification"]][[i]][["level4"]],
+        options[["randomEffectsSpecification"]][[i]][["level5"]]
       )
 
     } else if (tempType == "randomSlopes") {
 
-      tempValuesSlopes       <- unlist(options[["randomEffectsSpecification"]][[i]][["randomSlopeTerms"]][["value"]])
-      tempValuesSlopesTypes  <- options[["randomEffectsSpecification"]][[i]][["randomSlopeTerms"]][["types"]]
+      tempValuesSlopes       <- unlist(options[["randomEffectsSpecification"]][[i]][["randomSlopeTerms"]])
+      tempValuesSlopesTypes  <- options[["randomEffectsSpecification"]][[i]][["randomSlopeTerms.types"]]
 
       variablesNominal <- c(variablesNominal, tempValuesSlopes[tempValuesSlopesTypes == "nominal"])
       variablesScale   <- c(variablesScale,   tempValuesSlopes[tempValuesSlopesTypes == "scale"])
-      variablesNominal <- c(variablesNominal, options[["randomEffectsSpecification"]][[i]][["groupingFactor"]][["value"]])
+      variablesNominal <- c(variablesNominal, options[["randomEffectsSpecification"]][[i]][["groupingFactor"]])
 
     } else if (tempType == "structured") {
 
       variablesNominal <- c(
         variablesNominal,
-        options[["randomEffectsSpecification"]][[i]][["factorLevels"]][["value"]],
-        options[["randomEffectsSpecification"]][[i]][["groupingFactor"]][["value"]]
+        options[["randomEffectsSpecification"]][[i]][["factorLevels"]],
+        options[["randomEffectsSpecification"]][[i]][["groupingFactor"]]
       )
 
     }else if (tempType == "autoregressive") {
 
       if (options[["randomEffects"]][[i]][["structure"]] == "continuousTimeAr") {
-        variablesScale   <- c(variablesScale,   options[["randomEffectsSpecification"]][[i]][["time"]][["value"]])
+        variablesScale   <- c(variablesScale,   options[["randomEffectsSpecification"]][[i]][["time"]])
       } else {
-        variablesOrdinal <- c(variablesOrdinal, options[["randomEffectsSpecification"]][[i]][["time"]][["value"]])
+        variablesOrdinal <- c(variablesOrdinal, options[["randomEffectsSpecification"]][[i]][["time"]])
       }
-      variablesNominal <- c(variablesNominal, options[["randomEffectsSpecification"]][[i]][["groupingFactor"]][["value"]])
+      variablesNominal <- c(variablesNominal, options[["randomEffectsSpecification"]][[i]][["groupingFactor"]])
 
     }  else if (tempType == "spatial") {
 
-      variablesScale <- c(variablesScale, unlist(options[["randomEffectsSpecification"]][[i]][["spatialCoordinates"]][["value"]]))
-      variablesNominal <- c(variablesNominal, options[["randomEffectsSpecification"]][[i]][["groupingFactor"]][["value"]])
+      variablesScale <- c(variablesScale, unlist(options[["randomEffectsSpecification"]][[i]][["spatialCoordinates"]]))
+      variablesNominal <- c(variablesNominal, options[["randomEffectsSpecification"]][[i]][["groupingFactor"]])
 
     } else if (tempType == "knownCorrelation") {
 
@@ -284,12 +249,10 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
   variablesNominal <- variablesNominal[variablesNominal != ""]
   variablesOrdinal <- variablesOrdinal[variablesOrdinal != ""]
 
-
-  # TODO: remove variable translation hotfix
   return(list(
-    scale   = if (length(variablesScale)   != 0) sapply(variablesScale,   .encodeColNamesLax),
-    nominal = if (length(variablesNominal) != 0) sapply(variablesNominal, .encodeColNamesLax),
-    ordinal = if (length(variablesOrdinal) != 0) sapply(variablesOrdinal, .encodeColNamesLax)
+    scale   = if (length(variablesScale)   != 0) variablesScale,
+    nominal = if (length(variablesNominal) != 0) variablesNominal,
+    ordinal = if (length(variablesOrdinal) != 0) variablesOrdinal
   ))
 }
 .mammRandomEstimatesTable        <- function(jaspResults, dataset, options) {
