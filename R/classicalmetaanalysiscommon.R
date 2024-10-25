@@ -426,7 +426,7 @@
   fit <- .maExtractFit(jaspResults, options)
 
   # pooled estimates
-  pooledEstimatesTable          <- createJaspTable(gettext("Pooled Estimates"))
+  pooledEstimatesTable          <- createJaspTable(gettext("Meta-Analytic Estimates"))
   pooledEstimatesTable$position <- 4
   pooledEstimatesTable$dependOn(c("heterogeneityTau", "heterogeneityTau2", "heterogeneityI2", "heterogeneityH2",
                                   "confidenceIntervals", "confidenceIntervalsLevel", "predictionIntervals", "transformEffectSize"))
@@ -1003,7 +1003,21 @@
   if (!is.null(jaspResults[["casewiseDiagnosticsTable"]]))
     return()
 
-  fit <- .maExtractFit(jaspResults, options)
+  # diagnostics are unavaible for location-scale models
+  if (.maIsMetaregressionHeterogeneity(options)) {
+    # fit measures table
+    casewiseDiagnosticsTable          <- createJaspTable(gettext("Casewise Diagnostics Table"))
+    casewiseDiagnosticsTable$position <- 7
+    casewiseDiagnosticsTable$dependOn(c(.maDependencies, "diagnosticsCasewiseDiagnostics", "diagnosticsCasewiseDiagnosticsShowInfluentialOnly",
+                                        "diagnosticsCasewiseDiagnosticsIncludePredictors", "diagnosticsCasewiseDiagnosticsDifferenceInCoefficients",
+                                        "studyLabels"))
+    casewiseDiagnosticsTable$setError(gettext("Casewise diagnostics are not available for models that contain meta-regression on heterogeneity."))
+    jaspResults[["casewiseDiagnosticsTable"]] <- casewiseDiagnosticsTable
+    return()
+  }
+
+  # the fit diagnostics work only for the non-clustered fit
+  fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
 
   # stop on error
   if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
@@ -1024,12 +1038,22 @@
     diagnosticsResults$dependOn(.maDependencies)
     jaspResults[["diagnosticsResults"]] <- diagnosticsResults
 
-    # compute the results
-    influenceResults     <- influence(fit)
-    influenceResultsDfbs <- data.frame(influenceResults$dfbs)
-    influenceResultsInf  <- data.frame(influenceResults$inf)
-    influenceResultsInf$tau.del <- sqrt(influenceResultsInf$tau2.del)
-    influenceResultsInf$inf[influenceResultsInf$inf == "*"] <- "Yes"
+    if (.maIsMultilevelMultivariate(options)) {
+      # only a subset of diagnostics is available for rma.mv
+      influenceResultsDfbs <- data.frame(dfbetas(fit))
+      influenceResultsInf  <- data.frame(
+        rstudent = rstudent(fit)[["resid"]],
+        cook.d   = cooks.distance(fit),
+        hat      = hatvalues(fit)
+      )
+    } else {
+      # the complete suite of influence diagnostics is only available for rma.uni
+      influenceResults     <- influence(fit)
+      influenceResultsDfbs <- data.frame(influenceResults$dfbs)
+      influenceResultsInf  <- data.frame(influenceResults$inf)
+      influenceResultsInf$tau.del <- sqrt(influenceResultsInf$tau2.del)
+      influenceResultsInf$inf[influenceResultsInf$inf == "*"] <- "Yes"
+    }
 
     # store the results
     jaspResults[["diagnosticsResults"]]$object <- list(
@@ -1068,14 +1092,18 @@
   }
 
   casewiseDiagnosticsTable$addColumnInfo(name = "rstudent",  title = gettext("Standardized Residual"),  type = "number")
-  casewiseDiagnosticsTable$addColumnInfo(name = "dffits",    title = gettext("DFFITS"),                 type = "number")
+  if (!.maIsMultilevelMultivariate(options))
+    casewiseDiagnosticsTable$addColumnInfo(name = "dffits",  title = gettext("DFFITS"),                 type = "number")
   casewiseDiagnosticsTable$addColumnInfo(name = "cook.d",    title = gettext("Cook's Distance"),        type = "number")
-  casewiseDiagnosticsTable$addColumnInfo(name = "cov.r",     title = gettext("Covariance ratio"),       type = "number")
-  casewiseDiagnosticsTable$addColumnInfo(name = "tau.del",   title = gettext("\U1D70F"),                type = "number", overtitle = gettext("Leave One Out"))
-  casewiseDiagnosticsTable$addColumnInfo(name = "tau2.del",  title = gettext("\U1D70F\U00B2"),          type = "number", overtitle = gettext("Leave One Out"))
-  casewiseDiagnosticsTable$addColumnInfo(name = "QE.del",    title = gettext("Q\U2091"),                type = "number", overtitle = gettext("Leave One Out"))
+  if (!.maIsMultilevelMultivariate(options)) {
+    casewiseDiagnosticsTable$addColumnInfo(name = "cov.r",   title = gettext("Covariance ratio"),       type = "number")
+    casewiseDiagnosticsTable$addColumnInfo(name = "tau.del", title = gettext("\U1D70F"),                type = "number", overtitle = gettext("Leave One Out"))
+    casewiseDiagnosticsTable$addColumnInfo(name = "tau2.del",title = gettext("\U1D70F\U00B2"),          type = "number", overtitle = gettext("Leave One Out"))
+    casewiseDiagnosticsTable$addColumnInfo(name = "QE.del",  title = gettext("Q\U2091"),                type = "number", overtitle = gettext("Leave One Out"))
+  }
   casewiseDiagnosticsTable$addColumnInfo(name = "hat",       title = gettext("Hat"),                    type = "number")
-  casewiseDiagnosticsTable$addColumnInfo(name = "weight",    title = gettext("Weight"),                 type = "number")
+  if (!.maIsMultilevelMultivariate(options))
+    casewiseDiagnosticsTable$addColumnInfo(name = "weight",  title = gettext("Weight"),                 type = "number")
 
   if (options[["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"]]) {
     for (par in colnames(influenceResultsDfbs)) {
@@ -1091,11 +1119,17 @@
 
   casewiseDiagnosticsTable$setData(influenceResultsInf)
 
+  if (.maIsClustered(options))
+    casewiseDiagnosticsTable$addFootnote(gettext("Diagnostics are based on the non-clustered model."))
+
   return()
 }
 .maCasewiseDiagnosticsExportColumns   <- function(jaspResults, dataset, options) {
 
   if (!options[["diagnosticsCasewiseDiagnosticsExportToDataset"]])
+    return()
+
+  if (.maIsMetaregressionHeterogeneity(options))
     return()
 
   # extract diagnostics already computed in '.maCasewiseDiagnosticsTable'
@@ -1232,6 +1266,15 @@
   baujatPlot$position <- 9
   jaspResults[["baujatPlot"]] <- baujatPlot
 
+  if (.maIsMetaregressionHeterogeneity(options)) {
+    baujatPlot$setError(gettext("Baujat plot is not available for models that contain meta-regression on heterogeneity."))
+    return()
+  }
+  if (.maIsClustered(options)) {
+    baujatPlot$setError(gettext("Baujat plot is not available for models with clustering."))
+    return()
+  }
+
   # extract precomputed baujat data if done before:
   if (!is.null(jaspResults[["baujatResults"]])) {
 
@@ -1251,14 +1294,8 @@
     jaspResults[["baujatResults"]]$object <- dfBaujat
   }
 
-
-  # if (.maIsMetaregressionHeterogeneity(options)) {
-  #   baujatPlot$setError(gettext("Baujat plot is not available for models that contain meta-regression on heterogeneity."))
-  #   return()
-  # }
-
   if (jaspBase::isTryError(dfBaujat)) {
-    dfBaujat$setError(dfBaujat)
+    baujatPlot$setError(dfBaujat)
     return()
   }
 
@@ -1332,14 +1369,14 @@
 
   if (!is.null(jaspResults[["fitNoInfluence"]]$object)) {
     # extract clustered model if specified
-    if (options[["clustering"]] == "" || nonClustered) {
+    if (!.maIsClustered(options) || nonClustered) {
       return(jaspResults[["fitNoInfluence"]]$object[["fit"]])
     } else {
       return(jaspResults[["fitNoInfluence"]]$object[["fitClustered"]])
     }
   } else {
     # extract clustered model if specified
-    if (options[["clustering"]] == "" || nonClustered) {
+    if (!.maIsClustered(options) || nonClustered) {
       return(jaspResults[["fit"]]$object[["fit"]])
     } else {
       return(jaspResults[["fit"]]$object[["fitClustered"]])
@@ -2521,6 +2558,9 @@
 .maIsMetaregressionHeterogeneity  <- function(options) {
   return(length(options[["heterogeneityModelTerms"]]) > 0)
 }
+.maIsClustered                    <- function(options) {
+  return(options[["clustering"]] != "")
+}
 .maIsMetaregressionFtest          <- function(options) {
   return(options[["fixedEffectTest"]] %in% c("knha", "t"))
 }
@@ -2528,7 +2568,7 @@
   return(options[["module"]] == "metaAnalysisMultilevelMultivariate")
 }
 .maIsPermutation                  <- function(options) {
-  return(options[["clustering"]] == "" && options[["permutationTest"]])
+  return(!.maIsClustered(options) && options[["permutationTest"]])
 }
 .maCheckIsPossibleOptions         <- function(options) {
 
