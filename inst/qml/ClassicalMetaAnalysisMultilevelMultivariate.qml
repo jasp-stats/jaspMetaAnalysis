@@ -115,7 +115,16 @@ Form
 				property string typeValue:				type.value
 				property string structureValue:			structure.value
 				property string spatialInputTypeValue:	spatialInputType.value
+				property string typeLabel:				type.currentLabel
+				property string structureLabel:			structure.currentLabel
+				property string structureCounterValue:	structureCounter.text
 
+				Text
+				{
+					text:	qsTr("Structure %1").arg((rowIndex + 1))
+					id:		structureCounter
+				}
+				
 				DropDown
 				{
 					id:			type
@@ -193,7 +202,7 @@ Form
 			name:		"randomEffectsSpecification"
 			source:		"randomEffects"
 			title:		qsTr("Specification")
-			visible:	true // TODO: randomEffects.size > 0
+			visible:	true
 			rowSpacing: 20
 
 			rowComponent: 	ColumnLayout
@@ -201,26 +210,29 @@ Form
 				property var typeValue:				randomEffects.rowAt(rowIndex).typeValue
 				property var structureValue:		randomEffects.rowAt(rowIndex).structureValue
 				property var spatialInputTypeValue:	randomEffects.rowAt(rowIndex).spatialInputTypeValue
+				property var typeLabel:				randomEffects.rowAt(rowIndex).typeLabel
+				property var structureLabel:		randomEffects.rowAt(rowIndex).structureLabel
+				property var structureCounterValue:	randomEffects.rowAt(rowIndex).structureCounterValue
 
 				VariablesForm
 				{
 					removeInvisibles:	true
-					preferredHeight:	(typeValue == "randomSlopes" || typeValue == "spatial") ? 250 * preferencesModel.uiScale : 200 * preferencesModel.uiScale
+					preferredHeight:	(typeValue == "nested" || typeValue == "randomSlopes" || typeValue == "spatial") ? 250 * preferencesModel.uiScale : 200 * preferencesModel.uiScale
 					visible:			typeValue == "simple" || typeValue == "nested" || typeValue == "randomSlopes" || typeValue == "structured" || typeValue == "autoregressive" || (typeValue == "spatial" && spatialInputTypeValue == "computeFromVariables") || typeValue == "knownCorrelation"
 
 					AvailableVariablesList
 					{
 						name:		"allVars"
-						title:		typeValue + ": " + structureValue
+						title:		structureCounterValue + ": " + typeLabel
 					}
-
+					
 					AssignedVariablesList
 					{
 						name:				"randomSlopeTerms"
 						title:				qsTr("Random Slope Terms")
 						visible:			typeValue == "randomSlopes"
 						listViewType:		JASP.Interaction
-						suggestedColumns:	["nominal", "scale"] // this should be choose on assignment 
+						allowedColumns:		["nominal", "scale"] // this should be choose on assignment 
 						addAvailableVariablesToAssigned: false
 					}
 
@@ -230,7 +242,7 @@ Form
 						title:				qsTr("Factor Levels")
 						visible:			typeValue == "structured"
 						singleVariable:		true
-						suggestedColumns:	["nominal"]
+						allowedColumns:		["nominal"]
 					}
 
 
@@ -240,7 +252,7 @@ Form
 						title:				qsTr("Level 1")
 						visible:			typeValue == "nested"
 						singleVariable:		true
-						suggestedColumns:	["nominal"]
+						allowedColumns:		["nominal"]
 					}
 
 					AssignedVariablesList
@@ -249,7 +261,7 @@ Form
 						title:				qsTr("Level 2")
 						visible:			typeValue == "nested"
 						singleVariable:		true
-						suggestedColumns:	["nominal"]
+						allowedColumns:		["nominal"]
 					}
 
 					AssignedVariablesList
@@ -258,7 +270,7 @@ Form
 						title:				qsTr("Level 3")
 						visible:			typeValue == "nested"
 						singleVariable:		true
-						suggestedColumns:	["nominal"]
+						allowedColumns:		["nominal"]
 					}
 
 					AssignedVariablesList
@@ -267,7 +279,16 @@ Form
 						title:				qsTr("Level 4")
 						visible:			typeValue == "nested"
 						singleVariable:		true
-						suggestedColumns:	["nominal"]
+						allowedColumns:		["nominal"]
+					}
+
+					AssignedVariablesList
+					{
+						name:				"level5"
+						title:				qsTr("Level 5")
+						visible:			typeValue == "nested"
+						singleVariable:		true
+						allowedColumns:		["nominal"]
 					}
 
 					AssignedVariablesList
@@ -276,7 +297,7 @@ Form
 						title:				qsTr("Time")
 						visible:			typeValue == "autoregressive"
 						singleVariable:		true
-						suggestedColumns:	["ordinal", "scale"] // scale for continuous time AR otherwise ordinal
+						allowedColumns:		["ordinal", "scale"] // scale for continuous time AR otherwise ordinal
 					}
 
 					AssignedVariablesList
@@ -284,7 +305,7 @@ Form
 						name:				"spatialCoordinates"
 						title:				qsTr("Spatial Coordinates")
 						visible:			typeValue == "spatial" && spatialInputTypeValue == "computeFromVariables"
-						suggestedColumns:	["nominal"] 
+						allowedColumns:		["nominal"] 
 					}
 
 					AssignedVariablesList
@@ -293,7 +314,7 @@ Form
 						title:				qsTr("Grouping Factor")
 						visible:			typeValue != "nested"
 						singleVariable:		true
-						suggestedColumns:	["nominal"]
+						allowedColumns:		["nominal"]
 					}
 				}
 

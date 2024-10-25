@@ -116,7 +116,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
       tempValues <- tempValues[tempValues != ""]
 
       if (length(tempValues) > 0) {
-        randomFormulas[[i]] <- as.formula(paste0("~ 1 | ", paste(sapply(tempValues, .encodeColNamesLax), collapse = "/")), env = parent.frame(1))
+        randomFormulas[[i]] <- as.formula(paste0("~ 1 | ", paste(tempValues, collapse = "/")), env = parent.frame(1))
       }
 
     } else if (tempType == "randomSlopes") {
@@ -125,7 +125,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
       tempValueGrouping <- options[["randomEffectsSpecification"]][[i]][["groupingFactor"]]
 
       if (length(tempValuesSlopes) > 0 && tempValueGrouping != "") {
-        randomFormulas[[i]] <- as.formula(paste0("~ ", paste(sapply(tempValuesSlopes, .encodeColNamesLax), collapse = "+")," | ", .encodeColNamesLax(tempValueGrouping)), env = parent.frame(1))
+        randomFormulas[[i]] <- as.formula(paste0("~ ", paste(tempValuesSlopes, collapse = "+")," | ", tempValueGrouping), env = parent.frame(1))
         attr(randomFormulas[[i]], "structure") <- "GEN"
       }
 
@@ -139,7 +139,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
       tempValueOuter <- options[["randomEffectsSpecification"]][[i]][["groupingFactor"]]
 
       if (tempValueInner != "" && tempValueOuter != "") {
-        randomFormulas[[i]] <- as.formula(paste0("~ ", .encodeColNamesLax(tempValueInner), " | ", .encodeColNamesLax(tempValueOuter)), env = parent.frame(1))
+        randomFormulas[[i]] <- as.formula(paste0("~ ", tempValueInner, " | ", tempValueOuter), env = parent.frame(1))
         attr(randomFormulas[[i]], "structure") <- .mammGetStructureOptions(options[["randomEffects"]][[i]][["structure"]])
       }
 
@@ -149,7 +149,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
       tempValueOuter <- options[["randomEffectsSpecification"]][[i]][["groupingFactor"]]
 
       if (!is.null(unlist(options[["randomEffectsSpecification"]][[i]][["spatialCoordinates"]])) && tempValueOuter != "") {
-        randomFormulas[[i]] <- as.formula(paste0("~ ", .encodeColNamesLax(tempValueInner), " | ", .encodeColNamesLax(tempValueOuter)), env = parent.frame(1))
+        randomFormulas[[i]] <- as.formula(paste0("~ ", tempValueInner, " | ", tempValueOuter), env = parent.frame(1))
         attr(randomFormulas[[i]], "structure") <-  .mammGetStructureOptions(options[["randomEffects"]][[i]][["structure"]])
       }
 

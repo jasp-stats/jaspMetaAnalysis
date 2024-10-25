@@ -173,6 +173,7 @@
   # add random effects
   if (.maIsMultilevelMultivariate(options)) {
     randomFormulaList <- .mammGetRandomFormulaList(options)
+    randomFormulaList <- unname(randomFormulaList) # remove names for some metafor post-processing functions
     if (length(randomFormulaList) != 0) {
       rmaInput$random <- randomFormulaList
       rmaInput$struct <- do.call(c, lapply(randomFormulaList, attr, which = "structure"))
@@ -1112,7 +1113,8 @@
     influenceResultsInf <- cbind(influenceResultsInf, influenceResultsDfbs)
   }
 
-  casewiseDiagnosticsTable$addColumnInfo(name = "inf", title = gettext("Influential"), type = "string")
+  if (!.maIsMultilevelMultivariate(options))
+    casewiseDiagnosticsTable$addColumnInfo(name = "inf", title = gettext("Influential"), type = "string")
 
   if (options[["diagnosticsCasewiseDiagnosticsShowInfluentialOnly"]])
       influenceResultsInf <- influenceResultsInf[influenceResultsInf$inf == "Yes",,drop=FALSE]
@@ -3091,7 +3093,7 @@
     messages <- c(messages, gettextf("%1$i influential observations were detected and removed.", attr(dataset, "influentialObservations")))
 
   if (.maIsMultilevelMultivariate(options) && any(attr(fit, "skipped")))
-    messages <- c(messages, gettextf("The random component %1$s was not completely specified and was skipped.", paste0(which(attr(fit, "skipped")), collapse = " and ")))
+    messages <- c(messages, gettextf("The Model Structure %1$s was not completely specified and was skipped.", paste0(which(attr(fit, "skipped")), collapse = " and ")))
 
   return(messages)
 }

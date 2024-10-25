@@ -57,6 +57,7 @@ Section
 				{
 					name:		"diagnosticsCasewiseDiagnosticsShowInfluentialOnly"
 					text:		qsTr("Show influential only")
+					visible:	module == "metaAnalysis"
 				}
 
 				CheckBox
