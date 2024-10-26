@@ -444,8 +444,13 @@
     overtitleCi <- gettextf("%s%% PI", 100 * options[["confidenceIntervalsLevel"]])
     pooledEstimatesTable$addColumnInfo(name = "lPi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
     pooledEstimatesTable$addColumnInfo(name = "uPi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
-  }
 
+    if (.mammHasMultipleHeterogeneities(options, canAdd = TRUE)) {
+      for (colName in .mammExtractTauLevelNames(fit)) {
+        pooledEstimatesTable$addColumnInfo(name = colName, title = colName, type = "string", overtitle = gettext("Heterogeneity Level"))
+      }
+    }
+  }
 
   # stop on error
   if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
@@ -1452,12 +1457,34 @@
         level    = 100 * options[["confidenceIntervalsLevel"]]
       )
     } else {
-      predictedEffect <- predict(
-        fit,
-        newmods = colMeans(model.matrix(fit))[-1],
-        level   = 100 * options[["confidenceIntervalsLevel"]]
-      )
+
+      if (.mammHasMultipleHeterogeneities(options, canAdd = TRUE)) {
+        tauLevelsMatrix <- .mammExtractTauLevels(fit)
+        predictedEffect <- predict(
+          fit,
+          newmods = do.call(rbind, lapply(1:nrow(tauLevelsMatrix), function(i) colMeans(model.matrix(fit))[-1])),
+          level   = 100 * options[["confidenceIntervalsLevel"]],
+          tau2.levels   = tauLevelsMatrix[["tau2.levels"]],
+          gamma2.levels = tauLevelsMatrix[["gamma2.levels"]]
+        )
+      } else {
+        predictedEffect <- predict(
+          fit,
+          newmods = colMeans(model.matrix(fit))[-1],
+          level   = 100 * options[["confidenceIntervalsLevel"]]
+        )
+      }
     }
+  }
+
+  # keep levels for which the heterogeneity is predicted for complex multivariate models
+  if (.mammHasMultipleHeterogeneities(options, canAdd = TRUE)) {
+    tauLevels <- list(
+      predictedEffect[["tau2.level"]],
+      predictedEffect[["gamma2.level"]]
+    )
+    tauLevels           <- do.call(cbind.data.frame, tauLevels[!sapply(tauLevels, is.null)])
+    colnames(tauLevels) <- .mammExtractTauLevelNames(fit)
   }
 
   # to data.frame
@@ -1471,17 +1498,17 @@
       list(predictedEffect[,c("est", "lCi", "uCi", "lPi", "uPi")]))
 
   # remove non-requested columns
-  keepResults <- c(
-    "par",
-    "est",
-    if (options[["confidenceIntervals"]]) "lCi",
-    if (options[["confidenceIntervals"]]) "uCi",
-    if (options[["predictionIntervals"]]) "lPi",
-    if (options[["predictionIntervals"]]) "uPi"
-  )
+  predictedEffect <- predictedEffect[,c(
+    "par", "est",
+    if (options[["confidenceIntervals"]]) c("lCi", "uCi"),
+    if (options[["predictionIntervals"]]) c("lPi", "uPi")
+  )]
 
-  predictedEffect <- predictedEffect[,keepResults]
-  return(as.list(predictedEffect))
+  # return the tau levels
+  if (.mammHasMultipleHeterogeneities(options, canAdd = TRUE))
+    predictedEffect <- cbind(predictedEffect, tauLevels)
+
+  return(predictedEffect <- apply(predictedEffect, 1, as.list))
 }
 .maComputePooledEffectPlot         <- function(fit, options) {
 
@@ -3094,6 +3121,9 @@
 
   if (.maIsMultilevelMultivariate(options) && any(attr(fit, "skipped")))
     messages <- c(messages, gettextf("The Model Structure %1$s was not completely specified and was skipped.", paste0(which(attr(fit, "skipped")), collapse = " and ")))
+
+  if (.mammAnyStructureGen(options) && options[["predictionIntervals"]])
+    messages <- c(messages, gettext("Prediction interval for the pooled effect size is not available for models with multiple heterogeneity estimates."))
 
   return(messages)
 }

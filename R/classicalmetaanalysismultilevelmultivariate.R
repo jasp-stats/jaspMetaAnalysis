@@ -318,7 +318,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     containerH <- createJaspContainer(title = paste0(.mammGetOptionsNameStructure(fit[["struct"]][2]), gettext(" Summary")))
     containerH$position <- 3
     randomEstimatesContainer[["containerH"]] <- containerH
-    .mammExtractRandomTables(containerH, options, fit, indx = 3)
+    .mammExtractRandomTables(containerH, options, fit, indx = 2)
 
   }
 
@@ -354,8 +354,8 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     "UN"    = gettextf("Unstructured"),
     "ID"    = gettextf("Identity"),
     "DIAG"  = gettextf("Diagonal"),
-    "AR1"   = gettextf("AR(1)"),
-    "HAR"   = gettextf("heteroskedastic AR(1)"),
+    "AR"    = gettextf("AR(1)"),
+    "HAR"   = gettextf("Heteroskedastic AR(1)"),
     "CAR"   = gettextf("Continuous-Time AR"),
     "SPEXP" = gettextf("Exponential"),
     "SPGAU" = gettextf("Gaussian"),
@@ -364,6 +364,66 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     "SPSPH" = gettextf("Spherical"),
     stop(paste0("Unknown value: ", structure))
   ))
+}
+.mammAnyStructureGen            <- function(options) {
+  # only relevant for multivariate
+  if (options[["module"]] != "metaAnalysisMultilevelMultivariate")
+    return(FALSE)
+
+  # get all the active components types
+  randomFormulaList <- .mammGetRandomFormulaList(options)
+  if (length(randomFormulaList) == 0)
+    return(FALSE)
+
+  structures <- unlist(lapply(randomFormulaList, attr, which = "structure"))
+
+  return(any(structures %in% "GEN"))
+}
+.mammHasMultipleHeterogeneities <- function(options, canAddOutput = FALSE) {
+  # only relevant for multivariate
+  if (options[["module"]] != "metaAnalysisMultilevelMultivariate")
+    return(FALSE)
+
+  # get all the active components types
+  randomFormulaList <- .mammGetRandomFormulaList(options)
+  if (length(randomFormulaList) == 0)
+    return(FALSE)
+
+  structures <- unlist(lapply(randomFormulaList, attr, which = "structure"))
+
+  if (canAddOutput)
+    return(any(structures %in% c("HCS", "UN", "DIAG", "HAR")) && !any(structures %in% "GEN"))
+  else
+    return(any(structures %in% c("GEN", "HCS", "UN", "DIAG", "HAR")))
+}
+.mammExtractTauLevelNames <- function(fit) {
+
+  levelNames <- c()
+
+  if (fit[["withG"]] && fit[["struct"]][1] %in% c("HCS", "UN", "DIAG", "HAR"))
+    levelNames <- c(levelNames, fit$g.names[[1]])
+
+  if (fit[["withH"]] && fit[["struct"]][2] %in% c("HCS", "UN", "DIAG", "HAR"))
+    levelNames <- c(levelNames, fit$h.names[[1]])
+
+  return(levelNames)
+}
+.mammExtractTauLevels <- function(fit, expanded = TRUE) {
+
+  levels <- list()
+
+  if (fit[["withG"]] && fit[["struct"]][1] %in% c("HCS", "UN", "DIAG", "HAR"))
+    levels[["tau2.levels"]]   <- fit$g.levels.f[[1]]
+
+  if (fit[["withH"]] && fit[["struct"]][2] %in% c("HCS", "UN", "DIAG", "HAR"))
+    levels[["gamma2.levels"]] <- fit$h.levels.f[[1]]
+
+  if (expanded)
+    levels <- expand.grid(levels)
+  else
+    levels <- do.call(cbind.data.frame, levels)
+
+  return(levels)
 }
 .mammExtractRandomTables         <- function(tempContainer, options, x, indx = 1) {
 
