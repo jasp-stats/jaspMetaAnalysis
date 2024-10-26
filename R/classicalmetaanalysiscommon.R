@@ -42,11 +42,6 @@
 # Generic
 # - allow different covariates factoring across all settings
 
-
-# TODO fix QML
-# - remove selected variables in estimated marginal means when removed from the model components
-# - check that the variables types are always propagated throughout the options
-
 .ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # fit the model
@@ -445,7 +440,7 @@
     pooledEstimatesTable$addColumnInfo(name = "lPi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
     pooledEstimatesTable$addColumnInfo(name = "uPi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
 
-    if (.mammHasMultipleHeterogeneities(options, canAdd = TRUE)) {
+    if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
       for (colName in .mammExtractTauLevelNames(fit)) {
         pooledEstimatesTable$addColumnInfo(name = colName, title = colName, type = "string", overtitle = gettext("Heterogeneity Level"))
       }
@@ -784,6 +779,11 @@
       overtitleCi <- gettextf("%s%% PI", 100 * options[["confidenceIntervalsLevel"]])
       estimatedMarginalMeansTable$addColumnInfo(name = "lPi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
       estimatedMarginalMeansTable$addColumnInfo(name = "uPi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
+      if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
+        for (colName in .mammExtractTauLevelNames(fit)) {
+          estimatedMarginalMeansTable$addColumnInfo(name = colName, title = colName, type = "string", overtitle = gettext("Heterogeneity Level"))
+        }
+      }
     }
 
     if (options[["estimatedMarginalMeansEffectSizeTestAgainst"]]) {
@@ -1448,6 +1448,10 @@
 
   if (!.maIsMetaregressionEffectSize(options)) {
     predictedEffect <- predict(fit, level = 100 * options[["confidenceIntervalsLevel"]])
+    if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && !options[["predictionIntervals"]]) {
+      # remove the non-requested heterogeneity levels
+      predictedEffect <- predictedEffect[1, , drop = FALSE]
+    }
   } else {
     if (.maIsMetaregressionHeterogeneity(options)) {
       predictedEffect <- predict(
@@ -1458,7 +1462,7 @@
       )
     } else {
 
-      if (.mammHasMultipleHeterogeneities(options, canAdd = TRUE)) {
+      if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]]) {
         tauLevelsMatrix <- .mammExtractTauLevels(fit)
         predictedEffect <- predict(
           fit,
@@ -1478,7 +1482,7 @@
   }
 
   # keep levels for which the heterogeneity is predicted for complex multivariate models
-  if (.mammHasMultipleHeterogeneities(options, canAdd = TRUE)) {
+  if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]]) {
     tauLevels <- list(
       predictedEffect[["tau2.level"]],
       predictedEffect[["gamma2.level"]]
@@ -1505,7 +1509,7 @@
   )]
 
   # return the tau levels
-  if (.mammHasMultipleHeterogeneities(options, canAdd = TRUE))
+  if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]])
     predictedEffect <- cbind(predictedEffect, tauLevels)
 
   return(predictedEffect <- apply(predictedEffect, 1, as.list))
@@ -1916,11 +1920,31 @@
       )
     } else {
 
-      computedMarginalMeans <- predict(
-        fit,
-        newmods = predictorMatrixEffectSize,
-        level   = 100 * options[["confidenceIntervalsLevel"]]
+      if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]]) {
+        tauLevelsMatrix <- .mammExtractTauLevels(fit)
+        computedMarginalMeans <- predict(
+          fit,
+          newmods = do.call(rbind, lapply(1:nrow(tauLevelsMatrix), function(i) predictorMatrixEffectSize)),
+          level   = 100 * options[["confidenceIntervalsLevel"]],
+          tau2.levels   = if (is.null(dim(predictorMatrixEffectSize))) tauLevelsMatrix[["tau2.levels"]]   else do.call(rbind, lapply(1:nrow(predictorMatrixEffectSize), function(i) tauLevelsMatrix))[["tau2.levels"]],
+          gamma2.levels = if (is.null(dim(predictorMatrixEffectSize))) tauLevelsMatrix[["gamma2.levels"]] else do.call(rbind, lapply(1:nrow(predictorMatrixEffectSize), function(i) tauLevelsMatrix))[["gamma2.levels"]]
+        )
+      } else {
+        computedMarginalMeans <- predict(
+          fit,
+          newmods = predictorMatrixEffectSize,
+          level   = 100 * options[["confidenceIntervalsLevel"]]
+        )
+      }
+    }
+
+    if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]]) {
+      tauLevels <- list(
+        computedMarginalMeans[["tau2.level"]],
+        computedMarginalMeans[["gamma2.level"]]
       )
+      tauLevels           <- do.call(cbind.data.frame, tauLevels[!sapply(tauLevels, is.null)])
+      colnames(tauLevels) <- .mammExtractTauLevelNames(fit)
     }
 
 
@@ -2001,6 +2025,10 @@
 
   if (!options[["predictionIntervals"]])
     computedMarginalMeans <- computedMarginalMeans[,!colnames(computedMarginalMeans) %in% c("lPi", "uPi")]
+
+  # return the tau levels
+  if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]])
+    computedMarginalMeans <- cbind(computedMarginalMeans, tauLevels)
 
   return(computedMarginalMeans)
 }
