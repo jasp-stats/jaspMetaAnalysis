@@ -3,6 +3,10 @@
   # extract common options
   relativeRowSize <- options[["forestPlotRelativeSizeRow"]]
 
+  # overwrite basic options used in the pooled effect/marginal means
+  options[["confidenceIntervals"]] <- TRUE
+  options[["predictionIntervals"]] <- options[["forestPlotPredictionIntervals"]]
+
   # keep track of added rows across marginal means and model estimates:
   tempRow <- 1
   additionalInformation <- list()
@@ -110,6 +114,11 @@
     xRangeStudyInformationPanel <- NA
   }
 
+  ### Make sure no multiple prediction intervals are drawn for complex models ----
+  if (.mammHasMultipleHeterogeneities(options)) {
+    options[["predictionIntervals"]]           <- FALSE
+    options[["forestPlotPredictionIntervals"]] <- FALSE
+  }
 
   ### Estimated marginal means panel ----
 
