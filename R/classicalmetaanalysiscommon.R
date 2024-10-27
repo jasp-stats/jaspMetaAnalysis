@@ -442,7 +442,7 @@
 
     if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
       for (colName in .mammExtractTauLevelNames(fit)) {
-        pooledEstimatesTable$addColumnInfo(name = colName, title = colName, type = "string", overtitle = gettext("Heterogeneity Level"))
+        pooledEstimatesTable$addColumnInfo(name = colName, title = colName, type = .maGetVariableColumnType(colName, options), overtitle = gettext("Heterogeneity Level"))
       }
     }
   }
@@ -781,7 +781,7 @@
       estimatedMarginalMeansTable$addColumnInfo(name = "uPi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
       if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
         for (colName in .mammExtractTauLevelNames(fit)) {
-          estimatedMarginalMeansTable$addColumnInfo(name = colName, title = colName, type = "string", overtitle = gettext("Heterogeneity Level"))
+          estimatedMarginalMeansTable$addColumnInfo(name = colName, title = colName, type = .maGetVariableColumnType(colName, options), overtitle = gettext("Heterogeneity Level"))
         }
       }
     }
@@ -3020,16 +3020,17 @@
 }
 .maGetVariableColumnType              <- function(variable, options) {
 
-  if (variable %in% c(options[["effectSize"]], options[["effectSizeStandardError"]])) {
+  if (.maIsMultilevelMultivariate(options)) {
+    randomVariables <- .mammExtractRandomVariableNames(options)
+  } else {
+    randomVariables <- NULL
+  }
+
+  if (variable %in% c(options[["effectSize"]], options[["effectSizeStandardError"]], "samplingVariance",
+                      options[["predictors"]][options[["predictors.types"]] == "scale"], randomVariables[["scale"]], randomVariables[["ordinal"]])) {
     return("number")
-  } else if (variable == options[["clustering"]]) {
+  } else if (variable %in% c(options[["predictors"]][options[["predictors.types"]] == "nominal"], options[["clustering"]], randomVariables[["nominal"]])) {
     return("string")
-  } else if (variable %in% options[["predictors"]]){
-    return(switch(
-      options[["predictors.types"]][variable == options[["predictors"]]],
-      "scale"   = "number",
-      "nominal" = "string"
-    ))
   } else {
     return("string")
   }

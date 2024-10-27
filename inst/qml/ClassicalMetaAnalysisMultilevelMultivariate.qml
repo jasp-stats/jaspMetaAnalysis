@@ -390,7 +390,10 @@ Form
 
 	MA.ClassicalMetaAnalysisBubblePlot {}
 
-	MA.ClassicalMetaAnalysisDiagnostics {}
+	MA.ClassicalMetaAnalysisDiagnostics
+	{
+		module:		"metaAnalysisMultilevelMultivariate"
+	}
 
 	MA.ClassicalMetaAnalysisAdvanced
 	{
