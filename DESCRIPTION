@@ -31,6 +31,7 @@ Imports:
   pema,
   clubSandwich,
   CompQuadForm,
+  sp,
   patchwork
 Remotes:
   jasp-stats/jaspBase,

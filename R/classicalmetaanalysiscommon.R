@@ -37,8 +37,6 @@
 #   - vs predicted
 #   - vs outcome
 #   - vs covariates
-# Advanced
-# - change specification of Omnibus moderation tests (do not include bracket and c, show an information message about which coefficients are included in the test in a table note)
 # Generic
 # - allow different covariates factoring across all settings
 
@@ -172,6 +170,27 @@
     if (length(randomFormulaList) != 0) {
       rmaInput$random <- randomFormulaList
       rmaInput$struct <- do.call(c, lapply(randomFormulaList, attr, which = "structure"))
+
+      # spatial-specific settings
+      rmaInput$dist   <- unlist(lapply(randomFormulaList, attr, which = "dist"), recursive = FALSE)
+      addConstant     <- do.call(c, lapply(randomFormulaList, attr, which = "addConstant"))
+      if (length(addConstant) > 0 && any(addConstant))
+        rmaInput$data$constant   <- 1
+      for (i in seq_along(rmaInput$dist)) {
+        if (is.matrix(rmaInput$dist[[i]]) && !all(unique(rmaInput[["data"]][[names(rmaInput$dist)[i]]]) %in% rownames(rmaInput$dist[[names(rmaInput$dist)[i]]])))
+          .quitAnalysis(sprintf(gettext("The loaded distance matrix for '%1$s' does not match the dataset. The following levels are missing: %2$s."),
+                                names(rmaInput$dist)[i],
+                                paste0(unique(rmaInput[["data"]][[names(rmaInput$dist)[i]]])[!unique(rmaInput[["data"]][[names(rmaInput$dist)[i]]]) %in% rownames(rmaInput$dist)], collapse = ", ")))
+      }
+
+      # known correlation-specific settings
+      rmaInput$R   <- unlist(lapply(randomFormulaList, attr, which = "R"), recursive = FALSE)
+      for (i in seq_along(rmaInput$R)) {
+        if (!all(unique(rmaInput[["data"]][[names(rmaInput$R)[i]]]) %in% rownames(rmaInput$R[[names(rmaInput$R)[i]]])))
+          .quitAnalysis(sprintf(gettext("The loaded correlation matrix for '%1$s' does not match the dataset. The following levels are missing: %2$s."),
+                                names(rmaInput$R)[i],
+                                paste0(unique(rmaInput[["data"]][[names(rmaInput$R)[i]]])[!unique(rmaInput[["data"]][[names(rmaInput$R)[i]]]) %in% rownames(rmaInput$R)], collapse = ", ")))
+      }
     }
   }
 
@@ -254,6 +273,9 @@
     fitClustered   = fitClustered,
     fitPermutation = fitPermutation
   )
+
+  saveRDS(fit,          file = "C:/JASP/fit.RDS")
+  saveRDS(fitClustered, file = "C:/JASP/fitClustered.RDS")
 
   return()
 }
@@ -2380,13 +2402,31 @@
   if (.maIsMultilevelMultivariate(options)) {
     randomFormulaList <- .mammGetRandomFormulaList(options)
     if (length(randomFormulaList) != 0) {
-      struct <- do.call(c, lapply(randomFormulaList, attr, "structure"))
+      struct      <- do.call(c, lapply(randomFormulaList, attr, "structure"))
+      dist        <- unlist(unname(lapply(randomFormulaList, attr, which = "dist")), recursive = FALSE)
+      R           <- unlist(unname(lapply(randomFormulaList, attr, which = "R")), recursive = FALSE)
+      # change distance matrix into a variable
+      for (i in seq_along(dist)) {
+        if (is.matrix(dist[[i]]))
+          dist[[i]] <- paste0(names(dist)[i], gettext(" Distance Matrix"))
+      }
+      # change correlation matrix into a variable
+      for (i in seq_along(R)) {
+        R[[i]] <- paste0(names(R)[i], gettext(" Correlation Matrix"))
+      }
+
       if (length(randomFormulaList) > 1)
         randomFormulaList <- paste0("list(\n\t\t", paste0("'", names(randomFormulaList), "' = ", randomFormulaList, collapse = "\n\t\t"),")")
       rmaInput$random <- randomFormulaList
       if (length(struct) != 0)
-        struct <- paste0("c(", paste0("'", names(struct), "' = '", struct, "'", collapse = ""),")")
+        struct <- paste0("c(", paste0("'", names(struct), "' = '", struct, "'", collapse = ", "),")")
       rmaInput$struct <- struct
+      if (length(dist) > 0)
+        dist <- paste0("list(", paste0(names(dist), ifelse(names(dist) == "", "'", " = '"), dist, "'", collapse = ", "),")")
+      rmaInput$dist <- dist
+      if (length(R) > 0)
+        R <- paste0("list(", paste0(names(R), " = '", R, "'", collapse = ", "),")")
+      rmaInput$R <- R
     }
   }
 

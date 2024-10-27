@@ -145,18 +145,99 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
     }  else if (tempType == "spatial") {
 
-      tempValueInner <- paste0("computedSpatialDistance", i)
-      tempValueOuter <- options[["randomEffectsSpecification"]][[i]][["groupingFactor"]]
+      tempDistanceMetric <- .mammGetDistanceOptions(options[["randomEffectsSpecification"]][[i]][["distanceMetric"]])
 
-      if (!is.null(unlist(options[["randomEffectsSpecification"]][[i]][["spatialCoordinates"]])) && tempValueOuter != "") {
-        randomFormulas[[i]] <- as.formula(paste0("~ ", tempValueInner, " | ", tempValueOuter), env = parent.frame(1))
-        attr(randomFormulas[[i]], "structure") <-  .mammGetStructureOptions(options[["randomEffects"]][[i]][["structure"]])
+      if (tempDistanceMetric != "loadFromFile") {
+
+        # dispatch distance type
+        if (tempDistanceMetric == "gcd") {
+          tempValueInner <- c(
+            if (options[["randomEffectsSpecification"]][[i]][["longitude"]] != "") options[["randomEffectsSpecification"]][[i]][["longitude"]],
+            if (options[["randomEffectsSpecification"]][[i]][["latitude"]]  != "") options[["randomEffectsSpecification"]][[i]][["latitude"]]
+          )
+        } else {
+          tempValueInner <- unlist(options[["randomEffectsSpecification"]][[i]][["spatialCoordinates"]])
+        }
+
+        tempValueOuter <- options[["randomEffectsSpecification"]][[i]][["groupingFactor"]]
+
+        # spatial does not require a grouping factor
+        if (tempValueOuter == "")
+          tempValueOuter <- "constant"
+
+        if ((tempDistanceMetric == "gcd" && length(tempValueInner) == 2) || (tempDistanceMetric != "gcd" && length(tempValueInner) > 0)) {
+          randomFormulas[[i]] <- as.formula(paste0("~ ", paste(tempValueInner, collapse = "+")," | ", tempValueOuter), env = parent.frame(1))
+          attr(randomFormulas[[i]], "structure")    <- .mammGetStructureOptions(options[["randomEffects"]][[i]][["structure"]])
+          attr(randomFormulas[[i]], "dist")         <- tempDistanceMetric
+          attr(randomFormulas[[i]], "addConstant")  <- tempValueOuter == "constant"
+        }
+
+      } else {
+
+        # requires the inner term, the matrix needs to be a row & columns named file
+        tempValueInner         <- options[["randomEffectsSpecification"]][[i]][["locationIdentifier"]]
+        distanceMatrixFileName <- options[["randomEffectsSpecification"]][[i]][["distanceMatrixFile"]]
+
+        if (distanceMatrixFileName != "" && tempValueInner != "") {
+
+          # try regular csv loading
+          distanceMatrix <- try(as.matrix(read.csv(file = distanceMatrixFileName, row.names = 1)))
+
+          if (inherits(distanceMatrix, "try-error"))
+            .quitAnalysis(gettextf("Error reading the distance matrix file: %1$s", distanceMatrix))
+
+          # if there is only one column, try csv2 (indicates different decimals enconding)
+          if (ncol(distanceMatrix) == 1)
+            distanceMatrix <- try(as.matrix(read.csv2(file = distanceMatrixFileName, row.names = 1)))
+
+          if (inherits(distanceMatrix, "try-error"))
+            .quitAnalysis(gettextf("Error reading the distance matrix file: %1$s", distanceMatrix))
+
+          if (nrow(distanceMatrix) != ncol(distanceMatrix))
+            .quitAnalysis(gettext("The distance matrix must be square. The number of rows (%1$i) does not match the number of columns (%2$i).",
+                                  nrow(distanceMatrix), ncol(distanceMatrix)))
+
+          # spatial does not require a grouping factor
+          tempValueOuter <- options[["randomEffectsSpecification"]][[i]][["groupingFactor"]]
+          if (tempValueOuter == "")
+            tempValueOuter <- "constant"
+
+          randomFormulas[[i]] <- as.formula(paste0("~ ", tempValueInner, " | ", tempValueOuter), env = parent.frame(1))
+          attr(randomFormulas[[i]], "structure")    <- .mammGetStructureOptions(options[["randomEffects"]][[i]][["structure"]])
+          attr(randomFormulas[[i]], "dist")         <- list(distanceMatrix)
+          names(attr(randomFormulas[[i]], "dist"))  <- tempValueInner
+          attr(randomFormulas[[i]], "addConstant")  <- tempValueOuter == "constant"
+
+        }
       }
 
     } else if (tempType == "knownCorrelation") {
 
-      stop("Not implemented yet.")
+      # requires the outer term, the matrix needs to be a row & columns named file
+      tempValueOuter         <- options[["randomEffectsSpecification"]][[i]][["groupingFactor"]]
+      distanceMatrixFileName <- options[["randomEffectsSpecification"]][[i]][["correlationMatrixFile"]]
+      if (tempValueOuter != "" && distanceMatrixFileName != "") {
+        # try regular csv loading
+        correlationMatrix <- try(as.matrix(read.csv(file = distanceMatrixFileName, row.names = 1)))
 
+        if (inherits(correlationMatrix, "try-error"))
+          .quitAnalysis(gettextf("Error reading the correlation matrix file: %1$s", correlationMatrix))
+
+        # if there is only one column, try csv2 (indicates different decimals encoding)
+        if (ncol(correlationMatrix) == 1)
+          correlationMatrix <- try(as.matrix(read.csv2(file = distanceMatrixFileName, row.names = 1)))
+
+        if (inherits(correlationMatrix, "try-error"))
+          .quitAnalysis(gettextf("Error reading the correlation matrix file: %1$s", correlationMatrix))
+
+        if (nrow(correlationMatrix) != ncol(correlationMatrix))
+          .quitAnalysis(gettext("The distance matrix must be square. The number of rows (%1$i) does not match the number of columns (%2$i).",
+                                nrow(correlationMatrix), ncol(correlationMatrix)))
+
+        randomFormulas[[i]] <- as.formula(paste0("~ 1 | ", tempValueOuter), env = parent.frame(1))
+        attr(randomFormulas[[i]], "R")           <- list(correlationMatrix)
+        names(attr(randomFormulas[[i]], "R"))    <- tempValueOuter
+      }
     }
   }
 
@@ -165,7 +246,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
   if (all(randomFormulasSkipped))
     return(NULL)
 
-  randomFormulas        <- randomFormulas[!randomFormulasSkipped]
+  randomFormulas <- randomFormulas[!randomFormulasSkipped]
   # add missing null elements in case the last random effects was skipped
   if (length(options[["randomEffectsSpecification"]]) > length(randomFormulasSkipped))
     randomFormulasSkipped[(length(randomFormulasSkipped)+1):length(options[["randomEffectsSpecification"]])] <- TRUE
@@ -231,13 +312,15 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
     }  else if (tempType == "spatial") {
 
-      variablesScale <- c(variablesScale, unlist(options[["randomEffectsSpecification"]][[i]][["spatialCoordinates"]]))
-      variablesNominal <- c(variablesNominal, options[["randomEffectsSpecification"]][[i]][["groupingFactor"]])
+      variablesScale   <- c(variablesScale, unlist(options[["randomEffectsSpecification"]][[i]][["spatialCoordinates"]]),
+                            options[["randomEffectsSpecification"]][[i]][["longitude"]],
+                            options[["randomEffectsSpecification"]][[i]][["latitude"]])
+      variablesNominal <- c(variablesNominal, options[["randomEffectsSpecification"]][[i]][["groupingFactor"]],
+                            options[["randomEffectsSpecification"]][[i]][["locationIdentifier"]])
 
     } else if (tempType == "knownCorrelation") {
 
-      stop("Not implemented yet.")
-
+      variablesNominal <- c(variablesNominal, options[["randomEffectsSpecification"]][[i]][["groupingFactor"]])
     }
   }
 
@@ -274,7 +357,11 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
   ### create table for nested random effects
   if (fit[["withS"]]) {
 
-    tableS <- createJaspTable(title = gettext("Simple / Nested Estimates"))
+    containerS <- createJaspContainer(title = gettext("Simple / Nested Summary"))
+    containerS$position <- 1
+    randomEstimatesContainer[["containerS"]] <- containerS
+
+    tableS <- createJaspTable(title = gettext("Estimates"))
     tableS$position <- 1
 
     tableS$addColumnInfo(name = "factor",  type = "string",  title = "")
@@ -285,7 +372,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
       tableS$addColumnInfo(name = "fixed",   type = "string",  title = gettext("Fixed"))
 
     # tableS$addColumnInfo(name = "R",       type = "string",  title = gettext("R")) # whether supplied via known correlation matrix
-    randomEstimatesContainer[["tableS"]] <- tableS
+    containerS[["tableS"]] <- tableS
 
     resultsS <- data.frame(
       factor = .maVariableNames(fit[["s.names"]], unlist(.mammExtractRandomVariableNames(options))),
@@ -306,7 +393,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
   if (fit[["withG"]]) {
 
     # create jasp containers
-    containerG <- createJaspContainer(title = paste0(.mammGetOptionsNameStructure(fit[["struct"]][1]), gettext(" Summary")))
+    containerG <- createJaspContainer(title = .mammGetRandomEstimatesTitle(fit[["struct"]][1]))
     containerG$position <- 2
     randomEstimatesContainer[["containerG"]] <- containerG
     .mammExtractRandomTables(containerG, options, fit, indx = 1)
@@ -315,7 +402,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
   if (fit[["withH"]]) {
 
-    containerH <- createJaspContainer(title = paste0(.mammGetOptionsNameStructure(fit[["struct"]][2]), gettext(" Summary")))
+    containerH <- createJaspContainer(title = .mammGetRandomEstimatesTitle(fit[["struct"]][2]))
     containerH$position <- 3
     randomEstimatesContainer[["containerH"]] <- containerH
     .mammExtractRandomTables(containerH, options, fit, indx = 2)
@@ -323,6 +410,19 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
   }
 
   return()
+}
+.mammGetRandomEstimatesTitle     <- function(structure) {
+
+  if (structure == "GEN")
+    return(gettext("Random Slopes Summary"))
+  else if (structure %in% c("CS", "HCS", "UN", "ID", "DIAG"))
+    return(paste0(gettext("Structured"), " (", .mammGetOptionsNameStructure(structure), ") ", gettext("Summary")))
+  else if (structure %in% c("AR", "HAR", "CAR"))
+    return(paste0(gettext("Autoregressive"), " (", .mammGetOptionsNameStructure(structure), ") ", gettext("Summary")))
+  else if (structure %in% c("SPEXP", "SPGAU", "SPLIN", "SPRAT", "SPSPH"))
+    return(paste0(gettext("Spatial"), " (", .mammGetOptionsNameStructure(structure), ") ", gettext("Summary")))
+  else
+    return(gettext("Known Correlation Summary"))
 }
 .mammGetStructureOptions         <- function(structure) {
 
@@ -365,7 +465,19 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     stop(paste0("Unknown value: ", structure))
   ))
 }
-.mammAnyStructureGen            <- function(options) {
+.mammGetDistanceOptions          <- function(distance) {
+
+  return(switch(
+    distance,
+    "euclidean"     = "euclidean",
+    "manhattan"     = "manhattan",
+    "maximum"       = "maximum",
+    "greatCircle"   = "gcd",
+    "loadFromFile"  = "loadFromFile",
+    stop(paste0("Unknown value: ", distance))
+  ))
+}
+.mammAnyStructureGen             <- function(options) {
   # only relevant for multivariate
   if (options[["module"]] != "metaAnalysisMultilevelMultivariate")
     return(FALSE)
@@ -379,7 +491,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
   return(any(structures %in% "GEN"))
 }
-.mammHasMultipleHeterogeneities <- function(options, canAddOutput = FALSE) {
+.mammHasMultipleHeterogeneities  <- function(options, canAddOutput = FALSE) {
   # only relevant for multivariate
   if (options[["module"]] != "metaAnalysisMultilevelMultivariate")
     return(FALSE)
@@ -396,7 +508,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
   else
     return(any(structures %in% c("GEN", "HCS", "UN", "DIAG", "HAR")))
 }
-.mammExtractTauLevelNames <- function(fit) {
+.mammExtractTauLevelNames        <- function(fit) {
 
   levelNames <- c()
 
@@ -408,7 +520,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
   return(levelNames)
 }
-.mammExtractTauLevels <- function(fit, expanded = TRUE) {
+.mammExtractTauLevels            <- function(fit, expanded = TRUE) {
 
   levels <- list()
 

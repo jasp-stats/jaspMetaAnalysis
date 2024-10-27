@@ -108,6 +108,7 @@ Form
 		{
 			id:				randomEffects
 			name:			"randomEffects"
+			headerLabels:	["Type"]
 			defaultValues:	[{"type": "nested"}]
 
 			rowComponent: RowLayout
@@ -129,7 +130,6 @@ Form
 				{
 					id:			type
 					name:		"type"
-					label:		qsTr("Type")
 					values: [
 					{ label: qsTr("Simple"),				value: "simple"},
 					{ label: qsTr("Nested (multilevel)"),	value: "nested"},
@@ -175,25 +175,6 @@ Form
 						}
 					})()
 				}
-
-				DropDown
-				{
-					id:			spatialInputType
-					name:		"spatialInputType"
-					label:		qsTr("Spatial input type")
-					visible:	type.value == "spatial"
-					values: (function() {
-						if (type.value == "spatial") {
-							return [
-								{ label: qsTr("Compute from variables"),	value: "computeFromVariables"},
-								{ label: qsTr("Load from file"),			value: "loadFromFile"}
-							];
-						} else {
-							return [];
-						}
-					})()
-				}
-
 			}
 		}
 
@@ -217,8 +198,8 @@ Form
 				VariablesForm
 				{
 					removeInvisibles:	true
-					preferredHeight:	(typeValue == "nested" || typeValue == "randomSlopes" || typeValue == "spatial") ? 250 * preferencesModel.uiScale : 200 * preferencesModel.uiScale
-					visible:			typeValue == "simple" || typeValue == "nested" || typeValue == "randomSlopes" || typeValue == "structured" || typeValue == "autoregressive" || (typeValue == "spatial" && spatialInputTypeValue == "computeFromVariables") || typeValue == "knownCorrelation"
+					preferredHeight:	(typeValue == "nested" || typeValue == "randomSlopes" || (typeValue == "spatial" && distanceMetric.value != "greatCircle")) ? 250 * preferencesModel.uiScale : 200 * preferencesModel.uiScale
+					visible:			typeValue == "simple" || typeValue == "nested" || typeValue == "randomSlopes" || typeValue == "structured" || typeValue == "autoregressive" || typeValue == "spatial" || typeValue == "knownCorrelation"
 
 					AvailableVariablesList
 					{
@@ -304,8 +285,35 @@ Form
 					{
 						name:				"spatialCoordinates"
 						title:				qsTr("Spatial Coordinates")
-						visible:			typeValue == "spatial" && spatialInputTypeValue == "computeFromVariables"
+						visible:			typeValue == "spatial" && distanceMetric.value != "greatCircle" && distanceMetric.value != "loadFromFile"
+						allowedColumns:		["scale"] 
+					}
+
+					AssignedVariablesList
+					{
+						name:				"longitude"
+						title:				qsTr("Longitude")
+						visible:			typeValue == "spatial" && distanceMetric.value == "greatCircle"
+						allowedColumns:		["scale"] 
+						singleVariable:		true
+					}
+
+					AssignedVariablesList
+					{
+						name:				"latitude"
+						title:				qsTr("Latitude")
+						visible:			typeValue == "spatial" && distanceMetric.value == "greatCircle"
+						allowedColumns:		["scale"] 
+						singleVariable:		true
+					}
+
+					AssignedVariablesList
+					{
+						name:				"locationIdentifier"
+						title:				qsTr("Location Identifier")
+						visible:			typeValue == "spatial" && distanceMetric.value == "loadFromFile"
 						allowedColumns:		["nominal"] 
+						singleVariable:		true
 					}
 
 					AssignedVariablesList
@@ -318,30 +326,18 @@ Form
 					}
 				}
 
-				// TODO: Bruno -- adding variable crashes the qml
-				// TODO: Bruno -- allow single variable only, set-type to nominal
-				// FactorsForm
-				// {
-				// 	name:				"nestedGroupingFactors"
-				// 	id:					nestedGroupingFactors
-				// 	title:				qsTr("Nested Grouping Factors")
-				// 	preferredHeight:	200 * preferencesModel.uiScale 
-				// 	initNumberFactors:	1
-				// 	allowAll:			true
-				// 	visible:			typeValue == "nested"
-				// }
-
 				DropDown
 				{
 					name:		"distanceMetric"
 					id:			distanceMetric
 					label:		qsTr("Distance metric")
-					visible:	typeValue == "spatial" && spatialInputTypeValue == "computeFromVariables"
+					visible:	typeValue == "spatial"
 					values:		[
 						{ label: qsTr("Euclidean"),			value: "euclidean" },
 						{ label: qsTr("Manhattan"),			value: "manhattan" },
 						{ label: qsTr("Maximum"),			value: "maximum" },
-						{ label: qsTr("Great-circle"),		value: "greatCircle"}
+						{ label: qsTr("Great-circle"),		value: "greatCircle"},
+						{ label: qsTr("Load from file"),	value: "loadFromFile"}
 					]
 				}
 
@@ -349,16 +345,18 @@ Form
 				{
 					name:		"distanceMatrixFile"
 					label:		qsTr("Distance matrix file")
-					visible:	typeValue == "spatial" && spatialInputTypeValue == "loadFromFile"
+					visible:	typeValue == "spatial" && distanceMetric.value == "loadFromFile"
 					filter:		"*.csv"
+					save:		false
 				}
 
 				FileSelector
 				{
-					name:		"knownCorrelationMatrixFile"
-					label:		qsTr("Known correlation matrix file")
+					name:		"correlationMatrixFile"
+					label:		qsTr("Correlation matrix file")
 					visible:	typeValue == "knownCorrelation"
 					filter:		"*.csv"
+					save:		false
 				}
 
 				Divider { }
