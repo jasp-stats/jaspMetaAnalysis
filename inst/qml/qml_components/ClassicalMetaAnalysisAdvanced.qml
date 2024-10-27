@@ -147,7 +147,7 @@ Section
 				{
 					label: 				""
 					name: 				"addOmnibusModeratorTestEffectSizeCoefficientsValues"
-					value:				"c(1, 2)"
+					value:				"(1, 2)"
 				}
 			}
 
@@ -163,7 +163,7 @@ Section
 				{
 					label: 				""
 					name: 				"addOmnibusModeratorTestHeterogeneityCoefficientsValues"
-					value:				"c(1, 2)"
+					value:				"(1, 2)"
 				}
 			}
 		}

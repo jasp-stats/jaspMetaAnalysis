@@ -389,6 +389,7 @@
         return()
       } else {
         moderatorsTable$addRows(testEffectSizeCoefficients)
+        moderatorsTable$addFootnote(attr(testEffectSizeCoefficients, "footnote"))
       }
     }
   }
@@ -406,6 +407,7 @@
         return()
       } else {
         moderatorsTable$addRows(testHeterogeneityCoefficients)
+        moderatorsTable$addFootnote(attr(testHeterogeneityCoefficients, "footnote"))
       }
     }
   }
@@ -1741,10 +1743,16 @@
 
   if (parameter == "effectSize") {
     maxCoef <- nrow(fit$beta)
-    selCoef <- .parseRCodeInOptions(options[["addOmnibusModeratorTestEffectSizeCoefficientsValues"]])
+    selCoef <- .robmaCleanOptionsToPriors(
+      options[["addOmnibusModeratorTestEffectSizeCoefficientsValues"]],
+      message = gettext("Indexes of effect size moderation coefficients were specified in an incorrect format. Try '(1, 2)' to test the first two coefficients.")
+    )
   } else if (parameter == "heterogeneity") {
     maxCoef <- nrow(fit$alpha)
-    selCoef <- .parseRCodeInOptions(options[["addOmnibusModeratorTestHeterogeneityCoefficientsValues"]])
+    selCoef <- .robmaCleanOptionsToPriors(
+      options[["addOmnibusModeratorTestHeterogeneityCoefficientsValues"]],
+      message = gettext("Indexes of heterogeneity moderation coefficients were specified in an incorrect format. Try '(1, 2)' to test the first two coefficients.")
+    )
   }
 
   if (!is.numeric(selCoef) || any(!(abs(selCoef - round(selCoef)) < .Machine$double.eps^0.5)))
@@ -1767,10 +1775,20 @@
   if (.maIsMetaregressionFtest(options))
     row$df2 <- fit[["QMdf"]][2]
 
-  if (parameter == "effectSize")
-    row$parameter <- gettextf("Effect Size (coef: %1$s)", paste(selCoef, collapse = ","))
-  else if (parameter == "heterogeneity")
-    row$parameter <- gettextf("Heterogeneity (coef: %1$s)", paste(selCoef, collapse = ","))
+  if (parameter == "effectSize") {
+    row$parameter <- gettextf("Effect Size (coef: %1$s)", paste(selCoef, collapse = ", "))
+    attr(row, "footnote") <- gettextf(
+      "Effect size coefficients %1$s correspond to %2$s.",
+      paste(selCoef, collapse = ","),
+      paste(sapply(rownames(fit$beta)[selCoef], function(coefName) .maVariableNames(coefName, options[["predictors"]])), collapse = ", "))
+  } else if (parameter == "heterogeneity") {
+    row$parameter <- gettextf("Heterogeneity (coef: %1$s)", paste(selCoef, collapse = ", "))
+    attr(row, "footnote") <- sapply(rownames(fit$alpha)[selCoef], function(coefName) .maVariableNames(coefName, options[["predictors"]]))
+    attr(row, "footnote") <- gettextf(
+      "Heterogeneity coefficients %1$s correspond to %2$s.",
+      paste(selCoef, collapse = ","),
+      paste(sapply(rownames(fit$alpha)[selCoef], function(coefName) .maVariableNames(coefName, options[["predictors"]])), collapse = ", "))
+  }
 
   return(row)
 }
