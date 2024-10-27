@@ -39,7 +39,7 @@
 #   - vs covariates
 # Generic
 # - allow different covariates factoring across all settings
-# Add spe
+# - confidence interval for heterogeneity in multilevel multivariate
 
 .ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 

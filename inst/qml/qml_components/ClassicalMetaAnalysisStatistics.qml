@@ -74,13 +74,14 @@ Section
 			name:		"randomEffectsTestInclusion"
 			checked:	false
 		}
-
+		/* TODO: will require a lot of work in sorting out which value belongs where
 		CheckBox
 		{
 			text:		qsTr("Confidence intervals")
 			name:		"randomEffectsConfidenceIntervals"
 			checked:	false
-		}	
+		}
+		*/	
 	}
 
 	Group
