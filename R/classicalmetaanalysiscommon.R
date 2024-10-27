@@ -1203,56 +1203,79 @@
   if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
-  # create plot
-  profileLikelihoodPlot <- createJaspPlot(title = gettext("Profile Likelihood Plot"), width = 400, height = 320)
-  profileLikelihoodPlot$dependOn(c(.maDependencies, "diagnosticsPlotsProfileLikelihood"))
-  profileLikelihoodPlot$position <- 8
-  jaspResults[["profileLikelihoodPlot"]] <- profileLikelihoodPlot
+  # extract precomputed profile likelihoods if done before:
+  if (!is.null(jaspResults[["profileLikelihoodResults"]])) {
 
-  if (.maIsMetaregressionHeterogeneity(options)) {
-    profileLikelihoodPlot$setError(gettext("Profile likelihood is not available for models that contain meta-regression on heterogeneity."))
-    return()
+    dfProfile <- jaspResults[["profileLikelihoodResults"]]$object
+
+  } else {
+
+    # create the output container
+    profileLikelihoodResults <- createJaspState()
+    profileLikelihoodResults$dependOn(.maDependencies)
+    jaspResults[["profileLikelihoodResults"]] <- profileLikelihoodResults
+
+    if (.maIsMultilevelMultivariate(options)) {
+      # use the defaults (too many possible parameter combinations to control)
+      dfProfile <- try(metafor::profile.rma.mv(fit, plot = FALSE, progbar = FALSE))
+
+      jaspResults[["diagnosticsResults"]]$object <- dfProfile
+    } else {
+      # proceed with some nice formatting for rma.uni (too difficult to implement for rma.mv)
+      xTicks    <- jaspGraphs::getPrettyAxisBreaks(c(0, max(0.1, 2*fit[["tau2"]])))
+      dfProfile <- try(profile(fit, xlim = range(xTicks), plot = FALSE, progbar = FALSE))
+      attr(dfProfile, "xTicks")   <- xTicks
+
+      jaspResults[["diagnosticsResults"]]$object <- dfProfile
+    }
   }
 
-  # obtain profile likelihood
-  xTicks <- jaspGraphs::getPrettyAxisBreaks(c(0, 2*fit[["tau2"]]))
-  dfProfile <- try(profile(fit, xlim = range(xTicks), plot = FALSE, progbar = FALSE))
-  if (jaspBase::isTryError(dfProfile)) {
-    profileLikelihoodPlot$setError(dfProfile)
-    return()
+  # create profile likelihood plot / container
+  if (.maIsMultilevelMultivariate(options)) {
+    # container for multivariate
+    profileLikelihoodPlot <- createJaspContainer(title = gettext("Profile Likelihood Plots"))
+    profileLikelihoodPlot$dependOn(c(.maDependencies, "diagnosticsPlotsProfileLikelihood"))
+    profileLikelihoodPlot$position <- 8
+
+    jaspResults[["profileLikelihoodPlot"]] <- profileLikelihoodPlot
+
+    if (jaspBase::isTryError(dfProfile)) {
+      errorPlot <- createJaspPlot(title = gettext("Profile Likelihood Plot"))
+      errorPlot$setError(dfProfile)
+
+      profileLikelihoodPlot[["errorPlot"]] <- errorPlot
+      return()
+    }
+
+    for (i in 1:dfProfile[["comps"]]) {
+      tempProfilePlot <- createJaspPlot(title = paste0(dfProfile[[i]][["title"]][-1], collapse = " "), width = 400, height = 320)
+      tempProfilePlot$position <- i
+
+      profileLikelihoodPlot[[paste0("plot", i)]] <- tempProfilePlot
+
+      tempProfilePlot$plotObject <- .maMakeProfileLikelihoodPlot(dfProfile[[i]])
+    }
+
+  } else {
+    # plot for univariate
+    profileLikelihoodPlot <- createJaspPlot(title = gettext("Profile Likelihood Plot"), width = 400, height = 320)
+    profileLikelihoodPlot$dependOn(c(.maDependencies, "diagnosticsPlotsProfileLikelihood"))
+    profileLikelihoodPlot$position <- 8
+
+    jaspResults[["profileLikelihoodPlot"]] <- profileLikelihoodPlot
+
+    if (.maIsMetaregressionHeterogeneity(options)) {
+      profileLikelihoodPlot$setError(gettext("Profile likelihood is not available for models that contain meta-regression on heterogeneity."))
+      return()
+    }
+
+    if (jaspBase::isTryError(dfProfile)) {
+      profileLikelihoodPlot$setError(dfProfile)
+      return()
+    }
+
+    profileLikelihoodPlot$plotObject <- .maMakeProfileLikelihoodPlot(dfProfile)
   }
-
-  yTicks <- jaspGraphs::getPrettyAxisBreaks(c(min(dfProfile$ll), max(dfProfile$ll)))
-
-  # create plot
-  plotOut <- ggplot2::ggplot(
-    data = data.frame(
-      x = dfProfile$tau2,
-      y = dfProfile$ll
-    ),
-    ggplot2::aes(
-      x = x,
-      y = y)
-    ) +
-    jaspGraphs::geom_line() +
-    jaspGraphs::geom_point() +
-    ggplot2::geom_line(
-      data = data.frame(
-        x = rep(fit[["tau2"]], 2),
-        y = range(yTicks)),
-      linetype = "dotted") +
-    ggplot2::geom_line(
-      data = data.frame(
-        x = range(xTicks),
-        y = rep(max(dfProfile$ll), 2)),
-      linetype = "dotted") +
-    ggplot2::labs(x = expression(tau^2), y = gettext("Profile Likelihood")) +
-    jaspGraphs::scale_x_continuous(breaks = xTicks, limits = range(xTicks)) +
-    jaspGraphs::scale_y_continuous(breaks = yTicks, limits = range(yTicks)) +
-    jaspGraphs::geom_rangeframe() +
-    jaspGraphs::themeJaspRaw()
-
-  profileLikelihoodPlot$plotObject <- plotOut
 
   return()
 }
@@ -2603,6 +2626,46 @@
     jaspGraphs::themeJaspRaw()
 
   return(out)
+}
+.maMakeProfileLikelihoodPlot       <- function(dfPlot) {
+
+  yTicks <- jaspGraphs::getPrettyAxisBreaks(c(min(dfPlot$ll), max(dfPlot$ll)))
+
+  # xTicks and other attributes only passed for rma.uni
+  # (there are way too many options to deal with for rma.mv --- using the metafor package defaults)
+  if (!is.null(attr(dfPlot, "xTicks")))
+    xTicks <- attr(dfPlot, "xTicks")
+  else
+    xTicks <- jaspGraphs::getPrettyAxisBreaks(c(min(dfPlot[[1]]), max(dfPlot[[1]])))
+
+  # create plot
+  plotOut <- ggplot2::ggplot(
+    data    = data.frame(x = dfPlot[[1]], y = dfPlot[["ll"]]),
+    mapping = ggplot2::aes(x = x, y = y)
+  ) +
+    jaspGraphs::geom_line() +
+    jaspGraphs::geom_point()
+
+  plotOut <- plotOut +
+    ggplot2::geom_line(
+      data = data.frame(
+        x = rep(dfPlot[["vc"]], 2),
+        y = range(yTicks)),
+      linetype = "dotted") +
+    ggplot2::geom_line(
+      data = data.frame(
+        x = range(xTicks),
+        y = rep(max(dfPlot[["maxll"]]), 2)),
+      linetype = "dotted")
+
+  plotOut <- plotOut +
+    ggplot2::labs(x = dfPlot[["xlab"]], y = gettext("Profile Likelihood")) +
+    jaspGraphs::scale_x_continuous(breaks = xTicks, limits = range(xTicks)) +
+    jaspGraphs::scale_y_continuous(breaks = yTicks, limits = range(yTicks)) +
+    jaspGraphs::geom_rangeframe() +
+    jaspGraphs::themeJaspRaw()
+
+  return(plotOut)
 }
 
 # check functions
