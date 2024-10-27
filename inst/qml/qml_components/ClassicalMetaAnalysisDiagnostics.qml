@@ -108,6 +108,7 @@ Section
 			{
 				name:		"diagnosticsPlotsBaujat"
 				text:		qsTr("Baujat")
+				visible:	module == "metaAnalysis"
 			}
 
 			CheckBox
