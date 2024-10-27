@@ -409,6 +409,40 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
   }
 
+  ### create random structure inclusion summary
+  if (options[["randomEffectsTestInclusion"]]) {
+
+    tableInclusion <- createJaspTable(title = gettext("Inclusion Test"))
+    tableInclusion$position <- 4
+    tableInclusion$dependOn("randomEffectsTestInclusion")
+    randomEstimatesContainer[["tableInclusion"]] <- tableInclusion
+
+    tableInclusion$addColumnInfo(name = "model",  title = gettext("Removed Component"), type = "string")
+    tableInclusion$addColumnInfo(name = "logLik", title = gettext("Log Lik."),          type = "number")
+    tableInclusion$addColumnInfo(name = "df",     title = gettext("df"),                type = "integer")
+    tableInclusion$addColumnInfo(name = "AIC",    title = gettext("AIC"),               type = "number")
+    tableInclusion$addColumnInfo(name = "BIC",    title = gettext("BIC"),               type = "number")
+    tableInclusion$addColumnInfo(name = "AICc",   title = gettext("AICc"),              type = "number")
+    tableInclusion$addColumnInfo(name = "LRT",    title = gettext("LRT"),               type = "number")
+    tableInclusion$addColumnInfo(name = "pval",   title = gettext("p"),                 type = "pvalue")
+
+    dropOneFits <- .mammFitDropOneRandom(jaspResults, options)
+
+    if (length(dropOneFits) == 0)
+      return()
+
+    fit      <- .maExtractFit(jaspResults, options)
+    fitTests <- lapply(dropOneFits, function(fitB) data.frame(anova(fit, fitB)))
+    fitTests <- rbind(
+      cbind(model = "", fitTests[[1]][1,]),
+      cbind(model = names(fitTests), do.call(rbind, lapply(fitTests, function(fitTest) fitTest[2,])))
+    )
+
+    fitTests <- fitTests[,!colnames(fitTests) %in% "QE"]
+    tableInclusion$setData(fitTests)
+    tableInclusion$addFootnote(gettext("Likelihood Ratio Test (LRT) and p-value are based on a comparison with the complete model."))
+  }
+
   return()
 }
 .mammGetRandomEstimatesTitle     <- function(structure) {
@@ -423,6 +457,55 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     return(paste0(gettext("Spatial"), " (", .mammGetOptionsNameStructure(structure), ") ", gettext("Summary")))
   else
     return(gettext("Known Correlation Summary"))
+}
+.mammFitDropOneRandom            <- function(jaspResults, options) {
+
+  if (!is.null(jaspResults[["dropOneFits"]]))
+    return(jaspResults[["dropOneFits"]]$object)
+
+  dropOneFitsContainer <- createJaspState()
+  dropOneFitsContainer$dependOn(.maDependencies)
+  jaspResults[["dropOneFits"]] <- dropOneFitsContainer
+
+  fit <- .maExtractFit(jaspResults, options)
+
+  # create list of all structures
+  randomFormulaLists <- .mammGetRandomFormulaList(options)
+  dropOneFits        <- vector("list", length = length(randomFormulaLists))
+  names(dropOneFits) <- names(randomFormulaLists)
+
+  startProgressbar(expectedTicks = length(randomFormulaLists), label = gettext("Testing Inclusion of Random Effects / Model Structure"))
+
+  # perform drop one re-estimation
+  for (i in seq_along(randomFormulaLists)) {
+
+    randomFormulaList <- randomFormulaLists[-i]
+    randomFormulaList <- unname(randomFormulaList)
+
+    random <- NULL
+    struct <- NULL
+    dist   <- NULL
+    R      <- NULL
+
+    if (length(randomFormulaList) != 0) {
+      random <- randomFormulaList
+      struct <- do.call(c, lapply(randomFormulaList, attr, which = "structure"))
+      dist   <- unlist(lapply(randomFormulaList, attr, which = "dist"), recursive = FALSE)
+      R      <- unlist(lapply(randomFormulaList, attr, which = "R"), recursive = FALSE)
+    }
+
+    # set default struct if unspecified
+    if (is.null(struct))
+      struct <- "CS"
+
+    tempFit <- try(update(fit, random = random, struct = struct, dist = dist, R = R))
+
+    dropOneFits[[i]] <- tempFit
+    progressbarTick()
+  }
+
+  dropOneFitsContainer$object <- dropOneFits
+  return(dropOneFits)
 }
 .mammGetStructureOptions         <- function(structure) {
 
