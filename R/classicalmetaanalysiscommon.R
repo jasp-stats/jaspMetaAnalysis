@@ -2795,26 +2795,63 @@
       rel.tol   = if (options[["optimizerConvergenceRelativeTolerance"]]) options[["optimizerConvergenceRelativeToleranceValue"]]
     )
   } else {
-    if (.maGetMethodOptions(options) %in% c("REML", "ML", "EB")) {
-      out <- list(
-        tau2.init = if (options[["optimizerInitialTau2"]]) options[["optimizerInitialTau2Value"]],
-        iter.max  = if (options[["optimizerMaximumIterations"]]) options[["optimizerMaximumIterationsValue"]],
-        threshold = if (options[["optimizerConvergenceTolerance"]]) options[["optimizerConvergenceToleranceValue"]],
-        stepadj   = if (options[["optimizerStepAdjustment"]]) options[["optimizerStepAdjustmentValue"]]
-      )
-    } else if (.maGetMethodOptions(options) %in% c("PM", "PMM", "GENQM")) {
-      out <- list(
-        iter.max  = if (options[["optimizerMaximumIterations"]]) options[["optimizerMaximumIterationsValue"]],
-        tol       = if (options[["optimizerConvergenceTolerance"]]) options[["optimizerConvergenceToleranceValue"]],
-        tau2.min  = if (options[["optimizerMinimumTau2"]]) options[["optimizerMinimumTau2Value"]],
-        tau2.max  = if (options[["optimizerMaximumTau2"]]) options[["optimizerMaximumTau2Value"]]
-      )
-    } else if (.maGetMethodOptions(options) %in% c("SD")) {
-      out <- list(
-        tau2.init = if (options[["optimizerInitialTau2"]]) options[["optimizerInitialTau2Value"]]
-      )
+    if (.maIsMultilevelMultivariate(options)) {
+      if (options[["optimizerMethod"]] == "nlminb") {
+        out <- list(
+          optimizer = options[["optimizerMethod"]],
+          eval.max  = if (options[["optimizerMaximumEvaluations"]]) options[["optimizerMaximumEvaluationsValue"]],
+          iter.max  = if (options[["optimizerMaximumIterations"]]) options[["optimizerMaximumIterationsValue"]],
+          rel.tol   = if (options[["optimizerConvergenceRelativeTolerance"]]) options[["optimizerConvergenceRelativeToleranceValue"]]
+        )
+      } else if (options[["optimizerMethod"]] %in% c("Nelder-Mead", "BFGS")){
+        out <- list(
+          optimizer = options[["optimizerMethod"]],
+          maxit     = if (options[["optimizerMaximumIterations"]]) options[["optimizerMaximumIterationsValue"]],
+          reltol    = if (options[["optimizerConvergenceRelativeTolerance"]]) options[["optimizerConvergenceRelativeToleranceValue"]]
+        )
+      } else if (options[["optimizerMethod"]] %in% c("uobyqa", "newuoa", "bobyqa")){
+        out <- list(
+          optimizer = options[["optimizerMethod"]],
+          maxfun   = if (options[["optimizerMaximumEvaluations"]]) options[["optimizerMaximumEvaluationsValue"]],
+          rhobeg   = if (options[["optimizerInitialTrustRegionRadius"]]) options[["optimizerInitialTrustRegionRadiusValue"]],
+          rhoend   = if (options[["optimizerFinalTrustRegionRadius"]]) options[["optimizerFinalTrustRegionRadiusValue"]]
+        )
+      } else if (options[["optimizerMethod"]] %in% c("nloptr", "nlm")){
+        # could be much more, "nloptr" probably requires choosing a method too
+        out <- list(
+          optimizer = options[["optimizerMethod"]],
+          iterlim   = if (options[["optimizerMaximumIterations"]]) options[["optimizerMaximumIterationsValue"]]
+        )
+      } else if (options[["optimizerMethod"]] %in% c("hjk", "nmk", "mads")){
+        out <- list(
+          optimizer    = options[["optimizerMethod"]],
+          tol          = if (options[["optimizerConvergenceTolerance"]]) options[["optimizerConvergenceToleranceValue"]],
+          maxfeval     = if (options[["optimizerMaximumEvaluations"]]) options[["optimizerMaximumEvaluationsValue"]],
+          restarts.max = if (options[["optimizerMethod"]] == "mmk" && options[["optimizerMaximumRestarts"]]) options[["optimizerMaximumRestartsValue"]]
+        )
+      }
     } else {
-      out <- list()
+      if (.maGetMethodOptions(options) %in% c("REML", "ML", "EB")) {
+        out <- list(
+          tau2.init = if (options[["optimizerInitialTau2"]]) options[["optimizerInitialTau2Value"]],
+          iter.max  = if (options[["optimizerMaximumIterations"]]) options[["optimizerMaximumIterationsValue"]],
+          threshold = if (options[["optimizerConvergenceTolerance"]]) options[["optimizerConvergenceToleranceValue"]],
+          stepadj   = if (options[["optimizerStepAdjustment"]]) options[["optimizerStepAdjustmentValue"]]
+        )
+      } else if (.maGetMethodOptions(options) %in% c("PM", "PMM", "GENQM")) {
+        out <- list(
+          iter.max  = if (options[["optimizerMaximumIterations"]]) options[["optimizerMaximumIterationsValue"]],
+          tol       = if (options[["optimizerConvergenceTolerance"]]) options[["optimizerConvergenceToleranceValue"]],
+          tau2.min  = if (options[["optimizerMinimumTau2"]]) options[["optimizerMinimumTau2Value"]],
+          tau2.max  = if (options[["optimizerMaximumTau2"]]) options[["optimizerMaximumTau2Value"]]
+        )
+      } else if (.maGetMethodOptions(options) %in% c("SD")) {
+        out <- list(
+          tau2.init = if (options[["optimizerInitialTau2"]]) options[["optimizerInitialTau2Value"]]
+        )
+      } else {
+        out <- list()
+      }
     }
   }
   return(out[!sapply(out, is.null)])

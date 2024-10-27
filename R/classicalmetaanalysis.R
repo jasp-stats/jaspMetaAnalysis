@@ -25,6 +25,9 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     .maCheckErrors(dataset, options)
   }
 
+  saveRDS(options, file = "C:/JASP/options.RDS")
+  saveRDS(dataset, file = "C:/JASP/dataset.RDS")
+
   .ClassicalMetaAnalysisCommon(jaspResults, dataset, options)
 
   return()
@@ -44,6 +47,9 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "optimizerMinimumTau2", "optimizerMinimumTau2Value", "optimizerMaximumTau2", "optimizerMaximumTau2Value",
   "optimizerMaximumIterations", "optimizerMaximumIterationsValue", "optimizerConvergenceTolerance", "optimizerConvergenceToleranceValue",
   "optimizerConvergenceRelativeTolerance", "optimizerConvergenceRelativeToleranceValue", "optimizerStepAdjustment", "optimizerStepAdjustmentValue",
+  "optimizerMaximumEvaluations", "optimizerMaximumEvaluationsValue",
+  "optimizerInitialTrustRegionRadius", "optimizerInitialTrustRegionRadiusValue", "optimizerFinalTrustRegionRadius", "optimizerFinalTrustRegionRadiusValue",
+  "optimizerMaximumRestarts", "optimizerMaximumRestartsValue",
   # simple ma specific
   "heterogeneityModelTerms", "heterogeneityModelIncludeIntercept", "heterogeneityModelLink",
   "permutationTest", "permutationTestIteration", "permutationTestType", "setSeed", "seed",

@@ -178,6 +178,7 @@ Section
 			DropDown
 			{
 				name:		"optimizerMethod"
+				id:			optimizerMethod
 				label:		qsTr("Method") // TODO: switch default value on heterogeneityModelLink change
 				values:		{
 					if (module == "metaAnalysis") {
@@ -186,7 +187,7 @@ Section
 						else
 							["constrOptim", "nlminb", "BFGS", "Nelder-Mead", "uobyqa", "newuoa", "bobyqa", "nloptr", "nlm"]
 					} else	if (module == "metaAnalysisMultilevelMultivariate") {
-							["nlminb", "BFGS", "Nelder-Mead", "uobyqa", "newuoa", "bobyqa", "nloptr", "nlm", "hjk", "nmk", "mads", "ucminf", "lbfgsb3c", "BBoptim"]
+							["nlminb", "BFGS", "Nelder-Mead", "uobyqa", "newuoa", "bobyqa", "nloptr", "nlm", "hjk", "nmk", "mads"] // many else could be added "ucminf", "lbfgsb3c", "BBoptim"
 					}
 
 				}
@@ -238,8 +239,8 @@ Section
 				text:		qsTr("Maximum 𝜏²")
 				checked:	false
 				childrenOnSameRow:	true
-				visible:	(method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu") &&
-							sectionModel.heterogeneityModelTermsCount == 0 && module == "metaAnalysis"
+				visible:	((method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu") &&
+							sectionModel.heterogeneityModelTermsCount == 0 && module == "metaAnalysis")
 
 				DoubleField
 				{
@@ -254,12 +255,33 @@ Section
 
 			CheckBox
 			{
+				name:		"optimizerMaximumEvaluations"
+				text:		qsTr("Maximum evaluations")
+				checked:	false
+				childrenOnSameRow:	true
+				visible:	(optimizerMethod.value == "nlminb" || optimizerMethod.value == "uobyqa" || optimizerMethod.value == "newuoa" || optimizerMethod.value == "bobyqa" ||
+							optimizerMethod.value == "hjk" || optimizerMethod.value == "nmk" || optimizerMethod.value == "mads") && module == "metaAnalysisMultilevelMultivariate"
+
+				IntegerField
+				{
+					label: 				""
+					name: 				"optimizerMaximumEvaluationsValue"
+					value:				250
+					min: 				1
+					inclusive: 			JASP.None
+				}
+			}
+
+			CheckBox
+			{
 				name:		"optimizerMaximumIterations"
 				text:		qsTr("Maximum iterations")
 				checked:	false
 				childrenOnSameRow:	true
-				visible:	method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes" ||
-							method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu"
+				visible:	((method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes" ||
+							method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu") && module == "metaAnalysis") ||
+							((optimizerMethod.value == "nlminb" || optimizerMethod.value == "Nelder-Mead" || optimizerMethod.value == "BFGS" || 
+							optimizerMethod.value == "nloptr" || optimizerMethod.value == "nlm") && module == "metaAnalysisMultilevelMultivariate")
 
 				IntegerField
 				{
@@ -267,7 +289,7 @@ Section
 					name: 				"optimizerMaximumIterationsValue"
 					value:				{
 						if (sectionModel.heterogeneityModelTermsCount == 0)
-							100
+							150
 						else
 							1000
 					}
@@ -282,9 +304,10 @@ Section
 				text:		qsTr("Convergence tolerance")
 				checked:	false
 				childrenOnSameRow:	true
-				visible:	(method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes" ||
+				visible:	((method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes" ||
 							method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu") &&
-							sectionModel.heterogeneityModelTermsCount == 0
+							sectionModel.heterogeneityModelTermsCount == 0 && module == "metaAnalysis") ||
+							((optimizerMethod.value == "hjk" || optimizerMethod.value == "nmk" || optimizerMethod.value == "mads") && module == "metaAnalysisMultilevelMultivariate")
 
 				DoubleField
 				{
@@ -309,7 +332,8 @@ Section
 				text:		qsTr("Convergence relative tolerance")
 				checked:	false
 				childrenOnSameRow:	true
-				visible:	sectionModel.heterogeneityModelTermsCount > 0
+				visible:	(sectionModel.heterogeneityModelTermsCount > 0  && module == "metaAnalysis") ||
+							((optimizerMethod.value == "nlminb" || optimizerMethod.value == "Nelder-Mead" || optimizerMethod.value == "BFGS") && module == "metaAnalysisMultilevelMultivariate")
 
 				DoubleField
 				{
@@ -327,8 +351,9 @@ Section
 				text:		qsTr("Step adjustment")
 				checked:	false
 				childrenOnSameRow:	true
-				visible:	(method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes") &&
-							sectionModel.heterogeneityModelTermsCount == 0
+				visible:	((method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes") &&
+							sectionModel.heterogeneityModelTermsCount == 0 && module == "metaAnalysis")
+
 
 				DoubleField
 				{
@@ -336,6 +361,60 @@ Section
 					name: 				"optimizerStepAdjustmentValue"
 					defaultValue:		1
 					min: 				0
+					inclusive: 			JASP.None
+				}
+			}
+
+			CheckBox
+			{
+				name:		"optimizerInitialTrustRegionRadius"
+				text:		qsTr("Initial trust region radius")
+				checked:	false
+				childrenOnSameRow:	true
+				visible:	((optimizerMethod.value == "uobyqa" || optimizerMethod.value == "newuoa" || optimizerMethod.value == "bobyqa") && module == "metaAnalysisMultilevelMultivariate")
+
+				DoubleField
+				{
+					label: 				""
+					name: 				"optimizerInitialTrustRegionRadiusValue"
+					defaultValue:		1
+					min: 				0
+					inclusive: 			JASP.None
+				}
+			}
+
+			CheckBox
+			{
+				name:		"optimizerFinalTrustRegionRadius"
+				text:		qsTr("Final trust region radius")
+				checked:	false
+				childrenOnSameRow:	true
+				visible:	((optimizerMethod.value == "uobyqa" || optimizerMethod.value == "newuoa" || optimizerMethod.value == "bobyqa") && module == "metaAnalysisMultilevelMultivariate")
+
+				DoubleField
+				{
+					label: 				""
+					name: 				"optimizerFinalTrustRegionRadiusValue"
+					defaultValue:		1
+					min: 				0
+					inclusive: 			JASP.None
+				}
+			}
+
+			CheckBox
+			{
+				name:		"optimizerMaximumRestarts"
+				text:		qsTr("Maximum restarts")
+				checked:	false
+				childrenOnSameRow:	true
+				visible:	optimizerMethod.value == "mmk" && module == "metaAnalysisMultilevelMultivariate"
+
+				IntegerField
+				{
+					label: 				""
+					name: 				"optimizerMaximumRestartsValue"
+					defaultValue:		3
+					min: 				1
 					inclusive: 			JASP.None
 				}
 			}

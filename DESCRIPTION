@@ -32,6 +32,7 @@ Imports:
   clubSandwich,
   CompQuadForm,
   sp,
+  dfoptim,
   patchwork
 Remotes:
   jasp-stats/jaspBase,
