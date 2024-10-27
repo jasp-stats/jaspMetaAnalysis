@@ -39,6 +39,7 @@
 #   - vs covariates
 # Generic
 # - allow different covariates factoring across all settings
+# Add spe
 
 .ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
@@ -273,9 +274,6 @@
     fitClustered   = fitClustered,
     fitPermutation = fitPermutation
   )
-
-  saveRDS(fit,          file = "C:/JASP/fit.RDS")
-  saveRDS(fitClustered, file = "C:/JASP/fitClustered.RDS")
 
   return()
 }
