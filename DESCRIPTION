@@ -30,6 +30,7 @@ Imports:
   ggmcmc,
   pema,
   clubSandwich,
+  CompQuadForm,
   patchwork
 Remotes:
   jasp-stats/jaspBase,

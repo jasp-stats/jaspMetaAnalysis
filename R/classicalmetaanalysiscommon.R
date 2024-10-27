@@ -184,7 +184,7 @@
 
   # add fixed parameters if needed
   if (options[["fixParametersWeights"]])
-    rmaInput$weights <- as.name(options[["fixParametersWeightsVariable"]])
+    rmaInput$weights <- dataset[[options[["fixParametersWeightsVariable"]]]]
   if (options[["fixParametersTau2"]])
     rmaInput$tau2 <- .maGetFixedTau2Options(options) # TODO: add multiple possible fixed taus
 

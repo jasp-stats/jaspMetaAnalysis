@@ -94,7 +94,8 @@ Section
 
 		Group
 		{
-			title:	qsTr("Fix Parameters")
+			title:		qsTr("Fix Parameters")
+			visible:	module == "metaAnalysis"
 
 			CheckBox
 			{	// TODO: allow fixing in multivariate models
@@ -102,7 +103,6 @@ Section
 				text:				qsTr("𝜏²")
 				enabled:			sectionModel.heterogeneityModelTermsCount == 0
 				childrenOnSameRow:	true
-				visible:			module == "metaAnalysis"
 
 				FormulaField
 				{
@@ -125,6 +125,8 @@ Section
 					label: 				""
 					name: 				"fixParametersWeightsVariable"
 					source:				"allVariables"
+					addEmptyValue:		true
+					allowedColumns:		["scale"]
 				}
 			}
 		}
