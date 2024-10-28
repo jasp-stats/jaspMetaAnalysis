@@ -225,6 +225,10 @@
   # additional input
   rmaInput$level <- 100 * options[["confidenceIntervalsLevel"]]
 
+  # extend the call by custom commands from R if requested
+  if (options[["advancedExtendMetaforCall"]])
+    rmaInput <- c(rmaInput, .maExtendMetaforCallFromOptions(options))
+
   ### fit the model
   if (options[["module"]] == "metaAnalysis") {
     fit <- try(do.call(metafor::rma, rmaInput))
@@ -2458,6 +2462,10 @@
   # additional input
   rmaInput$level <- 100 * options[["confidenceIntervalsLevel"]]
 
+  # add additional options
+  if (options[["advancedExtendMetaforCall"]])
+    rmaInput <- c(rmaInput, .maExtendMetaforCallFromOptions(options))
+
   ### fit the model
   fit <- paste0("fit <- rma(\n\t", paste(names(rmaInput), "=", rmaInput, collapse = ",\n\t"), "\n)\n")
 
@@ -2877,6 +2885,15 @@
     smdToCles                     = metafor::transf.dtocles,
     stop(paste0("Unknown effect size transformation: ", effectSizeTransformation))
   )
+}
+.maExtendMetaforCallFromOptions       <- function(options) {
+
+  optionsCode <- try(eval(parse(text = options[["advancedExtendMetaforCallCode"]])))
+
+  if (jaspBase::isTryError(optionsCode))
+    .quitAnalysis(gettext("The custom R code for extending the metafor call failed with the following message: %1$s", optionsCode))
+
+  return(optionsCode)
 }
 
 # options names

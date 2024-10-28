@@ -468,4 +468,18 @@ Section
 
 		}
 	}
+
+	CheckBox
+	{
+		name:		"advancedExtendMetaforCall"
+		id:			advancedExtendMetaforCall
+		text:		qsTr("Extend metafor call")
+		checked:	false
+	}
+
+	TextArea
+	{
+		name: 				"advancedExtendMetaforCallCode"
+		visible:			advancedExtendMetaforCall.checked
+	}
 }

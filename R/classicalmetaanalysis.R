@@ -50,6 +50,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "optimizerMaximumEvaluations", "optimizerMaximumEvaluationsValue",
   "optimizerInitialTrustRegionRadius", "optimizerInitialTrustRegionRadiusValue", "optimizerFinalTrustRegionRadius", "optimizerFinalTrustRegionRadiusValue",
   "optimizerMaximumRestarts", "optimizerMaximumRestartsValue",
+  "advancedExtendMetaforCall", "advancedExtendMetaforCallCode",
   # simple ma specific
   "heterogeneityModelTerms", "heterogeneityModelIncludeIntercept", "heterogeneityModelLink",
   "permutationTest", "permutationTestIteration", "permutationTestType", "setSeed", "seed",
