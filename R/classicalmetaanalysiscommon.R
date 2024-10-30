@@ -2977,10 +2977,15 @@
   out      <- .maOmnibusTest(fit, options, parameter)
   outPrint <- .maPrintTermTest(out, testStatistic = TRUE)
 
-  if (parameter == "effectSize")
-    return(gettextf("Moderation: %1$s", outPrint))
-  else if (parameter == "effectSize")
-    return(gettextf("Moderation (Heterogeneity): %1$s", outPrint))
+  if (.maIsMetaregressionHeterogeneity(options)) {
+    if (parameter == "effectSize")
+      return(gettextf("Moderation (Effect Size): %1$s", outPrint))
+    else if (parameter == "heterogeneity")
+      return(gettextf("Moderation (Heterogeneity): %1$s", outPrint))
+  } else {
+    if (parameter == "effectSize")
+      return(gettextf("Moderation: %1$s", outPrint))
+  }
 }
 .maPrintHeterogeneityEstimate         <- function(fit, options, digits, keepText) {
 
