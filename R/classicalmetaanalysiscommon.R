@@ -351,7 +351,7 @@
   }
 
   if (jaspBase::isTryError(fit)) {
-    residualHeterogeneityTable$setError(fit)
+    residualHeterogeneityTable$setError(.maTryCleanErrorMessages(fit))
     return()
   }
 
@@ -3353,4 +3353,11 @@
     "exact"       = gettext("exact"),
     "approximate" = options[["permutationTestIteration"]]
   )))
+}
+.maTryCleanErrorMessages               <- function(message) {
+  # probably more messages will be gathered over time
+  if (grepl("singular matrix", message))
+    return(gettextf("The model estimation failed with the following message: %1$s. Please, consider simplifying the model.", message))
+
+  return(message)
 }
