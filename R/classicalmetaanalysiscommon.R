@@ -1493,40 +1493,49 @@
 # help compute functions
 .maComputePooledEffect             <- function(fit, options) {
 
-  if (!.maIsMetaregressionEffectSize(options)) {
-    predictedEffect <- predict(fit, level = 100 * options[["confidenceIntervalsLevel"]])
-    if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && !options[["predictionIntervals"]]) {
-      # remove the non-requested heterogeneity levels
-      predictedEffect <- predictedEffect[1, , drop = FALSE]
-    }
-  } else {
-    if (.maIsMetaregressionHeterogeneity(options)) {
-      predictedEffect <- predict(
-        fit,
-        newmods  = colMeans(model.matrix(fit)$location)[-1],
-        newscale = colMeans(model.matrix(fit)$scale)[-1],
-        level    = 100 * options[["confidenceIntervalsLevel"]]
-      )
-    } else {
+  # prediction for effect size of a location-scale models without effect size moderator does not work (compute it manually)
+  if (!.maIsMetaregressionEffectSize(options) && .maIsMetaregressionHeterogeneity(options)) {
 
-      if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]]) {
-        tauLevelsMatrix <- .mammExtractTauLevels(fit)
-        predictedEffect <- predict(
-          fit,
-          newmods = do.call(rbind, lapply(1:nrow(tauLevelsMatrix), function(i) colMeans(model.matrix(fit))[-1])),
-          level   = 100 * options[["confidenceIntervalsLevel"]],
-          tau2.levels   = tauLevelsMatrix[["tau2.levels"]],
-          gamma2.levels = tauLevelsMatrix[["gamma2.levels"]]
-        )
-      } else {
-        predictedEffect <- predict(
-          fit,
-          newmods = colMeans(model.matrix(fit))[-1],
-          level   = 100 * options[["confidenceIntervalsLevel"]]
-        )
-      }
+    predictedHeterogeneity <- .maComputePooledHeterogeneity(fit, options)
+    predictedEffect        <- data.frame(
+      pred  = fit$beta[1],
+      se    = fit$se[1],
+      ci.lb = fit$ci.lb[1],
+      ci.ub = fit$ci.ub[1],
+      pi.lb = fit$beta[1] - 1.96 * sqrt(fit$se[1]^2 + predictedHeterogeneity[1, 2]^2),
+      pi.ub = fit$beta[1] + 1.96 * sqrt(fit$se[1]^2 + predictedHeterogeneity[1, 2]^2)
+    )
+
+  } else {
+
+    predictInput <- list(
+      object = fit,
+      level  = 100 * options[["confidenceIntervalsLevel"]]
+    )
+
+    if (.maIsMetaregressionHeterogeneity(options)) {
+      predictInput$newmods  <- t(colMeans(model.matrix(fit)$location)[-1])
+      predictInput$newscale <- t(colMeans(model.matrix(fit)$scale)[-1])
+    } else if (.maIsMetaregressionEffectSize(options)) {
+      predictInput$newmods  <- t(colMeans(model.matrix(fit))[-1])
     }
+
+    if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]]) {
+      tauLevelsMatrix <- .mammExtractTauLevels(fit)
+      predictInput$tau2.levels   <- tauLevelsMatrix[["tau2.levels"]]
+      predictInput$gamma2.levels <- tauLevelsMatrix[["gamma2.levels"]]
+
+      if (.maIsMetaregressionEffectSize(options))
+        predictInput$newmods <- do.call(rbind, lapply(1:nrow(tauLevelsMatrix), function(i) predictInput$newmods))
+    }
+
+    predictedEffect <- do.call(predict, predictInput)
   }
+
+
+  # remove the non-requested heterogeneity levels
+  if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && !options[["predictionIntervals"]])
+    predictedEffect <- predictedEffect[1, , drop = FALSE]
 
   # keep levels for which the heterogeneity is predicted for complex multivariate models
   if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]]) {
