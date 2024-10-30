@@ -2214,7 +2214,7 @@
   }
 
   ### add confidence bands
-  if (options[["bubblePlotCondifenceIntervals"]]) {
+  if (options[["bubblePlotConfidenceIntervals"]]) {
 
     geomCi <- .maBubblePlotMakeCiGeom(dfPlot, options, ci = TRUE)
 

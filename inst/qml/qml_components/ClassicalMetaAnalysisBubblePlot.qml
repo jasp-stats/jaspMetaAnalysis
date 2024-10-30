@@ -128,13 +128,13 @@ Section
 		{
 			CheckBox
 			{
-				name:		"bubblePlotCondifenceIntervals"
+				name:		"bubblePlotConfidenceIntervals"
 				label:		qsTr("Condifence intervals")
 				checked:	true
 
 				DoubleField
 				{
-					name:			"bubblePlotCondifenceIntervalsTransparency"
+					name:			"bubblePlotConfidenceIntervalsTransparency"
 					label:			qsTr("Transparency")
 					defaultValue:	0.30
 					min:			0
