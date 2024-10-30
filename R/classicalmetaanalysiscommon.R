@@ -1612,11 +1612,11 @@
 }
 .maComputePooledHeterogeneity      <- function(fit, options) {
 
-  if (options[["fixParametersTau2"]]) {
+  if (fit[["tau2.fix"]]) {
 
     confIntHeterogeneity <- data.frame(
       par = c("\U1D70F", "\U1D70F\U00B2"),
-      est = c(sqrt(.maGetFixedTau2Options(options)), .maGetFixedTau2Options(options)),
+      est = c(sqrt(fit[["tau2"]]), fit[["tau2"]]),
       lCi = c(NA, NA),
       uCi = c(NA, NA)
     )
@@ -1690,7 +1690,7 @@
   if (inherits(fit, "robust.rma"))
     class(fit) <- class(fit)[!class(fit) %in% "robust.rma"]
 
-  if (options[["fixParametersTau2"]]) {
+  if (fit[["tau2.fix"]]) {
 
     confIntHeterogeneity <- list(
       est = sqrt(.maGetFixedTau2Options(options)),
@@ -2886,10 +2886,14 @@
 }
 .maExtendMetaforCallFromOptions       <- function(options) {
 
-  optionsCode <- try(eval(parse(text = options[["advancedExtendMetaforCallCode"]])))
+  optionsCode <- options[["advancedExtendMetaforCallCode"]]
+  optionsCode <- trimws(optionsCode, which = "both")
+  if (substr(optionsCode, 1, 4) != "list")
+    optionsCode <- paste0("list(\n", optionsCode, "\n)")
+  optionsCode <- try(eval(parse(text = optionsCode)))
 
   if (jaspBase::isTryError(optionsCode))
-    .quitAnalysis(gettext("The custom R code for extending the metafor call failed with the following message: %1$s", optionsCode))
+    .quitAnalysis(gettextf("The custom R code for extending the metafor call failed with the following message: %1$s", optionsCode))
 
   return(optionsCode)
 }
