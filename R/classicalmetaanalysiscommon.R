@@ -487,10 +487,8 @@
     # requires non-clustered fit
     pooledHeterogeneity <- .maComputePooledHeterogeneity(.maExtractFit(jaspResults, options, nonClustered = TRUE), options)
 
-    if (nrow(pooledHeterogeneity) > 0) {
-      for (i in 1:nrow(pooledHeterogeneity))
-        pooledEstimatesTable$addRows(pooledHeterogeneity[i,])
-    }
+    for (i in seq_len(nrow(pooledHeterogeneity)))
+      pooledEstimatesTable$addRows(pooledHeterogeneity[i, ])
   }
 
   # add messages

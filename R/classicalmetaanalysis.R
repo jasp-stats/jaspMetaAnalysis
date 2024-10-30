@@ -25,8 +25,6 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     .maCheckErrors(dataset, options)
   }
 
-  saveRDS(options, file = "C:/JASP/options.RDS")
-  saveRDS(dataset, file = "C:/JASP/dataset.RDS")
 
   .ClassicalMetaAnalysisCommon(jaspResults, dataset, options)
 
