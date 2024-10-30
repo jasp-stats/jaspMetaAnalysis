@@ -203,7 +203,7 @@
     rmaInput$weighted <- FALSE
 
   # add fixed parameters if needed
-  if (options[["fixParametersWeights"]])
+  if (options[["fixParametersWeights"]] && options[["fixParametersWeightsVariable"]] != "")
     rmaInput$weights <- dataset[[options[["fixParametersWeightsVariable"]]]]
   if (options[["fixParametersTau2"]])
     rmaInput$tau2 <- .maGetFixedTau2Options(options) # TODO: add multiple possible fixed taus
@@ -837,6 +837,8 @@
   # drop non-required columns
   if (parameter == "effectSize" && !options[["estimatedMarginalMeansEffectSizeTestAgainst"]])
     estimatedMarginalMeans <- estimatedMarginalMeans[,!colnames(estimatedMarginalMeans) %in% c("df", "stat", "pval")]
+  else if (parameter == "heterogeneity")
+    estimatedMarginalMeans <- estimatedMarginalMeans[,!colnames(estimatedMarginalMeans) %in% c("lPi", "uPi")]
 
   estimatedMarginalMeansTable$setData(estimatedMarginalMeans)
 
@@ -2447,7 +2449,7 @@
     rmaInput$weighted <- FALSE
 
   # add fixed parameters if needed
-  if (options[["fixParametersWeights"]])
+  if (options[["fixParametersWeights"]] && options[["fixParametersWeightsVariable"]] != "")
     rmaInput$weights <- as.name(options[["fixParametersWeightsVariable"]])
   if (options[["fixParametersTau2"]])
     rmaInput$tau2 <- .maGetFixedTau2Options(options)
