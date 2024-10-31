@@ -990,7 +990,7 @@ Form
 									{ label: qsTr("LS"), value: "LS" },
 									{ label: qsTr("LS2"), value: "LS2" },
 									{ label: qsTr("AV"), value: "AV" },
-									{ label: qsTr("A2"), value: "AV2" }
+									{ label: qsTr("AV2"), value: "AV2" }
 								];	
 					} else {
 						return [];
