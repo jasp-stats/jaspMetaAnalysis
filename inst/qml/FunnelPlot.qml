@@ -313,6 +313,13 @@ Form
 				{ label: qsTr("Left"), 			value: "left"}
 			]
 		}
+
+		DoubleField
+		{
+			name:			"estimatesMappingLabelOffset"
+			label:			qsTr("Label offset")
+			defaultValue:	0.10
+		}
 	}
 	
 

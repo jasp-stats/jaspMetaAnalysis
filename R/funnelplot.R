@@ -116,7 +116,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
       "funnelUnderH1PowerEnhancement", "funnelUnderH1PowerEnhancementBreaks",
       "funnelPredictionInterval", "funnelUnderH0LineType", "funnelUnderH0FillColors", "funnelUnderH1LineType", "funnelUnderH1FillColors",
       "invertColors",
-      "estimatesMappingLabel", "estimatesMappingColor", "estimatesMappingShape", "estimatesLegendPosition"
+      "estimatesMappingLabel", "estimatesMappingColor", "estimatesMappingShape", "estimatesLegendPosition", "estimatesMappingLabelOffset"
     ))
     funnelPlotContainer$position <- 1
     jaspResults[["funnelPlotContainer"]] <- funnelPlotContainer
@@ -318,7 +318,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     }
     # specify the position of the labels
     dfLabels$position <- ifelse(dfLabels$x < tempAdjustMean, "right", "left")
-    dfLabels$nudge_x  <- ifelse(dfLabels$x < tempAdjustMean, -0.05, 0.05)
+    dfLabels$nudge_x  <- ifelse(dfLabels$x < tempAdjustMean, -1, 1) * options[["estimatesMappingLabelOffset"]]
   }
 
   ### specify "background" for the funnel plot
@@ -420,7 +420,9 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     out <- out +
       ggplot2::geom_text(
         data    = dfLabels,
-        mapping = ggplot2::aes(x = x, y = y, label = label, hjust = position), nudge_x = dfLabels$nudge_x
+        mapping = ggplot2::aes(x = x, y = y, label = label, hjust = position),
+        nudge_x = dfLabels$nudge_x,
+
       )
   }
 
