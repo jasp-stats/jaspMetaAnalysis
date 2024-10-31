@@ -20,6 +20,8 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
   # all input checking is done within the escalc function
   # - error messages are cleaned and forwarded to the user
   dataOutput  <- .escComputeEffectSizes(dataset, options)
+  saveRDS(options, file = "C:/JASP/options.RDS")
+  saveRDS(dataset, file = "C:/JASP/dataset.RDS")
 
   .escComputeSummaryTable(jaspResults, dataset, options, dataOutput)
   .escExportData(jaspResults, options, dataOutput)
@@ -43,17 +45,25 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
       newDataOutput <- try(stop(gettext("Cannot compute outcomes. Chech that all of the required information is specified via the appropriate arguments (i.e. an Effect Size and either Standard Error, Sampling Variance, or 95% Confidence Interval).")))
     } else {
       # set escalc input
-      escalcInput <- c(
-        .escGetEscalcDataOptions(dataset, effectSizeType, variables),
-        .escGetEscalcAdjustFrequenciesOptions(effectSizeType, variables),
-        .escGetEscalcVtypeOption(effectSizeType, variables),
-        measure     = if (effectSizeType[["design"]] == "reportedEffectSizes") "GEN" else effectSizeType[["effectSize"]],
-        replace     = i == 1,
-        add.measure = TRUE,
-        data        = if (!is.null(dataOutput)) list(dataOutput)
-      )
+      tempDataOptions <- .escGetEscalcDataOptions(dataset, effectSizeType, variables)
 
-      newDataOutput <- try(do.call(metafor::escalc, escalcInput))
+      # skip on no input and don't set an error message
+      if (length(tempDataOptions) == 0) {
+        next
+      } else {
+        escalcInput <- c(
+          tempDataOptions,
+          .escGetEscalcAdjustFrequenciesOptions(effectSizeType, variables),
+          .escGetEscalcVtypeOption(effectSizeType, variables),
+          measure     = if (effectSizeType[["design"]] == "reportedEffectSizes") "GEN" else effectSizeType[["effectSize"]],
+          replace     = i == 1,
+          add.measure = TRUE,
+          data        = if (!is.null(dataOutput)) list(dataOutput)
+        )
+
+        newDataOutput <- try(do.call(metafor::escalc, escalcInput))
+      }
+
     }
 
 
