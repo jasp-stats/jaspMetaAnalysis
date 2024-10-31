@@ -357,8 +357,8 @@ Form
 
 				AssignedVariablesList
 				{ // metafor: ai
-					name: "cronbachsAlpha"
-					title: qsTr("Cronbach's alpha")
+					name: "coefficientAlpha"
+					title: qsTr("Coefficient α")
 					singleVariable: true
 					allowedColumns:	["scale"]
 					visible: (designValue == "other" &&  measurementValue == "reliability")

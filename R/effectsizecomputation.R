@@ -394,7 +394,7 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
   } else if (design == "other") {
     if (measurement == "reliability") {
       inputs <- list(
-        ai = dataset[[variables[["cronbachsAlpha"]]]],
+        ai = dataset[[variables[["coefficientAlpha"]]]],
         mi = dataset[[variables[["items"]]]],
         ni = dataset[[variables[["sampleSize"]]]]
       )
@@ -849,7 +849,7 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
   "group1OutcomePlus",
   "time1OutcomePlus",
   "outcomePlusPlus",
-  "cronbachsAlpha",
+  "coefficientAlpha",
   "homozygousDominantAlleles",
   "group1OutcomeMinus",
   "time1OutcomeMinus",
