@@ -1516,11 +1516,17 @@
     )
 
     if (.maIsMetaregressionHeterogeneity(options)) {
-      predictInput$newmods  <- t(colMeans(model.matrix(fit)$location)[-1])
-      predictInput$newscale <- t(colMeans(model.matrix(fit)$scale)[-1])
+      predictInput$newmods  <- t(colMeans(model.matrix(fit)$location))
+      predictInput$newscale <- t(colMeans(model.matrix(fit)$scale))
     } else if (.maIsMetaregressionEffectSize(options)) {
-      predictInput$newmods  <- t(colMeans(model.matrix(fit))[-1])
+      predictInput$newmods  <- t(colMeans(model.matrix(fit)))
     }
+
+    if (!is.null(predictInput$newmods) && options[["effectSizeModelIncludeIntercept"]])
+      predictInput$newmods <- predictInput$newmods[, -1, drop=FALSE]
+
+    if (!is.null(predictInput$newscale) && options[["heterogeneityModelIncludeIntercept"]])
+      predictInput$newscale <- predictInput$newscale[, -1, drop=FALSE]
 
     if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]]) {
       tauLevelsMatrix <- .mammExtractTauLevels(fit)
@@ -1873,6 +1879,11 @@
     effectSize    = fit[["formula.mods"]],
     heterogeneity = fit[["formula.scale"]]
   )
+  hasIntercept <- switch(
+    parameter,
+    effectSize    = options[["effectSizeModelIncludeIntercept"]],
+    heterogeneity = options[["heterogeneityModelIncludeIntercept"]]
+  )
 
   # extract the used variables
   terms     <- attr(terms(formula, data = fit[["data"]]), "term.labels")
@@ -1919,14 +1930,16 @@
   # add the specified variable and pool across the combinations of the remaining values
   if (length(selectedVariables) == 1 && selectedVariables == "") {
     # empty string creates overall adjusted estimate
-    outMatrix <- colMeans(model.matrix(formula, data = expand.grid(predictorsRemaining)))[-1]
+    outMatrix <- t(colMeans(model.matrix(formula, data = expand.grid(predictorsRemaining))))
   } else {
     predictorsSelectedGrid <- expand.grid(predictorsSelected)
     outMatrix <- do.call(rbind, lapply(1:nrow(predictorsSelectedGrid), function(i) {
-      colMeans(model.matrix(formula, data = expand.grid(c(predictorsRemaining,  predictorsSelectedGrid[i,,drop = FALSE]))))[-1]
+      colMeans(model.matrix(formula, data = expand.grid(c(predictorsRemaining,  predictorsSelectedGrid[i,,drop = FALSE]))))
     }))
   }
 
+  if (hasIntercept)
+    outMatrix <- outMatrix[, -1, drop=FALSE]
 
   # keep information about the variable and levels
   if (length(selectedVariables) == 1 && selectedVariables == "") {
