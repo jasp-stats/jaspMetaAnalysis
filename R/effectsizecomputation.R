@@ -40,32 +40,34 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
     effectSizeType <- options[["effectSizeType"]][[i]]
     variables      <- options[["variables"]][[i]]
 
-    # dispatch
-    if (effectSizeType[["design"]] == "reportedEffectSizes" && !.escReportedEffectSizesReady(variables)) {
+    # skip on no input to the reported effect sizes (no error added)
+    if (effectSizeType[["design"]] == "reportedEffectSizes" && !.escReportedEffectSizesReady(variables, all = FALSE))
+      next
+
+    # set escalc input (allows to check whether at least something was specified)
+    tempDataOptions <- .escGetEscalcDataOptions(dataset, effectSizeType, variables)
+
+    # skip on no input and don't set an error message
+    if (length(tempDataOptions) == 0)
+      next
+
+    # set error message if reported effect sizes cannot be performed
+    if (effectSizeType[["design"]] == "reportedEffectSizes" && !.escReportedEffectSizesReady(variables, all = TRUE)) {
       newDataOutput <- try(stop(gettext("Cannot compute outcomes. Chech that all of the required information is specified via the appropriate arguments (i.e. an Effect Size and either Standard Error, Sampling Variance, or 95% Confidence Interval).")))
     } else {
-      # set escalc input
-      tempDataOptions <- .escGetEscalcDataOptions(dataset, effectSizeType, variables)
+    # set escalc input
+      escalcInput <- c(
+        tempDataOptions,
+        .escGetEscalcAdjustFrequenciesOptions(effectSizeType, variables),
+        .escGetEscalcVtypeOption(effectSizeType, variables),
+        measure     = if (effectSizeType[["design"]] == "reportedEffectSizes") "GEN" else effectSizeType[["effectSize"]],
+        replace     = i == 1,
+        add.measure = TRUE,
+        data        = if (!is.null(dataOutput)) list(dataOutput)
+      )
 
-      # skip on no input and don't set an error message
-      if (length(tempDataOptions) == 0) {
-        next
-      } else {
-        escalcInput <- c(
-          tempDataOptions,
-          .escGetEscalcAdjustFrequenciesOptions(effectSizeType, variables),
-          .escGetEscalcVtypeOption(effectSizeType, variables),
-          measure     = if (effectSizeType[["design"]] == "reportedEffectSizes") "GEN" else effectSizeType[["effectSize"]],
-          replace     = i == 1,
-          add.measure = TRUE,
-          data        = if (!is.null(dataOutput)) list(dataOutput)
-        )
-
-        newDataOutput <- try(do.call(metafor::escalc, escalcInput))
-      }
-
+      newDataOutput <- try(do.call(metafor::escalc, escalcInput))
     }
-
 
     if (inherits(newDataOutput, "try-error")) {
       errors[[paste0("i",i)]] <- list(
@@ -832,9 +834,16 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
 
   return(inputs)
 }
-.escReportedEffectSizesReady          <- function(.escReportedEffectSizesReady, variables){
+.escReportedEffectSizesReady          <- function(variables, all = TRUE){
 
-  return(!(length(variables[["confidenceInterval"]]) == 0 && variables[["standardError"]] == "" && variables[["samplingVariance"]] == ""))
+  varianceMeasureReady <- !(length(variables[["confidenceInterval"]]) == 0 && variables[["standardError"]] == "" && variables[["samplingVariance"]] == "")
+  effectSizeReady      <- variables[["effectSize"]] != ""
+
+  if (all) {
+    return(effectSizeReady && varianceMeasureReady)
+  } else {
+    return((effectSizeReady + varianceMeasureReady) >= 1)
+  }
 }
 .escVariableInputs                    <- c(
   "group1OutcomePlus",
