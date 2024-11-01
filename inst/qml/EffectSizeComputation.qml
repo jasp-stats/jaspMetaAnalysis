@@ -1027,7 +1027,7 @@ Form
 
 			TextField
 			{
-				name:			"computedcolumnsNamesEffectSize"
+				name:			"computedColumnsNamesEffectSize"
 				label:			qsTr("Effect size")
 				defaultValue:	"computed effect size"
 			}
@@ -1050,7 +1050,7 @@ Form
 
 			TextField
 			{
-				name:			"computedcolumnsNamesEffectSizeType"
+				name:			"computedColumnsNamesEffectSizeType"
 				label:			qsTr("Effect size type")
 				defaultValue:	"computed effect size type"
 			}

@@ -143,9 +143,9 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
 
   # columns to add
   if (options[["computeSamplingVariance"]]) {
-    columnOptions <- c("computedcolumnsNamesEffectSize", "computedcolumnsNamesSamplingVariance", "computedcolumnsNamesEffectSizeType")
+    columnOptions <- c("computedColumnsNamesEffectSize", "computedcolumnsNamesSamplingVariance", "computedColumnsNamesEffectSizeType")
   } else {
-    columnOptions <- c("computedcolumnsNamesEffectSize", "computedcolumnsNamesStandardError", "computedcolumnsNamesEffectSizeType")
+    columnOptions <- c("computedColumnsNamesEffectSize", "computedcolumnsNamesStandardError", "computedColumnsNamesEffectSizeType")
   }
 
   for (column in columnOptions) {
@@ -158,10 +158,10 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
     jaspResults[[column]] <- createJaspColumn(columnName   = columnName, dependencies = c("effectSizeType", "variables", column))
     jaspResults[[column]]$setScale(switch(
       column,
-      "computedcolumnsNamesEffectSize"          = dataOutput[["yi"]],
+      "computedColumnsNamesEffectSize"          = dataOutput[["yi"]],
       "computedcolumnsNamesStandardError"       = sqrt(dataOutput[["vi"]]),
       "computedcolumnsNamesSamplingVariance"    = dataOutput[["vi"]],
-      "computedcolumnsNamesEffectSizeType"      = dataOutput[["measure"]]
+      "computedColumnsNamesEffectSizeType"      = dataOutput[["measure"]]
     ))
 
   }
