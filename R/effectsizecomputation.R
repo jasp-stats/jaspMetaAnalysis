@@ -20,8 +20,6 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
   # all input checking is done within the escalc function
   # - error messages are cleaned and forwarded to the user
   dataOutput  <- .escComputeEffectSizes(dataset, options)
-  saveRDS(options, file = "C:/JASP/options.RDS")
-  saveRDS(dataset, file = "C:/JASP/dataset.RDS")
 
   .escComputeSummaryTable(jaspResults, dataset, options, dataOutput)
   .escExportData(jaspResults, options, dataOutput)
