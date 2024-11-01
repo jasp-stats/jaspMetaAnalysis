@@ -27,6 +27,7 @@ Section
 	property string module:		"metaAnalysis"
 	columns:					1
 
+	info: qsTr("Advanced options for the meta-analysis, including optimization settings, clustering, and permutation tests.")
 	
 	property alias permutationTestChecked:		permutationTest.checked
 
@@ -42,6 +43,7 @@ Section
 				name:		"showMetaforRCode"
 				text:		qsTr("Show metafor R code")
 				Layout.preferredWidth: 300 * jaspTheme.uiScale
+				info: qsTr("Display the underlying R code used by the metafor package to fit the model.")
 			}
 
 			CheckBox
@@ -49,6 +51,7 @@ Section
 				name:		"weightedEstimation"
 				text:		qsTr("Weighted estimation")
 				checked:	true
+				info: qsTr("Perform weighted estimation using inverse-variance weights. Uncheck for unweighted estimation.")
 			}
 
 			Group
@@ -61,6 +64,7 @@ Section
 					name:		"clusteringUseClubSandwich"
 					text:		qsTr("Use clubSandwich")
 					checked:	true
+					info: qsTr("Use the clubSandwich package for robust variance estimation in clustered data. Enabled when a clustering variable is specified.")
 				}
 
 				CheckBox
@@ -68,6 +72,7 @@ Section
 					name:		"clusteringSmallSampleCorrection"
 					text:		qsTr("Small sample correction")
 					checked:	true
+					info: qsTr("Apply a small-sample correction to the clustered standard errors.")
 				}
 			}
 
@@ -81,6 +86,7 @@ Section
 					name:		"useSparseMatricies"
 					text:		qsTr("Use sparse matricies")
 					checked:	false
+					info: qsTr("Use sparse matrix representations to speed up computations in models with large datasets or complex random effects structures. Available in multilevel/multivariate meta-analysis.")
 				}
 
 				CheckBox
@@ -88,6 +94,7 @@ Section
 					name:		"computeCovarianceMatrix"
 					text:		qsTr("Compute covariance matrix")
 					checked:	true
+					info: qsTr("Compute the covariance matrix of the parameter estimates. Available in multilevel/multivariate meta-analysis.")
 				}
 			}
 		}
@@ -103,6 +110,7 @@ Section
 				text:				qsTr("𝜏²")
 				enabled:			sectionModel.heterogeneityModelTermsCount == 0
 				childrenOnSameRow:	true
+				info: qsTr("Fix the value of 𝜏² in the model instead of estimating it. Unavailable in multilevel/multivariate meta-analysis or with meta-regression model for heterogeneity. A more complex heterogeneity terms in the multilevel/multivariate meta-analysis can be fixed via the 'Extend metafor call' option.")
 
 				FormulaField
 				{
@@ -119,6 +127,7 @@ Section
 				name:	"fixParametersWeights"
 				text:	qsTr("Weights")
 				childrenOnSameRow:	true
+				info: qsTr("Use custom weights for the effect sizes instead of inverse-variance weights.")
 
 				DropDown
 				{
@@ -142,12 +151,14 @@ Section
 				name:	"addOmnibusModeratorTestEffectSizeCoefficients"
 				enabled:			sectionModel.effectSizeModelTermsCount > 0
 				childrenOnSameRow:	false
+				info: qsTr("Include an omnibus test for the specified effect size regression coefficients. Available when effect size model terms are included. The coefficients should be selected via their comma-separated indicies which correspond to the order presented in the 'Effect Size Meta-Regression Coefficients' Table.")
 
 				TextField
 				{
 					label: 				""
 					name: 				"addOmnibusModeratorTestEffectSizeCoefficientsValues"
 					value:				"(1, 2)"
+					info: qsTr("Specify the indices of the effect size meta-regression coefficients to include in the omnibus test, e.g. '(1, 2)' for the first and the second coefficient.")
 				}
 			}
 
@@ -158,12 +169,14 @@ Section
 				enabled:			sectionModel.heterogeneityModelTermsCount > 0
 				childrenOnSameRow:	false
 				visible:			module == "metaAnalysis"
+				info: qsTr("Include an omnibus test for the specified heterogeneity regression coefficients. Available when heterogeneity model terms are included. The coefficients should be selected via their comma-separated indicies which correspond to the order presented in the 'Heterogeneity Meta-Regression Coefficients' Table.")
 
 				TextField
 				{
 					label: 				""
 					name: 				"addOmnibusModeratorTestHeterogeneityCoefficientsValues"
 					value:				"(1, 2)"
+					info: qsTr("Specify the indices of the heterogeneity meta-regression coefficients to include in the omnibus test, e.g. '(1, 2)' for the first and the second coefficient.")
 				}
 			}
 		}
@@ -174,12 +187,14 @@ Section
 			enabled:	method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes" ||
 						method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu" ||
 						method.value == "sidikJonkman"
+			info: qsTr("Optimizer settings for estimating the meta-analytic models. A more complex/unavailbe settings can be specified via the 'Extend metafor call' option.")
 
 			DropDown
 			{
 				name:		"optimizerMethod"
 				id:			optimizerMethod
 				label:		qsTr("Method") // TODO: switch default value on heterogeneityModelLink change
+				info: qsTr("Select the optimization method to use for fitting the model. Available in multilevel/multivariate meta-analysis or when heterogeneity model terms are included.")
 				values:		{
 					if (module == "metaAnalysis") {
 						if (sectionModel.heterogeneityModelLinkValue == "log")
@@ -200,6 +215,7 @@ Section
 				text:		qsTr("Initial 𝜏²")
 				checked:	false
 				childrenOnSameRow:	true
+				info: qsTr("Specify the initial value of 𝜏² for the optimization algorithm. Available only for specific optimization methods and unavailable in multilevel/multivariate meta-analysis or when heterogeneity model terms are included.")
 				visible:	(method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes" ||
 							method.value == "sidikJonkman") && sectionModel.heterogeneityModelTermsCount == 0 && module == "metaAnalysis"
 
@@ -219,6 +235,7 @@ Section
 				text:		qsTr("Minimum 𝜏²")
 				checked:	false
 				childrenOnSameRow:	true
+				info: qsTr("Specify the minimum allowable value of 𝜏² during optimization. Available only for specific optimization methods and unavailable in multilevel/multivariate meta-analysis or when heterogeneity model terms are included.")
 				visible:	(method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu") &&
 							sectionModel.heterogeneityModelTermsCount == 0 && module == "metaAnalysis"
 
@@ -239,6 +256,7 @@ Section
 				text:		qsTr("Maximum 𝜏²")
 				checked:	false
 				childrenOnSameRow:	true
+				info: qsTr("Specify the maximim allowable value of 𝜏² during optimization. Available only for specific optimization methods and unavailable in multilevel/multivariate meta-analysis or when heterogeneity model terms are included.")
 				visible:	((method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu") &&
 							sectionModel.heterogeneityModelTermsCount == 0 && module == "metaAnalysis")
 
@@ -259,6 +277,7 @@ Section
 				text:		qsTr("Maximum evaluations")
 				checked:	false
 				childrenOnSameRow:	true
+				info: qsTr("Set the maximum number of function evaluations for the optimizer. Available when using specific optimization methods in multilevel/multivariate meta-analysis.")
 				visible:	(optimizerMethod.value == "nlminb" || optimizerMethod.value == "uobyqa" || optimizerMethod.value == "newuoa" || optimizerMethod.value == "bobyqa" ||
 							optimizerMethod.value == "hjk" || optimizerMethod.value == "nmk" || optimizerMethod.value == "mads") && module == "metaAnalysisMultilevelMultivariate"
 
@@ -278,6 +297,7 @@ Section
 				text:		qsTr("Maximum iterations")
 				checked:	false
 				childrenOnSameRow:	true
+				info: qsTr("Set the maximum number of iterations for the optimizer. Available when using certain estimation or optimization methods.")
 				visible:	((method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes" ||
 							method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu") && module == "metaAnalysis") ||
 							((optimizerMethod.value == "nlminb" || optimizerMethod.value == "Nelder-Mead" || optimizerMethod.value == "BFGS" || 
@@ -304,6 +324,7 @@ Section
 				text:		qsTr("Convergence tolerance")
 				checked:	false
 				childrenOnSameRow:	true
+				info: qsTr("Set the convergence tolerance for the optimizer. Available when using certain methods without heterogeneity model terms or specific optimizers in multilevel/multivariate meta-analysis.")
 				visible:	((method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes" ||
 							method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu") &&
 							sectionModel.heterogeneityModelTermsCount == 0 && module == "metaAnalysis") ||
@@ -332,6 +353,7 @@ Section
 				text:		qsTr("Convergence relative tolerance")
 				checked:	false
 				childrenOnSameRow:	true
+				info: qsTr("Set the relative convergence tolerance for the optimizer. Available when heterogeneity model terms are included or using specific optimizers in multilevel/multivariate meta-analysis.")
 				visible:	(sectionModel.heterogeneityModelTermsCount > 0  && module == "metaAnalysis") ||
 							((optimizerMethod.value == "nlminb" || optimizerMethod.value == "Nelder-Mead" || optimizerMethod.value == "BFGS") && module == "metaAnalysisMultilevelMultivariate")
 
@@ -351,6 +373,7 @@ Section
 				text:		qsTr("Step adjustment")
 				checked:	false
 				childrenOnSameRow:	true
+				info: qsTr("Set the step adjustment factor for the optimizer. Available when using certain methods without heterogeneity model terms and unavailable in multilevel/multivariate meta-analysis.")
 				visible:	((method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes") &&
 							sectionModel.heterogeneityModelTermsCount == 0 && module == "metaAnalysis")
 
@@ -371,6 +394,7 @@ Section
 				text:		qsTr("Initial trust region radius")
 				checked:	false
 				childrenOnSameRow:	true
+				info: qsTr("Set the initial trust region radius for the optimizer. Available when using specific optimization methods in multilevel/multivariate meta-analysis.")
 				visible:	((optimizerMethod.value == "uobyqa" || optimizerMethod.value == "newuoa" || optimizerMethod.value == "bobyqa") && module == "metaAnalysisMultilevelMultivariate")
 
 				DoubleField
@@ -389,6 +413,7 @@ Section
 				text:		qsTr("Final trust region radius")
 				checked:	false
 				childrenOnSameRow:	true
+				info: qsTr("Set the final trust region radius for the optimizer. Available when using specific optimization methods in multilevel/multivariate meta-analysis.")
 				visible:	((optimizerMethod.value == "uobyqa" || optimizerMethod.value == "newuoa" || optimizerMethod.value == "bobyqa") && module == "metaAnalysisMultilevelMultivariate")
 
 				DoubleField
@@ -407,6 +432,7 @@ Section
 				text:		qsTr("Maximum restarts")
 				checked:	false
 				childrenOnSameRow:	true
+				info: qsTr("Set the maximum number of restarts for the optimizer. Available when using the Nelder-Mead method ('nmk') in multilevel/multivariate meta-analysis.")
 				visible:	optimizerMethod.value == "mmk" && module == "metaAnalysisMultilevelMultivariate"
 
 				IntegerField
@@ -427,6 +453,8 @@ Section
 			id:			permutationTest
 			visible:	module == "metaAnalysis"
 			enabled:	clustering.count == 0
+			info: qsTr("Perform a permutation test for the model coefficients. Available in the meta-analysis module when clustering is not specified. The resulting permuation p-values are displayed in the 'p (permutation)' column. Note that permutation can be computationally intesive.")
+
 
 			RadioButtonGroup
 			{
@@ -434,6 +462,7 @@ Section
 				title:		qsTr("Type")
 				columns:	2
 				radioButtonsOnSameRow: true
+				info: qsTr("Select the type of permutation test.")
 
 				RadioButton
 				{
@@ -461,6 +490,7 @@ Section
 					value:				1000
 					min: 				10
 					inclusive: 			JASP.None
+					info: qsTr("Specify the number of permutations to use in the approximate permutation test.")
 				}
 
 				SetSeed{}
@@ -475,11 +505,13 @@ Section
 		id:			advancedExtendMetaforCall
 		text:		qsTr("Extend metafor call")
 		checked:	false
+		info: qsTr("Allow adding custom arguments to the metafor function call. Consult the metafor R package documentation for the available commands (https://wviechtb.github.io/metafor/reference/rma.uni.html and https://wviechtb.github.io/metafor/reference/rma.mv.html).")
 	}
 
 	TextArea
 	{
 		name: 				"advancedExtendMetaforCallCode"
 		visible:			advancedExtendMetaforCall.checked
+		info: qsTr("The additional arguments to the metafor function call must be specified as a named list (the 'list()' call can be ommited). E.g., 'list(tau2 = 1)' (or 'tau2 = 1') can be used to fix the between-study heterogeneity to a given value. Multiple arguments must be comma-seprated, e.g. 'list(tau2 = 1, gamma2 = 0.5)' (or 'tau2 = 1, gamma2 = 0.5'). New lines are ignored." )
 	}
 }

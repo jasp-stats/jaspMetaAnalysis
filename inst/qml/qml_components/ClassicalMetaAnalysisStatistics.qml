@@ -26,6 +26,7 @@ Section
 	title:						qsTr("Statistics")
 	columns: 					2
 	property string module:		"metaAnalysis"
+	info: qsTr("Options for summarizing the meta-analytic results.")
 
 	Group
 	{
@@ -33,12 +34,14 @@ Section
 		columns:	2
 		enabled:	method.value != "fixedEffects" && method.value != "equalEffects"
 		visible:	module == "metaAnalysis"
+		info: qsTr("Summarize the meta-analytic between-study heterogeneity. Unvailable when performing multilevel/multivariate meta-analysis.")
 
 		CheckBox
 		{
 			text:		qsTr("𝜏")
 			name:		"heterogeneityTau"
 			checked:	true
+			info: qsTr("Include 𝜏, the square root of the estimated between-study variance.")
 		}
 
 		CheckBox
@@ -46,6 +49,7 @@ Section
 			text:		qsTr("𝜏²")
 			name:		"heterogeneityTau2"
 			checked:	true
+			info: qsTr("Include 𝜏², the estimated between-study variance.")
 		}
 
 		CheckBox
@@ -53,6 +57,7 @@ Section
 			text:		qsTr("I²")
 			name:		"heterogeneityI2"
 			checked:	false
+			info: qsTr("Include I², the percentage of total variation across studies due to heterogeneity.")
 		}
 
 		CheckBox
@@ -60,6 +65,7 @@ Section
 			text:		qsTr("H²")
 			name:		"heterogeneityH2"
 			checked:	false
+			info: qsTr("Include H², an index indicating the ratio of total variability to sampling variability.")
 		}
 	}
 
@@ -67,12 +73,14 @@ Section
 	{
 		title:		qsTr("Random Effects / Model Structure")
 		visible:	module == "metaAnalysisMultilevelMultivariate"
+		info: qsTr("Available when performing multilevel/multivariate meta-analysis.")
 
 		CheckBox
 		{
 			text:		qsTr("Test inclusion")
 			name:		"randomEffectsTestInclusion"
 			checked:	false
+			info: qsTr("Test the inclusion of the individual Random Effects / Model Structure components. The test compares the complete model (i.e., including all components) with a model without one of the specified Random Effects / Model Structure components at a time.")
 		}
 		/* TODO: will require a lot of work in sorting out which value belongs where
 		CheckBox
@@ -88,12 +96,14 @@ Section
 	{
 		title:		qsTr("Meta-Regression")
 		enabled:	predictors.count > 0
+		info: qsTr("Create summaries of the meta-regression. Available when predictors are included.")
 
 		CheckBox
 		{
 			name:		"metaregressionTermTests"
 			text:		qsTr("Term tests")
 			checked:	true
+			info: qsTr("Include tests for each term in the meta-regression model.")
 		}
 
 		CheckBox
@@ -101,6 +111,7 @@ Section
 			name:		"metaregressionCoefficientEstimates"
 			text:		qsTr("Coefficient estimates")
 			checked:	true
+			info: qsTr("Include estimates of the regression coefficients in the meta-regression model.")
 		}
 
 		CheckBox
@@ -108,6 +119,7 @@ Section
 			name:		"metaregressionCoefficientCorrelationMatrix"
 			text:		qsTr("Coefficient correlation matrix")
 			checked:	false
+			info: qsTr("Include the correlation matrix of the regression coefficients.")
 		}
 	}
 
@@ -119,6 +131,7 @@ Section
 			text:				qsTr("Confidence intervals")
 			checked:			true
 			childrenOnSameRow:	true
+			info: qsTr("Include confidence intervals in the tabular output.")
 
 			CIField
 			{
@@ -131,6 +144,7 @@ Section
 			text:		qsTr("Prediction intervals")
 			name:		"predictionIntervals"
 			checked:	true
+			info: qsTr("Include prediction intervals in the tabular output.")
 		}
 
 		DropDown
@@ -138,6 +152,7 @@ Section
 			name:			"transformEffectSize"
 			label:			qsTr("Transform effect size")
 			setLabelAbove:	true
+			info: qsTr("Select a transformation to apply to the effect size estimates in the output. This transformation applies to the 'Meta-Analytic Estimates Table', 'Estimated Marginal Means Table', 'Forest Plot', and  the 'Bubble Plot'. The 'Meta-Regression Coeffient Estimates' are not transformed.")
 			values:			[
 					{ label: qsTr("None")								, value: "none"							},  // NULL
 					{ label: qsTr("Fisher's z to r")					, value: "fishersZToCorrelation"		},  // transf.ztor
@@ -162,6 +177,7 @@ Section
 	{
 		name:		"fitMeasures"
 		text:		qsTr("Fit measures")
+		info: qsTr("Include fit statistics for the model, such as AIC and BIC.")
 	}
 
 }

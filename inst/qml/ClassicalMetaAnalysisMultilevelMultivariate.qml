@@ -41,6 +41,7 @@ Form
 			title:				qsTr("Effect Size")
 			singleVariable:		true
 			allowedColumns:		["scale"]
+			info: qsTr("Variable containing the observed effect sizes.")
 		}
 
 		AssignedVariablesList
@@ -50,6 +51,7 @@ Form
 			title:				qsTr("Effect Size Standard Error")
 			singleVariable:		true
 			allowedColumns:		["scale"]
+			info: qsTr("Variable containing the standard errors corresponding to the effect sizes.")
 		}
 
 		DropDown
@@ -58,6 +60,7 @@ Form
 			id:				method
 			label:			qsTr("Method")
 			startValue:		"restrictedML"
+			info: qsTr("Method used to estimate heterogeneity in the meta-analysis.")
 			values:			[
 						{ label: qsTr("Maximum Likelihood")		, value: "maximumLikelihood"},
 						{ label: qsTr("Restricted ML")			, value: "restrictedML"		}
@@ -70,6 +73,7 @@ Form
 			label:				qsTr("Fixed effect test")
 			startValue:			"t"
 			values:				[ "z", "t"]
+			info: qsTr("Method for testing the model coefficients: 'z' uses standard normal approximation, 't' uses t-distribution.")
 		}
 
 		AssignedVariablesList
@@ -78,6 +82,7 @@ Form
 			id:					predictors
 			title:				qsTr("Predictors")
 			allowedColumns:		["nominal", "scale"]
+			info: qsTr("Variables to include as predictors (moderators) in the meta-regression model.")
 		}
 
 		AssignedVariablesList
@@ -87,6 +92,7 @@ Form
 			title:				qsTr("Clustering")
 			singleVariable:		true
 			allowedColumns:		["nominal"]
+			info: qsTr("Variable indicating clustering of effect sizes. This option is disabled when permutation tests are selected.")
 		}
 
 		AssignedVariablesList
@@ -95,6 +101,7 @@ Form
 			title:				qsTr("Study Labels")
 			singleVariable:		true
 			allowedColumns:		["nominal"]
+			info: qsTr("Variable containing labels for the studies. Used for labeling outputs and plots.")
 		}
 	}
 
@@ -102,7 +109,8 @@ Form
 	Section
 	{	
 		title:		qsTr("Random Effects / Model Structure")
-		expanded:		true
+		expanded:	true
+		info: qsTr("Specify the random effects structure for the meta-analysis model, including the types of random effects and their associated variables. Allows modeling of complex data structures such as multilevel, multivariate, autoregressive, spatial, and other forms of dependency.")
 
 		ComponentsList
 		{
@@ -130,6 +138,7 @@ Form
 				{
 					id:			type
 					name:		"type"
+					info: qsTr("Type of random effect to include in the model.")
 					values: [
 					{ label: qsTr("Simple"),				value: "simple"},
 					{ label: qsTr("Nested (multilevel)"),	value: "nested"},
@@ -147,6 +156,7 @@ Form
 					name:		"structure"
 					label:		qsTr("Structure")
 					visible:	type.value == "structured" || type.value == "autoregressive" || type.value == "spatial"
+					info: qsTr("Structure of the random effect when the type is 'Structured', 'Autoregressive', or 'Spatial'. Available structures depend on the selected type.")
 					values: (function() {
 						if (type.value == "structured") {
 							return [
@@ -214,6 +224,7 @@ Form
 						visible:			typeValue == "randomSlopes"
 						listViewType:		JASP.Interaction
 						allowedColumns:		["nominal", "scale"] // this should be choose on assignment 
+						info: qsTr("Variables to include as random slope terms in the model. Available when the random effect type is 'Random slopes'.")
 						addAvailableVariablesToAssigned: false
 					}
 
@@ -223,6 +234,7 @@ Form
 						title:				qsTr("Factor Levels")
 						visible:			typeValue == "structured"
 						singleVariable:		true
+						info: qsTr("Variable indicating the factor levels ('Inner Term') for the structured random effect. Available when the random effect type is 'Structured'.")
 						allowedColumns:		["nominal"]
 					}
 
@@ -279,6 +291,7 @@ Form
 						visible:			typeValue == "autoregressive"
 						singleVariable:		true
 						allowedColumns:		["ordinal", "scale"] // scale for continuous time AR otherwise ordinal
+						info: qsTr("Variable indicating time points for an autoregressive random effects structure. Available when the random effect type is 'Autoregressive'.")
 					}
 
 					AssignedVariablesList
@@ -287,6 +300,7 @@ Form
 						title:				qsTr("Spatial Coordinates")
 						visible:			typeValue == "spatial" && distanceMetric.value != "greatCircle" && distanceMetric.value != "loadFromFile"
 						allowedColumns:		["scale"] 
+						info: qsTr("Variables representing spatial coordinates for a spatial random effects structure. Available when the random effect type is 'Spatial' and the distance metric is not 'Great-circle' or prespecified in a file.")
 					}
 
 					AssignedVariablesList
@@ -296,6 +310,7 @@ Form
 						visible:			typeValue == "spatial" && distanceMetric.value == "greatCircle"
 						allowedColumns:		["scale"] 
 						singleVariable:		true
+						info: qsTr("Variable representing longitude (in decimal degrees, with minus signs for West) for a spatial random effects structure using the 'Great-circle' distance metric. Available when the random effect type is 'Spatial' and the distance metric is 'Great-circle'.")
 					}
 
 					AssignedVariablesList
@@ -305,6 +320,7 @@ Form
 						visible:			typeValue == "spatial" && distanceMetric.value == "greatCircle"
 						allowedColumns:		["scale"] 
 						singleVariable:		true
+						info: qsTr("Variable representing latitude (in decimal degrees, with minus signs for South) for a spatial random effects structure using the 'Great-circle' distance metric. Available when the random effect type is 'Spatial' and the distance metric is 'Great-circle'.")
 					}
 
 					AssignedVariablesList
@@ -314,6 +330,7 @@ Form
 						visible:			typeValue == "spatial" && distanceMetric.value == "loadFromFile"
 						allowedColumns:		["nominal"] 
 						singleVariable:		true
+						info: qsTr("Variable identifying locations when loading distances matrix from a file for a spatial random effects structure. The location corresponds to the row and column names of the distance matrix. The names cannot start with a number.")
 					}
 
 					AssignedVariablesList
@@ -323,6 +340,7 @@ Form
 						visible:			typeValue != "nested"
 						singleVariable:		true
 						allowedColumns:		["nominal"]
+						info: qsTr("Grouping variable specifying which observations share the same random effect ('Outer Term'). Available for random effect types other than 'Nested (Multilevel)'. The 'Grouping Factor' is not required for 'Spatial' Random Effects.")
 					}
 				}
 
@@ -332,6 +350,7 @@ Form
 					id:			distanceMetric
 					label:		qsTr("Distance metric")
 					visible:	typeValue == "spatial"
+					info: qsTr("Distance metric used to calculate distances in a spatial random effects structure. Available when the random effect type is 'Spatial'.")
 					values:		[
 						{ label: qsTr("Euclidean"),			value: "euclidean" },
 						{ label: qsTr("Manhattan"),			value: "manhattan" },
@@ -348,6 +367,8 @@ Form
 					visible:	typeValue == "spatial" && distanceMetric.value == "loadFromFile"
 					filter:		"*.csv"
 					save:		false
+					info: qsTr("CSV file containing the distance matrix for the spatial random effects structure. The first row and the first column of the file must contain names that map the matrix entries to the 'Location Identifier' (the names cannot start with a number). Available when the random effect type is 'Spatial' and the distance metric is loaded from a file.")
+
 				}
 
 				FileSelector
@@ -357,6 +378,7 @@ Form
 					visible:	typeValue == "knownCorrelation"
 					filter:		"*.csv"
 					save:		false
+					info: qsTr("CSV file containing the known correlation matrix for the random effects structure. The first row and the first column of the file must contain names that map the matrix entries to the 'Grouping Factor' (the names cannot start with a number). Available when the random effect type is 'Known correlation'.")
 				}
 
 				Divider { }

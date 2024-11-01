@@ -36,6 +36,7 @@ Section
 	Group
 	{
 		title: qsTr("Effect size model")
+		info: qsTr("Specify the effect size and heterogeneity models for the meta-analysis, including model terms, intercepts, and link functions.")
 
 		VariablesForm
 		{
@@ -55,6 +56,7 @@ Section
 				title:			qsTr("Model Terms")
 				listViewType:	JASP.Interaction
 				allowTypeChange:false
+				info: qsTr("Variables assigned as model terms in the effect size model.")
 			}
 		}
 
@@ -63,6 +65,7 @@ Section
 			name:				"effectSizeModelIncludeIntercept"
 			label:				qsTr("Include intercept")
 			checked:			true
+			info: qsTr("Include an intercept in the effect size model.")
 		}
 	}
 
@@ -71,6 +74,7 @@ Section
 		title:			qsTr("Heterogeneity model")
 		visible:		module =="metaAnalysis"
 		columns:		2
+		info: qsTr("Unvailable when performing multilevel/multivariate meta-analysis.")
 
 		VariablesForm
 		{
@@ -91,6 +95,7 @@ Section
 				listViewType:	JASP.Interaction
 				allowTypeChange:false
 				addAvailableVariablesToAssigned: false
+				info: qsTr("Variables assigned as model terms in the heterogeneity model. Specifying a heterogeneity model results in a 'location-scale' meta-analytic model.")
 			}
 		}
 
@@ -99,6 +104,7 @@ Section
 			name:		"heterogeneityModelIncludeIntercept";
 			label:		qsTr("Include intercept")
 			checked:	true
+			info: qsTr("Include an intercept in the heterogeneity model.")
 		}
 
 		DropDown
@@ -107,6 +113,7 @@ Section
 			id:			heterogeneityModelLink
 			label:		qsTr("Link")
 			values:		["log", "identity"]
+			info: qsTr("Link function used in the heterogeneity model: 'log' or 'identity'.")
 		}
 	}
 }

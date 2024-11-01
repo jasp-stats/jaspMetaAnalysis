@@ -25,6 +25,7 @@ Section
 {
 	title:						qsTr("Bubble Plot")
 	property string module:		"metaAnalysis"
+	info: qsTr("Options for visualizing the estimated effect sizes at different levels of the predictors with the observed estimates visualized as bubbles. Continuous predictors can be split into three bins with cutoffs at ±x standard deviations from the mean. Predictors that are not specified for either the x-axis, lines, or plots are averaged over.")
 
 	VariablesForm
 	{
@@ -33,7 +34,7 @@ Section
 		AvailableVariablesList
 		{
 			name:			"bubblePlotModelVariables"
-			title:			qsTr("Model variables")
+			title:			qsTr("Model Variables")
 			source:			[{ name: "effectSizeModelTerms", use: "noInteraction" }]
 		}
 
@@ -41,9 +42,10 @@ Section
 		{
 			name:			"bubblePlotSelectedVariable"
 			id:				bubblePlotSelectedVariable
-			title:			qsTr("Selected variable")
+			title:			qsTr("Selected Variable")
 			singleVariable:	true
 			allowTypeChange:false
+			info: qsTr("Variable to be visualized at the x-axis.")
 		}
 
 		AssignedVariablesList
@@ -52,6 +54,7 @@ Section
 			id:				bubblePlotSeparateLines
 			title:			qsTr("Separate Lines")
 			allowTypeChange:false
+			info: qsTr("Variable(s) according to which predictions are split across different lines.")
 		}
 
 		AssignedVariablesList
@@ -60,6 +63,7 @@ Section
 			id:				bubblePlotSeparatePlots
 			title:			qsTr("Separate Plots")
 			allowTypeChange:false
+			info: qsTr("Variable(s) according to which predictions are split across different plots.")
 		}
 	}
 
@@ -77,6 +81,7 @@ Section
 				min:			0
 				enabled:		bubblePlotSeparateLines.columnsTypes.includes("scale") || bubblePlotSeparatePlots.columnsTypes.includes("scale")
 				Layout.preferredWidth: 300 * jaspTheme.uiScale
+				info: qsTr("Standard deviation cutoff used for binning continuous covariates.")
 			}
 
 			Group
@@ -87,6 +92,7 @@ Section
 				{
 					name:		"bubblePlotBubblesSize"
 					label:		qsTr("Size")
+					info: qsTr("Options for determining the size of the observed estimates.")
 					values:		[
 						{ label: qsTr("Weight")				, value: "weight"},
 						{ label: qsTr("Inverse variance")	, value: "inverseVariance"	},
@@ -101,6 +107,7 @@ Section
 					defaultValue:	1
 					min:			0
 					inclusive: 		JASP.None
+					info: qsTr("Set the relative size of the observed estimates.")
 				}
 
 				DoubleField
@@ -111,6 +118,7 @@ Section
 					min:			0
 					max:			1
 					inclusive: 		JASP.None
+					info: qsTr("Set the transparency of the observed estimates.")
 				}
 
 				DoubleField
@@ -120,6 +128,7 @@ Section
 					label:			qsTr("Jitter")
 					defaultValue:	1
 					min:			0
+					info: qsTr("Set the degree of x-coordinate jitter of the observed estimates. Available when the x-axis variable is nominal.")
 				}
 			}
 		}
@@ -131,6 +140,7 @@ Section
 				name:		"bubblePlotConfidenceIntervals"
 				label:		qsTr("Condifence intervals")
 				checked:	true
+				info: qsTr("Include confidence interval of the estimated effect sizes.")
 
 				DoubleField
 				{
@@ -148,6 +158,7 @@ Section
 				name:		"bubblePlotPredictionIntervals"
 				label:		qsTr("Prediction intervals")
 				checked:	true
+				info: qsTr("Include prediction interval of the estimated effect sizes.")
 
 				DoubleField
 				{
@@ -172,6 +183,7 @@ Section
 				id:				bubblePlotTheme	
 				label:			qsTr("Theme")
 				startValue:		"jasp"
+				info: qsTr("Set theme of the bubble plot.")
 				values:
 				[
 					{ label: "JASP",					value: "jasp"},
@@ -191,12 +203,14 @@ Section
 				defaultValue:	1.5
 				min:			0
 				inclusive: 		JASP.None
+				info: qsTr("Adjust the text size of the bubble plot.")
 			}
 
 			DropDown
 			{
 				name:			"bubblePlotLegendPosition"
 				label:			qsTr("Legend position")
+				info: qsTr("Set legend of the bubble plot.")
 				startValue:		"right"
 				values:
 				[

@@ -40,6 +40,7 @@ Form
 			title:				qsTr("Effect Size")
 			singleVariable:		true
 			allowedColumns:		["scale"]
+			info: qsTr("Variable containing the observed effect sizes.")
 		}
 		AssignedVariablesList
 		{
@@ -48,6 +49,7 @@ Form
 			title:				qsTr("Effect Size Standard Error")
 			singleVariable:		true
 			allowedColumns:		["scale"]
+			info: qsTr("Variable containing the standard errors corresponding to the effect sizes.")
 		}
 
 		DropDown
@@ -56,6 +58,7 @@ Form
 			id:				method
 			label:			qsTr("Method")
 			startValue:		"restrictedML"
+			info: qsTr("Method used to estimate heterogeneity (tau-squared) in the meta-analysis. The available methods depend on the inclusion of heterogeneity model terms.")
 			values:			(function() {
 				if (sectionModel.heterogeneityModelTermsCount == 0) {
 					return [
@@ -89,6 +92,7 @@ Form
 			label:		qsTr("Fixed effect test")
 			startValue:	"knha"
 			values:		[ "z", "t", "knha"]
+			info: qsTr("Method for testing the model coefficients: 'z' uses standard normal approximation, 't' uses t-distribution, and 'knha' uses the Knapp and Hartung adjustment (default).")
 		}
 
 		AssignedVariablesList
@@ -98,6 +102,7 @@ Form
 			title:				qsTr("Predictors")
 			allowedColumns:		["nominal", "scale"]
 			allowTypeChange:	true
+			info: qsTr("Variables to include as predictors (moderators) in the meta-regression model.")
 		}
 
 		AssignedVariablesList
@@ -108,6 +113,7 @@ Form
 			singleVariable:		true
 			enabled:			!sectionAdvanced.permutationTestChecked
 			allowedColumns:		["nominal"]
+			info: qsTr("Variable indicating clustering of effect sizes. This option is disabled when permutation tests are selected.")
 		}
 
 		AssignedVariablesList
@@ -116,6 +122,7 @@ Form
 			title:				qsTr("Study Labels")
 			singleVariable:		true
 			allowedColumns:		["nominal"]
+			info: qsTr("Variable containing labels for the studies. Used for labeling outputs and plots.")
 		}
 	}
 
