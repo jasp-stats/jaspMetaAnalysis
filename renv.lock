@@ -185,7 +185,7 @@
     },
     "Rcpp": {
       "Package": "Rcpp",
-      "Version": "1.0.13",
+      "Version": "1.0.13-1",
       "Source": "Repository",
       "Requirements": [
         "methods",
@@ -644,7 +644,7 @@
     },
     "gdtools": {
       "Package": "gdtools",
-      "Version": "0.4.0",
+      "Version": "0.4.1",
       "Source": "Repository",
       "Requirements": [
         "R",
@@ -928,7 +928,7 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspBase",
-      "RemoteSha": "f8bfb18768b3a62e8dafca47e523c3c621edd68a"
+      "RemoteSha": "67652e03f135b8d9b7c42e353a0fe02b9fea0929"
     },
     "jaspGraphs": {
       "Package": "jaspGraphs",
@@ -951,7 +951,7 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspGraphs",
-      "RemoteSha": "550191feb1f662ba400e9b96617050aad4927048"
+      "RemoteSha": "5c2914842658f33a6e88d10ba90f1ee9a8a2efda"
     },
     "jpeg": {
       "Package": "jpeg",
@@ -1256,7 +1256,7 @@
     },
     "mvtnorm": {
       "Package": "mvtnorm",
-      "Version": "1.3-1",
+      "Version": "1.3-2",
       "Source": "Repository",
       "Requirements": [
         "R",
@@ -1674,7 +1674,7 @@
     },
     "rmarkdown": {
       "Package": "rmarkdown",
-      "Version": "2.28",
+      "Version": "2.29",
       "Source": "Repository",
       "Requirements": [
         "R",
@@ -1993,7 +1993,7 @@
     },
     "tinytex": {
       "Package": "tinytex",
-      "Version": "0.53",
+      "Version": "0.54",
       "Source": "Repository",
       "Requirements": [
         "xfun"
