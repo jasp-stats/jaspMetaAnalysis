@@ -7,6 +7,7 @@ Description
 	title : 		qsTr("Meta-Analysis")
 	description:	qsTr("Synthesize evidence across multiple studies")
 	requiresData:	false
+	preloadData:	true
 	icon:			"meta-analysis.svg"
 	version			: "0.19.2"
 	author:			"JASP Team"
@@ -14,10 +15,33 @@ Description
 	website:		"jasp-stats.org"
 	license:		"GPL (>= 2)"
 
+
 	GroupTitle
 	{
-		title:	qsTr("Classical")
-		icon:	"meta-analysis.svg"
+		title:		qsTr("Miscellaneous")
+		icon:		"meta-analysis.svg"
+	}
+
+	Analysis
+	{
+		menu:			qsTr("Effect Size Computation")
+		title:			qsTr("Effect Size Computation")
+		func:			"EffectSizeComputation"
+		requiresData:	true
+	}
+
+	Analysis
+	{
+		menu:			qsTr("Funnel Plot")
+		title:			qsTr("Funnel Plot")
+		func:			"FunnelPlot"
+		requiresData:	true
+	}
+
+	GroupTitle
+	{
+		title:		qsTr("Classical")
+		icon:		"meta-analysis.svg"
 	}
 
 	Analysis
@@ -25,6 +49,14 @@ Description
 		menu:			qsTr("Meta-Analysis")
 		title:			qsTr("Classical Meta-Analysis")
 		func:			"ClassicalMetaAnalysis"
+		requiresData:	true
+	}
+
+	Analysis
+	{
+		menu:			qsTr("Meta-Analysis (Multilevel/Multivariate)")
+		title:			qsTr("Classical Meta-Analysis (Multilevel/Multivariate)")
+		func:			"ClassicalMetaAnalysisMultilevelMultivariate"
 		requiresData:	true
 	}
 
@@ -59,8 +91,8 @@ Description
 
 	GroupTitle
 	{
-		title: 	qsTr("Bayesian")
-		icon:	"meta-analysis-bayesian.svg"
+		title:	 	qsTr("Bayesian")
+		icon:		"meta-analysis-bayesian.svg"
 	}
 
 	Analysis

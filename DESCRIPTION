@@ -28,7 +28,12 @@ Imports:
   RoBMA,
   metamisc (>= 0.2.5),
   ggmcmc,
-  pema
+  pema,
+  clubSandwich,
+  CompQuadForm,
+  sp,
+  dfoptim,
+  patchwork
 Remotes:
   jasp-stats/jaspBase,
   jasp-stats/jaspGraphs

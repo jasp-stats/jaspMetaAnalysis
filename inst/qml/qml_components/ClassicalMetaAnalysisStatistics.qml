@@ -23,72 +23,161 @@ import JASP				1.0
 
 Section
 {
-	title: qsTr("Statistics")
-	property string module:	"metaAnalysis"
+	title:						qsTr("Statistics")
+	columns: 					2
+	property string module:		"metaAnalysis"
+	info: qsTr("Options for summarizing the meta-analytic results.")
 
 	Group
 	{
-		title: qsTr("Regression Coefficients")
+		title:		qsTr("Heterogeneity")
+		columns:	2
+		enabled:	method.value != "fixedEffects" && method.value != "equalEffects"
+		visible:	module == "metaAnalysis"
+		info: qsTr("Summarize the meta-analytic between-study heterogeneity. Unvailable when performing multilevel/multivariate meta-analysis.")
+
 		CheckBox
 		{
-			name: "coefficientEstimate";
-			text: qsTr("Estimates");
-			checked: true
-			onClicked: { if (!checked && estimatesConfInt.checked) estimatesConfInt.click() }
-			CheckBox
+			text:		qsTr("𝜏")
+			name:		"heterogeneityTau"
+			checked:	true
+			info: qsTr("Include 𝜏, the square root of the estimated between-study variance.")
+		}
+
+		CheckBox
+		{
+			text:		qsTr("𝜏²")
+			name:		"heterogeneityTau2"
+			checked:	true
+			info: qsTr("Include 𝜏², the estimated between-study variance.")
+		}
+
+		CheckBox
+		{
+			text:		qsTr("I²")
+			name:		"heterogeneityI2"
+			checked:	false
+			info: qsTr("Include I², the percentage of total variation across studies due to heterogeneity.")
+		}
+
+		CheckBox
+		{
+			text:		qsTr("H²")
+			name:		"heterogeneityH2"
+			checked:	false
+			info: qsTr("Include H², an index indicating the ratio of total variability to sampling variability.")
+		}
+	}
+
+	Group
+	{
+		title:		qsTr("Random Effects / Model Structure")
+		visible:	module == "metaAnalysisMultilevelMultivariate"
+		info: qsTr("Available when performing multilevel/multivariate meta-analysis.")
+
+		CheckBox
+		{
+			text:		qsTr("Test inclusion")
+			name:		"randomEffectsTestInclusion"
+			checked:	false
+			info: qsTr("Test the inclusion of the individual Random Effects / Model Structure components. The test compares the complete model (i.e., including all components) with a model without one of the specified Random Effects / Model Structure components at a time.")
+		}
+		/* TODO: will require a lot of work in sorting out which value belongs where
+		CheckBox
+		{
+			text:		qsTr("Confidence intervals")
+			name:		"randomEffectsConfidenceIntervals"
+			checked:	false
+		}
+		*/	
+	}
+
+	Group
+	{
+		title:		qsTr("Meta-Regression")
+		enabled:	predictors.count > 0
+		info: qsTr("Create summaries of the meta-regression. Available when predictors are included.")
+
+		CheckBox
+		{
+			name:		"metaregressionTermTests"
+			text:		qsTr("Term tests")
+			checked:	true
+			info: qsTr("Include tests for each term in the meta-regression model. The null hypothesis states that the effect size at all levels of the categorical variable are equal or that there is no linear association between the effect size and the continuous variable).")
+		}
+
+		CheckBox
+		{
+			name:		"metaregressionCoefficientEstimates"
+			text:		qsTr("Coefficient estimates")
+			checked:	true
+			info: qsTr("Include estimates of the regression coefficients in the meta-regression model.")
+		}
+
+		CheckBox
+		{
+			name:		"metaregressionCoefficientCorrelationMatrix"
+			text:		qsTr("Coefficient correlation matrix")
+			checked:	false
+			info: qsTr("Include the correlation matrix of the regression coefficients.")
+		}
+	}
+
+	Group
+	{
+		CheckBox
+		{
+			name:				"confidenceIntervals"
+			text:				qsTr("Confidence intervals")
+			checked:			true
+			childrenOnSameRow:	true
+			info: qsTr("Include confidence intervals in the tabular output.")
+
+			CIField
 			{
-				id: estimatesConfInt
-				name: "coefficientCi"; text: qsTr("Confidence intervals")
-				CIField { name: "coefficientCiLevel"; label: qsTr("Interval") }
+				name:		"confidenceIntervalsLevel"
 			}
 		}
-		DropDown { name: "estimateTest"; label: qsTr("Test"); values: [ "z", "knha"]; }
-		CheckBox { name: "covarianceMatrix"; text: qsTr("Covariance matrix") }
 
-	}
-	Group
-	{
-		title: qsTr("Model Fit")
-		CheckBox { name: "fitMeasure";				text: qsTr("Fit measures") }
 		CheckBox
 		{
-			id:			forestPlot
-			name: 		"forestPlot"
-			text: 		qsTr("Forest plot")
-			
-			CheckBox
-			{
-				name:		"forestPlotLabel"
-				text:		qsTr("Show labels")
-				checked:	true
-				enabled: 	forestPlot.checked	
-				visible:	module == "cochrane"
-			}
+			text:		qsTr("Prediction intervals")
+			name:		"predictionIntervals"
+			checked:	true
+			info: qsTr("Include prediction intervals in the tabular output.")
+		}
 
-			DropDown
-			{
-				name:			"forestPlotOrder"
-				label:			qsTr("Ordering")
-				enabled: 		forestPlot.checked
-				visible:		module == "cochrane"
-				currentIndex:	1
-				values: [
-					{ label: qsTr("Year (ascending)")			, value: "yearAscending"			},
-					{ label: qsTr("Year (descending)")			, value: "yearDescending"			},
-					{ label: qsTr("Effect size (ascending)")	, value: "effectSizeAscending"		},
-					{ label: qsTr("Effect size (descending)")	, value: "effectSizeDescending"		}
+		DropDown
+		{//TODO: make shorter or across both rows?
+			name:			"transformEffectSize"
+			label:			qsTr("Transform effect size")
+			setLabelAbove:	true
+			info: qsTr("Select a transformation to apply to the effect size estimates in the output. This transformation applies to the 'Meta-Analytic Estimates Table', 'Estimated Marginal Means Table', 'Forest Plot', and  the 'Bubble Plot'. The 'Meta-Regression Coeffient Estimates' are not transformed.")
+			values:			[
+					{ label: qsTr("None")								, value: "none"							},  // NULL
+					{ label: qsTr("Fisher's z to r")					, value: "fishersZToCorrelation"		},  // transf.ztor
+					{ label: qsTr("Exponential")						, value: "exponential"					},  // exp
+					{ label: qsTr("Log odds to proportions")			, value: "logOddsToProportions"			},  // transf.logit
+					{ label: qsTr("Log odds to SMD (normal)")			, value: "logOddsToSmdNormal"			},  // transf.lnortod.norm
+					{ label: qsTr("Log odds to SMD (logistic)")			, value: "logOddsToSmdLogistic"			},  // transf.lnortod.logis
+					{ label: qsTr("SMD to log odds (normal)")			, value: "smdToLogOddsNormal"			},  // transf.dtolnor.norm
+					{ label: qsTr("SMD to log odds (logistic)")			, value: "smdToLogOddsLogistic"			},  // transf.dtolnor.logis
+					{ label: qsTr("Hakstian & Whalen inverse α")		, value: "hakstianAndWhalenInverseAlpha"},  // transf.iahw 
+					{ label: qsTr("Bonett inverse α")					, value: "bonettInverseAlpha"			},  // transf.iabt
+					{ label: qsTr("Z to R²")							, value: "zToR2"						}, 	// transf.ztor2
+					{ label: qsTr("SMD to Cohen's U₁")					, value: "smdToCohensU1"				},  // transf.dtou1
+					{ label: qsTr("SMD to Cohen's U₂")					, value: "smdToCohensU2"				},  // transf.dtou2
+					{ label: qsTr("SMD to Cohen's U₃")					, value: "smdToCohensU3"				},  // transf.dtou3
+					{ label: qsTr("SMD to CLES, Pr(supperiority)")		, value: "smdToCles"					},  // transf.dtocles
 				]
-			}
-		
 		}
-		CheckBox { name: "funnelPlot";				text: qsTr("Funnel plot") }
-		CheckBox { name: "funnelPlotRankTestAsymmetry";			text: qsTr("Rank test for funnel plot asymmetry") }
-		CheckBox { name: "funnelPlotRegressionTestAsymmetry"; text: qsTr("Regression test for funnel plot asymmetry") }
 	}
 
-	Group
+	CheckBox
 	{
-		title: qsTr("Residuals Model")
-		CheckBox { name: "residualParameter"; text: qsTr("Residuals parameters"); checked: true;}
+		name:		"fitMeasures"
+		text:		qsTr("Fit measures")
+		info: qsTr("Include fit statistics for the model, such as AIC and BIC.")
 	}
+
 }

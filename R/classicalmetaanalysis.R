@@ -15,83 +15,181 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-# This is a temporary fix
-# TODO: remove it when R will solve this problem!
-gettextf <- function(fmt, ..., domain = NULL)  {
-  return(sprintf(gettext(fmt, domain = domain), ...))
-}
 
 ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   options[["module"]] <- "metaAnalysis"
 
-  ready <- options$effectSize != "" && options$effectSizeSe != "" && (options$interceptTerm || length(options$modelTerms) > 0)
-  if(ready) {
-    dataset <- .metaAnalysisReadData(dataset, options)
-    .metaAnalysisCheckErrors(dataset, options)
+  if (.maReady(options)) {
+    dataset <- .maCheckData(dataset, options)
+    .maCheckErrors(dataset, options)
   }
 
-  container <- .metaAnalysisGetOutputContainer(jaspResults)
 
-  .ClassicalMetaAnalysisCommon(container, dataset, ready, options)
+  .ClassicalMetaAnalysisCommon(jaspResults, dataset, options)
 
   return()
 }
 
-.metaAnalysisGetOutputContainer <- function(jaspResults) {
-  if (!is.null(jaspResults[["modelContainer"]])) {
-    modelContainer <- jaspResults[["modelContainer"]]
-  } else {
-    modelContainer <- createJaspContainer()
-    modelContainer$dependOn(c("effectSize", "effectSizeSe", "method", "studyLabel", "covariates", "estimateTest",
-                              "factors", "modelTerms", "interceptTerm", "coefficientCiLevel"))
-    jaspResults[["modelContainer"]] <- modelContainer
-  }
-  return(modelContainer)
-}
-
-.metaAnalysisReadData <- function(dataset, options) {
-  if (!is.null(dataset))
-    return(dataset)
-  else {
-    effsizeName <- unlist(options$effectSize)
-    stderrName  <- unlist(options$effectSizeSe)
-    covarNames  <- if (length(options$covariates) > 0) unlist(options$covariates)
-    factNames   <- if (length(options$factors) > 0) unlist(options$factors)
-
-    numeric.variables <- Filter(function(s) s != "", c(effsizeName, covarNames, stderrName))
-    factor.variables  <- Filter(function(s) s != "", c(factNames, options$studyLabel))
-    return(.readDataSetToEnd(columns.as.factor   = factor.variables,
-                             columns.as.numeric  = numeric.variables,
-                             exclude.na.listwise = numeric.variables))
-  }
-}
-
-.metaAnalysisCheckErrors <- function(dataset, options){
-  effsizeName <- unlist(options$effectSize)
-  stderrName  <- unlist(options$effectSizeSe)
-  covarNames  <- if (length(options$covariates) > 0) unlist(options$covariates)
-  numeric.variables <- Filter(function(s) s != "", c(effsizeName, covarNames, stderrName))
-  .hasErrors(dataset              = dataset,
-             type                 = c("infinity", "observations", "variance"),
-             all.target           = numeric.variables,
-             observations.amount  = "< 2",
-             exitAnalysisIfErrors = TRUE)
-  .hasErrors(dataset              = dataset,
-             type                 = c("modelInteractions"),
-             modelInteractions.modelTerms = options$modelTerms,
-             exitAnalysisIfErrors = TRUE)
-  .hasErrors(dataset              = dataset,
-             seCheck.target       = options[["effectSizeSe"]],
-             custom               = .metaAnalysisCheckSE,
-             exitAnalysisIfErrors = TRUE)
-}
-
-.metaAnalysisCheckSE <- list(
-  seCheck = function(dataset, target) {
-    nonPositive <- !all(na.omit(dataset[,target]) > 0)
-    if (nonPositive) {
-      return(gettext("All standard errors/sample sizes must be positive."))
-    }
-  }
+.maDependencies        <- c(
+  "effectSize", "effectSizeStandardError", "predictors", "predictors.types", "clustering", "method", "fixedEffectTest",
+  "effectSizeModelTerms", "effectSizeModelIncludeIntercept",
+  "clusteringUseClubSandwich", "clusteringSmallSampleCorrection",
+  "confidenceIntervalsLevel",
+  "fixParametersTau2", "fixParametersTau2Value",
+  "fixParametersWeights", "fixParametersWeightsVariable",
+  "weightedEstimation",
+  "diagnosticsCasewiseDiagnosticsRerunWithoutInfluentialCases",
+  # optimizer settings
+  "optimizerMethod", "optimizerInitialTau2", "optimizerInitialTau2Value",
+  "optimizerMinimumTau2", "optimizerMinimumTau2Value", "optimizerMaximumTau2", "optimizerMaximumTau2Value",
+  "optimizerMaximumIterations", "optimizerMaximumIterationsValue", "optimizerConvergenceTolerance", "optimizerConvergenceToleranceValue",
+  "optimizerConvergenceRelativeTolerance", "optimizerConvergenceRelativeToleranceValue", "optimizerStepAdjustment", "optimizerStepAdjustmentValue",
+  "optimizerMaximumEvaluations", "optimizerMaximumEvaluationsValue",
+  "optimizerInitialTrustRegionRadius", "optimizerInitialTrustRegionRadiusValue", "optimizerFinalTrustRegionRadius", "optimizerFinalTrustRegionRadiusValue",
+  "optimizerMaximumRestarts", "optimizerMaximumRestartsValue",
+  "advancedExtendMetaforCall", "advancedExtendMetaforCallCode",
+  # simple ma specific
+  "heterogeneityModelTerms", "heterogeneityModelIncludeIntercept", "heterogeneityModelLink",
+  "permutationTest", "permutationTestIteration", "permutationTestType", "setSeed", "seed",
+  # multilevel/multivariate specific
+  "randomEffects", "randomEffectsSpecification",
+  "computeCovarianceMatrix", "computeCovarianceMatrix"
 )
+.maForestPlotDependencies <- c(
+  .maDependencies, "transformEffectSize", "confidenceIntervalsLevel",
+  "forestPlotStudyInformation",
+  "forestPlotStudyInformationAllVariables",
+  "forestPlotStudyInformationSelectedVariables",
+  "forestPlotStudyInformationSelectedVariablesSettings",
+  "forestPlotStudyInformationPredictedEffects",
+  "forestPlotStudyInformationStudyWeights",
+  "forestPlotStudyInformationOrderBy",
+  "forestPlotStudyInformationOrderAscending",
+  "forestPlotEstimatedMarginalMeans",
+  "forestPlotEstimatedMarginalMeansModelVariables",
+  "forestPlotEstimatedMarginalMeansSelectedVariables",
+  "forestPlotEstimatedMarginalMeansTermTests",
+  "forestPlotEstimatedMarginalMeansCoefficientTests",
+  "forestPlotEstimatedMarginalMeansCoefficientTestsAgainst",
+  "forestPlotEstimatedMarginalMeansAdjustedEffectSizeEstimate",
+  "forestPlotModelInformation",
+  "forestPlotPooledEffectSizeEstimate",
+  "forestPlotPooledEffectSizeTest",
+  "forestPlotResidualHeterogeneityTest",
+  "forestPlotResidualHeterogeneityEstimate",
+  "forestPlotEffectSizeModerationTest",
+  "forestPlotHeterogeneityModerationTest",
+  "forestPlotPredictionIntervals",
+  "forestPlotEstimatesAndConfidenceIntervals",
+  "forestPlotTestsInRightPanel",
+  "forestPlotMappingColor",
+  "forestPlotMappingShape",
+  "forestPlotRelativeSizeEstimates",
+  "forestPlotRelativeSizeText",
+  "forestPlotRelativeSizeAxisLabels",
+  "forestPlotRelativeSizeRow",
+  "forestPlotRelativeSizeLeftPanel",
+  "forestPlotRelativeSizeMiddlePanel",
+  "forestPlotRelativeSizeRightPanel",
+  "forestPlotAuxiliaryAdjustWidthBasedOnText",
+  "forestPlotAuxiliaryDigits",
+  "forestPlotAuxiliaryTestsInformation",
+  "forestPlotAuxiliaryPlotColor",
+  "forestPlotAuxiliaryAddVerticalLine",
+  "forestPlotAuxiliaryAddVerticalLineValue",
+  "forestPlotAuxiliaryAddVerticalLine2",
+  "forestPlotAuxiliaryAddVerticalLineValue2",
+  "forestPlotAuxiliaryEffectLabel",
+  "forestPlotAuxiliarySetXAxisLimit",
+  "forestPlotAuxiliarySetXAxisLimitLower",
+  "forestPlotAuxiliarySetXAxisLimitUpper",
+  "forestPlotStudyInformationSecondaryConfidenceInterval",
+  "forestPlotStudyInformationSecondaryConfidenceIntervalLevel"
+)
+.maBubblePlotDependencies <- c(
+  .maDependencies, "transformEffectSize", "confidenceIntervalsLevel",
+  "bubblePlotSelectedVariable",
+  "bubblePlotSeparateLines",
+  "bubblePlotSeparatePlots",
+  "bubblePlotSdFactorCovariates",
+  "bubblePlotBubblesSize",
+  "bubblePlotBubblesRelativeSize",
+  "bubblePlotBubblesTransparency",
+  "bubblePlotBubblesJitter",
+  "bubblePlotConfidenceIntervals",
+  "bubblePlotConfidenceIntervalsTransparency",
+  "bubblePlotPredictionIntervals",
+  "bubblePlotPredictionIntervalsTransparency",
+  "colorPalette",
+  "bubblePlotTheme",
+  "bubblePlotLegendPosition",
+  "bubblePlotRelativeSizeText"
+)
+.maReady               <- function(options) {
+
+  inputReady <- options[["effectSize"]] != "" && options[["effectSizeStandardError"]] != ""
+  termsEffectSizeReady    <- length(options[["effectSizeModelTerms"]]) > 0    || options[["effectSizeModelIncludeIntercept"]]
+  termsHeterogeneityReady <- length(options[["heterogeneityModelTerms"]]) > 0 || options[["heterogeneityModelIncludeIntercept"]]
+
+  return(inputReady && termsEffectSizeReady && termsHeterogeneityReady)
+}
+.maCheckData           <- function(dataset, options) {
+
+  # model data
+  predictorsNominal <- options[["predictors"]][options[["predictors.types"]] == "nominal"]
+  predictorsScale   <- options[["predictors"]][options[["predictors.types"]] == "scale"]
+
+  # omit NAs
+  omitOnVariables <- c(
+    options[["effectSize"]],
+    options[["effectSizeStandardError"]],
+    if (options[["clustering"]] != "") options[["clustering"]],
+    if (length(predictorsNominal) > 0) predictorsNominal,
+    if (length(predictorsScale) > 0)   predictorsScale
+  )
+  anyNaByRows <- apply(dataset[,omitOnVariables], 1, function(x) anyNA(x))
+  dataset     <- dataset[!anyNaByRows,]
+  attr(dataset, "NAs") <- sum(anyNaByRows)
+
+  return(dataset)
+}
+.maCheckErrors         <- function(dataset, options) {
+
+  .hasErrors(
+    dataset              = dataset,
+    type                 = c("infinity", "observations", "variance"),
+    all.target           = c(
+      options[["effectSize"]],
+      options[["effectSizeStandardError"]],
+      options[["predictors"]][options[["predictors.types"]] == "scale"]
+    ),
+    observations.amount  = "< 2",
+    exitAnalysisIfErrors = TRUE)
+
+  if (length(options[["effectSizeModelTerms"]]) > 0)
+    .hasErrors(
+      dataset              = dataset,
+      type                 = c("modelInteractions"),
+      modelInteractions.modelTerms = options[["effectSizeModelTerms"]],
+      exitAnalysisIfErrors = TRUE)
+
+  if (length(options[["heterogeneityModelTerms"]]) > 0)
+    .hasErrors(
+      dataset              = dataset,
+      type                 = c("modelInteractions"),
+      modelInteractions.modelTerms = options[["heterogeneityModelTerms"]],
+      exitAnalysisIfErrors = TRUE)
+
+  .hasErrors(
+    dataset              = dataset,
+    seCheck.target       = options[["effectSizeStandardError"]],
+    custom               = .maCheckStandardErrors,
+    exitAnalysisIfErrors = TRUE)
+}
+.maCheckStandardErrors <- list(seCheck = function(dataset, target) {
+    nonPositive <- !all(dataset[,target] > 0)
+    if (nonPositive) {
+      return(gettext("All standard errors must be positive."))
+    }
+  })
