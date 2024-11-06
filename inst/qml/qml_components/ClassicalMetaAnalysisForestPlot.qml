@@ -26,12 +26,14 @@ Section
 	title:						qsTr("Forest Plot")
 	property string module:		"metaAnalysis"
 	columns:					1
+	info: qsTr("Options for visualizing study-level information, estimated marginal means, and the model information in an all encompassing forest plot. Different sections of the forest plot can be individually enabled/disabled.")
 
 	CheckBox
 	{
 		id:			forestPlotStudyInformation
 		name: 		"forestPlotStudyInformation"
 		text: 		qsTr("Study information")
+		info: qsTr("Add study-level information panel to the forest plot. There are three sections of the study-level information panel: a) the left section with study labels, names, and etc designed via the 'Selected Variables' option, b) the middle section visualizing the estimates and confidence intervals based on the meta-analytic input, c) the right section textually summarizing the estimates and confidence intervals based on the meta-analytic input.")
 	}
 
 	VariablesForm
@@ -50,6 +52,7 @@ Section
 			id:					forestPlotStudyInformationSelectedVariables
 			title:				qsTr("Selected Variables")
 			allowedColumns:		["nominal"]
+			info: qsTr("Select variables containing study-level information to be printed in the left section of the panel. Each variable creates a new column in the panel.")
 		}
 	}
 
@@ -60,6 +63,7 @@ Section
 		enabled:			forestPlotStudyInformation.checked
 		visible:			forestPlotStudyInformationSelectedVariables.count > 0
 		headerLabels:		[qsTr("Title"), qsTr("Width"), qsTr("Alignment")]
+		info: qsTr("Adjust the Title, Width, and Alignment of each column in the left section of the study-level information panel.")
 
 		rowComponent: 			RowLayout
 		{
@@ -122,6 +126,7 @@ Section
 				enabled:	effectSize.count == 1 && effectSizeStandardError.count == 1
 				checked:	false
 				Layout.preferredWidth: 300 * jaspTheme.uiScale
+				info: qsTr("Include predicted effect sizes in the middle section of the study-level information panel.")
 			}
 
 			CheckBox
@@ -129,6 +134,7 @@ Section
 				name:			"forestPlotStudyInformationStudyWeights"
 				text:			qsTr("Study weights")
 				enabled:		forestPlotStudyInformation.checked
+				info: qsTr("Include the study weights in the right section of the study-level information panel.")
 			}
 
 			CheckBox
@@ -137,6 +143,7 @@ Section
 				text:			qsTr("Secondary confidence interval")
 				enabled:		forestPlotStudyInformation.checked
 				childrenOnSameRow:	true
+				info: qsTr("Include secondary confidence interval for effect sizes in the middle section of the study-level information panel.")
 
 				CIField
 				{ 
@@ -150,6 +157,8 @@ Section
 		Group
 		{
 			title:		qsTr("Order")
+			info: qsTr("Order the study-level information panel by a variable.")
+
 			DropDown
 			{
 				name:			"forestPlotStudyInformationOrderBy"
@@ -175,6 +184,7 @@ Section
 		id:			forestPlotEstimatedMarginalMeans
 		text:		qsTr("Estimated marginal means")
 		enabled:	sectionModel.effectSizeModelTermsCount > 0
+		info: qsTr("Add estimated marginal means information to the forest plot. Available when effect size meta-regression is specified.")
 	}
 
 	VariablesForm
@@ -185,7 +195,7 @@ Section
 		AvailableVariablesList
 		{
 			name:			"forestPlotEstimatedMarginalMeansModelVariables"
-			title:			qsTr("Model variables")
+			title:			qsTr("Model Variables")
 			source:			[{ name: "effectSizeModelTerms", use: "noInteraction" }]
 		}
 
@@ -193,8 +203,9 @@ Section
 		{
 			id:				forestPlotEstimatedMarginalMeansSelectedVariables
 			name:			"forestPlotEstimatedMarginalMeansSelectedVariables"
-			title:			qsTr("Selected variables")
+			title:			qsTr("Selected Variables")
 			allowTypeChange:false
+			info: qsTr("Select variables for which the estimated marginal means are visualized.")
 		}
 	}
 
@@ -212,6 +223,7 @@ Section
 				label:		qsTr("Term tests")
 				checked:	true
 				Layout.preferredWidth: 350 * jaspTheme.uiScale
+				info: qsTr("Include the omnibus term test of variables included in the estimated marginal means. The null hypothesis states that the effect size at all levels of the categorical variable are equal or that there is no linear association between the effect size and the continuous variable.")
 			}
 
 			CheckBox
@@ -221,12 +233,14 @@ Section
 				enabled:	forestPlotEstimatedMarginalMeans.checked
 				label:		qsTr("Coefficient tests")
 				checked:	true
+				info: qsTr("Include coefficient tests of variables included in the estimated marginal means. The null hypothesis states that the estimated marginal mean for a given level equals the tested value.")
 
 				DoubleField
 				{
 					name:			"forestPlotEstimatedMarginalMeansCoefficientTestsAgainst"
 					text:			qsTr("Against")
 					defaultValue:	0
+					info: qsTr("Specify the test value for the coefficient tests.")
 				}
 			}
 
@@ -237,6 +251,7 @@ Section
 			name:		"forestPlotEstimatedMarginalMeansAdjustedEffectSizeEstimate"
 			label:		qsTr("Adjusted effect size estimate")
 			enabled:	forestPlotEstimatedMarginalMeans.checked
+			info: qsTr("Include the adjusted effect size estimate in the estimated marginal means section.")
 		}
 	}
 
@@ -249,6 +264,7 @@ Section
 		id:			forestPlotModelInformation
 		enabled:	effectSize.count == 1 && effectSizeStandardError.count == 1
 		text:		qsTr("Model information")
+		info: qsTr("Add meta-analytic model information to the forest plot.")
 	}
 
 	Group
@@ -262,6 +278,7 @@ Section
 			text:		qsTr("Pooled effect size estimate")
 			checked:	true				
 			Layout.preferredWidth: 300 * jaspTheme.uiScale
+			info: qsTr("Include the overall meta-analytic effect size estimate in the model information section.")
 		}
 
 		CheckBox
@@ -269,6 +286,7 @@ Section
 			name:		"forestPlotPooledEffectSizeTest"
 			text:		qsTr("Pooled effect size test")
 			checked:	true
+			info: qsTr("Include the test of the overall meta-analytic effect size estimate in the model information section.")
 		}
 
 		CheckBox
@@ -276,6 +294,7 @@ Section
 			name:		"forestPlotResidualHeterogeneityTest"
 			text:		qsTr("Residual heterogeneity test")
 			checked:	true
+			info: qsTr("Include the test of the residual heterogeneity in the model information section.")
 		}
 
 		CheckBox
@@ -285,6 +304,7 @@ Section
 			enabled:	(method.value != "fixedEffects" || method.value != "equalEffects")
 			visible:	module == "metaAnalysis"
 			checked:	module == "metaAnalysis"
+			info: qsTr("Include the meta-analytic residual heterogeneity estimate in the model information section. Not available for multilevel/multivariate meta-analysis.")
 		}
 
 		CheckBox
@@ -293,6 +313,7 @@ Section
 			text:		qsTr("Effect size moderation test")
 			enabled:	sectionModel.effectSizeModelTermsCount > 0
 			checked:	true
+			info: qsTr("Include the omnibus effect size moderation test in the model information section. Available when effect size meta-regression is specified.")
 		}
 
 		CheckBox
@@ -302,6 +323,7 @@ Section
 			enabled:	sectionModel.heterogeneityModelTermsCount > 0
 			visible:	module == "metaAnalysis"
 			checked:	module == "metaAnalysis"
+			info: qsTr("Include the omnibus heterogeneity moderation test in the model information section. Available when moderation meta-regression is specified.")
 		}
 	}
 
@@ -326,6 +348,7 @@ Section
 				text:		qsTr("Prediction intervals")
 				checked:	true
 				Layout.preferredWidth: 300 * jaspTheme.uiScale
+				info: qsTr("Include prediction intervals of the estimated marginal means and the model information output.")
 			}
 
 			CheckBox
@@ -333,6 +356,7 @@ Section
 				name:			"forestPlotEstimatesAndConfidenceIntervals"
 				text:			qsTr("Estimates and confidence intervals")
 				checked:		true
+				info: qsTr("Include effect size estimates and confidence intervals summary text in the right panel of the forest plot.")
 			}
 
 			CheckBox
@@ -340,12 +364,14 @@ Section
 				name:			"forestPlotTestsInRightPanel"
 				text:			qsTr("Tests in right panel")
 				checked:		false
+				info: qsTr("Move test results text to the right panel.")
 			}
 		}
 
 		Group
 		{
 			title:	qsTr("Mapping")
+			info: qsTr("Select a variable for encoding the color or shape of the study information and the estimated marginal means output.")
 
 			DropDown
 			{
@@ -370,6 +396,7 @@ Section
 		Group
 		{
 			title:		qsTr("Relative Size")
+			info: qsTr("Adjust the relative size of the forest plot components.")
 
 			DoubleField
 			{
@@ -439,6 +466,7 @@ Section
 				name:			"forestPlotAuxiliaryAdjustWidthBasedOnText"
 				text:			qsTr("Adjust width based on text")
 				checked:		true
+				info: qsTr("Turn off the automatic width adjustment of the individual components.")
 			}
 		}
 
@@ -453,6 +481,7 @@ Section
 				min:			1
 				value:			2
 				inclusive: 		JASP.None
+				info: qsTr("Number of digits printed for the effect size and confidence intervals summary text.")
 			}
 
 			DropDown
@@ -470,6 +499,7 @@ Section
 				name:			"forestPlotAuxiliaryPlotColor"
 				enabled:		forestPlotMappingColor.value == ""
 				label:			qsTr("Color")
+				info: qsTr("Change color of the plotted objects. Only available if no color mapping is selected.")
 				values:			[
 						{ label: qsTr("Black")		, value: "black"},
 						{ label: qsTr("Blue")		, value: "blue"	},
@@ -482,6 +512,7 @@ Section
 				name:				"forestPlotAuxiliaryAddVerticalLine"
 				text:				qsTr("Add vertical line")
 				childrenOnSameRow:	true
+				info: qsTr("Add a solid vertical line in the forest plot.")
 
 				DoubleField
 				{
@@ -496,6 +527,7 @@ Section
 				name:				"forestPlotAuxiliaryAddVerticalLine2"
 				text:				qsTr("Add vertical line (2)")
 				childrenOnSameRow:	true
+				info: qsTr("Add a dotted vertical line in the forest plot.")
 
 				DoubleField
 				{
@@ -510,6 +542,7 @@ Section
 				name:			"forestPlotAuxiliaryEffectLabel"
 				text:			qsTr("X-axis label")
 				value:			"Effect Size"
+				info: qsTr("Change the x-axis label of the forest plot (the default 'Effect Size' changes in accordance with the selected effect size transformation).")
 			}
 
 			CheckBox
@@ -517,6 +550,7 @@ Section
 				name:			"forestPlotAuxiliarySetXAxisLimit"
 				text:			qsTr("X-axis limits")
 				childrenOnSameRow:	true
+				info: qsTr("Change the default x-axis limits.")
 
 				DoubleField
 				{

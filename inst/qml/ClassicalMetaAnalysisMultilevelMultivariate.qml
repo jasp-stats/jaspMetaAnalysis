@@ -110,7 +110,7 @@ Form
 	{	
 		title:		qsTr("Random Effects / Model Structure")
 		expanded:	true
-		info: qsTr("Specify the random effects structure for the meta-analysis model, including the types of random effects and their associated variables. Allows modeling of complex data structures such as multilevel, multivariate, autoregressive, spatial, and other forms of dependency.")
+		info: qsTr("Options for specifying the random effects structure for the meta-analysis model, including the types of random effects and their associated variables. Allows modeling of complex data structures such as multilevel, multivariate, autoregressive, spatial, and other forms of dependency.")
 
 		ComponentsList
 		{

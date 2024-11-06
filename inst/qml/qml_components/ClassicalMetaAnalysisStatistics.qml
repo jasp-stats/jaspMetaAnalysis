@@ -103,7 +103,7 @@ Section
 			name:		"metaregressionTermTests"
 			text:		qsTr("Term tests")
 			checked:	true
-			info: qsTr("Include tests for each term in the meta-regression model.")
+			info: qsTr("Include tests for each term in the meta-regression model. The null hypothesis states that the effect size at all levels of the categorical variable are equal or that there is no linear association between the effect size and the continuous variable).")
 		}
 
 		CheckBox

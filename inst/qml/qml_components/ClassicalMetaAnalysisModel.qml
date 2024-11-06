@@ -26,6 +26,7 @@ Section
 	title:						qsTr("Model")
 	columns:					2
 	property string module:		"metaAnalysis"
+	info: qsTr("Options for specifing the effect size and heterogeneity models based on the included predictors, including model terms, intercepts, and link functions.")
 
 	property alias effectSizeModelTerms:				effectSizeModelTerms
 	property alias effectSizeModelTermsCount:			effectSizeModelTerms.count
@@ -36,7 +37,7 @@ Section
 	Group
 	{
 		title: qsTr("Effect size model")
-		info: qsTr("Specify the effect size and heterogeneity models for the meta-analysis, including model terms, intercepts, and link functions.")
+		info: qsTr("Specify the effect size model.")
 
 		VariablesForm
 		{
@@ -74,7 +75,7 @@ Section
 		title:			qsTr("Heterogeneity model")
 		visible:		module =="metaAnalysis"
 		columns:		2
-		info: qsTr("Unvailable when performing multilevel/multivariate meta-analysis.")
+		info: qsTr("Specify the heterogeneity model. Unvailable when performing multilevel/multivariate meta-analysis.")
 
 		VariablesForm
 		{

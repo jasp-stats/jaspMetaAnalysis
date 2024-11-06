@@ -45,7 +45,7 @@ Section
 			title:			qsTr("Selected Variable")
 			singleVariable:	true
 			allowTypeChange:false
-			info: qsTr("Variable to be visualized at the x-axis.")
+			info: qsTr("Variable to be visualized on the x-axis.")
 		}
 
 		AssignedVariablesList
@@ -86,7 +86,7 @@ Section
 
 			Group
 			{
-				title:		qsTr("Bubles")
+				title:		qsTr("Bubbles")
 
 				DropDown
 				{
@@ -140,7 +140,7 @@ Section
 				name:		"bubblePlotConfidenceIntervals"
 				label:		qsTr("Condifence intervals")
 				checked:	true
-				info: qsTr("Include confidence interval of the estimated effect sizes.")
+				info: qsTr("Include confidence intervals of the estimated effect sizes.")
 
 				DoubleField
 				{
@@ -158,7 +158,7 @@ Section
 				name:		"bubblePlotPredictionIntervals"
 				label:		qsTr("Prediction intervals")
 				checked:	true
-				info: qsTr("Include prediction interval of the estimated effect sizes.")
+				info: qsTr("Include prediction intervals of the estimated effect sizes.")
 
 				DoubleField
 				{
@@ -183,7 +183,7 @@ Section
 				id:				bubblePlotTheme	
 				label:			qsTr("Theme")
 				startValue:		"jasp"
-				info: qsTr("Set theme of the bubble plot.")
+				info: qsTr("Set the theme of the bubble plot.")
 				values:
 				[
 					{ label: "JASP",					value: "jasp"},
@@ -210,7 +210,7 @@ Section
 			{
 				name:			"bubblePlotLegendPosition"
 				label:			qsTr("Legend position")
-				info: qsTr("Set legend of the bubble plot.")
+				info: qsTr("Set the legend position of the bubble plot.")
 				startValue:		"right"
 				values:
 				[
