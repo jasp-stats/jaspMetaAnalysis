@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2024-11-10 09:00+0000\n"
+"Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/es/>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.8.2\n"
 "X-Language: es\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -34,7 +40,7 @@ msgstr "Magnitud del Efecto"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr "Error Típico de la Magnitud del Efecto"
+msgstr "Error típico de la Magnitud del efecto"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "95% CI Lower and Upper Bound"
@@ -50,7 +56,7 @@ msgstr "Magnitud del Efecto"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr "Error Típico de la Magnitud del Efecto"
+msgstr "Error típico de la Magnitud del efecto"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Study Labels"
@@ -222,7 +228,7 @@ msgstr "Magnitud del Efecto"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr "Error Típico de la Magnitud del Efecto"
+msgstr "Error típico de la Magnitud del efecto"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "95% CI Lower and Upper Bound"
@@ -274,7 +280,7 @@ msgstr "Magnitud del Efecto"
 
 msgctxt "SelectionModels|"
 msgid "Effect Size Standard Error"
-msgstr "Error Típico de la Magnitud del Efecto"
+msgstr "Error típico de la Magnitud del efecto"
 
 msgctxt "SelectionModels|"
 msgid "N"
@@ -906,7 +912,7 @@ msgstr "Magnitud del Efecto"
 
 msgctxt "PetPeese|"
 msgid "Effect Size Standard Error"
-msgstr "Error Típico de la Magnitud del Efecto"
+msgstr "Error típico de la Magnitud del efecto"
 
 msgctxt "PetPeese|"
 msgid "Fisher's z"
@@ -1118,7 +1124,7 @@ msgstr "Magnitud del efecto"
 
 msgctxt "WaapWls|"
 msgid "Effect Size Standard Error"
-msgstr "Error típico de la magnitud del efecto"
+msgstr "Error típico de la Magnitud del efecto"
 
 msgctxt "WaapWls|"
 msgid "Fisher's z"
@@ -1194,7 +1200,7 @@ msgstr "Magnitud del Efecto"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr "Error Típico de la Magnitud del Efecto"
+msgstr "Error típico de la Magnitud del efecto"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Method"
@@ -1886,34 +1892,35 @@ msgstr "Estimaciones posteriores"
 
 msgctxt "Description|"
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Miscelánea"
 
 msgctxt "Description|"
 msgid "Effect Size Computation"
-msgstr ""
+msgstr "Cálculo de la magnitud del efecto"
 
 msgctxt "Description|"
 msgid "Funnel Plot"
-msgstr ""
+msgstr "Gráfico en embudo"
 
 msgctxt "Description|"
 msgid "Meta-Analysis (Multilevel/Multivariate)"
-msgstr ""
+msgstr "Meta-Análisis (Multinivel/Multivariante)"
 
 msgctxt "Description|"
 msgid "Classical Meta-Analysis (Multilevel/Multivariate)"
-msgstr ""
+msgstr "Meta-Análisis clásico (Multinivel/Multivariante)"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Variable containing the observed effect sizes."
-msgstr ""
+msgstr "Variable que contiene las magnitudes de los efectos observados."
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid ""
 "Variable containing the standard errors corresponding to the effect sizes."
 msgstr ""
+"Variable que contiene los errores típicos que corresponden a las magnitudes "
+"de los efectos."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Method"
 msgstr "Método"
@@ -1923,75 +1930,69 @@ msgid ""
 "Method used to estimate heterogeneity (tau-squared) in the meta-analysis. "
 "The available methods depend on the inclusion of heterogeneity model terms."
 msgstr ""
+"Método usado para estimar la heterogeneidad (tau-cuadrado) en el meta-"
+"análisis. Los métodos disponibles dependen de la inclusión de elementos de "
+"heterogeneidad en el modelo."
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Equal Effects"
-msgstr ""
+msgstr "Efectos Iguales"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Fixed Effects"
 msgstr "Efectos Fijos"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Maximum Likelihood"
 msgstr "Máxima Verosimilitud"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Restricted ML"
 msgstr "MV restringida"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "DerSimonian-Laird"
 msgstr "DerSimonian-Laird"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Hedges"
 msgstr "Hedges"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Hunter-Schmidt"
 msgstr "Hunter-Schmidt"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Hunter-Schmidt (SSC)"
-msgstr ""
+msgstr "Hunter-Schmidt (SSC)"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Sidik-Jonkman"
 msgstr "Sidik-Jonkman"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Empirical Bayes"
 msgstr "Bayes Empírico"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Paule-Mandel"
 msgstr "Paule-Mandel"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Paule-Mandel (MU)"
-msgstr ""
+msgstr "Paule-Mandel (MU)"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Generalized Q-stat"
-msgstr ""
+msgstr "Estat-Q generalizado"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Generalized Q-stat (MU)"
-msgstr ""
+msgstr "Estat-Q generalizado (MU)"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Fixed effect test"
-msgstr ""
+msgstr "Contraste de efectos fijos"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid ""
@@ -2033,18 +2034,19 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Variable containing the observed effect sizes."
-msgstr ""
+msgstr "Variable que contiene las magnitudes de los efectos observados."
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "Error típico de la Magnitud del efecto"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
 "Variable containing the standard errors corresponding to the effect sizes."
 msgstr ""
+"Variable que contiene los errores típicos que corresponden a las magnitudes "
+"de los efectos."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Method"
 msgstr "Método"
@@ -3092,16 +3094,18 @@ msgstr ""
 
 msgctxt "FunnelPlot|"
 msgid "Variable containing the observed effect sizes."
-msgstr ""
+msgstr "Variable que contiene las magnitudes de los efectos observados."
 
 msgctxt "FunnelPlot|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "Error típico de la Magnitud del efecto"
 
 msgctxt "FunnelPlot|"
 msgid ""
 "Variable containing the standard errors corresponding to the effect sizes."
 msgstr ""
+"Variable que contiene los errores típicos que corresponden a las magnitudes "
+"de los efectos."
 
 msgctxt "FunnelPlot|"
 msgid "Study Label"
@@ -3225,64 +3229,55 @@ msgstr ""
 
 msgctxt "FunnelPlot|"
 msgid "Equal Effects"
-msgstr ""
+msgstr "Efectos Iguales"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Fixed Effects"
 msgstr "Efectos Fijos"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Maximum Likelihood"
 msgstr "Máxima Verosimilitud"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Restricted ML"
 msgstr "MV restringida"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "DerSimonian-Laird"
 msgstr "DerSimonian-Laird"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Hedges"
 msgstr "Hedges"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Hunter-Schmidt"
 msgstr "Hunter-Schmidt"
 
 msgctxt "FunnelPlot|"
 msgid "Hunter-Schmidt (SSC)"
-msgstr ""
+msgstr "Hunter-Schmidt (SSC)"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Sidik-Jonkman"
 msgstr "Sidik-Jonkman"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Empirical Bayes"
 msgstr "Bayes Empírico"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Paule-Mandel"
 msgstr "Paule-Mandel"
 
 msgctxt "FunnelPlot|"
 msgid "Paule-Mandel (MU)"
-msgstr ""
+msgstr "Paule-Mandel (MU)"
 
 msgctxt "FunnelPlot|"
 msgid "Include heterogeneity"
-msgstr ""
+msgstr "Incluir heterogeneidad"
 
 msgctxt "FunnelPlot|"
 msgid ""
@@ -4406,7 +4401,7 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Residual heterogeneity test"
-msgstr ""
+msgstr "Contraste de Heterogeneidad de los errores"
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid ""
