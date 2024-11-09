@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2024-11-10 09:00+0000\n"
+"Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
+"Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/gl/>\n"
+"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.8.2\n"
 "X-Language: gl_ES\n"
 "X-Source-Language: C\n"
 "X-Qt-Contexts: true\n"
@@ -1886,34 +1892,35 @@ msgstr "Estimacións posteriores"
 
 msgctxt "Description|"
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Miscelánea"
 
 msgctxt "Description|"
 msgid "Effect Size Computation"
-msgstr ""
+msgstr "Cálculo da magnitude do efecto"
 
 msgctxt "Description|"
 msgid "Funnel Plot"
-msgstr ""
+msgstr "Gráfica en funil"
 
 msgctxt "Description|"
 msgid "Meta-Analysis (Multilevel/Multivariate)"
-msgstr ""
+msgstr "Meta-Análise (Multinivel/Multivariante)"
 
 msgctxt "Description|"
 msgid "Classical Meta-Analysis (Multilevel/Multivariate)"
-msgstr ""
+msgstr "Meta-Análise clásica (Multinivel/Multivariante)"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Variable containing the observed effect sizes."
-msgstr ""
+msgstr "Variable que contén as magnitudes dos efectos observados."
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid ""
 "Variable containing the standard errors corresponding to the effect sizes."
 msgstr ""
+"Variable que contén os erros padrón que corresponden ás magnitudes dos "
+"efectos."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Method"
 msgstr "Método"
@@ -1923,75 +1930,69 @@ msgid ""
 "Method used to estimate heterogeneity (tau-squared) in the meta-analysis. "
 "The available methods depend on the inclusion of heterogeneity model terms."
 msgstr ""
+"Método usado para estimar a heteroxeneidade (tau-cadrado) na meta-análise. "
+"Os métodos dispoñibles dependen da inclusión de elementos de heteroxeneidade "
+"no modelo."
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Equal Effects"
-msgstr ""
+msgstr "Efectos Iguais"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Fixed Effects"
 msgstr "Efectos Fixos"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Maximum Likelihood"
 msgstr "Máxima Verosimilitude"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Restricted ML"
 msgstr "MV restrinxida"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "DerSimonian-Laird"
 msgstr "DerSimonian-Laird"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Hedges"
 msgstr "Hedges"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Hunter-Schmidt"
 msgstr "Hunter-Schmidt"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Hunter-Schmidt (SSC)"
-msgstr ""
+msgstr "Hunter-Schmidt (SSC)"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Sidik-Jonkman"
 msgstr "Sidik-Jonkman"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Empirical Bayes"
 msgstr "Bayes Empírico"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Paule-Mandel"
 msgstr "Paule-Mandel"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Paule-Mandel (MU)"
-msgstr ""
+msgstr "Paule-Mandel (MU)"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Generalized Q-stat"
-msgstr ""
+msgstr "Estat-Q xeneralizado"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Generalized Q-stat (MU)"
-msgstr ""
+msgstr "Estat-Q xeneralizado (MU)"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Fixed effect test"
-msgstr ""
+msgstr "Proba de efectos fixos"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid ""
@@ -2034,9 +2035,8 @@ msgstr "Magnitude do Efecto"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Variable containing the observed effect sizes."
-msgstr ""
+msgstr "Variable que contén as magnitudes dos efectos observados."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Effect Size Standard Error"
 msgstr "Erro Padrón da Magnitude do Efecto"
@@ -2045,8 +2045,9 @@ msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
 "Variable containing the standard errors corresponding to the effect sizes."
 msgstr ""
+"Variable que contén os erros padrón que corresponden ás magnitudes dos "
+"efectos."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Method"
 msgstr "Método"
@@ -3095,9 +3096,8 @@ msgstr "Magnitude do Efecto"
 
 msgctxt "FunnelPlot|"
 msgid "Variable containing the observed effect sizes."
-msgstr ""
+msgstr "Variable que contén as magnitudes dos efectos observados."
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Effect Size Standard Error"
 msgstr "Erro Padrón da Magnitude do Efecto"
@@ -3106,6 +3106,8 @@ msgctxt "FunnelPlot|"
 msgid ""
 "Variable containing the standard errors corresponding to the effect sizes."
 msgstr ""
+"Variable que contén os erros padrón que corresponden ás magnitudes dos "
+"efectos."
 
 msgctxt "FunnelPlot|"
 msgid "Study Label"
@@ -3228,9 +3230,8 @@ msgstr ""
 
 msgctxt "FunnelPlot|"
 msgid "Equal Effects"
-msgstr ""
+msgstr "Efectos Iguais"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Fixed Effects"
 msgstr "Efectos Fixos"
@@ -3245,47 +3246,41 @@ msgctxt "FunnelPlot|"
 msgid "Restricted ML"
 msgstr "MV restrinxida"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "DerSimonian-Laird"
 msgstr "DerSimonian-Laird"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Hedges"
 msgstr "Hedges"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Hunter-Schmidt"
 msgstr "Hunter-Schmidt"
 
 msgctxt "FunnelPlot|"
 msgid "Hunter-Schmidt (SSC)"
-msgstr ""
+msgstr "Hunter-Schmidt (SSC)"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Sidik-Jonkman"
 msgstr "Sidik-Jonkman"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Empirical Bayes"
 msgstr "Bayes Empírico"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Paule-Mandel"
 msgstr "Paule-Mandel"
 
 msgctxt "FunnelPlot|"
 msgid "Paule-Mandel (MU)"
-msgstr ""
+msgstr "Paule-Mandel (MU)"
 
 msgctxt "FunnelPlot|"
 msgid "Include heterogeneity"
-msgstr ""
+msgstr "Incluír heteroxeneidade"
 
 msgctxt "FunnelPlot|"
 msgid ""
