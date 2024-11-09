@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2024-11-09 02:44\n"
-"PO-Revision-Date: 2024-10-22 11:15+0000\n"
+"PO-Revision-Date: 2024-11-10 09:00+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8-rc\n"
+"X-Generator: Weblate 5.8.2\n"
 
 msgid ""
 "The study labels contain invalid characters. Please, remove them before "
@@ -409,30 +409,31 @@ msgstr "Última iteración de la cadena"
 msgid "Shrink factor"
 msgstr "Factor de contracción"
 
-#, fuzzy
 msgid "All standard errors must be positive."
-msgstr "Todos los errores típicos/tamaños muestrales deben ser positivos."
+msgstr "Todos los errores típicos deben ser positivos."
 
 msgid ""
 "The loaded distance matrix for '%1$s' does not match the dataset. The "
 "following levels are missing: %2$s."
 msgstr ""
+"La matriz de distancias cargada para '%1$s' no coincide con el conjunto de "
+"datos. Los siguientes niveles están ausentes: %2$s."
 
 msgid ""
 "The loaded correlation matrix for '%1$s' does not match the dataset. The "
 "following levels are missing: %2$s."
 msgstr ""
+"La matriz de correlaciones cargada para '%1$s' no coincide con el conjunto "
+"de datos. Los siguientes niveles están ausentes: %2$s."
 
-#, fuzzy
 msgid "All observations were removed as influential."
-msgstr "la observación %i se eliminó debido a valores ausentes."
+msgstr "Todas las observaciones se eliminaron como influyentes."
 
-#, fuzzy
 msgid "Residual Heterogeneity Test"
-msgstr "Estimaciones de la Heterogeneidad de los Errores"
+msgstr "Contraste de Heterogeneidad de los errores"
 
 msgid "Qₑ"
-msgstr ""
+msgstr "Qₑ"
 
 msgid "df"
 msgstr "gl"
@@ -441,31 +442,28 @@ msgid "p"
 msgstr "p"
 
 msgid "Omnibus Moderation Test"
-msgstr ""
+msgstr "Contraste omnibus de moderación"
 
-#, fuzzy
 msgid "Parameter"
-msgstr "Peters"
+msgstr "Parámetro"
 
-#, fuzzy
 msgid "F"
-msgstr "EF"
+msgstr "F"
 
 msgid "Qₘ"
-msgstr ""
+msgstr "Qₘ"
 
 msgid "df₁"
-msgstr ""
+msgstr "gl₁"
 
 msgid "df₂"
-msgstr ""
+msgstr "gl₂"
 
 msgid "p (permutation)"
-msgstr ""
+msgstr "p (permutación)"
 
-#, fuzzy
 msgid "Meta-Analytic Estimates"
-msgstr "Estimaciones del Modelo"
+msgstr "Estimaciones Meta-Analíticas"
 
 msgid "Estimate"
 msgstr "Estimar"
@@ -476,16 +474,14 @@ msgstr "IC del %s%%"
 msgid "%s%% PI"
 msgstr "IP del %s%%"
 
-#, fuzzy
 msgid "Heterogeneity Level"
-msgstr "Heterogeneidad"
+msgstr "Nivel de Heterogeneidad"
 
-#, fuzzy
 msgid "Fit Measures"
 msgstr "Medidas de ajuste"
 
 msgid "Log Lik."
-msgstr ""
+msgstr "Log Verosim."
 
 msgid "Deviance"
 msgstr "Desviación"
@@ -500,7 +496,7 @@ msgid "AICc"
 msgstr "AICc"
 
 msgid "R²"
-msgstr ""
+msgstr "R²"
 
 msgid "Effect Size Meta-Regression Terms Tests"
 msgstr ""
@@ -541,13 +537,11 @@ msgstr ""
 msgid "Level"
 msgstr ""
 
-#, fuzzy
 msgid "Bubble Plots"
-msgstr "Gráfico de Embudo"
+msgstr "Gráficos de burbujas"
 
-#, fuzzy
 msgid "Bubble Plot"
-msgstr "Gráfico de Embudo"
+msgstr "Gráfico de burbujas"
 
 #, fuzzy
 msgid "%1$s (%2$s)"
@@ -1124,7 +1118,7 @@ msgid ""
 msgstr ""
 
 msgid "Funnel Plot"
-msgstr "Gráfico de Embudo"
+msgstr "Gráfico en embudo"
 
 msgid ""
 "Funnel plot prediction interval was specified in an incorrect format. Try "
