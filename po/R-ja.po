@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
-"POT-Creation-Date: 2024-04-20 02:33\n"
+"POT-Creation-Date: 2024-11-09 02:44\n"
 "PO-Revision-Date: 2024-07-02 17:09+0000\n"
 "Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -389,17 +389,30 @@ msgstr "チェーンの最後のiteration"
 msgid "Shrink factor"
 msgstr "Shrink factor"
 
-msgid "All standard errors/sample sizes must be positive."
+#, fuzzy
+msgid "All standard errors must be positive."
 msgstr "全標準誤差とサンプルサイズは正である必要があります."
 
-msgid "The metafor package crashed with the following error: %s"
-msgstr "metaforパッケージが次のエラーでクラッシュしました: %s"
+msgid ""
+"The loaded distance matrix for '%1$s' does not match the dataset. The "
+"following levels are missing: %2$s."
+msgstr ""
 
-msgid "Fixed and Random Effects"
-msgstr "固定効果と変量効果"
+msgid ""
+"The loaded correlation matrix for '%1$s' does not match the dataset. The "
+"following levels are missing: %2$s."
+msgstr ""
 
-msgid "Q"
-msgstr "Q"
+#, fuzzy
+msgid "All observations were removed as influential."
+msgstr "%i の観測値が欠損しているため削除されました。"
+
+#, fuzzy
+msgid "Residual Heterogeneity Test"
+msgstr "残差異質性の推定値"
+
+msgid "Qₑ"
+msgstr ""
 
 msgid "df"
 msgstr "df"
@@ -407,98 +420,52 @@ msgstr "df"
 msgid "p"
 msgstr "p"
 
-msgid "<em>p</em>-values are approximate."
-msgstr "<em>p</em>の値は概算値です."
+msgid "Omnibus Moderation Test"
+msgstr ""
 
-msgid "Coefficients"
-msgstr "係数"
+#, fuzzy
+msgid "Parameter"
+msgstr "ピーターズ(Peters)"
+
+#, fuzzy
+msgid "F"
+msgstr "FE"
+
+msgid "Qₘ"
+msgstr ""
+
+msgid "df₁"
+msgstr ""
+
+msgid "df₂"
+msgstr ""
+
+msgid "p (permutation)"
+msgstr ""
+
+#, fuzzy
+msgid "Meta-Analytic Estimates"
+msgstr "モデル推定値"
 
 msgid "Estimate"
 msgstr "推定"
 
-msgid "Standard Error"
-msgstr "標準誤差"
+msgid "%s%% CI"
+msgstr "%s%% CI"
 
-msgid "z"
-msgstr "z"
+msgid "%s%% PI"
+msgstr "%s%% PI"
 
-msgid "t"
-msgstr "t"
+#, fuzzy
+msgid "Heterogeneity Level"
+msgstr "異質性"
 
-msgid "Wald test."
-msgstr "Wald検定."
-
-msgid "Knapp and Hartung test adjustment."
-msgstr ""
-
-msgid "Fit measures"
+#, fuzzy
+msgid "Fit Measures"
 msgstr "適合度指標"
 
-msgid "Residual Heterogeneity Estimates"
-msgstr "残差異質性の推定値"
-
-msgid "Parameter Covariances"
-msgstr "パラメータ共分散"
-
-msgid "Rank correlation test for Funnel plot asymmetry"
-msgstr "ファンネルプロットの非対称性に関する順位相関検定"
-
-msgid "Kendall's %s"
-msgstr "Kendallの %s"
-
-msgid "Regression test for Funnel plot asymmetry (\"Egger's test\")"
-msgstr "ファンネルプロットの非対称性の回帰検定（\"Eggerの検定\"）"
-
-msgid "Influence Measures"
-msgstr "影響力の測定"
-
-msgid "Std. Residual"
-msgstr "標準的な残差"
-
-msgid "DFFITS"
-msgstr "DFFITS"
-
-msgid "Cook's Distance"
-msgstr "クックの距離"
-
-msgid "Cov. Ratio"
-msgstr "共分散比"
-
-msgid "%1$s%2$s<sub>(-i)</sub>"
-msgstr "%1$s%2$s<sub>(-i)</sub>"
-
-msgid "Q<sub>E(-i)</sub>"
-msgstr "Q<sub>E(-i)</sub>"
-
-msgid "Hat"
-msgstr "ハット"
-
-msgid "Weight"
-msgstr "重み"
-
-msgid "File Drawer Analysis"
-msgstr "お蔵入り(File Drawer)解析"
-
-msgid "Fail-safe N"
-msgstr "フェイル-セーフ(fail-safe) N"
-
-msgid "Target Significance"
-msgstr "ターゲットの有意性"
-
-msgid "Observed Significance"
-msgstr "観測された有意性"
-
-msgid "Omnibus test of Model Coefficients"
-msgstr "モデル係数のオムニバス検定"
-
-msgid "Test of Residual Heterogeneity"
-msgstr "残差異質性の検定"
-
-msgid "The model was estimated using %1$s method."
-msgstr "モデルは %1$s 法で推定されました."
-
-msgid "Log-Likelihood"
-msgstr "対数尤度"
+msgid "Log Lik."
+msgstr ""
 
 msgid "Deviance"
 msgstr "デビアンス"
@@ -512,117 +479,513 @@ msgstr "BIC"
 msgid "AICc"
 msgstr "AICc"
 
-msgid "I%s (%%)"
-msgstr "I%s (%%)"
+msgid "R²"
+msgstr ""
 
-msgid "H%s"
-msgstr "H%s"
+msgid "Effect Size Meta-Regression Terms Tests"
+msgstr ""
 
-msgid "Rank test"
-msgstr "順位検定"
+msgid "Heterogeneity Meta-Regression Terms Tests"
+msgstr ""
 
-msgid "Cases marked with %s are influential."
-msgstr "%s でマークされたケースは影響力があります."
+msgid "Effect Size Meta-Regression Coefficients"
+msgstr ""
 
-msgid "Plot"
-msgstr "プロット"
+msgid "Heterogeneity Meta-Regression Coefficients"
+msgstr ""
 
-msgid "Funnel Plot"
+msgid "Standard Error"
+msgstr "標準誤差"
+
+msgid "t"
+msgstr "t"
+
+msgid "z"
+msgstr "z"
+
+msgid "Effect Size Meta-Regression Correlation Matrix"
+msgstr ""
+
+msgid "Heterogeneity Meta-Regression Correlation Matrix"
+msgstr ""
+
+msgid "Estimated Marginal Means: Effect Size"
+msgstr ""
+
+msgid "Estimated Marginal Means: Heterogeneity"
+msgstr ""
+
+msgid "Variable"
+msgstr ""
+
+msgid "Level"
+msgstr ""
+
+#, fuzzy
+msgid "Bubble Plots"
 msgstr "ファンネルプロット"
 
-msgid "Log-Likelihood for %1$s%2$s"
-msgstr "%1$s%2$s の対数尤度"
+#, fuzzy
+msgid "Bubble Plot"
+msgstr "ファンネルプロット"
 
-msgid "Trim-Fill Analysis"
-msgstr "Trim-fill 分析"
+#, fuzzy
+msgid "%1$s (%2$s)"
+msgstr "BF%1$s%2$s"
 
-msgid "Diagnostic Plots"
-msgstr "診断プロット"
+msgid "Metafor R Code"
+msgstr ""
 
-msgid "Study %s"
-msgstr "研究 %s"
+msgid "Effect Size Meta-Regression Variance Inflation"
+msgstr ""
 
-msgid "FE Model"
-msgstr "FEモデル"
+msgid "Heterogeneity Meta-Regression Variance Inflation"
+msgstr ""
 
-msgid "RE Model"
-msgstr "REモデル"
+#, fuzzy
+msgid "Parameters"
+msgstr "ピーターズ(Peters)"
 
-msgid "Profile Plot for"
-msgstr "プロファイルプロット"
+msgid "VIF"
+msgstr ""
 
-msgid "Restricted Log-Likelihood"
-msgstr "制約付き対数尤度"
+msgid "SIF"
+msgstr ""
 
-msgid "Residual Value"
-msgstr "残差値"
+#, fuzzy
+msgid "Casewise Diagnostics Table"
+msgstr "モデル診断の概要"
 
-msgid "Radial Plot"
-msgstr "Radial プロット"
+msgid ""
+"Casewise diagnostics are not available for models that contain meta-"
+"regression on heterogeneity."
+msgstr ""
 
-msgid "Stopped because k = 1."
-msgstr "k = 1 のため停止しました."
+msgid "No influential cases found."
+msgstr ""
 
-msgid "Normal Q-Q Plot"
-msgstr "通常のQ-Qプロット"
+msgid "Label"
+msgstr ""
 
-msgid "Theoretical Quantiles"
-msgstr "理論上の分位数"
-
-msgid "Sample Quantiles"
-msgstr "サンプル分位数"
-
-msgid "Standardized Residuals"
-msgstr "標準化された残差"
-
-msgid "Fitted vs. Standardized Residuals"
-msgstr "適合残差 vs. 標準化残差"
-
-msgid "Fitted Value"
-msgstr "適合値"
+msgid "Predictor"
+msgstr ""
 
 msgid "Standardized Residual"
 msgstr "標準化残差"
 
-msgid "The model should contain at least one predictor or an intercept."
+msgid "DFFITS"
+msgstr "DFFITS"
+
+msgid "Cook's Distance"
+msgstr "クックの距離"
+
+#, fuzzy
+msgid "Covariance ratio"
+msgstr "共分散比"
+
+msgid "𝜏"
 msgstr ""
-"モデルには、少なくとも 1 つの予測変数または切片が含まれている必要があります."
 
-msgid "FE"
-msgstr "FE"
+msgid "Leave One Out"
+msgstr ""
 
-msgid "ML"
-msgstr "ML"
+msgid "𝜏²"
+msgstr ""
 
-msgid "REML"
-msgstr "REML"
+msgid "Hat"
+msgstr "ハット"
 
-msgid "DL"
-msgstr "DL"
+msgid "Weight"
+msgstr "重み"
 
-msgid "HE"
-msgstr "HE"
+msgid "Difference in coefficients"
+msgstr ""
 
-msgid "HS"
-msgstr "HS"
+msgid "Influential"
+msgstr ""
 
-msgid "SJ"
-msgstr "SJ"
+msgid "Diagnostics are based on the non-clustered model."
+msgstr ""
 
-msgid "EB"
-msgstr "EB"
+msgid "Column name %s already exists in the dataset."
+msgstr ""
 
-msgid "PM"
-msgstr "PM"
+#, fuzzy
+msgid "Profile Likelihood Plots"
+msgstr "プロファイルプロット"
 
-msgid "%g%% Confidence Interval"
-msgstr "%g %% 信頼区間"
+#, fuzzy
+msgid "Profile Likelihood Plot"
+msgstr "プロファイルプロット"
 
-msgid "%s%% CI"
-msgstr "%s%% CI"
+msgid ""
+"Profile likelihood is not available for models that contain meta-regression "
+"on heterogeneity."
+msgstr ""
 
-msgid "%s%% PI"
-msgstr "%s%% PI"
+#, fuzzy
+msgid "Baujat Plot"
+msgstr "Radial プロット"
+
+msgid ""
+"Baujat plot is not available for models that contain meta-regression on "
+"heterogeneity."
+msgstr ""
+
+msgid "Baujat plot is not available for models with clustering."
+msgstr ""
+
+#, fuzzy
+msgid "Squared Pearson Residual"
+msgstr "標準化残差"
+
+#, fuzzy
+msgid "Influence on Fitted Value"
+msgstr "影響力の測定"
+
+#, fuzzy
+msgid "Residual Funnel Plot"
+msgstr "ファンネルプロット"
+
+#, fuzzy
+msgid "Meta-Regression Summary"
+msgstr "PET-PEESE回帰推定値"
+
+msgid "Estimated Marginal Means Summary"
+msgstr ""
+
+msgid "Variance Inflation Summary"
+msgstr ""
+
+msgid ""
+"Indexes of effect size moderation coefficients were specified in an "
+"incorrect format. Try '(1, 2)' to test the first two coefficients."
+msgstr ""
+
+msgid ""
+"Indexes of heterogeneity moderation coefficients were specified in an "
+"incorrect format. Try '(1, 2)' to test the first two coefficients."
+msgstr ""
+
+msgid "The selected coefficients must be an integer vector."
+msgstr ""
+
+msgid ""
+"The selected coefficients must be between 1 and %1$i (i.e., the number of "
+"regression parameters)."
+msgstr ""
+
+#, fuzzy
+msgid "Effect Size (coef: %1$s)"
+msgstr "効果量（%s）"
+
+msgid "Effect size coefficients %1$s correspond to %2$s."
+msgstr ""
+
+#, fuzzy
+msgid "Heterogeneity (coef: %1$s)"
+msgstr "異質性(%s)"
+
+msgid "Heterogeneity coefficients %1$s correspond to %2$s."
+msgstr ""
+
+#, fuzzy
+msgid "Adjusted Estimate"
+msgstr "モデル推定値"
+
+msgid "Mean - %1$sSD"
+msgstr ""
+
+msgid "Mean + %1$sSD"
+msgstr ""
+
+msgid "Distance Matrix"
+msgstr ""
+
+#, fuzzy
+msgid "Correlation Matrix"
+msgstr "自己相関プロット"
+
+msgid "Residual Value"
+msgstr "残差値"
+
+#, fuzzy
+msgid "Profile Likelihood"
+msgstr "対数尤度"
+
+msgid ""
+"Clustering is not supported when specifying a heterogeneity meta-regression "
+"model."
+msgstr ""
+
+msgid "The fixed value for tau2 must be a positive number."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"The custom R code for extending the metafor call failed with the following "
+"message: %1$s"
+msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
+
+#, fuzzy
+msgid "Fisher's z to r"
+msgstr "フィッシャー(Fisher)のz"
+
+msgid "Exponential"
+msgstr ""
+
+msgid "Log odds to proportions"
+msgstr ""
+
+msgid "Log odds to SMD (normal)"
+msgstr ""
+
+msgid "Log odds to SMD (logistic)"
+msgstr ""
+
+msgid "SMD to log odds (normal)"
+msgstr ""
+
+msgid "SMD to log odds (logistic)"
+msgstr ""
+
+msgid "Hakstian & Whalen inverse α"
+msgstr ""
+
+msgid "Bonett inverse α"
+msgstr ""
+
+msgid "Z to R²"
+msgstr ""
+
+msgid "SMD to Cohen's U₁"
+msgstr ""
+
+msgid "SMD to Cohen's U₂"
+msgstr ""
+
+msgid "SMD to Cohen's U₃"
+msgstr ""
+
+msgid "SMD to CLES, Pr(supperiority)"
+msgstr ""
+
+msgid "Moderation (Effect Size): %1$s"
+msgstr ""
+
+#, fuzzy
+msgid "Moderation (Heterogeneity): %1$s"
+msgstr "異質性の検定"
+
+#, fuzzy
+msgid "Moderation: %1$s"
+msgstr "自己相関"
+
+#, fuzzy
+msgid "Heterogeneity:"
+msgstr "異質性"
+
+msgid "Fixed effect tested using z-distribution."
+msgstr ""
+
+msgid "Fixed effect tested using t-distribution."
+msgstr ""
+
+msgid "Fixed effect tested using Knapp and Hartung adjustment."
+msgstr ""
+
+msgid "The heterogeneity model for 𝜏² is specified on the log scale."
+msgstr ""
+
+msgid "The heterogeneity model for 𝜏² is specified on the identity scale."
+msgstr ""
+
+msgid "%1$i clusters with %2$i estimates each."
+msgstr ""
+
+msgid "%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates."
+msgstr ""
+
+msgid "The pooled effect size is transformed using %1$s transformation."
+msgstr ""
+
+msgid ""
+"The pooled effect size corresponds to the weighted average effect across "
+"studies."
+msgstr ""
+
+msgid ""
+"The pooled heterogeneity estimate corresponds to the heterogeneity at the "
+"average of predictor values."
+msgstr ""
+
+msgid "The I² and H² statistics are not available for heterogeneity models."
+msgstr ""
+
+#, fuzzy
+msgid "%1$i observations were ommited due to missing values."
+msgstr "%i の観測値が欠損しているため削除されました。"
+
+msgid "%1$i influential observations were detected and removed."
+msgstr ""
+
+msgid "The Model Structure %1$s was not completely specified and was skipped."
+msgstr ""
+
+msgid ""
+"Prediction interval for the pooled effect size is not available for models "
+"with multiple heterogeneity estimates."
+msgstr ""
+
+msgid ""
+"Each marginal mean estimate is averaged across the levels of the remaining "
+"predictors."
+msgstr ""
+
+msgid "The estimates and intervals are transformed using %1$s transformation."
+msgstr ""
+
+msgid "The estimates and intervals correspond to %1$s."
+msgstr ""
+
+msgid "Permutation p-value is based on %1$s permutations."
+msgstr ""
+
+msgid ""
+"The model estimation failed with the following message: %1$s. Please, "
+"consider simplifying the model."
+msgstr ""
+
+msgid "Error reading the distance matrix file: %1$s"
+msgstr ""
+
+msgid ""
+"The distance matrix must be square. The number of rows (%1$i) does not match "
+"the number of columns (%2$i)."
+msgstr ""
+
+msgid "Error reading the correlation matrix file: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid "Random Effects / Model Stucture Summary"
+msgstr "変量効果モデル:"
+
+msgid "Simple / Nested Summary"
+msgstr ""
+
+msgid "Estimates"
+msgstr "推定値"
+
+msgid "σ²"
+msgstr ""
+
+msgid "σ"
+msgstr ""
+
+msgid "Levels"
+msgstr ""
+
+#, fuzzy
+msgid "Fixed"
+msgstr "固定 H"
+
+#, fuzzy
+msgid "Inclusion Test"
+msgstr "包含BF"
+
+#, fuzzy
+msgid "Removed Component"
+msgstr "分散成分"
+
+msgid "LRT"
+msgstr ""
+
+msgid ""
+"Likelihood Ratio Test (LRT) and p-value are based on a comparison with the "
+"complete model."
+msgstr ""
+
+#, fuzzy
+msgid "Random Slopes Summary"
+msgstr "個別モデルの要約"
+
+msgid "Structured"
+msgstr ""
+
+msgid "Summary"
+msgstr "要約"
+
+msgid "Autoregressive"
+msgstr ""
+
+msgid "Spatial"
+msgstr ""
+
+msgid "Known Correlation Summary"
+msgstr ""
+
+msgid "Testing Inclusion of Random Effects / Model Structure"
+msgstr ""
+
+#, fuzzy
+msgid "Random Slopes"
+msgstr "変量 H%s"
+
+msgid "Compound Symmetry"
+msgstr ""
+
+msgid "Heteroscedastic Compound Symmetry"
+msgstr ""
+
+msgid "Unstructured"
+msgstr ""
+
+msgid "Identity"
+msgstr ""
+
+msgid "Diagonal"
+msgstr ""
+
+msgid "AR(1)"
+msgstr ""
+
+msgid "Heteroskedastic AR(1)"
+msgstr ""
+
+msgid "Continuous-Time AR"
+msgstr ""
+
+msgid "Gaussian"
+msgstr ""
+
+msgid "Linear"
+msgstr ""
+
+msgid "Rational Quadratic"
+msgstr ""
+
+msgid "Spherical"
+msgstr ""
+
+#, fuzzy
+msgid "Sqrt. Estimate"
+msgstr "推定"
+
+msgid "Levels:"
+msgstr ""
+
+#, fuzzy
+msgid "Component:"
+msgstr "分散成分"
+
+#, fuzzy
+msgid "Estimates 𝜏²"
+msgstr "推定値"
+
+#, fuzzy
+msgid "Estimates ρ"
+msgstr "推定値"
 
 msgid "%s Summary"
 msgstr "%s の要約"
@@ -690,14 +1053,138 @@ msgstr "サンプルサイズ"
 msgid "Total events"
 msgstr "イベントの合計数"
 
-msgid "Variance Components"
-msgstr "分散成分"
+msgid ""
+"Cannot compute outcomes. Chech that all of the required information is "
+"specified via the appropriate arguments (i.e. an Effect Size and either "
+"Standard Error, Sampling Variance, or 95% Confidence Interval)."
+msgstr ""
 
-msgid "Plots"
-msgstr "プロット"
+msgid "Step"
+msgstr ""
+
+msgid "Computed"
+msgstr ""
+
+msgid "Total Computed"
+msgstr ""
+
+msgid "Effect sizes were successfully computed for each data entry."
+msgstr ""
+
+msgid ""
+"Effect sizes were successfully computed for %1$i out of %2$i data entries."
+msgstr ""
+
+msgid "Error in Step %1$i:"
+msgstr ""
+
+msgid "Estimated Marginal Means"
+msgstr ""
+
+#, fuzzy
+msgid "Model Information"
+msgstr "情報"
+
+#, fuzzy
+msgid "Pooled Estimate"
+msgstr "モデル推定値"
+
+#, fuzzy
+msgid "Missing Data Summary"
+msgstr "%s の要約"
+
+msgid ""
+"The dataset contains missing values: %1$i missing values were removed from "
+"the analysis."
+msgstr ""
+
+msgid "Funnel Plot"
+msgstr "ファンネルプロット"
+
+msgid ""
+"Funnel plot prediction interval was specified in an incorrect format. Try "
+"'(0.90, 0.95, 0.99)'."
+msgstr ""
+
+#, fuzzy
+msgid "Funnel plot prediction intervals must be between 0 and 1."
+msgstr "すべてのp値のカットオフは0から1の間である必要があります."
+
+#, fuzzy
+msgid "Funnel plot prediction intervals must be specified."
+msgstr "少なくとも1つのp値カットオフを設定する必要があります."
+
+msgid ""
+"Power enhancement breaks were specified in an incorrect format. Try '(0.30, "
+"0.50, 0.80)'."
+msgstr ""
+
+msgid "Power enhancement breaks must be between 0.05 and 1."
+msgstr ""
+
+#, fuzzy
+msgid "Power"
+msgstr "下限"
+
+msgid "H₁ Funnel Parameter Estimates"
+msgstr ""
+
+msgid "μ"
+msgstr ""
+
+#, fuzzy
+msgid "The funnel plot parameter estimation failed with the following error:"
+msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
+
+#, fuzzy
+msgid "Meta-Regression Test for Funnel Plot Asymmetry"
+msgstr "ファンネルプロットの非対称性に関する順位相関検定"
+
+#, fuzzy
+msgid "Asymmetry Test"
+msgstr "ファンネルプロットの非対称性検定"
+
+#, fuzzy
+msgid "Limit Estimate"
+msgstr "推定"
+
+msgid "Lower 95% CI"
+msgstr ""
+
+msgid "Upper 95% CI"
+msgstr ""
+
+#, fuzzy
+msgid "Weighted Regression Test for Funnel Plot Asymmetry"
+msgstr "ファンネルプロットの非対称性の回帰検定（\"Eggerの検定\"）"
+
+#, fuzzy
+msgid "Rank Correlation Test for Funnel Plot Asymmetry"
+msgstr "ファンネルプロットの非対称性に関する順位相関検定"
+
+#, fuzzy
+msgid "The funnel plot asymmetry test failed with the following error:"
+msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
+
+#, fuzzy
+msgid ""
+"The funnel plot asymmetry test at level %1$s failed with the following error:"
+msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
+
+msgid ""
+"The meta-analytic model did not converge. Try modifying the 'Method' option "
+"for the 'Funnel under H₁' settings."
+msgstr ""
+
+msgid "The model should contain at least one predictor or an intercept."
+msgstr ""
+"モデルには、少なくとも 1 つの予測変数または切片が含まれている必要があります."
 
 msgid "Intercept"
 msgstr ""
+
+msgid "Coefficients"
+msgstr "係数"
 
 #, fuzzy
 msgid "At least one predictor needs to be specified."
@@ -727,10 +1214,9 @@ msgid ""
 "largest R-hat is %.3f > 1.01. To lower R-hat please increase 'Iterations', "
 "or 'Adapt delta' in the Options section."
 msgstr ""
-"推論の信頼性が低い可能性があります -- MCMC "
-"チェーンが収束していない可能性があります。最大のR-hatが %.3f > 1."
-"01でした。R-hatを下げるためには、オプションで「Iterations」や「Adapt "
-"delta」を増やしてください。"
+"推論の信頼性が低い可能性があります -- MCMC チェーンが収束していない可能性があ"
+"ります。最大のR-hatが %.3f > 1.01でした。R-hatを下げるためには、オプションで"
+"「Iterations」や「Adapt delta」を増やしてください。"
 
 msgid ""
 "Low estimation accuracy -- The smallest Effective Sample Size (ESS) is %.2f "
@@ -789,9 +1275,6 @@ msgstr ""
 
 msgid "The loaded object is not a RoBMA model."
 msgstr "読み込まれたオブジェクトは、RoBMAモデルではありません."
-
-msgid "Summary"
-msgstr "要約"
 
 msgid "Conditional Estimates"
 msgstr "条件付き推定値"
@@ -1124,9 +1607,6 @@ msgstr "注: 十分に検出力のある研究が %1$i ありました"
 msgid "Test of Effect"
 msgstr "効果量の検定"
 
-msgid "Estimates"
-msgstr "推定値"
-
 #, fuzzy
 msgid "Regression Estimates"
 msgstr "PET-PEESE回帰推定値"
@@ -1189,6 +1669,144 @@ msgstr[0] ""
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "%i の観測値が欠損しているため削除されました。"
+
+#~ msgid "The metafor package crashed with the following error: %s"
+#~ msgstr "metaforパッケージが次のエラーでクラッシュしました: %s"
+
+#~ msgid "Fixed and Random Effects"
+#~ msgstr "固定効果と変量効果"
+
+#~ msgid "Q"
+#~ msgstr "Q"
+
+#~ msgid "<em>p</em>-values are approximate."
+#~ msgstr "<em>p</em>の値は概算値です."
+
+#~ msgid "Wald test."
+#~ msgstr "Wald検定."
+
+#~ msgid "Parameter Covariances"
+#~ msgstr "パラメータ共分散"
+
+#~ msgid "Kendall's %s"
+#~ msgstr "Kendallの %s"
+
+#~ msgid "Std. Residual"
+#~ msgstr "標準的な残差"
+
+#~ msgid "%1$s%2$s<sub>(-i)</sub>"
+#~ msgstr "%1$s%2$s<sub>(-i)</sub>"
+
+#~ msgid "Q<sub>E(-i)</sub>"
+#~ msgstr "Q<sub>E(-i)</sub>"
+
+#~ msgid "File Drawer Analysis"
+#~ msgstr "お蔵入り(File Drawer)解析"
+
+#~ msgid "Fail-safe N"
+#~ msgstr "フェイル-セーフ(fail-safe) N"
+
+#~ msgid "Target Significance"
+#~ msgstr "ターゲットの有意性"
+
+#~ msgid "Observed Significance"
+#~ msgstr "観測された有意性"
+
+#~ msgid "Omnibus test of Model Coefficients"
+#~ msgstr "モデル係数のオムニバス検定"
+
+#~ msgid "Test of Residual Heterogeneity"
+#~ msgstr "残差異質性の検定"
+
+#~ msgid "The model was estimated using %1$s method."
+#~ msgstr "モデルは %1$s 法で推定されました."
+
+#~ msgid "I%s (%%)"
+#~ msgstr "I%s (%%)"
+
+#~ msgid "H%s"
+#~ msgstr "H%s"
+
+#~ msgid "Rank test"
+#~ msgstr "順位検定"
+
+#~ msgid "Cases marked with %s are influential."
+#~ msgstr "%s でマークされたケースは影響力があります."
+
+#~ msgid "Plot"
+#~ msgstr "プロット"
+
+#~ msgid "Log-Likelihood for %1$s%2$s"
+#~ msgstr "%1$s%2$s の対数尤度"
+
+#~ msgid "Trim-Fill Analysis"
+#~ msgstr "Trim-fill 分析"
+
+#~ msgid "Diagnostic Plots"
+#~ msgstr "診断プロット"
+
+#~ msgid "Study %s"
+#~ msgstr "研究 %s"
+
+#~ msgid "FE Model"
+#~ msgstr "FEモデル"
+
+#~ msgid "RE Model"
+#~ msgstr "REモデル"
+
+#~ msgid "Restricted Log-Likelihood"
+#~ msgstr "制約付き対数尤度"
+
+#~ msgid "Stopped because k = 1."
+#~ msgstr "k = 1 のため停止しました."
+
+#~ msgid "Normal Q-Q Plot"
+#~ msgstr "通常のQ-Qプロット"
+
+#~ msgid "Theoretical Quantiles"
+#~ msgstr "理論上の分位数"
+
+#~ msgid "Sample Quantiles"
+#~ msgstr "サンプル分位数"
+
+#~ msgid "Standardized Residuals"
+#~ msgstr "標準化された残差"
+
+#~ msgid "Fitted vs. Standardized Residuals"
+#~ msgstr "適合残差 vs. 標準化残差"
+
+#~ msgid "Fitted Value"
+#~ msgstr "適合値"
+
+#~ msgid "ML"
+#~ msgstr "ML"
+
+#~ msgid "REML"
+#~ msgstr "REML"
+
+#~ msgid "DL"
+#~ msgstr "DL"
+
+#~ msgid "HE"
+#~ msgstr "HE"
+
+#~ msgid "HS"
+#~ msgstr "HS"
+
+#~ msgid "SJ"
+#~ msgstr "SJ"
+
+#~ msgid "EB"
+#~ msgstr "EB"
+
+#~ msgid "PM"
+#~ msgstr "PM"
+
+#~ msgid "%g%% Confidence Interval"
+#~ msgstr "%g %% 信頼区間"
+
+#~ msgid "Plots"
+#~ msgstr "プロット"
 
 #~ msgid "Wald tests."
 #~ msgstr "Wald検定."
