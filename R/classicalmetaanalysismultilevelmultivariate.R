@@ -194,7 +194,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
             .quitAnalysis(gettextf("Error reading the distance matrix file: %1$s", distanceMatrix))
 
           if (nrow(distanceMatrix) != ncol(distanceMatrix))
-            .quitAnalysis(gettext("The distance matrix must be square. The number of rows (%1$i) does not match the number of columns (%2$i).",
+            .quitAnalysis(gettextf("The distance matrix must be square. The number of rows (%1$i) does not match the number of columns (%2$i).",
                                   nrow(distanceMatrix), ncol(distanceMatrix)))
 
           # spatial does not require a grouping factor
@@ -231,7 +231,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
           .quitAnalysis(gettextf("Error reading the correlation matrix file: %1$s", correlationMatrix))
 
         if (nrow(correlationMatrix) != ncol(correlationMatrix))
-          .quitAnalysis(gettext("The distance matrix must be square. The number of rows (%1$i) does not match the number of columns (%2$i).",
+          .quitAnalysis(gettextf("The distance matrix must be square. The number of rows (%1$i) does not match the number of columns (%2$i).",
                                 nrow(correlationMatrix), ncol(correlationMatrix)))
 
         randomFormulas[[i]] <- as.formula(paste0("~ 1 | ", tempValueOuter), env = parent.frame(1))

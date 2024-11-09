@@ -179,7 +179,7 @@
         rmaInput$data$constant   <- 1
       for (i in seq_along(rmaInput$dist)) {
         if (is.matrix(rmaInput$dist[[i]]) && !all(unique(rmaInput[["data"]][[names(rmaInput$dist)[i]]]) %in% rownames(rmaInput$dist[[names(rmaInput$dist)[i]]])))
-          .quitAnalysis(sprintf(gettext("The loaded distance matrix for '%1$s' does not match the dataset. The following levels are missing: %2$s."),
+          .quitAnalysis(gettextf("The loaded distance matrix for '%1$s' does not match the dataset. The following levels are missing: %2$s.",
                                 names(rmaInput$dist)[i],
                                 paste0(unique(rmaInput[["data"]][[names(rmaInput$dist)[i]]])[!unique(rmaInput[["data"]][[names(rmaInput$dist)[i]]]) %in% rownames(rmaInput$dist)], collapse = ", ")))
       }
@@ -188,7 +188,7 @@
       rmaInput$R   <- unlist(lapply(randomFormulaList, attr, which = "R"), recursive = FALSE)
       for (i in seq_along(rmaInput$R)) {
         if (!all(unique(rmaInput[["data"]][[names(rmaInput$R)[i]]]) %in% rownames(rmaInput$R[[names(rmaInput$R)[i]]])))
-          .quitAnalysis(sprintf(gettext("The loaded correlation matrix for '%1$s' does not match the dataset. The following levels are missing: %2$s."),
+          .quitAnalysis(gettextf("The loaded correlation matrix for '%1$s' does not match the dataset. The following levels are missing: %2$s.",
                                 names(rmaInput$R)[i],
                                 paste0(unique(rmaInput[["data"]][[names(rmaInput$R)[i]]])[!unique(rmaInput[["data"]][[names(rmaInput$R)[i]]]) %in% rownames(rmaInput$R)], collapse = ", ")))
       }
