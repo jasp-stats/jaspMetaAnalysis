@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2024-11-09 02:44\n"
-"PO-Revision-Date: 2024-11-10 09:00+0000\n"
+"PO-Revision-Date: 2024-11-11 11:00+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
@@ -276,7 +276,7 @@ msgstr ""
 "del modelo de efectos aleatorios restringido."
 
 msgid "Effect Size"
-msgstr "Tamaño del efecto"
+msgstr "Magnitud del efecto"
 
 msgid "Effect size"
 msgstr "Magnitud del efecto"
@@ -746,7 +746,7 @@ msgid "Fisher's z to r"
 msgstr "Z de Fisher"
 
 msgid "Exponential"
-msgstr ""
+msgstr "Exponencial"
 
 msgid "Log odds to proportions"
 msgstr ""
@@ -928,81 +928,76 @@ msgid "Random Slopes Summary"
 msgstr "Resumen de Modelos Individuales"
 
 msgid "Structured"
-msgstr ""
+msgstr "Estructurado"
 
 msgid "Summary"
 msgstr "Resumen"
 
 msgid "Autoregressive"
-msgstr ""
+msgstr "Autorregresivo"
 
 msgid "Spatial"
-msgstr ""
+msgstr "Espacial"
 
 msgid "Known Correlation Summary"
-msgstr ""
+msgstr "Resumen de la correlación conocida"
 
 msgid "Testing Inclusion of Random Effects / Model Structure"
 msgstr ""
 
-#, fuzzy
 msgid "Random Slopes"
-msgstr "H%s Aleatorio"
+msgstr "Pendientes aleatorias"
 
 msgid "Compound Symmetry"
-msgstr ""
+msgstr "Simetría compuesta"
 
 msgid "Heteroscedastic Compound Symmetry"
-msgstr ""
+msgstr "Simetría compuesta heterocedástica"
 
 msgid "Unstructured"
-msgstr ""
+msgstr "No estructurada"
 
 msgid "Identity"
-msgstr ""
+msgstr "Identidad"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Diagonal"
 
 msgid "AR(1)"
-msgstr ""
+msgstr "AR(1)"
 
 msgid "Heteroskedastic AR(1)"
-msgstr ""
+msgstr "AR(1) heterocedástica"
 
 msgid "Continuous-Time AR"
-msgstr ""
+msgstr "AR en tiempo continuo"
 
 msgid "Gaussian"
-msgstr ""
+msgstr "Normal"
 
 msgid "Linear"
-msgstr ""
+msgstr "Lineal"
 
 msgid "Rational Quadratic"
-msgstr ""
+msgstr "Cuadrática racional"
 
 msgid "Spherical"
-msgstr ""
+msgstr "Esférica"
 
-#, fuzzy
 msgid "Sqrt. Estimate"
-msgstr "Estimar"
+msgstr "Estimación cuadr."
 
 msgid "Levels:"
-msgstr ""
+msgstr "Niveles:"
 
-#, fuzzy
 msgid "Component:"
-msgstr "Componentes de Varianza"
+msgstr "Componente:"
 
-#, fuzzy
 msgid "Estimates 𝜏²"
-msgstr "Estimaciones"
+msgstr "Estimaciones 𝜏²"
 
-#, fuzzy
 msgid "Estimates ρ"
-msgstr "Estimaciones"
+msgstr "Estimaciones ρ"
 
 msgid "%s Summary"
 msgstr "Resumen de %s"
