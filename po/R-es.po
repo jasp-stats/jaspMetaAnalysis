@@ -1081,7 +1081,7 @@ msgstr "Eventos totales"
 msgid ""
 "Cannot compute outcomes. Chech that all of the required information is "
 "specified via the appropriate arguments (i.e. an Effect Size and either "
-"Standard Error, Sampling Variance, or 95% Confidence Interval)."
+"Standard Error, Sampling Variance, or 95%% Confidence Interval)."
 msgstr ""
 
 msgid "Step"

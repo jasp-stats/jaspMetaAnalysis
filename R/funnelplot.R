@@ -540,9 +540,9 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     metaRegressionTable$addColumnInfo(name = "k",     title = gettext("Estimates"), type = "integer")
     metaRegressionTable$addColumnInfo(name = "z", title = gettext("z"), type = "number", overtitle = gettext("Asymmetry Test"))
     metaRegressionTable$addColumnInfo(name = "p", title = gettext("p"), type = "pvalue", overtitle = gettext("Asymmetry Test"))
-    metaRegressionTable$addColumnInfo(name = "est", title = gettext("Estimate"),     type = "number", overtitle = gettext("Limit Estimate"))
-    metaRegressionTable$addColumnInfo(name = "lCI", title = gettext("Lower 95% CI"), type = "number", overtitle = gettext("Limit Estimate"))
-    metaRegressionTable$addColumnInfo(name = "uCI", title = gettext("Upper 95% CI"), type = "number", overtitle = gettext("Limit Estimate"))
+    metaRegressionTable$addColumnInfo(name = "est", title = gettext("Estimate"),       type = "number", overtitle = gettext("Limit Estimate"))
+    metaRegressionTable$addColumnInfo(name = "lCI", title = gettextf("Lower 95%% CI"), type = "number", overtitle = gettext("Limit Estimate"))
+    metaRegressionTable$addColumnInfo(name = "uCI", title = gettextf("Upper 95%% CI"), type = "number", overtitle = gettext("Limit Estimate"))
 
     if (.fpReady(options)) {
       if (options[["split"]] == "") {
@@ -595,9 +595,9 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     weightedRegressionTable$addColumnInfo(name = "t",  title = gettext("t"),  type = "number",  overtitle = gettext("Asymmetry Test"))
     weightedRegressionTable$addColumnInfo(name = "df", title = gettext("df"), type = "integer", overtitle = gettext("Asymmetry Test"))
     weightedRegressionTable$addColumnInfo(name = "p",  title = gettext("p"),  type = "pvalue",  overtitle = gettext("Asymmetry Test"))
-    weightedRegressionTable$addColumnInfo(name = "est", title = gettext("Estimate"),     type = "number", overtitle = gettext("Limit Estimate"))
-    weightedRegressionTable$addColumnInfo(name = "lCI", title = gettext("Lower 95% CI"), type = "number", overtitle = gettext("Limit Estimate"))
-    weightedRegressionTable$addColumnInfo(name = "uCI", title = gettext("Upper 95% CI"), type = "number", overtitle = gettext("Limit Estimate"))
+    weightedRegressionTable$addColumnInfo(name = "est", title = gettext("Estimate"),       type = "number", overtitle = gettext("Limit Estimate"))
+    weightedRegressionTable$addColumnInfo(name = "lCI", title = gettextf("Lower 95%% CI"), type = "number", overtitle = gettext("Limit Estimate"))
+    weightedRegressionTable$addColumnInfo(name = "uCI", title = gettextf("Upper 95%% CI"), type = "number", overtitle = gettext("Limit Estimate"))
 
     if (.fpReady(options)) {
       if (options[["split"]] == "") {

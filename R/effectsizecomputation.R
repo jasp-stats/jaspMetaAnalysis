@@ -51,7 +51,7 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
 
     # set error message if reported effect sizes cannot be performed
     if (effectSizeType[["design"]] == "reportedEffectSizes" && !.escReportedEffectSizesReady(variables, all = TRUE)) {
-      newDataOutput <- try(stop(gettext("Cannot compute outcomes. Chech that all of the required information is specified via the appropriate arguments (i.e. an Effect Size and either Standard Error, Sampling Variance, or 95% Confidence Interval).")))
+      newDataOutput <- try(stop(gettextf("Cannot compute outcomes. Chech that all of the required information is specified via the appropriate arguments (i.e. an Effect Size and either Standard Error, Sampling Variance, or 95%% Confidence Interval).")))
     } else {
     # set escalc input
       escalcInput <- c(
