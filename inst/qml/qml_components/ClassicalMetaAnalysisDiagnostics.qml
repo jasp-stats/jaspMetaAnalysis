@@ -23,22 +23,115 @@ import JASP				1.0
 
 Section
 {
-	title: qsTr("Diagnostics")
+	title:						qsTr("Diagnostics")
+	property string module:		"metaAnalysis"
+	columns:					1
+	info: qsTr("Options for evaluating the influence of individual studies and assessing model diagnostics, including variance inflation factors, casewise diagnostics, and diagnostic plots.")
+
 	Group
 	{
-		title: qsTr("Plots")
-		CheckBox { name: "trimFillAnalysis";			text: qsTr("Trim-fill analysis")	}
-		CheckBox { name: "profilePlot";	text: qsTr("Profile plot")			}
-		CheckBox
+		columns:	2
+
+		Group
 		{
-			name: "diagnosticPlot"; text: qsTr("Diagnostic plots")
-			CheckBox { name: "diagnosticQqPlot"; text: qsTr("Q-Q plot standardized residuals"); checked: true }
+			CheckBox
+			{
+				name:		"diagnosticsVarianceInflationFactor"
+				text:		qsTr("Variace inflation factor")
+				Layout.preferredWidth: 300 * jaspTheme.uiScale
+				enabled:	predictors.count > 0
+				info: qsTr("Include variance inflation factors to assess multicollinearity among predictors. Available when predictors are included in the model.")
+
+				CheckBox
+				{
+					name:		"diagnosticsVarianceInflationFactorAggregate"
+					text:		qsTr("Aggregate by terms")
+					checked:	true
+					info: qsTr("Aggregate variance inflation factors by terms instead of individual coefficients.")
+				}
+			}
+
+			CheckBox
+			{
+				name:		"diagnosticsCasewiseDiagnostics"
+				text:		qsTr("Casewise diagnostics")
+				info: qsTr("Include casewise diagnostics to assess the influence of individual studies on the meta-analysis results.")
+
+				CheckBox
+				{
+					name:		"diagnosticsCasewiseDiagnosticsShowInfluentialOnly"
+					text:		qsTr("Show influential only")
+					visible:	module == "metaAnalysis"
+					info: qsTr("Show only the influential studies in the casewise diagnostics. Unvailable when performing multilevel/multivariate meta-analysis.")
+				}
+
+				CheckBox
+				{
+					name:		"diagnosticsCasewiseDiagnosticsIncludePredictors"
+					text:		qsTr("Include predictors")
+					info: qsTr("Include predictor variables in the casewise diagnostics output.")
+				}
+
+				CheckBox
+				{
+					name:		"diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"
+					text:		qsTr("Difference in coefficients")
+					info: qsTr("Include the differences in model coefficients when each study is excluded (DFBETAS).")
+				}
+
+				CheckBox
+				{
+					name:		"diagnosticsCasewiseDiagnosticsExportToDataset"
+					text:		qsTr("Export to dataset")
+					info: qsTr("Export the casewise diagnostics results to the dataset.")
+
+					CheckBox
+					{
+						name:		"diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"
+						text:		qsTr("Influential indicator only")
+						checked:	true
+						visible:	module == "metaAnalysis"
+						info: qsTr("Export only the indicator of influential cases to the dataset.")
+					}
+				}
+
+				/*
+				CheckBox
+				{
+					name:		"diagnosticsCasewiseDiagnosticsRerunWithoutInfluentialCases"
+					text:		qsTr("Rerun without influential cases")
+					visible:	false
+					info: qsTr("Option to rerun the analysis without influential cases.")
+				}
+				*/
+			}
 		}
-	}
-	Group
-	{
-		title: qsTr("Robustness")
-		CheckBox { name: "failSafeN";			text: qsTr("Fail-safe N")			}
-		CheckBox { name: "casewiseDiagnostics";	text: qsTr("Casewise diagnostics")	}
+
+		Group
+		{
+			title:		qsTr("Plots")
+
+			CheckBox
+			{
+				name:		"diagnosticsPlotsProfileLikelihood"
+				text:		qsTr("Profile likelihood")
+				info: qsTr("Include a profile likelihood plot for the heterogeneity parameter (τ²).")
+			}
+
+			CheckBox
+			{
+				name:		"diagnosticsPlotsBaujat"
+				text:		qsTr("Baujat")
+				visible:	module == "metaAnalysis"
+				info: qsTr("Include a Baujat plot to detect studies contributing to heterogeneity and overall effect size. Unvailable when performing multilevel/multivariate meta-analysis.")
+			}
+
+			CheckBox
+			{
+				name:		"diagnosticsResidualFunnel"
+				text:		qsTr("Residual funnel")
+				info: qsTr("Include a residual funnel plot.")
+			}
+		}
 	}
 }

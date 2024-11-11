@@ -26,29 +26,123 @@ Form
 {
 	VariablesForm
 	{
-		preferredHeight: 400 * preferencesModel.uiScale
-		AvailableVariablesList { name: "allVariables" }
-		AssignedVariablesList { name: "effectSize";	title: qsTr("Effect Size"); singleVariable: true; allowedColumns: ["scale"] }
-		AssignedVariablesList { name: "effectSizeSe"; title: qsTr("Effect Size Standard Error"); singleVariable: true; allowedColumns: ["scale"] }
-		MA.ClassicalMetaAnalysisMethod{ visible: true}
-		AssignedVariablesList { name: "studyLabel"; title: qsTr("Study Labels"); singleVariable: true; allowedColumns: ["nominal"] }
-		AssignedVariablesList { name: "covariates";	title: qsTr("Covariates"); allowedColumns: ["scale"] }
-		AssignedVariablesList { name: "factors"; title: qsTr("Factors"); allowedColumns: ["nominal"] }
-	}
+		preferredHeight: 450 * preferencesModel.uiScale
 
-	Section
-	{
-		title: qsTr("Model")
-		VariablesForm
+		AvailableVariablesList
 		{
-			preferredHeight: 150 * preferencesModel.uiScale
-			AvailableVariablesList { name: "modelComponents"; title: qsTr("Components"); source: ["covariates","factors"]}
-			AssignedVariablesList  { name: "modelTerms"; title: qsTr("Model Terms"); listViewType: JASP.Interaction }
+			name:				"allVariables"
 		}
-		CheckBox { name: "interceptTerm"; label: qsTr("Include intercept"); checked: true }
+
+		AssignedVariablesList
+		{
+			name:				"effectSize"
+			id:					effectSize
+			title:				qsTr("Effect Size")
+			singleVariable:		true
+			allowedColumns:		["scale"]
+			info: qsTr("Variable containing the observed effect sizes.")
+		}
+		AssignedVariablesList
+		{
+			name:				"effectSizeStandardError"
+			id:					effectSizeStandardError
+			title:				qsTr("Effect Size Standard Error")
+			singleVariable:		true
+			allowedColumns:		["scale"]
+			info: qsTr("Variable containing the standard errors corresponding to the effect sizes.")
+		}
+
+		DropDown
+		{
+			name:			"method"
+			id:				method
+			label:			qsTr("Method")
+			startValue:		"restrictedML"
+			info: qsTr("Method used to estimate heterogeneity (tau-squared) in the meta-analysis. The available methods depend on the inclusion of heterogeneity model terms.")
+			values:			(function() {
+				if (sectionModel.heterogeneityModelTermsCount == 0) {
+					return [
+						{ label: qsTr("Equal Effects")			, value: "equalEffects"		},
+						{ label: qsTr("Fixed Effects")			, value: "fixedEffects"		},
+						{ label: qsTr("Maximum Likelihood")		, value: "maximumLikelihood"},
+						{ label: qsTr("Restricted ML")			, value: "restrictedML"		},
+						{ label: qsTr("DerSimonian-Laird")		, value: "derSimonianLaird"	},
+						{ label: qsTr("Hedges")					, value: "hedges"			},
+						{ label: qsTr("Hunter-Schmidt")			, value: "hunterSchmidt"	},
+						{ label: qsTr("Hunter-Schmidt (SSC)")	, value: "hunterSchmidtSsc"	},
+						{ label: qsTr("Sidik-Jonkman")			, value: "sidikJonkman"		},
+						{ label: qsTr("Empirical Bayes")		, value: "empiricalBayes"	},
+						{ label: qsTr("Paule-Mandel")			, value: "pauleMandel"		},
+						{ label: qsTr("Paule-Mandel (MU)")		, value: "pauleMandelMu"	},
+						{ label: qsTr("Generalized Q-stat")		, value: "qeneralizedQStat"	},
+						{ label: qsTr("Generalized Q-stat (MU)"), value: "qeneralizedQStatMu"}
+					];
+				} else {
+					return [
+						{ label: qsTr("Maximum Likelihood")		, value: "maximumLikelihood"},
+						{ label: qsTr("Restricted ML")			, value: "restrictedML"		},
+						{ label: qsTr("Empirical Bayes")		, value: "empiricalBayes"	}
+					];
+				}})()
+		}
+
+		DropDown
+		{
+			name:		"fixedEffectTest"
+			label:		qsTr("Fixed effect test")
+			startValue:	"knha"
+			values:		[ "z", "t", "knha"]
+			info: qsTr("Method for testing the model coefficients: 'z' uses standard normal approximation, 't' uses t-distribution, and 'knha' uses the Knapp and Hartung adjustment (default).")
+		}
+
+		AssignedVariablesList
+		{
+			name:				"predictors"
+			id:					predictors
+			title:				qsTr("Predictors")
+			allowedColumns:		["nominal", "scale"]
+			allowTypeChange:	true
+			info: qsTr("Variables to include as predictors (moderators) in the meta-regression model.")
+		}
+
+		AssignedVariablesList
+		{
+			name:				"clustering"
+			id:					clustering
+			title:				qsTr("Clustering")
+			singleVariable:		true
+			enabled:			!sectionAdvanced.permutationTestChecked
+			allowedColumns:		["nominal"]
+			info: qsTr("Variable indicating clustering of effect sizes. This option is disabled when permutation tests are selected.")
+		}
+
+		AssignedVariablesList
+		{
+			name:				"studyLabels"
+			title:				qsTr("Study Labels")
+			singleVariable:		true
+			allowedColumns:		["nominal"]
+			info: qsTr("Variable containing labels for the studies. Used for labeling outputs and plots.")
+		}
 	}
 
-	MA.ClassicalMetaAnalysisStatistics{}
+	MA.ClassicalMetaAnalysisModel
+	{
+		id:		sectionModel
+	}
 
-	MA.ClassicalMetaAnalysisDiagnostics{}
+	MA.ClassicalMetaAnalysisStatistics {}
+
+	MA.ClassicalMetaAnalysisEstimatedMarginalMeans {}
+
+	MA.ClassicalMetaAnalysisForestPlot {}
+
+	MA.ClassicalMetaAnalysisBubblePlot {}
+
+	MA.ClassicalMetaAnalysisDiagnostics {}
+
+	MA.ClassicalMetaAnalysisAdvanced
+	{
+		id:		sectionAdvanced
+	}
 }

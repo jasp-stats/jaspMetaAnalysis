@@ -41,8 +41,8 @@ Form
 	//	VariablesForm
 	//	{
 	//		AssignedVariablesList { name: "variables";	title: qsTr("Variables") }
-	//		AssignedVariablesList { name: "splitby";	title: qsTr("Split"); singleVariable: true; suggestedColumns: ["ordinal", "nominal"] }
-	//		AssignedVariablesList { name: "test";	title: qsTr("Test"); singleVariable: true; suggestedColumns: ["ordinal", "nominal"] }
+	//		AssignedVariablesList { name: "splitby";	title: qsTr("Split"); singleVariable: true; allowedColumns: ["ordinal", "nominal"] }
+	//		AssignedVariablesList { name: "test";	title: qsTr("Test"); singleVariable: true; allowedColumns: ["ordinal", "nominal"] }
 	//	}
 
 	DropDown { name: "labels_variable"; label: qsTr("Case labels"); values: allAvailableVariables; }

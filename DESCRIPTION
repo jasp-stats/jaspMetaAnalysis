@@ -1,7 +1,7 @@
 Package: jaspMetaAnalysis
 Type: Package
 Title: Meta-Analysis Module for JASP
-Version: 0.19.0
+Version: 0.19.2
 Date: 2022-10-05
 Author: JASP Team
 Website: jasp-stats.org
@@ -28,7 +28,12 @@ Imports:
   RoBMA,
   metamisc (>= 0.2.5),
   ggmcmc,
-  pema
+  pema,
+  clubSandwich,
+  CompQuadForm,
+  sp,
+  dfoptim,
+  patchwork
 Remotes:
   jasp-stats/jaspBase,
   jasp-stats/jaspGraphs

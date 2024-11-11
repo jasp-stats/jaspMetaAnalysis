@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.0\n"
-"POT-Creation-Date: 2024-04-20 02:33\n"
-"PO-Revision-Date: 2024-06-20 21:09+0000\n"
+"POT-Creation-Date: 2024-11-09 02:44\n"
+"PO-Revision-Date: 2024-09-05 15:09+0000\n"
 "Last-Translator: Tomasz Misiuro <tomaszmisiuro@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/pl/>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.6-rc\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 msgid ""
 "The study labels contain invalid characters. Please, remove them before "
@@ -344,7 +344,7 @@ msgid "Autocorrelations plot"
 msgstr "Wykresy autokorelacji"
 
 msgid "Lag"
-msgstr ""
+msgstr "Opóźnienie"
 
 msgid "Autocorrelation"
 msgstr "Autokorelacja"
@@ -358,16 +358,28 @@ msgstr ""
 msgid "Shrink factor"
 msgstr ""
 
-msgid "All standard errors/sample sizes must be positive."
+#, fuzzy
+msgid "All standard errors must be positive."
 msgstr "Wszystkie błędy standardowe/wielkości prób muszą być dodatnie."
 
-msgid "The metafor package crashed with the following error: %s"
+msgid ""
+"The loaded distance matrix for '%1$s' does not match the dataset. The "
+"following levels are missing: %2$s."
 msgstr ""
 
-msgid "Fixed and Random Effects"
-msgstr "Efekty stałe i losowe"
+msgid ""
+"The loaded correlation matrix for '%1$s' does not match the dataset. The "
+"following levels are missing: %2$s."
+msgstr ""
 
-msgid "Q"
+msgid "All observations were removed as influential."
+msgstr ""
+
+#, fuzzy
+msgid "Residual Heterogeneity Test"
+msgstr "Heterogeniczność"
+
+msgid "Qₑ"
 msgstr ""
 
 msgid "df"
@@ -376,98 +388,49 @@ msgstr "df"
 msgid "p"
 msgstr "p"
 
-msgid "<em>p</em>-values are approximate."
+msgid "Omnibus Moderation Test"
 msgstr ""
 
-msgid "Coefficients"
-msgstr "Współczyniki"
+msgid "Parameter"
+msgstr ""
+
+msgid "F"
+msgstr ""
+
+msgid "Qₘ"
+msgstr ""
+
+msgid "df₁"
+msgstr ""
+
+msgid "df₂"
+msgstr ""
+
+msgid "p (permutation)"
+msgstr ""
+
+msgid "Meta-Analytic Estimates"
+msgstr ""
 
 msgid "Estimate"
 msgstr "Oszacowanie"
 
-msgid "Standard Error"
-msgstr "Błąd standardowy"
+msgid "%s%% CI"
+msgstr "%s%% PU"
 
-msgid "z"
-msgstr "z"
-
-msgid "t"
-msgstr "t"
-
-msgid "Wald test."
-msgstr "Test Walda."
-
-msgid "Knapp and Hartung test adjustment."
+msgid "%s%% PI"
 msgstr ""
 
-msgid "Fit measures"
+#, fuzzy
+msgid "Heterogeneity Level"
+msgstr "Heterogeniczność"
+
+#, fuzzy
+msgid "Fit Measures"
 msgstr "Miary dopasowania"
 
-msgid "Residual Heterogeneity Estimates"
+msgid "Log Lik."
 msgstr ""
-
-msgid "Parameter Covariances"
-msgstr ""
-
-msgid "Rank correlation test for Funnel plot asymmetry"
-msgstr ""
-
-msgid "Kendall's %s"
-msgstr "%s Kendalla"
-
-msgid "Regression test for Funnel plot asymmetry (\"Egger's test\")"
-msgstr ""
-
-msgid "Influence Measures"
-msgstr ""
-
-msgid "Std. Residual"
-msgstr "Reszty stand."
-
-msgid "DFFITS"
-msgstr "DFFITS"
-
-msgid "Cook's Distance"
-msgstr "Dystans Cooka"
-
-msgid "Cov. Ratio"
-msgstr ""
-
-msgid "%1$s%2$s<sub>(-i)</sub>"
-msgstr ""
-
-msgid "Q<sub>E(-i)</sub>"
-msgstr "Q<sub>E(-i)</sub>"
-
-msgid "Hat"
-msgstr ""
-
-msgid "Weight"
-msgstr "Waga"
-
-msgid "File Drawer Analysis"
-msgstr ""
-
-msgid "Fail-safe N"
-msgstr ""
-
-msgid "Target Significance"
-msgstr ""
-
-msgid "Observed Significance"
-msgstr "Istotność obserwowana"
-
-msgid "Omnibus test of Model Coefficients"
-msgstr ""
-
-msgid "Test of Residual Heterogeneity"
-msgstr ""
-
-msgid "The model was estimated using %1$s method."
-msgstr ""
-
-msgid "Log-Likelihood"
-msgstr "Log. prawdopodobieństwo"
 
 msgid "Deviance"
 msgstr "Odchylanie"
@@ -481,116 +444,493 @@ msgstr "BIC"
 msgid "AICc"
 msgstr "AICc"
 
-msgid "I%s (%%)"
-msgstr "I%s (%%)"
-
-msgid "H%s"
-msgstr "H%s"
-
-msgid "Rank test"
+msgid "R²"
 msgstr ""
 
-msgid "Cases marked with %s are influential."
+msgid "Effect Size Meta-Regression Terms Tests"
 msgstr ""
 
-msgid "Plot"
-msgstr "Wykres"
-
-msgid "Funnel Plot"
+msgid "Heterogeneity Meta-Regression Terms Tests"
 msgstr ""
 
-msgid "Log-Likelihood for %1$s%2$s"
+msgid "Effect Size Meta-Regression Coefficients"
 msgstr ""
 
-msgid "Trim-Fill Analysis"
+msgid "Heterogeneity Meta-Regression Coefficients"
 msgstr ""
 
-msgid "Diagnostic Plots"
-msgstr "Wykresy diagnostyczne"
+msgid "Standard Error"
+msgstr "Błąd standardowy"
 
-msgid "Study %s"
+msgid "t"
+msgstr "t"
+
+msgid "z"
+msgstr "z"
+
+msgid "Effect Size Meta-Regression Correlation Matrix"
 msgstr ""
 
-msgid "FE Model"
+msgid "Heterogeneity Meta-Regression Correlation Matrix"
 msgstr ""
 
-msgid "RE Model"
+msgid "Estimated Marginal Means: Effect Size"
 msgstr ""
 
-msgid "Profile Plot for"
+msgid "Estimated Marginal Means: Heterogeneity"
 msgstr ""
 
-msgid "Restricted Log-Likelihood"
+msgid "Variable"
 msgstr ""
 
-msgid "Residual Value"
+msgid "Level"
 msgstr ""
 
-msgid "Radial Plot"
+msgid "Bubble Plots"
 msgstr ""
 
-msgid "Stopped because k = 1."
+msgid "Bubble Plot"
 msgstr ""
 
-msgid "Normal Q-Q Plot"
+#, fuzzy
+msgid "%1$s (%2$s)"
+msgstr "BF%1$s%2$s"
+
+msgid "Metafor R Code"
 msgstr ""
 
-msgid "Theoretical Quantiles"
+msgid "Effect Size Meta-Regression Variance Inflation"
 msgstr ""
 
-msgid "Sample Quantiles"
+msgid "Heterogeneity Meta-Regression Variance Inflation"
 msgstr ""
 
-msgid "Standardized Residuals"
-msgstr "Reszty standaryzowane"
-
-msgid "Fitted vs. Standardized Residuals"
+msgid "Parameters"
 msgstr ""
 
-msgid "Fitted Value"
+msgid "VIF"
+msgstr ""
+
+msgid "SIF"
+msgstr ""
+
+msgid "Casewise Diagnostics Table"
+msgstr ""
+
+msgid ""
+"Casewise diagnostics are not available for models that contain meta-"
+"regression on heterogeneity."
+msgstr ""
+
+msgid "No influential cases found."
+msgstr ""
+
+msgid "Label"
+msgstr ""
+
+msgid "Predictor"
 msgstr ""
 
 msgid "Standardized Residual"
 msgstr ""
 
-msgid "The model should contain at least one predictor or an intercept."
+msgid "DFFITS"
+msgstr "DFFITS"
+
+msgid "Cook's Distance"
+msgstr "Dystans Cooka"
+
+msgid "Covariance ratio"
 msgstr ""
 
-msgid "FE"
+msgid "𝜏"
 msgstr ""
 
-msgid "ML"
+msgid "Leave One Out"
 msgstr ""
 
-msgid "REML"
+msgid "𝜏²"
 msgstr ""
 
-msgid "DL"
+msgid "Hat"
 msgstr ""
 
-msgid "HE"
+msgid "Weight"
+msgstr "Waga"
+
+msgid "Difference in coefficients"
 msgstr ""
 
-msgid "HS"
+msgid "Influential"
 msgstr ""
 
-msgid "SJ"
+msgid "Diagnostics are based on the non-clustered model."
 msgstr ""
 
-msgid "EB"
+msgid "Column name %s already exists in the dataset."
 msgstr ""
 
-msgid "PM"
+msgid "Profile Likelihood Plots"
 msgstr ""
 
-msgid "%g%% Confidence Interval"
+msgid "Profile Likelihood Plot"
 msgstr ""
 
-msgid "%s%% CI"
-msgstr "%s%% PU"
-
-msgid "%s%% PI"
+msgid ""
+"Profile likelihood is not available for models that contain meta-regression "
+"on heterogeneity."
 msgstr ""
+
+msgid "Baujat Plot"
+msgstr ""
+
+msgid ""
+"Baujat plot is not available for models that contain meta-regression on "
+"heterogeneity."
+msgstr ""
+
+msgid "Baujat plot is not available for models with clustering."
+msgstr ""
+
+#, fuzzy
+msgid "Squared Pearson Residual"
+msgstr "Reszty standaryzowane"
+
+msgid "Influence on Fitted Value"
+msgstr ""
+
+msgid "Residual Funnel Plot"
+msgstr ""
+
+msgid "Meta-Regression Summary"
+msgstr ""
+
+msgid "Estimated Marginal Means Summary"
+msgstr ""
+
+msgid "Variance Inflation Summary"
+msgstr ""
+
+msgid ""
+"Indexes of effect size moderation coefficients were specified in an "
+"incorrect format. Try '(1, 2)' to test the first two coefficients."
+msgstr ""
+
+msgid ""
+"Indexes of heterogeneity moderation coefficients were specified in an "
+"incorrect format. Try '(1, 2)' to test the first two coefficients."
+msgstr ""
+
+msgid "The selected coefficients must be an integer vector."
+msgstr ""
+
+msgid ""
+"The selected coefficients must be between 1 and %1$i (i.e., the number of "
+"regression parameters)."
+msgstr ""
+
+#, fuzzy
+msgid "Effect Size (coef: %1$s)"
+msgstr "Wielkość efektu (%s)"
+
+msgid "Effect size coefficients %1$s correspond to %2$s."
+msgstr ""
+
+#, fuzzy
+msgid "Heterogeneity (coef: %1$s)"
+msgstr "Heterogeniczność"
+
+msgid "Heterogeneity coefficients %1$s correspond to %2$s."
+msgstr ""
+
+#, fuzzy
+msgid "Adjusted Estimate"
+msgstr "Oszacowanie"
+
+msgid "Mean - %1$sSD"
+msgstr ""
+
+msgid "Mean + %1$sSD"
+msgstr ""
+
+msgid "Distance Matrix"
+msgstr ""
+
+#, fuzzy
+msgid "Correlation Matrix"
+msgstr "Wykresy autokorelacji"
+
+msgid "Residual Value"
+msgstr ""
+
+#, fuzzy
+msgid "Profile Likelihood"
+msgstr "Log. prawdopodobieństwo"
+
+msgid ""
+"Clustering is not supported when specifying a heterogeneity meta-regression "
+"model."
+msgstr ""
+
+msgid "The fixed value for tau2 must be a positive number."
+msgstr ""
+
+msgid ""
+"The custom R code for extending the metafor call failed with the following "
+"message: %1$s"
+msgstr ""
+
+msgid "Fisher's z to r"
+msgstr ""
+
+msgid "Exponential"
+msgstr ""
+
+msgid "Log odds to proportions"
+msgstr ""
+
+msgid "Log odds to SMD (normal)"
+msgstr ""
+
+msgid "Log odds to SMD (logistic)"
+msgstr ""
+
+msgid "SMD to log odds (normal)"
+msgstr ""
+
+msgid "SMD to log odds (logistic)"
+msgstr ""
+
+msgid "Hakstian & Whalen inverse α"
+msgstr ""
+
+msgid "Bonett inverse α"
+msgstr ""
+
+msgid "Z to R²"
+msgstr ""
+
+msgid "SMD to Cohen's U₁"
+msgstr ""
+
+msgid "SMD to Cohen's U₂"
+msgstr ""
+
+msgid "SMD to Cohen's U₃"
+msgstr ""
+
+msgid "SMD to CLES, Pr(supperiority)"
+msgstr ""
+
+msgid "Moderation (Effect Size): %1$s"
+msgstr ""
+
+msgid "Moderation (Heterogeneity): %1$s"
+msgstr ""
+
+msgid "Moderation: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid "Heterogeneity:"
+msgstr "Heterogeniczność"
+
+msgid "Fixed effect tested using z-distribution."
+msgstr ""
+
+msgid "Fixed effect tested using t-distribution."
+msgstr ""
+
+msgid "Fixed effect tested using Knapp and Hartung adjustment."
+msgstr ""
+
+msgid "The heterogeneity model for 𝜏² is specified on the log scale."
+msgstr ""
+
+msgid "The heterogeneity model for 𝜏² is specified on the identity scale."
+msgstr ""
+
+msgid "%1$i clusters with %2$i estimates each."
+msgstr ""
+
+msgid "%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates."
+msgstr ""
+
+msgid "The pooled effect size is transformed using %1$s transformation."
+msgstr ""
+
+msgid ""
+"The pooled effect size corresponds to the weighted average effect across "
+"studies."
+msgstr ""
+
+msgid ""
+"The pooled heterogeneity estimate corresponds to the heterogeneity at the "
+"average of predictor values."
+msgstr ""
+
+msgid "The I² and H² statistics are not available for heterogeneity models."
+msgstr ""
+
+msgid "%1$i observations were ommited due to missing values."
+msgstr ""
+
+msgid "%1$i influential observations were detected and removed."
+msgstr ""
+
+msgid "The Model Structure %1$s was not completely specified and was skipped."
+msgstr ""
+
+msgid ""
+"Prediction interval for the pooled effect size is not available for models "
+"with multiple heterogeneity estimates."
+msgstr ""
+
+msgid ""
+"Each marginal mean estimate is averaged across the levels of the remaining "
+"predictors."
+msgstr ""
+
+msgid "The estimates and intervals are transformed using %1$s transformation."
+msgstr ""
+
+msgid "The estimates and intervals correspond to %1$s."
+msgstr ""
+
+msgid "Permutation p-value is based on %1$s permutations."
+msgstr ""
+
+msgid ""
+"The model estimation failed with the following message: %1$s. Please, "
+"consider simplifying the model."
+msgstr ""
+
+msgid "Error reading the distance matrix file: %1$s"
+msgstr ""
+
+msgid ""
+"The distance matrix must be square. The number of rows (%1$i) does not match "
+"the number of columns (%2$i)."
+msgstr ""
+
+msgid "Error reading the correlation matrix file: %1$s"
+msgstr ""
+
+msgid "Random Effects / Model Stucture Summary"
+msgstr ""
+
+msgid "Simple / Nested Summary"
+msgstr ""
+
+msgid "Estimates"
+msgstr "Oszacowania"
+
+msgid "σ²"
+msgstr ""
+
+msgid "σ"
+msgstr ""
+
+msgid "Levels"
+msgstr ""
+
+#, fuzzy
+msgid "Fixed"
+msgstr "stałe"
+
+msgid "Inclusion Test"
+msgstr ""
+
+msgid "Removed Component"
+msgstr ""
+
+msgid "LRT"
+msgstr ""
+
+msgid ""
+"Likelihood Ratio Test (LRT) and p-value are based on a comparison with the "
+"complete model."
+msgstr ""
+
+#, fuzzy
+msgid "Random Slopes Summary"
+msgstr "Podsumowania modeli"
+
+msgid "Structured"
+msgstr ""
+
+msgid "Summary"
+msgstr "Podsumowanie"
+
+msgid "Autoregressive"
+msgstr ""
+
+msgid "Spatial"
+msgstr ""
+
+msgid "Known Correlation Summary"
+msgstr ""
+
+msgid "Testing Inclusion of Random Effects / Model Structure"
+msgstr ""
+
+#, fuzzy
+msgid "Random Slopes"
+msgstr "Efekty losowe"
+
+msgid "Compound Symmetry"
+msgstr ""
+
+msgid "Heteroscedastic Compound Symmetry"
+msgstr ""
+
+msgid "Unstructured"
+msgstr ""
+
+msgid "Identity"
+msgstr ""
+
+msgid "Diagonal"
+msgstr ""
+
+msgid "AR(1)"
+msgstr ""
+
+msgid "Heteroskedastic AR(1)"
+msgstr ""
+
+msgid "Continuous-Time AR"
+msgstr ""
+
+msgid "Gaussian"
+msgstr ""
+
+msgid "Linear"
+msgstr ""
+
+msgid "Rational Quadratic"
+msgstr ""
+
+msgid "Spherical"
+msgstr ""
+
+#, fuzzy
+msgid "Sqrt. Estimate"
+msgstr "Oszacowanie"
+
+msgid "Levels:"
+msgstr ""
+
+msgid "Component:"
+msgstr ""
+
+#, fuzzy
+msgid "Estimates 𝜏²"
+msgstr "Oszacowania"
+
+#, fuzzy
+msgid "Estimates ρ"
+msgstr "Oszacowania"
 
 msgid "%s Summary"
 msgstr "Podsumowanie %s"
@@ -658,14 +998,127 @@ msgstr "Wielkość próby"
 msgid "Total events"
 msgstr ""
 
-msgid "Variance Components"
+msgid ""
+"Cannot compute outcomes. Chech that all of the required information is "
+"specified via the appropriate arguments (i.e. an Effect Size and either "
+"Standard Error, Sampling Variance, or 95%% Confidence Interval)."
 msgstr ""
 
-msgid "Plots"
-msgstr "Wykresy"
+msgid "Step"
+msgstr ""
+
+msgid "Computed"
+msgstr ""
+
+msgid "Total Computed"
+msgstr ""
+
+msgid "Effect sizes were successfully computed for each data entry."
+msgstr ""
+
+msgid ""
+"Effect sizes were successfully computed for %1$i out of %2$i data entries."
+msgstr ""
+
+msgid "Error in Step %1$i:"
+msgstr ""
+
+msgid "Estimated Marginal Means"
+msgstr ""
+
+msgid "Model Information"
+msgstr ""
+
+#, fuzzy
+msgid "Pooled Estimate"
+msgstr "Oszacowanie"
+
+#, fuzzy
+msgid "Missing Data Summary"
+msgstr "Podsumowanie %s"
+
+msgid ""
+"The dataset contains missing values: %1$i missing values were removed from "
+"the analysis."
+msgstr ""
+
+msgid "Funnel Plot"
+msgstr ""
+
+msgid ""
+"Funnel plot prediction interval was specified in an incorrect format. Try "
+"'(0.90, 0.95, 0.99)'."
+msgstr ""
+
+msgid "Funnel plot prediction intervals must be between 0 and 1."
+msgstr ""
+
+msgid "Funnel plot prediction intervals must be specified."
+msgstr ""
+
+msgid ""
+"Power enhancement breaks were specified in an incorrect format. Try '(0.30, "
+"0.50, 0.80)'."
+msgstr ""
+
+msgid "Power enhancement breaks must be between 0.05 and 1."
+msgstr ""
+
+#, fuzzy
+msgid "Power"
+msgstr "Dolny"
+
+msgid "H₁ Funnel Parameter Estimates"
+msgstr ""
+
+msgid "μ"
+msgstr ""
+
+msgid "The funnel plot parameter estimation failed with the following error:"
+msgstr ""
+
+msgid "Meta-Regression Test for Funnel Plot Asymmetry"
+msgstr ""
+
+msgid "Asymmetry Test"
+msgstr ""
+
+#, fuzzy
+msgid "Limit Estimate"
+msgstr "Oszacowanie"
+
+msgid "Lower 95% CI"
+msgstr ""
+
+msgid "Upper 95% CI"
+msgstr ""
+
+msgid "Weighted Regression Test for Funnel Plot Asymmetry"
+msgstr ""
+
+msgid "Rank Correlation Test for Funnel Plot Asymmetry"
+msgstr ""
+
+msgid "The funnel plot asymmetry test failed with the following error:"
+msgstr ""
+
+msgid ""
+"The funnel plot asymmetry test at level %1$s failed with the following error:"
+msgstr ""
+
+msgid ""
+"The meta-analytic model did not converge. Try modifying the 'Method' option "
+"for the 'Funnel under H₁' settings."
+msgstr ""
+
+msgid "The model should contain at least one predictor or an intercept."
+msgstr ""
 
 msgid "Intercept"
 msgstr "Wyraz wolny"
+
+msgid "Coefficients"
+msgstr "Współczyniki"
 
 msgid "At least one predictor needs to be specified."
 msgstr ""
@@ -748,9 +1201,6 @@ msgstr ""
 
 msgid "The loaded object is not a RoBMA model."
 msgstr ""
-
-msgid "Summary"
-msgstr "Podsumowanie"
 
 msgid "Conditional Estimates"
 msgstr ""
@@ -1061,9 +1511,6 @@ msgstr ""
 msgid "Test of Effect"
 msgstr ""
 
-msgid "Estimates"
-msgstr "Oszacowania"
-
 msgid "Regression Estimates"
 msgstr ""
 
@@ -1124,3 +1571,36 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid "Fixed and Random Effects"
+#~ msgstr "Efekty stałe i losowe"
+
+#~ msgid "Wald test."
+#~ msgstr "Test Walda."
+
+#~ msgid "Kendall's %s"
+#~ msgstr "%s Kendalla"
+
+#~ msgid "Std. Residual"
+#~ msgstr "Reszty stand."
+
+#~ msgid "Q<sub>E(-i)</sub>"
+#~ msgstr "Q<sub>E(-i)</sub>"
+
+#~ msgid "Observed Significance"
+#~ msgstr "Istotność obserwowana"
+
+#~ msgid "I%s (%%)"
+#~ msgstr "I%s (%%)"
+
+#~ msgid "H%s"
+#~ msgstr "H%s"
+
+#~ msgid "Plot"
+#~ msgstr "Wykres"
+
+#~ msgid "Diagnostic Plots"
+#~ msgstr "Wykresy diagnostyczne"
+
+#~ msgid "Plots"
+#~ msgstr "Wykresy"

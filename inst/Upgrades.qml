@@ -71,33 +71,13 @@ Upgrades
 	Upgrade
 	{
 		functionName:	"ClassicalMetaAnalysis"
-		fromVersion:	"0.16.4"
-		toVersion:		"0.17"
+		fromVersion:	"0.19.1"
+		toVersion:		"0.19.2"
 
-		// ClassicalMetaAnalysis.qml
-		ChangeRename { from: "dependent"; to: "effectSize" }
-		ChangeRename { from: "wlsWeights"; to: "effectSizeSe" }
-		ChangeRename { from: "studyLabels"; to: "studyLabel" }
-		ChangeRename { from: "includeConstant"; to: "interceptTerm" }
-
-		// ClassicalMetaAnalysisStatistics.qml
-		ChangeRename { from: "regressionCoefficientsEstimates"; to: "coefficientEstimate" }
-		ChangeRename { from: "regressionCoefficientsConfidenceIntervals"; to: "coefficientCi" }
-		ChangeRename { from: "regressionCoefficientsConfidenceIntervalsInterval"; to: "coefficientCiLevel" }
-		ChangeRename { from: "test"; to: "estimateTest" }
-		ChangeRename { from: "regressionCoefficientsCovarianceMatrix"; to: "covarianceMatrix" }
-		ChangeRename { from: "modelFit"; to: "fitMeasure" }
-		ChangeRename { from: "rSquaredChange"; to: "funnelPlotRankTestAsymmetry" }
-		ChangeRename { from: "funnelPlotAsymmetryTest"; to: "funnelPlotRegressionTestAsymmetry" }
-		ChangeRename { from: "residualsParameters"; to: "residualParameter" }
-
-		// ClassicalMetaAnalysisDiagnostics.qml
-		ChangeRename { from: "trimFillPlot"; to: "trimFillAnalysis" }
-		ChangeRename { from: "plotResidualsPredicted"; to: "profilePlot" }
-		ChangeRename { from: "plotResidualsDependent"; to: "diagnosticPlot" }
-		ChangeRename { from: "plotResidualsQQ"; to: "diagnosticQqPlot" }
-		ChangeRename { from: "plotResidualsCovariates"; to: "failSafeN" }
-		ChangeRename { from: "residualsCasewiseDiagnostics"; to: "casewiseDiagnostics" }
+		ChangeIncompatible
+		{
+			msg: qsTr("Results of this analysis cannot be updated. The analysis was created with an older version of JASP and the analysis options are not longer compatible. Please, redo the analysis with the updated module or download the 0.19.1 version of JASP to rerun or edit the analysis.")
+		}
 	}
 	Upgrade
 	{
