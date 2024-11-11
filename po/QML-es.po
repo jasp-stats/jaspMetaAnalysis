@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2024-11-11 11:02+0000\n"
+"PO-Revision-Date: 2024-11-12 06:48+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/es/>\n"
@@ -2674,483 +2674,479 @@ msgstr "PR"
 
 msgctxt "EffectSizeComputation|"
 msgid "PLN"
-msgstr ""
+msgstr "PLN"
 
 msgctxt "EffectSizeComputation|"
 msgid "PLO"
-msgstr ""
+msgstr "PLO"
 
 msgctxt "EffectSizeComputation|"
 msgid "PAS"
-msgstr ""
+msgstr "PAS"
 
 msgctxt "EffectSizeComputation|"
 msgid "PFT"
-msgstr ""
+msgstr "PFT"
 
 msgctxt "EffectSizeComputation|"
 msgid "IR"
-msgstr ""
+msgstr "IR"
 
 msgctxt "EffectSizeComputation|"
 msgid "IRLN"
-msgstr ""
+msgstr "IRLN"
 
 msgctxt "EffectSizeComputation|"
 msgid "IRS"
-msgstr ""
+msgstr "IRS"
 
 msgctxt "EffectSizeComputation|"
 msgid "IRFT"
-msgstr ""
+msgstr "IRFT"
 
 msgctxt "EffectSizeComputation|"
 msgid "MC"
-msgstr ""
+msgstr "MC"
 
 msgctxt "EffectSizeComputation|"
 msgid "SMCC"
-msgstr ""
+msgstr "SMCC"
 
 msgctxt "EffectSizeComputation|"
 msgid "SMCR"
-msgstr ""
+msgstr "SMCR"
 
 msgctxt "EffectSizeComputation|"
 msgid "SMCRH"
-msgstr ""
+msgstr "SMCRH"
 
 msgctxt "EffectSizeComputation|"
 msgid "SMCRP"
-msgstr ""
+msgstr "SMCRP"
 
 msgctxt "EffectSizeComputation|"
 msgid "SMCRPH"
-msgstr ""
+msgstr "SMCRPH"
 
 msgctxt "EffectSizeComputation|"
 msgid "ROMC"
-msgstr ""
+msgstr "ROMC"
 
 msgctxt "EffectSizeComputation|"
 msgid "CVRC"
-msgstr ""
+msgstr "CVRC"
 
 msgctxt "EffectSizeComputation|"
 msgid "VRC"
-msgstr ""
+msgstr "VRC"
 
 msgctxt "EffectSizeComputation|"
 msgid "MPRR"
-msgstr ""
+msgstr "MPRR"
 
 msgctxt "EffectSizeComputation|"
 msgid "MPOR"
-msgstr ""
+msgstr "MPOR"
 
 msgctxt "EffectSizeComputation|"
 msgid "MPRD"
-msgstr ""
+msgstr "MPRD"
 
 msgctxt "EffectSizeComputation|"
 msgid "MPORC"
-msgstr ""
+msgstr "MPORC"
 
 msgctxt "EffectSizeComputation|"
 msgid "MPPETO"
-msgstr ""
+msgstr "MPPETO"
 
 msgctxt "EffectSizeComputation|"
 msgid "MPORM"
-msgstr ""
+msgstr "MPORM"
 
 msgctxt "EffectSizeComputation|"
 msgid "ARAW"
-msgstr ""
+msgstr "ARAW"
 
 msgctxt "EffectSizeComputation|"
 msgid "AHW"
-msgstr ""
+msgstr "AHW"
 
 msgctxt "EffectSizeComputation|"
 msgid "ABT"
-msgstr ""
+msgstr "ABT"
 
 msgctxt "EffectSizeComputation|"
 msgid "PCOR"
-msgstr ""
+msgstr "PCOR"
 
 msgctxt "EffectSizeComputation|"
 msgid "ZPCOR"
-msgstr ""
+msgstr "ZPCOR"
 
 msgctxt "EffectSizeComputation|"
 msgid "SPCOR"
-msgstr ""
+msgstr "SPCOR"
 
 msgctxt "EffectSizeComputation|"
 msgid "ZSPCOR"
-msgstr ""
+msgstr "ZSPCOR"
 
 msgctxt "EffectSizeComputation|"
 msgid "R2"
-msgstr ""
+msgstr "R2"
 
 msgctxt "EffectSizeComputation|"
 msgid "ZR2"
-msgstr ""
+msgstr "ZR2"
 
 msgctxt "EffectSizeComputation|"
 msgid "REH"
-msgstr ""
+msgstr "REH"
 
 msgctxt "EffectSizeComputation|"
 msgid "Group 1/Outcome +"
-msgstr ""
+msgstr "Grupo 1/Resultado +"
 
 msgctxt "EffectSizeComputation|"
 msgid "Time 1/Outcome +"
-msgstr ""
+msgstr "Tiempo 1/Resultado +"
 
 msgctxt "EffectSizeComputation|"
 msgid "Outcome +/+"
-msgstr ""
+msgstr "Resultado +/+"
 
 msgctxt "EffectSizeComputation|"
 msgid "Coefficient α"
-msgstr ""
+msgstr "Coeficiente α"
 
 msgctxt "EffectSizeComputation|"
 msgid "Homozygous Dominant Alleles"
-msgstr ""
+msgstr "Alelos dominantes de homocigoto"
 
 msgctxt "EffectSizeComputation|"
 msgid "Group 1/Outcome -"
-msgstr ""
+msgstr "Grupo 1/Resultado -"
 
 msgctxt "EffectSizeComputation|"
 msgid "Time 1/Outcome -"
-msgstr ""
+msgstr "Tiempo 1/Resultado -"
 
 msgctxt "EffectSizeComputation|"
 msgid "Outcome +/-"
-msgstr ""
+msgstr "Resultado +/-"
 
 msgctxt "EffectSizeComputation|"
 msgid "Heterozygous Alleles"
-msgstr ""
+msgstr "Alelos de heterocigoto"
 
 msgctxt "EffectSizeComputation|"
 msgid "Group 2/Outcome +"
-msgstr ""
+msgstr "Grupo 2/Resultado +"
 
 msgctxt "EffectSizeComputation|"
 msgid "Time 2/Outcome +"
-msgstr ""
+msgstr "Tiempo 2/Resultado +"
 
 msgctxt "EffectSizeComputation|"
 msgid "Outcome -/+"
-msgstr ""
+msgstr "Resultado -/+"
 
 msgctxt "EffectSizeComputation|"
 msgid "Homozygous Recessive Alleles"
-msgstr ""
+msgstr "Alelos recesivos de homocigoto"
 
 msgctxt "EffectSizeComputation|"
 msgid "Group 2/Outcome Minus"
-msgstr ""
+msgstr "Grupo 2/Resultado menos"
 
 msgctxt "EffectSizeComputation|"
 msgid "Time 2/Outcome -"
-msgstr ""
+msgstr "Tiempo 2/Resultado -"
 
 msgctxt "EffectSizeComputation|"
 msgid "Outcome -/-"
-msgstr ""
+msgstr "Resultado -/-"
 
 msgctxt "EffectSizeComputation|"
 msgid "Outcome +/+ and +/-"
-msgstr ""
+msgstr "Resultado +/+ y +/-"
 
 msgctxt "EffectSizeComputation|"
 msgid "Outcome -/+ and -/-"
-msgstr ""
+msgstr "Resultado -/+ y -/-"
 
 msgctxt "EffectSizeComputation|"
 msgid "Events Group 1"
-msgstr ""
+msgstr "Eventos Grupo 1"
 
 msgctxt "EffectSizeComputation|"
 msgid "Events"
-msgstr ""
+msgstr "Eventos"
 
 msgctxt "EffectSizeComputation|"
 msgid "Non-Events"
-msgstr ""
+msgstr "Sin eventos"
 
 msgctxt "EffectSizeComputation|"
 msgid "Items"
-msgstr ""
+msgstr "Elementos"
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Predictors"
 msgstr "Predictores"
 
 msgctxt "EffectSizeComputation|"
 msgid "Events Group 2"
-msgstr ""
+msgstr "Eventos Grupo 2"
 
 msgctxt "EffectSizeComputation|"
 msgid "Person-Time Group 1"
-msgstr ""
+msgstr "Persona-Tiempo Grupo 1"
 
 msgctxt "EffectSizeComputation|"
 msgid "Person-Time"
-msgstr ""
+msgstr "Persona-Tiempo"
 
 msgctxt "EffectSizeComputation|"
 msgid "Person-Time Group 2"
-msgstr ""
+msgstr "Persona-Tiempo Grupo 2"
 
 msgctxt "EffectSizeComputation|"
 msgid "Mean Group 1"
-msgstr ""
+msgstr "Media Grupo 1"
 
 msgctxt "EffectSizeComputation|"
 msgid "Mean Time 1 (or Group 1)"
-msgstr ""
+msgstr "Media Tiempo 1 (o Grupo 1)"
 
 msgctxt "EffectSizeComputation|"
 msgid "Mean Group 2"
-msgstr ""
+msgstr "Media Grupo 2"
 
 msgctxt "EffectSizeComputation|"
 msgid "Mean Time 2 (or Group 2)"
-msgstr ""
+msgstr "Media Tiempo 2 (o Grupo 2)"
 
 msgctxt "EffectSizeComputation|"
 msgid "Mean"
-msgstr ""
+msgstr "Media"
 
 msgctxt "EffectSizeComputation|"
 msgid "SD Group 1"
-msgstr ""
+msgstr "DT Grupo 1"
 
 msgctxt "EffectSizeComputation|"
 msgid "SD Time 1 (or Group 1)"
-msgstr ""
+msgstr "DT Tiempo 1 (o Grupo 1)"
 
 msgctxt "EffectSizeComputation|"
 msgid "SD Group 2"
-msgstr ""
+msgstr "DT Grupo 2"
 
 msgctxt "EffectSizeComputation|"
 msgid "SD Time 2 (or Group 2)"
-msgstr ""
+msgstr "DT Tiempo 2 (o Grupo 2)"
 
 msgctxt "EffectSizeComputation|"
 msgid "SD"
-msgstr ""
+msgstr "DT"
 
 msgctxt "EffectSizeComputation|"
 msgid "Sample Size Group 1"
-msgstr ""
+msgstr "Tamaño de muestra Grupo 1"
 
 msgctxt "EffectSizeComputation|"
 msgid "Sample Size Group 2"
-msgstr ""
+msgstr "Tamaño de muestra Grupo 2"
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Correlation"
 msgstr "Correlación"
 
 msgctxt "EffectSizeComputation|"
 msgid "Proportion +/+"
-msgstr ""
+msgstr "Proporción +/+"
 
 msgctxt "EffectSizeComputation|"
 msgid "Sample Size"
-msgstr ""
+msgstr "Tamaño de la muestra"
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Cohen's d"
 msgstr "D de Cohen"
 
 msgctxt "EffectSizeComputation|"
 msgid "R-Squared"
-msgstr ""
+msgstr "R-cuadrado"
 
 msgctxt "EffectSizeComputation|"
 msgid "T-Statistic"
-msgstr ""
+msgstr "Estadístico T"
 
 msgctxt "EffectSizeComputation|"
 msgid "F-Statistic"
-msgstr ""
+msgstr "Estadístico F"
 
 msgctxt "EffectSizeComputation|"
 msgid "(Semi)Partial Correlation"
-msgstr ""
+msgstr "Correlación (Semi)Parcial"
 
 msgctxt "EffectSizeComputation|"
 msgid "P-Value"
-msgstr ""
+msgstr "Valor p"
 
 msgctxt "EffectSizeComputation|"
 msgid "Effect Size"
-msgstr ""
+msgstr "Magnitud del efecto"
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Standard Error"
 msgstr "Error Típico"
 
 msgctxt "EffectSizeComputation|"
 msgid "Sampling Variance"
-msgstr ""
+msgstr "Varianza de muestreo"
 
 msgctxt "EffectSizeComputation|"
 msgid "95% Confidence Interval"
-msgstr ""
+msgstr "Intervalo con 95% de confianza"
 
 msgctxt "EffectSizeComputation|"
 msgid "Sampling Variance Type Mixed"
-msgstr ""
+msgstr "Varianza de muestreo tipo mixto"
 
 msgctxt "EffectSizeComputation|"
 msgid "Subset"
-msgstr ""
+msgstr "Subconjunto"
 
 msgctxt "EffectSizeComputation|"
 msgid "Subset Level"
-msgstr ""
+msgstr "Nivel de subconjunto"
 
 msgctxt "EffectSizeComputation|"
 msgid "Frequency/event cell adjustment"
-msgstr ""
+msgstr "Ajuste de celda frecuencia/evento"
 
 msgctxt "EffectSizeComputation|"
 msgid "Add"
-msgstr ""
+msgstr "Añadir"
 
 msgctxt "EffectSizeComputation|"
 msgid "To"
-msgstr ""
+msgstr "A"
 
 msgctxt "EffectSizeComputation|"
 msgid "All"
-msgstr ""
+msgstr "Todo"
 
 msgctxt "EffectSizeComputation|"
 msgid "Only zero"
-msgstr ""
+msgstr "Solo cero"
 
 msgctxt "EffectSizeComputation|"
 msgid "If any zero"
-msgstr ""
+msgstr "Si algún cero"
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "None"
-msgstr "Ninguna"
+msgstr "Ninguno"
 
 msgctxt "EffectSizeComputation|"
 msgid "Drop studies with no cases/events"
-msgstr ""
+msgstr "Quitar estudios sin ningún caso/evento"
 
 msgctxt "EffectSizeComputation|"
 msgid "Yes"
-msgstr ""
+msgstr "Sí"
 
 msgctxt "EffectSizeComputation|"
 msgid "No"
-msgstr ""
+msgstr "No"
 
 msgctxt "EffectSizeComputation|"
 msgid "Sampling variance type"
-msgstr ""
+msgstr "Tipo de varianza de muestreo"
 
 msgctxt "EffectSizeComputation|"
 msgid "LS"
-msgstr ""
+msgstr "LS"
 
 msgctxt "EffectSizeComputation|"
 msgid "HO"
-msgstr ""
+msgstr "HO"
 
 msgctxt "EffectSizeComputation|"
 msgid "LS2"
-msgstr ""
+msgstr "LS2"
 
 msgctxt "EffectSizeComputation|"
 msgid "UB"
-msgstr ""
+msgstr "UB"
 
 msgctxt "EffectSizeComputation|"
 msgid "AV"
-msgstr ""
+msgstr "AV"
 
 msgctxt "EffectSizeComputation|"
 msgid "AVHO"
-msgstr ""
+msgstr "AVHO"
 
 msgctxt "EffectSizeComputation|"
 msgid "ST"
-msgstr ""
+msgstr "ST"
 
 msgctxt "EffectSizeComputation|"
 msgid "CS"
-msgstr ""
+msgstr "CS"
 
 msgctxt "EffectSizeComputation|"
 msgid "mixed"
-msgstr ""
+msgstr "Mixto"
 
 msgctxt "EffectSizeComputation|"
 msgid "AV2"
-msgstr ""
+msgstr "AV2"
 
 msgctxt "EffectSizeComputation|"
 msgid "Options"
-msgstr ""
+msgstr "Opciones"
 
 msgctxt "EffectSizeComputation|"
 msgid "Compute sampling variance"
-msgstr ""
+msgstr "Calcular la varianza de muestreo"
 
 msgctxt "EffectSizeComputation|"
 msgid "Computed Columns Names"
-msgstr ""
+msgstr "Nombres de columnas calculadas"
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Effect size"
 msgstr "Magnitud del efecto"
 
 msgctxt "EffectSizeComputation|"
 msgid "Standard error"
-msgstr ""
+msgstr "Error típico"
 
 msgctxt "EffectSizeComputation|"
 msgid "Sampling variance"
-msgstr ""
+msgstr "Varianza de muestreo"
 
 msgctxt "EffectSizeComputation|"
 msgid "Effect size type"
-msgstr ""
+msgstr "Tipo de magnitud del efecto"
 
 msgctxt "FunnelPlot|"
 msgid ""
 "Kossmeier, M., Tran, U. S., & Voracek, M. (2020). Power-enhanced funnel "
 "plots for meta-analysis. Zeitschrift für Psychologie, 228(1)."
 msgstr ""
+"Kossmeier, M., Tran, U. S., & Voracek, M. (2020). Power-enhanced funnel "
+"plots for meta-analysis. Zeitschrift für Psychologie, 228(1)."
 
 msgctxt "FunnelPlot|"
 msgid "Effect Size"
-msgstr ""
+msgstr "Magnitud del efecto"
 
 msgctxt "FunnelPlot|"
 msgid "Variable containing the observed effect sizes."
@@ -3169,7 +3165,7 @@ msgstr ""
 
 msgctxt "FunnelPlot|"
 msgid "Study Label"
-msgstr ""
+msgstr "Etiqueta del estudio"
 
 msgctxt "FunnelPlot|"
 msgid ""
@@ -3187,98 +3183,104 @@ msgctxt "FunnelPlot|"
 msgid ""
 "Variable used to split the funnel plot into separate groups or categories."
 msgstr ""
+"Variable utilizada para dividir el gráfico en embudo, en grupos o categorías "
+"separadas."
 
 msgctxt "FunnelPlot|"
 msgid "Funnel under H₀"
-msgstr ""
+msgstr "Embudo bajo H₀"
 
 msgctxt "FunnelPlot|"
 msgid "Specify the funnel plot under the null hypothesis."
-msgstr ""
+msgstr "Especificar el gráfico en embudo bajo la hipótesis nula."
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Parameters"
 msgstr "Parámetros"
 
 msgctxt "FunnelPlot|"
 msgid "μ"
-msgstr ""
+msgstr "μ"
 
 msgctxt "FunnelPlot|"
 msgid "Fixed value for the mean effect size under the null hypothesis."
-msgstr ""
+msgstr "Valor fijo para la magnitud media del efecto bajo la hipótesis nula."
 
 msgctxt "FunnelPlot|"
 msgid "𝜏"
-msgstr ""
+msgstr "𝜏"
 
 msgctxt "FunnelPlot|"
 msgid ""
 "Fixed value for 𝜏, representing the heterogeneity under the null hypothesis."
 msgstr ""
+"Valor fijo para 𝜏, que representa la heterogeneidad bajo la hipótesis nula."
 
 msgctxt "FunnelPlot|"
 msgid "Fill colors"
-msgstr ""
+msgstr "Rellenar colores"
 
 msgctxt "FunnelPlot|"
 msgid ""
 "Fill the funnel plot's prediction intervals under the null hypothesis with "
 "different colors."
 msgstr ""
+"Rellenar los intervalos de predicción del gráfico en embudo bajo la "
+"hipótesis nula, con distintos colores."
 
 msgctxt "FunnelPlot|"
 msgid "Line type"
-msgstr ""
+msgstr "Tipo de línea"
 
 msgctxt "FunnelPlot|"
 msgid ""
 "Set the type of line of the funnel plot's prediction intervals under the "
 "null hypothesis."
 msgstr ""
+"Establecer el tipo de línea de los intervalos de predicción del gráfico en "
+"embudo bajo la hipótesis nula."
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "None"
 msgstr "Ninguna"
 
 msgctxt "FunnelPlot|"
 msgid "Solid"
-msgstr ""
+msgstr "Sólida"
 
 msgctxt "FunnelPlot|"
 msgid "Dashed"
-msgstr ""
+msgstr "Discontinua"
 
 msgctxt "FunnelPlot|"
 msgid "Dotted"
-msgstr ""
+msgstr "Punteada"
 
 msgctxt "FunnelPlot|"
 msgid "Funnel under H₁"
-msgstr ""
+msgstr "Embudo bajo H₁"
 
 msgctxt "FunnelPlot|"
 msgid "Estimate or specify the funnel plot under the alternative hypothesis."
 msgstr ""
+"Estimar o especificar el gráfico en embudo bajo la hipótesis alternativa."
 
 msgctxt "FunnelPlot|"
 msgid ""
 "Choose whether to estimate or manually fix the parameters for the funnel "
 "plot under the alternative hypothesis."
 msgstr ""
+"Escoger si estimar o si fijar manualmente los parámetros para el gráfico en "
+"embudo bajo la hipótesis alternativa."
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Estimated"
 msgstr "Estimado"
 
 msgctxt "FunnelPlot|"
 msgid "Fixed"
-msgstr ""
+msgstr "Fijo"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Method"
 msgstr "Método"
@@ -3288,6 +3290,8 @@ msgid ""
 "Select the heterogeneity estimation method for the funnel plot under the "
 "alternative hypothesis."
 msgstr ""
+"Seleccionar el método de estimación de la heterogeneidad para el gráfico en "
+"embudo bajo la hipótesis alternativa."
 
 msgctxt "FunnelPlot|"
 msgid "Equal Effects"
