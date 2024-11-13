@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2024-11-09 02:44\n"
-"PO-Revision-Date: 2024-11-13 11:00+0000\n"
+"PO-Revision-Date: 2024-11-13 18:38+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
@@ -1152,6 +1152,8 @@ msgid ""
 "Power enhancement breaks were specified in an incorrect format. Try '(0.30, "
 "0.50, 0.80)'."
 msgstr ""
+"Las rupturas de la mejora de potencia se especificaron en un formato "
+"incorrecto. Intenta '(0.30, 0.50, 0.80)'."
 
 msgid "Power enhancement breaks must be between 0.05 and 1."
 msgstr "Las rupturas de mejora de potencia deben estar entre 0.05 y 1."
@@ -1160,58 +1162,54 @@ msgid "Power"
 msgstr "Potencia"
 
 msgid "H₁ Funnel Parameter Estimates"
-msgstr ""
+msgstr "Estimaciones de parámetros del embudo bajo H₁"
 
 msgid "μ"
-msgstr ""
+msgstr "μ"
 
-#, fuzzy
 msgid "The funnel plot parameter estimation failed with the following error:"
-msgstr "El contraste %1$s se quebró con el siguiente fallo: %2$s"
-
-#, fuzzy
-msgid "Meta-Regression Test for Funnel Plot Asymmetry"
 msgstr ""
-"Contraste de correlación de rangos para la asimetría con gráfico en embudo"
+"La estimación de parámetros del gráfico en embudo fracasó con el siguiente "
+"fallo:"
 
-#, fuzzy
+msgid "Meta-Regression Test for Funnel Plot Asymmetry"
+msgstr "Contraste de Meta-Regresión para asimetría de gráficos en embudo"
+
 msgid "Asymmetry Test"
-msgstr "Contrastes de Asimetría de Gráficos en Embudo"
+msgstr "Contraste de asimetría"
 
-#, fuzzy
 msgid "Limit Estimate"
-msgstr "Estimar"
+msgstr "Estimar límite"
 
 msgid "Lower 95% CI"
-msgstr ""
+msgstr "Inferior IC de 95%"
 
 msgid "Upper 95% CI"
-msgstr ""
+msgstr "Superior IC de 95%"
 
-#, fuzzy
 msgid "Weighted Regression Test for Funnel Plot Asymmetry"
-msgstr ""
-"Contraste de la regresión para la asimetría del gráfico en embudo (\"Proba "
-"de Egger\")"
+msgstr "Contraste de regresión ponderada para asimetría de gráficos en embudo"
 
-#, fuzzy
 msgid "Rank Correlation Test for Funnel Plot Asymmetry"
-msgstr ""
-"Contraste de correlación de rangos para la asimetría con gráfico en embudo"
+msgstr "Contraste de correlación de rangos para asimetría de gráficos en embudo"
 
-#, fuzzy
 msgid "The funnel plot asymmetry test failed with the following error:"
-msgstr "El contraste %1$s se quebró con el siguiente fallo: %2$s"
+msgstr ""
+"El contraste de asimetría de gráficos en embudo fracasó con el siguiente "
+"fallo:"
 
-#, fuzzy
 msgid ""
 "The funnel plot asymmetry test at level %1$s failed with the following error:"
-msgstr "El contraste %1$s se quebró con el siguiente fallo: %2$s"
+msgstr ""
+"El contraste de asimetría de gráficos en embudo a nivel %1$s fracasó con el "
+"siguiente fallo:"
 
 msgid ""
 "The meta-analytic model did not converge. Try modifying the 'Method' option "
 "for the 'Funnel under H₁' settings."
 msgstr ""
+"El modelo Meta-Analítico no converge. Intenta modificar la opción 'Método' "
+"en la configuración de 'Embudo bajo H₁'."
 
 msgid "The model should contain at least one predictor or an intercept."
 msgstr "El modelo debe tener, al menos, un predictor o una constante."
