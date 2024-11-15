@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2024-11-10 09:00+0000\n"
+"PO-Revision-Date: 2024-11-16 02:46+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/de/>\n"
@@ -9,7 +9,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8.2\n"
+"X-Generator: Weblate 5.9-dev\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -2144,46 +2144,54 @@ msgid ""
 "autoregressive, spatial, and other forms of dependency."
 msgstr ""
 
-#, qt-format
+#, fuzzy, qt-format
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Structure %1"
-msgstr ""
+msgstr "Struktur %1"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Type of random effect to include in the model."
-msgstr ""
+msgstr "Typ des zufälligen Effekts zum Einschluss ins Modell."
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Simple"
-msgstr ""
+msgstr "Einfach"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Nested (multilevel)"
-msgstr ""
+msgstr "Verschachtelt (multilevel)"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Random slopes"
-msgstr ""
+msgstr "Zufällige Steigungen"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Structured"
-msgstr ""
+msgstr "Strukturiert"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Autoregressive"
-msgstr ""
+msgstr "Autoregressiv"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Spatial"
-msgstr ""
+msgstr "Räumlich"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Known correlation"
-msgstr ""
+msgstr "Bekannte Korrelation"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Structure"
-msgstr ""
+msgstr "Struktur"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
