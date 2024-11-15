@@ -42,6 +42,12 @@
         "Matrix"
       ]
     },
+    "CompQuadForm": {
+      "Package": "CompQuadForm",
+      "Version": "1.4.3",
+      "Source": "Repository",
+      "Requirements": []
+    },
     "Formula": {
       "Package": "Formula",
       "Version": "1.2-5",
@@ -383,6 +389,17 @@
         "utils"
       ]
     },
+    "clubSandwich": {
+      "Package": "clubSandwich",
+      "Version": "0.5.11",
+      "Source": "Repository",
+      "Requirements": [
+        "R",
+        "stats",
+        "sandwich",
+        "lifecycle"
+      ]
+    },
     "cluster": {
       "Package": "cluster",
       "Version": "2.1.6",
@@ -475,6 +492,14 @@
         "cli",
         "R6",
         "utils"
+      ]
+    },
+    "dfoptim": {
+      "Package": "dfoptim",
+      "Version": "2023.1.0",
+      "Source": "Repository",
+      "Requirements": [
+        "R"
       ]
     },
     "digest": {
@@ -880,7 +905,7 @@
     },
     "inline": {
       "Package": "inline",
-      "Version": "0.3.19",
+      "Version": "0.3.20",
       "Source": "Repository",
       "Requirements": [
         "methods"
@@ -979,7 +1004,7 @@
     },
     "knitr": {
       "Package": "knitr",
-      "Version": "1.48",
+      "Version": "1.49",
       "Source": "Repository",
       "Requirements": [
         "R",
@@ -1770,6 +1795,17 @@
         "rlang"
       ]
     },
+    "sandwich": {
+      "Package": "sandwich",
+      "Version": "3.1-1",
+      "Source": "Repository",
+      "Requirements": [
+        "R",
+        "stats",
+        "utils",
+        "zoo"
+      ]
+    },
     "sass": {
       "Package": "sass",
       "Version": "0.4.9",
@@ -1851,6 +1887,21 @@
       "Source": "Repository",
       "Requirements": [
         "R"
+      ]
+    },
+    "sp": {
+      "Package": "sp",
+      "Version": "2.1-4",
+      "Source": "Repository",
+      "Requirements": [
+        "R",
+        "methods",
+        "utils",
+        "stats",
+        "graphics",
+        "grDevices",
+        "lattice",
+        "grid"
       ]
     },
     "stringi": {
@@ -2109,6 +2160,19 @@
       "Version": "2.3.1",
       "Source": "Repository",
       "Requirements": []
+    },
+    "zoo": {
+      "Package": "zoo",
+      "Version": "1.8-12",
+      "Source": "Repository",
+      "Requirements": [
+        "R",
+        "stats",
+        "utils",
+        "graphics",
+        "grDevices",
+        "lattice"
+      ]
     }
   }
 }
