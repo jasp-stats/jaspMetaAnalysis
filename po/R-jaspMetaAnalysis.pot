@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.19.2\n"
-"POT-Creation-Date: 2024-11-09 02:44\n"
+"POT-Creation-Date: 2024-11-16 02:48\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -977,10 +977,10 @@ msgstr ""
 msgid "Limit Estimate"
 msgstr ""
 
-msgid "Lower 95% CI"
+msgid "Lower 95%% CI"
 msgstr ""
 
-msgid "Upper 95% CI"
+msgid "Upper 95%% CI"
 msgstr ""
 
 msgid "Weighted Regression Test for Funnel Plot Asymmetry"
