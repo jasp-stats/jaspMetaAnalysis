@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2024-11-17 09:00+0000\n"
+"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.9-dev\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -2346,9 +2352,10 @@ msgid ""
 "column names of the distance matrix. The names cannot start with a number."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Grouping Factor"
-msgstr ""
+msgstr "Gruppierungsfaktor"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
@@ -2370,15 +2377,15 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Euclidean"
-msgstr ""
+msgstr "Euklidisch"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Manhattan"
-msgstr ""
+msgstr "Manhattan"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Maximum"
-msgstr ""
+msgstr "Maximum"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Great-circle"
@@ -2386,11 +2393,11 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Load from file"
-msgstr ""
+msgstr "Laden aus Datei"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Distance matrix file"
-msgstr ""
+msgstr "Distanzmatrix-Datei"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
@@ -2448,7 +2455,7 @@ msgstr ""
 
 msgctxt "EffectSizeComputation|"
 msgid "Binary"
-msgstr ""
+msgstr "Binär"
 
 msgctxt "EffectSizeComputation|"
 msgid "Counts per time"
@@ -2858,7 +2865,6 @@ msgctxt "EffectSizeComputation|"
 msgid "Items"
 msgstr ""
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Predictors"
 msgstr "Prädiktoren"
@@ -2963,14 +2969,12 @@ msgstr ""
 
 msgctxt "EffectSizeComputation|"
 msgid "P-Value"
-msgstr ""
+msgstr "P-Wert"
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Effect Size"
 msgstr "Effektstärke"
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Standard Error"
 msgstr "Standardfehler"
@@ -2981,7 +2985,7 @@ msgstr ""
 
 msgctxt "EffectSizeComputation|"
 msgid "95% Confidence Interval"
-msgstr ""
+msgstr "95%-Konfidenzintervall"
 
 msgctxt "EffectSizeComputation|"
 msgid "Sampling Variance Type Mixed"
@@ -3030,11 +3034,11 @@ msgstr ""
 
 msgctxt "EffectSizeComputation|"
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 msgctxt "EffectSizeComputation|"
 msgid "No"
-msgstr ""
+msgstr "Nein"
 
 msgctxt "EffectSizeComputation|"
 msgid "Sampling variance type"
