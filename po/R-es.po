@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
-"POT-Creation-Date: 2024-11-09 02:44\n"
-"PO-Revision-Date: 2024-10-22 11:15+0000\n"
+"POT-Creation-Date: 2024-11-16 02:48\n"
+"PO-Revision-Date: 2024-11-14 16:46+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8-rc\n"
+"X-Generator: Weblate 5.9-dev\n"
 
 msgid ""
 "The study labels contain invalid characters. Please, remove them before "
@@ -276,7 +276,7 @@ msgstr ""
 "del modelo de efectos aleatorios restringido."
 
 msgid "Effect Size"
-msgstr "Tamaño del efecto"
+msgstr "Magnitud del efecto"
 
 msgid "Effect size"
 msgstr "Magnitud del efecto"
@@ -303,7 +303,7 @@ msgid "Ordered H"
 msgstr "H Ordenado"
 
 msgid "Forest Plot"
-msgstr "Gráfico en bosque"
+msgstr "Gráfico forestal"
 
 msgid "Observed study effects"
 msgstr "Efectos observados del estudio"
@@ -342,7 +342,7 @@ msgid "random"
 msgstr "aleatorio"
 
 msgid "fixed"
-msgstr "fjo"
+msgstr "Fijo"
 
 msgid "Anecdotal"
 msgstr "Anecdótica"
@@ -409,30 +409,31 @@ msgstr "Última iteración de la cadena"
 msgid "Shrink factor"
 msgstr "Factor de contracción"
 
-#, fuzzy
 msgid "All standard errors must be positive."
-msgstr "Todos los errores típicos/tamaños muestrales deben ser positivos."
+msgstr "Todos los errores típicos deben ser positivos."
 
 msgid ""
 "The loaded distance matrix for '%1$s' does not match the dataset. The "
 "following levels are missing: %2$s."
 msgstr ""
+"La matriz de distancias cargada para '%1$s' no coincide con el conjunto de "
+"datos. Los siguientes niveles están ausentes: %2$s."
 
 msgid ""
 "The loaded correlation matrix for '%1$s' does not match the dataset. The "
 "following levels are missing: %2$s."
 msgstr ""
+"La matriz de correlaciones cargada para '%1$s' no coincide con el conjunto "
+"de datos. Los siguientes niveles están ausentes: %2$s."
 
-#, fuzzy
 msgid "All observations were removed as influential."
-msgstr "la observación %i se eliminó debido a valores ausentes."
+msgstr "Todas las observaciones se eliminaron como influyentes."
 
-#, fuzzy
 msgid "Residual Heterogeneity Test"
-msgstr "Estimaciones de la Heterogeneidad de los Errores"
+msgstr "Contraste de Heterogeneidad de los errores"
 
 msgid "Qₑ"
-msgstr ""
+msgstr "Qₑ"
 
 msgid "df"
 msgstr "gl"
@@ -441,31 +442,28 @@ msgid "p"
 msgstr "p"
 
 msgid "Omnibus Moderation Test"
-msgstr ""
+msgstr "Contraste ómnibus de moderación"
 
-#, fuzzy
 msgid "Parameter"
-msgstr "Peters"
+msgstr "Parámetro"
 
-#, fuzzy
 msgid "F"
-msgstr "EF"
+msgstr "F"
 
 msgid "Qₘ"
-msgstr ""
+msgstr "Qₘ"
 
 msgid "df₁"
-msgstr ""
+msgstr "gl₁"
 
 msgid "df₂"
-msgstr ""
+msgstr "gl₂"
 
 msgid "p (permutation)"
-msgstr ""
+msgstr "p (permutación)"
 
-#, fuzzy
 msgid "Meta-Analytic Estimates"
-msgstr "Estimaciones del Modelo"
+msgstr "Estimaciones Meta-Analíticas"
 
 msgid "Estimate"
 msgstr "Estimar"
@@ -476,16 +474,14 @@ msgstr "IC del %s%%"
 msgid "%s%% PI"
 msgstr "IP del %s%%"
 
-#, fuzzy
 msgid "Heterogeneity Level"
-msgstr "Heterogeneidad"
+msgstr "Nivel de Heterogeneidad"
 
-#, fuzzy
 msgid "Fit Measures"
 msgstr "Medidas de ajuste"
 
 msgid "Log Lik."
-msgstr ""
+msgstr "Log Verosim."
 
 msgid "Deviance"
 msgstr "Desviación"
@@ -500,19 +496,20 @@ msgid "AICc"
 msgstr "AICc"
 
 msgid "R²"
-msgstr ""
+msgstr "R²"
 
 msgid "Effect Size Meta-Regression Terms Tests"
 msgstr ""
+"Contrastes de los elementos de la Meta-Regresión de la magnitud del efecto"
 
 msgid "Heterogeneity Meta-Regression Terms Tests"
-msgstr ""
+msgstr "Contrastes de los elementos de la Meta-Regresión de heterogeneidad"
 
 msgid "Effect Size Meta-Regression Coefficients"
-msgstr ""
+msgstr "Coeficientes de la Meta-Regresión de la magnitud del efecto"
 
 msgid "Heterogeneity Meta-Regression Coefficients"
-msgstr ""
+msgstr "Coeficientes de la Meta-Regresión de heterogeneidad"
 
 msgid "Standard Error"
 msgstr "Error Típico"
@@ -524,71 +521,69 @@ msgid "z"
 msgstr "z"
 
 msgid "Effect Size Meta-Regression Correlation Matrix"
-msgstr ""
+msgstr "Matriz de correlaciones de la Meta-Regresión de la magnitud del efecto"
 
 msgid "Heterogeneity Meta-Regression Correlation Matrix"
-msgstr ""
+msgstr "Matriz de correlaciones de la Meta-Regresión de heterogeneidad"
 
 msgid "Estimated Marginal Means: Effect Size"
-msgstr ""
+msgstr "Medias marginales estimadas: Magnitud del efecto"
 
 msgid "Estimated Marginal Means: Heterogeneity"
-msgstr ""
+msgstr "Medias marginales estimadas: Heterogeneidad"
 
 msgid "Variable"
-msgstr ""
+msgstr "Variable"
 
 msgid "Level"
-msgstr ""
+msgstr "Nivel"
 
-#, fuzzy
 msgid "Bubble Plots"
-msgstr "Gráfico de Embudo"
+msgstr "Gráficos de burbujas"
 
-#, fuzzy
 msgid "Bubble Plot"
-msgstr "Gráfico de Embudo"
+msgstr "Gráfico de burbujas"
 
-#, fuzzy
 msgid "%1$s (%2$s)"
-msgstr "FB%1$s%2$s"
+msgstr "%1$s (%2$s)"
 
 msgid "Metafor R Code"
-msgstr ""
+msgstr "Código de R de Metafor"
 
 msgid "Effect Size Meta-Regression Variance Inflation"
 msgstr ""
+"Inflación de la varianza en la Meta-regresión de la magnitud del efecto"
 
 msgid "Heterogeneity Meta-Regression Variance Inflation"
-msgstr ""
+msgstr "Inflación de la varianza en la Meta-regresión de heterogeneidad"
 
-#, fuzzy
 msgid "Parameters"
-msgstr "Peters"
+msgstr "Parámetros"
 
 msgid "VIF"
-msgstr ""
+msgstr "FIV"
 
 msgid "SIF"
-msgstr ""
+msgstr "FIS"
 
-#, fuzzy
 msgid "Casewise Diagnostics Table"
-msgstr "Revisión de los Diagnósticos de los Modelos"
+msgstr "Tabla de diagnósticos caso a caso"
 
 msgid ""
 "Casewise diagnostics are not available for models that contain meta-"
 "regression on heterogeneity."
 msgstr ""
+"Los diagnósticos caso a caso no están disponibles para modelos con Meta-"
+"Regresión sobre heterogeneidad."
 
 msgid "No influential cases found."
-msgstr ""
+msgstr "No se encontraron casos influyentes."
 
 msgid "Label"
-msgstr ""
+msgstr "Etiqueta"
 
 msgid "Predictor"
-msgstr ""
+msgstr "Predictor"
 
 msgid "Standardized Residual"
 msgstr "Error Tipificado"
@@ -599,18 +594,17 @@ msgstr "GLFITS"
 msgid "Cook's Distance"
 msgstr "Distancia de Cook"
 
-#, fuzzy
 msgid "Covariance ratio"
-msgstr "Ratio de Cov"
+msgstr "Ratio de covarianza"
 
 msgid "𝜏"
-msgstr ""
+msgstr "𝜏"
 
 msgid "Leave One Out"
-msgstr ""
+msgstr "Dejar uno fuera"
 
 msgid "𝜏²"
-msgstr ""
+msgstr "𝜏²"
 
 msgid "Hat"
 msgstr "Circunflejo"
@@ -619,396 +613,405 @@ msgid "Weight"
 msgstr "Ponderación"
 
 msgid "Difference in coefficients"
-msgstr ""
+msgstr "Diferencia en coeficientes"
 
 msgid "Influential"
-msgstr ""
+msgstr "Influyente"
 
 msgid "Diagnostics are based on the non-clustered model."
-msgstr ""
+msgstr "Los diagnósticos se basan en el modelo no conglomerado."
 
 msgid "Column name %s already exists in the dataset."
-msgstr ""
+msgstr "El nombre %s de columna ya existe en el conjunto de datos."
 
-#, fuzzy
 msgid "Profile Likelihood Plots"
-msgstr "Gráfico de Perfil para"
+msgstr "Gráficos de verosimilitud de perfil"
 
-#, fuzzy
 msgid "Profile Likelihood Plot"
-msgstr "Gráfico de Perfil para"
+msgstr "Gráfico de verosimilitud de perfil"
 
 msgid ""
 "Profile likelihood is not available for models that contain meta-regression "
 "on heterogeneity."
 msgstr ""
+"La vesomilitud de perfil no está disponible para modelos con Meta-Regresión "
+"sobre heterogeneidad."
 
-#, fuzzy
 msgid "Baujat Plot"
-msgstr "Gráfico Radial"
+msgstr "Gráfico de Baujat"
 
 msgid ""
 "Baujat plot is not available for models that contain meta-regression on "
 "heterogeneity."
 msgstr ""
+"El gráfico de Baujat no está disponible para modelos con Meta-Regresión "
+"sobre heterogeneidad."
 
 msgid "Baujat plot is not available for models with clustering."
 msgstr ""
+"El gráfico de Baujat no está disponible para modelos con conglomeración."
 
-#, fuzzy
 msgid "Squared Pearson Residual"
-msgstr "Error Tipificado"
+msgstr "Error de Pearson Cuadrado"
 
-#, fuzzy
 msgid "Influence on Fitted Value"
-msgstr "Medidas de Influencia"
+msgstr "Influencia en el valor ajustado"
 
-#, fuzzy
 msgid "Residual Funnel Plot"
-msgstr "Gráfico de Embudo"
+msgstr "Gráfico en embudo de los errores"
 
-#, fuzzy
 msgid "Meta-Regression Summary"
-msgstr "Estimaciones de la Regresión"
+msgstr "Resumen de la Meta-Regresión"
 
 msgid "Estimated Marginal Means Summary"
-msgstr ""
+msgstr "Resumen de las medias marginales estimadas"
 
 msgid "Variance Inflation Summary"
-msgstr ""
+msgstr "Resumen de la inflación de varianza"
 
 msgid ""
 "Indexes of effect size moderation coefficients were specified in an "
 "incorrect format. Try '(1, 2)' to test the first two coefficients."
 msgstr ""
+"Los índices de los coeficientes de moderación de la magnitud del efecto se "
+"especificaron en un formato incorrecto. Intenta '(1, 2)' para comprobar los "
+"dos primeros coeficientes."
 
 msgid ""
 "Indexes of heterogeneity moderation coefficients were specified in an "
 "incorrect format. Try '(1, 2)' to test the first two coefficients."
 msgstr ""
+"Los índices de los coeficientes de moderación de heterogeneidad se "
+"especificaron en un formato incorrecto. Intenta '(1, 2)' para comprobar los "
+"dos primeros coeficientes."
 
 msgid "The selected coefficients must be an integer vector."
-msgstr ""
+msgstr "Los coeficientes elegidos deben ser un vector entero."
 
 msgid ""
 "The selected coefficients must be between 1 and %1$i (i.e., the number of "
 "regression parameters)."
 msgstr ""
+"Los coeficientes elegidos deben estar entre 1 y %1$i (i.e., el número de "
+"parámetros de la regresión)."
 
-#, fuzzy
 msgid "Effect Size (coef: %1$s)"
-msgstr "Tamaño del efecto (%s)"
+msgstr "Magnitud del efecto (coef: %1$s)"
 
 msgid "Effect size coefficients %1$s correspond to %2$s."
-msgstr ""
+msgstr "Los coeficientes %1$s de la magnitud del efecto corresponden a %2$s."
 
-#, fuzzy
 msgid "Heterogeneity (coef: %1$s)"
-msgstr "Heterogeneidad (%s)"
+msgstr "Heterogeneidad (coef: %1$s)"
 
 msgid "Heterogeneity coefficients %1$s correspond to %2$s."
-msgstr ""
+msgstr "Los coeficientes %1$s de heterogeneidad corresponden a %2$s."
 
-#, fuzzy
 msgid "Adjusted Estimate"
-msgstr "Estimaciones del Modelo"
+msgstr "Estimación ajustada"
 
 msgid "Mean - %1$sSD"
-msgstr ""
+msgstr "Media - %1$sDT"
 
 msgid "Mean + %1$sSD"
-msgstr ""
+msgstr "Media + %1$sDT"
 
 msgid "Distance Matrix"
-msgstr ""
+msgstr "Matriz de distancias"
 
-#, fuzzy
 msgid "Correlation Matrix"
-msgstr "Gráfico de autocorrelaciones"
+msgstr "Matriz de correlaciones"
 
 msgid "Residual Value"
 msgstr "Valor del Error"
 
-#, fuzzy
 msgid "Profile Likelihood"
-msgstr "Log-Verosimilitud"
+msgstr "Verosimilitud del perfil"
 
 msgid ""
 "Clustering is not supported when specifying a heterogeneity meta-regression "
 "model."
 msgstr ""
+"La conglomeración no se admite cuando se especifica un modelo de Meta-"
+"regresión con heterogeneidad."
 
 msgid "The fixed value for tau2 must be a positive number."
-msgstr ""
+msgstr "El valor fijo de tau2 debe ser un número positivo."
 
-#, fuzzy
 msgid ""
 "The custom R code for extending the metafor call failed with the following "
 "message: %1$s"
-msgstr "El contraste %1$s se quebró con el siguiente fallo: %2$s"
+msgstr ""
+"El código habitual de R para extender la invocación de metafor falló con el "
+"siguiente mensaje: %1$s"
 
-#, fuzzy
 msgid "Fisher's z to r"
-msgstr "Z de Fisher"
+msgstr "z de Fisher a r"
 
 msgid "Exponential"
-msgstr ""
+msgstr "Exponencial"
 
 msgid "Log odds to proportions"
-msgstr ""
+msgstr "Log de probabilidades a proporciones"
 
 msgid "Log odds to SMD (normal)"
-msgstr ""
+msgstr "Log de probabilidades a SMD (Normal)"
 
 msgid "Log odds to SMD (logistic)"
-msgstr ""
+msgstr "Log de probabilidades a SMD (Logística)"
 
 msgid "SMD to log odds (normal)"
-msgstr ""
+msgstr "SMD a Log de probabilidades (Normal)"
 
 msgid "SMD to log odds (logistic)"
-msgstr ""
+msgstr "SMD a Log de probabilidades (Logística)"
 
 msgid "Hakstian & Whalen inverse α"
-msgstr ""
+msgstr "α inversa de Hakstian & Whalen"
 
 msgid "Bonett inverse α"
-msgstr ""
+msgstr "α inversa de Bonett"
 
 msgid "Z to R²"
-msgstr ""
+msgstr "Z a R²"
 
 msgid "SMD to Cohen's U₁"
-msgstr ""
+msgstr "SMD a U₁ de Cohen"
 
 msgid "SMD to Cohen's U₂"
-msgstr ""
+msgstr "SMD a U₂ de Cohen"
 
 msgid "SMD to Cohen's U₃"
-msgstr ""
+msgstr "SMD a U₃ de Cohen"
 
 msgid "SMD to CLES, Pr(supperiority)"
-msgstr ""
+msgstr "SMD a CLES, Pr(superioridad)"
 
 msgid "Moderation (Effect Size): %1$s"
-msgstr ""
+msgstr "Moderación (Magnitud del efecto): %1$s"
 
-#, fuzzy
 msgid "Moderation (Heterogeneity): %1$s"
-msgstr "Contraste de Heterogeneidad"
+msgstr "Moderación (Heterogeneidad): %1$s"
 
-#, fuzzy
 msgid "Moderation: %1$s"
-msgstr "Autocorrelación (%1$s)"
+msgstr "Moderación: %1$s"
 
-#, fuzzy
 msgid "Heterogeneity:"
-msgstr "Heterogeneidad"
+msgstr "Heterogeneidad:"
 
 msgid "Fixed effect tested using z-distribution."
-msgstr ""
+msgstr "Efecto fijo contrastado usando la distribución z."
 
 msgid "Fixed effect tested using t-distribution."
-msgstr ""
+msgstr "Efecto fijo contrastado usando la distribución t."
 
-#, fuzzy
 msgid "Fixed effect tested using Knapp and Hartung adjustment."
-msgstr "Ajuste del contraste de Knapp y Hartung."
+msgstr "Efecto fijo contrastado usando el ajuste de Knapp y Hartung."
 
 msgid "The heterogeneity model for 𝜏² is specified on the log scale."
 msgstr ""
+"El modelo de heterogeneidad para 𝜏² está especificado en la escala "
+"logarítmica."
 
 msgid "The heterogeneity model for 𝜏² is specified on the identity scale."
 msgstr ""
+"El modelo de heterogeneidad para 𝜏² está especificado en la escala de "
+"identidad."
 
 msgid "%1$i clusters with %2$i estimates each."
-msgstr ""
+msgstr "%1$i conglomerados con %2$i estimaciones cada uno."
 
 msgid "%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates."
-msgstr ""
+msgstr "%1$i conglomerados con estimaciones %2$i/%3$i/%4$i de mín/mediana/máx."
 
 msgid "The pooled effect size is transformed using %1$s transformation."
 msgstr ""
+"La magnitud del efecto combinado se transforma usando la transformación %1$s."
 
 msgid ""
 "The pooled effect size corresponds to the weighted average effect across "
 "studies."
 msgstr ""
+"La magnitud del efecto combinado se corresponde con el efecto medio "
+"ponderado entre estudios."
 
 msgid ""
 "The pooled heterogeneity estimate corresponds to the heterogeneity at the "
 "average of predictor values."
 msgstr ""
+"La estimación de la heterogeneidad combinada se corresponde con la "
+"heterogeneidad en la media de los valores del predictor."
 
 msgid "The I² and H² statistics are not available for heterogeneity models."
 msgstr ""
+"Los estadísticos I² y H² no están disponibles para modelos de heterogeneidad."
 
-#, fuzzy
 msgid "%1$i observations were ommited due to missing values."
 msgstr "%1$s observaciones fueron omitidas debido a valores que faltan."
 
 msgid "%1$i influential observations were detected and removed."
-msgstr ""
+msgstr "Se detectaron y eliminaron %1$i observaciones influyentes."
 
 msgid "The Model Structure %1$s was not completely specified and was skipped."
 msgstr ""
+"La Estructura %1$s del modelo no se especificó completamente y fué omitida."
 
 msgid ""
 "Prediction interval for the pooled effect size is not available for models "
 "with multiple heterogeneity estimates."
 msgstr ""
+"El intervalo de predicción para la magnitud del efecto combinado no está "
+"disponible para modelos con múltiples estimaciones de heterogeneidad."
 
 msgid ""
 "Each marginal mean estimate is averaged across the levels of the remaining "
 "predictors."
 msgstr ""
+"Cada estimación media marginal se promedia entre los niveles de los "
+"predictores que quedan."
 
 msgid "The estimates and intervals are transformed using %1$s transformation."
 msgstr ""
+"Las estimaciones y los intervalos se transforman usando la transformación "
+"%1$s."
 
 msgid "The estimates and intervals correspond to %1$s."
-msgstr ""
+msgstr "Las estimaciones y los intervalos corresponden a %1$s."
 
 msgid "Permutation p-value is based on %1$s permutations."
-msgstr ""
+msgstr "El valor p de permutación se basa en %1$s permutaciones."
 
 msgid ""
 "The model estimation failed with the following message: %1$s. Please, "
 "consider simplifying the model."
 msgstr ""
+"La estimación del modelo falló con el siguiente mensaje: %1$s. Por favor, "
+"plantéese simplificar el modelo."
 
-#, fuzzy
 msgid "Error reading the distance matrix file: %1$s"
-msgstr "Se ha producido un error al leer el fichero modelo: %1$s"
+msgstr "Error al leer el fichero de la matriz de distancias: %1$s"
 
 msgid ""
 "The distance matrix must be square. The number of rows (%1$i) does not match "
 "the number of columns (%2$i)."
 msgstr ""
+"La matriz de distancias debe ser cuadrada. El número de filas (%1$i) no "
+"coincide con el número de columnas (%2$i)."
 
-#, fuzzy
 msgid "Error reading the correlation matrix file: %1$s"
-msgstr "Se ha producido un error al leer el fichero modelo: %1$s"
+msgstr "Error al leer el fichero de la matriz de correlaciones: %1$s"
 
-#, fuzzy
 msgid "Random Effects / Model Stucture Summary"
-msgstr "Modelo de efectos aleatorios:"
+msgstr "Resumen de Efectos aleatorios / Estructura del modelo"
 
 msgid "Simple / Nested Summary"
-msgstr ""
+msgstr "Resumen Simple / Anidado"
 
 msgid "Estimates"
 msgstr "Estimaciones"
 
 msgid "σ²"
-msgstr ""
+msgstr "σ²"
 
 msgid "σ"
-msgstr ""
+msgstr "σ"
 
 msgid "Levels"
-msgstr ""
+msgstr "Niveles"
 
-#, fuzzy
 msgid "Fixed"
-msgstr "H fixo"
+msgstr "Fijo"
 
-#, fuzzy
 msgid "Inclusion Test"
-msgstr "FB de la Inclusión"
+msgstr "Contraste de inclusión"
 
-#, fuzzy
 msgid "Removed Component"
-msgstr "Componentes de Varianza"
+msgstr "Componente eliminada"
 
 msgid "LRT"
-msgstr ""
+msgstr "CRV (LRT)"
 
 msgid ""
 "Likelihood Ratio Test (LRT) and p-value are based on a comparison with the "
 "complete model."
 msgstr ""
+"El contraste de razón de verosimiltudes (CRV, LRT) y el valor p están "
+"basados en una comparación con el modelo completo."
 
-#, fuzzy
 msgid "Random Slopes Summary"
-msgstr "Resumen de Modelos Individuales"
+msgstr "Resumen de pendientes aleatorias"
 
 msgid "Structured"
-msgstr ""
+msgstr "Estructurado"
 
 msgid "Summary"
 msgstr "Resumen"
 
 msgid "Autoregressive"
-msgstr ""
+msgstr "Autorregresivo"
 
 msgid "Spatial"
-msgstr ""
+msgstr "Espacial"
 
 msgid "Known Correlation Summary"
-msgstr ""
+msgstr "Resumen de la correlación conocida"
 
 msgid "Testing Inclusion of Random Effects / Model Structure"
-msgstr ""
+msgstr "Contrastando la inclusión de Efectos alatorios / Estructura del modelo"
 
-#, fuzzy
 msgid "Random Slopes"
-msgstr "H%s Aleatorio"
+msgstr "Pendientes aleatorias"
 
 msgid "Compound Symmetry"
-msgstr ""
+msgstr "Simetría compuesta"
 
 msgid "Heteroscedastic Compound Symmetry"
-msgstr ""
+msgstr "Simetría compuesta heterocedástica"
 
 msgid "Unstructured"
-msgstr ""
+msgstr "No estructurada"
 
 msgid "Identity"
-msgstr ""
+msgstr "Identidad"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Diagonal"
 
 msgid "AR(1)"
-msgstr ""
+msgstr "AR(1)"
 
 msgid "Heteroskedastic AR(1)"
-msgstr ""
+msgstr "AR(1) heterocedástica"
 
 msgid "Continuous-Time AR"
-msgstr ""
+msgstr "AR en tiempo continuo"
 
 msgid "Gaussian"
-msgstr ""
+msgstr "Normal"
 
 msgid "Linear"
-msgstr ""
+msgstr "Lineal"
 
 msgid "Rational Quadratic"
-msgstr ""
+msgstr "Cuadrática racional"
 
 msgid "Spherical"
-msgstr ""
+msgstr "Esférica"
 
-#, fuzzy
 msgid "Sqrt. Estimate"
-msgstr "Estimar"
+msgstr "Estimación cuadr."
 
 msgid "Levels:"
-msgstr ""
+msgstr "Niveles:"
 
-#, fuzzy
 msgid "Component:"
-msgstr "Componentes de Varianza"
+msgstr "Componente:"
 
-#, fuzzy
 msgid "Estimates 𝜏²"
-msgstr "Estimaciones"
+msgstr "Estimaciones 𝜏²"
 
-#, fuzzy
 msgid "Estimates ρ"
-msgstr "Estimaciones"
+msgstr "Estimaciones ρ"
 
 msgid "%s Summary"
 msgstr "Resumen de %s"
@@ -1037,7 +1040,7 @@ msgid "Concordance Statistic"
 msgstr "Estadístico de Coincidencia"
 
 msgid "Funnel Plot Asymmetry Tests"
-msgstr "Contrastes de Asimetría de Gráficos en Embudo"
+msgstr "Contrastes de asimetría de gráficos en embudo"
 
 msgid "Method"
 msgstr "Método"
@@ -1083,128 +1086,135 @@ msgid ""
 "specified via the appropriate arguments (i.e. an Effect Size and either "
 "Standard Error, Sampling Variance, or 95%% Confidence Interval)."
 msgstr ""
+"No se pueden calcular los resultados. Comprueba que está especificada toda "
+"la información requerida mediante los argumentos adecuados (i.e. una "
+"Magnitud del efecto y o bien un Error típico, o una Varianza de muestreo, o "
+"un Intervalo de confianza del 95%%."
 
 msgid "Step"
-msgstr ""
+msgstr "Paso"
 
 msgid "Computed"
-msgstr ""
+msgstr "Calculado"
 
 msgid "Total Computed"
-msgstr ""
+msgstr "Total calculado"
 
 msgid "Effect sizes were successfully computed for each data entry."
 msgstr ""
+"Las magnitudes de efectos se calcularon con éxito para cada entrada de datos."
 
 msgid ""
 "Effect sizes were successfully computed for %1$i out of %2$i data entries."
 msgstr ""
+"Las magnitudes de efectos se calcularon con éxito para %1$i de las %2$i "
+"entradas de datos."
 
 msgid "Error in Step %1$i:"
-msgstr ""
+msgstr "Error en Paso %1$i:"
 
 msgid "Estimated Marginal Means"
-msgstr ""
+msgstr "Medias marginales estimadas"
 
-#, fuzzy
 msgid "Model Information"
-msgstr "Información"
+msgstr "Información del modelo"
 
-#, fuzzy
 msgid "Pooled Estimate"
-msgstr "Estimaciones del Modelo"
+msgstr "Estimación anidada"
 
-#, fuzzy
 msgid "Missing Data Summary"
-msgstr "Resumen de %s"
+msgstr "Resumen de datos ausentes"
 
 msgid ""
 "The dataset contains missing values: %1$i missing values were removed from "
 "the analysis."
 msgstr ""
+"El conjunto de datos contiene valores ausentes: %1$i valores ausentes se "
+"eliminaron del análisis."
 
 msgid "Funnel Plot"
-msgstr "Gráfico de Embudo"
+msgstr "Gráfico en embudo"
 
 msgid ""
 "Funnel plot prediction interval was specified in an incorrect format. Try "
 "'(0.90, 0.95, 0.99)'."
 msgstr ""
+"El intervalo de predicción del gráfico en embudo se especificó en un formato "
+"incorrecto. Intenta '(0.90, 0.95, 0.99)'."
 
-#, fuzzy
 msgid "Funnel plot prediction intervals must be between 0 and 1."
 msgstr ""
-"Se necesita que todos los puntos de corte de los valores p estén entre 0 e 1."
+"Los intervalos de predicción del gráfico en embudo deben estar entre 0 y 1."
 
-#, fuzzy
 msgid "Funnel plot prediction intervals must be specified."
-msgstr "Se necesita establecer al menos un predictor."
+msgstr ""
+"Los intervalos de predicción del gráfico en embudo deben especificarse."
 
 msgid ""
 "Power enhancement breaks were specified in an incorrect format. Try '(0.30, "
 "0.50, 0.80)'."
 msgstr ""
+"Las rupturas de la mejora de potencia se especificaron en un formato "
+"incorrecto. Intenta '(0.30, 0.50, 0.80)'."
 
 msgid "Power enhancement breaks must be between 0.05 and 1."
-msgstr ""
+msgstr "Las rupturas de mejora de potencia deben estar entre 0.05 y 1."
 
-#, fuzzy
 msgid "Power"
-msgstr "Inferior"
+msgstr "Potencia"
 
 msgid "H₁ Funnel Parameter Estimates"
-msgstr ""
+msgstr "Estimaciones de parámetros del embudo bajo H₁"
 
 msgid "μ"
-msgstr ""
+msgstr "μ"
 
-#, fuzzy
 msgid "The funnel plot parameter estimation failed with the following error:"
-msgstr "El contraste %1$s se quebró con el siguiente fallo: %2$s"
+msgstr ""
+"La estimación de parámetros del gráfico en embudo fracasó con el siguiente "
+"fallo:"
 
-#, fuzzy
 msgid "Meta-Regression Test for Funnel Plot Asymmetry"
-msgstr ""
-"Contraste de correlación de rangos para la asimetría con gráfico en embudo"
+msgstr "Contraste de Meta-Regresión para asimetría de gráficos en embudo"
 
-#, fuzzy
 msgid "Asymmetry Test"
-msgstr "Contrastes de Asimetría de Gráficos en Embudo"
+msgstr "Contraste de asimetría"
 
-#, fuzzy
 msgid "Limit Estimate"
-msgstr "Estimar"
-
-msgid "Lower 95% CI"
-msgstr ""
-
-msgid "Upper 95% CI"
-msgstr ""
+msgstr "Estimar límite"
 
 #, fuzzy
+msgid "Lower 95%% CI"
+msgstr "Inferior IC de 95%"
+
+#, fuzzy
+msgid "Upper 95%% CI"
+msgstr "Superior IC de 95%"
+
 msgid "Weighted Regression Test for Funnel Plot Asymmetry"
-msgstr ""
-"Contraste de la regresión para la asimetría del gráfico en embudo (\"Proba "
-"de Egger\")"
+msgstr "Contraste de regresión ponderada para asimetría de gráficos en embudo"
 
-#, fuzzy
 msgid "Rank Correlation Test for Funnel Plot Asymmetry"
 msgstr ""
-"Contraste de correlación de rangos para la asimetría con gráfico en embudo"
+"Contraste de correlación de rangos para asimetría de gráficos en embudo"
 
-#, fuzzy
 msgid "The funnel plot asymmetry test failed with the following error:"
-msgstr "El contraste %1$s se quebró con el siguiente fallo: %2$s"
+msgstr ""
+"El contraste de asimetría de gráficos en embudo fracasó con el siguiente "
+"fallo:"
 
-#, fuzzy
 msgid ""
 "The funnel plot asymmetry test at level %1$s failed with the following error:"
-msgstr "El contraste %1$s se quebró con el siguiente fallo: %2$s"
+msgstr ""
+"El contraste de asimetría de gráficos en embudo a nivel %1$s fracasó con el "
+"siguiente fallo:"
 
 msgid ""
 "The meta-analytic model did not converge. Try modifying the 'Method' option "
 "for the 'Funnel under H₁' settings."
 msgstr ""
+"El modelo Meta-Analítico no converge. Intenta modificar la opción 'Método' "
+"en la configuración de 'Embudo bajo H₁'."
 
 msgid "The model should contain at least one predictor or an intercept."
 msgstr "El modelo debe tener, al menos, un predictor o una constante."
@@ -1472,14 +1482,14 @@ msgid ""
 "between 0 and 1."
 msgstr ""
 "Los resultados no pueden calcularse. Todas las entradas de la variable (%s) "
-"del valor p deben estar entre 0 e 1."
+"del valor p deben estar entre 0 y 1."
 
 msgid ""
 "Cannot compute results. All entries of the correlation coefficient variable "
 "(%s) must be between -1 and 1."
 msgstr ""
 "Los resultados no pueden calcularse. Todas las entradas de la variable (%s) "
-"del coeficiente de correlación deben estar entre 0 e 1."
+"del coeficiente de correlación deben estar entre -1 y 1."
 
 msgid ""
 "Cannot compute results. All entries of the sample size variable (%s) must be "
@@ -1496,7 +1506,7 @@ msgstr "Se necesita establecer al menos un punto de corte de los valores p."
 
 msgid "All p-value cutoffs needs to be between 0 and 1."
 msgstr ""
-"Se necesita que todos los puntos de corte de los valores p estén entre 0 e 1."
+"Se necesita que todos los puntos de corte de los valores p estén entre 0 y 1."
 
 msgid "95%% Confidence Interval"
 msgstr "Intervalo con el 95%% de Confianza"

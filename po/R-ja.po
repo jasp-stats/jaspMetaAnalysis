@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
-"POT-Creation-Date: 2024-11-09 02:44\n"
+"POT-Creation-Date: 2024-11-16 02:48\n"
 "PO-Revision-Date: 2024-07-02 17:09+0000\n"
 "Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -1148,10 +1148,10 @@ msgstr "ファンネルプロットの非対称性検定"
 msgid "Limit Estimate"
 msgstr "推定"
 
-msgid "Lower 95% CI"
+msgid "Lower 95%% CI"
 msgstr ""
 
-msgid "Upper 95% CI"
+msgid "Upper 95%% CI"
 msgstr ""
 
 #, fuzzy

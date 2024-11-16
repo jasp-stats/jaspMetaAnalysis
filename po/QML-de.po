@@ -1904,34 +1904,34 @@ msgstr "Posterior-Schätzungen"
 
 msgctxt "Description|"
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Verschiedenes"
 
 msgctxt "Description|"
 msgid "Effect Size Computation"
-msgstr ""
+msgstr "Effektstärkenberechnung"
 
 msgctxt "Description|"
 msgid "Funnel Plot"
-msgstr ""
+msgstr "Trichterdiagramm"
 
 msgctxt "Description|"
 msgid "Meta-Analysis (Multilevel/Multivariate)"
-msgstr ""
+msgstr "Metaanalyse (Multilevel/Multivariat)"
 
 msgctxt "Description|"
 msgid "Classical Meta-Analysis (Multilevel/Multivariate)"
-msgstr ""
+msgstr "Klassische Metaanalysise (Multilevel/Multivariat)"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Variable containing the observed effect sizes."
-msgstr ""
+msgstr "Variable, die die beobachteten Effektstärken enthält."
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid ""
 "Variable containing the standard errors corresponding to the effect sizes."
 msgstr ""
+"Variable, die die Standardfehler enthält, die den Effektstärken entsprechen."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Method"
 msgstr "Methode"
@@ -1944,14 +1944,12 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Equal Effects"
-msgstr ""
+msgstr "Gleiche Effekte"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Fixed Effects"
 msgstr "Feste Effekte"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Maximum Likelihood"
 msgstr "Maximum-Likelihood"
@@ -1961,17 +1959,14 @@ msgctxt "ClassicalMetaAnalysis|"
 msgid "Restricted ML"
 msgstr "Begrenztes ML"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "DerSimonian-Laird"
 msgstr "DerSimonian-Laird"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Hedges"
 msgstr "Hedges"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Hunter-Schmidt"
 msgstr "Hunter-Schmidt"
@@ -1980,7 +1975,6 @@ msgctxt "ClassicalMetaAnalysis|"
 msgid "Hunter-Schmidt (SSC)"
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Sidik-Jonkman"
 msgstr "Sidik-Jonkman"
@@ -1990,7 +1984,6 @@ msgctxt "ClassicalMetaAnalysis|"
 msgid "Empirical Bayes"
 msgstr "Empirische Bayes"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Paule-Mandel"
 msgstr "Paule-Mandel"
@@ -2007,9 +2000,10 @@ msgctxt "ClassicalMetaAnalysis|"
 msgid "Generalized Q-stat (MU)"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Fixed effect test"
-msgstr ""
+msgstr "Fester-Effekt-Test"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid ""
@@ -2017,8 +2011,10 @@ msgid ""
 "approximation, 't' uses t-distribution, and 'knha' uses the Knapp and "
 "Hartung adjustment (default)."
 msgstr ""
+"Methode zum Testen der Modellkoeffizienten: 'z' verwendet standardnormale "
+"Approximation, 't' verwendet t-Verteilung, und 'knha' verwendet die Knapp- "
+"und Hartung-Korrektur (standard)."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Predictors"
 msgstr "Prädiktoren"
@@ -2027,8 +2023,9 @@ msgctxt "ClassicalMetaAnalysis|"
 msgid ""
 "Variables to include as predictors (moderators) in the meta-regression model."
 msgstr ""
+"Variablen, die als Prädiktoren (Moderatoren) in das Meta-Regressionsmodell "
+"aufgenommen werden."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Clustering"
 msgstr "Clustering"
@@ -2044,17 +2041,17 @@ msgid ""
 "Variable containing labels for the studies. Used for labeling outputs and "
 "plots."
 msgstr ""
+"Variable, die Bezeichnungen für die Studien enthält. Wird für die "
+"Beschriftung von Ausgaben und Diagrammen verwendet."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Effect Size"
 msgstr "Effektstärke"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Variable containing the observed effect sizes."
-msgstr ""
+msgstr "Variable, die die beobachteten Effektstärken enthält."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Effect Size Standard Error"
 msgstr "Effektstärke Standardfehler"
@@ -2063,17 +2060,16 @@ msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
 "Variable containing the standard errors corresponding to the effect sizes."
 msgstr ""
+"Variable, die die Standardfehler enthält, die den Effektstärken entsprechen."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Method"
 msgstr "Methode"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Method used to estimate heterogeneity in the meta-analysis."
-msgstr ""
+msgstr "Methode zur Schätzung der Heterogenität in der Metaanalyse."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Maximum Likelihood"
 msgstr "Maximum-Likelihood"
@@ -2083,17 +2079,19 @@ msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Restricted ML"
 msgstr "Begrenztes ML"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Fixed effect test"
-msgstr ""
+msgstr "Fester-Effekt-Test"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
 "Method for testing the model coefficients: 'z' uses standard normal "
 "approximation, 't' uses t-distribution."
 msgstr ""
+"Methode zum Testen der Modellkoeffizienten: 'z' verwendet standardnormale "
+"Approximation, 't' verwendet t-Verteilung."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Predictors"
 msgstr "Prädiktoren"
@@ -2102,8 +2100,9 @@ msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
 "Variables to include as predictors (moderators) in the meta-regression model."
 msgstr ""
+"Variablen, die als Prädiktoren (Moderatoren) in das Meta-Regressionsmodell "
+"aufgenommen werden."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Clustering"
 msgstr "Clustering"
@@ -2114,19 +2113,22 @@ msgid ""
 "permutation tests are selected."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Study Labels"
-msgstr ""
+msgstr "Studienbezeichnungen"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
 "Variable containing labels for the studies. Used for labeling outputs and "
 "plots."
 msgstr ""
+"Variable, die Bezeichnungen für die Studien enthält. Wird für die "
+"Beschriftung von Ausgaben und Diagrammen verwendet."
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Random Effects / Model Structure"
-msgstr ""
+msgstr "Zufällige Effekte / Modellstruktur"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
@@ -2136,46 +2138,54 @@ msgid ""
 "autoregressive, spatial, and other forms of dependency."
 msgstr ""
 
-#, qt-format
+#, fuzzy, qt-format
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Structure %1"
-msgstr ""
+msgstr "Struktur %1"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Type of random effect to include in the model."
-msgstr ""
+msgstr "Typ des zufälligen Effekts zum Einschluss ins Modell."
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Simple"
-msgstr ""
+msgstr "Einfach"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Nested (multilevel)"
-msgstr ""
+msgstr "Verschachtelt (multilevel)"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Random slopes"
-msgstr ""
+msgstr "Zufällige Steigungen"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Structured"
-msgstr ""
+msgstr "Strukturiert"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Autoregressive"
-msgstr ""
+msgstr "Autoregressiv"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Spatial"
-msgstr ""
+msgstr "Räumlich"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Known correlation"
-msgstr ""
+msgstr "Bekannte Korrelation"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Structure"
-msgstr ""
+msgstr "Struktur"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
@@ -3110,29 +3120,35 @@ msgctxt "FunnelPlot|"
 msgid "Effect Size"
 msgstr "Effektstärke"
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Variable containing the observed effect sizes."
-msgstr ""
+msgstr "Variable, die die beobachteten Effektstärken enthält."
 
 #, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Effect Size Standard Error"
 msgstr "Effektstärke Standardfehler"
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid ""
 "Variable containing the standard errors corresponding to the effect sizes."
 msgstr ""
+"Variable, die die Standardfehler enthält, die den Effektstärken entsprechen."
 
 msgctxt "FunnelPlot|"
 msgid "Study Label"
 msgstr ""
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid ""
 "Variable containing labels for the studies. Used for labeling outputs and "
 "plots."
 msgstr ""
+"Variable, die Bezeichnungen für die Studien enthält. Wird für die "
+"Beschriftung von Ausgaben und Diagrammen verwendet."
 
 msgctxt "FunnelPlot|"
 msgid "Split"
@@ -3244,9 +3260,10 @@ msgid ""
 "alternative hypothesis."
 msgstr ""
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Equal Effects"
-msgstr ""
+msgstr "Gleiche Effekte"
 
 #, fuzzy
 msgctxt "FunnelPlot|"
@@ -3263,17 +3280,14 @@ msgctxt "FunnelPlot|"
 msgid "Restricted ML"
 msgstr "Begrenztes ML"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "DerSimonian-Laird"
 msgstr "DerSimonian-Laird"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Hedges"
 msgstr "Hedges"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Hunter-Schmidt"
 msgstr "Hunter-Schmidt"
@@ -3282,7 +3296,6 @@ msgctxt "FunnelPlot|"
 msgid "Hunter-Schmidt (SSC)"
 msgstr ""
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Sidik-Jonkman"
 msgstr "Sidik-Jonkman"
@@ -3292,7 +3305,6 @@ msgctxt "FunnelPlot|"
 msgid "Empirical Bayes"
 msgstr "Empirische Bayes"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Paule-Mandel"
 msgstr "Paule-Mandel"
@@ -3528,7 +3540,6 @@ msgid ""
 "unweighted estimation."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Clustering"
 msgstr "Clustering"
@@ -4766,9 +4777,10 @@ msgid ""
 "variability."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Random Effects / Model Structure"
-msgstr ""
+msgstr "Zufällige Effekte / Modellstruktur"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Available when performing multilevel/multivariate meta-analysis."
