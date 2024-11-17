@@ -33,6 +33,7 @@ Imports:
   CompQuadForm,
   sp,
   dfoptim,
+  nleqslv,
   patchwork
 Remotes:
   jasp-stats/jaspBase,
