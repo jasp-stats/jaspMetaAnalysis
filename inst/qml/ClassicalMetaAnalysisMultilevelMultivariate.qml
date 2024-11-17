@@ -82,6 +82,7 @@ Form
 			id:					predictors
 			title:				qsTr("Predictors")
 			allowedColumns:		["nominal", "scale"]
+			allowTypeChange:	true
 			info: qsTr("Variables to include as predictors (moderators) in the meta-regression model.")
 		}
 
