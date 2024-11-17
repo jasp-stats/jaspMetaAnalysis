@@ -41,3 +41,4 @@ Remotes:
 Depends: 
     R (>= 2.10)
 LazyData: true
+RoxygenNote: 7.3.2

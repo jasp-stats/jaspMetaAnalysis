@@ -181,7 +181,12 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
         if (distanceMatrixFileName != "" && tempValueInner != "") {
 
           # try regular csv loading
-          distanceMatrix <- try(as.matrix(read.csv(file = distanceMatrixFileName, row.names = 1)))
+          if (tolower(gsub(" ", "", distanceMatrixFileName)) == "examplemaire2019distancematrix") {
+            # allow to load example data for data library
+            data("exampleMaire2019DistanceMatrix")
+          }else{
+            distanceMatrix <- try(as.matrix(read.csv(file = distanceMatrixFileName, row.names = 1)))
+          }
 
           if (inherits(distanceMatrix, "try-error"))
             .quitAnalysis(gettextf("Error reading the distance matrix file: %1$s", distanceMatrix))

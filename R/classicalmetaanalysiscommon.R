@@ -2532,7 +2532,12 @@
     rmaInput <- c(rmaInput, .maExtendMetaforCallFromOptions(options))
 
   ### fit the model
-  fit <- paste0("fit <- rma(\n\t", paste(names(rmaInput), "=", rmaInput, collapse = ",\n\t"), "\n)\n")
+  if (.maIsMultilevelMultivariate(options)) {
+    fit <- paste0("fit <- rma.mv(\n\t", paste(names(rmaInput), "=", rmaInput, collapse = ",\n\t"), "\n)\n")
+  } else {
+    fit <- paste0("fit <- rma(\n\t", paste(names(rmaInput), "=", rmaInput, collapse = ",\n\t"), "\n)\n")
+  }
+
 
   # add clustering if specified
   if (options[["clustering"]] != "") {
@@ -2862,14 +2867,22 @@
 .maGetControlOptions                  <- function(options) {
 
   if (.maIsMetaregressionHeterogeneity(options)) {
-    out <- list(
-      optimizer = options[["optimizerMethod"]],
-      iter.max  = if (options[["optimizerMaximumIterations"]]) options[["optimizerMaximumIterationsValue"]],
-      rel.tol   = if (options[["optimizerConvergenceRelativeTolerance"]]) options[["optimizerConvergenceRelativeToleranceValue"]]
-    )
+    if (options[["optimizerMethod"]] == "nlminb" && !options[["optimizerMaximumIterations"]] && !options[["optimizerConvergenceRelativeTolerance"]]) {
+      # allow an empty list for default settings --- this allows manual modification of the control argument through extra input
+      out <- list()
+    } else {
+      out <- list(
+        optimizer = options[["optimizerMethod"]],
+        iter.max  = if (options[["optimizerMaximumIterations"]]) options[["optimizerMaximumIterationsValue"]],
+        rel.tol   = if (options[["optimizerConvergenceRelativeTolerance"]]) options[["optimizerConvergenceRelativeToleranceValue"]]
+      )
+    }
   } else {
     if (.maIsMultilevelMultivariate(options)) {
-      if (options[["optimizerMethod"]] == "nlminb") {
+      if (options[["optimizerMethod"]] == "nlminb" && !options[["optimizerMaximumEvaluations"]] && !options[["optimizerMaximumIterations"]] && !options[["optimizerConvergenceRelativeTolerance"]]) {
+        # allow an empty list for default settings --- this allows manual modification of the control argument through extra input
+        out <- list()
+      } else if (options[["optimizerMethod"]] == "nlminb") {
         out <- list(
           optimizer = options[["optimizerMethod"]],
           eval.max  = if (options[["optimizerMaximumEvaluations"]]) options[["optimizerMaximumEvaluationsValue"]],
