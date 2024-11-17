@@ -54,6 +54,7 @@
 
   # model summary
   .maResidualHeterogeneityTable(jaspResults, dataset, options)
+  .maPooledEffectSizeTestTable(jaspResults, dataset, options)
   .maModeratorsTable(jaspResults, dataset, options)
   .maPooledEstimatesTable(jaspResults, dataset, options)
 
@@ -361,6 +362,48 @@
     df    = fit[["k"]] - fit[["p"]],
     pval  = fit[["QEp"]]
   ))
+
+  return()
+}
+.maPooledEffectSizeTestTable          <- function(jaspResults, dataset, options) {
+
+  modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults)
+
+  if (!is.null(modelSummaryContainer[["pooledEffectSizeTest"]]))
+    return()
+
+  fit <- .maExtractFit(jaspResults, options)
+
+  pooledEffectSizeTest <- createJaspTable(gettext("Pooled Effect Size Test"))
+  pooledEffectSizeTest$position <- 1.1
+  pooledEffectSizeTest$dependOn("confidenceIntervals")
+  modelSummaryContainer[["pooledEffectSizeTest"]] <- pooledEffectSizeTest
+
+  pooledEffectSizeTest$addColumnInfo(name = "est",   type = "number", title = gettext("Estimate"))
+  pooledEffectSizeTest$addColumnInfo(name = "se",    type = "number", title = gettext("Standard Error"))
+  pooledEffectSizeTest$addColumnInfo(name = "stat",  type = "number", title = if(.maIsMetaregressionFtest(options)) gettext("t") else gettext("z"))
+  if (.maIsMetaregressionFtest(options))
+    pooledEffectSizeTest$addColumnInfo(name = "df",  type = "number", title = gettext("df"))
+  pooledEffectSizeTest$addColumnInfo(name = "pval",  type = "pvalue", title = gettext("p"))
+
+  if (is.null(fit) || jaspBase::isTryError(fit))
+    return()
+
+  # do not perform transformation on the estimate (keep est and se on the same scale)
+  options[["transformEffectSize"]] <- "none"
+  predictedEffect <- .maComputePooledEffectPlot(fit, options)
+
+  estimates <- data.frame(
+    est  = predictedEffect[["est"]],
+    se   = predictedEffect[["se"]],
+    stat = predictedEffect[["stat"]],
+    pval = predictedEffect[["pval"]]
+  )
+
+  if (.maIsMetaregressionFtest(options))
+    estimates$df <- predictedEffect[["df"]]
+
+  pooledEffectSizeTest$setData(estimates)
 
   return()
 }
@@ -1576,7 +1619,7 @@
   if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]])
     predictedEffect <- cbind(predictedEffect, tauLevels)
 
-  return(predictedEffect <- apply(predictedEffect, 1, as.list))
+  return(apply(predictedEffect, 1, as.list))
 }
 .maComputePooledEffectPlot         <- function(fit, options) {
 
