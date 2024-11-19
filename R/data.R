@@ -21,3 +21,8 @@
 #'
 #' @return A distance matrix
 "exampleMaire2019DistanceMatrix"
+
+.mammGetExampleMaire2019DistanceMatrix <- function() {
+  data("exampleMaire2019DistanceMatrix")
+  return(exampleMaire2019DistanceMatrix)
+}
