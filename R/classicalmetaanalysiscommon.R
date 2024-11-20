@@ -54,6 +54,7 @@
 
   # model summary
   .maResidualHeterogeneityTable(jaspResults, dataset, options)
+  .maPooledEffectSizeTestTable(jaspResults, dataset, options)
   .maModeratorsTable(jaspResults, dataset, options)
   .maPooledEstimatesTable(jaspResults, dataset, options)
 
@@ -361,6 +362,48 @@
     df    = fit[["k"]] - fit[["p"]],
     pval  = fit[["QEp"]]
   ))
+
+  return()
+}
+.maPooledEffectSizeTestTable          <- function(jaspResults, dataset, options) {
+
+  modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults)
+
+  if (!is.null(modelSummaryContainer[["pooledEffectSizeTest"]]))
+    return()
+
+  fit <- .maExtractFit(jaspResults, options)
+
+  pooledEffectSizeTest <- createJaspTable(gettext("Pooled Effect Size Test"))
+  pooledEffectSizeTest$position <- 1.1
+  pooledEffectSizeTest$dependOn("confidenceIntervals")
+  modelSummaryContainer[["pooledEffectSizeTest"]] <- pooledEffectSizeTest
+
+  pooledEffectSizeTest$addColumnInfo(name = "est",   type = "number", title = gettext("Estimate"))
+  pooledEffectSizeTest$addColumnInfo(name = "se",    type = "number", title = gettext("Standard Error"))
+  pooledEffectSizeTest$addColumnInfo(name = "stat",  type = "number", title = if(.maIsMetaregressionFtest(options)) gettext("t") else gettext("z"))
+  if (.maIsMetaregressionFtest(options))
+    pooledEffectSizeTest$addColumnInfo(name = "df",  type = "number", title = gettext("df"))
+  pooledEffectSizeTest$addColumnInfo(name = "pval",  type = "pvalue", title = gettext("p"))
+
+  if (is.null(fit) || jaspBase::isTryError(fit))
+    return()
+
+  # do not perform transformation on the estimate (keep est and se on the same scale)
+  options[["transformEffectSize"]] <- "none"
+  predictedEffect <- .maComputePooledEffectPlot(fit, options)
+
+  estimates <- data.frame(
+    est  = predictedEffect[["est"]],
+    se   = predictedEffect[["se"]],
+    stat = predictedEffect[["stat"]],
+    pval = predictedEffect[["pval"]]
+  )
+
+  if (.maIsMetaregressionFtest(options))
+    estimates$df <- predictedEffect[["df"]]
+
+  pooledEffectSizeTest$setData(estimates)
 
   return()
 }
@@ -1576,7 +1619,7 @@
   if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]])
     predictedEffect <- cbind(predictedEffect, tauLevels)
 
-  return(predictedEffect <- apply(predictedEffect, 1, as.list))
+  return(apply(predictedEffect, 1, as.list))
 }
 .maComputePooledEffectPlot         <- function(fit, options) {
 
@@ -2489,7 +2532,12 @@
     rmaInput <- c(rmaInput, .maExtendMetaforCallFromOptions(options))
 
   ### fit the model
-  fit <- paste0("fit <- rma(\n\t", paste(names(rmaInput), "=", rmaInput, collapse = ",\n\t"), "\n)\n")
+  if (.maIsMultilevelMultivariate(options)) {
+    fit <- paste0("fit <- rma.mv(\n\t", paste(names(rmaInput), "=", rmaInput, collapse = ",\n\t"), "\n)\n")
+  } else {
+    fit <- paste0("fit <- rma(\n\t", paste(names(rmaInput), "=", rmaInput, collapse = ",\n\t"), "\n)\n")
+  }
+
 
   # add clustering if specified
   if (options[["clustering"]] != "") {
@@ -2819,14 +2867,22 @@
 .maGetControlOptions                  <- function(options) {
 
   if (.maIsMetaregressionHeterogeneity(options)) {
-    out <- list(
-      optimizer = options[["optimizerMethod"]],
-      iter.max  = if (options[["optimizerMaximumIterations"]]) options[["optimizerMaximumIterationsValue"]],
-      rel.tol   = if (options[["optimizerConvergenceRelativeTolerance"]]) options[["optimizerConvergenceRelativeToleranceValue"]]
-    )
+    if (options[["optimizerMethod"]] == "nlminb" && !options[["optimizerMaximumIterations"]] && !options[["optimizerConvergenceRelativeTolerance"]]) {
+      # allow an empty list for default settings --- this allows manual modification of the control argument through extra input
+      out <- list()
+    } else {
+      out <- list(
+        optimizer = options[["optimizerMethod"]],
+        iter.max  = if (options[["optimizerMaximumIterations"]]) options[["optimizerMaximumIterationsValue"]],
+        rel.tol   = if (options[["optimizerConvergenceRelativeTolerance"]]) options[["optimizerConvergenceRelativeToleranceValue"]]
+      )
+    }
   } else {
     if (.maIsMultilevelMultivariate(options)) {
-      if (options[["optimizerMethod"]] == "nlminb") {
+      if (options[["optimizerMethod"]] == "nlminb" && !options[["optimizerMaximumEvaluations"]] && !options[["optimizerMaximumIterations"]] && !options[["optimizerConvergenceRelativeTolerance"]]) {
+        # allow an empty list for default settings --- this allows manual modification of the control argument through extra input
+        out <- list()
+      } else if (options[["optimizerMethod"]] == "nlminb") {
         out <- list(
           optimizer = options[["optimizerMethod"]],
           eval.max  = if (options[["optimizerMaximumEvaluations"]]) options[["optimizerMaximumEvaluationsValue"]],
