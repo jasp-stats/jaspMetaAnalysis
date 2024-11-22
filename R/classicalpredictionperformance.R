@@ -21,7 +21,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   ready <- .metamiscReady(options)
 
   if (ready) {
-    dataset <- .metamiscGetData(options, dataset)
+    .metamiscCheckData(options, dataset)
     .metamiscFitModel(jaspResults, options, dataset)
   }
 
@@ -76,26 +76,11 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
 
   return(FALSE)
 }
-.metamiscGetData             <- function(options, dataset) {
-
-  if (!is.null(dataset))
-    return(dataset)
-
+.metamiscCheckData           <- function(options, dataset) {
 
   varNames <- c(options[["effectSize"]], options[["effectSizeSe"]], unlist(options[["effectSizeCi"]]),
                 options[["numberOfParticipants"]], options[["numberOfObservedEvents"]], options[["numberOfExpectedEvents"]])
   varNames <- varNames[varNames != ""]
-
-  dataset <- readDataSetToEnd(
-    columns.as.numeric = varNames,
-    columns            = if (options[["studyLabel"]] != "") options[["studyLabel"]]
-  )
-
-  if (options[["studyLabel"]] != "") {
-    dataset[[options[["studyLabel"]]]] <- as.character(dataset[[options[["studyLabel"]]]])
-    if (any(!validUTF8(dataset[[options[["studyLabel"]]]])))
-      .quitAnalysis(gettext("The study labels contain invalid characters. Please, remove them before running the analysis."))
-  }
 
   .hasErrors(dataset               = dataset[,varNames],
              type                  = c("infinity", "observations", "negativeValues"),
@@ -104,11 +89,10 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
 
   .hasErrors(dataset              = dataset,
              seCheck.target       = varNames[varNames %in% c(options[["effectSizeSe"]],options[["numberOfParticipants"]])],
-             custom               = .metaAnalysisCheckSE,
+             custom               = .maCheckStandardErrors,
              exitAnalysisIfErrors = TRUE)
 
-
-  return(dataset)
+  return()
 }
 .metamiscFitModel            <- function(jaspResults, options, dataset) {
 
@@ -133,7 +117,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
     O          = if (options[["numberOfObservedEvents"]] != "")      dataset[, options[["numberOfObservedEvents"]]],
     E          = if (options[["numberOfExpectedEvents"]] != "")      dataset[, options[["numberOfExpectedEvents"]]],
     slab       = if (options[["studyLabel"]] != "") dataset[, options[["studyLabel"]]],
-    method     = .metaAnalysisGetMethod(options),
+    method     = .maGetMethodOptions(options),
     pars       = list(
       model.oe    = if (options[["measure"]] == "oeRatio")    options[["withinStudyVariation"]],
       model.cstat = if (options[["measure"]] == "cStatistic") options[["withinStudyVariation"]])
@@ -340,7 +324,7 @@ ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, stat
   fatFits <- modelsFat[["object"]]
 
   # switch the theta / theta.se location according to the link (poisson/log derives and stores the values at different place)
-  if (options[["withinStudyVariation"]] == "poisson/log" && options$method != "BAYES" && .metaAnalysisGetMethod(options) != "FE") {
+  if (options[["withinStudyVariation"]] == "poisson/log" && options$method != "BAYES" && .maGetMethodOptions(options) != "FE") {
     theta    <- "theta.blup"
     theta.se <- "theta.se.blup"
   } else {

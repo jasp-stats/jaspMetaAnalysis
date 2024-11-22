@@ -101,6 +101,7 @@ Description
 		title:			qsTr("Bayesian Meta-Analysis")
 		func:			"BayesianMetaAnalysis"
 		requiresData:	true
+		preloadData:	false
 	}
 
 	Analysis
@@ -109,6 +110,7 @@ Description
 		title:			qsTr("Bayesian Binomial Meta-Analysis")
 		func:			"BayesianBinomialMetaAnalysis"
 		requiresData:	true
+		preloadData:	false
 	}
 
 	Analysis
@@ -117,6 +119,7 @@ Description
 		title:			qsTr("Penalized Meta-Analysis")
 		func:			"PenalizedMetaAnalysis"
 		requiresData:	true
+		preloadData:	false
 	}
 	
 	Analysis
@@ -125,6 +128,7 @@ Description
 		title:			qsTr("Bayesian Prediction Model Performance")
 		func:			"BayesianPredictionPerformance"
 		requiresData:	true
+		preloadData:	false
 	}
 	
 	Analysis
@@ -132,6 +136,7 @@ Description
 		title:			qsTr("Robust Bayesian Meta-Analysis")
 		func:			"RobustBayesianMetaAnalysis"
 		requiresData:	false
+		preloadData:	false
 	}
 
 	Analysis

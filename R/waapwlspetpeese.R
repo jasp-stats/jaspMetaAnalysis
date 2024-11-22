@@ -61,13 +61,13 @@
   if (options[["effectSizeSe"]] != "")
     .hasErrors(dataset              = dataset,
                seCheck.target       = options[["effectSizeSe"]],
-               custom               = .metaAnalysisCheckSE,
+               custom               = .maCheckStandardErrors,
                exitAnalysisIfErrors = TRUE)
 
   if (options[["sampleSize"]] != "")
     .hasErrors(dataset              = dataset,
                seCheck.target       = options[["sampleSize"]],
-               custom               = .metaAnalysisCheckSE,
+               custom               = .maCheckStandardErrors,
                exitAnalysisIfErrors = TRUE)
 
 
