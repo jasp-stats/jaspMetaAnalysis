@@ -181,7 +181,12 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
         if (distanceMatrixFileName != "" && tempValueInner != "") {
 
           # try regular csv loading
-          distanceMatrix <- try(as.matrix(read.csv(file = distanceMatrixFileName, row.names = 1)))
+          if (tolower(gsub(" ", "", distanceMatrixFileName)) == "examplemaire2019distancematrix") {
+            # allow to load example data for data library
+            distanceMatrix <- .mammGetExampleMaire2019DistanceMatrix()
+          }else{
+            distanceMatrix <- try(as.matrix(read.csv(file = distanceMatrixFileName, row.names = 1)))
+          }
 
           if (inherits(distanceMatrix, "try-error"))
             .quitAnalysis(gettextf("Error reading the distance matrix file: %1$s", distanceMatrix))
@@ -340,13 +345,14 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 }
 .mammRandomEstimatesTable        <- function(jaspResults, dataset, options) {
 
-  if (!is.null(jaspResults[["randomEstimatesContainer"]]))
-    return()
-
-  randomEstimatesContainer <- createJaspContainer(title = gettext("Random Effects / Model Stucture Summary"))
-  randomEstimatesContainer$dependOn(.maDependencies)
-  randomEstimatesContainer$position <- 2
-  jaspResults[["randomEstimatesContainer"]] <- randomEstimatesContainer
+  if (!is.null(jaspResults[["randomEstimatesContainer"]])) {
+    randomEstimatesContainer <- jaspResults[["randomEstimatesContainer"]]
+  } else {
+    randomEstimatesContainer <- createJaspContainer(title = gettext("Random Effects / Model Stucture Summary"))
+    randomEstimatesContainer$dependOn(.maDependencies)
+    randomEstimatesContainer$position <- 2
+    jaspResults[["randomEstimatesContainer"]] <- randomEstimatesContainer
+  }
 
   fit <- .maExtractFit(jaspResults, options)
 
@@ -355,7 +361,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     return()
 
   ### create table for nested random effects
-  if (fit[["withS"]]) {
+  if (fit[["withS"]] && is.null(randomEstimatesContainer[["containerS"]])) {
 
     containerS <- createJaspContainer(title = gettext("Simple / Nested Summary"))
     containerS$position <- 1
@@ -390,7 +396,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
   }
 
   ### create summary for the remaining types
-  if (fit[["withG"]]) {
+  if (fit[["withG"]] && is.null(randomEstimatesContainer[["containerG"]])) {
 
     # create jasp containers
     containerG <- createJaspContainer(title = .mammGetRandomEstimatesTitle(fit[["struct"]][1]))
@@ -400,7 +406,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
   }
 
-  if (fit[["withH"]]) {
+  if (fit[["withH"]] && is.null(randomEstimatesContainer[["containerH"]])) {
 
     containerH <- createJaspContainer(title = .mammGetRandomEstimatesTitle(fit[["struct"]][2]))
     containerH$position <- 3
@@ -410,7 +416,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
   }
 
   ### create random structure inclusion summary
-  if (options[["randomEffectsTestInclusion"]]) {
+  if (options[["randomEffectsTestInclusion"]] && is.null(randomEstimatesContainer[["tableInclusion"]])) {
 
     tableInclusion <- createJaspTable(title = gettext("Inclusion Test"))
     tableInclusion$position <- 4
