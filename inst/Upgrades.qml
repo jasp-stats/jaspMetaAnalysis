@@ -642,4 +642,24 @@ Upgrades
 		ChangeRename { from: "advancedAutofitRemoveFailedModels"; to: "advancedRemoveFailedModels" }
 		ChangeRename { from: "advancedAutofitRebalanceComponentProbabilityOnModelFailure"; to: "advancedRebalanceComponentProbabilityOnModelFailure" }
 	}
+
+	Upgrade
+	{
+		functionName:	"RobustBayesianMetaAnalysis"
+		fromVersion:	"0.19.1"
+		toVersion:		"0.19.2"
+
+		ChangeJS
+		{
+			name:		"inferenceOutputScale"
+			jsFunction:	function(options)
+			{
+				switch(options["inferenceOutputScale"])
+				{
+					case "correlation":	return "r";
+					default:			return options["inferenceOutputScale"];
+				}
+			}
+		}
+	}
 }
