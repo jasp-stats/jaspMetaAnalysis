@@ -18,8 +18,7 @@
 SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
 
   if (.smCheckReady(options)) {
-    # get the data
-    dataset <- .smGetData(dataset, options)
+    # check the data
     dataset <- .smCheckData(jaspResults, dataset, options)
 
     # fit the models
@@ -57,18 +56,6 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
     return(options[["effectSize"]] != "" && options[["sampleSize"]] != "")
   }
 }
-.smGetData                 <- function(dataset, options) {
-  if (!is.null(dataset)) {
-    return(dataset)
-  } else {
-    return(.readDataSetToEnd(columns.as.numeric = c(
-      options[["effectSize"]],
-      if (options[["effectSizeSe"]] != "") options[["effectSizeSe"]],
-      if (options[["sampleSize"]] != "")  options[["sampleSize"]],
-      if (options[["pValue"]] != "")  options[["pValue"]]
-    )))
-  }
-}
 .smCheckData               <- function(jaspResults, dataset, options) {
 
   dataset_old <- dataset
@@ -94,14 +81,14 @@ SelectionModels <- function(jaspResults, dataset, options, state = NULL) {
   if (options[["effectSizeSe"]] != "")
     .hasErrors(dataset              = dataset,
                seCheck.target       = options[["effectSizeSe"]],
-               custom               = .metaAnalysisCheckSE,
+               custom               = .maCheckStandardErrors,
                exitAnalysisIfErrors = TRUE)
 
 
   if (options[["sampleSize"]] != "")
     .hasErrors(dataset              = dataset,
                seCheck.target       = options[["sampleSize"]],
-               custom               = .metaAnalysisCheckSE,
+               custom               = .maCheckStandardErrors,
                exitAnalysisIfErrors = TRUE)
 
 

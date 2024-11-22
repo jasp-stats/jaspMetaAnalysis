@@ -651,13 +651,81 @@ Upgrades
 
 		ChangeJS
 		{
-			name:		"inferenceOutputScale"
 			jsFunction:	function(options)
 			{
+				name:		"inferenceOutputScale"
 				switch(options["inferenceOutputScale"])
 				{
 					case "correlation":	return "r";
 					default:			return options["inferenceOutputScale"];
+				}
+			}
+		}
+	}
+
+	Upgrade
+	{
+		functionName:	"ClassicalPredictionPerformance"
+		fromVersion:	"0.19.1"
+		toVersion:		"0.19.2"
+
+		ChangeJS
+		{
+			name:		"withinStudyVariation"
+			jsFunction:	function(options)
+			{
+				if (options[["measure"]] == "cStatistic") {
+					switch(options["withinStudyVariation"])
+					{
+						case "normal/log":	return "normal/logit";
+						default:			return options["withinStudyVariation"];
+					}
+				} else {
+					return options["withinStudyVariation"]
+				}
+			}
+		}
+
+		ChangeJS
+		{
+			name:		"method"
+			jsFunction:	function(options)
+			{
+				switch(options["withinStudyVariation"])
+				{
+					case "Fixed Effects"		: return "fixedEffects";
+					case "Maximum Likelihood"	: return "maximumLikelihood";
+					case "Restricted ML"		: return "restrictedML";
+					case "DerSimonian-Laird"	: return "derSimonianLaird";
+					case "Hedges"				: return "hedges";
+					case "Hunter-Schmidt"		: return "hunterSchmidt";
+					case "Sidik-Jonkman"		: return "sidikJonkman";
+					case "Empirical Bayes"		: return "empiricalBayes";
+					case "Paule-Mandel"			: return "pauleMandel";
+				}
+			}
+		}
+	}
+
+	Upgrade
+	{
+		functionName:	"BayesianPredictionPerformance"
+		fromVersion:	"0.19.1"
+		toVersion:		"0.19.2"
+
+		ChangeJS
+		{
+			name:		"withinStudyVariation"
+			jsFunction:	function(options)
+			{
+				if (options[["measure"]] == "cStatistic") {
+					switch(options["withinStudyVariation"])
+					{
+						case "normal/log":	return "normal/logit";
+						default:			return options["withinStudyVariation"];
+					}
+				} else {
+					return options["withinStudyVariation"]
 				}
 			}
 		}
