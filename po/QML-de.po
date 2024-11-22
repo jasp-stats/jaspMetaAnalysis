@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2024-11-17 09:00+0000\n"
+"PO-Revision-Date: 2024-11-23 02:46+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/de/>\n"
@@ -2188,7 +2188,6 @@ msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Known correlation"
 msgstr "Bekannte Korrelation"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Structure"
 msgstr "Struktur"
@@ -2199,6 +2198,9 @@ msgid ""
 "'Autoregressive', or 'Spatial'. Available structures depend on the selected "
 "type."
 msgstr ""
+"Struktur des zufälligen Effektes, wenn der Typ 'Strukturiert', "
+"'Autoregressiv' oder 'Räumlich' ist. Auswählbare Strukturen hängen vom "
+"gewählten Typ ab."
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Compound symmetry"
@@ -2210,11 +2212,11 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Unstructured "
-msgstr ""
+msgstr "Unstrukturiert "
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Identity"
-msgstr ""
+msgstr "Identität"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Diagonal"
@@ -2234,15 +2236,15 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Exponential"
-msgstr ""
+msgstr "Exponentiell"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Gaussian"
-msgstr ""
+msgstr "Gaußsch"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Linear"
-msgstr ""
+msgstr "Linear"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Rational quadratic"
@@ -2256,59 +2258,67 @@ msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Specification"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Random Slope Terms"
-msgstr ""
+msgstr "Terme Zufälliger Steigungen"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
 "Variables to include as random slope terms in the model. Available when the "
 "random effect type is 'Random slopes'."
 msgstr ""
+"Variablen zum Einschluss als zufällige Steigungsterme im Modell. Wählbar, "
+"wenn der zufällige Effekttyp 'Zufällige Steigungen' ist."
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Factor Levels"
-msgstr ""
+msgstr "Faktorstufen"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
 "Variable indicating the factor levels ('Inner Term') for the structured "
 "random effect. Available when the random effect type is 'Structured'."
 msgstr ""
+"Variable mit den Faktorstufen ('Innere Terme') für den strukturierten "
+"Zufallseffekt. Wählbar, wenn der zufällige Effekttyp 'Strukturiert' ist."
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Level 1"
-msgstr ""
+msgstr "Stufe 1"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Level 2"
-msgstr ""
+msgstr "Stufe 2"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Level 3"
-msgstr ""
+msgstr "Stufe 3"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Level 4"
-msgstr ""
+msgstr "Stufe 4"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Level 5"
-msgstr ""
+msgstr "Stufe 5"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Time"
-msgstr ""
+msgstr "Zeit"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
 "Variable indicating time points for an autoregressive random effects "
 "structure. Available when the random effect type is 'Autoregressive'."
 msgstr ""
+"Variable mit Zeitpunkten für eine autoregressive Zufallseffektstruktur. "
+"Wählbar, wenn der zufällige Effekttyp 'Autoregressiv' ist."
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Spatial Coordinates"
-msgstr ""
+msgstr "Räumliche Koordinaten"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
@@ -2903,37 +2913,36 @@ msgstr ""
 
 msgctxt "EffectSizeComputation|"
 msgid "Mean"
-msgstr ""
+msgstr "Mittelwert"
 
 msgctxt "EffectSizeComputation|"
 msgid "SD Group 1"
-msgstr ""
+msgstr "SD Gruppe 1"
 
 msgctxt "EffectSizeComputation|"
 msgid "SD Time 1 (or Group 1)"
-msgstr ""
+msgstr "SD Zeit 1 (oder Gruppe 1)"
 
 msgctxt "EffectSizeComputation|"
 msgid "SD Group 2"
-msgstr ""
+msgstr "SD Gruppe 2"
 
 msgctxt "EffectSizeComputation|"
 msgid "SD Time 2 (or Group 2)"
-msgstr ""
+msgstr "SD Zeit 2 (oder Gruppe 2)"
 
 msgctxt "EffectSizeComputation|"
 msgid "SD"
-msgstr ""
+msgstr "SD"
 
 msgctxt "EffectSizeComputation|"
 msgid "Sample Size Group 1"
-msgstr ""
+msgstr "Stichprobenumfang Gruppe 1"
 
 msgctxt "EffectSizeComputation|"
 msgid "Sample Size Group 2"
-msgstr ""
+msgstr "Stichprobenumfang Gruppe 2"
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Correlation"
 msgstr "Korrelation"
@@ -2944,24 +2953,23 @@ msgstr ""
 
 msgctxt "EffectSizeComputation|"
 msgid "Sample Size"
-msgstr ""
+msgstr "Stichprobenumfang"
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Cohen's d"
 msgstr "Cohens d"
 
 msgctxt "EffectSizeComputation|"
 msgid "R-Squared"
-msgstr ""
+msgstr "R-Quadrat"
 
 msgctxt "EffectSizeComputation|"
 msgid "T-Statistic"
-msgstr ""
+msgstr "T-Statistik"
 
 msgctxt "EffectSizeComputation|"
 msgid "F-Statistic"
-msgstr ""
+msgstr "F-Statistik"
 
 msgctxt "EffectSizeComputation|"
 msgid "(Semi)Partial Correlation"
@@ -3124,7 +3132,6 @@ msgctxt "FunnelPlot|"
 msgid "Effect Size"
 msgstr "Effektstärke"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Variable containing the observed effect sizes."
 msgstr "Variable, die die beobachteten Effektstärken enthält."
@@ -3134,7 +3141,6 @@ msgctxt "FunnelPlot|"
 msgid "Effect Size Standard Error"
 msgstr "Effektstärke Standardfehler"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid ""
 "Variable containing the standard errors corresponding to the effect sizes."
