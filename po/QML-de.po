@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2024-11-24 10:00+0000\n"
+"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.9-dev\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -3088,40 +3094,42 @@ msgstr ""
 
 msgctxt "EffectSizeComputation|"
 msgid "Options"
-msgstr ""
+msgstr "Optionen"
 
+#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Compute sampling variance"
-msgstr ""
+msgstr "Stichprobenvarianz berechnen"
 
 msgctxt "EffectSizeComputation|"
 msgid "Computed Columns Names"
-msgstr ""
+msgstr "Namen berechneter Spalten"
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Effect size"
 msgstr "Effektstärke"
 
 msgctxt "EffectSizeComputation|"
 msgid "Standard error"
-msgstr ""
+msgstr "Standardfehler"
 
+#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Sampling variance"
-msgstr ""
+msgstr "Stichprobenvarianz"
 
 msgctxt "EffectSizeComputation|"
 msgid "Effect size type"
-msgstr ""
+msgstr "Typ der Effektstärke"
 
 msgctxt "FunnelPlot|"
 msgid ""
 "Kossmeier, M., Tran, U. S., & Voracek, M. (2020). Power-enhanced funnel "
 "plots for meta-analysis. Zeitschrift für Psychologie, 228(1)."
 msgstr ""
+"Kossmeier, M., Tran, U. S., & Voracek, M. (2020). Power-enhanced funnel "
+"plots for meta-analysis. Zeitschrift für Psychologie, 228(1)."
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Effect Size"
 msgstr "Effektstärke"
@@ -3130,7 +3138,6 @@ msgctxt "FunnelPlot|"
 msgid "Variable containing the observed effect sizes."
 msgstr "Variable, die die beobachteten Effektstärken enthält."
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Effect Size Standard Error"
 msgstr "Effektstärke Standardfehler"
@@ -3143,7 +3150,7 @@ msgstr ""
 
 msgctxt "FunnelPlot|"
 msgid "Study Label"
-msgstr ""
+msgstr "Studienbezeichnung"
 
 #, fuzzy
 msgctxt "FunnelPlot|"
@@ -3156,93 +3163,101 @@ msgstr ""
 
 msgctxt "FunnelPlot|"
 msgid "Split"
-msgstr ""
+msgstr "Aufteilung"
 
 msgctxt "FunnelPlot|"
 msgid ""
 "Variable used to split the funnel plot into separate groups or categories."
 msgstr ""
+"Variable zur Aufteilung des Trichterdiagramms in verschiedene Gruppen oder "
+"Kategorien."
 
 msgctxt "FunnelPlot|"
 msgid "Funnel under H₀"
-msgstr ""
+msgstr "Trichter unter H₀"
 
 msgctxt "FunnelPlot|"
 msgid "Specify the funnel plot under the null hypothesis."
-msgstr ""
+msgstr "Angabe des Trichterdiagramms unter der Nullhypothese."
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Parameters"
 msgstr "Parameter"
 
 msgctxt "FunnelPlot|"
 msgid "μ"
-msgstr ""
+msgstr "μ"
 
 msgctxt "FunnelPlot|"
 msgid "Fixed value for the mean effect size under the null hypothesis."
-msgstr ""
+msgstr "Fester Wert für die mittlere Effektstärke unter der Nullhypothese."
 
 msgctxt "FunnelPlot|"
 msgid "𝜏"
-msgstr ""
+msgstr "𝜏"
 
 msgctxt "FunnelPlot|"
 msgid ""
 "Fixed value for 𝜏, representing the heterogeneity under the null hypothesis."
 msgstr ""
+"Fester Wert für 𝜏, der die Heterogenität unter der Nullhypothese darstellt."
 
 msgctxt "FunnelPlot|"
 msgid "Fill colors"
-msgstr ""
+msgstr "Füllfarben"
 
 msgctxt "FunnelPlot|"
 msgid ""
 "Fill the funnel plot's prediction intervals under the null hypothesis with "
 "different colors."
 msgstr ""
+"Fülle die Vorhersageintervalle des Trichterdiagramms unter der Nullhypothese "
+"mit verschiedenen Farben."
 
 msgctxt "FunnelPlot|"
 msgid "Line type"
-msgstr ""
+msgstr "Linientyp"
 
 msgctxt "FunnelPlot|"
 msgid ""
 "Set the type of line of the funnel plot's prediction intervals under the "
 "null hypothesis."
 msgstr ""
+"Einstellen der Art der Linien für die Vorhersageintervalle des "
+"Trichterdiagramms unter der Nullhypothese."
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "None"
 msgstr "Keine"
 
 msgctxt "FunnelPlot|"
 msgid "Solid"
-msgstr ""
+msgstr "Durchgezogen"
 
 msgctxt "FunnelPlot|"
 msgid "Dashed"
-msgstr ""
+msgstr "Gestrichelt"
 
 msgctxt "FunnelPlot|"
 msgid "Dotted"
-msgstr ""
+msgstr "Gepunktet"
 
 msgctxt "FunnelPlot|"
 msgid "Funnel under H₁"
-msgstr ""
+msgstr "Trichter unter H₁"
 
 msgctxt "FunnelPlot|"
 msgid "Estimate or specify the funnel plot under the alternative hypothesis."
 msgstr ""
+"Schätzen oder Angabe des Trichterdiagramms unter der Alternativhypothese."
 
 msgctxt "FunnelPlot|"
 msgid ""
 "Choose whether to estimate or manually fix the parameters for the funnel "
 "plot under the alternative hypothesis."
 msgstr ""
+"Auswahl zwischen Schätzung oder manueller Fixierung der Parameter für das "
+"Trichterdiagramm unter der Alternativhypothese."
 
 #, fuzzy
 msgctxt "FunnelPlot|"
