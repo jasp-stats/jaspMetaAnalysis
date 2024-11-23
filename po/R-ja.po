@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
-"POT-Creation-Date: 2024-11-16 02:48\n"
+"POT-Creation-Date: 2024-11-23 02:48\n"
 "PO-Revision-Date: 2024-07-02 17:09+0000\n"
 "Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -420,6 +420,22 @@ msgstr "df"
 msgid "p"
 msgstr "p"
 
+#, fuzzy
+msgid "Pooled Effect Size Test"
+msgstr "効果量の推定値"
+
+msgid "Estimate"
+msgstr "推定"
+
+msgid "Standard Error"
+msgstr "標準誤差"
+
+msgid "t"
+msgstr "t"
+
+msgid "z"
+msgstr "z"
+
 msgid "Omnibus Moderation Test"
 msgstr ""
 
@@ -446,9 +462,6 @@ msgstr ""
 #, fuzzy
 msgid "Meta-Analytic Estimates"
 msgstr "モデル推定値"
-
-msgid "Estimate"
-msgstr "推定"
 
 msgid "%s%% CI"
 msgstr "%s%% CI"
@@ -493,15 +506,6 @@ msgstr ""
 
 msgid "Heterogeneity Meta-Regression Coefficients"
 msgstr ""
-
-msgid "Standard Error"
-msgstr "標準誤差"
-
-msgid "t"
-msgstr "t"
-
-msgid "z"
-msgstr "z"
 
 msgid "Effect Size Meta-Regression Correlation Matrix"
 msgstr ""

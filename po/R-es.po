@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
-"POT-Creation-Date: 2024-11-16 02:48\n"
+"POT-Creation-Date: 2024-11-23 02:48\n"
 "PO-Revision-Date: 2024-11-19 08:35+0000\n"
 "Last-Translator: JASP Stats <b.boutin@uva.nl>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
@@ -441,6 +441,22 @@ msgstr "gl"
 msgid "p"
 msgstr "p"
 
+#, fuzzy
+msgid "Pooled Effect Size Test"
+msgstr "Estimación de la Magnitud del Efecto"
+
+msgid "Estimate"
+msgstr "Estimar"
+
+msgid "Standard Error"
+msgstr "Error Típico"
+
+msgid "t"
+msgstr "t"
+
+msgid "z"
+msgstr "z"
+
 msgid "Omnibus Moderation Test"
 msgstr "Contraste ómnibus de moderación"
 
@@ -464,9 +480,6 @@ msgstr "p (permutación)"
 
 msgid "Meta-Analytic Estimates"
 msgstr "Estimaciones Meta-Analíticas"
-
-msgid "Estimate"
-msgstr "Estimar"
 
 msgid "%s%% CI"
 msgstr "IC del %s%%"
@@ -510,15 +523,6 @@ msgstr "Coeficientes de la Meta-Regresión de la magnitud del efecto"
 
 msgid "Heterogeneity Meta-Regression Coefficients"
 msgstr "Coeficientes de la Meta-Regresión de heterogeneidad"
-
-msgid "Standard Error"
-msgstr "Error Típico"
-
-msgid "t"
-msgstr "t"
-
-msgid "z"
-msgstr "z"
 
 msgid "Effect Size Meta-Regression Correlation Matrix"
 msgstr "Matriz de correlaciones de la Meta-Regresión de la magnitud del efecto"

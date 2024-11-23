@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2024-11-16 02:48\n"
+"POT-Creation-Date: 2024-11-23 02:48\n"
 "PO-Revision-Date: 2022-08-29 00:27+0000\n"
 "Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
@@ -417,6 +417,22 @@ msgstr "gl"
 msgid "p"
 msgstr "p"
 
+#, fuzzy
+msgid "Pooled Effect Size Test"
+msgstr "Tamanho de efeito"
+
+msgid "Estimate"
+msgstr "Estimativa"
+
+msgid "Standard Error"
+msgstr "Erro padrão"
+
+msgid "t"
+msgstr "t"
+
+msgid "z"
+msgstr "z"
+
 msgid "Omnibus Moderation Test"
 msgstr ""
 
@@ -442,9 +458,6 @@ msgstr ""
 #, fuzzy
 msgid "Meta-Analytic Estimates"
 msgstr "Estimativas"
-
-msgid "Estimate"
-msgstr "Estimativa"
 
 msgid "%s%% CI"
 msgstr "%s%% IC"
@@ -490,15 +503,6 @@ msgstr ""
 
 msgid "Heterogeneity Meta-Regression Coefficients"
 msgstr ""
-
-msgid "Standard Error"
-msgstr "Erro padrão"
-
-msgid "t"
-msgstr "t"
-
-msgid "z"
-msgstr "z"
 
 msgid "Effect Size Meta-Regression Correlation Matrix"
 msgstr ""

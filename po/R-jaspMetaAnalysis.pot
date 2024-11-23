@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.19.2\n"
-"POT-Creation-Date: 2024-11-16 02:48\n"
+"POT-Creation-Date: 2024-11-23 02:48\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -338,6 +338,21 @@ msgstr ""
 msgid "p"
 msgstr ""
 
+msgid "Pooled Effect Size Test"
+msgstr ""
+
+msgid "Estimate"
+msgstr ""
+
+msgid "Standard Error"
+msgstr ""
+
+msgid "t"
+msgstr ""
+
+msgid "z"
+msgstr ""
+
 msgid "Omnibus Moderation Test"
 msgstr ""
 
@@ -360,9 +375,6 @@ msgid "p (permutation)"
 msgstr ""
 
 msgid "Meta-Analytic Estimates"
-msgstr ""
-
-msgid "Estimate"
 msgstr ""
 
 msgid "%s%% CI"
@@ -405,15 +417,6 @@ msgid "Effect Size Meta-Regression Coefficients"
 msgstr ""
 
 msgid "Heterogeneity Meta-Regression Coefficients"
-msgstr ""
-
-msgid "Standard Error"
-msgstr ""
-
-msgid "t"
-msgstr ""
-
-msgid "z"
 msgstr ""
 
 msgid "Effect Size Meta-Regression Correlation Matrix"
