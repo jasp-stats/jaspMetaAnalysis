@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2024-11-16 02:48\n"
-"PO-Revision-Date: 2024-11-14 16:46+0000\n"
-"Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
+"PO-Revision-Date: 2024-11-19 08:35+0000\n"
+"Last-Translator: JASP Stats <b.boutin@uva.nl>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
 "Language: es\n"
@@ -847,7 +847,7 @@ msgstr ""
 "Los estadísticos I² y H² no están disponibles para modelos de heterogeneidad."
 
 msgid "%1$i observations were ommited due to missing values."
-msgstr "%1$s observaciones fueron omitidas debido a valores que faltan."
+msgstr "%1$i observaciones fueron omitidas debido a valores que faltan."
 
 msgid "%1$i influential observations were detected and removed."
 msgstr "Se detectaron y eliminaron %1$i observaciones influyentes."
@@ -1183,11 +1183,9 @@ msgstr "Contraste de asimetría"
 msgid "Limit Estimate"
 msgstr "Estimar límite"
 
-#, fuzzy
 msgid "Lower 95%% CI"
 msgstr "Inferior IC de 95%"
 
-#, fuzzy
 msgid "Upper 95%% CI"
 msgstr "Superior IC de 95%"
 
@@ -1283,7 +1281,7 @@ msgid "MCMC error/SD"
 msgstr "Error MCMC/DT"
 
 msgid "ESS"
-msgstr "ESS"
+msgstr "SCR"
 
 msgid "R-hat"
 msgstr "R-circunflejo"
