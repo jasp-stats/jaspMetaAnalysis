@@ -3943,9 +3943,10 @@ msgid ""
 "when the x-axis variable is nominal."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "Confidence intervals"
-msgstr ""
+msgstr "置信区间"
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "Include confidence intervals of the estimated effect sizes."
