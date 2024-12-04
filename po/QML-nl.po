@@ -3927,7 +3927,7 @@ msgid ""
 msgstr ""
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Condifence intervals"
+msgid "Confidence intervals"
 msgstr ""
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"

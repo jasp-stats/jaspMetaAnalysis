@@ -19,7 +19,7 @@ The design dropdown allows users to select the type of effect size based on the 
 - Single group: This option is for summarizing characteristics of individual groups based on either quantitative or dichotomous variables.
 - Repeated measures (or matched groups): This option is for assessing change within a single group over time or comparing two matched samples.
 - Other: This option includes specific effect sizes that do not fit into the other categories, such as reliability or partial correlations.
-- Reported effect sizes: This option allows to directly pass effect sizes and their standard errors or condifidence interval if they were already reported in the original studies. (When condifence interval is passed, normal approximation is used to compute the standard error.)
+- Reported effect sizes: This option allows to directly pass effect sizes and their standard errors or condifidence interval if they were already reported in the original studies. (When confidence interval is passed, normal approximation is used to compute the standard error.)
 
 #### Measurement
 
