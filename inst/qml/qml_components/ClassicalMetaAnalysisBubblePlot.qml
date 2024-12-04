@@ -138,7 +138,7 @@ Section
 			CheckBox
 			{
 				name:		"bubblePlotConfidenceIntervals"
-				label:		qsTr("Condifence intervals")
+				label:		qsTr("Confidence intervals")
 				checked:	true
 				info: qsTr("Include confidence intervals of the estimated effect sizes.")
 

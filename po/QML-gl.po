@@ -4116,7 +4116,7 @@ msgstr ""
 "Dispoñible cando o eixe x é nominal."
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Condifence intervals"
+msgid "Confidence intervals"
 msgstr "Intervalos de confianza"
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"

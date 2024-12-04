@@ -3982,7 +3982,7 @@ msgstr ""
 "Schätzungen. Auswählbar wenn die X-Achsen-Variable nominal ist."
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Condifence intervals"
+msgid "Confidence intervals"
 msgstr "Konfidenzintervalle"
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"

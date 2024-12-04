@@ -4126,7 +4126,7 @@ msgstr ""
 "observadas. Disponible cuando el eje x es nominal."
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Condifence intervals"
+msgid "Confidence intervals"
 msgstr "Intervalos de confianza"
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
