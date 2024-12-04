@@ -128,7 +128,6 @@ Description
 		title:			qsTr("Bayesian Prediction Model Performance")
 		func:			"BayesianPredictionPerformance"
 		requiresData:	true
-		preloadData:	false
 	}
 	
 	Analysis

@@ -18,8 +18,7 @@
 WaapWls <- function(jaspResults, dataset, options, state = NULL) {
 
   if (.wwppCheckReady(options)) {
-    # get the data
-    dataset <- .wwppGetData(dataset, options)
+    # check the data
     dataset <- .wwppCheckData(jaspResults, dataset, options)
 
     # fit the models

@@ -25,17 +25,6 @@
     return(options[["effectSize"]] != "" && options[["sampleSize"]] != "")
   }
 }
-.wwppGetData                 <- function(dataset, options) {
-  if (!is.null(dataset)) {
-    return(dataset)
-  } else {
-    return(.readDataSetToEnd(columns.as.numeric = c(
-      options[["effectSize"]],
-      if (options[["effectSizeSe"]] != "") options[["effectSizeSe"]],
-      if (options[["sampleSize"]]  != "") options[["sampleSize"]]
-    )))
-  }
-}
 .wwppCheckData               <- function(jaspResults, dataset, options) {
 
   dataset_old <- dataset
