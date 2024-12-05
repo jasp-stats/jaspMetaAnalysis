@@ -21,7 +21,7 @@ BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state 
   ready <- .metamiscReady(options)
 
   if (ready) {
-    dataset <- .metamiscGetData(options, dataset)
+    .metamiscCheckData(options, dataset)
     .metamiscFitModelBayesian(jaspResults, options, dataset)
   }
 

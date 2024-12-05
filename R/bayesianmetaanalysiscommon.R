@@ -301,7 +301,7 @@
     SE <- dataset[, options[["effectSizeSe"]]]
     .hasErrors(dataset              = dataset,
                seCheck.target       = options[["effectSizeSe"]],
-               custom               = .metaAnalysisCheckSE,
+               custom               = .maCheckStandardErrors,
                exitAnalysisIfErrors = TRUE)
   }
 

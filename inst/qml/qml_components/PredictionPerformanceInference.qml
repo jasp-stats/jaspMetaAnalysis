@@ -36,12 +36,26 @@ Section
 	Group
 	{
 
-		MA.ClassicalMetaAnalysisMethod
+		DropDown
 		{
-			visible:	analysisType == "classical"
-			id:			method
-		}
+			name:			"method"
+			label:			qsTr("Method")
+			currentIndex:	2
+			visible:		analysisType == "classical"
 
+			values: [
+				{ label: qsTr("Fixed Effects")		, value: "fixedEffects"			},
+				{ label: qsTr("Maximum Likelihood")	, value: "maximumLikelihood"	},
+				{ label: qsTr("Restricted ML")		, value: "restrictedML"			},
+				{ label: qsTr("DerSimonian-Laird")	, value: "derSimonianLaird"		},
+				{ label: qsTr("Hedges")				, value: "hedges"				},
+				{ label: qsTr("Hunter-Schmidt")		, value: "hunterSchmidt"		},
+				{ label: qsTr("Sidik-Jonkman")		, value: "sidikJonkman"			},
+				{ label: qsTr("Empirical Bayes")	, value: "empiricalBayes"		},
+				{ label: qsTr("Paule-Mandel")		, value: "pauleMandel"			}
+			]
+		}
+		
 		DropDown
 		{
 			name:		"withinStudyVariation"

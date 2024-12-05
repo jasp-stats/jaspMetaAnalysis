@@ -557,12 +557,13 @@
   modelSummaryContainer[["fitMeasuresTable"]] <- fitMeasuresTable
 
 
-  fitMeasuresTable$addColumnInfo(name = "model", title = "",                  type = "string")
-  fitMeasuresTable$addColumnInfo(name = "ll",    title = gettext("Log Lik."), type = "number")
-  fitMeasuresTable$addColumnInfo(name = "dev",   title = gettext("Deviance"), type = "number")
-  fitMeasuresTable$addColumnInfo(name = "AIC",   title = gettext("AIC"),      type = "number")
-  fitMeasuresTable$addColumnInfo(name = "BIC",   title = gettext("BIC"),      type = "number")
-  fitMeasuresTable$addColumnInfo(name = "AICc",  title = gettext("AICc"),     type = "number")
+  fitMeasuresTable$addColumnInfo(name = "model",         title = "",                      type = "string")
+  fitMeasuresTable$addColumnInfo(name = "observations",  title = gettext("Observations"), type = "integer")
+  fitMeasuresTable$addColumnInfo(name = "ll",            title = gettext("Log Lik."),     type = "number")
+  fitMeasuresTable$addColumnInfo(name = "dev",           title = gettext("Deviance"),     type = "number")
+  fitMeasuresTable$addColumnInfo(name = "AIC",           title = gettext("AIC"),          type = "number")
+  fitMeasuresTable$addColumnInfo(name = "BIC",           title = gettext("BIC"),          type = "number")
+  fitMeasuresTable$addColumnInfo(name = "AICc",          title = gettext("AICc"),         type = "number")
 
   if (.maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options))
     fitMeasuresTable$addColumnInfo(name = "R2",  title = gettext("R\U00B2"),   type = "number")
@@ -571,7 +572,7 @@
   if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
-  fitSummary <- cbind("model" = colnames(fit[["fit.stats"]]), data.frame(t(fit[["fit.stats"]])))
+  fitSummary <- cbind("model" = colnames(fit[["fit.stats"]]), observations = fit[["k"]], data.frame(t(fit[["fit.stats"]])))
 
   if (.maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options))
     fitSummary$R2 <- fit[["R2"]]
