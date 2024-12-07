@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2024-12-08 09:00+0000\n"
+"Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
+"Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/gl/>\n"
+"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.9-dev\n"
 "X-Language: gl_ES\n"
 "X-Source-Language: C\n"
 "X-Qt-Contexts: true\n"
@@ -5221,52 +5227,42 @@ msgstr ""
 "favor, volve facer a análise co módulo actualizado, ou descarga a versión "
 "0.19.1 de JASP para volver executar ou editar a análise."
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Method"
 msgstr "Método"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Fixed Effects"
 msgstr "Efectos Fixos"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Maximum Likelihood"
 msgstr "Máxima-Verosimilitude"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Restricted ML"
 msgstr "MV restrinxida"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "DerSimonian-Laird"
 msgstr "DerSimonian-Laird"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Hedges"
 msgstr "Hedges"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Hunter-Schmidt"
 msgstr "Hunter-Schmidt"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Sidik-Jonkman"
 msgstr "Sidik-Jonkman"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Empirical Bayes"
 msgstr "Bayes Empírico"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Paule-Mandel"
 msgstr "Paule-Mandel"
