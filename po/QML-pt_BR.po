@@ -4843,3 +4843,43 @@ msgid ""
 "Please, redo the analysis with the updated module or download the 0.19.1 "
 "version of JASP to rerun or edit the analysis."
 msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Method"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Fixed Effects"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Maximum Likelihood"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Restricted ML"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "DerSimonian-Laird"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Hedges"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Hunter-Schmidt"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Sidik-Jonkman"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Empirical Bayes"
+msgstr ""
+
+msgctxt "PredictionPerformanceInference|"
+msgid "Paule-Mandel"
+msgstr ""

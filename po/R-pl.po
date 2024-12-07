@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.0\n"
-"POT-Creation-Date: 2024-11-23 02:48\n"
+"POT-Creation-Date: 2024-12-07 02:52\n"
 "PO-Revision-Date: 2024-09-05 15:09+0000\n"
 "Last-Translator: Tomasz Misiuro <tomaszmisiuro@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
@@ -441,6 +441,10 @@ msgstr "Heterogeniczność"
 #, fuzzy
 msgid "Fit Measures"
 msgstr "Miary dopasowania"
+
+#, fuzzy
+msgid "Observations"
+msgstr "Iretacja"
 
 msgid "Log Lik."
 msgstr ""

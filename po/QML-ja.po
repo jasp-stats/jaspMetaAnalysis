@@ -4996,3 +4996,53 @@ msgid ""
 "Please, redo the analysis with the updated module or download the 0.19.1 "
 "version of JASP to rerun or edit the analysis."
 msgstr ""
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Method"
+msgstr "方法"
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Fixed Effects"
+msgstr "固定効果"
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Maximum Likelihood"
+msgstr "最尤"
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Restricted ML"
+msgstr "制限付き最尤法"
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "DerSimonian-Laird"
+msgstr "DerSimonian-Laird法"
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Hedges"
+msgstr "ヘッジ(Hedges)"
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Hunter-Schmidt"
+msgstr "Hunter-Schmidt"
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Sidik-Jonkman"
+msgstr "Sidik-Jonkman"
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Empirical Bayes"
+msgstr "経験ベイズ"
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Paule-Mandel"
+msgstr "Paule-Mandel"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2024-11-23 02:48\n"
+"POT-Creation-Date: 2024-12-07 02:52\n"
 "PO-Revision-Date: 2022-08-29 00:27+0000\n"
 "Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
@@ -473,6 +473,10 @@ msgstr "Testes de homogeneidade"
 #, fuzzy
 msgid "Fit Measures"
 msgstr "Medidas adicionais de ajuste"
+
+#, fuzzy
+msgid "Observations"
+msgstr "Informado"
 
 msgid "Log Lik."
 msgstr ""

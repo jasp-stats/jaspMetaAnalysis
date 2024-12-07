@@ -5243,3 +5243,53 @@ msgstr ""
 "compatibles. Por favor, vuelve a hacer el análisis con el módulo "
 "actualizado, o descarga la versión 0.19.1 de JASP para volver a ejecutar o a "
 "editar el análisis."
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Method"
+msgstr "Método"
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Fixed Effects"
+msgstr "Efectos fijos"
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Maximum Likelihood"
+msgstr "Máxima-Verosimilitud"
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Restricted ML"
+msgstr "MV restringida"
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "DerSimonian-Laird"
+msgstr "DerSimonian-Laird"
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Hedges"
+msgstr "Hedges"
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Hunter-Schmidt"
+msgstr "Hunter-Schmidt"
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Sidik-Jonkman"
+msgstr "Sidik-Jonkman"
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Empirical Bayes"
+msgstr "Bayes Empírico"
+
+#, fuzzy
+msgctxt "PredictionPerformanceInference|"
+msgid "Paule-Mandel"
+msgstr "Paule-Mandel"

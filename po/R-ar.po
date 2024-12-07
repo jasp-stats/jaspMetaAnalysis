@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.18.2\n"
-"POT-Creation-Date: 2024-11-23 02:48\n"
+"POT-Creation-Date: 2024-12-07 02:52\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -433,6 +433,9 @@ msgid "Heterogeneity Level"
 msgstr ""
 
 msgid "Fit Measures"
+msgstr ""
+
+msgid "Observations"
 msgstr ""
 
 msgid "Log Lik."
