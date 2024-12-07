@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2024-12-08 09:00+0000\n"
+"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.9-dev\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -3550,13 +3556,15 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Weighted estimation"
-msgstr ""
+msgstr "Gewichtete Schätzung"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid ""
 "Perform weighted estimation using inverse-variance weights. Uncheck for "
 "unweighted estimation."
 msgstr ""
+"Gewichtete Schätzung mit Gewichtung nach inverser Varianz ausführen. "
+"Deaktivieren für ungewichtete Schätzung."
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Clustering"
@@ -3564,17 +3572,19 @@ msgstr "Clustering"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Use clubSandwich"
-msgstr ""
+msgstr "clubSandwich benutzen"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid ""
 "Use the clubSandwich package for robust variance estimation in clustered "
 "data. Enabled when a clustering variable is specified."
 msgstr ""
+"Verwendung des clubSandwich-Pakets für robuste Varianzschätzung in "
+"geclusterten Daten. Aktiviert, wenn eine Clustervariable angegeben ist."
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Small sample correction"
-msgstr ""
+msgstr "Korrektur für kleine Stichprobe"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Apply a small-sample correction to the clustered standard errors."
@@ -3582,11 +3592,11 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Random Effects / Modele Structure"
-msgstr ""
+msgstr "Zufällige Effekte / Modellstruktur"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Use sparse matricies"
-msgstr ""
+msgstr "Dünnbesetzte Matrizen verwenden"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid ""
@@ -3594,16 +3604,21 @@ msgid ""
 "large datasets or complex random effects structures. Available in multilevel/"
 "multivariate meta-analysis."
 msgstr ""
+"Verwenden Sie dünnbesetzte Matrixdarstellungen, um Berechnungen in Modellen "
+"mit großen Datensätzen oder komplexen zufälligen Effektstrukturen zu "
+"beschleunigen. Verfügbar in multilevel/multivariate Metaanalyse."
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Compute covariance matrix"
-msgstr ""
+msgstr "Kovarianzmatrix berechnen"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid ""
 "Compute the covariance matrix of the parameter estimates. Available in "
 "multilevel/multivariate meta-analysis."
 msgstr ""
+"Berechnung der Kovarianzmatrix der Parameterschätzungen. Verfügbar in "
+"multilevel/multivariater Metaanalyse."
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Fix Parameters"
@@ -3621,7 +3636,6 @@ msgid ""
 "multivariate meta-analysis can be fixed via the 'Extend metafor call' option."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Weights"
 msgstr "Gewichte"
@@ -4982,22 +4996,18 @@ msgctxt "PredictionPerformanceInference|"
 msgid "Restricted ML"
 msgstr "Begrenztes ML"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "DerSimonian-Laird"
 msgstr "DerSimonian-Laird"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Hedges"
 msgstr "Hedges"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Hunter-Schmidt"
 msgstr "Hunter-Schmidt"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Sidik-Jonkman"
 msgstr "Sidik-Jonkman"
@@ -5007,7 +5017,6 @@ msgctxt "PredictionPerformanceInference|"
 msgid "Empirical Bayes"
 msgstr "Empirische Bayes"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Paule-Mandel"
 msgstr "Paule-Mandel"
