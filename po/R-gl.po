@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2023-04-29 02:38\n"
-"PO-Revision-Date: 2024-11-17 09:00+0000\n"
+"PO-Revision-Date: 2024-12-08 10:48+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/gl/>\n"
@@ -788,7 +788,7 @@ msgstr ""
 "podería requirir un tempo longo para completarse."
 
 msgid "Model Specification Preview"
-msgstr "Vista Previa da Especificación do Modelo"
+msgstr "Vista previa da especificación do Modelo"
 
 msgid "Prior Distribution"
 msgstr "Distribución previa"
@@ -800,7 +800,7 @@ msgid "Summary"
 msgstr "Resumo"
 
 msgid "Conditional Estimates"
-msgstr "Estimacións Condicionadas"
+msgstr "Estimacións condicionadas"
 
 msgid "Inclusion BF"
 msgstr "FB da Inclusión"
@@ -815,19 +815,19 @@ msgid "P(M|data)"
 msgstr "P(M|datos)"
 
 msgid "Model Averaged Estimates"
-msgstr "Estimacións Medias do Modelo"
+msgstr "Estimacións medias do Modelo"
 
 msgid "Model Averaged Weights (%s)"
-msgstr "Ponderacións Medias do Modelo (%s)"
+msgstr "Ponderacións medias do Modelo (%s)"
 
 msgid "Model Averaged PET-PEESE Estimates"
-msgstr "Estimacións Medias do Modelo PET-PEESE"
+msgstr "Estimacións medias do Modelo PET-PEESE"
 
 msgid "Conditional Weights (%s)"
-msgstr "Ponderacións Condicionadas (%s)"
+msgstr "Ponderacións condicionadas (%s)"
 
 msgid "Conditional PET-PEESE Estimates"
-msgstr "Estimacións Condicionadas PET-PEESE"
+msgstr "Estimacións condicionadas PET-PEESE"
 
 msgid "Models Overview"
 msgstr "Revisión dos modelos"
@@ -878,7 +878,7 @@ msgid "Conditional"
 msgstr "Condicionado"
 
 msgid "Model Averaged"
-msgstr "Modelo Medio"
+msgstr "Modelo medio"
 
 msgid "Effect Size Estimate"
 msgstr "Estimación da Magnitude do Efecto"
@@ -914,7 +914,7 @@ msgid "max(MCMC error/SD)"
 msgstr "max(erro MCMC/DP)"
 
 msgid "min(ESS)"
-msgstr "min(ESS)"
+msgstr "min(SCE)"
 
 msgid "max(R-hat)"
 msgstr "máx(R-circunflexo)"
