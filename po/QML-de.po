@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2024-12-08 09:00+0000\n"
+"PO-Revision-Date: 2024-12-14 02:49+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/de/>\n"
@@ -9,7 +9,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.9-dev\n"
+"X-Generator: Weblate 5.9-rc\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -4516,11 +4516,11 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Settings"
-msgstr ""
+msgstr "Einstellungen"
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Prediction intervals"
-msgstr ""
+msgstr "Vorhersageintervalle"
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid ""
@@ -4530,7 +4530,7 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Estimates and confidence intervals"
-msgstr ""
+msgstr "Schätzungen und Konfidenzintervalle"
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid ""
@@ -4558,36 +4558,35 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Color"
-msgstr ""
+msgstr "Farbe"
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Shape"
-msgstr ""
+msgstr "Form"
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Relative Size"
-msgstr ""
+msgstr "Relative Größe"
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Adjust the relative size of the forest plot components."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Estimates"
 msgstr "Schätzungen"
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Text"
-msgstr ""
+msgstr "Text"
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Axis labels"
-msgstr ""
+msgstr "Achsenbeschriftungen"
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Row"
-msgstr ""
+msgstr "Zeile"
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Left panel"
