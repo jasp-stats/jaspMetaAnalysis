@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2024-12-14 02:49+0000\n"
+"Last-Translator: tao guo <guotao3s@163.com>\n"
+"Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
+"projects/jasp/jaspmetaanalysis-qml/zh_Hans/>\n"
+"Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.9-rc\n"
 "X-Language: zh_Hans\n"
 "X-Qt-Contexts: true\n"
 
@@ -137,7 +143,7 @@ msgstr "随机效应系数表"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Model Derived Statistics"
-msgstr ""
+msgstr "模型派生统计量"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Estimated Marginal Means"
@@ -197,7 +203,7 @@ msgstr "诊断图"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Residual vs Dependent"
-msgstr ""
+msgstr "残差 vs 因变量"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Profile Random Effects Parameters (takes time)"
@@ -237,11 +243,11 @@ msgstr "贝叶斯因子计算"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Integration"
-msgstr ""
+msgstr "积分"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Bridge sampling"
-msgstr ""
+msgstr "桥接抽样"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Inference"
@@ -313,7 +319,7 @@ msgstr "显示标签"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Ordering"
-msgstr ""
+msgstr "排序"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Year (ascending)"
@@ -333,7 +339,7 @@ msgstr "效应量（降序）"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Order"
-msgstr ""
+msgstr "排序"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Ascending"
@@ -345,11 +351,11 @@ msgstr "降序"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Row order"
-msgstr ""
+msgstr "行顺序"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Cumulative forest plot"
-msgstr ""
+msgstr "累积森林图"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Add prior"
@@ -373,7 +379,7 @@ msgstr "阴影 95% 置信区间"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Sequential plot"
-msgstr ""
+msgstr "序列图"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Bayes factors"
@@ -433,19 +439,19 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Upper bound:"
-msgstr ""
+msgstr "上界："
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Heterogeneity (between-study SD)"
-msgstr ""
+msgstr "异质性（研究间标准差）"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Inverse gamma"
-msgstr ""
+msgstr "逆伽马分布"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "shape:"
-msgstr ""
+msgstr "形状："
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Half t"
@@ -453,7 +459,7 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Plot prior(s)"
-msgstr ""
+msgstr "绘制先验分布"
 
 #, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
@@ -467,7 +473,7 @@ msgstr "绘图"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Casewise diagnostics"
-msgstr ""
+msgstr "逐例诊断"
 
 #, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
@@ -480,15 +486,15 @@ msgstr "置信区间"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Fit measures"
-msgstr ""
+msgstr "拟合指标"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Fitted model"
-msgstr ""
+msgstr "拟合模型"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Path to the fitted model"
-msgstr ""
+msgstr "拟合模型路径"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Cohen's d"
