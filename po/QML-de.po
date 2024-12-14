@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2024-12-14 02:49+0000\n"
-"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
-"jaspmetaanalysis-qml/de/>\n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.9-rc\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -3430,9 +3424,10 @@ msgctxt "FunnelPlot|"
 msgid "Outside H₁"
 msgstr ""
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Color"
-msgstr ""
+msgstr "Farbe"
 
 msgctxt "FunnelPlot|"
 msgid ""
@@ -3440,9 +3435,10 @@ msgid ""
 "selected variable."
 msgstr ""
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Shape"
-msgstr ""
+msgstr "Form"
 
 msgctxt "FunnelPlot|"
 msgid ""
@@ -4003,9 +3999,10 @@ msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "Include confidence intervals of the estimated effect sizes."
 msgstr "Konfidenzintervalle der geschätzten Effektstärken einbeziehen."
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "Prediction intervals"
-msgstr ""
+msgstr "Vorhersageintervalle"
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "Include prediction intervals of the estimated effect sizes."
@@ -4881,9 +4878,10 @@ msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Include confidence intervals in the tabular output."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Prediction intervals"
-msgstr ""
+msgstr "Vorhersageintervalle"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Include prediction intervals in the tabular output."
