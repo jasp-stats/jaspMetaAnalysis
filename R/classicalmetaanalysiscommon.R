@@ -1297,6 +1297,12 @@
         code2   = "jaspBase::progressbarTick()"
       ))
 
+      # deal with a single component (not a list)
+      if (dfProfile[["comps"]] == 1) {
+        dfProfile <- list(dfProfile)
+        dfProfile[["comps"]] <- 1
+      }
+
       jaspResults[["diagnosticsResults"]]$object <- dfProfile
     } else {
       # proceed with some nice formatting for rma.uni (too difficult to implement for rma.mv)
