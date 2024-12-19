@@ -257,7 +257,9 @@
     fitPermutation <- try(metafor::permutest(
       fit,
       exact = options[["permutationTestType"]] == "exact",
-      iter  = options[["permutationTestIteration"]]
+      iter  = options[["permutationTestIteration"]],
+      code1 = "jaspBase::startProgressbar(X.iter, label = 'Permutation test')",
+      code2 = "jaspBase::progressbarTick()",
     ))
     fit <- .maFitAddPermutationPValues(fit, fitPermutation, options)
   } else {
@@ -1116,15 +1118,15 @@
 
     if (.maIsMultilevelMultivariate(options)) {
       # only a subset of diagnostics is available for rma.mv
-      influenceResultsDfbs <- data.frame(dfbetas(fit))
+      influenceResultsDfbs <- data.frame(dfbetas(fit, code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics: DFBETAS')", code2 = "jaspBase::progressbarTick()"))
       influenceResultsInf  <- data.frame(
-        rstudent = rstudent(fit)[["resid"]],
-        cook.d   = cooks.distance(fit),
+        rstudent = rstudent(fit,       code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics: Studentized residuals')", code2 = "jaspBase::progressbarTick()")[["resid"]],
+        cook.d   = cooks.distance(fit, code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics: Cooks distance')",        code2 = "jaspBase::progressbarTick()"),
         hat      = hatvalues(fit)
       )
     } else {
       # the complete suite of influence diagnostics is only available for rma.uni
-      influenceResults     <- influence(fit)
+      influenceResults     <- influence(fit, code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics')", code2 = "jaspBase::progressbarTick()")
       influenceResultsDfbs <- data.frame(influenceResults$dfbs)
       influenceResultsInf  <- data.frame(influenceResults$inf)
       influenceResultsInf$tau.del <- sqrt(influenceResultsInf$tau2.del)
@@ -1287,13 +1289,32 @@
 
     if (.maIsMultilevelMultivariate(options)) {
       # use the defaults (too many possible parameter combinations to control)
-      dfProfile <- try(metafor::profile.rma.mv(fit, plot = FALSE, progbar = FALSE))
+      dfProfile <- try(metafor::profile.rma.mv(
+        fit,
+        plot    = FALSE,
+        progbar = FALSE,
+        code1   = "jaspBase::startProgressbar(length(vcs), label = 'Profile likelihood')",
+        code2   = "jaspBase::progressbarTick()"
+      ))
+
+      # deal with a single component (not a list)
+      if (dfProfile[["comps"]] == 1) {
+        dfProfile <- list(dfProfile)
+        dfProfile[["comps"]] <- 1
+      }
 
       jaspResults[["diagnosticsResults"]]$object <- dfProfile
     } else {
       # proceed with some nice formatting for rma.uni (too difficult to implement for rma.mv)
       xTicks    <- jaspGraphs::getPrettyAxisBreaks(c(0, max(0.1, 2*fit[["tau2"]])))
-      dfProfile <- try(profile(fit, xlim = range(xTicks), plot = FALSE, progbar = FALSE))
+      dfProfile <- try(profile(
+        fit,
+        xlim    = range(xTicks),
+        plot    = FALSE,
+        progbar = FALSE,
+        code1   = "jaspBase::startProgressbar(length(vcs), label = 'Profile likelihood')",
+        code2   = "jaspBase::progressbarTick()"
+      ))
       attr(dfProfile, "xTicks")   <- xTicks
 
       jaspResults[["diagnosticsResults"]]$object <- dfProfile
