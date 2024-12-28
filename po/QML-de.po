@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2024-12-28 02:43+0000\n"
-"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
-"jaspmetaanalysis-qml/de/>\n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10-dev\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -3452,9 +3446,10 @@ msgid ""
 "selected variable."
 msgstr ""
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Legend position"
-msgstr ""
+msgstr "Legendenposition"
 
 msgctxt "FunnelPlot|"
 msgid ""
@@ -3462,21 +3457,25 @@ msgid ""
 "mapping is enabled."
 msgstr ""
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Bottom"
-msgstr ""
+msgstr "Unten"
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Right"
-msgstr ""
+msgstr "Rechts"
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Top"
-msgstr ""
+msgstr "Oben"
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Left"
-msgstr ""
+msgstr "Links"
 
 msgctxt "FunnelPlot|"
 msgid "Label offset"
@@ -4216,9 +4215,10 @@ msgid ""
 "model."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "SD factor covariates"
-msgstr ""
+msgstr "SD Faktor-Kovariaten"
 
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid ""
@@ -4339,17 +4339,19 @@ msgid ""
 "the study-level information panel."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Left"
-msgstr ""
+msgstr "Links"
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Middle"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Right"
-msgstr ""
+msgstr "Rechts"
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Predicted effects"
