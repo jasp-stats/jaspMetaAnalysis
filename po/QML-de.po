@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2024-12-28 02:43+0000\n"
+"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10-dev\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -3871,7 +3877,7 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Extend metafor call"
-msgstr ""
+msgstr "metafor-Aufruf erweitern"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid ""
@@ -3880,6 +3886,10 @@ msgid ""
 "github.io/metafor/reference/rma.uni.html and https://wviechtb.github.io/"
 "metafor/reference/rma.mv.html)."
 msgstr ""
+"Erlaubt benutzerdefinierte Argumente für den Funktionsaufruf von metafor. "
+"Konsultieren Sie die metafor-R-Paketdokumentation für die verfügbaren "
+"Befehle (https://wviechtb.github.io/metafor/reference/rma.uni.html und "
+"https://wviechtb.github.io/metafor/reference/rma.mv.html)."
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid ""
@@ -3939,7 +3949,7 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "SD factor covariates"
-msgstr ""
+msgstr "SD Faktor-Kovariaten"
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "Standard deviation cutoff used for binning continuous covariates."
@@ -3967,7 +3977,7 @@ msgstr "Inverse Varianz"
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "Equal"
-msgstr ""
+msgstr "Gleich"
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "Relative size"
@@ -4005,18 +4015,17 @@ msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "Include confidence intervals of the estimated effect sizes."
 msgstr "Konfidenzintervalle der geschätzten Effektstärken einbeziehen."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "Prediction intervals"
 msgstr "Vorhersageintervalle"
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "Include prediction intervals of the estimated effect sizes."
-msgstr ""
+msgstr "Vorhersageintervalle der geschätzten Effektstärken hinzufügen."
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "Theme"
-msgstr ""
+msgstr "Farbschema"
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "Set the theme of the bubble plot."
@@ -4024,19 +4033,19 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "White background"
-msgstr ""
+msgstr "Weißer Hintergrund"
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "Light"
-msgstr ""
+msgstr "Hell"
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "Minimal"
-msgstr ""
+msgstr "Minimal"
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "Relative text size"
-msgstr ""
+msgstr "Relative Textgröße"
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "Adjust the text size of the bubble plot."
@@ -4044,32 +4053,31 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "Legend position"
-msgstr ""
+msgstr "Legendenposition"
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "Set the legend position of the bubble plot."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "None"
 msgstr "Keine"
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "Bottom"
-msgstr ""
+msgstr "Unten"
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "Right"
-msgstr ""
+msgstr "Rechts"
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "Top"
-msgstr ""
+msgstr "Oben"
 
 msgctxt "ClassicalMetaAnalysisBubblePlot|"
 msgid "Left"
-msgstr ""
+msgstr "Links"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid ""
@@ -4106,39 +4114,43 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Show influential only"
-msgstr ""
+msgstr "Nur Einflussreiche anzeigen"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid ""
 "Show only the influential studies in the casewise diagnostics. Unvailable "
 "when performing multilevel/multivariate meta-analysis."
 msgstr ""
+"Nur die einflussreichen Studien in den fallweisen Diagnostiken anzeigen. "
+"Nicht verfügbar bei Durchführung einer multilevel/multivariaten Metaanalyse."
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Include predictors"
-msgstr ""
+msgstr "Prädiktoren hinzufügen"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Include predictor variables in the casewise diagnostics output."
-msgstr ""
+msgstr "Prädiktorvariablen zu den fallweisen Diagnostikergebnissen hinzufügen."
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Difference in coefficients"
-msgstr ""
+msgstr "Differenz von Koeffizienten"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid ""
 "Include the differences in model coefficients when each study is excluded "
 "(DFBETAS)."
 msgstr ""
+"Die Differenz von Modellkoeffizienten hinzufügen, wenn jede Studie "
+"ausgeschlossen wird (DFBETAS)."
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Export to dataset"
-msgstr ""
+msgstr "Export in Datensatz"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Export the casewise diagnostics results to the dataset."
-msgstr ""
+msgstr "Die fallweisen Diagnostikergebnisse in den Datensatz exportieren."
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Influential indicator only"
@@ -4175,7 +4187,6 @@ msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Include a residual funnel plot."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Estimated Marginal Means"
 msgstr "Geschätzte Randmittelwerte"
@@ -4187,18 +4198,17 @@ msgid ""
 "levels of moderators."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Effect size"
 msgstr "Effektstärke"
 
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Model variables"
-msgstr ""
+msgstr "Modellvariablen"
 
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Selected variables"
-msgstr ""
+msgstr "Ausgewählte Variablen"
 
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid ""
@@ -4382,16 +4392,15 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "By"
-msgstr ""
+msgstr "Nach"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Ascending"
 msgstr "Aufsteigend"
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Estimated marginal means"
-msgstr ""
+msgstr "Geschätzte Randmittelwerte"
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid ""
