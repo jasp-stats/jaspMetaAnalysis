@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2025-01-04 21:55+0000\n"
+"Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/es/>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10-dev\n"
 "X-Language: es\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -386,7 +392,7 @@ msgstr "cadenas:"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Bayes factor computation"
-msgstr "Cálculo del factor de Bayes"
+msgstr "Cálculo del Factor de Bayes"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Integration"
@@ -506,7 +512,7 @@ msgstr "Gráfico forestal acumulativo"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Prior and posterior"
-msgstr "Previo y posterior"
+msgstr "Previa y Posterior"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Additional info"
@@ -558,11 +564,11 @@ msgstr "Normal"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "mean:"
-msgstr "media:"
+msgstr "Media:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "std:"
-msgstr "típico:"
+msgstr "Típica:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "t"
@@ -570,7 +576,7 @@ msgstr "t"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "df:"
-msgstr "gl:"
+msgstr "GL:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Truncation"
@@ -590,7 +596,7 @@ msgstr "Gamma Inversa"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "shape:"
-msgstr "forma:"
+msgstr "Forma:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Half t"
@@ -598,7 +604,7 @@ msgstr "Mitad de t"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Plot prior(s)"
-msgstr "Representar previo(s)"
+msgstr "Representar previa(s)"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Diagnostics"
@@ -626,7 +632,7 @@ msgstr "Medidas de ajuste"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Add prior"
-msgstr "Añadir un previo"
+msgstr "Añadir una previa"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Heterogeneity (between-study SD)"
@@ -1094,11 +1100,11 @@ msgstr "posición:"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "scale:"
-msgstr "escala:"
+msgstr "Escala:"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "df:"
-msgstr "gl:"
+msgstr "GL:"
 
 msgctxt "WaapWls|"
 msgid "Effect sizes & SE"
