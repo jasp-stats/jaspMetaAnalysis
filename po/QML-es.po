@@ -4210,7 +4210,7 @@ msgstr ""
 "diagnósticos caso a caso y gráficos de diagnósticos."
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
-msgid "Variace inflation factor"
+msgid "Variance inflation factor"
 msgstr "Factor de Inflación de la Varianza"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
