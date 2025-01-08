@@ -4026,7 +4026,7 @@ msgid ""
 msgstr ""
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
-msgid "Variace inflation factor"
+msgid "Variance inflation factor"
 msgstr ""
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"

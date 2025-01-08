@@ -37,7 +37,7 @@ Section
 			CheckBox
 			{
 				name:		"diagnosticsVarianceInflationFactor"
-				text:		qsTr("Variace inflation factor")
+				text:		qsTr("Variance inflation factor")
 				Layout.preferredWidth: 300 * jaspTheme.uiScale
 				enabled:	predictors.count > 0
 				info: qsTr("Include variance inflation factors to assess multicollinearity among predictors. Available when predictors are included in the model.")
