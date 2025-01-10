@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2025-01-11 02:44+0000\n"
+"Last-Translator: 陳寬裕 <pf.kuan.yu.chen@gmail.com>\n"
+"Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
+"projects/jasp/jaspmetaanalysis-qml/zh_Hant/>\n"
+"Language: zh_Hant\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.10-dev\n"
 "X-Language: zh_Hant\n"
 "X-Qt-Contexts: true\n"
 
@@ -153,7 +159,7 @@ msgstr "森林圖"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Advanced"
-msgstr "進階的"
+msgstr "進階設定"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Method"
@@ -357,7 +363,7 @@ msgstr "彙整多項研究的證據"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Advanced"
-msgstr "進階的"
+msgstr "進階設定"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Prior model probability"
@@ -867,10 +873,9 @@ msgctxt "BayesianPredictionPerformance|"
 msgid "Gelman Rubin"
 msgstr ""
 
-#, fuzzy
 msgctxt "BayesianPredictionPerformance|"
 msgid "Advanced"
-msgstr "進階的"
+msgstr "進階設定"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Adapt"
@@ -1323,10 +1328,9 @@ msgctxt "PenalizedMetaAnalysis|"
 msgid "Autocorrelations"
 msgstr ""
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Advanced"
-msgstr "進階的"
+msgstr "進階設定"
 
 #, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
@@ -3017,7 +3021,7 @@ msgstr ""
 
 msgctxt "EffectSizeComputation|"
 msgid "R-Squared"
-msgstr ""
+msgstr "R平方"
 
 msgctxt "EffectSizeComputation|"
 msgid "T-Statistic"
