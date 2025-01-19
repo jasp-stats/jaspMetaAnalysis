@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2025-01-20 01:53+0000\n"
+"Last-Translator: 陳寬裕 <pf.kuan.yu.chen@gmail.com>\n"
+"Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
+"projects/jasp/jaspmetaanalysis-qml/zh_Hant/>\n"
+"Language: zh_Hant\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.10-dev\n"
 "X-Language: zh_Hant\n"
 "X-Qt-Contexts: true\n"
 
@@ -961,7 +967,7 @@ msgstr ""
 
 msgctxt "PredictionPerformanceData|"
 msgid "Standard Error"
-msgstr ""
+msgstr "標準誤"
 
 #, fuzzy
 msgctxt "PredictionPerformanceData|"
@@ -3040,7 +3046,7 @@ msgstr "效果量"
 
 msgctxt "EffectSizeComputation|"
 msgid "Standard Error"
-msgstr ""
+msgstr "標準誤"
 
 msgctxt "EffectSizeComputation|"
 msgid "Sampling Variance"
@@ -3166,7 +3172,7 @@ msgstr "效果量"
 
 msgctxt "EffectSizeComputation|"
 msgid "Standard error"
-msgstr ""
+msgstr "標準誤"
 
 msgctxt "EffectSizeComputation|"
 msgid "Sampling variance"
