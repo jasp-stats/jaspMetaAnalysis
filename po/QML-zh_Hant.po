@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-01-22 13:01+0000\n"
+"PO-Revision-Date: 2025-01-24 23:01+0000\n"
 "Last-Translator: 陳寬裕 <pf.kuan.yu.chen@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
 "projects/jasp/jaspmetaanalysis-qml/zh_Hant/>\n"
@@ -123,7 +123,7 @@ msgstr "Anova表格"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fit Indices"
-msgstr "適配指標"
+msgstr "配適指標"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Coefficients"
@@ -1958,10 +1958,9 @@ msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Model number"
 msgstr "模型號碼"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Estimate"
-msgstr "估計值"
+msgstr "估計"
 
 #, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
