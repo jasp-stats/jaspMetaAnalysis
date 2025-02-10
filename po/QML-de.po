@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-02-02 05:59+0000\n"
+"PO-Revision-Date: 2025-02-11 10:02+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/de/>\n"
@@ -3030,20 +3030,20 @@ msgstr ""
 
 msgctxt "EffectSizeComputation|"
 msgid "Only zero"
-msgstr ""
+msgstr "Nur Null"
 
 msgctxt "EffectSizeComputation|"
 msgid "If any zero"
 msgstr ""
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "None"
 msgstr "Keine"
 
+#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Drop studies with no cases/events"
-msgstr ""
+msgstr "Studien ohne Fälle/Ereignisse auslassen"
 
 msgctxt "EffectSizeComputation|"
 msgid "Yes"
@@ -3271,9 +3271,8 @@ msgstr "Geschätzt"
 
 msgctxt "FunnelPlot|"
 msgid "Fixed"
-msgstr ""
+msgstr "Fixiert"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Method"
 msgstr "Methode"
@@ -3283,23 +3282,21 @@ msgid ""
 "Select the heterogeneity estimation method for the funnel plot under the "
 "alternative hypothesis."
 msgstr ""
+"Auswahl der Heterogenitätsschätzungsmethode für das Trichterdiagramm unter "
+"der Alternativhypothese."
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Equal Effects"
 msgstr "Gleiche Effekte"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Fixed Effects"
 msgstr "Feste Effekte"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Maximum Likelihood"
 msgstr "Maximum-Likelihood"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Restricted ML"
 msgstr "Begrenztes ML"
@@ -3347,6 +3344,9 @@ msgid ""
 "hypothesis. If unselected, the heterogeneity estimate is not used to adjust "
 "the prediction intervals."
 msgstr ""
+"Heterogenität (𝜏) im Trichterdiagramm unter der Alternativhypothese. Falls "
+"unausgewählt, wird die Heterogenitätsschätzung nicht zur Anpassung der "
+"Vorhersageintervalle verwendet."
 
 #, fuzzy
 msgctxt "FunnelPlot|"
@@ -3358,22 +3358,29 @@ msgid ""
 "Summarize the effect size and heterogeneity estimates used for the funnel "
 "plot under the alternative hypothesis in a table."
 msgstr ""
+"Zusammenfassen der Effektstärken und Heterogenitätsschätzungen für das "
+"Trichterdiagramm unter der Alternativhypothese in einer Tabelle."
 
 msgctxt "FunnelPlot|"
 msgid "Fixed value for the mean effect size under the alternative hypothesis."
 msgstr ""
+"Fester Wert für die mittlere Effektstärke unter der Alternativhypothese."
 
 msgctxt "FunnelPlot|"
 msgid ""
 "Fixed value for 𝜏, representing the heterogeneity under the alternative "
 "hypothesis."
 msgstr ""
+"Fester Wert für 𝜏, der die Heterogenität unter der Alternativhypothese "
+"darstellt."
 
 msgctxt "FunnelPlot|"
 msgid ""
 "Fill the funnel plot's prediction intervals under the alternative hypothesis "
 "with different colors."
 msgstr ""
+"Fülle die Vorhersageintervalle des Trichterdiagramms unter der "
+"Alternativhypothese mit verschiedenen Farben."
 
 msgctxt "FunnelPlot|"
 msgid ""
