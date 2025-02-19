@@ -89,6 +89,13 @@ Description
 		requiresData:	true
 	}
 
+	Analysis
+	{
+		title:			qsTr("Meta-Analytic SEM")
+		func:			"MetaAnalyticSEM"
+		requiresData:	true
+	}
+
 	GroupTitle
 	{
 		title:	 	qsTr("Bayesian")
