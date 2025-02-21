@@ -31,13 +31,126 @@ Form
 		newItemName:	qsTr("Model 1")
 		optionKey:		"name"
 
-		content: TextArea
+		content: Group
 		{
-			name:		"syntax"
-			width:		models.width
-			textType:	JASP.TextTypeLavaan
+			TextArea
+			{
+				name:		"syntax"
+				width:		models.width
+				textType:	JASP.TextTypeLavaan
+			}
+
+			Group
+			{
+				CheckBox
+				{
+					text:		qsTr("Replace constraints")
+					name:		"replaceConstraints"
+					checked:	false
+				}
+
+				CheckBox
+				{
+					text:		qsTr("Fix latent variance to 1")
+					name:		"fixLatentVarianceTo1"
+					checked:	false
+				}
+			}
+		}
+	}
+	
+
+	CheckBox
+	{
+		text:		qsTr("Model summary")
+		name:		"modelSummary"
+		checked:	false
+
+		DropDown
+		{
+			name:		"modelSummaryConfidenceIntervalType"
+			label:		qsTr("Confidence interval type")
+			values:
+			[
+				{ label: qsTr("Standard errors")	, value: "standardErrors"	},
+				{ label: qsTr("Likelihood based")   , value: "likelihoodBased"	}
+			]
 		}
 	}
 
+	CheckBox
+	{
+		text:		qsTr("Path diagram")
+		name:		"pathDiagram"
+		checked:	false
+
+		DropDown
+		{
+			name:	"pathDiagramLayout"
+			label:	qsTr("Layout")
+			values:
+			[
+				{ label: qsTr("Tree"),		value: "tree" },
+				{ label: qsTr("Circle"),	value: "circle" },
+				{ label: qsTr("Spring"),	value: "spring" },
+				{ label: qsTr("Tree2"),		value: "tree2" },
+				{ label: qsTr("Circle2"),	value: "circle2" }
+			]
+		}
+
+		CheckBox
+		{
+			name:		"pathDiagramShowParameters"
+			label:		qsTr("Show parameters")
+			checked:	false
+		}
+
+		Group
+		{
+			DoubleField
+			{
+				name: "pathDiagramManifestNodeWidth"
+				label: qsTr("Manifest node width")
+				value: 6
+			}
+			
+			DoubleField 
+			{
+				name: "pathDiagramLatentNodeWidth"
+				label: qsTr("Latent node width")
+				value: 8
+			}
+			
+			DoubleField
+			{
+				name: "pathDiagramUnitVectorNodeWidth"
+				label: qsTr("Unit vector node width")
+				value: 8
+			}
+			
+			DoubleField
+			{
+				name: "pathDiagramLabelSize"
+				label: qsTr("Label size")
+				value: 1.3
+			}
+			
+			DoubleField
+			{
+				name: "pathDiagramEdgeLabelSize"
+				label: qsTr("Edge label size")
+				value: 0.9
+			}
+
+			IntegerField
+			{
+				name: "pathDiagramNumberOfDigits"
+				label: qsTr("Number of digits")
+				value: 4
+			}
+
+		}
+
+	}
 
 }
