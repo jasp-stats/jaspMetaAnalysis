@@ -85,6 +85,7 @@ Description
 	{
 		title:			qsTr("Meta-Analytic SEM")
 		func:			"MetaAnalyticSEM"
+		preloadData:	false
 		requiresData:	true
 	}
 
