@@ -36,6 +36,7 @@ Form
 			TextArea
 			{
 				name:		"syntax"
+				id:			syntax
 				width:		models.width
 				textType:	JASP.TextTypeLavaan
 			}
@@ -55,6 +56,21 @@ Form
 					name:		"fixLatentVarianceTo1"
 					checked:	false
 				}
+			}
+
+			VariablesList
+			{
+				id				: observedVariableList
+				name			: "observedVariableList"
+				source			: [{values: syntax}]
+				listViewType	: JASP.AssignedVariables
+				//preferredHeight	: 120 * preferencesModel.uiScale
+				//preferredWidth	: randomEffects.availableWidth
+				draggable		: false
+				optionKey		: "columns"
+				interactionHighOrderCheckBox: "observedVariable"
+
+				rowComponent: CheckBox { name: "observedVariable"; checked: true }
 			}
 		}
 	}
