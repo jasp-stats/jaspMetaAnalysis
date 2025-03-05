@@ -53,6 +53,11 @@ MetaAnalyticSEM <- function(jaspResults, dataset, options, state = NULL) {
 
   dataset <- .readDataSetToEnd(all.columns = TRUE)
 
+  # check that all columns are numeric
+  for(i in seq_len(ncol(dataset))) {
+    dataset[,i] <- as.numeric(dataset[,i])
+  }
+
   return(dataset)
 }
 .masemGetModelOutputContainer <- function(jaspResults, name, position) {
@@ -90,11 +95,9 @@ MetaAnalyticSEM <- function(jaspResults, dataset, options, state = NULL) {
 
     model <- options[["models"]][[i]]
 
-    # extract the model fit (is null on initialization / not fitted)
-    tempFit <- fits[[model[["name"]]]]
-
     # check if the model is already fitted
-    if (!is.null(tempFit)) {
+    if (model[["value"]] %in% names(fits)) {
+      tempFit <- fits[[model[["value"]]]]
 
       # check if the model is still valid (by comparing stored options to the current options)
       if (isTRUE(all.equal(attr(tempFit, "model"), model)) &&
@@ -108,12 +111,12 @@ MetaAnalyticSEM <- function(jaspResults, dataset, options, state = NULL) {
 
     } else {
 
-      jaspBase::startProgressbar(1, label = gettextf("Estimating: %1$s", model[["name"]]))
+      jaspBase::startProgressbar(1, label = gettextf("Estimating: %1$s", model[["value"]]))
 
       # prepare RAM
       tempRam <- try(metaSEM::lavaan2RAM(
         model         = model[["syntax"]][["model"]],
-        obs.variables = model[["syntax"]][["columns"]],
+        obs.variables = .masemGetObservedVariables(model),
         std.lv        = model[["replaceConstraints"]]
       ))
 
@@ -143,7 +146,7 @@ MetaAnalyticSEM <- function(jaspResults, dataset, options, state = NULL) {
     }
 
     # save output
-    fits[[model[["name"]]]] <- tempFit
+    fits[[model[["value"]]]] <- tempFit
   }
 
   modelContainer$object <- fits
@@ -180,19 +183,21 @@ MetaAnalyticSEM <- function(jaspResults, dataset, options, state = NULL) {
   for (model in options[["models"]]) {
 
     # extract model fit
-    tempFit <- fits[[model[["name"]]]]
+    tempFit <- fits[[model[["value"]]]]
 
     if (jaspBase::isTryError(tempFit) || is.null(tempFit)) {
-      out[[model[["name"]]]] <- data.frame(
-        name = model[["name"]],
+      out[[model[["value"]]]] <- data.frame(
+        name = model[["value"]],
         logLik = NA,
         df     = NA,
         aic    = NA,
         bic    = NA
       )
+      if (jaspBase::isTryError(tempFit))
+        modelFitTable$addFootnote(gettextf("%1$s fit failed with the following message %2$s.", model[["value"]], tempFit))
     } else {
-      out[[model[["name"]]]] <- data.frame(
-        name   = model[["name"]],
+      out[[model[["value"]]]] <- data.frame(
+        name   = model[["value"]],
         logLik = as.numeric(logLik(tempFit[["mx.fit"]])),
         df     = attr(logLik(tempFit[["mx.fit"]]), "df"),
         aic    = AIC(tempFit[["mx.fit"]]),
@@ -217,7 +222,7 @@ MetaAnalyticSEM <- function(jaspResults, dataset, options, state = NULL) {
     model <- options[["models"]][[i]]
 
     # get output container
-    tempOutputContainer <- .masemGetModelOutputContainer(jaspResults, model[["name"]], i)
+    tempOutputContainer <- .masemGetModelOutputContainer(jaspResults, model[["value"]], i)
 
     # check if the summary table already exists
     if (!is.null(tempOutputContainer[["summaryTable"]]))
@@ -245,7 +250,7 @@ MetaAnalyticSEM <- function(jaspResults, dataset, options, state = NULL) {
       next
 
     # extract model fit
-    tempFit <- fits[[model[["name"]]]]
+    tempFit <- fits[[model[["value"]]]]
 
     if (is.null(tempFit))
       next
@@ -281,7 +286,7 @@ MetaAnalyticSEM <- function(jaspResults, dataset, options, state = NULL) {
     model <- options[["models"]][[i]]
 
     # get output container
-    tempOutputContainer <- .masemGetModelOutputContainer(jaspResults, model[["name"]], i)
+    tempOutputContainer <- .masemGetModelOutputContainer(jaspResults, model[["value"]], i)
 
     # check if the plot already exists
     if (!is.null(tempOutputContainer[["pathDiagram"]]))
@@ -322,7 +327,7 @@ MetaAnalyticSEM <- function(jaspResults, dataset, options, state = NULL) {
     } else {
 
       # extract model
-      tempFit <- fits[[model[["name"]]]]
+      tempFit <- fits[[model[["value"]]]]
 
       if (is.null(tempFit))
         return()
@@ -381,7 +386,7 @@ MetaAnalyticSEM <- function(jaspResults, dataset, options, state = NULL) {
 
 
 # helper functions
-.metasem2SemPlot       <- function(x) {
+.metasem2SemPlot           <- function(x) {
   # based on metaSEM::plot.mxsem
   # Creates the semPlot object from the mxsem object
 
@@ -421,7 +426,7 @@ MetaAnalyticSEM <- function(jaspResults, dataset, options, state = NULL) {
 
   return(sem.plot)
 }
-.metasemDecodeSemPlot  <- function(x, dataVar) {
+.metasemDecodeSemPlot      <- function(x, dataVar) {
   # based on jaspSem::.lavToPlotObj
   # Create semplot model and decode the names of the manifest variables
 
@@ -452,16 +457,16 @@ MetaAnalyticSEM <- function(jaspResults, dataset, options, state = NULL) {
 
   return(x)
 }
-.masemGetIntervalsType <- function(options) {
+.masemGetIntervalsType     <- function(options) {
   return(switch(
     options[["modelSummaryConfidenceIntervalType"]],
     "standardErrors"  = "z",
     "likelihoodBased" = "LB"
   ))
 }
-.masemFixSideEffects   <- function() {
-  sideEffects <- c("ambiguousMethodSelection", "mxByrow", "mxCondenseMatrixSlots", "mxDefaultType", "mxOptions", "swift.initialexpr")
-  args <- sapply(sideEffects, function(x) return(NULL))
-  do.call(options, args)
-  return()
+.masemGetObservedVariables <- function(model) {
+  variable <- sapply(model[["observedVariableList"]], function(x) x[["value"]])
+  observed <- sapply(model[["observedVariableList"]], function(x) x[["observedVariable"]])
+
+  return(variable[observed])
 }

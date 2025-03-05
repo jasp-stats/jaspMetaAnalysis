@@ -25,54 +25,60 @@ Form
 
 	TabView
 	{
-		id:				models
 		name:			"models"
 		maximumItems:	9
 		newItemName:	qsTr("Model 1")
-		optionKey:		"name"
-
-		content: Group
+		content: Column
 		{
+			spacing: 5
 			TextArea
 			{
 				name:		"syntax"
 				id:			syntax
-				width:		models.width
 				textType:	JASP.TextTypeLavaan
 			}
 
 			Group
 			{
-				CheckBox
+				columns: 2
+
+				ComponentsList
 				{
-					text:		qsTr("Replace constraints")
-					name:		"replaceConstraints"
-					checked:	false
+					Layout.columnSpan:	1
+					preferredWidth:		syntax.width / 2
+					preferredHeight:	150
+					title: 				qsTr("Observed Variables")
+					name:				"observedVariableList"
+					source: 			"syntax"
+					rowComponent: 		CheckBox
+					{
+						label:		rowValue
+						name:		"observedVariable"
+						checked:	true
+					}
 				}
 
-				CheckBox
+				Group
 				{
-					text:		qsTr("Fix latent variance to 1")
-					name:		"fixLatentVarianceTo1"
-					checked:	false
+					title: qsTr("Model Settings")
+
+					CheckBox
+					{
+						text:		qsTr("Replace constraints")
+						name:		"replaceConstraints"
+						checked:	false
+					}
+
+					CheckBox
+					{
+						text:		qsTr("Fix latent variance to 1")
+						name:		"fixLatentVarianceTo1"
+						checked:	false
+					}
 				}
-			}
-
-			VariablesList
-			{
-				id				: observedVariableList
-				name			: "observedVariableList"
-				source			: [{values: syntax}]
-				listViewType	: JASP.AssignedVariables
-				//preferredHeight	: 120 * preferencesModel.uiScale
-				//preferredWidth	: randomEffects.availableWidth
-				draggable		: false
-				optionKey		: "columns"
-				interactionHighOrderCheckBox: "observedVariable"
-
-				rowComponent: CheckBox { name: "observedVariable"; checked: true }
 			}
 		}
+
 	}
 	
 
