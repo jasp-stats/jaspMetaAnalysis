@@ -219,58 +219,22 @@ MetaAnalyticSEM <- function(jaspResults, dataset, options, state = NULL) {
   # iterate across models and slot the model summary into the corresponding output container
   for (i in seq_along(options[["models"]])) {
 
-    model <- options[["models"]][[i]]
+    model   <- options[["models"]][[i]]
+    tempFit <- fits[[model[["value"]]]]
 
     # get output container
     tempOutputContainer <- .masemGetModelOutputContainer(jaspResults, model[["value"]], i)
 
-    # check if the summary table already exists
-    if (!is.null(tempOutputContainer[["summaryTable"]]))
-      next
-
-    # create summary table
-    tempSummaryTable <- createJaspTable(gettext("Summary"))
-    tempSummaryTable$position <- 1
-    tempSummaryTable$dependOn(c(.masemDependencies, "modelSummary"))
-    tempOutputContainer[["summaryTable"]] <- tempSummaryTable
-
-    # add columns
-    tempSummaryTable$addColumnInfo(name = "parameter", type = "string",  title = "")
-    tempSummaryTable$addColumnInfo(name = "estimate",  type = "number",  title = gettext("Estimate"))
-    if (options[["modelSummaryConfidenceIntervalType"]] == "standardErrors") {
-      tempSummaryTable$addColumnInfo(name = "se",        type = "number",  title = gettext("Standard Error"))
-      tempSummaryTable$addColumnInfo(name = "z",         type = "number",  title = gettext("z value"))
-      tempSummaryTable$addColumnInfo(name = "p",         type = "pvalue",  title = gettext("Pr(>|z|)"))
-    }
-    tempSummaryTable$addColumnInfo(name = "lCi",       type = "number",  title = gettext("Lower"), overtitle = gettextf("95%% CI"))
-    tempSummaryTable$addColumnInfo(name = "uCi",       type = "number",  title = gettext("Upper"), overtitle = gettextf("95%% CI"))
-
-    # skip if not ready
-    if (!.masemReady(options))
-      next
-
-    # extract model fit
-    tempFit <- fits[[model[["value"]]]]
-
-    if (is.null(tempFit))
-      next
-
-    # check if the model fit failed
-    if (jaspBase::isTryError(tempFit)) {
-      tempSummaryTable$setError(gettextf("Model fit failed with the following message %1$s.", tempFit))
-      next
+    # create the summary table if it does not exists
+    if (is.null(tempOutputContainer[["summaryTable"]])) {
+      .masemCreateSummaryTable(tempOutputContainer, tempFit, options)
     }
 
-    # extract the parameter estimates
-    tempOutput <- summary(tempFit)[["coefficients"]]
-    colnames(tempOutput) <- c("estimate", "se", "lCi", "uCi", "z", "p")
-    if (options[["modelSummaryConfidenceIntervalType"]] == "likelihoodBased") {
-      tempOutput <- tempOutput[, c("estimate", "lCi", "uCi")]
+    # create the computed estimates table if it does not exists (and mxalgebras are present)
+    if (is.null(tempOutputContainer[["computedEstimatesTable"]]) && !jaspBase::isTryError(tempFit) && !is.null(tempFit[["mxalgebras"]])) {
+      .masemCreateComputedEstimatesTable(tempOutputContainer, fits[[model[["value"]]]], options)
     }
-    tempOutput$parameter <- rownames(tempOutput)
 
-    # add output to container
-    tempSummaryTable$setData(tempOutput)
   }
 
   return()
@@ -383,8 +347,88 @@ MetaAnalyticSEM <- function(jaspResults, dataset, options, state = NULL) {
 
   return()
 }
+.masemCreateSummaryTable      <- function(tempOutputContainer, tempFit, options) {
 
+  # create summary table
+  tempSummaryTable <- createJaspTable(gettext("Coefficient Summary"))
+  tempSummaryTable$position <- 1
+  tempSummaryTable$dependOn(c(.masemDependencies, "modelSummary"))
+  tempOutputContainer[["summaryTable"]] <- tempSummaryTable
 
+  # add columns
+  tempSummaryTable$addColumnInfo(name = "parameter", type = "string",  title = "")
+  tempSummaryTable$addColumnInfo(name = "estimate",  type = "number",  title = gettext("Estimate"))
+  if (options[["modelSummaryConfidenceIntervalType"]] == "standardErrors") {
+    tempSummaryTable$addColumnInfo(name = "se",        type = "number",  title = gettext("Standard Error"))
+    tempSummaryTable$addColumnInfo(name = "z",         type = "number",  title = gettext("z"))
+    tempSummaryTable$addColumnInfo(name = "p",         type = "pvalue",  title = gettext("p"))
+  }
+  tempSummaryTable$addColumnInfo(name = "lCi",       type = "number",  title = gettext("Lower"), overtitle = gettextf("95%% CI"))
+  tempSummaryTable$addColumnInfo(name = "uCi",       type = "number",  title = gettext("Upper"), overtitle = gettextf("95%% CI"))
+
+  # skip if not ready
+  if (!.masemReady(options))
+    return()
+
+  if (is.null(tempFit))
+    return()
+
+  # check if the model fit failed
+  if (jaspBase::isTryError(tempFit)) {
+    tempSummaryTable$setError(gettextf("Model fit failed with the following message %1$s.", tempFit))
+    return()
+  }
+
+  # extract the parameter estimates
+  tempOutput <- summary(tempFit)[["coefficients"]]
+  colnames(tempOutput) <- c("estimate", "se", "lCi", "uCi", "z", "p")
+  if (options[["modelSummaryConfidenceIntervalType"]] == "likelihoodBased") {
+    tempOutput <- tempOutput[, c("estimate", "lCi", "uCi")]
+  }
+  tempOutput$parameter <- rownames(tempOutput)
+
+  # add output to container
+  tempSummaryTable$setData(tempOutput)
+
+  return()
+}
+.masemCreateComputedEstimatesTable  <- function(tempOutputContainer, tempFit, options) {
+
+  # create summary table
+  tempComputedTable <- createJaspTable(gettext("Computed Estimates Summary"))
+  tempComputedTable$position <- 2
+  tempComputedTable$dependOn(c(.masemDependencies, "modelSummary"))
+  tempOutputContainer[["computedEstimatesTable"]] <- tempComputedTable
+
+  # add columns
+  tempComputedTable$addColumnInfo(name = "parameter", type = "string",  title = "")
+  tempComputedTable$addColumnInfo(name = "estimate",  type = "number",  title = gettext("Estimate"))
+  tempComputedTable$addColumnInfo(name = "lCi",       type = "number",  title = gettext("Lower"), overtitle = gettextf("95%% CI"))
+  tempComputedTable$addColumnInfo(name = "uCi",       type = "number",  title = gettext("Upper"), overtitle = gettextf("95%% CI"))
+
+  # skip if not ready
+  if (!.masemReady(options))
+    return()
+
+  if (is.null(tempFit))
+    return()
+
+  # check if the model fit failed
+  if (jaspBase::isTryError(tempFit)) {
+    tempComputedTable$setError(gettextf("Model fit failed with the following message %1$s.", tempFit))
+    return()
+  }
+
+  # extract the parameter estimates
+  tempOutput <- data.frame(summary(tempFit)[["mxalgebras"]])
+  colnames(tempOutput) <- c("lCi", "estimate", "uCi")
+  tempOutput$parameter <- rownames(tempOutput)
+
+  # add output to container
+  tempComputedTable$setData(tempOutput)
+
+  return()
+}
 # helper functions
 .metasem2SemPlot           <- function(x) {
   # based on metaSEM::plot.mxsem
