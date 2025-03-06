@@ -55,7 +55,7 @@ MetaAnalyticSEM <- function(jaspResults, dataset, options, state = NULL) {
 
   # check that all columns are numeric
   for(i in seq_len(ncol(dataset))) {
-    dataset[,i] <- as.numeric(dataset[,i])
+    dataset[,i] <- as.numeric(as.character(dataset[,i]))
   }
 
   return(dataset)
