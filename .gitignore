@@ -50,3 +50,4 @@ Thumbs.db
 _processedLockFile.lock
 renv/activate.R
 .Rprofile
+/.vs
