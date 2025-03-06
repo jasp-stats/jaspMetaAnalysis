@@ -2699,15 +2699,16 @@
 }
 .maMakeResidualFunnelPlot          <- function(fit, options, dataset) {
 
-  dfPlot <- data.frame(
-    x  = resid(fit),
-    y  = sqrt(fit[["vi"]])
+  residuals <- rstandard(fit)
+  dfPlot    <- data.frame(
+    x  = residuals[["resid"]],
+    y  = residuals[["se"]]
   )
 
-  yTicks <- jaspGraphs::getPrettyAxisBreaks(range(dfPlot$y))
+  yTicks <- jaspGraphs::getPrettyAxisBreaks(c(0, max(dfPlot$y)))
 
   dfFunnel <- data.frame(
-    x = c(-max(yTicks), 0, max(yTicks)) / 1.96,
+    x = c(-max(yTicks), 0, max(yTicks)) * 1.96,
     y = c(max(yTicks),  0, max(yTicks))
   )
   dfFunnelEdge1 <- dfFunnel[1:2,]
@@ -2764,7 +2765,7 @@
       dfPlot,
       label = dataset[[options[["studyLabels"]]]]
     )
-    dfLabels <- dfLabels[abs(dfLabels$y/1.96) < abs(dfLabels$x),]
+    dfLabels <- dfLabels[abs(dfLabels$y * 1.96) < abs(dfLabels$x),]
     dfLabels$position <- ifelse(dfLabels$x < 0, "right", "left")
     dfLabels$nudge_x  <- ifelse(dfLabels$x < 0, -0.1, 0.1)
 
