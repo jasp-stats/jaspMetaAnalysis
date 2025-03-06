@@ -36,6 +36,7 @@ Form
 				name:		"syntax"
 				id:			syntax
 				textType:	JASP.TextTypeLavaan
+				info:		qsTr("Specify model using a lavaan style syntax.")
 			}
 
 			Group
@@ -50,6 +51,7 @@ Form
 					title: 				qsTr("Observed Variables")
 					name:				"observedVariableList"
 					source: 			"syntax"
+					info:				qsTr("Specify observed variables.")
 					rowComponent: 		CheckBox
 					{
 						label:		rowValue
@@ -67,6 +69,7 @@ Form
 						text:		qsTr("Replace constraints")
 						name:		"replaceConstraints"
 						checked:	false
+						info:		qsTr("Replace constraints in the model.")
 					}
 
 					CheckBox
@@ -74,6 +77,7 @@ Form
 						text:		qsTr("Fix latent variance to 1")
 						name:		"fixLatentVarianceTo1"
 						checked:	false
+						info:		qsTr("Fix the variance of latent variables to 1.")
 					}
 				}
 			}
@@ -87,6 +91,7 @@ Form
 		text:		qsTr("Model summary")
 		name:		"modelSummary"
 		checked:	false
+		info:		qsTr("Show a summary of the model coefficients and computed estimates.")
 
 		DropDown
 		{
@@ -97,6 +102,7 @@ Form
 				{ label: qsTr("Standard errors")	, value: "standardErrors"	},
 				{ label: qsTr("Likelihood based")   , value: "likelihoodBased"	}
 			]
+			info:		qsTr("Method for computing confidence interval.")
 		}
 	}
 
@@ -105,6 +111,7 @@ Form
 		text:		qsTr("Path diagram")
 		name:		"pathDiagram"
 		checked:	false
+		info:		qsTr("Show a path diagram of the model.")
 
 		DropDown
 		{
@@ -118,6 +125,7 @@ Form
 				{ label: qsTr("Tree2"),		value: "tree2" },
 				{ label: qsTr("Circle2"),	value: "circle2" }
 			]
+			info:	qsTr("Layout of the path diagram.")
 		}
 
 		CheckBox
@@ -125,6 +133,7 @@ Form
 			name:		"pathDiagramShowParameters"
 			label:		qsTr("Show parameters")
 			checked:	false
+			info:		qsTr("Show parameter names instead of the estimates in the path diagram.")
 		}
 
 		Group
@@ -134,6 +143,7 @@ Form
 				name: "pathDiagramManifestNodeWidth"
 				label: qsTr("Manifest node width")
 				value: 6
+				info: qsTr("Width of manifest nodes.")
 			}
 			
 			DoubleField 
@@ -141,6 +151,7 @@ Form
 				name: "pathDiagramLatentNodeWidth"
 				label: qsTr("Latent node width")
 				value: 8
+				info: qsTr("Width of latent nodes.")
 			}
 			
 			DoubleField
@@ -148,6 +159,7 @@ Form
 				name: "pathDiagramUnitVectorNodeWidth"
 				label: qsTr("Unit vector node width")
 				value: 8
+				info: qsTr("Width of unit vector nodes.")
 			}
 			
 			DoubleField
@@ -155,6 +167,7 @@ Form
 				name: "pathDiagramLabelSize"
 				label: qsTr("Label size")
 				value: 1.3
+				info: qsTr("Size of the labels.")
 			}
 			
 			DoubleField
@@ -162,6 +175,7 @@ Form
 				name: "pathDiagramEdgeLabelSize"
 				label: qsTr("Edge label size")
 				value: 0.9
+				info: qsTr("Size of the edge labels.")
 			}
 
 			IntegerField
@@ -169,6 +183,7 @@ Form
 				name: "pathDiagramNumberOfDigits"
 				label: qsTr("Number of digits")
 				value: 4
+				info: qsTr("Number of digits for rounding estimates.")
 			}
 
 		}
