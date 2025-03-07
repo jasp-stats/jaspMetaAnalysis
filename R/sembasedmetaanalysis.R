@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-MetaAnalyticSEM <- function(jaspResults, dataset, options, state = NULL) {
+SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
   # set OpenMx options
   # the JASP options() cleanup does not properly re-sets OpenMx settings
