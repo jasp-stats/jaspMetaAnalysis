@@ -147,6 +147,7 @@ Form
 				label:	qsTr("Estimated")
 				checked: true
 				id:		estimated
+				info: qsTr("Estimate the mean effect size and heterogeneity under the alternative hypothesis. The paramters are estimated with the 'Method' specified under 'General Settings'.")
 			}
 
 			RadioButton
@@ -160,29 +161,6 @@ Form
 		Group
 		{
 			visible:	estimated.checked
-
-			DropDown
-			{
-				name:			"method"
-				id:				method
-				label:			qsTr("Method")
-				startValue:		"restrictedML"
-				info: qsTr("Select the heterogeneity estimation method for the funnel plot under the alternative hypothesis.")
-				values:			[
-					{ label: qsTr("Equal Effects")			, value: "equalEffects"		},
-					{ label: qsTr("Fixed Effects")			, value: "fixedEffects"		},
-					{ label: qsTr("Maximum Likelihood")		, value: "maximumLikelihood"},
-					{ label: qsTr("Restricted ML")			, value: "restrictedML"		},
-					{ label: qsTr("DerSimonian-Laird")		, value: "derSimonianLaird"	},
-					{ label: qsTr("Hedges")					, value: "hedges"			},
-					{ label: qsTr("Hunter-Schmidt")			, value: "hunterSchmidt"	},
-					{ label: qsTr("Hunter-Schmidt (SSC)")	, value: "hunterSchmidtSsc"	},
-					{ label: qsTr("Sidik-Jonkman")			, value: "sidikJonkman"		},
-					{ label: qsTr("Empirical Bayes")		, value: "empiricalBayes"	},
-					{ label: qsTr("Paule-Mandel")			, value: "pauleMandel"		},
-					{ label: qsTr("Paule-Mandel (MU)")		, value: "pauleMandelMu"	}
-				]
-			}
 
 			CheckBox
 			{
@@ -348,11 +326,39 @@ Form
 			defaultValue:	0.10
 			info: qsTr("Adjust the offset of labels in the funnel plot.")
 		}
+
+		ColorPalette {}
 	}
 	
 
 	Group
 	{
+		title:	qsTr("General Settings")
+
+		DropDown
+		{
+			name:			"method"
+			id:				method
+			enabled:		(funnelUnderH1.checked && estimated.checked) || (funnelPlotAsymmetryTests.checked && funnelPlotAsymmetryTestsMetaRegression.checked) || trimAndFill.checked || (failSafeNGeneral.checked && failSafeNGeneral.checked)
+			label:			qsTr("Method")
+			startValue:		"restrictedML"
+			info: qsTr("Select the heterogeneity estimation method for the funnel plot under the alternative hypothesis, meta-regression funnel plot asymmetry tests, trim and fill, and the fail-safe n general method.")
+			values:			[
+				{ label: qsTr("Equal Effects")			, value: "equalEffects"		},
+				{ label: qsTr("Fixed Effects")			, value: "fixedEffects"		},
+				{ label: qsTr("Maximum Likelihood")		, value: "maximumLikelihood"},
+				{ label: qsTr("Restricted ML")			, value: "restrictedML"		},
+				{ label: qsTr("DerSimonian-Laird")		, value: "derSimonianLaird"	},
+				{ label: qsTr("Hedges")					, value: "hedges"			},
+				{ label: qsTr("Hunter-Schmidt")			, value: "hunterSchmidt"	},
+				{ label: qsTr("Hunter-Schmidt (SSC)")	, value: "hunterSchmidtSsc"	},
+				{ label: qsTr("Sidik-Jonkman")			, value: "sidikJonkman"		},
+				{ label: qsTr("Empirical Bayes")		, value: "empiricalBayes"	},
+				{ label: qsTr("Paule-Mandel")			, value: "pauleMandel"		},
+				{ label: qsTr("Paule-Mandel (MU)")		, value: "pauleMandelMu"	}
+			]
+		}
+
 		TextField
 		{
 			label: 				qsTr("Funnel prediction interval")
@@ -373,16 +379,18 @@ Form
 	CheckBox
 	{
 		name:		"funnelPlotAsymmetryTests"
-		label:		qsTr("Funnel plot asymmetry tests")
-		info: qsTr("Perform tests to detect asymmetry in the funnel plot indicating potential publication bias. The tests are performed with the 'Method' specified in the 'Funnel under H₁' option.")
+		id:			funnelPlotAsymmetryTests
+		label:		qsTr("Asymmetry tests")
+		info: qsTr("Perform tests to detect asymmetry in the funnel plot indicating potential publication bias.")
 
 
 		CheckBox
 		{
 			name:		"funnelPlotAsymmetryTestsMetaRegression"
+			id:			funnelPlotAsymmetryTestsMetaRegression	
 			label:		qsTr("Meta-regression")
 			checked:	true
-			info: qsTr("Include meta-regression tests for funnel plot asymmetry.")
+			info: qsTr("Include meta-regression tests for funnel plot asymmetry. The test is performed with the 'Method' specified under 'General Settings'.")
 		}
 
 		CheckBox
@@ -400,4 +408,135 @@ Form
 			info: qsTr("Include rank correlation tests for funnel plot asymmetry.")
 		}
 	}
+
+	CheckBox
+	{
+		name:		"trimAndFill"
+		id:			trimAndFill
+		label:		qsTr("Trim and fill")
+		info: qsTr("Perform the trim and fill to adjust the funnel plot for publication bias. The test is performed with the 'Method' specified under 'General Settings'.")
+
+		DropDown
+		{
+			name:		"trimAndFillEstimator"
+			label:		qsTr("Estimator")
+			startValue:	"L0"
+			info: qsTr("Select the method for the trim-and-fill adjustment.")
+			values:		[
+				{ label: qsTr("L0")	, value: "L0"	},
+				{ label: qsTr("R0")	, value: "R0"	},
+				{ label: qsTr("Q0")	, value: "Q0"	}
+			]
+		}
+
+		CheckBox
+		{
+			name:		"trimAndFillIncludeHeterogeneity"
+			label:		qsTr("Include heterogeneity")
+			enabled:	trimAndFillMethod.value != "fixedEffects" && trimAndFillMethod.value != "equalEffects"
+			info: qsTr("Include heterogeneity (𝜏) in the trim and fill funnel plot. If unselected, the heterogeneity estimate is not used to adjust the prediction intervals.") 
+		}
+
+		CheckBox
+		{
+			name:		"trimAndFillEstimatesTable"
+			label:		qsTr("Estimates table")
+			info: qsTr("Summarize the effect size, heterogeneity, and number of imputed estimatesused for the trim and fill in a table.")
+		}
+
+		CheckBox
+		{
+			name:		"trimAndFillFillColors"
+			label:		qsTr("Fill colors")
+			checked:	true
+			info: qsTr("Fill the funnel plot's prediction intervals under trim and fill with different colors.")
+		}
+
+		DropDown
+		{
+			name:		"trimAndFillLineType"
+			label:		qsTr("Line type")
+			startValue:	"none"
+			info: qsTr("Set the type of line of the funnel plot's prediction intervals under trim and fill.")
+			values:		[
+				{ label: qsTr("None"),		value: "none"	},
+				{ label: qsTr("Solid"),		value: "solid"	},
+				{ label: qsTr("Dashed"),	value: "dashed"	},
+				{ label: qsTr("Dotted"),	value: "dotted"	}
+			]
+		}
+	}
+
+	CheckBox
+	{
+		name:		"failSafeN"
+		label:		qsTr("Fail-safe N")
+		info: qsTr("Compute the minimum number of studies averaging null results that would have to be added to a given set of studies to change the conclusion of a meta-analysis tests to detect asymmetry in the funnel plot indicating potential publication bias.")
+
+
+		CheckBox
+		{
+			name:		"failSafeNRosenthal"
+			id:			failSafeNRosenthal	
+			label:		qsTr("Rosenthal")
+			checked:	true
+			info: qsTr("The Rosenthal method calculates the minimum number of studies averaging null results needed to reduce the combined significance level to a specified alpha level.")
+		}
+
+		CheckBox
+		{
+			name:		"failSafeNOrwin"
+			id:			failSafeNOrwin
+			label:		qsTr("Orwin")
+			info: qsTr("The Orwin method calculates the minimum number of studies averaging null results needed to reduce the average effect size to a target value. The default is set to 0.10 which is completely aribitrary.")
+
+		}
+
+		CheckBox
+		{
+			name:		"failSafeNRosenberg"
+			id:			failSafeNRosenberg
+			label:		qsTr("Rosenberg")
+			info: qsTr("The Rosenberg method calculates the minimum number of studies averaging null results needed to reduce the significance level of the average effect size to a specified alpha level.")
+		}
+
+		CheckBox
+		{
+			name:		"failSafeNGeneral"
+			id:			failSafeNGeneral
+			label:		qsTr("General")
+			info: qsTr("A general method to calculate the minimum number of studies averaging null results needed to reduce the significance level or the average effect size to a target effect size value. The default is set to 0.10 which is completely aribitrary.")
+
+			CheckBox
+			{
+				name:	"failSafeNGeneralExact"
+				label:	qsTr("Exact")
+				info:	qsTr("Use the exact method to calculate the fail-safe N.")
+			}
+		}
+
+		DoubleField
+		{
+			name:			"failSafeNAlpha"
+			label:			qsTr("Alpha")
+			enabled:		failSafeNRosenthal.checked || failSafeNRosenberg.checked || failSafeNGeneral.checked
+			defaultValue:	0.05
+			min:			0.00001
+			max:			1
+			info: qsTr("Set the significance level for the Rosenthal's, Rosenberg's, and general fail-safe N tests.")
+		}
+
+		DoubleField
+		{
+			name:			"failSafeNTarget"
+			label:			qsTr("Target effect size")
+			enabled:		failSafeNOrwin.checked || failSafeNGeneral.checked
+			defaultValue:	0.1
+			negativeValues:	true
+			info: qsTr("Set the target effect size for the Orwin's and general fail-safe N tests.")
+		}
+
+	}
+
+
 }
