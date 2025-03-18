@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-03-18 16:27+0000\n"
+"PO-Revision-Date: 2025-03-18 17:10+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/de/>\n"
@@ -4825,12 +4825,12 @@ msgstr "Linkfunktion"
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Link function used in the heterogeneity model: 'log' or 'identity'."
 msgstr ""
+"Linkfunktion zur Verwendung im Heterogenitätsmodell: 'Log' oder 'Identität'."
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Options for summarizing the meta-analytic results."
-msgstr ""
+msgstr "Optionen zur Zusammenfassung der metaanalytischen Ergebnisse."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Heterogeneity"
 msgstr "Heterogenität"
@@ -4840,8 +4840,9 @@ msgid ""
 "Summarize the meta-analytic between-study heterogeneity. Unvailable when "
 "performing multilevel/multivariate meta-analysis."
 msgstr ""
+"Zusammenfassung der metaanalytischen Heterogenität zwischen Studien. Nicht "
+"verfügbar bei mehrebenen/multivariater Metaanalyse."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "𝜏"
 msgstr "𝜏"
@@ -4849,14 +4850,15 @@ msgstr "𝜏"
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Include 𝜏, the square root of the estimated between-study variance."
 msgstr ""
+"τ einschließen, die Quadratwurzel der geschätzten zwischen-Studien-Varianz."
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "𝜏²"
-msgstr ""
+msgstr "𝜏²"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Include 𝜏², the estimated between-study variance."
-msgstr ""
+msgstr "𝜏² einschließen, die geschätzte zwischen-Studien-Varianz."
 
 #, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
