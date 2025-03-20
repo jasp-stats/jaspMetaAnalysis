@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-03-19 22:16+0000\n"
+"PO-Revision-Date: 2025-03-20 18:49+0000\n"
 "Last-Translator: Uğur ÇELİK <prof_ugur@hotmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/tr/>\n"
@@ -836,11 +836,11 @@ msgstr ""
 
 msgctxt "Description|"
 msgid "Classical"
-msgstr "Classical"
+msgstr "Klasik"
 
 msgctxt "Description|"
 msgid "Bayesian"
-msgstr "Bayesçi"
+msgstr "Bayes"
 
 msgctxt "Description|"
 msgid "Prediction Model Performance"
