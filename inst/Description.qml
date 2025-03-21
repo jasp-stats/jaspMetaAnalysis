@@ -91,6 +91,14 @@ Description
 
 	Analysis
 	{
+		title:			qsTr("Meta-Analytic SEM")
+		func:			"MetaAnalyticSem"
+		preloadData:	false
+		requiresData:	true
+	}
+
+	Analysis
+	{
 		title:			qsTr("SEM-Based Meta-Analysis")
 		func:			"SemBasedMetaAnalysis"
 		preloadData:	false
