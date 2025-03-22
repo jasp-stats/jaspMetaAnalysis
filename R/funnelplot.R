@@ -44,7 +44,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   }
 
   # add fail-safe n
-  if (options[["funnelUnderH1"]])
+  if (options[["failSafeN"]])
     .fpFailSafeNTable(jaspResults, dataset, options)
 
 
@@ -962,7 +962,8 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
       out <- do.call(rbind, lapply(splitLevels, function(splitLevel) {
 
         tempOut <- data.frame(
-          k = nrow(na.omit(dataset[dataset[[options[["split"]]]] == splitLevel,c(options[["effectSize"]], options[["effectSizeStandardError"]])]))
+          k     = nrow(na.omit(dataset[dataset[[options[["split"]]]] == splitLevel,c(options[["effectSize"]], options[["effectSizeStandardError"]])])),
+          split = splitLevel
         )
 
         if (options[["failSafeNRosenthal"]])
