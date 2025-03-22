@@ -491,7 +491,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   if (!isTrimAndFill && options[["funnelUnderH0"]]) {
 
     if (options[["funnelUnderH0FillColors"]]) {
-      for (i in rev(seq_along(dfsFunnel0))) {
+      for (i in rev(seq_along(dfsFunnel0)[-length(dfsFunnel0)])) {
         out <- out + ggplot2::geom_polygon(
           data     = dfsFunnel0[[i]],
           mapping  = ggplot2::aes(x = x, y = y),
@@ -515,7 +515,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   if (isTrimAndFill || options[["funnelUnderH1"]]) {
 
     if ((isTrimAndFill && options[["trimAndFillFillColors"]]) || (!isTrimAndFill && options[["funnelUnderH1FillColors"]])) {
-      for (i in rev(seq_along(dfsFunnel1))) {
+      for (i in rev(seq_along(dfsFunnel1)[-length(dfsFunnel1)])) {
         out <- out + ggplot2::geom_polygon(
           data     = dfsFunnel1[[i]],
           mapping  = ggplot2::aes(x = x, y = y),
@@ -988,6 +988,8 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
 .fpComputeFunnelDf              <- function(seSeq, mean, heterogeneity, funnelLevels) {
   dfs <- list()
+
+  # funnels
   for (i in seq_along(funnelLevels)) {
     tempZ <- qnorm(funnelLevels[i], lower.tail = FALSE)
     dfs[[i]] <- data.frame(
@@ -997,6 +999,13 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
       lvl = 1 - 2 * funnelLevels[i]
     )
   }
+
+  # add a center line
+  dfs[[length(dfs) + 1]] <- data.frame(
+    x   = c(mean, mean),
+    y   = range(seSeq)
+  )
+
   return(dfs)
 }
 .fpAsymmetryTestErrorMessage    <- function(level = NULL) {
