@@ -18,8 +18,12 @@
 FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
   if (.fpReady(options)) {
+    # check data set
     dataset <- .fpCheckDataset(jaspResults, dataset, options)
+
+    # pre-fit models if required
     .fpH1Fits(jaspResults, dataset, options)
+    .fpH1TrimAndFillFits(jaspResults, dataset, options)
   }
 
   # make the funnel plots
@@ -30,6 +34,15 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   # add the funnel plot asymmetry table
   if (options[["funnelPlotAsymmetryTests"]])
     .fpTestFunnelPlotAsymmetryTests(jaspResults, dataset, options)
+
+  # add trim and fill
+  if (options[["trimAndFill"]]) {
+    .fpTrimAndFillPlot(jaspResults, dataset, options)
+
+    if (options[["trimAndFillEstimatesTable"]])
+     .fpTrimAndFillEstimatesTable(jaspResults, dataset, options)
+  }
+
 
   return()
 }
@@ -76,6 +89,16 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   if (!is.null(jaspResults[["fitState"]]))
     return()
 
+  # fit the models only if
+  # - estimated funnel plot under H1 is requested
+  # - meta-regression asymmetry test is requested
+  # - trim and fill is requested
+
+  if (!((options[["funnelUnderH1"]] && options[["funnelUnderH1Parameters"]] == "estimated") ||
+         options[["funnelPlotAsymmetryTests"]] || options[["trimAndFill"]]))
+    return()
+
+  # store the fits into a state
   fitState <- createJaspState()
   fitState$dependOn(c(.fpDependencies, "method"))
   jaspResults[["fitState"]] <- fitState
@@ -105,6 +128,42 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
   return()
 }
+.fpH1TrimAndFillFits            <- function(jaspResults, dataset, options) {
+
+  if (!is.null(jaspResults[["trimAndFillState"]]))
+    return()
+
+  if (!options[["trimAndFill"]])
+    return()
+
+  # store the fits into a state
+  trimAndFillState <- createJaspState()
+  trimAndFillState$dependOn(c(.fpDependencies, "method", "trimAndFillEstimator"))
+  jaspResults[["trimAndFillState"]] <- trimAndFillState
+
+  if (options[["split"]] == "") {
+
+    trimAndFillState$object <- try(metafor::trimfill(
+      jaspResults[["fitState"]]$object,
+      estimator = options[["trimAndFillEstimator"]]
+    ))
+
+  } else {
+
+    splitLevels <- unique(dataset[[options[["split"]]]])
+    fits <- lapply(splitLevels, function(splitLevel) {
+      try(metafor::trimfill(
+        jaspResults[["fitState"]]$object[[splitLevel]],
+        estimator = options[["trimAndFillEstimator"]]
+      ))
+    })
+
+    names(fits) <- splitLevels
+    trimAndFillState$object <- fits
+  }
+
+  return()
+}
 .fpPlot                         <- function(jaspResults, dataset, options) {
 
   if (is.null(jaspResults[["funnelPlotContainer"]])) {
@@ -112,11 +171,11 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     funnelPlotContainer$dependOn(c(
       .fpDependencies, "studyLabel",
       "funnelUnderH0", "funnelUnderH0ParametersFixedMu", "funnelUnderH0ParametersFixedTau",
-      "funnelUnderH1", "funnelUnderH1Parameters", "funnelUnderH1ParametersFixedMu", "funnelUnderH1ParametersFixedTau", "funnelUnderH1IncludeHeterogeneity", "method",
+      "funnelUnderH1", "funnelUnderH1Parameters", "funnelUnderH1ParametersFixedMu", "funnelUnderH1ParametersFixedTau", "funnelUnderH1IncludeHeterogeneity",
       "funnelUnderH1PowerEnhancement", "funnelUnderH1PowerEnhancementBreaks",
-      "funnelPredictionInterval", "funnelUnderH0LineType", "funnelUnderH0FillColors", "funnelUnderH1LineType", "funnelUnderH1FillColors",
-      "invertColors",
-      "estimatesMappingLabel", "estimatesMappingColor", "estimatesMappingShape", "estimatesLegendPosition", "estimatesMappingLabelOffset"
+      "funnelUnderH0LineType", "funnelUnderH0FillColors", "funnelUnderH1LineType", "funnelUnderH1FillColors",
+      "invertColors", "funnelPredictionInterval", "method",
+      "estimatesMappingLabel", "estimatesMappingColor", "estimatesMappingShape", "estimatesLegendPosition", "estimatesMappingLabelOffset", "colorPalette"
     ))
     funnelPlotContainer$position <- 1
     jaspResults[["funnelPlotContainer"]] <- funnelPlotContainer
@@ -137,9 +196,8 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     funnelPlot <- createJaspPlot(width = 550, height = 480)
     funnelPlotContainer[["funnelPlot"]] <- funnelPlot
 
-    fit <- jaspResults[["fitState"]]$object
-    if (options[["funnelUnderH1"]] && options[["funnelUnderH1Parameters"]] == "estimated" && jaspBase::isTryError(fit))
-      funnelPlot$setError(.fpMetaforTranslateErrorMessage(fit))
+    if (options[["funnelUnderH1"]] && options[["funnelUnderH1Parameters"]] == "estimated" && jaspBase::isTryError(jaspResults[["fitState"]]$object))
+      funnelPlot$setError(.fpMetaforTranslateErrorMessage(jaspResults[["fitState"]]$object))
     else
       funnelPlot$plotObject <- .fpMakeFunnelPlot(jaspResults, dataset, options)
 
@@ -151,9 +209,8 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
       funnelPlot <- createJaspPlot(title = paste0(options[["split"]], " = ", splitLevel), width = 550, height = 480)
       funnelPlotContainer[[splitLevel]] <- funnelPlot
 
-      fit <- jaspResults[["fitState"]]$object[[splitLevel]]
-      if (options[["funnelUnderH1"]] && options[["funnelUnderH1Parameters"]] == "estimated" && jaspBase::isTryError(fit))
-        funnelPlot$setError(.fpMetaforTranslateErrorMessage(fit))
+      if (options[["funnelUnderH1"]] && options[["funnelUnderH1Parameters"]] == "estimated" && jaspBase::isTryError(jaspResults[["fitState"]]$object[[splitLevel]]))
+        funnelPlot$setError(.fpMetaforTranslateErrorMessage(jaspResults[["fitState"]]$object[[splitLevel]]))
       else
         funnelPlot$plotObject <- .fpMakeFunnelPlot(jaspResults, dataset, options, splitLevel = splitLevel)
 
@@ -163,10 +220,68 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
   return()
 }
-.fpMakeFunnelPlot               <- function(jaspResults, dataset, options, splitLevel = NULL) {
+.fpTrimAndFillPlot              <- function(jaspResults, dataset, options) {
 
-  # extract the funnel levels
-  if (options[["funnelUnderH0"]] || options[["funnelUnderH1"]]) {
+  trimAndFillContainer <- .fpGetTrimAndFillContainer(jaspResults)
+
+  # create a waiting plot
+  if (!.fpReady(options)) {
+    tempPlot <- createJaspPlot(width = 550, height = 480)
+    trimAndFillContainer[["tempPlot"]] <- tempPlot
+    return()
+  }
+
+  # dependencies for the trim and fill plot
+  .fpTrimAndFillPlotDependencies <- c(
+    "studyLabel",
+    "trimAndFillIncludeHeterogeneity", "trimAndFillFillColors", "trimAndFillLineType",
+    "funnelPredictionInterval",  "invertColors",
+    "estimatesMappingLabel", "estimatesMappingColor", "estimatesMappingShape", "estimatesLegendPosition", "estimatesMappingLabelOffset", "colorPalette"
+  )
+
+  # create funnel plots
+  if (options[["split"]] == "") {
+
+    if (!is.null(trimAndFillContainer[["funnelPlot"]]))
+      return()
+
+    funnelPlot <- createJaspPlot(width = 550, height = 480)
+    funnelPlot$dependOn(.fpTrimAndFillPlotDependencies)
+    trimAndFillContainer[["funnelPlot"]] <- funnelPlot
+
+    fit <- jaspResults[["trimAndFillState"]]$object
+    if (jaspBase::isTryError(fit))
+      funnelPlot$setError(.fpMetaforTranslateErrorMessage(fit))
+    else
+      funnelPlot$plotObject <- .fpMakeFunnelPlot(jaspResults, dataset, options, isTrimAndFill = TRUE)
+
+  } else {
+
+    splitLevels <- unique(dataset[[options[["split"]]]])
+    for (splitLevel in splitLevels) {
+
+      if (!is.null(trimAndFillContainer[[splitLevel]]))
+        next
+
+      funnelPlot <- createJaspPlot(title = paste0(options[["split"]], " = ", splitLevel), width = 550, height = 480)
+      funnelPlot$dependOn(.fpTrimAndFillPlotDependencies)
+      trimAndFillContainer[[splitLevel]] <- funnelPlot
+
+      fit <- jaspResults[["trimAndFillState"]]$object[[splitLevel]]
+      if (jaspBase::isTryError(fit))
+        funnelPlot$setError(.fpMetaforTranslateErrorMessage(fit))
+      else
+        funnelPlot$plotObject <- .fpMakeFunnelPlot(jaspResults, dataset, options, splitLevel = splitLevel, isTrimAndFill = TRUE)
+    }
+
+  }
+
+  return()
+}
+.fpMakeFunnelPlot               <- function(jaspResults, dataset, options, splitLevel = NULL, isTrimAndFill = FALSE) {
+
+  ### extract the funnel levels
+  if (options[["funnelUnderH0"]] || options[["funnelUnderH1"]] || isTrimAndFill) {
     funnelLevels <- .robmaCleanOptionsToPriors(options[["funnelPredictionInterval"]], message = gettext("Funnel plot prediction interval was specified in an incorrect format. Try '(0.90, 0.95, 0.99)'."))
     if (any(is.na(funnelLevels)) || any(funnelLevels <= 0 | funnelLevels >= 1))
       .quitAnalysis(gettext("Funnel plot prediction intervals must be between 0 and 1."))
@@ -185,7 +300,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
       funnelColors <- rev(funnelColors)
   }
 
-  # data-points
+  ### data-points
   dfPlot <- data.frame(
     x  = dataset[[options[["effectSize"]]]],
     y  = dataset[[options[["effectSizeStandardError"]]]]
@@ -197,8 +312,28 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   if (!is.null(splitLevel))
     dfPlot <- dfPlot[dataset[[options[["split"]]]] == splitLevel,]
 
-  # y-axis plotting range (based on the common data set to make them common across figures)
-  yTicks <- jaspGraphs::getPrettyAxisBreaks(range(c(0, dataset[[options[["effectSizeStandardError"]]]])))
+  # additional data points from trim and fill
+  if (isTrimAndFill) {
+    if (is.null(splitLevel)) {
+      tempFit <- jaspResults[["trimAndFillState"]]$object
+    } else {
+      tempFit <- jaspResults[["trimAndFillState"]]$object[[splitLevel]]
+    }
+
+    if (any(tempFit$fill)) {
+      dfPlotTrimAndFill <- data.frame(
+        x = tempFit$yi[tempFit$fill],
+        y = sqrt(tempFit$vi[tempFit$fill])
+      )
+    } else {
+      dfPlotTrimAndFill <- NULL
+    }
+  } else {
+    dfPlotTrimAndFill <- NULL
+  }
+
+  ### y-axis plotting range (based on the common data set to make them common across figures)
+  yTicks <- jaspGraphs::getPrettyAxisBreaks(range(c(0, dataset[[options[["effectSizeStandardError"]]]], dfPlotTrimAndFill[["y"]])))
   # a sequence of points must be used if tau is included in the confidence bands (PI is a nonlinear function of se)
   ySeqH0 <- if (options[["funnelUnderH0ParametersFixedTau"]] == 0) range(yTicks) else seq(from = min(yTicks), to = max(yTicks), length.out = 100)
   ySeqH1 <- if ((options[["funnelUnderH1Parameters"]] == "estimated" && !options[["funnelUnderH1IncludeHeterogeneity"]])
@@ -206,7 +341,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     range(yTicks) else seq(from = min(yTicks), to = max(yTicks), length.out = 100)
 
   ### specify zero-centered funnels
-  if (options[["funnelUnderH0"]]) {
+  if (options[["funnelUnderH0"]] && !isTrimAndFill) {
     adjustFunnel0Mean          <- options[["funnelUnderH0ParametersFixedMu"]]
     adjustFunnel0Heterogeneity <- options[["funnelUnderH0ParametersFixedTau"]]
     dfsFunnel0 <- .fpComputeFunnelDf(ySeqH0, adjustFunnel0Mean, adjustFunnel0Heterogeneity, funnelLevels)
@@ -214,40 +349,41 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
   ### specify meta-analysis centered funnels
   # allow user imputed vs meta-analytic estimated values
-  if (options[["funnelUnderH1"]]) {
+  if (options[["funnelUnderH1"]] || isTrimAndFill) {
 
-    if (options[["funnelUnderH1Parameters"]] == "fixed") {
-      adjustFunnel1Mean          <- options[["funnelUnderH1ParametersFixedMu"]]
-      adjustFunnel1Heterogeneity <- options[["funnelUnderH1ParametersFixedTau"]]
-    } else if (options[["funnelUnderH1Parameters"]] == "estimated"){
+    if (options[["funnelUnderH1Parameters"]] == "estimated" || isTrimAndFill){
 
       if (options[["split"]] == "") {
-        fit <- jaspResults[["fitState"]]$object
+        fit <- if (isTrimAndFill) jaspResults[["trimAndFillState"]]$object else jaspResults[["fitState"]]$object
       } else {
-        fit <- jaspResults[["fitState"]]$object[[splitLevel]]
+        fit <- if (isTrimAndFill) jaspResults[["trimAndFillState"]]$object[[splitLevel]] else jaspResults[["fitState"]]$object[[splitLevel]]
       }
 
       adjustFunnel1Mean          <- fit$b[1]
-      adjustFunnel1Heterogeneity <- if(options[["funnelUnderH1IncludeHeterogeneity"]]) sqrt(fit$tau2) else 0
+      adjustFunnel1Heterogeneity <- if ((isTrimAndFill && options[["trimAndFillIncludeHeterogeneity"]]) || (!isTrimAndFill && options[["funnelUnderH1IncludeHeterogeneity"]])) sqrt(fit$tau2) else 0
+    } else if (options[["funnelUnderH1Parameters"]] == "fixed") {
+      adjustFunnel1Mean          <- options[["funnelUnderH1ParametersFixedMu"]]
+      adjustFunnel1Heterogeneity <- options[["funnelUnderH1ParametersFixedTau"]]
     }
 
     dfsFunnel1 <- .fpComputeFunnelDf(ySeqH1, adjustFunnel1Mean, adjustFunnel1Heterogeneity, funnelLevels)
 
     # get maximum x value across all funnels in case of a split
-    if (options[["split"]] == "" || options[["funnelUnderH1Parameters"]] == "fixed") {
+    if (options[["split"]] == "" || (!isTrimAndFill && options[["funnelUnderH1Parameters"]] == "fixed")) {
       dfsFunnel1XRange <- range(sapply(dfsFunnel1, function(x) x$x))
     } else {
       dfsFunnel1XMax <- list()
-      for (i in seq_along(jaspResults[["fitState"]]$object)) {
+      tempFits <- if (isTrimAndFill) jaspResults[["trimAndFillState"]]$object else jaspResults[["fitState"]]$object
+      for (i in seq_along(tempFits)) {
         # extract each fit
-        tempFit <- jaspResults[["fitState"]]$object[[i]]
+        tempFit <- tempFits[[i]]
         if (jaspBase::isTryError(tempFit))
           next
         tempAdjustFunnel1Mean          <- tempFit$b[1]
-        tempAdjustFunnel1Heterogeneity <- if(options[["funnelUnderH1IncludeHeterogeneity"]]) sqrt(tempFit$tau2) else 0
+        tempAdjustFunnel1Heterogeneity <- if ((isTrimAndFill && options[["trimAndFillIncludeHeterogeneity"]]) || (!isTrimAndFill && options[["funnelUnderH1IncludeHeterogeneity"]])) sqrt(tempFit$tau2) else 0
 
         # compute the maximum funnel width
-        tempFitX <- .fpComputeFunnelDf(max(ySeqH1), tempAdjustFunnel1Mean, tempAdjustFunnel1Heterogeneity, max(funnelLevels))
+        tempFitX <- .fpComputeFunnelDf(max(ySeqH1), tempAdjustFunnel1Mean, tempAdjustFunnel1Heterogeneity, min(funnelLevels))
         dfsFunnel1XMax[[i]] <- range(tempFitX[[1]])
       }
       dfsFunnel1XRange <- range(unlist(dfsFunnel1XMax))
@@ -258,13 +394,13 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   ### get x-axis ticks
   xTicks <- jaspGraphs::getPrettyAxisBreaks(range(c(
     range(dataset[[options[["effectSize"]]]]),
-    if (options[["funnelUnderH0"]]) range(sapply(dfsFunnel0, function(x) x$x)),
-    if (options[["funnelUnderH1"]]) dfsFunnel1XRange
+    if (options[["funnelUnderH0"]] && !isTrimAndFill) range(sapply(dfsFunnel0, function(x) x$x)),
+    if (options[["funnelUnderH1"]] || isTrimAndFill)  dfsFunnel1XRange
   )))
 
 
   ### compute power enhancement
-  if (options[["funnelUnderH1"]] && options[["funnelUnderH1PowerEnhancement"]]) {
+  if (!isTrimAndFill && options[["funnelUnderH1"]] && options[["funnelUnderH1PowerEnhancement"]]) {
     powerEnhancementBreaks <- .robmaCleanOptionsToPriors(options[["funnelUnderH1PowerEnhancementBreaks"]], message = gettext("Power enhancement breaks were specified in an incorrect format. Try '(0.30, 0.50, 0.80)'."))
     if (any(is.na(powerEnhancementBreaks)) || any(powerEnhancementBreaks <= 0.05 | powerEnhancementBreaks >= 1))
       .quitAnalysis(gettext("Power enhancement breaks must be between 0.05 and 1."))
@@ -337,7 +473,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
       fill    = "black"
     )
 
-  if (options[["funnelUnderH1"]] && options[["funnelUnderH1PowerEnhancement"]]) {
+  if (!isTrimAndFill && options[["funnelUnderH1"]] && options[["funnelUnderH1PowerEnhancement"]]) {
     for (i in seq_along(dfsPowerEnhancement)) {
       out <- out + ggplot2::geom_polygon(
         data    = dfsPowerEnhancement[[i]],
@@ -348,7 +484,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   }
 
   # add H0 funnel
-  if (options[["funnelUnderH0"]]) {
+  if (!isTrimAndFill && options[["funnelUnderH0"]]) {
 
     if (options[["funnelUnderH0FillColors"]]) {
       for (i in rev(seq_along(dfsFunnel0))) {
@@ -372,9 +508,9 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   }
 
   # add H1 funnel
-  if (options[["funnelUnderH1"]]) {
+  if (isTrimAndFill || options[["funnelUnderH1"]]) {
 
-    if (options[["funnelUnderH1FillColors"]]) {
+    if ((isTrimAndFill && options[["trimAndFillFillColors"]]) || (!isTrimAndFill && options[["funnelUnderH1FillColors"]])) {
       for (i in rev(seq_along(dfsFunnel1))) {
         out <- out + ggplot2::geom_polygon(
           data     = dfsFunnel1[[i]],
@@ -384,12 +520,12 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
       }
     }
 
-    if (options[["funnelUnderH1LineType"]]!= "none") {
+    if ((isTrimAndFill && options[["trimAndFillLineType"]]!= "none") || (!isTrimAndFill && options[["funnelUnderH1LineType"]]!= "none")) {
       for (i in rev(seq_along(dfsFunnel1))) {
         out <- out + ggplot2::geom_line(
           data     = dfsFunnel1[[i]],
           mapping  = ggplot2::aes(x = x, y = y),
-          linetype = options[["funnelUnderH1LineType"]]
+          linetype = if (isTrimAndFill) options[["trimAndFillLineType"]] else options[["funnelUnderH1LineType"]]
         )
       }
     }
@@ -401,13 +537,23 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     y = as.name("y")
   )
   if (options[["estimatesMappingShape"]] != "") pointAes$shape <- as.name("shape")
-  if (options[["estimatesMappingColor"]] != "") pointAes$color <- as.name("color")
   if (options[["estimatesMappingColor"]] != "") pointAes$fill  <- as.name("color")
 
   out <- out + jaspGraphs::geom_point(
     data    = dfPlot,
     mapping = do.call(ggplot2::aes, pointAes)
   )
+
+  # add imputed estimates
+  if (isTrimAndFill && !is.null(dfPlotTrimAndFill)) {
+    out <- out + jaspGraphs::geom_point(
+      data    = dfPlotTrimAndFill,
+      mapping = ggplot2::aes(x = x, y = y),
+      shape   = 21,
+      color   = "black",
+      fill    = "white"
+    )
+  }
 
   if (options[["estimatesMappingShape"]] != "")
     out <- out + ggplot2::labs(shape = options[["estimatesMappingShape"]])
@@ -426,20 +572,23 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
       )
   }
 
-  out <- out + jaspGraphs::scale_x_continuous(breaks = xTicks, limits = range(xTicks), name = gettext("Effect Size"))
+  out <- out + jaspGraphs::scale_x_continuous(breaks = xTicks, limits = range(xTicks), name = gettext("Effect Size"), oob = scales::oob_keep)
 
   # add secondary axis whenever needed
-  if (options[["funnelUnderH1"]] && options[["funnelUnderH1PowerEnhancement"]]) {
+  if (!isTrimAndFill && options[["funnelUnderH1"]] && options[["funnelUnderH1PowerEnhancement"]]) {
     out <- out + ggplot2::scale_y_reverse(
-      breaks = rev(yTicks), limits = rev(range(yTicks)), name = gettext("Standard Error"),
+      breaks = rev(yTicks), limits = rev(range(yTicks)), name = gettext("Standard Error"), oob = scales::oob_keep,
       sec.axis = ggplot2::dup_axis(
         breaks = rev(powerEnhancementBreaksSe),
         labels = rev(paste0(round(c(.z_to_power(abs(adjustFunnel1Mean) / powerEnhancementBreaksSe[1]), powerEnhancementBreaks[-1]) * 100), "% ")), name = gettext("Power"))
     )
   } else {
-    out <- out + ggplot2::scale_y_reverse(breaks = rev(yTicks), limits = rev(range(yTicks)), name = gettext("Standard Error"))
+    out <- out + ggplot2::scale_y_reverse(breaks = rev(yTicks), limits = rev(range(yTicks)), name = gettext("Standard Error"), oob = scales::oob_keep)
   }
 
+  if (options[["estimatesMappingColor"]] != "")
+    out <- out +
+    jaspGraphs::scale_JASPfill_discrete(options[["colorPalette"]])
 
   out <- out +
     jaspGraphs::geom_rangeframe(sides = if (options[["funnelUnderH1"]] && options[["funnelUnderH1PowerEnhancement"]]) "blr" else "bl") +
@@ -461,48 +610,39 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   if (options[["split"]] != "")
     funnelParametersTable$addColumnInfo(name = "split", title = options[["split"]], type = "string")
   funnelParametersTable$addColumnInfo(name = "k",     title = gettext("Estimates"), type = "integer")
-  funnelParametersTable$addColumnInfo(name = "mu",    title = gettext("\U03BC"),    type = "number")
-  if (!.maGetMethodOptions(options) %in% c("EE", "FE"))
-    funnelParametersTable$addColumnInfo(name = "tau", title = gettext("\U1D70F"),   type = "number")
 
+  overtitleMu <- gettext("Estimate \U03BC")
+  funnelParametersTable$addColumnInfo(name = "muEst", title = gettext("Estimate"),        type = "number", overtitle = overtitleMu)
+  funnelParametersTable$addColumnInfo(name = "muLCI", title = gettextf("Lower 95%% CI"),  type = "number", overtitle = overtitleMu)
+  funnelParametersTable$addColumnInfo(name = "muUCI", title = gettextf("Upper 95%% CI"),  type = "number", overtitle = overtitleMu)
+  funnelParametersTable$addColumnInfo(name = "muP",   title = gettext("p"),               type = "pvalue", overtitle = overtitleMu)
+
+  if (!.maGetMethodOptions(options) %in% c("EE", "FE")) {
+    overtitleTau <- gettext("Estimate \U1D70F")
+    funnelParametersTable$addColumnInfo(name = "tauEst", title = gettext("Estimate"),         type = "number", overtitle = overtitleTau)
+    funnelParametersTable$addColumnInfo(name = "tauLCI", title = gettextf("Lower 95%% CI"),   type = "number", overtitle = overtitleTau)
+    funnelParametersTable$addColumnInfo(name = "tauUCI", title = gettextf("Upper 95%% CI"),   type = "number", overtitle = overtitleTau)
+    funnelParametersTable$addColumnInfo(name = "tauP",   title = gettext("p"),                type = "pvalue", overtitle = overtitleTau)
+  }
 
   if (!.fpReady(options))
     return()
 
   if (options[["split"]] == "") {
 
-    fit <- jaspResults[["fitState"]]$object
-    if (jaspBase::isTryError(fit)) {
-      fitSummary <- data.frame(k = NA, mu = NA)
+    fit        <- jaspResults[["fitState"]]$object
+    fitSummary <- .fpExtractFitEstimates(fit, options)
+    if (jaspBase::isTryError(fit))
       funnelParametersTable$addFootnote(.fpMetaforTranslateErrorMessage(fit), symbol = gettext("The funnel plot parameter estimation failed with the following error: "))
-    } else {
-      fitSummary <- data.frame(
-        k   = fit$k,
-        mu  = fit$b[1]
-      )
-      if (!.maGetMethodOptions(options) %in% c("EE", "FE"))
-        fitSummary$tau <- sqrt(fit$tau2)
-    }
 
   } else {
 
     fits       <- jaspResults[["fitState"]]$object
     fitSummary <- do.call(rbind, lapply(fits, function(fit) {
 
-      if (jaspBase::isTryError(fit)) {
+      tempFitSummary <- .fpExtractFitEstimates(fit, options)
+      if (jaspBase::isTryError(fit))
         funnelParametersTable$addFootnote(.fpMetaforTranslateErrorMessage(fit), symbol = gettext("The funnel plot parameter estimation failed with the following error: "))
-        if (.maGetMethodOptions(options) %in% c("EE", "FE"))
-          return(data.frame(k = NA, mu = NA))
-        else
-          return(data.frame(k = NA, mu = NA, tau = NA))
-      }
-
-      tempFitSummary <- data.frame(
-        k   = fit$k,
-        mu  = fit$b[1]
-      )
-      if (!.maGetMethodOptions(options) %in% c("EE", "FE"))
-        tempFitSummary$tau <- sqrt(fit$tau2)
 
       return(tempFitSummary)
     }))
@@ -511,6 +651,71 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   }
 
   funnelParametersTable$setData(fitSummary)
+
+  return()
+}
+.fpTrimAndFillEstimatesTable    <- function(jaspResults, dataset, options) {
+
+  trimAndFillContainer <- .fpGetTrimAndFillContainer(jaspResults)
+
+  if (!is.null(trimAndFillContainer[["trimAndFillTable"]]))
+    return()
+
+  # Trim and Fill Estimates Table
+  trimAndFillTable          <- createJaspTable(gettext("Trim and Fill Parameter Estimates"))
+  trimAndFillTable$dependOn(c(.fpDependencies, "trimAndFillEstimatesTable"))
+  trimAndFillContainer[["trimAndFillTable"]] <- trimAndFillTable
+
+  if (options[["split"]] != "")
+    trimAndFillTable$addColumnInfo(name = "split", title = options[["split"]], type = "string")
+  trimAndFillTable$addColumnInfo(name = "k",     title = gettext("Estimates"), type = "integer")
+
+  trimAndFillTable$addColumnInfo(name = "missingK", title = gettext("Missing Estimates"), type = "integer", overtitle = gettext("Trim and Fill"))
+  if (options[["trimAndFillEstimator"]] == "R0") {
+    trimAndFillTable$addColumnInfo(name = "missingP", title = gettext("p"), type = "pvalue",  overtitle = gettext("Trim and Fill"))
+  }
+
+  overtitleMu <- gettext("Adjusted Estimate \U03BC")
+  trimAndFillTable$addColumnInfo(name = "muEst", title = gettext("Estimate"),        type = "number", overtitle = overtitleMu)
+  trimAndFillTable$addColumnInfo(name = "muLCI", title = gettextf("Lower 95%% CI"),  type = "number", overtitle = overtitleMu)
+  trimAndFillTable$addColumnInfo(name = "muUCI", title = gettextf("Upper 95%% CI"),  type = "number", overtitle = overtitleMu)
+  trimAndFillTable$addColumnInfo(name = "muP",   title = gettext("p"),               type = "pvalue", overtitle = overtitleMu)
+
+  if (!.maGetMethodOptions(options) %in% c("EE", "FE")) {
+    overtitleTau <- gettext("Adjusted Estimate \U1D70F")
+    trimAndFillTable$addColumnInfo(name = "tauEst", title = gettext("Estimate"),         type = "number", overtitle = overtitleTau)
+    trimAndFillTable$addColumnInfo(name = "tauLCI", title = gettextf("Lower 95%% CI"),   type = "number", overtitle = overtitleTau)
+    trimAndFillTable$addColumnInfo(name = "tauUCI", title = gettextf("Upper 95%% CI"),   type = "number", overtitle = overtitleTau)
+    trimAndFillTable$addColumnInfo(name = "tauP",   title = gettext("p"),                type = "pvalue", overtitle = overtitleTau)
+  }
+
+
+  if (!.fpReady(options))
+    return()
+
+  if (options[["split"]] == "") {
+
+    fit        <- jaspResults[["trimAndFillState"]]$object
+    fitSummary <- .fpExtractTrimAndFillEstimates(fit, options)
+    if (jaspBase::isTryError(fit))
+      trimAndFillTable$addFootnote(.fpMetaforTranslateErrorMessage(fit), symbol = gettext("The funnel plot parameter estimation failed with the following error: "))
+
+  } else {
+
+    fits       <- jaspResults[["trimAndFillState"]]$object
+    fitSummary <- do.call(rbind, lapply(fits, function(fit) {
+
+      tempFitSummary <- .fpExtractTrimAndFillEstimates(fit, options)
+      if (jaspBase::isTryError(fit))
+        trimAndFillTable$addFootnote(.fpMetaforTranslateErrorMessage(fit), symbol = gettext("The funnel plot parameter estimation failed with the following error: "))
+
+      return(tempFitSummary)
+    }))
+    fitSummary <- data.frame(split = names(fits), fitSummary)
+
+  }
+
+  trimAndFillTable$setData(fitSummary)
 
   return()
 }
@@ -540,16 +745,16 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     metaRegressionTable$addColumnInfo(name = "k",     title = gettext("Estimates"), type = "integer")
     metaRegressionTable$addColumnInfo(name = "z", title = gettext("z"), type = "number", overtitle = gettext("Asymmetry Test"))
     metaRegressionTable$addColumnInfo(name = "p", title = gettext("p"), type = "pvalue", overtitle = gettext("Asymmetry Test"))
-    metaRegressionTable$addColumnInfo(name = "est", title = gettext("Estimate"),       type = "number", overtitle = gettext("Limit Estimate"))
-    metaRegressionTable$addColumnInfo(name = "lCI", title = gettextf("Lower 95%% CI"), type = "number", overtitle = gettext("Limit Estimate"))
-    metaRegressionTable$addColumnInfo(name = "uCI", title = gettextf("Upper 95%% CI"), type = "number", overtitle = gettext("Limit Estimate"))
+    metaRegressionTable$addColumnInfo(name = "est", title = gettext("Estimate"),       type = "number", overtitle = gettext("Limit Estimate \U03BC"))
+    metaRegressionTable$addColumnInfo(name = "lCI", title = gettextf("Lower 95%% CI"), type = "number", overtitle = gettext("Limit Estimate \U03BC"))
+    metaRegressionTable$addColumnInfo(name = "uCI", title = gettextf("Upper 95%% CI"), type = "number", overtitle = gettext("Limit Estimate \U03BC"))
 
     if (.fpReady(options)) {
       if (options[["split"]] == "") {
 
         fit        <- jaspResults[["fitState"]]$object
         fitTest    <- try(metafor::regtest(fit))
-        fitSummary <- .dpExtractAsymmetryTest(fitTest, testType = "metaRegression")
+        fitSummary <- .fpExtractAsymmetryTest(fitTest, testType = "metaRegression")
 
         if (jaspBase::isTryError(fit))
           metaRegressionTable$addFootnote(.fpMetaforTranslateErrorMessage(fit), symbol = .fpAsymmetryTestErrorMessage())
@@ -564,7 +769,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
         fitSummaries <- do.call(rbind, lapply(seq_along(fits), function(i) {
 
           fitTest    <- try(metafor::regtest(fits[[i]]))
-          fitSummary <- .dpExtractAsymmetryTest(fitTest, testType = "metaRegression")
+          fitSummary <- .fpExtractAsymmetryTest(fitTest, testType = "metaRegression")
           fitSummary$split <- names(fits)[i]
 
           if (jaspBase::isTryError(fits[[i]]))
@@ -595,16 +800,16 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
     weightedRegressionTable$addColumnInfo(name = "t",  title = gettext("t"),  type = "number",  overtitle = gettext("Asymmetry Test"))
     weightedRegressionTable$addColumnInfo(name = "df", title = gettext("df"), type = "integer", overtitle = gettext("Asymmetry Test"))
     weightedRegressionTable$addColumnInfo(name = "p",  title = gettext("p"),  type = "pvalue",  overtitle = gettext("Asymmetry Test"))
-    weightedRegressionTable$addColumnInfo(name = "est", title = gettext("Estimate"),       type = "number", overtitle = gettext("Limit Estimate"))
-    weightedRegressionTable$addColumnInfo(name = "lCI", title = gettextf("Lower 95%% CI"), type = "number", overtitle = gettext("Limit Estimate"))
-    weightedRegressionTable$addColumnInfo(name = "uCI", title = gettextf("Upper 95%% CI"), type = "number", overtitle = gettext("Limit Estimate"))
+    weightedRegressionTable$addColumnInfo(name = "est", title = gettext("Estimate"),       type = "number", overtitle = gettext("Limit Estimate \U03BC"))
+    weightedRegressionTable$addColumnInfo(name = "lCI", title = gettextf("Lower 95%% CI"), type = "number", overtitle = gettext("Limit Estimate \U03BC"))
+    weightedRegressionTable$addColumnInfo(name = "uCI", title = gettextf("Upper 95%% CI"), type = "number", overtitle = gettext("Limit Estimate \U03BC"))
 
     if (.fpReady(options)) {
       if (options[["split"]] == "") {
 
         fit        <- jaspResults[["fitState"]]$object
         fitTest    <- try(metafor::regtest(fit, model = "lm"))
-        fitSummary <- .dpExtractAsymmetryTest(fitTest, testType = "weightedRegression")
+        fitSummary <- .fpExtractAsymmetryTest(fitTest, testType = "weightedRegression")
 
         if (jaspBase::isTryError(fit))
           weightedRegressionTable$addFootnote(.fpMetaforTranslateErrorMessage(fit), symbol = .fpAsymmetryTestErrorMessage())
@@ -619,7 +824,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
         fitSummaries <- do.call(rbind, lapply(seq_along(fits), function(i) {
 
           fitTest    <- try(metafor::regtest(fits[[i]], model = "lm"))
-          fitSummary <- .dpExtractAsymmetryTest(fitTest, testType = "weightedRegression")
+          fitSummary <- .fpExtractAsymmetryTest(fitTest, testType = "weightedRegression")
           fitSummary$split <- names(fits)[i]
 
           if (jaspBase::isTryError(fits[[i]]))
@@ -656,7 +861,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
         fit        <- jaspResults[["fitState"]]$object
         fitTest    <- try(metafor::ranktest(fit))
-        fitSummary <- .dpExtractAsymmetryTest(fitTest, testType = "rankCorrelation")
+        fitSummary <- .fpExtractAsymmetryTest(fitTest, testType = "rankCorrelation")
 
         if (jaspBase::isTryError(fit))
           rankCorrelationTable$addFootnote(.fpMetaforTranslateErrorMessage(fit), symbol = .fpAsymmetryTestErrorMessage())
@@ -673,7 +878,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
         fitSummaries <- do.call(rbind, lapply(seq_along(fits), function(i) {
 
           fitTest    <- try(metafor::ranktest(fits[[i]]))
-          fitSummary <- .dpExtractAsymmetryTest(fitTest, testType = "rankCorrelation")
+          fitSummary <- .fpExtractAsymmetryTest(fitTest, testType = "rankCorrelation")
           fitSummary$split <- names(fits)[i]
 
           if (jaspBase::isTryError(fits[[i]])) {
@@ -719,11 +924,11 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 }
 .fpMetaforTranslateErrorMessage <- function(fit) {
   if (grepl("did not converge", fit))
-    return(gettext("The meta-analytic model did not converge. Try modifying the 'Method' option for the 'Funnel under H\U2081' settings."))
+    return(gettext("The meta-analytic model did not converge. Try modifying the 'Method' option."))
   else
     return(fit)
 }
-.dpExtractAsymmetryTest         <- function(fitTest, testType) {
+.fpExtractAsymmetryTest         <- function(fitTest, testType) {
   if (testType == "metaRegression") {
     return(data.frame(
       k   = if (jaspBase::isTryError(fitTest)) NA else fitTest$fit$k, # nobs will be fixed in the next release
@@ -749,6 +954,95 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
       p   = if (jaspBase::isTryError(fitTest)) NA else fitTest$pval
     ))
   }
+}
+.fpExtractFitEstimates          <- function(fit, options) {
+
+  if (jaspBase::isTryError(fit)) {
+    fitSummary <- data.frame(k = NA, muEst = NA, muLCI = NA, muUCI = NA, muP = NA)
+
+    if (!.maGetMethodOptions(options) %in% c("EE", "FE")) {
+      fitSummary$tauEst <- NA
+      fitSummary$tauLCI <- NA
+      fitSummary$tauUCI <- NA
+      fitSummary$tauP   <- NA
+    }
+
+    return(fitSummary)
+  }
+
+  fitSummary <- data.frame(
+    k        = fit$k,
+    muEst    = fit$b[1],
+    muLCI    = fit$ci.lb,
+    muUCI    = fit$ci.ub,
+    muP      = fit$pval
+  )
+
+  if (!.maGetMethodOptions(options) %in% c("EE", "FE")) {
+    tempTau <- data.frame(confint(fit)$random)[2,]
+    fitSummary$tauEst <- tempTau$estimate
+    fitSummary$tauLCI <- tempTau$ci.lb
+    fitSummary$tauUCI <- tempTau$ci.ub
+    fitSummary$tauP   <- fit$QEp
+  }
+
+  return(fitSummary)
+}
+.fpExtractTrimAndFillEstimates  <- function(fit, options) {
+
+  if (jaspBase::isTryError(fit)) {
+    fitSummary <- data.frame(k = NA, missingK = NA, muEst = NA, muLCI = NA, muUCI = NA, muP = NA)
+
+    if (options[["trimAndFillEstimator"]] == "R0")
+      fitSummary$missingP <- NA
+
+    if (!.maGetMethodOptions(options) %in% c("EE", "FE")) {
+      fitSummary$tauEst <- NA
+      fitSummary$tauLCI <- NA
+      fitSummary$tauUCI <- NA
+      fitSummary$tauP   <- NA
+    }
+
+    return(fitSummary)
+  }
+
+  fitSummary <- data.frame(
+    k        = fit$k,
+    missingK = fit$k0,
+    muEst    = fit$b[1],
+    muLCI    = fit$ci.lb,
+    muUCI    = fit$ci.ub,
+    muP      = fit$pval
+  )
+
+  if (options[["trimAndFillEstimator"]] == "R0") {
+    fitSummary$missingP <- fit$p.k0
+  }
+
+  if (!.maGetMethodOptions(options) %in% c("EE", "FE")) {
+    tempTau <- data.frame(confint(fit)$random)[2,]
+    fitSummary$tauEst <- tempTau$estimate
+    fitSummary$tauLCI <- tempTau$ci.lb
+    fitSummary$tauUCI <- tempTau$ci.ub
+    fitSummary$tauP   <- fit$QEp
+  }
+
+  return(fitSummary)
+}
+.fpGetTrimAndFillContainer      <- function(jaspResults) {
+
+  if (is.null(jaspResults[["trimAndFillContainer"]])) {
+    trimAndFillContainer <- createJaspContainer(title = gettext("Trim and Fill"))
+    trimAndFillContainer$dependOn(c(
+      .fpDependencies, "method", "trimAndFillEstimator", "trimAndFill"
+    ))
+    trimAndFillContainer$position <- 4
+    jaspResults[["trimAndFillContainer"]] <- trimAndFillContainer
+  } else {
+    trimAndFillContainer <- jaspResults[["trimAndFillContainer"]]
+  }
+
+  return(trimAndFillContainer)
 }
 
 # compute power enhancement contours (lifted from zcurve)
