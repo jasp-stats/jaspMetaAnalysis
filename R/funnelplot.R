@@ -43,6 +43,10 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
      .fpTrimAndFillEstimatesTable(jaspResults, dataset, options)
   }
 
+  # add fail-safe n
+  if (options[["funnelUnderH1"]])
+    .fpFailSafeNTable(jaspResults, dataset, options)
+
 
   return()
 }
@@ -902,6 +906,85 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
   return()
 }
+.fpFailSafeNTable               <- function(jaspResults, dataset, options) {
+
+  if (!is.null(jaspResults[["failSafeN"]]))
+    return()
+
+  if (is.null(jaspResults[["failSafeN"]])) {
+    failSafeN <- createJaspContainer(title = gettext("Fail-Safe N"))
+    failSafeN$dependOn(c(.fpDependencies, "failSafeN", "failSafeNRosenthal", "failSafeNOrwin", "failSafeNRosenberg", "failSafeNGeneral", "failSafeNGeneralExact", "failSafeNAlpha",  "failSafeNTarget"))
+    failSafeN$position <- 5
+    jaspResults[["failSafeN"]] <- failSafeN
+  }
+
+  # create the output table
+  failSafeNTable <- createJaspTable(gettext("Fail-Safe N Summary Table"))
+  failSafeNTable$position <- 1
+  failSafeN[["failSafeNTable"]] <- failSafeNTable
+
+  if (options[["split"]] != "")
+    failSafeNTable$addColumnInfo(name = "split", title = options[["split"]], type = "string")
+  failSafeNTable$addColumnInfo(name = "k",     title = gettext("Estimates"), type = "integer")
+  overtitle <- gettext("Fail-Safe N")
+  if (options[["failSafeNRosenthal"]])
+    failSafeNTable$addColumnInfo(name = "nRosenthal",    title = gettext("Rosenthal"), type = "integer", overtitle = overtitle)
+  if (options[["failSafeNOrwin"]])
+    failSafeNTable$addColumnInfo(name = "nOrwin",        title = gettext("Orwin"),     type = "integer", overtitle = overtitle)
+  if (options[["failSafeNRosenberg"]])
+    failSafeNTable$addColumnInfo(name = "nRosenberg",    title = gettext("Rosenberg"), type = "integer", overtitle = overtitle)
+  if (options[["failSafeNGeneral"]])
+    failSafeNTable$addColumnInfo(name = "nGeneral",      title = gettext("General"),   type = "integer", overtitle = overtitle)
+
+
+  if (.fpReady(options)) {
+
+    if (options[["split"]] == "") {
+
+      out <- data.frame(
+        k = nrow(na.omit(dataset[,c(options[["effectSize"]], options[["effectSizeStandardError"]])]))
+      )
+
+      if (options[["failSafeNRosenthal"]])
+        out$nRosenthal <- .fpTryGetFailSafeN(dataset, "", options, failSafeNTable, "Rosenthal")
+      if (options[["failSafeNOrwin"]])
+        out$nOrwin     <- .fpTryGetFailSafeN(dataset, "", options, failSafeNTable, "Orwin")
+      if (options[["failSafeNRosenberg"]])
+        out$nRosenberg <- .fpTryGetFailSafeN(dataset, "", options, failSafeNTable, "Rosenberg")
+      if (options[["failSafeNGeneral"]])
+        out$nGeneral   <- .fpTryGetFailSafeN(dataset, "", options, failSafeNTable, "General")
+
+      failSafeNTable$setData(out)
+
+    } else {
+
+      splitLevels <- unique(dataset[[options[["split"]]]])
+      out <- do.call(rbind, lapply(splitLevels, function(splitLevel) {
+
+        tempOut <- data.frame(
+          k = nrow(na.omit(dataset[dataset[[options[["split"]]]] == splitLevel,c(options[["effectSize"]], options[["effectSizeStandardError"]])]))
+        )
+
+        if (options[["failSafeNRosenthal"]])
+          tempOut$nRosenthal <- .fpTryGetFailSafeN(dataset, splitLevel, options, failSafeNTable, "Rosenthal")
+        if (options[["failSafeNOrwin"]])
+          tempOut$nOrwin     <- .fpTryGetFailSafeN(dataset, splitLevel, options, failSafeNTable, "Orwin")
+        if (options[["failSafeNRosenberg"]])
+          tempOut$nRosenberg <- .fpTryGetFailSafeN(dataset, splitLevel, options, failSafeNTable, "Rosenberg")
+        if (options[["failSafeNGeneral"]])
+          tempOut$nGeneral   <- .fpTryGetFailSafeN(dataset, splitLevel, options, failSafeNTable, "General")
+
+        return(tempOut)
+
+      }))
+
+      failSafeNTable$setData(out)
+
+    }
+  }
+
+  return()
+}
 
 .fpComputeFunnelDf              <- function(seSeq, mean, heterogeneity, funnelLevels) {
   dfs <- list()
@@ -1043,6 +1126,39 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   }
 
   return(trimAndFillContainer)
+}
+.fpTryGetFailSafeN              <- function(dataset, split, options, table, type) {
+
+  input <- list(
+    x   = if (split == "") dataset[[options[["effectSize"]]]]              else dataset[[options[["effectSize"]]]][dataset[[options[["split"]]]] == split],
+    sei = if (split == "") dataset[[options[["effectSizeStandardError"]]]] else dataset[[options[["effectSizeStandardError"]]]][dataset[[options[["split"]]]] == split],
+    type   = type,
+    method = .maGetMethodOptions(options),
+    exact  = options[["failSafeNGeneralExact"]]
+  )
+
+  if (type == "Rosenthal") {
+    input$alpha <- options[["failSafeNAlpha"]]
+  } else if (type == "orwin") {
+    input$target <- options[["failSafeNTarget"]]
+  } else if (type == "Rosenberg") {
+    input$alpha <- options[["failSafeNAlpha"]]
+  } else if (type == "General") {
+    input$alpha <- options[["failSafeNAlpha"]]
+    input$target <- options[["failSafeNTarget"]]
+  }
+
+  fit <- try(do.call(metafor::fsn, input))
+
+  if (jaspBase::isTryError(fit)) {
+    table$addFootnote(.fpMetaforTranslateErrorMessage(fit), symbol = gettextf(
+      "The %1$s fail-safe N calculation %2$sfailed with the following error: ",
+      type,
+      if (split == "") "" else gettextf("for split %1$s ", split)))
+    return(NA)
+  } else {
+    return(fit$fsnum)
+  }
 }
 
 # compute power enhancement contours (lifted from zcurve)
