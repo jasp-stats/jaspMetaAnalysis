@@ -537,7 +537,7 @@
   }
 
   # add messages
-  pooledEstimatesMessages <- .maPooledEstimatesMessages(fit, dataset, options)
+  pooledEstimatesMessages <- .maPooledEstimatesMessages(fit, dataset, options, sapply(pooledEffect, anyNA))
   for (i in seq_along(pooledEstimatesMessages))
     pooledEstimatesTable$addFootnote(pooledEstimatesMessages[i])
 
@@ -888,7 +888,7 @@
 
   estimatedMarginalMeansTable$setData(estimatedMarginalMeans)
 
-  estimatedMarginalMeansMessages <- .maEstimatedMarginalMeansMessages(options, parameter)
+  estimatedMarginalMeansMessages <- .maEstimatedMarginalMeansMessages(options, parameter, anyNA(sapply(estimatedMarginalMeans[,colnames(estimatedMarginalMeans) %in% c("est", "lCi", "uCi", "lPi", "uPi")], anyNA)))
   for (i in seq_along(estimatedMarginalMeansMessages))
     estimatedMarginalMeansTable$addFootnote(estimatedMarginalMeansMessages[i])
 
@@ -2972,18 +2972,18 @@
     none                          = function(x) x,
     fishersZToCorrelation         = metafor::transf.ztor,
     exponential                   = exp,
-    logOddsToProportions          = metafor::transf.logit,
+    logOddsToProportions          = Vectorize(metafor::transf.ilogit),
     logOddsToSmdNormal            = metafor::transf.lnortod.norm,
     logOddsToSmdLogistic          = metafor::transf.lnortod.logis,
     smdToLogOddsNormal            = metafor::transf.dtolnor.norm,
     smdToLogOddsLogistic          = metafor::transf.dtolnor.logis,
-    hakstianAndWhalenInverseAlpha = metafor::transf.iahw,
-    bonettInverseAlpha            = metafor::transf.iabt,
+    hakstianAndWhalenInverseAlpha = Vectorize(metafor::transf.iahw),
+    bonettInverseAlpha            = Vectorize(metafor::transf.iabt),
     zToR2                         = metafor::transf.ztor2,
-    smdToCohensU1                 = metafor::transf.dtou1,
-    smdToCohensU2                 = metafor::transf.dtou2,
-    smdToCohensU3                 = metafor::transf.dtou3,
-    smdToCles                     = metafor::transf.dtocles,
+    smdToCohensU1                 = Vectorize(metafor::transf.dtou1),
+    smdToCohensU2                 = Vectorize(metafor::transf.dtou2),
+    smdToCohensU3                 = Vectorize(metafor::transf.dtou3),
+    smdToCles                     = Vectorize(metafor::transf.dtocles),
     stop(paste0("Unknown effect size transformation: ", effectSizeTransformation))
   )
 }
@@ -3402,7 +3402,7 @@
   else if (options[["heterogeneityModelLink"]] == "identity")
     return(gettext("The heterogeneity model for \U1D70F\U00B2 is specified on the identity scale."))
 }
-.maPooledEstimatesMessages             <- function(fit, dataset, options) {
+.maPooledEstimatesMessages             <- function(fit, dataset, options, anyNA = FALSE) {
 
   messages <- NULL
 
@@ -3413,8 +3413,14 @@
       messages <- c(messages, gettextf("%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates.", fit[["n"]],  min(fit[["tcl"]]), median(fit[["tcl"]]), max(fit[["tcl"]])))
   }
 
-  if (options[["transformEffectSize"]] != "none")
-    messages <- c(messages, gettextf("The pooled effect size is transformed using %1$s transformation.", .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
+  if (options[["transformEffectSize"]] != "none") {
+    if (anyNA) {
+      messages <- c(messages, gettextf("NAs in the pooled effect size were introduced due to the %1$s transformation. Please verify that you are using the correct effect size transformation.", .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
+    } else {
+      messages <- c(messages, gettextf("The pooled effect size is transformed using %1$s transformation.", .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
+    }
+  }
+
 
   if (.maIsMetaregressionEffectSize(options))
     messages <- c(messages, gettext("The pooled effect size corresponds to the weighted average effect across studies."))
@@ -3439,12 +3445,18 @@
 
   return(messages)
 }
-.maEstimatedMarginalMeansMessages      <- function(options, parameter) {
+.maEstimatedMarginalMeansMessages      <- function(options, parameter, anyNA = FALSE) {
 
   messages <- gettext("Each marginal mean estimate is averaged across the levels of the remaining predictors.")
 
-  if (parameter == "effectSize" && options[["transformEffectSize"]] != "none")
-    messages <- c(messages, gettextf("The estimates and intervals are transformed using %1$s transformation.", .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
+  if (parameter == "effectSize" && options[["transformEffectSize"]] != "none") {
+    if (anyNA) {
+      messages <- c(messages, gettextf("NAs in the marginal mean estimatess were introduced due to the %1$s transformation. Please verify that you are using the correct effect size transformation.", .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
+    } else {
+      messages <- c(messages, gettextf("The estimates and intervals are transformed using %1$s transformation.", .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
+    }
+  }
+
 
   if (parameter == "heterogeneity")
     messages <- c(messages, gettextf("The estimates and intervals correspond to %1$s.", switch(
