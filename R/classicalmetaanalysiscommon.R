@@ -24,7 +24,6 @@
 # TODO:
 # Coefficient tests
 # - parwise() from new metafor version
-# - add permutation test for omnibus moderation tests if this is implemented: https://github.com/wviechtb/metafor/issues/88
 # Estimated Marginal Means
 # - add variable interactions
 # - specify and test contrasts
@@ -253,17 +252,7 @@
 
   # add permutation test if requested (only available for non-clustered fits)
   if (.maIsPermutation(options)) {
-    .setSeedJASP(options)
-    fitPermutation <- try(metafor::permutest(
-      fit,
-      exact = options[["permutationTestType"]] == "exact",
-      iter  = options[["permutationTestIteration"]],
-      code1 = "jaspBase::startProgressbar(X.iter, label = 'Permutation test')",
-      code2 = "jaspBase::progressbarTick()",
-    ))
-    fit <- .maFitAddPermutationPValues(fit, fitPermutation, options)
-  } else {
-    fitPermutation <- NULL
+    fit <- .maPermutestAndStore(fit, options)
   }
 
 
@@ -278,26 +267,110 @@
   # return the results
   jaspResults[[objectName]]$object <- list(
     fit            = fit,
-    fitClustered   = fitClustered,
-    fitPermutation = fitPermutation
+    fitClustered   = fitClustered
   )
 
   return()
 }
-.maFitAddPermutationPValues      <- function(fit, fitPerumation, options) {
+.maPermutestAndStore             <- function(fit, options) {
 
-  # stores the permutation p-values in the fit object
+  # perform permutation tests for coefficients and terms tests
+  # store the permutation p-values in the fit object
   # this simplifies object dispatching later in the code
   # the whole fitPermutation object can be essentially forgotten
 
-  if (.maIsMetaregressionEffectSize(options)) {
-    attr(fit[["QMp"]],  "permutation") <- fitPerumation[["QMp"]]
-    attr(fit[["pval"]], "permutation") <- fitPerumation[["pval"]]
-  }
+  .setSeedJASP(options)
+
+  permtestCall <- list(
+    fit,
+    exact = options[["permutationTestType"]] == "exact",
+    iter  = options[["permutationTestIteration"]],
+    code1 = "jaspBase::startProgressbar(X.iter, label = 'Permutation test')",
+    code2 = "jaspBase::progressbarTick()"
+  )
+  fitPermutation <- try(do.call(metafor::permutest, permtestCall))
+
 
   if (.maIsMetaregressionEffectSize(options)) {
-    attr(fit[["QSp"]], "permutation")        <- fitPerumation[["QSp"]]
-    attr(fit[["pval.alpha"]], "permutation") <- fitPerumation[["pval.alpha"]]
+
+    QMpPermutation <- fitPermutation[["QMp"]]
+
+    # add permutation test for additional omnibus moderator test
+    if (options[["addOmnibusModeratorTestEffectSizeCoefficients"]]) {
+      tempBtt          <- .maOmnibusTestCoefficients(fit, options, parameter = "effectSize", returnSelCoef = TRUE)
+      tempPermtestCall <- permtestCall
+      tempPermtestCall$btt   <- tempBtt
+      tempPermtestCall$code1 <- paste0("jaspBase::startProgressbar(X.iter, label = 'Effect Size Omibus Moderator Test: (", paste0(tempBtt, collapse = "," ), "))')")
+      tempFitPermutation     <- try(do.call(metafor::permutest, tempPermtestCall))
+      QMpPermutation   <- c(QMpPermutation, if (jaspBase::isTryError(tempFitPermutation)) NA else tempFitPermutation[["QMp"]])
+    }
+
+    # add permutation tests for moderation term tests
+    termsIndicies  <- .maGetTermsIndices(fit, "effectSize")
+
+    pvalPermutation      <- fitPermutation[["pval"]]
+    pvalTermsPermutation <- rep(NA, length(termsIndicies))
+
+    for (i in seq_along(termsIndicies)) {
+      # single-coefficient term tests: term == coefficient
+      if (length(termsIndicies[[i]]) == 1) {
+        pvalTermsPermutation[i] <- pvalPermutation[termsIndicies[[i]]]
+      } else if (length(termsIndicies[[i]]) > 1) {
+        # multiple-coefficient term tests: permutation needs to be re-done
+        tempBtt          <- .maOmnibusTestCoefficients(fit, options, parameter = "effectSize", returnSelCoef = TRUE)
+        tempPermtestCall <- permtestCall
+        tempPermtestCall$btt   <- tempBtt
+        tempPermtestCall$code1 <- paste0("jaspBase::startProgressbar(X.iter, label = 'Effect Size Moderator Test: (", names(termsIndicies)[i], "))')")
+        tempFitPermutation     <- try(do.call(metafor::permutest, tempPermtestCall))
+        pvalTermsPermutation[i] <- if (jaspBase::isTryError(tempFitPermutation)) NA else tempFitPermutation[["QMp"]]
+      }
+    }
+
+    # store results
+    attr(fit[["QMp"]],  "permutation")      <- QMpPermutation
+    attr(fit[["QMp"]],  "permutationTerms") <- pvalTermsPermutation
+    attr(fit[["pval"]], "permutation")      <- pvalPermutation
+  }
+
+  if (.maIsMetaregressionHeterogeneity(options)) {
+
+    QSpPermutation <- fitPermutation[["QSp"]]
+
+    # add permutation test for additional omnibus moderator test
+    if (options[["addOmnibusModeratorTestHeterogeneityCoefficients"]]) {
+      tempAtt          <- .maOmnibusTestCoefficients(fit, options, parameter = "heterogeneity", returnSelCoef = TRUE)
+      tempPermtestCall <- permtestCall
+      tempPermtestCall$att   <- tempAtt
+      tempPermtestCall$code1 <- paste0("jaspBase::startProgressbar(X.iter, label = 'Heterogeneity Omibus Moderator Test: (", paste0(tempAtt, collapse = "," ), "))')")
+      tempFitPermutation     <- try(do.call(metafor::permutest, tempPermtestCall))
+      QSpPermutation   <- c(QSpPermutation, if (jaspBase::isTryError(tempFitPermutation)) NA else tempFitPermutation[["QSp"]])
+    }
+
+    # add permutation tests for moderation term tests
+    termsIndicies  <- .maGetTermsIndices(fit, "heterogeneity")
+
+    pval.alphaPermutation      <- fitPermutation[["pval.alpha"]]
+    pval.alphaTermsPermutation <- rep(NA, length(termsIndicies))
+
+    for (i in seq_along(termsIndicies)) {
+      # single-coefficient term tests: term == coefficient
+      if (length(termsIndicies[[i]]) == 1) {
+        pval.alphaTermsPermutation[i] <- pval.alphaPermutation[termsIndicies[[i]]]
+      } else if (length(termsIndicies[[i]]) > 1) {
+        # multiple-coefficient term tests: permutation needs to be re-done
+        tempAtt          <- .maOmnibusTestCoefficients(fit, options, parameter = "heterogeneity", returnSelCoef = TRUE)
+        tempPermtestCall <- permtestCall
+        tempPermtestCall$att   <- tempAtt
+        tempPermtestCall$code1 <- paste0("jaspBase::startProgressbar(X.iter, label = 'Heterogeneity Moderator Test: (", names(termsIndicies)[i], "))')")
+        tempFitPermutation     <- try(do.call(metafor::permutest, tempPermtestCall))
+        pval.alphaTermsPermutation[i] <- if (jaspBase::isTryError(tempFitPermutation)) NA else tempFitPermutation[["QSp"]]
+      }
+    }
+
+    # store results
+    attr(fit[["QSp"]],  "permutation")       <- QSpPermutation
+    attr(fit[["QSp"]],  "permutationTerms")  <- pval.alphaTermsPermutation
+    attr(fit[["pval.alpha"]], "permutation") <- pval.alphaPermutation
   }
 
   return(fit)
@@ -617,6 +690,12 @@
     termsTable$addColumnInfo(name = "df2", type = "number", title = gettext("df\U2082"))
   }
   termsTable$addColumnInfo(name = "pval",  type = "pvalue", title = gettext("p"))
+
+  if (.maIsPermutation(options)) {
+    termsTable$addColumnInfo(name = "pval2",  type = "pvalue",  title = gettext("p (permutation)"))
+    termsTable$addFootnote(.maPermutationMessage(options))
+  }
+
   termsTable$addFootnote(.maFixedEffectTextMessage(options))
 
   if (is.null(fit) || jaspBase::isTryError(fit))
@@ -1584,7 +1663,7 @@
     predictedHeterogeneity <- .maComputePooledHeterogeneity(fit, options)
     predictedEffect        <- data.frame(
       pred  = fit$beta[1],
-      se    = fit$se[1],,
+      se    = fit$se[1],
       ddf   = fit$ddf[1],
       ci.lb = fit$ci.lb[1],
       ci.ub = fit$ci.ub[1],
@@ -1842,16 +1921,17 @@
       row$df2 <- fit[["QSdf"]][2]
   }
 
-  if (.maIsPermutation(options)) {
-    if (parameter == "effectSize")
-      row$pval2 <- attr(fit[["QMp"]], "permutation")
-    else if (parameter == "heterogeneity")
-      row$pval2 <- attr(fit[["QSp"]], "permutation")
-  }
+
+  if (.maIsPermutation(options))
+    row$pval2 <- switch(
+      parameter,
+      "effectSize"    = attr(fit[["QMp"]], "permutation")[1],
+      "heterogeneity" = attr(fit[["QSp"]], "permutation")[1]
+    )
 
   return(row)
 }
-.maOmnibusTestCoefficients         <- function(fit, options, parameter = "effectSize") {
+.maOmnibusTestCoefficients         <- function(fit, options, parameter = "effectSize", returnSelCoef = FALSE) {
 
   if (parameter == "effectSize") {
     maxCoef <- nrow(fit$beta)
@@ -1872,6 +1952,10 @@
   if (any(selCoef < 1) || any(selCoef > maxCoef))
     return(gettextf("The selected coefficients must be between 1 and %1$i (i.e., the number of regression parameters).", maxCoef))
 
+  if (returnSelCoef) {
+    return(selCoef)
+  }
+
   if (parameter == "effectSize") {
     out <- anova(fit, btt = selCoef)
   } else if (parameter == "heterogeneity") {
@@ -1886,6 +1970,13 @@
 
   if (.maIsMetaregressionFtest(options))
     row$df2 <- fit[["QMdf"]][2]
+
+  if (.maIsPermutation(options))
+    row$pval2 <- switch(
+      parameter,
+      "effectSize"    = attr(fit[["QMp"]], "permutation")[2],
+      "heterogeneity" = attr(fit[["QSp"]], "permutation")[2]
+    )
 
   if (parameter == "effectSize") {
     row$parameter <- gettextf("Effect Size (coef: %1$s)", paste(selCoef, collapse = ", "))
@@ -1926,6 +2017,9 @@
       if (.maIsMetaregressionFtest(options))
         out$df2 <- NA
 
+      if (.maIsPermutation(options))
+        out$pval2 <- NA
+
     } else {
 
       termsAnova <- anova(fit, btt = seq_along(termsIndex)[termsIndex == which(terms == term)])
@@ -1939,6 +2033,9 @@
 
       if (.maIsMetaregressionFtest(options))
         out$df2 <- termsAnova[["QMdf"]][2]
+
+      if (.maIsPermutation(options))
+        out$pval2 <- attr(fit[["QMp"]], "permutationTerms")[which(terms == term)]
     }
 
   } else if (parameter == "heterogeneity") {
@@ -1960,6 +2057,9 @@
       if (.maIsMetaregressionFtest(options))
         out$df2 <- NA
 
+      if (.maIsPermutation(options))
+        out$pval2 <- NA
+
     } else {
 
       termsAnova <- anova(fit, att = seq_along(termsIndex)[termsIndex == which(terms == term)])
@@ -1973,6 +2073,9 @@
 
       if (.maIsMetaregressionFtest(options))
         out$df2 <- termsAnova[["QSdf"]][2]
+
+      if (.maIsPermutation(options))
+        out$pval2 <- attr(fit[["QSp"]], "permutationTerms")[which(terms == term)]
     }
 
   }
@@ -3444,6 +3547,34 @@
   }
 
   return(df)
+}
+.maGetTermsIndices                    <- function(fit, parameter) {
+
+  if (parameter == "effectSize") {
+
+    terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")     # get terms indices from the model
+    termsIndex <- attr(model.matrix(fit[["formula.mods"]], data = fit[["data"]]), "assign")  # get coefficient indices from the model matrix
+    termsIndex <- termsIndex[!fit$coef.na]                                                   # remove dropped coefficients
+
+    termsIndicies <- lapply(terms, function(term){
+      seq_along(termsIndex)[termsIndex == which(terms == term)]
+    })
+    names(termsIndicies) <- terms
+
+  } else if (parameter == "heterogeneity") {
+
+    terms      <- attr(terms(fit[["formula.scale"]], data = fit[["data"]]),"term.labels")      # get terms indices from the model
+    termsIndex <- attr(model.matrix(fit[["formula.scale"]], data = fit[["data"]]), "assign")   # get coefficient indices from the model matrix
+    termsIndex <- termsIndex[!fit$coef.na.Z]                                                   # remove dropped coefficients
+
+    termsIndicies <- lapply(terms, function(term){
+      seq_along(termsIndex)[termsIndex == which(terms == term)]
+    })
+    names(termsIndicies) <- terms
+
+  }
+
+  return(termsIndicies)
 }
 
 # messages
