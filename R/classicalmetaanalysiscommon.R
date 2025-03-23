@@ -631,6 +631,10 @@
     ))
     termsTable$setData(termsTests)
 
+    termsTestWarnings <- .maTermsTableWarnings(fit, terms, parameter)
+    for (i in seq_along(termsTestWarnings))
+      termsTable$addFootnote(termsTestWarnings[i], symbol = gettext("Warning:"))
+
   } else if (parameter == "heterogeneity") {
 
     if (!.maIsMetaregressionHeterogeneity(options))
@@ -641,6 +645,10 @@
       .maTermTests(fit, options, term, parameter = "heterogeneity")
     ))
     termsTable$setData(termsTests)
+
+    termsTestWarnings <- .maTermsTableWarnings(fit, terms, parameter)
+    for (i in seq_along(termsTestWarnings))
+      termsTable$addFootnote(termsTestWarnings[i], symbol = gettext("Warning:"))
 
   }
 
@@ -718,6 +726,10 @@
 
     coefficientsTable$setData(estimates)
 
+    coefficientsTableWarnings <- .maCoefficientsTableWarnings(fit, parameter)
+    for (i in seq_along(coefficientsTableWarnings))
+      coefficientsTable$addFootnote(coefficientsTableWarnings[i], symbol = gettext("Warning:"))
+
   } else if (parameter == "heterogeneity") {
 
     estimates <- data.frame(
@@ -740,6 +752,10 @@
     }
 
     coefficientsTable$setData(estimates)
+
+    coefficientsTableWarnings <- .maCoefficientsTableWarnings(fit, parameter)
+    for (i in seq_along(coefficientsTableWarnings))
+      coefficientsTable$addFootnote(coefficientsTableWarnings[i], symbol = gettext("Warning:"))
 
   }
 
@@ -1645,21 +1661,30 @@
 }
 .maComputePooledEffectPlot         <- function(fit, options) {
 
-  if (!.maIsMetaregressionEffectSize(options)) {
+  if (!.maIsMetaregressionEffectSize(options) && !.maIsMetaregressionHeterogeneity(options)) {
     predictedEffect <- predict(fit)
-  } else {
-    if (.maIsMetaregressionHeterogeneity(options)) {
-      predictedEffect <- predict(
-        fit,
-        newmods  = colMeans(model.matrix(fit)$location)[-1],
-        newscale = colMeans(model.matrix(fit)$scale)[-1]
-      )
-    } else {
-      predictedEffect <- predict(
-        fit,
-        newmods = colMeans(model.matrix(fit))[-1]
-      )
-    }
+  } else if (.maIsMetaregressionHeterogeneity(options) && .maIsMetaregressionEffectSize(options)) {
+    predictedEffect <- predict(
+      fit,
+      newmods  = colMeans(model.matrix(fit)$location)[-1],
+      newscale = colMeans(model.matrix(fit)$scale)[-1]
+    )
+  } else if (.maIsMetaregressionEffectSize(options)){
+    predictedEffect <- predict(
+      fit,
+      newmods = colMeans(model.matrix(fit))[-1]
+    )
+  } else if (.maIsMetaregressionHeterogeneity(options)){
+    predictedHeterogeneity <- .maComputePooledHeterogeneity(fit, options)
+    predictedEffect        <- data.frame(
+      pred  = fit$beta[1],
+      se    = fit$se[1],
+      ddf   = fit$ddf,
+      ci.lb = fit$ci.lb[1],
+      ci.ub = fit$ci.ub[1],
+      pi.lb = fit$beta[1] - 1.96 * sqrt(fit$se[1]^2 + predictedHeterogeneity[1, 2]^2),
+      pi.ub = fit$beta[1] + 1.96 * sqrt(fit$se[1]^2 + predictedHeterogeneity[1, 2]^2)
+    )
   }
 
   # compute test against specified value
@@ -1900,34 +1925,72 @@
 
   # obtain terms indicies
   if (parameter == "effectSize") {
-    terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")
-    termsIndex <- attr(model.matrix(fit[["formula.mods"]], data = fit[["data"]]), "assign")
-    termsAnova <- anova(fit, btt = seq_along(termsIndex)[termsIndex == which(terms == term)])
 
-    out <- list(
-      term = .maVariableNames(term, options[["predictors"]]),
-      stat = termsAnova[["QM"]],
-      df1  = termsAnova[["QMdf"]][1],
-      pval = termsAnova[["QMp"]]
-    )
+    terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")     # get terms indices from the model
+    termsIndex <- attr(model.matrix(fit[["formula.mods"]], data = fit[["data"]]), "assign")  # get coefficient indices from the model matrix
+    termsIndex <- termsIndex[!fit$coef.na]                                                   # remove dropped coefficients
 
-    if (.maIsMetaregressionFtest(options))
-      out$df2 <- termsAnova[["QMdf"]][2]
+    # deal with the possibility that all coefficients of the corresponding term were dropped
+    if (sum(termsIndex == which(terms == term)) == 0) {
+
+      out <- list(
+        term = .maVariableNames(term, options[["predictors"]]),
+        stat = NA,
+        df1  = NA,
+        pval = NA
+      )
+
+      if (.maIsMetaregressionFtest(options))
+        out$df2 <- NA
+
+    } else {
+
+      termsAnova <- anova(fit, btt = seq_along(termsIndex)[termsIndex == which(terms == term)])
+
+      out <- list(
+        term = .maVariableNames(term, options[["predictors"]]),
+        stat = termsAnova[["QM"]],
+        df1  = termsAnova[["QMdf"]][1],
+        pval = termsAnova[["QMp"]]
+      )
+
+      if (.maIsMetaregressionFtest(options))
+        out$df2 <- termsAnova[["QMdf"]][2]
+    }
 
   } else if (parameter == "heterogeneity") {
-    terms      <- attr(terms(fit[["formula.scale"]], data = fit[["data"]]),"term.labels")
-    termsIndex <- attr(model.matrix(fit[["formula.scale"]], data = fit[["data"]]), "assign")
-    termsAnova <- anova(fit, att = seq_along(termsIndex)[termsIndex == which(terms == term)])
 
-    out <- list(
-      term = .maVariableNames(term, options[["predictors"]]),
-      stat = termsAnova[["QS"]],
-      df1  = termsAnova[["QSdf"]][1],
-      pval = termsAnova[["QSp"]]
-    )
+    terms      <- attr(terms(fit[["formula.scale"]], data = fit[["data"]]),"term.labels")      # get terms indices from the model
+    termsIndex <- attr(model.matrix(fit[["formula.scale"]], data = fit[["data"]]), "assign")   # get coefficient indices from the model matrix
+    termsIndex <- termsIndex[!fit$coef.na.Z]                                                   # remove dropped coefficients
 
-    if (.maIsMetaregressionFtest(options))
-      out$df2 <- termsAnova[["QSdf"]][2]
+    # deal with the possibility that all coefficients of the corresponding term were dropped
+    if (sum(termsIndex == which(terms == term)) == 0) {
+
+      out <- list(
+        term = .maVariableNames(term, options[["predictors"]]),
+        stat = NA,
+        df1  = NA,
+        pval = NA
+      )
+
+      if (.maIsMetaregressionFtest(options))
+        out$df2 <- NA
+
+    } else {
+
+      termsAnova <- anova(fit, att = seq_along(termsIndex)[termsIndex == which(terms == term)])
+
+      out <- list(
+        term = .maVariableNames(term, options[["predictors"]]),
+        stat = termsAnova[["QS"]],
+        df1  = termsAnova[["QSdf"]][1],
+        pval = termsAnova[["QSp"]]
+      )
+
+      if (.maIsMetaregressionFtest(options))
+        out$df2 <- termsAnova[["QSdf"]][2]
+    }
 
   }
 
@@ -2607,7 +2670,7 @@
       tableVif   <- do.call(rbind, lapply(seq_along(terms), function(i) {
         cbind.data.frame(
           term = terms[i],
-          .maExtractVifResults(metafor::vif(fit, btt = seq_along(termsIndex)[termsIndex == i]), options, parameter)
+          .maExtractVifResults(try(metafor::vif(fit, btt = seq_along(termsIndex)[termsIndex == i])), options, parameter)
         )
       }))
     } else if (parameter == "heterogeneity") {
@@ -2616,14 +2679,14 @@
       tableVif   <- do.call(rbind, lapply(seq_along(terms), function(i) {
         cbind.data.frame(
           term = terms[i],
-          .maExtractVifResults(metafor::vif(fit, att = seq_along(termsIndex)[termsIndex == i]), options, parameter)
+          .maExtractVifResults(try(metafor::vif(fit, att = seq_along(termsIndex)[termsIndex == i])), options, parameter)
         )
       }))
     }
 
   } else {
 
-    tableVif      <- .maExtractVifResults(metafor::vif(fit), options, parameter)
+    tableVif      <- .maExtractVifResults(try(metafor::vif(fit)), options, parameter)
     tableVif$term <- .maVariableNames(rownames(tableVif), options[["predictors"]])
   }
 
@@ -3285,6 +3348,21 @@
 }
 .maExtractVifResults                  <- function(vifResults, options, parameter) {
 
+  if (jaspBase::isTryError(vifResults)) {
+    if (options[["diagnosticsVarianceInflationFactorAggregate"]]) {
+      return(data.frame(
+        m   = NA,
+        vif = NA,
+        sif = NA
+      ))
+    } else {
+      return(data.frame(
+        vif = NA,
+        sif = NA
+      ))
+    }
+  }
+
   if (.maIsMetaregressionHeterogeneity(options))
     vifResults <- vifResults[[switch(
       parameter,
@@ -3480,4 +3558,62 @@
     return(gettextf("The model estimation failed with the following message: %1$s. Please, consider simplifying the model.", message))
 
   return(message)
+}
+.maTermsTableWarnings                  <- function(fit, terms, parameter) {
+
+  messages <- NULL
+
+  coefNA <- switch(
+    parameter,
+    "effectSize"    = fit$coef.na,
+    "heterogeneity" = fit$coef.na.Z
+  )
+
+  if (any(coefNA)) {
+
+    messages <- c(messages, unlist(sapply(terms, function(term) {
+
+      if (parameter == "effectSize") {
+        terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")     # get terms indices from the model
+        termsIndex <- attr(model.matrix(fit[["formula.mods"]], data = fit[["data"]]), "assign")  # get coefficient indices from the model matrix
+      } else if (parameter == "heterogeneity") {
+        terms      <- attr(terms(fit[["formula.scale"]], data = fit[["data"]]),"term.labels")      # get terms indices from the model
+        termsIndex <- attr(model.matrix(fit[["formula.scale"]], data = fit[["data"]]), "assign")   # get coefficient indices from the model matrix
+      }
+
+      thisTermsIndex <- termsIndex[termsIndex == which(terms == term)]
+      thisNaTerms    <- coefNA[termsIndex == which(terms == term)]
+
+      if (all(thisNaTerms)) {
+        return(gettextf("The term %1$s was completely removed from the model. Possible causes are missing values, collinear predictors, or missing crossed cells in an interaction term.", term))
+      } else if (any(thisNaTerms)) {
+        return(gettextf("The term %1$s was partilly removed (%2$i/%3$i coefficients) from the model. Possible causes are missing values, collinear predictors, or missing crossed cells in an interaction term.", term, sum(thisNaTerms), length(thisNaTerms)))
+      } else {
+        return(NULL)
+      }
+    })))
+  }
+
+  return(messages)
+}
+.maCoefficientsTableWarnings <- function(fit, parameter) {
+
+  messages <- NULL
+
+  coefNA <- switch(
+    parameter,
+    "effectSize"    = fit$coef.na,
+    "heterogeneity" = fit$coef.na.Z
+  )
+
+  if (any(coefNA)) {
+
+    missingCoef <- names(coefNA)[coefNA]
+    missingCoef <- gsub("^.", "", missingCoef) # remove first letter as metafor adds "X/Z"
+
+    messages <- c(messages, gettextf("The following coefficients were removed from the model: %1$s. Possible causes are missing values, collinear predictors, or missing crossed cells in an interaction term.",
+                            paste(missingCoef, collapse = ", ")))
+  }
+
+  return(messages)
 }
