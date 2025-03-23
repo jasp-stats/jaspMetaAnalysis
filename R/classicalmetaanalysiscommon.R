@@ -395,15 +395,17 @@
   options[["transformEffectSize"]] <- "none"
   predictedEffect <- .maComputePooledEffectPlot(fit, options)
 
+  # always use only the first entry - multiple entries with different prediction intervals for models with multiple heterogeneity terms
+  # (returned for general use of the `.maComputePooledEffectPlot` function)
   estimates <- data.frame(
-    est  = predictedEffect[["est"]],
-    se   = predictedEffect[["se"]],
-    stat = predictedEffect[["stat"]],
-    pval = predictedEffect[["pval"]]
+    est  = predictedEffect[["est"]][1],
+    se   = predictedEffect[["se"]][1],
+    stat = predictedEffect[["stat"]][1],
+    pval = predictedEffect[["pval"]][1]
   )
 
   if (.maIsMetaregressionFtest(options))
-    estimates$df <- predictedEffect[["df"]]
+    estimates$df <- predictedEffect[["df"]][1]
 
   pooledEffectSizeTest$setData(estimates)
 
@@ -1574,7 +1576,7 @@
 }
 
 # help compute functions
-.maComputePooledEffect             <- function(fit, options) {
+.maComputePooledEffect             <- function(fit, options, returnRaw = FALSE) {
 
   # prediction for effect size of a location-scale models without effect size moderator does not work (compute it manually)
   if (!.maIsMetaregressionEffectSize(options) && .maIsMetaregressionHeterogeneity(options)) {
@@ -1582,7 +1584,8 @@
     predictedHeterogeneity <- .maComputePooledHeterogeneity(fit, options)
     predictedEffect        <- data.frame(
       pred  = fit$beta[1],
-      se    = fit$se[1],
+      se    = fit$se[1],,
+      ddf   = fit$ddf[1],
       ci.lb = fit$ci.lb[1],
       ci.ub = fit$ci.ub[1],
       pi.lb = fit$beta[1] - 1.96 * sqrt(fit$se[1]^2 + predictedHeterogeneity[1, 2]^2),
@@ -1621,7 +1624,6 @@
     predictedEffect <- do.call(predict, predictInput)
   }
 
-
   # remove the non-requested heterogeneity levels
   if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && !options[["predictionIntervals"]])
     predictedEffect <- predictedEffect[1, , drop = FALSE]
@@ -1634,6 +1636,11 @@
     )
     tauLevels           <- do.call(cbind.data.frame, tauLevels[!sapply(tauLevels, is.null)])
     colnames(tauLevels) <- .mammExtractTauLevelNames(fit)
+  }
+
+  # return for the plotting function: requires different post-formatting
+  if (returnRaw) {
+    return(predictedEffect)
   }
 
   # to data.frame
@@ -1661,31 +1668,7 @@
 }
 .maComputePooledEffectPlot         <- function(fit, options) {
 
-  if (!.maIsMetaregressionEffectSize(options) && !.maIsMetaregressionHeterogeneity(options)) {
-    predictedEffect <- predict(fit)
-  } else if (.maIsMetaregressionHeterogeneity(options) && .maIsMetaregressionEffectSize(options)) {
-    predictedEffect <- predict(
-      fit,
-      newmods  = colMeans(model.matrix(fit)$location)[-1],
-      newscale = colMeans(model.matrix(fit)$scale)[-1]
-    )
-  } else if (.maIsMetaregressionEffectSize(options)){
-    predictedEffect <- predict(
-      fit,
-      newmods = colMeans(model.matrix(fit))[-1]
-    )
-  } else if (.maIsMetaregressionHeterogeneity(options)){
-    predictedHeterogeneity <- .maComputePooledHeterogeneity(fit, options)
-    predictedEffect        <- data.frame(
-      pred  = fit$beta[1],
-      se    = fit$se[1],
-      ddf   = fit$ddf,
-      ci.lb = fit$ci.lb[1],
-      ci.ub = fit$ci.ub[1],
-      pi.lb = fit$beta[1] - 1.96 * sqrt(fit$se[1]^2 + predictedHeterogeneity[1, 2]^2),
-      pi.ub = fit$beta[1] + 1.96 * sqrt(fit$se[1]^2 + predictedHeterogeneity[1, 2]^2)
-    )
-  }
+  predictedEffect      <- .maComputePooledEffect(fit, options, returnRaw = TRUE)
 
   # compute test against specified value
   if (.maIsMetaregressionFtest(options)) {
