@@ -22,8 +22,6 @@
 
 
 # TODO:
-# Coefficient tests
-# - parwise() from new metafor version
 # Estimated Marginal Means
 # - add variable interactions
 # - specify and test contrasts
@@ -83,6 +81,10 @@
   # estimated marginal means
   .maEstimatedMarginalMeansTable(jaspResults, dataset, options, "effectSize")
   .maEstimatedMarginalMeansTable(jaspResults, dataset, options, "heterogeneity")
+
+  # contrasts
+  if (options[["contrastsEffectSize"]])
+    .maContrastsTable(jaspResults, dataset, options)
 
   # plots
   .maUltimateForestPlot(jaspResults, dataset, options)
@@ -988,6 +990,40 @@
   estimatedMarginalMeansMessages <- .maEstimatedMarginalMeansMessages(options, parameter, anyNA(sapply(estimatedMarginalMeans[,colnames(estimatedMarginalMeans) %in% c("est", "lCi", "uCi", "lPi", "uPi")], anyNA)))
   for (i in seq_along(estimatedMarginalMeansMessages))
     estimatedMarginalMeansTable$addFootnote(estimatedMarginalMeansMessages[i])
+
+  return()
+}
+.maContrastsTable                     <- function(jaspResults, dataset, options) {
+
+  if (!is.null(jaspResults[["contrastsContainer"]]))
+    return()
+
+  # create the output container
+  contrastsContainer <- createJaspContainer(gettext("Contrasts Summary"))
+  contrastsContainer$dependOn(c(.maDependencies, "confidenceIntervals", "confidenceIntervalsLevel", "contrastsEffectSize", "contrastsEffectSizePValueAdjustment",
+                                "estimatedMarginalMeansEffectSizeSelectedVariables", "predictionIntervals"))
+  contrastsContainer$position <- 4.1
+  jaspResults[["contrastsContainer"]] <- contrastsContainer
+
+  # keep only factor variables
+  variablesFactors  <- options[["predictors"]][options[["predictors.types"]] == "nominal"]
+  variablesSelected <- unlist(options[["estimatedMarginalMeansEffectSizeSelectedVariables"]])
+  variablesSelected <- variablesSelected[variablesSelected %in% variablesFactors]
+
+  if (length(variablesSelected) == 0)
+    return()
+
+  # extract model fit
+  fit <- .maExtractFit(jaspResults, options)
+
+  for (variable in variablesSelected) {
+
+    tempTable <- .maContrastsCreateTable(variable, options)
+    .maContrastsFillTable(tempTable, fit, variable, options)
+    contrastsContainer[[variable]] <- tempTable
+
+  }
+
 
   return()
 }
@@ -2222,10 +2258,12 @@
     } else {
 
       if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]]) {
-        tauLevelsMatrix <- .mammExtractTauLevels(fit)
+        tauLevelsMatrix            <- .mammExtractTauLevels(fit)
+        tempPredictorMatrixRepeats <- rep(1:nrow(predictorMatrixEffectSize), each = nrow(tauLevelsMatrix)) # repeat the predictors for each tau level
+        attr(predictorMatrixEffectSize, attr(predictorMatrixEffectSize, "variable")) <- attr(predictorMatrixEffectSize, attr(predictorMatrixEffectSize, "variable"))[tempPredictorMatrixRepeats]
         computedMarginalMeans <- predict(
           fit,
-          newmods = do.call(rbind, lapply(1:nrow(tauLevelsMatrix), function(i) predictorMatrixEffectSize)),
+          newmods = predictorMatrixEffectSize[tempPredictorMatrixRepeats,,drop=FALSE],
           level   = 100 * options[["confidenceIntervalsLevel"]],
           tau2.levels   = if (is.null(dim(predictorMatrixEffectSize))) tauLevelsMatrix[["tau2.levels"]]   else do.call(rbind, lapply(1:nrow(predictorMatrixEffectSize), function(i) tauLevelsMatrix))[["tau2.levels"]],
           gamma2.levels = if (is.null(dim(predictorMatrixEffectSize))) tauLevelsMatrix[["gamma2.levels"]] else do.call(rbind, lapply(1:nrow(predictorMatrixEffectSize), function(i) tauLevelsMatrix))[["gamma2.levels"]]
@@ -2973,6 +3011,88 @@
 
   return(plotOut)
 }
+.maContrastsCreateTable            <- function(variable, options) {
+
+  contrastTable <- createJaspTable(gettextf("Contrast: %1$s", variable))
+
+  contrastTable$addColumnInfo(name = "comparison",  type = "string", title = gettext("Comparison"))
+  contrastTable$addColumnInfo(name = "est",         type = "number", title = gettext("Estimate"))
+
+  if (options[["confidenceIntervals"]]) {
+    overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
+    contrastTable$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
+    contrastTable$addColumnInfo(name = "uCi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
+  }
+
+  if (options[["predictionIntervals"]]) {
+    overtitleCi <- gettextf("%s%% PI", 100 * options[["confidenceIntervalsLevel"]])
+    contrastTable$addColumnInfo(name = "lPi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
+    contrastTable$addColumnInfo(name = "uPi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
+  }
+
+  contrastTable$addColumnInfo(name = "stat",  type = "number", title = if(.maIsMetaregressionFtest(options)) gettext("t") else gettext("z"))
+  if (.maIsMetaregressionFtest(options))
+    contrastTable$addColumnInfo(name = "df",  type = "number", title = gettext("df"))
+
+  contrastTable$addColumnInfo(name = "pval",  type = "pvalue", title = gettext("p"))
+
+  return(contrastTable)
+}
+.maContrastsFillTable              <- function(contrastTable, fit, variable, options) {
+
+  ### create all required contrasts
+  # ideally using this: tempPairmat <- metafor::pairmat(fit, btt = variable, btt2 = variable)
+  # but the function fails when using a two-level factor :(
+  termIndicies <- .maGetTermsIndices(fit, "effectSize")[[variable]]
+  termLevels   <- levels(fit[["data"]][[variable]])
+  tempPairmat  <- matrix(0, nrow = (length(termIndicies) + 1) * length(termIndicies) / 2, ncol = sum(!fit$coef.na))
+  tempNames    <- character(nrow(tempPairmat))
+
+  thisI <- 1
+  for (i in 1:length(termLevels)){
+    for (j in 1:length(termLevels)){
+      if (i < j){
+        if (i == 1 && j > i) {
+          tempPairmat[thisI, termIndicies[j-1] ] <- 1
+          tempNames[thisI] <- paste0(termLevels[i], " – ", termLevels[j])
+          thisI <- thisI + 1
+        } else if (j > i) {
+          tempPairmat[thisI, termIndicies[i-1] ] <- -1
+          tempPairmat[thisI, termIndicies[j-1] ] <- +1
+          tempNames[thisI] <- paste0(termLevels[i], " – ", termLevels[j])
+          thisI <- thisI + 1
+        }
+      }
+    }
+  }
+
+  # compute results
+  tempAnova   <- anova(fit, X = tempPairmat, adjust = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]]))
+  tempPredict <- predict(fit, newmods = tempPairmat)
+
+  # extract predictions
+  tempPredict <- .maExtractAndFormatPrediction(tempPredict)
+  tempPredict$comparison <- tempNames
+
+  # remove non-requested columns
+  tempPredict <- tempPredict[,c(
+    "comparison", "est",
+    if (options[["confidenceIntervals"]]) c("lCi", "uCi"),
+    if (options[["predictionIntervals"]]) c("lPi", "uPi")
+  )]
+
+
+  # add test results
+  tempPredict$stat <- tempAnova$zval
+  if (.maIsMetaregressionFtest(options))
+    tempPredict$df <- tempAnova$ddf
+
+  tempPredict$pval <- tempAnova$pval
+
+  contrastTable$setData(tempPredict)
+
+  return()
+}
 
 # check functions
 .maIsMetaregression               <- function(options) {
@@ -3148,6 +3268,18 @@
     .quitAnalysis(gettextf("The custom R code for extending the metafor call failed with the following message: %1$s", optionsCode))
 
   return(optionsCode)
+}
+.maGetPValueAdjustment                <- function(pValueAdjustment) {
+  return(switch(
+    pValueAdjustment,
+    "none"               = "none",
+    "bonferroni"         = "bonferroni",
+    "holm"               = "holm",
+    "hochberg"           = "hochberg",
+    "hommel"             = "hommel",
+    "benjaminiHochberg"  = "BH",
+    "benjaminiYekutieli" = "BY"
+  ))
 }
 
 # options names
@@ -3710,7 +3842,7 @@
 
   return(messages)
 }
-.maCoefficientsTableWarnings <- function(fit, parameter) {
+.maCoefficientsTableWarnings           <- function(fit, parameter) {
 
   messages <- NULL
 

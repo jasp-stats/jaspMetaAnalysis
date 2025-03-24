@@ -22,10 +22,10 @@ import JASP
 
 Section
 {
-	title:						qsTr("Estimated Marginal Means")
-	columns:					1
+	title:						qsTr("Estimated Marginal Means and Contrasts")
+	columns:					2
 	property string module:		"metaAnalysis"
-	info: qsTr("Options to compute estimated marginal means (EMMs) for the effect size and heterogeneity models, allowing examination of predicted values at specific levels of moderators.")
+	info: qsTr("Options to compute estimated marginal means (EMMs) and coefficient contrasts for the effect size and heterogeneity models, allowing examination of predicted values at specific levels of moderators and their differences.")
 
 	Group
 	{
@@ -57,35 +57,68 @@ Section
 		{
 			columns:	2
 
-			DoubleField
+			Group
 			{
-				name:			"estimatedMarginalMeansEffectSizeSdFactorCovariates"
-				label:			qsTr("SD factor covariates")
-				defaultValue: 	1
-				min:			0
-				enabled:		estimatedMarginalMeansEffectSizeSelectedVariables.columnsTypes.includes("scale")
-				Layout.preferredWidth: 350 * jaspTheme.uiScale
-				info: qsTr("Standard deviation factor for covariates when computing estimated marginal means; applies to scale variables.")
-			}
+				title:		qsTr("Estimated Marginal Means")
+				Layout.preferredWidth: 250 * jaspTheme.uiScale
 
-			CheckBox
-			{
-				name:		"estimatedMarginalMeansEffectSizeAddAdjustedEstimate"
-				label:		qsTr("Add adjusted estimate")
-				info: qsTr("Include the adjusted effect estimate, which accounts for the moderators in the meta-regression model. This provides the effect size adjusted for the influence of moderators, as opposed to the pooled effect which combines the estimates across all studies.")
-			}
-
-			CheckBox
-			{
-				name:				"estimatedMarginalMeansEffectSizeTestAgainst"
-				label:				qsTr("Test against")
-				childrenOnSameRow:	true
-				info: qsTr("Option to test the estimated marginal means against a specific value.")
+				CheckBox
+				{
+					name:		"estimatedMarginalMeansEffectSizeAddAdjustedEstimate"
+					label:		qsTr("Add adjusted estimate")
+					info: qsTr("Include the adjusted effect estimate, which accounts for the moderators in the meta-regression model. This provides the effect size adjusted for the influence of moderators, as opposed to the pooled effect which combines the estimates across all studies.")
+				}
 
 				DoubleField
 				{
-					name:			"estimatedMarginalMeansEffectSizeTestAgainstValue"
-					defaultValue:	0
+					name:			"estimatedMarginalMeansEffectSizeSdFactorCovariates"
+					label:			qsTr("SD factor covariates")
+					defaultValue: 	1
+					min:			0
+					enabled:		estimatedMarginalMeansEffectSizeSelectedVariables.columnsTypes.includes("scale")
+					info: qsTr("Standard deviation factor for covariates when computing estimated marginal means; applies to scale variables.")
+				}
+
+				CheckBox
+				{
+					name:				"estimatedMarginalMeansEffectSizeTestAgainst"
+					label:				qsTr("Test against")
+					childrenOnSameRow:	true
+					info: qsTr("Option to test the estimated marginal means against a specific value.")
+
+					DoubleField
+					{
+						name:			"estimatedMarginalMeansEffectSizeTestAgainstValue"
+						defaultValue:	0
+					}
+				}
+			}
+
+			Group
+			{
+				
+				enabled:	estimatedMarginalMeansEffectSizeSelectedVariables.columnsTypes.includes("nominal")
+
+				CheckBox
+				{
+					name:		"contrastsEffectSize"
+					label:		qsTr("Contrasts")
+				}
+
+				DropDown
+				{
+					name:	"contrastsEffectSizePValueAdjustment"
+					label:	qsTr("P-value adjustment")
+					values:
+					[
+						{ label: qsTr("None"),				value: "none"},
+						{ label: "Bonferroni",				value: "bonferroni"},
+						{ label: "Holm",					value: "holm"},
+						{ label: "Hochberg",				value: "hochberg"},
+						{ label: "Hommel",					value: "hommel"},
+						{ label: "Benjamini & Hochberg",	value: "benjaminiHochberg"},
+						{ label: "Benjamini & Yekutieli",	value: "benjaminiYekutieli"}
+					]
 				}
 			}
 		}
@@ -94,7 +127,7 @@ Section
 	Group
 	{
 		title:		qsTr("Heterogeneity")
-		enabled:	sectionModel.heterogeneityModelTerms.count > 0
+		enabled:	sectionModel.heterogeneityModelTermsCount > 0
 		visible:	module == "metaAnalysis"
 
 		VariablesForm
@@ -122,33 +155,39 @@ Section
 		{
 			columns:	2
 
-			DoubleField
+			Group
 			{
-				name:			"estimatedMarginalMeansHeterogeneitySdFactorCovariates"
-				label:			qsTr("SD factor covariates")
-				defaultValue: 	1
-				min:			0
-				enabled:		estimatedMarginalMeansHeterogeneitySelectedVariables.columnsTypes.includes("scale")
-				Layout.preferredWidth: 350 * jaspTheme.uiScale
-				info: qsTr("Standard deviation factor for covariates when computing estimated marginal means; applies to scale variables.")
-			}
+				title:		qsTr("Estimated Marginal Means")
+				Layout.preferredWidth: 250 * jaspTheme.uiScale
 
-			CheckBox
-			{
-				name:		"estimatedMarginalMeansHeterogeneityAddAdjustedEstimate"
-				label:		qsTr("Add adjusted estimate")
-				info: qsTr("Include the adjusted heterogeneity estimate, which accounts for the moderators in the heterogeneity meta-regression model. This provides the heterogeneity estimate adjusted for the influence of moderators, as opposed to the pooled heterogeneity estimate which combines the heterogeneity estimates across all studies.")
-			}
+				CheckBox
+				{
+					name:		"estimatedMarginalMeansHeterogeneityAddAdjustedEstimate"
+					label:		qsTr("Add adjusted estimate")
+					info: qsTr("Include the adjusted heterogeneity estimate, which accounts for the moderators in the heterogeneity meta-regression model. This provides the heterogeneity estimate adjusted for the influence of moderators, as opposed to the pooled heterogeneity estimate which combines the heterogeneity estimates across all studies.")
+				}
 
-			DropDown
-			{
-				name:			"estimatedMarginalMeansHeterogeneityTransformation"
-				label:			qsTr("Heterogeneity transformation")
-				info: qsTr("Transformation to apply to the heterogeneity estimate: tau (𝜏) or tau-squared (𝜏²).")
-				values:			[
-						{ label: qsTr("𝜏")		, value: "tau"	},
-						{ label: qsTr("𝜏²")	, value: "tau2"	}
-					]
+				DoubleField
+				{
+					name:			"estimatedMarginalMeansHeterogeneitySdFactorCovariates"
+					label:			qsTr("SD factor covariates")
+					defaultValue: 	1
+					min:			0
+					enabled:		estimatedMarginalMeansHeterogeneitySelectedVariables.columnsTypes.includes("scale")
+					Layout.preferredWidth: 350 * jaspTheme.uiScale
+					info: qsTr("Standard deviation factor for covariates when computing estimated marginal means; applies to scale variables.")
+				}
+
+				DropDown
+				{
+					name:			"estimatedMarginalMeansHeterogeneityTransformation"
+					label:			qsTr("Heterogeneity transformation")
+					info: qsTr("Transformation to apply to the heterogeneity estimate: tau (𝜏) or tau-squared (𝜏²).")
+					values:			[
+							{ label: qsTr("𝜏")		, value: "tau"	},
+							{ label: qsTr("𝜏²")	, value: "tau2"	}
+						]
+				}
 			}
 		}
 	}
