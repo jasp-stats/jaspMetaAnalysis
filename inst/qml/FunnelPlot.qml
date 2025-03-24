@@ -343,7 +343,7 @@ Form
 			enabled:		(funnelUnderH1.checked && estimated.checked) || (funnelPlotAsymmetryTests.checked && funnelPlotAsymmetryTestsMetaRegression.checked) || trimAndFill.checked || (failSafeNGeneral.checked && failSafeNGeneral.checked)
 			label:			qsTr("Method")
 			startValue:		"restrictedML"
-			info: qsTr("Select the heterogeneity estimation method for the funnel plot under the alternative hypothesis, meta-regression funnel plot asymmetry tests, trim and fill, and the fail-safe n general method.")
+			info: qsTr("Select the heterogeneity estimation method for the funnel plot under the alternative hypothesis, meta-regression funnel plot asymmetry tests, trim and fill, and the fail-safe N general method.")
 			values:			[
 				{ label: qsTr("Equal Effects")			, value: "equalEffects"		},
 				{ label: qsTr("Fixed Effects")			, value: "fixedEffects"		},
@@ -384,6 +384,7 @@ Form
 
 		CheckBox
 		{
+			Layout.preferredWidth: 150 * jaspTheme.uiScale
 			name:		"funnelPlotAsymmetryTests"
 			id:			funnelPlotAsymmetryTests
 			label:		qsTr("Asymmetry tests")
@@ -402,16 +403,16 @@ Form
 			CheckBox
 			{
 				name:		"funnelPlotAsymmetryTestsWeightedRegression"
-				label:		qsTr("Weighted regression")
-				info: qsTr("Include weighted regression tests for funnel plot asymmetry.")
+				label:		qsTr("Weighted regression (Egger's test)")
+				info: qsTr("Include weighted regression tests (also known as Egger's test) for funnel plot asymmetry.")
 
 			}
 
 			CheckBox
 			{
 				name:		"funnelPlotAsymmetryTestsRankCorrelation"
-				label:		qsTr("Rank correlation")
-				info: qsTr("Include rank correlation tests for funnel plot asymmetry.")
+				label:		qsTr("Rank correlation (Begg's test)")
+				info: qsTr("Include rank correlation tests (also known as Begg's test) for funnel plot asymmetry.")
 			}
 		}
 
