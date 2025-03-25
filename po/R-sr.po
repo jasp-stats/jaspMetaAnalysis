@@ -1,0 +1,1413 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: jaspMetaAnalysis 0.19.2\n"
+"POT-Creation-Date: 2024-12-07 02:52\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: sr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+msgid "The study labels contain invalid characters. Please, remove them before running the analysis."
+msgstr ""
+
+msgid "Prior Plots"
+msgstr ""
+
+msgid "Effect"
+msgstr ""
+
+msgid "Heterogeneity"
+msgstr ""
+
+msgid "Null"
+msgstr ""
+
+msgid "Alternative"
+msgstr ""
+
+msgid "Model Preview"
+msgstr ""
+
+msgid "Please specify a prior distribution for each parameter in the Models specification section (either null or alternative)."
+msgstr ""
+
+msgid "Model Summary"
+msgstr ""
+
+msgid "Models"
+msgstr ""
+
+msgid "P(M)"
+msgstr ""
+
+msgid "The analysis will estimate multiple meta-analytic models using MCMC and might require a prolonged time to complete."
+msgstr ""
+
+msgid "Model Specification Preview"
+msgstr ""
+
+msgid "Prior Distribution"
+msgstr ""
+
+msgid "The prior lower bound is not smaller than the upper bound."
+msgstr ""
+
+msgid "Your prior contains negative values."
+msgstr ""
+
+msgid "Your prior contains positive values."
+msgstr ""
+
+msgid "No positive numbers found in %s"
+msgstr ""
+
+msgid "No negative numbers found in %s"
+msgstr ""
+
+msgid "The 95%% CI Lower Bound must be smaller than the Upper Bound."
+msgstr ""
+
+msgid "You cannot set all the prior model probabilties to zero."
+msgstr ""
+
+msgid "The model could not be fit. Please check the following: Do you have at least n=2 studies? If the prior is truncated, is it consistent with the data (when most effect sizes are negative, the analysis may not work when the prior is constrained to be postive)?"
+msgstr ""
+
+msgid "Posterior Estimates per Model"
+msgstr ""
+
+msgid "BF%1$s%2$s"
+msgstr ""
+
+msgid "Log(BF%1$s%2$s)"
+msgstr ""
+
+msgid "Mean"
+msgstr ""
+
+msgid "SD"
+msgstr ""
+
+msgid "Lower"
+msgstr ""
+
+msgid "95%% Credible Interval"
+msgstr ""
+
+msgid "Upper"
+msgstr ""
+
+msgid "Averaged"
+msgstr ""
+
+msgid "Fixed effects"
+msgstr ""
+
+msgid "Random effects"
+msgstr ""
+
+msgid "Ordered effects"
+msgstr ""
+
+msgid "%1$s and %2$s are the group-level effect size and standard deviation, respectively."
+msgstr ""
+
+msgid "%s is the group-level effect size."
+msgstr ""
+
+msgid "Bayes factor of the random effects H%1$s over the fixed effects H%1$s."
+msgstr ""
+
+msgid "Posterior estimates are based on the models that assume an effect to be present. The Bayes factor is based on all four models: fixed effects H%2$s & random effects H%2$s over the fixed effects H%1$s & random effects H%1$s."
+msgstr ""
+
+msgid "Model averaged posterior estimates for %3$s are not yet available, but will be added in the future. The Bayes factor is based on all four models: random effects H%1$s & H%2$s over the fixed effects H%1$s & H%2$s."
+msgstr ""
+
+msgid "Bayes factor of the (unconstrained/constrained) random effects H%1$s over the fixed effects H%1$s."
+msgstr ""
+
+msgid "Bayes factor of the fixed effects H%1$s over the random effects H%1$s."
+msgstr ""
+
+msgid "Model averaged posterior estimates are based on the models that assume an effect to be present. The Bayes factor is based on all four models: fixed effects H%1$s & random effects H%1$s over the fixed effects H%2$s & random effects H%2$s."
+msgstr ""
+
+msgid "Model averaged posterior estimates for %3$s are not yet available, but will be added in the future. The Bayes factor is based on all four models: fixed effects H%1$s & H%2$s over the random effects H%1$s & H%2$s."
+msgstr ""
+
+msgid "Bayes factor of the fixed effects H%1$s over the (unconstrained/constrained) random effects H%1$s."
+msgstr ""
+
+msgid "Bayes factor of the ordered effects H%1$s over the fixed effects H%2$s. The Bayes factor for the ordered effects H%1$s versus the unconstrained (random) effects H%1$s model is %3$.3f."
+msgstr ""
+
+msgid "Bayes factor of the fixed effects H%2$s over the ordered effects H%1$s. The Bayes factor for the unconstrained (random) effects H%1$s versus the ordered effects H%1$s model is %3$.3f."
+msgstr ""
+
+msgid "Model Probabilities"
+msgstr ""
+
+msgid "Prior"
+msgstr ""
+
+msgid "Posterior"
+msgstr ""
+
+msgid "Fixed H%s"
+msgstr ""
+
+msgid "Random H%s"
+msgstr ""
+
+msgid "Ordered H%s"
+msgstr ""
+
+msgid "Effect Sizes per Study"
+msgstr ""
+
+msgid "Observed"
+msgstr ""
+
+msgid "Estimated"
+msgstr ""
+
+msgid "Study"
+msgstr ""
+
+msgid "Posterior mean and 95%% credible interval estimates from the random effects model."
+msgstr ""
+
+msgid "Posterior mean and 95%% credible interval estimates from the constrained random effects model."
+msgstr ""
+
+msgid "Effect Size"
+msgstr ""
+
+msgid "Effect size"
+msgstr ""
+
+msgid "Density"
+msgstr ""
+
+msgid "Prior and Posteriors"
+msgstr ""
+
+msgid "Fixed H"
+msgstr ""
+
+msgid "Random H"
+msgstr ""
+
+msgid "Averaged H"
+msgstr ""
+
+msgid "Prior H"
+msgstr ""
+
+msgid "Ordered H"
+msgstr ""
+
+msgid "Forest Plot"
+msgstr ""
+
+msgid "Observed study effects"
+msgstr ""
+
+msgid "Estimated study effects"
+msgstr ""
+
+msgid "Observed and estimated study effects"
+msgstr ""
+
+msgid "Cumulative forest plot"
+msgstr ""
+
+msgid "Overall effect size"
+msgstr ""
+
+msgid "Sequential Analysis"
+msgstr ""
+
+msgid "Bayes factors effect size"
+msgstr ""
+
+msgid "Bayes factors heterogeneity"
+msgstr ""
+
+msgid "Posterior model probabilities"
+msgstr ""
+
+msgid "Evidence for random effects"
+msgstr ""
+
+msgid "Evidence for fixed effects"
+msgstr ""
+
+msgid "random"
+msgstr ""
+
+msgid "fixed"
+msgstr ""
+
+msgid "Anecdotal"
+msgstr ""
+
+msgid "Moderate"
+msgstr ""
+
+msgid "Strong"
+msgstr ""
+
+msgid "Very Strong"
+msgstr ""
+
+msgid "Extreme"
+msgstr ""
+
+msgid "Evidence for %s:"
+msgstr ""
+
+msgid "Plotting failed: The Bayes factors contain infinity."
+msgstr ""
+
+msgid "Studies"
+msgstr ""
+
+msgid "Posterior model \n probability"
+msgstr ""
+
+msgid "Prior and posterior plot"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Running means plot"
+msgstr ""
+
+msgid "Iteration"
+msgstr ""
+
+msgid "Running mean"
+msgstr ""
+
+msgid "Autocorrelations plot"
+msgstr ""
+
+msgid "Lag"
+msgstr ""
+
+msgid "Autocorrelation"
+msgstr ""
+
+msgid "Gelman-Rubin plot"
+msgstr ""
+
+msgid "Last iteration in chain"
+msgstr ""
+
+msgid "Shrink factor"
+msgstr ""
+
+msgid "All standard errors must be positive."
+msgstr ""
+
+msgid "The loaded distance matrix for '%1$s' does not match the dataset. The following levels are missing: %2$s."
+msgstr ""
+
+msgid "The loaded correlation matrix for '%1$s' does not match the dataset. The following levels are missing: %2$s."
+msgstr ""
+
+msgid "All observations were removed as influential."
+msgstr ""
+
+msgid "Residual Heterogeneity Test"
+msgstr ""
+
+msgid "Qₑ"
+msgstr ""
+
+msgid "df"
+msgstr ""
+
+msgid "p"
+msgstr ""
+
+msgid "Pooled Effect Size Test"
+msgstr ""
+
+msgid "Estimate"
+msgstr ""
+
+msgid "Standard Error"
+msgstr ""
+
+msgid "t"
+msgstr ""
+
+msgid "z"
+msgstr ""
+
+msgid "Omnibus Moderation Test"
+msgstr ""
+
+msgid "Parameter"
+msgstr ""
+
+msgid "F"
+msgstr ""
+
+msgid "Qₘ"
+msgstr ""
+
+msgid "df₁"
+msgstr ""
+
+msgid "df₂"
+msgstr ""
+
+msgid "p (permutation)"
+msgstr ""
+
+msgid "Meta-Analytic Estimates"
+msgstr ""
+
+msgid "%s%% CI"
+msgstr ""
+
+msgid "%s%% PI"
+msgstr ""
+
+msgid "Heterogeneity Level"
+msgstr ""
+
+msgid "Fit Measures"
+msgstr ""
+
+msgid "Observations"
+msgstr ""
+
+msgid "Log Lik."
+msgstr ""
+
+msgid "Deviance"
+msgstr ""
+
+msgid "AIC"
+msgstr ""
+
+msgid "BIC"
+msgstr ""
+
+msgid "AICc"
+msgstr ""
+
+msgid "R²"
+msgstr ""
+
+msgid "Effect Size Meta-Regression Terms Tests"
+msgstr ""
+
+msgid "Heterogeneity Meta-Regression Terms Tests"
+msgstr ""
+
+msgid "Effect Size Meta-Regression Coefficients"
+msgstr ""
+
+msgid "Heterogeneity Meta-Regression Coefficients"
+msgstr ""
+
+msgid "Effect Size Meta-Regression Correlation Matrix"
+msgstr ""
+
+msgid "Heterogeneity Meta-Regression Correlation Matrix"
+msgstr ""
+
+msgid "Estimated Marginal Means: Effect Size"
+msgstr ""
+
+msgid "Estimated Marginal Means: Heterogeneity"
+msgstr ""
+
+msgid "Variable"
+msgstr ""
+
+msgid "Level"
+msgstr ""
+
+msgid "Bubble Plots"
+msgstr ""
+
+msgid "Bubble Plot"
+msgstr ""
+
+msgid "%1$s (%2$s)"
+msgstr ""
+
+msgid "Metafor R Code"
+msgstr ""
+
+msgid "Effect Size Meta-Regression Variance Inflation"
+msgstr ""
+
+msgid "Heterogeneity Meta-Regression Variance Inflation"
+msgstr ""
+
+msgid "Parameters"
+msgstr ""
+
+msgid "VIF"
+msgstr ""
+
+msgid "SIF"
+msgstr ""
+
+msgid "Casewise Diagnostics Table"
+msgstr ""
+
+msgid "Casewise diagnostics are not available for models that contain meta-regression on heterogeneity."
+msgstr ""
+
+msgid "No influential cases found."
+msgstr ""
+
+msgid "Label"
+msgstr ""
+
+msgid "Predictor"
+msgstr ""
+
+msgid "Standardized Residual"
+msgstr ""
+
+msgid "DFFITS"
+msgstr ""
+
+msgid "Cook's Distance"
+msgstr ""
+
+msgid "Covariance ratio"
+msgstr ""
+
+msgid "𝜏"
+msgstr ""
+
+msgid "Leave One Out"
+msgstr ""
+
+msgid "𝜏²"
+msgstr ""
+
+msgid "Hat"
+msgstr ""
+
+msgid "Weight"
+msgstr ""
+
+msgid "Difference in coefficients"
+msgstr ""
+
+msgid "Influential"
+msgstr ""
+
+msgid "Diagnostics are based on the non-clustered model."
+msgstr ""
+
+msgid "Column name %s already exists in the dataset."
+msgstr ""
+
+msgid "Profile Likelihood Plots"
+msgstr ""
+
+msgid "Profile Likelihood Plot"
+msgstr ""
+
+msgid "Profile likelihood is not available for models that contain meta-regression on heterogeneity."
+msgstr ""
+
+msgid "Baujat Plot"
+msgstr ""
+
+msgid "Baujat plot is not available for models that contain meta-regression on heterogeneity."
+msgstr ""
+
+msgid "Baujat plot is not available for models with clustering."
+msgstr ""
+
+msgid "Squared Pearson Residual"
+msgstr ""
+
+msgid "Influence on Fitted Value"
+msgstr ""
+
+msgid "Residual Funnel Plot"
+msgstr ""
+
+msgid "Meta-Regression Summary"
+msgstr ""
+
+msgid "Estimated Marginal Means Summary"
+msgstr ""
+
+msgid "Variance Inflation Summary"
+msgstr ""
+
+msgid "Indexes of effect size moderation coefficients were specified in an incorrect format. Try '(1, 2)' to test the first two coefficients."
+msgstr ""
+
+msgid "Indexes of heterogeneity moderation coefficients were specified in an incorrect format. Try '(1, 2)' to test the first two coefficients."
+msgstr ""
+
+msgid "The selected coefficients must be an integer vector."
+msgstr ""
+
+msgid "The selected coefficients must be between 1 and %1$i (i.e., the number of regression parameters)."
+msgstr ""
+
+msgid "Effect Size (coef: %1$s)"
+msgstr ""
+
+msgid "Effect size coefficients %1$s correspond to %2$s."
+msgstr ""
+
+msgid "Heterogeneity (coef: %1$s)"
+msgstr ""
+
+msgid "Heterogeneity coefficients %1$s correspond to %2$s."
+msgstr ""
+
+msgid "Adjusted Estimate"
+msgstr ""
+
+msgid "Mean - %1$sSD"
+msgstr ""
+
+msgid "Mean + %1$sSD"
+msgstr ""
+
+msgid "Distance Matrix"
+msgstr ""
+
+msgid "Correlation Matrix"
+msgstr ""
+
+msgid "Residual Value"
+msgstr ""
+
+msgid "Profile Likelihood"
+msgstr ""
+
+msgid "Clustering is not supported when specifying a heterogeneity meta-regression model."
+msgstr ""
+
+msgid "The fixed value for tau2 must be a positive number."
+msgstr ""
+
+msgid "The custom R code for extending the metafor call failed with the following message: %1$s"
+msgstr ""
+
+msgid "Fisher's z to r"
+msgstr ""
+
+msgid "Exponential"
+msgstr ""
+
+msgid "Log odds to proportions"
+msgstr ""
+
+msgid "Log odds to SMD (normal)"
+msgstr ""
+
+msgid "Log odds to SMD (logistic)"
+msgstr ""
+
+msgid "SMD to log odds (normal)"
+msgstr ""
+
+msgid "SMD to log odds (logistic)"
+msgstr ""
+
+msgid "Hakstian & Whalen inverse α"
+msgstr ""
+
+msgid "Bonett inverse α"
+msgstr ""
+
+msgid "Z to R²"
+msgstr ""
+
+msgid "SMD to Cohen's U₁"
+msgstr ""
+
+msgid "SMD to Cohen's U₂"
+msgstr ""
+
+msgid "SMD to Cohen's U₃"
+msgstr ""
+
+msgid "SMD to CLES, Pr(supperiority)"
+msgstr ""
+
+msgid "Moderation (Effect Size): %1$s"
+msgstr ""
+
+msgid "Moderation (Heterogeneity): %1$s"
+msgstr ""
+
+msgid "Moderation: %1$s"
+msgstr ""
+
+msgid "Heterogeneity:"
+msgstr ""
+
+msgid "Fixed effect tested using z-distribution."
+msgstr ""
+
+msgid "Fixed effect tested using t-distribution."
+msgstr ""
+
+msgid "Fixed effect tested using Knapp and Hartung adjustment."
+msgstr ""
+
+msgid "The heterogeneity model for 𝜏² is specified on the log scale."
+msgstr ""
+
+msgid "The heterogeneity model for 𝜏² is specified on the identity scale."
+msgstr ""
+
+msgid "%1$i clusters with %2$i estimates each."
+msgstr ""
+
+msgid "%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates."
+msgstr ""
+
+msgid "The pooled effect size is transformed using %1$s transformation."
+msgstr ""
+
+msgid "The pooled effect size corresponds to the weighted average effect across studies."
+msgstr ""
+
+msgid "The pooled heterogeneity estimate corresponds to the heterogeneity at the average of predictor values."
+msgstr ""
+
+msgid "The I² and H² statistics are not available for heterogeneity models."
+msgstr ""
+
+msgid "%1$i observations were ommited due to missing values."
+msgstr ""
+
+msgid "%1$i influential observations were detected and removed."
+msgstr ""
+
+msgid "The Model Structure %1$s was not completely specified and was skipped."
+msgstr ""
+
+msgid "Prediction interval for the pooled effect size is not available for models with multiple heterogeneity estimates."
+msgstr ""
+
+msgid "Each marginal mean estimate is averaged across the levels of the remaining predictors."
+msgstr ""
+
+msgid "The estimates and intervals are transformed using %1$s transformation."
+msgstr ""
+
+msgid "The estimates and intervals correspond to %1$s."
+msgstr ""
+
+msgid "Permutation p-value is based on %1$s permutations."
+msgstr ""
+
+msgid "The model estimation failed with the following message: %1$s. Please, consider simplifying the model."
+msgstr ""
+
+msgid "Error reading the distance matrix file: %1$s"
+msgstr ""
+
+msgid "The distance matrix must be square. The number of rows (%1$i) does not match the number of columns (%2$i)."
+msgstr ""
+
+msgid "Error reading the correlation matrix file: %1$s"
+msgstr ""
+
+msgid "Random Effects / Model Stucture Summary"
+msgstr ""
+
+msgid "Simple / Nested Summary"
+msgstr ""
+
+msgid "Estimates"
+msgstr ""
+
+msgid "σ²"
+msgstr ""
+
+msgid "σ"
+msgstr ""
+
+msgid "Levels"
+msgstr ""
+
+msgid "Fixed"
+msgstr ""
+
+msgid "Inclusion Test"
+msgstr ""
+
+msgid "Removed Component"
+msgstr ""
+
+msgid "LRT"
+msgstr ""
+
+msgid "Likelihood Ratio Test (LRT) and p-value are based on a comparison with the complete model."
+msgstr ""
+
+msgid "Random Slopes Summary"
+msgstr ""
+
+msgid "Structured"
+msgstr ""
+
+msgid "Summary"
+msgstr ""
+
+msgid "Autoregressive"
+msgstr ""
+
+msgid "Spatial"
+msgstr ""
+
+msgid "Known Correlation Summary"
+msgstr ""
+
+msgid "Testing Inclusion of Random Effects / Model Structure"
+msgstr ""
+
+msgid "Random Slopes"
+msgstr ""
+
+msgid "Compound Symmetry"
+msgstr ""
+
+msgid "Heteroscedastic Compound Symmetry"
+msgstr ""
+
+msgid "Unstructured"
+msgstr ""
+
+msgid "Identity"
+msgstr ""
+
+msgid "Diagonal"
+msgstr ""
+
+msgid "AR(1)"
+msgstr ""
+
+msgid "Heteroskedastic AR(1)"
+msgstr ""
+
+msgid "Continuous-Time AR"
+msgstr ""
+
+msgid "Gaussian"
+msgstr ""
+
+msgid "Linear"
+msgstr ""
+
+msgid "Rational Quadratic"
+msgstr ""
+
+msgid "Spherical"
+msgstr ""
+
+msgid "Sqrt. Estimate"
+msgstr ""
+
+msgid "Levels:"
+msgstr ""
+
+msgid "Component:"
+msgstr ""
+
+msgid "Estimates 𝜏²"
+msgstr ""
+
+msgid "Estimates ρ"
+msgstr ""
+
+msgid "%s Summary"
+msgstr ""
+
+msgid "metamisc package failed with the following error: '%s'"
+msgstr ""
+
+msgid "Based on %i studies."
+msgstr ""
+
+msgid "The model was estimated using %1$s method with %2$s link function."
+msgstr ""
+
+msgid "The model was estimated using MCMC with %1$s link function."
+msgstr ""
+
+msgid "Forest plot"
+msgstr ""
+
+msgid "Observed-Expected Ratio"
+msgstr ""
+
+msgid "Concordance Statistic"
+msgstr ""
+
+msgid "Funnel Plot Asymmetry Tests"
+msgstr ""
+
+msgid "Method"
+msgstr ""
+
+msgid "t-statistic"
+msgstr ""
+
+msgid "The %1$s test failed with the following error: %2$s"
+msgstr ""
+
+msgid "Funnel Plot Asymmetry Plots"
+msgstr ""
+
+msgid "Egger (unweighted)"
+msgstr ""
+
+msgid "Egger (multiplicative overdispersion)"
+msgstr ""
+
+msgid "Macaskill"
+msgstr ""
+
+msgid "Macaskill (pooled)"
+msgstr ""
+
+msgid "Peters"
+msgstr ""
+
+msgid "Debray"
+msgstr ""
+
+msgid "Standard error"
+msgstr ""
+
+msgid "Sample size"
+msgstr ""
+
+msgid "Total events"
+msgstr ""
+
+msgid "Cannot compute outcomes. Chech that all of the required information is specified via the appropriate arguments (i.e. an Effect Size and either Standard Error, Sampling Variance, or 95%% Confidence Interval)."
+msgstr ""
+
+msgid "Step"
+msgstr ""
+
+msgid "Computed"
+msgstr ""
+
+msgid "Total Computed"
+msgstr ""
+
+msgid "Effect sizes were successfully computed for each data entry."
+msgstr ""
+
+msgid "Effect sizes were successfully computed for %1$i out of %2$i data entries."
+msgstr ""
+
+msgid "Error in Step %1$i:"
+msgstr ""
+
+msgid "Estimated Marginal Means"
+msgstr ""
+
+msgid "Model Information"
+msgstr ""
+
+msgid "Pooled Estimate"
+msgstr ""
+
+msgid "Missing Data Summary"
+msgstr ""
+
+msgid "The dataset contains missing values: %1$i missing values were removed from the analysis."
+msgstr ""
+
+msgid "Funnel Plot"
+msgstr ""
+
+msgid "Funnel plot prediction interval was specified in an incorrect format. Try '(0.90, 0.95, 0.99)'."
+msgstr ""
+
+msgid "Funnel plot prediction intervals must be between 0 and 1."
+msgstr ""
+
+msgid "Funnel plot prediction intervals must be specified."
+msgstr ""
+
+msgid "Power enhancement breaks were specified in an incorrect format. Try '(0.30, 0.50, 0.80)'."
+msgstr ""
+
+msgid "Power enhancement breaks must be between 0.05 and 1."
+msgstr ""
+
+msgid "Power"
+msgstr ""
+
+msgid "H₁ Funnel Parameter Estimates"
+msgstr ""
+
+msgid "μ"
+msgstr ""
+
+msgid "The funnel plot parameter estimation failed with the following error:"
+msgstr ""
+
+msgid "Meta-Regression Test for Funnel Plot Asymmetry"
+msgstr ""
+
+msgid "Asymmetry Test"
+msgstr ""
+
+msgid "Limit Estimate"
+msgstr ""
+
+msgid "Lower 95%% CI"
+msgstr ""
+
+msgid "Upper 95%% CI"
+msgstr ""
+
+msgid "Weighted Regression Test for Funnel Plot Asymmetry"
+msgstr ""
+
+msgid "Rank Correlation Test for Funnel Plot Asymmetry"
+msgstr ""
+
+msgid "The funnel plot asymmetry test failed with the following error:"
+msgstr ""
+
+msgid "The funnel plot asymmetry test at level %1$s failed with the following error:"
+msgstr ""
+
+msgid "The meta-analytic model did not converge. Try modifying the 'Method' option for the 'Funnel under H₁' settings."
+msgstr ""
+
+msgid "The model should contain at least one predictor or an intercept."
+msgstr ""
+
+msgid "Intercept"
+msgstr ""
+
+msgid "Coefficients"
+msgstr ""
+
+msgid "At least one predictor needs to be specified."
+msgstr ""
+
+msgid "Warning:"
+msgstr ""
+
+msgid "%1$s observations were ommited due to missing values."
+msgstr ""
+
+msgid "Posterior distribution"
+msgstr ""
+
+msgid "Sampling diagnostics"
+msgstr ""
+
+msgid "Autocorrelation (%1$s)"
+msgstr ""
+
+msgid "Inference possibly unreliable -- MCMC chains might not have converged; The largest R-hat is %.3f > 1.01. To lower R-hat please increase 'Iterations', or 'Adapt delta' in the Options section."
+msgstr ""
+
+msgid "Low estimation accuracy -- The smallest Effective Sample Size (ESS) is %.2f < %1.0f. To increase accuracy please increase 'Iterations', or 'Adapt delta' in the Options section."
+msgstr ""
+
+msgid "The priors for publication bias were set incorrectly."
+msgstr ""
+
+msgid "Publication Bias"
+msgstr ""
+
+msgid "Baseline"
+msgstr ""
+
+msgid "Median"
+msgstr ""
+
+msgid "MCMC error"
+msgstr ""
+
+msgid "MCMC error/SD"
+msgstr ""
+
+msgid "ESS"
+msgstr ""
+
+msgid "R-hat"
+msgstr ""
+
+msgid "<em>p</em>-values interval"
+msgstr ""
+
+msgid "Effect size (%s)"
+msgstr ""
+
+msgid "Heterogeneity (%s)"
+msgstr ""
+
+msgid "Publication bias"
+msgstr ""
+
+msgid "log(OR)"
+msgstr ""
+
+msgid "OR"
+msgstr ""
+
+msgid "The specified path does not lead to an existing file."
+msgstr ""
+
+msgid "An error occurred while reading the model file: %1$s"
+msgstr ""
+
+msgid "The loaded object is not a RoBMA model."
+msgstr ""
+
+msgid "Conditional Estimates"
+msgstr ""
+
+msgid "Inclusion BF"
+msgstr ""
+
+msgid "Exclusion BF"
+msgstr ""
+
+msgid "log(Inclusion BF)"
+msgstr ""
+
+msgid "P(M|data)"
+msgstr ""
+
+msgid "Model Averaged Estimates"
+msgstr ""
+
+msgid "Model Averaged Weights (%s)"
+msgstr ""
+
+msgid "Model Averaged PET-PEESE Estimates"
+msgstr ""
+
+msgid "Conditional Weights (%s)"
+msgstr ""
+
+msgid "Conditional PET-PEESE Estimates"
+msgstr ""
+
+msgid "Models Overview"
+msgstr ""
+
+msgid "BF%s"
+msgstr ""
+
+msgid "log(BF%s)"
+msgstr ""
+
+msgid "log(MargLik)"
+msgstr ""
+
+msgid "Individual Models Summary"
+msgstr ""
+
+msgid "Model #"
+msgstr ""
+
+msgid "Priors"
+msgstr ""
+
+msgid "Information"
+msgstr ""
+
+msgid "Model Estimates"
+msgstr ""
+
+msgid "Model %i"
+msgstr ""
+
+msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
+msgstr ""
+
+msgid "Estimated Weights (%s)"
+msgstr ""
+
+msgid "PET-PEESE Estimates"
+msgstr ""
+
+msgid "%1$s Forest Plot"
+msgstr ""
+
+msgid "Posterior Distribution Plots"
+msgstr ""
+
+msgid "Conditional"
+msgstr ""
+
+msgid "Model Averaged"
+msgstr ""
+
+msgid "Effect Size Estimate"
+msgstr ""
+
+msgid "Heterogeneity Estimate"
+msgstr ""
+
+msgid "Weight Function Estimate"
+msgstr ""
+
+msgid "PET-PEESE Regression Estimate"
+msgstr ""
+
+msgid "Posterior Model Estimates Plots"
+msgstr ""
+
+msgid "Effect Size Estimates"
+msgstr ""
+
+msgid "Heterogeneity Estimates"
+msgstr ""
+
+msgid "Diagnostics"
+msgstr ""
+
+msgid "Models Diagnostics Overview"
+msgstr ""
+
+msgid "max(MCMC error)"
+msgstr ""
+
+msgid "max(MCMC error/SD)"
+msgstr ""
+
+msgid "min(ESS)"
+msgstr ""
+
+msgid "max(R-hat)"
+msgstr ""
+
+msgid "MCMC Diagnostics plots are created once both the plotted parameter ('Plot') and the plot type ('Type') options are selected."
+msgstr ""
+
+msgid "Weights"
+msgstr ""
+
+msgid "PET"
+msgstr ""
+
+msgid "PEESE"
+msgstr ""
+
+msgid "Trace plots"
+msgstr ""
+
+msgid "Average autocorrelations"
+msgstr ""
+
+msgid "Posterior samples densities"
+msgstr ""
+
+msgid "Model %i does not contain any of the selected parameters."
+msgstr ""
+
+msgid "All models failed to converge under the MCMC convergence criteria. Please update the MCMC settings."
+msgstr ""
+
+msgid "All models failed to converge. Please update the MCMC settings."
+msgstr ""
+
+msgid "Cannot compute results. All entries of the p-value variable (%s) must be between 0 and 1."
+msgstr ""
+
+msgid "Cannot compute results. All entries of the correlation coefficient variable (%s) must be between -1 and 1."
+msgstr ""
+
+msgid "Cannot compute results. All entries of the sample size variable (%s) must be greater than four."
+msgstr ""
+
+msgid "The p-value cutoffs were set incorectly."
+msgstr ""
+
+msgid "At least one p-value cutoff needs to be set."
+msgstr ""
+
+msgid "All p-value cutoffs needs to be between 0 and 1."
+msgstr ""
+
+msgid "95%% Confidence Interval"
+msgstr ""
+
+msgid "Note:"
+msgstr ""
+
+msgid "%1$s is on %2$s scale."
+msgstr ""
+
+msgid "<em>p</em>-values interval(one-sided)"
+msgstr ""
+
+msgid "Model Tests"
+msgstr ""
+
+msgid "Test of Heterogeneity"
+msgstr ""
+
+msgid "Error:"
+msgstr ""
+
+msgid "Test of Publication Bias"
+msgstr ""
+
+msgid "ChiSq"
+msgstr ""
+
+msgid "Assuming homogeneity"
+msgstr ""
+
+msgid "Assuming heterogeneity"
+msgstr ""
+
+msgid "Fixed Effects Estimates"
+msgstr ""
+
+msgid "Mean Estimates (%s)"
+msgstr ""
+
+msgid "Estimated Weights"
+msgstr ""
+
+msgid "Random Effects Estimates"
+msgstr ""
+
+msgid "Heterogeneity Estimates(%s)"
+msgstr ""
+
+msgid "p-value Frequency"
+msgstr ""
+
+msgid "Frequency"
+msgstr ""
+
+msgid "There were no p-value cutoffs after their automatic reduction. The displayed frequencies correspond to the non-reduced p-value cutoffs."
+msgstr ""
+
+msgid "Weight Function (%s)"
+msgstr ""
+
+msgid "The figure could not be created since one of the estimates is not a number."
+msgstr ""
+
+msgid "P-value (One-sided)"
+msgstr ""
+
+msgid "Publication Probability"
+msgstr ""
+
+msgid "Mean Model Estimates (%s)"
+msgstr ""
+
+msgid "Fixed effects (adjusted)"
+msgstr ""
+
+msgid "Random effects (adjusted)"
+msgstr ""
+
+msgid "Fixed effects model:"
+msgstr ""
+
+msgid "Random effects model:"
+msgstr ""
+
+msgid "%sThe optimizer failed to find a solution. Consider re-specifying the model or the p-value cutoffs."
+msgstr ""
+
+msgid "%sThe automatic cutoffs selection did not find viable p-value cutoffs. Please, specify them manually."
+msgstr ""
+
+msgid "At least one of the p-value intervals contains no effect sizes, leading to estimation problems. Consider re-specifying the cutoffs."
+msgstr ""
+
+msgid "At least one of the p-value intervals contains three or fewer effect sizes, which may lead to estimation problems. Consider re-specifying the cutoffs."
+msgstr ""
+
+msgid "The unadjusted estimate is negative. The selection model default specification expects that the expected direction of the effect size is positive. Please, check that you specified the effect sizes correctly or change the 'Expected effect size direction' option in the 'Model' tab."
+msgstr ""
+
+msgid "The analysis requires both 'Effect Size' and 'Effect Size Standard Error' to be specified."
+msgstr ""
+
+msgid "Only the following one-sided p-value cutoffs were used: %s."
+msgstr ""
+
+msgid "Error: There were not enough adequately powered studies (k = %1$i)"
+msgstr ""
+
+msgid "Note: There were %1$i adequately powered studies"
+msgstr ""
+
+msgid "Test of Effect"
+msgstr ""
+
+msgid "Regression Estimates"
+msgstr ""
+
+msgid "Multiplicative Heterogeneity Estimates"
+msgstr ""
+
+msgid "Estimated %1$s Regression"
+msgstr ""
+
+msgid "Cohen's d"
+msgstr ""
+
+msgid "Fisher's z"
+msgstr ""
+
+msgid "WAAP was not estimated: There were only %1$i adequately powered studies (power > 80%%)."
+msgstr ""
+
+msgid "There were %1$i adequately powered studies (power > 80%%)."
+msgstr ""
+
+msgid "The Hamiltonian Monte Carlo procedure might be invalid -- There was %i divergent transition after warmup. This can be solved by carefully increasing 'Adapt delta' until there are no divergent transitions."
+msgid_plural "The Hamiltonian Monte Carlo procedure might be invalid -- There were %i divergent transitions after warmup. This can be solved by carefully increasing 'Adapt delta' until there are no divergent transitions."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Bayesian Fraction of Missing Information (BFMI) that was too low in %i chain indicating that the posterior distribution was not explored efficiently. Try increasing number of 'Burnin' and 'Iterations'."
+msgid_plural "Bayesian Fraction of Missing Information (BFMI) that was too low in %i chains indicating that the posterior distribution was not explored efficiently. Try increasing number of 'Burnin' and 'Iterations'."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "The Hamiltonian Monte Carlo procedure might be inefficient -- %i transition exceeded the maximum tree depth. This can be solved by carefully increasing 'Maximum tree depth'."
+msgid_plural "The Hamiltonian Monte Carlo procedure might be inefficient -- %i transitions exceeded the maximum tree depth. This can be solved by carefully increasing 'Maximum tree depth'."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "%i observation was removed due to missing values."
+msgid_plural "%i observations were removed due to missing values."
+msgstr[0] ""
+msgstr[1] ""
