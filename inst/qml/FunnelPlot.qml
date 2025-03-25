@@ -289,6 +289,7 @@ Form
 			label:			qsTr("Color")
 			addEmptyValue:	true
 			allowedColumns:	["nominal"]
+			fieldWidth:		125 * preferencesModel.uiScale
 			info: qsTr("Map colors of the effect size estimates in the funnel plot based on the selected variable.")
 		}
 
@@ -299,6 +300,7 @@ Form
 			label:			qsTr("Shape")
 			addEmptyValue:	true
 			allowedColumns:	["nominal"]
+			fieldWidth:		125 * preferencesModel.uiScale
 			info: qsTr("Map shapes of the effect size estimates in the funnel plot based on the selected variable.")
 
 		}
