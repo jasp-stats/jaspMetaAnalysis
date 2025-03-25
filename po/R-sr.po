@@ -2,15 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.19.2\n"
 "POT-Creation-Date: 2024-12-07 02:52\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2025-03-26 01:12+0000\n"
+"Last-Translator: Marko Bojović <bojovicmarko@outlook.com>\n"
+"Language-Team: Serbian <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-r/sr/>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.11-dev\n"
 
 msgid "The study labels contain invalid characters. Please, remove them before running the analysis."
 msgstr ""
@@ -37,7 +39,7 @@ msgid "Please specify a prior distribution for each parameter in the Models spec
 msgstr ""
 
 msgid "Model Summary"
-msgstr ""
+msgstr "Резиме модела"
 
 msgid "Models"
 msgstr ""
@@ -91,10 +93,10 @@ msgid "Mean"
 msgstr ""
 
 msgid "SD"
-msgstr ""
+msgstr "SD"
 
 msgid "Lower"
-msgstr ""
+msgstr "Ниже"
 
 msgid "95%% Credible Interval"
 msgstr ""
@@ -187,10 +189,10 @@ msgid "Posterior mean and 95%% credible interval estimates from the constrained 
 msgstr ""
 
 msgid "Effect Size"
-msgstr ""
+msgstr "Величина ефекта"
 
 msgid "Effect size"
-msgstr ""
+msgstr "Величина ефекта"
 
 msgid "Density"
 msgstr ""
@@ -253,31 +255,31 @@ msgid "random"
 msgstr ""
 
 msgid "fixed"
-msgstr ""
+msgstr "поправљено"
 
 msgid "Anecdotal"
-msgstr ""
+msgstr "Анегдотски"
 
 msgid "Moderate"
-msgstr ""
+msgstr "Умерено"
 
 msgid "Strong"
-msgstr ""
+msgstr "Јак"
 
 msgid "Very Strong"
-msgstr ""
+msgstr "Веома јак"
 
 msgid "Extreme"
-msgstr ""
+msgstr "Екстремно"
 
 msgid "Evidence for %s:"
-msgstr ""
+msgstr "Докази за %s:"
 
 msgid "Plotting failed: The Bayes factors contain infinity."
-msgstr ""
+msgstr "Планирање није успело: Бајесови фактори садрже бесконачност."
 
 msgid "Studies"
-msgstr ""
+msgstr "Студије"
 
 msgid "Posterior model \n probability"
 msgstr ""
@@ -334,10 +336,10 @@ msgid "Qₑ"
 msgstr ""
 
 msgid "df"
-msgstr ""
+msgstr "df"
 
 msgid "p"
-msgstr ""
+msgstr "p"
 
 msgid "Pooled Effect Size Test"
 msgstr ""
@@ -346,13 +348,13 @@ msgid "Estimate"
 msgstr ""
 
 msgid "Standard Error"
-msgstr ""
+msgstr "Стандардна грешка"
 
 msgid "t"
-msgstr ""
+msgstr "t"
 
 msgid "z"
-msgstr ""
+msgstr "z"
 
 msgid "Omnibus Moderation Test"
 msgstr ""
@@ -361,7 +363,7 @@ msgid "Parameter"
 msgstr ""
 
 msgid "F"
-msgstr ""
+msgstr "F"
 
 msgid "Qₘ"
 msgstr ""
@@ -397,7 +399,7 @@ msgid "Log Lik."
 msgstr ""
 
 msgid "Deviance"
-msgstr ""
+msgstr "Девијанса"
 
 msgid "AIC"
 msgstr ""
@@ -754,7 +756,7 @@ msgid "Levels"
 msgstr ""
 
 msgid "Fixed"
-msgstr ""
+msgstr "Поправљено"
 
 msgid "Inclusion Test"
 msgstr ""
@@ -901,7 +903,7 @@ msgid "Debray"
 msgstr ""
 
 msgid "Standard error"
-msgstr ""
+msgstr "Стандардна грешка"
 
 msgid "Sample size"
 msgstr ""
@@ -1125,8 +1127,9 @@ msgstr ""
 msgid "BF%s"
 msgstr ""
 
+#, fuzzy
 msgid "log(BF%s)"
-msgstr ""
+msgstr "log(BF%s)"
 
 msgid "log(MargLik)"
 msgstr ""
@@ -1381,7 +1384,7 @@ msgid "Estimated %1$s Regression"
 msgstr ""
 
 msgid "Cohen's d"
-msgstr ""
+msgstr "Cohen's d"
 
 msgid "Fisher's z"
 msgstr ""
