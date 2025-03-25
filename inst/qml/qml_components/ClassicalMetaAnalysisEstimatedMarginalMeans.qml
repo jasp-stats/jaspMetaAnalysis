@@ -57,9 +57,11 @@ Section
 		{
 			columns:	2
 
-			Group
+			CheckBox
 			{
-				title:		qsTr("Estimated Marginal Means")
+				label:		qsTr("Estimated Marginal Means")
+				name: 		"estimatedMarginalMeansEffectSize"
+				checked:	true
 				Layout.preferredWidth: 250 * jaspTheme.uiScale
 
 				CheckBox
@@ -94,16 +96,11 @@ Section
 				}
 			}
 
-			Group
-			{
-				
+			CheckBox
+			{	
 				enabled:	estimatedMarginalMeansEffectSizeSelectedVariables.columnsTypes.includes("nominal")
-
-				CheckBox
-				{
-					name:		"contrastsEffectSize"
-					label:		qsTr("Contrasts")
-				}
+				name:		"contrastsEffectSize"
+				label:		qsTr("Contrasts")
 
 				DropDown
 				{
@@ -155,9 +152,11 @@ Section
 		{
 			columns:	2
 
-			Group
+			CheckBox
 			{
-				title:		qsTr("Estimated Marginal Means")
+				label:		qsTr("Estimated Marginal Means")
+				name: 		"estimatedMarginalMeansHeterogeneity"
+				checked:	true
 				Layout.preferredWidth: 250 * jaspTheme.uiScale
 
 				CheckBox
@@ -187,6 +186,29 @@ Section
 							{ label: qsTr("𝜏")		, value: "tau"	},
 							{ label: qsTr("𝜏²")	, value: "tau2"	}
 						]
+				}
+			}
+
+			CheckBox
+			{
+				enabled:	estimatedMarginalMeansHeterogeneitySelectedVariables.columnsTypes.includes("nominal")
+				name:		"contrastsHeterogeneity"
+				label:		qsTr("Contrasts")
+
+				DropDown
+				{
+					name:	"contrastsHeterogeneityPValueAdjustment"
+					label:	qsTr("P-value adjustment")
+					values:
+					[
+						{ label: qsTr("None"),				value: "none"},
+						{ label: "Bonferroni",				value: "bonferroni"},
+						{ label: "Holm",					value: "holm"},
+						{ label: "Hochberg",				value: "hochberg"},
+						{ label: "Hommel",					value: "hommel"},
+						{ label: "Benjamini & Hochberg",	value: "benjaminiHochberg"},
+						{ label: "Benjamini & Yekutieli",	value: "benjaminiYekutieli"}
+					]
 				}
 			}
 		}

@@ -24,7 +24,6 @@
 # TODO:
 # Estimated Marginal Means
 # - add variable interactions
-# - specify and test contrasts
 # Forest plot
 # - allow aggregation of studies by a factor (then show simple REML aggregation within and overlaying shaded estimates)
 # AIC/BIC Model-averaging
@@ -78,13 +77,8 @@
     }
   }
 
-  # estimated marginal means
-  .maEstimatedMarginalMeansTable(jaspResults, dataset, options, "effectSize")
-  .maEstimatedMarginalMeansTable(jaspResults, dataset, options, "heterogeneity")
-
-  # contrasts
-  if (options[["contrastsEffectSize"]])
-    .maContrastsTable(jaspResults, dataset, options)
+  # estimated marginal means and contrasts (the whole section is created within the dispatch)
+  .maEstimatedMarginalMeansAndContrasts(jaspResults, dataset, options)
 
   # plots
   .maUltimateForestPlot(jaspResults, dataset, options)
@@ -401,7 +395,7 @@
 }
 
 # output tables
-.maResidualHeterogeneityTable         <- function(jaspResults, dataset, options) {
+.maResidualHeterogeneityTable            <- function(jaspResults, dataset, options) {
 
   modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults)
 
@@ -442,7 +436,7 @@
 
   return()
 }
-.maPooledEffectSizeTestTable          <- function(jaspResults, dataset, options) {
+.maPooledEffectSizeTestTable             <- function(jaspResults, dataset, options) {
 
   modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults)
 
@@ -486,7 +480,7 @@
 
   return()
 }
-.maModeratorsTable                    <- function(jaspResults, dataset, options) {
+.maModeratorsTable                       <- function(jaspResults, dataset, options) {
 
   modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults)
 
@@ -560,7 +554,7 @@
 
   return()
 }
-.maPooledEstimatesTable               <- function(jaspResults, dataset, options) {
+.maPooledEstimatesTable                  <- function(jaspResults, dataset, options) {
 
   modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults)
 
@@ -620,7 +614,7 @@
 
   return()
 }
-.maFitMeasuresTable                   <- function(jaspResults, dataset, options) {
+.maFitMeasuresTable                      <- function(jaspResults, dataset, options) {
 
   modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults)
 
@@ -660,7 +654,7 @@
 
   return()
 }
-.maTermsTable                         <- function(jaspResults, dataset, options, parameter = "effectSize") {
+.maTermsTable                            <- function(jaspResults, dataset, options, parameter = "effectSize") {
 
   metaregressionContainer <- .maExtractMetaregressionContainer(jaspResults)
 
@@ -737,7 +731,7 @@
 
   return()
 }
-.maCoefficientEstimatesTable          <- function(jaspResults, dataset, options, parameter = "effectSize") {
+.maCoefficientEstimatesTable             <- function(jaspResults, dataset, options, parameter = "effectSize") {
 
   metaregressionContainer <- .maExtractMetaregressionContainer(jaspResults)
 
@@ -765,20 +759,18 @@
   coefficientsTable$addColumnInfo(name = "name",  type = "string", title = "")
   coefficientsTable$addColumnInfo(name = "est",   type = "number", title = gettext("Estimate"))
   coefficientsTable$addColumnInfo(name = "se",    type = "number", title = gettext("Standard Error"))
-  coefficientsTable$addColumnInfo(name = "stat",  type = "number", title = if(.maIsMetaregressionFtest(options)) gettext("t") else gettext("z"))
-  if (.maIsMetaregressionFtest(options))
-    coefficientsTable$addColumnInfo(name = "df",  type = "number", title = gettext("df"))
-  coefficientsTable$addColumnInfo(name = "pval",  type = "pvalue", title = gettext("p"))
-
-  if (.maIsPermutation(options)) {
-    coefficientsTable$addColumnInfo(name = "pval2",  type = "pvalue",  title = gettext("p (permutation)"))
-    coefficientsTable$addFootnote(.maPermutationMessage(options))
-  }
-
   if (options[["confidenceIntervals"]]) {
     overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
     coefficientsTable$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
     coefficientsTable$addColumnInfo(name = "uCi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
+  }
+  coefficientsTable$addColumnInfo(name = "stat",  type = "number", title = if(.maIsMetaregressionFtest(options)) gettext("t") else gettext("z"))
+  if (.maIsMetaregressionFtest(options))
+    coefficientsTable$addColumnInfo(name = "df",  type = "number", title = gettext("df"))
+  coefficientsTable$addColumnInfo(name = "pval",  type = "pvalue", title = gettext("p"))
+  if (.maIsPermutation(options)) {
+    coefficientsTable$addColumnInfo(name = "pval2",  type = "pvalue",  title = gettext("p (permutation)"))
+    coefficientsTable$addFootnote(.maPermutationMessage(options))
   }
 
   coefficientsTable$addFootnote(.maFixedEffectTextMessage(options))
@@ -847,7 +839,7 @@
 
   return()
 }
-.maCoefficientCorrelationMatrixTable  <- function(jaspResults, dataset, options, parameter = "effectSize") {
+.maCoefficientCorrelationMatrixTable     <- function(jaspResults, dataset, options, parameter = "effectSize") {
 
   metaregressionContainer <- .maExtractMetaregressionContainer(jaspResults)
 
@@ -893,57 +885,195 @@
 
   return()
 }
-.maEstimatedMarginalMeansTable        <- function(jaspResults, dataset, options, parameter = "effectSize") {
+.maEstimatedMarginalMeansAndContrasts    <- function(jaspResults, dataset, options) {
 
-  estimatedMarginalMeansContainer <- .maExtractEstimatedMarginalMeansContainer(jaspResults)
+  # so, this section is a bit complicated -- all in order to prevent updating of all subcomponents once a new variable is added/removed
+  # the main container contains effect size and heterogeneity subcontainers, which contain variable containers with the actual output tables
+  # updating of the subtables is skipped unless one of the options specified here is checked:
+  # .maGetEstimatedMarginalMeansAndContrastsOptions()
 
-  if (!is.null(estimatedMarginalMeansContainer[[parameter]]))
-    return()
+  # check whether the section should be created at all
+  isReadyEffectSize    <- length(options[["estimatedMarginalMeansEffectSizeSelectedVariables"]])    > 0 && (options[["estimatedMarginalMeansEffectSize"]]    || options[["contrastsEffectSize"]])
+  isReadyHeterogeneity <- length(options[["estimatedMarginalMeansHeterogeneitySelectedVariables"]]) > 0 && (options[["estimatedMarginalMeansHeterogeneity"]] || options[["contrastsHeterogeneity"]])
 
-  if (parameter == "effectSize" && length(options[["estimatedMarginalMeansEffectSizeSelectedVariables"]]) == 0)
+  if (!isReadyEffectSize && !isReadyHeterogeneity) {
+    # remove section if exists
+    if (!is.null(jaspResults[["estimatedMarginalMeansAndContrastsContainer"]]))
+      jaspResults[["estimatedMarginalMeansAndContrastsContainer"]] <- NULL
+
     return()
-  if (parameter == "heterogeneity" && length(options[["estimatedMarginalMeansHeterogeneitySelectedVariables"]]) == 0)
-    return()
+  }
+
+  # create/extract section otherwise
+  if (!is.null(jaspResults[["estimatedMarginalMeansAndContrastsContainer"]])) {
+    estimatedMarginalMeansAndContrastsContainer <- jaspResults[["estimatedMarginalMeansAndContrastsContainer"]]
+  } else {
+    # create the output container
+    estimatedMarginalMeansAndContrastsContainer <- createJaspContainer(gettext("Estimated Marginal Means and Contrasts Summary"))
+    estimatedMarginalMeansAndContrastsContainer$dependOn(c(.maDependencies, "confidenceIntervals", "confidenceIntervalsLevel"))
+    estimatedMarginalMeansAndContrastsContainer$position <- 4
+    jaspResults[["estimatedMarginalMeansAndContrastsContainer"]] <- estimatedMarginalMeansAndContrastsContainer
+  }
+
+  # fill the section with EMM/C tables for each variables for the effect size / heterogeneity
+  if (isReadyEffectSize)
+    .maEstimatedMarginalMeansAndContrastsFun(jaspResults, dataset, options, parameter = "effectSize")
+
+  if (isReadyEffectSize)
+    .maEstimatedMarginalMeansAndContrastsFun(jaspResults, dataset, options, parameter = "heterogeneity")
+
+  return()
+}
+.maEstimatedMarginalMeansAndContrastsFun <- function(jaspResults, dataset, options, parameter = "effectSize") {
+
+  # get the corresponding container
+  estimatedMarginalMeansAndContrastsContainer <- jaspResults[["estimatedMarginalMeansAndContrastsContainer"]]
+
+  # create/extract subsection container and meta-data
+  if (!is.null(estimatedMarginalMeansAndContrastsContainer[[parameter]])) {
+    tempContainer <- estimatedMarginalMeansAndContrastsContainer[[parameter]]
+    tempMetaData  <- estimatedMarginalMeansAndContrastsContainer[[paste0(parameter, "MetaData")]]$object
+  } else {
+    # create the output container
+    tempContainer <- createJaspContainer()
+    tempContainer$position <- switch(
+      parameter,
+      effectSize    = 1,
+      heterogeneity = 2
+    )
+    estimatedMarginalMeansAndContrastsContainer[[parameter]] <- tempContainer
+
+    # create the container meta-data
+    tempMetaDataState <- createJaspState()
+    tempMetaDataState$dependOn(c("estimatedMarginalMeansEffectSize", "contrastsEffectSize"))
+    estimatedMarginalMeansAndContrastsContainer[[paste0(parameter, "MetaData")]] <- tempMetaDataState
+    tempMetaData      <- list()
+  }
 
   fit <- .maExtractFit(jaspResults, options)
 
-  estimatedMarginalMeansTable <- createJaspTable(switch(
+  # add an empty null table in case of an error
+  if (jaspBase::isTryError(fit)) {
+    errorTable <- createJaspContainer(title = gettext("Estimated Marginal Means / Contrasts"))
+    tempContainer[["errorTable"]] <- errorTable
+    return()
+  }
+
+  # extract a list of already existing variables / to be created variables
+  existingVariables <- tempMetaData[["existingVariables"]]
+  selectedVariables <- unlist(switch(
     parameter,
-    effectSize    = gettext("Estimated Marginal Means: Effect Size"),
-    heterogeneity = gettext("Estimated Marginal Means: Heterogeneity")
+    effectSize    = options[["estimatedMarginalMeansEffectSizeSelectedVariables"]],
+    heterogeneity = options[["estimatedMarginalMeansHeterogeneitySelectedVariables"]]
   ))
-  estimatedMarginalMeansTable$position <- switch(
+
+  removeVariables <- setdiff(existingVariables, selectedVariables)
+  addVariables    <- setdiff(selectedVariables, existingVariables)
+  keepVariables   <- intersect(selectedVariables, existingVariables)
+
+  # get information about the output type
+  makeEstimatedMarginalMeans <- options[[switch(
     parameter,
-    effectSize    = 1,
-    heterogeneity = 2
+    effectSize    = "estimatedMarginalMeansEffectSize",
+    heterogeneity = "estimatedMarginalMeansHeterogeneity")]]
+  makeContrasts <- options[[switch(
+    parameter,
+    effectSize    = "contrastsEffectSize",
+    heterogeneity = "contrastsHeterogeneity")]]
+
+  # remove variables that are not selected anymore
+  for (i in seq_along(removeVariables))
+    tempContainer[[removeVariables[i]]] <- NULL
+
+  # if no variables needs to be added, there is no need to reshuffle the order
+  if ((length(addVariables) == 0 && length(existingVariables) == length(selectedVariables) && all(existingVariables == selectedVariables)) &&
+      (!is.null(tempMetaData[["hasEstimatedMarginalMeans"]]) && tempMetaData[["hasEstimatedMarginalMeans"]] == makeEstimatedMarginalMeans) &&
+      (!is.null(tempMetaData[["hasContrasts"]])              && tempMetaData[["hasContrasts"]] == makeContrasts) &&
+      (!is.null(tempMetaData[["selectedOptions"]]) && identical(tempMetaData[["selectedOptions"]], .maGetEstimatedMarginalMeansAndContrastsOptions(options)))
   )
-  estimatedMarginalMeansTable$dependOn(switch(
-    parameter,
-    effectSize    = c("estimatedMarginalMeansEffectSizeSelectedVariables", "transformEffectSize", "estimatedMarginalMeansEffectSizeSdFactorCovariates",
-                      "estimatedMarginalMeansEffectSizeTestAgainst", "estimatedMarginalMeansEffectSizeTestAgainstValue", "predictionIntervals",
-                      "estimatedMarginalMeansEffectSizeAddAdjustedEstimate"),
-    heterogeneity = c("estimatedMarginalMeansHeterogeneitySelectedVariables", "estimatedMarginalMeansHeterogeneityTransformation", "estimatedMarginalMeansHeterogeneitySdFactorCovariates",
-                      "estimatedMarginalMeansHeterogeneityAddAdjustedEstimate")
-  ))
-  estimatedMarginalMeansContainer[[parameter]] <- estimatedMarginalMeansTable
-
-
-  if (is.null(fit) || jaspBase::isTryError(fit))
     return()
 
+  # add adjusted estimate if requested
+  adjustedEstimateOption <- switch(
+    parameter,
+    effectSize    = "estimatedMarginalMeansEffectSizeAddAdjustedEstimate",
+    heterogeneity = "estimatedMarginalMeansHeterogeneityAddAdjustedEstimate"
+  )
+  if (options[[adjustedEstimateOption]] && is.null(tempContainer[["adjustedEstimate"]]) && makeEstimatedMarginalMeans){
+    tempVariableContainer <- createJaspContainer(title = sprintf(
+      "Adjusted Estimate%1$s",
+      if (.maIsMetaregressionHeterogeneity(options)) switch(parameter, effectSize = gettext(" (Effect Size)"), heterogeneity = gettext(" (Heterogeneity)"))
+      else ""
+    ))
+    tempVariableContainer$position <- 0
+    tempVariableContainer$dependOn(adjustedEstimateOption)
+    tempContainer[["adjustedEstimate"]] <- tempVariableContainer
+    .maEstimatedMarginalMeansTable(tempVariableContainer, fit, dataset, options, "", parameter)
+  }
 
-  estimatedMarginalMeansTable$addColumnInfo(name = "variable",  type = "string", title = gettext("Variable"))
-  estimatedMarginalMeansTable$addColumnInfo(name = "value",     type = "string", title = gettext("Level"))
+  # reorder / add variables
+  for (i in seq_along(selectedVariables)) {
+
+    # get the variable container
+    if (is.null(tempContainer[[selectedVariables[[i]]]])) {
+      tempVariableContainer <- createJaspContainer(title = sprintf(
+        "%1$s%2$s",
+        selectedVariables[[i]],
+        if (.maIsMetaregressionHeterogeneity(options)) switch(parameter, effectSize = gettext(" (Effect Size)"), heterogeneity = gettext(" (Heterogeneity)"))
+        else ""
+      ))
+      tempContainer[[selectedVariables[[i]]]] <- tempVariableContainer
+    } else {
+      tempVariableContainer <- tempContainer[[selectedVariables[[i]]]]
+    }
+
+    # if output was already created, just reorder the position
+    tempVariableContainer$position <- i
+
+    # add the missing outputs
+    if (makeEstimatedMarginalMeans && is.null(tempVariableContainer[["estimatedMarginalMeansTable"]]))
+      .maEstimatedMarginalMeansTable(tempVariableContainer, fit, dataset, options, selectedVariables[[i]], parameter)
+
+    if (makeContrasts && is.null(tempVariableContainer[["contrastsTable"]]))
+      .maContrastsTable(tempVariableContainer, fit, dataset, options, selectedVariables[[i]], parameter)
+  }
+
+  # re-write information about existing variables
+  estimatedMarginalMeansAndContrastsContainer[[paste0(parameter, "MetaData")]]$object <- list(
+    existingVariables         = selectedVariables,
+    hasEstimatedMarginalMeans = makeEstimatedMarginalMeans,
+    hasContrasts              = makeContrasts,
+    selectedOptions           = .maGetEstimatedMarginalMeansAndContrastsOptions(options)
+  )
+
+  return()
+}
+.maEstimatedMarginalMeansTable           <- function(variableContainer, fit, dataset, options, selectedVariable, parameter = "effectSize") {
+
+  estimatedMarginalMeansTable <- createJaspTable(if (selectedVariable == "") gettext("Adjusted Estimate") else gettext("Estimated Marginal Means"))
+  estimatedMarginalMeansTable$position <- 1
+  estimatedMarginalMeansTable$dependOn(c(switch(
+    parameter,
+    effectSize    = c("estimatedMarginalMeansEffectSize", "estimatedMarginalMeansEffectSizeSdFactorCovariates", "estimatedMarginalMeansEffectSizeTestAgainst",
+                      "estimatedMarginalMeansEffectSizeTestAgainstValue", "transformEffectSize", "predictionIntervals"),
+    heterogeneity = c("estimatedMarginalMeansHeterogeneity", "estimatedMarginalMeansHeterogeneityTransformation", "estimatedMarginalMeansHeterogeneitySdFactorCovariates")
+  ), if (selectedVariable == "") switch(
+    parameter,
+    effectSize    = "estimatedMarginalMeansEffectSizeAddAdjustedEstimate",
+    heterogeneity = "estimatedMarginalMeansHeterogeneityAddAdjustedEstimate"
+  )))
+  variableContainer[["estimatedMarginalMeansTable"]] <- estimatedMarginalMeansTable
+
+  # prepare table
+  if (selectedVariable != "")
+    estimatedMarginalMeansTable$addColumnInfo(name = "value",     type = "string", title = gettext("Level"))
   estimatedMarginalMeansTable$addColumnInfo(name = "est",       type = "number", title = gettext("Estimate"))
-
   if (options[["confidenceIntervals"]]) {
     overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
     estimatedMarginalMeansTable$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
     estimatedMarginalMeansTable$addColumnInfo(name = "uCi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
   }
-
   if (parameter == "effectSize") {
-
     if (options[["predictionIntervals"]]) {
       overtitleCi <- gettextf("%s%% PI", 100 * options[["confidenceIntervalsLevel"]])
       estimatedMarginalMeansTable$addColumnInfo(name = "lPi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
@@ -954,80 +1084,91 @@
         }
       }
     }
-
     if (options[["estimatedMarginalMeansEffectSizeTestAgainst"]]) {
       estimatedMarginalMeansTable$addColumnInfo(name = "stat",  type = "number", title = if(.maIsMetaregressionFtest(options)) gettext("t") else gettext("z"))
       if (.maIsMetaregressionFtest(options))
         estimatedMarginalMeansTable$addColumnInfo(name = "df",  type = "number", title = gettext("df"))
-
       estimatedMarginalMeansTable$addColumnInfo(name = "pval",  type = "pvalue", title = gettext("p"))
     }
   }
 
-
-  selectedVariables <- switch(
-    parameter,
-    effectSize    = c(
-      if (options[["estimatedMarginalMeansEffectSizeAddAdjustedEstimate"]]) "",
-      unlist(options[["estimatedMarginalMeansEffectSizeSelectedVariables"]])
-    ),
-    heterogeneity = c(
-      if (options[["estimatedMarginalMeansHeterogeneityAddAdjustedEstimate"]]) "",
-      unlist(options[["estimatedMarginalMeansHeterogeneitySelectedVariables"]])
-    )
-  )
-  estimatedMarginalMeans <- do.call(rbind, lapply(selectedVariables, function(selectedVariable)
-    .maComputeMarginalMeansVariable(fit, options, dataset, selectedVariable, options[["estimatedMarginalMeansEffectSizeTestAgainstValue"]], parameter)))
+  # get the estimate
+  estimatedMarginalMeans <- .maComputeMarginalMeansVariable(fit, options, dataset, selectedVariable, options[["estimatedMarginalMeansEffectSizeTestAgainstValue"]], parameter)
 
   # drop non-required columns
+  estimatedMarginalMeans <- estimatedMarginalMeans[,!colnames(estimatedMarginalMeans) %in% "variable", drop = FALSE]
   if (parameter == "effectSize" && !options[["estimatedMarginalMeansEffectSizeTestAgainst"]])
-    estimatedMarginalMeans <- estimatedMarginalMeans[,!colnames(estimatedMarginalMeans) %in% c("df", "stat", "pval")]
-  else if (parameter == "heterogeneity")
-    estimatedMarginalMeans <- estimatedMarginalMeans[,!colnames(estimatedMarginalMeans) %in% c("lPi", "uPi")]
+    estimatedMarginalMeans <- estimatedMarginalMeans[,!colnames(estimatedMarginalMeans) %in% c("df", "stat", "pval"), drop = FALSE]
+  if (parameter == "heterogeneity")
+    estimatedMarginalMeans <- estimatedMarginalMeans[,!colnames(estimatedMarginalMeans) %in% c("lPi", "uPi"), drop = FALSE]
+  if (selectedVariable == "")
+    estimatedMarginalMeans <- estimatedMarginalMeans[,!colnames(estimatedMarginalMeans) %in% c("value"), drop = FALSE]
 
+  # set data
   estimatedMarginalMeansTable$setData(estimatedMarginalMeans)
 
+  # add footnotes
   estimatedMarginalMeansMessages <- .maEstimatedMarginalMeansMessages(options, parameter, anyNA(sapply(estimatedMarginalMeans[,colnames(estimatedMarginalMeans) %in% c("est", "lCi", "uCi", "lPi", "uPi")], anyNA)))
   for (i in seq_along(estimatedMarginalMeansMessages))
     estimatedMarginalMeansTable$addFootnote(estimatedMarginalMeansMessages[i])
 
   return()
 }
-.maContrastsTable                     <- function(jaspResults, dataset, options) {
+.maContrastsTable                        <- function(variableContainer, fit, dataset, options, selectedVariable, parameter = "effectSize") {
 
-  if (!is.null(jaspResults[["contrastsContainer"]]))
-    return()
+  contrastsTable <- createJaspTable(gettext("Contrasts"))
+  contrastsTable$position <- 1
+  contrastsTable$dependOn(switch(
+    parameter,
+    effectSize    = c("contrastsEffectSize", "contrastsEffectSizePValueAdjustment", "predictionIntervals", "transformEffectSize"),
+    heterogeneity = c("contrastsHeterogeneity", "contrastsHeterogeneityPValueAdjustment", "estimatedMarginalMeansHeterogeneityTransformation")
+  ))
+  variableContainer[["contrastsTable"]] <- contrastsTable
 
-  # create the output container
-  contrastsContainer <- createJaspContainer(gettext("Contrasts Summary"))
-  contrastsContainer$dependOn(c(.maDependencies, "confidenceIntervals", "confidenceIntervalsLevel", "contrastsEffectSize", "contrastsEffectSizePValueAdjustment",
-                                "estimatedMarginalMeansEffectSizeSelectedVariables", "predictionIntervals"))
-  contrastsContainer$position <- 4.1
-  jaspResults[["contrastsContainer"]] <- contrastsContainer
-
-  # keep only factor variables
-  variablesFactors  <- options[["predictors"]][options[["predictors.types"]] == "nominal"]
-  variablesSelected <- unlist(options[["estimatedMarginalMeansEffectSizeSelectedVariables"]])
-  variablesSelected <- variablesSelected[variablesSelected %in% variablesFactors]
-
-  if (length(variablesSelected) == 0)
-    return()
-
-  # extract model fit
-  fit <- .maExtractFit(jaspResults, options)
-
-  for (variable in variablesSelected) {
-
-    tempTable <- .maContrastsCreateTable(variable, options)
-    .maContrastsFillTable(tempTable, fit, variable, options)
-    contrastsContainer[[variable]] <- tempTable
-
+  # prepare table
+  contrastsTable$addColumnInfo(name = "comparison", type = "string", title = gettext("Comparison"))
+  contrastsTable$addColumnInfo(name = "est",        type = "number", title = gettext("Estimate"))
+  if (options[["confidenceIntervals"]]) {
+    overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
+    contrastsTable$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
+    contrastsTable$addColumnInfo(name = "uCi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
   }
+  if (parameter == "effectSize") {
+    if (options[["predictionIntervals"]]) {
+      overtitleCi <- gettextf("%s%% PI", 100 * options[["confidenceIntervalsLevel"]])
+      contrastsTable$addColumnInfo(name = "lPi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
+      contrastsTable$addColumnInfo(name = "uPi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
+      # TODO?
+      # if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
+      #   for (colName in .mammExtractTauLevelNames(fit)) {
+      #     contrastsTable$addColumnInfo(name = colName, title = colName, type = .maGetVariableColumnType(colName, options), overtitle = gettext("Heterogeneity Level"))
+      #   }
+      # }
+    }
+  }
+  contrastsTable$addColumnInfo(name = "stat",  type = "number", title = if(.maIsMetaregressionFtest(options)) gettext("t") else gettext("z"))
+  if (.maIsMetaregressionFtest(options))
+    contrastsTable$addColumnInfo(name = "df",  type = "number", title = gettext("df"))
+  contrastsTable$addColumnInfo(name = "pval",  type = "pvalue", title = gettext("p"))
 
+  # get the estimate
+  contrasts <- .maComputeContrastVariable(fit, options, dataset, selectedVariable, options[["contrastsEffectSizeTestAgainstValue"]], parameter)
+
+  # drop non-required columns
+  if (parameter == "heterogeneity")
+    contrasts <- contrasts[,!colnames(contrasts) %in% c("lPi", "uPi"), drop = FALSE]
+
+  # set data
+  contrastsTable$setData(contrasts)
+
+  # add footnotes
+  contrastsMessages <- .macontrastsMessages(options, parameter)
+  for (i in seq_along(contrastsMessages))
+    contrastsTable$addFootnote(contrastsMessages[i])
 
   return()
 }
-.maUltimateForestPlot                 <- function(jaspResults, dataset, options) {
+.maUltimateForestPlot                    <- function(jaspResults, dataset, options) {
 
   if (!is.null(jaspResults[["forestPlot"]]))
     return()
@@ -1092,7 +1233,7 @@
 
   return()
 }
-.maBubblePlot                         <- function(jaspResults, dataset, options) {
+.maBubblePlot                            <- function(jaspResults, dataset, options) {
 
   if (!is.null(jaspResults[["bubblePlot"]]))
     return()
@@ -1156,7 +1297,7 @@
 
   return()
 }
-.maShowMetaforRCode                   <- function(jaspResults, options) {
+.maShowMetaforRCode                      <- function(jaspResults, options) {
 
   if (!.maReady(options) || !is.null(jaspResults[["metaforRCode"]]))
     return()
@@ -1171,7 +1312,7 @@
 
   return()
 }
-.maVarianceInflationTable             <- function(jaspResults, dataset, options, parameter = "effectSize") {
+.maVarianceInflationTable                <- function(jaspResults, dataset, options, parameter = "effectSize") {
 
   varianceInflationContainer <- .maExtractVarianceInflationContainer(jaspResults)
 
@@ -1209,7 +1350,7 @@
 
   return()
 }
-.maCasewiseDiagnosticsTable           <- function(jaspResults, dataset, options) {
+.maCasewiseDiagnosticsTable              <- function(jaspResults, dataset, options) {
 
   if (!is.null(jaspResults[["casewiseDiagnosticsTable"]]))
     return()
@@ -1336,7 +1477,7 @@
 
   return()
 }
-.maCasewiseDiagnosticsExportColumns   <- function(jaspResults, dataset, options) {
+.maCasewiseDiagnosticsExportColumns      <- function(jaspResults, dataset, options) {
 
   if (!options[["diagnosticsCasewiseDiagnosticsExportToDataset"]])
     return()
@@ -1397,7 +1538,7 @@
 
   return()
 }
-.maProfileLikelihoodPlot              <- function(jaspResults, dataset, options) {
+.maProfileLikelihoodPlot                 <- function(jaspResults, dataset, options) {
 
   if (!is.null(jaspResults[["profileLikelihoodPlot"]]))
     return()
@@ -1503,7 +1644,7 @@
 
   return()
 }
-.maBaujatPlot                         <- function(jaspResults, dataset, options) {
+.maBaujatPlot                            <- function(jaspResults, dataset, options) {
 
   if (!is.null(jaspResults[["baujatPlot"]]))
     return()
@@ -1590,7 +1731,7 @@
 
   return()
 }
-.maResidualFunnelPlot                 <- function(jaspResults, dataset, options) {
+.maResidualFunnelPlot                    <- function(jaspResults, dataset, options) {
 
   if (!is.null(jaspResults[["residualFunnelPlot"]]))
     return()
@@ -1616,7 +1757,7 @@
 }
 
 # containers/state functions
-.maExtractFit                             <- function(jaspResults, options, nonClustered = FALSE) {
+.maExtractFit                        <- function(jaspResults, options, nonClustered = FALSE) {
 
   if (is.null(jaspResults[["fit"]]$object))
     return()
@@ -1637,7 +1778,7 @@
     }
   }
 }
-.maExtractModelSummaryContainer           <- function(jaspResults) {
+.maExtractModelSummaryContainer      <- function(jaspResults) {
 
   if (!is.null(jaspResults[["modelSummaryContainer"]]))
     return(jaspResults[["modelSummaryContainer"]])
@@ -1650,7 +1791,7 @@
 
   return(modelSummaryContainer)
 }
-.maExtractMetaregressionContainer         <- function(jaspResults) {
+.maExtractMetaregressionContainer    <- function(jaspResults) {
 
   if (!is.null(jaspResults[["metaregressionContainer"]]))
     return(jaspResults[["metaregressionContainer"]])
@@ -1663,20 +1804,7 @@
 
   return(metaregressionContainer)
 }
-.maExtractEstimatedMarginalMeansContainer <- function(jaspResults) {
-
-  if (!is.null(jaspResults[["estimatedMarginalMeansContainer"]]))
-    return(jaspResults[["estimatedMarginalMeansContainer"]])
-
-  # create the output container
-  estimatedMarginalMeansContainer <- createJaspContainer(gettext("Estimated Marginal Means Summary"))
-  estimatedMarginalMeansContainer$dependOn(c(.maDependencies, "confidenceIntervals", "confidenceIntervalsLevel"))
-  estimatedMarginalMeansContainer$position <- 4
-  jaspResults[["estimatedMarginalMeansContainer"]] <- estimatedMarginalMeansContainer
-
-  return(estimatedMarginalMeansContainer)
-}
-.maExtractVarianceInflationContainer      <- function(jaspResults) {
+.maExtractVarianceInflationContainer <- function(jaspResults) {
 
   if (!is.null(jaspResults[["varianceInflationContainer"]]))
     return(jaspResults[["varianceInflationContainer"]])
@@ -2357,19 +2485,189 @@
 
 
   # remove unnecessary columns
-  computedMarginalMeans <- computedMarginalMeans[,!colnames(computedMarginalMeans) %in% "se"]
+  computedMarginalMeans <- computedMarginalMeans[,!colnames(computedMarginalMeans) %in% "se", drop = FALSE]
 
   if (!options[["confidenceIntervals"]])
-    computedMarginalMeans <- computedMarginalMeans[,!colnames(computedMarginalMeans) %in% c("lCi", "uCi")]
+    computedMarginalMeans <- computedMarginalMeans[,!colnames(computedMarginalMeans) %in% c("lCi", "uCi"), drop = FALSE]
 
   if (!options[["predictionIntervals"]])
-    computedMarginalMeans <- computedMarginalMeans[,!colnames(computedMarginalMeans) %in% c("lPi", "uPi")]
+    computedMarginalMeans <- computedMarginalMeans[,!colnames(computedMarginalMeans) %in% c("lPi", "uPi"), drop = FALSE]
 
   # return the tau levels
   if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]])
     computedMarginalMeans <- cbind(computedMarginalMeans, tauLevels)
 
   return(computedMarginalMeans)
+}
+.maComputeContrastVariable         <- function(fit, options, dataset, selectedVariable, testAgainst = 0, parameter) {
+
+  if (parameter == "effectSize") {
+
+    predictorMatrixEffectSize <- .maGetMarginalMeansPredictorMatrix(
+      fit               = fit,
+      options           = options,
+      dataset           = dataset,
+      selectedVariables = selectedVariable,
+      sdFactor          = options[["estimatedMarginalMeansEffectSizeSdFactorCovariates"]],
+      parameter         = "effectSize"
+    )
+
+    selectedVariableLevels   <- apply(predictorMatrixEffectSize, 1, paste0, collapse = ", ")
+    contrastMatrixEffectSize <- matrix(NA, nrow = nrow(predictorMatrixEffectSize) * (nrow(predictorMatrixEffectSize) - 1) / 2, ncol = ncol(predictorMatrixEffectSize))
+    contrastComparisons      <- character(nrow(contrastMatrixEffectSize))
+
+    thisContrast <- 1
+    for (i in 1:length(selectedVariableLevels)){
+      for (j in 1:length(selectedVariableLevels)){
+        if (j > i) {
+          contrastMatrixEffectSize[thisContrast,] <- predictorMatrixEffectSize[i,] - predictorMatrixEffectSize[j,]
+          contrastComparisons[thisContrast]       <- paste0(selectedVariableLevels[i], " – ", selectedVariableLevels[j])
+          thisContrast <- thisContrast + 1
+        }
+      }
+    }
+
+    if (.maIsMetaregressionHeterogeneity(options)) {
+
+      predictorMatrixHeterogeneity <- .maGetMarginalMeansPredictorMatrix(
+        fit               = fit,
+        options           = options,
+        dataset           = dataset,
+        selectedVariables = selectedVariable,
+        sdFactor          = options[["estimatedMarginalMeansEffectSizeSdFactorCovariates"]],
+        parameter         = "heterogeneity"
+      )
+      contrastMatrixHeterogeneity <- matrix(NA, nrow = nrow(predictorMatrixEffectSize) * (nrow(predictorMatrixEffectSize) - 1) / 2, ncol = ncol(predictorMatrixHeterogeneity))
+
+      thisContrast <- 1
+      for (i in 1:length(selectedVariableLevels)){
+        for (j in 1:length(selectedVariableLevels)){
+          if (j > i) {
+            contrastMatrixHeterogeneity[thisContrast,] <- predictorMatrixHeterogeneity[i,] - predictorMatrixHeterogeneity[j,]
+            thisContrast <- thisContrast + 1
+          }
+        }
+      }
+
+      computedContrasts <- predict(
+        fit,
+        newmods  = contrastMatrixEffectSize,
+        newscale = contrastMatrixHeterogeneity,
+        level    = 100 * options[["confidenceIntervalsLevel"]]
+      )
+      computedContrastsTests <- anova(
+        fit,
+        X      = contrastMatrixEffectSize,
+        adjust = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]])
+      )
+
+    } else {
+
+      if (FALSE){ # .mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]]) {
+
+        # # TODO?
+        # tauLevelsMatrix            <- .mammExtractTauLevels(fit)
+        # tempPredictorMatrixRepeats <- rep(1:nrow(predictorMatrixEffectSize), each = nrow(tauLevelsMatrix)) # repeat the predictors for each tau level
+        # attr(predictorMatrixEffectSize, attr(predictorMatrixEffectSize, "variable")) <- attr(predictorMatrixEffectSize, attr(predictorMatrixEffectSize, "variable"))[tempPredictorMatrixRepeats]
+        # computedMarginalMeans <- predict(
+        #   fit,
+        #   newmods = predictorMatrixEffectSize[tempPredictorMatrixRepeats,,drop=FALSE],
+        #   level   = 100 * options[["confidenceIntervalsLevel"]],
+        #   tau2.levels   = if (is.null(dim(predictorMatrixEffectSize))) tauLevelsMatrix[["tau2.levels"]]   else do.call(rbind, lapply(1:nrow(predictorMatrixEffectSize), function(i) tauLevelsMatrix))[["tau2.levels"]],
+        #   gamma2.levels = if (is.null(dim(predictorMatrixEffectSize))) tauLevelsMatrix[["gamma2.levels"]] else do.call(rbind, lapply(1:nrow(predictorMatrixEffectSize), function(i) tauLevelsMatrix))[["gamma2.levels"]]
+        # )
+
+
+      } else {
+
+        computedContrasts <- predict(
+          fit,
+          newmods = contrastMatrixEffectSize,
+          level   = 100 * options[["confidenceIntervalsLevel"]]
+        )
+        computedContrastsTests <- anova(
+          fit,
+          X      = contrastMatrixEffectSize,
+          adjust = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]])
+        )
+
+      }
+    }
+
+    if (FALSE) {#.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]]) {
+      # # TODO?
+      # tauLevels <- list(
+      #   computedMarginalMeans[["tau2.level"]],
+      #   computedMarginalMeans[["gamma2.level"]]
+      # )
+      # tauLevels           <- do.call(cbind.data.frame, tauLevels[!sapply(tauLevels, is.null)])
+      # colnames(tauLevels) <- .mammExtractTauLevelNames(fit)
+    }
+
+  } else if (parameter == "heterogeneity") {
+
+    predictorMatrixHeterogeneity <- .maGetMarginalMeansPredictorMatrix(
+      fit               = fit,
+      options           = options,
+      dataset           = dataset,
+      selectedVariables = selectedVariable,
+      sdFactor          = options[["estimatedMarginalMeansHeterogeneitySdFactorCovariates"]],
+      parameter         = "heterogeneity"
+    )
+
+    selectedVariableLevels      <- apply(predictorMatrixHeterogeneity, 1, paste0, collapse = ", ")
+    contrastMatrixHeterogeneity <- matrix(NA, nrow = nrow(predictorMatrixHeterogeneity) * (nrow(predictorMatrixHeterogeneity) - 1) / 2, ncol = ncol(predictorMatrixHeterogeneity))
+    contrastComparisons         <- character(nrow(contrastMatrixHeterogeneity))
+
+    thisContrast <- 1
+    for (i in 1:length(selectedVariableLevels)){
+      for (j in 1:length(selectedVariableLevels)){
+        if (j > i) {
+          contrastMatrixHeterogeneity[thisContrast,] <- predictorMatrixHeterogeneity[i,] - predictorMatrixHeterogeneity[j,]
+          contrastComparisons[thisContrast]          <- paste0(selectedVariableLevels[i], " – ", selectedVariableLevels[j])
+          thisContrast <- thisContrast + 1
+        }
+      }
+    }
+
+    computedContrasts <- predict(
+      fit,
+      newscale = contrastMatrixHeterogeneity,
+      level    = 100 * options[["confidenceIntervalsLevel"]]
+    )
+    computedContrastsTests <- anova(
+      fit,
+      Z      = contrastMatrixHeterogeneity,
+      adjust = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]])
+    )
+
+    # neither link or tau transformation cannot be applied
+  }
+
+  # reformat
+  computedContrasts <- .maExtractAndFormatPrediction(computedContrasts)
+
+  # remove unnecessary columns
+  computedContrasts <- computedContrasts[,!colnames(computedContrasts) %in% "se", drop = FALSE]
+
+  if (!options[["confidenceIntervals"]])
+    computedContrasts <- computedContrasts[,!colnames(computedContrasts) %in% c("lCi", "uCi"), drop = FALSE]
+
+  if (!options[["predictionIntervals"]])
+    computedContrasts <- computedContrasts[,!colnames(computedContrasts) %in% c("lPi", "uPi"), drop = FALSE]
+
+  # TODO: ? return the tau levels
+  # if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]])
+  #   computedMarginalMeans <- cbind(computedMarginalMeans, tauLevels)
+
+  # add test results
+  computedContrasts$comparison <- contrastComparisons
+  computedContrasts$stat       <- computedContrastsTests$zval
+  if (.maIsMetaregressionFtest(options))
+    computedContrasts$df <- computedContrastsTests$ddf
+  computedContrasts$pval <- computedContrastsTests$pval
+
+  return(computedContrasts)
 }
 .maMakeBubblePlotDataset           <- function(fit, options, dataset) {
 
@@ -3011,88 +3309,6 @@
 
   return(plotOut)
 }
-.maContrastsCreateTable            <- function(variable, options) {
-
-  contrastTable <- createJaspTable(gettextf("Contrast: %1$s", variable))
-
-  contrastTable$addColumnInfo(name = "comparison",  type = "string", title = gettext("Comparison"))
-  contrastTable$addColumnInfo(name = "est",         type = "number", title = gettext("Estimate"))
-
-  if (options[["confidenceIntervals"]]) {
-    overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
-    contrastTable$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
-    contrastTable$addColumnInfo(name = "uCi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
-  }
-
-  if (options[["predictionIntervals"]]) {
-    overtitleCi <- gettextf("%s%% PI", 100 * options[["confidenceIntervalsLevel"]])
-    contrastTable$addColumnInfo(name = "lPi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
-    contrastTable$addColumnInfo(name = "uPi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
-  }
-
-  contrastTable$addColumnInfo(name = "stat",  type = "number", title = if(.maIsMetaregressionFtest(options)) gettext("t") else gettext("z"))
-  if (.maIsMetaregressionFtest(options))
-    contrastTable$addColumnInfo(name = "df",  type = "number", title = gettext("df"))
-
-  contrastTable$addColumnInfo(name = "pval",  type = "pvalue", title = gettext("p"))
-
-  return(contrastTable)
-}
-.maContrastsFillTable              <- function(contrastTable, fit, variable, options) {
-
-  ### create all required contrasts
-  # ideally using this: tempPairmat <- metafor::pairmat(fit, btt = variable, btt2 = variable)
-  # but the function fails when using a two-level factor :(
-  termIndicies <- .maGetTermsIndices(fit, "effectSize")[[variable]]
-  termLevels   <- levels(fit[["data"]][[variable]])
-  tempPairmat  <- matrix(0, nrow = (length(termIndicies) + 1) * length(termIndicies) / 2, ncol = sum(!fit$coef.na))
-  tempNames    <- character(nrow(tempPairmat))
-
-  thisI <- 1
-  for (i in 1:length(termLevels)){
-    for (j in 1:length(termLevels)){
-      if (i < j){
-        if (i == 1 && j > i) {
-          tempPairmat[thisI, termIndicies[j-1] ] <- 1
-          tempNames[thisI] <- paste0(termLevels[i], " – ", termLevels[j])
-          thisI <- thisI + 1
-        } else if (j > i) {
-          tempPairmat[thisI, termIndicies[i-1] ] <- -1
-          tempPairmat[thisI, termIndicies[j-1] ] <- +1
-          tempNames[thisI] <- paste0(termLevels[i], " – ", termLevels[j])
-          thisI <- thisI + 1
-        }
-      }
-    }
-  }
-
-  # compute results
-  tempAnova   <- anova(fit, X = tempPairmat, adjust = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]]))
-  tempPredict <- predict(fit, newmods = tempPairmat)
-
-  # extract predictions
-  tempPredict <- .maExtractAndFormatPrediction(tempPredict)
-  tempPredict$comparison <- tempNames
-
-  # remove non-requested columns
-  tempPredict <- tempPredict[,c(
-    "comparison", "est",
-    if (options[["confidenceIntervals"]]) c("lCi", "uCi"),
-    if (options[["predictionIntervals"]]) c("lPi", "uPi")
-  )]
-
-
-  # add test results
-  tempPredict$stat <- tempAnova$zval
-  if (.maIsMetaregressionFtest(options))
-    tempPredict$df <- tempAnova$ddf
-
-  tempPredict$pval <- tempAnova$pval
-
-  contrastTable$setData(tempPredict)
-
-  return()
-}
 
 # check functions
 .maIsMetaregression               <- function(options) {
@@ -3126,7 +3342,7 @@
 }
 
 # extract options
-.maGetMethodOptions                   <- function(options) {
+.maGetMethodOptions                             <- function(options) {
 
   switch(
     options[["method"]],
@@ -3147,7 +3363,7 @@
     NA
   )
 }
-.maGetFixedTau2Options                <- function(options) {
+.maGetFixedTau2Options                          <- function(options) {
 
   tau2 <- .parseRCodeInOptions(options[["fixParametersTau2Value"]])
 
@@ -3156,7 +3372,7 @@
   else
     return(tau2)
 }
-.maGetControlOptions                  <- function(options) {
+.maGetControlOptions                            <- function(options) {
 
   if (.maIsMetaregressionHeterogeneity(options)) {
     if (options[["optimizerMethod"]] == "nlminb" && !options[["optimizerMaximumIterations"]] && !options[["optimizerConvergenceRelativeTolerance"]]) {
@@ -3234,7 +3450,7 @@
   }
   return(out[!sapply(out, is.null)])
 }
-.maGetEffectSizeTransformationOptions <- function(effectSizeTransformation) {
+.maGetEffectSizeTransformationOptions           <- function(effectSizeTransformation) {
 
   switch(
     effectSizeTransformation,
@@ -3256,7 +3472,7 @@
     stop(paste0("Unknown effect size transformation: ", effectSizeTransformation))
   )
 }
-.maExtendMetaforCallFromOptions       <- function(options) {
+.maExtendMetaforCallFromOptions                 <- function(options) {
 
   optionsCode <- options[["advancedExtendMetaforCallCode"]]
   optionsCode <- trimws(optionsCode, which = "both")
@@ -3269,7 +3485,7 @@
 
   return(optionsCode)
 }
-.maGetPValueAdjustment                <- function(pValueAdjustment) {
+.maGetPValueAdjustment                          <- function(pValueAdjustment) {
   return(switch(
     pValueAdjustment,
     "none"               = "none",
@@ -3281,6 +3497,26 @@
     "benjaminiYekutieli" = "BY"
   ))
 }
+.maGetEstimatedMarginalMeansAndContrastsOptions <- function(options){
+
+  return(options[c(
+    "contrastsHeterogeneityPValueAdjustment",
+    "estimatedMarginalMeansHeterogeneityTransformation",
+    "estimatedMarginalMeansHeterogeneitySdFactorCovariates",
+    "estimatedMarginalMeansHeterogeneityAddAdjustedEstimate",
+
+    "contrastsEffectSizePValueAdjustment",
+    "estimatedMarginalMeansEffectSizeTestAgainst",
+    "estimatedMarginalMeansEffectSizeTestAgainstValue",
+    "estimatedMarginalMeansEffectSizeSdFactorCovariates",
+    "estimatedMarginalMeansEffectSizeAddAdjustedEstimate",
+
+    "confidenceIntervals",
+    "confidenceIntervalsLevel",
+    "predictionIntervals",
+    "transformEffectSize"
+  )])
+}
 
 # options names
 .maGetOptionsNameEffectSizeTransformation <- function(effectSizeTransformation) {
@@ -3289,19 +3525,32 @@
     effectSizeTransformation,
     "none"                           = NULL,
     "fishersZToCorrelation"          = gettext("Fisher's z to r"),
-    "exponential"                    = gettext("Exponential"),
-    "logOddsToProportions"           = gettext("Log odds to proportions"),
-    "logOddsToSmdNormal"             = gettext("Log odds to SMD (normal)"),
-    "logOddsToSmdLogistic"           = gettext("Log odds to SMD (logistic)"),
+    "exponential"                    = gettext("exponential"),
+    "logOddsToProportions"           = gettext("log odds to proportions"),
+    "logOddsToSmdNormal"             = gettext("log odds to SMD (normal)"),
+    "logOddsToSmdLogistic"           = gettext("log odds to SMD (logistic)"),
     "smdToLogOddsNormal"             = gettext("SMD to log odds (normal)"),
     "smdToLogOddsLogistic"           = gettext("SMD to log odds (logistic)"),
     "hakstianAndWhalenInverseAlpha"  = gettext("Hakstian & Whalen inverse α"),
     "bonettInverseAlpha"             = gettext("Bonett inverse α"),
-    "zToR2"                          = gettext("Z to R²"),
+    "zToR2"                          = gettext("z to R²"),
     "smdToCohensU1"                  = gettext("SMD to Cohen's U₁"),
     "smdToCohensU2"                  = gettext("SMD to Cohen's U₂"),
     "smdToCohensU3"                  = gettext("SMD to Cohen's U₃"),
     "smdToCles"                      = gettext("SMD to CLES, Pr(supperiority)")
+  ))
+}
+.maGetOptionsNamePValueAdjustment         <- function(pValueAdjustment) {
+
+  return(switch(
+    pValueAdjustment,
+    "none"               = gettext("None"),
+    "bonferroni"         = gettext("Bonferroni"),
+    "holm"               = gettext("Holm"),
+    "hochberg"           = gettext("Hochberg"),
+    "hommel"             = gettext("Hommel"),
+    "benjaminiHochberg"  = gettext("Benjamini-Hochberg"),
+    "benjaminiYekutieli" = gettext("Benjamini-Yekutieli")
   ))
 }
 .maCasewiseDiagnosticsExportColumnsNames  <- function(columnName) {
@@ -3788,6 +4037,33 @@
       "tau"  = gettext("\U1D70F"),
       "tau2" = gettext("\U1D70F\U00B2")
     )))
+
+  return(messages)
+}
+.macontrastsMessages                   <- function(options, parameter) {
+
+  messages <- gettext("Each contrast is averaged across the levels of the remaining predictors.")
+
+  if (parameter == "effectSize" && options[["transformEffectSize"]] != "none") {
+    messages <- c(messages, gettextf("Contrasts of estimates marginal means cannot be transformed via the effect size transformation."))
+
+    if (options[["contrastsEffectSizePValueAdjustment"]] != "none") {
+      messages <- c(messages, gettextf("Contrasts of estimated marginal means are adjusted for multiple comparisons using %1$s correction.", .maGetOptionsNamePValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]])))
+    }
+  }
+
+  if (parameter == "heterogeneity") {
+
+    if (options[["heterogeneityModelLink"]] == "log") {
+      messages <- c(messages, gettext("Contrasts of estimated marginal means cannot be transformed via the link function. As such, the contrasts are summarized on the model scale: log(\U1D70F\U00B2)."))
+    } else if (options[["estimatedMarginalMeansHeterogeneityTransformation"]] == "tau"){
+      messages <- c(messages, gettext("Contrasts of estimated marginal means cannot be transformed via the heterogeneity transformation. As such, the contrasts are summarized as \U1D70F\U00B2."))
+    }
+
+    if (options[["contrastsEffectSizePValueAdjustment"]] != "none") {
+      messages <- c(messages, gettextf("Contrasts of estimated marginal means are adjusted for multiple comparisons using %1$s correction.", .maGetOptionsNamePValueAdjustment(options[["contrastsHeterogeneityPValueAdjustment"]])))
+    }
+  }
 
   return(messages)
 }
