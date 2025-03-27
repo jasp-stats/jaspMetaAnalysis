@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.19.2\n"
 "POT-Creation-Date: 2024-12-07 02:52\n"
-"PO-Revision-Date: 2025-03-26 01:12+0000\n"
+"PO-Revision-Date: 2025-03-28 12:20+0000\n"
 "Last-Translator: Marko Bojović <bojovicmarko@outlook.com>\n"
 "Language-Team: Serbian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/sr/>\n"
@@ -16,12 +16,14 @@ msgstr ""
 
 msgid "The study labels contain invalid characters. Please, remove them before running the analysis."
 msgstr ""
+"Натписи студије садрже неважеће знакове. Молим вас, уклоните их пре "
+"покретања анализе."
 
 msgid "Prior Plots"
 msgstr ""
 
 msgid "Effect"
-msgstr ""
+msgstr "Ефекат"
 
 msgid "Heterogeneity"
 msgstr ""
@@ -90,7 +92,7 @@ msgid "Log(BF%1$s%2$s)"
 msgstr ""
 
 msgid "Mean"
-msgstr ""
+msgstr "Аритметичка средина"
 
 msgid "SD"
 msgstr "SD"
@@ -102,7 +104,7 @@ msgid "95%% Credible Interval"
 msgstr ""
 
 msgid "Upper"
-msgstr ""
+msgstr "Горњи"
 
 msgid "Averaged"
 msgstr ""
@@ -345,7 +347,7 @@ msgid "Pooled Effect Size Test"
 msgstr ""
 
 msgid "Estimate"
-msgstr ""
+msgstr "Проценити"
 
 msgid "Standard Error"
 msgstr "Стандардна грешка"
@@ -381,7 +383,7 @@ msgid "Meta-Analytic Estimates"
 msgstr ""
 
 msgid "%s%% CI"
-msgstr ""
+msgstr "%s%% CI"
 
 msgid "%s%% PI"
 msgstr ""
@@ -402,13 +404,13 @@ msgid "Deviance"
 msgstr "Девијанса"
 
 msgid "AIC"
-msgstr ""
+msgstr "AIC"
 
 msgid "BIC"
-msgstr ""
+msgstr "BIC"
 
 msgid "AICc"
-msgstr ""
+msgstr "AICc"
 
 msgid "R²"
 msgstr ""
@@ -441,7 +443,7 @@ msgid "Variable"
 msgstr ""
 
 msgid "Level"
-msgstr ""
+msgstr "Ниво"
 
 msgid "Bubble Plots"
 msgstr ""
@@ -618,7 +620,7 @@ msgid "Fisher's z to r"
 msgstr ""
 
 msgid "Exponential"
-msgstr ""
+msgstr "Експоненцијална"
 
 msgid "Log odds to proportions"
 msgstr ""
@@ -1011,10 +1013,10 @@ msgid "The model should contain at least one predictor or an intercept."
 msgstr ""
 
 msgid "Intercept"
-msgstr ""
+msgstr "Пресек"
 
 msgid "Coefficients"
-msgstr ""
+msgstr "Коефицијенти"
 
 msgid "At least one predictor needs to be specified."
 msgstr ""
@@ -1050,7 +1052,7 @@ msgid "Baseline"
 msgstr ""
 
 msgid "Median"
-msgstr ""
+msgstr "Медијана"
 
 msgid "MCMC error"
 msgstr ""
@@ -1285,7 +1287,7 @@ msgid "Test of Publication Bias"
 msgstr ""
 
 msgid "ChiSq"
-msgstr ""
+msgstr "Хи квадрат"
 
 msgid "Assuming homogeneity"
 msgstr ""
