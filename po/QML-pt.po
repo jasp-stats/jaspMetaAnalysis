@@ -3220,12 +3220,6 @@ msgid "Method"
 msgstr ""
 
 msgctxt "FunnelPlot|"
-msgid ""
-"Select the heterogeneity estimation method for the funnel plot under the "
-"alternative hypothesis."
-msgstr ""
-
-msgctxt "FunnelPlot|"
 msgid "Equal Effects"
 msgstr ""
 
@@ -3436,38 +3430,7 @@ msgid "Invert the colors used in the funnel plot."
 msgstr ""
 
 msgctxt "FunnelPlot|"
-msgid "Funnel plot asymmetry tests"
-msgstr ""
-
-msgctxt "FunnelPlot|"
-msgid ""
-"Perform tests to detect asymmetry in the funnel plot indicating potential "
-"publication bias. The tests are performed with the 'Method' specified in the "
-"'Funnel under H₁' option."
-msgstr ""
-
-msgctxt "FunnelPlot|"
 msgid "Meta-regression"
-msgstr ""
-
-msgctxt "FunnelPlot|"
-msgid "Include meta-regression tests for funnel plot asymmetry."
-msgstr ""
-
-msgctxt "FunnelPlot|"
-msgid "Weighted regression"
-msgstr ""
-
-msgctxt "FunnelPlot|"
-msgid "Include weighted regression tests for funnel plot asymmetry."
-msgstr ""
-
-msgctxt "FunnelPlot|"
-msgid "Rank correlation"
-msgstr ""
-
-msgctxt "FunnelPlot|"
-msgid "Include rank correlation tests for funnel plot asymmetry."
 msgstr ""
 
 #, fuzzy
@@ -4919,4 +4882,206 @@ msgstr ""
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Paule-Mandel"
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid ""
+"Estimate the mean effect size and heterogeneity under the alternative "
+"hypothesis. The paramters are estimated with the 'Method' specified under "
+"'General Settings'."
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid "General Settings"
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid ""
+"Select the heterogeneity estimation method for the funnel plot under the "
+"alternative hypothesis, meta-regression funnel plot asymmetry tests, trim "
+"and fill, and the fail-safe N general method."
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid "Publication Bias / Sensitivity Analyses"
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid ""
+"Detect and perform sensitivity analyses to funel plot asymmetry, publication "
+"bias, and small-study effects."
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid "Asymmetry tests"
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid ""
+"Perform tests to detect asymmetry in the funnel plot indicating potential "
+"publication bias."
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid ""
+"Include meta-regression tests for funnel plot asymmetry. The test is "
+"performed with the 'Method' specified under 'General Settings'."
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid "Weighted regression (Egger's test)"
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid ""
+"Include weighted regression tests (also known as Egger's test) for funnel "
+"plot asymmetry."
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid "Rank correlation (Begg's test)"
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid ""
+"Include rank correlation tests (also known as Begg's test) for funnel plot "
+"asymmetry."
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid "Trim and fill"
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid ""
+"Perform the trim and fill to adjust the funnel plot for publication bias. "
+"The test is performed with the 'Method' specified under 'General Settings'."
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid "Estimator"
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid "Select the method for the trim-and-fill adjustment."
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid "L0"
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid "R0"
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid "Q0"
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid ""
+"Include heterogeneity (𝜏) in the trim and fill funnel plot. If unselected, "
+"the heterogeneity estimate is not used to adjust the prediction intervals."
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid ""
+"Summarize the effect size, heterogeneity, and number of imputed "
+"estimatesused for the trim and fill in a table."
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid ""
+"Fill the funnel plot's prediction intervals under trim and fill with "
+"different colors."
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid ""
+"Set the type of line of the funnel plot's prediction intervals under trim "
+"and fill."
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid "Fail-safe N"
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid ""
+"Compute the minimum number of studies averaging null results that would have "
+"to be added to a given set of studies to change the conclusion of a meta-"
+"analysis tests to detect asymmetry in the funnel plot indicating potential "
+"publication bias."
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid "Rosenthal"
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid ""
+"The Rosenthal method calculates the minimum number of studies averaging null "
+"results needed to reduce the combined significance level to a specified "
+"alpha level."
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid "Orwin"
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid ""
+"The Orwin method calculates the minimum number of studies averaging null "
+"results needed to reduce the average effect size to a target value. The "
+"default is set to 0.10 which is completely aribitrary."
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid "Rosenberg"
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid ""
+"The Rosenberg method calculates the minimum number of studies averaging null "
+"results needed to reduce the significance level of the average effect size "
+"to a specified alpha level."
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid "General"
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid ""
+"A general method to calculate the minimum number of studies averaging null "
+"results needed to reduce the significance level or the average effect size "
+"to a target effect size value. The default is set to 0.10 which is "
+"completely aribitrary."
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid "Exact"
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid "Use the exact method to calculate the fail-safe N."
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid "Alpha"
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid ""
+"Set the significance level for the Rosenthal's, Rosenberg's, and general "
+"fail-safe N tests."
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid "Target effect size"
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid ""
+"Set the target effect size for the Orwin's and general fail-safe N tests."
 msgstr ""

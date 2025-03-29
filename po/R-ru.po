@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.3\n"
-"POT-Creation-Date: 2024-12-07 02:52\n"
+"POT-Creation-Date: 2025-03-29 02:50\n"
 "PO-Revision-Date: 2025-03-17 17:10+0000\n"
 "Last-Translator: MikeWinny <winny63@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/jasp/"
@@ -1056,10 +1056,37 @@ msgstr ""
 msgid "H₁ Funnel Parameter Estimates"
 msgstr ""
 
-msgid "μ"
+#, fuzzy
+msgid "Estimate μ"
+msgstr "Оценки"
+
+msgid "Lower 95%% CI"
 msgstr ""
 
+msgid "Upper 95%% CI"
+msgstr ""
+
+#, fuzzy
+msgid "Estimate 𝜏"
+msgstr "Оценки"
+
 msgid "The funnel plot parameter estimation failed with the following error:"
+msgstr ""
+
+msgid "Trim and Fill Parameter Estimates"
+msgstr ""
+
+#, fuzzy
+msgid "Missing Estimates"
+msgstr "Оценки"
+
+msgid "Trim and Fill"
+msgstr ""
+
+msgid "Adjusted Estimate μ"
+msgstr ""
+
+msgid "Adjusted Estimate 𝜏"
 msgstr ""
 
 msgid "Meta-Regression Test for Funnel Plot Asymmetry"
@@ -1068,19 +1095,32 @@ msgstr ""
 msgid "Asymmetry Test"
 msgstr ""
 
-msgid "Limit Estimate"
-msgstr ""
-
-msgid "Lower 95%% CI"
-msgstr ""
-
-msgid "Upper 95%% CI"
-msgstr ""
+#, fuzzy
+msgid "Limit Estimate μ"
+msgstr "Оценки"
 
 msgid "Weighted Regression Test for Funnel Plot Asymmetry"
 msgstr ""
 
 msgid "Rank Correlation Test for Funnel Plot Asymmetry"
+msgstr ""
+
+msgid "Fail-Safe N"
+msgstr ""
+
+msgid "Fail-Safe N Summary Table"
+msgstr ""
+
+msgid "Rosenthal"
+msgstr ""
+
+msgid "Orwin"
+msgstr ""
+
+msgid "Rosenberg"
+msgstr ""
+
+msgid "General"
 msgstr ""
 
 msgid "The funnel plot asymmetry test failed with the following error:"
@@ -1091,8 +1131,10 @@ msgid ""
 msgstr ""
 
 msgid ""
-"The meta-analytic model did not converge. Try modifying the 'Method' option "
-"for the 'Funnel under H₁' settings."
+"The meta-analytic model did not converge. Try modifying the 'Method' option."
+msgstr ""
+
+msgid "The %1$s fail-safe N calculation %2$sfailed with the following error:"
 msgstr ""
 
 msgid "The model should contain at least one predictor or an intercept."

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
-"POT-Creation-Date: 2024-12-07 02:52\n"
+"POT-Creation-Date: 2025-03-29 02:50\n"
 "PO-Revision-Date: 2025-03-01 20:22+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -137,7 +137,8 @@ msgstr "順序効果"
 msgid ""
 "%1$s and %2$s are the group-level effect size and standard deviation, "
 "respectively."
-msgstr "%1$s と %2$s およびs は、それぞれグループレベルの効果量と標準偏差です。"
+msgstr ""
+"%1$s と %2$s およびs は、それぞれグループレベルの効果量と標準偏差です。"
 
 msgid "%s is the group-level effect size."
 msgstr "%s はグループレベルの効果量です."
@@ -151,8 +152,8 @@ msgid ""
 "random effects H%2$s over the fixed effects H%1$s & random effects H%1$s."
 msgstr ""
 "事後推定値は、効果が存在すると仮定したモデルに基づいています。ベイズ因子は、"
-"固定効果 H%1$sおよびランダム効果Hs に対する固定効果 H%2$s "
-"およびランダム効果H%2$s のすべての4つのモデルに基づいています。"
+"固定効果 H%1$sおよびランダム効果Hs に対する固定効果 H%2$s およびランダム効果"
+"H%2$s のすべての4つのモデルに基づいています。"
 
 msgid ""
 "Model averaged posterior estimates for %3$s are not yet available, but will "
@@ -1137,12 +1138,41 @@ msgstr "下限"
 msgid "H₁ Funnel Parameter Estimates"
 msgstr ""
 
-msgid "μ"
+#, fuzzy
+msgid "Estimate μ"
+msgstr "推定"
+
+msgid "Lower 95%% CI"
 msgstr ""
+
+msgid "Upper 95%% CI"
+msgstr ""
+
+#, fuzzy
+msgid "Estimate 𝜏"
+msgstr "推定値"
 
 #, fuzzy
 msgid "The funnel plot parameter estimation failed with the following error:"
 msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
+
+msgid "Trim and Fill Parameter Estimates"
+msgstr ""
+
+#, fuzzy
+msgid "Missing Estimates"
+msgstr "PET-PEESE回帰推定値"
+
+msgid "Trim and Fill"
+msgstr ""
+
+#, fuzzy
+msgid "Adjusted Estimate μ"
+msgstr "モデル推定値"
+
+#, fuzzy
+msgid "Adjusted Estimate 𝜏"
+msgstr "モデル推定値"
 
 #, fuzzy
 msgid "Meta-Regression Test for Funnel Plot Asymmetry"
@@ -1153,14 +1183,8 @@ msgid "Asymmetry Test"
 msgstr "ファンネルプロットの非対称性検定"
 
 #, fuzzy
-msgid "Limit Estimate"
+msgid "Limit Estimate μ"
 msgstr "推定"
-
-msgid "Lower 95%% CI"
-msgstr ""
-
-msgid "Upper 95%% CI"
-msgstr ""
 
 #, fuzzy
 msgid "Weighted Regression Test for Funnel Plot Asymmetry"
@@ -1169,6 +1193,25 @@ msgstr "ファンネルプロットの非対称性の回帰検定（\"Eggerの�
 #, fuzzy
 msgid "Rank Correlation Test for Funnel Plot Asymmetry"
 msgstr "ファンネルプロットの非対称性に関する順位相関検定"
+
+#, fuzzy
+msgid "Fail-Safe N"
+msgstr "フェイル-セーフ(fail-safe) N"
+
+msgid "Fail-Safe N Summary Table"
+msgstr ""
+
+msgid "Rosenthal"
+msgstr ""
+
+msgid "Orwin"
+msgstr ""
+
+msgid "Rosenberg"
+msgstr ""
+
+msgid "General"
+msgstr ""
 
 #, fuzzy
 msgid "The funnel plot asymmetry test failed with the following error:"
@@ -1180,9 +1223,12 @@ msgid ""
 msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
 
 msgid ""
-"The meta-analytic model did not converge. Try modifying the 'Method' option "
-"for the 'Funnel under H₁' settings."
+"The meta-analytic model did not converge. Try modifying the 'Method' option."
 msgstr ""
+
+#, fuzzy
+msgid "The %1$s fail-safe N calculation %2$sfailed with the following error:"
+msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
 
 msgid "The model should contain at least one predictor or an intercept."
 msgstr ""
@@ -1710,9 +1756,6 @@ msgstr[0] "%i の観測値が欠損しているため削除されました。"
 
 #~ msgid "File Drawer Analysis"
 #~ msgstr "お蔵入り(File Drawer)解析"
-
-#~ msgid "Fail-safe N"
-#~ msgstr "フェイル-セーフ(fail-safe) N"
 
 #~ msgid "Target Significance"
 #~ msgstr "ターゲットの有意性"
