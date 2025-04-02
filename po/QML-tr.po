@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2025-04-02 18:57+0000\n"
+"Last-Translator: Uğur ÇELİK <prof_ugur@hotmail.com>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/tr/>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.11-dev\n"
 "X-Language: tr\n"
 "X-Qt-Contexts: true\n"
 
@@ -243,7 +249,6 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Negative"
 msgstr "Negatif"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Set null priors"
 msgstr "Boş öncelikleri ayarla"
@@ -878,7 +883,7 @@ msgstr "Adapte et"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Burnin"
-msgstr ""
+msgstr "Burnin"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Sample"
@@ -922,1028 +927,969 @@ msgstr "Çıkarım"
 
 msgctxt "PetPeese|"
 msgid "Multiplicative heterogeneity estimates"
-msgstr ""
+msgstr "Çarpımsal heterojenlik tahminleri"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Plots"
 msgstr "Grafikler"
 
 msgctxt "PetPeese|"
 msgid "PET"
-msgstr ""
+msgstr "PET"
 
 msgctxt "PetPeese|"
 msgid "PEESE"
-msgstr ""
+msgstr "PEESE"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Mean model estimates"
 msgstr "Ortalama model tahminleri"
 
 msgctxt "PredictionPerformanceData|"
 msgid "Measure"
-msgstr ""
+msgstr "Ölçüm"
 
 msgctxt "PredictionPerformanceData|"
 msgid "C statistic"
-msgstr ""
+msgstr "C istatistiği"
 
 msgctxt "PredictionPerformanceData|"
 msgid "C-statistic"
-msgstr ""
+msgstr "C-istatistiği"
 
 msgctxt "PredictionPerformanceData|"
 msgid "Standard Error"
-msgstr ""
+msgstr "Standart Hata"
 
-#, fuzzy
 msgctxt "PredictionPerformanceData|"
 msgid "95% CI Lower and Upper Bound"
 msgstr "%95 CI Alt ve Üst Sınır"
 
 msgctxt "PredictionPerformanceData|"
 msgid "Number of Participants"
-msgstr ""
+msgstr "Katılımcı Sayısı"
 
 msgctxt "PredictionPerformanceData|"
 msgid "Number of Observed Events"
-msgstr ""
+msgstr "Gözlemlenen Olay Sayısı"
 
 msgctxt "PredictionPerformanceData|"
 msgid "Number of Expected Events"
-msgstr ""
+msgstr "Beklenen Olayların Sayısı"
 
-#, fuzzy
 msgctxt "PredictionPerformanceData|"
 msgid "Study Labels"
 msgstr "Çalışma Etiketleri"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Inference"
 msgstr "Çıkarım"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Within-study variation"
-msgstr ""
+msgstr "Çalışma içi varyasyon"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Normal/Log"
-msgstr ""
+msgstr "Normal/Log"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Normal/Identity"
-msgstr ""
+msgstr "Normal/Kimlik"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Poisson/Log"
-msgstr ""
+msgstr "Poisson/Log"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Prior and posterior plot"
-msgstr ""
+msgstr "Önceki ve sonraki grafik"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Forest plot"
-msgstr ""
+msgstr "Forest grafiği"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Labels"
-msgstr ""
+msgstr "Etiketler"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Estimates"
-msgstr ""
+msgstr "Tahminler"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Column name (lCI)"
-msgstr ""
+msgstr "Sütun adı (lCI)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Column name (uCI)"
-msgstr ""
+msgstr "Sütun adı (uCI)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "C-statistics"
-msgstr ""
+msgstr "C-istatistikleri"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "C-statistics (lCI)"
-msgstr ""
+msgstr "C-istatistikleri (ICI)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "C-statistics (uCI)"
-msgstr ""
+msgstr "C-istatistikleri (uCI)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Funnel plot asymmetry test"
-msgstr ""
+msgstr "Huni grafiği asimetri testi"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Egger (unweighted)"
-msgstr ""
+msgstr "Egger (ağırlıksız)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Egger (multiplicative overdispersion)"
-msgstr ""
+msgstr "Egger (çarpansal aşırı dağılım)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Macaskill"
-msgstr ""
+msgstr "Macaskill"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Macaskill (pooled)"
-msgstr ""
+msgstr "Macaskill (birleştirilmiş)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Peters"
-msgstr ""
+msgstr "Peters"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Debray"
-msgstr ""
+msgstr "Debray"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Plot"
-msgstr ""
+msgstr "Grafik"
 
-#, fuzzy
 msgctxt "PredictionPerformancePriors|"
 msgid "Priors"
-msgstr "Önceki"
+msgstr "Öncekiler"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "Normal mean:"
-msgstr ""
+msgstr "Normal ortalama:"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "sd:"
-msgstr ""
+msgstr "ss:"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "Uniform"
-msgstr ""
+msgstr "Benzet"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "min:"
-msgstr ""
+msgstr "min:"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "max:"
-msgstr ""
+msgstr "maks:"
 
-#, fuzzy
 msgctxt "PredictionPerformancePriors|"
 msgid "location:"
 msgstr "konum:"
 
-#, fuzzy
 msgctxt "PredictionPerformancePriors|"
 msgid "scale:"
 msgstr "ölçek:"
 
-#, fuzzy
 msgctxt "PredictionPerformancePriors|"
 msgid "df:"
 msgstr "sd (serbestlik derecesi)df:"
 
 msgctxt "WaapWls|"
 msgid "Effect sizes & SE"
-msgstr ""
+msgstr "Etki büyüklükleri ve SH"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Correlations & N"
 msgstr "Korelasyonlar ve N"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Correlation"
 msgstr "Korelasyon"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Effect Size"
 msgstr "Etki Boyutu"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Effect Size Standard Error"
 msgstr "Etki Boyutu Standart Hatası"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Fisher's z"
-msgstr "Fisher's z"
+msgstr "Fisher'ın z"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Cohen's d"
 msgstr "Cohen d"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Inference"
 msgstr "Çıkarım"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Plots"
 msgstr "Grafikler"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Mean model estimates"
 msgstr "Ortalama model tahminleri"
 
 msgctxt "PetPeese|"
 msgid "Transform correlations to"
-msgstr ""
+msgstr "Korelasyonları şuna dönüştürün"
 
 msgctxt "SelectionModels|"
 msgid "Transform correlations to"
-msgstr ""
+msgstr "Korelasyonları şuna dönüştürün"
 
 msgctxt "WaapWls|"
 msgid "Transform correlations to"
-msgstr ""
+msgstr "Korelasyonları şuna dönüştürün"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Input type"
-msgstr ""
+msgstr "Girdi türü"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Expected direction of effect sizes"
-msgstr ""
+msgstr "Etki büyüklüklerinin beklenen yönü"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "RoBMA-original"
-msgstr ""
+msgstr "RoBMA-orijinal"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Models (Custom Ensemble Only)"
-msgstr ""
+msgstr "Modeller (Sadece Özel Takım)"
 
 msgctxt "SelectionModels|"
 msgid "Expected direction of effect sizes"
-msgstr ""
+msgstr "Etki büyüklüklerinin beklenen yönü"
 
 msgctxt "PetPeese|"
 msgid "Measure"
-msgstr ""
+msgstr "Ölçüm"
 
 msgctxt "SelectionModels|"
 msgid "Measure"
-msgstr ""
+msgstr "Ölçüm"
 
 msgctxt "WaapWls|"
 msgid "Measure"
-msgstr ""
-
-msgctxt "Description|"
-msgid "Penalized Meta-Analysis"
-msgstr ""
+msgstr "Ölçüm"
 
 #, fuzzy
+msgctxt "Description|"
+msgid "Penalized Meta-Analysis"
+msgstr "Cezalandırılmış Meta-Analiz"
+
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Effect Size"
 msgstr "Etki Boyutu"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Effect Size Standard Error"
 msgstr "Etki Boyutu Standart Hatası"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Method"
 msgstr "Metot"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Horseshoe"
-msgstr ""
+msgstr "At nalı"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Lasso"
-msgstr ""
+msgstr "Lasso"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Covariates"
-msgstr ""
+msgstr "Ortak değişkenler"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Factors"
 msgstr "Faktörler"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Clustering"
-msgstr ""
+msgstr "Kümeleme"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Model"
 msgstr "Model"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Components"
 msgstr "Bileşenler"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Include intercept"
-msgstr ""
+msgstr "Kesmeyi dahil et"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale predictors"
-msgstr ""
+msgstr "Ölçek tahmincileri"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Priors"
 msgstr "Önceki"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Df"
-msgstr ""
+msgstr "sd (serbestlik derecesi)df"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale"
-msgstr ""
+msgstr "Ölçek"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Df (global)"
-msgstr ""
+msgstr "Df (küresel)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Df (slab)"
-msgstr ""
+msgstr "Df (levha)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale (global)"
-msgstr ""
+msgstr "Ölçek(küresel)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale (slab)"
-msgstr ""
+msgstr "Ölçek (levha)"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Inference"
 msgstr "Çıkarım"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "I²"
-msgstr ""
+msgstr "I²"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Posterior plots"
-msgstr ""
+msgstr "Arka plan grafikleri"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Model terms"
-msgstr ""
+msgstr "Model terimleri"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Plotted term"
-msgstr ""
+msgstr "Çizilen terim"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "MCMC diagnostics"
-msgstr ""
+msgstr "MCMC tanılamaları"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Horizontal axis"
-msgstr ""
+msgstr "Yatay eksen"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Vertical axis"
-msgstr ""
+msgstr "Dikey eksen"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Plot type"
-msgstr ""
+msgstr "Grafik türü"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Traceplot"
-msgstr ""
+msgstr "İz çizimi"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scatterplot"
-msgstr ""
+msgstr "Dağılım grafiği"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Histogram"
-msgstr ""
+msgstr "Histogram"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Density"
-msgstr ""
+msgstr "Yoğunluk"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Autocorrelations"
-msgstr ""
+msgstr "Otokorelasyonlar"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Advanced"
 msgstr "Gelişmiş"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Estimation settings (MCMC)"
 msgstr "Tahmin ayarları (MCMC)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Warmup"
-msgstr ""
+msgstr "Son hazırlık"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Iterations"
-msgstr ""
+msgstr "Tekrarlar"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Chains"
 msgstr "Zincirler(Diziler)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Adapt delta"
-msgstr ""
+msgstr "Deltayı uyarla"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Maximum treedepth"
-msgstr ""
+msgstr "Maksimum ağaç derinliği"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "samples:"
-msgstr ""
+msgstr "örnekler:"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Terms"
-msgstr ""
+msgstr "Şartlar"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Estimates table"
-msgstr ""
+msgstr "Tahmin tablosu"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Heterogeneity table"
-msgstr ""
+msgstr "Heterojenlik tablosu"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Available terms"
-msgstr ""
+msgstr "Mevcut koşullar"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Selected terms"
-msgstr ""
+msgstr "Seçili koşullar"
 
 msgctxt "PetPeese|"
 msgid "Sample size"
-msgstr ""
+msgstr "Örneklem büyüklüğü"
 
 msgctxt "PetPeese|"
 msgid "Mean estimates table"
-msgstr ""
+msgstr "Ortalama tahmini tablosu"
 
 msgctxt "PetPeese|"
 msgid "Regression estimates table"
-msgstr ""
+msgstr "regresyon tahmini tablosu"
 
 msgctxt "PetPeese|"
 msgid "Regression Estimate"
-msgstr ""
+msgstr "Regresyon Tahmini"
 
 msgctxt "PredictionPerformanceData|"
 msgid "O/E Ratio"
-msgstr ""
+msgstr "O/E Oranı"
 
 msgctxt "PredictionPerformanceData|"
 msgid "O/E ratio"
-msgstr ""
+msgstr "O/E oranı"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Export computed effect size"
-msgstr ""
+msgstr "Hesaplanan etki boyutunu dışa aktar"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Column name (effect size)"
-msgstr ""
+msgstr "Sütun adı (etki boyutu)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "O/E ratios"
-msgstr ""
+msgstr "O/E oranları"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "O/E ratios (lCI)"
-msgstr ""
+msgstr "O/E oranları (ICI)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "O/E ratios (uCI)"
-msgstr ""
+msgstr "O/E oranları (uCI)"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "mu: summary estimate (O/E Ratio)"
-msgstr ""
+msgstr "mu: özet tahmin (O/E Oranı)"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "mu: summary estimate (C statistic)"
-msgstr ""
+msgstr "mu: özet tahmin (C istatistiği)"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "tau: heterogeneity (Between study SD)"
-msgstr ""
+msgstr "tau: heterojenlik (Çalışma SS arasında)"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "T"
-msgstr ""
+msgstr "T"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Model ensemble type"
-msgstr ""
+msgstr "Model topluluk türü"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Prior distribution plots"
-msgstr ""
+msgstr "Önceki dağıtım grafikleri"
 
 msgctxt "SelectionModels|"
 msgid "P-value frequency table"
-msgstr ""
+msgstr "P-değeri frekans tablosu"
 
 msgctxt "SelectionModels|"
 msgid "Mean estimates table"
-msgstr ""
+msgstr "Ortalama tahmini tablosu"
 
 msgctxt "SelectionModels|"
 msgid "Estimated weights table"
-msgstr ""
+msgstr "Tahmini ağırlık tablosu"
 
 msgctxt "SelectionModels|"
 msgid "Estimated heterogeneity table"
-msgstr ""
+msgstr "Tahmini heterojenlik tablosu"
 
 msgctxt "WaapWls|"
 msgid "Sample size"
-msgstr ""
+msgstr "Örneklem büyüklüğü"
 
 msgctxt "WaapWls|"
 msgid "Mean estimates table"
-msgstr ""
+msgstr "Ortalama tahmini tablosu"
 
 msgctxt "WaapWls|"
 msgid "Multiplicative heterogeneity estimates table"
-msgstr ""
+msgstr "Çarpımsal heterojenlik tahmin tablosu"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Normal/Logit"
-msgstr ""
+msgstr "Normal/Logit"
 
 msgctxt "Description|"
 msgid "Binomial Meta-Analysis"
-msgstr ""
+msgstr "Binom Meta-Analiz"
 
 msgctxt "Description|"
 msgid "Bayesian Binomial Meta-Analysis"
-msgstr ""
+msgstr "Bayes Binom Meta-Analiz"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Successes (group 1)"
-msgstr ""
+msgstr "Başarılılar( grup 1)"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Successes (group 2)"
-msgstr ""
+msgstr "Başarılılar (grup 2)"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Observations (group 1)"
-msgstr ""
+msgstr "Gözlemler (grup 1)"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Observations (group 2)"
-msgstr ""
+msgstr "Gözlemler (grup 2)"
 
-#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Study Labels"
 msgstr "Çalışma Etiketleri"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Prior distribution plots"
-msgstr ""
+msgstr "Önceki dağıtım grafikleri"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Models"
-msgstr ""
+msgstr "Modeller"
 
-#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Set null priors"
 msgstr "Boş öncelikleri ayarla"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Advanced"
 msgstr "Gelişmiş"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Estimation scale"
-msgstr ""
+msgstr "Tahmin ölçeği"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Fisher's z"
-msgstr "Fisher's z"
+msgstr "Fisher'ın z"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Cohen's d"
 msgstr "Cohen d"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "logOR"
-msgstr ""
+msgstr "logOR"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "MCMC"
-msgstr ""
+msgstr "MCMC"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Adaptation"
-msgstr ""
+msgstr "Uyum"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Burnin"
-msgstr ""
+msgstr "Burnin"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Samples"
-msgstr ""
+msgstr "Örnekler"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Chains"
 msgstr "Zincirler(Diziler)"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Thin"
-msgstr ""
+msgstr "İnce"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Autofit"
-msgstr ""
+msgstr "Otomatik uyum"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "R-hat"
-msgstr ""
+msgstr "R-şapka"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Effective sample size"
-msgstr ""
+msgstr "Etkili örneklem büyüklüğü"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "MCMC error"
-msgstr ""
+msgstr "MCMC hatası"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "MCMC error / SD"
-msgstr ""
+msgstr "MCMC hatası / SS"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Maximum fitting time"
-msgstr ""
+msgstr "Maksimum uyum süresi"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "hours"
-msgstr ""
+msgstr "saatler"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "minutes"
-msgstr ""
+msgstr "dakikalar"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "seconds"
-msgstr ""
+msgstr "saniyeler"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Extend samples"
-msgstr ""
+msgstr "Örnekleri genişlet"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Remove failed models"
-msgstr ""
+msgstr "Başarısız modelleri kaldır"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Rebalance component probability on model failure"
-msgstr ""
+msgstr "Model arızasında bileşen olasılığını yeniden dengele"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Save the fitted model"
-msgstr ""
+msgstr "Uygun modeli kaydet"
 
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Baseline"
-msgstr ""
+msgstr "Temel çizgi"
 
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Baseline (null)"
-msgstr ""
+msgstr "Temel çizgi(boş)"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Distribution"
 msgstr "Dağıtım"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Parameters"
 msgstr "Parametreler"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Truncation"
 msgstr "Kesme"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Prior weights"
 msgstr "Önceki ağırlıklar"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Beta(α,β)"
 msgstr "Beta(α,β)"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "lower"
 msgstr "daha düşük"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "upper"
 msgstr "üst"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Weight"
 msgstr "Ağırlık"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "MCMC Diagnostics"
 msgstr "MCMC Tanılamaları"
 
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Overview table"
-msgstr ""
+msgstr "Genel bakış tablosu"
 
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Plot"
-msgstr ""
+msgstr "Grafik"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Effect"
 msgstr "Etki"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Heterogeneity"
 msgstr "Heterojenlik"
 
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Weights"
-msgstr ""
+msgstr "Ağırlıklar"
 
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "PET"
-msgstr ""
+msgstr "PET"
 
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "PEESE"
-msgstr ""
+msgstr "PEESE"
 
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Type"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
-msgid "Trace"
-msgstr ""
+msgstr "Tür"
 
 #, fuzzy
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "Trace"
+msgstr "İz(İşaret)"
+
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Autocorrelation"
 msgstr "Otokorelasyon"
 
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Posterior samples density"
-msgstr ""
+msgstr "Arka örnek yoğunluğu"
 
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Single model"
-msgstr ""
+msgstr "Tek model"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Inference"
 msgstr "Çıkarım"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Conditional parameter estimates"
-msgstr ""
+msgstr "Koşullu parametre tahminleri"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Models overview"
-msgstr ""
+msgstr "Modellere genel bakış"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "BF comparison"
-msgstr ""
+msgstr "BF karşılaştırması"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Inclusion"
-msgstr ""
+msgstr "İçerik"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "vs. Best"
-msgstr ""
+msgstr "vs. En iyi"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "vs. Previous"
-msgstr ""
+msgstr "vs. Önceki"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Order"
 msgstr "Sırala"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Model number"
-msgstr ""
+msgstr "Model numarası"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Marginal likelihood"
-msgstr ""
+msgstr "Marjinal olasılık"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Posterior probability"
-msgstr ""
+msgstr "Sonraki olasılık"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Individual models"
-msgstr ""
+msgstr "Bireysel modeller"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Single model"
-msgstr ""
+msgstr "Tek model"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "CI width"
-msgstr ""
+msgstr "CI genişliği"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Output scale"
-msgstr ""
+msgstr "Çıktı ölçeği"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Cohen's d"
 msgstr "Cohen d"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Fisher's z"
-msgstr "Fisher's z"
+msgstr "Fisher'ın z"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "logOR"
-msgstr ""
+msgstr "logOR"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "OR"
-msgstr ""
+msgstr "VEYA"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Correlation"
 msgstr "Korelasyon"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Shorten prior names"
-msgstr ""
+msgstr "Önceki isimleri kısalt"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Plots"
 msgstr "Grafikler"
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Forest plot"
-msgstr ""
+msgstr "Forest(Orman) grafiği"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Order"
 msgstr "Sırala"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Ascending"
 msgstr "Artan"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Descending"
 msgstr "Azalan"
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Alphabetical"
-msgstr ""
+msgstr "Alfabetik"
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Type"
-msgstr ""
+msgstr "Tür"
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Model averaged"
-msgstr ""
+msgstr "Model ortalaması alındı"
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Conditional"
-msgstr ""
+msgstr "Koşullu"
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Pooled estimates"
-msgstr ""
+msgstr "Birleştirilmiş tahminler"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Effect"
 msgstr "Etki"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Heterogeneity"
 msgstr "Heterojenlik"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Weight function"
 msgstr "Ağırlık fonksiyonu"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Rescale x-axis"
 msgstr "X eksenini yeniden ölçeklendir"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "PET-PEESE"
 msgstr "PET-PEESE"
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Prior distribution"
-msgstr ""
+msgstr "Önceki dağıtım"
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Individual models"
-msgstr ""
+msgstr "Bireysel modeller"
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Order by"
-msgstr ""
+msgstr "Sıralama"
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Model number"
-msgstr ""
+msgstr "Model numarası"
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Estimate"
-msgstr ""
+msgstr "Tahmin et"
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Bayes factor"
-msgstr ""
+msgstr "Bayes Faktörü"
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Posterior prob."
-msgstr ""
+msgstr "Arka problem."
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Show"
-msgstr ""
+msgstr "Göster"
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Bayesian updating"
-msgstr ""
+msgstr "Bayes güncellemesi"
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Posterior estimates"
-msgstr ""
+msgstr "Sonraki tahminler"
 
 msgctxt "Description|"
 msgid "Miscellaneous"
@@ -1951,30 +1897,30 @@ msgstr "Çeşitli"
 
 msgctxt "Description|"
 msgid "Effect Size Computation"
-msgstr ""
+msgstr "Etki Boyutu Hesaplaması"
 
 msgctxt "Description|"
 msgid "Funnel Plot"
-msgstr ""
+msgstr "Huni Grafiği"
 
 msgctxt "Description|"
 msgid "Meta-Analysis (Multilevel/Multivariate)"
-msgstr ""
+msgstr "Meta-Analiz (Çok Seviyeli/Çok Değişkenli)"
 
 msgctxt "Description|"
 msgid "Classical Meta-Analysis (Multilevel/Multivariate)"
-msgstr ""
+msgstr "Klasik Meta-Analiz (Çok Seviyeli/Çok Değişkenli)"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Variable containing the observed effect sizes."
-msgstr ""
+msgstr "Gözlenen etki büyüklüklerini içeren değişken."
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid ""
 "Variable containing the standard errors corresponding to the effect sizes."
 msgstr ""
+"Etkilerin büyüklüklerine karşılık gelen standart hataları içeren değişken."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Method"
 msgstr "Metot"
@@ -1984,67 +1930,68 @@ msgid ""
 "Method used to estimate heterogeneity (tau-squared) in the meta-analysis. "
 "The available methods depend on the inclusion of heterogeneity model terms."
 msgstr ""
+"Meta-analizde heterojenliği (tau kare) tahmin etmek için kullanılan yöntem. "
+"Mevcut yöntemler heterojenlik modeli terimlerinin dahil edilmesine bağlıdır."
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Equal Effects"
-msgstr ""
+msgstr "Eşit Etkiler"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Fixed Effects"
 msgstr "Sabit Etkiler"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Maximum Likelihood"
-msgstr ""
+msgstr "Maksimum Olasılık"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Restricted ML"
-msgstr ""
+msgstr "Sınırlı ML"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "DerSimonian-Laird"
-msgstr ""
+msgstr "DerSimonian-Laird"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Hedges"
-msgstr ""
+msgstr "Engeller"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Hunter-Schmidt"
-msgstr ""
+msgstr "Hunter-Schmidt"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Hunter-Schmidt (SSC)"
-msgstr ""
+msgstr "Hunter-Schmidt (SSC)"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Sidik-Jonkman"
-msgstr ""
+msgstr "Sidik-Jonkman"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Empirical Bayes"
-msgstr ""
+msgstr "Deneysel Bayes"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Paule-Mandel"
-msgstr ""
+msgstr "Paule-Mandel"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Paule-Mandel (MU)"
-msgstr ""
+msgstr "Paule-Mandel (MU)"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Generalized Q-stat"
-msgstr ""
+msgstr "Genelleştirilmiş Q-istatistik"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Generalized Q-stat (MU)"
-msgstr ""
+msgstr "Genelleştirilmiş Q-istatistik (MU)"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Fixed effect test"
-msgstr ""
+msgstr "Sabit etkili test"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid ""
@@ -2052,8 +1999,9 @@ msgid ""
 "approximation, 't' uses t-distribution, and 'knha' uses the Knapp and "
 "Hartung adjustment (default)."
 msgstr ""
+"Model katsayılarını test etme yöntemi: 'z' standart normal yaklaşımı, 't' t-"
+"dağılımını ve 'knha' Knapp ve Hartung ayarlamasını (varsayılan) kullanır."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Predictors"
 msgstr "Tahminciler"
@@ -2062,33 +2010,37 @@ msgctxt "ClassicalMetaAnalysis|"
 msgid ""
 "Variables to include as predictors (moderators) in the meta-regression model."
 msgstr ""
+"Meta-regresyon modeline tahminci (moderatör) olarak dahil edilecek "
+"değişkenler."
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Clustering"
-msgstr ""
+msgstr "Kümeleme"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid ""
 "Variable indicating clustering of effect sizes. This option is disabled when "
 "permutation tests are selected."
 msgstr ""
+"Etki büyüklüklerinin kümelenmesini gösteren değişken. Permütasyon testleri "
+"seçildiğinde bu seçenek devre dışı bırakılır."
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid ""
 "Variable containing labels for the studies. Used for labeling outputs and "
 "plots."
 msgstr ""
+"Çalışmalar için etiketler içeren değişken. Çıktıları ve grafikleri "
+"etiketlemek için kullanılır."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Effect Size"
 msgstr "Etki Boyutu"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Variable containing the observed effect sizes."
-msgstr ""
+msgstr "Gözlenen etki büyüklüklerini içeren değişken."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Effect Size Standard Error"
 msgstr "Etki Boyutu Standart Hatası"
@@ -2097,35 +2049,36 @@ msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
 "Variable containing the standard errors corresponding to the effect sizes."
 msgstr ""
+"Etkilerin büyüklüklerine karşılık gelen standart hataları içeren değişken."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Method"
 msgstr "Metot"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Method used to estimate heterogeneity in the meta-analysis."
-msgstr ""
+msgstr "Meta-analizde heterojenliği tahmin etmek için kullanılan yöntem."
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Maximum Likelihood"
-msgstr ""
+msgstr "Maksimum Olasılık"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Restricted ML"
-msgstr ""
+msgstr "Sınırlı ML"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Fixed effect test"
-msgstr ""
+msgstr "Sabit etki testi"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
 "Method for testing the model coefficients: 'z' uses standard normal "
 "approximation, 't' uses t-distribution."
 msgstr ""
+"Model katsayılarını test etme yöntemi: 'z' standart normal yaklaşımı, 't' t "
+"dağılımını kullanır."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Predictors"
 msgstr "Tahminciler"
@@ -2134,18 +2087,21 @@ msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
 "Variables to include as predictors (moderators) in the meta-regression model."
 msgstr ""
+"Meta-regresyon modeline tahminci (moderatör) olarak dahil edilecek "
+"değişkenler."
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Clustering"
-msgstr ""
+msgstr "Kümeleme"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
 "Variable indicating clustering of effect sizes. This option is disabled when "
 "permutation tests are selected."
 msgstr ""
+"Etki büyüklüklerinin kümelenmesini gösteren değişken. Permütasyon testleri "
+"seçildiğinde bu seçenek devre dışı bırakılır."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Study Labels"
 msgstr "Çalışma Etiketleri"
@@ -2155,10 +2111,12 @@ msgid ""
 "Variable containing labels for the studies. Used for labeling outputs and "
 "plots."
 msgstr ""
+"Çalışmalar için etiketler içeren değişken. Çıktıları ve grafikleri "
+"etiketlemek için kullanılır."
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Random Effects / Model Structure"
-msgstr ""
+msgstr "Rastgele Etkiler / Model Yapısı"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
@@ -2167,47 +2125,51 @@ msgid ""
 "Allows modeling of complex data structures such as multilevel, multivariate, "
 "autoregressive, spatial, and other forms of dependency."
 msgstr ""
+"Meta-analiz modeli için rastgele etki yapısını belirtme seçenekleri, "
+"rastgele etki türleri ve ilişkili değişkenleri dahil. Çok düzeyli, çok "
+"değişkenli, otoregresif, mekansal ve diğer bağımlılık biçimleri gibi "
+"karmaşık veri yapılarının modellenmesine olanak tanır."
 
 #, qt-format
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Structure %1"
-msgstr ""
+msgstr "Yapı %1"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Type of random effect to include in the model."
-msgstr ""
+msgstr "Modele dahil edilecek rastgele etki türü."
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Simple"
-msgstr ""
+msgstr "Basit"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Nested (multilevel)"
-msgstr ""
+msgstr "İç içe (çok seviyeli)"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Random slopes"
-msgstr ""
+msgstr "Rastgele eğimler"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Structured"
-msgstr ""
+msgstr "Yapılandırılmış"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Autoregressive"
-msgstr ""
+msgstr "Otoregresif"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Spatial"
-msgstr ""
+msgstr "Mekansal"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Known correlation"
-msgstr ""
+msgstr "Bilinen korelasyon"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Structure"
-msgstr ""
+msgstr "Yapılandırmak"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
@@ -2215,18 +2177,20 @@ msgid ""
 "'Autoregressive', or 'Spatial'. Available structures depend on the selected "
 "type."
 msgstr ""
+"Türü 'Yapılandırılmış', 'Otoregresif' veya 'Uzamsal' olduğunda rastgele "
+"etkinin yapısı. Kullanılabilir yapılar seçilen türe bağlıdır."
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Compound symmetry"
-msgstr ""
+msgstr "Bileşik simetri"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Heteroscedastic compound symmetry"
-msgstr ""
+msgstr "Heteroskedastik bileşik simetri"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Unstructured "
-msgstr ""
+msgstr "Yapılandırılmamış "
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Identity"
