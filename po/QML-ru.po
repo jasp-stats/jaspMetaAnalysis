@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-04-01 15:06+0000\n"
+"PO-Revision-Date: 2025-04-02 18:57+0000\n"
 "Last-Translator: Иван Рудаков <riv@polygene.ru>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/ru/>\n"
@@ -248,7 +248,7 @@ msgstr ""
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Diagnostics"
-msgstr ""
+msgstr "Диагностика"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Test for Funnel Plot Asymmetry"
@@ -332,7 +332,7 @@ msgstr ""
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Priors"
-msgstr ""
+msgstr "Априорные распределения"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Df"
@@ -688,7 +688,7 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Priors"
-msgstr ""
+msgstr "Априорные распределения"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Effect size"
@@ -760,7 +760,7 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Diagnostics"
-msgstr ""
+msgstr "Диагностика"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Plots"
@@ -788,7 +788,7 @@ msgstr ""
 
 msgctxt "PredictionPerformanceData|"
 msgid "Standard Error"
-msgstr ""
+msgstr "Стандартная ошибка"
 
 msgctxt "PredictionPerformanceData|"
 msgid "95% CI Lower and Upper Bound"
@@ -908,7 +908,7 @@ msgstr ""
 
 msgctxt "PredictionPerformancePriors|"
 msgid "Priors"
-msgstr ""
+msgstr "Априорные распределения"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "Normal mean:"
@@ -944,7 +944,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Effect"
-msgstr ""
+msgstr "Эффект"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Effect (null)"
@@ -976,7 +976,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Distribution"
-msgstr ""
+msgstr "Распределение"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Parameters"
@@ -1512,7 +1512,7 @@ msgstr ""
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Models"
-msgstr ""
+msgstr "Модели"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Set null priors"
@@ -1624,7 +1624,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Distribution"
-msgstr ""
+msgstr "Распределение"
 
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Parameters"
@@ -1668,7 +1668,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Effect"
-msgstr ""
+msgstr "Эффект"
 
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Heterogeneity"
@@ -1716,7 +1716,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Models overview"
-msgstr ""
+msgstr "Обзор моделей"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "BF comparison"
@@ -1820,11 +1820,12 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Model averaged"
-msgstr ""
+msgstr "Усредненная модель"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Conditional"
-msgstr ""
+msgstr "Условные"
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Pooled estimates"
@@ -1832,7 +1833,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Effect"
-msgstr ""
+msgstr "Эффект"
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Heterogeneity"
@@ -1852,7 +1853,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Prior distribution"
-msgstr ""
+msgstr "Априорное распределение"
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Individual models"
@@ -2927,7 +2928,7 @@ msgstr ""
 
 msgctxt "EffectSizeComputation|"
 msgid "Standard Error"
-msgstr ""
+msgstr "Стандартная ошибка"
 
 msgctxt "EffectSizeComputation|"
 msgid "Sampling Variance"
@@ -3051,7 +3052,7 @@ msgstr ""
 
 msgctxt "EffectSizeComputation|"
 msgid "Standard error"
-msgstr ""
+msgstr "Стандартная ошибка"
 
 msgctxt "EffectSizeComputation|"
 msgid "Sampling variance"
@@ -3316,7 +3317,7 @@ msgstr ""
 
 msgctxt "FunnelPlot|"
 msgid "Label"
-msgstr ""
+msgstr "Метка"
 
 msgctxt "FunnelPlot|"
 msgid "Show all or only a subset of the effect size estimate labels."
