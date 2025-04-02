@@ -160,6 +160,14 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
       .quitAnalysis(gettextf("The 'Means' variable input contains the following variable that are not specified in the 'Correlation/Covariance Matrix' variable input: %1$s.",
                              paste0(setdiff(decodedMeanNames, uniqueInputNames), collapse = ", ")))
 
+    # add variable names if any are missing
+    for (i in seq_along(setdiff(uniqueInputNames, decodedMeanNames))) {
+      datasetMeans[[setdiff(uniqueInputNames, decodedMeanNames)[i]]] <- NA
+    }
+
+    # fix order
+    datasetMeans <- datasetMeans[,uniqueInputNames]
+
 
     output[["means"]] <- datasetMeans
   }
@@ -180,7 +188,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 
   return()
 }
-.masemDataSummaryTables <- function(jaspResults, dataset, options) {
+.masemDataSummaryTables    <- function(jaspResults, dataset, options) {
 
   # create a table with the number of non-missing elements of the covariance matrix (or means if both are specified)
   if (!is.null(jaspResults[["dataSummaryTables"]]))
