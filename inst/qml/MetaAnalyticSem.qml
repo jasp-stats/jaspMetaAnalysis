@@ -23,6 +23,127 @@ import JASP
 Form
 {
 
+	VariablesForm
+	{
+		preferredHeight: 550 * preferencesModel.uiScale
+
+		AvailableVariablesList
+		{
+			name:				"allVariables"
+		}
+
+		AssignedVariablesList
+		{
+			name:				"correlationCovarianceMatrix"
+			title:				qsTr("Correlation/Covariance Matrix")
+			allowedColumns:		["scale"]
+			info: qsTr("Variables containing the correlations/covariances between the variables. " + 
+			"The variable name must be in a form `x_y` where `x` and `y` corresponds to the variables between which the correlation/covariance is reported. " + 
+			"The separator used in the variable names (defaults to `_`) can be changed via the `Variable name separator` option.")
+		}
+
+		AssignedVariablesList
+		{
+			name:				"means"
+			title:				qsTr("Means")
+			allowedColumns:		["scale"]
+			info: qsTr("Variables containing the means of the variables. The variable name must be `x` where `x` corresponds to the variable names in the correlation/covariance matrix input. This input is required only when meta-analytic sem with means is requested.")
+		}
+/*
+		AssignedVariablesList
+		{
+			name:				"predictors"
+			id:					predictors
+			title:				qsTr("Predictors")
+			allowedColumns:		["nominal", "scale"]
+			allowTypeChange:	true
+			info: qsTr("Variables to include as predictors (moderators) in the meta-regression model.")
+		}
+*/
+
+		AssignedVariablesList
+		{
+			name:				"sampleSize"
+			title:				qsTr("Sample Size")
+			singleVariable:		true
+			allowedColumns:		["scale"]
+			info: qsTr("Variable containing sample sizes for the studies")
+		}
+
+		AssignedVariablesList
+		{
+			name:				"studyLabels"
+			title:				qsTr("Study Labels")
+			singleVariable:		true
+			allowedColumns:		["nominal"]
+			info: qsTr("Variable containing labels for the studies. Used for labeling outputs and plots.")
+		}
+	}
+
+	Group
+	{
+		RadioButtonGroup
+		{
+
+			name:		"dataInputType"
+			title:		qsTr("Data Input Type")
+
+			RadioButton
+			{
+				name:		"correlation"
+				label:		qsTr("Correlation")
+				checked:	true
+				info:		qsTr("Select this option for a correlation input.")
+			}
+			
+			RadioButton
+			{
+				name:		"covariance"
+				label:		qsTr("Covariance")
+				info:		qsTr("Select this option for a covariance input.")
+			}
+		}
+
+		DropDown
+		{
+			name:			"variableNameSeparator"
+			label:			qsTr("Variable name separator")
+			startValue:		"_"
+			info: qsTr("Separator used in the variable names in the correlation/covariance matrix input. The variable name must be in a form `x_y` where `x` and `y` corresponds to the variables between which the correlation/covariance is reported.")
+			values:
+			[
+				{ label: qsTr("_"),		value: "_" },
+				{ label: qsTr("."),		value: "." },
+				{ label: qsTr("-"),		value: "-" },
+				{ label: qsTr(" "),		value: " " }
+			]
+		}
+	}
+
+	Group
+	{
+		title: qsTr("Input Summary")
+
+		CheckBox
+		{
+			name:		"inputSummaryAvailableVariableNames"
+			label:		qsTr("Available variable names")
+			checked:	true
+			info:		qsTr("Show a summary of the available variable names in the correlation/covariance matrix input.")
+		}
+
+		CheckBox
+		{
+			name:		"inputSummaryFrequencyTable"
+			label:		qsTr("Frequency table")
+			checked:	true
+			info:		qsTr("Show a frequency table of the variables in the correlation/covariance matrix input.")
+		}
+	}
+
+
+
+
 	TabView
 	{
 		name:			"models"
@@ -42,23 +163,6 @@ Form
 			Group
 			{
 				columns: 2
-
-				ComponentsList
-				{
-					Layout.columnSpan:	1
-					preferredWidth:		syntax.width / 2
-					preferredHeight:	150
-					title: 				qsTr("Observed Variables")
-					name:				"observedVariableList"
-					source: 			"syntax"
-					info:				qsTr("Specify observed variables.")
-					rowComponent: 		CheckBox
-					{
-						label:		rowValue
-						name:		"observedVariable"
-						checked:	true
-					}
-				}
 
 				Group
 				{
