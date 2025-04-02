@@ -42,7 +42,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   return()
 }
 
-.masemDependencies            <- c("models", "modelSummaryConfidenceIntervalType")
+.semmetaDependencies          <- c("models", "modelSummaryConfidenceIntervalType")
 .masemReady                   <- function(options) {
   return(TRUE)
 }
@@ -67,7 +67,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   } else {
     outputContainer <- createJaspContainer(title = name)
     outputContainer$position <- 1 + position / 10
-    outputContainer$dependOn(.masemDependencies)
+    outputContainer$dependOn(.semmetaDependencies)
     jaspResults[[paste0("outputContainer", name)]] <- outputContainer
   }
 
@@ -161,7 +161,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   # prepare table
   modelFitTable <- createJaspTable(gettext("Model Fit"))
   modelFitTable$position <- 1
-  modelFitTable$dependOn(.masemDependencies)
+  modelFitTable$dependOn(.semmetaDependencies)
   jaspResults[["modelFitTable"]] <- modelFitTable
 
   # add columns
@@ -259,7 +259,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
     # create plot
     tempPlot <- createJaspPlot(title = gettext("Path Diagram"), width = 600, height = 400)
     tempPlot$position <- 2
-    tempPlot$dependOn(c(.masemDependencies, "pathDiagram", "pathDiagramShowParameters",
+    tempPlot$dependOn(c(.semmetaDependencies, "pathDiagram", "pathDiagramShowParameters",
                         "pathDiagramLayout",
                         "pathDiagramManifestNodeWidth", "pathDiagramLatentNodeWidth", "pathDiagramUnitVectorNodeWidth",
                         "pathDiagramLabelSize", "pathDiagramEdgeLabelSize", "pathDiagramNumberOfDigits"))
@@ -352,7 +352,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   # create summary table
   tempSummaryTable <- createJaspTable(gettext("Coefficient Summary"))
   tempSummaryTable$position <- 1
-  tempSummaryTable$dependOn(c(.masemDependencies, "modelSummary"))
+  tempSummaryTable$dependOn(c(.semmetaDependencies, "modelSummary"))
   tempOutputContainer[["summaryTable"]] <- tempSummaryTable
 
   # add columns
@@ -397,7 +397,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   # create summary table
   tempComputedTable <- createJaspTable(gettext("Computed Estimates Summary"))
   tempComputedTable$position <- 2
-  tempComputedTable$dependOn(c(.masemDependencies, "modelSummary"))
+  tempComputedTable$dependOn(c(.semmetaDependencies, "modelSummary"))
   tempOutputContainer[["computedEstimatesTable"]] <- tempComputedTable
 
   # add columns
