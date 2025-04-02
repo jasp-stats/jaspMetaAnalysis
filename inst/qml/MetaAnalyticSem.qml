@@ -136,7 +136,6 @@ Form
 		{
 			name:		"inputSummaryFrequencyTable"
 			label:		qsTr("Frequency table")
-			checked:	true
 			info:		qsTr("Show a frequency table of the variables in the correlation/covariance matrix input.")
 		}
 	}
