@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-04-02 18:57+0000\n"
-"Last-Translator: Uğur ÇELİK <prof_ugur@hotmail.com>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/jasp/"
-"jaspmetaanalysis-qml/tr/>\n"
-"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.11-dev\n"
 "X-Language: tr\n"
 "X-Qt-Contexts: true\n"
 
@@ -2500,9 +2494,10 @@ msgctxt "EffectSizeComputation|"
 msgid "RR"
 msgstr ""
 
+#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "OR"
-msgstr ""
+msgstr "VEYA"
 
 msgctxt "EffectSizeComputation|"
 msgid "RD"
@@ -2956,9 +2951,10 @@ msgctxt "EffectSizeComputation|"
 msgid "Effect Size"
 msgstr "Etki Boyutu"
 
+#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Standard Error"
-msgstr ""
+msgstr "Standart Hata"
 
 msgctxt "EffectSizeComputation|"
 msgid "Sampling Variance"
@@ -3105,29 +3101,35 @@ msgctxt "FunnelPlot|"
 msgid "Effect Size"
 msgstr "Etki Boyutu"
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Variable containing the observed effect sizes."
-msgstr ""
+msgstr "Gözlenen etki büyüklüklerini içeren değişken."
 
 #, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Effect Size Standard Error"
 msgstr "Etki Boyutu Standart Hatası"
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid ""
 "Variable containing the standard errors corresponding to the effect sizes."
 msgstr ""
+"Etkilerin büyüklüklerine karşılık gelen standart hataları içeren değişken."
 
 msgctxt "FunnelPlot|"
 msgid "Study Label"
 msgstr ""
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid ""
 "Variable containing labels for the studies. Used for labeling outputs and "
 "plots."
 msgstr ""
+"Çalışmalar için etiketler içeren değişken. Çıktıları ve grafikleri "
+"etiketlemek için kullanılır."
 
 msgctxt "FunnelPlot|"
 msgid "Split"
@@ -3233,54 +3235,65 @@ msgctxt "FunnelPlot|"
 msgid "Method"
 msgstr "Metot"
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Equal Effects"
-msgstr ""
+msgstr "Eşit Etkiler"
 
 #, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Fixed Effects"
 msgstr "Sabit Etkiler"
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Maximum Likelihood"
-msgstr ""
+msgstr "Maksimum Olasılık"
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Restricted ML"
-msgstr ""
+msgstr "Sınırlı ML"
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "DerSimonian-Laird"
-msgstr ""
+msgstr "DerSimonian-Laird"
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Hedges"
-msgstr ""
+msgstr "Engeller"
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Hunter-Schmidt"
-msgstr ""
+msgstr "Hunter-Schmidt"
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Hunter-Schmidt (SSC)"
-msgstr ""
+msgstr "Hunter-Schmidt (SSC)"
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Sidik-Jonkman"
-msgstr ""
+msgstr "Sidik-Jonkman"
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Empirical Bayes"
-msgstr ""
+msgstr "Deneysel Bayes"
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Paule-Mandel"
-msgstr ""
+msgstr "Paule-Mandel"
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Paule-Mandel (MU)"
-msgstr ""
+msgstr "Paule-Mandel (MU)"
 
 msgctxt "FunnelPlot|"
 msgid "Include heterogeneity"
@@ -3293,9 +3306,10 @@ msgid ""
 "the prediction intervals."
 msgstr ""
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Estimates table"
-msgstr ""
+msgstr "Tahmin tablosu"
 
 msgctxt "FunnelPlot|"
 msgid ""
@@ -3478,9 +3492,10 @@ msgid ""
 "unweighted estimation."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Clustering"
-msgstr ""
+msgstr "Kümeleme"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Use clubSandwich"
@@ -3541,9 +3556,10 @@ msgid ""
 "multivariate meta-analysis can be fixed via the 'Extend metafor call' option."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Weights"
-msgstr ""
+msgstr "Ağırlıklar"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid ""
@@ -3745,9 +3761,10 @@ msgid ""
 "can be computationally intesive."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Type"
-msgstr ""
+msgstr "Tür"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Select the type of permutation test."
@@ -4470,9 +4487,10 @@ msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Adjust the relative size of the forest plot components."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Estimates"
-msgstr ""
+msgstr "Tahminler"
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Text"
@@ -4624,9 +4642,10 @@ msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Variables assigned as model terms in the effect size model."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Include intercept"
-msgstr ""
+msgstr "Kesmeyi dahil et"
 
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Include an intercept in the effect size model."
@@ -4691,9 +4710,10 @@ msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Include 𝜏², the estimated between-study variance."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "I²"
-msgstr ""
+msgstr "I²"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid ""
@@ -4711,9 +4731,10 @@ msgid ""
 "variability."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Random Effects / Model Structure"
-msgstr ""
+msgstr "Rastgele Etkiler / Model Yapısı"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Available when performing multilevel/multivariate meta-analysis."
@@ -4878,37 +4899,45 @@ msgctxt "PredictionPerformanceInference|"
 msgid "Fixed Effects"
 msgstr "Sabit Etkiler"
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Maximum Likelihood"
-msgstr ""
+msgstr "Maksimum Olasılık"
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Restricted ML"
-msgstr ""
+msgstr "Sınırlı ML"
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "DerSimonian-Laird"
-msgstr ""
+msgstr "DerSimonian-Laird"
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Hedges"
-msgstr ""
+msgstr "Engeller"
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Hunter-Schmidt"
-msgstr ""
+msgstr "Hunter-Schmidt"
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Sidik-Jonkman"
-msgstr ""
+msgstr "Sidik-Jonkman"
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Empirical Bayes"
-msgstr ""
+msgstr "Deneysel Bayes"
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Paule-Mandel"
-msgstr ""
+msgstr "Paule-Mandel"
 
 msgctxt "FunnelPlot|"
 msgid ""
