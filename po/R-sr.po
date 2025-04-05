@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.19.2\n"
 "POT-Creation-Date: 2025-03-29 02:50\n"
-"PO-Revision-Date: 2025-03-28 12:20+0000\n"
+"PO-Revision-Date: 2025-04-02 18:57+0000\n"
 "Last-Translator: Marko Bojović <bojovicmarko@outlook.com>\n"
 "Language-Team: Serbian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/sr/>\n"
@@ -111,7 +111,7 @@ msgid "Lower"
 msgstr "Ниже"
 
 msgid "95%% Credible Interval"
-msgstr ""
+msgstr "95%% Веродостојан интервал"
 
 msgid "Upper"
 msgstr "Горњи"
@@ -331,7 +331,7 @@ msgid "Prior and posterior plot"
 msgstr ""
 
 msgid "Value"
-msgstr ""
+msgstr "Вредност"
 
 msgid "Running means plot"
 msgstr ""
@@ -1263,7 +1263,7 @@ msgid "Models Overview"
 msgstr ""
 
 msgid "BF%s"
-msgstr ""
+msgstr "BF%s"
 
 #, fuzzy
 msgid "log(BF%s)"

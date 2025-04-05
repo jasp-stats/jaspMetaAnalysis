@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.3\n"
 "POT-Creation-Date: 2025-03-29 02:50\n"
-"PO-Revision-Date: 2025-03-17 17:10+0000\n"
-"Last-Translator: MikeWinny <winny63@gmail.com>\n"
+"PO-Revision-Date: 2025-04-02 18:57+0000\n"
+"Last-Translator: Иван Рудаков <riv@polygene.ru>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/ru/>\n"
 "Language: ru\n"
@@ -20,36 +20,38 @@ msgid ""
 msgstr ""
 
 msgid "Prior Plots"
-msgstr ""
+msgstr "Априорные графики"
 
 msgid "Effect"
-msgstr ""
+msgstr "Эффект"
 
 msgid "Heterogeneity"
 msgstr ""
 
 msgid "Null"
-msgstr ""
+msgstr "Ноль"
 
 msgid "Alternative"
-msgstr ""
+msgstr "Альтернатива"
 
 msgid "Model Preview"
-msgstr ""
+msgstr "Предпросмотр модели"
 
 msgid ""
 "Please specify a prior distribution for each parameter in the Models "
 "specification section (either null or alternative)."
 msgstr ""
+"Пожалуйста, укажите априорное распределение для каждого параметра в разделе "
+"Спецификация моделей (нулевое или альтернативное)."
 
 msgid "Model Summary"
-msgstr ""
+msgstr "Сводка по Модели"
 
 msgid "Models"
-msgstr ""
+msgstr "Модели"
 
 msgid "P(M)"
-msgstr ""
+msgstr "P(M)"
 
 msgid ""
 "The analysis will estimate multiple meta-analytic models using MCMC and "
@@ -57,10 +59,10 @@ msgid ""
 msgstr ""
 
 msgid "Model Specification Preview"
-msgstr ""
+msgstr "Предпросмотр описания Модели"
 
 msgid "Prior Distribution"
-msgstr "Априорное распределение"
+msgstr "Априорное Распределение"
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr ""
@@ -191,7 +193,7 @@ msgid "Model Probabilities"
 msgstr ""
 
 msgid "Prior"
-msgstr "Априорное распределение"
+msgstr "Априорная вероятность"
 
 msgid "Posterior"
 msgstr "Апостериорное распределение"
@@ -393,7 +395,7 @@ msgid "Estimate"
 msgstr ""
 
 msgid "Standard Error"
-msgstr ""
+msgstr "Стандартная ошибка"
 
 msgid "t"
 msgstr ""
@@ -426,7 +428,7 @@ msgid "Meta-Analytic Estimates"
 msgstr ""
 
 msgid "%s%% CI"
-msgstr ""
+msgstr "%s%% ДИ"
 
 msgid "%s%% PI"
 msgstr ""
@@ -527,7 +529,7 @@ msgid "No influential cases found."
 msgstr ""
 
 msgid "Label"
-msgstr ""
+msgstr "Метка"
 
 msgid "Predictor"
 msgstr ""
@@ -852,7 +854,7 @@ msgid "Structured"
 msgstr ""
 
 msgid "Summary"
-msgstr ""
+msgstr "Сводка"
 
 msgid "Autoregressive"
 msgstr ""
@@ -978,7 +980,7 @@ msgid "Debray"
 msgstr ""
 
 msgid "Standard error"
-msgstr ""
+msgstr "Стандартная ошибка"
 
 msgid "Sample size"
 msgstr "Размер выборки"
@@ -1150,7 +1152,7 @@ msgid "At least one predictor needs to be specified."
 msgstr ""
 
 msgid "Warning:"
-msgstr ""
+msgstr "Предупреждение:"
 
 msgid "%1$s observations were ommited due to missing values."
 msgstr ""
@@ -1195,19 +1197,19 @@ msgid "MCMC error/SD"
 msgstr ""
 
 msgid "ESS"
-msgstr ""
+msgstr "ESS"
 
 msgid "R-hat"
-msgstr ""
+msgstr "R-hat"
 
 msgid "<em>p</em>-values interval"
 msgstr ""
 
 msgid "Effect size (%s)"
-msgstr ""
+msgstr "Размер эффекта (%s)"
 
 msgid "Heterogeneity (%s)"
-msgstr ""
+msgstr "Гетерогенность (%s)"
 
 msgid "Publication bias"
 msgstr ""
@@ -1227,23 +1229,24 @@ msgstr ""
 msgid "The loaded object is not a RoBMA model."
 msgstr ""
 
+#, fuzzy
 msgid "Conditional Estimates"
-msgstr ""
+msgstr "Условные оценки"
 
 msgid "Inclusion BF"
-msgstr ""
+msgstr "Включение КБ"
 
 msgid "Exclusion BF"
-msgstr ""
+msgstr "Исключение КБ"
 
 msgid "log(Inclusion BF)"
-msgstr ""
+msgstr "log(Включение КБ)"
 
 msgid "P(M|data)"
-msgstr ""
+msgstr "P(M|данные)"
 
 msgid "Model Averaged Estimates"
-msgstr ""
+msgstr "Усредненные оценки модели"
 
 msgid "Model Averaged Weights (%s)"
 msgstr ""
@@ -1258,37 +1261,37 @@ msgid "Conditional PET-PEESE Estimates"
 msgstr ""
 
 msgid "Models Overview"
-msgstr ""
+msgstr "Обзор Моделей"
 
 msgid "BF%s"
-msgstr ""
+msgstr "КБ%s"
 
 msgid "log(BF%s)"
-msgstr ""
+msgstr "log(КБ%s)"
 
 msgid "log(MargLik)"
-msgstr ""
+msgstr "log(ПредПрав)"
 
 msgid "Individual Models Summary"
-msgstr ""
+msgstr "Сводка отдельных моделей"
 
 msgid "Model #"
-msgstr ""
+msgstr "Модель #"
 
 msgid "Priors"
-msgstr ""
+msgstr "Априорные распределения"
 
 msgid "Information"
-msgstr ""
+msgstr "Информация"
 
 msgid "Model Estimates"
-msgstr ""
+msgstr "Оценки Модели"
 
 msgid "Model %i"
-msgstr ""
+msgstr "Модель %i"
 
 msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
-msgstr ""
+msgstr "Модель %1$i не существует. Выберите одну из моделей от 1 до %2$i."
 
 msgid "Estimated Weights (%s)"
 msgstr ""
@@ -1300,16 +1303,18 @@ msgid "%1$s Forest Plot"
 msgstr ""
 
 msgid "Posterior Distribution Plots"
-msgstr ""
+msgstr "Графики Апостериорной Вероятности"
 
+#, fuzzy
 msgid "Conditional"
-msgstr ""
+msgstr "Условные"
 
 msgid "Model Averaged"
-msgstr ""
+msgstr "Усредненная Модель"
 
+#, fuzzy
 msgid "Effect Size Estimate"
-msgstr ""
+msgstr "Оценка эффективности"
 
 msgid "Heterogeneity Estimate"
 msgstr ""
@@ -1330,10 +1335,10 @@ msgid "Heterogeneity Estimates"
 msgstr ""
 
 msgid "Diagnostics"
-msgstr ""
+msgstr "Диагностика"
 
 msgid "Models Diagnostics Overview"
-msgstr ""
+msgstr "Обзор Диагностики Моделей"
 
 msgid "max(MCMC error)"
 msgstr ""
@@ -1342,15 +1347,17 @@ msgid "max(MCMC error/SD)"
 msgstr ""
 
 msgid "min(ESS)"
-msgstr ""
+msgstr "min(ЕСС)"
 
 msgid "max(R-hat)"
-msgstr ""
+msgstr "max(R-hat)"
 
 msgid ""
 "MCMC Diagnostics plots are created once both the plotted parameter ('Plot') "
 "and the plot type ('Type') options are selected."
 msgstr ""
+"MCMC Диагностические графики создаются после выбора параметра для построения "
+"('График') и типа графика ('Тип')."
 
 msgid "Weights"
 msgstr ""
@@ -1361,17 +1368,18 @@ msgstr ""
 msgid "PEESE"
 msgstr ""
 
+#, fuzzy
 msgid "Trace plots"
-msgstr ""
+msgstr "Графики трендов"
 
 msgid "Average autocorrelations"
-msgstr ""
+msgstr "Среднее автокоррелирование"
 
 msgid "Posterior samples densities"
-msgstr ""
+msgstr "Плотности образцов апостериорной вероятности"
 
 msgid "Model %i does not contain any of the selected parameters."
-msgstr ""
+msgstr "Модель %i не содержит ни одного из выбранных параметров."
 
 msgid ""
 "All models failed to converge under the MCMC convergence criteria. Please "

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2025-03-29 02:50\n"
-"PO-Revision-Date: 2025-01-12 11:00+0000\n"
+"PO-Revision-Date: 2025-03-30 09:01+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.11-dev\n"
 
 msgid ""
 "The study labels contain invalid characters. Please, remove them before "
@@ -1172,9 +1172,8 @@ msgstr "Potencia"
 msgid "H₁ Funnel Parameter Estimates"
 msgstr "Estimaciones de parámetros del embudo bajo H₁"
 
-#, fuzzy
 msgid "Estimate μ"
-msgstr "Estimar"
+msgstr "Estimar μ"
 
 msgid "Lower 95%% CI"
 msgstr "Inferior IC de 95%%"
@@ -1182,33 +1181,28 @@ msgstr "Inferior IC de 95%%"
 msgid "Upper 95%% CI"
 msgstr "Superior IC de 95%%"
 
-#, fuzzy
 msgid "Estimate 𝜏"
-msgstr "Estimaciones 𝜏²"
+msgstr "Estimar 𝜏"
 
 msgid "The funnel plot parameter estimation failed with the following error:"
 msgstr ""
 "La estimación de parámetros del gráfico en embudo fracasó con el siguiente "
 "fallo:"
 
-#, fuzzy
 msgid "Trim and Fill Parameter Estimates"
-msgstr "Estimaciones de parámetros del embudo bajo H₁"
+msgstr "Estimaciones de parámetros de Recortar y Rellenar"
 
-#, fuzzy
 msgid "Missing Estimates"
-msgstr "Estimaciones de la Regresión"
+msgstr "Estimaciones de ausentes"
 
 msgid "Trim and Fill"
-msgstr ""
+msgstr "Recortar y rellenar"
 
-#, fuzzy
 msgid "Adjusted Estimate μ"
-msgstr "Estimación ajustada"
+msgstr "Estimación ajustada de μ"
 
-#, fuzzy
 msgid "Adjusted Estimate 𝜏"
-msgstr "Estimación ajustada"
+msgstr "Estimación ajustada de 𝜏"
 
 msgid "Meta-Regression Test for Funnel Plot Asymmetry"
 msgstr "Contraste de Meta-Regresión para asimetría de gráficos en embudo"
@@ -1216,9 +1210,8 @@ msgstr "Contraste de Meta-Regresión para asimetría de gráficos en embudo"
 msgid "Asymmetry Test"
 msgstr "Contraste de asimetría"
 
-#, fuzzy
 msgid "Limit Estimate μ"
-msgstr "Estimar límite"
+msgstr "Estimación límite de μ"
 
 msgid "Weighted Regression Test for Funnel Plot Asymmetry"
 msgstr "Contraste de regresión ponderada para asimetría de gráficos en embudo"
@@ -1227,24 +1220,23 @@ msgid "Rank Correlation Test for Funnel Plot Asymmetry"
 msgstr ""
 "Contraste de correlación de rangos para asimetría de gráficos en embudo"
 
-#, fuzzy
 msgid "Fail-Safe N"
 msgstr "N a prueba de fallos"
 
 msgid "Fail-Safe N Summary Table"
-msgstr ""
+msgstr "Tabla resumen de N a prueba de fallos"
 
 msgid "Rosenthal"
-msgstr ""
+msgstr "Rosenthal"
 
 msgid "Orwin"
-msgstr ""
+msgstr "Orwin"
 
 msgid "Rosenberg"
-msgstr ""
+msgstr "Rosenberg"
 
 msgid "General"
-msgstr ""
+msgstr "General"
 
 msgid "The funnel plot asymmetry test failed with the following error:"
 msgstr ""
@@ -1257,16 +1249,14 @@ msgstr ""
 "El contraste de asimetría de gráficos en embudo a nivel %1$s fracasó con el "
 "siguiente fallo:"
 
-#, fuzzy
 msgid ""
 "The meta-analytic model did not converge. Try modifying the 'Method' option."
 msgstr ""
-"El modelo Meta-Analítico no converge. Intenta modificar la opción 'Método' "
-"en la configuración de 'Embudo bajo H₁'."
+"El modelo Meta-Analítico no converge. Intenta modificar la opción 'Método'."
 
-#, fuzzy
 msgid "The %1$s fail-safe N calculation %2$sfailed with the following error:"
-msgstr "El contraste %1$s se quebró con el siguiente fallo: %2$s"
+msgstr ""
+"El cálculo %1$s del N a prueba de fallos erró con el siguiente fallo: %2$s"
 
 msgid "The model should contain at least one predictor or an intercept."
 msgstr "El modelo debe tener, al menos, un predictor o una constante."
