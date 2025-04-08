@@ -20,7 +20,9 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   # set OpenMx options
   # the JASP options() cleanup does not properly re-sets OpenMx settings
   # consequently, the fitting function crashes with matrix(byrow) error
-  OpenMx::mxSetDefaultOptions()
+  library(metaSEM)
+  #
+  .masemMxOptions()
 
   # read the data set
   dataset <- .masemDecodeData(dataset, options)
@@ -34,20 +36,23 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   if (options[["inputSummaryFrequencyTable"]])
     .masemDataSummaryTables(jaspResults, dataset, options)
 
-  return()
   # estimate the models
-  .masemFitModels(jaspResults, dataset, options)
+  .masemFitModels(jaspResults, dataset, options, MASEM = TRUE)
+  .masemFitMeasures(jaspResults, options)
 
   # create summary with model fit statistics (for all models)
   .masemModelFitTable(jaspResults, options)
 
+  if (options[["additionalFitMeasures"]])
+    .masemAdditionalFitMeasuresTable(jaspResults, options)
+
   # create model-level summaries
   if (options[["modelSummary"]])
-    .masemModelSummaryTable(jaspResults, options)
+    .masemModelSummaryTable(jaspResults, options, MASEM = TRUE)
 
   # create path diagrams
   if (options[["pathDiagram"]])
-    .masemModelPathDiagram(jaspResults, options)
+    .masemModelPathDiagram(jaspResults, options, MASEM = TRUE)
 
   return()
 }
@@ -65,7 +70,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 
   inputNames <- options[["correlationCovarianceMatrix"]]
 
-  if (length(inputNames) == 0) {
+  if (length(inputNames) == 0 || options[["sampleSize"]] == "") {
     return()
   }
 
@@ -179,7 +184,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   # create an HTML output listing all available variable names (based on the correlation/covariance matrix input)
   variableSummaryView <- createJaspHtml(title = gettext("Available Variable Names"))
   variableSummaryView$dependOn(c("correlationCovarianceMatrix", "means", "dataInputType", "variableNameSeparator", "inputSummaryAvailableVariableNames"))
-  variableSummaryView$position <- 1
+  variableSummaryView$position <- 0.1
   jaspResults[["variableSummaryView"]] <- variableSummaryView
 
   if (!is.null(dataset[["inputMatricies"]])) {
@@ -195,7 +200,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
     return()
 
   dataSummaryTables <- createJaspContainer(title = gettext("Data Summary"))
-  dataSummaryTables$position <- 2
+  dataSummaryTables$position <- 0.2
   dataSummaryTables$dependOn(c("correlationCovarianceMatrix", "means", "dataInputType", "variableNameSeparator", "inputSummaryFrequencyTable"))
   jaspResults[["dataSummaryTables"]] <- dataSummaryTables
 
@@ -261,4 +266,184 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 
 
   return()
+}
+
+.masemFitMeasures                <- function(jaspResults, options) {
+
+  # add fit measures on model-by model bases if
+  # 1) they were requested
+  # 2) a new model was fitted that does not have fit measures
+  # the computation takes a bit, so it is worthwhile storing them
+
+  if (!options[["additionalFitMeasures"]])
+    return()
+
+  # obtain the model container
+  modelContainer <- jaspResults[["modelContainer"]]
+  fits           <- modelContainer$object
+
+  # compute the individual model fits
+  for (model in options[["models"]]) {
+
+    # current fit
+    tempFit <- fits[[model[["value"]]]]
+
+    # skip on error or null
+    if (is.null(tempFit) || jaspBase::isTryError(tempFit))
+      next
+
+    # check if the fit measures are already computed
+    if (!is.null(attr(tempFit, "fitIndices")))
+      next
+
+    # compute the fit measures
+    jaspBase::startProgressbar(1, label = gettextf("Computing additional fit measures: %1$s", model[["value"]]))
+    tempSummary <- summary(tempFit, fitIndices = TRUE)
+
+    # store the fit measures
+    attr(tempFit, "fitIndices") <- tempSummary
+    fits[[model[["value"]]]]    <- tempFit
+    jaspBase::progressbarTick()
+
+  }
+
+  # return all of the fits to the container
+  modelContainer$object <- fits
+
+  return()
+}
+.masemAdditionalFitMeasuresTable <- function(jaspResults, options) {
+
+  if (!is.null(jaspResults[["additionalFitMeasures"]]))
+    return()
+
+  # prepare table
+  additionalFitMeasures <- createJaspTable(gettext("Additional Fit Measures"))
+  additionalFitMeasures$position <- 1.1
+  additionalFitMeasures$dependOn(c(.semmetaDependencies, "additionalFitMeasures"))
+  jaspResults[["additionalFitMeasures"]] <- additionalFitMeasures
+
+  # add columns
+  additionalFitMeasures$addColumnInfo(name = "name",        type = "string",  title = "")
+  additionalFitMeasures$addColumnInfo(name = "cfi",         type = "number",  title = gettext("CLI"))
+  additionalFitMeasures$addColumnInfo(name = "tli",         type = "number",  title = gettext("TLI"))
+  additionalFitMeasures$addColumnInfo(name = "rmsea",       type = "number",  title = gettext("RMSEA"))
+  additionalFitMeasures$addColumnInfo(name = "prmsea",      type = "number",  title = gettext("p(RMSEA < 0.05)"))
+
+  # exit if not ready
+  if(!.masemReady(options) || is.null(jaspResults[["modelContainer"]]))
+    return()
+
+  # extract fits
+  fits <- jaspResults[["modelContainer"]]$object
+
+  # loop over models and store model fit indicies
+  out <- list()
+  for (model in options[["models"]]) {
+
+    # extract model fit
+    tempFit <- fits[[model[["value"]]]]
+
+    if (jaspBase::isTryError(tempFit) || is.null(tempFit) || is.null(attr(tempFit, "fitIndices"))) {
+      out[[model[["value"]]]] <- data.frame(
+        name   = model[["value"]],
+        cfi    = NA,
+        tli    = NA,
+        rmsea  = NA,
+        prmsea = NA
+      )
+
+    } else {
+      # extract fit measures
+      tempSummary <- attr(tempFit, "fitIndices")
+      out[[model[["value"]]]] <- data.frame(
+        name   = model[["value"]],
+        cfi    = tempSummary$CFI,
+        tli    = tempSummary$TLI,
+        rmsea  = tempSummary$RMSEA,
+        prmsea = tempSummary$RMSEAClose
+      )
+    }
+  }
+
+  # assign output to table
+  additionalFitMeasures$setData(do.call(rbind, out))
+
+  return()
+}
+.masemCreateSummaryTable         <- function(tempOutputContainer, tempFit, options, output) {
+
+  # create summary table
+  tempSummaryTable <- createJaspTable(title = switch(
+    output,
+    "parameters"    = gettext("Parameter Estimates"),
+    "covariances"   = gettext("Covariance Estimates"),
+    "randomEffects" = gettext("Random Effects Estimates")
+  ))
+  tempSummaryTable$position <- switch(
+    output,
+    "parameters"    = 1,
+    "covariances"   = 2,
+    "randomEffects" = 3
+  )
+  tempSummaryTable$dependOn(c(.semmetaDependencies, "modelSummary", switch(
+    output,
+    "parameters"    = "modelSummaryParameters",
+    "covariances"   = "modelSummaryCovariances",
+    "randomEffects" = "modelSummaryRandomEffects"
+  )))
+  tempOutputContainer[[output]] <- tempSummaryTable
+
+  # add columns
+  tempSummaryTable$addColumnInfo(name = "row",      type = "string",  title = gettext("Row"))
+  tempSummaryTable$addColumnInfo(name = "col",      type = "string",  title = gettext("Column"))
+  tempSummaryTable$addColumnInfo(name = "estimate", type = "number",  title = gettext("Estimate"))
+  if (options[["modelSummaryConfidenceIntervalType"]] == "standardErrors") {
+    tempSummaryTable$addColumnInfo(name = "se",        type = "number",  title = gettext("Standard Error"))
+    tempSummaryTable$addColumnInfo(name = "z",         type = "number",  title = gettext("z"))
+    tempSummaryTable$addColumnInfo(name = "p",         type = "pvalue",  title = gettext("p"))
+  }
+  tempSummaryTable$addColumnInfo(name = "lCi",       type = "number",  title = gettext("Lower"), overtitle = gettextf("95%% CI"))
+  tempSummaryTable$addColumnInfo(name = "uCi",       type = "number",  title = gettext("Upper"), overtitle = gettextf("95%% CI"))
+
+  # skip if not ready
+  if (!.masemReady(options))
+    return()
+
+  if (is.null(tempFit))
+    return()
+
+  # check if the model fit failed
+  if (jaspBase::isTryError(tempFit)) {
+    tempSummaryTable$setError(gettextf("Model fit failed with the following message %1$s.", tempFit))
+    return()
+  }
+
+  # extract the parameter estimates
+  tempOutput <- summary(tempFit)[["parameters"]]
+  colnames(tempOutput) <- c("name", "matrix", "row", "col", "estimate", "se", "lCi", "uCi", "lCiMet", "uCiMet", "z", "p")
+  tempOutput <- tempOutput[tempOutput$matrix == switch(
+    output,
+    "parameters"    = "Amatrix",
+    "covariances"   = "Smatrix",
+    "randomEffects" = "TauCov"
+  ), ,drop=FALSE]
+
+  if (options[["modelSummaryConfidenceIntervalType"]] == "likelihoodBased") {
+    tempOutput <- tempOutput[, c("row", "col", "estimate", "lCi", "uCi"),drop=FALSE]
+  } else {
+    tempOutput <- tempOutput[, c("row", "col", "estimate", "se", "z", "p", "lCi", "uCi"),drop=FALSE]
+  }
+
+  # add output to container
+  tempSummaryTable$setData(tempOutput)
+
+  return()
+}
+.masemMxOptions <- function() {
+  OpenMx::mxSetDefaultOptions()
+  OpenMx::mxOption(NULL, "Default optimizer", "SLSQP")
+  OpenMx::mxOption(NULL, "Gradient algorithm", "central")
+  OpenMx::mxOption(NULL, "Optimality tolerance", "6.3e-14")
+  OpenMx::mxOption(NULL, "Gradient iterations", 2)
 }

@@ -25,7 +25,7 @@ Form
 
 	VariablesForm
 	{
-		preferredHeight: 550 * preferencesModel.uiScale
+		preferredHeight: 425 * preferencesModel.uiScale
 
 		AvailableVariablesList
 		{
@@ -37,29 +37,11 @@ Form
 			name:				"correlationCovarianceMatrix"
 			title:				qsTr("Correlation/Covariance Matrix")
 			allowedColumns:		["scale"]
+			height:				250 * preferencesModel.uiScale
 			info: qsTr("Variables containing the correlations/covariances between the variables. " + 
 			"The variable name must be in a form `x_y` where `x` and `y` corresponds to the variables between which the correlation/covariance is reported. " + 
 			"The separator used in the variable names (defaults to `_`) can be changed via the `Variable name separator` option.")
 		}
-
-		AssignedVariablesList
-		{
-			name:				"means"
-			title:				qsTr("Means")
-			allowedColumns:		["scale"]
-			info: qsTr("Variables containing the means of the variables. The variable name must be `x` where `x` corresponds to the variable names in the correlation/covariance matrix input. This input is required only when meta-analytic sem with means is requested.")
-		}
-/*
-		AssignedVariablesList
-		{
-			name:				"predictors"
-			id:					predictors
-			title:				qsTr("Predictors")
-			allowedColumns:		["nominal", "scale"]
-			allowTypeChange:	true
-			info: qsTr("Variables to include as predictors (moderators) in the meta-regression model.")
-		}
-*/
 
 		AssignedVariablesList
 		{
@@ -72,12 +54,33 @@ Form
 
 		AssignedVariablesList
 		{
+			name:				"means"
+			id:					means
+			title:				qsTr("Means")
+			allowedColumns:		["scale"]
+			height:				100 * preferencesModel.uiScale
+			info: qsTr("Variables containing the means of the variables. The variable name must be `x` where `x` corresponds to the variable names in the correlation/covariance matrix input. This input is required only when meta-analytic sem with means is requested.")
+		}
+/*
+		AssignedVariablesList
+		{
+			name:				"predictors"
+			id:					predictors
+			title:				qsTr("Predictors")
+			allowedColumns:		["nominal", "scale"]
+			allowTypeChange:	true
+			info: qsTr("Variables to include as predictors (moderators) in the meta-regression model.")
+		}
+
+		AssignedVariablesList
+		{
 			name:				"studyLabels"
 			title:				qsTr("Study Labels")
 			singleVariable:		true
 			allowedColumns:		["nominal"]
 			info: qsTr("Variable containing labels for the studies. Used for labeling outputs and plots.")
 		}
+*/
 	}
 
 	Group
@@ -86,6 +89,7 @@ Form
 		{
 
 			name:		"dataInputType"
+			id:			dataInputType
 			title:		qsTr("Data Input Type")
 
 			RadioButton
@@ -155,7 +159,7 @@ Form
 			{
 				name:		"syntax"
 				id:			syntax
-				textType:	JASP.TextTypeLavaan
+				//textType:	JASP.TextTypeLavaan
 				info:		qsTr("Specify model using a lavaan style syntax.")
 			}
 
@@ -179,9 +183,56 @@ Form
 					{
 						text:		qsTr("Fix latent variance to 1")
 						name:		"fixLatentVarianceTo1"
-						checked:	false
-						info:		qsTr("Fix the variance of latent variables to 1.")
+						enabled:	dataInputType.value == "covariance"
+						checked:	true
+						info:		qsTr("Fix the variance of latent variables to 1. Only available for covariance input.")
 					}
+				}
+
+				Group
+				{
+					title: qsTr("Random Effects")
+
+					DropDown
+					{
+						name:		"randomEffectsSigma"
+						label:		qsTr("Sigma")
+						values:
+						[
+							{ label: qsTr("Diagonal"),	value: "diagonal" },
+							{ label: qsTr("Symmetric"),	value: "symmetric" },
+							{ label: qsTr("Zero"),		value: "zero" }
+						]
+						info: qsTr("Type of the random effects of the correlation or covariance vectors.")
+					}
+
+					DropDown
+					{
+						name:		"randomEffectsMu"
+						label:		qsTr("Mu")
+						enabled:	means.count > 0
+						values:
+						[
+							{ label: qsTr("Symmetric"),	value: "symmetric" },
+							{ label: qsTr("Diagonal"),	value: "diagonal" },
+							{ label: qsTr("Zero"),		value: "zero" }
+						]
+						info: qsTr("Type of the random effects of the mean vectors.")
+					}
+
+					DropDown
+					{
+						name:		"randomEffectsSigmaMu"
+						label:		qsTr("Sigma - Mu")
+						enabled:	means.count > 0
+						values:
+						[
+							{ label: qsTr("Zero"),	value: "zero" },
+							{ label: qsTr("Full"),	value: "full" }
+						]
+						info: qsTr("Type of the random effects between the correlation/covariance vectors and the mean vectors.")
+					}
+
 				}
 			}
 		}
@@ -189,23 +240,59 @@ Form
 	}
 	
 
-	CheckBox
+	Group
 	{
-		text:		qsTr("Model summary")
-		name:		"modelSummary"
-		checked:	false
-		info:		qsTr("Show a summary of the model coefficients and computed estimates.")
 
-		DropDown
+		CheckBox
 		{
-			name:		"modelSummaryConfidenceIntervalType"
-			label:		qsTr("Confidence interval type")
-			values:
-			[
-				{ label: qsTr("Standard errors")	, value: "standardErrors"	},
-				{ label: qsTr("Likelihood based")   , value: "likelihoodBased"	}
-			]
-			info:		qsTr("Method for computing confidence interval.")
+			text:		qsTr("Additional fit measures")
+			name:		"additionalFitMeasures"
+			checked:	false
+			info:		qsTr("Show a summary of the goodness-of-fit statistics.")
+		}
+
+		CheckBox
+		{
+			text:		qsTr("Model summary")
+			name:		"modelSummary"
+			checked:	false
+			info:		qsTr("Show a summary of the model coefficients and computed estimates.")
+
+			CheckBox
+			{
+				name:		"modelSummaryParameters"
+				label:		qsTr("Parameters")
+				checked:	true
+				info:		qsTr("Show parameter estimates (A-Matrix) in the model summary.")
+			}
+
+			CheckBox
+			{
+				name:		"modelSummaryCovariances"
+				label:		qsTr("Covariances")
+				checked:	false
+				info:		qsTr("Show covariance estimates (S-Matrix) in the model summary.")
+			}
+
+			CheckBox
+			{
+				name:		"modelSummaryRandomEffects"
+				label:		qsTr("Random effects")
+				checked:	false
+				info:		qsTr("Show random effects in the model summary.")
+			}
+
+			DropDown
+			{
+				name:		"modelSummaryConfidenceIntervalType"
+				label:		qsTr("Confidence interval type")
+				values:
+				[
+					{ label: qsTr("Standard errors")	, value: "standardErrors"	},
+					{ label: qsTr("Likelihood based")   , value: "likelihoodBased"	}
+				]
+				info:		qsTr("Method for computing confidence interval.")
+			}
 		}
 	}
 
