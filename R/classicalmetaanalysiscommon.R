@@ -47,9 +47,7 @@
   # }
 
   # model summary
-  .maResidualHeterogeneityTable(jaspResults, dataset, options)
-  .maPooledEffectSizeTestTable(jaspResults, dataset, options)
-  .maModeratorsTable(jaspResults, dataset, options)
+  .maOverallTestsTable(jaspResults, dataset, options)
   .maPooledEstimatesTable(jaspResults, dataset, options)
 
   # random effects
@@ -393,141 +391,103 @@
 }
 
 # output tables
-.maResidualHeterogeneityTable            <- function(jaspResults, dataset, options) {
+.maOverallTestsTable                     <- function(jaspResults, dataset, options) {
 
   modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults)
 
-  if (!is.null(modelSummaryContainer[["residualHeterogeneityTable"]]))
+  if (!is.null(modelSummaryContainer[["testsTable"]]))
     return()
 
   fit <- .maExtractFit(jaspResults, options)
 
   # residual heterogeneity table
-  residualHeterogeneityTable          <- createJaspTable(gettext("Residual Heterogeneity Test"))
-  residualHeterogeneityTable$position <- 1
-  modelSummaryContainer[["residualHeterogeneityTable"]] <- residualHeterogeneityTable
+  testsTable <- createJaspTable(gettext("Meta-Analytic Tests"))
+  testsTable$position <- 1
+  testsTable$dependOn(c("addOmnibusModeratorTestEffectSizeCoefficients", "addOmnibusModeratorTestEffectSizeCoefficientsValues",
+                             "addOmnibusModeratorTestHeterogeneityCoefficients", "addOmnibusModeratorTestHeterogeneityCoefficientsValues"))
+  modelSummaryContainer[["testsTable"]] <- testsTable
 
-  residualHeterogeneityTable$addColumnInfo(name = "qstat", type = "number",  title = gettext("Q\U2091"))
-  residualHeterogeneityTable$addColumnInfo(name = "df",    type = "integer", title = gettext("df"))
-  residualHeterogeneityTable$addColumnInfo(name = "pval",  type = "pvalue",  title = gettext("p"))
+  testsTable$addColumnInfo(name = "test",  type = "string",  title = "")
+  testsTable$addColumnInfo(name = "stat",  type = "string",  title = gettext("Test"))
+  testsTable$addColumnInfo(name = "pval",  type = "pvalue",  title = gettext("p"))
+
+  if (.maIsPermutation(options)) {
+    testsTable$addColumnInfo(name = "pval2",  type = "pvalue",  title = gettext("p (permutation)"))
+    testsTable$addFootnote(.maPermutationMessage(options))
+  }
 
   # stop and display errors
   if (is.null(fit))
     return()
 
   if (!is.null(.maCheckIsPossibleOptions(options))) {
-    residualHeterogeneityTable$setError(.maCheckIsPossibleOptions(options))
+    testsTable$setError(.maCheckIsPossibleOptions(options))
     return()
   }
 
   if (jaspBase::isTryError(fit)) {
-    residualHeterogeneityTable$setError(.maTryCleanErrorMessages(fit))
+    testsTable$setError(.maTryCleanErrorMessages(fit))
     return()
   }
 
-  # residual heterogeneity
-  residualHeterogeneityTable$addRows(list(
-    qstat = fit[["QE"]],
-    df    = fit[["k"]] - fit[["p"]],
-    pval  = fit[["QEp"]]
-  ))
+  # add all the overall model test
+  tests <- list()
 
-  return()
-}
-.maPooledEffectSizeTestTable             <- function(jaspResults, dataset, options) {
+  # heterogeneity / residual heterogeneity
+  tests[["heterogeneity"]] <- list(
+    test = if (.maIsMetaregression(options)) gettext("Residual heterogeneity") else gettext("Heterogeneity"),
+    stat = sprintf("Q\U2091(%1$i) = %2$.2f", fit[["k"]] - fit[["p"]], fit[["QE"]]),
+    pval = fit[["QEp"]]
+  )
+  if (.maIsPermutation(options)) {
+    tests[["heterogeneity"]][["pval2"]] <- NA
+  }
 
-  modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults)
-
-  if (!is.null(modelSummaryContainer[["pooledEffectSizeTest"]]))
-    return()
-
-  fit <- .maExtractFit(jaspResults, options)
-
-  pooledEffectSizeTest <- createJaspTable(gettext("Pooled Effect Size Test"))
-  pooledEffectSizeTest$position <- 1.1
-  pooledEffectSizeTest$dependOn("confidenceIntervals")
-  modelSummaryContainer[["pooledEffectSizeTest"]] <- pooledEffectSizeTest
-
-  pooledEffectSizeTest$addColumnInfo(name = "est",   type = "number", title = gettext("Estimate"))
-  pooledEffectSizeTest$addColumnInfo(name = "se",    type = "number", title = gettext("Standard Error"))
-  pooledEffectSizeTest$addColumnInfo(name = "stat",  type = "number", title = if(.maIsMetaregressionFtest(options)) gettext("t") else gettext("z"))
-  if (.maIsMetaregressionFtest(options))
-    pooledEffectSizeTest$addColumnInfo(name = "df",  type = "number", title = gettext("df"))
-  pooledEffectSizeTest$addColumnInfo(name = "pval",  type = "pvalue", title = gettext("p"))
-
-  if (is.null(fit) || jaspBase::isTryError(fit))
-    return()
-
-  # do not perform transformation on the estimate (keep est and se on the same scale)
-  options[["transformEffectSize"]] <- "none"
+  # pooled effect size
   predictedEffect <- .maComputePooledEffectPlot(fit, options)
-
-  # always use only the first entry - multiple entries with different prediction intervals for models with multiple heterogeneity terms
-  # (returned for general use of the `.maComputePooledEffectPlot` function)
-  estimates <- data.frame(
-    est  = predictedEffect[["est"]][1],
-    se   = predictedEffect[["se"]][1],
-    stat = predictedEffect[["stat"]][1],
+  tests[["pooledEffectSize"]] <- list(
+    test = gettext("Pooled effect size"),
+    stat = if (.maIsMetaregressionFtest(options)) sprintf("t(%1$.2f) = %2$.2f", predictedEffect[["df"]][1], predictedEffect[["stat"]][1])
+           else sprintf("z = %1$.2f",  predictedEffect[["stat"]][1]),
     pval = predictedEffect[["pval"]][1]
   )
-
-  if (.maIsMetaregressionFtest(options))
-    estimates$df <- predictedEffect[["df"]][1]
-
-  pooledEffectSizeTest$setData(estimates)
-
-  return()
-}
-.maModeratorsTable                       <- function(jaspResults, dataset, options) {
-
-  modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults)
-
-  if (!is.null(modelSummaryContainer[["moderatorsTable"]]))
-    return()
-
-  if (!.maIsMetaregression(options))
-    return()
-
-  fit <- .maExtractFit(jaspResults, options)
-
-  # omnibus moderator table
-  moderatorsTable          <- createJaspTable(gettext("Omnibus Moderation Test"))
-  moderatorsTable$position <- 2
-  moderatorsTable$dependOn(c("addOmnibusModeratorTestEffectSizeCoefficients", "addOmnibusModeratorTestEffectSizeCoefficientsValues",
-                             "addOmnibusModeratorTestHeterogeneityCoefficients", "addOmnibusModeratorTestHeterogeneityCoefficientsValues"))
-  modelSummaryContainer[["moderatorsTable"]] <- moderatorsTable
-
-  moderatorsTable$addColumnInfo(name = "parameter", type = "string",  title = gettext("Parameter"))
-  moderatorsTable$addColumnInfo(name = "stat", type = "number",   title = if(.maIsMetaregressionFtest(options)) gettext("F")   else gettext("Q\U2098"))
-  moderatorsTable$addColumnInfo(name = "df1",  type = "integer",  title = if(.maIsMetaregressionFtest(options)) gettext("df\U2081") else gettext("df"))
-  if (.maIsMetaregressionFtest(options))
-    moderatorsTable$addColumnInfo(name = "df2", type = "number", title = gettext("df\U2082"))
-  moderatorsTable$addColumnInfo(name = "pval",  type = "pvalue",  title = gettext("p"))
-
   if (.maIsPermutation(options)) {
-    moderatorsTable$addColumnInfo(name = "pval2",  type = "pvalue",  title = gettext("p (permutation)"))
-    moderatorsTable$addFootnote(.maPermutationMessage(options))
+    tests[["pooledEffectSize"]][["pval2"]] <- NA
   }
-
-
-  # stop on error
-  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
-    return()
 
   # effect size moderation
   if (.maIsMetaregressionEffectSize(options)) {
 
-    testEffectSize <- .maOmnibusTest(fit, options, parameter = "effectSize")
-    moderatorsTable$addRows(testEffectSize)
+    # omnibus test
+    moderationEffect <- .maOmnibusTest(fit, options, parameter = "effectSize")
+    tests[["moderationEffect"]] <- list(
+      test = if (.maIsMetaregressionHeterogeneity(options)) gettext("Moderation effect size") else gettext("Moderation"),
+      stat = if (.maIsMetaregressionFtest(options)) sprintf("F\U2098(%1$.2f, %2$.2f) = %3$.2f", moderationEffect[["df1"]], moderationEffect[["df2"]], moderationEffect[["stat"]])
+      else  sprintf("Q\U2098(%1$.2f) = %2$.2f", moderationEffect[["df1"]],  moderationEffect[["stat"]]),
+      pval = moderationEffect[["pval"]]
+    )
+    if (.maIsPermutation(options)) {
+      tests[["moderationEffect"]][["pval2"]] <- attr(fit[["QMp"]], "permutation")[1]
+    }
 
+    # additional custom test
     if (options[["addOmnibusModeratorTestEffectSizeCoefficients"]]) {
-      testEffectSizeCoefficients <- .maOmnibusTestCoefficients(fit, options, parameter = "effectSize")
-      if (length(testEffectSizeCoefficients) == 1) {
-        moderatorsTable$setError(testEffectSizeCoefficients)
+      moderationEffect2 <- .maOmnibusTestCoefficients(fit, options, parameter = "effectSize")
+      if (length(moderationEffect2) == 1) {
+        testsTable$setError(moderationEffect2)
         return()
       } else {
-        moderatorsTable$addRows(testEffectSizeCoefficients)
-        moderatorsTable$addFootnote(attr(testEffectSizeCoefficients, "footnote"))
+        tests[["moderationEffect2"]] <- list(
+          test = if (.maIsMetaregressionHeterogeneity(options)) gettextf("Moderation effect size (coef %1$s)", paste0(attr(moderationEffect2, "selCoef"), collapse = ", "))
+                 else gettextf("Moderation (coef: %1$s)", paste0(attr(moderationEffect2, "selCoef"), collapse = ", ")),
+          stat = if (.maIsMetaregressionFtest(options)) sprintf("F\U2098(%1$.2f, %2$.2f) = %3$.2f", moderationEffect2[["df1"]], moderationEffect2[["df2"]], moderationEffect2[["stat"]])
+                 else  sprintf("Q\U2098(%1$.2f) = %2$.2f", moderationEffect2[["df1"]],  moderationEffect2[["stat"]]),
+          pval = moderationEffect2[["pval"]]
+        )
+        if (.maIsPermutation(options)) {
+          tests[["moderationEffect2"]][["pval2"]] <- attr(fit[["QMp"]], "permutation")[2]
+        }
+        testsTable$addFootnote(attr(moderationEffect2, "footnote"))
       }
     }
   }
@@ -535,20 +495,42 @@
   # heterogeneity moderation
   if (.maIsMetaregressionHeterogeneity(options)) {
 
-    testHeterogeneity <- .maOmnibusTest(fit, options, parameter = "heterogeneity")
-    moderatorsTable$addRows(testHeterogeneity)
+    # omnibus test
+    moderationHeterogeneity <- .maOmnibusTest(fit, options, parameter = "heterogeneity")
+    tests[["moderationHeterogeneity"]] <- list(
+      test = gettext("Moderation heterogeneity"),
+      stat = if (.maIsMetaregressionFtest(options)) sprintf("F\U2098(%1$.2f, %2$.2f) = %3$.2f", moderationHeterogeneity[["df1"]], moderationHeterogeneity[["df2"]], moderationHeterogeneity[["stat"]])
+             else  sprintf("Q\U2098(%1$.2f) = %2$.2f", moderationHeterogeneity[["df1"]],  moderationHeterogeneity[["stat"]]),
+      pval = moderationHeterogeneity[["pval"]]
+    )
+    if (.maIsPermutation(options)) {
+      tests[["moderationHeterogeneity"]][["pval2"]] <- attr(fit[["QSp"]], "permutation")[1]
+    }
 
+    # additional custom test
     if (options[["addOmnibusModeratorTestHeterogeneityCoefficients"]]) {
-      testHeterogeneityCoefficients <- .maOmnibusTestCoefficients(fit, options, parameter = "heterogeneity")
-      if (length(testHeterogeneityCoefficients) == 1) {
-        moderatorsTable$setError(testHeterogeneityCoefficients)
+      moderationHeterogeneity2 <- .maOmnibusTestCoefficients(fit, options, parameter = "heterogeneity")
+      if (length(moderationHeterogeneity2) == 1) {
+        testsTable$setError(moderationHeterogeneity2)
         return()
       } else {
-        moderatorsTable$addRows(testHeterogeneityCoefficients)
-        moderatorsTable$addFootnote(attr(testHeterogeneityCoefficients, "footnote"))
+        tests[["moderationHeterogeneity2"]] <- list(
+          test = gettextf("Moderation heterogeneity (coef: %1$s)", paste0(attr(moderationHeterogeneity2, "selCoef"), collapse = ", ")),
+          stat = if (.maIsMetaregressionFtest(options)) sprintf("F\U2098(%1$.2f, %2$.2f) = %3$.2f", moderationHeterogeneity2[["df1"]], moderationHeterogeneity2[["df2"]], moderationHeterogeneity2[["stat"]])
+                 else  sprintf("Q\U2098(%1$.2f) = %2$.2f", moderationHeterogeneity2[["df1"]],  moderationHeterogeneity2[["stat"]]),
+          pval = moderationHeterogeneity2[["pval"]]
+        )
+        if (.maIsPermutation(options)) {
+          tests[["moderationHeterogeneity2"]][["pval2"]] <- attr(fit[["QSp"]], "permutation")[2]
+        }
+        testsTable$addFootnote(attr(moderationHeterogeneity2, "footnote"))
       }
     }
   }
+
+  tests <- do.call(rbind, lapply(tests, function(x) do.call(cbind.data.frame, x)))
+  testsTable$setData(tests)
+
 
   return()
 }
@@ -2154,6 +2136,8 @@
       paste(selCoef, collapse = ","),
       paste(sapply(rownames(fit$alpha)[selCoef], function(coefName) .maVariableNames(coefName, options[["predictors"]])), collapse = ", "))
   }
+
+  attr(row, "selCoef") <- selCoef
 
   return(row)
 }
