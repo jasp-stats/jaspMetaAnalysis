@@ -440,10 +440,53 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 
   return()
 }
-.masemMxOptions <- function() {
+.masemMxOptions                  <- function(){
   OpenMx::mxSetDefaultOptions()
   OpenMx::mxOption(NULL, "Default optimizer", "SLSQP")
   OpenMx::mxOption(NULL, "Gradient algorithm", "central")
   OpenMx::mxOption(NULL, "Optimality tolerance", "6.3e-14")
   OpenMx::mxOption(NULL, "Gradient iterations", 2)
+}
+
+checkMetaModel <- function(model, availableVars) {
+  # based on jaspSem:::checkLavaanModel
+
+  # function returns informative printable string if there is an error, else ""
+  if (model == "") return("Enter a model")
+
+  # translate to base64 - function from semsimple.R
+  vvars    <- availableVars
+  usedvars <- vvars #.semGetUsedVars(model, vvars)
+  vmodel   <- model # .semTranslateModel(model, usedvars)
+
+  unvvars <- availableVars
+  names(unvvars) <- vvars
+
+  # Check model syntax
+  parsed <- try(lavaan::lavParseModelString(vmodel, TRUE), silent = TRUE)
+  if (inherits(parsed, "try-error")) {
+    msg <- attr(parsed, "condition")$message
+    if (msg == "NA/NaN argument") {
+      return("Enter a model")
+    }
+    return(stringr::str_replace_all(msg, unvvars))
+  }
+
+  # Check variable names
+  if (!missing(availableVars)) {
+    latents <- unique(parsed[parsed$op == "=~",]$lhs)
+    modelVars <- setdiff(unique(c(parsed$lhs, parsed$rhs)), latents)
+    modelVars <- modelVars[modelVars != ""] # e.g., x1 ~ 1 yields an empty rhs entry
+
+    modelVarsInAvailableVars <- (modelVars %in% vvars)
+    if (!all(modelVarsInAvailableVars)) {
+      notRecognized <- modelVars[!modelVarsInAvailableVars]
+      return(paste("Variable(s) in model syntax not recognized:",
+                   paste(stringr::str_replace_all(notRecognized, unvvars),
+                         collapse = ", ")))
+    }
+  }
+
+  # if checks pass, return empty string
+  return("")
 }
