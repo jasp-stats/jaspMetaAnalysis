@@ -22,8 +22,6 @@
 
 
 # TODO:
-# Estimated Marginal Means
-# - add variable interactions
 # Forest plot
 # - allow aggregation of studies by a factor (then show simple REML aggregation within and overlaying shaded estimates)
 # AIC/BIC Model-averaging
@@ -961,11 +959,11 @@
 
   # extract a list of already existing variables / to be created variables
   existingVariables <- tempMetaData[["existingVariables"]]
-  selectedVariables <- unlist(switch(
+  selectedVariables <- sapply(switch(
     parameter,
     effectSize    = options[["estimatedMarginalMeansEffectSizeSelectedVariables"]],
     heterogeneity = options[["estimatedMarginalMeansHeterogeneitySelectedVariables"]]
-  ))
+  ), function(x) paste0(x[["variable"]], collapse = ":"))
 
   removeVariables <- setdiff(existingVariables, selectedVariables)
   addVariables    <- setdiff(selectedVariables, existingVariables)
@@ -1018,7 +1016,7 @@
     if (is.null(tempContainer[[selectedVariables[[i]]]])) {
       tempVariableContainer <- createJaspContainer(title = sprintf(
         "%1$s%2$s",
-        selectedVariables[[i]],
+        gsub(":", jaspBase::interactionSymbol, selectedVariables[[i]]),
         if (.maIsMetaregressionHeterogeneity(options)) switch(parameter, effectSize = gettext(" (Effect Size)"), heterogeneity = gettext(" (Heterogeneity)"))
         else ""
       ))
@@ -1093,7 +1091,7 @@
   }
 
   # get the estimate
-  estimatedMarginalMeans <- .maComputeMarginalMeansVariable(fit, options, dataset, selectedVariable, options[["estimatedMarginalMeansEffectSizeTestAgainstValue"]], parameter)
+  estimatedMarginalMeans <- .maComputeMarginalMeansVariable(fit, options, dataset, strsplit(selectedVariable, ":")[[1]], options[["estimatedMarginalMeansEffectSizeTestAgainstValue"]], parameter)
 
   # drop non-required columns
   estimatedMarginalMeans <- estimatedMarginalMeans[,!colnames(estimatedMarginalMeans) %in% "variable", drop = FALSE]
@@ -1152,7 +1150,7 @@
   contrastsTable$addColumnInfo(name = "pval",  type = "pvalue", title = gettext("p"))
 
   # get the estimate
-  contrasts <- .maComputeContrastVariable(fit, options, dataset, selectedVariable, options[["contrastsEffectSizeTestAgainstValue"]], parameter)
+  contrasts <- .maComputeContrastVariable(fit, options, dataset, strsplit(selectedVariable, ":")[[1]], options[["contrastsEffectSizeTestAgainstValue"]], parameter)
 
   # drop non-required columns
   if (parameter == "heterogeneity")
@@ -2450,8 +2448,8 @@
 
     # create full data frame
     computedMarginalMeans <- data.frame(
-      "variable" = attr(predictorMatrixEffectSize, "variable"),
-      "value"    = attr(predictorMatrixEffectSize, attr(predictorMatrixEffectSize, "variable")),
+      "variable" = paste0(attr(predictorMatrixEffectSize, "variable"), collapse = jaspBase::interactionSymbol),
+      "value"    = apply(attr(predictorMatrixEffectSize, "selectedGridNames"), 1, paste0, collapse = ", "),
       computedMarginalMeans
     )
 
@@ -2486,8 +2484,8 @@
 
     # create full data frame
     computedMarginalMeans <- data.frame(
-      "variable" = attr(predictorMatrixHeterogeneity, "variable"),
-      "value"    = attr(predictorMatrixHeterogeneity, attr(predictorMatrixHeterogeneity, "variable")),
+      "variable" = paste0(attr(predictorMatrixEffectSize, "variable"), collapse = jaspBase::interactionSymbol),
+      "value"    = apply(attr(predictorMatrixEffectSize, "selectedGridNames"), 1, paste0, collapse = ", "),
       computedMarginalMeans
     )
   }

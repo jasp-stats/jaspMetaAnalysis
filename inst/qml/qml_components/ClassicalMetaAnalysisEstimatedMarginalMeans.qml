@@ -40,7 +40,7 @@ Section
 			{
 				name:			"estimatedMarginalMeansEffectSizeModelVariables"
 				title:			qsTr("Model variables")
-				source:			[{ name: "effectSizeModelTerms", use: "noInteraction" }]
+				source:			"effectSizeModelTerms"
 			}
 
 			AssignedVariablesList
@@ -135,7 +135,7 @@ Section
 			{
 				name:			"estimatedMarginalHeterogeneityModelVariables"
 				title:			qsTr("Model variables")
-				source:			[{ name: "heterogeneityModelTerms", use: "noInteraction" }]
+				source:			"heterogeneityModelTerms"
 			}
 
 			AssignedVariablesList
