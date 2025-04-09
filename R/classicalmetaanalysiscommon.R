@@ -2284,16 +2284,23 @@
 
   # create complete model matrices including the specified variable
   predictorsSelected <- list()
+  predictorsSelectedNames <- list()
   if (length(selectedVariables) > 0) {
     for (selectedVariable in selectedVariables) {
       if (selectedVariable %in% variablesFactors) {
         predictorsSelected[[selectedVariable]] <- factor(levels(dataset[[selectedVariable]]), levels = levels(dataset[[selectedVariable]]))
+        predictorsSelectedNames[[selectedVariable]] <- levels(dataset[[selectedVariable]])
         contrasts(predictorsSelected[[selectedVariable]]) <- contrasts(dataset[[selectedVariable]])
       } else if (selectedVariable %in% variablesContinuous) {
         predictorsSelected[[selectedVariable]] <- c(
           mean(dataset[[selectedVariable]]) - sdFactor * sd(dataset[[selectedVariable]]),
           mean(dataset[[selectedVariable]]),
           mean(dataset[[selectedVariable]]) + sdFactor * sd(dataset[[selectedVariable]])
+        )
+        predictorsSelectedNames[[selectedVariable]] <- c(
+          gettextf("Mean - %1$sSD", sdFactor),
+          gettext("Mean"),
+          gettextf("Mean + %1$sSD", sdFactor)
         )
       }
     }
@@ -2310,7 +2317,8 @@
     # empty string creates overall adjusted estimate
     outMatrix <- t(colMeans(model.matrix(formula, data = expand.grid(predictorsRemaining))))
   } else {
-    predictorsSelectedGrid <- expand.grid(predictorsSelected)
+    predictorsSelectedGrid      <- expand.grid(predictorsSelected)
+    predictorsSelectedGridNames <- expand.grid(predictorsSelectedNames)
     outMatrix <- do.call(rbind, lapply(1:nrow(predictorsSelectedGrid), function(i) {
       colMeans(model.matrix(formula, data = expand.grid(c(predictorsRemaining,  predictorsSelectedGrid[i,,drop = FALSE]))))
     }))
@@ -2330,6 +2338,7 @@
 
     # selected variables grid
     attr(outMatrix, "selectedGrid") <- predictorsSelectedGrid
+    attr(outMatrix, "selectedGridNames") <- predictorsSelectedGridNames
 
     # add remaining variables
     attr(outMatrix, "variable") <- c(selectedVariables, trendVarible)
@@ -2512,7 +2521,7 @@
       parameter         = "effectSize"
     )
 
-    selectedVariableLevels   <- apply(predictorMatrixEffectSize, 1, paste0, collapse = ", ")
+    selectedVariableLevels   <- apply(attr(predictorMatrixEffectSize, "selectedGridNames"), 1, paste0, collapse = ", ")
     contrastMatrixEffectSize <- matrix(NA, nrow = nrow(predictorMatrixEffectSize) * (nrow(predictorMatrixEffectSize) - 1) / 2, ncol = ncol(predictorMatrixEffectSize))
     contrastComparisons      <- character(nrow(contrastMatrixEffectSize))
 
@@ -2615,7 +2624,7 @@
       parameter         = "heterogeneity"
     )
 
-    selectedVariableLevels      <- apply(predictorMatrixHeterogeneity, 1, paste0, collapse = ", ")
+    selectedVariableLevels      <- apply(attr(predictorMatrixHeterogeneity, "selectedGridNames"), 1, paste0, collapse = ", ")
     contrastMatrixHeterogeneity <- matrix(NA, nrow = nrow(predictorMatrixHeterogeneity) * (nrow(predictorMatrixHeterogeneity) - 1) / 2, ncol = ncol(predictorMatrixHeterogeneity))
     contrastComparisons         <- character(nrow(contrastMatrixHeterogeneity))
 
