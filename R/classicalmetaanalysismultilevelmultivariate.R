@@ -117,6 +117,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
       if (length(tempValues) > 0) {
         randomFormulas[[i]] <- as.formula(paste0("~ 1 | ", paste(tempValues, collapse = "/")), env = parent.frame(1))
+        attr(randomFormulas[[i]], "levels") <- tempValues
       }
 
     } else if (tempType == "randomSlopes") {
@@ -416,27 +417,24 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
   }
 
   ### create random structure inclusion summary
-  if (options[["randomEffectsTestInclusion"]] && is.null(randomEstimatesContainer[["tableInclusion"]])) {
+  if (options[["randomEffectsTestInclusion"]] && is.null(randomEstimatesContainer[["inclusionTestsContainer"]])) {
 
-    tableInclusion <- createJaspTable(title = gettext("Inclusion Test"))
-    tableInclusion$position <- 4
-    tableInclusion$dependOn("randomEffectsTestInclusion")
-    randomEstimatesContainer[["tableInclusion"]] <- tableInclusion
+    inclusionTestsContainer <- createJaspContainer(title = gettext("Inclusion Tests"))
+    inclusionTestsContainer$position <- 4
+    inclusionTestsContainer$dependOn("randomEffectsTestInclusion")
+    randomEstimatesContainer[["inclusionTestsContainer"]] <- inclusionTestsContainer
 
-    tableInclusion$addColumnInfo(name = "model",  title = gettext("Removed Component"), type = "string")
-    tableInclusion$addColumnInfo(name = "logLik", title = gettext("Log Lik."),          type = "number")
-    tableInclusion$addColumnInfo(name = "df",     title = gettext("df"),                type = "integer")
-    tableInclusion$addColumnInfo(name = "AIC",    title = gettext("AIC"),               type = "number")
-    tableInclusion$addColumnInfo(name = "BIC",    title = gettext("BIC"),               type = "number")
-    tableInclusion$addColumnInfo(name = "AICc",   title = gettext("AICc"),              type = "number")
-    tableInclusion$addColumnInfo(name = "LRT",    title = gettext("LRT"),               type = "number")
-    tableInclusion$addColumnInfo(name = "pval",   title = gettext("p"),                 type = "pvalue")
+    ### table with general tests for component drop
+    tableInclusion <- .mammMakeRandomInclusionTable(title = gettext("Component Inclusion Test"), position = 0)
+    inclusionTestsContainer[["tableInclusion"]] <- tableInclusion
 
-    dropOneFits <- .mammFitDropOneRandom(jaspResults, options)
+    # extract the precomputed drop models
+    dropOneFits    <- .mammFitDropOneRandom(jaspResults, options)
 
     if (length(dropOneFits) == 0)
       return()
 
+    # compute ANOVAs
     fit      <- .maExtractFit(jaspResults, options)
     fitTests <- lapply(dropOneFits, function(fitB) data.frame(anova(fit, fitB)))
     fitTests <- rbind(
@@ -446,10 +444,59 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
     fitTests <- fitTests[,!colnames(fitTests) %in% "QE"]
     tableInclusion$setData(fitTests)
-    tableInclusion$addFootnote(gettext("Likelihood Ratio Test (LRT) and p-value are based on a comparison with the complete model."))
+
+
+    ### tables with test for level drop for multilevel components
+    if (fit[["withS"]]) {
+
+      # extract the precomputed drop models
+      dropLevelFits <- .mammFitDropLevelRandom(jaspResults, options)
+
+      for (i in seq_along(dropLevelFits)) {
+
+        tempInclusion <- .mammMakeRandomInclusionTable(title = gettextf("%1$s: Level Inclusion Test", names(dropLevelFits)[i]), position = i, removedLevels = TRUE)
+        inclusionTestsContainer[[paste0("tableInclusion", i)]] <- tempInclusion
+
+        # level drip design
+        levelsGrid    <- attr(dropLevelFits[[i]], "levelsGrid")
+        levelsDropped <- sapply(1:nrow(levelsGrid), function(i) paste0(colnames(levelsGrid[!unlist(levelsGrid[i,])]), collapse = ", "))
+
+        # compute ANOVAs
+        fit      <- .maExtractFit(jaspResults, options)
+        fitTests <- lapply(dropLevelFits[[i]], function(fitB) data.frame(anova(fit, fitB)))
+        fitTests <- rbind(
+          cbind(model = "", fitTests[[1]][1,]),
+          cbind(model = levelsDropped, do.call(rbind, lapply(fitTests, function(fitTest) fitTest[2,])))
+        )
+
+        fitTests <- fitTests[,!colnames(fitTests) %in% "QE"]
+        fitTests <- fitTests[order(fitTests$df, decreasing = TRUE),]
+        tempInclusion$setData(fitTests)
+
+      }
+    }
   }
 
+
   return()
+}
+.mammMakeRandomInclusionTable    <- function(title = gettext("Component Inclusion Test"), position = 0, removedLevels = FALSE) {
+
+  tableInclusion <- createJaspTable(title = title)
+  tableInclusion$position <- position
+
+  tableInclusion$addColumnInfo(name = "model",  title = if (removedLevels) gettext("Removed Levels") else gettext("Removed Component"), type = "string")
+  tableInclusion$addColumnInfo(name = "logLik", title = gettext("Log Lik."),          type = "number")
+  tableInclusion$addColumnInfo(name = "df",     title = gettext("df"),                type = "integer")
+  tableInclusion$addColumnInfo(name = "AIC",    title = gettext("AIC"),               type = "number")
+  tableInclusion$addColumnInfo(name = "BIC",    title = gettext("BIC"),               type = "number")
+  tableInclusion$addColumnInfo(name = "AICc",   title = gettext("AICc"),              type = "number")
+  tableInclusion$addColumnInfo(name = "LRT",    title = gettext("LRT"),               type = "number")
+  tableInclusion$addColumnInfo(name = "pval",   title = gettext("p"),                 type = "pvalue")
+
+  tableInclusion$addFootnote(gettext("Likelihood Ratio Test (LRT) and p-value are based on a comparison with the complete model."))
+
+  return(tableInclusion)
 }
 .mammGetRandomEstimatesTitle     <- function(structure) {
 
@@ -512,6 +559,73 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
   dropOneFitsContainer$object <- dropOneFits
   return(dropOneFits)
+}
+.mammFitDropLevelRandom          <- function(jaspResults, options) {
+
+  if (!is.null(jaspResults[["dropLevelFits"]]))
+    return(jaspResults[["dropLevelFits"]]$object)
+
+  dropLevelFitsContainer <- createJaspState()
+  dropLevelFitsContainer$dependOn(.maDependencies)
+  jaspResults[["dropLevelFits"]] <- dropLevelFitsContainer
+
+  fit <- .maExtractFit(jaspResults, options)
+
+  # create list of all structures & keep hierarchical structures
+  randomFormulaLists             <- .mammGetRandomFormulaList(options)
+  randomFormulaHierarchicalLists <- randomFormulaLists[sapply(randomFormulaLists, function(x) !is.null(attr(x, which = "levels")))]
+
+  dropLevelsList        <- vector("list", length = length(randomFormulaHierarchicalLists))
+  names(dropLevelsList) <- names(randomFormulaHierarchicalLists)
+
+  # perform drop one re-estimation
+  for (i in seq_along(randomFormulaHierarchicalLists)) {
+
+    # create combination of all level inclusions
+    tempLevels     <- attr(randomFormulaHierarchicalLists[[i]], which = "levels")
+    tempLevelsGrid <- expand.grid(rep(list(c(TRUE, FALSE)), length(tempLevels)))
+    tempLevelsGrid <- tempLevelsGrid[-c(1, nrow(tempLevelsGrid)), , drop = FALSE] # first and the last fits are the full and null models
+    colnames(tempLevelsGrid) <- tempLevels
+
+    startProgressbar(expectedTicks = nrow(tempLevelsGrid), label = gettextf("Testing Inclusion of Nested Random Effects: %1$s", names(randomFormulaHierarchicalLists)[i]))
+    dropOneFits <- list()
+
+    for (j in 1:nrow(tempLevelsGrid)) {
+
+      # get the original random formula
+      randomFormulaList <- randomFormulaLists
+      # replace the current random formula with the new one
+      randomFormulaList[[names(randomFormulaHierarchicalLists)[i]]] <- as.formula(paste0("~ 1 | ", paste(tempLevels[unlist(tempLevelsGrid[j,])], collapse = "/")), env = parent.frame(1))
+      randomFormulaList <- unname(randomFormulaList)
+
+      random <- NULL
+      struct <- NULL
+      dist   <- NULL
+      R      <- NULL
+
+      if (length(randomFormulaList) != 0) {
+        random <- randomFormulaList
+        struct <- do.call(c, lapply(randomFormulaList, attr, which = "structure"))
+        dist   <- unlist(lapply(randomFormulaList, attr, which = "dist"), recursive = FALSE)
+        R      <- unlist(lapply(randomFormulaList, attr, which = "R"), recursive = FALSE)
+      }
+
+      # set default struct if unspecified
+      if (is.null(struct))
+        struct <- "CS"
+
+      tempFit <- try(update(fit, random = random, struct = struct, dist = dist, R = R))
+
+      dropOneFits[[j]] <- tempFit
+      progressbarTick()
+    }
+
+    dropLevelsList[[i]] <- dropOneFits
+    attr(dropLevelsList[[i]], "levelsGrid") <- tempLevelsGrid
+  }
+
+  dropLevelFitsContainer$object <- dropLevelsList
+  return(dropLevelsList)
 }
 .mammGetStructureOptions         <- function(structure) {
 
