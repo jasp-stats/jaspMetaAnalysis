@@ -1100,7 +1100,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   }
 
   fitSummary <- data.frame(
-    k        = fit$k,
+    k        = fit$k - fit$k0,
     missingK = fit$k0,
     muEst    = fit$b[1],
     muLCI    = fit$ci.lb,
