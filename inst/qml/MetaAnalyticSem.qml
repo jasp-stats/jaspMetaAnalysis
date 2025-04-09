@@ -157,10 +157,11 @@ Form
 			spacing: 5
 			TextArea
 			{
-				name:		"syntax"
-				id:			syntax
-				//textType:	JASP.TextTypeLavaan
-				info:		qsTr("Specify model using a lavaan style syntax.")
+				name:		        "syntax"
+				id:			        syntax
+				textType:	        JASP.TextTypeMetaSem
+                variableSeparator:  "_" 
+				info:		        qsTr("Specify model using a lavaan style syntax.")
 			}
 
 			Group

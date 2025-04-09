@@ -94,7 +94,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   for (i in seq_along(options[["models"]])) {
 
     model       <- options[["models"]][[i]]
-    modelSyntax <- model[["syntax"]]
+    modelSyntax <- model[["syntax"]][["model"]]
 
     # check if the model is already fitted
     if (model[["value"]] %in% names(fits)) {
@@ -336,11 +336,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
     if (options[["pathDiagramShowParameters"]]) {
 
       # extract the sem paths
-      if (MASEM) {
-        tempPaths <- model[["syntax"]]
-      } else {
-        tempPaths <- model[["syntax"]][["model"]]
-      }
+      tempPaths <- model[["syntax"]][["model"]]
 
       # skip if syntax is empty
       if (trimws(tempPaths) == "")
