@@ -117,7 +117,12 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
       if (length(tempValues) > 0) {
         randomFormulas[[i]] <- as.formula(paste0("~ 1 | ", paste(tempValues, collapse = "/")), env = parent.frame(1))
-        attr(randomFormulas[[i]], "levels") <- tempValues
+
+        if (length(tempValues) > 1) {
+          # store the levels only if they imply a nested structure
+          # allows for discriminating from a simple random effect in level inclusion tests
+          attr(randomFormulas[[i]], "levels") <- tempValues
+        }
       }
 
     } else if (tempType == "randomSlopes") {
@@ -416,11 +421,55 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
   }
 
+  ### create random structure confidence intervals summary
+  if (options[["randomEffectsConfidenceIntervals"]] && is.null(randomEstimatesContainer[["confidenceIntervalContainers"]]) && !is.null(.mammGetRandomFormulaList(options))) {
+
+    confidenceIntervalsContainer <- createJaspContainer(title = gettext("Confidence Intervals"))
+    confidenceIntervalsContainer$position <- 4
+    confidenceIntervalsContainer$dependOn(c("randomEffectsConfidenceIntervals", "confidenceIntervalsLevel"))
+    randomEstimatesContainer[["confidenceIntervalsContainer"]] <- confidenceIntervalsContainer
+
+    # extract precomputed confidence intervals
+    confintRandom <- .mammFitConfintRandom(jaspResults, options)
+
+
+    # confidence intervals for nested/simple random effects
+    if (fit[["withS"]] && is.null(confidenceIntervalsContainer[["confidenceContainerS"]])) {
+
+      confidenceContainerS <- createJaspContainer(title = gettext("Simple / Nested Summary"))
+      confidenceContainerS$position <- 1
+      confidenceIntervalsContainer[["confidenceContainerS"]] <- confidenceContainerS
+      .mammExtractRandomCiTables(confidenceContainerS, options, fit, confintRandom, indx = 0)
+
+    }
+
+    if (fit[["withG"]] && is.null(confidenceIntervalsContainer[["confidenceContainerG"]])) {
+
+      # create jasp containers
+      confidenceContainerG <- createJaspContainer(title = .mammGetRandomEstimatesTitle(fit[["struct"]][1]))
+      confidenceContainerG$position <- 2
+      confidenceIntervalsContainer[["confidenceContainerG"]] <- confidenceContainerG
+      .mammExtractRandomCiTables(confidenceContainerG, options, fit, confintRandom, indx = 1)
+
+    }
+
+    if (fit[["withH"]] && is.null(confidenceIntervalsContainer[["confidenceContainerH"]])) {
+
+      # create jasp containers
+      confidenceContainerH <- createJaspContainer(title = .mammHetRandomEstimatesTitle(fit[["struct"]][1]))
+      confidenceContainerH$position <- 3
+      confidenceIntervalsContainer[["confidenceContainerH"]] <- confidenceContainerH
+      .mammExtractRandomCiTables(confidenceContainerH, options, fit, confintRandom, indx = 1)
+
+    }
+  }
+
+
   ### create random structure inclusion summary
   if (options[["randomEffectsTestInclusion"]] && is.null(randomEstimatesContainer[["inclusionTestsContainer"]])) {
 
     inclusionTestsContainer <- createJaspContainer(title = gettext("Inclusion Tests"))
-    inclusionTestsContainer$position <- 4
+    inclusionTestsContainer$position <- 5
     inclusionTestsContainer$dependOn("randomEffectsTestInclusion")
     randomEstimatesContainer[["inclusionTestsContainer"]] <- inclusionTestsContainer
 
@@ -626,6 +675,38 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
   dropLevelFitsContainer$object <- dropLevelsList
   return(dropLevelsList)
+}
+.mammFitConfintRandom            <- function(jaspResults, options) {
+
+  if (!is.null(jaspResults[["confintRandom"]]))
+    return(jaspResults[["confintRandom"]]$object)
+
+  confintRandomContainer <- createJaspState()
+  confintRandomContainer$dependOn(.maDependencies)
+  jaspResults[["confintRandom"]] <- confintRandomContainer
+
+  fit <- .maExtractFit(jaspResults, options)
+  confintRandom <- confint(
+    fit,
+    level = 100 * options[["confidenceIntervalsLevel"]],
+    code1 = paste0("jaspBase::startProgressbar(",.mammConfintIterations(fit),", label = 'Random effects / model components: Confidence intervals')"),
+    code2 = "jaspBase::progressbarTick()"
+  )
+
+  # when multiple elements are present the last one is an `attribute` with information
+  if (length(.mammGetRandomFormulaList(options)) == 1) {
+    confintRandom <- list(confintRandom)
+  } else {
+    confintRandom <- confintRandom[-length(confintRandom)]
+  }
+
+  # flatten
+  confintRandom <- do.call(rbind, lapply(confintRandom, function(x) {
+    cbind.data.frame(parameter = rownames(x[[1]]), data.frame(x[[1]]))
+  }))
+
+  confintRandomContainer$object <- confintRandom
+  return(dropOneFits)
 }
 .mammGetStructureOptions         <- function(structure) {
 
@@ -1052,10 +1133,153 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
   return()
 }
+.mammExtractRandomCiTables       <- function(tempContainer, options, x, confintRandom, indx = 0) {
+
+  overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
+
+  tau2Name <- if (indx == 0) "sigma2" else if (indx == 1) "tau2" else "gamma2"
+  tauName  <- if (indx == 0) "sigma"  else if (indx == 1) "tau"  else "gamma"
+  rhoName  <- if (indx == 0) NA       else if (indx == 1) "rho"  else "phi"
+  struct   <- if (indx == 0) "simple" else if (indx == 1) x$struct[indx]
+
+  GName           <- if (indx == 1) "G" else "H"
+  g.levels.kName  <- if (indx == 1) "g.levels.k" else "h.levels.k"
+  g.namesName     <- if (indx == 1) "g.names"    else "h.names"
+
+  if (struct == "simple") {
+    title1 <- gettext("Estimates")
+  } else {
+    title1 <- gettext("Estimates \U1D70F\U00B2")
+  }
+
+  tempTable <- createJaspTable(title1)
+  tempTable$position <- 1
+
+  tempTable$addColumnInfo(name = "par",       type = "string", title = "")
+  tempTable$addColumnInfo(name = "estTau2", type = "number", title = if (indx == 0) gettext("\U03C3\U00B2") else gettext("\U1D70F\U00B2"))
+  tempTable$addColumnInfo(name = "lCiTau2", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
+  tempTable$addColumnInfo(name = "uCiTau2", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
+  tempTable$addColumnInfo(name = "estTau",  type = "number", title = if (indx == 0) gettext("\U03C3") else gettext("\U1D70F"))
+  tempTable$addColumnInfo(name = "lCiTau",  title = gettext("Lower"), type = "number", overtitle = overtitleCi)
+  tempTable$addColumnInfo(name = "uCiTau",  title = gettext("Upper"), type = "number", overtitle = overtitleCi)
+
+  # extract the estimates
+  tauCi  <- confintRandom[grepl(tauName, confintRandom$parameter) & !grepl(paste0(tauName,"^2"), confintRandom$parameter, fixed = TRUE),,drop=FALSE]
+  tau2Ci <- confintRandom[grepl(paste0(tauName,"^2"), confintRandom$parameter, fixed = TRUE),,drop=FALSE]
+
+  # create parameter names
+  if (struct == "simple") {
+    par1Levels <- .maVariableNames(x[["s.names"]], unlist(.mammExtractRandomVariableNames(options)))
+  } else if (is.element(struct, c("CS", "AR", "CAR", "ID", "SPEXP", "SPGAU", "SPLIN", "SPRAT", "SPSPH", "PHYBM", "PHYPL", "PHYPD"))) {
+    par1Levels <- "\U1D70F\U00B2"
+  } else if (is.element(struct, c("HCS", "HAR", "DIAG"))) {
+    if (length(x[[tau2Name]]) == 1L) {
+      par1Levels <- "\U1D70F\U00B2"
+    } else {
+      par1Levels <- c(paste0("\U1D70F\U00B2[",seq_along(x[[tau2Name]]),"]"))
+    }
+  } else if (is.element(struct, c("UN", "UNR"))) {
+    if (length(x[[g.levels.kName]]) == 1L) {
+      par1Levels <- c("\U1D70F\U00B2")
+    } else {
+      par1Levels <- paste0("\U1D70F\U00B2[",seq_along(x[[g.levels.kName]]),"]")
+    }
+  } else if (is.element(struct, c("GEN", "GDIAG"))) {
+    par1Levels <- .maVariableNames(x[[g.namesName]][-length(x[[g.namesName]])], unlist(.mammExtractRandomVariableNames(options)))
+  }
+
+  tempData <- data.frame(
+    par     = par1Levels,
+    estTau2 = tau2Ci$estimate,
+    lCiTau2 = tau2Ci$ci.lb,
+    uCiTau2 = tau2Ci$ci.ub,
+    estTau  = tauCi$estimate,
+    lCiTau  = tauCi$ci.lb,
+    uCiTau  = tauCi$ci.ub
+  )
+  tempTable$setData(tempData)
+  tempContainer[["tempTable"]] <- tempTable
+
+  # some structures have only one parameter
+  if (is.element(struct, c("simple", "DIAG", "GDIAG", "ID"))) {
+    return()
+  }
+
+  tempTable2 <- createJaspTable(title1)
+  tempTable2$position <- 1
+
+  tempTable2$addColumnInfo(name = "par", type = "string", title = "")
+  tempTable2$addColumnInfo(name = "est", type = "number", title = gettext("\U03C1"))
+  tempTable2$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
+  tempTable2$addColumnInfo(name = "uCi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
+
+  # extract the estimates
+  rhoCi  <- confintRandom[grepl(rhoName, confintRandom$parameter),,drop=FALSE]
+
+  # create parameter names
+  if (is.element(struct, c("CS", "AR", "CAR", "ID", "SPEXP", "SPGAU", "SPLIN", "SPRAT", "SPSPH", "PHYBM", "PHYPL", "PHYPD", "HCS", "HAR", "DIAG"))) {
+    par2Levels <- "\U03C1"
+  } else if (is.element(struct, c("UN", "UNR"))) {
+    if (length(x[[rhoName]]) == 1L) {
+      par2Levels <- "\U03C1[2,1]"
+    } else {
+      par2Levels <- NULL
+      for (i in 1:x[[g.nlevels.fName]][1]) {
+        for (j in 1:x[[g.nlevels.fName]][1]) {
+          if (i < j)
+            par2Levels <- c(par2Levels, paste0("\U03C1[", j, ",", i, "]"))
+        }
+      }
+    }
+  } else if (is.element(struct, c("GEN"))) {
+    par2Levels    <- NULL
+    par2Variables <- .maVariableNames(x[[g.namesName]][-length(x[[g.namesName]])], unlist(.mammExtractRandomVariableNames(options)))
+    for (i in 1:length(par2Variables)) {
+      for (j in 1:length(par2Variables)) {
+        if (i < j)
+          par2Levels <- c(par2Levels, paste0("\U03C1[", par2Variables[j], ",", par2Variables[i], "]"))
+      }
+    }
+  }
+
+  tempData2 <- data.frame(
+    par = par2Levels,
+    est = rhoCi$estimate,
+    lCi = rhoCi$ci.lb,
+    uCi = rhoCi$ci.ub
+  )
+  tempTable2$setData(tempData2)
+  tempContainer[["tempTable2"]] <- tempTable2
+
+  return()
+}
 .mammAddIsFixedRandom            <- function(options, indx) {
 
   return(FALSE)
 
   # TODO: show / hide information on whether the random effects are fixed by the user
 }
+.mammConfintIterations           <- function(x) {
 
+  iterations <- 0
+  if(x$withS && any(!x$vc.fix$sigma2))
+    iterations <- iterations + length(seq_len(x$sigma2s)[!x$vc.fix$sigma2])
+
+  if (x$withG) {
+    if (any(!x$vc.fix$tau2))
+      iterations <- iterations + length(seq_len(x$tau2s)[!x$vc.fix$tau2])
+
+    if (any(!x$vc.fix$rho))
+      iterations <- iterations + length(seq_len(x$rhos)[!x$vc.fix$rho])
+  }
+
+  if (x$withH) {
+    if (any(!x$vc.fix$gamma2))
+      iterations <- iterations + length(seq_len(x$gamma2s)[!x$vc.fix$gamma2])
+
+    if (any(!x$vc.fix$phi))
+      iterations <- iterations + length(seq_len(x$phis)[!x$vc.fix$phi])
+  }
+
+  return(iterations)
+}
