@@ -1827,9 +1827,35 @@
 
   return(apply(predictedEffect, 1, as.list))
 }
-.maComputePooledEffectPlot         <- function(fit, options) {
+.maComputeFixedEffect              <- function(fit, options) {
 
-  predictedEffect      <- .maComputePooledEffect(fit, options, returnRaw = TRUE)
+  # refit the model as a fixed effect model
+  fit <- metafor::rma(
+    yi     = fit$data[[options[["effectSize"]]]],
+    sei    = fit$data[[options[["effectSizeStandardError"]]]],
+    method = "FE",
+    test   = options[["fixedEffectTest"]]
+  )
+
+  predictedEffect <- data.frame(
+    pred  = fit$beta[1],
+    se    = fit$se[1],
+    ddf   = fit$ddf[1],
+    ci.lb = fit$ci.lb[1],
+    ci.ub = fit$ci.ub[1],
+    pi.lb = NA,
+    pi.ub = NA
+  )
+
+  return(predictedEffect)
+}
+.maComputePooledEffectPlot         <- function(fit, options, forceFixedEffect = FALSE) {
+
+  if (forceFixedEffect) {
+    predictedEffect <- .maComputeFixedEffect(fit, options)
+  } else {
+    predictedEffect <- .maComputePooledEffect(fit, options, returnRaw = TRUE)
+  }
 
   # compute test against specified value
   if (.maIsMetaregressionFtest(options)) {
@@ -1933,48 +1959,24 @@
 
   return(confIntHeterogeneity)
 }
-.maComputePooledHeterogeneityPlot  <- function(fit, options) {
+.maComputePooledHeterogeneityPlot  <- function(fit, options, parameter = "tau") {
 
   # don't use the confint on robust.rma objects (they are not implemented)
   # the clustering works only on the fixed effect estimates
   # -> we can drop the class and compute confint and get the heterogeneity from the original fit
+  # (the fit is passed directly from from forest plot function so it is cleaner to dispatch it here)
+
   if (inherits(fit, "robust.rma"))
     class(fit) <- class(fit)[!class(fit) %in% "robust.rma"]
 
-  if (fit[["tau2.fix"]]) {
+  # dispatch options to the .maComputePooledHeterogeneity function
+  options[["heterogeneityTau"]]  <- parameter == "tau"
+  options[["heterogeneityTau2"]] <- parameter == "tau2"
+  options[["heterogeneityI2"]]   <- parameter == "I2"
+  options[["heterogeneityH2"]]   <- parameter == "H2"
 
-    confIntHeterogeneity <- list(
-      est = sqrt(.maGetFixedTau2Options(options)),
-      lCi = NA,
-      uCi = NA
-    )
-
-  } else if (.maIsMetaregressionHeterogeneity(options)) {
-
-    # no confint support
-    # predict the scale on the average value
-    predScale <- predict(fit, newscale = colMeans(model.matrix(fit)$scale)[-1], level = 100 * options[["confidenceIntervalsLevel"]])
-
-    if (options[["heterogeneityModelLink"]] == "log") {
-      confIntHeterogeneity <- data.frame(
-        est = exp(predScale[["pred"]]  / 2),
-        lCi = exp(predScale[["ci.lb"]] / 2),
-        uCi = exp(predScale[["ci.ub"]] / 2)
-      )
-    } else if (options[["heterogeneityModelLink"]] == "identity") {
-      confIntHeterogeneity <- data.frame(
-        est = sqrt(predScale[["pred"]]),
-        lCi = sqrt(predScale[["ci.lb"]]),
-        uCi = sqrt(predScale[["ci.ub"]])
-      )
-    }
-
-  } else {
-
-    confIntHeterogeneity <- confint(fit)
-    confIntHeterogeneity <- data.frame(confIntHeterogeneity[["random"]])[2,]
-    colnames(confIntHeterogeneity) <- c("est", "lCi", "uCi")
-  }
+  # compute the heterogeneity
+  confIntHeterogeneity <- .maComputePooledHeterogeneity(fit, options)
 
   return(confIntHeterogeneity)
 }
@@ -3544,7 +3546,13 @@
 }
 .maPrintQTest                         <- function(fit) {
 
-  return(sprintf("Heterogeneity: Q(%1$i) = %2$.2f, %3$s", fit[["k"]] - fit[["p"]], fit[["QE"]], .maPrintPValue(fit[["QEp"]])))
+  if (fit[["p"]] > 1) {
+    heterogeneityName <- gettextf("Residual heterogeneity")
+  } else {
+    heterogeneityName <- gettextf("Heterogeneity")
+  }
+
+  return(sprintf("%1$s: Q(%2$i) = %3$.2f, %4$s", heterogeneityName, fit[["k"]] - fit[["p"]], fit[["QE"]], .maPrintPValue(fit[["QEp"]])))
 }
 .maPrintModerationTest                <- function(fit, options, parameter) {
 
@@ -3561,24 +3569,19 @@
       return(gettextf("Moderation: %1$s", outPrint))
   }
 }
-.maPrintHeterogeneityEstimate         <- function(fit, options, digits, keepText) {
+.maPrintHeterogeneityEstimate         <- function(fit, options, digits, parameter) {
 
-  out <- .maComputePooledHeterogeneityPlot(fit, options)
-
-  if (keepText)
-    prefix <- gettext("Heterogeneity: ")
-  else
-    prefix <- "" # paste0(rep(" ", nchar(gettext("Heterogeneity: "))), collapse = "")
+  out <- .maComputePooledHeterogeneityPlot(fit, options, parameter)
 
   return(sprintf(paste0(
-    "%1$s tau = ",
+    "%1$s  = ",
     "%2$.", digits, "f",
     " [",
     "%3$.", digits, "f",
     ", ",
     "%4$.", digits, "f",
     "]"
-    ), prefix, out$est, out$lCi, out$uCi))
+    ), out$par, out$est, out$lCi, out$uCi))
 }
 .maPrintTermTest                      <- function(out, testStatistic = TRUE) {
 
