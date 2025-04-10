@@ -3998,9 +3998,9 @@
 .maFixedEffectTextMessage              <- function(options) {
   return(switch(
     options[["fixedEffectTest"]],
-    "z"    = gettext("Fixed effect tested using z-distribution."),
-    "t"    = gettext("Fixed effect tested using t-distribution."),
-    "knha" = gettext("Fixed effect tested using Knapp and Hartung adjustment."),
+    "z"    = gettext("Fixed effects tested using z-distribution."),
+    "t"    = gettext("Fixed effects tested using t-distribution."),
+    "knha" = gettext("Fixed effects tested using Knapp and Hartung adjustment."),
     stop(paste0("Unknown fixed effect test.", options[["fixedEffectTest"]]))
   ))
 }
