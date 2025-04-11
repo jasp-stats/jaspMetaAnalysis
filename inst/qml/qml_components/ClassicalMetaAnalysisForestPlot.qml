@@ -163,6 +163,7 @@ Section
 				name:			"forestPlotStudyInformationOrderBy"
 				label:			qsTr("By")
 				addEmptyValue:	true
+				fieldWidth:		125 * preferencesModel.uiScale
 			}
 
 			CheckBox
@@ -271,58 +272,122 @@ Section
 		enabled:	forestPlotModelInformation.checked
 		columns:	2
 
-		CheckBox
+		Group
 		{
-			name:		"forestPlotPooledEffectSizeEstimate"
-			text:		qsTr("Pooled effect size estimate")
-			checked:	true				
+			title:		qsTr("Heterogeneity")
 			Layout.preferredWidth: 300 * jaspTheme.uiScale
-			info: qsTr("Include the overall meta-analytic effect size estimate in the model information section.")
+
+			CheckBox
+			{
+				name:		"forestPlotResidualHeterogeneityTest"
+				text:		qsTr("Test")
+				checked:	true
+				info: qsTr("Include the test of the residual heterogeneity in the model information section.")
+			}
+
+			Group
+			{
+				title:		qsTr("Estimate")
+				columns:	2
+				visible:	module == "metaAnalysis"
+				enabled:	(method.value != "fixedEffects" || method.value != "equalEffects")
+
+				CheckBox
+				{
+					text:		qsTr("𝜏")
+					name:		"forestPlotHeterogeneityEstimateTau"
+					checked:	module == "metaAnalysis"
+					info: qsTr("Include the meta-analytic 𝜏, the square root of the estimated between-study variance in the model information section. Not available for multilevel/multivariate meta-analysis.")
+				}
+
+				CheckBox
+				{
+					text:		qsTr("𝜏²")
+					name:		"forestPlotHeterogeneityEstimateTau2"
+					checked:	false
+					info: qsTr("Include the meta-analytic 𝜏², the estimated between-study variance in the model information section. Not available for multilevel/multivariate meta-analysis.")
+				}
+
+				CheckBox
+				{
+					text:		qsTr("I²")
+					name:		"forestPlotHeterogeneityEstimateI2"
+					enabled:	sectionModel.heterogeneityModelTermsCount == 0
+					checked:	false
+					info: qsTr("Include the meta-analytic I², the percentage of total variation across studies due to heterogeneity in the model information section. Not available for multilevel/multivariate meta-analysis.")
+				}
+
+				CheckBox
+				{
+					text:		qsTr("H²")
+					name:		"forestPlotHeterogeneityEstimateH2"	
+					enabled:	sectionModel.heterogeneityModelTermsCount == 0
+					checked:	false
+					info: qsTr("Include the meta-analytic H², an index indicating the ratio of total variability to sampling variability in the model information section. Not available for multilevel/multivariate meta-analysis.")
+				}
+			}
+			
+			CheckBox
+			{
+				name:		"forestPlotHeterogeneityModerationTest"
+				text:		qsTr("Moderation test")
+				enabled:	sectionModel.heterogeneityModelTermsCount > 0
+				visible:	module == "metaAnalysis"
+				checked:	module == "metaAnalysis"
+				info: qsTr("Include the omnibus heterogeneity moderation test in the model information section. Available when heterogeneity meta-regression is specified.")
+			}
 		}
 
-		CheckBox
+		Group
 		{
-			name:		"forestPlotPooledEffectSizeTest"
-			text:		qsTr("Pooled effect size test")
-			checked:	true
-			info: qsTr("Include the test of the overall meta-analytic effect size estimate in the model information section.")
-		}
+			title:		qsTr("Effect Size")
 
-		CheckBox
-		{
-			name:		"forestPlotResidualHeterogeneityTest"
-			text:		qsTr("Residual heterogeneity test")
-			checked:	true
-			info: qsTr("Include the test of the residual heterogeneity in the model information section.")
-		}
+			CheckBox
+			{
+				name:		"forestPlotEffectSizeFixedEffectEstimate"
+				text:		qsTr("Fixed effect estimate")
+				id:			forestPlotEffectSizeFixedEffectEstimate
+				checked:	false				
+				enabled:	!(method.value == "fixedEffects" || method.value == "equalEffects")
+				info: qsTr("Include a fixed effect meta-analytic effect size estimate in the model information section. Not available if the model was already fitted with fixed effects or the model contains heterogeneity meta-regression.")
+			}
 
-		CheckBox
-		{
-			name:		"forestPlotResidualHeterogeneityEstimate"
-			text:		qsTr("Residual heterogeneity estimate")
-			enabled:	(method.value != "fixedEffects" || method.value != "equalEffects")
-			visible:	module == "metaAnalysis"
-			checked:	module == "metaAnalysis"
-			info: qsTr("Include the meta-analytic residual heterogeneity estimate in the model information section. Not available for multilevel/multivariate meta-analysis.")
-		}
+			CheckBox
+			{
+				name:		"forestPlotEffectSizeFixedEffectTest"
+				text:		qsTr("Fixed effect estimate test")
+				checked:	true
+				enabled:	forestPlotEffectSizeFixedEffectEstimate.checked && !(method.value == "fixedEffects" || method.value == "equalEffects")
+				info: qsTr("Include the test of the fixed effect meta-analytic effect size estimate in the model information section.")
+			}
 
-		CheckBox
-		{
-			name:		"forestPlotEffectSizeModerationTest"
-			text:		qsTr("Effect size moderation test")
-			enabled:	sectionModel.effectSizeModelTermsCount > 0
-			checked:	true
-			info: qsTr("Include the omnibus effect size moderation test in the model information section. Available when effect size meta-regression is specified.")
-		}
+			CheckBox
+			{
+				name:		"forestPlotEffectSizePooledEstimate"
+				text:		qsTr("Pooled estimate")
+				id:			forestPlotEffectSizePooledEstimate
+				checked:	true				
+				Layout.preferredWidth: 300 * jaspTheme.uiScale
+				info: qsTr("Include the overall meta-analytic effect size estimate in the model information section.")
+			}
 
-		CheckBox
-		{
-			name:		"forestPlotHeterogeneityModerationTest"
-			text:		qsTr("Heterogeneity moderation test")
-			enabled:	sectionModel.heterogeneityModelTermsCount > 0
-			visible:	module == "metaAnalysis"
-			checked:	module == "metaAnalysis"
-			info: qsTr("Include the omnibus heterogeneity moderation test in the model information section. Available when moderation meta-regression is specified.")
+			CheckBox
+			{
+				name:		"forestPlotEffectSizePooledEstimateTest"
+				text:		qsTr("Pooled estimate test")
+				enabled:	forestPlotEffectSizePooledEstimate.checked
+				checked:	true
+				info: qsTr("Include the test of the overall meta-analytic effect size estimate in the model information section.")
+			}
+
+			CheckBox
+			{
+				name:		"forestPlotEffectSizeModerationTest"
+				text:		qsTr("Moderation test")
+				enabled:	sectionModel.effectSizeModelTermsCount > 0
+				checked:	true
+				info: qsTr("Include the omnibus effect size moderation test in the model information section. Available when effect size meta-regression is specified.")
+			}
 		}
 	}
 
@@ -379,6 +444,7 @@ Section
 				label:			qsTr("Color")
 				addEmptyValue:	true
 				allowedColumns:	["nominal"]
+				fieldWidth:		125 * preferencesModel.uiScale
 			}
 
 			DropDown
@@ -387,6 +453,7 @@ Section
 				label:			qsTr("Shape")
 				addEmptyValue:	true
 				allowedColumns:	["nominal"]
+				fieldWidth:		125 * preferencesModel.uiScale
 			}
 		}
 	

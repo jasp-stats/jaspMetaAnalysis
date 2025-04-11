@@ -256,16 +256,21 @@
 
 
   ### Model information panel ----
-  # - residual heterogeneity test
-  # - moderation tests
-  # - pooled estimate
+
   if (options[["forestPlotModelInformation"]]) {
 
     if (any(unlist(options[c(
-      "forestPlotResidualHeterogeneityTest", "forestPlotResidualHeterogeneityEstimate",
+      "forestPlotEffectSizeFixedEffectEstimate",
+      "forestPlotEffectSizeFixedEffectTest",
+      "forestPlotEffectSizePooledEstimate",
+      "forestPlotEffectSizePooledEstimateTest",
       "forestPlotEffectSizeModerationTest",
-      "forestPlotHeterogeneityModerationTest",
-      "forestPlotPooledEffectSizeEstimate"
+      "forestPlotHeterogeneityTest",
+      "forestPlotHeterogeneityEstimateTau",
+      "forestPlotHeterogeneityEstimateTau2",
+      "forestPlotHeterogeneityEstimateI2",
+      "forestPlotHeterogeneityEstimateH2",
+      "forestPlotHeterogeneityModerationTest"
     )]))) {
       # add Header
       additionalInformation[[tempRow]] <- data.frame(
@@ -293,9 +298,48 @@
       tempRow <- tempRow + 1
     }
 
-    if (!.maGetMethodOptions(options) %in% c("FE", "EE") && options[["forestPlotResidualHeterogeneityEstimate"]]) {
+    if (!.maGetMethodOptions(options) %in% c("FE", "EE") && options[["forestPlotHeterogeneityEstimateTau"]]) {
       additionalInformation[[tempRow]] <- data.frame(
-        "label" = .maPrintHeterogeneityEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], keepText = !options[["forestPlotResidualHeterogeneityTest"]]),
+        "label" = .maPrintHeterogeneityEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "tau"),
+        "row"   = tempRow,
+        "est"   = NA,
+        "lCi"   = NA,
+        "uCi"   = NA,
+        "test"  = "",
+        "face"  = NA
+      )
+      tempRow <- tempRow + 1
+    }
+
+    if (!.maGetMethodOptions(options) %in% c("FE", "EE") && options[["forestPlotHeterogeneityEstimateTau2"]]) {
+      additionalInformation[[tempRow]] <- data.frame(
+        "label" = .maPrintHeterogeneityEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "tau2"),
+        "row"   = tempRow,
+        "est"   = NA,
+        "lCi"   = NA,
+        "uCi"   = NA,
+        "test"  = "",
+        "face"  = NA
+      )
+      tempRow <- tempRow + 1
+    }
+
+    if (!.maGetMethodOptions(options) %in% c("FE", "EE") && !.maIsMetaregressionHeterogeneity(options) && options[["forestPlotHeterogeneityEstimateI2"]]) {
+      additionalInformation[[tempRow]] <- data.frame(
+        "label" = .maPrintHeterogeneityEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "I2"),
+        "row"   = tempRow,
+        "est"   = NA,
+        "lCi"   = NA,
+        "uCi"   = NA,
+        "test"  = "",
+        "face"  = NA
+      )
+      tempRow <- tempRow + 1
+    }
+
+    if (!.maGetMethodOptions(options) %in% c("FE", "EE") && !.maIsMetaregressionHeterogeneity(options) && options[["forestPlotHeterogeneityEstimateH2"]]) {
+      additionalInformation[[tempRow]] <- data.frame(
+        "label" = .maPrintHeterogeneityEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "H2"),
         "row"   = tempRow,
         "est"   = NA,
         "lCi"   = NA,
@@ -332,14 +376,50 @@
       tempRow <- tempRow + 1
     }
 
-    if (options[["forestPlotPooledEffectSizeEstimate"]]) {
+    if (options[["forestPlotEffectSizeFixedEffectEstimate"]]) {
 
-      pooledEffectSizeTestsRight <- options[["forestPlotPooledEffectSizeTest"]] && options[["forestPlotTestsInRightPanel"]]
-      pooledEffectSizeTestsBelow <- options[["forestPlotPooledEffectSizeTest"]] && !options[["forestPlotTestsInRightPanel"]] && options[["forestPlotPredictionIntervals"]]
-      pooledEffectSizeTestsLeft  <- options[["forestPlotPooledEffectSizeTest"]] && !options[["forestPlotTestsInRightPanel"]] && !options[["forestPlotPredictionIntervals"]]
+      pooledEffectSizeTestsRight <- options[["forestPlotEffectSizeFixedEffectTest"]] && options[["forestPlotTestsInRightPanel"]]
+      pooledEffectSizeTestsBelow <- options[["forestPlotEffectSizeFixedEffectTest"]] && !options[["forestPlotTestsInRightPanel"]] && options[["forestPlotPredictionIntervals"]]
+      pooledEffectSizeTestsLeft  <- options[["forestPlotEffectSizeFixedEffectTest"]] && !options[["forestPlotTestsInRightPanel"]] && !options[["forestPlotPredictionIntervals"]]
+
+      tempPooledEstimate <- .maComputePooledEffectPlot(fit, options, forceFixed = TRUE)
+      tempTestText       <- .maPrintCoefficientTest(tempPooledEstimate, options[["forestPlotAuxiliaryTestsInformation"]] == "statisticAndPValue")
+
+      additionalInformation[[tempRow]] <- data.frame(
+        "label" = if (pooledEffectSizeTestsLeft) paste0(gettext("Fixed Effect Estimate"), ": ", tempTestText) else gettext("Fixed Effect Estimate"),
+        "row"   = tempRow,
+        "est"   = tempPooledEstimate$est,
+        "lCi"   = tempPooledEstimate$lCi,
+        "uCi"   = tempPooledEstimate$uCi,
+        "test"  = if (pooledEffectSizeTestsRight) tempTestText else "",
+        "face"  = NA
+      )
+      additionalObjects[[tempRow]] <- with(tempPooledEstimate, .maMakeDiamondDataFrame(est = est, lCi = lCi, uCi = uCi, row = tempRow, id = tempRow))
+      tempRow <- tempRow + 1
+
+      if (pooledEffectSizeTestsBelow) {
+        additionalInformation[[tempRow]] <- data.frame(
+          "label" = if (pooledEffectSizeTestsBelow) tempTestText else NA,
+          "row"   = tempRow,
+          "est"   = NA,
+          "lCi"   = NA,
+          "uCi"   = NA,
+          "test"  = "",
+          "face"  = NA
+        )
+
+        tempRow <- tempRow + 1
+      }
+    }
+
+    if (options[["forestPlotEffectSizePooledEstimate"]]) {
+
+      pooledEffectSizeTestsRight <- options[["forestPlotEffectSizePooledEstimateTest"]] && options[["forestPlotTestsInRightPanel"]]
+      pooledEffectSizeTestsBelow <- options[["forestPlotEffectSizePooledEstimateTest"]] && !options[["forestPlotTestsInRightPanel"]] && options[["forestPlotPredictionIntervals"]]
+      pooledEffectSizeTestsLeft  <- options[["forestPlotEffectSizePooledEstimateTest"]] && !options[["forestPlotTestsInRightPanel"]] && !options[["forestPlotPredictionIntervals"]]
 
       tempPooledEstimate <- .maComputePooledEffectPlot(fit, options)
-      tempTestText <- .maPrintCoefficientTest(tempPooledEstimate, options[["forestPlotAuxiliaryTestsInformation"]] == "statisticAndPValue")
+      tempTestText      <- .maPrintCoefficientTest(tempPooledEstimate, options[["forestPlotAuxiliaryTestsInformation"]] == "statisticAndPValue")
 
       additionalInformation[[tempRow]] <- data.frame(
         "label" = if (pooledEffectSizeTestsLeft) paste0(gettext("Pooled Estimate"), ": ", tempTestText) else gettext("Pooled Estimate"),
