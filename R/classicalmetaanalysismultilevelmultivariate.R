@@ -694,10 +694,9 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
   )
 
   # when multiple elements are present the last one is an `attribute` with information
-  if (length(.mammGetRandomFormulaList(options)) == 1) {
+  confintRandom <- confintRandom[!names(confintRandom) == "digits"]
+  if (any(names(confintRandom) == "random")) {
     confintRandom <- list(confintRandom)
-  } else {
-    confintRandom <- confintRandom[-length(confintRandom)]
   }
 
   # flatten
@@ -706,7 +705,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
   }))
 
   confintRandomContainer$object <- confintRandom
-  return(dropOneFits)
+  return(confintRandom)
 }
 .mammGetStructureOptions         <- function(structure) {
 
@@ -1015,7 +1014,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     tempTable2 <- createJaspTable(title = gettext("Estimates \U03C1"))
     tempTable2$position <- 2
     tempTable2$addColumnInfo(name = "parameter", type = "string",  title = "")
-    for(i in 1:ncol(G)){
+    for(i in 1:(ncol(G)-1)){
       tempTable2$addColumnInfo(name = paste0("rho",i), type = "number", title = sprintf("[,%1$i]", i), overtitle = gettext("Estimates"))
     }
     for(i in 1:ncol(G.infoLevels)){
@@ -1142,9 +1141,14 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
   rhoName  <- if (indx == 0) NA       else if (indx == 1) "rho"  else "phi"
   struct   <- if (indx == 0) "simple" else if (indx == 1) x$struct[indx]
 
-  GName           <- if (indx == 1) "G" else "H"
-  g.levels.kName  <- if (indx == 1) "g.levels.k" else "h.levels.k"
-  g.namesName     <- if (indx == 1) "g.names"    else "h.names"
+  GName               <- if (indx == 1) "G" else "H"
+  g.levels.kName      <- if (indx == 1) "g.levels.k" else "h.levels.k"
+  g.levels.fName      <- if (indx == 1) "g.levels.f" else "h.levels.f"
+  g.nlevels.kName     <- if (indx == 1) "g.nlevels.k" else "h.nlevels.k"
+  g.nlevels.fName     <- if (indx == 1) "g.nlevels.f" else "h.nlevels.f"
+  g.levels.comb.kName <- if (indx == 1) "g.levels.comb.k" else "h.levels.comb.k"
+  g.nlevelsName       <- if (indx == 1) "g.nlevels" else "h.nlevels"
+  g.namesName         <- if (indx == 1) "g.names" else "h.names"
 
   if (struct == "simple") {
     title1 <- gettext("Estimates")
