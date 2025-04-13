@@ -2258,6 +2258,13 @@
     }))
   }
 
+  # remove entries corresponding to omitted coefficients
+  if (parameter == "effectSize" && any(fit$coef.na)) {
+    outMatrix <- outMatrix[, !fit$coef.na, drop=FALSE]
+  } else if (parameter == "heterogeneity" && any(fit$coef.na.Z)) {
+    outMatrix <- outMatrix[, !fit$coef.na.Z, drop=FALSE]
+  }
+
   if (hasIntercept)
     outMatrix <- outMatrix[, -1, drop=FALSE]
 

@@ -157,6 +157,9 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   dataset     <- dataset[!anyNaByRows,]
   attr(dataset, "NAs") <- sum(anyNaByRows)
 
+  # drop empty factor levels
+  dataset <- droplevels(dataset)
+
   return(dataset)
 }
 .maCheckErrors         <- function(dataset, options) {
