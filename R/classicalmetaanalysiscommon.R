@@ -40,13 +40,6 @@
   # fit the model
   .maFitModel(jaspResults, dataset, options)
 
-  saveRDS(options, file = "C:/JASP-Packages/options.RDS")
-  saveRDS(dataset, file = "C:/JASP-Packages/dataset.RDS")
-  fit <- .maExtractFit(jaspResults, options)
-  fitNonClustered <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
-  saveRDS(fitNonClustered, file = "C:/JASP-Packages/fitNonClustered.RDS")
-  saveRDS(fit, file = "C:/JASP-Packages/fit.RDS")
-
   # # remove influential observations and refit the model if requested
   # if (options[["diagnosticsCasewiseDiagnostics"]] && options[["diagnosticsCasewiseDiagnosticsRerunWithoutInfluentialCases"]]) {
   #   dataset <- .maRemoveInfluentialObservations(jaspResults, dataset, options)
@@ -718,7 +711,7 @@
   # term tests rows
   termTests <- do.call(rbind, lapply(fit, .maRowTermTestTable, options = options, parameter = parameter))
 
-  # reorder by heterogeneity estimate
+  # reorder by terms estimate
   termTests <- termTests[order(termTests[, "order"]),,drop = FALSE]
   termTests$order <- NULL
 
@@ -758,10 +751,12 @@
     effectSize    = 3,
     heterogeneity = 4
   )
-  coefficientsTable$dependOn(c("metaregressionCoefficientEstimates", "confidenceIntervals"))
+  coefficientsTable$dependOn(c("metaregressionCoefficientEstimates", "confidenceIntervals", "includeFullDatasetInSubgroupAnalysis"))
   metaregressionContainer[[paste0(parameter, "CoefficientTable")]] <- coefficientsTable
 
   coefficientsTable$addColumnInfo(name = "name",  type = "string", title = "")
+  if (options[["subgroup"]] != "")
+    coefficientsTable$addColumnInfo(name = "subgroup",  type = "string",  title = gettext("Subgroup"))
   coefficientsTable$addColumnInfo(name = "est",   type = "number", title = gettext("Estimate"))
   coefficientsTable$addColumnInfo(name = "se",    type = "number", title = gettext("Standard Error"))
   if (options[["confidenceIntervals"]]) {
@@ -780,67 +775,29 @@
 
   coefficientsTable$addFootnote(.maFixedEffectTextMessage(options))
 
-  if (is.null(fit) || jaspBase::isTryError(fit))
+  # skip on error
+  if ((length(fit) == 1 && jaspBase::isTryError(fit[[1]]))  || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
-  if (parameter == "effectSize") {
+  estimates <- do.call(rbind, lapply(fit, .maRowCoefficientsEstimatesTable, options = options, parameter = parameter))
 
-    estimates <- data.frame(
-      name = .maVariableNames(rownames(fit[["beta"]]), options[["predictors"]]),
-      est  = fit[["beta"]][,1],
-      se   = fit[["se"]],
-      stat = fit[["zval"]],
-      pval = fit[["pval"]]
-    )
+  # reorder by terms estimate
+  estimates <- estimates[order(estimates[, "order"]),,drop = FALSE]
+  estimates$order <- NULL
 
-    if (.maIsPermutation(options))
-      estimates$pval2 <- attr(fit[["pval"]], "permutation")
-
-    if (.maIsMetaregressionFtest(options))
-      estimates$df <- fit[["ddf"]]
-
-    if (options[["confidenceIntervals"]]) {
-      estimates$lCi <- fit[["ci.lb"]]
-      estimates$uCi <- fit[["ci.ub"]]
-    }
-
-    coefficientsTable$setData(estimates)
-
-    coefficientsTableWarnings <- .maCoefficientsTableWarnings(fit, parameter)
-    for (i in seq_along(coefficientsTableWarnings))
-      coefficientsTable$addFootnote(coefficientsTableWarnings[i], symbol = gettext("Warning:"))
-
-  } else if (parameter == "heterogeneity") {
-
-    estimates <- data.frame(
-      name = .maVariableNames(rownames(fit[["alpha"]]), options[["predictors"]]),
-      est  = fit[["alpha"]][,1],
-      se   = fit[["se.alpha"]],
-      stat = fit[["zval.alpha"]],
-      pval = fit[["pval.alpha"]]
-    )
-
-    if (.maIsPermutation(options))
-      estimates$pval2 <- attr(fit[["pval.alpha"]], "permutation")
-
-    if (.maIsMetaregressionFtest(options))
-      estimates$df <- fit[["ddf.alpha"]]
-
-    if (options[["confidenceIntervals"]]) {
-      estimates$lCi <- fit[["ci.lb.alpha"]]
-      estimates$uCi <- fit[["ci.ub.alpha"]]
-    }
-
-    coefficientsTable$setData(estimates)
-
-    coefficientsTableWarnings <- .maCoefficientsTableWarnings(fit, parameter)
-    for (i in seq_along(coefficientsTableWarnings))
-      coefficientsTable$addFootnote(coefficientsTableWarnings[i], symbol = gettext("Warning:"))
-
-  }
-
+  # add messages
+  coefficientsTableWarnings <- .maCoefficientsTableWarnings(fit, options, parameter)
+  for (i in seq_along(coefficientsTableWarnings))
+    coefficientsTable$addFootnote(coefficientsTableWarnings[i], symbol = gettext("Warning:"))
   if (parameter == "heterogeneity")
     coefficientsTable$addFootnote(.meMetaregressionHeterogeneityMessages(options))
+
+  # merge and clean estimates
+  if (options[["subgroup"]] == "")
+    estimates <- estimates[,colnames(estimates) != "subgroup", drop = FALSE]
+  estimates$name[duplicated(estimates$name)] <- NA
+
+  coefficientsTable$setData(estimates)
 
   return()
 }
@@ -4052,6 +4009,64 @@
 
   return(termsTests)
 }
+.maRowCoefficientsEstimatesTable        <- function(fit, options, parameter) {
+
+  # handle missing subfits
+  if (jaspBase::isTryError(fit)) {
+    return(NULL)
+  }
+
+  if (parameter == "effectSize") {
+
+    estimates <- data.frame(
+      name = .maVariableNames(rownames(fit[["beta"]]), options[["predictors"]]),
+      est  = fit[["beta"]][,1],
+      se   = fit[["se"]],
+      stat = fit[["zval"]],
+      pval = fit[["pval"]]
+    )
+
+    if (.maIsPermutation(options))
+      estimates$pval2 <- attr(fit[["pval"]], "permutation")
+
+    if (.maIsMetaregressionFtest(options))
+      estimates$df <- fit[["ddf"]]
+
+    if (options[["confidenceIntervals"]]) {
+      estimates$lCi <- fit[["ci.lb"]]
+      estimates$uCi <- fit[["ci.ub"]]
+    }
+
+    estimates$order <- seq_along(fit$coef.na)[!fit$coef.na]
+
+  } else if (parameter == "heterogeneity") {
+
+    estimates <- data.frame(
+      name = .maVariableNames(rownames(fit[["alpha"]]), options[["predictors"]]),
+      est  = fit[["alpha"]][,1],
+      se   = fit[["se.alpha"]],
+      stat = fit[["zval.alpha"]],
+      pval = fit[["pval.alpha"]]
+    )
+
+    if (.maIsPermutation(options))
+      estimates$pval2 <- attr(fit[["pval.alpha"]], "permutation")
+
+    if (.maIsMetaregressionFtest(options))
+      estimates$df <- fit[["ddf.alpha"]]
+
+    if (options[["confidenceIntervals"]]) {
+      estimates$lCi <- fit[["ci.lb.alpha"]]
+      estimates$uCi <- fit[["ci.ub.alpha"]]
+    }
+
+    estimates$order <- seq_along(fit$coef.na.Z)[!fit$coef.na.Z]
+  }
+
+  estimates$subgroup <- attr(fit, "subgroup")
+
+  return(estimates)
+}
 
 .maAddSpaceForPositiveValue           <- function(value) {
   if (value >= 0)
@@ -4534,9 +4549,20 @@
 
   return(messages)
 }
-.maCoefficientsTableWarnings           <- function(fit, parameter) {
+.maCoefficientsTableWarnings           <- function(fit, options, parameter) {
 
-  messages <- NULL
+  if (options[["subgroup"]] == "") {
+    messages <- .maCoefficientsTableWarningsFun(fit[[1]], parameter, prefix = "")
+  } else {
+    messages <- NULL
+    for (i in seq_along(fit)) {
+      messages <- c(messages, .maCoefficientsTableWarningsFun(fit[[i]], parameter, prefix = gettextf("Subgroup %1$s: ", attr(fit[[i]], "subgroup"))))
+    }
+  }
+
+  return(messages)
+}
+.maCoefficientsTableWarningsFun        <- function(fit, parameter, prefix = "") {
 
   coefNA <- switch(
     parameter,
@@ -4549,8 +4575,12 @@
     missingCoef <- names(coefNA)[coefNA]
     missingCoef <- gsub("^.", "", missingCoef) # remove first letter as metafor adds "X/Z"
 
-    messages <- c(messages, gettextf("The following coefficients were removed from the model: %1$s. Possible causes are missing values, collinear predictors, or missing crossed cells in an interaction term.",
-                            paste(missingCoef, collapse = ", ")))
+    messages <- gettextf(
+      "%1$sThe following coefficients were removed from the model: %2$s. Possible causes are missing values, collinear predictors, or missing crossed cells in an interaction term.",
+      prefix, paste(missingCoef, collapse = ", "))
+
+  } else {
+    messages <- NULL
   }
 
   return(messages)
