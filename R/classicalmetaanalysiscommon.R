@@ -523,9 +523,7 @@
 
   # bind and clean rows
   tests <- do.call(rbind, tests)
-  if (options[["subgroup"]] == "")
-    tests <- tests[,colnames(tests) != "subgroup", drop = FALSE]
-  tests$test[duplicated(tests$test)] <- NA
+  tests <- .maSafeOrderAndSimplify(tests, "test")
 
   # add the rows to the table
   testsTable$setData(tests)
@@ -586,12 +584,6 @@
     # requires non-clustered fit
     fitNonClustered <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
     estimates[["heterogeneity"]] <- do.call(rbind, lapply(fitNonClustered, .maRowPooledHeterogeneity, options = options))
-
-    # reorder by heterogeneity estimate
-    if (length(estimates[["heterogeneity"]]) > 0) {
-      estimates[["heterogeneity"]] <- estimates[["heterogeneity"]][order(estimates[["heterogeneity"]][, "order"]),,drop = FALSE]
-      estimates[["heterogeneity"]]$order <- NULL
-    }
   }
 
   # add messages
@@ -601,9 +593,7 @@
 
   # merge and clean estimates
   estimates <- do.call(rbind, estimates)
-  if (options[["subgroup"]] == "")
-    estimates <- estimates[,colnames(estimates) != "subgroup", drop = FALSE]
-  estimates$par[duplicated(estimates$par)] <- NA
+  estimates <- .maSafeOrderAndSimplify(estimates, "par")
 
   pooledEstimatesTable$setData(estimates)
 
@@ -644,15 +634,7 @@
 
   # fit measures rows
   fitMeasures <- do.call(rbind, lapply(fit, .maRowFitMeasures, options = options))
-
-  # reorder by model
-  fitMeasures <- fitMeasures[order(fitMeasures[, "order"]),,drop = FALSE]
-  fitMeasures$order <- NULL
-
-  # merge and clean estimates
-  if (options[["subgroup"]] == "")
-    fitMeasures <- fitMeasures[,colnames(fitMeasures) != "subgroup", drop = FALSE]
-  fitMeasures$model[duplicated(fitMeasures$model)] <- NA
+  fitMeasures <- .maSafeOrderAndSimplify(fitMeasures, "model")
 
   fitMeasuresTable$setData(fitMeasures)
 
@@ -710,20 +692,12 @@
 
   # term tests rows
   termTests <- do.call(rbind, lapply(fit, .maRowTermTestTable, options = options, parameter = parameter))
-
-  # reorder by terms estimate
-  termTests <- termTests[order(termTests[, "order"]),,drop = FALSE]
-  termTests$order <- NULL
+  termTests <- .maSafeOrderAndSimplify(termTests, "term")
 
   # add messages
   termTestWarnings <- .maTermsTableWarnings(fit, options, terms, parameter)
   for (i in seq_along(termTestWarnings))
     termsTable$addFootnote(termTestWarnings[i], symbol = gettext("Warning:"))
-
-  # merge and clean estimates
-  if (options[["subgroup"]] == "")
-    termTests <- termTests[,colnames(termTests) != "subgroup", drop = FALSE]
-  termTests$term[duplicated(termTests$term)] <- NA
 
   termsTable$setData(termTests)
 
@@ -780,10 +754,7 @@
     return()
 
   estimates <- do.call(rbind, lapply(fit, .maRowCoefficientsEstimatesTable, options = options, parameter = parameter))
-
-  # reorder by terms estimate
-  estimates <- estimates[order(estimates[, "order"]),,drop = FALSE]
-  estimates$order <- NULL
+  estimates <- .maSafeOrderAndSimplify(estimates, "name")
 
   # add messages
   coefficientsTableWarnings <- .maCoefficientsTableWarnings(fit, options, parameter)
@@ -791,11 +762,6 @@
     coefficientsTable$addFootnote(coefficientsTableWarnings[i], symbol = gettext("Warning:"))
   if (parameter == "heterogeneity")
     coefficientsTable$addFootnote(.meMetaregressionHeterogeneityMessages(options))
-
-  # merge and clean estimates
-  if (options[["subgroup"]] == "")
-    estimates <- estimates[,colnames(estimates) != "subgroup", drop = FALSE]
-  estimates$name[duplicated(estimates$name)] <- NA
 
   coefficientsTable$setData(estimates)
 
@@ -845,7 +811,7 @@
       effectSize    = 5,
       heterogeneity = 6
     )
-    jaspResults[[paste0(parameter, "CorrelationTable")]] <- correlationMatrixTable
+    metaregressionContainer[[paste0(parameter, "CorrelationTable")]] <- correlationMatrixTable
 
     for (i in seq_along(fit)) {
       correlationMatrixTable[[names(fit)[i]]]          <- .maCoefficientCorrelationMatrixTableFun(fit[[i]], dataset, options, parameter)
@@ -1100,9 +1066,7 @@
   ))
 
   # reorder by estimated marginal means estimate
-  estimatedMarginalMeans <- estimatedMarginalMeans[order(estimatedMarginalMeans[, "order"]),,drop = FALSE]
-  estimatedMarginalMeans$order <- NULL
-  estimatedMarginalMeans$value[duplicated(estimatedMarginalMeans$value)] <- NA
+  estimatedMarginalMeans <- .maSafeOrderAndSimplify(estimatedMarginalMeans, "value")
 
   # drop non-required columns
   estimatedMarginalMeans <- estimatedMarginalMeans[,!colnames(estimatedMarginalMeans) %in% "variable", drop = FALSE]
@@ -1173,10 +1137,8 @@
     parameter        = parameter
   ))
 
-  # reorder by contrast estimate
-  contrasts <- contrasts[order(contrasts[, "order"]),,drop = FALSE]
-  contrasts$order <- NULL
-  contrasts$comparison[duplicated(contrasts$comparison)] <- NA
+  # reorder by estimated marginal means estimate
+  contrasts <- .maSafeOrderAndSimplify(contrasts, "comparison")
 
   # drop non-required columns
   if (parameter == "heterogeneity")
@@ -3681,7 +3643,7 @@
   ))
 }
 
-# misc
+# print
 .maVariableNames                      <- function(varNames, variables) {
 
   return(sapply(varNames, function(varName){
@@ -3807,6 +3769,8 @@
     .maAddSpaceForPositiveValue(uCi), "%3$.", digits, "f",
     "]"), est, lCi, uCi))
 }
+
+# table row adding functions
 .maRowHeterogeneityTest               <- function(fit, options) {
 
   # handle missing subfits
@@ -4001,14 +3965,12 @@
       subgroup = attr(fit, "subgroup")
     )
 
-    row       <- do.call(cbind.data.frame, row)
-    row$order <- 1:nrow(row)
-
+    row <- do.call(cbind.data.frame, row)
     row <- row[,c(
       "par", "est",
       if (options[["confidenceIntervals"]]) c("lCi", "uCi"),
       if (options[["predictionIntervals"]]) c("lPi", "uPi"),
-      "subgroup", "order"
+      "subgroup"
     )]
 
     return(row)
@@ -4019,13 +3981,12 @@
   row$lPi      <- NA
   row$uPi      <- NA
   row$subgroup <- attr(fit, "subgroup")
-  row$order    <- 1:nrow(row)
 
   row <- row[,c(
     "par", "est",
     if (options[["confidenceIntervals"]]) c("lCi", "uCi"),
     if (options[["predictionIntervals"]]) c("lPi", "uPi"),
-    "subgroup", "order"
+    "subgroup"
   )]
 
   return(row)
@@ -4035,7 +3996,6 @@
   # handle missing subfits
   if (jaspBase::isTryError(fit)) {
     row <- data.frame(
-      "order"        = 1:2,
       "subgroup"     = attr(fit, "subgroup"),
       "model"        = NA,
       "observations" = NA,
@@ -4054,7 +4014,6 @@
 
   # pooled effect size
   row <- cbind.data.frame(
-    "order"        = 1:2,
     "subgroup"     = attr(fit, "subgroup"),
     "model"        = colnames(fit[["fit.stats"]]),
     "observations" = fit[["k"]],
@@ -4066,7 +4025,7 @@
 
   return(row)
 }
-.maRowTermTestTable                     <- function(fit, options, parameter) {
+.maRowTermTestTable                   <- function(fit, options, parameter) {
 
   # handle missing subfits
   if (jaspBase::isTryError(fit)) {
@@ -4086,11 +4045,10 @@
   }
 
   termsTests$subgroup <- attr(fit, "subgroup")
-  termsTests$order    <- 1:nrow(termsTests)
 
   return(termsTests)
 }
-.maRowCoefficientsEstimatesTable        <- function(fit, options, parameter) {
+.maRowCoefficientsEstimatesTable      <- function(fit, options, parameter) {
 
   # handle missing subfits
   if (jaspBase::isTryError(fit)) {
@@ -4118,8 +4076,6 @@
       estimates$uCi <- fit[["ci.ub"]]
     }
 
-    estimates$order <- seq_along(fit$coef.na)[!fit$coef.na]
-
   } else if (parameter == "heterogeneity") {
 
     estimates <- data.frame(
@@ -4141,14 +4097,35 @@
       estimates$uCi <- fit[["ci.ub.alpha"]]
     }
 
-    estimates$order <- seq_along(fit$coef.na.Z)[!fit$coef.na.Z]
   }
 
   estimates$subgroup <- attr(fit, "subgroup")
 
   return(estimates)
 }
+.maSafeOrderAndSimplify               <- function(df, columnName) {
 
+  # this function allows ordering and simplifying subgroup output tables
+  # the main issue is that some models might be missing coefficients/terms etc
+  # as such, simple ordering of the output might misaligned the grouped output
+
+  # get the grouping order
+  groupingOrder <- unique(df[[columnName]])
+
+  # get the order of the grouping
+  newDf <- list()
+  for (i in seq_along(groupingOrder)) {
+    newDf[[i]] <- df[df[[columnName]] == groupingOrder[i],,drop=FALSE]
+  }
+  newDf <- do.call(rbind, newDf)
+
+  # simplify the grouping column
+  newDf[[columnName]][duplicated(newDf[[columnName]])] <- NA
+
+  return(newDf)
+}
+
+# misc
 .maAddSpaceForPositiveValue           <- function(value) {
   if (value >= 0)
     return(" ")
