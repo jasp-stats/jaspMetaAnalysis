@@ -1615,8 +1615,8 @@
   if (options[["studyLabels"]] != "")
     dfBaujat$label <- as.character(dataset[[options[["studyLabels"]]]])
 
-  xTicks <- jaspGraphs::getPrettyAxisBreaks(range(dfBaujat$x))
-  yTicks <- jaspGraphs::getPrettyAxisBreaks(range(dfBaujat$y))
+  xTicks <- jaspGraphs::getPrettyAxisBreaks(range(dfBaujat$x, na.rm = TRUE))
+  yTicks <- jaspGraphs::getPrettyAxisBreaks(range(dfBaujat$y, na.rm = TRUE))
 
 
   aesCall <- list(
