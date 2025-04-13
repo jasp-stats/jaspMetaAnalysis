@@ -504,7 +504,11 @@ Section
 		id:			advancedExtendMetaforCall
 		text:		qsTr("Extend metafor call")
 		checked:	false
-		info: qsTr("Allow adding custom arguments to the metafor function call. Consult the metafor R package documentation for the available commands (https://wviechtb.github.io/metafor/reference/rma.uni.html and https://wviechtb.github.io/metafor/reference/rma.mv.html).")
+		info: qsTr("Allow adding custom arguments to the metafor function call. Consult the metafor R package documentation for the available commands (for %1meta-analysis%2 and %3meta-analysis (multilevel/multivariate)%4).")
+			.arg("<a href='https://wviechtb.github.io/metafor/reference/rma.uni.html'>")
+			.arg("</a>")
+			.arg("<a href='https://wviechtb.github.io/metafor/reference/rma.mv.html'>")
+			.arg("</a>")
 	}
 
 	TextArea

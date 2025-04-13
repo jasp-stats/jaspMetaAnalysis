@@ -711,13 +711,13 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 }
 .pemaMessageMaxRhat       <- function(Rhat) {
   gettextf(
-    "Inference possibly unreliable -- MCMC chains might not have converged; The largest R-hat is %.3f > 1.01. To lower R-hat please increase 'Iterations', or 'Adapt delta' in the Options section.",
+    "Inference possibly unreliable -- MCMC chains might not have converged; The largest R-hat is %1$.3f > 1.01. To lower R-hat please increase 'Iterations', or 'Adapt delta' in the Options section.",
     Rhat
   )
 }
 .pemaMessageMinESS        <- function(ESS, treshold) {
   gettextf(
-    "Low estimation accuracy -- The smallest Effective Sample Size (ESS) is %.2f < %1.0f. To increase accuracy please increase 'Iterations', or 'Adapt delta' in the Options section.",
+    "Low estimation accuracy -- The smallest Effective Sample Size (ESS) is %1$.2f < %2$1.0f. To increase accuracy please increase 'Iterations', or 'Adapt delta' in the Options section.",
     ESS,
     treshold
   )
