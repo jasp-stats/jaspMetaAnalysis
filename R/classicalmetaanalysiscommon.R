@@ -906,7 +906,7 @@
   } else {
     # create the output container
     estimatedMarginalMeansAndContrastsContainer <- createJaspContainer(gettext("Estimated Marginal Means and Contrasts Summary"))
-    estimatedMarginalMeansAndContrastsContainer$dependOn(c(.maDependencies, "confidenceIntervals", "confidenceIntervalsLevel"))
+    estimatedMarginalMeansAndContrastsContainer$dependOn(c(.maDependencies, "confidenceIntervals", "confidenceIntervalsLevel", "includeFullDatasetInSubgroupAnalysis"))
     estimatedMarginalMeansAndContrastsContainer$position <- 4
     jaspResults[["estimatedMarginalMeansAndContrastsContainer"]] <- estimatedMarginalMeansAndContrastsContainer
   }
@@ -949,7 +949,7 @@
   fit <- .maExtractFit(jaspResults, options)
 
   # add an empty null table in case of an error
-  if (jaspBase::isTryError(fit)) {
+  if (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) {
     errorTable <- createJaspContainer(title = gettext("Estimated Marginal Means / Contrasts"))
     tempContainer[["errorTable"]] <- errorTable
     return()
@@ -1063,6 +1063,8 @@
   # prepare table
   if (selectedVariable != "")
     estimatedMarginalMeansTable$addColumnInfo(name = "value",     type = "string", title = gettext("Level"))
+  if (options[["subgroup"]] != "")
+    estimatedMarginalMeansTable$addColumnInfo(name = "subgroup",  type = "string",  title = gettext("Subgroup"))
   estimatedMarginalMeansTable$addColumnInfo(name = "est",       type = "number", title = gettext("Estimate"))
   if (options[["confidenceIntervals"]]) {
     overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
@@ -1089,7 +1091,18 @@
   }
 
   # get the estimate
-  estimatedMarginalMeans <- .maComputeMarginalMeansVariable(fit, options, dataset, strsplit(selectedVariable, ":")[[1]], options[["estimatedMarginalMeansEffectSizeTestAgainstValue"]], parameter)
+  estimatedMarginalMeans <- do.call(rbind, lapply(fit, .maComputeMarginalMeansVariable,
+    options          = options,
+    dataset          = dataset,
+    selectedVariable = if (selectedVariable == "") "" else strsplit(selectedVariable, ":")[[1]],
+    testAgainst      = options[["estimatedMarginalMeansEffectSizeTestAgainstValue"]],
+    parameter        = parameter
+  ))
+
+  # reorder by estimated marginal means estimate
+  estimatedMarginalMeans <- estimatedMarginalMeans[order(estimatedMarginalMeans[, "order"]),,drop = FALSE]
+  estimatedMarginalMeans$order <- NULL
+  estimatedMarginalMeans$value[duplicated(estimatedMarginalMeans$value)] <- NA
 
   # drop non-required columns
   estimatedMarginalMeans <- estimatedMarginalMeans[,!colnames(estimatedMarginalMeans) %in% "variable", drop = FALSE]
@@ -1099,6 +1112,8 @@
     estimatedMarginalMeans <- estimatedMarginalMeans[,!colnames(estimatedMarginalMeans) %in% c("lPi", "uPi"), drop = FALSE]
   if (selectedVariable == "")
     estimatedMarginalMeans <- estimatedMarginalMeans[,!colnames(estimatedMarginalMeans) %in% c("value"), drop = FALSE]
+  if (options[["subgroup"]] == "")
+    estimatedMarginalMeans <- estimatedMarginalMeans[,colnames(estimatedMarginalMeans) != "subgroup", drop = FALSE]
 
   # set data
   estimatedMarginalMeansTable$setData(estimatedMarginalMeans)
@@ -1123,6 +1138,8 @@
 
   # prepare table
   contrastsTable$addColumnInfo(name = "comparison", type = "string", title = gettext("Comparison"))
+  if (options[["subgroup"]] != "")
+    contrastsTable$addColumnInfo(name = "subgroup",  type = "string",  title = gettext("Subgroup"))
   contrastsTable$addColumnInfo(name = "est",        type = "number", title = gettext("Estimate"))
   if (options[["confidenceIntervals"]]) {
     overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
@@ -1148,11 +1165,24 @@
   contrastsTable$addColumnInfo(name = "pval",  type = "pvalue", title = gettext("p"))
 
   # get the estimate
-  contrasts <- .maComputeContrastVariable(fit, options, dataset, strsplit(selectedVariable, ":")[[1]], options[["contrastsEffectSizeTestAgainstValue"]], parameter)
+  contrasts <- do.call(rbind, lapply(fit, .maComputeContrastVariable,
+    options          = options,
+    dataset          = dataset,
+    selectedVariable = if (selectedVariable == "") "" else strsplit(selectedVariable, ":")[[1]],
+    testAgainst      = options[["contrastsEffectSizeTestAgainstValue"]],
+    parameter        = parameter
+  ))
+
+  # reorder by contrast estimate
+  contrasts <- contrasts[order(contrasts[, "order"]),,drop = FALSE]
+  contrasts$order <- NULL
+  contrasts$comparison[duplicated(contrasts$comparison)] <- NA
 
   # drop non-required columns
   if (parameter == "heterogeneity")
     contrasts <- contrasts[,!colnames(contrasts) %in% c("lPi", "uPi"), drop = FALSE]
+  if (options[["subgroup"]] == "")
+    contrasts <- contrasts[,colnames(contrasts) != "subgroup", drop = FALSE]
 
   # set data
   contrastsTable$setData(contrasts)
@@ -2365,6 +2395,7 @@
   if (length(selectedVariables) == 1 && selectedVariables == "") {
     # empty string creates overall adjusted estimate
     outMatrix <- t(colMeans(model.matrix(formula, data = expand.grid(predictorsRemaining))))
+    predictorsSelectedGridNames <- matrix("")
   } else {
     predictorsSelectedGrid      <- expand.grid(predictorsSelected)
     predictorsSelectedGridNames <- expand.grid(predictorsSelectedNames)
@@ -2387,8 +2418,9 @@
   if (length(selectedVariables) == 1 && selectedVariables == "") {
 
     # add intercept
-    attr(outMatrix, "variable") <- gettext("Adjusted Estimate")
-    attr(outMatrix, gettext("Adjusted Estimate")) <- ""
+    attr(outMatrix, "variable") <- gettext("Adjusted estimate")
+    attr(outMatrix, gettext("Adjusted estimate")) <- ""
+    attr(outMatrix, "selectedGridNames") <- predictorsSelectedGridNames
 
   } else {
 
@@ -2420,6 +2452,10 @@
 
 }
 .maComputeMarginalMeansVariable    <- function(fit, options, dataset, selectedVariable, testAgainst = 0, parameter) {
+
+  if (jaspBase::isTryError(fit)) {
+    return(NULL)
+  }
 
   if (parameter == "effectSize") {
 
@@ -2542,8 +2578,8 @@
 
     # create full data frame
     computedMarginalMeans <- data.frame(
-      "variable" = paste0(attr(predictorMatrixEffectSize, "variable"), collapse = jaspBase::interactionSymbol),
-      "value"    = apply(attr(predictorMatrixEffectSize, "selectedGridNames"), 1, paste0, collapse = ", "),
+      "variable" = paste0(attr(predictorMatrixHeterogeneity, "variable"), collapse = jaspBase::interactionSymbol),
+      "value"    = apply(attr(predictorMatrixHeterogeneity, "selectedGridNames"), 1, paste0, collapse = ", "),
       computedMarginalMeans
     )
   }
@@ -2562,9 +2598,16 @@
   if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]])
     computedMarginalMeans <- cbind(computedMarginalMeans, tauLevels)
 
+  computedMarginalMeans$subgroup <- attr(fit, "subgroup")
+  computedMarginalMeans$order    <- 1:nrow(computedMarginalMeans)
+
   return(computedMarginalMeans)
 }
 .maComputeContrastVariable         <- function(fit, options, dataset, selectedVariable, testAgainst = 0, parameter) {
+
+  if (jaspBase::isTryError(fit)) {
+    return(NULL)
+  }
 
   if (parameter == "effectSize") {
 
@@ -2731,6 +2774,9 @@
   if (.maIsMetaregressionFtest(options))
     computedContrasts$df <- computedContrastsTests$ddf
   computedContrasts$pval <- computedContrastsTests$pval
+
+  computedContrasts$subgroup <- attr(fit, "subgroup")
+  computedContrasts$order    <- 1:nrow(computedContrasts)
 
   return(computedContrasts)
 }
@@ -3829,6 +3875,7 @@
 
   # handle missing subfits
   if (jaspBase::isTryError(fit)) {
+    testAdd <- if (coefficientsTest) gettext("(coef ...)") else ""
     row <- list(
       subgroup = attr(fit, "subgroup"),
       test     = switch(
@@ -4535,6 +4582,8 @@
   } else {
     messages <- NULL
     for (i in seq_along(fit)) {
+      if (jaspBase::isTryError(fit))
+        next
       messages <- c(messages, .maTermsTableWarningsFun(fit[[i]], terms, parameter, prefix = gettextf("Subgroup %1$s: ", attr(fit[[i]], "subgroup"))))
     }
   }
@@ -4590,6 +4639,8 @@
   } else {
     messages <- NULL
     for (i in seq_along(fit)) {
+      if (jaspBase::isTryError(fit))
+        next
       messages <- c(messages, .maCoefficientsTableWarningsFun(fit[[i]], parameter, prefix = gettextf("Subgroup %1$s: ", attr(fit[[i]], "subgroup"))))
     }
   }

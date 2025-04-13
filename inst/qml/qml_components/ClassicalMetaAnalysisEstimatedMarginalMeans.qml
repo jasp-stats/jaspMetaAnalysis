@@ -98,7 +98,6 @@ Section
 
 			CheckBox
 			{	
-				enabled:	estimatedMarginalMeansEffectSizeSelectedVariables.columnsTypes.includes("nominal")
 				name:		"contrastsEffectSize"
 				label:		qsTr("Contrasts")
 
@@ -191,7 +190,6 @@ Section
 
 			CheckBox
 			{
-				enabled:	estimatedMarginalMeansHeterogeneitySelectedVariables.columnsTypes.includes("nominal")
 				name:		"contrastsHeterogeneity"
 				label:		qsTr("Contrasts")
 
