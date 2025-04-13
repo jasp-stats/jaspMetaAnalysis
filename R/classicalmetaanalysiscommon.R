@@ -813,19 +813,53 @@
 
   fit <- .maExtractFit(jaspResults, options)
 
-  correlationMatrixTable <- createJaspTable(switch(
-    parameter,
-    effectSize    = gettext("Effect Size Meta-Regression Correlation Matrix"),
-    heterogeneity = gettext("Heterogeneity Meta-Regression Correlation Matrix")
-  ))
-  correlationMatrixTable$position <- switch(
-    parameter,
-    effectSize    = 5,
-    heterogeneity = 6
-  )
-  correlationMatrixTable$dependOn("metaregressionCoefficientCorrelationMatrix")
-  metaregressionContainer[[paste0(parameter, "CorrelationTable")]] <- correlationMatrixTable
+  # create individual tables for each subgroup
+  if (options[["subgroup"]] == "") {
 
+    correlationMatrixTable <- .maCoefficientCorrelationMatrixTableFun(fit[[1]], dataset, options, parameter)
+    correlationMatrixTable$title <- switch(
+      parameter,
+      effectSize    = gettext("Effect Size Meta-Regression Correlation Matrix"),
+      heterogeneity = gettext("Heterogeneity Meta-Regression Correlation Matrix")
+    )
+    correlationMatrixTable$dependOn(c("metaregressionCoefficientCorrelationMatrix", "includeFullDatasetInSubgroupAnalysis"))
+    correlationMatrixTable$position <- switch(
+      parameter,
+      effectSize    = 5,
+      heterogeneity = 6
+    )
+    metaregressionContainer[[paste0(parameter, "CorrelationTable")]] <- correlationMatrixTable
+    return()
+
+  } else {
+
+    # create the output container
+    correlationMatrixTable <- createJaspContainer(switch(
+      parameter,
+      effectSize    = gettext("Effect Size Meta-Regression Correlation Matrix"),
+      heterogeneity = gettext("Heterogeneity Meta-Regression Correlation Matrix")
+    ))
+    correlationMatrixTable$dependOn(c(.maDependencies, "metaregressionCoefficientCorrelationMatrix", "includeFullDatasetInSubgroupAnalysis"))
+    correlationMatrixTable$position <- switch(
+      parameter,
+      effectSize    = 5,
+      heterogeneity = 6
+    )
+    jaspResults[[paste0(parameter, "CorrelationTable")]] <- correlationMatrixTable
+
+    for (i in seq_along(fit)) {
+      correlationMatrixTable[[names(fit)[i]]]          <- .maCoefficientCorrelationMatrixTableFun(fit[[i]], dataset, options, parameter)
+      correlationMatrixTable[[names(fit)[i]]]$title    <- gettextf("Subgroup: %1$s", attr(fit[[i]], "subgroup"))
+      correlationMatrixTable[[names(fit)[i]]]$position <- i
+    }
+
+  }
+
+  return()
+}
+.maCoefficientCorrelationMatrixTableFun  <- function(fit, dataset, options, parameter) {
+
+  correlationMatrixTable <- createJaspTable()
 
   if (is.null(fit) || jaspBase::isTryError(fit))
     return()
@@ -845,7 +879,7 @@
 
   correlationMatrixTable$setData(correlationMatrix)
 
-  return()
+  return(correlationMatrixTable)
 }
 .maEstimatedMarginalMeansAndContrasts    <- function(jaspResults, dataset, options) {
 
