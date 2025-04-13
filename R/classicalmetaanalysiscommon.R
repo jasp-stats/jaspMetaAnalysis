@@ -570,11 +570,9 @@
     }
   }
 
-
   # skip on error
   if ((length(fit) == 1 && jaspBase::isTryError(fit[[1]]))  || !is.null(.maCheckIsPossibleOptions(options)))
     return()
-
 
   estimates <- list()
 
@@ -594,17 +592,18 @@
     estimates[["heterogeneity"]]$order <- NULL
   }
 
+  # add messages
+  pooledEstimatesMessages <- .maPooledEstimatesMessages(fit, dataset, options, anyNA(estimates[["effect"]]))
+  for (i in seq_along(pooledEstimatesMessages))
+    pooledEstimatesTable$addFootnote(pooledEstimatesMessages[i])
+
+  # merge and clean estimates
   estimates <- do.call(rbind, estimates)
   if (options[["subgroup"]] == "")
     estimates <- estimates[,colnames(estimates) != "subgroup", drop = FALSE]
   estimates$par[duplicated(estimates$par)] <- NA
 
   pooledEstimatesTable$setData(estimates)
-
-  # add messages
-  pooledEstimatesMessages <- .maPooledEstimatesMessages(fit, dataset, options, sapply(pooledEffect, anyNA))
-  for (i in seq_along(pooledEstimatesMessages))
-    pooledEstimatesTable$addFootnote(pooledEstimatesMessages[i])
 
   return()
 }
@@ -620,11 +619,13 @@
   # fit measures table
   fitMeasuresTable          <- createJaspTable(gettext("Fit Measures"))
   fitMeasuresTable$position <- 4
-  fitMeasuresTable$dependOn(c(.maDependencies, "fitMeasures"))
+  fitMeasuresTable$dependOn(c(.maDependencies, "fitMeasures", "includeFullDatasetInSubgroupAnalysis"))
   modelSummaryContainer[["fitMeasuresTable"]] <- fitMeasuresTable
 
 
   fitMeasuresTable$addColumnInfo(name = "model",         title = "",                      type = "string")
+  if (options[["subgroup"]] != "")
+    fitMeasuresTable$addColumnInfo(name = "subgroup",  type = "string",  title = gettext("Subgroup"))
   fitMeasuresTable$addColumnInfo(name = "observations",  title = gettext("Observations"), type = "integer")
   fitMeasuresTable$addColumnInfo(name = "ll",            title = gettext("Log Lik."),     type = "number")
   fitMeasuresTable$addColumnInfo(name = "dev",           title = gettext("Deviance"),     type = "number")
@@ -635,16 +636,23 @@
   if (.maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options))
     fitMeasuresTable$addColumnInfo(name = "R2",  title = gettext("R\U00B2"),   type = "number")
 
-  # stop on error
-  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+  # skip on error
+  if ((length(fit) == 1 && jaspBase::isTryError(fit[[1]]))  || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
-  fitSummary <- cbind("model" = colnames(fit[["fit.stats"]]), observations = fit[["k"]], data.frame(t(fit[["fit.stats"]])))
+  # fit measures rows
+  fitMeasures <- do.call(rbind, lapply(fit, .maRowFitMeasures, options = options))
 
-  if (.maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options))
-    fitSummary$R2 <- fit[["R2"]]
+  # reorder by model
+  fitMeasures <- fitMeasures[order(fitMeasures[, "order"]),,drop = FALSE]
+  fitMeasures$order <- NULL
 
-  fitMeasuresTable$setData(fitSummary)
+  # merge and clean estimates
+  if (options[["subgroup"]] == "")
+    fitMeasures <- fitMeasures[,colnames(fitMeasures) != "subgroup", drop = FALSE]
+  fitMeasures$model[duplicated(fitMeasures$model)] <- NA
+
+  fitMeasuresTable$setData(fitMeasures)
 
   return()
 }
@@ -1766,7 +1774,9 @@
   # }
 
   fitOutput          <- jaspResults[["fit"]]$object
-  if (!options[["includeFullDatasetInSubgroupAnalysis"]]) {
+
+  # remove full fit if requested (in subgroup analysis)
+  if (!options[["includeFullDatasetInSubgroupAnalysis"]] && options[["subgroup"]] !=  "") {
     fitOutput <- fitOutput[names(fitOutput) != "__fullDataset"]
   }
 
@@ -3979,6 +3989,42 @@
 
   return(row)
 }
+.maRowFitMeasures                     <- function(fit, options) {
+
+  # handle missing subfits
+  if (jaspBase::isTryError(fit)) {
+    row <- data.frame(
+      "order"        = 1:2,
+      "subgroup"     = attr(fit, "subgroup"),
+      "model"        = NA,
+      "observations" = NA,
+      "ll"           = NA,
+      "dev"          = NA,
+      "AIC"          = NA,
+      "BIC"          = NA,
+      "AICc"         = NA
+    )
+
+    if (.maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options))
+      row$R2 <- NA
+
+    return(row)
+  }
+
+  # pooled effect size
+  row <- cbind.data.frame(
+    "order"        = 1:2,
+    "subgroup"     = attr(fit, "subgroup"),
+    "model"        = colnames(fit[["fit.stats"]]),
+    "observations" = fit[["k"]],
+    data.frame(t(fit[["fit.stats"]]))
+  )
+
+  if (.maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options))
+    row$R2 <- fit[["R2"]]
+
+  return(row)
+}
 .maAddSpaceForPositiveValue           <- function(value) {
   if (value >= 0)
     return(" ")
@@ -4183,7 +4229,7 @@
 
   return(out)
 }
-.maCleanSelectedIndexesVector         <- function() {
+.maCleanSelectedIndexesVector         <- function(x) {
 
   x <- trimws(x, which = "both")
   x <- trimws(x, which = "both", whitespace = "c")
