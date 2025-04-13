@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.4.2",
+    "Version": "4.5.0",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -73,7 +73,7 @@
     },
     "GPArotation": {
       "Package": "GPArotation",
-      "Version": "2024.3-1",
+      "Version": "2025.3-1",
       "Source": "Repository",
       "Requirements": [
         "R",
@@ -95,30 +95,30 @@
     },
     "MASS": {
       "Package": "MASS",
-      "Version": "7.3-61",
+      "Version": "7.3-65",
       "Source": "Repository",
       "Requirements": [
-        "methods",
         "R",
         "grDevices",
         "graphics",
         "stats",
-        "utils"
+        "utils",
+        "methods"
       ]
     },
     "Matrix": {
       "Package": "Matrix",
-      "Version": "1.7-1",
+      "Version": "1.7-3",
       "Source": "Repository",
       "Requirements": [
+        "R",
+        "methods",
         "grDevices",
         "graphics",
         "grid",
         "lattice",
         "stats",
-        "utils",
-        "R",
-        "methods"
+        "utils"
       ]
     },
     "MatrixModels": {
@@ -184,7 +184,7 @@
     },
     "Rdpack": {
       "Package": "Rdpack",
-      "Version": "2.6.3",
+      "Version": "2.6.4",
       "Source": "Repository",
       "Requirements": [
         "R",
@@ -357,7 +357,7 @@
     },
     "clubSandwich": {
       "Package": "clubSandwich",
-      "Version": "0.5.11",
+      "Version": "0.6.0",
       "Source": "Repository",
       "Requirements": [
         "R",
@@ -566,7 +566,7 @@
     },
     "fs": {
       "Package": "fs",
-      "Version": "1.6.5",
+      "Version": "1.6.6",
       "Source": "Repository",
       "Requirements": [
         "R",
@@ -609,7 +609,7 @@
     },
     "ggplot2": {
       "Package": "ggplot2",
-      "Version": "3.5.1",
+      "Version": "3.5.2",
       "Source": "Repository",
       "Requirements": [
         "R",
@@ -781,7 +781,7 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspBase",
-      "RemoteSha": "31bc23b340ebb9298c03b67108de300cdc3f9f57"
+      "RemoteSha": "d3c6d19feaa94dcd5c636345adb76a9f2e8bdac1"
     },
     "jaspGraphs": {
       "Package": "jaspGraphs",
@@ -804,7 +804,7 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspGraphs",
-      "RemoteSha": "24db07dff35e3587155e8a4954f3fbdf88b2ac96"
+      "RemoteSha": "cb357cc60fa30e106a87d3d99f9fe31312010f7e"
     },
     "jquerylib": {
       "Package": "jquerylib",
@@ -833,7 +833,7 @@
     },
     "later": {
       "Package": "later",
-      "Version": "1.4.1",
+      "Version": "1.4.2",
       "Source": "Repository",
       "Requirements": [
         "Rcpp",
@@ -845,12 +845,12 @@
       "Version": "0.22-6",
       "Source": "Repository",
       "Requirements": [
+        "R",
         "grid",
         "grDevices",
         "graphics",
         "stats",
-        "utils",
-        "R"
+        "utils"
       ]
     },
     "lifecycle": {
@@ -1017,14 +1017,14 @@
       "Version": "1.9-1",
       "Source": "Repository",
       "Requirements": [
+        "R",
+        "nlme",
         "methods",
         "stats",
         "graphics",
         "Matrix",
         "splines",
-        "utils",
-        "R",
-        "nlme"
+        "utils"
       ]
     },
     "mime": {
@@ -1077,14 +1077,14 @@
     },
     "nlme": {
       "Package": "nlme",
-      "Version": "3.1-166",
+      "Version": "3.1-168",
       "Source": "Repository",
       "Requirements": [
+        "R",
         "graphics",
         "stats",
         "utils",
-        "lattice",
-        "R"
+        "lattice"
       ]
     },
     "nloptr": {
@@ -1186,7 +1186,7 @@
     },
     "pillar": {
       "Package": "pillar",
-      "Version": "1.10.1",
+      "Version": "1.10.2",
       "Source": "Repository",
       "Requirements": [
         "cli",
@@ -1295,7 +1295,7 @@
     },
     "ps": {
       "Package": "ps",
-      "Version": "1.9.0",
+      "Version": "1.9.1",
       "Source": "Repository",
       "Requirements": [
         "R",
@@ -1349,7 +1349,7 @@
     },
     "ragg": {
       "Package": "ragg",
-      "Version": "1.3.3",
+      "Version": "1.4.0",
       "Source": "Repository",
       "Requirements": [
         "systemfonts",
@@ -1396,7 +1396,7 @@
     },
     "rlang": {
       "Package": "rlang",
-      "Version": "1.1.5",
+      "Version": "1.1.6",
       "Source": "Repository",
       "Requirements": [
         "R",
@@ -1438,7 +1438,7 @@
     },
     "runjags": {
       "Package": "runjags",
-      "Version": "2.2.2-4",
+      "Version": "2.2.2-5",
       "Source": "Repository",
       "Requirements": [
         "R",
@@ -1476,7 +1476,7 @@
     },
     "sass": {
       "Package": "sass",
-      "Version": "0.4.9",
+      "Version": "0.4.10",
       "Source": "Repository",
       "Requirements": [
         "fs",
@@ -1600,16 +1600,16 @@
     },
     "survival": {
       "Package": "survival",
-      "Version": "3.7-0",
+      "Version": "3.8-3",
       "Source": "Repository",
       "Requirements": [
+        "R",
         "graphics",
         "Matrix",
         "methods",
         "splines",
         "stats",
-        "utils",
-        "R"
+        "utils"
       ]
     },
     "svglite": {
@@ -1630,7 +1630,7 @@
     },
     "systemfonts": {
       "Package": "systemfonts",
-      "Version": "1.2.1",
+      "Version": "1.2.2",
       "Source": "Repository",
       "Requirements": [
         "R",
@@ -1802,7 +1802,7 @@
     },
     "zoo": {
       "Package": "zoo",
-      "Version": "1.8-13",
+      "Version": "1.8-14",
       "Source": "Repository",
       "Requirements": [
         "R",
