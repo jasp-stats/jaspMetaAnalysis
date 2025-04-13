@@ -40,6 +40,13 @@
   # fit the model
   .maFitModel(jaspResults, dataset, options)
 
+  saveRDS(options, file = "C:/JASP-Packages/options.RDS")
+  saveRDS(dataset, file = "C:/JASP-Packages/dataset.RDS")
+  fit <- .maExtractFit(jaspResults, options)
+  fitNonClustered <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
+  saveRDS(fitNonClustered, file = "C:/JASP-Packages/fitNonClustered.RDS")
+  saveRDS(fit, file = "C:/JASP-Packages/fit.RDS")
+
   # # remove influential observations and refit the model if requested
   # if (options[["diagnosticsCasewiseDiagnostics"]] && options[["diagnosticsCasewiseDiagnosticsRerunWithoutInfluentialCases"]]) {
   #   dataset <- .maRemoveInfluentialObservations(jaspResults, dataset, options)
@@ -138,7 +145,7 @@
 
   # full dataset fit
   startProgressbar(expectedTicks = 1, label = gettext("Estimating Meta-Analytic Model"))
-  fitOutput[["__fullDataset"]] <- .maFitModelFun(dataset, options, subgroupName = gettext("Full Dataset"))
+  fitOutput[["__fullDataset"]] <- .maFitModelFun(dataset, options, subgroupName = gettext("Full dataset"))
   progressbarTick()
 
   # add subgroup fits
@@ -588,8 +595,10 @@
     estimates[["heterogeneity"]] <- do.call(rbind, lapply(fitNonClustered, .maRowPooledHeterogeneity, options = options))
 
     # reorder by heterogeneity estimate
-    estimates[["heterogeneity"]] <- estimates[["heterogeneity"]][order(estimates[["heterogeneity"]][, "order"]),,drop = FALSE]
-    estimates[["heterogeneity"]]$order <- NULL
+    if (length(estimates[["heterogeneity"]]) > 0) {
+      estimates[["heterogeneity"]] <- estimates[["heterogeneity"]][order(estimates[["heterogeneity"]][, "order"]),,drop = FALSE]
+      estimates[["heterogeneity"]]$order <- NULL
+    }
   }
 
   # add messages
@@ -678,10 +687,12 @@
     effectSize    = 1,
     heterogeneity = 2
   )
-  termsTable$dependOn("metaregressionTermTests")
+  termsTable$dependOn(c("metaregressionTermTests", "includeFullDatasetInSubgroupAnalysis"))
   metaregressionContainer[[paste0(parameter, "TermsTable")]] <- termsTable
 
   termsTable$addColumnInfo(name = "term",  type = "string",  title = "")
+  if (options[["subgroup"]] != "")
+    termsTable$addColumnInfo(name = "subgroup",  type = "string",  title = gettext("Subgroup"))
   termsTable$addColumnInfo(name = "stat",  type = "number",  title = if(.maIsMetaregressionFtest(options)) gettext("F")   else gettext("Q\U2098"))
   termsTable$addColumnInfo(name = "df1",   type = "integer", title = if(.maIsMetaregressionFtest(options)) gettext("df\U2081") else gettext("df"))
   if (.maIsMetaregressionFtest(options)) {
@@ -696,40 +707,32 @@
 
   termsTable$addFootnote(.maFixedEffectTextMessage(options))
 
-  if (is.null(fit) || jaspBase::isTryError(fit))
+  # skip on error
+  if ((length(fit) == 1 && jaspBase::isTryError(fit[[1]]))  || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
-  if (parameter == "effectSize") {
+  if ((parameter == "effectSize"    && !.maIsMetaregressionEffectSize(options)) ||
+      (parameter == "heterogeneity" && !.maIsMetaregressionHeterogeneity(options)))
+    return()
 
-    if (!.maIsMetaregressionEffectSize(options))
-      return()
+  # term tests rows
+  termTests <- do.call(rbind, lapply(fit, .maRowTermTestTable, options = options, parameter = parameter))
 
-    terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")
-    termsTests <- do.call(rbind.data.frame, lapply(terms, function(term)
-      .maTermTests(fit, options, term, parameter = "effectSize")
-    ))
-    termsTable$setData(termsTests)
+  # reorder by heterogeneity estimate
+  termTests <- termTests[order(termTests[, "order"]),,drop = FALSE]
+  termTests$order <- NULL
 
-    termsTestWarnings <- .maTermsTableWarnings(fit, terms, parameter)
-    for (i in seq_along(termsTestWarnings))
-      termsTable$addFootnote(termsTestWarnings[i], symbol = gettext("Warning:"))
+  # add messages
+  termTestWarnings <- .maTermsTableWarnings(fit, options, terms, parameter)
+  for (i in seq_along(termTestWarnings))
+    termsTable$addFootnote(termTestWarnings[i], symbol = gettext("Warning:"))
 
-  } else if (parameter == "heterogeneity") {
+  # merge and clean estimates
+  if (options[["subgroup"]] == "")
+    termTests <- termTests[,colnames(termTests) != "subgroup", drop = FALSE]
+  termTests$term[duplicated(termTests$term)] <- NA
 
-    if (!.maIsMetaregressionHeterogeneity(options))
-      return()
-
-    terms      <- attr(terms(fit[["formula.scale"]], data = fit[["data"]]),"term.labels")
-    termsTests <- do.call(rbind.data.frame, lapply(terms, function(term)
-      .maTermTests(fit, options, term, parameter = "heterogeneity")
-    ))
-    termsTable$setData(termsTests)
-
-    termsTestWarnings <- .maTermsTableWarnings(fit, terms, parameter)
-    for (i in seq_along(termsTestWarnings))
-      termsTable$addFootnote(termsTestWarnings[i], symbol = gettext("Warning:"))
-
-  }
+  termsTable$setData(termTests)
 
   return()
 }
@@ -1901,7 +1904,7 @@
 
   # to data.frame
   predictedEffect      <- .maExtractAndFormatPrediction(predictedEffect)
-  predictedEffect$par  <- gettext("Pooled Effect")
+  predictedEffect$par  <- gettext("Pooled effect")
 
   # apply effect size transformation
   if (options[["transformEffectSize"]] != "none")
@@ -2196,7 +2199,7 @@
     )
 
   if (parameter == "effectSize") {
-    row$parameter <- gettextf("Effect Size (coef: %1$s)", paste(selCoef, collapse = ", "))
+    row$parameter <- gettextf("Effect size (coef: %1$s)", paste(selCoef, collapse = ", "))
     attr(row, "footnote") <- gettextf(
       "Effect size coefficients %1$s correspond to %2$s.",
       paste(selCoef, collapse = ","),
@@ -3803,7 +3806,7 @@
   if (jaspBase::isTryError(fit)) {
     row <- list(
       subgroup = attr(fit, "subgroup"),
-      test     = gettext("Pooled Effect"),
+      test     = gettext("Pooled effect"),
       stat     = NA,
       pval     = NA
     )
@@ -3818,7 +3821,7 @@
 
   row <- list(
     subgroup = attr(fit, "subgroup"),
-    test     = gettext("Pooled Effect"),
+    test     = gettext("Pooled effect"),
     stat     = if (.maIsMetaregressionFtest(options)) sprintf("t(%1$s) = %2$.2f", .maPrintDf(predictedEffect[["df"]][1]), predictedEffect[["stat"]][1])
     else sprintf("z = %1$.2f",  predictedEffect[["stat"]][1]),
     pval     = predictedEffect[["pval"]][1]
@@ -3919,7 +3922,7 @@
   # handle missing subfits
   if (jaspBase::isTryError(fit)) {
     row <- list(
-      par     = gettext("Pooled Effect"),
+      par     = gettext("Pooled effect"),
       est     = NA,
       lCi     = NA,
       uCi     = NA,
@@ -4025,6 +4028,31 @@
 
   return(row)
 }
+.maRowTermTestTable                     <- function(fit, options, parameter) {
+
+  # handle missing subfits
+  if (jaspBase::isTryError(fit)) {
+    return(NULL)
+  }
+
+  if (parameter == "effectSize") {
+    terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")
+    termsTests <- do.call(rbind.data.frame, lapply(terms, function(term)
+      .maTermTests(fit, options, term, parameter = "effectSize")
+    ))
+  } else if (parameter == "heterogeneity") {
+    terms      <- attr(terms(fit[["formula.scale"]], data = fit[["data"]]),"term.labels")
+    termsTests <- do.call(rbind.data.frame, lapply(terms, function(term)
+      .maTermTests(fit, options, term, parameter = "heterogeneity")
+    ))
+  }
+
+  termsTests$subgroup <- attr(fit, "subgroup")
+  termsTests$order    <- 1:nrow(termsTests)
+
+  return(termsTests)
+}
+
 .maAddSpaceForPositiveValue           <- function(value) {
   if (value >= 0)
     return(" ")
@@ -4451,9 +4479,20 @@
 
   return(message)
 }
-.maTermsTableWarnings                  <- function(fit, terms, parameter) {
+.maTermsTableWarnings                  <- function(fit, options, terms, parameter) {
 
-  messages <- NULL
+  if (options[["subgroup"]] == "") {
+    messages <- .maTermsTableWarningsFun(fit[[1]], terms, parameter, prefix = "")
+  } else {
+    messages <- NULL
+    for (i in seq_along(fit)) {
+      messages <- c(messages, .maTermsTableWarningsFun(fit[[i]], terms, parameter, prefix = gettextf("Subgroup %1$s: ", attr(fit[[i]], "subgroup"))))
+    }
+  }
+
+  return(messages)
+}
+.maTermsTableWarningsFun               <- function(fit, terms, parameter, prefix = "") {
 
   coefNA <- switch(
     parameter,
@@ -4463,7 +4502,7 @@
 
   if (any(coefNA)) {
 
-    messages <- c(messages, unlist(sapply(terms, function(term) {
+    messages <- unlist(sapply(terms, function(term) {
 
       if (parameter == "effectSize") {
         terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")     # get terms indices from the model
@@ -4477,14 +4516,21 @@
       thisNaTerms    <- coefNA[termsIndex == which(terms == term)]
 
       if (all(thisNaTerms)) {
-        return(gettextf("The term %1$s was completely removed from the model. Possible causes are missing values, collinear predictors, or missing crossed cells in an interaction term.", term))
+        return(gettextf(
+          "%1$sThe term %2$s was completely removed from the model. Possible causes are missing values, collinear predictors, or missing crossed cells in an interaction term.",
+          prefix, term
+        ))
       } else if (any(thisNaTerms)) {
-        return(gettextf("The term %1$s was partilly removed (%2$i/%3$i coefficients) from the model. Possible causes are missing values, collinear predictors, or missing crossed cells in an interaction term.", term, sum(thisNaTerms), length(thisNaTerms)))
+        return(gettextf(
+          "%1$sThe term %2$s was partilly removed (%3$i/%4$i coefficients) from the model. Possible causes are missing values, collinear predictors, or missing crossed cells in an interaction term.",
+           prefix, term, sum(thisNaTerms), length(thisNaTerms)))
       } else {
         return(NULL)
       }
-    })))
-  }
+    }))
+  } else (
+    messages <- NULL
+  )
 
   return(messages)
 }
