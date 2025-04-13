@@ -70,25 +70,25 @@ Section
 
 	Group
 	{
-		title:		qsTr("Random Effects / Model Structure")
+		title:		qsTr("Random Effects / Model Components")
 		visible:	module == "metaAnalysisMultilevelMultivariate"
 		info: qsTr("Available when performing multilevel/multivariate meta-analysis.")
 
 		CheckBox
 		{
-			text:		qsTr("Test inclusion")
-			name:		"randomEffectsTestInclusion"
-			checked:	false
-			info: qsTr("Test the inclusion of the individual Random Effects / Model Structure components. The test compares the complete model (i.e., including all components) with a model without one of the specified Random Effects / Model Structure components at a time.")
-		}
-		/* TODO: will require a lot of work in sorting out which value belongs where
-		CheckBox
-		{
 			text:		qsTr("Confidence intervals")
 			name:		"randomEffectsConfidenceIntervals"
 			checked:	false
+			info: qsTr("Include confidence intervals for the Random Effects / Model Components.")
 		}
-		*/	
+		
+		CheckBox
+		{
+			text:		qsTr("Test inclusion")
+			name:		"randomEffectsTestInclusion"
+			checked:	false
+			info: qsTr("Test the inclusion of the individual Random Effects / Model Components. The test compares the complete model (i.e., including all components) with a model without one of the specified Random Effects / Model Structure components at a time.")
+		}
 	}
 
 	Group
