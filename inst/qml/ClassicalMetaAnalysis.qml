@@ -25,7 +25,7 @@ Form
 {
 	VariablesForm
 	{
-		preferredHeight: 450 * preferencesModel.uiScale
+		preferredHeight: 500 * preferencesModel.uiScale
 
 		AvailableVariablesList
 		{
@@ -101,7 +101,7 @@ Form
 			title:				qsTr("Predictors")
 			allowedColumns:		["nominal", "scale"]
 			allowTypeChange:	true
-			info: qsTr("Variables to include as predictors (moderators) in the meta-regression model.")
+			info: qsTr("Variables to include as predictors (moderators) in the meta-regression model. See the 'Model' section for the meta-regression specification details.")
 		}
 
 		AssignedVariablesList
@@ -112,7 +112,7 @@ Form
 			singleVariable:		true
 			enabled:			!sectionAdvanced.permutationTestChecked
 			allowedColumns:		["nominal"]
-			info: qsTr("Variable indicating clustering of effect sizes. This option is disabled when permutation tests are selected.")
+			info: qsTr("Variable indicating clustering of effect sizes for robust variance estimation. If the variable is specified, a cluster-robust tests and confidence intervals are provided. See 'Details' section for additional clustering options. This option is disabled when permutation tests are selected.")
 		}
 
 		AssignedVariablesList
@@ -122,6 +122,16 @@ Form
 			singleVariable:		true
 			allowedColumns:		["nominal"]
 			info: qsTr("Variable containing labels for the studies. Used for labeling outputs and plots.")
+		}
+
+		AssignedVariablesList
+		{
+			name:				"subgroup"
+			id:					subgroup
+			title:				qsTr("Subgroup")
+			singleVariable:		true
+			allowedColumns:		["nominal"]
+			info: qsTr("Variable indicating subgroup stratification. For each subgroup, an independent model is fitted to the corresponding data set subset.")
 		}
 	}
 

@@ -32,7 +32,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 }
 
 .maDependencies        <- c(
-  "effectSize", "effectSizeStandardError", "predictors", "predictors.types", "clustering", "method", "fixedEffectTest",
+  "effectSize", "effectSizeStandardError", "predictors", "predictors.types", "clustering", "subgroup", "method", "fixedEffectTest",
   "effectSizeModelTerms", "effectSizeModelIncludeIntercept",
   "clusteringUseClubSandwich", "clusteringSmallSampleCorrection",
   "confidenceIntervalsLevel",
@@ -150,6 +150,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     options[["effectSize"]],
     options[["effectSizeStandardError"]],
     if (options[["clustering"]] != "") options[["clustering"]],
+    if (options[["subgroup"]] != "")   options[["subgroup"]],
     if (length(predictorsNominal) > 0) predictorsNominal,
     if (length(predictorsScale) > 0)   predictorsScale
   )
