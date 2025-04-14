@@ -57,7 +57,7 @@ Section
 				name:		"includeFullDatasetInSubgroupAnalysis"
 				text:		qsTr("Include full dataset in subgroup analysis")
 				enabled:	subgroup.count == 1
-				checked:	true
+				checked:	false
 				info: qsTr("Include the full dataset output in the subgroup analysis. This option is only available when the subgroup analysis is selected.")
 			}
 

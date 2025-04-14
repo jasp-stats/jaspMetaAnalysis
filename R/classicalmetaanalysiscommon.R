@@ -150,13 +150,16 @@
     for (i in seq_along(subgroupLevels)) {
 
       subgroupLevel <- subgroupLevels[i]
-      subgroupData  <- dataset[dataset[[options[["subgroup"]]]] == subgroupLevel, ]
+      subgroupIndx  <- dataset[[options[["subgroup"]]]] == subgroupLevel
+      subgroupData  <- dataset[subgroupIndx, ]
 
-      attr(subgroupData, "NAs")    <- sum(attr(data, "NasIds")[dataset[[options[["subgroup"]]]] == subgroupLevel])
-      attr(subgroupData, "NasIds") <- attr(data, "NasIds")[dataset[[options[["subgroup"]]]] == subgroupLevel]
+      # forward NAs information
+      tempNasIds    <- attr(dataset, "NasIds")[!attr(dataset, "NasIds")]
+      attr(subgroupData, "NAs")    <- sum(tempNasIds[subgroupIndx])
+      attr(subgroupData, "NasIds") <- tempNasIds[subgroupIndx]
 
       # fit the model
-      fitOutput[[paste0("subgroup", subgroupLevel)]] <- .maFitModelFun(subgroupData, options, subgroupName = subgroupLevel)
+      fitOutput[[paste0("subgroup", subgroupLevel)]] <- .maFitModelFun(subgroupData, options, subgroupName = paste0("subgroup", subgroupLevel))
       progressbarTick()
     }
   }
@@ -293,7 +296,7 @@
   }
 
   # add attributes
-  attr(fit, "subgroup") <- subgroupName
+  attr(fit, "subgroup") <- paste0(subgroupName)
   attr(fit, "dataset")  <- dataset
   if (!is.null(fitClustered)) {
     attr(fitClustered, "subgroup") <- subgroupName
@@ -475,7 +478,7 @@
         }
       }
 
-      out[[paste0("subgroup", attr(fit[[i]], "subgroup"))]] <- list(
+      out[[attr(fit[[i]], "subgroup")]] <- list(
         "influenceResultsDfbs" = influenceResultsDfbs,
         "influenceResultsInf"  = influenceResultsInf
       )
@@ -616,7 +619,7 @@
   }
 
   # skip on error
-  if ((length(fit) == 1 && jaspBase::isTryError(fit[[1]]))  || !is.null(.maCheckIsPossibleOptions(options)))
+  if (length(fit) == 0 || (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
   estimates <- list()
@@ -1393,14 +1396,32 @@
                                       "studyLabels"))
   jaspResults[["casewiseDiagnosticsTable"]] <- casewiseDiagnosticsTable
 
+  ### the computation needs to be done before the table to get all the necessary information on column names
+  # export diagnostics
+  diagnostics <- .maDiagnostics(jaspResults, options)
 
+  # always drop the full from subgroups
+  if (options[["subgroup"]] != "" && options[["includeFullDatasetInSubgroupAnalysis"]]) {
+    fit         <- fit[-1]
+    diagnostics <- diagnostics[-1]
+  }
+
+  diagnosticsTable <- .maSafeRbind(lapply(seq_along(fit), function(i) .maRowDiagnosticsTable(
+    fit         = fit[[i]],
+    diagnostics = diagnostics[[attr(fit[[i]], "subgroup")]],
+    options     = options
+  )))
+
+  # table information
+  coefDifferenceNames <- setdiff(colnames(diagnosticsTable), c("subgroup", "label", .maCasewiseDiagnosticsNames()))
+
+  # prepare table
   .maAddSubgroupColumn(casewiseDiagnosticsTable, options)
   if (options[["studyLabels"]] != "") {
     casewiseDiagnosticsTable$addColumnInfo(name = "label", type  = "string", title = gettext("Label"))
   }
   if (options[["diagnosticsCasewiseDiagnosticsIncludePredictors"]]) {
-    fitData <- fit[[1]][["data"]]
-    for (var in colnames(fitData)) {
+    for (var in options[["predictors"]]) {
       casewiseDiagnosticsTable$addColumnInfo(name = paste0("pred", var), type  = .maGetVariableColumnType(var, options), title = var, overtitle = gettext("Predictor"))
     }
   }
@@ -1418,7 +1439,7 @@
   if (!.maIsMultilevelMultivariate(options))
     casewiseDiagnosticsTable$addColumnInfo(name = "weight",  title = gettext("Weight"),                 type = "number")
   if (options[["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"]]) {
-    for (par in colnames(influenceResultsDfbs)) {
+    for (par in coefDifferenceNames) {
       casewiseDiagnosticsTable$addColumnInfo(name = par, title = .maVariableNames(par, options[["predictors"]]), type = "number", overtitle = gettext("Difference in coefficients"))
     }
   }
@@ -1426,22 +1447,6 @@
     casewiseDiagnosticsTable$addColumnInfo(name = "inf", title = gettext("Influential"), type = "string")
 
 
-  # export diagnostics
-  diagnostics <- .maDiagnostics(jaspResults, options)
-  saveRDS(diagnostics, file = "C:/JASP/diagnostics.RDS")
-
-
-  # always drop the full from subgroups
-  if (options[["subgroup"]] != "" && options[["includeFullDatasetInSubgroupAnalysis"]]) {
-    fit         <- fit[-1]
-    diagnostics <- diagnostics[-1]
-  }
-
-  diagnosticsTable <- .maSafeRbind(lapply(seq_along(fit), function(i) .maRowDiagnosticsTable(
-    fit         = fit[[i]],
-    diagnostics = diagnostics[[paste0("subgroup", attr(fit[[i]], "subgroup"))]],
-    options     = options
-  )))
 
   # keep influential only
   if (options[["diagnosticsCasewiseDiagnosticsShowInfluentialOnly"]]) {
@@ -1482,26 +1487,57 @@
   if (.maIsMetaregressionHeterogeneity(options))
     return()
 
-  # extract diagnostics already computed in '.maCasewiseDiagnosticsTable'
-  diagnosticsResults <- jaspResults[["diagnosticsResults"]]$object
+  # the fit diagnostics work only for the non-clustered fit
+  fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
 
-  influenceResultsDfbs <- diagnosticsResults[["influenceResultsDfbs"]]
-  influenceResultsInf  <- diagnosticsResults[["influenceResultsInf"]]
+  # stop on error
+  if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) || !is.null(.maCheckIsPossibleOptions(options)))
+    return()
+
+  # export diagnostics
+  diagnostics <- .maDiagnostics(jaspResults, options)
+
+  # always drop the full from subgroups
+  if (options[["subgroup"]] != "" && options[["includeFullDatasetInSubgroupAnalysis"]]) {
+    fit         <- fit[-1]
+    diagnostics <- diagnostics[-1]
+  }
+
+  # return the diagnostics with order variable indicating the order in the full data set
+  diagnosticsTable <- .maSafeRbind(lapply(seq_along(fit), function(i) .maRowDiagnosticsTable(
+    fit         = fit[[i]],
+    diagnostics = diagnostics[[attr(fit[[i]], "subgroup")]],
+    options     = options,
+    forExport   = TRUE
+  )))
+
+  # add empty rows for the missing observations
+  diagnosticsTable <- .maSafeRbind(list(
+    diagnosticsTable,
+    data.frame("datasetOrder" = setdiff(1:length(attr(dataset, "NasIds")), diagnosticsTable[["datasetOrder"]]))
+  ))
+
+  # order according to the dataset order
+  diagnosticsTable <- diagnosticsTable[order(diagnosticsTable[["datasetOrder"]]),, drop = FALSE]
 
   # export columns:
   if (options[["diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"]]) {
 
+    # export only the influential indicator
     columnName <- "Diagnostics: Influential"
     if (jaspBase:::columnExists(columnName) && !jaspBase:::columnIsMine(columnName))
       .quitAnalysis(gettextf("Column name %s already exists in the dataset.", columnName))
 
     jaspResults[[columnName]] <- createJaspColumn(columnName = columnName, dependencies = .maDependencies)
-    jaspResults[[columnName]]$setNominal(influenceResultsInf[["inf"]])
+    jaspResults[[columnName]]$setNominal(diagnosticsTable[["inf"]])
 
   } else {
 
-    # export diagnostics
-    for (diagnosticName in colnames(influenceResultsInf)) {
+    # export all diagnostics
+    diagnosticsNames <- .maCasewiseDiagnosticsNames()
+    diagnosticsNames <- intersect(diagnosticsNames, colnames(diagnosticsTable))
+
+    for (diagnosticName in diagnosticsNames) {
 
       columnName <- paste0("Diagnostics: ", .maCasewiseDiagnosticsExportColumnsNames(diagnosticName))
 
@@ -1510,16 +1546,18 @@
 
       jaspResults[[columnName]] <- createJaspColumn(columnName = columnName, dependencies = .maDependencies)
       if (diagnosticName == "inf") {
-        jaspResults[[columnName]]$setNominal(influenceResultsInf[[diagnosticName]])
+        jaspResults[[columnName]]$setNominal(diagnosticsTable[[diagnosticName]])
       } else {
-        jaspResults[[columnName]]$setScale(influenceResultsInf[[diagnosticName]])
+        jaspResults[[columnName]]$setScale(diagnosticsTable[[diagnosticName]])
       }
     }
 
     # export change in coefficients
     if (options[["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"]]) {
 
-      for (diagnosticName in colnames(influenceResultsDfbs)) {
+      coefDifferenceNames <- setdiff(colnames(diagnosticsTable), c("subgroup", "label", "datasetOrder", .maCasewiseDiagnosticsNames()))
+
+      for (diagnosticName in coefDifferenceNames) {
 
         columnName <- decodeColNames(paste0("Difference in coefficients: ", .maVariableNames(diagnosticName, options[["predictors"]])))
 
@@ -1527,7 +1565,7 @@
           .quitAnalysis(gettextf("Column name %s already exists in the dataset.", columnName))
 
         jaspResults[[columnName]] <- createJaspColumn(columnName = columnName, dependencies = .maDependencies)
-        jaspResults[[columnName]]$setScale(influenceResultsDfbs[[diagnosticName]])
+        jaspResults[[columnName]]$setScale(diagnosticsTable[[diagnosticName]])
       }
     }
 
@@ -3639,6 +3677,20 @@
     "benjaminiYekutieli" = gettext("Benjamini-Yekutieli")
   ))
 }
+.maCasewiseDiagnosticsNames               <- function() {
+  return(c(
+    "rstudent",
+    "dffits",
+    "cook.d",
+    "cov.r",
+    "tau.del",
+    "tau2.del",
+    "QE.del",
+    "hat",
+    "weight",
+    "inf"
+  ))
+}
 .maCasewiseDiagnosticsExportColumnsNames  <- function(columnName) {
 
   return(switch(
@@ -4049,13 +4101,22 @@
 
   return(estimates)
 }
-.maRowDiagnosticsTable                <- function(fit, diagnostics, options) {
+.maRowDiagnosticsTable                <- function(fit, diagnostics, options, forExport = FALSE) {
 
   # first create the data part of the output
   # (in case the fit failed there are no diagnostics)
 
   fitData <- attr(fit, "data")
   rows    <- list()
+
+  # add export specific settings (for adding to the dataset)
+  if (forExport) {
+    rows[["datasetOrder"]] <- as.numeric(names(attr(fitData, "NasIds"))[!attr(fitData, "NasIds")])
+
+    # no variable information necessary
+    options[["studyLabels"]] <- ""
+    options[["diagnosticsCasewiseDiagnosticsIncludePredictors"]] <- FALSE
+  }
 
   # include study labels
   if (options[["studyLabels"]] != "") {
@@ -4092,7 +4153,9 @@
   # importantly, the order of the output data.frame
   # does not matter as order is determined by the table itself
 
-  dfs <- dfs[!sapply(dfs, is.null)]
+  if (length(dfs) == 0)
+    return(NULL)
+  dfs <- dfs[!(sapply(dfs, is.null) | sapply(dfs, nrow) == 0)]
   if (length(dfs) == 0)
     return(NULL)
 
@@ -4482,7 +4545,7 @@
 
   if (options[["clustering"]] == "") {
     fit <- fit[[1]]
-    if (!jaspBase::isTryError(fit)){
+    if (!jaspBase::isTryError(fit) && !is.null(fit)){
       if (all(fit[["tcl"]][1] == fit[["tcl"]]))
         messages <- c(messages, gettextf("%1$i clusters with %2$i estimates each.", fit[["n"]],  fit[["tcl"]][1]))
       else
@@ -4491,7 +4554,7 @@
   } else {
     for (i in seq_along(fit)) {
       tempFit <- fit[[i]]
-      if (!jaspBase::isTryError(tempFit)){
+      if (!jaspBase::isTryError(tempFit) && !is.null(tempFit)) {
         if (options[["clustering"]] != "") {
           if (all(tempFit[["tcl"]][1] == tempFit[["tcl"]]))
             messages <- c(messages, gettextf("%1$s: %2$i clusters with %3$i estimates each.", gettextf("Subgroup %1$s", attr(tempFit, "subgroup")), tempFit[["n"]],  tempFit[["tcl"]][1]))
