@@ -159,7 +159,7 @@
       attr(subgroupData, "NasIds") <- tempNasIds[subgroupIndx]
 
       # fit the model
-      fitOutput[[paste0("subgroup", subgroupLevel)]] <- .maFitModelFun(subgroupData, options, subgroupName = paste0("subgroup", subgroupLevel))
+      fitOutput[[paste0("subgroup", subgroupLevel)]] <- .maFitModelFun(subgroupData, options, subgroupName = as.character(subgroupLevel))
       progressbarTick()
     }
   }
@@ -487,6 +487,71 @@
     # store the results
     jaspResults[["diagnosticsResults"]]$object <- out
   }
+
+  return(out)
+}
+.maProfile                       <- function(jaspResults, options) {
+
+  # extract precomputed profile likelihood if done before:
+  if (!is.null(jaspResults[["profileLikelihoodResults"]])) {
+
+    out <- jaspResults[["profileLikelihoodResults"]]$object
+
+  } else {
+
+    # create the output container
+    profileLikelihoodResults <- createJaspState()
+    profileLikelihoodResults$dependOn(.maDependencies)
+    jaspResults[["profileLikelihoodResults"]] <- profileLikelihoodResults
+
+
+    fit <- .maExtractFit(jaspResults, options)
+    out <- list()
+
+    for (i in seq_along(fit)) {
+
+      if (jaspBase::isTryError(fit[[i]])) {
+
+        dfProfile <- list()
+
+      } else if (.maIsMultilevelMultivariate(options)) {
+
+        # use the defaults (too many possible parameter combinations to control)
+        dfProfile <- try(metafor::profile.rma.mv(
+          fit[[i]],
+          plot    = FALSE,
+          progbar = FALSE,
+          code1   = "jaspBase::startProgressbar(length(vcs), label = 'Profile likelihood')",
+          code2   = "jaspBase::progressbarTick()"
+        ))
+
+        # deal with a single component (not a list)
+        if (dfProfile[["comps"]] == 1) {
+          dfProfile <- list(dfProfile)
+          dfProfile[["comps"]] <- 1
+        }
+
+      } else {
+
+        # proceed with some nice formatting for rma.uni (too difficult to implement for rma.mv)
+        xTicks    <- jaspGraphs::getPrettyAxisBreaks(c(0, max(0.1, 2*fit[[i]][["tau2"]])))
+        dfProfile <- try(profile(
+          fit[[i]],
+          xlim    = range(xTicks),
+          plot    = FALSE,
+          progbar = FALSE,
+          code1   = "jaspBase::startProgressbar(length(vcs), label = 'Profile likelihood')",
+          code2   = "jaspBase::progressbarTick()"
+        ))
+        attr(dfProfile, "xTicks")   <- xTicks
+      }
+
+      out[[attr(fit[[i]], "subgroup")]] <- dfProfile
+    }
+
+    jaspResults[["profileLikelihoodResults"]]$object <- out
+  }
+
 
   return(out)
 }
@@ -1581,88 +1646,69 @@
   fit <- .maExtractFit(jaspResults, options)
 
   # stop on error
-  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+  if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
   # extract precomputed profile likelihoods if done before:
-  if (!is.null(jaspResults[["profileLikelihoodResults"]])) {
+  dfProfile <- .maProfile(jaspResults, options)
 
-    dfProfile <- jaspResults[["profileLikelihoodResults"]]$object
+  # create individual plots for each subgroup
+  if (options[["subgroup"]] == "") {
+
+    profileLikelihoodPlot       <- .maProfileLikelihoodPlotFun(fit[[i]], dfProfile[[i]], options)
+    profileLikelihoodPlot$title <- gettext("Profile Likelihood Plot")
+    profileLikelihoodPlot$dependOn(c(.maDependencies, "diagnosticsPlotsProfileLikelihood"))
+    profileLikelihoodPlot$position <- 8
+    jaspResults[["profileLikelihoodPlot"]] <- profileLikelihoodPlot
+    return()
 
   } else {
 
     # create the output container
-    profileLikelihoodResults <- createJaspState()
-    profileLikelihoodResults$dependOn(.maDependencies)
-    jaspResults[["profileLikelihoodResults"]] <- profileLikelihoodResults
+    profileLikelihoodPlot <- createJaspContainer()
+    profileLikelihoodPlot$title <- gettext("Profile Likelihood Plot")
+    profileLikelihoodPlot$dependOn(c(.maDependencies, "diagnosticsPlotsProfileLikelihood"))
+    profileLikelihoodPlot$position <- 8
+    jaspResults[["profileLikelihoodPlot"]] <- profileLikelihoodPlot
 
-    if (.maIsMultilevelMultivariate(options)) {
-      # use the defaults (too many possible parameter combinations to control)
-      dfProfile <- try(metafor::profile.rma.mv(
-        fit,
-        plot    = FALSE,
-        progbar = FALSE,
-        code1   = "jaspBase::startProgressbar(length(vcs), label = 'Profile likelihood')",
-        code2   = "jaspBase::progressbarTick()"
-      ))
-
-      # deal with a single component (not a list)
-      if (dfProfile[["comps"]] == 1) {
-        dfProfile <- list(dfProfile)
-        dfProfile[["comps"]] <- 1
-      }
-
-      jaspResults[["diagnosticsResults"]]$object <- dfProfile
-    } else {
-      # proceed with some nice formatting for rma.uni (too difficult to implement for rma.mv)
-      xTicks    <- jaspGraphs::getPrettyAxisBreaks(c(0, max(0.1, 2*fit[["tau2"]])))
-      dfProfile <- try(profile(
-        fit,
-        xlim    = range(xTicks),
-        plot    = FALSE,
-        progbar = FALSE,
-        code1   = "jaspBase::startProgressbar(length(vcs), label = 'Profile likelihood')",
-        code2   = "jaspBase::progressbarTick()"
-      ))
-      attr(dfProfile, "xTicks")   <- xTicks
-
-      jaspResults[["diagnosticsResults"]]$object <- dfProfile
+    for (i in seq_along(fit)) {
+      profileLikelihoodPlot[[names(fit)[i]]]          <- .maProfileLikelihoodPlotFun(fit[[i]], dfProfile[[i]], options)
+      profileLikelihoodPlot[[names(fit)[i]]]$title    <- gettextf("Subgroup: %1$s", attr(fit[[i]], "subgroup"))
+      profileLikelihoodPlot[[names(fit)[i]]]$position <- i
     }
+
   }
+
+  return()
+}
+.maProfileLikelihoodPlotFun              <- function(fit, dfProfile, options) {
 
   # create profile likelihood plot / container
   if (.maIsMultilevelMultivariate(options)) {
+
     # container for multivariate
-    profileLikelihoodPlot <- createJaspContainer(title = gettext("Profile Likelihood Plots"))
-    profileLikelihoodPlot$dependOn(c(.maDependencies, "diagnosticsPlotsProfileLikelihood"))
-    profileLikelihoodPlot$position <- 8
+    profileLikelihoodPlot <- createJaspContainer()
 
-    jaspResults[["profileLikelihoodPlot"]] <- profileLikelihoodPlot
-
+    # error plot
     if (jaspBase::isTryError(dfProfile)) {
       errorPlot <- createJaspPlot(title = gettext("Profile Likelihood Plot"))
       errorPlot$setError(dfProfile)
-
       profileLikelihoodPlot[["errorPlot"]] <- errorPlot
       return()
     }
 
+    # component specific plots
     for (i in 1:dfProfile[["comps"]]) {
       tempProfilePlot <- createJaspPlot(title = paste0(dfProfile[[i]][["title"]][-1], collapse = " "), width = 400, height = 320)
       tempProfilePlot$position <- i
-
       profileLikelihoodPlot[[paste0("plot", i)]] <- tempProfilePlot
-
       tempProfilePlot$plotObject <- .maMakeProfileLikelihoodPlot(dfProfile[[i]])
     }
 
   } else {
-    # plot for univariate
-    profileLikelihoodPlot <- createJaspPlot(title = gettext("Profile Likelihood Plot"), width = 400, height = 320)
-    profileLikelihoodPlot$dependOn(c(.maDependencies, "diagnosticsPlotsProfileLikelihood"))
-    profileLikelihoodPlot$position <- 8
 
-    jaspResults[["profileLikelihoodPlot"]] <- profileLikelihoodPlot
+    # plot for univariate
+    profileLikelihoodPlot <- createJaspPlot(, width = 400, height = 320)
 
     if (.maIsMetaregressionHeterogeneity(options)) {
       profileLikelihoodPlot$setError(gettext("Profile likelihood is not available for models that contain meta-regression on heterogeneity."))
@@ -1677,7 +1723,7 @@
     profileLikelihoodPlot$plotObject <- .maMakeProfileLikelihoodPlot(dfProfile)
   }
 
-  return()
+  return(profileLikelihoodPlot)
 }
 .maBaujatPlot                            <- function(jaspResults, dataset, options) {
 
