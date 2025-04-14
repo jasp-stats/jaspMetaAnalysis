@@ -445,8 +445,7 @@
   modelSummaryContainer[["testsTable"]] <- testsTable
 
   testsTable$addColumnInfo(name = "test",  type = "string",  title = "")
-  if (options[["subgroup"]] != "")
-    testsTable$addColumnInfo(name = "subgroup",  type = "string",  title = gettext("Subgroup"))
+  .maAddSubgroupColumn(testsTable, options)
   testsTable$addColumnInfo(name = "stat",  type = "string",  title = gettext("Test"))
   testsTable$addColumnInfo(name = "pval",  type = "pvalue",  title = gettext("p"))
 
@@ -523,7 +522,7 @@
 
   # bind and clean rows
   tests <- do.call(rbind, tests)
-  tests <- .maSafeOrderAndSimplify(tests, "test")
+  tests <- .maSafeOrderAndSimplify(tests, "test", options)
 
   # add the rows to the table
   testsTable$setData(tests)
@@ -548,23 +547,13 @@
   modelSummaryContainer[["pooledEstimatesTable"]] <- pooledEstimatesTable
 
   pooledEstimatesTable$addColumnInfo(name = "par",  type = "string", title = "")
-  if (options[["subgroup"]] != "")
-    pooledEstimatesTable$addColumnInfo(name = "subgroup",  type = "string",  title = gettext("Subgroup"))
+  .maAddSubgroupColumn(pooledEstimatesTable, options)
   pooledEstimatesTable$addColumnInfo(name = "est",  type = "number", title = gettext("Estimate"))
-  if (options[["confidenceIntervals"]]) {
-    overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
-    pooledEstimatesTable$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
-    pooledEstimatesTable$addColumnInfo(name = "uCi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
-  }
-  if (options[["predictionIntervals"]]) {
-    overtitleCi <- gettextf("%s%% PI", 100 * options[["confidenceIntervalsLevel"]])
-    pooledEstimatesTable$addColumnInfo(name = "lPi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
-    pooledEstimatesTable$addColumnInfo(name = "uPi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
-
-    if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
-      for (colName in .mammExtractTauLevelNames(fit)) {
-        pooledEstimatesTable$addColumnInfo(name = colName, title = colName, type = .maGetVariableColumnType(colName, options), overtitle = gettext("Heterogeneity Level"))
-      }
+  .maAddCiColumn(pooledEstimatesTable, options)
+  .maAddPiColumn(pooledEstimatesTable, options)
+  if (options[["predictionIntervals"]] && .mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
+    for (colName in .mammExtractTauLevelNames(fit)) {
+      pooledEstimatesTable$addColumnInfo(name = colName, title = colName, type = .maGetVariableColumnType(colName, options), overtitle = gettext("Heterogeneity Level"))
     }
   }
 
@@ -593,7 +582,7 @@
 
   # merge and clean estimates
   estimates <- do.call(rbind, estimates)
-  estimates <- .maSafeOrderAndSimplify(estimates, "par")
+  estimates <- .maSafeOrderAndSimplify(estimates, "par", options)
 
   pooledEstimatesTable$setData(estimates)
 
@@ -616,8 +605,7 @@
 
 
   fitMeasuresTable$addColumnInfo(name = "model",         title = "",                      type = "string")
-  if (options[["subgroup"]] != "")
-    fitMeasuresTable$addColumnInfo(name = "subgroup",  type = "string",  title = gettext("Subgroup"))
+  .maAddSubgroupColumn(fitMeasuresTable, options)
   fitMeasuresTable$addColumnInfo(name = "observations",  title = gettext("Observations"), type = "integer")
   fitMeasuresTable$addColumnInfo(name = "ll",            title = gettext("Log Lik."),     type = "number")
   fitMeasuresTable$addColumnInfo(name = "dev",           title = gettext("Deviance"),     type = "number")
@@ -634,7 +622,7 @@
 
   # fit measures rows
   fitMeasures <- do.call(rbind, lapply(fit, .maRowFitMeasures, options = options))
-  fitMeasures <- .maSafeOrderAndSimplify(fitMeasures, "model")
+  fitMeasures <- .maSafeOrderAndSimplify(fitMeasures, "model", options)
 
   fitMeasuresTable$setData(fitMeasures)
 
@@ -666,8 +654,7 @@
   metaregressionContainer[[paste0(parameter, "TermsTable")]] <- termsTable
 
   termsTable$addColumnInfo(name = "term",  type = "string",  title = "")
-  if (options[["subgroup"]] != "")
-    termsTable$addColumnInfo(name = "subgroup",  type = "string",  title = gettext("Subgroup"))
+  .maAddSubgroupColumn(termsTable, options)
   termsTable$addColumnInfo(name = "stat",  type = "number",  title = if(.maIsMetaregressionFtest(options)) gettext("F")   else gettext("Q\U2098"))
   termsTable$addColumnInfo(name = "df1",   type = "integer", title = if(.maIsMetaregressionFtest(options)) gettext("df\U2081") else gettext("df"))
   if (.maIsMetaregressionFtest(options)) {
@@ -692,7 +679,7 @@
 
   # term tests rows
   termTests <- do.call(rbind, lapply(fit, .maRowTermTestTable, options = options, parameter = parameter))
-  termTests <- .maSafeOrderAndSimplify(termTests, "term")
+  termTests <- .maSafeOrderAndSimplify(termTests, "term", options)
 
   # add messages
   termTestWarnings <- .maTermsTableWarnings(fit, options, terms, parameter)
@@ -729,15 +716,10 @@
   metaregressionContainer[[paste0(parameter, "CoefficientTable")]] <- coefficientsTable
 
   coefficientsTable$addColumnInfo(name = "name",  type = "string", title = "")
-  if (options[["subgroup"]] != "")
-    coefficientsTable$addColumnInfo(name = "subgroup",  type = "string",  title = gettext("Subgroup"))
+  .maAddSubgroupColumn(coefficientsTable, options)
   coefficientsTable$addColumnInfo(name = "est",   type = "number", title = gettext("Estimate"))
   coefficientsTable$addColumnInfo(name = "se",    type = "number", title = gettext("Standard Error"))
-  if (options[["confidenceIntervals"]]) {
-    overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
-    coefficientsTable$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
-    coefficientsTable$addColumnInfo(name = "uCi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
-  }
+  .maAddCiColumn(coefficientsTable, options)
   coefficientsTable$addColumnInfo(name = "stat",  type = "number", title = if(.maIsMetaregressionFtest(options)) gettext("t") else gettext("z"))
   if (.maIsMetaregressionFtest(options))
     coefficientsTable$addColumnInfo(name = "df",  type = "number", title = gettext("df"))
@@ -754,7 +736,7 @@
     return()
 
   estimates <- do.call(rbind, lapply(fit, .maRowCoefficientsEstimatesTable, options = options, parameter = parameter))
-  estimates <- .maSafeOrderAndSimplify(estimates, "name")
+  estimates <- .maSafeOrderAndSimplify(estimates, "name", options)
 
   # add messages
   coefficientsTableWarnings <- .maCoefficientsTableWarnings(fit, options, parameter)
@@ -1029,23 +1011,14 @@
   # prepare table
   if (selectedVariable != "")
     estimatedMarginalMeansTable$addColumnInfo(name = "value",     type = "string", title = gettext("Level"))
-  if (options[["subgroup"]] != "")
-    estimatedMarginalMeansTable$addColumnInfo(name = "subgroup",  type = "string",  title = gettext("Subgroup"))
+  .maAddSubgroupColumn(estimatedMarginalMeansTable, options)
   estimatedMarginalMeansTable$addColumnInfo(name = "est",       type = "number", title = gettext("Estimate"))
-  if (options[["confidenceIntervals"]]) {
-    overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
-    estimatedMarginalMeansTable$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
-    estimatedMarginalMeansTable$addColumnInfo(name = "uCi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
-  }
+  .maAddCiColumn(estimatedMarginalMeansTable, options)
   if (parameter == "effectSize") {
-    if (options[["predictionIntervals"]]) {
-      overtitleCi <- gettextf("%s%% PI", 100 * options[["confidenceIntervalsLevel"]])
-      estimatedMarginalMeansTable$addColumnInfo(name = "lPi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
-      estimatedMarginalMeansTable$addColumnInfo(name = "uPi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
-      if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
-        for (colName in .mammExtractTauLevelNames(fit)) {
-          estimatedMarginalMeansTable$addColumnInfo(name = colName, title = colName, type = .maGetVariableColumnType(colName, options), overtitle = gettext("Heterogeneity Level"))
-        }
+    .maAddPiColumn(estimatedMarginalMeansTable, options)
+    if (options[["predictionIntervals"]] && .mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
+      for (colName in .mammExtractTauLevelNames(fit)) {
+        estimatedMarginalMeansTable$addColumnInfo(name = colName, title = colName, type = .maGetVariableColumnType(colName, options), overtitle = gettext("Heterogeneity Level"))
       }
     }
     if (options[["estimatedMarginalMeansEffectSizeTestAgainst"]]) {
@@ -1066,7 +1039,7 @@
   ))
 
   # reorder by estimated marginal means estimate
-  estimatedMarginalMeans <- .maSafeOrderAndSimplify(estimatedMarginalMeans, "value")
+  estimatedMarginalMeans <- .maSafeOrderAndSimplify(estimatedMarginalMeans, "value", options)
 
   # drop non-required columns
   estimatedMarginalMeans <- estimatedMarginalMeans[,!colnames(estimatedMarginalMeans) %in% "variable", drop = FALSE]
@@ -1076,8 +1049,6 @@
     estimatedMarginalMeans <- estimatedMarginalMeans[,!colnames(estimatedMarginalMeans) %in% c("lPi", "uPi"), drop = FALSE]
   if (selectedVariable == "")
     estimatedMarginalMeans <- estimatedMarginalMeans[,!colnames(estimatedMarginalMeans) %in% c("value"), drop = FALSE]
-  if (options[["subgroup"]] == "")
-    estimatedMarginalMeans <- estimatedMarginalMeans[,colnames(estimatedMarginalMeans) != "subgroup", drop = FALSE]
 
   # set data
   estimatedMarginalMeansTable$setData(estimatedMarginalMeans)
@@ -1102,26 +1073,17 @@
 
   # prepare table
   contrastsTable$addColumnInfo(name = "comparison", type = "string", title = gettext("Comparison"))
-  if (options[["subgroup"]] != "")
-    contrastsTable$addColumnInfo(name = "subgroup",  type = "string",  title = gettext("Subgroup"))
+  .maAddSubgroupColumn(contrastsTable, options)
   contrastsTable$addColumnInfo(name = "est",        type = "number", title = gettext("Estimate"))
-  if (options[["confidenceIntervals"]]) {
-    overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
-    contrastsTable$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
-    contrastsTable$addColumnInfo(name = "uCi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
-  }
+  .maAddCiColumn(contrastsTable, options)
   if (parameter == "effectSize") {
-    if (options[["predictionIntervals"]]) {
-      overtitleCi <- gettextf("%s%% PI", 100 * options[["confidenceIntervalsLevel"]])
-      contrastsTable$addColumnInfo(name = "lPi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
-      contrastsTable$addColumnInfo(name = "uPi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
-      # TODO?
-      # if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
-      #   for (colName in .mammExtractTauLevelNames(fit)) {
-      #     contrastsTable$addColumnInfo(name = colName, title = colName, type = .maGetVariableColumnType(colName, options), overtitle = gettext("Heterogeneity Level"))
-      #   }
-      # }
-    }
+    .maAddPiColumn(contrastsTable, options)
+    # if (options[["predictionIntervals"]] && .mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
+    #   TODO?
+    #   for (colName in .mammExtractTauLevelNames(fit)) {
+    #   contrastsTable$addColumnInfo(name = colName, title = colName, type = .maGetVariableColumnType(colName, options), overtitle = gettext("Heterogeneity Level"))
+    #   }
+    # }
   }
   contrastsTable$addColumnInfo(name = "stat",  type = "number", title = if(.maIsMetaregressionFtest(options)) gettext("t") else gettext("z"))
   if (.maIsMetaregressionFtest(options))
@@ -1138,13 +1100,11 @@
   ))
 
   # reorder by estimated marginal means estimate
-  contrasts <- .maSafeOrderAndSimplify(contrasts, "comparison")
+  contrasts <- .maSafeOrderAndSimplify(contrasts, "comparison", options)
 
   # drop non-required columns
   if (parameter == "heterogeneity")
     contrasts <- contrasts[,!colnames(contrasts) %in% c("lPi", "uPi"), drop = FALSE]
-  if (options[["subgroup"]] == "")
-    contrasts <- contrasts[,colnames(contrasts) != "subgroup", drop = FALSE]
 
   # set data
   contrastsTable$setData(contrasts)
@@ -2561,7 +2521,6 @@
     computedMarginalMeans <- cbind(computedMarginalMeans, tauLevels)
 
   computedMarginalMeans$subgroup <- attr(fit, "subgroup")
-  computedMarginalMeans$order    <- 1:nrow(computedMarginalMeans)
 
   return(computedMarginalMeans)
 }
@@ -2738,7 +2697,6 @@
   computedContrasts$pval <- computedContrastsTests$pval
 
   computedContrasts$subgroup <- attr(fit, "subgroup")
-  computedContrasts$order    <- 1:nrow(computedContrasts)
 
   return(computedContrasts)
 }
@@ -4103,11 +4061,17 @@
 
   return(estimates)
 }
-.maSafeOrderAndSimplify               <- function(df, columnName) {
+.maSafeOrderAndSimplify               <- function(df, columnName, options) {
 
   # this function allows ordering and simplifying subgroup output tables
   # the main issue is that some models might be missing coefficients/terms etc
   # as such, simple ordering of the output might misaligned the grouped output
+
+  # drop the grouping column if no subgroups requested
+  if (options[["subgroup"]] == "") {
+    df <- df[,colnames(df) != "subgroup", drop = FALSE]
+    return(df)
+  }
 
   # get the grouping order
   groupingOrder <- unique(df[[columnName]])
@@ -4123,6 +4087,35 @@
   newDf[[columnName]][duplicated(newDf[[columnName]])] <- NA
 
   return(newDf)
+}
+
+# table functions
+.maAddCiColumn                  <- function(tempTable, options) {
+
+  if (options[["confidenceIntervals"]]) {
+    overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
+    tempTable$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
+    tempTable$addColumnInfo(name = "uCi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
+  }
+
+  return(tempTable)
+}
+.maAddPiColumn                  <- function(tempTable, options) {
+
+  if (options[["predictionIntervals"]]) {
+    overtitleCi <- gettextf("%s%% PI", 100 * options[["confidenceIntervalsLevel"]])
+    tempTable$addColumnInfo(name = "lPi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
+    tempTable$addColumnInfo(name = "uPi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
+  }
+
+  return(tempTable)
+}
+.maAddSubgroupColumn            <- function(tempTable, options) {
+
+  if (options[["subgroup"]] != "")
+    tempTable$addColumnInfo(name = "subgroup", type = "string", title = gettext("Subgroup"))
+
+  return(tempTable)
 }
 
 # misc
