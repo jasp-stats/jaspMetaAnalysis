@@ -1354,8 +1354,43 @@
   fit <- .maExtractFit(jaspResults, options)
 
   # stop on error
-  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+  if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) || !is.null(.maCheckIsPossibleOptions(options)))
     return()
+
+  # create individual plots for each subgroup
+  if (options[["subgroup"]] == "") {
+
+    bubblePlot       <- .maBubblePlotFun(fit[[1]], dataset, options)
+    bubblePlot$title <- gettext("Bubble Plots")
+    bubblePlot$dependOn(c(.maBubblePlotDependencies, "includeFullDatasetInSubgroupAnalysis"))
+    bubblePlot$position <- 5
+    jaspResults[["bubblePlot"]] <- bubblePlot
+    return()
+
+  } else {
+
+    # create the output container
+    bubblePlot       <- createJaspContainer()
+    bubblePlot$title <- gettext("Bubble Plots")
+    bubblePlot$dependOn(c(.maBubblePlotDependencies, "includeFullDatasetInSubgroupAnalysis"))
+    bubblePlot$position <- 5
+    jaspResults[["bubblePlot"]] <- bubblePlot
+
+    for (i in seq_along(fit)) {
+      bubblePlot[[names(fit)[i]]]          <- .maBubblePlotFun(fit[[i]], dataset, options)
+      bubblePlot[[names(fit)[i]]]$title    <- gettextf("Subgroup: %1$s", attr(fit[[i]], "subgroup"))
+      bubblePlot[[names(fit)[i]]]$position <- i
+    }
+
+  }
+
+  return()
+}
+.maBubblePlotFun                         <- function(fit, dataset, options) {
+
+  if (jaspBase::isTryError(fit)) {
+    return()
+  }
 
   # set dimensions
   width  <- if (length(options[["bubblePlotSeparateLines"]]) == 0 || options[["bubblePlotLegendPosition"]] == "none") 450 else 550
@@ -1363,15 +1398,9 @@
 
   # create containers / figure
   if (length(options[["bubblePlotSeparatePlots"]]) > 0) {
-    bubblePlotContainer <- createJaspContainer(title = gettext("Bubble Plots"))
-    bubblePlotContainer$dependOn(.maBubblePlotDependencies)
-    bubblePlotContainer$position <- 5
-    jaspResults[["bubblePlot"]] <- bubblePlotContainer
+    bubblePlot <- createJaspContainer()
   } else {
-    bubblePlot <- createJaspPlot(title = gettext("Bubble Plot"), width = width, height = height)
-    bubblePlot$dependOn(.maBubblePlotDependencies)
-    bubblePlot$position <- 6
-    jaspResults[["bubblePlot"]] <- bubblePlot
+    bubblePlot <- createJaspPlot(width = width, height = height)
   }
 
   # make bubble plots
@@ -1396,16 +1425,17 @@
 
   if (length(options[["bubblePlotSeparatePlots"]]) > 0) {
     for (i in seq_along(tempPlots)) {
-      bubblePlot <- createJaspPlot(title = gettextf("%1$s (%2$s)", attr(dfPlot, "separatePlots"), unique(dfPlot[["separatePlots"]])[i]), width = width, height = height)
-      bubblePlot$position      <- i
-      bubblePlot$plotObject    <- tempPlots[[i]]
-      bubblePlotContainer[[paste0("plot", i)]] <- bubblePlot
+      tempBubblePlot <- createJaspPlot(title = gettextf("%1$s (%2$s)", attr(dfPlot, "separatePlots"), unique(dfPlot[["separatePlots"]])[i]), width = width, height = height)
+      tempBubblePlot$position      <- i
+      tempBubblePlot$plotObject    <- tempPlots[[i]]
+      bubblePlot[[paste0("plot", i)]] <- tempBubblePlot
     }
   } else {
     bubblePlot$plotObject <- tempPlots[[1]]
   }
 
-  return()
+
+  return(bubblePlot)
 }
 .maShowMetaforRCode                      <- function(jaspResults, options) {
 
