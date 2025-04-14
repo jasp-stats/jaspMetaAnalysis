@@ -471,17 +471,17 @@
 
   # add all the overall model test
   tests <- list()
-  tests[["heterogeneity"]] <- do.call(rbind, lapply(fit, .maRowHeterogeneityTest, options = options))
-  tests[["effect"]]        <- do.call(rbind, lapply(fit, .maRowEffectSizeTest,    options = options))
+  tests[["heterogeneity"]] <- .maSafeRbind(lapply(fit, .maRowHeterogeneityTest, options = options))
+  tests[["effect"]]        <- .maSafeRbind(lapply(fit, .maRowEffectSizeTest,    options = options))
 
   # effect size moderation
   if (.maIsMetaregressionEffectSize(options)) {
     # omnibus test
-    tests[["moderationEffect"]] <- do.call(rbind, lapply(fit, .maRowModerationTest, options = options, parameter = "effectSize"))
+    tests[["moderationEffect"]] <- .maSafeRbind(lapply(fit, .maRowModerationTest, options = options, parameter = "effectSize"))
 
     # additional custom test
     if (options[["addOmnibusModeratorTestEffectSizeCoefficients"]]) {
-      tests[["moderationEffect2"]] <- do.call(rbind, lapply(fit, .maRowModerationTest, options = options, parameter = "effectSize", coefficientsTest = TRUE))
+      tests[["moderationEffect2"]] <- .maSafeRbind(lapply(fit, .maRowModerationTest, options = options, parameter = "effectSize", coefficientsTest = TRUE))
       if (jaspBase::isTryError(tests[["moderationEffect2"]])) {
         testsTable$setError(tests[["moderationEffect2"]])
         return()
@@ -493,11 +493,11 @@
   # heterogeneity moderation
   if (.maIsMetaregressionHeterogeneity(options)) {
     # omnibus test
-    tests[["moderationHeterogeneity"]] <- do.call(rbind, lapply(fit, .maRowModerationTest, options = options, parameter = "heterogeneity"))
+    tests[["moderationHeterogeneity"]] <- .maSafeRbind(lapply(fit, .maRowModerationTest, options = options, parameter = "heterogeneity"))
 
     # additional custom test
     if (options[["addOmnibusModeratorTestHeterogeneityCoefficients"]]) {
-      tests[["moderationHeterogeneity2"]] <- do.call(rbind, lapply(fit, .maRowModerationTest, options = options, parameter = "heterogeneity", coefficientsTest = TRUE))
+      tests[["moderationHeterogeneity2"]] <- .maSafeRbind(lapply(fit, .maRowModerationTest, options = options, parameter = "heterogeneity", coefficientsTest = TRUE))
       if (jaspBase::isTryError(tests[["moderationHeterogeneity2"]])) {
         testsTable$setError(tests[["moderationHeterogeneity2"]])
         return()
@@ -507,21 +507,17 @@
   }
 
   # add errors messages for failed fits
-  if (any(sapply(fit, jaspBase::isTryError))) {
-    for (i in seq_along(fit)) {
-      if (jaspBase::isTryError(fit[[i]])) {
-        testsTable$addFootnote(
-          gettextf("The model for the subgroup '%1$s' failed with the following error: %2$s",
-                   attr(fit[[i]], "subgroup"),
-                   .maTryCleanErrorMessages(fit[[i]])),
-          symbol = gettext("Error:")
-        )
-      }
-    }
+  for (i in seq_along(fit)[sapply(fit, jaspBase::isTryError)]) {
+    testsTable$addFootnote(
+      gettextf("The model for the subgroup '%1$s' failed with the following error: %2$s",
+               attr(fit[[i]], "subgroup"),
+               .maTryCleanErrorMessages(fit[[i]])),
+      symbol = gettext("Error:")
+    )
   }
 
   # bind and clean rows
-  tests <- do.call(rbind, tests)
+  tests <- .maSafeRbind(tests)
   tests <- .maSafeOrderAndSimplify(tests, "test", options)
 
   # add the rows to the table
@@ -564,7 +560,7 @@
   estimates <- list()
 
   # pooled effect size
-  estimates[["effect"]] <- do.call(rbind, lapply(fit, .maRowPooledEffectEstimate, options = options))
+  estimates[["effect"]] <- .maSafeRbind(lapply(fit, .maRowPooledEffectEstimate, options = options))
 
   # pooled heterogeneity
   if (!.maGetMethodOptions(options) %in% c("EE", "FE") && !.maIsMultilevelMultivariate(options) &&
@@ -572,7 +568,7 @@
 
     # requires non-clustered fit
     fitNonClustered <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
-    estimates[["heterogeneity"]] <- do.call(rbind, lapply(fitNonClustered, .maRowPooledHeterogeneity, options = options))
+    estimates[["heterogeneity"]] <- .maSafeRbind(lapply(fitNonClustered, .maRowPooledHeterogeneity, options = options))
   }
 
   # add messages
@@ -581,7 +577,7 @@
     pooledEstimatesTable$addFootnote(pooledEstimatesMessages[i])
 
   # merge and clean estimates
-  estimates <- do.call(rbind, estimates)
+  estimates <- .maSafeRbind(estimates)
   estimates <- .maSafeOrderAndSimplify(estimates, "par", options)
 
   pooledEstimatesTable$setData(estimates)
@@ -621,7 +617,7 @@
     return()
 
   # fit measures rows
-  fitMeasures <- do.call(rbind, lapply(fit, .maRowFitMeasures, options = options))
+  fitMeasures <- .maSafeRbind(lapply(fit, .maRowFitMeasures, options = options))
   fitMeasures <- .maSafeOrderAndSimplify(fitMeasures, "model", options)
 
   fitMeasuresTable$setData(fitMeasures)
@@ -678,7 +674,7 @@
     return()
 
   # term tests rows
-  termTests <- do.call(rbind, lapply(fit, .maRowTermTestTable, options = options, parameter = parameter))
+  termTests <- .maSafeRbind(lapply(fit, .maRowTermTestTable, options = options, parameter = parameter))
   termTests <- .maSafeOrderAndSimplify(termTests, "term", options)
 
   # add messages
@@ -735,7 +731,7 @@
   if ((length(fit) == 1 && jaspBase::isTryError(fit[[1]]))  || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
-  estimates <- do.call(rbind, lapply(fit, .maRowCoefficientsEstimatesTable, options = options, parameter = parameter))
+  estimates <- .maSafeRbind(lapply(fit, .maRowCoefficientsEstimatesTable, options = options, parameter = parameter))
   estimates <- .maSafeOrderAndSimplify(estimates, "name", options)
 
   # add messages
@@ -1030,7 +1026,7 @@
   }
 
   # get the estimate
-  estimatedMarginalMeans <- do.call(rbind, lapply(fit, .maComputeMarginalMeansVariable,
+  estimatedMarginalMeans <- .maSafeRbind(lapply(fit, .maComputeMarginalMeansVariable,
     options          = options,
     dataset          = dataset,
     selectedVariable = if (selectedVariable == "") "" else strsplit(selectedVariable, ":")[[1]],
@@ -1091,7 +1087,7 @@
   contrastsTable$addColumnInfo(name = "pval",  type = "pvalue", title = gettext("p"))
 
   # get the estimate
-  contrasts <- do.call(rbind, lapply(fit, .maComputeContrastVariable,
+  contrasts <- .maSafeRbind(lapply(fit, .maComputeContrastVariable,
     options          = options,
     dataset          = dataset,
     selectedVariable = if (selectedVariable == "") "" else strsplit(selectedVariable, ":")[[1]],
@@ -3738,57 +3734,40 @@
     "]"), est, lCi, uCi))
 }
 
-# table row adding functions
+# table row functions
 .maRowHeterogeneityTest               <- function(fit, options) {
 
   # handle missing subfits
   if (jaspBase::isTryError(fit)) {
-    row <- list(
+    return(data.frame(
       subgroup = attr(fit, "subgroup"),
-      test     = if (.maIsMetaregression(options)) gettext("Residual heterogeneity") else gettext("Heterogeneity"),
-      stat     = NA,
-      pval     = NA
-    )
-    if (.maIsPermutation(options))
-      row[["pval2"]] <- NA
-
-    return(do.call(cbind.data.frame, row))
+      test     = if (.maIsMetaregression(options)) gettext("Residual heterogeneity") else gettext("Heterogeneity")
+    ))
   }
 
-  row <- list(
+  row <- data.frame(
     subgroup = attr(fit, "subgroup"),
     test     = if (.maIsMetaregression(options)) gettext("Residual heterogeneity") else gettext("Heterogeneity"),
     stat     = sprintf("Q\U2091(%1$i) = %2$.2f", fit[["k"]] - fit[["p"]], fit[["QE"]]),
     pval     = fit[["QEp"]]
   )
 
-  if (.maIsPermutation(options)) {
-    row[["pval2"]] <- NA
-  }
-
-  row <- do.call(cbind.data.frame, row)
   return(row)
 }
 .maRowEffectSizeTest                  <- function(fit, options) {
 
   # handle missing subfits
   if (jaspBase::isTryError(fit)) {
-    row <- list(
+    return(data.frame(
       subgroup = attr(fit, "subgroup"),
-      test     = gettext("Pooled effect"),
-      stat     = NA,
-      pval     = NA
-    )
-    if (.maIsPermutation(options))
-      row[["pval2"]] <- NA
-
-    return(do.call(cbind.data.frame, row))
+      test     = gettext("Pooled effect")
+    ))
   }
 
   # pooled effect size
   predictedEffect <- .maComputePooledEffectPlot(fit, options)
 
-  row <- list(
+  row <- data.frame(
     subgroup = attr(fit, "subgroup"),
     test     = gettext("Pooled effect"),
     stat     = if (.maIsMetaregressionFtest(options)) sprintf("t(%1$s) = %2$.2f", .maPrintDf(predictedEffect[["df"]][1]), predictedEffect[["stat"]][1])
@@ -3796,11 +3775,6 @@
     pval     = predictedEffect[["pval"]][1]
   )
 
-  if (.maIsPermutation(options)) {
-    row[["pval2"]] <- NA
-  }
-
-  row <- do.call(cbind.data.frame, row)
   return(row)
 }
 .maRowModerationTest                  <- function(fit, options, parameter = "effectSize", coefficientsTest = FALSE) {
@@ -3808,20 +3782,15 @@
   # handle missing subfits
   if (jaspBase::isTryError(fit)) {
     testAdd <- if (coefficientsTest) gettext("(coef ...)") else ""
-    row <- list(
+    row     <- data.frame(
       subgroup = attr(fit, "subgroup"),
       test     = switch(
         parameter,
         "effectSize"    = if (.maIsMetaregressionHeterogeneity(options)) gettextf("Moderation effect size%1$s", testAdd) else gettextf("Moderation%1$s", testAdd),
         "heterogeneity" = gettextf("Moderation heterogeneity%1$s", testAdd)
-      ),
-      stat     = NA,
-      pval     = NA
+      )
     )
-    if (.maIsPermutation(options))
-      row[["pval2"]] <- NA
-
-    return(do.call(cbind.data.frame, row))
+    return(row)
   }
 
   # compute the test
@@ -3851,15 +3820,7 @@
 
 
   # test statistic
-
-  if (is.na(moderationOut[["pval"]])) {
-    row[["stat"]] <- NA
-    row[["pval"]] <- NA
-
-    if (.maIsPermutation(options)) {
-      row[["pval2"]] <- NA
-    }
-  } else {
+  if (!is.na(moderationOut[["pval"]])) {
 
     if (.maIsMetaregressionFtest(options)) {
       row[["stat"]] <- sprintf("F\U2098(%1$s, %2$s) = %3$.2f", .maPrintDf(moderationOut[["df1"]]), .maPrintDf(moderationOut[["df2"]]), moderationOut[["stat"]])
@@ -3891,24 +3852,10 @@
 
   # handle missing subfits
   if (jaspBase::isTryError(fit)) {
-    row <- list(
+    return(data.frame(
       par     = gettext("Pooled effect"),
-      est     = NA,
-      lCi     = NA,
-      uCi     = NA,
-      lPi     = NA,
-      uPi     = NA,
       subgroup = attr(fit, "subgroup")
-    )
-    row <- do.call(cbind.data.frame, row)
-    row <- row[,c(
-      "par", "est",
-      if (options[["confidenceIntervals"]]) c("lCi", "uCi"),
-      if (options[["predictionIntervals"]]) c("lPi", "uPi"),
-      "subgroup"
-    )]
-
-    return(row)
+    ))
   }
 
   # pooled effect size
@@ -3922,38 +3869,20 @@
 
   # handle missing subfits
   if (jaspBase::isTryError(fit)) {
-    row <- list(
+    return(data.frame(
       par     = c("\U1D70F", "\U1D70F\U00B2", "I\U00B2", "H\U00B2")[c(
         options[["heterogeneityTau"]], options[["heterogeneityTau2"]], options[["heterogeneityI2"]], options[["heterogeneityH2"]])],
-      est     = NA,
-      lCi     = NA,
-      uCi     = NA,
-      lPi     = NA,
-      uPi     = NA,
       subgroup = attr(fit, "subgroup")
-    )
-
-    row <- do.call(cbind.data.frame, row)
-    row <- row[,c(
-      "par", "est",
-      if (options[["confidenceIntervals"]]) c("lCi", "uCi"),
-      if (options[["predictionIntervals"]]) c("lPi", "uPi"),
-      "subgroup"
-    )]
-
-    return(row)
+    ))
   }
 
   # pooled effect size
   row          <- .maComputePooledHeterogeneity(fit, options)
-  row$lPi      <- NA
-  row$uPi      <- NA
   row$subgroup <- attr(fit, "subgroup")
 
   row <- row[,c(
     "par", "est",
     if (options[["confidenceIntervals"]]) c("lCi", "uCi"),
-    if (options[["predictionIntervals"]]) c("lPi", "uPi"),
     "subgroup"
   )]
 
@@ -4070,6 +3999,37 @@
   estimates$subgroup <- attr(fit, "subgroup")
 
   return(estimates)
+}
+
+# table row helper functions
+.maSafeRbind                          <- function(dfs) {
+
+  # this function allows combining data.frames with different columns
+  # the main issue is that some models might be missing coefficients/terms,
+  # or complete fit failure, as such, simple rbind might misaligned the grouped output
+  # importantly, the order of the output data.frame
+  # does not matter as order is determined by the table itself
+
+  dfs <- dfs[!sapply(dfs, is.null)]
+  if (length(dfs) == 0)
+    return(NULL)
+
+  # gather all colnames
+  colnamesUnique <- unique(unlist(lapply(dfs, colnames)))
+
+  # add missing columns and reorder
+  for (i in seq_along(dfs)) {
+    colnamesMissing <- setdiff(colnamesUnique, colnames(dfs[[i]]))
+    if (length(colnamesMissing) > 0) {
+      for (col in colnamesMissing) {
+        dfs[[i]][[col]] <- NA
+      }
+    }
+    dfs[[i]] <- dfs[[i]][,colnamesUnique,drop=FALSE]
+  }
+
+  df <- do.call(rbind, dfs)
+  return(df)
 }
 .maSafeOrderAndSimplify               <- function(df, columnName, options) {
 
