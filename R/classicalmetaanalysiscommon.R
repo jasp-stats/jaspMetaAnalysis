@@ -555,6 +555,42 @@
 
   return(out)
 }
+.maBaujat                        <- function(jaspResults, options) {
+
+  # extract precomputed profile likelihood if done before:
+  if (!is.null(jaspResults[["baujatResults"]])) {
+
+    out <- jaspResults[["baujatResults"]]$object
+
+  } else {
+
+    # create the output container
+    baujatResults <- createJaspState()
+    baujatResults$dependOn(.maDependencies)
+    jaspResults[["baujatResults"]] <- baujatResults
+
+
+    fit <- .maExtractFit(jaspResults, options)
+    out <- list()
+
+    for (i in seq_along(fit)) {
+
+      if (jaspBase::isTryError(fit[[i]])) {
+        dfBaujat <- list()
+      } else {
+        dfBaujat <- try(.maSuppressPlot(metafor::baujat(fit[[i]])))
+        attr(dfBaujat, "studyLabels") <- attr(fit[[i]], "dataset")[[options[["studyLabels"]]]]
+      }
+
+      out[[attr(fit[[i]], "subgroup")]] <- dfBaujat
+    }
+
+    jaspResults[["baujatResults"]]$object <- out
+  }
+
+
+  return(out)
+}
 
 # output tables
 .maOverallTestsTable                     <- function(jaspResults, dataset, options) {
@@ -1655,9 +1691,9 @@
   # create individual plots for each subgroup
   if (options[["subgroup"]] == "") {
 
-    profileLikelihoodPlot       <- .maProfileLikelihoodPlotFun(fit[[i]], dfProfile[[i]], options)
+    profileLikelihoodPlot       <- .maProfileLikelihoodPlotFun(fit[[1]], dfProfile[[1]], options)
     profileLikelihoodPlot$title <- gettext("Profile Likelihood Plot")
-    profileLikelihoodPlot$dependOn(c(.maDependencies, "diagnosticsPlotsProfileLikelihood"))
+    profileLikelihoodPlot$dependOn(c(.maDependencies, "diagnosticsPlotsProfileLikelihood", "includeFullDatasetInSubgroupAnalysis"))
     profileLikelihoodPlot$position <- 8
     jaspResults[["profileLikelihoodPlot"]] <- profileLikelihoodPlot
     return()
@@ -1665,9 +1701,9 @@
   } else {
 
     # create the output container
-    profileLikelihoodPlot <- createJaspContainer()
+    profileLikelihoodPlot       <- createJaspContainer()
     profileLikelihoodPlot$title <- gettext("Profile Likelihood Plot")
-    profileLikelihoodPlot$dependOn(c(.maDependencies, "diagnosticsPlotsProfileLikelihood"))
+    profileLikelihoodPlot$dependOn(c(.maDependencies, "diagnosticsPlotsProfileLikelihood", "includeFullDatasetInSubgroupAnalysis"))
     profileLikelihoodPlot$position <- 8
     jaspResults[["profileLikelihoodPlot"]] <- profileLikelihoodPlot
 
@@ -1694,6 +1730,9 @@
       errorPlot <- createJaspPlot(title = gettext("Profile Likelihood Plot"))
       errorPlot$setError(dfProfile)
       profileLikelihoodPlot[["errorPlot"]] <- errorPlot
+      return(profileLikelihoodPlot)
+    }
+    if (length(dfProfile) == 0) {
       return()
     }
 
@@ -1708,15 +1747,17 @@
   } else {
 
     # plot for univariate
-    profileLikelihoodPlot <- createJaspPlot(, width = 400, height = 320)
+    profileLikelihoodPlot <- createJaspPlot(width = 400, height = 320)
 
     if (.maIsMetaregressionHeterogeneity(options)) {
       profileLikelihoodPlot$setError(gettext("Profile likelihood is not available for models that contain meta-regression on heterogeneity."))
-      return()
+      return(profileLikelihoodPlot)
     }
-
     if (jaspBase::isTryError(dfProfile)) {
       profileLikelihoodPlot$setError(dfProfile)
+      return(profileLikelihoodPlot)
+    }
+    if (length(dfProfile) == 0) {
       return()
     }
 
@@ -1733,54 +1774,67 @@
   fit <- .maExtractFit(jaspResults, options)
 
   # stop on error
-  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+  if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
-  # create plot
-  baujatPlot <- createJaspPlot(title = gettext("Baujat Plot"), width = 400, height = 320)
-  baujatPlot$dependOn(c(.maDependencies, "diagnosticsPlotsBaujat", "studyLabels"))
-  baujatPlot$position <- 9
-  jaspResults[["baujatPlot"]] <- baujatPlot
+  # extract precomputed baujat plot if done before:
+  dfBaujat <- .maBaujat(jaspResults, options)
 
-  if (.maIsMetaregressionHeterogeneity(options)) {
-    baujatPlot$setError(gettext("Baujat plot is not available for models that contain meta-regression on heterogeneity."))
+  # create individual plots for each subgroup
+  if (options[["subgroup"]] == "") {
+
+    baujatPlot       <- .maBaujatPlotFun(fit[[1]], dfBaujat[[1]], options)
+    baujatPlot$title <- gettext("Baujat Plot")
+    baujatPlot$dependOn(c(.maDependencies, "diagnosticsPlotsBaujat", "includeFullDatasetInSubgroupAnalysis"))
+    baujatPlot$position <- 9
+    jaspResults[["baujatPlot"]] <- baujatPlot
     return()
-  }
-  if (.maIsClustered(options)) {
-    baujatPlot$setError(gettext("Baujat plot is not available for models with clustering."))
-    return()
-  }
-
-  # extract precomputed baujat data if done before:
-  if (!is.null(jaspResults[["baujatResults"]])) {
-
-    dfBaujat <- jaspResults[["baujatResults"]]$object
 
   } else {
 
     # create the output container
-    baujatResults <- createJaspState()
-    baujatResults$dependOn(.maDependencies)
-    jaspResults[["baujatResults"]] <- baujatResults
+    baujatPlot       <- createJaspContainer()
+    baujatPlot$title <- gettext("Baujat Plot")
+    baujatPlot$dependOn(c(.maDependencies, "diagnosticsPlotsBaujat", "includeFullDatasetInSubgroupAnalysis"))
+    baujatPlot$position <- 9
+    jaspResults[["baujatPlot"]] <- baujatPlot
 
-    # compute the results and save them in the container
-    dfBaujat <- try(.maSuppressPlot(metafor::baujat(fit)))
+    for (i in seq_along(fit)) {
+      baujatPlot[[names(fit)[i]]]          <- .maBaujatPlotFun(fit[[i]], dfBaujat[[i]], options)
+      baujatPlot[[names(fit)[i]]]$title    <- gettextf("Subgroup: %1$s", attr(fit[[i]], "subgroup"))
+      baujatPlot[[names(fit)[i]]]$position <- i
+    }
 
-    # store in the container
-    jaspResults[["baujatResults"]]$object <- dfBaujat
   }
 
+  return()
+}
+.maBaujatPlotFun                         <- function(jaspResults, dfBaujat, options) {
+
+  baujatPlot <- createJaspPlot(width = 400, height = 320)
+
+  # error handling
+  if (.maIsMetaregressionHeterogeneity(options)) {
+    baujatPlot$setError(gettext("Baujat plot is not available for models that contain meta-regression on heterogeneity."))
+    return(baujatPlot)
+  }
+  if (.maIsClustered(options)) {
+    baujatPlot$setError(gettext("Baujat plot is not available for models with clustering."))
+    return(baujatPlot)
+  }
   if (jaspBase::isTryError(dfBaujat)) {
     baujatPlot$setError(dfBaujat)
+    return(baujatPlot)
+  }
+  if (length(dfBaujat) == 0) {
     return()
   }
 
   if (options[["studyLabels"]] != "")
-    dfBaujat$label <- as.character(dataset[[options[["studyLabels"]]]])
+    dfBaujat$label <- attr(dfBaujat, "studyLabels")
 
   xTicks <- jaspGraphs::getPrettyAxisBreaks(range(dfBaujat$x, na.rm = TRUE))
   yTicks <- jaspGraphs::getPrettyAxisBreaks(range(dfBaujat$y, na.rm = TRUE))
-
 
   aesCall <- list(
     x     = as.name("x"),
@@ -1810,7 +1864,7 @@
 
   baujatPlot$plotObject <- plotOut
 
-  return()
+  return(baujatPlot)
 }
 .maResidualFunnelPlot                    <- function(jaspResults, dataset, options) {
 
