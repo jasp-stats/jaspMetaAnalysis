@@ -1285,16 +1285,20 @@
   varianceInflationContainer[[parameter]] <- termsTable
 
   termsTable$addColumnInfo(name = "term",  type = "string",  title = "")
+  .maAddSubgroupColumn(termsTable, options)
   if (options[["diagnosticsVarianceInflationFactorAggregate"]])
     termsTable$addColumnInfo(name = "m", type = "integer", title = gettext("Parameters"))
 
   termsTable$addColumnInfo(name = "vif",  type = "number", title = gettext("VIF"))
   termsTable$addColumnInfo(name = "sif",  type = "number", title = gettext("SIF"))
 
-  if (is.null(fit) || jaspBase::isTryError(fit))
+  if (length(fit) == 1 && jaspBase::isTryError(fit[[1]]))
     return()
 
-  termsTable$setData(.maComputeVifSummary(fit, options, parameter))
+  terms <- do.call(rbind, lapply(fit, .maComputeVifSummary, options = options, parameter = parameter))
+  terms <- .maSafeOrderAndSimplify(terms, "term", options)
+
+  termsTable$setData(terms)
 
   return()
 }
@@ -1770,7 +1774,7 @@
 
   # create the output container
   varianceInflationContainer <- createJaspContainer(gettext("Variance Inflation Summary"))
-  varianceInflationContainer$dependOn(c(.maDependencies, "diagnosticsVarianceInflationFactor", "diagnosticsVarianceInflationFactorAggregate"))
+  varianceInflationContainer$dependOn(c(.maDependencies, "diagnosticsVarianceInflationFactor", "diagnosticsVarianceInflationFactorAggregate", "includeFullDatasetInSubgroupAnalysis"))
   varianceInflationContainer$position <- 7
   jaspResults[["varianceInflationContainer"]] <- varianceInflationContainer
 
@@ -3114,6 +3118,10 @@
 }
 .maComputeVifSummary               <- function(fit, options, parameter = "effectSize") {
 
+  if (jaspBase::isTryError(fit)) {
+    return(NULL)
+  }
+
   if (options[["diagnosticsVarianceInflationFactorAggregate"]]) {
 
     # obtain terms indicies
@@ -3142,6 +3150,8 @@
     tableVif      <- .maExtractVifResults(try(metafor::vif(fit)), options, parameter)
     tableVif$term <- .maVariableNames(rownames(tableVif), options[["predictors"]])
   }
+
+  tableVif$subgroup <- attr(fit, "subgroup")
 
   return(tableVif)
 }
@@ -3735,7 +3745,7 @@
   if (jaspBase::isTryError(fit)) {
     row <- list(
       subgroup = attr(fit, "subgroup"),
-      test     = gettext("Heterogeneity"),
+      test     = if (.maIsMetaregression(options)) gettext("Residual heterogeneity") else gettext("Heterogeneity"),
       stat     = NA,
       pval     = NA
     )
