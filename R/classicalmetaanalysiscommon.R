@@ -1783,7 +1783,7 @@
   # create individual plots for each subgroup
   if (options[["subgroup"]] == "") {
 
-    baujatPlot       <- .maBaujatPlotFun(fit[[1]], dfBaujat[[1]], options)
+    baujatPlot       <- .maBaujatPlotFun(dfBaujat[[1]], options)
     baujatPlot$title <- gettext("Baujat Plot")
     baujatPlot$dependOn(c(.maDependencies, "diagnosticsPlotsBaujat", "includeFullDatasetInSubgroupAnalysis"))
     baujatPlot$position <- 9
@@ -1800,7 +1800,7 @@
     jaspResults[["baujatPlot"]] <- baujatPlot
 
     for (i in seq_along(fit)) {
-      baujatPlot[[names(fit)[i]]]          <- .maBaujatPlotFun(fit[[i]], dfBaujat[[i]], options)
+      baujatPlot[[names(fit)[i]]]          <- .maBaujatPlotFun(dfBaujat[[i]], options)
       baujatPlot[[names(fit)[i]]]$title    <- gettextf("Subgroup: %1$s", attr(fit[[i]], "subgroup"))
       baujatPlot[[names(fit)[i]]]$position <- i
     }
@@ -1809,7 +1809,7 @@
 
   return()
 }
-.maBaujatPlotFun                         <- function(jaspResults, dfBaujat, options) {
+.maBaujatPlotFun                         <- function(dfBaujat, options) {
 
   baujatPlot <- createJaspPlot(width = 400, height = 320)
 
@@ -1874,21 +1874,51 @@
   fit <- .maExtractFit(jaspResults, options)
 
   # stop on error
-  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+  if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
-  # create plot
-  residualFunnelPlot <- createJaspPlot(title = gettext("Residual Funnel Plot"), width = 550, height = 480)
-  residualFunnelPlot$dependOn(c(.maDependencies, "diagnosticsResidualFunnel", "studyLabels"))
-  residualFunnelPlot$position <- 10
-  jaspResults[["residualFunnelPlot"]] <- residualFunnelPlot
+  # create individual plots for each subgroup
+  if (options[["subgroup"]] == "") {
 
-  # obtain residual funnel plot
-  plotOut <- .maMakeResidualFunnelPlot(fit, options, dataset)
+    residualFunnelPlot       <- .maResidualFunnelPlotFun(fit[[1]], options)
+    residualFunnelPlot$title <- gettext("Residual Funnel Plot")
+    residualFunnelPlot$dependOn(c(.maDependencies, "diagnosticsResidualFunnel", "studyLabels", "includeFullDatasetInSubgroupAnalysis"))
+    residualFunnelPlot$position <- 10
+    jaspResults[["residualFunnelPlot"]] <- residualFunnelPlot
+    return()
 
-  residualFunnelPlot$plotObject <- plotOut
+  } else {
+
+    # create the output container
+    residualFunnelPlot       <- createJaspContainer()
+    residualFunnelPlot$title <- gettext("Residual Funnel Plot")
+    residualFunnelPlot$dependOn(c(.maDependencies, "diagnosticsResidualFunnel", "studyLabels", "includeFullDatasetInSubgroupAnalysis"))
+    residualFunnelPlot$position <- 10
+    jaspResults[["residualFunnelPlot"]] <- residualFunnelPlot
+
+    for (i in seq_along(fit)) {
+      residualFunnelPlot[[names(fit)[i]]]          <- .maResidualFunnelPlotFun(fit[[i]], options)
+      residualFunnelPlot[[names(fit)[i]]]$title    <- gettextf("Subgroup: %1$s", attr(fit[[i]], "subgroup"))
+      residualFunnelPlot[[names(fit)[i]]]$position <- i
+    }
+
+  }
 
   return()
+}
+.maResidualFunnelPlotFun                 <- function(fit, options) {
+
+  # create plot
+  residualFunnelPlot <- createJaspPlot(width = 400, height = 320)
+
+  if (jaspBase::isTryError(fit)) {
+    return()
+  }
+
+  # obtain residual funnel plot
+  residualFunnelPlot$plotObject <- .maMakeResidualFunnelPlot(fit, options, attr(fit, "dataset"))
+
+  return(residualFunnelPlot)
 }
 
 # containers/state functions
@@ -4244,6 +4274,7 @@
 
   return(rows)
 }
+
 # table row helper functions
 .maSafeRbind                          <- function(dfs) {
 
@@ -4253,9 +4284,7 @@
   # importantly, the order of the output data.frame
   # does not matter as order is determined by the table itself
 
-  if (length(dfs) == 0)
-    return(NULL)
-  dfs <- dfs[!(sapply(dfs, is.null) | sapply(dfs, nrow) == 0)]
+  dfs <- dfs[!sapply(dfs, function(x) is.null(x) || length(x) == 0 || nrow(x) == 0)]
   if (length(dfs) == 0)
     return(NULL)
 
