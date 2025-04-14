@@ -156,7 +156,8 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   )
   anyNaByRows <- apply(dataset[,omitOnVariables], 1, function(x) anyNA(x))
   dataset     <- dataset[!anyNaByRows,]
-  attr(dataset, "NAs") <- sum(anyNaByRows)
+  attr(dataset, "NAs")    <- sum(anyNaByRows)
+  attr(dataset, "NasIds") <- anyNaByRows
 
   # drop empty factor levels
   dataset <- droplevels(dataset)

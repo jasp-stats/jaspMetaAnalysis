@@ -152,6 +152,9 @@
       subgroupLevel <- subgroupLevels[i]
       subgroupData  <- dataset[dataset[[options[["subgroup"]]]] == subgroupLevel, ]
 
+      attr(subgroupData, "NAs")    <- sum(attr(data, "NasIds")[dataset[[options[["subgroup"]]]] == subgroupLevel])
+      attr(subgroupData, "NasIds") <- attr(data, "NasIds")[dataset[[options[["subgroup"]]]] == subgroupLevel]
+
       # fit the model
       fitOutput[[paste0("subgroup", subgroupLevel)]] <- .maFitModelFun(subgroupData, options, subgroupName = subgroupLevel)
       progressbarTick()
@@ -276,7 +279,7 @@
 
 
   # add permutation test if requested (only available for non-clustered fits)
-  if (.maIsPermutation(options)) {
+  if (.maIsPermutation(options) && !jaspBase::isTryError(fit)) {
     fit <- .maPermutestAndStore(fit, options)
   }
 
@@ -291,8 +294,12 @@
 
   # add attributes
   attr(fit, "subgroup") <- subgroupName
-  if (!is.null(fitClustered))
+  attr(fit, "dataset")  <- dataset
+  if (!is.null(fitClustered)) {
     attr(fitClustered, "subgroup") <- subgroupName
+    attr(fitClustered, "dataset")  <- dataset
+  }
+
 
   # return the results
   return(list(
@@ -424,6 +431,61 @@
     return(.quitAnalysis(gettext("All observations were removed as influential.")))
 
   return(dataset)
+}
+.maDiagnostics                   <- function(jaspResults, options) {
+
+  # extract precomputed diagnostics if done before:
+  if (!is.null(jaspResults[["diagnosticsResults"]])) {
+
+    out <- jaspResults[["diagnosticsResults"]]$object
+
+  } else {
+
+    # the fit diagnostics work only for the non-clustered fit
+    fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
+
+    # create the output container
+    diagnosticsResults <- createJaspState()
+    diagnosticsResults$dependOn(.maDependencies)
+    jaspResults[["diagnosticsResults"]] <- diagnosticsResults
+
+    out <- list()
+
+    for (i in seq_along(fit)) {
+
+      if (jaspBase::isTryError(fit[[i]])) {
+        influenceResultsDfbs <- list()
+        influenceResultsInf  <- list()
+      } else {
+        if (.maIsMultilevelMultivariate(options)) {
+          # only a subset of diagnostics is available for rma.mv
+          influenceResultsDfbs <- data.frame(dfbetas(fit[[i]], code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics: DFBETAS')", code2 = "jaspBase::progressbarTick()"))
+          influenceResultsInf  <- data.frame(
+            rstudent = rstudent(fit[[i]],       code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics: Studentized residuals')", code2 = "jaspBase::progressbarTick()")[["resid"]],
+            cook.d   = cooks.distance(fit[[i]], code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics: Cooks distance')",        code2 = "jaspBase::progressbarTick()"),
+            hat      = hatvalues(fit[[i]])
+          )
+        } else {
+          # the complete suite of influence diagnostics is only available for rma.uni
+          influenceResults     <- influence(fit[[i]], code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics')", code2 = "jaspBase::progressbarTick()")
+          influenceResultsDfbs <- data.frame(influenceResults$dfbs)
+          influenceResultsInf  <- data.frame(influenceResults$inf)
+          influenceResultsInf$tau.del <- sqrt(influenceResultsInf$tau2.del)
+          influenceResultsInf$inf[influenceResultsInf$inf == "*"] <- "Yes"
+        }
+      }
+
+      out[[paste0("subgroup", attr(fit[[i]], "subgroup"))]] <- list(
+        "influenceResultsDfbs" = influenceResultsDfbs,
+        "influenceResultsInf"  = influenceResultsInf
+      )
+    }
+
+    # store the results
+    jaspResults[["diagnosticsResults"]]$object <- out
+  }
+
+  return(out)
 }
 
 # output tables
@@ -1320,50 +1382,8 @@
   fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
 
   # stop on error
-  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+  if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) || !is.null(.maCheckIsPossibleOptions(options)))
     return()
-
-  # extract precomputed diagnostics if done before:
-  if (!is.null(jaspResults[["diagnosticsResults"]])) {
-
-    diagnosticsResults <- jaspResults[["diagnosticsResults"]]$object
-
-    influenceResultsDfbs <- diagnosticsResults[["influenceResultsDfbs"]]
-    influenceResultsInf  <- diagnosticsResults[["influenceResultsInf"]]
-
-  } else {
-
-    # create the output container
-    diagnosticsResults <- createJaspState()
-    diagnosticsResults$dependOn(.maDependencies)
-    jaspResults[["diagnosticsResults"]] <- diagnosticsResults
-
-    if (.maIsMultilevelMultivariate(options)) {
-      # only a subset of diagnostics is available for rma.mv
-      influenceResultsDfbs <- data.frame(dfbetas(fit, code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics: DFBETAS')", code2 = "jaspBase::progressbarTick()"))
-      influenceResultsInf  <- data.frame(
-        rstudent = rstudent(fit,       code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics: Studentized residuals')", code2 = "jaspBase::progressbarTick()")[["resid"]],
-        cook.d   = cooks.distance(fit, code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics: Cooks distance')",        code2 = "jaspBase::progressbarTick()"),
-        hat      = hatvalues(fit)
-      )
-    } else {
-      # the complete suite of influence diagnostics is only available for rma.uni
-      influenceResults     <- influence(fit, code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics')", code2 = "jaspBase::progressbarTick()")
-      influenceResultsDfbs <- data.frame(influenceResults$dfbs)
-      influenceResultsInf  <- data.frame(influenceResults$inf)
-      influenceResultsInf$tau.del <- sqrt(influenceResultsInf$tau2.del)
-      influenceResultsInf$inf[influenceResultsInf$inf == "*"] <- "Yes"
-    }
-
-    # store the results
-    jaspResults[["diagnosticsResults"]]$object <- list(
-      "influenceResultsDfbs" = influenceResultsDfbs,
-      "influenceResultsInf"  = influenceResultsInf
-    )
-  }
-
-  # extract fit data
-  fitData <- fit[["data"]]
 
   # fit measures table
   casewiseDiagnosticsTable          <- createJaspTable(gettext("Casewise Diagnostics Table"))
@@ -1373,24 +1393,17 @@
                                       "studyLabels"))
   jaspResults[["casewiseDiagnosticsTable"]] <- casewiseDiagnosticsTable
 
-  if (options[["diagnosticsCasewiseDiagnosticsShowInfluentialOnly"]] && sum(influenceResultsInf$inf != "Yes") == 0) {
-    casewiseDiagnosticsTable$addFootnote(gettext("No influential cases found."))
-    return()
-  }
 
+  .maAddSubgroupColumn(casewiseDiagnosticsTable, options)
   if (options[["studyLabels"]] != "") {
-    influenceResultsInf$label <- dataset[[options[["studyLabels"]]]]
     casewiseDiagnosticsTable$addColumnInfo(name = "label", type  = "string", title = gettext("Label"))
   }
-
   if (options[["diagnosticsCasewiseDiagnosticsIncludePredictors"]]) {
+    fitData <- fit[[1]][["data"]]
     for (var in colnames(fitData)) {
-      casewiseDiagnosticsTable$addColumnInfo(name = paste0("pred_", var), type  = .maGetVariableColumnType(var, options), title = var, overtitle = gettext("Predictor"))
+      casewiseDiagnosticsTable$addColumnInfo(name = paste0("pred", var), type  = .maGetVariableColumnType(var, options), title = var, overtitle = gettext("Predictor"))
     }
-    colnames(fitData)   <- paste0("pred_", colnames(fitData))
-    influenceResultsInf <- cbind(fitData, influenceResultsInf)
   }
-
   casewiseDiagnosticsTable$addColumnInfo(name = "rstudent",  title = gettext("Standardized Residual"),  type = "number")
   if (!.maIsMultilevelMultivariate(options))
     casewiseDiagnosticsTable$addColumnInfo(name = "dffits",  title = gettext("DFFITS"),                 type = "number")
@@ -1404,22 +1417,58 @@
   casewiseDiagnosticsTable$addColumnInfo(name = "hat",       title = gettext("Hat"),                    type = "number")
   if (!.maIsMultilevelMultivariate(options))
     casewiseDiagnosticsTable$addColumnInfo(name = "weight",  title = gettext("Weight"),                 type = "number")
-
   if (options[["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"]]) {
     for (par in colnames(influenceResultsDfbs)) {
       casewiseDiagnosticsTable$addColumnInfo(name = par, title = .maVariableNames(par, options[["predictors"]]), type = "number", overtitle = gettext("Difference in coefficients"))
     }
-    influenceResultsInf <- cbind(influenceResultsInf, influenceResultsDfbs)
   }
-
   if (!.maIsMultilevelMultivariate(options))
     casewiseDiagnosticsTable$addColumnInfo(name = "inf", title = gettext("Influential"), type = "string")
 
-  if (options[["diagnosticsCasewiseDiagnosticsShowInfluentialOnly"]])
-      influenceResultsInf <- influenceResultsInf[influenceResultsInf$inf == "Yes",,drop=FALSE]
 
-  casewiseDiagnosticsTable$setData(influenceResultsInf)
+  # export diagnostics
+  diagnostics <- .maDiagnostics(jaspResults, options)
+  saveRDS(diagnostics, file = "C:/JASP/diagnostics.RDS")
 
+
+  # always drop the full from subgroups
+  if (options[["subgroup"]] != "" && options[["includeFullDatasetInSubgroupAnalysis"]]) {
+    fit         <- fit[-1]
+    diagnostics <- diagnostics[-1]
+  }
+
+  diagnosticsTable <- .maSafeRbind(lapply(seq_along(fit), function(i) .maRowDiagnosticsTable(
+    fit         = fit[[i]],
+    diagnostics = diagnostics[[paste0("subgroup", attr(fit[[i]], "subgroup"))]],
+    options     = options
+  )))
+
+  # keep influential only
+  if (options[["diagnosticsCasewiseDiagnosticsShowInfluentialOnly"]]) {
+
+    diagnosticsTable <- diagnosticsTable[!is.na(diagnosticsTable[["inf"]]) ,,drop=FALSE]
+    diagnosticsTable <- diagnosticsTable[diagnosticsTable[["inf"]] == "Yes",,drop=FALSE]
+
+    # add note if some results are completly ommited
+    if (options[["subgroup"]] == "" && nrow(diagnosticsTable) == 0) {
+      casewiseDiagnosticsTable$addFootnote(gettext("No influential cases found."))
+    } else if (options[["subgroup"]] != "") {
+      influentialTable <- table(diagnosticsTable[["subgroup"]])
+      for (i in seq_along(influentialTable)[influentialTable == 0]) {
+        casewiseDiagnosticsTable$addFootnote(gettextf(
+          "%1$sNo influential cases found.",
+          if (options[["subgroup"]] != "") gettextf("Subgroup %1$s: ", attr(fit[[i]], "subgroup")) else ""
+        ))
+      }
+    }
+  }
+
+  # simplify and store results
+  diagnosticsTable <- .maSafeOrderAndSimplify(diagnosticsTable, "subgroup", options)
+  casewiseDiagnosticsTable$setData(diagnosticsTable)
+
+  if (options[["subgroup"]] != "")
+    casewiseDiagnosticsTable$addFootnote(gettext("Diagnostics are based on the the subgroup models."))
   if (.maIsClustered(options))
     casewiseDiagnosticsTable$addFootnote(gettext("Diagnostics are based on the non-clustered model."))
 
@@ -4000,7 +4049,40 @@
 
   return(estimates)
 }
+.maRowDiagnosticsTable                <- function(fit, diagnostics, options) {
 
+  # first create the data part of the output
+  # (in case the fit failed there are no diagnostics)
+
+  fitData <- attr(fit, "data")
+  rows    <- list()
+
+  # include study labels
+  if (options[["studyLabels"]] != "") {
+    rows[["label"]] <- fitData[[options[["studyLabels"]]]]
+  }
+
+  # include predictors
+  if (options[["diagnosticsCasewiseDiagnosticsIncludePredictors"]]) {
+    fitData           <- fitData[, colnames(fitData) %in% options[["predictors"]], drop = FALSE]
+    rows[["pred"]]    <- fitData
+  }
+
+  # return on error
+  if (jaspBase::isTryError(fit)) {
+    return(do.call(cbind.data.frame, rows))
+  }
+
+  # main diagnostics section
+  rows <- do.call(cbind.data.frame, c(
+    rows,
+    diagnostics[["influenceResultsInf"]],
+    if (options[["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"]]) diagnostics[["influenceResultsDfbs"]]
+  ))
+  rows$subgroup <- attr(fit, "subgroup")
+
+  return(rows)
+}
 # table row helper functions
 .maSafeRbind                          <- function(dfs) {
 
