@@ -39,6 +39,7 @@
 
   # fit the model
   .maFitModel(jaspResults, dataset, options)
+  .maUpdateFitModelDataset(jaspResults, dataset, options)
 
   # # remove influential observations and refit the model if requested
   # if (options[["diagnosticsCasewiseDiagnostics"]] && options[["diagnosticsCasewiseDiagnosticsRerunWithoutInfluentialCases"]]) {
@@ -305,6 +306,78 @@
 
 
   # return the results
+  return(list(
+    fit            = fit,
+    fitClustered   = fitClustered
+  ))
+}
+.maUpdateFitModelDataset         <- function(jaspResults, dataset, options, objectName = "fit") {
+
+  # this function updates the data sets stored as attribute of the fit object if any of the additional variables changes
+  # this is necessary for simplifying handling dataset in the forest plot etc...
+
+  if (!.maReady(options) || is.null(jaspResults[[objectName]]))
+    return()
+  if (!is.null(jaspResults[[paste0(objectName, "DataSet")]]))
+    return()
+
+  # create a container that works as an indicator for dataset update
+  fitContainer <- createJaspState()
+  fitContainer$dependOn(.maDataPlottingDependencies)
+  jaspResults[[paste0(objectName, "DataSet")]] <- fitContainer
+
+  # extract the fit objects
+  fitOutput <- jaspResults[[objectName]]$object
+
+  # full dataset fit
+  fitOutput[["__fullDataset"]] <- .maUpdateFitModelDatasetFun(fitOutput[["__fullDataset"]], dataset)
+
+  # add subgroup fits
+  if (options[["subgroup"]] != "") {
+
+    subgroupLevels <- unique(dataset[[options[["subgroup"]]]])
+
+    for (i in seq_along(subgroupLevels)) {
+
+      subgroupLevel <- subgroupLevels[i]
+      subgroupIndx  <- dataset[[options[["subgroup"]]]] == subgroupLevel
+      subgroupData  <- dataset[subgroupIndx, ]
+
+      # forward NAs information
+      tempNasIds    <- attr(dataset, "NasIds")[!attr(dataset, "NasIds")]
+      attr(subgroupData, "NAs")    <- sum(tempNasIds[subgroupIndx])
+      attr(subgroupData, "NasIds") <- tempNasIds[subgroupIndx]
+
+      # fit the model
+      fitOutput[[paste0("subgroup", subgroupLevel)]] <- .maUpdateFitModelDatasetFun(fitOutput[[paste0("subgroup", subgroupLevel)]], subgroupData)
+    }
+  }
+
+  # save the updated fits
+  jaspResults[[objectName]]$object  <- fitOutput
+
+  # set the container to non-null
+  jaspResults[[paste0(objectName, "DataSet")]]$object <- TRUE
+
+  return()
+
+}
+.maUpdateFitModelDatasetFun      <- function(fitOutput, dataset) {
+
+  if (!is.null(fitOutput[["fit"]])) {
+    fit <- fitOutput[["fit"]]
+    attr(fit, "dataset") <- dataset
+  } else {
+    fit <- NULL
+  }
+
+  if (!is.null(fitOutput[["fitClustered"]])) {
+    fitClustered <- fitOutput[["fitClustered"]]
+    attr(fitClustered, "dataset") <- dataset
+  } else {
+    fitClustered <- NULL
+  }
+
   return(list(
     fit            = fit,
     fitClustered   = fitClustered
@@ -1293,14 +1366,17 @@
   )))
     return()
 
+  # the full data set fit is always needed for subgroup analyses
+  # there are forest plot specific settings
+  options[["includeFullDatasetInSubgroupAnalysis"]] <- TRUE
   fit <- .maExtractFit(jaspResults, options)
 
   # stop on error
-  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+  if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit)) || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
   # try execute!
-  plotOut <- try(.maMakeTheUltimateForestPlot(fit, dataset, options))
+  plotOut <- try(.maMakeTheUltimateForestPlot(fit, options))
 
   if (inherits(plotOut, "try-error")) {
     forestPlot <- createJaspPlot(title = gettext("Forest Plot"))
@@ -4345,6 +4421,12 @@
   if (options[["subgroup"]] == "") {
     df <- df[,colnames(df) != "subgroup", drop = FALSE]
     return(df)
+  }
+
+  # remove rows with NA in the grouping column
+  if (anyNA(df[[columnName]])) {
+    warning(sprintf("The grouping column '%s' contains NA values. These rows will be removed.", columnName))
+    df <- df[!is.na(df[[columnName]]),,drop=FALSE]
   }
 
   # get the grouping order

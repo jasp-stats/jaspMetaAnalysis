@@ -430,6 +430,37 @@ Section
 				checked:		false
 				info: qsTr("Move test results text to the right panel.")
 			}
+
+			Group
+			{
+				title:		qsTr("Subgroup")
+				enabled:	subgroup.count == 1
+				info:		qsTr("Specify the forest plot behavior in the case of a subgroup analysis. These options is only available when the subgroup analysis is selected.")
+
+				CheckBox
+				{
+					name:			"forestPlotSubgroupPanelsWithinSubgroup"
+					text:			qsTr("Panels within subgroup")
+					checked:		true
+					info: qsTr("Group the output panels within their subgroup membership, i.e., the output panels are presented for each subgroup in a sequential order (i.e., Study information (Subgroup 1), Estimated marginal means (Subgroup 1), Model information (Subgroup 1), Study information (Subgroup 2), Estimated marginal means (Subgroup 2), Model information (Subgroup 2), .... If unchecked, the output is group by the panel membership first, i.e., Study information (Subgroup 1), Study information (Subgroup 2), Esimated marginal means (Subgroup 1), Estimated marginal means (Subgroup 2), Model information (Subgroup 1), Model information (Subgroup 2)...")
+				}
+
+				CheckBox
+				{
+					name:			"forestPlotSubgroupFullDatasetEstimatedMarginalMeans"
+					text:			qsTr("Full dataset estimated marginal means")
+					checked:		true
+					info: qsTr("Include the full dataset estimated marginal means in the forest plot if subgroups are specified. This option overrides the `Include full dataset in subgroup analysis` setting in the `Advanced` section.")
+				}
+
+				CheckBox
+				{
+					name:			"forestPlotSubgroupFullDatasetModelInformation"
+					text:			qsTr("Full dataset model information")
+					checked:		true
+					info: qsTr("Include the full dataset model information in the forest plot if subgroups are specified. This option overrides the `Include full dataset in subgroup analysis` setting in the `Advanced` section.")
+				}
+			}
 		}
 
 		Group

@@ -57,6 +57,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "computeCovarianceMatrix", "computeCovarianceMatrix"
 )
 .maForestPlotDependencies <- c(
+  # do not forget to add variable carrying options to the .maDataPlottingDependencies
   .maDependencies, "transformEffectSize", "confidenceIntervalsLevel",
   "forestPlotStudyInformation",
   "forestPlotStudyInformationAllVariables",
@@ -88,6 +89,9 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotPredictionIntervals",
   "forestPlotEstimatesAndConfidenceIntervals",
   "forestPlotTestsInRightPanel",
+  "forestPlotSubgroupPanelsWithinSubgroup",
+  "forestPlotSubgroupFullDatasetEstimatedMarginalMeans",
+  "forestPlotSubgroupFullDatasetModelInformation",
   "forestPlotMappingColor",
   "forestPlotMappingShape",
   "forestPlotRelativeSizeEstimates",
@@ -130,6 +134,12 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "bubblePlotTheme",
   "bubblePlotLegendPosition",
   "bubblePlotRelativeSizeText"
+)
+.maDataPlottingDependencies <- c(
+  "forestPlotStudyInformationSelectedVariables",
+  "forestPlotStudyInformationOrderBy",
+  "forestPlotMappingColor",
+  "forestPlotMappingShape"
 )
 .maReady               <- function(options) {
 
