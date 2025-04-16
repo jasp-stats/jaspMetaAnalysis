@@ -44,6 +44,7 @@
   forestObjects         <- NULL
   additionalInformation <- NULL
   additionalObjects     <- NULL
+  subgroupHeadings      <- NULL
   tempRow <- 1
 
   if (options[["subgroup"]] == "" || (options[["subgroup"]] != "" && options[["forestPlotSubgroupPanelsWithinSubgroup"]])) {
@@ -61,6 +62,13 @@
         doModelInformation       <- TRUE
       }
 
+      # add a subgroup heading
+      if (options[["subgroup"]] != "") {
+        subgroupHeadings[[length(subgroupHeadings) + 1]] <- .forestPlotSubgroupHeading(options, attr(fit[[i]], "subgroup"), tempRow)
+        tempRow <- tempRow + 1
+      }
+
+
       # extract forest input
       if (doForest && length(forestInput) > 0) {
 
@@ -76,16 +84,20 @@
 
         if (!is.null(forestInput[[i]][["prediction"]])) {
           tempForestObjects    <- forestInput[[i]][["prediction"]]
-          tempForestObjects$y  <- tempForestInformation$y + (tempRow - 1)
+          tempForestObjects$y  <- tempForestObjects$y + (tempRow - 1)
           tempForestObjects$id <- paste(tempForestObjects$id, i, sep = "_")
           forestObjects[[length(forestObjects) + 1]]   <- tempForestObjects
         }
 
-        tempRow <- tempRow + nrow(tempForestInformation) + 1
+        tempRow <- max(tempForestInformation$y, na.rm = TRUE) + 2
       }
 
       # extract estimated marginal means input
       if (doEstimatedMarginalMeans && length(estimatedMarginalMeansInput) > 0){
+
+        # add a section heading
+        additionalInformation[[length(additionalInformation) + 1]] <- .forestPlotPanelHeading(gettext("Estimated Marginal Means"), tempRow)
+        tempRow <- tempRow + 1
 
         tempAdditionalInformation   <- estimatedMarginalMeansInput[[i]][["information"]]
         tempAdditionalInformation$y <- tempAdditionalInformation$y + (tempRow - 1)
@@ -98,11 +110,15 @@
           additionalObjects[[length(additionalObjects) + 1]]   <- tempAdditionalObjects
         }
 
-        tempRow <- tempRow + nrow(tempAdditionalInformation) + 1
+        tempRow <- max(tempAdditionalInformation$y, na.rm = TRUE) + 2
       }
 
       # extract model information input
       if (doModelInformation && length(modelInformationInput) > 0) {
+
+        # add a section heading
+        additionalInformation[[length(additionalInformation) + 1]] <- .forestPlotPanelHeading(gettext("Model Information"), tempRow)
+        tempRow <- tempRow + 1
 
         tempAdditionalInformation   <- modelInformationInput[[i]][["information"]]
         tempAdditionalInformation$y <- tempAdditionalInformation$y + (tempRow - 1)
@@ -115,7 +131,7 @@
           additionalObjects[[length(additionalObjects) + 1]]   <- tempAdditionalObjects
         }
 
-        tempRow <- tempRow + nrow(tempAdditionalInformation) + 1
+        tempRow <- max(tempAdditionalInformation$y, na.rm = TRUE) + 2
       }
     }
   } else {
@@ -125,16 +141,22 @@
 
       for (i in seq_along(fit)) {
 
-        # add space for forest header if specified
-        if (.forestPlotHasStudyInformationHeader(options)) {
-          forestHeaderIndex <- c(forestHeaderIndex, tempRow)
-          tempRow           <- tempRow + 1
-        }
-
         # skip individual sections in case a subgroup analysis is performed and we are at the full fit object
         # (which is in the end of the order)
         if (i == length(fit) && options[["subgroup"]] != "")
           next
+
+        # add a subgroup heading
+        if (options[["subgroup"]] != "") {
+          subgroupHeadings[[length(subgroupHeadings) + 1]] <- .forestPlotSubgroupHeading(options, attr(fit[[i]], "subgroup"), tempRow)
+          tempRow <- tempRow + 1
+        }
+
+        # add forest header if specified
+        if (.forestPlotHasStudyInformationHeader(options)) {
+          forestHeaderIndex <- c(forestHeaderIndex, tempRow)
+          tempRow           <- tempRow + 1
+        }
 
         tempForestInformation   <- forestInput[[i]][["forest"]]
         tempForestInformation$y <- tempForestInformation$y + (tempRow - 1)
@@ -142,23 +164,34 @@
 
         if (!is.null(forestInput[[i]][["prediction"]])) {
           tempForestObjects    <- forestInput[[i]][["prediction"]]
-          tempForestObjects$y  <- tempForestInformation$y + (tempRow - 1)
+          tempForestObjects$y  <- tempForestObjects$y + (tempRow - 1)
           tempForestObjects$id <- paste(tempForestObjects$id, i, sep = "_")
           forestObjects[[length(forestObjects) + 1]]   <- tempForestObjects
         }
 
-        tempRow <- tempRow + nrow(tempForestInformation) + 1
+        tempRow <- max(tempForestInformation$y, na.rm = TRUE) + 2
       }
     }
 
     # extract estimated marginal means input
     if (length(estimatedMarginalMeansInput) > 0){
 
+      # add a section heading
+      additionalInformation[[length(additionalInformation) + 1]] <- .forestPlotPanelHeading(gettext("Estimated Marginal Means"), tempRow)
+      tempRow <- tempRow + 1
+
       for (i in seq_along(fit)) {
 
         # skip individual sections in case a subgroup analysis is performed and we are at the full fit object
         if (i == length(fit) && options[["subgroup"]] != "" && !options[["forestPlotSubgroupFullDatasetEstimatedMarginalMeans"]])
           next
+
+        # add a subgroup heading
+        if (options[["subgroup"]] != "") {
+          subgroupHeadings[[length(subgroupHeadings) + 1]] <- .forestPlotSubgroupHeading(options, attr(fit[[i]], "subgroup"), tempRow)
+          tempRow <- tempRow + 1
+        }
+
 
         tempAdditionalInformation   <- estimatedMarginalMeansInput[[i]][["information"]]
         tempAdditionalInformation$y <- tempAdditionalInformation$y + (tempRow - 1)
@@ -171,18 +204,28 @@
           additionalObjects[[length(additionalObjects) + 1]]   <- tempAdditionalObjects
         }
 
-        tempRow <- tempRow + nrow(tempAdditionalInformation) + 1
+        tempRow <- max(tempAdditionalInformation$y, na.rm = TRUE) + 2
       }
     }
 
     # extract model information input
     if (length(modelInformationInput) > 0) {
 
+      # add a section heading
+      additionalInformation[[length(additionalInformation) + 1]] <- .forestPlotPanelHeading(gettext("Model Information"), tempRow)
+      tempRow <- tempRow + 1
+
       for (i in seq_along(fit)) {
 
         # skip individual sections in case a subgroup analysis is performed and we are at the full fit object
         if (i == length(fit) && options[["subgroup"]] != "" && !options[["forestPlotSubgroupFullDatasetModelInformation"]])
           next
+
+        # add a subgroup heading
+        if (options[["subgroup"]] != "") {
+          subgroupHeadings[[length(subgroupHeadings) + 1]] <- .forestPlotSubgroupHeading(options, attr(fit[[i]], "subgroup"), tempRow)
+          tempRow <- tempRow + 1
+        }
 
         tempAdditionalInformation   <- modelInformationInput[[i]][["information"]]
         tempAdditionalInformation$y <- tempAdditionalInformation$y + (tempRow - 1)
@@ -195,7 +238,7 @@
           additionalObjects[[length(additionalObjects) + 1]]   <- tempAdditionalObjects
         }
 
-        tempRow <- tempRow + nrow(tempAdditionalInformation) + 1
+        tempRow <- max(tempAdditionalInformation$y, na.rm = TRUE) + 2
       }
     }
   }
@@ -210,6 +253,8 @@
     additionalInformation <- do.call(rbind, additionalInformation[!sapply(additionalInformation, is.null)])
   if (!is.null(additionalObjects))
     additionalObjects     <- do.call(rbind, additionalObjects[!sapply(additionalObjects, is.null)])
+  if (!is.null(subgroupHeadings))
+    subgroupHeadings      <- do.call(rbind, subgroupHeadings[!sapply(subgroupHeadings, is.null)])
 
   # adjust y-coordinates
   if (!is.null(forestHeaderIndex))
@@ -222,7 +267,8 @@
     additionalInformation$y <- - additionalInformation$y * options[["forestPlotRelativeSizeRow"]]
   if (!is.null(additionalObjects))
     additionalObjects$y     <- - additionalObjects$y     * options[["forestPlotRelativeSizeRow"]]
-
+  if (!is.null(subgroupHeadings))
+    subgroupHeadings$y      <- - subgroupHeadings$y      * options[["forestPlotRelativeSizeRow"]]
 
   ### make the forest plot ----
   plotForest <- ggplot2::ggplot()
@@ -334,32 +380,36 @@
 
 
   ### make the left information panel ----
-  if ((options[["forestPlotStudyInformation"]] && length(options[["forestPlotStudyInformationSelectedVariablesSettings"]]) > 0) || length(additionalInformation) > 0) {
+  if ((options[["forestPlotStudyInformation"]] && length(options[["forestPlotStudyInformationSelectedVariables"]]) > 0) || length(additionalInformation) > 0) {
 
     plotLeft     <- ggplot2::ggplot()
     maxCharsLeft <- NULL
 
     # add forest information
-    if (options[["forestPlotStudyInformation"]] && length(options[["forestPlotStudyInformationSelectedVariablesSettings"]]) > 0) {
+    if (options[["forestPlotStudyInformation"]] && length(options[["forestPlotStudyInformationSelectedVariables"]]) > 0) {
 
       # build the study information header
       leftPanelStudyInformation <- .forestPlotBuildStudyInformationHeader(options, forestInformation, additionalInformation)
       maxCharsLeft              <- attr(leftPanelStudyInformation, "maxChars")
 
-      # compute study information coordinates
+      # compute study information x-coordinates
       leftPanelStudyInformation$x <- ifelse(
         leftPanelStudyInformation$alignment == "left", leftPanelStudyInformation$xStart, ifelse(
           leftPanelStudyInformation$alignment == "middle", (leftPanelStudyInformation$xStart + leftPanelStudyInformation$xEnd) / 2, leftPanelStudyInformation$xEnd
         ))
-      leftPanelStudyInformation <- do.call(rbind, lapply(forestHeaderIndex, function(y) {
-        leftPanelStudyInformation$y <- y
-        return(leftPanelStudyInformation)
-      }))
 
       # add titles
-      if (length(leftPanelStudyInformation) > 0) {
+      if (any(leftPanelStudyInformation$title != "")) {
+
+        # create the repeating title information
+        leftPanelTitleInformation <- leftPanelStudyInformation
+        leftPanelTitleInformation <- do.call(rbind, lapply(forestHeaderIndex, function(y) {
+          leftPanelTitleInformation$y <- y
+          return(leftPanelTitleInformation)
+        }))
+
         plotLeft <- plotLeft + ggplot2::geom_text(
-          data    = leftPanelStudyInformation,
+          data    = leftPanelTitleInformation,
           mapping = ggplot2::aes(
             x     = x,
             y     = y,
@@ -367,7 +417,7 @@
             hjust = alignment
           ),
           size     = 4 * options[["forestPlotRelativeSizeText"]],
-          vjust    = "midle",
+          vjust    = "middle",
           fontface = "bold"
         )
       }
@@ -390,7 +440,7 @@
             color = label
           ),
           size     = 4 * options[["forestPlotRelativeSizeText"]],
-          vjust    = "midle",
+          vjust    = "middle",
         )
       }
       if (any(leftPanelStudyInformation$value != options[["forestPlotMappingColor"]])) {
@@ -412,7 +462,7 @@
             hjust = alignment
           ),
           size     = 4 * options[["forestPlotRelativeSizeText"]],
-          vjust    = "midle",
+          vjust    = "middle",
         )
       }
     }
@@ -422,7 +472,7 @@
 
       # subset left panel information only
       leftPanelAdditionalInformation   <- additionalInformation[!is.na(additionalInformation$label),]
-      leftPanelAdditionalInformation$x <- 1
+      leftPanelAdditionalInformation$x <- .forestPlotLeftPanelAlign(options)
       leftPanelAdditionalInformation$face[is.na(leftPanelAdditionalInformation$face)] <- "plain"
       maxCharsLeft <- max(c(maxCharsLeft, max(nchar(leftPanelAdditionalInformation$label))), na.rm = TRUE)
 
@@ -436,17 +486,35 @@
           fontface  = face
         ),
         size     = 4 * options[["forestPlotRelativeSizeText"]],
-        hjust    = "right",
-        vjust    = "midle",
+        hjust    = .forestPlotLeftPanelHjust(options),
+        vjust    = "middle",
       )
     }
+
+    if (length(subgroupHeadings) > 0) {
+      # add subgroup headings
+      subgroupHeadings$x <- .forestPlotLeftPanelAlign(options)
+      plotLeft <- plotLeft + ggplot2::geom_text(
+        data    = subgroupHeadings,
+        mapping     = ggplot2::aes(
+          x         = x,
+          y         = y,
+          label     = label,
+          fontface  = face
+        ),
+        size     = 4 * options[["forestPlotRelativeSizeText"]],
+        hjust    = .forestPlotLeftPanelHjust(options),
+        vjust    = "middle",
+      )
+    }
+
 
   } else {
     plotLeft <- NULL
   }
 
   ### make the right information panel ----
-  if (.forestPlotHasrightPanel(options, additionalInformation)) {
+  if (.forestPlotHasRightPanel(options, additionalInformation)) {
 
     # estimates and confidence intervals
     if (options[["forestPlotEstimatesAndConfidenceIntervals"]]) {
@@ -734,16 +802,56 @@
   additionalVariables <- c(
     if (length(options[["forestPlotStudyInformationSelectedVariables"]]) > 0) unlist(options[["forestPlotStudyInformationSelectedVariables"]]),
     if (options[["forestPlotStudyInformationOrderBy"]] != "")                 options[["forestPlotStudyInformationOrderBy"]],
+    if (options[["forestPlotStudyInformationAggregateBy"]] != "")             options[["forestPlotStudyInformationAggregateBy"]],
     if (options[["forestPlotMappingColor"]] != "")                            options[["forestPlotMappingColor"]],
     if (options[["forestPlotMappingShape"]] != "")                            options[["forestPlotMappingShape"]]
   )
   if (length(additionalVariables) > 0)
     dfForest <- cbind(dfForest, dataset[,additionalVariables,drop=FALSE])
 
-  # TODO: temporal fix for the variable names in the Component list not being properly translated
-  # for (i in seq_along(options[["forestPlotStudyInformationSelectedVariables"]])) {
-  #   options[["forestPlotStudyInformationSelectedVariablesSettings"]][[i]][["value"]] <- options[["forestPlotStudyInformationSelectedVariables"]][[i]]
-  # }
+  # aggregate (cannot be simultanously with predicted effects)
+  if (options[["forestPlotStudyInformationAggregateBy"]] != "" && !options[["forestPlotStudyInformationPredictedEffects"]]) {
+#TODO
+    .forestAggregateForBoxplot <- function(dataset, options, additionalVariables) {
+
+      datasetSplit <- split(dfForest, dataset[[options[["forestPlotStudyInformationAggregateBy"]]]])
+      for (i in seq_along(datasetSplit)) {
+        datasetSplit[[i]]$y <- i
+      }
+
+      datasetSplitUnique   <- datasetSplit[sapply(datasetSplit, nrow) == 1]
+      datasetSplitMultiple <- datasetSplit[sapply(datasetSplit, nrow)  > 1]
+
+      datasetSplitMultiple <- lapply(datasetSplitMultiple, function(df) {
+
+        # create a base of the geom
+        tempGeom <- data.frame(
+          y      = df$y[1],
+          min    = min(df$effectSize),
+          lower  = quantile(df$effectSize, 0.25),
+          middle = median(df$effectSize),
+          upper  = quantile(df$effectSize, 0.75),
+          ymax   = max(df$effectSize),
+          geom   = "boxplot"
+        )
+
+        # add the additional variables
+        for (var in additionalVariables) {
+          tempGeom[[var]] <- .forestPlotAggregateVariable(df[[var]][1])
+        }
+
+        return(tempGeom)
+      })
+
+      datasetSplitMultiple <- lapply()
+      options[["forestPlotStudyInformationSelectedVariables"]]
+
+
+
+    }
+
+
+  }
 
   # re-order
   if (options[["forestPlotStudyInformationOrderBy"]] != "") {
@@ -826,21 +934,6 @@
   estimatedMarginalMeansCoefficientTestsRight <- options[["forestPlotEstimatedMarginalMeansCoefficientTests"]] && options[["forestPlotTestsInRightPanel"]]
   estimatedMarginalMeansCoefficientTestsBelow <- options[["forestPlotEstimatedMarginalMeansCoefficientTests"]] && !options[["forestPlotTestsInRightPanel"]] && options[["forestPlotPredictionIntervals"]]
   estimatedMarginalMeansCoefficientTestsLeft  <- options[["forestPlotEstimatedMarginalMeansCoefficientTests"]] && !options[["forestPlotTestsInRightPanel"]] && !options[["forestPlotPredictionIntervals"]]
-
-  # add header
-  additionalInformation[[tempRow]] <- data.frame(
-    "label"  = gettextf(
-      "Estimated Marginal Means%1$s",
-      if (options[["subgroup"]] != "") gettextf(" (Subgroup: %1$s)", attr(fit, "subgroup")) else ""
-    ),
-    "y"      = tempRow,
-    "est"    = NA,
-    "lCi"    = NA,
-    "uCi"    = NA,
-    "test"   = "",
-    "face"   = "bold"
-  )
-  tempRow <- tempRow + 1
 
   # add marginal estimates
   for (i in seq_along(estimatedMarginalMeansVariables)) {
@@ -985,21 +1078,6 @@
   tempRow <- 1
   additionalInformation <- list()
   additionalObjects     <- list()
-
-  # add Header
-  additionalInformation[[tempRow]] <- data.frame(
-    "label"  = gettextf(
-      "Model Fit%1$s",
-      if (options[["subgroup"]] != "") gettextf(" (Subgroup: %1$s)", attr(fit, "subgroup")) else ""
-    ),
-    "y"     = tempRow,
-    "est"   = NA,
-    "lCi"   = NA,
-    "uCi"   = NA,
-    "test"  = "",
-    "face"  = "bold"
-  )
-  tempRow <- tempRow + 1
 
   if (options[["forestPlotResidualHeterogeneityTest"]]) {
     additionalInformation[[tempRow]] <- data.frame(
@@ -1173,7 +1251,6 @@
     objects     = do.call(rbind, additionalObjects[!sapply(additionalObjects, is.null)])
   ))
 }
-
 .forestPlotBuildStudyInformationHeader <- function(options, forestInformation, additionalInformation) {
 
   # get study information panel header
@@ -1213,8 +1290,6 @@
   attr(leftPanelStudyInformation, "maxChars") <- maxCharsLeft
   return(leftPanelStudyInformation)
 }
-
-
 .forestPlotHasStudyInformationHeader   <- function(options) {
 
   # get study information panel header
@@ -1223,7 +1298,7 @@
   # check if any titles specified
   return(any(leftPanelStudyInformation[["title"]] != ""))
 }
-.forestPlotHasrightPanel               <- function(options, additionalInformation) {
+.forestPlotHasRightPanel               <- function(options, additionalInformation) {
 
   if (!options[["forestPlotStudyInformation"]] && length(additionalInformation) == 0)
     return(FALSE)
@@ -1237,4 +1312,90 @@
     return(TRUE)
   else
     return(FALSE)
+}
+.forestPlotSubgroupHeading             <- function(options, subgroup, tempRow) {
+
+  return(data.frame(
+    "label"  = if (subgroup == gettext("Full dataset")) gettext("Full Dataset") else gettextf("Subgroup: %1$s", subgroup),
+    "y"      = tempRow,
+    "est"    = NA,
+    "lCi"    = NA,
+    "uCi"    = NA,
+    "test"   = "",
+    "face"   = "bold"
+  ))
+}
+.forestPlotPanelHeading                <- function(panel, tempRow) {
+
+  return(data.frame(
+    "label"  = panel,
+    "y"      = tempRow,
+    "est"    = NA,
+    "lCi"    = NA,
+    "uCi"    = NA,
+    "test"   = "",
+    "face"   = "bold"
+  ))
+}
+.forestPlotSubgroupTitles              <- function(options, section, subgroup) {
+
+  # return the default if no subgroups are specified
+  if (options[["subgroup"]] == "")
+    return(section)
+
+  # if output is grouped by subgroups, add a subgroup title only at the beginning: no section needs a subgroup title
+  # handled within the reordering of the data
+  if (options[["forestPlotSubgroupPanelsWithinSubgroup"]])
+    return(section)
+
+  # if output is grouped by panels, add only a subgroup title
+  if (subgroup == gettext("Full dataset")) {
+    return(gettext("Full dataset"))
+  } else {
+    return(gettextf("Subgroup: %2$s"))
+  }
+}
+.forestPlotLeftPanelAlign              <- function(options) {
+  return(switch(
+    options[["forestPlotAllignLeftPanel"]],
+    "left"   = 0,
+    "middle" = 0.5,
+    "right"  = 1
+  ))
+}
+.forestPlotLeftPanelHjust              <- function(options) {
+  return(switch(
+    options[["forestPlotAllignLeftPanel"]],
+    "left"   = 0,
+    "middle" = 0.5,
+    "right"  = 1
+  ))
+}
+.forestPlotAggregateVariable           <- function(x) {
+  if (length(unique(x)) == 1) {
+    return(unique(x))
+  } else {
+    x <- table(x)
+    x <- x[x > 0]
+    xNames <- names(x)
+    xFreqs <- paste0(" (", x, ")")
+    xFreqs[xFreqs == " (1)"] <- ""
+    return(paste0(xNames, xFreqs, collapse = ", "))
+  }
+}
+.forestPlotBoxplot <- function(x) {
+  y <- rnorm(2)
+  df <- data.frame(
+    x = 1,
+    y0 = min(y),
+    y25 = quantile(y, 0.25),
+    y50 = median(y),
+    y75 = quantile(y, 0.75),
+    y100 = max(y)
+  )
+  ggplot(df, aes(x)) +
+    geom_boxplot(
+      aes(ymin = y0, lower = y25, middle = y50, upper = y75, ymax = y100),
+      stat = "identity"
+    )
 }

@@ -67,6 +67,9 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotStudyInformationStudyWeights",
   "forestPlotStudyInformationOrderBy",
   "forestPlotStudyInformationOrderAscending",
+  "forestPlotStudyInformationAggregateBy",
+  "forestPlotStudyInformationAggregateMethod",
+  "forestPlotStudyInformationAggregateMethodBubbleRelativeSize",
   "forestPlotEstimatedMarginalMeans",
   "forestPlotEstimatedMarginalMeansModelVariables",
   "forestPlotEstimatedMarginalMeansSelectedVariables",
@@ -89,6 +92,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotPredictionIntervals",
   "forestPlotEstimatesAndConfidenceIntervals",
   "forestPlotTestsInRightPanel",
+  "forestPlotAllignLeftPanel",
   "forestPlotSubgroupPanelsWithinSubgroup",
   "forestPlotSubgroupFullDatasetEstimatedMarginalMeans",
   "forestPlotSubgroupFullDatasetModelInformation",
@@ -138,6 +142,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 .maDataPlottingDependencies <- c(
   "forestPlotStudyInformationSelectedVariables",
   "forestPlotStudyInformationOrderBy",
+  "forestPlotStudyInformationAggregateBy",
   "forestPlotMappingColor",
   "forestPlotMappingShape"
 )

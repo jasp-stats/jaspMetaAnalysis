@@ -121,6 +121,7 @@ Section
 			CheckBox
 			{
 				name:		"forestPlotStudyInformationPredictedEffects"
+				id:			forestPlotStudyInformationPredictedEffects
 				text:		qsTr("Predicted effects")
 				enabled:	effectSize.count == 1 && effectSizeStandardError.count == 1
 				checked:	false
@@ -155,21 +156,70 @@ Section
 
 		Group
 		{
-			title:		qsTr("Order")
-			info: qsTr("Order the study-level information panel by a variable.")
 
-			DropDown
+			Group
 			{
-				name:			"forestPlotStudyInformationOrderBy"
-				label:			qsTr("By")
-				addEmptyValue:	true
-				fieldWidth:		125 * preferencesModel.uiScale
+				title:		qsTr("Order")
+				info: qsTr("Order the study-level information panel by a variable.")
+
+				DropDown
+				{
+					name:			"forestPlotStudyInformationOrderBy"
+					label:			qsTr("By")
+					addEmptyValue:	true
+					fieldWidth:		125 * preferencesModel.uiScale
+				}
+
+				CheckBox
+				{
+					name:		"forestPlotStudyInformationOrderAscending"
+					text:		qsTr("Ascending")
+				}
 			}
 
-			CheckBox
+			Group
 			{
-				name:		"forestPlotStudyInformationOrderAscending"
-				text:		qsTr("Ascending")
+				title:		qsTr("Aggregate")
+				enabled:	!forestPlotStudyInformationPredictedEffects.checked
+				info: qsTr("Aggregate the study-level information panel by a variable. Not available if `Predicted effects` is selected.")
+
+				DropDown
+				{
+					name:			"forestPlotStudyInformationAggregateBy"
+					label:			qsTr("By")
+					addEmptyValue:	true
+					fieldWidth:		125 * preferencesModel.uiScale
+				}
+
+				RadioButtonGroup
+				{
+					name:			"forestPlotStudyInformationAggregateMethod"
+					info: qsTr("Select the method for aggregating the estimates of the study-level information panel.")
+
+					RadioButton
+					{
+						name: 		"boxplot";
+						label: 		qsTr("Boxplot")
+						checked: 	true
+					}
+
+					RadioButton
+					{
+						name: 				"bubbles"
+						label: 				qsTr("Bubbles")
+						childrenOnSameRow: 	true
+
+						DoubleField
+						{
+							name:			"forestPlotStudyInformationAggregateMethodBubbleRelativeSize"
+							label:			qsTr("Relative size")
+							defaultValue:	1
+							min:			0
+							inclusive: 		JASP.None
+							info: qsTr("Set the relative size of the observed estimates.")
+						}
+					}
+				}
 			}
 		}
 	}
@@ -406,29 +456,48 @@ Section
 
 		Group
 		{
-			CheckBox
+			Group
 			{
-				name:		"forestPlotPredictionIntervals"
-				text:		qsTr("Prediction intervals")
-				checked:	true
-				Layout.preferredWidth: 300 * jaspTheme.uiScale
-				info: qsTr("Include prediction intervals of the estimated marginal means and the model information output.")
-			}
+				title:		qsTr("General")
 
-			CheckBox
-			{
-				name:			"forestPlotEstimatesAndConfidenceIntervals"
-				text:			qsTr("Estimates and confidence intervals")
-				checked:		true
-				info: qsTr("Include effect size estimates and confidence intervals summary text in the right panel of the forest plot.")
-			}
+				CheckBox
+				{
+					name:		"forestPlotPredictionIntervals"
+					text:		qsTr("Prediction intervals")
+					checked:	true
+					Layout.preferredWidth: 300 * jaspTheme.uiScale
+					info: qsTr("Include prediction intervals of the estimated marginal means and the model information output.")
+				}
 
-			CheckBox
-			{
-				name:			"forestPlotTestsInRightPanel"
-				text:			qsTr("Tests in right panel")
-				checked:		false
-				info: qsTr("Move test results text to the right panel.")
+				CheckBox
+				{
+					name:			"forestPlotEstimatesAndConfidenceIntervals"
+					text:			qsTr("Estimates and confidence intervals")
+					checked:		true
+					info: qsTr("Include effect size estimates and confidence intervals summary text in the right panel of the forest plot.")
+				}
+
+				CheckBox
+				{
+					name:			"forestPlotTestsInRightPanel"
+					text:			qsTr("Tests in right panel")
+					checked:		false
+					info: qsTr("Move test results text to the right panel.")
+				}
+
+				DropDown
+				{
+					name:			"forestPlotAllignLeftPanel"
+					label:			qsTr("Align left panel")
+					enabled:		forestPlotModelInformation.checked || forestPlotEstimatedMarginalMeans.checked
+					startValue:		"right"
+					info: qsTr("Align text of the `Estimated marginal means` and  `Model Information` sections.")
+					values:		[
+						{ label: qsTr("Left")		, value: "left"		},
+						{ label: qsTr("Middle")		, value: "middle"	},
+						{ label: qsTr("Right")		, value: "right"	}
+					]
+				}
 			}
 
 			Group
