@@ -26,7 +26,7 @@ Form
 
 	VariablesForm
 	{
-		preferredHeight: 450 * preferencesModel.uiScale
+		preferredHeight: 525 * preferencesModel.uiScale
 
 		AvailableVariablesList
 		{
@@ -102,6 +102,16 @@ Form
 			singleVariable:		true
 			allowedColumns:		["nominal"]
 			info: qsTr("Variable containing labels for the studies. Used for labeling outputs and plots.")
+		}
+		
+		AssignedVariablesList
+		{
+			name:				"subgroup"
+			id:					subgroup
+			title:				qsTr("Subgroup")
+			singleVariable:		true
+			allowedColumns:		["nominal"]
+			info: qsTr("Variable indicating subgroup stratification. For each subgroup, an independent model is fitted to the corresponding data set subset.")
 		}
 	}
 

@@ -4785,12 +4785,12 @@
   messages <- NULL
 
   if (options[["clustering"]] == "") {
-    fit <- fit[[1]]
-    if (!jaspBase::isTryError(fit) && !is.null(fit)){
-      if (all(fit[["tcl"]][1] == fit[["tcl"]]))
-        messages <- c(messages, gettextf("%1$i clusters with %2$i estimates each.", fit[["n"]],  fit[["tcl"]][1]))
+    tempFit <- fit[[1]]
+    if (!jaspBase::isTryError(tempFit) && !is.null(tempFit)){
+      if (all(tempFit[["tcl"]][1] == tempFit[["tcl"]]))
+        messages <- c(messages, gettextf("%1$i clusters with %2$i estimates each.", tempFit[["n"]],  tempFit[["tcl"]][1]))
       else
-        messages <- c(messages, gettextf("%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates.", fit[["n"]],  min(fit[["tcl"]]), median(fit[["tcl"]]), max(fit[["tcl"]])))
+        messages <- c(messages, gettextf("%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates.", tempFit[["n"]],  min(tempFit[["tcl"]]), median(tempFit[["tcl"]]), max(tempFit[["tcl"]])))
     }
   } else {
     for (i in seq_along(fit)) {
@@ -4830,7 +4830,7 @@
   if (!is.null(attr(dataset, "influentialObservations")) && attr(dataset, "influentialObservations") > 0)
     messages <- c(messages, gettextf("%1$i influential observations were detected and removed.", attr(dataset, "influentialObservations")))
 
-  if (.maIsMultilevelMultivariate(options) && any(attr(fit, "skipped")) && !jaspBase::isTryError(fit[[1]]))
+  if (.maIsMultilevelMultivariate(options) && any(attr(fit[[1]], "skipped")) && !jaspBase::isTryError(fit[[1]]))
     messages <- c(messages, gettextf("The Model Structure %1$s was not completely specified and was skipped.", paste0(which(attr(fit[[1]], "skipped")), collapse = " and ")))
 
   if (.mammAnyStructureGen(options) && options[["predictionIntervals"]])
