@@ -12,6 +12,11 @@
   options[["confidenceIntervals"]] <- TRUE
   options[["predictionIntervals"]] <- options[["forestPlotPredictionIntervals"]]
 
+  # overwrite aggregation options: predicted effects cannot be performed simultaneously with predicted effects
+  if (options[["forestPlotStudyInformationAggregateBy"]] != "") {
+    options[["forestPlotStudyInformationPredictedEffects"]] <- FALSE
+  }
+
   ### initiate objects for generating the forest plot ----
   forestInput                 <- list() # this list carries the study information
   estimatedMarginalMeansInput <- list() # this list carries estimated marginal means information
@@ -84,6 +89,13 @@
 
         if (!is.null(forestInput[[i]][["prediction"]])) {
           tempForestObjects    <- forestInput[[i]][["prediction"]]
+          tempForestObjects$y  <- tempForestObjects$y + (tempRow - 1)
+          tempForestObjects$id <- paste(tempForestObjects$id, i, sep = "_")
+          forestObjects[[length(forestObjects) + 1]]   <- tempForestObjects
+        }
+
+        if (!is.null(forestInput[[i]][["geoms"]])) {
+          tempForestObjects    <- forestInput[[i]][["geoms"]]
           tempForestObjects$y  <- tempForestObjects$y + (tempRow - 1)
           tempForestObjects$id <- paste(tempForestObjects$id, i, sep = "_")
           forestObjects[[length(forestObjects) + 1]]   <- tempForestObjects
@@ -164,6 +176,13 @@
 
         if (!is.null(forestInput[[i]][["prediction"]])) {
           tempForestObjects    <- forestInput[[i]][["prediction"]]
+          tempForestObjects$y  <- tempForestObjects$y + (tempRow - 1)
+          tempForestObjects$id <- paste(tempForestObjects$id, i, sep = "_")
+          forestObjects[[length(forestObjects) + 1]]   <- tempForestObjects
+        }
+
+        if (!is.null(forestInput[[i]][["geoms"]])) {
+          tempForestObjects    <- forestInput[[i]][["geoms"]]
           tempForestObjects$y  <- tempForestObjects$y + (tempRow - 1)
           tempForestObjects$id <- paste(tempForestObjects$id, i, sep = "_")
           forestObjects[[length(forestObjects) + 1]]   <- tempForestObjects
@@ -276,60 +295,110 @@
   # study information panel estimates
   if (options[["forestPlotStudyInformation"]]) {
 
-    # add prediction intervals
-    if (options[["forestPlotStudyInformationPredictedEffects"]]) {
-      # dispatch the aes call based on mapping
-      aesCall <- list(
-        x     = as.name("x"),
-        y     = as.name("y"),
-        group = as.name("id"),
-        fill  = if (options[["forestPlotMappingColor"]] != "") as.name(options[["forestPlotMappingColor"]])
-      )
-      geomCall <- list(
-        data    = forestObjects,
-        mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
-        fill    = if (options[["forestPlotMappingColor"]] == "") "grey20",
-        alpha   = 0.8
-      )
-      plotForest <- plotForest + do.call(ggplot2::geom_polygon, geomCall[!sapply(geomCall, is.null)])
+    # add boxplot/bubbleplot
+    if (options[["forestPlotStudyInformationAggregateBy"]] != "") {
+      if (options[["forestPlotStudyInformationAggregateMethod"]] == "boxplot") {
+        # dispatch the aes call based on mapping
+        aesCall <- list(
+          y       = as.name("y"),
+          group   = as.name("id"),
+          xmin    = as.name("min"),
+          xlower  = as.name("lower"),
+          xmiddle = as.name("middle"),
+          xupper  = as.name("upper"),
+          xmax    = as.name("max"),
+          fill    = if (options[["forestPlotMappingColor"]] != "") as.name(options[["forestPlotMappingColor"]])
+        )
+        geomCall <- list(
+          data    = forestObjects,
+          mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
+          fill    = if (options[["forestPlotMappingColor"]] == "") "grey20",
+          alpha   = 0.8,
+          orientation = "y",
+          stat    = "identity"
+        )
+        plotForest <- plotForest + do.call(ggplot2::geom_boxplot, geomCall[!sapply(geomCall, is.null)])
+
+      } else if (options[["forestPlotStudyInformationAggregateMethod"]] == "bubbles") {
+
+        # dispatch the aes call based on mapping TODO
+        aesCall <- list(
+          y     = as.name("y"),
+          x     = as.name("x"),
+          size  = as.name("weight"),
+          fill  = if (options[["forestPlotMappingColor"]] != "") as.name(options[["forestPlotMappingColor"]]),
+          color = if (options[["forestPlotMappingColor"]] != "") as.name(options[["forestPlotMappingColor"]])
+        )
+        geomCall <- list(
+          data      = forestObjects,
+          mapping   = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
+          fill      = if (options[["forestPlotMappingColor"]] == "") "grey20",
+          alpha     = 0.8,
+          position  = ggplot2::position_jitter(
+            width       = 0,
+            height      = 0.10
+          )
+        )
+        plotForest <- plotForest + do.call(jaspGraphs::geom_point, geomCall[!sapply(geomCall, is.null)]) +
+          ggplot2::scale_size(range = c(1.5, 10) * options[["forestPlotStudyInformationAggregateMethodBubbleRelativeSize"]])
+      }
     }
 
-    ### add estimates
-    # dispatch the aes call based on mapping:
-    aesCall <- list(
-      x     = as.name("effectSize"),
-      y     = as.name("y"),
-      color = if (options[["forestPlotMappingColor"]] != "") as.name(options[["forestPlotMappingColor"]]),
-      shape = if (options[["forestPlotMappingShape"]] != "") as.name(options[["forestPlotMappingShape"]]),
-      size  = as.name("weights")
-    )
-    geomCall <- list(
-      data    = forestInformation,
-      mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
-      color   = if (options[["forestPlotMappingColor"]] == "") options[["forestPlotAuxiliaryPlotColor"]],
-      shape   = if (options[["forestPlotMappingShape"]] == "") 15
-    )
-    plotForest <- plotForest + do.call(ggplot2::geom_point, geomCall[!sapply(geomCall, is.null)]) +
-      ggplot2::scale_size(range = c(1, 6) * options[["forestPlotRelativeSizeEstimates"]])
+    # add estimates
+    if (options[["forestPlotStudyInformationAggregateBy"]] == "") {
+
+      # add prediction intervals
+      if (options[["forestPlotStudyInformationPredictedEffects"]]) {
+        # dispatch the aes call based on mapping
+        aesCall <- list(
+          x     = as.name("x"),
+          y     = as.name("y"),
+          group = as.name("id"),
+          fill  = if (options[["forestPlotMappingColor"]] != "") as.name(options[["forestPlotMappingColor"]])
+        )
+        geomCall <- list(
+          data    = forestObjects,
+          mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
+          fill    = if (options[["forestPlotMappingColor"]] == "") "grey20",
+          alpha   = 0.8
+        )
+        plotForest <- plotForest + do.call(ggplot2::geom_polygon, geomCall[!sapply(geomCall, is.null)])
+      }
+
+      # dispatch the aes call based on mapping
+      aesCall <- list(
+        x     = as.name("effectSize"),
+        y     = as.name("y"),
+        color = if (options[["forestPlotMappingColor"]] != "") as.name(options[["forestPlotMappingColor"]]),
+        shape = if (options[["forestPlotMappingShape"]] != "") as.name(options[["forestPlotMappingShape"]]),
+        size  = as.name("weights")
+      )
+      geomCall <- list(
+        data    = forestInformation,
+        mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
+        color   = if (options[["forestPlotMappingColor"]] == "") options[["forestPlotAuxiliaryPlotColor"]],
+        shape   = if (options[["forestPlotMappingShape"]] == "") 15
+      )
+      plotForest <- plotForest + do.call(ggplot2::geom_point, geomCall[!sapply(geomCall, is.null)]) +
+        ggplot2::scale_size(range = c(1, 6) * options[["forestPlotRelativeSizeEstimates"]])
 
 
-    # change scale for shapes to full shapes if used
-    if (options[["forestPlotMappingShape"]] != "")
-      plotForest <- plotForest + ggplot2::scale_shape_manual(values = rep(c(15:18, 21:25), length.out = length(unique(forestInformation[[options[["forestPlotMappingShape"]]]]))))
+      # change scale for shapes to full shapes if used
+      if (options[["forestPlotMappingShape"]] != "")
+        plotForest <- plotForest + ggplot2::scale_shape_manual(values = rep(c(15:18, 21:25), length.out = length(unique(forestInformation[[options[["forestPlotMappingShape"]]]]))))
 
+      ### add CIs
+      plotForest <- plotForest + ggplot2::geom_errorbarh(
+        data    = forestInformation,
+        mapping = ggplot2::aes(
+          xmin = lCi,
+          xmax = uCi,
+          y    = y
+        ),
+        height = 0
+      )
 
-    ### add CIs
-    plotForest <- plotForest + ggplot2::geom_errorbarh(
-      data    = forestInformation,
-      mapping = ggplot2::aes(
-        xmin = lCi,
-        xmax = uCi,
-        y    = y
-      ),
-      height = 0
-    )
-
-    if (options[["forestPlotStudyInformationSecondaryConfidenceInterval"]]) {
+      if (options[["forestPlotStudyInformationSecondaryConfidenceInterval"]]) {
       plotForest <- plotForest + ggplot2::geom_errorbarh(
         data    = forestInformation,
         mapping = ggplot2::aes(
@@ -341,7 +410,7 @@
         height = 0.3
       )
     }
-
+    }
   }
 
   # add additional information
@@ -517,7 +586,7 @@
   if (.forestPlotHasRightPanel(options, additionalInformation)) {
 
     # estimates and confidence intervals
-    if (options[["forestPlotEstimatesAndConfidenceIntervals"]]) {
+    if (options[["forestPlotEstimatesAndConfidenceIntervals"]] && options[["forestPlotStudyInformationAggregateBy"]] == "") {
 
       ### join the est and Cis for the right panel
       rightPanelCis <- rbind(
@@ -630,7 +699,7 @@
   } else {
     xBreaks <- jaspGraphs::getPrettyAxisBreaks(range(c(
       forestInformation$lCi, forestInformation$uCi,
-      forestObjects$x,
+      forestObjects$x, forestObjects$min,  forestObjects$max,
       additionalInformation$lCi, additionalInformation$uCi,
       additionalObjects$x
     ), na.rm = TRUE))
@@ -809,60 +878,30 @@
   if (length(additionalVariables) > 0)
     dfForest <- cbind(dfForest, dataset[,additionalVariables,drop=FALSE])
 
-  # aggregate (cannot be simultanously with predicted effects)
-  if (options[["forestPlotStudyInformationAggregateBy"]] != "" && !options[["forestPlotStudyInformationPredictedEffects"]]) {
-#TODO
-    .forestAggregateForBoxplot <- function(dataset, options, additionalVariables) {
+  ### aggregate the forest information
+  if (options[["forestPlotStudyInformationAggregateBy"]] != "") {
 
-      datasetSplit <- split(dfForest, dataset[[options[["forestPlotStudyInformationAggregateBy"]]]])
-      for (i in seq_along(datasetSplit)) {
-        datasetSplit[[i]]$y <- i
-      }
+    # aggregate the data
+    dfAggregate <- .forestStudyInformationAggregate(dfForest, options, additionalVariables)
+    dfForest    <- dfAggregate$forest
+    dfGeoms     <- dfAggregate$geoms
 
-      datasetSplitUnique   <- datasetSplit[sapply(datasetSplit, nrow) == 1]
-      datasetSplitMultiple <- datasetSplit[sapply(datasetSplit, nrow)  > 1]
-
-      datasetSplitMultiple <- lapply(datasetSplitMultiple, function(df) {
-
-        # create a base of the geom
-        tempGeom <- data.frame(
-          y      = df$y[1],
-          min    = min(df$effectSize),
-          lower  = quantile(df$effectSize, 0.25),
-          middle = median(df$effectSize),
-          upper  = quantile(df$effectSize, 0.75),
-          ymax   = max(df$effectSize),
-          geom   = "boxplot"
-        )
-
-        # add the additional variables
-        for (var in additionalVariables) {
-          tempGeom[[var]] <- .forestPlotAggregateVariable(df[[var]][1])
-        }
-
-        return(tempGeom)
-      })
-
-      datasetSplitMultiple <- lapply()
-      options[["forestPlotStudyInformationSelectedVariables"]]
-
-
-
-    }
-
-
+  } else {
+    dfGeoms <- NULL
   }
 
-  # re-order
+  ### re-order
   if (options[["forestPlotStudyInformationOrderBy"]] != "") {
     dfForest <- dfForest[order(
-      dfForest[,options[["forestPlotStudyInformationOrderBy"]]],
+      dfForest[[options[["forestPlotStudyInformationOrderBy"]]]],
       decreasing = options[["forestPlotStudyInformationOrderAscending"]]),]
   }
 
-  # add y-axis coordinates for plotting
+  ### add y-axis coordinates for plotting
   dfForest$y <- seq(nrow(dfForest))
-
+  if (!is.null(dfGeoms)) {
+    dfGeoms <- merge(dfGeoms, dfForest[,colnames(dfForest) %in% c("id", "y")], by = "id")
+  }
 
   ### add predicted effects
   if (options[["forestPlotStudyInformationPredictedEffects"]]) {
@@ -896,7 +935,8 @@
   # return
   return(list(
     forest     = dfForest,
-    prediction = dfForestPrediction
+    prediction = dfForestPrediction,
+    geoms      = dfGeoms
   ))
 }
 .forestPlotBuildEstimatedMarginalMeans <- function(fit, options){
@@ -1383,19 +1423,81 @@
     return(paste0(xNames, xFreqs, collapse = ", "))
   }
 }
-.forestPlotBoxplot <- function(x) {
-  y <- rnorm(2)
-  df <- data.frame(
-    x = 1,
-    y0 = min(y),
-    y25 = quantile(y, 0.25),
-    y50 = median(y),
-    y75 = quantile(y, 0.75),
-    y100 = max(y)
-  )
-  ggplot(df, aes(x)) +
-    geom_boxplot(
-      aes(ymin = y0, lower = y25, middle = y50, upper = y75, ymax = y100),
-      stat = "identity"
-    )
+.forestStudyInformationAggregate       <- function(dfForest, options, additionalVariables) {
+
+  # split the data set by the grouping variable
+  datasetSplit <- split(dfForest, dfForest[[options[["forestPlotStudyInformationAggregateBy"]]]])
+
+  # add id to each split index
+  for (i in seq_along(datasetSplit)) {
+    datasetSplit[[i]]$id <- i
+  }
+
+  if (options[["forestPlotStudyInformationAggregateMethod"]] == "boxplot") {
+
+    datasetAggregated <- do.call(rbind, lapply(datasetSplit, function(df) {
+
+      # create a base of the geom
+      tempDf <- data.frame(
+        id     = df$id[1],
+        min    = min(df$effectSize),
+        lower  = quantile(df$effectSize, 0.25),
+        middle = median(df$effectSize),
+        upper  = quantile(df$effectSize, 0.75),
+        max    = max(df$effectSize),
+        geom   = "boxplot"
+      )
+
+      # add the additional variables
+      for (var in additionalVariables) {
+        tempDf[[var]] <- .forestPlotAggregateVariable(df[[var]])
+      }
+
+      return(tempDf)
+    }))
+
+    # split into study information and geoms
+    dfGeoms  <- datasetAggregated
+    dfForest <- datasetAggregated[,!colnames(datasetAggregated) %in% c("min", "lower", "middle", "upper", "max", "geom"),drop=FALSE]
+
+
+  } else if (options[["forestPlotStudyInformationAggregateMethod"]] == "bubbles") {
+
+    dfForest <- do.call(rbind, lapply(datasetSplit, function(df) {
+
+      tempDf <- data.frame(
+        id     = df$id[1]
+      )
+
+      # add the additional variables
+      for (var in additionalVariables) {
+        tempDf[[var]] <- .forestPlotAggregateVariable(df[[var]])
+      }
+
+      return(tempDf)
+    }))
+    dfGeoms  <- do.call(rbind, lapply(datasetSplit, function(df) {
+
+      # create a base of the geom
+      tempDf <- data.frame(
+        id      = df$id[1],
+        x       = df$effectSize,
+        weight  = 1/df$standardError^2,
+        geom    = "bubbles"
+      )
+
+      # add the additional variables
+      for (var in additionalVariables) {
+        tempDf[[var]] <- .forestPlotAggregateVariable(df[[var]])
+      }
+
+      return(tempDf)
+    }))
+
+  }
+
+  return(list(
+    forest = dfForest,
+    geoms  = dfGeoms
+  ))
 }

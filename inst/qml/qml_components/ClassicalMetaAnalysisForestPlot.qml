@@ -180,8 +180,7 @@ Section
 			Group
 			{
 				title:		qsTr("Aggregate")
-				enabled:	!forestPlotStudyInformationPredictedEffects.checked
-				info: qsTr("Aggregate the study-level information panel by a variable. Not available if `Predicted effects` is selected.")
+				info: qsTr("Aggregate the study-level information panel by a variable. If selected, `Predicted effects` and all `Study information` in the tight panel is supressed.")
 
 				DropDown
 				{

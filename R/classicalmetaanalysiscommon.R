@@ -3127,7 +3127,7 @@
   hasSeparateLines <- attr(dfPlot, "separateLines") != ""
   hasSeparatePlots <- attr(dfPlot, "separatePlots") != ""
 
-  ### add prediction bads
+  ### add prediction bands
   if (options[["bubblePlotPredictionIntervals"]]) {
 
     geomPi <- .maBubblePlotMakeCiGeom(dfPlot, options, ci = FALSE)
