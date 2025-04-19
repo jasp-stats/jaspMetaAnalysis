@@ -38,8 +38,8 @@ Form
 			title:				qsTr("Correlation/Covariance Matrix")
 			allowedColumns:		["scale"]
 			height:				250 * preferencesModel.uiScale
-			info: qsTr("Variables containing the correlations/covariances between the variables. " + 
-			"The variable name must be in a form `x_y` where `x` and `y` corresponds to the variables between which the correlation/covariance is reported. " + 
+			info: qsTr("Variables containing the correlations/covariances between the variables. " +
+			"The variable name must be in a form `x_y` where `x` and `y` corresponds to the variables between which the correlation/covariance is reported. " +
 			"The separator used in the variable names (defaults to `_`) can be changed via the `Variable name separator` option.")
 		}
 
@@ -99,7 +99,7 @@ Form
 				checked:	true
 				info:		qsTr("Select this option for a correlation input.")
 			}
-			
+
 			RadioButton
 			{
 				name:		"covariance"
@@ -126,21 +126,31 @@ Form
 
 	Group
 	{
-		title: qsTr("Input Summary")
-
 		CheckBox
 		{
-			name:		"inputSummaryAvailableVariableNames"
+			name:		"availableVariableNames"
 			label:		qsTr("Available variable names")
 			checked:	true
 			info:		qsTr("Show a summary of the available variable names in the correlation/covariance matrix input.")
 		}
 
-		CheckBox
+		Group
 		{
-			name:		"inputSummaryFrequencyTable"
-			label:		qsTr("Frequency table")
-			info:		qsTr("Show a frequency table of the variables in the correlation/covariance matrix input.")
+			title: qsTr("Descriptives")
+
+			CheckBox
+			{
+				name:		"numberOfEstimates"
+				label:		qsTr("Number of estimates")
+				info:		qsTr("Show a frequency table of the estimates in the correlation/covariance matrix input.")
+			}
+
+			CheckBox
+			{
+				name:		"numberOfObservations"
+				label:		qsTr("Number of observations")
+				info:		qsTr("Show a frequency table of the observations in the correlation/covariance matrix input.")
+			}
 		}
 	}
 
@@ -160,7 +170,7 @@ Form
 				name:		        "syntax"
 				id:			        syntax
 				textType:	        JASP.TextTypeMetaSem
-                variableSeparator:  "_" 
+                variableSeparator:  "_"
 				info:		        qsTr("Specify model using a lavaan style syntax.")
 			}
 
@@ -239,7 +249,7 @@ Form
 		}
 
 	}
-	
+
 
 	Group
 	{
@@ -261,10 +271,10 @@ Form
 
 			CheckBox
 			{
-				name:		"modelSummaryParameters"
-				label:		qsTr("Parameters")
+				name:		"modelSummaryRegression"
+				label:		qsTr("Regression")
 				checked:	true
-				info:		qsTr("Show parameter estimates (A-Matrix) in the model summary.")
+				info:		qsTr("Show regression estimates (A-Matrix) in the model summary.")
 			}
 
 			CheckBox
@@ -293,6 +303,14 @@ Form
 					{ label: qsTr("Likelihood based")   , value: "likelihoodBased"	}
 				]
 				info:		qsTr("Method for computing confidence interval.")
+			}
+
+			CheckBox
+			{
+				label:		qsTr("Show matrix indices")
+				name:		"modelSummaryShowMatrixIndices"
+				checked:	false
+				info:		qsTr("Show matrix indices (rows/columns) in the model summary.")
 			}
 		}
 	}
@@ -336,15 +354,15 @@ Form
 				value: 6
 				info: qsTr("Width of manifest nodes.")
 			}
-			
-			DoubleField 
+
+			DoubleField
 			{
 				name: "pathDiagramLatentNodeWidth"
 				label: qsTr("Latent node width")
 				value: 8
 				info: qsTr("Width of latent nodes.")
 			}
-			
+
 			DoubleField
 			{
 				name: "pathDiagramUnitVectorNodeWidth"
@@ -352,7 +370,7 @@ Form
 				value: 8
 				info: qsTr("Width of unit vector nodes.")
 			}
-			
+
 			DoubleField
 			{
 				name: "pathDiagramLabelSize"
@@ -360,7 +378,7 @@ Form
 				value: 1.3
 				info: qsTr("Size of the labels.")
 			}
-			
+
 			DoubleField
 			{
 				name: "pathDiagramEdgeLabelSize"
