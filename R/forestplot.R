@@ -619,7 +619,7 @@
 
     ### tests and weights right panel
     rightPanelTestsAndWeights <- rbind(
-      if (options[["forestPlotStudyInformation"]] > 0 && options[["forestPlotStudyInformationStudyWeights"]]) {
+      if (options[["forestPlotStudyInformation"]] > 0 && options[["forestPlotStudyInformationStudyWeights"]] && options[["forestPlotStudyInformationAggregateBy"]] == "") {
         tempDf <- forestInformation[,c("y", "weights")]
         tempDf$label <- paste0(sprintf(paste0("%1$.", options[["forestPlotAuxiliaryDigits"]], "f"), tempDf$weights), " %")
         tempDf[,c("y", "label")]
