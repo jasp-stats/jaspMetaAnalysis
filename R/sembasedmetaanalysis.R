@@ -25,6 +25,9 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   # read the data set
   dataset <- .masemReadData(dataset)
 
+  saveRDS(options, file = "C:/JASP/options.RDS")
+  saveRDS(dataset, file = "C:/JASP/dataset.RDS")
+
   # estimate the models
   .masemFitModels(jaspResults, dataset, options)
 
@@ -84,12 +87,14 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
     # (only run on initialization)
     modelContainer <- createJaspState()
     jaspResults[["modelContainer"]] <- modelContainer
+    if (MASEM)
+      modelContainer$dependOn(c("correlationCovarianceMatrix", "means", "dataInputType", "variableNameSeparator"))
     fits <- list()
   } else {
     modelContainer <- jaspResults[["modelContainer"]]
     fits <- modelContainer$object
   }
-
+  saveRDS(fits, file = "C:/JASP/fits.RDS")
   # compute the individual model fits
   for (i in seq_along(options[["models"]])) {
 
@@ -98,17 +103,21 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
     # check if the model is already fitted
     if (model[["value"]] %in% names(fits)) {
+
+      # extract the fit
       tempFit <- fits[[model[["value"]]]]
 
       # check if the model is still valid (by comparing stored options to the current options)
       if (isTRUE(all.equal(attr(tempFit, "model"), model)) &&
           attr(tempFit, "modelSummaryConfidenceIntervalType") == options[["modelSummaryConfidenceIntervalType"]] &&
           isTRUE(all.equal(attr(tempFit, "dataset"), dataset)) &&
-          attr(tempFit, "dataInputType") == options[["dataInputType"]])
+          if (MASEM) attr(tempFit, "dataInputType") == options[["dataInputType"]] else TRUE)
         next
+    } else {
+      tempFit <- NULL
     }
 
-    if (trimws(modelSyntax) == "" || (MASEM && is.null(dataset[["inputMatricies"]]))) {
+    if (trimws(modelSyntax) == "" || (MASEM && is.null(dataset[["data"]]))) {
       # skip if syntax is empty
       tempFit <- NULL
 
@@ -116,71 +125,12 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
       jaspBase::startProgressbar(1, label = gettextf("Estimating: %1$s", model[["value"]]))
 
-      if (MASEM) {
-
-        # prepare RAM
-        tempRam <- try(metaSEM::lavaan2RAM(
-          model         = modelSyntax,
-          obs.variables = attr(dataset[["inputMatricies"]], "variableNames"),
-          std.lv        = if (options[["dataInputType"]] == "correlation") TRUE else model[["fixLatentVarianceTo1"]]
-        ))
-
-        # prepare data
-        corDataset <- metaSEM::Cor2DataFrame(
-          x = dataset[["inputMatricies"]],
-          n = dataset[["sampleSize"]],
-          cor.analysis = options[["dataInputType"]] == "correlation"
-        )
-
-        # fit SEM
-        if (!jaspBase::isTryError(tempRam)) {
-          tempFit <- try(metaSEM::osmasem2(
-            RAM                 = tempRam,
-            data                = corDataset,
-            intervals.type      = .masemGetIntervalsType(options),
-            cor.analysis        = options[["dataInputType"]] == "correlation",
-            RE.type.Sigma       = .masemGetRandomEffectsType(model[["randomEffectsSigma"]]),
-            RE.type.Mu          = .masemGetRandomEffectsType(model[["randomEffectsMu"]]),
-            RE.type.SigmaMu     = .masemGetRandomEffectsType(model[["randomEffectsSigmaMu"]]),
-            replace.constraints = model[["replaceConstraints"]]
-          ))
-        }
-        saveRDS(tempFit, file = "C:/JASP/fit.RDS")
-        # forward any mxfit errors
-        if (!jaspBase::isTryError(tempFit) && inherits(tempFit[["mx.fit"]], "simpleError")){
-          tempFit <- try(stop(tempFit[["mx.fit"]]))
-        }
-
-      } else if (!MASEM &&!jaspBase::isTryError(tempRam)) {
-
-        # prepare RAM
-        tempRam <- try(metaSEM::lavaan2RAM(
-          model         = modelSyntax,
-          obs.variables = .masemGetObservedVariables(model),
-          std.lv        = model[["fixLatentVarianceTo1"]]
-        ))
-
-        # fit SEM
-        if (!jaspBase::isTryError(tempRam)) {
-          tempFit <- try(metaSEM::sem(
-            RAM                 = tempRam,
-            data                = dataset,
-            intervals.type      = .masemGetIntervalsType(options),
-            replace.constraints = model[["replaceConstraints"]]
-          ))
-        }
-
-        # forward any mxfit errors
-        if (!jaspBase::isTryError(tempFit) && inherits(tempFit[["mx.fit"]], "simpleError")){
-          tempFit <- try(stop(tempFit[["mx.fit"]]))
-        }
-
-      } else {
-        # forward ram errors to the sem object
-        tempFit <- tempRam
-      }
+      if (MASEM) tempFit <- .masemFitModelsFun(model, dataset, options)
+      else       tempFit <- .semmetaFitModelsFun(model, dataset, options)
 
       jaspBase::progressbarTick()
+
+      saveRDS(tempFit, file = "C:/JASP/fit.RDS")
 
       # add options to the model fit
       attr(tempFit, "model") <- model
@@ -197,6 +147,74 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   modelContainer$object <- fits
 
   return()
+}
+.semmetaFitModelsFun          <- function(model, dataset, options) {
+
+  # prepare RAM
+  tempRam <- try(metaSEM::lavaan2RAM(
+    model         = model[["syntax"]][["model"]],
+    obs.variables = .masemGetObservedVariables(model),
+    std.lv        = model[["fixLatentVarianceTo1"]]
+  ))
+
+  # fit SEM
+  if (!jaspBase::isTryError(tempRam)) {
+    tempFit <- try(metaSEM::sem(
+      RAM                 = tempRam,
+      data                = dataset,
+      intervals.type      = .masemGetIntervalsType(options),
+      replace.constraints = model[["replaceConstraints"]]
+    ))
+  } else {
+    # forward ram errors
+    tempFit <- tempRam
+  }
+
+  # forward any mxfit errors
+  if (!jaspBase::isTryError(tempFit) && inherits(tempFit[["mx.fit"]], "simpleError")){
+    tempFit <- try(stop(tempFit[["mx.fit"]]))
+  }
+
+  return(tempFit)
+}
+.masemFitModelsFun            <- function(model, dataset, options) {
+
+  # prepare RAM
+  tempRam <- try(metaSEM::lavaan2RAM(
+    model         = model[["syntax"]][["modelOriginal"]],
+    obs.variables = attr(dataset[["data"]], "variableNames"),
+    std.lv        = if (options[["dataInputType"]] == "correlation") TRUE else model[["fixLatentVarianceTo1"]]
+  ))
+
+  # prepare data
+  corDataset <- metaSEM::Cor2DataFrame(
+    dataset,
+    cor.analysis = options[["dataInputType"]] == "correlation"
+  )
+
+  # fit SEM
+  if (!jaspBase::isTryError(tempRam)) {
+    tempFit <- try(metaSEM::osmasem2(
+      RAM                 = tempRam,
+      data                = corDataset,
+      intervals.type      = .masemGetIntervalsType(options),
+      cor.analysis        = options[["dataInputType"]] == "correlation",
+      RE.type.Sigma       = .masemGetRandomEffectsType(model[["randomEffectsSigma"]]),
+      RE.type.Mu          = .masemGetRandomEffectsType(model[["randomEffectsMu"]]),
+      RE.type.SigmaMu     = .masemGetRandomEffectsType(model[["randomEffectsSigmaMu"]]),
+      replace.constraints = model[["replaceConstraints"]]
+    ))
+  } else {
+    # forward ram errors
+    tempFit <- tempRam
+  }
+
+  # forward any mxfit errors
+  if (!jaspBase::isTryError(tempFit) && inherits(tempFit[["mx.fit"]], "simpleError")){
+    tempFit <- try(stop(tempFit[["mx.fit"]]))
+  }
+
+  return(tempFit)
 }
 .masemModelFitTable           <- function(jaspResults, options, MASEM = FALSE) {
 
@@ -273,8 +291,8 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
     # create the summary table if it does not exists
     if (MASEM) {
 
-      if (is.null(tempOutputContainer[["summaryTableParameters"]]) && options[["modelSummaryParameters"]]) {
-        .masemCreateSummaryTable(tempOutputContainer, tempFit, options, output = "parameters")
+      if (is.null(tempOutputContainer[["summaryTableParameters"]]) && options[["modelSummaryRegression"]]) {
+        .masemCreateSummaryTable(tempOutputContainer, tempFit, options, output = "regression")
       }
 
       if (is.null(tempOutputContainer[["summaryTableCovariances"]]) && options[["modelSummaryCovariances"]]) {
@@ -336,7 +354,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
     if (options[["pathDiagramShowParameters"]]) {
 
       # extract the sem paths
-      tempPaths <- model[["syntax"]][["model"]]
+      tempPaths <- model[["syntax"]][[if (MASEM) "modelOriginal" else "model"]]
 
       # skip if syntax is empty
       if (trimws(tempPaths) == "")
@@ -665,7 +683,9 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   variable <- sapply(model[["observedVariableList"]], function(x) x[["value"]])
   observed <- sapply(model[["observedVariableList"]], function(x) x[["observedVariable"]])
 
-  return(variable[observed])
+  observedVariables <- variable[observed]
+  observedVariables <- encodeColNames(observedVariables)
+  return()
 }
 .masemGetRandomEffectsType <- function(type) {
   return(switch(
