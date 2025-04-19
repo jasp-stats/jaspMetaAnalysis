@@ -31,10 +31,12 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   saveRDS(dataset, file = "C:/JASP/dataset.RDS")
 
   # create a data-summary of the input
-  if (options[["inputSummaryAvailableVariableNames"]])
+  if (options[["availableVariableNames"]])
     .masemVariableSummaryView(jaspResults, dataset, options)
-  if (options[["inputSummaryFrequencyTable"]])
-    .masemDataSummaryTables(jaspResults, dataset, options)
+  if (options[["numberOfEstimates"]])
+    .masemDataSummaryTables(jaspResults, dataset, options, type = "estimates")
+  if (options[["numberOfObservations"]])
+    .masemDataSummaryTables(jaspResults, dataset, options, type = "observations")
 
   # estimate the models
   .masemFitModels(jaspResults, dataset, options, MASEM = TRUE)
@@ -63,6 +65,11 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 )
 .masemDecodeData           <- function(dataset, options) {
 
+  if (!is.null(dataset))
+    return(dataset)
+
+  dataset <- .readDataSetToEnd(all.columns = TRUE)
+  saveRDS(dataset, file = "C:/JASP/datasetRaw.RDS")
   # masem requires a wide format of the correlation/covariance matrices
   # (because of backwards compatibility with previous tutorial papers etc)
   # therefore, the variable names need to be decoded manually for reconstruction
@@ -75,7 +82,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   }
 
   # subset the data
-  inputDataset <- dataset[,inputNames]
+  inputDataset <- dataset[,inputNames,drop=FALSE]
 
   # decode the correlation matrix names
   decodedInputNames      <- decodeColNames(inputNames)
@@ -147,16 +154,16 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   # store variable names
   attr(matricies, "variableNames") <- uniqueInputNames
   output <- list(
-    inputMatricies = matricies,
-    sampleSize     = dataset[[options[["sampleSize"]]]]
+    data = matricies,
+    n    = dataset[[options[["sampleSize"]]]]
   )
 
   # check if means are specified
-  meanNames        <- options[["means"]]
+  meanNames <- options[["means"]]
   if (length(meanNames) > 0) {
 
     # select and decode data
-    datasetMeans           <- dataset[,meanNames]
+    datasetMeans           <- dataset[,meanNames,drop=FALSE]
     decodedMeanNames       <- decodeColNames(meanNames)
     colnames(datasetMeans) <- decodedMeanNames
 
@@ -173,8 +180,26 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
     # fix order
     datasetMeans <- datasetMeans[,uniqueInputNames]
 
-
     output[["means"]] <- datasetMeans
+  }
+
+  # check if moderators are specified
+  varNames <- unique(c(
+    # TODO: check whether moderators are always in data.
+    #    unlist(lapply(options[["models"]], function(model) model[["syntax"]][["value"]])),
+    unlist(lapply(options[["models"]], function(model) model[["syntax"]][["prefixedColumns"]][["data."]]))
+  ))
+  modNames <- setdiff(varNames, c(inputNames, meanNames))
+  if (length(modNames) > 0) {
+    # select and decode data
+    datasetMods           <- dataset[,modNames,drop=FALSE]
+    decodedmodNames       <- decodeColNames(modNames)
+    colnames(datasetMods) <- decodedmodNames
+
+    for (var in decodedmodNames){
+      output[[var]] <- datasetMods[[var]]
+    }
+    attr(output, "modNames") <- decodedmodNames
   }
 
   return(output)
@@ -183,72 +208,119 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 
   # create an HTML output listing all available variable names (based on the correlation/covariance matrix input)
   variableSummaryView <- createJaspHtml(title = gettext("Available Variable Names"))
-  variableSummaryView$dependOn(c("correlationCovarianceMatrix", "means", "dataInputType", "variableNameSeparator", "inputSummaryAvailableVariableNames"))
+  variableSummaryView$dependOn(c("correlationCovarianceMatrix", "means", "dataInputType", "variableNameSeparator", "availableVariableNames"))
   variableSummaryView$position <- 0.1
   jaspResults[["variableSummaryView"]] <- variableSummaryView
 
-  if (!is.null(dataset[["inputMatricies"]])) {
-    variableSummaryView[["text"]] <- paste0(attr(dataset[["inputMatricies"]], "variableNames"), collapse = "<br>")
+  if (!is.null(dataset[["data"]])) {
+    variableSummaryView[["text"]] <- paste0(attr(dataset[["data"]], "variableNames"), collapse = "<br>")
   }
 
   return()
 }
-.masemDataSummaryTables    <- function(jaspResults, dataset, options) {
+.masemDataSummaryTables    <- function(jaspResults, dataset, options, type) {
+
+  # obtain the descriptives container
+  if (!is.null(jaspResults[["descriptives"]])) {
+    descriptivesContainer <- jaspResults[["descriptives"]]
+  } else {
+    descriptivesContainer <- createJaspContainer(title = gettext("Descriptives"))
+    descriptivesContainer$dependOn(c("correlationCovarianceMatrix", "means", "dataInputType", "variableNameSeparator"))
+    descriptivesContainer$position <- 0.2
+    jaspResults[["descriptives"]] <- descriptivesContainer
+  }
 
   # create a table with the number of non-missing elements of the covariance matrix (or means if both are specified)
-  if (!is.null(jaspResults[["dataSummaryTables"]]))
-    return()
+  if (is.null(descriptivesContainer[[paste0(type, "corCovTable")]])) {
 
-  dataSummaryTables <- createJaspContainer(title = gettext("Data Summary"))
-  dataSummaryTables$position <- 0.2
-  dataSummaryTables$dependOn(c("correlationCovarianceMatrix", "means", "dataInputType", "variableNameSeparator", "inputSummaryFrequencyTable"))
-  jaspResults[["dataSummaryTables"]] <- dataSummaryTables
+    ### create correlation/covariance matrix summary
+    correlationCovarianceSummaryTable <- createJaspTable(title = gettextf(
+      "%1$s: %1$s Matrix",
+      switch(
+        type,
+        "estimates"     = gettext("Number of Estimates"),
+        "observations"  = gettext("Number of Observations")
+      ),
+      switch(
+        options[["dataInputType"]],
+        "correlation" = gettext("Correlation"),
+        "covariance"  = gettext("Covariance")
+      )))
+    correlationCovarianceSummaryTable$position <- switch(
+      type,
+      "estimates"     = 1,
+      "observations"  = 2
+    )
+    correlationCovarianceSummaryTable$dependOn(switch(
+      type,
+      "estimates"    = "numberOfEstimates",
+      "observations" = "numberOfObservations"
+    ))
 
-  ### create correlation/covariance matrix summary
-  correlationCovarianceSummaryTable <- createJaspTable(title = gettextf("Number of Estimates: %1$s Matrix", switch(
-    options[["dataInputType"]],
-    "correlation" = gettext("Correlation"),
-    "covariance"  = gettext("Covariance")
-  )))
-  correlationCovarianceSummaryTable$position <- 1
-  dataSummaryTables[["correlationCovarianceSummaryTable"]] <- correlationCovarianceSummaryTable
+    descriptivesContainer[[paste0(type, "corCovTable")]] <- correlationCovarianceSummaryTable
 
-  if (is.null(dataset[["inputMatricies"]]))
-    return()
+    if (is.null(dataset[["data"]]))
+      return()
 
-  # get data
-  inputMatricies <- dataset[["inputMatricies"]]
-  variableNames  <- attr(inputMatricies, "variableNames")
+    # get data
+    inputMatricies <- dataset[["data"]]
+    sampleSize     <- dataset[["n"]]
+    variableNames  <- attr(inputMatricies, "variableNames")
 
-  # add columns
-  correlationCovarianceSummaryTable$addColumnInfo(name = "variable", type = "string", title = gettext("Variable"))
-  for (var in variableNames) {
-    correlationCovarianceSummaryTable$addColumnInfo(name = var, type = "integer",  title = var)
-  }
+    # add columns
+    correlationCovarianceSummaryTable$addColumnInfo(name = "variable", type = "string", title = gettext("Variable"))
+    for (var in variableNames) {
+      correlationCovarianceSummaryTable$addColumnInfo(name = var, type = "integer",  title = var)
+    }
 
-  # compute the number of non-missing elements
-  nonNaMatric <- matrix(NA, nrow = length(variableNames), ncol = length(variableNames))
-  colnames(nonNaMatric) <- variableNames
-  for (j in seq_along(variableNames)) {
-    for (k in seq_along(variableNames)) {
-      if (j > k) {
-        nonNaMatric[j, k] <- sum(!is.na(sapply(inputMatricies, function(x) x[j, k])))
+    # compute the number of non-missing elements
+    nonNaMatric <- matrix(NA, nrow = length(variableNames), ncol = length(variableNames))
+    colnames(nonNaMatric) <- variableNames
+    for (j in seq_along(variableNames)) {
+      for (k in seq_along(variableNames)) {
+        if (j > k) {
+          nonNaMatric[j, k] <- switch(
+            type,
+            "estimates"    = sum(!is.na(sapply(inputMatricies, function(x) x[j, k]))),
+            "observations" = sum(sampleSize * !is.na(sapply(inputMatricies, function(x) x[j, k])), na.rm = TRUE),
+          )
+        }
+      }
+      if (options[["dataInputType"]] == "covariance") {
+        nonNaMatric[j, j] <- switch(
+          type,
+          "estimates"    = sum(!is.na(sapply(inputMatricies, function(x) x[j, j]))),
+          "observations" = sum(sampleSize * !is.na(sapply(inputMatricies, function(x) x[j, j])), na.rm = TRUE)
+        )
       }
     }
-    if (options[["dataInputType"]] == "covariance") {
-      nonNaMatric[j, j] <- sum(!is.na(sapply(inputMatricies, function(x) x[j, j])))
-    }
-  }
-  nonNaMatric <- cbind.data.frame(variable = variableNames, nonNaMatric)
-  correlationCovarianceSummaryTable$setData(nonNaMatric)
+    nonNaMatric <- cbind.data.frame(variable = variableNames, nonNaMatric)
+    correlationCovarianceSummaryTable$setData(nonNaMatric)
 
+  }
 
   ### create means matrix summary
-  if (!is.null(dataset[["means"]])) {
 
-    meansSummaryTable <- createJaspTable(title = gettext("Number of Estimates: Means"))
-    meansSummaryTable$position <- 2
-    dataSummaryTables[["meansSummaryTable"]] <- meansSummaryTable
+  if (is.null(descriptivesContainer[[paste0(type, "meanTable")]]) && !is.null(dataset[["means"]])) {
+
+    meansSummaryTable <- createJaspTable(title = gettextf(
+      "%1$s: Means",
+      switch(
+        type,
+        "estimates"     = gettext("Number of Estimates"),
+        "observations"  = gettext("Number of Observations")
+      )))
+    meansSummaryTable$position <- switch(
+      type,
+      "estimates"     = 3,
+      "observations"  = 4
+    )
+    meansSummaryTable$dependOn(switch(
+      type,
+      "estimates"    = "numberOfEstimates",
+      "observations" = "numberOfObservations"
+    ))
+    descriptivesContainer[[paste0(type, "meanTable")]] <- meansSummaryTable
 
     # get data
     meansData <- dataset[["means"]]
@@ -258,7 +330,11 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
     meansSummaryTable$addColumnInfo(name = "estimates", type = "string", title = gettext("Estimates"))
 
     # compute the number of non-missing elements
-    nonNaMeans <- apply(meansData, 2, function(x) sum(!is.na(x)))
+    nonNaMeans <- switch(
+      type,
+      "estimates"    = apply(meansData, 2, function(x) sum(!is.na(x))),
+      "observations" = apply(meansData, 2, function(x) sum(sampleSize * !is.na(x), na.rm = TRUE))
+    )
     nonNaMeans <- cbind.data.frame(variable = colnames(meansData), estimates = nonNaMeans)
 
     meansSummaryTable$setData(nonNaMeans)
@@ -376,35 +452,40 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   # create summary table
   tempSummaryTable <- createJaspTable(title = switch(
     output,
-    "parameters"    = gettext("Parameter Estimates"),
+    "regression"    = gettext("Regression Estimates"),
     "covariances"   = gettext("Covariance Estimates"),
     "randomEffects" = gettext("Random Effects Estimates")
   ))
   tempSummaryTable$position <- switch(
     output,
-    "parameters"    = 1,
+    "regression"    = 1,
     "covariances"   = 2,
     "randomEffects" = 3
   )
-  tempSummaryTable$dependOn(c(.semmetaDependencies, "modelSummary", switch(
+  tempSummaryTable$dependOn(c(.semmetaDependencies, "modelSummary", "modelSummaryShowMatrixIndices", switch(
     output,
-    "parameters"    = "modelSummaryParameters",
+    "regression"    = "modelSummaryRegression",
     "covariances"   = "modelSummaryCovariances",
     "randomEffects" = "modelSummaryRandomEffects"
   )))
   tempOutputContainer[[output]] <- tempSummaryTable
 
   # add columns
-  tempSummaryTable$addColumnInfo(name = "row",      type = "string",  title = gettext("Row"))
-  tempSummaryTable$addColumnInfo(name = "col",      type = "string",  title = gettext("Column"))
+  tempSummaryTable$addColumnInfo(name = "name",     type = "string",  title = "")
+  if (options[["modelSummaryShowMatrixIndices"]]) {
+    tempSummaryTable$addColumnInfo(name = "row",      type = "string",  title = gettext("Row"))
+    tempSummaryTable$addColumnInfo(name = "col",      type = "string",  title = gettext("Column"))
+  }
   tempSummaryTable$addColumnInfo(name = "estimate", type = "number",  title = gettext("Estimate"))
   if (options[["modelSummaryConfidenceIntervalType"]] == "standardErrors") {
     tempSummaryTable$addColumnInfo(name = "se",        type = "number",  title = gettext("Standard Error"))
-    tempSummaryTable$addColumnInfo(name = "z",         type = "number",  title = gettext("z"))
-    tempSummaryTable$addColumnInfo(name = "p",         type = "pvalue",  title = gettext("p"))
   }
   tempSummaryTable$addColumnInfo(name = "lCi",       type = "number",  title = gettext("Lower"), overtitle = gettextf("95%% CI"))
   tempSummaryTable$addColumnInfo(name = "uCi",       type = "number",  title = gettext("Upper"), overtitle = gettextf("95%% CI"))
+  if (options[["modelSummaryConfidenceIntervalType"]] == "standardErrors") {
+    tempSummaryTable$addColumnInfo(name = "z",         type = "number",  title = gettext("z"))
+    tempSummaryTable$addColumnInfo(name = "p",         type = "pvalue",  title = gettext("p"))
+  }
 
   # skip if not ready
   if (!.masemReady(options))
@@ -422,17 +503,21 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   # extract the parameter estimates
   tempOutput <- summary(tempFit)[["parameters"]]
   colnames(tempOutput) <- c("name", "matrix", "row", "col", "estimate", "se", "lCi", "uCi", "lCiMet", "uCiMet", "z", "p")
-  tempOutput <- tempOutput[tempOutput$matrix == switch(
+  tempOutput <- tempOutput[tempOutput$matrix %in% switch(
     output,
-    "parameters"    = "Amatrix",
+    "regression"    = c("Amatrix", "Amatrixvars"),
     "covariances"   = "Smatrix",
     "randomEffects" = "TauCov"
   ), ,drop=FALSE]
 
+  # remove additional columns
   if (options[["modelSummaryConfidenceIntervalType"]] == "likelihoodBased") {
-    tempOutput <- tempOutput[, c("row", "col", "estimate", "lCi", "uCi"),drop=FALSE]
+    tempOutput <- tempOutput[, c("name", "row", "col", "estimate", "lCi", "uCi"),drop=FALSE]
   } else {
-    tempOutput <- tempOutput[, c("row", "col", "estimate", "se", "z", "p", "lCi", "uCi"),drop=FALSE]
+    tempOutput <- tempOutput[, c("name", "row", "col", "estimate", "se", "z", "p", "lCi", "uCi"),drop=FALSE]
+  }
+  if (options[["modelSummaryShowMatrixIndices"]]) {
+    tempOutput <- tempOutput[,!colnames(tempOutput) %in% c("row", "col"),drop=FALSE]
   }
 
   # add output to container
