@@ -152,7 +152,7 @@
 
       subgroupLevel <- subgroupLevels[i]
       subgroupIndx  <- dataset[[options[["subgroup"]]]] == subgroupLevel
-      subgroupData  <- dataset[subgroupIndx, ]
+      subgroupData  <- droplevels(dataset[subgroupIndx, ])
 
       # forward NAs information
       tempNasIds    <- attr(dataset, "NasIds")[!attr(dataset, "NasIds")]
@@ -262,7 +262,9 @@
     rmaInput <- c(rmaInput, .maExtendMetaforCallFromOptions(options))
 
   ### fit the model
-  if (options[["module"]] == "metaAnalysis") {
+  if (nrow(dataset) < 2) {
+    fit <- try(stop("Fewer than two estimates."))
+  } else if (options[["module"]] == "metaAnalysis") {
     fit <- try(do.call(metafor::rma, rmaInput))
   } else if (options[["module"]] == "metaAnalysisMultilevelMultivariate") {
     fit <- try(do.call(metafor::rma.mv, rmaInput))
@@ -270,7 +272,7 @@
 
 
   # add clustering if specified
-  if (options[["clustering"]] != "") {
+  if (options[["clustering"]] != "" && !jaspBase::isTryError(fit)) {
     fitClustered <- try(metafor::robust(
       fit,
       cluster      = dataset[[options[["clustering"]]]],
@@ -341,7 +343,7 @@
 
       subgroupLevel <- subgroupLevels[i]
       subgroupIndx  <- dataset[[options[["subgroup"]]]] == subgroupLevel
-      subgroupData  <- dataset[subgroupIndx, ]
+      subgroupData  <- droplevels(dataset[subgroupIndx, ])
 
       # forward NAs information
       tempNasIds    <- attr(dataset, "NasIds")[!attr(dataset, "NasIds")]
@@ -4898,6 +4900,8 @@
   # probably more messages will be gathered over time
   if (grepl("singular matrix", message))
     return(gettextf("The model estimation failed with the following message: %1$s. Please, consider simplifying the model.", message))
+  if (grepl("Fewer than two estimates", message))
+    return(gettext("Fewer than two estimates."))
 
   return(message)
 }
