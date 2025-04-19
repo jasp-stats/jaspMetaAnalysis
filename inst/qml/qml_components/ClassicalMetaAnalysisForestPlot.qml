@@ -121,6 +121,7 @@ Section
 			CheckBox
 			{
 				name:		"forestPlotStudyInformationPredictedEffects"
+				id:			forestPlotStudyInformationPredictedEffects
 				text:		qsTr("Predicted effects")
 				enabled:	effectSize.count == 1 && effectSizeStandardError.count == 1
 				checked:	false
@@ -155,21 +156,69 @@ Section
 
 		Group
 		{
-			title:		qsTr("Order")
-			info: qsTr("Order the study-level information panel by a variable.")
 
-			DropDown
+			Group
 			{
-				name:			"forestPlotStudyInformationOrderBy"
-				label:			qsTr("By")
-				addEmptyValue:	true
-				fieldWidth:		125 * preferencesModel.uiScale
+				title:		qsTr("Order")
+				info: qsTr("Order the study-level information panel by a variable.")
+
+				DropDown
+				{
+					name:			"forestPlotStudyInformationOrderBy"
+					label:			qsTr("By")
+					addEmptyValue:	true
+					fieldWidth:		125 * preferencesModel.uiScale
+				}
+
+				CheckBox
+				{
+					name:		"forestPlotStudyInformationOrderAscending"
+					text:		qsTr("Ascending")
+				}
 			}
 
-			CheckBox
+			Group
 			{
-				name:		"forestPlotStudyInformationOrderAscending"
-				text:		qsTr("Ascending")
+				title:		qsTr("Aggregate")
+				info: qsTr("Aggregate the study-level information panel by a variable. If selected, `Predicted effects` and all `Study information` in the tight panel is supressed.")
+
+				DropDown
+				{
+					name:			"forestPlotStudyInformationAggregateBy"
+					label:			qsTr("By")
+					addEmptyValue:	true
+					fieldWidth:		125 * preferencesModel.uiScale
+				}
+
+				RadioButtonGroup
+				{
+					name:			"forestPlotStudyInformationAggregateMethod"
+					info: qsTr("Select the method for aggregating the estimates of the study-level information panel.")
+
+					RadioButton
+					{
+						name: 		"boxplot";
+						label: 		qsTr("Boxplot")
+						checked: 	true
+					}
+
+					RadioButton
+					{
+						name: 				"bubbles"
+						label: 				qsTr("Bubbles")
+						childrenOnSameRow: 	true
+
+						DoubleField
+						{
+							name:			"forestPlotStudyInformationAggregateMethodBubbleRelativeSize"
+							label:			qsTr("Relative size")
+							defaultValue:	1
+							min:			0
+							inclusive: 		JASP.None
+							info: qsTr("Set the relative size of the observed estimates.")
+						}
+					}
+				}
 			}
 		}
 	}
@@ -406,29 +455,79 @@ Section
 
 		Group
 		{
-			CheckBox
+			Group
 			{
-				name:		"forestPlotPredictionIntervals"
-				text:		qsTr("Prediction intervals")
-				checked:	true
-				Layout.preferredWidth: 300 * jaspTheme.uiScale
-				info: qsTr("Include prediction intervals of the estimated marginal means and the model information output.")
+				title:		qsTr("General")
+
+				CheckBox
+				{
+					name:		"forestPlotPredictionIntervals"
+					text:		qsTr("Prediction intervals")
+					checked:	true
+					Layout.preferredWidth: 300 * jaspTheme.uiScale
+					info: qsTr("Include prediction intervals of the estimated marginal means and the model information output.")
+				}
+
+				CheckBox
+				{
+					name:			"forestPlotEstimatesAndConfidenceIntervals"
+					text:			qsTr("Estimates and confidence intervals")
+					checked:		true
+					info: qsTr("Include effect size estimates and confidence intervals summary text in the right panel of the forest plot.")
+				}
+
+				CheckBox
+				{
+					name:			"forestPlotTestsInRightPanel"
+					text:			qsTr("Tests in right panel")
+					checked:		false
+					info: qsTr("Move test results text to the right panel.")
+				}
+
+				DropDown
+				{
+					name:			"forestPlotAllignLeftPanel"
+					label:			qsTr("Align left panel")
+					enabled:		forestPlotModelInformation.checked || forestPlotEstimatedMarginalMeans.checked
+					startValue:		"right"
+					info: qsTr("Align text of the `Estimated marginal means` and  `Model Information` sections.")
+					values:		[
+						{ label: qsTr("Left")		, value: "left"		},
+						{ label: qsTr("Middle")		, value: "middle"	},
+						{ label: qsTr("Right")		, value: "right"	}
+					]
+				}
 			}
 
-			CheckBox
+			Group
 			{
-				name:			"forestPlotEstimatesAndConfidenceIntervals"
-				text:			qsTr("Estimates and confidence intervals")
-				checked:		true
-				info: qsTr("Include effect size estimates and confidence intervals summary text in the right panel of the forest plot.")
-			}
+				title:		qsTr("Subgroup")
+				enabled:	subgroup.count == 1
+				info:		qsTr("Specify the forest plot behavior in the case of a subgroup analysis. These options is only available when the subgroup analysis is selected.")
 
-			CheckBox
-			{
-				name:			"forestPlotTestsInRightPanel"
-				text:			qsTr("Tests in right panel")
-				checked:		false
-				info: qsTr("Move test results text to the right panel.")
+				CheckBox
+				{
+					name:			"forestPlotSubgroupPanelsWithinSubgroup"
+					text:			qsTr("Panels within subgroup")
+					checked:		true
+					info: qsTr("Group the output panels within their subgroup membership, i.e., the output panels are presented for each subgroup in a sequential order (i.e., Study information (Subgroup 1), Estimated marginal means (Subgroup 1), Model information (Subgroup 1), Study information (Subgroup 2), Estimated marginal means (Subgroup 2), Model information (Subgroup 2), .... If unchecked, the output is group by the panel membership first, i.e., Study information (Subgroup 1), Study information (Subgroup 2), Esimated marginal means (Subgroup 1), Estimated marginal means (Subgroup 2), Model information (Subgroup 1), Model information (Subgroup 2)...")
+				}
+
+				CheckBox
+				{
+					name:			"forestPlotSubgroupFullDatasetEstimatedMarginalMeans"
+					text:			qsTr("Full dataset estimated marginal means")
+					checked:		true
+					info: qsTr("Include the full dataset estimated marginal means in the forest plot if subgroups are specified. This option overrides the `Include full dataset in subgroup analysis` setting in the `Advanced` section.")
+				}
+
+				CheckBox
+				{
+					name:			"forestPlotSubgroupFullDatasetModelInformation"
+					text:			qsTr("Full dataset model information")
+					checked:		true
+					info: qsTr("Include the full dataset model information in the forest plot if subgroups are specified. This option overrides the `Include full dataset in subgroup analysis` setting in the `Advanced` section.")
+				}
 			}
 		}
 

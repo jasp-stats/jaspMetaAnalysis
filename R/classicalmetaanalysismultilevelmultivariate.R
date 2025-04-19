@@ -45,12 +45,14 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     options[["effectSizeStandardError"]],
     unlist(randomVariables),
     if (options[["clustering"]] != "") options[["clustering"]],
+    if (options[["subgroup"]] != "")   options[["subgroup"]],
     if (length(predictorsNominal) > 0) predictorsNominal,
     if (length(predictorsScale) > 0)   predictorsScale
   )
   anyNaByRows <- apply(dataset[,omitOnVariables], 1, function(x) anyNA(x))
   dataset     <- dataset[!anyNaByRows,]
-  attr(dataset, "NAs") <- sum(anyNaByRows)
+  attr(dataset, "NAs")    <- sum(anyNaByRows)
+  attr(dataset, "NasIds") <- anyNaByRows
 
   # add se^2 for V^2 input
   dataset$samplingVariance <- dataset[[options[["effectSizeStandardError"]]]]^2
@@ -351,6 +353,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 }
 .mammRandomEstimatesTable        <- function(jaspResults, dataset, options) {
 
+  # obtain the overall container
   if (!is.null(jaspResults[["randomEstimatesContainer"]])) {
     randomEstimatesContainer <- jaspResults[["randomEstimatesContainer"]]
   } else {
@@ -362,16 +365,45 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
   fit <- .maExtractFit(jaspResults, options)
 
+  if (options[["subgroup"]] == "") {
+
+    # directly fill the main container if only full estimate is requested
+    .mammRandomEstimatesTableFun(jaspResults, randomEstimatesContainer, options, fit[[1]])
+
+  } else {
+
+    for (i in seq_along(fit)) {
+
+      # create subgroup containers
+      if (!is.null(randomEstimatesContainer[[attr(fit[[i]], "subgroup")]])) {
+        randomEstimatesSubgroupContainer <- randomEstimatesContainer[[attr(fit[[i]], "subgroup")]]
+      } else {
+        randomEstimatesSubgroupContainer <- createJaspContainer(title = gettextf("Subgroup: %1$s", attr(fit[[i]], "subgroup")))
+        randomEstimatesSubgroupContainer$position <- 1
+        randomEstimatesContainer[[attr(fit[[i]], "subgroup")]] <- randomEstimatesSubgroupContainer
+      }
+
+      # fill the subgroup containers
+      .mammRandomEstimatesTableFun(jaspResults, randomEstimatesSubgroupContainer, options, fit[[i]])
+    }
+  }
+
+  return()
+}
+.mammRandomEstimatesTableFun     <- function(jaspResults, randomEffectsContainer, options, fit) {
+
+  dataset <- attr(fit, "dataset")
+
   # stop on error
   if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
   ### create table for nested random effects
-  if (fit[["withS"]] && is.null(randomEstimatesContainer[["containerS"]])) {
+  if (fit[["withS"]] && is.null(randomEffectsContainer[["containerS"]])) {
 
     containerS <- createJaspContainer(title = gettext("Simple / Nested Summary"))
     containerS$position <- 1
-    randomEstimatesContainer[["containerS"]] <- containerS
+    randomEffectsContainer[["containerS"]] <- containerS
 
     tableS <- createJaspTable(title = gettext("Estimates"))
     tableS$position <- 1
@@ -402,35 +434,35 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
   }
 
   ### create summary for the remaining types
-  if (fit[["withG"]] && is.null(randomEstimatesContainer[["containerG"]])) {
+  if (fit[["withG"]] && is.null(randomEffectsContainer[["containerG"]])) {
 
     # create jasp containers
     containerG <- createJaspContainer(title = .mammGetRandomEstimatesTitle(fit[["struct"]][1]))
     containerG$position <- 2
-    randomEstimatesContainer[["containerG"]] <- containerG
+    randomEffectsContainer[["containerG"]] <- containerG
     .mammExtractRandomTables(containerG, options, fit, indx = 1)
 
   }
 
-  if (fit[["withH"]] && is.null(randomEstimatesContainer[["containerH"]])) {
+  if (fit[["withH"]] && is.null(randomEffectsContainer[["containerH"]])) {
 
     containerH <- createJaspContainer(title = .mammGetRandomEstimatesTitle(fit[["struct"]][2]))
     containerH$position <- 3
-    randomEstimatesContainer[["containerH"]] <- containerH
+    randomEffectsContainer[["containerH"]] <- containerH
     .mammExtractRandomTables(containerH, options, fit, indx = 2)
 
   }
 
   ### create random structure confidence intervals summary
-  if (options[["randomEffectsConfidenceIntervals"]] && is.null(randomEstimatesContainer[["confidenceIntervalContainers"]]) && !is.null(.mammGetRandomFormulaList(options))) {
+  if (options[["randomEffectsConfidenceIntervals"]] && is.null(randomEffectsContainer[["confidenceIntervalContainers"]]) && !is.null(.mammGetRandomFormulaList(options))) {
 
     confidenceIntervalsContainer <- createJaspContainer(title = gettext("Confidence Intervals"))
     confidenceIntervalsContainer$position <- 4
     confidenceIntervalsContainer$dependOn(c("randomEffectsConfidenceIntervals", "confidenceIntervalsLevel"))
-    randomEstimatesContainer[["confidenceIntervalsContainer"]] <- confidenceIntervalsContainer
+    randomEffectsContainer[["confidenceIntervalsContainer"]] <- confidenceIntervalsContainer
 
     # extract precomputed confidence intervals
-    confintRandom <- .mammFitConfintRandom(jaspResults, options)
+    confintRandom <- .mammFitConfintRandom(jaspResults, options)[[attr(fit, "subgroup")]]
 
 
     # confidence intervals for nested/simple random effects
@@ -466,25 +498,24 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
 
   ### create random structure inclusion summary
-  if (options[["randomEffectsTestInclusion"]] && is.null(randomEstimatesContainer[["inclusionTestsContainer"]])) {
+  if (options[["randomEffectsTestInclusion"]] && is.null(randomEffectsContainer[["inclusionTestsContainer"]])) {
 
     inclusionTestsContainer <- createJaspContainer(title = gettext("Inclusion Tests"))
     inclusionTestsContainer$position <- 5
     inclusionTestsContainer$dependOn("randomEffectsTestInclusion")
-    randomEstimatesContainer[["inclusionTestsContainer"]] <- inclusionTestsContainer
+    randomEffectsContainer[["inclusionTestsContainer"]] <- inclusionTestsContainer
 
     ### table with general tests for component drop
     tableInclusion <- .mammMakeRandomInclusionTable(title = gettext("Component Inclusion Test"), position = 0)
     inclusionTestsContainer[["tableInclusion"]] <- tableInclusion
 
     # extract the precomputed drop models
-    dropOneFits    <- .mammFitDropOneRandom(jaspResults, options)
+    dropOneFits    <- .mammFitDropOneRandom(jaspResults, options)[[attr(fit, "subgroup")]]
 
     if (length(dropOneFits) == 0)
       return()
 
     # compute ANOVAs
-    fit      <- .maExtractFit(jaspResults, options)
     fitTests <- lapply(dropOneFits, function(fitB) data.frame(anova(fit, fitB)))
     fitTests <- rbind(
       cbind(model = "", fitTests[[1]][1,]),
@@ -499,7 +530,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     if (fit[["withS"]]) {
 
       # extract the precomputed drop models
-      dropLevelFits <- .mammFitDropLevelRandom(jaspResults, options)
+      dropLevelFits <- .mammFitDropLevelRandom(jaspResults, options)[[attr(fit, "subgroup")]]
 
       for (i in seq_along(dropLevelFits)) {
 
@@ -511,7 +542,6 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
         levelsDropped <- sapply(1:nrow(levelsGrid), function(i) paste0(colnames(levelsGrid[!unlist(levelsGrid[i,])]), collapse = ", "))
 
         # compute ANOVAs
-        fit      <- .maExtractFit(jaspResults, options)
         fitTests <- lapply(dropLevelFits[[i]], function(fitB) data.frame(anova(fit, fitB)))
         fitTests <- rbind(
           cbind(model = "", fitTests[[1]][1,]),
@@ -562,21 +592,48 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 }
 .mammFitDropOneRandom            <- function(jaspResults, options) {
 
-  if (!is.null(jaspResults[["dropOneFits"]]))
-    return(jaspResults[["dropOneFits"]]$object)
+  # extract precomputed drop one fits
+  if (!is.null(jaspResults[["dropOneFits"]])) {
 
-  dropOneFitsContainer <- createJaspState()
-  dropOneFitsContainer$dependOn(.maDependencies)
-  jaspResults[["dropOneFits"]] <- dropOneFitsContainer
+    out <- jaspResults[["dropOneFits"]]$object
 
-  fit <- .maExtractFit(jaspResults, options)
+  } else {
+
+    # create the output container
+    confintRandomContainer <- createJaspState()
+    confintRandomContainer$dependOn(.maDependencies)
+    jaspResults[["dropOneFits"]] <- confintRandomContainer
+
+    fit <- .maExtractFit(jaspResults, options)
+    out <- list()
+
+    for (i in seq_along(fit)) {
+      if (jaspBase::isTryError(fit[[i]])) {
+        out[[attr(fit[[i]], "subgroup")]] <- list()
+      } else {
+        out[[attr(fit[[i]], "subgroup")]] <- .mammFitDropOneRandomFun(fit[[i]], options)
+      }
+    }
+
+    jaspResults[["dropOneFits"]]$object <- out
+  }
+
+
+  return(out)
+}
+.mammFitDropOneRandomFun         <- function(fit, options) {
 
   # create list of all structures
   randomFormulaLists <- .mammGetRandomFormulaList(options)
   dropOneFits        <- vector("list", length = length(randomFormulaLists))
   names(dropOneFits) <- names(randomFormulaLists)
 
-  startProgressbar(expectedTicks = length(randomFormulaLists), label = gettext("Testing Inclusion of Random Effects / Model Structure"))
+  if (options[["subgroup"]] == "") {
+    startProgressbar(expectedTicks = length(randomFormulaLists), label = gettext("Testing Inclusion of Random Effects / Model Structure"))
+  } else {
+    startProgressbar(expectedTicks = length(randomFormulaLists), label = gettextf("Subgroup %1$s: Testing Inclusion of Random Effects / Model Structure", attr(fit, "subgroup")))
+  }
+
 
   # perform drop one re-estimation
   for (i in seq_along(randomFormulaLists)) {
@@ -606,19 +663,40 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     progressbarTick()
   }
 
-  dropOneFitsContainer$object <- dropOneFits
   return(dropOneFits)
 }
 .mammFitDropLevelRandom          <- function(jaspResults, options) {
 
-  if (!is.null(jaspResults[["dropLevelFits"]]))
-    return(jaspResults[["dropLevelFits"]]$object)
+  # extract precomputed drop one fits
+  if (!is.null(jaspResults[["dropLevelFits"]])) {
 
-  dropLevelFitsContainer <- createJaspState()
-  dropLevelFitsContainer$dependOn(.maDependencies)
-  jaspResults[["dropLevelFits"]] <- dropLevelFitsContainer
+    out <- jaspResults[["dropLevelFits"]]$object
 
-  fit <- .maExtractFit(jaspResults, options)
+  } else {
+
+    # create the output container
+    confintRandomContainer <- createJaspState()
+    confintRandomContainer$dependOn(.maDependencies)
+    jaspResults[["dropLevelFits"]] <- confintRandomContainer
+
+    fit <- .maExtractFit(jaspResults, options)
+    out <- list()
+
+    for (i in seq_along(fit)) {
+      if (jaspBase::isTryError(fit[[i]])) {
+        out[[attr(fit[[i]], "subgroup")]] <- list()
+      } else {
+        out[[attr(fit[[i]], "subgroup")]] <- .mammFitDropLevelRandomFun(fit[[i]], options)
+      }
+    }
+
+    jaspResults[["dropLevelFits"]]$object <- out
+  }
+
+
+  return(out)
+}
+.mammFitDropLevelRandomFun       <- function(fit, options) {
 
   # create list of all structures & keep hierarchical structures
   randomFormulaLists             <- .mammGetRandomFormulaList(options)
@@ -636,7 +714,12 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     tempLevelsGrid <- tempLevelsGrid[-c(1, nrow(tempLevelsGrid)), , drop = FALSE] # first and the last fits are the full and null models
     colnames(tempLevelsGrid) <- tempLevels
 
-    startProgressbar(expectedTicks = nrow(tempLevelsGrid), label = gettextf("Testing Inclusion of Nested Random Effects: %1$s", names(randomFormulaHierarchicalLists)[i]))
+    if (options[["subgroup"]] == "") {
+      startProgressbar(expectedTicks = nrow(tempLevelsGrid), label = gettextf("Testing Inclusion of Nested Random Effects: %1$s", names(randomFormulaHierarchicalLists)[i]))
+    } else {
+      startProgressbar(expectedTicks = nrow(tempLevelsGrid), label = gettextf("Subgroup %1$s: Testing Inclusion of Nested Random Effects: %2$s", attr(fit, "subgroup"), names(randomFormulaHierarchicalLists)[i]))
+    }
+
     dropOneFits <- list()
 
     for (j in 1:nrow(tempLevelsGrid)) {
@@ -673,23 +756,50 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     attr(dropLevelsList[[i]], "levelsGrid") <- tempLevelsGrid
   }
 
-  dropLevelFitsContainer$object <- dropLevelsList
   return(dropLevelsList)
 }
 .mammFitConfintRandom            <- function(jaspResults, options) {
 
-  if (!is.null(jaspResults[["confintRandom"]]))
-    return(jaspResults[["confintRandom"]]$object)
+  # extract precomputed confidence intervals
+  if (!is.null(jaspResults[["confintRandom"]])) {
 
-  confintRandomContainer <- createJaspState()
-  confintRandomContainer$dependOn(.maDependencies)
-  jaspResults[["confintRandom"]] <- confintRandomContainer
+    out <- jaspResults[["confintRandom"]]$object
 
-  fit <- .maExtractFit(jaspResults, options)
+  } else {
+
+    # create the output container
+    confintRandomContainer <- createJaspState()
+    confintRandomContainer$dependOn(.maDependencies)
+    jaspResults[["confintRandom"]] <- confintRandomContainer
+
+    fit <- .maExtractFit(jaspResults, options)
+    out <- list()
+
+    for (i in seq_along(fit)) {
+      if (jaspBase::isTryError(fit[[i]])) {
+        out[[attr(fit[[i]], "subgroup")]] <- list()
+      } else {
+        out[[attr(fit[[i]], "subgroup")]] <- .mammFitConfintRandomFun(fit[[i]], options)
+      }
+    }
+
+    jaspResults[["confintRandom"]]$object <- out
+  }
+
+  return(out)
+}
+.mammFitConfintRandomFun         <- function(fit, options) {
+
+  if (options[["subgroup"]] == "") {
+    progressBarCode <- paste0("jaspBase::startProgressbar(",.mammConfintIterations(fit),", label = 'Random effects / model components: Confidence intervals')")
+  } else {
+    progressBarCode <- paste0("jaspBase::startProgressbar(",.mammConfintIterations(fit),", label = 'Subgroup ", attr(fit, "subgroup")," :Random effects / model components: Confidence intervals')")
+  }
+
   confintRandom <- confint(
     fit,
     level = 100 * options[["confidenceIntervalsLevel"]],
-    code1 = paste0("jaspBase::startProgressbar(",.mammConfintIterations(fit),", label = 'Random effects / model components: Confidence intervals')"),
+    code1 = progressBarCode,
     code2 = "jaspBase::progressbarTick()"
   )
 
@@ -704,7 +814,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     cbind.data.frame(parameter = rownames(x[[1]]), data.frame(x[[1]]))
   }))
 
-  confintRandomContainer$object <- confintRandom
+
   return(confintRandom)
 }
 .mammGetStructureOptions         <- function(structure) {
@@ -801,6 +911,19 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
   if (fit[["withH"]] && fit[["struct"]][2] %in% c("HCS", "UN", "DIAG", "HAR"))
     levelNames <- c(levelNames, fit$h.names[[1]])
 
+  return(levelNames)
+}
+.mammExtractTauLevelNamesList    <- function(fit) {
+
+  levelNames <- list()
+
+  for (i in seq_along(fit)) {
+    if (jaspBase::isTryError(fit[[i]]) || is.null(fit[[i]]))
+      next
+    levelNames[[length(levelNames) + 1]] <- .mammExtractTauLevelNames(fit[[i]])
+  }
+
+  levelNames <- unique(unlist(levelNames))
   return(levelNames)
 }
 .mammExtractTauLevels            <- function(fit, expanded = TRUE) {
