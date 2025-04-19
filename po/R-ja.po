@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
-"POT-Creation-Date: 2025-03-29 02:50\n"
+"POT-Creation-Date: 2025-04-19 02:49\n"
 "PO-Revision-Date: 2025-03-01 20:22+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -409,53 +409,14 @@ msgid "All observations were removed as influential."
 msgstr "%i の観測値が欠損しているため削除されました。"
 
 #, fuzzy
-msgid "Residual Heterogeneity Test"
-msgstr "残差異質性の推定値"
+msgid "Meta-Analytic Tests"
+msgstr "モデル推定値"
 
-msgid "Qₑ"
+msgid "Test"
 msgstr ""
-
-msgid "df"
-msgstr "df"
 
 msgid "p"
 msgstr "p"
-
-#, fuzzy
-msgid "Pooled Effect Size Test"
-msgstr "効果量の推定値"
-
-msgid "Estimate"
-msgstr "推定"
-
-msgid "Standard Error"
-msgstr "標準誤差"
-
-msgid "t"
-msgstr "t"
-
-msgid "z"
-msgstr "z"
-
-msgid "Omnibus Moderation Test"
-msgstr ""
-
-#, fuzzy
-msgid "Parameter"
-msgstr "ピーターズ(Peters)"
-
-#, fuzzy
-msgid "F"
-msgstr "FE"
-
-msgid "Qₘ"
-msgstr ""
-
-msgid "df₁"
-msgstr ""
-
-msgid "df₂"
-msgstr ""
 
 msgid "p (permutation)"
 msgstr ""
@@ -463,6 +424,9 @@ msgstr ""
 #, fuzzy
 msgid "Meta-Analytic Estimates"
 msgstr "モデル推定値"
+
+msgid "Estimate"
+msgstr "推定"
 
 msgid "%s%% CI"
 msgstr "%s%% CI"
@@ -506,11 +470,39 @@ msgstr ""
 msgid "Heterogeneity Meta-Regression Terms Tests"
 msgstr ""
 
+#, fuzzy
+msgid "F"
+msgstr "FE"
+
+msgid "Qₘ"
+msgstr ""
+
+msgid "df₁"
+msgstr ""
+
+msgid "df"
+msgstr "df"
+
+msgid "df₂"
+msgstr ""
+
+msgid "Warning:"
+msgstr "警告:"
+
 msgid "Effect Size Meta-Regression Coefficients"
 msgstr ""
 
 msgid "Heterogeneity Meta-Regression Coefficients"
 msgstr ""
+
+msgid "Standard Error"
+msgstr "標準誤差"
+
+msgid "t"
+msgstr "t"
+
+msgid "z"
+msgstr "z"
 
 msgid "Effect Size Meta-Regression Correlation Matrix"
 msgstr ""
@@ -518,17 +510,36 @@ msgstr ""
 msgid "Heterogeneity Meta-Regression Correlation Matrix"
 msgstr ""
 
-msgid "Estimated Marginal Means: Effect Size"
+msgid "Estimated Marginal Means and Contrasts Summary"
 msgstr ""
 
-msgid "Estimated Marginal Means: Heterogeneity"
+msgid "Estimated Marginal Means / Contrasts"
 msgstr ""
 
-msgid "Variable"
+#, fuzzy
+msgid "(Effect Size)"
+msgstr "効果量"
+
+#, fuzzy
+msgid "(Heterogeneity)"
+msgstr "異質性"
+
+#, fuzzy
+msgid "Adjusted Estimate"
+msgstr "モデル推定値"
+
+msgid "Estimated Marginal Means"
 msgstr ""
 
 msgid "Level"
 msgstr ""
+
+msgid "Contrasts"
+msgstr ""
+
+#, fuzzy
+msgid "Comparison"
+msgstr "分散成分"
 
 #, fuzzy
 msgid "Bubble Plots"
@@ -601,6 +612,9 @@ msgstr ""
 msgid "𝜏²"
 msgstr ""
 
+msgid "Qₑ"
+msgstr ""
+
 msgid "Hat"
 msgstr "ハット"
 
@@ -660,9 +674,6 @@ msgstr "ファンネルプロット"
 msgid "Meta-Regression Summary"
 msgstr "PET-PEESE回帰推定値"
 
-msgid "Estimated Marginal Means Summary"
-msgstr ""
-
 msgid "Variance Inflation Summary"
 msgstr ""
 
@@ -697,10 +708,6 @@ msgstr "異質性(%s)"
 
 msgid "Heterogeneity coefficients %1$s correspond to %2$s."
 msgstr ""
-
-#, fuzzy
-msgid "Adjusted Estimate"
-msgstr "モデル推定値"
 
 msgid "Mean - %1$sSD"
 msgstr ""
@@ -740,16 +747,16 @@ msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
 msgid "Fisher's z to r"
 msgstr "フィッシャー(Fisher)のz"
 
-msgid "Exponential"
+msgid "exponential"
 msgstr ""
 
-msgid "Log odds to proportions"
+msgid "log odds to proportions"
 msgstr ""
 
-msgid "Log odds to SMD (normal)"
+msgid "log odds to SMD (normal)"
 msgstr ""
 
-msgid "Log odds to SMD (logistic)"
+msgid "log odds to SMD (logistic)"
 msgstr ""
 
 msgid "SMD to log odds (normal)"
@@ -764,7 +771,7 @@ msgstr ""
 msgid "Bonett inverse α"
 msgstr ""
 
-msgid "Z to R²"
+msgid "z to R²"
 msgstr ""
 
 msgid "SMD to Cohen's U₁"
@@ -779,6 +786,31 @@ msgstr ""
 msgid "SMD to CLES, Pr(supperiority)"
 msgstr ""
 
+msgid "None"
+msgstr ""
+
+msgid "Bonferroni"
+msgstr ""
+
+msgid "Holm"
+msgstr ""
+
+msgid "Hochberg"
+msgstr ""
+
+msgid "Hommel"
+msgstr ""
+
+msgid "Benjamini-Hochberg"
+msgstr ""
+
+msgid "Benjamini-Yekutieli"
+msgstr ""
+
+#, fuzzy
+msgid "Residual heterogeneity"
+msgstr "残差異質性の推定値"
+
 msgid "Moderation (Effect Size): %1$s"
 msgstr ""
 
@@ -791,16 +823,32 @@ msgid "Moderation: %1$s"
 msgstr "自己相関"
 
 #, fuzzy
-msgid "Heterogeneity:"
-msgstr "異質性"
+msgid "Pooled effect size"
+msgstr "効果量の推定値"
 
-msgid "Fixed effect tested using z-distribution."
+#, fuzzy
+msgid "(coef: %1$s)"
+msgstr "効果量（%s）"
+
+#, fuzzy
+msgid "Moderation effect size%1$s"
+msgstr "自己相関"
+
+#, fuzzy
+msgid "Moderation%1$s"
+msgstr "自己相関"
+
+#, fuzzy
+msgid "Moderation heterogeneity%1$s"
+msgstr "異質性の検定"
+
+msgid "Fixed effects tested using z-distribution."
 msgstr ""
 
-msgid "Fixed effect tested using t-distribution."
+msgid "Fixed effects tested using t-distribution."
 msgstr ""
 
-msgid "Fixed effect tested using Knapp and Hartung adjustment."
+msgid "Fixed effects tested using Knapp and Hartung adjustment."
 msgstr ""
 
 msgid "The heterogeneity model for 𝜏² is specified on the log scale."
@@ -813,6 +861,12 @@ msgid "%1$i clusters with %2$i estimates each."
 msgstr ""
 
 msgid "%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates."
+msgstr ""
+
+msgid ""
+"NAs in the pooled effect size were introduced due to the %1$s "
+"transformation. Please verify that you are using the correct effect size "
+"transformation."
 msgstr ""
 
 msgid "The pooled effect size is transformed using %1$s transformation."
@@ -851,10 +905,40 @@ msgid ""
 "predictors."
 msgstr ""
 
+msgid ""
+"NAs in the marginal mean estimatess were introduced due to the %1$s "
+"transformation. Please verify that you are using the correct effect size "
+"transformation."
+msgstr ""
+
 msgid "The estimates and intervals are transformed using %1$s transformation."
 msgstr ""
 
 msgid "The estimates and intervals correspond to %1$s."
+msgstr ""
+
+msgid ""
+"Each contrast is averaged across the levels of the remaining predictors."
+msgstr ""
+
+msgid ""
+"Contrasts of estimates marginal means cannot be transformed via the effect "
+"size transformation."
+msgstr ""
+
+msgid ""
+"Contrasts of estimated marginal means are adjusted for multiple comparisons "
+"using %1$s correction."
+msgstr ""
+
+msgid ""
+"Contrasts of estimated marginal means cannot be transformed via the link "
+"function. As such, the contrasts are summarized on the model scale: log(𝜏²)."
+msgstr ""
+
+msgid ""
+"Contrasts of estimated marginal means cannot be transformed via the "
+"heterogeneity transformation. As such, the contrasts are summarized as 𝜏²."
 msgstr ""
 
 msgid "Permutation p-value is based on %1$s permutations."
@@ -863,6 +947,24 @@ msgstr ""
 msgid ""
 "The model estimation failed with the following message: %1$s. Please, "
 "consider simplifying the model."
+msgstr ""
+
+msgid ""
+"The term %1$s was completely removed from the model. Possible causes are "
+"missing values, collinear predictors, or missing crossed cells in an "
+"interaction term."
+msgstr ""
+
+msgid ""
+"The term %1$s was partilly removed (%2$i/%3$i coefficients) from the model. "
+"Possible causes are missing values, collinear predictors, or missing crossed "
+"cells in an interaction term."
+msgstr ""
+
+msgid ""
+"The following coefficients were removed from the model: %1$s. Possible "
+"causes are missing values, collinear predictors, or missing crossed cells in "
+"an interaction term."
 msgstr ""
 
 msgid "Error reading the distance matrix file: %1$s"
@@ -900,8 +1002,23 @@ msgid "Fixed"
 msgstr "固定 H"
 
 #, fuzzy
-msgid "Inclusion Test"
+msgid "Confidence Intervals"
+msgstr "95%% 信頼区間"
+
+#, fuzzy
+msgid "Inclusion Tests"
 msgstr "包含BF"
+
+#, fuzzy
+msgid "Component Inclusion Test"
+msgstr "包含BF"
+
+#, fuzzy
+msgid "%1$s: Level Inclusion Test"
+msgstr "包含BF"
+
+msgid "Removed Levels"
+msgstr ""
 
 #, fuzzy
 msgid "Removed Component"
@@ -937,6 +1054,9 @@ msgstr ""
 msgid "Testing Inclusion of Random Effects / Model Structure"
 msgstr ""
 
+msgid "Testing Inclusion of Nested Random Effects: %1$s"
+msgstr ""
+
 #, fuzzy
 msgid "Random Slopes"
 msgstr "変量 H%s"
@@ -963,6 +1083,9 @@ msgid "Heteroskedastic AR(1)"
 msgstr ""
 
 msgid "Continuous-Time AR"
+msgstr ""
+
+msgid "Exponential"
 msgstr ""
 
 msgid "Gaussian"
@@ -995,6 +1118,9 @@ msgstr "推定値"
 #, fuzzy
 msgid "Estimates ρ"
 msgstr "推定値"
+
+msgid "ρ"
+msgstr ""
 
 msgid "%s Summary"
 msgstr "%s の要約"
@@ -1087,12 +1213,13 @@ msgstr ""
 msgid "Error in Step %1$i:"
 msgstr ""
 
-msgid "Estimated Marginal Means"
-msgstr ""
-
 #, fuzzy
 msgid "Model Information"
 msgstr "情報"
+
+#, fuzzy
+msgid "Fixed Effect Estimate"
+msgstr "固定効果の推定値"
 
 #, fuzzy
 msgid "Pooled Estimate"
@@ -1244,9 +1371,6 @@ msgstr "係数"
 msgid "At least one predictor needs to be specified."
 msgstr "少なくとも1つのp値カットオフを設定する必要があります."
 
-msgid "Warning:"
-msgstr "警告:"
-
 #, fuzzy
 msgid "%1$s observations were ommited due to missing values."
 msgstr "%i の観測値が欠損しているため削除されました。"
@@ -1263,20 +1387,25 @@ msgstr "診断"
 msgid "Autocorrelation (%1$s)"
 msgstr "自己相関"
 
+#, fuzzy
 msgid ""
 "Inference possibly unreliable -- MCMC chains might not have converged; The "
-"largest R-hat is %.3f > 1.01. To lower R-hat please increase 'Iterations', "
+"largest R-hat is %1$.3f > 1.01. To lower R-hat please increase 'Iterations', "
 "or 'Adapt delta' in the Options section."
 msgstr ""
 "推論の信頼性が低い可能性があります -- MCMC チェーンが収束していない可能性があ"
 "ります。最大のR-hatが %.3f > 1.01でした。R-hatを下げるためには、オプションで"
 "「Iterations」や「Adapt delta」を増やしてください。"
 
+#, fuzzy
 msgid ""
-"Low estimation accuracy -- The smallest Effective Sample Size (ESS) is %.2f "
-"< %1.0f. To increase accuracy please increase 'Iterations', or 'Adapt delta' "
-"in the Options section."
+"Low estimation accuracy -- The smallest Effective Sample Size (ESS) is "
+"%1$.2f < %2$1.0f. To increase accuracy please increase 'Iterations', or "
+"'Adapt delta' in the Options section."
 msgstr ""
+"推論の信頼性が低い可能性があります -- MCMC チェーンが収束していない可能性があ"
+"ります。最大のR-hatが %.3f > 1.01でした。R-hatを下げるためには、オプションで"
+"「Iterations」や「Adapt delta」を増やしてください。"
 
 msgid "The priors for publication bias were set incorrectly."
 msgstr "出版バイアスの事前確率が正しく設定されていません."
@@ -1723,6 +1852,14 @@ msgstr[0] ""
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "%i の観測値が欠損しているため削除されました。"
+
+#, fuzzy
+#~ msgid "Parameter"
+#~ msgstr "ピーターズ(Peters)"
+
+#, fuzzy
+#~ msgid "Heterogeneity:"
+#~ msgstr "異質性"
 
 #~ msgid "The metafor package crashed with the following error: %s"
 #~ msgstr "metaforパッケージが次のエラーでクラッシュしました: %s"

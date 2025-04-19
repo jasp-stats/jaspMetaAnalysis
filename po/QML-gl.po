@@ -2112,28 +2112,6 @@ msgstr ""
 "etiquetar saídas de resultados e gráficas."
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Random Effects / Model Structure"
-msgstr "Efectos aleatorios / Estrutura do modelo"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Options for specifying the random effects structure for the meta-analysis "
-"model, including the types of random effects and their associated variables. "
-"Allows modeling of complex data structures such as multilevel, multivariate, "
-"autoregressive, spatial, and other forms of dependency."
-msgstr ""
-"Opcións para especificar a estrutura de efectos aleatorios do modelo de meta-"
-"análise, incluíndo os tipos de efectos aleatorios e as súas variables "
-"asociadas. Permite modelar estruturas complexas de datos como as "
-"multiniveis, multivariantes, autorregresivas, espaciais, e outras formas de "
-"dependencia."
-
-#, qt-format
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Structure %1"
-msgstr "Estrutura %1"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Type of random effect to include in the model."
 msgstr "Tipo de efecto aleatorio a incluír no modelo."
 
@@ -3933,18 +3911,6 @@ msgstr "Extender a invocación de metafor"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid ""
-"Allow adding custom arguments to the metafor function call. Consult the "
-"metafor R package documentation for the available commands (https://wviechtb."
-"github.io/metafor/reference/rma.uni.html and https://wviechtb.github.io/"
-"metafor/reference/rma.mv.html)."
-msgstr ""
-"Permitir engadir argumentos personalizados á invocación da función metafor. "
-"Consulta a documentación do paquete metafor de R para ver as instrucións "
-"dispoñibles (https://wviechtb.github.io/metafor/reference/rma.uni.html e "
-"https://wviechtb.github.io/metafor/reference/rma.mv.html)."
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid ""
 "The additional arguments to the metafor function call must be specified as a "
 "named list (the 'list()' call can be ommited). E.g., 'list(tau2 = 1)' (or "
 "'tau2 = 1') can be used to fix the between-study heterogeneity to a given "
@@ -4274,16 +4240,6 @@ msgid "Estimated Marginal Means"
 msgstr "Medias marxinais estimadas"
 
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
-msgid ""
-"Options to compute estimated marginal means (EMMs) for the effect size and "
-"heterogeneity models, allowing examination of predicted values at specific "
-"levels of moderators."
-msgstr ""
-"Opcións para calcular as medias marxinais estimadas (EMMs) para modelos da "
-"magnitude do efecto e de heteroxeneidade, permitindo o exame dos valores "
-"preditos a niveis determinados dos moderadores."
-
-msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Effect size"
 msgstr "Magnitude do efecto"
 
@@ -4602,20 +4558,12 @@ msgid "Add meta-analytic model information to the forest plot."
 msgstr "Engadir información do modelo Meta-Analítico á gráfica forestal."
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Pooled effect size estimate"
-msgstr "Estimación da magnitude do efecto combinada"
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid ""
 "Include the overall meta-analytic effect size estimate in the model "
 "information section."
 msgstr ""
 "Incluír a estimación da magnitude do efecto Meta-Analítica global na sección "
 "de información do modelo."
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Pooled effect size test"
-msgstr "Proba da magnitude do efecto combinada"
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid ""
@@ -4626,33 +4574,12 @@ msgstr ""
 "na sección de información do modelo."
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Residual heterogeneity test"
-msgstr "Proba de Heteroxeneidade dos erros"
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid ""
 "Include the test of the residual heterogeneity in the model information "
 "section."
 msgstr ""
 "Incluír a proba de heteroxeneidade dos erros na sección de información do "
 "modelo."
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Residual heterogeneity estimate"
-msgstr "Estimación da heteroxeneidade dos erros"
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Include the meta-analytic residual heterogeneity estimate in the model "
-"information section. Not available for multilevel/multivariate meta-analysis."
-msgstr ""
-"Incluír a estimación de heteroxeneidade dos erros Meta-Analítica na sección "
-"de información do modelo. Non dispoñible para Meta-Análise multinivel/"
-"multivariante."
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Effect size moderation test"
-msgstr "Proba de moderación da magnitude do efecto"
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid ""
@@ -4662,19 +4589,6 @@ msgstr ""
 "Incluír a proba ómnibus de moderación da magnitude do efecto na sección de "
 "información do modelo. Dispoñible cando se especifica a Meta-Regresión da "
 "magnitude do efecto."
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Heterogeneity moderation test"
-msgstr "Proba de moderación de heteroxeneidade"
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Include the omnibus heterogeneity moderation test in the model information "
-"section. Available when moderation meta-regression is specified."
-msgstr ""
-"Incluír a proba ómnibus de moderación de heteroxeneidade na sección de "
-"información do modelo. Dispoñible cando se especifica a Meta-Regresión de "
-"moderación."
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Settings"
@@ -5002,28 +4916,12 @@ msgstr ""
 "variabilidade da mostraxe."
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
-msgid "Random Effects / Model Structure"
-msgstr "Efectos aleatorios / Estrutura do modelo"
-
-msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Available when performing multilevel/multivariate meta-analysis."
 msgstr "Dispoñible cando se realiza Meta-Análise multinivel/multivariante."
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Test inclusion"
 msgstr "Probar a inclusión"
-
-msgctxt "ClassicalMetaAnalysisStatistics|"
-msgid ""
-"Test the inclusion of the individual Random Effects / Model Structure "
-"components. The test compares the complete model (i.e., including all "
-"components) with a model without one of the specified Random Effects / Model "
-"Structure components at a time."
-msgstr ""
-"Probar a inclusión das compoñentes individuais de Efectos aleatorios / "
-"Estrutura do modelo. A proba compara de cada vez, o modelo completo (i.e., "
-"incluíndo tódalas compoñentes) con un modelo sen algunha das compoñentes "
-"especificadas de Efectos aleatorios / Estrutura do modelo."
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Meta-Regression"
@@ -5468,3 +5366,172 @@ msgid ""
 msgstr ""
 "Establecer a magnitude obxectivo do efecto para as probas de Orwin e do N de "
 "seguridade xeral."
+
+msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
+msgid "Random Effects / Model Components"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
+msgid ""
+"Options for specifying the random effects components for the meta-analysis "
+"model, including the types of random effects and their associated variables. "
+"Allows modeling of complex data structures such as multilevel, multivariate, "
+"autoregressive, spatial, and other forms of dependency."
+msgstr ""
+
+#, qt-format
+msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
+msgid "Component %1"
+msgstr ""
+
+#, qt-format
+msgctxt "ClassicalMetaAnalysisAdvanced|"
+msgid ""
+"Allow adding custom arguments to the metafor function call. Consult the "
+"metafor R package documentation for the available commands (for %1meta-"
+"analysis%2 and %3meta-analysis (multilevel/multivariate)%4)."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
+msgid "Estimated Marginal Means and Contrasts"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
+msgid ""
+"Options to compute estimated marginal means (EMMs) and coefficient contrasts "
+"for the effect size and heterogeneity models, allowing examination of "
+"predicted values at specific levels of moderators and their differences."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
+msgid "Contrasts"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
+msgid "P-value adjustment"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
+msgid "None"
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisForestPlot|"
+msgid "Heterogeneity"
+msgstr "Heteroxeneidade"
+
+msgctxt "ClassicalMetaAnalysisForestPlot|"
+msgid "Test"
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisForestPlot|"
+msgid "Estimate"
+msgstr "Estimar"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisForestPlot|"
+msgid "𝜏"
+msgstr "𝜏"
+
+msgctxt "ClassicalMetaAnalysisForestPlot|"
+msgid ""
+"Include the meta-analytic 𝜏, the square root of the estimated between-study "
+"variance in the model information section. Not available for multilevel/"
+"multivariate meta-analysis."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisForestPlot|"
+msgid "𝜏²"
+msgstr "𝜏²"
+
+msgctxt "ClassicalMetaAnalysisForestPlot|"
+msgid ""
+"Include the meta-analytic 𝜏², the estimated between-study variance in the "
+"model information section. Not available for multilevel/multivariate meta-"
+"analysis."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisForestPlot|"
+msgid "I²"
+msgstr "I²"
+
+msgctxt "ClassicalMetaAnalysisForestPlot|"
+msgid ""
+"Include the meta-analytic I², the percentage of total variation across "
+"studies due to heterogeneity in the model information section. Not available "
+"for multilevel/multivariate meta-analysis."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisForestPlot|"
+msgid "H²"
+msgstr "H²"
+
+msgctxt "ClassicalMetaAnalysisForestPlot|"
+msgid ""
+"Include the meta-analytic H², an index indicating the ratio of total "
+"variability to sampling variability in the model information section. Not "
+"available for multilevel/multivariate meta-analysis."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisForestPlot|"
+msgid "Moderation test"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisForestPlot|"
+msgid ""
+"Include the omnibus heterogeneity moderation test in the model information "
+"section. Available when heterogeneity meta-regression is specified."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisForestPlot|"
+msgid "Effect Size"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisForestPlot|"
+msgid "Fixed effect estimate"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisForestPlot|"
+msgid ""
+"Include a fixed effect meta-analytic effect size estimate in the model "
+"information section. Not available if the model was already fitted with "
+"fixed effects or the model contains heterogeneity meta-regression."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisForestPlot|"
+msgid "Fixed effect estimate test"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisForestPlot|"
+msgid ""
+"Include the test of the fixed effect meta-analytic effect size estimate in "
+"the model information section."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisForestPlot|"
+msgid "Pooled estimate"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisForestPlot|"
+msgid "Pooled estimate test"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Random Effects / Model Components"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Include confidence intervals for the Random Effects / Model Components."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid ""
+"Test the inclusion of the individual Random Effects / Model Components. The "
+"test compares the complete model (i.e., including all components) with a "
+"model without one of the specified Random Effects / Model Structure "
+"components at a time."
+msgstr ""

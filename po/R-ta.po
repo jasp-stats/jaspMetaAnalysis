@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.19.2\n"
-"POT-Creation-Date: 2025-03-29 02:50\n"
+"POT-Creation-Date: 2025-04-19 02:49\n"
 "PO-Revision-Date: 2025-04-13 07:48+0000\n"
 "Last-Translator: Koen Derks <koen-derks@hotmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/jasp/"
@@ -416,56 +416,24 @@ msgstr ""
 msgid "All observations were removed as influential."
 msgstr "அனைத்து அவதானிப்புகளும் செல்வாக்குமிக்கவை."
 
-msgid "Residual Heterogeneity Test"
-msgstr "மீதமுள்ள பன்முக சோதனை"
+#, fuzzy
+msgid "Meta-Analytic Tests"
+msgstr "மேவு பகுப்பாய்வு மதிப்பீடுகள்"
 
-msgid "Qₑ"
-msgstr "Qₑ"
-
-msgid "df"
-msgstr "டி.எஃப்"
+msgid "Test"
+msgstr ""
 
 msgid "p"
 msgstr "ப"
-
-msgid "Pooled Effect Size Test"
-msgstr "பூல் செய்யப்பட்ட விளைவு அளவு சோதனை"
-
-msgid "Estimate"
-msgstr "மதிப்பீடு"
-
-msgid "Standard Error"
-msgstr "நிலையான பிழை"
-
-msgid "t"
-msgstr "டி"
-
-msgid "z"
-msgstr "சட்"
-
-msgid "Omnibus Moderation Test"
-msgstr "அனைத்து மிதமான சோதனை"
-
-msgid "Parameter"
-msgstr "கூறளவு"
-
-msgid "F"
-msgstr "F"
-
-msgid "Qₘ"
-msgstr "Qₘ"
-
-msgid "df₁"
-msgstr "df₁"
-
-msgid "df₂"
-msgstr "df₂"
 
 msgid "p (permutation)"
 msgstr "பி (வரிசைமாற்றம்)"
 
 msgid "Meta-Analytic Estimates"
 msgstr "மேவு பகுப்பாய்வு மதிப்பீடுகள்"
+
+msgid "Estimate"
+msgstr "மதிப்பீடு"
 
 msgid "%s%% CI"
 msgstr "%s %% தொஒ"
@@ -506,11 +474,38 @@ msgstr "விளைவு அளவு மெட்டா-பின்னடை
 msgid "Heterogeneity Meta-Regression Terms Tests"
 msgstr "பன்முகத்தன்மை மெட்டா-பின்னடைவு விதிமுறைகள் சோதனைகள்"
 
+msgid "F"
+msgstr "F"
+
+msgid "Qₘ"
+msgstr "Qₘ"
+
+msgid "df₁"
+msgstr "df₁"
+
+msgid "df"
+msgstr "டி.எஃப்"
+
+msgid "df₂"
+msgstr "df₂"
+
+msgid "Warning:"
+msgstr "எச்சரிக்கை:"
+
 msgid "Effect Size Meta-Regression Coefficients"
 msgstr "விளைவு அளவு மெட்டா-பின்னடைவு குணகங்கள்"
 
 msgid "Heterogeneity Meta-Regression Coefficients"
 msgstr "பன்முகத்தன்மை மெட்டா-பின்னடைவு குணகங்கள்"
+
+msgid "Standard Error"
+msgstr "நிலையான பிழை"
+
+msgid "t"
+msgstr "டி"
+
+msgid "z"
+msgstr "சட்"
 
 msgid "Effect Size Meta-Regression Correlation Matrix"
 msgstr "விளைவு அளவு மெட்டா-பின்னடைவு தொடர்பு அணி"
@@ -518,17 +513,37 @@ msgstr "விளைவு அளவு மெட்டா-பின்னடை
 msgid "Heterogeneity Meta-Regression Correlation Matrix"
 msgstr "பன்முகத்தன்மை மெட்டா-பின்னடைவு தொடர்பு அணி"
 
-msgid "Estimated Marginal Means: Effect Size"
-msgstr "மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகள்: விளைவு அளவு"
+#, fuzzy
+msgid "Estimated Marginal Means and Contrasts Summary"
+msgstr "மதிப்பிடப்பட்ட விளிம்பு என்றால் சுருக்கம்"
 
-msgid "Estimated Marginal Means: Heterogeneity"
-msgstr "மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகள்: பன்முகத்தன்மை"
+#, fuzzy
+msgid "Estimated Marginal Means / Contrasts"
+msgstr "மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகள்"
 
-msgid "Variable"
-msgstr "மாறக்கூடிய"
+#, fuzzy
+msgid "(Effect Size)"
+msgstr "விளைவு அளவு"
+
+#, fuzzy
+msgid "(Heterogeneity)"
+msgstr "பன்முகத்தன்மை"
+
+msgid "Adjusted Estimate"
+msgstr "சரிசெய்யப்பட்ட மதிப்பீடு"
+
+msgid "Estimated Marginal Means"
+msgstr "மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகள்"
 
 msgid "Level"
 msgstr "நிலை"
+
+msgid "Contrasts"
+msgstr ""
+
+#, fuzzy
+msgid "Comparison"
+msgstr "கூறு:"
 
 msgid "Bubble Plots"
 msgstr "குமிழி அடுக்கு"
@@ -597,6 +612,9 @@ msgstr "ஒன்றை விட்டு விடுங்கள்"
 msgid "𝜏²"
 msgstr ". 𝜏²"
 
+msgid "Qₑ"
+msgstr "Qₑ"
+
 msgid "Hat"
 msgstr "தொப்பி"
 
@@ -653,9 +671,6 @@ msgstr "மீதமுள்ள புனல் சூழ்ச்சி"
 msgid "Meta-Regression Summary"
 msgstr "மெட்டா-பின்னடைவு சுருக்கம்"
 
-msgid "Estimated Marginal Means Summary"
-msgstr "மதிப்பிடப்பட்ட விளிம்பு என்றால் சுருக்கம்"
-
 msgid "Variance Inflation Summary"
 msgstr "மாறுபாடு பணவீக்க சுருக்கம்"
 
@@ -695,9 +710,6 @@ msgstr "பன்முகத்தன்மை (Coef: %1$s)"
 msgid "Heterogeneity coefficients %1$s correspond to %2$s."
 msgstr "பன்முகத்தன்மை குணகங்கள் %1$s %2$s உடன் ஒத்திருக்கும்."
 
-msgid "Adjusted Estimate"
-msgstr "சரிசெய்யப்பட்ட மதிப்பீடு"
-
 msgid "Mean - %1$sSD"
 msgstr "சராசரி - %1$s திட நிலை இயக்கி"
 
@@ -736,16 +748,20 @@ msgstr ""
 msgid "Fisher's z to r"
 msgstr "ஃபிசரின் சட் முதல் ஆர்"
 
-msgid "Exponential"
+#, fuzzy
+msgid "exponential"
 msgstr "அடுக்குக்குறி"
 
-msgid "Log odds to proportions"
+#, fuzzy
+msgid "log odds to proportions"
 msgstr "விகிதாச்சாரத்திற்கு முரண்பாடுகள்"
 
-msgid "Log odds to SMD (normal)"
+#, fuzzy
+msgid "log odds to SMD (normal)"
 msgstr "SMD (இயல்பானது) க்கு பதிவு முரண்பாடுகள்"
 
-msgid "Log odds to SMD (logistic)"
+#, fuzzy
+msgid "log odds to SMD (logistic)"
 msgstr "SMD க்கு பதிவு முரண்பாடுகள் (லாசிச்டிக்)"
 
 msgid "SMD to log odds (normal)"
@@ -760,7 +776,8 @@ msgstr "அக்ச்டியன் & வேலன் தலைகீழ் �
 msgid "Bonett inverse α"
 msgstr "போனெட் தலைகீழ் α"
 
-msgid "Z to R²"
+#, fuzzy
+msgid "z to R²"
 msgstr "இந்த r² உடன்"
 
 msgid "SMD to Cohen's U₁"
@@ -775,6 +792,31 @@ msgstr "SMD பெறுநர் COHEN’S U₃"
 msgid "SMD to CLES, Pr(supperiority)"
 msgstr "வகுப்பிற்கு SMD, அல்லது (மேன்மை)"
 
+msgid "None"
+msgstr ""
+
+msgid "Bonferroni"
+msgstr ""
+
+msgid "Holm"
+msgstr ""
+
+msgid "Hochberg"
+msgstr ""
+
+msgid "Hommel"
+msgstr ""
+
+msgid "Benjamini-Hochberg"
+msgstr ""
+
+msgid "Benjamini-Yekutieli"
+msgstr ""
+
+#, fuzzy
+msgid "Residual heterogeneity"
+msgstr "மீதமுள்ள பன்முக சோதனை"
+
 msgid "Moderation (Effect Size): %1$s"
 msgstr "மிதமான (விளைவு அளவு): %1$s"
 
@@ -784,16 +826,36 @@ msgstr "மிதமான (பன்முகத்தன்மை): %1$s"
 msgid "Moderation: %1$s"
 msgstr "மிதமான: %1$s"
 
-msgid "Heterogeneity:"
-msgstr "பன்முகத்தன்மை:"
+#, fuzzy
+msgid "Pooled effect size"
+msgstr "பூல் செய்யப்பட்ட விளைவு அளவு சோதனை"
 
-msgid "Fixed effect tested using z-distribution."
+#, fuzzy
+msgid "(coef: %1$s)"
+msgstr "விளைவு அளவு (COEF: %1$s)"
+
+#, fuzzy
+msgid "Moderation effect size%1$s"
+msgstr "மிதமான (விளைவு அளவு): %1$s"
+
+#, fuzzy
+msgid "Moderation%1$s"
+msgstr "மிதமான: %1$s"
+
+#, fuzzy
+msgid "Moderation heterogeneity%1$s"
+msgstr "மிதமான (பன்முகத்தன்மை): %1$s"
+
+#, fuzzy
+msgid "Fixed effects tested using z-distribution."
 msgstr "Z- விநியோகத்தைப் பயன்படுத்தி நிலையான விளைவு சோதிக்கப்பட்டது."
 
-msgid "Fixed effect tested using t-distribution."
+#, fuzzy
+msgid "Fixed effects tested using t-distribution."
 msgstr "டி-விநியோகத்தைப் பயன்படுத்தி நிலையான விளைவு சோதிக்கப்பட்டது."
 
-msgid "Fixed effect tested using Knapp and Hartung adjustment."
+#, fuzzy
+msgid "Fixed effects tested using Knapp and Hartung adjustment."
 msgstr "நாப் மற்றும் ஆர்ட்டுங் சரிசெய்தலைப் பயன்படுத்தி நிலையான விளைவு சோதிக்கப்பட்டது."
 
 msgid "The heterogeneity model for 𝜏² is specified on the log scale."
@@ -807,6 +869,12 @@ msgstr "%1$i நான் %2$i உடன் ஒவ்வொன்றையும
 
 msgid "%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates."
 msgstr "%1$i கொத்துகள் மின்/சராசரி/அதிகபட்சம்%2$i/%3$i/%4$i நான் மதிப்பிடுகிறேன்."
+
+msgid ""
+"NAs in the pooled effect size were introduced due to the %1$s "
+"transformation. Please verify that you are using the correct effect size "
+"transformation."
+msgstr ""
 
 msgid "The pooled effect size is transformed using %1$s transformation."
 msgstr "பூல் செய்யப்பட்ட விளைவு அளவு %1$s உருமாற்றத்தைப் பயன்படுத்தி மாற்றப்படுகிறது."
@@ -851,11 +919,45 @@ msgstr ""
 "ஒவ்வொரு விளிம்பு சராசரி மதிப்பீடும் மீதமுள்ள முன்னறிவிப்பாளர்களின் அளவுகளில் சராசரியாக "
 "உள்ளது."
 
+msgid ""
+"NAs in the marginal mean estimatess were introduced due to the %1$s "
+"transformation. Please verify that you are using the correct effect size "
+"transformation."
+msgstr ""
+
 msgid "The estimates and intervals are transformed using %1$s transformation."
 msgstr "மதிப்பீடுகள் மற்றும் இடைவெளிகள் %1$s உருமாற்றத்தைப் பயன்படுத்தி மாற்றப்படுகின்றன."
 
 msgid "The estimates and intervals correspond to %1$s."
 msgstr "மதிப்பீடுகள் மற்றும் இடைவெளிகள் %1$s உடன் ஒத்திருக்கும்."
+
+#, fuzzy
+msgid ""
+"Each contrast is averaged across the levels of the remaining predictors."
+msgstr ""
+"ஒவ்வொரு விளிம்பு சராசரி மதிப்பீடும் மீதமுள்ள முன்னறிவிப்பாளர்களின் அளவுகளில் சராசரியாக "
+"உள்ளது."
+
+#, fuzzy
+msgid ""
+"Contrasts of estimates marginal means cannot be transformed via the effect "
+"size transformation."
+msgstr "மதிப்பீடுகள் மற்றும் இடைவெளிகள் %1$s உருமாற்றத்தைப் பயன்படுத்தி மாற்றப்படுகின்றன."
+
+msgid ""
+"Contrasts of estimated marginal means are adjusted for multiple comparisons "
+"using %1$s correction."
+msgstr ""
+
+msgid ""
+"Contrasts of estimated marginal means cannot be transformed via the link "
+"function. As such, the contrasts are summarized on the model scale: log(𝜏²)."
+msgstr ""
+
+msgid ""
+"Contrasts of estimated marginal means cannot be transformed via the "
+"heterogeneity transformation. As such, the contrasts are summarized as 𝜏²."
+msgstr ""
 
 msgid "Permutation p-value is based on %1$s permutations."
 msgstr "வரிசைமாற்றம் p- மதிப்பு %1$s வரிசைமாற்றங்களை அடிப்படையாகக் கொண்டது."
@@ -866,6 +968,24 @@ msgid ""
 msgstr ""
 "மாதிரி மதிப்பீடு பின்வரும் செய்தியுடன் தோல்வியடைந்தது: %1$s. தயவுசெய்து, மாதிரியை "
 "எளிதாக்குவதைக் கவனியுங்கள்."
+
+msgid ""
+"The term %1$s was completely removed from the model. Possible causes are "
+"missing values, collinear predictors, or missing crossed cells in an "
+"interaction term."
+msgstr ""
+
+msgid ""
+"The term %1$s was partilly removed (%2$i/%3$i coefficients) from the model. "
+"Possible causes are missing values, collinear predictors, or missing crossed "
+"cells in an interaction term."
+msgstr ""
+
+msgid ""
+"The following coefficients were removed from the model: %1$s. Possible "
+"causes are missing values, collinear predictors, or missing crossed cells in "
+"an interaction term."
+msgstr ""
 
 msgid "Error reading the distance matrix file: %1$s"
 msgstr "தூர மேட்ரிக்ச் கோப்பைப் படிப்பதில் பிழை: %1$s"
@@ -901,8 +1021,25 @@ msgstr "நிலைகள்"
 msgid "Fixed"
 msgstr "சரி"
 
-msgid "Inclusion Test"
+#, fuzzy
+msgid "Confidence Intervals"
+msgstr "95 %% நம்பிக்கை இடைவெளி"
+
+#, fuzzy
+msgid "Inclusion Tests"
 msgstr "சேர்க்கும் சோதனை"
+
+#, fuzzy
+msgid "Component Inclusion Test"
+msgstr "சேர்க்கும் சோதனை"
+
+#, fuzzy
+msgid "%1$s: Level Inclusion Test"
+msgstr "சேர்க்கும் சோதனை"
+
+#, fuzzy
+msgid "Removed Levels"
+msgstr "நிலைகள்"
 
 msgid "Removed Component"
 msgstr "அகற்றப்பட்ட கூறு"
@@ -938,6 +1075,10 @@ msgstr "அறியப்பட்ட தொடர்பு சுருக்�
 msgid "Testing Inclusion of Random Effects / Model Structure"
 msgstr "சீரற்ற விளைவுகள் / மாதிரி கட்டமைப்பைச் சேர்ப்பது"
 
+#, fuzzy
+msgid "Testing Inclusion of Nested Random Effects: %1$s"
+msgstr "சீரற்ற விளைவுகள் / மாதிரி கட்டமைப்பைச் சேர்ப்பது"
+
 msgid "Random Slopes"
 msgstr "சீரற்ற சரிவுகள்"
 
@@ -965,6 +1106,9 @@ msgstr "ஈட்டோரோச்கெச்டாச்டிக் ஏ.ஆ�
 msgid "Continuous-Time AR"
 msgstr "தொடர்ச்சியான நேர ஏ.ஆர்"
 
+msgid "Exponential"
+msgstr "அடுக்குக்குறி"
+
 msgid "Gaussian"
 msgstr "காசியன்"
 
@@ -991,6 +1135,9 @@ msgstr "மதிப்பீடுகள் 𝜏²"
 
 msgid "Estimates ρ"
 msgstr "மதிப்பீடுகள்"
+
+msgid "ρ"
+msgstr ""
 
 msgid "%s Summary"
 msgstr "%s சுருக்கம்"
@@ -1086,11 +1233,12 @@ msgstr "எஃபெக்ட் அளவுகள் %2$i தரவு உள�
 msgid "Error in Step %1$i:"
 msgstr "படி %1$i இல் பிழை:"
 
-msgid "Estimated Marginal Means"
-msgstr "மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகள்"
-
 msgid "Model Information"
 msgstr "மாதிரி செய்தி"
+
+#, fuzzy
+msgid "Fixed Effect Estimate"
+msgstr "நிலையான விளைவுகள் மதிப்பீடுகள்"
 
 msgid "Pooled Estimate"
 msgstr "பூல் மதிப்பீடு"
@@ -1238,9 +1386,6 @@ msgstr "குணகங்கள்"
 msgid "At least one predictor needs to be specified."
 msgstr "குறைந்தது ஒரு முன்கணிப்பு குறிப்பிடப்பட வேண்டும்."
 
-msgid "Warning:"
-msgstr "எச்சரிக்கை:"
-
 msgid "%1$s observations were ommited due to missing values."
 msgstr "மதிப்புகள் காணாமல் போனதால் %1$s அவதானிப்புகள் இருந்தன."
 
@@ -1253,19 +1398,21 @@ msgstr "மாதிரி கண்டறிதல்"
 msgid "Autocorrelation (%1$s)"
 msgstr "தன்னியக்க தொடர்பு (%1$s)"
 
+#, fuzzy
 msgid ""
 "Inference possibly unreliable -- MCMC chains might not have converged; The "
-"largest R-hat is %.3f > 1.01. To lower R-hat please increase 'Iterations', "
+"largest R-hat is %1$.3f > 1.01. To lower R-hat please increase 'Iterations', "
 "or 'Adapt delta' in the Options section."
 msgstr ""
 "அனுமானம் நம்பமுடியாதது - எம்.சி.எம்.சி சங்கிலிகள் ஒன்றிணைந்திருக்காது; மிகப்பெரிய R-"
 "HAT %.3f > 1.01. R-HAT ஐக் குறைக்க தயவுசெய்து 'மறு செய்கைகளை' அதிகரிக்கவும் அல்லது "
 "விருப்பங்கள் பிரிவில் 'டெல்டாவை மாற்றியமைக்கவும்'."
 
+#, fuzzy
 msgid ""
-"Low estimation accuracy -- The smallest Effective Sample Size (ESS) is %.2f "
-"< %1.0f. To increase accuracy please increase 'Iterations', or 'Adapt delta' "
-"in the Options section."
+"Low estimation accuracy -- The smallest Effective Sample Size (ESS) is "
+"%1$.2f < %2$1.0f. To increase accuracy please increase 'Iterations', or "
+"'Adapt delta' in the Options section."
 msgstr ""
 "குறைந்த மதிப்பீட்டு துல்லியம் - மிகச்சிறிய பயனுள்ள மாதிரி அளவு (ESS) %.2f < %1.0f. "
 "துல்லியத்தை அதிகரிக்க தயவுசெய்து 'மறு செய்கைகளை' அதிகரிக்கவும் அல்லது விருப்பங்கள் "
@@ -1604,8 +1751,8 @@ msgid ""
 "%sThe optimizer failed to find a solution. Consider re-specifying the model "
 "or the p-value cutoffs."
 msgstr ""
-"%s ஆப்டிமைசர் ஒரு தீர்வைக் கண்டுபிடிக்கத் தவறிவிட்டது. மாதிரி அல்லது p-மதிப்பு வெட்டுக்களை"
-" மீண்டும் குறிப்பிடுவதைக் கருத்தில் கொள்ளுங்கள்."
+"%s ஆப்டிமைசர் ஒரு தீர்வைக் கண்டுபிடிக்கத் தவறிவிட்டது. மாதிரி அல்லது p-மதிப்பு "
+"வெட்டுக்களை மீண்டும் குறிப்பிடுவதைக் கருத்தில் கொள்ளுங்கள்."
 
 msgid ""
 "%sThe automatic cutoffs selection did not find viable p-value cutoffs. "
@@ -1736,6 +1883,24 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "மதிப்புகள் காணாமல் போனதால் %i கண்காணிப்பு அகற்றப்பட்டது."
 msgstr[1] "மதிப்புகள் காணாமல் போனதால் %i அவதானிப்புகள் அகற்றப்பட்டன."
+
+#~ msgid "Omnibus Moderation Test"
+#~ msgstr "அனைத்து மிதமான சோதனை"
+
+#~ msgid "Parameter"
+#~ msgstr "கூறளவு"
+
+#~ msgid "Estimated Marginal Means: Effect Size"
+#~ msgstr "மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகள்: விளைவு அளவு"
+
+#~ msgid "Estimated Marginal Means: Heterogeneity"
+#~ msgstr "மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகள்: பன்முகத்தன்மை"
+
+#~ msgid "Variable"
+#~ msgstr "மாறக்கூடிய"
+
+#~ msgid "Heterogeneity:"
+#~ msgstr "பன்முகத்தன்மை:"
 
 #~ msgid "μ"
 #~ msgstr "மீ"
