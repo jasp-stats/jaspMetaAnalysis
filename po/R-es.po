@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2025-04-19 02:49\n"
-"PO-Revision-Date: 2025-03-30 09:01+0000\n"
+"PO-Revision-Date: 2025-04-19 11:43+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11-dev\n"
+"X-Generator: Weblate 5.11.1-dev\n"
 
 msgid ""
 "The study labels contain invalid characters. Please, remove them before "
@@ -429,12 +429,11 @@ msgstr ""
 msgid "All observations were removed as influential."
 msgstr "Todas las observaciones se eliminaron como influyentes."
 
-#, fuzzy
 msgid "Meta-Analytic Tests"
-msgstr "Estimaciones Meta-Analíticas"
+msgstr "Contrastes Meta-Analíticos"
 
 msgid "Test"
-msgstr ""
+msgstr "Contraste"
 
 msgid "p"
 msgstr "p"
@@ -527,21 +526,17 @@ msgstr "Matriz de correlaciones de la Meta-Regresión de la magnitud del efecto"
 msgid "Heterogeneity Meta-Regression Correlation Matrix"
 msgstr "Matriz de correlaciones de la Meta-Regresión de heterogeneidad"
 
-#, fuzzy
 msgid "Estimated Marginal Means and Contrasts Summary"
-msgstr "Resumen de las medias marginales estimadas"
+msgstr "Resumen de las medias marginales estimadas y contrastes"
 
-#, fuzzy
 msgid "Estimated Marginal Means / Contrasts"
-msgstr "Medias marginales estimadas"
+msgstr "Medias marginales estimadas/Contrastes"
 
-#, fuzzy
 msgid "(Effect Size)"
-msgstr "Magnitud del efecto"
+msgstr "(Magnitud del efecto)"
 
-#, fuzzy
 msgid "(Heterogeneity)"
-msgstr "Heterogeneidad"
+msgstr "(Heterogeneidad)"
 
 msgid "Adjusted Estimate"
 msgstr "Estimación ajustada"
@@ -553,11 +548,10 @@ msgid "Level"
 msgstr "Nivel"
 
 msgid "Contrasts"
-msgstr ""
+msgstr "Contrastes"
 
-#, fuzzy
 msgid "Comparison"
-msgstr "Componente:"
+msgstr "Comparación"
 
 msgid "Bubble Plots"
 msgstr "Gráficos de burbujas"
@@ -766,19 +760,15 @@ msgstr ""
 msgid "Fisher's z to r"
 msgstr "z de Fisher a r"
 
-#, fuzzy
 msgid "exponential"
 msgstr "Exponencial"
 
-#, fuzzy
 msgid "log odds to proportions"
 msgstr "Log de probabilidades a proporciones"
 
-#, fuzzy
 msgid "log odds to SMD (normal)"
 msgstr "Log de probabilidades a SMD (Normal)"
 
-#, fuzzy
 msgid "log odds to SMD (logistic)"
 msgstr "Log de probabilidades a SMD (Logística)"
 
@@ -794,7 +784,6 @@ msgstr "α inversa de Hakstian & Whalen"
 msgid "Bonett inverse α"
 msgstr "α inversa de Bonett"
 
-#, fuzzy
 msgid "z to R²"
 msgstr "Z a R²"
 
@@ -811,29 +800,28 @@ msgid "SMD to CLES, Pr(supperiority)"
 msgstr "SMD a CLES, Pr(superioridad)"
 
 msgid "None"
-msgstr ""
+msgstr "Ninguna"
 
 msgid "Bonferroni"
-msgstr ""
+msgstr "Bonferroni"
 
 msgid "Holm"
-msgstr ""
+msgstr "Holm"
 
 msgid "Hochberg"
-msgstr ""
+msgstr "Hochberg"
 
 msgid "Hommel"
-msgstr ""
+msgstr "Hommel"
 
 msgid "Benjamini-Hochberg"
-msgstr ""
+msgstr "Benjamini-Hochberg"
 
 msgid "Benjamini-Yekutieli"
-msgstr ""
+msgstr "Benjamini-Yekutieli"
 
-#, fuzzy
 msgid "Residual heterogeneity"
-msgstr "Contraste de Heterogeneidad de los errores"
+msgstr "Heterogeneidad de los errores"
 
 msgid "Moderation (Effect Size): %1$s"
 msgstr "Moderación (Magnitud del efecto): %1$s"
@@ -844,37 +832,29 @@ msgstr "Moderación (Heterogeneidad): %1$s"
 msgid "Moderation: %1$s"
 msgstr "Moderación: %1$s"
 
-#, fuzzy
 msgid "Pooled effect size"
-msgstr "Contraste de la magnitud del efecto combinada"
+msgstr "Magnitud del efecto combinada"
 
-#, fuzzy
 msgid "(coef: %1$s)"
-msgstr "Magnitud del efecto (coef: %1$s)"
+msgstr "(coef: %1$s)"
 
-#, fuzzy
 msgid "Moderation effect size%1$s"
-msgstr "Moderación (Magnitud del efecto): %1$s"
+msgstr "Magnitud %1$s del efecto de moderación"
 
-#, fuzzy
 msgid "Moderation%1$s"
-msgstr "Moderación: %1$s"
+msgstr "Moderación %1$s"
 
-#, fuzzy
 msgid "Moderation heterogeneity%1$s"
-msgstr "Moderación (Heterogeneidad): %1$s"
+msgstr "Heterogeneidad de moderación %1$s"
 
-#, fuzzy
 msgid "Fixed effects tested using z-distribution."
-msgstr "Efecto fijo contrastado usando la distribución z."
+msgstr "Efectos fijos contrastados usando la distribución z."
 
-#, fuzzy
 msgid "Fixed effects tested using t-distribution."
-msgstr "Efecto fijo contrastado usando la distribución t."
+msgstr "Efectos fijos contrastados usando la distribución t."
 
-#, fuzzy
 msgid "Fixed effects tested using Knapp and Hartung adjustment."
-msgstr "Efecto fijo contrastado usando el ajuste de Knapp y Hartung."
+msgstr "Efectos fijos contrastados usando el ajuste de Knapp y Hartung."
 
 msgid "The heterogeneity model for 𝜏² is specified on the log scale."
 msgstr ""
@@ -897,6 +877,9 @@ msgid ""
 "transformation. Please verify that you are using the correct effect size "
 "transformation."
 msgstr ""
+"Os NAs na magnitude do efecto combinada se presentaron debido á "
+"transformación %1$s. Por favor, verifica que estás usando a transformación "
+"correcta da magnitude do efecto."
 
 msgid "The pooled effect size is transformed using %1$s transformation."
 msgstr ""
@@ -949,6 +932,9 @@ msgid ""
 "transformation. Please verify that you are using the correct effect size "
 "transformation."
 msgstr ""
+"Os NAs nas estimacións das medias marxinais se presentaron debido á "
+"transformación %1$s. Por favor, verifica que estás usando a transformación "
+"correcta da magnitude do efecto."
 
 msgid "The estimates and intervals are transformed using %1$s transformation."
 msgstr ""
@@ -958,35 +944,40 @@ msgstr ""
 msgid "The estimates and intervals correspond to %1$s."
 msgstr "Las estimaciones y los intervalos corresponden a %1$s."
 
-#, fuzzy
 msgid ""
 "Each contrast is averaged across the levels of the remaining predictors."
 msgstr ""
-"Cada estimación media marginal se promedia entre los niveles de los "
-"predictores que quedan."
+"Cada contraste se promedia entre los niveles de los predictores que quedan."
 
-#, fuzzy
 msgid ""
 "Contrasts of estimates marginal means cannot be transformed via the effect "
 "size transformation."
 msgstr ""
-"Las estimaciones y los intervalos se transforman usando la transformación "
-"%1$s."
+"Los contrastes de las estimaciones de las medias marginales no se pueden "
+"transformar mediante la transformación de la magnitud del efecto."
 
 msgid ""
 "Contrasts of estimated marginal means are adjusted for multiple comparisons "
 "using %1$s correction."
 msgstr ""
+"Los contrastes de las estimaciones de las medias marginales se ajustan para "
+"múltiples comparaciones usando la corrección %1$s."
 
 msgid ""
 "Contrasts of estimated marginal means cannot be transformed via the link "
 "function. As such, the contrasts are summarized on the model scale: log(𝜏²)."
 msgstr ""
+"Los contrastes de las estimaciones de las medias marginales no se pueden "
+"transformar mediante la función de enlace. Así los contrastes se resumen en "
+"la escala del modelo: log(𝜏²)."
 
 msgid ""
 "Contrasts of estimated marginal means cannot be transformed via the "
 "heterogeneity transformation. As such, the contrasts are summarized as 𝜏²."
 msgstr ""
+"Los contrastes de las estimaciones de las medias marginales no se pueden "
+"transformar mediante la transformación de heterogeneidad. Así los contrastes "
+"se resumen como 𝜏²."
 
 msgid "Permutation p-value is based on %1$s permutations."
 msgstr "El valor p de permutación se basa en %1$s permutaciones."
@@ -1003,18 +994,27 @@ msgid ""
 "missing values, collinear predictors, or missing crossed cells in an "
 "interaction term."
 msgstr ""
+"El término %1$s se eliminó completamente del modelo. Las causas posibles son:"
+" valores ausentes predictores con multicolinealidad o celdas cruzadas "
+"ausentes en un término de interacción."
 
 msgid ""
 "The term %1$s was partilly removed (%2$i/%3$i coefficients) from the model. "
 "Possible causes are missing values, collinear predictors, or missing crossed "
 "cells in an interaction term."
 msgstr ""
+"El término %1$s se eliminó parcialmente (coeficientes %2$i/%3$i) del modelo. "
+"Las causas posibles son: valores ausentes predictores con multicolinealidad "
+"o celdas cruzadas ausentes en un término de interacción."
 
 msgid ""
 "The following coefficients were removed from the model: %1$s. Possible "
 "causes are missing values, collinear predictors, or missing crossed cells in "
 "an interaction term."
 msgstr ""
+"Los siguientes coeficientes se eliminaron del modelo: %1$s. Las causas "
+"posibles son: valores ausentes predictores con multicolinealidad o celdas "
+"cruzadas ausentes en un término de interacción."
 
 msgid "Error reading the distance matrix file: %1$s"
 msgstr "Error al leer el fichero de la matriz de distancias: %1$s"
@@ -1050,25 +1050,20 @@ msgstr "Niveles"
 msgid "Fixed"
 msgstr "Fijo"
 
-#, fuzzy
 msgid "Confidence Intervals"
-msgstr "Intervalo con el 95%% de Confianza"
+msgstr "Intervalos de confianza"
 
-#, fuzzy
 msgid "Inclusion Tests"
-msgstr "Contraste de inclusión"
+msgstr "Contrastes de inclusión"
 
-#, fuzzy
 msgid "Component Inclusion Test"
-msgstr "Contraste de inclusión"
+msgstr "Contraste de inclusión de componentes"
 
-#, fuzzy
 msgid "%1$s: Level Inclusion Test"
-msgstr "Contraste de inclusión"
+msgstr "%1$s: Contraste de inclusión de niveles"
 
-#, fuzzy
 msgid "Removed Levels"
-msgstr "Niveles"
+msgstr "Niveles eliminados"
 
 msgid "Removed Component"
 msgstr "Componente eliminada"
@@ -1102,11 +1097,10 @@ msgid "Known Correlation Summary"
 msgstr "Resumen de la correlación conocida"
 
 msgid "Testing Inclusion of Random Effects / Model Structure"
-msgstr "Contrastando la inclusión de Efectos alatorios / Estructura del modelo"
+msgstr "Contrastando la inclusión de Efectos aleatorios / Estructura del modelo"
 
-#, fuzzy
 msgid "Testing Inclusion of Nested Random Effects: %1$s"
-msgstr "Contrastando la inclusión de Efectos alatorios / Estructura del modelo"
+msgstr "Contrastando la inclusión de Efectos aleatorios anidados: %1$s"
 
 msgid "Random Slopes"
 msgstr "Pendientes aleatorias"
@@ -1166,7 +1160,7 @@ msgid "Estimates ρ"
 msgstr "Estimaciones ρ"
 
 msgid "ρ"
-msgstr ""
+msgstr "ρ"
 
 msgid "%s Summary"
 msgstr "Resumen de %s"
@@ -1271,12 +1265,11 @@ msgstr "Error en Paso %1$i:"
 msgid "Model Information"
 msgstr "Información del modelo"
 
-#, fuzzy
 msgid "Fixed Effect Estimate"
-msgstr "Estimaciones de los Efectos Fijos"
+msgstr "Estimación de los Efectos Fijos"
 
 msgid "Pooled Estimate"
-msgstr "Estimación anidada"
+msgstr "Estimación combinada"
 
 msgid "Missing Data Summary"
 msgstr "Resumen de datos ausentes"
@@ -1432,26 +1425,24 @@ msgstr "Diagnósticos del muestreo"
 msgid "Autocorrelation (%1$s)"
 msgstr "Autocorrelación (%1$s)"
 
-#, fuzzy
 msgid ""
 "Inference possibly unreliable -- MCMC chains might not have converged; The "
 "largest R-hat is %1$.3f > 1.01. To lower R-hat please increase 'Iterations', "
 "or 'Adapt delta' in the Options section."
 msgstr ""
 "Inferencia posiblemente poco fiable -- las cadenas MCMC pudieron no "
-"converger. El mayor R-circunflejo es %.3f > 1.01. Para reducir el R-"
+"converger. El mayor R-circunflejo es %1$.3f > 1.01. Para reducir el R-"
 "circunflejo, por favor, aumenta las 'Iteraciones' o 'Delta de ajuste' en la "
 "sección de Opciones."
 
-#, fuzzy
 msgid ""
 "Low estimation accuracy -- The smallest Effective Sample Size (ESS) is "
 "%1$.2f < %2$1.0f. To increase accuracy please increase 'Iterations', or "
 "'Adapt delta' in the Options section."
 msgstr ""
-"Precisión baja de la estimación -- El Tamaño de la Muestra Efectivo (ESS) "
-"más pequeño es %.2f < %1.0f. Para aumentar la precisión, por favor, aumenta "
-"'Iteraciones', o 'Delta de ajuste' en la sección Opciones."
+"Precisión baja de la estimación -- El Tamaño Efectivo de la Muestra (ESS) "
+"más pequeño es %1$.2f < %2$1.0f. Para aumentar la precisión, por favor, "
+"aumenta 'Iteraciones', o 'Delta de ajuste' en la sección Opciones."
 
 msgid "The priors for publication bias were set incorrectly."
 msgstr ""
