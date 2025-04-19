@@ -37,6 +37,9 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
     .masemDataSummaryTables(jaspResults, dataset, options, type = "estimates")
   if (options[["numberOfObservations"]])
     .masemDataSummaryTables(jaspResults, dataset, options, type = "observations")
+  if (options[["pooledCorrelationCovarianceMatrix"]])
+    .masemPooledCorrelationCovarianceMatrix(jaspResults, dataset, options)
+
 
   # estimate the models
   .masemFitModels(jaspResults, dataset, options, MASEM = TRUE)
@@ -47,6 +50,8 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 
   if (options[["additionalFitMeasures"]])
     .masemAdditionalFitMeasuresTable(jaspResults, options)
+  if (options[["pairwiseModelComparison"]])
+    .masemPairwiseModelComparisonTable(jaspResults, options)
 
   # create model-level summaries
   if (options[["modelSummary"]])
@@ -343,8 +348,99 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 
   return()
 }
+.masemPooledCorrelationCovarianceMatrix <- function(jaspResults, dataset, options) {
 
-.masemFitMeasures                <- function(jaspResults, options) {
+  # obtain the descriptives container
+  if (!is.null(jaspResults[["pooledContainer"]])) {
+    return()
+  } else {
+    pooledContainer <- createJaspContainer(title = gettextf(
+      "Pooled %1$s Matrix", switch(
+        options[["dataInputType"]],
+        "correlation" = gettext("Correlation"),
+        "covariance"  = gettext("Covariance")
+      )))
+    pooledContainer$dependOn(c("correlationCovarianceMatrix", "means", "dataInputType", "variableNameSeparator",
+                               "pooledCorrelationCovarianceMatrix", "pooledCorrelationCovarianceMatrixRandomEffects"))
+    pooledContainer$position <- 0.3
+    jaspResults[["pooledContainer"]] <- pooledContainer
+  }
+
+  pooledMatrix <- createJaspTable(title = gettextf(
+    "Pooled %1$s Matrix", switch(
+      options[["dataInputType"]],
+      "correlation" = gettext("Correlation"),
+      "covariance"  = gettext("Covariance")
+    )))
+  pooledMatrix$position <- 1
+  pooledContainer[["pooledMatrix"]] <- pooledMatrix
+
+  # exit if not ready
+  if (is.null(dataset[["data"]]))
+    return()
+
+  fit <- try(metaSEM::tssem1(
+    Cov    = dataset[["data"]],
+    n      = dataset[["n"]],
+    cor.analysis = options[["dataInputType"]] == "correlation",
+    RE.type      = .masemGetRandomEffectsType(options[["pooledCorrelationCovarianceMatrixRandomEffects"]])
+  ))
+
+  if (jaspBase::isTryError(fit)) {
+    pooledMatrix$setError(gettext("The pooled correlation/covariance matrix could not be computed."))
+    return()
+  }
+
+  # obtain model summary
+  coefficientsSummary    <- summary(fit)[["coefficients"]]
+  coefficientsSummaryMat <- coefficientsSummary[grepl("Intercept",rownames(coefficientsSummary)),]
+
+  # create a table with the pooled correlation/covariance matrix
+  variableNames <- attr(dataset[["data"]], "variableNames")
+  pooledMatrix$addColumnInfo(name = "variable", type = "string", title = gettext("Variable"))
+  for (var in variableNames) {
+    pooledMatrix$addColumnInfo(name = var, type = "number", title = var)
+  }
+
+  covMatrix <- matrix(NA, nrow = length(variableNames), ncol = length(variableNames))
+  colnames(covMatrix)  <- variableNames
+  if (options[["dataInputType"]] == "correlation") {
+    covMatrix[lower.tri(covMatrix)] <- coefficientsSummaryMat[,"Estimate"]
+  } else if (options[["dataInputType"]] == "covariance") {
+    covMatrix[!upper.tri(covMatrix)] <- coefficientsSummaryMat[,"Estimate"]
+  }
+  covMatrix <- cbind.data.frame(variable = variableNames, covMatrix)
+  pooledMatrix$setData(covMatrix)
+
+
+  # add all parameters table
+  pooledParameters <- createJaspTable(title = gettextf(
+    "Pooled %1$s Matrix Parameters", switch(
+      options[["dataInputType"]],
+      "correlation" = gettext("Correlation"),
+      "covariance"  = gettext("Covariance")
+    )))
+  pooledParameters$position <- 2
+  pooledContainer[["pooledParameters"]] <- pooledParameters
+
+  # add columns
+  pooledParameters$addColumnInfo(name = "name",     type = "string",  title = "")
+  pooledParameters$addColumnInfo(name = "estimate", type = "number",  title = gettext("Estimate"))
+  if (options[["modelSummaryConfidenceIntervalType"]] == "standardErrors") {
+    pooledParameters$addColumnInfo(name = "se",        type = "number",  title = gettext("Standard Error"))
+  }
+  pooledParameters$addColumnInfo(name = "lCi",       type = "number",  title = gettext("Lower"), overtitle = gettextf("95%% CI"))
+  pooledParameters$addColumnInfo(name = "uCi",       type = "number",  title = gettext("Upper"), overtitle = gettextf("95%% CI"))
+  pooledParameters$addColumnInfo(name = "z",         type = "number",  title = gettext("z"))
+  pooledParameters$addColumnInfo(name = "p",         type = "pvalue",  title = gettext("p"))
+
+  colnames(coefficientsSummary) <- c("estimate", "se", "lCi",  "uCi", "z", "p")
+  coefficientsSummary$name <- rownames(coefficientsSummary)
+  pooledParameters$setData(coefficientsSummary)
+
+  return()
+}
+.masemFitMeasures                  <- function(jaspResults, options) {
 
   # add fit measures on model-by model bases if
   # 1) they were requested
@@ -388,7 +484,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 
   return()
 }
-.masemAdditionalFitMeasuresTable <- function(jaspResults, options) {
+.masemAdditionalFitMeasuresTable   <- function(jaspResults, options) {
 
   if (!is.null(jaspResults[["additionalFitMeasures"]]))
     return()
@@ -401,6 +497,9 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 
   # add columns
   additionalFitMeasures$addColumnInfo(name = "name",        type = "string",  title = "")
+  additionalFitMeasures$addColumnInfo(name = "chi2",        type = "number",  title = "\U03C7\U00B2")
+  additionalFitMeasures$addColumnInfo(name = "df",          type = "integer", title = gettext("df"))
+  additionalFitMeasures$addColumnInfo(name = "p",           type = "pvalue",  title = gettext("p"))
   additionalFitMeasures$addColumnInfo(name = "cfi",         type = "number",  title = gettext("CLI"))
   additionalFitMeasures$addColumnInfo(name = "tli",         type = "number",  title = gettext("TLI"))
   additionalFitMeasures$addColumnInfo(name = "rmsea",       type = "number",  title = gettext("RMSEA"))
@@ -426,7 +525,10 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
         cfi    = NA,
         tli    = NA,
         rmsea  = NA,
-        prmsea = NA
+        prmsea = NA,
+        chi2   = NA,
+        df     = NA,
+        p      = NA
       )
 
     } else {
@@ -437,7 +539,10 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
         cfi    = tempSummary$CFI,
         tli    = tempSummary$TLI,
         rmsea  = tempSummary$RMSEA,
-        prmsea = tempSummary$RMSEAClose
+        prmsea = tempSummary$RMSEAClose,
+        chi2   = tempSummary$Chi,
+        df     = tempSummary$ChiDoF,
+        p      = tempSummary$p
       )
     }
   }
@@ -447,7 +552,70 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 
   return()
 }
-.masemCreateSummaryTable         <- function(tempOutputContainer, tempFit, options, output) {
+.masemPairwiseModelComparisonTable <- function(jaspResults, options) {
+
+  if (!is.null(jaspResults[["pairwiseModelComparison"]]))
+    return()
+
+  # prepare table
+  pairwiseModelComparison <- createJaspTable(gettext("Pairwise Model Comparison"))
+  pairwiseModelComparison$position <- 1.2
+  pairwiseModelComparison$dependOn(c(.semmetaDependencies, "pairwiseModelComparison"))
+  jaspResults[["pairwiseModelComparison"]] <- pairwiseModelComparison
+
+  # add columns
+  pairwiseModelComparison$addColumnInfo(name = "comparison",  type = "string",  title = "")
+  pairwiseModelComparison$addColumnInfo(name = "difChi2",     type = "integer", title = gettext("\U0394 \U03C7\U00B2"))
+  pairwiseModelComparison$addColumnInfo(name = "difDf",       type = "integer", title = gettext("\U0394 df"))
+  pairwiseModelComparison$addColumnInfo(name = "p",           type = "pvalue",  title = gettext("p"))
+
+  # exit if not ready
+  if(!.masemReady(options) || is.null(jaspResults[["modelContainer"]]))
+    return()
+
+  # extract fits
+  fits <- jaspResults[["modelContainer"]]$object
+  if (length(fits) < 2) {
+    pairwiseModelComparison$addFootnote(gettext("At least two models are required for pairwise model comparison."))
+    return()
+  }
+
+  # loop over models and store model fit indicies
+  out <- list()
+  for (i in seq_along(fits)) {
+    for (j in seq_along(fits)) {
+
+      if (i == j)
+        next
+
+      tempFit1 <- fits[[options[["models"]][[i]][["value"]]]]
+      tempFit2 <- fits[[options[["models"]][[j]][["value"]]]]
+
+      if (jaspBase::isTryError(tempFit1) || is.null(tempFit1))
+        next
+      if (jaspBase::isTryError(tempFit2) || is.null(tempFit2))
+        next
+
+      tempAnova <- suppressWarnings(anova(tempFit1, tempFit2))
+
+      out[[length(out) + 1]] <- data.frame(
+        comparison = paste0(options[["models"]][[i]][["value"]], " vs ", options[["models"]][[j]][["value"]]),
+        difChi2    = tempAnova$diffLL[2],
+        difDf      = tempAnova$diffdf[2],
+        p          = tempAnova$p[2]
+      )
+    }
+  }
+
+  out <- do.call(rbind, out)
+  out <- out[out$diffdf > 0,,drop=FALSE]
+
+  # assign output to table
+  pairwiseModelComparison$setData(out)
+
+  return()
+}
+.masemCreateSummaryTable           <- function(tempOutputContainer, tempFit, options, output) {
 
   # create summary table
   tempSummaryTable <- createJaspTable(title = switch(
@@ -516,7 +684,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   } else {
     tempOutput <- tempOutput[, c("name", "row", "col", "estimate", "se", "z", "p", "lCi", "uCi"),drop=FALSE]
   }
-  if (options[["modelSummaryShowMatrixIndices"]]) {
+  if (!options[["modelSummaryShowMatrixIndices"]]) {
     tempOutput <- tempOutput[,!colnames(tempOutput) %in% c("row", "col"),drop=FALSE]
   }
 
@@ -525,7 +693,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 
   return()
 }
-.masemMxOptions                  <- function(){
+.masemMxOptions                    <- function(){
   OpenMx::mxSetDefaultOptions()
   OpenMx::mxOption(NULL, "Default optimizer", "SLSQP")
   OpenMx::mxOption(NULL, "Gradient algorithm", "central")

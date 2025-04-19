@@ -152,6 +152,27 @@ Form
 				info:		qsTr("Show a frequency table of the observations in the correlation/covariance matrix input.")
 			}
 		}
+
+		CheckBox
+		{
+			label:		qsTr("Pooled correlation/covariance matrix")
+			name:		"pooledCorrelationCovarianceMatrix"
+			checked:	false
+			info:		qsTr("Show the pooled correlation/covariance matrix. The pooled correlation/covariance matrix is from the first stage of two-stage meta-analytic SEM. ")
+
+			DropDown
+			{
+				name:		"pooledCorrelationCovarianceMatrixRandomEffects"
+				label:		qsTr("Random effects")
+				values:
+				[
+					{ label: qsTr("Diagonal"),	value: "diagonal" },
+					{ label: qsTr("Symmetric"),	value: "symmetric" },
+					{ label: qsTr("Zero"),		value: "zero" }
+				]
+				info: qsTr("Type of the random effects of the correlation or covariance vectors.")
+			}
+		}
 	}
 
 
@@ -260,6 +281,14 @@ Form
 			name:		"additionalFitMeasures"
 			checked:	false
 			info:		qsTr("Show a summary of the goodness-of-fit statistics.")
+		}
+
+		CheckBox
+		{
+			text:		qsTr("Pairwise model comparison")
+			name:		"pairwiseModelComparison"
+			checked:	false
+			info:		qsTr("Show a pairwise model comparison table.")
 		}
 
 		CheckBox
