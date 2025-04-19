@@ -39,6 +39,7 @@
 
   # fit the model
   .maFitModel(jaspResults, dataset, options)
+  .maUpdateFitModelDataset(jaspResults, dataset, options)
 
   # # remove influential observations and refit the model if requested
   # if (options[["diagnosticsCasewiseDiagnostics"]] && options[["diagnosticsCasewiseDiagnosticsRerunWithoutInfluentialCases"]]) {
@@ -125,9 +126,7 @@
   return(as.formula(formula, env = parent.frame(1)))
 }
 .maFitModel                      <- function(jaspResults, dataset, options, objectName = "fit") {
-  # --------------------------------------------------------------------------- #
-  # when updating don't forget to update the '.maMakeMetaforCallText' function! #
-  # --------------------------------------------------------------------------- #
+
   if (!.maReady(options) || !is.null(jaspResults[[objectName]]))
     return()
 
@@ -135,6 +134,47 @@
   fitContainer <- createJaspState()
   fitContainer$dependOn(.maDependencies)
   jaspResults[[objectName]] <- fitContainer
+
+  fitOutput <- list()
+
+  # full dataset fit
+  startProgressbar(expectedTicks = 1, label = gettext("Estimating Meta-Analytic Model"))
+  fitOutput[["__fullDataset"]] <- .maFitModelFun(dataset, options, subgroupName = gettext("Full dataset"))
+  progressbarTick()
+
+  # add subgroup fits
+  if (options[["subgroup"]] != "") {
+
+    subgroupLevels <- unique(dataset[[options[["subgroup"]]]])
+    startProgressbar(expectedTicks = length(subgroupLevels), label = gettext("Estimating Subgroup Models"))
+
+    for (i in seq_along(subgroupLevels)) {
+
+      subgroupLevel <- subgroupLevels[i]
+      subgroupIndx  <- dataset[[options[["subgroup"]]]] == subgroupLevel
+      subgroupData  <- droplevels(dataset[subgroupIndx, ])
+
+      # forward NAs information
+      tempNasIds    <- attr(dataset, "NasIds")[!attr(dataset, "NasIds")]
+      attr(subgroupData, "NAs")    <- sum(tempNasIds[subgroupIndx])
+      attr(subgroupData, "NasIds") <- tempNasIds[subgroupIndx]
+
+      # fit the model
+      fitOutput[[paste0("subgroup", subgroupLevel)]] <- .maFitModelFun(subgroupData, options, subgroupName = as.character(subgroupLevel))
+      progressbarTick()
+    }
+  }
+
+
+  # add to the output
+  jaspResults[[objectName]]$object <- fitOutput
+
+  return()
+}
+.maFitModelFun                   <- function(dataset, options, subgroupName) {
+  # --------------------------------------------------------------------------- #
+  # when updating don't forget to update the '.maMakeMetaforCallText' function! #
+  # --------------------------------------------------------------------------- #
 
   # specify the effect size and outcome
   if (options[["module"]] == "metaAnalysis") {
@@ -172,8 +212,8 @@
       for (i in seq_along(rmaInput$dist)) {
         if (is.matrix(rmaInput$dist[[i]]) && !all(unique(rmaInput[["data"]][[names(rmaInput$dist)[i]]]) %in% rownames(rmaInput$dist[[names(rmaInput$dist)[i]]])))
           .quitAnalysis(gettextf("The loaded distance matrix for '%1$s' does not match the dataset. The following levels are missing: %2$s.",
-                                names(rmaInput$dist)[i],
-                                paste0(unique(rmaInput[["data"]][[names(rmaInput$dist)[i]]])[!unique(rmaInput[["data"]][[names(rmaInput$dist)[i]]]) %in% rownames(rmaInput$dist)], collapse = ", ")))
+                                 names(rmaInput$dist)[i],
+                                 paste0(unique(rmaInput[["data"]][[names(rmaInput$dist)[i]]])[!unique(rmaInput[["data"]][[names(rmaInput$dist)[i]]]) %in% rownames(rmaInput$dist)], collapse = ", ")))
       }
 
       # known correlation-specific settings
@@ -181,8 +221,8 @@
       for (i in seq_along(rmaInput$R)) {
         if (!all(unique(rmaInput[["data"]][[names(rmaInput$R)[i]]]) %in% rownames(rmaInput$R[[names(rmaInput$R)[i]]])))
           .quitAnalysis(gettextf("The loaded correlation matrix for '%1$s' does not match the dataset. The following levels are missing: %2$s.",
-                                names(rmaInput$R)[i],
-                                paste0(unique(rmaInput[["data"]][[names(rmaInput$R)[i]]])[!unique(rmaInput[["data"]][[names(rmaInput$R)[i]]]) %in% rownames(rmaInput$R)], collapse = ", ")))
+                                 names(rmaInput$R)[i],
+                                 paste0(unique(rmaInput[["data"]][[names(rmaInput$R)[i]]])[!unique(rmaInput[["data"]][[names(rmaInput$R)[i]]]) %in% rownames(rmaInput$R)], collapse = ", ")))
       }
     }
   }
@@ -222,7 +262,9 @@
     rmaInput <- c(rmaInput, .maExtendMetaforCallFromOptions(options))
 
   ### fit the model
-  if (options[["module"]] == "metaAnalysis") {
+  if (nrow(dataset) < 2) {
+    fit <- try(stop("Fewer than two estimates."))
+  } else if (options[["module"]] == "metaAnalysis") {
     fit <- try(do.call(metafor::rma, rmaInput))
   } else if (options[["module"]] == "metaAnalysisMultilevelMultivariate") {
     fit <- try(do.call(metafor::rma.mv, rmaInput))
@@ -230,7 +272,7 @@
 
 
   # add clustering if specified
-  if (options[["clustering"]] != "") {
+  if (options[["clustering"]] != "" && !jaspBase::isTryError(fit)) {
     fitClustered <- try(metafor::robust(
       fit,
       cluster      = dataset[[options[["clustering"]]]],
@@ -243,7 +285,7 @@
 
 
   # add permutation test if requested (only available for non-clustered fits)
-  if (.maIsPermutation(options)) {
+  if (.maIsPermutation(options) && !jaspBase::isTryError(fit)) {
     fit <- .maPermutestAndStore(fit, options)
   }
 
@@ -256,13 +298,92 @@
     }
   }
 
+  # add attributes
+  attr(fit, "subgroup") <- paste0(subgroupName)
+  attr(fit, "dataset")  <- dataset
+  if (!is.null(fitClustered)) {
+    attr(fitClustered, "subgroup") <- subgroupName
+    attr(fitClustered, "dataset")  <- dataset
+  }
+
+
   # return the results
-  jaspResults[[objectName]]$object <- list(
+  return(list(
     fit            = fit,
     fitClustered   = fitClustered
-  )
+  ))
+}
+.maUpdateFitModelDataset         <- function(jaspResults, dataset, options, objectName = "fit") {
+
+  # this function updates the data sets stored as attribute of the fit object if any of the additional variables changes
+  # this is necessary for simplifying handling dataset in the forest plot etc...
+
+  if (!.maReady(options) || is.null(jaspResults[[objectName]]))
+    return()
+  if (!is.null(jaspResults[[paste0(objectName, "DataSet")]]))
+    return()
+
+  # create a container that works as an indicator for dataset update
+  fitContainer <- createJaspState()
+  fitContainer$dependOn(.maDataPlottingDependencies)
+  jaspResults[[paste0(objectName, "DataSet")]] <- fitContainer
+
+  # extract the fit objects
+  fitOutput <- jaspResults[[objectName]]$object
+
+  # full dataset fit
+  fitOutput[["__fullDataset"]] <- .maUpdateFitModelDatasetFun(fitOutput[["__fullDataset"]], dataset)
+
+  # add subgroup fits
+  if (options[["subgroup"]] != "") {
+
+    subgroupLevels <- unique(dataset[[options[["subgroup"]]]])
+
+    for (i in seq_along(subgroupLevels)) {
+
+      subgroupLevel <- subgroupLevels[i]
+      subgroupIndx  <- dataset[[options[["subgroup"]]]] == subgroupLevel
+      subgroupData  <- droplevels(dataset[subgroupIndx, ])
+
+      # forward NAs information
+      tempNasIds    <- attr(dataset, "NasIds")[!attr(dataset, "NasIds")]
+      attr(subgroupData, "NAs")    <- sum(tempNasIds[subgroupIndx])
+      attr(subgroupData, "NasIds") <- tempNasIds[subgroupIndx]
+
+      # fit the model
+      fitOutput[[paste0("subgroup", subgroupLevel)]] <- .maUpdateFitModelDatasetFun(fitOutput[[paste0("subgroup", subgroupLevel)]], subgroupData)
+    }
+  }
+
+  # save the updated fits
+  jaspResults[[objectName]]$object  <- fitOutput
+
+  # set the container to non-null
+  jaspResults[[paste0(objectName, "DataSet")]]$object <- TRUE
 
   return()
+
+}
+.maUpdateFitModelDatasetFun      <- function(fitOutput, dataset) {
+
+  if (!is.null(fitOutput[["fit"]])) {
+    fit <- fitOutput[["fit"]]
+    attr(fit, "dataset") <- dataset
+  } else {
+    fit <- NULL
+  }
+
+  if (!is.null(fitOutput[["fitClustered"]])) {
+    fitClustered <- fitOutput[["fitClustered"]]
+    attr(fitClustered, "dataset") <- dataset
+  } else {
+    fitClustered <- NULL
+  }
+
+  return(list(
+    fit            = fit,
+    fitClustered   = fitClustered
+  ))
 }
 .maPermutestAndStore             <- function(fit, options) {
 
@@ -389,6 +510,162 @@
 
   return(dataset)
 }
+.maDiagnostics                   <- function(jaspResults, options) {
+
+  # extract precomputed diagnostics if done before:
+  if (!is.null(jaspResults[["diagnosticsResults"]])) {
+
+    out <- jaspResults[["diagnosticsResults"]]$object
+
+  } else {
+
+    # the fit diagnostics work only for the non-clustered fit
+    fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
+
+    # create the output container
+    diagnosticsResults <- createJaspState()
+    diagnosticsResults$dependOn(.maDependencies)
+    jaspResults[["diagnosticsResults"]] <- diagnosticsResults
+
+    out <- list()
+
+    for (i in seq_along(fit)) {
+
+      if (jaspBase::isTryError(fit[[i]])) {
+        influenceResultsDfbs <- list()
+        influenceResultsInf  <- list()
+      } else {
+        if (.maIsMultilevelMultivariate(options)) {
+          # only a subset of diagnostics is available for rma.mv
+          influenceResultsDfbs <- data.frame(dfbetas(fit[[i]], code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics: DFBETAS')", code2 = "jaspBase::progressbarTick()"))
+          influenceResultsInf  <- data.frame(
+            rstudent = rstudent(fit[[i]],       code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics: Studentized residuals')", code2 = "jaspBase::progressbarTick()")[["resid"]],
+            cook.d   = cooks.distance(fit[[i]], code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics: Cooks distance')",        code2 = "jaspBase::progressbarTick()"),
+            hat      = hatvalues(fit[[i]])
+          )
+        } else {
+          # the complete suite of influence diagnostics is only available for rma.uni
+          influenceResults     <- influence(fit[[i]], code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics')", code2 = "jaspBase::progressbarTick()")
+          influenceResultsDfbs <- data.frame(influenceResults$dfbs)
+          influenceResultsInf  <- data.frame(influenceResults$inf)
+          influenceResultsInf$tau.del <- sqrt(influenceResultsInf$tau2.del)
+          influenceResultsInf$inf[influenceResultsInf$inf == "*"] <- "Yes"
+        }
+      }
+
+      out[[attr(fit[[i]], "subgroup")]] <- list(
+        "influenceResultsDfbs" = influenceResultsDfbs,
+        "influenceResultsInf"  = influenceResultsInf
+      )
+    }
+
+    # store the results
+    jaspResults[["diagnosticsResults"]]$object <- out
+  }
+
+  return(out)
+}
+.maProfile                       <- function(jaspResults, options) {
+
+  # extract precomputed profile likelihood if done before:
+  if (!is.null(jaspResults[["profileLikelihoodResults"]])) {
+
+    out <- jaspResults[["profileLikelihoodResults"]]$object
+
+  } else {
+
+    # create the output container
+    profileLikelihoodResults <- createJaspState()
+    profileLikelihoodResults$dependOn(.maDependencies)
+    jaspResults[["profileLikelihoodResults"]] <- profileLikelihoodResults
+
+
+    fit <- .maExtractFit(jaspResults, options)
+    out <- list()
+
+    for (i in seq_along(fit)) {
+
+      if (jaspBase::isTryError(fit[[i]])) {
+
+        dfProfile <- list()
+
+      } else if (.maIsMultilevelMultivariate(options)) {
+
+        # use the defaults (too many possible parameter combinations to control)
+        dfProfile <- try(metafor::profile.rma.mv(
+          fit[[i]],
+          plot    = FALSE,
+          progbar = FALSE,
+          code1   = "jaspBase::startProgressbar(length(vcs), label = 'Profile likelihood')",
+          code2   = "jaspBase::progressbarTick()"
+        ))
+
+        # deal with a single component (not a list)
+        if (dfProfile[["comps"]] == 1) {
+          dfProfile <- list(dfProfile)
+          dfProfile[["comps"]] <- 1
+        }
+
+      } else {
+
+        # proceed with some nice formatting for rma.uni (too difficult to implement for rma.mv)
+        xTicks    <- jaspGraphs::getPrettyAxisBreaks(c(0, max(0.1, 2*fit[[i]][["tau2"]])))
+        dfProfile <- try(profile(
+          fit[[i]],
+          xlim    = range(xTicks),
+          plot    = FALSE,
+          progbar = FALSE,
+          code1   = "jaspBase::startProgressbar(length(vcs), label = 'Profile likelihood')",
+          code2   = "jaspBase::progressbarTick()"
+        ))
+        attr(dfProfile, "xTicks")   <- xTicks
+      }
+
+      out[[attr(fit[[i]], "subgroup")]] <- dfProfile
+    }
+
+    jaspResults[["profileLikelihoodResults"]]$object <- out
+  }
+
+
+  return(out)
+}
+.maBaujat                        <- function(jaspResults, options) {
+
+  # extract precomputed profile likelihood if done before:
+  if (!is.null(jaspResults[["baujatResults"]])) {
+
+    out <- jaspResults[["baujatResults"]]$object
+
+  } else {
+
+    # create the output container
+    baujatResults <- createJaspState()
+    baujatResults$dependOn(.maDependencies)
+    jaspResults[["baujatResults"]] <- baujatResults
+
+
+    fit <- .maExtractFit(jaspResults, options)
+    out <- list()
+
+    for (i in seq_along(fit)) {
+
+      if (jaspBase::isTryError(fit[[i]])) {
+        dfBaujat <- list()
+      } else {
+        dfBaujat <- try(.maSuppressPlot(metafor::baujat(fit[[i]])))
+        attr(dfBaujat, "studyLabels") <- attr(fit[[i]], "dataset")[[options[["studyLabels"]]]]
+      }
+
+      out[[attr(fit[[i]], "subgroup")]] <- dfBaujat
+    }
+
+    jaspResults[["baujatResults"]]$object <- out
+  }
+
+
+  return(out)
+}
 
 # output tables
 .maOverallTestsTable                     <- function(jaspResults, dataset, options) {
@@ -404,10 +681,12 @@
   testsTable <- createJaspTable(gettext("Meta-Analytic Tests"))
   testsTable$position <- 1
   testsTable$dependOn(c("addOmnibusModeratorTestEffectSizeCoefficients", "addOmnibusModeratorTestEffectSizeCoefficientsValues",
-                             "addOmnibusModeratorTestHeterogeneityCoefficients", "addOmnibusModeratorTestHeterogeneityCoefficientsValues"))
+                        "addOmnibusModeratorTestHeterogeneityCoefficients", "addOmnibusModeratorTestHeterogeneityCoefficientsValues",
+                        "includeFullDatasetInSubgroupAnalysis"))
   modelSummaryContainer[["testsTable"]] <- testsTable
 
   testsTable$addColumnInfo(name = "test",  type = "string",  title = "")
+  .maAddSubgroupColumn(testsTable, options)
   testsTable$addColumnInfo(name = "stat",  type = "string",  title = gettext("Test"))
   testsTable$addColumnInfo(name = "pval",  type = "pvalue",  title = gettext("p"))
 
@@ -425,24 +704,25 @@
     return()
   }
 
-  if (jaspBase::isTryError(fit)) {
-    testsTable$setError(.maTryCleanErrorMessages(fit))
+  # stop with error if only single fit requested and failed
+  if (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) {
+    testsTable$setError(.maTryCleanErrorMessages(fit[[1]]))
     return()
   }
 
   # add all the overall model test
   tests <- list()
-  tests[["heterogeneity"]] <- .maRowHeterogeneityTest(fit, options)
-  tests[["effect"]]        <- .maRowEffectSizeTest(fit, options)
+  tests[["heterogeneity"]] <- .maSafeRbind(lapply(fit, .maRowHeterogeneityTest, options = options))
+  tests[["effect"]]        <- .maSafeRbind(lapply(fit, .maRowEffectSizeTest,    options = options))
 
   # effect size moderation
   if (.maIsMetaregressionEffectSize(options)) {
     # omnibus test
-    tests[["moderationEffect"]] <- .maRowModerationTest(fit, options, parameter = "effectSize")
+    tests[["moderationEffect"]] <- .maSafeRbind(lapply(fit, .maRowModerationTest, options = options, parameter = "effectSize"))
 
     # additional custom test
     if (options[["addOmnibusModeratorTestEffectSizeCoefficients"]]) {
-      tests[["moderationEffect2"]] <- .maRowModerationTest(fit, options, parameter = "effectSize", coefficientsTest = TRUE)
+      tests[["moderationEffect2"]] <- .maSafeRbind(lapply(fit, .maRowModerationTest, options = options, parameter = "effectSize", coefficientsTest = TRUE))
       if (jaspBase::isTryError(tests[["moderationEffect2"]])) {
         testsTable$setError(tests[["moderationEffect2"]])
         return()
@@ -454,11 +734,11 @@
   # heterogeneity moderation
   if (.maIsMetaregressionHeterogeneity(options)) {
     # omnibus test
-    tests[["moderationHeterogeneity"]] <- .maRowModerationTest(fit, options, parameter = "heterogeneity")
+    tests[["moderationHeterogeneity"]] <- .maSafeRbind(lapply(fit, .maRowModerationTest, options = options, parameter = "heterogeneity"))
 
     # additional custom test
     if (options[["addOmnibusModeratorTestHeterogeneityCoefficients"]]) {
-      tests[["moderationHeterogeneity2"]] <- .maRowModerationTest(fit, options, parameter = "heterogeneity", coefficientsTest = TRUE)
+      tests[["moderationHeterogeneity2"]] <- .maSafeRbind(lapply(fit, .maRowModerationTest, options = options, parameter = "heterogeneity", coefficientsTest = TRUE))
       if (jaspBase::isTryError(tests[["moderationHeterogeneity2"]])) {
         testsTable$setError(tests[["moderationHeterogeneity2"]])
         return()
@@ -467,7 +747,21 @@
     }
   }
 
-  tests <- do.call(rbind, tests)
+  # add errors messages for failed fits
+  for (i in seq_along(fit)[sapply(fit, jaspBase::isTryError)]) {
+    testsTable$addFootnote(
+      gettextf("The model for the subgroup '%1$s' failed with the following error: %2$s",
+               attr(fit[[i]], "subgroup"),
+               .maTryCleanErrorMessages(fit[[i]])),
+      symbol = gettext("Error:")
+    )
+  }
+
+  # bind and clean rows
+  tests <- .maSafeRbind(tests)
+  tests <- .maSafeOrderAndSimplify(tests, "test", options)
+
+  # add the rows to the table
   testsTable$setData(tests)
 
   return()
@@ -485,50 +779,49 @@
   pooledEstimatesTable          <- createJaspTable(gettext("Meta-Analytic Estimates"))
   pooledEstimatesTable$position <- 4
   pooledEstimatesTable$dependOn(c("heterogeneityTau", "heterogeneityTau2", "heterogeneityI2", "heterogeneityH2",
-                                  "confidenceIntervals", "confidenceIntervalsLevel", "predictionIntervals", "transformEffectSize"))
+                                  "confidenceIntervals", "confidenceIntervalsLevel", "predictionIntervals", "transformEffectSize",
+                                  "includeFullDatasetInSubgroupAnalysis"))
   modelSummaryContainer[["pooledEstimatesTable"]] <- pooledEstimatesTable
 
   pooledEstimatesTable$addColumnInfo(name = "par",  type = "string", title = "")
+  .maAddSubgroupColumn(pooledEstimatesTable, options)
   pooledEstimatesTable$addColumnInfo(name = "est",  type = "number", title = gettext("Estimate"))
-  if (options[["confidenceIntervals"]]) {
-    overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
-    pooledEstimatesTable$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
-    pooledEstimatesTable$addColumnInfo(name = "uCi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
-  }
-  if (options[["predictionIntervals"]]) {
-    overtitleCi <- gettextf("%s%% PI", 100 * options[["confidenceIntervalsLevel"]])
-    pooledEstimatesTable$addColumnInfo(name = "lPi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
-    pooledEstimatesTable$addColumnInfo(name = "uPi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
-
-    if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
-      for (colName in .mammExtractTauLevelNames(fit)) {
-        pooledEstimatesTable$addColumnInfo(name = colName, title = colName, type = .maGetVariableColumnType(colName, options), overtitle = gettext("Heterogeneity Level"))
-      }
+  .maAddCiColumn(pooledEstimatesTable, options)
+  .maAddPiColumn(pooledEstimatesTable, options)
+  if (options[["predictionIntervals"]] && .mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
+    for (colName in .mammExtractTauLevelNamesList(fit)) {
+      pooledEstimatesTable$addColumnInfo(name = colName, title = colName, type = .maGetVariableColumnType(colName, options), overtitle = gettext("Heterogeneity Level"))
     }
   }
 
-  # stop on error
-  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+  # skip on error
+  if (length(fit) == 0 || (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
+  estimates <- list()
+
   # pooled effect size
-  pooledEffect <- .maComputePooledEffect(fit, options)
-  pooledEstimatesTable$addRows(pooledEffect)
+  estimates[["effect"]] <- .maSafeRbind(lapply(fit, .maRowPooledEffectEstimate, options = options))
 
   # pooled heterogeneity
-  if (!.maGetMethodOptions(options) %in% c("EE", "FE") && !.maIsMultilevelMultivariate(options)) {
+  if (!.maGetMethodOptions(options) %in% c("EE", "FE") && !.maIsMultilevelMultivariate(options) &&
+      (options[["heterogeneityTau"]] ||options[["heterogeneityTau2"]] || options[["heterogeneityI2"]] || options[["heterogeneityH2"]])) {
 
     # requires non-clustered fit
-    pooledHeterogeneity <- .maComputePooledHeterogeneity(.maExtractFit(jaspResults, options, nonClustered = TRUE), options)
-
-    for (i in seq_len(nrow(pooledHeterogeneity)))
-      pooledEstimatesTable$addRows(pooledHeterogeneity[i, ])
+    fitNonClustered <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
+    estimates[["heterogeneity"]] <- .maSafeRbind(lapply(fitNonClustered, .maRowPooledHeterogeneity, options = options))
   }
 
   # add messages
-  pooledEstimatesMessages <- .maPooledEstimatesMessages(fit, dataset, options, sapply(pooledEffect, anyNA))
+  pooledEstimatesMessages <- .maPooledEstimatesMessages(fit, dataset, options, anyNA(estimates[["effect"]]))
   for (i in seq_along(pooledEstimatesMessages))
     pooledEstimatesTable$addFootnote(pooledEstimatesMessages[i])
+
+  # merge and clean estimates
+  estimates <- .maSafeRbind(estimates)
+  estimates <- .maSafeOrderAndSimplify(estimates, "par", options)
+
+  pooledEstimatesTable$setData(estimates)
 
   return()
 }
@@ -544,11 +837,12 @@
   # fit measures table
   fitMeasuresTable          <- createJaspTable(gettext("Fit Measures"))
   fitMeasuresTable$position <- 4
-  fitMeasuresTable$dependOn(c(.maDependencies, "fitMeasures"))
+  fitMeasuresTable$dependOn(c(.maDependencies, "fitMeasures", "includeFullDatasetInSubgroupAnalysis"))
   modelSummaryContainer[["fitMeasuresTable"]] <- fitMeasuresTable
 
 
   fitMeasuresTable$addColumnInfo(name = "model",         title = "",                      type = "string")
+  .maAddSubgroupColumn(fitMeasuresTable, options)
   fitMeasuresTable$addColumnInfo(name = "observations",  title = gettext("Observations"), type = "integer")
   fitMeasuresTable$addColumnInfo(name = "ll",            title = gettext("Log Lik."),     type = "number")
   fitMeasuresTable$addColumnInfo(name = "dev",           title = gettext("Deviance"),     type = "number")
@@ -559,16 +853,15 @@
   if (.maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options))
     fitMeasuresTable$addColumnInfo(name = "R2",  title = gettext("R\U00B2"),   type = "number")
 
-  # stop on error
-  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+  # skip on error
+  if ((length(fit) == 1 && jaspBase::isTryError(fit[[1]]))  || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
-  fitSummary <- cbind("model" = colnames(fit[["fit.stats"]]), observations = fit[["k"]], data.frame(t(fit[["fit.stats"]])))
+  # fit measures rows
+  fitMeasures <- .maSafeRbind(lapply(fit, .maRowFitMeasures, options = options))
+  fitMeasures <- .maSafeOrderAndSimplify(fitMeasures, "model", options)
 
-  if (.maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options))
-    fitSummary$R2 <- fit[["R2"]]
-
-  fitMeasuresTable$setData(fitSummary)
+  fitMeasuresTable$setData(fitMeasures)
 
   return()
 }
@@ -594,10 +887,11 @@
     effectSize    = 1,
     heterogeneity = 2
   )
-  termsTable$dependOn("metaregressionTermTests")
+  termsTable$dependOn(c("metaregressionTermTests", "includeFullDatasetInSubgroupAnalysis"))
   metaregressionContainer[[paste0(parameter, "TermsTable")]] <- termsTable
 
   termsTable$addColumnInfo(name = "term",  type = "string",  title = "")
+  .maAddSubgroupColumn(termsTable, options)
   termsTable$addColumnInfo(name = "stat",  type = "number",  title = if(.maIsMetaregressionFtest(options)) gettext("F")   else gettext("Q\U2098"))
   termsTable$addColumnInfo(name = "df1",   type = "integer", title = if(.maIsMetaregressionFtest(options)) gettext("df\U2081") else gettext("df"))
   if (.maIsMetaregressionFtest(options)) {
@@ -612,40 +906,24 @@
 
   termsTable$addFootnote(.maFixedEffectTextMessage(options))
 
-  if (is.null(fit) || jaspBase::isTryError(fit))
+  # skip on error
+  if ((length(fit) == 1 && jaspBase::isTryError(fit[[1]]))  || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
-  if (parameter == "effectSize") {
+  if ((parameter == "effectSize"    && !.maIsMetaregressionEffectSize(options)) ||
+      (parameter == "heterogeneity" && !.maIsMetaregressionHeterogeneity(options)))
+    return()
 
-    if (!.maIsMetaregressionEffectSize(options))
-      return()
+  # term tests rows
+  termTests <- .maSafeRbind(lapply(fit, .maRowTermTestTable, options = options, parameter = parameter))
+  termTests <- .maSafeOrderAndSimplify(termTests, "term", options)
 
-    terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")
-    termsTests <- do.call(rbind.data.frame, lapply(terms, function(term)
-      .maTermTests(fit, options, term, parameter = "effectSize")
-    ))
-    termsTable$setData(termsTests)
+  # add messages
+  termTestWarnings <- .maTermsTableWarnings(fit, options, terms, parameter)
+  for (i in seq_along(termTestWarnings))
+    termsTable$addFootnote(termTestWarnings[i], symbol = gettext("Warning:"))
 
-    termsTestWarnings <- .maTermsTableWarnings(fit, terms, parameter)
-    for (i in seq_along(termsTestWarnings))
-      termsTable$addFootnote(termsTestWarnings[i], symbol = gettext("Warning:"))
-
-  } else if (parameter == "heterogeneity") {
-
-    if (!.maIsMetaregressionHeterogeneity(options))
-      return()
-
-    terms      <- attr(terms(fit[["formula.scale"]], data = fit[["data"]]),"term.labels")
-    termsTests <- do.call(rbind.data.frame, lapply(terms, function(term)
-      .maTermTests(fit, options, term, parameter = "heterogeneity")
-    ))
-    termsTable$setData(termsTests)
-
-    termsTestWarnings <- .maTermsTableWarnings(fit, terms, parameter)
-    for (i in seq_along(termsTestWarnings))
-      termsTable$addFootnote(termsTestWarnings[i], symbol = gettext("Warning:"))
-
-  }
+  termsTable$setData(termTests)
 
   return()
 }
@@ -671,17 +949,14 @@
     effectSize    = 3,
     heterogeneity = 4
   )
-  coefficientsTable$dependOn(c("metaregressionCoefficientEstimates", "confidenceIntervals"))
+  coefficientsTable$dependOn(c("metaregressionCoefficientEstimates", "confidenceIntervals", "includeFullDatasetInSubgroupAnalysis"))
   metaregressionContainer[[paste0(parameter, "CoefficientTable")]] <- coefficientsTable
 
   coefficientsTable$addColumnInfo(name = "name",  type = "string", title = "")
+  .maAddSubgroupColumn(coefficientsTable, options)
   coefficientsTable$addColumnInfo(name = "est",   type = "number", title = gettext("Estimate"))
   coefficientsTable$addColumnInfo(name = "se",    type = "number", title = gettext("Standard Error"))
-  if (options[["confidenceIntervals"]]) {
-    overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
-    coefficientsTable$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
-    coefficientsTable$addColumnInfo(name = "uCi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
-  }
+  .maAddCiColumn(coefficientsTable, options)
   coefficientsTable$addColumnInfo(name = "stat",  type = "number", title = if(.maIsMetaregressionFtest(options)) gettext("t") else gettext("z"))
   if (.maIsMetaregressionFtest(options))
     coefficientsTable$addColumnInfo(name = "df",  type = "number", title = gettext("df"))
@@ -693,67 +968,21 @@
 
   coefficientsTable$addFootnote(.maFixedEffectTextMessage(options))
 
-  if (is.null(fit) || jaspBase::isTryError(fit))
+  # skip on error
+  if ((length(fit) == 1 && jaspBase::isTryError(fit[[1]]))  || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
-  if (parameter == "effectSize") {
+  estimates <- .maSafeRbind(lapply(fit, .maRowCoefficientsEstimatesTable, options = options, parameter = parameter))
+  estimates <- .maSafeOrderAndSimplify(estimates, "name", options)
 
-    estimates <- data.frame(
-      name = .maVariableNames(rownames(fit[["beta"]]), options[["predictors"]]),
-      est  = fit[["beta"]][,1],
-      se   = fit[["se"]],
-      stat = fit[["zval"]],
-      pval = fit[["pval"]]
-    )
-
-    if (.maIsPermutation(options))
-      estimates$pval2 <- attr(fit[["pval"]], "permutation")
-
-    if (.maIsMetaregressionFtest(options))
-      estimates$df <- fit[["ddf"]]
-
-    if (options[["confidenceIntervals"]]) {
-      estimates$lCi <- fit[["ci.lb"]]
-      estimates$uCi <- fit[["ci.ub"]]
-    }
-
-    coefficientsTable$setData(estimates)
-
-    coefficientsTableWarnings <- .maCoefficientsTableWarnings(fit, parameter)
-    for (i in seq_along(coefficientsTableWarnings))
-      coefficientsTable$addFootnote(coefficientsTableWarnings[i], symbol = gettext("Warning:"))
-
-  } else if (parameter == "heterogeneity") {
-
-    estimates <- data.frame(
-      name = .maVariableNames(rownames(fit[["alpha"]]), options[["predictors"]]),
-      est  = fit[["alpha"]][,1],
-      se   = fit[["se.alpha"]],
-      stat = fit[["zval.alpha"]],
-      pval = fit[["pval.alpha"]]
-    )
-
-    if (.maIsPermutation(options))
-      estimates$pval2 <- attr(fit[["pval.alpha"]], "permutation")
-
-    if (.maIsMetaregressionFtest(options))
-      estimates$df <- fit[["ddf.alpha"]]
-
-    if (options[["confidenceIntervals"]]) {
-      estimates$lCi <- fit[["ci.lb.alpha"]]
-      estimates$uCi <- fit[["ci.ub.alpha"]]
-    }
-
-    coefficientsTable$setData(estimates)
-
-    coefficientsTableWarnings <- .maCoefficientsTableWarnings(fit, parameter)
-    for (i in seq_along(coefficientsTableWarnings))
-      coefficientsTable$addFootnote(coefficientsTableWarnings[i], symbol = gettext("Warning:"))
-
-  }
-
+  # add messages
+  coefficientsTableWarnings <- .maCoefficientsTableWarnings(fit, options, parameter)
+  for (i in seq_along(coefficientsTableWarnings))
+    coefficientsTable$addFootnote(coefficientsTableWarnings[i], symbol = gettext("Warning:"))
   if (parameter == "heterogeneity")
     coefficientsTable$addFootnote(.meMetaregressionHeterogeneityMessages(options))
+
+  coefficientsTable$setData(estimates)
 
   return()
 }
@@ -769,19 +998,53 @@
 
   fit <- .maExtractFit(jaspResults, options)
 
-  correlationMatrixTable <- createJaspTable(switch(
-    parameter,
-    effectSize    = gettext("Effect Size Meta-Regression Correlation Matrix"),
-    heterogeneity = gettext("Heterogeneity Meta-Regression Correlation Matrix")
-  ))
-  correlationMatrixTable$position <- switch(
-    parameter,
-    effectSize    = 5,
-    heterogeneity = 6
-  )
-  correlationMatrixTable$dependOn("metaregressionCoefficientCorrelationMatrix")
-  metaregressionContainer[[paste0(parameter, "CorrelationTable")]] <- correlationMatrixTable
+  # create individual tables for each subgroup
+  if (options[["subgroup"]] == "") {
 
+    correlationMatrixTable <- .maCoefficientCorrelationMatrixTableFun(fit[[1]], dataset, options, parameter)
+    correlationMatrixTable$title <- switch(
+      parameter,
+      effectSize    = gettext("Effect Size Meta-Regression Correlation Matrix"),
+      heterogeneity = gettext("Heterogeneity Meta-Regression Correlation Matrix")
+    )
+    correlationMatrixTable$dependOn(c("metaregressionCoefficientCorrelationMatrix", "includeFullDatasetInSubgroupAnalysis"))
+    correlationMatrixTable$position <- switch(
+      parameter,
+      effectSize    = 5,
+      heterogeneity = 6
+    )
+    metaregressionContainer[[paste0(parameter, "CorrelationTable")]] <- correlationMatrixTable
+    return()
+
+  } else {
+
+    # create the output container
+    correlationMatrixTable <- createJaspContainer(switch(
+      parameter,
+      effectSize    = gettext("Effect Size Meta-Regression Correlation Matrix"),
+      heterogeneity = gettext("Heterogeneity Meta-Regression Correlation Matrix")
+    ))
+    correlationMatrixTable$dependOn(c(.maDependencies, "metaregressionCoefficientCorrelationMatrix", "includeFullDatasetInSubgroupAnalysis"))
+    correlationMatrixTable$position <- switch(
+      parameter,
+      effectSize    = 5,
+      heterogeneity = 6
+    )
+    metaregressionContainer[[paste0(parameter, "CorrelationTable")]] <- correlationMatrixTable
+
+    for (i in seq_along(fit)) {
+      correlationMatrixTable[[names(fit)[i]]]          <- .maCoefficientCorrelationMatrixTableFun(fit[[i]], dataset, options, parameter)
+      correlationMatrixTable[[names(fit)[i]]]$title    <- gettextf("Subgroup: %1$s", attr(fit[[i]], "subgroup"))
+      correlationMatrixTable[[names(fit)[i]]]$position <- i
+    }
+
+  }
+
+  return()
+}
+.maCoefficientCorrelationMatrixTableFun  <- function(fit, dataset, options, parameter) {
+
+  correlationMatrixTable <- createJaspTable()
 
   if (is.null(fit) || jaspBase::isTryError(fit))
     return()
@@ -801,7 +1064,7 @@
 
   correlationMatrixTable$setData(correlationMatrix)
 
-  return()
+  return(correlationMatrixTable)
 }
 .maEstimatedMarginalMeansAndContrasts    <- function(jaspResults, dataset, options) {
 
@@ -828,7 +1091,7 @@
   } else {
     # create the output container
     estimatedMarginalMeansAndContrastsContainer <- createJaspContainer(gettext("Estimated Marginal Means and Contrasts Summary"))
-    estimatedMarginalMeansAndContrastsContainer$dependOn(c(.maDependencies, "confidenceIntervals", "confidenceIntervalsLevel"))
+    estimatedMarginalMeansAndContrastsContainer$dependOn(c(.maDependencies, "confidenceIntervals", "confidenceIntervalsLevel", "includeFullDatasetInSubgroupAnalysis"))
     estimatedMarginalMeansAndContrastsContainer$position <- 4
     jaspResults[["estimatedMarginalMeansAndContrastsContainer"]] <- estimatedMarginalMeansAndContrastsContainer
   }
@@ -871,7 +1134,7 @@
   fit <- .maExtractFit(jaspResults, options)
 
   # add an empty null table in case of an error
-  if (jaspBase::isTryError(fit)) {
+  if (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) {
     errorTable <- createJaspContainer(title = gettext("Estimated Marginal Means / Contrasts"))
     tempContainer[["errorTable"]] <- errorTable
     return()
@@ -985,21 +1248,14 @@
   # prepare table
   if (selectedVariable != "")
     estimatedMarginalMeansTable$addColumnInfo(name = "value",     type = "string", title = gettext("Level"))
+  .maAddSubgroupColumn(estimatedMarginalMeansTable, options)
   estimatedMarginalMeansTable$addColumnInfo(name = "est",       type = "number", title = gettext("Estimate"))
-  if (options[["confidenceIntervals"]]) {
-    overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
-    estimatedMarginalMeansTable$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
-    estimatedMarginalMeansTable$addColumnInfo(name = "uCi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
-  }
+  .maAddCiColumn(estimatedMarginalMeansTable, options)
   if (parameter == "effectSize") {
-    if (options[["predictionIntervals"]]) {
-      overtitleCi <- gettextf("%s%% PI", 100 * options[["confidenceIntervalsLevel"]])
-      estimatedMarginalMeansTable$addColumnInfo(name = "lPi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
-      estimatedMarginalMeansTable$addColumnInfo(name = "uPi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
-      if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
-        for (colName in .mammExtractTauLevelNames(fit)) {
-          estimatedMarginalMeansTable$addColumnInfo(name = colName, title = colName, type = .maGetVariableColumnType(colName, options), overtitle = gettext("Heterogeneity Level"))
-        }
+    .maAddPiColumn(estimatedMarginalMeansTable, options)
+    if (options[["predictionIntervals"]] && .mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
+      for (colName in .mammExtractTauLevelNamesList(fit)) {
+        estimatedMarginalMeansTable$addColumnInfo(name = colName, title = colName, type = .maGetVariableColumnType(colName, options), overtitle = gettext("Heterogeneity Level"))
       }
     }
     if (options[["estimatedMarginalMeansEffectSizeTestAgainst"]]) {
@@ -1011,7 +1267,16 @@
   }
 
   # get the estimate
-  estimatedMarginalMeans <- .maComputeMarginalMeansVariable(fit, options, dataset, strsplit(selectedVariable, ":")[[1]], options[["estimatedMarginalMeansEffectSizeTestAgainstValue"]], parameter)
+  estimatedMarginalMeans <- .maSafeRbind(lapply(fit, .maComputeMarginalMeansVariable,
+    options          = options,
+    dataset          = dataset,
+    selectedVariable = if (selectedVariable == "") "" else strsplit(selectedVariable, ":")[[1]],
+    testAgainst      = options[["estimatedMarginalMeansEffectSizeTestAgainstValue"]],
+    parameter        = parameter
+  ))
+
+  # reorder by estimated marginal means estimate
+  estimatedMarginalMeans <- .maSafeOrderAndSimplify(estimatedMarginalMeans, "value", options)
 
   # drop non-required columns
   estimatedMarginalMeans <- estimatedMarginalMeans[,!colnames(estimatedMarginalMeans) %in% "variable", drop = FALSE]
@@ -1045,24 +1310,17 @@
 
   # prepare table
   contrastsTable$addColumnInfo(name = "comparison", type = "string", title = gettext("Comparison"))
+  .maAddSubgroupColumn(contrastsTable, options)
   contrastsTable$addColumnInfo(name = "est",        type = "number", title = gettext("Estimate"))
-  if (options[["confidenceIntervals"]]) {
-    overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
-    contrastsTable$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
-    contrastsTable$addColumnInfo(name = "uCi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
-  }
+  .maAddCiColumn(contrastsTable, options)
   if (parameter == "effectSize") {
-    if (options[["predictionIntervals"]]) {
-      overtitleCi <- gettextf("%s%% PI", 100 * options[["confidenceIntervalsLevel"]])
-      contrastsTable$addColumnInfo(name = "lPi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
-      contrastsTable$addColumnInfo(name = "uPi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
-      # TODO?
-      # if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
-      #   for (colName in .mammExtractTauLevelNames(fit)) {
-      #     contrastsTable$addColumnInfo(name = colName, title = colName, type = .maGetVariableColumnType(colName, options), overtitle = gettext("Heterogeneity Level"))
-      #   }
-      # }
-    }
+    .maAddPiColumn(contrastsTable, options)
+    # if (options[["predictionIntervals"]] && .mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
+    #   TODO?
+    #   for (colName in .mammExtractTauLevelNamesList(fit)) {
+    #   contrastsTable$addColumnInfo(name = colName, title = colName, type = .maGetVariableColumnType(colName, options), overtitle = gettext("Heterogeneity Level"))
+    #   }
+    # }
   }
   contrastsTable$addColumnInfo(name = "stat",  type = "number", title = if(.maIsMetaregressionFtest(options)) gettext("t") else gettext("z"))
   if (.maIsMetaregressionFtest(options))
@@ -1070,7 +1328,16 @@
   contrastsTable$addColumnInfo(name = "pval",  type = "pvalue", title = gettext("p"))
 
   # get the estimate
-  contrasts <- .maComputeContrastVariable(fit, options, dataset, strsplit(selectedVariable, ":")[[1]], options[["contrastsEffectSizeTestAgainstValue"]], parameter)
+  contrasts <- .maSafeRbind(lapply(fit, .maComputeContrastVariable,
+    options          = options,
+    dataset          = dataset,
+    selectedVariable = if (selectedVariable == "") "" else strsplit(selectedVariable, ":")[[1]],
+    testAgainst      = options[["contrastsEffectSizeTestAgainstValue"]],
+    parameter        = parameter
+  ))
+
+  # reorder by estimated marginal means estimate
+  contrasts <- .maSafeOrderAndSimplify(contrasts, "comparison", options)
 
   # drop non-required columns
   if (parameter == "heterogeneity")
@@ -1101,14 +1368,17 @@
   )))
     return()
 
+  # the full data set fit is always needed for subgroup analyses
+  # there are forest plot specific settings
+  options[["includeFullDatasetInSubgroupAnalysis"]] <- TRUE
   fit <- .maExtractFit(jaspResults, options)
 
   # stop on error
-  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+  if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit)) || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
   # try execute!
-  plotOut <- try(.maMakeTheUltimateForestPlot(fit, dataset, options))
+  plotOut <- try(.maMakeTheUltimateForestPlot(fit, options))
 
   if (inherits(plotOut, "try-error")) {
     forestPlot <- createJaspPlot(title = gettext("Forest Plot"))
@@ -1162,8 +1432,43 @@
   fit <- .maExtractFit(jaspResults, options)
 
   # stop on error
-  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+  if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) || !is.null(.maCheckIsPossibleOptions(options)))
     return()
+
+  # create individual plots for each subgroup
+  if (options[["subgroup"]] == "") {
+
+    bubblePlot       <- .maBubblePlotFun(fit[[1]], dataset, options)
+    bubblePlot$title <- gettext("Bubble Plots")
+    bubblePlot$dependOn(c(.maBubblePlotDependencies, "includeFullDatasetInSubgroupAnalysis"))
+    bubblePlot$position <- 5
+    jaspResults[["bubblePlot"]] <- bubblePlot
+    return()
+
+  } else {
+
+    # create the output container
+    bubblePlot       <- createJaspContainer()
+    bubblePlot$title <- gettext("Bubble Plots")
+    bubblePlot$dependOn(c(.maBubblePlotDependencies, "includeFullDatasetInSubgroupAnalysis"))
+    bubblePlot$position <- 5
+    jaspResults[["bubblePlot"]] <- bubblePlot
+
+    for (i in seq_along(fit)) {
+      bubblePlot[[names(fit)[i]]]          <- .maBubblePlotFun(fit[[i]], dataset, options)
+      bubblePlot[[names(fit)[i]]]$title    <- gettextf("Subgroup: %1$s", attr(fit[[i]], "subgroup"))
+      bubblePlot[[names(fit)[i]]]$position <- i
+    }
+
+  }
+
+  return()
+}
+.maBubblePlotFun                         <- function(fit, dataset, options) {
+
+  if (jaspBase::isTryError(fit)) {
+    return()
+  }
 
   # set dimensions
   width  <- if (length(options[["bubblePlotSeparateLines"]]) == 0 || options[["bubblePlotLegendPosition"]] == "none") 450 else 550
@@ -1171,15 +1476,9 @@
 
   # create containers / figure
   if (length(options[["bubblePlotSeparatePlots"]]) > 0) {
-    bubblePlotContainer <- createJaspContainer(title = gettext("Bubble Plots"))
-    bubblePlotContainer$dependOn(.maBubblePlotDependencies)
-    bubblePlotContainer$position <- 5
-    jaspResults[["bubblePlot"]] <- bubblePlotContainer
+    bubblePlot <- createJaspContainer()
   } else {
-    bubblePlot <- createJaspPlot(title = gettext("Bubble Plot"), width = width, height = height)
-    bubblePlot$dependOn(.maBubblePlotDependencies)
-    bubblePlot$position <- 6
-    jaspResults[["bubblePlot"]] <- bubblePlot
+    bubblePlot <- createJaspPlot(width = width, height = height)
   }
 
   # make bubble plots
@@ -1204,16 +1503,17 @@
 
   if (length(options[["bubblePlotSeparatePlots"]]) > 0) {
     for (i in seq_along(tempPlots)) {
-      bubblePlot <- createJaspPlot(title = gettextf("%1$s (%2$s)", attr(dfPlot, "separatePlots"), unique(dfPlot[["separatePlots"]])[i]), width = width, height = height)
-      bubblePlot$position      <- i
-      bubblePlot$plotObject    <- tempPlots[[i]]
-      bubblePlotContainer[[paste0("plot", i)]] <- bubblePlot
+      tempBubblePlot <- createJaspPlot(title = gettextf("%1$s (%2$s)", attr(dfPlot, "separatePlots"), unique(dfPlot[["separatePlots"]])[i]), width = width, height = height)
+      tempBubblePlot$position      <- i
+      tempBubblePlot$plotObject    <- tempPlots[[i]]
+      bubblePlot[[paste0("plot", i)]] <- tempBubblePlot
     }
   } else {
     bubblePlot$plotObject <- tempPlots[[1]]
   }
 
-  return()
+
+  return(bubblePlot)
 }
 .maShowMetaforRCode                      <- function(jaspResults, options) {
 
@@ -1255,16 +1555,20 @@
   varianceInflationContainer[[parameter]] <- termsTable
 
   termsTable$addColumnInfo(name = "term",  type = "string",  title = "")
+  .maAddSubgroupColumn(termsTable, options)
   if (options[["diagnosticsVarianceInflationFactorAggregate"]])
     termsTable$addColumnInfo(name = "m", type = "integer", title = gettext("Parameters"))
 
   termsTable$addColumnInfo(name = "vif",  type = "number", title = gettext("VIF"))
   termsTable$addColumnInfo(name = "sif",  type = "number", title = gettext("SIF"))
 
-  if (is.null(fit) || jaspBase::isTryError(fit))
+  if (length(fit) == 1 && jaspBase::isTryError(fit[[1]]))
     return()
 
-  termsTable$setData(.maComputeVifSummary(fit, options, parameter))
+  terms <- do.call(rbind, lapply(fit, .maComputeVifSummary, options = options, parameter = parameter))
+  terms <- .maSafeOrderAndSimplify(terms, "term", options)
+
+  termsTable$setData(terms)
 
   return()
 }
@@ -1290,50 +1594,8 @@
   fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
 
   # stop on error
-  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+  if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) || !is.null(.maCheckIsPossibleOptions(options)))
     return()
-
-  # extract precomputed diagnostics if done before:
-  if (!is.null(jaspResults[["diagnosticsResults"]])) {
-
-    diagnosticsResults <- jaspResults[["diagnosticsResults"]]$object
-
-    influenceResultsDfbs <- diagnosticsResults[["influenceResultsDfbs"]]
-    influenceResultsInf  <- diagnosticsResults[["influenceResultsInf"]]
-
-  } else {
-
-    # create the output container
-    diagnosticsResults <- createJaspState()
-    diagnosticsResults$dependOn(.maDependencies)
-    jaspResults[["diagnosticsResults"]] <- diagnosticsResults
-
-    if (.maIsMultilevelMultivariate(options)) {
-      # only a subset of diagnostics is available for rma.mv
-      influenceResultsDfbs <- data.frame(dfbetas(fit, code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics: DFBETAS')", code2 = "jaspBase::progressbarTick()"))
-      influenceResultsInf  <- data.frame(
-        rstudent = rstudent(fit,       code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics: Studentized residuals')", code2 = "jaspBase::progressbarTick()")[["resid"]],
-        cook.d   = cooks.distance(fit, code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics: Cooks distance')",        code2 = "jaspBase::progressbarTick()"),
-        hat      = hatvalues(fit)
-      )
-    } else {
-      # the complete suite of influence diagnostics is only available for rma.uni
-      influenceResults     <- influence(fit, code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics')", code2 = "jaspBase::progressbarTick()")
-      influenceResultsDfbs <- data.frame(influenceResults$dfbs)
-      influenceResultsInf  <- data.frame(influenceResults$inf)
-      influenceResultsInf$tau.del <- sqrt(influenceResultsInf$tau2.del)
-      influenceResultsInf$inf[influenceResultsInf$inf == "*"] <- "Yes"
-    }
-
-    # store the results
-    jaspResults[["diagnosticsResults"]]$object <- list(
-      "influenceResultsDfbs" = influenceResultsDfbs,
-      "influenceResultsInf"  = influenceResultsInf
-    )
-  }
-
-  # extract fit data
-  fitData <- fit[["data"]]
 
   # fit measures table
   casewiseDiagnosticsTable          <- createJaspTable(gettext("Casewise Diagnostics Table"))
@@ -1343,24 +1605,35 @@
                                       "studyLabels"))
   jaspResults[["casewiseDiagnosticsTable"]] <- casewiseDiagnosticsTable
 
-  if (options[["diagnosticsCasewiseDiagnosticsShowInfluentialOnly"]] && sum(influenceResultsInf$inf != "Yes") == 0) {
-    casewiseDiagnosticsTable$addFootnote(gettext("No influential cases found."))
-    return()
+  ### the computation needs to be done before the table to get all the necessary information on column names
+  # export diagnostics
+  diagnostics <- .maDiagnostics(jaspResults, options)
+
+  # always drop the full from subgroups
+  if (options[["subgroup"]] != "" && options[["includeFullDatasetInSubgroupAnalysis"]]) {
+    fit         <- fit[-1]
+    diagnostics <- diagnostics[-1]
   }
 
+  diagnosticsTable <- .maSafeRbind(lapply(seq_along(fit), function(i) .maRowDiagnosticsTable(
+    fit         = fit[[i]],
+    diagnostics = diagnostics[[attr(fit[[i]], "subgroup")]],
+    options     = options
+  )))
+
+  # table information
+  coefDifferenceNames <- setdiff(colnames(diagnosticsTable), c("subgroup", "label", .maCasewiseDiagnosticsNames()))
+
+  # prepare table
+  .maAddSubgroupColumn(casewiseDiagnosticsTable, options)
   if (options[["studyLabels"]] != "") {
-    influenceResultsInf$label <- dataset[[options[["studyLabels"]]]]
     casewiseDiagnosticsTable$addColumnInfo(name = "label", type  = "string", title = gettext("Label"))
   }
-
   if (options[["diagnosticsCasewiseDiagnosticsIncludePredictors"]]) {
-    for (var in colnames(fitData)) {
-      casewiseDiagnosticsTable$addColumnInfo(name = paste0("pred_", var), type  = .maGetVariableColumnType(var, options), title = var, overtitle = gettext("Predictor"))
+    for (var in options[["predictors"]]) {
+      casewiseDiagnosticsTable$addColumnInfo(name = paste0("pred", var), type  = .maGetVariableColumnType(var, options), title = var, overtitle = gettext("Predictor"))
     }
-    colnames(fitData)   <- paste0("pred_", colnames(fitData))
-    influenceResultsInf <- cbind(fitData, influenceResultsInf)
   }
-
   casewiseDiagnosticsTable$addColumnInfo(name = "rstudent",  title = gettext("Standardized Residual"),  type = "number")
   if (!.maIsMultilevelMultivariate(options))
     casewiseDiagnosticsTable$addColumnInfo(name = "dffits",  title = gettext("DFFITS"),                 type = "number")
@@ -1374,22 +1647,42 @@
   casewiseDiagnosticsTable$addColumnInfo(name = "hat",       title = gettext("Hat"),                    type = "number")
   if (!.maIsMultilevelMultivariate(options))
     casewiseDiagnosticsTable$addColumnInfo(name = "weight",  title = gettext("Weight"),                 type = "number")
-
   if (options[["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"]]) {
-    for (par in colnames(influenceResultsDfbs)) {
+    for (par in coefDifferenceNames) {
       casewiseDiagnosticsTable$addColumnInfo(name = par, title = .maVariableNames(par, options[["predictors"]]), type = "number", overtitle = gettext("Difference in coefficients"))
     }
-    influenceResultsInf <- cbind(influenceResultsInf, influenceResultsDfbs)
   }
-
   if (!.maIsMultilevelMultivariate(options))
     casewiseDiagnosticsTable$addColumnInfo(name = "inf", title = gettext("Influential"), type = "string")
 
-  if (options[["diagnosticsCasewiseDiagnosticsShowInfluentialOnly"]])
-      influenceResultsInf <- influenceResultsInf[influenceResultsInf$inf == "Yes",,drop=FALSE]
 
-  casewiseDiagnosticsTable$setData(influenceResultsInf)
 
+  # keep influential only
+  if (options[["diagnosticsCasewiseDiagnosticsShowInfluentialOnly"]]) {
+
+    diagnosticsTable <- diagnosticsTable[!is.na(diagnosticsTable[["inf"]]) ,,drop=FALSE]
+    diagnosticsTable <- diagnosticsTable[diagnosticsTable[["inf"]] == "Yes",,drop=FALSE]
+
+    # add note if some results are completly ommited
+    if (options[["subgroup"]] == "" && nrow(diagnosticsTable) == 0) {
+      casewiseDiagnosticsTable$addFootnote(gettext("No influential cases found."))
+    } else if (options[["subgroup"]] != "") {
+      influentialTable <- table(diagnosticsTable[["subgroup"]])
+      for (i in seq_along(influentialTable)[influentialTable == 0]) {
+        casewiseDiagnosticsTable$addFootnote(gettextf(
+          "%1$sNo influential cases found.",
+          if (options[["subgroup"]] != "") gettextf("Subgroup %1$s: ", attr(fit[[i]], "subgroup")) else ""
+        ))
+      }
+    }
+  }
+
+  # simplify and store results
+  diagnosticsTable <- .maSafeOrderAndSimplify(diagnosticsTable, "subgroup", options)
+  casewiseDiagnosticsTable$setData(diagnosticsTable)
+
+  if (options[["subgroup"]] != "")
+    casewiseDiagnosticsTable$addFootnote(gettext("Diagnostics are based on the the subgroup models."))
   if (.maIsClustered(options))
     casewiseDiagnosticsTable$addFootnote(gettext("Diagnostics are based on the non-clustered model."))
 
@@ -1403,26 +1696,57 @@
   if (.maIsMetaregressionHeterogeneity(options))
     return()
 
-  # extract diagnostics already computed in '.maCasewiseDiagnosticsTable'
-  diagnosticsResults <- jaspResults[["diagnosticsResults"]]$object
+  # the fit diagnostics work only for the non-clustered fit
+  fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
 
-  influenceResultsDfbs <- diagnosticsResults[["influenceResultsDfbs"]]
-  influenceResultsInf  <- diagnosticsResults[["influenceResultsInf"]]
+  # stop on error
+  if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) || !is.null(.maCheckIsPossibleOptions(options)))
+    return()
+
+  # export diagnostics
+  diagnostics <- .maDiagnostics(jaspResults, options)
+
+  # always drop the full from subgroups
+  if (options[["subgroup"]] != "" && options[["includeFullDatasetInSubgroupAnalysis"]]) {
+    fit         <- fit[-1]
+    diagnostics <- diagnostics[-1]
+  }
+
+  # return the diagnostics with order variable indicating the order in the full data set
+  diagnosticsTable <- .maSafeRbind(lapply(seq_along(fit), function(i) .maRowDiagnosticsTable(
+    fit         = fit[[i]],
+    diagnostics = diagnostics[[attr(fit[[i]], "subgroup")]],
+    options     = options,
+    forExport   = TRUE
+  )))
+
+  # add empty rows for the missing observations
+  diagnosticsTable <- .maSafeRbind(list(
+    diagnosticsTable,
+    data.frame("datasetOrder" = setdiff(1:length(attr(dataset, "NasIds")), diagnosticsTable[["datasetOrder"]]))
+  ))
+
+  # order according to the dataset order
+  diagnosticsTable <- diagnosticsTable[order(diagnosticsTable[["datasetOrder"]]),, drop = FALSE]
 
   # export columns:
   if (options[["diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"]]) {
 
+    # export only the influential indicator
     columnName <- "Diagnostics: Influential"
     if (jaspBase:::columnExists(columnName) && !jaspBase:::columnIsMine(columnName))
       .quitAnalysis(gettextf("Column name %s already exists in the dataset.", columnName))
 
     jaspResults[[columnName]] <- createJaspColumn(columnName = columnName, dependencies = .maDependencies)
-    jaspResults[[columnName]]$setNominal(influenceResultsInf[["inf"]])
+    jaspResults[[columnName]]$setNominal(diagnosticsTable[["inf"]])
 
   } else {
 
-    # export diagnostics
-    for (diagnosticName in colnames(influenceResultsInf)) {
+    # export all diagnostics
+    diagnosticsNames <- .maCasewiseDiagnosticsNames()
+    diagnosticsNames <- intersect(diagnosticsNames, colnames(diagnosticsTable))
+
+    for (diagnosticName in diagnosticsNames) {
 
       columnName <- paste0("Diagnostics: ", .maCasewiseDiagnosticsExportColumnsNames(diagnosticName))
 
@@ -1431,16 +1755,18 @@
 
       jaspResults[[columnName]] <- createJaspColumn(columnName = columnName, dependencies = .maDependencies)
       if (diagnosticName == "inf") {
-        jaspResults[[columnName]]$setNominal(influenceResultsInf[[diagnosticName]])
+        jaspResults[[columnName]]$setNominal(diagnosticsTable[[diagnosticName]])
       } else {
-        jaspResults[[columnName]]$setScale(influenceResultsInf[[diagnosticName]])
+        jaspResults[[columnName]]$setScale(diagnosticsTable[[diagnosticName]])
       }
     }
 
     # export change in coefficients
     if (options[["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"]]) {
 
-      for (diagnosticName in colnames(influenceResultsDfbs)) {
+      coefDifferenceNames <- setdiff(colnames(diagnosticsTable), c("subgroup", "label", "datasetOrder", .maCasewiseDiagnosticsNames()))
+
+      for (diagnosticName in coefDifferenceNames) {
 
         columnName <- decodeColNames(paste0("Difference in coefficients: ", .maVariableNames(diagnosticName, options[["predictors"]])))
 
@@ -1448,7 +1774,7 @@
           .quitAnalysis(gettextf("Column name %s already exists in the dataset.", columnName))
 
         jaspResults[[columnName]] <- createJaspColumn(columnName = columnName, dependencies = .maDependencies)
-        jaspResults[[columnName]]$setScale(influenceResultsDfbs[[diagnosticName]])
+        jaspResults[[columnName]]$setScale(diagnosticsTable[[diagnosticName]])
       }
     }
 
@@ -1464,103 +1790,89 @@
   fit <- .maExtractFit(jaspResults, options)
 
   # stop on error
-  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+  if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
   # extract precomputed profile likelihoods if done before:
-  if (!is.null(jaspResults[["profileLikelihoodResults"]])) {
+  dfProfile <- .maProfile(jaspResults, options)
 
-    dfProfile <- jaspResults[["profileLikelihoodResults"]]$object
+  # create individual plots for each subgroup
+  if (options[["subgroup"]] == "") {
+
+    profileLikelihoodPlot       <- .maProfileLikelihoodPlotFun(fit[[1]], dfProfile[[1]], options)
+    profileLikelihoodPlot$title <- gettext("Profile Likelihood Plot")
+    profileLikelihoodPlot$dependOn(c(.maDependencies, "diagnosticsPlotsProfileLikelihood", "includeFullDatasetInSubgroupAnalysis"))
+    profileLikelihoodPlot$position <- 8
+    jaspResults[["profileLikelihoodPlot"]] <- profileLikelihoodPlot
+    return()
 
   } else {
 
     # create the output container
-    profileLikelihoodResults <- createJaspState()
-    profileLikelihoodResults$dependOn(.maDependencies)
-    jaspResults[["profileLikelihoodResults"]] <- profileLikelihoodResults
+    profileLikelihoodPlot       <- createJaspContainer()
+    profileLikelihoodPlot$title <- gettext("Profile Likelihood Plot")
+    profileLikelihoodPlot$dependOn(c(.maDependencies, "diagnosticsPlotsProfileLikelihood", "includeFullDatasetInSubgroupAnalysis"))
+    profileLikelihoodPlot$position <- 8
+    jaspResults[["profileLikelihoodPlot"]] <- profileLikelihoodPlot
 
-    if (.maIsMultilevelMultivariate(options)) {
-      # use the defaults (too many possible parameter combinations to control)
-      dfProfile <- try(metafor::profile.rma.mv(
-        fit,
-        plot    = FALSE,
-        progbar = FALSE,
-        code1   = "jaspBase::startProgressbar(length(vcs), label = 'Profile likelihood')",
-        code2   = "jaspBase::progressbarTick()"
-      ))
-
-      # deal with a single component (not a list)
-      if (dfProfile[["comps"]] == 1) {
-        dfProfile <- list(dfProfile)
-        dfProfile[["comps"]] <- 1
-      }
-
-      jaspResults[["diagnosticsResults"]]$object <- dfProfile
-    } else {
-      # proceed with some nice formatting for rma.uni (too difficult to implement for rma.mv)
-      xTicks    <- jaspGraphs::getPrettyAxisBreaks(c(0, max(0.1, 2*fit[["tau2"]])))
-      dfProfile <- try(profile(
-        fit,
-        xlim    = range(xTicks),
-        plot    = FALSE,
-        progbar = FALSE,
-        code1   = "jaspBase::startProgressbar(length(vcs), label = 'Profile likelihood')",
-        code2   = "jaspBase::progressbarTick()"
-      ))
-      attr(dfProfile, "xTicks")   <- xTicks
-
-      jaspResults[["diagnosticsResults"]]$object <- dfProfile
+    for (i in seq_along(fit)) {
+      profileLikelihoodPlot[[names(fit)[i]]]          <- .maProfileLikelihoodPlotFun(fit[[i]], dfProfile[[i]], options)
+      profileLikelihoodPlot[[names(fit)[i]]]$title    <- gettextf("Subgroup: %1$s", attr(fit[[i]], "subgroup"))
+      profileLikelihoodPlot[[names(fit)[i]]]$position <- i
     }
+
   }
+
+  return()
+}
+.maProfileLikelihoodPlotFun              <- function(fit, dfProfile, options) {
 
   # create profile likelihood plot / container
   if (.maIsMultilevelMultivariate(options)) {
+
     # container for multivariate
-    profileLikelihoodPlot <- createJaspContainer(title = gettext("Profile Likelihood Plots"))
-    profileLikelihoodPlot$dependOn(c(.maDependencies, "diagnosticsPlotsProfileLikelihood"))
-    profileLikelihoodPlot$position <- 8
+    profileLikelihoodPlot <- createJaspContainer()
 
-    jaspResults[["profileLikelihoodPlot"]] <- profileLikelihoodPlot
-
+    # error plot
     if (jaspBase::isTryError(dfProfile)) {
       errorPlot <- createJaspPlot(title = gettext("Profile Likelihood Plot"))
       errorPlot$setError(dfProfile)
-
       profileLikelihoodPlot[["errorPlot"]] <- errorPlot
+      return(profileLikelihoodPlot)
+    }
+    if (length(dfProfile) == 0) {
       return()
     }
 
+    # component specific plots
     for (i in 1:dfProfile[["comps"]]) {
       tempProfilePlot <- createJaspPlot(title = paste0(dfProfile[[i]][["title"]][-1], collapse = " "), width = 400, height = 320)
       tempProfilePlot$position <- i
-
       profileLikelihoodPlot[[paste0("plot", i)]] <- tempProfilePlot
-
       tempProfilePlot$plotObject <- .maMakeProfileLikelihoodPlot(dfProfile[[i]])
     }
 
   } else {
-    # plot for univariate
-    profileLikelihoodPlot <- createJaspPlot(title = gettext("Profile Likelihood Plot"), width = 400, height = 320)
-    profileLikelihoodPlot$dependOn(c(.maDependencies, "diagnosticsPlotsProfileLikelihood"))
-    profileLikelihoodPlot$position <- 8
 
-    jaspResults[["profileLikelihoodPlot"]] <- profileLikelihoodPlot
+    # plot for univariate
+    profileLikelihoodPlot <- createJaspPlot(width = 400, height = 320)
 
     if (.maIsMetaregressionHeterogeneity(options)) {
       profileLikelihoodPlot$setError(gettext("Profile likelihood is not available for models that contain meta-regression on heterogeneity."))
-      return()
+      return(profileLikelihoodPlot)
     }
-
     if (jaspBase::isTryError(dfProfile)) {
       profileLikelihoodPlot$setError(dfProfile)
+      return(profileLikelihoodPlot)
+    }
+    if (length(dfProfile) == 0) {
       return()
     }
 
     profileLikelihoodPlot$plotObject <- .maMakeProfileLikelihoodPlot(dfProfile)
   }
 
-  return()
+  return(profileLikelihoodPlot)
 }
 .maBaujatPlot                            <- function(jaspResults, dataset, options) {
 
@@ -1570,54 +1882,67 @@
   fit <- .maExtractFit(jaspResults, options)
 
   # stop on error
-  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+  if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
-  # create plot
-  baujatPlot <- createJaspPlot(title = gettext("Baujat Plot"), width = 400, height = 320)
-  baujatPlot$dependOn(c(.maDependencies, "diagnosticsPlotsBaujat", "studyLabels"))
-  baujatPlot$position <- 9
-  jaspResults[["baujatPlot"]] <- baujatPlot
+  # extract precomputed baujat plot if done before:
+  dfBaujat <- .maBaujat(jaspResults, options)
 
-  if (.maIsMetaregressionHeterogeneity(options)) {
-    baujatPlot$setError(gettext("Baujat plot is not available for models that contain meta-regression on heterogeneity."))
+  # create individual plots for each subgroup
+  if (options[["subgroup"]] == "") {
+
+    baujatPlot       <- .maBaujatPlotFun(dfBaujat[[1]], options)
+    baujatPlot$title <- gettext("Baujat Plot")
+    baujatPlot$dependOn(c(.maDependencies, "diagnosticsPlotsBaujat", "includeFullDatasetInSubgroupAnalysis"))
+    baujatPlot$position <- 9
+    jaspResults[["baujatPlot"]] <- baujatPlot
     return()
-  }
-  if (.maIsClustered(options)) {
-    baujatPlot$setError(gettext("Baujat plot is not available for models with clustering."))
-    return()
-  }
-
-  # extract precomputed baujat data if done before:
-  if (!is.null(jaspResults[["baujatResults"]])) {
-
-    dfBaujat <- jaspResults[["baujatResults"]]$object
 
   } else {
 
     # create the output container
-    baujatResults <- createJaspState()
-    baujatResults$dependOn(.maDependencies)
-    jaspResults[["baujatResults"]] <- baujatResults
+    baujatPlot       <- createJaspContainer()
+    baujatPlot$title <- gettext("Baujat Plot")
+    baujatPlot$dependOn(c(.maDependencies, "diagnosticsPlotsBaujat", "includeFullDatasetInSubgroupAnalysis"))
+    baujatPlot$position <- 9
+    jaspResults[["baujatPlot"]] <- baujatPlot
 
-    # compute the results and save them in the container
-    dfBaujat <- try(.maSuppressPlot(metafor::baujat(fit)))
+    for (i in seq_along(fit)) {
+      baujatPlot[[names(fit)[i]]]          <- .maBaujatPlotFun(dfBaujat[[i]], options)
+      baujatPlot[[names(fit)[i]]]$title    <- gettextf("Subgroup: %1$s", attr(fit[[i]], "subgroup"))
+      baujatPlot[[names(fit)[i]]]$position <- i
+    }
 
-    # store in the container
-    jaspResults[["baujatResults"]]$object <- dfBaujat
   }
 
+  return()
+}
+.maBaujatPlotFun                         <- function(dfBaujat, options) {
+
+  baujatPlot <- createJaspPlot(width = 400, height = 320)
+
+  # error handling
+  if (.maIsMetaregressionHeterogeneity(options)) {
+    baujatPlot$setError(gettext("Baujat plot is not available for models that contain meta-regression on heterogeneity."))
+    return(baujatPlot)
+  }
+  if (.maIsClustered(options)) {
+    baujatPlot$setError(gettext("Baujat plot is not available for models with clustering."))
+    return(baujatPlot)
+  }
   if (jaspBase::isTryError(dfBaujat)) {
     baujatPlot$setError(dfBaujat)
+    return(baujatPlot)
+  }
+  if (length(dfBaujat) == 0) {
     return()
   }
 
   if (options[["studyLabels"]] != "")
-    dfBaujat$label <- as.character(dataset[[options[["studyLabels"]]]])
+    dfBaujat$label <- attr(dfBaujat, "studyLabels")
 
   xTicks <- jaspGraphs::getPrettyAxisBreaks(range(dfBaujat$x, na.rm = TRUE))
   yTicks <- jaspGraphs::getPrettyAxisBreaks(range(dfBaujat$y, na.rm = TRUE))
-
 
   aesCall <- list(
     x     = as.name("x"),
@@ -1647,7 +1972,7 @@
 
   baujatPlot$plotObject <- plotOut
 
-  return()
+  return(baujatPlot)
 }
 .maResidualFunnelPlot                    <- function(jaspResults, dataset, options) {
 
@@ -1657,21 +1982,51 @@
   fit <- .maExtractFit(jaspResults, options)
 
   # stop on error
-  if (is.null(fit) || jaspBase::isTryError(fit) || !is.null(.maCheckIsPossibleOptions(options)))
+  if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
-  # create plot
-  residualFunnelPlot <- createJaspPlot(title = gettext("Residual Funnel Plot"), width = 550, height = 480)
-  residualFunnelPlot$dependOn(c(.maDependencies, "diagnosticsResidualFunnel", "studyLabels"))
-  residualFunnelPlot$position <- 10
-  jaspResults[["residualFunnelPlot"]] <- residualFunnelPlot
+  # create individual plots for each subgroup
+  if (options[["subgroup"]] == "") {
 
-  # obtain residual funnel plot
-  plotOut <- .maMakeResidualFunnelPlot(fit, options, dataset)
+    residualFunnelPlot       <- .maResidualFunnelPlotFun(fit[[1]], options)
+    residualFunnelPlot$title <- gettext("Residual Funnel Plot")
+    residualFunnelPlot$dependOn(c(.maDependencies, "diagnosticsResidualFunnel", "studyLabels", "includeFullDatasetInSubgroupAnalysis"))
+    residualFunnelPlot$position <- 10
+    jaspResults[["residualFunnelPlot"]] <- residualFunnelPlot
+    return()
 
-  residualFunnelPlot$plotObject <- plotOut
+  } else {
+
+    # create the output container
+    residualFunnelPlot       <- createJaspContainer()
+    residualFunnelPlot$title <- gettext("Residual Funnel Plot")
+    residualFunnelPlot$dependOn(c(.maDependencies, "diagnosticsResidualFunnel", "studyLabels", "includeFullDatasetInSubgroupAnalysis"))
+    residualFunnelPlot$position <- 10
+    jaspResults[["residualFunnelPlot"]] <- residualFunnelPlot
+
+    for (i in seq_along(fit)) {
+      residualFunnelPlot[[names(fit)[i]]]          <- .maResidualFunnelPlotFun(fit[[i]], options)
+      residualFunnelPlot[[names(fit)[i]]]$title    <- gettextf("Subgroup: %1$s", attr(fit[[i]], "subgroup"))
+      residualFunnelPlot[[names(fit)[i]]]$position <- i
+    }
+
+  }
 
   return()
+}
+.maResidualFunnelPlotFun                 <- function(fit, options) {
+
+  # create plot
+  residualFunnelPlot <- createJaspPlot(width = 400, height = 320)
+
+  if (jaspBase::isTryError(fit)) {
+    return()
+  }
+
+  # obtain residual funnel plot
+  residualFunnelPlot$plotObject <- .maMakeResidualFunnelPlot(fit, options, attr(fit, "dataset"))
+
+  return(residualFunnelPlot)
 }
 
 # containers/state functions
@@ -1680,21 +2035,32 @@
   if (is.null(jaspResults[["fit"]]$object))
     return()
 
-  if (!is.null(jaspResults[["fitNoInfluence"]]$object)) {
-    # extract clustered model if specified
-    if (!.maIsClustered(options) || nonClustered) {
-      return(jaspResults[["fitNoInfluence"]]$object[["fit"]])
-    } else {
-      return(jaspResults[["fitNoInfluence"]]$object[["fitClustered"]])
-    }
-  } else {
-    # extract clustered model if specified
-    if (!.maIsClustered(options) || nonClustered) {
-      return(jaspResults[["fit"]]$object[["fit"]])
-    } else {
-      return(jaspResults[["fit"]]$object[["fitClustered"]])
-    }
+  # if (!is.null(jaspResults[["fitNoInfluence"]]$object)) {
+  #   # extract clustered model if specified
+  #   if (!.maIsClustered(options) || nonClustered) {
+  #     return(jaspResults[["fitNoInfluence"]]$object[["fit"]])
+  #   } else {
+  #     return(jaspResults[["fitNoInfluence"]]$object[["fitClustered"]])
+  #   }
+  # }
+
+  fitOutput          <- jaspResults[["fit"]]$object
+
+  # remove full fit if requested (in subgroup analysis)
+  if (!options[["includeFullDatasetInSubgroupAnalysis"]] && options[["subgroup"]] !=  "") {
+    fitOutput <- fitOutput[names(fitOutput) != "__fullDataset"]
   }
+
+  fitOutputExtracted <- lapply(fitOutput, function(output){
+    # extract clustered model if specified
+    if (!.maIsClustered(options) || nonClustered) {
+      return(output[["fit"]])
+    } else {
+      return((output)[["fitClustered"]])
+    }
+  })
+
+  return(fitOutputExtracted)
 }
 .maExtractModelSummaryContainer      <- function(jaspResults) {
 
@@ -1729,7 +2095,7 @@
 
   # create the output container
   varianceInflationContainer <- createJaspContainer(gettext("Variance Inflation Summary"))
-  varianceInflationContainer$dependOn(c(.maDependencies, "diagnosticsVarianceInflationFactor", "diagnosticsVarianceInflationFactorAggregate"))
+  varianceInflationContainer$dependOn(c(.maDependencies, "diagnosticsVarianceInflationFactor", "diagnosticsVarianceInflationFactorAggregate", "includeFullDatasetInSubgroupAnalysis"))
   varianceInflationContainer$position <- 7
   jaspResults[["varianceInflationContainer"]] <- varianceInflationContainer
 
@@ -1791,10 +2157,19 @@
 
   # keep levels for which the heterogeneity is predicted for complex multivariate models
   if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]]) {
-    tauLevels <- list(
-      predictedEffect[["tau2.level"]],
-      predictedEffect[["gamma2.level"]]
-    )
+    # if there is only a single level of heterogeneity, the levels are not returned
+    # happens with subgroups etc - it needs to be appended from the design matrix
+    if (nrow(tauLevelsMatrix) == 1) {
+      tauLevels <- list(
+        tauLevelsMatrix[["tau2.levels"]],
+        tauLevelsMatrix[["gamma2.levels"]]
+      )
+    } else {
+      tauLevels <- list(
+        predictedEffect[["tau2.level"]],
+        predictedEffect[["gamma2.level"]]
+      )
+    }
     tauLevels           <- do.call(cbind.data.frame, tauLevels[!sapply(tauLevels, is.null)])
     colnames(tauLevels) <- .mammExtractTauLevelNames(fit)
   }
@@ -1806,7 +2181,7 @@
 
   # to data.frame
   predictedEffect      <- .maExtractAndFormatPrediction(predictedEffect)
-  predictedEffect$par  <- "Effect Size"
+  predictedEffect$par  <- gettext("Pooled effect")
 
   # apply effect size transformation
   if (options[["transformEffectSize"]] != "none")
@@ -2017,24 +2392,50 @@
 }
 .maOmnibusTestCoefficients         <- function(fit, options, parameter = "effectSize", returnSelCoef = FALSE) {
 
-  if (parameter == "effectSize") {
-    maxCoef <- nrow(fit$beta)
-    selCoef <- .robmaCleanOptionsToPriors(
-      options[["addOmnibusModeratorTestEffectSizeCoefficientsValues"]],
-      message = gettext("Indexes of effect size moderation coefficients were specified in an incorrect format. Try '(1, 2)' to test the first two coefficients.")
-    )
-  } else if (parameter == "heterogeneity") {
-    maxCoef <- nrow(fit$alpha)
-    selCoef <- .robmaCleanOptionsToPriors(
-      options[["addOmnibusModeratorTestHeterogeneityCoefficientsValues"]],
-      message = gettext("Indexes of heterogeneity moderation coefficients were specified in an incorrect format. Try '(1, 2)' to test the first two coefficients.")
-    )
-  }
+  maxCoef <- switch(
+    parameter,
+    "effectSize"    = nrow(fit$beta),
+    "heterogeneity" = nrow(fit$alpha)
+  )
+  selCoef <- .maCleanSelectedIndexesVector(options[[switch(
+    parameter,
+    "effectSize"    = "addOmnibusModeratorTestEffectSizeCoefficientsValues",
+    "heterogeneity" = "addOmnibusModeratorTestHeterogeneityCoefficientsValues"
+  )]])
 
-  if (!is.numeric(selCoef) || any(!(abs(selCoef - round(selCoef)) < .Machine$double.eps^0.5)))
-    return(gettext("The selected coefficients must be an integer vector."))
-  if (any(selCoef < 1) || any(selCoef > maxCoef))
-    return(gettextf("The selected coefficients must be between 1 and %1$i (i.e., the number of regression parameters).", maxCoef))
+  # additional error catching
+  if ((!is.numeric(selCoef) || any(!(abs(selCoef - round(selCoef)) < .Machine$double.eps^0.5))) ||
+      (any(selCoef < 1) || any(selCoef > maxCoef))) {
+
+    row <- list(
+      stat = NA,
+      df1  = NA,
+      pval = NA
+    )
+
+    if (.maIsMetaregressionFtest(options))
+      row$df2 <- NA
+
+    if ((!is.numeric(selCoef) || any(!(abs(selCoef - round(selCoef)) < .Machine$double.eps^0.5))))
+      attr(row, "footnote") <- gettextf(
+        "Indexes of %1$s moderation coefficients were specified in an incorrect format. Try '(1, 2)' to test the first two coefficients.",
+        switch(
+          parameter,
+          "effectSize"    = "effect size",
+          "heterogeneity" = "heterogeneity"
+        ))
+    else if (any(selCoef < 1) || any(selCoef > maxCoef))
+      attr(row, "footnote") <- gettextf(
+        "The selected coefficients for %1$s moderation must be between 1 and %2$i (i.e., the number of regression parameters).",
+        switch(
+          parameter,
+          "effectSize"    = "effect size",
+          "heterogeneity" = "heterogeneity"
+        ),
+        maxCoef)
+
+    return(row)
+  }
 
   if (returnSelCoef) {
     return(selCoef)
@@ -2075,7 +2476,7 @@
     )
 
   if (parameter == "effectSize") {
-    row$parameter <- gettextf("Effect Size (coef: %1$s)", paste(selCoef, collapse = ", "))
+    row$parameter <- gettextf("Effect size (coef: %1$s)", paste(selCoef, collapse = ", "))
     attr(row, "footnote") <- gettextf(
       "Effect size coefficients %1$s correspond to %2$s.",
       paste(selCoef, collapse = ","),
@@ -2250,6 +2651,7 @@
   if (length(selectedVariables) == 1 && selectedVariables == "") {
     # empty string creates overall adjusted estimate
     outMatrix <- t(colMeans(model.matrix(formula, data = expand.grid(predictorsRemaining))))
+    predictorsSelectedGridNames <- matrix("")
   } else {
     predictorsSelectedGrid      <- expand.grid(predictorsSelected)
     predictorsSelectedGridNames <- expand.grid(predictorsSelectedNames)
@@ -2272,8 +2674,9 @@
   if (length(selectedVariables) == 1 && selectedVariables == "") {
 
     # add intercept
-    attr(outMatrix, "variable") <- gettext("Adjusted Estimate")
-    attr(outMatrix, gettext("Adjusted Estimate")) <- ""
+    attr(outMatrix, "variable") <- gettext("Adjusted estimate")
+    attr(outMatrix, gettext("Adjusted estimate")) <- ""
+    attr(outMatrix, "selectedGridNames") <- predictorsSelectedGridNames
 
   } else {
 
@@ -2305,6 +2708,10 @@
 
 }
 .maComputeMarginalMeansVariable    <- function(fit, options, dataset, selectedVariable, testAgainst = 0, parameter) {
+
+  if (jaspBase::isTryError(fit)) {
+    return(NULL)
+  }
 
   if (parameter == "effectSize") {
 
@@ -2427,8 +2834,8 @@
 
     # create full data frame
     computedMarginalMeans <- data.frame(
-      "variable" = paste0(attr(predictorMatrixEffectSize, "variable"), collapse = jaspBase::interactionSymbol),
-      "value"    = apply(attr(predictorMatrixEffectSize, "selectedGridNames"), 1, paste0, collapse = ", "),
+      "variable" = paste0(attr(predictorMatrixHeterogeneity, "variable"), collapse = jaspBase::interactionSymbol),
+      "value"    = apply(attr(predictorMatrixHeterogeneity, "selectedGridNames"), 1, paste0, collapse = ", "),
       computedMarginalMeans
     )
   }
@@ -2447,9 +2854,15 @@
   if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]])
     computedMarginalMeans <- cbind(computedMarginalMeans, tauLevels)
 
+  computedMarginalMeans$subgroup <- attr(fit, "subgroup")
+
   return(computedMarginalMeans)
 }
 .maComputeContrastVariable         <- function(fit, options, dataset, selectedVariable, testAgainst = 0, parameter) {
+
+  if (jaspBase::isTryError(fit)) {
+    return(NULL)
+  }
 
   if (parameter == "effectSize") {
 
@@ -2617,6 +3030,8 @@
     computedContrasts$df <- computedContrastsTests$ddf
   computedContrasts$pval <- computedContrastsTests$pval
 
+  computedContrasts$subgroup <- attr(fit, "subgroup")
+
   return(computedContrasts)
 }
 .maMakeBubblePlotDataset           <- function(fit, options, dataset) {
@@ -2723,7 +3138,7 @@
   hasSeparateLines <- attr(dfPlot, "separateLines") != ""
   hasSeparatePlots <- attr(dfPlot, "separatePlots") != ""
 
-  ### add prediction bads
+  ### add prediction bands
   if (options[["bubblePlotPredictionIntervals"]]) {
 
     geomPi <- .maBubblePlotMakeCiGeom(dfPlot, options, ci = FALSE)
@@ -3033,6 +3448,10 @@
 }
 .maComputeVifSummary               <- function(fit, options, parameter = "effectSize") {
 
+  if (jaspBase::isTryError(fit)) {
+    return(NULL)
+  }
+
   if (options[["diagnosticsVarianceInflationFactorAggregate"]]) {
 
     # obtain terms indicies
@@ -3061,6 +3480,8 @@
     tableVif      <- .maExtractVifResults(try(metafor::vif(fit)), options, parameter)
     tableVif$term <- .maVariableNames(rownames(tableVif), options[["predictors"]])
   }
+
+  tableVif$subgroup <- attr(fit, "subgroup")
 
   return(tableVif)
 }
@@ -3503,6 +3924,20 @@
     "benjaminiYekutieli" = gettext("Benjamini-Yekutieli")
   ))
 }
+.maCasewiseDiagnosticsNames               <- function() {
+  return(c(
+    "rstudent",
+    "dffits",
+    "cook.d",
+    "cov.r",
+    "tau.del",
+    "tau2.del",
+    "QE.del",
+    "hat",
+    "weight",
+    "inf"
+  ))
+}
 .maCasewiseDiagnosticsExportColumnsNames  <- function(columnName) {
 
   return(switch(
@@ -3520,7 +3955,7 @@
   ))
 }
 
-# misc
+# print
 .maVariableNames                      <- function(varNames, variables) {
 
   return(sapply(varNames, function(varName){
@@ -3616,7 +4051,7 @@
 }
 .maPrintDf                            <- function(df) {
   if (.maIsWholenumber(df)) {
-    return(sprintf("%1$i", df))
+    return(sprintf("%1$i", round(df)))
   } else {
     return(sprintf("%1$.2f", df))
   }
@@ -3646,49 +4081,76 @@
     .maAddSpaceForPositiveValue(uCi), "%3$.", digits, "f",
     "]"), est, lCi, uCi))
 }
-.maRowHeterogeneityTest               <- function(fit, options){
 
-  row <- list(
-    test = if (.maIsMetaregression(options)) gettext("Residual heterogeneity") else gettext("Heterogeneity"),
-    stat = sprintf("Q\U2091(%1$i) = %2$.2f", fit[["k"]] - fit[["p"]], fit[["QE"]]),
-    pval = fit[["QEp"]]
-  )
+# table row functions
+.maRowHeterogeneityTest               <- function(fit, options) {
 
-  if (.maIsPermutation(options)) {
-    row[["pval2"]] <- NA
+  # handle missing subfits
+  if (jaspBase::isTryError(fit)) {
+    return(data.frame(
+      subgroup = attr(fit, "subgroup"),
+      test     = if (.maIsMetaregression(options)) gettext("Residual heterogeneity") else gettext("Heterogeneity")
+    ))
   }
 
-  row <- do.call(cbind.data.frame, row)
+  row <- data.frame(
+    subgroup = attr(fit, "subgroup"),
+    test     = if (.maIsMetaregression(options)) gettext("Residual heterogeneity") else gettext("Heterogeneity"),
+    stat     = sprintf("Q\U2091(%1$i) = %2$.2f", fit[["k"]] - fit[["p"]], fit[["QE"]]),
+    pval     = fit[["QEp"]]
+  )
+
   return(row)
 }
-.maRowEffectSizeTest                  <- function(fit, options){
+.maRowEffectSizeTest                  <- function(fit, options) {
+
+  # handle missing subfits
+  if (jaspBase::isTryError(fit)) {
+    return(data.frame(
+      subgroup = attr(fit, "subgroup"),
+      test     = gettext("Pooled effect")
+    ))
+  }
 
   # pooled effect size
   predictedEffect <- .maComputePooledEffectPlot(fit, options)
 
-  row <- list(
-    test = gettext("Pooled effect size"),
-    stat = if (.maIsMetaregressionFtest(options)) sprintf("t(%1$s) = %2$.2f", .maPrintDf(predictedEffect[["df"]][1]), predictedEffect[["stat"]][1])
+  row <- data.frame(
+    subgroup = attr(fit, "subgroup"),
+    test     = gettext("Pooled effect"),
+    stat     = if (.maIsMetaregressionFtest(options)) sprintf("t(%1$s) = %2$.2f", .maPrintDf(predictedEffect[["df"]][1]), predictedEffect[["stat"]][1])
     else sprintf("z = %1$.2f",  predictedEffect[["stat"]][1]),
-    pval = predictedEffect[["pval"]][1]
+    pval     = predictedEffect[["pval"]][1]
   )
 
-  if (.maIsPermutation(options)) {
-    row[["pval2"]] <- NA
-  }
-
-  row <- do.call(cbind.data.frame, row)
   return(row)
 }
 .maRowModerationTest                  <- function(fit, options, parameter = "effectSize", coefficientsTest = FALSE) {
 
+  # handle missing subfits
+  if (jaspBase::isTryError(fit)) {
+    testAdd <- if (coefficientsTest) gettext("(coef ...)") else ""
+    row     <- data.frame(
+      subgroup = attr(fit, "subgroup"),
+      test     = switch(
+        parameter,
+        "effectSize"    = if (.maIsMetaregressionHeterogeneity(options)) gettextf("Moderation effect size%1$s", testAdd) else gettextf("Moderation%1$s", testAdd),
+        "heterogeneity" = gettextf("Moderation heterogeneity%1$s", testAdd)
+      )
+    )
+    return(row)
+  }
+
+  # compute the test
   if (coefficientsTest) {
     moderationOut <- .maOmnibusTestCoefficients(fit, options, parameter = parameter)
   } else {
     moderationOut <- .maOmnibusTest(fit, options, parameter = parameter)
   }
 
-  row <- list()
+  row <- list(
+    "subgroup" = attr(fit, "subgroup")
+  )
 
   # add information about the tested coefficients
   if (coefficientsTest) {
@@ -3704,20 +4166,24 @@
     "heterogeneity" = gettextf("Moderation heterogeneity%1$s", testAdd)
   )
 
-  # test statistic
-  if (.maIsMetaregressionFtest(options)) {
-    row[["stat"]] <- sprintf("F\U2098(%1$s, %2$s) = %3$.2f", .maPrintDf(moderationOut[["df1"]]), .maPrintDf(moderationOut[["df2"]]), moderationOut[["stat"]])
-  } else {
-    row[["stat"]] <- sprintf("Q\U2098(%1$s) = %2$.2f", .maPrintDf(moderationOut[["df1"]]),  moderationOut[["stat"]])
-  }
-  row[["pval"]] <- moderationOut[["pval"]]
 
-  # permutation p-value
-  if (.maIsPermutation(options)) {
-    if (parameter == "effectSize") {
-      row[["pval2"]] <- attr(fit[["QMp"]], "permutation")[1]
-    } else if (parameter == "heterogeneity") {
-      row[["pval2"]] <- attr(fit[["QSp"]], "permutation")[1]
+  # test statistic
+  if (!is.na(moderationOut[["pval"]])) {
+
+    if (.maIsMetaregressionFtest(options)) {
+      row[["stat"]] <- sprintf("F\U2098(%1$s, %2$s) = %3$.2f", .maPrintDf(moderationOut[["df1"]]), .maPrintDf(moderationOut[["df2"]]), moderationOut[["stat"]])
+    } else {
+      row[["stat"]] <- sprintf("Q\U2098(%1$s) = %2$.2f", .maPrintDf(moderationOut[["df1"]]),  moderationOut[["stat"]])
+    }
+    row[["pval"]] <- moderationOut[["pval"]]
+
+    # permutation p-value
+    if (.maIsPermutation(options)) {
+      if (parameter == "effectSize") {
+        row[["pval2"]] <- attr(fit[["QMp"]], "permutation")[1]
+      } else if (parameter == "heterogeneity") {
+        row[["pval2"]] <- attr(fit[["QSp"]], "permutation")[1]
+      }
     }
   }
 
@@ -3730,6 +4196,301 @@
 
   return(row)
 }
+.maRowPooledEffectEstimate            <- function(fit, options) {
+
+  # handle missing subfits
+  if (jaspBase::isTryError(fit)) {
+    return(data.frame(
+      par     = gettext("Pooled effect"),
+      subgroup = attr(fit, "subgroup")
+    ))
+  }
+
+  # pooled effect size
+  row          <- .maComputePooledEffect(fit, options)
+
+  if (options[["predictionIntervals"]] && .mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
+    row <- do.call(rbind.data.frame, row)
+  } else {
+    row <- do.call(cbind.data.frame, row)
+  }
+
+  row$subgroup <- attr(fit, "subgroup")
+  return(row)
+}
+.maRowPooledHeterogeneity             <- function(fit, options) {
+
+  # handle missing subfits
+  if (jaspBase::isTryError(fit)) {
+    return(data.frame(
+      par     = c("\U1D70F", "\U1D70F\U00B2", "I\U00B2", "H\U00B2")[c(
+        options[["heterogeneityTau"]], options[["heterogeneityTau2"]], options[["heterogeneityI2"]], options[["heterogeneityH2"]])],
+      subgroup = attr(fit, "subgroup")
+    ))
+  }
+
+  # pooled effect size
+  row          <- .maComputePooledHeterogeneity(fit, options)
+  row$subgroup <- attr(fit, "subgroup")
+
+  row <- row[,c(
+    "par", "est",
+    if (options[["confidenceIntervals"]]) c("lCi", "uCi"),
+    "subgroup"
+  )]
+
+  return(row)
+}
+.maRowFitMeasures                     <- function(fit, options) {
+
+  # handle missing subfits
+  if (jaspBase::isTryError(fit)) {
+    row <- data.frame(
+      "subgroup"     = attr(fit, "subgroup"),
+      "model"        = NA,
+      "observations" = NA,
+      "ll"           = NA,
+      "dev"          = NA,
+      "AIC"          = NA,
+      "BIC"          = NA,
+      "AICc"         = NA
+    )
+
+    if (.maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options))
+      row$R2 <- NA
+
+    return(row)
+  }
+
+  # pooled effect size
+  row <- cbind.data.frame(
+    "subgroup"     = attr(fit, "subgroup"),
+    "model"        = colnames(fit[["fit.stats"]]),
+    "observations" = fit[["k"]],
+    data.frame(t(fit[["fit.stats"]]))
+  )
+
+  if (.maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options))
+    row$R2 <- fit[["R2"]]
+
+  return(row)
+}
+.maRowTermTestTable                   <- function(fit, options, parameter) {
+
+  # handle missing subfits
+  if (jaspBase::isTryError(fit)) {
+    return(NULL)
+  }
+
+  if (parameter == "effectSize") {
+    terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")
+    termsTests <- do.call(rbind.data.frame, lapply(terms, function(term)
+      .maTermTests(fit, options, term, parameter = "effectSize")
+    ))
+  } else if (parameter == "heterogeneity") {
+    terms      <- attr(terms(fit[["formula.scale"]], data = fit[["data"]]),"term.labels")
+    termsTests <- do.call(rbind.data.frame, lapply(terms, function(term)
+      .maTermTests(fit, options, term, parameter = "heterogeneity")
+    ))
+  }
+
+  termsTests$subgroup <- attr(fit, "subgroup")
+
+  return(termsTests)
+}
+.maRowCoefficientsEstimatesTable      <- function(fit, options, parameter) {
+
+  # handle missing subfits
+  if (jaspBase::isTryError(fit)) {
+    return(NULL)
+  }
+
+  if (parameter == "effectSize") {
+
+    estimates <- data.frame(
+      name = .maVariableNames(rownames(fit[["beta"]]), options[["predictors"]]),
+      est  = fit[["beta"]][,1],
+      se   = fit[["se"]],
+      stat = fit[["zval"]],
+      pval = fit[["pval"]]
+    )
+
+    if (.maIsPermutation(options))
+      estimates$pval2 <- attr(fit[["pval"]], "permutation")
+
+    if (.maIsMetaregressionFtest(options))
+      estimates$df <- fit[["ddf"]]
+
+    if (options[["confidenceIntervals"]]) {
+      estimates$lCi <- fit[["ci.lb"]]
+      estimates$uCi <- fit[["ci.ub"]]
+    }
+
+  } else if (parameter == "heterogeneity") {
+
+    estimates <- data.frame(
+      name = .maVariableNames(rownames(fit[["alpha"]]), options[["predictors"]]),
+      est  = fit[["alpha"]][,1],
+      se   = fit[["se.alpha"]],
+      stat = fit[["zval.alpha"]],
+      pval = fit[["pval.alpha"]]
+    )
+
+    if (.maIsPermutation(options))
+      estimates$pval2 <- attr(fit[["pval.alpha"]], "permutation")
+
+    if (.maIsMetaregressionFtest(options))
+      estimates$df <- fit[["ddf.alpha"]]
+
+    if (options[["confidenceIntervals"]]) {
+      estimates$lCi <- fit[["ci.lb.alpha"]]
+      estimates$uCi <- fit[["ci.ub.alpha"]]
+    }
+
+  }
+
+  estimates$subgroup <- attr(fit, "subgroup")
+
+  return(estimates)
+}
+.maRowDiagnosticsTable                <- function(fit, diagnostics, options, forExport = FALSE) {
+
+  # first create the data part of the output
+  # (in case the fit failed there are no diagnostics)
+
+  fitData <- attr(fit, "data")
+  rows    <- list()
+
+  # add export specific settings (for adding to the dataset)
+  if (forExport) {
+    rows[["datasetOrder"]] <- as.numeric(names(attr(fitData, "NasIds"))[!attr(fitData, "NasIds")])
+
+    # no variable information necessary
+    options[["studyLabels"]] <- ""
+    options[["diagnosticsCasewiseDiagnosticsIncludePredictors"]] <- FALSE
+  }
+
+  # include study labels
+  if (options[["studyLabels"]] != "") {
+    rows[["label"]] <- fitData[[options[["studyLabels"]]]]
+  }
+
+  # include predictors
+  if (options[["diagnosticsCasewiseDiagnosticsIncludePredictors"]]) {
+    fitData           <- fitData[, colnames(fitData) %in% options[["predictors"]], drop = FALSE]
+    rows[["pred"]]    <- fitData
+  }
+
+  # return on error
+  if (jaspBase::isTryError(fit)) {
+    return(do.call(cbind.data.frame, rows))
+  }
+
+  # main diagnostics section
+  rows <- do.call(cbind.data.frame, c(
+    rows,
+    diagnostics[["influenceResultsInf"]],
+    if (options[["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"]]) diagnostics[["influenceResultsDfbs"]]
+  ))
+  rows$subgroup <- attr(fit, "subgroup")
+
+  return(rows)
+}
+
+# table row helper functions
+.maSafeRbind                          <- function(dfs) {
+
+  # this function allows combining data.frames with different columns
+  # the main issue is that some models might be missing coefficients/terms,
+  # or complete fit failure, as such, simple rbind might misaligned the grouped output
+  # importantly, the order of the output data.frame
+  # does not matter as order is determined by the table itself
+
+  dfs <- dfs[!sapply(dfs, function(x) is.null(x) || length(x) == 0 || nrow(x) == 0)]
+  if (length(dfs) == 0)
+    return(NULL)
+
+  # gather all colnames
+  colnamesUnique <- unique(unlist(lapply(dfs, colnames)))
+
+  # add missing columns and reorder
+  for (i in seq_along(dfs)) {
+    colnamesMissing <- setdiff(colnamesUnique, colnames(dfs[[i]]))
+    if (length(colnamesMissing) > 0) {
+      for (col in colnamesMissing) {
+        dfs[[i]][[col]] <- NA
+      }
+    }
+    dfs[[i]] <- dfs[[i]][,colnamesUnique,drop=FALSE]
+  }
+
+  df <- do.call(rbind, dfs)
+  return(df)
+}
+.maSafeOrderAndSimplify               <- function(df, columnName, options) {
+
+  # this function allows ordering and simplifying subgroup output tables
+  # the main issue is that some models might be missing coefficients/terms etc
+  # as such, simple ordering of the output might misaligned the grouped output
+
+  # drop the grouping column if no subgroups requested
+  if (options[["subgroup"]] == "") {
+    df <- df[,colnames(df) != "subgroup", drop = FALSE]
+    return(df)
+  }
+
+  # remove rows with NA in the grouping column
+  if (anyNA(df[[columnName]])) {
+    warning(sprintf("The grouping column '%s' contains NA values. These rows will be removed.", columnName))
+    df <- df[!is.na(df[[columnName]]),,drop=FALSE]
+  }
+
+  # get the grouping order
+  groupingOrder <- unique(df[[columnName]])
+
+  # get the order of the grouping
+  newDf <- list()
+  for (i in seq_along(groupingOrder)) {
+    newDf[[i]] <- df[df[[columnName]] == groupingOrder[i],,drop=FALSE]
+  }
+  newDf <- do.call(rbind, newDf)
+
+  # simplify the grouping column
+  newDf[[columnName]][duplicated(newDf[[columnName]])] <- NA
+
+  return(newDf)
+}
+
+# table functions
+.maAddCiColumn                  <- function(tempTable, options) {
+
+  if (options[["confidenceIntervals"]]) {
+    overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
+    tempTable$addColumnInfo(name = "lCi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
+    tempTable$addColumnInfo(name = "uCi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
+  }
+
+  return(tempTable)
+}
+.maAddPiColumn                  <- function(tempTable, options) {
+
+  if (options[["predictionIntervals"]]) {
+    overtitleCi <- gettextf("%s%% PI", 100 * options[["confidenceIntervalsLevel"]])
+    tempTable$addColumnInfo(name = "lPi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
+    tempTable$addColumnInfo(name = "uPi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
+  }
+
+  return(tempTable)
+}
+.maAddSubgroupColumn            <- function(tempTable, options) {
+
+  if (options[["subgroup"]] != "")
+    tempTable$addColumnInfo(name = "subgroup", type = "string", title = gettext("Subgroup"))
+
+  return(tempTable)
+}
+
+# misc
 .maAddSpaceForPositiveValue           <- function(value) {
   if (value >= 0)
     return(" ")
@@ -3934,6 +4695,23 @@
 
   return(out)
 }
+.maCleanSelectedIndexesVector         <- function(x) {
+
+  x <- trimws(x, which = "both")
+  x <- trimws(x, which = "both", whitespace = "c")
+  x <- trimws(x, which = "both", whitespace = "\\(")
+  x <- trimws(x, which = "both", whitespace = "\\)")
+  x <- trimws(x, which = "both", whitespace = ",")
+
+  x <- strsplit(x, ",", fixed = TRUE)[[1]]
+
+  x <- trimws(x, which = "both")
+  x <- x[x != ""]
+
+  x <- as.numeric(x)
+
+  return(x)
+}
 .maDichotomizeVariablesLevels         <- function(df, variables, options) {
 
   variablesContinuous <- variables[variables %in% options[["predictors"]][options[["predictors.types"]] == "scale"]]
@@ -4022,11 +4800,26 @@
 
   messages <- NULL
 
-  if (options[["clustering"]] != "") {
-    if (all(fit[["tcl"]][1] == fit[["tcl"]]))
-      messages <- c(messages, gettextf("%1$i clusters with %2$i estimates each.", fit[["n"]],  fit[["tcl"]][1]))
-    else
-      messages <- c(messages, gettextf("%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates.", fit[["n"]],  min(fit[["tcl"]]), median(fit[["tcl"]]), max(fit[["tcl"]])))
+  if (options[["clustering"]] == "") {
+    tempFit <- fit[[1]]
+    if (!jaspBase::isTryError(tempFit) && !is.null(tempFit)){
+      if (all(tempFit[["tcl"]][1] == tempFit[["tcl"]]))
+        messages <- c(messages, gettextf("%1$i clusters with %2$i estimates each.", tempFit[["n"]],  tempFit[["tcl"]][1]))
+      else
+        messages <- c(messages, gettextf("%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates.", tempFit[["n"]],  min(tempFit[["tcl"]]), median(tempFit[["tcl"]]), max(tempFit[["tcl"]])))
+    }
+  } else {
+    for (i in seq_along(fit)) {
+      tempFit <- fit[[i]]
+      if (!jaspBase::isTryError(tempFit) && !is.null(tempFit)) {
+        if (options[["clustering"]] != "") {
+          if (all(tempFit[["tcl"]][1] == tempFit[["tcl"]]))
+            messages <- c(messages, gettextf("%1$s: %2$i clusters with %3$i estimates each.", gettextf("Subgroup %1$s", attr(tempFit, "subgroup")), tempFit[["n"]],  tempFit[["tcl"]][1]))
+          else
+            messages <- c(messages, gettextf("%1$s: %2$i clusters with min/median/max %3$i/%4$i/%5$i estimates.", gettextf("Subgroup %1$s", attr(tempFit, "subgroup")), tempFit[["n"]],  min(tempFit[["tcl"]]), median(tempFit[["tcl"]]), max(tempFit[["tcl"]])))
+        }
+      }
+    }
   }
 
   if (options[["transformEffectSize"]] != "none") {
@@ -4053,8 +4846,8 @@
   if (!is.null(attr(dataset, "influentialObservations")) && attr(dataset, "influentialObservations") > 0)
     messages <- c(messages, gettextf("%1$i influential observations were detected and removed.", attr(dataset, "influentialObservations")))
 
-  if (.maIsMultilevelMultivariate(options) && any(attr(fit, "skipped")))
-    messages <- c(messages, gettextf("The Model Structure %1$s was not completely specified and was skipped.", paste0(which(attr(fit, "skipped")), collapse = " and ")))
+  if (.maIsMultilevelMultivariate(options) && any(attr(fit[[1]], "skipped")) && !jaspBase::isTryError(fit[[1]]))
+    messages <- c(messages, gettextf("The Model Structure %1$s was not completely specified and was skipped.", paste0(which(attr(fit[[1]], "skipped")), collapse = " and ")))
 
   if (.mammAnyStructureGen(options) && options[["predictionIntervals"]])
     messages <- c(messages, gettext("Prediction interval for the pooled effect size is not available for models with multiple heterogeneity estimates."))
@@ -4121,12 +4914,27 @@
   # probably more messages will be gathered over time
   if (grepl("singular matrix", message))
     return(gettextf("The model estimation failed with the following message: %1$s. Please, consider simplifying the model.", message))
+  if (grepl("Fewer than two estimates", message))
+    return(gettext("Fewer than two estimates."))
 
   return(message)
 }
-.maTermsTableWarnings                  <- function(fit, terms, parameter) {
+.maTermsTableWarnings                  <- function(fit, options, terms, parameter) {
 
-  messages <- NULL
+  if (options[["subgroup"]] == "") {
+    messages <- .maTermsTableWarningsFun(fit[[1]], terms, parameter, prefix = "")
+  } else {
+    messages <- NULL
+    for (i in seq_along(fit)) {
+      if (jaspBase::isTryError(fit))
+        next
+      messages <- c(messages, .maTermsTableWarningsFun(fit[[i]], terms, parameter, prefix = gettextf("Subgroup %1$s: ", attr(fit[[i]], "subgroup"))))
+    }
+  }
+
+  return(messages)
+}
+.maTermsTableWarningsFun               <- function(fit, terms, parameter, prefix = "") {
 
   coefNA <- switch(
     parameter,
@@ -4136,7 +4944,7 @@
 
   if (any(coefNA)) {
 
-    messages <- c(messages, unlist(sapply(terms, function(term) {
+    messages <- unlist(sapply(terms, function(term) {
 
       if (parameter == "effectSize") {
         terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")     # get terms indices from the model
@@ -4150,20 +4958,40 @@
       thisNaTerms    <- coefNA[termsIndex == which(terms == term)]
 
       if (all(thisNaTerms)) {
-        return(gettextf("The term %1$s was completely removed from the model. Possible causes are missing values, collinear predictors, or missing crossed cells in an interaction term.", term))
+        return(gettextf(
+          "%1$sThe term %2$s was completely removed from the model. Possible causes are missing values, collinear predictors, or missing crossed cells in an interaction term.",
+          prefix, term
+        ))
       } else if (any(thisNaTerms)) {
-        return(gettextf("The term %1$s was partilly removed (%2$i/%3$i coefficients) from the model. Possible causes are missing values, collinear predictors, or missing crossed cells in an interaction term.", term, sum(thisNaTerms), length(thisNaTerms)))
+        return(gettextf(
+          "%1$sThe term %2$s was partilly removed (%3$i/%4$i coefficients) from the model. Possible causes are missing values, collinear predictors, or missing crossed cells in an interaction term.",
+           prefix, term, sum(thisNaTerms), length(thisNaTerms)))
       } else {
         return(NULL)
       }
-    })))
+    }))
+  } else (
+    messages <- NULL
+  )
+
+  return(messages)
+}
+.maCoefficientsTableWarnings           <- function(fit, options, parameter) {
+
+  if (options[["subgroup"]] == "") {
+    messages <- .maCoefficientsTableWarningsFun(fit[[1]], parameter, prefix = "")
+  } else {
+    messages <- NULL
+    for (i in seq_along(fit)) {
+      if (jaspBase::isTryError(fit))
+        next
+      messages <- c(messages, .maCoefficientsTableWarningsFun(fit[[i]], parameter, prefix = gettextf("Subgroup %1$s: ", attr(fit[[i]], "subgroup"))))
+    }
   }
 
   return(messages)
 }
-.maCoefficientsTableWarnings           <- function(fit, parameter) {
-
-  messages <- NULL
+.maCoefficientsTableWarningsFun        <- function(fit, parameter, prefix = "") {
 
   coefNA <- switch(
     parameter,
@@ -4176,8 +5004,12 @@
     missingCoef <- names(coefNA)[coefNA]
     missingCoef <- gsub("^.", "", missingCoef) # remove first letter as metafor adds "X/Z"
 
-    messages <- c(messages, gettextf("The following coefficients were removed from the model: %1$s. Possible causes are missing values, collinear predictors, or missing crossed cells in an interaction term.",
-                            paste(missingCoef, collapse = ", ")))
+    messages <- gettextf(
+      "%1$sThe following coefficients were removed from the model: %2$s. Possible causes are missing values, collinear predictors, or missing crossed cells in an interaction term.",
+      prefix, paste(missingCoef, collapse = ", "))
+
+  } else {
+    messages <- NULL
   }
 
   return(messages)

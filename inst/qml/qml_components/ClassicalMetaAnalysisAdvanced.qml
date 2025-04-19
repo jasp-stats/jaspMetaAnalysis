@@ -36,7 +36,6 @@ Section
 
 		Group
 		{
-
 			CheckBox
 			{
 				name:		"showMetaforRCode"
@@ -51,6 +50,15 @@ Section
 				text:		qsTr("Weighted estimation")
 				checked:	true
 				info: qsTr("Perform weighted estimation using inverse-variance weights. Uncheck for unweighted estimation.")
+			}
+
+			CheckBox
+			{
+				name:		"includeFullDatasetInSubgroupAnalysis"
+				text:		qsTr("Include full dataset in subgroup analysis")
+				enabled:	subgroup.count == 1
+				checked:	false
+				info: qsTr("Include the full dataset output in the subgroup analysis. This option is only available when the subgroup analysis is selected.")
 			}
 
 			Group

@@ -32,7 +32,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 }
 
 .maDependencies        <- c(
-  "effectSize", "effectSizeStandardError", "predictors", "predictors.types", "clustering", "method", "fixedEffectTest",
+  "effectSize", "effectSizeStandardError", "predictors", "predictors.types", "clustering", "subgroup", "method", "fixedEffectTest",
   "effectSizeModelTerms", "effectSizeModelIncludeIntercept",
   "clusteringUseClubSandwich", "clusteringSmallSampleCorrection",
   "confidenceIntervalsLevel",
@@ -57,6 +57,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "computeCovarianceMatrix", "computeCovarianceMatrix"
 )
 .maForestPlotDependencies <- c(
+  # do not forget to add variable carrying options to the .maDataPlottingDependencies
   .maDependencies, "transformEffectSize", "confidenceIntervalsLevel",
   "forestPlotStudyInformation",
   "forestPlotStudyInformationAllVariables",
@@ -66,6 +67,9 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotStudyInformationStudyWeights",
   "forestPlotStudyInformationOrderBy",
   "forestPlotStudyInformationOrderAscending",
+  "forestPlotStudyInformationAggregateBy",
+  "forestPlotStudyInformationAggregateMethod",
+  "forestPlotStudyInformationAggregateMethodBubbleRelativeSize",
   "forestPlotEstimatedMarginalMeans",
   "forestPlotEstimatedMarginalMeansModelVariables",
   "forestPlotEstimatedMarginalMeansSelectedVariables",
@@ -88,6 +92,10 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotPredictionIntervals",
   "forestPlotEstimatesAndConfidenceIntervals",
   "forestPlotTestsInRightPanel",
+  "forestPlotAllignLeftPanel",
+  "forestPlotSubgroupPanelsWithinSubgroup",
+  "forestPlotSubgroupFullDatasetEstimatedMarginalMeans",
+  "forestPlotSubgroupFullDatasetModelInformation",
   "forestPlotMappingColor",
   "forestPlotMappingShape",
   "forestPlotRelativeSizeEstimates",
@@ -131,6 +139,13 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "bubblePlotLegendPosition",
   "bubblePlotRelativeSizeText"
 )
+.maDataPlottingDependencies <- c(
+  "forestPlotStudyInformationSelectedVariables",
+  "forestPlotStudyInformationOrderBy",
+  "forestPlotStudyInformationAggregateBy",
+  "forestPlotMappingColor",
+  "forestPlotMappingShape"
+)
 .maReady               <- function(options) {
 
   inputReady <- options[["effectSize"]] != "" && options[["effectSizeStandardError"]] != ""
@@ -150,12 +165,14 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     options[["effectSize"]],
     options[["effectSizeStandardError"]],
     if (options[["clustering"]] != "") options[["clustering"]],
+    if (options[["subgroup"]] != "")   options[["subgroup"]],
     if (length(predictorsNominal) > 0) predictorsNominal,
     if (length(predictorsScale) > 0)   predictorsScale
   )
   anyNaByRows <- apply(dataset[,omitOnVariables], 1, function(x) anyNA(x))
   dataset     <- dataset[!anyNaByRows,]
-  attr(dataset, "NAs") <- sum(anyNaByRows)
+  attr(dataset, "NAs")    <- sum(anyNaByRows)
+  attr(dataset, "NasIds") <- anyNaByRows
 
   # drop empty factor levels
   dataset <- droplevels(dataset)
