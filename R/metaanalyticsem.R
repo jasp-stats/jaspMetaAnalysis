@@ -27,9 +27,6 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   # read the data set
   dataset <- .masemDecodeData(dataset, options)
 
-  saveRDS(options, file = "C:/JASP/options.RDS")
-  saveRDS(dataset, file = "C:/JASP/dataset.RDS")
-
   # create a data-summary of the input
   if (options[["availableVariableNames"]])
     .masemVariableSummaryView(jaspResults, dataset, options)
@@ -402,6 +399,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
     pooledMatrix$addColumnInfo(name = var, type = "number", title = var)
   }
 
+  # TODO: check column ordering
   covMatrix <- matrix(NA, nrow = length(variableNames), ncol = length(variableNames))
   colnames(covMatrix)  <- variableNames
   if (options[["dataInputType"]] == "correlation") {
@@ -434,6 +432,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   pooledParameters$addColumnInfo(name = "z",         type = "number",  title = gettext("z"))
   pooledParameters$addColumnInfo(name = "p",         type = "pvalue",  title = gettext("p"))
 
+  # TODO: rename parameters
   colnames(coefficientsSummary) <- c("estimate", "se", "lCi",  "uCi", "z", "p")
   coefficientsSummary$name <- rownames(coefficientsSummary)
   pooledParameters$setData(coefficientsSummary)
@@ -673,9 +672,9 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   colnames(tempOutput) <- c("name", "matrix", "row", "col", "estimate", "se", "lCi", "uCi", "lCiMet", "uCiMet", "z", "p")
   tempOutput <- tempOutput[tempOutput$matrix %in% switch(
     output,
-    "regression"    = c("Amatrix", "Amatrixvars"),
+    "regression"    = c("Amatrix", "Amatrixvars", "Mmatrix", "Mmatrixvars"),
     "covariances"   = "Smatrix",
-    "randomEffects" = "TauCov"
+    "randomEffects" = c("TauCov", "TauMean")
   ), ,drop=FALSE]
 
   # remove additional columns

@@ -25,9 +25,6 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   # read the data set
   dataset <- .masemReadData(dataset)
 
-  saveRDS(options, file = "C:/JASP/options.RDS")
-  saveRDS(dataset, file = "C:/JASP/dataset.RDS")
-
   # estimate the models
   .masemFitModels(jaspResults, dataset, options)
 
@@ -94,7 +91,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
     modelContainer <- jaspResults[["modelContainer"]]
     fits <- modelContainer$object
   }
-  saveRDS(fits, file = "C:/JASP/fits.RDS")
+
   # compute the individual model fits
   for (i in seq_along(options[["models"]])) {
 
@@ -129,8 +126,6 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
       else       tempFit <- .semmetaFitModelsFun(model, dataset, options)
 
       jaspBase::progressbarTick()
-
-      saveRDS(tempFit, file = "C:/JASP/fit.RDS")
 
       # add options to the model fit
       attr(tempFit, "model") <- model
@@ -187,10 +182,14 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   ))
 
   # prepare data
-  corDataset <- metaSEM::Cor2DataFrame(
-    dataset,
+  dataCall <- list(
+    dataset[!names(dataset) %in% "means"],
     cor.analysis = options[["dataInputType"]] == "correlation"
   )
+  if (!is.null(dataset[["means"]])) {
+    dataCall[["Means"]] <- dataset[["means"]]
+  }
+  corDataset <- do.call(metaSEM::Cor2DataFrame, dataCall)
 
   # fit SEM
   if (!jaspBase::isTryError(tempRam)) {
@@ -199,6 +198,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
       data                = corDataset,
       intervals.type      = .masemGetIntervalsType(options),
       cor.analysis        = options[["dataInputType"]] == "correlation",
+      mean.analysis       = !is.null(dataset[["means"]]),
       RE.type.Sigma       = .masemGetRandomEffectsType(model[["randomEffectsSigma"]]),
       RE.type.Mu          = .masemGetRandomEffectsType(model[["randomEffectsMu"]]),
       RE.type.SigmaMu     = .masemGetRandomEffectsType(model[["randomEffectsSigmaMu"]]),
