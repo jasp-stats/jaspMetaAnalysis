@@ -4042,7 +4042,7 @@
 }
 .maPrintDf                            <- function(df) {
   if (.maIsWholenumber(df)) {
-    return(sprintf("%1$i", df))
+    return(sprintf("%1$i", round(df)))
   } else {
     return(sprintf("%1$.2f", df))
   }
