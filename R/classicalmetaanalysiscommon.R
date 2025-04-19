@@ -789,7 +789,7 @@
   .maAddCiColumn(pooledEstimatesTable, options)
   .maAddPiColumn(pooledEstimatesTable, options)
   if (options[["predictionIntervals"]] && .mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
-    for (colName in .mammExtractTauLevelNames(fit)) {
+    for (colName in .mammExtractTauLevelNamesList(fit)) {
       pooledEstimatesTable$addColumnInfo(name = colName, title = colName, type = .maGetVariableColumnType(colName, options), overtitle = gettext("Heterogeneity Level"))
     }
   }
@@ -1254,7 +1254,7 @@
   if (parameter == "effectSize") {
     .maAddPiColumn(estimatedMarginalMeansTable, options)
     if (options[["predictionIntervals"]] && .mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
-      for (colName in .mammExtractTauLevelNames(fit)) {
+      for (colName in .mammExtractTauLevelNamesList(fit)) {
         estimatedMarginalMeansTable$addColumnInfo(name = colName, title = colName, type = .maGetVariableColumnType(colName, options), overtitle = gettext("Heterogeneity Level"))
       }
     }
@@ -1317,7 +1317,7 @@
     .maAddPiColumn(contrastsTable, options)
     # if (options[["predictionIntervals"]] && .mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
     #   TODO?
-    #   for (colName in .mammExtractTauLevelNames(fit)) {
+    #   for (colName in .mammExtractTauLevelNamesList(fit)) {
     #   contrastsTable$addColumnInfo(name = colName, title = colName, type = .maGetVariableColumnType(colName, options), overtitle = gettext("Heterogeneity Level"))
     #   }
     # }
@@ -4199,9 +4199,14 @@
 
   # pooled effect size
   row          <- .maComputePooledEffect(fit, options)
-  row$subgroup <- attr(fit, "subgroup")
 
-  row <- do.call(cbind.data.frame, row)
+  if (options[["predictionIntervals"]] && .mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
+    row <- do.call(rbind.data.frame, row)
+  } else {
+    row <- do.call(cbind.data.frame, row)
+  }
+
+  row$subgroup <- attr(fit, "subgroup")
   return(row)
 }
 .maRowPooledHeterogeneity             <- function(fit, options) {

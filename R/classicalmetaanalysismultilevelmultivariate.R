@@ -913,6 +913,19 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
   return(levelNames)
 }
+.mammExtractTauLevelNamesList    <- function(fit) {
+
+  levelNames <- list()
+
+  for (i in seq_along(fit)) {
+    if (jaspBase::isTryError(fit[[i]]) || is.null(fit[[i]]))
+      next
+    levelNames[[length(levelNames) + 1]] <- .mammExtractTauLevelNames(fit[[i]])
+  }
+
+  levelNames <- unique(unlist(levelNames))
+  return(levelNames)
+}
 .mammExtractTauLevels            <- function(fit, expanded = TRUE) {
 
   levels <- list()
