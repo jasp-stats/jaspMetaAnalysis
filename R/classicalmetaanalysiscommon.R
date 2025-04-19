@@ -2157,10 +2157,19 @@
 
   # keep levels for which the heterogeneity is predicted for complex multivariate models
   if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]]) {
-    tauLevels <- list(
-      predictedEffect[["tau2.level"]],
-      predictedEffect[["gamma2.level"]]
-    )
+    # if there is only a single level of heterogeneity, the levels are not returned
+    # happens with subgroups etc - it needs to be appended from the design matrix
+    if (nrow(tauLevelsMatrix) == 1) {
+      tauLevels <- list(
+        tauLevelsMatrix[["tau2.levels"]],
+        tauLevelsMatrix[["gamma2.levels"]]
+      )
+    } else {
+      tauLevels <- list(
+        predictedEffect[["tau2.level"]],
+        predictedEffect[["gamma2.level"]]
+      )
+    }
     tauLevels           <- do.call(cbind.data.frame, tauLevels[!sapply(tauLevels, is.null)])
     colnames(tauLevels) <- .mammExtractTauLevelNames(fit)
   }
