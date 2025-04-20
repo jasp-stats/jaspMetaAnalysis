@@ -351,7 +351,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     ordinal = if (length(variablesOrdinal) != 0) variablesOrdinal
   ))
 }
-.mammRandomEstimatesTable        <- function(jaspResults, dataset, options) {
+.mammRandomEstimatesTable        <- function(jaspResults, options) {
 
   # obtain the overall container
   if (!is.null(jaspResults[["randomEstimatesContainer"]])) {

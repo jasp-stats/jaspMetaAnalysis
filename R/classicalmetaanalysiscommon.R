@@ -48,54 +48,54 @@
   # }
 
   # model summary
-  .maOverallTestsTable(jaspResults, dataset, options)
-  .maPooledEstimatesTable(jaspResults, dataset, options)
+  .maOverallTestsTable(jaspResults, options)
+  .maPooledEstimatesTable(jaspResults, options)
 
   # random effects
   if (.maIsMultilevelMultivariate(options))
-    .mammRandomEstimatesTable(jaspResults, dataset, options)
+    .mammRandomEstimatesTable(jaspResults, options)
 
   if (options[["fitMeasures"]])
-    .maFitMeasuresTable(jaspResults, dataset, options)
+    .maFitMeasuresTable(jaspResults, options)
 
   # meta-regression tables
   if (.maIsMetaregression(options)) {
     if (options[["metaregressionTermTests"]]) {
-      .maTermsTable(jaspResults, dataset, options, "effectSize")
-      .maTermsTable(jaspResults, dataset, options, "heterogeneity")
+      .maTermsTable(jaspResults, options, "effectSize")
+      .maTermsTable(jaspResults, options, "heterogeneity")
     }
     if (options[["metaregressionCoefficientEstimates"]]) {
-      .maCoefficientEstimatesTable(jaspResults, dataset, options, "effectSize")
-      .maCoefficientEstimatesTable(jaspResults, dataset, options, "heterogeneity")
+      .maCoefficientEstimatesTable(jaspResults, options, "effectSize")
+      .maCoefficientEstimatesTable(jaspResults, options, "heterogeneity")
     }
     if (options[["metaregressionCoefficientCorrelationMatrix"]]) {
-      .maCoefficientCorrelationMatrixTable(jaspResults, dataset, options, "effectSize")
-      .maCoefficientCorrelationMatrixTable(jaspResults, dataset, options, "heterogeneity")
+      .maCoefficientCorrelationMatrixTable(jaspResults, options, "effectSize")
+      .maCoefficientCorrelationMatrixTable(jaspResults, options, "heterogeneity")
     }
   }
 
   # estimated marginal means and contrasts (the whole section is created within the dispatch)
-  .maEstimatedMarginalMeansAndContrasts(jaspResults, dataset, options)
+  .maEstimatedMarginalMeansAndContrasts(jaspResults, options)
 
   # plots
-  .maUltimateForestPlot(jaspResults, dataset, options)
-  .maBubblePlot(jaspResults, dataset, options)
+  .maUltimateForestPlot(jaspResults, options)
+  .maBubblePlot(jaspResults, options)
 
   # diagnostics
   if (.maIsMetaregression(options) && options[["diagnosticsVarianceInflationFactor"]]) {
-    .maVarianceInflationTable(jaspResults, dataset, options, "effectSize")
-    .maVarianceInflationTable(jaspResults, dataset, options, "heterogeneity")
+    .maVarianceInflationTable(jaspResults, options, "effectSize")
+    .maVarianceInflationTable(jaspResults, options, "heterogeneity")
   }
   if (options[["diagnosticsCasewiseDiagnostics"]]) {
-    .maCasewiseDiagnosticsTable(jaspResults, dataset, options)
+    .maCasewiseDiagnosticsTable(jaspResults, options)
     .maCasewiseDiagnosticsExportColumns(jaspResults, dataset, options)
   }
   if (options[["diagnosticsPlotsProfileLikelihood"]])
-    .maProfileLikelihoodPlot(jaspResults, dataset, options)
+    .maProfileLikelihoodPlot(jaspResults, options)
   if (options[["diagnosticsPlotsBaujat"]])
-    .maBaujatPlot(jaspResults, dataset, options)
+    .maBaujatPlot(jaspResults, options)
   if (options[["diagnosticsResidualFunnel"]])
-    .maResidualFunnelPlot(jaspResults, dataset, options)
+    .maResidualFunnelPlot(jaspResults, options)
 
 
   # additional
@@ -668,7 +668,7 @@
 }
 
 # output tables
-.maOverallTestsTable                     <- function(jaspResults, dataset, options) {
+.maOverallTestsTable                     <- function(jaspResults, options) {
 
   modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults)
 
@@ -766,7 +766,7 @@
 
   return()
 }
-.maPooledEstimatesTable                  <- function(jaspResults, dataset, options) {
+.maPooledEstimatesTable                  <- function(jaspResults, options) {
 
   modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults)
 
@@ -813,7 +813,7 @@
   }
 
   # add messages
-  pooledEstimatesMessages <- .maPooledEstimatesMessages(fit, dataset, options, anyNA(estimates[["effect"]]))
+  pooledEstimatesMessages <- .maPooledEstimatesMessages(fit, options, anyNA(estimates[["effect"]]))
   for (i in seq_along(pooledEstimatesMessages))
     pooledEstimatesTable$addFootnote(pooledEstimatesMessages[i])
 
@@ -825,7 +825,7 @@
 
   return()
 }
-.maFitMeasuresTable                      <- function(jaspResults, dataset, options) {
+.maFitMeasuresTable                      <- function(jaspResults, options) {
 
   modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults)
 
@@ -865,7 +865,7 @@
 
   return()
 }
-.maTermsTable                            <- function(jaspResults, dataset, options, parameter = "effectSize") {
+.maTermsTable                            <- function(jaspResults, options, parameter = "effectSize") {
 
   metaregressionContainer <- .maExtractMetaregressionContainer(jaspResults)
 
@@ -927,7 +927,7 @@
 
   return()
 }
-.maCoefficientEstimatesTable             <- function(jaspResults, dataset, options, parameter = "effectSize") {
+.maCoefficientEstimatesTable             <- function(jaspResults, options, parameter = "effectSize") {
 
   metaregressionContainer <- .maExtractMetaregressionContainer(jaspResults)
 
@@ -986,7 +986,7 @@
 
   return()
 }
-.maCoefficientCorrelationMatrixTable     <- function(jaspResults, dataset, options, parameter = "effectSize") {
+.maCoefficientCorrelationMatrixTable     <- function(jaspResults, options, parameter = "effectSize") {
 
   metaregressionContainer <- .maExtractMetaregressionContainer(jaspResults)
 
@@ -1001,7 +1001,7 @@
   # create individual tables for each subgroup
   if (options[["subgroup"]] == "") {
 
-    correlationMatrixTable <- .maCoefficientCorrelationMatrixTableFun(fit[[1]], dataset, options, parameter)
+    correlationMatrixTable <- .maCoefficientCorrelationMatrixTableFun(fit[[1]], options, parameter)
     correlationMatrixTable$title <- switch(
       parameter,
       effectSize    = gettext("Effect Size Meta-Regression Correlation Matrix"),
@@ -1033,7 +1033,7 @@
     metaregressionContainer[[paste0(parameter, "CorrelationTable")]] <- correlationMatrixTable
 
     for (i in seq_along(fit)) {
-      correlationMatrixTable[[names(fit)[i]]]          <- .maCoefficientCorrelationMatrixTableFun(fit[[i]], dataset, options, parameter)
+      correlationMatrixTable[[names(fit)[i]]]          <- .maCoefficientCorrelationMatrixTableFun(fit[[i]], options, parameter)
       correlationMatrixTable[[names(fit)[i]]]$title    <- gettextf("Subgroup: %1$s", attr(fit[[i]], "subgroup"))
       correlationMatrixTable[[names(fit)[i]]]$position <- i
     }
@@ -1042,7 +1042,7 @@
 
   return()
 }
-.maCoefficientCorrelationMatrixTableFun  <- function(fit, dataset, options, parameter) {
+.maCoefficientCorrelationMatrixTableFun  <- function(fit, options, parameter) {
 
   correlationMatrixTable <- createJaspTable()
 
@@ -1050,9 +1050,9 @@
     return()
 
   if (parameter == "effectSize")
-    correlationMatrix <- data.frame(cov2cor(fit[["vb"]]))
+    correlationMatrix <- data.frame(as.matrix(cov2cor(fit[["vb"]])))
   else if (parameter == "heterogeneity")
-    correlationMatrix <- data.frame(cov2cor(fit[["va"]]))
+    correlationMatrix <- data.frame(as.matrix(cov2cor(fit[["va"]])))
 
   correlationMatrixNames      <- .maVariableNames(colnames(correlationMatrix), options[["predictors"]])
   colnames(correlationMatrix) <- correlationMatrixNames
@@ -1066,7 +1066,7 @@
 
   return(correlationMatrixTable)
 }
-.maEstimatedMarginalMeansAndContrasts    <- function(jaspResults, dataset, options) {
+.maEstimatedMarginalMeansAndContrasts    <- function(jaspResults, options) {
 
   # so, this section is a bit complicated -- all in order to prevent updating of all subcomponents once a new variable is added/removed
   # the main container contains effect size and heterogeneity subcontainers, which contain variable containers with the actual output tables
@@ -1098,14 +1098,14 @@
 
   # fill the section with EMM/C tables for each variables for the effect size / heterogeneity
   if (isReadyEffectSize)
-    .maEstimatedMarginalMeansAndContrastsFun(jaspResults, dataset, options, parameter = "effectSize")
+    .maEstimatedMarginalMeansAndContrastsFun(jaspResults, options, parameter = "effectSize")
 
   if (isReadyEffectSize)
-    .maEstimatedMarginalMeansAndContrastsFun(jaspResults, dataset, options, parameter = "heterogeneity")
+    .maEstimatedMarginalMeansAndContrastsFun(jaspResults, options, parameter = "heterogeneity")
 
   return()
 }
-.maEstimatedMarginalMeansAndContrastsFun <- function(jaspResults, dataset, options, parameter = "effectSize") {
+.maEstimatedMarginalMeansAndContrastsFun <- function(jaspResults, options, parameter = "effectSize") {
 
   # get the corresponding container
   estimatedMarginalMeansAndContrastsContainer <- jaspResults[["estimatedMarginalMeansAndContrastsContainer"]]
@@ -1189,7 +1189,7 @@
     tempVariableContainer$position <- 0
     tempVariableContainer$dependOn(adjustedEstimateOption)
     tempContainer[["adjustedEstimate"]] <- tempVariableContainer
-    .maEstimatedMarginalMeansTable(tempVariableContainer, fit, dataset, options, "", parameter)
+    .maEstimatedMarginalMeansTable(tempVariableContainer, fit, options, "", parameter)
   }
 
   # reorder / add variables
@@ -1213,10 +1213,10 @@
 
     # add the missing outputs
     if (makeEstimatedMarginalMeans && is.null(tempVariableContainer[["estimatedMarginalMeansTable"]]))
-      .maEstimatedMarginalMeansTable(tempVariableContainer, fit, dataset, options, selectedVariables[[i]], parameter)
+      .maEstimatedMarginalMeansTable(tempVariableContainer, fit, options, selectedVariables[[i]], parameter)
 
     if (makeContrasts && is.null(tempVariableContainer[["contrastsTable"]]))
-      .maContrastsTable(tempVariableContainer, fit, dataset, options, selectedVariables[[i]], parameter)
+      .maContrastsTable(tempVariableContainer, fit, options, selectedVariables[[i]], parameter)
   }
 
   # re-write information about existing variables
@@ -1229,7 +1229,7 @@
 
   return()
 }
-.maEstimatedMarginalMeansTable           <- function(variableContainer, fit, dataset, options, selectedVariable, parameter = "effectSize") {
+.maEstimatedMarginalMeansTable           <- function(variableContainer, fit, options, selectedVariable, parameter = "effectSize") {
 
   estimatedMarginalMeansTable <- createJaspTable(if (selectedVariable == "") gettext("Adjusted Estimate") else gettext("Estimated Marginal Means"))
   estimatedMarginalMeansTable$position <- 1
@@ -1269,7 +1269,6 @@
   # get the estimate
   estimatedMarginalMeans <- .maSafeRbind(lapply(fit, .maComputeMarginalMeansVariable,
     options          = options,
-    dataset          = dataset,
     selectedVariable = if (selectedVariable == "") "" else strsplit(selectedVariable, ":")[[1]],
     testAgainst      = options[["estimatedMarginalMeansEffectSizeTestAgainstValue"]],
     parameter        = parameter
@@ -1297,7 +1296,7 @@
 
   return()
 }
-.maContrastsTable                        <- function(variableContainer, fit, dataset, options, selectedVariable, parameter = "effectSize") {
+.maContrastsTable                        <- function(variableContainer, fit, options, selectedVariable, parameter = "effectSize") {
 
   contrastsTable <- createJaspTable(gettext("Contrasts"))
   contrastsTable$position <- 1
@@ -1330,7 +1329,6 @@
   # get the estimate
   contrasts <- .maSafeRbind(lapply(fit, .maComputeContrastVariable,
     options          = options,
-    dataset          = dataset,
     selectedVariable = if (selectedVariable == "") "" else strsplit(selectedVariable, ":")[[1]],
     testAgainst      = options[["contrastsEffectSizeTestAgainstValue"]],
     parameter        = parameter
@@ -1353,7 +1351,7 @@
 
   return()
 }
-.maUltimateForestPlot                    <- function(jaspResults, dataset, options) {
+.maUltimateForestPlot                    <- function(jaspResults, options) {
 
   if (!is.null(jaspResults[["forestPlot"]]))
     return()
@@ -1421,7 +1419,7 @@
 
   return()
 }
-.maBubblePlot                            <- function(jaspResults, dataset, options) {
+.maBubblePlot                            <- function(jaspResults, options) {
 
   if (!is.null(jaspResults[["bubblePlot"]]))
     return()
@@ -1438,7 +1436,7 @@
   # create individual plots for each subgroup
   if (options[["subgroup"]] == "") {
 
-    bubblePlot       <- .maBubblePlotFun(fit[[1]], dataset, options)
+    bubblePlot       <- .maBubblePlotFun(fit[[1]], options)
     bubblePlot$title <- gettext("Bubble Plots")
     bubblePlot$dependOn(c(.maBubblePlotDependencies, "includeFullDatasetInSubgroupAnalysis"))
     bubblePlot$position <- 5
@@ -1455,7 +1453,7 @@
     jaspResults[["bubblePlot"]] <- bubblePlot
 
     for (i in seq_along(fit)) {
-      bubblePlot[[names(fit)[i]]]          <- .maBubblePlotFun(fit[[i]], dataset, options)
+      bubblePlot[[names(fit)[i]]]          <- .maBubblePlotFun(fit[[i]], options)
       bubblePlot[[names(fit)[i]]]$title    <- gettextf("Subgroup: %1$s", attr(fit[[i]], "subgroup"))
       bubblePlot[[names(fit)[i]]]$position <- i
     }
@@ -1464,7 +1462,7 @@
 
   return()
 }
-.maBubblePlotFun                         <- function(fit, dataset, options) {
+.maBubblePlotFun                         <- function(fit, options) {
 
   if (jaspBase::isTryError(fit)) {
     return()
@@ -1482,7 +1480,7 @@
   }
 
   # make bubble plots
-  dfPlot <- .maMakeBubblePlotDataset(fit, options, dataset)
+  dfPlot <- .maMakeBubblePlotDataset(fit, options)
 
   if (attr(dfPlot, "separatePlots") == "") {
     tempPlots <- list(.maMakeBubblePlot(fit, options, dfPlot))
@@ -1530,7 +1528,7 @@
 
   return()
 }
-.maVarianceInflationTable                <- function(jaspResults, dataset, options, parameter = "effectSize") {
+.maVarianceInflationTable                <- function(jaspResults, options, parameter = "effectSize") {
 
   varianceInflationContainer <- .maExtractVarianceInflationContainer(jaspResults)
 
@@ -1572,7 +1570,7 @@
 
   return()
 }
-.maCasewiseDiagnosticsTable              <- function(jaspResults, dataset, options) {
+.maCasewiseDiagnosticsTable              <- function(jaspResults, options) {
 
   if (!is.null(jaspResults[["casewiseDiagnosticsTable"]]))
     return()
@@ -1782,7 +1780,7 @@
 
   return()
 }
-.maProfileLikelihoodPlot                 <- function(jaspResults, dataset, options) {
+.maProfileLikelihoodPlot                 <- function(jaspResults, options) {
 
   if (!is.null(jaspResults[["profileLikelihoodPlot"]]))
     return()
@@ -1874,7 +1872,7 @@
 
   return(profileLikelihoodPlot)
 }
-.maBaujatPlot                            <- function(jaspResults, dataset, options) {
+.maBaujatPlot                            <- function(jaspResults, options) {
 
   if (!is.null(jaspResults[["baujatPlot"]]))
     return()
@@ -1974,7 +1972,7 @@
 
   return(baujatPlot)
 }
-.maResidualFunnelPlot                    <- function(jaspResults, dataset, options) {
+.maResidualFunnelPlot                    <- function(jaspResults, options) {
 
   if (!is.null(jaspResults[["residualFunnelPlot"]]))
     return()
@@ -2024,7 +2022,7 @@
   }
 
   # obtain residual funnel plot
-  residualFunnelPlot$plotObject <- .maMakeResidualFunnelPlot(fit, options, attr(fit, "dataset"))
+  residualFunnelPlot$plotObject <- .maMakeResidualFunnelPlot(fit, options)
 
   return(residualFunnelPlot)
 }
@@ -2581,8 +2579,9 @@
 
   return(out)
 }
-.maGetMarginalMeansPredictorMatrix <- function(fit, options, dataset, selectedVariables, trendVarible = NULL, trendSequence = NULL, sdFactor, parameter) {
+.maGetMarginalMeansPredictorMatrix <- function(fit, options, selectedVariables, trendVarible = NULL, trendSequence = NULL, sdFactor, parameter) {
 
+  dataset <- attr(fit, "dataset")
   variablesContinuous <- options[["predictors"]][options[["predictors.types"]] == "scale"]
   variablesFactors    <- options[["predictors"]][options[["predictors.types"]] == "nominal"]
 
@@ -2707,7 +2706,7 @@
   return(outMatrix)
 
 }
-.maComputeMarginalMeansVariable    <- function(fit, options, dataset, selectedVariable, testAgainst = 0, parameter) {
+.maComputeMarginalMeansVariable    <- function(fit, options, selectedVariable, testAgainst = 0, parameter) {
 
   if (jaspBase::isTryError(fit)) {
     return(NULL)
@@ -2718,7 +2717,6 @@
     predictorMatrixEffectSize <- .maGetMarginalMeansPredictorMatrix(
       fit               = fit,
       options           = options,
-      dataset           = dataset,
       selectedVariables = selectedVariable,
       sdFactor          = options[["estimatedMarginalMeansEffectSizeSdFactorCovariates"]],
       parameter         = "effectSize"
@@ -2729,7 +2727,6 @@
       predictorMatrixHeterogeneity <- .maGetMarginalMeansPredictorMatrix(
         fit               = fit,
         options           = options,
-        dataset           = dataset,
         selectedVariables = selectedVariable,
         sdFactor          = options[["estimatedMarginalMeansEffectSizeSdFactorCovariates"]],
         parameter         = "heterogeneity"
@@ -2808,7 +2805,6 @@
     predictorMatrixHeterogeneity <- .maGetMarginalMeansPredictorMatrix(
       fit               = fit,
       options           = options,
-      dataset           = dataset,
       selectedVariables = selectedVariable,
       sdFactor          = options[["estimatedMarginalMeansHeterogeneitySdFactorCovariates"]],
       parameter         = "heterogeneity"
@@ -2858,7 +2854,7 @@
 
   return(computedMarginalMeans)
 }
-.maComputeContrastVariable         <- function(fit, options, dataset, selectedVariable, testAgainst = 0, parameter) {
+.maComputeContrastVariable         <- function(fit, options, selectedVariable, testAgainst = 0, parameter) {
 
   if (jaspBase::isTryError(fit)) {
     return(NULL)
@@ -2869,7 +2865,6 @@
     predictorMatrixEffectSize <- .maGetMarginalMeansPredictorMatrix(
       fit               = fit,
       options           = options,
-      dataset           = dataset,
       selectedVariables = selectedVariable,
       sdFactor          = options[["estimatedMarginalMeansEffectSizeSdFactorCovariates"]],
       parameter         = "effectSize"
@@ -2895,7 +2890,6 @@
       predictorMatrixHeterogeneity <- .maGetMarginalMeansPredictorMatrix(
         fit               = fit,
         options           = options,
-        dataset           = dataset,
         selectedVariables = selectedVariable,
         sdFactor          = options[["estimatedMarginalMeansEffectSizeSdFactorCovariates"]],
         parameter         = "heterogeneity"
@@ -2972,7 +2966,6 @@
     predictorMatrixHeterogeneity <- .maGetMarginalMeansPredictorMatrix(
       fit               = fit,
       options           = options,
-      dataset           = dataset,
       selectedVariables = selectedVariable,
       sdFactor          = options[["estimatedMarginalMeansHeterogeneitySdFactorCovariates"]],
       parameter         = "heterogeneity"
@@ -3034,13 +3027,14 @@
 
   return(computedContrasts)
 }
-.maMakeBubblePlotDataset           <- function(fit, options, dataset) {
+.maMakeBubblePlotDataset           <- function(fit, options) {
 
   # extract options
   separateLines        <- unlist(options[["bubblePlotSeparateLines"]])
   separatePlots        <- unlist(options[["bubblePlotSeparatePlots"]])
   selectedVariable     <- options[["bubblePlotSelectedVariable"]][[1]][["variable"]]
   selectedVariableType <- options[["predictors.types"]][options[["predictors"]] == selectedVariable]
+  dataset              <- attr(fit, "dataset")
 
   # create a range of values for continuous predictors to plot the trend but use lvls for factors
   if (selectedVariableType == "scale") {
@@ -3051,7 +3045,6 @@
     predictorMatrixEffectSize <- .maGetMarginalMeansPredictorMatrix(
       fit               = fit,
       options           = options,
-      dataset           = dataset,
       selectedVariables = c(separateLines, separatePlots),
       sdFactor          = options[["bubblePlotSdFactorCovariates"]],
       trendVarible      = selectedVariable,
@@ -3064,7 +3057,6 @@
     predictorMatrixEffectSize <- .maGetMarginalMeansPredictorMatrix(
       fit               = fit,
       options           = options,
-      dataset           = dataset,
       selectedVariables = c(selectedVariable, separateLines, separatePlots),
       sdFactor          = options[["bubblePlotSdFactorCovariates"]],
       parameter         = "effectSize"
@@ -3078,7 +3070,6 @@
     predictorMatrixHeterogeneity <- .maGetMarginalMeansPredictorMatrix(
       fit               = fit,
       options           = options,
-      dataset           = dataset,
       selectedVariables = c(separateLines, separatePlots),
       sdFactor          = options[["bubblePlotSdFactorCovariates"]],
       trendVarible      = selectedVariable,
@@ -3553,9 +3544,10 @@
 
   return(geom)
 }
-.maMakeResidualFunnelPlot          <- function(fit, options, dataset) {
+.maMakeResidualFunnelPlot          <- function(fit, options) {
 
   residuals <- rstandard(fit)
+  dataset   <- attr(fit, "dataset")
   dfPlot    <- data.frame(
     x  = residuals[["resid"]],
     y  = residuals[["se"]]
@@ -4796,23 +4788,37 @@
   else if (options[["heterogeneityModelLink"]] == "identity")
     return(gettext("The heterogeneity model for \U1D70F\U00B2 is specified on the identity scale."))
 }
-.maPooledEstimatesMessages             <- function(fit, dataset, options, anyNA = FALSE) {
+.maPooledEstimatesMessages             <- function(fit, options, anyNA = FALSE) {
 
   messages <- NULL
 
-  if (options[["clustering"]] == "") {
-    tempFit <- fit[[1]]
-    if (!jaspBase::isTryError(tempFit) && !is.null(tempFit)){
-      if (all(tempFit[["tcl"]][1] == tempFit[["tcl"]]))
-        messages <- c(messages, gettextf("%1$i clusters with %2$i estimates each.", tempFit[["n"]],  tempFit[["tcl"]][1]))
-      else
-        messages <- c(messages, gettextf("%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates.", tempFit[["n"]],  min(tempFit[["tcl"]]), median(tempFit[["tcl"]]), max(tempFit[["tcl"]])))
+  if (options[["subgroup"]] == "") {
+
+    tempFit     <- fit[[1]]
+    tempDataset <- attr(tempFit, "dataset")
+
+    if (attr(tempDataset, "NAs") > 0)
+      messages <- c(messages, gettextf("%1$i observations were ommited due to missing values.", attr(tempDataset, "NAs")))
+
+    if (options[["clustering"]] != "") {
+      if (!jaspBase::isTryError(tempFit) && !is.null(tempFit)){
+        if (all(tempFit[["tcl"]][1] == tempFit[["tcl"]]))
+          messages <- c(messages, gettextf("%1$i clusters with %2$i estimates each.", tempFit[["n"]],  tempFit[["tcl"]][1]))
+        else
+          messages <- c(messages, gettextf("%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates.", tempFit[["n"]],  min(tempFit[["tcl"]]), median(tempFit[["tcl"]]), max(tempFit[["tcl"]])))
+      }
     }
   } else {
     for (i in seq_along(fit)) {
-      tempFit <- fit[[i]]
-      if (!jaspBase::isTryError(tempFit) && !is.null(tempFit)) {
-        if (options[["clustering"]] != "") {
+
+      tempFit     <- fit[[i]]
+      tempDataset <- attr(tempFit, "dataset")
+
+      if (attr(tempDataset, "NAs") > 0)
+        messages <- c(messages, gettextf("%1$s: %2$i observations were ommited due to missing values.", gettextf("Subgroup %1$s", attr(tempFit, "subgroup")), attr(tempDataset, "NAs")))
+
+      if (options[["clustering"]] != "") {
+        if (!jaspBase::isTryError(tempFit) && !is.null(tempFit)) {
           if (all(tempFit[["tcl"]][1] == tempFit[["tcl"]]))
             messages <- c(messages, gettextf("%1$s: %2$i clusters with %3$i estimates each.", gettextf("Subgroup %1$s", attr(tempFit, "subgroup")), tempFit[["n"]],  tempFit[["tcl"]][1]))
           else
@@ -4830,7 +4836,6 @@
     }
   }
 
-
   if (.maIsMetaregressionEffectSize(options))
     messages <- c(messages, gettext("The pooled effect size corresponds to the weighted average effect across studies."))
 
@@ -4839,12 +4844,6 @@
 
   if (.maIsMetaregressionHeterogeneity(options) && (options[["heterogeneityI2"]] || options[["heterogeneityH2"]]))
     messages <- c(messages, gettext("The I² and H² statistics are not available for heterogeneity models."))
-
-  if (attr(dataset, "NAs") > 0)
-    messages <- c(messages, gettextf("%1$i observations were ommited due to missing values.", attr(dataset, "NAs")))
-
-  if (!is.null(attr(dataset, "influentialObservations")) && attr(dataset, "influentialObservations") > 0)
-    messages <- c(messages, gettextf("%1$i influential observations were detected and removed.", attr(dataset, "influentialObservations")))
 
   if (.maIsMultilevelMultivariate(options) && any(attr(fit[[1]], "skipped")) && !jaspBase::isTryError(fit[[1]]))
     messages <- c(messages, gettextf("The Model Structure %1$s was not completely specified and was skipped.", paste0(which(attr(fit[[1]], "skipped")), collapse = " and ")))
@@ -4856,7 +4855,11 @@
 }
 .maEstimatedMarginalMeansMessages      <- function(options, parameter, anyNA = FALSE) {
 
-  messages <- gettext("Each marginal mean estimate is averaged across the levels of the remaining predictors.")
+  if (options[["subgroup"]] == "") {
+    messages <- gettext("Each marginal mean estimate is averaged across the levels of the remaining predictors.")
+  } else {
+    messages <- gettext("Each marginal mean estimate is averaged across the levels of the remaining predictors in a given subgroup.")
+  }
 
   if (parameter == "effectSize" && options[["transformEffectSize"]] != "none") {
     if (anyNA) {
