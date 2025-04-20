@@ -21,7 +21,6 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   # the JASP options() cleanup does not properly re-sets OpenMx settings
   # consequently, the fitting function crashes with matrix(byrow) error
   library(metaSEM)
-  #
   .masemMxOptions()
 
   # read the data set
@@ -328,8 +327,8 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
     meansData <- dataset[["means"]]
 
     # add columns
-    meansSummaryTable$addColumnInfo(name = "variable",  type = "string", title = gettext("Variable"))
-    meansSummaryTable$addColumnInfo(name = "estimates", type = "string", title = gettext("Estimates"))
+    meansSummaryTable$addColumnInfo(name = "variable",  type = "string",  title = gettext("Variable"))
+    meansSummaryTable$addColumnInfo(name = "estimates", type = "integer", title = gettext("Estimates"))
 
     # compute the number of non-missing elements
     nonNaMeans <- switch(
@@ -382,15 +381,13 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
     cor.analysis = options[["dataInputType"]] == "correlation",
     RE.type      = .masemGetRandomEffectsType(options[["pooledCorrelationCovarianceMatrixRandomEffects"]])
   ))
+  fitSummary <- try(summary(fit))
 
-  if (jaspBase::isTryError(fit)) {
-    pooledMatrix$setError(gettext("The pooled correlation/covariance matrix could not be computed."))
+  # error handling
+  if (jaspBase::isTryError(fit) || jaspBase::isTryError(fitSummary)) {
+    pooledMatrix$setError(gettext("The pooled correlation/covariance matrix could not be computed. Consider verifying that all correlation/covariance matrix variables are correctly specified via 'Descriptives'."))
     return()
   }
-
-  # obtain model summary
-  coefficientsSummary    <- summary(fit)[["coefficients"]]
-  coefficientsSummaryMat <- coefficientsSummary[grepl("Intercept",rownames(coefficientsSummary)),]
 
   # create a table with the pooled correlation/covariance matrix
   variableNames <- attr(dataset[["data"]], "variableNames")
@@ -399,17 +396,52 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
     pooledMatrix$addColumnInfo(name = var, type = "number", title = var)
   }
 
-  # TODO: check column ordering
+  # obtain model summary
+  coefficientsSummary           <- fitSummary[["coefficients"]]
+  colnames(coefficientsSummary) <- c("estimate", "se", "lCi",  "uCi", "z", "p")
+  coefficientsSummaryMat <- coefficientsSummary[grepl("Intercept",rownames(coefficientsSummary)),]
+  coefficientsSummaryRan <- coefficientsSummary[grepl("Tau",rownames(coefficientsSummary)),]
+
+  # add correlation/covariance matrix
   covMatrix <- matrix(NA, nrow = length(variableNames), ncol = length(variableNames))
   colnames(covMatrix)  <- variableNames
   if (options[["dataInputType"]] == "correlation") {
-    covMatrix[lower.tri(covMatrix)] <- coefficientsSummaryMat[,"Estimate"]
+    covMatrix[lower.tri(covMatrix)] <- coefficientsSummaryMat[,"estimate"]
   } else if (options[["dataInputType"]] == "covariance") {
-    covMatrix[!upper.tri(covMatrix)] <- coefficientsSummaryMat[,"Estimate"]
+    covMatrix[!upper.tri(covMatrix)] <- coefficientsSummaryMat[,"estimate"]
   }
   covMatrix <- cbind.data.frame(variable = variableNames, covMatrix)
   pooledMatrix$setData(covMatrix)
 
+  # fix names (the coefficients are in column major order)
+  if (options[["dataInputType"]] == "correlation") {
+    matrixIndicies <- which(lower.tri(covMatrix), arr.ind = TRUE)
+    coefficientsSummaryMat$name <- gettext("Correlation")
+  } else if (options[["dataInputType"]] == "covariance") {
+    matrixIndicies <- which(!upper.tri(covMatrix), arr.ind = TRUE)
+    coefficientsSummaryMat$name <- gettext("Covariance")
+  }
+  coefficientsSummaryMat$row  <- variableNames[matrixIndicies[,1]]
+  coefficientsSummaryMat$col  <- variableNames[matrixIndicies[,2]]
+  if (options[["pooledCorrelationCovarianceMatrixRandomEffects"]] != "zero") {
+    if (options[["pooledCorrelationCovarianceMatrixRandomEffects"]] == "diagonal") {
+      coefficientsSummaryRan$row  <- variableNames[matrixIndicies[,1]]
+      coefficientsSummaryRan$col  <- variableNames[matrixIndicies[,2]]
+      coefficientsSummaryRan$name <- gettext("Random Effect")
+    }else if (options[["pooledCorrelationCovarianceMatrixRandomEffects"]] == "symmetric") {
+      ranNames       <- do.call(rbind, strsplit(rownames(coefficientsSummaryRan), "_"))
+      varVectorNames <- paste0(variableNames[matrixIndicies[,1]], ", ", variableNames[matrixIndicies[,2]])
+      coefficientsSummaryRan$row  <- varVectorNames[as.numeric(ranNames[,2])]
+      coefficientsSummaryRan$col  <- varVectorNames[as.numeric(ranNames[,3])]
+      coefficientsSummaryRan$name <- gettext("Random Effect Covariance")
+      coefficientsSummaryRan$row[ranNames[,2] == ranNames[,3]]  <- variableNames[matrixIndicies[,1]]
+      coefficientsSummaryRan$col[ranNames[,2] == ranNames[,3]]  <- variableNames[matrixIndicies[,2]]
+      coefficientsSummaryRan$name[ranNames[,2] == ranNames[,3]] <- gettext("Random Effect")
+      coefficientsSummaryRan <- coefficientsSummaryRan[order(coefficientsSummaryRan$name),]
+    }
+
+    coefficientsSummaryMat <- rbind(coefficientsSummaryMat, coefficientsSummaryRan)
+  }
 
   # add all parameters table
   pooledParameters <- createJaspTable(title = gettextf(
@@ -423,6 +455,8 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 
   # add columns
   pooledParameters$addColumnInfo(name = "name",     type = "string",  title = "")
+  pooledParameters$addColumnInfo(name = "row",      type = "string",  title = gettext("Row"))
+  pooledParameters$addColumnInfo(name = "col",      type = "string",  title = gettext("Column"))
   pooledParameters$addColumnInfo(name = "estimate", type = "number",  title = gettext("Estimate"))
   if (options[["modelSummaryConfidenceIntervalType"]] == "standardErrors") {
     pooledParameters$addColumnInfo(name = "se",        type = "number",  title = gettext("Standard Error"))
@@ -432,10 +466,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   pooledParameters$addColumnInfo(name = "z",         type = "number",  title = gettext("z"))
   pooledParameters$addColumnInfo(name = "p",         type = "pvalue",  title = gettext("p"))
 
-  # TODO: rename parameters
-  colnames(coefficientsSummary) <- c("estimate", "se", "lCi",  "uCi", "z", "p")
-  coefficientsSummary$name <- rownames(coefficientsSummary)
-  pooledParameters$setData(coefficientsSummary)
+  pooledParameters$setData(coefficientsSummaryMat)
 
   return()
 }
