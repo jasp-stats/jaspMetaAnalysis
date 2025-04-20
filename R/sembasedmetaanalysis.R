@@ -60,14 +60,14 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
   return(dataset)
 }
-.masemGetModelOutputContainer <- function(jaspResults, name, position) {
+.masemGetModelOutputContainer <- function(jaspResults, name, position, MASEM = FALSE) {
 
   if (!is.null(jaspResults[[paste0("outputContainer", name)]])) {
     outputContainer <- jaspResults[[paste0("outputContainer", name)]]
   } else {
     outputContainer <- createJaspContainer(title = name)
     outputContainer$position <- 2 + position / 10
-    outputContainer$dependOn(.semmetaDependencies)
+    outputContainer$dependOn((if (MASEM) .masemDependencies else .semmetaDependencies))
     jaspResults[[paste0("outputContainer", name)]] <- outputContainer
   }
 
@@ -85,7 +85,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
     modelContainer <- createJaspState()
     jaspResults[["modelContainer"]] <- modelContainer
     if (MASEM)
-      modelContainer$dependOn(c("correlationCovarianceMatrix", "means", "dataInputType", "variableNameSeparator"))
+      modelContainer$dependOn(c("correlationCovarianceMatrix", "means", "dataInputType", "variableNameSeparator", "modelSummaryConfidenceIntervalType"))
     fits <- list()
   } else {
     modelContainer <- jaspResults[["modelContainer"]]
@@ -189,10 +189,10 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   if (!is.null(dataset[["means"]])) {
     dataCall[["Means"]] <- dataset[["means"]]
   }
-  corDataset <- do.call(metaSEM::Cor2DataFrame, dataCall)
+  corDataset <- try(do.call(metaSEM::Cor2DataFrame, dataCall))
 
   # fit SEM
-  if (!jaspBase::isTryError(tempRam)) {
+  if (!jaspBase::isTryError(tempRam) && !jaspBase::isTryError(corDataset)) {
     tempFit <- try(metaSEM::osmasem2(
       RAM                 = tempRam,
       data                = corDataset,
@@ -205,8 +205,13 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
       replace.constraints = model[["replaceConstraints"]]
     ))
   } else {
-    # forward ram errors
-    tempFit <- tempRam
+    if (jaspBase::isTryError(tempRam)){
+      # forward ram errors
+      tempFit <- tempRam
+    } else {
+      # forward data errors
+      tempFit <- corDataset
+    }
   }
 
   # forward any mxfit errors
@@ -224,7 +229,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   # prepare table
   modelFitTable <- createJaspTable(gettext("Model Fit"))
   modelFitTable$position <- 1
-  modelFitTable$dependOn(.semmetaDependencies)
+  modelFitTable$dependOn(if (MASEM) .masemDependencies else .semmetaDependencies)
   jaspResults[["modelFitTable"]] <- modelFitTable
 
   # add columns
@@ -286,7 +291,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
     tempFit <- fits[[model[["value"]]]]
 
     # get output container
-    tempOutputContainer <- .masemGetModelOutputContainer(jaspResults, model[["value"]], i)
+    tempOutputContainer <- .masemGetModelOutputContainer(jaspResults, model[["value"]], i, MASEM)
 
     # create the summary table if it does not exists
     if (MASEM) {
@@ -340,7 +345,8 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
     # create plot
     tempPlot <- createJaspPlot(title = gettext("Path Diagram"), width = 600, height = 400)
     tempPlot$position <- 5
-    tempPlot$dependOn(c(.semmetaDependencies, "pathDiagram", "pathDiagramShowParameters",
+    tempPlot$dependOn(c((if (MASEM) .masemDependencies else .semmetaDependencies),
+                        "pathDiagram", "pathDiagramShowParameters",
                         "pathDiagramLayout",
                         "pathDiagramManifestNodeWidth", "pathDiagramLatentNodeWidth", "pathDiagramUnitVectorNodeWidth",
                         "pathDiagramLabelSize", "pathDiagramEdgeLabelSize", "pathDiagramNumberOfDigits"))
