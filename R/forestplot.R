@@ -1392,7 +1392,7 @@
   if (subgroup == gettext("Full dataset")) {
     return(gettext("Full dataset"))
   } else {
-    return(gettextf("Subgroup: %2$s"))
+    return(gettextf("Subgroup: %s"))
   }
 }
 .forestPlotLeftPanelAlign              <- function(options) {
