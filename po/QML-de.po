@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-04-19 11:43+0000\n"
+"PO-Revision-Date: 2025-04-23 10:14+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/de/>\n"
@@ -4131,13 +4131,14 @@ msgid ""
 "analysis."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Residual funnel"
-msgstr ""
+msgstr "Residuen-Trichter"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Include a residual funnel plot."
-msgstr ""
+msgstr "Ein Residuen-Trichterdiagramm hinzufügen."
 
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Estimated Marginal Means"
@@ -4186,13 +4187,13 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Test against"
-msgstr ""
+msgstr "Test gegen"
 
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Option to test the estimated marginal means against a specific value."
 msgstr ""
+"Option, die geschätzten Randmittel gegen einen bestimmten Wert zu prüfen."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Heterogeneity"
 msgstr "Heterogenität"
