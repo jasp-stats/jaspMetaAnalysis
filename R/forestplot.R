@@ -1377,24 +1377,6 @@
     "face"   = "bold"
   ))
 }
-.forestPlotSubgroupTitles              <- function(options, section, subgroup) {
-
-  # return the default if no subgroups are specified
-  if (options[["subgroup"]] == "")
-    return(section)
-
-  # if output is grouped by subgroups, add a subgroup title only at the beginning: no section needs a subgroup title
-  # handled within the reordering of the data
-  if (options[["forestPlotSubgroupPanelsWithinSubgroup"]])
-    return(section)
-
-  # if output is grouped by panels, add only a subgroup title
-  if (subgroup == gettext("Full dataset")) {
-    return(gettext("Full dataset"))
-  } else {
-    return(gettextf("Subgroup: %2$s"))
-  }
-}
 .forestPlotLeftPanelAlign              <- function(options) {
   return(switch(
     options[["forestPlotAllignLeftPanel"]],
