@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.18.2\n"
-"POT-Creation-Date: 2025-04-19 02:49\n"
+"POT-Creation-Date: 2025-04-26 02:52\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -359,6 +359,15 @@ msgstr ""
 msgid "All standard errors must be positive."
 msgstr ""
 
+msgid "Estimating Meta-Analytic Model"
+msgstr ""
+
+msgid "Full dataset"
+msgstr ""
+
+msgid "Estimating Subgroup Models"
+msgstr ""
+
 msgid ""
 "The loaded distance matrix for '%1$s' does not match the dataset. The "
 "following levels are missing: %2$s."
@@ -384,16 +393,16 @@ msgstr ""
 msgid "p (permutation)"
 msgstr ""
 
+msgid "The model for the subgroup '%1$s' failed with the following error: %2$s"
+msgstr ""
+
+msgid "Error:"
+msgstr ""
+
 msgid "Meta-Analytic Estimates"
 msgstr ""
 
 msgid "Estimate"
-msgstr ""
-
-msgid "%s%% CI"
-msgstr ""
-
-msgid "%s%% PI"
 msgstr ""
 
 msgid "Heterogeneity Level"
@@ -468,6 +477,9 @@ msgstr ""
 msgid "Heterogeneity Meta-Regression Correlation Matrix"
 msgstr ""
 
+msgid "Subgroup: %1$s"
+msgstr ""
+
 msgid "Estimated Marginal Means and Contrasts Summary"
 msgstr ""
 
@@ -498,9 +510,6 @@ msgstr ""
 msgid "Bubble Plots"
 msgstr ""
 
-msgid "Bubble Plot"
-msgstr ""
-
 msgid "%1$s (%2$s)"
 msgstr ""
 
@@ -528,9 +537,6 @@ msgstr ""
 msgid ""
 "Casewise diagnostics are not available for models that contain meta-"
 "regression on heterogeneity."
-msgstr ""
-
-msgid "No influential cases found."
 msgstr ""
 
 msgid "Label"
@@ -575,13 +581,19 @@ msgstr ""
 msgid "Influential"
 msgstr ""
 
+msgid "No influential cases found."
+msgstr ""
+
+msgid "%1$sNo influential cases found."
+msgstr ""
+
+msgid "Diagnostics are based on the the subgroup models."
+msgstr ""
+
 msgid "Diagnostics are based on the non-clustered model."
 msgstr ""
 
 msgid "Column name %s already exists in the dataset."
-msgstr ""
-
-msgid "Profile Likelihood Plots"
 msgstr ""
 
 msgid "Profile Likelihood Plot"
@@ -618,25 +630,20 @@ msgstr ""
 msgid "Variance Inflation Summary"
 msgstr ""
 
-msgid ""
-"Indexes of effect size moderation coefficients were specified in an "
-"incorrect format. Try '(1, 2)' to test the first two coefficients."
+msgid "Pooled effect"
 msgstr ""
 
 msgid ""
-"Indexes of heterogeneity moderation coefficients were specified in an "
-"incorrect format. Try '(1, 2)' to test the first two coefficients."
-msgstr ""
-
-msgid "The selected coefficients must be an integer vector."
+"Indexes of %1$s moderation coefficients were specified in an incorrect "
+"format. Try '(1, 2)' to test the first two coefficients."
 msgstr ""
 
 msgid ""
-"The selected coefficients must be between 1 and %1$i (i.e., the number of "
-"regression parameters)."
+"The selected coefficients for %1$s moderation must be between 1 and %2$i (i."
+"e., the number of regression parameters)."
 msgstr ""
 
-msgid "Effect Size (coef: %1$s)"
+msgid "Effect size (coef: %1$s)"
 msgstr ""
 
 msgid "Effect size coefficients %1$s correspond to %2$s."
@@ -652,6 +659,9 @@ msgid "Mean - %1$sSD"
 msgstr ""
 
 msgid "Mean + %1$sSD"
+msgstr ""
+
+msgid "Adjusted estimate"
 msgstr ""
 
 msgid "Distance Matrix"
@@ -754,10 +764,7 @@ msgstr ""
 msgid "Moderation: %1$s"
 msgstr ""
 
-msgid "Pooled effect size"
-msgstr ""
-
-msgid "(coef: %1$s)"
+msgid "(coef ...)"
 msgstr ""
 
 msgid "Moderation effect size%1$s"
@@ -767,6 +774,18 @@ msgid "Moderation%1$s"
 msgstr ""
 
 msgid "Moderation heterogeneity%1$s"
+msgstr ""
+
+msgid "(coef: %1$s)"
+msgstr ""
+
+msgid "%s%% CI"
+msgstr ""
+
+msgid "%s%% PI"
+msgstr ""
+
+msgid "Subgroup"
 msgstr ""
 
 msgid "Fixed effects tested using z-distribution."
@@ -784,10 +803,22 @@ msgstr ""
 msgid "The heterogeneity model for 𝜏² is specified on the identity scale."
 msgstr ""
 
+msgid "%1$i observations were ommited due to missing values."
+msgstr ""
+
 msgid "%1$i clusters with %2$i estimates each."
 msgstr ""
 
 msgid "%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates."
+msgstr ""
+
+msgid "%1$s: %2$i observations were ommited due to missing values."
+msgstr ""
+
+msgid "%1$s: %2$i clusters with %3$i estimates each."
+msgstr ""
+
+msgid "%1$s: %2$i clusters with min/median/max %3$i/%4$i/%5$i estimates."
 msgstr ""
 
 msgid ""
@@ -812,12 +843,6 @@ msgstr ""
 msgid "The I² and H² statistics are not available for heterogeneity models."
 msgstr ""
 
-msgid "%1$i observations were ommited due to missing values."
-msgstr ""
-
-msgid "%1$i influential observations were detected and removed."
-msgstr ""
-
 msgid "The Model Structure %1$s was not completely specified and was skipped."
 msgstr ""
 
@@ -829,6 +854,11 @@ msgstr ""
 msgid ""
 "Each marginal mean estimate is averaged across the levels of the remaining "
 "predictors."
+msgstr ""
+
+msgid ""
+"Each marginal mean estimate is averaged across the levels of the remaining "
+"predictors in a given subgroup."
 msgstr ""
 
 msgid ""
@@ -875,20 +905,26 @@ msgid ""
 "consider simplifying the model."
 msgstr ""
 
+msgid "Fewer than two estimates."
+msgstr ""
+
+msgid "Subgroup %1$s:"
+msgstr ""
+
 msgid ""
-"The term %1$s was completely removed from the model. Possible causes are "
+"%1$sThe term %2$s was completely removed from the model. Possible causes are "
 "missing values, collinear predictors, or missing crossed cells in an "
 "interaction term."
 msgstr ""
 
 msgid ""
-"The term %1$s was partilly removed (%2$i/%3$i coefficients) from the model. "
-"Possible causes are missing values, collinear predictors, or missing crossed "
-"cells in an interaction term."
+"%1$sThe term %2$s was partilly removed (%3$i/%4$i coefficients) from the "
+"model. Possible causes are missing values, collinear predictors, or missing "
+"crossed cells in an interaction term."
 msgstr ""
 
 msgid ""
-"The following coefficients were removed from the model: %1$s. Possible "
+"%1$sThe following coefficients were removed from the model: %2$s. Possible "
 "causes are missing values, collinear predictors, or missing crossed cells in "
 "an interaction term."
 msgstr ""
@@ -972,7 +1008,13 @@ msgstr ""
 msgid "Testing Inclusion of Random Effects / Model Structure"
 msgstr ""
 
+msgid "Subgroup %1$s: Testing Inclusion of Random Effects / Model Structure"
+msgstr ""
+
 msgid "Testing Inclusion of Nested Random Effects: %1$s"
+msgstr ""
+
+msgid "Subgroup %1$s: Testing Inclusion of Nested Random Effects: %2$s"
 msgstr ""
 
 msgid "Random Slopes"
@@ -1133,6 +1175,9 @@ msgid "Fixed Effect Estimate"
 msgstr ""
 
 msgid "Pooled Estimate"
+msgstr ""
+
+msgid "Full Dataset"
 msgstr ""
 
 msgid "Missing Data Summary"
@@ -1529,9 +1574,6 @@ msgid "Model Tests"
 msgstr ""
 
 msgid "Test of Heterogeneity"
-msgstr ""
-
-msgid "Error:"
 msgstr ""
 
 msgid "Test of Publication Bias"

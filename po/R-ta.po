@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.19.2\n"
-"POT-Creation-Date: 2025-04-19 02:49\n"
+"POT-Creation-Date: 2025-04-26 02:52\n"
 "PO-Revision-Date: 2025-04-13 07:48+0000\n"
 "Last-Translator: Koen Derks <koen-derks@hotmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/jasp/"
@@ -399,6 +399,16 @@ msgstr "சுருக்க காரணி"
 msgid "All standard errors must be positive."
 msgstr "அனைத்து நிலையான பிழைகளும் நேர்மறையாக இருக்க வேண்டும்."
 
+#, fuzzy
+msgid "Estimating Meta-Analytic Model"
+msgstr "மேவு பகுப்பாய்வு மதிப்பீடுகள்"
+
+msgid "Full dataset"
+msgstr ""
+
+msgid "Estimating Subgroup Models"
+msgstr ""
+
 msgid ""
 "The loaded distance matrix for '%1$s' does not match the dataset. The "
 "following levels are missing: %2$s."
@@ -429,17 +439,18 @@ msgstr "ப"
 msgid "p (permutation)"
 msgstr "பி (வரிசைமாற்றம்)"
 
+#, fuzzy
+msgid "The model for the subgroup '%1$s' failed with the following error: %2$s"
+msgstr "பின்வரும் பிழையுடன் %1$s சோதனை தோல்வியடைந்தது: %2$s"
+
+msgid "Error:"
+msgstr "பிழை:"
+
 msgid "Meta-Analytic Estimates"
 msgstr "மேவு பகுப்பாய்வு மதிப்பீடுகள்"
 
 msgid "Estimate"
 msgstr "மதிப்பீடு"
-
-msgid "%s%% CI"
-msgstr "%s %% தொஒ"
-
-msgid "%s%% PI"
-msgstr "%s %% PI"
 
 msgid "Heterogeneity Level"
 msgstr "பன்முகத்தன்மை நிலை"
@@ -513,6 +524,9 @@ msgstr "விளைவு அளவு மெட்டா-பின்னடை
 msgid "Heterogeneity Meta-Regression Correlation Matrix"
 msgstr "பன்முகத்தன்மை மெட்டா-பின்னடைவு தொடர்பு அணி"
 
+msgid "Subgroup: %1$s"
+msgstr ""
+
 #, fuzzy
 msgid "Estimated Marginal Means and Contrasts Summary"
 msgstr "மதிப்பிடப்பட்ட விளிம்பு என்றால் சுருக்கம்"
@@ -548,9 +562,6 @@ msgstr "கூறு:"
 msgid "Bubble Plots"
 msgstr "குமிழி அடுக்கு"
 
-msgid "Bubble Plot"
-msgstr "குமிழி சூழ்ச்சி"
-
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
@@ -581,9 +592,6 @@ msgid ""
 msgstr ""
 "பன்முகத்தன்மை குறித்த மெட்டா-பின்னடைவு கொண்ட மாதிரிகளுக்கு கேச்வைச் கண்டறிதல் "
 "கிடைக்கவில்லை."
-
-msgid "No influential cases found."
-msgstr "செல்வாக்குமிக்க வழக்குகள் எதுவும் கிடைக்கவில்லை."
 
 msgid "Label"
 msgstr "சிட்டை"
@@ -627,14 +635,22 @@ msgstr "குணகங்களில் வேறுபாடு"
 msgid "Influential"
 msgstr "செல்வாக்கு மிக்க"
 
+msgid "No influential cases found."
+msgstr "செல்வாக்குமிக்க வழக்குகள் எதுவும் கிடைக்கவில்லை."
+
+#, fuzzy
+msgid "%1$sNo influential cases found."
+msgstr "செல்வாக்குமிக்க வழக்குகள் எதுவும் கிடைக்கவில்லை."
+
+#, fuzzy
+msgid "Diagnostics are based on the the subgroup models."
+msgstr "கண்டறிதல் அல்லாத கிளச்டர்டு மாதிரியை அடிப்படையாகக் கொண்டது."
+
 msgid "Diagnostics are based on the non-clustered model."
 msgstr "கண்டறிதல் அல்லாத கிளச்டர்டு மாதிரியை அடிப்படையாகக் கொண்டது."
 
 msgid "Column name %s already exists in the dataset."
 msgstr "நெடுவரிசை பெயர் %s ஏற்கனவே தரவுத்தொகுப்பில் உள்ளன."
-
-msgid "Profile Likelihood Plots"
-msgstr "சுயவிவர நிகழ்தகவு அடுக்கு"
 
 msgid "Profile Likelihood Plot"
 msgstr "சுயவிவர நிகழ்தகவு சூழ்ச்சி"
@@ -674,31 +690,28 @@ msgstr "மெட்டா-பின்னடைவு சுருக்கம�
 msgid "Variance Inflation Summary"
 msgstr "மாறுபாடு பணவீக்க சுருக்கம்"
 
+#, fuzzy
+msgid "Pooled effect"
+msgstr "பூல் செய்யப்பட்ட விளைவு அளவு சோதனை"
+
+#, fuzzy
 msgid ""
-"Indexes of effect size moderation coefficients were specified in an "
-"incorrect format. Try '(1, 2)' to test the first two coefficients."
+"Indexes of %1$s moderation coefficients were specified in an incorrect "
+"format. Try '(1, 2)' to test the first two coefficients."
 msgstr ""
 "விளைவு அளவு மிதமான குணகங்களின் குறியீடுகள் தவறான வடிவத்தில் குறிப்பிடப்பட்டன. முதல் "
 "இரண்டு குணகங்களை சோதிக்க '(1, 2)' முயற்சிக்கவும்."
 
+#, fuzzy
 msgid ""
-"Indexes of heterogeneity moderation coefficients were specified in an "
-"incorrect format. Try '(1, 2)' to test the first two coefficients."
-msgstr ""
-"பன்முகத்தன்மை மிதமான குணகங்களின் குறியீடுகள் தவறான வடிவத்தில் குறிப்பிடப்பட்டன. முதல் "
-"இரண்டு குணகங்களை சோதிக்க '(1, 2)' முயற்சிக்கவும்."
-
-msgid "The selected coefficients must be an integer vector."
-msgstr "தேர்ந்தெடுக்கப்பட்ட குணகங்கள் ஒரு முழு திசையனாக இருக்க வேண்டும்."
-
-msgid ""
-"The selected coefficients must be between 1 and %1$i (i.e., the number of "
-"regression parameters)."
+"The selected coefficients for %1$s moderation must be between 1 and %2$i (i."
+"e., the number of regression parameters)."
 msgstr ""
 "தேர்ந்தெடுக்கப்பட்ட குணகங்கள் 1 முதல் %1$i வரை இருக்க வேண்டும் (அதாவது, பின்னடைவு "
 "அளவுருக்களின் எண்ணிக்கை)."
 
-msgid "Effect Size (coef: %1$s)"
+#, fuzzy
+msgid "Effect size (coef: %1$s)"
 msgstr "விளைவு அளவு (COEF: %1$s)"
 
 msgid "Effect size coefficients %1$s correspond to %2$s."
@@ -715,6 +728,10 @@ msgstr "சராசரி - %1$s திட நிலை இயக்கி"
 
 msgid "Mean + %1$sSD"
 msgstr "சராசரி + %1$s திட நிலை இயக்கி"
+
+#, fuzzy
+msgid "Adjusted estimate"
+msgstr "சரிசெய்யப்பட்ட மதிப்பீடு"
 
 msgid "Distance Matrix"
 msgstr "தொலைதூர அணி"
@@ -827,11 +844,7 @@ msgid "Moderation: %1$s"
 msgstr "மிதமான: %1$s"
 
 #, fuzzy
-msgid "Pooled effect size"
-msgstr "பூல் செய்யப்பட்ட விளைவு அளவு சோதனை"
-
-#, fuzzy
-msgid "(coef: %1$s)"
+msgid "(coef ...)"
 msgstr "விளைவு அளவு (COEF: %1$s)"
 
 #, fuzzy
@@ -845,6 +858,19 @@ msgstr "மிதமான: %1$s"
 #, fuzzy
 msgid "Moderation heterogeneity%1$s"
 msgstr "மிதமான (பன்முகத்தன்மை): %1$s"
+
+#, fuzzy
+msgid "(coef: %1$s)"
+msgstr "விளைவு அளவு (COEF: %1$s)"
+
+msgid "%s%% CI"
+msgstr "%s %% தொஒ"
+
+msgid "%s%% PI"
+msgstr "%s %% PI"
+
+msgid "Subgroup"
+msgstr ""
 
 #, fuzzy
 msgid "Fixed effects tested using z-distribution."
@@ -864,10 +890,25 @@ msgstr "𝜏² க்கான பன்முகத்தன்மை மாத
 msgid "The heterogeneity model for 𝜏² is specified on the identity scale."
 msgstr "𝜏² க்கான பன்முகத்தன்மை மாதிரி அடையாள அளவில் குறிப்பிடப்பட்டுள்ளது."
 
+msgid "%1$i observations were ommited due to missing values."
+msgstr "மதிப்புகள் காணாமல் போனதால் %1$i அவதானிப்புகள் வெளியேற்றப்பட்டன."
+
 msgid "%1$i clusters with %2$i estimates each."
 msgstr "%1$i நான் %2$i உடன் ஒவ்வொன்றையும் மதிப்பிடுகிறேன்."
 
 msgid "%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates."
+msgstr "%1$i கொத்துகள் மின்/சராசரி/அதிகபட்சம்%2$i/%3$i/%4$i நான் மதிப்பிடுகிறேன்."
+
+#, fuzzy
+msgid "%1$s: %2$i observations were ommited due to missing values."
+msgstr "மதிப்புகள் காணாமல் போனதால் %1$i அவதானிப்புகள் வெளியேற்றப்பட்டன."
+
+#, fuzzy
+msgid "%1$s: %2$i clusters with %3$i estimates each."
+msgstr "%1$i நான் %2$i உடன் ஒவ்வொன்றையும் மதிப்பிடுகிறேன்."
+
+#, fuzzy
+msgid "%1$s: %2$i clusters with min/median/max %3$i/%4$i/%5$i estimates."
 msgstr "%1$i கொத்துகள் மின்/சராசரி/அதிகபட்சம்%2$i/%3$i/%4$i நான் மதிப்பிடுகிறேன்."
 
 msgid ""
@@ -896,12 +937,6 @@ msgstr ""
 msgid "The I² and H² statistics are not available for heterogeneity models."
 msgstr "I² மற்றும் H² புள்ளிவிவரங்கள் பன்முகத்தன்மை மாதிரிகளுக்கு கிடைக்கவில்லை."
 
-msgid "%1$i observations were ommited due to missing values."
-msgstr "மதிப்புகள் காணாமல் போனதால் %1$i அவதானிப்புகள் வெளியேற்றப்பட்டன."
-
-msgid "%1$i influential observations were detected and removed."
-msgstr "%1$i செல்வாக்குமிக்க அவதானிப்புகள் கண்டறியப்பட்டு அகற்றப்பட்டன."
-
 msgid "The Model Structure %1$s was not completely specified and was skipped."
 msgstr "மாதிரி அமைப்பு %1$s முழுமையாக குறிப்பிடப்படவில்லை மற்றும் தவிர்க்கப்பட்டது."
 
@@ -915,6 +950,14 @@ msgstr ""
 msgid ""
 "Each marginal mean estimate is averaged across the levels of the remaining "
 "predictors."
+msgstr ""
+"ஒவ்வொரு விளிம்பு சராசரி மதிப்பீடும் மீதமுள்ள முன்னறிவிப்பாளர்களின் அளவுகளில் சராசரியாக "
+"உள்ளது."
+
+#, fuzzy
+msgid ""
+"Each marginal mean estimate is averaged across the levels of the remaining "
+"predictors in a given subgroup."
 msgstr ""
 "ஒவ்வொரு விளிம்பு சராசரி மதிப்பீடும் மீதமுள்ள முன்னறிவிப்பாளர்களின் அளவுகளில் சராசரியாக "
 "உள்ளது."
@@ -969,20 +1012,26 @@ msgstr ""
 "மாதிரி மதிப்பீடு பின்வரும் செய்தியுடன் தோல்வியடைந்தது: %1$s. தயவுசெய்து, மாதிரியை "
 "எளிதாக்குவதைக் கவனியுங்கள்."
 
+msgid "Fewer than two estimates."
+msgstr ""
+
+msgid "Subgroup %1$s:"
+msgstr ""
+
 msgid ""
-"The term %1$s was completely removed from the model. Possible causes are "
+"%1$sThe term %2$s was completely removed from the model. Possible causes are "
 "missing values, collinear predictors, or missing crossed cells in an "
 "interaction term."
 msgstr ""
 
 msgid ""
-"The term %1$s was partilly removed (%2$i/%3$i coefficients) from the model. "
-"Possible causes are missing values, collinear predictors, or missing crossed "
-"cells in an interaction term."
+"%1$sThe term %2$s was partilly removed (%3$i/%4$i coefficients) from the "
+"model. Possible causes are missing values, collinear predictors, or missing "
+"crossed cells in an interaction term."
 msgstr ""
 
 msgid ""
-"The following coefficients were removed from the model: %1$s. Possible "
+"%1$sThe following coefficients were removed from the model: %2$s. Possible "
 "causes are missing values, collinear predictors, or missing crossed cells in "
 "an interaction term."
 msgstr ""
@@ -1076,7 +1125,15 @@ msgid "Testing Inclusion of Random Effects / Model Structure"
 msgstr "சீரற்ற விளைவுகள் / மாதிரி கட்டமைப்பைச் சேர்ப்பது"
 
 #, fuzzy
+msgid "Subgroup %1$s: Testing Inclusion of Random Effects / Model Structure"
+msgstr "சீரற்ற விளைவுகள் / மாதிரி கட்டமைப்பைச் சேர்ப்பது"
+
+#, fuzzy
 msgid "Testing Inclusion of Nested Random Effects: %1$s"
+msgstr "சீரற்ற விளைவுகள் / மாதிரி கட்டமைப்பைச் சேர்ப்பது"
+
+#, fuzzy
+msgid "Subgroup %1$s: Testing Inclusion of Nested Random Effects: %2$s"
 msgstr "சீரற்ற விளைவுகள் / மாதிரி கட்டமைப்பைச் சேர்ப்பது"
 
 msgid "Random Slopes"
@@ -1242,6 +1299,9 @@ msgstr "நிலையான விளைவுகள் மதிப்பீ�
 
 msgid "Pooled Estimate"
 msgstr "பூல் மதிப்பீடு"
+
+msgid "Full Dataset"
+msgstr ""
 
 msgid "Missing Data Summary"
 msgstr "தரவு சுருக்கத்தைக் காணவில்லை"
@@ -1676,9 +1736,6 @@ msgstr "மாதிரி சோதனைகள்"
 msgid "Test of Heterogeneity"
 msgstr "பன்முகத்தன்மையின் சோதனை"
 
-msgid "Error:"
-msgstr "பிழை:"
-
 msgid "Test of Publication Bias"
 msgstr "வெளியீட்டு சார்புகளின் சோதனை"
 
@@ -1883,6 +1940,25 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "மதிப்புகள் காணாமல் போனதால் %i கண்காணிப்பு அகற்றப்பட்டது."
 msgstr[1] "மதிப்புகள் காணாமல் போனதால் %i அவதானிப்புகள் அகற்றப்பட்டன."
+
+#~ msgid "Bubble Plot"
+#~ msgstr "குமிழி சூழ்ச்சி"
+
+#~ msgid "Profile Likelihood Plots"
+#~ msgstr "சுயவிவர நிகழ்தகவு அடுக்கு"
+
+#~ msgid ""
+#~ "Indexes of heterogeneity moderation coefficients were specified in an "
+#~ "incorrect format. Try '(1, 2)' to test the first two coefficients."
+#~ msgstr ""
+#~ "பன்முகத்தன்மை மிதமான குணகங்களின் குறியீடுகள் தவறான வடிவத்தில் குறிப்பிடப்பட்டன. முதல் "
+#~ "இரண்டு குணகங்களை சோதிக்க '(1, 2)' முயற்சிக்கவும்."
+
+#~ msgid "The selected coefficients must be an integer vector."
+#~ msgstr "தேர்ந்தெடுக்கப்பட்ட குணகங்கள் ஒரு முழு திசையனாக இருக்க வேண்டும்."
+
+#~ msgid "%1$i influential observations were detected and removed."
+#~ msgstr "%1$i செல்வாக்குமிக்க அவதானிப்புகள் கண்டறியப்பட்டு அகற்றப்பட்டன."
 
 #~ msgid "Omnibus Moderation Test"
 #~ msgstr "அனைத்து மிதமான சோதனை"

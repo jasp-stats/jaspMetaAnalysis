@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2025-04-19 02:49\n"
+"POT-Creation-Date: 2025-04-26 02:52\n"
 "PO-Revision-Date: 2022-08-29 00:27+0000\n"
 "Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
@@ -390,6 +390,16 @@ msgstr ""
 msgid "All standard errors must be positive."
 msgstr ""
 
+#, fuzzy
+msgid "Estimating Meta-Analytic Model"
+msgstr "Estimativas"
+
+msgid "Full dataset"
+msgstr ""
+
+msgid "Estimating Subgroup Models"
+msgstr ""
+
 msgid ""
 "The loaded distance matrix for '%1$s' does not match the dataset. The "
 "following levels are missing: %2$s."
@@ -417,19 +427,18 @@ msgstr "p"
 msgid "p (permutation)"
 msgstr ""
 
+msgid "The model for the subgroup '%1$s' failed with the following error: %2$s"
+msgstr ""
+
+msgid "Error:"
+msgstr ""
+
 #, fuzzy
 msgid "Meta-Analytic Estimates"
 msgstr "Estimativas"
 
 msgid "Estimate"
 msgstr "Estimativa"
-
-msgid "%s%% CI"
-msgstr "%s%% IC"
-
-#, fuzzy
-msgid "%s%% PI"
-msgstr "%s%% IC"
 
 #, fuzzy
 msgid "Heterogeneity Level"
@@ -506,6 +515,9 @@ msgstr ""
 msgid "Heterogeneity Meta-Regression Correlation Matrix"
 msgstr ""
 
+msgid "Subgroup: %1$s"
+msgstr ""
+
 #, fuzzy
 msgid "Estimated Marginal Means and Contrasts Summary"
 msgstr "Estimativas de tamanho de efeito"
@@ -542,9 +554,6 @@ msgstr "Componentes"
 msgid "Bubble Plots"
 msgstr ""
 
-msgid "Bubble Plot"
-msgstr ""
-
 msgid "%1$s (%2$s)"
 msgstr ""
 
@@ -573,9 +582,6 @@ msgstr ""
 msgid ""
 "Casewise diagnostics are not available for models that contain meta-"
 "regression on heterogeneity."
-msgstr ""
-
-msgid "No influential cases found."
 msgstr ""
 
 msgid "Label"
@@ -622,13 +628,19 @@ msgstr ""
 msgid "Influential"
 msgstr ""
 
+msgid "No influential cases found."
+msgstr ""
+
+msgid "%1$sNo influential cases found."
+msgstr ""
+
+msgid "Diagnostics are based on the the subgroup models."
+msgstr ""
+
 msgid "Diagnostics are based on the non-clustered model."
 msgstr ""
 
 msgid "Column name %s already exists in the dataset."
-msgstr ""
-
-msgid "Profile Likelihood Plots"
 msgstr ""
 
 msgid "Profile Likelihood Plot"
@@ -668,26 +680,22 @@ msgstr "Medidas adicionais de ajuste"
 msgid "Variance Inflation Summary"
 msgstr ""
 
+#, fuzzy
+msgid "Pooled effect"
+msgstr "Tamanho de efeito"
+
 msgid ""
-"Indexes of effect size moderation coefficients were specified in an "
-"incorrect format. Try '(1, 2)' to test the first two coefficients."
+"Indexes of %1$s moderation coefficients were specified in an incorrect "
+"format. Try '(1, 2)' to test the first two coefficients."
 msgstr ""
 
 msgid ""
-"Indexes of heterogeneity moderation coefficients were specified in an "
-"incorrect format. Try '(1, 2)' to test the first two coefficients."
-msgstr ""
-
-msgid "The selected coefficients must be an integer vector."
-msgstr ""
-
-msgid ""
-"The selected coefficients must be between 1 and %1$i (i.e., the number of "
-"regression parameters)."
+"The selected coefficients for %1$s moderation must be between 1 and %2$i (i."
+"e., the number of regression parameters)."
 msgstr ""
 
 #, fuzzy
-msgid "Effect Size (coef: %1$s)"
+msgid "Effect size (coef: %1$s)"
 msgstr "Tamanho do efeito"
 
 msgid "Effect size coefficients %1$s correspond to %2$s."
@@ -705,6 +713,10 @@ msgstr ""
 
 msgid "Mean + %1$sSD"
 msgstr ""
+
+#, fuzzy
+msgid "Adjusted estimate"
+msgstr "Estimativas"
 
 msgid "Distance Matrix"
 msgstr ""
@@ -813,11 +825,7 @@ msgid "Moderation: %1$s"
 msgstr "Covariâncias / correlações observadas"
 
 #, fuzzy
-msgid "Pooled effect size"
-msgstr "Tamanho de efeito"
-
-#, fuzzy
-msgid "(coef: %1$s)"
+msgid "(coef ...)"
 msgstr "Tamanho do efeito"
 
 #, fuzzy
@@ -831,6 +839,20 @@ msgstr "Covariâncias / correlações observadas"
 #, fuzzy
 msgid "Moderation heterogeneity%1$s"
 msgstr "Testes de homogeneidade"
+
+#, fuzzy
+msgid "(coef: %1$s)"
+msgstr "Tamanho do efeito"
+
+msgid "%s%% CI"
+msgstr "%s%% IC"
+
+#, fuzzy
+msgid "%s%% PI"
+msgstr "%s%% IC"
+
+msgid "Subgroup"
+msgstr ""
 
 msgid "Fixed effects tested using z-distribution."
 msgstr ""
@@ -847,10 +869,24 @@ msgstr ""
 msgid "The heterogeneity model for 𝜏² is specified on the identity scale."
 msgstr ""
 
+#, fuzzy
+msgid "%1$i observations were ommited due to missing values."
+msgstr "%i observação foi removida devido a valores ausentes."
+
 msgid "%1$i clusters with %2$i estimates each."
 msgstr ""
 
 msgid "%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates."
+msgstr ""
+
+#, fuzzy
+msgid "%1$s: %2$i observations were ommited due to missing values."
+msgstr "%i observação foi removida devido a valores ausentes."
+
+msgid "%1$s: %2$i clusters with %3$i estimates each."
+msgstr ""
+
+msgid "%1$s: %2$i clusters with min/median/max %3$i/%4$i/%5$i estimates."
 msgstr ""
 
 msgid ""
@@ -875,13 +911,6 @@ msgstr ""
 msgid "The I² and H² statistics are not available for heterogeneity models."
 msgstr ""
 
-#, fuzzy
-msgid "%1$i observations were ommited due to missing values."
-msgstr "%i observação foi removida devido a valores ausentes."
-
-msgid "%1$i influential observations were detected and removed."
-msgstr ""
-
 msgid "The Model Structure %1$s was not completely specified and was skipped."
 msgstr ""
 
@@ -893,6 +922,11 @@ msgstr ""
 msgid ""
 "Each marginal mean estimate is averaged across the levels of the remaining "
 "predictors."
+msgstr ""
+
+msgid ""
+"Each marginal mean estimate is averaged across the levels of the remaining "
+"predictors in a given subgroup."
 msgstr ""
 
 msgid ""
@@ -939,20 +973,26 @@ msgid ""
 "consider simplifying the model."
 msgstr ""
 
+msgid "Fewer than two estimates."
+msgstr ""
+
+msgid "Subgroup %1$s:"
+msgstr ""
+
 msgid ""
-"The term %1$s was completely removed from the model. Possible causes are "
+"%1$sThe term %2$s was completely removed from the model. Possible causes are "
 "missing values, collinear predictors, or missing crossed cells in an "
 "interaction term."
 msgstr ""
 
 msgid ""
-"The term %1$s was partilly removed (%2$i/%3$i coefficients) from the model. "
-"Possible causes are missing values, collinear predictors, or missing crossed "
-"cells in an interaction term."
+"%1$sThe term %2$s was partilly removed (%3$i/%4$i coefficients) from the "
+"model. Possible causes are missing values, collinear predictors, or missing "
+"crossed cells in an interaction term."
 msgstr ""
 
 msgid ""
-"The following coefficients were removed from the model: %1$s. Possible "
+"%1$sThe following coefficients were removed from the model: %2$s. Possible "
 "causes are missing values, collinear predictors, or missing crossed cells in "
 "an interaction term."
 msgstr ""
@@ -1041,7 +1081,13 @@ msgstr ""
 msgid "Testing Inclusion of Random Effects / Model Structure"
 msgstr ""
 
+msgid "Subgroup %1$s: Testing Inclusion of Random Effects / Model Structure"
+msgstr ""
+
 msgid "Testing Inclusion of Nested Random Effects: %1$s"
+msgstr ""
+
+msgid "Subgroup %1$s: Testing Inclusion of Nested Random Effects: %2$s"
 msgstr ""
 
 #, fuzzy
@@ -1215,6 +1261,9 @@ msgstr "Estimativas de efeitos fixos"
 #, fuzzy
 msgid "Pooled Estimate"
 msgstr "Estimativas"
+
+msgid "Full Dataset"
+msgstr ""
 
 #, fuzzy
 msgid "Missing Data Summary"
@@ -1651,9 +1700,6 @@ msgid "Model Tests"
 msgstr "Termos do Modelo"
 
 msgid "Test of Heterogeneity"
-msgstr ""
-
-msgid "Error:"
 msgstr ""
 
 msgid "Test of Publication Bias"

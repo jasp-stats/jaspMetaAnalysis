@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
-"POT-Creation-Date: 2025-04-19 02:49\n"
+"POT-Creation-Date: 2025-04-26 02:52\n"
 "PO-Revision-Date: 2025-04-19 11:43+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
@@ -412,6 +412,16 @@ msgstr "Factor de contracción"
 msgid "All standard errors must be positive."
 msgstr "Todos los errores típicos deben ser positivos."
 
+#, fuzzy
+msgid "Estimating Meta-Analytic Model"
+msgstr "Contrastes Meta-Analíticos"
+
+msgid "Full dataset"
+msgstr ""
+
+msgid "Estimating Subgroup Models"
+msgstr ""
+
 msgid ""
 "The loaded distance matrix for '%1$s' does not match the dataset. The "
 "following levels are missing: %2$s."
@@ -441,17 +451,18 @@ msgstr "p"
 msgid "p (permutation)"
 msgstr "p (permutación)"
 
+#, fuzzy
+msgid "The model for the subgroup '%1$s' failed with the following error: %2$s"
+msgstr "El contraste %1$s se quebró con el siguiente fallo: %2$s"
+
+msgid "Error:"
+msgstr "Fallo:"
+
 msgid "Meta-Analytic Estimates"
 msgstr "Estimaciones Meta-Analíticas"
 
 msgid "Estimate"
 msgstr "Estimar"
-
-msgid "%s%% CI"
-msgstr "IC del %s%%"
-
-msgid "%s%% PI"
-msgstr "IP del %s%%"
 
 msgid "Heterogeneity Level"
 msgstr "Nivel de Heterogeneidad"
@@ -526,6 +537,9 @@ msgstr "Matriz de correlaciones de la Meta-Regresión de la magnitud del efecto"
 msgid "Heterogeneity Meta-Regression Correlation Matrix"
 msgstr "Matriz de correlaciones de la Meta-Regresión de heterogeneidad"
 
+msgid "Subgroup: %1$s"
+msgstr ""
+
 msgid "Estimated Marginal Means and Contrasts Summary"
 msgstr "Resumen de las medias marginales estimadas y contrastes"
 
@@ -555,9 +569,6 @@ msgstr "Comparación"
 
 msgid "Bubble Plots"
 msgstr "Gráficos de burbujas"
-
-msgid "Bubble Plot"
-msgstr "Gráfico de burbujas"
 
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
@@ -590,9 +601,6 @@ msgid ""
 msgstr ""
 "Los diagnósticos caso a caso no están disponibles para modelos con Meta-"
 "Regresión sobre heterogeneidad."
-
-msgid "No influential cases found."
-msgstr "No se encontraron casos influyentes."
 
 msgid "Label"
 msgstr "Etiqueta"
@@ -636,14 +644,22 @@ msgstr "Diferencia en coeficientes"
 msgid "Influential"
 msgstr "Influyente"
 
+msgid "No influential cases found."
+msgstr "No se encontraron casos influyentes."
+
+#, fuzzy
+msgid "%1$sNo influential cases found."
+msgstr "No se encontraron casos influyentes."
+
+#, fuzzy
+msgid "Diagnostics are based on the the subgroup models."
+msgstr "Los diagnósticos se basan en el modelo no conglomerado."
+
 msgid "Diagnostics are based on the non-clustered model."
 msgstr "Los diagnósticos se basan en el modelo no conglomerado."
 
 msgid "Column name %s already exists in the dataset."
 msgstr "El nombre %s de columna ya existe en el conjunto de datos."
-
-msgid "Profile Likelihood Plots"
-msgstr "Gráficos de verosimilitud de perfil"
 
 msgid "Profile Likelihood Plot"
 msgstr "Gráfico de verosimilitud de perfil"
@@ -684,33 +700,29 @@ msgstr "Resumen de la Meta-Regresión"
 msgid "Variance Inflation Summary"
 msgstr "Resumen de la inflación de varianza"
 
+#, fuzzy
+msgid "Pooled effect"
+msgstr "Magnitud del efecto combinada"
+
+#, fuzzy
 msgid ""
-"Indexes of effect size moderation coefficients were specified in an "
-"incorrect format. Try '(1, 2)' to test the first two coefficients."
+"Indexes of %1$s moderation coefficients were specified in an incorrect "
+"format. Try '(1, 2)' to test the first two coefficients."
 msgstr ""
 "Los índices de los coeficientes de moderación de la magnitud del efecto se "
 "especificaron en un formato incorrecto. Intenta '(1, 2)' para comprobar los "
 "dos primeros coeficientes."
 
+#, fuzzy
 msgid ""
-"Indexes of heterogeneity moderation coefficients were specified in an "
-"incorrect format. Try '(1, 2)' to test the first two coefficients."
-msgstr ""
-"Los índices de los coeficientes de moderación de heterogeneidad se "
-"especificaron en un formato incorrecto. Intenta '(1, 2)' para comprobar los "
-"dos primeros coeficientes."
-
-msgid "The selected coefficients must be an integer vector."
-msgstr "Los coeficientes elegidos deben ser un vector entero."
-
-msgid ""
-"The selected coefficients must be between 1 and %1$i (i.e., the number of "
-"regression parameters)."
+"The selected coefficients for %1$s moderation must be between 1 and %2$i (i."
+"e., the number of regression parameters)."
 msgstr ""
 "Los coeficientes elegidos deben estar entre 1 y %1$i (i.e., el número de "
 "parámetros de la regresión)."
 
-msgid "Effect Size (coef: %1$s)"
+#, fuzzy
+msgid "Effect size (coef: %1$s)"
 msgstr "Magnitud del efecto (coef: %1$s)"
 
 msgid "Effect size coefficients %1$s correspond to %2$s."
@@ -727,6 +739,10 @@ msgstr "Media - %1$sDT"
 
 msgid "Mean + %1$sSD"
 msgstr "Media + %1$sDT"
+
+#, fuzzy
+msgid "Adjusted estimate"
+msgstr "Estimación ajustada"
 
 msgid "Distance Matrix"
 msgstr "Matriz de distancias"
@@ -832,10 +848,8 @@ msgstr "Moderación (Heterogeneidad): %1$s"
 msgid "Moderation: %1$s"
 msgstr "Moderación: %1$s"
 
-msgid "Pooled effect size"
-msgstr "Magnitud del efecto combinada"
-
-msgid "(coef: %1$s)"
+#, fuzzy
+msgid "(coef ...)"
 msgstr "(coef: %1$s)"
 
 msgid "Moderation effect size%1$s"
@@ -846,6 +860,18 @@ msgstr "Moderación %1$s"
 
 msgid "Moderation heterogeneity%1$s"
 msgstr "Heterogeneidad de moderación %1$s"
+
+msgid "(coef: %1$s)"
+msgstr "(coef: %1$s)"
+
+msgid "%s%% CI"
+msgstr "IC del %s%%"
+
+msgid "%s%% PI"
+msgstr "IP del %s%%"
+
+msgid "Subgroup"
+msgstr ""
 
 msgid "Fixed effects tested using z-distribution."
 msgstr "Efectos fijos contrastados usando la distribución z."
@@ -866,10 +892,25 @@ msgstr ""
 "El modelo de heterogeneidad para 𝜏² está especificado en la escala de "
 "identidad."
 
+msgid "%1$i observations were ommited due to missing values."
+msgstr "%1$i observaciones fueron omitidas debido a valores que faltan."
+
 msgid "%1$i clusters with %2$i estimates each."
 msgstr "%1$i conglomerados con %2$i estimaciones cada uno."
 
 msgid "%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates."
+msgstr "%1$i conglomerados con estimaciones %2$i/%3$i/%4$i de mín/mediana/máx."
+
+#, fuzzy
+msgid "%1$s: %2$i observations were ommited due to missing values."
+msgstr "%1$i observaciones fueron omitidas debido a valores que faltan."
+
+#, fuzzy
+msgid "%1$s: %2$i clusters with %3$i estimates each."
+msgstr "%1$i conglomerados con %2$i estimaciones cada uno."
+
+#, fuzzy
+msgid "%1$s: %2$i clusters with min/median/max %3$i/%4$i/%5$i estimates."
 msgstr "%1$i conglomerados con estimaciones %2$i/%3$i/%4$i de mín/mediana/máx."
 
 msgid ""
@@ -903,12 +944,6 @@ msgid "The I² and H² statistics are not available for heterogeneity models."
 msgstr ""
 "Los estadísticos I² y H² no están disponibles para modelos de heterogeneidad."
 
-msgid "%1$i observations were ommited due to missing values."
-msgstr "%1$i observaciones fueron omitidas debido a valores que faltan."
-
-msgid "%1$i influential observations were detected and removed."
-msgstr "Se detectaron y eliminaron %1$i observaciones influyentes."
-
 msgid "The Model Structure %1$s was not completely specified and was skipped."
 msgstr ""
 "La Estructura %1$s del modelo no se especificó completamente y fué omitida."
@@ -923,6 +958,14 @@ msgstr ""
 msgid ""
 "Each marginal mean estimate is averaged across the levels of the remaining "
 "predictors."
+msgstr ""
+"Cada estimación media marginal se promedia entre los niveles de los "
+"predictores que quedan."
+
+#, fuzzy
+msgid ""
+"Each marginal mean estimate is averaged across the levels of the remaining "
+"predictors in a given subgroup."
 msgstr ""
 "Cada estimación media marginal se promedia entre los niveles de los "
 "predictores que quedan."
@@ -989,26 +1032,35 @@ msgstr ""
 "La estimación del modelo falló con el siguiente mensaje: %1$s. Por favor, "
 "plantéese simplificar el modelo."
 
+msgid "Fewer than two estimates."
+msgstr ""
+
+msgid "Subgroup %1$s:"
+msgstr ""
+
+#, fuzzy
 msgid ""
-"The term %1$s was completely removed from the model. Possible causes are "
+"%1$sThe term %2$s was completely removed from the model. Possible causes are "
 "missing values, collinear predictors, or missing crossed cells in an "
 "interaction term."
 msgstr ""
-"El término %1$s se eliminó completamente del modelo. Las causas posibles son:"
-" valores ausentes predictores con multicolinealidad o celdas cruzadas "
+"El término %1$s se eliminó completamente del modelo. Las causas posibles "
+"son: valores ausentes predictores con multicolinealidad o celdas cruzadas "
 "ausentes en un término de interacción."
 
+#, fuzzy
 msgid ""
-"The term %1$s was partilly removed (%2$i/%3$i coefficients) from the model. "
-"Possible causes are missing values, collinear predictors, or missing crossed "
-"cells in an interaction term."
+"%1$sThe term %2$s was partilly removed (%3$i/%4$i coefficients) from the "
+"model. Possible causes are missing values, collinear predictors, or missing "
+"crossed cells in an interaction term."
 msgstr ""
 "El término %1$s se eliminó parcialmente (coeficientes %2$i/%3$i) del modelo. "
 "Las causas posibles son: valores ausentes predictores con multicolinealidad "
 "o celdas cruzadas ausentes en un término de interacción."
 
+#, fuzzy
 msgid ""
-"The following coefficients were removed from the model: %1$s. Possible "
+"%1$sThe following coefficients were removed from the model: %2$s. Possible "
 "causes are missing values, collinear predictors, or missing crossed cells in "
 "an interaction term."
 msgstr ""
@@ -1097,9 +1149,19 @@ msgid "Known Correlation Summary"
 msgstr "Resumen de la correlación conocida"
 
 msgid "Testing Inclusion of Random Effects / Model Structure"
-msgstr "Contrastando la inclusión de Efectos aleatorios / Estructura del modelo"
+msgstr ""
+"Contrastando la inclusión de Efectos aleatorios / Estructura del modelo"
+
+#, fuzzy
+msgid "Subgroup %1$s: Testing Inclusion of Random Effects / Model Structure"
+msgstr ""
+"Contrastando la inclusión de Efectos aleatorios / Estructura del modelo"
 
 msgid "Testing Inclusion of Nested Random Effects: %1$s"
+msgstr "Contrastando la inclusión de Efectos aleatorios anidados: %1$s"
+
+#, fuzzy
+msgid "Subgroup %1$s: Testing Inclusion of Nested Random Effects: %2$s"
 msgstr "Contrastando la inclusión de Efectos aleatorios anidados: %1$s"
 
 msgid "Random Slopes"
@@ -1270,6 +1332,9 @@ msgstr "Estimación de los Efectos Fijos"
 
 msgid "Pooled Estimate"
 msgstr "Estimación combinada"
+
+msgid "Full Dataset"
+msgstr ""
 
 msgid "Missing Data Summary"
 msgstr "Resumen de datos ausentes"
@@ -1708,9 +1773,6 @@ msgstr "Contrastes del Modelo"
 msgid "Test of Heterogeneity"
 msgstr "Contraste de Heterogeneidad"
 
-msgid "Error:"
-msgstr "Fallo:"
-
 msgid "Test of Publication Bias"
 msgstr "Contraste del Sesgo de Publicación"
 
@@ -1929,6 +1991,26 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "la observación %i se eliminó debido a valores ausentes."
 msgstr[1] "las observaciones %i se eliminaron debido a valores ausentes."
+
+#~ msgid "Bubble Plot"
+#~ msgstr "Gráfico de burbujas"
+
+#~ msgid "Profile Likelihood Plots"
+#~ msgstr "Gráficos de verosimilitud de perfil"
+
+#~ msgid ""
+#~ "Indexes of heterogeneity moderation coefficients were specified in an "
+#~ "incorrect format. Try '(1, 2)' to test the first two coefficients."
+#~ msgstr ""
+#~ "Los índices de los coeficientes de moderación de heterogeneidad se "
+#~ "especificaron en un formato incorrecto. Intenta '(1, 2)' para comprobar "
+#~ "los dos primeros coeficientes."
+
+#~ msgid "The selected coefficients must be an integer vector."
+#~ msgstr "Los coeficientes elegidos deben ser un vector entero."
+
+#~ msgid "%1$i influential observations were detected and removed."
+#~ msgstr "Se detectaron y eliminaron %1$i observaciones influyentes."
 
 #~ msgid "Omnibus Moderation Test"
 #~ msgstr "Contraste ómnibus de moderación"
