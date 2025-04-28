@@ -348,7 +348,7 @@
     },
     "cli": {
       "Package": "cli",
-      "Version": "3.6.4",
+      "Version": "3.6.5",
       "Source": "Repository",
       "Requirements": [
         "R",
@@ -381,18 +381,6 @@
       "Source": "Repository",
       "Requirements": [
         "R"
-      ]
-    },
-    "colorspace": {
-      "Package": "colorspace",
-      "Version": "2.1-1",
-      "Source": "Repository",
-      "Requirements": [
-        "R",
-        "methods",
-        "graphics",
-        "grDevices",
-        "stats"
       ]
     },
     "commonmark": {
@@ -724,7 +712,7 @@
     },
     "httpuv": {
       "Package": "httpuv",
-      "Version": "1.6.15",
+      "Version": "1.6.16",
       "Source": "Repository",
       "Requirements": [
         "R",
@@ -754,7 +742,7 @@
     },
     "jaspBase": {
       "Package": "jaspBase",
-      "Version": "0.19.2",
+      "Version": "0.20.0",
       "Source": "GitHub",
       "Requirements": [
         "cli",
@@ -781,11 +769,11 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspBase",
-      "RemoteSha": "d3c6d19feaa94dcd5c636345adb76a9f2e8bdac1"
+      "RemoteSha": "82b4b3fd094ac3b43e4c92bc6857da7efb7530d1"
     },
     "jaspGraphs": {
       "Package": "jaspGraphs",
-      "Version": "0.19.2",
+      "Version": "0.20.0",
       "Source": "GitHub",
       "Requirements": [
         "testthat",
@@ -804,7 +792,7 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspGraphs",
-      "RemoteSha": "cb357cc60fa30e106a87d3d99f9fe31312010f7e"
+      "RemoteSha": "78cc4121563962922e48513d1f27e10510263e8a"
     },
     "jquerylib": {
       "Package": "jquerylib",
@@ -1049,15 +1037,6 @@
       "Source": "Repository",
       "Requirements": [
         "R"
-      ]
-    },
-    "munsell": {
-      "Package": "munsell",
-      "Version": "0.5.1",
-      "Source": "Repository",
-      "Requirements": [
-        "colorspace",
-        "methods"
       ]
     },
     "mvtnorm": {
@@ -1488,7 +1467,7 @@
     },
     "scales": {
       "Package": "scales",
-      "Version": "1.3.0",
+      "Version": "1.4.0",
       "Source": "Repository",
       "Requirements": [
         "R",
@@ -1497,7 +1476,6 @@
         "glue",
         "labeling",
         "lifecycle",
-        "munsell",
         "R6",
         "RColorBrewer",
         "rlang",
