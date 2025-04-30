@@ -54,7 +54,31 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "permutationTest", "permutationTestIteration", "permutationTestType", "setSeed", "seed",
   # multilevel/multivariate specific
   "randomEffects", "randomEffectsSpecification",
-  "computeCovarianceMatrix", "computeCovarianceMatrix"
+  "computeCovarianceMatrix", "computeCovarianceMatrix",
+  # multivariate effect size computation
+  "varianceCovarianceMatrixType",
+  "varianceCovarianceMatrixFile",
+  "varianceCovarianceMatrixCorrelationMatrix",
+  "varianceCovarianceMatrixSubcluster",
+  "varianceCovarianceMatrixCluster",
+  "varianceCovarianceMatrixForcePositiveDefiniteness",
+  "varianceCovarianceMatrixCheckPositiveDefiniteness",
+  "varianceCovarianceMatrixCorrelationMatrix",
+  "varianceCovarianceMatrixConstruct",
+  "varianceCovarianceMatrixConstructType",
+  "varianceCovarianceMatrixTime1",
+  "varianceCovarianceMatrixTime2",
+  "varianceCovarianceMatrixGroup1",
+  "varianceCovarianceMatrixGroup1",
+  "varianceCovarianceMatrixGroupSize1",
+  "varianceCovarianceMatrixGroupSize2",
+  "varianceCovarianceMatrixConstructCorrelationMatrix",
+  "varianceCovarianceMatrixConstructCorrelationMatrixValue",
+  "varianceCovarianceMatrixConstructCorrelationMatrixFilePath",
+  "varianceCovarianceMatrixConstructTypeCorrelationMatrix",
+  "varianceCovarianceMatrixConstructTypeCorrelationMatrixValue",
+  "varianceCovarianceMatrixConstructTypeCorrelationMatrixFilePath",
+  "varianceCovarianceMatrixTimeLag1Correlation"
 )
 .maForestPlotDependencies <- c(
   # do not forget to add variable carrying options to the .maDataPlottingDependencies
@@ -183,14 +207,24 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   .hasErrors(
     dataset              = dataset,
-    type                 = c("infinity", "observations", "variance"),
+    type                 = c("infinity", "observations"),
     all.target           = c(
       options[["effectSize"]],
-      options[["effectSizeStandardError"]],
-      options[["predictors"]][options[["predictors.types"]] == "scale"]
+      options[["effectSizeStandardError"]]
     ),
     observations.amount  = "< 2",
     exitAnalysisIfErrors = TRUE)
+
+  # do not check effect sizes / standard errors for 0 variance
+  otherVariable <- options[["predictors"]][options[["predictors.types"]] == "scale"]
+  if (length(otherVariable) > 0) {
+    .hasErrors(
+      dataset              = dataset,
+      type                 = c("infinity", "observations", "variance"),
+      all.target           = otherVariable,
+      observations.amount  = "< 2",
+      exitAnalysisIfErrors = TRUE)
+  }
 
   if (length(options[["effectSizeModelTerms"]]) > 0)
     .hasErrors(

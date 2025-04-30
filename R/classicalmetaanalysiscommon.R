@@ -22,8 +22,6 @@
 
 
 # TODO:
-# Forest plot
-# - allow aggregation of studies by a factor (then show simple REML aggregation within and overlaying shaded estimates)
 # AIC/BIC Model-averaging
 # Diagnostics
 # - model re-run on presence of influential cases
@@ -97,10 +95,13 @@
   if (options[["diagnosticsResidualFunnel"]])
     .maResidualFunnelPlot(jaspResults, options)
 
-
   # additional
   if (options[["showMetaforRCode"]])
     .maShowMetaforRCode(jaspResults, options)
+
+  # export the variance-covariance matrix if requested
+  if (.maIsMultilevelMultivariate(options) && options[["varianceCovarianceMatrixSaveComputedVarianceCovarianceMatrix"]] != "")
+    .mammExportVarianceCovarianceMatrix(dataset, options)
 
   return()
 }
@@ -154,10 +155,11 @@
       subgroupIndx  <- dataset[[options[["subgroup"]]]] == subgroupLevel
       subgroupData  <- droplevels(dataset[subgroupIndx, ])
 
-      # forward NAs information
+      # forward NAs information and additional attributes
       tempNasIds    <- attr(dataset, "NasIds")[!attr(dataset, "NasIds")]
-      attr(subgroupData, "NAs")    <- sum(tempNasIds[subgroupIndx])
-      attr(subgroupData, "NasIds") <- tempNasIds[subgroupIndx]
+      attr(subgroupData, "NAs")          <- sum(tempNasIds[subgroupIndx])
+      attr(subgroupData, "NasIds")       <- tempNasIds[subgroupIndx]
+      attr(subgroupData, "subgroupIndx") <- subgroupIndx
 
       # fit the model
       fitOutput[[paste0("subgroup", subgroupLevel)]] <- .maFitModelFun(subgroupData, options, subgroupName = as.character(subgroupLevel))
@@ -178,16 +180,17 @@
 
   # specify the effect size and outcome
   if (options[["module"]] == "metaAnalysis") {
+    # specify the univariate input
     rmaInput <- list(
       yi   = as.name(options[["effectSize"]]),
       sei  = as.name(options[["effectSizeStandardError"]]),
       data = dataset
     )
   } else if (options[["module"]] == "metaAnalysisMultilevelMultivariate") {
-    # TODO: extend to covariance matrices
+    # specify the multivariate input
     rmaInput <- list(
       yi   = as.name(options[["effectSize"]]),
-      V    = as.name("samplingVariance"), # precomputed on data load
+      V    = if (.mammVarianceCovarianceMatrixReady(options)) .mammGetVarianceCovarianceMatrix(dataset, options) else as.name("samplingVariance"),
       data = dataset
     )
   }
@@ -755,6 +758,14 @@
                .maTryCleanErrorMessages(fit[[i]])),
       symbol = gettext("Error:")
     )
+  }
+
+  # add multivariate settings notes
+  if (.maIsMultilevelMultivariate(options)) {
+    multivariateReadyNotes <- attr(.mammVarianceCovarianceMatrixReady(options), "messages")
+    for (i in seq_along(multivariateReadyNotes)) {
+      testsTable$addFootnote(multivariateReadyNotes[i])
+    }
   }
 
   # bind and clean rows
@@ -3316,10 +3327,15 @@
       data = as.name("dataset")
     )
   } else if (options[["module"]] == "metaAnalysisMultilevelMultivariate") {
-    # TODO: extend to covariance matrices
+
+    if (.mammVarianceCovarianceMatrixReady(options)) {
+      vcalcInput <-.mammGetVarianceCovarianceMatrix(NULL, options, returnCall = TRUE)
+      vcalcInput$data <- as.name("dataset")
+    }
+
     rmaInput <- list(
       yi   = as.name(options[["effectSize"]]),
-      V    = paste0(options[["effectSizeStandardError"]], "^2"), # precomputed on data load
+      V    = if (.mammVarianceCovarianceMatrixReady(options)) "effectSizeVarianceCovarianceMatrix" else paste0(options[["effectSizeStandardError"]], "^2"),
       data = as.name("dataset")
     )
   }
@@ -3401,6 +3417,19 @@
     fit <- paste0("fit <- rma(\n\t", paste(names(rmaInput), "=", rmaInput, collapse = ",\n\t"), "\n)\n")
   }
 
+  if (.maIsMultilevelMultivariate(options) &&  .mammVarianceCovarianceMatrixReady(options)) {
+    if (options[["varianceCovarianceMatrixType"]] == "precomputed") {
+      fit <- paste0(
+        paste0("effectSizeVarianceCovarianceMatrix <- ", vcalcInput[["file"]], "\n"), "\n",
+        fit
+      )
+    } else {
+      fit <- paste0(
+        paste0("effectSizeVarianceCovarianceMatrix <- vcalc(\n\t", paste(names(vcalcInput), "=", vcalcInput, collapse = ",\n\t"), "\n)\n"), "\n",
+        fit
+      )
+    }
+  }
 
   # add clustering if specified
   if (options[["clustering"]] != "") {
