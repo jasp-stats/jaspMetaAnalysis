@@ -226,20 +226,6 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
       exitAnalysisIfErrors = TRUE)
   }
 
-  if (length(options[["effectSizeModelTerms"]]) > 0)
-    .hasErrors(
-      dataset              = dataset,
-      type                 = c("modelInteractions"),
-      modelInteractions.modelTerms = options[["effectSizeModelTerms"]],
-      exitAnalysisIfErrors = TRUE)
-
-  if (length(options[["heterogeneityModelTerms"]]) > 0)
-    .hasErrors(
-      dataset              = dataset,
-      type                 = c("modelInteractions"),
-      modelInteractions.modelTerms = options[["heterogeneityModelTerms"]],
-      exitAnalysisIfErrors = TRUE)
-
   .hasErrors(
     dataset              = dataset,
     seCheck.target       = options[["effectSizeStandardError"]],

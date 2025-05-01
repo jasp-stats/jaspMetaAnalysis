@@ -2610,7 +2610,7 @@
 
   # extract the used variables
   terms     <- attr(terms(formula, data = fit[["data"]]), "term.labels")
-  variables <- terms[!grepl(":", terms)]
+  variables <- unique(unlist(sapply(terms, strsplit, split = ":")))
 
   # average across remaining variables
   remainingVariables <- setdiff(variables, c(selectedVariables, trendVarible))

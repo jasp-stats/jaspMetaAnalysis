@@ -56,6 +56,7 @@ Section
 				title:			qsTr("Model Terms")
 				listViewType:	JASP.Interaction
 				allowTypeChange:false
+				interactionContainLowerTerms:	false
 				info: qsTr("Variables assigned as model terms in the effect size model.")
 			}
 		}
@@ -94,7 +95,8 @@ Section
 				title:			qsTr("Model Terms")
 				listViewType:	JASP.Interaction
 				allowTypeChange:false
-				addAvailableVariablesToAssigned: false
+				addAvailableVariablesToAssigned:	false
+				interactionContainLowerTerms:		false
 				info: qsTr("Variables assigned as model terms in the heterogeneity model. Specifying a heterogeneity model results in a 'location-scale' meta-analytic model.")
 			}
 		}

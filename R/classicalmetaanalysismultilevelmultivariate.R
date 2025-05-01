@@ -91,13 +91,6 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
       exitAnalysisIfErrors = TRUE)
   }
 
-
-  .hasErrors(
-    dataset              = dataset,
-    type                 = c("modelInteractions"),
-    modelInteractions.modelTerms = options[["effectSizeModelTerms"]],
-    exitAnalysisIfErrors = TRUE)
-
   .hasErrors(
     dataset              = dataset,
     seCheck.target       = options[["effectSizeStandardError"]],

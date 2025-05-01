@@ -950,8 +950,6 @@
   if (is.null(fit) || jaspBase::isTryError(fit))
     return(NULL)
 
-  dataset <- attr(fit, "dataset")
-
   # Make sure no multiple prediction intervals are drawn for complex models
   if (.mammHasMultipleHeterogeneities(options)) {
     options[["predictionIntervals"]]           <- FALSE
@@ -979,7 +977,7 @@
   for (i in seq_along(estimatedMarginalMeansVariables)) {
 
     tempTermTest               <- .maTermTests(fit, options, estimatedMarginalMeansVariables[i])
-    tempEstimatedMarginalMeans <- .maComputeMarginalMeansVariable(fit, options, dataset, estimatedMarginalMeansVariables[i], options[["forestPlotEstimatedMarginalMeansCoefficientTestsAgainst"]] , "effectSize")
+    tempEstimatedMarginalMeans <- .maComputeMarginalMeansVariable(fit, options, estimatedMarginalMeansVariables[i], options[["forestPlotEstimatedMarginalMeansCoefficientTestsAgainst"]] , "effectSize")
     tempTestText               <- .maPrintTermTest(tempTermTest, estimatedMarginalMeansTestsStaistics)
 
     # add term information
@@ -1041,7 +1039,7 @@
   # add adjusted effect size estimate
   if (options[["forestPlotEstimatedMarginalMeansAdjustedEffectSizeEstimate"]]) {
 
-    tempEstimatedMarginalMeans <- .maComputeMarginalMeansVariable(fit, options, dataset, "", options[["forestPlotEstimatedMarginalMeansCoefficientTestsAgainst"]] , "effectSize")
+    tempEstimatedMarginalMeans <- .maComputeMarginalMeansVariable(fit, options, "", options[["forestPlotEstimatedMarginalMeansCoefficientTestsAgainst"]] , "effectSize")
     tempCoefficientTest <- .maPrintCoefficientTest(tempEstimatedMarginalMeans, options[["forestPlotAuxiliaryTestsInformation"]] == "statisticAndPValue")
 
     additionalInformation[[tempRow]] <- data.frame(
