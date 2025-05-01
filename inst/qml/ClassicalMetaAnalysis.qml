@@ -41,6 +41,7 @@ Form
 			allowedColumns:		["scale"]
 			info: qsTr("Variable containing the observed effect sizes.")
 		}
+		
 		AssignedVariablesList
 		{
 			name:				"effectSizeStandardError"
