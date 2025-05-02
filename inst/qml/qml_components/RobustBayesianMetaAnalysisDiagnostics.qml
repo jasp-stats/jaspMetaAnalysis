@@ -95,19 +95,6 @@ Section
 				name:		"mcmcDiagnosticsPlotTypePosteriorSamplesDensity"
 			}
 		}
-
-		CheckBox
-		{
-			label:		qsTr("Single model")
-			name:		"mcmcDiagnosticsPlotSingleModel"
-			childrenOnSameRow: true
-
-			IntegerField
-			{
-				name:			"mcmcDiagnosticsPlotSingleModelNumber"
-				defaultValue:	1
-			}
-		}
 	}
 
 }

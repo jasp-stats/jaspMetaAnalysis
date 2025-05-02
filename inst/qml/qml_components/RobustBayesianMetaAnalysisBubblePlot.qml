@@ -23,8 +23,12 @@ import JASP
 Section
 {
 	title:						qsTr("Bubble Plot")
-	property string module:		"metaAnalysis"
 	info: qsTr("Options for visualizing the estimated effect sizes at different levels of the predictors with the observed estimates visualized as bubbles. Continuous predictors can be split into three bins with cutoffs at ±x standard deviations from the mean. Predictors that are not specified for either the x-axis, lines, or plots are averaged over.")
+
+	property string analysisType: "RoBMA"
+	// RoBMA: Robust Bayesian Meta-Analsis
+	// BiBMA: Binomial Bayesian Meta-Analysis
+	// NoBMA: Normal Bayesian Meta-Analysis
 
 	VariablesForm
 	{
@@ -72,70 +76,49 @@ Section
 
 		Group
 		{
-			DoubleField
+			title:		qsTr("Bubbles")
+
+			DropDown
 			{
-				name:			"bubblePlotSdFactorCovariates"
-				label:			qsTr("SD factor covariates")
-				defaultValue: 	1
-				min:			0
-				enabled:		bubblePlotSeparateLines.columnsTypes.includes("scale") || bubblePlotSeparatePlots.columnsTypes.includes("scale")
+				name:		"bubblePlotBubblesSize"
+				label:		qsTr("Size")
+				info: qsTr("Options for determining the size of the observed estimates.")
 				Layout.preferredWidth: 300 * jaspTheme.uiScale
-				info: qsTr("Standard deviation cutoff used for binning continuous covariates.")
+				values:		[
+					{ label: qsTr("Inverse variance")	, value: "inverseVariance"	},
+					{ label: qsTr("Equal")				, value: "equal"	}
+				]
 			}
 
-			Group
+			DoubleField
 			{
-				title:		qsTr("Bubbles")
+				name:			"bubblePlotBubblesRelativeSize"
+				label:			qsTr("Relative size")
+				defaultValue:	1
+				min:			0
+				inclusive: 		JASP.None
+				info: qsTr("Set the relative size of the observed estimates.")
+			}
 
-				DropDown
-				{
-					name:		"bubblePlotBubblesSize"
-					label:		qsTr("Size")
-					info: qsTr("Options for determining the size of the observed estimates.")
-					values:		
-					if (module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate")
-						[
-							{ label: qsTr("Weight")				, value: "weight"},
-							{ label: qsTr("Inverse variance")	, value: "inverseVariance"	},
-							{ label: qsTr("Equal")				, value: "equal"	}
-						]
-					else
-						[
-							{ label: qsTr("Inverse variance")	, value: "inverseVariance"	},
-							{ label: qsTr("Equal")				, value: "equal"	}
-						]
-				}
+			DoubleField
+			{
+				name:			"bubblePlotBubblesTransparency"
+				label:			qsTr("Transparency")
+				defaultValue:	0.90
+				min:			0
+				max:			1
+				inclusive: 		JASP.None
+				info: qsTr("Set the transparency of the observed estimates.")
+			}
 
-				DoubleField
-				{
-					name:			"bubblePlotBubblesRelativeSize"
-					label:			qsTr("Relative size")
-					defaultValue:	1
-					min:			0
-					inclusive: 		JASP.None
-					info: qsTr("Set the relative size of the observed estimates.")
-				}
-
-				DoubleField
-				{
-					name:			"bubblePlotBubblesTransparency"
-					label:			qsTr("Transparency")
-					defaultValue:	0.90
-					min:			0
-					max:			1
-					inclusive: 		JASP.None
-					info: qsTr("Set the transparency of the observed estimates.")
-				}
-
-				DoubleField
-				{
-					enabled:		bubblePlotSelectedVariable.columnsTypes.includes("nominal")
-					name:			"bubblePlotBubblesJitter"
-					label:			qsTr("Jitter")
-					defaultValue:	1
-					min:			0
-					info: qsTr("Set the degree of x-coordinate jitter of the observed estimates. Available when the x-axis variable is nominal.")
-				}
+			DoubleField
+			{
+				enabled:		bubblePlotSelectedVariable.columnsTypes.includes("nominal")
+				name:			"bubblePlotBubblesJitter"
+				label:			qsTr("Jitter")
+				defaultValue:	1
+				min:			0
+				info: qsTr("Set the degree of x-coordinate jitter of the observed estimates. Available when the x-axis variable is nominal.")
 			}
 		}
 
@@ -165,7 +148,6 @@ Section
 				label:		qsTr("Prediction intervals")
 				checked:	true
 				info: qsTr("Include prediction intervals of the estimated effect sizes.")
-				visible:	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
 
 				DoubleField
 				{

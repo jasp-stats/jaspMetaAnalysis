@@ -188,10 +188,10 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   omitOnVariables <- c(
     options[["effectSize"]],
     options[["effectSizeStandardError"]],
-    if (options[["clustering"]] != "") options[["clustering"]],
-    if (options[["subgroup"]] != "")   options[["subgroup"]],
-    if (length(predictorsNominal) > 0) predictorsNominal,
-    if (length(predictorsScale) > 0)   predictorsScale
+    if (length(options[["clustering"]]) > 0 && options[["clustering"]] != "") options[["clustering"]],
+    if (length(options[["subgroup"]])   > 0 && options[["subgroup"]]   != "") options[["subgroup"]],
+    if (length(predictorsNominal)       > 0) predictorsNominal,
+    if (length(predictorsScale)         > 0) predictorsScale
   )
   anyNaByRows <- apply(dataset[,omitOnVariables], 1, function(x) anyNA(x))
   dataset     <- dataset[!anyNaByRows,]

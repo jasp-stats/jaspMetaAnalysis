@@ -126,7 +126,7 @@
 
   return(as.formula(formula, env = parent.frame(1)))
 }
-.maFitModel                      <- function(jaspResults, dataset, options, objectName = "fit") {
+.maFitModel                      <- function(jaspResults, dataset, options, objectName = "fit", analysis = "ma") {
 
   if (!.maReady(options) || !is.null(jaspResults[[objectName]]))
     return()
@@ -138,9 +138,16 @@
 
   fitOutput <- list()
 
+  # dispatch fitting function
+  fittingFunction <- switch(
+    analysis,
+    "ma"    = .maFitModelFun,
+    "robma" = .robmaFitModelFun
+  )
+
   # full dataset fit
   startProgressbar(expectedTicks = 1, label = gettext("Estimating Meta-Analytic Model"))
-  fitOutput[["__fullDataset"]] <- .maFitModelFun(dataset, options, subgroupName = gettext("Full dataset"))
+  fitOutput[["__fullDataset"]] <- do.call(fittingFunction, list(dataset = dataset, options = options, subgroupName = gettext("Full dataset")))
   progressbarTick()
 
   # add subgroup fits
@@ -162,7 +169,8 @@
       attr(subgroupData, "subgroupIndx") <- subgroupIndx
 
       # fit the model
-      fitOutput[[paste0("subgroup", subgroupLevel)]] <- .maFitModelFun(subgroupData, options, subgroupName = as.character(subgroupLevel))
+      fitOutput[[paste0("subgroup", subgroupLevel)]] <- do.call(fittingFunction, list(dataset = subgroupData, options = options, subgroupName = as.character(subgroupLevel)))
+
       progressbarTick()
     }
   }
@@ -316,7 +324,7 @@
     fitClustered   = fitClustered
   ))
 }
-.maUpdateFitModelDataset         <- function(jaspResults, dataset, options, objectName = "fit") {
+.maUpdateFitModelDataset         <- function(jaspResults, dataset, options, objectName = "fit", analysis = "ma") {
 
   # this function updates the data sets stored as attribute of the fit object if any of the additional variables changes
   # this is necessary for simplifying handling dataset in the forest plot etc...
@@ -335,7 +343,7 @@
   fitOutput <- jaspResults[[objectName]]$object
 
   # full dataset fit
-  fitOutput[["__fullDataset"]] <- .maUpdateFitModelDatasetFun(fitOutput[["__fullDataset"]], dataset)
+  fitOutput[["__fullDataset"]] <- .maUpdateFitModelDatasetFun(fitOutput[["__fullDataset"]], dataset, analysis = analysis)
 
   # add subgroup fits
   if (options[["subgroup"]] != "") {
@@ -350,11 +358,12 @@
 
       # forward NAs information
       tempNasIds    <- attr(dataset, "NasIds")[!attr(dataset, "NasIds")]
-      attr(subgroupData, "NAs")    <- sum(tempNasIds[subgroupIndx])
-      attr(subgroupData, "NasIds") <- tempNasIds[subgroupIndx]
+      attr(subgroupData, "NAs")          <- sum(tempNasIds[subgroupIndx])
+      attr(subgroupData, "NasIds")       <- tempNasIds[subgroupIndx]
+      attr(subgroupData, "subgroupIndx") <- subgroupIndx
 
       # fit the model
-      fitOutput[[paste0("subgroup", subgroupLevel)]] <- .maUpdateFitModelDatasetFun(fitOutput[[paste0("subgroup", subgroupLevel)]], subgroupData)
+      fitOutput[[paste0("subgroup", subgroupLevel)]] <- .maUpdateFitModelDatasetFun(fitOutput[[paste0("subgroup", subgroupLevel)]], subgroupData, analysis = analysis)
     }
   }
 
@@ -367,7 +376,7 @@
   return()
 
 }
-.maUpdateFitModelDatasetFun      <- function(fitOutput, dataset) {
+.maUpdateFitModelDatasetFun      <- function(fitOutput, dataset, analysis = "ma") {
 
   if (!is.null(fitOutput[["fit"]])) {
     fit <- fitOutput[["fit"]]
@@ -376,17 +385,23 @@
     fit <- NULL
   }
 
-  if (!is.null(fitOutput[["fitClustered"]])) {
-    fitClustered <- fitOutput[["fitClustered"]]
-    attr(fitClustered, "dataset") <- dataset
-  } else {
-    fitClustered <- NULL
-  }
+  if (analysis == "ma") {
+    if (!is.null(fitOutput[["fitClustered"]])) {
+      fitClustered <- fitOutput[["fitClustered"]]
+      attr(fitClustered, "dataset") <- dataset
+    } else {
+      fitClustered <- NULL
+    }
 
-  return(list(
-    fit            = fit,
-    fitClustered   = fitClustered
-  ))
+    return(list(
+      fit            = fit,
+      fitClustered   = fitClustered
+    ))
+  } else if (analysis == "robma") {
+    return(list(
+      fit            = fit
+    ))
+  }
 }
 .maPermutestAndStore             <- function(fit, options) {
 

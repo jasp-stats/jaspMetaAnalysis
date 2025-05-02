@@ -23,9 +23,14 @@ import JASP
 Section
 {
 	title:						qsTr("Forest Plot")
-	property string module:		"metaAnalysis"
 	columns:					1
 	info: qsTr("Options for visualizing study-level information, estimated marginal means, and the model information in an all encompassing forest plot. Different sections of the forest plot can be individually enabled/disabled.")
+
+
+	property string analysisType: "RoBMA"
+	// RoBMA: Robust Bayesian Meta-Analsis
+	// BiBMA: Binomial Bayesian Meta-Analysis
+	// NoBMA: Normal Bayesian Meta-Analysis
 
 	CheckBox
 	{
@@ -124,7 +129,6 @@ Section
 				id:			forestPlotStudyInformationPredictedEffects
 				text:		qsTr("Predicted effects")
 				enabled:	effectSize.count == 1 && effectSizeStandardError.count == 1
-				visible:	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
 				checked:	false
 				Layout.preferredWidth: 300 * jaspTheme.uiScale
 				info: qsTr("Include predicted effect sizes in the middle section of the study-level information panel.")
@@ -135,7 +139,6 @@ Section
 				name:			"forestPlotStudyInformationStudyWeights"
 				text:			qsTr("Study weights")
 				enabled:		forestPlotStudyInformation.checked
-				visible:	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
 				info: qsTr("Include the study weights in the right section of the study-level information panel.")
 			}
 
@@ -144,7 +147,6 @@ Section
 				name:			"forestPlotStudyInformationSecondaryConfidenceInterval"
 				text:			qsTr("Secondary confidence interval")
 				enabled:		forestPlotStudyInformation.checked
-				Layout.preferredWidth: 300 * jaspTheme.uiScale
 				childrenOnSameRow:	true
 				info: qsTr("Include secondary confidence interval for effect sizes in the middle section of the study-level information panel.")
 
@@ -290,7 +292,6 @@ Section
 				DoubleField
 				{
 					name:			"forestPlotEstimatedMarginalMeansCoefficientTestsAgainst"
-					visible:		module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
 					text:			qsTr("Against")
 					defaultValue:	0
 					info: qsTr("Specify the test value for the coefficient tests.")
@@ -385,8 +386,8 @@ Section
 				name:		"forestPlotHeterogeneityModerationTest"
 				text:		qsTr("Moderation test")
 				enabled:	sectionModel.heterogeneityModelTermsCount > 0
-				visible:	module === "metaAnalysis" || module === "RoBMA"
-				checked:	module === "metaAnalysis" || module === "RoBMA"
+				visible:	module == "metaAnalysis"
+				checked:	module == "metaAnalysis"
 				info: qsTr("Include the omnibus heterogeneity moderation test in the model information section. Available when heterogeneity meta-regression is specified.")
 			}
 		}
@@ -394,27 +395,6 @@ Section
 		Group
 		{
 			title:		qsTr("Effect Size")
-
-			CheckBox
-			{
-				name:		"forestPlotEffectSizeFixedEffectEstimate"
-				text:		qsTr("Fixed effect estimate")
-				id:			forestPlotEffectSizeFixedEffectEstimate
-				checked:	false				
-				enabled:	!(method.value == "fixedEffects" || method.value == "equalEffects")
-				visible:	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
-				info: qsTr("Include a fixed effect meta-analytic effect size estimate in the model information section. Not available if the model was already fitted with fixed effects or the model contains heterogeneity meta-regression.")
-			}
-
-			CheckBox
-			{
-				name:		"forestPlotEffectSizeFixedEffectTest"
-				text:		qsTr("Fixed effect estimate test")
-				checked:	true
-				enabled:	forestPlotEffectSizeFixedEffectEstimate.checked && !(method.value == "fixedEffects" || method.value == "equalEffects")
-				visible:	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
-				info: qsTr("Include the test of the fixed effect meta-analytic effect size estimate in the model information section.")
-			}
 
 			CheckBox
 			{
@@ -471,7 +451,6 @@ Section
 					text:		qsTr("Prediction intervals")
 					checked:	true
 					Layout.preferredWidth: 300 * jaspTheme.uiScale
-					visible:	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
 					info: qsTr("Include prediction intervals of the estimated marginal means and the model information output.")
 				}
 
@@ -480,7 +459,6 @@ Section
 					name:			"forestPlotEstimatesAndConfidenceIntervals"
 					text:			qsTr("Estimates and confidence intervals")
 					checked:		true
-					Layout.preferredWidth: 300 * jaspTheme.uiScale
 					info: qsTr("Include effect size estimates and confidence intervals summary text in the right panel of the forest plot.")
 				}
 
@@ -655,17 +633,6 @@ Section
 				value:			2
 				inclusive: 		JASP.None
 				info: qsTr("Number of digits printed for the effect size and confidence intervals summary text.")
-			}
-
-			DropDown
-			{
-				label:		qsTr("Tests information")
-				name:		"forestPlotAuxiliaryTestsInformation"				
-				visible:	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
-				values:		[
-						{ label: qsTr("Statistic and p-value")		, value: "statisticAndPValue"	},
-						{ label: qsTr("P-value")					, value: "pValue"				}
-				]
 			}
 
 			DropDown

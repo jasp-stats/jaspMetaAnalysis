@@ -58,7 +58,7 @@ Section
 			{
 				name:			"advancedMcmcAdaptation"
 				label:			qsTr("Adaptation")
-				defaultValue:	500
+				defaultValue:	5000
 				min:			100
 				fieldWidth:		55 * preferencesModel.uiScale
 			}
@@ -66,7 +66,7 @@ Section
 			{
 				name:			"advancedMcmcBurnin"
 				label:			qsTr("Burnin")
-				defaultValue:	2000
+				defaultValue:	5000
 				min:			100
 				fieldWidth:		55 * preferencesModel.uiScale
 			}
@@ -74,7 +74,7 @@ Section
 			{
 				name:			"advancedMcmcSamples"
 				label:			qsTr("Samples")
-				defaultValue:	5000
+				defaultValue:	10000
 				min:			100
 				fieldWidth:		55 * preferencesModel.uiScale
 			}
@@ -210,98 +210,36 @@ Section
 			{
 				label: 			qsTr("Extend samples")
 				name:			"advancedAutofitExtendSamples"
-				defaultValue:	1000
+				defaultValue:	5000
 				min:			100
 			}
 		}
 
-		CheckBox
-		{
-			label: 				qsTr("Remove failed models")
-			name:				"advancedRemoveFailedModels"
-			checked:			false
-
-			CheckBox
-			{
-				label: 				qsTr("R-hat")
-				name:				"advancedRemoveFailedModelsRHat"
-				checked:			true
-				childrenOnSameRow:	true
-
-				DoubleField
-				{
-					name:			"advancedRemoveFailedModelsRHatTarget"
-					defaultValue:	1.05
-					min:			1
-					inclusive:		JASP.None
-				}
-			}
-
-			CheckBox
-			{
-				label: 				qsTr("Effective sample size")
-				name:				"advancedRemoveFailedModelsEss"
-				checked:			true
-				childrenOnSameRow:	true
-
-				DoubleField
-				{
-					name:			"advancedRemoveFailedModelsEssTarget"
-					defaultValue:	500
-					min:			1
-					inclusive:		JASP.None
-				}
-			}
-
-			CheckBox
-			{
-				label: 				qsTr("MCMC error")
-				name:				"advancedRemoveFailedModelsMcmcError"
-				checked:			false
-				childrenOnSameRow:	true
-
-				DoubleField
-				{
-					name:			"advancedRemoveFailedModelsMcmcErrorTarget"
-					defaultValue:	0.001
-					min:			0
-					inclusive:		JASP.None
-				}
-			}
-
-			CheckBox
-			{
-				label: 				qsTr("MCMC error / SD")
-				name:				"advancedRemoveFailedModelsMcmcErrorSd"
-				checked:			false
-				childrenOnSameRow:	true
-
-				DoubleField
-				{
-					name:			"advancedRemoveFailedModelsMcmcErrorSdTarget"
-					defaultValue:	0.01
-					min:			0
-					inclusive:		JASP.None
-				}
-			}
-		}
-
-		CheckBox
-		{
-			label: 				qsTr("Rebalance component probability on model failure")
-			name:				"advancedRebalanceComponentProbabilityOnModelFailure"
-			checked:			true
-		}
-
 	}
 
-	FileSelector
+	Group
 	{
 		Layout.columnSpan:	2
-		label: 				qsTr("Save the fitted model")
-		name:				"advancedSaveFittedModel"
-		filter:				"*.RDS"
-		save:				true
-		visible:			analysisType === "RoBMA"
+		
+		FileSelector
+		{
+			name:				"pathToFittedModel"
+			label:  			qsTr("Load a fitted model")
+			filter:				"*.RDS"
+			save:				false
+			visible:			analysisType === "RoBMA"
+			info:				qsTr("Load a fitted model from a file. This will allow you to load the fitted model in a later session. Note that this will overwrite the current fitted model and all of the model fitting options (Model, Priors, etc.).")
+		}
+
+		FileSelector
+		{
+
+			label: 				qsTr("Save the fitted model")
+			name:				"advancedSaveFittedModel"
+			filter:				"*.RDS"
+			save:				true
+			visible:			analysisType === "RoBMA"
+			info:				qsTr("Save the fitted model to a file. This will allow you to load the fitted model in a later session.")
+		}
 	}
 }
