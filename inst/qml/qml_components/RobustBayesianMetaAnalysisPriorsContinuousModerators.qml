@@ -32,10 +32,19 @@ ColumnLayout
 
 	RowLayout
 	{
-		Label { text: qsTr("Distribution"); Layout.preferredWidth: 100 * preferencesModel.uiScale; Layout.leftMargin: 150 * preferencesModel.uiScale}
-		Label { text: qsTr("Parameters");	Layout.preferredWidth: 155 * preferencesModel.uiScale }
-		Label { text: qsTr("Truncation");	Layout.preferredWidth: 150 * preferencesModel.uiScale }
-		Label { text: qsTr("Prior weights") }
+		Layout.preferredWidth:	parent.width
+		layoutDirection: Qt.RightToLeft
+		Label { text: qsTr("Truncation");	Layout.preferredWidth: 174 * preferencesModel.uiScale }
+	}
+	Item
+	{
+		implicitWidth:	parent.width
+		implicitHeight: priorLabel.implicitHeight
+		Label { text: qsTr("Prior weights");	anchors.right: parent.right; id: priorLabel	}
+		Label { text: qsTr("Max");				anchors.right: parent.right; anchors.rightMargin: 127 * preferencesModel.uiScale - implicitWidth}
+		Label { text: qsTr("Min");				anchors.right: parent.right; anchors.rightMargin: 174 * preferencesModel.uiScale - implicitWidth}
+		Label { text: qsTr("Parameters");		anchors.right: parent.right; anchors.rightMargin: 350 * preferencesModel.uiScale - implicitWidth}
+		Label { text: qsTr("Distribution");		anchors.right: parent.right; anchors.rightMargin: 460 * preferencesModel.uiScale - implicitWidth}
 	}
 
 	VariablesList
@@ -49,40 +58,71 @@ ColumnLayout
 
 		rowComponent: RowLayout
 		{
+			spacing:				8 * preferencesModel.uiScale
+			layoutDirection:		Qt.RightToLeft
+
+			FormulaField
+			{
+				name: 				"priorWeight"
+				value:				"1"
+				min: 				0
+				inclusive: 			JASP.None
+				fieldWidth:			40 * preferencesModel.uiScale
+				useExternalBorder:	false
+				showBorder:			true
+			}
+
 			Row
 			{
 				spacing:				4 * preferencesModel.uiScale
-				Layout.preferredWidth:	100 * preferencesModel.uiScale
-//				Layout.leftMargin: 		150 * preferencesModel.uiScale
+				Layout.preferredWidth:	120 * preferencesModel.uiScale
 
-				DropDown
+				FormulaField
 				{
-					id: typeItem
-					name: "type"
-					fieldWidth:		100 * preferencesModel.uiScale
-					useExternalBorder: true
-					startValue: componentType === "null" ? "spike" : "normal"
-					values:
-					[
-						{ label: qsTr("Normal(μ,σ)"),			value: "normal"},
-						{ label: qsTr("Student-t(μ,σ,v)"),		value: "t"},
-						{ label: qsTr("Cauchy(x₀,θ)"),			value: "cauchy"},
-						{ label: qsTr("Gamma(α,β)"),			value: "gammaAB"},
-						{ label: qsTr("Gamma(k,θ)"),			value: "gammaK0"},
-						{ label: qsTr("Inverse-Gamma(α,β)"),	value: "invgamma"},
-						{ label: qsTr("Log-Normal(μ,σ)"),		value: "lognormal"},
-						{ label: qsTr("Beta(α,β)"),				value: "beta"},
-						{ label: qsTr("Uniform(a,b)"),			value: "uniform"},
-						{ label: qsTr("Spike(x₀)"),				value: "spike"},
-						{ label: qsTr("None"),					value: "none"}
-					]
+					id:					truncationLower
+					name: 				"truncationLower"
+					visible:			typeItem.currentValue !== "spike" && typeItem.currentValue !== "uniform"
+					value:				"-Inf"
+					min:
+					{
+						if (typeItem.currentValue === "gammaK0" || typeItem.currentValue === "gammaAB" || typeItem.currentValue === "invgamma" || typeItem.currentValue === "lognormal" || typeItem.currentValue === "beta")
+							0
+						else
+							"-Inf"
+					}
+					max: 				truncationUpper.value
+					inclusive: 			JASP.MinOnly
+					fieldWidth:			40 * preferencesModel.uiScale
+					useExternalBorder:	false
+					showBorder:			true
+				}
+				FormulaField
+				{
+					id:					truncationUpper
+					name: 				"truncationUpper"
+					visible:			typeItem.currentValue !== "spike" && typeItem.currentValue !== "uniform"
+					value:
+					{
+						if (typeItem.currentValue === "beta")	1
+						else									"Inf"
+					}
+					max:
+					{
+						if (typeItem.currentValue === "beta")	1
+						else									"Inf"
+					}
+					min: 				truncationLower ? truncationLower.value : 0
+					inclusive: 			JASP.MaxOnly
+					fieldWidth:			40 * preferencesModel.uiScale
+					useExternalBorder:	false
+					showBorder:			true
 				}
 			}
 
 			Row
 			{
 				spacing:				4 * preferencesModel.uiScale
-				Layout.preferredWidth:	155 * preferencesModel.uiScale
+				Layout.preferredWidth:	170 * preferencesModel.uiScale
 
 				FormulaField
 				{
@@ -111,7 +151,7 @@ ColumnLayout
 				}
 				FormulaField
 				{
-					label:				"σ"
+					label:				"σ "
 					name:				"sigma"
 					id:					sigma
 					visible:			typeItem.currentValue === "normal"		||
@@ -216,66 +256,29 @@ ColumnLayout
 				}
 			}
 
-			Row
+			DropDown
 			{
-				spacing:				4 * preferencesModel.uiScale
-				Layout.preferredWidth:	150 * preferencesModel.uiScale
-
-				FormulaField
-				{
-					id:					truncationLower
-					label: 				qsTr("lower")
-					name: 				"truncationLower"
-					visible:			typeItem.currentValue !== "spike" && typeItem.currentValue !== "uniform"
-					value:				"-Inf"
-					min:				
-					{
-						if (typeItem.currentValue === "gammaK0" || typeItem.currentValue === "gammaAB" || typeItem.currentValue === "invgamma" || typeItem.currentValue === "lognormal" || typeItem.currentValue === "beta")
-							0
-						else
-							"-Inf"
-					}
-					max: 				truncationUpper.value
-					inclusive: 			JASP.MinOnly
-					fieldWidth:			40 * preferencesModel.uiScale
-					useExternalBorder:	false
-					showBorder:			true
-				}
-				FormulaField
-				{
-					id:					truncationUpper
-					label: 				qsTr("upper")
-					name: 				"truncationUpper"
-					visible:			typeItem.currentValue !== "spike" && typeItem.currentValue !== "uniform"
-					value:
-					{
-						if (typeItem.currentValue === "beta")	1
-						else									"Inf"
-					}
-					max:				
-					{
-						if (typeItem.currentValue === "beta")	1
-						else									"Inf"
-					}
-					min: 				truncationLower ? truncationLower.value : 0
-					inclusive: 			JASP.MaxOnly
-					fieldWidth:			40 * preferencesModel.uiScale
-					useExternalBorder:	false
-					showBorder:			true
-				}
+				id: typeItem
+				name: "type"
+				fieldWidth:		100 * preferencesModel.uiScale
+				useExternalBorder: true
+				startValue: componentType === "null" ? "spike" : "normal"
+				values:
+				[
+					{ label: qsTr("Normal(μ,σ)"),			value: "normal"},
+					{ label: qsTr("Student-t(μ,σ,v)"),		value: "t"},
+					{ label: qsTr("Cauchy(x₀,θ)"),			value: "cauchy"},
+					{ label: qsTr("Gamma(α,β)"),			value: "gammaAB"},
+					{ label: qsTr("Gamma(k,θ)"),			value: "gammaK0"},
+					{ label: qsTr("Inverse-Gamma(α,β)"),	value: "invgamma"},
+					{ label: qsTr("Log-Normal(μ,σ)"),		value: "lognormal"},
+					{ label: qsTr("Beta(α,β)"),				value: "beta"},
+					{ label: qsTr("Uniform(a,b)"),			value: "uniform"},
+					{ label: qsTr("Spike(x₀)"),				value: "spike"},
+					{ label: qsTr("None"),					value: "none"}
+				]
 			}
 
-			FormulaField
-			{
-				label: 				qsTr("Weight")
-				name: 				"priorWeight"
-				value:				"1"
-				min: 				0
-				inclusive: 			JASP.None
-				fieldWidth:			40 * preferencesModel.uiScale
-				useExternalBorder:	false
-				showBorder:			true
-			}
 		}
 	}
 
