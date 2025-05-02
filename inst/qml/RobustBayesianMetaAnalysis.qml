@@ -211,6 +211,14 @@ Form
 				{ label: qsTr("Negative"),	value: "negative",	info: qsTr("Negative effect")}
 			]
 		}
+
+		CheckBox
+		{
+			name:		"showModelSpecification"
+			label:		qsTr("Show model specification")
+			info:		qsTr("Show the model specification. This is useful for understanding and reporting the specified model.")
+			checked:	true
+		}
 	}
 
 	//// Model Section ////

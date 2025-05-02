@@ -15,6 +15,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+# TODO
+# - custom prior for factor moderators does not work
 
 RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
@@ -22,10 +24,16 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     dataset <- .maCheckData(dataset, options)
     .maCheckErrors(dataset, options)
   }
+  saveRDS(options, file = "C:/JASP-Packages/options.RDS")
+  saveRDS(dataset, file = "C:/JASP-Packages/dataset.RDS")
 
   # get priors and show model specification table
-  .robmaGetPriors(jaspResults, options)
-  .robmaModelPreviewTables(jaspResults, options)
+  .robmaLoadPriors(jaspResults, options)
+  if (options[["showModelSpecification"]])
+    .robmaModelSpecificationTables(jaspResults, options)
+
+
+  .robmaModelSpecificationTables(jaspResults, options)
 return()
   # fit the model
   .maFitModel(jaspResults, dataset, options, analysis = "robma")
@@ -36,9 +44,9 @@ return()
   # get the priors
   .robmaGetPriors(jaspResults, options)
 
-  # show the model preview
+  # show the model Specification
   if (is.null(jaspResults[["model"]]))
-    .robmaModelPreviewTable(jaspResults, options)
+    .robmaModelSpecificationTable(jaspResults, options)
 
   # fit model
   if (is.null(jaspResults[["modelNotifier"]]) && .robmaCheckReady(options))
@@ -117,10 +125,14 @@ return()
 
 .robmaReady <- function(options) {
 
-  inputReady           <- options[["effectSize"]] != "" && options[["effectSizeStandardError"]] != ""
-  termsEffectSizeReady <- length(options[["effectSizeModelTerms"]]) > 0    || options[["effectSizeModelIncludeIntercept"]]
+  # data
+  inputReady <- options[["effectSize"]] != "" && options[["effectSizeStandardError"]] != ""
 
-  return(inputReady && termsEffectSizeReady)
+  # effect & heterogeneity priors ready
+  priorsEffectReady        <- length(options[["modelsEffectNull"]]) > 0        || length(options[["modelsEffect"]]) > 0
+  priorsHeterogeneityReady <- length(options[["modelsHeterogeneityNull"]]) > 0 || length(options[["modelsHeterogeneity"]]) > 0
+
+  return(inputReady && priorsEffectReady && priorsHeterogeneityReady)
 }
 
 .robmaFitModelFun <- function(dataset, options, subgroupName) {
@@ -132,7 +144,7 @@ return()
 
 
 # priors related functions
-.robmaGetPriors                <- function(jaspResults, options) {
+.robmaLoadPriors               <- function(jaspResults, options) {
 
   if (!is.null(jaspResults[["priors"]])) {
     return()
@@ -253,7 +265,7 @@ return()
       if (options[["bayesianModelAveragingModerations"]] && options[["priorDistributionsEffectSizeAndHeterogeneity"]] != "custom") {
         tempPrior[["null"]] <- RoBMA::set_default_priors("effect", null = TRUE)
       } else if (options[["bayesianModelAveragingModerations"]]) {
-        tempPrior[["null"]] <- .robmaExtractPriorsFromOptions(options[["modelsContinuousModeratorsNull"]][[which(sapply(options[["modelsContinuousModeratorsNull"]], "[[", "value") == tempTerm)]], type = "factor")
+        tempPrior[["null"]] <- .robmaExtractPriorsFromOptions(options[["modelsFactorModeratorsNull"]][[which(sapply(options[["modelsFactorModeratorsNull"]], "[[", "value") == tempTerm)]], type = "factor")
       }
 
     } else if (tempTermType == "scale") {
@@ -279,12 +291,21 @@ return()
     # enlist
     tempObject[[tempTerm]] <- tempPrior
   }
+  object[["moderators"]] <- tempObject
 
 
-
+  saveRDS(object, file = "C:/JASP-Packages/priors.RDS")
   priors[["object"]] <- object
 
   return()
+}
+.robmaGetPriors                <- function(jaspResults) {
+
+  if (is.null(jaspResults[["priors"]])) {
+    return()
+  } else {
+    return(jaspResults[["priors"]][["object"]])
+  }
 }
 .robmaRescalePriorDistribution <- function(prior, scale) {
 
@@ -424,108 +445,154 @@ return()
   return(arguments)
 }
 
+# naming related functions
+.robmaComponentNames <- function(component) {
+  return(switch(
+    component,
+    "effect"        = gettext("Effect Size"),
+    "heterogeneity" = gettext("Heterogeneity"),
+    "bias"          = gettext("Publication Bias")
+  ))
+}
+
 #
-.robmaModelPreviewTables        <- function(jaspResults, options) {
+.robmaModelSpecificationTables                 <- function(jaspResults, options) {
 
   # create / access the container
-  if (!is.null(jaspResults[["modelPreview"]])) {
+  # the dependencies could be set for specific tables
+  # but this is very simple computation so it's not worth doing
+  if (!is.null(jaspResults[["modelSpecification"]])) {
     return()
   } else {
-    modelPreview <- createJaspContainer(title = gettext("Model Preview"))
-    modelPreview$dependOn(c(.robmaDependencies, "shortenPriorName"))
-    modelPreview$position <- 1
-    jaspResults[["modelPreview"]] <- modelPreview
+    modelSpecification <- createJaspContainer(title = gettext("Model Specification"))
+    modelSpecification$dependOn(c(.robmaDependencies, "shortenPriorName", "showModelSpecification"))
+    modelSpecification$position <- 1
+    jaspResults[["modelSpecification"]] <- modelSpecification
   }
 
-
-  # extract the priors
-  priors  <- jaspResults[["priors"]][["object"]]
-
-  ### create overview table
-  overallSummary <- createJaspTable(title = gettext("Model Components"))
-  overallSummary$position <- 1
-  modelPreview[["overallSummary"]] <- overallSummary
-
-  overallSummary$addColumnInfo(name = "term",      title = "",                type = "string")
-  overallSummary$addColumnInfo(name = "models",    title = gettext("Models"), type = "string")
-  overallSummary$addColumnInfo(name = "priorProb", title = gettext("P(M)"),   type = "number")
-
-  # fill rows
-  out <- list()
-  for (term in c("effect", "heterogeneity", "bias")) {
-    out[[term]] <- data.frame(
-      term   = switch(
-        term,
-        "effect"        = gettext("Effect Size"),
-        "heterogeneity" = gettext("Heterogeneity"),
-        "bias"          = gettext("Publication Bias")
-      ),
-      models    = sprintf("%1$i/%2$i", length(priors[[term]]), length(priors[[term]]) + length(priors[[paste0(term, "Null")]])),
-      priorProb = sum(sapply(priors[[term]], \(x) x[["prior_weights"]])) / (
-        sum(sapply(priors[[paste0(term)]], \(x) x[["prior_weights"]])) +
-          sum(sapply(priors[[paste0(term, "Null")]], \(x) x[["prior_weights"]]))
-      )
-    )
-  }
-  overallSummary$setData(do.call(rbind, out))
-  overallSummary$addFootnote(gettext("The analysis will estimate multiple meta-analytic models using MCMC and might require a prolonged time to complete."), symbol = "\u26A0")
+  ### add component overview table
+  modelSpecification[["overallSummary"]] <- .robmaModelSpecificationTablesComponents(jaspResults, options)
 
   ### create models overview table
-  modelsSummary <- createJaspTable(title = gettext("Prior Distributions (Alternative)"))
-  modelsSummary$position <- 2
-  modelPreview[["modelsSummary"]] <- modelsSummary
+  modelSpecification[["componentPriors"]]     <- .robmaModelSpecificationTablesComponentsPriors(jaspResults, options)
+  modelSpecification[["componentPriorsNull"]] <- .robmaModelSpecificationTablesComponentsPriors(jaspResults, options, null = TRUE)
 
-  overtitlePrior <- gettext("Prior Distribution")
-  modelsSummary$addColumnInfo(name = "effect",         title = gettext("Effect Size"),       type = "string")
-  modelsSummary$addColumnInfo(name = "heterogeneity",  title = gettext("Heterogeneity"),     type = "string")
-  modelsSummary$addColumnInfo(name = "bias",           title = gettext("Publication Bias"),  type = "string")
-
-  priorsEffect        <- sapply(priors[["effect"]],        print, short_name = options[["shortenPriorName"]], silent = TRUE)
-  priorsHeterogeneity <- sapply(priors[["heterogeneity"]], print, short_name = options[["shortenPriorName"]], silent = TRUE)
-  priorsBias          <- sapply(priors[["bias"]],          print, short_name = options[["shortenPriorName"]], silent = TRUE)
-
-  # assure that the output aligns for cbind
-  maxPriorLength <- max(c(length(priorsEffect),length(priorsHeterogeneity), length(priorsBias)))
-  if (length(priorsEffect) < maxPriorLength)        priorsEffect[(length(priorsEffect) + 1):maxPriorLength] <- ""
-  if (length(priorsHeterogeneity) < maxPriorLength) priorsHeterogeneity[(length(priorsHeterogeneity) + 1):maxPriorLength] <- ""
-  if (length(priorsBias) < maxPriorLength)          priorsBias[(length(priorsBias) + 1):maxPriorLength] <- ""
-
-  modelsSummary$setData(data.frame(
-    effect        = priorsEffect,
-    heterogeneity = priorsHeterogeneity,
-    bias          = priorsBias
-  ))
-
-
-  ### create models overview table for null priors
-  modelsSummaryNull <- createJaspTable(title = gettext("Prior Distributions (Null)"))
-  modelsSummaryNull$position <- 3
-  modelPreview[["modelsSummaryNull"]] <- modelsSummaryNull
-
-  overtitlePrior <- gettext("Prior Distribution")
-  modelsSummaryNull$addColumnInfo(name = "effect",         title = gettext("Effect Size"),       type = "string")
-  modelsSummaryNull$addColumnInfo(name = "heterogeneity",  title = gettext("Heterogeneity"),     type = "string")
-  modelsSummaryNull$addColumnInfo(name = "bias",           title = gettext("Publication Bias"),  type = "string")
-
-  priorsEffect        <- sapply(priors[["effectNull"]],        print, short_name = options[["shortenPriorName"]], silent = TRUE)
-  priorsHeterogeneity <- sapply(priors[["heterogeneityNull"]], print, short_name = options[["shortenPriorName"]], silent = TRUE)
-  priorsBias          <- sapply(priors[["biasNull"]],          print, short_name = options[["shortenPriorName"]], silent = TRUE)
-
-  # assure that the output aligns for cbind
-  maxPriorLength <- max(c(length(priorsEffect),length(priorsHeterogeneity), length(priorsBias)))
-  if (length(priorsEffect) < maxPriorLength)        priorsEffect[(length(priorsEffect) + 1):maxPriorLength] <- ""
-  if (length(priorsHeterogeneity) < maxPriorLength) priorsHeterogeneity[(length(priorsHeterogeneity) + 1):maxPriorLength] <- ""
-  if (length(priorsBias) < maxPriorLength)          priorsBias[(length(priorsBias) + 1):maxPriorLength] <- ""
-
-  modelsSummaryNull$setData(data.frame(
-    effect        = priorsEffect,
-    heterogeneity = priorsHeterogeneity,
-    bias          = priorsBias
-  ))
+  ### moderation priors
+  modelSpecification[["moderators"]] <- .robmaModelSpecificationTablesModeratorsPriors(jaspResults, options)
 
   return()
 }
+.robmaModelSpecificationTablesComponents       <- function(jaspResults, options, components = c("effect", "heterogeneity", "bias")) {
 
+  priors <- .robmaGetPriors(jaspResults)
+
+  ### create overview table
+  tempTable <- createJaspTable(title = gettext("Model Components"))
+  tempTable$position <- 1
+
+  tempTable$addColumnInfo(name = "component", title = "",                type = "string")
+  tempTable$addColumnInfo(name = "models",    title = gettext("Models"), type = "string")
+  tempTable$addColumnInfo(name = "priorProb", title = gettext("P(M)"),   type = "number")
+
+  if (is.null(priors))
+    return(tempTable)
+
+  # fill rows
+  out <- list()
+  for (component in components) {
+
+    tempPriorsNull <- priors[[paste0(component, "Null")]]
+    tempPriors     <- priors[[component]]
+
+    # skip unspecified components (unless they are part of effect / heterogeneity)
+    if (!component %in% c("effect", "heterogeneity") && length(tempPriorsNull) == 0 && length(tempPriors) == 0)
+      next
+
+    tempWeightsNull <- if (length(tempPriorsNull) > 0) sum(sapply(tempPriorsNull, \(x) x[["prior_weights"]])) else 0
+    tempWeights     <- if (length(tempPriors) > 0) sum(sapply(tempPriors, \(x) x[["prior_weights"]]))         else 0
+
+    out[[component]] <- data.frame(
+      component   = .robmaComponentNames(component),
+      models      = sprintf("%1$i/%2$i", length(tempPriors), length(tempPriorsNull) + length(tempPriors)),
+      priorProb   = tempWeights / (tempWeights + tempWeightsNull)
+    )
+
+    if (length(tempPriorsNull) == 0 && length(tempPriors) == 0)
+      tempTable$addFootnote(gettextf("At least one prior distribution for %1$s component has to be specified.", .robmaComponentNames(component)))
+  }
+
+  tempTable$setData(do.call(rbind, out))
+  tempTable$addFootnote(gettext("The analysis will estimate multiple meta-analytic models using MCMC and might require a prolonged time to complete."), symbol = "\u26A0")
+
+  return(tempTable)
+}
+.robmaModelSpecificationTablesComponentsPriors <- function(jaspResults, options, components = c("effect", "heterogeneity", "bias"), null = FALSE) {
+
+  priors <- .robmaGetPriors(jaspResults)
+
+  ### create overview table
+  tempTable <- createJaspTable(title = gettextf("Prior Distributions %1$s", if (null) gettext("(Null)") else gettext("(Alternative)")))
+  tempTable$position <- if (null) 3 else 2
+
+  # select the corresponding priors
+  componentNames <- paste0(components, if (null) "Null" else "")
+  priors         <- priors[names(priors) %in% componentNames]
+  priors         <- priors[!sapply(priors, is.null)]
+  names(priors)  <- gsub("Null", "", names(priors)) # remove the null from the names for simpler handling
+
+  if (length(priors) == 0)
+    return(tempTable)
+
+  # always keep effect and heterogeneity, but remove other components if unspecified
+  components <- components[components %in% unique(c("effect", "heterogeneity", names(priors)))]
+  for (component in components) {
+    tempTable$addColumnInfo(name = component, title = .robmaComponentNames(component), type = "string")
+  }
+
+  # print notes & fill empty spots
+  priors <- lapply(priors, function(x) c(
+    if (length(x) > 0) sapply(x, print, short_name = options[["shortenPriorName"]], silent = TRUE),
+    rep("", max(lengths(priors)) - length(x))
+  ))
+
+  tempTable$setData(do.call(cbind.data.frame, priors))
+
+  return(tempTable)
+}
+.robmaModelSpecificationTablesModeratorsPriors <- function(jaspResults, options) {
+
+  if (length(options[["effectSizeModelTerms"]]) == 0)
+    return()
+
+  priors <- .robmaGetPriors(jaspResults)
+
+  ### create overview table
+  tempTable <- createJaspTable(title = gettext("Prior Distributions Moderators"))
+  tempTable$position <- 4
+
+  tempTable$addColumnInfo(name = "term",         title = "",                     type = "string")
+  tempTable$addColumnInfo(name = "alternative",  title = gettext("Alternative"), type = "string")
+  tempTable$addColumnInfo(name = "null",         title = gettext("Null"),        type = "string")
+
+  # select the corresponding priors
+  priors <- priors[["moderators"]]
+
+  if (length(priors) == 0)
+    return(tempTable)
+
+  # print notes & fill empty spots
+  priors <- lapply(names(priors), function(x) {
+    data.frame(
+      term        = x,
+      alternative = if (!is.null(priors[[x]][["alt"]]))  print(priors[[x]][["alt"]], short_name = options[["shortenPriorName"]], silent = TRUE)  else "",
+      null        = if (!is.null(priors[[x]][["null"]])) print(priors[[x]][["null"]], short_name = options[["shortenPriorName"]], silent = TRUE) else ""
+    )
+  })
+
+  tempTable$setData(do.call(rbind.data.frame, priors))
+
+  return(tempTable)
+}
 
 ### OLD -------------------------------------------------------------------------------------------------
 
@@ -1031,8 +1098,8 @@ return()
     return()
   }
 
-  # remove the model preview
-  jaspResults[["modelPreview"]] <- NULL
+  # remove the model Specification
+  jaspResults[["modelSpecification"]] <- NULL
 
   # extract the model
   fit   <- jaspResults[["model"]][["object"]]
