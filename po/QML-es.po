@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-05-03 14:12+0000\n"
+"PO-Revision-Date: 2025-05-03 14:18+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/es/>\n"
@@ -4422,7 +4422,7 @@ msgstr "Izquierda"
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Middle"
-msgstr "Media"
+msgstr "Medio"
 
 msgctxt "ClassicalMetaAnalysisForestPlot|"
 msgid "Right"
