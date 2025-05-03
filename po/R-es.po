@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2025-04-26 02:52\n"
-"PO-Revision-Date: 2025-04-19 11:43+0000\n"
+"PO-Revision-Date: 2025-04-26 12:37+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11.1-dev\n"
+"X-Generator: Weblate 5.12-dev\n"
 
 msgid ""
 "The study labels contain invalid characters. Please, remove them before "
@@ -412,15 +412,14 @@ msgstr "Factor de contracción"
 msgid "All standard errors must be positive."
 msgstr "Todos los errores típicos deben ser positivos."
 
-#, fuzzy
 msgid "Estimating Meta-Analytic Model"
-msgstr "Contrastes Meta-Analíticos"
+msgstr "Estimando el modelo Meta-Analítico"
 
 msgid "Full dataset"
-msgstr ""
+msgstr "Conjunto completo de datos"
 
 msgid "Estimating Subgroup Models"
-msgstr ""
+msgstr "Estimando modelos de subgrupos"
 
 msgid ""
 "The loaded distance matrix for '%1$s' does not match the dataset. The "
@@ -451,9 +450,8 @@ msgstr "p"
 msgid "p (permutation)"
 msgstr "p (permutación)"
 
-#, fuzzy
 msgid "The model for the subgroup '%1$s' failed with the following error: %2$s"
-msgstr "El contraste %1$s se quebró con el siguiente fallo: %2$s"
+msgstr "El modelo para el subgrupo '%1$s' fracasó con el siguiente fallo: %2$s"
 
 msgid "Error:"
 msgstr "Fallo:"
@@ -538,7 +536,7 @@ msgid "Heterogeneity Meta-Regression Correlation Matrix"
 msgstr "Matriz de correlaciones de la Meta-Regresión de heterogeneidad"
 
 msgid "Subgroup: %1$s"
-msgstr ""
+msgstr "Subgrupo: %1$s"
 
 msgid "Estimated Marginal Means and Contrasts Summary"
 msgstr "Resumen de las medias marginales estimadas y contrastes"
@@ -647,13 +645,11 @@ msgstr "Influyente"
 msgid "No influential cases found."
 msgstr "No se encontraron casos influyentes."
 
-#, fuzzy
 msgid "%1$sNo influential cases found."
-msgstr "No se encontraron casos influyentes."
+msgstr "%1$sNo se encontraron casos influyentes."
 
-#, fuzzy
 msgid "Diagnostics are based on the the subgroup models."
-msgstr "Los diagnósticos se basan en el modelo no conglomerado."
+msgstr "Los diagnósticos se basan en los modelos de subgrupos."
 
 msgid "Diagnostics are based on the non-clustered model."
 msgstr "Los diagnósticos se basan en el modelo no conglomerado."
@@ -700,28 +696,24 @@ msgstr "Resumen de la Meta-Regresión"
 msgid "Variance Inflation Summary"
 msgstr "Resumen de la inflación de varianza"
 
-#, fuzzy
 msgid "Pooled effect"
-msgstr "Magnitud del efecto combinada"
+msgstr "Efecto combinado"
 
-#, fuzzy
 msgid ""
 "Indexes of %1$s moderation coefficients were specified in an incorrect "
 "format. Try '(1, 2)' to test the first two coefficients."
 msgstr ""
-"Los índices de los coeficientes de moderación de la magnitud del efecto se "
-"especificaron en un formato incorrecto. Intenta '(1, 2)' para comprobar los "
-"dos primeros coeficientes."
+"Los índices de los coeficientes de moderación de %1$s se especificaron en un "
+"formato incorrecto. Intenta '(1, 2)' para comprobar los dos primeros "
+"coeficientes."
 
-#, fuzzy
 msgid ""
 "The selected coefficients for %1$s moderation must be between 1 and %2$i (i."
 "e., the number of regression parameters)."
 msgstr ""
-"Los coeficientes elegidos deben estar entre 1 y %1$i (i.e., el número de "
-"parámetros de la regresión)."
+"Los coeficientes elegidos para la moderación de %1$s deben estar entre 1 y "
+"%2$i (i.e. el número de parámetros de la regresión)."
 
-#, fuzzy
 msgid "Effect size (coef: %1$s)"
 msgstr "Magnitud del efecto (coef: %1$s)"
 
@@ -740,7 +732,6 @@ msgstr "Media - %1$sDT"
 msgid "Mean + %1$sSD"
 msgstr "Media + %1$sDT"
 
-#, fuzzy
 msgid "Adjusted estimate"
 msgstr "Estimación ajustada"
 
@@ -848,9 +839,8 @@ msgstr "Moderación (Heterogeneidad): %1$s"
 msgid "Moderation: %1$s"
 msgstr "Moderación: %1$s"
 
-#, fuzzy
 msgid "(coef ...)"
-msgstr "(coef: %1$s)"
+msgstr "(coef ...)"
 
 msgid "Moderation effect size%1$s"
 msgstr "Magnitud %1$s del efecto de moderación"
@@ -871,7 +861,7 @@ msgid "%s%% PI"
 msgstr "IP del %s%%"
 
 msgid "Subgroup"
-msgstr ""
+msgstr "Subgrupo"
 
 msgid "Fixed effects tested using z-distribution."
 msgstr "Efectos fijos contrastados usando la distribución z."
@@ -901,17 +891,15 @@ msgstr "%1$i conglomerados con %2$i estimaciones cada uno."
 msgid "%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates."
 msgstr "%1$i conglomerados con estimaciones %2$i/%3$i/%4$i de mín/mediana/máx."
 
-#, fuzzy
 msgid "%1$s: %2$i observations were ommited due to missing values."
-msgstr "%1$i observaciones fueron omitidas debido a valores que faltan."
+msgstr "%1$s: %2$i observaciones fueron omitidas debido a valores que faltan."
 
-#, fuzzy
 msgid "%1$s: %2$i clusters with %3$i estimates each."
-msgstr "%1$i conglomerados con %2$i estimaciones cada uno."
+msgstr "%1$s: %2$i conglomerados con %3$i estimaciones cada uno."
 
-#, fuzzy
 msgid "%1$s: %2$i clusters with min/median/max %3$i/%4$i/%5$i estimates."
-msgstr "%1$i conglomerados con estimaciones %2$i/%3$i/%4$i de mín/mediana/máx."
+msgstr ""
+"%1$s: %2$i conglomerados con estimaciones %3$i/%4$i/%5$i de mín/mediana/máx."
 
 msgid ""
 "NAs in the pooled effect size were introduced due to the %1$s "
@@ -959,16 +947,15 @@ msgid ""
 "Each marginal mean estimate is averaged across the levels of the remaining "
 "predictors."
 msgstr ""
-"Cada estimación media marginal se promedia entre los niveles de los "
+"Cada estimación de la media marginal se promedia entre los niveles de los "
 "predictores que quedan."
 
-#, fuzzy
 msgid ""
 "Each marginal mean estimate is averaged across the levels of the remaining "
 "predictors in a given subgroup."
 msgstr ""
-"Cada estimación media marginal se promedia entre los niveles de los "
-"predictores que quedan."
+"Cada estimación de la media marginal se promedia entre los niveles de los "
+"predictores que quedan en un subgrupo dado."
 
 msgid ""
 "NAs in the marginal mean estimatess were introduced due to the %1$s "
@@ -1033,39 +1020,36 @@ msgstr ""
 "plantéese simplificar el modelo."
 
 msgid "Fewer than two estimates."
-msgstr ""
+msgstr "Menos de dos estimaciones."
 
 msgid "Subgroup %1$s:"
-msgstr ""
+msgstr "Subgrupo %1$s:"
 
-#, fuzzy
 msgid ""
 "%1$sThe term %2$s was completely removed from the model. Possible causes are "
 "missing values, collinear predictors, or missing crossed cells in an "
 "interaction term."
 msgstr ""
-"El término %1$s se eliminó completamente del modelo. Las causas posibles "
-"son: valores ausentes predictores con multicolinealidad o celdas cruzadas "
+"%1$sEl término %2$s se eliminó completamente del modelo. Las causas posibles "
+"son: valores ausentes, predictores con multicolinealidad o celdas cruzadas "
 "ausentes en un término de interacción."
 
-#, fuzzy
 msgid ""
 "%1$sThe term %2$s was partilly removed (%3$i/%4$i coefficients) from the "
 "model. Possible causes are missing values, collinear predictors, or missing "
 "crossed cells in an interaction term."
 msgstr ""
-"El término %1$s se eliminó parcialmente (coeficientes %2$i/%3$i) del modelo. "
-"Las causas posibles son: valores ausentes predictores con multicolinealidad "
-"o celdas cruzadas ausentes en un término de interacción."
+"%1$sEl término %2$s se eliminó parcialmente (coeficientes %3$i/%4$i) del "
+"modelo. Las causas posibles son: valores ausentes, predictores con "
+"multicolinealidad o celdas cruzadas ausentes en un término de interacción."
 
-#, fuzzy
 msgid ""
 "%1$sThe following coefficients were removed from the model: %2$s. Possible "
 "causes are missing values, collinear predictors, or missing crossed cells in "
 "an interaction term."
 msgstr ""
-"Los siguientes coeficientes se eliminaron del modelo: %1$s. Las causas "
-"posibles son: valores ausentes predictores con multicolinealidad o celdas "
+"%1$sLos siguientes coeficientes se eliminaron del modelo: %2$s. Las causas "
+"posibles son: valores ausentes, predictores con multicolinealidad o celdas "
 "cruzadas ausentes en un término de interacción."
 
 msgid "Error reading the distance matrix file: %1$s"
@@ -1152,17 +1136,17 @@ msgid "Testing Inclusion of Random Effects / Model Structure"
 msgstr ""
 "Contrastando la inclusión de Efectos aleatorios / Estructura del modelo"
 
-#, fuzzy
 msgid "Subgroup %1$s: Testing Inclusion of Random Effects / Model Structure"
 msgstr ""
-"Contrastando la inclusión de Efectos aleatorios / Estructura del modelo"
+"Subgrupo %1$s: Contrastando la inclusión de Efectos aleatorios / Estructura "
+"del modelo"
 
 msgid "Testing Inclusion of Nested Random Effects: %1$s"
 msgstr "Contrastando la inclusión de Efectos aleatorios anidados: %1$s"
 
-#, fuzzy
 msgid "Subgroup %1$s: Testing Inclusion of Nested Random Effects: %2$s"
-msgstr "Contrastando la inclusión de Efectos aleatorios anidados: %1$s"
+msgstr ""
+"Subgrupo %1$s: Contrastando la inclusión de Efectos aleatorios anidados: %2$s"
 
 msgid "Random Slopes"
 msgstr "Pendientes aleatorias"
@@ -1260,7 +1244,7 @@ msgid "t-statistic"
 msgstr "Estadístico t"
 
 msgid "The %1$s test failed with the following error: %2$s"
-msgstr "El contraste %1$s se quebró con el siguiente fallo: %2$s"
+msgstr "El contraste %1$s fracasó con el siguiente fallo: %2$s"
 
 msgid "Funnel Plot Asymmetry Plots"
 msgstr "Gráficos de Asimetría de Gráficos en Embudo"
@@ -1334,7 +1318,7 @@ msgid "Pooled Estimate"
 msgstr "Estimación combinada"
 
 msgid "Full Dataset"
-msgstr ""
+msgstr "Conjunto completo de datos"
 
 msgid "Missing Data Summary"
 msgstr "Resumen de datos ausentes"
