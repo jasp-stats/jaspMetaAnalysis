@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.0\n"
-"POT-Creation-Date: 2025-04-26 02:52\n"
+"POT-Creation-Date: 2025-05-03 02:55\n"
 "PO-Revision-Date: 2024-09-05 15:09+0000\n"
 "Last-Translator: Tomasz Misiuro <tomaszmisiuro@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
@@ -959,6 +959,65 @@ msgid ""
 msgstr ""
 
 msgid "Error reading the correlation matrix file: %1$s"
+msgstr ""
+
+msgid "Error reading the variance-covariance matrix file: %1$s"
+msgstr ""
+
+msgid ""
+"The variance-covariance matrix must be square. The number of rows (%1$i) "
+"does not match the number of columns (%2$i)."
+msgstr ""
+
+msgid ""
+"The variance-covariance matrix must match the dimensions of the data set. "
+"The number of the matrix rows/columns (%1$i) does not match the number of "
+"observations in the dataset (%2$i)."
+msgstr ""
+
+msgid "The supplied variance-covariance matrix is not positive definite."
+msgstr ""
+
+msgid "Error computing the variance-covariance matrix: %1$s"
+msgstr ""
+
+msgid "Please provide a file with the precomputed variance-covariance matrix."
+msgstr ""
+
+msgid "Please provide a clustering variable for the correlation matrix."
+msgstr ""
+
+msgid "Please provide correlation matrix variables."
+msgstr ""
+
+msgid ""
+"The value of the correlation between construct types is set to 0. This "
+"corresponds to no adjustment for dependency between construct types."
+msgstr ""
+
+msgid ""
+"Please provide a file with the correlation matrix for the construct types."
+msgstr ""
+
+msgid ""
+"The value of the correlation between construct types is set to 0. This "
+"corresponds to no adjustment for dependency between constructs."
+msgstr ""
+
+msgid "Please provide a file with the correlation matrix for the construct."
+msgstr ""
+
+msgid ""
+"The value of the correlation between time lags is set to 0. This corresponds "
+"to no adjustment for dependency between time lags."
+msgstr ""
+
+msgid ""
+"The 'Group Size' for specifying dependency due to common group comparison is "
+"unspecified. As default, the groups are assumed to be equal."
+msgstr ""
+
+msgid "Error writing the variance-covariance matrix file: %1$s"
 msgstr ""
 
 msgid "Random Effects / Model Stucture Summary"
