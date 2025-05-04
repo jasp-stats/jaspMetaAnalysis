@@ -126,24 +126,26 @@
 
   return(as.formula(formula, env = parent.frame(1)))
 }
-.maFitModel                      <- function(jaspResults, dataset, options, objectName = "fit", analysis = "ma") {
+.maFitModel                      <- function(jaspResults, dataset, options, objectName = "fit") {
 
   if (!.maReady(options) || !is.null(jaspResults[[objectName]]))
     return()
 
+  # dispatch fitting function & dependencies
+  if (options[["module"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate")) {
+    fittingFunction <- .maFitModelFun
+    dependencies    <- .maDependencies
+  } else if (options[["module"]] %in% c("NoBMA", "RoBMA")) {
+    fittingFunction <- .robmaFitModelFun
+    dependencies    <- .robmaDependencies
+  }
+
   # create the output container
   fitContainer <- createJaspState()
-  fitContainer$dependOn(.maDependencies)
+  fitContainer$dependOn(dependencies)
   jaspResults[[objectName]] <- fitContainer
 
   fitOutput <- list()
-
-  # dispatch fitting function
-  fittingFunction <- switch(
-    analysis,
-    "ma"    = .maFitModelFun,
-    "robma" = .robmaFitModelFun
-  )
 
   # full dataset fit
   startProgressbar(expectedTicks = 1, label = gettext("Estimating Meta-Analytic Model"))
@@ -324,7 +326,7 @@
     fitClustered   = fitClustered
   ))
 }
-.maUpdateFitModelDataset         <- function(jaspResults, dataset, options, objectName = "fit", analysis = "ma") {
+.maUpdateFitModelDataset         <- function(jaspResults, dataset, options, objectName = "fit") {
 
   # this function updates the data sets stored as attribute of the fit object if any of the additional variables changes
   # this is necessary for simplifying handling dataset in the forest plot etc...
@@ -343,7 +345,7 @@
   fitOutput <- jaspResults[[objectName]]$object
 
   # full dataset fit
-  fitOutput[["__fullDataset"]] <- .maUpdateFitModelDatasetFun(fitOutput[["__fullDataset"]], dataset, analysis = analysis)
+  fitOutput[["__fullDataset"]] <- .maUpdateFitModelDatasetFun(fitOutput[["__fullDataset"]], dataset, options)
 
   # add subgroup fits
   if (options[["subgroup"]] != "") {
@@ -363,7 +365,7 @@
       attr(subgroupData, "subgroupIndx") <- subgroupIndx
 
       # fit the model
-      fitOutput[[paste0("subgroup", subgroupLevel)]] <- .maUpdateFitModelDatasetFun(fitOutput[[paste0("subgroup", subgroupLevel)]], subgroupData, analysis = analysis)
+      fitOutput[[paste0("subgroup", subgroupLevel)]] <- .maUpdateFitModelDatasetFun(fitOutput[[paste0("subgroup", subgroupLevel)]], subgroupData, options)
     }
   }
 
@@ -376,7 +378,7 @@
   return()
 
 }
-.maUpdateFitModelDatasetFun      <- function(fitOutput, dataset, analysis = "ma") {
+.maUpdateFitModelDatasetFun      <- function(fitOutput, dataset, options) {
 
   if (!is.null(fitOutput[["fit"]])) {
     fit <- fitOutput[["fit"]]
@@ -385,7 +387,7 @@
     fit <- NULL
   }
 
-  if (analysis == "ma") {
+  if (options[["module"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate")) {
     if (!is.null(fitOutput[["fitClustered"]])) {
       fitClustered <- fitOutput[["fitClustered"]]
       attr(fitClustered, "dataset") <- dataset
@@ -397,7 +399,7 @@
       fit            = fit,
       fitClustered   = fitClustered
     ))
-  } else if (analysis == "robma") {
+  } else {
     return(list(
       fit            = fit
     ))
@@ -695,7 +697,7 @@
 
   fit <- .maExtractFit(jaspResults, options)
 
-  # residual heterogeneity table
+  # model tests table
   testsTable <- createJaspTable(gettext("Meta-Analytic Tests"))
   testsTable$position <- 1
   testsTable$dependOn(c("addOmnibusModeratorTestEffectSizeCoefficients", "addOmnibusModeratorTestEffectSizeCoefficientsValues",
@@ -768,7 +770,7 @@
   # add errors messages for failed fits
   for (i in seq_along(fit)[sapply(fit, jaspBase::isTryError)]) {
     testsTable$addFootnote(
-      gettextf("The model for the subgroup '%1$s' failed with the following error: %2$s",
+      gettextf("The model for subgroup '%1$s' failed with the following error: %2$s",
                attr(fit[[i]], "subgroup"),
                .maTryCleanErrorMessages(fit[[i]])),
       symbol = gettext("Error:")
@@ -975,7 +977,7 @@
     effectSize    = 3,
     heterogeneity = 4
   )
-  coefficientsTable$dependOn(c("metaregressionCoefficientEstimates", "confidenceIntervals", "includeFullDatasetInSubgroupAnalysis"))
+  coefficientsTable$dependOn(c("metaregressionCoefficientEstimates", "confidenceIntervals", "confidenceIntervalsLevel", "includeFullDatasetInSubgroupAnalysis"))
   metaregressionContainer[[paste0(parameter, "CoefficientTable")]] <- coefficientsTable
 
   coefficientsTable$addColumnInfo(name = "name",  type = "string", title = "")
@@ -1100,8 +1102,10 @@
   # .maGetEstimatedMarginalMeansAndContrastsOptions()
 
   # check whether the section should be created at all
-  isReadyEffectSize    <- length(options[["estimatedMarginalMeansEffectSizeSelectedVariables"]])    > 0 && (options[["estimatedMarginalMeansEffectSize"]]    || options[["contrastsEffectSize"]])
-  isReadyHeterogeneity <- length(options[["estimatedMarginalMeansHeterogeneitySelectedVariables"]]) > 0 && (options[["estimatedMarginalMeansHeterogeneity"]] || options[["contrastsHeterogeneity"]])
+  isReadyEffectSize    <- (length(options[["estimatedMarginalMeansEffectSizeSelectedVariables"]])    > 0 || options[["estimatedMarginalMeansEffectSizeAddAdjustedEstimate"]])    &&
+                          (options[["estimatedMarginalMeansEffectSize"]]    || options[["contrastsEffectSize"]])
+  isReadyHeterogeneity <- (length(options[["estimatedMarginalMeansHeterogeneitySelectedVariables"]]) > 0 || options[["estimatedMarginalMeansHeterogeneityAddAdjustedEstimate"]]) &&
+                          (options[["estimatedMarginalMeansHeterogeneity"]] || options[["contrastsHeterogeneity"]])
 
   if (!isReadyEffectSize && !isReadyHeterogeneity) {
     # remove section if exists
@@ -1126,7 +1130,7 @@
   if (isReadyEffectSize)
     .maEstimatedMarginalMeansAndContrastsFun(jaspResults, options, parameter = "effectSize")
 
-  if (isReadyEffectSize)
+  if (isReadyHeterogeneity)
     .maEstimatedMarginalMeansAndContrastsFun(jaspResults, options, parameter = "heterogeneity")
 
   return()
@@ -1152,7 +1156,10 @@
 
     # create the container meta-data
     tempMetaDataState <- createJaspState()
-    tempMetaDataState$dependOn(c("estimatedMarginalMeansEffectSize", "contrastsEffectSize"))
+    tempMetaDataState$dependOn(c(
+      if (parameter == "effectSize") c("estimatedMarginalMeansEffectSize", "contrastsEffectSize")
+      else if (parameter == "heterogeneity") c("estimatedMarginalMeansHeterogeneity", "contrastsHeterogeneity")
+    ))
     estimatedMarginalMeansAndContrastsContainer[[paste0(parameter, "MetaData")]] <- tempMetaDataState
     tempMetaData      <- list()
   }
@@ -1206,7 +1213,8 @@
     effectSize    = "estimatedMarginalMeansEffectSizeAddAdjustedEstimate",
     heterogeneity = "estimatedMarginalMeansHeterogeneityAddAdjustedEstimate"
   )
-  if (options[[adjustedEstimateOption]] && is.null(tempContainer[["adjustedEstimate"]]) && makeEstimatedMarginalMeans){
+
+  if (options[[adjustedEstimateOption]] && is.null(tempContainer[["adjustedEstimate"]][["estimatedMarginalMeansTable"]]) && makeEstimatedMarginalMeans){
     tempVariableContainer <- createJaspContainer(title = sprintf(
       "Adjusted Estimate%1$s",
       if (.maIsMetaregressionHeterogeneity(options)) switch(parameter, effectSize = gettext(" (Effect Size)"), heterogeneity = gettext(" (Heterogeneity)"))
@@ -1264,10 +1272,6 @@
     effectSize    = c("estimatedMarginalMeansEffectSize", "estimatedMarginalMeansEffectSizeSdFactorCovariates", "estimatedMarginalMeansEffectSizeTestAgainst",
                       "estimatedMarginalMeansEffectSizeTestAgainstValue", "transformEffectSize", "predictionIntervals"),
     heterogeneity = c("estimatedMarginalMeansHeterogeneity", "estimatedMarginalMeansHeterogeneityTransformation", "estimatedMarginalMeansHeterogeneitySdFactorCovariates")
-  ), if (selectedVariable == "") switch(
-    parameter,
-    effectSize    = "estimatedMarginalMeansEffectSizeAddAdjustedEstimate",
-    heterogeneity = "estimatedMarginalMeansHeterogeneityAddAdjustedEstimate"
   )))
   variableContainer[["estimatedMarginalMeansTable"]] <- estimatedMarginalMeansTable
 
@@ -2075,14 +2079,19 @@
     fitOutput <- fitOutput[names(fitOutput) != "__fullDataset"]
   }
 
-  fitOutputExtracted <- lapply(fitOutput, function(output){
-    # extract clustered model if specified
-    if (!.maIsClustered(options) || nonClustered) {
+  if (options[["module"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate")) {
+    fitOutputExtracted <- lapply(fitOutput, function(output){
+      if (!.maIsClustered(options) || nonClustered) {
+        return(output[["fit"]])
+      } else {
+        return((output)[["fitClustered"]])
+      }
+    })
+  } else if (options[["module"]] %in% c("NoBMA", "RoBMA")) {
+    fitOutputExtracted <- lapply(fitOutput, function(output){
       return(output[["fit"]])
-    } else {
-      return((output)[["fitClustered"]])
-    }
-  })
+    })
+  }
 
   return(fitOutputExtracted)
 }
@@ -2106,7 +2115,7 @@
 
   # create the output container
   metaregressionContainer <- createJaspContainer(gettext("Meta-Regression Summary"))
-  metaregressionContainer$dependOn(c(.maDependencies, "confidenceInterval"))
+  metaregressionContainer$dependOn(c(.maDependencies))
   metaregressionContainer$position <- 3
   jaspResults[["metaregressionContainer"]] <- metaregressionContainer
 
@@ -3996,8 +4005,8 @@
 
   return(sapply(varNames, function(varName){
 
-    if (varName == "intrcpt")
-      return("Intercept")
+    if (varName %in% c("intrcpt", "intercept"))
+      return(gettext("Intercept"))
 
     for (vn in variables) {
       inf <- regexpr(vn, varName, fixed = TRUE)
@@ -4855,6 +4864,17 @@
 
   messages <- NULL
 
+  if (.maIsMetaregressionEffectSize(options)) {
+    if (options[["module"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate")) {
+      effectSizeName <- gettext("pooled effect")
+    } else   if (options[["module"]] %in% c("RoBMA", "NoBMA")) {
+      effectSizeName <- gettext("adjusted effect")
+    }
+  } else {
+    effectSizeName <- gettext("pooled effect")
+  }
+
+
   if (options[["subgroup"]] == "") {
 
     tempFit     <- fit[[1]]
@@ -4863,7 +4883,7 @@
     if (attr(tempDataset, "NAs") > 0)
       messages <- c(messages, gettextf("%1$i observations were ommited due to missing values.", attr(tempDataset, "NAs")))
 
-    if (options[["clustering"]] != "") {
+    if (!is.null(options[["clustering"]]) && options[["clustering"]] != "") {
       if (!jaspBase::isTryError(tempFit) && !is.null(tempFit)){
         if (all(tempFit[["tcl"]][1] == tempFit[["tcl"]]))
           messages <- c(messages, gettextf("%1$i clusters with %2$i estimates each.", tempFit[["n"]],  tempFit[["tcl"]][1]))
@@ -4880,7 +4900,7 @@
       if (attr(tempDataset, "NAs") > 0)
         messages <- c(messages, gettextf("%1$s: %2$i observations were ommited due to missing values.", gettextf("Subgroup %1$s", attr(tempFit, "subgroup")), attr(tempDataset, "NAs")))
 
-      if (options[["clustering"]] != "") {
+      if (!is.null(options[["clustering"]]) && options[["clustering"]] != "") {
         if (!jaspBase::isTryError(tempFit) && !is.null(tempFit)) {
           if (all(tempFit[["tcl"]][1] == tempFit[["tcl"]]))
             messages <- c(messages, gettextf("%1$s: %2$i clusters with %3$i estimates each.", gettextf("Subgroup %1$s", attr(tempFit, "subgroup")), tempFit[["n"]],  tempFit[["tcl"]][1]))
@@ -4893,14 +4913,19 @@
 
   if (options[["transformEffectSize"]] != "none") {
     if (anyNA) {
-      messages <- c(messages, gettextf("NAs in the pooled effect size were introduced due to the %1$s transformation. Please verify that you are using the correct effect size transformation.", .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
+      messages <- c(messages, gettextf("NAs in the %1$s were introduced due to the %2$s transformation. Please verify that you are using the correct effect size transformation.", effectSizeName, .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
     } else {
-      messages <- c(messages, gettextf("The pooled effect size is transformed using %1$s transformation.", .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
+      messages <- c(messages, gettextf("The %1$s is transformed using %2$s transformation.", effectSizeName, .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
     }
   }
 
-  if (.maIsMetaregressionEffectSize(options))
-    messages <- c(messages, gettext("The pooled effect size corresponds to the weighted average effect across studies."))
+  if (.maIsMetaregressionEffectSize(options)) {
+    if (options[["module"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate")) {
+      messages <- c(messages, gettext("The pooled effect size corresponds to the weighted average effect across studies."))
+    } else   if (options[["module"]] %in% c("RoBMA", "NoBMA")) {
+      messages <- c(messages, gettext("The adjusted effect corresponds to the averaged effect size estimate across the levels of all moderators."))
+    }
+  }
 
   if (.maIsMetaregressionHeterogeneity(options))
     messages <- c(messages, gettext("The pooled heterogeneity estimate corresponds to the heterogeneity at the average of predictor values."))
@@ -4912,7 +4937,7 @@
     messages <- c(messages, gettextf("The Model Structure %1$s was not completely specified and was skipped.", paste0(which(attr(fit[[1]], "skipped")), collapse = " and ")))
 
   if (.mammAnyStructureGen(options) && options[["predictionIntervals"]])
-    messages <- c(messages, gettext("Prediction interval for the pooled effect size is not available for models with multiple heterogeneity estimates."))
+    messages <- c(messages, gettextf("Prediction interval for the %1$s is not available for models with multiple heterogeneity estimates.", effectSizeName))
 
   return(messages)
 }

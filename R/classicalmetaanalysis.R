@@ -172,11 +172,30 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 )
 .maReady               <- function(options) {
 
-  inputReady <- options[["effectSize"]] != "" && options[["effectSizeStandardError"]] != ""
-  termsEffectSizeReady    <- length(options[["effectSizeModelTerms"]]) > 0    || options[["effectSizeModelIncludeIntercept"]]
-  termsHeterogeneityReady <- length(options[["heterogeneityModelTerms"]]) > 0 || options[["heterogeneityModelIncludeIntercept"]]
+  if (options[["module"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate")) {
 
-  return(inputReady && termsEffectSizeReady && termsHeterogeneityReady)
+    # data
+    inputReady <- options[["effectSize"]] != "" && options[["effectSizeStandardError"]] != ""
+
+    # model
+    termsEffectSizeReady    <- length(options[["effectSizeModelTerms"]]) > 0    || options[["effectSizeModelIncludeIntercept"]]
+    termsHeterogeneityReady <- length(options[["heterogeneityModelTerms"]]) > 0 || options[["heterogeneityModelIncludeIntercept"]]
+
+    return(inputReady && termsEffectSizeReady && termsHeterogeneityReady)
+
+  } else if (options[["module"]] %in% c("NoBMA", "RoBMA")) {
+
+    # data
+    inputReady <- options[["effectSize"]] != "" && options[["effectSizeStandardError"]] != ""
+return(inputReady)
+    # TODO: unblock once priors are fixed
+    # effect & heterogeneity priors ready
+    priorsEffectReady        <- length(options[["modelsEffectNull"]]) > 0        || length(options[["modelsEffect"]]) > 0
+    priorsHeterogeneityReady <- length(options[["modelsHeterogeneityNull"]]) > 0 || length(options[["modelsHeterogeneity"]]) > 0
+
+    return(inputReady && priorsEffectReady && priorsHeterogeneityReady)
+
+  }
 }
 .maCheckData           <- function(dataset, options) {
 

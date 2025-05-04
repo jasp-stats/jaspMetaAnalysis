@@ -26,30 +26,12 @@ Section
 	// BiBMA: Binomial Bayesian Meta-Analysis
 	// NoBMA: Normal Bayesian Meta-Analysis
 
-	property bool measuresGeneralChecked:	false
-	property bool measuresFittedChecked:		false
-
 	title: 				qsTr("Advanced")
 	columns: 			2
-	enabled:			!measuresFittedChecked
-	onEnabledChanged:	if(!enabled) expanded = false
+
 	
 	Group
 	{
-		rowSpacing: 10 * preferencesModel.uiScale
-
-		DropDown
-		{
-			name:		"advancedEstimationScale"
-			label:		qsTr("Estimation scale")
-			visible:	!measuresGeneralChecked && analysisType === "RoBMA"
-			values: [
-				{ label: qsTr("Fisher's z"),		value: "fishersZ"},
-				{ label: qsTr("Cohen's d"),			value: "cohensD"},
-				{ label: qsTr("logOR"),				value: "logOr"}
-			]
-		}
-
 		Group
 		{
 			title: 		qsTr("MCMC")
@@ -58,7 +40,7 @@ Section
 			{
 				name:			"advancedMcmcAdaptation"
 				label:			qsTr("Adaptation")
-				defaultValue:	5000
+				defaultValue:	2000 + 1000 * predictors.count
 				min:			100
 				fieldWidth:		55 * preferencesModel.uiScale
 			}
@@ -66,7 +48,7 @@ Section
 			{
 				name:			"advancedMcmcBurnin"
 				label:			qsTr("Burnin")
-				defaultValue:	5000
+				defaultValue:	2000 + 2000 * predictors.count
 				min:			100
 				fieldWidth:		55 * preferencesModel.uiScale
 			}
@@ -74,7 +56,7 @@ Section
 			{
 				name:			"advancedMcmcSamples"
 				label:			qsTr("Samples")
-				defaultValue:	10000
+				defaultValue:	5000 + 2500 * predictors.count
 				min:			100
 				fieldWidth:		55 * preferencesModel.uiScale
 			}
@@ -108,7 +90,7 @@ Section
 		{
 			label:			qsTr("Autofit")
 			name:			"autofit"
-			checked:		true
+			checked:		false
 
 			CheckBox
 			{
@@ -219,7 +201,7 @@ Section
 
 	Group
 	{
-		Layout.columnSpan:	2
+//		Layout.columnSpan:	2
 		
 		FileSelector
 		{
@@ -242,4 +224,32 @@ Section
 			info:				qsTr("Save the fitted model to a file. This will allow you to load the fitted model in a later session.")
 		}
 	}
+
+	Group
+	{
+		CheckBox
+		{
+			name:		"showMetaforRCode"
+			text:		qsTr("Show metafor R code")
+			Layout.preferredWidth: 300 * jaspTheme.uiScale
+			info: qsTr("Display the underlying R code used by the metafor package to fit the model.")
+		}
+
+		CheckBox
+		{
+			name:		"includeFullDatasetInSubgroupAnalysis"
+			text:		qsTr("Include full dataset in subgroup analysis")
+			enabled:	subgroup.count == 1
+			checked:	false
+			info: qsTr("Include the full dataset output in the subgroup analysis. This option is only available when the subgroup analysis is selected.")
+		}
+
+		CheckBox
+		{
+			label:		qsTr("Shorten prior names")
+			name:		"shortenPriorName"
+			info: qsTr("Shorten the prior names in the output.")
+		}
+	}
+
 }

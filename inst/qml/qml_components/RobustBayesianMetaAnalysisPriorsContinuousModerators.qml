@@ -24,6 +24,7 @@ ColumnLayout
 {
 	spacing: 						0
 	property string componentType:	"Default type"
+	property string analysisType:	"normal"
 
 	Label
 	{
@@ -41,8 +42,8 @@ ColumnLayout
 		implicitWidth:	parent.width
 		implicitHeight: priorLabel.implicitHeight
 		Label { text: qsTr("Prior weights");	anchors.right: parent.right; id: priorLabel	}
-		Label { text: qsTr("Max");				anchors.right: parent.right; anchors.rightMargin: 127 * preferencesModel.uiScale - implicitWidth}
-		Label { text: qsTr("Min");				anchors.right: parent.right; anchors.rightMargin: 174 * preferencesModel.uiScale - implicitWidth}
+		Label { text: qsTr("Lower");			anchors.right: parent.right; anchors.rightMargin: 127 * preferencesModel.uiScale - implicitWidth}
+		Label { text: qsTr("Upper");			anchors.right: parent.right; anchors.rightMargin: 174 * preferencesModel.uiScale - implicitWidth}
 		Label { text: qsTr("Parameters");		anchors.right: parent.right; anchors.rightMargin: 350 * preferencesModel.uiScale - implicitWidth}
 		Label { text: qsTr("Distribution");		anchors.right: parent.right; anchors.rightMargin: 460 * preferencesModel.uiScale - implicitWidth}
 	}
@@ -96,6 +97,7 @@ ColumnLayout
 					useExternalBorder:	false
 					showBorder:			true
 				}
+
 				FormulaField
 				{
 					id:					truncationUpper
@@ -103,13 +105,17 @@ ColumnLayout
 					visible:			typeItem.currentValue !== "spike" && typeItem.currentValue !== "uniform"
 					value:
 					{
-						if (typeItem.currentValue === "beta")	1
-						else									"Inf"
+						if (typeItem.currentValue === "beta")
+							1
+						else
+							"Inf"
 					}
 					max:
 					{
-						if (typeItem.currentValue === "beta")	1
-						else									"Inf"
+						if (typeItem.currentValue === "beta")
+							1
+						else
+							"Inf"
 					}
 					min: 				truncationLower ? truncationLower.value : 0
 					inclusive: 			JASP.MaxOnly
@@ -117,6 +123,7 @@ ColumnLayout
 					useExternalBorder:	false
 					showBorder:			true
 				}
+
 			}
 
 			Row

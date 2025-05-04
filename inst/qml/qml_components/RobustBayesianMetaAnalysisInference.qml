@@ -69,8 +69,6 @@ Section
 		}
 	}
 
-	BayesFactorType {}
-
 	Group
 	{
 		title:		qsTr("Meta-Regression")
@@ -90,33 +88,15 @@ Section
 			name:		"metaregressionCoefficientEstimates"
 			text:		qsTr("Coefficient estimates")
 			checked:	true
-			info: qsTr("Include estimates of the regression coefficients in the meta-regression model.")
-		}
-	}
-
-	Group
-	{
-		title:		qsTr("Publication Bias Adjustment")
-		enabled:	publicationBiasAdjustment.value != "none"
-		visible:	analysisType === "RoBMA"
-		info: qsTr("Create summaries of the publication bias adjustment. Available when publication bias adjustment is specified.")
-
-		CheckBox
-		{
-			enabled:	publicationBiasAdjustment.value != "PP"
-			name:		"publicationBiasAdjustmentWeightfunctionEstimates"
-			text:		qsTr("Weight function estimates")
-			checked:	true
-			info: qsTr("Include estimates of the weight function parameters in the publication bias adjustment model.")
+			info: qsTr("Include estimates of the regression coefficients in the meta-regression model. Note that the regression coefficients are not standardized and correspond to the scale of the prior distribution (the RoBMA R package provides only standardized regression coefficients).")
 		}
 
 		CheckBox
 		{
-			enabled:	publicationBiasAdjustment.value != "original"
-			name:		"publicationBiasAdjustmentPetPeeseEstimates"
-			text:		qsTr("PET-PEESE estimates")
-			checked:	true
-			info: qsTr("Include estimates of the PET-PEESE parameters in the publication bias adjustment model.")
+			name:		"metaregressionStandardizedCoefficientEstimates"
+			text:		qsTr("Standardized coefficient estimates")
+			checked:	false
+			info: qsTr("Include estimates of the standardized regression coefficients in the meta-regression model. The standardized regression coefficients are the regression coefficients divided by the standard deviation of the predictor variable and correspond to the scale of prior distribution (there is no difference between standardized and non-standardized regression coefficients for categorical moderators).")
 		}
 	}
 
@@ -124,11 +104,12 @@ Section
 	{
 		CheckBox
 		{
+			// the name is 'confidenceIntervals' rather then 'credibleIntervals' for reusing the standard MA code`
 			name:				"confidenceIntervals"
-			text:				qsTr("Confidence intervals")
+			text:				qsTr("Credible intervals")
 			checked:			true
 			childrenOnSameRow:	true
-			info: qsTr("Include confidence intervals in the tabular output.")
+			info: qsTr("Include credible intervals in the tabular output.")
 
 			CIField
 			{
@@ -158,7 +139,7 @@ Section
 			setLabelAbove:	true
 			info: qsTr("Select a transformation to apply to the effect size estimates in the output. This transformation applies to the 'Meta-Analytic Estimates Table', 'Estimated Marginal Means Table', 'Forest Plot', and  the 'Bubble Plot'. The 'Meta-Regression Coeffient Estimates' are not transformed.")
 			values:			
-				if (effectSizeMeasure.value === "smd")
+				if (effectSizeMeasure.value === "SMD")
 				[
 					{ label: qsTr("None")								, value: "none"							},  // NULL				
 					{ label: qsTr("SMD to log odds (normal)")			, value: "smdToLogOddsNormal"			},  // transf.dtolnor.norm
@@ -210,12 +191,35 @@ Section
 					{ label: qsTr("SMD to CLES, Pr(supperiority)")		, value: "smdToCles"					}  // transf.dtocles
 				]
 		}
+	}
+
+
+	Group
+	{
+		title:		qsTr("Publication Bias Adjustment")
+		enabled:	publicationBiasAdjustment.value != "none"
+		visible:	analysisType === "RoBMA"
+		info: qsTr("Create summaries of the publication bias adjustment. Available when publication bias adjustment is specified.")
 
 		CheckBox
 		{
-			label:		qsTr("Shorten prior names")
-			name:		"shortenPriorName"
+			enabled:	publicationBiasAdjustment.value != "PP"
+			name:		"publicationBiasAdjustmentWeightfunctionEstimates"
+			text:		qsTr("Weight function estimates")
+			checked:	false
+			info: qsTr("Include estimates of the weight function parameters in the publication bias adjustment model.")
+		}
+
+		CheckBox
+		{
+			enabled:	publicationBiasAdjustment.value != "original"
+			name:		"publicationBiasAdjustmentPetPeeseEstimates"
+			text:		qsTr("PET-PEESE estimates")
+			checked:	false
+			info: qsTr("Include estimates of the PET-PEESE parameters in the publication bias adjustment model.")
 		}
 	}
+
+	BayesFactorType {}
 }
 

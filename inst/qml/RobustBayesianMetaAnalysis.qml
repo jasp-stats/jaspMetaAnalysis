@@ -217,7 +217,7 @@ Form
 			name:		"showModelSpecification"
 			label:		qsTr("Show model specification")
 			info:		qsTr("Show the model specification. This is useful for understanding and reporting the specified model.")
-			checked:	true
+			checked:	false
 		}
 	}
 
@@ -226,7 +226,7 @@ Form
 	{
 		analysisType:	"RoBMA"
 	}
-
+/*
 	//// Priors Section ////
 	Section
 	{
@@ -354,7 +354,7 @@ Form
 			analysisType:			"normal"
 		}
 	}
-
+*/
 	//// Inference Section ////
 	MA.RobustBayesianMetaAnalysisInference
 	{

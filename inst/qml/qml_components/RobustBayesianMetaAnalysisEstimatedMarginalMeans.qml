@@ -75,28 +75,12 @@ Section
 					info: qsTr("Include the adjusted effect estimate, which accounts for the moderators in the meta-regression model. This provides the effect size adjusted for the influence of moderators, as opposed to the pooled effect which combines the estimates across all studies.")
 				}
 
-				DoubleField
-				{
-					name:			"estimatedMarginalMeansEffectSizeSdFactorCovariates"
-					label:			qsTr("SD factor covariates")
-					defaultValue: 	1
-					min:			0
-					enabled:		estimatedMarginalMeansEffectSizeSelectedVariables.columnsTypes.includes("scale")
-					info: qsTr("Standard deviation factor for covariates when computing estimated marginal means; applies to scale variables.")
-				}
-
 				CheckBox
 				{
-					name:				"estimatedMarginalMeansEffectSizeTestAgainst"
-					label:				qsTr("Test against")
+					name:				"estimatedMarginalMeansEffectSizeTestAgainst0"
+					label:				qsTr("Test against 0")
 					childrenOnSameRow:	true
-					info: qsTr("Option to test the estimated marginal means against a specific value.")
-
-					DoubleField
-					{
-						name:			"estimatedMarginalMeansEffectSizeTestAgainstValue"
-						defaultValue:	0
-					}
+					info: qsTr("Option to test the estimated marginal means against 0.")
 				}
 			}
 		}
