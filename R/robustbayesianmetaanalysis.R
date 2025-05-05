@@ -176,7 +176,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
 }
 
 .robmaDependencies <- c(
-  "effectSize", "effectSizeStandardError", "predictors", "predictors.types", "subgroup", "effectSizeMeasure",
+  "effectSize", "effectSizeStandardError", "predictors", "predictors.types", "studyLevelMultilevel", "subgroup", "effectSizeMeasure",
   "effectSizeModelTerms", "effectSizeModelIncludeIntercept",
   "bayesianModelAveragingEffectSize", "bayesianModelAveragingHeterogeneity", "bayesianModelAveragingModerations", "bayesianModelAveragingPublicationBias",
   "priorDistributionsEffectSizeAndHeterogeneity", "priorDistributionsScale", "publicationBiasAdjustment", "modelExpectedDirectionOfTheEffect",
@@ -240,6 +240,10 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
       "y"
     )
   }
+
+  # add 3rd level
+  if (options[["studyLevelMultilevel"]] != "")
+    fitCall$study_id <- dataset[, options[["studyLevelMultilevel"]]]
 
   # add prior settings
   fitCall$prior_scale <- switch(
@@ -793,12 +797,14 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   options[["heterogeneityH2"]]     <- parameter == "H2"
 
   out <- .robmaRowPooledEstimates(fit, options, conditional)
-
-  if (parameter == "effect") {
-    out <- out[ 1,,drop = FALSE]
-  } else {
-    out <- out[-1,,drop = FALSE]
-  }
+  out <- out[rownames(out) == switch(
+    parameter,
+    "effect" = "effectSize",
+    "tau"    = "heterogeneityTau",
+    "tau2"   = "heterogeneityTau2",
+    "I2"     = "heterogeneityI2",
+    "H2"     = "heterogeneityH2"
+  ),,drop = FALSE]
 
   return(sprintf(paste0(
     "%1$s  = ",
@@ -947,6 +953,9 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     BF01  = options[["bayesFactorType"]] == "BF01"
   )[["components"]]
 
+  # remove hierarchical if exists
+  fitSummary <- fitSummary[!grepl("Hierarchical", rownames(fitSummary)),, drop = FALSE]
+
   row <- data.frame(
     subgroup  = attr(fit, "subgroup"),
     test      = sapply(rownames(fitSummary), .robmaComponentNames, options = options),
@@ -985,6 +994,20 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
       lCi    = hetSummary["tau", 3],
       uCi    = hetSummary["tau", 4]
     )
+  if (options[["heterogeneityTau"]] && options[["studyLevelMultilevel"]] != "") {
+    effSummary <- summary(
+      fit,
+      conditional = conditional,
+      probs       = c(.5 + c(-1, 1) * options[["confidenceIntervalsLevel"]] / 2)
+    )[[if (conditional) "estimates_conditional" else "estimates"]]
+    tempRows[["heterogeneityRho"]] <- data.frame(
+      par    = "\U03C1",
+      mean   = effSummary["rho", "Mean"],
+      median = effSummary["rho", "Median"],
+      lCi    = effSummary["rho", 3],
+      uCi    = effSummary["rho", 4]
+    )
+  }
   if (options[["heterogeneityTau2"]])
     tempRows[["heterogeneityTau2"]] <- data.frame(
       par    = "\U1D70F\U00B2",

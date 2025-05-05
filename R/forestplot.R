@@ -1159,7 +1159,7 @@
   additionalInformation <- list()
   additionalObjects     <- list()
 
-  if (options[["forestPlotResidualHeterogeneityTest"]]) {
+  if (options[["forestPlotHeterogeneityTest"]]) {
     additionalInformation[[tempRow]] <- data.frame(
       "label" = if (.maIsClassical(options)) .maPrintQTest(fit) else .robmaPrintTest(fit, options, "heterogeneity"),
       "y"     = tempRow,

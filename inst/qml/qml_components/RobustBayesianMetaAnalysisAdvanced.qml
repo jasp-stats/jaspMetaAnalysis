@@ -25,11 +25,52 @@ Section
 	// RoBMA: Robust Bayesian Meta-Analsis
 	// BiBMA: Binomial Bayesian Meta-Analysis
 	// NoBMA: Normal Bayesian Meta-Analysis
+	
+	property alias enableStudyLevelNesting:			enableStudyLevelNesting
 
 	title: 				qsTr("Advanced")
 	columns: 			2
 
 	
+	Group
+	{
+
+		Group
+		{
+			CheckBox
+			{
+				name:		"showRoBMARCode"
+				text:		qsTr("Show RoBMA R code")
+				info: qsTr("Display the underlying R code used by the RoBMA package to fit the model.")
+			}
+
+			CheckBox
+			{
+				name:		"includeFullDatasetInSubgroupAnalysis"
+				text:		qsTr("Include full dataset in subgroup analysis")
+				enabled:	subgroup.count == 1
+				checked:	false
+				info: qsTr("Include the full dataset output in the subgroup analysis. This option is only available when the subgroup analysis is selected.")
+			}
+
+			CheckBox
+			{
+				label:		qsTr("Shorten prior names")
+				name:		"shortenPriorName"
+				info: qsTr("Shorten the prior names in the output.")
+			}
+
+			CheckBox
+			{
+				label:		qsTr("Enable study-level nesting")
+				name:		"enableStudyLevelNesting"
+				id:			enableStudyLevelNesting
+				visible:	analysisType === "RoBMA"
+				info: qsTr("Enables study level nesting. Note that this is an experimental feature.")
+			}
+		}
+	}
+
 	Group
 	{
 		Group
@@ -199,10 +240,9 @@ Section
 
 	}
 
+/* TODO: one needs to figure out how to add moderator names to the option list when importing a model 
 	Group
-	{
-//		Layout.columnSpan:	2
-		
+	{	
 		FileSelector
 		{
 			name:				"pathToFittedModel"
@@ -224,32 +264,6 @@ Section
 			info:				qsTr("Save the fitted model to a file. This will allow you to load the fitted model in a later session.")
 		}
 	}
-
-	Group
-	{
-		CheckBox
-		{
-			name:		"showMetaforRCode"
-			text:		qsTr("Show metafor R code")
-			Layout.preferredWidth: 300 * jaspTheme.uiScale
-			info: qsTr("Display the underlying R code used by the metafor package to fit the model.")
-		}
-
-		CheckBox
-		{
-			name:		"includeFullDatasetInSubgroupAnalysis"
-			text:		qsTr("Include full dataset in subgroup analysis")
-			enabled:	subgroup.count == 1
-			checked:	false
-			info: qsTr("Include the full dataset output in the subgroup analysis. This option is only available when the subgroup analysis is selected.")
-		}
-
-		CheckBox
-		{
-			label:		qsTr("Shorten prior names")
-			name:		"shortenPriorName"
-			info: qsTr("Shorten the prior names in the output.")
-		}
-	}
+*/
 
 }

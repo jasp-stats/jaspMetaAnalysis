@@ -345,9 +345,7 @@
   fitOutput <- jaspResults[[objectName]]$object
 
   # full dataset fit
-  saveRDS(  fitOutput[["__fullDataset"]], file = "C:/JASP-Packages/fit0.RDS")
   fitOutput[["__fullDataset"]] <- .maUpdateFitModelDatasetFun(fitOutput[["__fullDataset"]], dataset, options)
-  saveRDS(  fitOutput[["__fullDataset"]], file = "C:/JASP-Packages/fit1.RDS")
   # add subgroup fits
   if (options[["subgroup"]] != "") {
 

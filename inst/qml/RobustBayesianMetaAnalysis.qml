@@ -26,7 +26,8 @@ Form
 
 	VariablesForm
 	{
-		preferredHeight: 425 * preferencesModel.uiScale
+		preferredHeight:	(sectionAdvanced.enableStudyLevelNesting.checked ? 450 : 425) * preferencesModel.uiScale
+		removeInvisibles:	true
 
 		AvailableVariablesList
 		{
@@ -77,6 +78,19 @@ Form
 			allowedColumns:		["nominal", "scale"]
 			allowTypeChange:	true
 			info: qsTr("Variables to include as predictors (moderators) in the meta-regression model. See the 'Model' section for the meta-regression specification details.")
+		}
+
+
+		AssignedVariablesList
+		{
+			name:				"studyLevelMultilevel"
+			title:				qsTr("Study Level (Multilevel)")
+			singleVariable:		true
+			allowedColumns:		["nominal"]
+			visible:			 sectionAdvanced.enableStudyLevelNesting.checked
+			property bool active:	sectionAdvanced.enableStudyLevelNesting.checked
+			onActiveChanged: 		if (!active && count > 0) itemDoubleClicked(0)
+			info: qsTr("Variable indicating the study level nesting. This variable is used to specify the nesting of the studies in the meta-analysis. The nesting is used to specify the model structure and to account for the correlation between the effect sizes within each study. Note that this is an experimental feature that needs to be manually enabled in the 'Advanced' section.")
 		}
 
 		AssignedVariablesList
@@ -396,6 +410,7 @@ Form
 	MA.RobustBayesianMetaAnalysisAdvanced
 	{
 		analysisType:	"RoBMA"
+		id:				sectionAdvanced
 	}
 
 }

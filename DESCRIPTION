@@ -37,7 +37,8 @@ Imports:
   patchwork
 Remotes:
   jasp-stats/jaspBase,
-  jasp-stats/jaspGraphs
+  jasp-stats/jaspGraphs,
+  FBartos/RoBMA@3lvl
 Depends: 
     R (>= 2.10)
 LazyData: true

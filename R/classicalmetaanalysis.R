@@ -211,6 +211,7 @@ return(inputReady)
     options[["effectSize"]],
     options[["effectSizeStandardError"]],
     if (length(options[["clustering"]]) > 0 && options[["clustering"]] != "") options[["clustering"]],
+    if (length(options[["studyLevelMultilevel"]]) > 0 && options[["studyLevelMultilevel"]] != "") options[["studyLevelMultilevel"]],
     if (length(options[["subgroup"]])   > 0 && options[["subgroup"]]   != "") options[["subgroup"]],
     if (length(predictorsNominal)       > 0) predictorsNominal,
     if (length(predictorsScale)         > 0) predictorsScale

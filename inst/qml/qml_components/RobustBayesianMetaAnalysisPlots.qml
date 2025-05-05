@@ -46,7 +46,7 @@ Section
 		{
 			label:		qsTr("Moderation")
 			name:		"priorAndPosteriorPlotModeration"
-			enabled:	predictors.count > 0
+			enabled:	sectionModel.effectSizeModelTermsCount > 0
 
 			CheckBox
 			{

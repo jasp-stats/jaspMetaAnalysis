@@ -343,7 +343,7 @@ Section
 
 			CheckBox
 			{
-				name:		"forestPlotResidualHeterogeneityTest"
+				name:		"forestPlotHeterogeneityTest"
 				text:		qsTr("Test")
 				checked:	true
 				info: qsTr("Include the test of the residual heterogeneity in the model information section.")

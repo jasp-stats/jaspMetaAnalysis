@@ -54,7 +54,7 @@ Section
 		{
 			label:		qsTr("Moderation")
 			name:		"mcmcDiagnosticsPlotModeration"
-			enabled:	predictors.count > 0
+			enabled:	sectionModel.effectSizeModelTermsCount > 0
 		}
 
 		CheckBox
