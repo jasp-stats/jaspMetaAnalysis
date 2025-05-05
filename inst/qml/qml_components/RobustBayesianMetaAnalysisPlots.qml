@@ -32,20 +32,28 @@ Section
 
 		CheckBox
 		{
-			label:	qsTr("Effect size")
-			name:	"priorAndPosteriorPlotEffectSize"
+			label:		qsTr("Effect size")
+			name:		"priorAndPosteriorPlotEffectSize"
 		}
 
 		CheckBox
 		{
-			label:	qsTr("Heterogeneity")
-			name:	"priorAndPosteriorPlotHeterogeneity"
+			label:		qsTr("Heterogeneity")
+			name:		"priorAndPosteriorPlotHeterogeneity"
 		}
 
 		CheckBox
 		{
-			label:	qsTr("Moderation")
-			name:	"priorAndPosteriorPlotModeration"
+			label:		qsTr("Moderation")
+			name:		"priorAndPosteriorPlotModeration"
+			enabled:	predictors.count > 0
+
+			CheckBox
+			{
+				name:		"priorAndPosteriorPlotModerationEstimatedMarginalMeans"
+				text:		qsTr("Estimated marginal means")
+				checked:	false
+			}
 		}
 
 		CheckBox
