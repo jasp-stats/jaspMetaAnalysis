@@ -139,8 +139,16 @@ Section
 			enabled:		effectSizeMeasure.value !== "RD"
 			setLabelAbove:	true
 			info: qsTr("Select a transformation to apply to the effect size estimates in the output. This transformation applies to the 'Meta-Analytic Estimates Table', 'Estimated Marginal Means Table', 'Forest Plot', and  the 'Bubble Plot'. The 'Meta-Regression Coeffient Estimates' are not transformed.")
-			values:			
-				if (effectSizeMeasure.value === "SMD")
+			values:		
+				if (analysisType == "BiBMA") // treat as: effectSizeMeasure.value === "logOR"
+				[
+					{ label: qsTr("None")								, value: "none"							},  // NULL
+					{ label: qsTr("Exponential")						, value: "exponential"					},  // exp
+					{ label: qsTr("Log odds to proportions")			, value: "logOddsToProportions"			},  // transf.logit
+					{ label: qsTr("Log odds to SMD (normal)")			, value: "logOddsToSmdNormal"			},  // transf.lnortod.norm
+					{ label: qsTr("Log odds to SMD (logistic)")			, value: "logOddsToSmdLogistic"			}   // transf.lnortod.logis
+				]	
+				else if (effectSizeMeasure.value === "SMD")
 				[
 					{ label: qsTr("None")								, value: "none"							},  // NULL				
 					{ label: qsTr("SMD to log odds (normal)")			, value: "smdToLogOddsNormal"			},  // transf.dtolnor.norm

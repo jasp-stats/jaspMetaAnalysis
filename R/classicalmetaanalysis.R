@@ -189,8 +189,14 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   } else {
 
     # data
-    inputReady <- options[["effectSize"]] != "" && options[["effectSizeStandardError"]] != ""
-return(inputReady)
+    if (options[["module"]] %in% c("RoBMA", "NoBMA")) {
+      inputReady <- options[["effectSize"]] != "" && options[["effectSizeStandardError"]] != ""
+    } else if (options[["module"]] == "BiBMA") {
+      inputReady <- options[["successesGroup1"]] != "" && options[["successesGroup2"]] != "" &&
+        options[["observationsGroup1"]] != "" && options[["observationsGroup2"]] != ""
+    }
+
+    return(inputReady)
     # TODO: unblock once priors are fixed
     # effect & heterogeneity priors ready
     priorsEffectReady        <- length(options[["modelsEffectNull"]]) > 0        || length(options[["modelsEffect"]]) > 0

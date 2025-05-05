@@ -109,7 +109,8 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 }
 
 .robmaDependencies <- c(
-  "effectSize", "effectSizeStandardError", "predictors", "predictors.types", "studyLevelMultilevel", "subgroup", "effectSizeMeasure",
+  "effectSize", "effectSizeStandardError", "predictors", "predictors.types", "studyLevelMultilevel", "subgroup", "effectSizeMeasure",  # RoBMA / NoBMA
+  "successesGroup1", "successesGroup2", "observationsGroup1", "observationsGroup2",                                                    # BiBMA
   "effectSizeModelTerms", "effectSizeModelIncludeIntercept",
   "bayesianModelAveragingEffectSize", "bayesianModelAveragingHeterogeneity", "bayesianModelAveragingModerations", "bayesianModelAveragingPublicationBias",
   "priorDistributionsEffectSizeAndHeterogeneity", "priorDistributionsScale", "publicationBiasAdjustment", "modelExpectedDirectionOfTheEffect",
@@ -136,14 +137,20 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   if (.maIsMetaregression(options)) {
 
     # dispatch the specified effect size measure
-    fitData <- dataset[, c(options[["effectSize"]], options[["effectSizeStandardError"]], options[["predictors"]])]
-    colnames(fitData)[1:2] <- switch(
-      options[["effectSizeMeasure"]],
-      "SMD"      = c("d", "se"),
-      "fishersZ" = c("z", "se"),
-      "logOR"    = c("logOR", "se"),
-      c("y", "se")
-    )
+    if (options[["module"]] %in% c("RoBMA", "NoBMA")) {
+      fitData <- dataset[, c(options[["effectSize"]], options[["effectSizeStandardError"]], options[["predictors"]])]
+      colnames(fitData)[1:2] <- switch(
+        options[["effectSizeMeasure"]],
+        "SMD"      = c("d", "se"),
+        "fishersZ" = c("z", "se"),
+        "logOR"    = c("logOR", "se"),
+        c("y", "se")
+      )
+    } else if (options[["module"]] == "BiBMA") {
+      fitData <- dataset[, c(options[["successesGroup1"]], options[["successesGroup2"]], options[["observationsGroup1"]], options[["observationsGroup2"]], options[["predictors"]])]
+      colnames(fitData)[1:4] <- c("x1", "x2", "n1", "n2")
+    }
+
 
     # specify meta-regression
     fitFormula <- .maGetFormula(options[["effectSizeModelTerms"]], TRUE)
@@ -161,17 +168,27 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   } else {
 
     # dispatch the specified effect size measure
-    fitCall <- list(
-      "es" = dataset[, options[["effectSize"]]],
-      "se" = dataset[, options[["effectSizeStandardError"]]]
-    )
-    names(fitCall)[1] <- switch(
-      options[["effectSizeMeasure"]],
-      "SMD"      = "d",
-      "fishersZ" = "z",
-      "logOR"    = "logOR",
-      "y"
-    )
+    if (options[["module"]] %in% c("RoBMA", "NoBMA")) {
+      fitCall <- list(
+        "es" = dataset[, options[["effectSize"]]],
+        "se" = dataset[, options[["effectSizeStandardError"]]]
+      )
+      names(fitCall)[1] <- switch(
+        options[["effectSizeMeasure"]],
+        "SMD"      = "d",
+        "fishersZ" = "z",
+        "logOR"    = "logOR",
+        "y"
+      )
+    } else if (options[["module"]] == "BiBMA") {
+      fitCall <- list(
+        "x1" = dataset[, options[["successesGroup1"]]],
+        "x2" = dataset[, options[["successesGroup2"]]],
+        "n1" = dataset[, options[["observationsGroup1"]]],
+        "n2" = dataset[, options[["observationsGroup2"]]]
+      )
+    }
+
   }
 
   # add 3rd level
@@ -179,24 +196,30 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     fitCall$study_id <- dataset[, options[["studyLevelMultilevel"]]]
 
   # add prior settings
-  fitCall$prior_scale <- switch(
-    options[["effectSizeMeasure"]],
-    "SMD"      = "cohens_d",
-    "fishersZ" = "fishers_z",
-    "logOR"    = "logOR",
-    "none"
-  )
-  if (options[["effectSizeMeasure"]] %in% c("SMD", "fishersZ", "logOR")) {
-    fitCall$transformation <- "fishers_z"
-  } else {
-    fitCall$transformation <- "none"
+  if (options[["module"]] %in% c("RoBMA", "NoBMA")) {
+    fitCall$prior_scale <- switch(
+      options[["effectSizeMeasure"]],
+      "SMD"      = "cohens_d",
+      "fishersZ" = "fishers_z",
+      "logOR"    = "logOR",
+      "none"
+    )
+    if (options[["effectSizeMeasure"]] %in% c("SMD", "fishersZ", "logOR")) {
+      fitCall$transformation <- "fishers_z"
+    } else {
+      fitCall$transformation <- "none"
+    }
   }
+
   fitCall$priors_effect             <- if (is.null(priors[["effect"]]))            list() else priors[["effect"]]
   fitCall$priors_heterogeneity      <- if (is.null(priors[["heterogeneity"]]))     list() else priors[["heterogeneity"]]
-  fitCall$priors_bias               <- if (is.null(priors[["bias"]]))              list() else priors[["bias"]]
   fitCall$priors_effect_null        <- if (is.null(priors[["effectNull"]]))        list() else priors[["effectNull"]]
   fitCall$priors_heterogeneity_null <- if (is.null(priors[["heterogeneityNull"]])) list() else priors[["heterogeneityNull"]]
-  fitCall$priors_bias_null          <- if (is.null(priors[["biasNull"]]))          list() else priors[["biasNull"]]
+  # TODO: dispatch BiBMA baseline prior
+  if (options[["module"]] == "RoBMA") {
+    fitCall$priors_bias               <- if (is.null(priors[["bias"]]))     list() else priors[["bias"]]
+    fitCall$priors_bias_null          <- if (is.null(priors[["biasNull"]])) list() else priors[["biasNull"]]
+  }
 
   # sampling settings
   fitCall$chains <- options[["advancedMcmcChains"]]
@@ -224,11 +247,26 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   fitCall$silent    <- TRUE
 
   # select fitting function
-  if (.maIsMetaregression(options)) {
-    fit <- try(do.call(RoBMA::RoBMA.reg, fitCall))
-  } else {
-    fit <- try(do.call(RoBMA::RoBMA, fitCall))
+  if (options[["module"]] == "RoBMA") {
+    if (.maIsMetaregression(options)) {
+      fit <- try(do.call(RoBMA::RoBMA.reg, fitCall))
+    } else {
+      fit <- try(do.call(RoBMA::RoBMA, fitCall))
+    }
+  } else if (options[["module"]] == "NoBMA") {
+    if (.maIsMetaregression(options)) {
+      fit <- try(do.call(RoBMA::NoBMA.reg, fitCall))
+    } else {
+      fit <- try(do.call(RoBMA::NoBMA, fitCall))
+    }
+  } else if (options[["module"]] == "BiBMA") {
+    if (.maIsMetaregression(options)) {
+      fit <- try(do.call(RoBMA::BiBMA.reg, fitCall))
+    } else {
+      fit <- try(do.call(RoBMA::BiBMA, fitCall))
+    }
   }
+
 
   # add attributes
   attr(fit, "subgroup") <- paste0(subgroupName)
@@ -291,6 +329,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   }
 
   ### effect size & heterogeneity
+  # TODO: the prior distributions for smd/logor/z must be transformed
   if (options[["priorDistributionsEffectSizeAndHeterogeneity"]] == "default") {
 
     object[["effect"]]        <- list(RoBMA::set_default_priors("effect",        rescale = options[["priorDistributionsScale"]]))

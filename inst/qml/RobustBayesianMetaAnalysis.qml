@@ -168,21 +168,21 @@ Form
 			label:		qsTr("Effect size and heterogeneity")
 			info:		qsTr("Specify the type of prior distributions for the effect size and heterogeneity.")
 			values: 
-				if (effectSizeMeasure.value === "SMD" || effectSizeMeasure.value === "fishersZ")
+				if (effectSizeMeasure.value === "SMD" || effectSizeMeasure.value === "fishersZ" || effectSizeMeasure.value === "logOR")
 					[
-						{ label: qsTr("Default"),		value: "default",		info: qsTr("Uses default prior distributions for the effect size and heterogeneity based on Bartoš et al. (2022).")},
-						{ label: qsTr("Psychology"),	value: "psychology",	info: qsTr("Uses default prior distributions developed for psychology based on Bartoš et al. (2022). This settings corresponds to the 'Default' setting.")},
-						{ label: qsTr("Medicine"),		value: "medicine",		info: qsTr("Used prior distributions based on the Cochrane Database of Systematic Reviews developed by Bartoš et al. (2021)")},
-						{ label: qsTr("Custom"),		value: "custom",		info: qsTr("Custom prior distributions. This option allows you to specify a custom model ensemble for the effect size and heterogeneity prior distributions.")}
+						{ label: qsTr("Default"),		value: "default",		info: qsTr("Use default prior distributions for the effect size and heterogeneity based on Bartoš et al. (2022).")},
+						{ label: qsTr("Psychology"),	value: "psychology",	info: qsTr("Use default prior distributions developed for psychology based on Bartoš et al. (2022). This settings corresponds to the 'Default' setting.")},
+						{ label: qsTr("Medicine"),		value: "medicine",		info: qsTr("Use prior distributions based on the Cochrane Database of Systematic Reviews developed by Bartoš et al. (2021)")},
+						{ label: qsTr("Custom"),		value: "custom",		info: qsTr("Use custom prior distributions. This option allows you to specify a custom model ensemble for the effect size and heterogeneity prior distributions.")}
 					]
-				else if (effectSizeMeasure.value === "logOR" || effectSizeMeasure.value === "logRR" || effectSizeMeasure.value === "logHR" || effectSizeMeasure.value === "RD")
+				else if (effectSizeMeasure.value === "logRR" || effectSizeMeasure.value === "logHR" || effectSizeMeasure.value === "RD")
 					[
-						{ label: qsTr("Medicine"),		value: "medicine",		info: qsTr("Used prior distributions based on the Cochrane Database of Systematic Reviews developed by Bartoš et al. (2023).")},
-						{ label: qsTr("Custom"),		value: "custom",		info: qsTr("Custom prior distributions. This option allows you to specify a custom model ensemble for the effect size and heterogeneity prior distributions.")}
+						{ label: qsTr("Medicine"),		value: "medicine",		info: qsTr("Use prior distributions based on the Cochrane Database of Systematic Reviews developed by Bartoš et al. (2023).")},
+						{ label: qsTr("Custom"),		value: "custom",		info: qsTr("Use custom prior distributions. This option allows you to specify a custom model ensemble for the effect size and heterogeneity prior distributions.")}
 					]
 				else 
 					[
-						{ label: qsTr("Custom"),		value: "custom",		info: qsTr("Custom prior distributions. This option allows you to specify a custom model ensemble for the effect size and heterogeneity prior distributions.")}
+						{ label: qsTr("Custom"),		value: "custom",		info: qsTr("Use custom prior distributions. This option allows you to specify a custom model ensemble for the effect size and heterogeneity prior distributions.")}
 					]
 		}
 
