@@ -59,9 +59,9 @@ Section
 		CheckBox
 		{
 			label:		qsTr("Weight function")
-			enabled:	publicationBiasAdjustment.value != "none" && publicationBiasAdjustment.value != "PP"
 			name:		"priorAndPosteriorPlotWeightFunction"
 			visible:	analysisType === "RoBMA"
+			enabled:	publicationBiasAdjustment.value != "none" && publicationBiasAdjustment.value != "PP"
 
 			CheckBox
 			{
@@ -73,10 +73,10 @@ Section
 
 		CheckBox
 		{
-			enabled:	publicationBiasAdjustment.value != "none" && publicationBiasAdjustment.value != "original"
 			label:		qsTr("PET-PEESE")
 			name:		"priorAndPosteriorPlotPetPeese"
 			visible:	analysisType === "RoBMA"
+			enabled:	publicationBiasAdjustment.value != "none" && publicationBiasAdjustment.value != "original"
 		}
 	}
 

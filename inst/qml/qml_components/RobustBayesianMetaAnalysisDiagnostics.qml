@@ -40,8 +40,8 @@ Section
 		title:			qsTr("Plot")
 		CheckBox
 		{
-			label:		qsTr("Effect")
-			name:		"mcmcDiagnosticsPlotEffect"
+			label:		qsTr("Effect size")
+			name:		"mcmcDiagnosticsPlotEffectSize"
 		}
 
 		CheckBox
@@ -52,9 +52,17 @@ Section
 
 		CheckBox
 		{
+			label:		qsTr("Moderation")
+			name:		"mcmcDiagnosticsPlotModeration"
+			enabled:	predictors.count > 0
+		}
+
+		CheckBox
+		{
 			label:		qsTr("Weights")
 			name:		"mcmcDiagnosticsPlotWeights"
 			visible:	analysisType === "RoBMA"
+			enabled:	publicationBiasAdjustment.value != "none" && publicationBiasAdjustment.value != "PP"
 		}
 
 		CheckBox
@@ -62,6 +70,7 @@ Section
 			label:		qsTr("PET")
 			name:		"mcmcDiagnosticsPlotPet"
 			visible:	analysisType === "RoBMA"
+			enabled:	publicationBiasAdjustment.value != "none" && publicationBiasAdjustment.value != "original"
 		}
 
 		CheckBox
@@ -69,6 +78,7 @@ Section
 			label:		qsTr("PEESE")
 			name:		"mcmcDiagnosticsPlotPeese"
 			visible:	analysisType === "RoBMA"
+			enabled:	publicationBiasAdjustment.value != "none" && publicationBiasAdjustment.value != "original"
 		}
 	}
 
