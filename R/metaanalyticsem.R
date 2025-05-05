@@ -135,6 +135,9 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
       # all diagonals equal 1
       diag(tempMatrix) <- 1
 
+      if (any(abs(tempMatrix) > 1, na.rm = TRUE))
+        .quitAnalysis(gettext("The correlation matrix contains values outside the range of -1 and 1. Please check your input."))
+
     } else if (options[["dataInputType"]] == "covariance") {
 
       # diagonals specified in the input
