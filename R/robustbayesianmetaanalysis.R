@@ -112,66 +112,6 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   if (options[["mcmcDiagnosticsPlotPeese"]])
     .robmaDiagnosticsPlot(jaspResults, options, "peese")
 
-
-  return()
-
-  #------------
-  # get the priors
-  .robmaGetPriors(jaspResults, options)
-
-  # show the model Specification
-  if (is.null(jaspResults[["model"]]))
-    .robmaModelSpecificationTable(jaspResults, options)
-
-  # fit model
-  if (is.null(jaspResults[["modelNotifier"]]) && .robmaCheckReady(options))
-    .robmaFitModel(jaspResults, dataset, options)
-
-  ### Priors plot
-  if (options[["priorDistributionPlot"]])
-    .robmaPriorsPlots(jaspResults, options)
-
-
-  ### Inference
-  # default summary
-  .robmaSummaryTable(jaspResults, options, type = "RoBMA")
-  # models overview
-  if (options[["inferenceModelsOverview"]])
-    .robmaModelsOverviewTable(jaspResults, options, type = "RoBMA")
-  # models summary
-  if (options[["inferenceIndividualModels"]])
-    .robmaModelsSummaryTable(jaspResults, options, type = "RoBMA")
-
-
-  ### Plots
-  # forest plot
-  if (options[["plotsForestPlot"]])
-    .robmaForestPlot(jaspResults, options, type = "RoBMA")
-
-  # pooled estimates plots
-  if (options[["plotsPooledEstimatesEffect"]])
-    .robmaEstimatesPlot(jaspResults, options, "mu", type = "RoBMA")
-  if (options[["plotsPooledEstimatesHeterogeneity"]])
-    .robmaEstimatesPlot(jaspResults, options, "tau", type = "RoBMA")
-  if (options[["plotsPooledEstimatesWeightFunction"]])
-    .robmaEstimatesPlot(jaspResults, options, "weightFunction", type = "RoBMA")
-  if (options[["plotsPooledEstimatesPetPeese"]])
-    .robmaEstimatesPlot(jaspResults, options, "petPeese", type = "RoBMA")
-
-  # individual models
-  if (options[["plotsIndividualModelsEffect"]])
-    .robmaModelsPlot(jaspResults, options, "mu", type = "RoBMA")
-  if (options[["plotsIndividualModelsHeterogeneity"]])
-    .robmaModelsPlot(jaspResults, options, "tau", type = "RoBMA")
-
-  ### Diagnostics
-
-
-  ### Save the model
-  if (options[["advancedSaveFittedModel"]] != "" && is.null(jaspResults[["modelSaved"]]))
-    .robmaSaveModel(jaspResults, options)
-
-
   return()
 }
 
@@ -667,496 +607,6 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   } else {
     stop("Unknown prior type.")
   }
-}
-
-# naming related functions
-.robmaComponentNames   <- function(component, options) {
-  return(switch(
-    component,
-    # from options
-    "effectSize"    = if (.maIsMetaregression(options)) gettext("Adjusted effect") else gettext("Pooled effect"),
-    "effect"        = if (.maIsMetaregression(options)) gettext("Adjusted effect") else gettext("Pooled effect"),
-    "heterogeneity" = gettext("Heterogeneity"),
-    "bias"          = gettext("Publication bias"),
-    "Baseline"      = gettext("Baseline"),
-    # from package
-    "Effect"        = if (.maIsMetaregression(options)) gettext("Adjusted effect") else gettext("Pooled effect"),
-    "Heterogeneity" = gettext("Heterogeneity"),
-    "Bias"          = gettext("Publication bias"),
-    "Baseline"      = gettext("Baseline")
-  ))
-}
-.robmaVariableNames    <- function(varNames, variables) {
-
-  return(sapply(varNames, function(varName){
-
-    if (varName %in% c("intrcpt", "intercept"))
-      return(gettext("Intercept"))
-#     # TODO: figure out how to handle this when interactions are present
-#     # (will need ignoring inside of square brackets for [dif: A] or [A])
-#     for (vn in variables) {
-#       inf <- regexpr(vn, varName, fixed = TRUE)
-#
-#       if (inf[1] != -1) {
-#         varName <- paste0(
-#           substr(varName, 0, inf[1] - 1),
-#           substr(varName, inf[1], inf[1] + attr(inf, "match.length") - 1),
-#           " (",
-#           substr(varName, inf[1] + attr(inf, "match.length"), nchar(varName))
-#         )
-#       }
-#
-#     }
-#
-#     varName <- gsub(":", paste0(")", jaspBase::interactionSymbol), varName, fixed = TRUE)
-#     varName <- paste0(varName, ")")
-#     varName <- gsub(" ()", "", varName, fixed = TRUE)
-#     varName <- gsub(" (/", "/", varName, fixed = TRUE)
-
-    return(varName)
-
-  }))
-}
-.robmaHasHeterogeneity <- function(options) {
-
-  priors <- .robmaGetPriors(options)
-
-  for (i in seq_along(priors[["heterogeneity"]])) {
-    if (priors[["heterogeneity"]][[i]][["distribution"]] != "point" ||
-        (priors[["heterogeneity"]][[i]][["distribution"]] == "point" && priors[["heterogeneity"]][[i]][["parameters"]][["location"]] != 0))
-      return(TRUE)
-  }
-
-  return(FALSE)
-}
-# temp helpers
-.robmaAddBfColumn <- function(tempTable, options) {
-
-  titleBF <- switch(
-    options[["bayesFactorType"]],
-    "BF10"    = gettext("Inclusion BF"),
-    "BF01"    = gettext("Exclusion BF"),
-    "LogBF10" = gettext("log(Inclusion BF)")
-  )
-
-  tempTable$addColumnInfo(name = "bf", title = titleBF, type = "number")
-
-  return()
-}
-
-.robmaPrintBf             <- function(bf) {
-
-  bf <- sapply(bf, function(x) {
-    if (is.infinite(x) && x > 0) {
-      return("\U221E")
-    } else if (is.infinite(x) && x < 0) {
-      return("-\U221E")
-    } else if (x < 1) {
-      return(sprintf("%1$.3f", x))
-    } else if (x < 10) {
-      return(sprintf("%1$.2f", x))
-    } else if (x < 100) {
-      return(sprintf("%1$.1f", x))
-    } else if (x < 100) {
-      return(sprintf("%1$.1f", x))
-    } else if (x < 1e5){
-      return(sprintf("%1$.0f", x))
-    } else {
-      return(sprintf("%1$.3g", x))
-    }
-  })
-  return(bf)
-}
-.robmaPrintBfTest         <- function(out, options) {
-
-  bfText <- switch(
-    options[["bayesFactorType"]],
-    "BF10"    = "BF\U2081\U2080",
-    "BF01"    = "BF\U2080\U2081",
-    "LogBF10" = "logBF\U2081\U2080"
-  )
-
-  return(sprintf("%1$s = %2$s", bfText, .robmaPrintBf(out[["bf"]])))
-}
-.robmaPrintTest           <- function(fit, options, component, includeName = TRUE) {
-
-  out <- .robmaRowTests(fit, options)
-  out <- out[out$test == .robmaComponentNames(component, options),, drop = FALSE]
-
-  if (includeName) {
-    return(sprintf("%1$s: %2$s", out[["test"]], .robmaPrintBfTest(out, options)))
-  } else {
-    return(.robmaPrintBfTest(out, options))
-  }
-}
-.robmaPrintPooledEstimate <- function(fit, options, digits, parameter, conditional) {
-
-  options[["heterogeneityTau"]]    <- parameter == "tau"
-  options[["heterogeneityTau2"]]   <- parameter == "tau2"
-  options[["heterogeneityI2"]]     <- parameter == "I2"
-  options[["heterogeneityH2"]]     <- parameter == "H2"
-
-  out <- .robmaRowPooledEstimates(fit, options, conditional)
-  out <- out[rownames(out) == switch(
-    parameter,
-    "effect" = "effectSize",
-    "tau"    = "heterogeneityTau",
-    "tau2"   = "heterogeneityTau2",
-    "I2"     = "heterogeneityI2",
-    "H2"     = "heterogeneityH2"
-  ),,drop = FALSE]
-
-  return(sprintf(paste0(
-    "%1$s  = ",
-    "%2$.", digits, "f",
-    " [",
-    "%3$.", digits, "f",
-    ", ",
-    "%4$.", digits, "f",
-    "]"
-  ), out$par, out$mean, out$lCi, out$uCi))
-}
-
-.robmaComputePooledEffect           <- function(fit, options, conditional, returnRaw = FALSE) {
-
-  # effect size summary
-  fitSummary <- summary(
-    fit,
-    conditional = conditional,
-    probs       = c(.5 + c(-1, 1) * options[["confidenceIntervalsLevel"]] / 2)
-  )[[if (conditional) "estimates_conditional" else "estimates"]]
-  fitSummary <- fitSummary[rownames(fitSummary) == "mu",,drop=FALSE]
-
-  estimate <- list(
-    par    = .robmaComponentNames("effect", options),
-    mean   = fitSummary[["Mean"]],
-    median = fitSummary[["Median"]],
-    lCi    = fitSummary[[3]],
-    uCi    = fitSummary[[4]]
-  )
-
-  # prediction intervals
-  if (options[["predictionIntervals"]]) {
-
-    hetSummary <- RoBMA::summary_heterogeneity(
-      fit,
-      conditional = conditional,
-      probs       = c(.5 + c(-1, 1) * options[["confidenceIntervalsLevel"]] / 2)
-    )[[if (conditional) "estimates_conditional" else "estimates"]]
-
-    estimate$lPi <- hetSummary["PI", 3]
-    estimate$uPi <- hetSummary["PI", 4]
-
-  } else {
-
-    estimate$lPi <- NA
-    estimate$uPi <- NA
-
-  }
-
-
-  # return for the plotting function: requires different post-formatting
-  if (returnRaw) {
-    return(estimate)
-  }
-
-  # to data.frame
-  estimate <- data.frame(estimate)
-
-  # apply effect size transformation
-  if (options[["transformEffectSize"]] != "none")
-    estimate[,c("mean", "median", "lCi", "uCi", "lPi", "uPi")] <- do.call(
-      .maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]),
-      list(estimate[,c("mean", "median", "lCi", "uCi", "lPi", "uPi")]))
-
-  # remove non-requested columns
-  estimate <- estimate[,c(
-    "par", "mean", "median",
-    if (options[["confidenceIntervals"]]) c("lCi", "uCi"),
-    if (options[["predictionIntervals"]]) c("lPi", "uPi")
-  )]
-
-  return(as.list(estimate))
-}
-.robmaTermTests                     <- function(fit, options, selectedVariable) {
-  termTests <- .robmaRowTermTests(fit, options)
-  termTests <- termTests[grep(selectedVariable, termTests$term),, drop = FALSE]
-  return(termTests)
-}
-.robmaComputeMarginalMeans          <- function(fit, options, conditional) {
-
-  # extracts the already pre-computed marginal means from the fit object
-  object <- list()
-  for (i in seq_along(fit)) {
-    object[[names(fit)[i]]] <- attr(fit[[i]], "marginalSummary")
-  }
-
-  for (i in seq_along(object)) {
-    if (!jaspBase::isTryError(object[[i]])) {
-      estimate <- object[[i]][[if (conditional) "estimates_conditional" else "estimates"]]
-      # transform the BF
-      if (options[["bayesFactorType"]] == "BF01") {
-        estimate[["inclusion_BF"]] <- 1 / estimate[["inclusion_BF"]]
-      } else if (options[["bayesFactorType"]] == "logBF10") {
-        estimate[["inclusion_BF"]] <- log(estimate[["inclusion_BF"]])
-      }
-      # add parameter names
-      colnames(estimate) <- c("mean", "median", "lCi", "uCi", "bf")
-      estimate$value     <- rownames(estimate)
-      estimate$subgroup  <- attr(fit[[i]], "subgroup")
-
-      # apply effect size transformation
-      if (options[["transformEffectSize"]] != "none")
-        estimate[,c("mean", "median", "lCi", "uCi")] <- do.call(
-          .maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]),
-          list(estimate[,c("mean", "median", "lCi", "uCi")]))
-
-      object[[i]] <- estimate
-    } else {
-      object[[i]] <- NULL
-    }
-  }
-
-  return(object)
-}
-.robmaComputeMarginalMeansVariable  <- function(fit, options, selectedVariable, conditional) {
-
-  if (jaspBase::isTryError(fit)) {
-    return(NULL)
-  }
-
-  computedMarginalMeans <- data.frame(.robmaComputeMarginalMeans(fit, options, conditional)[[1]])
-  computedMarginalMeans <- computedMarginalMeans[grep(selectedVariable, computedMarginalMeans$value),, drop = FALSE]
-
-  computedMarginalMeans$value <- gsub(selectedVariable, "", rownames(computedMarginalMeans))
-  computedMarginalMeans$value <- gsub("[", "", gsub("]", "", computedMarginalMeans$value, fixed = TRUE), fixed = TRUE)
-  computedMarginalMeans$est   <- computedMarginalMeans$mean
-
-  if (!options[["confidenceIntervals"]])
-    computedMarginalMeans <- computedMarginalMeans[,!colnames(computedMarginalMeans) %in% c("lCi", "uCi"), drop = FALSE]
-
-  return(computedMarginalMeans)
-}
-
-
-.robmaRowTests                               <- function(fit, options) {
-  # handle missing subfits
-  if (jaspBase::isTryError(fit)) {
-    return(data.frame(
-      subgroup = attr(fit, "subgroup")
-    ))
-  }
-
-  fitSummary <- summary(
-    fit,
-    logBF = options[["bayesFactorType"]] == "LogBF10",
-    BF01  = options[["bayesFactorType"]] == "BF01"
-  )[["components"]]
-
-  # remove hierarchical if exists
-  fitSummary <- fitSummary[!grepl("Hierarchical", rownames(fitSummary)),, drop = FALSE]
-
-  row <- data.frame(
-    subgroup  = attr(fit, "subgroup"),
-    test      = sapply(rownames(fitSummary), .robmaComponentNames, options = options),
-    priorProb = fitSummary[["prior_prob"]],
-    postProb  = fitSummary[["post_prob"]],
-    bf        = fitSummary[["inclusion_BF"]]
-  )
-
-  return(row)
-}
-.robmaRowPooledEstimates                     <- function(fit, options, conditional) {
-
-  # handle missing subfits
-  if (jaspBase::isTryError(fit)) {
-    return(data.frame(
-      subgroup = attr(fit, "subgroup")
-    ))
-  }
-
-  # heterogeneity summary
-  hetSummary <- RoBMA::summary_heterogeneity(
-    fit,
-    conditional = conditional,
-    probs       = c(.5 + c(-1, 1) * options[["confidenceIntervalsLevel"]] / 2)
-  )[[if (conditional) "estimates_conditional" else "estimates"]]
-
-  # construct the rows
-  tempRows <- list()
-  tempRows[["effectSize"]] <- data.frame(.robmaComputePooledEffect(fit, options, conditional))
-
-  if (options[["heterogeneityTau"]])
-    tempRows[["heterogeneityTau"]] <- data.frame(
-      par    = "\U1D70F",
-      mean   = hetSummary["tau", "Mean"],
-      median = hetSummary["tau", "Median"],
-      lCi    = hetSummary["tau", 3],
-      uCi    = hetSummary["tau", 4]
-    )
-  if (options[["heterogeneityTau"]] && options[["studyLevelMultilevel"]] != "") {
-    effSummary <- summary(
-      fit,
-      conditional = conditional,
-      probs       = c(.5 + c(-1, 1) * options[["confidenceIntervalsLevel"]] / 2)
-    )[[if (conditional) "estimates_conditional" else "estimates"]]
-    tempRows[["heterogeneityRho"]] <- data.frame(
-      par    = "\U03C1",
-      mean   = effSummary["rho", "Mean"],
-      median = effSummary["rho", "Median"],
-      lCi    = effSummary["rho", 3],
-      uCi    = effSummary["rho", 4]
-    )
-  }
-  if (options[["heterogeneityTau2"]])
-    tempRows[["heterogeneityTau2"]] <- data.frame(
-      par    = "\U1D70F\U00B2",
-      mean   = hetSummary["tau2", "Mean"],
-      median = hetSummary["tau2", "Median"],
-      lCi    = hetSummary["tau2", 3],
-      uCi    = hetSummary["tau2", 4]
-    )
-  if (options[["heterogeneityI2"]])
-    tempRows[["heterogeneityI2"]] <- data.frame(
-      par    = "I\U00B2",
-      mean   = hetSummary["I2", "Mean"],
-      median = hetSummary["I2", "Median"],
-      lCi    = hetSummary["I2", 3],
-      uCi    = hetSummary["I2", 4]
-    )
-  if (options[["heterogeneityH2"]])
-    tempRows[["heterogeneityH2"]] <- data.frame(
-      par    = "H\U00B2",
-      mean   = hetSummary["H2", "Mean"],
-      median = hetSummary["H2", "Median"],
-      lCi    = hetSummary["H2", 3],
-      uCi    = hetSummary["H2", 4]
-    )
-
-  tempRows <- .maSafeRbind(tempRows)
-  tempRows$subgroup <- attr(fit, "subgroup")
-
-  return(tempRows)
-}
-.robmaRowTermTests                           <- function(fit, options) {
-
-  # handle missing subfits
-  if (jaspBase::isTryError(fit)) {
-    return(NULL)
-  }
-
-  fitSummary <- summary(
-    fit,
-    logBF = options[["bayesFactorType"]] == "LogBF10",
-    BF01  = options[["bayesFactorType"]] == "BF01"
-  )[["components_predictors"]]
-
-  row <- data.frame(
-    subgroup  = attr(fit, "subgroup"),
-    term      = .maVariableNames(rownames(fitSummary), variables = options[["predictors"]]),
-    priorProb = fitSummary[["prior_prob"]],
-    postProb  = fitSummary[["post_prob"]],
-    bf        = fitSummary[["inclusion_BF"]]
-  )
-
-  return(row)
-}
-.robmaRowCoefficientsEstimates               <- function(fit, options, standardized, conditional) {
-
-  # handle missing subfits
-  if (jaspBase::isTryError(fit)) {
-    return(NULL)
-  }
-
-  fitSummary <- summary(
-    fit,
-    conditional = conditional,
-    probs       = c(.5 + c(-1, 1) * options[["confidenceIntervalsLevel"]] / 2)
-  )[[if (conditional) "estimates_predictors_conditional" else "estimates_predictors"]]
-
-  estimates <- data.frame(
-    par    = rownames(fitSummary),
-    mean   = fitSummary[["Mean"]],
-    median = fitSummary[["Median"]],
-    lCi    = fitSummary[[3]],
-    uCi    = fitSummary[[4]]
-  )
-
-  if (!standardized) {
-
-    tempData <- attr(fit[["data"]][["predictors"]], "variables_info")
-    for (i in seq_along(tempData)) {
-      if (tempData[[i]][["type"]] == "continuous") {
-        estimates[estimates$par == "intercept", c("mean", "median", "lCi", "uCi")]        <- estimates[estimates$par == "intercept", c("mean", "median", "lCi", "uCi")] -
-          estimates[estimates$par == names(tempData)[i], "mean"] * (tempData[[i]][["mean"]] / tempData[[i]][["sd"]])
-        estimates[estimates$par == names(tempData)[i], c("mean", "median", "lCi", "uCi")] <- estimates[estimates$par == names(tempData)[i], c("mean", "median", "lCi", "uCi")] / tempData[[i]][["sd"]]
-      }
-    }
-  }
-
-  estimates$par      <- .robmaVariableNames(estimates$par, variables = options[["predictors"]])
-  estimates$subgroup <- attr(fit, "subgroup")
-
-  return(estimates)
-}
-.robmaRowCoefficientsWeightfunctionEstimates <- function(fit, options, conditional) {
-
-  # handle missing subfits
-  if (jaspBase::isTryError(fit)) {
-    return(NULL)
-  }
-
-  fitSummary <- summary(
-    fit,
-    conditional = conditional,
-    probs       = c(.5 + c(-1, 1) * options[["confidenceIntervalsLevel"]] / 2)
-  )[[if (conditional) "estimates_conditional" else "estimates"]]
-
-  estimates <- data.frame(
-    par    = rownames(fitSummary),
-    mean   = fitSummary[["Mean"]],
-    median = fitSummary[["Median"]],
-    lCi    = fitSummary[[3]],
-    uCi    = fitSummary[[4]]
-  )
-  estimates <- estimates[grepl("omega", estimates$par),,drop=FALSE]
-
-  # get p-value intervals
-  estimatesInterval <- gsub("omega", "", estimates$par)
-  estimatesInterval <- gsub("[", "", gsub("]", "", estimatesInterval, fixed = TRUE), fixed = TRUE)
-  estimatesInterval <- data.frame(do.call(rbind, lapply(estimatesInterval, function(x) strsplit(x, split = ",", fixed = TRUE)[[1]])))
-  estimates$lowerRange <- estimatesInterval[,1]
-  estimates$upperRange <- estimatesInterval[,2]
-
-  estimates$subgroup <- attr(fit, "subgroup")
-
-  return(estimates)
-}
-.robmaRowCoefficientsPetPeeseEstimates       <- function(fit, options, conditional) {
-
-  # handle missing subfits
-  if (jaspBase::isTryError(fit)) {
-    return(NULL)
-  }
-
-  fitSummary <- summary(
-    fit,
-    conditional = conditional,
-    probs       = c(.5 + c(-1, 1) * options[["confidenceIntervalsLevel"]] / 2)
-  )[[if (conditional) "estimates_conditional" else "estimates"]]
-
-  estimates <- data.frame(
-    par    = rownames(fitSummary),
-    mean   = fitSummary[["Mean"]],
-    median = fitSummary[["Median"]],
-    lCi    = fitSummary[[3]],
-    uCi    = fitSummary[[4]]
-  )
-  estimates <- estimates[grepl("PET", estimates$par) | grepl("PEESE", estimates$par),,drop=FALSE]
-
-  estimates$subgroup <- attr(fit, "subgroup")
-
-  return(estimates)
 }
 
 # tables and figures
@@ -1754,7 +1204,7 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   return()
 }
 .robmaEstimatedMarginalMeansTable        <- function(variableContainer, fit, options, selectedVariable, conditional) {
-
+  saveRDS(fit, file = "C:/JASP-Packages/fitMM.RDS")
   estimatedMarginalMeansTable <- createJaspTable(if (conditional) gettext("Conditional Estimated Marginal Means") else gettext("Estimated Marginal Means"))
   estimatedMarginalMeansTable$position <- if (conditional) 2 else 1
   estimatedMarginalMeansTable$dependOn(c("estimatedMarginalMeansEffectSize", "estimatedMarginalMeansEffectSizeTestAgainst0", "transformEffectSize", "bayesFactorType",
@@ -2214,6 +1664,441 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   return()
 }
 
+# containers
+.robmaExtractModelSummaryContainer           <- function(jaspResults) {
+
+  if (!is.null(jaspResults[["modelSummaryContainer"]]))
+    return(jaspResults[["modelSummaryContainer"]])
+
+  # create the output container
+  modelSummaryContainer <- createJaspContainer(gettext("Model Summary"))
+  modelSummaryContainer$dependOn(.robmaDependencies)
+  modelSummaryContainer$position <- 2
+  jaspResults[["modelSummaryContainer"]] <- modelSummaryContainer
+
+  return(modelSummaryContainer)
+}
+.robmaExtractMetaregressionContainer         <- function(jaspResults) {
+
+  if (!is.null(jaspResults[["metaregressionContainer"]]))
+    return(jaspResults[["metaregressionContainer"]])
+
+  # create the output container
+  metaregressionContainer <- createJaspContainer(gettext("Meta-Regression Summary"))
+  metaregressionContainer$dependOn(c(.robmaDependencies))
+  metaregressionContainer$position <- 3
+  jaspResults[["metaregressionContainer"]] <- metaregressionContainer
+
+  return(metaregressionContainer)
+}
+.robmaExtractPublicationBiasContainer        <- function(jaspResults) {
+
+  if (!is.null(jaspResults[["publicationBiasContainer"]]))
+    return(jaspResults[["publicationBiasContainer"]])
+
+  # create the output container
+  publicationBiasContainer <- createJaspContainer(gettext("Publication Bias Adjustment Summary"))
+  publicationBiasContainer$dependOn(c(.robmaDependencies, "confidenceIntervals"))
+  publicationBiasContainer$position <- 4
+  jaspResults[["publicationBiasContainer"]] <- publicationBiasContainer
+
+  return(publicationBiasContainer)
+}
+.robmaExtractEstimatedMarginalMeansContainer <- function(jaspResults) {
+
+  if (!is.null(jaspResults[["estimatedMarginalMeansContainer"]]))
+    return(jaspResults[["estimatedMarginalMeansContainer"]])
+
+  # create the output container
+  estimatedMarginalMeansContainer <- createJaspContainer(gettext("Estimated Marginal Means Summary"))
+  estimatedMarginalMeansContainer$dependOn(c(.robmaDependencies, "confidenceIntervals", "confidenceIntervalsLevel", "includeFullDatasetInSubgroupAnalysis"))
+  estimatedMarginalMeansContainer$position <- 5
+  jaspResults[["estimatedMarginalMeansContainer"]] <- estimatedMarginalMeansContainer
+
+  return(estimatedMarginalMeansContainer)
+}
+.robmaExtractPriorAndPosteriorPlotContainer  <- function(jaspResults) {
+
+  if (!is.null(jaspResults[["priorAndPosteriorPlotContainer"]]))
+    return(jaspResults[["priorAndPosteriorPlotContainer"]])
+
+  # create the output container
+  priorAndPosteriorPlotContainer <- createJaspContainer(gettext("Prior and Posterior Plots"))
+  priorAndPosteriorPlotContainer$dependOn(c(.robmaDependencies, "includeFullDatasetInSubgroupAnalysis", "priorAndPosteriorPlotType", "priorAndPosteriorPlotIncludePriorDistribution"))
+  priorAndPosteriorPlotContainer$position <- 6
+  jaspResults[["priorAndPosteriorPlotContainer"]] <- priorAndPosteriorPlotContainer
+
+  return(priorAndPosteriorPlotContainer)
+}
+.robmaExtractDiagnosticsContainer            <- function(jaspResults) {
+
+  if (!is.null(jaspResults[["diagnosticsContainer"]]))
+    return(jaspResults[["diagnosticsContainer"]])
+
+  # create the output container
+  diagnosticsContainer <- createJaspContainer(gettext("Diagnostics"))
+  diagnosticsContainer$dependOn(.robmaDependencies)
+  diagnosticsContainer$position <- 8
+  jaspResults[["diagnosticsContainer"]] <- diagnosticsContainer
+
+  return(diagnosticsContainer)
+}
+.robmaExtractDiagnosticsSubContainer         <- function(diagnosticsContainer, parameter, title, position, dependencies) {
+
+  if (!is.null(diagnosticsContainer[[parameter]]))
+    return(diagnosticsContainer[[parameter]])
+
+  # create the output container
+  diagnosticsSubContainer <- createJaspContainer(title)
+  diagnosticsSubContainer$dependOn(dependencies)
+  diagnosticsSubContainer$position <- position
+  diagnosticsContainer[[parameter]] <- diagnosticsSubContainer
+
+  return(diagnosticsSubContainer)
+}
+
+# additional compute functions
+.robmaComputePooledEffect           <- function(fit, options, conditional, returnRaw = FALSE) {
+
+  # effect size summary
+  fitSummary <- summary(
+    fit,
+    conditional = conditional,
+    probs       = c(.5 + c(-1, 1) * options[["confidenceIntervalsLevel"]] / 2)
+  )[[if (conditional) "estimates_conditional" else "estimates"]]
+  fitSummary <- fitSummary[rownames(fitSummary) == "mu",,drop=FALSE]
+
+  estimate <- list(
+    par    = .robmaComponentNames("effect", options),
+    mean   = fitSummary[["Mean"]],
+    median = fitSummary[["Median"]],
+    lCi    = fitSummary[[3]],
+    uCi    = fitSummary[[4]]
+  )
+
+  # prediction intervals
+  if (options[["predictionIntervals"]]) {
+
+    hetSummary <- RoBMA::summary_heterogeneity(
+      fit,
+      conditional = conditional,
+      probs       = c(.5 + c(-1, 1) * options[["confidenceIntervalsLevel"]] / 2)
+    )[[if (conditional) "estimates_conditional" else "estimates"]]
+
+    estimate$lPi <- hetSummary["PI", 3]
+    estimate$uPi <- hetSummary["PI", 4]
+
+  } else {
+
+    estimate$lPi <- NA
+    estimate$uPi <- NA
+
+  }
+
+
+  # return for the plotting function: requires different post-formatting
+  if (returnRaw) {
+    return(estimate)
+  }
+
+  # to data.frame
+  estimate <- data.frame(estimate)
+
+  # apply effect size transformation
+  if (options[["transformEffectSize"]] != "none")
+    estimate[,c("mean", "median", "lCi", "uCi", "lPi", "uPi")] <- do.call(
+      .maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]),
+      list(estimate[,c("mean", "median", "lCi", "uCi", "lPi", "uPi")]))
+
+  # remove non-requested columns
+  estimate <- estimate[,c(
+    "par", "mean", "median",
+    if (options[["confidenceIntervals"]]) c("lCi", "uCi"),
+    if (options[["predictionIntervals"]]) c("lPi", "uPi")
+  )]
+
+  return(as.list(estimate))
+}
+.robmaTermTests                     <- function(fit, options, selectedVariable) {
+  termTests <- .robmaRowTermTests(fit, options)
+  termTests <- termTests[grep(selectedVariable, termTests$term),, drop = FALSE]
+  return(termTests)
+}
+.robmaComputeMarginalMeans          <- function(fit, options, conditional) {
+
+  # extracts the already pre-computed marginal means from the fit object
+  object <- list()
+  for (i in seq_along(fit)) {
+    object[[names(fit)[i]]] <- attr(fit[[i]], "marginalSummary")
+  }
+
+  for (i in seq_along(object)) {
+    if (!jaspBase::isTryError(object[[i]])) {
+      estimate <- object[[i]][[if (conditional) "estimates_conditional" else "estimates"]]
+      # transform the BF
+      if (options[["bayesFactorType"]] == "BF01") {
+        estimate[["inclusion_BF"]] <- 1 / estimate[["inclusion_BF"]]
+      } else if (options[["bayesFactorType"]] == "logBF10") {
+        estimate[["inclusion_BF"]] <- log(estimate[["inclusion_BF"]])
+      }
+      # add parameter names
+      colnames(estimate) <- c("mean", "median", "lCi", "uCi", "bf")
+      estimate$value     <- rownames(estimate)
+      estimate$subgroup  <- attr(fit[[i]], "subgroup")
+
+      # apply effect size transformation
+      if (options[["transformEffectSize"]] != "none")
+        estimate[,c("mean", "median", "lCi", "uCi")] <- do.call(
+          .maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]),
+          list(estimate[,c("mean", "median", "lCi", "uCi")]))
+
+      object[[i]] <- estimate
+    } else {
+      object[[i]] <- NULL
+    }
+  }
+
+  return(object)
+}
+.robmaComputeMarginalMeansVariable  <- function(fit, options, selectedVariable, conditional) {
+
+  if (jaspBase::isTryError(fit)) {
+    return(NULL)
+  }
+
+  computedMarginalMeans <- data.frame(.robmaComputeMarginalMeans(fit, options, conditional)[[1]])
+  computedMarginalMeans <- computedMarginalMeans[grep(selectedVariable, computedMarginalMeans$value),, drop = FALSE]
+
+  computedMarginalMeans$value <- gsub(selectedVariable, "", rownames(computedMarginalMeans))
+  computedMarginalMeans$value <- gsub("[", "", gsub("]", "", computedMarginalMeans$value, fixed = TRUE), fixed = TRUE)
+  computedMarginalMeans$est   <- computedMarginalMeans$mean
+
+  if (!options[["confidenceIntervals"]])
+    computedMarginalMeans <- computedMarginalMeans[,!colnames(computedMarginalMeans) %in% c("lCi", "uCi"), drop = FALSE]
+
+  return(computedMarginalMeans)
+}
+
+.robmaRowTests                               <- function(fit, options) {
+  # handle missing subfits
+  if (jaspBase::isTryError(fit)) {
+    return(data.frame(
+      subgroup = attr(fit, "subgroup")
+    ))
+  }
+
+  fitSummary <- summary(
+    fit,
+    logBF = options[["bayesFactorType"]] == "LogBF10",
+    BF01  = options[["bayesFactorType"]] == "BF01"
+  )[["components"]]
+
+  # remove hierarchical if exists
+  fitSummary <- fitSummary[!grepl("Hierarchical", rownames(fitSummary)),, drop = FALSE]
+
+  row <- data.frame(
+    subgroup  = attr(fit, "subgroup"),
+    test      = sapply(rownames(fitSummary), .robmaComponentNames, options = options),
+    priorProb = fitSummary[["prior_prob"]],
+    postProb  = fitSummary[["post_prob"]],
+    bf        = fitSummary[["inclusion_BF"]]
+  )
+
+  return(row)
+}
+.robmaRowPooledEstimates                     <- function(fit, options, conditional) {
+
+  # handle missing subfits
+  if (jaspBase::isTryError(fit)) {
+    return(data.frame(
+      subgroup = attr(fit, "subgroup")
+    ))
+  }
+
+  # heterogeneity summary
+  hetSummary <- RoBMA::summary_heterogeneity(
+    fit,
+    conditional = conditional,
+    probs       = c(.5 + c(-1, 1) * options[["confidenceIntervalsLevel"]] / 2)
+  )[[if (conditional) "estimates_conditional" else "estimates"]]
+
+  # construct the rows
+  tempRows <- list()
+  tempRows[["effectSize"]] <- data.frame(.robmaComputePooledEffect(fit, options, conditional))
+
+  if (options[["heterogeneityTau"]])
+    tempRows[["heterogeneityTau"]] <- data.frame(
+      par    = "\U1D70F",
+      mean   = hetSummary["tau", "Mean"],
+      median = hetSummary["tau", "Median"],
+      lCi    = hetSummary["tau", 3],
+      uCi    = hetSummary["tau", 4]
+    )
+  if (options[["heterogeneityTau"]] && options[["studyLevelMultilevel"]] != "") {
+    effSummary <- summary(
+      fit,
+      conditional = conditional,
+      probs       = c(.5 + c(-1, 1) * options[["confidenceIntervalsLevel"]] / 2)
+    )[[if (conditional) "estimates_conditional" else "estimates"]]
+    tempRows[["heterogeneityRho"]] <- data.frame(
+      par    = "\U03C1",
+      mean   = effSummary["rho", "Mean"],
+      median = effSummary["rho", "Median"],
+      lCi    = effSummary["rho", 3],
+      uCi    = effSummary["rho", 4]
+    )
+  }
+  if (options[["heterogeneityTau2"]])
+    tempRows[["heterogeneityTau2"]] <- data.frame(
+      par    = "\U1D70F\U00B2",
+      mean   = hetSummary["tau2", "Mean"],
+      median = hetSummary["tau2", "Median"],
+      lCi    = hetSummary["tau2", 3],
+      uCi    = hetSummary["tau2", 4]
+    )
+  if (options[["heterogeneityI2"]])
+    tempRows[["heterogeneityI2"]] <- data.frame(
+      par    = "I\U00B2",
+      mean   = hetSummary["I2", "Mean"],
+      median = hetSummary["I2", "Median"],
+      lCi    = hetSummary["I2", 3],
+      uCi    = hetSummary["I2", 4]
+    )
+  if (options[["heterogeneityH2"]])
+    tempRows[["heterogeneityH2"]] <- data.frame(
+      par    = "H\U00B2",
+      mean   = hetSummary["H2", "Mean"],
+      median = hetSummary["H2", "Median"],
+      lCi    = hetSummary["H2", 3],
+      uCi    = hetSummary["H2", 4]
+    )
+
+  tempRows <- .maSafeRbind(tempRows)
+  tempRows$subgroup <- attr(fit, "subgroup")
+
+  return(tempRows)
+}
+.robmaRowTermTests                           <- function(fit, options) {
+
+  # handle missing subfits
+  if (jaspBase::isTryError(fit)) {
+    return(NULL)
+  }
+
+  fitSummary <- summary(
+    fit,
+    logBF = options[["bayesFactorType"]] == "LogBF10",
+    BF01  = options[["bayesFactorType"]] == "BF01"
+  )[["components_predictors"]]
+
+  row <- data.frame(
+    subgroup  = attr(fit, "subgroup"),
+    term      = .maVariableNames(rownames(fitSummary), variables = options[["predictors"]]),
+    priorProb = fitSummary[["prior_prob"]],
+    postProb  = fitSummary[["post_prob"]],
+    bf        = fitSummary[["inclusion_BF"]]
+  )
+
+  return(row)
+}
+.robmaRowCoefficientsEstimates               <- function(fit, options, standardized, conditional) {
+
+  # handle missing subfits
+  if (jaspBase::isTryError(fit)) {
+    return(NULL)
+  }
+
+  fitSummary <- summary(
+    fit,
+    conditional = conditional,
+    probs       = c(.5 + c(-1, 1) * options[["confidenceIntervalsLevel"]] / 2)
+  )[[if (conditional) "estimates_predictors_conditional" else "estimates_predictors"]]
+
+  estimates <- data.frame(
+    par    = rownames(fitSummary),
+    mean   = fitSummary[["Mean"]],
+    median = fitSummary[["Median"]],
+    lCi    = fitSummary[[3]],
+    uCi    = fitSummary[[4]]
+  )
+
+  if (!standardized) {
+
+    tempData <- attr(fit[["data"]][["predictors"]], "variables_info")
+    for (i in seq_along(tempData)) {
+      if (tempData[[i]][["type"]] == "continuous") {
+        estimates[estimates$par == "intercept", c("mean", "median", "lCi", "uCi")]        <- estimates[estimates$par == "intercept", c("mean", "median", "lCi", "uCi")] -
+          estimates[estimates$par == names(tempData)[i], "mean"] * (tempData[[i]][["mean"]] / tempData[[i]][["sd"]])
+        estimates[estimates$par == names(tempData)[i], c("mean", "median", "lCi", "uCi")] <- estimates[estimates$par == names(tempData)[i], c("mean", "median", "lCi", "uCi")] / tempData[[i]][["sd"]]
+      }
+    }
+  }
+
+  estimates$par      <- .robmaVariableNames(estimates$par, variables = options[["predictors"]])
+  estimates$subgroup <- attr(fit, "subgroup")
+
+  return(estimates)
+}
+.robmaRowCoefficientsWeightfunctionEstimates <- function(fit, options, conditional) {
+
+  # handle missing subfits
+  if (jaspBase::isTryError(fit)) {
+    return(NULL)
+  }
+
+  fitSummary <- summary(
+    fit,
+    conditional = conditional,
+    probs       = c(.5 + c(-1, 1) * options[["confidenceIntervalsLevel"]] / 2)
+  )[[if (conditional) "estimates_conditional" else "estimates"]]
+
+  estimates <- data.frame(
+    par    = rownames(fitSummary),
+    mean   = fitSummary[["Mean"]],
+    median = fitSummary[["Median"]],
+    lCi    = fitSummary[[3]],
+    uCi    = fitSummary[[4]]
+  )
+  estimates <- estimates[grepl("omega", estimates$par),,drop=FALSE]
+
+  # get p-value intervals
+  estimatesInterval <- gsub("omega", "", estimates$par)
+  estimatesInterval <- gsub("[", "", gsub("]", "", estimatesInterval, fixed = TRUE), fixed = TRUE)
+  estimatesInterval <- data.frame(do.call(rbind, lapply(estimatesInterval, function(x) strsplit(x, split = ",", fixed = TRUE)[[1]])))
+  estimates$lowerRange <- estimatesInterval[,1]
+  estimates$upperRange <- estimatesInterval[,2]
+
+  estimates$subgroup <- attr(fit, "subgroup")
+
+  return(estimates)
+}
+.robmaRowCoefficientsPetPeeseEstimates       <- function(fit, options, conditional) {
+
+  # handle missing subfits
+  if (jaspBase::isTryError(fit)) {
+    return(NULL)
+  }
+
+  fitSummary <- summary(
+    fit,
+    conditional = conditional,
+    probs       = c(.5 + c(-1, 1) * options[["confidenceIntervalsLevel"]] / 2)
+  )[[if (conditional) "estimates_conditional" else "estimates"]]
+
+  estimates <- data.frame(
+    par    = rownames(fitSummary),
+    mean   = fitSummary[["Mean"]],
+    median = fitSummary[["Median"]],
+    lCi    = fitSummary[[3]],
+    uCi    = fitSummary[[4]]
+  )
+  estimates <- estimates[grepl("PET", estimates$par) | grepl("PEESE", estimates$par),,drop=FALSE]
+
+  estimates$subgroup <- attr(fit, "subgroup")
+
+  return(estimates)
+}
+
 # additional help functions
 .robmaGetEstimatedMarginalMeansOptions <- function(options){
 
@@ -2228,8 +2113,6 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     "transformEffectSize"
   )])
 }
-
-
 .robmaEstimatedMarginalMeansWarnings   <- function(fit, options, parameter) {
 
   if (parameter == "")
@@ -2247,574 +2130,79 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
   } else {
     for (i in seq_along(fit)) {
 
-      tempFit      <- fit[[1]]
+      tempFit      <- fit[[i]]
       tempWarnings <- attr(tempFit, "warnings")
       tempWarnings <- gsub("mu_", "", tempWarnings)
+      tempWarnings <- tempWarnings[grep(parameter, tempWarnings)]
 
       if (length(tempWarnings) > 0) {
-        messages <- c(messages, sapply(gettextf("Subgroup %1$s, %2$s", attr(tempFit, "subgroup")), tempWarnings))
+        messages <- c(messages, sapply(tempWarnings, function(x) gettextf("Subgroup %1$s, %2$s", tempFit$subgroup[1], x)))
       }
     }
   }
 
   return(messages)
 }
-# containers
-.robmaExtractModelSummaryContainer      <- function(jaspResults) {
-
-  if (!is.null(jaspResults[["modelSummaryContainer"]]))
-    return(jaspResults[["modelSummaryContainer"]])
-
-  # create the output container
-  modelSummaryContainer <- createJaspContainer(gettext("Model Summary"))
-  modelSummaryContainer$dependOn(.robmaDependencies)
-  modelSummaryContainer$position <- 2
-  jaspResults[["modelSummaryContainer"]] <- modelSummaryContainer
-
-  return(modelSummaryContainer)
-}
-.robmaExtractMetaregressionContainer    <- function(jaspResults) {
-
-  if (!is.null(jaspResults[["metaregressionContainer"]]))
-    return(jaspResults[["metaregressionContainer"]])
-
-  # create the output container
-  metaregressionContainer <- createJaspContainer(gettext("Meta-Regression Summary"))
-  metaregressionContainer$dependOn(c(.robmaDependencies))
-  metaregressionContainer$position <- 3
-  jaspResults[["metaregressionContainer"]] <- metaregressionContainer
-
-  return(metaregressionContainer)
-}
-.robmaExtractPublicationBiasContainer   <- function(jaspResults) {
-
-  if (!is.null(jaspResults[["publicationBiasContainer"]]))
-    return(jaspResults[["publicationBiasContainer"]])
-
-  # create the output container
-  publicationBiasContainer <- createJaspContainer(gettext("Publication Bias Adjustment Summary"))
-  publicationBiasContainer$dependOn(c(.robmaDependencies, "confidenceIntervals"))
-  publicationBiasContainer$position <- 4
-  jaspResults[["publicationBiasContainer"]] <- publicationBiasContainer
-
-  return(publicationBiasContainer)
-}
-.robmaExtractEstimatedMarginalMeansContainer   <- function(jaspResults) {
-
-  if (!is.null(jaspResults[["estimatedMarginalMeansContainer"]]))
-    return(jaspResults[["estimatedMarginalMeansContainer"]])
-
-  # create the output container
-  estimatedMarginalMeansContainer <- createJaspContainer(gettext("Estimated Marginal Means Summary"))
-  estimatedMarginalMeansContainer$dependOn(c(.robmaDependencies, "confidenceIntervals", "confidenceIntervalsLevel", "includeFullDatasetInSubgroupAnalysis"))
-  estimatedMarginalMeansContainer$position <- 5
-  jaspResults[["estimatedMarginalMeansContainer"]] <- estimatedMarginalMeansContainer
-
-  return(estimatedMarginalMeansContainer)
-}
-.robmaExtractPriorAndPosteriorPlotContainer    <- function(jaspResults) {
-
-  if (!is.null(jaspResults[["priorAndPosteriorPlotContainer"]]))
-    return(jaspResults[["priorAndPosteriorPlotContainer"]])
-
-  # create the output container
-  priorAndPosteriorPlotContainer <- createJaspContainer(gettext("Prior and Posterior Plots"))
-  priorAndPosteriorPlotContainer$dependOn(c(.robmaDependencies, "includeFullDatasetInSubgroupAnalysis", "priorAndPosteriorPlotType", "priorAndPosteriorPlotIncludePriorDistribution"))
-  priorAndPosteriorPlotContainer$position <- 6
-  jaspResults[["priorAndPosteriorPlotContainer"]] <- priorAndPosteriorPlotContainer
-
-  return(priorAndPosteriorPlotContainer)
-}
-.robmaExtractDiagnosticsContainer       <- function(jaspResults) {
-
-  if (!is.null(jaspResults[["diagnosticsContainer"]]))
-    return(jaspResults[["diagnosticsContainer"]])
-
-  # create the output container
-  diagnosticsContainer <- createJaspContainer(gettext("Diagnostics"))
-  diagnosticsContainer$dependOn(.robmaDependencies)
-  diagnosticsContainer$position <- 8
-  jaspResults[["diagnosticsContainer"]] <- diagnosticsContainer
-
-  return(diagnosticsContainer)
-}
-.robmaExtractDiagnosticsSubContainer    <- function(diagnosticsContainer, parameter, title, position, dependencies) {
-
-  if (!is.null(diagnosticsContainer[[parameter]]))
-    return(diagnosticsContainer[[parameter]])
-
-  # create the output container
-  diagnosticsSubContainer <- createJaspContainer(title)
-  diagnosticsSubContainer$dependOn(dependencies)
-  diagnosticsSubContainer$position <- position
-  diagnosticsContainer[[parameter]] <- diagnosticsSubContainer
-
-  return(diagnosticsSubContainer)
-}
-
-
-### OLD -------------------------------------------------------------------------------------------------
-
-
-
-# table filling functions
-.robmaAddPriorColumn      <- function(jaspTable, robmaTable) {
-
-  # identify prior columns
-  priorColumns <- which(attr(robmaTable, "type") == "prior")
-  if(length(priorColumns) == 0)
-    return(jaspTable)
-
-  # translate prior names (there will be custom names with addition of meta-regression later)
-  priorNamesTranslate  <- function(name) switch(
-    name,
-    "Effect"        = gettext("Effect Size"),
-    "Heterogeneity" = gettext("Heterogeneity"),
-    "Bias"          = gettext("Publication Bias"),
-    "Baseline"      = gettext("Baseline"),
-    name
-  )
-
-  for(i in priorColumns)
-    jaspTable$addColumnInfo(name = colnames(robmaTable)[i], title = priorNamesTranslate(colnames(robmaTable)[i]), type = "string",  overtitle = gettext("Prior Distribution"))
-
-  return(jaspTable)
-}
-.robmaFillPriorColumn     <- function(jaspRow, robmaRow) {
-
-  # identify prior columns
-  priorColumns <- which(attr(robmaRow, "type") == "prior")
-  if(length(priorColumns) == 0)
-    return(jaspRow)
-
-  for(i in priorColumns)
-    jaspRow[[colnames(robmaRow)[i]]] <- robmaRow[,colnames(robmaRow)[i]]
-
-  return(jaspRow)
-}
-.robmaTableFillCoef       <- function(jaspTable, resultsTable, options, individual = FALSE) {
-
-  overtitleCi <- gettextf("%s%% CI", 100 * options[["inferenceCiWidth"]])
-  # add columns
-  jaspTable$addColumnInfo(name = "terms",  title = "",                type = "string")
-  jaspTable$addColumnInfo(name = "mean",   title = gettext("Mean"),   type = "number")
-  jaspTable$addColumnInfo(name = "median", title = gettext("Median"), type = "number")
-  jaspTable$addColumnInfo(name = "lowerCI",title = gettext("Lower"),  type = "number", overtitle = overtitleCi)
-  jaspTable$addColumnInfo(name = "upperCI",title = gettext("Upper"),  type = "number", overtitle = overtitleCi)
-
-  if (individual) {
-    jaspTable$addColumnInfo(name = "mcmcError",   title = gettext("MCMC error"),    type = "number")
-    jaspTable$addColumnInfo(name = "mcmcErrorSd", title = gettext("MCMC error/SD"), type = "number")
-    jaspTable$addColumnInfo(name = "ess",         title = gettext("ESS"),           type = "integer")
-    jaspTable$addColumnInfo(name = "rHat",        title = gettext("R-hat"),         type = "number")
-  }
-
-
-  if (is.null(resultsTable))
-    return(jaspTable)
-
-  # fill rows
-  for (i in c(1:nrow(resultsTable))[rownames(resultsTable) %in% c("mu", "tau")]) {
-    tempRow <- list(
-      terms    = .robmaCoefNames(rownames(resultsTable)[i], options),
-      mean     = resultsTable[i, "Mean"],
-      median   = resultsTable[i, "Median"],
-      lowerCI  = resultsTable[i, if (individual) "lCI" else as.character(.5 - options[["inferenceCiWidth"]] / 2)],
-      upperCI  = resultsTable[i, if (individual) "uCI" else as.character(.5 + options[["inferenceCiWidth"]] / 2)]
-    )
-    if (individual) {
-      tempRow[["mcmcError"]]   <- resultsTable[i, "MCMC_error"]
-      tempRow[["mcmcErrorSd"]] <- resultsTable[i, "MCMC_SD_error"]
-      tempRow[["ess"]]         <- resultsTable[i, "ESS"]
-      tempRow[["rHat"]]        <- resultsTable[i, "R_hat"]
-    }
-
-    jaspTable$addRows(tempRow)
-  }
-
-  # add footnote
-  footnotes       <- attr(resultsTable, "footnotes")
-  for(i in seq_along(footnotes[!grepl("publication weights omega", footnotes)])) {
-    jaspTable$addFootnote(footnotes[!grepl("publication weights omega", footnotes)][i])
-  }
-
-  return(jaspTable)
-}
-.robmaTableFillPetPeese   <- function(jaspTable, resultsTable, options, individual = FALSE) {
-
-  overtitleCi <- gettextf("%s%% CI", 100 * options[["inferenceCiWidth"]])
-  # add columns
-  jaspTable$addColumnInfo(name = "terms",  title = "",                type = "string")
-  jaspTable$addColumnInfo(name = "mean",   title = gettext("Mean"),   type = "number")
-  jaspTable$addColumnInfo(name = "median", title = gettext("Median"), type = "number")
-  jaspTable$addColumnInfo(name = "lowerCI",title = gettext("Lower"),  type = "number", overtitle = overtitleCi)
-  jaspTable$addColumnInfo(name = "upperCI",title = gettext("Upper"),  type = "number", overtitle = overtitleCi)
-
-  if (individual) {
-    jaspTable$addColumnInfo(name = "mcmcError",   title = gettext("MCMC error"),    type = "number")
-    jaspTable$addColumnInfo(name = "mcmcErrorSd", title = gettext("MCMC error/SD"), type = "number")
-    jaspTable$addColumnInfo(name = "ess",         title = gettext("ESS"),           type = "integer")
-    jaspTable$addColumnInfo(name = "rHat",        title = gettext("R-hat"),         type = "number")
-  }
-
-
-  if (is.null(resultsTable))
-    return(jaspTable)
-
-  # fill rows
-  for (i in c(1:nrow(resultsTable))[rownames(resultsTable) %in% c("PET", "PEESE")]) {
-    tempRow <- list(
-      terms    = rownames(resultsTable)[i],
-      mean     = resultsTable[i, "Mean"],
-      median   = resultsTable[i, "Median"],
-      lowerCI  = resultsTable[i, if (individual) "lCI" else as.character(.5 - options[["inferenceCiWidth"]] / 2)],
-      upperCI  = resultsTable[i, if (individual) "uCI" else as.character(.5 + options[["inferenceCiWidth"]] / 2)]
-    )
-    if (individual) {
-      tempRow[["mcmcError"]]   <- resultsTable[i, "MCMC_error"]
-      tempRow[["mcmcErrorSd"]] <- resultsTable[i, "MCMC_SD_error"]
-      tempRow[["ess"]]         <- resultsTable[i, "ESS"]
-      tempRow[["rHat"]]        <- resultsTable[i, "R_hat"]
-    }
-
-    jaspTable$addRows(tempRow)
-  }
-
-
-  return(jaspTable)
-}
-.robmaTableFillWeights    <- function(jaspTable, resultsTable, options, individual = FALSE) {
-
-  overtitleP  <- gettext("<em>p</em>-values interval")
-  overtitleCi <- gettextf("%s%% CI", 100 * options[["inferenceCiWidth"]])
-  # add columns
-  jaspTable$addColumnInfo(name = "lowerRange", title = gettext("Lower"),  type = "number", overtitle = overtitleP)
-  jaspTable$addColumnInfo(name = "upperRange", title = gettext("Upper"),  type = "number", overtitle = overtitleP)
-  jaspTable$addColumnInfo(name = "mean",       title = gettext("Mean"),   type = "number")
-  jaspTable$addColumnInfo(name = "median",     title = gettext("Median"), type = "number")
-  jaspTable$addColumnInfo(name = "lowerCI",    title = gettext("Lower"),  type = "number", overtitle = overtitleCi)
-  jaspTable$addColumnInfo(name = "upperCI",    title = gettext("Upper"),  type = "number", overtitle = overtitleCi)
-
-  if (individual) {
-    jaspTable$addColumnInfo(name = "mcmcError",   title = gettext("MCMC error"),    type = "number")
-    jaspTable$addColumnInfo(name = "mcmcErrorSd", title = gettext("MCMC error/SD"), type = "number")
-    jaspTable$addColumnInfo(name = "ess",         title = gettext("ESS"),           type = "integer")
-    jaspTable$addColumnInfo(name = "rHat",        title = gettext("R-hat"),         type = "number")
-  }
-
-
-  if (is.null(resultsTable))
-    return(jaspTable)
-
-
-  # fill rows
-  for (i in c(1:nrow(resultsTable))[grepl("omega", rownames(resultsTable))]) {
-    tempRow <- list(
-      lowerRange = as.numeric(substr(
-        rownames(resultsTable)[i],
-        7,
-        regexec(",", rownames(resultsTable)[i], fixed = TRUE)[[1]] - 1
-      )),
-      upperRange = as.numeric(substr(
-        rownames(resultsTable)[i],
-        regexec(",", rownames(resultsTable)[i], fixed = TRUE)[[1]] + 1,
-        nchar(rownames(resultsTable)[i]) - 1
-      )),
-      mean       = resultsTable[i, "Mean"],
-      median     = resultsTable[i, "Median"],
-      lowerCI    = resultsTable[i, if (individual) "lCI" else as.character(.5 - options[["inferenceCiWidth"]] / 2)],
-      upperCI    = resultsTable[i, if (individual) "uCI" else as.character(.5 + options[["inferenceCiWidth"]] / 2)]
-    )
-    if (individual) {
-      tempRow[["mcmcError"]]   <- resultsTable[i, "MCMC_error"]
-      tempRow[["mcmcErrorSd"]] <- resultsTable[i, "MCMC_SD_error"]
-      tempRow[["ess"]]         <- resultsTable[i, "ESS"]
-      tempRow[["rHat"]]        <- resultsTable[i, "R_hat"]
-    }
-
-    jaspTable$addRows(tempRow)
-  }
-
-  # add footnote
-  footnotes       <- attr(resultsTable, "footnotes")
-  for(i in seq_along(footnotes[grepl("publication weights omega", footnotes)])) {
-    jaspTable$addFootnote(footnotes[grepl("publication weights omega", footnotes)][i])
-  }
-
-  return(jaspTable)
-}
-.robmaCoefNames           <- function(coefficient, options) {
-  if (coefficient == "mu" && (!is.null(options[["inputType"]]) && options[["inputType"]] != "unstandardizedEffectSizes"))
-    return(gettextf("Effect size (%s)", "\u03BC"))
-  else if (coefficient == "mu")
-    return(gettextf("Effect size (%s)", .robmaCoefLetters(options[["inferenceOutputScale"]])))
-  else if (coefficient == "tau")
-    return(gettextf("Heterogeneity (%s)","\u03C4"))
-}
-.robmaCompNames           <- function(component) {
+.robmaComponentNames   <- function(component, options) {
   return(switch(
     component,
-    "Effect"        = gettext("Effect"),
+    # from options
+    "effectSize"    = if (.maIsMetaregression(options)) gettext("Adjusted effect") else gettext("Pooled effect"),
+    "effect"        = if (.maIsMetaregression(options)) gettext("Adjusted effect") else gettext("Pooled effect"),
+    "heterogeneity" = gettext("Heterogeneity"),
+    "bias"          = gettext("Publication bias"),
+    "Baseline"      = gettext("Baseline"),
+    # from package
+    "Effect"        = if (.maIsMetaregression(options)) gettext("Adjusted effect") else gettext("Pooled effect"),
     "Heterogeneity" = gettext("Heterogeneity"),
     "Bias"          = gettext("Publication bias"),
     "Baseline"      = gettext("Baseline")
   ))
 }
-.robmaCoefLetters         <- function(effectSize) {
-  return(switch(
-    effectSize,
-    "correlation" = "\u03C1",
-    "cohensD"     = "\u03B4",
-    "fishersZ"    = "\u007a",
-    "logOr"       = gettext("log(OR)"),
-    "or"          = gettext("OR")
-  ))
-}
-# helper functions
-.robmaCheckDiagnostics    <- function(options, any) {
-  parametersAny <-
-    options[["mcmcDiagnosticsPlotEffect"]]          ||
-    options[["mcmcDiagnosticsPlotHeterogeneity"]]   ||
-    options[["mcmcDiagnosticsPlotWeights"]]         ||
-    options[["mcmcDiagnosticsPlotPet"]]             ||
-    options[["mcmcDiagnosticsPlotPeese"]]
-  typeAny <- options[["mcmcDiagnosticsPlotTypeTrace"]]  ||
-    options[["mcmcDiagnosticsPlotTypeAutocorrelation"]] ||
-    options[["mcmcDiagnosticsPlotTypePosteriorSamplesDensity"]]
+.robmaVariableNames    <- function(varNames, variables) {
 
-  if (any)
-    return(parametersAny || typeAny)
-  else
-    return(parametersAny && typeAny)
-}
-.robmaModelNotifier       <- function(jaspResults) {
-  # We don't wanna delete the RoBMA modele every time settings is change since RoBMA takes a lot of time to fit.
-  # Therefore, we don't create dependencies on the fitted model (in cases when the model can be updated), but
-  # on a notifier that tells us when there was the change. If possible, we don't refit the whole model,
-  # just update the neccessary parts.
+  return(sapply(varNames, function(varName){
 
-  if (is.null(jaspResults[["modelNotifier"]])) {
-    modelNotifier <- createJaspState()
-    modelNotifier$dependOn(.robmaDependencies)
-    jaspResults[["modelNotifier"]] <- modelNotifier
+    if (varName %in% c("intrcpt", "intercept"))
+      return(gettext("Intercept"))
+    #     # TODO: figure out how to handle this when interactions are present
+    #     # (will need ignoring inside of square brackets for [dif: A] or [A])
+    #     for (vn in variables) {
+    #       inf <- regexpr(vn, varName, fixed = TRUE)
+    #
+    #       if (inf[1] != -1) {
+    #         varName <- paste0(
+    #           substr(varName, 0, inf[1] - 1),
+    #           substr(varName, inf[1], inf[1] + attr(inf, "match.length") - 1),
+    #           " (",
+    #           substr(varName, inf[1] + attr(inf, "match.length"), nchar(varName))
+    #         )
+    #       }
+    #
+    #     }
+    #
+    #     varName <- gsub(":", paste0(")", jaspBase::interactionSymbol), varName, fixed = TRUE)
+    #     varName <- paste0(varName, ")")
+    #     varName <- gsub(" ()", "", varName, fixed = TRUE)
+    #     varName <- gsub(" (/", "/", varName, fixed = TRUE)
+
+    return(varName)
+
+  }))
+}
+.robmaHasHeterogeneity <- function(options) {
+
+  priors <- .robmaGetPriors(options)
+
+  for (i in seq_along(priors[["heterogeneity"]])) {
+    if (priors[["heterogeneity"]][[i]][["distribution"]] != "point" ||
+        (priors[["heterogeneity"]][[i]][["distribution"]] == "point" && priors[["heterogeneity"]][[i]][["parameters"]][["location"]] != 0))
+      return(TRUE)
   }
 
-  return()
-
+  return(FALSE)
 }
-
-.robmaTypeDependencies    <- function(type) {
-  return(switch(
-    type,
-    "RoBMA" = .robmaDependencies,
-    "BiBMA" = .bibmaDependencies
-  ))
-}
-# main functions
-.robmaPriorsPlots              <- function(jaspResults, options) {
-
-  # create / access the container
-  if (!is.null(jaspResults[["priorPlots"]]))
-    priorPlots <- jaspResults[["priorPlots"]]
-  else {
-    priorPlots <- createJaspContainer(title = gettext("Prior Plots"))
-    priorPlots$dependOn(c("priorDistributionPlot", "inputType", "pathToFittedModel", "priorScale", "modelEnsembleType"))
-    priorPlots$position <- 2
-    jaspResults[["priorPlots"]] <- priorPlots
-  }
-
-  # extract the priors
-  if (is.null(jaspResults[["model"]]) && options[["modelEnsembleType"]] != "custom")
-    priors <- .robmaPriorsToOptionsNames(RoBMA::check_setup(model_type = .robmaGetModelTypeOption(options), silent = TRUE)$priors)
-  else if (is.null(jaspResults[["model"]]))
-    priors <- .robmaPriorsToOptionsNames(jaspResults[["priors"]][["object"]])
-  else
-    priors <- .robmaPriorsToOptionsNames(jaspResults[["model"]][["object"]][["priors"]])
-
-
-  # create container for each of the parameters
-  for (parameter in c("effect", "heterogeneity", "bias")) {
-
-    if (!is.null(priorPlots[[parameter]]))
-      parameterContainer <- priorPlots[[parameter]]
-    else {
-      parameterContainer <- createJaspContainer(title = switch(
-        parameter,
-        "effect"          = gettext("Effect"),
-        "heterogeneity"   = gettext("Heterogeneity"),
-        "bias"            = gettext("Publication Bias")
-      ))
-      parameterContainer$position <- switch(
-        parameter,
-        "effect"          = 1,
-        "heterogeneity"   = 2,
-        "bias"            = 3
-      )
-      priorPlots[[parameter]] <- parameterContainer
-    }
-
-    # create container for null and alternative models
-    for (type in c("null", "alternative")) {
-
-      if (!is.null(parameterContainer[[type]])) {
-        next
-      } else {
-        typeContainer <- createJaspContainer(title = switch(
-          type,
-          "null"         = gettext("Null"),
-          "alternative"  = gettext("Alternative")
-        ))
-        typeContainer$position <- switch(
-          type,
-          "null"         = 1,
-          "alternative"  = 2
-        )
-        typeContainer$dependOn(switch(
-          parameter,
-          "effect"        = c("modelsEffect", "modelsEffectNull"),
-          "heterogeneity" = c("modelsHeterogeneity", "modelsHeterogeneityNull"),
-          "bias"          = c("modelsSelectionModels", "modelsSelectionModelsNull", "modelsPet", "modelsPetNull", "modelsPeese", "modelsPeeseNull")
-        ))
-        parameterContainer[[type]] <- typeContainer
-      }
-
-      tempPriors <- priors[[paste0(switch(
-        parameter,
-        "effect"        = "modelsEffect",
-        "heterogeneity" = "modelsHeterogeneity",
-        "bias"          = "modelsBias"
-      ), if (type == "null") "Null")]]
-
-      if (length(tempPriors) == 0)
-        next
-
-      # generate the actual plots
-      for (i in seq_along(tempPriors)) {
-
-        if(BayesTools::is.prior.none(tempPriors[[i]]))
-          next
-
-        if (parameter == "bias")
-          tempPlot <- createJaspPlot(width = 500,  height = 400)
-        else
-          tempPlot <- createJaspPlot(width = 400,  height = 300)
-
-        typeContainer[[paste0(parameter, type, i)]] <- tempPlot
-
-        p <- plot(tempPriors[[i]], plot_type = "ggplot", rescale_x = TRUE, par_name = switch(
-          parameter,
-          "effect"        = bquote(mu),
-          "heterogeneity" = bquote(tau),
-          NULL
-        ))
-        p <- jaspGraphs::themeJasp(p)
-
-        typeContainer[[paste0(parameter, type, i)]][["plotObject"]] <- p
-
-      }
-    }
-  }
-
-  return()
-}
-
-.robmaReadFittedModel          <- function(options) {
-  if (tolower(gsub(" ", "", options[["pathToFittedModel"]])) == "examplerobmalui2015") {
-    data("exampleRobmaLui2015")
-    return(exampleRobmaLui2015)
-  } else {
-    try(readRDS(file = options[["pathToFittedModel"]]))
-  }
-}
-
-
-.robmaModelsOverviewTable      <- function(jaspResults, options, type) {
-
-  ### create overview table
-  modelsSummary <- createJaspTable(title = gettext("Models Overview"))
-  modelsSummary$position <- 8
-  modelsSummary$dependOn(c(.robmaTypeDependencies(type), "bayesFactorType", "inferenceModelsOverview", "inferenceModelsOverviewBF", "inferenceModelsOverviewOrder", "inferenceShortenPriorName"))
-  jaspResults[["mainSummary"]][["modelsSummary"]] <- modelsSummary
-
-  if (options[["inferenceModelsOverviewBfComparison"]] == "inclusion")
-    titleBF <- switch(
-      options[["bayesFactorType"]],
-      "BF10"    = gettext("Inclusion BF"),
-      "BF01"    = gettext("Exclusion BF"),
-      "LogBF10" = gettext("log(Inclusion BF)")
-    )
-  else
-    titleBF <- switch(
-      options[["bayesFactorType"]],
-      "BF10"    = gettextf("BF%s",     "\u2081\u2080"),
-      "BF01"    = gettextf("BF%s",     "\u2080\u2081"),
-      "LogBF10" = gettextf("log(BF%s)","\u2081\u2080")
-    )
-
-
-  if (is.null(jaspResults[["model"]]))
-    fitSummary <- NULL
-  else
-    fitSummary <- summary(
-      jaspResults[["model"]][["object"]],
-      type       = "models",
-      short_name = options[["inferenceShortenPriorName"]]
-    )
-
-  # create the table
-  modelsSummary$addColumnInfo(name = "number",             title = "#",                        type = "integer")
-  if (!is.null(fitSummary))
-    modelsSummary <- .robmaAddPriorColumn(modelsSummary, fitSummary[["summary"]])
-  modelsSummary$addColumnInfo(name = "priorProb",          title = gettext("P(M)"),             type = "number")
-  modelsSummary$addColumnInfo(name = "postProb",           title = gettext("P(M|data)"),        type = "number")
-  modelsSummary$addColumnInfo(name = "marglik",            title = gettext("log(MargLik)"),     type = "number")
-  modelsSummary$addColumnInfo(name = "BF",                 title = titleBF,                     type = "number")
-
-  if (is.null(fitSummary))
-    return()
-
-  # do ordering
-  if (options[["inferenceModelsOverviewOrder"]] == "marginalLikelihood")
-    fitSummary[["summary"]] <- fitSummary[["summary"]][order(fitSummary[["summary"]][["marglik"]], decreasing = TRUE),]
-  else if (options[["inferenceModelsOverviewOrder"]] == "posteriorProbability")
-    fitSummary[["summary"]] <- fitSummary[["summary"]][order(fitSummary[["summary"]][["post_prob"]], decreasing = TRUE),]
-
-  # compute the BF requested
-  if (options[["inferenceModelsOverviewBfComparison"]] == "inclusion") {
-    bf <- fitSummary[["summary"]][, 8]
-  } else if (options[["inferenceModelsOverviewBfComparison"]] == "best") {
-    bf <- exp(fitSummary[["summary"]][["marglik"]] - max(fitSummary[["summary"]][["marglik"]]))
-  } else if (options[["inferenceModelsOverviewBfComparison"]] == "previous") {
-    tempThisMargLik <- fitSummary[["summary"]][["marglik"]][-length(fitSummary[["summary"]][["marglik"]])]
-    tempPrevMargLik <- fitSummary[["summary"]][["marglik"]][-1]
-    bf <- c(1, exp(tempPrevMargLik - tempThisMargLik))
-  }
-
-  # fill the rows
-  for (i in 1:nrow(fitSummary[["summary"]])) {
-    tempRow <- list(
-      number             = fitSummary[["summary"]][i, "Model"],
-      priorProb          = fitSummary[["summary"]][i, "prior_prob"],
-      postProb           = fitSummary[["summary"]][i, "post_prob"],
-      marglik            = fitSummary[["summary"]][i, "marglik"],
-      BF                 = BayesTools::format_BF(bf[i], logBF = options[["bayesFactorType"]] == "LogBF10", BF01 = options[["bayesFactorType"]] == "BF01")
-    )
-    tempRow <- .robmaFillPriorColumn(tempRow, fitSummary[["summary"]][i,])
-    modelsSummary$addRows(tempRow)
-  }
-
-  return()
-}
-.robmaModelsSummaryTable       <- function(jaspResults, options, type) {
-
-  if (!is.null(jaspResults[["individualModels"]])) {
-    return()
-  } else {
-    individualModels <- createJaspContainer(title = gettext("Individual Models Summary"))
-    individualModels$position <- 9
-    individualModels$dependOn(c(.robmaTypeDependencies(type), "bayesFactorType", "inferenceIndividualModels", "inferenceIndividualModelsSingleModel", "inferenceIndividualModelsSingleModelNumber", "inferenceShortenPriorName", "inferenceOutputScale"))
-    jaspResults[["individualModels"]] <- individualModels
-  }
+.robmaAddBfColumn      <- function(tempTable, options) {
 
   titleBF <- switch(
     options[["bayesFactorType"]],
@@ -2823,782 +2211,81 @@ RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NU
     "LogBF10" = gettext("log(Inclusion BF)")
   )
 
-  if (is.null(jaspResults[["model"]])) {
-
-    tempModel <- createJaspContainer(title = gettext("Model #"))
-    individualModels[["modelI"]] <- tempModel
-
-    tempPriors <- createJaspTable(title = gettext("Priors"))
-    if (type == "RoBMA") {
-      tempPriors$addColumnInfo(name = "priorMu",       title = gettext("Effect Size"),      type = "string")
-      tempPriors$addColumnInfo(name = "priorTau",      title = gettext("Heterogeneity"),    type = "string")
-      tempPriors$addColumnInfo(name = "priorBias",     title = gettext("Publication Bias"), type = "string")
-    } else if (type == "BiBMA") {
-      tempPriors$addColumnInfo(name = "priorMu",       title = gettext("Effect Size"),      type = "string")
-      tempPriors$addColumnInfo(name = "priorTau",      title = gettext("Heterogeneity"),    type = "string")
-      tempPriors$addColumnInfo(name = "priorBaseline", title = gettext("Baseline"),         type = "string")
-    }
-    tempModel[["tempPriors"]] <- tempPriors
-
-    tempInfo <- createJaspTable(title = gettext("Information"))
-    tempInfo$addColumnInfo(name = "priorProb",   title = gettext("P(M)"),          type = "number")
-    tempInfo$addColumnInfo(name = "postProb",    title = gettext("P(M|data)"),     type = "number")
-    tempInfo$addColumnInfo(name = "marglik",     title = gettext("log(MargLik)"),  type = "number")
-    tempInfo$addColumnInfo(name = "BF",          title = titleBF,                  type = "number")
-    tempModel[["tempInfo"]] <- tempInfo
-
-    tempCoef <- createJaspTable(title = gettext("Model Estimates"))
-    tempCoef <- .robmaTableFillCoef(tempCoef, NULL, options, individual = TRUE)
-    tempModel[["tempCoef"]] <- tempCoef
-
-    return()
-  }
-
-  # extract the model
-  fit   <- jaspResults[["model"]][["object"]]
-
-  # some shared info
-  fitSummary <- summary(
-    fit,
-    type          = "individual",
-    output_scale  = .robmaGetOutputScaleOption(options),
-    short_name    = options[["inferenceShortenPriorName"]]
-  )
-
-  ### create tables for individual models
-
-  # select models to iterate over
-  if (options[["inferenceIndividualModelsSingleModel"]]) {
-    modelsI <- options[["inferenceIndividualModelsSingleModelNumber"]]
-    if (modelsI < 1 || modelsI > length(fit[["models"]])) {
-      tempModel  <- createJaspContainer(title = gettextf("Model %i", modelsI))
-      tempError  <- createJaspTable(title = "")
-      tempError$setError(gettextf("Model %1$i does not exist. Select one of the models between 1 and %2$i.", modelsI, length(fit[["models"]])))
-      tempModel[["tempError"]]                     <- tempError
-      individualModels[[paste0("model", modelsI)]] <- tempModel
-      return()
-    }
-  } else {
-    modelsI <- 1:length(fit[["models"]])
-  }
-
-
-  # do the iteration
-  for (i in modelsI) {
-
-    tempModel <- createJaspContainer(title = gettextf("Model %i", i))
-    individualModels[[paste0("model", i)]] <- tempModel
-
-    ### model priors
-    tempPriors <- createJaspTable(title = gettext("Priors"))
-
-    if (type == "RoBMA") {
-
-      tempPriors$addColumnInfo(name = "priorMu",    title = gettext("Effect Size"),      type = "string")
-      tempPriors$addColumnInfo(name = "priorTau",   title = gettext("Heterogeneity"),    type = "string")
-      tempPriors$addColumnInfo(name = "priorBias",  title = gettext("Publication Bias"), type = "string")
-
-      tempPriors$addRows(list(
-        priorMu     = print(fit[["models"]][[i]][["priors"]][["mu"]],    silent = TRUE, short_name = options[["inferenceShortenPriorName"]]),
-        priorTau    = print(fit[["models"]][[i]][["priors"]][["tau"]],   silent = TRUE, short_name = options[["inferenceShortenPriorName"]]),
-        priorBias   = if (!is.null(fit[["models"]][[i]][["priors"]][["omega"]]))
-          print(fit[["models"]][[i]][["priors"]][["omega"]], silent = TRUE, short_name = options[["inferenceShortenPriorName"]])
-        else if (!is.null(fit[["models"]][[i]][["priors"]][["PET"]]))
-          print(fit[["models"]][[i]][["priors"]][["PET"]],   silent = TRUE, short_name = options[["inferenceShortenPriorName"]])
-        else if (!is.null(fit[["models"]][[i]][["priors"]][["PEESE"]]))
-          print(fit[["models"]][[i]][["priors"]][["PEESE"]], silent = TRUE, short_name = options[["inferenceShortenPriorName"]])
-      ))
-
-    } else if (type == "BiBMA") {
-
-      tempPriors$addColumnInfo(name = "priorMu",       title = gettext("Effect Size"),      type = "string")
-      tempPriors$addColumnInfo(name = "priorTau",      title = gettext("Heterogeneity"),    type = "string")
-      tempPriors$addColumnInfo(name = "priorBaseline", title = gettext("Baseline"),         type = "string")
-
-      tempPriors$addRows(list(
-        priorMu       = print(fit[["models"]][[i]][["priors"]][["mu"]],   silent = TRUE, short_name = options[["inferenceShortenPriorName"]]),
-        priorTau      = print(fit[["models"]][[i]][["priors"]][["tau"]],  silent = TRUE, short_name = options[["inferenceShortenPriorName"]]),
-        priorBaseline = print(fit[["models"]][[i]][["priors"]][["pi"]],   silent = TRUE, short_name = options[["inferenceShortenPriorName"]])
-      ))
-
-    }
-
-    tempModel[["tempPriors"]] <- tempPriors
-
-
-    ### model information
-    tempInfo <- createJaspTable(title = gettext("Information"))
-
-    tempInfo$addColumnInfo(name = "priorProb",   title = gettext("P(M)"),          type = "number")
-    tempInfo$addColumnInfo(name = "postProb",    title = gettext("P(M|data)"),     type = "number")
-    tempInfo$addColumnInfo(name = "marglik",     title = gettext("log(MargLik)"),  type = "number")
-    tempInfo$addColumnInfo(name = "BF",          title = titleBF,                  type = "number")
-
-    tempInfo$addRows(list(
-      priorProb    = fit[["models"]][[i]][["inference"]][["prior_prob"]],
-      postProb     = fit[["models"]][[i]][["inference"]][["post_prob"]],
-      marglik      = fit[["models"]][[i]][["inference"]][["marglik"]],
-      BF           = BayesTools::format_BF(fit[["models"]][[i]][["inference"]][["inclusion_BF"]], logBF = options[["bayesFactorType"]] == "LogBF10", BF01 = options[["bayesFactorType"]] == "BF01")
-    ))
-
-    tempModel[["tempInfo"]] <- tempInfo
-
-
-    ### model coefficients
-    # estimate table
-    tempCoef <- createJaspTable(title = gettext("Model Estimates"))
-    tempCoef <- .robmaTableFillCoef(tempCoef, fitSummary$models[[i]][["estimates"]], options, individual = TRUE)
-    tempModel[["tempCoef"]] <- tempCoef
-
-    ### weights and studies effects
-    if (type == "RoBMA" && !is.null(fitSummary[["models"]][[i]][["estimates"]])) {
-
-      # weights table
-      if (any(grepl("omega", rownames(fitSummary[["models"]][[i]][["estimates"]])))) {
-        tempWeights <- createJaspTable(title = gettextf("Estimated Weights (%s)", "\u03C9"))
-        tempWeights <- .robmaTableFillWeights(tempWeights, fitSummary$models[[i]][["estimates"]], options, individual = TRUE)
-        tempModel[["tempWeights"]] <- tempWeights
-      }
-
-      # estimated studies table
-      if (any(grepl("PET", rownames(fitSummary[["models"]][[i]][["estimates"]])) | grepl("PEESE", rownames(fitSummary[["models"]][[i]][["estimates"]])))) {
-        tempPetPeese <- createJaspTable(title = gettextf("PET-PEESE Estimates"))
-        tempPetPeese <- .robmaTableFillPetPeese(tempPetPeese, fitSummary[["models"]][[i]][["estimates"]], options, individual = TRUE)
-        tempModel[["tempPetPeese"]] <- tempPetPeese
-      }
-    }
-  }
+  tempTable$addColumnInfo(name = "bf", title = titleBF, type = "number")
 
   return()
 }
-.robmaForestPlot               <- function(jaspResults, options, type) {
 
-  if (!is.null(jaspResults[["forestPlot"]]))
-    return()
+# print functions
+.robmaPrintBf             <- function(bf) {
 
-  # prepare the plot object
-  title  <- gettextf("%1$s Forest Plot", switch(
-    options[["plotsForestPlotType"]],
-    "conditional" = gettext("Conditional"),
-    "averaged"    = gettext("Model Averaged")
-  ))
-
-  if (is.null(jaspResults[["model"]])) {
-    jaspResults[["forestPlot"]] <- createJaspPlot(title = title, dependencies = "plotsForestPlot")
-    return()
-  }
-
-  # extract the model
-  fit <- jaspResults[["model"]][["object"]]
-
-  height <- 100 + nrow(fit[["data"]]) * 50
-  width  <- 800
-
-  forestPlot <- createJaspPlot(title = title, width = width, height = height)
-  forestPlot$position <- 10
-  forestPlot$dependOn(c(.robmaTypeDependencies(type), "plotsForestPlot", "plotsForestPlotOrder", "plotsForestPlotType", "inferenceOutputScale"))
-  jaspResults[["forestPlot"]] <- forestPlot
-
-
-  # plot
-  p <- try(RoBMA::forest(
-    fit,
-    conditional  = options[["plotsForestPlotType"]] == "conditional",
-    order        = options[["plotsForestPlotOrder"]],
-    output_scale = .robmaGetOutputScaleOption(options),
-    plot_type    = "ggplot"
-  ))
-
-  if (jaspBase::isTryError(p)) {
-    forestPlot$setError(p)
-    return()
-  }
-
-  p <- jaspGraphs::themeJasp(p, sides = "b")
-  jaspResults[["forestPlot"]]$plotObject <- p
-
-  return()
-}
-.robmaEstimatesPlot            <- function(jaspResults, options, parameter, type) {
-
-  # create / access the container
-  if (is.null(jaspResults[["estimatesPlots"]])) {
-    estimatesPlots <- createJaspContainer(title = gettext("Posterior Distribution Plots"))
-    estimatesPlots$position <- 11
-    estimatesPlots$dependOn(c(.robmaTypeDependencies(type), "plotsPooledEstimatesType", "plotsPooledEstimatesPriorDistribution", "inferenceOutputScale"))
-    jaspResults[["estimatesPlots"]] <- estimatesPlots
-  } else {
-    estimatesPlots <- jaspResults[["estimatesPlots"]]
-  }
-
-  # don't redo an already created plot
-  if (!is.null(estimatesPlots[[parameter]]))
-    return()
-
-  # prepare the plot object
-  title  <- sprintf(
-    "%1$s %2$s",
-    switch(
-      options[["plotsPooledEstimatesType"]],
-      "conditional" = gettext("Conditional"),
-      "averaged"    = gettext("Model Averaged")
-    ),
-    switch(
-      parameter,
-      "mu"             = gettext("Effect Size Estimate"),
-      "tau"            = gettext("Heterogeneity Estimate"),
-      "weightFunction" = gettext("Weight Function Estimate"),
-      "petPeese"       = gettext("PET-PEESE Regression Estimate")
-    ))
-  height <- 350
-  width  <- 600
-
-  tempPlot <- createJaspPlot(title = title, width = width, height = height)
-  tempPlot$position <- switch(
-    parameter,
-    "mu"             = 1,
-    "tau"            = 2,
-    "weightFunction" = 3,
-    "petPeese"       = 4
-  )
-  tempPlot$dependOn(switch(
-    parameter,
-    "mu"             = "plotsPooledEstimatesEffect",
-    "tau"            = "plotsPooledEstimatesHeterogeneity",
-    "weightFunction" = c("plotsPooledEstimatesWeightFunction", "plotsPooledEstimatesWeightFunctionRescaleXAxis"),
-    "petPeese"       = "plotsPooledEstimatesPetPeese"
-  ))
-  estimatesPlots[[parameter]] <- tempPlot
-
-  if (is.null(jaspResults[["model"]]))
-    return()
-
-  # extract the model
-  fit   <- jaspResults[["model"]][["object"]]
-
-  # plot
-  p <- try(plot(
-    fit,
-    parameter    = parameter,
-    prior        = options[["plotsPooledEstimatesPriorDistribution"]],
-    output_scale = .robmaGetOutputScaleOption(options),
-    rescale_x    = options[["plotsPooledEstimatesWeightFunctionRescaleXAxis"]],
-    conditional  = options[["plotsPooledEstimatesType"]] == "conditional",
-    plot_type    = "ggplot"
-  ))
-
-  if (jaspBase::isTryError(p)) {
-    tempPlot$setError(p)
-    return()
-  }
-
-  if (attr(p, "sec_axis"))
-    p <- jaspGraphs::themeJasp(p, sides = "blr") + ggplot2::theme(
-      axis.title.y.right = ggplot2::element_text(vjust = 3.25),
-      plot.margin        = ggplot2::margin(t = 3, r = 12, b = 0, l = 1))
-  else
-    p <- jaspGraphs::themeJasp(p, sides = "bl")
-
-  estimatesPlots[[parameter]]$plotObject <- p
-
-  return()
-}
-.robmaModelsPlot               <- function(jaspResults, options, parameter, type) {
-
-  # create / access the container
-  if (is.null(jaspResults[["modelsPlots"]])) {
-    modelsPlots <- createJaspContainer(title = gettext("Posterior Model Estimates Plots"))
-    modelsPlots$position <- 12
-    modelsPlots$dependOn(c(.robmaTypeDependencies(type), "plotsIndividualModelsType", "plotsIndividualModelsOrder", "plotsIndividualModelsOrderBy", "plotsIndividualModelsShowBayesianUpdating", "plotsIndividualModelsShowPosteriorEstimates", "inferenceOutputScale"))
-    jaspResults[["modelsPlots"]] <- modelsPlots
-  } else {
-    modelsPlots <- jaspResults[["modelsPlots"]]
-  }
-
-  # don't redo an already created plot
-  if (!is.null(modelsPlots[[parameter]]))
-    return()
-
-  # prepare the plot object
-  title  <- sprintf(
-    "%1$s %2$s",
-    switch(
-      options[["plotsIndividualModelsType"]],
-      "conditional" = gettext("Conditional"),
-      "averaged"    = gettext("Model Averaged")
-    ),
-    switch(
-      parameter,
-      "mu"  = gettext("Effect Size Estimates"),
-      "tau" = gettext("Heterogeneity Estimates")
-    ))
-
-  if (is.null(jaspResults[["model"]])) {
-    modelsPlots[[parameter]] <- createJaspPlot(title = title, dependencies = switch(
-      parameter,
-      "mu"  = "plotsIndividualModelsEffect",
-      "tau" = "plotsIndividualModelsHeterogeneity"
-    ))
-    return()
-  }
-
-  # extract the model
-  fit   <- jaspResults[["model"]][["object"]]
-
-  height_multiplier <- if(options[["plotsIndividualModelsShowBayesianUpdating"]] && options[["plotsIndividualModelsShowPosteriorEstimates"]]) 65 else 30
-  height <- switch(
-    options[["plotsIndividualModelsType"]],
-    "averaged"    = 50 + length(fit[["models"]]) * height_multiplier,
-    "conditional" = 50 + sum(sapply(fit[["models"]], function(model) RoBMA:::.is_component_null(model[["priors"]], component = switch(parameter, "mu" = "effect", "tau" = "heterogeneity")))) * height_multiplier
-  )
-  width  <- 800
-
-  tempPlot <- createJaspPlot(title = title, width = width, height = height)
-  tempPlot$position <- switch(
-    parameter,
-    "mu"  = 1,
-    "tau" = 2
-  )
-  tempPlot$dependOn(switch(
-    parameter,
-    "mu"  = "plotsIndividualModelsEffect",
-    "tau" = "plotsIndividualModelsHeterogeneity"
-  ))
-  modelsPlots[[parameter]] <- tempPlot
-
-  # plot
-  p <- try(RoBMA::plot_models(
-    fit,
-    parameter      = parameter,
-    order          = options[["plotsIndividualModelsOrder"]],
-    order_by       = .robmaGetIndividualModelOrderOption(options),
-    conditional    = options[["plotsIndividualModelsType"]] == "conditional",
-    output_scale   = .robmaGetOutputScaleOption(options),
-    show_updating  = options[["plotsIndividualModelsShowBayesianUpdating"]],
-    show_estimates = options[["plotsIndividualModelsShowPosteriorEstimates"]],
-    y_axis2        = options[["plotsIndividualModelsShowBayesianUpdating"]] || options[["plotsIndividualModelsShowPosteriorEstimates"]],
-    plot_type      = "ggplot"
-  ))
-
-  if (jaspBase::isTryError(p)) {
-    tempPlot$setError(p)
-    return()
-  }
-
-  p <- jaspGraphs::themeJasp(p, sides = "b")
-  modelsPlots[[parameter]]$plotObject <- p
-
-  return()
-}
-.robmaDiagnosticsOverviewTable <- function(jaspResults, options, type) {
-
-  # create / access the container
-  if (is.null(jaspResults[["diagnostics"]])) {
-    diagnostics <- createJaspContainer(title = gettext("Diagnostics"))
-    diagnostics$position <- 13
-    diagnostics$dependOn(.robmaTypeDependencies(type))
-    jaspResults[["diagnostics"]] <- diagnostics
-  } else {
-    diagnostics <- jaspResults[["diagnostics"]]
-  }
-
-  if (!is.null(diagnostics[["diagosticsTable"]])) {
-    return()
-  }
-
-
-  if (is.null(jaspResults[["model"]]))
-    fitSummary <- NULL
-  else
-    fitSummary <- summary(
-      jaspResults[["model"]][["object"]],
-      type       = "diagnostics",
-      short_name = options[["inferenceShortenPriorName"]]
-    )
-
-
-  ### create overview table
-  diagosticsTable <-  createJaspTable(title = gettext("Models Diagnostics Overview"))
-  diagosticsTable$position <- 1
-  diagosticsTable$dependOn(c(.robmaTypeDependencies(type), "mcmcDiagnosticsOverviewTable", "inferenceShortenPriorName"))
-  diagnostics[["diagosticsTable"]] <- diagosticsTable
-
-  overtitlePrior <- gettext("Prior Distribution")
-
-  diagosticsTable$addColumnInfo(name = "number",             title = "#",                           type = "integer")
-  if (!is.null(fitSummary))
-    diagosticsTable <- .robmaAddPriorColumn(diagosticsTable, fitSummary[["diagnostics"]])
-  diagosticsTable$addColumnInfo(name = "mcmcError",          title = gettext("max(MCMC error)"),    type = "number")
-  diagosticsTable$addColumnInfo(name = "mcmcErrorSd",        title = gettext("max(MCMC error/SD)"), type = "number")
-  diagosticsTable$addColumnInfo(name = "ess",                title = gettext("min(ESS)"),           type = "integer")
-  diagosticsTable$addColumnInfo(name = "rHat",               title = gettext("max(R-hat)"),         type = "number")
-
-
-  if (is.null(fitSummary))
-    return()
-
-
-  for (i in 1:nrow(fitSummary[["diagnostics"]])) {
-   tempRow <- list(
-      number             = fitSummary[["diagnostics"]][i, "Model"],
-      mcmcError          = fitSummary[["diagnostics"]][i, "max_MCMC_error"],
-      mcmcErrorSd        = fitSummary[["diagnostics"]][i, "max_MCMC_SD_error"],
-      ess                = fitSummary[["diagnostics"]][i, "min_ESS"],
-      rHat               = fitSummary[["diagnostics"]][i, "max_R_hat"]
-    )
-    tempRow <- .robmaFillPriorColumn(tempRow, fitSummary[["diagnostics"]][i,])
-    diagosticsTable$addRows(tempRow)
-  }
-
-  return()
-}
-.robmaDiagnosticsPlots         <- function(jaspResults, options, type) {
-
-  # create / access the container
-  if (is.null(jaspResults[["diagnostics"]])) {
-    diagnostics <- createJaspContainer(title = gettext("Diagnostics"))
-    diagnostics$position <- 14
-    diagnostics$dependOn(.robmaTypeDependencies(type))
-    jaspResults[["diagnostics"]] <- diagnostics
-  } else {
-    diagnostics <- jaspResults[["diagnostics"]]
-  }
-
-
-  ### create waiting plot
-  if (is.null(jaspResults[["model"]]))
-    wait <- TRUE
-  else if (type == "RoBMA" && !.robmaCheckDiagnostics(options, any = FALSE))
-    wait <- TRUE
-  else if (type == "BiBMA" && !.bibmaCheckDiagnostics(options, any = FALSE))
-    wait <- TRUE
-  else
-    wait <- FALSE
-
-  if (wait) {
-    tempWait  <- createJaspHtml(text = gettext("MCMC Diagnostics plots are created once both the plotted parameter ('Plot') and the plot type ('Type') options are selected."))
-    tempWait$dependOn(c("mcmcDiagnosticsPlotEffect", "mcmcDiagnosticsPlotHeterogeneity", "mcmcDiagnosticsPlotWeights", "mcmcDiagnosticsPlotPet", "mcmcDiagnosticsPlotPeese",
-                        "mcmcDiagnosticsPlotTypeTrace", "mcmcDiagnosticsPlotTypeAutocorrelation", "mcmcDiagnosticsPlotTypePosteriorSamplesDensity"))
-    diagnostics[["tempWait"]] <- tempWait
-    return()
-  }
-
-
-  # extract the model
-  fit   <- jaspResults[["model"]][["object"]]
-
-  # select models to iterate over
-  if (options[["mcmcDiagnosticsPlotSingleModel"]]) {
-    modelsI <- options[["mcmcDiagnosticsPlotSingleModelNumber"]]
-    if (modelsI < 1 || modelsI > length(fit[["models"]])) {
-      tempModel  <- createJaspContainer(title = gettextf("Model %i", modelsI))
-      diagnostics[[paste0("model", modelsI)]] <- tempModel
-      tempError  <- createJaspPlot(title = "")
-      tempError$dependOn("mcmcDiagnosticsPlotSingleModelNumber", "mcmcDiagnosticsPlotSingleModel")
-      tempError$setError(gettextf("Model %1$i does not exist. Select one of the models between 1 and %2$i.", modelsI, length(fit[["models"]])))
-      tempModel[["tempError"]] <- tempError
-      return()
-    }
-  } else {
-    modelsI <- 1:length(fit[["models"]])
-  }
-
-  # collect the parameters
-  parameters <- NULL
-  if (options[["mcmcDiagnosticsPlotEffect"]])
-    parameters <- c(parameters, "mu")
-  if (options[["mcmcDiagnosticsPlotHeterogeneity"]])
-    parameters <- c(parameters, "tau")
-  if (options[["mcmcDiagnosticsPlotWeights"]])
-    parameters <- c(parameters, "omega")
-  if (options[["mcmcDiagnosticsPlotPet"]])
-    parameters <- c(parameters, "PET")
-  if (options[["mcmcDiagnosticsPlotPeese"]])
-    parameters <- c(parameters, "PEESE")
-
-
-  # do the iterations
-  for (i in modelsI) {
-    # create / access container for individual models
-    if (is.null(diagnostics[[paste0("model_", i)]])) {
-      tempModel <- createJaspContainer(title = gettextf("Model %i", i))
-      tempModel$position <- i
-      tempModel$dependOn(c("mcmcDiagnosticsPlotSingleModelNumber", "mcmcDiagnosticsPlotSingleModel"))
-      diagnostics[[paste0("model", i)]] <- tempModel
+  bf <- sapply(bf, function(x) {
+    if (is.infinite(x) && x > 0) {
+      return("\U221E")
+    } else if (is.infinite(x) && x < 0) {
+      return("-\U221E")
+    } else if (x < 1) {
+      return(sprintf("%1$.3f", x))
+    } else if (x < 10) {
+      return(sprintf("%1$.2f", x))
+    } else if (x < 100) {
+      return(sprintf("%1$.1f", x))
+    } else if (x < 100) {
+      return(sprintf("%1$.1f", x))
+    } else if (x < 1e5){
+      return(sprintf("%1$.0f", x))
     } else {
-      tempModel <- diagnostics[[paste0("model", i)]]
+      return(sprintf("%1$.3g", x))
     }
+  })
+  return(bf)
+}
+.robmaPrintBfTest         <- function(out, options) {
 
-    noPars <- TRUE # tracker for checking whether any parameter was plotted
+  bfText <- switch(
+    options[["bayesFactorType"]],
+    "BF10"    = "BF\U2081\U2080",
+    "BF01"    = "BF\U2080\U2081",
+    "LogBF10" = "logBF\U2081\U2080"
+  )
 
-    for (par in parameters) {
-      # create / access container for individual parameters
-      if (is.null(tempModel[[par]])) {
-        tempPar <- createJaspContainer(title = switch(
-          par,
-          "mu"    = gettext("Effect"),
-          "tau"   = gettext("Heterogeneity"),
-          "omega" = gettext("Weights"),
-          "PET"   = gettext("PET"),
-          "PEESE" = gettext("PEESE")
-        ))
-        tempPar$position <- switch(
-          par,
-          "mu"    = 1,
-          "tau"   = 2,
-          "omega" = 3,
-          "PET"   = 4,
-          "PEESE" = 5
-        )
-        tempPar$dependOn(switch(
-          par,
-          "mu"    = "mcmcDiagnosticsPlotEffect",
-          "tau"   = "mcmcDiagnosticsPlotHeterogeneity",
-          "omega" = "mcmcDiagnosticsPlotWeights",
-          "PET"   = "mcmcDiagnosticsPlotPet",
-          "PEESE" = "mcmcDiagnosticsPlotPeese"
-        ))
-        tempModel[[par]] <- tempPar
-      } else {
-        tempPar <- tempModel[[par]]
-      }
+  return(sprintf("%1$s = %2$s", bfText, .robmaPrintBf(out[["bf"]])))
+}
+.robmaPrintTest           <- function(fit, options, component, includeName = TRUE) {
 
+  out <- .robmaRowTests(fit, options)
+  out <- out[out$test == .robmaComponentNames(component, options),, drop = FALSE]
 
-      # add trace plots
-      if (options[["mcmcDiagnosticsPlotTypeTrace"]]) {
-        # create / access container for trace plots
-        if (is.null(tempPar[["trace"]])) {
-          tempPlots <- createJaspContainer(gettext("Trace plots"))
-          tempPlots$position <- 1
-          tempPlots$dependOn("mcmcDiagnosticsPlotTypeTrace")
-          tempPar[["trace"]] <- tempPlots
-        } else {
-          tempPlots <- tempPar[["trace"]]
-        }
-
-        # create plots
-        newPlots <- RoBMA::diagnostics(
-          fit,
-          parameter     = par,
-          type          = "chains",
-          plot_type     = "ggplot",
-          show_models   = i,
-          title         = FALSE
-        )
-
-        # (temporal) fix for the package returning a list with empty plots on the remaining spots
-        newPlots <- newPlots[!sapply(newPlots, is.null)]
-
-        if (length(newPlots) == 0)
-          next
-
-        noPars <- FALSE
-
-        # add them to the container
-        if (!ggplot2::is.ggplot(newPlots)) {
-          for (pi in 1:length(newPlots)) {
-            tempPlot  <- createJaspPlot(width = 400, aspectRatio = .7)
-            tempPlots[[paste0("trace", pi)]] <- tempPlot
-            tempPlot[["plotObject"]] <-
-              jaspGraphs::themeJasp(newPlots[[pi]])
-          }
-        } else {
-          tempPlot  <- createJaspPlot(width = 400, aspectRatio = .7)
-          tempPlots[[paste0("trace", 1)]] <- tempPlot
-          tempPlot[["plotObject"]] <- jaspGraphs::themeJasp(newPlots)
-        }
-
-      }
-
-
-      # add autocorrelation plots
-      if (options[["mcmcDiagnosticsPlotTypeAutocorrelation"]]) {
-        # create / access container for trace plots
-        if (is.null(tempPar[["autocor"]])) {
-          tempPlots <- createJaspContainer(gettext("Average autocorrelations"))
-          tempPlots$position <- 2
-          tempPlots$dependOn("mcmcDiagnosticsPlotTypeAutocorrelation")
-          tempPar[["autocor"]] <- tempPlots
-        } else {
-          tempPlots <- tempPar[["autocor"]]
-        }
-
-        # create plots
-        newPlots <- RoBMA::diagnostics(
-          fit,
-          parameter     = par,
-          type          = "autocorrelations",
-          plot_type     = "ggplot",
-          show_models   = i,
-          title         = FALSE
-        )
-
-        # (temporal) fix for the package returning a list with empty plots on the remaining spots
-        newPlots <- newPlots[!sapply(newPlots, is.null)]
-
-        if (length(newPlots) == 0)
-          next
-
-        noPars <- FALSE
-
-        # add them to the container
-        if (!ggplot2::is.ggplot(newPlots)) {
-          for (pi in 1:length(newPlots)) {
-            tempPlot  <- createJaspPlot(width = 400, aspectRatio = .7)
-            tempPlots[[paste0("autocor", pi)]] <- tempPlot
-            tempPlot[["plotObject"]] <-
-              jaspGraphs::themeJasp(newPlots[[pi]])
-          }
-
-        } else {
-          tempPlot  <- createJaspPlot(width = 400, aspectRatio = .7)
-          tempPlots[[paste0("autocor", 1)]] <- tempPlot
-          tempPlot[["plotObject"]] <- jaspGraphs::themeJasp(newPlots)
-        }
-
-      }
-
-
-      # add sample densities plots
-      if (options[["mcmcDiagnosticsPlotTypePosteriorSamplesDensity"]]) {
-        # create / access container for trace plots
-        if (is.null(tempPar[["samples"]])) {
-          tempPlots <- createJaspContainer(gettext("Posterior samples densities"))
-          tempPlots$position <- 3
-          tempPlots$dependOn("mcmcDiagnosticsPlotTypePosteriorSamplesDensity")
-          tempPar[["samples"]] <- tempPlots
-        } else {
-          tempPlots <- tempPar[["samples"]]
-        }
-
-        # create plots
-        newPlots <- RoBMA::diagnostics(
-          fit,
-          parameter     = par,
-          type          = "densities",
-          plot_type     = "ggplot",
-          show_models   = i,
-          title         = FALSE
-        )
-
-        # (temporal) fix for the package returning a list with empty plots on the remaining spots
-        newPlots <- newPlots[!sapply(newPlots, is.null)]
-
-        if (length(newPlots) == 0)
-          next
-
-        noPars <- FALSE
-
-        # add them to the container
-        if (!ggplot2::is.ggplot(newPlots)) {
-          for (pi in 1:length(newPlots)) {
-            tempPlot  <- createJaspPlot(width = 400, aspectRatio = .7)
-            tempPlots[[paste0("samples", pi)]] <- tempPlot
-            tempPlot[["plotObject"]] <- jaspGraphs::themeJasp(newPlots[[pi]])
-          }
-
-        } else {
-          tempPlot  <- createJaspPlot(width = 400, aspectRatio = .7)
-          tempPlots[[paste0("samples", 1)]] <- tempPlot
-          tempPlot[["plotObject"]] <- jaspGraphs::themeJasp(newPlots)
-        }
-
-      }
-
-    }
-
-    # show error if only one model is selected but doesn't contain any of the diagnostics
-    if (noPars && options[["mcmcDiagnosticsPlotSingleModelNumber"]]) {
-      tempError  <- createJaspHtml(text = gettextf("Model %i does not contain any of the selected parameters.", i))
-      tempError$dependOn(c("mcmcDiagnosticsPlotEffect", "mcmcDiagnosticsPlotHeterogeneity", "mcmcDiagnosticsPlotWeights", "mcmcDiagnosticsPlotPet", "mcmcDiagnosticsPlotPeese",
-                           "mcmcDiagnosticsPlotTypeTrace", "mcmcDiagnosticsPlotTypeAutocorrelation", "mcmcDiagnosticsPlotTypePosteriorSamplesDensity"))
-      tempModel[["tempError"]] <- tempError
-    }
+  if (includeName) {
+    return(sprintf("%1$s: %2$s", out[["test"]], .robmaPrintBfTest(out, options)))
+  } else {
+    return(.robmaPrintBfTest(out, options))
   }
+}
+.robmaPrintPooledEstimate <- function(fit, options, digits, parameter, conditional) {
 
-  return()
-}
-.robmaGetModelTypeOption       <- function(options) {
-  return(switch(
-    options[["modelEnsembleType"]],
-    "PSMA"     = "PSMA",
-    "PP"       = "PP",
-    "original" = "2w",
-    "custom"   = "custom"
-  ))
-}
-.robmaGetPriorScaleOption      <- function(options) {
-  if (options[["inputType"]] == "unstandardizedEffectSizes")
-    return("none")
-  else
-    return(switch(
-      options[["priorScale"]],
-      "cohensD"   = "cohens_d",
-      "fishersZ"  = "fishers_z",
-      "logOr"     = "logOR"
-    ))
-}
-.robmaGetFittingScaleOption    <- function(options) {
-  if (options[["inputType"]] == "unstandardizedEffectSizes")
-    return("none")
-  else
-    return(switch(
-      options[["advancedEstimationScale"]],
-      "cohensD"   = "cohens_d",
-      "fishersZ"  = "fishers_z",
-      "logOr"     = "logOR"
-    ))
-}
-.robmaGetOutputScaleOption     <- function(options) {
-  if (!is.null(options[["inputType"]]) && options[["inputType"]] != "unstandardizedEffectSizes")
-    return(NULL)
-  else
-    return(switch(
-      options[["inferenceOutputScale"]],
-      "cohensD"     = "cohens_d",
-      "fishersZ"    = "fishers_z",
-      "logOr"       = "logOR",
-      "or"          = "OR",
-      "correlation" = "r"
-    ))
-}
-.robmaGetIndividualModelOrderOption <- function(options){
-  return(switch(
-    options[["plotsIndividualModelsOrderBy"]],
-    "modelNumber"          = "model",
-    "estimate"             = "estimate",
-    "bayesFactor"          = "BF",
-    "posteriorProbability" = "probability"
-  ))
-}
-.robmaSaveModel                <- function(jaspResults, options) {
-  if (is.null(jaspResults[["modelSaved"]])) {
-    modelSaved <- createJaspState()
-    modelSaved$dependOn(c(.robmaDependencies, "advancedSaveFittedModel"))
-    jaspResults[["modelSaved"]] <- modelSaved
+  options[["heterogeneityTau"]]    <- parameter == "tau"
+  options[["heterogeneityTau2"]]   <- parameter == "tau2"
+  options[["heterogeneityI2"]]     <- parameter == "I2"
+  options[["heterogeneityH2"]]     <- parameter == "H2"
 
-  }
+  out <- .robmaRowPooledEstimates(fit, options, conditional)
+  out <- out[rownames(out) == switch(
+    parameter,
+    "effect" = "effectSize",
+    "tau"    = "heterogeneityTau",
+    "tau2"   = "heterogeneityTau2",
+    "I2"     = "heterogeneityI2",
+    "H2"     = "heterogeneityH2"
+  ),,drop = FALSE]
 
-  modelSaved[["object"]] <- TRUE
-}
-.robmaPriorsToOptionsNames     <- function(priors) {
-  priorNames               <- names(priors)
-  substr(priorNames, 1, 1) <- toupper(substr(priorNames, 1, 1))
-  priorNames               <- paste0("models", priorNames)
-  names(priors)            <- priorNames
-  return(priors)
-}
-.robmaErrorHandling            <- function(fit, options) {
-
-  if (jaspBase::isTryError(fit))
-    .quitAnalysis(fit)
-
-  if (all(!RoBMA:::.get_model_convergence(fit))) {
-    if (options[["advancedRemoveFailedModels"]])
-      .quitAnalysis(gettext("All models failed to converge under the MCMC convergence criteria. Please update the MCMC settings."))
-    else
-      .quitAnalysis(gettext("All models failed to converge. Please update the MCMC settings."))
-  }
-
-  return()
+  return(sprintf(paste0(
+    "%1$s  = ",
+    "%2$.", digits, "f",
+    " [",
+    "%3$.", digits, "f",
+    ", ",
+    "%4$.", digits, "f",
+    "]"
+  ), out$par, out$mean, out$lCi, out$uCi))
 }
