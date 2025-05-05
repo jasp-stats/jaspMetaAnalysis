@@ -183,7 +183,8 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
   # prepare data
   dataCall <- list(
-    dataset[!names(dataset) %in% "means"],
+    x = dataset[["data"]],
+    n = dataset[["n"]],
     cor.analysis = options[["dataInputType"]] == "correlation"
   )
   if (!is.null(dataset[["means"]])) {

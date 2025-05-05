@@ -70,7 +70,6 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
     return(dataset)
 
   dataset <- .readDataSetToEnd(all.columns = TRUE)
-  saveRDS(dataset, file = "C:/JASP/datasetRaw.RDS")
   # masem requires a wide format of the correlation/covariance matrices
   # (because of backwards compatibility with previous tutorial papers etc)
   # therefore, the variable names need to be decoded manually for reconstruction
