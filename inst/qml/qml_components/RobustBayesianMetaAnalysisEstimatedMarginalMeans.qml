@@ -80,7 +80,7 @@ Section
 					name:				"estimatedMarginalMeansEffectSizeTestAgainst0"
 					label:				qsTr("Test against 0")
 					childrenOnSameRow:	true
-					info: qsTr("Option to test the estimated marginal means against 0.")
+					info: qsTr("Option to test the estimated marginal means against 0. The test is performed using a Savage-Dickey Density Ratio test based on the prior and posterior distributions assuming either the presence of the effect or moderation.")
 				}
 			}
 		}

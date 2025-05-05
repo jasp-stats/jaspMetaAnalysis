@@ -132,10 +132,10 @@
     return()
 
   # dispatch fitting function & dependencies
-  if (options[["module"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate")) {
+  if (.maIsClassical(options)) {
     fittingFunction <- .maFitModelFun
     dependencies    <- .maDependencies
-  } else if (options[["module"]] %in% c("NoBMA", "RoBMA")) {
+  } else {
     fittingFunction <- .robmaFitModelFun
     dependencies    <- .robmaDependencies
   }
@@ -345,8 +345,9 @@
   fitOutput <- jaspResults[[objectName]]$object
 
   # full dataset fit
+  saveRDS(  fitOutput[["__fullDataset"]], file = "C:/JASP-Packages/fit0.RDS")
   fitOutput[["__fullDataset"]] <- .maUpdateFitModelDatasetFun(fitOutput[["__fullDataset"]], dataset, options)
-
+  saveRDS(  fitOutput[["__fullDataset"]], file = "C:/JASP-Packages/fit1.RDS")
   # add subgroup fits
   if (options[["subgroup"]] != "") {
 
@@ -387,7 +388,7 @@
     fit <- NULL
   }
 
-  if (options[["module"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate")) {
+  if (.maIsClassical(options)) {
     if (!is.null(fitOutput[["fitClustered"]])) {
       fitClustered <- fitOutput[["fitClustered"]]
       attr(fitClustered, "dataset") <- dataset
@@ -1402,7 +1403,7 @@
   fit <- .maExtractFit(jaspResults, options)
 
   # stop on error
-  if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit)) || !is.null(.maCheckIsPossibleOptions(options)))
+  if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit)) || (.maIsClassical(options) && !is.null(.maCheckIsPossibleOptions(options))))
     return()
 
   # try execute!
@@ -1429,8 +1430,8 @@
     width  = width,
     height = height
   )
-  forestPlot$position <- 5
-  forestPlot$dependOn(.maForestPlotDependencies)
+  forestPlot$position <- if (.maIsClassical(options)) 5 else 7
+  forestPlot$dependOn(c(.maForestPlotDependencies, if (.maIsClassical(options)) .maDependencies else .robmaDependencies))
 
   if (!attr(plotOut, "isPanel")) {
     forestPlot$plotObject <- plotOut
@@ -2079,7 +2080,7 @@
     fitOutput <- fitOutput[names(fitOutput) != "__fullDataset"]
   }
 
-  if (options[["module"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate")) {
+  if (.maIsClassical(options)) {
     fitOutputExtracted <- lapply(fitOutput, function(output){
       if (!.maIsClustered(options) || nonClustered) {
         return(output[["fit"]])
@@ -2087,7 +2088,7 @@
         return((output)[["fitClustered"]])
       }
     })
-  } else if (options[["module"]] %in% c("NoBMA", "RoBMA")) {
+  } else {
     fitOutputExtracted <- lapply(fitOutput, function(output){
       return(output[["fit"]])
     })
@@ -2238,9 +2239,10 @@
 .maComputeFixedEffect              <- function(fit, options) {
 
   # refit the model as a fixed effect model
+  data <- attr(fit, "dataset")
   fit <- metafor::rma(
-    yi     = fit$data[[options[["effectSize"]]]],
-    sei    = fit$data[[options[["effectSizeStandardError"]]]],
+    yi     = data[[options[["effectSize"]]]],
+    sei    = data[[options[["effectSizeStandardError"]]]],
     method = "FE",
     test   = options[["fixedEffectTest"]]
   )
@@ -3760,6 +3762,15 @@
 # extract options
 .maGetMethodOptions                             <- function(options) {
 
+  # dummy return for Bayesian methods
+  # simplifies further plotting dispatch in forest plot
+  if (!.maIsClassical(options)) {
+    if (.robmaHasHeterogeneity(options))
+      return("REML")
+    else
+      return("FE")
+  }
+
   switch(
     options[["method"]],
     "equalEffects"       = "EE",
@@ -4865,9 +4876,9 @@
   messages <- NULL
 
   if (.maIsMetaregressionEffectSize(options)) {
-    if (options[["module"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate")) {
+    if (.maIsClassical(options)) {
       effectSizeName <- gettext("pooled effect")
-    } else   if (options[["module"]] %in% c("RoBMA", "NoBMA")) {
+    } else {
       effectSizeName <- gettext("adjusted effect")
     }
   } else {
@@ -4920,9 +4931,9 @@
   }
 
   if (.maIsMetaregressionEffectSize(options)) {
-    if (options[["module"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate")) {
+    if (.maIsClassical(options)) {
       messages <- c(messages, gettext("The pooled effect size corresponds to the weighted average effect across studies."))
-    } else   if (options[["module"]] %in% c("RoBMA", "NoBMA")) {
+    } else {
       messages <- c(messages, gettext("The adjusted effect corresponds to the averaged effect size estimate across the levels of all moderators."))
     }
   }

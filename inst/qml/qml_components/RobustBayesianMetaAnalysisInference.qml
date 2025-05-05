@@ -129,6 +129,7 @@ Section
 		{
 			label:		qsTr("Conditional estimates")
 			name:		"conditionalEstimates"
+			info: qsTr("Include conditional estimates, i.e., estimates assuming the presence of the corresponding model component/parameter, in the tabular output and figures.")
 		}
 
 		DropDown

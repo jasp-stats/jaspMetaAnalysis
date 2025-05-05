@@ -225,6 +225,7 @@ Form
 	MA.RobustBayesianMetaAnalysisModel
 	{
 		analysisType:	"RoBMA"
+		id:				sectionModel
 	}
 /*
 	//// Priors Section ////

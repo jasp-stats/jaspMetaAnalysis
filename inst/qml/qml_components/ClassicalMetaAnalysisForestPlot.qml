@@ -135,7 +135,8 @@ Section
 				name:			"forestPlotStudyInformationStudyWeights"
 				text:			qsTr("Study weights")
 				enabled:		forestPlotStudyInformation.checked
-				visible:	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
+				visible:		module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
+				checked:		false
 				info: qsTr("Include the study weights in the right section of the study-level information panel.")
 			}
 
@@ -283,6 +284,7 @@ Section
 				name:		"forestPlotEstimatedMarginalMeansCoefficientTests"
 				id:			forestPlotEstimatedMarginalMeansCoefficientTests
 				enabled:	forestPlotEstimatedMarginalMeans.checked
+				visible:		module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
 				label:		qsTr("Coefficient tests")
 				checked:	true
 				info: qsTr("Include coefficient tests of variables included in the estimated marginal means. The null hypothesis states that the estimated marginal mean for a given level equals the tested value.")
@@ -290,11 +292,20 @@ Section
 				DoubleField
 				{
 					name:			"forestPlotEstimatedMarginalMeansCoefficientTestsAgainst"
-					visible:		module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
 					text:			qsTr("Against")
 					defaultValue:	0
 					info: qsTr("Specify the test value for the coefficient tests.")
 				}
+			}
+
+			CheckBox
+			{
+				name:		"forestPlotEstimatedMarginalMeansCoefficientTestsAgainst0"
+				enabled:	forestPlotEstimatedMarginalMeans.checked
+				visible:	module === "RoBMA" || module === "NoBMA"
+				label:		qsTr("Coefficient tests against 0")
+				checked:	true
+				info: qsTr("Include coefficient tests of variables included in the estimated marginal means against 0. The null hypothesis states that the estimated marginal mean for a given level equals the tested value.")
 			}
 
 		}
@@ -342,14 +353,14 @@ Section
 			{
 				title:		qsTr("Estimate")
 				columns:	2
-				visible:	module == "metaAnalysis"
+				visible:	module === "metaAnalysis" || module === "RoBMA"  || module === "NoBMA"
 				enabled:	(method.value != "fixedEffects" || method.value != "equalEffects")
 
 				CheckBox
 				{
 					text:		qsTr("𝜏")
 					name:		"forestPlotHeterogeneityEstimateTau"
-					checked:	module == "metaAnalysis"
+					checked:	module === "metaAnalysis" || module === "RoBMA"  || module === "NoBMA"
 					info: qsTr("Include the meta-analytic 𝜏, the square root of the estimated between-study variance in the model information section. Not available for multilevel/multivariate meta-analysis.")
 				}
 
@@ -365,7 +376,7 @@ Section
 				{
 					text:		qsTr("I²")
 					name:		"forestPlotHeterogeneityEstimateI2"
-					enabled:	sectionModel.heterogeneityModelTermsCount == 0
+					enabled:	(module === "RoBMA"  || module === "NoBMA") || sectionModel.heterogeneityModelTermsCount == 0
 					checked:	false
 					info: qsTr("Include the meta-analytic I², the percentage of total variation across studies due to heterogeneity in the model information section. Not available for multilevel/multivariate meta-analysis.")
 				}
@@ -374,7 +385,7 @@ Section
 				{
 					text:		qsTr("H²")
 					name:		"forestPlotHeterogeneityEstimateH2"	
-					enabled:	sectionModel.heterogeneityModelTermsCount == 0
+					enabled:	(module === "RoBMA"  || module === "NoBMA") || sectionModel.heterogeneityModelTermsCount == 0
 					checked:	false
 					info: qsTr("Include the meta-analytic H², an index indicating the ratio of total variability to sampling variability in the model information section. Not available for multilevel/multivariate meta-analysis.")
 				}
@@ -385,8 +396,8 @@ Section
 				name:		"forestPlotHeterogeneityModerationTest"
 				text:		qsTr("Moderation test")
 				enabled:	sectionModel.heterogeneityModelTermsCount > 0
-				visible:	module === "metaAnalysis" || module === "RoBMA"
-				checked:	module === "metaAnalysis" || module === "RoBMA"
+				visible:	module === "metaAnalysis"
+				checked:	module === "metaAnalysis"
 				info: qsTr("Include the omnibus heterogeneity moderation test in the model information section. Available when heterogeneity meta-regression is specified.")
 			}
 		}
@@ -400,9 +411,9 @@ Section
 				name:		"forestPlotEffectSizeFixedEffectEstimate"
 				text:		qsTr("Fixed effect estimate")
 				id:			forestPlotEffectSizeFixedEffectEstimate
-				checked:	false				
-				enabled:	!(method.value == "fixedEffects" || method.value == "equalEffects")
+				checked:	false
 				visible:	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
+				enabled:	(module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate") && !(method.value == "fixedEffects" || method.value == "equalEffects")
 				info: qsTr("Include a fixed effect meta-analytic effect size estimate in the model information section. Not available if the model was already fitted with fixed effects or the model contains heterogeneity meta-regression.")
 			}
 
@@ -410,9 +421,9 @@ Section
 			{
 				name:		"forestPlotEffectSizeFixedEffectTest"
 				text:		qsTr("Fixed effect estimate test")
-				checked:	true
-				enabled:	forestPlotEffectSizeFixedEffectEstimate.checked && !(method.value == "fixedEffects" || method.value == "equalEffects")
+				checked:	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
 				visible:	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
+				enabled:	forestPlotEffectSizeFixedEffectEstimate.checked
 				info: qsTr("Include the test of the fixed effect meta-analytic effect size estimate in the model information section.")
 			}
 
@@ -440,8 +451,24 @@ Section
 				name:		"forestPlotEffectSizeModerationTest"
 				text:		qsTr("Moderation test")
 				enabled:	sectionModel.effectSizeModelTermsCount > 0
-				checked:	true
+				visible: 	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
+				checked:	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
 				info: qsTr("Include the omnibus effect size moderation test in the model information section. Available when effect size meta-regression is specified.")
+			}
+		}
+
+		Group
+		{
+			title:		qsTr("Publication Bias")
+			visible: 	module === "RoBMA"
+
+			CheckBox
+			{
+				name:		"forestPlotPublicationBiasTest"
+				text:		qsTr("Test")
+				enabled:	module === "RoBMA" && publicationBiasAdjustment.value != "none"
+				checked:	module === "RoBMA" && publicationBiasAdjustment.value != "none"
+				info: qsTr("Include the publication bias test in the model information section.")
 			}
 		}
 	}
@@ -471,7 +498,6 @@ Section
 					text:		qsTr("Prediction intervals")
 					checked:	true
 					Layout.preferredWidth: 300 * jaspTheme.uiScale
-					visible:	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
 					info: qsTr("Include prediction intervals of the estimated marginal means and the model information output.")
 				}
 
@@ -480,8 +506,16 @@ Section
 					name:			"forestPlotEstimatesAndConfidenceIntervals"
 					text:			qsTr("Estimates and confidence intervals")
 					checked:		true
-					Layout.preferredWidth: 300 * jaspTheme.uiScale
 					info: qsTr("Include effect size estimates and confidence intervals summary text in the right panel of the forest plot.")
+				}
+
+				CheckBox
+				{
+					name:		"forestPlotConditionalEstimates"
+					text:		qsTr("Conditional estimates")
+					visible:	module === "RoBMA" || module === "NoBMA"
+					checked:	false
+					info: qsTr("Display the conditional effect, heterogeneity, and estimated marginal means estimates.")
 				}
 
 				CheckBox
@@ -539,109 +573,6 @@ Section
 			}
 		}
 
-		Group
-		{
-			title:	qsTr("Mapping")
-			info: qsTr("Select a variable for encoding the color or shape of the study information and the estimated marginal means output.")
-
-			DropDown
-			{
-				name:			"forestPlotMappingColor"
-				id:				forestPlotMappingColor
-				label:			qsTr("Color")
-				addEmptyValue:	true
-				allowedColumns:	["nominal"]
-				fieldWidth:		125 * preferencesModel.uiScale
-			}
-
-			DropDown
-			{
-				name:			"forestPlotMappingShape"
-				label:			qsTr("Shape")
-				addEmptyValue:	true
-				allowedColumns:	["nominal"]
-				fieldWidth:		125 * preferencesModel.uiScale
-			}
-		}
-	
-
-
-		Group
-		{
-			title:		qsTr("Relative Size")
-			info: qsTr("Adjust the relative size of the forest plot components.")
-
-			DoubleField
-			{
-				name:			"forestPlotRelativeSizeEstimates"
-				text:			qsTr("Estimates")
-				defaultValue:	1
-				min:			0
-				inclusive: 		JASP.None
-			}
-
-			DoubleField
-			{
-				name:			"forestPlotRelativeSizeText"
-				text:			qsTr("Text")
-				defaultValue:	1
-				min:			0
-				inclusive: 		JASP.None
-			}
-
-			DoubleField
-			{
-				name:			"forestPlotRelativeSizeAxisLabels"
-				text:			qsTr("Axis labels")
-				defaultValue:	1
-				min:			0
-				inclusive: 		JASP.None
-			}
-
-			DoubleField
-			{
-				name:			"forestPlotRelativeSizeRow"
-				text:			qsTr("Row")
-				defaultValue:	1
-				min:			0
-				inclusive: 		JASP.None
-			}
-
-			DoubleField
-			{
-				name:			"forestPlotRelativeSizeLeftPanel"
-				text:			qsTr("Left panel")
-				defaultValue:	0.5
-				min:			0
-				inclusive: 		JASP.None
-			}
-
-			DoubleField
-			{
-				name:			"forestPlotRelativeSizeMiddlePanel"
-				text:			qsTr("Middle panel")
-				defaultValue:	1
-				min:			0
-				inclusive: 		JASP.None
-			}
-
-			DoubleField
-			{
-				name:			"forestPlotRelativeSizeRightPanel"
-				text:			qsTr("Right panel")
-				defaultValue:	0.5
-				min:			0
-				inclusive: 		JASP.None
-			}
-
-			CheckBox
-			{
-				name:			"forestPlotAuxiliaryAdjustWidthBasedOnText"
-				text:			qsTr("Adjust width based on text")
-				checked:		true
-				info: qsTr("Turn off the automatic width adjustment of the individual components.")
-			}
-		}
 
 		Group
 		{
@@ -723,7 +654,7 @@ Section
 			{
 				name:			"forestPlotAuxiliarySetXAxisLimit"
 				text:			qsTr("X-axis limits")
-				childrenOnSameRow:	true
+				childrenOnSameRow:	false
 				info: qsTr("Change the default x-axis limits.")
 
 				DoubleField
@@ -750,7 +681,110 @@ Section
 
 		}
 
+
+		Group
+		{
+			title:		qsTr("Relative Size")
+			info: qsTr("Adjust the relative size of the forest plot components.")
+
+			DoubleField
+			{
+				name:			"forestPlotRelativeSizeEstimates"
+				text:			qsTr("Estimates")
+				defaultValue:	1
+				min:			0
+				inclusive: 		JASP.None
+			}
+
+			DoubleField
+			{
+				name:			"forestPlotRelativeSizeText"
+				text:			qsTr("Text")
+				defaultValue:	1
+				min:			0
+				inclusive: 		JASP.None
+			}
+
+			DoubleField
+			{
+				name:			"forestPlotRelativeSizeAxisLabels"
+				text:			qsTr("Axis labels")
+				defaultValue:	1
+				min:			0
+				inclusive: 		JASP.None
+			}
+
+			DoubleField
+			{
+				name:			"forestPlotRelativeSizeRow"
+				text:			qsTr("Row")
+				defaultValue:	1
+				min:			0
+				inclusive: 		JASP.None
+			}
+
+			DoubleField
+			{
+				name:			"forestPlotRelativeSizeLeftPanel"
+				text:			qsTr("Left panel")
+				defaultValue:	0.5
+				min:			0
+				inclusive: 		JASP.None
+			}
+
+			DoubleField
+			{
+				name:			"forestPlotRelativeSizeMiddlePanel"
+				text:			qsTr("Middle panel")
+				defaultValue:	1
+				min:			0
+				inclusive: 		JASP.None
+			}
+
+			DoubleField
+			{
+				name:			"forestPlotRelativeSizeRightPanel"
+				text:			qsTr("Right panel")
+				defaultValue:	0.5
+				min:			0
+				inclusive: 		JASP.None
+			}
+
+			CheckBox
+			{
+				name:			"forestPlotAuxiliaryAdjustWidthBasedOnText"
+				text:			qsTr("Adjust width based on text")
+				checked:		true
+				info: qsTr("Turn off the automatic width adjustment of the individual components.")
+			}
+		}
+
+		Group
+		{
+			title:	qsTr("Mapping")
+			info: qsTr("Select a variable for encoding the color or shape of the study information and the estimated marginal means output.")
+
+			DropDown
+			{
+				name:			"forestPlotMappingColor"
+				id:				forestPlotMappingColor
+				label:			qsTr("Color")
+				addEmptyValue:	true
+				allowedColumns:	["nominal"]
+				fieldWidth:		125 * preferencesModel.uiScale
+			}
+
+			DropDown
+			{
+				name:			"forestPlotMappingShape"
+				label:			qsTr("Shape")
+				addEmptyValue:	true
+				allowedColumns:	["nominal"]
+				fieldWidth:		125 * preferencesModel.uiScale
+			}
+		}
 	}
+
 
 
 }

@@ -82,7 +82,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 )
 .maForestPlotDependencies <- c(
   # do not forget to add variable carrying options to the .maDataPlottingDependencies
-  .maDependencies, "transformEffectSize", "confidenceIntervalsLevel",
+  "transformEffectSize", "confidenceIntervalsLevel", "bayesFactorType",
   "forestPlotStudyInformation",
   "forestPlotStudyInformationAllVariables",
   "forestPlotStudyInformationSelectedVariables",
@@ -100,6 +100,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotEstimatedMarginalMeansTermTests",
   "forestPlotEstimatedMarginalMeansCoefficientTests",
   "forestPlotEstimatedMarginalMeansCoefficientTestsAgainst",
+  "forestPlotEstimatedMarginalMeansCoefficientTestsAgainst0",
   "forestPlotEstimatedMarginalMeansAdjustedEffectSizeEstimate",
   "forestPlotModelInformation",
   "forestPlotEffectSizeFixedEffectEstimate",
@@ -113,8 +114,10 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotHeterogeneityEstimateI2",
   "forestPlotHeterogeneityEstimateH2",
   "forestPlotHeterogeneityModerationTest",
+  "forestPlotPublicationBiasTest",
   "forestPlotPredictionIntervals",
   "forestPlotEstimatesAndConfidenceIntervals",
+  "forestPlotConditionalEstimates",
   "forestPlotTestsInRightPanel",
   "forestPlotAllignLeftPanel",
   "forestPlotSubgroupPanelsWithinSubgroup",
@@ -172,7 +175,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 )
 .maReady               <- function(options) {
 
-  if (options[["module"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate")) {
+  if (.maIsClassical(options)) {
 
     # data
     inputReady <- options[["effectSize"]] != "" && options[["effectSizeStandardError"]] != ""
@@ -183,7 +186,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
     return(inputReady && termsEffectSizeReady && termsHeterogeneityReady)
 
-  } else if (options[["module"]] %in% c("NoBMA", "RoBMA")) {
+  } else {
 
     # data
     inputReady <- options[["effectSize"]] != "" && options[["effectSizeStandardError"]] != ""
@@ -257,3 +260,14 @@ return(inputReady)
       return(gettext("All standard errors must be positive."))
     }
   })
+.maIsClassical         <- function(options) {
+
+  # check if the analysis is classical
+  if (options[["module"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate")) {
+    return(TRUE)
+  } else if (options[["module"]] %in% c("RoBMA", "NoBMA", "BiBMA")){
+    return(FALSE)
+  } else {
+    stop("Unknown module")
+  }
+}
