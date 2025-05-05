@@ -26,7 +26,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   }
 
 
-  .ClassicalMetaAnalysisCommon(jaspResults, dataset, options)
+  ClassicalMetaAnalysisCommon(jaspResults, dataset, options)
 
   return()
 }

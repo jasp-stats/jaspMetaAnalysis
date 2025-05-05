@@ -629,9 +629,15 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
   return()
 }
-.robmaModelSpecificationTablesComponents          <- function(jaspResults, options, components = c("effect", "heterogeneity", "bias")) {
+.robmaModelSpecificationTablesComponents          <- function(jaspResults, options) {
 
-  priors <- .robmaGetPriors(options)
+  priors     <- .robmaGetPriors(options)
+  components <- switch(
+    options[["module"]],
+    "RoBMA" = c("effect", "heterogeneity", "bias"),
+    "NoBMA" = c("effect", "heterogeneity"),
+    "BiBMA" = c("effect", "heterogeneity")
+  )
 
   ### create overview table
   tempTable <- createJaspTable(title = gettext("Model Components"))
@@ -673,9 +679,15 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
   return(tempTable)
 }
-.robmaModelSpecificationTablesComponentsPriors    <- function(jaspResults, options, components = c("effect", "heterogeneity", "bias"), null = FALSE) {
+.robmaModelSpecificationTablesComponentsPriors    <- function(jaspResults, options, null = FALSE) {
 
-  priors <- .robmaGetPriors(options)
+  priors     <- .robmaGetPriors(options)
+  components <- switch(
+    options[["module"]],
+    "RoBMA" = c("effect", "heterogeneity", "bias"),
+    "NoBMA" = c("effect", "heterogeneity"),
+    "BiBMA" = c("effect", "heterogeneity")
+  )
 
   ### create overview table
   tempTable <- createJaspTable(title = gettextf("Prior Distributions %1$s", if (null) gettext("(Null)") else gettext("(Alternative)")))

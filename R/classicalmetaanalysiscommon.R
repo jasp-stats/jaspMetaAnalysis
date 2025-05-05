@@ -33,7 +33,7 @@
 # - allow different covariates factoring across all settings
 # - confidence interval for heterogeneity in multilevel multivariate
 
-.ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
+ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # fit the model
   .maFitModel(jaspResults, dataset, options)

@@ -96,6 +96,13 @@ Description
 
 	Analysis
 	{
+		menu:			qsTr("Meta-Analysis (Deprecated)")
+		title:			qsTr("Bayesian Meta-Analysis (Deprecated)")
+		func:			"BayesianMetaAnalysisDeprecated"
+	}
+
+	Analysis
+	{
 		menu:			qsTr("Binomial Meta-Analysis")
 		title:			qsTr("Bayesian Binomial Meta-Analysis")
 		func:			"BayesianBinomialMetaAnalysis"

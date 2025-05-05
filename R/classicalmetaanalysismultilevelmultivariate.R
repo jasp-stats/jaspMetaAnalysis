@@ -25,7 +25,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     .mammCheckErrors(dataset, options)
   }
 
-  .ClassicalMetaAnalysisCommon(jaspResults, dataset, options)
+  ClassicalMetaAnalysisCommon(jaspResults, dataset, options)
 
   return()
 }
