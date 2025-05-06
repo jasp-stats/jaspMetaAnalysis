@@ -20,6 +20,10 @@
 
 RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, state = NULL) {
 
+  # this is needed to register the contrasts, for some reason even this does not work
+  # contr.meandif     <<- BayesTools::contr.meandif
+  # contr.orthonormal <<- BayesTools::contr.orthonormal
+  # contr.independent <<- BayesTools::contr.independent
   library(RoBMA)
 
   # devel settings
@@ -314,36 +318,40 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   return()
 }
 
-#contr.meandif     <<- BayesTools::contr.meandif
-#contr.orthonormal <<- BayesTools::contr.orthonormal
-#contr.independent <<- BayesTools::contr.independent
-
 # priors related functions
 .robmaGetPriors                <- function(options) {
 
   object <- list()
 
-  # treat fishersZ input scale as smd for setting a prior distribution (as the same prior type is going to be set up within RoBMA)
-  if (options[["effectSizeMeasure"]] == "fishersZ") {
-    options[["effectSizeMeasure"]] <- "SMD"
-  }
-
   ### effect size & heterogeneity
-  # TODO: the prior distributions for smd/logor/z must be transformed
-  if (options[["priorDistributionsEffectSizeAndHeterogeneity"]] == "default") {
+  # the default (= psychology) priors are defined on smd scale, but they can be transformed to logOR/Fisher's z
+  # the medicine priors for logOR, and SMD are defined on logOR and SMD scales, we use the SMD ones to be transformed into Fisher's z
+  # the remaining medicine priors (logRR, logHR, RD) are on the appropriate scales already and cannot be transformed
+  # (note that also all publication bias priors but PEESE prior is scale independent)
+  if (options[["priorDistributionsEffectSizeAndHeterogeneity"]] %in% c("default", "psychology")) {
 
     object[["effect"]]        <- list(RoBMA::set_default_priors("effect",        rescale = options[["priorDistributionsScale"]]))
     object[["heterogeneity"]] <- list(RoBMA::set_default_priors("heterogeneity", rescale = options[["priorDistributionsScale"]]))
 
-  } else if (options[["priorDistributionsEffectSizeAndHeterogeneity"]] == "psychology") {
-
-    object[["effect"]]        <- list(RoBMA::set_default_priors("effect",        rescale = options[["priorDistributionsScale"]]))
-    object[["heterogeneity"]] <- list(RoBMA::set_default_priors("heterogeneity", rescale = options[["priorDistributionsScale"]]))
+    if (options[["effectSizeMeasure"]] == "fishersZ") {
+      object[["effect"]]        <- lapply(object[["effect"]]       , .robmaRescalePriorDistribution, scale = 0.5)
+      object[["heterogeneity"]] <- lapply(object[["heterogeneity"]], .robmaRescalePriorDistribution, scale = 0.5)
+    } else if (options[["effectSizeMeasure"]] == "logOR") {
+      object[["effect"]]        <- lapply(object[["effect"]]       , .robmaRescalePriorDistribution, scale = 1.813799)
+      object[["heterogeneity"]] <- lapply(object[["heterogeneity"]], .robmaRescalePriorDistribution, scale = 1.813799)
+    }
 
   } else if (options[["priorDistributionsEffectSizeAndHeterogeneity"]] == "medicine") {
 
-    object[["effect"]]        <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "effect",        type = options[["effectSizeMeasure"]]), options[["priorDistributionsScale"]]))
-    object[["heterogeneity"]] <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "heterogeneity", type = options[["effectSizeMeasure"]]), options[["priorDistributionsScale"]]))
+    if (options[["effectSizeMeasure"]] == "fishersZ") {
+      object[["effect"]]        <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "effect",        type = "SMD"), options[["priorDistributionsScale"]]))
+      object[["heterogeneity"]] <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "heterogeneity", type = "SMD"), options[["priorDistributionsScale"]]))
+      object[["effect"]]        <- lapply(object[["effect"]]       , .robmaRescalePriorDistribution, scale = 0.2756644)
+      object[["heterogeneity"]] <- lapply(object[["heterogeneity"]], .robmaRescalePriorDistribution, scale = 0.2756644)
+    } else {
+      object[["effect"]]        <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "effect",        type = options[["effectSizeMeasure"]]), options[["priorDistributionsScale"]]))
+      object[["heterogeneity"]] <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "heterogeneity", type = options[["effectSizeMeasure"]]), options[["priorDistributionsScale"]]))
+    }
 
   } else if (options[["priorDistributionsEffectSizeAndHeterogeneity"]] == "custom") {
 
@@ -358,39 +366,77 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   } else if (options[["bayesianModelAveragingEffectSize"]]) {
     object[["effectNull"]]    <- lapply(options[["modelsEffectNull"]], .robmaExtractPriorsFromOptions, type = "continuous")
   } else {
-    object[["effectNull"]]    <- NULL
+    object[["effectNull"]]    <- list()
   }
   if (options[["bayesianModelAveragingHeterogeneity"]] && options[["priorDistributionsEffectSizeAndHeterogeneity"]] != "custom") {
     object[["heterogeneityNull"]] <- list(RoBMA::set_default_priors("heterogeneity", null = TRUE))
   } else if (options[["bayesianModelAveragingHeterogeneity"]]) {
     object[["heterogeneityNull"]] <- lapply(options[["modelsHeterogeneityNull"]], .robmaExtractPriorsFromOptions, type = "continuous")
   } else {
-    object[["heterogeneityNull"]] <- NULL
+    object[["heterogeneityNull"]] <- list()
   }
 
   ### publication bias
+  # the PEESE prior distribution scales with the inverse of the effect size transformation
+  # (it's on the relationship between es and se^2; the PET prior is effect size transformation invariant)
+  # (it also scales with 1/scale^2 for width of the prior distribution, as smaller prior means lower association between es and se^2)
   if (options[["publicationBiasAdjustment"]] == "PSMA") {
-    object[["bias"]] <- RoBMA::set_default_priors("bias", rescale = .robmaPriorBiasScale(options))
+
+    # select all priors
+    tempPriors <- RoBMA::set_default_priors("bias", rescale = options[["priorDistributionsScale"]])
+
+    # effect size re-scaling for PEESE
+    if (options[["effectSizeMeasure"]] == "fishersZ") {
+      tempPriors[[8]] <- .robmaRescalePriorDistribution(tempPriors[[8]], 1/0.5)
+    } else if (options[["effectSizeMeasure"]] == "logOR") {
+      tempPriors[[8]] <- .robmaRescalePriorDistribution(tempPriors[[8]], 1/1.813799)
+    }
+
+    object[["bias"]] <- tempPriors
+
   } else if (options[["publicationBiasAdjustment"]] == "PP") {
+
+    # select PET-PEESE priors only
     tempPriors <- RoBMA::set_default_priors("bias", rescale = .robmaPriorBiasScale(options))[7:8]
+
+    # re-standardize the prior model probability
     for (i in seq_along(tempPriors)) {
       tempPriors[[i]][["prior_weights"]] <- 1/2
     }
+
+    # effect size re-scaling for PEESE
+    if (options[["effectSizeMeasure"]] == "fishersZ") {
+      tempPriors[[2]] <- .robmaRescalePriorDistribution(tempPriors[[2]], 1/0.5)
+    } else if (options[["effectSizeMeasure"]] == "logOR") {
+      tempPriors[[2]] <- .robmaRescalePriorDistribution(tempPriors[[2]], 1/1.813799)
+    }
+
     object[["bias"]] <- tempPriors
-  } else if (options[["publicationBiasAdjustment"]] == "PP") {
+
+  } else if (options[["publicationBiasAdjustment"]] == "2w") {
+
+    # select the first two weight functions only
     tempPriors <- RoBMA::set_default_priors("bias", rescale = .robmaPriorBiasScale(options))[1:2]
+
+    # re-standardize the prior model probability
     for (i in seq_along(tempPriors)) {
       tempPriors[[i]][["prior_weights"]] <- 1/2
     }
+
     object[["bias"]] <- tempPriors
+
   } else if (options[["publicationBiasAdjustment"]] == "custom") {
+
     object[["bias"]] <- c(
       lapply(options[["modelsSelectionModels"]], .robmaExtractPriorsFromOptions, type = "weightfunction"),
       lapply(options[["modelsPet"]],             .robmaExtractPriorsFromOptions, type = "pet"),
       lapply(options[["modelsPeese"]],           .robmaExtractPriorsFromOptions, type = "peese")
     )
+
   } else if (options[["publicationBiasAdjustment"]] == "none") {
-    object[["bias"]] <- NULL
+
+    object[["bias"]] <- list()
+
   }
 
   # null prior distributions
@@ -409,6 +455,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   }
 
   ### moderation
+  # the same effect size transformations as to effect sizes apply
   tempObject <- list()
   for (i in seq_along(options[["effectSizeModelTerms"]])) {
 
@@ -421,9 +468,10 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
     if (tempTermType == "nominal") {
 
+      # TODO: use logOR effect size for fisher's z in medicine here
       # alternative distribution prior
       tempPrior[["alt"]] <- switch(
-        # medicine priors are more narrow than psychology priors (there are no default priors for moderatior yet - use 1/2 of the effect size prior scaling)
+        # medicine priors are more narrow than psychology priors (there are no default priors for moderator yet - use 1/2 of the effect size prior scaling)
         options[["priorDistributionsEffectSizeAndHeterogeneity"]],
         "default"    = RoBMA::set_default_priors("factors", rescale = options[["priorDistributionsScale"]]),
         "psychology" = RoBMA::set_default_priors("factors", rescale = options[["priorDistributionsScale"]]),
@@ -443,6 +491,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
     } else if (tempTermType == "scale") {
 
+      # TODO: use logOR effect size for fisher's z in medicine here
       # alternative distribution prior
       tempPrior[["alt"]] <- switch(
         # medicine priors are more narrow than psychology priors (there are no default priors for moderatior yet - use 1/2 of the effect size prior scaling)
@@ -461,6 +510,31 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
       }
     }
 
+    # TODO: apply the transformations here
+    if (options[["priorDistributionsEffectSizeAndHeterogeneity"]] %in% c("default", "psychology")) {
+
+      if (options[["effectSizeMeasure"]] == "fishersZ") {
+        object[["effect"]]        <- lapply(object[["effect"]]       , .robmaRescalePriorDistribution, scale = 0.5)
+        object[["heterogeneity"]] <- lapply(object[["heterogeneity"]], .robmaRescalePriorDistribution, scale = 0.5)
+      } else if (options[["effectSizeMeasure"]] == "logOR") {
+        object[["effect"]]        <- lapply(object[["effect"]]       , .robmaRescalePriorDistribution, scale = 1.813799)
+        object[["heterogeneity"]] <- lapply(object[["heterogeneity"]], .robmaRescalePriorDistribution, scale = 1.813799)
+      }
+
+    } else if (options[["priorDistributionsEffectSizeAndHeterogeneity"]] == "medicine") {
+
+      if (options[["effectSizeMeasure"]] == "fishersZ") {
+        object[["effect"]]        <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "effect",        type = "SMD"), options[["priorDistributionsScale"]]))
+        object[["heterogeneity"]] <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "heterogeneity", type = "SMD"), options[["priorDistributionsScale"]]))
+        object[["effect"]]        <- lapply(object[["effect"]]       , .robmaRescalePriorDistribution, scale = 0.2756644)
+        object[["heterogeneity"]] <- lapply(object[["heterogeneity"]], .robmaRescalePriorDistribution, scale = 0.2756644)
+      } else {
+        object[["effect"]]        <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "effect",        type = options[["effectSizeMeasure"]]), options[["priorDistributionsScale"]]))
+        object[["heterogeneity"]] <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "heterogeneity", type = options[["effectSizeMeasure"]]), options[["priorDistributionsScale"]]))
+      }
+
+    }
+
     # enlist
     tempObject[[tempTerm]] <- tempPrior
   }
@@ -474,10 +548,8 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   # rescale priors as needed
   if (prior[["distribution"]] %in% c("normal", "mnormal")) {
     prior$parameters[["sd"]]   <- prior$parameters[["sd"]]     * scale
-  } else if (prior[["distribution"]] %in% c("t", "mt")) {
+  } else if (prior[["distribution"]] %in% c("t", "mt", "invgamma")) {
     prior$parameters[["scale"]] <- prior$parameters[["scale"]] * scale
-  } else if (prior[["distribution"]] == "invgamma") {
-    prior$parameters[["rate"]]  <- prior$parameters[["scale"]] * scale
   } else if (scale != 1) {
     stop("Selected prior distribution cannot be rescaled.")
   }
@@ -618,15 +690,17 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   return(factorPrior)
 }
 .robmaPriorBiasScale           <- function(options) {
+
   # default rescale based on cohen's d
   rescale <- options[["priorDistributionsScale"]]
   if (options[["effectSizeMeasure"]] == "SMD") {
     rescale <- rescale
   } else if (options[["effectSizeMeasure"]] == "fishersZ") {
-    rescale <- rescale * RoBMA::d2z(1)
+    rescale <- rescale * 1/0.5
   } else if (options[["effectSizeMeasure"]] == "logOR") {
-    rescale <- rescale * RoBMA::d2logOR(1)
+    rescale <- rescale * 1/1.813799
   }
+
   return(rescale)
 }
 .robmaPriorGetContrast         <- function(prior) {
@@ -696,10 +770,6 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     tempPriorsNull <- priors[[paste0(component, "Null")]]
     tempPriors     <- priors[[component]]
 
-    # skip unspecified components (unless they are part of effect / heterogeneity)
-    if (!component %in% c("effect", "heterogeneity") && length(tempPriorsNull) == 0 && length(tempPriors) == 0)
-      next
-
     tempWeightsNull <- if (length(tempPriorsNull) > 0) sum(sapply(tempPriorsNull, \(x) x[["prior_weights"]])) else 0
     tempWeights     <- if (length(tempPriors) > 0) sum(sapply(tempPriors, \(x) x[["prior_weights"]]))         else 0
 
@@ -741,8 +811,6 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   if (length(priors) == 0)
     return(tempTable)
 
-  # always keep effect and heterogeneity, but remove other components if unspecified
-  components <- components[components %in% unique(c("effect", "heterogeneity", names(priors)))]
   for (component in components) {
     tempTable$addColumnInfo(name = component, title = .robmaComponentNames(component, options), type = "string")
   }
@@ -824,7 +892,6 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   }
 
   tests <- .maSafeRbind(lapply(fit, .robmaRowTests, options = options))
-
 
   # add errors messages for failed fits
   for (i in seq_along(fit)[sapply(fit, jaspBase::isTryError)]) {
