@@ -1509,7 +1509,12 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   }
 
   # make bubble plots
-  dfPlot <- .maMakeBubblePlotDataset(fit, options)
+  if (.maIsClassical(options)) {
+    dfPlot <- .maMakeBubblePlotDataset(fit, options)
+  } else {
+    dfPlot <- .robmaMakeBubblePlotDataset(fit, options)
+  }
+
 
   if (attr(dfPlot, "separatePlots") == "") {
     tempPlots <- list(.maMakeBubblePlot(fit, options, dfPlot))
@@ -3207,12 +3212,13 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   }
 
   ### add studies as bubbles
+  dataset <- attr(fit, "dataset")
   dfStudies <- data.frame(
-    effectSize       = fit[["yi"]],
-    inverseVariance  = 1/fit[["vi"]],
-    weight           = weights(fit),
-    constant         = rep(options[["bubblePlotBubblesRelativeSize"]], nrow(fit[["data"]])),
-    selectedVariable = fit[["data"]][[attr(dfPlot, "selectedVariable")]]
+    effectSize       = dataset[[options[["effectSize"]]]],
+    inverseVariance  = 1/dataset[[options[["effectSizeStandardError"]]]]^2,
+    weight           = if (.maIsClassical(options)) weights(fit) else NA,
+    constant         = rep(options[["bubblePlotBubblesRelativeSize"]], nrow(dataset)),
+    selectedVariable = dataset[[attr(dfPlot, "selectedVariable")]]
   )
 
   # add separate lines and plots
