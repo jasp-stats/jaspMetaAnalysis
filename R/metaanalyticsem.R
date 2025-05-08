@@ -42,7 +42,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   .masemFitMeasures(jaspResults, options)
 
   # create summary with model fit statistics (for all models)
-  .masemModelFitTable(jaspResults, options)
+  .masemModelFitTable(jaspResults, options, MASEM = TRUE)
 
   if (options[["additionalFitMeasures"]])
     .masemAdditionalFitMeasuresTable(jaspResults, options)
@@ -524,7 +524,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   # prepare table
   additionalFitMeasures <- createJaspTable(gettext("Additional Fit Measures"))
   additionalFitMeasures$position <- 1.1
-  additionalFitMeasures$dependOn(c(.semmetaDependencies, "additionalFitMeasures"))
+  additionalFitMeasures$dependOn(c(.masemDependencies, "additionalFitMeasures"))
   jaspResults[["additionalFitMeasures"]] <- additionalFitMeasures
 
   # add columns
@@ -592,7 +592,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   # prepare table
   pairwiseModelComparison <- createJaspTable(gettext("Pairwise Model Comparison"))
   pairwiseModelComparison$position <- 1.2
-  pairwiseModelComparison$dependOn(c(.semmetaDependencies, "pairwiseModelComparison"))
+  pairwiseModelComparison$dependOn(c(.masemDependencies, "pairwiseModelComparison"))
   jaspResults[["pairwiseModelComparison"]] <- pairwiseModelComparison
 
   # add columns
@@ -662,7 +662,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
     "covariances"   = 2,
     "randomEffects" = 3
   )
-  tempSummaryTable$dependOn(c(.semmetaDependencies, "modelSummary", "modelSummaryShowMatrixIndices", switch(
+  tempSummaryTable$dependOn(c(.masemDependencies, "modelSummary", "modelSummaryShowMatrixIndices", switch(
     output,
     "regression"    = "modelSummaryRegression",
     "covariances"   = "modelSummaryCovariances",
