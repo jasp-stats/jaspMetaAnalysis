@@ -696,7 +696,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 
   # check if the model fit failed
   if (jaspBase::isTryError(tempFit)) {
-    tempSummaryTable$setError(gettextf("Model fit failed with the following message %1$s.", tempFit))
+    tempSummaryTable$setError(gettextf("Model fit failed with the following message: %1$s.", tempFit))
     return()
   }
 
