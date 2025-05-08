@@ -368,8 +368,8 @@ Form
 
 		CheckBox
 		{
-			name:		"pathDiagramShowParameters"
-			label:		qsTr("Show parameters")
+			name:		"pathDiagramShowParameterNames"
+			label:		qsTr("Show parameter names")
 			checked:	false
 			info:		qsTr("Show parameter names instead of the estimates in the path diagram.")
 		}
