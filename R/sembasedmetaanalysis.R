@@ -347,18 +347,18 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
     tempPlot <- createJaspPlot(title = gettext("Path Diagram"), width = 600, height = 400)
     tempPlot$position <- 5
     tempPlot$dependOn(c((if (MASEM) .masemDependencies else .semmetaDependencies),
-                        "pathDiagram", "pathDiagramShowParameters",
+                        "pathDiagram", "pathDiagramShowParameterNames",
                         "pathDiagramLayout",
                         "pathDiagramManifestNodeWidth", "pathDiagramLatentNodeWidth", "pathDiagramUnitVectorNodeWidth",
                         "pathDiagramLabelSize", "pathDiagramEdgeLabelSize", "pathDiagramNumberOfDigits"))
     tempOutputContainer[["pathDiagram"]] <- tempPlot
 
     # skip if not ready
-    if (!.masemReady(options) && !options[["pathDiagramShowParameters"]])
+    if (!.masemReady(options) && !options[["pathDiagramShowParameterNames"]])
       next
 
     # prepare path based on the syntax / fitted model
-    if (options[["pathDiagramShowParameters"]]) {
+    if (options[["pathDiagramShowParameterNames"]]) {
 
       # extract the sem paths
       tempPaths <- model[["syntax"]][[if (MASEM) "modelOriginal" else "model"]]
@@ -416,7 +416,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
     # create the plot
     tempOut <- jaspBase::.suppressGrDevice(semPlot::semPaths(
       object         = tempPaths,
-      what           = if (options[["pathDiagramShowParameters"]]) "path" else "est",
+      what           = if (options[["pathDiagramShowParameterNames"]]) "path" else "est",
       layout         = options[["pathDiagramLayout"]],
 
       nCharNodes = 0,
@@ -454,11 +454,13 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   tempSummaryTable$addColumnInfo(name = "estimate",  type = "number",  title = gettext("Estimate"))
   if (options[["modelSummaryConfidenceIntervalType"]] == "standardErrors") {
     tempSummaryTable$addColumnInfo(name = "se",        type = "number",  title = gettext("Standard Error"))
-    tempSummaryTable$addColumnInfo(name = "z",         type = "number",  title = gettext("z"))
-    tempSummaryTable$addColumnInfo(name = "p",         type = "pvalue",  title = gettext("p"))
   }
   tempSummaryTable$addColumnInfo(name = "lCi",       type = "number",  title = gettext("Lower"), overtitle = gettextf("95%% CI"))
   tempSummaryTable$addColumnInfo(name = "uCi",       type = "number",  title = gettext("Upper"), overtitle = gettextf("95%% CI"))
+  if (options[["modelSummaryConfidenceIntervalType"]] == "standardErrors") {
+    tempSummaryTable$addColumnInfo(name = "z",         type = "number",  title = gettext("z"))
+    tempSummaryTable$addColumnInfo(name = "p",         type = "pvalue",  title = gettext("p"))
+  }
 
   # skip if not ready
   if (!.masemReady(options))
