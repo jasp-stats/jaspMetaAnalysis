@@ -4015,7 +4015,13 @@
     heterogeneityName <- gettextf("Heterogeneity")
   }
 
-  return(sprintf("%1$s: Q(%2$i) = %3$.2f, %4$s", heterogeneityName, fit[["k"]] - fit[["p"]], fit[["QE"]], .maPrintPValue(fit[["QEp"]])))
+  return(sprintf(
+    paste0("%1$s: Q(%2$i) = ", if (fit[["QE"]] < 1e5) "%3$.2f" else "%3$.3g", ", %4$s"),
+    heterogeneityName,
+    fit[["k"]] - fit[["p"]],
+    fit[["QE"]],
+    .maPrintPValue(fit[["QEp"]])
+  ))
 }
 .maPrintModerationTest                <- function(fit, options, parameter) {
 
@@ -4117,7 +4123,7 @@
   row <- data.frame(
     subgroup = attr(fit, "subgroup"),
     test     = if (.maIsMetaregression(options)) gettext("Residual heterogeneity") else gettext("Heterogeneity"),
-    stat     = sprintf("Q\U2091(%1$i) = %2$.2f", fit[["k"]] - fit[["p"]], fit[["QE"]]),
+    stat     = sprintf(paste0("Q\U2091(%1$i) = ", if (fit[["QE"]] < 1e5) "%2$.2f" else "%2$.3g"), fit[["k"]] - fit[["p"]], fit[["QE"]]),
     pval     = fit[["QEp"]]
   )
 
@@ -4139,8 +4145,12 @@
   row <- data.frame(
     subgroup = attr(fit, "subgroup"),
     test     = gettext("Pooled effect"),
-    stat     = if (.maIsMetaregressionFtest(options)) sprintf("t(%1$s) = %2$.2f", .maPrintDf(predictedEffect[["df"]][1]), predictedEffect[["stat"]][1])
-    else sprintf("z = %1$.2f",  predictedEffect[["stat"]][1]),
+    stat     = if (.maIsMetaregressionFtest(options)) sprintf(paste0(
+      "t(%1$s) = ", if (predictedEffect[["stat"]][1] < 1e5) "%2$.2f" else "%2$.3g"),
+      .maPrintDf(predictedEffect[["df"]][1]),
+      predictedEffect[["stat"]][1]
+    )
+    else sprintf(paste0("z = ", if (predictedEffect[["stat"]][1] < 1e5) "%1$.2f" else "%1$.3g"), predictedEffect[["stat"]][1]),
     pval     = predictedEffect[["pval"]][1]
   )
 
@@ -4192,9 +4202,18 @@
   if (!is.na(moderationOut[["pval"]])) {
 
     if (.maIsMetaregressionFtest(options)) {
-      row[["stat"]] <- sprintf("F\U2098(%1$s, %2$s) = %3$.2f", .maPrintDf(moderationOut[["df1"]]), .maPrintDf(moderationOut[["df2"]]), moderationOut[["stat"]])
+      row[["stat"]] <- sprintf(paste0(
+        "F\U2098(%1$s, %2$s) = ", if (moderationOut[["stat"]] < 1e5) "%3$.2f" else "%3$.3g"),
+        .maPrintDf(moderationOut[["df1"]]),
+        .maPrintDf(moderationOut[["df2"]]),
+        moderationOut[["stat"]]
+      )
     } else {
-      row[["stat"]] <- sprintf("Q\U2098(%1$s) = %2$.2f", .maPrintDf(moderationOut[["df1"]]),  moderationOut[["stat"]])
+      row[["stat"]] <- sprintf(paste0(
+        "Q\U2098(%1$s) = ", if (moderationOut[["stat"]] < 1e5) "%2$.2f" else "%2$.3g"),
+        .maPrintDf(moderationOut[["df1"]]),
+        moderationOut[["stat"]]
+      )
     }
     row[["pval"]] <- moderationOut[["pval"]]
 
@@ -4834,7 +4853,7 @@
         if (all(tempFit[["tcl"]][1] == tempFit[["tcl"]]))
           messages <- c(messages, gettextf("%1$i clusters with %2$i estimates each.", tempFit[["n"]],  tempFit[["tcl"]][1]))
         else
-          messages <- c(messages, gettextf("%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates.", tempFit[["n"]],  min(tempFit[["tcl"]]), median(tempFit[["tcl"]]), max(tempFit[["tcl"]])))
+          messages <- c(messages, gettextf("%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates.", tempFit[["n"]],  min(tempFit[["tcl"]]), round(median(tempFit[["tcl"]])), max(tempFit[["tcl"]])))
       }
     }
   } else {
@@ -4851,7 +4870,7 @@
           if (all(tempFit[["tcl"]][1] == tempFit[["tcl"]]))
             messages <- c(messages, gettextf("%1$s: %2$i clusters with %3$i estimates each.", gettextf("Subgroup %1$s", attr(tempFit, "subgroup")), tempFit[["n"]],  tempFit[["tcl"]][1]))
           else
-            messages <- c(messages, gettextf("%1$s: %2$i clusters with min/median/max %3$i/%4$i/%5$i estimates.", gettextf("Subgroup %1$s", attr(tempFit, "subgroup")), tempFit[["n"]],  min(tempFit[["tcl"]]), median(tempFit[["tcl"]]), max(tempFit[["tcl"]])))
+            messages <- c(messages, gettextf("%1$s: %2$i clusters with min/median/max %3$i/%4$i/%5$i estimates.", gettextf("Subgroup %1$s", attr(tempFit, "subgroup")), tempFit[["n"]],  min(tempFit[["tcl"]]), round(median(tempFit[["tcl"]])), max(tempFit[["tcl"]])))
         }
       }
     }
@@ -4946,6 +4965,8 @@
   # probably more messages will be gathered over time
   if (grepl("singular matrix", message))
     return(gettextf("The model estimation failed with the following message: %1$s. Please, consider simplifying the model.", message))
+  if (grepl("Could not obtain the cluster-robust variance-covariance matrix", message))
+    return(gettext("The cluster-robust standard errors could not be computed. Please, consider modifying the clustering settings in the 'Advanced' section."))
   if (grepl("Fewer than two estimates", message))
     return(gettext("Fewer than two estimates."))
 
