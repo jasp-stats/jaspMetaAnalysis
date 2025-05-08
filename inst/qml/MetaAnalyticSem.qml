@@ -19,6 +19,7 @@ import QtQuick
 import QtQuick.Layouts
 import JASP.Controls
 import JASP
+import "../qml/qml_components" as MA
 
 Form
 {
@@ -188,11 +189,11 @@ Form
 			spacing: 5
 			TextArea
 			{
-				name:		        "syntax"
-				id:			        syntax
-				textType:	        JASP.TextTypeMetaSem
-                variableSeparator:  "_"
-				info:		        qsTr("Specify model using a lavaan style syntax.")
+				name:				"syntax"
+				id:					syntax
+				textType:			JASP.TextTypeMetaSem
+				variableSeparator:  "_"
+				info:				qsTr("Specify model using a lavaan style syntax.")
 			}
 
 			Group
@@ -344,88 +345,6 @@ Form
 		}
 	}
 
-	CheckBox
-	{
-		text:		qsTr("Path diagram")
-		name:		"pathDiagram"
-		checked:	false
-		info:		qsTr("Show a path diagram of the model.")
-
-		DropDown
-		{
-			name:	"pathDiagramLayout"
-			label:	qsTr("Layout")
-			values:
-			[
-				{ label: qsTr("Tree"),		value: "tree" },
-				{ label: qsTr("Circle"),	value: "circle" },
-				{ label: qsTr("Spring"),	value: "spring" },
-				{ label: qsTr("Tree2"),		value: "tree2" },
-				{ label: qsTr("Circle2"),	value: "circle2" }
-			]
-			info:	qsTr("Layout of the path diagram.")
-		}
-
-		CheckBox
-		{
-			name:		"pathDiagramShowParameterNames"
-			label:		qsTr("Show parameter names")
-			checked:	false
-			info:		qsTr("Show parameter names instead of the estimates in the path diagram.")
-		}
-
-		Group
-		{
-			DoubleField
-			{
-				name: "pathDiagramManifestNodeWidth"
-				label: qsTr("Manifest node width")
-				value: 6
-				info: qsTr("Width of manifest nodes.")
-			}
-
-			DoubleField
-			{
-				name: "pathDiagramLatentNodeWidth"
-				label: qsTr("Latent node width")
-				value: 8
-				info: qsTr("Width of latent nodes.")
-			}
-
-			DoubleField
-			{
-				name: "pathDiagramUnitVectorNodeWidth"
-				label: qsTr("Unit vector node width")
-				value: 8
-				info: qsTr("Width of unit vector nodes.")
-			}
-
-			DoubleField
-			{
-				name: "pathDiagramLabelSize"
-				label: qsTr("Label size")
-				value: 1.3
-				info: qsTr("Size of the labels.")
-			}
-
-			DoubleField
-			{
-				name: "pathDiagramEdgeLabelSize"
-				label: qsTr("Edge label size")
-				value: 0.9
-				info: qsTr("Size of the edge labels.")
-			}
-
-			IntegerField
-			{
-				name: "pathDiagramNumberOfDigits"
-				label: qsTr("Number of digits")
-				value: 4
-				info: qsTr("Number of digits for rounding estimates.")
-			}
-
-		}
-
-	}
-
+	MA.SemBasedMetaAnalysisPlot{}
+	
 }
