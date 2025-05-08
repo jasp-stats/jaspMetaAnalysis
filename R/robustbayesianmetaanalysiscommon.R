@@ -20,11 +20,10 @@
 
 RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, state = NULL) {
 
-  # this is needed to register the contrasts, for some reason even this does not work
-  # contr.meandif     <<- BayesTools::contr.meandif
-  # contr.orthonormal <<- BayesTools::contr.orthonormal
-  # contr.independent <<- BayesTools::contr.independent
-  library(RoBMA)
+  # this is needed to register the contrasts till BayesTools is updated
+  contr.meandif     <<- BayesTools::contr.meandif
+  contr.orthonormal <<- BayesTools::contr.orthonormal
+  contr.independent <<- BayesTools::contr.independent
 
   # devel settings
   options[["advancedMcmcChains"]]     <- 2
@@ -32,8 +31,8 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   options[["advancedMcmcBurnin"]]     <- 1000
   options[["advancedMcmcSamples"]]    <- 2000
 
-  saveRDS(options, file = "C:/JASP-Packages/options.RDS")
-  saveRDS(dataset, file = "C:/JASP-Packages/dataset.RDS")
+  saveRDS(options, file = "C:/JASP/options.RDS")
+  saveRDS(dataset, file = "C:/JASP/dataset.RDS")
   # get priors and show model specification table
 
   if (options[["showModelSpecification"]])
@@ -346,8 +345,8 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     if (options[["effectSizeMeasure"]] == "fishersZ") {
       object[["effect"]]        <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "effect",        type = "SMD"), options[["priorDistributionsScale"]]))
       object[["heterogeneity"]] <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "heterogeneity", type = "SMD"), options[["priorDistributionsScale"]]))
-      object[["effect"]]        <- lapply(object[["effect"]]       , .robmaRescalePriorDistribution, scale = 0.2756644)
-      object[["heterogeneity"]] <- lapply(object[["heterogeneity"]], .robmaRescalePriorDistribution, scale = 0.2756644)
+      object[["effect"]]        <- lapply(object[["effect"]]       , .robmaRescalePriorDistribution, scale = 0.5)
+      object[["heterogeneity"]] <- lapply(object[["heterogeneity"]], .robmaRescalePriorDistribution, scale = 0.5)
     } else {
       object[["effect"]]        <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "effect",        type = options[["effectSizeMeasure"]]), options[["priorDistributionsScale"]]))
       object[["heterogeneity"]] <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "heterogeneity", type = options[["effectSizeMeasure"]]), options[["priorDistributionsScale"]]))
@@ -466,78 +465,81 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     tempTerm     <- options[["effectSizeModelTerms"]][[i]]$components
     tempTermType <- options[["predictors.types"]][options[["predictors"]] == tempTerm]
 
-    if (tempTermType == "nominal") {
-
-      # TODO: use logOR effect size for fisher's z in medicine here
-      # alternative distribution prior
-      tempPrior[["alt"]] <- switch(
-        # medicine priors are more narrow than psychology priors (there are no default priors for moderator yet - use 1/2 of the effect size prior scaling)
-        options[["priorDistributionsEffectSizeAndHeterogeneity"]],
-        "default"    = RoBMA::set_default_priors("factors", rescale = options[["priorDistributionsScale"]]),
-        "psychology" = RoBMA::set_default_priors("factors", rescale = options[["priorDistributionsScale"]]),
-        "medicine"   = .robmaCochraneFactorPrior(type = options[["effectSizeMeasure"]], options[["priorDistributionsScale"]] / 2),
-        "custom"     = .robmaExtractPriorsFromOptions(options[["modelsFactorModerators"]][[which(sapply(options[["modelsFactorModerators"]], "[[", "value") == tempTerm)]], type = "factor")
-      )
-
-      # null distribution prior (make sure that the contrast type matches between the alternative and the null hypothesis)
-      if (options[["bayesianModelAveragingModerations"]] && options[["priorDistributionsEffectSizeAndHeterogeneity"]] != "custom") {
-        tempPrior[["null"]] <- RoBMA::prior_factor("spike", list(0), contrast = .robmaPriorGetContrast(tempPrior[["alt"]]))
-      } else if (options[["bayesianModelAveragingModerations"]]) {
-        tempPrior[["null"]] <- .robmaExtractPriorsFromOptions(options[["modelsFactorModeratorsNull"]][[which(sapply(options[["modelsFactorModeratorsNull"]], "[[", "value") == tempTerm)]], type = "factor")
-        if (BayesTools::is.prior.point(tempPrior[["null"]])) {
-          tempPrior[["null"]] <- RoBMA::prior_factor("spike", list(tempPrior[["alt"]][["parameters"]][["location"]]), contrast = .robmaPriorGetContrast(tempPrior[["alt"]]))
-        }
-      }
-
-    } else if (tempTermType == "scale") {
-
-      # TODO: use logOR effect size for fisher's z in medicine here
-      # alternative distribution prior
-      tempPrior[["alt"]] <- switch(
-        # medicine priors are more narrow than psychology priors (there are no default priors for moderatior yet - use 1/2 of the effect size prior scaling)
-        options[["priorDistributionsEffectSizeAndHeterogeneity"]],
-        "default"    = RoBMA::set_default_priors("covariates", rescale = options[["priorDistributionsScale"]]),
-        "psychology" = RoBMA::set_default_priors("covariates", rescale = options[["priorDistributionsScale"]]),
-        "medicine"   = .robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "effect", type = options[["effectSizeMeasure"]]), options[["priorDistributionsScale"]] / 2),
-        "custom"     = .robmaExtractPriorsFromOptions(options[["modelsContinuousModerators"]][[which(sapply(options[["modelsContinuousModerators"]], "[[", "value") == tempTerm)]], type = "continuous")
-      )
-
-      # null distribution prior
-      if (options[["bayesianModelAveragingModerations"]] && options[["priorDistributionsEffectSizeAndHeterogeneity"]] != "custom") {
-        tempPrior[["null"]] <- RoBMA::set_default_priors("covariates", null = TRUE)
-      } else if (options[["bayesianModelAveragingModerations"]]) {
-        tempPrior[["null"]] <- .robmaExtractPriorsFromOptions(options[["modelsContinuousModeratorsNull"]][[which(sapply(options[["modelsContinuousModeratorsNull"]], "[[", "value") == tempTerm)]], type = "continuous")
-      }
-    }
-
-    # TODO: apply the transformations here
+    ### alternative distributions
     if (options[["priorDistributionsEffectSizeAndHeterogeneity"]] %in% c("default", "psychology")) {
 
+      tempPrior[["alt"]] <- switch(
+        tempTermType,
+        "nominal" = RoBMA::set_default_priors("factors",    rescale = options[["priorDistributionsScale"]]),
+        "scale"   = RoBMA::set_default_priors("covariates", rescale = options[["priorDistributionsScale"]])
+      )
+
       if (options[["effectSizeMeasure"]] == "fishersZ") {
-        object[["effect"]]        <- lapply(object[["effect"]]       , .robmaRescalePriorDistribution, scale = 0.5)
-        object[["heterogeneity"]] <- lapply(object[["heterogeneity"]], .robmaRescalePriorDistribution, scale = 0.5)
+        tempPrior[["alt"]] <- .robmaRescalePriorDistribution(tempPrior[["alt"]], scale = 0.5)
       } else if (options[["effectSizeMeasure"]] == "logOR") {
-        object[["effect"]]        <- lapply(object[["effect"]]       , .robmaRescalePriorDistribution, scale = 1.813799)
-        object[["heterogeneity"]] <- lapply(object[["heterogeneity"]], .robmaRescalePriorDistribution, scale = 1.813799)
+        tempPrior[["alt"]] <- .robmaRescalePriorDistribution(tempPrior[["alt"]], scale = 1.813799)
       }
 
     } else if (options[["priorDistributionsEffectSizeAndHeterogeneity"]] == "medicine") {
 
+      # medicine priors are more narrow than psychology priors (there are no default priors for moderator yet - use 1/2 of the effect size prior scaling)
       if (options[["effectSizeMeasure"]] == "fishersZ") {
-        object[["effect"]]        <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "effect",        type = "SMD"), options[["priorDistributionsScale"]]))
-        object[["heterogeneity"]] <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "heterogeneity", type = "SMD"), options[["priorDistributionsScale"]]))
-        object[["effect"]]        <- lapply(object[["effect"]]       , .robmaRescalePriorDistribution, scale = 0.2756644)
-        object[["heterogeneity"]] <- lapply(object[["heterogeneity"]], .robmaRescalePriorDistribution, scale = 0.2756644)
+
+        tempPrior[["alt"]] <- switch(
+          tempTermType,
+          "nominal" = .robmaCochraneFactorPrior(type = "SMD", options[["priorDistributionsScale"]] / 2),
+          "scale"   = .robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "effect", type = "SMD"), options[["priorDistributionsScale"]] / 2)
+        )
+        tempPrior[["alt"]] <- .robmaRescalePriorDistribution(tempPrior[["alt"]], scale = 0.5)
+
       } else {
-        object[["effect"]]        <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "effect",        type = options[["effectSizeMeasure"]]), options[["priorDistributionsScale"]]))
-        object[["heterogeneity"]] <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "heterogeneity", type = options[["effectSizeMeasure"]]), options[["priorDistributionsScale"]]))
+
+        tempPrior[["alt"]] <- switch(
+          tempTermType,
+          "nominal" = .robmaCochraneFactorPrior(type = options[["effectSizeMeasure"]], options[["priorDistributionsScale"]] / 2),
+          "scale"   = .robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "effect", type = options[["effectSizeMeasure"]]), options[["priorDistributionsScale"]] / 2)
+        )
+
       }
 
+    } else if (options[["priorDistributionsEffectSizeAndHeterogeneity"]] == "custom") {
+
+      tempPrior[["alt"]] <- switch(
+        tempTermType,
+        "nominal" = .robmaExtractPriorsFromOptions(options[["modelsFactorModerators"]][[which(sapply(options[["modelsFactorModerators"]], "[[", "value") == tempTerm)]], type = "factor"),
+        "scale"   = .robmaExtractPriorsFromOptions(options[["modelsContinuousModerators"]][[which(sapply(options[["modelsContinuousModerators"]], "[[", "value") == tempTerm)]], type = "continuous")
+      )
+
+    }
+
+
+    ### null distribution prior (make sure that the contrast type matches between the alternative and the null hypothesis)
+    if (options[["bayesianModelAveragingModerations"]] && options[["priorDistributionsEffectSizeAndHeterogeneity"]] != "custom") {
+
+      tempPrior[["null"]] <- switch(
+        tempTermType,
+        "nominal" = RoBMA::prior_factor("spike", list(0), contrast = .robmaPriorGetContrast(tempPrior[["alt"]])),
+        "scale"   = RoBMA::set_default_priors("covariates", null = TRUE),
+      )
+
+    } else if (options[["bayesianModelAveragingModerations"]]) {
+
+      tempPrior[["null"]] <- switch(
+        tempTermType,
+        "nominal" = .robmaExtractPriorsFromOptions(options[["modelsFactorModeratorsNull"]][[which(sapply(options[["modelsFactorModeratorsNull"]], "[[", "value") == tempTerm)]], type = "factor"),
+        "scale"   = .robmaExtractPriorsFromOptions(options[["modelsContinuousModeratorsNull"]][[which(sapply(options[["modelsContinuousModeratorsNull"]], "[[", "value") == tempTerm)]], type = "continuous"),
+      )
+
+      if (tempTermType == "nominal" && BayesTools::is.prior.point(tempPrior[["null"]])) {
+        tempPrior[["null"]] <- RoBMA::prior_factor("spike", list(tempPrior[["alt"]][["parameters"]][["location"]]), contrast = .robmaPriorGetContrast(tempPrior[["alt"]]))
+      }
     }
 
     # enlist
     tempObject[[tempTerm]] <- tempPrior
+
   }
+
   object[["moderators"]] <- tempObject
 
 
@@ -867,7 +869,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     return()
 
   fit <- .maExtractFit(jaspResults, options)
-  saveRDS(fit, file = "C:/JASP-Packages/fit.RDS")
+  saveRDS(fit, file = "C:/JASP/fit.RDS")
 
   ### create overview table
   testsTable <- createJaspTable(gettext("Meta-Analytic Tests"))
@@ -1315,7 +1317,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   return()
 }
 .robmaEstimatedMarginalMeansTable        <- function(variableContainer, fit, options, selectedVariable, conditional) {
-  saveRDS(fit, file = "C:/JASP-Packages/fitMM.RDS")
+  saveRDS(fit, file = "C:/JASP/fitMM.RDS")
   estimatedMarginalMeansTable <- createJaspTable(if (conditional) gettext("Conditional Estimated Marginal Means") else gettext("Estimated Marginal Means"))
   estimatedMarginalMeansTable$position <- if (conditional) 2 else 1
   estimatedMarginalMeansTable$dependOn(c("estimatedMarginalMeansEffectSize", "estimatedMarginalMeansEffectSizeTestAgainst0", "transformEffectSize", "bayesFactorType",
@@ -1775,199 +1777,6 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   return()
 }
 
-.robmaMakeBubblePlotDataset            <- function(fit, options) {
-
-  # extract options
-  separateLines        <- unlist(options[["bubblePlotSeparateLines"]])
-  separatePlots        <- unlist(options[["bubblePlotSeparatePlots"]])
-  selectedVariable     <- options[["bubblePlotSelectedVariable"]][[1]][["variable"]]
-  selectedVariableType <- options[["predictors.types"]][options[["predictors"]] == selectedVariable]
-  remainingVariables   <- setdiff(fit[["add_info"]][["predictors"]], c(separateLines, separatePlots, selectedVariable))
-  dataset              <- attr(fit, "dataset")
-
-  # create a range of values for continuous predictors to plot the trend but use lvls for factors
-  if (selectedVariableType == "scale") {
-
-    xRange <- range(jaspGraphs::getPrettyAxisBreaks(range(dataset[[selectedVariable]])))
-    trendSequence <- seq(xRange[1], xRange[2], length.out =  101)
-
-    predictorMatrixEffectSize <- .robmaGetMarginalMeansPredictorMatrix(
-      fit                = fit,
-      options            = options,
-      selectedVariables  = c(separateLines, separatePlots),
-      sdFactor           = options[["bubblePlotSdFactorCovariates"]],
-      trendVarible       = selectedVariable,
-      trendSequence      = trendSequence,
-      parameter          = "effectSize"
-    )
-
-  } else if (selectedVariableType == "nominal") {
-
-    predictorMatrixEffectSize <- .robmaGetMarginalMeansPredictorMatrix(
-      fit                = fit,
-      options            = options,
-      selectedVariables  = c(selectedVariable, separateLines, separatePlots),
-      sdFactor           = options[["bubblePlotSdFactorCovariates"]],
-      parameter          = "effectSize"
-    )
-
-  }
-
-  predictions <- BayesTools::JAGS_evaluate_formula(
-    fit         = fit$model$fit, # coda::as.mcmc.list(coda::as.mcmc(fit.ss$model$fit))
-    formula     = fit$formula,
-    parameter   = "mu",
-    data        = as.data.frame(predictorMatrixEffectSize),
-    prior_list  = attr(fit$model$fit, "prior_list")
-  )
-
-  ### modify and rename selectedGrid
-  selectedGrid  <- attr(predictorMatrixEffectSize, "selectedGrid")
-  selectedGrid$selectedVariable <- selectedGrid[,selectedVariable]
-  # deal with continuous variables dichotomization
-  selectedGrid     <- .maDichotomizeVariablesLevels(selectedGrid, c(separateLines, separatePlots), options)
-  continuousLevels <- attr(selectedGrid, "continuousLevels")
-  # collapse factor levels if multiple selected
-  selectedGrid <- .maMergeVariablesLevels(selectedGrid, separateLines, "separateLines")
-  selectedGrid <- .maMergeVariablesLevels(selectedGrid, separatePlots, "separatePlots")
-  # remove original names
-  selectedGrid <- selectedGrid[,setdiff(names(selectedGrid), c(selectedVariable, separateLines, separatePlots)),drop = FALSE]
-
-  ### modify marginal means
-  # average across the remaining variables
-  for (i in seq_along(remainingVariables)) {
-    if (options[["predictors.types"]][options[["predictors"]] == remainingVariables[i]] == "nominal") {
-      predictions <- do.call(cbind, lapply(unique(dataset[[remainingVariables[i]]]), function(x) {
-        predictions[predictorMatrixEffectSize[[remainingVariables[i]]] == x, , drop = FALSE]
-      }))
-      predictorMatrixEffectSize <- lapply(unique(dataset[[remainingVariables[i]]]), function(x) {
-        predictorMatrixEffectSize[predictorMatrixEffectSize[[remainingVariables[i]]] == x, , drop = FALSE]
-      })[[1]]
-    }
-  }
-  # compute the estimate and standard error
-  computedMarginalMeans <- data.frame(
-    est = apply(predictions, 1, mean),
-    lCi = apply(predictions, 1, quantile, prob = 0.5 - options[["confidenceIntervalsLevel"]] / 2),
-    uCi = apply(predictions, 1, quantile, prob = 0.5 + options[["confidenceIntervalsLevel"]] / 2),
-    lPi = NA,
-    uPi = NA
-  )
-
-  ### merge and add attributes
-  dfPlot <- cbind.data.frame(selectedGrid, computedMarginalMeans)
-
-  attr(dfPlot, "selectedVariable")     <- selectedVariable
-  attr(dfPlot, "selectedVariableType") <- selectedVariableType
-  attr(dfPlot, "separateLines")    <- paste(separateLines, collapse = " | ")
-  attr(dfPlot, "separatePlots")    <- paste(separatePlots, collapse = " | ")
-  attr(dfPlot, "variablesLines")   <- separateLines
-  attr(dfPlot, "variablesPlots")   <- separatePlots
-  attr(dfPlot, "continuousLevels") <- continuousLevels[!sapply(continuousLevels, is.null)]
-  attr(dfPlot, "xRange")           <- if (selectedVariableType == "scale") xRange
-
-  return(dfPlot)
-}
-.robmaGetMarginalMeansPredictorMatrix  <- function(fit, options, selectedVariables, trendVarible = NULL, trendSequence = NULL, sdFactor, parameter) {
-
-  dataset <- attr(fit, "dataset")
-  priors  <- fit[["priors"]][["terms"]]
-  variablesContinuous <- options[["predictors"]][options[["predictors.types"]] == "scale"]
-  variablesFactors    <- options[["predictors"]][options[["predictors.types"]] == "nominal"]
-
-  # extract the corresponding formula
-  formula      <- fit$formula
-  hasIntercept <- TRUE
-
-  # extract the used variables
-  terms     <- attr(terms(formula, data = fit[["data"]]), "term.labels")
-  variables <- terms[!grepl(":", terms)]
-
-  # average across remaining variables
-  remainingVariables <- setdiff(variables, c(selectedVariables, trendVarible))
-
-  ### create model matrix for the remaining predictors
-  # (use all factors for levels to average out the predictor matrix later)
-  predictorsRemaining <- list()
-  for (i in seq_along(remainingVariables)) {
-    if (remainingVariables[[i]] %in% variablesFactors) {
-      predictorsRemaining[[remainingVariables[i]]] <- factor(levels(dataset[[remainingVariables[[i]]]]), levels = levels(dataset[[remainingVariables[[i]]]]))
-      contrasts(predictorsRemaining[[remainingVariables[i]]]) <- contrasts(dataset[[remainingVariables[[i]]]])
-    } else if (remainingVariables[[i]] %in% variablesContinuous) {
-      predictorsRemaining[[remainingVariables[i]]] <- mean(dataset[[remainingVariables[[i]]]])
-    }
-  }
-
-  # create complete model matrices including the specified variable
-  predictorsSelected <- list()
-  predictorsSelectedNames <- list()
-  if (length(selectedVariables) > 0) {
-    for (selectedVariable in selectedVariables) {
-      if (selectedVariable %in% variablesFactors) {
-        predictorsSelected[[selectedVariable]] <- factor(levels(dataset[[selectedVariable]]), levels = levels(dataset[[selectedVariable]]))
-        predictorsSelectedNames[[selectedVariable]] <- levels(dataset[[selectedVariable]])
-        contrasts(predictorsSelected[[selectedVariable]]) <- contrasts(dataset[[selectedVariable]])
-      } else if (selectedVariable %in% variablesContinuous) {
-        predictorsSelected[[selectedVariable]] <- c(
-          mean(dataset[[selectedVariable]]) - sdFactor * sd(dataset[[selectedVariable]]),
-          mean(dataset[[selectedVariable]]),
-          mean(dataset[[selectedVariable]]) + sdFactor * sd(dataset[[selectedVariable]])
-        )
-        predictorsSelectedNames[[selectedVariable]] <- c(
-          gettextf("Mean - %1$sSD", sdFactor),
-          gettext("Mean"),
-          gettextf("Mean + %1$sSD", sdFactor)
-        )
-      }
-    }
-  }
-
-  # create model matrix for the trend variable
-  if (length(trendVarible) != 0) {
-    predictorsSelected[[trendVarible]] <- trendSequence
-  }
-
-  # add the specified variable
-  predictorsSelectedGrid      <- expand.grid(predictorsSelected)
-  predictorsSelectedGridNames <- expand.grid(predictorsSelectedNames)
-  outMatrix <- do.call(rbind, lapply(1:nrow(predictorsSelectedGrid), function(i) {
-    expand.grid(c(predictorsRemaining,  predictorsSelectedGrid[i,,drop = FALSE]))
-  }))
-
-  # standardize the continuous variables
-  variablesInfo <- attr(fit[["data"]][["predictors"]], "variables_info")
-  for (i in seq_along(variablesInfo)) {
-    if (variablesInfo[[i]][["type"]] == "continuous") {
-      outMatrix[[names(variablesInfo)[[i]]]] <- (outMatrix[[names(variablesInfo)[[i]]]] - variablesInfo[[i]][["mean"]]) / variablesInfo[[i]][["sd"]]
-    }
-  }
-
-  # selected variables grid
-  attr(outMatrix, "selectedGrid") <- predictorsSelectedGrid
-  attr(outMatrix, "selectedGridNames") <- predictorsSelectedGridNames
-
-  # add remaining variables
-  attr(outMatrix, "variable") <- c(selectedVariables, trendVarible)
-
-  for (selectedVariable in selectedVariables) {
-    if (selectedVariable %in% variablesFactors) {
-      attr(outMatrix, selectedVariable) <- predictorsSelected[[selectedVariable]]
-    } else if (selectedVariable %in% variablesContinuous) {
-      attr(outMatrix, selectedVariable) <- c(
-        gettextf("Mean - %1$sSD", sdFactor),
-        gettext("Mean"),
-        gettextf("Mean + %1$sSD", sdFactor))
-    }
-  }
-
-  if (length(trendVarible) != 0) {
-    attr(outMatrix, "trend") <- trendVarible
-    attr(outMatrix, "trend") <- trendSequence
-  }
-
-  return(outMatrix)
-}
-
 # containers
 .robmaExtractModelSummaryContainer           <- function(jaspResults) {
 
@@ -2181,6 +1990,199 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     computedMarginalMeans <- computedMarginalMeans[,!colnames(computedMarginalMeans) %in% c("lCi", "uCi"), drop = FALSE]
 
   return(computedMarginalMeans)
+}
+.robmaMakeBubblePlotDataset            <- function(fit, options) {
+
+  # extract options
+  separateLines        <- unlist(options[["bubblePlotSeparateLines"]])
+  separatePlots        <- unlist(options[["bubblePlotSeparatePlots"]])
+  selectedVariable     <- options[["bubblePlotSelectedVariable"]][[1]][["variable"]]
+  selectedVariableType <- options[["predictors.types"]][options[["predictors"]] == selectedVariable]
+  remainingVariables   <- setdiff(fit[["add_info"]][["predictors"]], c(separateLines, separatePlots, selectedVariable))
+  dataset              <- attr(fit, "dataset")
+
+  # create a range of values for continuous predictors to plot the trend but use lvls for factors
+  if (selectedVariableType == "scale") {
+
+    xRange <- range(jaspGraphs::getPrettyAxisBreaks(range(dataset[[selectedVariable]])))
+    trendSequence <- seq(xRange[1], xRange[2], length.out =  101)
+
+    predictorMatrixEffectSize <- .robmaGetMarginalMeansPredictorMatrix(
+      fit                = fit,
+      options            = options,
+      selectedVariables  = c(separateLines, separatePlots),
+      sdFactor           = options[["bubblePlotSdFactorCovariates"]],
+      trendVarible       = selectedVariable,
+      trendSequence      = trendSequence,
+      parameter          = "effectSize"
+    )
+
+  } else if (selectedVariableType == "nominal") {
+
+    predictorMatrixEffectSize <- .robmaGetMarginalMeansPredictorMatrix(
+      fit                = fit,
+      options            = options,
+      selectedVariables  = c(selectedVariable, separateLines, separatePlots),
+      sdFactor           = options[["bubblePlotSdFactorCovariates"]],
+      parameter          = "effectSize"
+    )
+
+  }
+
+  predictions <- BayesTools::JAGS_evaluate_formula(
+    fit         = fit$model$fit,
+    formula     = fit$formula,
+    parameter   = "mu",
+    data        = as.data.frame(predictorMatrixEffectSize),
+    prior_list  = attr(fit$model$fit, "prior_list")
+  )
+
+  ### modify and rename selectedGrid
+  selectedGrid  <- attr(predictorMatrixEffectSize, "selectedGrid")
+  selectedGrid$selectedVariable <- selectedGrid[,selectedVariable]
+  # deal with continuous variables dichotomization
+  selectedGrid     <- .maDichotomizeVariablesLevels(selectedGrid, c(separateLines, separatePlots), options)
+  continuousLevels <- attr(selectedGrid, "continuousLevels")
+  # collapse factor levels if multiple selected
+  selectedGrid <- .maMergeVariablesLevels(selectedGrid, separateLines, "separateLines")
+  selectedGrid <- .maMergeVariablesLevels(selectedGrid, separatePlots, "separatePlots")
+  # remove original names
+  selectedGrid <- selectedGrid[,setdiff(names(selectedGrid), c(selectedVariable, separateLines, separatePlots)),drop = FALSE]
+
+  ### modify marginal means
+  # average across the remaining variables
+  for (i in seq_along(remainingVariables)) {
+    if (options[["predictors.types"]][options[["predictors"]] == remainingVariables[i]] == "nominal") {
+      predictionsSplit <- lapply(unique(dataset[[remainingVariables[i]]]), function(x) {
+        predictions[predictorMatrixEffectSize[[remainingVariables[i]]] == x, , drop = FALSE]
+      })
+      predictions <- matrix(rowMeans(do.call(cbind, lapply(predictionsSplit, as.vector))), nrow = nrow(predictionsSplit[[1]]), ncol = ncol(predictionsSplit[[1]]))
+      predictorMatrixEffectSize <- lapply(unique(dataset[[remainingVariables[i]]]), function(x) {
+        predictorMatrixEffectSize[predictorMatrixEffectSize[[remainingVariables[i]]] == x, , drop = FALSE]
+      })[[1]]
+    }
+  }
+  # compute the estimate and standard error
+  computedMarginalMeans <- data.frame(
+    est = apply(predictions, 1, mean),
+    lCi = apply(predictions, 1, quantile, prob = 0.5 - options[["confidenceIntervalsLevel"]] / 2),
+    uCi = apply(predictions, 1, quantile, prob = 0.5 + options[["confidenceIntervalsLevel"]] / 2),
+    lPi = NA,
+    uPi = NA
+  )
+
+  ### merge and add attributes
+  dfPlot <- cbind.data.frame(selectedGrid, computedMarginalMeans)
+
+  attr(dfPlot, "selectedVariable")     <- selectedVariable
+  attr(dfPlot, "selectedVariableType") <- selectedVariableType
+  attr(dfPlot, "separateLines")    <- paste(separateLines, collapse = " | ")
+  attr(dfPlot, "separatePlots")    <- paste(separatePlots, collapse = " | ")
+  attr(dfPlot, "variablesLines")   <- separateLines
+  attr(dfPlot, "variablesPlots")   <- separatePlots
+  attr(dfPlot, "continuousLevels") <- continuousLevels[!sapply(continuousLevels, is.null)]
+  attr(dfPlot, "xRange")           <- if (selectedVariableType == "scale") xRange
+
+  return(dfPlot)
+}
+.robmaGetMarginalMeansPredictorMatrix  <- function(fit, options, selectedVariables, trendVarible = NULL, trendSequence = NULL, sdFactor, parameter) {
+
+  dataset <- attr(fit, "dataset")
+  priors  <- fit[["priors"]][["terms"]]
+  variablesContinuous <- options[["predictors"]][options[["predictors.types"]] == "scale"]
+  variablesFactors    <- options[["predictors"]][options[["predictors.types"]] == "nominal"]
+
+  # extract the corresponding formula
+  formula      <- fit$formula
+  hasIntercept <- TRUE
+
+  # extract the used variables
+  terms     <- attr(terms(formula, data = fit[["data"]]), "term.labels")
+  variables <- terms[!grepl(":", terms)]
+
+  # average across remaining variables
+  remainingVariables <- setdiff(variables, c(selectedVariables, trendVarible))
+
+  ### create model matrix for the remaining predictors
+  # (use all factors for levels to average out the predictor matrix later)
+  predictorsRemaining <- list()
+  for (i in seq_along(remainingVariables)) {
+    if (remainingVariables[[i]] %in% variablesFactors) {
+      predictorsRemaining[[remainingVariables[i]]] <- factor(levels(dataset[[remainingVariables[[i]]]]), levels = levels(dataset[[remainingVariables[[i]]]]))
+      contrasts(predictorsRemaining[[remainingVariables[i]]]) <- contrasts(dataset[[remainingVariables[[i]]]])
+    } else if (remainingVariables[[i]] %in% variablesContinuous) {
+      predictorsRemaining[[remainingVariables[i]]] <- mean(dataset[[remainingVariables[[i]]]])
+    }
+  }
+
+  # create complete model matrices including the specified variable
+  predictorsSelected <- list()
+  predictorsSelectedNames <- list()
+  if (length(selectedVariables) > 0) {
+    for (selectedVariable in selectedVariables) {
+      if (selectedVariable %in% variablesFactors) {
+        predictorsSelected[[selectedVariable]] <- factor(levels(dataset[[selectedVariable]]), levels = levels(dataset[[selectedVariable]]))
+        predictorsSelectedNames[[selectedVariable]] <- levels(dataset[[selectedVariable]])
+        contrasts(predictorsSelected[[selectedVariable]]) <- contrasts(dataset[[selectedVariable]])
+      } else if (selectedVariable %in% variablesContinuous) {
+        predictorsSelected[[selectedVariable]] <- c(
+          mean(dataset[[selectedVariable]]) - sdFactor * sd(dataset[[selectedVariable]]),
+          mean(dataset[[selectedVariable]]),
+          mean(dataset[[selectedVariable]]) + sdFactor * sd(dataset[[selectedVariable]])
+        )
+        predictorsSelectedNames[[selectedVariable]] <- c(
+          gettextf("Mean - %1$sSD", sdFactor),
+          gettext("Mean"),
+          gettextf("Mean + %1$sSD", sdFactor)
+        )
+      }
+    }
+  }
+
+  # create model matrix for the trend variable
+  if (length(trendVarible) != 0) {
+    predictorsSelected[[trendVarible]] <- trendSequence
+  }
+
+  # add the specified variable
+  predictorsSelectedGrid      <- expand.grid(predictorsSelected)
+  predictorsSelectedGridNames <- expand.grid(predictorsSelectedNames)
+  outMatrix <- do.call(rbind, lapply(1:nrow(predictorsSelectedGrid), function(i) {
+    expand.grid(c(predictorsRemaining,  predictorsSelectedGrid[i,,drop = FALSE]))
+  }))
+
+  # standardize the continuous variables
+  variablesInfo <- attr(fit[["data"]][["predictors"]], "variables_info")
+  for (i in seq_along(variablesInfo)) {
+    if (variablesInfo[[i]][["type"]] == "continuous") {
+      outMatrix[[names(variablesInfo)[[i]]]] <- (outMatrix[[names(variablesInfo)[[i]]]] - variablesInfo[[i]][["mean"]]) / variablesInfo[[i]][["sd"]]
+    }
+  }
+
+  # selected variables grid
+  attr(outMatrix, "selectedGrid") <- predictorsSelectedGrid
+  attr(outMatrix, "selectedGridNames") <- predictorsSelectedGridNames
+
+  # add remaining variables
+  attr(outMatrix, "variable") <- c(selectedVariables, trendVarible)
+
+  for (selectedVariable in selectedVariables) {
+    if (selectedVariable %in% variablesFactors) {
+      attr(outMatrix, selectedVariable) <- predictorsSelected[[selectedVariable]]
+    } else if (selectedVariable %in% variablesContinuous) {
+      attr(outMatrix, selectedVariable) <- c(
+        gettextf("Mean - %1$sSD", sdFactor),
+        gettext("Mean"),
+        gettextf("Mean + %1$sSD", sdFactor))
+    }
+  }
+
+  if (length(trendVarible) != 0) {
+    attr(outMatrix, "trend") <- trendVarible
+    attr(outMatrix, "trend") <- trendSequence
+  }
+
+  return(outMatrix)
 }
 
 .robmaRowTests                               <- function(fit, options) {

@@ -1467,8 +1467,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     bubblePlot       <- .maBubblePlotFun(fit[[1]], options)
     bubblePlot$title <- gettext("Bubble Plots")
-    bubblePlot$dependOn(c(.maBubblePlotDependencies, "includeFullDatasetInSubgroupAnalysis"))
-    bubblePlot$position <- 5
+    bubblePlot$dependOn(c(.maBubblePlotDependencies, "includeFullDatasetInSubgroupAnalysis", if (.maIsClassical(options)) .maDependencies else .robmaDependencies))
+    bubblePlot$position <- if (.maIsClassical(options)) 5 else 6
     jaspResults[["bubblePlot"]] <- bubblePlot
     return()
 
@@ -1477,8 +1477,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     # create the output container
     bubblePlot       <- createJaspContainer()
     bubblePlot$title <- gettext("Bubble Plots")
-    bubblePlot$dependOn(c(.maBubblePlotDependencies, "includeFullDatasetInSubgroupAnalysis"))
-    bubblePlot$position <- 5
+    bubblePlot$dependOn(c(.maBubblePlotDependencies, "includeFullDatasetInSubgroupAnalysis", if (.maIsClassical(options)) .maDependencies else .robmaDependencies))
+    bubblePlot$position <- if (.maIsClassical(options)) 5 else 6
     jaspResults[["bubblePlot"]] <- bubblePlot
 
     for (i in seq_along(fit)) {
@@ -1508,7 +1508,6 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     bubblePlot <- createJaspPlot(width = width, height = height)
   }
 
-  # make bubble plots
   if (.maIsClassical(options)) {
     dfPlot <- .maMakeBubblePlotDataset(fit, options)
   } else {
@@ -3202,7 +3201,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
       y     = as.name("est"),
       color = if (hasSeparateLines) as.name("separateLines")
     )
-    dfPlot[["y"]] <- do.call(.maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]), list(dfPlot[["y"]]))
+    dfPlot[["est"]] <- do.call(.maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]), list(dfPlot[["est"]]))
     geomCall <- list(
       data    = dfPlot,
       mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)])
@@ -3223,14 +3222,14 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # add separate lines and plots
   if (hasSeparateLines)
-    dfStudies[attr(dfPlot, "variablesLines")] <- fit[["data"]][attr(dfPlot, "variablesLines")]
+    dfStudies[attr(dfPlot, "variablesLines")] <- dataset[attr(dfPlot, "variablesLines")]
   if (hasSeparatePlots)
-    dfStudies[attr(dfPlot, "variablesPlots")] <- fit[["data"]][attr(dfPlot, "variablesPlots")]
+    dfStudies[attr(dfPlot, "variablesPlots")] <- dataset[attr(dfPlot, "variablesPlots")]
 
   # make same encoding
   dfStudies <- .maDichotomizeVariablesDataset(dfStudies, c(attr(dfPlot, "variablesLines"), attr(dfPlot, "variablesPlots")), attr(dfPlot, "continuousLevels"), options)
-  dfStudies <- .maMergeVariablesLevels(dfStudies, variablesLines <- attr(dfPlot, "variablesLines"), "separateLines")
-  dfStudies <- .maMergeVariablesLevels(dfStudies, variablesLines <- attr(dfPlot, "variablesPlots"), "separatePlots")
+  dfStudies <- .maMergeVariablesLevels(dfStudies, attr(dfPlot, "variablesLines"), "separateLines")
+  dfStudies <- .maMergeVariablesLevels(dfStudies, attr(dfPlot, "variablesPlots"), "separatePlots")
   if (hasSeparateLines)
     levels(dfStudies[,"separateLines"]) <- levels(dfPlot[,"separateLines"])
 

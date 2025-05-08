@@ -148,7 +148,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotStudyInformationSecondaryConfidenceIntervalLevel"
 )
 .maBubblePlotDependencies <- c(
-  .maDependencies, "transformEffectSize", "confidenceIntervalsLevel",
+  "transformEffectSize", "confidenceIntervalsLevel",
   "bubblePlotSelectedVariable",
   "bubblePlotSeparateLines",
   "bubblePlotSeparatePlots",
