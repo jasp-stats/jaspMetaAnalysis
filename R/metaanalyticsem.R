@@ -640,7 +640,11 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   }
 
   out <- do.call(rbind, out)
-  out <- out[out$diffdf > 0,,drop=FALSE]
+  out <- out[out[["difDf"]] > 0,,drop=FALSE]
+
+  if (nrow(out) == 0)
+    pairwiseModelComparison$addFootnote(gettext("No pairwise model comparison with at least one degree of freedom difference available."))
+
 
   # assign output to table
   pairwiseModelComparison$setData(out)
