@@ -61,8 +61,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 }
 
 .masemDependencies <- c(
-  "correlationCovarianceMatrix", "means", "dataInputType", "variableNameSeparator",
-  "models", "modelSummaryConfidenceIntervalType"
+  "correlationCovarianceMatrix", "sampleSize", "means", "dataInputType", "variableNameSeparator", "models"
 )
 .masemDecodeData           <- function(dataset, options) {
 

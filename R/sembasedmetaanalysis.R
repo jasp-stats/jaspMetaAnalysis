@@ -77,15 +77,15 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
   # since multiple models are fitted, we check for dependencies on model-by-model basis
   # (by comparing to stored options to the current options)
-
   # obtain the model container
+  # TODO: this container is always reset to NULL, no idea what is wrong
   if (is.null(jaspResults[["modelContainer"]])) {
     # create the jaspState to hold the model object
     # (only run on initialization)
     modelContainer <- createJaspState()
     jaspResults[["modelContainer"]] <- modelContainer
-    if (MASEM)
-      modelContainer$dependOn(c("correlationCovarianceMatrix", "means", "dataInputType", "variableNameSeparator", "modelSummaryConfidenceIntervalType"))
+    if (MASEM)       modelContainer$dependOn(c("correlationCovarianceMatrix", "sampleSize", "means", "dataInputType", "variableNameSeparator"))
+    else if (!MASEM) modelContainer$dependOn(c("modelSummaryConfidenceIntervalType"))
     fits <- list()
   } else {
     modelContainer <- jaspResults[["modelContainer"]]
@@ -106,9 +106,9 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
       # check if the model is still valid (by comparing stored options to the current options)
       if (isTRUE(all.equal(attr(tempFit, "model"), model)) &&
-          attr(tempFit, "modelSummaryConfidenceIntervalType") == options[["modelSummaryConfidenceIntervalType"]] &&
           isTRUE(all.equal(attr(tempFit, "dataset"), dataset)) &&
-          if (MASEM) attr(tempFit, "dataInputType") == options[["dataInputType"]] else TRUE)
+          if (!MASEM) attr(tempFit, "modelSummaryConfidenceIntervalType") == options[["modelSummaryConfidenceIntervalType"]]  else TRUE &&
+          if (MASEM)  attr(tempFit, "dataInputType")                      == options[["dataInputType"]]                       else TRUE)
         next
     } else {
       tempFit <- NULL
@@ -129,10 +129,9 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
       # add options to the model fit
       attr(tempFit, "model") <- model
-      attr(tempFit, "modelSummaryConfidenceIntervalType") <- options[["modelSummaryConfidenceIntervalType"]]
       attr(tempFit, "dataset") <- dataset
-      attr(tempFit, "dataInputType") <- options[["dataInputType"]]
-
+      if       (MASEM) attr(tempFit, "dataInputType") <- options[["dataInputType"]]
+      else if (!MASEM) attr(tempFit, "modelSummaryConfidenceIntervalType") <- options[["modelSummaryConfidenceIntervalType"]]
     }
 
     # save output
@@ -197,7 +196,6 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
     tempFit <- try(metaSEM::osmasem2(
       RAM                 = tempRam,
       data                = corDataset,
-      intervals.type      = .masemGetIntervalsType(options),
       cor.analysis        = options[["dataInputType"]] == "correlation",
       mean.analysis       = !is.null(dataset[["means"]]),
       RE.type.Sigma       = .masemGetRandomEffectsType(model[["randomEffectsSigma"]]),

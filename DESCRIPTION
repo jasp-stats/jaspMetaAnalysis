@@ -41,7 +41,8 @@ Remotes:
   jasp-stats/jaspGraphs,
   FBartos/RoBMA@3lvl,
   FBartos/BayesTools@diagnostics-fix,
-  jasp-stats/jaspSEM
+  jasp-stats/jaspSEM,
+  mikewlcheung/metasem
 Depends: 
     R (>= 2.10)
 LazyData: true

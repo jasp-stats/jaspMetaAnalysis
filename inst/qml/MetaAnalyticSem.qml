@@ -62,26 +62,6 @@ Form
 			height:				100 * preferencesModel.uiScale
 			info: qsTr("Variables containing the means of the variables. The variable name must be `x` where `x` corresponds to the variable names in the correlation/covariance matrix input. This input is required only when meta-analytic sem with means is requested.")
 		}
-/*
-		AssignedVariablesList
-		{
-			name:				"predictors"
-			id:					predictors
-			title:				qsTr("Predictors")
-			allowedColumns:		["nominal", "scale"]
-			allowTypeChange:	true
-			info: qsTr("Variables to include as predictors (moderators) in the meta-regression model.")
-		}
-
-		AssignedVariablesList
-		{
-			name:				"studyLabels"
-			title:				qsTr("Study Labels")
-			singleVariable:		true
-			allowedColumns:		["nominal"]
-			info: qsTr("Variable containing labels for the studies. Used for labeling outputs and plots.")
-		}
-*/
 	}
 
 	Group
@@ -321,18 +301,6 @@ Form
 				label:		qsTr("Random effects")
 				checked:	false
 				info:		qsTr("Show random effects in the model summary.")
-			}
-
-			DropDown
-			{
-				name:		"modelSummaryConfidenceIntervalType"
-				label:		qsTr("Confidence interval type")
-				values:
-				[
-					{ label: qsTr("Standard errors")	, value: "standardErrors"	},
-					{ label: qsTr("Likelihood based")   , value: "likelihoodBased"	}
-				]
-				info:		qsTr("Method for computing confidence interval.")
 			}
 
 			CheckBox
