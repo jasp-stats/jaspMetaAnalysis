@@ -40,70 +40,79 @@ Form
 				info:		qsTr("Specify model using a lavaan style syntax.")
 			}
 
+
+			/*
+			columns: 2
+
+			ComponentsList
+			{
+				Layout.columnSpan:	1
+				preferredWidth:		syntax.width / 2
+				preferredHeight:	150
+				title: 				qsTr("Observed Variables")
+				name:				"observedVariableList"
+				source: 			"syntax"
+				info:				qsTr("Specify observed variables.")
+				rowComponent: 		CheckBox
+				{
+					label:		rowValue
+					name:		"observedVariable"
+					checked:	true
+				}
+			}
+			*/
 			Group
 			{
-				columns: 2
+				title: qsTr("Model Settings")
 
-				ComponentsList
+				CheckBox
 				{
-					Layout.columnSpan:	1
-					preferredWidth:		syntax.width / 2
-					preferredHeight:	150
-					title: 				qsTr("Observed Variables")
-					name:				"observedVariableList"
-					source: 			"syntax"
-					info:				qsTr("Specify observed variables.")
-					rowComponent: 		CheckBox
-					{
-						label:		rowValue
-						name:		"observedVariable"
-						checked:	true
-					}
+					text:		qsTr("Replace constraints")
+					name:		"replaceConstraints"
+					checked:	false
+					info:		qsTr("Replace constraints in the model.")
 				}
 
-				Group
+				CheckBox
 				{
-					title: qsTr("Model Settings")
-
-					CheckBox
-					{
-						text:		qsTr("Replace constraints")
-						name:		"replaceConstraints"
-						checked:	false
-						info:		qsTr("Replace constraints in the model.")
-					}
-
-					CheckBox
-					{
-						text:		qsTr("Fix latent variance to 1")
-						name:		"fixLatentVarianceTo1"
-						checked:	false
-						info:		qsTr("Fix the variance of latent variables to 1.")
-					}
+					text:		qsTr("Fix latent variance to 1")
+					name:		"fixLatentVarianceTo1"
+					checked:	false
+					info:		qsTr("Fix the variance of latent variables to 1.")
 				}
 			}
 		}
 
 	}
 	
-
-	CheckBox
+	Group
 	{
-		text:		qsTr("Model summary")
-		name:		"modelSummary"
-		checked:	false
-		info:		qsTr("Show a summary of the model coefficients and computed estimates.")
-
-		DropDown
+		CheckBox
 		{
-			name:		"modelSummaryConfidenceIntervalType"
-			label:		qsTr("Confidence interval type")
-			values:
-			[
-				{ label: qsTr("Standard errors")	, value: "standardErrors"	},
-				{ label: qsTr("Likelihood based")   , value: "likelihoodBased"	}
-			]
-			info:		qsTr("Method for computing confidence interval.")
+			text:		qsTr("Pairwise model comparison")
+			name:		"pairwiseModelComparison"
+			checked:	false
+			info:		qsTr("Show a pairwise model comparison table.")
+		}
+
+		CheckBox
+		{
+			text:		qsTr("Model summary")
+			name:		"modelSummary"
+			checked:	false
+			info:		qsTr("Show a summary of the model coefficients and computed estimates.")
+
+			DropDown
+			{
+				name:		"modelSummaryConfidenceIntervalType"
+				label:		qsTr("Confidence interval type")
+				values:
+				[
+					{ label: qsTr("Standard errors")	, value: "standardErrors"	},
+					{ label: qsTr("Likelihood based")   , value: "likelihoodBased"	}
+				]
+				info:		qsTr("Method for computing confidence interval.")
+			}
 		}
 	}
 

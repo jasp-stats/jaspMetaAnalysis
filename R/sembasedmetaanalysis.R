@@ -31,6 +31,9 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   # create summary with model fit statistics (for all models)
   .masemModelFitTable(jaspResults, options)
 
+  if (options[["pairwiseModelComparison"]])
+    .masemPairwiseModelComparisonTable(jaspResults, options)
+
   # create model-level summaries
   if (options[["modelSummary"]])
     .masemModelSummaryTable(jaspResults, options)
@@ -691,10 +694,11 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   ))
 }
 .masemGetObservedVariables <- function(model) {
-  variable <- sapply(model[["observedVariableList"]], function(x) x[["value"]])
-  observed <- sapply(model[["observedVariableList"]], function(x) x[["observedVariable"]])
 
-  observedVariables <- variable[observed]
+  observedVariables <- c(
+    model$syntax$columns,
+    model$syntax$prefixedColumns$data.
+  )
   observedVariables <- encodeColNames(observedVariables)
   return()
 }
