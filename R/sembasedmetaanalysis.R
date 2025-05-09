@@ -193,6 +193,10 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
   # fit SEM
   if (!jaspBase::isTryError(tempRam) && !jaspBase::isTryError(corDataset)) {
+
+    OpenMx::mxOption(NULL, "Calculate Hessian", "Yes")
+    OpenMx::mxOption(NULL, "Standard Errors", "Yes")
+
     tempFit <- try(metaSEM::osmasem2(
       RAM                 = tempRam,
       data                = corDataset,

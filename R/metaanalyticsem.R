@@ -459,9 +459,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   pooledParameters$addColumnInfo(name = "row",      type = "string",  title = gettext("Row"))
   pooledParameters$addColumnInfo(name = "col",      type = "string",  title = gettext("Column"))
   pooledParameters$addColumnInfo(name = "estimate", type = "number",  title = gettext("Estimate"))
-  if (options[["modelSummaryConfidenceIntervalType"]] == "standardErrors") {
-    pooledParameters$addColumnInfo(name = "se",        type = "number",  title = gettext("Standard Error"))
-  }
+  pooledParameters$addColumnInfo(name = "se",        type = "number",  title = gettext("Standard Error"))
   pooledParameters$addColumnInfo(name = "lCi",       type = "number",  title = gettext("Lower"), overtitle = gettextf("95%% CI"))
   pooledParameters$addColumnInfo(name = "uCi",       type = "number",  title = gettext("Upper"), overtitle = gettextf("95%% CI"))
   pooledParameters$addColumnInfo(name = "z",         type = "number",  title = gettext("z"))
@@ -680,15 +678,11 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
     tempSummaryTable$addColumnInfo(name = "col",      type = "string",  title = gettext("Column"))
   }
   tempSummaryTable$addColumnInfo(name = "estimate", type = "number",  title = gettext("Estimate"))
-  if (options[["modelSummaryConfidenceIntervalType"]] == "standardErrors") {
-    tempSummaryTable$addColumnInfo(name = "se",        type = "number",  title = gettext("Standard Error"))
-  }
+  tempSummaryTable$addColumnInfo(name = "se",        type = "number",  title = gettext("Standard Error"))
   tempSummaryTable$addColumnInfo(name = "lCi",       type = "number",  title = gettext("Lower"), overtitle = gettextf("95%% CI"))
   tempSummaryTable$addColumnInfo(name = "uCi",       type = "number",  title = gettext("Upper"), overtitle = gettextf("95%% CI"))
-  if (options[["modelSummaryConfidenceIntervalType"]] == "standardErrors") {
-    tempSummaryTable$addColumnInfo(name = "z",         type = "number",  title = gettext("z"))
-    tempSummaryTable$addColumnInfo(name = "p",         type = "pvalue",  title = gettext("p"))
-  }
+  tempSummaryTable$addColumnInfo(name = "z",         type = "number",  title = gettext("z"))
+  tempSummaryTable$addColumnInfo(name = "p",         type = "pvalue",  title = gettext("p"))
 
   # skip if not ready
   if (!.masemReady(options))
@@ -714,11 +708,8 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   ), ,drop=FALSE]
 
   # remove additional columns
-  if (options[["modelSummaryConfidenceIntervalType"]] == "likelihoodBased") {
-    tempOutput <- tempOutput[, c("name", "row", "col", "estimate", "lCi", "uCi"),drop=FALSE]
-  } else {
-    tempOutput <- tempOutput[, c("name", "row", "col", "estimate", "se", "z", "p", "lCi", "uCi"),drop=FALSE]
-  }
+  tempOutput <- tempOutput[, c("name", "row", "col", "estimate", "se", "z", "p", "lCi", "uCi"),drop=FALSE]
+
   if (!options[["modelSummaryShowMatrixIndices"]]) {
     tempOutput <- tempOutput[,!colnames(tempOutput) %in% c("row", "col"),drop=FALSE]
   }
