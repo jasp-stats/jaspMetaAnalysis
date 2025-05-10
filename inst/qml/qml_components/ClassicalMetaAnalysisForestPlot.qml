@@ -242,7 +242,7 @@ Section
 
 	VariablesForm
 	{
-		preferredHeight:	250 * preferencesModel.uiScale
+		preferredHeight:	150 * preferencesModel.uiScale
 		enabled:			forestPlotEstimatedMarginalMeans.checked
 
 		AvailableVariablesList
@@ -272,7 +272,7 @@ Section
 			{
 				name:		"forestPlotEstimatedMarginalMeansTermTests"
 				id:			forestPlotEstimatedMarginalMeansTermTests
-				enabled:	forestPlotEstimatedMarginalMeans.checked
+				enabled:	forestPlotEstimatedMarginalMeans.checked && ((module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate") || (bayesianModelAveragingEffectSize.checked || bayesianModelAveragingModerations.checked))
 				label:		qsTr("Term tests")
 				checked:	true
 				Layout.preferredWidth: 350 * jaspTheme.uiScale
@@ -284,7 +284,7 @@ Section
 				name:		"forestPlotEstimatedMarginalMeansCoefficientTests"
 				id:			forestPlotEstimatedMarginalMeansCoefficientTests
 				enabled:	forestPlotEstimatedMarginalMeans.checked
-				visible:		module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
+				visible:	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
 				label:		qsTr("Coefficient tests")
 				checked:	true
 				info: qsTr("Include coefficient tests of variables included in the estimated marginal means. The null hypothesis states that the estimated marginal mean for a given level equals the tested value.")
@@ -301,7 +301,7 @@ Section
 			CheckBox
 			{
 				name:		"forestPlotEstimatedMarginalMeansCoefficientTestsAgainst0"
-				enabled:	forestPlotEstimatedMarginalMeans.checked
+				enabled:	forestPlotEstimatedMarginalMeans.checked && (bayesianModelAveragingEffectSize.checked || bayesianModelAveragingModerations.checked)
 				visible:	module === "RoBMA" || module === "NoBMA"
 				label:		qsTr("Coefficient tests against 0")
 				checked:	true
@@ -345,6 +345,7 @@ Section
 			{
 				name:		"forestPlotHeterogeneityTest"
 				text:		qsTr("Test")
+				enabled:	(module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate") ||  bayesianModelAveragingHeterogeneity.checked
 				checked:	true
 				info: qsTr("Include the test of the residual heterogeneity in the model information section.")
 			}
@@ -441,9 +442,13 @@ Section
 			{
 				name:		"forestPlotEffectSizePooledEstimateTest"
 				text:		qsTr("Pooled estimate test")
-				enabled:	forestPlotEffectSizePooledEstimate.checked
+				enabled:	forestPlotEffectSizePooledEstimate.checked && ((module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate") ||  bayesianModelAveragingEffectSize.checked)
 				checked:	true
-				info: qsTr("Include the test of the overall meta-analytic effect size estimate in the model information section.")
+				info: 
+					if ((module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate")) 
+						qsTr("Include the test of the overall meta-analytic effect size estimate in the model information section.")
+					else 
+						qsTr("Include the test of the overall meta-analytic effect size estimate in the model information section. If a meta-regression model is fitted, the test corresponds to either the adjusted effect or the meta-regression intercept term and the corresponding estimate is also displayed. The test is available only if Bayesian model averaging for the effect is selected.")
 			}
 
 			CheckBox
@@ -551,7 +556,7 @@ Section
 				{
 					name:			"forestPlotSubgroupPanelsWithinSubgroup"
 					text:			qsTr("Panels within subgroup")
-					checked:		true
+					checked:		false
 					info: qsTr("Group the output panels within their subgroup membership, i.e., the output panels are presented for each subgroup in a sequential order (i.e., Study information (Subgroup 1), Estimated marginal means (Subgroup 1), Model information (Subgroup 1), Study information (Subgroup 2), Estimated marginal means (Subgroup 2), Model information (Subgroup 2), .... If unchecked, the output is group by the panel membership first, i.e., Study information (Subgroup 1), Study information (Subgroup 2), Esimated marginal means (Subgroup 1), Estimated marginal means (Subgroup 2), Model information (Subgroup 1), Model information (Subgroup 2)...")
 				}
 

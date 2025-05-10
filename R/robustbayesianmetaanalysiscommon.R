@@ -15,9 +15,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-# TODO
-# - custom prior for factor moderators does not work
-
 RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, state = NULL) {
 
   # this is needed to register the contrasts till BayesTools is updated
@@ -31,10 +28,14 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   options[["advancedMcmcBurnin"]]     <- 1000
   options[["advancedMcmcSamples"]]    <- 2000
 
-  saveRDS(options, file = "C:/JASP/options.RDS")
-  saveRDS(dataset, file = "C:/JASP/dataset.RDS")
-  # get priors and show model specification table
+  # attach priors to options
+  options <- .robmaAttachPriors(options)
 
+  saveRDS(options, file = "C:/JASP-Packages/options.RDS")
+  saveRDS(dataset, file = "C:/JASP-Packages/dataset.RDS")
+
+
+  # get priors and show model specification table
   if (options[["showModelSpecification"]])
     .robmaModelSpecificationTables(jaspResults, options)
 
@@ -51,7 +52,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
   # meta-regression tables
   if (.maIsMetaregression(options)) {
-    if (options[["metaregressionTermTests"]])
+    if (options[["metaregressionTermTests"]] && options[["bayesianModelAveragingModerations"]])
       .robmaTermsTable(jaspResults, options)
     if (options[["metaregressionCoefficientEstimates"]])
       .robmaCoefficientEstimatesTable(jaspResults, options)
@@ -134,7 +135,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 .robmaFitModelFun            <- function(dataset, options, subgroupName) {
 
   # obtain prior distributions
-  priors <- .robmaGetPriors(options)
+  priors <- attr(options, "priors")
 
   # dispatch between a meta-regression and a meta-analysis data specification
   if (.maIsMetaregression(options)) {
@@ -280,10 +281,6 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 }
 .robmaAddMarginalSummary     <- function(jaspResults, options) {
 
-  # add the marginal summary to the results only if it was requested down the line
-  if (!(length(options[["estimatedMarginalMeansEffectSizeSelectedVariables"]]) > 0 || length(options[["forestPlotEstimatedMarginalMeansSelectedVariables"]]) > 0))
-    return()
-
   # check whether it was already computed
   if (!is.null(jaspResults[["marginalSummary"]]))
    return()
@@ -303,11 +300,32 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
   startProgressbar(expectedTicks = length(fit), label = gettext("Estimating Marginal Means"))
   for (i in seq_along(fit)) {
-    attr(fit[[i]][["fit"]], "marginalSummary") <- try(RoBMA::marginal_summary(
+
+    ### compute the marginal summary
+    marginalSummary <- try(RoBMA::marginal_summary(
       object      = fit[[i]][["fit"]],
       conditional = TRUE,
       probs       = c(.5 + c(-1, 1) * options[["confidenceIntervalsLevel"]] / 2)
     ))
+
+    ### add the adjusted estimate
+    adjustedEstimate            <- .robmaComputeAdjustedEffect(fit[[i]][["fit"]], options, conditional = FALSE)
+    adjustedEstimateConditional <- .robmaComputeAdjustedEffect(fit[[i]][["fit"]], options, conditional = TRUE)
+
+    if (.robmaIsMetaregressionCentered(options)) {
+      # the BF for the adjusted estimate is available only for the centered model parameterization
+      fitSummary <- summary(
+        fit[[i]][["fit"]]
+      )[["components"]]
+      adjustedEstimatBf <- fitSummary[rownames(fitSummary) == "Effect", "inclusion_BF"]
+    } else {
+      adjustedEstimatBf <- NA
+    }
+    marginalSummary[["estimates"]]["intercept",1:5]             <- c(unlist(adjustedEstimate[2:5]),            adjustedEstimatBf)
+    marginalSummary[["estimates_conditional"]]["intercept",1:5] <- c(unlist(adjustedEstimateConditional[2:5]), adjustedEstimatBf)
+
+
+    attr(fit[[i]][["fit"]], "marginalSummary") <- marginalSummary
     progressbarTick()
   }
 
@@ -318,7 +336,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 }
 
 # priors related functions
-.robmaGetPriors                <- function(options) {
+.robmaAttachPriors                <- function(options) {
 
   object <- list()
 
@@ -539,11 +557,11 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     tempObject[[tempTerm]] <- tempPrior
 
   }
-
   object[["moderators"]] <- tempObject
 
-
-  return(object)
+  # attach and return
+  attr(options, "priors") <- object
+  return(options)
 }
 .robmaRescalePriorDistribution <- function(prior, scale) {
 
@@ -746,7 +764,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 }
 .robmaModelSpecificationTablesComponents          <- function(jaspResults, options) {
 
-  priors     <- .robmaGetPriors(options)
+  priors     <- attr(options, "priors")
   components <- switch(
     options[["module"]],
     "RoBMA" = c("effect", "heterogeneity", "bias"),
@@ -792,7 +810,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 }
 .robmaModelSpecificationTablesComponentsPriors    <- function(jaspResults, options, null = FALSE) {
 
-  priors     <- .robmaGetPriors(options)
+  priors     <- attr(options, "priors")
   components <- switch(
     options[["module"]],
     "RoBMA" = c("effect", "heterogeneity", "bias"),
@@ -832,7 +850,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   if (length(options[["effectSizeModelTerms"]]) == 0)
     return()
 
-  priors <- .robmaGetPriors(options)
+  priors <- attr(options, "priors")
 
   ### create overview table
   tempTable <- createJaspTable(title = gettext("Prior Distributions Moderators"))
@@ -869,7 +887,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     return()
 
   fit <- .maExtractFit(jaspResults, options)
-  saveRDS(fit, file = "C:/JASP/fit.RDS")
+  saveRDS(fit, file = "C:/JASP-Packages/fit.RDS")
 
   ### create overview table
   testsTable <- createJaspTable(gettext("Meta-Analytic Tests"))
@@ -1187,8 +1205,12 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   # .robmaGetEstimatedMarginalMeansOptions()
 
   # check whether the section should be created at all
-  isReadyEffectSize    <- (length(options[["estimatedMarginalMeansEffectSizeSelectedVariables"]]) > 0 || options[["estimatedMarginalMeansEffectSizeAddAdjustedEstimate"]]) &&
+  isReadyEffectSize <- (length(options[["estimatedMarginalMeansEffectSizeSelectedVariables"]]) > 0 || options[["estimatedMarginalMeansEffectSizeAddAdjustedEstimate"]]) &&
     (options[["estimatedMarginalMeansEffectSize"]])
+
+  # disable BF tests if no model-averaging is performed
+  if (!(options[["bayesianModelAveragingModerations"]] || options[["bayesianModelAveragingEffectSize"]]))
+    options[["estimatedMarginalMeansEffectSizeTestAgainst0"]] <- FALSE
 
   # remove section if exists
   if (!isReadyEffectSize) {
@@ -1317,7 +1339,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   return()
 }
 .robmaEstimatedMarginalMeansTable        <- function(variableContainer, fit, options, selectedVariable, conditional) {
-  saveRDS(fit, file = "C:/JASP/fitMM.RDS")
+
   estimatedMarginalMeansTable <- createJaspTable(if (conditional) gettext("Conditional Estimated Marginal Means") else gettext("Estimated Marginal Means"))
   estimatedMarginalMeansTable$position <- if (conditional) 2 else 1
   estimatedMarginalMeansTable$dependOn(c("estimatedMarginalMeansEffectSize", "estimatedMarginalMeansEffectSizeTestAgainst0", "transformEffectSize", "bayesFactorType",
@@ -1334,19 +1356,22 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   if (options[["estimatedMarginalMeansEffectSizeTestAgainst0"]])
     .robmaAddBfColumn(estimatedMarginalMeansTable, options)
 
+
   # get the estimate
   estimatedMarginalMeans <- .maSafeRbind(lapply(fit, function(x) {
     if (selectedVariable == "") {
-      return(x[1,,drop=FALSE])
+      return(data.frame(x[x$value == "intercept",,drop=FALSE]))
     } else {
       return(data.frame(x[grep(selectedVariable, x$value),,drop=FALSE]))
     }
   }))
-
   # reorder by estimated marginal means estimate
   estimatedMarginalMeans <- .maSafeOrderAndSimplify(estimatedMarginalMeans, "value", options)
 
+
   # add footnotes
+  if (selectedVariable == "" && !.robmaIsMetaregressionCentered(options) && options[["estimatedMarginalMeansEffectSizeTestAgainst0"]])
+    estimatedMarginalMeansTable$addFootnote(gettext("The Bayes factor test for the adjusted estimate is not available for meta-regressions with non-centered parameteriazation."))
   estimatedMarginalMeansMessages <- .maEstimatedMarginalMeansMessages(options, "effectSize", anyNA(sapply(estimatedMarginalMeans[,colnames(estimatedMarginalMeans) %in% c("mean", "median", "lCi", "uCi", "lPi", "uPi")], anyNA)))
   for (i in seq_along(estimatedMarginalMeansMessages))
    estimatedMarginalMeansTable$addFootnote(estimatedMarginalMeansMessages[i])
@@ -1873,6 +1898,101 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 # additional compute functions
 .robmaComputePooledEffect           <- function(fit, options, conditional, returnRaw = FALSE) {
 
+  if (!.maIsMetaregression(options)) {
+    # the adjusted estimate corresponds to the pooled estimate for non-regression models
+    return(.robmaComputeInterceptEffect(fit, options, conditional, returnRaw))
+  }
+
+  # the following function is necessary only for a meta-regression
+  estimate <- RoBMA::pooled_effect(
+    fit,
+    conditional = conditional,
+    probs       = c(.5 + c(-1, 1) * options[["confidenceIntervalsLevel"]] / 2)
+  )[[if (conditional) "estimates_conditional" else "estimates"]]
+
+  estimate <- data.frame(
+    "par"    = gettext("Pooled effect"),
+    "mean"   = estimate[["Mean"]][1],
+    "median" = estimate[["Median"]][1],
+    "lCi"    = estimate[[3]][1],
+    "uCi"    = estimate[[4]][1],
+    "lPi"    = estimate[[3]][2],
+    "uPi"    = estimate[[4]][2]
+  )
+
+  # return for the plotting function: requires different post-formatting
+  if (returnRaw) {
+    return(estimate)
+  }
+
+  # to data.frame
+  estimate <- data.frame(estimate)
+
+  # apply effect size transformation
+  if (options[["transformEffectSize"]] != "none")
+    estimate[,c("mean", "median", "lCi", "uCi", "lPi", "uPi")] <- do.call(
+      .maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]),
+      list(estimate[,c("mean", "median", "lCi", "uCi", "lPi", "uPi")]))
+
+  # remove non-requested columns
+  estimate <- estimate[,c(
+    "par", "mean", "median",
+    if (options[["confidenceIntervals"]]) c("lCi", "uCi"),
+    if (options[["predictionIntervals"]]) c("lPi", "uPi")
+  )]
+
+  return(as.list(estimate))
+}
+.robmaComputeAdjustedEffect         <- function(fit, options, conditional, returnRaw = FALSE) {
+
+  if (!.maIsMetaregression(options) || (.maIsMetaregression(options) && .robmaIsMetaregressionCentered(options))) {
+    # the adjusted estimate corresponds to the pooled estimate for non-regression models
+    # and to the intercept estimate for centered regression models
+    return(.robmaComputeInterceptEffect(fit, options, conditional, returnRaw))
+  }
+
+  # the following function is necessary only for a meta-regression
+  estimate <- RoBMA::adjusted_effect(
+    fit,
+    conditional = conditional,
+    probs       = c(.5 + c(-1, 1) * options[["confidenceIntervalsLevel"]] / 2)
+  )[[if (conditional) "estimates_conditional" else "estimates"]]
+
+  estimate <- data.frame(
+    "par"    = gettext("Adjusted effect"),
+    "mean"   = estimate[["Mean"]][1],
+    "median" = estimate[["Median"]][1],
+    "lCi"    = estimate[[3]][1],
+    "uCi"    = estimate[[4]][1],
+    "lPi"    = estimate[[3]][2],
+    "uPi"    = estimate[[4]][2]
+  )
+
+  # return for the plotting function: requires different post-formatting
+  if (returnRaw) {
+    return(estimate)
+  }
+
+  # to data.frame
+  estimate <- data.frame(estimate)
+
+  # apply effect size transformation
+  if (options[["transformEffectSize"]] != "none")
+    estimate[,c("mean", "median", "lCi", "uCi", "lPi", "uPi")] <- do.call(
+      .maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]),
+      list(estimate[,c("mean", "median", "lCi", "uCi", "lPi", "uPi")]))
+
+  # remove non-requested columns
+  estimate <- estimate[,c(
+    "par", "mean", "median",
+    if (options[["confidenceIntervals"]]) c("lCi", "uCi"),
+    if (options[["predictionIntervals"]]) c("lPi", "uPi")
+  )]
+
+  return(as.list(estimate))
+}
+.robmaComputeInterceptEffect        <- function(fit, options, conditional, returnRaw = FALSE) {
+
   # effect size summary
   fitSummary <- summary(
     fit,
@@ -1902,12 +2022,9 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     estimate$uPi <- hetSummary["PI", 4]
 
   } else {
-
     estimate$lPi <- NA
     estimate$uPi <- NA
-
   }
-
 
   # return for the plotting function: requires different post-formatting
   if (returnRaw) {
@@ -2232,6 +2349,13 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   tempRows <- list()
   tempRows[["effectSize"]] <- data.frame(.robmaComputePooledEffect(fit, options, conditional))
 
+  # add adjusted effect size for meta-regression since they match the meta-analytic test
+  if (.maIsMetaregression(options) && .robmaIsMetaregressionCentered(options)) {
+    tempRows[["adjustedEffectSize"]] <- data.frame(.robmaComputeAdjustedEffect(fit, options, conditional))
+  } else if (.maIsMetaregression(options) && !.robmaIsMetaregressionCentered(options)) {
+    tempRows[["interceptEffectSize"]] <- data.frame(.robmaComputeInterceptEffect(fit, options, conditional))
+  }
+
   if (options[["heterogeneityTau"]])
     tempRows[["heterogeneityTau"]] <- data.frame(
       par    = "\U1D70F",
@@ -2410,6 +2534,24 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 }
 
 # additional help functions
+.robmaIsMetaregressionCentered         <- function(options){
+
+  if (!.maIsMetaregression(options))
+    return(FALSE)
+
+  priors          <- attr(options, "priors")
+  priorModerators <- priors[["moderators"]]
+
+  isCentered <- TRUE
+  for (priorModerator in priorModerators) {
+    for (i in seq_along(priorModerator)) {
+      if (BayesTools::is.prior.treatment(priorModerator[[i]]))
+        isCentered <- FALSE
+    }
+  }
+
+  return(isCentered)
+}
 .robmaGetEstimatedMarginalMeansOptions <- function(options){
 
   return(options[c(
@@ -2451,22 +2593,19 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     }
   }
 
+  if (parameter == "intercept")
+    messages <- messages[!grepl("do not span", messages)]
+
   return(messages)
 }
 .robmaComponentNames   <- function(component, options) {
   return(switch(
-    component,
-    # from options
-    "effectSize"    = if (.maIsMetaregression(options)) gettext("Adjusted effect") else gettext("Pooled effect"),
-    "effect"        = if (.maIsMetaregression(options)) gettext("Adjusted effect") else gettext("Pooled effect"),
+    tolower(component),
+    "effectsize"    = if (.maIsMetaregression(options) && .robmaIsMetaregressionCentered(options)) gettext("Adjusted effect") else if (.maIsMetaregression(options)) gettext("Effect intercept") else gettext("Pooled effect"),
+    "effect"        = if (.maIsMetaregression(options) && .robmaIsMetaregressionCentered(options)) gettext("Adjusted effect") else if (.maIsMetaregression(options)) gettext("Effect intercept") else gettext("Pooled effect"),
     "heterogeneity" = gettext("Heterogeneity"),
     "bias"          = gettext("Publication bias"),
-    "Baseline"      = gettext("Baseline"),
-    # from package
-    "Effect"        = if (.maIsMetaregression(options)) gettext("Adjusted effect") else gettext("Pooled effect"),
-    "Heterogeneity" = gettext("Heterogeneity"),
-    "Bias"          = gettext("Publication bias"),
-    "Baseline"      = gettext("Baseline")
+    "baseline"      = gettext("Baseline")
   ))
 }
 .robmaVariableNames    <- function(varNames, variables) {
@@ -2502,7 +2641,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 }
 .robmaHasHeterogeneity <- function(options) {
 
-  priors <- .robmaGetPriors(options)
+  priors <- attr(options, "priors")
 
   for (i in seq_along(priors[["heterogeneity"]])) {
     if (priors[["heterogeneity"]][[i]][["distribution"]] != "point" ||
@@ -2530,7 +2669,9 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 .robmaPrintBf             <- function(bf) {
 
   bf <- sapply(bf, function(x) {
-    if (is.infinite(x) && x > 0) {
+    if (is.na(x)) {
+      return("NA")
+    } else if (is.infinite(x) && x > 0) {
       return("\U221E")
     } else if (is.infinite(x) && x < 0) {
       return("-\U221E")

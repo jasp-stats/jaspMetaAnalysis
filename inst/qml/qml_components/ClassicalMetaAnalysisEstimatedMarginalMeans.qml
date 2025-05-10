@@ -34,7 +34,7 @@ Section
 
 		VariablesForm
 		{
-			preferredHeight:	250  * preferencesModel.uiScale
+			preferredHeight:	150 * preferencesModel.uiScale
 
 			AvailableVariablesList
 			{
@@ -128,7 +128,7 @@ Section
 
 		VariablesForm
 		{
-			preferredHeight:	250 * preferencesModel.uiScale
+			preferredHeight:	150 * preferencesModel.uiScale
 
 			AvailableVariablesList
 			{

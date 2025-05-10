@@ -38,7 +38,7 @@ Section
 
 		VariablesForm
 		{
-			preferredHeight:	250  * preferencesModel.uiScale
+			preferredHeight:	150 * preferencesModel.uiScale
 
 			AvailableVariablesList
 			{
@@ -79,8 +79,9 @@ Section
 				{
 					name:				"estimatedMarginalMeansEffectSizeTestAgainst0"
 					label:				qsTr("Test against 0")
+					enabled:			bayesianModelAveragingModerations.checked || bayesianModelAveragingEffectSize.checked
 					childrenOnSameRow:	true
-					info: qsTr("Option to test the estimated marginal means against 0. The test is performed using a Savage-Dickey Density Ratio test based on the prior and posterior distributions assuming either the presence of the effect or moderation.")
+					info: qsTr("Option to test the estimated marginal means against 0. The test for the adjusted estimate is available only for meta-regression models with centred parameterization (i.e., no treatment factor contrasts). The test for the estimated marginal means is performed using a Savage-Dickey Density Ratio test based on the prior and posterior distributions assuming either the presence of the effect or moderation.")
 				}
 			}
 		}
