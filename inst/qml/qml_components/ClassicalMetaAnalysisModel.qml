@@ -22,9 +22,9 @@ import JASP
 
 Section
 {
-	title:						qsTr("Model")
-	columns:					2
-	property string module:		"metaAnalysis"
+	title:							qsTr("Model")
+	columns:						2
+	property string analysisType:	"metaAnalysis"
 	info: qsTr("Options for specifing the effect size and heterogeneity models based on the included predictors, including model terms, intercepts, and link functions.")
 
 	property alias effectSizeModelTerms:				effectSizeModelTerms
@@ -73,7 +73,7 @@ Section
 	Group
 	{
 		title:			qsTr("Heterogeneity model")
-		visible:		module =="metaAnalysis"
+		visible:		analysisType === "metaAnalysis"
 		columns:		2
 		info: qsTr("Specify the heterogeneity model. Unvailable when performing multilevel/multivariate meta-analysis.")
 

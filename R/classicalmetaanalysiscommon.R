@@ -189,14 +189,14 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   # --------------------------------------------------------------------------- #
 
   # specify the effect size and outcome
-  if (options[["module"]] == "metaAnalysis") {
+  if (options[["analysis"]] == "metaAnalysis") {
     # specify the univariate input
     rmaInput <- list(
       yi   = as.name(options[["effectSize"]]),
       sei  = as.name(options[["effectSizeStandardError"]]),
       data = dataset
     )
-  } else if (options[["module"]] == "metaAnalysisMultilevelMultivariate") {
+  } else if (options[["analysis"]] == "metaAnalysisMultilevelMultivariate") {
     # specify the multivariate input
     rmaInput <- list(
       yi   = as.name(options[["effectSize"]]),
@@ -277,9 +277,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   ### fit the model
   if (nrow(dataset) < 2) {
     fit <- try(stop("Fewer than two estimates."))
-  } else if (options[["module"]] == "metaAnalysis") {
+  } else if (options[["analysis"]] == "metaAnalysis") {
     fit <- try(do.call(metafor::rma, rmaInput))
-  } else if (options[["module"]] == "metaAnalysisMultilevelMultivariate") {
+  } else if (options[["analysis"]] == "metaAnalysisMultilevelMultivariate") {
     fit <- try(do.call(metafor::rma.mv, rmaInput))
   }
 
@@ -3349,13 +3349,13 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 }
 .maMakeMetaforCallText             <- function(options) {
 
-  if (options[["module"]] == "metaAnalysis") {
+  if (options[["analysis"]] == "metaAnalysis") {
     rmaInput <- list(
       yi   = as.name(options[["effectSize"]]),
       sei  = as.name(options[["effectSizeStandardError"]]),
       data = as.name("dataset")
     )
-  } else if (options[["module"]] == "metaAnalysisMultilevelMultivariate") {
+  } else if (options[["analysis"]] == "metaAnalysisMultilevelMultivariate") {
 
     if (.mammVarianceCovarianceMatrixReady(options)) {
       vcalcInput <-.mammGetVarianceCovarianceMatrix(NULL, options, returnCall = TRUE)
@@ -3748,7 +3748,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   return(options[["fixedEffectTest"]] %in% c("knha", "t"))
 }
 .maIsMultilevelMultivariate       <- function(options) {
-  return(options[["module"]] == "metaAnalysisMultilevelMultivariate")
+  return(options[["analysis"]] == "metaAnalysisMultilevelMultivariate")
 }
 .maIsPermutation                  <- function(options) {
   return(!.maIsClustered(options) && options[["permutationTest"]])

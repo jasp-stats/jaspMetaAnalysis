@@ -19,7 +19,7 @@
 
 BayesianBinomialMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
-  options[["module"]] <- "BiBMA"
+  options[["analysis"]] <- "BiBMA"
   options[["effectSizeMeasure"]]         <- "logOR"
   options[["publicationBiasAdjustment"]] <- "none"
 

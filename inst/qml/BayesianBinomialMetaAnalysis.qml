@@ -299,15 +299,15 @@ Form
 	}
 
 	//// Forest Plots Section ////
-	MA.ClassicalMetaAnalysisForestPlot
+	MA.ForestPlot
 	{
-		module:	"NoBMA"
+		analysisType:	"NoBMA"
 	}
 
 	//// Bubble Plot Section ////
-	MA.ClassicalMetaAnalysisBubblePlot
+	MA.BubblePlot
 	{
-		module:	"NoBMA"
+		analysisType:	"NoBMA"
 	}
 
 	//// Diagnostics section ////

@@ -22,8 +22,8 @@ import JASP
 
 Section
 {
-	title:						qsTr("Bubble Plot")
-	property string module:		"metaAnalysis"
+	title:							qsTr("Bubble Plot")
+	property string analysisType:	"metaAnalysis"
 	info: qsTr("Options for visualizing the estimated effect sizes at different levels of the predictors with the observed estimates visualized as bubbles. Continuous predictors can be split into three bins with cutoffs at ±x standard deviations from the mean. Predictors that are not specified for either the x-axis, lines, or plots are averaged over.")
 
 	VariablesForm
@@ -93,7 +93,7 @@ Section
 					label:		qsTr("Size")
 					info: qsTr("Options for determining the size of the observed estimates.")
 					values:		
-					if (module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate")
+					if (analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate")
 						[
 							{ label: qsTr("Weight")				, value: "weight"},
 							{ label: qsTr("Inverse variance")	, value: "inverseVariance"	},
@@ -165,7 +165,7 @@ Section
 				label:		qsTr("Prediction intervals")
 				checked:	true
 				info: qsTr("Include prediction intervals of the estimated effect sizes.")
-				visible:	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
+				visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
 
 				DoubleField
 				{

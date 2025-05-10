@@ -22,9 +22,9 @@ import JASP
 
 Section
 {
-	title:						qsTr("Forest Plot")
-	property string module:		"metaAnalysis"
-	columns:					1
+	title:							qsTr("Forest Plot")
+	property string analysisType:	"metaAnalysis"
+	columns:						1
 	info: qsTr("Options for visualizing study-level information, estimated marginal means, and the model information in an all encompassing forest plot. Different sections of the forest plot can be individually enabled/disabled.")
 
 	CheckBox
@@ -124,7 +124,7 @@ Section
 				id:			forestPlotStudyInformationPredictedEffects
 				text:		qsTr("Predicted effects")
 				enabled:	effectSize.count == 1 && effectSizeStandardError.count == 1
-				visible:	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
+				visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
 				checked:	false
 				Layout.preferredWidth: 300 * jaspTheme.uiScale
 				info: qsTr("Include predicted effect sizes in the middle section of the study-level information panel.")
@@ -135,7 +135,7 @@ Section
 				name:			"forestPlotStudyInformationStudyWeights"
 				text:			qsTr("Study weights")
 				enabled:		forestPlotStudyInformation.checked
-				visible:		module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
+				visible:		analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
 				checked:		false
 				info: qsTr("Include the study weights in the right section of the study-level information panel.")
 			}
@@ -272,7 +272,7 @@ Section
 			{
 				name:		"forestPlotEstimatedMarginalMeansTermTests"
 				id:			forestPlotEstimatedMarginalMeansTermTests
-				enabled:	forestPlotEstimatedMarginalMeans.checked && ((module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate") || (bayesianModelAveragingEffectSize.checked || bayesianModelAveragingModerations.checked))
+				enabled:	forestPlotEstimatedMarginalMeans.checked && ((analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate") || (bayesianModelAveragingEffectSize.checked || bayesianModelAveragingModerations.checked))
 				label:		qsTr("Term tests")
 				checked:	true
 				Layout.preferredWidth: 350 * jaspTheme.uiScale
@@ -284,7 +284,7 @@ Section
 				name:		"forestPlotEstimatedMarginalMeansCoefficientTests"
 				id:			forestPlotEstimatedMarginalMeansCoefficientTests
 				enabled:	forestPlotEstimatedMarginalMeans.checked
-				visible:	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
+				visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
 				label:		qsTr("Coefficient tests")
 				checked:	true
 				info: qsTr("Include coefficient tests of variables included in the estimated marginal means. The null hypothesis states that the estimated marginal mean for a given level equals the tested value.")
@@ -302,7 +302,7 @@ Section
 			{
 				name:		"forestPlotEstimatedMarginalMeansCoefficientTestsAgainst0"
 				enabled:	forestPlotEstimatedMarginalMeans.checked && (bayesianModelAveragingEffectSize.checked || bayesianModelAveragingModerations.checked)
-				visible:	module === "RoBMA" || module === "NoBMA"
+				visible:	analysisType === "RoBMA" || analysisType === "NoBMA"
 				label:		qsTr("Coefficient tests against 0")
 				checked:	true
 				info: qsTr("Include coefficient tests of variables included in the estimated marginal means against 0. The null hypothesis states that the estimated marginal mean for a given level equals the tested value.")
@@ -345,7 +345,7 @@ Section
 			{
 				name:		"forestPlotHeterogeneityTest"
 				text:		qsTr("Test")
-				enabled:	(module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate") ||  bayesianModelAveragingHeterogeneity.checked
+				enabled:	(analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate") ||  bayesianModelAveragingHeterogeneity.checked
 				checked:	true
 				info: qsTr("Include the test of the residual heterogeneity in the model information section.")
 			}
@@ -354,14 +354,14 @@ Section
 			{
 				title:		qsTr("Estimate")
 				columns:	2
-				visible:	module === "metaAnalysis" || module === "RoBMA"  || module === "NoBMA"
+				visible:	analysisType === "metaAnalysis" || analysisType === "RoBMA"  || analysisType === "NoBMA"
 				enabled:	(method.value != "fixedEffects" || method.value != "equalEffects")
 
 				CheckBox
 				{
 					text:		qsTr("𝜏")
 					name:		"forestPlotHeterogeneityEstimateTau"
-					checked:	module === "metaAnalysis" || module === "RoBMA"  || module === "NoBMA"
+					checked:	analysisType === "metaAnalysis" || analysisType === "RoBMA"  || analysisType === "NoBMA"
 					info: qsTr("Include the meta-analytic 𝜏, the square root of the estimated between-study variance in the model information section. Not available for multilevel/multivariate meta-analysis.")
 				}
 
@@ -377,7 +377,7 @@ Section
 				{
 					text:		qsTr("I²")
 					name:		"forestPlotHeterogeneityEstimateI2"
-					enabled:	(module === "RoBMA"  || module === "NoBMA") || sectionModel.heterogeneityModelTermsCount == 0
+					enabled:	(analysisType === "RoBMA"  || analysisType === "NoBMA") || sectionModel.heterogeneityModelTermsCount == 0
 					checked:	false
 					info: qsTr("Include the meta-analytic I², the percentage of total variation across studies due to heterogeneity in the model information section. Not available for multilevel/multivariate meta-analysis.")
 				}
@@ -386,7 +386,7 @@ Section
 				{
 					text:		qsTr("H²")
 					name:		"forestPlotHeterogeneityEstimateH2"	
-					enabled:	(module === "RoBMA"  || module === "NoBMA") || sectionModel.heterogeneityModelTermsCount == 0
+					enabled:	(analysisType === "RoBMA"  || analysisType === "NoBMA") || sectionModel.heterogeneityModelTermsCount == 0
 					checked:	false
 					info: qsTr("Include the meta-analytic H², an index indicating the ratio of total variability to sampling variability in the model information section. Not available for multilevel/multivariate meta-analysis.")
 				}
@@ -397,8 +397,8 @@ Section
 				name:		"forestPlotHeterogeneityModerationTest"
 				text:		qsTr("Moderation test")
 				enabled:	sectionModel.heterogeneityModelTermsCount > 0
-				visible:	module === "metaAnalysis"
-				checked:	module === "metaAnalysis"
+				visible:	analysisType === "metaAnalysis"
+				checked:	analysisType === "metaAnalysis"
 				info: qsTr("Include the omnibus heterogeneity moderation test in the model information section. Available when heterogeneity meta-regression is specified.")
 			}
 		}
@@ -413,8 +413,8 @@ Section
 				text:		qsTr("Fixed effect estimate")
 				id:			forestPlotEffectSizeFixedEffectEstimate
 				checked:	false
-				visible:	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
-				enabled:	(module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate") && !(method.value == "fixedEffects" || method.value == "equalEffects")
+				visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
+				enabled:	(analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate") && !(method.value === "fixedEffects" || method.value === "equalEffects")
 				info: qsTr("Include a fixed effect meta-analytic effect size estimate in the model information section. Not available if the model was already fitted with fixed effects or the model contains heterogeneity meta-regression.")
 			}
 
@@ -422,8 +422,8 @@ Section
 			{
 				name:		"forestPlotEffectSizeFixedEffectTest"
 				text:		qsTr("Fixed effect estimate test")
-				checked:	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
-				visible:	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
+				checked:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
+				visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
 				enabled:	forestPlotEffectSizeFixedEffectEstimate.checked
 				info: qsTr("Include the test of the fixed effect meta-analytic effect size estimate in the model information section.")
 			}
@@ -442,10 +442,10 @@ Section
 			{
 				name:		"forestPlotEffectSizePooledEstimateTest"
 				text:		qsTr("Pooled estimate test")
-				enabled:	forestPlotEffectSizePooledEstimate.checked && ((module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate") ||  bayesianModelAveragingEffectSize.checked)
+				enabled:	forestPlotEffectSizePooledEstimate.checked && ((analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate") ||  bayesianModelAveragingEffectSize.checked)
 				checked:	true
 				info: 
-					if ((module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate")) 
+					if ((analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate")) 
 						qsTr("Include the test of the overall meta-analytic effect size estimate in the model information section.")
 					else 
 						qsTr("Include the test of the overall meta-analytic effect size estimate in the model information section. If a meta-regression model is fitted, the test corresponds to either the adjusted effect or the meta-regression intercept term and the corresponding estimate is also displayed. The test is available only if Bayesian model averaging for the effect is selected.")
@@ -456,8 +456,8 @@ Section
 				name:		"forestPlotEffectSizeModerationTest"
 				text:		qsTr("Moderation test")
 				enabled:	sectionModel.effectSizeModelTermsCount > 0
-				visible: 	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
-				checked:	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
+				visible: 	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
+				checked:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
 				info: qsTr("Include the omnibus effect size moderation test in the model information section. Available when effect size meta-regression is specified.")
 			}
 		}
@@ -465,14 +465,14 @@ Section
 		Group
 		{
 			title:		qsTr("Publication Bias")
-			visible: 	module === "RoBMA"
+			visible: 	analysisType === "RoBMA"
 
 			CheckBox
 			{
 				name:		"forestPlotPublicationBiasTest"
 				text:		qsTr("Test")
-				enabled:	module === "RoBMA" && publicationBiasAdjustment.value != "none"
-				checked:	module === "RoBMA" && publicationBiasAdjustment.value != "none"
+				enabled:	analysisType === "RoBMA" && publicationBiasAdjustment.value != "none"
+				checked:	analysisType === "RoBMA" && publicationBiasAdjustment.value != "none"
 				info: qsTr("Include the publication bias test in the model information section.")
 			}
 		}
@@ -518,7 +518,7 @@ Section
 				{
 					name:		"forestPlotConditionalEstimates"
 					text:		qsTr("Conditional estimates")
-					visible:	module === "RoBMA" || module === "NoBMA"
+					visible:	analysisType === "RoBMA" || analysisType === "NoBMA"
 					checked:	false
 					info: qsTr("Display the conditional effect, heterogeneity, and estimated marginal means estimates.")
 				}
@@ -597,7 +597,7 @@ Section
 			{
 				label:		qsTr("Tests information")
 				name:		"forestPlotAuxiliaryTestsInformation"				
-				visible:	module === "metaAnalysis" || module === "metaAnalysisMultilevelMultivariate"
+				visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
 				values:		[
 						{ label: qsTr("Statistic and p-value")		, value: "statisticAndPValue"	},
 						{ label: qsTr("P-value")					, value: "pValue"				}
@@ -607,7 +607,7 @@ Section
 			DropDown
 			{
 				name:			"forestPlotAuxiliaryPlotColor"
-				enabled:		forestPlotMappingColor.value == ""
+				enabled:		forestPlotMappingColor.value === ""
 				label:			qsTr("Color")
 				info: qsTr("Change color of the plotted objects. Only available if no color mapping is selected.")
 				values:			[

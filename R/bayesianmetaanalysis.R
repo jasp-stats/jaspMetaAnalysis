@@ -17,7 +17,7 @@
 
 BayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
-  options[["module"]] <- "NoBMA"
+  options[["analysis"]] <- "NoBMA"
   options[['publicationBiasAdjustment']] <- "none"
 
   if (.maReady(options)) {

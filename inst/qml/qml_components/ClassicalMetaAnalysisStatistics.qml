@@ -22,9 +22,9 @@ import JASP
 
 Section
 {
-	title:						qsTr("Statistics")
-	columns: 					2
-	property string module:		"metaAnalysis"
+	title:							qsTr("Statistics")
+	columns: 						2
+	property string analysisType:	"metaAnalysis"
 	info: qsTr("Options for summarizing the meta-analytic results.")
 
 	Group
@@ -32,7 +32,7 @@ Section
 		title:		qsTr("Heterogeneity")
 		columns:	2
 		enabled:	method.value != "fixedEffects" && method.value != "equalEffects"
-		visible:	module == "metaAnalysis"
+		visible:	analysisType === "metaAnalysis"
 		info: qsTr("Summarize the meta-analytic between-study heterogeneity. Unvailable when performing multilevel/multivariate meta-analysis.")
 
 		CheckBox
@@ -71,7 +71,7 @@ Section
 	Group
 	{
 		title:		qsTr("Random Effects / Model Components")
-		visible:	module == "metaAnalysisMultilevelMultivariate"
+		visible:	analysisType === "metaAnalysisMultilevelMultivariate"
 		info: qsTr("Available when performing multilevel/multivariate meta-analysis.")
 
 		CheckBox

@@ -18,7 +18,7 @@
 
 ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
-  options[["module"]] <- "metaAnalysis"
+  options[["analysis"]] <- "metaAnalysis"
 
   if (.maReady(options)) {
     dataset <- .maCheckData(dataset, options)
@@ -189,9 +189,9 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   } else {
 
     # data
-    if (options[["module"]] %in% c("RoBMA", "NoBMA")) {
+    if (options[["analysis"]] %in% c("RoBMA", "NoBMA")) {
       inputReady <- options[["effectSize"]] != "" && options[["effectSizeStandardError"]] != ""
-    } else if (options[["module"]] == "BiBMA") {
+    } else if (options[["analysis"]] == "BiBMA") {
       inputReady <- options[["successesGroup1"]] != "" && options[["successesGroup2"]] != "" &&
         options[["observationsGroup1"]] != "" && options[["observationsGroup2"]] != ""
     }
@@ -270,9 +270,9 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 .maIsClassical         <- function(options) {
 
   # check if the analysis is classical
-  if (options[["module"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate")) {
+  if (options[["analysis"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate")) {
     return(TRUE)
-  } else if (options[["module"]] %in% c("RoBMA", "NoBMA", "BiBMA")){
+  } else if (options[["analysis"]] %in% c("RoBMA", "NoBMA", "BiBMA")){
     return(FALSE)
   } else {
     stop("Unknown module")

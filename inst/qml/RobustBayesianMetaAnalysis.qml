@@ -389,15 +389,15 @@ Form
 	}
 
 	//// Forest Plots Section ////
-	MA.ClassicalMetaAnalysisForestPlot
+	MA.ForestPlot
 	{
-		module:	"RoBMA"
+		analysisType:	"RoBMA"
 	}
 
 	//// Bubble Plot Section ////
-	MA.ClassicalMetaAnalysisBubblePlot
+	MA.BubblePlot
 	{
-		module:	"RoBMA"
+		analysisType:	"RoBMA"
 	}
 
 	//// Diagnostics section ////

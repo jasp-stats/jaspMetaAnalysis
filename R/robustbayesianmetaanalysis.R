@@ -20,7 +20,7 @@
 
 RobustBayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
-  options[["module"]] <- "RoBMA"
+  options[["analysis"]] <- "RoBMA"
 
   if (.maReady(options)) {
     dataset <- .maCheckData(dataset, options)

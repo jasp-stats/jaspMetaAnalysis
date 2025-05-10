@@ -145,9 +145,9 @@ Form
 
 	MA.ClassicalMetaAnalysisEstimatedMarginalMeans {}
 
-	MA.ClassicalMetaAnalysisForestPlot {}
+	MA.ForestPlot {}
 
-	MA.ClassicalMetaAnalysisBubblePlot {}
+	MA.BubblePlot {}
 
 	MA.ClassicalMetaAnalysisDiagnostics {}
 

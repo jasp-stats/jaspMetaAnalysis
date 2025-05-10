@@ -141,7 +141,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   if (.maIsMetaregression(options)) {
 
     # dispatch the specified effect size measure
-    if (options[["module"]] %in% c("RoBMA", "NoBMA")) {
+    if (options[["analysis"]] %in% c("RoBMA", "NoBMA")) {
       fitData <- dataset[, c(options[["effectSize"]], options[["effectSizeStandardError"]], options[["predictors"]])]
       colnames(fitData)[1:2] <- switch(
         options[["effectSizeMeasure"]],
@@ -150,7 +150,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
         "logOR"    = c("logOR", "se"),
         c("y", "se")
       )
-    } else if (options[["module"]] == "BiBMA") {
+    } else if (options[["analysis"]] == "BiBMA") {
       fitData <- dataset[, c(options[["successesGroup1"]], options[["successesGroup2"]], options[["observationsGroup1"]], options[["observationsGroup2"]], options[["predictors"]])]
       colnames(fitData)[1:4] <- c("x1", "x2", "n1", "n2")
     }
@@ -172,7 +172,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   } else {
 
     # dispatch the specified effect size measure
-    if (options[["module"]] %in% c("RoBMA", "NoBMA")) {
+    if (options[["analysis"]] %in% c("RoBMA", "NoBMA")) {
       fitCall <- list(
         "es" = dataset[, options[["effectSize"]]],
         "se" = dataset[, options[["effectSizeStandardError"]]]
@@ -184,7 +184,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
         "logOR"    = "logOR",
         "y"
       )
-    } else if (options[["module"]] == "BiBMA") {
+    } else if (options[["analysis"]] == "BiBMA") {
       fitCall <- list(
         "x1" = dataset[, options[["successesGroup1"]]],
         "x2" = dataset[, options[["successesGroup2"]]],
@@ -200,7 +200,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     fitCall$study_id <- dataset[, options[["studyLevelMultilevel"]]]
 
   # add prior settings
-  if (options[["module"]] %in% c("RoBMA", "NoBMA")) {
+  if (options[["analysis"]] %in% c("RoBMA", "NoBMA")) {
     fitCall$prior_scale <- switch(
       options[["effectSizeMeasure"]],
       "SMD"      = "cohens_d",
@@ -220,7 +220,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   fitCall$priors_effect_null        <- if (is.null(priors[["effectNull"]]))        list() else priors[["effectNull"]]
   fitCall$priors_heterogeneity_null <- if (is.null(priors[["heterogeneityNull"]])) list() else priors[["heterogeneityNull"]]
   # TODO: dispatch BiBMA baseline prior
-  if (options[["module"]] == "RoBMA") {
+  if (options[["analysis"]] == "RoBMA") {
     fitCall$priors_bias               <- if (is.null(priors[["bias"]]))     list() else priors[["bias"]]
     fitCall$priors_bias_null          <- if (is.null(priors[["biasNull"]])) list() else priors[["biasNull"]]
   }
@@ -251,19 +251,19 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   fitCall$silent    <- TRUE
 
   # select fitting function
-  if (options[["module"]] == "RoBMA") {
+  if (options[["analysis"]] == "RoBMA") {
     if (.maIsMetaregression(options)) {
       fit <- try(do.call(RoBMA::RoBMA.reg, fitCall))
     } else {
       fit <- try(do.call(RoBMA::RoBMA, fitCall))
     }
-  } else if (options[["module"]] == "NoBMA") {
+  } else if (options[["analysis"]] == "NoBMA") {
     if (.maIsMetaregression(options)) {
       fit <- try(do.call(RoBMA::NoBMA.reg, fitCall))
     } else {
       fit <- try(do.call(RoBMA::NoBMA, fitCall))
     }
-  } else if (options[["module"]] == "BiBMA") {
+  } else if (options[["analysis"]] == "BiBMA") {
     if (.maIsMetaregression(options)) {
       fit <- try(do.call(RoBMA::BiBMA.reg, fitCall))
     } else {
@@ -284,6 +284,10 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   # check whether it was already computed
   if (!is.null(jaspResults[["marginalSummary"]]))
    return()
+
+  # skip if no meta-regression is performed
+  if (!.maIsMetaregression(options))
+    return()
 
   # do not use .maExtractFit as all fits needs to be always updated because of forest plot
   fit <- jaspResults[["fit"]]$object
@@ -766,7 +770,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
   priors     <- attr(options, "priors")
   components <- switch(
-    options[["module"]],
+    options[["analysis"]],
     "RoBMA" = c("effect", "heterogeneity", "bias"),
     "NoBMA" = c("effect", "heterogeneity"),
     "BiBMA" = c("effect", "heterogeneity")
@@ -812,7 +816,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
   priors     <- attr(options, "priors")
   components <- switch(
-    options[["module"]],
+    options[["analysis"]],
     "RoBMA" = c("effect", "heterogeneity", "bias"),
     "NoBMA" = c("effect", "heterogeneity"),
     "BiBMA" = c("effect", "heterogeneity")
@@ -935,8 +939,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
         ))
       } else {
         testsTable$addFootnote(symbol = gettext("Warning:"), gettextf(
-          "The model fit resulted in the following warning: %2$s",
-          attr(fit[[i]], "subgroup"),
+          "The model fit resulted in the following warning: %1$s",
           errorsAndWarnings[j]
         ))
       }

@@ -19,7 +19,8 @@
 
 BayesianMetaAnalysisDeprecated <- function(jaspResults, dataset, ready, options) {
 
-  options[["module"]] <- "metaAnalysis"
+  # the module here is remnant of the analysis being imported into Cochrane
+  options[["analysis"]] <- "bmaDeprecated"
 
   # Ready: variables needed for the analysis (confidence interval missing)
   ready <- options[["effectSize"]] != "" && (options[["effectSizeSe"]] != "" || (all(unlist(options$effectSizeCi) != "") && !is.null(unlist(options[["effectSizeCi"]]))))
@@ -1471,7 +1472,7 @@ BayesianMetaAnalysisDeprecated <- function(jaspResults, dataset, ready, options)
   # Get y values for the estimated points
   yEst <- rev(seq(.6, length(varES) - .4, 1))
 
-  if (options[["module"]] == "metaAnalysis"){
+  if (options[["analysis"]] == "bmaDeprecated"){
 
     ranked <- rank(df$effectSize, ties.method="first")
     if(options$forestPlotRowOrder == "ascending"){

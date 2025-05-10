@@ -55,7 +55,7 @@ Section
 				RadioButton
 				{
 					id:		plotForestEstimated
-					enabled: 	!(modelTypeValue == "fixed")
+					enabled: 	!(modelTypeValue === "fixed")
 					name: 		"estimated"
 					label: 		qsTr("Estimated")
 				}
@@ -63,7 +63,7 @@ Section
 				RadioButton
 				{
 					id:		plotForestBoth
-					enabled: 	!(modelTypeValue == "fixed")
+					enabled: 	!(modelTypeValue === "fixed")
 					name: 		"both"
 					label: 		qsTr("Both")
 				}
@@ -72,7 +72,7 @@ Section
 
 		Group
 		{
-			visible:		module == "cochrane"
+			visible:		module === "cochrane"
 			enabled: 		checkForest.checked
 			
 			CheckBox
@@ -80,14 +80,14 @@ Section
 				name:		"forestPlotLabel"
 				text:		qsTr("Show labels")
 				checked:	true
-				visible:	module == "cochrane"
+				visible:	module === "cochrane"
 			}
 
 			DropDown
 			{
 				name:			"forestPlotOrder"
 				label:			qsTr("Ordering")
-				visible:		module == "cochrane"
+				visible:		module === "cochrane"
 				currentIndex:	1
 				values: [
 					{ label: qsTr("Year (ascending)")			, value: "yearAscending"			},
@@ -103,7 +103,7 @@ Section
 			name: 		"forestPlotRowOrder"
 			title: 		qsTr("Order")
 			enabled: 	checkForest.checked
-			visible:	module == "metaAnalysis"
+			visible:	module === "metaAnalysis"
 
 			RadioButton
 			{
@@ -150,7 +150,7 @@ Section
 		CheckBox
 		{
 			name: "priorPosteriorFixedAndRandom"
-			enabled: modelTypeValue == "averaging" || modelTypeValue == "constrainedRandom"
+			enabled: modelTypeValue === "averaging" || modelTypeValue === "constrainedRandom"
 			label: qsTr("Add fixed and random effects posterior")
 		}
 		CheckBox

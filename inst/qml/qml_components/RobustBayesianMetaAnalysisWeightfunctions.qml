@@ -86,14 +86,14 @@ ColumnLayout
 					]
 					onCurrentValueChanged: 
 					{
-						if (currentValue == "twoSided" || currentValue == "oneSided")
+						if (currentValue === "twoSided" || currentValue === "oneSided")
 						{
 							pValues.value  = "(.05, .10)";
 							alpha.value = "(1,1,1)";
 							pValues.editingFinished();
 							alpha.editingFinished();
 						}
-						if (currentValue == "twoSidedFixed" || currentValue == "oneSidedFixed")
+						if (currentValue === "twoSidedFixed" || currentValue === "oneSidedFixed")
 						{
 							pValues.value  = "(.05, .10)";
 							omega.value = "(1, 0.5, 0.1)";

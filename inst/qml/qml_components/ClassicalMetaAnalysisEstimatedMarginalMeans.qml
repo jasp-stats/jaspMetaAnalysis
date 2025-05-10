@@ -22,9 +22,9 @@ import JASP
 
 Section
 {
-	title:						qsTr("Estimated Marginal Means and Contrasts")
-	columns:					2
-	property string module:		"metaAnalysis"
+	title:							qsTr("Estimated Marginal Means and Contrasts")
+	columns:						2
+	property string analysisType:	"metaAnalysis"
 	info: qsTr("Options to compute estimated marginal means (EMMs) and coefficient contrasts for the effect size and heterogeneity models, allowing examination of predicted values at specific levels of moderators and their differences.")
 
 	Group
@@ -124,7 +124,7 @@ Section
 	{
 		title:		qsTr("Heterogeneity")
 		enabled:	sectionModel.heterogeneityModelTermsCount > 0
-		visible:	module == "metaAnalysis"
+		visible:	analysisType === "metaAnalysis"
 
 		VariablesForm
 		{

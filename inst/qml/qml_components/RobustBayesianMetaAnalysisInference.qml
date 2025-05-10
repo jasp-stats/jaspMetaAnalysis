@@ -141,7 +141,7 @@ Section
 			setLabelAbove:	true
 			info: qsTr("Select a transformation to apply to the effect size estimates in the output. This transformation applies to the 'Meta-Analytic Estimates Table', 'Estimated Marginal Means Table', 'Forest Plot', and  the 'Bubble Plot'. The 'Meta-Regression Coeffient Estimates' are not transformed.")
 			values:		
-				if (analysisType == "BiBMA") // treat as: effectSizeMeasure.value === "logOR"
+				if (analysisType === "BiBMA") // treat as: effectSizeMeasure.value === "logOR"
 				[
 					{ label: qsTr("None")								, value: "none"							},  // NULL
 					{ label: qsTr("Exponential")						, value: "exponential"					},  // exp

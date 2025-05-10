@@ -137,7 +137,7 @@ Section
 			{
 				name: 				"truncationLowerBound"
 				childrenOnSameRow: 	true
-				checked: 			modelTypeValue == "constrainedRandom" && modelDirectionValue == "positive"
+				checked: 			modelTypeValue === "constrainedRandom" && modelDirectionValue === "positive"
 
 				DoubleField
 				{
@@ -145,9 +145,9 @@ Section
 					name: 			"truncationLowerBoundValue"
 					label: 			qsTr("Lower bound:")
 					fieldWidth: 	50
-					negativeValues: !(modelTypeValue == "constrainedRandom" && modelDirectionValue == "positive")
+					negativeValues: !(modelTypeValue === "constrainedRandom" && modelDirectionValue === "positive")
 					defaultValue: 	0
-					max: 			modelTypeValue == "constrainedRandom" && modelDirectionValue == "negative" ? 0 : Infinity
+					max: 			modelTypeValue === "constrainedRandom" && modelDirectionValue === "negative" ? 0 : Infinity
 				}
 			}
 
@@ -155,7 +155,7 @@ Section
 			{
 				name: 				"truncationUpperBound"
 				childrenOnSameRow: 	true
-				checked: 			modelTypeValue == "constrainedRandom" && modelDirectionValue == "negative"
+				checked: 			modelTypeValue === "constrainedRandom" && modelDirectionValue === "negative"
 
 				DoubleField
 				{
@@ -163,9 +163,9 @@ Section
 					name: 			"truncationUpperBoundValue"
 					label: 			qsTr("Upper bound:")
 					fieldWidth: 	50
-					negativeValues: !(modelTypeValue == "constrainedRandom") && modelDirectionValue == "positive"
+					negativeValues: !(modelTypeValue === "constrainedRandom") && modelDirectionValue === "positive"
 					defaultValue: 	0
-					max: 			modelTypeValue == "constrainedRandom" && modelDirectionValue == "negative" ? 0 : Infinity
+					max: 			modelTypeValue === "constrainedRandom" && modelDirectionValue === "negative" ? 0 : Infinity
 				}
 			}
 		}
@@ -174,7 +174,7 @@ Section
 
 	RadioButtonGroup
 	{
-		enabled:	modelTypeValue == "random" || modelTypeValue == "constrainedRandom" || modelTypeValue == "averaging"
+		enabled:	modelTypeValue === "random" || modelTypeValue === "constrainedRandom" || modelTypeValue === "averaging"
 		title: 		qsTr("Heterogeneity (between-study SD)")
 		name: 		"priorStandardError"
 
