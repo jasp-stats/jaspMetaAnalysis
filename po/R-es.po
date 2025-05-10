@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2025-05-03 02:55\n"
-"PO-Revision-Date: 2025-04-26 12:37+0000\n"
+"PO-Revision-Date: 2025-05-03 14:12+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
@@ -1053,7 +1053,7 @@ msgstr ""
 "cruzadas ausentes en un término de interacción."
 
 msgid "Error reading the distance matrix file: %1$s"
-msgstr "Error al leer el fichero de la matriz de distancias: %1$s"
+msgstr "Fallo al leer el archivo de la matriz de distancias: %1$s"
 
 msgid ""
 "The distance matrix must be square. The number of rows (%1$i) does not match "
@@ -1063,76 +1063,91 @@ msgstr ""
 "coincide con el número de columnas (%2$i)."
 
 msgid "Error reading the correlation matrix file: %1$s"
-msgstr "Error al leer el fichero de la matriz de correlaciones: %1$s"
+msgstr "Fallo al leer el archivo de la matriz de correlaciones: %1$s"
 
-#, fuzzy
 msgid "Error reading the variance-covariance matrix file: %1$s"
-msgstr "Error al leer el fichero de la matriz de distancias: %1$s"
+msgstr "Fallo al leer el archivo de la matriz de varianzas-covarianzas: %1$s"
 
-#, fuzzy
 msgid ""
 "The variance-covariance matrix must be square. The number of rows (%1$i) "
 "does not match the number of columns (%2$i)."
 msgstr ""
-"La matriz de distancias debe ser cuadrada. El número de filas (%1$i) no "
-"coincide con el número de columnas (%2$i)."
+"La matriz de varianzas-covarianzas debe ser cuadrada. El número de filas "
+"(%1$i) no coincide con el número de columnas (%2$i)."
 
-#, fuzzy
 msgid ""
 "The variance-covariance matrix must match the dimensions of the data set. "
 "The number of the matrix rows/columns (%1$i) does not match the number of "
 "observations in the dataset (%2$i)."
 msgstr ""
-"La matriz de distancias debe ser cuadrada. El número de filas (%1$i) no "
-"coincide con el número de columnas (%2$i)."
+"La matriz de varianzas-covarianzas debe cumplir las dimensiones del conjunto "
+"de datos. El número de filas/columnas (%1$i) de la matriz no coincide con el "
+"número de observaciones del conjunto de datos (%2$i)."
 
 msgid "The supplied variance-covariance matrix is not positive definite."
-msgstr ""
+msgstr "La matriz de varianzas-covarianzas ofrecida no es positiva definida."
 
-#, fuzzy
 msgid "Error computing the variance-covariance matrix: %1$s"
-msgstr "Error al leer el fichero de la matriz de distancias: %1$s"
+msgstr "Fallo al calcular la matriz de varianzas-covarianzas: %1$s"
 
 msgid "Please provide a file with the precomputed variance-covariance matrix."
 msgstr ""
+"Por favor, proporcione un archivo con la matriz de varianzas-covarianzas "
+"precalculadas."
 
 msgid "Please provide a clustering variable for the correlation matrix."
 msgstr ""
+"Por favor, proporcione una variable de conglomeración para la matriz de "
+"correlaciones."
 
-#, fuzzy
 msgid "Please provide correlation matrix variables."
-msgstr "Error al leer el fichero de la matriz de correlaciones: %1$s"
+msgstr "Por favor, proporcione las variables de la matriz de correlaciones."
 
 msgid ""
 "The value of the correlation between construct types is set to 0. This "
 "corresponds to no adjustment for dependency between construct types."
 msgstr ""
+"El valor de la correlación entre tipos de constructos está en 0. Esto se "
+"corresponde la ausencia de ajuste para la dependencia entre tipos de "
+"constructos."
 
 msgid ""
 "Please provide a file with the correlation matrix for the construct types."
 msgstr ""
+"Por favor, proporcione un archivo con la matriz de correlaciones para los "
+"tipos de constructos."
 
 msgid ""
 "The value of the correlation between construct types is set to 0. This "
 "corresponds to no adjustment for dependency between constructs."
 msgstr ""
+"El valor de la correlación entre tipos de constructos está en 0. Esto se "
+"corresponde la ausencia de ajuste para la dependencia entre constructos."
 
 msgid "Please provide a file with the correlation matrix for the construct."
 msgstr ""
+"Por favor, proporcione un archivo con la matriz de correlaciones para el "
+"constructo."
 
 msgid ""
 "The value of the correlation between time lags is set to 0. This corresponds "
 "to no adjustment for dependency between time lags."
 msgstr ""
+"El valor de la correlación entre retardos temporales está en 0. Esto se "
+"corresponde la ausencia de ajuste para la dependencia entre retardos "
+"temporales."
 
 msgid ""
 "The 'Group Size' for specifying dependency due to common group comparison is "
 "unspecified. As default, the groups are assumed to be equal."
 msgstr ""
+"El 'Tamaño de grupo' para indicar la dependencia debida a la comparación "
+"habitual de grupos está sin especificar. Por defecto, se asume que los "
+"grupos son iguales."
 
-#, fuzzy
 msgid "Error writing the variance-covariance matrix file: %1$s"
-msgstr "Error al leer el fichero de la matriz de distancias: %1$s"
+msgstr ""
+"Fallo al escribir el archivo de la matriz de varianzas-covarianzas: %1$s"
 
 msgid "Random Effects / Model Stucture Summary"
 msgstr "Resumen de Efectos aleatorios / Estructura del modelo"
@@ -1610,7 +1625,7 @@ msgid "The specified path does not lead to an existing file."
 msgstr "La ruta especificada no conduce a ningún archivo."
 
 msgid "An error occurred while reading the model file: %1$s"
-msgstr "Se ha producido un error al leer el fichero modelo: %1$s"
+msgstr "Se ha producido un error al leer el archivo del modelo: %1$s"
 
 msgid "The loaded object is not a RoBMA model."
 msgstr "El objeto cargado no es un modelo RoBMA."
