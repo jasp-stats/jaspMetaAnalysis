@@ -30,16 +30,16 @@ Section
 	Group
 	{
 		id:			priorModelProbabilityGroup
-		enabled: 	modelTypeValue == "fixed" || modelTypeValue == "random" || modelTypeValue == "averaging"
+		enabled: 	modelTypeValue === "fixed" || modelTypeValue === "random" || modelTypeValue === "averaging"
 		title: 		qsTr("Prior model probability")
 
-		property double fixedEffectsHypothesisVal:	modelTypeValue == "fixed" ? 0.5 :
-														modelTypeValue == "random" ? 0 :
-															modelTypeValue == "averaging" ? 0.25 : 0
+		property double fixedEffectsHypothesisVal:	modelTypeValue === "fixed" ? 0.5 :
+														modelTypeValue === "random" ? 0 :
+															modelTypeValue === "averaging" ? 0.25 : 0
 
-		property double randomEffectsHypothesisVal:	modelTypeValue == "fixed" ? 0 :
-														modelTypeValue == "random" ? 0.5 :
-															modelTypeValue == "averaging" ? 0.25 : 0
+		property double randomEffectsHypothesisVal:	modelTypeValue === "fixed" ? 0 :
+														modelTypeValue === "random" ? 0.5 :
+															modelTypeValue === "averaging" ? 0.25 : 0
 		function resetHypotheses() {
 			priorH0FE.value = fixedEffectsHypothesisVal
 			priorH1FE.value = fixedEffectsHypothesisVal
@@ -54,7 +54,7 @@ Section
 		
 		Group
 		{
-			enabled: 			modelTypeValue == "fixed" || modelTypeValue == "averaging"
+			enabled: 			modelTypeValue === "fixed" || modelTypeValue === "averaging"
 			title: 				qsTr("Fixed effects")
 			onEnabledChanged: 	priorModelProbabilityGroup.resetHypotheses()
 
@@ -78,7 +78,7 @@ Section
 		Group
 		{
 			title: 				qsTr("Random effects")
-			enabled: 			modelTypeValue == "random" || modelTypeValue == "averaging"
+			enabled: 			modelTypeValue === "random" || modelTypeValue === "averaging"
 			onEnabledChanged: 	priorModelProbabilityGroup.resetHypotheses()
 
 			DoubleField
@@ -101,7 +101,7 @@ Section
 
 	Group
 	{
-		enabled: !(modelTypeValue == "constrainedRandom")
+		enabled: !(modelTypeValue === "constrainedRandom")
 
 		Group
 		{
@@ -112,7 +112,7 @@ Section
 			{
 				label: 			qsTr("samples:")
 				name: 			"samples"
-				defaultValue: 	!(modelTypeValue == "constrainedRandom") ? 2000 : 10000
+				defaultValue: 	!(modelTypeValue === "constrainedRandom") ? 2000 : 10000
 				min:			100
 				max: 			1000000
 				fieldWidth: 	100

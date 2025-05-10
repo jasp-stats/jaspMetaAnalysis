@@ -499,10 +499,10 @@ Form
 					id:			structure
 					name:		"structure"
 					label:		qsTr("Structure")
-					visible:	type.value == "structured" || type.value == "autoregressive" || type.value == "spatial"
+					visible:	type.value === "structured" || type.value === "autoregressive" || type.value === "spatial"
 					info: qsTr("Structure of the random effect when the type is 'Structured', 'Autoregressive', or 'Spatial'. Available structures depend on the selected type.")
 					values: (function() {
-						if (type.value == "structured") {
+						if (type.value === "structured") {
 							return [
 								{ label: qsTr("Compound symmetry"),						value: "compoundSymmetry"},
 								{ label: qsTr("Heteroscedastic compound symmetry"),		value: "heteroscedasticCompoundSymmetry"},
@@ -510,13 +510,13 @@ Form
 								{ label: qsTr("Identity"),								value: "identity"},
 								{ label: qsTr("Diagonal"),								value: "diagonal"}
 							];
-						} else if (type.value == "autoregressive") {
+						} else if (type.value === "autoregressive") {
 							return [
 								{ label: qsTr("AR(1)"),					value: "ar1"},
 								{ label: qsTr("Heteroscedastic AR(1)"),	value: "heteroskedasticAr1"},
 								{ label: qsTr("Continuous-time AR"),	value: "continuousTimeAr"}
 							];
-						} else if (type.value == "spatial") {
+						} else if (type.value === "spatial") {
 							return [
 								{ label: qsTr("Exponential"),			value: "exponential"},
 								{ label: qsTr("Gaussian"),				value: "gaussian"},
@@ -552,8 +552,8 @@ Form
 				VariablesForm
 				{
 					removeInvisibles:	true
-					preferredHeight:	(typeValue == "nested" || typeValue == "randomSlopes" || (typeValue == "spatial" && distanceMetric.value != "greatCircle")) ? 250 * preferencesModel.uiScale : 200 * preferencesModel.uiScale
-					visible:			typeValue == "simple" || typeValue == "nested" || typeValue == "randomSlopes" || typeValue == "structured" || typeValue == "autoregressive" || typeValue == "spatial" || typeValue == "knownCorrelation"
+					preferredHeight:	(typeValue === "nested" || typeValue === "randomSlopes" || (typeValue === "spatial" && distanceMetric.value != "greatCircle")) ? 250 * preferencesModel.uiScale : 200 * preferencesModel.uiScale
+					visible:			typeValue === "simple" || typeValue === "nested" || typeValue === "randomSlopes" || typeValue === "structured" || typeValue === "autoregressive" || typeValue === "spatial" || typeValue === "knownCorrelation"
 
 					AvailableVariablesList
 					{
@@ -565,7 +565,7 @@ Form
 					{
 						name:				"randomSlopeTerms"
 						title:				qsTr("Random Slope Terms")
-						visible:			typeValue == "randomSlopes"
+						visible:			typeValue === "randomSlopes"
 						listViewType:		JASP.Interaction
 						allowedColumns:		["nominal", "scale"] // this should be choose on assignment 
 						info: qsTr("Variables to include as random slope terms in the model. Available when the random effect type is 'Random slopes'.")
@@ -576,7 +576,7 @@ Form
 					{
 						name:				"factorLevels"
 						title:				qsTr("Factor Levels")
-						visible:			typeValue == "structured"
+						visible:			typeValue === "structured"
 						singleVariable:		true
 						info: qsTr("Variable indicating the factor levels ('Inner Term') for the structured random effect. Available when the random effect type is 'Structured'.")
 						allowedColumns:		["nominal"]
@@ -587,7 +587,7 @@ Form
 					{
 						name:				"level1"
 						title:				qsTr("Level 1")
-						visible:			typeValue == "nested"
+						visible:			typeValue === "nested"
 						singleVariable:		true
 						allowedColumns:		["nominal"]
 					}
@@ -596,7 +596,7 @@ Form
 					{
 						name:				"level2"
 						title:				qsTr("Level 2")
-						visible:			typeValue == "nested"
+						visible:			typeValue === "nested"
 						singleVariable:		true
 						allowedColumns:		["nominal"]
 					}
@@ -605,7 +605,7 @@ Form
 					{
 						name:				"level3"
 						title:				qsTr("Level 3")
-						visible:			typeValue == "nested"
+						visible:			typeValue === "nested"
 						singleVariable:		true
 						allowedColumns:		["nominal"]
 					}
@@ -614,7 +614,7 @@ Form
 					{
 						name:				"level4"
 						title:				qsTr("Level 4")
-						visible:			typeValue == "nested"
+						visible:			typeValue === "nested"
 						singleVariable:		true
 						allowedColumns:		["nominal"]
 					}
@@ -623,7 +623,7 @@ Form
 					{
 						name:				"level5"
 						title:				qsTr("Level 5")
-						visible:			typeValue == "nested"
+						visible:			typeValue === "nested"
 						singleVariable:		true
 						allowedColumns:		["nominal"]
 					}
@@ -632,7 +632,7 @@ Form
 					{
 						name:				"time"
 						title:				qsTr("Time")
-						visible:			typeValue == "autoregressive"
+						visible:			typeValue === "autoregressive"
 						singleVariable:		true
 						allowedColumns:		["ordinal", "scale"] // scale for continuous time AR otherwise ordinal
 						info: qsTr("Variable indicating time points for an autoregressive random effects structure. Available when the random effect type is 'Autoregressive'.")
@@ -642,7 +642,7 @@ Form
 					{
 						name:				"spatialCoordinates"
 						title:				qsTr("Spatial Coordinates")
-						visible:			typeValue == "spatial" && distanceMetric.value != "greatCircle" && distanceMetric.value != "loadFromFile"
+						visible:			typeValue === "spatial" && distanceMetric.value != "greatCircle" && distanceMetric.value != "loadFromFile"
 						allowedColumns:		["scale"] 
 						info: qsTr("Variables representing spatial coordinates for a spatial random effects structure. Available when the random effect type is 'Spatial' and the distance metric is not 'Great-circle' or prespecified in a file.")
 					}
@@ -651,7 +651,7 @@ Form
 					{
 						name:				"longitude"
 						title:				qsTr("Longitude")
-						visible:			typeValue == "spatial" && distanceMetric.value == "greatCircle"
+						visible:			typeValue === "spatial" && distanceMetric.value === "greatCircle"
 						allowedColumns:		["scale"] 
 						singleVariable:		true
 						info: qsTr("Variable representing longitude (in decimal degrees, with minus signs for West) for a spatial random effects structure using the 'Great-circle' distance metric. Available when the random effect type is 'Spatial' and the distance metric is 'Great-circle'.")
@@ -661,7 +661,7 @@ Form
 					{
 						name:				"latitude"
 						title:				qsTr("Latitude")
-						visible:			typeValue == "spatial" && distanceMetric.value == "greatCircle"
+						visible:			typeValue === "spatial" && distanceMetric.value === "greatCircle"
 						allowedColumns:		["scale"] 
 						singleVariable:		true
 						info: qsTr("Variable representing latitude (in decimal degrees, with minus signs for South) for a spatial random effects structure using the 'Great-circle' distance metric. Available when the random effect type is 'Spatial' and the distance metric is 'Great-circle'.")
@@ -671,7 +671,7 @@ Form
 					{
 						name:				"locationIdentifier"
 						title:				qsTr("Location Identifier")
-						visible:			typeValue == "spatial" && distanceMetric.value == "loadFromFile"
+						visible:			typeValue === "spatial" && distanceMetric.value === "loadFromFile"
 						allowedColumns:		["nominal"] 
 						singleVariable:		true
 						info: qsTr("Variable identifying locations when loading distances matrix from a file for a spatial random effects structure. The location corresponds to the row and column names of the distance matrix. The names cannot start with a number.")
@@ -693,7 +693,7 @@ Form
 					name:		"distanceMetric"
 					id:			distanceMetric
 					label:		qsTr("Distance metric")
-					visible:	typeValue == "spatial"
+					visible:	typeValue === "spatial"
 					info: qsTr("Distance metric used to calculate distances in a spatial random effects structure. Available when the random effect type is 'Spatial'.")
 					values:		[
 						{ label: qsTr("Euclidean"),			value: "euclidean" },
@@ -708,7 +708,7 @@ Form
 				{
 					name:		"distanceMatrixFile"
 					label:		qsTr("Distance matrix file")
-					visible:	typeValue == "spatial" && distanceMetric.value == "loadFromFile"
+					visible:	typeValue === "spatial" && distanceMetric.value === "loadFromFile"
 					filter:		"*.csv"
 					save:		false
 					info: qsTr("CSV file containing the distance matrix for the spatial random effects structure. The first row and the first column of the file must contain names that map the matrix entries to the 'Location Identifier' (the names cannot start with a number). Available when the random effect type is 'Spatial' and the distance metric is loaded from a file.")
@@ -719,7 +719,7 @@ Form
 				{
 					name:		"correlationMatrixFile"
 					label:		qsTr("Correlation matrix file")
-					visible:	typeValue == "knownCorrelation"
+					visible:	typeValue === "knownCorrelation"
 					filter:		"*.csv"
 					save:		false
 					info: qsTr("CSV file containing the known correlation matrix for the random effects structure. The first row and the first column of the file must contain names that map the matrix entries to the 'Grouping Factor' (the names cannot start with a number). Available when the random effect type is 'Known correlation'.")
@@ -733,34 +733,34 @@ Form
 
 	MA.ClassicalMetaAnalysisModel
 	{
-		id:			sectionModel
-		module:		"metaAnalysisMultilevelMultivariate"
+		id:				sectionModel
+		analysisType:	"metaAnalysisMultilevelMultivariate"
 	}
 
 	MA.ClassicalMetaAnalysisStatistics 
 	{
-		module:		"metaAnalysisMultilevelMultivariate"
+		analysisType:	"metaAnalysisMultilevelMultivariate"
 	}
 
 	MA.ClassicalMetaAnalysisEstimatedMarginalMeans
 	{
-		module:		"metaAnalysisMultilevelMultivariate"
+		analysisType:	"metaAnalysisMultilevelMultivariate"
 	}
 
-	MA.ClassicalMetaAnalysisForestPlot
+	MA.ForestPlot
 	{
-		module:		"metaAnalysisMultilevelMultivariate"
+		analysisType:	"metaAnalysisMultilevelMultivariate"
 	}
 
-	MA.ClassicalMetaAnalysisBubblePlot {}
+	MA.BubblePlot {}
 
 	MA.ClassicalMetaAnalysisDiagnostics
 	{
-		module:		"metaAnalysisMultilevelMultivariate"
+		analysisType:	"metaAnalysisMultilevelMultivariate"
 	}
 
 	MA.ClassicalMetaAnalysisAdvanced
 	{
-		module:		"metaAnalysisMultilevelMultivariate"
+		analysisType:	"metaAnalysisMultilevelMultivariate"
 	}
 }

@@ -252,7 +252,7 @@ ColumnLayout
 					visible:			typeItem.currentValue !== "spike" && typeItem.currentValue !== "uniform"
 					value:				
 					{
-						if(componentType == "modelsHeterogeneity" || componentType == "modelsHeterogeneityNull" || componentType == "modelsPet" || componentType == "modelsPetNull" || componentType == "modelsPeese" || componentType == "modelsPeeseNull")
+						if(componentType === "modelsHeterogeneity" || componentType === "modelsHeterogeneityNull" || componentType === "modelsPet" || componentType === "modelsPetNull" || componentType === "modelsPeese" || componentType === "modelsPeeseNull")
 							0
 						else if (typeItem.currentValue === "gammaK0" || typeItem.currentValue === "gammaAB" || typeItem.currentValue === "invgamma" || typeItem.currentValue === "lognormal" || typeItem.currentValue === "beta")
 							0
@@ -261,7 +261,7 @@ ColumnLayout
 					}	
 					min:				
 					{
-						if(componentType == "modelsHeterogeneity" || componentType == "modelsHeterogeneityNull" || componentType == "modelsPet" || componentType == "modelsPetNull" || componentType == "modelsPeese" || componentType == "modelsPeeseNull")
+						if(componentType === "modelsHeterogeneity" || componentType === "modelsHeterogeneityNull" || componentType === "modelsPet" || componentType === "modelsPetNull" || componentType === "modelsPeese" || componentType === "modelsPeeseNull")
 							0
 						else if (typeItem.currentValue === "gammaK0" || typeItem.currentValue === "gammaAB" || typeItem.currentValue === "invgamma" || typeItem.currentValue === "lognormal" || typeItem.currentValue === "beta")
 							0

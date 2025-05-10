@@ -22,9 +22,9 @@ import JASP
 
 Section
 {
-	title:						qsTr("Diagnostics")
-	property string module:		"metaAnalysis"
-	columns:					1
+	title:							qsTr("Diagnostics")
+	property string analysisType:	"metaAnalysis"
+	columns:						1
 	info: qsTr("Options for evaluating the influence of individual studies and assessing model diagnostics, including variance inflation factors, casewise diagnostics, and diagnostic plots.")
 
 	Group
@@ -60,7 +60,7 @@ Section
 				{
 					name:		"diagnosticsCasewiseDiagnosticsShowInfluentialOnly"
 					text:		qsTr("Show influential only")
-					visible:	module == "metaAnalysis"
+					visible:	analysisType === "metaAnalysis"
 					info: qsTr("Show only the influential studies in the casewise diagnostics. Unvailable when performing multilevel/multivariate meta-analysis.")
 				}
 
@@ -89,7 +89,7 @@ Section
 						name:		"diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"
 						text:		qsTr("Influential indicator only")
 						checked:	true
-						visible:	module == "metaAnalysis"
+						visible:	analysisType === "metaAnalysis"
 						info: qsTr("Export only the indicator of influential cases to the dataset.")
 					}
 				}
@@ -121,7 +121,7 @@ Section
 			{
 				name:		"diagnosticsPlotsBaujat"
 				text:		qsTr("Baujat")
-				visible:	module == "metaAnalysis"
+				visible:	analysisType === "metaAnalysis"
 				info: qsTr("Include a Baujat plot to detect studies contributing to heterogeneity and overall effect size. Unvailable when performing multilevel/multivariate meta-analysis.")
 			}
 

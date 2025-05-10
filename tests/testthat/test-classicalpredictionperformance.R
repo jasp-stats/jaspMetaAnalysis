@@ -27,7 +27,7 @@ options$effectSizeSe <- ""
 options$withinStudyVariation <- "normal/logit"
 options$withinStudyVariation <- "normal/log"
 options$measure <- "oeRatio"
-options$method <- "Restricted ML"
+options$method <- "restrictedML"
 options$priorAndPosteriorPlot <- FALSE
 set.seed(1)
 dataset <- EuroSCORE
@@ -200,7 +200,7 @@ options$numberOfObservedEvents <- "n.events"
 options$effectSizeSe <- ""
 options$withinStudyVariation <- "normal/logit"
 options$measure <- "cStatistic"
-options$method <- "Fixed Effects"
+options$method <- "fixedEffects"
 options$priorAndPosteriorPlot <- FALSE
 set.seed(1)
 dataset <- EuroSCORE
@@ -285,7 +285,7 @@ options$numberOfObservedEvents <- "n.events"
 options$effectSizeSe <- "se.c.index"
 options$withinStudyVariation <- "normal/identity"
 options$measure <- "cStatistic"
-options$method <- "Maximum Likelihood"
+options$method <- "maximumLikelihood"
 options$priorAndPosteriorPlot <- FALSE
 set.seed(1)
 dataset <- EuroSCORE
