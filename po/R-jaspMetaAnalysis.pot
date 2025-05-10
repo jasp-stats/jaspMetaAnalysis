@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.20.0\n"
-"POT-Creation-Date: 2025-05-03 02:55\n"
+"POT-Creation-Date: 2025-05-10 02:56\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -816,6 +816,9 @@ msgid "Permutation p-value is based on %1$s permutations."
 msgstr ""
 
 msgid "The model estimation failed with the following message: %1$s. Please, consider simplifying the model."
+msgstr ""
+
+msgid "The cluster-robust standard errors could not be computed. Please, consider modifying the clustering settings in the 'Advanced' section."
 msgstr ""
 
 msgid "Fewer than two estimates."
