@@ -30,7 +30,7 @@ options$scatterVariableX <- list(list(variable = "JaspColumn_4_Encoded"))
 options$scatterVariableY <- list()
 options$setSeed <- TRUE
 set.seed(1)
-results <- runAnalysis("PenalizedMetaAnalysis", "BCG Vaccine", options)
+results <- runAnalysis("PenalizedMetaAnalysis", "Effectiveness of the BCG Vaccine Against Tuberculosis", options)
 
 
 test_that("posterior-plot-1 matches", {
@@ -116,7 +116,7 @@ options$scatterVariableX <- list(list(variable = "Heterogeneity"))
 options$scatterVariableY <- list()
 options$setSeed <- TRUE
 set.seed(1)
-results <- runAnalysis("PenalizedMetaAnalysis", "BCG Vaccine", options)
+results <- runAnalysis("PenalizedMetaAnalysis", "Effectiveness of the BCG Vaccine Against Tuberculosis", options)
 
 
 test_that("diagnostic-plot-2 matches", {

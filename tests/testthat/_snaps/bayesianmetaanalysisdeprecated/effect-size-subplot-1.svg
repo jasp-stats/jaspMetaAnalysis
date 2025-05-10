@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' data-engine-version='2.0' width='720.00pt' height='576.00pt' viewBox='0 0 720.00 576.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA='>
+    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<rect x='0.00' y='0.00' width='720.00' height='576.00' style='stroke-width: 10.67; stroke: none;' />
+</g>
+<defs>
+  <clipPath id='cpMC4wMHw3MjAuMDB8MTcuMzB8NTc2LjAw'>
+    <rect x='0.00' y='17.30' width='720.00' height='558.70' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MTcuMzB8NTc2LjAw)'>
+<rect x='0.00' y='17.30' width='720.00' height='558.70' style='stroke-width: 10.67; stroke: none;' />
+<text x='437.12' y='377.13' style='font-size: 16.93px; font-family: sans;' textLength='11.30px' lengthAdjust='spacingAndGlyphs'>B</text>
+<text x='448.41' y='377.13' style='font-size: 16.93px; font-family: sans;' textLength='10.34px' lengthAdjust='spacingAndGlyphs'>F</text>
+<text x='458.75' y='380.26' style='font-size: 11.85px; font-family: sans;' textLength='6.59px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='465.34' y='380.26' style='font-size: 11.85px; font-family: sans;' textLength='6.59px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='475.85' y='377.13' style='font-size: 16.93px; font-family: sans;' textLength='13.14px' lengthAdjust='spacingAndGlyphs'>=</text>
+<text x='492.92' y='377.13' style='font-size: 16.93px; font-family: sans;' textLength='51.78px' lengthAdjust='spacingAndGlyphs'>0.0228</text>
+<text x='437.12' y='224.75' style='font-size: 16.93px; font-family: sans;' textLength='11.30px' lengthAdjust='spacingAndGlyphs'>B</text>
+<text x='448.41' y='224.75' style='font-size: 16.93px; font-family: sans;' textLength='10.34px' lengthAdjust='spacingAndGlyphs'>F</text>
+<text x='458.75' y='227.89' style='font-size: 11.85px; font-family: sans;' textLength='6.59px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='465.34' y='227.89' style='font-size: 11.85px; font-family: sans;' textLength='6.59px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='475.85' y='224.75' style='font-size: 16.93px; font-family: sans;' textLength='13.14px' lengthAdjust='spacingAndGlyphs'>=</text>
+<text x='492.92' y='224.75' style='font-size: 16.93px; font-family: sans;' textLength='51.78px' lengthAdjust='spacingAndGlyphs'>43.789</text>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<text x='0.00' y='9.08' style='font-size: 13.20px; font-family: sans;' textLength='118.87px' lengthAdjust='spacingAndGlyphs'>effect-size-subplot-1</text>
+</g>
+</svg>

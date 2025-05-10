@@ -23,7 +23,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
   if (.pemaCheckReady(options)) {
     # get the data
-    dataset <- .pemaGetData(jaspResults, dataset, options)
+    dataset <- .pemaCheckData(jaspResults, dataset, options)
 
     # fit the models
     .pemaFit(jaspResults, dataset, options)
@@ -57,32 +57,15 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 .pemaCheckReady                <- function(options) {
   return(options[["effectSize"]] != "" && options[["effectSizeSe"]] != "" && length(options[["modelTerms"]]) > 0)
 }
-.pemaGetData                   <- function(jaspResults, dataset, options) {
+.pemaCheckData                 <- function(jaspResults, dataset, options) {
 
-  if (!is.null(dataset))
-    return(dataset)
-  else {
-    effsizeName <- unlist(options$effectSize)
-    stderrName  <- unlist(options$effectSizeSe)
-    covarNames  <- if (length(options$covariates)  > 0) unlist(options$covariates)
-    factNames   <- if (length(options$factors)     > 0) unlist(options$factors)
-    clustNames  <- if (length(options$clustering)  > 0) unlist(options$clustering)
-    studyLabels <- if (length(options$studyLabels) > 0) unlist(options$studyLabels)
+  # precompute variance
+  dataset$JASP_computed_variance__ <- dataset[,stderrName]^2
 
-    numeric.variables <- Filter(function(s) s != "", c(effsizeName, covarNames, stderrName))
-    factor.variables  <- Filter(function(s) s != "", c(factNames, studyLabels, clustNames))
+  # check the data
+  dataset <- .pemaCheckData(jaspResults, dataset, options)
 
-    dataset <- .readDataSetToEnd(columns.as.factor   = factor.variables,
-                                 columns.as.numeric  = numeric.variables)
-
-    # precompute variance
-    dataset$JASP_computed_variance__ <- dataset[,stderrName]^2
-
-    # check the data
-    dataset <- .pemaCheckData(jaspResults, dataset, options)
-
-    return(dataset)
-  }
+  return(dataset)
 }
 .pemaCheckData                 <- function(jaspResults, dataset, options) {
 

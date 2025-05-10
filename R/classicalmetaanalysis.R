@@ -262,7 +262,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     exitAnalysisIfErrors = TRUE)
 }
 .maCheckStandardErrors <- list(seCheck = function(dataset, target) {
-    nonPositive <- !all(dataset[,target] > 0)
+    nonPositive <- !all(dataset[,target] > 0, na.rm = TRUE)
     if (nonPositive) {
       return(gettext("All standard errors must be positive."))
     }

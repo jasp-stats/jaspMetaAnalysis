@@ -18,6 +18,9 @@
 
 ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, state = NULL) {
 
+  # required for method dispatching
+  options[["module"]] <- "metaAnalysis"
+
   ready <- .metamiscReady(options)
 
   if (ready) {

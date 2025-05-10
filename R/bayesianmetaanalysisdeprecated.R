@@ -27,10 +27,6 @@ BayesianMetaAnalysisDeprecated <- function(jaspResults, dataset, ready, options)
   # Dependencies: basically everything
   # dependencies <- .bmaDependencies
 
-  # Dataset with effectSize, effectSizeSe, and studyLabel
-  # If data is null stuff is missing
-  dataset <- .bmaReadData(jaspResults, options)
-
   # Table: Posterior Model Estimates
   .bmaMainTable(jaspResults, dataset, options, ready, .bmaDependencies)
 
@@ -80,28 +76,6 @@ BayesianMetaAnalysisDeprecated <- function(jaspResults, dataset, ready, options)
   "bayesFactorComputation", "bridgeSamplingSamples", "samples",
   "chains", "seed", "setSeed"
 )
-
-# Get dataset
-.bmaReadData <- function(jaspResults, options){
-  varES <- options[["effectSize"]]
-  varSE <- options[["effectSizeSe"]]
-  CI <- unlist(options$effectSizeCi)
-  lower <- CI[[1]]
-  upper <- CI[[2]]
-  study <- options[["studyLabel"]]
-  if(varES == "") varES <- NULL
-  if(varSE == "") varSE <- NULL
-  if(CI[[1]] == ""  || CI[[2]] == "" || is.null(CI)) {
-    lower <- NULL
-    upper <- NULL
-  }
-  variables.to.read <- c(varES, varSE, lower, upper)
-  dataset <- .readDataSetToEnd(columns.as.numeric = variables.to.read,
-                               columns.as.factor  = if(study != "") study,
-                               exclude.na.listwise = variables.to.read)
-  return(dataset)
-}
-
 
 # Save priors for later use (without data)
 .bmaPriors <- function(jaspResults, options) {
