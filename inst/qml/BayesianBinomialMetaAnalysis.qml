@@ -149,7 +149,12 @@ Form
 				{ label: qsTr("Medicine"),		value: "medicine",		info: qsTr("Use prior distributions based on the Cochrane Database of Systematic Reviews developed by Bartoš et al. (2021)")},
 				{ label: qsTr("Custom"),		value: "custom",		info: qsTr("Use custom prior distributions. This option allows you to specify a custom model ensemble for the effect size and heterogeneity prior distributions.")}
 			]
+		}
 
+		MA.RobustBayesianMetaAnalysisCochranePriorDistributions
+		{
+			visible:				priorDistributionsEffectSizeAndHeterogeneity.value === "medicine"
+			effectSizeMeasure:		"logOR"
 		}
 
 		DoubleField

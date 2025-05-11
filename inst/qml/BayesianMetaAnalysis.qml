@@ -164,6 +164,13 @@ Form
 					]
 		}
 
+		MA.RobustBayesianMetaAnalysisCochranePriorDistributions
+		{
+			visible:				priorDistributionsEffectSizeAndHeterogeneity.value === "medicine"
+			effectSizeMeasure:		effectSizeMeasure.value
+		}
+
+
 		DoubleField
 		{
 			name:		"priorDistributionsScale"

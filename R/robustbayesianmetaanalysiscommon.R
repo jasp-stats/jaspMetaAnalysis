@@ -120,7 +120,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   "predictors", "predictors.types", "studyLevelMultilevel", "subgroup",
   "effectSizeModelTerms", "effectSizeModelIncludeIntercept",
   "bayesianModelAveragingEffectSize", "bayesianModelAveragingHeterogeneity", "bayesianModelAveragingModerations", "bayesianModelAveragingPublicationBias",
-  "priorDistributionsEffectSizeAndHeterogeneity", "priorDistributionsScale", "publicationBiasAdjustment", "modelExpectedDirectionOfTheEffect",
+  "priorDistributionsEffectSizeAndHeterogeneity", "priorDistributionsEffectSizeAndHeterogeneityMedicineSubfield", "priorDistributionsScale", "publicationBiasAdjustment", "modelExpectedDirectionOfTheEffect",
   # prior distributions
   "priorsEffect", "priorsEffectNull", "priorsHeterogeneity", "priorsHeterogeneityNull",
   "priorsModeratorsFactor", "priorsModeratorsFactorNull", "priorsModeratorsContinuous", "priorsModeratorsContinuousNull",
@@ -346,6 +346,10 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
   object <- list()
 
+  # the "General" Cochrane prior distribution needs to be renamed to "Cochrane" for proper dispatching
+  if (options[["priorDistributionsEffectSizeAndHeterogeneityMedicineSubfield"]] == "general")
+    options[["priorDistributionsEffectSizeAndHeterogeneityMedicineSubfield"]] <- "Cochrane"
+
   # effect size & heterogeneity ----
   # the default (= psychology) priors are defined on smd scale, but they can be transformed to logOR/Fisher's z
   # the medicine priors for logOR, and SMD are defined on logOR and SMD scales, we use the SMD ones to be transformed into Fisher's z
@@ -367,13 +371,13 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   } else if (options[["priorDistributionsEffectSizeAndHeterogeneity"]] == "medicine") {
 
     if (options[["effectSizeMeasure"]] == "fishersZ") {
-      object[["effect"]]        <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "effect",        type = "SMD"), options[["priorDistributionsScale"]]))
-      object[["heterogeneity"]] <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "heterogeneity", type = "SMD"), options[["priorDistributionsScale"]]))
+      object[["effect"]]        <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed(options[["priorDistributionsEffectSizeAndHeterogeneityMedicineSubfield"]], parameter = "effect",        type = "SMD"), options[["priorDistributionsScale"]]))
+      object[["heterogeneity"]] <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed(options[["priorDistributionsEffectSizeAndHeterogeneityMedicineSubfield"]], parameter = "heterogeneity", type = "SMD"), options[["priorDistributionsScale"]]))
       object[["effect"]]        <- lapply(object[["effect"]]       , .robmaRescalePriorDistribution, scale = 0.5)
       object[["heterogeneity"]] <- lapply(object[["heterogeneity"]], .robmaRescalePriorDistribution, scale = 0.5)
     } else {
-      object[["effect"]]        <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "effect",        type = options[["effectSizeMeasure"]]), options[["priorDistributionsScale"]]))
-      object[["heterogeneity"]] <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "heterogeneity", type = options[["effectSizeMeasure"]]), options[["priorDistributionsScale"]]))
+      object[["effect"]]        <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed(options[["priorDistributionsEffectSizeAndHeterogeneityMedicineSubfield"]], parameter = "effect",        type = options[["effectSizeMeasure"]]), options[["priorDistributionsScale"]]))
+      object[["heterogeneity"]] <- list(.robmaRescalePriorDistribution(RoBMA::prior_informed(options[["priorDistributionsEffectSizeAndHeterogeneityMedicineSubfield"]], parameter = "heterogeneity", type = options[["effectSizeMeasure"]]), options[["priorDistributionsScale"]]))
     }
 
   } else if (options[["priorDistributionsEffectSizeAndHeterogeneity"]] == "custom") {
@@ -527,8 +531,8 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
         tempPrior[["alt"]] <- switch(
           tempTermType,
-          "nominal" = .robmaCochraneFactorPrior(type = "SMD", options[["priorDistributionsScale"]] / 2),
-          "scale"   = .robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "effect", type = "SMD"), options[["priorDistributionsScale"]] / 2)
+          "nominal" = .robmaCochraneFactorPrior(options[["priorDistributionsEffectSizeAndHeterogeneityMedicineSubfield"]], type = "SMD",  options[["priorDistributionsScale"]] / 2),
+          "scale"   = .robmaRescalePriorDistribution(RoBMA::prior_informed(options[["priorDistributionsEffectSizeAndHeterogeneityMedicineSubfield"]], parameter = "effect", type = "SMD"), options[["priorDistributionsScale"]] / 2)
         )
         tempPrior[["alt"]] <- .robmaRescalePriorDistribution(tempPrior[["alt"]], scale = 0.5)
 
@@ -536,8 +540,8 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
         tempPrior[["alt"]] <- switch(
           tempTermType,
-          "nominal" = .robmaCochraneFactorPrior(type = options[["effectSizeMeasure"]], options[["priorDistributionsScale"]] / 2),
-          "scale"   = .robmaRescalePriorDistribution(RoBMA::prior_informed("Cochrane", parameter = "effect", type = options[["effectSizeMeasure"]]), options[["priorDistributionsScale"]] / 2)
+          "nominal" = .robmaCochraneFactorPrior(options[["priorDistributionsEffectSizeAndHeterogeneityMedicineSubfield"]], type = options[["effectSizeMeasure"]], options[["priorDistributionsScale"]] / 2),
+          "scale"   = .robmaRescalePriorDistribution(RoBMA::prior_informed(options[["priorDistributionsEffectSizeAndHeterogeneityMedicineSubfield"]], parameter = "effect", type = options[["effectSizeMeasure"]]), options[["priorDistributionsScale"]] / 2)
         )
 
       }
@@ -758,9 +762,9 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
   return(arguments)
 }
-.robmaCochraneFactorPrior      <- function(type, scale) {
+.robmaCochraneFactorPrior      <- function(name, type, scale) {
 
-  effectPrior <- RoBMA::prior_informed("Cochrane", parameter = "effect", type = type)
+  effectPrior <- RoBMA::prior_informed(name, parameter = "effect", type = type)
   if (effectPrior[["distribution"]] == "t") {
     factorPrior <- RoBMA::prior_factor("mt", list(location = 0, scale = effectPrior[["parameters"]][["scale"]] * scale, df = effectPrior[["parameters"]][["df"]]), contrast = "meandif")
   } else if (effectPrior[["distribution"]] == "normal") {
