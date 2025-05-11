@@ -92,10 +92,16 @@ Section
 					name:		"bubblePlotBubblesSize"
 					label:		qsTr("Size")
 					info: qsTr("Options for determining the size of the observed estimates.")
-					values:		
+					values:
 					if (analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate")
 						[
 							{ label: qsTr("Weight")				, value: "weight"},
+							{ label: qsTr("Inverse variance")	, value: "inverseVariance"	},
+							{ label: qsTr("Equal")				, value: "equal"	}
+						]
+					else if (analysisType === "BiBMA")
+						[
+							{ label: qsTr("Sample size")		, value: "sampleSize"	},
 							{ label: qsTr("Inverse variance")	, value: "inverseVariance"	},
 							{ label: qsTr("Equal")				, value: "equal"	}
 						]
@@ -187,7 +193,7 @@ Section
 			DropDown
 			{
 				name:			"bubblePlotTheme"
-				id:				bubblePlotTheme	
+				id:				bubblePlotTheme
 				label:			qsTr("Theme")
 				startValue:		"jasp"
 				info: qsTr("Set the theme of the bubble plot.")

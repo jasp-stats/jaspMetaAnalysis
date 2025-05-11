@@ -26,7 +26,7 @@ Form
 
 	VariablesForm
 	{
-		preferredHeight:	550 * preferencesModel.uiScale
+		preferredHeight:	500 * preferencesModel.uiScale
 
 		AvailableVariablesList
 		{
@@ -36,7 +36,7 @@ Form
 		AssignedVariablesList
 		{
 			name: 			"successesGroup1"
-			title: 			qsTr("Successes (Group 1)")
+			title: 			qsTr("Successes Group 1")
 			singleVariable: true
 			allowedColumns: ["scale"]
 		}
@@ -44,23 +44,23 @@ Form
 		AssignedVariablesList
 		{
 			name: 			"successesGroup2"
-			title: 			qsTr("Successes (Group 2)")
+			title: 			qsTr("Successes Group 2")
 			singleVariable: true
 			allowedColumns: ["scale"]
 		}
 
 		AssignedVariablesList
 		{
-			name: 			"observationsGroup1"
-			title: 			qsTr("Observations (Group 1)")
+			name: 			"sampleSizeGroup1"
+			title: 			qsTr("Sample Size Group 1")
 			singleVariable: true
 			allowedColumns: ["scale"]
 		}
 
 		AssignedVariablesList
 		{
-			name: 			"observationsGroup2"
-			title: 			qsTr("Observations (Group 2)")
+			name: 			"sampleSizeGroup2"
+			title: 			qsTr("Samples Size Group 2")
 			singleVariable: true
 			allowedColumns: ["scale"]
 		}
@@ -80,18 +80,10 @@ Form
 		{
 			name:				"studyLevelMultilevel"
 			title:				qsTr("Study Level (Multilevel)")
+			id:					studyLevelMultilevel
 			singleVariable:		true
 			allowedColumns:		["nominal"]
 			info: qsTr("Variable indicating the study level nesting. This variable is used to specify the nesting of the studies in the meta-analysis. The nesting is used to specify the model structure and to account for the correlation between the effect sizes within each study.")
-		}
-
-		AssignedVariablesList
-		{
-			name:				"studyLabels"
-			title:				qsTr("Study Labels")
-			singleVariable:		true
-			allowedColumns:		["nominal"]
-			info: qsTr("Variable containing labels for the studies. Used for labeling outputs and plots.")
 		}
 
 		AssignedVariablesList
@@ -182,16 +174,16 @@ Form
 	//// Model Section ////
 	MA.RobustBayesianMetaAnalysisModel
 	{
-		analysisType:	"NoBMA"
+		analysisType:	"BiBMA"
 		id:				sectionModel
 	}
-/*
+
 	//// Priors Section ////
 	Section
 	{
 		title: 				qsTr("Prior Distributions (Custom)")
 		columns:			1
-		enabled:			priorDistributionsEffectSizeAndHeterogeneity.value === "custom" || publicationBiasAdjustment.value === "custom"
+		enabled:			priorDistributionsEffectSizeAndHeterogeneity.value === "custom"
 		onEnabledChanged:	if(!enabled) expanded = false
 
 
@@ -200,7 +192,7 @@ Form
 		{
 			visible:				priorDistributionsEffectSizeAndHeterogeneity.value === "custom"
 			Layout.preferredWidth:	parent.width
-			componentType:			"modelsEffect"
+			componentType:			"priorsEffect"
 			analysisType:			"normal"
 		}
 
@@ -209,7 +201,7 @@ Form
 		{
 			visible:				priorDistributionsEffectSizeAndHeterogeneity.value === "custom"
 			Layout.preferredWidth:	parent.width
-			componentType:			"modelsHeterogeneity"
+			componentType:			"priorsHeterogeneity"
 			analysisType:			"normal"
 		}
 
@@ -233,7 +225,7 @@ Form
 		MA.RobustBayesianMetaAnalysisBaseline
 		{
 			Layout.preferredWidth:	parent.width
-			componentType:			"modelsBaseline"
+			componentType:			"priorsBaseline"
 		}
 
 		Divider { }
@@ -243,7 +235,7 @@ Form
 		{
 			visible:				priorDistributionsEffectSizeAndHeterogeneity.value === "custom" && bayesianModelAveragingEffectSize.checked
 			Layout.preferredWidth:	parent.width
-			componentType:			"modelsEffectNull"
+			componentType:			"priorsEffectNull"
 			analysisType:			"normal"
 		}
 
@@ -252,7 +244,7 @@ Form
 		{
 			visible:				priorDistributionsEffectSizeAndHeterogeneity.value === "custom" && bayesianModelAveragingHeterogeneity.checked
 			Layout.preferredWidth:	parent.width
-			componentType:			"modelsHeterogeneityNull"
+			componentType:			"priorsHeterogeneityNull"
 			analysisType:			"normal"
 		}
 
@@ -276,50 +268,50 @@ Form
 		MA.RobustBayesianMetaAnalysisBaseline
 		{
 			Layout.preferredWidth:	parent.width
-			componentType:			"modelsBaselineNull"
+			componentType:			"priorsBaselineNull"
 		}
 	}
-*/
+
 	//// Inference Section ////
 	MA.RobustBayesianMetaAnalysisInference
 	{
-		analysisType:	"NoBMA"
+		analysisType:	"BiBMA"
 	}
 
 	//// Inference Section ////
 	MA.RobustBayesianMetaAnalysisEstimatedMarginalMeans
 	{
-		analysisType:	"NoBMA"
+		analysisType:	"BiBMA"
 	}
 
 	//// Prior and Posterior Plots Section ////
 	MA.RobustBayesianMetaAnalysisPlots
 	{
-		analysisType:	"NoBMA"
+		analysisType:	"BiBMA"
 	}
 
 	//// Forest Plots Section ////
 	MA.ForestPlot
 	{
-		analysisType:	"NoBMA"
+		analysisType:	"BiBMA"
 	}
 
 	//// Bubble Plot Section ////
 	MA.BubblePlot
 	{
-		analysisType:	"NoBMA"
+		analysisType:	"BiBMA"
 	}
 
 	//// Diagnostics section ////
 	MA.RobustBayesianMetaAnalysisDiagnostics
 	{
-		analysisType:	"NoBMA"
+		analysisType:	"BiBMA"
 	}
 
 	//// Advanced section for prior model probabilities sampling settings ////
 	MA.RobustBayesianMetaAnalysisAdvanced
 	{
-		analysisType:	"NoBMA"
+		analysisType:	"BiBMA"
 		id:				sectionAdvanced
 	}
 

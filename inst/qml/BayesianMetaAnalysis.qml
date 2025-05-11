@@ -26,7 +26,7 @@ Form
 
 	VariablesForm
 	{
-		preferredHeight:	450 * preferencesModel.uiScale
+		preferredHeight:	400 * preferencesModel.uiScale
 
 		AvailableVariablesList
 		{
@@ -79,23 +79,14 @@ Form
 			info: qsTr("Variables to include as predictors (moderators) in the meta-regression model. See the 'Model' section for the meta-regression specification details.")
 		}
 
-
 		AssignedVariablesList
 		{
 			name:				"studyLevelMultilevel"
+			id:					studyLevelMultilevel
 			title:				qsTr("Study Level (Multilevel)")
 			singleVariable:		true
 			allowedColumns:		["nominal"]
 			info: qsTr("Variable indicating the study level nesting. This variable is used to specify the nesting of the studies in the meta-analysis. The nesting is used to specify the model structure and to account for the correlation between the effect sizes within each study.")
-		}
-
-		AssignedVariablesList
-		{
-			name:				"studyLabels"
-			title:				qsTr("Study Labels")
-			singleVariable:		true
-			allowedColumns:		["nominal"]
-			info: qsTr("Variable containing labels for the studies. Used for labeling outputs and plots.")
 		}
 
 		AssignedVariablesList
@@ -198,13 +189,13 @@ Form
 		analysisType:	"NoBMA"
 		id:				sectionModel
 	}
-/*
+
 	//// Priors Section ////
 	Section
 	{
 		title: 				qsTr("Prior Distributions (Custom)")
 		columns:			1
-		enabled:			priorDistributionsEffectSizeAndHeterogeneity.value === "custom" || publicationBiasAdjustment.value === "custom"
+		enabled:			priorDistributionsEffectSizeAndHeterogeneity.value === "custom"
 		onEnabledChanged:	if(!enabled) expanded = false
 
 
@@ -213,7 +204,7 @@ Form
 		{
 			visible:				priorDistributionsEffectSizeAndHeterogeneity.value === "custom"
 			Layout.preferredWidth:	parent.width
-			componentType:			"modelsEffect"
+			componentType:			"priorsEffect"
 			analysisType:			"normal"
 		}
 
@@ -222,7 +213,7 @@ Form
 		{
 			visible:				priorDistributionsEffectSizeAndHeterogeneity.value === "custom"
 			Layout.preferredWidth:	parent.width
-			componentType:			"modelsHeterogeneity"
+			componentType:			"priorsHeterogeneity"
 			analysisType:			"normal"
 		}
 
@@ -249,16 +240,16 @@ Form
 		{
 			visible:				priorDistributionsEffectSizeAndHeterogeneity.value === "custom" && bayesianModelAveragingEffectSize.checked
 			Layout.preferredWidth:	parent.width
-			componentType:			"modelsEffectNull"
+			componentType:			"priorsEffectNull"
 			analysisType:			"normal"
 		}
 
-		// effect prior
+		// heterogeneity prior
 		MA.RobustBayesianMetaAnalysisPriors
 		{
 			visible:				priorDistributionsEffectSizeAndHeterogeneity.value === "custom" && bayesianModelAveragingHeterogeneity.checked
 			Layout.preferredWidth:	parent.width
-			componentType:			"modelsHeterogeneityNull"
+			componentType:			"priorsHeterogeneityNull"
 			analysisType:			"normal"
 		}
 
@@ -278,7 +269,7 @@ Form
 			componentType:			"null"
 		}
 	}
-*/
+
 	//// Inference Section ////
 	MA.RobustBayesianMetaAnalysisInference
 	{

@@ -29,8 +29,8 @@ ColumnLayout
 	{
 		text:	switch (componentType) 
 		{
-			case "modelsSelectionModels":		qsTr("Publication bias: selection models"); break;
-			case "modelsSelectionModelsNull":	qsTr("Publication bias: selection models (null)"); break;
+			case "priorsBiasSelectionModels":		qsTr("Publication bias: selection models"); break;
+			case "priorsBiasSelectionModelsNull":	qsTr("Publication bias: selection models (null)"); break;
 		}
 		Layout.preferredHeight:	20 * preferencesModel.uiScale
 	}
@@ -50,7 +50,7 @@ ColumnLayout
 		optionKey:				"name"
 		defaultValues:			switch (componentType) 
 		{
-			case "modelsSelectionModels":
+			case "priorsBiasSelectionModels":
 				[
 					{"type": "twoSided",	"pValues": "(.05)",				"alpha": "(1,1)",	"priorWeight": "1/12"},
 					{"type": "twoSided",	"pValues": "(.05, .10)",		"alpha": "(1,1,1)",	"priorWeight": "1/12"},
@@ -60,7 +60,7 @@ ColumnLayout
 					{"type": "oneSided",	"pValues": "(.025, .05, .10)",	"alpha": "(1,1,1,1)","priorWeight": "1/12"}
 				];
 				break;
-			case "modelsSelectionModelsNull":
+			case "priorsBiasSelectionModelsNull":
 				[{"type": "none"}];
 				break;
 		}

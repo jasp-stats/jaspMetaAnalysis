@@ -28,6 +28,8 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   options[["advancedMcmcBurnin"]]     <- 1000
   options[["advancedMcmcSamples"]]    <- 2000
 
+  saveRDS(options, file = "C:/JASP-Packages/options.RDS")
+
   # attach priors to options
   options <- .robmaAttachPriors(options)
 
@@ -113,21 +115,23 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 }
 
 .robmaDependencies <- c(
-  "effectSize", "effectSizeStandardError", "predictors", "predictors.types", "studyLevelMultilevel", "subgroup", "effectSizeMeasure",  # RoBMA / NoBMA
-  "successesGroup1", "successesGroup2", "observationsGroup1", "observationsGroup2",                                                    # BiBMA
+  "effectSize", "effectSizeStandardError", "effectSizeMeasure",                       # RoBMA / NoBMA
+  "successesGroup1", "successesGroup2", "sampleSizeGroup1", "sampleSizeGroup2",   # BiBMA
+  "predictors", "predictors.types", "studyLevelMultilevel", "subgroup",
   "effectSizeModelTerms", "effectSizeModelIncludeIntercept",
   "bayesianModelAveragingEffectSize", "bayesianModelAveragingHeterogeneity", "bayesianModelAveragingModerations", "bayesianModelAveragingPublicationBias",
   "priorDistributionsEffectSizeAndHeterogeneity", "priorDistributionsScale", "publicationBiasAdjustment", "modelExpectedDirectionOfTheEffect",
   # prior distributions
-  "modelsEffect", "modelsEffectNull", "modelsHeterogeneity", "modelsHeterogeneityNull",
-  "modelsSelectionModels", "modelsSelectionModelsNull", "modelsPet", "modelsPetNull", "modelsPeese", "modelsPeeseNull",
+  "priorsEffect", "priorsEffectNull", "priorsHeterogeneity", "priorsHeterogeneityNull",
+  "priorsModeratorsFactor", "priorsModeratorsFactorNull", "priorsModeratorsContinuous", "priorsModeratorsContinuousNull",
+  "priorsBiasSelectionModels", "priorsBiasSelectionModelsNull", "priorsBiasPet", "priorsBiasPetNull", "priorsBiasPeese", "priorsBiasPeeseNull",
+  "priorsBaseline", "priorsBaselineNull",
 
   # MCMC settings
   "advancedMcmcAdaptation", "advancedMcmcBurnin", "advancedMcmcSamples", "advancedMcmcChains", "advancedMcmcThin",
   "autofit", "advancedAutofitRHat", "advancedAutofitRHatTarget", "advancedAutofitEss", "advancedAutofitEssTarget", "advancedAutofitMcmcError",
   "advancedAutofitMcmcErrorTarget", "advancedAutofitMcmcErrorSd", "advancedAutofitMcmcErrorSdTarget", "advancedAutofitMaximumFittingTime",
   "advancedAutofitMaximumFittingTimeTarget", "advancedAutofitMaximumFittingTimeTargetUnit", "advancedAutofitExtendSamples",
-
   "seed", "setSeed"
 )
 
@@ -151,7 +155,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
         c("y", "se")
       )
     } else if (options[["analysis"]] == "BiBMA") {
-      fitData <- dataset[, c(options[["successesGroup1"]], options[["successesGroup2"]], options[["observationsGroup1"]], options[["observationsGroup2"]], options[["predictors"]])]
+      fitData <- dataset[, c(options[["successesGroup1"]], options[["successesGroup2"]], options[["sampleSizeGroup1"]], options[["sampleSizeGroup2"]], options[["predictors"]])]
       colnames(fitData)[1:4] <- c("x1", "x2", "n1", "n2")
     }
 
@@ -174,8 +178,8 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     # dispatch the specified effect size measure
     if (options[["analysis"]] %in% c("RoBMA", "NoBMA")) {
       fitCall <- list(
-        "es" = dataset[, options[["effectSize"]]],
-        "se" = dataset[, options[["effectSizeStandardError"]]]
+        "es" = dataset[[options[["effectSize"]]]],
+        "se" = dataset[[options[["effectSizeStandardError"]]]]
       )
       names(fitCall)[1] <- switch(
         options[["effectSizeMeasure"]],
@@ -186,10 +190,10 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
       )
     } else if (options[["analysis"]] == "BiBMA") {
       fitCall <- list(
-        "x1" = dataset[, options[["successesGroup1"]]],
-        "x2" = dataset[, options[["successesGroup2"]]],
-        "n1" = dataset[, options[["observationsGroup1"]]],
-        "n2" = dataset[, options[["observationsGroup2"]]]
+        "x1" = dataset[[options[["successesGroup1"]]]],
+        "x2" = dataset[[options[["successesGroup2"]]]],
+        "n1" = dataset[[options[["sampleSizeGroup1"]]]],
+        "n2" = dataset[[options[["sampleSizeGroup2"]]]]
       )
     }
 
@@ -219,11 +223,21 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   fitCall$priors_heterogeneity      <- if (is.null(priors[["heterogeneity"]]))     list() else priors[["heterogeneity"]]
   fitCall$priors_effect_null        <- if (is.null(priors[["effectNull"]]))        list() else priors[["effectNull"]]
   fitCall$priors_heterogeneity_null <- if (is.null(priors[["heterogeneityNull"]])) list() else priors[["heterogeneityNull"]]
-  # TODO: dispatch BiBMA baseline prior
+
   if (options[["analysis"]] == "RoBMA") {
-    fitCall$priors_bias               <- if (is.null(priors[["bias"]]))     list() else priors[["bias"]]
-    fitCall$priors_bias_null          <- if (is.null(priors[["biasNull"]])) list() else priors[["biasNull"]]
+    fitCall$priors_bias       <- if (is.null(priors[["bias"]]))     list() else priors[["bias"]]
+    fitCall$priors_bias_null  <- if (is.null(priors[["biasNull"]])) list() else priors[["biasNull"]]
+    fitCall$effect_direction  <- switch(
+      options[["modelExpectedDirectionOfTheEffect"]],
+      "detect" = if (median(dataset[[options[["effectSize"]]]]) >= 0) "positive" else "negative",
+      options[["modelExpectedDirectionOfTheEffect"]]
+    )
   }
+  if (options[["analysis"]] == "BiBMA") {
+    fitCall$priors_baseline       <- if (is.null(priors[["baseline"]]))     list() else priors[["baseline"]]
+    fitCall$priors_baseline_null  <- if (is.null(priors[["baselineNull"]])) list() else priors[["baselineNull"]]
+  }
+
 
   # sampling settings
   fitCall$chains <- options[["advancedMcmcChains"]]
@@ -251,26 +265,14 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   fitCall$silent    <- TRUE
 
   # select fitting function
-  if (options[["analysis"]] == "RoBMA") {
-    if (.maIsMetaregression(options)) {
-      fit <- try(do.call(RoBMA::RoBMA.reg, fitCall))
-    } else {
-      fit <- try(do.call(RoBMA::RoBMA, fitCall))
-    }
-  } else if (options[["analysis"]] == "NoBMA") {
-    if (.maIsMetaregression(options)) {
-      fit <- try(do.call(RoBMA::NoBMA.reg, fitCall))
-    } else {
-      fit <- try(do.call(RoBMA::NoBMA, fitCall))
-    }
-  } else if (options[["analysis"]] == "BiBMA") {
-    if (.maIsMetaregression(options)) {
-      fit <- try(do.call(RoBMA::BiBMA.reg, fitCall))
-    } else {
-      fit <- try(do.call(RoBMA::BiBMA, fitCall))
-    }
-  }
+  fitFunc <- switch (
+    options[["analysis"]],
+    "RoBMA" = if (.maIsMetaregression(options)) RoBMA::RoBMA.reg else RoBMA::RoBMA,
+    "NoBMA" = if (.maIsMetaregression(options)) RoBMA::NoBMA.reg else RoBMA::NoBMA,
+    "BiBMA" = if (.maIsMetaregression(options)) RoBMA::BiBMA.reg else RoBMA::BiBMA
+  )
 
+  fit <- try(do.call(fitFunc, fitCall))
 
   # add attributes
   attr(fit, "subgroup") <- paste0(subgroupName)
@@ -340,11 +342,11 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 }
 
 # priors related functions
-.robmaAttachPriors                <- function(options) {
+.robmaAttachPriors             <- function(options) {
 
   object <- list()
 
-  ### effect size & heterogeneity
+  # effect size & heterogeneity ----
   # the default (= psychology) priors are defined on smd scale, but they can be transformed to logOR/Fisher's z
   # the medicine priors for logOR, and SMD are defined on logOR and SMD scales, we use the SMD ones to be transformed into Fisher's z
   # the remaining medicine priors (logRR, logHR, RD) are on the appropriate scales already and cannot be transformed
@@ -376,8 +378,8 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
   } else if (options[["priorDistributionsEffectSizeAndHeterogeneity"]] == "custom") {
 
-    object[["effect"]]        <- lapply(options[["modelsEffect"]],        .robmaExtractPriorsFromOptions, type = "continuous")
-    object[["heterogeneity"]] <- lapply(options[["modelsHeterogeneity"]], .robmaExtractPriorsFromOptions, type = "continuous")
+    object[["effect"]]        <- lapply(options[["priorsEffect"]],        .robmaExtractPriorsFromOptions, type = "continuous")
+    object[["heterogeneity"]] <- lapply(options[["priorsHeterogeneity"]], .robmaExtractPriorsFromOptions, type = "continuous")
 
   }
 
@@ -385,97 +387,113 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   if (options[["bayesianModelAveragingEffectSize"]] && options[["priorDistributionsEffectSizeAndHeterogeneity"]] != "custom") {
     object[["effectNull"]]    <- list(RoBMA::set_default_priors("effect", null = TRUE))
   } else if (options[["bayesianModelAveragingEffectSize"]]) {
-    object[["effectNull"]]    <- lapply(options[["modelsEffectNull"]], .robmaExtractPriorsFromOptions, type = "continuous")
+    object[["effectNull"]]    <- lapply(options[["priorsEffectNull"]], .robmaExtractPriorsFromOptions, type = "continuous")
   } else {
     object[["effectNull"]]    <- list()
   }
   if (options[["bayesianModelAveragingHeterogeneity"]] && options[["priorDistributionsEffectSizeAndHeterogeneity"]] != "custom") {
     object[["heterogeneityNull"]] <- list(RoBMA::set_default_priors("heterogeneity", null = TRUE))
   } else if (options[["bayesianModelAveragingHeterogeneity"]]) {
-    object[["heterogeneityNull"]] <- lapply(options[["modelsHeterogeneityNull"]], .robmaExtractPriorsFromOptions, type = "continuous")
+    object[["heterogeneityNull"]] <- lapply(options[["priorsHeterogeneityNull"]], .robmaExtractPriorsFromOptions, type = "continuous")
   } else {
     object[["heterogeneityNull"]] <- list()
   }
 
-  ### publication bias
+  # publication bias ----
   # the PEESE prior distribution scales with the inverse of the effect size transformation
   # (it's on the relationship between es and se^2; the PET prior is effect size transformation invariant)
   # (it also scales with 1/scale^2 for width of the prior distribution, as smaller prior means lower association between es and se^2)
-  if (options[["publicationBiasAdjustment"]] == "PSMA") {
+  if (options[["analysis"]] == "RoBMA") {
+    if (options[["publicationBiasAdjustment"]] == "PSMA") {
 
-    # select all priors
-    tempPriors <- RoBMA::set_default_priors("bias", rescale = options[["priorDistributionsScale"]])
+      # select all priors
+      tempPriors <- RoBMA::set_default_priors("bias", rescale = options[["priorDistributionsScale"]])
 
-    # effect size re-scaling for PEESE
-    if (options[["effectSizeMeasure"]] == "fishersZ") {
-      tempPriors[[8]] <- .robmaRescalePriorDistribution(tempPriors[[8]], 1/0.5)
-    } else if (options[["effectSizeMeasure"]] == "logOR") {
-      tempPriors[[8]] <- .robmaRescalePriorDistribution(tempPriors[[8]], 1/1.813799)
+      # effect size re-scaling for PEESE
+      if (options[["effectSizeMeasure"]] == "fishersZ") {
+        tempPriors[[8]] <- .robmaRescalePriorDistribution(tempPriors[[8]], 1/0.5)
+      } else if (options[["effectSizeMeasure"]] == "logOR") {
+        tempPriors[[8]] <- .robmaRescalePriorDistribution(tempPriors[[8]], 1/1.813799)
+      }
+
+      object[["bias"]] <- tempPriors
+
+    } else if (options[["publicationBiasAdjustment"]] == "PP") {
+
+      # select PET-PEESE priors only
+      tempPriors <- RoBMA::set_default_priors("bias", rescale = .robmaPriorBiasScale(options))[7:8]
+
+      # re-standardize the prior model probability
+      for (i in seq_along(tempPriors)) {
+        tempPriors[[i]][["prior_weights"]] <- 1/2
+      }
+
+      # effect size re-scaling for PEESE
+      if (options[["effectSizeMeasure"]] == "fishersZ") {
+        tempPriors[[2]] <- .robmaRescalePriorDistribution(tempPriors[[2]], 1/0.5)
+      } else if (options[["effectSizeMeasure"]] == "logOR") {
+        tempPriors[[2]] <- .robmaRescalePriorDistribution(tempPriors[[2]], 1/1.813799)
+      }
+
+      object[["bias"]] <- tempPriors
+
+    } else if (options[["publicationBiasAdjustment"]] == "original") {
+
+      # select the first two weight functions only
+      tempPriors <- RoBMA::set_default_priors("bias", rescale = .robmaPriorBiasScale(options))[1:2]
+
+      # re-standardize the prior model probability
+      for (i in seq_along(tempPriors)) {
+        tempPriors[[i]][["prior_weights"]] <- 1/2
+      }
+
+      object[["bias"]] <- tempPriors
+
+    } else if (options[["publicationBiasAdjustment"]] == "custom") {
+
+      object[["bias"]] <- c(
+        lapply(options[["priorsBiasSelectionModels"]], .robmaExtractPriorsFromOptions, type = "weightfunction"),
+        lapply(options[["priorsBiasPet"]],             .robmaExtractPriorsFromOptions, type = "pet"),
+        lapply(options[["priorsBiasPeese"]],           .robmaExtractPriorsFromOptions, type = "peese")
+      )
+
+    } else if (options[["publicationBiasAdjustment"]] == "none") {
+
+      object[["bias"]] <- list()
+
     }
 
-    object[["bias"]] <- tempPriors
-
-  } else if (options[["publicationBiasAdjustment"]] == "PP") {
-
-    # select PET-PEESE priors only
-    tempPriors <- RoBMA::set_default_priors("bias", rescale = .robmaPriorBiasScale(options))[7:8]
-
-    # re-standardize the prior model probability
-    for (i in seq_along(tempPriors)) {
-      tempPriors[[i]][["prior_weights"]] <- 1/2
+    # null prior distributions
+    if (options[["publicationBiasAdjustment"]] == "none") {
+      object[["biasNull"]] <- list(RoBMA::set_default_priors("bias", null = TRUE))
+    } else if (options[["bayesianModelAveragingPublicationBias"]] && options[["publicationBiasAdjustment"]] != "custom") {
+      object[["biasNull"]] <- list(RoBMA::set_default_priors("bias", null = TRUE))
+    } else if (options[["bayesianModelAveragingPublicationBias"]]) {
+      object[["biasNull"]] <- c(
+        lapply(options[["priorsBiasSelectionModelsNull"]], .robmaExtractPriorsFromOptions, type = "weightfunction"),
+        lapply(options[["priorsBiasPetNull"]],             .robmaExtractPriorsFromOptions, type = "pet"),
+        lapply(options[["priorsBiasPeeseNull"]],           .robmaExtractPriorsFromOptions, type = "peese")
+      )
+    } else {
+      object[["biasNull"]] <- NULL
     }
-
-    # effect size re-scaling for PEESE
-    if (options[["effectSizeMeasure"]] == "fishersZ") {
-      tempPriors[[2]] <- .robmaRescalePriorDistribution(tempPriors[[2]], 1/0.5)
-    } else if (options[["effectSizeMeasure"]] == "logOR") {
-      tempPriors[[2]] <- .robmaRescalePriorDistribution(tempPriors[[2]], 1/1.813799)
-    }
-
-    object[["bias"]] <- tempPriors
-
-  } else if (options[["publicationBiasAdjustment"]] == "2w") {
-
-    # select the first two weight functions only
-    tempPriors <- RoBMA::set_default_priors("bias", rescale = .robmaPriorBiasScale(options))[1:2]
-
-    # re-standardize the prior model probability
-    for (i in seq_along(tempPriors)) {
-      tempPriors[[i]][["prior_weights"]] <- 1/2
-    }
-
-    object[["bias"]] <- tempPriors
-
-  } else if (options[["publicationBiasAdjustment"]] == "custom") {
-
-    object[["bias"]] <- c(
-      lapply(options[["modelsSelectionModels"]], .robmaExtractPriorsFromOptions, type = "weightfunction"),
-      lapply(options[["modelsPet"]],             .robmaExtractPriorsFromOptions, type = "pet"),
-      lapply(options[["modelsPeese"]],           .robmaExtractPriorsFromOptions, type = "peese")
-    )
-
-  } else if (options[["publicationBiasAdjustment"]] == "none") {
-
-    object[["bias"]] <- list()
-
   }
 
-  # null prior distributions
-  if (options[["publicationBiasAdjustment"]] == "none") {
-    object[["biasNull"]] <- list(RoBMA::set_default_priors("bias", null = TRUE))
-  } else if (options[["bayesianModelAveragingPublicationBias"]] && options[["publicationBiasAdjustment"]] != "custom") {
-    object[["biasNull"]] <- list(RoBMA::set_default_priors("bias", null = TRUE))
-  } else if (options[["bayesianModelAveragingPublicationBias"]]) {
-    object[["biasNull"]] <- c(
-      lapply(options[["modelsSelectionModelsNull"]], .robmaExtractPriorsFromOptions, type = "weightfunction"),
-      lapply(options[["modelsPetNull"]],             .robmaExtractPriorsFromOptions, type = "pet"),
-      lapply(options[["modelsPeeseNull"]],           .robmaExtractPriorsFromOptions, type = "peese")
-    )
-  } else {
-    object[["biasNull"]] <- NULL
+
+  # baseline ----
+  if (options[["analysis"]] == "BiBMA") {
+
+    if (options[["priorDistributionsEffectSizeAndHeterogeneity"]] != "custom") {
+      object[["baseline"]]     <- NULL
+      object[["baselineNull"]] <- list(RoBMA::set_default_binomial_priors("baseline", null = TRUE))
+    } else {
+      object[["baseline"]]     <- lapply(options[["priorsBaseline"]],     .robmaExtractPriorsFromOptions, type = "baseline")
+      object[["baselineNull"]] <- lapply(options[["priorsBaselineNull"]], .robmaExtractPriorsFromOptions, type = "baseline")
+    }
   }
 
-  ### moderation
+
+  # moderation ----
   # the same effect size transformations as to effect sizes apply
   tempObject <- list()
   for (i in seq_along(options[["effectSizeModelTerms"]])) {
@@ -528,8 +546,8 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
       tempPrior[["alt"]] <- switch(
         tempTermType,
-        "nominal" = .robmaExtractPriorsFromOptions(options[["modelsFactorModerators"]][[which(sapply(options[["modelsFactorModerators"]], "[[", "value") == tempTerm)]], type = "factor"),
-        "scale"   = .robmaExtractPriorsFromOptions(options[["modelsContinuousModerators"]][[which(sapply(options[["modelsContinuousModerators"]], "[[", "value") == tempTerm)]], type = "continuous")
+        "nominal" = .robmaExtractPriorsFromOptions(options[["priorsModeratorsFactor"]][[which(sapply(options[["priorsModeratorsFactor"]], "[[", "value") == tempTerm)]], type = "factor"),
+        "scale"   = .robmaExtractPriorsFromOptions(options[["priorsModeratorsContinuous"]][[which(sapply(options[["priorsModeratorsContinuous"]], "[[", "value") == tempTerm)]], type = "continuous")
       )
 
     }
@@ -548,12 +566,13 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
       tempPrior[["null"]] <- switch(
         tempTermType,
-        "nominal" = .robmaExtractPriorsFromOptions(options[["modelsFactorModeratorsNull"]][[which(sapply(options[["modelsFactorModeratorsNull"]], "[[", "value") == tempTerm)]], type = "factor"),
-        "scale"   = .robmaExtractPriorsFromOptions(options[["modelsContinuousModeratorsNull"]][[which(sapply(options[["modelsContinuousModeratorsNull"]], "[[", "value") == tempTerm)]], type = "continuous"),
+        "nominal" = .robmaExtractPriorsFromOptions(options[["priorsModeratorsFactorNull"]][[which(sapply(options[["priorsModeratorsFactorNull"]], "[[", "value") == tempTerm)]], type = "factor"),
+        "scale"   = .robmaExtractPriorsFromOptions(options[["priorsModeratorsContinuousNull"]][[which(sapply(options[["priorsModeratorsContinuousNull"]], "[[", "value") == tempTerm)]], type = "continuous"),
       )
 
+      # assert the proper contrast (based on the alternative prior distribution)
       if (tempTermType == "nominal" && BayesTools::is.prior.point(tempPrior[["null"]])) {
-        tempPrior[["null"]] <- RoBMA::prior_factor("spike", list(tempPrior[["alt"]][["parameters"]][["location"]]), contrast = .robmaPriorGetContrast(tempPrior[["alt"]]))
+        tempPrior[["null"]] <- RoBMA::prior_factor("spike", list(tempPrior[["null"]][["parameters"]][["location"]]), contrast = .robmaPriorGetContrast(tempPrior[["alt"]]))
       }
     }
 
@@ -562,6 +581,29 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
   }
   object[["moderators"]] <- tempObject
+
+  # verify that all required priors were specified ----
+  if (length(object[["effectNull"]]) == 0 && length(object[["effect"]]) == 0)
+    .quitAnalysis(gettext("At least one prior distribution for the Effect component has to be specified."))
+  if (length(object[["heterogeneityNull"]]) == 0 && length(object[["heterogeneity"]]) == 0)
+    .quitAnalysis(gettext("At least one prior distribution for the Heterogeneity component has to be specified."))
+  for (i in seq_along(object[["moderators"]])) {
+    if (length(object[["moderators"]][[i]][["alt"]]) == 0 && length(object[["moderators"]][[i]][["null"]]) == 0)
+      .quitAnalysis(gettextf("At least one prior distribution for the %1$s moderator component has to be specified.", names(object[["moderators"]])[i]))
+    if (length(object[["moderators"]][[i]]) == 2 && BayesTools::is.prior.factor(object[["moderators"]][[i]][[1]]) &&
+        !(
+          (BayesTools::is.prior.meandif(object[["moderators"]][[i]][[1]]) && BayesTools::is.prior.meandif(object[["moderators"]][[i]][[2]])) ||
+          (BayesTools::is.prior.orthonormal(object[["moderators"]][[i]][[1]]) && BayesTools::is.prior.orthonormal(object[["moderators"]][[i]][[2]])) ||
+          (BayesTools::is.prior.independent(object[["moderators"]][[i]][[1]]) && BayesTools::is.prior.independent(object[["moderators"]][[i]][[2]])) ||
+          (BayesTools::is.prior.treatment(object[["moderators"]][[i]][[1]]) && BayesTools::is.prior.treatment(object[["moderators"]][[i]][[2]]))
+        ))
+      .quitAnalysis(gettextf("Both priors distributions for the %1$s moderator component must have the same contrast type.", names(object[["moderators"]])[i]))
+  }
+  if (options[["analysis"]] == "RoBMA" && length(object[["bias"]]) == 0 && length(object[["biasNull"]]) == 0)
+    .quitAnalysis(gettext("At least one prior distribution for the Publication Bias component has to be specified."))
+  if (options[["analysis"]] == "BiBMA" && length(object[["baseline"]]) == 0 && length(object[["baselineNull"]]) == 0)
+    .quitAnalysis(gettext("At least one prior distribution for the Baseline component has to be specified."))
+
 
   # attach and return
   attr(options, "priors") <- object
@@ -585,7 +627,15 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   optionsPrior   <- .robmaEvalOptionsToPriors(optionsPrior)
 
   if (optionsPrior[["type"]] == "none")
-    return(RoBMA::prior_none(prior_weights = optionsPrior[["priorWeight"]]))
+    return(switch(
+      type,
+      "continuous"      = NULL,
+      "factor"          = NULL,
+      "baseline"        = NULL,
+      "weightfunction"  = RoBMA::prior_none(prior_weights = optionsPrior[["priorWeight"]]),
+      "pet"             = RoBMA::prior_none(prior_weights = optionsPrior[["priorWeight"]]),
+      "peese"           = RoBMA::prior_none(prior_weights = optionsPrior[["priorWeight"]])
+    ))
   else
     return(do.call(
       what = switch(
@@ -594,7 +644,8 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
         "factor"          = RoBMA::prior_factor,
         "weightfunction"  = RoBMA::prior_weightfunction,
         "pet"             = RoBMA::prior_PET,
-        "peese"           = RoBMA::prior_PEESE
+        "peese"           = RoBMA::prior_PEESE,
+        "baseline"        = RoBMA::prior_factor # more magic happens in the function .robmaMapOptionsToPriors function
       ),
       args = .robmaMapOptionsToPriors(optionsPrior, type)
     ))
@@ -663,6 +714,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     optionsPrior[["type"]],
     "gammaAB" = "gamma",
     "gammaK0" = "gamma",
+    "spike0"  = "spike",
     optionsPrior[["type"]]
   )
 
@@ -687,7 +739,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     "twoSidedFixed" = list("steps" = optionsPrior[["pValues"]], omega = optionsPrior[["omega"]])
   )
 
-  if(!arguments[["distribution"]] %in% c("oneSided", "twoSided", "oneSidedFixed", "twoSidedFixed", "spike", "uniform", "mnormal", "mt", "spike0")) {
+  if (!arguments[["distribution"]] %in% c("oneSided", "twoSided", "oneSidedFixed", "twoSidedFixed", "spike", "uniform", "mnormal", "mt", "spike0")) {
     arguments[["truncation"]] <- list(
       lower   = optionsPrior[["truncationLower"]],
       upper   = optionsPrior[["truncationUpper"]]
@@ -696,8 +748,12 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
   arguments[["prior_weights"]] <- optionsPrior[["priorWeight"]]
 
-  if(type == "factor") {
+  if (type == "factor") {
     arguments[["contrast"]] <- optionsPrior[["contrast"]]
+  }
+
+  if (type == "baseline") {
+    arguments[["contrast"]] <- "independent"
   }
 
   return(arguments)
@@ -773,7 +829,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     options[["analysis"]],
     "RoBMA" = c("effect", "heterogeneity", "bias"),
     "NoBMA" = c("effect", "heterogeneity"),
-    "BiBMA" = c("effect", "heterogeneity")
+    "BiBMA" = c("effect", "heterogeneity", "baseline")
   )
 
   ### create overview table
@@ -795,20 +851,16 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     tempPriors     <- priors[[component]]
 
     tempWeightsNull <- if (length(tempPriorsNull) > 0) sum(sapply(tempPriorsNull, \(x) x[["prior_weights"]])) else 0
-    tempWeights     <- if (length(tempPriors) > 0) sum(sapply(tempPriors, \(x) x[["prior_weights"]]))         else 0
+    tempWeights     <- if (length(tempPriors) > 0)     sum(sapply(tempPriors,     \(x) x[["prior_weights"]])) else 0
 
     out[[component]] <- data.frame(
       component   = .robmaComponentNames(component, options),
       models      = sprintf("%1$i/%2$i", length(tempPriors), length(tempPriorsNull) + length(tempPriors)),
       priorProb   = tempWeights / (tempWeights + tempWeightsNull)
     )
-
-    if (length(tempPriorsNull) == 0 && length(tempPriors) == 0)
-      tempTable$addFootnote(gettextf("At least one prior distribution for %1$s component has to be specified.", .robmaComponentNames(component, options)))
   }
 
   tempTable$setData(do.call(rbind, out))
-  tempTable$addFootnote(gettext("The analysis will estimate multiple meta-analytic models using MCMC and might require a prolonged time to complete."), symbol = "\u26A0")
 
   return(tempTable)
 }
@@ -819,7 +871,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     options[["analysis"]],
     "RoBMA" = c("effect", "heterogeneity", "bias"),
     "NoBMA" = c("effect", "heterogeneity"),
-    "BiBMA" = c("effect", "heterogeneity")
+    "BiBMA" = c("effect", "heterogeneity", "baseline")
   )
 
   ### create overview table
@@ -905,9 +957,12 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   testsTable$addColumnInfo(name = "postProb",  title = gettext("P(M|data)"), type = "number")
   .robmaAddBfColumn(testsTable, options)
 
-  # stop and display errors
-  if (is.null(fit))
+  # display waiting message on no fit
+  if (is.null(fit)) {
+    if (options[["analysis"]] == "RoBMA")
+      testsTable$addFootnote(gettext("The analysis will estimate a complex meta-analytic model ensemble using MCMC and might require a prolonged time to complete."), symbol = "\u26A0")
     return()
+  }
 
   # stop with error if only single fit requested and failed
   if (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) {
@@ -1358,7 +1413,6 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   .maAddCiColumn(estimatedMarginalMeansTable, options)
   if (options[["estimatedMarginalMeansEffectSizeTestAgainst0"]])
     .robmaAddBfColumn(estimatedMarginalMeansTable, options)
-
 
   # get the estimate
   estimatedMarginalMeans <- .maSafeRbind(lapply(fit, function(x) {
@@ -2341,13 +2395,6 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     ))
   }
 
-  # heterogeneity summary
-  hetSummary <- RoBMA::summary_heterogeneity(
-    fit,
-    conditional = conditional,
-    probs       = c(.5 + c(-1, 1) * options[["confidenceIntervalsLevel"]] / 2)
-  )[[if (conditional) "estimates_conditional" else "estimates"]]
-
   # construct the rows
   tempRows <- list()
   tempRows[["effectSize"]] <- data.frame(.robmaComputePooledEffect(fit, options, conditional))
@@ -2358,6 +2405,13 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   } else if (.maIsMetaregression(options) && !.robmaIsMetaregressionCentered(options)) {
     tempRows[["interceptEffectSize"]] <- data.frame(.robmaComputeInterceptEffect(fit, options, conditional))
   }
+
+  # heterogeneity summary
+  hetSummary <- RoBMA::summary_heterogeneity(
+    fit,
+    conditional = conditional,
+    probs       = c(.5 + c(-1, 1) * options[["confidenceIntervalsLevel"]] / 2)
+  )[[if (conditional) "estimates_conditional" else "estimates"]]
 
   if (options[["heterogeneityTau"]])
     tempRows[["heterogeneityTau"]] <- data.frame(
@@ -2545,15 +2599,14 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   priors          <- attr(options, "priors")
   priorModerators <- priors[["moderators"]]
 
-  isCentered <- TRUE
   for (priorModerator in priorModerators) {
     for (i in seq_along(priorModerator)) {
-      if (BayesTools::is.prior.treatment(priorModerator[[i]]))
-        isCentered <- FALSE
+      if (BayesTools::is.prior.treatment(priorModerator[[i]]) || BayesTools::is.prior.independent(priorModerator[[i]]))
+        return(FALSE)
     }
   }
 
-  return(isCentered)
+  return(TRUE)
 }
 .robmaGetEstimatedMarginalMeansOptions <- function(options){
 

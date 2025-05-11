@@ -854,7 +854,21 @@
       weights        = weights(fit),
       id             = seq_along(fit[["yi"]])
     )
-  } else {
+  } else if (options[["analysis"]] == "BiBMA") {
+    tempDf <- metafor::escalc(
+      measure = "OR",
+      ai      = dataset[[options[["successesGroup1"]]]],
+      n1i     = dataset[[options[["sampleSizeGroup1"]]]],
+      ci      = dataset[[options[["successesGroup2"]]]],
+      n2i     = dataset[[options[["sampleSizeGroup2"]]]]
+    )
+    dfForest <- data.frame(
+      effectSize     = tempDf[["yi"]],
+      standardError  = sqrt(tempDf[["vi"]]),
+      weights        = (dataset[[options[["sampleSizeGroup1"]]]] + dataset[[options[["sampleSizeGroup2"]]]]),
+      id             = seq_len(nrow(dataset))
+    )
+  }else {
     dfForest <- data.frame(
       effectSize     = dataset[[options[["effectSize"]]]],
       standardError  = dataset[[options[["effectSizeStandardError"]]]],

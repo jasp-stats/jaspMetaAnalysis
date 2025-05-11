@@ -354,7 +354,7 @@ Section
 			{
 				title:		qsTr("Estimate")
 				columns:	2
-				visible:	analysisType === "metaAnalysis" || analysisType === "RoBMA"  || analysisType === "NoBMA"
+				visible:	analysisType === "metaAnalysis" || analysisType === "RoBMA"  || analysisType === "NoBMA" || analysisType === "BiBMA"
 				enabled:	(method.value != "fixedEffects" || method.value != "equalEffects")
 
 				CheckBox
@@ -379,7 +379,7 @@ Section
 					name:		"forestPlotHeterogeneityEstimateI2"
 					enabled:	(analysisType === "RoBMA"  || analysisType === "NoBMA") || sectionModel.heterogeneityModelTermsCount == 0
 					checked:	false
-					info: qsTr("Include the meta-analytic I², the percentage of total variation across studies due to heterogeneity in the model information section. Not available for multilevel/multivariate meta-analysis.")
+					info: qsTr("Include the meta-analytic I², the percentage of total variation across studies due to heterogeneity in the model information section. Not available for multilevel/multivariate and binomial meta-analysis.")
 				}
 
 				CheckBox
@@ -388,7 +388,7 @@ Section
 					name:		"forestPlotHeterogeneityEstimateH2"	
 					enabled:	(analysisType === "RoBMA"  || analysisType === "NoBMA") || sectionModel.heterogeneityModelTermsCount == 0
 					checked:	false
-					info: qsTr("Include the meta-analytic H², an index indicating the ratio of total variability to sampling variability in the model information section. Not available for multilevel/multivariate meta-analysis.")
+					info: qsTr("Include the meta-analytic H², an index indicating the ratio of total variability to sampling variability in the model information section. Not available for multilevel/multivariate and binomial meta-analysis.")
 				}
 			}
 			

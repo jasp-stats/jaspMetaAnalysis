@@ -26,7 +26,7 @@ Form
 
 	VariablesForm
 	{
-		preferredHeight:	(sectionAdvanced.enableStudyLevelNesting.checked ? 450 : 425) * preferencesModel.uiScale
+		preferredHeight:	(sectionAdvanced.enableStudyLevelNesting.checked ? 400 : 350) * preferencesModel.uiScale
 		removeInvisibles:	true
 
 		AvailableVariablesList
@@ -80,26 +80,17 @@ Form
 			info: qsTr("Variables to include as predictors (moderators) in the meta-regression model. See the 'Model' section for the meta-regression specification details.")
 		}
 
-
 		AssignedVariablesList
 		{
 			name:				"studyLevelMultilevel"
 			title:				qsTr("Study Level (Multilevel)")
+			id:					studyLevelMultilevel
 			singleVariable:		true
 			allowedColumns:		["nominal"]
 			visible:			 sectionAdvanced.enableStudyLevelNesting.checked
 			property bool active:	sectionAdvanced.enableStudyLevelNesting.checked
 			onActiveChanged: 		if (!active && count > 0) itemDoubleClicked(0)
 			info: qsTr("Variable indicating the study level nesting. This variable is used to specify the nesting of the studies in the meta-analysis. The nesting is used to specify the model structure and to account for the correlation between the effect sizes within each study. Note that this is an experimental feature that needs to be manually enabled in the 'Advanced' section.")
-		}
-
-		AssignedVariablesList
-		{
-			name:				"studyLabels"
-			title:				qsTr("Study Labels")
-			singleVariable:		true
-			allowedColumns:		["nominal"]
-			info: qsTr("Variable containing labels for the studies. Used for labeling outputs and plots.")
 		}
 
 		AssignedVariablesList
@@ -241,7 +232,7 @@ Form
 		analysisType:	"RoBMA"
 		id:				sectionModel
 	}
-/*
+
 	//// Priors Section ////
 	Section
 	{
@@ -256,7 +247,7 @@ Form
 		{
 			visible:				priorDistributionsEffectSizeAndHeterogeneity.value === "custom"
 			Layout.preferredWidth:	parent.width
-			componentType:			"modelsEffect"
+			componentType:			"priorsEffect"
 			analysisType:			"normal"
 		}
 
@@ -265,7 +256,7 @@ Form
 		{
 			visible:				priorDistributionsEffectSizeAndHeterogeneity.value === "custom"
 			Layout.preferredWidth:	parent.width
-			componentType:			"modelsHeterogeneity"
+			componentType:			"priorsHeterogeneity"
 			analysisType:			"normal"
 		}
 
@@ -290,14 +281,14 @@ Form
 		{
 			visible:				publicationBiasAdjustment.value === "custom"
 			Layout.preferredWidth:	parent.width
-			componentType:			"modelsSelectionModels"
+			componentType:			"priorsBiasSelectionModels"
 		}
 
 		MA.RobustBayesianMetaAnalysisPriors
 		{
 			visible:				publicationBiasAdjustment.value === "custom"
 			Layout.preferredWidth:	parent.width
-			componentType:			"modelsPet"
+			componentType:			"priorsBiasPet"
 			analysisType:			"normal"
 		}
 
@@ -305,7 +296,7 @@ Form
 		{
 			visible:				publicationBiasAdjustment.value === "custom"
 			Layout.preferredWidth:	parent.width
-			componentType:			"modelsPeese"
+			componentType:			"priorsBiasPeese"
 			analysisType:			"normal"
 		}
 
@@ -316,7 +307,7 @@ Form
 		{
 			visible:				priorDistributionsEffectSizeAndHeterogeneity.value === "custom" && bayesianModelAveragingEffectSize.checked
 			Layout.preferredWidth:	parent.width
-			componentType:			"modelsEffectNull"
+			componentType:			"priorsEffectNull"
 			analysisType:			"normal"
 		}
 
@@ -325,7 +316,7 @@ Form
 		{
 			visible:				priorDistributionsEffectSizeAndHeterogeneity.value === "custom" && bayesianModelAveragingHeterogeneity.checked
 			Layout.preferredWidth:	parent.width
-			componentType:			"modelsHeterogeneityNull"
+			componentType:			"priorsHeterogeneityNull"
 			analysisType:			"normal"
 		}
 
@@ -350,14 +341,14 @@ Form
 		{
 			visible:				publicationBiasAdjustment.value === "custom" && bayesianModelAveragingPublicationBias.checked
 			Layout.preferredWidth:	parent.width
-			componentType:			"modelsSelectionModelsNull"
+			componentType:			"priorsBiasSelectionModelsNull"
 		}
 
 		MA.RobustBayesianMetaAnalysisPriors
 		{
 			visible:				publicationBiasAdjustment.value === "custom" && bayesianModelAveragingPublicationBias.checked
 			Layout.preferredWidth:	parent.width
-			componentType:			"modelsPetNull"
+			componentType:			"priorsBiasPetNull"
 			analysisType:			"normal"
 		}
 
@@ -365,11 +356,11 @@ Form
 		{
 			visible:				publicationBiasAdjustment.value === "custom" && bayesianModelAveragingPublicationBias.checked
 			Layout.preferredWidth:	parent.width
-			componentType:			"modelsPeeseNull"
+			componentType:			"priorsBiasPeeseNull"
 			analysisType:			"normal"
 		}
 	}
-*/
+
 	//// Inference Section ////
 	MA.RobustBayesianMetaAnalysisInference
 	{

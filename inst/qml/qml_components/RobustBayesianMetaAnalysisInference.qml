@@ -34,7 +34,7 @@ Section
 	{
 		title:		qsTr("Heterogeneity")
 		columns:	2
-		info: qsTr("Summarize the meta-analytic between-study heterogeneity. Unvailable when performing multilevel/multivariate meta-analysis.")
+		info: qsTr("Summarize the meta-analytic between-study heterogeneity.")
 
 		CheckBox
 		{
@@ -57,7 +57,8 @@ Section
 			text:		qsTr("I²")
 			name:		"heterogeneityI2"
 			checked:	false
-			info: qsTr("Include I², the percentage of total variation across studies due to heterogeneity.")
+			visible:	analysisType === "RoBMA" || analysisType === "NoBMA"
+			info: qsTr("Include I², the percentage of total variation across studies due to heterogeneity. Unvailable when performing binomial meta-analysis.")
 		}
 
 		CheckBox
@@ -65,7 +66,8 @@ Section
 			text:		qsTr("H²")
 			name:		"heterogeneityH2"
 			checked:	false
-			info: qsTr("Include H², an index indicating the ratio of total variability to sampling variability.")
+			visible:	analysisType === "RoBMA" || analysisType === "NoBMA"
+			info: qsTr("Include H², an index indicating the ratio of total variability to sampling variability. Unvailable when performing binomial meta-analysis.")
 		}
 	}
 

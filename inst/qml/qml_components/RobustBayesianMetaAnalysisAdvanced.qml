@@ -81,7 +81,7 @@ Section
 			{
 				name:			"advancedMcmcAdaptation"
 				label:			qsTr("Adaptation")
-				defaultValue:	2000 + 1000 * predictors.count
+				defaultValue:	2000 + 500 * predictors.count + 1500 * studyLevelMultilevel.count + (analysisType === "RoBMA" ? 1500 : 0)
 				min:			100
 				fieldWidth:		55 * preferencesModel.uiScale
 			}
@@ -89,7 +89,7 @@ Section
 			{
 				name:			"advancedMcmcBurnin"
 				label:			qsTr("Burnin")
-				defaultValue:	2000 + 2000 * predictors.count
+				defaultValue:	2000 + 1000 * predictors.count + 2500 * studyLevelMultilevel.count + (analysisType === "RoBMA" ? 2500 : 0)
 				min:			100
 				fieldWidth:		55 * preferencesModel.uiScale
 			}
@@ -97,7 +97,7 @@ Section
 			{
 				name:			"advancedMcmcSamples"
 				label:			qsTr("Samples")
-				defaultValue:	5000 + 2500 * predictors.count
+				defaultValue:	5000 + 2000 * predictors.count + 5000 * studyLevelMultilevel.count + (analysisType === "RoBMA" ? 5000 : 0)
 				min:			100
 				fieldWidth:		55 * preferencesModel.uiScale
 			}

@@ -50,7 +50,7 @@ ColumnLayout
 
 	VariablesList
 	{
-		name			: componentType === "null" ? "modelsContinuousModerators" : "modelsContinuousModeratorsNull"
+		name			: componentType === "null" ? "priorsModeratorsContinuousNull" : "priorsModeratorsContinuous"
 		source			: [{ name: "effectSizeModelTerms", use: "type=scale"}]
 		listViewType	: JASP.AssignedVariables
 		draggable		: false
@@ -82,15 +82,11 @@ ColumnLayout
 				{
 					id:					truncationLower
 					name: 				"truncationLower"
-					visible:			typeItem.currentValue !== "spike" && typeItem.currentValue !== "uniform"
-					value:				"-Inf"
-					min:
-					{
-						if (typeItem.currentValue === "gammaK0" || typeItem.currentValue === "gammaAB" || typeItem.currentValue === "invgamma" || typeItem.currentValue === "lognormal" || typeItem.currentValue === "beta")
-							0
-						else
-							"-Inf"
-					}
+					visible:			typeItem.currentValue !== "spike" && typeItem.currentValue !== "uniform" && typeItem.currentValue !== "none"
+					value:				(typeItem.currentValue === "gammaK0" || typeItem.currentValue === "gammaAB" || typeItem.currentValue === "invgamma" || 
+										typeItem.currentValue === "lognormal" || typeItem.currentValue === "beta") ? "0" : "-Inf"
+					min:				(typeItem.currentValue === "gammaK0" || typeItem.currentValue === "gammaAB" || typeItem.currentValue === "invgamma" || 
+										typeItem.currentValue === "lognormal" || typeItem.currentValue === "beta") ? "0" : "-Inf"
 					max: 				truncationUpper.value
 					inclusive: 			JASP.MinOnly
 					fieldWidth:			40 * preferencesModel.uiScale
@@ -102,21 +98,9 @@ ColumnLayout
 				{
 					id:					truncationUpper
 					name: 				"truncationUpper"
-					visible:			typeItem.currentValue !== "spike" && typeItem.currentValue !== "uniform"
-					value:
-					{
-						if (typeItem.currentValue === "beta")
-							1
-						else
-							"Inf"
-					}
-					max:
-					{
-						if (typeItem.currentValue === "beta")
-							1
-						else
-							"Inf"
-					}
+					visible:			typeItem.currentValue !== "spike" && typeItem.currentValue !== "uniform" && typeItem.currentValue !== "none"
+					value:				(typeItem.currentValue === "beta") ? "1" : "Inf"
+					max:				(typeItem.currentValue === "beta") ? "1" : "Inf"
 					min: 				truncationLower ? truncationLower.value : 0
 					inclusive: 			JASP.MaxOnly
 					fieldWidth:			40 * preferencesModel.uiScale

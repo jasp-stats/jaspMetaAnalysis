@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-#"successesGroup1", "successesGroup2", "observationsGroup1", "observationsGroup2"
+#"successesGroup1", "successesGroup2", "sampleSizeGroup1", "sampleSizeGroup2"
 
 BayesianBinomialMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
@@ -45,8 +45,8 @@ BayesianBinomialMetaAnalysis <- function(jaspResults, dataset, options, state = 
   omitOnVariables <- c(
     options[["successesGroup1"]],
     options[["successesGroup2"]],
-    options[["observationsGroup1"]],
-    options[["observationsGroup2"]],
+    options[["sampleSizeGroup1"]],
+    options[["sampleSizeGroup2"]],
     if (length(options[["studyLevelMultilevel"]]) > 0 && options[["studyLevelMultilevel"]] != "") options[["studyLevelMultilevel"]],
     if (length(options[["subgroup"]])   > 0 && options[["subgroup"]]   != "") options[["subgroup"]],
     if (length(predictorsNominal)       > 0) predictorsNominal,
@@ -70,8 +70,8 @@ BayesianBinomialMetaAnalysis <- function(jaspResults, dataset, options, state = 
     all.target           = c(
       options[["successesGroup1"]],
       options[["successesGroup2"]],
-      options[["observationsGroup1"]],
-      options[["observationsGroup2"]]
+      options[["sampleSizeGroup1"]],
+      options[["sampleSizeGroup2"]]
     ),
     observations.amount  = "< 2",
     exitAnalysisIfErrors = TRUE)
@@ -96,7 +96,7 @@ BayesianBinomialMetaAnalysis <- function(jaspResults, dataset, options, state = 
 
   .hasErrors(
     dataset              = dataset,
-    seCheck.target       = c(options[["observationsGroup1"]], options[["observationsGroup2"]]),
+    seCheck.target       = c(options[["sampleSizeGroup1"]], options[["sampleSizeGroup2"]]),
     custom               = .bibmaCheckObsevations,
     exitAnalysisIfErrors = TRUE)
 }

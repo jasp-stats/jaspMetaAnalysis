@@ -3212,13 +3212,32 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   ### add studies as bubbles
   dataset <- attr(fit, "dataset")
-  dfStudies <- data.frame(
-    effectSize       = dataset[[options[["effectSize"]]]],
-    inverseVariance  = 1/dataset[[options[["effectSizeStandardError"]]]]^2,
-    weight           = if (.maIsClassical(options)) weights(fit) else NA,
-    constant         = rep(options[["bubblePlotBubblesRelativeSize"]], nrow(dataset)),
-    selectedVariable = dataset[[attr(dfPlot, "selectedVariable")]]
-  )
+  if (options[["analysis"]] == "BiBMA") {
+    tempDf <- metafor::escalc(
+      measure = "OR",
+      ai      = dataset[[options[["successesGroup1"]]]],
+      n1i     = dataset[[options[["sampleSizeGroup1"]]]],
+      ci      = dataset[[options[["successesGroup2"]]]],
+      n2i     = dataset[[options[["sampleSizeGroup2"]]]]
+    )
+    dfStudies <- data.frame(
+      effectSize        = tempDf[["yi"]],
+      inverseVariance   = 1/tempDf[["vi"]],
+      sampleSize        = (dataset[[options[["sampleSizeGroup1"]]]] + dataset[[options[["sampleSizeGroup2"]]]]),
+      weight            = if (.maIsClassical(options)) weights(fit) else NA,
+      constant          = rep(options[["bubblePlotBubblesRelativeSize"]], nrow(dataset)),
+      selectedVariable  = dataset[[attr(dfPlot, "selectedVariable")]]
+    )
+  } else {
+    dfStudies <- data.frame(
+      effectSize        = dataset[[options[["effectSize"]]]],
+      inverseVariance   = 1/dataset[[options[["effectSizeStandardError"]]]]^2,
+      weight            = if (.maIsClassical(options)) weights(fit) else NA,
+      constant          = rep(options[["bubblePlotBubblesRelativeSize"]], nrow(dataset)),
+      selectedVariable  = dataset[[attr(dfPlot, "selectedVariable")]]
+    )
+  }
+
 
   # add separate lines and plots
   if (hasSeparateLines)
@@ -3242,9 +3261,10 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     y     = as.name("effectSize"),
     size  = switch(
       options[["bubblePlotBubblesSize"]],
-      "weight"          = as.name("weight"),
-      "inverseVariance" = as.name("inverseVariance"),
-      "equal"           = as.name("constant")
+      "weight"            = as.name("weight"),
+      "inverseVariance"   = as.name("inverseVariance"),
+      "sampleSize"        = as.name("sampleSize"),
+      "equal"             = as.name("constant")
     ),
     color = if (hasSeparateLines) as.name("separateLines"),
     fill  = if (hasSeparateLines) as.name("separateLines"),

@@ -51,7 +51,7 @@ ColumnLayout
 
 	VariablesList
 	{
-		name			: componentType === "null" ? "modelsFactorModerators" : "modelsFactorModeratorsNull"
+		name			: componentType === "null" ? "priorsModeratorsFactorNull" : "priorsModeratorsFactor"
 		source			: [{ name: "effectSizeModelTerms", use: "type=nominal"}]
 		listViewType	: JASP.AssignedVariables
 		draggable		: false
@@ -84,15 +84,11 @@ ColumnLayout
 					id:					truncationLower
 					name: 				"truncationLower"
 					visible:			typeItem.currentValue !== "spike" && typeItem.currentValue !== "uniform" &&
-										typeItem.currentValue !== "mnormal" && typeItem.currentValue !== "mt" && typeItem.currentValue !== "spike0"
-					value:				"-Inf"
-					min:
-					{
-						if (typeItem.currentValue === "gammaK0" || typeItem.currentValue === "gammaAB" || typeItem.currentValue === "invgamma" || typeItem.currentValue === "lognormal" || typeItem.currentValue === "beta")
-							0
-						else
-							"-Inf"
-					}
+										typeItem.currentValue !== "mnormal" && typeItem.currentValue !== "mt" && typeItem.currentValue !== "spike0" && typeItem.currentValue !== "none"
+					value:				(typeItem.currentValue === "gammaK0" || typeItem.currentValue === "gammaAB" || typeItem.currentValue === "invgamma" || 
+										typeItem.currentValue === "lognormal" || typeItem.currentValue === "beta") ? 0 : "-Inf"
+					min:				(typeItem.currentValue === "gammaK0" || typeItem.currentValue === "gammaAB" || typeItem.currentValue === "invgamma" || 
+										typeItem.currentValue === "lognormal" || typeItem.currentValue === "beta") ? 0 : "-Inf"
 					max: 				truncationUpper.value
 					inclusive: 			JASP.MinOnly
 					fieldWidth:			40 * preferencesModel.uiScale
@@ -104,17 +100,9 @@ ColumnLayout
 					id:					truncationUpper
 					name: 				"truncationUpper"
 					visible:			typeItem.currentValue !== "spike" && typeItem.currentValue !== "uniform" &&
-										typeItem.currentValue !== "mnormal" && typeItem.currentValue !== "mt" && typeItem.currentValue !== "spike0"
-					value:
-					{
-						if (typeItem.currentValue === "beta")	1
-						else									"Inf"
-					}
-					max:
-					{
-						if (typeItem.currentValue === "beta")	1
-						else									"Inf"
-					}
+										typeItem.currentValue !== "mnormal" && typeItem.currentValue !== "mt" && typeItem.currentValue !== "spike0" && typeItem.currentValue !== "none"
+					value:  			(typeItem.currentValue === "beta") ? 1 : "Inf"
+					max:				(typeItem.currentValue === "beta") ? 1 : "Inf"
 					min: 				truncationLower ? truncationLower.value : 0
 					inclusive: 			JASP.MaxOnly
 					fieldWidth:			40 * preferencesModel.uiScale
@@ -273,7 +261,8 @@ ColumnLayout
 				fieldWidth:		95 * preferencesModel.uiScale
 				useExternalBorder: true
 				startValue:
-					if (componentType === "null") "spike"
+					if      (componentType === "null" && (contrastItem.currentValue === "meandif" || contrastItem.currentValue === "orthonormal")) "spike0"
+					else if (componentType === "null" && (contrastItem.currentValue === "treatment" || contrastItem.currentValue === "independent")) "spike"
 					else if (contrastItem.currentValue === "meandif" || contrastItem.currentValue === "orthonormal") "mnormal"
 					else "normal"
 				values:
@@ -307,7 +296,7 @@ ColumnLayout
 				name: "contrast"
 				fieldWidth:		90 * preferencesModel.uiScale
 				useExternalBorder: true
-				startValue: componentType === "null" ? "meandif" : "normal"
+				startValue: "meandif"
 				values:
 				[
 					{ label: qsTr("Mean dif."),				value: "meandif"},

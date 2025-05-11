@@ -193,17 +193,12 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
       inputReady <- options[["effectSize"]] != "" && options[["effectSizeStandardError"]] != ""
     } else if (options[["analysis"]] == "BiBMA") {
       inputReady <- options[["successesGroup1"]] != "" && options[["successesGroup2"]] != "" &&
-        options[["observationsGroup1"]] != "" && options[["observationsGroup2"]] != ""
+        options[["sampleSizeGroup1"]] != "" && options[["sampleSizeGroup2"]] != ""
     }
 
+    # missing priors automatically throw error
+
     return(inputReady)
-    # TODO: unblock once priors are fixed
-    # effect & heterogeneity priors ready
-    priorsEffectReady        <- length(options[["modelsEffectNull"]]) > 0        || length(options[["modelsEffect"]]) > 0
-    priorsHeterogeneityReady <- length(options[["modelsHeterogeneityNull"]]) > 0 || length(options[["modelsHeterogeneity"]]) > 0
-
-    return(inputReady && priorsEffectReady && priorsHeterogeneityReady)
-
   }
 }
 .maCheckData           <- function(dataset, options) {
