@@ -111,11 +111,16 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   if (options[["mcmcDiagnosticsPlotPeese"]])
     .robmaDiagnosticsPlot(jaspResults, options, "peese")
 
+
+  # additional
+  if (options[["showRoBMARCode"]])
+    .robmaShowRobmaRCode(jaspResults, options)
+
   return()
 }
 
 .robmaDependencies <- c(
-  "effectSize", "effectSizeStandardError", "effectSizeMeasure",                       # RoBMA / NoBMA
+  "effectSize", "effectSizeStandardError", "effectSizeMeasure",                   # RoBMA / NoBMA
   "successesGroup1", "successesGroup2", "sampleSizeGroup1", "sampleSizeGroup2",   # BiBMA
   "predictors", "predictors.types", "studyLevelMultilevel", "subgroup",
   "effectSizeModelTerms", "effectSizeModelIncludeIntercept",
@@ -137,6 +142,9 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
 # model fitting function
 .robmaFitModelFun            <- function(dataset, options, subgroupName) {
+  # --------------------------------------------------------------------------- #
+  # when updating don't forget to update the '.robmaMakeRobmaCallText' function! #
+  # --------------------------------------------------------------------------- #
 
   # obtain prior distributions
   priors <- attr(options, "priors")
@@ -201,7 +209,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
   # add 3rd level
   if (options[["studyLevelMultilevel"]] != "")
-    fitCall$study_id <- dataset[, options[["studyLevelMultilevel"]]]
+    fitCall$study_id <- dataset[[options[["studyLevelMultilevel"]]]]
 
   # add prior settings
   if (options[["analysis"]] %in% c("RoBMA", "NoBMA")) {
@@ -1862,6 +1870,21 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
   return()
 }
+.robmaShowRobmaRCode                     <- function(jaspResults, options) {
+
+  if (!.maReady(options) || !is.null(jaspResults[["robmaRCode"]]))
+    return()
+
+  robmaRCode <- createJaspHtml(title = gettext("RoBMA R Code"))
+  robmaRCode$dependOn(c(.robmaDependencies, "showRoBMARCode"))
+  robmaRCode$position <- 99
+
+  robmaRCode$text <- .maTransformToHtml(.robmaMakeRobmaCallText(options))
+
+  jaspResults[["robmaRCode"]] <- robmaRCode
+
+  return()
+}
 
 # containers
 .robmaExtractModelSummaryContainer           <- function(jaspResults) {
@@ -2658,7 +2681,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
   return(messages)
 }
-.robmaComponentNames   <- function(component, options) {
+.robmaComponentNames      <- function(component, options) {
   return(switch(
     tolower(component),
     "effectsize"    = if (.maIsMetaregression(options) && .robmaIsMetaregressionCentered(options)) gettext("Adjusted effect") else if (.maIsMetaregression(options)) gettext("Effect intercept") else gettext("Pooled effect"),
@@ -2668,7 +2691,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     "baseline"      = gettext("Baseline")
   ))
 }
-.robmaVariableNames    <- function(varNames, variables) {
+.robmaVariableNames       <- function(varNames, variables) {
 
   return(sapply(varNames, function(varName){
 
@@ -2699,7 +2722,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
   }))
 }
-.robmaHasHeterogeneity <- function(options) {
+.robmaHasHeterogeneity    <- function(options) {
 
   priors <- attr(options, "priors")
 
@@ -2711,7 +2734,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
   return(FALSE)
 }
-.robmaAddBfColumn      <- function(tempTable, options) {
+.robmaAddBfColumn         <- function(tempTable, options) {
 
   titleBF <- switch(
     options[["bayesFactorType"]],
@@ -2724,6 +2747,274 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
   return()
 }
+.robmaMakeRobmaCallText   <- function(options) {
+
+  # obtain prior distributions
+  priors <- attr(options, "priors")
+
+  # dispatch between a meta-regression and a meta-analysis data specification
+  if (.maIsMetaregression(options)) {
+
+    # dispatch the specified effect size measure
+    if (options[["analysis"]] %in% c("RoBMA", "NoBMA")) {
+
+      colnamesData <- switch(
+        options[["effectSizeMeasure"]],
+        "SMD"      = c("d", "se"),
+        "fishersZ" = c("z", "se"),
+        "logOR"    = c("logOR", "se"),
+        c("y", "se")
+      )
+
+      fitData <- paste0(
+        "colnames(dataset)[colnames(dataset) == '", options[["effectSize"]], "'] <- '", colnamesData[1], "'\n",
+        "colnames(dataset)[colnames(dataset) == '", options[["effectSizeStandardError"]], "'] <- '", colnamesData[2], "'\n\n"
+      )
+      effSizeName <- colnamesData[1]
+
+    } else if (options[["analysis"]] == "BiBMA") {
+
+      fitData <- paste0(
+        "colnames(dataset)[colnames(dataset) == '", options[["successesGroup1"]], "'] <- 'x1'\n",
+        "colnames(dataset)[colnames(dataset) == '", options[["successesGroup2"]], "'] <- 'x2'\n",
+        "colnames(dataset)[colnames(dataset) == '", options[["sampleSizeGroup1"]], "'] <- 'n1'\n",
+        "colnames(dataset)[colnames(dataset) == '", options[["sampleSizeGroup2"]], "'] <- 'n2'\n\n"
+      )
+    }
+
+
+    # specify meta-regression
+    fitFormula <- .maGetFormula(options[["effectSizeModelTerms"]], TRUE)
+
+    # get moderation priors
+    priorsModerators <- priors[["moderators"]]
+
+    # core of the meta-regression call
+    fitCall <- list(
+      formula = fitFormula,
+      data    = "dataset",
+      priors  = .robmaPrintPriorList(priorsModerators)
+    )
+
+  } else {
+
+    fitData <- ""
+
+    # dispatch the specified effect size measure
+    if (options[["analysis"]] %in% c("RoBMA", "NoBMA")) {
+      fitCall <- list(
+        "es" = paste0("dataset[['", options[["effectSize"]], "']]"),
+        "se" = paste0("dataset[['", options[["effectSizeStandardError"]], "']]")
+      )
+      names(fitCall)[1] <- switch(
+        options[["effectSizeMeasure"]],
+        "SMD"      = "d",
+        "fishersZ" = "z",
+        "logOR"    = "logOR",
+        "y"
+      )
+      effSizeName <- options[["effectSize"]]
+
+    } else if (options[["analysis"]] == "BiBMA") {
+      fitCall <- list(
+        "x1" = paste0("dataset[['", options[["successesGroup1"]], "']]"),
+        "x2" = paste0("dataset[['", options[["successesGroup2"]], "']]"),
+        "n1" = paste0("dataset[['", options[["sampleSizeGroup1"]], "']]"),
+        "n2" = paste0("dataset[['", options[["sampleSizeGroup2"]], "']]")
+      )
+    }
+
+  }
+
+  # add 3rd level
+  if (options[["studyLevelMultilevel"]] != "")
+    fitCall$study_id <- paste0("dataset[['", options[["studyLevelMultilevel"]], "']]")
+
+  # add prior settings
+  if (options[["analysis"]] %in% c("RoBMA", "NoBMA")) {
+    fitCall$prior_scale <- switch(
+      options[["effectSizeMeasure"]],
+      "SMD"      =  paste0("'cohens_d'"),
+      "fishersZ" =  paste0("'fishers_z'"),
+      "logOR"    =  paste0("'logOR'"),
+      "none"
+    )
+    if (options[["effectSizeMeasure"]] %in% c("SMD", "fishersZ", "logOR")) {
+      fitCall$transformation <- "'fishers_z'"
+    } else {
+      fitCall$transformation <- "'none'"
+    }
+  }
+
+  fitCall$priors_effect             <- if (is.null(priors[["effect"]]))            list() else .robmaPrintPriorComponent(priors[["effect"]])
+  fitCall$priors_heterogeneity      <- if (is.null(priors[["heterogeneity"]]))     list() else .robmaPrintPriorComponent(priors[["heterogeneity"]])
+  fitCall$priors_effect_null        <- if (is.null(priors[["effectNull"]]))        list() else .robmaPrintPriorComponent(priors[["effectNull"]])
+  fitCall$priors_heterogeneity_null <- if (is.null(priors[["heterogeneityNull"]])) list() else .robmaPrintPriorComponent(priors[["heterogeneityNull"]])
+
+  if (options[["analysis"]] == "RoBMA") {
+    fitCall$priors_bias       <- if (is.null(priors[["bias"]]))     list() else .robmaPrintPriorComponent(priors[["bias"]])
+    fitCall$priors_bias_null  <- if (is.null(priors[["biasNull"]])) list() else .robmaPrintPriorComponent(priors[["biasNull"]])
+    fitCall$effect_direction  <- switch(
+      options[["modelExpectedDirectionOfTheEffect"]],
+      "detect" = paste0("if (median(dataset[['", effSizeName, "']]) >= 0) 'positive' else 'negative'"),
+      paste0("'", options[["modelExpectedDirectionOfTheEffect"]], "'")
+    )
+  }
+  if (options[["analysis"]] == "BiBMA") {
+    fitCall$priors_baseline       <- if (is.null(priors[["baseline"]]))     list() else .robmaPrintPriorComponent(priors[["baseline"]])
+    fitCall$priors_baseline_null  <- if (is.null(priors[["baselineNull"]])) list() else .robmaPrintPriorComponent(priors[["baselineNull"]])
+  }
+
+
+  # sampling settings
+  fitCall$chains <- options[["advancedMcmcChains"]]
+  fitCall$adapt  <- options[["advancedMcmcAdaptation"]]
+  fitCall$burnin <- options[["advancedMcmcBurnin"]]
+  fitCall$sample <- options[["advancedMcmcSamples"]]
+  fitCall$thin   <- options[["advancedMcmcThin"]]
+
+  # autofit settings
+  fitCall$autofit         <- options[["autofit"]]
+  if (options[["autofit"]]) {
+    fitCall$autofit_control <- RoBMA::set_autofit_control(
+      max_Rhat      = if (options[["advancedAutofitRHat"]])        options[["advancedAutofitRHatTarget"]],
+      min_ESS       = if (options[["advancedAutofitEss"]])         options[["advancedAutofitEssTarget"]],
+      max_error     = if (options[["advancedAutofitMcmcError"]])   options[["advancedAutofitMcmcErrorTarget"]],
+      max_SD_error  = if (options[["advancedAutofitMcmcErrorSd"]]) options[["advancedAutofitMcmcErrorSdTarget"]],
+      max_time      = if (options[["advancedAutofitMaximumFittingTime"]]) list(
+        time = options[["advancedAutofitMaximumFittingTimeTarget"]],
+        unit = options[["advancedAutofitMaximumFittingTimeTargetUnit"]]),
+      sample_extend = options[["advancedAutofitExtendSamples"]]
+    )
+  }
+
+
+  # additional settings
+  fitCall$seed      <- .getSeedJASP(options)
+  fitCall$algorithm <- paste0("'ss'")
+  # fitCall$silent    <- TRUE
+
+  # select fitting function
+  fitFunc <- switch (
+    options[["analysis"]],
+    "RoBMA" = if (.maIsMetaregression(options)) "RoBMA.reg" else "RoBMA",
+    "NoBMA" = if (.maIsMetaregression(options)) "NoBMA.reg" else "NoBMA",
+    "BiBMA" = if (.maIsMetaregression(options)) "BiBMA.reg" else "BiBMA"
+  )
+
+  fit <- paste0(
+    fitData,
+    paste0("fit <- ", fitFunc, "(\n\t", paste(names(fitCall), "=", fitCall, collapse = ",\n\t"), "\n)\n")
+  )
+
+  return(fit)
+}
+.robmaPrintPrior          <- function(thisPrior) {
+
+  if (BayesTools::is.prior.weightfunction(thisPrior)) {
+    thisOut <- "prior_weightfunction("
+  } else if (BayesTools::is.prior.PET(thisPrior)) {
+    thisOut <- "prior_PET("
+  } else if (BayesTools::is.prior.PEESE(thisPrior)) {
+    thisOut <- "prior_PEESE("
+  } else if (BayesTools::is.prior.none(thisPrior)) {
+    thisOut <- "prior_none("
+  } else if (BayesTools::is.prior.factor(thisPrior)) {
+    thisOut <- "prior_factor("
+  } else if (BayesTools::is.prior.simple(thisPrior)) {
+    thisOut <- "prior("
+  }
+
+  if (BayesTools::is.prior.none(thisPrior)) {
+
+    thisOut <- paste0(thisOut, "prior_weights = ", thisPrior$prior_weights, ")")
+
+  } else {
+
+    thisOut <- paste0(thisOut, "distribution = '", thisPrior$distribution, "'")
+
+    if (BayesTools::is.prior.factor(thisPrior)) {
+      thisPrior$parameters[["K"]] <- NULL
+    }
+
+    if (!is.null(thisPrior$parameters[["steps"]]))
+      thisPrior$parameters[["steps"]] <- rev(thisPrior$parameters[["steps"]])
+
+    thisOut <- paste0(thisOut, ", parameters = list(", paste0(names(thisPrior$parameters), " = ", thisPrior$parameters,  collapse = ", "), ")")
+
+    if (!BayesTools::is.prior.weightfunction(thisPrior) && !BayesTools::is.prior.point(thisPrior)) {
+      thisOut <- paste0(thisOut, ", truncation = list(", paste0(names(thisPrior$truncation), " = ", thisPrior$truncation,  collapse = ", "), ")")
+    }
+
+    if (BayesTools::is.prior.factor(thisPrior)) {
+      if (BayesTools::is.prior.orthonormal(thisPrior)) {
+        thisOut <- paste0(thisOut, ", contrast = 'orthonormal'")
+      } else if (BayesTools::is.prior.meandif(thisPrior)) {
+        thisOut <- paste0(thisOut, ", contrast = 'meandif'")
+      } else if (BayesTools::is.prior.treatment(thisPrior)) {
+        thisOut <- paste0(thisOut, ", contrast = 'treatment'")
+      } else if (BayesTools::is.prior.independent(thisPrior)) {
+        thisOut <- paste0(thisOut, ", contrast = 'independent'")
+      }
+    }
+
+    thisOut <- paste0(thisOut, ", prior_weights = ", thisPrior$prior_weights, ")")
+  }
+
+  return(thisOut)
+}
+.robmaPrintPriorComponent <- function(priorList) {
+
+  outList <- "list(\n"
+
+  for (i in seq_along(priorList)) {
+    outList <- paste0(outList, "\t\t", .robmaPrintPrior(priorList[[i]]))
+    if (i != length(priorList)) {
+      outList <- paste0(outList, ",\n")
+    }else {
+      outList <- paste0(outList, "\n")
+    }
+  }
+
+  outList <- paste0(outList, "\t)")
+
+  return(outList)
+}
+.robmaPrintPriorList      <- function(priorList) {
+
+  outList <- "list(\n"
+
+  for (i in seq_along(priorList)) {
+
+    thisPrior <- priorList[[i]]
+    thisOut   <- "\t\t"
+
+    outList <- paste0(outList, "\t\t", names(priorList)[i], " = list(\n")
+
+    if (length(priorList[[i]][["alt"]]) != 0) {
+      outList <- paste0(outList, "\t\t\talt = ", .robmaPrintPrior(priorList[[i]][["alt"]]))
+      if (length(priorList[[i]][["null"]]) != 0) {
+        outList <- paste0(outList, ",\n")
+        outList <- paste0(outList, "\t\t\tnull = ", .robmaPrintPrior(priorList[[i]][["null"]]))
+      }
+      outList <- paste0(outList, "\n\t\t)")
+    } else if (length(priorList[[i]][["null"]]) != 0) {
+      outList <- paste0(outList, "\t\t\tnull = ", .robmaPrintPrior(priorList[[i]][["null"]]))
+      outList <- paste0(outList, "\n\t\t)")
+    }
+
+    if (i != length(priorList)) {
+      outList <- paste0(outList, ",\n")
+    }else {
+      outList <- paste0(outList, "\n")
+    }
+  }
+
+  outList <- paste0(outList, "\t)")
+
+  return(outList)
+}
+
 
 # print functions
 .robmaPrintBf             <- function(bf) {
