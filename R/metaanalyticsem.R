@@ -709,6 +709,8 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 
   # remove additional columns
   tempOutput <- tempOutput[, c("name", "row", "col", "estimate", "se", "z", "p", "lCi", "uCi"),drop=FALSE]
+  tempOutput$lCi <- tempOutput$estimate - 1.96 * tempOutput$se
+  tempOutput$uCi <- tempOutput$estimate + 1.96 * tempOutput$se
 
   if (!options[["modelSummaryShowMatrixIndices"]]) {
     tempOutput <- tempOutput[,!colnames(tempOutput) %in% c("row", "col"),drop=FALSE]

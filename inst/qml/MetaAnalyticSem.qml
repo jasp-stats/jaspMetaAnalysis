@@ -111,7 +111,7 @@ Form
 		{
 			name:		"availableVariableNames"
 			label:		qsTr("Available variable names")
-			checked:	true
+			checked:	false
 			info:		qsTr("Show a summary of the available variable names in the correlation/covariance matrix input.")
 		}
 
