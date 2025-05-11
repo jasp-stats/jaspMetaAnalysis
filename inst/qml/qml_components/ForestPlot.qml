@@ -172,12 +172,14 @@ Section
 					label:			qsTr("By")
 					addEmptyValue:	true
 					fieldWidth:		125 * preferencesModel.uiScale
+					info: qsTr("Select the variable by which the study-level information panel is ordered.")
 				}
 
 				CheckBox
 				{
 					name:		"forestPlotStudyInformationOrderAscending"
 					text:		qsTr("Ascending")
+					info: qsTr("Order the study-level information panel in ascending order.")
 				}
 			}
 
@@ -192,6 +194,7 @@ Section
 					label:			qsTr("By")
 					addEmptyValue:	true
 					fieldWidth:		125 * preferencesModel.uiScale
+					info: qsTr("Select the variable by which the study-level information panel is aggregated.")
 				}
 
 				RadioButtonGroup
@@ -204,6 +207,7 @@ Section
 						name: 		"boxplot";
 						label: 		qsTr("Boxplot")
 						checked: 	true
+						info: qsTr("Aggregate the estimates of the study-level information panel by boxplot with the box borders corresponding to the 25th, 50th, and 75th quantile and whiskers corresponding to the min and max values.")
 					}
 
 					RadioButton
@@ -211,6 +215,7 @@ Section
 						name: 				"bubbles"
 						label: 				qsTr("Bubbles")
 						childrenOnSameRow: 	true
+						info: qsTr("Aggregate the estimates of the study-level information panel by bubbles. The size of the bubble corresponds to the inverse variance of the estimates (or total sample size for binomial models).")
 
 						DoubleField
 						{
