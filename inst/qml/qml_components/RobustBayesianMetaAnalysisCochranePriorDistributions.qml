@@ -22,7 +22,7 @@ import JASP
 
 DropDown
 {
-	label:					qsTr("Medicine subfield")
+	label:					qsTr("Medical subfield")
 	id:						cochranePriorDropdown
 	name:					"priorDistributionsEffectSizeAndHeterogeneityMedicineSubfield"
 	fieldWidth:				150 * preferencesModel.uiScale
