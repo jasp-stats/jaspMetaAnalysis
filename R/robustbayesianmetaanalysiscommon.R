@@ -23,19 +23,13 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   contr.independent <<- BayesTools::contr.independent
 
   # devel settings
-  options[["advancedMcmcChains"]]     <- 2
-  options[["advancedMcmcAdaptation"]] <- 500
-  options[["advancedMcmcBurnin"]]     <- 1000
-  options[["advancedMcmcSamples"]]    <- 2000
-
-  saveRDS(options, file = "C:/JASP-Packages/options.RDS")
+  # options[["advancedMcmcChains"]]     <- 2
+  # options[["advancedMcmcAdaptation"]] <- 500
+  # options[["advancedMcmcBurnin"]]     <- 1000
+  # options[["advancedMcmcSamples"]]    <- 2000
 
   # attach priors to options
   options <- .robmaAttachPriors(options)
-
-  saveRDS(options, file = "C:/JASP-Packages/options.RDS")
-  saveRDS(dataset, file = "C:/JASP-Packages/dataset.RDS")
-
 
   # get priors and show model specification table
   if (options[["showModelSpecification"]])
@@ -955,7 +949,6 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     return()
 
   fit <- .maExtractFit(jaspResults, options)
-  saveRDS(fit, file = "C:/JASP-Packages/fit.RDS")
 
   ### create overview table
   testsTable <- createJaspTable(gettext("Meta-Analytic Tests"))
