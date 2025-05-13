@@ -148,15 +148,15 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   fitOutput <- list()
 
   # full dataset fit
-  startProgressbar(expectedTicks = 1, label = gettext("Estimating Meta-Analytic Model"))
+  if (.maIsClassical(options)) startProgressbar(expectedTicks = 1, label = gettext("Estimating Meta-Analytic Model"))
   fitOutput[["__fullDataset"]] <- do.call(fittingFunction, list(dataset = dataset, options = options, subgroupName = gettext("Full dataset")))
-  progressbarTick()
+  if (.maIsClassical(options)) progressbarTick()
 
   # add subgroup fits
   if (options[["subgroup"]] != "") {
 
     subgroupLevels <- unique(dataset[[options[["subgroup"]]]])
-    startProgressbar(expectedTicks = length(subgroupLevels), label = gettext("Estimating Subgroup Models"))
+    if (.maIsClassical(options)) startProgressbar(expectedTicks = length(subgroupLevels), label = gettext("Estimating Subgroup Models"))
 
     for (i in seq_along(subgroupLevels)) {
 
@@ -173,7 +173,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
       # fit the model
       fitOutput[[paste0("subgroup", subgroupLevel)]] <- do.call(fittingFunction, list(dataset = subgroupData, options = options, subgroupName = as.character(subgroupLevel)))
 
-      progressbarTick()
+      if (.maIsClassical(options)) progressbarTick()
     }
   }
 

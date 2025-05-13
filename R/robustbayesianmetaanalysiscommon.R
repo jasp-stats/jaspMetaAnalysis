@@ -266,6 +266,10 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   fitCall$algorithm <- "ss"
   fitCall$silent    <- TRUE
 
+  # add progress bar settings
+  fitCall$is_JASP        <- TRUE
+  fitCall$is_JASP_prefix <- if (subgroupName != gettext("Full dataset")) subgroupName
+
   # select fitting function
   fitFunc <- switch (
     options[["analysis"]],
