@@ -29,8 +29,8 @@ ColumnLayout
 	{
 		text:	switch (componentType) 
 		{
-			case "modelsBaseline":				qsTr("Baseline"); break;
-			case "modelsBaselineNull":			qsTr("Baseline (null)"); break;
+			case "priorsBaseline":				qsTr("Baseline"); break;
+			case "priorsBaselineNull":			qsTr("Baseline (null)"); break;
 		}
 		Layout.preferredHeight:	20 * preferencesModel.uiScale
 	}
@@ -49,8 +49,8 @@ ColumnLayout
 		optionKey:				"name"
 		defaultValues:			switch (componentType) 		
 		{
-			case "modelsBaseline":				[]; break;
-			case "modelsBaselineNull":			[{"type": "beta", "alpha": "1", "beta": "1"}]; break;
+			case "priorsBaseline":				[]; break;
+			case "priorsBaselineNull":			[{"type": "beta", "alpha": "1", "beta": "1"}]; break;
 		}
 		rowComponent: 			RowLayout
 		{

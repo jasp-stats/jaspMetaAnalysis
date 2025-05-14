@@ -21,101 +21,51 @@ import JASP.Controls
 
 Section
 {
+	title: 		qsTr("Prior and Posterior Plots")
 	property string analysisType: "RoBMA"
 	// RoBMA: Robust Bayesian Meta-Analsis
 	// BiBMA: Binomial Bayesian Meta-Analysis
 	// NoBMA: Normal Bayesian Meta-Analysis
 
-	title: 		qsTr("Plots")
-
-
-	CheckBox
-	{
-		columns:	2
-		label:		qsTr("Forest plot")
-		name:		"plotsForestPlot"
-
-		RadioButtonGroup
-		{
-			name: 		"plotsForestPlotOrder"
-			title:		qsTr("Order")
-
-			RadioButton
-			{
-				name: 	"increasing"
-				label: 	qsTr("Ascending")
-			}
-
-			RadioButton
-			{
-				name: 	"decreasing"
-				label: 	qsTr("Descending")
-			}
-
-			RadioButton
-			{
-				name: 	"alphabetical"
-				label: 	qsTr("Alphabetical")
-				checked:true
-			}
-		}
-	}
-
 	Group
 	{
-		title:		" " // Add a line to align with the first column
-		columns:	1
-
-		RadioButtonGroup
-		{
-			name:				"plotsForestPlotType"
-			title:				qsTr("Type")
-			columns:			2
-
-			RadioButton
-			{
-				value:		"averaged"
-				label:		qsTr("Model averaged")
-				checked:	true
-			}
-
-			RadioButton
-			{
-				value:		"conditional"
-				label:		qsTr("Conditional")
-			}
-
-		}
-	}
-
-	Divider { }
-
-	Group
-	{
-		title:	qsTr("Pooled estimates")
-		columns: 1
 
 		CheckBox
 		{
-			label:	qsTr("Effect")
-			name:	"plotsPooledEstimatesEffect"
+			label:		qsTr("Effect size")
+			name:		"priorAndPosteriorPlotEffectSize"
 		}
 
 		CheckBox
 		{
-			label:	qsTr("Heterogeneity")
-			name:	"plotsPooledEstimatesHeterogeneity"
+			label:		qsTr("Heterogeneity")
+			name:		"priorAndPosteriorPlotHeterogeneity"
+		}
+
+		CheckBox
+		{
+			label:		qsTr("Moderation")
+			name:		"priorAndPosteriorPlotModeration"
+			enabled:	sectionModel.effectSizeModelTermsCount > 0
+
+			CheckBox
+			{
+				name:		"priorAndPosteriorPlotModerationEstimatedMarginalMeans"
+				text:		qsTr("Estimated marginal means")
+				checked:	false
+			}
 		}
 
 		CheckBox
 		{
 			label:		qsTr("Weight function")
-			name:		"plotsPooledEstimatesWeightFunction"
+			name:		"priorAndPosteriorPlotWeightFunction"
 			visible:	analysisType === "RoBMA"
+			enabled:	publicationBiasAdjustment.value != "none" && publicationBiasAdjustment.value != "PP"
 
 			CheckBox
 			{
-				name:		"plotsPooledEstimatesWeightFunctionRescaleXAxis"
+				name:		"priorAndPosteriorPlotWeightFunctionRescaleXAxis"
 				text:		qsTr("Rescale x-axis")
 				checked:	true
 			}
@@ -124,21 +74,21 @@ Section
 		CheckBox
 		{
 			label:		qsTr("PET-PEESE")
-			name:		"plotsPooledEstimatesPetPeese"
+			name:		"priorAndPosteriorPlotPetPeese"
 			visible:	analysisType === "RoBMA"
+			enabled:	publicationBiasAdjustment.value != "none" && publicationBiasAdjustment.value != "original"
 		}
 	}
 
 	Group
 	{
-		title:		" " // Add a line to align with the first column
 		columns:	1
 
 		RadioButtonGroup
 		{
-			name:		"plotsPooledEstimatesType"
+			name:		"priorAndPosteriorPlotType"
 			title:		qsTr("Type")
-			columns:	2
+			columns:	1
 
 			RadioButton
 			{
@@ -157,125 +107,9 @@ Section
 
 		CheckBox
 		{
-			label:		qsTr("Prior distribution")
-			name:		"plotsPooledEstimatesPriorDistribution"
+			label:		qsTr("Include prior distribution")
+			name:		"priorAndPosteriorPlotIncludePriorDistribution"
 			checked:	true
-		}
-	}
-
-	Divider { }
-
-	Group
-	{
-		title:	qsTr("Individual models")
-		columns: 1
-
-		CheckBox
-		{
-			label:	qsTr("Effect")
-			name:	"plotsIndividualModelsEffect"
-		}
-
-		CheckBox
-		{
-			label:	qsTr("Heterogeneity")
-			name:	"plotsIndividualModelsHeterogeneity"
-		}
-	}
-
-	Group
-	{
-		title:		" "
-		columns:	2
-
-		RadioButtonGroup
-		{
-			name:				"plotsIndividualModelsType"
-			title:				qsTr("Type")
-			Layout.columnSpan:	2
-			columns:			2
-
-			RadioButton
-			{
-				value:		"averaged"
-				label:		qsTr("Model averaged")
-			}
-
-			RadioButton
-			{
-				value:		"conditional"
-				label:		qsTr("Conditional")
-				checked:	true
-			}
-		}
-
-		RadioButtonGroup
-		{
-			name: 		"plotsIndividualModelsOrder"
-			title:		qsTr("Order")
-
-			RadioButton
-			{
-				name: 	"increasing"
-				label: 	qsTr("Ascending")
-			}
-
-			RadioButton
-			{
-				name: 	"decreasing"
-				label: 	qsTr("Descending")
-			}
-		}
-
-		RadioButtonGroup
-		{
-			name: 		"plotsIndividualModelsOrderBy"
-			title:		qsTr("Order by")
-
-			RadioButton
-			{
-				name:		"modelNumber"
-				label:		qsTr("Model number")
-				checked:	true
-			}
-
-			RadioButton
-			{
-				name:		"estimate"
-				label:		qsTr("Estimate")
-			}
-
-			RadioButton
-			{
-				name:		"bayesFactor"
-				label:		qsTr("Bayes factor")
-			}
-
-			RadioButton
-			{
-				name:		"posteriorProbability"
-				label:		qsTr("Posterior prob.")
-			}
-		}
-
-		Group
-		{
-			title:				qsTr("Show")
-			Layout.columnSpan:	2
-
-			CheckBox
-			{
-				label:		qsTr("Bayesian updating")
-				name:		"plotsIndividualModelsShowBayesianUpdating"
-				checked:	true
-			}
-
-			CheckBox
-			{
-				label:		qsTr("Posterior estimates")
-				name:		"plotsIndividualModelsShowPosteriorEstimates"
-				checked:	false
-			}
 		}
 	}
 }

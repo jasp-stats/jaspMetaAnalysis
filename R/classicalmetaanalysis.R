@@ -18,7 +18,7 @@
 
 ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
-  options[["module"]] <- "metaAnalysis"
+  options[["analysis"]] <- "metaAnalysis"
 
   if (.maReady(options)) {
     dataset <- .maCheckData(dataset, options)
@@ -26,7 +26,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   }
 
 
-  .ClassicalMetaAnalysisCommon(jaspResults, dataset, options)
+  ClassicalMetaAnalysisCommon(jaspResults, dataset, options)
 
   return()
 }
@@ -82,7 +82,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 )
 .maForestPlotDependencies <- c(
   # do not forget to add variable carrying options to the .maDataPlottingDependencies
-  .maDependencies, "transformEffectSize", "confidenceIntervalsLevel",
+  "transformEffectSize", "confidenceIntervalsLevel", "bayesFactorType",
   "forestPlotStudyInformation",
   "forestPlotStudyInformationAllVariables",
   "forestPlotStudyInformationSelectedVariables",
@@ -100,6 +100,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotEstimatedMarginalMeansTermTests",
   "forestPlotEstimatedMarginalMeansCoefficientTests",
   "forestPlotEstimatedMarginalMeansCoefficientTestsAgainst",
+  "forestPlotEstimatedMarginalMeansCoefficientTestsAgainst0",
   "forestPlotEstimatedMarginalMeansAdjustedEffectSizeEstimate",
   "forestPlotModelInformation",
   "forestPlotEffectSizeFixedEffectEstimate",
@@ -113,8 +114,10 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotHeterogeneityEstimateI2",
   "forestPlotHeterogeneityEstimateH2",
   "forestPlotHeterogeneityModerationTest",
+  "forestPlotPublicationBiasTest",
   "forestPlotPredictionIntervals",
   "forestPlotEstimatesAndConfidenceIntervals",
+  "forestPlotConditionalEstimates",
   "forestPlotTestsInRightPanel",
   "forestPlotAllignLeftPanel",
   "forestPlotSubgroupPanelsWithinSubgroup",
@@ -145,7 +148,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotStudyInformationSecondaryConfidenceIntervalLevel"
 )
 .maBubblePlotDependencies <- c(
-  .maDependencies, "transformEffectSize", "confidenceIntervalsLevel",
+  "transformEffectSize", "confidenceIntervalsLevel",
   "bubblePlotSelectedVariable",
   "bubblePlotSeparateLines",
   "bubblePlotSeparatePlots",
@@ -172,11 +175,31 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 )
 .maReady               <- function(options) {
 
-  inputReady <- options[["effectSize"]] != "" && options[["effectSizeStandardError"]] != ""
-  termsEffectSizeReady    <- length(options[["effectSizeModelTerms"]]) > 0    || options[["effectSizeModelIncludeIntercept"]]
-  termsHeterogeneityReady <- length(options[["heterogeneityModelTerms"]]) > 0 || options[["heterogeneityModelIncludeIntercept"]]
+  if (.maIsClassical(options)) {
 
-  return(inputReady && termsEffectSizeReady && termsHeterogeneityReady)
+    # data
+    inputReady <- options[["effectSize"]] != "" && options[["effectSizeStandardError"]] != ""
+
+    # model
+    termsEffectSizeReady    <- length(options[["effectSizeModelTerms"]]) > 0    || options[["effectSizeModelIncludeIntercept"]]
+    termsHeterogeneityReady <- length(options[["heterogeneityModelTerms"]]) > 0 || options[["heterogeneityModelIncludeIntercept"]]
+
+    return(inputReady && termsEffectSizeReady && termsHeterogeneityReady)
+
+  } else {
+
+    # data
+    if (options[["analysis"]] %in% c("RoBMA", "NoBMA")) {
+      inputReady <- options[["effectSize"]] != "" && options[["effectSizeStandardError"]] != ""
+    } else if (options[["analysis"]] == "BiBMA") {
+      inputReady <- options[["successesGroup1"]] != "" && options[["successesGroup2"]] != "" &&
+        options[["sampleSizeGroup1"]] != "" && options[["sampleSizeGroup2"]] != ""
+    }
+
+    # missing priors automatically throw error
+
+    return(inputReady)
+  }
 }
 .maCheckData           <- function(dataset, options) {
 
@@ -188,10 +211,11 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   omitOnVariables <- c(
     options[["effectSize"]],
     options[["effectSizeStandardError"]],
-    if (options[["clustering"]] != "") options[["clustering"]],
-    if (options[["subgroup"]] != "")   options[["subgroup"]],
-    if (length(predictorsNominal) > 0) predictorsNominal,
-    if (length(predictorsScale) > 0)   predictorsScale
+    if (length(options[["clustering"]]) > 0 && options[["clustering"]] != "") options[["clustering"]],
+    if (length(options[["studyLevelMultilevel"]]) > 0 && options[["studyLevelMultilevel"]] != "") options[["studyLevelMultilevel"]],
+    if (length(options[["subgroup"]])   > 0 && options[["subgroup"]]   != "") options[["subgroup"]],
+    if (length(predictorsNominal)       > 0) predictorsNominal,
+    if (length(predictorsScale)         > 0) predictorsScale
   )
   anyNaByRows <- apply(dataset[,omitOnVariables], 1, function(x) anyNA(x))
   dataset     <- dataset[!anyNaByRows,]
@@ -233,8 +257,19 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     exitAnalysisIfErrors = TRUE)
 }
 .maCheckStandardErrors <- list(seCheck = function(dataset, target) {
-    nonPositive <- !all(dataset[,target] > 0)
+    nonPositive <- !all(dataset[,target] > 0, na.rm = TRUE)
     if (nonPositive) {
       return(gettext("All standard errors must be positive."))
     }
   })
+.maIsClassical         <- function(options) {
+
+  # check if the analysis is classical
+  if (options[["analysis"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate")) {
+    return(TRUE)
+  } else if (options[["analysis"]] %in% c("RoBMA", "NoBMA", "BiBMA")){
+    return(FALSE)
+  } else {
+    stop("Unknown module")
+  }
+}

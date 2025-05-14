@@ -159,7 +159,7 @@ Form
 		Group
 		{
 			title:		qsTr("Horseshoe")
-			visible:	method.currentValue == "horseshoe"
+			visible:	method.currentValue === "horseshoe"
 			
 			DoubleField
 			{
@@ -183,7 +183,7 @@ Form
 		Group
 		{
 			title:		qsTr("Lasso")
-			visible:	method.currentValue == "lasso"
+			visible:	method.currentValue === "lasso"
 			
 			DoubleField
 			{
@@ -323,7 +323,7 @@ Form
 			{
 				singleVariable:	true
 				name:			"scatterVariableX"
-				title:			samplingPlot.currentValue == "scatter" ? qsTr("Horizontal axis") : qsTr("Plotted term")
+				title:			samplingPlot.currentValue === "scatter" ? qsTr("Horizontal axis") : qsTr("Plotted term")
 			}
 
 			AssignedVariablesList
@@ -333,7 +333,7 @@ Form
 				title:			qsTr("Vertical axis")
 				visible:		active
 				
-				property bool active:	samplingPlot.currentValue == "scatter"
+				property bool active:	samplingPlot.currentValue === "scatter"
 				onActiveChanged: if (!active && count > 0) itemDoubleClicked(0);
 			}
 		}

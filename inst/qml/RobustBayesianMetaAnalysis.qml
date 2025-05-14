@@ -23,254 +23,376 @@ import "./qml_components"		as MA
 
 Form
 {
-	property var listVisibility :
-	{
-		"effectSizeSe":	{ values: ["cohensD", "unstandardizedEffectSizes", "logOr"],	id: inputSE},
-		"effectSizeCi":	{ values: ["cohensD", "unstandardizedEffectSizes", "logOr"],	id: inputCI},
-		"sampleSize" :	{ values: ["cohensD", "correlation"],		id: inputN}
-	}
-
-	function checkListVisibility(name)
-	{
-		var check = (listVisibility[name]["check2Sample"] ? cohensDTwoSample.checked : true)
-
-		return check && listVisibility[name]["values"].includes(measures.value);
-	}
-
-
-	FileSelector
-	{
-		Layout.columnSpan:	2
-		name:				"pathToFittedModel"
-		label:  			qsTr("Path to the fitted model")
-		filter:				"*.RDS"
-		save:				false
-		visible:			measuresFitted.checked
-	}
 
 	VariablesForm
 	{
-		preferredHeight:	250 * preferencesModel.uiScale
-		visible:			!measuresFitted.checked
-		Layout.columnSpan:	2
+		preferredHeight:	(sectionAdvanced.enableStudyLevelNesting.checked ? 400 : 350) * preferencesModel.uiScale
+		removeInvisibles:	true
 
-		AvailableVariablesList {name: "variablesList"}
-
-		AssignedVariablesList
+		AvailableVariablesList
 		{
-			id: 			inputES
-			name: 			"effectSize"
-			enabled: 		inputT.count == 0
-			title:
-			{
-			if (measuresCohensD.checked)
-				qsTr("Cohen's d")
-			else if (measuresCorrelation.checked)
-				qsTr("Correlation")
-			else if (measureslogOr.checked)
-				qsTr("Log Odds Ratio")
-			else
-				qsTr("Effect Size")
-			}
-			singleVariable: true
-			allowedColumns: ["scale"]
+			name:				"allVariables"
 		}
 
 		AssignedVariablesList
 		{
-			id: 			inputSE
-			enabled: 		inputCI.count == 0 && inputN.count == 0
-			name: 			"effectSizeSe"
-			title: 			qsTr("Effect Size Standard Error")
-			singleVariable: true
-			allowedColumns: ["scale"]
-			visible:		checkListVisibility(name)
+			name:				"effectSize"
+			id:					effectSize
+			title:				qsTr("Effect Size")
+			singleVariable:		true
+			allowedColumns:		["scale"]
+			info: qsTr("Variable containing the observed effect sizes.")
+		}
+		AssignedVariablesList
+		{
+			name:				"effectSizeStandardError"
+			id:					effectSizeStandardError
+			title:				qsTr("Effect Size Standard Error")
+			singleVariable:		true
+			allowedColumns:		["scale"]
+			info: qsTr("Variable containing the standard errors corresponding to the effect sizes.")
 		}
 
-		AssignedPairsVariablesList
+		DropDown
 		{
-			id: 			inputCI
-			enabled: 		inputSE.count == 0 && inputN.count == 0 && inputN.count == 0
-			name: 			"effectSizeCi"
-			title: 			qsTr("95% CI Lower and Upper Bound")
-			singleVariable: true
-			allowedColumns: ["scale"]
-			visible:		checkListVisibility(name)
+			id:			effectSizeMeasure
+			name:		"effectSizeMeasure"
+			label:		qsTr("Effect size measure")
+			info: qsTr("Effect size measure supplied as the 'Effect Size'. This is an important setting as it determines the defaul prior distributions and the model fitting transformation.")
+			values: [
+				{ label: qsTr("Standardized mean difference"),	value: "SMD",			info: qsTr("Standardized mean difference such as Cohen's d, Hedge's g")},
+				{ label: qsTr("Fisher's z"),					value: "fishersZ",		info: qsTr("Fisher's z transformation of correlation coefficients")},
+				{ label: qsTr("Log odds ratio"),				value: "logOR",			info: qsTr("Log odds ratio")},
+				{ label: qsTr("Log risk ratio"),				value: "logRR",			info: qsTr("Log risk ratio")},
+				{ label: qsTr("Log hazard ratio"),				value: "logHR",			info: qsTr("Log hazard ratio")},
+				{ label: qsTr("Risk difference"),				value: "RD",			info: qsTr("Risk difference")},
+				{ label: qsTr("General"),						value: "general",		info: qsTr("General effect size that does not correspond to any of the measures above. Please, be careful when specifying the prior distributions as no sensible defaults are available.")}
+			]
 		}
 
 		AssignedVariablesList
 		{
-			id: 			inputN
-			enabled: 		inputSE.count == 0 && inputCI.count == 0
-			name: 			"sampleSize"
-			title: 			qsTr("N")
-			singleVariable: true
-			allowedColumns: ["scale"]
-			visible:		checkListVisibility(name)
+			name:				"predictors"
+			id:					predictors
+			title:				qsTr("Predictors")
+			allowedColumns:		["nominal", "scale"]
+			allowTypeChange:	true
+			info: qsTr("Variables to include as predictors (moderators) in the meta-regression model. See the 'Model' section for the meta-regression specification details.")
 		}
 
 		AssignedVariablesList
 		{
-			name: 			"studyLabel"
-			title: 			qsTr("Study Labels")
-			singleVariable:	true
-			allowedColumns: ["nominal"]
+			name:				"studyLevelMultilevel"
+			title:				qsTr("Study Level (Multilevel)")
+			id:					studyLevelMultilevel
+			singleVariable:		true
+			allowedColumns:		["nominal"]
+			visible:			 sectionAdvanced.enableStudyLevelNesting.checked
+			property bool active:	sectionAdvanced.enableStudyLevelNesting.checked
+			onActiveChanged: 		if (!active && count > 0) itemDoubleClicked(0)
+			info: qsTr("Variable indicating the study level nesting. This variable is used to specify the nesting of the studies in the meta-analysis. The nesting is used to specify the model structure and to account for the correlation between the effect sizes within each study. Note that this is an experimental feature that needs to be manually enabled in the 'Advanced' section.")
+		}
+
+		AssignedVariablesList
+		{
+			name:				"subgroup"
+			id:					subgroup
+			title:				qsTr("Subgroup")
+			singleVariable:		true
+			allowedColumns:		["nominal"]
+			info: qsTr("Variable indicating subgroup stratification. For each subgroup, an independent model is fitted to the corresponding data set subset.")
 		}
 	}
 
-	RadioButtonGroup
+
+	Group
 	{
-		id:						measures
-		Layout.columnSpan:		2
-		name:					"inputType"
-		title:					qsTr("Input type")
-		radioButtonsOnSameRow:	false
-		columns:				2
-		defaultValue:			dataSetInfo.dataAvailable ? "cohensD" : "fittedModel"
+		title:		qsTr("Bayesian Model-Averaging")
+		info:		qsTr("Specify which components should be included Bayesian model-averaging. If selected, prior distribution under both the presence and absence of the component are specified. This allows for testing for the presence vs. absence of the component (if the component is not selected, a Bayes factor test is not conducted). The displayed estimates are averaged across null and alternative prior distributions of all specified components.")
 
-		onValueChanged:
+		CheckBox
 		{
-			for (var inputName in listVisibility)
-			{
-				if (!checkListVisibility(inputName) && listVisibility[inputName]["id"].count > 0)
-					listVisibility[inputName]["id"].itemDoubleClicked(0)
-			}
-
-			if(measuresGeneral.checked)
-				modelType.value = "custom"
-			else
-				modelType.value = "PSMA"
+			name:		"bayesianModelAveragingEffectSize"
+			id:			bayesianModelAveragingEffectSize
+			label:		qsTr("Effect size")
+			info:		qsTr("Average over the presence vs. absence of the effect. If unspecified, the resulting model assumes that the effect is present.")
+			checked:	true
 		}
 
-		RadioButton
+		CheckBox
 		{
-			label:		qsTr("Cohen's d")
-			value:		"cohensD"
-			id:			measuresCohensD
-			enabled:	dataSetInfo.dataAvailable
+			name:		"bayesianModelAveragingHeterogeneity"
+			id:			bayesianModelAveragingHeterogeneity
+			label:		qsTr("Heterogeneity")
+			info:		qsTr("Average over the presence vs. absence of heterogeneity. If unspecified, the resulting model assumes that heterogeneity is present.")
+			checked:	true
 		}
 
-		RadioButton
+		CheckBox
 		{
-			label:		qsTr("Correlations")
-			value:		"correlation"
-			id:			measuresCorrelation
-			enabled:	dataSetInfo.dataAvailable
+			name:		"bayesianModelAveragingModerations"
+			id:			bayesianModelAveragingModerations
+			label:		qsTr("Moderation")
+			info:		qsTr("Average over the presence vs. absence of moderators. If unspecified, the resulting model assumes that all moderators models are present.")
+			checked:	true
+			enabled:	predictors.count > 0
 		}
 
-		RadioButton
+		CheckBox
 		{
-			label:		qsTr("Log odds ratios")
-			value:		"logOr"
-			id:			measureslogOr
-			enabled:	dataSetInfo.dataAvailable
-		}
-
-		RadioButton
-		{
-			label:		qsTr("Unstandardized effect sizes")
-			value:		"unstandardizedEffectSizes"
-			id:			measuresGeneral
-			enabled:	dataSetInfo.dataAvailable
-		}
-
-		RadioButton
-		{
-			label:		qsTr("Fitted model")
-			value:		"fittedModel"
-			id:			measuresFitted
-		}
-	}
-
-	RadioButtonGroup
-	{
-		name:		"modelExpectedDirectionOfEffectSizes"
-		title:		qsTr("Expected direction of effect sizes")
-		columns:	1
-		enabled:	!measuresFitted.checked
-
-		RadioButton
-		{
-			value:		"positive"
-			label:		qsTr("Positive")
-			checked: 	true
-		}
-
-		RadioButton
-		{
-			value:		"negative"
-			label:		qsTr("Negative")
+			name:		"bayesianModelAveragingPublicationBias"
+			id:			bayesianModelAveragingPublicationBias
+			label:		qsTr("Publication bias")
+			info:		qsTr("Average over the presence vs. absence of publication bias. If unspecified, the resulting model assumes that publication bias is present.")
+			checked:	true
 		}
 	}
 
 	Group
 	{
+		title:		qsTr("Prior Distributions")
+
 		DropDown
 		{
-			id:			modelType
-			name:		"modelEnsembleType"
-			label:		qsTr("Model ensemble type")
-			enabled:	!measuresFitted.checked && !measuresGeneral.checked
+			name:		"priorDistributionsEffectSizeAndHeterogeneity"
+			id:			priorDistributionsEffectSizeAndHeterogeneity
+			label:		qsTr("Effect size and heterogeneity")
+			info:		qsTr("Specify the type of prior distributions for the effect size and heterogeneity.")
+			values: 
+				if (effectSizeMeasure.value === "SMD" || effectSizeMeasure.value === "fishersZ" || effectSizeMeasure.value === "logOR")
+					[
+						{ label: qsTr("Default"),		value: "default",		info: qsTr("Use default prior distributions for the effect size and heterogeneity based on Bartoš et al. (2022).")},
+						{ label: qsTr("Psychology"),	value: "psychology",	info: qsTr("Use default prior distributions developed for psychology based on Bartoš et al. (2022). This settings corresponds to the 'Default' setting.")},
+						{ label: qsTr("Medicine"),		value: "medicine",		info: qsTr("Use prior distributions based on the Cochrane Database of Systematic Reviews developed by Bartoš et al. (2021)")},
+						{ label: qsTr("Custom"),		value: "custom",		info: qsTr("Use custom prior distributions. This option allows you to specify a custom model ensemble for the effect size and heterogeneity prior distributions.")}
+					]
+				else if (effectSizeMeasure.value === "logRR" || effectSizeMeasure.value === "logHR" || effectSizeMeasure.value === "RD")
+					[
+						{ label: qsTr("Medicine"),		value: "medicine",		info: qsTr("Use prior distributions based on the Cochrane Database of Systematic Reviews developed by Bartoš et al. (2023).")},
+						{ label: qsTr("Custom"),		value: "custom",		info: qsTr("Use custom prior distributions. This option allows you to specify a custom model ensemble for the effect size and heterogeneity prior distributions.")}
+					]
+				else 
+					[
+						{ label: qsTr("Custom"),		value: "custom",		info: qsTr("Use custom prior distributions. This option allows you to specify a custom model ensemble for the effect size and heterogeneity prior distributions.")}
+					]
+		}
+
+		MA.RobustBayesianMetaAnalysisCochranePriorDistributions
+		{
+			visible:				priorDistributionsEffectSizeAndHeterogeneity.value === "medicine"
+			effectSizeMeasure:		effectSizeMeasure.value
+		}
+
+		DoubleField
+		{
+			name:		"priorDistributionsScale"
+			label:		qsTr("Scale")
+			enabled:	priorDistributionsEffectSizeAndHeterogeneity.value === "default" || priorDistributionsEffectSizeAndHeterogeneity.value === "psychology" || priorDistributionsEffectSizeAndHeterogeneity.value === "medicine"
+			info:		qsTr("Setting value different than 1 re-scales the pre-specified prior distributions. Values smaller than 1 lead to more informative priors, while values larger than 1 lead to less informative priors.")
+			startValue:	1
+			min:		0
+		}
+
+		DropDown
+		{
+			name:		"publicationBiasAdjustment"
+			id:			publicationBiasAdjustment
+			label:		qsTr("Publication bias adjustment")
+			info:		qsTr("Publication bias adjustment method. The default is the RoBMA-PSMA method (combination of 6 weight functions and PET-PEESE).")
+			startValue:	"PSMA"
 			values: [
-				{ label: qsTr("RoBMA-PSMA"),		value: "PSMA"},
-				{ label: qsTr("RoBMA-PP"),			value: "PP"},
-				{ label: qsTr("RoBMA-original"),	value: "original"},
-				{ label: qsTr("Custom"),			value: "custom"}
+				{ label: qsTr("RoBMA-PSMA"),		value: "PSMA",		info: qsTr("RoBMA-PSMA method (combination of 6 weight functions and PET-PEESE) as described in Bartoš et al. (2022). This is the recommended method.")},
+				{ label: qsTr("RoBMA-PP"),			value: "PP",		info: qsTr("RoBMA PET-PEESE method. A simplification of the RoBMA-PSMA method that uses only the PET-PEESE weight function.")},
+				{ label: qsTr("RoBMA-original"),	value: "original",	info: qsTr("Original RoBMA method (combination of 2 weight functions) as described in Maier et al. (2023).")},
+				{ label: qsTr("Custom"),			value: "custom",	info: qsTr("Custom model ensemble. This option allows you to specify a custom model ensemble for the publication bias adjustment.")},
+				{ label: qsTr("None"),				value: "none",		info: qsTr("No publication bias adjustment.")}
 			]
 		}
 
-		Group
+		DropDown
 		{
-			columns:	2
-
-			DropDown
-			{
-				id:			priorScale
-				name:		"priorScale"
-				label:		qsTr("Prior scale")
-				enabled:	!measuresFitted.checked && !measuresGeneral.checked && modelType.value == "custom"
-
-				values: [
-					{ label: qsTr("Cohen's d"),			value: "cohensD"},
-					{ label: qsTr("Fisher's z"),		value: "fishersZ"},
-					{ label: qsTr("log(OR)"),			value: "logOr"}
-				]
-				onCurrentValueChanged:
-				{
-					if(priorScale.currentValue == "cohensD")
-						inferenceOutputScale.currentValue = "cohensD"
-					else if(priorScale.currentValue == "fishersZ")
-						inferenceOutputScale.currentValue = "fishersZ"
-					else if(priorScale.currentValue == "logOr")
-						inferenceOutputScale.currentValue = "logOr"
-				}
-			}
-			/*
-			HelpButton
-			{
-				toolTip:	qsTr("Prior scale can be changed only when specifying a 'Custom' Model ensemble for standardized effect size measures.")
-			}
-			*/
+			name:		"modelExpectedDirectionOfTheEffect"
+			label:		qsTr("Expected direction of the effect")
+			enabled:	modelEnsembleTestPublicationBias.checked
+			info:		qsTr("The expected direction of the effect. This setting is important for the publication bias adjustment (one-sided selection models specify different publication probabilities for estimates in the expected vs. unexpected direction and PET-PEESE is bounded to adjust in the expected direction). The default is 'Positive'.")
+			startValue:	"detect"
+			values: [
+				{ label: qsTr("Detect"),	value: "detect",	info: qsTr("Determine the expected direction of the effect automatically based on the median effect size in the data.")},
+				{ label: qsTr("Positive"),	value: "positive",	info: qsTr("Positive effect")},
+				{ label: qsTr("Negative"),	value: "negative",	info: qsTr("Negative effect")}
+			]
 		}
-
 
 		CheckBox
 		{
-			name:		"priorDistributionPlot"
-			label:		qsTr("Prior distribution plots")
+			name:		"showModelSpecification"
+			label:		qsTr("Show model specification")
+			info:		qsTr("Show the model specification. This is useful for understanding and reporting the specified model.")
+			checked:	false
 		}
 	}
 
-
-	//// Inference ////
-	MA.RobustBayesianMetaAnalysisInference
+	//// Model Section ////
+	MA.RobustBayesianMetaAnalysisModel
 	{
-		analysisType:				"RoBMA"
-		measuresGeneralChecked: 	measuresGeneral.checked
+		analysisType:	"RoBMA"
+		id:				sectionModel
 	}
 
-	//// Plots section ////
+	//// Priors Section ////
+	Section
+	{
+		title: 				qsTr("Prior Distributions (Custom)")
+		columns:			1
+		enabled:			priorDistributionsEffectSizeAndHeterogeneity.value === "custom" || publicationBiasAdjustment.value === "custom"
+		onEnabledChanged:	if(!enabled) expanded = false
+
+
+		// effect prior
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			visible:				priorDistributionsEffectSizeAndHeterogeneity.value === "custom"
+			Layout.preferredWidth:	parent.width
+			componentType:			"priorsEffect"
+			analysisType:			"normal"
+		}
+
+		// heterogeneity prior
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			visible:				priorDistributionsEffectSizeAndHeterogeneity.value === "custom"
+			Layout.preferredWidth:	parent.width
+			componentType:			"priorsHeterogeneity"
+			analysisType:			"normal"
+		}
+
+		// moderation (continuous) prior
+		MA.RobustBayesianMetaAnalysisPriorsContinuousModerators
+		{
+			visible:				priorDistributionsEffectSizeAndHeterogeneity.value === "custom" && predictors.count > 0
+			Layout.preferredWidth:	parent.width
+			componentType:			"alternative"
+		}
+
+		// moderation (factor) prior
+		MA.RobustBayesianMetaAnalysisPriorsFactorModerators
+		{
+			visible:				priorDistributionsEffectSizeAndHeterogeneity.value === "custom" && predictors.count > 0
+			Layout.preferredWidth:	parent.width
+			componentType:			"alternative"
+		}
+
+		// bias priors
+		MA.RobustBayesianMetaAnalysisWeightfunctions
+		{
+			visible:				publicationBiasAdjustment.value === "custom"
+			Layout.preferredWidth:	parent.width
+			componentType:			"priorsBiasSelectionModels"
+		}
+
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			visible:				publicationBiasAdjustment.value === "custom"
+			Layout.preferredWidth:	parent.width
+			componentType:			"priorsBiasPet"
+			analysisType:			"normal"
+		}
+
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			visible:				publicationBiasAdjustment.value === "custom"
+			Layout.preferredWidth:	parent.width
+			componentType:			"priorsBiasPeese"
+			analysisType:			"normal"
+		}
+
+		Divider { }
+
+		// effect prior
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			visible:				priorDistributionsEffectSizeAndHeterogeneity.value === "custom" && bayesianModelAveragingEffectSize.checked
+			Layout.preferredWidth:	parent.width
+			componentType:			"priorsEffectNull"
+			analysisType:			"normal"
+		}
+
+		// effect prior
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			visible:				priorDistributionsEffectSizeAndHeterogeneity.value === "custom" && bayesianModelAveragingHeterogeneity.checked
+			Layout.preferredWidth:	parent.width
+			componentType:			"priorsHeterogeneityNull"
+			analysisType:			"normal"
+		}
+
+		// moderation (continuous) prior
+		MA.RobustBayesianMetaAnalysisPriorsContinuousModerators
+		{
+			visible:				priorDistributionsEffectSizeAndHeterogeneity.value === "custom" && predictors.count > 0 && bayesianModelAveragingModerations.checked
+			Layout.preferredWidth:	parent.width
+			componentType:			"null"
+		}
+
+		// moderation (factor) prior
+		MA.RobustBayesianMetaAnalysisPriorsFactorModerators
+		{
+			visible:				priorDistributionsEffectSizeAndHeterogeneity.value === "custom" && predictors.count > 0 && bayesianModelAveragingModerations.checked
+			Layout.preferredWidth:	parent.width
+			componentType:			"null"
+		}
+
+		// bias priors
+		MA.RobustBayesianMetaAnalysisWeightfunctions
+		{
+			visible:				publicationBiasAdjustment.value === "custom" && bayesianModelAveragingPublicationBias.checked
+			Layout.preferredWidth:	parent.width
+			componentType:			"priorsBiasSelectionModelsNull"
+		}
+
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			visible:				publicationBiasAdjustment.value === "custom" && bayesianModelAveragingPublicationBias.checked
+			Layout.preferredWidth:	parent.width
+			componentType:			"priorsBiasPetNull"
+			analysisType:			"normal"
+		}
+
+		MA.RobustBayesianMetaAnalysisPriors
+		{
+			visible:				publicationBiasAdjustment.value === "custom" && bayesianModelAveragingPublicationBias.checked
+			Layout.preferredWidth:	parent.width
+			componentType:			"priorsBiasPeeseNull"
+			analysisType:			"normal"
+		}
+	}
+
+	//// Inference Section ////
+	MA.RobustBayesianMetaAnalysisInference
+	{
+		analysisType:	"RoBMA"
+	}
+
+	//// Inference Section ////
+	MA.RobustBayesianMetaAnalysisEstimatedMarginalMeans
+	{
+		analysisType:	"RoBMA"
+	}
+
+	//// Prior and Posterior Plots Section ////
 	MA.RobustBayesianMetaAnalysisPlots
+	{
+		analysisType:	"RoBMA"
+	}
+
+	//// Forest Plots Section ////
+	MA.ForestPlot
+	{
+		analysisType:	"RoBMA"
+	}
+
+	//// Bubble Plot Section ////
+	MA.BubblePlot
 	{
 		analysisType:	"RoBMA"
 	}
@@ -281,110 +403,11 @@ Form
 		analysisType:	"RoBMA"
 	}
 
-	//// Priors ////
-	Section
-	{
-		title: 				qsTr("Models (Custom Ensemble Only)")
-		columns:			1
-		enabled:			modelType.value == "custom"
-		onEnabledChanged:	if(!enabled) expanded = false
-
-
-		// effect prior
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"modelsEffect"
-			analysisType:			"normal"
-		}
-
-		// effect prior
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"modelsHeterogeneity"
-			analysisType:			"normal"
-		}
-
-		// bias priors
-		MA.RobustBayesianMetaAnalysisWeightfunctions
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"modelsSelectionModels"
-		}
-
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"modelsPet"
-			analysisType:			"normal"
-		}
-
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"modelsPeese"
-			analysisType:			"normal"
-		}
-
-		Divider { }
-
-		CheckBox
-		{
-			id:						priorsNull
-			name:					"priorsNull"
-			label:					qsTr("Set null priors")
-		}
-
-		// effect prior
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"modelsEffectNull"
-			analysisType:			"normal"
-			visible:				priorsNull.checked
-		}
-
-		// effect prior
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"modelsHeterogeneityNull"
-			analysisType:			"normal"
-			visible:				priorsNull.checked
-		}
-
-		// bias priors
-		MA.RobustBayesianMetaAnalysisWeightfunctions
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"modelsSelectionModelsNull"
-			visible:				priorsNull.checked
-		}
-
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"modelsPetNull"
-			analysisType:			"normal"
-			visible:				priorsNull.checked
-		}
-
-		MA.RobustBayesianMetaAnalysisPriors
-		{
-			Layout.preferredWidth:	parent.width
-			componentType:			"modelsPeeseNull"
-			analysisType:			"normal"
-			visible:				priorsNull.checked
-		}
-	}
-
 	//// Advanced section for prior model probabilities sampling settings ////
 	MA.RobustBayesianMetaAnalysisAdvanced
 	{
-		analysisType:				"RoBMA"
-		measuresGeneralChecked: 	measuresGeneral.checked
-		measuresFittedChecked: 		measuresFitted.checked
+		analysisType:	"RoBMA"
+		id:				sectionAdvanced
 	}
 
 }

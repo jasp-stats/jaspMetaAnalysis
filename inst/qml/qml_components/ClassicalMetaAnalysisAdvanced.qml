@@ -22,9 +22,9 @@ import JASP
 
 Section
 {
-	title:						qsTr("Advanced")
-	property string module:		"metaAnalysis"
-	columns:					1
+	title:							qsTr("Advanced")
+	property string analysisType:	"metaAnalysis"
+	columns:						1
 
 	info: qsTr("Advanced options for the meta-analysis, including optimization settings, clustering, and permutation tests.")
 	
@@ -85,7 +85,7 @@ Section
 
 			Group
 			{
-				visible:	module == "metaAnalysisMultilevelMultivariate"
+				visible:	analysisType === "metaAnalysisMultilevelMultivariate"
 				title:		qsTr("Random Effects / Modele Structure")
 
 				CheckBox
@@ -109,7 +109,7 @@ Section
 		Group
 		{
 			title:		qsTr("Fix Parameters")
-			visible:	module == "metaAnalysis"
+			visible:	analysisType === "metaAnalysis"
 
 			CheckBox
 			{	// TODO: allow fixing in multivariate models
@@ -175,7 +175,7 @@ Section
 				name:	"addOmnibusModeratorTestHeterogeneityCoefficients"
 				enabled:			sectionModel.heterogeneityModelTermsCount > 0
 				childrenOnSameRow:	false
-				visible:			module == "metaAnalysis"
+				visible:			analysisType === "metaAnalysis"
 				info: qsTr("Include an omnibus test for the specified heterogeneity regression coefficients. Available when heterogeneity model terms are included. The coefficients should be selected via their comma-separated indicies which correspond to the order presented in the 'Heterogeneity Meta-Regression Coefficients' Table.")
 
 				TextField
@@ -191,9 +191,9 @@ Section
 		Group
 		{
 			title:		qsTr("Optimizer")
-			enabled:	method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes" ||
-						method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu" ||
-						method.value == "sidikJonkman"
+			enabled:	method.value === "restrictedML" || method.value === "maximumLikelihood" || method.value === "empiricalBayes" ||
+						method.value === "pauleMandel" || method.value === "pauleMandelMu" || method.value === "qeneralizedQStatMu" ||
+						method.value === "sidikJonkman"
 			info: qsTr("Optimizer settings for estimating the meta-analytic models. A more complex/unavailbe settings can be specified via the 'Extend metafor call' option.")
 
 			DropDown
@@ -203,17 +203,17 @@ Section
 				label:		qsTr("Method") // TODO: switch default value on heterogeneityModelLink change
 				info: qsTr("Select the optimization method to use for fitting the model. Available in multilevel/multivariate meta-analysis or when heterogeneity model terms are included.")
 				values:		{
-					if (module == "metaAnalysis") {
-						if (sectionModel.heterogeneityModelLinkValue == "log")
+					if (analysisType === "metaAnalysis") {
+						if (sectionModel.heterogeneityModelLinkValue === "log")
 							["nlminb", "BFGS", "Nelder-Mead", "uobyqa", "newuoa", "bobyqa", "nloptr", "nlm"]
 						else
 							["constrOptim", "nlminb", "BFGS", "Nelder-Mead", "uobyqa", "newuoa", "bobyqa", "nloptr", "nlm"]
-					} else	if (module == "metaAnalysisMultilevelMultivariate") {
+					} else	if (analysisType === "metaAnalysisMultilevelMultivariate") {
 							["nlminb", "BFGS", "Nelder-Mead", "uobyqa", "newuoa", "bobyqa", "nloptr", "nlm", "hjk", "nmk", "mads"] // many else could be added "ucminf", "lbfgsb3c", "BBoptim"
 					}
 
 				}
-				visible:	module == "metaAnalysisMultilevelMultivariate" || sectionModel.heterogeneityModelTermsCount > 0
+				visible:	analysisType === "metaAnalysisMultilevelMultivariate" || sectionModel.heterogeneityModelTermsCount > 0
 			}
 
 			CheckBox
@@ -223,8 +223,8 @@ Section
 				checked:	false
 				childrenOnSameRow:	true
 				info: qsTr("Specify the initial value of 𝜏² for the optimization algorithm. Available only for specific optimization methods and unavailable in multilevel/multivariate meta-analysis or when heterogeneity model terms are included.")
-				visible:	(method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes" ||
-							method.value == "sidikJonkman") && sectionModel.heterogeneityModelTermsCount == 0 && module == "metaAnalysis"
+				visible:	(method.value === "restrictedML" || method.value === "maximumLikelihood" || method.value === "empiricalBayes" ||
+							method.value === "sidikJonkman") && sectionModel.heterogeneityModelTermsCount == 0 && analysisType === "metaAnalysis"
 
 				DoubleField
 				{
@@ -243,8 +243,8 @@ Section
 				checked:	false
 				childrenOnSameRow:	true
 				info: qsTr("Specify the minimum allowable value of 𝜏² during optimization. Available only for specific optimization methods and unavailable in multilevel/multivariate meta-analysis or when heterogeneity model terms are included.")
-				visible:	(method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu") &&
-							sectionModel.heterogeneityModelTermsCount == 0 && module == "metaAnalysis"
+				visible:	(method.value === "pauleMandel" || method.value === "pauleMandelMu" || method.value === "qeneralizedQStatMu") &&
+							sectionModel.heterogeneityModelTermsCount == 0 && analysisType === "metaAnalysis"
 
 				DoubleField
 				{
@@ -264,8 +264,8 @@ Section
 				checked:	false
 				childrenOnSameRow:	true
 				info: qsTr("Specify the maximim allowable value of 𝜏² during optimization. Available only for specific optimization methods and unavailable in multilevel/multivariate meta-analysis or when heterogeneity model terms are included.")
-				visible:	((method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu") &&
-							sectionModel.heterogeneityModelTermsCount == 0 && module == "metaAnalysis")
+				visible:	((method.value === "pauleMandel" || method.value === "pauleMandelMu" || method.value === "qeneralizedQStatMu") &&
+							sectionModel.heterogeneityModelTermsCount == 0 && analysisType === "metaAnalysis")
 
 				DoubleField
 				{
@@ -285,8 +285,8 @@ Section
 				checked:	false
 				childrenOnSameRow:	true
 				info: qsTr("Set the maximum number of function evaluations for the optimizer. Available when using specific optimization methods in multilevel/multivariate meta-analysis.")
-				visible:	(optimizerMethod.value == "nlminb" || optimizerMethod.value == "uobyqa" || optimizerMethod.value == "newuoa" || optimizerMethod.value == "bobyqa" ||
-							optimizerMethod.value == "hjk" || optimizerMethod.value == "nmk" || optimizerMethod.value == "mads") && module == "metaAnalysisMultilevelMultivariate"
+				visible:	(optimizerMethod.value === "nlminb" || optimizerMethod.value === "uobyqa" || optimizerMethod.value === "newuoa" || optimizerMethod.value === "bobyqa" ||
+							optimizerMethod.value === "hjk" || optimizerMethod.value === "nmk" || optimizerMethod.value === "mads") && analysisType === "metaAnalysisMultilevelMultivariate"
 
 				IntegerField
 				{
@@ -305,10 +305,10 @@ Section
 				checked:	false
 				childrenOnSameRow:	true
 				info: qsTr("Set the maximum number of iterations for the optimizer. Available when using certain estimation or optimization methods.")
-				visible:	((method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes" ||
-							method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu") && module == "metaAnalysis") ||
-							((optimizerMethod.value == "nlminb" || optimizerMethod.value == "Nelder-Mead" || optimizerMethod.value == "BFGS" || 
-							optimizerMethod.value == "nloptr" || optimizerMethod.value == "nlm") && module == "metaAnalysisMultilevelMultivariate")
+				visible:	((method.value === "restrictedML" || method.value === "maximumLikelihood" || method.value === "empiricalBayes" ||
+							method.value === "pauleMandel" || method.value === "pauleMandelMu" || method.value === "qeneralizedQStatMu") && analysisType === "metaAnalysis") ||
+							((optimizerMethod.value === "nlminb" || optimizerMethod.value === "Nelder-Mead" || optimizerMethod.value === "BFGS" || 
+							optimizerMethod.value === "nloptr" || optimizerMethod.value === "nlm") && analysisType === "metaAnalysisMultilevelMultivariate")
 
 				IntegerField
 				{
@@ -332,19 +332,19 @@ Section
 				checked:	false
 				childrenOnSameRow:	true
 				info: qsTr("Set the convergence tolerance for the optimizer. Available when using certain methods without heterogeneity model terms or specific optimizers in multilevel/multivariate meta-analysis.")
-				visible:	((method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes" ||
-							method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu") &&
-							sectionModel.heterogeneityModelTermsCount == 0 && module == "metaAnalysis") ||
-							((optimizerMethod.value == "hjk" || optimizerMethod.value == "nmk" || optimizerMethod.value == "mads") && module == "metaAnalysisMultilevelMultivariate")
+				visible:	((method.value === "restrictedML" || method.value === "maximumLikelihood" || method.value === "empiricalBayes" ||
+							method.value === "pauleMandel" || method.value === "pauleMandelMu" || method.value === "qeneralizedQStatMu") &&
+							sectionModel.heterogeneityModelTermsCount == 0 && analysisType === "metaAnalysis") ||
+							((optimizerMethod.value === "hjk" || optimizerMethod.value === "nmk" || optimizerMethod.value === "mads") && analysisType === "metaAnalysisMultilevelMultivariate")
 
 				DoubleField
 				{
 					label: 				""
 					name: 				"optimizerConvergenceToleranceValue"
 					defaultValue:		{
-						if (method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes")
+						if (method.value === "restrictedML" || method.value === "maximumLikelihood" || method.value === "empiricalBayes")
 							1e-5
-						else if (method.value == "pauleMandel" || method.value == "pauleMandelMu" || method.value == "qeneralizedQStatMu")
+						else if (method.value === "pauleMandel" || method.value === "pauleMandelMu" || method.value === "qeneralizedQStatMu")
 							1e-4
 						else
 							1
@@ -361,8 +361,8 @@ Section
 				checked:	false
 				childrenOnSameRow:	true
 				info: qsTr("Set the relative convergence tolerance for the optimizer. Available when heterogeneity model terms are included or using specific optimizers in multilevel/multivariate meta-analysis.")
-				visible:	(sectionModel.heterogeneityModelTermsCount > 0  && module == "metaAnalysis") ||
-							((optimizerMethod.value == "nlminb" || optimizerMethod.value == "Nelder-Mead" || optimizerMethod.value == "BFGS") && module == "metaAnalysisMultilevelMultivariate")
+				visible:	(sectionModel.heterogeneityModelTermsCount > 0  && analysisType === "metaAnalysis") ||
+							((optimizerMethod.value === "nlminb" || optimizerMethod.value === "Nelder-Mead" || optimizerMethod.value === "BFGS") && analysisType === "metaAnalysisMultilevelMultivariate")
 
 				DoubleField
 				{
@@ -381,8 +381,8 @@ Section
 				checked:	false
 				childrenOnSameRow:	true
 				info: qsTr("Set the step adjustment factor for the optimizer. Available when using certain methods without heterogeneity model terms and unavailable in multilevel/multivariate meta-analysis.")
-				visible:	((method.value == "restrictedML" || method.value == "maximumLikelihood" || method.value == "empiricalBayes") &&
-							sectionModel.heterogeneityModelTermsCount == 0 && module == "metaAnalysis")
+				visible:	((method.value === "restrictedML" || method.value === "maximumLikelihood" || method.value === "empiricalBayes") &&
+							sectionModel.heterogeneityModelTermsCount == 0 && analysisType === "metaAnalysis")
 
 
 				DoubleField
@@ -402,7 +402,7 @@ Section
 				checked:	false
 				childrenOnSameRow:	true
 				info: qsTr("Set the initial trust region radius for the optimizer. Available when using specific optimization methods in multilevel/multivariate meta-analysis.")
-				visible:	((optimizerMethod.value == "uobyqa" || optimizerMethod.value == "newuoa" || optimizerMethod.value == "bobyqa") && module == "metaAnalysisMultilevelMultivariate")
+				visible:	((optimizerMethod.value === "uobyqa" || optimizerMethod.value === "newuoa" || optimizerMethod.value === "bobyqa") && analysisType === "metaAnalysisMultilevelMultivariate")
 
 				DoubleField
 				{
@@ -421,7 +421,7 @@ Section
 				checked:	false
 				childrenOnSameRow:	true
 				info: qsTr("Set the final trust region radius for the optimizer. Available when using specific optimization methods in multilevel/multivariate meta-analysis.")
-				visible:	((optimizerMethod.value == "uobyqa" || optimizerMethod.value == "newuoa" || optimizerMethod.value == "bobyqa") && module == "metaAnalysisMultilevelMultivariate")
+				visible:	((optimizerMethod.value === "uobyqa" || optimizerMethod.value === "newuoa" || optimizerMethod.value === "bobyqa") && analysisType === "metaAnalysisMultilevelMultivariate")
 
 				DoubleField
 				{
@@ -440,7 +440,7 @@ Section
 				checked:	false
 				childrenOnSameRow:	true
 				info: qsTr("Set the maximum number of restarts for the optimizer. Available when using the Nelder-Mead method ('nmk') in multilevel/multivariate meta-analysis.")
-				visible:	optimizerMethod.value == "mmk" && module == "metaAnalysisMultilevelMultivariate"
+				visible:	optimizerMethod.value === "mmk" && analysisType === "metaAnalysisMultilevelMultivariate"
 
 				IntegerField
 				{
@@ -458,9 +458,9 @@ Section
 			text:		qsTr("Permutation test")
 			name:		"permutationTest"
 			id:			permutationTest
-			visible:	module == "metaAnalysis"
+			visible:	analysisType === "metaAnalysis"
 			enabled:	clustering.count == 0
-			info: qsTr("Perform a permutation test for the model coefficients. Available in the meta-analysis module when clustering is not specified. The resulting permuation p-values are displayed in the 'p (permutation)' column. Note that permutation can be computationally intesive.")
+			info: qsTr("Perform a permutation test for the model coefficients. Available in the meta-analysis analysisType when clustering is not specified. The resulting permuation p-values are displayed in the 'p (permutation)' column. Note that permutation can be computationally intesive.")
 
 
 			RadioButtonGroup

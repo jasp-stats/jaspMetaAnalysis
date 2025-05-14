@@ -18,14 +18,14 @@
 
 ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = NULL, options, ...) {
 
-  options[["module"]] <- "metaAnalysisMultilevelMultivariate"
+  options[["analysis"]] <- "metaAnalysisMultilevelMultivariate"
 
   if (.maReady(options)) {
     dataset <- .mammCheckData(dataset, options)
     .mammCheckErrors(dataset, options)
   }
 
-  .ClassicalMetaAnalysisCommon(jaspResults, dataset, options)
+  ClassicalMetaAnalysisCommon(jaspResults, dataset, options)
 
   return()
 }
@@ -1259,7 +1259,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 }
 .mammAnyStructureGen             <- function(options) {
   # only relevant for multivariate
-  if (options[["module"]] != "metaAnalysisMultilevelMultivariate")
+  if (options[["analysis"]] != "metaAnalysisMultilevelMultivariate")
     return(FALSE)
 
   # get all the active components types
@@ -1273,7 +1273,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 }
 .mammHasMultipleHeterogeneities  <- function(options, canAddOutput = FALSE) {
   # only relevant for multivariate
-  if (options[["module"]] != "metaAnalysisMultilevelMultivariate")
+  if (options[["analysis"]] != "metaAnalysisMultilevelMultivariate")
     return(FALSE)
 
   # get all the active components types

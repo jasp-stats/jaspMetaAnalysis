@@ -25,31 +25,54 @@ Section
 	// RoBMA: Robust Bayesian Meta-Analsis
 	// BiBMA: Binomial Bayesian Meta-Analysis
 	// NoBMA: Normal Bayesian Meta-Analysis
-
-	property bool measuresGeneralChecked:	false
-	property bool measuresFittedChecked:		false
+	
+	property alias enableStudyLevelNesting:			enableStudyLevelNesting
 
 	title: 				qsTr("Advanced")
 	columns: 			2
-	enabled:			!measuresFittedChecked
-	onEnabledChanged:	if(!enabled) expanded = false
+
 	
 	Group
 	{
-		rowSpacing: 10 * preferencesModel.uiScale
 
-		DropDown
+		Group
 		{
-			name:		"advancedEstimationScale"
-			label:		qsTr("Estimation scale")
-			visible:	!measuresGeneralChecked && analysisType === "RoBMA"
-			values: [
-				{ label: qsTr("Fisher's z"),		value: "fishersZ"},
-				{ label: qsTr("Cohen's d"),			value: "cohensD"},
-				{ label: qsTr("logOR"),				value: "logOr"}
-			]
-		}
+			CheckBox
+			{
+				name:		"showRoBMARCode"
+				text:		qsTr("Show RoBMA R code")
+				info: qsTr("Display the underlying R code used by the RoBMA package to fit the model.")
+			}
 
+			CheckBox
+			{
+				name:		"includeFullDatasetInSubgroupAnalysis"
+				text:		qsTr("Include full dataset in subgroup analysis")
+				enabled:	subgroup.count == 1
+				checked:	false
+				info: qsTr("Include the full dataset output in the subgroup analysis. This option is only available when the subgroup analysis is selected.")
+			}
+
+			CheckBox
+			{
+				label:		qsTr("Shorten prior names")
+				name:		"shortenPriorName"
+				info: qsTr("Shorten the prior names in the output.")
+			}
+
+			CheckBox
+			{
+				label:		qsTr("Enable study-level nesting")
+				name:		"enableStudyLevelNesting"
+				id:			enableStudyLevelNesting
+				visible:	analysisType === "RoBMA"
+				info: qsTr("Enables study level nesting. Note that this is an experimental feature.")
+			}
+		}
+	}
+
+	Group
+	{
 		Group
 		{
 			title: 		qsTr("MCMC")
@@ -58,7 +81,7 @@ Section
 			{
 				name:			"advancedMcmcAdaptation"
 				label:			qsTr("Adaptation")
-				defaultValue:	500
+				defaultValue:	2000 + 500 * predictors.count + 1500 * studyLevelMultilevel.count + (analysisType === "RoBMA" ? 1500 : 0)
 				min:			100
 				fieldWidth:		55 * preferencesModel.uiScale
 			}
@@ -66,7 +89,7 @@ Section
 			{
 				name:			"advancedMcmcBurnin"
 				label:			qsTr("Burnin")
-				defaultValue:	2000
+				defaultValue:	2000 + 1000 * predictors.count + 2500 * studyLevelMultilevel.count + (analysisType === "RoBMA" ? 2500 : 0)
 				min:			100
 				fieldWidth:		55 * preferencesModel.uiScale
 			}
@@ -74,7 +97,7 @@ Section
 			{
 				name:			"advancedMcmcSamples"
 				label:			qsTr("Samples")
-				defaultValue:	5000
+				defaultValue:	5000 + 2000 * predictors.count + 5000 * studyLevelMultilevel.count + (analysisType === "RoBMA" ? 5000 : 0)
 				min:			100
 				fieldWidth:		55 * preferencesModel.uiScale
 			}
@@ -108,7 +131,7 @@ Section
 		{
 			label:			qsTr("Autofit")
 			name:			"autofit"
-			checked:		true
+			checked:		false
 
 			CheckBox
 			{
@@ -210,98 +233,37 @@ Section
 			{
 				label: 			qsTr("Extend samples")
 				name:			"advancedAutofitExtendSamples"
-				defaultValue:	1000
+				defaultValue:	5000
 				min:			100
 			}
 		}
 
-		CheckBox
-		{
-			label: 				qsTr("Remove failed models")
-			name:				"advancedRemoveFailedModels"
-			checked:			false
-
-			CheckBox
-			{
-				label: 				qsTr("R-hat")
-				name:				"advancedRemoveFailedModelsRHat"
-				checked:			true
-				childrenOnSameRow:	true
-
-				DoubleField
-				{
-					name:			"advancedRemoveFailedModelsRHatTarget"
-					defaultValue:	1.05
-					min:			1
-					inclusive:		JASP.None
-				}
-			}
-
-			CheckBox
-			{
-				label: 				qsTr("Effective sample size")
-				name:				"advancedRemoveFailedModelsEss"
-				checked:			true
-				childrenOnSameRow:	true
-
-				DoubleField
-				{
-					name:			"advancedRemoveFailedModelsEssTarget"
-					defaultValue:	500
-					min:			1
-					inclusive:		JASP.None
-				}
-			}
-
-			CheckBox
-			{
-				label: 				qsTr("MCMC error")
-				name:				"advancedRemoveFailedModelsMcmcError"
-				checked:			false
-				childrenOnSameRow:	true
-
-				DoubleField
-				{
-					name:			"advancedRemoveFailedModelsMcmcErrorTarget"
-					defaultValue:	0.001
-					min:			0
-					inclusive:		JASP.None
-				}
-			}
-
-			CheckBox
-			{
-				label: 				qsTr("MCMC error / SD")
-				name:				"advancedRemoveFailedModelsMcmcErrorSd"
-				checked:			false
-				childrenOnSameRow:	true
-
-				DoubleField
-				{
-					name:			"advancedRemoveFailedModelsMcmcErrorSdTarget"
-					defaultValue:	0.01
-					min:			0
-					inclusive:		JASP.None
-				}
-			}
-		}
-
-		CheckBox
-		{
-			label: 				qsTr("Rebalance component probability on model failure")
-			name:				"advancedRebalanceComponentProbabilityOnModelFailure"
-			checked:			true
-		}
-
 	}
 
-	FileSelector
-	{
-		Layout.columnSpan:	2
-		label: 				qsTr("Save the fitted model")
-		name:				"advancedSaveFittedModel"
-		filter:				"*.RDS"
-		save:				true
-		visible:			analysisType === "RoBMA"
+/* TODO: one needs to figure out how to add moderator names to the option list when importing a model 
+	Group
+	{	
+		FileSelector
+		{
+			name:				"pathToFittedModel"
+			label:  			qsTr("Load a fitted model")
+			filter:				"*.RDS"
+			save:				false
+			visible:			analysisType === "RoBMA"
+			info:				qsTr("Load a fitted model from a file. This will allow you to load the fitted model in a later session. Note that this will overwrite the current fitted model and all of the model fitting options (Model, Priors, etc.).")
+		}
+
+		FileSelector
+		{
+
+			label: 				qsTr("Save the fitted model")
+			name:				"advancedSaveFittedModel"
+			filter:				"*.RDS"
+			save:				true
+			visible:			analysisType === "RoBMA"
+			info:				qsTr("Save the fitted model to a file. This will allow you to load the fitted model in a later session.")
+		}
 	}
+*/
+
 }

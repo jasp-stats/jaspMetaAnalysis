@@ -40,7 +40,7 @@ Section
 			name:			"method"
 			label:			qsTr("Method")
 			currentIndex:	2
-			visible:		analysisType == "classical"
+			visible:		analysisType === "classical"
 
 			values: [
 				{ label: qsTr("Fixed Effects")		, value: "fixedEffects"			},
@@ -59,13 +59,13 @@ Section
 		{
 			name:		"withinStudyVariation"
 			label:		qsTr("Within-study variation")
-			values: 	if (analysisType == "bayesian" && measure == "oeRatio"){ // removing as metamisc's link function is broken for frequentist option: method.value == "Fixed Effects" || method.value == "Maximum Likelihood" ||
+			values: 	if (analysisType === "bayesian" && measure === "oeRatio"){ // removing as metamisc's link function is broken for frequentist option: method.value === "Fixed Effects" || method.value === "Maximum Likelihood" ||
 				[
 					{ label: qsTr("Normal/Log"),		value: "normal/log"			},
 					{ label: qsTr("Normal/Identity"),	value: "normal/identity"	},
 					{ label: qsTr("Poisson/Log"),		value: "poisson/log"		}
 				]
-			} else if (measure == "oeRatio"){
+			} else if (measure === "oeRatio"){
 				[
 					{ label: qsTr("Normal/Log"),		value: "normal/log"			},
 					{ label: qsTr("Normal/Identity"),	value: "normal/identity"	}
@@ -85,7 +85,7 @@ Section
 		{
 			name:		"priorAndPosteriorPlot"
 			label:		qsTr("Prior and posterior plot")
-			visible:	analysisType == "bayesian"
+			visible:	analysisType === "bayesian"
 		}
 
 		CheckBox
@@ -122,8 +122,8 @@ Section
 			text: 				qsTr("Column name (effect size)")
 			fieldWidth: 		150 * preferencesModel.uiScale
 			placeholderText: 	qsTr("O/E ratios")
-			visible:			measure == "oeRatio"
-			enabled:			measure == "oeRatio" && exportColumns.checked
+			visible:			measure === "oeRatio"
+			enabled:			measure === "oeRatio" && exportColumns.checked
 		}
 
 		ComputedColumnField
@@ -132,8 +132,8 @@ Section
 			text: 				qsTr("Column name (lCI)")
 			fieldWidth: 		150 * preferencesModel.uiScale
 			placeholderText:	qsTr("O/E ratios (lCI)")
-			visible:			measure == "oeRatio"
-			enabled:			measure == "oeRatio" && exportColumns.checked
+			visible:			measure === "oeRatio"
+			enabled:			measure === "oeRatio" && exportColumns.checked
 		}
 
 		ComputedColumnField
@@ -142,8 +142,8 @@ Section
 			text: 				qsTr("Column name (uCI)")
 			fieldWidth: 		150 * preferencesModel.uiScale
 			placeholderText:	qsTr("O/E ratios (uCI)")
-			visible:			measure == "oeRatio"
-			enabled:			measure == "oeRatio" && exportColumns.checked
+			visible:			measure === "oeRatio"
+			enabled:			measure === "oeRatio" && exportColumns.checked
 		}
 
 		ComputedColumnField
@@ -153,8 +153,8 @@ Section
 			text: 				qsTr("Column name (effect size)")
 			fieldWidth: 		150 * preferencesModel.uiScale
 			placeholderText:	qsTr("C-statistics")
-			visible:			measure == "cStatistic"
-			enabled:			measure == "cStatistic" && exportColumns.checked
+			visible:			measure === "cStatistic"
+			enabled:			measure === "cStatistic" && exportColumns.checked
 		}
 
 		ComputedColumnField
@@ -163,8 +163,8 @@ Section
 			text: 				qsTr("Column name (lCI)")
 			fieldWidth: 		150 * preferencesModel.uiScale
 			placeholderText:	qsTr("C-statistics (lCI)")
-			visible:			measure == "cStatistic"
-			enabled:			measure == "cStatistic" && exportColumns.checked
+			visible:			measure === "cStatistic"
+			enabled:			measure === "cStatistic" && exportColumns.checked
 		}
 
 		ComputedColumnField
@@ -173,8 +173,8 @@ Section
 			text: 				qsTr("Column name (uCI)")
 			fieldWidth: 		150 * preferencesModel.uiScale
 			placeholderText: 	qsTr("C-statistics (uCI)")
-			visible:			measure == "cStatistic"
-			enabled:			measure == "cStatistic" && exportColumns.checked
+			visible:			measure === "cStatistic"
+			enabled:			measure === "cStatistic" && exportColumns.checked
 		}
 	}
 

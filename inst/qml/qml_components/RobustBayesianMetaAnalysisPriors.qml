@@ -30,14 +30,14 @@ ColumnLayout
 	{
 		text:	switch (componentType) 
 		{
-			case "modelsEffect":				qsTr("Effect"); break;
-			case "modelsEffectNull":			qsTr("Effect (null)"); break;
-			case "modelsHeterogeneity":			qsTr("Heterogeneity"); break;
-			case "modelsHeterogeneityNull":		qsTr("Heterogeneity (null)"); break;
-			case "modelsPet":					qsTr("Publication bias: PET"); break;
-			case "modelsPetNull":				qsTr("Publication bias: PET (null)"); break;
-			case "modelsPeese":					qsTr("Publication bias: PEESE"); break;
-			case "modelsPeeseNull":				qsTr("Publication bias: PEESE (null)"); break;
+			case "priorsEffect":				qsTr("Effect"); break;
+			case "priorsEffectNull":			qsTr("Effect (null)"); break;
+			case "priorsHeterogeneity":			qsTr("Heterogeneity"); break;
+			case "priorsHeterogeneityNull":		qsTr("Heterogeneity (null)"); break;
+			case "priorsBiasPet":					qsTr("Publication bias: PET"); break;
+			case "priorsBiasPetNull":				qsTr("Publication bias: PET (null)"); break;
+			case "priorsBiasPeese":					qsTr("Publication bias: PEESE"); break;
+			case "priorsBiasPeeseNull":				qsTr("Publication bias: PEESE (null)"); break;
 		}
 		Layout.preferredHeight:	20 * preferencesModel.uiScale
 	}
@@ -56,22 +56,22 @@ ColumnLayout
 		optionKey:				"name"
 		defaultValues:			switch (componentType)
 		{
-			case "modelsEffect":				switch(analysisType)
+			case "priorsEffect":				switch(analysisType)
 			{
 				case "normal":		[{"type": "normal", "mu": "0", "sigma": "1"}]; break;
 				case "binomial":	[{"type": "t", "mu": "0", "sigma": "0.58", "nu": "4"}]; break;
 			}; break;
-			case "modelsEffectNull":			[{"type": "spike", "x0": "0"}]; break;
-			case "modelsHeterogeneity":			switch(analysisType)
+			case "priorsEffectNull":			[{"type": "spike", "x0": "0"}]; break;
+			case "priorsHeterogeneity":			switch(analysisType)
 			{
 				case "normal":		[{"type": "invgamma", "alpha": "1", "beta": "0.15"}]; break;
 				case "binomial":	[{"type": "invgamma", "alpha": "1.77", "beta": "0.55"}]; break;
 			}; break;
-			case "modelsHeterogeneityNull":		[{"type": "spike", "x0": "0"}]; break;
-			case "modelsPet":					[{"type": "cauchy", "x0": "0", "theta": "1", "priorWeight": "1/4"}]; break;
-			case "modelsPetNull":				[]; break;
-			case "modelsPeese":					[{"type": "cauchy", "x0": "0", "theta": "5", "priorWeight": "1/4"}]; break;
-			case "modelsPeeseNull":				[]; break;
+			case "priorsHeterogeneityNull":		[{"type": "spike", "x0": "0"}]; break;
+			case "priorsBiasPet":					[{"type": "cauchy", "x0": "0", "theta": "1", "priorWeight": "1/4"}]; break;
+			case "priorsBiasPetNull":				[]; break;
+			case "priorsBiasPeese":					[{"type": "cauchy", "x0": "0", "theta": "5", "priorWeight": "1/4"}]; break;
+			case "priorsBiasPeeseNull":				[]; break;
 		}
 		rowComponent: 			RowLayout
 		{
@@ -252,7 +252,7 @@ ColumnLayout
 					visible:			typeItem.currentValue !== "spike" && typeItem.currentValue !== "uniform"
 					value:				
 					{
-						if(componentType == "modelsHeterogeneity" || componentType == "modelsHeterogeneityNull" || componentType == "modelsPet" || componentType == "modelsPetNull" || componentType == "modelsPeese" || componentType == "modelsPeeseNull")
+						if(componentType === "priorsHeterogeneity" || componentType === "priorsHeterogeneityNull" || componentType === "priorsBiasPet" || componentType === "priorsBiasPetNull" || componentType === "priorsBiasPeese" || componentType === "priorsBiasPeeseNull")
 							0
 						else if (typeItem.currentValue === "gammaK0" || typeItem.currentValue === "gammaAB" || typeItem.currentValue === "invgamma" || typeItem.currentValue === "lognormal" || typeItem.currentValue === "beta")
 							0
@@ -261,7 +261,7 @@ ColumnLayout
 					}	
 					min:				
 					{
-						if(componentType == "modelsHeterogeneity" || componentType == "modelsHeterogeneityNull" || componentType == "modelsPet" || componentType == "modelsPetNull" || componentType == "modelsPeese" || componentType == "modelsPeeseNull")
+						if(componentType === "priorsHeterogeneity" || componentType === "priorsHeterogeneityNull" || componentType === "priorsBiasPet" || componentType === "priorsBiasPetNull" || componentType === "priorsBiasPeese" || componentType === "priorsBiasPeeseNull")
 							0
 						else if (typeItem.currentValue === "gammaK0" || typeItem.currentValue === "gammaAB" || typeItem.currentValue === "invgamma" || typeItem.currentValue === "lognormal" || typeItem.currentValue === "beta")
 							0

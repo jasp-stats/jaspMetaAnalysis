@@ -601,17 +601,21 @@
       # remove all NAs
       rightPanelCis <- rightPanelCis[!apply(rightPanelCis[,2:4], 1, function(x) all(is.na(x))),]
 
-      # adjust the number formatings
-      for (colName in c("est", "lCi", "uCi")) {
-        rightPanelCis[!is.na(rightPanelCis[,colName]),colName] <- .maFormatDigits(
-          rightPanelCis[!is.na(rightPanelCis[,colName]),colName],
-          options[["forestPlotAuxiliaryDigits"]])
-      }
+      if (nrow(rightPanelCis) > 0) {
+        # adjust the number formatings
+        for (colName in c("est", "lCi", "uCi")) {
+          rightPanelCis[!is.na(rightPanelCis[,colName]),colName] <- .maFormatDigits(
+            rightPanelCis[!is.na(rightPanelCis[,colName]),colName],
+            options[["forestPlotAuxiliaryDigits"]])
+        }
 
-      # deal with PIs and CIs separately
-      rightPanelCis$label <- NA
-      rightPanelCis$label[ is.na(rightPanelCis$est)] <- with(rightPanelCis[ is.na(rightPanelCis$est), ], paste0("PI [", lCi, ", ", uCi, "]"))
-      rightPanelCis$label[!is.na(rightPanelCis$est)] <- with(rightPanelCis[!is.na(rightPanelCis$est), ], paste0(est, " [", lCi, ", ", uCi, "]"))
+        # deal with PIs and CIs separately
+        rightPanelCis$label <- NA
+        rightPanelCis$label[ is.na(rightPanelCis$est)] <- with(rightPanelCis[ is.na(rightPanelCis$est), ], paste0("PI [", lCi, ", ", uCi, "]"))
+        rightPanelCis$label[!is.na(rightPanelCis$est)] <- with(rightPanelCis[!is.na(rightPanelCis$est), ], paste0(est, " [", lCi, ", ", uCi, "]"))
+      } else {
+        rightPanelCis <- NULL
+      }
 
     } else {
       rightPanelCis <- NULL
@@ -713,10 +717,14 @@
   yRange[1] <- yRange[1] - options[["forestPlotRelativeSizeRow"]]
 
   # fix plotting range
-  plotForest <- plotForest + ggplot2::coord_cartesian(
-    xlim   = xRange,
-    ylim   = yRange,
-    expand = FALSE
+  plotForest <- plotForest +
+    jaspGraphs::scale_x_continuous(
+      limits = xRange,
+      breaks = xBreaks
+    ) +  ggplot2::coord_cartesian(
+    xlim    = xRange,
+    ylim    = yRange,
+    expand  = FALSE
   ) + ggplot2::xlab(
     if (options[["forestPlotAuxiliaryEffectLabel"]] != "Effect Size")  options[["forestPlotAuxiliaryEffectLabel"]]
     else if (options[["transformEffectSize"]] == "none")               gettext("Effect Size")
@@ -839,12 +847,36 @@
   dataset <- attr(fit, "dataset")
 
   ### extract effect sizes and variances from the fitted object
-  dfForest <- data.frame(
-    effectSize     = fit[["yi"]],
-    standardError  = sqrt(fit[["vi"]]),
-    weights        = weights(fit),
-    id             = seq_along(fit[["yi"]])
-  )
+  if (.maIsClassical(options)) {
+    dfForest <- data.frame(
+      effectSize     = fit[["yi"]],
+      standardError  = sqrt(fit[["vi"]]),
+      weights        = weights(fit),
+      id             = seq_along(fit[["yi"]])
+    )
+  } else if (options[["analysis"]] == "BiBMA") {
+    tempDf <- metafor::escalc(
+      measure = "OR",
+      ai      = dataset[[options[["successesGroup1"]]]],
+      n1i     = dataset[[options[["sampleSizeGroup1"]]]],
+      ci      = dataset[[options[["successesGroup2"]]]],
+      n2i     = dataset[[options[["sampleSizeGroup2"]]]]
+    )
+    dfForest <- data.frame(
+      effectSize     = tempDf[["yi"]],
+      standardError  = sqrt(tempDf[["vi"]]),
+      weights        = (dataset[[options[["sampleSizeGroup1"]]]] + dataset[[options[["sampleSizeGroup2"]]]]),
+      id             = seq_len(nrow(dataset))
+    )
+  }else {
+    dfForest <- data.frame(
+      effectSize     = dataset[[options[["effectSize"]]]],
+      standardError  = dataset[[options[["effectSizeStandardError"]]]],
+      weights        = 1/dataset[[options[["effectSizeStandardError"]]]]^2,
+      id             = seq_len(nrow(dataset))
+    )
+  }
+
 
   # add CI using normal approximation
   dfForest$lCi <- dfForest$effectSize - qnorm((1 - options[["confidenceIntervalsLevel"]]) / 2, lower.tail = F) * dfForest$standardError
@@ -950,11 +982,25 @@
   if (is.null(fit) || jaspBase::isTryError(fit))
     return(NULL)
 
-  # Make sure no multiple prediction intervals are drawn for complex models
+  dataset <- attr(fit, "dataset")
+
+  # Make sure no multiple prediction intervals are drawn for complex models or Bayesian models
   if (.mammHasMultipleHeterogeneities(options)) {
     options[["predictionIntervals"]]           <- FALSE
     options[["forestPlotPredictionIntervals"]] <- FALSE
   }
+  if (!.maIsClassical(options)) {
+    options[["forestPlotEstimatedMarginalMeansCoefficientTests"]] <- options[["forestPlotEstimatedMarginalMeansCoefficientTestsAgainst0"]]
+    options[["predictionIntervals"]]           <- FALSE
+    options[["forestPlotPredictionIntervals"]] <- FALSE
+
+    # disable tests when no averaging is performed
+    if (!(options[["bayesianModelAveragingModerations"]] || options[["bayesianModelAveragingEffectSize"]])) {
+      options[["forestPlotEstimatedMarginalMeansTermTests"]]        <- FALSE
+      options[["forestPlotEstimatedMarginalMeansCoefficientTests"]] <- FALSE
+    }
+  }
+
 
   # initiate the local objects
   tempRow <- 1
@@ -962,7 +1008,7 @@
   additionalObjects     <- list()
 
   # terms and levels information
-  estimatedMarginalMeansTestsStaistics   <- options[["forestPlotAuxiliaryTestsInformation"]] == "statisticAndPValue"
+  estimatedMarginalMeansTestsStatistics  <- options[["forestPlotAuxiliaryTestsInformation"]] == "statisticAndPValue"
   estimatedMarginalMeansVariables        <- unlist(options[["forestPlotEstimatedMarginalMeansSelectedVariables"]])
 
   # statistics position adjustment
@@ -976,9 +1022,16 @@
   # add marginal estimates
   for (i in seq_along(estimatedMarginalMeansVariables)) {
 
-    tempTermTest               <- .maTermTests(fit, options, estimatedMarginalMeansVariables[i])
-    tempEstimatedMarginalMeans <- .maComputeMarginalMeansVariable(fit, options, estimatedMarginalMeansVariables[i], options[["forestPlotEstimatedMarginalMeansCoefficientTestsAgainst"]] , "effectSize")
-    tempTestText               <- .maPrintTermTest(tempTermTest, estimatedMarginalMeansTestsStaistics)
+    if (.maIsClassical(options)) {
+      tempTermTest               <- .maTermTests(fit, options, estimatedMarginalMeansVariables[i])
+      tempEstimatedMarginalMeans <- .maComputeMarginalMeansVariable(fit, options, estimatedMarginalMeansVariables[i], options[["forestPlotEstimatedMarginalMeansCoefficientTestsAgainst"]], "effectSize")
+      tempTestText               <- .maPrintTermTest(tempTermTest, estimatedMarginalMeansTestsStatistics)
+    } else {
+      tempTermTest               <- .robmaTermTests(fit, options, estimatedMarginalMeansVariables[i])
+      tempEstimatedMarginalMeans <- .robmaComputeMarginalMeansVariable(list("fit" = fit), options, estimatedMarginalMeansVariables[i], conditional = options[["forestPlotConditionalEstimates"]])
+      tempTestText               <- .robmaPrintBfTest(tempTermTest, options)
+    }
+
 
     # add term information
     additionalInformation[[tempRow]] <- data.frame(
@@ -995,7 +1048,11 @@
     # add levels information
     for (j in 1:nrow(tempEstimatedMarginalMeans)) {
 
-      tempCoefficientTest <- .maPrintCoefficientTest(tempEstimatedMarginalMeans[j,], estimatedMarginalMeansTestsStaistics)
+      if (.maIsClassical(options)) {
+        tempCoefficientTest <- .maPrintCoefficientTest(tempEstimatedMarginalMeans[j,], estimatedMarginalMeansTestsStatistics)
+      } else {
+        tempCoefficientTest <- .robmaPrintBfTest(tempEstimatedMarginalMeans[j,], options)
+      }
 
       additionalInformation[[tempRow]] <- data.frame(
         "label"  = if (estimatedMarginalMeansCoefficientTestsLeft) paste0(tempEstimatedMarginalMeans$value[j], ": ", tempCoefficientTest) else tempEstimatedMarginalMeans$value[j],
@@ -1039,8 +1096,13 @@
   # add adjusted effect size estimate
   if (options[["forestPlotEstimatedMarginalMeansAdjustedEffectSizeEstimate"]]) {
 
-    tempEstimatedMarginalMeans <- .maComputeMarginalMeansVariable(fit, options, "", options[["forestPlotEstimatedMarginalMeansCoefficientTestsAgainst"]] , "effectSize")
-    tempCoefficientTest <- .maPrintCoefficientTest(tempEstimatedMarginalMeans, options[["forestPlotAuxiliaryTestsInformation"]] == "statisticAndPValue")
+    if (.maIsClassical(options)) {
+      tempEstimatedMarginalMeans <- .maComputeMarginalMeansVariable(fit, options, "", options[["forestPlotEstimatedMarginalMeansCoefficientTestsAgainst"]] , "effectSize")
+      tempCoefficientTest <- .maPrintCoefficientTest(tempEstimatedMarginalMeans, options[["forestPlotAuxiliaryTestsInformation"]] == "statisticAndPValue")
+    } else {
+      tempEstimatedMarginalMeans <- .robmaComputeMarginalMeansVariable(list("fit" = fit), options, "intercept", conditional = options[["forestPlotConditionalEstimates"]])
+      tempCoefficientTest <- .robmaPrintBfTest(tempEstimatedMarginalMeans[1,], options)
+    }
 
     additionalInformation[[tempRow]] <- data.frame(
       "label" = if (estimatedMarginalMeansCoefficientTestsLeft) paste0(gettext("Adjusted Estimate"), ": ", tempCoefficientTest) else gettext("Adjusted Estimate"),
@@ -1117,9 +1179,12 @@
   additionalInformation <- list()
   additionalObjects     <- list()
 
-  if (options[["forestPlotResidualHeterogeneityTest"]]) {
+  if (options[["forestPlotHeterogeneityTest"]] && (.maIsClassical(options) || options[["bayesianModelAveragingHeterogeneity"]])) {
+
+
+
     additionalInformation[[tempRow]] <- data.frame(
-      "label" = .maPrintQTest(fit),
+      "label" = if (.maIsClassical(options)) .maPrintQTest(fit) else .robmaPrintTest(fit, options, "heterogeneity"),
       "y"     = tempRow,
       "est"   = NA,
       "lCi"   = NA,
@@ -1132,7 +1197,8 @@
 
   if (!.maGetMethodOptions(options) %in% c("FE", "EE") && options[["forestPlotHeterogeneityEstimateTau"]]) {
     additionalInformation[[tempRow]] <- data.frame(
-      "label" = .maPrintHeterogeneityEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "tau"),
+      "label" = if (.maIsClassical(options)) .maPrintHeterogeneityEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "tau")
+        else .robmaPrintPooledEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "tau", conditional = options[["forestPlotConditionalEstimates"]]),
       "y"     = tempRow,
       "est"   = NA,
       "lCi"   = NA,
@@ -1143,9 +1209,10 @@
     tempRow <- tempRow + 1
   }
 
-  if (!.maGetMethodOptions(options) %in% c("FE", "EE") && options[["forestPlotHeterogeneityEstimateTau2"]]) {
+  if ((!.maGetMethodOptions(options) %in% c("FE", "EE")) && options[["forestPlotHeterogeneityEstimateTau2"]]) {
     additionalInformation[[tempRow]] <- data.frame(
-      "label" = .maPrintHeterogeneityEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "tau2"),
+      "label" = if (.maIsClassical(options)) .maPrintHeterogeneityEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "tau2")
+      else .robmaPrintPooledEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "tau2", conditional = options[["forestPlotConditionalEstimates"]]),
       "y"     = tempRow,
       "est"   = NA,
       "lCi"   = NA,
@@ -1158,7 +1225,8 @@
 
   if (!.maGetMethodOptions(options) %in% c("FE", "EE") && !.maIsMetaregressionHeterogeneity(options) && options[["forestPlotHeterogeneityEstimateI2"]]) {
     additionalInformation[[tempRow]] <- data.frame(
-      "label" = .maPrintHeterogeneityEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "I2"),
+      "label" = if (.maIsClassical(options)) .maPrintHeterogeneityEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "I2")
+      else .robmaPrintPooledEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "I2", conditional = options[["forestPlotConditionalEstimates"]]),
       "y"     = tempRow,
       "est"   = NA,
       "lCi"   = NA,
@@ -1171,7 +1239,8 @@
 
   if (!.maGetMethodOptions(options) %in% c("FE", "EE") && !.maIsMetaregressionHeterogeneity(options) && options[["forestPlotHeterogeneityEstimateH2"]]) {
     additionalInformation[[tempRow]] <- data.frame(
-      "label" = .maPrintHeterogeneityEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "H2"),
+      "label" = if (.maIsClassical(options)) .maPrintHeterogeneityEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "H2")
+      else .robmaPrintPooledEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "H2", conditional = options[["forestPlotConditionalEstimates"]]),
       "y"     = tempRow,
       "est"   = NA,
       "lCi"   = NA,
@@ -1198,6 +1267,19 @@
   if (.maIsMetaregressionHeterogeneity(options) && options[["forestPlotHeterogeneityModerationTest"]]) {
     additionalInformation[[tempRow]] <- data.frame(
       "label" = .maPrintModerationTest(fit, options, par = "heterogeneity"),
+      "y"     = tempRow,
+      "est"   = NA,
+      "lCi"   = NA,
+      "uCi"   = NA,
+      "test"  = "",
+      "face"  = NA
+    )
+    tempRow <- tempRow + 1
+  }
+
+  if (options[["forestPlotPublicationBiasTest"]]) {
+    additionalInformation[[tempRow]] <- data.frame(
+      "label" = gettextf("Publication Bias: %1$s", .robmaPrintTest(fit, options, "bias", includeName = FALSE)),
       "y"     = tempRow,
       "est"   = NA,
       "lCi"   = NA,
@@ -1244,17 +1326,19 @@
     }
   }
 
-  if (options[["forestPlotEffectSizePooledEstimate"]]) {
+  if (.maIsClassical(options) && options[["forestPlotEffectSizePooledEstimate"]]) {
 
     pooledEffectSizeTestsRight <- options[["forestPlotEffectSizePooledEstimateTest"]] && options[["forestPlotTestsInRightPanel"]]
     pooledEffectSizeTestsBelow <- options[["forestPlotEffectSizePooledEstimateTest"]] && !options[["forestPlotTestsInRightPanel"]] && options[["forestPlotPredictionIntervals"]]
     pooledEffectSizeTestsLeft  <- options[["forestPlotEffectSizePooledEstimateTest"]] && !options[["forestPlotTestsInRightPanel"]] && !options[["forestPlotPredictionIntervals"]]
 
+    effectSizeName     <- gettext("Pooled Effect")
     tempPooledEstimate <- .maComputePooledEffectPlot(fit, options)
-    tempTestText      <- .maPrintCoefficientTest(tempPooledEstimate, options[["forestPlotAuxiliaryTestsInformation"]] == "statisticAndPValue")
+    tempTestText       <- .maPrintCoefficientTest(tempPooledEstimate, options[["forestPlotAuxiliaryTestsInformation"]] == "statisticAndPValue")
+
 
     additionalInformation[[tempRow]] <- data.frame(
-      "label" = if (pooledEffectSizeTestsLeft) paste0(gettext("Pooled Estimate"), ": ", tempTestText) else gettext("Pooled Estimate"),
+      "label" = if (pooledEffectSizeTestsLeft) paste0(effectSizeName, ": ", tempTestText) else effectSizeName,
       "y"     = tempRow,
       "est"   = tempPooledEstimate$est,
       "lCi"   = tempPooledEstimate$lCi,
@@ -1282,6 +1366,126 @@
       tempRow <- tempRow + 1
     }
   }
+
+  if (!.maIsClassical(options) && options[["forestPlotEffectSizePooledEstimate"]]) {
+
+    pooledEffectSizeTestsRight <- options[["bayesianModelAveragingEffectSize"]] && options[["forestPlotEffectSizePooledEstimateTest"]] && options[["forestPlotTestsInRightPanel"]]
+    pooledEffectSizeTestsBelow <- options[["bayesianModelAveragingEffectSize"]] && options[["forestPlotEffectSizePooledEstimateTest"]] && !options[["forestPlotTestsInRightPanel"]] && options[["forestPlotPredictionIntervals"]]
+    pooledEffectSizeTestsLeft  <- options[["bayesianModelAveragingEffectSize"]] && options[["forestPlotEffectSizePooledEstimateTest"]] && !options[["forestPlotTestsInRightPanel"]] && !options[["forestPlotPredictionIntervals"]]
+
+    effectSizeName         <- gettext("Pooled Effect")
+    tempPooledEstimate     <- .robmaComputePooledEffect(fit, options, conditional = options[["forestPlotConditionalEstimates"]])
+    tempPooledEstimate$est <- tempPooledEstimate$mean
+    tempTestText           <- .robmaPrintTest(fit, options, "effect", includeName = FALSE)
+
+    if (!.maIsMetaregression(options)) {
+
+      # only in nonmeta-regression models the pooled effect size matches the overall test
+      additionalInformation[[tempRow]] <- data.frame(
+        "label" = if (pooledEffectSizeTestsLeft) paste0(effectSizeName, ": ", tempTestText) else effectSizeName,
+        "y"     = tempRow,
+        "est"   = tempPooledEstimate$est,
+        "lCi"   = tempPooledEstimate$lCi,
+        "uCi"   = tempPooledEstimate$uCi,
+        "test"  = if (pooledEffectSizeTestsRight) tempTestText else "",
+        "face"  = NA
+      )
+      additionalObjects[[tempRow]] <- with(tempPooledEstimate, .maMakeDiamondDataFrame(est = est, lCi = lCi, uCi = uCi, row = tempRow, id = tempRow))
+      tempRow <- tempRow + 1
+
+      if (pooledEffectSizeTestsBelow || options[["forestPlotPredictionIntervals"]]) {
+        additionalInformation[[tempRow]] <- data.frame(
+          "label" = if (pooledEffectSizeTestsBelow) tempTestText else NA,
+          "y"     = tempRow,
+          "est"   = NA,
+          "lCi"   = if (options[["forestPlotPredictionIntervals"]]) tempPooledEstimate$lPi else NA,
+          "uCi"   = if (options[["forestPlotPredictionIntervals"]]) tempPooledEstimate$uPi else NA,
+          "test"  = "",
+          "face"  = NA
+        )
+
+        if (options[["forestPlotPredictionIntervals"]])
+          additionalObjects[[tempRow]] <- with(tempPooledEstimate, .maMakeRectangleDataFrame(lCi = lPi, uCi = uPi, row = tempRow, id = tempRow))
+
+        tempRow <- tempRow + 1
+      }
+
+    } else {
+
+
+      # only in nonmeta-regression models the pooled effect size matches the overall test
+      additionalInformation[[tempRow]] <- data.frame(
+        "label" = effectSizeName,
+        "y"     = tempRow,
+        "est"   = tempPooledEstimate$est,
+        "lCi"   = tempPooledEstimate$lCi,
+        "uCi"   = tempPooledEstimate$uCi,
+        "test"  = "",
+        "face"  = NA
+      )
+      additionalObjects[[tempRow]] <- with(tempPooledEstimate, .maMakeDiamondDataFrame(est = est, lCi = lCi, uCi = uCi, row = tempRow, id = tempRow))
+      tempRow <- tempRow + 1
+
+      if (options[["forestPlotPredictionIntervals"]]) {
+        additionalInformation[[tempRow]] <- data.frame(
+          "label" = NA,
+          "y"     = tempRow,
+          "est"   = NA,
+          "lCi"   = tempPooledEstimate$lPi,
+          "uCi"   = tempPooledEstimate$uPi,
+          "test"  = "",
+          "face"  = NA
+        )
+        additionalObjects[[tempRow]] <- with(tempPooledEstimate, .maMakeRectangleDataFrame(lCi = lPi, uCi = uPi, row = tempRow, id = tempRow))
+        tempRow <- tempRow + 1
+      }
+
+      if (options[["forestPlotEffectSizePooledEstimateTest"]]) {
+
+        # add adjusted effect size for meta-regression since they match the meta-analytic test
+        if (.robmaIsMetaregressionCentered(options)) {
+          tempTestEstimate     <- .robmaComputeAdjustedEffect(fit, options, conditional = options[["forestPlotConditionalEstimates"]])
+          tempTestEstimate$est <- tempPooledEstimate$mean
+          effectSizeName       <- gettext("Adjusted Estimate")
+        } else {
+          tempTestEstimate     <- .robmaComputeInterceptEffect(fit, options, conditional = options[["forestPlotConditionalEstimates"]])
+          tempTestEstimate$est <- tempPooledEstimate$mean
+          effectSizeName       <- gettext("Intercept Estimate")
+        }
+
+        additionalInformation[[tempRow]] <- data.frame(
+          "label" = if (pooledEffectSizeTestsLeft) paste0(effectSizeName, ": ", tempTestText) else effectSizeName,
+          "y"     = tempRow,
+          "est"   = tempTestEstimate$est,
+          "lCi"   = tempTestEstimate$lCi,
+          "uCi"   = tempTestEstimate$uCi,
+          "test"  = if (pooledEffectSizeTestsRight) tempTestText else "",
+          "face"  = NA
+        )
+        additionalObjects[[tempRow]] <- with(tempTestEstimate, .maMakeDiamondDataFrame(est = est, lCi = lCi, uCi = uCi, row = tempRow, id = tempRow))
+        tempRow <- tempRow + 1
+
+        if (pooledEffectSizeTestsBelow || options[["forestPlotPredictionIntervals"]]) {
+          additionalInformation[[tempRow]] <- data.frame(
+            "label" = if (pooledEffectSizeTestsBelow) tempTestText else NA,
+            "y"     = tempRow,
+            "est"   = NA,
+            "lCi"   = if (options[["forestPlotPredictionIntervals"]]) tempTestEstimate$lPi else NA,
+            "uCi"   = if (options[["forestPlotPredictionIntervals"]]) tempTestEstimate$uPi else NA,
+            "test"  = "",
+            "face"  = NA
+          )
+
+          if (options[["forestPlotPredictionIntervals"]] && .robmaIsMetaregressionCentered(options))
+            additionalObjects[[tempRow]] <- with(tempTestEstimate, .maMakeRectangleDataFrame(lCi = lPi, uCi = uPi, row = tempRow, id = tempRow))
+
+          tempRow <- tempRow + 1
+        }
+      }
+
+    }
+  }
+
 
   # return
   return(list(
