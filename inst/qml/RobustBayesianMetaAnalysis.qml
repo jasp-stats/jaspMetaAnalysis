@@ -32,12 +32,12 @@ Form
 	"The analysis is based on the Bayesian meta-analysis/meta-regression parameterization as outlined in Bartoš et al. (2025).")
 	infoBottom: "## " + qsTr("References") + "\n" +
 	"- Bartoš F, Gronau QF, Timmers B, Otte WM, Ly A, Wagenmakers EJ (2021). “Bayesian model‐averaged meta‐analysis in medicine.” _Statistics in Medicine, 40_(30), 6743-6761. https://doi.org/10.1002/sim.9170\n" +
-	"- Bartoš F, Maier M, Stanley TD, Wagenmakers EJ (2025). “Robust Bayesian meta-regression: Model-averaged moderation analysis in the presence of publication bias.” _Psychological Methods.  https://doi.org/10.1037/met0000737\n" +
+	"- Bartoš F, Maier M, Stanley TD, Wagenmakers EJ (2025). “Robust Bayesian meta-regression: Model-averaged moderation analysis in the presence of publication bias.” _Psychological Methods_.  https://doi.org/10.1037/met0000737\n" +
 	"- Bartoš F, Maier M, Quintana DS, Wagenmakers EJ (2022). “Adjusting for publication bias in JASP and R: Selection models, PET-PEESE, and robust Bayesian meta-analysis.” _Advances in Methods and Practices in Psychological Science, 5_(3), 25152459221109259. https://doi.org/10.1177/25152459221109259\n" +
 	"- Bartoš F, Maier M, Wagenmakers E, Doucouliagos H, Stanley TD (2023). “Robust Bayesian meta-analysis: Model-averaging across complementary publication bias adjustment methods.” _Research Synthesis Methods, 14_(1), 99–116. https://doi.org/10.1002/jrsm.1594\n" +
-	"- Bartoš F, Otte WM, Gronau QF, Timmers B, Ly A, Wagenmakers EJ (2023). “Empirical prior distributions for Bayesian meta-analyses of binary and time to event outcomes.” _arXiv preprint_ https://doi.org/10.48550/arXiv.2306.11468\n" + 
-	"- Maier M, Bartoš F, Wagenmakers E (2023). “Robust Bayesian Meta-Analysis: Addressing publication bias with model-averaging.” Psychological Methods, 28_(1), 107–122. https://doi.org/10.1037/met0000405\n" +
-	"- van Erp S, Verhagen J, Grasman RP, Wagenmakers EJ (2017). “Estimates of between-study heterogeneity for 705 meta-analyses reported in Psychological Bulletin from 1990–2013.” Journal of Open Psychology Data, 5_(1), 1–5. https://doi.org/10.5334/jopd.33\n" +
+	"- Bartoš F, Otte WM, Gronau QF, Timmers B, Ly A, Wagenmakers EJ (2023). “Empirical prior distributions for Bayesian meta-analyses of binary and time to event outcomes.” _arXiv Preprint_ https://doi.org/10.48550/arXiv.2306.11468\n" + 
+	"- Maier M, Bartoš F, Wagenmakers E (2023). “Robust Bayesian Meta-Analysis: Addressing publication bias with model-averaging.” _Psychological Methods, 28_(1), 107–122. https://doi.org/10.1037/met0000405\n" +
+	"- van Erp S, Verhagen J, Grasman RP, Wagenmakers EJ (2017). “Estimates of between-study heterogeneity for 705 meta-analyses reported in Psychological Bulletin from 1990–2013.” _Journal of Open Psychology Data, 5_(1), 1–5. https://doi.org/10.5334/jopd.33\n" +
 	"- Bartoš F, Maier M, (2025) _RoBMA: An R package for robust Bayesian meta-analyses_. R package version 3.5.0 Available at: <https://CRAN.R-project.org/package=RoBMA>.\n" +
 	"## " + qsTr("R Packages") + "\n" +
 	"- RoBMA"
