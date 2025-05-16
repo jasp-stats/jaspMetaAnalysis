@@ -23,6 +23,19 @@ import "./qml_components"		as MA
 
 Form
 {
+	info: qsTr("Bayesian Binomial meta-analysis allows you to conduct a binomial meta-analysis using the Bayesian approach. " + 
+	"By default, Bayesian meta-analysis model-averages across models assuming the presence vs. absence of the effect, heterogeneity, and moderation (if specified). " +
+	"The analysis provides pre-specified prior distributions for different effect size measures and fields. " + 
+	"The analysis allows you to specify meta-regression, 3-level meta-analysis, and subgroup analysis. " +
+	"The results include estimates of effect sizes, heterogeneity, moderation, and various plots to visualize the results.\n\n" +
+	"The analysis is based on the Bayesian meta-analysis/meta-regression parameterization as outlined in Bartoš et al. (2025) with the binomial-normal model described in Bartoš et al. (2023).")
+	infoBottom: "## " + qsTr("References") + "\n" +
+	"- Bartoš F, Gronau QF, Timmers B, Otte WM, Ly A, Wagenmakers EJ (2021). “Bayesian model‐averaged meta‐analysis in medicine.” _Statistics in Medicine, 40_(30), 6743-6761. https://doi.org/10.1002/sim.9170\n" +
+	"- Bartoš F, Otte WM, Gronau QF, Timmers B, Ly A, Wagenmakers EJ (2023). “Empirical prior distributions for Bayesian meta-analyses of binary and time to event outcomes.” _arXiv Preprint_ https://doi.org/10.48550/arXiv.2306.11468\n" + 
+	"- Bartoš F, Maier M, Stanley TD, Wagenmakers EJ (2025). “Robust Bayesian meta-regression: Model-averaged moderation analysis in the presence of publication bias.” _Psychological Methods_.  https://doi.org/10.1037/met0000737\n" +
+    "- Bartoš F, Maier M, (2025) _RoBMA: An R package for robust Bayesian meta-analyses_. R package version 3.5.0 Available at: <https://CRAN.R-project.org/package=RoBMA>.\n" +
+	"## " + qsTr("R Packages") + "\n" +
+	"- RoBMA"
 
 	VariablesForm
 	{

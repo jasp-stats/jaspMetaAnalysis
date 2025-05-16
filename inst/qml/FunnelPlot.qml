@@ -22,8 +22,17 @@ import JASP
 
 Form
 {
-
-	infoBottom: qsTr("Kossmeier, M., Tran, U. S., & Voracek, M. (2020). Power-enhanced funnel plots for meta-analysis. Zeitschrift für Psychologie, 228(1).")
+	info: qsTr("Funnel plots allow you to visualize the observed effect sizes and standard errors with the funnel outlaying the sampling distribution under a given meta-analytic model. " +
+	"Funnel plots are often used to assess publication bias and small-study effects. However, many studies have shown that funnel plots are not very reliable for this purpose. " + 
+	"See e.g. Lau et al., (2006) and Terrin et al. (2005).")
+	infoBottom: "## " + qsTr("References") + "\n" +
+	"- Lau J, Ioannidis JP, Terrin N, Schmid CH, Olkin I. (2006). “The case of the misleading funnel plot.” _BMJ, 333_(7568), 597-600. https://doi.org/10.1136/bmj.333.7568.597\n" +
+	"- Terrin N, Schmid CH, Lau J (2005). In an empirical evaluation of the funnel plot, researchers could not visually identify publication bias. _Journal of Clinical Epidemiology, 58_(9), 894-901. https://doi.org/10.1016/j.jclinepi.2005.01.006\n" +
+	"- Kossmeier M, Tran US, Voracek M. (2020). “Power-enhanced funnel plots for meta-analysis.” _Zeitschrift für Psychologie, 228_(1). https://doi.org/10.1027/2151-2604/a000392\n" +
+	"- Viechtbauer W (2010). “Conducting meta-analyses in R with the metafor package.” _Journal of Statistical Software, 36_(3), 1–48. https://doi.org/10.18637/jss.v036.i03\n" +
+	"- Viechtbauer W (2025). _metafor: Meta-Analysis Package for R_. R package version 4.8-0 Available at: <https://CRAN.R-project.org/package=metafor>.\n" +
+	"## " + qsTr("R Packages") + "\n" +
+	"- metafor"
 
 	VariablesForm
 	{

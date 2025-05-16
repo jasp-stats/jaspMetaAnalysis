@@ -23,6 +23,17 @@ import "../qml/qml_components" as MA
 
 Form
 {
+	info: qsTr("Classical multilevel/multivariate meta-analysis allows you to conduct a meta-analysis adjusting for the dependency between effect sizes using the classical approach. " + 
+	"The effect size dependency can be adjusted for by specifying the 'Effect Size Variance-Covariance Matrix' (interfacing the 'vcalc' function) and specifying the 'Random Effects/Model Components' (interfacing the 'random' argument in 'rma.mv' function). " +
+	"It provides options for fixed and random effects models, as well as meta-regression, and subgroup analysis. " +
+	"Additional options include the ability to specify clustering for robust variance estimation, permutation tests, and generating the metafor package R code. " +
+	"The results include estimates of effect sizes, heterogeneity, moderation, and various plots to visualize the results.")
+	infoBottom: "## " + qsTr("References") + "\n" +
+	"- Viechtbauer W (2010). “Conducting meta-analyses in R with the metafor package.” _Journal of Statistical Software, 36_(3), 1–48. https://doi.org/10.18637/jss.v036.i03\n" +
+	"- Viechtbauer W, López-López JA, Sánchez-Meca J, Marín-Martínez F (2015). “A comparison of procedures to test for moderators in mixed-effects meta-regression models.” _Psychological Methods, 20_(3), 360–374. https://doi.org/10.1037/met0000023\n" +
+	"- Viechtbauer W (2025). _metafor: Meta-Analysis Package for R_. R package version 4.8-0 Available at: <https://CRAN.R-project.org/package=metafor>.\n" +
+	"## " + qsTr("R Packages") + "\n" +
+	"- metafor"
 
 	VariablesForm
 	{
