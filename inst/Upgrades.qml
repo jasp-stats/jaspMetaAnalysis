@@ -3,197 +3,6 @@ import JASP.Module
 
 Upgrades
 {
-
-	// These functions are used to make upgraders for reusable components that are, well, actually reused multiple times. 
-	// So instead of copy pasting the upgrade code we reuse these upgrader functions
-
-	// Priors in robma
-	// qml_components/RobustBayesianMetaAnalysisPriors.qml
-	function robmaPriorsUpgrader(name) {
-		return function(options) {
-			let newModels = options[name].map(model => {
-					let newModel = {};
-					newModel.name				= model.name;
-					newModel.type				= model.type;
-					newModel.mu					= model.parMean;
-					newModel.x0					= model.parLocation;
-					newModel.sigma				= model.parScale;
-					newModel.k					= model.parShape;
-					newModel.theta				= model.parScale2;
-					newModel.nu					= model.parDf;
-					newModel.alpha				= model.parAlpha;
-					newModel.beta				= model.parBeta;
-					newModel.a					= model.parA;
-					newModel.b					= model.parB;
-					newModel.truncationLower	= model.truncationLower;
-					newModel.truncationUpper	= model.truncationUpper;
-					newModel.priorWeight		= model.priorWeight;
-
-					return newModel;
-				});
-
-			return newModels;
-		}
-	}
-
-	// Weight functions in robma
-	// qml_components/RobustBayesianMetaAnalysisWeightunctions.qml
-	function robmaWeightFunctionsUpgrader(name) {
-		return function(options) {
-			// helper function to upgrade model type
-			function typeSwitcher(type) {
-				switch(type) {
-					case "two-sided":		return "twoSided";
-					case "one-sided":		return "oneSided";
-					case "two-sided-fixed":	return "twoSidedFixed";
-					case "one-sided-fixed":	return "oneSidedFixed";
-					default:				return type;
-				}
-			}
-
-			let newModels = options[name].map(model => {
-				let newModel = {};
-				newModel.name			= model.name;
-				newModel.type			= typeSwitcher(model.type);
-				newModel.pValues		= model.parCuts;
-				newModel.alpha			= model.parAlpha;
-				newModel.omega			= model.parOmega;
-				newModel.priorWeight	= model.priorWeight;
-
-				return newModel;
-
-			});
-
-			return newModels;
-		}
-	}
-
-	Upgrade
-	{
-		functionName:	"ClassicalMetaAnalysis"
-		fromVersion:	"0.19.1"
-		toVersion:		"0.19.2"
-
-		ChangeIncompatible
-		{
-			msg: qsTr("Results of this analysis cannot be updated. The analysis was created with an older version of JASP and the analysis options are not longer compatible. Please, redo the analysis with the updated module or download the 0.19.1 version of JASP to rerun or edit the analysis.")
-		}
-	}
-	Upgrade
-	{
-		functionName:	"BayesianMetaAnalysis"
-		fromVersion:	"0.16.4"
-		toVersion:		"0.17"
-
-		// BayesianMetaAnalysis.qml
-		ChangeRename { from: "standardError"; to: "effectSizeSe" }
-		ChangeRename { from: "confidenceInterval"; to: "effectSizeCi" }
-		ChangeRename { from: "studyLabels"; to: "studyLabel" }
-
-		// BayesianMetaAnalysisInference.qml
-		ChangeRename { from: "modelSpecification"; to: "model" }
-		ChangeJS
-		{
-				name:		"model"
-				jsFunction:	function(options)
-				{
-						switch(options["model"])
-						{
-								case "FE":	return "fixed";
-								case "RE":	return "random";
-								case "BMA":	return "averaging";
-								case "CRE":	return "constrainedRandom";
-								default:	return options["model"];
-						}
-				}
-		}
-		ChangeRename { from: "direction"; to: "constrainedRandomDirection" }
-		ChangeJS
-		{
-				name:		"constrainedRandomDirection"
-				jsFunction:	function(options)
-				{
-						switch(options["constrainedRandomDirection"])
-						{
-								case "allPos":	return "positive";
-								case "allNeg":	return "negative";
-								default:		return options["constrainedRandomDirection"];
-						}
-				}
-		}
-		ChangeRename { from: "postTable"; to: "modelProbability" }
-		ChangeRename { from: "esTable"; to: "effectSizePerStudy" }
-
-		// BayesianMetaAnalysisPlots.qml
-		ChangeRename { from: "forestPlot"; to: "forestPlotEffect" }
-		ChangeRename { from: "checkForestPlot"; to: "forestPlot" }
-		ChangeJS
-		{
-				name:		"forestPlotEffect"
-				jsFunction:	function(options)
-				{
-						switch(options["forestPlotEffect"])
-						{
-								case "plotForestObserved":	return "observed";
-								case "plotForestEstimated":	return "estimated";
-								case "plotForestBoth":		return "both";
-								default:					options["forestPlotEffect"];
-						}
-				}
-		}
-		ChangeRename { from: "showLabels"; to: "forestPlotLabel" }
-		ChangeRename { from: "orderForest"; to: "forestPlotRowOrder" }
-		ChangeJS
-		{
-				name:		"forestPlotRowOrder"
-				jsFunction:	function(options)
-				{
-						switch(options["forestPlotRowOrder"])
-						{
-								case "ascendingForest":	    return "ascending";
-								case "descendingForest":	return "descending";
-								case "labelForest":	        return "rowOrder";
-								default:					return options["forestPlotRowOrder"]
-						}
-				}
-		}
-		ChangeRename { from: "plotCumForest"; to: "cumulativeForestPlot" }
-		ChangeRename { from: "addPrior"; to: "cumulativeForestPlotPrior" }
-		ChangeRename { from: "plotPosterior"; to: "priorPosterior" }
-		ChangeRename { from: "addInfo"; to: "priorPosteriorAdditionalInfo" }
-		ChangeRename { from: "addLines"; to: "priorPosteriorFixedAndRandom" }
-		ChangeRename { from: "shade"; to: "priorPosteriorCi" }
-		ChangeRename { from: "plotSequential"; to: "bfSequentialPlot" }
-		ChangeRename { from: "plotSeqPM"; to: "modelProbabilitySequentialPlot" }
-
-		// BayesianMetaAnalysisPriors.qml
-		ChangeRename { from: "priorES"; to: "priorEffectSize" }
-		ChangeRename { from: "informativeCauchyLocation"; to: "cauchyLocation" }
-		ChangeRename { from: "informativeCauchyScale"; to: "cauchyScale" }
-		ChangeRename { from: "informativeNormalMean"; to: "normalMean" }
-		ChangeRename { from: "informativeNormalStd"; to: "normalSd" }
-		ChangeRename { from: "informativeTLocation"; to: "tLocation" }
-		ChangeRename { from: "informativeTScale"; to: "tScale" }
-		ChangeRename { from: "informativeTDf"; to: "tDf" }
-		ChangeRename { from: "checkLowerPrior"; to: "truncationLowerBound" }
-		ChangeRename { from: "lowerTrunc"; to: "truncationLowerBoundValue" }
-		ChangeRename { from: "checkUpperPrior"; to: "truncationUpperBound" }
-		ChangeRename { from: "upperTrunc"; to: "truncationUpperBoundValue" }
-		ChangeRename { from: "priorSE"; to: "priorStandardError" }
-		ChangeRename { from: "informativehalfTScale"; to: "halfTScale" }
-		ChangeRename { from: "informativehalfTDf"; to: "halfTDf" }
-		ChangeRename { from: "plotPrior"; to: "priorPlot" }
-
-		// BayesianMetaAnalysisAdvanced.qml
-		ChangeRename { from: "priorH0FE"; to: "priorModelProbabilityFixedNull" }
-		ChangeRename { from: "priorH1FE"; to: "priorModelProbabilityFixedAlternative" }
-		ChangeRename { from: "priorH0RE"; to: "priorModelProbabilityRandomNull" }
-		ChangeRename { from: "priorH1RE"; to: "priorModelProbabilityRandomAlternative" }
-		ChangeRename { from: "iterMCMC"; to: "samples" }
-		ChangeRename { from: "chainsMCMC"; to: "chains" }
-		ChangeRename { from: "BFComputation"; to: "bayesFactorComputation" }
-		ChangeRename { from: "iterBridge"; to: "bridgeSamplingSamples" }
-	}
 	Upgrade
 	{
 		functionName:	"ClassicalPredictionPerformance"
@@ -409,213 +218,6 @@ Upgrades
 		ChangeRename { from: "plotModels"; to: "plotsMeanModelEstimatesPlot" }	
 	}	
 
-
-	Upgrade
-	{
-		functionName:	"RobustBayesianMetaAnalysis"
-		fromVersion:	"0.17.2"
-		toVersion:		"0.17.3"
-
-		// RobustBayesianMetaAnalysis.qml
-		ChangeRename { from: "fittedPath"; to: "pathToFittedModel" }
-		ChangeRename { from: "inputES"; to: "effectSize" }
-		ChangeRename { from: "inputSE"; to: "effectSizeSe" }
-		ChangeRename { from: "inputCI"; to: "effectSizeCi" }
-		ChangeRename { from: "inputN"; to: "sampleSize" }
-		ChangeRename { from: "inputPVal"; to: "pValue" }	
-		ChangeRename { from: "inputLabels"; to: "studyLabel" }
-		ChangeRename { from: "measures"; to: "inputType" }
-		ChangeJS
-		{
-			name:		"inputType"
-			jsFunction:	function(options)
-			{
-				switch(options["inputType"])
-				{
-					case "logOR":	return "logOr";
-					case "general":	return "unstandardizedEffectSizes";
-					case "fitted":	return "fittedModel";
-					default:		return options["inputType"];
-				}
-			}
-		}
-		ChangeRename { from: "modelType"; to: "modelEnsembleType" }
-		ChangeJS
-		{
-			name:		"modelEnsembleType"
-			jsFunction:	function(options)
-			{
-				switch(options["modelEnsembleType"])
-				{
-					case "2w":	return "original";
-					default:	return options["modelEnsembleType"];
-				}
-			}
-		}
-		ChangeJS
-		{
-			name:		"priorScale"
-			jsFunction:	function(options)
-			{
-				switch(options["priorScale"])
-				{
-					case "cohens_d":	return "cohensD";
-					case "fishers_z":	return "fishersZ";
-					case "logOR":		return "logOr";
-					default:			return options["priorScale"];
-				}
-			}
-		}
-		ChangeRename { from: "plotPriors"; to: "priorDistributionPlot" }
-		// inference section
-		ChangeRename { from: "resultsConditional"; to: "inferenceConditionalParameterEstimates" }
-		ChangeRename { from: "resultsModels"; to: "inferenceModelsOverview" }
-		ChangeRename { from: "resultsModelsBf"; to: "inferenceModelsOverviewBfComparison" }
-		ChangeRename { from: "resultsModelsOrder"; to: "inferenceModelsOverviewOrder" }
-		ChangeJS
-		{
-			name:		"inferenceModelsOverviewOrder"
-			jsFunction:	function(options)
-			{
-				switch(options["inferenceModelsOverviewOrder"])
-				{
-					case "default":		return "modelNumber";
-					case "marglik":		return "marginalLikelihood";
-					case "posterior": 	return "posteriorProbability";
-					default:			return options["inferenceModelsOverviewOrder"];
-				}
-			}
-		}
-		ChangeRename { from: "resultsIndividual"; to: "inferenceIndividualModels" }
-		ChangeRename { from: "resultsIndividualSingle"; to: "inferenceIndividualModelsSingleModel" }
-		ChangeRename { from: "resultsIndividualSingleNumber"; to: "inferenceIndividualModelsSingleModelNumber" }
-		ChangeRename { from: "resultsCi"; to: "inferenceCiWidth" }
-		ChangeRename { from: "resultsScale"; to: "inferenceOutputScale" }
-		ChangeJS
-		{
-			name:		"inferenceOutputScale"
-			jsFunction:	function(options)
-			{
-				switch(options["inferenceOutputScale"])
-				{
-					case "cohens_d":	return "cohensD";
-					case "fishers_z":	return "fishersZ";
-					case "logOR":		return "logOr";
-					case "r":			return "correlation";
-					default:			return options["inferenceOutputScale"];
-				}
-			}
-		}
-		ChangeRename { from: "shortNames"; to: "inferenceShortenPriorName" }
-		// Plots section
-		ChangeRename { from: "plotForest"; to: "plotsForestPlot" }
-		ChangeRename { from: "plotForestOrder"; to: "plotsForestPlotOrder" }
-		ChangeRename { from: "plotForestType"; to: "plotsForestPlotType" }
-
-		ChangeRename { from: "plotEstimatesMu"; to: "plotsPooledEstimatesEffect" }
-		ChangeRename { from: "plotEstimatesTau"; to: "plotsPooledEstimatesHeterogeneity" }
-		ChangeRename { from: "plotEstimatesWeightFunction"; to: "plotsPooledEstimatesWeightFunction" }
-		ChangeRename { from: "plotEstimatesWeightFunctionRescale"; to: "plotsPooledEstimatesWeightFunctionRescaleXAxis" }
-		ChangeRename { from: "plotEstimatesPetPeese"; to: "plotsPooledEstimatesPetPeese" }
-		ChangeRename { from: "plotEstimatesType"; to: "plotsPooledEstimatesType" }
-		ChangeRename { from: "plotEstimatesPriors"; to: "plotsPooledEstimatesPriorDistribution" }
-		
-		ChangeRename { from: "plotModelsMu"; to: "plotsIndividualModelsEffect" }
-		ChangeRename { from: "plotModelsTau"; to: "plotsIndividualModelsHeterogeneity" }
-		ChangeRename { from: "plotModelsType"; to: "plotsIndividualModelsType" }
-		ChangeRename { from: "plotModelsOrder"; to: "plotsIndividualModelsOrder" }
-		ChangeRename { from: "plotModelsOrderBy"; to: "plotsIndividualModelsOrderBy" }
-		ChangeJS
-		{
-			name:		"plotsIndividualModelsOrderBy"
-			jsFunction:	function(options)
-			{
-				switch(options["plotsIndividualModelsOrderBy"])
-				{
-					case "model":		return "modelNumber";
-					case "BF":			return "bayesFactor";
-					case "probability":	return "posteriorProbability";
-					default:			return options["plotsIndividualModelsOrderBy"];
-				}
-			}
-		}
-		ChangeRename { from: "plotModelsShowUpdating"; to: "plotsIndividualModelsShowBayesianUpdating" }
-		ChangeRename { from: "plotModelsShowEstimates"; to: "plotsIndividualModelsShowPosteriorEstimates" }
-		// MCMC Diagnostics section
-		ChangeRename { from: "diagnosticsOverview"; to: "mcmcDiagnosticsOverviewTable" }
-		ChangeRename { from: "diagnosticsMu"; to: "mcmcDiagnosticsPlotEffect" }
-		ChangeRename { from: "diagnosticsTau"; to: "mcmcDiagnosticsPlotHeterogeneity" }
-		ChangeRename { from: "diagnosticsOmega"; to: "mcmcDiagnosticsPlotWeights" }
-		ChangeRename { from: "diagnosticsPet"; to: "mcmcDiagnosticsPlotPet" }
-		ChangeRename { from: "diagnosticsPeese"; to: "mcmcDiagnosticsPlotPeese" }
-		ChangeRename { from: "diagnosticsTrace"; to: "mcmcDiagnosticsPlotTypeTrace" }
-		ChangeRename { from: "diagnosticsAutocorrelation"; to: "mcmcDiagnosticsPlotTypeAutocorrelation" }
-		ChangeRename { from: "diagnosticsSamples"; to: "mcmcDiagnosticsPlotTypePosteriorSamplesDensity" }
-		ChangeRename { from: "diagnosticsSingle"; to: "mcmcDiagnosticsPlotSingleModel" }
-		ChangeRename { from: "diagnosticsSingleModel"; to: "mcmcDiagnosticsPlotSingleModelNumber" }
-		// Priors section
-		ChangeRename { from: "effect"; to: "modelsEffect" }
-		ChangeRename { from: "heterogeneity"; to: "modelsHeterogeneity" }
-		ChangeRename { from: "omega"; to: "modelsSelectionModels" }
-		ChangeRename { from: "pet"; to: "modelsPet" }
-		ChangeRename { from: "peese"; to: "modelsPeese" }
-		ChangeRename { from: "effectNull"; to: "modelsEffectNull" }
-		ChangeRename { from: "heterogeneityNull"; to: "modelsHeterogeneityNull" }
-		ChangeRename { from: "omegaNull"; to: "modelsSelectionModelsNull" }
-		ChangeRename { from: "petNull"; to: "modelsPetNull" }
-		ChangeRename { from: "peeseNull"; to: "modelsPeeseNull" }
-
-		// apply the upgrader functions on the repeated components
-		Repeater
-		{
-			model: ["modelsEffect", "modelsHeterogeneity", "modelsPet", "modelsPeese", "modelsEffectNull", "modelsHeterogeneityNull", "modelsPetNull", "modelsPeeseNull"]
-			ChangeJS { name: modelData; jsFunction: robmaPriorsUpgrader(modelData) }
-		}
-
-		Repeater
-		{
-			model: ["modelsSelectionModels", "modelsSelectionModelsNull"]
-			ChangeJS { name: modelData; jsFunction: robmaWeightFunctionsUpgrader(modelData) }
-		}
-
-		// Advanced section
-		ChangeRename { from: "fittingScale"; to: "advancedEstimationScale" }
-		ChangeJS
-		{
-			name:		"advancedEstimationScale"
-			jsFunction:	function(options)
-			{
-				switch(options["advancedEstimationScale"])
-				{
-					case "cohens_d":	return "cohensD";
-					case "fishers_z":	return "fishersZ";
-					case "logOR":		return "logOr";
-					default:			return options["advancedEstimationScale"];
-				}
-			}
-		}
-		ChangeRename { from: "advancedAdapt"; to: "advancedMcmcAdaptation" }
-		ChangeRename { from: "advancedBurnin"; to: "advancedMcmcBurnin" }
-		ChangeRename { from: "advancedIteration"; to: "advancedMcmcSamples" }
-		ChangeRename { from: "advancedChains"; to: "advancedMcmcChains" }
-		ChangeRename { from: "advancedThin"; to: "advancedMcmcThin" }
-		ChangeRename { from: "autofitRhat"; to: "advancedAutofitRHat" }
-		ChangeRename { from: "autofitRhatValue"; to: "advancedAutofitRHatTarget" }
-		ChangeRename { from: "autofitEss"; to: "advancedAutofitEss" }
-		ChangeRename { from: "autofitEssValue"; to: "advancedAutofitEssTarget" }
-		ChangeRename { from: "autofitMcmcError"; to: "advancedAutofitMcmcError" }
-		ChangeRename { from: "autofitMcmcErrorValue"; to: "advancedAutofitMcmcErrorTarget" }
-		ChangeRename { from: "autofitMcmcErrorSd"; to: "advancedAutofitMcmcErrorSd" }
-		ChangeRename { from: "autofitMcmcErrorSdValue"; to: "advancedAutofitMcmcErrorSdTarget" }
-		ChangeRename { from: "autofitTime"; to: "advancedAutofitMaximumFittingTime" }
-		ChangeRename { from: "autofitTimeValue"; to: "advancedAutofitMaximumFittingTimeTarget" }
-		ChangeRename { from: "autofitTimeUnit"; to: "advancedAutofitMaximumFittingTimeTargetUnit" }
-		ChangeRename { from: "autofitExtendSamples"; to: "advancedAutofitExtendSamples" }
-		ChangeRename { from: "removeFailed"; to: "advancedAutofitRemoveFailedModels" }
-		ChangeRename { from: "balanceProbability"; to: "advancedAutofitRebalanceComponentProbabilityOnModelFailure" }
-		ChangeRename { from: "savePath"; to: "advancedSaveFittedModel" }
-	}
-
 	Upgrade
 	{
 		functionName:	"PenalizedMetaAnalysis"
@@ -631,36 +233,6 @@ Upgrades
 		ChangeRename { from: "estimatesI2"; to: "inferenceHeterogeneityI2" }
 		ChangeRename { from: "availableModelComponentsPlot"; to: "posteriorPlotsAvailableTerms" }
 		ChangeRename { from: "plotPosterior"; to: "posteriorPlotsSelectedTerms" }
-	}
-
-	Upgrade
-	{
-		functionName:	"RobustBayesianMetaAnalysis"
-		fromVersion:	"0.18.3"
-		toVersion:		"0.19"
-
-		ChangeRename { from: "advancedAutofitRemoveFailedModels"; to: "advancedRemoveFailedModels" }
-		ChangeRename { from: "advancedAutofitRebalanceComponentProbabilityOnModelFailure"; to: "advancedRebalanceComponentProbabilityOnModelFailure" }
-	}
-
-	Upgrade
-	{
-		functionName:	"RobustBayesianMetaAnalysis"
-		fromVersion:	"0.19.1"
-		toVersion:		"0.19.2"
-
-		ChangeJS
-		{
-			jsFunction:	function(options)
-			{
-				name:		"inferenceOutputScale"
-				switch(options["inferenceOutputScale"])
-				{
-					case "correlation":	return "r";
-					default:			return options["inferenceOutputScale"];
-				}
-			}
-		}
 	}
 
 	Upgrade
@@ -730,4 +302,54 @@ Upgrades
 			}
 		}
 	}
+
+	Upgrade
+	{
+		functionName:	"ClassicalMetaAnalysis"
+		fromVersion:	"0.19.1"
+		toVersion:		"0.19.2"
+
+		ChangeIncompatible
+		{
+			msg: qsTr("Results of this analysis cannot be updated. The analysis was created with an older version of JASP and the analysis options are not longer compatible. Please, redo the analysis with the updated module or download the 0.19.1 version of JASP to rerun or edit the analysis.")
+		}
+	}
+
+	Upgrade
+	{
+		functionName:	"BayesianMetaAnalysis"
+		fromVersion:	"0.19.3"
+		toVersion:		"0.20.0"
+
+		ChangeIncompatible
+		{
+			msg: qsTr("Results of this analysis cannot be updated. The analysis was created with an older version of JASP and the analysis options are not longer compatible. Please, redo the analysis with the updated module or download the 0.19.3 version of JASP to rerun or edit the analysis.")
+		}
+	}
+
+	Upgrade
+	{
+		functionName:	"BayesianBinomialMetaAnalysis"
+		fromVersion:	"0.19.3"
+		toVersion:		"0.20.0"
+
+		ChangeIncompatible
+		{
+			msg: qsTr("Results of this analysis cannot be updated. The analysis was created with an older version of JASP and the analysis options are not longer compatible. Please, redo the analysis with the updated module or download the 0.19.3 version of JASP to rerun or edit the analysis.")
+		}
+	}
+
+	Upgrade
+	{
+		functionName:	"BayesianMetaAnalysis"
+		fromVersion:	"0.19.3"
+		toVersion:		"0.20.0"
+
+		ChangeIncompatible
+		{
+			msg: qsTr("Results of this analysis cannot be updated. The analysis was created with an older version of JASP and the analysis options are not longer compatible. Please, redo the analysis with the updated module or download the 0.19.3 version of JASP to rerun or edit the analysis.")
+		}
+	}
 }
+
+
