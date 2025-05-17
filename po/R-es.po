@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2025-05-17 02:58\n"
-"PO-Revision-Date: 2025-05-11 11:01+0000\n"
+"PO-Revision-Date: 2025-05-18 14:01+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Weblate 5.12-dev\n"
 
 msgid "There must be at least one observation in each group."
-msgstr ""
+msgstr "Debe haber al menos una observación en cada grupo."
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr "El límite previo inferior no es menor que el límite superior."
@@ -402,7 +402,6 @@ msgstr "p"
 msgid "p (permutation)"
 msgstr "p (permutación)"
 
-#, fuzzy
 msgid "The model for subgroup '%1$s' failed with the following error: %2$s"
 msgstr "El modelo para el subgrupo '%1$s' fracasó con el siguiente fallo: %2$s"
 
@@ -841,13 +840,11 @@ msgstr ""
 "El modelo de heterogeneidad para 𝜏² está especificado en la escala de "
 "identidad."
 
-#, fuzzy
 msgid "pooled effect"
 msgstr "Efecto combinado"
 
-#, fuzzy
 msgid "adjusted effect"
-msgstr "Efectos ordenados"
+msgstr "Efecto ajustado"
 
 msgid "%1$i observations were ommited due to missing values."
 msgstr "%1$i observaciones fueron omitidas debido a valores que faltan."
@@ -868,19 +865,16 @@ msgid "%1$s: %2$i clusters with min/median/max %3$i/%4$i/%5$i estimates."
 msgstr ""
 "%1$s: %2$i conglomerados con estimaciones %3$i/%4$i/%5$i de mín/mediana/máx."
 
-#, fuzzy
 msgid ""
 "NAs in the %1$s were introduced due to the %2$s transformation. Please "
 "verify that you are using the correct effect size transformation."
 msgstr ""
-"Os NAs na magnitude do efecto combinada se presentaron debido á "
-"transformación %1$s. Por favor, verifica que estás usando a transformación "
-"correcta da magnitude do efecto."
+"Los NAs en %1$s se presentaron debido a la transformación %2$s. Por favor, "
+"verifica que estás usando la transformación correcta de la magnitud de "
+"efecto."
 
-#, fuzzy
 msgid "The %1$s is transformed using %2$s transformation."
-msgstr ""
-"La magnitud del efecto combinado se transforma usando la transformación %1$s."
+msgstr "La %1$s se transforma usando la transformación %2$s."
 
 msgid ""
 "The pooled effect size corresponds to the weighted average effect across "
@@ -889,13 +883,12 @@ msgstr ""
 "La magnitud del efecto combinado se corresponde con el efecto medio "
 "ponderado entre estudios."
 
-#, fuzzy
 msgid ""
 "The adjusted effect corresponds to the averaged effect size estimate across "
 "the levels of all moderators."
 msgstr ""
-"La magnitud del efecto combinado se corresponde con el efecto medio "
-"ponderado entre estudios."
+"El efecto ajustado se corresponde con la estimación media de la magnitud del "
+"efecto a través de los niveles de todos los moderadores."
 
 msgid ""
 "The pooled heterogeneity estimate corresponds to the heterogeneity at the "
@@ -912,13 +905,12 @@ msgid "The Model Structure %1$s was not completely specified and was skipped."
 msgstr ""
 "La Estructura %1$s del modelo no se especificó completamente y fué omitida."
 
-#, fuzzy
 msgid ""
 "Prediction interval for the %1$s is not available for models with multiple "
 "heterogeneity estimates."
 msgstr ""
-"El intervalo de predicción para la magnitud del efecto combinado no está "
-"disponible para modelos con múltiples estimaciones de heterogeneidad."
+"El intervalo de predicción para %1$s no está disponible para modelos con "
+"múltiples estimaciones de heterogeneidad."
 
 msgid ""
 "Each marginal mean estimate is averaged across the levels of the remaining "
@@ -1379,20 +1371,17 @@ msgstr "Error en Paso %1$i:"
 msgid "Model Information"
 msgstr "Información del modelo"
 
-#, fuzzy
 msgid "Publication Bias: %1$s"
-msgstr "Sesgo de Publicación"
+msgstr "Sesgo de Publicación: %1$"
 
 msgid "Fixed Effect Estimate"
 msgstr "Estimación de los Efectos Fijos"
 
-#, fuzzy
 msgid "Pooled Effect"
 msgstr "Efecto combinado"
 
-#, fuzzy
 msgid "Intercept Estimate"
-msgstr "Estimación de la Heterogeneidad"
+msgstr "Estimación de la constante"
 
 msgid "Full Dataset"
 msgstr "Conjunto completo de datos"
@@ -1567,56 +1556,60 @@ msgstr ""
 "más pequeño es %1$.2f < %2$1.0f. Para aumentar la precisión, por favor, "
 "aumenta 'Iteraciones', o 'Delta de ajuste' en la sección Opciones."
 
-#, fuzzy
 msgid "Estimating Marginal Means"
-msgstr "Medias marginales estimadas"
+msgstr "Estimando las medias marginales"
 
-#, fuzzy
 msgid ""
 "At least one prior distribution for the Effect component has to be specified."
-msgstr "Se necesita establecer al menos un predictor."
+msgstr ""
+"Se necesita establecer al menos una distribución previa para la componente "
+"de Efecto."
 
-#, fuzzy
 msgid ""
 "At least one prior distribution for the Heterogeneity component has to be "
 "specified."
-msgstr "Se necesita establecer al menos un predictor."
+msgstr ""
+"Se necesita establecer al menos una distribución previa para la componente "
+"de Heterogeneidad."
 
-#, fuzzy
 msgid ""
 "At least one prior distribution for the %1$s moderator component has to be "
 "specified."
-msgstr "Se necesita establecer al menos un predictor."
+msgstr ""
+"Se necesita establecer al menos una distribución previa para la componente "
+"del moderador %1$s."
 
 msgid ""
 "Both priors distributions for the %1$s moderator component must have the "
 "same contrast type."
 msgstr ""
+"Ambas distribuciones previas para la componente del moderador %1$s deben "
+"tener el mismo tipo de contraste."
 
-#, fuzzy
 msgid ""
 "At least one prior distribution for the Publication Bias component has to be "
 "specified."
-msgstr "Se necesita establecer al menos un predictor."
+msgstr ""
+"Se necesita establecer al menos una distribución previa para la componente "
+"del Sesgo de publicación."
 
-#, fuzzy
 msgid ""
 "At least one prior distribution for the Baseline component has to be "
 "specified."
-msgstr "Se necesita establecer al menos un predictor."
+msgstr ""
+"Se necesita establecer al menos una distribución previa para la componente "
+"de Base."
 
 msgid "The priors for publication bias were set incorrectly."
 msgstr ""
 "Los previos para el sesgo de publicación se han establecido de forma "
 "incorrecta."
 
-#, fuzzy
 msgid "Model Specification"
-msgstr "Vista previa de la especificación del Modelo"
+msgstr "Especificación del Modelo"
 
-#, fuzzy
 msgid "Model Components"
-msgstr "Componente eliminada"
+msgstr "Componentes del Modelo"
 
 msgid "Models"
 msgstr "Modelos"
@@ -1624,13 +1617,11 @@ msgstr "Modelos"
 msgid "P(M)"
 msgstr "P(M)"
 
-#, fuzzy
 msgid "Prior Distributions %1$s"
-msgstr "Distribución previa"
+msgstr "Distribuciones previas %1$s"
 
-#, fuzzy
 msgid "Prior Distributions Moderators"
-msgstr "Gráficos de Distribuciones Posteriores"
+msgstr "Moderadores de Distribuciones Previas"
 
 msgid "Alternative"
 msgstr "Alternativa"
@@ -1641,26 +1632,24 @@ msgstr "Nula"
 msgid "P(M|data)"
 msgstr "P(M|datos)"
 
-#, fuzzy
 msgid ""
 "The analysis will estimate a complex meta-analytic model ensemble using MCMC "
 "and might require a prolonged time to complete."
 msgstr ""
-"El análisis estimará modelos meta-analíticos múltiples utilizando MCMC y "
-"podría requerir largo tiempo para completarse."
+"El análisis estimará un conjunto de modelos meta-analíticos complejos "
+"utilizando MCMC y podría requerir largo tiempo para completarse."
 
-#, fuzzy
 msgid ""
 "The model fit for subgroup '%1$s' resulted in the following warning: %2$s"
-msgstr "El modelo para el subgrupo '%1$s' fracasó con el siguiente fallo: %2$s"
+msgstr ""
+"El ajuste del modelo para el subgrupo '%1$s' dió como resultado el siguiente "
+"aviso: %2$s"
 
-#, fuzzy
 msgid "The model fit resulted in the following warning: %1$s"
-msgstr "El modelo para el subgrupo '%1$s' fracasó con el siguiente fallo: %2$s"
+msgstr "El ajuste del modelo dió como resultado el siguiente aviso: %1$s"
 
-#, fuzzy
 msgid "Conditional Meta-Analytic Estimates"
-msgstr "Estimaciones Meta-Analíticas"
+msgstr "Estimaciones Meta-Analíticas condicionadas"
 
 msgid "Median"
 msgstr "Mediana"
@@ -1669,83 +1658,76 @@ msgid ""
 "Conditional estimates are based on models assuming the presence of a given "
 "component."
 msgstr ""
+"Las estimaciones condicionadas se basan en modelos que asumen la presencia "
+"de una componente dada."
 
-#, fuzzy
 msgid "Standardized Conditional Meta-Regression Coefficients"
-msgstr "Coeficientes de la Meta-Regresión de heterogeneidad"
+msgstr "Coeficientes tipificados de la Meta-Regresión condicionada"
 
-#, fuzzy
 msgid "Standardized Meta-Regression Coefficients"
-msgstr "Coeficientes de la Meta-Regresión de la magnitud del efecto"
+msgstr "Coeficientes tipificados de la Meta-Regresión"
 
-#, fuzzy
 msgid "Conditional Meta-Regression Coefficients"
-msgstr "Coeficientes de la Meta-Regresión de heterogeneidad"
+msgstr "Coeficientes de la Meta-Regresión condicionada"
 
-#, fuzzy
 msgid "Meta-Regression Coefficients"
-msgstr "Coeficientes de la Meta-Regresión de la magnitud del efecto"
+msgstr "Coeficientes de la Meta-Regresión"
 
 msgid "Conditional Publication Bias Adjustment Estimates (Weight Function)"
 msgstr ""
+"Estimaciones condicionadas del ajuste de Sesgo de publicación (Función de "
+"ponderación)"
 
 msgid "Publication Bias Adjustment Estimates (Weight Function)"
 msgstr ""
+"Estimaciones del ajuste de Sesgo de publicación (Función de ponderación)"
 
-#, fuzzy
 msgid "<em>p</em>-Values Interval"
-msgstr "intervalo de valores <em>p</em>"
+msgstr "Intervalo de valores <em>p</em>"
 
 msgid "Conditional Publication Bias Adjustment Estimates (PET-PEESE)"
 msgstr ""
+"Estimaciones condicionadas del ajuste de Sesgo de publicación (PET-PEESE)"
 
 msgid "Publication Bias Adjustment Estimates (PET-PEESE)"
-msgstr ""
+msgstr "Estimaciones del ajuste de Sesgo de publicación (PET-PEESE)"
 
-#, fuzzy
 msgid "Estimated Conditional Marginal Means"
-msgstr "Medias marginales estimadas"
+msgstr "Medias marginales condicionadas estimadas"
 
-#, fuzzy
 msgid "Conditional %1$s"
-msgstr "Condicionado"
+msgstr "Condicionado %1$s"
 
-#, fuzzy
 msgid "Conditional Estimated Marginal Means"
-msgstr "Medias marginales estimadas"
+msgstr "Medias marginales estimadas condicionadas"
 
 msgid ""
 "The Bayes factor test for the adjusted estimate is not available for meta-"
 "regressions with non-centered parameteriazation."
 msgstr ""
+"El contraste del factor de Bayes para la estimación ajustada no está "
+"disponible para meta-regresiones con parametrización no centrada."
 
-#, fuzzy
 msgid "Adjusted Effect"
-msgstr "Estimación ajustada"
+msgstr "Efecto ajustado"
 
-#, fuzzy
 msgid "Moderation: Estimated Marginal Means"
-msgstr "Medias marginales estimadas"
+msgstr "Moderación: Medias marginales estimadas"
 
-#, fuzzy
 msgid "Moderation"
-msgstr "Moderación %1$s"
+msgstr "Moderación"
 
-#, fuzzy
 msgid "Weight Function"
-msgstr "Función de Ponderación (%s)"
+msgstr "Función de Ponderación"
 
-#, fuzzy
 msgid "PET-PEESE"
-msgstr "PEESE"
+msgstr "PET-PEESE"
 
-#, fuzzy
 msgid "P-Value"
-msgstr "Valor"
+msgstr "Valor p"
 
-#, fuzzy
 msgid "Diagnostics Summary"
-msgstr "Diagnósticos"
+msgstr "Resumen de diagnósticos"
 
 msgid "MCMC error"
 msgstr "Error MCMC"
@@ -1768,48 +1750,38 @@ msgstr "PET"
 msgid "PEESE"
 msgstr "PEESE"
 
-#, fuzzy
 msgid "Trace Plot"
-msgstr "Gráficos de trazado"
+msgstr "Gráfico de trazado"
 
-#, fuzzy
 msgid "Autocorrelation Plot"
 msgstr "Gráfico de autocorrelaciones"
 
-#, fuzzy
 msgid "Density Plot"
-msgstr "Densidad"
+msgstr "Gráfico de densidad"
 
-#, fuzzy
 msgid "RoBMA R Code"
-msgstr "Código de R de Metafor"
+msgstr "Código de R de RoBMA"
 
-#, fuzzy
 msgid "Publication Bias Adjustment Summary"
-msgstr "Sesgo de Publicación"
+msgstr "Resumen del ajuste del Sesgo de publicación"
 
-#, fuzzy
 msgid "Estimated Marginal Means Summary"
-msgstr "Medias marginales estimadas"
+msgstr "Resumen de Medias marginales estimadas"
 
-#, fuzzy
 msgid "Prior and Posterior Plots"
-msgstr "Gráfico de las previas y posteriores"
+msgstr "Gráficos de previas y posteriores"
 
 msgid "Diagnostics"
 msgstr "Diagnósticos"
 
-#, fuzzy
 msgid "Adjusted effect"
-msgstr "Estimación ajustada"
+msgstr "Efecto ajustado"
 
-#, fuzzy
 msgid "Subgroup %1$s, %2$s"
-msgstr "Subgrupo %1$s:"
+msgstr "Subgrupo %1$s, %2$s"
 
-#, fuzzy
 msgid "Effect intercept"
-msgstr "Magnitud del efecto"
+msgstr "Constante del efecto"
 
 msgid "Publication bias"
 msgstr "Sesgo de publicación"
