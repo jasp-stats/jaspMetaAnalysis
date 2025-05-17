@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.20.0\n"
-"POT-Creation-Date: 2025-05-10 02:56\n"
+"POT-Creation-Date: 2025-05-17 02:58\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -11,46 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-msgid "The study labels contain invalid characters. Please, remove them before running the analysis."
-msgstr ""
-
-msgid "Prior Plots"
-msgstr ""
-
-msgid "Effect"
-msgstr ""
-
-msgid "Heterogeneity"
-msgstr ""
-
-msgid "Null"
-msgstr ""
-
-msgid "Alternative"
-msgstr ""
-
-msgid "Model Preview"
-msgstr ""
-
-msgid "Please specify a prior distribution for each parameter in the Models specification section (either null or alternative)."
-msgstr ""
-
-msgid "Model Summary"
-msgstr ""
-
-msgid "Models"
-msgstr ""
-
-msgid "P(M)"
-msgstr ""
-
-msgid "The analysis will estimate multiple meta-analytic models using MCMC and might require a prolonged time to complete."
-msgstr ""
-
-msgid "Model Specification Preview"
-msgstr ""
-
-msgid "Prior Distribution"
+msgid "There must be at least one observation in each group."
 msgstr ""
 
 msgid "The prior lower bound is not smaller than the upper bound."
@@ -186,6 +147,9 @@ msgid "Posterior mean and 95%% credible interval estimates from the constrained 
 msgstr ""
 
 msgid "Effect Size"
+msgstr ""
+
+msgid "Heterogeneity"
 msgstr ""
 
 msgid "Effect size"
@@ -347,7 +311,7 @@ msgstr ""
 msgid "p (permutation)"
 msgstr ""
 
-msgid "The model for the subgroup '%1$s' failed with the following error: %2$s"
+msgid "The model for subgroup '%1$s' failed with the following error: %2$s"
 msgstr ""
 
 msgid "Error:"
@@ -572,6 +536,9 @@ msgstr ""
 msgid "Residual Funnel Plot"
 msgstr ""
 
+msgid "Model Summary"
+msgstr ""
+
 msgid "Meta-Regression Summary"
 msgstr ""
 
@@ -692,6 +659,9 @@ msgstr ""
 msgid "Benjamini-Yekutieli"
 msgstr ""
 
+msgid "Intercept"
+msgstr ""
+
 msgid "Residual heterogeneity"
 msgstr ""
 
@@ -743,6 +713,12 @@ msgstr ""
 msgid "The heterogeneity model for 𝜏² is specified on the identity scale."
 msgstr ""
 
+msgid "pooled effect"
+msgstr ""
+
+msgid "adjusted effect"
+msgstr ""
+
 msgid "%1$i observations were ommited due to missing values."
 msgstr ""
 
@@ -761,13 +737,16 @@ msgstr ""
 msgid "%1$s: %2$i clusters with min/median/max %3$i/%4$i/%5$i estimates."
 msgstr ""
 
-msgid "NAs in the pooled effect size were introduced due to the %1$s transformation. Please verify that you are using the correct effect size transformation."
+msgid "NAs in the %1$s were introduced due to the %2$s transformation. Please verify that you are using the correct effect size transformation."
 msgstr ""
 
-msgid "The pooled effect size is transformed using %1$s transformation."
+msgid "The %1$s is transformed using %2$s transformation."
 msgstr ""
 
 msgid "The pooled effect size corresponds to the weighted average effect across studies."
+msgstr ""
+
+msgid "The adjusted effect corresponds to the averaged effect size estimate across the levels of all moderators."
 msgstr ""
 
 msgid "The pooled heterogeneity estimate corresponds to the heterogeneity at the average of predictor values."
@@ -779,7 +758,7 @@ msgstr ""
 msgid "The Model Structure %1$s was not completely specified and was skipped."
 msgstr ""
 
-msgid "Prediction interval for the pooled effect size is not available for models with multiple heterogeneity estimates."
+msgid "Prediction interval for the %1$s is not available for models with multiple heterogeneity estimates."
 msgstr ""
 
 msgid "Each marginal mean estimate is averaged across the levels of the remaining predictors."
@@ -1115,10 +1094,16 @@ msgstr ""
 msgid "Model Information"
 msgstr ""
 
+msgid "Publication Bias: %1$s"
+msgstr ""
+
 msgid "Fixed Effect Estimate"
 msgstr ""
 
-msgid "Pooled Estimate"
+msgid "Pooled Effect"
+msgstr ""
+
+msgid "Intercept Estimate"
 msgstr ""
 
 msgid "Full Dataset"
@@ -1232,9 +1217,6 @@ msgstr ""
 msgid "The model should contain at least one predictor or an intercept."
 msgstr ""
 
-msgid "Intercept"
-msgstr ""
-
 msgid "Coefficients"
 msgstr ""
 
@@ -1259,16 +1241,133 @@ msgstr ""
 msgid "Low estimation accuracy -- The smallest Effective Sample Size (ESS) is %1$.2f < %2$1.0f. To increase accuracy please increase 'Iterations', or 'Adapt delta' in the Options section."
 msgstr ""
 
+msgid "Estimating Marginal Means"
+msgstr ""
+
+msgid "At least one prior distribution for the Effect component has to be specified."
+msgstr ""
+
+msgid "At least one prior distribution for the Heterogeneity component has to be specified."
+msgstr ""
+
+msgid "At least one prior distribution for the %1$s moderator component has to be specified."
+msgstr ""
+
+msgid "Both priors distributions for the %1$s moderator component must have the same contrast type."
+msgstr ""
+
+msgid "At least one prior distribution for the Publication Bias component has to be specified."
+msgstr ""
+
+msgid "At least one prior distribution for the Baseline component has to be specified."
+msgstr ""
+
 msgid "The priors for publication bias were set incorrectly."
 msgstr ""
 
-msgid "Publication Bias"
+msgid "Model Specification"
 msgstr ""
 
-msgid "Baseline"
+msgid "Model Components"
+msgstr ""
+
+msgid "Models"
+msgstr ""
+
+msgid "P(M)"
+msgstr ""
+
+msgid "Prior Distributions %1$s"
+msgstr ""
+
+msgid "Prior Distributions Moderators"
+msgstr ""
+
+msgid "Alternative"
+msgstr ""
+
+msgid "Null"
+msgstr ""
+
+msgid "P(M|data)"
+msgstr ""
+
+msgid "The analysis will estimate a complex meta-analytic model ensemble using MCMC and might require a prolonged time to complete."
+msgstr ""
+
+msgid "The model fit for subgroup '%1$s' resulted in the following warning: %2$s"
+msgstr ""
+
+msgid "The model fit resulted in the following warning: %1$s"
+msgstr ""
+
+msgid "Conditional Meta-Analytic Estimates"
 msgstr ""
 
 msgid "Median"
+msgstr ""
+
+msgid "Conditional estimates are based on models assuming the presence of a given component."
+msgstr ""
+
+msgid "Standardized Conditional Meta-Regression Coefficients"
+msgstr ""
+
+msgid "Standardized Meta-Regression Coefficients"
+msgstr ""
+
+msgid "Conditional Meta-Regression Coefficients"
+msgstr ""
+
+msgid "Meta-Regression Coefficients"
+msgstr ""
+
+msgid "Conditional Publication Bias Adjustment Estimates (Weight Function)"
+msgstr ""
+
+msgid "Publication Bias Adjustment Estimates (Weight Function)"
+msgstr ""
+
+msgid "<em>p</em>-Values Interval"
+msgstr ""
+
+msgid "Conditional Publication Bias Adjustment Estimates (PET-PEESE)"
+msgstr ""
+
+msgid "Publication Bias Adjustment Estimates (PET-PEESE)"
+msgstr ""
+
+msgid "Estimated Conditional Marginal Means"
+msgstr ""
+
+msgid "Conditional %1$s"
+msgstr ""
+
+msgid "Conditional Estimated Marginal Means"
+msgstr ""
+
+msgid "The Bayes factor test for the adjusted estimate is not available for meta-regressions with non-centered parameteriazation."
+msgstr ""
+
+msgid "Adjusted Effect"
+msgstr ""
+
+msgid "Moderation: Estimated Marginal Means"
+msgstr ""
+
+msgid "Moderation"
+msgstr ""
+
+msgid "Weight Function"
+msgstr ""
+
+msgid "PET-PEESE"
+msgstr ""
+
+msgid "P-Value"
+msgstr ""
+
+msgid "Diagnostics Summary"
 msgstr ""
 
 msgid "MCMC error"
@@ -1283,156 +1382,6 @@ msgstr ""
 msgid "R-hat"
 msgstr ""
 
-msgid "<em>p</em>-values interval"
-msgstr ""
-
-msgid "Effect size (%s)"
-msgstr ""
-
-msgid "Heterogeneity (%s)"
-msgstr ""
-
-msgid "Publication bias"
-msgstr ""
-
-msgid "log(OR)"
-msgstr ""
-
-msgid "OR"
-msgstr ""
-
-msgid "The specified path does not lead to an existing file."
-msgstr ""
-
-msgid "An error occurred while reading the model file: %1$s"
-msgstr ""
-
-msgid "The loaded object is not a RoBMA model."
-msgstr ""
-
-msgid "Conditional Estimates"
-msgstr ""
-
-msgid "Inclusion BF"
-msgstr ""
-
-msgid "Exclusion BF"
-msgstr ""
-
-msgid "log(Inclusion BF)"
-msgstr ""
-
-msgid "P(M|data)"
-msgstr ""
-
-msgid "Model Averaged Estimates"
-msgstr ""
-
-msgid "Model Averaged Weights (%s)"
-msgstr ""
-
-msgid "Model Averaged PET-PEESE Estimates"
-msgstr ""
-
-msgid "Conditional Weights (%s)"
-msgstr ""
-
-msgid "Conditional PET-PEESE Estimates"
-msgstr ""
-
-msgid "Models Overview"
-msgstr ""
-
-msgid "BF%s"
-msgstr ""
-
-msgid "log(BF%s)"
-msgstr ""
-
-msgid "log(MargLik)"
-msgstr ""
-
-msgid "Individual Models Summary"
-msgstr ""
-
-msgid "Model #"
-msgstr ""
-
-msgid "Priors"
-msgstr ""
-
-msgid "Information"
-msgstr ""
-
-msgid "Model Estimates"
-msgstr ""
-
-msgid "Model %i"
-msgstr ""
-
-msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
-msgstr ""
-
-msgid "Estimated Weights (%s)"
-msgstr ""
-
-msgid "PET-PEESE Estimates"
-msgstr ""
-
-msgid "%1$s Forest Plot"
-msgstr ""
-
-msgid "Posterior Distribution Plots"
-msgstr ""
-
-msgid "Conditional"
-msgstr ""
-
-msgid "Model Averaged"
-msgstr ""
-
-msgid "Effect Size Estimate"
-msgstr ""
-
-msgid "Heterogeneity Estimate"
-msgstr ""
-
-msgid "Weight Function Estimate"
-msgstr ""
-
-msgid "PET-PEESE Regression Estimate"
-msgstr ""
-
-msgid "Posterior Model Estimates Plots"
-msgstr ""
-
-msgid "Effect Size Estimates"
-msgstr ""
-
-msgid "Heterogeneity Estimates"
-msgstr ""
-
-msgid "Diagnostics"
-msgstr ""
-
-msgid "Models Diagnostics Overview"
-msgstr ""
-
-msgid "max(MCMC error)"
-msgstr ""
-
-msgid "max(MCMC error/SD)"
-msgstr ""
-
-msgid "min(ESS)"
-msgstr ""
-
-msgid "max(R-hat)"
-msgstr ""
-
-msgid "MCMC Diagnostics plots are created once both the plotted parameter ('Plot') and the plot type ('Type') options are selected."
-msgstr ""
-
 msgid "Weights"
 msgstr ""
 
@@ -1442,22 +1391,52 @@ msgstr ""
 msgid "PEESE"
 msgstr ""
 
-msgid "Trace plots"
+msgid "Trace Plot"
 msgstr ""
 
-msgid "Average autocorrelations"
+msgid "Autocorrelation Plot"
 msgstr ""
 
-msgid "Posterior samples densities"
+msgid "Density Plot"
 msgstr ""
 
-msgid "Model %i does not contain any of the selected parameters."
+msgid "RoBMA R Code"
 msgstr ""
 
-msgid "All models failed to converge under the MCMC convergence criteria. Please update the MCMC settings."
+msgid "Publication Bias Adjustment Summary"
 msgstr ""
 
-msgid "All models failed to converge. Please update the MCMC settings."
+msgid "Estimated Marginal Means Summary"
+msgstr ""
+
+msgid "Prior and Posterior Plots"
+msgstr ""
+
+msgid "Diagnostics"
+msgstr ""
+
+msgid "Adjusted effect"
+msgstr ""
+
+msgid "Subgroup %1$s, %2$s"
+msgstr ""
+
+msgid "Effect intercept"
+msgstr ""
+
+msgid "Publication bias"
+msgstr ""
+
+msgid "Baseline"
+msgstr ""
+
+msgid "Inclusion BF"
+msgstr ""
+
+msgid "Exclusion BF"
+msgstr ""
+
+msgid "log(Inclusion BF)"
 msgstr ""
 
 msgid "Cannot compute results. All entries of the p-value variable (%s) must be between 0 and 1."

@@ -72,14 +72,6 @@ msgctxt "BayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
 msgstr ""
 
-msgctxt "BayesianMetaAnalysis|"
-msgid "95% CI Lower and Upper Bound"
-msgstr ""
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Study Labels"
-msgstr ""
-
 msgctxt "BayesianPredictionPerformance|"
 msgid "MCMC Diagnostics"
 msgstr ""
@@ -1094,63 +1086,11 @@ msgid "Weight"
 msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Path to the fitted model"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Cohen's d"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Correlation"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Log Odds Ratio"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size"
 msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "95% CI Lower and Upper Bound"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "N"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Study Labels"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Input type"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Correlations"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Log odds ratios"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Unstandardized effect sizes"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Fitted model"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Expected direction of effect sizes"
 msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
@@ -1178,23 +1118,7 @@ msgid "Custom"
 msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Prior scale"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Fisher's z"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "log(OR)"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Models (Custom Ensemble Only)"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Set null priors"
 msgstr ""
 
 msgctxt "SelectionModels|"
@@ -1433,14 +1357,6 @@ msgctxt "PredictionPerformancePriors|"
 msgid "T"
 msgstr ""
 
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Model ensemble type"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Prior distribution plots"
-msgstr ""
-
 msgctxt "SelectionModels|"
 msgid "P-value frequency table"
 msgstr ""
@@ -1481,56 +1397,8 @@ msgctxt "Description|"
 msgid "Bayesian Binomial Meta-Analysis"
 msgstr ""
 
-msgctxt "BayesianBinomialMetaAnalysis|"
-msgid "Successes (group 1)"
-msgstr ""
-
-msgctxt "BayesianBinomialMetaAnalysis|"
-msgid "Successes (group 2)"
-msgstr ""
-
-msgctxt "BayesianBinomialMetaAnalysis|"
-msgid "Observations (group 1)"
-msgstr ""
-
-msgctxt "BayesianBinomialMetaAnalysis|"
-msgid "Observations (group 2)"
-msgstr ""
-
-msgctxt "BayesianBinomialMetaAnalysis|"
-msgid "Study Labels"
-msgstr ""
-
-msgctxt "BayesianBinomialMetaAnalysis|"
-msgid "Prior distribution plots"
-msgstr ""
-
-msgctxt "BayesianBinomialMetaAnalysis|"
-msgid "Models"
-msgstr "Модели"
-
-msgctxt "BayesianBinomialMetaAnalysis|"
-msgid "Set null priors"
-msgstr ""
-
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Advanced"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisAdvanced|"
-msgid "Estimation scale"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisAdvanced|"
-msgid "Fisher's z"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisAdvanced|"
-msgid "Cohen's d"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisAdvanced|"
-msgid "logOR"
 msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
@@ -1597,18 +1465,6 @@ msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Extend samples"
 msgstr ""
 
-msgctxt "RobustBayesianMetaAnalysisAdvanced|"
-msgid "Remove failed models"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisAdvanced|"
-msgid "Rebalance component probability on model failure"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisAdvanced|"
-msgid "Save the fitted model"
-msgstr ""
-
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Baseline"
 msgstr ""
@@ -1662,10 +1518,6 @@ msgid "Plot"
 msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
-msgid "Effect"
-msgstr "Эффект"
-
-msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Heterogeneity"
 msgstr ""
 
@@ -1697,118 +1549,6 @@ msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Posterior samples density"
 msgstr ""
 
-msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
-msgid "Single model"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid "Inference"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid "Conditional parameter estimates"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid "Models overview"
-msgstr "Обзор моделей"
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid "BF comparison"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid "Inclusion"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid "vs. Best"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid "vs. Previous"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid "Order"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid "Model number"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid "Marginal likelihood"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid "Posterior probability"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid "Individual models"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid "Single model"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid "CI width"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid "Output scale"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid "Cohen's d"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid "Fisher's z"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid "logOR"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid "OR"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid "Correlation"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid "Shorten prior names"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisPlots|"
-msgid "Plots"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisPlots|"
-msgid "Forest plot"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisPlots|"
-msgid "Order"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisPlots|"
-msgid "Ascending"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisPlots|"
-msgid "Descending"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisPlots|"
-msgid "Alphabetical"
-msgstr ""
-
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Type"
 msgstr ""
@@ -1821,14 +1561,6 @@ msgstr "Усредненная модель"
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Conditional"
 msgstr "Условные"
-
-msgctxt "RobustBayesianMetaAnalysisPlots|"
-msgid "Pooled estimates"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisPlots|"
-msgid "Effect"
-msgstr "Эффект"
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Heterogeneity"
@@ -1844,46 +1576,6 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "PET-PEESE"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisPlots|"
-msgid "Prior distribution"
-msgstr "Априорное распределение"
-
-msgctxt "RobustBayesianMetaAnalysisPlots|"
-msgid "Individual models"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisPlots|"
-msgid "Order by"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisPlots|"
-msgid "Model number"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisPlots|"
-msgid "Estimate"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisPlots|"
-msgid "Bayes factor"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisPlots|"
-msgid "Posterior prob."
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisPlots|"
-msgid "Show"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisPlots|"
-msgid "Bayesian updating"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisPlots|"
-msgid "Posterior estimates"
 msgstr ""
 
 msgctxt "Description|"
@@ -3030,12 +2722,6 @@ msgid "Effect size type"
 msgstr ""
 
 msgctxt "FunnelPlot|"
-msgid ""
-"Kossmeier, M., Tran, U. S., & Voracek, M. (2020). Power-enhanced funnel "
-"plots for meta-analysis. Zeitschrift für Psychologie, 228(1)."
-msgstr ""
-
-msgctxt "FunnelPlot|"
 msgid "Effect Size"
 msgstr ""
 
@@ -3664,14 +3350,6 @@ msgid "Permutation test"
 msgstr ""
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid ""
-"Perform a permutation test for the model coefficients. Available in the meta-"
-"analysis module when clustering is not specified. The resulting permuation p-"
-"values are displayed in the 'p (permutation)' column. Note that permutation "
-"can be computationally intesive."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Type"
 msgstr ""
 
@@ -3708,179 +3386,6 @@ msgid ""
 "'tau2 = 1') can be used to fix the between-study heterogeneity to a given "
 "value. Multiple arguments must be comma-seprated, e.g. 'list(tau2 = 1, "
 "gamma2 = 0.5)' (or 'tau2 = 1, gamma2 = 0.5'). New lines are ignored."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Bubble Plot"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid ""
-"Options for visualizing the estimated effect sizes at different levels of "
-"the predictors with the observed estimates visualized as bubbles. Continuous "
-"predictors can be split into three bins with cutoffs at ±x standard "
-"deviations from the mean. Predictors that are not specified for either the x-"
-"axis, lines, or plots are averaged over."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Model Variables"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Selected Variable"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Variable to be visualized on the x-axis."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Separate Lines"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid ""
-"Variable(s) according to which predictions are split across different lines."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Separate Plots"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid ""
-"Variable(s) according to which predictions are split across different plots."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "SD factor covariates"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Standard deviation cutoff used for binning continuous covariates."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Bubbles"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Size"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Options for determining the size of the observed estimates."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Weight"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Inverse variance"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Equal"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Relative size"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Set the relative size of the observed estimates."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Transparency"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Set the transparency of the observed estimates."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Jitter"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid ""
-"Set the degree of x-coordinate jitter of the observed estimates. Available "
-"when the x-axis variable is nominal."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Confidence intervals"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Include confidence intervals of the estimated effect sizes."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Prediction intervals"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Include prediction intervals of the estimated effect sizes."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Theme"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Set the theme of the bubble plot."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "White background"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Light"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Minimal"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Relative text size"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Adjust the text size of the bubble plot."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Legend position"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Set the legend position of the bubble plot."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "None"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Bottom"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Right"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Top"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisBubblePlot|"
-msgid "Left"
 msgstr ""
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
@@ -4075,388 +3580,6 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "𝜏²"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Forest Plot"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Options for visualizing study-level information, estimated marginal means, "
-"and the model information in an all encompassing forest plot. Different "
-"sections of the forest plot can be individually enabled/disabled."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Study information"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Add study-level information panel to the forest plot. There are three "
-"sections of the study-level information panel: a) the left section with "
-"study labels, names, and etc designed via the 'Selected Variables' option, "
-"b) the middle section visualizing the estimates and confidence intervals "
-"based on the meta-analytic input, c) the right section textually summarizing "
-"the estimates and confidence intervals based on the meta-analytic input."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Selected Variables"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Select variables containing study-level information to be printed in the "
-"left section of the panel. Each variable creates a new column in the panel."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Title"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Width"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Alignment"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Adjust the Title, Width, and Alignment of each column in the left section of "
-"the study-level information panel."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Left"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Middle"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Right"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Predicted effects"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Include predicted effect sizes in the middle section of the study-level "
-"information panel."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Study weights"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Include the study weights in the right section of the study-level "
-"information panel."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Secondary confidence interval"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Include secondary confidence interval for effect sizes in the middle section "
-"of the study-level information panel."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Order"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Order the study-level information panel by a variable."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "By"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Ascending"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Estimated marginal means"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Add estimated marginal means information to the forest plot. Available when "
-"effect size meta-regression is specified."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Model Variables"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Select variables for which the estimated marginal means are visualized."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Term tests"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Include the omnibus term test of variables included in the estimated "
-"marginal means. The null hypothesis states that the effect size at all "
-"levels of the categorical variable are equal or that there is no linear "
-"association between the effect size and the continuous variable."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Coefficient tests"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Include coefficient tests of variables included in the estimated marginal "
-"means. The null hypothesis states that the estimated marginal mean for a "
-"given level equals the tested value."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Against"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Specify the test value for the coefficient tests."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Adjusted effect size estimate"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Include the adjusted effect size estimate in the estimated marginal means "
-"section."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Model information"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Add meta-analytic model information to the forest plot."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Include the overall meta-analytic effect size estimate in the model "
-"information section."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Include the test of the overall meta-analytic effect size estimate in the "
-"model information section."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Include the test of the residual heterogeneity in the model information "
-"section."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Include the omnibus effect size moderation test in the model information "
-"section. Available when effect size meta-regression is specified."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Settings"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Prediction intervals"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Include prediction intervals of the estimated marginal means and the model "
-"information output."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Estimates and confidence intervals"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Include effect size estimates and confidence intervals summary text in the "
-"right panel of the forest plot."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Tests in right panel"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Move test results text to the right panel."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Mapping"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Select a variable for encoding the color or shape of the study information "
-"and the estimated marginal means output."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Color"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Shape"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Relative Size"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Adjust the relative size of the forest plot components."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Estimates"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Text"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Axis labels"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Row"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Left panel"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Middle panel"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Right panel"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Adjust width based on text"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Turn off the automatic width adjustment of the individual components."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Auxiliary"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Digits"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Number of digits printed for the effect size and confidence intervals "
-"summary text."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Tests information"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Statistic and p-value"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "P-value"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Change color of the plotted objects. Only available if no color mapping is "
-"selected."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Black"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Blue"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Red"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Add vertical line"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Add a solid vertical line in the forest plot."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Add vertical line (2)"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Add a dotted vertical line in the forest plot."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "X-axis label"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Change the x-axis label of the forest plot (the default 'Effect Size' "
-"changes in accordance with the selected effect size transformation)."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "X-axis limits"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Change the default x-axis limits."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Lower"
-msgstr "Нижний"
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Upper"
 msgstr ""
 
 msgctxt "ClassicalMetaAnalysisModel|"
@@ -5009,105 +4132,6 @@ msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "None"
 msgstr ""
 
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Heterogeneity"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Test"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Estimate"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "𝜏"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Include the meta-analytic 𝜏, the square root of the estimated between-study "
-"variance in the model information section. Not available for multilevel/"
-"multivariate meta-analysis."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "𝜏²"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Include the meta-analytic 𝜏², the estimated between-study variance in the "
-"model information section. Not available for multilevel/multivariate meta-"
-"analysis."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "I²"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Include the meta-analytic I², the percentage of total variation across "
-"studies due to heterogeneity in the model information section. Not available "
-"for multilevel/multivariate meta-analysis."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "H²"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Include the meta-analytic H², an index indicating the ratio of total "
-"variability to sampling variability in the model information section. Not "
-"available for multilevel/multivariate meta-analysis."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Moderation test"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Include the omnibus heterogeneity moderation test in the model information "
-"section. Available when heterogeneity meta-regression is specified."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Effect Size"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Fixed effect estimate"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Include a fixed effect meta-analytic effect size estimate in the model "
-"information section. Not available if the model was already fitted with "
-"fixed effects or the model contains heterogeneity meta-regression."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Fixed effect estimate test"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Include the test of the fixed effect meta-analytic effect size estimate in "
-"the model information section."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Pooled estimate"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Pooled estimate test"
-msgstr ""
-
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Random Effects / Model Components"
 msgstr ""
@@ -5167,102 +4191,6 @@ msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid ""
 "Include the full dataset output in the subgroup analysis. This option is "
 "only available when the subgroup analysis is selected."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Aggregate"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Aggregate the study-level information panel by a variable. If selected, "
-"`Predicted effects` and all `Study information` in the tight panel is "
-"supressed."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Select the method for aggregating the estimates of the study-level "
-"information panel."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Boxplot"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Bubbles"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Relative size"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Set the relative size of the observed estimates."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "General"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Align left panel"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Align text of the `Estimated marginal means` and  `Model Information` "
-"sections."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Subgroup"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Specify the forest plot behavior in the case of a subgroup analysis. These "
-"options is only available when the subgroup analysis is selected."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Panels within subgroup"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Group the output panels within their subgroup membership, i.e., the output "
-"panels are presented for each subgroup in a sequential order (i.e., Study "
-"information (Subgroup 1), Estimated marginal means (Subgroup 1), Model "
-"information (Subgroup 1), Study information (Subgroup 2), Estimated marginal "
-"means (Subgroup 2), Model information (Subgroup 2), .... If unchecked, the "
-"output is group by the panel membership first, i.e., Study information "
-"(Subgroup 1), Study information (Subgroup 2), Esimated marginal means "
-"(Subgroup 1), Estimated marginal means (Subgroup 2), Model information "
-"(Subgroup 1), Model information (Subgroup 2)..."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Full dataset estimated marginal means"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Include the full dataset estimated marginal means in the forest plot if "
-"subgroups are specified. This option overrides the `Include full dataset in "
-"subgroup analysis` setting in the `Advanced` section."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid "Full dataset model information"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisForestPlot|"
-msgid ""
-"Include the full dataset model information in the forest plot if subgroups "
-"are specified. This option overrides the `Include full dataset in subgroup "
-"analysis` setting in the `Advanced` section."
 msgstr ""
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
@@ -5511,4 +4439,2502 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Save computed variance-covariance matrix"
+msgstr ""
+
+msgctxt "Description|"
+msgid "Meta-Analysis (Deprecated)"
+msgstr ""
+
+msgctxt "Description|"
+msgid "Bayesian Meta-Analysis (Deprecated)"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid ""
+"Bayesian Binomial meta-analysis allows you to conduct a binomial meta-"
+"analysis using the Bayesian approach. By default, Bayesian meta-analysis "
+"model-averages across models assuming the presence vs. absence of the "
+"effect, heterogeneity, and moderation (if specified). The analysis provides "
+"pre-specified prior distributions for different effect size measures and "
+"fields. The analysis allows you to specify meta-regression, 3-level meta-"
+"analysis, and subgroup analysis. The results include estimates of effect "
+"sizes, heterogeneity, moderation, and various plots to visualize the "
+"results.\n"
+"\n"
+"The analysis is based on the Bayesian meta-analysis/meta-regression "
+"parameterization as outlined in Bartoš et al. (2025) with the binomial-"
+"normal model described in Bartoš et al. (2023)."
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "References"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "R Packages"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Successes Group 1"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Successes Group 2"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Sample Size Group 1"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Samples Size Group 2"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Predictors"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid ""
+"Variables to include as predictors (moderators) in the meta-regression "
+"model. See the 'Model' section for the meta-regression specification details."
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Study Level (Multilevel)"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid ""
+"Variable indicating the study level nesting. This variable is used to "
+"specify the nesting of the studies in the meta-analysis. The nesting is used "
+"to specify the model structure and to account for the correlation between "
+"the effect sizes within each study."
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Subgroup"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid ""
+"Variable indicating subgroup stratification. For each subgroup, an "
+"independent model is fitted to the corresponding data set subset."
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Bayesian Model-Averaging"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid ""
+"Specify which components should be included Bayesian model-averaging. If "
+"selected, prior distribution under both the presence and absence of the "
+"component are specified. This allows for testing for the presence vs. "
+"absence of the component (if the component is not selected, a Bayes factor "
+"test is not conducted). The displayed estimates are averaged across null and "
+"alternative prior distributions of all specified components."
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Effect size"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid ""
+"Average over the presence vs. absence of the effect. If unspecified, the "
+"resulting model assumes that the effect is present."
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Heterogeneity"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid ""
+"Average over the presence vs. absence of heterogeneity. If unspecified, the "
+"resulting model assumes that heterogeneity is present."
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Moderation"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid ""
+"Average over the presence vs. absence of moderators. If unspecified, the "
+"resulting model assumes that all moderators models are present."
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Prior Distributions"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Effect size and heterogeneity"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid ""
+"Specify the type of prior distributions for the effect size and "
+"heterogeneity."
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Default"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid ""
+"Use default prior distributions for the effect size and heterogeneity based "
+"on Bartoš et al. (2022)."
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Psychology"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid ""
+"Use default prior distributions developed for psychology based on Bartoš et "
+"al. (2022). This settings corresponds to the 'Default' setting."
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Medicine"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid ""
+"Use prior distributions based on the Cochrane Database of Systematic Reviews "
+"developed by Bartoš et al. (2021)"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Custom"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid ""
+"Use custom prior distributions. This option allows you to specify a custom "
+"model ensemble for the effect size and heterogeneity prior distributions."
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Scale"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid ""
+"Setting value different than 1 re-scales the pre-specified prior "
+"distributions. Values smaller than 1 lead to more informative priors, while "
+"values larger than 1 lead to less informative priors."
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Show model specification"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid ""
+"Show the model specification. This is useful for understanding and reporting "
+"the specified model."
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Prior Distributions (Custom)"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid ""
+"Bayesian meta-analysis allows you to conduct a meta-analysis using the "
+"Bayesian approach. By default, Bayesian meta-analysis model-averages across "
+"models assuming the presence vs. absence of the effect, heterogeneity, and "
+"moderation (if specified). The analysis provides pre-specified prior "
+"distributions for different effect size measures and fields. Additional care "
+"is required when using a different type of effect sizes as the default prior "
+"distributions might not match the proper scaling of the effect size and "
+"heterogeneity. The analysis allows you to specify meta-regression, 3-level "
+"meta-analysis, and subgroup analysis. The results include estimates of "
+"effect sizes, heterogeneity, moderation, and various plots to visualize the "
+"results.\n"
+"\n"
+"The analysis is based on the Bayesian meta-analysis/meta-regression "
+"parameterization as outlined in Bartoš et al. (2025)."
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "References"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "R Packages"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Variable containing the observed effect sizes."
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid ""
+"Variable containing the standard errors corresponding to the effect sizes."
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Effect size measure"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid ""
+"Effect size measure supplied as the 'Effect Size'. This is an important "
+"setting as it determines the defaul prior distributions and the model "
+"fitting transformation."
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Standardized mean difference"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Standardized mean difference such as Cohen's d, Hedge's g"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Fisher's z"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Fisher's z transformation of correlation coefficients"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Log odds ratio"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Log risk ratio"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Log hazard ratio"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Risk difference"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "General"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid ""
+"General effect size that does not correspond to any of the measures above. "
+"Please, be careful when specifying the prior distributions as no sensible "
+"defaults are available."
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Predictors"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid ""
+"Variables to include as predictors (moderators) in the meta-regression "
+"model. See the 'Model' section for the meta-regression specification details."
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Study Level (Multilevel)"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid ""
+"Variable indicating the study level nesting. This variable is used to "
+"specify the nesting of the studies in the meta-analysis. The nesting is used "
+"to specify the model structure and to account for the correlation between "
+"the effect sizes within each study."
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Subgroup"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid ""
+"Variable indicating subgroup stratification. For each subgroup, an "
+"independent model is fitted to the corresponding data set subset."
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Bayesian Model-Averaging"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid ""
+"Specify which components should be included Bayesian model-averaging. If "
+"selected, prior distribution under both the presence and absence of the "
+"component are specified. This allows for testing for the presence vs. "
+"absence of the component (if the component is not selected, a Bayes factor "
+"test is not conducted). The displayed estimates are averaged across null and "
+"alternative prior distributions of all specified components."
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Effect size"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid ""
+"Average over the presence vs. absence of the effect. If unspecified, the "
+"resulting model assumes that the effect is present."
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Heterogeneity"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid ""
+"Average over the presence vs. absence of heterogeneity. If unspecified, the "
+"resulting model assumes that heterogeneity is present."
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Moderation"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid ""
+"Average over the presence vs. absence of moderators. If unspecified, the "
+"resulting model assumes that all moderators models are present."
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Prior Distributions"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Effect size and heterogeneity"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid ""
+"Specify the type of prior distributions for the effect size and "
+"heterogeneity."
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Default"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid ""
+"Use default prior distributions for the effect size and heterogeneity based "
+"on Bartoš et al. (2022)."
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Psychology"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid ""
+"Use default prior distributions developed for psychology based on Bartoš et "
+"al. (2022). This settings corresponds to the 'Default' setting."
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Medicine"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid ""
+"Use prior distributions based on the Cochrane Database of Systematic Reviews "
+"developed by Bartoš et al. (2021)"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Custom"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid ""
+"Use custom prior distributions. This option allows you to specify a custom "
+"model ensemble for the effect size and heterogeneity prior distributions."
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid ""
+"Use prior distributions based on the Cochrane Database of Systematic Reviews "
+"developed by Bartoš et al. (2023)."
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Scale"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid ""
+"Setting value different than 1 re-scales the pre-specified prior "
+"distributions. Values smaller than 1 lead to more informative priors, while "
+"values larger than 1 lead to less informative priors."
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Show model specification"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid ""
+"Show the model specification. This is useful for understanding and reporting "
+"the specified model."
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Prior Distributions (Custom)"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysisDeprecated|"
+msgid "Effect Size"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysisDeprecated|"
+msgid "Effect Size Standard Error"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysisDeprecated|"
+msgid "95% CI Lower and Upper Bound"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysisDeprecated|"
+msgid "Study Labels"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysis|"
+msgid ""
+"Classical meta-analysis allows you to conduct a meta-analysis using the "
+"classical approach. It provides options for fixed and random effects models, "
+"as well as meta-regression, location-scale models, and subgroup analysis. "
+"Additional options include the ability to specify clustering for robust "
+"variance estimation, permutation tests, and generating the metafor package R "
+"code. The results include estimates of effect sizes, heterogeneity, "
+"moderation, and various plots to visualize the results."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysis|"
+msgid "References"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysis|"
+msgid "R Packages"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
+msgid ""
+"Classical multilevel/multivariate meta-analysis allows you to conduct a meta-"
+"analysis adjusting for the dependency between effect sizes using the "
+"classical approach. The effect size dependency can be adjusted for by "
+"specifying the 'Effect Size Variance-Covariance Matrix' (interfacing the "
+"'vcalc' function) and specifying the 'Random Effects/Model "
+"Components' (interfacing the 'random' argument in 'rma.mv' function). It "
+"provides options for fixed and random effects models, as well as meta-"
+"regression, and subgroup analysis. Additional options include the ability to "
+"specify clustering for robust variance estimation, permutation tests, and "
+"generating the metafor package R code. The results include estimates of "
+"effect sizes, heterogeneity, moderation, and various plots to visualize the "
+"results."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
+msgid "References"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
+msgid "R Packages"
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid ""
+"Funnel plots allow you to visualize the observed effect sizes and standard "
+"errors with the funnel outlaying the sampling distribution under a given "
+"meta-analytic model. Funnel plots are often used to assess publication bias "
+"and small-study effects. However, many studies have shown that funnel plots "
+"are not very reliable for this purpose. See e.g. Lau et al., (2006) and "
+"Terrin et al. (2005)."
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid "References"
+msgstr ""
+
+msgctxt "FunnelPlot|"
+msgid "R Packages"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Bubble Plot"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid ""
+"Options for visualizing the estimated effect sizes at different levels of "
+"the predictors with the observed estimates visualized as bubbles. Continuous "
+"predictors can be split into three bins with cutoffs at ±x standard "
+"deviations from the mean. Predictors that are not specified for either the x-"
+"axis, lines, or plots are averaged over."
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Model Variables"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Selected Variable"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Variable to be visualized on the x-axis."
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Separate Lines"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid ""
+"Variable(s) according to which predictions are split across different lines."
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Separate Plots"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid ""
+"Variable(s) according to which predictions are split across different plots."
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "SD factor covariates"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Standard deviation cutoff used for binning continuous covariates."
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Bubbles"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Size"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Options for determining the size of the observed estimates."
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Weight"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Inverse variance"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Equal"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Sample size"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Relative size"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Set the relative size of the observed estimates."
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Transparency"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Set the transparency of the observed estimates."
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Jitter"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid ""
+"Set the degree of x-coordinate jitter of the observed estimates. Available "
+"when the x-axis variable is nominal."
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Confidence intervals"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Include confidence intervals of the estimated effect sizes."
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Prediction intervals"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Include prediction intervals of the estimated effect sizes."
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Theme"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Set the theme of the bubble plot."
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "White background"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Light"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Minimal"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Relative text size"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Adjust the text size of the bubble plot."
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Legend position"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Set the legend position of the bubble plot."
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "None"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Bottom"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Right"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Top"
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid "Left"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisAdvanced|"
+msgid ""
+"Perform a permutation test for the model coefficients. Available in the meta-"
+"analysis analysisType when clustering is not specified. The resulting "
+"permuation p-values are displayed in the 'p (permutation)' column. Note that "
+"permutation can be computationally intesive."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Forest Plot"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Options for visualizing study-level information, estimated marginal means, "
+"and the model information in an all encompassing forest plot. Different "
+"sections of the forest plot can be individually enabled/disabled."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Study information"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Add study-level information panel to the forest plot. There are three "
+"sections of the study-level information panel: a) the left section with "
+"study labels, names, and etc designed via the 'Selected Variables' option, "
+"b) the middle section visualizing the estimates and confidence intervals "
+"based on the meta-analytic input, c) the right section textually summarizing "
+"the estimates and confidence intervals based on the meta-analytic input."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Selected Variables"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Select variables containing study-level information to be printed in the "
+"left section of the panel. Each variable creates a new column in the panel."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Title"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Width"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Alignment"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Adjust the Title, Width, and Alignment of each column in the left section of "
+"the study-level information panel."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Left"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Middle"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Right"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Predicted effects"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Include predicted effect sizes in the middle section of the study-level "
+"information panel."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Study weights"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Include the study weights in the right section of the study-level "
+"information panel."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Secondary confidence interval"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Include secondary confidence interval for effect sizes in the middle section "
+"of the study-level information panel."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Order"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Order the study-level information panel by a variable."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "By"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Select the variable by which the study-level information panel is ordered."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Ascending"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Order the study-level information panel in ascending order."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Aggregate"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Aggregate the study-level information panel by a variable. If selected, "
+"`Predicted effects` and all `Study information` in the tight panel is "
+"supressed."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Select the variable by which the study-level information panel is aggregated."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Select the method for aggregating the estimates of the study-level "
+"information panel."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Boxplot"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Aggregate the estimates of the study-level information panel by boxplot with "
+"the box borders corresponding to the 25th, 50th, and 75th quantile and "
+"whiskers corresponding to the min and max values."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Bubbles"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Aggregate the estimates of the study-level information panel by bubbles. The "
+"size of the bubble corresponds to the inverse variance of the estimates (or "
+"total sample size for binomial models)."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Relative size"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Set the relative size of the observed estimates."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Estimated marginal means"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Add estimated marginal means information to the forest plot. Available when "
+"effect size meta-regression is specified."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Model Variables"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Select variables for which the estimated marginal means are visualized."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Term tests"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Include the omnibus term test of variables included in the estimated "
+"marginal means. The null hypothesis states that the effect size at all "
+"levels of the categorical variable are equal or that there is no linear "
+"association between the effect size and the continuous variable."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Coefficient tests"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Include coefficient tests of variables included in the estimated marginal "
+"means. The null hypothesis states that the estimated marginal mean for a "
+"given level equals the tested value."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Against"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Specify the test value for the coefficient tests."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Coefficient tests against 0"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Include coefficient tests of variables included in the estimated marginal "
+"means against 0. The null hypothesis states that the estimated marginal mean "
+"for a given level equals the tested value."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Adjusted effect size estimate"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Include the adjusted effect size estimate in the estimated marginal means "
+"section."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Model information"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Add meta-analytic model information to the forest plot."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Heterogeneity"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Test"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Include the test of the residual heterogeneity in the model information "
+"section."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Estimate"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "𝜏"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Include the meta-analytic 𝜏, the square root of the estimated between-study "
+"variance in the model information section. Not available for multilevel/"
+"multivariate meta-analysis."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "𝜏²"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Include the meta-analytic 𝜏², the estimated between-study variance in the "
+"model information section. Not available for multilevel/multivariate meta-"
+"analysis."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "I²"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Include the meta-analytic I², the percentage of total variation across "
+"studies due to heterogeneity in the model information section. Not available "
+"for multilevel/multivariate and binomial meta-analysis."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "H²"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Include the meta-analytic H², an index indicating the ratio of total "
+"variability to sampling variability in the model information section. Not "
+"available for multilevel/multivariate and binomial meta-analysis."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Moderation test"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Include the omnibus heterogeneity moderation test in the model information "
+"section. Available when heterogeneity meta-regression is specified."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Effect Size"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Fixed effect estimate"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Include a fixed effect meta-analytic effect size estimate in the model "
+"information section. Not available if the model was already fitted with "
+"fixed effects or the model contains heterogeneity meta-regression."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Fixed effect estimate test"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Include the test of the fixed effect meta-analytic effect size estimate in "
+"the model information section."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Pooled estimate"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Include the overall meta-analytic effect size estimate in the model "
+"information section."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Pooled estimate test"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Include the test of the overall meta-analytic effect size estimate in the "
+"model information section."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Include the test of the overall meta-analytic effect size estimate in the "
+"model information section. If a meta-regression model is fitted, the test "
+"corresponds to either the adjusted effect or the meta-regression intercept "
+"term and the corresponding estimate is also displayed. The test is available "
+"only if Bayesian model averaging for the effect is selected."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Include the omnibus effect size moderation test in the model information "
+"section. Available when effect size meta-regression is specified."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Publication Bias"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Include the publication bias test in the model information section."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Settings"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "General"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Prediction intervals"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Include prediction intervals of the estimated marginal means and the model "
+"information output."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Estimates and confidence intervals"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Include effect size estimates and confidence intervals summary text in the "
+"right panel of the forest plot."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Conditional estimates"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Display the conditional effect, heterogeneity, and estimated marginal means "
+"estimates."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Tests in right panel"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Move test results text to the right panel."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Align left panel"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Align text of the `Estimated marginal means` and  `Model Information` "
+"sections."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Subgroup"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Specify the forest plot behavior in the case of a subgroup analysis. These "
+"options is only available when the subgroup analysis is selected."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Panels within subgroup"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Group the output panels within their subgroup membership, i.e., the output "
+"panels are presented for each subgroup in a sequential order (i.e., Study "
+"information (Subgroup 1), Estimated marginal means (Subgroup 1), Model "
+"information (Subgroup 1), Study information (Subgroup 2), Estimated marginal "
+"means (Subgroup 2), Model information (Subgroup 2), .... If unchecked, the "
+"output is group by the panel membership first, i.e., Study information "
+"(Subgroup 1), Study information (Subgroup 2), Esimated marginal means "
+"(Subgroup 1), Estimated marginal means (Subgroup 2), Model information "
+"(Subgroup 1), Model information (Subgroup 2)..."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Full dataset estimated marginal means"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Include the full dataset estimated marginal means in the forest plot if "
+"subgroups are specified. This option overrides the `Include full dataset in "
+"subgroup analysis` setting in the `Advanced` section."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Full dataset model information"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Include the full dataset model information in the forest plot if subgroups "
+"are specified. This option overrides the `Include full dataset in subgroup "
+"analysis` setting in the `Advanced` section."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Auxiliary"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Digits"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Number of digits printed for the effect size and confidence intervals "
+"summary text."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Tests information"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Statistic and p-value"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "P-value"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Color"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Change color of the plotted objects. Only available if no color mapping is "
+"selected."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Black"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Blue"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Red"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Add vertical line"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Add a solid vertical line in the forest plot."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Add vertical line (2)"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Add a dotted vertical line in the forest plot."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "X-axis label"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Change the x-axis label of the forest plot (the default 'Effect Size' "
+"changes in accordance with the selected effect size transformation)."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "X-axis limits"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Change the default x-axis limits."
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlot|"
+msgid "Lower"
+msgstr "Нижний"
+
+msgctxt "ForestPlot|"
+msgid "Upper"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Relative Size"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Adjust the relative size of the forest plot components."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Estimates"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Text"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Axis labels"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Row"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Left panel"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Middle panel"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Right panel"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Adjust width based on text"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Turn off the automatic width adjustment of the individual components."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Mapping"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Select a variable for encoding the color or shape of the study information "
+"and the estimated marginal means output."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Shape"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Show RoBMA R code"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid ""
+"Display the underlying R code used by the RoBMA package to fit the model."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Include full dataset in subgroup analysis"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid ""
+"Include the full dataset output in the subgroup analysis. This option is "
+"only available when the subgroup analysis is selected."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Shorten prior names"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Shorten the prior names in the output."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Enable study-level nesting"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisAdvanced|"
+msgid "Enables study level nesting. Note that this is an experimental feature."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Medical subfield"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "General"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Acute Respiratory Infections"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Airways"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Anaesthesia"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Back and Neck"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Bone, Joint and Muscle Trauma"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Colorectal"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Common Mental Disorders"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Consumers and Communication"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Cystic Fibrosis and Genetic Disorders"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Dementia and Cognitive Improvement"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Developmental, Psychosocial and Learning Problems"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Drugs and Alcohol"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Effective Practice and Organisation of Care"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Emergency and Critical Care"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "ENT"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Eyes and Vision"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Gynaecological, Neuro-oncology and Orphan Cancer"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Gynaecology and Fertility"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Heart"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Hepato-Biliary"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "HIV/AIDS"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Hypertension"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Incontinence"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Infectious Diseases"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Inflammatory Bowel Disease"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Injuries"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Kidney and Transplant"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Metabolic and Endocrine Disorders"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Methodology"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Movement Disorders"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Musculoskeletal"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Neonatal"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Oral Health"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Pain, Palliative and Supportive Care"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Pregnancy and Childbirth"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Public Health"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Schizophrenia"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Sexually Transmitted Infections"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Skin"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Stroke"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Tobacco Addiction"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Upper GI and Pancreatic Diseases"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Urology"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Vascular"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Work"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Wounds"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Breast Cancer"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Chronic Pain"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Cirrhosis and Liver Transplantation"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Cognitive Impairment and Dementia"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Colorectal Cancer"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Epilepsy"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Fertility Regulation"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Gut"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Haematology"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Heart; Vascular"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Lung Cancer"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Multiple Sclerosis and Rare Diseases of the CNS"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
+msgid "Neuromuscular"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "Effect size"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
+msgid "Moderation"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
+msgid "Estimated Marginal Means"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
+msgid ""
+"Options to compute estimated marginal means, allowing examination of "
+"predicted values at specific levels of moderators and their differences from "
+"0."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
+msgid "Effect size"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
+msgid "Model variables"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
+msgid "Selected variables"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
+msgid ""
+"Variables selected for computing estimated marginal means in the effect size "
+"model."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
+msgid "Add adjusted estimate"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
+msgid ""
+"Include the adjusted effect estimate, which accounts for the moderators in "
+"the meta-regression model. This provides the effect size adjusted for the "
+"influence of moderators, as opposed to the pooled effect which combines the "
+"estimates across all studies."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
+msgid "Test against 0"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
+msgid ""
+"Option to test the estimated marginal means against 0. The test for the "
+"adjusted estimate is available only for meta-regression models with centred "
+"parameterization (i.e., no treatment factor contrasts). The test for the "
+"estimated marginal means is performed using a Savage-Dickey Density Ratio "
+"test based on the prior and posterior distributions assuming either the "
+"presence of the effect or moderation."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Statistics"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Options for summarizing the meta-analytic results."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Heterogeneity"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Summarize the meta-analytic between-study heterogeneity."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "𝜏"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Include 𝜏, the square root of the estimated between-study variance."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "𝜏²"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Include 𝜏², the estimated between-study variance."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "I²"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid ""
+"Include I², the percentage of total variation across studies due to "
+"heterogeneity. Unvailable when performing binomial meta-analysis."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "H²"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid ""
+"Include H², an index indicating the ratio of total variability to sampling "
+"variability. Unvailable when performing binomial meta-analysis."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Meta-Regression"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid ""
+"Create summaries of the meta-regression. Available when predictors are "
+"included."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Term tests"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid ""
+"Include tests for each term in the meta-regression model. The null "
+"hypothesis states that the effect size at all levels of the categorical "
+"variable are equal or that there is no linear association between the effect "
+"size and the continuous variable)."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Coefficient estimates"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid ""
+"Include estimates of the regression coefficients in the meta-regression "
+"model. Note that the regression coefficients are not standardized and "
+"correspond to the scale of the prior distribution (the RoBMA R package "
+"provides only standardized regression coefficients)."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Standardized coefficient estimates"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid ""
+"Include estimates of the standardized regression coefficients in the meta-"
+"regression model. The standardized regression coefficients are the "
+"regression coefficients divided by the standard deviation of the predictor "
+"variable and correspond to the scale of prior distribution (there is no "
+"difference between standardized and non-standardized regression coefficients "
+"for categorical moderators)."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Credible intervals"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Include credible intervals in the tabular output."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Prediction intervals"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Include prediction intervals in the tabular output."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Conditional estimates"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid ""
+"Include conditional estimates, i.e., estimates assuming the presence of the "
+"corresponding model component/parameter, in the tabular output and figures."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Transform effect size"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid ""
+"Select a transformation to apply to the effect size estimates in the output. "
+"This transformation applies to the 'Meta-Analytic Estimates Table', "
+"'Estimated Marginal Means Table', 'Forest Plot', and  the 'Bubble Plot'. The "
+"'Meta-Regression Coeffient Estimates' are not transformed."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "None"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Exponential"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Log odds to proportions"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Log odds to SMD (normal)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Log odds to SMD (logistic)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "SMD to log odds (normal)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "SMD to log odds (logistic)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "SMD to Cohen's U₁"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "SMD to Cohen's U₂"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "SMD to Cohen's U₃"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "SMD to CLES, Pr(supperiority)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Fisher's z to r"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Z to R²"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Hakstian & Whalen inverse α"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Bonett inverse α"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Publication Bias Adjustment"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid ""
+"Create summaries of the publication bias adjustment. Available when "
+"publication bias adjustment is specified."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "Weight function estimates"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid ""
+"Include estimates of the weight function parameters in the publication bias "
+"adjustment model."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "PET-PEESE estimates"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid ""
+"Include estimates of the PET-PEESE parameters in the publication bias "
+"adjustment model."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisModel|"
+msgid "Model"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisModel|"
+msgid ""
+"Options for specifing the effect size and heterogeneity models based on the "
+"included predictors, including model terms, intercepts, and link functions."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisModel|"
+msgid "Effect size model"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisModel|"
+msgid "Specify the effect size model."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisModel|"
+msgid "Available Components"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisModel|"
+msgid "Model Terms"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisModel|"
+msgid "Variables assigned as model terms in the effect size model."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Prior and Posterior Plots"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Effect size"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Moderation"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Estimated marginal means"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPlots|"
+msgid "Include prior distribution"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
+msgid "Continuous Moderators (null)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
+msgid "Continuous Moderators"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
+msgid "Truncation"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
+msgid "Prior weights"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
+msgid "Lower"
+msgstr "Нижний"
+
+msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
+msgid "Upper"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
+msgid "Parameters"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
+msgid "Distribution"
+msgstr "Распределение"
+
+msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
+msgid "Normal(μ,σ)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
+msgid "Student-t(μ,σ,v)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
+msgid "Cauchy(x₀,θ)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
+msgid "Gamma(α,β)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
+msgid "Gamma(k,θ)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
+msgid "Inverse-Gamma(α,β)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
+msgid "Log-Normal(μ,σ)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
+msgid "Beta(α,β)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
+msgid "Uniform(a,b)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
+msgid "Spike(x₀)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
+msgid "None"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Factor Moderators (null)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Factor Moderators"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Prior"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Truncation"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "weights"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Upper"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Lower"
+msgstr "Нижний"
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Parameters"
+msgstr ""
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Distribution"
+msgstr "Распределение"
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Contrast"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "M-Normal(μ=0,σ)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "M-T(μ=0,σ,v)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Spike(x₀=0)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "None"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Normal(μ,σ)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Student-t(μ,σ,v)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Cauchy(x₀,θ)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Gamma(α,β)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Gamma(k,θ)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Inverse-Gamma(α,β)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Log-Normal(μ,σ)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Beta(α,β)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Uniform(a,b)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Spike(x₀)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Mean dif."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Treatment"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Orthonormal"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
+msgid "Independent"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Robust Bayesian meta-analysis allows you to conduct a publication-bias "
+"adjusted meta-analysis using the Bayesian approach. By default, Bayesian "
+"meta-analysis model-averages across models assuming the presence vs. absence "
+"of the effect, heterogeneity, publication bias, and moderation (if "
+"specified). The analysis provides pre-specified prior distributions for "
+"different effect size measures and fields. Additional care is required when "
+"using a different type of effect sizes as the default prior distributions "
+"might not match the proper scaling of the effect size and heterogeneity. The "
+"analysis allows you to specify meta-regression, 3-level meta-analysis, and "
+"subgroup analysis. The results include estimates of effect sizes, "
+"heterogeneity, moderation, and various plots to visualize the results.\n"
+"\n"
+"The analysis is based on the Bayesian meta-analysis/meta-regression "
+"parameterization as outlined in Bartoš et al. (2025)."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "References"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "R Packages"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Variable containing the observed effect sizes."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Variable containing the standard errors corresponding to the effect sizes."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Effect size measure"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Effect size measure supplied as the 'Effect Size'. This is an important "
+"setting as it determines the defaul prior distributions and the model "
+"fitting transformation."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Standardized mean difference"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Standardized mean difference such as Cohen's d, Hedge's g"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Fisher's z transformation of correlation coefficients"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Log odds ratio"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Log risk ratio"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Log hazard ratio"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Risk difference"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "General"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"General effect size that does not correspond to any of the measures above. "
+"Please, be careful when specifying the prior distributions as no sensible "
+"defaults are available."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Predictors"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Variables to include as predictors (moderators) in the meta-regression "
+"model. See the 'Model' section for the meta-regression specification details."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Study Level (Multilevel)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Variable indicating the study level nesting. This variable is used to "
+"specify the nesting of the studies in the meta-analysis. The nesting is used "
+"to specify the model structure and to account for the correlation between "
+"the effect sizes within each study. Note that this is an experimental "
+"feature that needs to be manually enabled in the 'Advanced' section."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Subgroup"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Variable indicating subgroup stratification. For each subgroup, an "
+"independent model is fitted to the corresponding data set subset."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Bayesian Model-Averaging"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Specify which components should be included Bayesian model-averaging. If "
+"selected, prior distribution under both the presence and absence of the "
+"component are specified. This allows for testing for the presence vs. "
+"absence of the component (if the component is not selected, a Bayes factor "
+"test is not conducted). The displayed estimates are averaged across null and "
+"alternative prior distributions of all specified components."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Effect size"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Average over the presence vs. absence of the effect. If unspecified, the "
+"resulting model assumes that the effect is present."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Heterogeneity"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Average over the presence vs. absence of heterogeneity. If unspecified, the "
+"resulting model assumes that heterogeneity is present."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Moderation"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Average over the presence vs. absence of moderators. If unspecified, the "
+"resulting model assumes that all moderators models are present."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Publication bias"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Average over the presence vs. absence of publication bias. If unspecified, "
+"the resulting model assumes that publication bias is present."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Prior Distributions"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Effect size and heterogeneity"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Specify the type of prior distributions for the effect size and "
+"heterogeneity."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Default"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Use default prior distributions for the effect size and heterogeneity based "
+"on Bartoš et al. (2022)."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Psychology"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Use default prior distributions developed for psychology based on Bartoš et "
+"al. (2022). This settings corresponds to the 'Default' setting."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Medicine"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Use prior distributions based on the Cochrane Database of Systematic Reviews "
+"developed by Bartoš et al. (2021)"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Use custom prior distributions. This option allows you to specify a custom "
+"model ensemble for the effect size and heterogeneity prior distributions."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Use prior distributions based on the Cochrane Database of Systematic Reviews "
+"developed by Bartoš et al. (2023)."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Scale"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Setting value different than 1 re-scales the pre-specified prior "
+"distributions. Values smaller than 1 lead to more informative priors, while "
+"values larger than 1 lead to less informative priors."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Publication bias adjustment"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Publication bias adjustment method. The default is the RoBMA-PSMA method "
+"(combination of 6 weight functions and PET-PEESE)."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"RoBMA-PSMA method (combination of 6 weight functions and PET-PEESE) as "
+"described in Bartoš et al. (2022). This is the recommended method."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"RoBMA PET-PEESE method. A simplification of the RoBMA-PSMA method that uses "
+"only the PET-PEESE weight function."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Original RoBMA method (combination of 2 weight functions) as described in "
+"Maier et al. (2023)."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Custom model ensemble. This option allows you to specify a custom model "
+"ensemble for the publication bias adjustment."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "None"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "No publication bias adjustment."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Expected direction of the effect"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"The expected direction of the effect. This setting is important for the "
+"publication bias adjustment (one-sided selection models specify different "
+"publication probabilities for estimates in the expected vs. unexpected "
+"direction and PET-PEESE is bounded to adjust in the expected direction). The "
+"default is 'Positive'."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Detect"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Determine the expected direction of the effect automatically based on the "
+"median effect size in the data."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Positive effect"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Negative effect"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Show model specification"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Show the model specification. This is useful for understanding and reporting "
+"the specified model."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Prior Distributions (Custom)"
 msgstr ""

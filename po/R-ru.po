@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.3\n"
-"POT-Creation-Date: 2025-05-10 02:56\n"
+"POT-Creation-Date: 2025-05-17 02:58\n"
 "PO-Revision-Date: 2025-04-10 05:00+0000\n"
 "Last-Translator: MikeWinny <winny63@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/jasp/"
@@ -14,55 +14,8 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Weblate 5.11-dev\n"
 
-msgid ""
-"The study labels contain invalid characters. Please, remove them before "
-"running the analysis."
+msgid "There must be at least one observation in each group."
 msgstr ""
-
-msgid "Prior Plots"
-msgstr "Априорные графики"
-
-msgid "Effect"
-msgstr "Эффект"
-
-msgid "Heterogeneity"
-msgstr ""
-
-msgid "Null"
-msgstr "Ноль"
-
-msgid "Alternative"
-msgstr "Альтернатива"
-
-msgid "Model Preview"
-msgstr "Предпросмотр модели"
-
-msgid ""
-"Please specify a prior distribution for each parameter in the Models "
-"specification section (either null or alternative)."
-msgstr ""
-"Пожалуйста, укажите априорное распределение для каждого параметра в разделе "
-"Спецификация моделей (нулевое или альтернативное)."
-
-msgid "Model Summary"
-msgstr "Сводка по Модели"
-
-msgid "Models"
-msgstr "Модели"
-
-msgid "P(M)"
-msgstr "P(M)"
-
-msgid ""
-"The analysis will estimate multiple meta-analytic models using MCMC and "
-"might require a prolonged time to complete."
-msgstr ""
-
-msgid "Model Specification Preview"
-msgstr "Предпросмотр описания Модели"
-
-msgid "Prior Distribution"
-msgstr "Априорное Распределение"
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr ""
@@ -232,6 +185,9 @@ msgstr ""
 msgid "Effect Size"
 msgstr ""
 
+msgid "Heterogeneity"
+msgstr ""
+
 msgid "Effect size"
 msgstr ""
 
@@ -397,7 +353,7 @@ msgstr "p"
 msgid "p (permutation)"
 msgstr ""
 
-msgid "The model for the subgroup '%1$s' failed with the following error: %2$s"
+msgid "The model for subgroup '%1$s' failed with the following error: %2$s"
 msgstr ""
 
 msgid "Error:"
@@ -630,6 +586,9 @@ msgstr ""
 msgid "Residual Funnel Plot"
 msgstr ""
 
+msgid "Model Summary"
+msgstr "Сводка по Модели"
+
 msgid "Meta-Regression Summary"
 msgstr ""
 
@@ -760,6 +719,9 @@ msgstr ""
 msgid "Benjamini-Yekutieli"
 msgstr ""
 
+msgid "Intercept"
+msgstr ""
+
 #, fuzzy
 msgid "Residual heterogeneity"
 msgstr "Гетерогенность (%s)"
@@ -813,6 +775,13 @@ msgstr ""
 msgid "The heterogeneity model for 𝜏² is specified on the identity scale."
 msgstr ""
 
+msgid "pooled effect"
+msgstr ""
+
+#, fuzzy
+msgid "adjusted effect"
+msgstr "Оценки Модели"
+
 msgid "%1$i observations were ommited due to missing values."
 msgstr ""
 
@@ -832,17 +801,21 @@ msgid "%1$s: %2$i clusters with min/median/max %3$i/%4$i/%5$i estimates."
 msgstr ""
 
 msgid ""
-"NAs in the pooled effect size were introduced due to the %1$s "
-"transformation. Please verify that you are using the correct effect size "
-"transformation."
+"NAs in the %1$s were introduced due to the %2$s transformation. Please "
+"verify that you are using the correct effect size transformation."
 msgstr ""
 
-msgid "The pooled effect size is transformed using %1$s transformation."
+msgid "The %1$s is transformed using %2$s transformation."
 msgstr ""
 
 msgid ""
 "The pooled effect size corresponds to the weighted average effect across "
 "studies."
+msgstr ""
+
+msgid ""
+"The adjusted effect corresponds to the averaged effect size estimate across "
+"the levels of all moderators."
 msgstr ""
 
 msgid ""
@@ -857,8 +830,8 @@ msgid "The Model Structure %1$s was not completely specified and was skipped."
 msgstr ""
 
 msgid ""
-"Prediction interval for the pooled effect size is not available for models "
-"with multiple heterogeneity estimates."
+"Prediction interval for the %1$s is not available for models with multiple "
+"heterogeneity estimates."
 msgstr ""
 
 msgid ""
@@ -1246,12 +1219,20 @@ msgstr ""
 msgid "Model Information"
 msgstr ""
 
+msgid "Publication Bias: %1$s"
+msgstr ""
+
 #, fuzzy
 msgid "Fixed Effect Estimate"
 msgstr "Оценка эффективности"
 
-msgid "Pooled Estimate"
-msgstr ""
+#, fuzzy
+msgid "Pooled Effect"
+msgstr "Эффект"
+
+#, fuzzy
+msgid "Intercept Estimate"
+msgstr "Оценка эффективности"
 
 msgid "Full Dataset"
 msgstr ""
@@ -1376,9 +1357,6 @@ msgstr ""
 msgid "The model should contain at least one predictor or an intercept."
 msgstr ""
 
-msgid "Intercept"
-msgstr ""
-
 msgid "Coefficients"
 msgstr ""
 
@@ -1409,17 +1387,162 @@ msgid ""
 "'Adapt delta' in the Options section."
 msgstr ""
 
+msgid "Estimating Marginal Means"
+msgstr ""
+
+msgid ""
+"At least one prior distribution for the Effect component has to be specified."
+msgstr ""
+
+msgid ""
+"At least one prior distribution for the Heterogeneity component has to be "
+"specified."
+msgstr ""
+
+msgid ""
+"At least one prior distribution for the %1$s moderator component has to be "
+"specified."
+msgstr ""
+
+msgid ""
+"Both priors distributions for the %1$s moderator component must have the "
+"same contrast type."
+msgstr ""
+
+msgid ""
+"At least one prior distribution for the Publication Bias component has to be "
+"specified."
+msgstr ""
+
+msgid ""
+"At least one prior distribution for the Baseline component has to be "
+"specified."
+msgstr ""
+
 msgid "The priors for publication bias were set incorrectly."
 msgstr ""
 
-msgid "Publication Bias"
+#, fuzzy
+msgid "Model Specification"
+msgstr "Предпросмотр описания Модели"
+
+msgid "Model Components"
 msgstr ""
 
-msgid "Baseline"
+msgid "Models"
+msgstr "Модели"
+
+msgid "P(M)"
+msgstr "P(M)"
+
+#, fuzzy
+msgid "Prior Distributions %1$s"
+msgstr "Априорное Распределение"
+
+#, fuzzy
+msgid "Prior Distributions Moderators"
+msgstr "Графики Апостериорной Вероятности"
+
+msgid "Alternative"
+msgstr "Альтернатива"
+
+msgid "Null"
+msgstr "Ноль"
+
+msgid "P(M|data)"
+msgstr "P(M|данные)"
+
+msgid ""
+"The analysis will estimate a complex meta-analytic model ensemble using MCMC "
+"and might require a prolonged time to complete."
 msgstr ""
+
+msgid ""
+"The model fit for subgroup '%1$s' resulted in the following warning: %2$s"
+msgstr ""
+
+msgid "The model fit resulted in the following warning: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid "Conditional Meta-Analytic Estimates"
+msgstr "Условные оценки"
 
 msgid "Median"
 msgstr "Медиана"
+
+msgid ""
+"Conditional estimates are based on models assuming the presence of a given "
+"component."
+msgstr ""
+
+msgid "Standardized Conditional Meta-Regression Coefficients"
+msgstr ""
+
+msgid "Standardized Meta-Regression Coefficients"
+msgstr ""
+
+msgid "Conditional Meta-Regression Coefficients"
+msgstr ""
+
+msgid "Meta-Regression Coefficients"
+msgstr ""
+
+msgid "Conditional Publication Bias Adjustment Estimates (Weight Function)"
+msgstr ""
+
+msgid "Publication Bias Adjustment Estimates (Weight Function)"
+msgstr ""
+
+msgid "<em>p</em>-Values Interval"
+msgstr ""
+
+msgid "Conditional Publication Bias Adjustment Estimates (PET-PEESE)"
+msgstr ""
+
+msgid "Publication Bias Adjustment Estimates (PET-PEESE)"
+msgstr ""
+
+msgid "Estimated Conditional Marginal Means"
+msgstr ""
+
+#, fuzzy
+msgid "Conditional %1$s"
+msgstr "Условные"
+
+#, fuzzy
+msgid "Conditional Estimated Marginal Means"
+msgstr "Условные оценки"
+
+msgid ""
+"The Bayes factor test for the adjusted estimate is not available for meta-"
+"regressions with non-centered parameteriazation."
+msgstr ""
+
+#, fuzzy
+msgid "Adjusted Effect"
+msgstr "Оценки Модели"
+
+msgid "Moderation: Estimated Marginal Means"
+msgstr ""
+
+#, fuzzy
+msgid "Moderation"
+msgstr "Информация"
+
+msgid "Weight Function"
+msgstr ""
+
+msgid "PET-PEESE"
+msgstr ""
+
+#, fuzzy
+msgid "P-Value"
+msgstr "Значение"
+
+#, fuzzy
+msgid "Diagnostics Summary"
+msgstr "Диагностика"
 
 msgid "MCMC error"
 msgstr ""
@@ -1433,163 +1556,6 @@ msgstr "ESS"
 msgid "R-hat"
 msgstr "R-hat"
 
-msgid "<em>p</em>-values interval"
-msgstr ""
-
-msgid "Effect size (%s)"
-msgstr "Размер эффекта (%s)"
-
-msgid "Heterogeneity (%s)"
-msgstr "Гетерогенность (%s)"
-
-msgid "Publication bias"
-msgstr ""
-
-msgid "log(OR)"
-msgstr ""
-
-msgid "OR"
-msgstr ""
-
-msgid "The specified path does not lead to an existing file."
-msgstr ""
-
-msgid "An error occurred while reading the model file: %1$s"
-msgstr ""
-
-msgid "The loaded object is not a RoBMA model."
-msgstr ""
-
-#, fuzzy
-msgid "Conditional Estimates"
-msgstr "Условные оценки"
-
-msgid "Inclusion BF"
-msgstr "Включение КБ"
-
-msgid "Exclusion BF"
-msgstr "Исключение КБ"
-
-msgid "log(Inclusion BF)"
-msgstr "log(Включение КБ)"
-
-msgid "P(M|data)"
-msgstr "P(M|данные)"
-
-msgid "Model Averaged Estimates"
-msgstr "Усредненные оценки модели"
-
-msgid "Model Averaged Weights (%s)"
-msgstr ""
-
-msgid "Model Averaged PET-PEESE Estimates"
-msgstr ""
-
-msgid "Conditional Weights (%s)"
-msgstr ""
-
-msgid "Conditional PET-PEESE Estimates"
-msgstr ""
-
-msgid "Models Overview"
-msgstr "Обзор Моделей"
-
-msgid "BF%s"
-msgstr "КБ%s"
-
-msgid "log(BF%s)"
-msgstr "log(КБ%s)"
-
-msgid "log(MargLik)"
-msgstr "log(ПредПрав)"
-
-msgid "Individual Models Summary"
-msgstr "Сводка отдельных моделей"
-
-msgid "Model #"
-msgstr "Модель #"
-
-msgid "Priors"
-msgstr "Априорные распределения"
-
-msgid "Information"
-msgstr "Информация"
-
-msgid "Model Estimates"
-msgstr "Оценки Модели"
-
-msgid "Model %i"
-msgstr "Модель %i"
-
-msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
-msgstr "Модель %1$i не существует. Выберите одну из моделей от 1 до %2$i."
-
-msgid "Estimated Weights (%s)"
-msgstr ""
-
-msgid "PET-PEESE Estimates"
-msgstr ""
-
-msgid "%1$s Forest Plot"
-msgstr ""
-
-msgid "Posterior Distribution Plots"
-msgstr "Графики Апостериорной Вероятности"
-
-#, fuzzy
-msgid "Conditional"
-msgstr "Условные"
-
-msgid "Model Averaged"
-msgstr "Усредненная Модель"
-
-#, fuzzy
-msgid "Effect Size Estimate"
-msgstr "Оценка эффективности"
-
-msgid "Heterogeneity Estimate"
-msgstr ""
-
-msgid "Weight Function Estimate"
-msgstr ""
-
-msgid "PET-PEESE Regression Estimate"
-msgstr ""
-
-msgid "Posterior Model Estimates Plots"
-msgstr ""
-
-msgid "Effect Size Estimates"
-msgstr ""
-
-msgid "Heterogeneity Estimates"
-msgstr ""
-
-msgid "Diagnostics"
-msgstr "Диагностика"
-
-msgid "Models Diagnostics Overview"
-msgstr "Обзор Диагностики Моделей"
-
-msgid "max(MCMC error)"
-msgstr ""
-
-msgid "max(MCMC error/SD)"
-msgstr ""
-
-msgid "min(ESS)"
-msgstr "min(ЕСС)"
-
-msgid "max(R-hat)"
-msgstr "max(R-hat)"
-
-msgid ""
-"MCMC Diagnostics plots are created once both the plotted parameter ('Plot') "
-"and the plot type ('Type') options are selected."
-msgstr ""
-"MCMC Диагностические графики создаются после выбора параметра для построения "
-"('График') и типа графика ('Тип')."
-
 msgid "Weights"
 msgstr ""
 
@@ -1600,25 +1566,57 @@ msgid "PEESE"
 msgstr ""
 
 #, fuzzy
-msgid "Trace plots"
+msgid "Trace Plot"
 msgstr "Графики трендов"
 
-msgid "Average autocorrelations"
+#, fuzzy
+msgid "Autocorrelation Plot"
 msgstr "Среднее автокоррелирование"
 
-msgid "Posterior samples densities"
-msgstr "Плотности образцов апостериорной вероятности"
-
-msgid "Model %i does not contain any of the selected parameters."
-msgstr "Модель %i не содержит ни одного из выбранных параметров."
-
-msgid ""
-"All models failed to converge under the MCMC convergence criteria. Please "
-"update the MCMC settings."
+msgid "Density Plot"
 msgstr ""
 
-msgid "All models failed to converge. Please update the MCMC settings."
+msgid "RoBMA R Code"
 msgstr ""
+
+msgid "Publication Bias Adjustment Summary"
+msgstr ""
+
+msgid "Estimated Marginal Means Summary"
+msgstr ""
+
+#, fuzzy
+msgid "Prior and Posterior Plots"
+msgstr "Графики Апостериорной Вероятности"
+
+msgid "Diagnostics"
+msgstr "Диагностика"
+
+#, fuzzy
+msgid "Adjusted effect"
+msgstr "Оценки Модели"
+
+msgid "Subgroup %1$s, %2$s"
+msgstr ""
+
+#, fuzzy
+msgid "Effect intercept"
+msgstr "Размер эффекта (%s)"
+
+msgid "Publication bias"
+msgstr ""
+
+msgid "Baseline"
+msgstr ""
+
+msgid "Inclusion BF"
+msgstr "Включение КБ"
+
+msgid "Exclusion BF"
+msgstr "Исключение КБ"
+
+msgid "log(Inclusion BF)"
+msgstr "log(Включение КБ)"
 
 msgid ""
 "Cannot compute results. All entries of the p-value variable (%s) must be "
@@ -1832,3 +1830,81 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid "Prior Plots"
+#~ msgstr "Априорные графики"
+
+#~ msgid "Model Preview"
+#~ msgstr "Предпросмотр модели"
+
+#~ msgid ""
+#~ "Please specify a prior distribution for each parameter in the Models "
+#~ "specification section (either null or alternative)."
+#~ msgstr ""
+#~ "Пожалуйста, укажите априорное распределение для каждого параметра в "
+#~ "разделе Спецификация моделей (нулевое или альтернативное)."
+
+#~ msgid "Effect size (%s)"
+#~ msgstr "Размер эффекта (%s)"
+
+#~ msgid "Heterogeneity (%s)"
+#~ msgstr "Гетерогенность (%s)"
+
+#~ msgid "Model Averaged Estimates"
+#~ msgstr "Усредненные оценки модели"
+
+#~ msgid "Models Overview"
+#~ msgstr "Обзор Моделей"
+
+#~ msgid "BF%s"
+#~ msgstr "КБ%s"
+
+#~ msgid "log(BF%s)"
+#~ msgstr "log(КБ%s)"
+
+#~ msgid "log(MargLik)"
+#~ msgstr "log(ПредПрав)"
+
+#~ msgid "Individual Models Summary"
+#~ msgstr "Сводка отдельных моделей"
+
+#~ msgid "Model #"
+#~ msgstr "Модель #"
+
+#~ msgid "Priors"
+#~ msgstr "Априорные распределения"
+
+#~ msgid "Model Estimates"
+#~ msgstr "Оценки Модели"
+
+#~ msgid "Model %i"
+#~ msgstr "Модель %i"
+
+#~ msgid ""
+#~ "Model %1$i does not exist. Select one of the models between 1 and %2$i."
+#~ msgstr "Модель %1$i не существует. Выберите одну из моделей от 1 до %2$i."
+
+#~ msgid "Model Averaged"
+#~ msgstr "Усредненная Модель"
+
+#~ msgid "Models Diagnostics Overview"
+#~ msgstr "Обзор Диагностики Моделей"
+
+#~ msgid "min(ESS)"
+#~ msgstr "min(ЕСС)"
+
+#~ msgid "max(R-hat)"
+#~ msgstr "max(R-hat)"
+
+#~ msgid ""
+#~ "MCMC Diagnostics plots are created once both the plotted parameter "
+#~ "('Plot') and the plot type ('Type') options are selected."
+#~ msgstr ""
+#~ "MCMC Диагностические графики создаются после выбора параметра для "
+#~ "построения ('График') и типа графика ('Тип')."
+
+#~ msgid "Posterior samples densities"
+#~ msgstr "Плотности образцов апостериорной вероятности"
+
+#~ msgid "Model %i does not contain any of the selected parameters."
+#~ msgstr "Модель %i не содержит ни одного из выбранных параметров."

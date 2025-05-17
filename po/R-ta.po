@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.19.2\n"
-"POT-Creation-Date: 2025-05-10 02:56\n"
+"POT-Creation-Date: 2025-05-17 02:58\n"
 "PO-Revision-Date: 2025-04-13 07:48+0000\n"
 "Last-Translator: Koen Derks <koen-derks@hotmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/jasp/"
@@ -13,59 +13,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.11-dev\n"
 
-msgid ""
-"The study labels contain invalid characters. Please, remove them before "
-"running the analysis."
+msgid "There must be at least one observation in each group."
 msgstr ""
-"ஆய்வு லேபிள்களில் தவறான எழுத்துக்கள் உள்ளன. தயவுசெய்து, பகுப்பாய்வை இயக்குவதற்கு முன்பு "
-"அவற்றை அகற்றவும்."
-
-msgid "Prior Plots"
-msgstr "முன் அடுக்கு"
-
-msgid "Effect"
-msgstr "விளைவு"
-
-msgid "Heterogeneity"
-msgstr "பன்முகத்தன்மை"
-
-msgid "Null"
-msgstr "சுழியம்"
-
-msgid "Alternative"
-msgstr "மாற்று"
-
-msgid "Model Preview"
-msgstr "மாதிரி முன்னோட்டம்"
-
-msgid ""
-"Please specify a prior distribution for each parameter in the Models "
-"specification section (either null or alternative)."
-msgstr ""
-"மாதிரிகள் விவரக்குறிப்பு பிரிவில் (பூச்ய அல்லது மாற்று) ஒவ்வொரு அளவுருவுக்கும் முன் "
-"விநியோகத்தைக் குறிப்பிடவும்."
-
-msgid "Model Summary"
-msgstr "மாதிரி சுருக்கம்"
-
-msgid "Models"
-msgstr "மாதிரிகள்"
-
-msgid "P(M)"
-msgstr "பி (மீ)"
-
-msgid ""
-"The analysis will estimate multiple meta-analytic models using MCMC and "
-"might require a prolonged time to complete."
-msgstr ""
-"பகுப்பாய்வு MCMC ஐப் பயன்படுத்தி பல மேவு பகுப்பாய்வு மாதிரிகளை மதிப்பிடும் மற்றும் "
-"முடிக்க நீண்ட நேரம் தேவைப்படலாம்."
-
-msgid "Model Specification Preview"
-msgstr "மாதிரி விவரக்குறிப்பு முன்னோட்டம்"
-
-msgid "Prior Distribution"
-msgstr "முன் வழங்கல்"
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr "முந்தைய கீழ் எல்லை மேல் எல்லையை விட சிறியதல்ல."
@@ -266,6 +215,9 @@ msgstr ""
 msgid "Effect Size"
 msgstr "விளைவு அளவு"
 
+msgid "Heterogeneity"
+msgstr "பன்முகத்தன்மை"
+
 msgid "Effect size"
 msgstr "விளைவு அளவு"
 
@@ -440,7 +392,7 @@ msgid "p (permutation)"
 msgstr "பி (வரிசைமாற்றம்)"
 
 #, fuzzy
-msgid "The model for the subgroup '%1$s' failed with the following error: %2$s"
+msgid "The model for subgroup '%1$s' failed with the following error: %2$s"
 msgstr "பின்வரும் பிழையுடன் %1$s சோதனை தோல்வியடைந்தது: %2$s"
 
 msgid "Error:"
@@ -684,6 +636,9 @@ msgstr "பொருத்தப்பட்ட மதிப்பில் ச�
 msgid "Residual Funnel Plot"
 msgstr "மீதமுள்ள புனல் சூழ்ச்சி"
 
+msgid "Model Summary"
+msgstr "மாதிரி சுருக்கம்"
+
 msgid "Meta-Regression Summary"
 msgstr "மெட்டா-பின்னடைவு சுருக்கம்"
 
@@ -830,6 +785,9 @@ msgstr ""
 msgid "Benjamini-Yekutieli"
 msgstr ""
 
+msgid "Intercept"
+msgstr "இடைமறிப்பு"
+
 #, fuzzy
 msgid "Residual heterogeneity"
 msgstr "மீதமுள்ள பன்முக சோதனை"
@@ -890,6 +848,14 @@ msgstr "𝜏² க்கான பன்முகத்தன்மை மாத
 msgid "The heterogeneity model for 𝜏² is specified on the identity scale."
 msgstr "𝜏² க்கான பன்முகத்தன்மை மாதிரி அடையாள அளவில் குறிப்பிடப்பட்டுள்ளது."
 
+#, fuzzy
+msgid "pooled effect"
+msgstr "பூல் செய்யப்பட்ட விளைவு அளவு சோதனை"
+
+#, fuzzy
+msgid "adjusted effect"
+msgstr "ஆர்டர் செய்யப்பட்ட விளைவுகள்"
+
 msgid "%1$i observations were ommited due to missing values."
 msgstr "மதிப்புகள் காணாமல் போனதால் %1$i அவதானிப்புகள் வெளியேற்றப்பட்டன."
 
@@ -912,17 +878,25 @@ msgid "%1$s: %2$i clusters with min/median/max %3$i/%4$i/%5$i estimates."
 msgstr "%1$i கொத்துகள் மின்/சராசரி/அதிகபட்சம்%2$i/%3$i/%4$i நான் மதிப்பிடுகிறேன்."
 
 msgid ""
-"NAs in the pooled effect size were introduced due to the %1$s "
-"transformation. Please verify that you are using the correct effect size "
-"transformation."
+"NAs in the %1$s were introduced due to the %2$s transformation. Please "
+"verify that you are using the correct effect size transformation."
 msgstr ""
 
-msgid "The pooled effect size is transformed using %1$s transformation."
+#, fuzzy
+msgid "The %1$s is transformed using %2$s transformation."
 msgstr "பூல் செய்யப்பட்ட விளைவு அளவு %1$s உருமாற்றத்தைப் பயன்படுத்தி மாற்றப்படுகிறது."
 
 msgid ""
 "The pooled effect size corresponds to the weighted average effect across "
 "studies."
+msgstr ""
+"பூல் செய்யப்பட்ட விளைவு அளவு ஆய்வுகள் முழுவதும் எடையுள்ள சராசரி விளைவுக்கு "
+"ஒத்திருக்கிறது."
+
+#, fuzzy
+msgid ""
+"The adjusted effect corresponds to the averaged effect size estimate across "
+"the levels of all moderators."
 msgstr ""
 "பூல் செய்யப்பட்ட விளைவு அளவு ஆய்வுகள் முழுவதும் எடையுள்ள சராசரி விளைவுக்கு "
 "ஒத்திருக்கிறது."
@@ -940,9 +914,10 @@ msgstr "I² மற்றும் H² புள்ளிவிவரங்கள
 msgid "The Model Structure %1$s was not completely specified and was skipped."
 msgstr "மாதிரி அமைப்பு %1$s முழுமையாக குறிப்பிடப்படவில்லை மற்றும் தவிர்க்கப்பட்டது."
 
+#, fuzzy
 msgid ""
-"Prediction interval for the pooled effect size is not available for models "
-"with multiple heterogeneity estimates."
+"Prediction interval for the %1$s is not available for models with multiple "
+"heterogeneity estimates."
 msgstr ""
 "பூல் செய்யப்பட்ட விளைவு அளவிற்கான கணிப்பு இடைவெளி பல பன்முகத்தன்மை மதிப்பீடுகளைக் கொண்ட "
 "மாதிரிகளுக்கு கிடைக்காது."
@@ -1368,11 +1343,20 @@ msgid "Model Information"
 msgstr "மாதிரி செய்தி"
 
 #, fuzzy
+msgid "Publication Bias: %1$s"
+msgstr "வெளியீட்டு சார்பு"
+
+#, fuzzy
 msgid "Fixed Effect Estimate"
 msgstr "நிலையான விளைவுகள் மதிப்பீடுகள்"
 
-msgid "Pooled Estimate"
-msgstr "பூல் மதிப்பீடு"
+#, fuzzy
+msgid "Pooled Effect"
+msgstr "பூல் செய்யப்பட்ட விளைவு அளவு சோதனை"
+
+#, fuzzy
+msgid "Intercept Estimate"
+msgstr "பன்முகத்தன்மை மதிப்பீடு"
 
 msgid "Full Dataset"
 msgstr ""
@@ -1511,9 +1495,6 @@ msgstr "பின்வரும் பிழையுடன் %1$s சோத�
 msgid "The model should contain at least one predictor or an intercept."
 msgstr "மாதிரியில் குறைந்தது ஒரு முன்கணிப்பு அல்லது இடைமறிப்பு இருக்க வேண்டும்."
 
-msgid "Intercept"
-msgstr "இடைமறிப்பு"
-
 msgid "Coefficients"
 msgstr "குணகங்கள்"
 
@@ -1552,17 +1533,183 @@ msgstr ""
 "துல்லியத்தை அதிகரிக்க தயவுசெய்து 'மறு செய்கைகளை' அதிகரிக்கவும் அல்லது விருப்பங்கள் "
 "பிரிவில் 'டெல்டாவை மாற்றியமைக்கவும்'."
 
+#, fuzzy
+msgid "Estimating Marginal Means"
+msgstr "மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகள்"
+
+#, fuzzy
+msgid ""
+"At least one prior distribution for the Effect component has to be specified."
+msgstr "குறைந்தது ஒரு முன்கணிப்பு குறிப்பிடப்பட வேண்டும்."
+
+#, fuzzy
+msgid ""
+"At least one prior distribution for the Heterogeneity component has to be "
+"specified."
+msgstr "குறைந்தது ஒரு முன்கணிப்பு குறிப்பிடப்பட வேண்டும்."
+
+#, fuzzy
+msgid ""
+"At least one prior distribution for the %1$s moderator component has to be "
+"specified."
+msgstr "குறைந்தது ஒரு முன்கணிப்பு குறிப்பிடப்பட வேண்டும்."
+
+msgid ""
+"Both priors distributions for the %1$s moderator component must have the "
+"same contrast type."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"At least one prior distribution for the Publication Bias component has to be "
+"specified."
+msgstr "குறைந்தது ஒரு முன்கணிப்பு குறிப்பிடப்பட வேண்டும்."
+
+#, fuzzy
+msgid ""
+"At least one prior distribution for the Baseline component has to be "
+"specified."
+msgstr "குறைந்தது ஒரு முன்கணிப்பு குறிப்பிடப்பட வேண்டும்."
+
 msgid "The priors for publication bias were set incorrectly."
 msgstr "வெளியீட்டு சார்புக்கான முன்னுரிமைகள் தவறாக அமைக்கப்பட்டன."
 
-msgid "Publication Bias"
-msgstr "வெளியீட்டு சார்பு"
+#, fuzzy
+msgid "Model Specification"
+msgstr "மாதிரி விவரக்குறிப்பு முன்னோட்டம்"
 
-msgid "Baseline"
-msgstr "அடிப்படை"
+#, fuzzy
+msgid "Model Components"
+msgstr "அகற்றப்பட்ட கூறு"
+
+msgid "Models"
+msgstr "மாதிரிகள்"
+
+msgid "P(M)"
+msgstr "பி (மீ)"
+
+#, fuzzy
+msgid "Prior Distributions %1$s"
+msgstr "முன் வழங்கல்"
+
+#, fuzzy
+msgid "Prior Distributions Moderators"
+msgstr "பின்புற விநியோக அடுக்குகள்"
+
+msgid "Alternative"
+msgstr "மாற்று"
+
+msgid "Null"
+msgstr "சுழியம்"
+
+msgid "P(M|data)"
+msgstr "பி (எம் | தரவு)"
+
+#, fuzzy
+msgid ""
+"The analysis will estimate a complex meta-analytic model ensemble using MCMC "
+"and might require a prolonged time to complete."
+msgstr ""
+"பகுப்பாய்வு MCMC ஐப் பயன்படுத்தி பல மேவு பகுப்பாய்வு மாதிரிகளை மதிப்பிடும் மற்றும் "
+"முடிக்க நீண்ட நேரம் தேவைப்படலாம்."
+
+#, fuzzy
+msgid ""
+"The model fit for subgroup '%1$s' resulted in the following warning: %2$s"
+msgstr "பின்வரும் பிழையுடன் %1$s சோதனை தோல்வியடைந்தது: %2$s"
+
+#, fuzzy
+msgid "The model fit resulted in the following warning: %1$s"
+msgstr "பின்வரும் பிழையுடன் %1$s சோதனை தோல்வியடைந்தது: %2$s"
+
+#, fuzzy
+msgid "Conditional Meta-Analytic Estimates"
+msgstr "மேவு பகுப்பாய்வு மதிப்பீடுகள்"
 
 msgid "Median"
 msgstr "இடைநடு"
+
+msgid ""
+"Conditional estimates are based on models assuming the presence of a given "
+"component."
+msgstr ""
+
+#, fuzzy
+msgid "Standardized Conditional Meta-Regression Coefficients"
+msgstr "பன்முகத்தன்மை மெட்டா-பின்னடைவு குணகங்கள்"
+
+#, fuzzy
+msgid "Standardized Meta-Regression Coefficients"
+msgstr "விளைவு அளவு மெட்டா-பின்னடைவு குணகங்கள்"
+
+#, fuzzy
+msgid "Conditional Meta-Regression Coefficients"
+msgstr "பன்முகத்தன்மை மெட்டா-பின்னடைவு குணகங்கள்"
+
+#, fuzzy
+msgid "Meta-Regression Coefficients"
+msgstr "விளைவு அளவு மெட்டா-பின்னடைவு குணகங்கள்"
+
+msgid "Conditional Publication Bias Adjustment Estimates (Weight Function)"
+msgstr ""
+
+msgid "Publication Bias Adjustment Estimates (Weight Function)"
+msgstr ""
+
+#, fuzzy
+msgid "<em>p</em>-Values Interval"
+msgstr "<em> ப </em>-மதிப்பீட்டு இடைவெளி"
+
+msgid "Conditional Publication Bias Adjustment Estimates (PET-PEESE)"
+msgstr ""
+
+msgid "Publication Bias Adjustment Estimates (PET-PEESE)"
+msgstr ""
+
+#, fuzzy
+msgid "Estimated Conditional Marginal Means"
+msgstr "மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகள்"
+
+#, fuzzy
+msgid "Conditional %1$s"
+msgstr "நிபந்தனை"
+
+#, fuzzy
+msgid "Conditional Estimated Marginal Means"
+msgstr "மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகள்"
+
+msgid ""
+"The Bayes factor test for the adjusted estimate is not available for meta-"
+"regressions with non-centered parameteriazation."
+msgstr ""
+
+#, fuzzy
+msgid "Adjusted Effect"
+msgstr "சரிசெய்யப்பட்ட மதிப்பீடு"
+
+#, fuzzy
+msgid "Moderation: Estimated Marginal Means"
+msgstr "மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகள்"
+
+#, fuzzy
+msgid "Moderation"
+msgstr "மிதமான: %1$s"
+
+#, fuzzy
+msgid "Weight Function"
+msgstr "எடை செயல்பாடு (%s)"
+
+#, fuzzy
+msgid "PET-PEESE"
+msgstr "படம்"
+
+#, fuzzy
+msgid "P-Value"
+msgstr "மதிப்பு"
+
+#, fuzzy
+msgid "Diagnostics Summary"
+msgstr "கண்டறிதல்"
 
 msgid "MCMC error"
 msgstr "MCMC பிழை"
@@ -1576,161 +1723,6 @@ msgstr "எச்"
 msgid "R-hat"
 msgstr "ஆர்-தொப்பி"
 
-msgid "<em>p</em>-values interval"
-msgstr "<em> ப </em>-மதிப்பீட்டு இடைவெளி"
-
-msgid "Effect size (%s)"
-msgstr "விளைவு அளவு (%s)"
-
-msgid "Heterogeneity (%s)"
-msgstr "பன்முகத்தன்மை (%s)"
-
-msgid "Publication bias"
-msgstr "வெளியீட்டு சார்பு"
-
-msgid "log(OR)"
-msgstr "பதிவு (அல்லது)"
-
-msgid "OR"
-msgstr "அல்லது"
-
-msgid "The specified path does not lead to an existing file."
-msgstr "குறிப்பிட்ட பாதை ஏற்கனவே உள்ள கோப்புக்கு வழிவகுக்காது."
-
-msgid "An error occurred while reading the model file: %1$s"
-msgstr "மாதிரி கோப்பைப் படிக்கும்போது பிழை ஏற்பட்டது: %1$s"
-
-msgid "The loaded object is not a RoBMA model."
-msgstr "ஏற்றப்பட்ட பொருள் ராப்மா மாதிரி அல்ல."
-
-msgid "Conditional Estimates"
-msgstr "நிபந்தனை மதிப்பீடுகள்"
-
-msgid "Inclusion BF"
-msgstr "சேர்த்தல் பி.எஃப்"
-
-msgid "Exclusion BF"
-msgstr "விலக்கு பி.எஃப்"
-
-msgid "log(Inclusion BF)"
-msgstr "பதிவு (சேர்த்தல் பி.எஃப்)"
-
-msgid "P(M|data)"
-msgstr "பி (எம் | தரவு)"
-
-msgid "Model Averaged Estimates"
-msgstr "மாதிரி சராசரி மதிப்பீடுகள்"
-
-msgid "Model Averaged Weights (%s)"
-msgstr "மாதிரி சராசரி எடைகள் (%s)"
-
-msgid "Model Averaged PET-PEESE Estimates"
-msgstr "மாதிரி சராசரி செல்லப்பிராணி-பெச் மதிப்பீடுகள்"
-
-msgid "Conditional Weights (%s)"
-msgstr "நிபந்தனை எடைகள் (%s)"
-
-msgid "Conditional PET-PEESE Estimates"
-msgstr "நிபந்தனைக்குட்பட்ட செல்லப்பிராணி மதிப்பீடுகள்"
-
-msgid "Models Overview"
-msgstr "மாதிரிகள் கண்ணோட்டம்"
-
-msgid "BF%s"
-msgstr "பி.எஃப்%s"
-
-msgid "log(BF%s)"
-msgstr "பதிவு (பி.எஃப்%s)"
-
-msgid "log(MargLik)"
-msgstr "பதிவு (பாலிக்)"
-
-msgid "Individual Models Summary"
-msgstr "தனிப்பட்ட மாதிரிகள் சுருக்கம்"
-
-msgid "Model #"
-msgstr "மாதிரி #"
-
-msgid "Priors"
-msgstr "ப்ரியர்ச்"
-
-msgid "Information"
-msgstr "தகவல்"
-
-msgid "Model Estimates"
-msgstr "மாதிரி மதிப்பீடுகள்"
-
-msgid "Model %i"
-msgstr "மாதிரி %i"
-
-msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
-msgstr ""
-"மாதிரி %1$i நான் இல்லை. 1 முதல் %2$i க்கு இடையில் மாதிரிகளில் ஒன்றைத் தேர்ந்தெடுக்கவும்."
-
-msgid "Estimated Weights (%s)"
-msgstr "மதிப்பிடப்பட்ட எடைகள் (%s)"
-
-msgid "PET-PEESE Estimates"
-msgstr "பெட்-பீச் மதிப்பீடுகள்"
-
-msgid "%1$s Forest Plot"
-msgstr "%1$s வன சூழ்ச்சி"
-
-msgid "Posterior Distribution Plots"
-msgstr "பின்புற விநியோக அடுக்குகள்"
-
-msgid "Conditional"
-msgstr "நிபந்தனை"
-
-msgid "Model Averaged"
-msgstr "மாதிரி சராசரி"
-
-msgid "Effect Size Estimate"
-msgstr "விளைவு அளவு மதிப்பீடு"
-
-msgid "Heterogeneity Estimate"
-msgstr "பன்முகத்தன்மை மதிப்பீடு"
-
-msgid "Weight Function Estimate"
-msgstr "எடை செயல்பாடு மதிப்பீடு"
-
-msgid "PET-PEESE Regression Estimate"
-msgstr "பெட்-பீச் பின்னடைவு மதிப்பீடு"
-
-msgid "Posterior Model Estimates Plots"
-msgstr "பின்புற மாதிரி அடுக்குகளை மதிப்பிடுகிறது"
-
-msgid "Effect Size Estimates"
-msgstr "விளைவு அளவு மதிப்பீடுகள்"
-
-msgid "Heterogeneity Estimates"
-msgstr "பன்முகத்தன்மை மதிப்பீடுகள்"
-
-msgid "Diagnostics"
-msgstr "கண்டறிதல்"
-
-msgid "Models Diagnostics Overview"
-msgstr "மாதிரிகள் கண்டறிதல் கண்ணோட்டம்"
-
-msgid "max(MCMC error)"
-msgstr "அதிகபட்சம் (MCMC பிழை)"
-
-msgid "max(MCMC error/SD)"
-msgstr "அதிகபட்சம் (MCMC பிழை/எச்டி)"
-
-msgid "min(ESS)"
-msgstr "என் (ஏச்)"
-
-msgid "max(R-hat)"
-msgstr "அதிகபட்சம் (ஆர்-தொப்பி)"
-
-msgid ""
-"MCMC Diagnostics plots are created once both the plotted parameter ('Plot') "
-"and the plot type ('Type') options are selected."
-msgstr ""
-"திட்டமிடப்பட்ட அளவுரு ('சதி') மற்றும் சூழ்ச்சி வகை ('வகை') விருப்பங்கள் "
-"தேர்ந்தெடுக்கப்பட்டவுடன் எம்.சி.எம்.சி கண்டறிதல் அடுக்கு உருவாக்கப்படுகிறது."
-
 msgid "Weights"
 msgstr "எடைகள்"
 
@@ -1740,27 +1732,63 @@ msgstr "செல்லப்பிள்ளை"
 msgid "PEESE"
 msgstr "படம்"
 
-msgid "Trace plots"
+#, fuzzy
+msgid "Trace Plot"
 msgstr "சுவடு அடுக்கு"
 
-msgid "Average autocorrelations"
-msgstr "சராசரி தன்னியக்க தொடர்புகள்"
+#, fuzzy
+msgid "Autocorrelation Plot"
+msgstr "தன்னியக்க தொடர்பு சூழ்ச்சி"
 
-msgid "Posterior samples densities"
-msgstr "பின்புற மாதிரிகள் அடர்த்தி"
+#, fuzzy
+msgid "Density Plot"
+msgstr "அடர்த்தி"
 
-msgid "Model %i does not contain any of the selected parameters."
-msgstr "மாதிரி %i நான் தேர்ந்தெடுக்கப்பட்ட அளவுருக்கள் எதுவும் இல்லை."
+#, fuzzy
+msgid "RoBMA R Code"
+msgstr "மெட்டாஃபோர் ஆர் குறியீடு"
 
-msgid ""
-"All models failed to converge under the MCMC convergence criteria. Please "
-"update the MCMC settings."
-msgstr ""
-"அனைத்து மாதிரிகள் எம்.சி.எம்.சி குவிப்பு அளவுகோல்களின் கீழ் ஒன்றிணைக்கத் தவறிவிட்டன. MCMC "
-"அமைப்புகளை புதுப்பிக்கவும்."
+#, fuzzy
+msgid "Publication Bias Adjustment Summary"
+msgstr "வெளியீட்டு சார்பு"
 
-msgid "All models failed to converge. Please update the MCMC settings."
-msgstr "அனைத்து மாதிரிகள் ஒன்றிணைக்கத் தவறிவிட்டன. MCMC அமைப்புகளை புதுப்பிக்கவும்."
+#, fuzzy
+msgid "Estimated Marginal Means Summary"
+msgstr "மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகள்"
+
+#, fuzzy
+msgid "Prior and Posterior Plots"
+msgstr "முன் மற்றும் பின்புற சூழ்ச்சி"
+
+msgid "Diagnostics"
+msgstr "கண்டறிதல்"
+
+#, fuzzy
+msgid "Adjusted effect"
+msgstr "சரிசெய்யப்பட்ட மதிப்பீடு"
+
+#, fuzzy
+msgid "Subgroup %1$s, %2$s"
+msgstr "%1$s (%2$s)"
+
+#, fuzzy
+msgid "Effect intercept"
+msgstr "விளைவு அளவு"
+
+msgid "Publication bias"
+msgstr "வெளியீட்டு சார்பு"
+
+msgid "Baseline"
+msgstr "அடிப்படை"
+
+msgid "Inclusion BF"
+msgstr "சேர்த்தல் பி.எஃப்"
+
+msgid "Exclusion BF"
+msgstr "விலக்கு பி.எஃப்"
+
+msgid "log(Inclusion BF)"
+msgstr "பதிவு (சேர்த்தல் பி.எஃப்)"
 
 msgid ""
 "Cannot compute results. All entries of the p-value variable (%s) must be "
@@ -2014,6 +2042,178 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "மதிப்புகள் காணாமல் போனதால் %i கண்காணிப்பு அகற்றப்பட்டது."
 msgstr[1] "மதிப்புகள் காணாமல் போனதால் %i அவதானிப்புகள் அகற்றப்பட்டன."
+
+#~ msgid ""
+#~ "The study labels contain invalid characters. Please, remove them before "
+#~ "running the analysis."
+#~ msgstr ""
+#~ "ஆய்வு லேபிள்களில் தவறான எழுத்துக்கள் உள்ளன. தயவுசெய்து, பகுப்பாய்வை இயக்குவதற்கு "
+#~ "முன்பு அவற்றை அகற்றவும்."
+
+#~ msgid "Prior Plots"
+#~ msgstr "முன் அடுக்கு"
+
+#~ msgid "Effect"
+#~ msgstr "விளைவு"
+
+#~ msgid "Model Preview"
+#~ msgstr "மாதிரி முன்னோட்டம்"
+
+#~ msgid ""
+#~ "Please specify a prior distribution for each parameter in the Models "
+#~ "specification section (either null or alternative)."
+#~ msgstr ""
+#~ "மாதிரிகள் விவரக்குறிப்பு பிரிவில் (பூச்ய அல்லது மாற்று) ஒவ்வொரு அளவுருவுக்கும் முன் "
+#~ "விநியோகத்தைக் குறிப்பிடவும்."
+
+#~ msgid "Pooled Estimate"
+#~ msgstr "பூல் மதிப்பீடு"
+
+#~ msgid "Effect size (%s)"
+#~ msgstr "விளைவு அளவு (%s)"
+
+#~ msgid "Heterogeneity (%s)"
+#~ msgstr "பன்முகத்தன்மை (%s)"
+
+#~ msgid "log(OR)"
+#~ msgstr "பதிவு (அல்லது)"
+
+#~ msgid "OR"
+#~ msgstr "அல்லது"
+
+#~ msgid "The specified path does not lead to an existing file."
+#~ msgstr "குறிப்பிட்ட பாதை ஏற்கனவே உள்ள கோப்புக்கு வழிவகுக்காது."
+
+#~ msgid "An error occurred while reading the model file: %1$s"
+#~ msgstr "மாதிரி கோப்பைப் படிக்கும்போது பிழை ஏற்பட்டது: %1$s"
+
+#~ msgid "The loaded object is not a RoBMA model."
+#~ msgstr "ஏற்றப்பட்ட பொருள் ராப்மா மாதிரி அல்ல."
+
+#~ msgid "Conditional Estimates"
+#~ msgstr "நிபந்தனை மதிப்பீடுகள்"
+
+#~ msgid "Model Averaged Estimates"
+#~ msgstr "மாதிரி சராசரி மதிப்பீடுகள்"
+
+#~ msgid "Model Averaged Weights (%s)"
+#~ msgstr "மாதிரி சராசரி எடைகள் (%s)"
+
+#~ msgid "Model Averaged PET-PEESE Estimates"
+#~ msgstr "மாதிரி சராசரி செல்லப்பிராணி-பெச் மதிப்பீடுகள்"
+
+#~ msgid "Conditional Weights (%s)"
+#~ msgstr "நிபந்தனை எடைகள் (%s)"
+
+#~ msgid "Conditional PET-PEESE Estimates"
+#~ msgstr "நிபந்தனைக்குட்பட்ட செல்லப்பிராணி மதிப்பீடுகள்"
+
+#~ msgid "Models Overview"
+#~ msgstr "மாதிரிகள் கண்ணோட்டம்"
+
+#~ msgid "BF%s"
+#~ msgstr "பி.எஃப்%s"
+
+#~ msgid "log(BF%s)"
+#~ msgstr "பதிவு (பி.எஃப்%s)"
+
+#~ msgid "log(MargLik)"
+#~ msgstr "பதிவு (பாலிக்)"
+
+#~ msgid "Individual Models Summary"
+#~ msgstr "தனிப்பட்ட மாதிரிகள் சுருக்கம்"
+
+#~ msgid "Model #"
+#~ msgstr "மாதிரி #"
+
+#~ msgid "Priors"
+#~ msgstr "ப்ரியர்ச்"
+
+#~ msgid "Information"
+#~ msgstr "தகவல்"
+
+#~ msgid "Model Estimates"
+#~ msgstr "மாதிரி மதிப்பீடுகள்"
+
+#~ msgid "Model %i"
+#~ msgstr "மாதிரி %i"
+
+#~ msgid ""
+#~ "Model %1$i does not exist. Select one of the models between 1 and %2$i."
+#~ msgstr ""
+#~ "மாதிரி %1$i நான் இல்லை. 1 முதல் %2$i க்கு இடையில் மாதிரிகளில் ஒன்றைத் "
+#~ "தேர்ந்தெடுக்கவும்."
+
+#~ msgid "Estimated Weights (%s)"
+#~ msgstr "மதிப்பிடப்பட்ட எடைகள் (%s)"
+
+#~ msgid "PET-PEESE Estimates"
+#~ msgstr "பெட்-பீச் மதிப்பீடுகள்"
+
+#~ msgid "%1$s Forest Plot"
+#~ msgstr "%1$s வன சூழ்ச்சி"
+
+#~ msgid "Model Averaged"
+#~ msgstr "மாதிரி சராசரி"
+
+#~ msgid "Effect Size Estimate"
+#~ msgstr "விளைவு அளவு மதிப்பீடு"
+
+#~ msgid "Weight Function Estimate"
+#~ msgstr "எடை செயல்பாடு மதிப்பீடு"
+
+#~ msgid "PET-PEESE Regression Estimate"
+#~ msgstr "பெட்-பீச் பின்னடைவு மதிப்பீடு"
+
+#~ msgid "Posterior Model Estimates Plots"
+#~ msgstr "பின்புற மாதிரி அடுக்குகளை மதிப்பிடுகிறது"
+
+#~ msgid "Effect Size Estimates"
+#~ msgstr "விளைவு அளவு மதிப்பீடுகள்"
+
+#~ msgid "Heterogeneity Estimates"
+#~ msgstr "பன்முகத்தன்மை மதிப்பீடுகள்"
+
+#~ msgid "Models Diagnostics Overview"
+#~ msgstr "மாதிரிகள் கண்டறிதல் கண்ணோட்டம்"
+
+#~ msgid "max(MCMC error)"
+#~ msgstr "அதிகபட்சம் (MCMC பிழை)"
+
+#~ msgid "max(MCMC error/SD)"
+#~ msgstr "அதிகபட்சம் (MCMC பிழை/எச்டி)"
+
+#~ msgid "min(ESS)"
+#~ msgstr "என் (ஏச்)"
+
+#~ msgid "max(R-hat)"
+#~ msgstr "அதிகபட்சம் (ஆர்-தொப்பி)"
+
+#~ msgid ""
+#~ "MCMC Diagnostics plots are created once both the plotted parameter "
+#~ "('Plot') and the plot type ('Type') options are selected."
+#~ msgstr ""
+#~ "திட்டமிடப்பட்ட அளவுரு ('சதி') மற்றும் சூழ்ச்சி வகை ('வகை') விருப்பங்கள் "
+#~ "தேர்ந்தெடுக்கப்பட்டவுடன் எம்.சி.எம்.சி கண்டறிதல் அடுக்கு உருவாக்கப்படுகிறது."
+
+#~ msgid "Average autocorrelations"
+#~ msgstr "சராசரி தன்னியக்க தொடர்புகள்"
+
+#~ msgid "Posterior samples densities"
+#~ msgstr "பின்புற மாதிரிகள் அடர்த்தி"
+
+#~ msgid "Model %i does not contain any of the selected parameters."
+#~ msgstr "மாதிரி %i நான் தேர்ந்தெடுக்கப்பட்ட அளவுருக்கள் எதுவும் இல்லை."
+
+#~ msgid ""
+#~ "All models failed to converge under the MCMC convergence criteria. Please "
+#~ "update the MCMC settings."
+#~ msgstr ""
+#~ "அனைத்து மாதிரிகள் எம்.சி.எம்.சி குவிப்பு அளவுகோல்களின் கீழ் ஒன்றிணைக்கத் தவறிவிட்டன. "
+#~ "MCMC அமைப்புகளை புதுப்பிக்கவும்."
+
+#~ msgid "All models failed to converge. Please update the MCMC settings."
+#~ msgstr "அனைத்து மாதிரிகள் ஒன்றிணைக்கத் தவறிவிட்டன. MCMC அமைப்புகளை புதுப்பிக்கவும்."
 
 #~ msgid "Bubble Plot"
 #~ msgstr "குமிழி சூழ்ச்சி"

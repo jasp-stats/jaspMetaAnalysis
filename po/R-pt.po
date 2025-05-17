@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2025-05-10 02:56\n"
+"POT-Creation-Date: 2025-05-17 02:58\n"
 "PO-Revision-Date: 2022-08-29 00:27+0000\n"
 "Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
@@ -17,55 +17,7 @@ msgstr ""
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
 
-msgid ""
-"The study labels contain invalid characters. Please, remove them before "
-"running the analysis."
-msgstr ""
-
-#, fuzzy
-msgid "Prior Plots"
-msgstr "Diagramas"
-
-msgid "Effect"
-msgstr "Efeito"
-
-msgid "Heterogeneity"
-msgstr ""
-
-msgid "Null"
-msgstr ""
-
-msgid "Alternative"
-msgstr ""
-
-#, fuzzy
-msgid "Model Preview"
-msgstr "Nome do modelo"
-
-msgid ""
-"Please specify a prior distribution for each parameter in the Models "
-"specification section (either null or alternative)."
-msgstr ""
-
-msgid "Model Summary"
-msgstr "Resumo do modelo"
-
-msgid "Models"
-msgstr "Modelos"
-
-msgid "P(M)"
-msgstr "P(M)"
-
-msgid ""
-"The analysis will estimate multiple meta-analytic models using MCMC and "
-"might require a prolonged time to complete."
-msgstr ""
-
-#, fuzzy
-msgid "Model Specification Preview"
-msgstr "Nome do modelo"
-
-msgid "Prior Distribution"
+msgid "There must be at least one observation in each group."
 msgstr ""
 
 msgid "The prior lower bound is not smaller than the upper bound."
@@ -244,6 +196,9 @@ msgstr ""
 #, fuzzy
 msgid "Effect Size"
 msgstr "Tamanho de efeito"
+
+msgid "Heterogeneity"
+msgstr ""
 
 msgid "Effect size"
 msgstr "Tamanho do Efeito"
@@ -427,7 +382,7 @@ msgstr "p"
 msgid "p (permutation)"
 msgstr ""
 
-msgid "The model for the subgroup '%1$s' failed with the following error: %2$s"
+msgid "The model for subgroup '%1$s' failed with the following error: %2$s"
 msgstr ""
 
 msgid "Error:"
@@ -673,6 +628,9 @@ msgstr ""
 msgid "Residual Funnel Plot"
 msgstr "Resíduos"
 
+msgid "Model Summary"
+msgstr "Resumo do modelo"
+
 #, fuzzy
 msgid "Meta-Regression Summary"
 msgstr "Medidas adicionais de ajuste"
@@ -809,6 +767,9 @@ msgstr ""
 msgid "Benjamini-Yekutieli"
 msgstr ""
 
+msgid "Intercept"
+msgstr ""
+
 #, fuzzy
 msgid "Residual heterogeneity"
 msgstr "Testes de homogeneidade"
@@ -870,6 +831,14 @@ msgid "The heterogeneity model for 𝜏² is specified on the identity scale."
 msgstr ""
 
 #, fuzzy
+msgid "pooled effect"
+msgstr "Tamanho de efeito"
+
+#, fuzzy
+msgid "adjusted effect"
+msgstr "efeitos fixos da escala r"
+
+#, fuzzy
 msgid "%1$i observations were ommited due to missing values."
 msgstr "%i observação foi removida devido a valores ausentes."
 
@@ -890,17 +859,21 @@ msgid "%1$s: %2$i clusters with min/median/max %3$i/%4$i/%5$i estimates."
 msgstr ""
 
 msgid ""
-"NAs in the pooled effect size were introduced due to the %1$s "
-"transformation. Please verify that you are using the correct effect size "
-"transformation."
+"NAs in the %1$s were introduced due to the %2$s transformation. Please "
+"verify that you are using the correct effect size transformation."
 msgstr ""
 
-msgid "The pooled effect size is transformed using %1$s transformation."
+msgid "The %1$s is transformed using %2$s transformation."
 msgstr ""
 
 msgid ""
 "The pooled effect size corresponds to the weighted average effect across "
 "studies."
+msgstr ""
+
+msgid ""
+"The adjusted effect corresponds to the averaged effect size estimate across "
+"the levels of all moderators."
 msgstr ""
 
 msgid ""
@@ -915,8 +888,8 @@ msgid "The Model Structure %1$s was not completely specified and was skipped."
 msgstr ""
 
 msgid ""
-"Prediction interval for the pooled effect size is not available for models "
-"with multiple heterogeneity estimates."
+"Prediction interval for the %1$s is not available for models with multiple "
+"heterogeneity estimates."
 msgstr ""
 
 msgid ""
@@ -1318,13 +1291,20 @@ msgstr ""
 msgid "Model Information"
 msgstr "Informado"
 
+msgid "Publication Bias: %1$s"
+msgstr ""
+
 #, fuzzy
 msgid "Fixed Effect Estimate"
 msgstr "Estimativas de efeitos fixos"
 
 #, fuzzy
-msgid "Pooled Estimate"
-msgstr "Estimativas"
+msgid "Pooled Effect"
+msgstr "Tamanho de efeito"
+
+#, fuzzy
+msgid "Intercept Estimate"
+msgstr "Testes de homogeneidade"
 
 msgid "Full Dataset"
 msgstr ""
@@ -1453,9 +1433,6 @@ msgstr ""
 msgid "The model should contain at least one predictor or an intercept."
 msgstr ""
 
-msgid "Intercept"
-msgstr ""
-
 msgid "Coefficients"
 msgstr "Coeficientes"
 
@@ -1490,17 +1467,168 @@ msgid ""
 "'Adapt delta' in the Options section."
 msgstr ""
 
+#, fuzzy
+msgid "Estimating Marginal Means"
+msgstr "Estimativas de tamanho de efeito"
+
+msgid ""
+"At least one prior distribution for the Effect component has to be specified."
+msgstr ""
+
+msgid ""
+"At least one prior distribution for the Heterogeneity component has to be "
+"specified."
+msgstr ""
+
+msgid ""
+"At least one prior distribution for the %1$s moderator component has to be "
+"specified."
+msgstr ""
+
+msgid ""
+"Both priors distributions for the %1$s moderator component must have the "
+"same contrast type."
+msgstr ""
+
+msgid ""
+"At least one prior distribution for the Publication Bias component has to be "
+"specified."
+msgstr ""
+
+msgid ""
+"At least one prior distribution for the Baseline component has to be "
+"specified."
+msgstr ""
+
 msgid "The priors for publication bias were set incorrectly."
 msgstr ""
 
-msgid "Publication Bias"
+#, fuzzy
+msgid "Model Specification"
+msgstr "Nome do modelo"
+
+#, fuzzy
+msgid "Model Components"
+msgstr "Componentes"
+
+msgid "Models"
+msgstr "Modelos"
+
+msgid "P(M)"
+msgstr "P(M)"
+
+#, fuzzy
+msgid "Prior Distributions %1$s"
+msgstr "Amostras posteriores"
+
+#, fuzzy
+msgid "Prior Distributions Moderators"
+msgstr "Amostras posteriores"
+
+msgid "Alternative"
 msgstr ""
 
-msgid "Baseline"
+msgid "Null"
 msgstr ""
+
+msgid "P(M|data)"
+msgstr "P(M|dado)"
+
+msgid ""
+"The analysis will estimate a complex meta-analytic model ensemble using MCMC "
+"and might require a prolonged time to complete."
+msgstr ""
+
+msgid ""
+"The model fit for subgroup '%1$s' resulted in the following warning: %2$s"
+msgstr ""
+
+msgid "The model fit resulted in the following warning: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid "Conditional Meta-Analytic Estimates"
+msgstr "Estimativas"
 
 msgid "Median"
 msgstr "Mediana"
+
+msgid ""
+"Conditional estimates are based on models assuming the presence of a given "
+"component."
+msgstr ""
+
+msgid "Standardized Conditional Meta-Regression Coefficients"
+msgstr ""
+
+msgid "Standardized Meta-Regression Coefficients"
+msgstr ""
+
+msgid "Conditional Meta-Regression Coefficients"
+msgstr ""
+
+#, fuzzy
+msgid "Meta-Regression Coefficients"
+msgstr "Medidas adicionais de ajuste"
+
+msgid "Conditional Publication Bias Adjustment Estimates (Weight Function)"
+msgstr ""
+
+msgid "Publication Bias Adjustment Estimates (Weight Function)"
+msgstr ""
+
+msgid "<em>p</em>-Values Interval"
+msgstr ""
+
+msgid "Conditional Publication Bias Adjustment Estimates (PET-PEESE)"
+msgstr ""
+
+msgid "Publication Bias Adjustment Estimates (PET-PEESE)"
+msgstr ""
+
+#, fuzzy
+msgid "Estimated Conditional Marginal Means"
+msgstr "Estimativas de tamanho de efeito"
+
+#, fuzzy
+msgid "Conditional %1$s"
+msgstr "Medidas adicionais de ajuste"
+
+#, fuzzy
+msgid "Conditional Estimated Marginal Means"
+msgstr "Medidas adicionais de ajuste"
+
+msgid ""
+"The Bayes factor test for the adjusted estimate is not available for meta-"
+"regressions with non-centered parameteriazation."
+msgstr ""
+
+#, fuzzy
+msgid "Adjusted Effect"
+msgstr "Estimativas"
+
+#, fuzzy
+msgid "Moderation: Estimated Marginal Means"
+msgstr "Estimativas de tamanho de efeito"
+
+#, fuzzy
+msgid "Moderation"
+msgstr "Covariâncias / correlações observadas"
+
+#, fuzzy
+msgid "Weight Function"
+msgstr "Medidas adicionais de ajuste"
+
+msgid "PET-PEESE"
+msgstr ""
+
+#, fuzzy
+msgid "P-Value"
+msgstr "Valor"
+
+#, fuzzy
+msgid "Diagnostics Summary"
+msgstr "Resumo do modelo"
 
 msgid "MCMC error"
 msgstr ""
@@ -1515,181 +1643,6 @@ msgstr "EQS"
 msgid "R-hat"
 msgstr ""
 
-msgid "<em>p</em>-values interval"
-msgstr ""
-
-#, fuzzy
-msgid "Effect size (%s)"
-msgstr "Tamanho do efeito"
-
-#, fuzzy
-msgid "Heterogeneity (%s)"
-msgstr "Testes de homogeneidade"
-
-msgid "Publication bias"
-msgstr ""
-
-#, fuzzy
-msgid "log(OR)"
-msgstr "log(BF%s)"
-
-msgid "OR"
-msgstr ""
-
-msgid "The specified path does not lead to an existing file."
-msgstr ""
-
-msgid "An error occurred while reading the model file: %1$s"
-msgstr ""
-
-msgid "The loaded object is not a RoBMA model."
-msgstr ""
-
-#, fuzzy
-msgid "Conditional Estimates"
-msgstr "Medidas adicionais de ajuste"
-
-msgid "Inclusion BF"
-msgstr ""
-
-msgid "Exclusion BF"
-msgstr ""
-
-msgid "log(Inclusion BF)"
-msgstr ""
-
-msgid "P(M|data)"
-msgstr "P(M|dado)"
-
-#, fuzzy
-msgid "Model Averaged Estimates"
-msgstr "Modelo médio posterior"
-
-#, fuzzy
-msgid "Model Averaged Weights (%s)"
-msgstr "Modelo médio posterior"
-
-#, fuzzy
-msgid "Model Averaged PET-PEESE Estimates"
-msgstr "Modelo médio posterior"
-
-msgid "Conditional Weights (%s)"
-msgstr ""
-
-#, fuzzy
-msgid "Conditional PET-PEESE Estimates"
-msgstr "Medidas adicionais de ajuste"
-
-#, fuzzy
-msgid "Models Overview"
-msgstr "Termos do Modelo"
-
-msgid "BF%s"
-msgstr "BF%s"
-
-msgid "log(BF%s)"
-msgstr "log(BF%s)"
-
-msgid "log(MargLik)"
-msgstr ""
-
-msgid "Individual Models Summary"
-msgstr ""
-
-#, fuzzy
-msgid "Model #"
-msgstr "Modelo"
-
-#, fuzzy
-msgid "Priors"
-msgstr "Anterior"
-
-#, fuzzy
-msgid "Information"
-msgstr "Informado"
-
-#, fuzzy
-msgid "Model Estimates"
-msgstr "Estimativas"
-
-#, fuzzy
-msgid "Model %i"
-msgstr "Modelo"
-
-msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
-msgstr ""
-
-msgid "Estimated Weights (%s)"
-msgstr ""
-
-msgid "PET-PEESE Estimates"
-msgstr ""
-
-#, fuzzy
-msgid "%1$s Forest Plot"
-msgstr "Gráfico do modelo"
-
-msgid "Posterior Distribution Plots"
-msgstr ""
-
-#, fuzzy
-msgid "Conditional"
-msgstr "Medidas adicionais de ajuste"
-
-#, fuzzy
-msgid "Model Averaged"
-msgstr "Modelo médio posterior"
-
-#, fuzzy
-msgid "Effect Size Estimate"
-msgstr "Tamanho de efeito"
-
-#, fuzzy
-msgid "Heterogeneity Estimate"
-msgstr "Testes de homogeneidade"
-
-#, fuzzy
-msgid "Weight Function Estimate"
-msgstr "Medidas adicionais de ajuste"
-
-msgid "PET-PEESE Regression Estimate"
-msgstr ""
-
-#, fuzzy
-msgid "Posterior Model Estimates Plots"
-msgstr "Estimativas"
-
-#, fuzzy
-msgid "Effect Size Estimates"
-msgstr "Estimativas de efeitos fixos"
-
-#, fuzzy
-msgid "Heterogeneity Estimates"
-msgstr "Testes de homogeneidade"
-
-msgid "Diagnostics"
-msgstr ""
-
-msgid "Models Diagnostics Overview"
-msgstr ""
-
-msgid "max(MCMC error)"
-msgstr ""
-
-msgid "max(MCMC error/SD)"
-msgstr ""
-
-msgid "min(ESS)"
-msgstr ""
-
-msgid "max(R-hat)"
-msgstr ""
-
-msgid ""
-"MCMC Diagnostics plots are created once both the plotted parameter ('Plot') "
-"and the plot type ('Type') options are selected."
-msgstr ""
-
 #, fuzzy
 msgid "Weights"
 msgstr "WLS Ponderado"
@@ -1701,26 +1654,58 @@ msgid "PEESE"
 msgstr ""
 
 #, fuzzy
-msgid "Trace plots"
+msgid "Trace Plot"
 msgstr "Diagramas Separados"
 
 #, fuzzy
-msgid "Average autocorrelations"
+msgid "Autocorrelation Plot"
 msgstr "Covariâncias / correlações observadas"
 
 #, fuzzy
-msgid "Posterior samples densities"
-msgstr "Amostras posteriores"
+msgid "Density Plot"
+msgstr "Densidade"
 
-msgid "Model %i does not contain any of the selected parameters."
+msgid "RoBMA R Code"
 msgstr ""
 
-msgid ""
-"All models failed to converge under the MCMC convergence criteria. Please "
-"update the MCMC settings."
+msgid "Publication Bias Adjustment Summary"
 msgstr ""
 
-msgid "All models failed to converge. Please update the MCMC settings."
+#, fuzzy
+msgid "Estimated Marginal Means Summary"
+msgstr "Estimativas de tamanho de efeito"
+
+#, fuzzy
+msgid "Prior and Posterior Plots"
+msgstr "Posteriores marginal"
+
+msgid "Diagnostics"
+msgstr ""
+
+#, fuzzy
+msgid "Adjusted effect"
+msgstr "Estimativas"
+
+msgid "Subgroup %1$s, %2$s"
+msgstr ""
+
+#, fuzzy
+msgid "Effect intercept"
+msgstr "Tamanho de efeito"
+
+msgid "Publication bias"
+msgstr ""
+
+msgid "Baseline"
+msgstr ""
+
+msgid "Inclusion BF"
+msgstr ""
+
+msgid "Exclusion BF"
+msgstr ""
+
+msgid "log(Inclusion BF)"
 msgstr ""
 
 msgid ""
@@ -1944,6 +1929,115 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "%i observação foi removida devido a valores ausentes."
 msgstr[1] "%i observações foram removidas devido a valores ausentes."
+
+#, fuzzy
+#~ msgid "Prior Plots"
+#~ msgstr "Diagramas"
+
+#~ msgid "Effect"
+#~ msgstr "Efeito"
+
+#, fuzzy
+#~ msgid "Model Preview"
+#~ msgstr "Nome do modelo"
+
+#, fuzzy
+#~ msgid "Pooled Estimate"
+#~ msgstr "Estimativas"
+
+#, fuzzy
+#~ msgid "Effect size (%s)"
+#~ msgstr "Tamanho do efeito"
+
+#, fuzzy
+#~ msgid "Heterogeneity (%s)"
+#~ msgstr "Testes de homogeneidade"
+
+#, fuzzy
+#~ msgid "log(OR)"
+#~ msgstr "log(BF%s)"
+
+#, fuzzy
+#~ msgid "Model Averaged Estimates"
+#~ msgstr "Modelo médio posterior"
+
+#, fuzzy
+#~ msgid "Model Averaged Weights (%s)"
+#~ msgstr "Modelo médio posterior"
+
+#, fuzzy
+#~ msgid "Model Averaged PET-PEESE Estimates"
+#~ msgstr "Modelo médio posterior"
+
+#, fuzzy
+#~ msgid "Conditional PET-PEESE Estimates"
+#~ msgstr "Medidas adicionais de ajuste"
+
+#, fuzzy
+#~ msgid "Models Overview"
+#~ msgstr "Termos do Modelo"
+
+#~ msgid "BF%s"
+#~ msgstr "BF%s"
+
+#~ msgid "log(BF%s)"
+#~ msgstr "log(BF%s)"
+
+#, fuzzy
+#~ msgid "Model #"
+#~ msgstr "Modelo"
+
+#, fuzzy
+#~ msgid "Priors"
+#~ msgstr "Anterior"
+
+#, fuzzy
+#~ msgid "Information"
+#~ msgstr "Informado"
+
+#, fuzzy
+#~ msgid "Model Estimates"
+#~ msgstr "Estimativas"
+
+#, fuzzy
+#~ msgid "Model %i"
+#~ msgstr "Modelo"
+
+#, fuzzy
+#~ msgid "%1$s Forest Plot"
+#~ msgstr "Gráfico do modelo"
+
+#, fuzzy
+#~ msgid "Model Averaged"
+#~ msgstr "Modelo médio posterior"
+
+#, fuzzy
+#~ msgid "Effect Size Estimate"
+#~ msgstr "Tamanho de efeito"
+
+#, fuzzy
+#~ msgid "Weight Function Estimate"
+#~ msgstr "Medidas adicionais de ajuste"
+
+#, fuzzy
+#~ msgid "Posterior Model Estimates Plots"
+#~ msgstr "Estimativas"
+
+#, fuzzy
+#~ msgid "Effect Size Estimates"
+#~ msgstr "Estimativas de efeitos fixos"
+
+#, fuzzy
+#~ msgid "Heterogeneity Estimates"
+#~ msgstr "Testes de homogeneidade"
+
+#, fuzzy
+#~ msgid "Average autocorrelations"
+#~ msgstr "Covariâncias / correlações observadas"
+
+#, fuzzy
+#~ msgid "Posterior samples densities"
+#~ msgstr "Amostras posteriores"
 
 #, fuzzy
 #~ msgid "Parameter"
