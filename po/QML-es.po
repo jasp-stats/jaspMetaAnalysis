@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-05-18 22:01+0000\n"
+"PO-Revision-Date: 2025-05-19 15:48+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/es/>\n"
@@ -4044,7 +4044,7 @@ msgid ""
 msgstr ""
 "Seleccionar una transformación a aplicar a las estimaciones de la magnitud "
 "del efecto en la salida de resultados. Esta transformación se aplica a "
-"'Tabla de estimaciones Meta-Analíticas', 'Tabla de medias marginales "
+"'Tabla de estimaciones meta-analíticas', 'Tabla de medias marginales "
 "estimadas', 'Gráfico forestal' y 'Gráfico de burbujas'. Las 'Estimaciones de "
 "los coeficientes de Meta-Regresión' no se transforman."
 
@@ -5948,8 +5948,11 @@ msgid ""
 "the box borders corresponding to the 25th, 50th, and 75th quantile and "
 "whiskers corresponding to the min and max values."
 msgstr ""
+"Agrega las estimaciones del panel de información nivel-estudio por gráfico "
+"de caja, con los bordes de la caja correspondiéndose con los cuantiles del "
+"25%, del 50% y del 75% y los bigotes correspondiéndose con los valores "
+"mínimo y máximo."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Bubbles"
 msgstr "Burbujas"
@@ -5960,23 +5963,22 @@ msgid ""
 "size of the bubble corresponds to the inverse variance of the estimates (or "
 "total sample size for binomial models)."
 msgstr ""
+"Agrega las estimaciones del panel de información nivel-estudio por burbujas. "
+"El tamaño de la burbuja se corresponde con la varianza inversa de las "
+"estimaciones (o con el tamaño muestral total para modelos Binomiales)."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Relative size"
 msgstr "Tamaño relativo"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Set the relative size of the observed estimates."
 msgstr "Establecer el tamaño relativo de las estimaciones observadas."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Estimated marginal means"
 msgstr "Medias marginales estimadas"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid ""
 "Add estimated marginal means information to the forest plot. Available when "
@@ -5985,24 +5987,20 @@ msgstr ""
 "Añadir información de las medias marginales estimadas al gráfico forestal. "
 "Disponible cuando se especifica la Meta-Regresión de la magnitud del efecto."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Model Variables"
 msgstr "Variables del modelo"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Select variables for which the estimated marginal means are visualized."
 msgstr ""
 "Seleccionar las variables para las que se visualizan las medias marginales "
 "estimadas."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Term tests"
 msgstr "Contrastes de términos"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid ""
 "Include the omnibus term test of variables included in the estimated "
@@ -6015,12 +6013,10 @@ msgstr ""
 "efecto en todos los niveles de la variable con categorías es la misma, o que "
 "no hay asociación lineal entre la magnitud del efecto y la variable continua."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Coefficient tests"
 msgstr "Contrastes de coeficientes"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid ""
 "Include coefficient tests of variables included in the estimated marginal "
@@ -6031,12 +6027,10 @@ msgstr ""
 "medias marginales estimadas. La hipótesis nula establece que la media "
 "marginal estimada para un nivel dado es igual al valor que se contrasta."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Against"
 msgstr "Frente a"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Specify the test value for the coefficient tests."
 msgstr ""
@@ -6044,7 +6038,7 @@ msgstr ""
 
 msgctxt "ForestPlot|"
 msgid "Coefficient tests against 0"
-msgstr ""
+msgstr "Contrastes de coeficientes frente a 0"
 
 msgctxt "ForestPlot|"
 msgid ""
@@ -6052,13 +6046,15 @@ msgid ""
 "means against 0. The null hypothesis states that the estimated marginal mean "
 "for a given level equals the tested value."
 msgstr ""
+"Incluir contrastes de los coeficientes de las variables incluidas en las "
+"medias marginales estimadas, frente a 0. La hipótesis nula establece que la "
+"media marginal estimada para un nivel dado es igual al valor que se "
+"contrasta."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Adjusted effect size estimate"
 msgstr "Estimación de la magnitud del efecto ajustada"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid ""
 "Include the adjusted effect size estimate in the estimated marginal means "
@@ -6067,27 +6063,22 @@ msgstr ""
 "Incluir la estimación de la magnitud del efecto ajustada, en la sección de "
 "las medias marginales estimadas."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Model information"
 msgstr "Información del modelo"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Add meta-analytic model information to the forest plot."
-msgstr "Añadir información del modelo Meta-Analítico al gráfico forestal."
+msgstr "Añadir información del modelo meta-analítico al gráfico forestal."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Heterogeneity"
 msgstr "Heterogeneidad"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Test"
 msgstr "Contraste"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid ""
 "Include the test of the residual heterogeneity in the model information "
@@ -6096,12 +6087,10 @@ msgstr ""
 "Incluir el contraste de heterogeneidad de los errores en la sección de "
 "información del modelo."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Estimate"
 msgstr "Estimar"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "𝜏"
 msgstr "𝜏"
@@ -6116,7 +6105,6 @@ msgstr ""
 "estimada, en la sección de información del modelo. No disponible en el Meta-"
 "Análisis multinivel/multivariante."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "𝜏²"
 msgstr "𝜏²"
@@ -6131,7 +6119,6 @@ msgstr ""
 "sección de información del modelo. No disponible en el Meta-Análisis "
 "multinivel/multivariante."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "I²"
 msgstr "I²"
@@ -6142,8 +6129,11 @@ msgid ""
 "studies due to heterogeneity in the model information section. Not available "
 "for multilevel/multivariate and binomial meta-analysis."
 msgstr ""
+"Incluir el I² meta-analítico, el porcentaje de variación total entre "
+"estudios debida a la heterogeneidad, en la sección de información del "
+"modelo. No disponible en el Meta-Análisis multinivel/multivariante ni "
+"Binomial."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "H²"
 msgstr "H²"
@@ -6154,32 +6144,32 @@ msgid ""
 "variability to sampling variability in the model information section. Not "
 "available for multilevel/multivariate and binomial meta-analysis."
 msgstr ""
+"Incluir el H² meta-analítico, un índice que expresa el cociente entre la "
+"variabilidad total y la variabilidade muestral, en la sección de información "
+"del modelo. No disponible en el Meta-Análisis multinivel/multivariante ni "
+"Binomial."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Moderation test"
 msgstr "Contraste de moderación"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid ""
 "Include the omnibus heterogeneity moderation test in the model information "
 "section. Available when heterogeneity meta-regression is specified."
 msgstr ""
 "Incluir el contraste omnibus de moderación de heterogeneidad, en la sección "
-"de información del modelo. Disponible cuando se especifica la meta-regresión "
+"de información del modelo. Disponible cuando se especifica la Meta-Regresión "
 "de heterogeneidad."
 
 msgctxt "ForestPlot|"
 msgid "Effect Size"
-msgstr ""
+msgstr "Magnitud del efecto"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Fixed effect estimate"
 msgstr "Estimación de efectos fijos"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid ""
 "Include a fixed effect meta-analytic effect size estimate in the model "
@@ -6188,14 +6178,12 @@ msgid ""
 msgstr ""
 "Incluir una estimación de la magnitud del efecto fijo meta-analítico, en la "
 "sección de información del modelo. No disponible si el modelo fue ajustado "
-"con efectos fijos o contiene la meta-regresión de heterogeneidad."
+"con efectos fijos o contiene la Meta-Regresión de heterogeneidad."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Fixed effect estimate test"
 msgstr "Contraste de la estimación de efectos fijos"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid ""
 "Include the test of the fixed effect meta-analytic effect size estimate in "
@@ -6204,33 +6192,29 @@ msgstr ""
 "Incluir el contraste de la estimación de la magnitud del efecto fijo meta-"
 "analítico, en la sección de información del modelo."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Pooled estimate"
 msgstr "Estimación combinada"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid ""
 "Include the overall meta-analytic effect size estimate in the model "
 "information section."
 msgstr ""
-"Incluir la estimación de la magnitud del efecto Meta-Analítica global en la "
+"Incluir la estimación de la magnitud del efecto meta-analítico global, en la "
 "sección de información del modelo."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Pooled estimate test"
 msgstr "Contraste de estimación combinada"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid ""
 "Include the test of the overall meta-analytic effect size estimate in the "
 "model information section."
 msgstr ""
-"Incluir el contraste de la estimación de la magnitud del efecto Meta-"
-"Analítica global en la sección de información del modelo."
+"Incluir el contraste de la estimación de la magnitud del efecto meta-"
+"analítico global, en la sección de información del modelo."
 
 msgctxt "ForestPlot|"
 msgid ""
@@ -6240,14 +6224,19 @@ msgid ""
 "term and the corresponding estimate is also displayed. The test is available "
 "only if Bayesian model averaging for the effect is selected."
 msgstr ""
+"Incluir el contraste de la estimación de la magnitud del efecto meta-"
+"analítico global, en la sección de información del modelo. Si se ajusta un "
+"modelo de Meta-Regresión, el contraste se corresponde con el efecto ajustado "
+"o con la constante de la Meta-Regresión, y la consecuente estimación también "
+"se presenta. EL contraste está disponible solo si se selecciona un modelo "
+"bayesiano medio para el efecto."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid ""
 "Include the omnibus effect size moderation test in the model information "
 "section. Available when effect size meta-regression is specified."
 msgstr ""
-"Incluir el contraste ómnibus de moderación de la magnitud del efecto en la "
+"Incluir el contraste ómnibus de moderación de la magnitud del efecto, en la "
 "sección de información del modelo. Disponible cuando se especifica la Meta-"
 "Regresión de la magnitud del efecto."
 
@@ -6258,23 +6247,21 @@ msgstr "Sesgo de publicación"
 msgctxt "ForestPlot|"
 msgid "Include the publication bias test in the model information section."
 msgstr ""
+"Incluir el contraste de Sesgo de publicación, en la sección de información "
+"del modelo."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Settings"
 msgstr "Configuración"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "General"
 msgstr "General"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Prediction intervals"
 msgstr "Intervalos de predicción"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid ""
 "Include prediction intervals of the estimated marginal means and the model "
@@ -6283,12 +6270,10 @@ msgstr ""
 "Incluir intervalos de predicción de las medias marginales estimadas y salida "
 "de resultados de la información del modelo."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Estimates and confidence intervals"
 msgstr "Estimaciones e intervalos de confianza"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid ""
 "Include effect size estimates and confidence intervals summary text in the "
@@ -6299,44 +6284,40 @@ msgstr ""
 
 msgctxt "ForestPlot|"
 msgid "Conditional estimates"
-msgstr ""
+msgstr "Estimaciones condicionadas"
 
 msgctxt "ForestPlot|"
 msgid ""
 "Display the conditional effect, heterogeneity, and estimated marginal means "
 "estimates."
 msgstr ""
+"Mostrar las estimaciones de efecto, heterogeneidad y medias marginales "
+"estimadas condicionadas."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Tests in right panel"
 msgstr "Contrastes en el panel derecho"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Move test results text to the right panel."
 msgstr "Mover el texto con resultados de los contrastes, al panel derecho."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Align left panel"
 msgstr "Alinear panel a la izquierda"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid ""
 "Align text of the `Estimated marginal means` and  `Model Information` "
 "sections."
 msgstr ""
-"Alinear el texto de las secciones `Medias marginales estimadas` e "
-"`Información del modelo`."
+"Alinear el texto de las secciones `Medias marginales estimadas` e `"
+"Información del modelo`."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Subgroup"
 msgstr "Subgrupo"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid ""
 "Specify the forest plot behavior in the case of a subgroup analysis. These "
@@ -6346,12 +6327,10 @@ msgstr ""
 "subgrupos. Esta opción está solo disponible cuando se selecciona el análisis "
 "de subgrupos."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Panels within subgroup"
 msgstr "Paneles dentro del subgrupo"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid ""
 "Group the output panels within their subgroup membership, i.e., the output "
@@ -6364,23 +6343,21 @@ msgid ""
 "(Subgroup 1), Estimated marginal means (Subgroup 2), Model information "
 "(Subgroup 1), Model information (Subgroup 2)..."
 msgstr ""
-"Agrupar los paneles de resultados dentro de sus subgrupos de pertenencia, i."
-"e. los paneles de resultados se presentan para cada subgrupo en orden "
+"Agrupar los paneles de resultados dentro de sus subgrupos de pertenencia, "
+"i.e. los paneles de resultados se presentan para cada subgrupo en orden "
 "secuencial (i.e. Información del estudio (Subgrupo 1), Medias marginales "
 "estimadas (Subgrupo 1), Información del modelo (Subgrupo 1), Información del "
 "estudio (Subgrupo 2), Medias marginales estimadas (Subgrupo 2), Información "
 "del modelo (Subgrupo 2)), .... Si no se selecciona, el resultado se agrupa "
 "primero por la pertenencia al panel, i.e. Información del estudio (Subgrupo "
-"1), Información del estudio (Subgrupo 2), Medias marginales estimadas "
-"(Subgrupo 1), Medias marginales estimadas (Subgrupo 2), Información del "
+"1), Información del estudio (Subgrupo 2), Medias marginales estimadas ("
+"Subgrupo 1), Medias marginales estimadas (Subgrupo 2), Información del "
 "modelo (Subgrupo 1), Información del modelo (Subgrupo 2)..."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Full dataset estimated marginal means"
 msgstr "Medias marginales estimadas del conjunto completo de datos"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid ""
 "Include the full dataset estimated marginal means in the forest plot if "
@@ -6392,12 +6369,10 @@ msgstr ""
 "configuración `Incluir el conjunto de datos completo en el análisis de "
 "subgrupos` de la sección `Avanzado`."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Full dataset model information"
 msgstr "Información del modelo del conjunto completo de datos"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid ""
 "Include the full dataset model information in the forest plot if subgroups "
@@ -6409,17 +6384,14 @@ msgstr ""
 "configuración `Incluir el conjunto de datos completo en el análisis de "
 "subgrupos` de la sección `Avanzado`."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Auxiliary"
 msgstr "Auxiliar"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Digits"
 msgstr "Dígitos"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid ""
 "Number of digits printed for the effect size and confidence intervals "
@@ -6428,27 +6400,22 @@ msgstr ""
 "Número de dígitos presentados en el texto del resumen de la magnitud del "
 "efecto e intervalos de confianza."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Tests information"
 msgstr "Información de los contrastes"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Statistic and p-value"
-msgstr "Estadístico y valor p"
+msgstr "Estadístico y valor-p"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "P-value"
-msgstr "Valor p"
+msgstr "Valor-p"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Color"
 msgstr "Color"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid ""
 "Change color of the plotted objects. Only available if no color mapping is "
@@ -6457,72 +6424,59 @@ msgstr ""
 "Cambiar el color de los objetos dibujados. Solo disponible si no se elige "
 "ningún mapa de colores."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Black"
 msgstr "Negro"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Blue"
 msgstr "Azul"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Red"
 msgstr "Rojo"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Add vertical line"
 msgstr "Añadir línea vertical"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Add a solid vertical line in the forest plot."
 msgstr "Añadir una línea vertical sólida en el gráfico forestal."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Add vertical line (2)"
 msgstr "Añadir línea vertical (2)"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Add a dotted vertical line in the forest plot."
 msgstr "Añadir una línea vertical punteada en el gráfico forestal."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "X-axis label"
-msgstr "Etiqueta del eje x"
+msgstr "Etiqueta del eje X"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid ""
 "Change the x-axis label of the forest plot (the default 'Effect Size' "
 "changes in accordance with the selected effect size transformation)."
 msgstr ""
-"Modificar la etiqueta del eje x en el gráfico forestal (la 'Magnitud del "
+"Modificar la etiqueta del eje X en el gráfico forestal (la 'Magnitud del "
 "efecto' predeterminada cambia de acuerdo con la transformación elegida de la "
 "magnitud del efecto)."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "X-axis limits"
-msgstr "Límites del eje x"
+msgstr "Límites del eje X"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Change the default x-axis limits."
-msgstr "Cambiar los límites predeterminados del eje x."
+msgstr "Cambiar los límites predeterminados del eje X."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Lower"
 msgstr "Inferior"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Upper"
 msgstr "Superior"
@@ -6531,63 +6485,51 @@ msgctxt "ForestPlot|"
 msgid "Relative Size"
 msgstr "Tamaño relativo"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Adjust the relative size of the forest plot components."
 msgstr "Ajustar el tamaño relativo de las componentes del gráfico forestal."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Estimates"
 msgstr "Estimaciones"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Text"
 msgstr "Texto"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Axis labels"
 msgstr "Etiquetas de los ejes"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Row"
 msgstr "Fila"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Left panel"
 msgstr "Panel izquierdo"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Middle panel"
 msgstr "Panel medio"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Right panel"
 msgstr "Panel derecho"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Adjust width based on text"
 msgstr "Ajustar el ancho en base al texto"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Turn off the automatic width adjustment of the individual components."
 msgstr ""
 "Desactivar el ajuste automático del ancho de las componentes individuales."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Mapping"
 msgstr "Cartografiar"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid ""
 "Select a variable for encoding the color or shape of the study information "
@@ -6597,26 +6539,25 @@ msgstr ""
 "resultados de la información del estudio y de las medias marginales "
 "estimadas."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Shape"
 msgstr "Forma"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Show RoBMA R code"
-msgstr ""
+msgstr "Mostrar el código R de RoBMA"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid ""
 "Display the underlying R code used by the RoBMA package to fit the model."
 msgstr ""
+"Mostrar el código R subyacente utilizado por el paquete RoBMA para ajustar "
+"el modelo."
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Include full dataset in subgroup analysis"
 msgstr "Incluir el conjunto de datos completo en el análisis de subgrupos"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid ""
 "Include the full dataset output in the subgroup analysis. This option is "
@@ -6626,269 +6567,268 @@ msgstr ""
 "subgrupos. Esta opción solo está disponible cuando se selecciona el análisis "
 "de subgrupos."
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Shorten prior names"
 msgstr "Acortar los nombres previos"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Shorten the prior names in the output."
-msgstr ""
+msgstr "Acortar los nombres previos en el resultado."
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Enable study-level nesting"
-msgstr ""
+msgstr "Permitir anidado de niveles-estudios"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Enables study level nesting. Note that this is an experimental feature."
 msgstr ""
+"Permite el anidado de niveles-estudios. Ten en cuenta que esta es una "
+"característica experimental."
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Medical subfield"
-msgstr ""
+msgstr "Subcampo médico"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "General"
 msgstr "General"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Acute Respiratory Infections"
-msgstr ""
+msgstr "Infecciones respiratorias agudas"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Airways"
-msgstr ""
+msgstr "Vías respiratorias"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Anaesthesia"
-msgstr ""
+msgstr "Anestesia"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Back and Neck"
-msgstr ""
+msgstr "Espalda y cuello"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Bone, Joint and Muscle Trauma"
-msgstr ""
+msgstr "Traumatismo de huesos, articulaciones y músculos"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Colorectal"
-msgstr ""
+msgstr "Colorectal"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Common Mental Disorders"
-msgstr ""
+msgstr "Desórdenes mentales comunes"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Consumers and Communication"
-msgstr ""
+msgstr "Consumidores y comunicación"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Cystic Fibrosis and Genetic Disorders"
-msgstr ""
+msgstr "Fibrosis quística y desórdenes genéticos"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Dementia and Cognitive Improvement"
-msgstr ""
+msgstr "Demencia y pérdidas cognitivas"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Developmental, Psychosocial and Learning Problems"
-msgstr ""
+msgstr "Problemas de desarrollo mental, psicosociales y de aprendizaje"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Drugs and Alcohol"
-msgstr ""
+msgstr "Drogas y alcohol"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Effective Practice and Organisation of Care"
-msgstr ""
+msgstr "Práctica y organización sanitaria efectivas"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Emergency and Critical Care"
-msgstr ""
+msgstr "Emergencias y cuidados críticos"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "ENT"
-msgstr ""
+msgstr "Otorrinolaringología"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Eyes and Vision"
-msgstr ""
+msgstr "Ojos y visión"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Gynaecological, Neuro-oncology and Orphan Cancer"
-msgstr ""
+msgstr "Cáncer ginecológico, neuro-oncología y cáncer huérfano"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Gynaecology and Fertility"
-msgstr ""
+msgstr "Ginecología y fertilidad"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Heart"
-msgstr ""
+msgstr "Corazón"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Hepato-Biliary"
-msgstr ""
+msgstr "Hepatobiliar"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "HIV/AIDS"
-msgstr ""
+msgstr "VIH/SIDA"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Hypertension"
-msgstr ""
+msgstr "Hipertensión"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Incontinence"
-msgstr ""
+msgstr "Incontinencia"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Infectious Diseases"
-msgstr ""
+msgstr "Enfermedades infecciosas"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Inflammatory Bowel Disease"
-msgstr ""
+msgstr "Enfermedad intestinal inflamatoria"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Injuries"
-msgstr ""
+msgstr "Lesiones"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Kidney and Transplant"
-msgstr ""
+msgstr "Riñones y trasplantes"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Metabolic and Endocrine Disorders"
-msgstr ""
+msgstr "Trastornos metabólicos y endocrinos"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Methodology"
-msgstr ""
+msgstr "Metodología"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Movement Disorders"
-msgstr ""
+msgstr "Trastornos del movimiento"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Musculoskeletal"
-msgstr ""
+msgstr "Músculo-esquelético"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Neonatal"
-msgstr ""
+msgstr "Neonatal"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Oral Health"
-msgstr ""
+msgstr "Salud oral"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Pain, Palliative and Supportive Care"
-msgstr ""
+msgstr "Dolor, apoyo y cuidados paliativos"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Pregnancy and Childbirth"
-msgstr ""
+msgstr "Embarazo y parto"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Public Health"
-msgstr ""
+msgstr "Salud pública"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Schizophrenia"
-msgstr ""
+msgstr "Esquizofrenia"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Sexually Transmitted Infections"
-msgstr ""
+msgstr "Infecciones de transmisión sexual"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Skin"
-msgstr ""
+msgstr "Piel"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Stroke"
-msgstr ""
+msgstr "Embolia"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Tobacco Addiction"
-msgstr ""
+msgstr "Adicción al tabaco"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Upper GI and Pancreatic Diseases"
-msgstr ""
+msgstr "Enfermedades del gastrointestino alto y páncreas"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Urology"
-msgstr ""
+msgstr "Urología"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Vascular"
-msgstr ""
+msgstr "Vascular"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Work"
-msgstr ""
+msgstr "Trabajo"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Wounds"
-msgstr ""
+msgstr "Feridas"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Breast Cancer"
-msgstr ""
+msgstr "Cáncer de mama"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Chronic Pain"
-msgstr ""
+msgstr "Dolor crónico"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Cirrhosis and Liver Transplantation"
-msgstr ""
+msgstr "Cirrosis y trasplante de hígado"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Cognitive Impairment and Dementia"
-msgstr ""
+msgstr "Deterioro cognitivo y demencia"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Colorectal Cancer"
-msgstr ""
+msgstr "Cáncer colorectal"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Epilepsy"
-msgstr ""
+msgstr "Epilepsia"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Fertility Regulation"
-msgstr ""
+msgstr "Regulación de la fertilidad"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Gut"
-msgstr ""
+msgstr "Intestino"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Haematology"
-msgstr ""
+msgstr "Hematología"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Heart; Vascular"
-msgstr ""
+msgstr "Corazón; Vascular"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Lung Cancer"
-msgstr ""
+msgstr "Cáncer de pulmón"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Multiple Sclerosis and Rare Diseases of the CNS"
-msgstr ""
+msgstr "Esclerosis múltiple y enfermedades raras del SNC"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Neuromuscular"
-msgstr ""
+msgstr "Neuromuscular"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Effect size"
 msgstr "Magnitud del efecto"
@@ -6907,8 +6847,10 @@ msgid ""
 "predicted values at specific levels of moderators and their differences from "
 "0."
 msgstr ""
+"Opciones para calcular las medias marginales estimadas, que permiten "
+"examinar los valores predichos a niveles concretos de los moderadores y sus "
+"diferencias de 0."
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Effect size"
 msgstr "Magnitud del efecto"
@@ -6917,12 +6859,10 @@ msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Model variables"
 msgstr "Variables del modelo"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Selected variables"
 msgstr "Variables seleccionadas"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid ""
 "Variables selected for computing estimated marginal means in the effect size "
@@ -6931,12 +6871,10 @@ msgstr ""
 "Variables seleccionadas para calcular las medias marginales estimadas en el "
 "modelo de la magnitud del efecto."
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Add adjusted estimate"
 msgstr "Añadir estimación ajustada"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid ""
 "Include the adjusted effect estimate, which accounts for the moderators in "
@@ -6951,7 +6889,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Test against 0"
-msgstr ""
+msgstr "Contraste frente a 0"
 
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid ""
@@ -6962,47 +6900,46 @@ msgid ""
 "test based on the prior and posterior distributions assuming either the "
 "presence of the effect or moderation."
 msgstr ""
+"Opción para contrastar las medias marginales estimadas frente a 0. El "
+"contraste para la estimación ajustada está disponible solo para modelos de "
+"Meta-Regresión con parametrización centrada (i.e. sin contrastes del factor "
+"de tratamiento). El contraste para las medias marginales estimadas se "
+"realiza utilizando un contraste de Proporción de densidades de Savage-Dickey "
+"basado en las distribuciones previa y posterior, asumiendo la presencia del "
+"efecto o la moderación."
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Statistics"
 msgstr "Estadísticos"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Options for summarizing the meta-analytic results."
-msgstr "Opciones para resumir los resultados Meta-Analíticos."
+msgstr "Opciones para resumir los resultados meta-analíticos."
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Heterogeneity"
 msgstr "Heterogeneidad"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Summarize the meta-analytic between-study heterogeneity."
-msgstr ""
+msgstr "Resumir la heterogeneidad entre-estudios meta-analítica."
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "𝜏"
 msgstr "𝜏"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Include 𝜏, the square root of the estimated between-study variance."
 msgstr "Incluir 𝜏, la raíz cuadrada de la varianza estimada entre-estudios."
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "𝜏²"
 msgstr "𝜏²"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Include 𝜏², the estimated between-study variance."
 msgstr "Incluir 𝜏², la varianza estimada entre-estudios."
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "I²"
 msgstr "I²"
@@ -7012,8 +6949,10 @@ msgid ""
 "Include I², the percentage of total variation across studies due to "
 "heterogeneity. Unvailable when performing binomial meta-analysis."
 msgstr ""
+"Incluir I², el porcentaje de la variación total entre estudios debida a la "
+"heterogeneidad. No está disponible cuando se realiza el Meta-Análisis "
+"Binomial."
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "H²"
 msgstr "H²"
@@ -7023,13 +6962,14 @@ msgid ""
 "Include H², an index indicating the ratio of total variability to sampling "
 "variability. Unvailable when performing binomial meta-analysis."
 msgstr ""
+"Incluir H², un índice que señala la ratio entre la variabilidad total y la "
+"variabilidad muestral. No está disponible cuando se realiza el Meta-Análisis "
+"Binomial."
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Meta-Regression"
 msgstr "Meta-Regresión"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid ""
 "Create summaries of the meta-regression. Available when predictors are "
@@ -7038,12 +6978,10 @@ msgstr ""
 "Crear resúmenes de la Meta-Regresión. Disponible cuando se incluyen "
 "predictores."
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Term tests"
 msgstr "Contrastes de términos"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid ""
 "Include tests for each term in the meta-regression model. The null "
@@ -7056,7 +6994,6 @@ msgstr ""
 "la variable con categorías es la misma, o que no hay asociación lineal entre "
 "la magnitud del efecto y la variable continua."
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Coefficient estimates"
 msgstr "Estimaciones de coeficientes"
@@ -7091,32 +7028,31 @@ msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Include credible intervals in the tabular output."
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Prediction intervals"
 msgstr "Intervalos de predicción"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Include prediction intervals in the tabular output."
 msgstr "Incluir intervalos de predicción en la salida tabular de resultados."
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Conditional estimates"
-msgstr ""
+msgstr "Estimaciones condicionadas"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid ""
 "Include conditional estimates, i.e., estimates assuming the presence of the "
 "corresponding model component/parameter, in the tabular output and figures."
 msgstr ""
+"Incluir estimaciones condicionadas, i.e. estimaciones que asumen la "
+"presencia de la correspondiente componente/parámetro del modelo, en el "
+"resultado tabular e imágenes."
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Transform effect size"
 msgstr "Transformar la magnitud del efecto"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid ""
 "Select a transformation to apply to the effect size estimates in the output. "
@@ -7126,80 +7062,66 @@ msgid ""
 msgstr ""
 "Seleccionar una transformación a aplicar a las estimaciones de la magnitud "
 "del efecto en la salida de resultados. Esta transformación se aplica a "
-"'Tabla de estimaciones Meta-Analíticas', 'Tabla de medias marginales "
+"'Tabla de estimaciones meta-analíticas', 'Tabla de medias marginales "
 "estimadas', 'Gráfico forestal' y 'Gráfico de burbujas'. Las 'Estimaciones de "
 "los coeficientes de Meta-Regresión' no se transforman."
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "None"
-msgstr ""
+msgstr "Ninguna"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Exponential"
 msgstr "Exponencial"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Log odds to proportions"
 msgstr "Log de probabilidades a proporciones"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Log odds to SMD (normal)"
 msgstr "Log de probabilidades a SMD (Normal)"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Log odds to SMD (logistic)"
 msgstr "Log de probabilidades a SMD (Logística)"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "SMD to log odds (normal)"
 msgstr "SMD a Log de probabilidades (Normal)"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "SMD to log odds (logistic)"
 msgstr "SMD a Log de probabilidades (Logística)"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "SMD to Cohen's U₁"
 msgstr "SMD a U₁ de Cohen"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "SMD to Cohen's U₂"
 msgstr "SMD a U₂ de Cohen"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "SMD to Cohen's U₃"
 msgstr "SMD a U₃ de Cohen"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "SMD to CLES, Pr(supperiority)"
 msgstr "SMD a CLES, Pr(superioridad)"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Fisher's z to r"
 msgstr "z de Fisher a r"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Z to R²"
 msgstr "Z a R²"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Hakstian & Whalen inverse α"
 msgstr "α inversa de Hakstian & Whalen"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Bonett inverse α"
 msgstr "α inversa de Bonett"
@@ -7216,7 +7138,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Weight function estimates"
-msgstr ""
+msgstr "Estimaciones de la función de ponderación"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid ""
@@ -7279,7 +7201,6 @@ msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Prior and Posterior Plots"
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Effect size"
 msgstr "Magnitud del efecto"
@@ -7314,7 +7235,6 @@ msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Prior weights"
 msgstr "Ponderaciones previas"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Lower"
 msgstr "Inferior"
@@ -7413,7 +7333,6 @@ msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Upper"
 msgstr "Superior"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Lower"
 msgstr "Inferior"
