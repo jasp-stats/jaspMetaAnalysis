@@ -4,7 +4,7 @@
     "Repositories": [
       {
         "Name": "CRAN",
-        "URL": "https://cloud.r-project.org"
+        "URL": "https://cran.rstudio.com"
       }
     ]
   },
@@ -196,22 +196,37 @@
     },
     "RoBMA": {
       "Package": "RoBMA",
-      "Version": "3.4.0",
-      "Source": "Repository",
+      "Version": "3.5.0",
+      "Source": "GitHub",
       "Requirements": [
         "R",
         "BayesTools",
         "runjags",
         "rjags",
-        "stats",
-        "graphics",
         "mvtnorm",
         "scales",
         "Rdpack",
         "rlang",
         "coda",
-        "ggplot2"
-      ]
+        "ggplot2",
+        "metaBMA",
+        "metafor",
+        "weightr",
+        "lme4",
+        "fixest",
+        "emmeans",
+        "metadat",
+        "testthat",
+        "vdiffr",
+        "knitr",
+        "rmarkdown",
+        "covr"
+      ],
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "FBartos",
+      "RemoteRepo": "RoBMA",
+      "RemoteSha": "37dee513713321eaf2e27c67550c3a1c0e1a261f"
     },
     "SparseM": {
       "Package": "SparseM",
@@ -576,7 +591,7 @@
     },
     "generics": {
       "Package": "generics",
-      "Version": "0.1.3",
+      "Version": "0.1.4",
       "Source": "Repository",
       "Requirements": [
         "R",
@@ -769,7 +784,7 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspBase",
-      "RemoteSha": "82b4b3fd094ac3b43e4c92bc6857da7efb7530d1"
+      "RemoteSha": "812b3eb26892da316a4bda6dc2e247f8ff194596"
     },
     "jaspGraphs": {
       "Package": "jaspGraphs",
@@ -909,7 +924,7 @@
     },
     "mathjaxr": {
       "Package": "mathjaxr",
-      "Version": "1.6-0",
+      "Version": "1.8-0",
       "Source": "Repository",
       "Requirements": []
     },
@@ -1355,7 +1370,7 @@
     },
     "reformulas": {
       "Package": "reformulas",
-      "Version": "0.4.0",
+      "Version": "0.4.1",
       "Source": "Repository",
       "Requirements": [
         "stats",
@@ -1592,11 +1607,16 @@
     },
     "svglite": {
       "Package": "svglite",
-      "Version": "2.1.3",
+      "Version": "2.2.1",
       "Source": "Repository",
       "Requirements": [
         "R",
+        "base64enc",
+        "cli",
+        "lifecycle",
+        "rlang",
         "systemfonts",
+        "textshaping",
         "cpp11"
       ]
     },
@@ -1608,10 +1628,11 @@
     },
     "systemfonts": {
       "Package": "systemfonts",
-      "Version": "1.2.2",
+      "Version": "1.2.3",
       "Source": "Repository",
       "Requirements": [
         "R",
+        "base64enc",
         "grid",
         "jsonlite",
         "lifecycle",
@@ -1631,7 +1652,7 @@
     },
     "textshaping": {
       "Package": "textshaping",
-      "Version": "1.0.0",
+      "Version": "1.0.1",
       "Source": "Repository",
       "Requirements": [
         "R",
@@ -1697,7 +1718,7 @@
     },
     "utf8": {
       "Package": "utf8",
-      "Version": "1.2.4",
+      "Version": "1.2.5",
       "Source": "Repository",
       "Requirements": [
         "R"
@@ -1774,7 +1795,7 @@
     },
     "zip": {
       "Package": "zip",
-      "Version": "2.3.2",
+      "Version": "2.3.3",
       "Source": "Repository",
       "Requirements": []
     },
