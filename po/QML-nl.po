@@ -4976,9 +4976,10 @@ msgctxt "BayesianMetaAnalysisDeprecated|"
 msgid "Effect Size Standard Error"
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysisDeprecated|"
 msgid "95% CI Lower and Upper Bound"
-msgstr ""
+msgstr "95% CI Onder- en Bovengrens"
 
 msgctxt "BayesianMetaAnalysisDeprecated|"
 msgid "Study Labels"
