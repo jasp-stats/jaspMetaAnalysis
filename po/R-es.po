@@ -1372,7 +1372,7 @@ msgid "Model Information"
 msgstr "Información del modelo"
 
 msgid "Publication Bias: %1$s"
-msgstr "Sesgo de Publicación: %1$"
+msgstr "Sesgo de Publicación: %1$s"
 
 msgid "Fixed Effect Estimate"
 msgstr "Estimación de los Efectos Fijos"
