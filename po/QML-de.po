@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-05-30 02:03+0000\n"
-"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
-"jaspmetaanalysis-qml/de/>\n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12-dev\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -4308,25 +4302,33 @@ msgid ""
 "selected."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Subgroup"
-msgstr ""
+msgstr "Untergruppe"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid ""
 "Variable indicating subgroup stratification. For each subgroup, an "
 "independent model is fitted to the corresponding data set subset."
 msgstr ""
+"Variable zur Angabe der Untergruppeneinteilung. Für jede Untergruppe wird "
+"ein unabhängiges Modell an die entsprechende Datensatz-Untermenge angepasst."
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Subgroup"
-msgstr ""
+msgstr "Untergruppe"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
 "Variable indicating subgroup stratification. For each subgroup, an "
 "independent model is fitted to the corresponding data set subset."
 msgstr ""
+"Variable zur Angabe der Untergruppeneinteilung. Für jede Untergruppe wird "
+"ein unabhängiges Modell an die entsprechende Datensatz-Untermenge angepasst."
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Include full dataset in subgroup analysis"
@@ -4660,19 +4662,24 @@ msgid ""
 "the effect sizes within each study."
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Subgroup"
-msgstr ""
+msgstr "Untergruppe"
 
+#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid ""
 "Variable indicating subgroup stratification. For each subgroup, an "
 "independent model is fitted to the corresponding data set subset."
 msgstr ""
+"Variable zur Angabe der Untergruppeneinteilung. Für jede Untergruppe wird "
+"ein unabhängiges Modell an die entsprechende Datensatz-Untermenge angepasst."
 
+#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Bayesian Model-Averaging"
-msgstr ""
+msgstr "Bayessche Modell-Mittelung"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid ""
@@ -4919,19 +4926,24 @@ msgid ""
 "the effect sizes within each study."
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Subgroup"
-msgstr ""
+msgstr "Untergruppe"
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid ""
 "Variable indicating subgroup stratification. For each subgroup, an "
 "independent model is fitted to the corresponding data set subset."
 msgstr ""
+"Variable zur Angabe der Untergruppeneinteilung. Für jede Untergruppe wird "
+"ein unabhängiges Modell an die entsprechende Datensatz-Untermenge angepasst."
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Bayesian Model-Averaging"
-msgstr ""
+msgstr "Bayessche Modell-Mittelung"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid ""
@@ -4948,40 +4960,55 @@ msgctxt "BayesianMetaAnalysis|"
 msgid "Effect size"
 msgstr "Effektstärke"
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid ""
 "Average over the presence vs. absence of the effect. If unspecified, the "
 "resulting model assumes that the effect is present."
 msgstr ""
+"Mittelwert über die Anwesenheit vs. Abwesenheit des Effekts. Falls "
+"unspezifiziert, nimmt das resultierende Modell an, dass der Effekt vorhanden "
+"ist."
 
 #, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Heterogeneity"
 msgstr "Heterogenität"
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid ""
 "Average over the presence vs. absence of heterogeneity. If unspecified, the "
 "resulting model assumes that heterogeneity is present."
 msgstr ""
+"Mittelwert über die Anwesenheit vs. Abwesenheit von Heterogenität. Falls "
+"unspezifiziert, nimmt das resultierende Modell an, dass Heterogenität "
+"vorhanden ist."
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Moderation"
-msgstr ""
+msgstr "Moderation"
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid ""
 "Average over the presence vs. absence of moderators. If unspecified, the "
 "resulting model assumes that all moderators models are present."
 msgstr ""
+"Mittelwert über die Anwesenheit vs. Abwesenheit von Moderatoren. Falls "
+"unspezifiziert, nimmt das resultierende Modell an, dass alle "
+"Moderatormodelle vorhanden sind."
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Prior Distributions"
-msgstr ""
+msgstr "Prior-Verteilungen"
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Effect size and heterogeneity"
-msgstr ""
+msgstr "Effektstärke und Heterogenität"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid ""
@@ -5892,9 +5919,10 @@ msgid ""
 "sections."
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Subgroup"
-msgstr ""
+msgstr "Untergruppe"
 
 msgctxt "ForestPlot|"
 msgid ""
@@ -6388,9 +6416,10 @@ msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Effect size"
 msgstr "Effektstärke"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Moderation"
-msgstr ""
+msgstr "Moderation"
 
 #, fuzzy
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
@@ -6733,9 +6762,10 @@ msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Effect size"
 msgstr "Effektstärke"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Moderation"
-msgstr ""
+msgstr "Moderation"
 
 #, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
@@ -7110,21 +7140,30 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Heterogeneity"
 msgstr "Heterogenität"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
 "Average over the presence vs. absence of heterogeneity. If unspecified, the "
 "resulting model assumes that heterogeneity is present."
 msgstr ""
+"Mittelwert über die Anwesenheit vs. Abwesenheit von Heterogenität. Falls "
+"unspezifiziert, nimmt das resultierende Modell an, dass Heterogenität "
+"vorhanden ist."
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Moderation"
-msgstr ""
+msgstr "Moderation"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
 "Average over the presence vs. absence of moderators. If unspecified, the "
 "resulting model assumes that all moderators models are present."
 msgstr ""
+"Mittelwert über die Anwesenheit vs. Abwesenheit von Moderatoren. Falls "
+"unspezifiziert, nimmt das resultierende Modell an, dass alle "
+"Moderatormodelle vorhanden sind."
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Publication bias"
@@ -7136,13 +7175,15 @@ msgid ""
 "the resulting model assumes that publication bias is present."
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Prior Distributions"
-msgstr ""
+msgstr "Prior-Verteilungen"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect size and heterogeneity"
-msgstr ""
+msgstr "Effektstärke und Heterogenität"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
