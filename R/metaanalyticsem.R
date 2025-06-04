@@ -171,7 +171,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 
     # check if there are some superfluous variables
     if (any(!decodedMeanNames %in% uniqueInputNames))
-      .quitAnalysis(gettextf("The 'Means' variable input contains the following variable that are not specified in the 'Correlation/Covariance Matrix' variable input: %1$s.",
+      .quitAnalysis(gettextf("The 'Means' variable input contains the following variable that is not specified in the 'Correlation/Covariance Matrix' variable input: %1$s.",
                              paste0(setdiff(decodedMeanNames, uniqueInputNames), collapse = ", ")))
 
     # add variable names if any are missing
