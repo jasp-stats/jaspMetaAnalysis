@@ -594,7 +594,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 
   # add columns
   pairwiseModelComparison$addColumnInfo(name = "comparison",  type = "string",  title = "")
-  pairwiseModelComparison$addColumnInfo(name = "difChi2",     type = "integer", title = gettext("\U0394 \U03C7\U00B2"))
+  pairwiseModelComparison$addColumnInfo(name = "difChi2",     type = "integer", title = gettext("2\U0394LL"))
   pairwiseModelComparison$addColumnInfo(name = "difDf",       type = "integer", title = gettext("\U0394 df"))
   pairwiseModelComparison$addColumnInfo(name = "p",           type = "pvalue",  title = gettext("p"))
 

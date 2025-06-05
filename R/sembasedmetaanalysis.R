@@ -277,6 +277,12 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
         aic    = AIC(tempFit[["mx.fit"]]),
         bic    = BIC(tempFit[["mx.fit"]])
       )
+
+      # check for openMX errors and warngings
+      openMxMessages <- .openMxCheckWarnings(summary(tempFit))
+      for (i in seq_along(openMxMessages)) {
+        modelFitTable$addFootnote(gettextf("%1$s: %2$s", model[["value"]], openMxMessages[i]), symbol = gettext("Warning"))
+      }
     }
   }
 
@@ -710,4 +716,28 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
     "zero"      = "Zero",
     "full"      = "Full"
   ))
+}
+.openMxCheckWarnings       <- function(x) {
+
+  msgs <- character()
+
+  # Information matrix not positive definite
+  if (!is.null(x$infoDefinite) && !is.na(x$infoDefinite) && !x$infoDefinite) {
+    msgs <- c(msgs, "Information matrix is not positive definite (not at a candidate optimum). Be suspicious of these results. At minimum, do not trust the standard errors.")
+  }
+
+  # Information criteria warning (from fit statistics)
+  if (!is.null(x$CFI) && !is.null(x$TLI) && !is.null(x$RMSEA) && !is.null(x$fitUnits)) {
+    if (!is.null(x$independence) && !is.na(x$independence) && !is.null(x$likelihood) && x$independence < x$likelihood) {
+      msgs <- c(msgs, "Your model may be mis-specified (and fit worse than an independence model), or you may be using the wrong independence model.")
+    }
+  }
+
+  # Status code messages (from optimizer)
+  if (!is.null(x$npsolMessage) && nzchar(x$npsolMessage)) {
+    msgs <- c(msgs, x$npsolMessage)
+  }
+
+  # Return unique messages
+  return(msgs)
 }
