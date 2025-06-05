@@ -319,7 +319,7 @@ Upgrades
 	{
 		functionName:	"BayesianMetaAnalysis"
 		fromVersion:	"0.19.3"
-		toVersion:		"0.20.0"
+		toVersion:		"0.95.0"
 
 		ChangeIncompatible
 		{
@@ -331,7 +331,7 @@ Upgrades
 	{
 		functionName:	"BayesianBinomialMetaAnalysis"
 		fromVersion:	"0.19.3"
-		toVersion:		"0.20.0"
+		toVersion:		"0.95.0"
 
 		ChangeIncompatible
 		{
@@ -343,7 +343,7 @@ Upgrades
 	{
 		functionName:	"BayesianMetaAnalysis"
 		fromVersion:	"0.19.3"
-		toVersion:		"0.20.0"
+		toVersion:		"0.95.0"
 
 		ChangeIncompatible
 		{
