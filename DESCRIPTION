@@ -17,6 +17,7 @@ Imports:
   MASS,
   metaBMA (>= 0.6.3),
   metafor,
+  metaSEM,
   psych,
   purrr,
   rstan,
@@ -39,7 +40,9 @@ Remotes:
   jasp-stats/jaspBase,
   jasp-stats/jaspGraphs,
   FBartos/RoBMA@3lvl,
-  FBartos/BayesTools@diagnostics-fix
+  FBartos/BayesTools@diagnostics-fix,
+  jasp-stats/jaspSem,
+  mikewlcheung/metasem
 Depends: 
     R (>= 2.10)
 LazyData: true
