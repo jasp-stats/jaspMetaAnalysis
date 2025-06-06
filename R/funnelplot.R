@@ -17,6 +17,8 @@
 
 FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
+  options[["analysis"]] <- "metaAnalysis"
+
   if (.fpReady(options)) {
     # check data set
     dataset <- .fpCheckDataset(jaspResults, dataset, options)
@@ -147,19 +149,27 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
   if (options[["split"]] == "") {
 
-    trimAndFillState$object <- try(metafor::trimfill(
-      jaspResults[["fitState"]]$object,
-      estimator = options[["trimAndFillEstimator"]]
-    ))
+    if (jaspBase::isTryError(jaspResults[["fitState"]]$object)) {
+      trimAndFillState$object <- jaspResults[["fitState"]]$object
+    } else {
+      trimAndFillState$object <- try(metafor::trimfill(
+        jaspResults[["fitState"]]$object,
+        estimator = options[["trimAndFillEstimator"]]
+      ))
+    }
 
   } else {
 
     splitLevels <- unique(dataset[[options[["split"]]]])
     fits <- lapply(splitLevels, function(splitLevel) {
-      try(metafor::trimfill(
-        jaspResults[["fitState"]]$object[[splitLevel]],
-        estimator = options[["trimAndFillEstimator"]]
-      ))
+      if (jaspBase::isTryError(jaspResults[["fitState"]]$object[[splitLevel]])) {
+        return(jaspResults[["fitState"]]$object[[splitLevel]])
+      } else {
+        return(try(metafor::trimfill(
+          jaspResults[["fitState"]]$object[[splitLevel]],
+          estimator = options[["trimAndFillEstimator"]]
+        )))
+      }
     })
 
     names(fits) <- splitLevels
