@@ -167,7 +167,6 @@ Form
 				if (effectSizeMeasure.value === "SMD" || effectSizeMeasure.value === "fishersZ" || effectSizeMeasure.value === "logOR")
 					[
 						{ label: qsTr("Default"),		value: "default",		info: qsTr("Use default prior distributions for the effect size and heterogeneity based on Bartoš et al. (2022).")},
-						{ label: qsTr("Psychology"),	value: "psychology",	info: qsTr("Use default prior distributions developed for psychology based on Bartoš et al. (2022). This settings corresponds to the 'Default' setting.")},
 						{ label: qsTr("Medicine"),		value: "medicine",		info: qsTr("Use prior distributions based on the Cochrane Database of Systematic Reviews developed by Bartoš et al. (2021)")},
 						{ label: qsTr("Custom"),		value: "custom",		info: qsTr("Use custom prior distributions. This option allows you to specify a custom model ensemble for the effect size and heterogeneity prior distributions.")}
 					]
@@ -193,7 +192,7 @@ Form
 		{
 			name:		"priorDistributionsScale"
 			label:		qsTr("Scale")
-			enabled:	priorDistributionsEffectSizeAndHeterogeneity.value === "default" || priorDistributionsEffectSizeAndHeterogeneity.value === "psychology" || priorDistributionsEffectSizeAndHeterogeneity.value === "medicine"
+			enabled:	priorDistributionsEffectSizeAndHeterogeneity.value === "default" || priorDistributionsEffectSizeAndHeterogeneity.value === "medicine"
 			info:		qsTr("Setting value different than 1 re-scales the pre-specified prior distributions. Values smaller than 1 lead to more informative priors, while values larger than 1 lead to less informative priors.")
 			startValue:	1
 			min:		0
