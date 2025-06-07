@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.19.2\n"
-"POT-Creation-Date: 2025-05-17 02:58\n"
+"POT-Creation-Date: 2025-06-07 03:01\n"
 "PO-Revision-Date: 2025-05-17 07:56+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/jasp/"
@@ -1492,6 +1492,125 @@ msgstr ""
 msgid "The %1$s fail-safe N calculation %2$sfailed with the following error:"
 msgstr "பின்வரும் பிழையுடன் %1$s சோதனை தோல்வியடைந்தது: %2$s"
 
+msgid ""
+"The 'Correlation/Covariance Matrix' variable input contains the following "
+"variable that does not contain the variable name separator '%1$s': %2$s."
+msgstr ""
+
+msgid ""
+"The correlation matrix contains values outside the range of -1 and 1. Please "
+"check your input."
+msgstr ""
+
+msgid ""
+"The 'Means' variable input contains the following variable that is not "
+"specified in the 'Correlation/Covariance Matrix' variable input: %1$s."
+msgstr ""
+
+msgid "Available Variable Names"
+msgstr ""
+
+msgid "Descriptives"
+msgstr ""
+
+msgid "%1$s: %1$s Matrix"
+msgstr ""
+
+msgid "Variable"
+msgstr "மாறக்கூடிய"
+
+msgid "%1$s: Means"
+msgstr ""
+
+#, fuzzy
+msgid "Pooled %1$s Matrix"
+msgstr "பூல் மதிப்பீடு"
+
+msgid ""
+"The pooled correlation/covariance matrix could not be computed. Consider "
+"verifying that all correlation/covariance matrix variables are correctly "
+"specified via 'Descriptives'."
+msgstr ""
+
+#, fuzzy
+msgid "Correlation"
+msgstr "தன்னொட்டுறவு"
+
+#, fuzzy
+msgid "Covariance"
+msgstr "கோவாரன்ச் விகிதம்"
+
+#, fuzzy
+msgid "Random Effect"
+msgstr "சீரற்ற விளைவுகள்"
+
+#, fuzzy
+msgid "Random Effect Covariance"
+msgstr "சீரற்ற விளைவுகள் மதிப்பீடுகள்"
+
+msgid "Pooled %1$s Matrix Parameters"
+msgstr ""
+
+msgid "Row"
+msgstr ""
+
+msgid "Column"
+msgstr ""
+
+#, fuzzy
+msgid "95%% CI"
+msgstr "%s%% தொஒ"
+
+msgid "Computing additional fit measures: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid "Additional Fit Measures"
+msgstr "பொருத்தமான நடவடிக்கைகள்"
+
+msgid "CLI"
+msgstr ""
+
+msgid "TLI"
+msgstr ""
+
+msgid "RMSEA"
+msgstr ""
+
+msgid "p(RMSEA < 0.05)"
+msgstr ""
+
+msgid "Pairwise Model Comparison"
+msgstr ""
+
+msgid "2ΔLL"
+msgstr ""
+
+msgid "Δ df"
+msgstr ""
+
+msgid "At least two models are required for pairwise model comparison."
+msgstr ""
+
+msgid ""
+"No pairwise model comparison with at least one degree of freedom difference "
+"available."
+msgstr ""
+
+msgid "Regression Estimates"
+msgstr "பின்னடைவு மதிப்பீடுகள்"
+
+#, fuzzy
+msgid "Covariance Estimates"
+msgstr "கோவாரன்ச் விகிதம்"
+
+msgid "Random Effects Estimates"
+msgstr "சீரற்ற விளைவுகள் மதிப்பீடுகள்"
+
+#, fuzzy
+msgid "Model fit failed with the following message: %1$s."
+msgstr "பின்வரும் பிழையுடன் %1$s சோதனை தோல்வியடைந்தது: %2$s"
+
 msgid "The model should contain at least one predictor or an intercept."
 msgstr "மாதிரியில் குறைந்தது ஒரு முன்கணிப்பு அல்லது இடைமறிப்பு இருக்க வேண்டும்."
 
@@ -1859,9 +1978,6 @@ msgstr "சராசரி மதிப்பீடுகள் (%s)"
 msgid "Estimated Weights"
 msgstr "மதிப்பிடப்பட்ட எடைகள்"
 
-msgid "Random Effects Estimates"
-msgstr "சீரற்ற விளைவுகள் மதிப்பீடுகள்"
-
 msgid "Heterogeneity Estimates(%s)"
 msgstr "பன்முகத்தன்மை மதிப்பீடுகள் (%s)"
 
@@ -1955,6 +2071,58 @@ msgstr ""
 msgid "Only the following one-sided p-value cutoffs were used: %s."
 msgstr "பின்வரும் ஒருதலைப்பட்ச பி-மதிப்பு வெட்டுக்கள் மட்டுமே பயன்படுத்தப்பட்டன: %s."
 
+#, fuzzy
+msgid "Estimating: %1$s"
+msgstr "மதிப்பீடுகள்"
+
+#, fuzzy
+msgid "Model Fit"
+msgstr "மாதிரி %i"
+
+#, fuzzy
+msgid "log Lik."
+msgstr "பதிவு லிக்."
+
+#, fuzzy
+msgid "%1$s fit failed with the following message %2$s."
+msgstr "பின்வரும் பிழையுடன் %1$s சோதனை தோல்வியடைந்தது: %2$s"
+
+#, fuzzy
+msgid "%1$s: %2$s"
+msgstr "%1$s (%2$s)"
+
+#, fuzzy
+msgid "Warning"
+msgstr "எச்சரிக்கை:"
+
+msgid "Path Diagram"
+msgstr ""
+
+#, fuzzy
+msgid "Syntax failed with the following message %1$s."
+msgstr "பின்வரும் பிழையுடன் %1$s சோதனை தோல்வியடைந்தது: %2$s"
+
+#, fuzzy
+msgid "Model fit failed with the following message %1$s."
+msgstr "பின்வரும் பிழையுடன் %1$s சோதனை தோல்வியடைந்தது: %2$s"
+
+msgid ""
+"Model visualization might not be possible for models with 'Replace "
+"constraints' option."
+msgstr ""
+
+#, fuzzy
+msgid "Model visualization failed with the following message %1$s."
+msgstr "பின்வரும் பிழையுடன் %1$s சோதனை தோல்வியடைந்தது: %2$s"
+
+#, fuzzy
+msgid "Coefficient Summary"
+msgstr "குணகங்கள்"
+
+#, fuzzy
+msgid "Computed Estimates Summary"
+msgstr "எளிய / உள்ளமைக்கப்பட்ட சுருக்கம்"
+
 msgid "Error: There were not enough adequately powered studies (k = %1$i)"
 msgstr "பிழை: போதுமான அளவு இயங்கும் ஆய்வுகள் இல்லை (k = %1$i)"
 
@@ -1963,9 +2131,6 @@ msgstr "குறிப்பு: %1$i நான் போதுமான அள
 
 msgid "Test of Effect"
 msgstr "விளைவு சோதனை"
-
-msgid "Regression Estimates"
-msgstr "பின்னடைவு மதிப்பீடுகள்"
 
 msgid "Multiplicative Heterogeneity Estimates"
 msgstr "பெருக்கல் பன்முகத்தன்மை மதிப்பீடுகள்"
@@ -2066,9 +2231,6 @@ msgstr[1] "மதிப்புகள் காணாமல் போனதா�
 #~ "மாதிரிகள் விவரக்குறிப்பு பிரிவில் (பூச்ய அல்லது மாற்று) ஒவ்வொரு அளவுருவுக்கும் முன் "
 #~ "விநியோகத்தைக் குறிப்பிடவும்."
 
-#~ msgid "Pooled Estimate"
-#~ msgstr "பூல் மதிப்பீடு"
-
 #~ msgid "Effect size (%s)"
 #~ msgstr "விளைவு அளவு (%s)"
 
@@ -2134,9 +2296,6 @@ msgstr[1] "மதிப்புகள் காணாமல் போனதா�
 
 #~ msgid "Model Estimates"
 #~ msgstr "மாதிரி மதிப்பீடுகள்"
-
-#~ msgid "Model %i"
-#~ msgstr "மாதிரி %i"
 
 #~ msgid ""
 #~ "Model %1$i does not exist. Select one of the models between 1 and %2$i."
@@ -2245,9 +2404,6 @@ msgstr[1] "மதிப்புகள் காணாமல் போனதா�
 
 #~ msgid "Estimated Marginal Means: Heterogeneity"
 #~ msgstr "மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகள்: பன்முகத்தன்மை"
-
-#~ msgid "Variable"
-#~ msgstr "மாறக்கூடிய"
 
 #~ msgid "Heterogeneity:"
 #~ msgstr "பன்முகத்தன்மை:"

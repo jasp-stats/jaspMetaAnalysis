@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
-"POT-Creation-Date: 2025-05-17 02:58\n"
+"POT-Creation-Date: 2025-06-07 03:01\n"
 "PO-Revision-Date: 2025-03-01 20:22+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -1448,6 +1448,126 @@ msgstr ""
 msgid "The %1$s fail-safe N calculation %2$sfailed with the following error:"
 msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
 
+msgid ""
+"The 'Correlation/Covariance Matrix' variable input contains the following "
+"variable that does not contain the variable name separator '%1$s': %2$s."
+msgstr ""
+
+msgid ""
+"The correlation matrix contains values outside the range of -1 and 1. Please "
+"check your input."
+msgstr ""
+
+msgid ""
+"The 'Means' variable input contains the following variable that is not "
+"specified in the 'Correlation/Covariance Matrix' variable input: %1$s."
+msgstr ""
+
+msgid "Available Variable Names"
+msgstr ""
+
+msgid "Descriptives"
+msgstr ""
+
+msgid "%1$s: %1$s Matrix"
+msgstr ""
+
+msgid "Variable"
+msgstr ""
+
+msgid "%1$s: Means"
+msgstr ""
+
+#, fuzzy
+msgid "Pooled %1$s Matrix"
+msgstr "モデル推定値"
+
+msgid ""
+"The pooled correlation/covariance matrix could not be computed. Consider "
+"verifying that all correlation/covariance matrix variables are correctly "
+"specified via 'Descriptives'."
+msgstr ""
+
+#, fuzzy
+msgid "Correlation"
+msgstr "自己相関"
+
+#, fuzzy
+msgid "Covariance"
+msgstr "共分散比"
+
+#, fuzzy
+msgid "Random Effect"
+msgstr "変量効果"
+
+#, fuzzy
+msgid "Random Effect Covariance"
+msgstr "変量効果の推定値"
+
+msgid "Pooled %1$s Matrix Parameters"
+msgstr ""
+
+msgid "Row"
+msgstr ""
+
+msgid "Column"
+msgstr ""
+
+#, fuzzy
+msgid "95%% CI"
+msgstr "%s%% CI"
+
+msgid "Computing additional fit measures: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid "Additional Fit Measures"
+msgstr "適合度指標"
+
+msgid "CLI"
+msgstr ""
+
+msgid "TLI"
+msgstr ""
+
+msgid "RMSEA"
+msgstr ""
+
+msgid "p(RMSEA < 0.05)"
+msgstr ""
+
+msgid "Pairwise Model Comparison"
+msgstr ""
+
+msgid "2ΔLL"
+msgstr ""
+
+msgid "Δ df"
+msgstr ""
+
+msgid "At least two models are required for pairwise model comparison."
+msgstr ""
+
+msgid ""
+"No pairwise model comparison with at least one degree of freedom difference "
+"available."
+msgstr ""
+
+#, fuzzy
+msgid "Regression Estimates"
+msgstr "PET-PEESE回帰推定値"
+
+#, fuzzy
+msgid "Covariance Estimates"
+msgstr "共分散比"
+
+msgid "Random Effects Estimates"
+msgstr "変量効果の推定値"
+
+#, fuzzy
+msgid "Model fit failed with the following message: %1$s."
+msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
+
 msgid "The model should contain at least one predictor or an intercept."
 msgstr ""
 "モデルには、少なくとも 1 つの予測変数または切片が含まれている必要があります."
@@ -1814,9 +1934,6 @@ msgstr "平均推定値(%s)"
 msgid "Estimated Weights"
 msgstr "推定ウェイト"
 
-msgid "Random Effects Estimates"
-msgstr "変量効果の推定値"
-
 msgid "Heterogeneity Estimates(%s)"
 msgstr "異質性の推定値(%s)"
 
@@ -1908,6 +2025,57 @@ msgstr ""
 msgid "Only the following one-sided p-value cutoffs were used: %s."
 msgstr "次の片側 p 値カットオフのみが使用されました: %s."
 
+#, fuzzy
+msgid "Estimating: %1$s"
+msgstr "推定値"
+
+#, fuzzy
+msgid "Model Fit"
+msgstr "モデル %i"
+
+msgid "log Lik."
+msgstr ""
+
+#, fuzzy
+msgid "%1$s fit failed with the following message %2$s."
+msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
+
+#, fuzzy
+msgid "%1$s: %2$s"
+msgstr "BF%1$s%2$s"
+
+#, fuzzy
+msgid "Warning"
+msgstr "警告:"
+
+msgid "Path Diagram"
+msgstr ""
+
+#, fuzzy
+msgid "Syntax failed with the following message %1$s."
+msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
+
+#, fuzzy
+msgid "Model fit failed with the following message %1$s."
+msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
+
+msgid ""
+"Model visualization might not be possible for models with 'Replace "
+"constraints' option."
+msgstr ""
+
+#, fuzzy
+msgid "Model visualization failed with the following message %1$s."
+msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
+
+#, fuzzy
+msgid "Coefficient Summary"
+msgstr "係数"
+
+#, fuzzy
+msgid "Computed Estimates Summary"
+msgstr "モデル推定値"
+
 msgid "Error: There were not enough adequately powered studies (k = %1$i)"
 msgstr "エラー: 十分な検出力のある研究がありませんでした(k = %1$i)"
 
@@ -1916,10 +2084,6 @@ msgstr "注: 十分に検出力のある研究が %1$i ありました"
 
 msgid "Test of Effect"
 msgstr "効果量の検定"
-
-#, fuzzy
-msgid "Regression Estimates"
-msgstr "PET-PEESE回帰推定値"
 
 msgid "Multiplicative Heterogeneity Estimates"
 msgstr "乗法異質性の推定値"
@@ -2003,10 +2167,6 @@ msgstr[0] "%i の観測値が欠損しているため削除されました。"
 #~ "モデル指定セクションで、各パラメータの事前分布を指定してください (null ま"
 #~ "たは対立)."
 
-#, fuzzy
-#~ msgid "Pooled Estimate"
-#~ msgstr "モデル推定値"
-
 #~ msgid "Effect size (%s)"
 #~ msgstr "効果量（%s）"
 
@@ -2061,9 +2221,6 @@ msgstr[0] "%i の観測値が欠損しているため削除されました。"
 
 #~ msgid "Model Estimates"
 #~ msgstr "モデル推定値"
-
-#~ msgid "Model %i"
-#~ msgstr "モデル %i"
 
 #~ msgid ""
 #~ "Model %1$i does not exist. Select one of the models between 1 and %2$i."

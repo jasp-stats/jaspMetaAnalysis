@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.3\n"
-"POT-Creation-Date: 2025-05-17 02:58\n"
+"POT-Creation-Date: 2025-06-07 03:01\n"
 "PO-Revision-Date: 2025-04-10 05:00+0000\n"
 "Last-Translator: MikeWinny <winny63@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/jasp/"
@@ -1354,6 +1354,120 @@ msgstr ""
 msgid "The %1$s fail-safe N calculation %2$sfailed with the following error:"
 msgstr ""
 
+msgid ""
+"The 'Correlation/Covariance Matrix' variable input contains the following "
+"variable that does not contain the variable name separator '%1$s': %2$s."
+msgstr ""
+
+msgid ""
+"The correlation matrix contains values outside the range of -1 and 1. Please "
+"check your input."
+msgstr ""
+
+msgid ""
+"The 'Means' variable input contains the following variable that is not "
+"specified in the 'Correlation/Covariance Matrix' variable input: %1$s."
+msgstr ""
+
+msgid "Available Variable Names"
+msgstr ""
+
+msgid "Descriptives"
+msgstr ""
+
+msgid "%1$s: %1$s Matrix"
+msgstr ""
+
+msgid "Variable"
+msgstr ""
+
+msgid "%1$s: Means"
+msgstr ""
+
+msgid "Pooled %1$s Matrix"
+msgstr ""
+
+msgid ""
+"The pooled correlation/covariance matrix could not be computed. Consider "
+"verifying that all correlation/covariance matrix variables are correctly "
+"specified via 'Descriptives'."
+msgstr ""
+
+#, fuzzy
+msgid "Correlation"
+msgstr "Информация"
+
+msgid "Covariance"
+msgstr ""
+
+#, fuzzy
+msgid "Random Effect"
+msgstr "Эффект"
+
+msgid "Random Effect Covariance"
+msgstr ""
+
+msgid "Pooled %1$s Matrix Parameters"
+msgstr ""
+
+msgid "Row"
+msgstr ""
+
+msgid "Column"
+msgstr ""
+
+#, fuzzy
+msgid "95%% CI"
+msgstr "%s%% ДИ"
+
+msgid "Computing additional fit measures: %1$s"
+msgstr ""
+
+msgid "Additional Fit Measures"
+msgstr ""
+
+msgid "CLI"
+msgstr ""
+
+msgid "TLI"
+msgstr ""
+
+msgid "RMSEA"
+msgstr ""
+
+msgid "p(RMSEA < 0.05)"
+msgstr ""
+
+msgid "Pairwise Model Comparison"
+msgstr ""
+
+msgid "2ΔLL"
+msgstr ""
+
+msgid "Δ df"
+msgstr ""
+
+msgid "At least two models are required for pairwise model comparison."
+msgstr ""
+
+msgid ""
+"No pairwise model comparison with at least one degree of freedom difference "
+"available."
+msgstr ""
+
+msgid "Regression Estimates"
+msgstr ""
+
+#, fuzzy
+msgid "Covariance Estimates"
+msgstr "Оценки Модели"
+
+msgid "Random Effects Estimates"
+msgstr ""
+
+msgid "Model fit failed with the following message: %1$s."
+msgstr ""
+
 msgid "The model should contain at least one predictor or an intercept."
 msgstr ""
 
@@ -1681,9 +1795,6 @@ msgstr ""
 msgid "Estimated Weights"
 msgstr ""
 
-msgid "Random Effects Estimates"
-msgstr ""
-
 msgid "Heterogeneity Estimates(%s)"
 msgstr ""
 
@@ -1761,6 +1872,51 @@ msgstr ""
 msgid "Only the following one-sided p-value cutoffs were used: %s."
 msgstr ""
 
+#, fuzzy
+msgid "Estimating: %1$s"
+msgstr "Оценки"
+
+#, fuzzy
+msgid "Model Fit"
+msgstr "Модель %i"
+
+msgid "log Lik."
+msgstr ""
+
+msgid "%1$s fit failed with the following message %2$s."
+msgstr ""
+
+msgid "%1$s: %2$s"
+msgstr ""
+
+#, fuzzy
+msgid "Warning"
+msgstr "Предупреждение:"
+
+msgid "Path Diagram"
+msgstr ""
+
+msgid "Syntax failed with the following message %1$s."
+msgstr ""
+
+msgid "Model fit failed with the following message %1$s."
+msgstr ""
+
+msgid ""
+"Model visualization might not be possible for models with 'Replace "
+"constraints' option."
+msgstr ""
+
+msgid "Model visualization failed with the following message %1$s."
+msgstr ""
+
+#, fuzzy
+msgid "Coefficient Summary"
+msgstr "Сводка по Модели"
+
+msgid "Computed Estimates Summary"
+msgstr ""
+
 msgid "Error: There were not enough adequately powered studies (k = %1$i)"
 msgstr ""
 
@@ -1768,9 +1924,6 @@ msgid "Note: There were %1$i adequately powered studies"
 msgstr ""
 
 msgid "Test of Effect"
-msgstr ""
-
-msgid "Regression Estimates"
 msgstr ""
 
 msgid "Multiplicative Heterogeneity Estimates"
@@ -1873,12 +2026,6 @@ msgstr[1] ""
 
 #~ msgid "Priors"
 #~ msgstr "Априорные распределения"
-
-#~ msgid "Model Estimates"
-#~ msgstr "Оценки Модели"
-
-#~ msgid "Model %i"
-#~ msgstr "Модель %i"
 
 #~ msgid ""
 #~ "Model %1$i does not exist. Select one of the models between 1 and %2$i."

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2025-05-17 02:58\n"
+"POT-Creation-Date: 2025-06-07 03:01\n"
 "PO-Revision-Date: 2022-08-29 00:27+0000\n"
 "Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
@@ -1430,6 +1430,125 @@ msgstr ""
 msgid "The %1$s fail-safe N calculation %2$sfailed with the following error:"
 msgstr ""
 
+msgid ""
+"The 'Correlation/Covariance Matrix' variable input contains the following "
+"variable that does not contain the variable name separator '%1$s': %2$s."
+msgstr ""
+
+msgid ""
+"The correlation matrix contains values outside the range of -1 and 1. Please "
+"check your input."
+msgstr ""
+
+msgid ""
+"The 'Means' variable input contains the following variable that is not "
+"specified in the 'Correlation/Covariance Matrix' variable input: %1$s."
+msgstr ""
+
+msgid "Available Variable Names"
+msgstr ""
+
+msgid "Descriptives"
+msgstr ""
+
+msgid "%1$s: %1$s Matrix"
+msgstr ""
+
+msgid "Variable"
+msgstr ""
+
+msgid "%1$s: Means"
+msgstr ""
+
+#, fuzzy
+msgid "Pooled %1$s Matrix"
+msgstr "Estimativas"
+
+msgid ""
+"The pooled correlation/covariance matrix could not be computed. Consider "
+"verifying that all correlation/covariance matrix variables are correctly "
+"specified via 'Descriptives'."
+msgstr ""
+
+#, fuzzy
+msgid "Correlation"
+msgstr "Covariâncias / correlações observadas"
+
+#, fuzzy
+msgid "Covariance"
+msgstr "Desvio"
+
+#, fuzzy
+msgid "Random Effect"
+msgstr "efeitos aleatórios da escala r"
+
+#, fuzzy
+msgid "Random Effect Covariance"
+msgstr "Modelo de efeitos aleatórios:"
+
+msgid "Pooled %1$s Matrix Parameters"
+msgstr ""
+
+msgid "Row"
+msgstr ""
+
+msgid "Column"
+msgstr ""
+
+#, fuzzy
+msgid "95%% CI"
+msgstr "%s%% IC"
+
+msgid "Computing additional fit measures: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid "Additional Fit Measures"
+msgstr "Medidas adicionais de ajuste"
+
+msgid "CLI"
+msgstr ""
+
+msgid "TLI"
+msgstr ""
+
+msgid "RMSEA"
+msgstr ""
+
+msgid "p(RMSEA < 0.05)"
+msgstr ""
+
+msgid "Pairwise Model Comparison"
+msgstr ""
+
+msgid "2ΔLL"
+msgstr ""
+
+msgid "Δ df"
+msgstr ""
+
+msgid "At least two models are required for pairwise model comparison."
+msgstr ""
+
+msgid ""
+"No pairwise model comparison with at least one degree of freedom difference "
+"available."
+msgstr ""
+
+#, fuzzy
+msgid "Regression Estimates"
+msgstr "Medidas adicionais de ajuste"
+
+#, fuzzy
+msgid "Covariance Estimates"
+msgstr "Estimativas"
+
+msgid "Random Effects Estimates"
+msgstr ""
+
+msgid "Model fit failed with the following message: %1$s."
+msgstr ""
+
 msgid "The model should contain at least one predictor or an intercept."
 msgstr ""
 
@@ -1774,9 +1893,6 @@ msgstr "Estimativas"
 msgid "Estimated Weights"
 msgstr "Estimativas"
 
-msgid "Random Effects Estimates"
-msgstr ""
-
 #, fuzzy
 msgid "Heterogeneity Estimates(%s)"
 msgstr "Testes de homogeneidade"
@@ -1856,6 +1972,52 @@ msgstr ""
 msgid "Only the following one-sided p-value cutoffs were used: %s."
 msgstr ""
 
+#, fuzzy
+msgid "Estimating: %1$s"
+msgstr "Estimativa"
+
+#, fuzzy
+msgid "Model Fit"
+msgstr "Modelo"
+
+msgid "log Lik."
+msgstr ""
+
+msgid "%1$s fit failed with the following message %2$s."
+msgstr ""
+
+msgid "%1$s: %2$s"
+msgstr ""
+
+#, fuzzy
+msgid "Warning"
+msgstr "Aviso:"
+
+msgid "Path Diagram"
+msgstr ""
+
+msgid "Syntax failed with the following message %1$s."
+msgstr ""
+
+msgid "Model fit failed with the following message %1$s."
+msgstr ""
+
+msgid ""
+"Model visualization might not be possible for models with 'Replace "
+"constraints' option."
+msgstr ""
+
+msgid "Model visualization failed with the following message %1$s."
+msgstr ""
+
+#, fuzzy
+msgid "Coefficient Summary"
+msgstr "Coeficientes"
+
+#, fuzzy
+msgid "Computed Estimates Summary"
+msgstr "Estimativas"
+
 msgid "Error: There were not enough adequately powered studies (k = %1$i)"
 msgstr ""
 
@@ -1865,10 +2027,6 @@ msgstr ""
 #, fuzzy
 msgid "Test of Effect"
 msgstr "Efeito"
-
-#, fuzzy
-msgid "Regression Estimates"
-msgstr "Medidas adicionais de ajuste"
 
 #, fuzzy
 msgid "Multiplicative Heterogeneity Estimates"
@@ -1942,10 +2100,6 @@ msgstr[1] "%i observações foram removidas devido a valores ausentes."
 #~ msgstr "Nome do modelo"
 
 #, fuzzy
-#~ msgid "Pooled Estimate"
-#~ msgstr "Estimativas"
-
-#, fuzzy
 #~ msgid "Effect size (%s)"
 #~ msgstr "Tamanho do efeito"
 
@@ -1994,14 +2148,6 @@ msgstr[1] "%i observações foram removidas devido a valores ausentes."
 #, fuzzy
 #~ msgid "Information"
 #~ msgstr "Informado"
-
-#, fuzzy
-#~ msgid "Model Estimates"
-#~ msgstr "Estimativas"
-
-#, fuzzy
-#~ msgid "Model %i"
-#~ msgstr "Modelo"
 
 #, fuzzy
 #~ msgid "%1$s Forest Plot"

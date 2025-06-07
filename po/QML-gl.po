@@ -5050,18 +5050,6 @@ msgstr ""
 "a heteroxeneidade baseadas en Bartoš et al. (2022)."
 
 msgctxt "BayesianBinomialMetaAnalysis|"
-msgid "Psychology"
-msgstr "Psicoloxía"
-
-msgctxt "BayesianBinomialMetaAnalysis|"
-msgid ""
-"Use default prior distributions developed for psychology based on Bartoš et "
-"al. (2022). This settings corresponds to the 'Default' setting."
-msgstr ""
-"Utilizar distribucións previas predeterminadas para psicoloxía baseadas en "
-"Bartoš et al. (2022). Esta configuración se corresponde coa 'Por defecto'."
-
-msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Medicine"
 msgstr "Medicina"
 
@@ -5351,18 +5339,6 @@ msgid ""
 msgstr ""
 "Utilizar distribucións previas predeterminadas para a magnitude do efecto e "
 "a heteroxeneidade baseadas en Bartoš et al. (2022)."
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Psychology"
-msgstr "Psicoloxía"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid ""
-"Use default prior distributions developed for psychology based on Bartoš et "
-"al. (2022). This settings corresponds to the 'Default' setting."
-msgstr ""
-"Utilizar distribucións previas predeterminadas para psicoloxía baseadas en "
-"Bartoš et al. (2022). Esta configuración se corresponde coa 'Por defecto'."
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Medicine"
@@ -7619,18 +7595,6 @@ msgstr ""
 "a heteroxeneidade baseadas en Bartoš et al. (2022)."
 
 msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Psychology"
-msgstr "Psicoloxía"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid ""
-"Use default prior distributions developed for psychology based on Bartoš et "
-"al. (2022). This settings corresponds to the 'Default' setting."
-msgstr ""
-"Utilizar distribucións previas predeterminadas para psicoloxía baseadas en "
-"Bartoš et al. (2022). Esta configuración se corresponde coa 'Por defecto'."
-
-msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Medicine"
 msgstr "Medicina"
 
@@ -7778,3 +7742,438 @@ msgstr ""
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Prior Distributions (Custom)"
 msgstr "Distribucións previas (Personalizado)"
+
+msgctxt "Description|"
+msgid "Meta-Analytic SEM"
+msgstr ""
+
+msgctxt "Description|"
+msgid "SEM-Based Meta-Analysis"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Correlation/Covariance Matrix"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid ""
+"Variables containing the correlations/covariances between the variables. The "
+"variable name must be in a form `x_y` where `x` and `y` corresponds to the "
+"variables between which the correlation/covariance is reported. The "
+"separator used in the variable names (defaults to `_`) can be changed via "
+"the `Variable name separator` option."
+msgstr ""
+
+#, fuzzy
+msgctxt "MetaAnalyticSem|"
+msgid "Sample Size"
+msgstr "Tamaño da mostra"
+
+msgctxt "MetaAnalyticSem|"
+msgid "Variable containing sample sizes for the studies"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Means"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid ""
+"Variables containing the means of the variables. The variable name must be "
+"`x` where `x` corresponds to the variable names in the correlation/"
+"covariance matrix input. This input is required only when meta-analytic sem "
+"with means is requested."
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Data Input Type"
+msgstr ""
+
+#, fuzzy
+msgctxt "MetaAnalyticSem|"
+msgid "Correlation"
+msgstr "Correlación"
+
+msgctxt "MetaAnalyticSem|"
+msgid "Select this option for a correlation input."
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Covariance"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Select this option for a covariance input."
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Variable name separator"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid ""
+"Separator used in the variable names in the correlation/covariance matrix "
+"input. The variable name must be in a form `x_y` where `x` and `y` "
+"corresponds to the variables between which the correlation/covariance is "
+"reported."
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "_"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "."
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "-"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid " "
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Available variable names"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid ""
+"Show a summary of the available variable names in the correlation/covariance "
+"matrix input."
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Descriptives"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Number of estimates"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid ""
+"Show a frequency table of the estimates in the correlation/covariance matrix "
+"input."
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Number of observations"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid ""
+"Show a frequency table of the observations in the correlation/covariance "
+"matrix input."
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Pooled correlation/covariance matrix"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid ""
+"Show the pooled correlation/covariance matrix. The pooled correlation/"
+"covariance matrix is from the first stage of two-stage meta-analytic SEM. "
+msgstr ""
+
+#, fuzzy
+msgctxt "MetaAnalyticSem|"
+msgid "Random effects"
+msgstr "Efectos aleatorios"
+
+#, fuzzy
+msgctxt "MetaAnalyticSem|"
+msgid "Diagonal"
+msgstr "Diagonal"
+
+msgctxt "MetaAnalyticSem|"
+msgid "Symmetric"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Zero"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Type of the random effects of the correlation or covariance vectors."
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Model 1"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Specify model using a lavaan style syntax."
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Model Settings"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Replace constraints"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Replace constraints in the model."
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Fix latent variance to 1"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid ""
+"Fix the variance of latent variables to 1. Only available for covariance "
+"input."
+msgstr ""
+
+#, fuzzy
+msgctxt "MetaAnalyticSem|"
+msgid "Random Effects"
+msgstr "Efectos aleatorios"
+
+msgctxt "MetaAnalyticSem|"
+msgid "Sigma"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Mu"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Type of the random effects of the mean vectors."
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Sigma - Mu"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Full"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid ""
+"Type of the random effects between the correlation/covariance vectors and "
+"the mean vectors."
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Additional fit measures"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Show a summary of the goodness-of-fit statistics."
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Pairwise model comparison"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Show a pairwise model comparison table."
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Model summary"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Show a summary of the model coefficients and computed estimates."
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Regression"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Show regression estimates (A-Matrix) in the model summary."
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Covariances"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Show covariance estimates (S-Matrix) in the model summary."
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Show random effects in the model summary."
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Show matrix indices"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Show matrix indices (rows/columns) in the model summary."
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysisPlot|"
+msgid "Path diagram"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysisPlot|"
+msgid "Show a path diagram of the model."
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysisPlot|"
+msgid "Layout"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysisPlot|"
+msgid "Tree"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysisPlot|"
+msgid "Circle"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysisPlot|"
+msgid "Spring"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysisPlot|"
+msgid "Tree2"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysisPlot|"
+msgid "Circle2"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysisPlot|"
+msgid "Layout of the path diagram."
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysisPlot|"
+msgid "Show parameter names"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysisPlot|"
+msgid "Show parameter names instead of the estimates in the path diagram."
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysisPlot|"
+msgid "Manifest node width"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysisPlot|"
+msgid "Width of manifest nodes."
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysisPlot|"
+msgid "Latent node width"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysisPlot|"
+msgid "Width of latent nodes."
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysisPlot|"
+msgid "Unit vector node width"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysisPlot|"
+msgid "Width of unit vector nodes."
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysisPlot|"
+msgid "Label size"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysisPlot|"
+msgid "Size of the labels."
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysisPlot|"
+msgid "Edge label size"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysisPlot|"
+msgid "Size of the edge labels."
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysisPlot|"
+msgid "Number of digits"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysisPlot|"
+msgid "Number of digits for rounding estimates."
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysis|"
+msgid "Model 1"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysis|"
+msgid "Specify model using a lavaan style syntax."
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysis|"
+msgid "Model Settings"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysis|"
+msgid "Replace constraints"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysis|"
+msgid "Replace constraints in the model."
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysis|"
+msgid "Fix latent variance to 1"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysis|"
+msgid "Fix the variance of latent variables to 1."
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysis|"
+msgid "Pairwise model comparison"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysis|"
+msgid "Show a pairwise model comparison table."
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysis|"
+msgid "Model summary"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysis|"
+msgid "Show a summary of the model coefficients and computed estimates."
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysis|"
+msgid "Confidence interval type"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysis|"
+msgid "Standard errors"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysis|"
+msgid "Likelihood based"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysis|"
+msgid "Method for computing confidence interval."
+msgstr ""
+
+#, fuzzy
+msgctxt "Upgrades|"
+msgid ""
+"Results of this analysis cannot be updated. The analysis was created with an "
+"older version of JASP and the analysis options are not longer compatible. "
+"Please, redo the analysis with the updated module or download the 0.19.3 "
+"version of JASP to rerun or edit the analysis."
+msgstr ""
+"Os resultados desta análise non poden actualizarse. A análise xerouse cunha "
+"versión antiga de JASP e as opcións da análise xa non son compatibles. Por "
+"favor, volve facer a análise co módulo actualizado, ou descarga a versión "
+"0.19.1 de JASP para volver executar ou editar a análise. {0.19.3 ?}"
