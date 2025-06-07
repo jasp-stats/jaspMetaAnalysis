@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2025-06-07 03:01\n"
-"PO-Revision-Date: 2025-05-24 21:09+0000\n"
+"PO-Revision-Date: 2025-06-08 22:01+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
@@ -1520,120 +1520,125 @@ msgid ""
 "The 'Correlation/Covariance Matrix' variable input contains the following "
 "variable that does not contain the variable name separator '%1$s': %2$s."
 msgstr ""
+"La entrada de la variable 'Matriz de Correlaciones/Covarianzas' contiene la "
+"siguiente variable que no tiene el separador de nombre de variables '%1$s': "
+"%2$s."
 
 msgid ""
 "The correlation matrix contains values outside the range of -1 and 1. Please "
 "check your input."
 msgstr ""
+"La matriz de correlaciones contiene valores fuera del rango entre -1 y 1. "
+"Por favor, compruebe su entrada."
 
 msgid ""
 "The 'Means' variable input contains the following variable that is not "
 "specified in the 'Correlation/Covariance Matrix' variable input: %1$s."
 msgstr ""
+"La entrada de variable 'Medias' contiene la siguiente variable que no está "
+"especificada en la entrada de variable 'Matriz de Correlaciones/Covarianzas':"
+" %1$s."
 
 msgid "Available Variable Names"
-msgstr ""
+msgstr "Nombres disponibles de variables"
 
 msgid "Descriptives"
-msgstr ""
+msgstr "Descriptivos"
 
 msgid "%1$s: %1$s Matrix"
-msgstr ""
+msgstr "%1$s: Matriz %1$s"
 
 msgid "Variable"
 msgstr "Variable"
 
 msgid "%1$s: Means"
-msgstr ""
+msgstr "%1$s: Medias"
 
-#, fuzzy
 msgid "Pooled %1$s Matrix"
-msgstr "Estimación combinada"
+msgstr "Matriz %1$s combinada"
 
 msgid ""
 "The pooled correlation/covariance matrix could not be computed. Consider "
 "verifying that all correlation/covariance matrix variables are correctly "
 "specified via 'Descriptives'."
 msgstr ""
+"La matriz combinada de correlaciones/covarianzas no se puede calcular. "
+"Plantéese verificar que todas las variables de la matriz de correlaciones/"
+"covarianzas están correctamente especificadas mediante 'Descriptivos'."
 
-#, fuzzy
 msgid "Correlation"
-msgstr "Autocorrelación"
+msgstr "Correlación"
 
-#, fuzzy
 msgid "Covariance"
-msgstr "Ratio de covarianza"
+msgstr "Covarianza"
 
-#, fuzzy
 msgid "Random Effect"
-msgstr "Efectos aleatorios"
+msgstr "Efecto aleatorio"
 
-#, fuzzy
 msgid "Random Effect Covariance"
-msgstr "Estimaciones de los Efectos Aleatorios"
+msgstr "Covarianza del efecto aleatorio"
 
 msgid "Pooled %1$s Matrix Parameters"
-msgstr ""
+msgstr "Parámetros de la matriz %1$s combinada"
 
 msgid "Row"
-msgstr ""
+msgstr "Fila"
 
 msgid "Column"
-msgstr ""
+msgstr "Columna"
 
-#, fuzzy
 msgid "95%% CI"
-msgstr "IC del %s%%"
+msgstr "IC del 95%%"
 
 msgid "Computing additional fit measures: %1$s"
-msgstr ""
+msgstr "Calculando medidas adicionales de ajuste: %1$s"
 
-#, fuzzy
 msgid "Additional Fit Measures"
-msgstr "Medidas de ajuste"
+msgstr "Medidas de ajuste adicionales"
 
 msgid "CLI"
-msgstr ""
+msgstr "ICL"
 
 msgid "TLI"
-msgstr ""
+msgstr "ITL (TLI)"
 
 msgid "RMSEA"
-msgstr ""
+msgstr "REACM (RMSEA)"
 
 msgid "p(RMSEA < 0.05)"
-msgstr ""
+msgstr "p(REACM < 0.05)"
 
 msgid "Pairwise Model Comparison"
-msgstr ""
+msgstr "Comparación de modelos por pares"
 
 msgid "2ΔLL"
-msgstr ""
+msgstr "2ΔLL"
 
 msgid "Δ df"
-msgstr ""
+msgstr "Δ gl"
 
 msgid "At least two models are required for pairwise model comparison."
 msgstr ""
+"Al menos se requieren dos modelos para la comparación de modelos por pares."
 
 msgid ""
 "No pairwise model comparison with at least one degree of freedom difference "
 "available."
 msgstr ""
+"Ninguna comparación de modelos por pares, sin disponer al menos de una "
+"diferencia de un grado de libertad."
 
 msgid "Regression Estimates"
 msgstr "Estimaciones de la Regresión"
 
-#, fuzzy
 msgid "Covariance Estimates"
-msgstr "Ratio de covarianza"
+msgstr "Estimaciones de covarianzas"
 
 msgid "Random Effects Estimates"
 msgstr "Estimaciones de los Efectos Aleatorios"
 
-#, fuzzy
 msgid "Model fit failed with the following message: %1$s."
-msgstr "El ajuste del modelo dió como resultado el siguiente aviso: %1$s"
+msgstr "El ajuste del modelo falló con el siguiente mensaje: %1$s."
 
 msgid "The model should contain at least one predictor or an intercept."
 msgstr "El modelo debe tener, al menos, un predictor o una constante."
@@ -2087,57 +2092,48 @@ msgid "Only the following one-sided p-value cutoffs were used: %s."
 msgstr ""
 "Solo se utilizaron los siguientes puntos de corte del valor p unilateral: %s."
 
-#, fuzzy
 msgid "Estimating: %1$s"
-msgstr "Estimaciones"
+msgstr "Estimando: %1$s"
 
-#, fuzzy
 msgid "Model Fit"
-msgstr "Modelo %i"
+msgstr "Ajuste del Modelo"
 
-#, fuzzy
 msgid "log Lik."
 msgstr "Log Verosim."
 
-#, fuzzy
 msgid "%1$s fit failed with the following message %2$s."
-msgstr "El contraste %1$s fracasó con el siguiente fallo: %2$s"
+msgstr "El ajuste %1$s fracasó con el siguiente mensaje: %2$s."
 
-#, fuzzy
 msgid "%1$s: %2$s"
-msgstr "%1$s (%2$s)"
+msgstr "%1$s: %2$s"
 
-#, fuzzy
 msgid "Warning"
-msgstr "Advertencia:"
+msgstr "Advertencia"
 
 msgid "Path Diagram"
-msgstr ""
+msgstr "Diagrama de Ruta"
 
-#, fuzzy
 msgid "Syntax failed with the following message %1$s."
-msgstr "El contraste %1$s fracasó con el siguiente fallo: %2$s"
+msgstr "La sintaxis falló con el siguiente mensaje: %1$s."
 
-#, fuzzy
 msgid "Model fit failed with the following message %1$s."
-msgstr "El ajuste del modelo dió como resultado el siguiente aviso: %1$s"
+msgstr "El ajuste del modelo falló con el siguiente mensaje: %1$s."
 
 msgid ""
 "Model visualization might not be possible for models with 'Replace "
 "constraints' option."
 msgstr ""
+"La visualización de modelos podría no ser posible para modelos con la opción "
+"'Sustituir restricciones'."
 
-#, fuzzy
 msgid "Model visualization failed with the following message %1$s."
-msgstr "El contraste %1$s fracasó con el siguiente fallo: %2$s"
+msgstr "La visualización del modelo falló con el siguiente mensaje: %1$s."
 
-#, fuzzy
 msgid "Coefficient Summary"
-msgstr "Coeficientes"
+msgstr "Resumen de coeficientes"
 
-#, fuzzy
 msgid "Computed Estimates Summary"
-msgstr "Resumen Simple / Anidado"
+msgstr "Resumen de estimaciones calculadas"
 
 msgid "Error: There were not enough adequately powered studies (k = %1$i)"
 msgstr ""
