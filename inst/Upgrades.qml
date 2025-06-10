@@ -338,18 +338,6 @@ Upgrades
 			msg: qsTr("Results of this analysis cannot be updated. The analysis was created with an older version of JASP and the analysis options are not longer compatible. Please, redo the analysis with the updated module or download the 0.19.3 version of JASP to rerun or edit the analysis.")
 		}
 	}
-
-	Upgrade
-	{
-		functionName:	"BayesianMetaAnalysis"
-		fromVersion:	"0.19.3"
-		toVersion:		"0.95.0"
-
-		ChangeIncompatible
-		{
-			msg: qsTr("Results of this analysis cannot be updated. The analysis was created with an older version of JASP and the analysis options are not longer compatible. Please, redo the analysis with the updated module or download the 0.19.3 version of JASP to rerun or edit the analysis.")
-		}
-	}
 }
 
 
