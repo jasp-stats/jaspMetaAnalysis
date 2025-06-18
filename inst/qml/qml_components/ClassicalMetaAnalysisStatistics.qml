@@ -167,7 +167,7 @@ Section
 					{ label: qsTr("SMD to Cohen's U₁")					, value: "smdToCohensU1"				},  // transf.dtou1
 					{ label: qsTr("SMD to Cohen's U₂")					, value: "smdToCohensU2"				},  // transf.dtou2
 					{ label: qsTr("SMD to Cohen's U₃")					, value: "smdToCohensU3"				},  // transf.dtou3
-					{ label: qsTr("SMD to CLES, Pr(supperiority)")		, value: "smdToCles"					},  // transf.dtocles
+					{ label: qsTr("SMD to CLES, Pr(superiority)")		, value: "smdToCles"					},  // transf.dtocles
 				]
 		}
 	}
