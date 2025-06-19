@@ -9,7 +9,7 @@ Description
 	requiresData:	true
 	preloadData:	true
 	icon:			"meta-analysis.svg"
-	version			: "0.20.0"
+	version			: "0.95.0"
 	author:			"JASP Team"
 	maintainer:		"JASP Team <info@jasp-stats.org>"
 	website:		"jasp-stats.org"
