@@ -3940,10 +3940,6 @@ msgid "SMD to Cohen's U₃"
 msgstr ""
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
-msgid "SMD to CLES, Pr(supperiority)"
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Include fit statistics for the model, such as AIC and BIC."
 msgstr ""
 
@@ -7509,4 +7505,8 @@ msgid ""
 "older version of JASP and the analysis options are not longer compatible. "
 "Please, redo the analysis with the updated module or download the 0.19.3 "
 "version of JASP to rerun or edit the analysis."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "SMD to CLES, Pr(superiority)"
 msgstr ""
