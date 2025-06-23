@@ -351,6 +351,7 @@ Section
 					}
 					min: 				0
 					inclusive: 			JASP.None
+					decimals:			5
 				}
 			}
 
