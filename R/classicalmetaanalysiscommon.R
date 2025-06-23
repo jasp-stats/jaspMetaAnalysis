@@ -622,7 +622,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
         ))
 
         # deal with a single component (not a list)
-        if (dfProfile[["comps"]] == 1) {
+        if (!jaspBase::isTryError(dfProfile) && dfProfile[["comps"]] == 1) {
           dfProfile <- list(dfProfile)
           dfProfile[["comps"]] <- 1
         }
