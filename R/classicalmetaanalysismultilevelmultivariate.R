@@ -353,7 +353,13 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
     # try cleaning the error message before returning
     if (jaspBase::isTryError(vMatrix)) {
-      vMatrix <- gsub("'rvars'",  "'Correlation Matrix'", vMatrix)
+
+      if (grepl("(max(k.cluster) > length(rvars))", vMatrix, fixed = TRUE))
+        .quitAnalysis(gettext("The Variance-Covariance Matrix could not be computed: There must be as many 'Correlation Matrix' entries as is the number of estimates within the largest 'Cluster'."))
+
+      vMatrix <- gsub("rvars",     "Correlation Matrix", vMatrix)
+      vMatrix <- gsub("k.cluster", "Numer of Clusters",  vMatrix)
+
       .quitAnalysis(gettextf("Error computing the variance-covariance matrix: %1$s", vMatrix))
     }
 
