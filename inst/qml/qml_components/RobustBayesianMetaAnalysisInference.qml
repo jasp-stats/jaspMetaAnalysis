@@ -58,7 +58,7 @@ Section
 			name:		"heterogeneityI2"
 			checked:	false
 			visible:	analysisType === "RoBMA" || analysisType === "NoBMA"
-			info: qsTr("Include I², the percentage of total variation across studies due to heterogeneity. Unvailable when performing binomial meta-analysis.")
+			info: qsTr("Include I², the percentage of total variation across studies due to heterogeneity. Unavailable when performing binomial meta-analysis.")
 		}
 
 		CheckBox
@@ -67,7 +67,7 @@ Section
 			name:		"heterogeneityH2"
 			checked:	false
 			visible:	analysisType === "RoBMA" || analysisType === "NoBMA"
-			info: qsTr("Include H², an index indicating the ratio of total variability to sampling variability. Unvailable when performing binomial meta-analysis.")
+			info: qsTr("Include H², an index indicating the ratio of total variability to sampling variability. Unavailable when performing binomial meta-analysis.")
 		}
 	}
 

@@ -75,7 +75,7 @@ Section
 		title:			qsTr("Heterogeneity model")
 		visible:		analysisType === "metaAnalysis"
 		columns:		2
-		info: qsTr("Specify the heterogeneity model. Unvailable when performing multilevel/multivariate meta-analysis.")
+		info: qsTr("Specify the heterogeneity model. Unavailable when performing multilevel/multivariate meta-analysis.")
 
 		VariablesForm
 		{
