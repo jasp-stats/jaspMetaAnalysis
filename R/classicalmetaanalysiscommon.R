@@ -743,12 +743,19 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     # additional custom test
     if (options[["addOmnibusModeratorTestEffectSizeCoefficients"]]) {
-      tests[["moderationEffect2"]] <- .maSafeRbind(lapply(fit, .maRowModerationTest, options = options, parameter = "effectSize", coefficientsTest = TRUE))
+
+      tempModerationEffect2 <- lapply(fit, .maRowModerationTest, options = options, parameter = "effectSize", coefficientsTest = TRUE)
+      tests[["moderationEffect2"]] <- .maSafeRbind(tempModerationEffect2)
+
       if (jaspBase::isTryError(tests[["moderationEffect2"]])) {
         testsTable$setError(tests[["moderationEffect2"]])
         return()
       }
-      testsTable$addFootnote(attr(tests[["moderationEffect2"]], "footnote"))
+
+      # add footnotes
+      tempFootnotes <- unique(lapply(tempModerationEffect2, attr, which = "footnote"))
+      for (i in seq_along(tempFootnotes))
+        testsTable$addFootnote(tempFootnotes[[i]])
     }
   }
 
@@ -759,12 +766,20 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     # additional custom test
     if (options[["addOmnibusModeratorTestHeterogeneityCoefficients"]]) {
-      tests[["moderationHeterogeneity2"]] <- .maSafeRbind(lapply(fit, .maRowModerationTest, options = options, parameter = "heterogeneity", coefficientsTest = TRUE))
+
+      tempModerationHeterogeneity2 <- lapply(fit, .maRowModerationTest, options = options, parameter = "heterogeneity", coefficientsTest = TRUE)
+      tests[["moderationHeterogeneity2"]] <- .maSafeRbind(tempModerationHeterogeneity2)
+
       if (jaspBase::isTryError(tests[["moderationHeterogeneity2"]])) {
         testsTable$setError(tests[["moderationHeterogeneity2"]])
         return()
       }
-      testsTable$addFootnote(attr(tests[["moderationHeterogeneity2"]], "footnote"))
+
+      # add footnotes
+      tempFootnotes <- unique(lapply(tempModerationHeterogeneity2, attr, which = "footnote"))
+      for (i in seq_along(tempFootnotes))
+        testsTable$addFootnote(tempFootnotes[[i]])
+
     }
   }
 
