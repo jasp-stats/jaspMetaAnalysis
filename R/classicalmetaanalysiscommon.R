@@ -292,6 +292,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
       clubSandwich = options[["clusteringUseClubSandwich"]],
       adjust       = options[["clusteringSmallSampleCorrection"]]
     ))
+  } else if (options[["clustering"]] != "" && jaspBase::isTryError(fit)) {
+    fitClustered <- fit
   } else {
     fitClustered <- NULL
   }
