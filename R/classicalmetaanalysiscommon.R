@@ -1912,7 +1912,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   if (!is.null(jaspResults[["baujatPlot"]]))
     return()
 
-  fit <- .maExtractFit(jaspResults, options)
+  fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
 
   # stop on error
   if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) || !is.null(.maCheckIsPossibleOptions(options)))
@@ -1957,10 +1957,6 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   # error handling
   if (.maIsMetaregressionHeterogeneity(options)) {
     baujatPlot$setError(gettext("Baujat plot is not available for models that contain meta-regression on heterogeneity."))
-    return(baujatPlot)
-  }
-  if (.maIsClustered(options)) {
-    baujatPlot$setError(gettext("Baujat plot is not available for models with clustering."))
     return(baujatPlot)
   }
   if (jaspBase::isTryError(dfBaujat)) {
@@ -2012,7 +2008,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   if (!is.null(jaspResults[["residualFunnelPlot"]]))
     return()
 
-  fit <- .maExtractFit(jaspResults, options)
+  fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
 
   # stop on error
   if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) || !is.null(.maCheckIsPossibleOptions(options)))
