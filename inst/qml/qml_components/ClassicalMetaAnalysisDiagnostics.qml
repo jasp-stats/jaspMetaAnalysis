@@ -54,7 +54,7 @@ Section
 			{
 				name:		"diagnosticsCasewiseDiagnostics"
 				text:		qsTr("Casewise diagnostics")
-				info: qsTr("Include casewise diagnostics to assess the influence of individual studies on the meta-analysis results.")
+				info: qsTr("Include casewise diagnostics to assess the influence of individual studies on the meta-analysis results. Note that diagnostics are always based on the non-clustered model.")
 
 				CheckBox
 				{
@@ -122,14 +122,14 @@ Section
 				name:		"diagnosticsPlotsBaujat"
 				text:		qsTr("Baujat")
 				visible:	analysisType === "metaAnalysis"
-				info: qsTr("Include a Baujat plot to detect studies contributing to heterogeneity and overall effect size. Unvailable when performing multilevel/multivariate meta-analysis.")
+				info: qsTr("Include a Baujat plot to detect studies contributing to heterogeneity and overall effect size. Unvailable when performing multilevel/multivariate meta-analysis. Note that Baujat plot is always based on the non-clustered model.")
 			}
 
 			CheckBox
 			{
 				name:		"diagnosticsResidualFunnel"
 				text:		qsTr("Residual funnel")
-				info: qsTr("Include a residual funnel plot.")
+				info: qsTr("Include a residual funnel plot. Note that residual funnel plot is always based on the non-clustered model.")
 			}
 		}
 	}

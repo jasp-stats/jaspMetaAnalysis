@@ -666,7 +666,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     jaspResults[["baujatResults"]] <- baujatResults
 
 
-    fit <- .maExtractFit(jaspResults, options)
+    fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
     out <- list()
 
     for (i in seq_along(fit)) {
