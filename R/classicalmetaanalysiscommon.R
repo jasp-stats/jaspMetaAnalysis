@@ -4186,7 +4186,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 .maRowHeterogeneityTest               <- function(fit, options) {
 
   # handle missing subfits
-  if (jaspBase::isTryError(fit)) {
+  if (jaspBase::isTryError(fit) || (!is.null(fit[["QE"]]) && is.na(fit[["QE"]]))) {
     return(data.frame(
       subgroup = attr(fit, "subgroup"),
       test     = if (.maIsMetaregression(options)) gettext("Residual heterogeneity") else gettext("Heterogeneity")
