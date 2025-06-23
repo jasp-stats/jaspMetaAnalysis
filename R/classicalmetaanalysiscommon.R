@@ -3987,7 +3987,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     "smdToCohensU1"                  = gettext("SMD to Cohen's U₁"),
     "smdToCohensU2"                  = gettext("SMD to Cohen's U₂"),
     "smdToCohensU3"                  = gettext("SMD to Cohen's U₃"),
-    "smdToCles"                      = gettext("SMD to CLES, Pr(supperiority)")
+    "smdToCles"                      = gettext("SMD to CLES, Pr(superiority)")
   ))
 }
 .maGetOptionsNamePValueAdjustment         <- function(pValueAdjustment) {
