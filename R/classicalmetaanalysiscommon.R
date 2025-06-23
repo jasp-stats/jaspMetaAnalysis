@@ -3293,9 +3293,11 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     )
   }
 
-  bubblePlot <- bubblePlot + do.call(jaspGraphs::geom_point, geomCall) +
-    ggplot2::scale_size(range = c(1.5, 10) * options[["bubblePlotBubblesRelativeSize"]])
-  yRange     <- range(c(yRange, dfStudies[["effectSize"]]))
+  if (nrow(dfStudies) > 0) {
+    bubblePlot <- bubblePlot + do.call(jaspGraphs::geom_point, geomCall) +
+      ggplot2::scale_size(range = c(1.5, 10) * options[["bubblePlotBubblesRelativeSize"]])
+    yRange     <- range(c(yRange, dfStudies[["effectSize"]]))
+  }
 
   # add color palette
   bubblePlot <- bubblePlot +
@@ -4693,7 +4695,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   if (length(variables) == 1) {
     df[[mergedName]] <- factor(
       df[,variables],
-      levels = unique(df[,variables])
+      levels = if (is.null(levels(df[,variables]))) unique(df[,variables]) else levels(df[,variables])
     )
   } else if (length(variables) > 1) {
     df[[mergedName]] <- factor(
@@ -4840,12 +4842,15 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     tempUnique <- variablesInformation[[sapply(variablesInformation, function(x) x[["variable"]]) == variablesContinuous[i]]]
 
+    # cut into the three levels
     df[[variablesContinuous[i]]] <- cut(
       df[[variablesContinuous[i]]],
       breaks = c(-Inf, mean(tempUnique[["levels"]][1:2]), mean(tempUnique[["levels"]][2:3]), Inf),
       labels = c(paste0("Mean - ", options[["bubblePlotSdFactorCovariates"]], "SD"), "Mean", paste0("Mean + ", options[["bubblePlotSdFactorCovariates"]], "SD"))
     )
 
+    # ensure that all levels are present (get dropped if the interval is empty)
+    levels(df[[variablesContinuous[i]]]) <- c(paste0("Mean - ", options[["bubblePlotSdFactorCovariates"]], "SD"), "Mean", paste0("Mean + ", options[["bubblePlotSdFactorCovariates"]], "SD"))
   }
 
   return(df)
