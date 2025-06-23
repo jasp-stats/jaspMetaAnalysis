@@ -4198,7 +4198,14 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   }
 
   # pooled effect size
-  predictedEffect <- .maComputePooledEffectPlot(fit, options)
+  predictedEffect <- try(.maComputePooledEffectPlot(fit, options))
+
+  if (jaspBase::isTryError(predictedEffect))
+    return(data.frame(
+      subgroup = attr(fit, "subgroup"),
+      test     = gettext("Pooled effect"),
+      stat     = gettext("The pooled effect size could not be calculated.")
+    ))
 
   row <- data.frame(
     subgroup = attr(fit, "subgroup"),
@@ -4305,7 +4312,14 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   }
 
   # pooled effect size
-  row          <- .maComputePooledEffect(fit, options)
+  row <- try(.maComputePooledEffect(fit, options))
+
+  if (jaspBase::isTryError(row)) {
+    return(data.frame(
+      par     = gettext("Pooled effect"),
+      subgroup = attr(fit, "subgroup")
+    ))
+  }
 
   if (options[["predictionIntervals"]] && .mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
     row <- do.call(rbind.data.frame, row)
