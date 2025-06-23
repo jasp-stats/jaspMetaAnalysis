@@ -952,13 +952,13 @@
       with(dfForestPrediction[i,], .maMakeDiamondDataFrame(est = pred, lCi = pi.lb, uCi = pi.ub, row = y, id = id))
     }))
 
-    dfForestPrediction <- merge(dfForestPrediction, dfForest[,!colnames(dfForest) %in% c("effectSize", "standardError", "weights", "lCi", "uCi", "y")], by = "id")
+    dfForestPrediction <- merge(dfForestPrediction, dfForest[,!colnames(dfForest) %in% c("effectSize", "standardError", "weights", "lCi", "uCi", "y"),drop=FALSE], by = "id")
 
     # transform effect size when requested
     if (options[["transformEffectSize"]] != "none")
-      dfForestPrediction[,"xPrediction"] <- do.call(
+      dfForestPrediction[,"x"] <- do.call(
         .maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]),
-        list(dfForestPrediction[,"xPrediction"]))
+        list(dfForestPrediction[,"x"]))
 
   } else {
     dfForestPrediction <- NULL

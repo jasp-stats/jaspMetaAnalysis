@@ -292,6 +292,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
       clubSandwich = options[["clusteringUseClubSandwich"]],
       adjust       = options[["clusteringSmallSampleCorrection"]]
     ))
+  } else if (options[["clustering"]] != "" && jaspBase::isTryError(fit)) {
+    fitClustered <- fit
   } else {
     fitClustered <- NULL
   }
@@ -664,7 +666,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     jaspResults[["baujatResults"]] <- baujatResults
 
 
-    fit <- .maExtractFit(jaspResults, options)
+    fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
     out <- list()
 
     for (i in seq_along(fit)) {
@@ -1910,7 +1912,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   if (!is.null(jaspResults[["baujatPlot"]]))
     return()
 
-  fit <- .maExtractFit(jaspResults, options)
+  fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
 
   # stop on error
   if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) || !is.null(.maCheckIsPossibleOptions(options)))
@@ -1955,10 +1957,6 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   # error handling
   if (.maIsMetaregressionHeterogeneity(options)) {
     baujatPlot$setError(gettext("Baujat plot is not available for models that contain meta-regression on heterogeneity."))
-    return(baujatPlot)
-  }
-  if (.maIsClustered(options)) {
-    baujatPlot$setError(gettext("Baujat plot is not available for models with clustering."))
     return(baujatPlot)
   }
   if (jaspBase::isTryError(dfBaujat)) {
@@ -2010,7 +2008,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   if (!is.null(jaspResults[["residualFunnelPlot"]]))
     return()
 
-  fit <- .maExtractFit(jaspResults, options)
+  fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
 
   # stop on error
   if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) || !is.null(.maCheckIsPossibleOptions(options)))
@@ -3291,9 +3289,11 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     )
   }
 
-  bubblePlot <- bubblePlot + do.call(jaspGraphs::geom_point, geomCall) +
-    ggplot2::scale_size(range = c(1.5, 10) * options[["bubblePlotBubblesRelativeSize"]])
-  yRange     <- range(c(yRange, dfStudies[["effectSize"]]))
+  if (nrow(dfStudies) > 0) {
+    bubblePlot <- bubblePlot + do.call(jaspGraphs::geom_point, geomCall) +
+      ggplot2::scale_size(range = c(1.5, 10) * options[["bubblePlotBubblesRelativeSize"]])
+    yRange     <- range(c(yRange, dfStudies[["effectSize"]]))
+  }
 
   # add color palette
   bubblePlot <- bubblePlot +
@@ -3987,7 +3987,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     "smdToCohensU1"                  = gettext("SMD to Cohen's U₁"),
     "smdToCohensU2"                  = gettext("SMD to Cohen's U₂"),
     "smdToCohensU3"                  = gettext("SMD to Cohen's U₃"),
-    "smdToCles"                      = gettext("SMD to CLES, Pr(supperiority)")
+    "smdToCles"                      = gettext("SMD to CLES, Pr(superiority)")
   ))
 }
 .maGetOptionsNamePValueAdjustment         <- function(pValueAdjustment) {
@@ -4691,7 +4691,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   if (length(variables) == 1) {
     df[[mergedName]] <- factor(
       df[,variables],
-      levels = unique(df[,variables])
+      levels = if (is.null(levels(df[,variables]))) unique(df[,variables]) else levels(df[,variables])
     )
   } else if (length(variables) > 1) {
     df[[mergedName]] <- factor(
@@ -4838,12 +4838,15 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     tempUnique <- variablesInformation[[sapply(variablesInformation, function(x) x[["variable"]]) == variablesContinuous[i]]]
 
+    # cut into the three levels
     df[[variablesContinuous[i]]] <- cut(
       df[[variablesContinuous[i]]],
       breaks = c(-Inf, mean(tempUnique[["levels"]][1:2]), mean(tempUnique[["levels"]][2:3]), Inf),
       labels = c(paste0("Mean - ", options[["bubblePlotSdFactorCovariates"]], "SD"), "Mean", paste0("Mean + ", options[["bubblePlotSdFactorCovariates"]], "SD"))
     )
 
+    # ensure that all levels are present (get dropped if the interval is empty)
+    levels(df[[variablesContinuous[i]]]) <- c(paste0("Mean - ", options[["bubblePlotSdFactorCovariates"]], "SD"), "Mean", paste0("Mean + ", options[["bubblePlotSdFactorCovariates"]], "SD"))
   }
 
   return(df)
@@ -5043,6 +5046,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     return(gettext("The cluster-robust standard errors could not be computed. Please, consider modifying the clustering settings in the 'Advanced' section."))
   if (grepl("Fewer than two estimates", message))
     return(gettext("Fewer than two estimates."))
+  if (grepl("Must specify the 'weights' argument when method=", message))
+    return(gettext("The selected 'Method' requires specification of the 'Weights' option in the 'Advanced' section."))
 
   return(message)
 }
