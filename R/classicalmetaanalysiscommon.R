@@ -5043,6 +5043,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     return(gettext("The cluster-robust standard errors could not be computed. Please, consider modifying the clustering settings in the 'Advanced' section."))
   if (grepl("Fewer than two estimates", message))
     return(gettext("Fewer than two estimates."))
+  if (grepl("Must specify the 'weights' argument when method=", message))
+    return(gettext("The selected 'Method' requires specification of the 'Weights' option in the 'Advanced' section."))
 
   return(message)
 }
