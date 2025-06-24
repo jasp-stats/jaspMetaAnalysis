@@ -160,7 +160,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
   } else {
 
-    splitLevels <- unique(dataset[[options[["split"]]]])
+    splitLevels <- as.character(unique(dataset[[options[["split"]]]]))
     fits <- lapply(splitLevels, function(splitLevel) {
       if (jaspBase::isTryError(jaspResults[["fitState"]]$object[[splitLevel]])) {
         return(jaspResults[["fitState"]]$object[[splitLevel]])
@@ -1030,6 +1030,8 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 .fpMetaforTranslateErrorMessage <- function(fit) {
   if (grepl("did not converge", fit))
     return(gettext("The meta-analytic model did not converge. Try modifying the 'Method' option."))
+  else if (grepl("Stopped because k = 1", fit))
+    return(gettext("The method is not available with only one observation."))
   else
     return(fit)
 }
