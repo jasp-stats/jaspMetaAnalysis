@@ -143,7 +143,7 @@ Section
 				name:			"estimatedMarginalMeansHeterogeneitySelectedVariables"
 				title:			qsTr("Selected variables")
 				allowTypeChange:false
-				info: qsTr("Variables selected for computing estimated marginal means in the heterogeneity model. Unvailable when performing multilevel/multivariate meta-analysis.")
+				info: qsTr("Variables selected for computing estimated marginal means in the heterogeneity model. Unavailable when performing multilevel/multivariate meta-analysis.")
 			}
 		}
 

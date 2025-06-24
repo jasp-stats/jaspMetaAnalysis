@@ -33,7 +33,7 @@ Section
 		columns:	2
 		enabled:	method.value != "fixedEffects" && method.value != "equalEffects"
 		visible:	analysisType === "metaAnalysis"
-		info: qsTr("Summarize the meta-analytic between-study heterogeneity. Unvailable when performing multilevel/multivariate meta-analysis.")
+		info: qsTr("Summarize the meta-analytic between-study heterogeneity. Unavailable when performing multilevel/multivariate meta-analysis.")
 
 		CheckBox
 		{

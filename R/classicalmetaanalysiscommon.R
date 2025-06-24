@@ -622,7 +622,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
         ))
 
         # deal with a single component (not a list)
-        if (dfProfile[["comps"]] == 1) {
+        if (!jaspBase::isTryError(dfProfile) && dfProfile[["comps"]] == 1) {
           dfProfile <- list(dfProfile)
           dfProfile[["comps"]] <- 1
         }
@@ -743,12 +743,19 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     # additional custom test
     if (options[["addOmnibusModeratorTestEffectSizeCoefficients"]]) {
-      tests[["moderationEffect2"]] <- .maSafeRbind(lapply(fit, .maRowModerationTest, options = options, parameter = "effectSize", coefficientsTest = TRUE))
+
+      tempModerationEffect2 <- lapply(fit, .maRowModerationTest, options = options, parameter = "effectSize", coefficientsTest = TRUE)
+      tests[["moderationEffect2"]] <- .maSafeRbind(tempModerationEffect2)
+
       if (jaspBase::isTryError(tests[["moderationEffect2"]])) {
         testsTable$setError(tests[["moderationEffect2"]])
         return()
       }
-      testsTable$addFootnote(attr(tests[["moderationEffect2"]], "footnote"))
+
+      # add footnotes
+      tempFootnotes <- unique(lapply(tempModerationEffect2, attr, which = "footnote"))
+      for (i in seq_along(tempFootnotes))
+        testsTable$addFootnote(tempFootnotes[[i]])
     }
   }
 
@@ -759,12 +766,20 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     # additional custom test
     if (options[["addOmnibusModeratorTestHeterogeneityCoefficients"]]) {
-      tests[["moderationHeterogeneity2"]] <- .maSafeRbind(lapply(fit, .maRowModerationTest, options = options, parameter = "heterogeneity", coefficientsTest = TRUE))
+
+      tempModerationHeterogeneity2 <- lapply(fit, .maRowModerationTest, options = options, parameter = "heterogeneity", coefficientsTest = TRUE)
+      tests[["moderationHeterogeneity2"]] <- .maSafeRbind(tempModerationHeterogeneity2)
+
       if (jaspBase::isTryError(tests[["moderationHeterogeneity2"]])) {
         testsTable$setError(tests[["moderationHeterogeneity2"]])
         return()
       }
-      testsTable$addFootnote(attr(tests[["moderationHeterogeneity2"]], "footnote"))
+
+      # add footnotes
+      tempFootnotes <- unique(lapply(tempModerationHeterogeneity2, attr, which = "footnote"))
+      for (i in seq_along(tempFootnotes))
+        testsTable$addFootnote(tempFootnotes[[i]])
+
     }
   }
 
@@ -948,7 +963,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   termTests <- .maSafeOrderAndSimplify(termTests, "term", options)
 
   # add messages
-  termTestWarnings <- .maTermsTableWarnings(fit, options, terms, parameter)
+  termTestWarnings <- .maTermsTableWarnings(fit, options, parameter)
   for (i in seq_along(termTestWarnings))
     termsTable$addFootnote(termTestWarnings[i], symbol = gettext("Warning:"))
 
@@ -1083,7 +1098,11 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   else if (parameter == "heterogeneity")
     correlationMatrix <- data.frame(as.matrix(cov2cor(fit[["va"]])))
 
-  correlationMatrixNames      <- .maVariableNames(colnames(correlationMatrix), options[["predictors"]])
+  correlationMatrixNames      <- .maVariableNames(colnames(correlationMatrix), switch(
+    parameter,
+    effectSize    = unlist(options[["effectSizeModelTerms"]]),
+    heterogeneity = unlist(options[["heterogeneityModelTerms"]])
+  ))
   colnames(correlationMatrix) <- correlationMatrixNames
   correlationMatrix$name      <- correlationMatrixNames
 
@@ -1682,7 +1701,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     casewiseDiagnosticsTable$addColumnInfo(name = "weight",  title = gettext("Weight"),                 type = "number")
   if (options[["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"]]) {
     for (par in coefDifferenceNames) {
-      casewiseDiagnosticsTable$addColumnInfo(name = par, title = .maVariableNames(par, options[["predictors"]]), type = "number", overtitle = gettext("Difference in coefficients"))
+      casewiseDiagnosticsTable$addColumnInfo(name = par, title = .maVariableNames(par, c(unlist(options[["effectSizeModelTerms"]]), unlist(options[["heterogeneityModelTerms"]]))),
+                                             type = "number", overtitle = gettext("Difference in coefficients"))
     }
   }
   if (!.maIsMultilevelMultivariate(options))
@@ -1801,7 +1821,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
       for (diagnosticName in coefDifferenceNames) {
 
-        columnName <- decodeColNames(paste0("Difference in coefficients: ", .maVariableNames(diagnosticName, options[["predictors"]])))
+        columnName <- decodeColNames(paste0("Difference in coefficients: ", .maVariableNames(diagnosticName, c(unlist(options[["effectSizeModelTerms"]]), unlist(options[["heterogeneityModelTerms"]])))))
 
         if (jaspBase:::columnExists(columnName) && !jaspBase:::columnIsMine(columnName))
           .quitAnalysis(gettextf("Column name %s already exists in the dataset.", columnName))
@@ -2515,14 +2535,14 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     attr(row, "footnote") <- gettextf(
       "Effect size coefficients %1$s correspond to %2$s.",
       paste(selCoef, collapse = ","),
-      paste(sapply(rownames(fit$beta)[selCoef], function(coefName) .maVariableNames(coefName, options[["predictors"]])), collapse = ", "))
+      paste(sapply(rownames(fit$beta)[selCoef], function(coefName) .maVariableNames(coefName, unlist(options[["effectSizeModelTerms"]]))), collapse = ", "))
   } else if (parameter == "heterogeneity") {
     row$parameter <- gettextf("Heterogeneity (coef: %1$s)", paste(selCoef, collapse = ", "))
     attr(row, "footnote") <- sapply(rownames(fit$alpha)[selCoef], function(coefName) .maVariableNames(coefName, options[["predictors"]]))
     attr(row, "footnote") <- gettextf(
       "Heterogeneity coefficients %1$s correspond to %2$s.",
       paste(selCoef, collapse = ","),
-      paste(sapply(rownames(fit$alpha)[selCoef], function(coefName) .maVariableNames(coefName, options[["predictors"]])), collapse = ", "))
+      paste(sapply(rownames(fit$alpha)[selCoef], function(coefName) .maVariableNames(coefName, unlist(options[["heterogeneityModelTerms"]]))), collapse = ", "))
   }
 
   attr(row, "selCoef") <- selCoef
@@ -2542,7 +2562,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     if (sum(termsIndex == which(terms == term)) == 0) {
 
       out <- list(
-        term = .maVariableNames(term, options[["predictors"]]),
+        term = .maVariableNames(term, unlist(options[["effectSizeModelTerms"]])),
         stat = NA,
         df1  = NA,
         pval = NA
@@ -2559,7 +2579,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
       termsAnova <- anova(fit, btt = seq_along(termsIndex)[termsIndex == which(terms == term)])
 
       out <- list(
-        term = .maVariableNames(term, options[["predictors"]]),
+        term = .maVariableNames(term, unlist(options[["effectSizeModelTerms"]])),
         stat = termsAnova[["QM"]],
         df1  = termsAnova[["QMdf"]][1],
         pval = termsAnova[["QMp"]]
@@ -2582,7 +2602,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     if (sum(termsIndex == which(terms == term)) == 0) {
 
       out <- list(
-        term = .maVariableNames(term, options[["predictors"]]),
+        term = .maVariableNames(term, unlist(options[["heterogeneityModelTerms"]])),
         stat = NA,
         df1  = NA,
         pval = NA
@@ -2599,7 +2619,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
       termsAnova <- anova(fit, att = seq_along(termsIndex)[termsIndex == which(terms == term)])
 
       out <- list(
-        term = .maVariableNames(term, options[["predictors"]]),
+        term = .maVariableNames(term, unlist(options[["heterogeneityModelTerms"]])),
         stat = termsAnova[["QS"]],
         df1  = termsAnova[["QSdf"]][1],
         pval = termsAnova[["QSp"]]
@@ -3547,7 +3567,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   } else {
 
     tableVif      <- .maExtractVifResults(try(metafor::vif(fit)), options, parameter)
-    tableVif$term <- .maVariableNames(rownames(tableVif), options[["predictors"]])
+    tableVif$term <- .maVariableNames(rownames(tableVif), c(unlist(options[["effectSizeModelTerms"]]), unlist(options[["heterogeneityModelTerms"]])))
   }
 
   tableVif$subgroup <- attr(fit, "subgroup")
@@ -4037,12 +4057,15 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 # print
 .maVariableNames                      <- function(varNames, variables) {
 
+  # sometimes interactions are missformated as "."
+  varNames <- gsub(".", ":", varNames, fixed = TRUE)
+
   return(sapply(varNames, function(varName){
 
     if (varName %in% c("intrcpt", "intercept"))
       return(gettext("Intercept"))
 
-    for (vn in variables) {
+    for (vn in unique(variables)) {
       inf <- regexpr(vn, varName, fixed = TRUE)
 
       if (inf[1] != -1) {
@@ -4171,7 +4194,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 .maRowHeterogeneityTest               <- function(fit, options) {
 
   # handle missing subfits
-  if (jaspBase::isTryError(fit)) {
+  if (jaspBase::isTryError(fit) || (!is.null(fit[["QE"]]) && is.na(fit[["QE"]]))) {
     return(data.frame(
       subgroup = attr(fit, "subgroup"),
       test     = if (.maIsMetaregression(options)) gettext("Residual heterogeneity") else gettext("Heterogeneity")
@@ -4198,7 +4221,14 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   }
 
   # pooled effect size
-  predictedEffect <- .maComputePooledEffectPlot(fit, options)
+  predictedEffect <- try(.maComputePooledEffectPlot(fit, options))
+
+  if (jaspBase::isTryError(predictedEffect))
+    return(data.frame(
+      subgroup = attr(fit, "subgroup"),
+      test     = gettext("Pooled effect"),
+      stat     = gettext("The pooled effect size could not be calculated.")
+    ))
 
   row <- data.frame(
     subgroup = attr(fit, "subgroup"),
@@ -4305,7 +4335,14 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   }
 
   # pooled effect size
-  row          <- .maComputePooledEffect(fit, options)
+  row <- try(.maComputePooledEffect(fit, options))
+
+  if (jaspBase::isTryError(row)) {
+    return(data.frame(
+      par     = gettext("Pooled effect"),
+      subgroup = attr(fit, "subgroup")
+    ))
+  }
 
   if (options[["predictionIntervals"]] && .mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
     row <- do.call(rbind.data.frame, row)
@@ -4406,7 +4443,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   if (parameter == "effectSize") {
 
     estimates <- data.frame(
-      name = .maVariableNames(rownames(fit[["beta"]]), options[["predictors"]]),
+      name = .maVariableNames(rownames(fit[["beta"]]), unlist(options[["effectSizeModelTerms"]])),
       est  = fit[["beta"]][,1],
       se   = fit[["se"]],
       stat = fit[["zval"]],
@@ -4427,7 +4464,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   } else if (parameter == "heterogeneity") {
 
     estimates <- data.frame(
-      name = .maVariableNames(rownames(fit[["alpha"]]), options[["predictors"]]),
+      name = .maVariableNames(rownames(fit[["alpha"]]), unlist(options[["heterogeneityModelTerms"]])),
       est  = fit[["alpha"]][,1],
       se   = fit[["se.alpha"]],
       stat = fit[["zval.alpha"]],
@@ -5051,22 +5088,22 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   return(message)
 }
-.maTermsTableWarnings                  <- function(fit, options, terms, parameter) {
+.maTermsTableWarnings                  <- function(fit, options, parameter) {
 
   if (options[["subgroup"]] == "") {
-    messages <- .maTermsTableWarningsFun(fit[[1]], terms, parameter, prefix = "")
+    messages <- .maTermsTableWarningsFun(fit[[1]], parameter, prefix = "")
   } else {
     messages <- NULL
     for (i in seq_along(fit)) {
       if (jaspBase::isTryError(fit))
         next
-      messages <- c(messages, .maTermsTableWarningsFun(fit[[i]], terms, parameter, prefix = gettextf("Subgroup %1$s: ", attr(fit[[i]], "subgroup"))))
+      messages <- c(messages, .maTermsTableWarningsFun(fit[[i]], parameter, prefix = gettextf("Subgroup %1$s: ", attr(fit[[i]], "subgroup"))))
     }
   }
 
   return(messages)
 }
-.maTermsTableWarningsFun               <- function(fit, terms, parameter, prefix = "") {
+.maTermsTableWarningsFun               <- function(fit, parameter, prefix = "") {
 
   coefNA <- switch(
     parameter,
@@ -5076,15 +5113,15 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   if (any(coefNA)) {
 
-    messages <- unlist(sapply(terms, function(term) {
+    if (parameter == "effectSize") {
+      terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")     # get terms indices from the model
+      termsIndex <- attr(model.matrix(fit[["formula.mods"]], data = fit[["data"]]), "assign")  # get coefficient indices from the model matrix
+    } else if (parameter == "heterogeneity") {
+      terms      <- attr(terms(fit[["formula.scale"]], data = fit[["data"]]),"term.labels")      # get terms indices from the model
+      termsIndex <- attr(model.matrix(fit[["formula.scale"]], data = fit[["data"]]), "assign")   # get coefficient indices from the model matrix
+    }
 
-      if (parameter == "effectSize") {
-        terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")     # get terms indices from the model
-        termsIndex <- attr(model.matrix(fit[["formula.mods"]], data = fit[["data"]]), "assign")  # get coefficient indices from the model matrix
-      } else if (parameter == "heterogeneity") {
-        terms      <- attr(terms(fit[["formula.scale"]], data = fit[["data"]]),"term.labels")      # get terms indices from the model
-        termsIndex <- attr(model.matrix(fit[["formula.scale"]], data = fit[["data"]]), "assign")   # get coefficient indices from the model matrix
-      }
+    messages <- unlist(sapply(terms, function(term) {
 
       thisTermsIndex <- termsIndex[termsIndex == which(terms == term)]
       thisNaTerms    <- coefNA[termsIndex == which(terms == term)]

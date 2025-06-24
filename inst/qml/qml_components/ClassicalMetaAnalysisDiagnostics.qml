@@ -61,7 +61,7 @@ Section
 					name:		"diagnosticsCasewiseDiagnosticsShowInfluentialOnly"
 					text:		qsTr("Show influential only")
 					visible:	analysisType === "metaAnalysis"
-					info: qsTr("Show only the influential studies in the casewise diagnostics. Unvailable when performing multilevel/multivariate meta-analysis.")
+					info: qsTr("Show only the influential studies in the casewise diagnostics. Unavailable when performing multilevel/multivariate meta-analysis.")
 				}
 
 				CheckBox
@@ -122,7 +122,7 @@ Section
 				name:		"diagnosticsPlotsBaujat"
 				text:		qsTr("Baujat")
 				visible:	analysisType === "metaAnalysis"
-				info: qsTr("Include a Baujat plot to detect studies contributing to heterogeneity and overall effect size. Unvailable when performing multilevel/multivariate meta-analysis. Note that Baujat plot is always based on the non-clustered model.")
+				info: qsTr("Include a Baujat plot to detect studies contributing to heterogeneity and overall effect size. Unavailable when performing multilevel/multivariate meta-analysis. Note that Baujat plot is always based on the non-clustered model.")
 			}
 
 			CheckBox

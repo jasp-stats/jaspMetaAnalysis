@@ -1296,7 +1296,9 @@
     pooledEffectSizeTestsBelow <- options[["forestPlotEffectSizeFixedEffectTest"]] && !options[["forestPlotTestsInRightPanel"]] && options[["forestPlotPredictionIntervals"]]
     pooledEffectSizeTestsLeft  <- options[["forestPlotEffectSizeFixedEffectTest"]] && !options[["forestPlotTestsInRightPanel"]] && !options[["forestPlotPredictionIntervals"]]
 
-    tempPooledEstimate <- .maComputePooledEffectPlot(fit, options, forceFixed = TRUE)
+    tempPooledEstimate <- try(.maComputePooledEffectPlot(fit, options, forceFixed = TRUE))
+    if (jaspBase::isTryError(tempPooledEstimate))
+      stop(gettext("The fixed effect effect size could not be calculated."))
     tempTestText       <- .maPrintCoefficientTest(tempPooledEstimate, options[["forestPlotAuxiliaryTestsInformation"]] == "statisticAndPValue")
 
     additionalInformation[[tempRow]] <- data.frame(
@@ -1333,7 +1335,9 @@
     pooledEffectSizeTestsLeft  <- options[["forestPlotEffectSizePooledEstimateTest"]] && !options[["forestPlotTestsInRightPanel"]] && !options[["forestPlotPredictionIntervals"]]
 
     effectSizeName     <- gettext("Pooled Effect")
-    tempPooledEstimate <- .maComputePooledEffectPlot(fit, options)
+    tempPooledEstimate <- try(.maComputePooledEffectPlot(fit, options))
+    if (jaspBase::isTryError(tempPooledEstimate))
+      stop(gettext("The pooled effect size could not be calculated."))
     tempTestText       <- .maPrintCoefficientTest(tempPooledEstimate, options[["forestPlotAuxiliaryTestsInformation"]] == "statisticAndPValue")
 
 
