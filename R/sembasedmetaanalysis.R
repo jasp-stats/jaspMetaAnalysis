@@ -369,7 +369,8 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
       next
 
     # prepare path based on the syntax / fitted model
-    if (options[["pathDiagramShowParameterNames"]]) {
+    # the MASEM model with parameter names can be plotted based only on the fitted object (use syntax only if that is not available)
+    if (options[["pathDiagramShowParameterNames"]] && (!MASEM || (MASEM && (is.null(fits[[model[["value"]]]]) || jaspBase::isTryError(fits[[model[["value"]]]]))))) {
 
       # extract the sem paths
       tempPaths <- model[["syntax"]][[if (MASEM) "modelOriginal" else "model"]]
