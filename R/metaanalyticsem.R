@@ -329,7 +329,11 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 
     # add columns
     meansSummaryTable$addColumnInfo(name = "variable",  type = "string",  title = gettext("Variable"))
-    meansSummaryTable$addColumnInfo(name = "estimates", type = "integer", title = gettext("Estimates"))
+    meansSummaryTable$addColumnInfo(name = "estimates", type = "integer", title = switch(
+      type,
+      "estimates"    = gettext("Estimates"),
+      "observations" = gettext("Observations")
+    ))
 
     # compute the number of non-missing elements
     nonNaMeans <- switch(
