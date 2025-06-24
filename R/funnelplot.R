@@ -1082,11 +1082,18 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   )
 
   if (!.maGetMethodOptions(options) %in% c("EE", "FE")) {
-    tempTau <- data.frame(confint(fit)$random)[2,]
-    fitSummary$tauEst <- tempTau$estimate
-    fitSummary$tauLCI <- tempTau$ci.lb
-    fitSummary$tauUCI <- tempTau$ci.ub
-    fitSummary$tauP   <- fit$QEp
+    tempTau <- try(data.frame(confint(fit)$random)[2,])
+    if (jaspBase::isTryError(tempTau)) {
+      fitSummary$tauEst <- fit[["tau2"]]
+      fitSummary$tauLCI <- NA
+      fitSummary$tauUCI <- NA
+      fitSummary$tauP   <- fit$QEp
+    } else {
+      fitSummary$tauEst <- tempTau$estimate
+      fitSummary$tauLCI <- tempTau$ci.lb
+      fitSummary$tauUCI <- tempTau$ci.ub
+      fitSummary$tauP   <- fit$QEp
+    }
   }
 
   return(fitSummary)
