@@ -227,7 +227,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
     descriptivesContainer <- jaspResults[["descriptives"]]
   } else {
     descriptivesContainer <- createJaspContainer(title = gettext("Descriptives"))
-    descriptivesContainer$dependOn(c("correlationCovarianceMatrix", "means", "dataInputType", "variableNameSeparator"))
+    descriptivesContainer$dependOn(c("correlationCovarianceMatrix", "means", "sampleSize", "dataInputType", "variableNameSeparator"))
     descriptivesContainer$position <- 0.2
     jaspResults[["descriptives"]] <- descriptivesContainer
   }
@@ -361,7 +361,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
         "correlation" = gettext("Correlation"),
         "covariance"  = gettext("Covariance")
       )))
-    pooledContainer$dependOn(c("correlationCovarianceMatrix", "means", "dataInputType", "variableNameSeparator",
+    pooledContainer$dependOn(c("correlationCovarianceMatrix", "means", "sampleSize", "dataInputType", "variableNameSeparator",
                                "pooledCorrelationCovarianceMatrix", "pooledCorrelationCovarianceMatrixRandomEffects"))
     pooledContainer$position <- 0.3
     jaspResults[["pooledContainer"]] <- pooledContainer
