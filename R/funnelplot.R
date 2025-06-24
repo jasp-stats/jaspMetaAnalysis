@@ -416,6 +416,8 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   ### compute power enhancement
   if (!isTrimAndFill && options[["funnelUnderH1"]] && options[["funnelUnderH1PowerEnhancement"]]) {
     powerEnhancementBreaks <- .robmaCleanOptionsToPriors(options[["funnelUnderH1PowerEnhancementBreaks"]], message = gettext("Power enhancement breaks were specified in an incorrect format. Try '(0.30, 0.50, 0.80)'."))
+    if (length(powerEnhancementBreaks) == 0)
+      .quitAnalysis(gettext("At least one power enhancement break must be specified."))
     if (any(is.na(powerEnhancementBreaks)) || any(powerEnhancementBreaks <= 0.05 | powerEnhancementBreaks >= 1))
       .quitAnalysis(gettext("Power enhancement breaks must be between 0.05 and 1."))
     powerEnhancementBreaks   <- sort(powerEnhancementBreaks)
