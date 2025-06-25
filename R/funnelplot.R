@@ -160,7 +160,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
   } else {
 
-    splitLevels <- unique(dataset[[options[["split"]]]])
+    splitLevels <- levels(dataset[[options[["split"]]]])
     fits <- lapply(splitLevels, function(splitLevel) {
       if (jaspBase::isTryError(jaspResults[["fitState"]]$object[[splitLevel]])) {
         return(jaspResults[["fitState"]]$object[[splitLevel]])
@@ -416,6 +416,8 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   ### compute power enhancement
   if (!isTrimAndFill && options[["funnelUnderH1"]] && options[["funnelUnderH1PowerEnhancement"]]) {
     powerEnhancementBreaks <- .robmaCleanOptionsToPriors(options[["funnelUnderH1PowerEnhancementBreaks"]], message = gettext("Power enhancement breaks were specified in an incorrect format. Try '(0.30, 0.50, 0.80)'."))
+    if (length(powerEnhancementBreaks) == 0)
+      .quitAnalysis(gettext("At least one power enhancement break must be specified."))
     if (any(is.na(powerEnhancementBreaks)) || any(powerEnhancementBreaks <= 0.05 | powerEnhancementBreaks >= 1))
       .quitAnalysis(gettext("Power enhancement breaks must be between 0.05 and 1."))
     powerEnhancementBreaks   <- sort(powerEnhancementBreaks)
@@ -1028,6 +1030,8 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 .fpMetaforTranslateErrorMessage <- function(fit) {
   if (grepl("did not converge", fit))
     return(gettext("The meta-analytic model did not converge. Try modifying the 'Method' option."))
+  else if (grepl("Stopped because k = 1", fit))
+    return(gettext("The method is not available with only one observation."))
   else
     return(fit)
 }
@@ -1082,11 +1086,18 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   )
 
   if (!.maGetMethodOptions(options) %in% c("EE", "FE")) {
-    tempTau <- data.frame(confint(fit)$random)[2,]
-    fitSummary$tauEst <- tempTau$estimate
-    fitSummary$tauLCI <- tempTau$ci.lb
-    fitSummary$tauUCI <- tempTau$ci.ub
-    fitSummary$tauP   <- fit$QEp
+    tempTau <- try(data.frame(confint(fit)$random)[2,])
+    if (jaspBase::isTryError(tempTau)) {
+      fitSummary$tauEst <- fit[["tau2"]]
+      fitSummary$tauLCI <- NA
+      fitSummary$tauUCI <- NA
+      fitSummary$tauP   <- fit$QEp
+    } else {
+      fitSummary$tauEst <- tempTau$estimate
+      fitSummary$tauLCI <- tempTau$ci.lb
+      fitSummary$tauUCI <- tempTau$ci.ub
+      fitSummary$tauP   <- fit$QEp
+    }
   }
 
   return(fitSummary)
