@@ -42,12 +42,14 @@ Section
 		{
 			label:		qsTr("Effect size")
 			name:		"mcmcDiagnosticsPlotEffectSize"
+			id:			mcmcDiagnosticsPlotEffectSize
 		}
 
 		CheckBox
 		{
 			label:		qsTr("Heterogeneity")
 			name:		"mcmcDiagnosticsPlotHeterogeneity"
+			id:			mcmcDiagnosticsPlotHeterogeneity
 		}
 
 		CheckBox
@@ -55,6 +57,7 @@ Section
 			label:		qsTr("Moderation")
 			name:		"mcmcDiagnosticsPlotModeration"
 			enabled:	sectionModel.effectSizeModelTermsCount > 0
+			id:			mcmcDiagnosticsPlotModeration
 		}
 
 		CheckBox
@@ -63,6 +66,7 @@ Section
 			name:		"mcmcDiagnosticsPlotWeights"
 			visible:	analysisType === "RoBMA"
 			enabled:	publicationBiasAdjustment.value != "none" && publicationBiasAdjustment.value != "PP"
+			id:			mcmcDiagnosticsPlotWeights
 		}
 
 		CheckBox
@@ -71,6 +75,7 @@ Section
 			name:		"mcmcDiagnosticsPlotPet"
 			visible:	analysisType === "RoBMA"
 			enabled:	publicationBiasAdjustment.value != "none" && publicationBiasAdjustment.value != "original"
+			id:			mcmcDiagnosticsPlotPet
 		}
 
 		CheckBox
@@ -79,6 +84,7 @@ Section
 			name:		"mcmcDiagnosticsPlotPeese"
 			visible:	analysisType === "RoBMA"
 			enabled:	publicationBiasAdjustment.value != "none" && publicationBiasAdjustment.value != "original"
+			id:			mcmcDiagnosticsPlotPeese
 		}
 	}
 
@@ -87,10 +93,18 @@ Section
 		Group
 		{
 			title:			qsTr("Type")
+			enabled:		mcmcDiagnosticsPlotEffectSize.checked ||
+			   mcmcDiagnosticsPlotHeterogeneity.checked ||
+			   mcmcDiagnosticsPlotModeration.checked ||
+			   mcmcDiagnosticsPlotWeights.checked ||
+			   mcmcDiagnosticsPlotPet.checked ||
+			   mcmcDiagnosticsPlotPeese.checked
+
 			CheckBox
 			{
 				label:		qsTr("Trace")
 				name:		"mcmcDiagnosticsPlotTypeTrace"
+				checked: 	true
 			}
 
 			CheckBox
