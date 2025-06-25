@@ -657,21 +657,24 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   # create summary table
   tempSummaryTable <- createJaspTable(title = switch(
     output,
-    "regression"    = gettext("Regression Estimates"),
-    "covariances"   = gettext("Covariance Estimates"),
-    "randomEffects" = gettext("Random Effects Estimates")
+    "regression"      = gettext("Regression Estimates"),
+    "meansIntercepts" = gettext("Mean/Intercept Estimates"),
+    "covariances"     = gettext("Covariance Estimates"),
+    "randomEffects"   = gettext("Random Effects Estimates")
   ))
   tempSummaryTable$position <- switch(
     output,
-    "regression"    = 1,
-    "covariances"   = 2,
-    "randomEffects" = 3
+    "regression"      = 1,
+    "meansIntercepts" = 2,
+    "covariances"     = 3,
+    "randomEffects"   = 4
   )
   tempSummaryTable$dependOn(c(.masemDependencies, "modelSummary", "modelSummaryShowMatrixIndices", switch(
     output,
-    "regression"    = "modelSummaryRegression",
-    "covariances"   = "modelSummaryCovariances",
-    "randomEffects" = "modelSummaryRandomEffects"
+    "regression"      = "modelSummaryRegression",
+    "meansIntercepts" = "modelSummaryMeansIntercepts",
+    "covariances"     = "modelSummaryCovariances",
+    "randomEffects"   = "modelSummaryRandomEffects"
   )))
   tempOutputContainer[[output]] <- tempSummaryTable
 
@@ -706,9 +709,10 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   colnames(tempOutput) <- c("name", "matrix", "row", "col", "estimate", "se", "lCi", "uCi", "lCiMet", "uCiMet", "z", "p")
   tempOutput <- tempOutput[tempOutput$matrix %in% switch(
     output,
-    "regression"    = c("Amatrix", "Amatrixvars", "Mmatrix", "Mmatrixvars"),
-    "covariances"   = "Smatrix",
-    "randomEffects" = c("TauCov", "TauMean")
+    "regression"      = c("Amatrix", "Amatrixvars"),
+    "meansIntercepts" = c("Mmatrix", "Mmatrixvars"),
+    "covariances"     = "Smatrix",
+    "randomEffects"   = c("TauCov", "TauMean")
   ), ,drop=FALSE]
 
   # remove additional columns

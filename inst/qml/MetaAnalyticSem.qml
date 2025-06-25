@@ -289,6 +289,15 @@ Form
 
 			CheckBox
 			{
+				name:		"modelSummaryMeansIntercepts"
+				label:		qsTr("Means/Intercepts")
+				checked:	true
+				enabled:	means.count > 0
+				info:		qsTr("Show mean and intercept estimates (M-Matrix) in the model summary.")
+			}
+
+			CheckBox
+			{
 				name:		"modelSummaryCovariances"
 				label:		qsTr("Covariances")
 				checked:	false

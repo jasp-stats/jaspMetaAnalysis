@@ -312,6 +312,10 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
         .masemCreateSummaryTable(tempOutputContainer, tempFit, options, output = "regression")
       }
 
+      if (is.null(tempOutputContainer[["summaryTableParameters"]]) && options[["modelSummaryMeansIntercepts"]] && length(options[["means"]] > 0)) {
+        .masemCreateSummaryTable(tempOutputContainer, tempFit, options, output = "meansIntercepts")
+      }
+
       if (is.null(tempOutputContainer[["summaryTableCovariances"]]) && options[["modelSummaryCovariances"]]) {
         .masemCreateSummaryTable(tempOutputContainer, tempFit, options, output = "covariances")
       }
