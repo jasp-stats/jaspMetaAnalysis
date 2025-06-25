@@ -25,8 +25,6 @@ Section
 	// RoBMA: Robust Bayesian Meta-Analsis
 	// BiBMA: Binomial Bayesian Meta-Analysis
 	// NoBMA: Normal Bayesian Meta-Analysis
-	
-	property alias enableStudyLevelNesting:			enableStudyLevelNesting
 
 	title: 				qsTr("Advanced")
 	columns: 			2
@@ -58,15 +56,6 @@ Section
 				label:		qsTr("Shorten prior names")
 				name:		"shortenPriorName"
 				info: qsTr("Shorten the prior names in the output.")
-			}
-
-			CheckBox
-			{
-				label:		qsTr("Enable study-level nesting")
-				name:		"enableStudyLevelNesting"
-				id:			enableStudyLevelNesting
-				visible:	analysisType === "RoBMA"
-				info: qsTr("Enables study level nesting. Note that this is an experimental feature.")
 			}
 		}
 	}
