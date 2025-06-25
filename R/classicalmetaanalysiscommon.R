@@ -2636,7 +2636,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   return(out)
 }
-.maGetMarginalMeansPredictorMatrix <- function(fit, options, selectedVariables, trendVarible = NULL, trendSequence = NULL, sdFactor, parameter) {
+.maGetMarginalMeansPredictorMatrix <- function(fit, options, selectedVariables, trendVarible = NULL, trendSequence = NULL, sdFactor, parameter, dropIntercept = TRUE) {
 
   dataset <- attr(fit, "dataset")
   variablesContinuous <- options[["predictors"]][options[["predictors.types"]] == "scale"]
@@ -2723,7 +2723,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     outMatrix <- outMatrix[, !fit$coef.na.Z, drop=FALSE]
   }
 
-  if (hasIntercept)
+  if (hasIntercept && dropIntercept)
     outMatrix <- outMatrix[, -1, drop=FALSE]
 
   # keep information about the variable and levels
@@ -2924,7 +2924,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
       options           = options,
       selectedVariables = selectedVariable,
       sdFactor          = options[["estimatedMarginalMeansEffectSizeSdFactorCovariates"]],
-      parameter         = "effectSize"
+      parameter         = "effectSize",
+      dropIntercept     = FALSE
     )
 
     selectedVariableLevels   <- apply(attr(predictorMatrixEffectSize, "selectedGridNames"), 1, paste0, collapse = ", ")
@@ -2996,13 +2997,13 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
         computedContrasts <- predict(
           fit,
-          newmods = contrastMatrixEffectSize,
-          level   = 100 * options[["confidenceIntervalsLevel"]]
+          newmods   = contrastMatrixEffectSize,
+          level     = 100 * options[["confidenceIntervalsLevel"]]
         )
         computedContrastsTests <- anova(
           fit,
-          X      = contrastMatrixEffectSize,
-          adjust = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]])
+          X         = contrastMatrixEffectSize,
+          adjust    = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]])
         )
 
       }
@@ -3025,7 +3026,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
       options           = options,
       selectedVariables = selectedVariable,
       sdFactor          = options[["estimatedMarginalMeansHeterogeneitySdFactorCovariates"]],
-      parameter         = "heterogeneity"
+      parameter         = "heterogeneity",
+      dropIntercept     = FALSE
     )
 
     selectedVariableLevels      <- apply(attr(predictorMatrixHeterogeneity, "selectedGridNames"), 1, paste0, collapse = ", ")
@@ -3045,13 +3047,13 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     computedContrasts <- predict(
       fit,
-      newscale = contrastMatrixHeterogeneity,
-      level    = 100 * options[["confidenceIntervalsLevel"]]
+      newscale  = contrastMatrixHeterogeneity,
+      level     = 100 * options[["confidenceIntervalsLevel"]]
     )
     computedContrastsTests <- anova(
       fit,
-      Z      = contrastMatrixHeterogeneity,
-      adjust = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]])
+      Z         = contrastMatrixHeterogeneity,
+      adjust    = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]])
     )
 
     # neither link or tau transformation cannot be applied
