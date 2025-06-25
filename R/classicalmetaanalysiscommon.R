@@ -853,6 +853,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     # requires non-clustered fit
     fitNonClustered <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
+    saveRDS(options, file = "C:/JASP-Packages/options.RDS")
     estimates[["heterogeneity"]] <- .maSafeRbind(lapply(fitNonClustered, .maRowPooledHeterogeneity, options = options))
   }
 
@@ -2339,7 +2340,11 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   } else if (.maIsMetaregressionHeterogeneity(options)) {
     # no confint support
     # predict the scale on the average value
-    predScale <- predict(fit, newscale = colMeans(model.matrix(fit)$scale)[-1], level = 100 * options[["confidenceIntervalsLevel"]])
+    predScale <- predict(
+      fit,
+      newscale  = matrix(colMeans(model.matrix(fit)$scale), nrow = 1),
+      level     = 100 * options[["confidenceIntervalsLevel"]]
+    )
 
     if (options[["heterogeneityModelLink"]] == "log") {
       confIntHeterogeneity <- data.frame(
