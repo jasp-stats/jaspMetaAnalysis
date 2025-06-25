@@ -258,8 +258,8 @@ Form
 
 		CheckBox
 		{
-			text:		qsTr("Additional fit measures")
-			name:		"additionalFitMeasures"
+			text:		qsTr("Fit measures")
+			name:		"fitMeasures"
 			checked:	false
 			info:		qsTr("Show a summary of the goodness-of-fit statistics.")
 		}

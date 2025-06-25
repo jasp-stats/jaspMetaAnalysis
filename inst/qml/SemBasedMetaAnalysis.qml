@@ -99,7 +99,7 @@ Form
 		{
 			text:		qsTr("Model summary")
 			name:		"modelSummary"
-			checked:	false
+			checked:	true
 			info:		qsTr("Show a summary of the model coefficients and computed estimates.")
 
 			DropDown
