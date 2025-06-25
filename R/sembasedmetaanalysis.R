@@ -194,6 +194,10 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   }
   corDataset <- try(do.call(metaSEM::Cor2DataFrame, dataCall))
 
+  for (i in seq_along(attr(dataset, "modNames"))) {
+    corDataset$data[[attr(dataset, "modNames")[i]]] <- dataset[[attr(dataset, "modNames")[i]]]
+  }
+
   # fit SEM
   if (!jaspBase::isTryError(tempRam) && !jaspBase::isTryError(corDataset)) {
 
