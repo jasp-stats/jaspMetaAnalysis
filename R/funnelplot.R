@@ -160,7 +160,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
 
   } else {
 
-    splitLevels <- as.character(unique(dataset[[options[["split"]]]]))
+    splitLevels <- levels(dataset[[options[["split"]]]])
     fits <- lapply(splitLevels, function(splitLevel) {
       if (jaspBase::isTryError(jaspResults[["fitState"]]$object[[splitLevel]])) {
         return(jaspResults[["fitState"]]$object[[splitLevel]])
