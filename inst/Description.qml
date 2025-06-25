@@ -129,7 +129,6 @@ Description
 		menu:			qsTr("Penalized Meta-Analysis")
 		title:			qsTr("Penalized Meta-Analysis")
 		func:			"PenalizedMetaAnalysis"
-		preloadData:	false
 	}
 	
 	Analysis

@@ -1880,7 +1880,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
 
   subplot <- createJaspPlot(title = "", width = 320, height = 250)
   subplot$position <- 1
-  subplot$setError(gettext("Please select at least one 'Type' of diagnostics plot (e.g., 'Trace', 'Autocorrelation' or 'Posterior samples density'."))
+  subplot$setError(gettext("Please select at least one 'Type' of diagnostics plot (e.g., 'Trace', 'Autocorrelation' or 'Posterior samples density')."))
   subplot$dependOn(c("mcmcDiagnosticsPlotTypeTrace", "mcmcDiagnosticsPlotTypeAutocorrelation", "mcmcDiagnosticsPlotTypePosteriorSamplesDensity"))
 
   container[["waitingPlot"]] <- subplot
