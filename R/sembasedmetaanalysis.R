@@ -437,9 +437,9 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
       nCharNodes = 0,
       nCharEdges = 0,
-      sizeInt    = options[["pathDiagramManifestNodeWidth"]],
-      sizeMan    = options[["pathDiagramLatentNodeWidth"]],
-      sizeLat    = options[["pathDiagramUnitVectorNodeWidth"]],
+      sizeInt    = options[["pathDiagramUnitVectorNodeWidth"]],
+      sizeMan    = options[["pathDiagramManifestNodeWidth"]],
+      sizeLat    = options[["pathDiagramLatentNodeWidth"]],
       nDigits    = options[["pathDiagramNumberOfDigits"]],
       weighted   = FALSE,
 
