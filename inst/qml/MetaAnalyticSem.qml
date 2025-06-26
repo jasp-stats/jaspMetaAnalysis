@@ -258,10 +258,18 @@ Form
 
 		CheckBox
 		{
-			text:		qsTr("Additional fit measures")
-			name:		"additionalFitMeasures"
+			text:		qsTr("SEM fit measures")
+			name:		"semFitMeasures"
 			checked:	false
-			info:		qsTr("Show a summary of the goodness-of-fit statistics.")
+			info:		qsTr("Show a summary of the SEM goodness-of-fit statistics.")
+		}
+
+		CheckBox
+		{
+			text:		qsTr("Model fit measures")
+			name:		"modelFitMeasures"
+			checked:	false
+			info:		qsTr("Show a summary of the model fit statistics.")
 		}
 
 		CheckBox
@@ -276,7 +284,7 @@ Form
 		{
 			text:		qsTr("Model summary")
 			name:		"modelSummary"
-			checked:	false
+			checked:	true
 			info:		qsTr("Show a summary of the model coefficients and computed estimates.")
 
 			CheckBox

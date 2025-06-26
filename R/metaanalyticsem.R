@@ -41,11 +41,11 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   .masemFitModels(jaspResults, dataset, options, MASEM = TRUE)
   .masemFitMeasures(jaspResults, options)
 
-  # create summary with model fit statistics (for all models)
-  .masemModelFitTable(jaspResults, options, MASEM = TRUE)
 
-  if (options[["additionalFitMeasures"]])
-    .masemAdditionalFitMeasuresTable(jaspResults, options)
+  if (options[["semFitMeasures"]])
+    .masemSemFitMeasuresTable(jaspResults, options)
+  if (options[["modelFitMeasures"]])
+    .masemModelFitMeasuresTable(jaspResults, options, MASEM = TRUE)
   if (options[["pairwiseModelComparison"]])
     .masemPairwiseModelComparisonTable(jaspResults, options)
 
@@ -480,7 +480,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   # 2) a new model was fitted that does not have fit measures
   # the computation takes a bit, so it is worthwhile storing them
 
-  if (!options[["additionalFitMeasures"]])
+  if (!options[["semFitMeasures"]])
     return()
 
   # obtain the model container
@@ -517,26 +517,26 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 
   return()
 }
-.masemAdditionalFitMeasuresTable   <- function(jaspResults, options) {
+.masemSemFitMeasuresTable   <- function(jaspResults, options) {
 
-  if (!is.null(jaspResults[["additionalFitMeasures"]]))
+  if (!is.null(jaspResults[["semFitMeasures"]]))
     return()
 
   # prepare table
-  additionalFitMeasures <- createJaspTable(gettext("Additional Fit Measures"))
-  additionalFitMeasures$position <- 1.1
-  additionalFitMeasures$dependOn(c(.masemDependencies, "additionalFitMeasures"))
-  jaspResults[["additionalFitMeasures"]] <- additionalFitMeasures
+  semFitMeasures <- createJaspTable(gettext("SEM Fit Measures"))
+  semFitMeasures$position <- 1
+  semFitMeasures$dependOn(c(.masemDependencies, "semFitMeasures"))
+  jaspResults[["semFitMeasures"]] <- semFitMeasures
 
   # add columns
-  additionalFitMeasures$addColumnInfo(name = "name",        type = "string",  title = "")
-  additionalFitMeasures$addColumnInfo(name = "chi2",        type = "number",  title = "\U03C7\U00B2")
-  additionalFitMeasures$addColumnInfo(name = "df",          type = "integer", title = gettext("df"))
-  additionalFitMeasures$addColumnInfo(name = "p",           type = "pvalue",  title = gettext("p"))
-  additionalFitMeasures$addColumnInfo(name = "cfi",         type = "number",  title = gettext("CLI"))
-  additionalFitMeasures$addColumnInfo(name = "tli",         type = "number",  title = gettext("TLI"))
-  additionalFitMeasures$addColumnInfo(name = "rmsea",       type = "number",  title = gettext("RMSEA"))
-  additionalFitMeasures$addColumnInfo(name = "prmsea",      type = "number",  title = gettext("p(RMSEA < 0.05)"))
+  semFitMeasures$addColumnInfo(name = "name",        type = "string",  title = "")
+  semFitMeasures$addColumnInfo(name = "chi2",        type = "number",  title = "\U03C7\U00B2")
+  semFitMeasures$addColumnInfo(name = "df",          type = "integer", title = gettext("df"))
+  semFitMeasures$addColumnInfo(name = "p",           type = "pvalue",  title = gettext("p"))
+  semFitMeasures$addColumnInfo(name = "cfi",         type = "number",  title = gettext("CLI"))
+  semFitMeasures$addColumnInfo(name = "tli",         type = "number",  title = gettext("TLI"))
+  semFitMeasures$addColumnInfo(name = "rmsea",       type = "number",  title = gettext("RMSEA"))
+  semFitMeasures$addColumnInfo(name = "prmsea",      type = "number",  title = gettext("p(RMSEA < 0.05)"))
 
   # exit if not ready
   if(!.masemReady(options) || is.null(jaspResults[["modelContainer"]]))
@@ -581,7 +581,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   }
 
   # assign output to table
-  additionalFitMeasures$setData(do.call(rbind, out))
+  semFitMeasures$setData(do.call(rbind, out))
 
   return()
 }

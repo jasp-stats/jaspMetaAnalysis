@@ -87,6 +87,15 @@ Form
 	
 	Group
 	{
+
+		CheckBox
+		{
+			text:		qsTr("Model fit measures")
+			name:		"modelFitMeasures"
+			checked:	false
+			info:		qsTr("Show a summary of the model fit statistics.")
+		}
+
 		CheckBox
 		{
 			text:		qsTr("Pairwise model comparison")
@@ -99,7 +108,7 @@ Form
 		{
 			text:		qsTr("Model summary")
 			name:		"modelSummary"
-			checked:	false
+			checked:	true
 			info:		qsTr("Show a summary of the model coefficients and computed estimates.")
 
 			DropDown

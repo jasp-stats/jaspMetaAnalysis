@@ -29,7 +29,8 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   .masemFitModels(jaspResults, dataset, options)
 
   # create summary with model fit statistics (for all models)
-  .masemModelFitTable(jaspResults, options)
+  if (options[["modelFitMeasures"]])
+    .masemModelFitMeasuresTable(jaspResults, options)
 
   if (options[["pairwiseModelComparison"]])
     .masemPairwiseModelComparisonTable(jaspResults, options)
@@ -231,15 +232,15 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
   return(tempFit)
 }
-.masemModelFitTable           <- function(jaspResults, options, MASEM = FALSE) {
+.masemModelFitMeasuresTable   <- function(jaspResults, options, MASEM = FALSE) {
 
   if (!is.null(jaspResults[["modelFitTable"]]))
     return()
 
   # prepare table
-  modelFitTable <- createJaspTable(gettext("Model Fit"))
-  modelFitTable$position <- 1
-  modelFitTable$dependOn(if (MASEM) .masemDependencies else .semmetaDependencies)
+  modelFitTable <- createJaspTable(gettext("Model Fit Measures"))
+  modelFitTable$position <- 1.1
+  modelFitTable$dependOn(c("modelFitMeasures", if (MASEM) .masemDependencies else .semmetaDependencies))
   jaspResults[["modelFitTable"]] <- modelFitTable
 
   # add columns
