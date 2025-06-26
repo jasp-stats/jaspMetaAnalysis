@@ -60,15 +60,9 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 .pemaCheckData                 <- function(jaspResults, dataset, options) {
 
   # precompute variance
-  dataset$JASP_computed_variance__ <- dataset[,stderrName]^2
+  dataset[["JASP_computed_variance__"]] <- dataset[[options[["effectSizeSe"]]]]^2
 
   # check the data
-  dataset <- .pemaCheckData(jaspResults, dataset, options)
-
-  return(dataset)
-}
-.pemaCheckData                 <- function(jaspResults, dataset, options) {
-
   datasetOld <- dataset
   dataset    <- na.omit(dataset)
 

@@ -36,7 +36,8 @@ Form
 	"- Bartoš F, Maier M, Quintana DS, Wagenmakers EJ (2022). “Adjusting for publication bias in JASP and R: Selection models, PET-PEESE, and robust Bayesian meta-analysis.” _Advances in Methods and Practices in Psychological Science, 5_(3), 25152459221109259. https://doi.org/10.1177/25152459221109259\n" +
 	"- Bartoš F, Maier M, Wagenmakers E, Doucouliagos H, Stanley TD (2023). “Robust Bayesian meta-analysis: Model-averaging across complementary publication bias adjustment methods.” _Research Synthesis Methods, 14_(1), 99–116. https://doi.org/10.1002/jrsm.1594\n" +
 	"- Bartoš F, Otte WM, Gronau QF, Timmers B, Ly A, Wagenmakers EJ (2023). “Empirical prior distributions for Bayesian meta-analyses of binary and time to event outcomes.” _arXiv Preprint_ https://doi.org/10.48550/arXiv.2306.11468\n" + 
-	"- Maier M, Bartoš F, Wagenmakers E (2023). “Robust Bayesian Meta-Analysis: Addressing publication bias with model-averaging.” _Psychological Methods, 28_(1), 107–122. https://doi.org/10.1037/met0000405\n" +
+	"- Bartoš F, Maier M, Wagenmakers EJ (2025). “Robust Bayesian multilevel meta-analysis: Adjusting for publication bias in the presence of dependent effect sizes”  _PsyArXiv Preprint_\n" +
+	"- Maier M, Bartoš F, Wagenmakers E (2023). “Robust Bayesian meta-analysis: Addressing publication bias with model-averaging.” _Psychological Methods, 28_(1), 107–122. https://doi.org/10.1037/met0000405\n" +
 	"- van Erp S, Verhagen J, Grasman RP, Wagenmakers EJ (2017). “Estimates of between-study heterogeneity for 705 meta-analyses reported in Psychological Bulletin from 1990–2013.” _Journal of Open Psychology Data, 5_(1), 1–5. https://doi.org/10.5334/jopd.33\n" +
 	"- Bartoš F, Maier M, (2025) _RoBMA: An R package for robust Bayesian meta-analyses_. R package version 3.5.0 Available at: <https://CRAN.R-project.org/package=RoBMA>.\n" +
 	"## " + qsTr("R Packages") + "\n" +
@@ -44,7 +45,7 @@ Form
 
 	VariablesForm
 	{
-		preferredHeight:	(sectionAdvanced.enableStudyLevelNesting.checked ? 400 : 350) * preferencesModel.uiScale
+		preferredHeight:	400 * preferencesModel.uiScale
 		removeInvisibles:	true
 
 		AvailableVariablesList
@@ -105,9 +106,6 @@ Form
 			id:					studyLevelMultilevel
 			singleVariable:		true
 			allowedColumns:		["nominal"]
-			visible:			 sectionAdvanced.enableStudyLevelNesting.checked
-			property bool active:	sectionAdvanced.enableStudyLevelNesting.checked
-			onActiveChanged: 		if (!active && count > 0) itemDoubleClicked(0)
 			info: qsTr("Variable indicating the study level nesting. This variable is used to specify the nesting of the studies in the meta-analysis. The nesting is used to specify the model structure and to account for the correlation between the effect sizes within each study. Note that this is an experimental feature that needs to be manually enabled in the 'Advanced' section.")
 		}
 

@@ -1785,6 +1785,12 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   if (jaspBase::isTryError(fit))
     return()
 
+  # create a waiting plot for at least one type of the plot to be selected
+  if (!options[["mcmcDiagnosticsPlotTypeTrace"]] && !options[["mcmcDiagnosticsPlotTypeAutocorrelation"]] && !options[["mcmcDiagnosticsPlotTypePosteriorSamplesDensity"]]) {
+    .robmaDiagnosticsStoreWaitingPlot(container)
+    return()
+  }
+
   .robmaDiagnosticsStorePlot(container, options, fit, parameter, "chains",          gettext("Trace Plot"),           1, "mcmcDiagnosticsPlotTypeTrace")
   .robmaDiagnosticsStorePlot(container, options, fit, parameter, "autocorrelation", gettext("Autocorrelation Plot"), 2, "mcmcDiagnosticsPlotTypeAutocorrelation")
   .robmaDiagnosticsStorePlot(container, options, fit, parameter, "densityPlot",     gettext("Density Plot"),         3, "mcmcDiagnosticsPlotTypePosteriorSamplesDensity")
@@ -1864,6 +1870,20 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     container[[type]] <- subplot
 
   }
+
+  return()
+}
+.robmaDiagnosticsStoreWaitingPlot        <- function(container) {
+
+  if (!is.null(container[["waitingPlot"]]))
+    return()
+
+  subplot <- createJaspPlot(title = "", width = 320, height = 250)
+  subplot$position <- 1
+  subplot$setError(gettext("Please select at least one 'Type' of diagnostics plot (e.g., 'Trace', 'Autocorrelation' or 'Posterior samples density')."))
+  subplot$dependOn(c("mcmcDiagnosticsPlotTypeTrace", "mcmcDiagnosticsPlotTypeAutocorrelation", "mcmcDiagnosticsPlotTypePosteriorSamplesDensity"))
+
+  container[["waitingPlot"]] <- subplot
 
   return()
 }
