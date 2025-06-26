@@ -79,15 +79,16 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
   # do not check effect sizes / standard errors for 0 variance
   otherVariable <- c(
-    options[["predictors"]][options[["predictors.types"]] == "scale"],
+    options[["predictors"]],
     c(randomVariables$scale, randomVariables$ordinal)
   )
   if (length(otherVariable) > 0) {
     .hasErrors(
       dataset              = dataset,
-      type                 = c("infinity", "observations", "variance"),
+      type                 = c("infinity", "observations", "variance", "factorLevels"),
       all.target           = otherVariable,
       observations.amount  = "< 2",
+      factorLevels.amount  = "< 2",
       exitAnalysisIfErrors = TRUE)
   }
 
@@ -277,6 +278,14 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
   names(randomFormulas) <- paste("Component", seq_along(randomFormulas))
 
   return(randomFormulas)
+}
+.mammEmbedLevelRandom            <- function(dataset, levels) {
+
+  for (i in seq_along(levels)[-1]) {
+    dataset[[levels[i]]] <- paste0(as.character(dataset[[levels[i-1]]]), "-", as.character(dataset[[levels[i]]]))
+  }
+
+  return(dataset)
 }
 .mammGetVarianceCovarianceMatrix    <- function(dataset, options, returnCall = FALSE) {
 

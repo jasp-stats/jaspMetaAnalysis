@@ -61,13 +61,13 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   }
 
   # publication bias adjustment tables
-  if (options[["publicationBiasAdjustmentWeightfunctionEstimates"]])
+  if (options[["publicationBiasAdjustmentWeightfunctionEstimates"]] && .robmaHasWeightfunction(options))
     .robmaPublicationBiasWeightfunctionEstimatesTable(jaspResults, options)
-  if (options[["publicationBiasAdjustmentWeightfunctionEstimates"]] && options[["conditionalEstimates"]])
+  if (options[["publicationBiasAdjustmentWeightfunctionEstimates"]] && options[["conditionalEstimates"]] && .robmaHasWeightfunction(options))
     .robmaPublicationBiasWeightfunctionEstimatesTable(jaspResults, options, conditional = TRUE)
-  if (options[["publicationBiasAdjustmentPetPeeseEstimates"]])
+  if (options[["publicationBiasAdjustmentPetPeeseEstimates"]] && .robmaHasPetPeese(options))
     .robmaPublicationBiasPetPeeseEstimatesTable(jaspResults, options)
-  if (options[["publicationBiasAdjustmentPetPeeseEstimates"]] && options[["conditionalEstimates"]])
+  if (options[["publicationBiasAdjustmentPetPeeseEstimates"]] && options[["conditionalEstimates"]] && .robmaHasPetPeese(options))
     .robmaPublicationBiasPetPeeseEstimatesTable(jaspResults, options, conditional = TRUE)
 
   # estimated marginal means and contrasts (the whole section is created within the dispatch)
@@ -80,9 +80,9 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     .robmaPriorAndPosteriorPlot(jaspResults, options, "heterogeneity")
   if (options[["priorAndPosteriorPlotModeration"]])
     .robmaPriorAndPosteriorPlot(jaspResults, options, "moderation")
-  if (options[["priorAndPosteriorPlotWeightFunction"]])
+  if (options[["priorAndPosteriorPlotWeightFunction"]] && .robmaHasWeightfunction(options))
     .robmaPriorAndPosteriorPlot(jaspResults, options, "weightFunction")
-  if (options[["priorAndPosteriorPlotPetPeese"]])
+  if (options[["priorAndPosteriorPlotPetPeese"]] && .robmaHasPetPeese(options))
     .robmaPriorAndPosteriorPlot(jaspResults, options, "petPeese")
 
   # plots
@@ -98,11 +98,11 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     .robmaDiagnosticsPlot(jaspResults, options, "heterogeneity")
   if (options[["mcmcDiagnosticsPlotModeration"]])
     .robmaDiagnosticsPlot(jaspResults, options, "moderation")
-  if (options[["mcmcDiagnosticsPlotWeights"]])
+  if (options[["mcmcDiagnosticsPlotWeights"]] && .robmaHasWeightfunction(options))
     .robmaDiagnosticsPlot(jaspResults, options, "weights")
-  if (options[["mcmcDiagnosticsPlotPet"]])
+  if (options[["mcmcDiagnosticsPlotPet"]]     && .robmaHasPet(options))
     .robmaDiagnosticsPlot(jaspResults, options, "pet")
-  if (options[["mcmcDiagnosticsPlotPeese"]])
+  if (options[["mcmcDiagnosticsPlotPeese"]]   && .robmaHasPeese(options))
     .robmaDiagnosticsPlot(jaspResults, options, "peese")
 
 
@@ -2746,6 +2746,50 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   for (i in seq_along(priors[["heterogeneity"]])) {
     if (priors[["heterogeneity"]][[i]][["distribution"]] != "point" ||
         (priors[["heterogeneity"]][[i]][["distribution"]] == "point" && priors[["heterogeneity"]][[i]][["parameters"]][["location"]] != 0))
+      return(TRUE)
+  }
+
+  return(FALSE)
+}
+.robmaHasWeightfunction   <- function(options) {
+
+  priors <- attr(options, "priors")
+
+  for (i in seq_along(priors[["bias"]])) {
+    if (BayesTools::is.prior.weightfunction(priors[["bias"]][[i]]))
+      return(TRUE)
+  }
+
+  return(FALSE)
+}
+.robmaHasPetPeese         <- function(options) {
+
+  priors <- attr(options, "priors")
+
+  for (i in seq_along(priors[["bias"]])) {
+    if (BayesTools::is.prior.PET(priors[["bias"]][[i]]) || BayesTools::is.prior.PEESE(priors[["bias"]][[i]]))
+      return(TRUE)
+  }
+
+  return(FALSE)
+}
+.robmaHasPet              <- function(options) {
+
+  priors <- attr(options, "priors")
+
+  for (i in seq_along(priors[["bias"]])) {
+    if (BayesTools::is.prior.PET(priors[["bias"]][[i]]))
+      return(TRUE)
+  }
+
+  return(FALSE)
+}
+.robmaHasPeese            <- function(options) {
+
+  priors <- attr(options, "priors")
+
+  for (i in seq_along(priors[["bias"]])) {
+    if (BayesTools::is.prior.PEESE(priors[["bias"]][[i]]))
       return(TRUE)
   }
 

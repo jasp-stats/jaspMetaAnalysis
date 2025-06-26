@@ -214,8 +214,17 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     randomFormulaList <- .mammGetRandomFormulaList(options)
     randomFormulaList <- unname(randomFormulaList) # remove names for some metafor post-processing functions
     if (length(randomFormulaList) != 0) {
+
       rmaInput$random <- randomFormulaList
       rmaInput$struct <- do.call(c, lapply(randomFormulaList, attr, which = "structure"))
+
+      # modify hierarchical structure data, so the levels are nested within each other (otherwise level dropping test will fail)
+      for (i in seq_along(randomFormulaList)) {
+        if (is.null(attr(randomFormulaList[[i]], "structure")) && length(attr(randomFormulaList[[i]], "levels")) > 1) {
+          dataset <- .mammEmbedLevelRandom(dataset, attr(randomFormulaList[[i]], "levels"))
+        }
+      }
+      rmaInput$data <- dataset
 
       # spatial-specific settings
       rmaInput$dist   <- unlist(lapply(randomFormulaList, attr, which = "dist"), recursive = FALSE)
@@ -2339,7 +2348,11 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   } else if (.maIsMetaregressionHeterogeneity(options)) {
     # no confint support
     # predict the scale on the average value
-    predScale <- predict(fit, newscale = colMeans(model.matrix(fit)$scale)[-1], level = 100 * options[["confidenceIntervalsLevel"]])
+    predScale <- predict(
+      fit,
+      newscale  = matrix(colMeans(model.matrix(fit)$scale), nrow = 1),
+      level     = 100 * options[["confidenceIntervalsLevel"]]
+    )
 
     if (options[["heterogeneityModelLink"]] == "log") {
       confIntHeterogeneity <- data.frame(
@@ -2636,7 +2649,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   return(out)
 }
-.maGetMarginalMeansPredictorMatrix <- function(fit, options, selectedVariables, trendVarible = NULL, trendSequence = NULL, sdFactor, parameter) {
+.maGetMarginalMeansPredictorMatrix <- function(fit, options, selectedVariables, trendVarible = NULL, trendSequence = NULL, sdFactor, parameter, dropIntercept = TRUE) {
 
   dataset <- attr(fit, "dataset")
   variablesContinuous <- options[["predictors"]][options[["predictors.types"]] == "scale"]
@@ -2723,7 +2736,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     outMatrix <- outMatrix[, !fit$coef.na.Z, drop=FALSE]
   }
 
-  if (hasIntercept)
+  if (hasIntercept && dropIntercept)
     outMatrix <- outMatrix[, -1, drop=FALSE]
 
   # keep information about the variable and levels
@@ -2924,7 +2937,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
       options           = options,
       selectedVariables = selectedVariable,
       sdFactor          = options[["estimatedMarginalMeansEffectSizeSdFactorCovariates"]],
-      parameter         = "effectSize"
+      parameter         = "effectSize",
+      dropIntercept     = FALSE
     )
 
     selectedVariableLevels   <- apply(attr(predictorMatrixEffectSize, "selectedGridNames"), 1, paste0, collapse = ", ")
@@ -2996,13 +3010,13 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
         computedContrasts <- predict(
           fit,
-          newmods = contrastMatrixEffectSize,
-          level   = 100 * options[["confidenceIntervalsLevel"]]
+          newmods   = contrastMatrixEffectSize,
+          level     = 100 * options[["confidenceIntervalsLevel"]]
         )
         computedContrastsTests <- anova(
           fit,
-          X      = contrastMatrixEffectSize,
-          adjust = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]])
+          X         = contrastMatrixEffectSize,
+          adjust    = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]])
         )
 
       }
@@ -3025,7 +3039,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
       options           = options,
       selectedVariables = selectedVariable,
       sdFactor          = options[["estimatedMarginalMeansHeterogeneitySdFactorCovariates"]],
-      parameter         = "heterogeneity"
+      parameter         = "heterogeneity",
+      dropIntercept     = FALSE
     )
 
     selectedVariableLevels      <- apply(attr(predictorMatrixHeterogeneity, "selectedGridNames"), 1, paste0, collapse = ", ")
@@ -3045,13 +3060,13 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     computedContrasts <- predict(
       fit,
-      newscale = contrastMatrixHeterogeneity,
-      level    = 100 * options[["confidenceIntervalsLevel"]]
+      newscale  = contrastMatrixHeterogeneity,
+      level     = 100 * options[["confidenceIntervalsLevel"]]
     )
     computedContrastsTests <- anova(
       fit,
-      Z      = contrastMatrixHeterogeneity,
-      adjust = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]])
+      Z         = contrastMatrixHeterogeneity,
+      adjust    = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]])
     )
 
     # neither link or tau transformation cannot be applied
@@ -3124,15 +3139,32 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   if (.maIsMetaregressionHeterogeneity(options)) {
 
-    predictorMatrixHeterogeneity <- .maGetMarginalMeansPredictorMatrix(
-      fit               = fit,
-      options           = options,
-      selectedVariables = c(separateLines, separatePlots),
-      sdFactor          = options[["bubblePlotSdFactorCovariates"]],
-      trendVarible      = selectedVariable,
-      trendSequence     = trendSequence,
-      parameter         = "heterogeneity"
-    )
+    if (selectedVariableType == "scale") {
+
+      xRange <- range(jaspGraphs::getPrettyAxisBreaks(range(dataset[[selectedVariable]])))
+      trendSequence <- seq(xRange[1], xRange[2], length.out =  101)
+
+      predictorMatrixHeterogeneity <- .maGetMarginalMeansPredictorMatrix(
+        fit               = fit,
+        options           = options,
+        selectedVariables = c(separateLines, separatePlots),
+        sdFactor          = options[["bubblePlotSdFactorCovariates"]],
+        trendVarible      = selectedVariable,
+        trendSequence     = trendSequence,
+        parameter         = "heterogeneity"
+      )
+
+    } else if (selectedVariableType == "nominal") {
+
+      predictorMatrixHeterogeneity <- .maGetMarginalMeansPredictorMatrix(
+        fit               = fit,
+        options           = options,
+        selectedVariables = c(selectedVariable, separateLines, separatePlots),
+        sdFactor          = options[["bubblePlotSdFactorCovariates"]],
+        parameter         = "heterogeneity"
+      )
+
+    }
 
     computedMarginalMeans <- predict(
       fit,

@@ -240,13 +240,14 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     exitAnalysisIfErrors = TRUE)
 
   # do not check effect sizes / standard errors for 0 variance
-  otherVariable <- options[["predictors"]][options[["predictors.types"]] == "scale"]
+  otherVariable <- options[["predictors"]]
   if (length(otherVariable) > 0) {
     .hasErrors(
       dataset              = dataset,
-      type                 = c("infinity", "observations", "variance"),
+      type                 = c("infinity", "observations", "variance", "factorLevels"),
       all.target           = otherVariable,
       observations.amount  = "< 2",
+      factorLevels.amount  = "< 2",
       exitAnalysisIfErrors = TRUE)
   }
 
