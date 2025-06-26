@@ -3131,15 +3131,32 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   if (.maIsMetaregressionHeterogeneity(options)) {
 
-    predictorMatrixHeterogeneity <- .maGetMarginalMeansPredictorMatrix(
-      fit               = fit,
-      options           = options,
-      selectedVariables = c(separateLines, separatePlots),
-      sdFactor          = options[["bubblePlotSdFactorCovariates"]],
-      trendVarible      = selectedVariable,
-      trendSequence     = trendSequence,
-      parameter         = "heterogeneity"
-    )
+    if (selectedVariableType == "scale") {
+
+      xRange <- range(jaspGraphs::getPrettyAxisBreaks(range(dataset[[selectedVariable]])))
+      trendSequence <- seq(xRange[1], xRange[2], length.out =  101)
+
+      predictorMatrixHeterogeneity <- .maGetMarginalMeansPredictorMatrix(
+        fit               = fit,
+        options           = options,
+        selectedVariables = c(separateLines, separatePlots),
+        sdFactor          = options[["bubblePlotSdFactorCovariates"]],
+        trendVarible      = selectedVariable,
+        trendSequence     = trendSequence,
+        parameter         = "heterogeneity"
+      )
+
+    } else if (selectedVariableType == "nominal") {
+
+      predictorMatrixHeterogeneity <- .maGetMarginalMeansPredictorMatrix(
+        fit               = fit,
+        options           = options,
+        selectedVariables = c(selectedVariable, separateLines, separatePlots),
+        sdFactor          = options[["bubblePlotSdFactorCovariates"]],
+        parameter         = "heterogeneity"
+      )
+
+    }
 
     computedMarginalMeans <- predict(
       fit,
