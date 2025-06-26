@@ -279,6 +279,14 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
 
   return(randomFormulas)
 }
+.mammEmbedLevelRandom            <- function(dataset, levels) {
+
+  for (i in seq_along(levels)[-1]) {
+    dataset[[levels[i]]] <- paste0(as.character(dataset[[levels[i-1]]]), "-", as.character(dataset[[levels[i]]]))
+  }
+
+  return(dataset)
+}
 .mammGetVarianceCovarianceMatrix    <- function(dataset, options, returnCall = FALSE) {
 
   if (options[["varianceCovarianceMatrixType"]] == "precomputed") {

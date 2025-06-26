@@ -214,8 +214,17 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     randomFormulaList <- .mammGetRandomFormulaList(options)
     randomFormulaList <- unname(randomFormulaList) # remove names for some metafor post-processing functions
     if (length(randomFormulaList) != 0) {
+
       rmaInput$random <- randomFormulaList
       rmaInput$struct <- do.call(c, lapply(randomFormulaList, attr, which = "structure"))
+
+      # modify hierarchical structure data, so the levels are nested within each other (otherwise level dropping test will fail)
+      for (i in seq_along(randomFormulaList)) {
+        if (is.null(attr(randomFormulaList[[i]], "structure")) && length(attr(randomFormulaList[[i]], "levels")) > 1) {
+          dataset <- .mammEmbedLevelRandom(dataset, attr(randomFormulaList[[i]], "levels"))
+        }
+      }
+      rmaInput$data <- dataset
 
       # spatial-specific settings
       rmaInput$dist   <- unlist(lapply(randomFormulaList, attr, which = "dist"), recursive = FALSE)
