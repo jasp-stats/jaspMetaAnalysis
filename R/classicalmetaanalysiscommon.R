@@ -853,7 +853,6 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     # requires non-clustered fit
     fitNonClustered <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
-    saveRDS(options, file = "C:/JASP-Packages/options.RDS")
     estimates[["heterogeneity"]] <- .maSafeRbind(lapply(fitNonClustered, .maRowPooledHeterogeneity, options = options))
   }
 
