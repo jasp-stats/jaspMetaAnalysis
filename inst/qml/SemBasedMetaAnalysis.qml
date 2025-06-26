@@ -104,6 +104,16 @@ Form
 			info:		qsTr("Show a pairwise model comparison table.")
 		}
 
+/*
+		CheckBox
+		{
+			text:		qsTr("Model convergence")
+			name:		"modelConvergence"
+			checked:	false
+			info:		qsTr("Show a summary of the model convergence.")
+		}
+*/
+
 		CheckBox
 		{
 			text:		qsTr("Model summary")

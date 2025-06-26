@@ -46,6 +46,8 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
     .masemSemFitMeasuresTable(jaspResults, options)
   if (options[["modelFitMeasures"]])
     .masemModelFitMeasuresTable(jaspResults, options, MASEM = TRUE)
+  if (options[["modelConvergence"]])
+    .masemModelConvergenceTable(jaspResults, options)
   if (options[["pairwiseModelComparison"]])
     .masemPairwiseModelComparisonTable(jaspResults, options)
 
@@ -592,7 +594,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 
   # prepare table
   pairwiseModelComparison <- createJaspTable(gettext("Pairwise Model Comparison"))
-  pairwiseModelComparison$position <- 1.2
+  pairwiseModelComparison$position <- 1.4
   pairwiseModelComparison$dependOn(c(.masemDependencies, "pairwiseModelComparison"))
   jaspResults[["pairwiseModelComparison"]] <- pairwiseModelComparison
 

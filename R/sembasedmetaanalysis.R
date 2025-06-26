@@ -31,7 +31,8 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   # create summary with model fit statistics (for all models)
   if (options[["modelFitMeasures"]])
     .masemModelFitMeasuresTable(jaspResults, options)
-
+  # if (options[["modelConvergence"]])
+  #   .masemModelConvergenceTable(jaspResults, options)
   if (options[["pairwiseModelComparison"]])
     .masemPairwiseModelComparisonTable(jaspResults, options)
 
@@ -293,6 +294,64 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
   # assign output to table
   modelFitTable$setData(do.call(rbind, out))
+
+  return()
+}
+.masemModelConvergenceTable   <- function(jaspResults, options, MASEM = FALSE) {
+
+  if (!is.null(jaspResults[["modelConvergenceTable"]]))
+    return()
+
+  # prepare table
+  modelConvergenceTable <- createJaspTable(gettext("Model Convergence"))
+  modelConvergenceTable$position <- 1.2
+  modelConvergenceTable$dependOn(c("modelConvergence", if (MASEM) .masemDependencies else .semmetaDependencies))
+  jaspResults[["modelConvergenceTable"]] <- modelConvergenceTable
+
+  # add columns
+  modelConvergenceTable$addColumnInfo(name = "name",    type = "string",  title = "")
+  modelConvergenceTable$addColumnInfo(name = "status",  type = "string",  title = gettext("Status"))
+
+  # exit if not ready
+  if(!.masemReady(options) || is.null(jaspResults[["modelContainer"]]))
+    return()
+
+  # extract fits
+  fits <- jaspResults[["modelContainer"]]$object
+
+  # loop over models and store model fit indicies
+  out <- list()
+  for (model in options[["models"]]) {
+
+    # extract model fit
+    tempFit <- fits[[model[["value"]]]]
+
+    if (jaspBase::isTryError(tempFit) || is.null(tempFit)) {
+      out[[model[["value"]]]] <- data.frame(
+        name   = model[["value"]],
+        status = ""
+      )
+      if (jaspBase::isTryError(tempFit))
+        modelFitTable$addFootnote(gettextf("%1$s fit failed with the following message %2$s.", model[["value"]], tempFit))
+    } else {
+
+      tempSummary <- summary(tempFit)
+
+      out[[model[["value"]]]] <- data.frame(
+        name   = model[["value"]],
+        status = if (!is.null(tempSummary[["statusCode"]])) paste0(tempSummary[["statusCode"]], collapse = ", ") else ""
+      )
+
+      # check for openMX errors and warngings
+      openMxMessages <- .openMxCheckWarnings(tempSummary)
+      for (i in seq_along(openMxMessages)) {
+        modelConvergenceTable$addFootnote(gettextf("%1$s: %2$s", model[["value"]], openMxMessages[i]), symbol = gettext("Warning"))
+      }
+    }
+  }
+
+  # assign output to table
+  modelConvergenceTable$setData(do.call(rbind, out))
 
   return()
 }
