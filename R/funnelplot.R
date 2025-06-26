@@ -554,6 +554,7 @@ FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
   )
   if (options[["estimatesMappingShape"]] != "") pointAes$shape <- as.name("shape")
   if (options[["estimatesMappingColor"]] != "") pointAes$fill  <- as.name("color")
+  if (options[["estimatesMappingShape"]] != "" && options[["estimatesMappingColor"]] != "") pointAes$color <- as.name("color")
 
   out <- out + jaspGraphs::geom_point(
     data    = dfPlot,
