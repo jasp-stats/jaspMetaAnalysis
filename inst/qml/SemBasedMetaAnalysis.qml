@@ -39,50 +39,7 @@ Form
 				textType:	JASP.TextTypeLavaan
 				info:		qsTr("Specify model using a lavaan style syntax.")
 			}
-
-
-			/*
-			columns: 2
-
-			ComponentsList
-			{
-				Layout.columnSpan:	1
-				preferredWidth:		syntax.width / 2
-				preferredHeight:	150
-				title: 				qsTr("Observed Variables")
-				name:				"observedVariableList"
-				source: 			"syntax"
-				info:				qsTr("Specify observed variables.")
-				rowComponent: 		CheckBox
-				{
-					label:		rowValue
-					name:		"observedVariable"
-					checked:	true
-				}
-			}
-			*/
-			Group
-			{
-				title: qsTr("Model Settings")
-
-				CheckBox
-				{
-					text:		qsTr("Replace constraints")
-					name:		"replaceConstraints"
-					checked:	false
-					info:		qsTr("Replace constraints in the model.")
-				}
-
-				CheckBox
-				{
-					text:		qsTr("Fix latent variance to 1")
-					name:		"fixLatentVarianceTo1"
-					checked:	false
-					info:		qsTr("Fix the variance of latent variables to 1.")
-				}
-			}
 		}
-
 	}
 	
 	Group
