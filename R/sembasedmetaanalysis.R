@@ -29,8 +29,10 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   .masemFitModels(jaspResults, dataset, options)
 
   # create summary with model fit statistics (for all models)
-  .masemModelFitTable(jaspResults, options)
-
+  if (options[["modelFitMeasures"]])
+    .masemModelFitMeasuresTable(jaspResults, options)
+  # if (options[["modelConvergence"]])
+  #   .masemModelConvergenceTable(jaspResults, options)
   if (options[["pairwiseModelComparison"]])
     .masemPairwiseModelComparisonTable(jaspResults, options)
 
@@ -194,6 +196,10 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   }
   corDataset <- try(do.call(metaSEM::Cor2DataFrame, dataCall))
 
+  for (i in seq_along(attr(dataset, "modNames"))) {
+    corDataset$data[[attr(dataset, "modNames")[i]]] <- dataset[[attr(dataset, "modNames")[i]]]
+  }
+
   # fit SEM
   if (!jaspBase::isTryError(tempRam) && !jaspBase::isTryError(corDataset)) {
 
@@ -227,15 +233,15 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
   return(tempFit)
 }
-.masemModelFitTable           <- function(jaspResults, options, MASEM = FALSE) {
+.masemModelFitMeasuresTable   <- function(jaspResults, options, MASEM = FALSE) {
 
   if (!is.null(jaspResults[["modelFitTable"]]))
     return()
 
   # prepare table
-  modelFitTable <- createJaspTable(gettext("Model Fit"))
-  modelFitTable$position <- 1
-  modelFitTable$dependOn(if (MASEM) .masemDependencies else .semmetaDependencies)
+  modelFitTable <- createJaspTable(gettext("Model Fit Measures"))
+  modelFitTable$position <- 1.1
+  modelFitTable$dependOn(c("modelFitMeasures", if (MASEM) .masemDependencies else .semmetaDependencies))
   jaspResults[["modelFitTable"]] <- modelFitTable
 
   # add columns
@@ -291,6 +297,64 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
   return()
 }
+.masemModelConvergenceTable   <- function(jaspResults, options, MASEM = FALSE) {
+
+  if (!is.null(jaspResults[["modelConvergenceTable"]]))
+    return()
+
+  # prepare table
+  modelConvergenceTable <- createJaspTable(gettext("Model Convergence"))
+  modelConvergenceTable$position <- 1.2
+  modelConvergenceTable$dependOn(c("modelConvergence", if (MASEM) .masemDependencies else .semmetaDependencies))
+  jaspResults[["modelConvergenceTable"]] <- modelConvergenceTable
+
+  # add columns
+  modelConvergenceTable$addColumnInfo(name = "name",    type = "string",  title = "")
+  modelConvergenceTable$addColumnInfo(name = "status",  type = "string",  title = gettext("Status"))
+
+  # exit if not ready
+  if(!.masemReady(options) || is.null(jaspResults[["modelContainer"]]))
+    return()
+
+  # extract fits
+  fits <- jaspResults[["modelContainer"]]$object
+
+  # loop over models and store model fit indicies
+  out <- list()
+  for (model in options[["models"]]) {
+
+    # extract model fit
+    tempFit <- fits[[model[["value"]]]]
+
+    if (jaspBase::isTryError(tempFit) || is.null(tempFit)) {
+      out[[model[["value"]]]] <- data.frame(
+        name   = model[["value"]],
+        status = ""
+      )
+      if (jaspBase::isTryError(tempFit))
+        modelFitTable$addFootnote(gettextf("%1$s fit failed with the following message %2$s.", model[["value"]], tempFit))
+    } else {
+
+      tempSummary <- summary(tempFit)
+
+      out[[model[["value"]]]] <- data.frame(
+        name   = model[["value"]],
+        status = if (!is.null(tempSummary[["statusCode"]])) paste0(tempSummary[["statusCode"]], collapse = ", ") else ""
+      )
+
+      # check for openMX errors and warngings
+      openMxMessages <- .openMxCheckWarnings(tempSummary)
+      for (i in seq_along(openMxMessages)) {
+        modelConvergenceTable$addFootnote(gettextf("%1$s: %2$s", model[["value"]], openMxMessages[i]), symbol = gettext("Warning"))
+      }
+    }
+  }
+
+  # assign output to table
+  modelConvergenceTable$setData(do.call(rbind, out))
+
+  return()
+}
 .masemModelSummaryTable       <- function(jaspResults, options, MASEM = FALSE) {
 
   # extract fits
@@ -310,6 +374,10 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
       if (is.null(tempOutputContainer[["summaryTableParameters"]]) && options[["modelSummaryRegression"]]) {
         .masemCreateSummaryTable(tempOutputContainer, tempFit, options, output = "regression")
+      }
+
+      if (is.null(tempOutputContainer[["summaryTableParameters"]]) && options[["modelSummaryMeansIntercepts"]] && length(options[["means"]] > 0)) {
+        .masemCreateSummaryTable(tempOutputContainer, tempFit, options, output = "meansIntercepts")
       }
 
       if (is.null(tempOutputContainer[["summaryTableCovariances"]]) && options[["modelSummaryCovariances"]]) {
@@ -433,9 +501,9 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
       nCharNodes = 0,
       nCharEdges = 0,
-      sizeInt    = options[["pathDiagramManifestNodeWidth"]],
-      sizeMan    = options[["pathDiagramLatentNodeWidth"]],
-      sizeLat    = options[["pathDiagramUnitVectorNodeWidth"]],
+      sizeInt    = options[["pathDiagramUnitVectorNodeWidth"]],
+      sizeMan    = options[["pathDiagramManifestNodeWidth"]],
+      sizeLat    = options[["pathDiagramLatentNodeWidth"]],
       nDigits    = options[["pathDiagramNumberOfDigits"]],
       weighted   = FALSE,
 

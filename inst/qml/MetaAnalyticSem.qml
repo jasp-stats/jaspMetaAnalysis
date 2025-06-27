@@ -258,10 +258,26 @@ Form
 
 		CheckBox
 		{
-			text:		qsTr("Additional fit measures")
-			name:		"additionalFitMeasures"
+			text:		qsTr("SEM fit measures")
+			name:		"semFitMeasures"
 			checked:	false
-			info:		qsTr("Show a summary of the goodness-of-fit statistics.")
+			info:		qsTr("Show a summary of the SEM goodness-of-fit statistics.")
+		}
+
+		CheckBox
+		{
+			text:		qsTr("Model fit measures")
+			name:		"modelFitMeasures"
+			checked:	false
+			info:		qsTr("Show a summary of the model fit statistics.")
+		}
+
+		CheckBox
+		{
+			text:		qsTr("Model convergence")
+			name:		"modelConvergence"
+			checked:	false
+			info:		qsTr("Show a summary of the model convergence.")
 		}
 
 		CheckBox
@@ -276,7 +292,7 @@ Form
 		{
 			text:		qsTr("Model summary")
 			name:		"modelSummary"
-			checked:	false
+			checked:	true
 			info:		qsTr("Show a summary of the model coefficients and computed estimates.")
 
 			CheckBox
@@ -285,6 +301,15 @@ Form
 				label:		qsTr("Regression")
 				checked:	true
 				info:		qsTr("Show regression estimates (A-Matrix) in the model summary.")
+			}
+
+			CheckBox
+			{
+				name:		"modelSummaryMeansIntercepts"
+				label:		qsTr("Means/Intercepts")
+				checked:	true
+				enabled:	means.count > 0
+				info:		qsTr("Show mean and intercept estimates (M-Matrix) in the model summary.")
 			}
 
 			CheckBox
