@@ -8274,18 +8274,17 @@ msgid ""
 "Include H², an index indicating the ratio of total variability to sampling "
 "variability. Unavailable when performing binomial meta-analysis."
 msgstr ""
-"Incluír H², un índice que expresa a proporción da variabilidade total "
-"respecto á variabilidade mostral. Non está dispoñible cando se fai a meta-"
-"análise binomial."
+"Incluir H², un índice que expresa la proporción de la variabilidad total "
+"respecto a la variabilidad muestral. No está disponible cuando se hace el "
+"meta-análisis binomial."
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "SMD to CLES, Pr(superiority)"
 msgstr "SMD a CLES, Pr(superioridad)"
 
 msgctxt "SemBasedMetaAnalysis|"
 msgid "Model fit measures"
-msgstr ""
+msgstr "Medidas de ajuste del modelo"
 
 msgctxt "SemBasedMetaAnalysis|"
 msgid "Show a summary of the model fit statistics."
