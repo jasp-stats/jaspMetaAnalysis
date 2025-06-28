@@ -381,7 +381,7 @@ msgid "Meta-Analytic Tests"
 msgstr "மேவு பகுப்பாய்வு சோதனைகள்"
 
 msgid "Test"
-msgstr "தேர்வு"
+msgstr "சோதனை"
 
 msgid "p"
 msgstr "ப"
@@ -1447,7 +1447,7 @@ msgid "Rank Correlation Test for Funnel Plot Asymmetry"
 msgstr "புனல் சூழ்ச்சி சமச்சீரற்ற தன்மைக்கான தரவரிசை தொடர்பு சோதனை"
 
 msgid "Fail-Safe N"
-msgstr "பாதுகாப்பாக தோல்வி"
+msgstr "பாதுகாப்பாகத் தோல்வி என்"
 
 msgid "Fail-Safe N Summary Table"
 msgstr ""
