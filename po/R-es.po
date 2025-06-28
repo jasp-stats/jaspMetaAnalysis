@@ -794,7 +794,7 @@ msgid "Moderation: %1$s"
 msgstr "Moderación: %1$s"
 
 msgid "The pooled effect size could not be calculated."
-msgstr "Non pode calcularse a magnitude combinada do efecto."
+msgstr "No puede calcularse la magnitud combinada del efecto."
 
 msgid "(coef ...)"
 msgstr "(coef ...)"
@@ -1391,7 +1391,7 @@ msgid "Publication Bias: %1$s"
 msgstr "Sesgo de Publicación: %1$s"
 
 msgid "The fixed effect effect size could not be calculated."
-msgstr ""
+msgstr "No puede calcularse la magnitud fija del efecto."
 
 msgid "Fixed Effect Estimate"
 msgstr "Estimación de los Efectos Fijos"
@@ -1440,9 +1440,8 @@ msgstr ""
 "Las rupturas de la mejora de potencia se especificaron en un formato "
 "incorrecto. Intenta '(0.30, 0.50, 0.80)'."
 
-#, fuzzy
 msgid "At least one power enhancement break must be specified."
-msgstr "Se necesita establecer al menos un predictor."
+msgstr "Se necesita especificar al menos una ruptura de mejora de potencia."
 
 msgid "Power enhancement breaks must be between 0.05 and 1."
 msgstr "Las rupturas de mejora de potencia deben estar entre 0.05 y 1."
@@ -1536,7 +1535,7 @@ msgstr ""
 "El modelo Meta-Analítico no converge. Intenta modificar la opción 'Método'."
 
 msgid "The method is not available with only one observation."
-msgstr ""
+msgstr "El método no está disponible con una única observación."
 
 msgid "The %1$s fail-safe N calculation %2$sfailed with the following error:"
 msgstr ""
@@ -1619,9 +1618,8 @@ msgstr "IC del 95%%"
 msgid "Computing additional fit measures: %1$s"
 msgstr "Calculando medidas adicionales de ajuste: %1$s"
 
-#, fuzzy
 msgid "SEM Fit Measures"
-msgstr "Medidas de ajuste"
+msgstr "Medidas de ajuste de MES (SEM)"
 
 msgid "CLI"
 msgstr "ICL"
@@ -1658,9 +1656,8 @@ msgstr ""
 msgid "Regression Estimates"
 msgstr "Estimaciones de la Regresión"
 
-#, fuzzy
 msgid "Mean/Intercept Estimates"
-msgstr "Estimación de la constante"
+msgstr "Estimaciones de media/constante"
 
 msgid "Covariance Estimates"
 msgstr "Estimaciones de covarianzas"
@@ -1918,6 +1915,8 @@ msgid ""
 "Please select at least one 'Type' of diagnostics plot (e.g., 'Trace', "
 "'Autocorrelation' or 'Posterior samples density')."
 msgstr ""
+"Por favor, selecciona al menos un 'Tipo' de gráfico de diagnósticos (p.e. "
+"'Trazado', 'Autocorrelación' o 'Densidad de muestras posteriores')."
 
 msgid "RoBMA R Code"
 msgstr "Código de R de RoBMA"
@@ -2131,9 +2130,8 @@ msgstr ""
 msgid "Estimating: %1$s"
 msgstr "Estimando: %1$s"
 
-#, fuzzy
 msgid "Model Fit Measures"
-msgstr "Medidas de ajuste"
+msgstr "Medidas de ajuste del modelo"
 
 msgid "log Lik."
 msgstr "Log Verosim."
@@ -2147,12 +2145,11 @@ msgstr "%1$s: %2$s"
 msgid "Warning"
 msgstr "Advertencia"
 
-#, fuzzy
 msgid "Model Convergence"
-msgstr "Modelo Promediado"
+msgstr "Convergencia del modelo"
 
 msgid "Status"
-msgstr ""
+msgstr "Estado"
 
 msgid "Path Diagram"
 msgstr "Diagrama de Ruta"
