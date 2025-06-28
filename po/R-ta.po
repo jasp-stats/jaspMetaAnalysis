@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.19.2\n"
-"POT-Creation-Date: 2025-06-07 03:01\n"
+"POT-Creation-Date: 2025-06-28 03:00\n"
 "PO-Revision-Date: 2025-05-17 07:56+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/jasp/"
@@ -624,9 +624,6 @@ msgstr ""
 "பன்முகத்தன்மை குறித்த மெட்டா-பின்னடைவு கொண்ட மாதிரிகளுக்கு ப அயு சாத் சூழ்ச்சி "
 "கிடைக்கவில்லை."
 
-msgid "Baujat plot is not available for models with clustering."
-msgstr "கிளச்டரிங் கொண்ட மாடல்களுக்கு ப அயு சாத் சூழ்ச்சி கிடைக்கவில்லை."
-
 msgid "Squared Pearson Residual"
 msgstr "ச்கொயர் பியர்சன் எஞ்சியவர்"
 
@@ -761,7 +758,8 @@ msgstr "SMD பெறுநர் COHEN’S U₂"
 msgid "SMD to Cohen's U₃"
 msgstr "SMD பெறுநர் COHEN’S U₃"
 
-msgid "SMD to CLES, Pr(supperiority)"
+#, fuzzy
+msgid "SMD to CLES, Pr(superiority)"
 msgstr "வகுப்பிற்கு SMD, அல்லது (மேன்மை)"
 
 msgid "None"
@@ -800,6 +798,9 @@ msgstr "மிதமான (பன்முகத்தன்மை): %1$s"
 
 msgid "Moderation: %1$s"
 msgstr "மிதமான: %1$s"
+
+msgid "The pooled effect size could not be calculated."
+msgstr ""
 
 #, fuzzy
 msgid "(coef ...)"
@@ -995,6 +996,11 @@ msgstr ""
 msgid "Fewer than two estimates."
 msgstr ""
 
+msgid ""
+"The selected 'Method' requires specification of the 'Weights' option in the "
+"'Advanced' section."
+msgstr ""
+
 msgid "Subgroup %1$s:"
 msgstr ""
 
@@ -1051,6 +1057,12 @@ msgstr ""
 "எண்ணிக்கையுடன் (%2$i) பொருந்தவில்லை."
 
 msgid "The supplied variance-covariance matrix is not positive definite."
+msgstr ""
+
+msgid ""
+"The Variance-Covariance Matrix could not be computed: There must be as many "
+"'Correlation Matrix' entries as is the number of estimates within the "
+"largest 'Cluster'."
 msgstr ""
 
 #, fuzzy
@@ -1346,6 +1358,9 @@ msgstr "மாதிரி செய்தி"
 msgid "Publication Bias: %1$s"
 msgstr "வெளியீட்டு சார்பு"
 
+msgid "The fixed effect effect size could not be calculated."
+msgstr ""
+
 #, fuzzy
 msgid "Fixed Effect Estimate"
 msgstr "நிலையான விளைவுகள் மதிப்பீடுகள்"
@@ -1393,6 +1408,10 @@ msgid ""
 msgstr ""
 "ஆற்றல் மேம்பாட்டு இடைவெளிகள் தவறான வடிவத்தில் குறிப்பிடப்பட்டன. முயற்சிக்கவும் '(0.30, "
 "0.50, 0.80)'."
+
+#, fuzzy
+msgid "At least one power enhancement break must be specified."
+msgstr "குறைந்தது ஒரு முன்கணிப்பு குறிப்பிடப்பட வேண்டும்."
 
 msgid "Power enhancement breaks must be between 0.05 and 1."
 msgstr "ஆற்றல் மேம்பாட்டு இடைவெளிகள் 0.05 முதல் 1 வரை இருக்க வேண்டும்."
@@ -1488,6 +1507,9 @@ msgstr ""
 "மேவு பகுப்பாய்வு மாதிரி ஒன்றிணையவில்லை. 'H₁ இன் கீழ் உள்ள புனல்' அமைப்புகளுக்கான 'முறை' "
 "விருப்பத்தை மாற்ற முயற்சிக்கவும்."
 
+msgid "The method is not available with only one observation."
+msgstr ""
+
 #, fuzzy
 msgid "The %1$s fail-safe N calculation %2$sfailed with the following error:"
 msgstr "பின்வரும் பிழையுடன் %1$s சோதனை தோல்வியடைந்தது: %2$s"
@@ -1565,7 +1587,7 @@ msgid "Computing additional fit measures: %1$s"
 msgstr ""
 
 #, fuzzy
-msgid "Additional Fit Measures"
+msgid "SEM Fit Measures"
 msgstr "பொருத்தமான நடவடிக்கைகள்"
 
 msgid "CLI"
@@ -1599,6 +1621,10 @@ msgstr ""
 
 msgid "Regression Estimates"
 msgstr "பின்னடைவு மதிப்பீடுகள்"
+
+#, fuzzy
+msgid "Mean/Intercept Estimates"
+msgstr "பன்முகத்தன்மை மதிப்பீடு"
 
 #, fuzzy
 msgid "Covariance Estimates"
@@ -1863,6 +1889,11 @@ msgstr "தன்னியக்க தொடர்பு சூழ்ச்ச�
 msgid "Density Plot"
 msgstr "அடர்த்தி"
 
+msgid ""
+"Please select at least one 'Type' of diagnostics plot (e.g., 'Trace', "
+"'Autocorrelation' or 'Posterior samples density')."
+msgstr ""
+
 #, fuzzy
 msgid "RoBMA R Code"
 msgstr "மெட்டாஃபோர் ஆர் குறியீடு"
@@ -2076,8 +2107,8 @@ msgid "Estimating: %1$s"
 msgstr "மதிப்பீடுகள்"
 
 #, fuzzy
-msgid "Model Fit"
-msgstr "மாதிரி %i"
+msgid "Model Fit Measures"
+msgstr "பொருத்தமான நடவடிக்கைகள்"
 
 #, fuzzy
 msgid "log Lik."
@@ -2094,6 +2125,13 @@ msgstr "%1$s (%2$s)"
 #, fuzzy
 msgid "Warning"
 msgstr "எச்சரிக்கை:"
+
+#, fuzzy
+msgid "Model Convergence"
+msgstr "மாதிரி சராசரி"
+
+msgid "Status"
+msgstr ""
 
 msgid "Path Diagram"
 msgstr ""
@@ -2208,6 +2246,17 @@ msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "மதிப்புகள் காணாமல் போனதால் %i கண்காணிப்பு அகற்றப்பட்டது."
 msgstr[1] "மதிப்புகள் காணாமல் போனதால் %i அவதானிப்புகள் அகற்றப்பட்டன."
 
+#~ msgid "Baujat plot is not available for models with clustering."
+#~ msgstr "கிளச்டரிங் கொண்ட மாடல்களுக்கு ப அயு சாத் சூழ்ச்சி கிடைக்கவில்லை."
+
+#, fuzzy
+#~ msgid "Additional Fit Measures"
+#~ msgstr "பொருத்தமான நடவடிக்கைகள்"
+
+#, fuzzy
+#~ msgid "Model Fit"
+#~ msgstr "மாதிரி %i"
+
 #~ msgid ""
 #~ "The study labels contain invalid characters. Please, remove them before "
 #~ "running the analysis."
@@ -2311,9 +2360,6 @@ msgstr[1] "மதிப்புகள் காணாமல் போனதா�
 
 #~ msgid "%1$s Forest Plot"
 #~ msgstr "%1$s வன சூழ்ச்சி"
-
-#~ msgid "Model Averaged"
-#~ msgstr "மாதிரி சராசரி"
 
 #~ msgid "Effect Size Estimate"
 #~ msgstr "விளைவு அளவு மதிப்பீடு"

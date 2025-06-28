@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
-"POT-Creation-Date: 2025-06-07 03:01\n"
+"POT-Creation-Date: 2025-06-28 03:00\n"
 "PO-Revision-Date: 2025-03-01 20:22+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -620,9 +620,6 @@ msgid ""
 "heterogeneity."
 msgstr ""
 
-msgid "Baujat plot is not available for models with clustering."
-msgstr ""
-
 #, fuzzy
 msgid "Squared Pearson Residual"
 msgstr "標準化残差"
@@ -751,7 +748,7 @@ msgstr ""
 msgid "SMD to Cohen's U₃"
 msgstr ""
 
-msgid "SMD to CLES, Pr(supperiority)"
+msgid "SMD to CLES, Pr(superiority)"
 msgstr ""
 
 msgid "None"
@@ -792,6 +789,9 @@ msgstr "異質性の検定"
 #, fuzzy
 msgid "Moderation: %1$s"
 msgstr "自己相関"
+
+msgid "The pooled effect size could not be calculated."
+msgstr ""
 
 #, fuzzy
 msgid "(coef ...)"
@@ -961,6 +961,11 @@ msgstr ""
 msgid "Fewer than two estimates."
 msgstr ""
 
+msgid ""
+"The selected 'Method' requires specification of the 'Weights' option in the "
+"'Advanced' section."
+msgstr ""
+
 msgid "Subgroup %1$s:"
 msgstr ""
 
@@ -1008,6 +1013,12 @@ msgid ""
 msgstr ""
 
 msgid "The supplied variance-covariance matrix is not positive definite."
+msgstr ""
+
+msgid ""
+"The Variance-Covariance Matrix could not be computed: There must be as many "
+"'Correlation Matrix' entries as is the number of estimates within the "
+"largest 'Cluster'."
 msgstr ""
 
 msgid "Error computing the variance-covariance matrix: %1$s"
@@ -1301,6 +1312,9 @@ msgstr "情報"
 msgid "Publication Bias: %1$s"
 msgstr "出版バイアス(Publication Bias)"
 
+msgid "The fixed effect effect size could not be calculated."
+msgstr ""
+
 #, fuzzy
 msgid "Fixed Effect Estimate"
 msgstr "固定効果の推定値"
@@ -1345,6 +1359,10 @@ msgid ""
 "Power enhancement breaks were specified in an incorrect format. Try '(0.30, "
 "0.50, 0.80)'."
 msgstr ""
+
+#, fuzzy
+msgid "At least one power enhancement break must be specified."
+msgstr "少なくとも1つのp値カットオフを設定する必要があります."
 
 msgid "Power enhancement breaks must be between 0.05 and 1."
 msgstr ""
@@ -1444,6 +1462,9 @@ msgid ""
 "The meta-analytic model did not converge. Try modifying the 'Method' option."
 msgstr ""
 
+msgid "The method is not available with only one observation."
+msgstr ""
+
 #, fuzzy
 msgid "The %1$s fail-safe N calculation %2$sfailed with the following error:"
 msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
@@ -1521,7 +1542,7 @@ msgid "Computing additional fit measures: %1$s"
 msgstr ""
 
 #, fuzzy
-msgid "Additional Fit Measures"
+msgid "SEM Fit Measures"
 msgstr "適合度指標"
 
 msgid "CLI"
@@ -1556,6 +1577,10 @@ msgstr ""
 #, fuzzy
 msgid "Regression Estimates"
 msgstr "PET-PEESE回帰推定値"
+
+#, fuzzy
+msgid "Mean/Intercept Estimates"
+msgstr "異質性推定"
 
 #, fuzzy
 msgid "Covariance Estimates"
@@ -1821,6 +1846,11 @@ msgstr "自己相関プロット"
 msgid "Density Plot"
 msgstr "密度"
 
+msgid ""
+"Please select at least one 'Type' of diagnostics plot (e.g., 'Trace', "
+"'Autocorrelation' or 'Posterior samples density')."
+msgstr ""
+
 msgid "RoBMA R Code"
 msgstr ""
 
@@ -2030,8 +2060,8 @@ msgid "Estimating: %1$s"
 msgstr "推定値"
 
 #, fuzzy
-msgid "Model Fit"
-msgstr "モデル %i"
+msgid "Model Fit Measures"
+msgstr "適合度指標"
 
 msgid "log Lik."
 msgstr ""
@@ -2047,6 +2077,13 @@ msgstr "BF%1$s%2$s"
 #, fuzzy
 msgid "Warning"
 msgstr "警告:"
+
+#, fuzzy
+msgid "Model Convergence"
+msgstr "モデルアベレージ"
+
+msgid "Status"
+msgstr ""
 
 msgid "Path Diagram"
 msgstr ""
@@ -2144,6 +2181,14 @@ msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "%i の観測値が欠損しているため削除されました。"
 
+#, fuzzy
+#~ msgid "Additional Fit Measures"
+#~ msgstr "適合度指標"
+
+#, fuzzy
+#~ msgid "Model Fit"
+#~ msgstr "モデル %i"
+
 #~ msgid ""
 #~ "The study labels contain invalid characters. Please, remove them before "
 #~ "running the analysis."
@@ -2236,9 +2281,6 @@ msgstr[0] "%i の観測値が欠損しているため削除されました。"
 
 #~ msgid "%1$s Forest Plot"
 #~ msgstr "%1$s フォレストプロット"
-
-#~ msgid "Model Averaged"
-#~ msgstr "モデルアベレージ"
 
 #~ msgid "Effect Size Estimate"
 #~ msgstr "効果量の推定値"

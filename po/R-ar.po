@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.18.2\n"
-"POT-Creation-Date: 2025-06-07 03:01\n"
+"POT-Creation-Date: 2025-06-28 03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -570,9 +570,6 @@ msgid ""
 "heterogeneity."
 msgstr ""
 
-msgid "Baujat plot is not available for models with clustering."
-msgstr ""
-
 msgid "Squared Pearson Residual"
 msgstr ""
 
@@ -689,7 +686,7 @@ msgstr ""
 msgid "SMD to Cohen's U₃"
 msgstr ""
 
-msgid "SMD to CLES, Pr(supperiority)"
+msgid "SMD to CLES, Pr(superiority)"
 msgstr ""
 
 msgid "None"
@@ -726,6 +723,9 @@ msgid "Moderation (Heterogeneity): %1$s"
 msgstr ""
 
 msgid "Moderation: %1$s"
+msgstr ""
+
+msgid "The pooled effect size could not be calculated."
 msgstr ""
 
 msgid "(coef ...)"
@@ -887,6 +887,11 @@ msgstr ""
 msgid "Fewer than two estimates."
 msgstr ""
 
+msgid ""
+"The selected 'Method' requires specification of the 'Weights' option in the "
+"'Advanced' section."
+msgstr ""
+
 msgid "Subgroup %1$s:"
 msgstr ""
 
@@ -934,6 +939,12 @@ msgid ""
 msgstr ""
 
 msgid "The supplied variance-covariance matrix is not positive definite."
+msgstr ""
+
+msgid ""
+"The Variance-Covariance Matrix could not be computed: There must be as many "
+"'Correlation Matrix' entries as is the number of estimates within the "
+"largest 'Cluster'."
 msgstr ""
 
 msgid "Error computing the variance-covariance matrix: %1$s"
@@ -1212,6 +1223,9 @@ msgstr ""
 msgid "Publication Bias: %1$s"
 msgstr ""
 
+msgid "The fixed effect effect size could not be calculated."
+msgstr ""
+
 msgid "Fixed Effect Estimate"
 msgstr ""
 
@@ -1249,6 +1263,9 @@ msgstr ""
 msgid ""
 "Power enhancement breaks were specified in an incorrect format. Try '(0.30, "
 "0.50, 0.80)'."
+msgstr ""
+
+msgid "At least one power enhancement break must be specified."
 msgstr ""
 
 msgid "Power enhancement breaks must be between 0.05 and 1."
@@ -1334,6 +1351,9 @@ msgid ""
 "The meta-analytic model did not converge. Try modifying the 'Method' option."
 msgstr ""
 
+msgid "The method is not available with only one observation."
+msgstr ""
+
 msgid "The %1$s fail-safe N calculation %2$sfailed with the following error:"
 msgstr ""
 
@@ -1403,7 +1423,7 @@ msgstr ""
 msgid "Computing additional fit measures: %1$s"
 msgstr ""
 
-msgid "Additional Fit Measures"
+msgid "SEM Fit Measures"
 msgstr ""
 
 msgid "CLI"
@@ -1436,6 +1456,9 @@ msgid ""
 msgstr ""
 
 msgid "Regression Estimates"
+msgstr ""
+
+msgid "Mean/Intercept Estimates"
 msgstr ""
 
 msgid "Covariance Estimates"
@@ -1657,6 +1680,11 @@ msgstr ""
 msgid "Density Plot"
 msgstr ""
 
+msgid ""
+"Please select at least one 'Type' of diagnostics plot (e.g., 'Trace', "
+"'Autocorrelation' or 'Posterior samples density')."
+msgstr ""
+
 msgid "RoBMA R Code"
 msgstr ""
 
@@ -1839,7 +1867,7 @@ msgstr ""
 msgid "Estimating: %1$s"
 msgstr ""
 
-msgid "Model Fit"
+msgid "Model Fit Measures"
 msgstr ""
 
 msgid "log Lik."
@@ -1852,6 +1880,12 @@ msgid "%1$s: %2$s"
 msgstr ""
 
 msgid "Warning"
+msgstr ""
+
+msgid "Model Convergence"
+msgstr ""
+
+msgid "Status"
 msgstr ""
 
 msgid "Path Diagram"

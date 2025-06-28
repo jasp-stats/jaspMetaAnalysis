@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
-"POT-Creation-Date: 2025-06-07 03:01\n"
+"POT-Creation-Date: 2025-06-28 03:00\n"
 "PO-Revision-Date: 2025-06-15 08:01+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
@@ -629,10 +629,6 @@ msgstr ""
 "El gráfico de Baujat no está disponible para modelos con Meta-Regresión "
 "sobre heterogeneidad."
 
-msgid "Baujat plot is not available for models with clustering."
-msgstr ""
-"El gráfico de Baujat no está disponible para modelos con conglomeración."
-
 msgid "Squared Pearson Residual"
 msgstr "Error de Pearson Cuadrado"
 
@@ -758,7 +754,8 @@ msgstr "SMD a U₂ de Cohen"
 msgid "SMD to Cohen's U₃"
 msgstr "SMD a U₃ de Cohen"
 
-msgid "SMD to CLES, Pr(supperiority)"
+#, fuzzy
+msgid "SMD to CLES, Pr(superiority)"
 msgstr "SMD a CLES, Pr(superioridad)"
 
 msgid "None"
@@ -796,6 +793,9 @@ msgstr "Moderación (Heterogeneidad): %1$s"
 
 msgid "Moderation: %1$s"
 msgstr "Moderación: %1$s"
+
+msgid "The pooled effect size could not be calculated."
+msgstr ""
 
 msgid "(coef ...)"
 msgstr "(coef ...)"
@@ -998,6 +998,11 @@ msgstr ""
 msgid "Fewer than two estimates."
 msgstr "Menos de dos estimaciones."
 
+msgid ""
+"The selected 'Method' requires specification of the 'Weights' option in the "
+"'Advanced' section."
+msgstr ""
+
 msgid "Subgroup %1$s:"
 msgstr "Subgrupo %1$s:"
 
@@ -1062,6 +1067,12 @@ msgstr ""
 
 msgid "The supplied variance-covariance matrix is not positive definite."
 msgstr "La matriz de varianzas-covarianzas ofrecida no es positiva definida."
+
+msgid ""
+"The Variance-Covariance Matrix could not be computed: There must be as many "
+"'Correlation Matrix' entries as is the number of estimates within the "
+"largest 'Cluster'."
+msgstr ""
 
 msgid "Error computing the variance-covariance matrix: %1$s"
 msgstr "Fallo al calcular la matriz de varianzas-covarianzas: %1$s"
@@ -1374,6 +1385,9 @@ msgstr "Información del modelo"
 msgid "Publication Bias: %1$s"
 msgstr "Sesgo de Publicación: %1$s"
 
+msgid "The fixed effect effect size could not be calculated."
+msgstr ""
+
 msgid "Fixed Effect Estimate"
 msgstr "Estimación de los Efectos Fijos"
 
@@ -1420,6 +1434,10 @@ msgid ""
 msgstr ""
 "Las rupturas de la mejora de potencia se especificaron en un formato "
 "incorrecto. Intenta '(0.30, 0.50, 0.80)'."
+
+#, fuzzy
+msgid "At least one power enhancement break must be specified."
+msgstr "Se necesita establecer al menos un predictor."
 
 msgid "Power enhancement breaks must be between 0.05 and 1."
 msgstr "Las rupturas de mejora de potencia deben estar entre 0.05 y 1."
@@ -1512,6 +1530,9 @@ msgid ""
 msgstr ""
 "El modelo Meta-Analítico no converge. Intenta modificar la opción 'Método'."
 
+msgid "The method is not available with only one observation."
+msgstr ""
+
 msgid "The %1$s fail-safe N calculation %2$sfailed with the following error:"
 msgstr ""
 "El cálculo %1$s del N a prueba de fallos erró con el siguiente fallo: %2$s"
@@ -1536,8 +1557,8 @@ msgid ""
 "specified in the 'Correlation/Covariance Matrix' variable input: %1$s."
 msgstr ""
 "La entrada de variable 'Medias' contiene la siguiente variable que no está "
-"especificada en la entrada de variable 'Matriz de Correlaciones/Covarianzas':"
-" %1$s."
+"especificada en la entrada de variable 'Matriz de Correlaciones/"
+"Covarianzas': %1$s."
 
 msgid "Available Variable Names"
 msgstr "Nombres disponibles de variables"
@@ -1593,8 +1614,9 @@ msgstr "IC del 95%%"
 msgid "Computing additional fit measures: %1$s"
 msgstr "Calculando medidas adicionales de ajuste: %1$s"
 
-msgid "Additional Fit Measures"
-msgstr "Medidas de ajuste adicionales"
+#, fuzzy
+msgid "SEM Fit Measures"
+msgstr "Medidas de ajuste"
 
 msgid "CLI"
 msgstr "ICL"
@@ -1630,6 +1652,10 @@ msgstr ""
 
 msgid "Regression Estimates"
 msgstr "Estimaciones de la Regresión"
+
+#, fuzzy
+msgid "Mean/Intercept Estimates"
+msgstr "Estimación de la constante"
 
 msgid "Covariance Estimates"
 msgstr "Estimaciones de covarianzas"
@@ -1883,6 +1909,11 @@ msgstr "Gráfico de autocorrelaciones"
 msgid "Density Plot"
 msgstr "Gráfico de densidad"
 
+msgid ""
+"Please select at least one 'Type' of diagnostics plot (e.g., 'Trace', "
+"'Autocorrelation' or 'Posterior samples density')."
+msgstr ""
+
 msgid "RoBMA R Code"
 msgstr "Código de R de RoBMA"
 
@@ -2095,8 +2126,9 @@ msgstr ""
 msgid "Estimating: %1$s"
 msgstr "Estimando: %1$s"
 
-msgid "Model Fit"
-msgstr "Ajuste del modelo"
+#, fuzzy
+msgid "Model Fit Measures"
+msgstr "Medidas de ajuste"
 
 msgid "log Lik."
 msgstr "Log Verosim."
@@ -2109,6 +2141,13 @@ msgstr "%1$s: %2$s"
 
 msgid "Warning"
 msgstr "Advertencia"
+
+#, fuzzy
+msgid "Model Convergence"
+msgstr "Modelo Promediado"
+
+msgid "Status"
+msgstr ""
 
 msgid "Path Diagram"
 msgstr "Diagrama de Ruta"
@@ -2227,6 +2266,16 @@ msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "la observación %i se eliminó debido a valores ausentes."
 msgstr[1] "las observaciones %i se eliminaron debido a valores ausentes."
 
+#~ msgid "Baujat plot is not available for models with clustering."
+#~ msgstr ""
+#~ "El gráfico de Baujat no está disponible para modelos con conglomeración."
+
+#~ msgid "Additional Fit Measures"
+#~ msgstr "Medidas de ajuste adicionales"
+
+#~ msgid "Model Fit"
+#~ msgstr "Ajuste del modelo"
+
 #~ msgid ""
 #~ "The study labels contain invalid characters. Please, remove them before "
 #~ "running the analysis."
@@ -2329,9 +2378,6 @@ msgstr[1] "las observaciones %i se eliminaron debido a valores ausentes."
 
 #~ msgid "%1$s Forest Plot"
 #~ msgstr "Gráfico en Bosque %1$s"
-
-#~ msgid "Model Averaged"
-#~ msgstr "Modelo Promediado"
 
 #~ msgid "Effect Size Estimate"
 #~ msgstr "Estimación de la Magnitud del Efecto"

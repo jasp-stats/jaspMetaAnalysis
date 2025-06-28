@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-06-21 19:26+0000\n"
-"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
-"jaspmetaanalysis-qml/de/>\n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -3530,22 +3524,8 @@ msgid ""
 msgstr ""
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
-msgid ""
-"Include casewise diagnostics to assess the influence of individual studies "
-"on the meta-analysis results."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Show influential only"
 msgstr "Nur Einflussreiche anzeigen"
-
-msgctxt "ClassicalMetaAnalysisDiagnostics|"
-msgid ""
-"Show only the influential studies in the casewise diagnostics. Unvailable "
-"when performing multilevel/multivariate meta-analysis."
-msgstr ""
-"Nur die einflussreichen Studien in den fallweisen Diagnostiken anzeigen. "
-"Nicht verfügbar bei Durchführung einer multilevel/multivariaten Metaanalyse."
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Include predictors"
@@ -3595,21 +3575,10 @@ msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Baujat"
 msgstr ""
 
-msgctxt "ClassicalMetaAnalysisDiagnostics|"
-msgid ""
-"Include a Baujat plot to detect studies contributing to heterogeneity and "
-"overall effect size. Unvailable when performing multilevel/multivariate meta-"
-"analysis."
-msgstr ""
-
 #, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Residual funnel"
 msgstr "Residuen-Trichter"
-
-msgctxt "ClassicalMetaAnalysisDiagnostics|"
-msgid "Include a residual funnel plot."
-msgstr "Ein Residuen-Trichterdiagramm hinzufügen."
 
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Estimated Marginal Means"
@@ -3667,13 +3636,6 @@ msgstr ""
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Heterogeneity"
 msgstr "Heterogenität"
-
-msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
-msgid ""
-"Variables selected for computing estimated marginal means in the "
-"heterogeneity model. Unvailable when performing multilevel/multivariate meta-"
-"analysis."
-msgstr ""
 
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid ""
@@ -3749,12 +3711,6 @@ msgstr "Heterogenitätsmodell"
 
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid ""
-"Specify the heterogeneity model. Unvailable when performing multilevel/"
-"multivariate meta-analysis."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisModel|"
-msgid ""
 "Variables assigned as model terms in the heterogeneity model. Specifying a "
 "heterogeneity model results in a 'location-scale' meta-analytic model."
 msgstr ""
@@ -3779,14 +3735,6 @@ msgstr "Optionen zur Zusammenfassung der metaanalytischen Ergebnisse."
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Heterogeneity"
 msgstr "Heterogenität"
-
-msgctxt "ClassicalMetaAnalysisStatistics|"
-msgid ""
-"Summarize the meta-analytic between-study heterogeneity. Unvailable when "
-"performing multilevel/multivariate meta-analysis."
-msgstr ""
-"Zusammenfassung der metaanalytischen Heterogenität zwischen Studien. Nicht "
-"verfügbar bei mehrebenen/multivariater Metaanalyse."
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "𝜏"
@@ -4175,9 +4123,10 @@ msgid ""
 "to a specified alpha level."
 msgstr ""
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "General"
-msgstr ""
+msgstr "Allgemein"
 
 msgctxt "FunnelPlot|"
 msgid ""
@@ -4868,9 +4817,10 @@ msgctxt "BayesianMetaAnalysis|"
 msgid "Risk difference"
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "General"
-msgstr ""
+msgstr "Allgemein"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid ""
@@ -6113,21 +6063,14 @@ msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Shorten the prior names in the output."
 msgstr ""
 
-msgctxt "RobustBayesianMetaAnalysisAdvanced|"
-msgid "Enable study-level nesting"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisAdvanced|"
-msgid "Enables study level nesting. Note that this is an experimental feature."
-msgstr ""
-
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Medical subfield"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "General"
-msgstr ""
+msgstr "Allgemein"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Acute Respiratory Infections"
@@ -6479,19 +6422,7 @@ msgid "I²"
 msgstr "I²"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid ""
-"Include I², the percentage of total variation across studies due to "
-"heterogeneity. Unvailable when performing binomial meta-analysis."
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "H²"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid ""
-"Include H², an index indicating the ratio of total variability to sampling "
-"variability. Unvailable when performing binomial meta-analysis."
 msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
@@ -6622,10 +6553,6 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "SMD to Cohen's U₃"
-msgstr ""
-
-msgctxt "RobustBayesianMetaAnalysisInference|"
-msgid "SMD to CLES, Pr(supperiority)"
 msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
@@ -7012,9 +6939,10 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Risk difference"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "General"
-msgstr ""
+msgstr "Allgemein"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
@@ -7488,14 +7416,6 @@ msgid ""
 msgstr ""
 
 msgctxt "MetaAnalyticSem|"
-msgid "Additional fit measures"
-msgstr ""
-
-msgctxt "MetaAnalyticSem|"
-msgid "Show a summary of the goodness-of-fit statistics."
-msgstr ""
-
-msgctxt "MetaAnalyticSem|"
 msgid "Pairwise model comparison"
 msgstr ""
 
@@ -7701,4 +7621,106 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "SMD to CLES, Pr(superiority)"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "SEM fit measures"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Show a summary of the SEM goodness-of-fit statistics."
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Model fit measures"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Show a summary of the model fit statistics."
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Model convergence"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Show a summary of the model convergence."
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Means/Intercepts"
+msgstr ""
+
+msgctxt "MetaAnalyticSem|"
+msgid "Show mean and intercept estimates (M-Matrix) in the model summary."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisDiagnostics|"
+msgid ""
+"Include casewise diagnostics to assess the influence of individual studies "
+"on the meta-analysis results. Note that diagnostics are always based on the "
+"non-clustered model."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisDiagnostics|"
+msgid ""
+"Show only the influential studies in the casewise diagnostics. Unavailable "
+"when performing multilevel/multivariate meta-analysis."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisDiagnostics|"
+msgid ""
+"Include a Baujat plot to detect studies contributing to heterogeneity and "
+"overall effect size. Unavailable when performing multilevel/multivariate "
+"meta-analysis. Note that Baujat plot is always based on the non-clustered "
+"model."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisDiagnostics|"
+msgid ""
+"Include a residual funnel plot. Note that residual funnel plot is always "
+"based on the non-clustered model."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
+msgid ""
+"Variables selected for computing estimated marginal means in the "
+"heterogeneity model. Unavailable when performing multilevel/multivariate "
+"meta-analysis."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisModel|"
+msgid ""
+"Specify the heterogeneity model. Unavailable when performing multilevel/"
+"multivariate meta-analysis."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid ""
+"Summarize the meta-analytic between-study heterogeneity. Unavailable when "
+"performing multilevel/multivariate meta-analysis."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid ""
+"Include I², the percentage of total variation across studies due to "
+"heterogeneity. Unavailable when performing binomial meta-analysis."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid ""
+"Include H², an index indicating the ratio of total variability to sampling "
+"variability. Unavailable when performing binomial meta-analysis."
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysisInference|"
+msgid "SMD to CLES, Pr(superiority)"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysis|"
+msgid "Model fit measures"
+msgstr ""
+
+msgctxt "SemBasedMetaAnalysis|"
+msgid "Show a summary of the model fit statistics."
 msgstr ""

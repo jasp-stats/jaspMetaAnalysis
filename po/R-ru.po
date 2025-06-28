@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.3\n"
-"POT-Creation-Date: 2025-06-07 03:01\n"
+"POT-Creation-Date: 2025-06-28 03:00\n"
 "PO-Revision-Date: 2025-06-19 09:04+0000\n"
 "Last-Translator: Иван Рудаков <riv@polygene.ru>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/jasp/"
@@ -574,9 +574,6 @@ msgid ""
 "heterogeneity."
 msgstr ""
 
-msgid "Baujat plot is not available for models with clustering."
-msgstr ""
-
 msgid "Squared Pearson Residual"
 msgstr ""
 
@@ -695,7 +692,7 @@ msgstr ""
 msgid "SMD to Cohen's U₃"
 msgstr ""
 
-msgid "SMD to CLES, Pr(supperiority)"
+msgid "SMD to CLES, Pr(superiority)"
 msgstr ""
 
 msgid "None"
@@ -733,6 +730,9 @@ msgid "Moderation (Heterogeneity): %1$s"
 msgstr ""
 
 msgid "Moderation: %1$s"
+msgstr ""
+
+msgid "The pooled effect size could not be calculated."
 msgstr ""
 
 msgid "(coef ...)"
@@ -896,6 +896,11 @@ msgstr ""
 msgid "Fewer than two estimates."
 msgstr ""
 
+msgid ""
+"The selected 'Method' requires specification of the 'Weights' option in the "
+"'Advanced' section."
+msgstr ""
+
 msgid "Subgroup %1$s:"
 msgstr ""
 
@@ -943,6 +948,12 @@ msgid ""
 msgstr ""
 
 msgid "The supplied variance-covariance matrix is not positive definite."
+msgstr ""
+
+msgid ""
+"The Variance-Covariance Matrix could not be computed: There must be as many "
+"'Correlation Matrix' entries as is the number of estimates within the "
+"largest 'Cluster'."
 msgstr ""
 
 msgid "Error computing the variance-covariance matrix: %1$s"
@@ -1222,6 +1233,9 @@ msgstr ""
 msgid "Publication Bias: %1$s"
 msgstr ""
 
+msgid "The fixed effect effect size could not be calculated."
+msgstr ""
+
 #, fuzzy
 msgid "Fixed Effect Estimate"
 msgstr "Оценка эффективности"
@@ -1262,6 +1276,9 @@ msgstr ""
 msgid ""
 "Power enhancement breaks were specified in an incorrect format. Try '(0.30, "
 "0.50, 0.80)'."
+msgstr ""
+
+msgid "At least one power enhancement break must be specified."
 msgstr ""
 
 msgid "Power enhancement breaks must be between 0.05 and 1."
@@ -1351,6 +1368,9 @@ msgid ""
 "The meta-analytic model did not converge. Try modifying the 'Method' option."
 msgstr ""
 
+msgid "The method is not available with only one observation."
+msgstr ""
+
 msgid "The %1$s fail-safe N calculation %2$sfailed with the following error:"
 msgstr ""
 
@@ -1423,7 +1443,7 @@ msgstr "%s%% ДИ"
 msgid "Computing additional fit measures: %1$s"
 msgstr ""
 
-msgid "Additional Fit Measures"
+msgid "SEM Fit Measures"
 msgstr ""
 
 msgid "CLI"
@@ -1457,6 +1477,10 @@ msgstr ""
 
 msgid "Regression Estimates"
 msgstr ""
+
+#, fuzzy
+msgid "Mean/Intercept Estimates"
+msgstr "Оценка эффективности"
 
 #, fuzzy
 msgid "Covariance Estimates"
@@ -1690,6 +1714,11 @@ msgstr "Среднее автокоррелирование"
 msgid "Density Plot"
 msgstr ""
 
+msgid ""
+"Please select at least one 'Type' of diagnostics plot (e.g., 'Trace', "
+"'Autocorrelation' or 'Posterior samples density')."
+msgstr ""
+
 msgid "RoBMA R Code"
 msgstr ""
 
@@ -1877,7 +1906,7 @@ msgid "Estimating: %1$s"
 msgstr "Оценки"
 
 #, fuzzy
-msgid "Model Fit"
+msgid "Model Fit Measures"
 msgstr "Модель %i"
 
 msgid "log Lik."
@@ -1892,6 +1921,13 @@ msgstr ""
 #, fuzzy
 msgid "Warning"
 msgstr "Предупреждение:"
+
+#, fuzzy
+msgid "Model Convergence"
+msgstr "Усредненная Модель"
+
+msgid "Status"
+msgstr ""
 
 msgid "Path Diagram"
 msgstr ""
@@ -2030,9 +2066,6 @@ msgstr[1] ""
 #~ msgid ""
 #~ "Model %1$i does not exist. Select one of the models between 1 and %2$i."
 #~ msgstr "Модель %1$i не существует. Выберите одну из моделей от 1 до %2$i."
-
-#~ msgid "Model Averaged"
-#~ msgstr "Усредненная Модель"
 
 #~ msgid "Models Diagnostics Overview"
 #~ msgstr "Обзор Диагностики Моделей"

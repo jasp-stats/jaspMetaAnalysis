@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2025-06-07 03:01\n"
+"POT-Creation-Date: 2025-06-28 03:00\n"
 "PO-Revision-Date: 2022-08-29 00:27+0000\n"
 "Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
@@ -614,9 +614,6 @@ msgid ""
 "heterogeneity."
 msgstr ""
 
-msgid "Baujat plot is not available for models with clustering."
-msgstr ""
-
 #, fuzzy
 msgid "Squared Pearson Residual"
 msgstr "Tamanho de efeito padronizado"
@@ -743,7 +740,7 @@ msgstr ""
 msgid "SMD to Cohen's U₃"
 msgstr ""
 
-msgid "SMD to CLES, Pr(supperiority)"
+msgid "SMD to CLES, Pr(superiority)"
 msgstr ""
 
 msgid "None"
@@ -784,6 +781,9 @@ msgstr "Testes de homogeneidade"
 #, fuzzy
 msgid "Moderation: %1$s"
 msgstr "Covariâncias / correlações observadas"
+
+msgid "The pooled effect size could not be calculated."
+msgstr ""
 
 #, fuzzy
 msgid "(coef ...)"
@@ -954,6 +954,11 @@ msgstr ""
 msgid "Fewer than two estimates."
 msgstr ""
 
+msgid ""
+"The selected 'Method' requires specification of the 'Weights' option in the "
+"'Advanced' section."
+msgstr ""
+
 msgid "Subgroup %1$s:"
 msgstr ""
 
@@ -1001,6 +1006,12 @@ msgid ""
 msgstr ""
 
 msgid "The supplied variance-covariance matrix is not positive definite."
+msgstr ""
+
+msgid ""
+"The Variance-Covariance Matrix could not be computed: There must be as many "
+"'Correlation Matrix' entries as is the number of estimates within the "
+"largest 'Cluster'."
 msgstr ""
 
 msgid "Error computing the variance-covariance matrix: %1$s"
@@ -1294,6 +1305,9 @@ msgstr "Informado"
 msgid "Publication Bias: %1$s"
 msgstr ""
 
+msgid "The fixed effect effect size could not be calculated."
+msgstr ""
+
 #, fuzzy
 msgid "Fixed Effect Estimate"
 msgstr "Estimativas de efeitos fixos"
@@ -1335,6 +1349,9 @@ msgstr ""
 msgid ""
 "Power enhancement breaks were specified in an incorrect format. Try '(0.30, "
 "0.50, 0.80)'."
+msgstr ""
+
+msgid "At least one power enhancement break must be specified."
 msgstr ""
 
 msgid "Power enhancement breaks must be between 0.05 and 1."
@@ -1427,6 +1444,9 @@ msgid ""
 "The meta-analytic model did not converge. Try modifying the 'Method' option."
 msgstr ""
 
+msgid "The method is not available with only one observation."
+msgstr ""
+
 msgid "The %1$s fail-safe N calculation %2$sfailed with the following error:"
 msgstr ""
 
@@ -1503,7 +1523,7 @@ msgid "Computing additional fit measures: %1$s"
 msgstr ""
 
 #, fuzzy
-msgid "Additional Fit Measures"
+msgid "SEM Fit Measures"
 msgstr "Medidas adicionais de ajuste"
 
 msgid "CLI"
@@ -1538,6 +1558,10 @@ msgstr ""
 #, fuzzy
 msgid "Regression Estimates"
 msgstr "Medidas adicionais de ajuste"
+
+#, fuzzy
+msgid "Mean/Intercept Estimates"
+msgstr "Testes de homogeneidade"
 
 #, fuzzy
 msgid "Covariance Estimates"
@@ -1784,6 +1808,11 @@ msgstr "Covariâncias / correlações observadas"
 msgid "Density Plot"
 msgstr "Densidade"
 
+msgid ""
+"Please select at least one 'Type' of diagnostics plot (e.g., 'Trace', "
+"'Autocorrelation' or 'Posterior samples density')."
+msgstr ""
+
 msgid "RoBMA R Code"
 msgstr ""
 
@@ -1977,8 +2006,8 @@ msgid "Estimating: %1$s"
 msgstr "Estimativa"
 
 #, fuzzy
-msgid "Model Fit"
-msgstr "Modelo"
+msgid "Model Fit Measures"
+msgstr "Medidas adicionais de ajuste"
 
 msgid "log Lik."
 msgstr ""
@@ -1992,6 +2021,13 @@ msgstr ""
 #, fuzzy
 msgid "Warning"
 msgstr "Aviso:"
+
+#, fuzzy
+msgid "Model Convergence"
+msgstr "Modelo médio posterior"
+
+msgid "Status"
+msgstr ""
 
 msgid "Path Diagram"
 msgstr ""
@@ -2089,6 +2125,14 @@ msgstr[0] "%i observação foi removida devido a valores ausentes."
 msgstr[1] "%i observações foram removidas devido a valores ausentes."
 
 #, fuzzy
+#~ msgid "Additional Fit Measures"
+#~ msgstr "Medidas adicionais de ajuste"
+
+#, fuzzy
+#~ msgid "Model Fit"
+#~ msgstr "Modelo"
+
+#, fuzzy
 #~ msgid "Prior Plots"
 #~ msgstr "Diagramas"
 
@@ -2152,10 +2196,6 @@ msgstr[1] "%i observações foram removidas devido a valores ausentes."
 #, fuzzy
 #~ msgid "%1$s Forest Plot"
 #~ msgstr "Gráfico do modelo"
-
-#, fuzzy
-#~ msgid "Model Averaged"
-#~ msgstr "Modelo médio posterior"
 
 #, fuzzy
 #~ msgid "Effect Size Estimate"
