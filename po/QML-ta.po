@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-01-04 21:55+0000\n"
+"PO-Revision-Date: 2025-06-29 08:02+0000\n"
 "Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/ta/>\n"
@@ -9,7 +9,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 "X-Qt-Contexts: true\n"
 
 msgctxt "Description|"
@@ -502,7 +502,7 @@ msgstr "இறங்கு"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Row order"
-msgstr "வரிசை வரிசை"
+msgstr "வரி வரிசை"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Cumulative forest plot"
@@ -522,7 +522,7 @@ msgstr "நிலையான மற்றும் சீரற்ற விள
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Shade 95% CI"
-msgstr "நிழல் 95% சி.ஐ."
+msgstr "நிழல் 95% சி.ஐ"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Sequential plot"
@@ -566,7 +566,7 @@ msgstr "சராசரி:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "std:"
-msgstr "std:"
+msgstr "தரம்:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "t"
@@ -810,7 +810,7 @@ msgstr "பதிவு முரண்பாடுகள் விகிதம�
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "RoBMA-PSMA"
-msgstr "ராப்மா-பி.டி.எச்.எம்.ஏ."
+msgstr "ராப்மா-பி.டி.எச்.எம்.ஏ"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "RoBMA-PP"
@@ -826,11 +826,11 @@ msgstr "முந்தைய அளவு"
 
 msgctxt "Description|"
 msgid "Classical"
-msgstr ""
+msgstr "இலக்கிய நயம் வாய்ந்த"
 
 msgctxt "Description|"
 msgid "Bayesian"
-msgstr ""
+msgstr "பேய்சியன்"
 
 msgctxt "Description|"
 msgid "Prediction Model Performance"
@@ -1566,7 +1566,7 @@ msgstr "ஆட்டோஃபிட்"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "R-hat"
-msgstr "R-hat"
+msgstr "ஆர்-தொப்பி"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Effective sample size"
@@ -2445,7 +2445,7 @@ msgstr "ஒற்றை குழு"
 
 msgctxt "EffectSizeComputation|"
 msgid "Repeated measures"
-msgstr "மீண்டும் மீண்டும் நடவடிக்கைகள்"
+msgstr "மறுநிகழ்வு நடவடிக்கைகள்"
 
 msgctxt "EffectSizeComputation|"
 msgid "Other"
