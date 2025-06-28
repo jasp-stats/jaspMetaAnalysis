@@ -152,8 +152,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   # prepare RAM
   tempRam <- try(metaSEM::lavaan2RAM(
     model         = model[["syntax"]][["model"]],
-    obs.variables = .masemGetObservedVariables(model),
-    std.lv        = model[["fixLatentVarianceTo1"]]
+    obs.variables = .masemGetObservedVariables(model)
   ))
 
   # fit SEM
@@ -162,7 +161,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
       RAM                 = tempRam,
       data                = dataset,
       intervals.type      = .masemGetIntervalsType(options),
-      replace.constraints = model[["replaceConstraints"]]
+      replace.constraints = TRUE
     ))
   } else {
     # forward ram errors
@@ -214,7 +213,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
       RE.type.Sigma       = .masemGetRandomEffectsType(model[["randomEffectsSigma"]]),
       RE.type.Mu          = .masemGetRandomEffectsType(model[["randomEffectsMu"]]),
       RE.type.SigmaMu     = .masemGetRandomEffectsType(model[["randomEffectsSigmaMu"]]),
-      replace.constraints = model[["replaceConstraints"]]
+      replace.constraints = TRUE
     ))
   } else {
     if (jaspBase::isTryError(tempRam)){
@@ -479,11 +478,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
       # deal with possible errors
       if (jaspBase::isTryError(tempPaths)) {
-        if (grepl("subscript out of bounds", tempPaths) && model[["replaceConstraints"]]) {
-          tempPlot$setError(gettextf("Model visualization might not be possible for models with 'Replace constraints' option."))
-        } else {
-          tempPlot$setError(gettextf("Model visualization failed with the following message %1$s.", tempPaths))
-        }
+        tempPlot$setError(gettextf("Model visualization failed with the following message %1$s.", tempPaths))
         next
       }
     }

@@ -186,14 +186,6 @@ Form
 
 					CheckBox
 					{
-						text:		qsTr("Replace constraints")
-						name:		"replaceConstraints"
-						checked:	false
-						info:		qsTr("Replace constraints in the model.")
-					}
-
-					CheckBox
-					{
 						text:		qsTr("Fix latent variance to 1")
 						name:		"fixLatentVarianceTo1"
 						enabled:	dataInputType.value == "covariance"
