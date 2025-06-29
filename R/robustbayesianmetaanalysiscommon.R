@@ -1010,6 +1010,10 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     }
   }
 
+  # add notes
+  if (any(tests[["bf"]] > 100 | tests[["bf"]] < 1/100))
+    testsTable$addFootnote(.robmaLargeBayesFactorWarning())
+
   # clean rows
   tests <- .maSafeOrderAndSimplify(tests, "test", options)
 
@@ -1102,6 +1106,10 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   # term tests rows
   termTests <- .maSafeRbind(lapply(fit, .robmaRowTermTests, options = options))
   termTests <- .maSafeOrderAndSimplify(termTests, "term", options)
+
+  # add notes
+  if (any(termTests[["bf"]] > 100 | termTests[["bf"]] < 1/100))
+    termsTable$addFootnote(.robmaLargeBayesFactorWarning())
 
   termsTable$setData(termTests)
   termsTable$showSpecifiedColumnsOnly <- TRUE
@@ -3151,4 +3159,7 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
     "%4$.", digits, "f",
     "]"
   ), out$par, out$mean, out$lCi, out$uCi))
+}
+.robmaLargeBayesFactorWarning <- function() {
+  return(gettext("Large Bayes factors, i.e., BF > 100 or BF < 1/100, might be computationally unstable (a small change in posterior inclusion probability corresponds to a very large change in the Bayes factor). Consider increasing the number of chains and posterior samples to obtain more stable estimates."))
 }
