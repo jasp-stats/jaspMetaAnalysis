@@ -234,7 +234,7 @@ Form
 				name:				"varianceCovarianceMatrixTime1"
 				id:					varianceCovarianceMatrixTime1
 				title:				qsTr("Time 1")
-				allowedColumns:		["nominal"]
+				allowedColumns:		["scale"]
 				allowTypeChange:	true
 				singleVariable:		true
 				visible:			varianceCovarianceMatrixConstructsGroupsTimes.checked
@@ -248,7 +248,7 @@ Form
 				name:				"varianceCovarianceMatrixTime2"
 				enabled:			varianceCovarianceMatrixTime1.count != 0
 				title:				qsTr("Time 2")
-				allowedColumns:		["nominal"]
+				allowedColumns:		["scale"]
 				allowTypeChange:	true
 				singleVariable:		true
 				visible:			varianceCovarianceMatrixConstructsGroupsTimes.checked
