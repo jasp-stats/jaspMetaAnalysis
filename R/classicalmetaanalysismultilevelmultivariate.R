@@ -765,7 +765,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     jaspResults[["randomEstimatesContainer"]] <- randomEstimatesContainer
   }
 
-  fit <- .maExtractFit(jaspResults, options)
+  fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
 
   if (options[["subgroup"]] == "") {
 
@@ -1006,7 +1006,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     confintRandomContainer$dependOn(.maDependencies)
     jaspResults[["dropOneFits"]] <- confintRandomContainer
 
-    fit <- .maExtractFit(jaspResults, options)
+    fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
     out <- list()
 
     for (i in seq_along(fit)) {
@@ -1081,7 +1081,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     confintRandomContainer$dependOn(.maDependencies)
     jaspResults[["dropLevelFits"]] <- confintRandomContainer
 
-    fit <- .maExtractFit(jaspResults, options)
+    fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
     out <- list()
 
     for (i in seq_along(fit)) {

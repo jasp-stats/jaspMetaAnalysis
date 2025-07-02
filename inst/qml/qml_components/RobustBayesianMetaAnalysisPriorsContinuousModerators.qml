@@ -148,7 +148,7 @@ ColumnLayout
 					visible:			typeItem.currentValue === "normal"		||
 										typeItem.currentValue === "lognormal"	||
 										typeItem.currentValue === "t"
-					value:				"1"
+					value:				"0.25"
 					min:				0
 					inclusive:			JASP.None
 					fieldWidth: 		40 * preferencesModel.uiScale
