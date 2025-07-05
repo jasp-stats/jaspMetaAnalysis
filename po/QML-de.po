@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-06-30 11:54+0000\n"
-"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
-"jaspmetaanalysis-qml/de/>\n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -4596,11 +4590,15 @@ msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Predictors"
 msgstr "Prädiktoren"
 
+#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid ""
 "Variables to include as predictors (moderators) in the meta-regression "
 "model. See the 'Model' section for the meta-regression specification details."
 msgstr ""
+"Variablen, die als Prädiktoren (Moderatoren) in das Meta-Regressionsmodell "
+"einbezogen werden sollen. Einzelheiten zur Spezifikation der Meta-Regression "
+"finden Sie im Abschnitt \"Modell\"."
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Study Level (Multilevel)"
@@ -4848,11 +4846,15 @@ msgctxt "BayesianMetaAnalysis|"
 msgid "Predictors"
 msgstr "Prädiktoren"
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid ""
 "Variables to include as predictors (moderators) in the meta-regression "
 "model. See the 'Model' section for the meta-regression specification details."
 msgstr ""
+"Variablen, die als Prädiktoren (Moderatoren) in das Meta-Regressionsmodell "
+"einbezogen werden sollen. Einzelheiten zur Spezifikation der Meta-Regression "
+"finden Sie im Abschnitt \"Modell\"."
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Study Level (Multilevel)"
@@ -6970,11 +6972,15 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Predictors"
 msgstr "Prädiktoren"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
 "Variables to include as predictors (moderators) in the meta-regression "
 "model. See the 'Model' section for the meta-regression specification details."
 msgstr ""
+"Variablen, die als Prädiktoren (Moderatoren) in das Meta-Regressionsmodell "
+"einbezogen werden sollen. Einzelheiten zur Spezifikation der Meta-Regression "
+"finden Sie im Abschnitt \"Modell\"."
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Study Level (Multilevel)"
@@ -7381,14 +7387,6 @@ msgid "Model Settings"
 msgstr ""
 
 msgctxt "MetaAnalyticSem|"
-msgid "Replace constraints"
-msgstr ""
-
-msgctxt "MetaAnalyticSem|"
-msgid "Replace constraints in the model."
-msgstr ""
-
-msgctxt "MetaAnalyticSem|"
 msgid "Fix latent variance to 1"
 msgstr ""
 
@@ -7571,26 +7569,6 @@ msgstr ""
 
 msgctxt "SemBasedMetaAnalysis|"
 msgid "Specify model using a lavaan style syntax."
-msgstr ""
-
-msgctxt "SemBasedMetaAnalysis|"
-msgid "Model Settings"
-msgstr ""
-
-msgctxt "SemBasedMetaAnalysis|"
-msgid "Replace constraints"
-msgstr ""
-
-msgctxt "SemBasedMetaAnalysis|"
-msgid "Replace constraints in the model."
-msgstr ""
-
-msgctxt "SemBasedMetaAnalysis|"
-msgid "Fix latent variance to 1"
-msgstr ""
-
-msgctxt "SemBasedMetaAnalysis|"
-msgid "Fix the variance of latent variables to 1."
 msgstr ""
 
 msgctxt "SemBasedMetaAnalysis|"

@@ -7080,14 +7080,6 @@ msgid "Model Settings"
 msgstr ""
 
 msgctxt "MetaAnalyticSem|"
-msgid "Replace constraints"
-msgstr ""
-
-msgctxt "MetaAnalyticSem|"
-msgid "Replace constraints in the model."
-msgstr ""
-
-msgctxt "MetaAnalyticSem|"
 msgid "Fix latent variance to 1"
 msgstr ""
 
@@ -7269,26 +7261,6 @@ msgstr ""
 
 msgctxt "SemBasedMetaAnalysis|"
 msgid "Specify model using a lavaan style syntax."
-msgstr ""
-
-msgctxt "SemBasedMetaAnalysis|"
-msgid "Model Settings"
-msgstr ""
-
-msgctxt "SemBasedMetaAnalysis|"
-msgid "Replace constraints"
-msgstr ""
-
-msgctxt "SemBasedMetaAnalysis|"
-msgid "Replace constraints in the model."
-msgstr ""
-
-msgctxt "SemBasedMetaAnalysis|"
-msgid "Fix latent variance to 1"
-msgstr ""
-
-msgctxt "SemBasedMetaAnalysis|"
-msgid "Fix the variance of latent variables to 1."
 msgstr ""
 
 msgctxt "SemBasedMetaAnalysis|"
