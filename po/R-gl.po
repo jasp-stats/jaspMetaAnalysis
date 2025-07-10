@@ -61,7 +61,7 @@ msgid "BF%1$s%2$s"
 msgstr "FB%1$s%2$s"
 
 msgid "Log(BF%1$s%2$s)"
-msgstr "Log(BF%1$s%2$s)"
+msgstr "Log(FB%1$s%2$s)"
 
 msgid "Mean"
 msgstr "Media"
