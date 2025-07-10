@@ -1180,9 +1180,6 @@
   additionalObjects     <- list()
 
   if (options[["forestPlotHeterogeneityTest"]] && (.maIsClassical(options) || options[["bayesianModelAveragingHeterogeneity"]])) {
-
-
-
     additionalInformation[[tempRow]] <- data.frame(
       "label" = if (.maIsClassical(options)) .maPrintQTest(fit) else .robmaPrintTest(fit, options, "heterogeneity"),
       "y"     = tempRow,
@@ -1195,7 +1192,7 @@
     tempRow <- tempRow + 1
   }
 
-  if (!.maGetMethodOptions(options) %in% c("FE", "EE") && options[["forestPlotHeterogeneityEstimateTau"]]) {
+  if (!.maGetMethodOptions(options) %in% c("FE", "EE", "MH", "PETO") && options[["forestPlotHeterogeneityEstimateTau"]]) {
     additionalInformation[[tempRow]] <- data.frame(
       "label" = if (.maIsClassical(options)) .maPrintHeterogeneityEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "tau")
         else .robmaPrintPooledEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "tau", conditional = options[["forestPlotConditionalEstimates"]]),
@@ -1209,7 +1206,7 @@
     tempRow <- tempRow + 1
   }
 
-  if ((!.maGetMethodOptions(options) %in% c("FE", "EE")) && options[["forestPlotHeterogeneityEstimateTau2"]]) {
+  if ((!.maGetMethodOptions(options) %in% c("FE", "EE", "MH", "PETO")) && options[["forestPlotHeterogeneityEstimateTau2"]]) {
     additionalInformation[[tempRow]] <- data.frame(
       "label" = if (.maIsClassical(options)) .maPrintHeterogeneityEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "tau2")
       else .robmaPrintPooledEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "tau2", conditional = options[["forestPlotConditionalEstimates"]]),
@@ -1223,7 +1220,7 @@
     tempRow <- tempRow + 1
   }
 
-  if (!.maGetMethodOptions(options) %in% c("FE", "EE") && !.maIsMetaregressionHeterogeneity(options) && options[["forestPlotHeterogeneityEstimateI2"]]) {
+  if (!.maGetMethodOptions(options) %in% c("FE", "EE", "MH", "PETO") && !.maIsMetaregressionHeterogeneity(options) && options[["forestPlotHeterogeneityEstimateI2"]]) {
     additionalInformation[[tempRow]] <- data.frame(
       "label" = if (.maIsClassical(options)) .maPrintHeterogeneityEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "I2")
       else .robmaPrintPooledEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "I2", conditional = options[["forestPlotConditionalEstimates"]]),
@@ -1237,10 +1234,36 @@
     tempRow <- tempRow + 1
   }
 
-  if (!.maGetMethodOptions(options) %in% c("FE", "EE") && !.maIsMetaregressionHeterogeneity(options) && options[["forestPlotHeterogeneityEstimateH2"]]) {
+  if (.maGetMethodOptions(options) %in% c("MH", "PETO") && options[["forestPlotHeterogeneityEstimateI2"]]) {
+    additionalInformation[[tempRow]] <- data.frame(
+      "label" = .mamhpPrintHeterogeneityEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "I2"),
+      "y"     = tempRow,
+      "est"   = NA,
+      "lCi"   = NA,
+      "uCi"   = NA,
+      "test"  = "",
+      "face"  = NA
+    )
+    tempRow <- tempRow + 1
+  }
+
+  if (!.maGetMethodOptions(options) %in% c("FE", "EE", "MH", "PETO") && !.maIsMetaregressionHeterogeneity(options) && options[["forestPlotHeterogeneityEstimateH2"]]) {
     additionalInformation[[tempRow]] <- data.frame(
       "label" = if (.maIsClassical(options)) .maPrintHeterogeneityEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "H2")
       else .robmaPrintPooledEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "H2", conditional = options[["forestPlotConditionalEstimates"]]),
+      "y"     = tempRow,
+      "est"   = NA,
+      "lCi"   = NA,
+      "uCi"   = NA,
+      "test"  = "",
+      "face"  = NA
+    )
+    tempRow <- tempRow + 1
+  }
+
+  if (.maGetMethodOptions(options) %in% c("MH", "PETO") && options[["forestPlotHeterogeneityEstimateH2"]]) {
+    additionalInformation[[tempRow]] <- data.frame(
+      "label" = .mamhpPrintHeterogeneityEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "H2"),
       "y"     = tempRow,
       "est"   = NA,
       "lCi"   = NA,

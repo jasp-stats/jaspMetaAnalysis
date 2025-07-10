@@ -132,8 +132,11 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     return()
 
   # dispatch fitting function & dependencies
-  if (.maIsClassical(options)) {
+  if (.maIsClassical(options, notMHP = TRUE)) {
     fittingFunction <- .maFitModelFun
+    dependencies    <- .maDependencies
+  } else if (.maIsClassical(options)) {
+    fittingFunction <- .mamhpFitModelFun
     dependencies    <- .maDependencies
   } else {
     fittingFunction <- .robmaFitModelFun
@@ -792,6 +795,29 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     }
   }
 
+  # additional tests for Mantel-Haenszel
+  if (options[["analysis"]] == "mantelHaenszelPeto" &&
+      ((options[["method"]] == "mantelHaenszelFrequencies" && options[["effectSizeMeasure"]] == "OR") ||
+       (options[["method"]] == "mantelHaenszelEvents"      && options[["effectSizeMeasure"]] == "IRR"))) {
+
+    # add the Mantel-Haenszel test
+    tests[["mantelHaenszel"]] <- .maSafeRbind(lapply(fit, .mamhpRowMantelHaenszelTest, options = options))
+  }
+
+  # additional tests for Mantel-Haenszel
+  if (options[["analysis"]] == "mantelHaenszelPeto" &&
+      (options[["method"]] == "mantelHaenszelFrequencies" && options[["effectSizeMeasure"]] == "OR")) {
+
+    # add the Tarone's test
+    tests[["Tarone"]] <- .maSafeRbind(lapply(fit, .mamhpRowTaroneTest, options = options))
+  }
+
+  # additional tests for subgroup differences
+  if (options[["subgroup"]] != "") {
+    tests[["subgroup"]] <- .maRowSubgroupTest(fit, options = options)
+  }
+
+
   # add errors messages for failed fits
   for (i in seq_along(fit)[sapply(fit, jaspBase::isTryError)]) {
     testsTable$addFootnote(
@@ -857,9 +883,14 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   estimates[["effect"]] <- .maSafeRbind(lapply(fit, .maRowPooledEffectEstimate, options = options))
 
   # pooled heterogeneity
-  if (!.maGetMethodOptions(options) %in% c("EE", "FE") && !.maIsMultilevelMultivariate(options) &&
+  if (!.maGetMethodOptions(options) %in% c("EE", "FE", "MH", "PETO") && !.maIsMultilevelMultivariate(options) &&
       (options[["heterogeneityTau"]] ||options[["heterogeneityTau2"]] || options[["heterogeneityI2"]] || options[["heterogeneityH2"]])) {
 
+    # requires non-clustered fit
+    fitNonClustered <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
+    estimates[["heterogeneity"]] <- .maSafeRbind(lapply(fitNonClustered, .maRowPooledHeterogeneity, options = options))
+  } else if (options[["analysis"]] %in% "mantelHaenszelPeto" &&
+             (options[["heterogeneityI2"]] || options[["heterogeneityH2"]])) {
     # requires non-clustered fit
     fitNonClustered <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
     estimates[["heterogeneity"]] <- .maSafeRbind(lapply(fitNonClustered, .maRowPooledHeterogeneity, options = options))
@@ -3805,25 +3836,25 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
 # check functions
 .maIsMetaregression               <- function(options) {
-  return(.maIsMetaregressionEffectSize(options) || .maIsMetaregressionHeterogeneity(options))
+  return(.maIsClassical(options, notMHP = TRUE) && (.maIsMetaregressionEffectSize(options) || .maIsMetaregressionHeterogeneity(options)))
 }
 .maIsMetaregressionEffectSize     <- function(options) {
-  return(length(options[["effectSizeModelTerms"]]) > 0)
+  return(.maIsClassical(options, notMHP = TRUE) && length(options[["effectSizeModelTerms"]]) > 0)
 }
 .maIsMetaregressionHeterogeneity  <- function(options) {
-  return(length(options[["heterogeneityModelTerms"]]) > 0)
+  return(.maIsClassical(options, notMHP = TRUE) && length(options[["heterogeneityModelTerms"]]) > 0)
 }
 .maIsClustered                    <- function(options) {
-  return(options[["clustering"]] != "")
+  return(.maIsClassical(options, notMHP = TRUE) && options[["clustering"]] != "")
 }
 .maIsMetaregressionFtest          <- function(options) {
-  return(options[["fixedEffectTest"]] %in% c("knha", "t"))
+  return(.maIsClassical(options, notMHP = TRUE) && options[["fixedEffectTest"]] %in% c("knha", "t"))
 }
 .maIsMultilevelMultivariate       <- function(options) {
   return(options[["analysis"]] == "metaAnalysisMultilevelMultivariate")
 }
 .maIsPermutation                  <- function(options) {
-  return(!.maIsClustered(options) && options[["permutationTest"]])
+  return(.maIsClassical(options, notMHP = TRUE) && !.maIsClustered(options) && options[["permutationTest"]])
 }
 .maCheckIsPossibleOptions         <- function(options) {
 
@@ -3839,7 +3870,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # dummy return for Bayesian methods
   # simplifies further plotting dispatch in forest plot
-  if (!.maIsClassical(options)) {
+  if (options[["method"]] %in% c("RoBMA", "NoBMA", "BiBMA")) {
     if (.robmaHasHeterogeneity(options))
       return("REML")
     else
@@ -3862,6 +3893,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     "pauleMandelMu"      = "PMM",
     "qeneralizedQStat"   = "GENQ",
     "qeneralizedQStatMu" = "GENQM",
+    "mantelHaenszelFrequencies" = "MH",
+    "mantelHaenszelEvents"      = "MH",
+    "peto"                      = "PETO",
     NA
   )
 }
@@ -4356,6 +4390,34 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   return(row)
 }
+.maRowSubgroupTest                    <- function(fit, options) {
+
+  est <- lapply(fit, function(x) {
+    if (isTryError(x)) {
+      return()
+    } else {
+      return(data.frame(predict(x)))
+    }
+  })
+  est <- do.call(rbind, est[!sapply(est, is.null)])
+
+  if (nrow(est) == 0)
+    return()
+
+  subFit <- try(metafor::rma(yi = est[["pred"]], sei = est[["se"]], mods = ~ as.factor(1:nrow(est)), method = "FE"))
+
+  if (jaspBase::isTryError(subFit))
+    return()
+
+  row <- data.frame(
+    subgroup = "",
+    test     = gettext("Subgroup differences"),
+    stat     = sprintf(paste0("Q\U2098(%1$i) = ", if (subFit[["QM"]] < 1e5) "%2$.2f" else "%2$.3g"), nrow(est) - 1, subFit[["QM"]]),
+    pval     = subFit[["QMp"]]
+  )
+
+  return(row)
+}
 .maRowPooledEffectEstimate            <- function(fit, options) {
 
   # handle missing subfits
@@ -4397,7 +4459,11 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   }
 
   # pooled effect size
-  row          <- .maComputePooledHeterogeneity(fit, options)
+  if (options[["analysis"]] == "mantelHaenszelPeto") {
+    row <- .mamhpComputePooledHeterogeneity(fit, options)
+  } else {
+    row <- .maComputePooledHeterogeneity(fit, options)
+  }
   row$subgroup <- attr(fit, "subgroup")
 
   row <- row[,c(

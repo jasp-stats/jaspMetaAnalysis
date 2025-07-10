@@ -38,7 +38,8 @@ Section
 				name:		"diagnosticsVarianceInflationFactor"
 				text:		qsTr("Variance inflation factor")
 				Layout.preferredWidth: 300 * jaspTheme.uiScale
-				enabled:	predictors.count > 0
+				visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
+				enabled:	(analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate") && predictors.count > 0
 				info: qsTr("Include variance inflation factors to assess multicollinearity among predictors. Available when predictors are included in the model.")
 
 				CheckBox
@@ -54,6 +55,9 @@ Section
 			{
 				name:		"diagnosticsCasewiseDiagnostics"
 				text:		qsTr("Casewise diagnostics")
+				visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
+				enabled:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
+				Layout.preferredWidth: 300 * jaspTheme.uiScale
 				info: qsTr("Include casewise diagnostics to assess the influence of individual studies on the meta-analysis results. Note that diagnostics are always based on the non-clustered model.")
 
 				CheckBox
@@ -114,6 +118,8 @@ Section
 			{
 				name:		"diagnosticsPlotsProfileLikelihood"
 				text:		qsTr("Profile likelihood")
+				visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
+				enabled:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
 				info: qsTr("Include a profile likelihood plot for the heterogeneity parameter (τ²).")
 			}
 

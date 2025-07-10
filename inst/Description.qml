@@ -58,6 +58,13 @@ Description
 
 	Analysis
 	{
+		menu:			qsTr("Mantel-Haenszel / Peto (beta)")
+		title:			qsTr("Mantel-Haenszel / Peto (beta)")
+		func:			"ClassicalMantelHaenszelPeto"
+	}
+
+	Analysis
+	{
 		menu:			qsTr("Prediction Model Performance")
 		title:			qsTr("Classical Prediction Model Performance")
 		func:			"ClassicalPredictionPerformance"
