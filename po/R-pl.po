@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.0\n"
 "POT-Creation-Date: 2025-07-05 03:01\n"
-"PO-Revision-Date: 2025-07-09 19:01+0000\n"
+"PO-Revision-Date: 2025-07-11 22:01+0000\n"
 "Last-Translator: Tomasz Misiuro <tomaszmisiuro@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/pl/>\n"
@@ -143,7 +143,7 @@ msgid ""
 msgstr ""
 
 msgid "Model Probabilities"
-msgstr ""
+msgstr "Prawdopodobieństwa modeli"
 
 msgid "Prior"
 msgstr "Prior"
@@ -577,9 +577,8 @@ msgid ""
 "heterogeneity."
 msgstr ""
 
-#, fuzzy
 msgid "Squared Pearson Residual"
-msgstr "Reszty standaryzowane"
+msgstr "Kwadrat reszty Pearsona"
 
 msgid "Influence on Fitted Value"
 msgstr ""
@@ -1414,7 +1413,7 @@ msgid "Available Variable Names"
 msgstr ""
 
 msgid "Descriptives"
-msgstr ""
+msgstr "Statystyki opisowe"
 
 msgid "%1$s: %1$s Matrix"
 msgstr ""
