@@ -4721,9 +4721,8 @@ msgid ""
 "developed by Bartoš et al. (2021)"
 msgstr ""
 "Verwendung von Priorverteilungen basierend auf der Cochrane-Datenbank "
-"systematischer Übersichtsarbeiten, entwickelt von Bartoš et al. (2022)."
+"systematischer Übersichtsarbeiten, entwickelt von Bartoš et al. (2022)"
 
-#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Custom"
 msgstr "Benutzerdefiniert"
@@ -4734,7 +4733,6 @@ msgid ""
 "model ensemble for the effect size and heterogeneity prior distributions."
 msgstr ""
 
-#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Scale"
 msgstr "Skalenparameter"
@@ -4780,11 +4778,11 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "References"
-msgstr ""
+msgstr "Referenzen"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "R Packages"
-msgstr ""
+msgstr "R-Pakete"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Variable containing the observed effect sizes."
