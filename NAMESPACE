@@ -1,6 +1,7 @@
 import(jaspBase)
 export(ClassicalMetaAnalysis)
 export(ClassicalMetaAnalysisMultilevelMultivariate)
+export(ClassicalMantelHaenszelPeto)
 export(SelectionModels)
 export(WaapWls)
 export(PetPeese)

@@ -78,7 +78,12 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "varianceCovarianceMatrixConstructTypeCorrelationMatrix",
   "varianceCovarianceMatrixConstructTypeCorrelationMatrixValue",
   "varianceCovarianceMatrixConstructTypeCorrelationMatrixFilePath",
-  "varianceCovarianceMatrixTimeLag1Correlation"
+  "varianceCovarianceMatrixTimeLag1Correlation",
+  # Mantel-Haenszel / Peto
+  "successesGroup1", "successesGroup2", "sampleSizeGroup1", "sampleSizeGroup2",
+  "eventsGroup1", "eventsGroup2", "personTimeGroup1", "personTimeGroup2",
+  "effectSizeMeasure",
+  "advancedAdd", "advancedTo", "advancedDropStudiesWithNoCasesOrEvents", "advancedContinuityCorrection"
 )
 .maForestPlotDependencies <- c(
   # do not forget to add variable carrying options to the .maDataPlottingDependencies
@@ -171,11 +176,12 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotStudyInformationOrderBy",
   "forestPlotStudyInformationAggregateBy",
   "forestPlotMappingColor",
-  "forestPlotMappingShape"
+  "forestPlotMappingShape",
+  "studyLabels"
 )
 .maReady               <- function(options) {
 
-  if (.maIsClassical(options)) {
+  if (.maIsClassical(options, notMHP = TRUE)) {
 
     # data
     inputReady <- options[["effectSize"]] != "" && options[["effectSizeStandardError"]] != ""
@@ -185,6 +191,19 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
     termsHeterogeneityReady <- length(options[["heterogeneityModelTerms"]]) > 0 || options[["heterogeneityModelIncludeIntercept"]]
 
     return(inputReady && termsEffectSizeReady && termsHeterogeneityReady)
+
+  } else if (.maIsClassical(options)) {
+
+    # data
+    if (options[["method"]] %in% c("mantelHaenszelFrequencies", "peto")) {
+      inputReady <- options[["successesGroup1"]] != "" && options[["successesGroup2"]] != "" &&
+        options[["sampleSizeGroup1"]] != "" && options[["sampleSizeGroup2"]] != ""
+    } else if (options[["method"]] == "mantelHaenszelEvents") {
+      inputReady <- options[["eventsGroup1"]] != "" && options[["eventsGroup2"]] != "" &&
+        options[["personTimeGroup1"]] != "" && options[["personTimeGroup2"]] != ""
+    }
+
+    return(inputReady)
 
   } else {
 
@@ -263,11 +282,15 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
       return(gettext("All standard errors must be positive."))
     }
   })
-.maIsClassical         <- function(options) {
+.maIsClassical         <- function(options, notMHP = FALSE) {
 
   # check if the analysis is classical
-  if (options[["analysis"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate")) {
-    return(TRUE)
+  if (options[["analysis"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate", "mantelHaenszelPeto")) {
+    if (notMHP) {
+      return(options[["analysis"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate"))
+    } else {
+      return(TRUE)
+    }
   } else if (options[["analysis"]] %in% c("RoBMA", "NoBMA", "BiBMA")){
     return(FALSE)
   } else {

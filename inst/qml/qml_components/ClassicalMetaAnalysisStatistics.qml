@@ -32,7 +32,7 @@ Section
 		title:		qsTr("Heterogeneity")
 		columns:	2
 		enabled:	method.value != "fixedEffects" && method.value != "equalEffects"
-		visible:	analysisType === "metaAnalysis"
+		visible:	analysisType === "metaAnalysis" || analysisType === "ClassicalMantelHaenszelPeto"
 		info: qsTr("Summarize the meta-analytic between-study heterogeneity. Unavailable when performing multilevel/multivariate meta-analysis.")
 
 		CheckBox
@@ -40,6 +40,7 @@ Section
 			text:		qsTr("𝜏")
 			name:		"heterogeneityTau"
 			checked:	true
+			visible:	analysisType === "metaAnalysis"
 			info: qsTr("Include 𝜏, the square root of the estimated between-study variance.")
 		}
 
@@ -48,6 +49,7 @@ Section
 			text:		qsTr("𝜏²")
 			name:		"heterogeneityTau2"
 			checked:	true
+			visible:	analysisType === "metaAnalysis"
 			info: qsTr("Include 𝜏², the estimated between-study variance.")
 		}
 
@@ -55,7 +57,7 @@ Section
 		{
 			text:		qsTr("I²")
 			name:		"heterogeneityI2"
-			checked:	false
+			checked:	analysisType === "ClassicalMantelHaenszelPeto"
 			info: qsTr("Include I², the percentage of total variation across studies due to heterogeneity.")
 		}
 
@@ -95,6 +97,7 @@ Section
 	{
 		title:		qsTr("Meta-Regression")
 		enabled:	predictors.count > 0
+		visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
 		info: qsTr("Create summaries of the meta-regression. Available when predictors are included.")
 
 		CheckBox
@@ -143,6 +146,7 @@ Section
 			text:		qsTr("Prediction intervals")
 			name:		"predictionIntervals"
 			checked:	true
+			visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
 			info: qsTr("Include prediction intervals in the tabular output.")
 		}
 
@@ -152,23 +156,34 @@ Section
 			label:			qsTr("Transform effect size")
 			setLabelAbove:	true
 			info: qsTr("Select a transformation to apply to the effect size estimates in the output. This transformation applies to the 'Meta-Analytic Estimates Table', 'Estimated Marginal Means Table', 'Forest Plot', and  the 'Bubble Plot'. The 'Meta-Regression Coeffient Estimates' are not transformed.")
-			values:			[
-					{ label: qsTr("None")								, value: "none"							},  // NULL
-					{ label: qsTr("Fisher's z to r")					, value: "fishersZToCorrelation"		},  // transf.ztor
-					{ label: qsTr("Exponential")						, value: "exponential"					},  // exp
-					{ label: qsTr("Log odds to proportions")			, value: "logOddsToProportions"			},  // transf.logit
-					{ label: qsTr("Log odds to SMD (normal)")			, value: "logOddsToSmdNormal"			},  // transf.lnortod.norm
-					{ label: qsTr("Log odds to SMD (logistic)")			, value: "logOddsToSmdLogistic"			},  // transf.lnortod.logis
-					{ label: qsTr("SMD to log odds (normal)")			, value: "smdToLogOddsNormal"			},  // transf.dtolnor.norm
-					{ label: qsTr("SMD to log odds (logistic)")			, value: "smdToLogOddsLogistic"			},  // transf.dtolnor.logis
-					{ label: qsTr("Hakstian & Whalen inverse α")		, value: "hakstianAndWhalenInverseAlpha"},  // transf.iahw 
-					{ label: qsTr("Bonett inverse α")					, value: "bonettInverseAlpha"			},  // transf.iabt
-					{ label: qsTr("Z to R²")							, value: "zToR2"						}, 	// transf.ztor2
-					{ label: qsTr("SMD to Cohen's U₁")					, value: "smdToCohensU1"				},  // transf.dtou1
-					{ label: qsTr("SMD to Cohen's U₂")					, value: "smdToCohensU2"				},  // transf.dtou2
-					{ label: qsTr("SMD to Cohen's U₃")					, value: "smdToCohensU3"				},  // transf.dtou3
-					{ label: qsTr("SMD to CLES, Pr(superiority)")		, value: "smdToCles"					},  // transf.dtocles
-				]
+			values:			(function() {
+				if (analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate") {
+					return [
+						{ label: qsTr("None")								, value: "none"							},  // NULL
+						{ label: qsTr("Fisher's z to r")					, value: "fishersZToCorrelation"		},  // transf.ztor
+						{ label: qsTr("Exponential")						, value: "exponential"					},  // exp
+						{ label: qsTr("Log odds to proportions")			, value: "logOddsToProportions"			},  // transf.logit
+						{ label: qsTr("Log odds to SMD (normal)")			, value: "logOddsToSmdNormal"			},  // transf.lnortod.norm
+						{ label: qsTr("Log odds to SMD (logistic)")			, value: "logOddsToSmdLogistic"			},  // transf.lnortod.logis
+						{ label: qsTr("SMD to log odds (normal)")			, value: "smdToLogOddsNormal"			},  // transf.dtolnor.norm
+						{ label: qsTr("SMD to log odds (logistic)")			, value: "smdToLogOddsLogistic"			},  // transf.dtolnor.logis
+						{ label: qsTr("Hakstian & Whalen inverse α")		, value: "hakstianAndWhalenInverseAlpha"},  // transf.iahw 
+						{ label: qsTr("Bonett inverse α")					, value: "bonettInverseAlpha"			},  // transf.iabt
+						{ label: qsTr("Z to R²")							, value: "zToR2"						}, 	// transf.ztor2
+						{ label: qsTr("SMD to Cohen's U₁")					, value: "smdToCohensU1"				},  // transf.dtou1
+						{ label: qsTr("SMD to Cohen's U₂")					, value: "smdToCohensU2"				},  // transf.dtou2
+						{ label: qsTr("SMD to Cohen's U₃")					, value: "smdToCohensU3"				},  // transf.dtou3
+						{ label: qsTr("SMD to CLES, Pr(superiority)")		, value: "smdToCles"					},  // transf.dtocles
+					];
+				} else {
+					return [
+						{ label: qsTr("None")								, value: "none"							},  // NULL
+						{ label: qsTr("Exponential")						, value: "exponential"					},  // exp
+						{ label: qsTr("Log odds to proportions")			, value: "logOddsToProportions"			},  // transf.logit
+						{ label: qsTr("Log odds to SMD (normal)")			, value: "logOddsToSmdNormal"			},  // transf.lnortod.norm
+						{ label: qsTr("Log odds to SMD (logistic)")			, value: "logOddsToSmdLogistic"			},  // transf.lnortod.logis
+					];
+				}})()
 		}
 	}
 

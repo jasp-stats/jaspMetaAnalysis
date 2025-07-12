@@ -233,94 +233,109 @@ Section
 	}
 
 
-
-	Divider { }
-
-	CheckBox
-	{
-		name:		"forestPlotEstimatedMarginalMeans"
-		id:			forestPlotEstimatedMarginalMeans
-		text:		qsTr("Estimated marginal means")
-		enabled:	sectionModel.effectSizeModelTermsCount > 0
-		info: qsTr("Add estimated marginal means information to the forest plot. Available when effect size meta-regression is specified.")
-	}
-
-	VariablesForm
-	{
-		preferredHeight:	150 * preferencesModel.uiScale
-		enabled:			forestPlotEstimatedMarginalMeans.checked
-
-		AvailableVariablesList
-		{
-			name:			"forestPlotEstimatedMarginalMeansModelVariables"
-			title:			qsTr("Model Variables")
-			source:			[{ name: "effectSizeModelTerms", use: "noInteraction" }]
-		}
-
-		AssignedVariablesList
-		{
-			id:				forestPlotEstimatedMarginalMeansSelectedVariables
-			name:			"forestPlotEstimatedMarginalMeansSelectedVariables"
-			title:			qsTr("Selected Variables")
-			allowTypeChange:false
-			info: qsTr("Select variables for which the estimated marginal means are visualized.")
-		}
-	}
-
 	Group
 	{
-		columns:	2
+		visible: 
+			analysisType === "metaAnalysis" || 
+			analysisType === "metaAnalysisMultilevelMultivariate" || 
+			analysisType === "RoBMA" ||
+			analysisType === "NoBMA" ||
+			analysisType === "BiBMA"
+		enabled: 
+			analysisType === "metaAnalysis" || 
+			analysisType === "metaAnalysisMultilevelMultivariate" || 
+			analysisType === "RoBMA" ||
+			analysisType === "NoBMA" ||
+			analysisType === "BiBMA"
 
-		Group
-		{
-			CheckBox
-			{
-				name:		"forestPlotEstimatedMarginalMeansTermTests"
-				id:			forestPlotEstimatedMarginalMeansTermTests
-				enabled:	forestPlotEstimatedMarginalMeans.checked && ((analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate") || (bayesianModelAveragingEffectSize.checked || bayesianModelAveragingModerations.checked))
-				label:		qsTr("Term tests")
-				checked:	true
-				Layout.preferredWidth: 350 * jaspTheme.uiScale
-				info: qsTr("Include the omnibus term test of variables included in the estimated marginal means. The null hypothesis states that the effect size at all levels of the categorical variable are equal or that there is no linear association between the effect size and the continuous variable.")
-			}
-
-			CheckBox
-			{
-				name:		"forestPlotEstimatedMarginalMeansCoefficientTests"
-				id:			forestPlotEstimatedMarginalMeansCoefficientTests
-				enabled:	forestPlotEstimatedMarginalMeans.checked
-				visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
-				label:		qsTr("Coefficient tests")
-				checked:	true
-				info: qsTr("Include coefficient tests of variables included in the estimated marginal means. The null hypothesis states that the estimated marginal mean for a given level equals the tested value.")
-
-				DoubleField
-				{
-					name:			"forestPlotEstimatedMarginalMeansCoefficientTestsAgainst"
-					text:			qsTr("Against")
-					defaultValue:	0
-					info: qsTr("Specify the test value for the coefficient tests.")
-				}
-			}
-
-			CheckBox
-			{
-				name:		"forestPlotEstimatedMarginalMeansCoefficientTestsAgainst0"
-				enabled:	forestPlotEstimatedMarginalMeans.checked && (bayesianModelAveragingEffectSize.checked || bayesianModelAveragingModerations.checked)
-				visible:	analysisType === "RoBMA" || analysisType === "NoBMA"
-				label:		qsTr("Coefficient tests against 0")
-				checked:	true
-				info: qsTr("Include coefficient tests of variables included in the estimated marginal means against 0. The null hypothesis states that the estimated marginal mean for a given level equals the tested value.")
-			}
-
-		}
+		Divider { }
 
 		CheckBox
 		{
-			name:		"forestPlotEstimatedMarginalMeansAdjustedEffectSizeEstimate"
-			label:		qsTr("Adjusted effect size estimate")
-			enabled:	forestPlotEstimatedMarginalMeans.checked
-			info: qsTr("Include the adjusted effect size estimate in the estimated marginal means section.")
+			name:		"forestPlotEstimatedMarginalMeans"
+			id:			forestPlotEstimatedMarginalMeans
+			text:		qsTr("Estimated marginal means")
+			enabled:	sectionModel.effectSizeModelTermsCount > 0
+			info: qsTr("Add estimated marginal means information to the forest plot. Available when effect size meta-regression is specified.")
+		}
+
+		VariablesForm
+		{
+			preferredHeight:	150 * preferencesModel.uiScale
+			enabled:			forestPlotEstimatedMarginalMeans.checked
+
+			AvailableVariablesList
+			{
+				name:			"forestPlotEstimatedMarginalMeansModelVariables"
+				title:			qsTr("Model Variables")
+				source:			analysisType === "ClassicalMantelHaenszelPeto" ? undefined : [{ name: "effectSizeModelTerms", use: "noInteraction" }]
+			}
+
+			AssignedVariablesList
+			{
+				id:				forestPlotEstimatedMarginalMeansSelectedVariables
+				name:			"forestPlotEstimatedMarginalMeansSelectedVariables"
+				title:			qsTr("Selected Variables")
+				allowTypeChange:false
+				info: qsTr("Select variables for which the estimated marginal means are visualized.")
+			}
+		}
+
+		Group
+		{
+			columns:	2
+
+			Group
+			{
+				CheckBox
+				{
+					name:		"forestPlotEstimatedMarginalMeansTermTests"
+					id:			forestPlotEstimatedMarginalMeansTermTests
+					enabled:	forestPlotEstimatedMarginalMeans.checked && ((analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate") || (bayesianModelAveragingEffectSize.checked || bayesianModelAveragingModerations.checked))
+					label:		qsTr("Term tests")
+					checked:	true
+					Layout.preferredWidth: 350 * jaspTheme.uiScale
+					info: qsTr("Include the omnibus term test of variables included in the estimated marginal means. The null hypothesis states that the effect size at all levels of the categorical variable are equal or that there is no linear association between the effect size and the continuous variable.")
+				}
+
+				CheckBox
+				{
+					name:		"forestPlotEstimatedMarginalMeansCoefficientTests"
+					id:			forestPlotEstimatedMarginalMeansCoefficientTests
+					enabled:	forestPlotEstimatedMarginalMeans.checked
+					visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
+					label:		qsTr("Coefficient tests")
+					checked:	true
+					info: qsTr("Include coefficient tests of variables included in the estimated marginal means. The null hypothesis states that the estimated marginal mean for a given level equals the tested value.")
+
+					DoubleField
+					{
+						name:			"forestPlotEstimatedMarginalMeansCoefficientTestsAgainst"
+						text:			qsTr("Against")
+						defaultValue:	0
+						info: qsTr("Specify the test value for the coefficient tests.")
+					}
+				}
+
+				CheckBox
+				{
+					name:		"forestPlotEstimatedMarginalMeansCoefficientTestsAgainst0"
+					enabled:	forestPlotEstimatedMarginalMeans.checked && (bayesianModelAveragingEffectSize.checked || bayesianModelAveragingModerations.checked)
+					visible:	analysisType === "RoBMA" || analysisType === "NoBMA"
+					label:		qsTr("Coefficient tests against 0")
+					checked:	true
+					info: qsTr("Include coefficient tests of variables included in the estimated marginal means against 0. The null hypothesis states that the estimated marginal mean for a given level equals the tested value.")
+				}
+
+			}
+
+			CheckBox
+			{
+				name:		"forestPlotEstimatedMarginalMeansAdjustedEffectSizeEstimate"
+				label:		qsTr("Adjusted effect size estimate")
+				enabled:	forestPlotEstimatedMarginalMeans.checked
+				info: qsTr("Include the adjusted effect size estimate in the estimated marginal means section.")
+			}
 		}
 	}
 
@@ -359,13 +374,13 @@ Section
 			{
 				title:		qsTr("Estimate")
 				columns:	2
-				visible:	analysisType === "metaAnalysis" || analysisType === "RoBMA"  || analysisType === "NoBMA" || analysisType === "BiBMA"
 				enabled:	(method.value != "fixedEffects" || method.value != "equalEffects")
 
 				CheckBox
 				{
 					text:		qsTr("𝜏")
 					name:		"forestPlotHeterogeneityEstimateTau"
+					visible:	analysisType === "metaAnalysis" || analysisType === "RoBMA"  || analysisType === "NoBMA" || analysisType === "BiBMA"
 					checked:	analysisType === "metaAnalysis" || analysisType === "RoBMA"  || analysisType === "NoBMA"
 					info: qsTr("Include the meta-analytic 𝜏, the square root of the estimated between-study variance in the model information section. Not available for multilevel/multivariate meta-analysis.")
 				}
@@ -374,6 +389,7 @@ Section
 				{
 					text:		qsTr("𝜏²")
 					name:		"forestPlotHeterogeneityEstimateTau2"
+					visible:	analysisType === "metaAnalysis" || analysisType === "RoBMA"  || analysisType === "NoBMA" || analysisType === "BiBMA"
 					checked:	false
 					info: qsTr("Include the meta-analytic 𝜏², the estimated between-study variance in the model information section. Not available for multilevel/multivariate meta-analysis.")
 				}
@@ -382,7 +398,7 @@ Section
 				{
 					text:		qsTr("I²")
 					name:		"forestPlotHeterogeneityEstimateI2"
-					enabled:	(analysisType === "RoBMA"  || analysisType === "NoBMA") || sectionModel.heterogeneityModelTermsCount == 0
+					enabled:	(analysisType === "RoBMA" || analysisType === "NoBMA" || analysisType === "ClassicalMantelHaenszelPeto") || sectionModel.heterogeneityModelTermsCount == 0
 					checked:	false
 					info: qsTr("Include the meta-analytic I², the percentage of total variation across studies due to heterogeneity in the model information section. Not available for multilevel/multivariate and binomial meta-analysis.")
 				}
@@ -391,7 +407,7 @@ Section
 				{
 					text:		qsTr("H²")
 					name:		"forestPlotHeterogeneityEstimateH2"	
-					enabled:	(analysisType === "RoBMA"  || analysisType === "NoBMA") || sectionModel.heterogeneityModelTermsCount == 0
+					enabled:	(analysisType === "RoBMA" || analysisType === "NoBMA" || analysisType === "ClassicalMantelHaenszelPeto") || sectionModel.heterogeneityModelTermsCount == 0
 					checked:	false
 					info: qsTr("Include the meta-analytic H², an index indicating the ratio of total variability to sampling variability in the model information section. Not available for multilevel/multivariate and binomial meta-analysis.")
 				}
@@ -460,7 +476,7 @@ Section
 			{
 				name:		"forestPlotEffectSizeModerationTest"
 				text:		qsTr("Moderation test")
-				enabled:	sectionModel.effectSizeModelTermsCount > 0
+				enabled:	(analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate") && sectionModel.effectSizeModelTermsCount > 0
 				visible: 	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
 				checked:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
 				info: qsTr("Include the omnibus effect size moderation test in the model information section. Available when effect size meta-regression is specified.")
@@ -494,6 +510,7 @@ Section
 	Group
 	{
 		columns:	2
+		enabled:	forestPlotStudyInformation.checked || forestPlotEstimatedMarginalMeans.checked || forestPlotModelInformation.checked
 
 
 		Group
@@ -507,6 +524,7 @@ Section
 					name:		"forestPlotPredictionIntervals"
 					text:		qsTr("Prediction intervals")
 					checked:	true
+					visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
 					Layout.preferredWidth: 300 * jaspTheme.uiScale
 					info: qsTr("Include prediction intervals of the estimated marginal means and the model information output.")
 				}
