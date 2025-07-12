@@ -824,10 +824,7 @@ msgid "(coef: %1$s)"
 msgstr "(coef: %1$s)"
 
 msgid "Subgroup differences"
-msgstr ""
-"Cobertura de los intervalos de confianza (o intervalos de credibilidad, en "
-"caso de análisis bayesiano) en porcentajes. Por defecto, el intervalo de "
-"confianza se fija en 95%. Esto se puede cambiar por el porcentaje deseado."
+msgstr "Diferencias de subgrupos"
 
 msgid "%s%% CI"
 msgstr "IC del %s%%"
