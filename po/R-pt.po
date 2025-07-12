@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2025-07-05 03:01\n"
+"POT-Creation-Date: 2025-07-12 03:05\n"
 "PO-Revision-Date: 2022-08-29 00:27+0000\n"
 "Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
@@ -342,6 +342,22 @@ msgstr ""
 msgid "Shrink factor"
 msgstr ""
 
+#, fuzzy
+msgid "All observations must be non-negative."
+msgstr "%i observação foi removida devido a valores ausentes."
+
+msgid "Cochran-Mantel-Haenszel"
+msgstr ""
+
+msgid "Mantel-Haenszel"
+msgstr ""
+
+msgid "Tarone"
+msgstr ""
+
+msgid "Metafor R Code"
+msgstr ""
+
 msgid "All standard errors must be positive."
 msgstr ""
 
@@ -510,9 +526,6 @@ msgid "Bubble Plots"
 msgstr ""
 
 msgid "%1$s (%2$s)"
-msgstr ""
-
-msgid "Metafor R Code"
 msgstr ""
 
 msgid "Effect Size Meta-Regression Variance Inflation"
@@ -804,6 +817,9 @@ msgstr "Testes de homogeneidade"
 #, fuzzy
 msgid "(coef: %1$s)"
 msgstr "Tamanho do efeito"
+
+msgid "Subgroup differences"
+msgstr ""
 
 msgid "%s%% CI"
 msgstr "%s%% IC"

@@ -4556,10 +4556,6 @@ msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Sample Size Group 1"
 msgstr ""
 
-msgctxt "BayesianBinomialMetaAnalysis|"
-msgid "Samples Size Group 2"
-msgstr ""
-
 #, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Predictors"
@@ -7511,4 +7507,209 @@ msgstr ""
 
 msgctxt "SemBasedMetaAnalysis|"
 msgid "Show a summary of the model fit statistics."
+msgstr ""
+
+msgctxt "Description|"
+msgid "Mantel-Haenszel / Peto (beta)"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Sample Size Group 2"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid ""
+"Mantel-Haenszel / Peto meta-analysis allows you to conduct a meta-analysis "
+"of frequencies / time to event outcomes."
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "References"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "R Packages"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "Successes Group 1"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "Successes Group 2"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "Sample Size Group 1"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "Sample Size Group 2"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "Events Group 1"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "Events Group 2"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "Person-Time Group 1"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "Person-Time Group 2"
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "Method"
+msgstr "方法"
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "Select the method to be used for the meta-analysis."
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "Mantel-Haenszel (Frequencies)"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "Mantel-Haenszel (Events)"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "Peto"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "Effect size measure"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "Select the effect size measure to be used in the meta-analysis."
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "Log odds ratio"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "Log risk ratio"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "Risk difference"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "Log incidence rate ratio"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "Incidence rate difference"
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "Study Labels"
+msgstr "研究ラベル"
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid ""
+"Variable containing labels for the studies. Used for labeling outputs and "
+"plots."
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid "Subgroup"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPeto|"
+msgid ""
+"Variable indicating subgroup stratification. For each subgroup, an "
+"independent model is fitted to the corresponding data set subset."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
+msgid "Advanced"
+msgstr "詳細"
+
+msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
+msgid "Advanced options for the meta-analysis."
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
+msgid "Show metafor R code"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
+msgid ""
+"Display the underlying R code used by the metafor package to fit the model."
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
+msgid "Include full dataset in subgroup analysis"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
+msgid ""
+"Include the full dataset output in the subgroup analysis. This option is "
+"only available when the subgroup analysis is selected."
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
+msgid "Handling of zero frequencies"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
+msgid "Options for handling zero frequencies in the data."
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
+msgid "Add"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
+msgid "To"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
+msgid "All"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
+msgid "Only zero"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
+msgid "If any zero"
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
+msgid "None"
+msgstr "なし"
+
+msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
+msgid "Drop studies with no cases/events"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
+msgid "Yes"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
+msgid "No"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
+msgid "Continuity correction"
+msgstr ""
+
+msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
+msgid "Apply continuity correction to Cochran-Mantel-Haenszel test statistic."
 msgstr ""

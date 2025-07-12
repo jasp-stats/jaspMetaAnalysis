@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.95.0\n"
-"POT-Creation-Date: 2025-07-05 03:01\n"
+"POT-Creation-Date: 2025-07-12 03:05\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -278,6 +278,21 @@ msgstr ""
 msgid "Shrink factor"
 msgstr ""
 
+msgid "All observations must be non-negative."
+msgstr ""
+
+msgid "Cochran-Mantel-Haenszel"
+msgstr ""
+
+msgid "Mantel-Haenszel"
+msgstr ""
+
+msgid "Tarone"
+msgstr ""
+
+msgid "Metafor R Code"
+msgstr ""
+
 msgid "All standard errors must be positive."
 msgstr ""
 
@@ -429,9 +444,6 @@ msgid "Bubble Plots"
 msgstr ""
 
 msgid "%1$s (%2$s)"
-msgstr ""
-
-msgid "Metafor R Code"
 msgstr ""
 
 msgid "Effect Size Meta-Regression Variance Inflation"
@@ -687,6 +699,9 @@ msgid "Moderation heterogeneity%1$s"
 msgstr ""
 
 msgid "(coef: %1$s)"
+msgstr ""
+
+msgid "Subgroup differences"
 msgstr ""
 
 msgid "%s%% CI"

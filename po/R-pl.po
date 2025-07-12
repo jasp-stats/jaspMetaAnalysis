@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.0\n"
-"POT-Creation-Date: 2025-07-05 03:01\n"
+"POT-Creation-Date: 2025-07-12 03:05\n"
 "PO-Revision-Date: 2025-07-11 22:01+0000\n"
 "Last-Translator: Tomasz Misiuro <tomaszmisiuro@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
@@ -317,6 +317,22 @@ msgid "Shrink factor"
 msgstr ""
 
 #, fuzzy
+msgid "All observations must be non-negative."
+msgstr "Wszystkie błędy standardowe/wielkości prób muszą być dodatnie."
+
+msgid "Cochran-Mantel-Haenszel"
+msgstr ""
+
+msgid "Mantel-Haenszel"
+msgstr ""
+
+msgid "Tarone"
+msgstr ""
+
+msgid "Metafor R Code"
+msgstr ""
+
+#, fuzzy
 msgid "All standard errors must be positive."
 msgstr "Wszystkie błędy standardowe/wielkości prób muszą być dodatnie."
 
@@ -477,9 +493,6 @@ msgstr ""
 #, fuzzy
 msgid "%1$s (%2$s)"
 msgstr "BF%1$s%2$s"
-
-msgid "Metafor R Code"
-msgstr ""
 
 msgid "Effect Size Meta-Regression Variance Inflation"
 msgstr ""
@@ -759,6 +772,9 @@ msgstr ""
 #, fuzzy
 msgid "(coef: %1$s)"
 msgstr "Wielkość efektu (%s)"
+
+msgid "Subgroup differences"
+msgstr ""
 
 msgid "%s%% CI"
 msgstr "%s%% PU"
@@ -1548,8 +1564,8 @@ msgid ""
 "%1$.2f < %2$1.0f. To increase accuracy please increase 'Iterations', or "
 "'Adapt delta' in the Options section."
 msgstr ""
-"Niska dokładność estymacji — najmniejsza efektywna liczba prób (ESS) wynosi %"
-"1\\$.2f < %2\\$1.0f. Aby zwiększyć dokładność, należy zwiększyć liczbę "
+"Niska dokładność estymacji — najmniejsza efektywna liczba prób (ESS) wynosi "
+"%1\\$.2f < %2\\$1.0f. Aby zwiększyć dokładność, należy zwiększyć liczbę "
 "„Iteracji” lub wartość „Adapt delta” w sekcji Opcje."
 
 msgid "Estimating Marginal Means"

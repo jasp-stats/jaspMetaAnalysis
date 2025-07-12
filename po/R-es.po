@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
-"POT-Creation-Date: 2025-07-05 03:01\n"
+"POT-Creation-Date: 2025-07-12 03:05\n"
 "PO-Revision-Date: 2025-07-06 03:42+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
@@ -361,6 +361,22 @@ msgstr "Última iteración de la cadena"
 msgid "Shrink factor"
 msgstr "Factor de contracción"
 
+#, fuzzy
+msgid "All observations must be non-negative."
+msgstr "Todos los errores típicos deben ser positivos."
+
+msgid "Cochran-Mantel-Haenszel"
+msgstr ""
+
+msgid "Mantel-Haenszel"
+msgstr ""
+
+msgid "Tarone"
+msgstr ""
+
+msgid "Metafor R Code"
+msgstr "Código de R de Metafor"
+
 msgid "All standard errors must be positive."
 msgstr "Todos los errores típicos deben ser positivos."
 
@@ -522,9 +538,6 @@ msgstr "Gráficos de burbujas"
 
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
-
-msgid "Metafor R Code"
-msgstr "Código de R de Metafor"
 
 msgid "Effect Size Meta-Regression Variance Inflation"
 msgstr ""
@@ -810,6 +823,9 @@ msgstr "Heterogeneidad de moderación %1$s"
 
 msgid "(coef: %1$s)"
 msgstr "(coef: %1$s)"
+
+msgid "Subgroup differences"
+msgstr ""
 
 msgid "%s%% CI"
 msgstr "IC del %s%%"

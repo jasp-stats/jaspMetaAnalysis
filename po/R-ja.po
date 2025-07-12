@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
-"POT-Creation-Date: 2025-07-05 03:01\n"
+"POT-Creation-Date: 2025-07-12 03:05\n"
 "PO-Revision-Date: 2025-03-01 20:22+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -344,6 +344,22 @@ msgid "Shrink factor"
 msgstr "Shrink factor"
 
 #, fuzzy
+msgid "All observations must be non-negative."
+msgstr "全標準誤差とサンプルサイズは正である必要があります."
+
+msgid "Cochran-Mantel-Haenszel"
+msgstr ""
+
+msgid "Mantel-Haenszel"
+msgstr ""
+
+msgid "Tarone"
+msgstr ""
+
+msgid "Metafor R Code"
+msgstr ""
+
+#, fuzzy
 msgid "All standard errors must be positive."
 msgstr "全標準誤差とサンプルサイズは正である必要があります."
 
@@ -515,9 +531,6 @@ msgstr "ファンネルプロット"
 #, fuzzy
 msgid "%1$s (%2$s)"
 msgstr "BF%1$s%2$s"
-
-msgid "Metafor R Code"
-msgstr ""
 
 msgid "Effect Size Meta-Regression Variance Inflation"
 msgstr ""
@@ -812,6 +825,9 @@ msgstr "異質性の検定"
 #, fuzzy
 msgid "(coef: %1$s)"
 msgstr "効果量（%s）"
+
+msgid "Subgroup differences"
+msgstr ""
 
 msgid "%s%% CI"
 msgstr "%s%% CI"
