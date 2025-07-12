@@ -3396,11 +3396,11 @@ msgid ""
 msgstr ""
 "Setzen der Konvergenztoleranz für die Optimiererung. Verfügbar bei "
 "Verwendung bestimmter Methoden ohne Heterogenitätsmodellterme oder "
-"spezifische Optimierer in multilevel/multivariater Metaanalyse."
+"spezifische Optimierer für multilevel/multivariater Metaanalyse."
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Convergence relative tolerance"
-msgstr ""
+msgstr "Relative Konvergenztoleranz"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid ""
@@ -3408,10 +3408,13 @@ msgid ""
 "heterogeneity model terms are included or using specific optimizers in "
 "multilevel/multivariate meta-analysis."
 msgstr ""
+"Setzen der relative Konvergenztoleranz für die Optimiererung. Verfügbar, "
+"wenn Heterogenitätsmodellterme enthalten sind oder bei Verwendung von "
+"speziellen Optimierern für multilevel/multivariater Metaanalyse."
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Step adjustment"
-msgstr ""
+msgstr "Schrittanpassung"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid ""
@@ -3419,6 +3422,9 @@ msgid ""
 "certain methods without heterogeneity model terms and unavailable in "
 "multilevel/multivariate meta-analysis."
 msgstr ""
+"Setzen des Schritteinstellungsfaktors für den Optimierer. Verfügbar bei "
+"Verwendung bestimmter Methoden ohne Heterogenitätsmodellterme und nicht "
+"verfügbar für multilevel/multivariate Metaanalyse."
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Initial trust region radius"
@@ -4578,31 +4584,28 @@ msgstr ""
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Successes Group 1"
-msgstr ""
+msgstr "Erfolge Gruppe 1"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Successes Group 2"
-msgstr ""
+msgstr "Erfolge Gruppe 2"
 
-#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Sample Size Group 1"
 msgstr "Stichprobenumfang Gruppe 1"
 
-#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Predictors"
 msgstr "Prädiktoren"
 
-#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid ""
 "Variables to include as predictors (moderators) in the meta-regression "
 "model. See the 'Model' section for the meta-regression specification details."
 msgstr ""
 "Variablen, die als Prädiktoren (Moderatoren) in das Meta-Regressionsmodell "
-"einbezogen werden sollen. Einzelheiten zur Spezifikation der Meta-Regression "
-"finden Sie im Abschnitt \"Modell\"."
+"einbezogen werden sollen. Siehe Abschnitt 'Modell' für Details zur "
+"Spezifikation der Meta-Regression."
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Study Level (Multilevel)"
@@ -4698,23 +4701,27 @@ msgstr ""
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid ""
 "Use default prior distributions for the effect size and heterogeneity based "
 "on Bartoš et al. (2022)."
 msgstr ""
+"Verwendung von Standard-Priorverteilungen für die Effektstärke und "
+"Heterogenität, basierend auf Bartoš et al. (2022)."
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Medicine"
-msgstr ""
+msgstr "Medizin"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid ""
 "Use prior distributions based on the Cochrane Database of Systematic Reviews "
 "developed by Bartoš et al. (2021)"
 msgstr ""
+"Verwendung von Priorverteilungen basierend auf der Cochrane-Datenbank "
+"systematischer Übersichtsarbeiten, entwickelt von Bartoš et al. (2022)."
 
 #, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
@@ -5269,7 +5276,6 @@ msgctxt "BubblePlot|"
 msgid "Minimal"
 msgstr "Minimal"
 
-#, fuzzy
 msgctxt "BubblePlot|"
 msgid "Relative text size"
 msgstr "Relative Textgröße"
@@ -5278,7 +5284,6 @@ msgctxt "BubblePlot|"
 msgid "Adjust the text size of the bubble plot."
 msgstr ""
 
-#, fuzzy
 msgctxt "BubblePlot|"
 msgid "Legend position"
 msgstr "Legendenposition"
@@ -5287,27 +5292,22 @@ msgctxt "BubblePlot|"
 msgid "Set the legend position of the bubble plot."
 msgstr ""
 
-#, fuzzy
 msgctxt "BubblePlot|"
 msgid "None"
 msgstr "Keine"
 
-#, fuzzy
 msgctxt "BubblePlot|"
 msgid "Bottom"
 msgstr "Unten"
 
-#, fuzzy
 msgctxt "BubblePlot|"
 msgid "Right"
 msgstr "Rechts"
 
-#, fuzzy
 msgctxt "BubblePlot|"
 msgid "Top"
 msgstr "Oben"
 
-#, fuzzy
 msgctxt "BubblePlot|"
 msgid "Left"
 msgstr "Links"
