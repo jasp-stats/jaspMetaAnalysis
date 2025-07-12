@@ -55,9 +55,9 @@ Section
 			{
 				name:		"diagnosticsCasewiseDiagnostics"
 				text:		qsTr("Casewise diagnostics")
+				Layout.preferredWidth: 300 * jaspTheme.uiScale
 				visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
 				enabled:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
-				Layout.preferredWidth: 300 * jaspTheme.uiScale
 				info: qsTr("Include casewise diagnostics to assess the influence of individual studies on the meta-analysis results. Note that diagnostics are always based on the non-clustered model.")
 
 				CheckBox
@@ -127,7 +127,7 @@ Section
 			{
 				name:		"diagnosticsPlotsBaujat"
 				text:		qsTr("Baujat")
-				visible:	analysisType === "metaAnalysis"
+				visible:	analysisType === "metaAnalysis" || analysisType === "ClassicalMantelHaenszelPeto"
 				info: qsTr("Include a Baujat plot to detect studies contributing to heterogeneity and overall effect size. Unavailable when performing multilevel/multivariate meta-analysis. Note that Baujat plot is always based on the non-clustered model.")
 			}
 

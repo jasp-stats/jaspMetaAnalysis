@@ -176,7 +176,8 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotStudyInformationOrderBy",
   "forestPlotStudyInformationAggregateBy",
   "forestPlotMappingColor",
-  "forestPlotMappingShape"
+  "forestPlotMappingShape",
+  "studyLabels"
 )
 .maReady               <- function(options) {
 

@@ -44,8 +44,7 @@ ClassicalMantelHaenszelPeto <- function(jaspResults, dataset = NULL, options, ..
     .maCasewiseDiagnosticsTable(jaspResults, options)
     .maCasewiseDiagnosticsExportColumns(jaspResults, dataset, options)
   }
-  if (options[["diagnosticsPlotsProfileLikelihood"]])
-    .maProfileLikelihoodPlot(jaspResults, options)
+
   if (options[["diagnosticsPlotsBaujat"]])
     .maBaujatPlot(jaspResults, options)
   if (options[["diagnosticsResidualFunnel"]])
@@ -139,7 +138,7 @@ ClassicalMantelHaenszelPeto <- function(jaspResults, dataset = NULL, options, ..
       data = dataset
     )
   } else if (options[["method"]] == "mantelHaenszelEvents") {
-    rmaInput <- c(
+    rmaInput <- list(
       x1i  = as.name(options[["eventsGroup1"]]),
       x2i  = as.name(options[["eventsGroup2"]]),
       t1i  = as.name(options[["personTimeGroup1"]]),

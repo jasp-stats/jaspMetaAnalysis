@@ -85,7 +85,6 @@ Section
 				name: "advancedDropStudiesWithNoCasesOrEvents"
 				title: qsTr("Drop studies with no cases/events")
 				columns: 2
-				radioButtonsOnSameRow: true
 
 				RadioButton
 				{

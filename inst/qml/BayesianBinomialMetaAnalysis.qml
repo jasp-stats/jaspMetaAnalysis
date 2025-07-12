@@ -74,7 +74,7 @@ Form
 		AssignedVariablesList
 		{
 			name: 			"sampleSizeGroup2"
-			title: 			qsTr("Samples Size Group 2")
+			title: 			qsTr("Sample Size Group 2")
 			singleVariable: true
 			allowedColumns: ["scale"]
 		}

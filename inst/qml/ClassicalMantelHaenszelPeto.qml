@@ -47,6 +47,8 @@ Form
 			singleVariable: true
 			allowedColumns: ["scale"]
 			visible: 		method.value === "mantelHaenszelFrequencies" || method.value === "peto"
+			enabled: 		method.value === "mantelHaenszelFrequencies" || method.value === "peto"
+			onEnabledChanged:	itemDoubleClicked(0)
 		}
 
 		AssignedVariablesList
@@ -56,6 +58,8 @@ Form
 			singleVariable: true
 			allowedColumns: ["scale"]
 			visible: 		method.value === "mantelHaenszelFrequencies" || method.value === "peto"
+			enabled: 		method.value === "mantelHaenszelFrequencies" || method.value === "peto"
+			onEnabledChanged:	itemDoubleClicked(0)
 		}
 
 		AssignedVariablesList
@@ -65,15 +69,19 @@ Form
 			singleVariable: true
 			allowedColumns: ["scale"]
 			visible: 		method.value === "mantelHaenszelFrequencies" || method.value === "peto"
+			enabled: 		method.value === "mantelHaenszelFrequencies" || method.value === "peto"
+			onEnabledChanged:	itemDoubleClicked(0)
 		}
 
 		AssignedVariablesList
 		{
 			name: 			"sampleSizeGroup2"
-			title: 			qsTr("Samples Size Group 2")
+			title: 			qsTr("Sample Size Group 2")
 			singleVariable: true
 			allowedColumns: ["scale"]
 			visible: 		method.value === "mantelHaenszelFrequencies" || method.value === "peto"
+			enabled: 		method.value === "mantelHaenszelFrequencies" || method.value === "peto"
+			onEnabledChanged:	itemDoubleClicked(0)
 		}
 
 		AssignedVariablesList
@@ -83,6 +91,8 @@ Form
 			singleVariable: true
 			allowedColumns:	["scale"]
 			visible: 		method.value === "mantelHaenszelEvents"
+			enabled: 		method.value === "mantelHaenszelEvents"
+			onEnabledChanged:	itemDoubleClicked(0)
 		}
 
 		AssignedVariablesList
@@ -92,6 +102,8 @@ Form
 			singleVariable: true
 			allowedColumns:	["scale"]
 			visible: 		method.value === "mantelHaenszelEvents"
+			enabled: 		method.value === "mantelHaenszelEvents"
+			onEnabledChanged:	itemDoubleClicked(0)
 		}
 
 		AssignedVariablesList
@@ -101,6 +113,8 @@ Form
 			singleVariable: true
 			allowedColumns:	["scale"]
 			visible: 		method.value === "mantelHaenszelEvents"
+			enabled: 		method.value === "mantelHaenszelEvents"
+			onEnabledChanged:	itemDoubleClicked(0)
 		}
 
 		AssignedVariablesList
@@ -110,6 +124,8 @@ Form
 			singleVariable: true
 			allowedColumns:	["scale"]
 			visible: 		method.value === "mantelHaenszelEvents"
+			enabled: 		method.value === "mantelHaenszelEvents"
+			onEnabledChanged:	itemDoubleClicked(0)
 		}
 
 		DropDown

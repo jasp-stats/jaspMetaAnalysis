@@ -510,6 +510,7 @@ Section
 	Group
 	{
 		columns:	2
+		enabled:	forestPlotStudyInformation.checked || forestPlotEstimatedMarginalMeans.checked || forestPlotModelInformation.checked
 
 
 		Group

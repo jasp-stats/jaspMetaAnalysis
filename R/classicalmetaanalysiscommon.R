@@ -1986,7 +1986,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     baujatPlot       <- .maBaujatPlotFun(dfBaujat[[1]], options)
     baujatPlot$title <- gettext("Baujat Plot")
-    baujatPlot$dependOn(c(.maDependencies, "diagnosticsPlotsBaujat", "includeFullDatasetInSubgroupAnalysis"))
+    baujatPlot$dependOn(c(.maDependencies, "diagnosticsPlotsBaujat", "includeFullDatasetInSubgroupAnalysis", "studyLabels"))
     baujatPlot$position <- 9
     jaspResults[["baujatPlot"]] <- baujatPlot
     return()
@@ -1996,7 +1996,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     # create the output container
     baujatPlot       <- createJaspContainer()
     baujatPlot$title <- gettext("Baujat Plot")
-    baujatPlot$dependOn(c(.maDependencies, "diagnosticsPlotsBaujat", "includeFullDatasetInSubgroupAnalysis"))
+    baujatPlot$dependOn(c(.maDependencies, "diagnosticsPlotsBaujat", "includeFullDatasetInSubgroupAnalysis", "studyLabels"))
     baujatPlot$position <- 9
     jaspResults[["baujatPlot"]] <- baujatPlot
 
@@ -3836,19 +3836,19 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
 # check functions
 .maIsMetaregression               <- function(options) {
-  return(.maIsClassical(options, notMHP = TRUE) && (.maIsMetaregressionEffectSize(options) || .maIsMetaregressionHeterogeneity(options)))
+  return(.maIsMetaregressionEffectSize(options) || .maIsMetaregressionHeterogeneity(options))
 }
 .maIsMetaregressionEffectSize     <- function(options) {
-  return(.maIsClassical(options, notMHP = TRUE) && length(options[["effectSizeModelTerms"]]) > 0)
+  return(!is.null(options[["effectSizeModelTerms"]]) && length(options[["effectSizeModelTerms"]]) > 0)
 }
 .maIsMetaregressionHeterogeneity  <- function(options) {
-  return(.maIsClassical(options, notMHP = TRUE) && length(options[["heterogeneityModelTerms"]]) > 0)
+  return(!is.null(options[["heterogeneityModelTerms"]]) && length(options[["heterogeneityModelTerms"]]) > 0)
 }
 .maIsClustered                    <- function(options) {
-  return(.maIsClassical(options, notMHP = TRUE) && options[["clustering"]] != "")
+  return(!is.null(options[["clustering"]]) && options[["clustering"]] != "")
 }
 .maIsMetaregressionFtest          <- function(options) {
-  return(.maIsClassical(options, notMHP = TRUE) && options[["fixedEffectTest"]] %in% c("knha", "t"))
+  return(!is.null(options[["fixedEffectTest"]]) && options[["fixedEffectTest"]] %in% c("knha", "t"))
 }
 .maIsMultilevelMultivariate       <- function(options) {
   return(options[["analysis"]] == "metaAnalysisMultilevelMultivariate")
