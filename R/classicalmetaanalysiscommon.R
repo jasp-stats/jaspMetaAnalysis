@@ -3870,7 +3870,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # dummy return for Bayesian methods
   # simplifies further plotting dispatch in forest plot
-  if (options[["method"]] %in% c("RoBMA", "NoBMA", "BiBMA")) {
+  if (options[["analysis"]] %in% c("RoBMA", "NoBMA", "BiBMA")) {
     if (.robmaHasHeterogeneity(options))
       return("REML")
     else

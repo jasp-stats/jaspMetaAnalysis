@@ -524,7 +524,8 @@ Section
 					name:		"forestPlotPredictionIntervals"
 					text:		qsTr("Prediction intervals")
 					checked:	true
-					visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
+					visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate" ||
+								analysisType === "NoBMA" || analysisType === "RoBMA" || analysisType === "BiBMA"  
 					Layout.preferredWidth: 300 * jaspTheme.uiScale
 					info: qsTr("Include prediction intervals of the estimated marginal means and the model information output.")
 				}
@@ -541,7 +542,7 @@ Section
 				{
 					name:		"forestPlotConditionalEstimates"
 					text:		qsTr("Conditional estimates")
-					visible:	analysisType === "RoBMA" || analysisType === "NoBMA"
+					visible:	analysisType === "RoBMA" || analysisType === "NoBMA" || analysisType === "BiBMA"
 					checked:	false
 					info: qsTr("Display the conditional effect, heterogeneity, and estimated marginal means estimates.")
 				}
