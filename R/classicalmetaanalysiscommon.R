@@ -4396,7 +4396,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     if (isTryError(x)) {
       return()
     } else {
-      return(data.frame(predict(x)))
+      return(data.frame(.maComputePooledEffect(x, options, returnRaw = TRUE)))
     }
   })
   est <- do.call(rbind, est[!sapply(est, is.null)])
