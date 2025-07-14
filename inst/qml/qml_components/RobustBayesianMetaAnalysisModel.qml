@@ -57,7 +57,9 @@ Section
 				id:				effectSizeModelTerms
 				title:			qsTr("Model Terms")
 				listViewType:	JASP.Interaction
-				allowTypeChange:false
+				addAvailableVariablesToAssigned:true
+				allowTypeChange:				false
+				addInteractionsByDefault:		false
 				info: qsTr("Variables assigned as model terms in the effect size model.")
 			}
 		}
