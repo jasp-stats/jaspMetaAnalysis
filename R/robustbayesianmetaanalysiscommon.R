@@ -22,6 +22,9 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   contr.orthonormal <<- BayesTools::contr.orthonormal
   contr.independent <<- BayesTools::contr.independent
 
+  # check for interactions
+  .robmaCheckOptions(options)
+
   # devel settings
   # options[["advancedMcmcChains"]]     <- 2
   # options[["advancedMcmcAdaptation"]] <- 500
@@ -134,6 +137,18 @@ RobustBayesianMetaAnalysisCommon <- function(jaspResults, dataset, options, stat
   "seed", "setSeed"
 )
 
+.robmaCheckOptions <- function(options) {
+
+  if (length(options[["effectSizeModelTerms"]]) == 0)
+    return()
+
+  sapply(options[["effectSizeModelTerms"]], function(x) {
+    if (length(x[["components"]]) > 1)
+      .quitAnalysis(gettext("Interaction terms are currently not possible in Bayesian meta-analyses."))
+  })
+
+  return()
+}
 # model fitting function
 .robmaFitModelFun            <- function(dataset, options, subgroupName) {
   # --------------------------------------------------------------------------- #
