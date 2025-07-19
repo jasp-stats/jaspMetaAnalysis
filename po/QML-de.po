@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2025-07-13 09:01+0000\n"
+"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.13-dev\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -2122,7 +2128,6 @@ msgctxt "EffectSizeComputation|"
 msgid "Counts per time"
 msgstr ""
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Mixed"
 msgstr "Gemischt"
@@ -3381,7 +3386,7 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Convergence tolerance"
-msgstr ""
+msgstr "Konvergenztoleranz"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid ""
@@ -3389,10 +3394,13 @@ msgid ""
 "certain methods without heterogeneity model terms or specific optimizers in "
 "multilevel/multivariate meta-analysis."
 msgstr ""
+"Setzen der Konvergenztoleranz für die Optimiererung. Verfügbar bei "
+"Verwendung bestimmter Methoden ohne Heterogenitätsmodellterme oder "
+"spezifische Optimierer für multilevel/multivariater Metaanalyse."
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Convergence relative tolerance"
-msgstr ""
+msgstr "Relative Konvergenztoleranz"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid ""
@@ -3400,10 +3408,13 @@ msgid ""
 "heterogeneity model terms are included or using specific optimizers in "
 "multilevel/multivariate meta-analysis."
 msgstr ""
+"Setzen der relative Konvergenztoleranz für die Optimiererung. Verfügbar, "
+"wenn Heterogenitätsmodellterme enthalten sind oder bei Verwendung von "
+"speziellen Optimierern für multilevel/multivariater Metaanalyse."
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Step adjustment"
-msgstr ""
+msgstr "Schrittanpassung"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid ""
@@ -3411,6 +3422,9 @@ msgid ""
 "certain methods without heterogeneity model terms and unavailable in "
 "multilevel/multivariate meta-analysis."
 msgstr ""
+"Setzen des Schritteinstellungsfaktors für den Optimierer. Verfügbar bei "
+"Verwendung bestimmter Methoden ohne Heterogenitätsmodellterme und nicht "
+"verfügbar für multilevel/multivariate Metaanalyse."
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Initial trust region radius"
@@ -4570,31 +4584,28 @@ msgstr ""
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Successes Group 1"
-msgstr ""
+msgstr "Erfolge Gruppe 1"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Successes Group 2"
-msgstr ""
+msgstr "Erfolge Gruppe 2"
 
-#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Sample Size Group 1"
 msgstr "Stichprobenumfang Gruppe 1"
 
-#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Predictors"
 msgstr "Prädiktoren"
 
-#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid ""
 "Variables to include as predictors (moderators) in the meta-regression "
 "model. See the 'Model' section for the meta-regression specification details."
 msgstr ""
 "Variablen, die als Prädiktoren (Moderatoren) in das Meta-Regressionsmodell "
-"einbezogen werden sollen. Einzelheiten zur Spezifikation der Meta-Regression "
-"finden Sie im Abschnitt \"Modell\"."
+"einbezogen werden sollen. Siehe Abschnitt 'Modell' für Details zur "
+"Spezifikation der Meta-Regression."
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Study Level (Multilevel)"
@@ -4690,25 +4701,28 @@ msgstr ""
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid ""
 "Use default prior distributions for the effect size and heterogeneity based "
 "on Bartoš et al. (2022)."
 msgstr ""
+"Verwendung von Standard-Priorverteilungen für die Effektstärke und "
+"Heterogenität, basierend auf Bartoš et al. (2022)."
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Medicine"
-msgstr ""
+msgstr "Medizin"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid ""
 "Use prior distributions based on the Cochrane Database of Systematic Reviews "
 "developed by Bartoš et al. (2021)"
 msgstr ""
+"Verwendung von Priorverteilungen basierend auf der Cochrane-Datenbank "
+"systematischer Übersichtsarbeiten, entwickelt von Bartoš et al. (2022)"
 
-#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Custom"
 msgstr "Benutzerdefiniert"
@@ -4719,7 +4733,6 @@ msgid ""
 "model ensemble for the effect size and heterogeneity prior distributions."
 msgstr ""
 
-#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Scale"
 msgstr "Skalenparameter"
@@ -4765,11 +4778,11 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "References"
-msgstr ""
+msgstr "Referenzen"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "R Packages"
-msgstr ""
+msgstr "R-Pakete"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Variable containing the observed effect sizes."
@@ -5261,7 +5274,6 @@ msgctxt "BubblePlot|"
 msgid "Minimal"
 msgstr "Minimal"
 
-#, fuzzy
 msgctxt "BubblePlot|"
 msgid "Relative text size"
 msgstr "Relative Textgröße"
@@ -5270,7 +5282,6 @@ msgctxt "BubblePlot|"
 msgid "Adjust the text size of the bubble plot."
 msgstr ""
 
-#, fuzzy
 msgctxt "BubblePlot|"
 msgid "Legend position"
 msgstr "Legendenposition"
@@ -5279,27 +5290,22 @@ msgctxt "BubblePlot|"
 msgid "Set the legend position of the bubble plot."
 msgstr ""
 
-#, fuzzy
 msgctxt "BubblePlot|"
 msgid "None"
 msgstr "Keine"
 
-#, fuzzy
 msgctxt "BubblePlot|"
 msgid "Bottom"
 msgstr "Unten"
 
-#, fuzzy
 msgctxt "BubblePlot|"
 msgid "Right"
 msgstr "Rechts"
 
-#, fuzzy
 msgctxt "BubblePlot|"
 msgid "Top"
 msgstr "Oben"
 
-#, fuzzy
 msgctxt "BubblePlot|"
 msgid "Left"
 msgstr "Links"
