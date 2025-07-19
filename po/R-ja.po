@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
-"POT-Creation-Date: 2025-07-12 03:05\n"
+"POT-Creation-Date: 2025-07-19 03:02\n"
 "PO-Revision-Date: 2025-03-01 20:22+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -1655,6 +1655,9 @@ msgstr ""
 "推論の信頼性が低い可能性があります -- MCMC チェーンが収束していない可能性があ"
 "ります。最大のR-hatが %.3f > 1.01でした。R-hatを下げるためには、オプションで"
 "「Iterations」や「Adapt delta」を増やしてください。"
+
+msgid "Interaction terms are currently not possible in Bayesian meta-analyses."
+msgstr ""
 
 #, fuzzy
 msgid "Estimating Marginal Means"

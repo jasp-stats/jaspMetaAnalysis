@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.0\n"
-"POT-Creation-Date: 2025-07-12 03:05\n"
+"POT-Creation-Date: 2025-07-19 03:02\n"
 "PO-Revision-Date: 2025-07-16 21:01+0000\n"
 "Last-Translator: Tomasz Misiuro <tomaszmisiuro@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
@@ -1568,6 +1568,9 @@ msgstr ""
 "Niska dokładność estymacji — najmniejsza efektywna liczba prób (ESS) wynosi "
 "%1\\$.2f < %2\\$1.0f. Aby zwiększyć dokładność, należy zwiększyć liczbę "
 "„Iteracji” lub wartość „Adapt delta” w sekcji Opcje."
+
+msgid "Interaction terms are currently not possible in Bayesian meta-analyses."
+msgstr ""
 
 msgid "Estimating Marginal Means"
 msgstr ""

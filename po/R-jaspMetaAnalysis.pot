@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.95.0\n"
-"POT-Creation-Date: 2025-07-12 03:05\n"
+"POT-Creation-Date: 2025-07-19 03:02\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1371,6 +1371,9 @@ msgid "Inference possibly unreliable -- MCMC chains might not have converged; Th
 msgstr ""
 
 msgid "Low estimation accuracy -- The smallest Effective Sample Size (ESS) is %1$.2f < %2$1.0f. To increase accuracy please increase 'Iterations', or 'Adapt delta' in the Options section."
+msgstr ""
+
+msgid "Interaction terms are currently not possible in Bayesian meta-analyses."
 msgstr ""
 
 msgid "Estimating Marginal Means"

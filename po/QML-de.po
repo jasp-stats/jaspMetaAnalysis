@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-07-13 09:01+0000\n"
-"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
-"jaspmetaanalysis-qml/de/>\n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -4574,13 +4568,15 @@ msgid ""
 "normal model described in Bartoš et al. (2023)."
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "References"
-msgstr ""
+msgstr "Referenzen"
 
+#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "R Packages"
-msgstr ""
+msgstr "R-Pakete"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Successes Group 1"
@@ -4958,25 +4954,33 @@ msgid ""
 "heterogeneity."
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid ""
 "Use default prior distributions for the effect size and heterogeneity based "
 "on Bartoš et al. (2022)."
 msgstr ""
+"Verwendung von Standard-Priorverteilungen für die Effektstärke und "
+"Heterogenität, basierend auf Bartoš et al. (2022)."
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Medicine"
-msgstr ""
+msgstr "Medizin"
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid ""
 "Use prior distributions based on the Cochrane Database of Systematic Reviews "
 "developed by Bartoš et al. (2021)"
 msgstr ""
+"Verwendung von Priorverteilungen basierend auf der Cochrane-Datenbank "
+"systematischer Übersichtsarbeiten, entwickelt von Bartoš et al. (2022)"
 
 #, fuzzy
 msgctxt "BayesianMetaAnalysis|"
@@ -5050,13 +5054,15 @@ msgid ""
 "moderation, and various plots to visualize the results."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "References"
-msgstr ""
+msgstr "Referenzen"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "R Packages"
-msgstr ""
+msgstr "R-Pakete"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
@@ -5074,13 +5080,15 @@ msgid ""
 "results."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "References"
-msgstr ""
+msgstr "Referenzen"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "R Packages"
-msgstr ""
+msgstr "R-Pakete"
 
 msgctxt "FunnelPlot|"
 msgid ""
@@ -5092,13 +5100,15 @@ msgid ""
 "Terrin et al. (2005)."
 msgstr ""
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "References"
-msgstr ""
+msgstr "Referenzen"
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "R Packages"
-msgstr ""
+msgstr "R-Pakete"
 
 msgctxt "BubblePlot|"
 msgid "Bubble Plot"
@@ -6900,13 +6910,15 @@ msgid ""
 "parameterization as outlined in Bartoš et al. (2025)."
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "References"
-msgstr ""
+msgstr "Referenzen"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "R Packages"
-msgstr ""
+msgstr "R-Pakete"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Variable containing the observed effect sizes."
@@ -7088,25 +7100,33 @@ msgid ""
 "heterogeneity."
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
 "Use default prior distributions for the effect size and heterogeneity based "
 "on Bartoš et al. (2022)."
 msgstr ""
+"Verwendung von Standard-Priorverteilungen für die Effektstärke und "
+"Heterogenität, basierend auf Bartoš et al. (2022)."
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Medicine"
-msgstr ""
+msgstr "Medizin"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
 "Use prior distributions based on the Cochrane Database of Systematic Reviews "
 "developed by Bartoš et al. (2021)"
 msgstr ""
+"Verwendung von Priorverteilungen basierend auf der Cochrane-Datenbank "
+"systematischer Übersichtsarbeiten, entwickelt von Bartoš et al. (2022)"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
@@ -7734,21 +7754,25 @@ msgid ""
 "of frequencies / time to event outcomes."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "References"
-msgstr ""
+msgstr "Referenzen"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "R Packages"
-msgstr ""
+msgstr "R-Pakete"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Successes Group 1"
-msgstr ""
+msgstr "Erfolge Gruppe 1"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Successes Group 2"
-msgstr ""
+msgstr "Erfolge Gruppe 2"
 
 #, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
