@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2025-07-19 03:02\n"
-"PO-Revision-Date: 2022-08-29 00:27+0000\n"
-"Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
+"PO-Revision-Date: 2025-08-04 22:01+0000\n"
+"Last-Translator: Wendel Paulo Silvestre <wpsilvestre@ucs.br>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/pt/>\n"
 "Language: pt\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 "X-Language: en_US\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -176,9 +176,8 @@ msgstr "Tamanho de efeito"
 msgid "Observed"
 msgstr "Observado"
 
-#, fuzzy
 msgid "Estimated"
-msgstr "Estimativas"
+msgstr "Estimado"
 
 msgid "Study"
 msgstr ""
@@ -327,7 +326,7 @@ msgid "Autocorrelations plot"
 msgstr "Covariâncias / correlações observadas"
 
 msgid "Lag"
-msgstr ""
+msgstr "Lag"
 
 #, fuzzy
 msgid "Autocorrelation"
@@ -390,7 +389,7 @@ msgid "Meta-Analytic Tests"
 msgstr "Estimativas"
 
 msgid "Test"
-msgstr ""
+msgstr "Teste"
 
 msgid "p"
 msgstr "p"
@@ -472,7 +471,7 @@ msgid "Heterogeneity Meta-Regression Coefficients"
 msgstr ""
 
 msgid "Standard Error"
-msgstr "Erro padrão"
+msgstr "Erro Padrão"
 
 msgid "t"
 msgstr "t"
@@ -510,7 +509,7 @@ msgid "Adjusted Estimate"
 msgstr "Estimativas"
 
 msgid "Estimated Marginal Means"
-msgstr ""
+msgstr "Médias marginais estimadas"
 
 msgid "Level"
 msgstr ""
@@ -518,9 +517,8 @@ msgstr ""
 msgid "Contrasts"
 msgstr ""
 
-#, fuzzy
 msgid "Comparison"
-msgstr "Componentes"
+msgstr "Comparação"
 
 msgid "Bubble Plots"
 msgstr ""
@@ -586,9 +584,8 @@ msgstr ""
 msgid "Hat"
 msgstr ""
 
-#, fuzzy
 msgid "Weight"
-msgstr "WLS Ponderado"
+msgstr "Peso"
 
 msgid "Difference in coefficients"
 msgstr ""
@@ -627,9 +624,8 @@ msgid ""
 "heterogeneity."
 msgstr ""
 
-#, fuzzy
 msgid "Squared Pearson Residual"
-msgstr "Tamanho de efeito padronizado"
+msgstr "Resíduos quadrados de Pearson"
 
 msgid "Influence on Fitted Value"
 msgstr ""
@@ -639,7 +635,7 @@ msgid "Residual Funnel Plot"
 msgstr "Resíduos"
 
 msgid "Model Summary"
-msgstr "Resumo do modelo"
+msgstr "Resumo do Modelo"
 
 #, fuzzy
 msgid "Meta-Regression Summary"
@@ -1072,16 +1068,14 @@ msgstr ""
 msgid "Error writing the variance-covariance matrix file: %1$s"
 msgstr ""
 
-#, fuzzy
 msgid "Random Effects / Model Stucture Summary"
-msgstr "Modelo de efeitos aleatórios:"
+msgstr "Efeitos Aleatórios / Resumo da estrutura do modelo"
 
 msgid "Simple / Nested Summary"
 msgstr ""
 
-#, fuzzy
 msgid "Estimates"
-msgstr "Estimativa"
+msgstr "Estimativas"
 
 msgid "σ²"
 msgstr ""
@@ -1204,9 +1198,8 @@ msgstr "Estimativa"
 msgid "Levels:"
 msgstr ""
 
-#, fuzzy
 msgid "Component:"
-msgstr "Componentes"
+msgstr "Componente:"
 
 #, fuzzy
 msgid "Estimates 𝜏²"
@@ -1518,15 +1511,14 @@ msgstr "Desvio"
 msgid "Random Effect"
 msgstr "efeitos aleatórios da escala r"
 
-#, fuzzy
 msgid "Random Effect Covariance"
-msgstr "Modelo de efeitos aleatórios:"
+msgstr "Covariância dos efeitos aleatórios"
 
 msgid "Pooled %1$s Matrix Parameters"
 msgstr ""
 
 msgid "Row"
-msgstr ""
+msgstr "Linha"
 
 msgid "Column"
 msgstr ""
@@ -1803,7 +1795,7 @@ msgid "ESS"
 msgstr "EQS"
 
 msgid "R-hat"
-msgstr ""
+msgstr "R-hat"
 
 #, fuzzy
 msgid "Weights"
@@ -1847,7 +1839,7 @@ msgid "Prior and Posterior Plots"
 msgstr "Posteriores marginal"
 
 msgid "Diagnostics"
-msgstr ""
+msgstr "Diagnóstico"
 
 #, fuzzy
 msgid "Adjusted effect"
@@ -2044,9 +2036,8 @@ msgstr ""
 msgid "%1$s: %2$s"
 msgstr ""
 
-#, fuzzy
 msgid "Warning"
-msgstr "Aviso:"
+msgstr "Aviso"
 
 #, fuzzy
 msgid "Model Convergence"
@@ -2127,7 +2118,13 @@ msgid_plural ""
 "chains indicating that the posterior distribution was not explored "
 "efficiently. Try increasing number of 'Burnin' and 'Iterations'."
 msgstr[0] ""
+"Bayesian Fraction of Missing Information (BFMI) que estava muito baixa na "
+"cadeia %i, indicando que a distribuição posterior não foi explorada de forma "
+"eficiente. Experimente aumentar o número de 'Burnin' e 'Iterações'."
 msgstr[1] ""
+"Bayesian Fraction of Missing Information (BFMI) que estava muito baixa nas "
+"cadeias %i, indicando que a distribuição posterior não foi explorada de "
+"forma eficiente. Experimente aumentar o número de 'Burnin' e 'Iterações'."
 
 msgid ""
 "The Hamiltonian Monte Carlo procedure might be inefficient -- %i transition "
