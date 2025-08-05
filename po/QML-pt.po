@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2025-08-05 14:01+0000\n"
+"Last-Translator: Wendel Paulo Silvestre <wpsilvestre@ucs.br>\n"
+"Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/pt/>\n"
+"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.13-dev\n"
 "X-Language: pt\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -18,7 +24,7 @@ msgstr "Erro Padrão de Tamanho de Efeito"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Study Labels"
-msgstr ""
+msgstr "Rótulos de Estudo"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Effect Size"
@@ -26,23 +32,23 @@ msgstr "Tamanho de efeito"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Effect Size Variance"
-msgstr ""
+msgstr "Variância do Tamanho de Efeito"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fixed Effects"
-msgstr ""
+msgstr "Efeitos Fixos"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Inner Grouping (Multivariate Structure)"
-msgstr ""
+msgstr "Grupo Interno (Estrutura Multivariada)"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Outer Grouping (Grouping Structure)"
-msgstr ""
+msgstr "Agrupamento Externo (Estrutura de Agrupamento)"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Case labels"
-msgstr ""
+msgstr "Rótulo dos casos"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fixed Effects Model"
@@ -570,7 +576,7 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Statistics"
-msgstr "Estatísticas"
+msgstr "Estatística"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Confidence intervals"
@@ -1124,15 +1130,13 @@ msgctxt "Description|"
 msgid "Penalized Meta-Analysis"
 msgstr ""
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Effect Size"
-msgstr "Tamanho de efeito"
+msgstr "Tamanho do Efeito"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr "Erro Padrão de Tamanho de Efeito"
+msgstr "Erro Padrão do Tamanho de Efeito"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Method"
@@ -1146,12 +1150,10 @@ msgctxt "PenalizedMetaAnalysis|"
 msgid "Lasso"
 msgstr ""
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Covariates"
 msgstr "Covariáveis"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Factors"
 msgstr "Fatores"
@@ -1160,12 +1162,10 @@ msgctxt "PenalizedMetaAnalysis|"
 msgid "Clustering"
 msgstr ""
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Model"
 msgstr "Modelo"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Components"
 msgstr "Componentes"
@@ -1262,7 +1262,6 @@ msgctxt "PenalizedMetaAnalysis|"
 msgid "Autocorrelations"
 msgstr ""
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Advanced"
 msgstr "Avançado"
