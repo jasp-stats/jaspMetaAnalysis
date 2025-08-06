@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-08-05 14:01+0000\n"
+"PO-Revision-Date: 2025-08-06 07:43+0000\n"
 "Last-Translator: Wendel Paulo Silvestre <wpsilvestre@ucs.br>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/pt/>\n"
@@ -16,7 +16,7 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Effect Size"
-msgstr "Tamanho de efeito"
+msgstr "Tamanho de Efeito"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Effect Size Standard Error"
@@ -28,7 +28,7 @@ msgstr "Rótulos de Estudo"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Effect Size"
-msgstr "Tamanho de efeito"
+msgstr "Tamanho de Efeito"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Effect Size Variance"
@@ -52,27 +52,27 @@ msgstr "Rótulo dos casos"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fixed Effects Model"
-msgstr ""
+msgstr "Modelo de Efeitos Fixos"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Predictors"
-msgstr ""
+msgstr "Preditores"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Model Terms"
-msgstr ""
+msgstr "Termos do Modelo"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Use intercept"
-msgstr ""
+msgstr "Usar intercepto"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Random Effects Model"
-msgstr ""
+msgstr "Efeito de Modelos Aleatórios"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Multivariate Covariance Model"
-msgstr ""
+msgstr "Modelo de Covariância Multivariada"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Statistics"
@@ -80,15 +80,15 @@ msgstr "Estatísticas"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Omnibus Statistics"
-msgstr ""
+msgstr "Estatística Omnibus"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Anova Table"
-msgstr ""
+msgstr "Tabela Anova"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fit Indices"
-msgstr ""
+msgstr "Índices de Ajuste"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Coefficients"
@@ -172,7 +172,7 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Effect Size"
-msgstr "Tamanho de efeito"
+msgstr "Tamanho de Efeito"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
@@ -200,7 +200,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size"
-msgstr "Tamanho de efeito"
+msgstr "Tamanho de Efeito"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
@@ -232,7 +232,7 @@ msgstr ""
 
 msgctxt "SelectionModels|"
 msgid "Effect Size"
-msgstr "Tamanho de efeito"
+msgstr "Tamanho de Efeito"
 
 msgctxt "SelectionModels|"
 msgid "Effect Size Standard Error"
@@ -794,10 +794,9 @@ msgctxt "BayesianPredictionPerformance|"
 msgid "MCMC Diagnostics"
 msgstr ""
 
-#, fuzzy
 msgctxt "BayesianPredictionPerformance|"
 msgid "Plots"
-msgstr "Diagramas"
+msgstr "Gráficos"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Running means"
@@ -811,7 +810,6 @@ msgctxt "BayesianPredictionPerformance|"
 msgid "Gelman Rubin"
 msgstr ""
 
-#, fuzzy
 msgctxt "BayesianPredictionPerformance|"
 msgid "Advanced"
 msgstr "Avançado"
@@ -844,15 +842,13 @@ msgctxt "PetPeese|"
 msgid "Correlation"
 msgstr ""
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Effect Size"
-msgstr "Tamanho de efeito"
+msgstr "Tamanho de Efeito"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Effect Size Standard Error"
-msgstr "Erro Padrão de Tamanho de Efeito"
+msgstr "Erro Padrão do Tamanho de Efeito"
 
 msgctxt "PetPeese|"
 msgid "Fisher's z"
@@ -870,10 +866,9 @@ msgctxt "PetPeese|"
 msgid "Multiplicative heterogeneity estimates"
 msgstr ""
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Plots"
-msgstr "Diagramas"
+msgstr "Gráficos"
 
 msgctxt "PetPeese|"
 msgid "PET"
@@ -955,7 +950,6 @@ msgctxt "PredictionPerformanceInference|"
 msgid "Labels"
 msgstr ""
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Estimates"
 msgstr "Estimativas"
@@ -1036,17 +1030,14 @@ msgctxt "PredictionPerformancePriors|"
 msgid "max:"
 msgstr ""
 
-#, fuzzy
 msgctxt "PredictionPerformancePriors|"
 msgid "location:"
 msgstr "localização:"
 
-#, fuzzy
 msgctxt "PredictionPerformancePriors|"
 msgid "scale:"
 msgstr "escala:"
 
-#, fuzzy
 msgctxt "PredictionPerformancePriors|"
 msgid "df:"
 msgstr "gl:"
@@ -1063,15 +1054,13 @@ msgctxt "WaapWls|"
 msgid "Correlation"
 msgstr ""
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Effect Size"
-msgstr "Tamanho de efeito"
+msgstr "Tamanho de Efeito"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Effect Size Standard Error"
-msgstr "Erro Padrão de Tamanho de Efeito"
+msgstr "Erro Padrão do Tamanho de Efeito"
 
 msgctxt "WaapWls|"
 msgid "Fisher's z"
@@ -1085,10 +1074,9 @@ msgctxt "WaapWls|"
 msgid "Inference"
 msgstr ""
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Plots"
-msgstr "Diagramas"
+msgstr "Gráficos"
 
 msgctxt "WaapWls|"
 msgid "Mean model estimates"
@@ -1414,7 +1402,6 @@ msgctxt "Description|"
 msgid "Bayesian Binomial Meta-Analysis"
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Advanced"
 msgstr "Avançado"
@@ -1495,7 +1482,6 @@ msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Distribution"
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Parameters"
 msgstr "Parâmetros"
@@ -1716,16 +1702,14 @@ msgid ""
 "plots."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Effect Size"
-msgstr "Tamanho de efeito"
+msgstr "Tamanho de Efeito"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Variable containing the observed effect sizes."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Effect Size Standard Error"
 msgstr "Erro Padrão de Tamanho de Efeito"
@@ -2601,10 +2585,9 @@ msgctxt "EffectSizeComputation|"
 msgid "P-Value"
 msgstr ""
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Effect Size"
-msgstr "Tamanho de efeito"
+msgstr "Tamanho de Efeito"
 
 msgctxt "EffectSizeComputation|"
 msgid "Standard Error"
@@ -2726,7 +2709,6 @@ msgctxt "EffectSizeComputation|"
 msgid "Computed Columns Names"
 msgstr ""
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Effect size"
 msgstr "Tamanho de efeito"
@@ -2743,19 +2725,17 @@ msgctxt "EffectSizeComputation|"
 msgid "Effect size type"
 msgstr ""
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Effect Size"
-msgstr "Tamanho de efeito"
+msgstr "Tamanho de Efeito"
 
 msgctxt "FunnelPlot|"
 msgid "Variable containing the observed effect sizes."
 msgstr ""
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Effect Size Standard Error"
-msgstr "Erro Padrão de Tamanho de Efeito"
+msgstr "Erro Padrão do Tamanho de Efeito"
 
 msgctxt "FunnelPlot|"
 msgid ""
@@ -2789,7 +2769,6 @@ msgctxt "FunnelPlot|"
 msgid "Specify the funnel plot under the null hypothesis."
 msgstr ""
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Parameters"
 msgstr "Parâmetros"
@@ -3087,7 +3066,6 @@ msgctxt "FunnelPlot|"
 msgid "Meta-regression"
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Advanced"
 msgstr "Avançado"
@@ -3499,7 +3477,6 @@ msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Estimated Marginal Means"
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Effect size"
 msgstr "Tamanho de efeito"
@@ -3579,7 +3556,6 @@ msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "𝜏²"
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Model"
 msgstr "Modelo"
@@ -4514,7 +4490,6 @@ msgid ""
 "alternative prior distributions of all specified components."
 msgstr ""
 
-#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Effect size"
 msgstr "Tamanho de efeito"
@@ -4749,7 +4724,6 @@ msgid ""
 "alternative prior distributions of all specified components."
 msgstr ""
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Effect size"
 msgstr "Tamanho de efeito"
@@ -4855,15 +4829,13 @@ msgctxt "BayesianMetaAnalysis|"
 msgid "Prior Distributions (Custom)"
 msgstr ""
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisDeprecated|"
 msgid "Effect Size"
-msgstr "Tamanho de efeito"
+msgstr "Tamanho de Efeito"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisDeprecated|"
 msgid "Effect Size Standard Error"
-msgstr "Erro Padrão de Tamanho de Efeito"
+msgstr "Erro Padrão do Tamanho de Efeito"
 
 msgctxt "BayesianMetaAnalysisDeprecated|"
 msgid "95% CI Lower and Upper Bound"
@@ -5214,7 +5186,6 @@ msgid ""
 "of the study-level information panel."
 msgstr ""
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Order"
 msgstr "Ordem"
@@ -5442,10 +5413,9 @@ msgid ""
 "section. Available when heterogeneity meta-regression is specified."
 msgstr ""
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Effect Size"
-msgstr "Tamanho de efeito"
+msgstr "Tamanho de Efeito"
 
 msgctxt "ForestPlot|"
 msgid "Fixed effect estimate"
@@ -5714,7 +5684,6 @@ msgctxt "ForestPlot|"
 msgid "Adjust the relative size of the forest plot components."
 msgstr ""
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Estimates"
 msgstr "Estimativas"
@@ -6036,7 +6005,6 @@ msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Neuromuscular"
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Effect size"
 msgstr "Tamanho de efeito"
@@ -6056,7 +6024,6 @@ msgid ""
 "0."
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Effect size"
 msgstr "Tamanho de efeito"
@@ -6101,10 +6068,9 @@ msgid ""
 "presence of the effect or moderation."
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Statistics"
-msgstr "Estatísticas"
+msgstr "Estatística"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Options for summarizing the meta-analytic results."
@@ -6314,7 +6280,6 @@ msgid ""
 "adjustment model."
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Model"
 msgstr "Modelo"
@@ -6349,7 +6314,6 @@ msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Prior and Posterior Plots"
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Effect size"
 msgstr "Tamanho de efeito"
@@ -6390,7 +6354,6 @@ msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Upper"
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Parameters"
 msgstr "Parâmetros"
@@ -6471,7 +6434,6 @@ msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Lower"
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Parameters"
 msgstr "Parâmetros"
@@ -6688,7 +6650,6 @@ msgid ""
 "alternative prior distributions of all specified components."
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect size"
 msgstr "Tamanho de efeito"
@@ -7490,7 +7451,6 @@ msgid ""
 "independent model is fitted to the corresponding data set subset."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "Advanced"
 msgstr "Avançado"
