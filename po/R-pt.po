@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2025-07-19 03:02\n"
-"PO-Revision-Date: 2025-08-06 02:02+0000\n"
+"PO-Revision-Date: 2025-08-06 07:43+0000\n"
 "Last-Translator: Wendel Paulo Silvestre <wpsilvestre@ucs.br>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/pt/>\n"
@@ -55,13 +55,13 @@ msgstr ""
 "não funcionar quando o anterior é limitado a ser positivo)?"
 
 msgid "Posterior Estimates per Model"
-msgstr ""
+msgstr "Estimativas posteriores por Modelo"
 
 msgid "BF%1$s%2$s"
-msgstr ""
+msgstr "BF%1$s%2$s"
 
 msgid "Log(BF%1$s%2$s)"
-msgstr ""
+msgstr "Log(BF%1$s%2$s)"
 
 msgid "Mean"
 msgstr "Média"
@@ -79,7 +79,7 @@ msgid "Upper"
 msgstr "Superior"
 
 msgid "Averaged"
-msgstr ""
+msgstr "Médio"
 
 msgid "Fixed effects"
 msgstr "Efeitos Fixos"
@@ -1180,7 +1180,7 @@ msgid "Funnel Plot Asymmetry Tests"
 msgstr ""
 
 msgid "Method"
-msgstr ""
+msgstr "Método"
 
 msgid "t-statistic"
 msgstr ""
