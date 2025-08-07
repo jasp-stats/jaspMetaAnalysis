@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2025-07-19 03:02\n"
-"PO-Revision-Date: 2025-08-06 07:43+0000\n"
+"PO-Revision-Date: 2025-08-07 23:01+0000\n"
 "Last-Translator: Wendel Paulo Silvestre <wpsilvestre@ucs.br>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/pt/>\n"
@@ -483,10 +483,10 @@ msgid "Estimated Marginal Means"
 msgstr "Médias marginais estimadas"
 
 msgid "Level"
-msgstr ""
+msgstr "Nível"
 
 msgid "Contrasts"
-msgstr ""
+msgstr "Contrastes"
 
 msgid "Comparison"
 msgstr "Comparação"
@@ -563,7 +563,7 @@ msgid "Influential"
 msgstr ""
 
 msgid "No influential cases found."
-msgstr ""
+msgstr "Não foram encontrados casos influentes."
 
 msgid "%1$sNo influential cases found."
 msgstr ""
@@ -716,25 +716,25 @@ msgid "None"
 msgstr ""
 
 msgid "Bonferroni"
-msgstr ""
+msgstr "Bonferroni"
 
 msgid "Holm"
-msgstr ""
+msgstr "Holm"
 
 msgid "Hochberg"
-msgstr ""
+msgstr "Hochberg"
 
 msgid "Hommel"
 msgstr ""
 
 msgid "Benjamini-Hochberg"
-msgstr ""
+msgstr "Benjamini-Hochberg"
 
 msgid "Benjamini-Yekutieli"
-msgstr ""
+msgstr "Benjamini-Yekutieli"
 
 msgid "Intercept"
-msgstr ""
+msgstr "Intercepto"
 
 msgid "Residual heterogeneity"
 msgstr "Heterogeneidade residual"
