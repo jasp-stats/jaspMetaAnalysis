@@ -263,7 +263,7 @@ Section
 				text:		qsTr("Maximum 𝜏²")
 				checked:	false
 				childrenOnSameRow:	true
-				info: qsTr("Specify the maximim allowable value of 𝜏² during optimization. Available only for specific optimization methods and unavailable in multilevel/multivariate meta-analysis or when heterogeneity model terms are included.")
+				info: qsTr("Specify the maximum allowable value of 𝜏² during optimization. Available only for specific optimization methods and unavailable in multilevel/multivariate meta-analysis or when heterogeneity model terms are included.")
 				visible:	((method.value === "pauleMandel" || method.value === "pauleMandelMu" || method.value === "qeneralizedQStatMu") &&
 							sectionModel.heterogeneityModelTermsCount == 0 && analysisType === "metaAnalysis")
 
