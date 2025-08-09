@@ -2664,13 +2664,6 @@ msgid "Maximum 𝜏²"
 msgstr ""
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid ""
-"Specify the maximim allowable value of 𝜏² during optimization. Available "
-"only for specific optimization methods and unavailable in multilevel/"
-"multivariate meta-analysis or when heterogeneity model terms are included."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Maximum evaluations"
 msgstr ""
 
@@ -7519,4 +7512,11 @@ msgstr ""
 
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "Apply continuity correction to Cochran-Mantel-Haenszel test statistic."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisAdvanced|"
+msgid ""
+"Specify the maximum allowable value of 𝜏² during optimization. Available "
+"only for specific optimization methods and unavailable in multilevel/"
+"multivariate meta-analysis or when heterogeneity model terms are included."
 msgstr ""

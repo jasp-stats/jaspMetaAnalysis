@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-08-09 03:01+0000\n"
-"Last-Translator: Wendel Paulo Silvestre <wpsilvestre@ucs.br>\n"
-"Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
-"jaspmetaanalysis-qml/pt/>\n"
-"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Language: pt\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -118,9 +112,10 @@ msgctxt "MultilevelMetaAnalysis|"
 msgid "Funnel plot"
 msgstr ""
 
+#, fuzzy
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Forest plot"
-msgstr ""
+msgstr "Gráfico de floresta"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Advanced"
@@ -134,9 +129,10 @@ msgctxt "MultilevelMetaAnalysis|"
 msgid "Fixed Effects Covariance Matrix"
 msgstr ""
 
+#, fuzzy
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Diagnostics"
-msgstr ""
+msgstr "Diagnóstico"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Test for Funnel Plot Asymmetry"
@@ -278,13 +274,15 @@ msgctxt "SelectionModels|"
 msgid "Fisher's z"
 msgstr ""
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Inference"
-msgstr ""
+msgstr "Inferência"
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Fixed Effects"
-msgstr ""
+msgstr "Efeitos Fixos"
 
 msgctxt "SelectionModels|"
 msgid "Random Effects"
@@ -298,13 +296,15 @@ msgctxt "SelectionModels|"
 msgid "Weight Function"
 msgstr ""
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Fixed effects"
-msgstr ""
+msgstr "Efeitos fixos"
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Random effects"
-msgstr ""
+msgstr "Efeitos aleatórios"
 
 msgctxt "SelectionModels|"
 msgid "Rescale x-axis"
@@ -634,9 +634,10 @@ msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Parameters"
 msgstr "Parâmetros"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Truncation"
-msgstr ""
+msgstr "Truncamento"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Prior weights"
@@ -858,9 +859,10 @@ msgctxt "PetPeese|"
 msgid "Cohen's d"
 msgstr ""
 
+#, fuzzy
 msgctxt "PetPeese|"
 msgid "Inference"
-msgstr ""
+msgstr "Inferência"
 
 msgctxt "PetPeese|"
 msgid "Multiplicative heterogeneity estimates"
@@ -914,13 +916,15 @@ msgctxt "PredictionPerformanceData|"
 msgid "Number of Expected Events"
 msgstr ""
 
+#, fuzzy
 msgctxt "PredictionPerformanceData|"
 msgid "Study Labels"
-msgstr ""
+msgstr "Rótulos de Estudo"
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Inference"
-msgstr ""
+msgstr "Inferência"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Within-study variation"
@@ -942,9 +946,10 @@ msgctxt "PredictionPerformanceInference|"
 msgid "Prior and posterior plot"
 msgstr ""
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Forest plot"
-msgstr ""
+msgstr "Gráfico de floresta"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Labels"
@@ -1006,9 +1011,10 @@ msgctxt "PredictionPerformanceInference|"
 msgid "Plot"
 msgstr ""
 
+#, fuzzy
 msgctxt "PredictionPerformancePriors|"
 msgid "Priors"
-msgstr ""
+msgstr "Anteriores"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "Normal mean:"
@@ -1070,9 +1076,10 @@ msgctxt "WaapWls|"
 msgid "Cohen's d"
 msgstr ""
 
+#, fuzzy
 msgctxt "WaapWls|"
 msgid "Inference"
-msgstr ""
+msgstr "Inferência"
 
 msgctxt "WaapWls|"
 msgid "Plots"
@@ -1166,9 +1173,10 @@ msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale predictors"
 msgstr ""
 
+#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Priors"
-msgstr ""
+msgstr "Anteriores"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Df"
@@ -1194,9 +1202,10 @@ msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale (slab)"
 msgstr ""
 
+#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Inference"
-msgstr ""
+msgstr "Inferência"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "I²"
@@ -1254,9 +1263,10 @@ msgctxt "PenalizedMetaAnalysis|"
 msgid "Advanced"
 msgstr "Avançado"
 
+#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Estimation settings (MCMC)"
-msgstr ""
+msgstr "Configurações de estimação (MCMC)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Warmup"
@@ -1486,9 +1496,10 @@ msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Parameters"
 msgstr "Parâmetros"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Truncation"
-msgstr ""
+msgstr "Truncamento"
 
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Prior weights"
@@ -1625,9 +1636,10 @@ msgctxt "ClassicalMetaAnalysis|"
 msgid "Equal Effects"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Fixed Effects"
-msgstr ""
+msgstr "Efeitos Fixos"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Maximum Likelihood"
@@ -1688,9 +1700,10 @@ msgid ""
 "Hartung adjustment (default)."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Predictors"
-msgstr ""
+msgstr "Preditores"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Clustering"
@@ -1745,9 +1758,10 @@ msgid ""
 "approximation, 't' uses t-distribution."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Predictors"
-msgstr ""
+msgstr "Preditores"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
@@ -1764,9 +1778,10 @@ msgid ""
 "permutation tests are selected."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Study Labels"
-msgstr ""
+msgstr "Rótulos de Estudo"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
@@ -2481,9 +2496,10 @@ msgctxt "EffectSizeComputation|"
 msgid "Items"
 msgstr ""
 
+#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Predictors"
-msgstr ""
+msgstr "Preditores"
 
 msgctxt "EffectSizeComputation|"
 msgid "Events Group 2"
@@ -2840,9 +2856,10 @@ msgid ""
 "plot under the alternative hypothesis."
 msgstr ""
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Estimated"
-msgstr ""
+msgstr "Estimado"
 
 msgctxt "FunnelPlot|"
 msgid "Fixed"
@@ -2856,9 +2873,10 @@ msgctxt "FunnelPlot|"
 msgid "Equal Effects"
 msgstr ""
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Fixed Effects"
-msgstr ""
+msgstr "Efeitos Fixos"
 
 msgctxt "FunnelPlot|"
 msgid "Maximum Likelihood"
@@ -3259,13 +3277,6 @@ msgid "Maximum 𝜏²"
 msgstr ""
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid ""
-"Specify the maximim allowable value of 𝜏² during optimization. Available "
-"only for specific optimization methods and unavailable in multilevel/"
-"multivariate meta-analysis or when heterogeneity model terms are included."
-msgstr ""
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Maximum evaluations"
 msgstr ""
 
@@ -3578,9 +3589,10 @@ msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Available Components"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Model Terms"
-msgstr ""
+msgstr "Termos do Modelo"
 
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Variables assigned as model terms in the effect size model."
@@ -3804,9 +3816,10 @@ msgctxt "PredictionPerformanceInference|"
 msgid "Method"
 msgstr ""
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Fixed Effects"
-msgstr ""
+msgstr "Efeitos Fixos"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Maximum Likelihood"
@@ -4444,9 +4457,10 @@ msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Sample Size Group 1"
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Predictors"
-msgstr ""
+msgstr "Preditores"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid ""
@@ -4678,9 +4692,10 @@ msgid ""
 "defaults are available."
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Predictors"
-msgstr ""
+msgstr "Preditores"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid ""
@@ -4841,9 +4856,10 @@ msgctxt "BayesianMetaAnalysisDeprecated|"
 msgid "95% CI Lower and Upper Bound"
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysisDeprecated|"
 msgid "Study Labels"
-msgstr ""
+msgstr "Rótulos de Estudo"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid ""
@@ -5011,9 +5027,10 @@ msgid ""
 "when the x-axis variable is nominal."
 msgstr ""
 
+#, fuzzy
 msgctxt "BubblePlot|"
 msgid "Confidence intervals"
-msgstr ""
+msgstr "Intervalos de confiança"
 
 msgctxt "BubblePlot|"
 msgid "Include confidence intervals of the estimated effect sizes."
@@ -5203,9 +5220,10 @@ msgid ""
 "Select the variable by which the study-level information panel is ordered."
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Ascending"
-msgstr ""
+msgstr "Ascendente"
 
 msgctxt "ForestPlot|"
 msgid "Order the study-level information panel in ascending order."
@@ -6302,9 +6320,10 @@ msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Available Components"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Model Terms"
-msgstr ""
+msgstr "Termos do Modelo"
 
 msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Variables assigned as model terms in the effect size model."
@@ -6338,9 +6357,10 @@ msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Continuous Moderators"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Truncation"
-msgstr ""
+msgstr "Truncamento"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Prior weights"
@@ -6418,9 +6438,10 @@ msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Prior"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Truncation"
-msgstr ""
+msgstr "Truncamento"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "weights"
@@ -6603,9 +6624,10 @@ msgid ""
 "defaults are available."
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Predictors"
-msgstr ""
+msgstr "Preditores"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
@@ -6967,9 +6989,10 @@ msgid ""
 "covariance matrix is from the first stage of two-stage meta-analytic SEM. "
 msgstr ""
 
+#, fuzzy
 msgctxt "MetaAnalyticSem|"
 msgid "Random effects"
-msgstr ""
+msgstr "Efeitos aleatórios"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Diagonal"
@@ -7431,9 +7454,10 @@ msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Incidence rate difference"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Study Labels"
-msgstr ""
+msgstr "Rótulos de Estudo"
 
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid ""
@@ -7528,4 +7552,11 @@ msgstr ""
 
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "Apply continuity correction to Cochran-Mantel-Haenszel test statistic."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisAdvanced|"
+msgid ""
+"Specify the maximum allowable value of 𝜏² during optimization. Available "
+"only for specific optimization methods and unavailable in multilevel/"
+"multivariate meta-analysis or when heterogeneity model terms are included."
 msgstr ""
