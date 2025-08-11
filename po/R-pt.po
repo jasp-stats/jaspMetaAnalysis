@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2025-07-19 03:02\n"
-"PO-Revision-Date: 2025-08-09 03:01+0000\n"
+"PO-Revision-Date: 2025-08-11 03:01+0000\n"
 "Last-Translator: Wendel Paulo Silvestre <wpsilvestre@ucs.br>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/pt/>\n"
@@ -94,32 +94,46 @@ msgid ""
 "%1$s and %2$s are the group-level effect size and standard deviation, "
 "respectively."
 msgstr ""
+"%1$s e %2$s são o tamanho do efeito de nível de grupo e desvio padrão, "
+"respectivamente."
 
 msgid "%s is the group-level effect size."
 msgstr "%s é o tamanho do efeito a nível de grupo."
 
 msgid "Bayes factor of the random effects H%1$s over the fixed effects H%1$s."
 msgstr ""
+"O fator de Bayes dos efeitos aleatórios H%1$s sobre os efeitos fixos H%1$s."
 
 msgid ""
 "Posterior estimates are based on the models that assume an effect to be "
 "present. The Bayes factor is based on all four models: fixed effects H%2$s & "
 "random effects H%2$s over the fixed effects H%1$s & random effects H%1$s."
 msgstr ""
+"As estimativas posteriores são baseadas nos modelos que assumem um efeito a "
+"estar presente. O fator de Bayes é baseado em todos os quatro modelos: "
+"efeitos fixos H%2$s & efeitos aleatórios H%2$s sobre os efeitos fixos H%1$s "
+"& efeitos aleatórios H%1$s."
 
 msgid ""
 "Model averaged posterior estimates for %3$s are not yet available, but will "
 "be added in the future. The Bayes factor is based on all four models: random "
 "effects H%1$s & H%2$s over the fixed effects H%1$s & H%2$s."
 msgstr ""
+"As estimativas posteriores médias do modelo para %3$s ainda não estão "
+"disponíveis, mas serão adicionadas no futuro. O fator de Bayes é baseado em "
+"todos os quatro modelos: efeitos aleatórios H%1$s & H%2$s sobre os efeitos "
+"fixos H%1$s & H%2$s."
 
 msgid ""
 "Bayes factor of the (unconstrained/constrained) random effects H%1$s over "
 "the fixed effects H%1$s."
 msgstr ""
+"O fator de Bayes dos efeitos aleatórios (não limitados/limitados) H%1$s "
+"sobre os efeitos fixos H%1$s."
 
 msgid "Bayes factor of the fixed effects H%1$s over the random effects H%1$s."
 msgstr ""
+"O fator de Bayes dos efeitos fixos H%1$s sobre os efeitos aleatórios H%1$s."
 
 msgid ""
 "Model averaged posterior estimates are based on the models that assume an "
@@ -127,29 +141,45 @@ msgid ""
 "effects H%1$s & random effects H%1$s over the fixed effects H%2$s & random "
 "effects H%2$s."
 msgstr ""
+"As estimativas posteriores médias do modelo são baseadas nos modelos que "
+"assumem um efeito a estar presente. O fator fr Bayes é baseado em todos os "
+"quatro modelos: efeitos fixos H%1$s & efeitos aleatórios H%1$s sobre os "
+"efeitos fixos H%2$s & efeitos aleatórios H%2$s."
 
 msgid ""
 "Model averaged posterior estimates for %3$s are not yet available, but will "
 "be added in the future. The Bayes factor is based on all four models: fixed "
 "effects H%1$s & H%2$s over the random effects H%1$s & H%2$s."
 msgstr ""
+"As estimativas posteriores médias do modelo para %3$s ainda não estão "
+"disponíveis, mas serão adicionadas no futuro. O fator de Bayes é baseado em "
+"todos os quatro modelos: efeitos fixos H%1$s & H%2$s sobre os efeitos "
+"aleatórios H%1$s & H%2$s."
 
 msgid ""
 "Bayes factor of the fixed effects H%1$s over the (unconstrained/constrained) "
 "random effects H%1$s."
 msgstr ""
+"O fator de Bayes dos efeitos fixos H%1$s sobre os efeitos aleatórios (sem "
+"restrições/com restrições) H%1$s."
 
 msgid ""
 "Bayes factor of the ordered effects H%1$s over the fixed effects H%2$s. The "
 "Bayes factor for the ordered effects H%1$s versus the unconstrained (random) "
 "effects H%1$s model is %3$.3f."
 msgstr ""
+"O fator de Bayes dos efeitos ordenados H%1$s sobre os efeitos fixos H%2$s. O "
+"fator de Bayes para os efeitos ordenados H%1$s versus os efeitos não "
+"restritos(aleatórios) do modelo H%1$s é %3$.3f."
 
 msgid ""
 "Bayes factor of the fixed effects H%2$s over the ordered effects H%1$s. The "
 "Bayes factor for the unconstrained (random) effects H%1$s versus the ordered "
 "effects H%1$s model is %3$.3f."
 msgstr ""
+"O fator de Bayes dos efeitos fixos H%2$s sobre os efeitos ordenados H%1$s. O "
+"fator de Bayes para o modelo de efeitos aleatórios (irrestritos) H%1$s "
+"versus os efeitos ordenados H%1$s é %3$.3f."
 
 msgid "Model Probabilities"
 msgstr "Probabilidades do modelo"
@@ -179,23 +209,27 @@ msgid "Estimated"
 msgstr "Estimado"
 
 msgid "Study"
-msgstr ""
+msgstr "Estudo"
 
 msgid ""
 "Posterior mean and 95%% credible interval estimates from the random effects "
 "model."
 msgstr ""
+"Estimativas de média posterior e intervalo credível de 95 % do modelo de "
+"efeitos aleatórios."
 
 msgid ""
 "Posterior mean and 95%% credible interval estimates from the constrained "
 "random effects model."
 msgstr ""
+"Estimativas de média posterior e intervalo credível de 95 % do modelo de "
+"efeitos aleatórios restrito."
 
 msgid "Effect Size"
 msgstr "Tamanho de Efeito"
 
 msgid "Heterogeneity"
-msgstr ""
+msgstr "Heterogeneidade"
 
 msgid "Effect size"
 msgstr "Tamanho do Efeito"
@@ -207,13 +241,13 @@ msgid "Prior and Posteriors"
 msgstr "Anteriores e Posteriores"
 
 msgid "Fixed H"
-msgstr ""
+msgstr "H Fixo"
 
 msgid "Random H"
 msgstr "H Aleatório"
 
 msgid "Averaged H"
-msgstr ""
+msgstr "H Médio"
 
 msgid "Prior H"
 msgstr "H Anterior"
@@ -222,19 +256,19 @@ msgid "Ordered H"
 msgstr "H Ordenado"
 
 msgid "Forest Plot"
-msgstr ""
+msgstr "Gráfico de Floresta"
 
 msgid "Observed study effects"
-msgstr ""
+msgstr "Efeitos observados do estudo"
 
 msgid "Estimated study effects"
 msgstr "Efeitos estimados do estudo"
 
 msgid "Observed and estimated study effects"
-msgstr ""
+msgstr "Efeitos observados e estimados do estudo"
 
 msgid "Cumulative forest plot"
-msgstr ""
+msgstr "Gráfico de floresta acumulado"
 
 msgid "Overall effect size"
 msgstr "Tamanho geral do efeito"
@@ -246,7 +280,7 @@ msgid "Bayes factors effect size"
 msgstr "Tamanho do efeito dos fatores de Bayes"
 
 msgid "Bayes factors heterogeneity"
-msgstr ""
+msgstr "Heterogeneidade dos fatores de Bayes"
 
 msgid "Posterior model probabilities"
 msgstr "Probabilidades do modelo posterior"
@@ -261,7 +295,7 @@ msgid "random"
 msgstr "aleatório"
 
 msgid "fixed"
-msgstr ""
+msgstr "fixo"
 
 msgid "Anecdotal"
 msgstr "Anedótico"
@@ -279,18 +313,20 @@ msgid "Extreme"
 msgstr "Extremo"
 
 msgid "Evidence for %s:"
-msgstr ""
+msgstr "Evidência para %s:"
 
 msgid "Plotting failed: The Bayes factors contain infinity."
-msgstr ""
+msgstr "A plotagem falhou: Os fatores de Bayes contêm infinitos."
 
 msgid "Studies"
-msgstr ""
+msgstr "Estudos"
 
 msgid ""
 "Posterior model \n"
 " probability"
 msgstr ""
+"Probabilidade do\n"
+" modelo posterior"
 
 msgid "Prior and posterior plot"
 msgstr "Gráficos anterior e posterior"
@@ -299,13 +335,13 @@ msgid "Value"
 msgstr "Valor"
 
 msgid "Running means plot"
-msgstr ""
+msgstr "Gráfico de médias móveis"
 
 msgid "Iteration"
 msgstr "Iteração"
 
 msgid "Running mean"
-msgstr ""
+msgstr "Média móvel"
 
 msgid "Autocorrelations plot"
 msgstr "Gráfico de autocorrelações"
@@ -317,50 +353,54 @@ msgid "Autocorrelation"
 msgstr "Autocorrelação"
 
 msgid "Gelman-Rubin plot"
-msgstr ""
+msgstr "Gráfico de Gelman-Rubin"
 
 msgid "Last iteration in chain"
-msgstr ""
+msgstr "Última iteração na cadeia"
 
 msgid "Shrink factor"
-msgstr ""
+msgstr "Fator de encolhimento"
 
 msgid "All observations must be non-negative."
 msgstr "Todas as observações devem ser não negativas."
 
 msgid "Cochran-Mantel-Haenszel"
-msgstr ""
+msgstr "Cochran-Mantel-Haenszel"
 
 msgid "Mantel-Haenszel"
-msgstr ""
+msgstr "Mantel-Haenszel"
 
 msgid "Tarone"
-msgstr ""
+msgstr "Tarone"
 
 msgid "Metafor R Code"
-msgstr ""
+msgstr "Código R de metafor"
 
 msgid "All standard errors must be positive."
-msgstr ""
+msgstr "Todos os erros padrões devem ser positivos."
 
 msgid "Estimating Meta-Analytic Model"
 msgstr "Estimando o Modelo Meta-analítico"
 
 msgid "Full dataset"
-msgstr ""
+msgstr "Conjunto de dados completo"
 
 msgid "Estimating Subgroup Models"
-msgstr ""
+msgstr "Estimando Modelos de Subgrupos"
 
 msgid ""
 "The loaded distance matrix for '%1$s' does not match the dataset. The "
 "following levels are missing: %2$s."
 msgstr ""
+"A matriz de distância carregada para '%1$s' não corresponde ao conjunto de "
+"dados. Os seguintes níveis estão ausentes: %2$s."
 
 msgid ""
 "The loaded correlation matrix for '%1$s' does not match the dataset. The "
 "following levels are missing: %2$s."
 msgstr ""
+"A matriz de correlação carregada para '%1$s' não corresponde ao conjunto de "
+"dados. Os seguintes níveis estão ausentes: %2$s."
 
 msgid "All observations were removed as influential."
 msgstr "Todas as observações foram removidas como influentes."
@@ -375,13 +415,13 @@ msgid "p"
 msgstr "p"
 
 msgid "p (permutation)"
-msgstr ""
+msgstr "p (permutação)"
 
 msgid "The model for subgroup '%1$s' failed with the following error: %2$s"
-msgstr ""
+msgstr "O modelo para o subgrupo '%1$s' falhou com o seguinte erro: %2$s"
 
 msgid "Error:"
-msgstr ""
+msgstr "Erro:"
 
 msgid "Meta-Analytic Estimates"
 msgstr "Estimativas Meta-Analíticas"
@@ -399,7 +439,7 @@ msgid "Observations"
 msgstr "Observações"
 
 msgid "Log Lik."
-msgstr ""
+msgstr "Log verossim."
 
 msgid "Deviance"
 msgstr "Desvio"
@@ -411,40 +451,40 @@ msgid "BIC"
 msgstr "BIC"
 
 msgid "AICc"
-msgstr ""
+msgstr "AICc"
 
 msgid "R²"
-msgstr ""
+msgstr "R²"
 
 msgid "Effect Size Meta-Regression Terms Tests"
-msgstr ""
+msgstr "Testes de Termos de Meta-Regressão de Tamanho de Efeito"
 
 msgid "Heterogeneity Meta-Regression Terms Tests"
-msgstr ""
+msgstr "Testes de Termos de Meta-Regressão de Heterogeneidade"
 
 msgid "F"
-msgstr ""
+msgstr "F"
 
 msgid "Qₘ"
-msgstr ""
+msgstr "Qₘ"
 
 msgid "df₁"
-msgstr ""
+msgstr "gl₁"
 
 msgid "df"
 msgstr "gl"
 
 msgid "df₂"
-msgstr ""
+msgstr "gl₂"
 
 msgid "Warning:"
 msgstr "Aviso:"
 
 msgid "Effect Size Meta-Regression Coefficients"
-msgstr ""
+msgstr "Coeficientes de Meta-Regressão do Tamanho do Efeito"
 
 msgid "Heterogeneity Meta-Regression Coefficients"
-msgstr ""
+msgstr "Coeficientes de Meta-Regressão de Heterogeneidade"
 
 msgid "Standard Error"
 msgstr "Erro Padrão"
@@ -456,13 +496,13 @@ msgid "z"
 msgstr "z"
 
 msgid "Effect Size Meta-Regression Correlation Matrix"
-msgstr ""
+msgstr "Matriz de Correlação de Meta-Regressão do Tamanho do Efeito"
 
 msgid "Heterogeneity Meta-Regression Correlation Matrix"
-msgstr ""
+msgstr "Matriz de Correlação de Meta-Regressão de Heterogeneidade"
 
 msgid "Subgroup: %1$s"
-msgstr ""
+msgstr "Subgrupo: %1$s"
 
 msgid "Estimated Marginal Means and Contrasts Summary"
 msgstr "Resumo de Médias Marginais Estimadas e Contrastes"
@@ -492,16 +532,16 @@ msgid "Comparison"
 msgstr "Comparação"
 
 msgid "Bubble Plots"
-msgstr ""
+msgstr "Gráfico de Bolhas"
 
 msgid "%1$s (%2$s)"
-msgstr ""
+msgstr "%1$s (%2$s)"
 
 msgid "Effect Size Meta-Regression Variance Inflation"
-msgstr ""
+msgstr "Inflação da Variância na Meta-Regressão do Tamanho do Efeito"
 
 msgid "Heterogeneity Meta-Regression Variance Inflation"
-msgstr ""
+msgstr "Inflação da Variância na Meta-Regressão de Heterogeneidade"
 
 msgid "Parameters"
 msgstr "Parâmetros"
@@ -510,94 +550,100 @@ msgid "VIF"
 msgstr "FIV"
 
 msgid "SIF"
-msgstr ""
+msgstr "FIS"
 
 msgid "Casewise Diagnostics Table"
-msgstr ""
+msgstr "Tabela de Diagnósticos Caso a Caso"
 
 msgid ""
 "Casewise diagnostics are not available for models that contain meta-"
 "regression on heterogeneity."
 msgstr ""
+"Diagnósticos caso a caso não estão disponíveis para modelos que contêm "
+"metarregressão sobre heterogeneidade."
 
 msgid "Label"
-msgstr ""
+msgstr "Rótulo"
 
 msgid "Predictor"
-msgstr ""
+msgstr "Preditor"
 
 msgid "Standardized Residual"
 msgstr "Resíduo Padronizado"
 
 msgid "DFFITS"
-msgstr ""
+msgstr "DFFITS"
 
 msgid "Cook's Distance"
 msgstr "Distância de Cook"
 
 msgid "Covariance ratio"
-msgstr ""
+msgstr "Razão de covariância"
 
 msgid "𝜏"
-msgstr ""
+msgstr "𝜏"
 
 msgid "Leave One Out"
-msgstr ""
+msgstr "Deixe Um de Fora"
 
 msgid "𝜏²"
-msgstr ""
+msgstr "𝜏²"
 
 msgid "Qₑ"
-msgstr ""
+msgstr "Qₑ"
 
 msgid "Hat"
-msgstr ""
+msgstr "Hat"
 
 msgid "Weight"
 msgstr "Peso"
 
 msgid "Difference in coefficients"
-msgstr ""
+msgstr "Diferença nos coeficientes"
 
 msgid "Influential"
-msgstr ""
+msgstr "Influente"
 
 msgid "No influential cases found."
 msgstr "Não foram encontrados casos influentes."
 
 msgid "%1$sNo influential cases found."
-msgstr ""
+msgstr "%1$sNenhum caso influente encontrado."
 
 msgid "Diagnostics are based on the the subgroup models."
-msgstr ""
+msgstr "Os diagnósticos são baseados nos modelos de subgrupos."
 
 msgid "Diagnostics are based on the non-clustered model."
-msgstr ""
+msgstr "Os diagnósticos são baseados no modelo não agrupado."
 
 msgid "Column name %s already exists in the dataset."
-msgstr ""
+msgstr "O nome de coluna %s já existe no conjunto de dados."
 
 msgid "Profile Likelihood Plot"
-msgstr ""
+msgstr "Gráfico de Probabilidade de Perfil"
 
 msgid ""
 "Profile likelihood is not available for models that contain meta-regression "
 "on heterogeneity."
 msgstr ""
+"A probabilidade do perfil não está disponível para modelos que contêm "
+"metarregressão sobre heterogeneidade."
 
 msgid "Baujat Plot"
-msgstr ""
+msgstr "Gráfico de Baujat"
 
 msgid ""
 "Baujat plot is not available for models that contain meta-regression on "
 "heterogeneity."
 msgstr ""
+"O gráfico de Baujat não está disponível para modelos que contêm "
+"metarregressão sobre heterogeneidade."
 
 msgid "Squared Pearson Residual"
 msgstr "Resíduos quadrados de Pearson"
 
 msgid "Influence on Fitted Value"
-msgstr ""
+msgstr "Influência sobre o Valor Ajustado"
 
 msgid "Residual Funnel Plot"
 msgstr "Gráfico de Funil Residual"
@@ -609,7 +655,7 @@ msgid "Meta-Regression Summary"
 msgstr "Resumo da Meta-regressão"
 
 msgid "Variance Inflation Summary"
-msgstr ""
+msgstr "Resumo da Inflação de Variância"
 
 msgid "Pooled effect"
 msgstr "Efeito combinado"
@@ -618,35 +664,39 @@ msgid ""
 "Indexes of %1$s moderation coefficients were specified in an incorrect "
 "format. Try '(1, 2)' to test the first two coefficients."
 msgstr ""
+"Os índices dos coeficientes de moderação de %1$s foram especificados em um "
+"formato incorreto. Tente '(1, 2)' para testar os dois primeiros coeficientes."
 
 msgid ""
 "The selected coefficients for %1$s moderation must be between 1 and %2$i (i."
 "e., the number of regression parameters)."
 msgstr ""
+"Os coeficientes selecionados para moderação %1$s devem estar entre 1 e %2$i ("
+"i.e., o número de parâmetros de regressão)."
 
 msgid "Effect size (coef: %1$s)"
 msgstr "Tamanho do efeito (coef: %1$s)"
 
 msgid "Effect size coefficients %1$s correspond to %2$s."
-msgstr ""
+msgstr "O tamanho de efeito dos coeficientes %1$s correspondem a %2$s."
 
 msgid "Heterogeneity (coef: %1$s)"
 msgstr "Heterogeneidade (coef: %1$s)"
 
 msgid "Heterogeneity coefficients %1$s correspond to %2$s."
-msgstr ""
+msgstr "Os coeficientes de heterogeneidade %1$s correspondem a %2$s."
 
 msgid "Mean - %1$sSD"
-msgstr ""
+msgstr "Média - %1$sDP"
 
 msgid "Mean + %1$sSD"
-msgstr ""
+msgstr "Média + %1$sDP"
 
 msgid "Adjusted estimate"
 msgstr "Estimativa ajustada"
 
 msgid "Distance Matrix"
-msgstr ""
+msgstr "Matriz de Distância"
 
 msgid "Correlation Matrix"
 msgstr "Matriz de Correlação"
@@ -661,59 +711,63 @@ msgid ""
 "Clustering is not supported when specifying a heterogeneity meta-regression "
 "model."
 msgstr ""
+"O agrupamento não é suportado ao especificar um modelo de metarregressão de "
+"heterogeneidade."
 
 msgid "The fixed value for tau2 must be a positive number."
-msgstr ""
+msgstr "O valor fixado para tau2 deve ser um número positivo."
 
 msgid ""
 "The custom R code for extending the metafor call failed with the following "
 "message: %1$s"
 msgstr ""
+"O código R personalizado para estender a chamada metafor falhou com a "
+"seguinte mensagem: %1$s"
 
 msgid "Fisher's z to r"
-msgstr ""
+msgstr "z de Fisher a r"
 
 msgid "exponential"
-msgstr ""
+msgstr "exponencial"
 
 msgid "log odds to proportions"
-msgstr ""
+msgstr "log de chances para proporções"
 
 msgid "log odds to SMD (normal)"
-msgstr ""
+msgstr "log de chances para SMD (normal)"
 
 msgid "log odds to SMD (logistic)"
-msgstr ""
+msgstr "log de chances para SMD (logístico)"
 
 msgid "SMD to log odds (normal)"
-msgstr ""
+msgstr "SMD para log de chances (normal)"
 
 msgid "SMD to log odds (logistic)"
-msgstr ""
+msgstr "SMD para log de chances (logístico)"
 
 msgid "Hakstian & Whalen inverse α"
-msgstr ""
+msgstr "α inverso de Hakstian & Whalen"
 
 msgid "Bonett inverse α"
-msgstr ""
+msgstr "α inverso de Bonett"
 
 msgid "z to R²"
-msgstr ""
+msgstr "z a R²"
 
 msgid "SMD to Cohen's U₁"
-msgstr ""
+msgstr "SMD a U₁ de Cohen"
 
 msgid "SMD to Cohen's U₂"
-msgstr ""
+msgstr "SMD a U₂ de Cohen"
 
 msgid "SMD to Cohen's U₃"
-msgstr ""
+msgstr "SMD a U₃ de Cohen"
 
 msgid "SMD to CLES, Pr(superiority)"
-msgstr ""
+msgstr "SMD a CLES, Pr(superioridade)"
 
 msgid "None"
-msgstr ""
+msgstr "Nenhum"
 
 msgid "Bonferroni"
 msgstr "Bonferroni"
@@ -749,7 +803,7 @@ msgid "Moderation: %1$s"
 msgstr "Moderação: %1$s"
 
 msgid "The pooled effect size could not be calculated."
-msgstr ""
+msgstr "O tamanho de efeito combinado não pôde ser calculado."
 
 msgid "(coef ...)"
 msgstr "(coef...)"
@@ -767,7 +821,7 @@ msgid "(coef: %1$s)"
 msgstr "(coef: %1$s)"
 
 msgid "Subgroup differences"
-msgstr ""
+msgstr "Diferenças de subgrupos"
 
 msgid "%s%% CI"
 msgstr "%s%% IC"
@@ -776,22 +830,24 @@ msgid "%s%% PI"
 msgstr "%s%% IR"
 
 msgid "Subgroup"
-msgstr ""
+msgstr "Subgrupo"
 
 msgid "Fixed effects tested using z-distribution."
-msgstr ""
+msgstr "Os feitos fixos foram testados usando a distribuição z."
 
 msgid "Fixed effects tested using t-distribution."
-msgstr ""
+msgstr "Os efeitos fixos foram testados usando a distribuição t."
 
 msgid "Fixed effects tested using Knapp and Hartung adjustment."
-msgstr ""
+msgstr "Os efeitos fixos foram testados usando o ajuste de Knapp e Hartung."
 
 msgid "The heterogeneity model for 𝜏² is specified on the log scale."
 msgstr ""
+"O modelo de heterogeneidade para 𝜏² foi especificado na escala logarítmica."
 
 msgid "The heterogeneity model for 𝜏² is specified on the identity scale."
 msgstr ""
+"O modelo de heterogeneidade para 𝜏² foi especificado na escala identidade."
 
 msgid "pooled effect"
 msgstr "efeito combinado"
@@ -803,235 +859,307 @@ msgid "%1$i observations were ommited due to missing values."
 msgstr "%1$i observações foram omitidas devido a valores ausentes."
 
 msgid "%1$i clusters with %2$i estimates each."
-msgstr ""
+msgstr "%1$i agrupamentos com %2$i estimativas cada."
 
 msgid "%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates."
-msgstr ""
+msgstr "Agrupamentos %1$i com estimativas mín./mediana/máx. %2$i/%3$i/%4$i."
 
 msgid "%1$s: %2$i observations were ommited due to missing values."
 msgstr "%1$s: %2$i observações foram omitidas devido a valores ausentes."
 
 msgid "%1$s: %2$i clusters with %3$i estimates each."
-msgstr ""
+msgstr "%1$s: %2$i agrupamentos com %3$i estimativas cada."
 
 msgid "%1$s: %2$i clusters with min/median/max %3$i/%4$i/%5$i estimates."
-msgstr ""
+msgstr "%1$s: %2$i agrupamentos com estimativas mín/mediana/máx %3$i/%4$i/%5$i."
 
 msgid ""
 "NAs in the %1$s were introduced due to the %2$s transformation. Please "
 "verify that you are using the correct effect size transformation."
 msgstr ""
+"As NAs em %1$s foram introduzidas devido à transformação %2$s. Verifique se "
+"você está usando a transformação de tamanho de efeito correta."
 
 msgid "The %1$s is transformed using %2$s transformation."
-msgstr ""
+msgstr "O %1$s é transformado usando a transformação %2$s."
 
 msgid ""
 "The pooled effect size corresponds to the weighted average effect across "
 "studies."
 msgstr ""
+"O tamanho do efeito combinado corresponde ao efeito médio ponderado entre os "
+"estudos."
 
 msgid ""
 "The adjusted effect corresponds to the averaged effect size estimate across "
 "the levels of all moderators."
 msgstr ""
+"O efeito ajustado corresponde à estimativa média do tamanho do efeito entre "
+"os níveis de todos os moderadores."
 
 msgid ""
 "The pooled heterogeneity estimate corresponds to the heterogeneity at the "
 "average of predictor values."
 msgstr ""
+"A estimativa de heterogeneidade combinada corresponde à heterogeneidade na "
+"média dos valores preditores."
 
 msgid "The I² and H² statistics are not available for heterogeneity models."
 msgstr ""
+"As estatísticasI² e H² não estão disponíveis para modelos de heterogeneidade."
 
 msgid "The Model Structure %1$s was not completely specified and was skipped."
 msgstr ""
+"A estrutura do modelo %1$s não foi completamente especificada e foi ignorada."
 
 msgid ""
 "Prediction interval for the %1$s is not available for models with multiple "
 "heterogeneity estimates."
 msgstr ""
+"O intervalo de previsão para %1$s não está disponível para modelos com "
+"múltiplas estimativas de heterogeneidade."
 
 msgid ""
 "Each marginal mean estimate is averaged across the levels of the remaining "
 "predictors."
 msgstr ""
+"Cada estimativa média marginal é calculada através dos níveis dos preditores "
+"restantes."
 
 msgid ""
 "Each marginal mean estimate is averaged across the levels of the remaining "
 "predictors in a given subgroup."
 msgstr ""
+"Cada estimativa média marginal é calculada através dos níveis dos preditores "
+"restantes em um determinado subgrupo."
 
 msgid ""
 "NAs in the marginal mean estimatess were introduced due to the %1$s "
 "transformation. Please verify that you are using the correct effect size "
 "transformation."
 msgstr ""
+"As NAs nas estimativas médias marginais foram introduzidas devido à "
+"transformação %1$s. Verifique se você está usando a transformação correta do "
+"tamanho do efeito."
 
 msgid "The estimates and intervals are transformed using %1$s transformation."
 msgstr ""
+"As estimativas e intervalos foram transformados usando a transformação %1$s."
 
 msgid "The estimates and intervals correspond to %1$s."
-msgstr ""
+msgstr "As estimativas e intervalos correspondem a %1$s."
 
 msgid ""
 "Each contrast is averaged across the levels of the remaining predictors."
 msgstr ""
+"Cada contraste é calculado com base nos níveis dos preditores restantes."
 
 msgid ""
 "Contrasts of estimates marginal means cannot be transformed via the effect "
 "size transformation."
 msgstr ""
+"Os contrastes das médias marginais das estimativas não podem ser "
+"transformados por meio da transformação do tamanho do efeito."
 
 msgid ""
 "Contrasts of estimated marginal means are adjusted for multiple comparisons "
 "using %1$s correction."
 msgstr ""
+"Os contrastes das medias marginais estimadas são ajustados para comparações "
+"múltiplas usando a correção %1$s."
 
 msgid ""
 "Contrasts of estimated marginal means cannot be transformed via the link "
 "function. As such, the contrasts are summarized on the model scale: log(𝜏²)."
 msgstr ""
+"Os contrastes das médias marginais estimadas não podem ser transformados por "
+"meio da função de ligação. Assim, os contrastes são resumidos na escala do "
+"modelo: log(𝜏²)."
 
 msgid ""
 "Contrasts of estimated marginal means cannot be transformed via the "
 "heterogeneity transformation. As such, the contrasts are summarized as 𝜏²."
 msgstr ""
+"Os contrastes das médias marginais estimadas não podem ser transformados por "
+"meio da transformação de heterogeneidade. Assim, os contrastes são resumidos "
+"como 𝜏²."
 
 msgid "Permutation p-value is based on %1$s permutations."
-msgstr ""
+msgstr "O valor-p da permutação é baseado em %1$s permutações."
 
 msgid ""
 "The model estimation failed with the following message: %1$s. Please, "
 "consider simplifying the model."
 msgstr ""
+"A estimativa do modelo falhou com a seguinte mensagem: %1$s. Por favor, "
+"considere simplificar o modelo."
 
 msgid ""
 "The cluster-robust standard errors could not be computed. Please, consider "
 "modifying the clustering settings in the 'Advanced' section."
 msgstr ""
+"Não foi possível calcular os erros padrões robustos do agrupamento. "
+"Considere modificar as configurações de agrupamento na seção 'Avançado'."
 
 msgid "Fewer than two estimates."
-msgstr ""
+msgstr "Menos do que duas estimativas."
 
 msgid ""
 "The selected 'Method' requires specification of the 'Weights' option in the "
 "'Advanced' section."
 msgstr ""
+"O 'Método' selecionado requer a especificação da opção 'Pesos' na seção "
+"'Avançado'."
 
 msgid "Subgroup %1$s:"
-msgstr ""
+msgstr "Subgrupo %1$s:"
 
 msgid ""
 "%1$sThe term %2$s was completely removed from the model. Possible causes are "
 "missing values, collinear predictors, or missing crossed cells in an "
 "interaction term."
 msgstr ""
+"%1$sO termo %2$s foi completamente removido do modelo. Possíveis causas são "
+"valores ausentes, preditores colineares ou células cruzadas ausentes em um "
+"termo de interação."
 
 msgid ""
 "%1$sThe term %2$s was partilly removed (%3$i/%4$i coefficients) from the "
 "model. Possible causes are missing values, collinear predictors, or missing "
 "crossed cells in an interaction term."
 msgstr ""
+"%1$sO termo %2$s foi parcialmente removido (coeficientes %3$i/%4$i) do "
+"modelo. As possíveis causas são valores ausentes, preditores colineares ou "
+"células cruzadas ausentes em um termo de interação."
 
 msgid ""
 "%1$sThe following coefficients were removed from the model: %2$s. Possible "
 "causes are missing values, collinear predictors, or missing crossed cells in "
 "an interaction term."
 msgstr ""
+"%1$sOs seguintes coeficientes foram removidos do modelo: %2$s. Possíveis "
+"causas: valores ausentes, preditores colineares ou células cruzadas ausentes "
+"em um termo de interação."
 
 msgid "Error reading the distance matrix file: %1$s"
-msgstr ""
+msgstr "Erro ao ler o arquivo de matriz de distância: %1$s"
 
 msgid ""
 "The distance matrix must be square. The number of rows (%1$i) does not match "
 "the number of columns (%2$i)."
 msgstr ""
+"A matriz de distância deve ser quadrada. O número de linhas (%1$i) não "
+"corresponde ao número de colunas (%2$i)."
 
 msgid "Error reading the correlation matrix file: %1$s"
-msgstr ""
+msgstr "Erro ao ler o arquivo da matriz de correlação: %1$s"
 
 msgid "Error reading the variance-covariance matrix file: %1$s"
-msgstr ""
+msgstr "Erro ao ler o arquivo da matriz de variância-covariância: %1$s"
 
 msgid ""
 "The variance-covariance matrix must be square. The number of rows (%1$i) "
 "does not match the number of columns (%2$i)."
 msgstr ""
+"A matriz de variância-covariância deve ser quadrada. O número de linhas "
+"(%1$i) não corresponde ao número de colunas (%2$i)."
 
 msgid ""
 "The variance-covariance matrix must match the dimensions of the data set. "
 "The number of the matrix rows/columns (%1$i) does not match the number of "
 "observations in the dataset (%2$i)."
 msgstr ""
+"A matriz de variância-covariância deve corresponder às dimensões do conjunto "
+"de dados. O número de linhas/colunas da matriz (%1$i) não corresponde ao "
+"número de observações no conjunto de dados (%2$i)."
 
 msgid "The supplied variance-covariance matrix is not positive definite."
 msgstr ""
+"A matriz de variância-covariância fornecida não é definida positivamente."
 
 msgid ""
 "The Variance-Covariance Matrix could not be computed: There must be as many "
 "'Correlation Matrix' entries as is the number of estimates within the "
 "largest 'Cluster'."
 msgstr ""
+"A Matriz de Variância-Covariância não pôde ser calculada: Deve haver tantas "
+"entradas na 'Matriz de Correlação' quanto o número de estimativas dentro do "
+"maior 'Agrupamento'."
 
 msgid "Error computing the variance-covariance matrix: %1$s"
-msgstr ""
+msgstr "Erro ao calcular a matriz de variância-covariância: %1$s"
 
 msgid "Please provide a file with the precomputed variance-covariance matrix."
 msgstr ""
+"Por favor, forneça um arquivo com a matriz de variância-covariância "
+"pré-calculada."
 
 msgid "Please provide a clustering variable for the correlation matrix."
 msgstr ""
+"Por favor, forneça uma variável de agrupamento para a matriz de correlação."
 
 msgid "Please provide correlation matrix variables."
-msgstr ""
+msgstr "Por favor, forneça variáveis para a matriz de correlação."
 
 msgid ""
 "The value of the correlation between construct types is set to 0. This "
 "corresponds to no adjustment for dependency between construct types."
 msgstr ""
+"O valor da correlação entre os tipos de construção é definido como 0. Isso "
+"corresponde a nenhum ajuste de dependência entre os tipos de construção."
 
 msgid ""
 "Please provide a file with the correlation matrix for the construct types."
 msgstr ""
+"Por favor, forneça um arquivo com a matriz de correlação para os tipos de "
+"construção."
 
 msgid ""
 "The value of the correlation between construct types is set to 0. This "
 "corresponds to no adjustment for dependency between constructs."
 msgstr ""
+"O valor da correlação entre os tipos de construção é definido como 0. Isso "
+"corresponde a nenhum ajuste de dependência entre construções."
 
 msgid "Please provide a file with the correlation matrix for the construct."
 msgstr ""
+"Por favor, forneça um arquivo com a matriz de correlação para o construto."
 
 msgid ""
 "The value of the correlation between time lags is set to 0. This corresponds "
 "to no adjustment for dependency between time lags."
 msgstr ""
+"O valor da correlação entre os intervalos de tempo é definido como 0. Isso "
+"corresponde a nenhum ajuste para dependência entre os intervalos de tempo."
 
 msgid ""
 "The 'Group Size' for specifying dependency due to common group comparison is "
 "unspecified. As default, the groups are assumed to be equal."
 msgstr ""
+"O 'Tamanho do Grupo' para especificar a dependência devido à comparação de "
+"grupos comuns não é especificado. Por padrão, os grupos são considerados "
+"iguais."
 
 msgid "Error writing the variance-covariance matrix file: %1$s"
-msgstr ""
+msgstr "Erro ao escrever o arquivo da matriz de variância-covariância: %1$s"
 
 msgid "Random Effects / Model Stucture Summary"
 msgstr "Efeitos Aleatórios / Resumo da estrutura do modelo"
 
 msgid "Simple / Nested Summary"
-msgstr ""
+msgstr "Resumo Simples / Aninhado"
 
 msgid "Estimates"
 msgstr "Estimativas"
 
 msgid "σ²"
-msgstr ""
+msgstr "σ²"
 
 msgid "σ"
-msgstr ""
+msgstr "σ"
 
 msgid "Levels"
-msgstr ""
+msgstr "Níveis"
 
 msgid "Fixed"
 msgstr "Fixo(s)"
@@ -1040,105 +1168,109 @@ msgid "Confidence Intervals"
 msgstr "Intervalos de Confiança"
 
 msgid "Inclusion Tests"
-msgstr ""
+msgstr "Testes de Inclusão"
 
 msgid "Component Inclusion Test"
-msgstr ""
+msgstr "Teste de Inclusão de Componentes"
 
 msgid "%1$s: Level Inclusion Test"
-msgstr ""
+msgstr "%1$s: Teste de Inclusão de Níveis"
 
 msgid "Removed Levels"
-msgstr ""
+msgstr "Níveis Removidos"
 
 msgid "Removed Component"
 msgstr "Componente Removido"
 
 msgid "LRT"
-msgstr ""
+msgstr "TRV"
 
 msgid ""
 "Likelihood Ratio Test (LRT) and p-value are based on a comparison with the "
 "complete model."
 msgstr ""
+"O Teste da Razão de Verossimilhança (TRV) e o valor-p são baseados em uma "
+"comparação com o modelo completo."
 
 msgid "Random Slopes Summary"
-msgstr ""
+msgstr "Resumo das Inclinações Aleatórias"
 
 msgid "Structured"
-msgstr ""
+msgstr "Estruturado"
 
 msgid "Summary"
-msgstr ""
+msgstr "Resumo"
 
 msgid "Autoregressive"
-msgstr ""
+msgstr "Autorregressivo"
 
 msgid "Spatial"
-msgstr ""
+msgstr "Espacial"
 
 msgid "Known Correlation Summary"
-msgstr ""
+msgstr "Resumo da Correlação Conhecida"
 
 msgid "Testing Inclusion of Random Effects / Model Structure"
-msgstr ""
+msgstr "Testando Inclusão de Efeitos Aleatórios / Estrutura do Modelo"
 
 msgid "Subgroup %1$s: Testing Inclusion of Random Effects / Model Structure"
 msgstr ""
+"Subgrupo %1$s: Testando Inclusão de Efeitos Aleatórios / Estrutura do Modelo"
 
 msgid "Testing Inclusion of Nested Random Effects: %1$s"
-msgstr ""
+msgstr "Testando a Inclusão de Efeitos Aleatórios Aninhados: %1$s"
 
 msgid "Subgroup %1$s: Testing Inclusion of Nested Random Effects: %2$s"
 msgstr ""
+"Subgrupo %1$s: Testando a Inclusão de Efeitos Aleatórios Aninhados: %2$s"
 
 msgid "Random Slopes"
 msgstr "Inclinações Aleatórias"
 
 msgid "Compound Symmetry"
-msgstr ""
+msgstr "Simetria Composta"
 
 msgid "Heteroscedastic Compound Symmetry"
-msgstr ""
+msgstr "Simetria Composta Heteroscedástica"
 
 msgid "Unstructured"
-msgstr ""
+msgstr "Não estruturado"
 
 msgid "Identity"
-msgstr ""
+msgstr "Identidade"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Diagonal"
 
 msgid "AR(1)"
-msgstr ""
+msgstr "AR(1)"
 
 msgid "Heteroskedastic AR(1)"
-msgstr ""
+msgstr "AR(1) Heteroscedástico"
 
 msgid "Continuous-Time AR"
-msgstr ""
+msgstr "AR de tempo contínuo"
 
 msgid "Exponential"
-msgstr ""
+msgstr "Exponencial"
 
 msgid "Gaussian"
-msgstr ""
+msgstr "Gaussiano"
 
 msgid "Linear"
-msgstr ""
+msgstr "Linear"
 
 msgid "Rational Quadratic"
-msgstr ""
+msgstr "Quadrático Racional"
 
 msgid "Spherical"
-msgstr ""
+msgstr "Esférico"
 
 msgid "Sqrt. Estimate"
 msgstr "RQ da estimativa"
 
 msgid "Levels:"
-msgstr ""
+msgstr "Níveis:"
 
 msgid "Component:"
 msgstr "Componente:"
@@ -1150,64 +1282,65 @@ msgid "Estimates ρ"
 msgstr "Estimativas ρ"
 
 msgid "ρ"
-msgstr ""
+msgstr "ρ"
 
 msgid "%s Summary"
 msgstr "Resumo %s"
 
 msgid "metamisc package failed with the following error: '%s'"
-msgstr ""
+msgstr "o pacote metamisc falhou com a seguinte mensagem de erro: '%s'"
 
 msgid "Based on %i studies."
-msgstr ""
+msgstr "Baseado em %i estudos."
 
 msgid "The model was estimated using %1$s method with %2$s link function."
 msgstr ""
+"O modelo foi estimado usando o método %1$s com a função de ligação %2$s."
 
 msgid "The model was estimated using MCMC with %1$s link function."
-msgstr ""
+msgstr "O modelo foi estimado usando MCMC com a função de ligação %1$s."
 
 msgid "Forest plot"
 msgstr "Gráfico de floresta"
 
 msgid "Observed-Expected Ratio"
-msgstr ""
+msgstr "Razão Observado-Esperado"
 
 msgid "Concordance Statistic"
-msgstr ""
+msgstr "Estatística de Concordância"
 
 msgid "Funnel Plot Asymmetry Tests"
-msgstr ""
+msgstr "Testes de Assimetria de Gráfico de Funil"
 
 msgid "Method"
 msgstr "Método"
 
 msgid "t-statistic"
-msgstr ""
+msgstr "estatística t"
 
 msgid "The %1$s test failed with the following error: %2$s"
-msgstr ""
+msgstr "O teste %1$s falhou com o seguinte erro: %2$s"
 
 msgid "Funnel Plot Asymmetry Plots"
-msgstr ""
+msgstr "Gráficos de Assimetria de Funil"
 
 msgid "Egger (unweighted)"
-msgstr ""
+msgstr "Egger (não ponderado)"
 
 msgid "Egger (multiplicative overdispersion)"
-msgstr ""
+msgstr "Egger (superdispersão multiplicativa)"
 
 msgid "Macaskill"
-msgstr ""
+msgstr "Macaskill"
 
 msgid "Macaskill (pooled)"
-msgstr ""
+msgstr "Macaskill (combinado)"
 
 msgid "Peters"
-msgstr ""
+msgstr "Peters"
 
 msgid "Debray"
-msgstr ""
+msgstr "Debray"
 
 msgid "Standard error"
 msgstr "Erro padrão"
@@ -1216,41 +1349,49 @@ msgid "Sample size"
 msgstr "Tamanho da amostra"
 
 msgid "Total events"
-msgstr ""
+msgstr "Eventos totais"
 
 msgid ""
 "Cannot compute outcomes. Chech that all of the required information is "
 "specified via the appropriate arguments (i.e. an Effect Size and either "
 "Standard Error, Sampling Variance, or 95%% Confidence Interval)."
 msgstr ""
+"Não é possível calcular os resultados. Verifique se todas as informações "
+"necessárias estão especificadas por meio dos argumentos apropriados (i.e., "
+"um Tamanho do Efeito e Erro Padrão, Variância Amostral ou Intervalo de "
+"Confiança de 95%%)."
 
 msgid "Step"
-msgstr ""
+msgstr "Passo"
 
 msgid "Computed"
-msgstr ""
+msgstr "Calculado"
 
 msgid "Total Computed"
-msgstr ""
+msgstr "Total calculado"
 
 msgid "Effect sizes were successfully computed for each data entry."
 msgstr ""
+"Os tamanhos de efeito foram calculados com sucesso para cada entrada de "
+"dados."
 
 msgid ""
 "Effect sizes were successfully computed for %1$i out of %2$i data entries."
 msgstr ""
+"Os tamanhos do efeito foram calculados com sucesso para %1$i de %2$i "
+"entradas de dados."
 
 msgid "Error in Step %1$i:"
-msgstr ""
+msgstr "Erro no Passo %1$i:"
 
 msgid "Model Information"
 msgstr "Informação do Modelo"
 
 msgid "Publication Bias: %1$s"
-msgstr ""
+msgstr "Viés de Publicação: %1$s"
 
 msgid "The fixed effect effect size could not be calculated."
-msgstr ""
+msgstr "O tamanho do efeito fixo não pôde ser calculado."
 
 msgid "Fixed Effect Estimate"
 msgstr "Estimativas de Efeitos Fixos"
@@ -1262,7 +1403,7 @@ msgid "Intercept Estimate"
 msgstr "Estimativa do Intercepto"
 
 msgid "Full Dataset"
-msgstr ""
+msgstr "Conjunto Completo de Dados"
 
 msgid "Missing Data Summary"
 msgstr "Resumo de Dados Ausentes"
@@ -1271,61 +1412,69 @@ msgid ""
 "The dataset contains missing values: %1$i missing values were removed from "
 "the analysis."
 msgstr ""
+"O conjunto de dados contém valores ausentes: %1$i valores ausentes foram "
+"removidos da análise."
 
 msgid "Funnel Plot"
-msgstr ""
+msgstr "Gráfico de Funil"
 
 msgid ""
 "Funnel plot prediction interval was specified in an incorrect format. Try "
 "'(0.90, 0.95, 0.99)'."
 msgstr ""
+"O intervalo de previsão do gráfico de funil foi especificado em um formato "
+"incorreto. Tente '(0,90; 0,95; 0,99)'."
 
 msgid "Funnel plot prediction intervals must be between 0 and 1."
-msgstr ""
+msgstr "Os intervalos de previsão do gráfico de funil devem estar entre 0 e 1."
 
 msgid "Funnel plot prediction intervals must be specified."
-msgstr ""
+msgstr "Os intervalos de previsão do gráfico de funil devem ser especificados."
 
 msgid ""
 "Power enhancement breaks were specified in an incorrect format. Try '(0.30, "
 "0.50, 0.80)'."
 msgstr ""
+"Os intervalos de aumento de potência foram especificados em um formato "
+"incorreto. Tente '(0,30; 0,50; 0,80)'."
 
 msgid "At least one power enhancement break must be specified."
 msgstr ""
+"Pelo menos uma interrupção de aumento de potência deve ser especificada."
 
 msgid "Power enhancement breaks must be between 0.05 and 1."
-msgstr ""
+msgstr "Os intervalos de aumento de potência devem estar entre 0,05 e 1."
 
 msgid "Power"
 msgstr "Potência"
 
 msgid "H₁ Funnel Parameter Estimates"
-msgstr ""
+msgstr "Estimativas de Parâmetros de Funil H₁"
 
 msgid "Estimate μ"
 msgstr "Estimativa μ"
 
 msgid "Lower 95%% CI"
-msgstr ""
+msgstr "IC 95%% inferior"
 
 msgid "Upper 95%% CI"
-msgstr ""
+msgstr "IC 95%% superior"
 
 msgid "Estimate 𝜏"
 msgstr "Estimativa 𝜏"
 
 msgid "The funnel plot parameter estimation failed with the following error:"
 msgstr ""
+"A estimativa do parâmetro do gráfico de funil falhou com o seguinte erro:"
 
 msgid "Trim and Fill Parameter Estimates"
-msgstr ""
+msgstr "Estimativas de parâmetros de Corte e Preenchimento"
 
 msgid "Missing Estimates"
 msgstr "Estimativas Ausentes"
 
 msgid "Trim and Fill"
-msgstr ""
+msgstr "Corte e Preenchimento"
 
 msgid "Adjusted Estimate μ"
 msgstr "Estimativa μ Ajustada"
@@ -1334,84 +1483,94 @@ msgid "Adjusted Estimate 𝜏"
 msgstr "Estimativa 𝜏 Ajustada"
 
 msgid "Meta-Regression Test for Funnel Plot Asymmetry"
-msgstr ""
+msgstr "Teste de Meta-regressão para Assimetria de Gráfico de Funil"
 
 msgid "Asymmetry Test"
-msgstr ""
+msgstr "Teste de Assimetria"
 
 msgid "Limit Estimate μ"
 msgstr "Estimativa Limite μ"
 
 msgid "Weighted Regression Test for Funnel Plot Asymmetry"
-msgstr ""
+msgstr "Teste de Regressão Ponderada para Assimetria de Gráfico de Funil"
 
 msgid "Rank Correlation Test for Funnel Plot Asymmetry"
 msgstr ""
+"Teste de Correlação de Classificação para Assimetria de Gráfico de Funil"
 
 msgid "Fail-Safe N"
-msgstr ""
+msgstr "N à Prova de Falhas"
 
 msgid "Fail-Safe N Summary Table"
-msgstr ""
+msgstr "Tabela Resumo de N à Prova de Falhas"
 
 msgid "Rosenthal"
-msgstr ""
+msgstr "Rosenthal"
 
 msgid "Orwin"
-msgstr ""
+msgstr "Orwin"
 
 msgid "Rosenberg"
-msgstr ""
+msgstr "Rosenberg"
 
 msgid "General"
-msgstr ""
+msgstr "Geral"
 
 msgid "The funnel plot asymmetry test failed with the following error:"
-msgstr ""
+msgstr "O teste de assimetria do gráfico de funil falhou com o seguinte erro:"
 
 msgid ""
 "The funnel plot asymmetry test at level %1$s failed with the following error:"
 msgstr ""
+"O teste de assimetria do gráfico de funil no nível %1$s falhou com o "
+"seguinte erro:"
 
 msgid ""
 "The meta-analytic model did not converge. Try modifying the 'Method' option."
 msgstr ""
+"O modelo meta-analítico não convergiu. Tente modificar a opção 'Método'."
 
 msgid "The method is not available with only one observation."
-msgstr ""
+msgstr "O método não está disponível com apenas uma observação."
 
 msgid "The %1$s fail-safe N calculation %2$sfailed with the following error:"
-msgstr ""
+msgstr "O cálculo %1$s do N à prova de falhas falhou com o seguinte erro: %2$s"
 
 msgid ""
 "The 'Correlation/Covariance Matrix' variable input contains the following "
 "variable that does not contain the variable name separator '%1$s': %2$s."
 msgstr ""
+"A variável de entrada 'Matriz de Correlação/Covariância' contém a seguinte "
+"variável que não contém o separador de nome de variável '%1$s': %2$s."
 
 msgid ""
 "The correlation matrix contains values outside the range of -1 and 1. Please "
 "check your input."
 msgstr ""
+"A matriz de correlação contém valores fora da faixa de -1 e 1. Por favor, "
+"verifique sua entrada."
 
 msgid ""
 "The 'Means' variable input contains the following variable that is not "
 "specified in the 'Correlation/Covariance Matrix' variable input: %1$s."
 msgstr ""
+"A entrada da variável 'Médias' contém a seguinte variável que não está "
+"especificada na entrada da variável 'Matriz de Correlação/Covariância': %1$s."
 
 msgid "Available Variable Names"
-msgstr ""
+msgstr "Nomes Disponíveis de Variáveis"
 
 msgid "Descriptives"
-msgstr ""
+msgstr "Descritivos"
 
 msgid "%1$s: %1$s Matrix"
-msgstr ""
+msgstr "%1$s: Matriz %1$s"
 
 msgid "Variable"
-msgstr ""
+msgstr "Variável"
 
 msgid "%1$s: Means"
-msgstr ""
+msgstr "%1$s: Médias"
 
 msgid "Pooled %1$s Matrix"
 msgstr "Matriz Combinada %1$s"
@@ -1421,6 +1580,9 @@ msgid ""
 "verifying that all correlation/covariance matrix variables are correctly "
 "specified via 'Descriptives'."
 msgstr ""
+"Não foi possível calcular a matriz de correlação/covariância combinada. "
+"Considere verificar se todas as variáveis da matriz de correlação/"
+"covariância estão especificadas corretamente por meio de 'Descritivos'."
 
 msgid "Correlation"
 msgstr "Correlação"
@@ -1435,51 +1597,54 @@ msgid "Random Effect Covariance"
 msgstr "Covariância dos efeitos aleatórios"
 
 msgid "Pooled %1$s Matrix Parameters"
-msgstr ""
+msgstr "Parâmetros da Matriz %1$s Combinada"
 
 msgid "Row"
 msgstr "Linha"
 
 msgid "Column"
-msgstr ""
+msgstr "Coluna"
 
 msgid "95%% CI"
 msgstr "95%% IC"
 
 msgid "Computing additional fit measures: %1$s"
-msgstr ""
+msgstr "Calculando medidas de ajuste adicionais: %1$s"
 
 msgid "SEM Fit Measures"
 msgstr "Medidas de Ajuste do EPM"
 
 msgid "CLI"
-msgstr ""
+msgstr "ICL"
 
 msgid "TLI"
-msgstr ""
+msgstr "ITL"
 
 msgid "RMSEA"
 msgstr "REQMA"
 
 msgid "p(RMSEA < 0.05)"
-msgstr ""
+msgstr "p(REQMA < 0.05)"
 
 msgid "Pairwise Model Comparison"
-msgstr ""
+msgstr "Modelo de Comparação em Pares"
 
 msgid "2ΔLL"
-msgstr ""
+msgstr "2ΔLL"
 
 msgid "Δ df"
-msgstr ""
+msgstr "Δ gl"
 
 msgid "At least two models are required for pairwise model comparison."
 msgstr ""
+"Pelo menos dois modelos são necessários para comparação de modelos em pares."
 
 msgid ""
 "No pairwise model comparison with at least one degree of freedom difference "
 "available."
 msgstr ""
+"Nenhuma comparação de modelo em pares com pelo menos um grau de diferença de "
+"liberdade disponível."
 
 msgid "Regression Estimates"
 msgstr "Estimativas de regressão"
@@ -1491,19 +1656,19 @@ msgid "Covariance Estimates"
 msgstr "Estimativas de Covariância"
 
 msgid "Random Effects Estimates"
-msgstr ""
+msgstr "Estimativas de Efeitos Aleatórios"
 
 msgid "Model fit failed with the following message: %1$s."
-msgstr ""
+msgstr "O ajuste do modelo falhou com a seguinte mensagem: %1$s."
 
 msgid "The model should contain at least one predictor or an intercept."
-msgstr ""
+msgstr "O modelo deve conter pelo menos um preditor ou um intercepto."
 
 msgid "Coefficients"
 msgstr "Coeficientes"
 
 msgid "At least one predictor needs to be specified."
-msgstr ""
+msgstr "Pelo menos um preditor precisa ser especificado."
 
 msgid "%1$s observations were ommited due to missing values."
 msgstr "%1$s observações foram omitidas devido a valores ausentes."
@@ -1522,6 +1687,9 @@ msgid ""
 "largest R-hat is %1$.3f > 1.01. To lower R-hat please increase 'Iterations', "
 "or 'Adapt delta' in the Options section."
 msgstr ""
+"Inferência possivelmente não confiável — as cadeias MCMC podem não ter "
+"convergido; o maior R-hat é %1$.3f > 1,01. Para diminuir o R-hat, aumente "
+"'Iterações' ou 'Delta de adaptação' na seção Opções."
 
 msgid ""
 "Low estimation accuracy -- The smallest Effective Sample Size (ESS) is "
@@ -1534,6 +1702,7 @@ msgstr ""
 
 msgid "Interaction terms are currently not possible in Bayesian meta-analyses."
 msgstr ""
+"Termos de interação não são atualmente possíveis em meta-análises Bayesianas."
 
 msgid "Estimating Marginal Means"
 msgstr "Estimando Médias Marginais"
@@ -1541,34 +1710,46 @@ msgstr "Estimando Médias Marginais"
 msgid ""
 "At least one prior distribution for the Effect component has to be specified."
 msgstr ""
+"Pelo menos uma distribuição anterior para o componente Efeito deve ser "
+"especificada."
 
 msgid ""
 "At least one prior distribution for the Heterogeneity component has to be "
 "specified."
 msgstr ""
+"Pelo menos uma distribuição anterior para o componente Heterogeneidade deve "
+"ser especificada."
 
 msgid ""
 "At least one prior distribution for the %1$s moderator component has to be "
 "specified."
 msgstr ""
+"Pelo menos uma distribuição anterior para o componente moderador %1$s deve "
+"ser especificada."
 
 msgid ""
 "Both priors distributions for the %1$s moderator component must have the "
 "same contrast type."
 msgstr ""
+"Ambas as distribuições anteriores para o componente moderador %1$s devem ter "
+"o mesmo tipo de contraste."
 
 msgid ""
 "At least one prior distribution for the Publication Bias component has to be "
 "specified."
 msgstr ""
+"Pelo menos uma distribuição anterior para o componente Viés de Publicação "
+"deve ser especificada."
 
 msgid ""
 "At least one prior distribution for the Baseline component has to be "
 "specified."
 msgstr ""
+"Pelo menos uma distribuição anterior para o componente de linha de base deve "
+"ser especificada."
 
 msgid "The priors for publication bias were set incorrectly."
-msgstr ""
+msgstr "Os critérios para viés de publicação foram definidos incorretamente."
 
 msgid "Model Specification"
 msgstr "Especificações do Modelo"
@@ -1589,10 +1770,10 @@ msgid "Prior Distributions Moderators"
 msgstr "Moderadores das Distribuições Anteriores"
 
 msgid "Alternative"
-msgstr ""
+msgstr "Alternativo"
 
 msgid "Null"
-msgstr ""
+msgstr "Nulo"
 
 msgid "P(M|data)"
 msgstr "P(M|dado)"
@@ -1601,13 +1782,16 @@ msgid ""
 "The analysis will estimate a complex meta-analytic model ensemble using MCMC "
 "and might require a prolonged time to complete."
 msgstr ""
+"A análise estimará um conjunto complexo de modelos meta-analíticos usando "
+"MCMC e pode levar um tempo prolongado para ser concluída."
 
 msgid ""
 "The model fit for subgroup '%1$s' resulted in the following warning: %2$s"
 msgstr ""
+"O ajuste do modelo para o subgrupo '%1$s' resultou no seguinte aviso: %2$s"
 
 msgid "The model fit resulted in the following warning: %1$s"
-msgstr ""
+msgstr "O ajuste do modelo resultou no seguinte aviso: %1$s"
 
 msgid "Conditional Meta-Analytic Estimates"
 msgstr "Estimativas Meta-analíticas Condicionais"
@@ -1619,33 +1803,37 @@ msgid ""
 "Conditional estimates are based on models assuming the presence of a given "
 "component."
 msgstr ""
+"Estimativas condicionais são baseadas em modelos que pressupõem a presença "
+"de um determinado componente."
 
 msgid "Standardized Conditional Meta-Regression Coefficients"
-msgstr ""
+msgstr "Coeficientes de Meta-Regressão Condicional Padronizados"
 
 msgid "Standardized Meta-Regression Coefficients"
-msgstr ""
+msgstr "Coeficientes de Meta-Regressão Padronizados"
 
 msgid "Conditional Meta-Regression Coefficients"
-msgstr ""
+msgstr "Coeficientes de Meta-Regressão Condicional"
 
 msgid "Meta-Regression Coefficients"
 msgstr "Coeficientes de Meta-regressão"
 
 msgid "Conditional Publication Bias Adjustment Estimates (Weight Function)"
 msgstr ""
+"Estimativas de Ajuste de Viés de Publicação Condicional (Função de "
+"Ponderação)"
 
 msgid "Publication Bias Adjustment Estimates (Weight Function)"
-msgstr ""
+msgstr "Estimativas de Ajuste de Viés de Publicação (Função de Ponderação)"
 
 msgid "<em>p</em>-Values Interval"
-msgstr ""
+msgstr "Intervalo de Valores-<em>p</em>"
 
 msgid "Conditional Publication Bias Adjustment Estimates (PET-PEESE)"
-msgstr ""
+msgstr "Estimativas de Ajuste de Viés de Publicação Condicional (PET-PEESE)"
 
 msgid "Publication Bias Adjustment Estimates (PET-PEESE)"
-msgstr ""
+msgstr "Estimativas de Ajuste de Viés de Publicação (PET-PEESE)"
 
 msgid "Estimated Conditional Marginal Means"
 msgstr "Estimativas de Médias Marginais Condicionais"
@@ -1660,6 +1848,8 @@ msgid ""
 "The Bayes factor test for the adjusted estimate is not available for meta-"
 "regressions with non-centered parameteriazation."
 msgstr ""
+"O teste do fator de Bayes para a estimativa ajustada não está disponível "
+"para meta-regressões com parametrização não centrada."
 
 msgid "Adjusted Effect"
 msgstr "Efeito Ajustado"
@@ -1674,7 +1864,7 @@ msgid "Weight Function"
 msgstr "Função de ponderação"
 
 msgid "PET-PEESE"
-msgstr ""
+msgstr "PET-PEESE"
 
 msgid "P-Value"
 msgstr "Valor-p"
@@ -1683,10 +1873,10 @@ msgid "Diagnostics Summary"
 msgstr "Resumo do Diagnóstico"
 
 msgid "MCMC error"
-msgstr ""
+msgstr "Erro MCMC"
 
 msgid "MCMC error/SD"
-msgstr ""
+msgstr "Erro MCMC/DP"
 
 msgid "ESS"
 msgstr "SQE"
@@ -1698,10 +1888,10 @@ msgid "Weights"
 msgstr "Pesos"
 
 msgid "PET"
-msgstr ""
+msgstr "PET"
 
 msgid "PEESE"
-msgstr ""
+msgstr "PEESE"
 
 msgid "Trace Plot"
 msgstr "Traçar Gráfico"
@@ -1716,12 +1906,14 @@ msgid ""
 "Please select at least one 'Type' of diagnostics plot (e.g., 'Trace', "
 "'Autocorrelation' or 'Posterior samples density')."
 msgstr ""
+"Selecione pelo menos um 'Tipo' de gráfico de diagnóstico (e.g., 'Traço', "
+"'Autocorrelação' ou 'Densidade de amostras posteriores')."
 
 msgid "RoBMA R Code"
-msgstr ""
+msgstr "Código R de RoBMA"
 
 msgid "Publication Bias Adjustment Summary"
-msgstr ""
+msgstr "Resumo do Ajuste de Viés de Publicação"
 
 msgid "Estimated Marginal Means Summary"
 msgstr "Resumo das Estimativas de Médias Marginais"
@@ -1736,25 +1928,25 @@ msgid "Adjusted effect"
 msgstr "Efeito ajustado"
 
 msgid "Subgroup %1$s, %2$s"
-msgstr ""
+msgstr "Subgrupo %1$s, %2$s"
 
 msgid "Effect intercept"
 msgstr "Intercepto do Efeito"
 
 msgid "Publication bias"
-msgstr ""
+msgstr "Viés de publicação"
 
 msgid "Baseline"
-msgstr ""
+msgstr "Linha de base"
 
 msgid "Inclusion BF"
-msgstr ""
+msgstr "FB da Inclusão"
 
 msgid "Exclusion BF"
-msgstr ""
+msgstr "FB da Exclusão"
 
 msgid "log(Inclusion BF)"
-msgstr ""
+msgstr "log(FB da Inclusão)"
 
 msgid ""
 "Large Bayes factors, i.e., BF > 100 or BF < 1/100, might be computationally "
@@ -1762,30 +1954,41 @@ msgid ""
 "very large change in the Bayes factor). Consider increasing the number of "
 "chains and posterior samples to obtain more stable estimates."
 msgstr ""
+"Fatores de Bayes grandes, i.e., FB > 100 ou FB < 1/100, podem ser "
+"computacionalmente instáveis (uma pequena alteração na probabilidade de "
+"inclusão posterior corresponde a uma alteração muito grande no fator de "
+"Bayes). Considere aumentar o número de cadeias e amostras posteriores para "
+"obter estimativas mais estáveis."
 
 msgid ""
 "Cannot compute results. All entries of the p-value variable (%s) must be "
 "between 0 and 1."
 msgstr ""
+"Não é possível calcular os resultados. Todas as entradas da variável de "
+"valor-p (%s) devem estar entre 0 e 1."
 
 msgid ""
 "Cannot compute results. All entries of the correlation coefficient variable "
 "(%s) must be between -1 and 1."
 msgstr ""
+"Não é possível calcular os resultados. Todas as entradas da variável de "
+"coeficiente de correlação (%s) devem estar entre -1 e 1."
 
 msgid ""
 "Cannot compute results. All entries of the sample size variable (%s) must be "
 "greater than four."
 msgstr ""
+"Não é possível calcular os resultados. Todas as entradas da variável de "
+"tamanho da amostra (%s) devem ser maiores que quatro."
 
 msgid "The p-value cutoffs were set incorectly."
-msgstr ""
+msgstr "Os pontos de corte do valor-p foram definidos incorretamente."
 
 msgid "At least one p-value cutoff needs to be set."
-msgstr ""
+msgstr "Pelo menos um valor de corte para o valor-p precisa ser definido."
 
 msgid "All p-value cutoffs needs to be between 0 and 1."
-msgstr ""
+msgstr "Todos os pontos de corte do valor-p precisam estar entre 0 e 1."
 
 msgid "95%% Confidence Interval"
 msgstr "Intervalo de Confiança 95%%"
@@ -1794,28 +1997,28 @@ msgid "Note:"
 msgstr "Nota:"
 
 msgid "%1$s is on %2$s scale."
-msgstr ""
+msgstr "%1$s está na escala %2$s."
 
 msgid "<em>p</em>-values interval(one-sided)"
-msgstr ""
+msgstr "intervalo de valores-<em>p</em> (unilateral)"
 
 msgid "Model Tests"
 msgstr "Testes do Modelo"
 
 msgid "Test of Heterogeneity"
-msgstr ""
+msgstr "Teste de Heterogeneidade"
 
 msgid "Test of Publication Bias"
-msgstr ""
+msgstr "Teste de Viés de Publicação"
 
 msgid "ChiSq"
 msgstr "Qui-quadrado"
 
 msgid "Assuming homogeneity"
-msgstr ""
+msgstr "Assumindo homogeneidade"
 
 msgid "Assuming heterogeneity"
-msgstr ""
+msgstr "Assumindo heterogeneidade"
 
 msgid "Fixed Effects Estimates"
 msgstr "Estimativas de efeitos fixos"
@@ -1830,7 +2033,7 @@ msgid "Heterogeneity Estimates(%s)"
 msgstr "Estimativas de Heterogeneidade(%s)"
 
 msgid "p-value Frequency"
-msgstr ""
+msgstr "Frequência de valor-p"
 
 msgid "Frequency"
 msgstr "Frequência"
@@ -1839,31 +2042,33 @@ msgid ""
 "There were no p-value cutoffs after their automatic reduction. The displayed "
 "frequencies correspond to the non-reduced p-value cutoffs."
 msgstr ""
+"Não houve cortes de valor-p após a redução automática. As frequências "
+"exibidas correspondem aos cortes de valor-p não reduzidos."
 
 msgid "Weight Function (%s)"
 msgstr "Função de Ponderação (%s)"
 
 msgid ""
 "The figure could not be created since one of the estimates is not a number."
-msgstr ""
+msgstr "O valor não pôde ser criado porque uma das estimativas não é um número."
 
 msgid "P-value (One-sided)"
-msgstr ""
+msgstr "Valor-p (Unilateral)"
 
 msgid "Publication Probability"
-msgstr ""
+msgstr "Probabilidade de Publicação"
 
 msgid "Mean Model Estimates (%s)"
-msgstr ""
+msgstr "Estimativas do Modelo Médio (%s)"
 
 msgid "Fixed effects (adjusted)"
-msgstr ""
+msgstr "Efeitos fixos (ajustados)"
 
 msgid "Random effects (adjusted)"
-msgstr ""
+msgstr "Efeitos aleatórios (ajustado)"
 
 msgid "Fixed effects model:"
-msgstr ""
+msgstr "Modelo de efeitos fixos:"
 
 msgid "Random effects model:"
 msgstr "Modelo de efeitos aleatórios:"
@@ -1872,21 +2077,30 @@ msgid ""
 "%sThe optimizer failed to find a solution. Consider re-specifying the model "
 "or the p-value cutoffs."
 msgstr ""
+"%s O otimizador não conseguiu encontrar uma solução. Considere reespecificar "
+"o modelo ou os pontos de corte do valor-p."
 
 msgid ""
 "%sThe automatic cutoffs selection did not find viable p-value cutoffs. "
 "Please, specify them manually."
 msgstr ""
+"%s A seleção automática de pontos de corte não encontrou pontos de corte "
+"para valores-p viáveis. Por favor, especifique-os manualmente."
 
 msgid ""
 "At least one of the p-value intervals contains no effect sizes, leading to "
 "estimation problems. Consider re-specifying the cutoffs."
 msgstr ""
+"Pelo menos um dos intervalos de valor-p não contém tamanhos de efeito, o que "
+"leva a problemas de estimativa. Considere reespecificar os pontos de corte."
 
 msgid ""
 "At least one of the p-value intervals contains three or fewer effect sizes, "
 "which may lead to estimation problems. Consider re-specifying the cutoffs."
 msgstr ""
+"Pelo menos um dos intervalos de valor-p contém três ou menos tamanhos de "
+"efeito, o que pode levar a problemas de estimativa. Considere redefinir os "
+"pontos de corte."
 
 msgid ""
 "The unadjusted estimate is negative. The selection model default "
@@ -1894,14 +2108,21 @@ msgid ""
 "positive. Please, check that you specified the effect sizes correctly or "
 "change the 'Expected effect size direction' option in the 'Model' tab."
 msgstr ""
+"A estimativa não ajustada é negativa. A especificação padrão do modelo de "
+"seleção espera que a direção esperada do tamanho do efeito seja positiva. "
+"Verifique se você especificou os tamanhos do efeito corretamente ou altere a "
+"opção 'Direção esperada do tamanho do efeito' na aba 'Modelo'."
 
 msgid ""
 "The analysis requires both 'Effect Size' and 'Effect Size Standard Error' to "
 "be specified."
 msgstr ""
+"A análise requer que tanto o 'Tamanho do Efeito' quanto o 'Erro Padrão do "
+"Tamanho do Efeito' sejam especificados."
 
 msgid "Only the following one-sided p-value cutoffs were used: %s."
 msgstr ""
+"Somente os seguintes pontos de corte de valor-p unilateral foram usados: %s."
 
 msgid "Estimating: %1$s"
 msgstr "Estimando: %1$s"
@@ -1910,13 +2131,13 @@ msgid "Model Fit Measures"
 msgstr "Medidas de Ajuste do Modelo"
 
 msgid "log Lik."
-msgstr ""
+msgstr "Log Verossim."
 
 msgid "%1$s fit failed with the following message %2$s."
-msgstr ""
+msgstr "O ajuste %1$s falhou com a seguinte mensagem %2$s."
 
 msgid "%1$s: %2$s"
-msgstr ""
+msgstr "%1$s: %2$s"
 
 msgid "Warning"
 msgstr "Aviso"
@@ -1925,19 +2146,19 @@ msgid "Model Convergence"
 msgstr "Convergência do Modelo"
 
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 msgid "Path Diagram"
-msgstr ""
+msgstr "Diagrama de Caminhos"
 
 msgid "Syntax failed with the following message %1$s."
-msgstr ""
+msgstr "A sintaxe falhou com a seguinte mensagem: %1$s."
 
 msgid "Model fit failed with the following message %1$s."
-msgstr ""
+msgstr "O ajuste do modelo falhou com a seguinte mensagem %1$s."
 
 msgid "Model visualization failed with the following message %1$s."
-msgstr ""
+msgstr "A visualização do modelo falhou com a seguinte mensagem %1$s."
 
 msgid "Coefficient Summary"
 msgstr "Resumo dos Coeficientes"
@@ -1946,10 +2167,10 @@ msgid "Computed Estimates Summary"
 msgstr "Resumo das Estimativas Calculadas"
 
 msgid "Error: There were not enough adequately powered studies (k = %1$i)"
-msgstr ""
+msgstr "Erro: Não houve estudos suficientes com poder adequado (k = %1$i)"
 
 msgid "Note: There were %1$i adequately powered studies"
-msgstr ""
+msgstr "Nota: Houve %1$i estudos com poder adequado"
 
 msgid "Test of Effect"
 msgstr "teste do Efeito"
@@ -1961,18 +2182,20 @@ msgid "Estimated %1$s Regression"
 msgstr "Regressão Estimada %1$s"
 
 msgid "Cohen's d"
-msgstr ""
+msgstr "d de Cohen"
 
 msgid "Fisher's z"
-msgstr ""
+msgstr "z de Fisher"
 
 msgid ""
 "WAAP was not estimated: There were only %1$i adequately powered studies "
 "(power > 80%%)."
 msgstr ""
+"O WAAP não foi estimado: houve apenas %1$i estudos com poder adequado (poder "
+"> 80%%)."
 
 msgid "There were %1$i adequately powered studies (power > 80%%)."
-msgstr ""
+msgstr "Houve %1$i estudos com poder estatístico adequado (poder > 80%%)."
 
 msgid ""
 "The Hamiltonian Monte Carlo procedure might be invalid -- There was %i "
