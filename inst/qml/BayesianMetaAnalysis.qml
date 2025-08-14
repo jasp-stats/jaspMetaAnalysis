@@ -122,8 +122,8 @@ Form
 
 	Group
 	{
-		title:		qsTr("Bayesian Model-Averaging")
-		info:		qsTr("Specify which components should be included Bayesian model-averaging. If selected, prior distribution under both the presence and absence of the component are specified. This allows for testing for the presence vs. absence of the component (if the component is not selected, a Bayes factor test is not conducted). The displayed estimates are averaged across null and alternative prior distributions of all specified components.")
+		title:		qsTr("Bayesian Model Averaging")
+		info:		qsTr("Specify which components should be included Bayesian model averaging. If selected, prior distribution under both the presence and absence of the component are specified. This allows for testing for the presence vs. absence of the component (if the component is not selected, a Bayes factor test is not conducted). The displayed estimates are averaged across null and alternative prior distributions of all specified components.")
 
 		CheckBox
 		{
