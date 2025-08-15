@@ -43,7 +43,7 @@ Section
 			AvailableVariablesList
 			{
 				name:			"estimatedMarginalMeansEffectSizeModelVariables"
-				title:			qsTr("Model variables")
+				title:			qsTr("Model Variables")
 				source:			"effectSizeModelTerms"
 			}
 
@@ -51,7 +51,7 @@ Section
 			{
 				id:				estimatedMarginalMeansEffectSizeSelectedVariables
 				name:			"estimatedMarginalMeansEffectSizeSelectedVariables"
-				title:			qsTr("Selected variables")
+				title:			qsTr("Selected Variables")
 				allowTypeChange:false
 				info: qsTr("Variables selected for computing estimated marginal means in the effect size model.")
 			}
