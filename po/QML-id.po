@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2025-08-13 10:02+0000\n"
+"Last-Translator: ChristCBA <christ.billy@atmajaya.ac.id>\n"
+"Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/id/>\n"
+"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.13-dev\n"
 "X-Language: id\n"
 "X-Qt-Contexts: true\n"
 
@@ -21,7 +27,7 @@ msgstr "Klasik"
 
 msgctxt "Description|"
 msgid "Classical Meta-Analysis"
-msgstr ""
+msgstr "Meta-Analisis Klasik"
 
 msgctxt "Description|"
 msgid "Prediction Model Performance"
@@ -33,11 +39,11 @@ msgstr ""
 
 msgctxt "Description|"
 msgid "WAAP-WLS"
-msgstr ""
+msgstr "WAAP-WLS"
 
 msgctxt "Description|"
 msgid "PET-PEESE"
-msgstr ""
+msgstr "PET-PEESE"
 
 msgctxt "Description|"
 msgid "Selection Models"
@@ -49,7 +55,7 @@ msgstr "Bayesian"
 
 msgctxt "Description|"
 msgid "Bayesian Meta-Analysis"
-msgstr ""
+msgstr "Meta-Analisis Bayesian"
 
 msgctxt "Description|"
 msgid "Bayesian Prediction Model Performance"
@@ -65,11 +71,11 @@ msgstr "Ukuran Efek"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "Kesalahan Baku Ukuran Efek"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "MCMC Diagnostics"
-msgstr ""
+msgstr "Diagnostik MCMC"
 
 #, fuzzy
 msgctxt "BayesianPredictionPerformance|"
@@ -86,7 +92,7 @@ msgstr "Autokorelasi"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Gelman Rubin"
-msgstr ""
+msgstr "Gelman Rubin"
 
 #, fuzzy
 msgctxt "BayesianPredictionPerformance|"
@@ -115,11 +121,11 @@ msgstr "Ukuran Efek"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "Kesalahan Baku Ukuran Efek"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Study Labels"
-msgstr ""
+msgstr "Label Studi"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Effect Size"
@@ -127,7 +133,7 @@ msgstr "Ukuran Efek"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Effect Size Variance"
-msgstr ""
+msgstr "Varians Ukuran Efek"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fixed Effects"
@@ -147,7 +153,7 @@ msgstr ""
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fixed Effects Model"
-msgstr ""
+msgstr "Model Efek Tetap"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Predictors"
@@ -163,7 +169,7 @@ msgstr ""
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Random Effects Model"
-msgstr ""
+msgstr "Model Efek Acak"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Multivariate Covariance Model"
@@ -175,7 +181,7 @@ msgstr "Statistik"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Omnibus Statistics"
-msgstr ""
+msgstr "Statistik Omnibus"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Anova Table"
@@ -191,11 +197,11 @@ msgstr "Koefisien"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fixed Effects Coefficients Table"
-msgstr ""
+msgstr "Tabel Koefisien Efek Tetap"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Random Effects Coefficients Table"
-msgstr ""
+msgstr "Tabel Koefisien Efek Acak"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Model Derived Statistics"
@@ -269,11 +275,11 @@ msgstr ""
 
 msgctxt "PetPeese|"
 msgid "Effect sizes & SE"
-msgstr ""
+msgstr "Ukuran Efek & Kesalahan Baku"
 
 msgctxt "PetPeese|"
 msgid "Correlations & N"
-msgstr ""
+msgstr "Korelasi & N"
 
 msgctxt "PetPeese|"
 msgid "Correlation"
@@ -285,11 +291,11 @@ msgstr "Ukuran Efek"
 
 msgctxt "PetPeese|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "Kesalah Baku Ukuran Efek"
 
 msgctxt "PetPeese|"
 msgid "Transform correlations to"
-msgstr ""
+msgstr "Mengubah korelasi ke"
 
 msgctxt "PetPeese|"
 msgid "Fisher's z"
@@ -314,11 +320,11 @@ msgstr "Plot"
 
 msgctxt "PetPeese|"
 msgid "PET"
-msgstr ""
+msgstr "PET"
 
 msgctxt "PetPeese|"
 msgid "PEESE"
-msgstr ""
+msgstr "PEESE"
 
 msgctxt "PetPeese|"
 msgid "Mean model estimates"
@@ -354,7 +360,7 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Bayes factor computation"
-msgstr ""
+msgstr "Komputasi faktor Bayes"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Integration"
@@ -408,7 +414,7 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Effect sizes per study"
-msgstr ""
+msgstr "Ukuran efek tiap studi"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Plots"
