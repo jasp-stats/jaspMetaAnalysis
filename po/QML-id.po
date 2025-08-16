@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-08-13 10:02+0000\n"
-"Last-Translator: ChristCBA <christ.billy@atmajaya.ac.id>\n"
-"Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
-"jaspmetaanalysis-qml/id/>\n"
-"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.13-dev\n"
 "X-Language: id\n"
 "X-Qt-Contexts: true\n"
 
@@ -641,9 +635,10 @@ msgctxt "PredictionPerformanceData|"
 msgid "Number of Expected Events"
 msgstr ""
 
+#, fuzzy
 msgctxt "PredictionPerformanceData|"
 msgid "Study Labels"
-msgstr ""
+msgstr "Label Studi"
 
 #, fuzzy
 msgctxt "PredictionPerformanceInference|"
@@ -961,13 +956,15 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Fisher's z"
 msgstr ""
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Effect sizes & SE"
-msgstr ""
+msgstr "Ukuran Efek & Kesalahan Baku"
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Correlations & N"
-msgstr ""
+msgstr "Korelasi & N"
 
 msgctxt "SelectionModels|"
 msgid "Correlation"
@@ -1014,9 +1011,10 @@ msgctxt "SelectionModels|"
 msgid "Negative"
 msgstr "Negatif"
 
+#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Transform correlations to"
-msgstr ""
+msgstr "Mengubah korelasi ke"
 
 msgctxt "SelectionModels|"
 msgid "Cohen's d"
@@ -1066,13 +1064,15 @@ msgctxt "SelectionModels|"
 msgid "Mean model estimates"
 msgstr ""
 
+#, fuzzy
 msgctxt "WaapWls|"
 msgid "Effect sizes & SE"
-msgstr ""
+msgstr "Ukuran Efek & Kesalahan Baku"
 
+#, fuzzy
 msgctxt "WaapWls|"
 msgid "Correlations & N"
-msgstr ""
+msgstr "Korelasi & N"
 
 msgctxt "WaapWls|"
 msgid "Correlation"
@@ -1086,9 +1086,10 @@ msgctxt "WaapWls|"
 msgid "Effect Size Standard Error"
 msgstr ""
 
+#, fuzzy
 msgctxt "WaapWls|"
 msgid "Transform correlations to"
-msgstr ""
+msgstr "Mengubah korelasi ke"
 
 msgctxt "WaapWls|"
 msgid "Fisher's z"
@@ -1544,9 +1545,10 @@ msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Weight"
 msgstr "Berat"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "MCMC Diagnostics"
-msgstr ""
+msgstr "Diagnostik MCMC"
 
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Overview table"
@@ -1566,13 +1568,15 @@ msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Weights"
 msgstr "Bobot"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "PET"
-msgstr ""
+msgstr "PET"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "PEESE"
-msgstr ""
+msgstr "PEESE"
 
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Type"
@@ -1616,9 +1620,10 @@ msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Rescale x-axis"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "PET-PEESE"
-msgstr ""
+msgstr "PET-PEESE"
 
 msgctxt "Description|"
 msgid "Miscellaneous"
@@ -1808,9 +1813,10 @@ msgid ""
 "permutation tests are selected."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Study Labels"
-msgstr ""
+msgstr "Label Studi"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
@@ -4908,9 +4914,10 @@ msgctxt "BayesianMetaAnalysisDeprecated|"
 msgid "95% CI Lower and Upper Bound"
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysisDeprecated|"
 msgid "Study Labels"
-msgstr ""
+msgstr "Label Studi"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid ""
@@ -7524,9 +7531,10 @@ msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Incidence rate difference"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Study Labels"
-msgstr ""
+msgstr "Label Studi"
 
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid ""
