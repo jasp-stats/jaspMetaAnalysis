@@ -451,7 +451,7 @@ Form
 				AssignedVariablesList
 				{ // metafor: di
 					name: "group2OutcomeMinus"
-					title: qsTr("Group 2/Outcome Minus")
+					title: qsTr("Group 2/Outcome -")
 					singleVariable: true
 					allowedColumns:	["scale"]
 					visible: (designValue === "independentGroups" && measurementValue === "binary") ||
