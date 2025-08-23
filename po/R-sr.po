@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.19.2\n"
 "POT-Creation-Date: 2025-07-19 03:02\n"
-"PO-Revision-Date: 2025-04-14 23:01+0000\n"
+"PO-Revision-Date: 2025-08-23 02:52+0000\n"
 "Last-Translator: Marko Bojović <bojovicmarko@outlook.com>\n"
 "Language-Team: Serbian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/sr/>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.11-dev\n"
+"X-Generator: Weblate 5.13\n"
 
 msgid "There must be at least one observation in each group."
 msgstr ""
@@ -146,7 +146,7 @@ msgid "Model Probabilities"
 msgstr ""
 
 msgid "Prior"
-msgstr ""
+msgstr "Претходни"
 
 msgid "Posterior"
 msgstr ""
@@ -231,7 +231,7 @@ msgid "Overall effect size"
 msgstr ""
 
 msgid "Sequential Analysis"
-msgstr ""
+msgstr "Секвенцијална анализа"
 
 msgid "Bayes factors effect size"
 msgstr ""
@@ -1407,13 +1407,13 @@ msgid "Available Variable Names"
 msgstr ""
 
 msgid "Descriptives"
-msgstr ""
+msgstr "Дескриптивна статистика"
 
 msgid "%1$s: %1$s Matrix"
 msgstr ""
 
 msgid "Variable"
-msgstr "Променљива"
+msgstr "Варијабла"
 
 msgid "%1$s: Means"
 msgstr ""
@@ -1585,10 +1585,11 @@ msgid "Model Components"
 msgstr ""
 
 msgid "Models"
-msgstr ""
+msgstr "Модели"
 
+#, fuzzy
 msgid "P(M)"
-msgstr ""
+msgstr "P(M)"
 
 msgid "Prior Distributions %1$s"
 msgstr ""
@@ -1603,7 +1604,7 @@ msgid "Null"
 msgstr ""
 
 msgid "P(M|data)"
-msgstr ""
+msgstr "P(M|подаци)"
 
 msgid ""
 "The analysis will estimate a complex meta-analytic model ensemble using MCMC "
@@ -1721,9 +1722,8 @@ msgstr ""
 msgid "Autocorrelation Plot"
 msgstr ""
 
-#, fuzzy
 msgid "Density Plot"
-msgstr "Густина"
+msgstr "График густине"
 
 msgid ""
 "Please select at least one 'Type' of diagnostics plot (e.g., 'Trace', "
