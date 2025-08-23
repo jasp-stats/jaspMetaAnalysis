@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-08-23 02:52+0000\n"
-"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
-"jaspmetaanalysis-qml/de/>\n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -2497,10 +2491,6 @@ msgid "Homozygous Recessive Alleles"
 msgstr "Homozygot rezessive Allele"
 
 msgctxt "EffectSizeComputation|"
-msgid "Group 2/Outcome Minus"
-msgstr ""
-
-msgctxt "EffectSizeComputation|"
 msgid "Time 2/Outcome -"
 msgstr ""
 
@@ -3061,9 +3051,10 @@ msgctxt "FunnelPlot|"
 msgid "Show all or only a subset of the effect size estimate labels."
 msgstr ""
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 msgctxt "FunnelPlot|"
 msgid "Outside H₀"
@@ -3611,14 +3602,6 @@ msgid "Effect size"
 msgstr "Effektstärke"
 
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
-msgid "Model variables"
-msgstr "Modellvariablen"
-
-msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
-msgid "Selected variables"
-msgstr "Ausgewählte Variablen"
-
-msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid ""
 "Variables selected for computing estimated marginal means in the effect size "
 "model."
@@ -3876,11 +3859,10 @@ msgid ""
 "'Meta-Regression Coeffient Estimates' are not transformed."
 msgstr ""
 "Wählen Sie eine Transformation zur Anwendung auf die Effektstärkeschätzungen "
-"in der Ausgabe. Diese Transformation bezieht sich auf die "
-"\"Tabelle Metaanalytischer Schätzungen\", "
-"\"Tabelle geschätzter marginaler Mittelwerte\", \"Forest-Plot\", und "
-"\"Bubble-Plot\". Die \"Schätzungen Meta-Regressionskoeffizienten\" werden "
-"nicht transformiert."
+"in der Ausgabe. Diese Transformation bezieht sich auf die \"Tabelle "
+"Metaanalytischer Schätzungen\", \"Tabelle geschätzter marginaler "
+"Mittelwerte\", \"Forest-Plot\", und \"Bubble-Plot\". Die \"Schätzungen Meta-"
+"Regressionskoeffizienten\" werden nicht transformiert."
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "None"
@@ -4673,20 +4655,6 @@ msgstr ""
 "Variable zur Angabe der Untergruppeneinteilung. Für jede Untergruppe wird "
 "ein unabhängiges Modell an die entsprechende Datensatz-Untermenge angepasst."
 
-msgctxt "BayesianBinomialMetaAnalysis|"
-msgid "Bayesian Model-Averaging"
-msgstr "Bayessche Modell-Mittelung"
-
-msgctxt "BayesianBinomialMetaAnalysis|"
-msgid ""
-"Specify which components should be included Bayesian model-averaging. If "
-"selected, prior distribution under both the presence and absence of the "
-"component are specified. This allows for testing for the presence vs. "
-"absence of the component (if the component is not selected, a Bayes factor "
-"test is not conducted). The displayed estimates are averaged across null and "
-"alternative prior distributions of all specified components."
-msgstr ""
-
 #, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Effect size"
@@ -4930,20 +4898,6 @@ msgid ""
 msgstr ""
 "Variable zur Angabe der Untergruppeneinteilung. Für jede Untergruppe wird "
 "ein unabhängiges Modell an die entsprechende Datensatz-Untermenge angepasst."
-
-msgctxt "BayesianMetaAnalysis|"
-msgid "Bayesian Model-Averaging"
-msgstr "Bayessche Modell-Mittelung"
-
-msgctxt "BayesianMetaAnalysis|"
-msgid ""
-"Specify which components should be included Bayesian model-averaging. If "
-"selected, prior distribution under both the presence and absence of the "
-"component are specified. This allows for testing for the presence vs. "
-"absence of the component (if the component is not selected, a Bayes factor "
-"test is not conducted). The displayed estimates are averaged across null and "
-"alternative prior distributions of all specified components."
-msgstr ""
 
 #, fuzzy
 msgctxt "BayesianMetaAnalysis|"
@@ -6408,16 +6362,6 @@ msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Effect size"
 msgstr "Effektstärke"
 
-#, fuzzy
-msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
-msgid "Model variables"
-msgstr "Modellvariablen"
-
-#, fuzzy
-msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
-msgid "Selected variables"
-msgstr "Ausgewählte Variablen"
-
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid ""
 "Variables selected for computing estimated marginal means in the effect size "
@@ -6503,17 +6447,21 @@ msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Meta-Regression"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid ""
 "Create summaries of the meta-regression. Available when predictors are "
 "included."
 msgstr ""
+"Erstelle Zusammenfassungen der Meta-Regression. Verfügbar, wenn Prädiktoren "
+"einbezogen sind."
 
 #, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Term tests"
 msgstr "Term-Tests"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid ""
 "Include tests for each term in the meta-regression model. The null "
@@ -6521,10 +6469,15 @@ msgid ""
 "variable are equal or that there is no linear association between the effect "
 "size and the continuous variable)."
 msgstr ""
+"Tests für jeden Term im Meta-Regressionsmodell hinzufügen. Die Nullhypothese "
+"besagt, dass die Effektstärke auf allen Stufen der kategorischen Variable "
+"gleich sind oder dass es keine lineare Beziehung zwischen der Effektstärke "
+"und der kontinuierlichen Variable gibt."
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Coefficient estimates"
-msgstr ""
+msgstr "Koeffizient-Schätzungen"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid ""
@@ -6561,9 +6514,10 @@ msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Prediction intervals"
 msgstr "Vorhersageintervalle"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Include prediction intervals in the tabular output."
-msgstr ""
+msgstr "Vorhersageintervalle in tabellarischer Ausgabe hinzufügen."
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Conditional estimates"
@@ -6575,10 +6529,12 @@ msgid ""
 "corresponding model component/parameter, in the tabular output and figures."
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Transform effect size"
-msgstr ""
+msgstr "Effektsärke transformieren"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid ""
 "Select a transformation to apply to the effect size estimates in the output. "
@@ -6586,6 +6542,11 @@ msgid ""
 "'Estimated Marginal Means Table', 'Forest Plot', and  the 'Bubble Plot'. The "
 "'Meta-Regression Coeffient Estimates' are not transformed."
 msgstr ""
+"Wählen Sie eine Transformation zur Anwendung auf die Effektstärkeschätzungen "
+"in der Ausgabe. Diese Transformation bezieht sich auf die \"Tabelle "
+"Metaanalytischer Schätzungen\", \"Tabelle geschätzter marginaler "
+"Mittelwerte\", \"Forest-Plot\", und \"Bubble-Plot\". Die \"Schätzungen Meta-"
+"Regressionskoeffizienten\" werden nicht transformiert."
 
 #, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
@@ -6597,9 +6558,10 @@ msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Exponential"
 msgstr "Exponentiell"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Log odds to proportions"
-msgstr ""
+msgstr "Log Odds zu Anteilen"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Log odds to SMD (normal)"
@@ -6629,21 +6591,25 @@ msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "SMD to Cohen's U₃"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Fisher's z to r"
-msgstr ""
+msgstr "Fishers z zu r"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Z to R²"
-msgstr ""
+msgstr "Z zu R²"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Hakstian & Whalen inverse α"
-msgstr ""
+msgstr "Hakstian & Whalen inverses α"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Bonett inverse α"
-msgstr ""
+msgstr "Bonett inverses α"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Publication Bias Adjustment"
@@ -7066,21 +7032,6 @@ msgid ""
 msgstr ""
 "Variable zur Angabe der Untergruppeneinteilung. Für jede Untergruppe wird "
 "ein unabhängiges Modell an die entsprechende Datensatz-Untermenge angepasst."
-
-#, fuzzy
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid "Bayesian Model-Averaging"
-msgstr "Bayessche Modell-Mittelung"
-
-msgctxt "RobustBayesianMetaAnalysis|"
-msgid ""
-"Specify which components should be included Bayesian model-averaging. If "
-"selected, prior distribution under both the presence and absence of the "
-"component are specified. This allows for testing for the presence vs. "
-"absence of the component (if the component is not selected, a Bayes factor "
-"test is not conducted). The displayed estimates are averaged across null and "
-"alternative prior distributions of all specified components."
-msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect size"
@@ -7965,22 +7916,25 @@ msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "Add"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "To"
-msgstr ""
+msgstr "Zu"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 #, fuzzy
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "Only zero"
 msgstr "Nur Null"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "If any zero"
-msgstr ""
+msgstr "Falls irgendwo Null"
 
 #, fuzzy
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
@@ -8015,4 +7969,70 @@ msgid ""
 "Specify the maximum allowable value of 𝜏² during optimization. Available "
 "only for specific optimization methods and unavailable in multilevel/"
 "multivariate meta-analysis or when heterogeneity model terms are included."
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid "Bayesian Model Averaging"
+msgstr ""
+
+msgctxt "BayesianBinomialMetaAnalysis|"
+msgid ""
+"Specify which components should be included Bayesian model averaging. If "
+"selected, prior distribution under both the presence and absence of the "
+"component are specified. This allows for testing for the presence vs. "
+"absence of the component (if the component is not selected, a Bayes factor "
+"test is not conducted). The displayed estimates are averaged across null and "
+"alternative prior distributions of all specified components."
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid "Bayesian Model Averaging"
+msgstr ""
+
+msgctxt "BayesianMetaAnalysis|"
+msgid ""
+"Specify which components should be included Bayesian model averaging. If "
+"selected, prior distribution under both the presence and absence of the "
+"component are specified. This allows for testing for the presence vs. "
+"absence of the component (if the component is not selected, a Bayes factor "
+"test is not conducted). The displayed estimates are averaged across null and "
+"alternative prior distributions of all specified components."
+msgstr ""
+
+msgctxt "EffectSizeComputation|"
+msgid "Group 2/Outcome -"
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
+msgid "Model Variables"
+msgstr "Modellvariablen"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
+msgid "Selected Variables"
+msgstr "Ausgewähle Variablen"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
+msgid "Model Variables"
+msgstr "Modellvariablen"
+
+#, fuzzy
+msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
+msgid "Selected Variables"
+msgstr "Ausgewähle Variablen"
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid "Bayesian Model Averaging"
+msgstr ""
+
+msgctxt "RobustBayesianMetaAnalysis|"
+msgid ""
+"Specify which components should be included Bayesian model averaging. If "
+"selected, prior distribution under both the presence and absence of the "
+"component are specified. This allows for testing for the presence vs. "
+"absence of the component (if the component is not selected, a Bayes factor "
+"test is not conducted). The displayed estimates are averaged across null and "
+"alternative prior distributions of all specified components."
 msgstr ""
