@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-08-24 11:02+0000\n"
+"PO-Revision-Date: 2025-08-25 12:03+0000\n"
 "Last-Translator: Marko Bojović <bojovicmarko@outlook.com>\n"
 "Language-Team: Serbian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/sr/>\n"
@@ -2381,7 +2381,7 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Prior and posterior"
-msgstr ""
+msgstr "Претходна и задња"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Additional info"
@@ -6927,7 +6927,7 @@ msgstr ""
 
 msgctxt "MetaAnalyticSem|"
 msgid "Descriptives"
-msgstr ""
+msgstr "Дескриптивна"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Number of estimates"
