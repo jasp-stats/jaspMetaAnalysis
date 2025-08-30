@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.19.2\n"
 "POT-Creation-Date: 2025-07-19 03:02\n"
-"PO-Revision-Date: 2025-08-23 02:52+0000\n"
+"PO-Revision-Date: 2025-08-25 14:02+0000\n"
 "Last-Translator: Marko Bojović <bojovicmarko@outlook.com>\n"
 "Language-Team: Serbian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/sr/>\n"
@@ -1407,7 +1407,7 @@ msgid "Available Variable Names"
 msgstr ""
 
 msgid "Descriptives"
-msgstr "Дескриптивна статистика"
+msgstr "Дескриптивна"
 
 msgid "%1$s: %1$s Matrix"
 msgstr ""
@@ -1585,7 +1585,7 @@ msgid "Model Components"
 msgstr ""
 
 msgid "Models"
-msgstr "Модели"
+msgstr ""
 
 #, fuzzy
 msgid "P(M)"
