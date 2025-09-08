@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-09-07 09:02+0000\n"
+"PO-Revision-Date: 2025-09-08 15:02+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/de/>\n"
@@ -1631,6 +1631,9 @@ msgid ""
 "Method used to estimate heterogeneity (tau-squared) in the meta-analysis. "
 "The available methods depend on the inclusion of heterogeneity model terms."
 msgstr ""
+"Methode zur Schätzung der Heterogenität (Tau-Quadrat) in der Meta-Analyse. "
+"Die verfügbaren Methoden hängen von der Einbeziehung von "
+"Heterogenitätsmodelltermen ab."
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Equal Effects"
@@ -1686,11 +1689,11 @@ msgctxt "ClassicalMetaAnalysis|"
 msgid "Generalized Q-stat"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Generalized Q-stat (MU)"
-msgstr ""
+msgstr "Verallgemeinerte Q-Statistik (MU)"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Fixed effect test"
 msgstr "Fester-Effekt-Test"
@@ -1756,7 +1759,6 @@ msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Restricted ML"
 msgstr "Begrenztes ML"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Fixed effect test"
 msgstr "Fester-Effekt-Test"
@@ -1789,11 +1791,12 @@ msgid ""
 "Variable indicating clustering of effect sizes. This option is disabled when "
 "permutation tests are selected."
 msgstr ""
+"Variable mit Angabe des Clusterings von Effektstärken. Diese Option ist "
+"deaktiviert, wenn Permutationstests ausgewählt sind."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Study Labels"
-msgstr "Studienbezeichnungen"
+msgstr "Studienbeschriftungen"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
@@ -1849,9 +1852,10 @@ msgstr ""
 "'Autoregressiv' oder 'Räumlich' ist. Auswählbare Strukturen hängen vom "
 "gewählten Typ ab."
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Compound symmetry"
-msgstr ""
+msgstr "Komponenten-Symmetrie"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Heteroscedastic compound symmetry"
@@ -1921,7 +1925,6 @@ msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Factor Levels"
 msgstr "Faktorstufen"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
 "Variable indicating the factor levels ('Inner Term') for the structured "
@@ -1975,7 +1978,7 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Longitude"
-msgstr ""
+msgstr "Längengrad"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
@@ -1987,7 +1990,7 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Latitude"
-msgstr ""
+msgstr "Breitengrad"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
@@ -2008,7 +2011,6 @@ msgid ""
 "column names of the distance matrix. The names cannot start with a number."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Grouping Factor"
 msgstr "Gruppierungsfaktor"
@@ -2048,7 +2050,7 @@ msgstr "Maximum"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Great-circle"
-msgstr ""
+msgstr "Großkreis"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Load from file"
@@ -2099,9 +2101,8 @@ msgstr ""
 
 msgctxt "EffectSizeComputation|"
 msgid "Single group"
-msgstr ""
+msgstr "Einzelgruppe"
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Repeated measures"
 msgstr "Wiederholte Messungen"
@@ -2124,7 +2125,7 @@ msgstr "Binär"
 
 msgctxt "EffectSizeComputation|"
 msgid "Counts per time"
-msgstr ""
+msgstr "Anzahl pro Zeit"
 
 msgctxt "EffectSizeComputation|"
 msgid "Mixed"
@@ -3055,7 +3056,6 @@ msgctxt "FunnelPlot|"
 msgid "Show all or only a subset of the effect size estimate labels."
 msgstr ""
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "All"
 msgstr "Alle"
@@ -4163,10 +4163,9 @@ msgstr ""
 "Signifikanzniveau der durchschnittlichen Effektstärke auf ein bestimmtes "
 "Alphaniveau zu reduzieren."
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "General"
-msgstr "Allgemein"
+msgstr "Allgemeines"
 
 msgctxt "FunnelPlot|"
 msgid ""
@@ -4600,12 +4599,10 @@ msgid ""
 "normal model described in Bartoš et al. (2023)."
 msgstr ""
 
-#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "References"
 msgstr "Referenzen"
 
-#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "R Packages"
 msgstr "R-Pakete"
@@ -4869,7 +4866,6 @@ msgctxt "BayesianMetaAnalysis|"
 msgid "Predictors"
 msgstr "Prädiktoren"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid ""
 "Variables to include as predictors (moderators) in the meta-regression "
@@ -4958,12 +4954,10 @@ msgid ""
 "heterogeneity."
 msgstr ""
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Default"
 msgstr "Standard"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid ""
 "Use default prior distributions for the effect size and heterogeneity based "
@@ -4972,19 +4966,17 @@ msgstr ""
 "Verwendung von Standard-Priorverteilungen für die Effektstärke und "
 "Heterogenität, basierend auf Bartoš et al. (2022)."
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Medicine"
 msgstr "Medizin"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid ""
 "Use prior distributions based on the Cochrane Database of Systematic Reviews "
 "developed by Bartoš et al. (2021)"
 msgstr ""
 "Verwendung von Priorverteilungen basierend auf der Cochrane-Datenbank "
-"systematischer Übersichtsarbeiten, entwickelt von Bartoš et al. (2022)"
+"systematischer Übersichtsarbeiten, entwickelt von Bartoš et al. (2021)"
 
 #, fuzzy
 msgctxt "BayesianMetaAnalysis|"
@@ -5058,12 +5050,10 @@ msgid ""
 "moderation, and various plots to visualize the results."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "References"
 msgstr "Referenzen"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "R Packages"
 msgstr "R-Pakete"
@@ -5084,12 +5074,10 @@ msgid ""
 "results."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "References"
 msgstr "Referenzen"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "R Packages"
 msgstr "R-Pakete"
@@ -5104,12 +5092,10 @@ msgid ""
 "Terrin et al. (2005)."
 msgstr ""
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "References"
 msgstr "Referenzen"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "R Packages"
 msgstr "R-Pakete"
@@ -6099,7 +6085,6 @@ msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Medical subfield"
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "General"
 msgstr "Allgemein"
@@ -6451,7 +6436,6 @@ msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Meta-Regression"
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid ""
 "Create summaries of the meta-regression. Available when predictors are "
@@ -6465,7 +6449,6 @@ msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Term tests"
 msgstr "Term-Tests"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid ""
 "Include tests for each term in the meta-regression model. The null "
@@ -6475,10 +6458,9 @@ msgid ""
 msgstr ""
 "Tests für jeden Term im Meta-Regressionsmodell hinzufügen. Die Nullhypothese "
 "besagt, dass die Effektstärke auf allen Stufen der kategorischen Variable "
-"gleich sind oder dass es keine lineare Beziehung zwischen der Effektstärke "
+"gleich sind, oder dass es keine lineare Beziehung zwischen der Effektstärke "
 "und der kontinuierlichen Variable gibt."
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Coefficient estimates"
 msgstr "Koeffizient-Schätzungen"
@@ -6518,7 +6500,6 @@ msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Prediction intervals"
 msgstr "Vorhersageintervalle"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Include prediction intervals in the tabular output."
 msgstr "Vorhersageintervalle in tabellarischer Ausgabe hinzufügen."
@@ -6533,12 +6514,10 @@ msgid ""
 "corresponding model component/parameter, in the tabular output and figures."
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Transform effect size"
-msgstr "Effektsärke transformieren"
+msgstr "Effektstärke transformieren"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid ""
 "Select a transformation to apply to the effect size estimates in the output. "
@@ -6547,10 +6526,11 @@ msgid ""
 "'Meta-Regression Coeffient Estimates' are not transformed."
 msgstr ""
 "Wählen Sie eine Transformation zur Anwendung auf die Effektstärkeschätzungen "
-"in der Ausgabe. Diese Transformation bezieht sich auf die \"Tabelle "
-"Metaanalytischer Schätzungen\", \"Tabelle geschätzter marginaler "
-"Mittelwerte\", \"Forest-Plot\", und \"Bubble-Plot\". Die \"Schätzungen Meta-"
-"Regressionskoeffizienten\" werden nicht transformiert."
+"in der Ausgabe. Diese Transformation bezieht sich auf die "
+"\"Tabelle Metaanalytischer Schätzungen\", "
+"\"Tabelle geschätzter marginaler Mittelwerte\", \"Forest-Plot\", und "
+"\"Bubble-Plot\". Die \"Schätzungen Meta-Regressionskoeffizienten\" werden "
+"nicht transformiert."
 
 #, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
@@ -6562,7 +6542,6 @@ msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Exponential"
 msgstr "Exponentiell"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Log odds to proportions"
 msgstr "Log Odds zu Anteilen"
@@ -6595,22 +6574,18 @@ msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "SMD to Cohen's U₃"
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Fisher's z to r"
 msgstr "Fishers z zu r"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Z to R²"
 msgstr "Z zu R²"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Hakstian & Whalen inverse α"
 msgstr "Hakstian & Whalen inverses α"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Bonett inverse α"
 msgstr "Bonett inverses α"
@@ -6926,12 +6901,10 @@ msgid ""
 "parameterization as outlined in Bartoš et al. (2025)."
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "References"
 msgstr "Referenzen"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "R Packages"
 msgstr "R-Pakete"
@@ -6988,7 +6961,7 @@ msgstr ""
 #, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "General"
-msgstr "Allgemein"
+msgstr "Verallgemeinert"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
@@ -7002,7 +6975,6 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Predictors"
 msgstr "Prädiktoren"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
 "Variables to include as predictors (moderators) in the meta-regression "
@@ -7101,12 +7073,10 @@ msgid ""
 "heterogeneity."
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Default"
 msgstr "Standard"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
 "Use default prior distributions for the effect size and heterogeneity based "
@@ -7115,19 +7085,17 @@ msgstr ""
 "Verwendung von Standard-Priorverteilungen für die Effektstärke und "
 "Heterogenität, basierend auf Bartoš et al. (2022)."
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Medicine"
 msgstr "Medizin"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
 "Use prior distributions based on the Cochrane Database of Systematic Reviews "
 "developed by Bartoš et al. (2021)"
 msgstr ""
 "Verwendung von Priorverteilungen basierend auf der Cochrane-Datenbank "
-"systematischer Übersichtsarbeiten, entwickelt von Bartoš et al. (2022)"
+"systematischer Übersichtsarbeiten, entwickelt von Bartoš et al. (2021)"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
@@ -7755,22 +7723,18 @@ msgid ""
 "of frequencies / time to event outcomes."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "References"
 msgstr "Referenzen"
 
-#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "R Packages"
 msgstr "R-Pakete"
 
-#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Successes Group 1"
 msgstr "Erfolge Gruppe 1"
 
-#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Successes Group 2"
 msgstr "Erfolge Gruppe 2"
@@ -7920,12 +7884,10 @@ msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "Add"
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "To"
 msgstr "Zu"
 
-#, fuzzy
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "All"
 msgstr "Alle"
@@ -7935,7 +7897,6 @@ msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "Only zero"
 msgstr "Nur Null"
 
-#, fuzzy
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "If any zero"
 msgstr "Falls irgendwo Null"
