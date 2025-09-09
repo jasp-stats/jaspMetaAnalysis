@@ -127,6 +127,16 @@ Section
 
 	Group
 	{
+
+		CheckBox
+		{
+			text:		qsTr("Standard errors")
+			name:		"standardErrors"
+			checked:	true
+			enabled:	transformEffectSizeDropdown.value === "none"
+			info: qsTr("Include standard errors in the tabular output. Only available when no effect size transformation is applied.")
+		}
+
 		CheckBox
 		{
 			name:				"confidenceIntervals"
@@ -139,15 +149,6 @@ Section
 			{
 				name:		"confidenceIntervalsLevel"
 			}
-		}
-
-		CheckBox
-		{
-			text:		qsTr("Standard errors")
-			name:		"standardError"
-			checked:	true
-			enabled:	transformEffectSizeDropdown.value === "none"
-			info: qsTr("Include standard errors in the tabular output. Only available when no effect size transformation is applied.")
 		}
 
 		CheckBox
