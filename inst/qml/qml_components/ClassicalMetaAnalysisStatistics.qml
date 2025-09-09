@@ -143,6 +143,14 @@ Section
 
 		CheckBox
 		{
+			text:		qsTr("Standard errors")
+			name:		"standardError"
+			checked:	true
+			info: qsTr("Include standard errors in the tabular output. Only available when no effect size transformation is applied.")
+		}
+
+		CheckBox
+		{
 			text:		qsTr("Prediction intervals")
 			name:		"predictionIntervals"
 			checked:	true

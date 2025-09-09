@@ -859,7 +859,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   pooledEstimatesTable$position <- 4
   pooledEstimatesTable$dependOn(c("heterogeneityTau", "heterogeneityTau2", "heterogeneityI2", "heterogeneityH2",
                                   "confidenceIntervals", "confidenceIntervalsLevel", "predictionIntervals", "transformEffectSize",
-                                  "includeFullDatasetInSubgroupAnalysis"))
+                                  "standardError", "includeFullDatasetInSubgroupAnalysis"))
   modelSummaryContainer[["pooledEstimatesTable"]] <- pooledEstimatesTable
 
   pooledEstimatesTable$addColumnInfo(name = "par",  type = "string", title = "")
@@ -1331,7 +1331,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   estimatedMarginalMeansTable$dependOn(c(switch(
     parameter,
     effectSize    = c("estimatedMarginalMeansEffectSize", "estimatedMarginalMeansEffectSizeSdFactorCovariates", "estimatedMarginalMeansEffectSizeTestAgainst",
-                      "estimatedMarginalMeansEffectSizeTestAgainstValue", "transformEffectSize", "predictionIntervals"),
+                      "estimatedMarginalMeansEffectSizeTestAgainstValue", "transformEffectSize", "predictionIntervals", "standardError"),
     heterogeneity = c("estimatedMarginalMeansHeterogeneity", "estimatedMarginalMeansHeterogeneityTransformation", "estimatedMarginalMeansHeterogeneitySdFactorCovariates")
   )))
   variableContainer[["estimatedMarginalMeansTable"]] <- estimatedMarginalMeansTable
@@ -1394,7 +1394,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   contrastsTable$position <- 1
   contrastsTable$dependOn(switch(
     parameter,
-    effectSize    = c("contrastsEffectSize", "contrastsEffectSizePValueAdjustment", "predictionIntervals", "transformEffectSize"),
+    effectSize    = c("contrastsEffectSize", "contrastsEffectSizePValueAdjustment", "predictionIntervals", "transformEffectSize", "standardError"),
     heterogeneity = c("contrastsHeterogeneity", "contrastsHeterogeneityPValueAdjustment", "estimatedMarginalMeansHeterogeneityTransformation")
   ))
   variableContainer[["contrastsTable"]] <- contrastsTable
@@ -4723,7 +4723,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 }
 .maAddSeColumn                  <- function(tempTable, options) {
 
-  if (options[["transformEffectSize"]] == "none") {
+  if (options[["standardError"]] && options[["transformEffectSize"]] == "none") {
     tempTable$addColumnInfo(name = "se", title = gettext("Standard Error"), type = "number")
   }
 
