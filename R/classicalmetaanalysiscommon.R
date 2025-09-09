@@ -4724,7 +4724,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 .maAddSeColumn                  <- function(tempTable, options) {
 
   if (options[["transformEffectSize"]] == "none") {
-    tempTable$addColumnInfo(name = "se", title = gettext("SE"), type = "number")
+    tempTable$addColumnInfo(name = "se", title = gettext("Standard Error"), type = "number")
   }
 
   return(tempTable)
