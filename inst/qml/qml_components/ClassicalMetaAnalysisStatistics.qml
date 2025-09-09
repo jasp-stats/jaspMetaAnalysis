@@ -146,6 +146,7 @@ Section
 			text:		qsTr("Standard errors")
 			name:		"standardError"
 			checked:	true
+			enabled:	transformEffectSizeDropdown.value === "none"
 			info: qsTr("Include standard errors in the tabular output. Only available when no effect size transformation is applied.")
 		}
 
@@ -160,6 +161,7 @@ Section
 
 		DropDown
 		{//TODO: make shorter or across both rows?
+			id:				transformEffectSizeDropdown
 			name:			"transformEffectSize"
 			label:			qsTr("Transform effect size")
 			setLabelAbove:	true
