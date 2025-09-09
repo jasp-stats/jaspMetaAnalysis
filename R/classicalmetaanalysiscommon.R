@@ -865,6 +865,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   pooledEstimatesTable$addColumnInfo(name = "par",  type = "string", title = "")
   .maAddSubgroupColumn(pooledEstimatesTable, options)
   pooledEstimatesTable$addColumnInfo(name = "est",  type = "number", title = gettext("Estimate"))
+  .maAddSeColumn(pooledEstimatesTable, options)
   .maAddCiColumn(pooledEstimatesTable, options)
   .maAddPiColumn(pooledEstimatesTable, options)
   if (options[["predictionIntervals"]] && .mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
@@ -1340,6 +1341,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     estimatedMarginalMeansTable$addColumnInfo(name = "value",     type = "string", title = gettext("Level"))
   .maAddSubgroupColumn(estimatedMarginalMeansTable, options)
   estimatedMarginalMeansTable$addColumnInfo(name = "est",       type = "number", title = gettext("Estimate"))
+  .maAddSeColumn(estimatedMarginalMeansTable, options)
   .maAddCiColumn(estimatedMarginalMeansTable, options)
   if (parameter == "effectSize") {
     .maAddPiColumn(estimatedMarginalMeansTable, options)
@@ -1401,6 +1403,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   contrastsTable$addColumnInfo(name = "comparison", type = "string", title = gettext("Comparison"))
   .maAddSubgroupColumn(contrastsTable, options)
   contrastsTable$addColumnInfo(name = "est",        type = "number", title = gettext("Estimate"))
+  .maAddSeColumn(contrastsTable, options)
   .maAddCiColumn(contrastsTable, options)
   if (parameter == "effectSize") {
     .maAddPiColumn(contrastsTable, options)
@@ -2286,6 +2289,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   # remove non-requested columns
   predictedEffect <- predictedEffect[,c(
     "par", "est",
+    if (options[["transformEffectSize"]] == "none") "se",
     if (options[["confidenceIntervals"]]) c("lCi", "uCi"),
     if (options[["predictionIntervals"]]) c("lPi", "uPi")
   )]
@@ -2939,7 +2943,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
 
   # remove unnecessary columns
-  computedMarginalMeans <- computedMarginalMeans[,!colnames(computedMarginalMeans) %in% "se", drop = FALSE]
+  seColumnsToRemove <- if (options[["transformEffectSize"]] == "none") character(0) else "se"
+  computedMarginalMeans <- computedMarginalMeans[,!colnames(computedMarginalMeans) %in% seColumnsToRemove, drop = FALSE]
 
   if (!options[["confidenceIntervals"]])
     computedMarginalMeans <- computedMarginalMeans[,!colnames(computedMarginalMeans) %in% c("lCi", "uCi"), drop = FALSE]
@@ -3107,7 +3112,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   computedContrasts <- .maExtractAndFormatPrediction(computedContrasts)
 
   # remove unnecessary columns
-  computedContrasts <- computedContrasts[,!colnames(computedContrasts) %in% "se", drop = FALSE]
+  seColumnsToRemove <- if (options[["transformEffectSize"]] == "none") character(0) else "se"
+  computedContrasts <- computedContrasts[,!colnames(computedContrasts) %in% seColumnsToRemove, drop = FALSE]
 
   if (!options[["confidenceIntervals"]])
     computedContrasts <- computedContrasts[,!colnames(computedContrasts) %in% c("lCi", "uCi"), drop = FALSE]
@@ -4711,6 +4717,14 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     overtitleCi <- gettextf("%s%% PI", 100 * options[["confidenceIntervalsLevel"]])
     tempTable$addColumnInfo(name = "lPi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
     tempTable$addColumnInfo(name = "uPi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
+  }
+
+  return(tempTable)
+}
+.maAddSeColumn                  <- function(tempTable, options) {
+
+  if (options[["transformEffectSize"]] == "none") {
+    tempTable$addColumnInfo(name = "se", title = gettext("SE"), type = "number")
   }
 
   return(tempTable)
