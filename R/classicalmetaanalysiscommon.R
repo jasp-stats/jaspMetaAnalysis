@@ -31,7 +31,6 @@
 #   - vs covariates
 # Generic
 # - allow different covariates factoring across all settings
-# - confidence interval for heterogeneity in multilevel multivariate
 
 ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
@@ -856,6 +855,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # pooled estimates
   pooledEstimatesTable          <- createJaspTable(gettext("Meta-Analytic Estimates"))
+  pooledEstimatesTable$showSpecifiedColumnsOnly <- TRUE
   pooledEstimatesTable$position <- 4
   pooledEstimatesTable$dependOn(c("heterogeneityTau", "heterogeneityTau2", "heterogeneityI2", "heterogeneityH2",
                                   "confidenceIntervals", "confidenceIntervalsLevel", "predictionIntervals", "transformEffectSize",
@@ -1034,13 +1034,13 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     effectSize    = 3,
     heterogeneity = 4
   )
-  coefficientsTable$dependOn(c("metaregressionCoefficientEstimates", "confidenceIntervals", "confidenceIntervalsLevel", "includeFullDatasetInSubgroupAnalysis"))
+  coefficientsTable$dependOn(c("metaregressionCoefficientEstimates", "confidenceIntervals", "confidenceIntervalsLevel", "standardErrors", "includeFullDatasetInSubgroupAnalysis"))
   metaregressionContainer[[paste0(parameter, "CoefficientTable")]] <- coefficientsTable
 
   coefficientsTable$addColumnInfo(name = "name",  type = "string", title = "")
   .maAddSubgroupColumn(coefficientsTable, options)
   coefficientsTable$addColumnInfo(name = "est",   type = "number", title = gettext("Estimate"))
-  coefficientsTable$addColumnInfo(name = "se",    type = "number", title = gettext("Standard Error"))
+  .maAddSeColumn(coefficientsTable, options, noTransformation = TRUE)
   .maAddCiColumn(coefficientsTable, options)
   coefficientsTable$addColumnInfo(name = "stat",  type = "number", title = if(.maIsMetaregressionFtest(options)) gettext("t") else gettext("z"))
   if (.maIsMetaregressionFtest(options))
@@ -1328,6 +1328,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   estimatedMarginalMeansTable <- createJaspTable(if (selectedVariable == "") gettext("Adjusted Estimate") else gettext("Estimated Marginal Means"))
   estimatedMarginalMeansTable$position <- 1
+  estimatedMarginalMeansTable$showSpecifiedColumnsOnly <- TRUE
   estimatedMarginalMeansTable$dependOn(c(switch(
     parameter,
     effectSize    = c("estimatedMarginalMeansEffectSize", "estimatedMarginalMeansEffectSizeSdFactorCovariates", "estimatedMarginalMeansEffectSizeTestAgainst",
@@ -1341,7 +1342,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     estimatedMarginalMeansTable$addColumnInfo(name = "value",     type = "string", title = gettext("Level"))
   .maAddSubgroupColumn(estimatedMarginalMeansTable, options)
   estimatedMarginalMeansTable$addColumnInfo(name = "est",       type = "number", title = gettext("Estimate"))
-  .maAddSeColumn(estimatedMarginalMeansTable, options)
+  if (parameter == "effectSize")
+    .maAddSeColumn(estimatedMarginalMeansTable, options)
   .maAddCiColumn(estimatedMarginalMeansTable, options)
   if (parameter == "effectSize") {
     .maAddPiColumn(estimatedMarginalMeansTable, options)
@@ -1369,15 +1371,6 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   # reorder by estimated marginal means estimate
   estimatedMarginalMeans <- .maSafeOrderAndSimplify(estimatedMarginalMeans, "value", options)
 
-  # drop non-required columns
-  estimatedMarginalMeans <- estimatedMarginalMeans[,!colnames(estimatedMarginalMeans) %in% "variable", drop = FALSE]
-  if (parameter == "effectSize" && !options[["estimatedMarginalMeansEffectSizeTestAgainst"]])
-    estimatedMarginalMeans <- estimatedMarginalMeans[,!colnames(estimatedMarginalMeans) %in% c("df", "stat", "pval"), drop = FALSE]
-  if (parameter == "heterogeneity")
-    estimatedMarginalMeans <- estimatedMarginalMeans[,!colnames(estimatedMarginalMeans) %in% c("lPi", "uPi"), drop = FALSE]
-  if (selectedVariable == "")
-    estimatedMarginalMeans <- estimatedMarginalMeans[,!colnames(estimatedMarginalMeans) %in% c("value"), drop = FALSE]
-
   # set data
   estimatedMarginalMeansTable$setData(estimatedMarginalMeans)
 
@@ -1392,6 +1385,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   contrastsTable <- createJaspTable(gettext("Contrasts"))
   contrastsTable$position <- 1
+  contrastsTable$showSpecifiedColumnsOnly <- TRUE
   contrastsTable$dependOn(switch(
     parameter,
     effectSize    = c("contrastsEffectSize", "contrastsEffectSizePValueAdjustment", "predictionIntervals", "transformEffectSize", "standardErrors"),
@@ -1403,7 +1397,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   contrastsTable$addColumnInfo(name = "comparison", type = "string", title = gettext("Comparison"))
   .maAddSubgroupColumn(contrastsTable, options)
   contrastsTable$addColumnInfo(name = "est",        type = "number", title = gettext("Estimate"))
-  .maAddSeColumn(contrastsTable, options)
+  if (parameter == "effectSize")
+    .maAddSeColumn(contrastsTable, options)
   .maAddCiColumn(contrastsTable, options)
   if (parameter == "effectSize") {
     .maAddPiColumn(contrastsTable, options)
@@ -1429,10 +1424,6 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # reorder by estimated marginal means estimate
   contrasts <- .maSafeOrderAndSimplify(contrasts, "comparison", options)
-
-  # drop non-required columns
-  if (parameter == "heterogeneity")
-    contrasts <- contrasts[,!colnames(contrasts) %in% c("lPi", "uPi"), drop = FALSE]
 
   # set data
   contrastsTable$setData(contrasts)
@@ -2286,14 +2277,6 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
       .maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]),
       list(predictedEffect[,c("est", "lCi", "uCi", "lPi", "uPi")]))
 
-  # remove non-requested columns
-  predictedEffect <- predictedEffect[,c(
-    "par", "est",
-    if (options[["transformEffectSize"]] == "none") "se",
-    if (options[["confidenceIntervals"]]) c("lCi", "uCi"),
-    if (options[["predictionIntervals"]]) c("lPi", "uPi")
-  )]
-
   # return the tau levels
   if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]])
     predictedEffect <- cbind(predictedEffect, tauLevels)
@@ -2419,6 +2402,10 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     confIntHeterogeneity <- data.frame(confIntHeterogeneity[["random"]])[c(2,1,3,4),]
     colnames(confIntHeterogeneity) <- c("est", "lCi", "uCi")
     confIntHeterogeneity$par       <- c("\U1D70F", "\U1D70F\U00B2", "I\U00B2", "H\U00B2")
+
+    if (options[["standardErrors"]]){
+      confIntHeterogeneity$se <- c(.maGetSqrtTransformationSeDeltaMethod(fit$tau2 ,fit$se.tau2), fit$se.tau2, NA, NA)
+    }
 
     # keep only the requested parameters
     heterogeneityShow <- c(
@@ -2941,17 +2928,6 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     )
   }
 
-
-  # remove unnecessary columns
-  seColumnsToRemove <- if (options[["transformEffectSize"]] == "none") character(0) else "se"
-  computedMarginalMeans <- computedMarginalMeans[,!colnames(computedMarginalMeans) %in% seColumnsToRemove, drop = FALSE]
-
-  if (!options[["confidenceIntervals"]])
-    computedMarginalMeans <- computedMarginalMeans[,!colnames(computedMarginalMeans) %in% c("lCi", "uCi"), drop = FALSE]
-
-  if (!options[["predictionIntervals"]])
-    computedMarginalMeans <- computedMarginalMeans[,!colnames(computedMarginalMeans) %in% c("lPi", "uPi"), drop = FALSE]
-
   # return the tau levels
   if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]])
     computedMarginalMeans <- cbind(computedMarginalMeans, tauLevels)
@@ -3110,16 +3086,6 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # reformat
   computedContrasts <- .maExtractAndFormatPrediction(computedContrasts)
-
-  # remove unnecessary columns
-  seColumnsToRemove <- if (options[["transformEffectSize"]] == "none") character(0) else "se"
-  computedContrasts <- computedContrasts[,!colnames(computedContrasts) %in% seColumnsToRemove, drop = FALSE]
-
-  if (!options[["confidenceIntervals"]])
-    computedContrasts <- computedContrasts[,!colnames(computedContrasts) %in% c("lCi", "uCi"), drop = FALSE]
-
-  if (!options[["predictionIntervals"]])
-    computedContrasts <- computedContrasts[,!colnames(computedContrasts) %in% c("lPi", "uPi"), drop = FALSE]
 
   # TODO: ? return the tau levels
   # if (.mammHasMultipleHeterogeneities(options, canAddOutput = TRUE) && options[["predictionIntervals"]])
@@ -4053,6 +4019,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     "estimatedMarginalMeansEffectSizeSdFactorCovariates",
     "estimatedMarginalMeansEffectSizeAddAdjustedEstimate",
 
+    "standardErrors",
     "confidenceIntervals",
     "confidenceIntervalsLevel",
     "predictionIntervals",
@@ -4472,12 +4439,6 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   }
   row$subgroup <- attr(fit, "subgroup")
 
-  row <- row[,c(
-    "par", "est",
-    if (options[["confidenceIntervals"]]) c("lCi", "uCi"),
-    "subgroup"
-  )]
-
   return(row)
 }
 .maRowFitMeasures                     <- function(fit, options) {
@@ -4721,9 +4682,12 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   return(tempTable)
 }
-.maAddSeColumn                  <- function(tempTable, options) {
+.maAddSeColumn                  <- function(tempTable, options, noTransformation = FALSE) {
 
-  if (options[["standardErrors"]] && options[["transformEffectSize"]] == "none") {
+  if (!options[["standardErrors"]])
+    return(tempTable)
+
+  if (noTransformation || options[["transformEffectSize"]] == "none") {
     tempTable$addColumnInfo(name = "se", title = gettext("Standard Error"), type = "number")
   }
 
@@ -5028,7 +4992,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   return(termsIndicies)
 }
-
+.maGetSqrtTransformationSeDeltaMethod <- function(estimate, estimate_se) {
+  estimate_se / (2 * sqrt(estimate))
+}
 # messages
 .maFixedEffectTextMessage              <- function(options) {
   return(switch(
