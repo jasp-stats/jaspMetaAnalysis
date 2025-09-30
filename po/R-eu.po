@@ -2,1769 +2,1975 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.95.0\n"
 "POT-Creation-Date: 2025-07-19 03:02\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2025-10-01 11:05+0000\n"
+"Last-Translator: Ángel Prieto <angel.prieto.fi@gmail.com>\n"
+"Language-Team: Basque <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-r/eu/>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.14-dev\n"
 
 msgid "There must be at least one observation in each group."
-msgstr ""
+msgstr "Talde bakoitzean gutxienez behaketa bat egon behar da."
 
 msgid "The prior lower bound is not smaller than the upper bound."
-msgstr ""
+msgstr "Aurreko beheko muga ez da goiko muga baino txikiagoa."
 
 msgid "Your prior contains negative values."
-msgstr ""
+msgstr "Zure aurrekoak balio negatiboak ditu."
 
 msgid "Your prior contains positive values."
-msgstr ""
+msgstr "Zure aurrekoak balio positiboak ditu."
 
 msgid "No positive numbers found in %s"
-msgstr ""
+msgstr "Ez da zenbaki positiborik aurkitu %s-n"
 
 msgid "No negative numbers found in %s"
-msgstr ""
+msgstr "Ez da zenbaki negatiborik aurkitu %s-n"
 
 msgid "The 95%% CI Lower Bound must be smaller than the Upper Bound."
-msgstr ""
+msgstr "% 95eko CI beheko muga goiko muga baino txikiagoa izan behar da."
 
 msgid "You cannot set all the prior model probabilties to zero."
-msgstr ""
+msgstr "Ezin dituzu aurreko ereduaren probabilitate guztiak zero gisa ezarri."
 
 msgid "The model could not be fit. Please check the following: Do you have at least n=2 studies? If the prior is truncated, is it consistent with the data (when most effect sizes are negative, the analysis may not work when the prior is constrained to be postive)?"
 msgstr ""
+"Eredua ezin izan da egokitu. Mesedez, egiaztatu honako hau: Gutxienez n=2 "
+"ikerketa dituzu? Aurrekoa moztuta badago, datuekin koherentea al da (efektu-"
+"tamaina gehienak negatiboak direnean, analisiak agian ez du funtzionatuko "
+"aurrekoa positiboa izatera mugatzen denean)?"
 
 msgid "Posterior Estimates per Model"
-msgstr ""
+msgstr "Modelo bakoitzeko ondorengo estimazioak"
 
 msgid "BF%1$s%2$s"
-msgstr ""
+msgstr "BF%1$s%2$s"
 
 msgid "Log(BF%1$s%2$s)"
-msgstr ""
+msgstr "Erregistroa(BF%1$s%2$s)"
 
 msgid "Mean"
-msgstr ""
+msgstr "Batez bestekoa"
 
 msgid "SD"
-msgstr ""
+msgstr "SD"
 
 msgid "Lower"
-msgstr ""
+msgstr "Beheko"
 
 msgid "95%% Credible Interval"
-msgstr ""
+msgstr "%95eko sinesgarritasun tartea"
 
 msgid "Upper"
-msgstr ""
+msgstr "Goiko"
 
 msgid "Averaged"
-msgstr ""
+msgstr "Batez bestekoa"
 
 msgid "Fixed effects"
-msgstr ""
+msgstr "Efektu finkoak"
 
 msgid "Random effects"
-msgstr ""
+msgstr "Ausazko efektuak"
 
 msgid "Ordered effects"
-msgstr ""
+msgstr "Efektu ordenatuak"
 
 msgid "%1$s and %2$s are the group-level effect size and standard deviation, respectively."
 msgstr ""
+"%1$s eta %2$s talde-mailako efektuaren tamaina eta desbideratze estandarra "
+"dira, hurrenez hurren."
 
 msgid "%s is the group-level effect size."
-msgstr ""
+msgstr "%s talde-mailako efektuaren tamaina da."
 
 msgid "Bayes factor of the random effects H%1$s over the fixed effects H%1$s."
-msgstr ""
+msgstr "H%1$s efektu aleatorioen Bayes faktorea efektu finkoen H%1$s gainean."
 
 msgid "Posterior estimates are based on the models that assume an effect to be present. The Bayes factor is based on all four models: fixed effects H%2$s & random effects H%2$s over the fixed effects H%1$s & random effects H%1$s."
 msgstr ""
+"Atzeragoko estimazioak efektu bat dagoela suposatzen duten ereduetan "
+"oinarritzen dira. Bayes faktorea lau ereduetan oinarritzen da: H%2$s efektu "
+"finkoak eta H%2$s ausazko efektuak H%1$s efektu finkoen eta H%1$s ausazko "
+"efektuen gainean."
 
 msgid "Model averaged posterior estimates for %3$s are not yet available, but will be added in the future. The Bayes factor is based on all four models: random effects H%1$s & H%2$s over the fixed effects H%1$s & H%2$s."
 msgstr ""
+"%3$s-rako batez besteko ereduaren atzeko estimazioak ez daude oraindik "
+"eskuragarri, baina etorkizunean gehituko dira. Bayes faktorea lau ereduetan "
+"oinarritzen da: H%1$s eta H%2$s ausazko efektuak H%1$s eta H%2$s efektu "
+"finkoen gainean."
 
 msgid "Bayes factor of the (unconstrained/constrained) random effects H%1$s over the fixed effects H%1$s."
 msgstr ""
+"(Mugarik gabeko/mugatutako) ausazko efektuen H%1$s efektu finkoen gaineko "
+"Bayes faktorea."
 
 msgid "Bayes factor of the fixed effects H%1$s over the random effects H%1$s."
-msgstr ""
+msgstr "H%1$s efektu finkoen Bayes faktorea ausazko efektuen H%1$s gainean."
 
 msgid "Model averaged posterior estimates are based on the models that assume an effect to be present. The Bayes factor is based on all four models: fixed effects H%1$s & random effects H%1$s over the fixed effects H%2$s & random effects H%2$s."
 msgstr ""
+"Ereduaren batez besteko atzeko estimazioak efektu bat dagoela suposatzen "
+"duten ereduetan oinarritzen dira. Bayes faktorea lau ereduetan oinarritzen "
+"da: H%1$s efektu finkoak eta H%1$s ausazko efektuak H%2$s efektu finkoen eta "
+"H%2$s ausazko efektuen gainean."
 
 msgid "Model averaged posterior estimates for %3$s are not yet available, but will be added in the future. The Bayes factor is based on all four models: fixed effects H%1$s & H%2$s over the random effects H%1$s & H%2$s."
 msgstr ""
+"%3$s-rako batez besteko modeloen atzeko estimazioak ez daude oraindik "
+"eskuragarri, baina etorkizunean gehituko dira. Bayes faktorea lau modeloetan "
+"oinarritzen da: H%1$s eta H%2$s efektu finkoen H%1$s eta H%2$s efektu "
+"aleatorioen gainean."
 
 msgid "Bayes factor of the fixed effects H%1$s over the (unconstrained/constrained) random effects H%1$s."
 msgstr ""
+"H%1$s efektu finkoen Bayes faktorea (mugarik gabeko/mugatutako) ausazko "
+"efektuen gaineko H%1$s."
 
 msgid "Bayes factor of the ordered effects H%1$s over the fixed effects H%2$s. The Bayes factor for the ordered effects H%1$s versus the unconstrained (random) effects H%1$s model is %3$.3f."
 msgstr ""
+"H%1$s efektu ordenatuen Bayes faktorea H%2$s efektu finkoen gainean. H%1$s "
+"efektu ordenatuen Bayes faktorea, mugarik gabeko (ausazko) efektuen H%1$s "
+"ereduaren aldean, %3$.3f da."
 
 msgid "Bayes factor of the fixed effects H%2$s over the ordered effects H%1$s. The Bayes factor for the unconstrained (random) effects H%1$s versus the ordered effects H%1$s model is %3$.3f."
 msgstr ""
+"H%2$s efektu finkoen Bayes faktorea ordenatutako efektuen gainean. Ausazko ("
+"mugarik gabeko) efektuen H%1$s ereduaren Bayes faktorea ordenatutako "
+"efektuen aldean %3$.3f da."
 
 msgid "Model Probabilities"
-msgstr ""
+msgstr "Ereduaren probabilitateak"
 
 msgid "Prior"
-msgstr ""
+msgstr "Aurrekoa"
 
 msgid "Posterior"
-msgstr ""
+msgstr "Atzekoa"
 
 msgid "Fixed H%s"
-msgstr ""
+msgstr "H% finkoak"
 
 msgid "Random H%s"
-msgstr ""
+msgstr "Ausazko H%s"
 
 msgid "Ordered H%s"
-msgstr ""
+msgstr "Eskatutako H%s"
 
 msgid "Effect Sizes per Study"
-msgstr ""
+msgstr "Efektuaren tamaina ikerketa bakoitzeko"
 
 msgid "Observed"
-msgstr ""
+msgstr "Behatuak"
 
 msgid "Estimated"
-msgstr ""
+msgstr "Kalkulatua"
 
 msgid "Study"
-msgstr ""
+msgstr "Ikasketa"
 
 msgid "Posterior mean and 95%% credible interval estimates from the random effects model."
 msgstr ""
+"Ausazko efektuen eredutik ateratako atzeko batez bestekoaren eta % 95eko "
+"sinesgarritasun-tarteko estimazioak."
 
 msgid "Posterior mean and 95%% credible interval estimates from the constrained random effects model."
 msgstr ""
+"Ausazko efektu mugatuen eredutik ateratako atzeko batez bestekoaren eta % "
+"95eko sinesgarritasun tartearen estimazioak."
 
 msgid "Effect Size"
-msgstr ""
+msgstr "Efektuaren tamaina"
 
 msgid "Heterogeneity"
-msgstr ""
+msgstr "Heterogeneotasuna"
 
 msgid "Effect size"
-msgstr ""
+msgstr "Efektuaren tamaina"
 
 msgid "Density"
-msgstr ""
+msgstr "Dentsitatea"
 
 msgid "Prior and Posteriors"
-msgstr ""
+msgstr "Aurrekoak eta ondorengoak"
 
 msgid "Fixed H"
-msgstr ""
+msgstr "H finkoa"
 
 msgid "Random H"
-msgstr ""
+msgstr "Ausazko H"
 
 msgid "Averaged H"
-msgstr ""
+msgstr "Batez besteko H"
 
 msgid "Prior H"
-msgstr ""
+msgstr "Prior H"
 
 msgid "Ordered H"
-msgstr ""
+msgstr "H eskatua"
 
 msgid "Forest Plot"
-msgstr ""
+msgstr "Baso-lursaila"
 
 msgid "Observed study effects"
-msgstr ""
+msgstr "Behatutako ikerketaren efektuak"
 
 msgid "Estimated study effects"
-msgstr ""
+msgstr "Ikerketaren efektu estimatuak"
 
 msgid "Observed and estimated study effects"
-msgstr ""
+msgstr "Behatutako eta kalkulatutako ikerketaren efektuak"
 
 msgid "Cumulative forest plot"
-msgstr ""
+msgstr "Baso-diagrama metatua"
 
 msgid "Overall effect size"
-msgstr ""
+msgstr "Efektuaren tamaina orokorra"
 
 msgid "Sequential Analysis"
-msgstr ""
+msgstr "Analisi sekuentziala"
 
 msgid "Bayes factors effect size"
-msgstr ""
+msgstr "Bayes faktoreen efektuaren tamaina"
 
 msgid "Bayes factors heterogeneity"
-msgstr ""
+msgstr "Bayes faktoreen heterogeneotasuna"
 
 msgid "Posterior model probabilities"
-msgstr ""
+msgstr "Atzeko ereduaren probabilitateak"
 
 msgid "Evidence for random effects"
-msgstr ""
+msgstr "Ausazko efektuen frogak"
 
 msgid "Evidence for fixed effects"
-msgstr ""
+msgstr "Efektu finkoen frogak"
 
 msgid "random"
-msgstr ""
+msgstr "ausazko"
 
 msgid "fixed"
-msgstr ""
+msgstr "finko"
 
 msgid "Anecdotal"
-msgstr ""
+msgstr "Anekdotikoa"
 
 msgid "Moderate"
-msgstr ""
+msgstr "Moderatua"
 
 msgid "Strong"
-msgstr ""
+msgstr "Indartsua"
 
 msgid "Very Strong"
-msgstr ""
+msgstr "Oso sendoa"
 
 msgid "Extreme"
-msgstr ""
+msgstr "Muturrekoa"
 
 msgid "Evidence for %s:"
-msgstr ""
+msgstr "%s-ren frogak:"
 
 msgid "Plotting failed: The Bayes factors contain infinity."
-msgstr ""
+msgstr "Marrazketak huts egin du: Bayes faktoreek infinitua dute."
 
 msgid "Studies"
-msgstr ""
+msgstr "Ikasketak"
 
 msgid "Posterior model \n probability"
 msgstr ""
+"Atzeko eredua\n"
+"probabilitatea"
 
 msgid "Prior and posterior plot"
-msgstr ""
+msgstr "Aurreko eta ondorengo trama"
 
 msgid "Value"
-msgstr ""
+msgstr "Balioa"
 
 msgid "Running means plot"
-msgstr ""
+msgstr "Korrika egiteak lursaila esan nahi du"
 
 msgid "Iteration"
-msgstr ""
+msgstr "Iterazioa"
 
 msgid "Running mean"
-msgstr ""
+msgstr "Korrika egitea batez bestekoa"
 
 msgid "Autocorrelations plot"
-msgstr ""
+msgstr "Autokorrelazioen grafikoa"
 
 msgid "Lag"
-msgstr ""
+msgstr "Atzerapena"
 
 msgid "Autocorrelation"
-msgstr ""
+msgstr "Autokorrelazioa"
 
 msgid "Gelman-Rubin plot"
-msgstr ""
+msgstr "Gelman-Rubin grafikoa"
 
 msgid "Last iteration in chain"
-msgstr ""
+msgstr "Azken iterazioa katean"
 
 msgid "Shrink factor"
-msgstr ""
+msgstr "Txikitze faktorea"
 
 msgid "All observations must be non-negative."
-msgstr ""
+msgstr "Behaketa guztiak ez-negatiboak izan behar dira."
 
 msgid "Cochran-Mantel-Haenszel"
-msgstr ""
+msgstr "Cochran-Mantel-Haenszel"
 
 msgid "Mantel-Haenszel"
-msgstr ""
+msgstr "Mantel-Haenszel"
 
 msgid "Tarone"
-msgstr ""
+msgstr "Tarone"
 
 msgid "Metafor R Code"
-msgstr ""
+msgstr "Metafor R kodea"
 
 msgid "All standard errors must be positive."
-msgstr ""
+msgstr "Errore estandar guztiak positiboak izan behar dira."
 
 msgid "Estimating Meta-Analytic Model"
-msgstr ""
+msgstr "Metaanalisi eredua kalkulatzea"
 
 msgid "Full dataset"
-msgstr ""
+msgstr "Datu-multzo osoa"
 
 msgid "Estimating Subgroup Models"
-msgstr ""
+msgstr "Azpitaldeen ereduak kalkulatzea"
 
 msgid "The loaded distance matrix for '%1$s' does not match the dataset. The following levels are missing: %2$s."
 msgstr ""
+"'%1$s'-rako kargatutako distantzia-matrizea ez dator bat datu-multzoarekin. "
+"Maila hauek falta dira: %2$s."
 
 msgid "The loaded correlation matrix for '%1$s' does not match the dataset. The following levels are missing: %2$s."
 msgstr ""
+"'%1$s'-rako kargatutako korrelazio matrizea ez dator bat datu multzoarekin. "
+"Maila hauek falta dira: %2$s."
 
 msgid "All observations were removed as influential."
-msgstr ""
+msgstr "Behaketa guztiak eragingarriak zirela esanez kendu ziren."
 
 msgid "Meta-Analytic Tests"
-msgstr ""
+msgstr "Metaanalisi probak"
 
 msgid "Test"
-msgstr ""
+msgstr "Proba"
 
 msgid "p"
-msgstr ""
+msgstr "or"
 
 msgid "p (permutation)"
-msgstr ""
+msgstr "p (permutazioa)"
 
 msgid "The model for subgroup '%1$s' failed with the following error: %2$s"
-msgstr ""
+msgstr "'%1$s' azpitalderako ereduak huts egin du errore honekin: %2$s"
 
 msgid "Error:"
-msgstr ""
+msgstr "Errorea:"
 
 msgid "Meta-Analytic Estimates"
-msgstr ""
+msgstr "Metaanalisi estimazioak"
 
 msgid "Estimate"
-msgstr ""
+msgstr "Estimazioa"
 
 msgid "Heterogeneity Level"
-msgstr ""
+msgstr "Heterogeneotasun maila"
 
 msgid "Fit Measures"
-msgstr ""
+msgstr "Egokitze neurriak"
 
 msgid "Observations"
-msgstr ""
+msgstr "Behaketak"
 
 msgid "Log Lik."
-msgstr ""
+msgstr "Log Lik."
 
 msgid "Deviance"
-msgstr ""
+msgstr "Desbideratzea"
 
 msgid "AIC"
-msgstr ""
+msgstr "AIC"
 
 msgid "BIC"
-msgstr ""
+msgstr "BIC"
 
 msgid "AICc"
-msgstr ""
+msgstr "AICc"
 
 msgid "R²"
-msgstr ""
+msgstr "R²"
 
 msgid "Effect Size Meta-Regression Terms Tests"
-msgstr ""
+msgstr "Efektuaren Tamaina Meta-Erregresio Terminoen Probak"
 
 msgid "Heterogeneity Meta-Regression Terms Tests"
-msgstr ""
+msgstr "Heterogeneotasun Meta-Erregresio Terminoen Probak"
 
 msgid "F"
-msgstr ""
+msgstr "F"
 
 msgid "Qₘ"
-msgstr ""
+msgstr "Qₘ"
 
 msgid "df₁"
-msgstr ""
+msgstr "df₁"
 
 msgid "df"
-msgstr ""
+msgstr "df"
 
 msgid "df₂"
-msgstr ""
+msgstr "df₂"
 
 msgid "Warning:"
-msgstr ""
+msgstr "Abisua:"
 
 msgid "Effect Size Meta-Regression Coefficients"
-msgstr ""
+msgstr "Efektuaren Tamaina Meta-Erregresio Koefizienteak"
 
 msgid "Heterogeneity Meta-Regression Coefficients"
-msgstr ""
+msgstr "Heterogeneotasun Meta-Erregresio Koefizienteak"
 
 msgid "Standard Error"
-msgstr ""
+msgstr "Errore estandarra"
 
 msgid "t"
-msgstr ""
+msgstr "t"
 
 msgid "z"
-msgstr ""
+msgstr "z"
 
 msgid "Effect Size Meta-Regression Correlation Matrix"
-msgstr ""
+msgstr "Efektuaren Tamaina Meta-Erregresio Korrelazio Matrizea"
 
 msgid "Heterogeneity Meta-Regression Correlation Matrix"
-msgstr ""
+msgstr "Heterogeneotasun Meta-Erregresio Korrelazio Matrizea"
 
 msgid "Subgroup: %1$s"
-msgstr ""
+msgstr "Azpitaldea: %1$s"
 
 msgid "Estimated Marginal Means and Contrasts Summary"
-msgstr ""
+msgstr "Kalkulatutako batez besteko marjinalak eta kontrasteen laburpena"
 
 msgid "Estimated Marginal Means / Contrasts"
-msgstr ""
+msgstr "Kalkulatutako batez besteko marjinalak / kontrasteak"
 
 msgid "(Effect Size)"
-msgstr ""
+msgstr "(Efektuaren tamaina)"
 
 msgid "(Heterogeneity)"
-msgstr ""
+msgstr "(Heterogeneotasuna)"
 
 msgid "Adjusted Estimate"
-msgstr ""
+msgstr "Estimazio doitua"
 
 msgid "Estimated Marginal Means"
-msgstr ""
+msgstr "Kalkulatutako batez besteko marjinalak"
 
 msgid "Level"
-msgstr ""
+msgstr "Maila"
 
 msgid "Contrasts"
-msgstr ""
+msgstr "Kontrasteak"
 
 msgid "Comparison"
-msgstr ""
+msgstr "Konparaketa"
 
 msgid "Bubble Plots"
-msgstr ""
+msgstr "Burbuila-diagramak"
 
 msgid "%1$s (%2$s)"
-msgstr ""
+msgstr "%1$s (%2$s)"
 
 msgid "Effect Size Meta-Regression Variance Inflation"
-msgstr ""
+msgstr "Efektuaren Tamaina Meta-Erregresio Bariantzaren Inflazioa"
 
 msgid "Heterogeneity Meta-Regression Variance Inflation"
-msgstr ""
+msgstr "Heterogeneotasuna Meta-erregresioa Bariantza Inflazioa"
 
 msgid "Parameters"
-msgstr ""
+msgstr "Parametroak"
 
 msgid "VIF"
-msgstr ""
+msgstr "VIF"
 
 msgid "SIF"
-msgstr ""
+msgstr "SIF"
 
 msgid "Casewise Diagnostics Table"
-msgstr ""
+msgstr "Kasuka Diagnostiko Taula"
 
 msgid "Casewise diagnostics are not available for models that contain meta-regression on heterogeneity."
 msgstr ""
+"Kasuz kasuko diagnostikoak ez daude eskuragarri heterogeneotasunean meta-"
+"erregresioa duten ereduetarako."
 
 msgid "Label"
-msgstr ""
+msgstr "Etiketa"
 
 msgid "Predictor"
-msgstr ""
+msgstr "Aurreikuslea"
 
 msgid "Standardized Residual"
-msgstr ""
+msgstr "Hondar estandarizatua"
 
 msgid "DFFITS"
-msgstr ""
+msgstr "DFFITS"
 
 msgid "Cook's Distance"
-msgstr ""
+msgstr "Cook-en distantzia"
 
 msgid "Covariance ratio"
-msgstr ""
+msgstr "Kobariantza-erlazioa"
 
 msgid "𝜏"
-msgstr ""
+msgstr "𝜏"
 
 msgid "Leave One Out"
-msgstr ""
+msgstr "Utzi bat kanpoan"
 
 msgid "𝜏²"
-msgstr ""
+msgstr "𝜏²"
 
 msgid "Qₑ"
-msgstr ""
+msgstr "Qₑ"
 
 msgid "Hat"
-msgstr ""
+msgstr "Txapela"
 
 msgid "Weight"
-msgstr ""
+msgstr "Pisua"
 
 msgid "Difference in coefficients"
-msgstr ""
+msgstr "Koefizienteen arteko aldea"
 
 msgid "Influential"
-msgstr ""
+msgstr "Eraginkorra"
 
 msgid "No influential cases found."
-msgstr ""
+msgstr "Ez da eragin handiko kasurik aurkitu."
 
 msgid "%1$sNo influential cases found."
-msgstr ""
+msgstr "%1$sEz da eragin handiko kasurik aurkitu."
 
 msgid "Diagnostics are based on the the subgroup models."
-msgstr ""
+msgstr "Diagnostikoak azpitaldeen ereduetan oinarritzen dira."
 
 msgid "Diagnostics are based on the non-clustered model."
-msgstr ""
+msgstr "Diagnostikoak multzokatutako eredu ez-multzoan oinarritzen dira."
 
 msgid "Column name %s already exists in the dataset."
-msgstr ""
+msgstr "%s izeneko zutabea dagoeneko existitzen da datu-multzoan."
 
 msgid "Profile Likelihood Plot"
-msgstr ""
+msgstr "Profilaren probabilitate-diagrama"
 
 msgid "Profile likelihood is not available for models that contain meta-regression on heterogeneity."
 msgstr ""
+"Profilaren probabilitatea ez dago eskuragarri heterogeneotasunean meta-"
+"erregresioa duten ereduetarako."
 
 msgid "Baujat Plot"
-msgstr ""
+msgstr "Baujat lursaila"
 
 msgid "Baujat plot is not available for models that contain meta-regression on heterogeneity."
 msgstr ""
+"Baujat grafikoa ez dago erabilgarri heterogeneotasunean meta-erregresioa "
+"duten ereduetarako."
 
 msgid "Squared Pearson Residual"
-msgstr ""
+msgstr "Pearsonen hondar karratua"
 
 msgid "Influence on Fitted Value"
-msgstr ""
+msgstr "Balio Egokituan Eragina"
 
 msgid "Residual Funnel Plot"
-msgstr ""
+msgstr "Hondar-inbutuaren grafikoa"
 
 msgid "Model Summary"
-msgstr ""
+msgstr "Modeloaren laburpena"
 
 msgid "Meta-Regression Summary"
-msgstr ""
+msgstr "Meta-erregresioaren laburpena"
 
 msgid "Variance Inflation Summary"
-msgstr ""
+msgstr "Aldakortasun Inflazioaren Laburpena"
 
 msgid "Pooled effect"
-msgstr ""
+msgstr "Efektu metatua"
 
 msgid "Indexes of %1$s moderation coefficients were specified in an incorrect format. Try '(1, 2)' to test the first two coefficients."
 msgstr ""
+"%1$s moderazio koefizienteen indizeak formatu okerrean zehaztu dira. Saiatu "
+"'(1, 2)' lehenengo bi koefizienteak probatzeko."
 
 msgid "The selected coefficients for %1$s moderation must be between 1 and %2$i (i.e., the number of regression parameters)."
 msgstr ""
+"%1$s moderaziorako hautatutako koefizienteak 1 eta %2$i artean egon behar "
+"dira (hau da, erregresio-parametroen kopurua)."
 
 msgid "Effect size (coef: %1$s)"
-msgstr ""
+msgstr "Efektuaren tamaina (koefizientea: %1$s)"
 
 msgid "Effect size coefficients %1$s correspond to %2$s."
-msgstr ""
+msgstr "%1$s efektu-tamainaren koefizienteak %2$s-ri dagozkio."
 
 msgid "Heterogeneity (coef: %1$s)"
-msgstr ""
+msgstr "Heterogeneotasuna (koefizientea: %1$s)"
 
 msgid "Heterogeneity coefficients %1$s correspond to %2$s."
-msgstr ""
+msgstr "%1$s heterogeneotasun koefizienteak %2$s-ri dagozkio."
 
 msgid "Mean - %1$sSD"
-msgstr ""
+msgstr "Batez bestekoa - %1$sSD"
 
 msgid "Mean + %1$sSD"
-msgstr ""
+msgstr "Batez bestekoa + %1$sDE"
 
 msgid "Adjusted estimate"
-msgstr ""
+msgstr "Estimazio doitua"
 
 msgid "Distance Matrix"
-msgstr ""
+msgstr "Distantzia-matrizea"
 
 msgid "Correlation Matrix"
-msgstr ""
+msgstr "Korrelazio Matrizea"
 
 msgid "Residual Value"
-msgstr ""
+msgstr "Hondar-balioa"
 
 msgid "Profile Likelihood"
-msgstr ""
+msgstr "Profilaren probabilitatea"
 
 msgid "Clustering is not supported when specifying a heterogeneity meta-regression model."
 msgstr ""
+"Ez da onartzen multzokatzea heterogeneotasun meta-erregresio eredu bat "
+"zehaztean."
 
 msgid "The fixed value for tau2 must be a positive number."
-msgstr ""
+msgstr "tau2-ren balio finkoa zenbaki positiboa izan behar da."
 
 msgid "The custom R code for extending the metafor call failed with the following message: %1$s"
 msgstr ""
+"Metafor deia zabaltzeko R kode pertsonalizatuak huts egin du mezu hau emanez:"
+" %1$s"
 
 msgid "Fisher's z to r"
-msgstr ""
+msgstr "Fisherren z-tik r-ra"
 
 msgid "exponential"
-msgstr ""
+msgstr "esponentziala"
 
 msgid "log odds to proportions"
-msgstr ""
+msgstr "erregistratu probabilitateak proportzioetara"
 
 msgid "log odds to SMD (normal)"
-msgstr ""
+msgstr "erregistratu probabilitateak SMDra (normala)"
 
 msgid "log odds to SMD (logistic)"
-msgstr ""
+msgstr "logaritmoaren probabilitateak SMDra (logistika)"
 
 msgid "SMD to log odds (normal)"
-msgstr ""
+msgstr "SMD probabilitateak erregistratzeko (normala)"
 
 msgid "SMD to log odds (logistic)"
-msgstr ""
+msgstr "SMDtik probabilitateen erregistroa (logistika)"
 
 msgid "Hakstian & Whalen inverse α"
-msgstr ""
+msgstr "Hakstian eta Whalen alderantzizko α"
 
 msgid "Bonett inverse α"
-msgstr ""
+msgstr "Bonett-en alderantzizko α"
 
 msgid "z to R²"
-msgstr ""
+msgstr "z-tik R²-ra"
 
 msgid "SMD to Cohen's U₁"
-msgstr ""
+msgstr "SMD Cohen-en U₁-ra"
 
 msgid "SMD to Cohen's U₂"
-msgstr ""
+msgstr "SMD Cohen-en U₂-ra"
 
 msgid "SMD to Cohen's U₃"
-msgstr ""
+msgstr "SMD Cohen-en U₃-ra"
 
 msgid "SMD to CLES, Pr(superiority)"
-msgstr ""
+msgstr "SMDtik CLESera, Pr(nagusitasuna)"
 
 msgid "None"
-msgstr ""
+msgstr "Bat ere ez"
 
 msgid "Bonferroni"
-msgstr ""
+msgstr "Bonferroni"
 
 msgid "Holm"
-msgstr ""
+msgstr "Holm"
 
 msgid "Hochberg"
-msgstr ""
+msgstr "Hochberg"
 
 msgid "Hommel"
-msgstr ""
+msgstr "Hommel"
 
 msgid "Benjamini-Hochberg"
-msgstr ""
+msgstr "Benjamini-Hochberg"
 
 msgid "Benjamini-Yekutieli"
-msgstr ""
+msgstr "Benjamini-Yekutieli"
 
 msgid "Intercept"
-msgstr ""
+msgstr "Atzeman"
 
 msgid "Residual heterogeneity"
-msgstr ""
+msgstr "Hondar-heterogeneotasuna"
 
 msgid "Moderation (Effect Size): %1$s"
-msgstr ""
+msgstr "Moderazioa (Efektuaren Tamaina): %1$s"
 
 msgid "Moderation (Heterogeneity): %1$s"
-msgstr ""
+msgstr "Moderazioa (Heterogeneotasuna): %1$s"
 
 msgid "Moderation: %1$s"
-msgstr ""
+msgstr "Moderazioa: %1$s"
 
 msgid "The pooled effect size could not be calculated."
-msgstr ""
+msgstr "Ezin izan da efektu metatuaren tamaina kalkulatu."
 
 msgid "(coef ...)"
-msgstr ""
+msgstr "(koefizientea ...)"
 
 msgid "Moderation effect size%1$s"
-msgstr ""
+msgstr "Moderazio efektuaren tamaina %1$s"
 
 msgid "Moderation%1$s"
-msgstr ""
+msgstr "Moderazioa%1$s"
 
 msgid "Moderation heterogeneity%1$s"
-msgstr ""
+msgstr "Moderazio heterogeneotasuna%1$s"
 
 msgid "(coef: %1$s)"
-msgstr ""
+msgstr "(koefizientea: %1$s)"
 
 msgid "Subgroup differences"
-msgstr ""
+msgstr "Azpitaldeen arteko desberdintasunak"
 
 msgid "%s%% CI"
-msgstr ""
+msgstr "%s%% CI"
 
 msgid "%s%% PI"
-msgstr ""
+msgstr "%s%% PI"
 
 msgid "Subgroup"
-msgstr ""
+msgstr "Azpitaldea"
 
 msgid "Fixed effects tested using z-distribution."
-msgstr ""
+msgstr "Z-banaketa erabiliz probatutako efektu finkoak."
 
 msgid "Fixed effects tested using t-distribution."
-msgstr ""
+msgstr "Efektu finkoak t-banaketa erabiliz probatu dira."
 
 msgid "Fixed effects tested using Knapp and Hartung adjustment."
-msgstr ""
+msgstr "Knapp eta Hartung doikuntza erabiliz probatutako efektu finkoak."
 
 msgid "The heterogeneity model for 𝜏² is specified on the log scale."
-msgstr ""
+msgstr "𝜏²-ren heterogeneotasun eredua eskala logaritmikoan zehazten da."
 
 msgid "The heterogeneity model for 𝜏² is specified on the identity scale."
-msgstr ""
+msgstr "𝜏²-ren heterogeneotasun eredua identitate eskalan zehaztuta dago."
 
 msgid "pooled effect"
-msgstr ""
+msgstr "efektu metatua"
 
 msgid "adjusted effect"
-msgstr ""
+msgstr "efektu doitua"
 
 msgid "%1$i observations were ommited due to missing values."
-msgstr ""
+msgstr "%1$i behaketa ezabatu dira balio falta direlako."
 
 msgid "%1$i clusters with %2$i estimates each."
-msgstr ""
+msgstr "%1$i multzo %2$i estimaziorekin bakoitza."
 
 msgid "%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates."
-msgstr ""
+msgstr "%1$i multzo %2$i/%3$i/%4$i gutxieneko/mediana/gehieneko estimazioekin."
 
 msgid "%1$s: %2$i observations were ommited due to missing values."
-msgstr ""
+msgstr "%1$s: %2$i behaketa ezabatu dira balio falta direla eta."
 
 msgid "%1$s: %2$i clusters with %3$i estimates each."
-msgstr ""
+msgstr "%1$s: %2$i multzo %3$i estimaziorekin bakoitza."
 
 msgid "%1$s: %2$i clusters with min/median/max %3$i/%4$i/%5$i estimates."
 msgstr ""
+"%1$s: %2$i multzo %3$i/%4$i/%5$i gutxieneko/mediana/gehieneko estimazioekin."
 
 msgid "NAs in the %1$s were introduced due to the %2$s transformation. Please verify that you are using the correct effect size transformation."
 msgstr ""
+"%1$s-ko NAak %2$s eraldaketa dela eta sartu dira. Mesedez, egiaztatu efektu-"
+"tamainaren eraldaketa zuzena erabiltzen ari zarela."
 
 msgid "The %1$s is transformed using %2$s transformation."
-msgstr ""
+msgstr "%1$s %2$s eraldaketa erabiliz eraldatu da."
 
 msgid "The pooled effect size corresponds to the weighted average effect across studies."
 msgstr ""
+"Efektuaren tamaina metatua ikerketen arteko batez besteko efektu haztatuari "
+"dagokio."
 
 msgid "The adjusted effect corresponds to the averaged effect size estimate across the levels of all moderators."
 msgstr ""
+"Doitutako efektua moderatzaile guztien maila guztietan egindako batez "
+"besteko efektu-tamainaren estimazioari dagokio."
 
 msgid "The pooled heterogeneity estimate corresponds to the heterogeneity at the average of predictor values."
 msgstr ""
+"Heterogeneotasun-estimazio metatua aurreikusle-balioen batez besteko "
+"heterogeneotasunari dagokio."
 
 msgid "The I² and H² statistics are not available for heterogeneity models."
 msgstr ""
+"I² eta H² estatistikak ez daude eskuragarri heterogeneotasun ereduetarako."
 
 msgid "The Model Structure %1$s was not completely specified and was skipped."
-msgstr ""
+msgstr "%1$s Eredu Egitura ez zen guztiz zehaztu eta saltatu egin zen."
 
 msgid "Prediction interval for the %1$s is not available for models with multiple heterogeneity estimates."
 msgstr ""
+"%1$s-ren iragarpen-tartea ez dago eskuragarri heterogeneotasun-estimazio "
+"anitz dituzten modeloetarako."
 
 msgid "Each marginal mean estimate is averaged across the levels of the remaining predictors."
 msgstr ""
+"Batez besteko marjinal bakoitzaren estimazioa gainerako iragarleen mailen "
+"batez bestekoa kalkulatzen da."
 
 msgid "Each marginal mean estimate is averaged across the levels of the remaining predictors in a given subgroup."
 msgstr ""
+"Batez besteko marjinal bakoitzaren estimazioa azpitalde jakin bateko "
+"gainerako iragarleen mailen batez bestekoa da."
 
 msgid "NAs in the marginal mean estimatess were introduced due to the %1$s transformation. Please verify that you are using the correct effect size transformation."
 msgstr ""
+"Batez besteko estimazio marjinaletan NAk %1$s eraldaketa dela eta sartu "
+"ziren. Mesedez, egiaztatu efektu-tamainaren eraldaketa zuzena erabiltzen ari "
+"zarela."
 
 msgid "The estimates and intervals are transformed using %1$s transformation."
-msgstr ""
+msgstr "Estimazioak eta tarteak %1$s eraldaketa erabiliz eraldatzen dira."
 
 msgid "The estimates and intervals correspond to %1$s."
-msgstr ""
+msgstr "Estimazioak eta tarteak %1$s-ri dagozkio."
 
 msgid "Each contrast is averaged across the levels of the remaining predictors."
 msgstr ""
+"Kontraste bakoitzaren batez bestekoa gainerako iragarleen mailen artean "
+"kalkulatzen da."
 
 msgid "Contrasts of estimates marginal means cannot be transformed via the effect size transformation."
 msgstr ""
+"Estimazioen batez besteko marjinalen kontrasteak ezin dira efektuaren "
+"tamainaren eraldaketaren bidez eraldatu."
 
 msgid "Contrasts of estimated marginal means are adjusted for multiple comparisons using %1$s correction."
 msgstr ""
+"Kalkulatutako batez besteko marjinalen kontrasteak %1$s zuzenketa erabiliz "
+"doitzen dira konparaketa anitzetarako."
 
 msgid "Contrasts of estimated marginal means cannot be transformed via the link function. As such, the contrasts are summarized on the model scale: log(𝜏²)."
 msgstr ""
+"Kalkulatutako batez besteko marjinalen kontrasteak ezin dira lotura-"
+"funtzioaren bidez eraldatu. Beraz, kontrasteak eredu-eskalan laburbiltzen "
+"dira: log(𝜏²)."
 
 msgid "Contrasts of estimated marginal means cannot be transformed via the heterogeneity transformation. As such, the contrasts are summarized as 𝜏²."
 msgstr ""
+"Kalkulatutako batez besteko marjinalen kontrasteak ezin dira "
+"heterogeneotasun-eraldaketaren bidez eraldatu. Beraz, kontrasteak 𝜏² gisa "
+"laburbiltzen dira."
 
 msgid "Permutation p-value is based on %1$s permutations."
-msgstr ""
+msgstr "Permutazioaren p-balioa %1$s permutaziotan oinarritzen da."
 
 msgid "The model estimation failed with the following message: %1$s. Please, consider simplifying the model."
 msgstr ""
+"Modeloaren estimazioak huts egin du mezu hau erakutsiz: %1$s. Mesedez, "
+"kontuan hartu modeloa sinplifikatzea."
 
 msgid "The cluster-robust standard errors could not be computed. Please, consider modifying the clustering settings in the 'Advanced' section."
 msgstr ""
+"Kluster-errobusto estandar erroreak ezin izan dira kalkulatu. Mesedez, "
+"kontuan hartu 'Aurreratua' ataleko klusterizazio ezarpenak aldatzea."
 
 msgid "Fewer than two estimates."
-msgstr ""
+msgstr "Bi estimazio baino gutxiago."
 
 msgid "The selected 'Method' requires specification of the 'Weights' option in the 'Advanced' section."
 msgstr ""
+"Hautatutako 'Metodoa' atalak 'Pisuak' aukera zehaztu behar du 'Aurreratua' "
+"atalean."
 
 msgid "Subgroup %1$s:"
-msgstr ""
+msgstr "%1$s azpitaldea:"
 
 msgid "%1$sThe term %2$s was completely removed from the model. Possible causes are missing values, collinear predictors, or missing crossed cells in an interaction term."
 msgstr ""
+"%1$s %2$s terminoa erabat kendu da eredutik. Balizko arrazoiak hauek dira: "
+"balio falta, aurreikusle kolinearrak edo interakzio-termino batean "
+"gurutzatutako gelaxka falta."
 
 msgid "%1$sThe term %2$s was partilly removed (%3$i/%4$i coefficients) from the model. Possible causes are missing values, collinear predictors, or missing crossed cells in an interaction term."
 msgstr ""
+"%1$s%2$s terminoa partzialki kendu da (%3$i/%4$i koefizienteak) eredutik. "
+"Balizko arrazoiak balio falta, iragarle kolinearrak edo interakzio-termino "
+"batean gurutzatutako gelaxka falta dira."
 
 msgid "%1$sThe following coefficients were removed from the model: %2$s. Possible causes are missing values, collinear predictors, or missing crossed cells in an interaction term."
 msgstr ""
+"%1$sKoefiziente hauek kendu dira eredutik: %2$s. Balizko arrazoiak hauek "
+"dira: balio falta, iragarle kolinearrak edo interakzio-termino batean "
+"gurutzatutako gelaxkak falta."
 
 msgid "Error reading the distance matrix file: %1$s"
-msgstr ""
+msgstr "Errorea distantzia-matrizearen fitxategia irakurtzean: %1$s"
 
 msgid "The distance matrix must be square. The number of rows (%1$i) does not match the number of columns (%2$i)."
 msgstr ""
+"Distantzia-matrizea karratua izan behar da. Errenkada kopurua (%1$i) ez "
+"dator bat zutabe kopuruarekin (%2$i)."
 
 msgid "Error reading the correlation matrix file: %1$s"
-msgstr ""
+msgstr "Errorea korrelazio-matrizearen fitxategia irakurtzean: %1$s"
 
 msgid "Error reading the variance-covariance matrix file: %1$s"
-msgstr ""
+msgstr "Errorea bariantza-kobariantza matrizearen fitxategia irakurtzean: %1$s"
 
 msgid "The variance-covariance matrix must be square. The number of rows (%1$i) does not match the number of columns (%2$i)."
 msgstr ""
+"Bariantza-kobariantza matrizea karratua izan behar da. Errenkada kopurua "
+"(%1$i) ez dator bat zutabe kopuruarekin (%2$i)."
 
 msgid "The variance-covariance matrix must match the dimensions of the data set. The number of the matrix rows/columns (%1$i) does not match the number of observations in the dataset (%2$i)."
 msgstr ""
+"Bariantza-kobariantza matrizea datu-multzoaren dimentsioekin bat etorri "
+"behar da. Matrizearen errenkada/zutabe kopurua (%1$i) ez dator bat datu-"
+"multzoko behaketa kopuruarekin (%2$i)."
 
 msgid "The supplied variance-covariance matrix is not positive definite."
-msgstr ""
+msgstr "Emandako bariantza-kobariantza matrizea ez da positibo definitua."
 
 msgid "The Variance-Covariance Matrix could not be computed: There must be as many 'Correlation Matrix' entries as is the number of estimates within the largest 'Cluster'."
 msgstr ""
+"Bariantza-Kobariantza Matrizea ezin izan da kalkulatu: 'Kluster' handienean "
+"dauden estimazio kopuruaren araberako 'Korrelazio Matrizea' sarrera kopurua "
+"egon behar da."
 
 msgid "Error computing the variance-covariance matrix: %1$s"
-msgstr ""
+msgstr "Errorea bariantza-kobariantza matrizea kalkulatzean: %1$s"
 
 msgid "Please provide a file with the precomputed variance-covariance matrix."
 msgstr ""
+"Mesedez, eman aldez aurretik kalkulatutako bariantza-kobariantza matrizea "
+"duen fitxategi bat."
 
 msgid "Please provide a clustering variable for the correlation matrix."
-msgstr ""
+msgstr "Mesedez, eman korrelazio-matrizearen multzokatze-aldagai bat."
 
 msgid "Please provide correlation matrix variables."
-msgstr ""
+msgstr "Mesedez, eman korrelazio-matrizearen aldagaiak."
 
 msgid "The value of the correlation between construct types is set to 0. This corresponds to no adjustment for dependency between construct types."
 msgstr ""
+"Eraikuntza moten arteko korrelazioaren balioa 0ra ezarrita dago. Horrek esan "
+"nahi du ez dagoela eraikuntza moten arteko mendekotasunerako doikuntzarik."
 
 msgid "Please provide a file with the correlation matrix for the construct types."
-msgstr ""
+msgstr "Mesedez, eman eraikuntza moten korrelazio matrizea duen fitxategi bat."
 
 msgid "The value of the correlation between construct types is set to 0. This corresponds to no adjustment for dependency between constructs."
 msgstr ""
+"Eraikuntza moten arteko korrelazioaren balioa 0ra ezarrita dago. Horrek esan "
+"nahi du ez dagoela konstruktuen arteko mendekotasunerako doikuntzarik."
 
 msgid "Please provide a file with the correlation matrix for the construct."
-msgstr ""
+msgstr "Mesedez, eman konstruktuaren korrelazio matrizea duen fitxategi bat."
 
 msgid "The value of the correlation between time lags is set to 0. This corresponds to no adjustment for dependency between time lags."
 msgstr ""
+"Denbora-atzerapenen arteko korrelazioaren balioa 0ra ezarrita dago. Horrek "
+"denbora-atzerapenen arteko menpekotasuna doitzeko doikuntzarik ez dagoela "
+"adierazten du."
 
 msgid "The 'Group Size' for specifying dependency due to common group comparison is unspecified. As default, the groups are assumed to be equal."
 msgstr ""
+"Taldeen konparaketa arruntagatiko mendekotasuna zehazteko 'Taldearen "
+"tamaina' zehaztu gabe dago. Berez, taldeak berdinak direla suposatzen da."
 
 msgid "Error writing the variance-covariance matrix file: %1$s"
-msgstr ""
+msgstr "Errorea bariantza-kobariantza matrizearen fitxategia idaztean: %1$s"
 
 msgid "Random Effects / Model Stucture Summary"
-msgstr ""
+msgstr "Ausazko efektuak / Ereduaren egituraren laburpena"
 
 msgid "Simple / Nested Summary"
-msgstr ""
+msgstr "Laburpen sinplea / txertatua"
 
 msgid "Estimates"
-msgstr ""
+msgstr "Estimazioak"
 
 msgid "σ²"
-msgstr ""
+msgstr "σ²"
 
 msgid "σ"
-msgstr ""
+msgstr "σ"
 
 msgid "Levels"
-msgstr ""
+msgstr "Mailak"
 
 msgid "Fixed"
-msgstr ""
+msgstr "Konpondua"
 
 msgid "Confidence Intervals"
-msgstr ""
+msgstr "Konfiantza-tarteak"
 
 msgid "Inclusion Tests"
-msgstr ""
+msgstr "Inklusio probak"
 
 msgid "Component Inclusion Test"
-msgstr ""
+msgstr "Osagaien Inklusio Proba"
 
 msgid "%1$s: Level Inclusion Test"
-msgstr ""
+msgstr "%1$s: Maila Inklusiboko Proba"
 
 msgid "Removed Levels"
-msgstr ""
+msgstr "Kendutako mailak"
 
 msgid "Removed Component"
-msgstr ""
+msgstr "Kendutako osagaia"
 
 msgid "LRT"
-msgstr ""
+msgstr "LRT"
 
 msgid "Likelihood Ratio Test (LRT) and p-value are based on a comparison with the complete model."
 msgstr ""
+"Probabilitate-erlazioaren testa (LRT) eta p-balioa eredu osoarekin "
+"alderatzean oinarritzen dira."
 
 msgid "Random Slopes Summary"
-msgstr ""
+msgstr "Ausazko malden laburpena"
 
 msgid "Structured"
-msgstr ""
+msgstr "Egituratua"
 
 msgid "Summary"
-msgstr ""
+msgstr "Laburpena"
 
 msgid "Autoregressive"
-msgstr ""
+msgstr "Autoerregresiboa"
 
 msgid "Spatial"
-msgstr ""
+msgstr "Espaziala"
 
 msgid "Known Correlation Summary"
-msgstr ""
+msgstr "Ezagutzen den korrelazioaren laburpena"
 
 msgid "Testing Inclusion of Random Effects / Model Structure"
-msgstr ""
+msgstr "Ausazko efektuen / ereduaren egituraren inklusioa probatzea"
 
 msgid "Subgroup %1$s: Testing Inclusion of Random Effects / Model Structure"
 msgstr ""
+"%1$s azpitaldea: Ausazko efektuen inklusioa / ereduaren egitura probatzea"
 
 msgid "Testing Inclusion of Nested Random Effects: %1$s"
-msgstr ""
+msgstr "Ausazko efektu txertatuen inklusioa probatzen: %1$s"
 
 msgid "Subgroup %1$s: Testing Inclusion of Nested Random Effects: %2$s"
-msgstr ""
+msgstr "%1$s azpitaldea: Ausazko efektu txertatuen inklusioa probatzen: %2$s"
 
 msgid "Random Slopes"
-msgstr ""
+msgstr "Ausazko maldak"
 
 msgid "Compound Symmetry"
-msgstr ""
+msgstr "Simetria konposatua"
 
 msgid "Heteroscedastic Compound Symmetry"
-msgstr ""
+msgstr "Simetria Konposatu Heteroskedastikoa"
 
 msgid "Unstructured"
-msgstr ""
+msgstr "Egituratu gabea"
 
 msgid "Identity"
-msgstr ""
+msgstr "Identitatea"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "Diagonala"
 
 msgid "AR(1)"
-msgstr ""
+msgstr "AR(1)"
 
 msgid "Heteroskedastic AR(1)"
-msgstr ""
+msgstr "Heteroskedastiko AR(1)"
 
 msgid "Continuous-Time AR"
-msgstr ""
+msgstr "Denbora Jarraituko AR"
 
 msgid "Exponential"
-msgstr ""
+msgstr "Esponentziala"
 
 msgid "Gaussian"
-msgstr ""
+msgstr "Gaussiarra"
 
 msgid "Linear"
-msgstr ""
+msgstr "Lineala"
 
 msgid "Rational Quadratic"
-msgstr ""
+msgstr "Ekuazio koadratiko arrazionala"
 
 msgid "Spherical"
-msgstr ""
+msgstr "Esferikoa"
 
 msgid "Sqrt. Estimate"
-msgstr ""
+msgstr "Karratuaren estimazioa"
 
 msgid "Levels:"
-msgstr ""
+msgstr "Mailak:"
 
 msgid "Component:"
-msgstr ""
+msgstr "Osagaia:"
 
 msgid "Estimates 𝜏²"
-msgstr ""
+msgstr "Estimazioak 𝜏²"
 
 msgid "Estimates ρ"
-msgstr ""
+msgstr "ρ estimazioak"
 
 msgid "ρ"
-msgstr ""
+msgstr "ρ"
 
 msgid "%s Summary"
-msgstr ""
+msgstr "%s Laburpena"
 
 msgid "metamisc package failed with the following error: '%s'"
-msgstr ""
+msgstr "metamisc paketeak huts egin du errore honekin: '%s'"
 
 msgid "Based on %i studies."
-msgstr ""
+msgstr "%i ikerketetan oinarrituta."
 
 msgid "The model was estimated using %1$s method with %2$s link function."
-msgstr ""
+msgstr "Modeloa %1$s metodoa eta %2$s esteka funtzioa erabiliz kalkulatu da."
 
 msgid "The model was estimated using MCMC with %1$s link function."
-msgstr ""
+msgstr "Modeloa %1$s esteka funtzioarekin MCMC erabiliz kalkulatu da."
 
 msgid "Forest plot"
-msgstr ""
+msgstr "Baso-lursaila"
 
 msgid "Observed-Expected Ratio"
-msgstr ""
+msgstr "Behatutako-Esperotako Erlazioa"
 
 msgid "Concordance Statistic"
-msgstr ""
+msgstr "Konkordantzia Estatistika"
 
 msgid "Funnel Plot Asymmetry Tests"
-msgstr ""
+msgstr "Inbutu-diagrama asimetriko probak"
 
 msgid "Method"
-msgstr ""
+msgstr "Metodoa"
 
 msgid "t-statistic"
-msgstr ""
+msgstr "t-estatistika"
 
 msgid "The %1$s test failed with the following error: %2$s"
-msgstr ""
+msgstr "%1$s probak huts egin du errore honekin: %2$s"
 
 msgid "Funnel Plot Asymmetry Plots"
-msgstr ""
+msgstr "Inbutu-diagrama asimetrikoen grafikoak"
 
 msgid "Egger (unweighted)"
-msgstr ""
+msgstr "Egger (pisurik gabe)"
 
 msgid "Egger (multiplicative overdispersion)"
-msgstr ""
+msgstr "Egger (gehiegizko dispertsio biderkatzailea)"
 
 msgid "Macaskill"
-msgstr ""
+msgstr "Macaskill"
 
 msgid "Macaskill (pooled)"
-msgstr ""
+msgstr "Macaskill (multzoa)"
 
 msgid "Peters"
-msgstr ""
+msgstr "Peters"
 
 msgid "Debray"
-msgstr ""
+msgstr "Debray"
 
 msgid "Standard error"
-msgstr ""
+msgstr "Errore estandarra"
 
 msgid "Sample size"
-msgstr ""
+msgstr "Laginaren tamaina"
 
 msgid "Total events"
-msgstr ""
+msgstr "Gertaera guztiak"
 
 msgid "Cannot compute outcomes. Chech that all of the required information is specified via the appropriate arguments (i.e. an Effect Size and either Standard Error, Sampling Variance, or 95%% Confidence Interval)."
 msgstr ""
+"Ezin dira emaitzak kalkulatu. Egiaztatu beharrezko informazio guztia "
+"argumentu egokien bidez zehaztuta dagoela (hau da, Efektuaren Tamaina eta "
+"Errore Estandarra, Laginketa Bariantza edo %95eko Konfiantza Tartea)."
 
 msgid "Step"
-msgstr ""
+msgstr "Urratsa"
 
 msgid "Computed"
-msgstr ""
+msgstr "Kalkulatua"
 
 msgid "Total Computed"
-msgstr ""
+msgstr "Guztira kalkulatua"
 
 msgid "Effect sizes were successfully computed for each data entry."
-msgstr ""
+msgstr "Efektu-tamainak arrakastaz kalkulatu dira datu-sarrera bakoitzerako."
 
 msgid "Effect sizes were successfully computed for %1$i out of %2$i data entries."
 msgstr ""
+"Efektu-tamainak arrakastaz kalkulatu dira %2$i datu-sarreratik %1$i-rako."
 
 msgid "Error in Step %1$i:"
-msgstr ""
+msgstr "Errorea %1$i urratsean:"
 
 msgid "Model Information"
-msgstr ""
+msgstr "Modeloaren informazioa"
 
 msgid "Publication Bias: %1$s"
-msgstr ""
+msgstr "Argitalpen-alborapena: %1$s"
 
 msgid "The fixed effect effect size could not be calculated."
-msgstr ""
+msgstr "Efektu finkoaren efektuaren tamaina ezin izan da kalkulatu."
 
 msgid "Fixed Effect Estimate"
-msgstr ""
+msgstr "Efektu Finkoaren Estimazioa"
 
 msgid "Pooled Effect"
-msgstr ""
+msgstr "Efektu metatua"
 
 msgid "Intercept Estimate"
-msgstr ""
+msgstr "Interzepzioaren Estimazioa"
 
 msgid "Full Dataset"
-msgstr ""
+msgstr "Datu-multzo osoa"
 
 msgid "Missing Data Summary"
-msgstr ""
+msgstr "Datu faltaren laburpena"
 
 msgid "The dataset contains missing values: %1$i missing values were removed from the analysis."
-msgstr ""
+msgstr "Datu-multzoak balio falta ditu: %1$i balio falta kendu dira analisitik."
 
 msgid "Funnel Plot"
-msgstr ""
+msgstr "Inbutu-diagrama"
 
 msgid "Funnel plot prediction interval was specified in an incorrect format. Try '(0.90, 0.95, 0.99)'."
 msgstr ""
+"Inbutu-diagramaren iragarpen-tartea formatu okerrean zehaztu da. Saiatu '("
+"0.90, 0.95, 0.99)'."
 
 msgid "Funnel plot prediction intervals must be between 0 and 1."
-msgstr ""
+msgstr "Inbutu-diagramaren iragarpen-tarteak 0 eta 1 artean egon behar dira."
 
 msgid "Funnel plot prediction intervals must be specified."
-msgstr ""
+msgstr "Inbutu-diagramaren iragarpen-tarteak zehaztu behar dira."
 
 msgid "Power enhancement breaks were specified in an incorrect format. Try '(0.30, 0.50, 0.80)'."
 msgstr ""
+"Potentzia hobetzeko etenaldiak formatu okerrean zehaztu dira. Saiatu '(0.30, "
+"0.50, 0.80)'."
 
 msgid "At least one power enhancement break must be specified."
-msgstr ""
+msgstr "Gutxienez potentzia hobetzeko etenaldi bat zehaztu behar da."
 
 msgid "Power enhancement breaks must be between 0.05 and 1."
-msgstr ""
+msgstr "Potentzia hobetzeko etenaldiak 0,05 eta 1 artean egon behar dira."
 
 msgid "Power"
-msgstr ""
+msgstr "Potentzia"
 
 msgid "H₁ Funnel Parameter Estimates"
-msgstr ""
+msgstr "H₁ Inbutuaren Parametroen Estimazioak"
 
 msgid "Estimate μ"
-msgstr ""
+msgstr "Estimatu μ"
 
 msgid "Lower 95%% CI"
-msgstr ""
+msgstr "%95eko CI baxuagoa"
 
 msgid "Upper 95%% CI"
-msgstr ""
+msgstr "Goiko %95eko CI"
 
 msgid "Estimate 𝜏"
-msgstr ""
+msgstr "Estimatu 𝜏"
 
 msgid "The funnel plot parameter estimation failed with the following error:"
-msgstr ""
+msgstr "Inbutu-diagramaren parametroen estimazioak huts egin du errore honekin:"
 
 msgid "Trim and Fill Parameter Estimates"
-msgstr ""
+msgstr "Moztu eta Bete Parametroen Estimazioak"
 
 msgid "Missing Estimates"
-msgstr ""
+msgstr "Falta diren estimazioak"
 
 msgid "Trim and Fill"
-msgstr ""
+msgstr "Moztu eta bete"
 
 msgid "Adjusted Estimate μ"
-msgstr ""
+msgstr "Estimazio doitua μ"
 
 msgid "Adjusted Estimate 𝜏"
-msgstr ""
+msgstr "Estimazio doitua"
 
 msgid "Meta-Regression Test for Funnel Plot Asymmetry"
-msgstr ""
+msgstr "Inbutu-diagramaren asimetriaren meta-erregresio-proba"
 
 msgid "Asymmetry Test"
-msgstr ""
+msgstr "Asimetria proba"
 
 msgid "Limit Estimate μ"
-msgstr ""
+msgstr "Muga-estimazioa μ"
 
 msgid "Weighted Regression Test for Funnel Plot Asymmetry"
-msgstr ""
+msgstr "Inbutu-diagramaren asimetriarako pisuzko erregresio-proba"
 
 msgid "Rank Correlation Test for Funnel Plot Asymmetry"
-msgstr ""
+msgstr "Inbutu-diagramaren asimetriarako sailkapen-korrelazio-proba"
 
 msgid "Fail-Safe N"
-msgstr ""
+msgstr "Segurtasun-aurkako N"
 
 msgid "Fail-Safe N Summary Table"
-msgstr ""
+msgstr "Segurtasun-aurkako N laburpen-taula"
 
 msgid "Rosenthal"
-msgstr ""
+msgstr "Rosenthal"
 
 msgid "Orwin"
-msgstr ""
+msgstr "Orwin"
 
 msgid "Rosenberg"
-msgstr ""
+msgstr "Rosenberg"
 
 msgid "General"
-msgstr ""
+msgstr "Orokorra"
 
 msgid "The funnel plot asymmetry test failed with the following error:"
-msgstr ""
+msgstr "Inbutu-diagramaren asimetria-probak huts egin du errore honekin:"
 
 msgid "The funnel plot asymmetry test at level %1$s failed with the following error:"
 msgstr ""
+"%1$s mailako inbutu-diagramaren asimetria-probak huts egin du errore honekin:"
 
 msgid "The meta-analytic model did not converge. Try modifying the 'Method' option."
-msgstr ""
+msgstr "Metaanalisi eredua ez da bat etorri. Saiatu 'Metodoa' aukera aldatzen."
 
 msgid "The method is not available with only one observation."
-msgstr ""
+msgstr "Metodoa ez dago erabilgarri behaketa bakarrarekin."
 
 msgid "The %1$s fail-safe N calculation %2$sfailed with the following error:"
 msgstr ""
+"%1$s-en hutsegiteen aurkako N kalkulua %2$s-ek huts egin du errore honekin:"
 
 msgid "The 'Correlation/Covariance Matrix' variable input contains the following variable that does not contain the variable name separator '%1$s': %2$s."
 msgstr ""
+"'Korrelazio/Kobariantza Matrizea' aldagaiaren sarrerak aldagai-izenaren "
+"bereizlea ez duen '%1$s' aldagai-izenaren bereizlea dauka: %2$s."
 
 msgid "The correlation matrix contains values outside the range of -1 and 1. Please check your input."
 msgstr ""
+"Korrelazio matrizeak -1 eta 1 tartetik kanpoko balioak ditu. Mesedez, "
+"egiaztatu zure sarrera."
 
 msgid "The 'Means' variable input contains the following variable that is not specified in the 'Correlation/Covariance Matrix' variable input: %1$s."
 msgstr ""
+"'Batez bestekoak' aldagaiaren sarrerak 'Korrelazio/Kobariantza Matrizea' "
+"aldagaiaren sarreran zehaztuta ez dagoen aldagai hau dauka: %1$s."
 
 msgid "Available Variable Names"
-msgstr ""
+msgstr "Eskuragarri dauden aldagai-izenak"
 
 msgid "Descriptives"
-msgstr ""
+msgstr "Deskribapenak"
 
 msgid "%1$s: %1$s Matrix"
-msgstr ""
+msgstr "%1$s: %1$s Matrizea"
 
 msgid "Variable"
-msgstr ""
+msgstr "Aldagaia"
 
 msgid "%1$s: Means"
-msgstr ""
+msgstr "%1$s: Esan nahi du"
 
 msgid "Pooled %1$s Matrix"
-msgstr ""
+msgstr "%1$s matrizea multzokatua"
 
 msgid "The pooled correlation/covariance matrix could not be computed. Consider verifying that all correlation/covariance matrix variables are correctly specified via 'Descriptives'."
 msgstr ""
+"Ezin izan da kalkulatu korrelazio/kobariantza matrizea. Kontuan hartu "
+"egiaztatzea korrelazio/kobariantza matrizearen aldagai guztiak behar bezala "
+"zehaztuta daudela 'Deskribapenak' atalean."
 
 msgid "Correlation"
-msgstr ""
+msgstr "Korrelazioa"
 
 msgid "Covariance"
-msgstr ""
+msgstr "Kobariantza"
 
 msgid "Random Effect"
-msgstr ""
+msgstr "Ausazko efektua"
 
 msgid "Random Effect Covariance"
-msgstr ""
+msgstr "Ausazko efektuaren kobariantza"
 
 msgid "Pooled %1$s Matrix Parameters"
-msgstr ""
+msgstr "%1$s matrizearen parametro multzokatuak"
 
 msgid "Row"
-msgstr ""
+msgstr "Ilara"
 
 msgid "Column"
-msgstr ""
+msgstr "Zutabea"
 
 msgid "95%% CI"
-msgstr ""
+msgstr "%95eko CI"
 
 msgid "Computing additional fit measures: %1$s"
-msgstr ""
+msgstr "Gehigarrizko doikuntza neurriak kalkulatzen: %1$s"
 
 msgid "SEM Fit Measures"
-msgstr ""
+msgstr "SEM egokitzapen neurriak"
 
 msgid "CLI"
-msgstr ""
+msgstr "CLI"
 
 msgid "TLI"
-msgstr ""
+msgstr "TLI"
 
 msgid "RMSEA"
-msgstr ""
+msgstr "RMSEA"
 
 msgid "p(RMSEA < 0.05)"
-msgstr ""
+msgstr "p(RMSEA < 0,05)"
 
 msgid "Pairwise Model Comparison"
-msgstr ""
+msgstr "Bikoteka ereduen konparaketa"
 
 msgid "2ΔLL"
-msgstr ""
+msgstr "2ΔLL"
 
 msgid "Δ df"
-msgstr ""
+msgstr "Δ df"
 
 msgid "At least two models are required for pairwise model comparison."
-msgstr ""
+msgstr "Gutxienez bi modelo behar dira bikoteka alderatzeko."
 
 msgid "No pairwise model comparison with at least one degree of freedom difference available."
 msgstr ""
+"Ez dago gutxienez askatasun-gradu bateko diferentzia duen bikoteka egindako "
+"ereduen konparaketarik eskuragarri."
 
 msgid "Regression Estimates"
-msgstr ""
+msgstr "Erregresio-estimazioak"
 
 msgid "Mean/Intercept Estimates"
-msgstr ""
+msgstr "Batez besteko/ebakidura estimazioak"
 
 msgid "Covariance Estimates"
-msgstr ""
+msgstr "Kobariantza-estimazioak"
 
 msgid "Random Effects Estimates"
-msgstr ""
+msgstr "Ausazko Efektuen Estimazioak"
 
 msgid "Model fit failed with the following message: %1$s."
-msgstr ""
+msgstr "Modeloaren doikuntzak huts egin du mezu hau erakutsiz: %1$s."
 
 msgid "The model should contain at least one predictor or an intercept."
-msgstr ""
+msgstr "Modeloak gutxienez iragarle edo ebakidura bat izan behar du."
 
 msgid "Coefficients"
-msgstr ""
+msgstr "Koefizienteak"
 
 msgid "At least one predictor needs to be specified."
-msgstr ""
+msgstr "Gutxienez aurreikusle bat zehaztu behar da."
 
 msgid "%1$s observations were ommited due to missing values."
-msgstr ""
+msgstr "%1$s behaketa kendu dira balio falta direla eta."
 
 msgid "Posterior distribution"
-msgstr ""
+msgstr "Atzeko banaketa"
 
 msgid "Sampling diagnostics"
-msgstr ""
+msgstr "Laginketa diagnostikoak"
 
 msgid "Autocorrelation (%1$s)"
-msgstr ""
+msgstr "Autokorrelazioa (%1$s)"
 
 msgid "Inference possibly unreliable -- MCMC chains might not have converged; The largest R-hat is %1$.3f > 1.01. To lower R-hat please increase 'Iterations', or 'Adapt delta' in the Options section."
 msgstr ""
+"Inferentzia agian ez da fidagarria -- MCMC kateak agian ez dira konbergitu; "
+"R-hat handiena %1$.3f > 1.01 da. R-hat jaisteko, handitu 'Iterazioa' edo "
+"'Egokitu delta' Aukeren atalean."
 
 msgid "Low estimation accuracy -- The smallest Effective Sample Size (ESS) is %1$.2f < %2$1.0f. To increase accuracy please increase 'Iterations', or 'Adapt delta' in the Options section."
 msgstr ""
+"Estimazio-zehaztasun txikia -- Lagin-tamaina eraginkor txikiena (ESS) %1$.2f "
+"< %2$1.0f da. Zehaztasuna handitzeko, handitu 'Iterazioen' edo 'Egokitu "
+"delta' Aukerak atalean."
 
 msgid "Interaction terms are currently not possible in Bayesian meta-analyses."
 msgstr ""
+"Elkarrekintza-terminoak ez dira posible gaur egun Bayes-en metaanalisietan."
 
 msgid "Estimating Marginal Means"
-msgstr ""
+msgstr "Batez besteko marjinalak kalkulatzea"
 
 msgid "At least one prior distribution for the Effect component has to be specified."
-msgstr ""
+msgstr "Efektu osagaiarentzako gutxienez aurreko banaketa bat zehaztu behar da."
 
 msgid "At least one prior distribution for the Heterogeneity component has to be specified."
 msgstr ""
+"Heterogeneotasun osagaiarentzako gutxienez aurreko banaketa bat zehaztu "
+"behar da."
 
 msgid "At least one prior distribution for the %1$s moderator component has to be specified."
 msgstr ""
+"%1$s moderatzaile osagaiarentzako gutxienez aurreko banaketa bat zehaztu "
+"behar da."
 
 msgid "Both priors distributions for the %1$s moderator component must have the same contrast type."
 msgstr ""
+"%1$s moderatzaile osagaiaren bi aurrien banaketek kontraste mota bera izan "
+"behar dute."
 
 msgid "At least one prior distribution for the Publication Bias component has to be specified."
 msgstr ""
+"Argitalpen-alborapenaren osagaiarentzako gutxienez aurreko banaketa bat "
+"zehaztu behar da."
 
 msgid "At least one prior distribution for the Baseline component has to be specified."
 msgstr ""
+"Oinarrizko osagaiarentzako gutxienez aurreko banaketa bat zehaztu behar da."
 
 msgid "The priors for publication bias were set incorrectly."
-msgstr ""
+msgstr "Argitalpen-alborapenaren aurrizko balioak gaizki ezarri ziren."
 
 msgid "Model Specification"
-msgstr ""
+msgstr "Modeloaren zehaztapena"
 
 msgid "Model Components"
-msgstr ""
+msgstr "Modeloaren osagaiak"
 
 msgid "Models"
-msgstr ""
+msgstr "Modeloak"
 
 msgid "P(M)"
-msgstr ""
+msgstr "P(M)"
 
 msgid "Prior Distributions %1$s"
-msgstr ""
+msgstr "Aurreko banaketak %1$s"
 
 msgid "Prior Distributions Moderators"
-msgstr ""
+msgstr "Aurreko Banaketa Moderatzaileak"
 
 msgid "Alternative"
-msgstr ""
+msgstr "Alternatiba"
 
 msgid "Null"
-msgstr ""
+msgstr "Nulua"
 
 msgid "P(M|data)"
-msgstr ""
+msgstr "P(M|datuak)"
 
 msgid "The analysis will estimate a complex meta-analytic model ensemble using MCMC and might require a prolonged time to complete."
 msgstr ""
+"Analisiak MCMC erabiliz meta-analisi eredu multzo konplexu bat kalkulatuko "
+"du eta denbora luzea behar izan dezake osatzeko."
 
 msgid "The model fit for subgroup '%1$s' resulted in the following warning: %2$s"
-msgstr ""
+msgstr "'%1$s' azpitalderako ereduaren egokitzapenak abisu hau eragin du: %2$s"
 
 msgid "The model fit resulted in the following warning: %1$s"
-msgstr ""
+msgstr "Modeloaren doikuntzak abisu hau eragin zuen: %1$s"
 
 msgid "Conditional Meta-Analytic Estimates"
-msgstr ""
+msgstr "Baldintzapeko Metaanalisi Estimazioak"
 
 msgid "Median"
-msgstr ""
+msgstr "Mediana"
 
 msgid "Conditional estimates are based on models assuming the presence of a given component."
 msgstr ""
+"Baldintzapeko estimazioak osagai jakin baten presentzia suposatzen duten "
+"ereduetan oinarritzen dira."
 
 msgid "Standardized Conditional Meta-Regression Coefficients"
-msgstr ""
+msgstr "Estandarizatutako Baldintzapeko Meta-Erregresio Koefizienteak"
 
 msgid "Standardized Meta-Regression Coefficients"
-msgstr ""
+msgstr "Meta-erregresio koefiziente estandarizatuak"
 
 msgid "Conditional Meta-Regression Coefficients"
-msgstr ""
+msgstr "Baldintzapeko Meta-Erregresio Koefizienteak"
 
 msgid "Meta-Regression Coefficients"
-msgstr ""
+msgstr "Meta-erregresio koefizienteak"
 
 msgid "Conditional Publication Bias Adjustment Estimates (Weight Function)"
 msgstr ""
+"Baldintzapeko Argitalpenaren Alborapenaren Doikuntza Estimazioak (Pisu "
+"Funtzioa)"
 
 msgid "Publication Bias Adjustment Estimates (Weight Function)"
-msgstr ""
+msgstr "Argitalpenaren Alborapenaren Doikuntza Estimazioak (Pisu Funtzioa)"
 
 msgid "<em>p</em>-Values Interval"
-msgstr ""
+msgstr "<em>p</em>-Balioen tartea"
 
 msgid "Conditional Publication Bias Adjustment Estimates (PET-PEESE)"
 msgstr ""
+"Baldintzapeko Argitalpenaren Alborapenaren Doikuntza Estimazioak (PET-PEESE)"
 
 msgid "Publication Bias Adjustment Estimates (PET-PEESE)"
-msgstr ""
+msgstr "Argitalpenaren Alborapenaren Doikuntza Estimazioak (PET-PEESE)"
 
 msgid "Estimated Conditional Marginal Means"
-msgstr ""
+msgstr "Kalkulatutako Batez besteko Marjinal Baldintzatuak"
 
 msgid "Conditional %1$s"
-msgstr ""
+msgstr "Baldintzapeko %1$s"
 
 msgid "Conditional Estimated Marginal Means"
-msgstr ""
+msgstr "Baldintzapeko Estimazio Marjinal Batezbestekoak"
 
 msgid "The Bayes factor test for the adjusted estimate is not available for meta-regressions with non-centered parameteriazation."
 msgstr ""
+"Doitutako estimaziorako Bayes faktorearen testa ez dago erabilgarri "
+"parametrizazio ez-zentratua duten meta-erregresioetarako."
 
 msgid "Adjusted Effect"
-msgstr ""
+msgstr "Doitutako efektua"
 
 msgid "Moderation: Estimated Marginal Means"
-msgstr ""
+msgstr "Moderazioa: Batez besteko marjinal estimatuak"
 
 msgid "Moderation"
-msgstr ""
+msgstr "Moderazioa"
 
 msgid "Weight Function"
-msgstr ""
+msgstr "Pisu funtzioa"
 
 msgid "PET-PEESE"
-msgstr ""
+msgstr "PET-PEESE"
 
 msgid "P-Value"
-msgstr ""
+msgstr "P-Balioa"
 
 msgid "Diagnostics Summary"
-msgstr ""
+msgstr "Diagnostikoen laburpena"
 
 msgid "MCMC error"
-msgstr ""
+msgstr "MCMC errorea"
 
 msgid "MCMC error/SD"
-msgstr ""
+msgstr "MCMC errorea/SD"
 
 msgid "ESS"
-msgstr ""
+msgstr "ESS"
 
 msgid "R-hat"
-msgstr ""
+msgstr "R-txapela"
 
 msgid "Weights"
-msgstr ""
+msgstr "Pisuak"
 
 msgid "PET"
-msgstr ""
+msgstr "PET"
 
 msgid "PEESE"
-msgstr ""
+msgstr "PIZARRA"
 
 msgid "Trace Plot"
-msgstr ""
+msgstr "Trazadura-diagrama"
 
 msgid "Autocorrelation Plot"
-msgstr ""
+msgstr "Autokorrelazio grafikoa"
 
 msgid "Density Plot"
-msgstr ""
+msgstr "Dentsitate-diagrama"
 
 msgid "Please select at least one 'Type' of diagnostics plot (e.g., 'Trace', 'Autocorrelation' or 'Posterior samples density')."
 msgstr ""
+"Hautatu gutxienez diagnostiko-diagrama 'Mota' bat (adibidez, 'Aztarna', "
+"'Autokorrelazioa' edo 'Atzeko laginen dentsitatea')."
 
 msgid "RoBMA R Code"
-msgstr ""
+msgstr "RoBMA R kodea"
 
 msgid "Publication Bias Adjustment Summary"
-msgstr ""
+msgstr "Argitalpenaren Alborapenaren Doikuntzaren Laburpena"
 
 msgid "Estimated Marginal Means Summary"
-msgstr ""
+msgstr "Kalkulatutako Marjina Batez bestekoen Laburpena"
 
 msgid "Prior and Posterior Plots"
-msgstr ""
+msgstr "Aurreko eta ondorengo grafikoak"
 
 msgid "Diagnostics"
-msgstr ""
+msgstr "Diagnostikoak"
 
 msgid "Adjusted effect"
-msgstr ""
+msgstr "Doitutako efektua"
 
 msgid "Subgroup %1$s, %2$s"
-msgstr ""
+msgstr "%1$s azpitaldea, %2$s"
 
 msgid "Effect intercept"
-msgstr ""
+msgstr "Efektuaren interzepzioa"
 
 msgid "Publication bias"
-msgstr ""
+msgstr "Argitalpen-alborapena"
 
 msgid "Baseline"
-msgstr ""
+msgstr "Oinarrizko lerroa"
 
 msgid "Inclusion BF"
-msgstr ""
+msgstr "Inklusio BF"
 
 msgid "Exclusion BF"
-msgstr ""
+msgstr "BF bazterketa"
 
 msgid "log(Inclusion BF)"
-msgstr ""
+msgstr "log(Inklusio BF)"
 
 msgid "Large Bayes factors, i.e., BF > 100 or BF < 1/100, might be computationally unstable (a small change in posterior inclusion probability corresponds to a very large change in the Bayes factor). Consider increasing the number of chains and posterior samples to obtain more stable estimates."
 msgstr ""
+"Bayes faktore handiak, hau da, BF > 100 edo BF < 1/100, konputazionalki "
+"ezegonkorrak izan daitezke (atzeragoko inklusio-probabilitatearen aldaketa "
+"txiki batek Bayes faktorearen aldaketa oso handi bat dakar). Kontuan hartu "
+"kateen eta atzeragoko laginen kopurua handitzea estimazio egonkorragoak "
+"lortzeko."
 
 msgid "Cannot compute results. All entries of the p-value variable (%s) must be between 0 and 1."
 msgstr ""
+"Ezin dira emaitzak kalkulatu. p-balio aldagaiaren (%s) sarrera guztiak 0 eta "
+"1 artean egon behar dira."
 
 msgid "Cannot compute results. All entries of the correlation coefficient variable (%s) must be between -1 and 1."
 msgstr ""
+"Ezin dira emaitzak kalkulatu. Korrelazio-koefizientearen aldagaiaren (%s) "
+"sarrera guztiak -1 eta 1 artean egon behar dira."
 
 msgid "Cannot compute results. All entries of the sample size variable (%s) must be greater than four."
 msgstr ""
+"Ezin dira emaitzak kalkulatu. Laginaren tamaina aldagaiaren (%s) sarrera "
+"guztiak lau baino handiagoak izan behar dira."
 
 msgid "The p-value cutoffs were set incorectly."
-msgstr ""
+msgstr "p-balioaren mugak gaizki ezarri ziren."
 
 msgid "At least one p-value cutoff needs to be set."
-msgstr ""
+msgstr "Gutxienez p-balioaren muga bat ezarri behar da."
 
 msgid "All p-value cutoffs needs to be between 0 and 1."
-msgstr ""
+msgstr "p-balioaren muga guztiak 0 eta 1 artean egon behar dira."
 
 msgid "95%% Confidence Interval"
-msgstr ""
+msgstr "%95eko konfiantza-tartea"
 
 msgid "Note:"
-msgstr ""
+msgstr "Oharra:"
 
 msgid "%1$s is on %2$s scale."
-msgstr ""
+msgstr "%1$s %2$s eskalan dago."
 
 msgid "<em>p</em>-values interval(one-sided)"
-msgstr ""
+msgstr "<em>p</em>-balioen tartea (alde bakarrekoa)"
 
 msgid "Model Tests"
-msgstr ""
+msgstr "Eredu probak"
 
 msgid "Test of Heterogeneity"
-msgstr ""
+msgstr "Heterogeneotasun proba"
 
 msgid "Test of Publication Bias"
-msgstr ""
+msgstr "Argitalpen-alborapenaren proba"
 
 msgid "ChiSq"
-msgstr ""
+msgstr "ChiSq"
 
 msgid "Assuming homogeneity"
-msgstr ""
+msgstr "Homogeneotasuna suposatuz"
 
 msgid "Assuming heterogeneity"
-msgstr ""
+msgstr "Heterogeneotasuna suposatuz"
 
 msgid "Fixed Effects Estimates"
-msgstr ""
+msgstr "Efektu Finkoen Estimazioak"
 
 msgid "Mean Estimates (%s)"
-msgstr ""
+msgstr "Batez besteko estimazioak (%s)"
 
 msgid "Estimated Weights"
-msgstr ""
+msgstr "Pisu estimatuak"
 
 msgid "Heterogeneity Estimates(%s)"
-msgstr ""
+msgstr "Heterogeneotasun Estimazioak (%s)"
 
 msgid "p-value Frequency"
-msgstr ""
+msgstr "p-balioa Maiztasuna"
 
 msgid "Frequency"
-msgstr ""
+msgstr "Maiztasuna"
 
 msgid "There were no p-value cutoffs after their automatic reduction. The displayed frequencies correspond to the non-reduced p-value cutoffs."
 msgstr ""
+"Ez zegoen p-balio mugarik haien murrizketa automatikoaren ondoren. "
+"Bistaratutako maiztasunak murriztu gabeko p-balio mugak dira."
 
 msgid "Weight Function (%s)"
-msgstr ""
+msgstr "Pisu funtzioa (%s)"
 
 msgid "The figure could not be created since one of the estimates is not a number."
-msgstr ""
+msgstr "Ezin izan da zifra sortu, kalkuluetako bat ez baita zenbaki bat."
 
 msgid "P-value (One-sided)"
-msgstr ""
+msgstr "P-balioa (alde bakarrekoa)"
 
 msgid "Publication Probability"
-msgstr ""
+msgstr "Argitalpen Probabilitatea"
 
 msgid "Mean Model Estimates (%s)"
-msgstr ""
+msgstr "Batez besteko ereduaren estimazioak (%s)"
 
 msgid "Fixed effects (adjusted)"
-msgstr ""
+msgstr "Efektu finkoak (egokituak)"
 
 msgid "Random effects (adjusted)"
-msgstr ""
+msgstr "Ausazko efektuak (egokituta)"
 
 msgid "Fixed effects model:"
-msgstr ""
+msgstr "Efektu finkoen eredua:"
 
 msgid "Random effects model:"
-msgstr ""
+msgstr "Ausazko efektuen eredua:"
 
 msgid "%sThe optimizer failed to find a solution. Consider re-specifying the model or the p-value cutoffs."
 msgstr ""
+"%sOptimizatzaileak ez du irtenbiderik aurkitu. Kontuan hartu eredua edo p-"
+"balio mugak berriro zehaztea."
 
 msgid "%sThe automatic cutoffs selection did not find viable p-value cutoffs. Please, specify them manually."
 msgstr ""
+"%sMuga automatikoen hautaketak ez du p-balioaren muga bideragarririk "
+"aurkitu. Mesedez, zehaztu itzazu eskuz."
 
 msgid "At least one of the p-value intervals contains no effect sizes, leading to estimation problems. Consider re-specifying the cutoffs."
 msgstr ""
+"Gutxienez p-balio tarte batek ez du efektu-tamainarik, eta horrek estimazio-"
+"arazoak sortzen ditu. Kontuan hartu mugak berriro zehaztea."
 
 msgid "At least one of the p-value intervals contains three or fewer effect sizes, which may lead to estimation problems. Consider re-specifying the cutoffs."
 msgstr ""
+"Gutxienez p-balio tarte batek hiru efektu-tamaina edo gutxiago ditu, eta "
+"horrek estimazio-arazoak sor ditzake. Kontuan hartu mugak berriro zehaztea."
 
 msgid "The unadjusted estimate is negative. The selection model default specification expects that the expected direction of the effect size is positive. Please, check that you specified the effect sizes correctly or change the 'Expected effect size direction' option in the 'Model' tab."
 msgstr ""
+"Doitu gabeko estimazioa negatiboa da. Hautapen-ereduaren lehenetsitako "
+"zehaztapenak efektu-tamainaren espero den norabidea positiboa izatea espero "
+"du. Mesedez, egiaztatu efektu-tamainak behar bezala zehaztu dituzula edo "
+"aldatu 'Espero den efektu-tamainaren norabidea' aukera 'Eredua' fitxan."
 
 msgid "The analysis requires both 'Effect Size' and 'Effect Size Standard Error' to be specified."
 msgstr ""
+"Analisiak 'Efektuaren Tamaina' eta 'Efektuaren Tamainaren Errore Estandarra' "
+"zehaztu behar ditu."
 
 msgid "Only the following one-sided p-value cutoffs were used: %s."
-msgstr ""
+msgstr "Alde bakarreko p-balioaren muga hauek bakarrik erabili ziren: %s."
 
 msgid "Estimating: %1$s"
-msgstr ""
+msgstr "Kalkulatzen: %1$s"
 
 msgid "Model Fit Measures"
-msgstr ""
+msgstr "Ereduaren egokitzapen neurriak"
 
 msgid "log Lik."
-msgstr ""
+msgstr "saioa hasi Lik."
 
 msgid "%1$s fit failed with the following message %2$s."
-msgstr ""
+msgstr "%1$s doikuntzak huts egin du honako mezua emanez: %2$s."
 
 msgid "%1$s: %2$s"
-msgstr ""
+msgstr "%1$s: %2$s"
 
 msgid "Warning"
-msgstr ""
+msgstr "Abisua"
 
 msgid "Model Convergence"
-msgstr ""
+msgstr "Ereduaren Konbergentzia"
 
 msgid "Status"
-msgstr ""
+msgstr "Egoera"
 
 msgid "Path Diagram"
-msgstr ""
+msgstr "Bide-diagrama"
 
 msgid "Syntax failed with the following message %1$s."
-msgstr ""
+msgstr "Sintaxiak huts egin du honako mezuarekin: %1$s."
 
 msgid "Model fit failed with the following message %1$s."
-msgstr ""
+msgstr "Modeloaren doikuntzak huts egin du honako mezuarekin: %1$s."
 
 msgid "Model visualization failed with the following message %1$s."
-msgstr ""
+msgstr "Modeloaren bistaratzeak huts egin du honako mezuarekin: %1$s."
 
 msgid "Coefficient Summary"
-msgstr ""
+msgstr "Koefizientearen laburpena"
 
 msgid "Computed Estimates Summary"
-msgstr ""
+msgstr "Kalkulatutako Estimazioen Laburpena"
 
 msgid "Error: There were not enough adequately powered studies (k = %1$i)"
 msgstr ""
+"Errorea: Ez zegoen behar adina ikerketa behar bezala indartuta (k = %1$i)"
 
 msgid "Note: There were %1$i adequately powered studies"
-msgstr ""
+msgstr "Oharra: %1$i ikerketa behar bezala indartuak izan ziren"
 
 msgid "Test of Effect"
-msgstr ""
+msgstr "Efektuaren proba"
 
 msgid "Multiplicative Heterogeneity Estimates"
-msgstr ""
+msgstr "Heterogeneotasun biderkatzailearen estimazioak"
 
 msgid "Estimated %1$s Regression"
-msgstr ""
+msgstr "%1$s-ko erregresio estimatua"
 
 msgid "Cohen's d"
-msgstr ""
+msgstr "Cohenen d"
 
 msgid "Fisher's z"
-msgstr ""
+msgstr "Fisherren z"
 
 msgid "WAAP was not estimated: There were only %1$i adequately powered studies (power > 80%%)."
 msgstr ""
+"WAAP ez zen kalkulatu: %1$i ikerketa behar bezala potentziatu baino ez "
+"zeuden (potentzia > %80)."
 
 msgid "There were %1$i adequately powered studies (power > 80%%)."
-msgstr ""
+msgstr "Behar bezalako potentzia zuten %1$i ikerketa zeuden (potentzia > %80)."
 
 msgid "The Hamiltonian Monte Carlo procedure might be invalid -- There was %i divergent transition after warmup. This can be solved by carefully increasing 'Adapt delta' until there are no divergent transitions."
 msgid_plural "The Hamiltonian Monte Carlo procedure might be invalid -- There were %i divergent transitions after warmup. This can be solved by carefully increasing 'Adapt delta' until there are no divergent transitions."
