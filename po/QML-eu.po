@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "PO-Revision-Date: 2025-10-01 11:02+0000\n"
-"Last-Translator: Ángel Prieto <angel.prieto.fi@gmail.com>\n"
+"Last-Translator: Jose Ramon Rueda <joseramon.rueda@ehu.eus>\n"
 "Language-Team: Basque <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/eu/>\n"
 "Language: eu\n"
@@ -14,27 +14,27 @@ msgstr ""
 
 msgctxt "Description|"
 msgid "Meta-Analysis"
-msgstr "Metaanalisia"
+msgstr "MetaAnalisia"
 
 msgctxt "Description|"
 msgid "Classical Meta-Analysis"
-msgstr "Metaanalisi klasikoa"
+msgstr "MetaAnalisi Klasikoa"
 
 msgctxt "Description|"
 msgid "Selection Models"
-msgstr "Hautaketa ereduak"
+msgstr "Hautaketa Ereduak"
 
 msgctxt "Description|"
 msgid "Bayesian Meta-Analysis"
-msgstr "Bayesiar Metaanalisia"
+msgstr "Bayesiar MetaAnalisia"
 
 msgctxt "Description|"
 msgid "Robust Bayesian Meta-Analysis"
-msgstr "Metaanalisi Bayesiano sendoa"
+msgstr "MetaAnalisi Bayesiarra sendoa"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Effect Size"
-msgstr "Efektuaren tamaina"
+msgstr "Efektuaren Tamaina"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
