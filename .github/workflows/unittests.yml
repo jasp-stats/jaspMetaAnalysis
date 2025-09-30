@@ -2,7 +2,7 @@ on:
   push:
     paths: ['**.R', 'tests/**', '**.Rd', '**.c', '**.cpp', '**.h', '**.hpp', 'DESCRIPTION', 'NAMESPACE', 'MAKEVARS', 'MAKEVARS.win', '**.yml']
   pull_request:
-    paths: ['**.R', 'tests/**', '**.Rd', '**.c', '**.cpp', '**.h', '**.hpp', 'DESCRIPTION', 'NAMESPACE', 'MAKEVARS', 'MAKEVARS.win']
+    paths: ['**.R', 'tests/**', '**.Rd', '**.c', '**.cpp', '**.h', '**.hpp', 'DESCRIPTION', 'NAMESPACE', 'MAKEVARS', 'MAKEVARS.win', '**.yml']
   schedule:
     - cron:  '13 12 * * 1-5'
 
@@ -11,8 +11,8 @@ name: unit-tests
 jobs:
 
   unit-tests:
-
-    uses: jasp-stats/jasp-actions/.github/workflows/unittests.yml@master
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
+    uses: jasp-stats/jasp-actions/.github/workflows/unittests.yml@v1
     with:
       needs_JAGS:   true
-      needs_igraph: false
+
