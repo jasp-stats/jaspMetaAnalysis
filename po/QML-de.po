@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2025-10-12 09:08+0000\n"
+"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.14-dev\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -5923,7 +5929,6 @@ msgctxt "ForestPlot|"
 msgid "P-value"
 msgstr "P-Wert"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Color"
 msgstr "Farbe"
@@ -5933,86 +5938,85 @@ msgid ""
 "Change color of the plotted objects. Only available if no color mapping is "
 "selected."
 msgstr ""
+"Ändern Sie die Farbe der gezeigten Objekte. Nur verfügbar, wenn keine "
+"Farbzuweisung ausgewählt wird."
 
 msgctxt "ForestPlot|"
 msgid "Black"
-msgstr ""
+msgstr "Schwarz"
 
 msgctxt "ForestPlot|"
 msgid "Blue"
-msgstr ""
+msgstr "Blau"
 
 msgctxt "ForestPlot|"
 msgid "Red"
-msgstr ""
+msgstr "Rot"
 
 msgctxt "ForestPlot|"
 msgid "Add vertical line"
-msgstr ""
+msgstr "Vertikale Linie hinzufügen"
 
 msgctxt "ForestPlot|"
 msgid "Add a solid vertical line in the forest plot."
-msgstr ""
+msgstr "Eine durchgezogene vertikale Linie in den Forest-Plot hinzufügen."
 
 msgctxt "ForestPlot|"
 msgid "Add vertical line (2)"
-msgstr ""
+msgstr "Vertikale Linie hinzufügen (2)"
 
 msgctxt "ForestPlot|"
 msgid "Add a dotted vertical line in the forest plot."
-msgstr ""
+msgstr "Eine gestrichelte vertikale Linie in den Forest-Plot hinzufügen."
 
 msgctxt "ForestPlot|"
 msgid "X-axis label"
-msgstr ""
+msgstr "Beschriftung X-Achse"
 
 msgctxt "ForestPlot|"
 msgid ""
 "Change the x-axis label of the forest plot (the default 'Effect Size' "
 "changes in accordance with the selected effect size transformation)."
 msgstr ""
+"Die Beschriftung der X-Achse ändern (die standardmäßige 'Effektstärke' "
+"ändert sich passend zur gewählten Effektstärken-Transformation)."
 
 msgctxt "ForestPlot|"
 msgid "X-axis limits"
-msgstr ""
+msgstr "Grenzen X-Achse"
 
 msgctxt "ForestPlot|"
 msgid "Change the default x-axis limits."
-msgstr ""
+msgstr "Standardgrenzen der X-Achse ändern."
 
 msgctxt "ForestPlot|"
 msgid "Lower"
-msgstr ""
+msgstr "Untere"
 
 msgctxt "ForestPlot|"
 msgid "Upper"
-msgstr ""
+msgstr "Obere"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Relative Size"
 msgstr "Relative Größe"
 
 msgctxt "ForestPlot|"
 msgid "Adjust the relative size of the forest plot components."
-msgstr ""
+msgstr "Die relative Größe der Forest-Plot-Komponenten anpassen."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Estimates"
 msgstr "Schätzungen"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Text"
 msgstr "Text"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Axis labels"
 msgstr "Achsenbeschriftungen"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Row"
 msgstr "Zeile"
