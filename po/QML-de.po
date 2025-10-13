@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-10-12 09:08+0000\n"
+"PO-Revision-Date: 2025-10-14 12:35+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/de/>\n"
@@ -6035,11 +6035,12 @@ msgstr ""
 
 msgctxt "ForestPlot|"
 msgid "Adjust width based on text"
-msgstr ""
+msgstr "Breite nach Text anpassen"
 
 msgctxt "ForestPlot|"
 msgid "Turn off the automatic width adjustment of the individual components."
 msgstr ""
+"Ausschalten der automatischen Breiteneinstellung der einzelnen Komponenten."
 
 msgctxt "ForestPlot|"
 msgid "Mapping"
@@ -6050,24 +6051,27 @@ msgid ""
 "Select a variable for encoding the color or shape of the study information "
 "and the estimated marginal means output."
 msgstr ""
+"Auswahl einer Variable zur Codierung von Farbe oder Form der "
+"Studieninformation und der geschätzten Randmittelausgabe."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Shape"
 msgstr "Form"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Show RoBMA R code"
-msgstr ""
+msgstr "RoBMA R-Code anzeigen"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid ""
 "Display the underlying R code used by the RoBMA package to fit the model."
 msgstr ""
+"Anzeige des zugrunde liegenden R-Codes, der vom RoBMA-Paket verwendet wird, "
+"um das Modell anzupassen."
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Include full dataset in subgroup analysis"
-msgstr ""
+msgstr "Vollständigen Datensatz in Untergruppenanalyse einschließen"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid ""
