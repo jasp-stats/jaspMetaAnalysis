@@ -7,7 +7,7 @@ Already included effect sizes can be passed forward using the Reported effect si
 
 The selected effect size can be computed only for a subset of the dataset using the Subset indicator variable.. 
 
-See [metafor's documentation](https://wviechtb.github.io/metafor/reference/escalc.html) for more detail about the effect sizes.
+See [metafor's documentation](https://wviechtb.github.io/metafor/reference/escalc.html) for more detail about the effect sizes. See [this tutorial](https://doi.org/10.48550/arXiv.2509.09845) for a detailed introduction to the module.
 
 
 #### Design
