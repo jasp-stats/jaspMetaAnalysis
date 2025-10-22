@@ -3,19 +3,11 @@ import JASP.Module
 
 Description
 {
-	name:			"jaspMetaAnalysis"
 	title : 		qsTr("Meta-Analysis")
 	description:	qsTr("Synthesize evidence across multiple studies")
-	requiresData:	true
-	preloadData:	true
 	icon:			"meta-analysis.svg"
-	version			: "0.95.0"
-	author:			"JASP Team"
-	maintainer:		"JASP Team <info@jasp-stats.org>"
-	website:		"jasp-stats.org"
-	license:		"GPL (>= 2)"
-
-
+	hasWrappers: 	false
+	
 	GroupTitle
 	{
 		title:		qsTr("Miscellaneous")
