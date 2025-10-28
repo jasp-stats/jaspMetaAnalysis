@@ -7652,10 +7652,6 @@ msgid "-"
 msgstr "-"
 
 msgctxt "MetaAnalyticSem|"
-msgid " "
-msgstr " "
-
-msgctxt "MetaAnalyticSem|"
 msgid "Available variable names"
 msgstr "Nomes dispoñibles de variables"
 
