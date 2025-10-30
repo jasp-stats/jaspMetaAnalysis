@@ -24,7 +24,7 @@ Form
 {
 	info: qsTr("Funnel plots allow you to visualize the observed effect sizes and standard errors with the funnel outlaying the sampling distribution under a given meta-analytic model. " +
 	"Funnel plots are often used to assess publication bias and small-study effects. However, many studies have shown that funnel plots are not very reliable for this purpose. " + 
-	"See e.g. Lau et al., (2006) and Terrin et al. (2005).\n\n" + 
+	"See e.g. Lau et al., (2006) and Terrin et al., (2005).\n\n" + 
 	"See [this tutorial](https://doi.org/10.48550/arXiv.2509.09845) for a detailed introduction to the module.")
 	infoBottom: "## " + qsTr("References") + "\n" +
 	"- Bartoš F, Wagenmakers EJ, & Viechtbauer W (2025). “Meta-analysis with JASP, Part I: Classical approaches.” _ArXiv Preprint_. https://doi.org/10.48550/arXiv.2509.09845\n" + 
