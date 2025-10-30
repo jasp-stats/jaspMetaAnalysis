@@ -29,8 +29,8 @@ Form
 	"Additional care is required when using a different type of effect sizes as the default prior distributions might not match the proper scaling of the effect size and heterogeneity. " + 
 	"The analysis allows you to specify meta-regression, 3-level meta-analysis, and subgroup analysis. " +
 	"The results include estimates of effect sizes, heterogeneity, moderation, and various plots to visualize the results.\n\n" +
-	"The analysis is based on the Bayesian meta-analysis/meta-regression parameterization as outlined in Bartoš et al. (2025)."\n\n" + 
-	"See [this tutorial](https://doi.org/10.48550/arXiv.2509.09850) for a detailed introduction to the module.")
+	"The analysis is based on the Bayesian meta-analysis/meta-regression parameterization as outlined in Bartoš et al. (2025).\n\n" + 
+	"See [this tutorial](https://doi.org/10.48550/arXiv.2509.09850) for a detailed introduction to the module.)"
 	infoBottom: "## " + qsTr("References") + "\n" +
 	"- Bartoš F & Wagenmakers EJ (2025). “Meta-analysis with JASP, Part II: Bayesian approaches.” _ArXiv Preprint_. https://doi.org/10.48550/arXiv.2509.09850\n" + 
 	"- Bartoš F, Gronau QF, Timmers B, Otte WM, Ly A, Wagenmakers EJ (2021). “Bayesian model‐averaged meta‐analysis in medicine.” _Statistics in Medicine, 40_(30), 6743-6761. https://doi.org/10.1002/sim.9170\n" +
