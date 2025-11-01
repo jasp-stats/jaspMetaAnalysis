@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.0\n"
-"POT-Creation-Date: 2025-07-19 03:02\n"
+"POT-Creation-Date: 2025-11-01 03:00\n"
 "PO-Revision-Date: 2025-08-07 23:01+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
@@ -440,9 +440,6 @@ msgstr ""
 msgid "Heterogeneity Meta-Regression Coefficients"
 msgstr ""
 
-msgid "Standard Error"
-msgstr "Błąd standardowy"
-
 msgid "t"
 msgstr "t"
 
@@ -656,6 +653,9 @@ msgstr "Wykresy autokorelacji"
 
 msgid "Residual Value"
 msgstr ""
+
+msgid "Standard Error"
+msgstr "Błąd standardowy"
 
 #, fuzzy
 msgid "Profile Likelihood"

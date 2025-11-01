@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.19.2\n"
-"POT-Creation-Date: 2025-07-19 03:02\n"
+"POT-Creation-Date: 2025-11-01 03:00\n"
 "PO-Revision-Date: 2025-08-25 14:02+0000\n"
 "Last-Translator: Marko Bojović <bojovicmarko@outlook.com>\n"
 "Language-Team: Serbian <https://hosted.weblate.org/projects/jasp/"
@@ -437,9 +437,6 @@ msgstr ""
 msgid "Heterogeneity Meta-Regression Coefficients"
 msgstr ""
 
-msgid "Standard Error"
-msgstr "Стандардна грешка"
-
 msgid "t"
 msgstr "t"
 
@@ -647,6 +644,9 @@ msgstr ""
 
 msgid "Residual Value"
 msgstr ""
+
+msgid "Standard Error"
+msgstr "Стандардна грешка"
 
 msgid "Profile Likelihood"
 msgstr ""

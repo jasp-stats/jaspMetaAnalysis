@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.3\n"
-"POT-Creation-Date: 2025-07-19 03:02\n"
+"POT-Creation-Date: 2025-11-01 03:00\n"
 "PO-Revision-Date: 2025-07-03 07:49+0000\n"
 "Last-Translator: Alexander Matveev <avmcsmu@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/jasp/"
@@ -437,9 +437,6 @@ msgstr ""
 msgid "Heterogeneity Meta-Regression Coefficients"
 msgstr ""
 
-msgid "Standard Error"
-msgstr "Стандартная ошибка"
-
 msgid "t"
 msgstr ""
 
@@ -648,6 +645,9 @@ msgstr ""
 
 msgid "Residual Value"
 msgstr ""
+
+msgid "Standard Error"
+msgstr "Стандартная ошибка"
 
 msgid "Profile Likelihood"
 msgstr ""

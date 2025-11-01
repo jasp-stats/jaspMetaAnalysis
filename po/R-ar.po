@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.18.2\n"
-"POT-Creation-Date: 2025-07-19 03:02\n"
+"POT-Creation-Date: 2025-11-01 03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -435,9 +435,6 @@ msgstr ""
 msgid "Heterogeneity Meta-Regression Coefficients"
 msgstr ""
 
-msgid "Standard Error"
-msgstr ""
-
 msgid "t"
 msgstr ""
 
@@ -641,6 +638,9 @@ msgid "Correlation Matrix"
 msgstr ""
 
 msgid "Residual Value"
+msgstr ""
+
+msgid "Standard Error"
 msgstr ""
 
 msgid "Profile Likelihood"
