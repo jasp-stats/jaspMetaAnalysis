@@ -7144,18 +7144,6 @@ msgstr ""
 "informa de su correlación/covarianza."
 
 msgctxt "MetaAnalyticSem|"
-msgid "_"
-msgstr "_"
-
-msgctxt "MetaAnalyticSem|"
-msgid "."
-msgstr "."
-
-msgctxt "MetaAnalyticSem|"
-msgid "-"
-msgstr "-"
-
-msgctxt "MetaAnalyticSem|"
 msgid "Available variable names"
 msgstr "Nombres disponibles de variables"
 
@@ -7900,10 +7888,6 @@ msgstr "Variables del modelo"
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Selected Variables"
 msgstr "Variables seleccionadas"
-
-msgctxt "MetaAnalyticSem|"
-msgid " "
-msgstr " "
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid ""
