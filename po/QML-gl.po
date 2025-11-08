@@ -7100,18 +7100,6 @@ msgstr ""
 "covarianza."
 
 msgctxt "MetaAnalyticSem|"
-msgid "_"
-msgstr "_"
-
-msgctxt "MetaAnalyticSem|"
-msgid "."
-msgstr "."
-
-msgctxt "MetaAnalyticSem|"
-msgid "-"
-msgstr "-"
-
-msgctxt "MetaAnalyticSem|"
 msgid "Available variable names"
 msgstr "Nomes dispoñibles de variables"
 
@@ -7845,10 +7833,6 @@ msgstr "Variables do modelo"
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Selected Variables"
 msgstr "Variables escollidas"
-
-msgctxt "MetaAnalyticSem|"
-msgid " "
-msgstr " "
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid ""

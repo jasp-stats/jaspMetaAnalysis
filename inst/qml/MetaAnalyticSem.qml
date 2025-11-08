@@ -97,10 +97,10 @@ Form
 			info: qsTr("Separator used in the variable names in the correlation/covariance matrix input. The variable name must be in a form `x_y` where `x` and `y` corresponds to the variables between which the correlation/covariance is reported.")
 			values:
 			[
-				{ label: qsTr("_"),		value: "_" },
-				{ label: qsTr("."),		value: "." },
-				{ label: qsTr("-"),		value: "-" },
-				{ label: qsTr(" "),		value: " " }
+				{ label: "_",		value: "_" },
+				{ label: ".",		value: "." },
+				{ label: "-",		value: "-" },
+				{ label: " ",		value: " " }
 			]
 		}
 	}
