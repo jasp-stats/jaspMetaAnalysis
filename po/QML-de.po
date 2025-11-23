@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-11-22 13:29+0000\n"
+"PO-Revision-Date: 2025-11-23 14:51+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/de/>\n"
@@ -3669,9 +3669,8 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Available Components"
-msgstr ""
+msgstr "Verfügbare Komponenten"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Model Terms"
 msgstr "Modellterme"
@@ -3680,14 +3679,13 @@ msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Variables assigned as model terms in the effect size model."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Include intercept"
 msgstr "Konstante einbeziehen"
 
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Include an intercept in the effect size model."
-msgstr ""
+msgstr "Eine Konstante in das Effektstärke-Modell hinzufügen."
 
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Heterogeneity model"
