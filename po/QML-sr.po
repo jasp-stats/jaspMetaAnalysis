@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-08-25 12:03+0000\n"
+"PO-Revision-Date: 2025-12-01 20:00+0000\n"
 "Last-Translator: Marko Bojović <bojovicmarko@outlook.com>\n"
 "Language-Team: Serbian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/sr/>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 5.15-dev\n"
 "X-Qt-Contexts: true\n"
 
 msgctxt "Description|"
@@ -35,7 +35,7 @@ msgstr ""
 
 msgctxt "Description|"
 msgid "Classical"
-msgstr "Класичан"
+msgstr "Класична"
 
 msgctxt "Description|"
 msgid "Classical Meta-Analysis"
@@ -71,7 +71,7 @@ msgstr ""
 
 msgctxt "Description|"
 msgid "Bayesian"
-msgstr ""
+msgstr "Бејзова"
 
 msgctxt "Description|"
 msgid "Bayesian Meta-Analysis"
@@ -1106,7 +1106,7 @@ msgstr ""
 
 msgctxt "EffectSizeComputation|"
 msgid "Correlation"
-msgstr ""
+msgstr "Корелација"
 
 msgctxt "EffectSizeComputation|"
 msgid "Proportion +/+"
@@ -2811,7 +2811,7 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Variance inflation factor"
-msgstr ""
+msgstr "Фактор пораста варијансе"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid ""
@@ -5349,7 +5349,7 @@ msgstr ""
 
 msgctxt "ForestPlot|"
 msgid "Estimate"
-msgstr ""
+msgstr "Процена"
 
 msgctxt "ForestPlot|"
 msgid "𝜏"
