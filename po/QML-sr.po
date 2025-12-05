@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-12-01 20:00+0000\n"
+"PO-Revision-Date: 2025-12-05 22:00+0000\n"
 "Last-Translator: Marko Bojović <bojovicmarko@outlook.com>\n"
 "Language-Team: Serbian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/sr/>\n"
@@ -19,7 +19,7 @@ msgstr "Мета-анализе"
 
 msgctxt "Description|"
 msgid "Synthesize evidence across multiple studies"
-msgstr ""
+msgstr "Синтетизовање доказа из више студија"
 
 msgctxt "Description|"
 msgid "Miscellaneous"
@@ -470,7 +470,7 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Time"
-msgstr ""
+msgstr "Време"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
@@ -642,7 +642,7 @@ msgstr ""
 
 msgctxt "EffectSizeComputation|"
 msgid "Reliability"
-msgstr ""
+msgstr "Поузданост"
 
 msgctxt "EffectSizeComputation|"
 msgid "Partial correlation"
@@ -962,7 +962,7 @@ msgstr ""
 
 msgctxt "EffectSizeComputation|"
 msgid "Coefficient α"
-msgstr ""
+msgstr "Коефицијент α"
 
 msgctxt "EffectSizeComputation|"
 msgid "Homozygous Dominant Alleles"
@@ -1122,7 +1122,7 @@ msgstr ""
 
 msgctxt "EffectSizeComputation|"
 msgid "R-Squared"
-msgstr ""
+msgstr "R-квадрат"
 
 msgctxt "EffectSizeComputation|"
 msgid "T-Statistic"
@@ -1917,7 +1917,7 @@ msgstr ""
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Forest plot"
-msgstr ""
+msgstr "Графикон са ефектима (forest plot)"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Advanced"
@@ -2317,7 +2317,7 @@ msgstr ""
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Forest plot"
-msgstr ""
+msgstr "Графикон са ефектима (forest plot)"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Observed"
@@ -3332,11 +3332,11 @@ msgstr ""
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Prior and posterior plot"
-msgstr ""
+msgstr "График претпоставке и постериорне"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Forest plot"
-msgstr ""
+msgstr "Графикон са ефектима (forest plot)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Labels"
@@ -5085,7 +5085,7 @@ msgstr ""
 
 msgctxt "ForestPlot|"
 msgid "Forest Plot"
-msgstr ""
+msgstr "Графикон са ефектима (forest plot)"
 
 msgctxt "ForestPlot|"
 msgid ""
