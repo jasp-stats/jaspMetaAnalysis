@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2025-12-07 11:00+0000\n"
+"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15-dev\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -6196,12 +6202,10 @@ msgid ""
 "model."
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Add adjusted estimate"
 msgstr "Korrigierte Schätzung hinzufügen"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid ""
 "Include the adjusted effect estimate, which accounts for the moderators in "
@@ -6456,7 +6460,6 @@ msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Model"
 msgstr "Modell"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid ""
 "Options for specifing the effect size and heterogeneity models based on the "
@@ -6474,7 +6477,6 @@ msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Specify the effect size model."
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Available Components"
 msgstr "Verfügbare Komponenten"
@@ -6786,17 +6788,19 @@ msgstr ""
 
 msgctxt "MetaAnalyticSem|"
 msgid "Available variable names"
-msgstr ""
+msgstr "Verfügbare Variablennamen"
 
 msgctxt "MetaAnalyticSem|"
 msgid ""
 "Show a summary of the available variable names in the correlation/covariance "
 "matrix input."
 msgstr ""
+"Anzeige einer Zusammenfassung der verfügbaren Variablennamen in der "
+"Korrelations-/Kovarianzmatrixeingabe."
 
 msgctxt "MetaAnalyticSem|"
 msgid "Descriptives"
-msgstr ""
+msgstr "Deskriptiv"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Number of estimates"
