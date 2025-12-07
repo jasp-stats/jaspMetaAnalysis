@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.19.2\n"
 "POT-Creation-Date: 2025-11-01 03:00\n"
-"PO-Revision-Date: 2025-12-05 22:00+0000\n"
+"PO-Revision-Date: 2025-12-08 20:00+0000\n"
 "Last-Translator: Marko Bojović <bojovicmarko@outlook.com>\n"
 "Language-Team: Serbian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/sr/>\n"
@@ -273,7 +273,7 @@ msgid "Evidence for %s:"
 msgstr "Докази за %s:"
 
 msgid "Plotting failed: The Bayes factors contain infinity."
-msgstr "Планирање није успело: Бајесови фактори садрже бесконачност."
+msgstr "Планирање није успело: Бејзови фактори садрже бесконачност."
 
 msgid "Studies"
 msgstr "Студије"
@@ -413,7 +413,6 @@ msgstr ""
 msgid "Heterogeneity Meta-Regression Terms Tests"
 msgstr ""
 
-#, fuzzy
 msgid "F"
 msgstr "F"
 
@@ -650,7 +649,7 @@ msgid "Standard Error"
 msgstr "Стандардна грешка"
 
 msgid "Profile Likelihood"
-msgstr ""
+msgstr "Профилна веродостојност"
 
 msgid ""
 "Clustering is not supported when specifying a heterogeneity meta-regression "
@@ -709,7 +708,7 @@ msgid "SMD to CLES, Pr(superiority)"
 msgstr ""
 
 msgid "None"
-msgstr ""
+msgstr "Ништа"
 
 msgid "Bonferroni"
 msgstr ""
