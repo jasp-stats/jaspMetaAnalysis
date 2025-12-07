@@ -144,4 +144,3 @@ test_that("Mean Model Estimates (rho) plot matches", {
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "mean-model-estimates-rho")
 })
-
