@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-12-07 11:00+0000\n"
+"PO-Revision-Date: 2025-12-08 18:00+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/de/>\n"
@@ -6772,19 +6772,19 @@ msgstr ""
 
 msgctxt "MetaAnalyticSem|"
 msgid "_"
-msgstr ""
+msgstr "_"
 
 msgctxt "MetaAnalyticSem|"
 msgid "."
-msgstr ""
+msgstr "."
 
 msgctxt "MetaAnalyticSem|"
 msgid "-"
-msgstr ""
+msgstr "-"
 
 msgctxt "MetaAnalyticSem|"
 msgid " "
-msgstr ""
+msgstr " "
 
 msgctxt "MetaAnalyticSem|"
 msgid "Available variable names"
@@ -6804,7 +6804,7 @@ msgstr "Deskriptiv"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Number of estimates"
-msgstr ""
+msgstr "Anzahl Schätzungen"
 
 msgctxt "MetaAnalyticSem|"
 msgid ""
@@ -6814,13 +6814,15 @@ msgstr ""
 
 msgctxt "MetaAnalyticSem|"
 msgid "Number of observations"
-msgstr ""
+msgstr "Anzahl Beobachtungen"
 
 msgctxt "MetaAnalyticSem|"
 msgid ""
 "Show a frequency table of the observations in the correlation/covariance "
 "matrix input."
 msgstr ""
+"Zeige eine Häufigkeitstabelle der Beobachtungen in der Korrelations-/"
+"Kovarianzmatrixeingabe."
 
 msgctxt "MetaAnalyticSem|"
 msgid "Pooled correlation/covariance matrix"
@@ -6842,11 +6844,11 @@ msgstr "Diagonal"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Symmetric"
-msgstr ""
+msgstr "Symmetrisch"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Zero"
-msgstr ""
+msgstr "Null"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Type of the random effects of the correlation or covariance vectors."
@@ -6854,25 +6856,27 @@ msgstr ""
 
 msgctxt "MetaAnalyticSem|"
 msgid "Model 1"
-msgstr ""
+msgstr "Modell 1"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Specify model using a lavaan style syntax."
-msgstr ""
+msgstr "Modellangabe mit Syntax im lavaan-Stil."
 
 msgctxt "MetaAnalyticSem|"
 msgid "Model Settings"
-msgstr ""
+msgstr "Modell-Einstellungen"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Fix latent variance to 1"
-msgstr ""
+msgstr "Latente Varianz auf 1 fixieren"
 
 msgctxt "MetaAnalyticSem|"
 msgid ""
 "Fix the variance of latent variables to 1. Only available for covariance "
 "input."
 msgstr ""
+"Die Varianz der latenten Variablen auf 1 fixieren. Nur verfügbar für "
+"Kovarianz-Eingabe."
 
 msgctxt "MetaAnalyticSem|"
 msgid "Random Effects"
