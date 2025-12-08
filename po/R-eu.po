@@ -207,7 +207,7 @@ msgid ""
 "Posterior mean and 95%% credible interval estimates from the random effects "
 "model."
 msgstr ""
-"Ausazko efektuen eredutik ateratako atzeko batez bestekoaren eta % 95eko "
+"Ausazko efektuen eredutik ateratako atzeko batez bestekoaren eta %%95eko "
 "sinesgarritasun-tarteko estimazioak."
 
 msgid ""
