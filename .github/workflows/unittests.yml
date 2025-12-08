@@ -15,4 +15,3 @@ jobs:
     uses: jasp-stats/jasp-actions/.github/workflows/unittests.yml@v1
     with:
       needs_JAGS:   true
-
