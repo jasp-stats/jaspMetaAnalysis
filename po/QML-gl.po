@@ -7846,10 +7846,6 @@ msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Selected Variables"
 msgstr "Variables escollidas"
 
-msgctxt "MetaAnalyticSem|"
-msgid " "
-msgstr " "
-
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid ""
 "Bayesian Binomial meta-analysis allows you to conduct a binomial meta-"
