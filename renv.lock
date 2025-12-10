@@ -134,10 +134,10 @@
       "Version": "7.3-65",
       "Source": "Repository",
       "Requirements": [
-        "graphics",
-        "grDevices",
         "methods",
         "R",
+        "grDevices",
+        "graphics",
         "stats",
         "utils"
       ]
@@ -147,14 +147,14 @@
       "Version": "1.7-4",
       "Source": "Repository",
       "Requirements": [
-        "graphics",
         "grDevices",
+        "graphics",
         "grid",
         "lattice",
-        "methods",
-        "R",
         "stats",
-        "utils"
+        "utils",
+        "R",
+        "methods"
       ]
     },
     "MatrixModels": {
@@ -223,11 +223,10 @@
     },
     "Rcpp": {
       "Package": "Rcpp",
-      "Version": "1.1.0.8.1",
+      "Version": "1.1.0",
       "Source": "Repository",
       "Requirements": [
         "methods",
-        "R",
         "utils"
       ]
     },
@@ -434,8 +433,8 @@
       "Version": "1.3-32",
       "Source": "Repository",
       "Requirements": [
-        "graphics",
         "R",
+        "graphics",
         "stats"
       ]
     },
@@ -572,9 +571,9 @@
       "Requirements": [
         "graphics",
         "grDevices",
-        "R",
         "stats",
-        "utils"
+        "utils",
+        "R"
       ]
     },
     "coda": {
@@ -841,9 +840,9 @@
       "Source": "Repository",
       "Requirements": [
         "methods",
-        "R",
+        "utils",
         "stats",
-        "utils"
+        "R"
       ]
     },
     "fs": {
@@ -1222,7 +1221,7 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspSem",
-      "RemoteSha": "f2616a9e2f89253c5ab2977276d1b1bb5590cfc6"
+      "RemoteSha": "1618354fe682371fe4dd53607ed8c25009f23ddf"
     },
     "jpeg": {
       "Package": "jpeg",
@@ -1301,12 +1300,12 @@
       "Version": "0.22-7",
       "Source": "Repository",
       "Requirements": [
-        "graphics",
-        "grDevices",
         "grid",
-        "R",
+        "grDevices",
+        "graphics",
         "stats",
-        "utils"
+        "utils",
+        "R"
       ]
     },
     "lavaan": {
@@ -1595,10 +1594,10 @@
       "Source": "Repository",
       "Requirements": [
         "graphics",
-        "lattice",
-        "R",
         "stats",
-        "utils"
+        "utils",
+        "lattice",
+        "R"
       ]
     },
     "nloptr": {
@@ -2096,10 +2095,10 @@
       "Version": "4.1.24",
       "Source": "Repository",
       "Requirements": [
-        "graphics",
-        "grDevices",
         "R",
-        "stats"
+        "graphics",
+        "stats",
+        "grDevices"
       ]
     },
     "rpf": {
@@ -2381,10 +2380,10 @@
         "graphics",
         "Matrix",
         "methods",
-        "R",
         "splines",
         "stats",
-        "utils"
+        "utils",
+        "R"
       ]
     },
     "svglite": {
@@ -2607,7 +2606,7 @@
     },
     "yaml": {
       "Package": "yaml",
-      "Version": "2.3.11",
+      "Version": "2.3.12",
       "Source": "Repository",
       "Requirements": []
     },
