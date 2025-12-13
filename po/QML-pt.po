@@ -7087,18 +7087,6 @@ msgstr ""
 "correspondem às variáveis entre as quais a correlação/covariância é relatada."
 
 msgctxt "MetaAnalyticSem|"
-msgid "_"
-msgstr "_"
-
-msgctxt "MetaAnalyticSem|"
-msgid "."
-msgstr "."
-
-msgctxt "MetaAnalyticSem|"
-msgid "-"
-msgstr "-"
-
-msgctxt "MetaAnalyticSem|"
 msgid "Available variable names"
 msgstr "Nomes de variáveis disponíveis"
 
