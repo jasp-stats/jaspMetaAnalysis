@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-12-05 22:00+0000\n"
+"PO-Revision-Date: 2025-12-08 18:00+0000\n"
 "Last-Translator: Marko Bojović <bojovicmarko@outlook.com>\n"
 "Language-Team: Serbian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/sr/>\n"
@@ -650,7 +650,7 @@ msgstr ""
 
 msgctxt "EffectSizeComputation|"
 msgid "Model fit"
-msgstr ""
+msgstr "Прилагођеност модела"
 
 msgctxt "EffectSizeComputation|"
 msgid "Heterozygosity"
@@ -2877,7 +2877,7 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Profile likelihood"
-msgstr ""
+msgstr "Профилна веродостојност"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Include a profile likelihood plot for the heterogeneity parameter (τ²)."
