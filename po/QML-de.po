@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2025-12-14 11:00+0000\n"
+"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15-dev\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -6323,11 +6329,11 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Credible intervals"
-msgstr ""
+msgstr "Glaubwürdigkeitsintervalle"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Include credible intervals in the tabular output."
-msgstr ""
+msgstr "Glaubwürdigkeitsintervalle zur tabellarischen Ausgabe hinzufügen."
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Prediction intervals"
@@ -6339,7 +6345,7 @@ msgstr "Vorhersageintervalle in tabellarischer Ausgabe hinzufügen."
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Conditional estimates"
-msgstr ""
+msgstr "Konditionale Schätzungen"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid ""
@@ -7022,15 +7028,13 @@ msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Number of digits for rounding estimates."
 msgstr ""
 
-#, fuzzy
 msgctxt "SemBasedMetaAnalysis|"
 msgid "Model 1"
 msgstr "Modell 1"
 
-#, fuzzy
 msgctxt "SemBasedMetaAnalysis|"
 msgid "Specify model using a lavaan style syntax."
-msgstr "Modellangabe mit Syntax im lavaan-Stil."
+msgstr "Modell mit Syntax im lavaan-Stil angeben."
 
 msgctxt "SemBasedMetaAnalysis|"
 msgid "Pairwise model comparison"
