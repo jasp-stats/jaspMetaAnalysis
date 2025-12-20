@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.19.2\n"
 "POT-Creation-Date: 2025-11-01 03:00\n"
-"PO-Revision-Date: 2025-12-12 19:00+0000\n"
+"PO-Revision-Date: 2025-12-17 23:00+0000\n"
 "Last-Translator: Marko Bojović <bojovicmarko@outlook.com>\n"
 "Language-Team: Serbian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/sr/>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 5.15.1-dev\n"
 
 msgid "There must be at least one observation in each group."
 msgstr ""
@@ -90,7 +90,7 @@ msgid "%s is the group-level effect size."
 msgstr ""
 
 msgid "Bayes factor of the random effects H%1$s over the fixed effects H%1$s."
-msgstr ""
+msgstr "Бејзов фактор случајних ефеката H%1$s преко фиксних ефеката H%1$s."
 
 msgid ""
 "Posterior estimates are based on the models that assume an effect to be "
@@ -413,7 +413,6 @@ msgstr ""
 msgid "Heterogeneity Meta-Regression Terms Tests"
 msgstr ""
 
-#, fuzzy
 msgid "F"
 msgstr "F"
 
@@ -1414,7 +1413,7 @@ msgid "%1$s: %1$s Matrix"
 msgstr ""
 
 msgid "Variable"
-msgstr "Варијабла"
+msgstr "Варијавла"
 
 msgid "%1$s: Means"
 msgstr ""
