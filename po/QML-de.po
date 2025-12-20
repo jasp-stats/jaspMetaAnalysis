@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2025-12-21 17:02+0000\n"
+"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.1\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -5649,7 +5655,6 @@ msgid ""
 "right panel of the forest plot."
 msgstr ""
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Conditional estimates"
 msgstr "Konditionale Schätzungen"
@@ -7559,17 +7564,14 @@ msgid ""
 "detailed introduction to the module."
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "References"
 msgstr "Referenzen"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "R Packages"
 msgstr "R-Pakete"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size"
 msgstr "Effektstärke"
@@ -7578,7 +7580,6 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Variable containing the observed effect sizes."
 msgstr "Variable, die die beobachteten Effektstärken enthält."
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
 msgstr "Effektstärke Standardfehler"
@@ -7591,7 +7592,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect size measure"
-msgstr ""
+msgstr "Effektstärkemaß"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
@@ -7606,20 +7607,19 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Standardized mean difference such as Cohen's d, Hedge's g"
-msgstr ""
+msgstr "Standardisierte mittlere Differenz, wie Cohens d, Hedges g"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Fisher's z"
 msgstr "Fishers z"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Fisher's z transformation of correlation coefficients"
-msgstr ""
+msgstr "Fishers Z-Transformation von Korrelationskoeffizienten"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Log odds ratio"
-msgstr ""
+msgstr "Log-Chancenverhältnis"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Log risk ratio"
