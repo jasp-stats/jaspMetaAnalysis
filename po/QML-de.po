@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2025-12-31 11:01+0000\n"
+"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.1\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -4743,7 +4749,6 @@ msgid ""
 msgstr ""
 "Variable, die die Standardfehler enthält, die den Effektstärken entsprechen."
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Effect size measure"
 msgstr "Effektstärkemaß"
@@ -4759,7 +4764,6 @@ msgctxt "BayesianMetaAnalysis|"
 msgid "Standardized mean difference"
 msgstr ""
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Standardized mean difference such as Cohen's d, Hedge's g"
 msgstr "Standardisierte mittlere Differenz, wie Cohens d, Hedges g"
@@ -4769,12 +4773,10 @@ msgctxt "BayesianMetaAnalysis|"
 msgid "Fisher's z"
 msgstr "Fishers z"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Fisher's z transformation of correlation coefficients"
 msgstr "Fishers Z-Transformation von Korrelationskoeffizienten"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Log odds ratio"
 msgstr "Log-Chancenverhältnis"
@@ -7254,7 +7256,6 @@ msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Peto"
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Effect size measure"
 msgstr "Effektstärkemaß"
