@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.19.2\n"
 "POT-Creation-Date: 2025-11-01 03:00\n"
-"PO-Revision-Date: 2025-09-20 02:45+0000\n"
+"PO-Revision-Date: 2026-01-01 18:01+0000\n"
 "Last-Translator: தமிழ்நேரம் <tamilneram247@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/ta/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 
 msgid "There must be at least one observation in each group."
 msgstr "ஒவ்வொரு குழுவிலும் குறைந்தது ஒரு கண்காணிப்பு இருக்க வேண்டும்."
@@ -156,7 +156,7 @@ msgid ""
 "effects H%1$s model is %3$.3f."
 msgstr ""
 "வரிசைப்படுத்தப்பட்ட விளைவுகளின் பேய்ஸ் காரணி H%1$s நிலையான விளைவுகள் H%2$s ஐ விட "
-"அதிகமாகும். வரிசைப்படுத்தப்பட்ட விளைவுகள் H%1$s க்கு எதிராக கட்டுப்படுத்தப்படாத (சீரற்ற) "
+"அதிகமாகும். வரிசைப்படுத்தப்பட்ட விளைவுகள் H%1$s க்கு எதிராகக் கட்டுப்படுத்தப்படாத (சீரற்ற) "
 "விளைவுகள் H%1$s மாதிரிக்கான பேய்ஸ் காரணி %3$.3f ஆகும்."
 
 msgid ""
@@ -348,18 +348,17 @@ msgstr "சங்கிலியில் கடைசி மறு செய்
 msgid "Shrink factor"
 msgstr "சுருக்க காரணி"
 
-#, fuzzy
 msgid "All observations must be non-negative."
-msgstr "அனைத்து நிலையான பிழைகளும் நேர்மறையாக இருக்க வேண்டும்."
+msgstr "அனைத்து அவதானிப்புகளும் எதிர்மறையாக இருக்க வேண்டும்."
 
 msgid "Cochran-Mantel-Haenszel"
-msgstr ""
+msgstr "கோக்ரான்-மாண்டல்-ஏன்செல்"
 
 msgid "Mantel-Haenszel"
-msgstr ""
+msgstr "மாண்டல்-ஏன்செல்"
 
 msgid "Tarone"
-msgstr ""
+msgstr "டரோன்"
 
 msgid "Metafor R Code"
 msgstr "மெட்டாஃபோர் ஆர் குறியீடு"
@@ -397,7 +396,7 @@ msgid "Meta-Analytic Tests"
 msgstr "மேவு பகுப்பாய்வு சோதனைகள்"
 
 msgid "Test"
-msgstr "தேர்வு"
+msgstr "சோதனை"
 
 msgid "p"
 msgstr "ப"
@@ -451,7 +450,7 @@ msgid "Heterogeneity Meta-Regression Terms Tests"
 msgstr "பன்முகத்தன்மை மெட்டா-பின்னடைவு விதிமுறைகள் சோதனைகள்"
 
 msgid "F"
-msgstr "F"
+msgstr "எஃப்"
 
 msgid "Qₘ"
 msgstr "Qₘ"
@@ -460,7 +459,7 @@ msgid "df₁"
 msgstr "டிஎப்₁"
 
 msgid "df"
-msgstr "டி.எஃப்"
+msgstr "டிஎஃப்"
 
 msgid "df₂"
 msgstr "டிஎப்₂"
@@ -478,7 +477,7 @@ msgid "t"
 msgstr "டி"
 
 msgid "z"
-msgstr "சட்"
+msgstr "ஔ"
 
 msgid "Effect Size Meta-Regression Correlation Matrix"
 msgstr "விளைவு அளவு மெட்டா-பின்னடைவு தொடர்பு அணி"
@@ -551,7 +550,7 @@ msgid "Label"
 msgstr "சிட்டை"
 
 msgid "Predictor"
-msgstr "முன்கணிப்பு"
+msgstr "கணிப்பவர்"
 
 msgid "Standardized Residual"
 msgstr "தரப்படுத்தப்பட்ட மீதமுள்ள"
@@ -809,7 +808,7 @@ msgid "(coef: %1$s)"
 msgstr "(கோஃப்: %1$s)"
 
 msgid "Subgroup differences"
-msgstr ""
+msgstr "துணைக்குழு வேறுபாடுகள்"
 
 msgid "%s%% CI"
 msgstr "%s%% தொஒ"
@@ -1656,6 +1655,7 @@ msgstr ""
 
 msgid "Interaction terms are currently not possible in Bayesian meta-analyses."
 msgstr ""
+"பேய்சியன் மெட்டா பகுப்பாய்வுகளில் தொடர்புச் சொற்கள் தற்போது சாத்தியமில்லை."
 
 msgid "Estimating Marginal Means"
 msgstr "விளிம்பு வழிமுறைகளை மதிப்பிடுதல்"
