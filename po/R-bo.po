@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.95.5\n"
 "POT-Creation-Date: 2025-11-15 02:55\n"
-"PO-Revision-Date: 2025-12-29 01:00+0000\n"
+"PO-Revision-Date: 2026-01-06 14:01+0000\n"
 "Last-Translator: Zev Oster <zevelijah@gmail.com>\n"
 "Language-Team: Tibetan <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/bo/>\n"
@@ -157,8 +157,9 @@ msgstr ""
 msgid "Effect size"
 msgstr ""
 
+#, fuzzy
 msgid "Density"
-msgstr ""
+msgstr "སྟུག་ཚད།"
 
 msgid "Prior and Posteriors"
 msgstr ""
@@ -220,20 +221,25 @@ msgstr ""
 msgid "fixed"
 msgstr ""
 
+#, fuzzy
 msgid "Anecdotal"
-msgstr ""
+msgstr "ངག་རྒྱུས།"
 
+#, fuzzy
 msgid "Moderate"
-msgstr ""
+msgstr "འབྲིང་བ།"
 
+#, fuzzy
 msgid "Strong"
-msgstr ""
+msgstr "དྲག་པོ།"
 
+#, fuzzy
 msgid "Very Strong"
-msgstr ""
+msgstr "ཧ་ཅང་དྲག་པོ།"
 
+#, fuzzy
 msgid "Extreme"
-msgstr ""
+msgstr "མཐར་ཐུག"
 
 msgid "Evidence for %s:"
 msgstr ""
