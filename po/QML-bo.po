@@ -1,12 +1,15 @@
 msgid ""
 msgstr ""
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2026-01-06 15:01+0000\n"
+"Last-Translator: Zev Oster <zevelijah@gmail.com>\n"
+"Language-Team: Tibetan <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/bo/>\n"
 "Language: bo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.15.1\n"
 "X-Qt-Contexts: true\n"
 
 msgctxt "Description|"
@@ -725,13 +728,15 @@ msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "Weight"
 msgstr ""
 
+#, fuzzy
 msgctxt "Description|"
 msgid "Classical"
-msgstr ""
+msgstr "སྲོལ་རྒྱུན།"
 
+#, fuzzy
 msgctxt "Description|"
 msgid "Bayesian"
-msgstr ""
+msgstr "བྷེ་ཡེ་སིའི།"
 
 msgctxt "Description|"
 msgid "Prediction Model Performance"
