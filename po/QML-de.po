@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2026-01-12 10:01+0000\n"
+"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.1\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -2387,31 +2393,31 @@ msgstr ""
 
 msgctxt "EffectSizeComputation|"
 msgid "ZSPCOR"
-msgstr ""
+msgstr "ZSPCOR"
 
 msgctxt "EffectSizeComputation|"
 msgid "R2"
-msgstr ""
+msgstr "R2"
 
 msgctxt "EffectSizeComputation|"
 msgid "ZR2"
-msgstr ""
+msgstr "ZR2"
 
 msgctxt "EffectSizeComputation|"
 msgid "REH"
-msgstr ""
+msgstr "REH"
 
 msgctxt "EffectSizeComputation|"
 msgid "Group 1/Outcome +"
-msgstr ""
+msgstr "Gruppe 1/Ergebnis +"
 
 msgctxt "EffectSizeComputation|"
 msgid "Time 1/Outcome +"
-msgstr ""
+msgstr "Zeit 1/Ergebnis +"
 
 msgctxt "EffectSizeComputation|"
 msgid "Outcome +/+"
-msgstr ""
+msgstr "Ergebnis +/+"
 
 msgctxt "EffectSizeComputation|"
 msgid "Coefficient α"
@@ -2423,15 +2429,15 @@ msgstr "Homozygot dominante Allele"
 
 msgctxt "EffectSizeComputation|"
 msgid "Group 1/Outcome -"
-msgstr ""
+msgstr "Gruppe 1/Ergebnis -"
 
 msgctxt "EffectSizeComputation|"
 msgid "Time 1/Outcome -"
-msgstr ""
+msgstr "Zeit 1/Ergebnis -"
 
 msgctxt "EffectSizeComputation|"
 msgid "Outcome +/-"
-msgstr ""
+msgstr "Ergebnis +/-"
 
 msgctxt "EffectSizeComputation|"
 msgid "Heterozygous Alleles"
@@ -2439,15 +2445,15 @@ msgstr "Heterozygote Allele"
 
 msgctxt "EffectSizeComputation|"
 msgid "Group 2/Outcome +"
-msgstr ""
+msgstr "Gruppe 2/Ergebnis +"
 
 msgctxt "EffectSizeComputation|"
 msgid "Time 2/Outcome +"
-msgstr ""
+msgstr "Zeit 2/Ergebnis +"
 
 msgctxt "EffectSizeComputation|"
 msgid "Outcome -/+"
-msgstr ""
+msgstr "Ergebnis -/+"
 
 msgctxt "EffectSizeComputation|"
 msgid "Homozygous Recessive Alleles"
@@ -2455,31 +2461,31 @@ msgstr "Homozygot rezessive Allele"
 
 msgctxt "EffectSizeComputation|"
 msgid "Time 2/Outcome -"
-msgstr ""
+msgstr "Zeit 2/Ergebnis -"
 
 msgctxt "EffectSizeComputation|"
 msgid "Outcome -/-"
-msgstr ""
+msgstr "Ergebnis -/-"
 
 msgctxt "EffectSizeComputation|"
 msgid "Outcome +/+ and +/-"
-msgstr ""
+msgstr "Ergebnis +/+ und +/-"
 
 msgctxt "EffectSizeComputation|"
 msgid "Outcome -/+ and -/-"
-msgstr ""
+msgstr "Ergebnis -/+ und -/-"
 
 msgctxt "EffectSizeComputation|"
 msgid "Events Group 1"
-msgstr ""
+msgstr "Ereignisse Gruppe 1"
 
 msgctxt "EffectSizeComputation|"
 msgid "Events"
-msgstr ""
+msgstr "Ereignisse"
 
 msgctxt "EffectSizeComputation|"
 msgid "Non-Events"
-msgstr ""
+msgstr "Nicht-Ereignisse"
 
 msgctxt "EffectSizeComputation|"
 msgid "Items"
@@ -2491,15 +2497,15 @@ msgstr "Prädiktoren"
 
 msgctxt "EffectSizeComputation|"
 msgid "Events Group 2"
-msgstr ""
+msgstr "Ereignisse Gruppe 2"
 
 msgctxt "EffectSizeComputation|"
 msgid "Person-Time Group 1"
-msgstr ""
+msgstr "Person-Zeit Gruppe 1"
 
 msgctxt "EffectSizeComputation|"
 msgid "Person-Time"
-msgstr ""
+msgstr "Person-Zeit"
 
 msgctxt "EffectSizeComputation|"
 msgid "Person-Time Group 2"
@@ -4817,12 +4823,10 @@ msgstr ""
 "einbezogen werden sollen. Einzelheiten zur Spezifikation der Meta-Regression "
 "finden Sie im Abschnitt \"Modell\"."
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Study Level (Multilevel)"
 msgstr "Studien-Ebene (Multilevel)"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid ""
 "Variable indicating the study level nesting. This variable is used to "
@@ -4897,7 +4901,6 @@ msgctxt "BayesianMetaAnalysis|"
 msgid "Effect size and heterogeneity"
 msgstr "Effektstärke und Heterogenität"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid ""
 "Specify the type of prior distributions for the effect size and "
@@ -7272,7 +7275,6 @@ msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Select the effect size measure to be used in the meta-analysis."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Log odds ratio"
 msgstr "Log-Chancenverhältnis"
@@ -7664,7 +7666,6 @@ msgid ""
 "model. See the 'Model' section for the meta-regression specification details."
 msgstr ""
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Study Level (Multilevel)"
 msgstr "Studien-Ebene (Multilevel)"
@@ -7770,7 +7771,6 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect size and heterogeneity"
 msgstr "Effektstärke und Heterogenität"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
 "Specify the type of prior distributions for the effect size and "
