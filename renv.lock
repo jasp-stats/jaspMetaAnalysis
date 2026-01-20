@@ -379,7 +379,7 @@
     },
     "alabama": {
       "Package": "alabama",
-      "Version": "2023.1.0",
+      "Version": "2025.1.0",
       "Source": "Repository",
       "Requirements": [
         "numDeriv",
@@ -711,13 +711,14 @@
     },
     "distributional": {
       "Package": "distributional",
-      "Version": "0.5.0",
+      "Version": "0.6.0",
       "Source": "Repository",
       "Requirements": [
         "generics",
         "lifecycle",
         "numDeriv",
         "pillar",
+        "R",
         "rlang",
         "stats",
         "utils",
@@ -774,11 +775,12 @@
     },
     "extraDistr": {
       "Package": "extraDistr",
-      "Version": "1.10.0.1",
+      "Version": "1.10.0.2",
       "Source": "Repository",
       "Requirements": [
         "R",
-        "Rcpp"
+        "Rcpp",
+        "RcppArmadillo"
       ]
     },
     "farver": {
@@ -876,7 +878,7 @@
     },
     "future": {
       "Package": "future",
-      "Version": "1.68.0",
+      "Version": "1.69.0",
       "Source": "Repository",
       "Requirements": [
         "digest",
@@ -1207,7 +1209,7 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspBase",
-      "RemoteSha": "8ea347b9ba06aa607c3c6ecea00bae24fe8cd7bf"
+      "RemoteSha": "2aaba080558d26571bb0454652a81fc8014525f3"
     },
     "jaspGraphs": {
       "Package": "jaspGraphs",
@@ -1231,7 +1233,7 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspGraphs",
-      "RemoteSha": "db2ef8b8a74c9ce63a11002f3dd32073d67b18ad"
+      "RemoteSha": "8be6081bc7b1719a70538e563be853e11c4aedbc"
     },
     "jaspSem": {
       "Package": "jaspSem",
@@ -1256,7 +1258,7 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspSem",
-      "RemoteSha": "5d787a50ed9cfe40ac08f98411ccbe6cec2b012d"
+      "RemoteSha": "ebaa1ba44e69698360a0c5880144615a9b664e3a"
     },
     "jpeg": {
       "Package": "jpeg",
@@ -1669,7 +1671,7 @@
     },
     "officer": {
       "Package": "officer",
-      "Version": "0.7.2",
+      "Version": "0.7.3",
       "Source": "Repository",
       "Requirements": [
         "cli",
@@ -2072,7 +2074,7 @@
     },
     "rappdirs": {
       "Package": "rappdirs",
-      "Version": "0.3.3",
+      "Version": "0.3.4",
       "Source": "Repository",
       "Requirements": [
         "R"
@@ -2223,7 +2225,7 @@
     },
     "rstudioapi": {
       "Package": "rstudioapi",
-      "Version": "0.17.1",
+      "Version": "0.18.0",
       "Source": "Repository",
       "Requirements": []
     },
@@ -2447,16 +2449,16 @@
     },
     "survival": {
       "Package": "survival",
-      "Version": "3.8-3",
+      "Version": "3.8-6",
       "Source": "Repository",
       "Requirements": [
         "graphics",
         "Matrix",
         "methods",
+        "R",
         "splines",
         "stats",
-        "utils",
-        "R"
+        "utils"
       ]
     },
     "svglite": {
@@ -2607,7 +2609,7 @@
     },
     "vctrs": {
       "Package": "vctrs",
-      "Version": "0.6.5",
+      "Version": "0.7.0",
       "Source": "Repository",
       "Requirements": [
         "cli",
@@ -2647,7 +2649,7 @@
     },
     "xfun": {
       "Package": "xfun",
-      "Version": "0.55",
+      "Version": "0.56",
       "Source": "Repository",
       "Requirements": [
         "grDevices",
@@ -2658,7 +2660,7 @@
     },
     "xml2": {
       "Package": "xml2",
-      "Version": "1.5.1",
+      "Version": "1.5.2",
       "Source": "Repository",
       "Requirements": [
         "cli",
