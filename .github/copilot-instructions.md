@@ -1,8 +1,8 @@
 # JASP Module
 
 ALWAYS follow these instructions first and fallback to additional search and context gathering ONLY if the information in these instructions is incomplete or found to be in error.
-
 This is a JASP module. It contains QML user-facing interfaces and R backend computations.
+In all interactions and commit messages, be extremely concise and sacrifgice grammar for the sake of concisionn.
 
 ## Working Effectively
 
@@ -19,22 +19,22 @@ This is a JASP module. It contains QML user-facing interfaces and R backend comp
 ### Repository Structure
 ```
 /
-├── R/                          # Backend R analysis functions
+├── R/                           # Backend R analysis functions
 ├── inst/
-│   ├── qml/                   # QML interface definitions
-│   ├── Descriptions/          # Analysis descriptions (Description.qml)
-│   ├── help/                  # Markdown help files
-│   └── Upgrades.qml          # Version upgrade mappings
-├── tests/testthat/           # Unit tests using jaspTools
-├── .github/workflows/        # CI/CD automation
-├── DESCRIPTION               # R package metadata
-├── renv.lock                # R dependency lockfile
+│   ├── qml/                     # QML interface definitions
+│   ├── Descriptions/            # Analysis descriptions (Description.qml)
+│   ├── help/                    # Markdown help files
+│   └── Upgrades.qml             # Version upgrade mappings
+├── tests/testthat/              # Unit tests using jaspTools
+├── .github/workflows/           # CI/CD automation
+├── DESCRIPTION                  # R package metadata
+├── renv.lock                    # R dependency lockfile
 └── jaspSummaryStatistics.Rproj  # RStudio project
 ```
 
 ### Key Files to Check After Changes
 - Always check corresponding test file in `tests/testthat/` when modifying R functions
-- Check `inst/Upgrades.qml` when renaming QML options to maintain backward compatibility
+- Update `inst/Upgrades.qml` when renaming QML options to maintain backward compatibility
 
 ## Building and Testing Code Changes
 
