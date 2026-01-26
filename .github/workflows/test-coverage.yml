@@ -1,0 +1,18 @@
+on:
+  push:
+    paths: ['**.R', 'tests/**', '**.c', '**.cpp', '**.h', '**.hpp', 'DESCRIPTION', 'NAMESPACE', 'MAKEVARS', 'MAKEVARS.win', '**.yml']
+  pull_request:
+    paths: ['**.R', 'tests/**', '**.c', '**.cpp', '**.h', '**.hpp', 'DESCRIPTION', 'NAMESPACE', 'MAKEVARS', 'MAKEVARS.win']
+  # schedule:
+  #   - cron:  '13 12 * * 1-5'
+
+name: coverage
+
+jobs:
+  coverage:
+    if: github.event_name != 'push' || github.event_name == 'pull_request'
+    uses: jasp-stats/jasp-actions/.github/workflows/coverage.yml@master
+    with:
+      needs_JAGS: true
+    secrets:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
