@@ -1,4 +1,17 @@
-# The Meta-Analysis Module <img src='inst/icons/meta-analysis.svg' width='149' height='173' align='right'/>
+<div align="right">
+
+[![Unit Tests](https://github.com/jasp-stats/jaspMetaAnalysis/actions/workflows/unittests.yml/badge.svg)](https://github.com/jasp-stats/jaspMetaAnalysis/actions/workflows/unittests.yml)
+[![codecov](https://codecov.io/gh/jasp-stats/jaspMetaAnalysis/branch/master/graph/badge.svg)](https://codecov.io/gh/jasp-stats/jaspMetaAnalysis)
+<br>
+<b>Maintainer:</b> <a href="https://github.com/FBartos/">František Bartoš</a>
+
+</div>
+
+# The Meta-Analysis Module
+
+## Overview
+
+<img src='inst/icons/meta-analysis.svg' width='149' height='173' align='right'/>
 
 **JASP Meta-Analysis module** is an add-on module for JASP that provides comprehensive tools for synthesizing evidence across multiple studies. The Meta-Analysis module offers a wide range of functionalities, including (but not limited to) classical and Bayesian meta-analytic approaches, multilevel and multivariate models, meta-regression, publication bias adjustment, and robust meta-analytic methods. Specifically, it comprises analysis tools for effect size computation, random-effects and fixed-effects meta-analysis, moderator analysis, heterogeneity assessment, and publication bias detection. Furthermore, the module provides state-of-the-art Bayesian meta-analytic methods through model averaging and hypothesis testing. The module integrates comprehensive visualizations including forest plots, funnel plots, and bubble plots, along with extensive diagnostic tools that assist researchers in understanding, documenting, and communicating their meta-analytic results.
 
@@ -13,7 +26,9 @@ The main functions of the Meta-Analysis module are comprehensively documented in
 [![arXiv](https://img.shields.io/badge/arXiv-2509.09850-b31b1b.svg)](https://doi.org/10.48550/arXiv.2509.09850)
 
 
-## R Packages <img src='https://www.r-project.org/logo/Rlogo.svg' width='100' height='78' align='right'/>
+## R Packages
+
+<img src='https://www.r-project.org/logo/Rlogo.svg' width='100' height='78' align='right'/>
 
 The meta-analytic functionality is served by several R packages
 
