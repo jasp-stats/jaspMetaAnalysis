@@ -5,7 +5,6 @@ context("Example: Temporal Trends in Fish Community Structures in French Rivers"
 
 test_that("ClassicalMetaAnalysisMultilevelMultivariate results match", {
 
-  skip("Issues loading the included csv file for covariance matrix from generated files?")
   # Load from JASP example file
   jaspFile <- testthat::test_path("..", "..", "examples", "Temporal Trends in Fish Community Structures in French Rivers.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)
