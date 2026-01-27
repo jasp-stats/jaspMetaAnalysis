@@ -23,6 +23,7 @@
 "exampleMaire2019DistanceMatrix"
 
 .mammGetExampleMaire2019DistanceMatrix <- function() {
-  data("exampleMaire2019DistanceMatrix")
-  return(exampleMaire2019DistanceMatrix)
+  env <- new.env()
+  utils::data("exampleMaire2019DistanceMatrix", package = "jaspMetaAnalysis", envir = env)
+  return(env[["exampleMaire2019DistanceMatrix"]])
 }
