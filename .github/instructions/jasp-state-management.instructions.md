@@ -1,5 +1,5 @@
 ---
-paths: "**/R/*.R"
+applyTo: "**/R/*.R"
 ---
 
 # JASP State Management (createJaspState)
@@ -20,15 +20,15 @@ Model fitting is expensive. Without caching, every option change (even toggling 
 
 ```r
 .computeModel <- function(jaspResults, dataset, options) {
-    if (!is.null(jaspResults[["modelFit"]]))
-        return()                                    # cached → skip
+	if (!is.null(jaspResults[["modelFit"]]))
+		return()                                    # cached → skip
 
-    fitState <- createJaspState()
-    fitState$dependOn(.modelDeps)                    # only model options
-    jaspResults[["modelFit"]] <- fitState
+	fitState <- createJaspState()
+	fitState$dependOn(.modelDeps)                    # only model options
+	jaspResults[["modelFit"]] <- fitState
 
-    result <- try(expensiveFit(dataset, options))
-    fitState$object <- result                        # cache
+	result <- try(expensiveFit(dataset, options))
+	fitState$object <- result                        # cache
 }
 ```
 
@@ -70,26 +70,26 @@ The most common pattern -- fit a model once, reuse across multiple tables and pl
 
 ```r
 .computeModel <- function(jaspResults, dataset, options) {
-    if (!is.null(jaspResults[["modelFit"]]))
-        return()
+	if (!is.null(jaspResults[["modelFit"]]))
+		return()
 
-    fitState <- createJaspState()
-    fitState$dependOn(.modelDeps)
-    jaspResults[["modelFit"]] <- fitState
+	fitState <- createJaspState()
+	fitState$dependOn(.modelDeps)
+	jaspResults[["modelFit"]] <- fitState
 
-    fit <- try(myPackage::fitModel(
-        formula = .buildFormula(options),
-        data    = dataset
-    ))
+	fit <- try(myPackage::fitModel(
+		formula = .buildFormula(options),
+		data    = dataset
+	))
 
-    fitState$object <- fit
+	fitState$object <- fit
 }
 
 # Used by multiple builders:
 .extractFit <- function(jaspResults) {
-    cached <- jaspResults[["modelFit"]]$object
-    if (is.null(cached)) return(NULL)
-    return(cached)
+	cached <- jaspResults[["modelFit"]]$object
+	if (is.null(cached)) return(NULL)
+	return(cached)
 }
 ```
 
@@ -101,30 +101,30 @@ When the analysis computes separate fits for groups or variables, store them as 
 
 ```r
 .computeModel <- function(jaspResults, dataset, options) {
-    if (!is.null(jaspResults[["modelFit"]]))
-        return()
+	if (!is.null(jaspResults[["modelFit"]]))
+		return()
 
-    fitState <- createJaspState()
-    fitState$dependOn(.modelDeps)
-    jaspResults[["modelFit"]] <- fitState
+	fitState <- createJaspState()
+	fitState$dependOn(.modelDeps)
+	jaspResults[["modelFit"]] <- fitState
 
-    results <- list()
+	results <- list()
 
-    # Overall fit
-    results[["overall"]] <- try(fitFun(dataset, options))
+	# Overall fit
+	results[["overall"]] <- try(fitFun(dataset, options))
 
-    # Per-group fits (if grouping variable selected)
-    if (options[["groupingVariable"]] != "") {
-        groups <- unique(dataset[[options[["groupingVariable"]]]])
-        for (g in groups) {
-            subData <- dataset[dataset[[options[["groupingVariable"]]]] == g, ]
-            fit <- try(fitFun(subData, options))
-            attr(fit, "group") <- as.character(g)    # preserve metadata even on error
-            results[[paste0("group_", g)]] <- fit
-        }
-    }
+	# Per-group fits (if grouping variable selected)
+	if (options[["groupingVariable"]] != "") {
+		groups <- unique(dataset[[options[["groupingVariable"]]]])
+		for (g in groups) {
+			subData <- dataset[dataset[[options[["groupingVariable"]]]] == g, ]
+			fit <- try(fitFun(subData, options))
+			attr(fit, "group") <- as.character(g)    # preserve metadata even on error
+			results[[paste0("group_", g)]] <- fit
+		}
+	}
 
-    fitState$object <- results
+	fitState$object <- results
 }
 ```
 
@@ -137,14 +137,14 @@ When the analysis computes separate fits for groups or variables, store them as 
 
 ```r
 .extractFit <- function(jaspResults, options) {
-    results <- jaspResults[["modelFit"]]$object
-    if (is.null(results)) return(NULL)
+	results <- jaspResults[["modelFit"]]$object
+	if (is.null(results)) return(NULL)
 
-    # Optionally exclude overall fit
-    if (options[["groupingVariable"]] != "" && !options[["includeOverall"]])
-        results <- results[names(results) != "overall"]
+	# Optionally exclude overall fit
+	if (options[["groupingVariable"]] != "" && !options[["includeOverall"]])
+		results <- results[names(results) != "overall"]
 
-    return(results)
+	return(results)
 }
 ```
 
@@ -156,16 +156,16 @@ When multiple output elements (table + plot) need the same intermediate result:
 
 ```r
 .computeDiagnostics <- function(jaspResults, options) {
-    if (!is.null(jaspResults[["diagnosticsCache"]]))
-        return(jaspResults[["diagnosticsCache"]]$object)
+	if (!is.null(jaspResults[["diagnosticsCache"]]))
+		return(jaspResults[["diagnosticsCache"]]$object)
 
-    state <- createJaspState()
-    state$dependOn(.diagnosticsDeps)
-    jaspResults[["diagnosticsCache"]] <- state
+	state <- createJaspState()
+	state$dependOn(.diagnosticsDeps)
+	jaspResults[["diagnosticsCache"]] <- state
 
-    results <- expensiveComputation(...)
-    state$object <- results
-    return(results)
+	results <- expensiveComputation(...)
+	state$object <- results
+	return(results)
 }
 ```
 
@@ -180,35 +180,35 @@ When the set of output children depends on user-selected variables, track what's
 ```r
 .buildVariableOutputs <- function(jaspResults, options) {
 
-    container <- .extractContainer(jaspResults)
+	container <- .extractContainer(jaspResults)
 
-    # Get or create metadata state
-    if (!is.null(container[["metaData"]])) {
-        meta <- container[["metaData"]]$object
-    } else {
-        metaState <- createJaspState()
-        metaState$dependOn(c("selectedVariables"))
-        container[["metaData"]] <- metaState
-        meta <- list(existing = character(0))
-    }
+	# Get or create metadata state
+	if (!is.null(container[["metaData"]])) {
+		meta <- container[["metaData"]]$object
+	} else {
+		metaState <- createJaspState()
+		metaState$dependOn(c("selectedVariables"))
+		container[["metaData"]] <- metaState
+		meta <- list(existing = character(0))
+	}
 
-    selected <- options[["selectedVariables"]]
-    existing <- meta$existing
+	selected <- options[["selectedVariables"]]
+	existing <- meta$existing
 
-    # Remove deselected
-    for (v in setdiff(existing, selected))
-        container[[v]] <- NULL
+	# Remove deselected
+	for (v in setdiff(existing, selected))
+		container[[v]] <- NULL
 
-    # Add new
-    for (v in setdiff(selected, existing)) {
-        child <- createJaspContainer(title = v)
-        child$position <- which(selected == v)
-        container[[v]] <- child
-        .buildTableForVariable(child, jaspResults, options, v)
-    }
+	# Add new
+	for (v in setdiff(selected, existing)) {
+		child <- createJaspContainer(title = v)
+		child$position <- which(selected == v)
+		container[[v]] <- child
+		.buildTableForVariable(child, jaspResults, options, v)
+	}
 
-    # Update tracking
-    container[["metaData"]]$object <- list(existing = selected)
+	# Update tracking
+	container[["metaData"]]$object <- list(existing = selected)
 }
 ```
 
@@ -222,22 +222,22 @@ When an expensive fit should NOT be re-run for visualization-only option changes
 
 ```r
 .updateFitData <- function(jaspResults, dataset, options) {
-    if (is.null(jaspResults[["modelFit"]]))
-        return()
-    if (!is.null(jaspResults[["fitDataUpdate"]]))
-        return()
+	if (is.null(jaspResults[["modelFit"]]))
+		return()
+	if (!is.null(jaspResults[["fitDataUpdate"]]))
+		return()
 
-    # Create sentinel with narrow deps
-    sentinel <- createJaspState()
-    sentinel$dependOn(.plottingVariableDeps)
-    jaspResults[["fitDataUpdate"]] <- sentinel
+	# Create sentinel with narrow deps
+	sentinel <- createJaspState()
+	sentinel$dependOn(.plottingVariableDeps)
+	jaspResults[["fitDataUpdate"]] <- sentinel
 
-    # Update auxiliary data on the existing (cached) fit
-    fit <- jaspResults[["modelFit"]]$object
-    fit$plotData <- .prepPlotData(fit, dataset, options)
-    jaspResults[["modelFit"]]$object <- fit
+	# Update auxiliary data on the existing (cached) fit
+	fit <- jaspResults[["modelFit"]]$object
+	fit$plotData <- .prepPlotData(fit, dataset, options)
+	jaspResults[["modelFit"]]$object <- fit
 
-    sentinel$object <- TRUE    # mark as done
+	sentinel$object <- TRUE    # mark as done
 }
 ```
 
