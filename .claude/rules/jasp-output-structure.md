@@ -1,7 +1,13 @@
+---
+paths:
+  - "**/tests/testthat/*.R"
+  - "**/R/*.R"
+---
+
 # JASP Analysis Output Structure
 
 Reading and testing the serialized output from `jaspTools::runAnalysis()`.
-For building output in R code, see [jasp-r-building-patterns.md](jasp-r-building-patterns.md).
+For building tables see [jasp-tables.md](jasp-tables.md). For plots see [jasp-plots.md](jasp-plots.md).
 
 ## Top-Level `results` Object
 

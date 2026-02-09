@@ -10,18 +10,23 @@ In all interactions and commit messages, be extremely concise and sacrifice gram
 
 For comprehensive guidance on specific topics, see:
 
-- **[R Backend Development](.claude/rules/r-instructions.md)** - Complete R function structure, output components, jaspResults usage
+- **[Module Architecture](.claude/rules/jasp-module-architecture.md)** - **Start here.** QML-Desktop-R reactive loop, jaspResults persistence, options mapping, data flow
+- **[Dependency Management](.claude/rules/jasp-dependency-management.md)** - $dependOn mechanics, inheritance, vectors, per-value deps, sentinel pattern
+- **[State Management](.claude/rules/jasp-state-management.md)** - createJaspState caching, model fit patterns, metadata state, dynamic containers
+- **[R Backend Development](.claude/rules/r-instructions.md)** - R function structure, validation, style conventions
+- **[Tables](.claude/rules/jasp-tables.md)** - Table lifecycle, columns, rows, footnotes, error display
+- **[Plots](.claude/rules/jasp-plots.md)** - Plot lifecycle, composite plots, subgroup/facet patterns
+- **[Containers & Errors](.claude/rules/jasp-containers-and-errors.md)** - Container patterns, HTML output, error handling
 - **[QML Interface Development](.claude/rules/qml-instructions.md)** - QML controls, validation, bindings, and UI patterns
 - **[Testing & Test Writing](.claude/rules/testing-instructions.md)** - Test framework, snapshots, and test workflow
 - **[Translation (i18n)](.claude/rules/translation-instructions.md)** - gettext/gettextf/qsTr usage, formatting, plurals
 - **[Output Structure](.claude/rules/jasp-output-structure.md)** - Reading/testing serialized output (containers, tables, plots, state)
-- **[R Building Patterns](.claude/rules/jasp-r-building-patterns.md)** - Patterns for building tables, plots, containers, state in R code
 
 ## R Session via MCP
 
 This project uses the `btw` MCP server (`.claude/mcp-server.R`) to provide a persistent R session via `btw_tool_run_r`. The MCP server config (`.mcp.json`) is module-specific and NOT committed to git.
 
-**Session handoff:** The user sets up their R session (RStudio/Positron/radian), runs `btw::btw_mcp_session()`, and hands it over. Connect via `list_r_sessions` / `select_r_session`. All `btw_tool_run_r` calls then execute in the user's session with full access to loaded packages and objects.
+**Session handoff:** The user sets up their R session (RStudio/Positron/radian), runs `btw::btw_mcp_session()`, and hands it over. Connect via `list_r_sessions` / `select_r_session`. All `btw_tool_run_r` calls then execute in the user's session with full access to loaded packages and objects. The following R packages are required for the mcp server: `btw`, `mcptools`.  
 
 ### Available MCP Tools
 

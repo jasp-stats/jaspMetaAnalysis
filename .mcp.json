@@ -2,7 +2,7 @@
   "mcpServers": {
     "r-mcptools": {
       "type": "stdio",
-      "command": "C:/Program Files/R/R-4.5.1/bin/Rscript.exe",
+      "command": "Rscript",
       "args": ["-e", "source('.claude/mcp-server.R')"]
     },
     "markitdown": {
