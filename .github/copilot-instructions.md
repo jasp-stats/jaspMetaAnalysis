@@ -21,6 +21,7 @@ For comprehensive guidance on specific topics, see:
 - **[Testing & Test Writing](.github/instructions/testing.instructions.md)** - Test framework, snapshots, and test workflow
 - **[Translation (i18n)](.github/instructions/translation.instructions.md)** - gettext/gettextf/qsTr usage, formatting, plurals
 - **[Output Structure](.github/instructions/jasp-output-structure.instructions.md)** - Reading/testing serialized output (containers, tables, plots, state)
+- **[Debug Analysis](.github/instructions/debug-analysis.instructions.md)** - Debugging JASP analyses via saveRDS() state capture in MCP sessions
 
 ## R Session via MCP
 

@@ -4,11 +4,11 @@ applyTo: "**/tests/testthat/*.R"
 
 # JASP Testing Instructions
 
-## Test Framework
+## 1) Test Framework
 
 This module uses the `jaspTools` testing framework. Tests are **critical** and must always pass before committing code.
 
-## Running Tests
+## 2) Running Tests
 
 Run via `btw_tool_run_r` in the persistent R session:
 
@@ -28,7 +28,7 @@ testAnalysis("AnalysisName")
 - ALL tests must pass before proceeding
 - Some tests skip on certain platforms (e.g., Windows) -- this is expected
 
-## Test File Structure
+## 3) Test File Structure
 
 Each test file in `tests/testthat/` corresponds to an R analysis file:
 
@@ -36,7 +36,7 @@ Each test file in `tests/testthat/` corresponds to an R analysis file:
 - Test file name pattern: `test-<analysisname>.R`
 - Analysis names for `testAnalysis()` come from NAMESPACE exports (PascalCase)
 
-## Writing Tests
+## 4) Writing Tests
 
 ### Basic test structure
 
@@ -84,19 +84,19 @@ results  <- jaspTools::runAnalysis("AnalysisName", encoded$dataset, encoded$opti
 - `jaspTools::expect_equal_tables(actual, expected)` -- Compare table output
 - `jaspTools::expect_equal_plots(plot, name, dir)` -- Compare plot output (snapshot-based)
 
-## Test Data
+## 5) Test Data
 
 - `"debug.csv"` is a built-in jaspTools dataset containing most data types
 - Use `set.seed()` before running analyses for reproducibility
 - Example .jasp files in `examples/` provide pre-configured options and datasets
 
-## Test Snapshots
+## 6) Test Snapshots
 
 - Snapshots stored in `tests/testthat/_snaps/`
 - **NEVER automatically accept snapshot changes** -- always notify user for manual inspection
 - When a new snapshot is created, inform the user so they can verify it
 
-## When to Update Tests
+## 7) When to Update Tests
 
 ### Always update tests when
 
@@ -112,7 +112,7 @@ results  <- jaspTools::runAnalysis("AnalysisName", encoded$dataset, encoded$opti
 3. Update expected values in test file
 4. Re-run tests to confirm they pass
 
-## Test Workflow
+## 8) Test Workflow
 
 ### Before making code changes
 
@@ -132,7 +132,7 @@ Run `testAll()` via `btw_tool_run_r` to establish baseline -- all tests should p
 4. If unexpected: fix your code
 5. Re-run tests until all pass
 
-## Adding New Tests
+## 9) Adding New Tests
 
 When adding a new analysis:
 
@@ -142,7 +142,7 @@ When adding a new analysis:
 4. Test edge cases and error conditions
 5. Use meaningful variable names and test data
 
-## Best Practices
+## 10) Best Practices
 
 - **One test per output element** -- separate `test_that()` blocks for each table/plot
 - **Descriptive test names** -- clearly state what is being tested

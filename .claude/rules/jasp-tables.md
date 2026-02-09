@@ -13,7 +13,7 @@ For containers and error handling see [jasp-containers-and-errors.md](jasp-conta
 
 ---
 
-## Complete Table Lifecycle
+## 1) Complete Table Lifecycle
 
 ```r
 .myTable <- function(jaspResults, options) {
@@ -61,7 +61,7 @@ For containers and error handling see [jasp-containers-and-errors.md](jasp-conta
 
 ---
 
-## Column Types
+## 2) Column Types
 
 | Type | Use for | Format examples |
 |------|---------|-----------------|
@@ -72,7 +72,7 @@ For containers and error handling see [jasp-containers-and-errors.md](jasp-conta
 
 ---
 
-## Column Modifiers
+## 3) Column Modifiers
 
 ```r
 # Grouped column header (e.g., "95% CI" spanning Lower/Upper)
@@ -85,7 +85,7 @@ table$showSpecifiedColumnsOnly <- TRUE
 
 ---
 
-## DRY Pattern: Reusable Column Helpers
+## 4) DRY Pattern: Reusable Column Helpers
 
 When multiple tables share the same column groups (e.g., CI columns, SE columns, test statistics), factor out repeated `addColumnInfo()` calls into shared helper functions. For example, a helper that conditionally adds a CI lower/upper pair with a dynamic overtitle avoids duplicating those 3-4 lines across every table builder.
 
@@ -93,7 +93,7 @@ Apply the same pattern for any column group that appears in more than one table 
 
 ---
 
-## Parameterized Tables
+## 5) Parameterized Tables
 
 When the same table structure serves multiple purposes, parametrize the builder:
 
@@ -118,7 +118,7 @@ When the same table structure serves multiple purposes, parametrize the builder:
 
 ---
 
-## Row Builder Pattern
+## 6) Row Builder Pattern
 
 Each row builder takes a **single fit** and returns a **data.frame** (one or more rows):
 
@@ -152,7 +152,7 @@ Each row builder takes a **single fit** and returns a **data.frame** (one or mor
 
 ---
 
-## DRY Pattern: Safe Data Aggregation
+## 7) DRY Pattern: Safe Data Aggregation
 
 When combining data.frames from multiple fits — especially when some fits may fail and return fewer columns — create a helper that:
 
@@ -165,7 +165,7 @@ This avoids `rbind()` failures when partial errors produce data.frames with hete
 
 ---
 
-## Footnotes
+## 8) Footnotes
 
 ```r
 # Simple footnote (appears at bottom)
@@ -189,7 +189,7 @@ table$addFootnote(message, colNames = "est", rowNames = "rowLabel")
 
 ---
 
-## Error Display on Tables
+## 9) Error Display on Tables
 
 ```r
 # Error message replaces entire table content

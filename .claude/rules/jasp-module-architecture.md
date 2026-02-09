@@ -9,7 +9,7 @@ For serialized output format see [jasp-output-structure.md](jasp-output-structur
 
 ---
 
-## The Reactive Loop
+## 1) The Reactive Loop
 
 ```
 User changes option in QML GUI
@@ -39,7 +39,7 @@ Desktop reads jaspResults and renders tables/plots/text in the GUI
 
 ---
 
-## jaspResults: The Persistent Bridge
+## 2) jaspResults: The Persistent Bridge
 
 `jaspResults` is an R5 reference class that persists between R invocations for the same analysis instance. It is NOT recreated each time.
 
@@ -71,7 +71,7 @@ Every element has `$position` (integer). Lower = higher on page. Children within
 
 ---
 
-## Options: The Flat Named List
+## 3) Options: The Flat Named List
 
 ### QML name → R options key
 
@@ -119,7 +119,7 @@ JASP internally encodes column names. In R analysis code, the encoding is transp
 
 ---
 
-## Data Flow (Generic)
+## 4) Data Flow (Generic)
 
 ```
 QML assigns variable names → options[["dependentVariable"]] = "score"
@@ -148,7 +148,7 @@ Builders should handle the "not ready" case gracefully -- create empty tables (c
 
 ---
 
-## The Entry Point → Common → Builder Pattern
+## 5) The Entry Point → Common → Builder Pattern
 
 ### Three-layer architecture
 
@@ -224,7 +224,7 @@ AnalysisCommon(jaspResults, dataset, options)
 
 ---
 
-## Registration & Backward Compatibility
+## 6) Registration & Backward Compatibility
 
 ### Description.qml
 

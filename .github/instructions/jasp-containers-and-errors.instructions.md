@@ -12,7 +12,7 @@ For state/caching see [jasp-state-management.md](jasp-state-management.md).
 
 ---
 
-## 1. Containers
+## 1) Containers
 
 Containers group related output elements under a collapsible section.
 
@@ -87,7 +87,7 @@ See [jasp-state-management.md](jasp-state-management.md) for the metadata state 
 
 ---
 
-## 2. HTML Output
+## 2) HTML Output
 
 For raw HTML content (e.g., displaying R code or formatted messages):
 
@@ -101,7 +101,7 @@ jaspResults[["rCode"]] <- htmlOutput
 
 ---
 
-## 3. Error Handling Patterns
+## 3) Error Handling Patterns
 
 ### Create-then-error
 

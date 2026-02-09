@@ -14,7 +14,7 @@ Note that you cannot test this by running analysis via `runAnalysis()` because y
 
 ---
 
-## Why State Objects Exist
+## 1) Why State Objects Exist
 
 Model fitting is expensive. Without caching, every option change (even toggling a checkbox for an unrelated table) would re-run the computation. State objects solve this by caching results that persist across R invocations as long as their dependencies hold.
 
@@ -36,7 +36,7 @@ Now when the user toggles "Show CI" (a table option, not a model option), `jaspR
 
 ---
 
-## The $object Property
+## 2) The $object Property
 
 `createJaspState()` stores arbitrary R objects via `$object`:
 
@@ -52,7 +52,7 @@ model <- cached$model
 
 ---
 
-## State vs Output Elements
+## 3) State vs Output Elements
 
 | | State | Table/Plot/Html |
 |---|---|---|
@@ -64,7 +64,7 @@ model <- cached$model
 
 ---
 
-## Pattern: Model Fit Caching
+## 4) Pattern: Model Fit Caching
 
 The most common pattern -- fit a model once, reuse across multiple tables and plots:
 
@@ -95,7 +95,7 @@ The most common pattern -- fit a model once, reuse across multiple tables and pl
 
 ---
 
-## Pattern: Multiple Fits (Per Group / Per Variable)
+## 5) Pattern: Multiple Fits (Per Group / Per Variable)
 
 When the analysis computes separate fits for groups or variables, store them as a named list:
 
@@ -150,7 +150,7 @@ When the analysis computes separate fits for groups or variables, store them as 
 
 ---
 
-## Pattern: Shared Computation Cache
+## 6) Pattern: Shared Computation Cache
 
 When multiple output elements (table + plot) need the same intermediate result:
 
@@ -173,7 +173,7 @@ Both `.diagnosticsTable()` and `.diagnosticsPlot()` call `.computeDiagnostics()`
 
 ---
 
-## Pattern: Metadata State for Dynamic Containers
+## 7) Pattern: Metadata State for Dynamic Containers
 
 When the set of output children depends on user-selected variables, track what's currently rendered:
 
@@ -216,7 +216,7 @@ This avoids rebuilding the entire container when the user adds or removes a sing
 
 ---
 
-## Pattern: Dataset Update Sentinel
+## 8) Pattern: Dataset Update Sentinel
 
 When an expensive fit should NOT be re-run for visualization-only option changes, but auxiliary data attached to the fit needs updating:
 
@@ -245,7 +245,7 @@ When a plotting variable changes: sentinel is NULLed, data is re-attached. The m
 
 ---
 
-## Common Pitfalls
+## 9) Common Pitfalls
 
 **Forgetting to store:** Creating a state but never assigning `$object` -- extractors see NULL.
 

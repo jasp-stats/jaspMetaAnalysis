@@ -9,7 +9,7 @@
       "WebFetch(domain:cran.r-project.org)",
       "WebFetch(domain:gadenbuie.r-universe.dev)",
       "WebFetch(domain:ellmer.tidyverse.org)",
-	  "WebFetch(domain:github.com)",
+      "WebFetch(domain:github.com)",
       "mcp__r-mcptools__btw_tool_session_platform_info",
       "mcp__r-mcptools__btw_tool_session_package_info",
       "mcp__r-mcptools__btw_tool_session_check_package_installed",
@@ -21,7 +21,8 @@
       "mcp__r-mcptools__btw_tool_docs_vignette",
       "mcp__r-mcptools__btw_tool_docs_help_page",
       "mcp__r-mcptools__btw_tool_run_r",
-      "mcp__markitdown__convert_to_markdown"
+      "mcp__markitdown__convert_to_markdown",
+      "Read(//c/JASP-Packages/jaspMetaAnalysis/**)"
     ]
   },
   "enableAllProjectMcpServers": true,

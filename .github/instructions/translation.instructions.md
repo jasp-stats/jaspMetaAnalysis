@@ -7,13 +7,13 @@ applyTo:
 
 # Translation (i18n) Instructions
 
-## Core Principle
+## 1) Core Principle
 
 **ALL user-visible text must be wrapped for translation.**
 
 This module is translated into multiple languages via Weblate integration.
 
-## R Code Translation
+## 2) R Code Translation
 
 ### Use `gettext()` for static strings:
 ```r
@@ -56,7 +56,7 @@ if (options$confidenceInterval) {
 }
 ```
 
-## QML Translation
+## 3) QML Translation
 
 ### Wrap all visible strings with `qsTr()`:
 ```qml
@@ -128,7 +128,7 @@ DropDown
 }
 ```
 
-## Translation Rules
+## 4) Translation Rules
 
 ### DO wrap for translation:
 - ✅ Table/plot/container titles
@@ -172,7 +172,7 @@ label <- gettextf("%s% CI", 95)
 label <- gettextf("%s%% CI", 95)
 ```
 
-## Translation Workflow
+## 5) Translation Workflow
 
 ### Automated process:
 1. Developers write code with `gettext()`/`gettextf()`/`qsTr()`
@@ -195,7 +195,7 @@ Usually handled automatically, but if needed:
 # Don't manually edit .po files unless absolutely necessary
 ```
 
-## Testing Translations
+## 6) Testing Translations
 
 While we can't easily test all languages locally, ensure:
 1. All user-visible strings are wrapped
@@ -204,7 +204,7 @@ While we can't easily test all languages locally, ensure:
 4. No empty strings marked for translation
 5. Context provided for ambiguous terms
 
-## Common Mistakes to Avoid
+## 7) Common Mistakes to Avoid
 
 ### ❌ WRONG:
 ```r
@@ -236,7 +236,7 @@ msg <- gettextf("Found %1$s issues in %2$s", count, name)
 label <- gettextf("%s%% Confidence Interval", 95)
 ```
 
-## Translation Context
+## 8) Translation Context
 
 For ambiguous terms, consider adding comments:
 ```r
@@ -247,7 +247,7 @@ columnTitle <- gettext("Mean")
 fieldLabel <- qsTr("Scale variable")
 ```
 
-## Weblate Integration
+## 9) Weblate Integration
 
 - Weblate repo: `jaspequivalencettests-qml` and `jaspequivalencettests-r`
 - Automated workflow: `.github/workflows/translations.yml`

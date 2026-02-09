@@ -14,7 +14,7 @@ Note that you cannot test this by running analysis via `runAnalysis()` because y
 
 ---
 
-## What $dependOn Does
+## 1) What $dependOn Does
 
 When you write:
 ```r
@@ -27,7 +27,7 @@ Elements whose dependencies are NOT hit survive across invocations -- the builde
 
 ---
 
-## Dependency Inheritance
+## 2) Dependency Inheritance
 
 Container dependencies propagate to ALL children:
 
@@ -43,7 +43,7 @@ This means you can put shared model-level dependencies on the container and only
 
 ---
 
-## Dependency Vectors as Constants
+## 3) Dependency Vectors as Constants
 
 Define at file top for reuse across builders:
 ```r
@@ -62,7 +62,7 @@ Keep dependency vectors comprehensive -- missing a dependency means stale output
 
 ---
 
-## Conditional / Dynamic Dependencies
+## 4) Conditional / Dynamic Dependencies
 
 When different analysis modes need different dependency sets:
 ```r
@@ -82,7 +82,7 @@ plot$dependOn(c(.plotDeps,
 
 ---
 
-## Per-Value Dependencies (optionContainsValue)
+## 5) Per-Value Dependencies (optionContainsValue)
 
 For containers with one child per user-selected variable, invalidate only when that specific variable is removed:
 
@@ -100,7 +100,7 @@ If the user removes variable `"x"` from the list, only `container[["x"]]` is NUL
 
 ---
 
-## Sentinel Pattern (Narrow Dependencies)
+## 6) Sentinel Pattern (Narrow Dependencies)
 
 When an expensive computation (e.g., model fit) should NOT be invalidated by visualization-only options, but the visualization data still needs updating:
 
@@ -125,7 +125,7 @@ This avoids expensive re-computation when only display options change.
 
 ---
 
-## Common Pitfalls
+## 7) Common Pitfalls
 
 **Missing dependency:** If you forget to list an option in `$dependOn()`, changing that option won't invalidate the element. The user sees stale output.
 

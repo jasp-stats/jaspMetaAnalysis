@@ -11,7 +11,7 @@ For testing plots see [testing-instructions.md](testing-instructions.md) (`expec
 
 ---
 
-## Simple Plot
+## 1) Simple Plot
 
 ```r
 .myPlot <- function(jaspResults, options) {
@@ -46,7 +46,7 @@ For testing plots see [testing-instructions.md](testing-instructions.md) (`expec
 
 ---
 
-## Plot with Error Handling
+## 2) Plot with Error Handling
 
 Wrap plot construction in `try()` and display the error on the plot element:
 
@@ -68,7 +68,7 @@ jaspResults[["myPlot"]] <- myPlot
 
 ---
 
-## Composite Plot (jaspGraphsPlot)
+## 3) Composite Plot (jaspGraphsPlot)
 
 For plots with multiple panels (e.g., a left annotation panel + right data panel):
 
@@ -86,7 +86,7 @@ In tests, each subplot gets its own SVG snapshot: `"name-subplot-1"`, `"name-sub
 
 ---
 
-## Per-Group Plot Pattern
+## 4) Per-Group Plot Pattern
 
 When a single fit produces a single plot, but multiple groups produce a container of plots:
 
@@ -115,7 +115,7 @@ if (options[["groupingVariable"]] == "") {
 
 ---
 
-## Separate-Plots-by-Variable Pattern
+## 5) Separate-Plots-by-Variable Pattern
 
 When a variable creates multiple faceted plots:
 

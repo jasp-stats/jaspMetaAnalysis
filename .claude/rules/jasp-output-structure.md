@@ -9,7 +9,7 @@ paths:
 Reading and testing the serialized output from `jaspTools::runAnalysis()`.
 For building tables see [jasp-tables.md](jasp-tables.md). For plots see [jasp-plots.md](jasp-plots.md).
 
-## Top-Level `results` Object
+## 1) Top-Level `results` Object
 
 After `jaspTools::runAnalysis()`, the returned list has 5 keys:
 - `status` -- `"complete"` or `"fatalError"`
@@ -18,7 +18,7 @@ After `jaspTools::runAnalysis()`, the returned list has 5 keys:
 - `progress` -- progress info (usually empty after completion)
 - `typeRequest` -- internal type info
 
-## `results$results` Structure
+## 2) `results$results` Structure
 
 Contains:
 - `.meta` -- recursive metadata describing the tree (type, name, title for each element)
@@ -33,7 +33,7 @@ Contains:
 | **Table** | `data`, `schema`, `name`, `title`, `status`, `footnotes`, `casesAcrossColumns` | Has `$schema` with `$fields` |
 | **Plot/Image** | `data` (string path), `name`, `title`, `width`, `height`, `status`, `convertible` | Has `$data` as character string (e.g., `"plots/1.png"`) |
 
-## Containers
+## 3) Containers
 
 Containers group related output elements. Structure:
 ```
@@ -63,7 +63,7 @@ estimatedMarginalMeansAndContrastsContainer
 results[["results"]][["containerName"]][["collection"]][["containerName_child"]][["collection"]][["containerName_child_table"]][["data"]]
 ```
 
-## Tables
+## 4) Tables
 
 ### Schema (`table$schema$fields`)
 List of column definitions, each with:
@@ -95,7 +95,7 @@ footnote$rows   -- rows it applies to (NULL = all)
 - `.isNewGroup` -- boolean, marks visual row separator in JASP GUI
 - These appear in `expect_equal_tables` flattened output
 
-## Plots
+## 5) Plots
 
 ### In `results$results`
 Plot entries store metadata only:
@@ -127,13 +127,13 @@ testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
 jaspTools::expect_equal_plots(testPlot, "snapshot-name")
 ```
 
-## State Object (`results$state`)
+## 6) State Object (`results$state`)
 
 - `state$figures` -- named list of plot objects (keyed by "plots/N.png")
 - `state$other` -- named list of cached R objects (keyed by "state_N")
   - Used by `createJaspState()` for caching expensive computations between output elements
 
-## Testing Utilities
+## 7) Testing Utilities
 
 ### `expect_equal_tables(table_data, reference_list)`
 1. Takes `table$data` (list of row-lists)
@@ -157,7 +157,7 @@ jaspTools::expect_equal_tables(table_data,
 - If plain `ggplot`: compared directly via `vdiffr::expect_doppelganger`
 - SVG snapshots stored in `tests/testthat/_snaps/`
 
-## Quick Reference: Navigating Results
+## 8) Quick Reference: Navigating Results
 
 ```r
 # Run analysis
