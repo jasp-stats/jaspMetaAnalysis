@@ -67,9 +67,9 @@ Prefer **declarative validation** via built-in field properties:
 - **Consistency:** Prefer the provided JASP controls over ad-hoc QML; nest subordinate options inside the control that enables them (e.g., a `CheckBox` containing its dependent fields).
 - **Two-column rhythm:** Let the grid flow naturally; use `rowSpan/columnSpan` to avoid awkward gaps; avoid long single-column scrollers.
 - **Variables first:** Place `VariablesForm` at the top; align list widths; restrict types with `allowedColumns`.
-- **Defaults & placeholders:** Prefer meaningful `defaultValue`; use `placeholderText` only when input is optional. Don’t set both.
-- **Dropdowns:** Use `{label, value}` pairs when R-side value differs; add an explicit empty choice with `addEmptyValue` if “no selection” is valid.
-- **Advanced options:** Tuck rare/expert settings into a `Section` titled “Advanced Options”.
+- **Defaults & placeholders:** Prefer meaningful `defaultValue`; use `placeholderText` only when input is optional. Don't set both.
+- **Dropdowns:** Use `{label, value}` pairs when R-side value differs; add an explicit empty choice with `addEmptyValue` if "no selection" is valid.
+- **Advanced options:** Tuck rare/expert settings into a `Section` titled "Advanced Options".
 - **Docs:** Fill `info:` succinctly for every major control.
 - **Spacing:** Always use tabs for spacing. Each argument on a new line. (See examples below.)
 
@@ -83,7 +83,7 @@ Prefer **declarative validation** via built-in field properties:
     name:   "showX"
     label:  qsTr("Show X")
   }
-  
+
   DoubleField
   {
     name:         "Alpha"
@@ -102,7 +102,7 @@ Prefer **declarative validation** via built-in field properties:
   {
     name: "crit"
     title: qsTr("Criterion")
-    
+
     RadioButton
     {
       value:      "pValue"

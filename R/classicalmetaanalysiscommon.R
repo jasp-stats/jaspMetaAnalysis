@@ -765,6 +765,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
       # add footnotes
       tempFootnotes <- unique(lapply(tempModerationEffect2, attr, which = "footnote"))
+      tempFootnotes <- Filter(Negate(is.null), tempFootnotes)
       for (i in seq_along(tempFootnotes))
         testsTable$addFootnote(tempFootnotes[[i]])
     }
@@ -788,6 +789,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
       # add footnotes
       tempFootnotes <- unique(lapply(tempModerationHeterogeneity2, attr, which = "footnote"))
+      tempFootnotes <- Filter(Negate(is.null), tempFootnotes)
       for (i in seq_along(tempFootnotes))
         testsTable$addFootnote(tempFootnotes[[i]])
 

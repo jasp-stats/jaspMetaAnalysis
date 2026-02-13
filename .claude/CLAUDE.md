@@ -10,18 +10,17 @@ In all interactions and commit messages, be extremely concise and sacrifice gram
 
 For comprehensive guidance on specific topics, see:
 
-- **[Module Architecture](.github/instructions/jasp-module-architecture.instructions.md)** - **Start here.** QML-Desktop-R reactive loop, jaspResults persistence, options mapping, data flow
-- **[Dependency Management](.github/instructions/jasp-dependency-management.instructions.md)** - $dependOn mechanics, inheritance, vectors, per-value deps, sentinel pattern
-- **[State Management](.github/instructions/jasp-state-management.instructions.md)** - createJaspState caching, model fit patterns, metadata state, dynamic containers
-- **[R Backend Development](.github/instructions/r-instructions.md)** - R function structure, validation, style conventions
-- **[Tables](.github/instructions/jasp-tables.instructions.md)** - Table lifecycle, columns, rows, footnotes, error display
-- **[Plots](.github/instructions/jasp-plots.instructions.md)** - Plot lifecycle, composite plots, subgroup/facet patterns
-- **[Containers & Errors](.github/instructions/jasp-containers-and-errors.instructions.md)** - Container patterns, HTML output, error handling
-- **[QML Interface Development](.github/instructions/qml-instructions.md)** - QML controls, validation, bindings, and UI patterns
-- **[Testing & Test Writing](.github/instructions/testing.instructions.md)** - Test framework, snapshots, and test workflow
-- **[Translation (i18n)](.github/instructions/translation.instructions.md)** - gettext/gettextf/qsTr usage, formatting, plurals
-- **[Output Structure](.github/instructions/jasp-output-structure.instructions.md)** - Reading/testing serialized output (containers, tables, plots, state)
-- **[Debug Analysis](.github/instructions/debug-analysis.instructions.md)** - Debugging JASP analyses via saveRDS() state capture in MCP sessions
+- **[Module Architecture](.claude/rules/jasp-module-architecture.md)** - **Start here.** QML-Desktop-R reactive loop, jaspResults persistence, options mapping, data flow
+- **[Dependency Management](.claude/rules/jasp-dependency-management.md)** - $dependOn mechanics, inheritance, vectors, per-value deps, sentinel pattern
+- **[State Management](.claude/rules/jasp-state-management.md)** - createJaspState caching, model fit patterns, metadata state, dynamic containers
+- **[R Backend Development](.claude/rules/r-instructions.md)** - R function structure, validation, style conventions
+- **[Tables](.claude/rules/jasp-tables.md)** - Table lifecycle, columns, rows, footnotes, error display
+- **[Plots](.claude/rules/jasp-plots.md)** - Plot lifecycle, composite plots, subgroup/facet patterns
+- **[Containers & Errors](.claude/rules/jasp-containers-and-errors.md)** - Container patterns, HTML output, error handling
+- **[QML Interface Development](.claude/rules/qml-instructions.md)** - QML controls, validation, bindings, and UI patterns
+- **[Testing & Test Writing](.claude/rules/testing-instructions.md)** - Test framework, snapshots, and test workflow
+- **[Translation (i18n)](.claude/rules/translation-instructions.md)** - gettext/gettextf/qsTr usage, formatting, plurals
+- **[Output Structure](.claude/rules/jasp-output-structure.md)** - Reading/testing serialized output (containers, tables, plots, state)
 
 ## R Session via MCP
 
@@ -45,7 +44,7 @@ Use these R-specific tools instead of Bash when possible:
 | `btw_tool_session_platform_info` | Check R version and platform |
 | `btw_tool_session_check_package_installed` | Verify package availability |
 
-**Use Copilot Code native tools** (Read, Edit, Write, Glob, Grep, Bash) for file editing, git operations, and file search -- they are faster than MCP equivalents.
+**Use Claude Code native tools** (Read, Edit, Write, Glob, Grep, Bash) for file editing, git operations, and file search -- they are faster than MCP equivalents.
 
 ## Working Effectively
 
@@ -81,7 +80,7 @@ testAnalysis("AnalysisName")
 - Analysis names are PascalCase exports from NAMESPACE
 - Some tests may skip on certain platforms (e.g., Windows) -- this is expected
 
-**See [testing-instructions.md](.github/instructions/testing-instructions.md) for detailed test writing guidelines, snapshots, and workflows.**
+**See [testing-instructions.md](.claude/rules/testing-instructions.md) for detailed test writing guidelines, snapshots, and workflows.**
 
 ### Running a Specific Analysis
 
@@ -136,6 +135,10 @@ After `runAnalysis()`, check:
 │   └── Upgrades.qml             # Version upgrade mappings
 ├── examples/                    # Example .jasp files for testing
 ├── tests/testthat/              # Unit tests using jaspTools
+├── .claude/                     # Claude Code instructions and MCP server
+│   ├── CLAUDE.md                # This file
+│   ├── mcp-server.R             # MCP server startup script
+│   └── rules/                   # Path-specific rules
 ├── .github/workflows/           # CI/CD automation
 ├── DESCRIPTION                  # R package metadata
 ├── NAMESPACE                    # Exported analysis names
@@ -160,7 +163,7 @@ After `runAnalysis()`, check:
 - Use existing QML files as examples for structure and style
 - Add default values to unit tests when adding new QML options
 
-**See [qml-instructions.md](.github/instructions/qml-instructions.md) for comprehensive QML controls reference, validation patterns, and UI conventions.**
+**See [qml-instructions.md](.claude/rules/qml-instructions.md) for comprehensive QML controls reference, validation patterns, and UI conventions.**
 
 ### R Backend Rules
 - R functions in `R/` directory called by analyses in `inst/Descriptions/`
@@ -169,7 +172,7 @@ After `runAnalysis()`, check:
 - Access `options` list via `options[["name"]]` notation to avoid partial matching
 - Follow CRAN guidelines for code structure and documentation
 
-**See [r-instructions.md](.github/instructions/r-instructions.md) for complete R function structure, jaspResults API, output components (tables/plots/containers/state), and coding conventions.**
+**See [r-instructions.md](.claude/rules/r-instructions.md) for complete R function structure, jaspResults API, output components (tables/plots/containers/state), and coding conventions.**
 
 ### Input Validation and Error Handling
 - **TARGETED VALIDATION ONLY**: Since `options` are validated in the GUI, R functions should NOT check user input validity except for specific cases
@@ -190,7 +193,7 @@ After `runAnalysis()`, check:
 - Use UTF-8 encoding for non-ASCII characters: `\u03B2` for beta
 - Double `%` characters in format strings: `gettextf("%s%% CI for Mean")`
 
-**See [translation-instructions.md](.github/instructions/translation-instructions.md) for comprehensive i18n guidelines including QML qsTr(), R gettext/gettextf/ngettext, formatting rules, and Weblate workflow.**
+**See [translation-instructions.md](.claude/rules/translation-instructions.md) for comprehensive i18n guidelines including QML qsTr(), R gettext/gettextf/ngettext, formatting rules, and Weblate workflow.**
 
 ## CI/CD Pipeline
 - GitHub Actions in `.github/workflows/unittests.yml` runs on every push

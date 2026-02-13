@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "r-mcptools": {
+      "type": "stdio",
+      "command": "Rscript",
+      "args": ["-e", "source('.claude/mcp-server.R')"]
+    },
+    "markitdown": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["markitdown-mcp==0.0.1a4"]
+    }
+  }
+}

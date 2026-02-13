@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where:*)",
+      "Bash(grep:*)",
+      "Bash(Rscript:*)",
+      "Bash(find:*)",
+      "WebFetch(domain:posit-dev.github.io)",
+      "WebFetch(domain:cran.r-project.org)",
+      "WebFetch(domain:gadenbuie.r-universe.dev)",
+      "WebFetch(domain:ellmer.tidyverse.org)",
+      "WebFetch(domain:github.com)",
+      "mcp__r-mcptools__btw_tool_session_platform_info",
+      "mcp__r-mcptools__btw_tool_session_package_info",
+      "mcp__r-mcptools__btw_tool_session_check_package_installed",
+      "mcp__r-mcptools__btw_tool_files_list_files",
+      "mcp__r-mcptools__btw_tool_git_status",
+      "mcp__r-mcptools__list_r_sessions",
+      "mcp__r-mcptools__select_r_session",
+      "mcp__r-mcptools__btw_tool_docs_available_vignettes",
+      "mcp__r-mcptools__btw_tool_docs_vignette",
+      "mcp__r-mcptools__btw_tool_docs_help_page",
+      "mcp__r-mcptools__btw_tool_run_r",
+      "mcp__markitdown__convert_to_markdown",
+      "Read(//c/JASP-Packages/jaspMetaAnalysis/**)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "r-mcptools",
+    "markitdown"
+  ]
+}
