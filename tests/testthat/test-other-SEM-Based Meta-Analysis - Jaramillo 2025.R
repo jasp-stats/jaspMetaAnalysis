@@ -5,7 +5,7 @@ context("Other: SEM-Based Meta-Analysis - Jaramillo 2025")
 
 test_that("SemBasedMetaAnalysis results match", {
 
-  skip(message = "Encoding is not working for SEM-Based meta-analysis")
+  skip(message = "Encoding is not working for non-preload dataset")
 
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "SEM-Based Meta-Analysis - Jaramillo 2025.jasp")
