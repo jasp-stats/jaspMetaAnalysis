@@ -1,8 +1,3 @@
----
-paths:
-  - "**/R/*.R"
----
-
 # R Instructions
 
 ## 1) Core Basics

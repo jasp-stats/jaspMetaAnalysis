@@ -1,8 +1,3 @@
----
-paths:
-  - "**/inst/qml/*.qml"
----
-
 # JASP QML Instructions
 
 ## 0) QML Syntax Validation

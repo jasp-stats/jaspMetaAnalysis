@@ -1,8 +1,3 @@
----
-applyTo: "**/R/*.R,**/inst/qml/*.qml,**/po/**"
-description: "gettext/gettextf/qsTr usage, formatting, plurals, Weblate workflow"
----
-
 # Translation (i18n) Instructions
 
 ## 1) Core Principle

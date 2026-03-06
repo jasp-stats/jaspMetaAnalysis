@@ -1,8 +1,3 @@
----
-paths:
-  - "**/tests/testthat/*.R"
----
-
 # JASP Testing Instructions
 
 ## 1) Test Framework

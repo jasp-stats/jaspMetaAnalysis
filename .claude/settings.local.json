@@ -21,8 +21,20 @@
       "mcp__r-mcptools__btw_tool_docs_vignette",
       "mcp__r-mcptools__btw_tool_docs_help_page",
       "mcp__r-mcptools__btw_tool_run_r",
-      "mcp__markitdown__convert_to_markdown",
-      "Read(//c/JASP-Packages/jaspMetaAnalysis/**)"
+      "mcp__markitdown__convert_to_markdown"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/block-test-edits.js"
+          }
+        ]
+      }
     ]
   },
   "enableAllProjectMcpServers": true,

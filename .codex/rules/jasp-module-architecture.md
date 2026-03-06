@@ -1,8 +1,3 @@
----
-applyTo: "**/R/*.R,**/inst/qml/*.qml"
-description: "QML-Desktop-R reactive loop, jaspResults persistence, options mapping, data flow"
----
-
 # JASP Module Architecture
 
 How QML, JASP Desktop, and R interact. This explains *why* the patterns in the other rule files exist.
@@ -18,21 +13,21 @@ For serialized output format see [jasp-output-structure.md](jasp-output-structur
 
 ```
 User changes option in QML GUI
-		│
-		▼
+        │
+        ▼
 JASP Desktop collects ALL current option values into a flat named list
-		│
-		▼
+        │
+        ▼
 Desktop calls: AnalysisName(jaspResults, dataset, options)
-		│                      │          │         │
-		│                      │          │         └─ named list of ALL QML option values
-		│                      │          └─ data.frame loaded from the active dataset
-		│                      └─ PERSISTENT container surviving across invocations
-		│
-		▼
+        │                      │          │         │
+        │                      │          │         └─ named list of ALL QML option values
+        │                      │          └─ data.frame loaded from the active dataset
+        │                      └─ PERSISTENT container surviving across invocations
+        │
+        ▼
 R function builds/updates output in jaspResults
-		│
-		▼
+        │
+        ▼
 Desktop reads jaspResults and renders tables/plots/text in the GUI
 ```
 
@@ -54,7 +49,7 @@ Desktop reads jaspResults and renders tables/plots/text in the GUI
 1. Element does not exist          → builder creates it, attaches to jaspResults
 2. Options change, deps NOT hit    → element survives, builder returns early
 3. Options change, deps ARE hit    → Desktop NULLs the element before calling R
-									 → builder sees NULL, recreates it
+                                     → builder sees NULL, recreates it
 4. User removes the analysis       → jaspResults is destroyed entirely
 ```
 
@@ -84,11 +79,11 @@ Every QML control has a `name:` property. Desktop flattens ALL controls into a s
 
 ```qml
 CheckBox {
-	name: "showCI"                          // options[["showCI"]] = TRUE/FALSE
-	DoubleField {
-		name: "ciLevel"                     // options[["ciLevel"]] = 0.95
-		defaultValue: 0.95
-	}
+    name: "showCI"                          // options[["showCI"]] = TRUE/FALSE
+    DoubleField {
+        name: "ciLevel"                     // options[["ciLevel"]] = 0.95
+        defaultValue: 0.95
+    }
 }
 ```
 
@@ -128,25 +123,25 @@ JASP internally encodes column names. In R analysis code, the encoding is transp
 
 ```
 QML assigns variable names → options[["dependentVariable"]] = "score"
-		│
-		▼
+        │
+        ▼
 Desktop loads dataset with requested columns → dataset (data.frame)
-		│
-		▼
+        │
+        ▼
 Entry point: readiness check + data validation
-	- Are required variables assigned?
-	- .hasErrors(): infinity, observations, variance, etc.
-		│
-		▼
+    - Are required variables assigned?
+    - .hasErrors(): infinity, observations, variance, etc.
+        │
+        ▼
 Compute function: expensive model fitting, cached in state
-	- Wrap in try() for error handling
-	- Store result via createJaspState()
-		│
-		▼
+    - Wrap in try() for error handling
+    - Store result via createJaspState()
+        │
+        ▼
 Builder functions: extract cached results, build output
-	- Tables: define columns, build rows, setData()
-	- Plots: build ggplot, assign to plotObject
-	- Errors: attach element FIRST, then setError()
+    - Tables: define columns, build rows, setData()
+    - Plots: build ggplot, assign to plotObject
+    - Errors: attach element FIRST, then setError()
 ```
 
 Builders should handle the "not ready" case gracefully -- create empty tables (column headers but no data) so the user sees the output structure before assigning variables.
@@ -159,26 +154,26 @@ Builders should handle the "not ready" case gracefully -- create empty tables (c
 
 ```
 Layer 1: Entry point (thin wrapper per analysis)
-	MyAnalysis(jaspResults, dataset, options)
-		- Sets dispatch flags if sharing code with other analyses
-		- Validates data
-		- Delegates to orchestrator
+    MyAnalysis(jaspResults, dataset, options)
+        - Sets dispatch flags if sharing code with other analyses
+        - Validates data
+        - Delegates to orchestrator
 
 Layer 2: Orchestrator (flat sequence of builder calls)
-	MyAnalysisCommon(jaspResults, dataset, options)
-		- Calls .computeModel()                  # state
-		- Calls .summaryTable()                  # table
-		- Calls .coefficientsTable()             # table
-		- Calls .mainPlot()                      # plot
-		- Conditional sections based on options
+    MyAnalysisCommon(jaspResults, dataset, options)
+        - Calls .computeModel()                  # state
+        - Calls .summaryTable()                  # table
+        - Calls .coefficientsTable()             # table
+        - Calls .mainPlot()                      # plot
+        - Conditional sections based on options
 
 Layer 3: Builders (idempotent, self-contained)
-	.summaryTable(jaspResults, options)
-		- Checks if output exists (return early if so)
-		- Gets/creates container
-		- Creates table, defines columns
-		- Extracts cached results
-		- Builds rows, sets data
+    .summaryTable(jaspResults, options)
+        - Checks if output exists (return early if so)
+        - Gets/creates container
+        - Creates table, defines columns
+        - Extracts cached results
+        - Builds rows, sets data
 ```
 
 ### Multiple entry points sharing one orchestrator
@@ -187,25 +182,25 @@ When related analyses share logic, they set a dispatch flag and delegate:
 
 ```r
 AnalysisVariantA <- function(jaspResults, dataset, options) {
-	options[["variant"]] <- "A"
-	if (.isReady(options)) {
-		dataset <- .checkData(dataset, options)
-		.checkErrors(dataset, options)
-	}
-	AnalysisCommon(jaspResults, dataset, options)
+    options[["variant"]] <- "A"
+    if (.isReady(options)) {
+        dataset <- .checkData(dataset, options)
+        .checkErrors(dataset, options)
+    }
+    AnalysisCommon(jaspResults, dataset, options)
 }
 
 AnalysisVariantB <- function(jaspResults, dataset, options) {
-	options[["variant"]] <- "B"
-	# ... same pattern ...
-	AnalysisCommon(jaspResults, dataset, options)
+    options[["variant"]] <- "B"
+    # ... same pattern ...
+    AnalysisCommon(jaspResults, dataset, options)
 }
 ```
 
 Builders branch on the flag:
 ```r
 if (options[["variant"]] == "B")
-	.additionalTable(jaspResults, options)
+    .additionalTable(jaspResults, options)
 ```
 
 ### The readiness check
@@ -214,15 +209,15 @@ Before model fitting, verify required inputs exist:
 
 ```r
 .isReady <- function(options) {
-	options[["dependentVariable"]] != "" && length(options[["covariates"]]) > 0
+    options[["dependentVariable"]] != "" && length(options[["covariates"]]) > 0
 }
 ```
 
 In the entry point:
 ```r
 if (.isReady(options)) {
-	dataset <- .checkData(dataset, options)
-	.checkErrors(dataset, options)
+    dataset <- .checkData(dataset, options)
+    .checkErrors(dataset, options)
 }
 AnalysisCommon(jaspResults, dataset, options)
 ```
@@ -236,8 +231,8 @@ AnalysisCommon(jaspResults, dataset, options)
 Registers analyses with their R function names:
 ```qml
 Analysis {
-	title: qsTr("My Analysis")
-	func:  "MyAnalysis"               // must match R function name exactly (case-sensitive)
+    title: qsTr("My Analysis")
+    func:  "MyAnalysis"               // must match R function name exactly (case-sensitive)
 }
 ```
 
@@ -253,20 +248,20 @@ export(MyAnalysis)
 When renaming QML option names, add a migration so old .jasp files load correctly:
 ```qml
 Upgrade {
-	functionName: "MyAnalysis"
-	fromVersion:  "0.17.2"
-	toVersion:    "0.17.3"
+    functionName: "MyAnalysis"
+    fromVersion:  "0.17.2"
+    toVersion:    "0.17.3"
 
-	ChangeRename { from: "oldOptionName"; to: "newOptionName" }
+    ChangeRename { from: "oldOptionName"; to: "newOptionName" }
 
-	ChangeJS {
-		name: "transformedOption"
-		jsFunction: function(options) {
-			switch(options["transformedOption"]) {
-				case "oldValue": return "newValue";
-				default:         return options["transformedOption"];
-			}
-		}
-	}
+    ChangeJS {
+        name: "transformedOption"
+        jsFunction: function(options) {
+            switch(options["transformedOption"]) {
+                case "oldValue": return "newValue";
+                default:         return options["transformedOption"];
+            }
+        }
+    }
 }
 ```

@@ -1,8 +1,3 @@
----
-applyTo: "**/R/*.R"
-description: "Table lifecycle, columns, rows, footnotes, error display in jaspResults"
----
-
 # JASP Table Building Patterns
 
 How to create, configure, and populate tables in jaspResults.
@@ -22,7 +17,7 @@ For containers and error handling see [jasp-containers-and-errors.md](jasp-conta
 
   # 1. SKIP if already created (idempotency)
   if (!is.null(container[["myTable"]]))
-	return()
+    return()
 
   fit <- .extractFit(jaspResults, options)
 
@@ -40,10 +35,10 @@ For containers and error handling see [jasp-containers-and-errors.md](jasp-conta
 
   # 4. EARLY RETURN on error (table shows as empty with error)
   if (is.null(fit))
-	return()
+    return()
   if (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) {
-	myTable$setError(.cleanErrorMessage(fit[[1]]))
-	return()
+    myTable$setError(.cleanErrorMessage(fit[[1]]))
+    return()
   }
 
   # 5. BUILD row data (list of data.frames → rbind)
@@ -77,7 +72,7 @@ For containers and error handling see [jasp-containers-and-errors.md](jasp-conta
 ```r
 # Grouped column header (e.g., "95% CI" spanning Lower/Upper)
 table$addColumnInfo(name = "lCi", type = "number", title = gettext("Lower"),
-					overtitle = gettextf("%s%% CI", 100 * options[["ciLevel"]]))
+                    overtitle = gettextf("%s%% CI", 100 * options[["ciLevel"]]))
 
 # Show only explicitly added columns (hide data columns not in schema)
 table$showSpecifiedColumnsOnly <- TRUE
@@ -104,11 +99,11 @@ When the same table structure serves multiple purposes, parametrize the builder:
   tableKey  <- paste0(parameter, "Table")
 
   if (!is.null(container[[tableKey]]))
-	return()
+    return()
 
   table <- createJaspTable(switch(parameter,
-	main    = gettext("Main Results"),
-	summary = gettext("Summary Results")
+    main    = gettext("Main Results"),
+    summary = gettext("Summary Results")
   ))
   table$position <- switch(parameter, main = 1, summary = 2)
   container[[tableKey]] <- table
@@ -127,18 +122,18 @@ Each row builder takes a **single fit** and returns a **data.frame** (one or mor
 
   # Handle failed fits gracefully (return skeleton with NAs)
   if (jaspBase::isTryError(fit)) {
-	return(data.frame(
-	  term  = gettext("My term"),
-	  group = attr(fit, "group")
-	))
+    return(data.frame(
+      term  = gettext("My term"),
+      group = attr(fit, "group")
+    ))
   }
 
   row <- data.frame(
-	term  = gettext("My term"),
-	group = attr(fit, "group"),
-	est   = fit$beta[1],
-	se    = fit$se[1],
-	pval  = fit$pval[1]
+    term  = gettext("My term"),
+    group = attr(fit, "group"),
+    est   = fit$beta[1],
+    se    = fit$se[1],
+    pval  = fit$pval[1]
   )
 
   return(row)
@@ -177,9 +172,9 @@ table$addFootnote(warningMsg, symbol = gettext("Warning:"))
 # Per-group error footnotes
 for (i in which(sapply(fit, jaspBase::isTryError))) {
   table$addFootnote(
-	gettextf("The model for group '%1$s' failed: %2$s",
-			 attr(fit[[i]], "group"), .cleanError(fit[[i]])),
-	symbol = gettext("Error:")
+    gettextf("The model for group '%1$s' failed: %2$s",
+             attr(fit[[i]], "group"), .cleanError(fit[[i]])),
+    symbol = gettext("Error:")
   )
 }
 

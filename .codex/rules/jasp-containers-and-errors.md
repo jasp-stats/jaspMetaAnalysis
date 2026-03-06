@@ -1,8 +1,3 @@
----
-applyTo: "**/R/*.R"
-description: "Container patterns, HTML output, and error handling in jaspResults"
----
-
 # JASP Containers, HTML Output & Error Handling
 
 Patterns for grouping output elements and handling errors in jaspResults.
@@ -22,7 +17,7 @@ Containers group related output elements under a collapsible section.
 ```r
 .myExtractContainer <- function(jaspResults) {
   if (!is.null(jaspResults[["myContainer"]]))
-	return(jaspResults[["myContainer"]])
+    return(jaspResults[["myContainer"]])
 
   container <- createJaspContainer(gettext("My Section Title"))
   container$dependOn(.myBaseDependencies)
@@ -128,8 +123,8 @@ When some per-group fits fail but others succeed, show partial results with per-
 # Tables show partial results with error footnotes per failed group
 for (i in which(sapply(fit, jaspBase::isTryError))) {
   table$addFootnote(
-	gettextf("Group '%1$s' failed: %2$s", attr(fit[[i]], "group"), .cleanError(fit[[i]])),
-	symbol = gettext("Error:")
+    gettextf("Group '%1$s' failed: %2$s", attr(fit[[i]], "group"), .cleanError(fit[[i]])),
+    symbol = gettext("Error:")
   )
 }
 ```

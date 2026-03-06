@@ -1,8 +1,3 @@
----
-applyTo: "**/R/*.R"
-description: "dependOn mechanics, inheritance, vectors, per-value deps, sentinel pattern"
----
-
 # JASP Dependency Management ($dependOn)
 
 How `$dependOn()` controls caching and invalidation of output elements in jaspResults.
@@ -67,16 +62,16 @@ Keep dependency vectors comprehensive -- missing a dependency means stale output
 When different analysis modes need different dependency sets:
 ```r
 if (options[["variant"]] == "classical") {
-	fitState$dependOn(.classicalDeps)
+    fitState$dependOn(.classicalDeps)
 } else {
-	fitState$dependOn(.bayesianDeps)
+    fitState$dependOn(.bayesianDeps)
 }
 ```
 
 Or combine dynamically:
 ```r
 plot$dependOn(c(.plotDeps,
-	if (options[["variant"]] == "classical") .classicalDeps else .bayesianDeps
+    if (options[["variant"]] == "classical") .classicalDeps else .bayesianDeps
 ))
 ```
 
@@ -88,11 +83,11 @@ For containers with one child per user-selected variable, invalidate only when t
 
 ```r
 for (v in options[["variables"]]) {
-	if (!is.null(container[[v]])) next
-	plot <- createJaspPlot(title = v)
-	plot$dependOn(optionContainsValue = list(variables = v))
-	container[[v]] <- plot
-	# ... fill plot ...
+    if (!is.null(container[[v]])) next
+    plot <- createJaspPlot(title = v)
+    plot$dependOn(optionContainsValue = list(variables = v))
+    container[[v]] <- plot
+    # ... fill plot ...
 }
 ```
 

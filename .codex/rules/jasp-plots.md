@@ -1,14 +1,9 @@
----
-applyTo: "**/R/*.R"
-description: "Plot lifecycle, composite plots, subgroup/facet patterns in jaspResults"
----
-
 # JASP Plot Building Patterns
 
 How to create and configure plots in jaspResults.
 
 For dependency mechanics see [jasp-dependency-management.md](jasp-dependency-management.md).
-For testing plots see [testing.instructions.md](testing.instructions.md) (`expect_equal_plots`).
+For testing plots see [testing-instructions.md](testing-instructions.md) (`expect_equal_plots`).
 
 ---
 
@@ -18,16 +13,16 @@ For testing plots see [testing.instructions.md](testing.instructions.md) (`expec
 .myPlot <- function(jaspResults, options) {
 
   if (!is.null(jaspResults[["myPlot"]]))
-	return()
+    return()
 
   fit <- .extractFit(jaspResults, options)
   if (is.null(fit) || jaspBase::isTryError(fit[[1]]))
-	return()
+    return()
 
   myPlot <- createJaspPlot(
-	title  = gettext("My Plot"),
-	width  = 400,
-	height = 320
+    title  = gettext("My Plot"),
+    width  = 400,
+    height = 320
   )
   myPlot$position <- 5
   myPlot$dependOn(c(.baseDependencies, "plotSpecificOption"))
@@ -38,8 +33,8 @@ For testing plots see [testing.instructions.md](testing.instructions.md) (`expec
 
   # Add JASP theme and (plot frame b = bottom, r = right, t = top, l = left)
   plotObj <- plotObj + 
-	jaspGraphs::geom_rangeframe(sides = "bl") +
-	jaspGraphs::themeJaspRaw()
+    jaspGraphs::geom_rangeframe(sides = "bl") +
+    jaspGraphs::themeJaspRaw()
 
   myPlot$plotObject <- plotObj
 }
@@ -107,9 +102,9 @@ if (options[["groupingVariable"]] == "") {
   jaspResults[["myPlot"]] <- container
 
   for (i in seq_along(fit)) {
-	container[[names(fit)[i]]]          <- .makePlotFun(fit[[i]], options)
-	container[[names(fit)[i]]]$title    <- gettextf("Group: %1$s", attr(fit[[i]], "group"))
-	container[[names(fit)[i]]]$position <- i
+    container[[names(fit)[i]]]          <- .makePlotFun(fit[[i]], options)
+    container[[names(fit)[i]]]$title    <- gettextf("Group: %1$s", attr(fit[[i]], "group"))
+    container[[names(fit)[i]]]$position <- i
   }
 }
 ```
@@ -124,10 +119,10 @@ When a variable creates multiple faceted plots:
 if (length(options[["separatePlots"]]) > 0) {
   container <- createJaspContainer()
   for (i in seq_along(levels)) {
-	tempPlot <- createJaspPlot(title = levels[i], width = w, height = h)
-	tempPlot$position <- i
-	tempPlot$plotObject <- makePlot(data[data$facet == levels[i], ])
-	container[[paste0("plot", i)]] <- tempPlot
+    tempPlot <- createJaspPlot(title = levels[i], width = w, height = h)
+    tempPlot$position <- i
+    tempPlot$plotObject <- makePlot(data[data$facet == levels[i], ])
+    container[[paste0("plot", i)]] <- tempPlot
   }
 } else {
   plot <- createJaspPlot(width = w, height = h)

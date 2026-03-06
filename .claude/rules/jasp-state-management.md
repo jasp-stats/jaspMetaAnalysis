@@ -1,5 +1,6 @@
 ---
-paths: "**/R/*.R"
+paths:
+  - "**/R/*.R"
 ---
 
 # JASP State Management (createJaspState)

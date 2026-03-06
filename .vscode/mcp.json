@@ -3,10 +3,6 @@
     "r-mcptools": {
       "command": "Rscript",
       "args": ["-e", "source('.claude/mcp-server.R')"]
-    },
-    "markitdown": {
-      "command": "uvx",
-      "args": ["markitdown-mcp==0.0.1a4"]
     }
   }
 }

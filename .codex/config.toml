@@ -1,0 +1,19 @@
+# Codex CLI project configuration for JASP modules
+# Requires: project must be trusted for this config to load
+# See: https://developers.openai.com/codex/config-reference/
+
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+
+# Increase project doc limit to accommodate comprehensive AGENTS.md
+project_doc_max_bytes = 65536
+
+# Reasoning: use high effort for complex module-fixing tasks
+model_reasoning_effort = "high"
+model_reasoning_summary = "concise"
+
+[mcp_servers.r-mcptools]
+command = "Rscript"
+args = ["-e", "source('.claude/mcp-server.R')"]
+startup_timeout_sec = 60
+tool_timeout_sec = 600

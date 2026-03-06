@@ -1,8 +1,3 @@
----
-applyTo: "**/tests/testthat/*.R,**/R/*.R"
-description: "Reading and testing serialized output from runAnalysis (containers, tables, plots, state)"
----
-
 # JASP Analysis Output Structure
 
 Reading and testing the serialized output from `jaspTools::runAnalysis()`.
@@ -53,8 +48,8 @@ Containers can nest arbitrarily deep:
 ```
 estimatedMarginalMeansAndContrastsContainer
   estimatedMarginalMeansAndContrastsContainer_effectSize
-	estimatedMarginalMeansAndContrastsContainer_effectSize_adjustedEstimate
-	  ..._adjustedEstimate_estimatedMarginalMeansTable
+    estimatedMarginalMeansAndContrastsContainer_effectSize_adjustedEstimate
+      ..._adjustedEstimate_estimatedMarginalMeansTable
 ```
 
 **Accessing deeply nested elements:** Chain `$collection` at each container level:
@@ -148,7 +143,7 @@ jaspTools::expect_equal_plots(testPlot, "snapshot-name")
 # Row 2: df=9, est=0.29, name="Slope", pval=0.01
 jaspTools::expect_equal_tables(table_data,
   list(9, -0.69, "Intercept", 0.50,   # row 1
-	   9, 0.29, "Slope", 0.01))       # row 2
+       9, 0.29, "Slope", 0.01))       # row 2
 ```
 
 ### `expect_equal_plots(plot_obj, snapshot_name)`
@@ -180,13 +175,13 @@ table$schema$fields  # list of {name, title, type, format, overTitle}
 mapResults <- function(x, depth = 0) {
   indent <- paste(rep("  ", depth), collapse = "")
   if (is.list(x) && !is.null(x$collection)) {
-	cat(sprintf("%s[container] %s: '%s'\n", indent, x$name, x$title))
-	for (child in x$collection) mapResults(child, depth + 1)
+    cat(sprintf("%s[container] %s: '%s'\n", indent, x$name, x$title))
+    for (child in x$collection) mapResults(child, depth + 1)
   } else if (is.list(x) && !is.null(x$schema)) {
-	cat(sprintf("%s[table] %s: '%s' (%d rows x %d cols)\n",
-		indent, x$name, x$title, length(x$data), length(x$schema$fields)))
+    cat(sprintf("%s[table] %s: '%s' (%d rows x %d cols)\n",
+        indent, x$name, x$title, length(x$data), length(x$schema$fields)))
   } else if (is.list(x) && !is.null(x$data) && is.character(x$data)) {
-	cat(sprintf("%s[plot] %s: '%s'\n", indent, x$name, x$title))
+    cat(sprintf("%s[plot] %s: '%s'\n", indent, x$name, x$title))
   }
 }
 for (item in results$results[setdiff(names(results$results), c(".meta", "name"))]) {
