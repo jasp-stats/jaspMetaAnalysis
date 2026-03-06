@@ -71,10 +71,9 @@ msgctxt "BayesianPredictionPerformance|"
 msgid "MCMC Diagnostics"
 msgstr "Diagnostik MCMC"
 
-#, fuzzy
 msgctxt "BayesianPredictionPerformance|"
 msgid "Plots"
-msgstr "Plot"
+msgstr "Diagram"
 
 msgctxt "BayesianPredictionPerformance|"
 msgid "Running means"
@@ -205,10 +204,9 @@ msgctxt "MultilevelMetaAnalysis|"
 msgid "Estimated Marginal Means"
 msgstr ""
 
-#, fuzzy
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Plots"
-msgstr "Plot"
+msgstr "Diagram"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Funnel plot"
@@ -4268,7 +4266,7 @@ msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
 "Variable specifying the time point of the effect size measurement. In case "
 "multiple time points are specified, the first time corresponds to the first "
-"codntion."
+"condition."
 msgstr ""
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"

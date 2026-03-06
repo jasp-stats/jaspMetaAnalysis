@@ -242,7 +242,7 @@ Form
 				visible:			varianceCovarianceMatrixConstructsGroupsTimes.checked
 				property bool active:	varianceCovarianceMatrixConstructsGroupsTimes.checked
 				onActiveChanged: 		if (!active && count > 0) itemDoubleClicked(0)
-				info: qsTr("Variable specifying the time point of the effect size measurement. In case multiple time points are specified, the first time corresponds to the first codntion.")
+				info: qsTr("Variable specifying the time point of the effect size measurement. In case multiple time points are specified, the first time corresponds to the first condition.")
 			}			
 
 			AssignedVariablesList

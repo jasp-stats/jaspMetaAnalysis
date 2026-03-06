@@ -231,3 +231,13 @@ After `runAnalysis()`, check:
 - Use `createJaspTable()`, `createJaspPlot()`, `createJaspHtml()` for output elements
 - Always set `$dependOn()` for proper caching and state management
 - Use containers for grouping related elements, state objects for reusing computed results
+
+## Compact Instructions
+
+When context is compacted, preserve:
+- Current workflow stage (from /workspace/.openclaw-run/current_stage)
+- Implementation plan (from /workspace/.openclaw-run/PLAN.md)
+- The module name and original task description
+- What git changes have been made so far
+
+After compaction, re-read /workspace/.openclaw-run/RECOVERY.md to re-orient.

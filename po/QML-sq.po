@@ -4228,7 +4228,7 @@ msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
 "Variable specifying the time point of the effect size measurement. In case "
 "multiple time points are specified, the first time corresponds to the first "
-"codntion."
+"condition."
 msgstr ""
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"

@@ -3931,14 +3931,16 @@
         "plotly",
         "R6",
         "rlang",
-        "scales"
+        "scales",
+        "testthat",
+        "vdiffr"
       ],
       "Roxygen": "list(markdown = TRUE)",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspGraphs",
-      "RemoteSha": "1a0f11bf210637b7428f337f8598bee8a62c8495"
+      "RemoteSha": "5c68ba4b81afc55e2092e733fe334819c85e354a"
     },
     "jaspSem": {
       "Package": "jaspSem",
