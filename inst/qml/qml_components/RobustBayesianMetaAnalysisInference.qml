@@ -26,6 +26,7 @@ Section
 	info: qsTr("Options for summarizing the meta-analytic results.")
 
 	property string analysisType: "RoBMA"
+	property string transformEffectSizeValue: transformEffectSizeDropdown.value
 	// RoBMA: Robust Bayesian Meta-Analsis
 	// BiBMA: Binomial Bayesian Meta-Analysis
 	// NoBMA: Normal Bayesian Meta-Analysis
@@ -137,6 +138,7 @@ Section
 
 		DropDown
 		{
+			id:				transformEffectSizeDropdown
 			name:			"transformEffectSize"
 			label:			qsTr("Transform effect size")
 			enabled:		effectSizeMeasure.value !== "RD"

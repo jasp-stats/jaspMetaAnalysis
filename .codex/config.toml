@@ -1,6 +1,9 @@
 # Codex CLI project configuration for JASP modules
 # Requires: project must be trusted for this config to load
 # See: https://developers.openai.com/codex/config-reference/
+#
+# Meta-Analysis Knowledge Base: see knowledge-base/ directory
+# and AGENTS.md "Meta-Analysis Knowledge Base" section for navigation instructions
 
 sandbox_mode = "workspace-write"
 approval_policy = "on-request"

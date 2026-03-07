@@ -24,6 +24,7 @@ Section
 {
 	title:							qsTr("Forest Plot")
 	property string analysisType:	"metaAnalysis"
+	property string transformEffectSizeValue: "none"
 	columns:						1
 	info: qsTr("Options for visualizing study-level information, estimated marginal means, and the model information in an all encompassing forest plot. Different sections of the forest plot can be individually enabled/disabled.")
 
@@ -671,40 +672,73 @@ Section
 				}
 			}
 
-			TextField
+			Group
 			{
-				name:			"forestPlotAuxiliaryEffectLabel"
-				text:			qsTr("X-axis label")
-				value:			"Effect Size"
-				info: qsTr("Change the x-axis label of the forest plot (the default 'Effect Size' changes in accordance with the selected effect size transformation).")
-			}
+				title:		qsTr("X-axis")
 
-			CheckBox
-			{
-				name:			"forestPlotAuxiliarySetXAxisLimit"
-				text:			qsTr("X-axis limits")
-				childrenOnSameRow:	false
-				info: qsTr("Change the default x-axis limits.")
 
-				DoubleField
+				TextField
 				{
-					name:			"forestPlotAuxiliarySetXAxisLimitLower"
-					id:				forestPlotAuxiliarySetXAxisLimitLower
-					text:			qsTr("Lower")
-					defaultValue:	-1
-					negativeValues:	true
-					max:			forestPlotAuxiliarySetXAxisLimitUpper
-					inclusive: 		JASP.None
+					name:			"forestPlotAuxiliaryEffectLabel"
+					text:			qsTr("Label")
+					value:			"Effect Size"
+					info: qsTr("Change the x-axis label of the forest plot (the default 'Effect Size' changes in accordance with the selected effect size transformation).")
 				}
 
-				DoubleField
+				CheckBox
 				{
-					name:			"forestPlotAuxiliarySetXAxisLimitUpper"
-					id:				forestPlotAuxiliarySetXAxisLimitUpper
-					text:			qsTr("Upper")
-					defaultValue:	1
-					min:			forestPlotAuxiliarySetXAxisLimitLower			
-					inclusive: 		JASP.None
+					name:			"forestPlotAuxiliarySetXAxisLimit"
+					text:			qsTr("Limits")
+
+					info: qsTr("Change the default x-axis limits.")
+
+					DoubleField
+					{
+						name:			"forestPlotAuxiliarySetXAxisLimitLower"
+						id:				forestPlotAuxiliarySetXAxisLimitLower
+						text:			qsTr("Lower")
+						defaultValue:	-1
+						negativeValues:	true
+						max:			forestPlotAuxiliarySetXAxisLimitUpper
+						inclusive: 		JASP.None
+					}
+
+					DoubleField
+					{
+						name:			"forestPlotAuxiliarySetXAxisLimitUpper"
+						id:				forestPlotAuxiliarySetXAxisLimitUpper
+						text:			qsTr("Upper")
+						defaultValue:	1
+						negativeValues:	true
+						min:			forestPlotAuxiliarySetXAxisLimitLower			
+						inclusive: 		JASP.None
+					}
+				}
+
+				CheckBox
+				{
+					name:				"forestPlotAuxiliarySetXAxisTicks"
+					text:				qsTr("Ticks")
+					childrenOnSameRow:	true
+					info: qsTr("Specify x-axis ticks manually as comma-separated numbers or fractions. The values are interpreted on the displayed/transformed scale.")
+
+					TextField
+					{
+						label:			""
+						name:			"forestPlotAuxiliarySetXAxisTicksValues"
+						value:			"-1, -0.5, 0, 0.5, 1"
+						fieldWidth:		200 * preferencesModel.uiScale
+						info: qsTr("Specify comma-separated x-axis ticks. Fractions such as 1/4 are allowed and their labels are kept as typed.")
+					}
+				}
+
+				CheckBox
+				{
+					name:		"forestPlotAuxiliaryXAxisTransformLabelsOnly"
+					text:		qsTr("Transform labels only")
+					checked:	true
+					enabled:	transformEffectSizeValue !== "none"
+					info: qsTr("Apply the selected effect size transformation only to the x-axis labels while keeping the plotted estimates on the original analysis scale.")
 				}
 			}
 

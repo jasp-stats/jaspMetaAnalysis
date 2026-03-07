@@ -25,6 +25,7 @@ Section
 	title:							qsTr("Statistics")
 	columns: 						2
 	property string analysisType:	"metaAnalysis"
+	property string transformEffectSizeValue: transformEffectSizeDropdown.value
 	info: qsTr("Options for summarizing the meta-analytic results.")
 
 	Group

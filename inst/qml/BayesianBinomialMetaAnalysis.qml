@@ -295,6 +295,7 @@ Form
 	//// Inference Section ////
 	MA.RobustBayesianMetaAnalysisInference
 	{
+		id:				sectionInference
 		analysisType:	"BiBMA"
 	}
 
@@ -313,7 +314,8 @@ Form
 	//// Forest Plots Section ////
 	MA.ForestPlot
 	{
-		analysisType:	"BiBMA"
+		analysisType:				"BiBMA"
+		transformEffectSizeValue:	sectionInference.transformEffectSizeValue
 	}
 
 	//// Bubble Plot Section ////

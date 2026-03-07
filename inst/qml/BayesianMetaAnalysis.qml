@@ -300,6 +300,7 @@ Form
 	//// Inference Section ////
 	MA.RobustBayesianMetaAnalysisInference
 	{
+		id:				sectionInference
 		analysisType:	"NoBMA"
 	}
 
@@ -318,7 +319,8 @@ Form
 	//// Forest Plots Section ////
 	MA.ForestPlot
 	{
-		analysisType:	"NoBMA"
+		analysisType:				"NoBMA"
+		transformEffectSizeValue:	sectionInference.transformEffectSizeValue
 	}
 
 	//// Bubble Plot Section ////

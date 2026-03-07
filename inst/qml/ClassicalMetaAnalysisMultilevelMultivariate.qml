@@ -752,6 +752,7 @@ Form
 
 	MA.ClassicalMetaAnalysisStatistics 
 	{
+		id:				sectionStatistics
 		analysisType:	"metaAnalysisMultilevelMultivariate"
 	}
 
@@ -762,7 +763,8 @@ Form
 
 	MA.ForestPlot
 	{
-		analysisType:	"metaAnalysisMultilevelMultivariate"
+		analysisType:				"metaAnalysisMultilevelMultivariate"
+		transformEffectSizeValue:	sectionStatistics.transformEffectSizeValue
 	}
 
 	MA.BubblePlot {}

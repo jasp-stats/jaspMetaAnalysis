@@ -155,11 +155,17 @@ Form
 		id:		sectionModel
 	}
 
-	MA.ClassicalMetaAnalysisStatistics {}
+	MA.ClassicalMetaAnalysisStatistics
+	{
+		id:		sectionStatistics
+	}
 
 	MA.ClassicalMetaAnalysisEstimatedMarginalMeans {}
 
-	MA.ForestPlot {}
+	MA.ForestPlot
+	{
+		transformEffectSizeValue:	sectionStatistics.transformEffectSizeValue
+	}
 
 	MA.BubblePlot {}
 

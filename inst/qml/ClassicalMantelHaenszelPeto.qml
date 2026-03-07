@@ -185,12 +185,14 @@ Form
 
 	MA.ClassicalMetaAnalysisStatistics
 	{
+		id:				sectionStatistics
 		analysisType:	"ClassicalMantelHaenszelPeto"
 	}
 
 	MA.ForestPlot
 	{
-		analysisType:	"ClassicalMantelHaenszelPeto"
+		analysisType:				"ClassicalMantelHaenszelPeto"
+		transformEffectSizeValue:	sectionStatistics.transformEffectSizeValue
 	}
 
 	MA.ClassicalMetaAnalysisDiagnostics

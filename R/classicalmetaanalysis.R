@@ -149,6 +149,9 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotAuxiliarySetXAxisLimit",
   "forestPlotAuxiliarySetXAxisLimitLower",
   "forestPlotAuxiliarySetXAxisLimitUpper",
+  "forestPlotAuxiliarySetXAxisTicks",
+  "forestPlotAuxiliarySetXAxisTicksValues",
+  "forestPlotAuxiliaryXAxisTransformLabelsOnly",
   "forestPlotStudyInformationSecondaryConfidenceInterval",
   "forestPlotStudyInformationSecondaryConfidenceIntervalLevel"
 )

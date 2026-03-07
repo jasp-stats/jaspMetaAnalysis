@@ -1,6 +1,9 @@
 # Codex CLI MCP server configuration
 # Equivalent of .mcp.json for the Codex CLI
 # Fallback: used when .codex/config.toml is not available
+#
+# Meta-Analysis Knowledge Base: see knowledge-base/ directory
+# and AGENTS.md "Meta-Analysis Knowledge Base" section for navigation instructions
 
 # Reasoning: use high effort for complex module-fixing tasks
 model_reasoning_effort = "high"

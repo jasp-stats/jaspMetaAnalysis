@@ -266,6 +266,31 @@ After `runAnalysis()`, check:
 - Always set `$dependOn()` for proper caching and state management
 - Use containers for grouping related elements, state objects for reusing computed results
 
+## Meta-Analysis Knowledge Base
+
+This module ships a comprehensive knowledge base at `knowledge-base/` built by analyzing all ~200 R packages from the [CRAN Task View for Meta-Analysis](https://cran.r-project.org/web/views/MetaAnalysis.html). Use it as reference when implementing or improving meta-analysis features.
+
+### How to Navigate
+
+| Goal | Action |
+|------|--------|
+| **Find a feature by name** | Grep `knowledge-base/_feature_lookup.json` for the name → note the `c` (category) field → grep `knowledge-base/categories/<category>.json` for the feature |
+| **Explore a domain** | Read `knowledge-base/_master_index.json` (~38K tok, always fits) → read `knowledge-base/categories/<name>.toc.json` (5-48K, always fits) → grep full `categories/<name>.json` for specifics |
+| **Research a package** | Read `knowledge-base/packages/profiles/<pkg>.md` (1-5K, quick summary) → for full detail, read `knowledge-base/packages/raw/<pkg>/knowledge.json` |
+| **Check integrations** | Read `knowledge-base/integrations/by-package/<pkg>.json` |
+| **Find feature gaps** | Read `knowledge-base/_gap_analysis.md` (~29K tok) for prioritized feature list |
+
+### Key Stats
+- 196 packages analyzed, 2,989 features, 5,511 implementations
+- 16 feature categories: model-fitting, data-preparation, diagnostics-influence, publication-bias, forest-plot, visualization-other, heterogeneity, prediction-ci, model-comparison, meta-regression, network-ma, bayesian, summary-print, reporting, utility, significance-values
+
+### When to Use
+- Implementing new statistical methods → check what approaches exist across packages
+- Adding new analyses → find best-practice patterns and established APIs
+- Writing effect size computations → check `data-preparation` category
+- Forest/funnel plot enhancements → check `forest-plot` and `publication-bias` categories
+- Bayesian methods → check `bayesian` category for prior/MCMC/posterior patterns
+
 ## Compact Instructions
 
 When context is compacted, preserve:
