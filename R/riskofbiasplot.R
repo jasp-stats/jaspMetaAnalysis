@@ -23,10 +23,13 @@
 
 RiskOfBiasPlot <- function(jaspResults, dataset, options) {
 
-  .robValidateData(dataset, options)
+  ready <- length(.robGetDomainColumns(options)) > 0
 
-  .robSummaryPlot(jaspResults, dataset, options)
-  .robTrafficLightPlot(jaspResults, dataset, options)
+  if (ready)
+    .robValidateData(dataset, options)
+
+  .robSummaryPlot(jaspResults, dataset, options, ready)
+  .robTrafficLightPlot(jaspResults, dataset, options, ready)
 }
 
 
@@ -125,7 +128,7 @@ RiskOfBiasPlot <- function(jaspResults, dataset, options) {
 
 # ── summary plot ─────────────────────────────────────────────────────────────
 
-.robSummaryPlot <- function(jaspResults, dataset, options) {
+.robSummaryPlot <- function(jaspResults, dataset, options, ready) {
 
   if (!options[["summaryPlot"]])
     return()
@@ -133,6 +136,15 @@ RiskOfBiasPlot <- function(jaspResults, dataset, options) {
     return()
 
   summaryDeps <- c(.robBaseDeps, "summaryPlot", "summaryPlotWeighted", "studyWeights")
+
+  if (!ready) {
+    plot <- createJaspPlot(title = gettext("Summary"), width = 600, height = 350)
+    plot$position <- 1
+    plot$dependOn(summaryDeps)
+    plot$addCitation(.robCitation)
+    jaspResults[["summaryPlot"]] <- plot
+    return()
+  }
 
   robData  <- .robAssembleData(dataset, options)
   tool     <- .robGetToolString(options)
@@ -177,7 +189,7 @@ RiskOfBiasPlot <- function(jaspResults, dataset, options) {
 
 # ── traffic light plot ───────────────────────────────────────────────────────
 
-.robTrafficLightPlot <- function(jaspResults, dataset, options) {
+.robTrafficLightPlot <- function(jaspResults, dataset, options, ready) {
 
   if (!options[["trafficLightPlot"]])
     return()
@@ -185,6 +197,15 @@ RiskOfBiasPlot <- function(jaspResults, dataset, options) {
     return()
 
   tlDeps <- c(.robBaseDeps, "trafficLightPlot", "trafficLightPlotPointSize")
+
+  if (!ready) {
+    plot <- createJaspPlot(title = gettext("Traffic Light"))
+    plot$position <- 2
+    plot$dependOn(tlDeps)
+    plot$addCitation(.robCitation)
+    jaspResults[["trafficLightPlot"]] <- plot
+    return()
+  }
 
   robData <- .robAssembleData(dataset, options)
   tool    <- .robGetToolString(options)

@@ -69,7 +69,7 @@ test_that("RiskOfBiasPlot (analysis 3) results match", {
 
 })
 
-test_that("RiskOfBiasPlot (analysis 4) results match", {
+test_that("RiskOfBiasPlot (analysis 4) shows waiting state with no domains", {
 
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Risk of Bias - rob2.jasp")
@@ -81,13 +81,10 @@ test_that("RiskOfBiasPlot (analysis 4) results match", {
   set.seed(1)
   results <- jaspTools::runAnalysis("RiskOfBiasPlot", encoded$dataset, encoded$options, encodedDataset = TRUE)
 
-  plotName <- results[["results"]][["summaryPlot"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "analysis-4_figure-1_risk-of-bias-summary")
-
-  plotName <- results[["results"]][["trafficLightPlot"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "analysis-4_figure-2_risk-of-bias-traffic-light")
+  # no domain columns assigned → plots should be empty/waiting (no plot object, no error message)
+  expect_identical(results[["status"]], "complete")
+  expect_identical(results[["results"]][["summaryPlot"]][["data"]], "")
+  expect_identical(results[["results"]][["trafficLightPlot"]][["data"]], "")
 
 })
 
