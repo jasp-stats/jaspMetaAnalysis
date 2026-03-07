@@ -131,6 +131,8 @@
     return(dfForest)
   }
 
+  # "Ascending" means values increase top-to-bottom (forest plot convention),
+  # which corresponds to decreasing = TRUE in R's order() (row 1 = top of plot).
   dfForest <- dfForest[order(
     dfForest[[options[["forestPlotStudyInformationOrderBy"]]]],
     decreasing = options[["forestPlotStudyInformationOrderAscending"]]
@@ -763,9 +765,9 @@
 
 # ── Left panel header helpers ─────────────────────────────────────────────────
 
-.forestPlotStudyInformationSettings    <- function(options) {
+.forestPlotInformationSettings         <- function(options, key) {
 
-  settings <- options[["forestPlotStudyInformationSelectedVariablesSettings"]]
+  settings <- options[[key]]
   if (length(settings) == 0) {
     return(data.frame(
       title     = character(0),
@@ -777,19 +779,11 @@
 
   return(do.call(rbind.data.frame, settings))
 }
+.forestPlotStudyInformationSettings    <- function(options) {
+  return(.forestPlotInformationSettings(options, "forestPlotStudyInformationSelectedVariablesSettings"))
+}
 .forestPlotEstimateInformationSettings <- function(options) {
-
-  settings <- options[["forestPlotEstimateInformationSelectedVariablesSettings"]]
-  if (length(settings) == 0) {
-    return(data.frame(
-      title     = character(0),
-      value     = character(0),
-      width     = numeric(0),
-      alignment = character(0)
-    ))
-  }
-
-  return(do.call(rbind.data.frame, settings))
+  return(.forestPlotInformationSettings(options, "forestPlotEstimateInformationSelectedVariablesSettings"))
 }
 .forestPlotStudyInformationCharWidths  <- function(studyInformation, forestInformation) {
 

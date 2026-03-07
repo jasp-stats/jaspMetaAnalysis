@@ -1032,6 +1032,14 @@
     maxCharsRight   = maxCharsRight
   ))
 }
+# Add a text layer to a side panel plot, skipping when data is NULL.
+.forestPlotAddTextLayer              <- function(plot, data, mapping, options, ...) {
+
+  if (is.null(data))
+    return(plot)
+
+  return(plot + ggplot2::geom_text(
+    data    = data,
 .forestPlotBuildLeftPanel             <- function(plotData, options) {
 
   leftPanelData <- .forestPlotPrepareLeftPanelData(plotData, options)
@@ -1039,117 +1047,43 @@
     return(NULL)
   }
 
+  align    <- .forestPlotLeftPanelAlign(options)
   plotLeft <- ggplot2::ggplot()
 
-  if (!is.null(leftPanelData[["titles"]])) {
-    plotLeft <- plotLeft + ggplot2::geom_text(
-      data    = leftPanelData[["titles"]],
-      mapping = ggplot2::aes(
-        x     = x,
-        y     = y,
-        label = title,
-        hjust = alignment
-      ),
-      na.rm    = TRUE,
-      size     = 4 * options[["forestPlotRelativeSizeText"]],
-      vjust    = "middle",
-      fontface = "bold"
-    )
-  }
+  # column headers (bold)
+  plotLeft <- .forestPlotAddTextLayer(plotLeft, leftPanelData[["titles"]], ggplot2::aes(
+    x = x, y = y, label = title, hjust = alignment
+  ), options, fontface = "bold")
 
-  if (!is.null(leftPanelData[["studyDataColored"]])) {
-    plotLeft <- plotLeft + ggplot2::geom_text(
-      data    = leftPanelData[["studyDataColored"]],
-      mapping = ggplot2::aes(
-        x     = x,
-        y     = y,
-        label = label,
-        hjust = alignment,
-        color = label
-      ),
-      na.rm = TRUE,
-      size  = 4 * options[["forestPlotRelativeSizeText"]],
-      vjust = "middle"
-    )
-  }
+  # color-mapped study column (color driven by label value)
+  plotLeft <- .forestPlotAddTextLayer(plotLeft, leftPanelData[["studyDataColored"]], ggplot2::aes(
+    x = x, y = y, label = label, hjust = alignment, color = label
+  ), options)
 
-  if (!is.null(leftPanelData[["studyData"]])) {
-    plotLeft <- plotLeft + ggplot2::geom_text(
-      data    = leftPanelData[["studyData"]],
-      mapping = ggplot2::aes(
-        x     = x,
-        y     = y,
-        label = label,
-        hjust = alignment
-      ),
-      na.rm = TRUE,
-      size  = 4 * options[["forestPlotRelativeSizeText"]],
-      vjust = "middle"
-    )
-  }
+  # remaining study columns
+  plotLeft <- .forestPlotAddTextLayer(plotLeft, leftPanelData[["studyData"]], ggplot2::aes(
+    x = x, y = y, label = label, hjust = alignment
+  ), options)
 
-  if (!is.null(leftPanelData[["estimateTitles"]])) {
-    plotLeft <- plotLeft + ggplot2::geom_text(
-      data    = leftPanelData[["estimateTitles"]],
-      mapping = ggplot2::aes(
-        x     = x,
-        y     = y,
-        label = label,
-        hjust = alignment
-      ),
-      na.rm    = TRUE,
-      size     = 4 * options[["forestPlotRelativeSizeText"]],
-      vjust    = "middle",
-      fontface = "bold"
-    )
-  }
+  # estimate column headers (bold)
+  plotLeft <- .forestPlotAddTextLayer(plotLeft, leftPanelData[["estimateTitles"]], ggplot2::aes(
+    x = x, y = y, label = label, hjust = alignment
+  ), options, fontface = "bold")
 
-  if (!is.null(leftPanelData[["additionalData"]])) {
-    plotLeft <- plotLeft + ggplot2::geom_text(
-      data    = leftPanelData[["additionalData"]],
-      mapping = ggplot2::aes(
-        x     = x,
-        y     = y,
-        label = label,
-        hjust = alignment
-      ),
-      na.rm = TRUE,
-      size  = 4 * options[["forestPlotRelativeSizeText"]],
-      vjust = "middle"
-    )
-  }
+  # estimate-level multi-column data
+  plotLeft <- .forestPlotAddTextLayer(plotLeft, leftPanelData[["additionalData"]], ggplot2::aes(
+    x = x, y = y, label = label, hjust = alignment
+  ), options)
 
-  if (!is.null(leftPanelData[["additionalInformation"]])) {
-    plotLeft <- plotLeft + ggplot2::geom_text(
-      data    = leftPanelData[["additionalInformation"]],
-      mapping = ggplot2::aes(
-        x        = x,
-        y        = y,
-        label    = label,
-        fontface = face
-      ),
-      na.rm = TRUE,
-      size  = 4 * options[["forestPlotRelativeSizeText"]],
-      hjust = .forestPlotLeftPanelAlign(options),
-      vjust = "middle"
-    )
-  }
+  # additional section labels (EMM / model info, face mapped per row)
+  plotLeft <- .forestPlotAddTextLayer(plotLeft, leftPanelData[["additionalInformation"]], ggplot2::aes(
+    x = x, y = y, label = label, fontface = face
+  ), options, hjust = align)
 
-  if (!is.null(leftPanelData[["subgroupHeadings"]])) {
-    plotLeft <- plotLeft + ggplot2::geom_text(
-      data    = leftPanelData[["subgroupHeadings"]],
-      mapping = ggplot2::aes(
-        x        = x,
-        y        = y,
-        label    = label,
-        fontface = face
-      ),
-      na.rm = TRUE,
-      size  = 4 * options[["forestPlotRelativeSizeText"]],
-      hjust = .forestPlotLeftPanelAlign(options),
-      vjust = "middle"
-    )
-  }
+  # subgroup headings (bold face mapped per row)
+  plotLeft <- .forestPlotAddTextLayer(plotLeft, leftPanelData[["subgroupHeadings"]], ggplot2::aes(
+    x = x, y = y, label = label, fontface = face
+  ), options, hjust = align)
 
   attr(plotLeft, "maxCharsLeft") <- leftPanelData[["maxCharsLeft"]]
 
@@ -1796,14 +1730,11 @@
     maxCharsRight <- NULL
   }
 
-  plotsWidths <- c()
-  if (!is.null(plotLeft)) {
-    plotsWidths <- c(plotsWidths, options[["forestPlotRelativeSizeLeftPanel"]])
-  }
-  plotsWidths <- c(plotsWidths, options[["forestPlotRelativeSizeMiddlePanel"]])
-  if (!is.null(plotRight)) {
-    plotsWidths <- c(plotsWidths, options[["forestPlotRelativeSizeRightPanel"]])
-  }
+  plotsWidths <- c(
+    if (!is.null(plotLeft))  options[["forestPlotRelativeSizeLeftPanel"]],
+    options[["forestPlotRelativeSizeMiddlePanel"]],
+    if (!is.null(plotRight)) options[["forestPlotRelativeSizeRightPanel"]]
+  )
 
   if (options[["forestPlotAuxiliaryAdjustWidthBasedOnText"]] && length(plotsWidths) == 3) {
     plotsWidths[1] <- plotsWidths[1] * 2 * maxCharsLeft  / (maxCharsRight + maxCharsLeft)

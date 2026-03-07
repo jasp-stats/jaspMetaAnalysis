@@ -429,12 +429,26 @@ ForestPlot <- function(jaspResults, dataset, options) {
   if (options[["row"]] != "")
     estimateData <- estimateData[order(estimateData[[options[["row"]]]]), ]
 
-  n <- nrow(estimateData)
+  intervals <- .fpStandaloneExtractEstimateIntervals(estimateData, options)
+  positions <- .fpStandaloneEstimatePositions(estimateData, intervals, options)
 
-  # ── effect sizes ──
+  information <- .fpStandaloneEstimateInformation(estimateData, intervals, positions, options)
+  objects     <- .fpStandaloneEstimateObjects(intervals, positions)
+
+  return(.forestPlotCreateAdditionalSection(
+    heading     = gettext("Estimates"),
+    information = information,
+    objects     = objects
+  ))
+}
+
+# Extract effect sizes, CIs, and PIs from estimate rows; apply transformation.
+.fpStandaloneExtractEstimateIntervals <- function(estimateData, options) {
+
+  n  <- nrow(estimateData)
   es <- estimateData[[options[["effectSize"]]]]
 
-  # ── confidence intervals ──
+  # confidence intervals: from paired columns or computed from SE
   ciCols <- .fpStandaloneGetPairColumns(options, "confidenceInterval")
   hasCi  <- length(ciCols) == 2
   hasSe  <- options[["effectSizeStandardError"]] != ""
@@ -452,7 +466,7 @@ ForestPlot <- function(jaspResults, dataset, options) {
     uCi <- rep(NA_real_, n)
   }
 
-  # ── prediction intervals ──
+  # prediction intervals: from paired columns only
   piCols <- .fpStandaloneGetPairColumns(options, "predictionInterval")
   hasPi  <- length(piCols) == 2
   if (hasPi) {
@@ -465,7 +479,7 @@ ForestPlot <- function(jaspResults, dataset, options) {
     hasPiRow <- rep(FALSE, n)
   }
 
-  # ── transform ──
+  # apply effect size transformation
   if (options[["transformEffectSize"]] != "none") {
     transformFn <- .maGetEffectSizeTransformationOptions(options[["transformEffectSize"]])
     es  <- transformFn(es)
@@ -477,10 +491,17 @@ ForestPlot <- function(jaspResults, dataset, options) {
     }
   }
 
-  # ── row positions ──
+  return(list(n = n, es = es, lCi = lCi, uCi = uCi, lPi = lPi, uPi = uPi, hasPiRow = hasPiRow))
+}
+
+# Compute row positions for diamonds and PI rectangles, handling user-specified
+# row values and the extra rows needed for prediction interval display.
+.fpStandaloneEstimatePositions <- function(estimateData, intervals, options) {
+
+  hasPiRow <- intervals[["hasPiRow"]]
+
   if (options[["row"]] != "") {
     diamondRow <- estimateData[[options[["row"]]]]
-    # shift positions to make room for PI rows
     if (any(hasPiRow)) {
       piShift    <- c(0L, head(cumsum(as.integer(hasPiRow)), -1))
       diamondRow <- diamondRow + piShift
@@ -488,15 +509,24 @@ ForestPlot <- function(jaspResults, dataset, options) {
   } else {
     diamondRow <- cumsum(c(1L, head(1L + as.integer(hasPiRow), -1L)))
   }
-  piRow <- diamondRow + 1L
 
-  # ── information rows ──
+  return(list(diamondRow = diamondRow, piRow = diamondRow + 1L))
+}
+
+# Build the information data frame (text rows for left/right panels).
+.fpStandaloneEstimateInformation <- function(estimateData, intervals, positions, options) {
+
+  n          <- intervals[["n"]]
+  hasPiRow   <- intervals[["hasPiRow"]]
+  diamondRow <- positions[["diamondRow"]]
+  piRow      <- positions[["piRow"]]
+
   diamondInfo <- data.frame(
     label = rep(NA_character_, n),
     y     = diamondRow,
-    est   = es,
-    lCi   = lCi,
-    uCi   = uCi,
+    est   = intervals[["es"]],
+    lCi   = intervals[["lCi"]],
+    uCi   = intervals[["uCi"]],
     test  = rep("", n),
     face  = rep(NA, n)
   )
@@ -510,28 +540,38 @@ ForestPlot <- function(jaspResults, dataset, options) {
       diamondInfo[[v]] <- as.character(estimateData[[v]])
   }
 
-  if (any(hasPiRow)) {
-    piInfo <- data.frame(
-      label = rep(NA_character_, sum(hasPiRow)),
-      y     = piRow[hasPiRow],
-      est   = rep(NA_real_, sum(hasPiRow)),
-      lCi   = lPi[hasPiRow],
-      uCi   = uPi[hasPiRow],
-      test  = rep("", sum(hasPiRow)),
-      face  = rep(NA, sum(hasPiRow))
-    )
-    if (hasEstimateVars) {
-      for (v in estimateVars)
-        piInfo[[v]] <- NA_character_
-    }
-    information <- rbind(diamondInfo, piInfo)
-    information <- information[order(information$y), ]
-  } else {
-    information <- diamondInfo
+  if (!any(hasPiRow))
+    return(diamondInfo)
+
+  piInfo <- data.frame(
+    label = rep(NA_character_, sum(hasPiRow)),
+    y     = piRow[hasPiRow],
+    est   = rep(NA_real_, sum(hasPiRow)),
+    lCi   = intervals[["lPi"]][hasPiRow],
+    uCi   = intervals[["uPi"]][hasPiRow],
+    test  = rep("", sum(hasPiRow)),
+    face  = rep(NA, sum(hasPiRow))
+  )
+  if (hasEstimateVars) {
+    for (v in estimateVars)
+      piInfo[[v]] <- NA_character_
   }
 
-  # ── objects (diamonds + PI rectangles) ──
-  adj  <- 1 / 3
+  information <- rbind(diamondInfo, piInfo)
+  return(information[order(information$y), ])
+}
+
+# Build the polygon objects (diamonds for estimates, rectangles for PIs).
+.fpStandaloneEstimateObjects <- function(intervals, positions) {
+
+  es         <- intervals[["es"]]
+  lCi        <- intervals[["lCi"]]
+  uCi        <- intervals[["uCi"]]
+  hasPiRow   <- intervals[["hasPiRow"]]
+  diamondRow <- positions[["diamondRow"]]
+  piRow      <- positions[["piRow"]]
+
+  adj     <- 1 / 3
   objects <- data.frame(
     id       = rep(diamondRow, each = 4),
     x        = as.vector(rbind(lCi, es, uCi, es)),
@@ -545,7 +585,8 @@ ForestPlot <- function(jaspResults, dataset, options) {
     piIdx  <- which(hasPiRow)
     piRect <- data.frame(
       id       = rep(piRow[piIdx], each = 4),
-      x        = as.vector(rbind(lPi[piIdx], uPi[piIdx], uPi[piIdx], lPi[piIdx])),
+      x        = as.vector(rbind(intervals[["lPi"]][piIdx], intervals[["uPi"]][piIdx],
+                                 intervals[["uPi"]][piIdx], intervals[["lPi"]][piIdx])),
       y        = as.vector(rbind(piRow[piIdx] - radj, piRow[piIdx] - radj,
                                  piRow[piIdx] + radj, piRow[piIdx] + radj)),
       type     = "rectangle",
@@ -554,9 +595,5 @@ ForestPlot <- function(jaspResults, dataset, options) {
     objects <- rbind(objects, piRect)
   }
 
-  return(.forestPlotCreateAdditionalSection(
-    heading     = gettext("Estimates"),
-    information = information,
-    objects     = objects
-  ))
+  return(objects)
 }
