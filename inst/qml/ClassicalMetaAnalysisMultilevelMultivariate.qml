@@ -761,7 +761,7 @@ Form
 		analysisType:	"metaAnalysisMultilevelMultivariate"
 	}
 
-	MA.ForestPlot
+	MA.ForestPlotSection
 	{
 		analysisType:				"metaAnalysisMultilevelMultivariate"
 		transformEffectSizeValue:	sectionStatistics.transformEffectSizeValue

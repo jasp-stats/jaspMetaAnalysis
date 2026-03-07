@@ -404,7 +404,7 @@ Form
 	}
 
 	//// Forest Plots Section ////
-	MA.ForestPlot
+	MA.ForestPlotSection
 	{
 		analysisType:				"RoBMA"
 		transformEffectSizeValue:	sectionInference.transformEffectSizeValue

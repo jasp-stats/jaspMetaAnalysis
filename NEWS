@@ -2,6 +2,7 @@ Fixes:
 - fixes out of x-range estimates visualization in forest plot and indications if an estimate is out of plotting range
 
 Features:
+- Forest Plot analysis
 - if a transformation is applied, the forest plot transforms the tick labels by default (can be switched)
 - automatic label finding for transformed forest plot x-axis
 - option to input transformed forect plot x-axis labels manually

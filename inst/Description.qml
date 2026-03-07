@@ -28,6 +28,13 @@ Description
 		func:			"FunnelPlot"
 	}
 
+	Analysis
+	{
+		menu:			qsTr("Forest Plot")
+		title:			qsTr("Forest Plot")
+		func:			"ForestPlot"
+	}
+
 	GroupTitle
 	{
 		title:		qsTr("Classical")

@@ -189,7 +189,7 @@ Form
 		analysisType:	"ClassicalMantelHaenszelPeto"
 	}
 
-	MA.ForestPlot
+	MA.ForestPlotSection
 	{
 		analysisType:				"ClassicalMantelHaenszelPeto"
 		transformEffectSizeValue:	sectionStatistics.transformEffectSizeValue

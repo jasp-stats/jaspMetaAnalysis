@@ -162,7 +162,7 @@ Form
 
 	MA.ClassicalMetaAnalysisEstimatedMarginalMeans {}
 
-	MA.ForestPlot
+	MA.ForestPlotSection
 	{
 		transformEffectSizeValue:	sectionStatistics.transformEffectSizeValue
 	}

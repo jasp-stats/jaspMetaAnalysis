@@ -235,6 +235,7 @@
 .forestPlotCreateLayout               <- function() {
   return(list(
     forestHeaderIndex     = NULL,
+    estimateHeaderIndex   = NULL,
     forestInformation     = list(),
     forestObjects         = list(),
     additionalInformation = list(),
@@ -383,6 +384,10 @@
 }
 .forestPlotAppendSubgroupHeading      <- function(layout, options, subgroup) {
 
+  if (isFALSE(options[["forestPlotSubgroupShowTitles"]])) {
+    return(layout)
+  }
+
   layout[["subgroupHeadings"]][[length(layout[["subgroupHeadings"]]) + 1]] <- .forestPlotSubgroupHeading(options, subgroup, layout[["row"]])
   layout[["row"]] <- layout[["row"]] + 1
 
@@ -445,6 +450,7 @@
 
   plotData <- list(
     forestHeaderIndex     = layout[["forestHeaderIndex"]],
+    estimateHeaderIndex   = layout[["estimateHeaderIndex"]],
     forestInformation     = .forestPlotBindDataFrames(layout[["forestInformation"]]),
     forestObjects         = .forestPlotBindDataFrames(layout[["forestObjects"]]),
     additionalInformation = .forestPlotBindDataFrames(layout[["additionalInformation"]]),
@@ -456,6 +462,7 @@
   # Convert row indices to plot coordinates (negative = top-to-bottom, scaled)
   rowSize <- options[["forestPlotRelativeSizeRow"]]
   plotData[["forestHeaderIndex"]]     <- .forestPlotScaleY(plotData[["forestHeaderIndex"]], rowSize)
+  plotData[["estimateHeaderIndex"]]   <- .forestPlotScaleY(plotData[["estimateHeaderIndex"]], rowSize)
   plotData[["forestInformation"]]     <- .forestPlotScaleYColumn(plotData[["forestInformation"]],     rowSize)
   plotData[["forestObjects"]]         <- .forestPlotScaleYColumn(plotData[["forestObjects"]],         rowSize)
   plotData[["additionalInformation"]] <- .forestPlotScaleYColumn(plotData[["additionalInformation"]], rowSize)
@@ -723,18 +730,23 @@
   additionalInformation <- plotData[["additionalInformation"]]
   subgroupHeadings      <- plotData[["subgroupHeadings"]]
 
-  hasStudyVars <- options[["forestPlotStudyInformation"]] && length(options[["forestPlotStudyInformationSelectedVariables"]]) > 0
-  if (!hasStudyVars && !.forestPlotHasDataFrame(additionalInformation)) {
+  hasStudyVars    <- options[["forestPlotStudyInformation"]] && length(options[["forestPlotStudyInformationSelectedVariables"]]) > 0
+  hasEstimateVars <- length(options[["forestPlotEstimateInformationSelectedVariables"]]) > 0
+  if (!hasStudyVars && !hasEstimateVars && !.forestPlotHasDataFrame(additionalInformation)) {
     return(NULL)
   }
 
   leftPanelData <- list(
     titles = NULL, studyDataColored = NULL, studyData = NULL,
-    additionalInformation = NULL, subgroupHeadings = NULL, maxCharsLeft = NULL
+    estimateTitles = NULL, additionalData = NULL, additionalInformation = NULL,
+    subgroupHeadings = NULL, maxCharsLeft = NULL
   )
 
   if (hasStudyVars) {
     leftPanelData <- .forestPlotPrepareLeftPanelStudyData(leftPanelData, plotData, forestInformation, additionalInformation, options)
+  }
+  if (hasEstimateVars) {
+    leftPanelData <- .forestPlotPrepareLeftPanelEstimateData(leftPanelData, plotData, additionalInformation, options)
   }
   leftPanelData <- .forestPlotPrepareLeftPanelAdditional(leftPanelData, additionalInformation, options)
   leftPanelData <- .forestPlotPrepareLeftPanelSubgroups(leftPanelData, subgroupHeadings, options)
@@ -788,13 +800,86 @@
 
   return(leftPanelData)
 }
+.forestPlotPrepareLeftPanelEstimateData <- function(leftPanelData, plotData, additionalInformation, options) {
+
+  estimateSettings <- .forestPlotEstimateInformationSettings(options)
+  if (nrow(estimateSettings) == 0 || !.forestPlotHasDataFrame(additionalInformation)) {
+    return(leftPanelData)
+  }
+
+  availableVars <- intersect(estimateSettings$value, colnames(additionalInformation))
+  if (length(availableVars) == 0) {
+    return(leftPanelData)
+  }
+
+  estimateSettings <- estimateSettings[estimateSettings$value %in% availableVars, , drop = FALSE]
+
+  hasMultiColumn <- rowSums(!is.na(additionalInformation[, availableVars, drop = FALSE])) > 0
+  if (!any(hasMultiColumn)) {
+    return(leftPanelData)
+  }
+
+  estimateInfo <- additionalInformation[hasMultiColumn, , drop = FALSE]
+
+  charWidths       <- .forestPlotStudyInformationCharWidths(estimateSettings, estimateInfo)
+  maxCharsEstimate <- sum(charWidths)
+
+  leftPanelData[["maxCharsLeft"]] <- max(c(leftPanelData[["maxCharsLeft"]], maxCharsEstimate), na.rm = TRUE)
+
+  relativeWidths <- .forestPlotStudyInformationRelativeWidths(
+    estimateSettings, leftPanelData[["maxCharsLeft"]], charWidths, options
+  )
+
+  if (options[["forestPlotAuxiliaryAdjustWidthBasedOnText"]]) {
+    estimateSettings$xStart <- cumsum(relativeWidths[-length(relativeWidths)])
+    estimateSettings$xEnd   <- cumsum(relativeWidths)[-1]
+  } else {
+    estimateSettings$xStart <- c(0, cumsum(relativeWidths[-length(relativeWidths)]))
+    estimateSettings$xEnd   <- cumsum(relativeWidths)
+  }
+
+  estimateSettings$x <- ifelse(
+    estimateSettings$alignment == "left",   estimateSettings$xStart,
+    ifelse(estimateSettings$alignment == "middle",
+           (estimateSettings$xStart + estimateSettings$xEnd) / 2,
+           estimateSettings$xEnd)
+  )
+
+  leftPanelData[["additionalData"]] <- do.call(rbind.data.frame, lapply(availableVars, function(variable) {
+    data.frame(
+      x         = estimateSettings$x[estimateSettings$value == variable],
+      y         = estimateInfo$y,
+      label     = as.character(estimateInfo[[variable]]),
+      alignment = estimateSettings$alignment[estimateSettings$value == variable]
+    )
+  }))
+
+  # title rows at estimateHeaderIndex positions
+  estimateHeaderIndex <- plotData[["estimateHeaderIndex"]]
+  if (!is.null(estimateHeaderIndex) && any(estimateSettings$title != "")) {
+    leftPanelData[["estimateTitles"]] <- do.call(rbind, lapply(estimateHeaderIndex, function(y) {
+      data.frame(
+        x         = estimateSettings$x,
+        y         = y,
+        label     = estimateSettings$title,
+        alignment = estimateSettings$alignment
+      )
+    }))
+  }
+
+  return(leftPanelData)
+}
 .forestPlotPrepareLeftPanelAdditional <- function(leftPanelData, additionalInformation, options) {
 
   if (!.forestPlotHasDataFrame(additionalInformation)) {
     return(leftPanelData)
   }
 
-  info       <- additionalInformation[!is.na(additionalInformation$label), , drop = FALSE]
+  info <- additionalInformation[!is.na(additionalInformation$label), , drop = FALSE]
+  if (!.forestPlotHasDataFrame(info)) {
+    return(leftPanelData)
+  }
+
   info$x     <- .forestPlotLeftPanelAlign(options)
   info$face[is.na(info$face)] <- "plain"
 
@@ -991,6 +1076,37 @@
   if (!is.null(leftPanelData[["studyData"]])) {
     plotLeft <- plotLeft + ggplot2::geom_text(
       data    = leftPanelData[["studyData"]],
+      mapping = ggplot2::aes(
+        x     = x,
+        y     = y,
+        label = label,
+        hjust = alignment
+      ),
+      na.rm = TRUE,
+      size  = 4 * options[["forestPlotRelativeSizeText"]],
+      vjust = "middle"
+    )
+  }
+
+  if (!is.null(leftPanelData[["estimateTitles"]])) {
+    plotLeft <- plotLeft + ggplot2::geom_text(
+      data    = leftPanelData[["estimateTitles"]],
+      mapping = ggplot2::aes(
+        x     = x,
+        y     = y,
+        label = label,
+        hjust = alignment
+      ),
+      na.rm    = TRUE,
+      size     = 4 * options[["forestPlotRelativeSizeText"]],
+      vjust    = "middle",
+      fontface = "bold"
+    )
+  }
+
+  if (!is.null(leftPanelData[["additionalData"]])) {
+    plotLeft <- plotLeft + ggplot2::geom_text(
+      data    = leftPanelData[["additionalData"]],
       mapping = ggplot2::aes(
         x     = x,
         y     = y,

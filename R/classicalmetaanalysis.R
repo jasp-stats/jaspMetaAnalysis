@@ -125,6 +125,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotConditionalEstimates",
   "forestPlotTestsInRightPanel",
   "forestPlotAllignLeftPanel",
+  "forestPlotSubgroupShowTitles",
   "forestPlotSubgroupPanelsWithinSubgroup",
   "forestPlotSubgroupFullDatasetEstimatedMarginalMeans",
   "forestPlotSubgroupFullDatasetModelInformation",

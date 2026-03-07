@@ -317,7 +317,7 @@ Form
 	}
 
 	//// Forest Plots Section ////
-	MA.ForestPlot
+	MA.ForestPlotSection
 	{
 		analysisType:				"NoBMA"
 		transformEffectSizeValue:	sectionInference.transformEffectSizeValue

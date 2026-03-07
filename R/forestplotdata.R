@@ -777,6 +777,20 @@
 
   return(do.call(rbind.data.frame, settings))
 }
+.forestPlotEstimateInformationSettings <- function(options) {
+
+  settings <- options[["forestPlotEstimateInformationSelectedVariablesSettings"]]
+  if (length(settings) == 0) {
+    return(data.frame(
+      title     = character(0),
+      value     = character(0),
+      width     = numeric(0),
+      alignment = character(0)
+    ))
+  }
+
+  return(do.call(rbind.data.frame, settings))
+}
 .forestPlotStudyInformationCharWidths  <- function(studyInformation, forestInformation) {
 
   if (nrow(studyInformation) == 0) {
@@ -853,6 +867,12 @@
   leftPanelStudyInformation <- .forestPlotStudyInformationSettings(options)
 
   return(nrow(leftPanelStudyInformation) > 0 && any(leftPanelStudyInformation[["title"]] != ""))
+}
+.forestPlotHasEstimateInformationHeader <- function(options) {
+
+  estimateSettings <- .forestPlotEstimateInformationSettings(options)
+
+  return(nrow(estimateSettings) > 0 && any(estimateSettings[["title"]] != ""))
 }
 
 # Decide whether the right panel is needed at all before building/laying it out.
