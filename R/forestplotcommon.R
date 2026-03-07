@@ -1040,6 +1040,13 @@
 
   return(plot + ggplot2::geom_text(
     data    = data,
+    mapping = mapping,
+    na.rm   = TRUE,
+    size    = 4 * options[["forestPlotRelativeSizeText"]],
+    vjust   = "middle",
+    ...
+  ))
+}
 .forestPlotBuildLeftPanel             <- function(plotData, options) {
 
   leftPanelData <- .forestPlotPrepareLeftPanelData(plotData, options)

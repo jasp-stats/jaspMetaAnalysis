@@ -161,8 +161,13 @@ ForestPlot <- function(jaspResults, dataset, options) {
   if (!is.null(jaspResults[["forestPlot"]]))
     return()
 
-  if (!ready)
+  if (!ready) {
+    forestPlot          <- createJaspPlot(title = gettext("Forest Plot"), width = 500, height = 400)
+    forestPlot$position <- 1
+    forestPlot$dependOn(.fpStandaloneDependencies)
+    jaspResults[["forestPlot"]] <- forestPlot
     return()
+  }
 
   # build plot data from user columns
   plotOut <- try(.fpStandaloneBuildAndRender(dataset, options))

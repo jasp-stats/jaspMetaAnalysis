@@ -35,6 +35,13 @@ Description
 		func:			"ForestPlot"
 	}
 
+	Analysis
+	{
+		menu:			qsTr("Risk of Bias Plot")
+		title:			qsTr("Risk of Bias Plot")
+		func:			"RiskOfBiasPlot"
+	}
+
 	GroupTitle
 	{
 		title:		qsTr("Classical")

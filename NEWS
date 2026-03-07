@@ -3,6 +3,8 @@ Fixes:
 
 Features:
 - Forest Plot analysis
+- Risk of Bias analysis
+- Effect Size Aggregation analysis
 - if a transformation is applied, the forest plot transforms the tick labels by default (can be switched)
 - automatic label finding for transformed forest plot x-axis
 - option to input transformed forect plot x-axis labels manually
