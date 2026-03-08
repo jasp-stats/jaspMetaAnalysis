@@ -23,6 +23,13 @@ Description
 
 	Analysis
 	{
+		menu:			qsTr("Effect Size Aggregation")
+		title:			qsTr("Effect Size Aggregation")
+		func:			"EffectSizeAggregation"
+	}
+
+	Analysis
+	{
 		menu:			qsTr("Funnel Plot")
 		title:			qsTr("Funnel Plot")
 		func:			"FunnelPlot"
