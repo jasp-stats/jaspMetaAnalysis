@@ -3,11 +3,11 @@ context("Library: Effects of Modified School Calendars on Student Achievement")
 # This test file was auto-generated from a JASP example file.
 # The JASP file is stored in tests/testthat/jaspfiles/library/.
 
-test_that("ClassicalMetaAnalysisMultilevelMultivariate results match", {
+test_that("ClassicalMetaAnalysisMultilevelMultivariate (analysis 1) results match", {
 
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "library", "Effects of Modified School Calendars on Student Achievement.jasp")
-  opts <- jaspTools::analysisOptions(jaspFile)
+  opts <- jaspTools::analysisOptions(jaspFile)[[1]]
   dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
 
   # Encode and run analysis
@@ -52,6 +52,51 @@ test_that("ClassicalMetaAnalysisMultilevelMultivariate results match", {
      17.7735508377994, 2, -16.8454994526106, "jaspColumn3", 2.48818251251384e-05,
      68.4329523719603, 68.6637216027295, 72.4476187424252, 48.5155043045384,
      2, -32.2164761859801, "jaspColumn4", 3.27687921744215e-12))
+
+})
+
+test_that("EffectSizeAggregation (analysis 2) results match", {
+
+  # Load from JASP example file
+  jaspFile <- testthat::test_path("jaspfiles", "library", "Effects of Modified School Calendars on Student Achievement.jasp")
+  opts <- jaspTools::analysisOptions(jaspFile)[[2]]
+  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+
+  # Encode and run analysis
+  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
+  set.seed(1)
+  results <- jaspTools::runAnalysis("EffectSizeAggregation", encoded$dataset, encoded$options, encodedDataset = TRUE)
+
+  table <- results[["results"]][["summaryTable"]][["data"]]
+  jaspTools::expect_equal_tables(table,
+    list("Independent", 11, 56))
+
+})
+
+test_that("ClassicalMetaAnalysis (analysis 3) results match", {
+
+  # Load from JASP example file
+  jaspFile <- testthat::test_path("jaspfiles", "library", "Effects of Modified School Calendars on Student Achievement.jasp")
+  opts <- jaspTools::analysisOptions(jaspFile)[[3]]
+  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+
+  # Encode and run analysis
+  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
+  set.seed(1)
+  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", encoded$dataset, encoded$options, encodedDataset = TRUE)
+
+  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
+  jaspTools::expect_equal_tables(table,
+    list(0.1960299, -0.003266479, -0.4755446, "Pooled effect", 0.08944523,
+     0.3953263, 0.8676044, 0.287828331811827, 0.193633194775452,
+     "", "𝜏", 0.0689964199690152, 0.513389932442685, "", 0.0828451485935791,
+     0.037493814118948, "", "𝜏<unicode>", 0.0397182489213397, 0.263569222733505,
+     ""))
+
+  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_testsTable"]][["data"]]
+  jaspTools::expect_equal_tables(table,
+    list(3.83843303769695e-83, "Q<unicode>(10) = 415.92", "Heterogeneity",
+     0.0531900165513901, "t(10) = 2.19", "Pooled effect"))
 
 })
 

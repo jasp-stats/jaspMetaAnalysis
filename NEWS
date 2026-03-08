@@ -11,4 +11,5 @@ Features:
 
 Changes:
 - forest plot function complete refactor
+- effect size variance covariance matrix qml refactor
 - additional unit tests for the forest plot

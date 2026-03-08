@@ -23,6 +23,14 @@ import "../qml/qml_components" as MA
 
 Form
 {
+	info: qsTr("Effect Size Aggregation allows you to combine multiple effect sizes or outcomes from the same study into a single aggregate effect size." + 
+	"This is useful when a study reports multiple outcomes that should be treated as a single unit. Note that multilevel and multivariate models available in the Classical Meta-Analysis (Multilevel/Multivariate) option are preferable for analyzing such structures.")
+	infoBottom: "## " + qsTr("References") + "\n" +
+	"- Bartoš F, Wagenmakers EJ, & Viechtbauer W (2025). “Meta-analysis with JASP, Part I: Classical approaches.” _ArXiv Preprint_. https://doi.org/10.48550/arXiv.2509.09845\n" + 
+	"- Viechtbauer W (2010). “Conducting meta-analyses in R with the metafor package.” _Journal of Statistical Software, 36_(3), 1–48. https://doi.org/10.18637/jss.v036.i03\n" +
+	"- Viechtbauer W (2025). _metafor: Meta-Analysis Package for R_. R package version 4.8-0 Available at: <https://CRAN.R-project.org/package=metafor>.\n" + 
+	"## " + qsTr("R Packages") + "\n" +
+	"- metafor"
 
 	VariablesForm
 	{

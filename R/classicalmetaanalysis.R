@@ -31,6 +31,36 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   return()
 }
 
+.effectSizeVarianceCovarianceMatrixDependencies <- c(
+  # simple pathway
+  "varianceCovarianceMatrixType",
+  "varianceCovarianceMatrixSimpleStructure",
+  "varianceCovarianceMatrixSimpleWithinClusterCorrelation",
+  "varianceCovarianceMatrixSimpleTimeVariable",
+  "varianceCovarianceMatrixSimpleTimeLag1Correlation",
+  # precomputed
+  "varianceCovarianceMatrixFile",
+  # correlation matrix
+  "varianceCovarianceMatrixCorrelationMatrix",
+  "varianceCovarianceMatrixCluster", "varianceCovarianceMatrixSubcluster",
+  # constructs/groups/times
+  "varianceCovarianceMatrixConstruct", "varianceCovarianceMatrixConstructType",
+  "varianceCovarianceMatrixConstructCorrelationMatrix",
+  "varianceCovarianceMatrixConstructCorrelationMatrixValue",
+  "varianceCovarianceMatrixConstructCorrelationMatrixFilePath",
+  "varianceCovarianceMatrixConstructTypeCorrelationMatrix",
+  "varianceCovarianceMatrixConstructTypeCorrelationMatrixValue",
+  "varianceCovarianceMatrixConstructTypeCorrelationMatrixFilePath",
+  "varianceCovarianceMatrixTime1", "varianceCovarianceMatrixTime2",
+  "varianceCovarianceMatrixTimeLag1Correlation",
+  "varianceCovarianceMatrixGroup1", "varianceCovarianceMatrixGroup2",
+  "varianceCovarianceMatrixGroupSize1", "varianceCovarianceMatrixGroupSize2",
+  # matrix options
+  "varianceCovarianceMatrixCheckPositiveDefiniteness",
+  "varianceCovarianceMatrixForcePositiveDefiniteness",
+  "varianceCovarianceMatrixSaveComputedVarianceCovarianceMatrix"
+)
+
 .maDependencies        <- c(
   "effectSize", "effectSizeStandardError", "predictors", "predictors.types", "clustering", "subgroup", "method", "fixedEffectTest",
   "effectSizeModelTerms", "effectSizeModelIncludeIntercept",
@@ -56,35 +86,14 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "randomEffects", "randomEffectsSpecification",
   "computeCovarianceMatrix", "computeCovarianceMatrix",
   # multivariate effect size computation
-  "varianceCovarianceMatrixType",
-  "varianceCovarianceMatrixFile",
-  "varianceCovarianceMatrixCorrelationMatrix",
-  "varianceCovarianceMatrixSubcluster",
-  "varianceCovarianceMatrixCluster",
-  "varianceCovarianceMatrixForcePositiveDefiniteness",
-  "varianceCovarianceMatrixCheckPositiveDefiniteness",
-  "varianceCovarianceMatrixCorrelationMatrix",
-  "varianceCovarianceMatrixConstruct",
-  "varianceCovarianceMatrixConstructType",
-  "varianceCovarianceMatrixTime1",
-  "varianceCovarianceMatrixTime2",
-  "varianceCovarianceMatrixGroup1",
-  "varianceCovarianceMatrixGroup1",
-  "varianceCovarianceMatrixGroupSize1",
-  "varianceCovarianceMatrixGroupSize2",
-  "varianceCovarianceMatrixConstructCorrelationMatrix",
-  "varianceCovarianceMatrixConstructCorrelationMatrixValue",
-  "varianceCovarianceMatrixConstructCorrelationMatrixFilePath",
-  "varianceCovarianceMatrixConstructTypeCorrelationMatrix",
-  "varianceCovarianceMatrixConstructTypeCorrelationMatrixValue",
-  "varianceCovarianceMatrixConstructTypeCorrelationMatrixFilePath",
-  "varianceCovarianceMatrixTimeLag1Correlation",
+  .effectSizeVarianceCovarianceMatrixDependencies,
   # Mantel-Haenszel / Peto
   "successesGroup1", "successesGroup2", "sampleSizeGroup1", "sampleSizeGroup2",
   "eventsGroup1", "eventsGroup2", "personTimeGroup1", "personTimeGroup2",
   "effectSizeMeasure",
   "advancedAdd", "advancedTo", "advancedDropStudiesWithNoCasesOrEvents", "advancedContinuityCorrection"
 )
+
 .maForestPlotDependencies <- c(
   # do not forget to add variable carrying options to the .maDataPlottingDependencies
   "transformEffectSize", "confidenceIntervalsLevel", "bayesFactorType",
