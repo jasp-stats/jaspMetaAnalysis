@@ -52,12 +52,14 @@ Section
 		visible:
 			analysisType === "metaAnalysis" ||
 			analysisType === "metaAnalysisMultilevelMultivariate" ||
+			analysisType === "ClassicalGeneralizedMetaAnalysis"   ||
 			analysisType === "RoBMA" ||
 			analysisType === "NoBMA" ||
 			analysisType === "BiBMA"
 		enabled:
 			analysisType === "metaAnalysis" ||
 			analysisType === "metaAnalysisMultilevelMultivariate" ||
+			analysisType === "ClassicalGeneralizedMetaAnalysis"   ||
 			analysisType === "RoBMA" ||
 			analysisType === "NoBMA" ||
 			analysisType === "BiBMA"

@@ -33,7 +33,7 @@ Section
 		title:		qsTr("Heterogeneity")
 		columns:	2
 		enabled:	method.value != "fixedEffects" && method.value != "equalEffects"
-		visible:	analysisType === "metaAnalysis" || analysisType === "ClassicalMantelHaenszelPeto"
+		visible:	analysisType === "metaAnalysis" || analysisType === "ClassicalMantelHaenszelPeto" || analysisType === "ClassicalGeneralizedMetaAnalysis"
 		info: qsTr("Summarize the meta-analytic between-study heterogeneity. Unavailable when performing multilevel/multivariate meta-analysis.")
 
 		CheckBox
@@ -41,7 +41,7 @@ Section
 			text:		qsTr("𝜏")
 			name:		"heterogeneityTau"
 			checked:	true
-			visible:	analysisType === "metaAnalysis"
+			visible:	analysisType === "metaAnalysis" || analysisType === "ClassicalGeneralizedMetaAnalysis"
 			info: qsTr("Include 𝜏, the square root of the estimated between-study variance.")
 		}
 
@@ -50,7 +50,7 @@ Section
 			text:		qsTr("𝜏²")
 			name:		"heterogeneityTau2"
 			checked:	true
-			visible:	analysisType === "metaAnalysis"
+			visible:	analysisType === "metaAnalysis" || analysisType === "ClassicalGeneralizedMetaAnalysis"
 			info: qsTr("Include 𝜏², the estimated between-study variance.")
 		}
 
@@ -98,7 +98,7 @@ Section
 	{
 		title:		qsTr("Meta-Regression")
 		enabled:	predictors.count > 0
-		visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
+		visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate" || analysisType === "ClassicalGeneralizedMetaAnalysis"
 		info: qsTr("Create summaries of the meta-regression. Available when predictors are included.")
 
 		CheckBox
@@ -157,7 +157,7 @@ Section
 			text:		qsTr("Prediction intervals")
 			name:		"predictionIntervals"
 			checked:	true
-			visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
+			visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate" || analysisType === "ClassicalGeneralizedMetaAnalysis"
 			info: qsTr("Include prediction intervals in the tabular output.")
 		}
 
@@ -187,7 +187,7 @@ Section
 						{ label: qsTr("SMD to Cohen's U₃")					, value: "smdToCohensU3"				},  // transf.dtou3
 						{ label: qsTr("SMD to CLES, Pr(superiority)")		, value: "smdToCles"					},  // transf.dtocles
 					];
-				} else {
+				} else if (analysisType === "ClassicalMantelHaenszelPeto" || analysisType === "ClassicalGeneralizedMetaAnalysis"){
 					return [
 						{ label: qsTr("None")								, value: "none"							},  // NULL
 						{ label: qsTr("Exponential")						, value: "exponential"					},  // exp

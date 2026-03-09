@@ -95,12 +95,19 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     .maResidualFunnelPlot(jaspResults, options)
 
   # additional
-  if (options[["showMetaforRCode"]])
-    .maShowMetaforRCode(jaspResults, options)
+  if (options[["showMetaforRCode"]]) {
+    if (.maIsGLMM(options)) {
+      .maglmmShowMetaforRCode(jaspResults, options)
+    } else {
+      .maShowMetaforRCode(jaspResults, options)
+    }
+  }
 
   # export the variance-covariance matrix if requested
-  if (.maIsMultilevelMultivariate(options) && options[["varianceCovarianceMatrixSaveComputedVarianceCovarianceMatrix"]] != "")
+  if (.maIsMultilevelMultivariate(options) && options[["varianceCovarianceMatrixSaveComputedVarianceCovarianceMatrix"]] != "") {
     .mammExportVarianceCovarianceMatrix(dataset, options)
+  }
+    
 
   return()
 }
@@ -109,19 +116,21 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 .maGetFormula                    <- function(modelTerms, includeIntercept) {
 
   predictors <- unlist(lapply(modelTerms, function(x) {
-    if (length(x[["components"]]) > 1)
+    if (length(x[["components"]]) > 1) {
       return(paste(x[["components"]], collapse = ":"))
-    else
+    } else {
       return(x[["components"]])
+    }
   }))
 
   if (length(predictors) == 0)
     return(NULL)
 
-  if (includeIntercept)
+  if (includeIntercept) {
     formula <- paste("~", paste(predictors, collapse = "+"))
-  else
+  } else {
     formula <- paste("~", paste(predictors, collapse = "+"), "-1")
+  }
 
   return(as.formula(formula, env = parent.frame(1)))
 }
@@ -131,7 +140,10 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     return()
 
   # dispatch fitting function & dependencies
-  if (.maIsClassical(options, notMHP = TRUE)) {
+  if (.maIsGLMM(options)) {
+    fittingFunction <- .maglmmFitModelFun
+    dependencies    <- .maDependencies
+  } else if (.maIsClassical(options, notMHP = TRUE)) {
     fittingFunction <- .maFitModelFun
     dependencies    <- .maDependencies
   } else if (.maIsClassical(options)) {
@@ -744,7 +756,11 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # add all the overall model test
   tests <- list()
-  tests[["heterogeneity"]] <- .maSafeRbind(lapply(fit, .maRowHeterogeneityTest, options = options))
+  if (.maIsGLMM(options)) {
+    tests[["heterogeneity"]] <- .maSafeRbind(lapply(fit, .maglmmRowHeterogeneityTest, options = options))
+  } else {
+    tests[["heterogeneity"]] <- .maSafeRbind(lapply(fit, .maRowHeterogeneityTest, options = options))
+  }
   tests[["effect"]]        <- .maSafeRbind(lapply(fit, .maRowEffectSizeTest,    options = options))
 
   # effect size moderation
@@ -886,7 +902,10 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   estimates[["effect"]] <- .maSafeRbind(lapply(fit, .maRowPooledEffectEstimate, options = options))
 
   # pooled heterogeneity
-  if (!.maGetMethodOptions(options) %in% c("EE", "FE", "MH", "PETO") && !.maIsMultilevelMultivariate(options) &&
+  if (.maIsGLMM(options) && .maGetMethodOptions(options) != "FE" &&
+      (options[["heterogeneityTau"]] || options[["heterogeneityTau2"]] || options[["heterogeneityI2"]] || options[["heterogeneityH2"]])) {
+    estimates[["heterogeneity"]] <- .maSafeRbind(lapply(fit, .maRowPooledHeterogeneity, options = options))
+  } else if (!.maGetMethodOptions(options) %in% c("EE", "FE", "MH", "PETO") && !.maIsMultilevelMultivariate(options) &&
       (options[["heterogeneityTau"]] ||options[["heterogeneityTau2"]] || options[["heterogeneityI2"]] || options[["heterogeneityH2"]])) {
 
     # requires non-clustered fit
@@ -937,7 +956,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   fitMeasuresTable$addColumnInfo(name = "BIC",           title = gettext("BIC"),          type = "number")
   fitMeasuresTable$addColumnInfo(name = "AICc",          title = gettext("AICc"),         type = "number")
 
-  if (.maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options))
+  if (.maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options) && !.maIsGLMM(options))
     fitMeasuresTable$addColumnInfo(name = "R2",  title = gettext("R\U00B2"),   type = "number")
 
   # skip on error
@@ -2428,11 +2447,15 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 }
 .maComputePooledHeterogeneityPlot  <- function(fit, options, parameter = "tau") {
 
+  # dispatch to GLMM-specific function
+  if (inherits(fit, "rma.glmm"))
+    return(.maglmmComputePooledHeterogeneityPlot(fit, options, parameter))
+    
+
   # don't use the confint on robust.rma objects (they are not implemented)
   # the clustering works only on the fixed effect estimates
   # -> we can drop the class and compute confint and get the heterogeneity from the original fit
   # (the fit is passed directly from from forest plot function so it is cleaner to dispatch it here)
-
   if (inherits(fit, "robust.rma"))
     class(fit) <- class(fit)[!class(fit) %in% "robust.rma"]
 
@@ -2466,10 +2489,11 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   }
 
   if (.maIsMetaregressionFtest(options)) {
-    if (parameter == "effectSize")
+    if (parameter == "effectSize") {
       row$df2 <- fit[["QMdf"]][2]
-    else if (parameter == "heterogeneity")
+    } else if (parameter == "heterogeneity") {
       row$df2 <- fit[["QSdf"]][2]
+    }
   }
 
 
@@ -3267,7 +3291,16 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   ### add studies as bubbles
   dataset <- attr(fit, "dataset")
-  if (options[["analysis"]] == "BiBMA") {
+  if (.maIsGLMM(options)) {
+    tempDf    <- .maglmmEscalc(dataset, options)
+    dfStudies <- data.frame(
+      effectSize        = tempDf[["yi"]],
+      inverseVariance   = 1/tempDf[["vi"]],
+      sampleSize        = .maglmmGetSampleSize(dataset, options),
+      constant          = rep(options[["bubblePlotBubblesRelativeSize"]], nrow(dataset)),
+      selectedVariable  = dataset[[attr(dfPlot, "selectedVariable")]]
+    )
+  } else if (options[["analysis"]] == "BiBMA") {
     tempDf <- metafor::escalc(
       measure = "OR",
       ai      = dataset[[options[["successesGroup1"]]]],
@@ -3773,10 +3806,11 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # xTicks and other attributes only passed for rma.uni
   # (there are way too many options to deal with for rma.mv --- using the metafor package defaults)
-  if (!is.null(attr(dfPlot, "xTicks")))
+  if (!is.null(attr(dfPlot, "xTicks"))) {
     xTicks <- attr(dfPlot, "xTicks")
-  else
+  } else {
     xTicks <- jaspGraphs::getPrettyAxisBreaks(c(min(dfPlot[[1]]), max(dfPlot[[1]])))
+  }
 
   # create plot
   plotOut <- ggplot2::ggplot(
@@ -4131,6 +4165,18 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 }
 .maPrintQTest                         <- function(fit) {
 
+  # rma.glmm uses QE.Wld/QE.LRT instead of QE/QEp
+  if (inherits(fit, "rma.glmm")) {
+    heterogeneityName <- if (fit[["p"]] > 1) gettext("Residual heterogeneity (Wald)") else gettext("Heterogeneity (Wald)")
+    return(sprintf(
+      paste0("%1$s: Q_W(%2$i) = ", if (fit[["QE.Wld"]] < 1e5) "%3$.2f" else "%3$.3g", ", %4$s"),
+      heterogeneityName,
+      fit[["QE.df"]],
+      fit[["QE.Wld"]],
+      .maPrintPValue(fit[["QEp.Wld"]])
+    ))
+  }
+
   if (fit[["p"]] > 1) {
     heterogeneityName <- gettextf("Residual heterogeneity")
   } else {
@@ -4359,9 +4405,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   row <- do.call(cbind.data.frame, row)
 
   # add footnote message if necessary
-  if (coefficientsTest) {
+  if (coefficientsTest)
     attr(row, "footnote") <- attr(moderationOut, "footnote")
-  }
 
   return(row)
 }
@@ -4433,8 +4478,10 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     ))
   }
 
-  # pooled effect size
-  if (options[["analysis"]] == "mantelHaenszelPeto") {
+  # pooled heterogeneity
+  if (options[["analysis"]] == "generalizedMetaAnalysis") {
+    row <- .maglmmComputePooledHeterogeneity(fit, options)
+  } else if (options[["analysis"]] == "mantelHaenszelPeto") {
     row <- .mamhpComputePooledHeterogeneity(fit, options)
   } else {
     row <- .maComputePooledHeterogeneity(fit, options)
@@ -4472,7 +4519,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     data.frame(t(fit[["fit.stats"]]))
   )
 
-  if (.maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options))
+  if (.maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options) && !.maIsGLMM(options))
     row$R2 <- fit[["R2"]]
 
   return(row)

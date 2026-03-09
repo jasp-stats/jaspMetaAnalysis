@@ -11,10 +11,17 @@
 .forestPlotStudyExtractBaseData        <- function(fit, dataset, options) {
 
   if (.maIsClassical(options)) {
+
+    if (options[["analysis"]] %in% c("generalizedMetaAnalysis", "mantelHaenszelPeto")) {
+      studyWeights <- 1 / fit[["vi"]]
+    } else {
+      studyWeights <- weights(fit)
+    }
+
     return(data.frame(
       effectSize     = fit[["yi"]],
       standardError  = sqrt(fit[["vi"]]),
-      weights        = weights(fit),
+      weights        = studyWeights,
       id             = seq_along(fit[["yi"]])
     ))
   }

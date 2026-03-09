@@ -99,7 +99,7 @@ Section
 							{ label: qsTr("Inverse variance")	, value: "inverseVariance"	},
 							{ label: qsTr("Equal")				, value: "equal"	}
 						]
-					else if (analysisType === "BiBMA")
+					else if (analysisType === "BiBMA" || analysisType === "ClassicalGeneralizedMetaAnalysis")
 						[
 							{ label: qsTr("Sample size")		, value: "sampleSize"	},
 							{ label: qsTr("Inverse variance")	, value: "inverseVariance"	},
@@ -171,7 +171,7 @@ Section
 				label:		qsTr("Prediction intervals")
 				checked:	true
 				info: qsTr("Include prediction intervals of the estimated effect sizes.")
-				visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
+				visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate" || analysisType === "ClassicalGeneralizedMetaAnalysis"
 
 				DoubleField
 				{

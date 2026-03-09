@@ -71,8 +71,15 @@ Description
 
 	Analysis
 	{
-		menu:			qsTr("Mantel-Haenszel / Peto (beta)")
-		title:			qsTr("Mantel-Haenszel / Peto (beta)")
+		menu:			qsTr("Generalized (GLMM) Meta-Analysis")
+		title:			qsTr("Classical Generalized (GLMM) Meta-Analysis")
+		func:			"ClassicalGeneralizedMetaAnalysis"
+	}
+
+	Analysis
+	{
+		menu:			qsTr("Mantel-Haenszel / Peto")
+		title:			qsTr("Mantel-Haenszel / Peto")
 		func:			"ClassicalMantelHaenszelPeto"
 	}
 

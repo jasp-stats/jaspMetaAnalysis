@@ -87,11 +87,13 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "computeCovarianceMatrix", "computeCovarianceMatrix",
   # multivariate effect size computation
   .effectSizeVarianceCovarianceMatrixDependencies,
-  # Mantel-Haenszel / Peto
+  # Mantel-Haenszel / Peto / GLMM (frequency-based inputs)
   "successesGroup1", "successesGroup2", "sampleSizeGroup1", "sampleSizeGroup2",
   "eventsGroup1", "eventsGroup2", "personTimeGroup1", "personTimeGroup2",
   "effectSizeMeasure",
-  "advancedAdd", "advancedTo", "advancedDropStudiesWithNoCasesOrEvents", "advancedContinuityCorrection"
+  "advancedAdd", "advancedTo", "advancedDropStudiesWithNoCasesOrEvents", "advancedContinuityCorrection",
+  # GLMM specific
+  "glmmModel", "glmmCoding", "glmmCorrelatedEffects", "glmmQuadraturePoints"
 )
 
 .maForestPlotDependencies <- c(
@@ -205,6 +207,20 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
     return(inputReady && termsEffectSizeReady && termsHeterogeneityReady)
 
+  } else if (.maIsGLMM(options)) {
+
+    measureCategory <- .maglmmGetMeasureCategory(options)
+    if (measureCategory == "twoByTwo") {
+      inputReady <- options[["successesGroup1"]] != "" && options[["successesGroup2"]] != "" &&
+        options[["sampleSizeGroup1"]] != "" && options[["sampleSizeGroup2"]] != ""
+    } else if (measureCategory == "events") {
+      inputReady <- options[["eventsGroup1"]] != "" && options[["eventsGroup2"]] != "" &&
+        options[["personTimeGroup1"]] != "" && options[["personTimeGroup2"]] != ""
+    }
+
+    termsEffectSizeReady <- length(options[["effectSizeModelTerms"]]) > 0 || options[["effectSizeModelIncludeIntercept"]]
+    return(inputReady && termsEffectSizeReady)
+
   } else if (.maIsClassical(options)) {
 
     # data
@@ -298,7 +314,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 .maIsClassical         <- function(options, notMHP = FALSE) {
 
   # check if the analysis is classical
-  if (options[["analysis"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate", "mantelHaenszelPeto")) {
+  if (options[["analysis"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate", "mantelHaenszelPeto", "generalizedMetaAnalysis")) {
     if (notMHP) {
       return(options[["analysis"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate"))
     } else {
