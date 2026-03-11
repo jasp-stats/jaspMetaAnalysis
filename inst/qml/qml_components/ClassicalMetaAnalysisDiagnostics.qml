@@ -135,6 +135,7 @@ Section
 			{
 				name:		"diagnosticsResidualFunnel"
 				text:		qsTr("Residual funnel")
+				visible:	analysisType !== "ClassicalGeneralizedMetaAnalysis"
 				info: qsTr("Include a residual funnel plot. Note that residual funnel plot is always based on the non-clustered model.")
 			}
 		}

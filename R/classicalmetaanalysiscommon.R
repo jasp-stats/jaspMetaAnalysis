@@ -769,7 +769,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     tests[["moderationEffect"]] <- .maSafeRbind(lapply(fit, .maRowModerationTest, options = options, parameter = "effectSize"))
 
     # additional custom test
-    if (options[["addOmnibusModeratorTestEffectSizeCoefficients"]]) {
+    if (isTRUE(options[["addOmnibusModeratorTestEffectSizeCoefficients"]])) {
 
       tempModerationEffect2 <- lapply(fit, .maRowModerationTest, options = options, parameter = "effectSize", coefficientsTest = TRUE)
       tests[["moderationEffect2"]] <- .maSafeRbind(tempModerationEffect2)
@@ -793,7 +793,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     tests[["moderationHeterogeneity"]] <- .maSafeRbind(lapply(fit, .maRowModerationTest, options = options, parameter = "heterogeneity"))
 
     # additional custom test
-    if (options[["addOmnibusModeratorTestHeterogeneityCoefficients"]]) {
+    if (isTRUE(options[["addOmnibusModeratorTestHeterogeneityCoefficients"]])) {
 
       tempModerationHeterogeneity2 <- lapply(fit, .maRowModerationTest, options = options, parameter = "heterogeneity", coefficientsTest = TRUE)
       tests[["moderationHeterogeneity2"]] <- .maSafeRbind(tempModerationHeterogeneity2)
@@ -852,6 +852,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
       testsTable$addFootnote(multivariateReadyNotes[i])
     }
   }
+
+  if (.maIsGLMM(options) && .maIsMetaregressionEffectSize(options))
+    testsTable$addFootnote(gettext("Moderation test based on a Wald-type chi-squared test."))
 
   # bind and clean rows
   tests <- .maSafeRbind(tests)
@@ -1012,6 +1015,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   termsTable$addFootnote(.maFixedEffectTextMessage(options))
 
+  if (.maIsGLMM(options))
+    termsTable$addFootnote(gettext("Term tests based on Wald-type chi-squared tests."))
+
   # skip on error
   if ((length(fit) == 1 && jaspBase::isTryError(fit[[1]]))  || !is.null(.maCheckIsPossibleOptions(options)))
     return()
@@ -1153,7 +1159,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   correlationMatrixTable <- createJaspTable()
 
   if (is.null(fit) || jaspBase::isTryError(fit))
-    return()
+    return(correlationMatrixTable)
 
   if (parameter == "effectSize")
     correlationMatrix <- data.frame(as.matrix(cov2cor(fit[["vb"]])))
@@ -1184,9 +1190,11 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   # .maGetEstimatedMarginalMeansAndContrastsOptions()
 
   # check whether the section should be created at all
-  isReadyEffectSize    <- (length(options[["estimatedMarginalMeansEffectSizeSelectedVariables"]])    > 0 || options[["estimatedMarginalMeansEffectSizeAddAdjustedEstimate"]])    &&
+  isReadyEffectSize    <- .maIsMetaregressionEffectSize(options) &&
+                          (length(options[["estimatedMarginalMeansEffectSizeSelectedVariables"]])    > 0 || options[["estimatedMarginalMeansEffectSizeAddAdjustedEstimate"]])    &&
                           (options[["estimatedMarginalMeansEffectSize"]]    || options[["contrastsEffectSize"]])
-  isReadyHeterogeneity <- (length(options[["estimatedMarginalMeansHeterogeneitySelectedVariables"]]) > 0 || options[["estimatedMarginalMeansHeterogeneityAddAdjustedEstimate"]]) &&
+  isReadyHeterogeneity <- .maIsMetaregressionHeterogeneity(options) &&
+                          (length(options[["estimatedMarginalMeansHeterogeneitySelectedVariables"]]) > 0 || options[["estimatedMarginalMeansHeterogeneityAddAdjustedEstimate"]]) &&
                           (options[["estimatedMarginalMeansHeterogeneity"]] || options[["contrastsHeterogeneity"]])
 
   if (!isReadyEffectSize && !isReadyHeterogeneity) {
@@ -1453,6 +1461,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   contrastsMessages <- .macontrastsMessages(options, parameter)
   for (i in seq_along(contrastsMessages))
     contrastsTable$addFootnote(contrastsMessages[i])
+
+  if (.maIsGLMM(options))
+    contrastsTable$addFootnote(gettext("Contrast tests based on Wald-type z-tests."))
 
   return()
 }
@@ -2083,6 +2094,10 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   if (!is.null(jaspResults[["residualFunnelPlot"]]))
     return()
 
+  # rstandard() is not available for rma.glmm
+  if (.maIsGLMM(options))
+    return()
+
   fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
 
   # stop on error
@@ -2559,7 +2574,11 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   if (parameter == "effectSize") {
 
-    out <- anova(fit, btt = selCoef)
+    if (.maIsGLMM(options)) {
+      out <- .maGlmmWaldTest(fit, btt = selCoef)
+    } else {
+      out <- anova(fit, btt = selCoef)
+    }
 
     row <- list(
       stat = out[["QM"]],
@@ -2617,7 +2636,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")     # get terms indices from the model
     termsIndex <- attr(model.matrix(fit[["formula.mods"]], data = fit[["data"]]), "assign")  # get coefficient indices from the model matrix
-    termsIndex <- termsIndex[!fit$coef.na]                                                   # remove dropped coefficients
+    if (!is.null(fit$coef.na))
+      termsIndex <- termsIndex[!fit$coef.na]                                                   # remove dropped coefficients
 
     # deal with the possibility that all coefficients of the corresponding term were dropped
     if (sum(termsIndex == which(terms == term)) == 0) {
@@ -2637,7 +2657,12 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     } else {
 
-      termsAnova <- anova(fit, btt = seq_along(termsIndex)[termsIndex == which(terms == term)])
+      bttIdx <- seq_along(termsIndex)[termsIndex == which(terms == term)]
+      if (.maIsGLMM(options)) {
+        termsAnova <- .maGlmmWaldTest(fit, btt = bttIdx)
+      } else {
+        termsAnova <- anova(fit, btt = bttIdx)
+      }
 
       out <- list(
         term = .maVariableNames(term, unlist(options[["effectSizeModelTerms"]])),
@@ -2657,7 +2682,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     terms      <- attr(terms(fit[["formula.scale"]], data = fit[["data"]]),"term.labels")      # get terms indices from the model
     termsIndex <- attr(model.matrix(fit[["formula.scale"]], data = fit[["data"]]), "assign")   # get coefficient indices from the model matrix
-    termsIndex <- termsIndex[!fit$coef.na.Z]                                                   # remove dropped coefficients
+    if (!is.null(fit$coef.na.Z))
+      termsIndex <- termsIndex[!fit$coef.na.Z]                                                   # remove dropped coefficients
 
     # deal with the possibility that all coefficients of the corresponding term were dropped
     if (sum(termsIndex == which(terms == term)) == 0) {
@@ -2778,9 +2804,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   }
 
   # remove entries corresponding to omitted coefficients
-  if (parameter == "effectSize" && any(fit$coef.na)) {
+  if (parameter == "effectSize" && !is.null(fit$coef.na) && any(fit$coef.na)) {
     outMatrix <- outMatrix[, !fit$coef.na, drop=FALSE]
-  } else if (parameter == "heterogeneity" && any(fit$coef.na.Z)) {
+  } else if (parameter == "heterogeneity" && !is.null(fit$coef.na.Z) && any(fit$coef.na.Z)) {
     outMatrix <- outMatrix[, !fit$coef.na.Z, drop=FALSE]
   }
 
@@ -3021,11 +3047,15 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
         newscale = contrastMatrixHeterogeneity,
         level    = 100 * options[["confidenceIntervalsLevel"]]
       )
-      computedContrastsTests <- anova(
-        fit,
-        X      = contrastMatrixEffectSize,
-        adjust = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]])
-      )
+      if (.maIsGLMM(options)) {
+        computedContrastsTests <- .maGlmmContrastTest(fit, X = contrastMatrixEffectSize, adjust = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]]))
+      } else {
+        computedContrastsTests <- anova(
+          fit,
+          X      = contrastMatrixEffectSize,
+          adjust = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]])
+        )
+      }
 
     } else {
 
@@ -3051,11 +3081,15 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
           newmods   = contrastMatrixEffectSize,
           level     = 100 * options[["confidenceIntervalsLevel"]]
         )
-        computedContrastsTests <- anova(
-          fit,
-          X         = contrastMatrixEffectSize,
-          adjust    = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]])
-        )
+        if (.maIsGLMM(options)) {
+          computedContrastsTests <- .maGlmmContrastTest(fit, X = contrastMatrixEffectSize, adjust = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]]))
+        } else {
+          computedContrastsTests <- anova(
+            fit,
+            X         = contrastMatrixEffectSize,
+            adjust    = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]])
+          )
+        }
 
       }
     }
@@ -3885,6 +3919,15 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
       return("FE")
   }
 
+  # GLMM only supports ML/FE (not EE)
+  if (.maIsGLMM(options)) {
+    return(switch(
+      options[["method"]],
+      "maximumLikelihood" = "ML",
+      "equalEffects"      = "FE"
+    ))
+  }
+
   switch(
     options[["method"]],
     "equalEffects"       = "EE",
@@ -4209,6 +4252,10 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 .maPrintHeterogeneityEstimate         <- function(fit, options, digits, parameter) {
 
   out <- .maComputePooledHeterogeneityPlot(fit, options, parameter)
+
+  if (is.na(out$lCi) || is.na(out$uCi)) {
+    return(sprintf(paste0("%1$s  = ", "%2$.", digits, "f"), out$par, out$est))
+  }
 
   return(sprintf(paste0(
     "%1$s  = ",
@@ -5019,7 +5066,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")     # get terms indices from the model
     termsIndex <- attr(model.matrix(fit[["formula.mods"]], data = fit[["data"]]), "assign")  # get coefficient indices from the model matrix
-    termsIndex <- termsIndex[!fit$coef.na]                                                   # remove dropped coefficients
+    if (!is.null(fit$coef.na))
+      termsIndex <- termsIndex[!fit$coef.na]                                                   # remove dropped coefficients
 
     termsIndicies <- lapply(terms, function(term){
       seq_along(termsIndex)[termsIndex == which(terms == term)]
@@ -5030,7 +5078,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     terms      <- attr(terms(fit[["formula.scale"]], data = fit[["data"]]),"term.labels")      # get terms indices from the model
     termsIndex <- attr(model.matrix(fit[["formula.scale"]], data = fit[["data"]]), "assign")   # get coefficient indices from the model matrix
-    termsIndex <- termsIndex[!fit$coef.na.Z]                                                   # remove dropped coefficients
+    if (!is.null(fit$coef.na.Z))
+      termsIndex <- termsIndex[!fit$coef.na.Z]                                                   # remove dropped coefficients
 
     termsIndicies <- lapply(terms, function(term){
       seq_along(termsIndex)[termsIndex == which(terms == term)]
@@ -5132,7 +5181,13 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     messages <- c(messages, gettext("The pooled heterogeneity estimate corresponds to the heterogeneity at the average of predictor values."))
 
   if (.maIsMetaregressionHeterogeneity(options) && (options[["heterogeneityI2"]] || options[["heterogeneityH2"]]))
-    messages <- c(messages, gettext("The I² and H² statistics are not available for heterogeneity models."))
+    messages <- c(messages, gettext("The I\U00B2 and H\U00B2 statistics are not available for heterogeneity models."))
+
+  if (.maIsGLMM(options) && options[["confidenceIntervals"]] &&
+      (options[["heterogeneityTau"]] || options[["heterogeneityTau2"]] || options[["heterogeneityI2"]] || options[["heterogeneityH2"]]) &&
+      !jaspBase::isTryError(fit[[1]]) && is.na(fit[[1]][["ci.lb.tau2"]])) {
+    messages <- c(messages, gettext("Heterogeneity confidence intervals are not available for this GLMM model type."))
+  }
 
   if (.maIsMultilevelMultivariate(options) && any(attr(fit[[1]], "skipped")) && !jaspBase::isTryError(fit[[1]]))
     messages <- c(messages, gettextf("The Model Structure %1$s was not completely specified and was skipped.", paste0(which(attr(fit[[1]], "skipped")), collapse = " and ")))

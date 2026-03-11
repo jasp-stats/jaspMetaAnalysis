@@ -35,6 +35,28 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
   options[["analysis"]] == "generalizedMetaAnalysis"
 }
 
+# anova.rma is not available for rma.glmm; compute Wald-type tests manually
+.maGlmmWaldTest <- function(fit, btt) {
+  beta <- as.vector(fit$beta[btt])
+  vb   <- fit$vb[btt, btt, drop = FALSE]
+  QM   <- as.vector(t(beta) %*% chol2inv(chol(vb)) %*% beta)
+  QMdf <- c(length(btt), NA)
+  QMp  <- pchisq(QM, df = QMdf[1], lower.tail = FALSE)
+  list(QM = QM, QMdf = QMdf, QMp = QMp)
+}
+
+.maGlmmContrastTest <- function(fit, X, adjust = "none") {
+  beta <- as.vector(fit$beta)
+  vb   <- fit$vb
+  Xb   <- c(X %*% beta)
+  se   <- sqrt(diag(X %*% tcrossprod(vb, X)))
+  zval <- Xb / se
+  pval <- 2 * pnorm(abs(zval), lower.tail = FALSE)
+  if (adjust != "none")
+    pval <- p.adjust(pval, method = adjust)
+  list(zval = zval, pval = pval)
+}
+
 .maglmmGetMeasureCategory <- function(options) {
   switch(
     options[["effectSizeMeasure"]],
@@ -74,6 +96,7 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
   if (length(predictorsScale)   > 0) omitOnVariables <- c(omitOnVariables, predictorsScale)
 
   # omit NAs
+  omitOnVariables <- unlist(omitOnVariables)
   anyNaByRows <- apply(dataset[, omitOnVariables, drop = FALSE], 1, function(x) anyNA(x))
   dataset     <- dataset[!anyNaByRows, ]
   attr(dataset, "NAs")    <- sum(anyNaByRows)
@@ -203,14 +226,28 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
 # heterogeneity
 .maglmmComputePooledHeterogeneity <- function(fit, options) {
 
+  # derive I²/H² CIs from tau² CIs via monotonic transformation when available
+  vt        <- fit[["vt"]]
+  tau2Lower <- fit[["ci.lb.tau2"]]
+  tau2Upper <- fit[["ci.ub.tau2"]]
+
+  if (!is.na(tau2Lower) && !is.na(tau2Upper) && !is.na(vt) && vt > 0) {
+    H2Lower <- tau2Lower / vt + 1
+    H2Upper <- tau2Upper / vt + 1
+    I2Lower <- 100 * (H2Lower - 1) / H2Lower
+    I2Upper <- 100 * (H2Upper - 1) / H2Upper
+  } else {
+    H2Lower <- H2Upper <- I2Lower <- I2Upper <- NA
+  }
+
   heterogeneity <- data.frame(
     par = c("\U1D70F", "\U1D70F\U00B2", "I\U00B2", "H\U00B2"),
     est = c(sqrt(fit[["tau2"]]), fit[["tau2"]], fit[["I2"]], fit[["H2"]]),
-    lCi = c(sqrt(fit[["ci.lb.tau2"]]), fit[["ci.lb.tau2"]], NA, NA),
-    uCi = c(sqrt(fit[["ci.ub.tau2"]]), fit[["ci.ub.tau2"]], NA, NA)
+    lCi = c(sqrt(tau2Lower), tau2Lower, I2Lower, H2Lower),
+    uCi = c(sqrt(tau2Upper), tau2Upper, I2Upper, H2Upper)
   )
 
-  if (options[["standardErrors"]] && !is.null(fit[["se.tau2"]]))
+  if (options[["standardErrors"]] && !is.na(fit[["se.tau2"]]))
     heterogeneity$se <- c(.maGetSqrtTransformationSeDeltaMethod(fit[["tau2"]], fit[["se.tau2"]]), fit[["se.tau2"]], NA, NA)
 
   # keep only the requested parameters
