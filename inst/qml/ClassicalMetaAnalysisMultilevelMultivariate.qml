@@ -131,7 +131,7 @@ Form
 
 	MA.ClassicalMetaAnalysisMultivariate
 	{
-		analysisType:	"metaAnalysisMultilevelMultivariate"
+		analysisType:	"multilevelMultivariateMetaAnalysis"
 	}
 
 	Section
@@ -418,23 +418,23 @@ Form
 	MA.ClassicalMetaAnalysisModel
 	{
 		id:				sectionModel
-		analysisType:	"metaAnalysisMultilevelMultivariate"
+		analysisType:	"multilevelMultivariateMetaAnalysis"
 	}
 
 	MA.ClassicalMetaAnalysisStatistics 
 	{
 		id:				sectionStatistics
-		analysisType:	"metaAnalysisMultilevelMultivariate"
+		analysisType:	"multilevelMultivariateMetaAnalysis"
 	}
 
 	MA.ClassicalMetaAnalysisEstimatedMarginalMeans
 	{
-		analysisType:	"metaAnalysisMultilevelMultivariate"
+		analysisType:	"multilevelMultivariateMetaAnalysis"
 	}
 
 	MA.ForestPlotSection
 	{
-		analysisType:				"metaAnalysisMultilevelMultivariate"
+		analysisType:				"multilevelMultivariateMetaAnalysis"
 		transformEffectSizeValue:	sectionStatistics.transformEffectSizeValue
 	}
 
@@ -442,11 +442,11 @@ Form
 
 	MA.ClassicalMetaAnalysisDiagnostics
 	{
-		analysisType:	"metaAnalysisMultilevelMultivariate"
+		analysisType:	"multilevelMultivariateMetaAnalysis"
 	}
 
 	MA.ClassicalMetaAnalysisAdvanced
 	{
-		analysisType:	"metaAnalysisMultilevelMultivariate"
+		analysisType:	"multilevelMultivariateMetaAnalysis"
 	}
 }

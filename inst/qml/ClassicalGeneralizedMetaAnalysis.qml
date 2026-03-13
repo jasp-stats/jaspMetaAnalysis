@@ -42,29 +42,24 @@ Form
 			name:				"allVariables"
 		}
 
-		// 2x2 table inputs (OR, RR, RD)
+		// events inputs (OR, RR, RD, IRR)
 		AssignedVariablesList
 		{
-			name:			"successesGroup1"
-			title:			qsTr("Successes Group 1")
+			name:			"eventsGroup1"
+			title:			qsTr("Events Group 1")
 			singleVariable:	true
 			allowedColumns:	["scale"]
-			visible:		effectSizeMeasure.value === "OR" || effectSizeMeasure.value === "RR" || effectSizeMeasure.value === "RD"
-			enabled:		effectSizeMeasure.value === "OR" || effectSizeMeasure.value === "RR" || effectSizeMeasure.value === "RD"
-			onEnabledChanged:	itemDoubleClicked(0)
 		}
 
 		AssignedVariablesList
 		{
-			name:			"successesGroup2"
-			title:			qsTr("Successes Group 2")
+			name:			"eventsGroup2"
+			title:			qsTr("Events Group 2")
 			singleVariable:	true
 			allowedColumns:	["scale"]
-			visible:		effectSizeMeasure.value === "OR" || effectSizeMeasure.value === "RR" || effectSizeMeasure.value === "RD"
-			enabled:		effectSizeMeasure.value === "OR" || effectSizeMeasure.value === "RR" || effectSizeMeasure.value === "RD"
-			onEnabledChanged:	itemDoubleClicked(0)
 		}
 
+		// sample size inputs (OR, RR, RD)
 		AssignedVariablesList
 		{
 			name:			"sampleSizeGroup1"
@@ -84,29 +79,6 @@ Form
 			allowedColumns:	["scale"]
 			visible:		effectSizeMeasure.value === "OR" || effectSizeMeasure.value === "RR" || effectSizeMeasure.value === "RD"
 			enabled:		effectSizeMeasure.value === "OR" || effectSizeMeasure.value === "RR" || effectSizeMeasure.value === "RD"
-			onEnabledChanged:	itemDoubleClicked(0)
-		}
-
-		// two-group event count inputs (IRR)
-		AssignedVariablesList
-		{
-			name:			"eventsGroup1"
-			title:			qsTr("Events Group 1")
-			singleVariable:	true
-			allowedColumns:	["scale"]
-			visible:		effectSizeMeasure.value === "IRR"
-			enabled:		effectSizeMeasure.value === "IRR"
-			onEnabledChanged:	itemDoubleClicked(0)
-		}
-
-		AssignedVariablesList
-		{
-			name:			"eventsGroup2"
-			title:			qsTr("Events Group 2")
-			singleVariable:	true
-			allowedColumns:	["scale"]
-			visible:		effectSizeMeasure.value === "IRR"
-			enabled:		effectSizeMeasure.value === "IRR"
 			onEnabledChanged:	itemDoubleClicked(0)
 		}
 
@@ -229,34 +201,34 @@ Form
 	MA.ClassicalMetaAnalysisModel
 	{
 		id:				sectionModel
-		analysisType:	"ClassicalGeneralizedMetaAnalysis"
+		analysisType:	"generalizedMetaAnalysis"
 	}
 
 	MA.ClassicalMetaAnalysisStatistics
 	{
 		id:				sectionStatistics
-		analysisType:	"ClassicalGeneralizedMetaAnalysis"
+		analysisType:	"generalizedMetaAnalysis"
 	}
 
 	MA.ClassicalMetaAnalysisEstimatedMarginalMeans
 	{
-		analysisType:	"ClassicalGeneralizedMetaAnalysis"
+		analysisType:	"generalizedMetaAnalysis"
 	}
 
 	MA.ForestPlotSection
 	{
-		analysisType:				"ClassicalGeneralizedMetaAnalysis"
+		analysisType:				"generalizedMetaAnalysis"
 		transformEffectSizeValue:	sectionStatistics.transformEffectSizeValue
 	}
 
 	MA.BubblePlot
 	{
-		analysisType:	"ClassicalGeneralizedMetaAnalysis"
+		analysisType:	"generalizedMetaAnalysis"
 	}
 
 	MA.ClassicalMetaAnalysisDiagnostics
 	{
-		analysisType:	"ClassicalGeneralizedMetaAnalysis"
+		analysisType:	"generalizedMetaAnalysis"
 	}
 
 	MA.ClassicalGeneralizedMetaAnalysisAdvanced {}

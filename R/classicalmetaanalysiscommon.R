@@ -107,7 +107,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   if (.maIsMultilevelMultivariate(options) && options[["varianceCovarianceMatrixSaveComputedVarianceCovarianceMatrix"]] != "") {
     .mammExportVarianceCovarianceMatrix(dataset, options)
   }
-    
+
 
   return()
 }
@@ -2465,7 +2465,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   # dispatch to GLMM-specific function
   if (inherits(fit, "rma.glmm"))
     return(.maglmmComputePooledHeterogeneityPlot(fit, options, parameter))
-    
+
 
   # don't use the confint on robust.rma objects (they are not implemented)
   # the clustering works only on the fixed effect estimates
@@ -4206,18 +4206,30 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   }))
 }
-.maPrintQTest                         <- function(fit) {
+.maPrintQTest                         <- function(fit, type = NULL) {
 
   # rma.glmm uses QE.Wld/QE.LRT instead of QE/QEp
   if (inherits(fit, "rma.glmm")) {
-    heterogeneityName <- if (fit[["p"]] > 1) gettext("Residual heterogeneity (Wald)") else gettext("Heterogeneity (Wald)")
-    return(sprintf(
-      paste0("%1$s: Q_W(%2$i) = ", if (fit[["QE.Wld"]] < 1e5) "%3$.2f" else "%3$.3g", ", %4$s"),
-      heterogeneityName,
-      fit[["QE.df"]],
-      fit[["QE.Wld"]],
-      .maPrintPValue(fit[["QEp.Wld"]])
-    ))
+
+    if (is.null(type) || type == "Wald") {
+      heterogeneityName <- if (fit[["p"]] > 1) gettext("Residual heterogeneity (Wald)") else gettext("Heterogeneity (Wald)")
+      return(sprintf(
+        paste0("%1$s: Q\U2091(%2$i) = ", if (fit[["QE.Wld"]] < 1e5) "%3$.2f" else "%3$.3g", ", %4$s"),
+        heterogeneityName,
+        fit[["QE.df"]],
+        fit[["QE.Wld"]],
+        .maPrintPValue(fit[["QEp.Wld"]])
+      ))
+    } else if (type == "LRT") {
+      heterogeneityName <- if (fit[["p"]] > 1) gettext("Residual heterogeneity (LRT)") else gettext("Heterogeneity (LRT)")
+      return(sprintf(
+        paste0("%1$s: Q\U2091(%2$i) = ", if (fit[["QE.LRT"]] < 1e5) "%3$.2f" else "%3$.3g", ", %4$s"),
+        heterogeneityName,
+        fit[["QE.df"]],
+        fit[["QE.LRT"]],
+        .maPrintPValue(fit[["QEp.LRT"]])
+      ))
+    }
   }
 
   if (fit[["p"]] > 1) {
@@ -4559,11 +4571,17 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   }
 
   # pooled effect size
+  fitStats <- fit[["fit.stats"]]
+
+  # GLMM always uses ML; drop the REML column
+  if (inherits(fit, "rma.glmm") && "REML" %in% colnames(fitStats))
+    fitStats <- fitStats[, "ML", drop = FALSE]
+
   row <- cbind.data.frame(
     "subgroup"     = attr(fit, "subgroup"),
-    "model"        = colnames(fit[["fit.stats"]]),
+    "model"        = colnames(fitStats),
     "observations" = fit[["k"]],
-    data.frame(t(fit[["fit.stats"]]))
+    data.frame(t(fitStats))
   )
 
   if (.maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options) && !.maIsGLMM(options))

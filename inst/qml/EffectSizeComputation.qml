@@ -328,7 +328,7 @@ Form
 				AssignedVariablesList
 				{ // metafor: ai
 					name: "group1OutcomePlus"
-					title: qsTr("Group 1/Outcome +")
+					title: qsTr("Group 1/Outcome + (Events)")
 					singleVariable: true
 					allowedColumns:	["scale"]
 					visible: (designValue === "independentGroups" && measurementValue === "binary") ||
@@ -375,7 +375,7 @@ Form
 				AssignedVariablesList
 				{ // metafor: bi
 					name: "group1OutcomeMinus"
-					title: qsTr("Group 1/Outcome -")
+					title: qsTr("Group 1/Outcome - (Non-Events)")
 					singleVariable: true
 					allowedColumns:	["scale"]
 					visible: (designValue === "independentGroups" && measurementValue === "binary") ||
@@ -413,7 +413,7 @@ Form
 				AssignedVariablesList
 				{ // metafor: ci
 					name: "group2OutcomePlus"
-					title: qsTr("Group 2/Outcome +")
+					title: qsTr("Group 2/Outcome + (Events)")
 					singleVariable: true
 					allowedColumns:	["scale"]
 					visible: (designValue === "independentGroups" && measurementValue === "binary") ||
@@ -451,7 +451,7 @@ Form
 				AssignedVariablesList
 				{ // metafor: di
 					name: "group2OutcomeMinus"
-					title: qsTr("Group 2/Outcome -")
+					title: qsTr("Group 2/Outcome - (Non-Events)")
 					singleVariable: true
 					allowedColumns:	["scale"]
 					visible: (designValue === "independentGroups" && measurementValue === "binary") ||

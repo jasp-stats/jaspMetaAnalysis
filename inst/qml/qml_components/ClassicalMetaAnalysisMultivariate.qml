@@ -23,7 +23,7 @@ import JASP
 Section
 {	
 	title:							qsTr("Effect Size Variance-Covariance Matrix")
-	property string analysisType:	"metaAnalysisMultilevelMultivariate"
+	property string analysisType:	"multilevelMultivariateMetaAnalysis"
 	expanded:						analysisType === "effectSizeAggregation"
 	info: qsTr("Options for specifying the approximate variance-covariance matrix of the effect sizes. This matrix is used to account for the correlation between effect sizes when they are not independent.")
 
@@ -50,7 +50,7 @@ Section
 			id:			varianceCovarianceMatrixCorrelationMatrix
 			name:		"correlationMatrix"
 			label:		qsTr("Correlation matrix")
-			checked:	analysisType === "metaAnalysisMultilevelMultivariate"
+			checked:	analysisType === "multilevelMultivariateMetaAnalysis"
 			info: qsTr("Use a list of variables to specify the correlation matrix of studies corresponding to the same cluster. Corresponds to the `rvars` option in the metafor's 'vcalc' function.")
 		}
 

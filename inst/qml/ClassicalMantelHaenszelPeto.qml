@@ -42,67 +42,39 @@ Form
 
 		AssignedVariablesList
 		{
-			name: 			"successesGroup1"
-			title: 			qsTr("Successes Group 1")
-			singleVariable: true
-			allowedColumns: ["scale"]
-			visible: 		method.value === "mantelHaenszelFrequencies" || method.value === "peto"
-			enabled: 		method.value === "mantelHaenszelFrequencies" || method.value === "peto"
-			onEnabledChanged:	itemDoubleClicked(0)
-		}
-
-		AssignedVariablesList
-		{
-			name: 			"successesGroup2"
-			title: 			qsTr("Successes Group 2")
-			singleVariable: true
-			allowedColumns: ["scale"]
-			visible: 		method.value === "mantelHaenszelFrequencies" || method.value === "peto"
-			enabled: 		method.value === "mantelHaenszelFrequencies" || method.value === "peto"
-			onEnabledChanged:	itemDoubleClicked(0)
-		}
-
-		AssignedVariablesList
-		{
-			name: 			"sampleSizeGroup1"
-			title: 			qsTr("Sample Size Group 1")
-			singleVariable: true
-			allowedColumns: ["scale"]
-			visible: 		method.value === "mantelHaenszelFrequencies" || method.value === "peto"
-			enabled: 		method.value === "mantelHaenszelFrequencies" || method.value === "peto"
-			onEnabledChanged:	itemDoubleClicked(0)
-		}
-
-		AssignedVariablesList
-		{
-			name: 			"sampleSizeGroup2"
-			title: 			qsTr("Sample Size Group 2")
-			singleVariable: true
-			allowedColumns: ["scale"]
-			visible: 		method.value === "mantelHaenszelFrequencies" || method.value === "peto"
-			enabled: 		method.value === "mantelHaenszelFrequencies" || method.value === "peto"
-			onEnabledChanged:	itemDoubleClicked(0)
-		}
-
-		AssignedVariablesList
-		{ 
 			name:			"eventsGroup1"
 			title:			qsTr("Events Group 1")
-			singleVariable: true
+			singleVariable:	true
 			allowedColumns:	["scale"]
-			visible: 		method.value === "mantelHaenszelEvents"
-			enabled: 		method.value === "mantelHaenszelEvents"
+		}
+
+		AssignedVariablesList
+		{
+			name:			"eventsGroup2"
+			title:			qsTr("Events Group 2")
+			singleVariable:	true
+			allowedColumns:	["scale"]
+		}
+
+		AssignedVariablesList
+		{
+			name:			"sampleSizeGroup1"
+			title:			qsTr("Sample Size Group 1")
+			singleVariable:	true
+			allowedColumns:	["scale"]
+			visible:		method.value === "mantelHaenszelFrequencies" || method.value === "peto"
+			enabled:		method.value === "mantelHaenszelFrequencies" || method.value === "peto"
 			onEnabledChanged:	itemDoubleClicked(0)
 		}
 
 		AssignedVariablesList
-		{ 
-			name:			"eventsGroup2"
-			title:			qsTr("Events Group 2")
-			singleVariable: true
+		{
+			name:			"sampleSizeGroup2"
+			title:			qsTr("Sample Size Group 2")
+			singleVariable:	true
 			allowedColumns:	["scale"]
-			visible: 		method.value === "mantelHaenszelEvents"
-			enabled: 		method.value === "mantelHaenszelEvents"
+			visible:		method.value === "mantelHaenszelFrequencies" || method.value === "peto"
+			enabled:		method.value === "mantelHaenszelFrequencies" || method.value === "peto"
 			onEnabledChanged:	itemDoubleClicked(0)
 		}
 
@@ -186,18 +158,18 @@ Form
 	MA.ClassicalMetaAnalysisStatistics
 	{
 		id:				sectionStatistics
-		analysisType:	"ClassicalMantelHaenszelPeto"
+		analysisType:	"mantelHaenszelPeto"
 	}
 
 	MA.ForestPlotSection
 	{
-		analysisType:				"ClassicalMantelHaenszelPeto"
+		analysisType:				"mantelHaenszelPeto"
 		transformEffectSizeValue:	sectionStatistics.transformEffectSizeValue
 	}
 
 	MA.ClassicalMetaAnalysisDiagnostics
 	{
-		analysisType:	"ClassicalMantelHaenszelPeto"
+		analysisType:	"mantelHaenszelPeto"
 	}
 
 	MA.ClassicalMantelHaenszelPetoAdvanced {}

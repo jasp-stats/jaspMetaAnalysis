@@ -64,8 +64,8 @@ Description
 
 	Analysis
 	{
-		menu:			qsTr("Meta-Analysis (Multilevel/Multivariate)")
-		title:			qsTr("Classical Meta-Analysis (Multilevel/Multivariate)")
+		menu:			qsTr("Multilevel/Multivariate Meta-Analysis")
+		title:			qsTr("Classical Multilevel/Multivariate Meta-Analysis")
 		func:			"ClassicalMetaAnalysisMultilevelMultivariate"
 	}
 

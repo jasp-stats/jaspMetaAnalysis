@@ -72,8 +72,8 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
 
   if (measureCategory == "twoByTwo") {
     omitOnVariables <- c(
-      options[["successesGroup1"]],
-      options[["successesGroup2"]],
+      options[["eventsGroup1"]],
+      options[["eventsGroup2"]],
       options[["sampleSizeGroup1"]],
       options[["sampleSizeGroup2"]]
     )
@@ -114,8 +114,8 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
 
   if (measureCategory == "twoByTwo") {
     variables <- c(
-      options[["successesGroup1"]],
-      options[["successesGroup2"]],
+      options[["eventsGroup1"]],
+      options[["eventsGroup2"]],
       options[["sampleSizeGroup1"]],
       options[["sampleSizeGroup2"]]
     )
@@ -161,8 +161,8 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
   # data arguments based on measure category
   measureCategory <- .maglmmGetMeasureCategory(options)
   if (measureCategory == "twoByTwo") {
-    rmaInput$ai  <- as.name(options[["successesGroup1"]])
-    rmaInput$ci  <- as.name(options[["successesGroup2"]])
+    rmaInput$ai  <- as.name(options[["eventsGroup1"]])
+    rmaInput$ci  <- as.name(options[["eventsGroup2"]])
     rmaInput$n1i <- as.name(options[["sampleSizeGroup1"]])
     rmaInput$n2i <- as.name(options[["sampleSizeGroup2"]])
   } else if (measureCategory == "events") {
@@ -306,8 +306,8 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
       if (.maIsMetaregression(options)) gettext("Residual heterogeneity (LRT)")  else gettext("Heterogeneity (LRT)")
     ),
     stat = c(
-      sprintf(paste0("Q_W(%1$i) = ", if (fit[["QE.Wld"]] < 1e5) "%2$.2f" else "%2$.3g"), fit[["QE.df"]], fit[["QE.Wld"]]),
-      sprintf(paste0("Q_LR(%1$i) = ", if (fit[["QE.LRT"]] < 1e5) "%2$.2f" else "%2$.3g"), fit[["QE.df"]], fit[["QE.LRT"]])
+      sprintf(paste0("Q(%1$i) = ", if (fit[["QE.Wld"]] < 1e5) "%2$.2f" else "%2$.3g"), fit[["QE.df"]], fit[["QE.Wld"]]),
+      sprintf(paste0("Q(%1$i) = ", if (fit[["QE.LRT"]] < 1e5) "%2$.2f" else "%2$.3g"), fit[["QE.df"]], fit[["QE.LRT"]])
     ),
     pval = c(fit[["QEp.Wld"]], fit[["QEp.LRT"]])
   )
@@ -339,8 +339,8 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
   rmaInput <- list()
 
   if (measureCategory == "twoByTwo") {
-    rmaInput$ai  <- as.name(options[["successesGroup1"]])
-    rmaInput$ci  <- as.name(options[["successesGroup2"]])
+    rmaInput$ai  <- as.name(options[["eventsGroup1"]])
+    rmaInput$ci  <- as.name(options[["eventsGroup2"]])
     rmaInput$n1i <- as.name(options[["sampleSizeGroup1"]])
     rmaInput$n2i <- as.name(options[["sampleSizeGroup2"]])
   } else if (measureCategory == "events") {
@@ -377,8 +377,8 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
   escalcArgs      <- list(measure = options[["effectSizeMeasure"]])
 
   if (measureCategory == "twoByTwo") {
-    escalcArgs$ai  <- dataset[[options[["successesGroup1"]]]]
-    escalcArgs$ci  <- dataset[[options[["successesGroup2"]]]]
+    escalcArgs$ai  <- dataset[[options[["eventsGroup1"]]]]
+    escalcArgs$ci  <- dataset[[options[["eventsGroup2"]]]]
     escalcArgs$n1i <- dataset[[options[["sampleSizeGroup1"]]]]
     escalcArgs$n2i <- dataset[[options[["sampleSizeGroup2"]]]]
   } else if (measureCategory == "events") {

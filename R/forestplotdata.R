@@ -563,6 +563,8 @@
     "forestPlotEffectSizePooledEstimateTest",
     "forestPlotEffectSizeModerationTest",
     "forestPlotHeterogeneityTest",
+    "forestPlotHeterogeneityTestWald",
+    "forestPlotHeterogeneityTestLRT",
     "forestPlotHeterogeneityEstimateTau",
     "forestPlotHeterogeneityEstimateTau2",
     "forestPlotHeterogeneityEstimateI2",
@@ -580,10 +582,24 @@
 
   state <- .forestPlotCreateAdditionalSectionState()
 
-  if (options[["forestPlotHeterogeneityTest"]] && (classical || options[["bayesianModelAveragingHeterogeneity"]])) {
+  if (options[["forestPlotHeterogeneityTest"]] && ((classical && !.maIsGLMM(options)) || options[["bayesianModelAveragingHeterogeneity"]])) {
     state <- .forestPlotAppendAdditionalRow(
       state = state,
       label = if (classical) .maPrintQTest(fit) else .robmaPrintTest(fit, options, "heterogeneity")
+    )
+  }
+
+  if (options[["forestPlotHeterogeneityTestWald"]] && .maIsGLMM(options)) {
+    state <- .forestPlotAppendAdditionalRow(
+      state = state,
+      label = .maPrintQTest(fit, type = "Wald")
+    )
+  }
+
+  if (options[["forestPlotHeterogeneityTestLRT"]] && .maIsGLMM(options)) {
+    state <- .forestPlotAppendAdditionalRow(
+      state = state,
+      label = .maPrintQTest(fit, type = "LRT")
     )
   }
 

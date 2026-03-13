@@ -87,9 +87,11 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "computeCovarianceMatrix", "computeCovarianceMatrix",
   # multivariate effect size computation
   .effectSizeVarianceCovarianceMatrixDependencies,
-  # Mantel-Haenszel / Peto / GLMM (frequency-based inputs)
-  "successesGroup1", "successesGroup2", "sampleSizeGroup1", "sampleSizeGroup2",
-  "eventsGroup1", "eventsGroup2", "personTimeGroup1", "personTimeGroup2",
+  # BiBMA (frequency-based inputs)
+  "successesGroup1", "successesGroup2",
+  # GLMM / MHP (frequency-based inputs)
+  "eventsGroup1", "eventsGroup2", "sampleSizeGroup1", "sampleSizeGroup2",
+  "personTimeGroup1", "personTimeGroup2",
   "effectSizeMeasure",
   "advancedAdd", "advancedTo", "advancedDropStudiesWithNoCasesOrEvents", "advancedContinuityCorrection",
   # GLMM specific
@@ -125,6 +127,8 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotEffectSizePooledEstimateTest",
   "forestPlotEffectSizeModerationTest",
   "forestPlotHeterogeneityTest",
+  "forestPlotHeterogeneityTestWald",
+  "forestPlotHeterogeneityTestLRT",
   "forestPlotHeterogeneityEstimateTau",
   "forestPlotHeterogeneityEstimateTau2",
   "forestPlotHeterogeneityEstimateI2",
@@ -211,7 +215,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
     measureCategory <- .maglmmGetMeasureCategory(options)
     if (measureCategory == "twoByTwo") {
-      inputReady <- options[["successesGroup1"]] != "" && options[["successesGroup2"]] != "" &&
+      inputReady <- options[["eventsGroup1"]] != "" && options[["eventsGroup2"]] != "" &&
         options[["sampleSizeGroup1"]] != "" && options[["sampleSizeGroup2"]] != ""
     } else if (measureCategory == "events") {
       inputReady <- options[["eventsGroup1"]] != "" && options[["eventsGroup2"]] != "" &&
@@ -225,7 +229,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
     # data
     if (options[["method"]] %in% c("mantelHaenszelFrequencies", "peto")) {
-      inputReady <- options[["successesGroup1"]] != "" && options[["successesGroup2"]] != "" &&
+      inputReady <- options[["eventsGroup1"]] != "" && options[["eventsGroup2"]] != "" &&
         options[["sampleSizeGroup1"]] != "" && options[["sampleSizeGroup2"]] != ""
     } else if (options[["method"]] == "mantelHaenszelEvents") {
       inputReady <- options[["eventsGroup1"]] != "" && options[["eventsGroup2"]] != "" &&

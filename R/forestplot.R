@@ -111,6 +111,8 @@ ForestPlot <- function(jaspResults, dataset, options) {
     forestPlotEffectSizePooledEstimateTest                         = FALSE,
     forestPlotEffectSizeModerationTest                             = FALSE,
     forestPlotHeterogeneityTest                                    = FALSE,
+    forestPlotHeterogeneityTestWald                                = FALSE,
+    forestPlotHeterogeneityTestLRT                                 = FALSE,
     forestPlotHeterogeneityEstimateTau                             = FALSE,
     forestPlotHeterogeneityEstimateTau2                            = FALSE,
     forestPlotHeterogeneityEstimateI2                              = FALSE,
