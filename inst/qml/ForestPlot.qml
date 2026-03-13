@@ -181,6 +181,6 @@ Form
 	MA.ForestPlotSettings
 	{
 		transformEffectSizeValue:	transformEffectSize.value
-		showSubgroupSettings:		subgroup.count > 0
+		enableSubgroupSettings:		subgroup.count > 0
 	}
 }

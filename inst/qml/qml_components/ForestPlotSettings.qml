@@ -9,7 +9,7 @@ Group
 	property bool showConditionalEstimates:		false
 	property bool showTestsInRightPanel:		false
 	property bool showTestsInformation:			false
-	property bool showSubgroupSettings:			false
+	property bool enableSubgroupSettings:			false
 	property bool settingsEnabled:				true
 	property string transformEffectSizeValue:	"none"
 
@@ -73,6 +73,7 @@ Group
 		Group
 		{
 			title:		qsTr("Subgroup")
+			enabled:	enableSubgroupSettings
 			info: qsTr("Specify the forest plot behavior for subgroup analysis.")
 
 			CheckBox
@@ -86,7 +87,6 @@ Group
 			CheckBox
 			{
 				name:			"forestPlotSubgroupPanelsWithinSubgroup"
-				visible:		showSubgroupSettings
 				text:			qsTr("Panels within subgroup")
 				checked:		false
 				info: qsTr("Group the output panels within their subgroup membership.")
@@ -95,7 +95,6 @@ Group
 			CheckBox
 			{
 				name:			"forestPlotSubgroupFullDatasetEstimatedMarginalMeans"
-				visible:		showSubgroupSettings
 				text:			qsTr("Full dataset estimated marginal means")
 				checked:		true
 				info: qsTr("Include the full dataset estimated marginal means in the forest plot if subgroups are specified.")
@@ -104,7 +103,6 @@ Group
 			CheckBox
 			{
 				name:			"forestPlotSubgroupFullDatasetModelInformation"
-				visible:		showSubgroupSettings
 				text:			qsTr("Full dataset model information")
 				checked:		true
 				info: qsTr("Include the full dataset model information in the forest plot if subgroups are specified.")
