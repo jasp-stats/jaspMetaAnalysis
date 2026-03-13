@@ -1,3 +1,7 @@
+TODO:
+- fix aggregation in forest plot
+- add unit tests and examples for forest plot
+
 Fixes:
 - fixes out of x-range estimates visualization in forest plot and indications if an estimate is out of plotting range
 
