@@ -853,8 +853,20 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     }
   }
 
-  if (.maIsGLMM(options) && .maIsMetaregressionEffectSize(options))
-    testsTable$addFootnote(gettext("Moderation test based on a Wald-type chi-squared test."))
+  if (.maIsGLMM(options) && .maIsMetaregressionEffectSize(options)) {
+    # check whether the fit uses t/F-distribution
+    fitTest <- NULL
+    for (f in fit) {
+      if (!jaspBase::isTryError(f)) {
+        fitTest <- f[["test"]]
+        break
+      }
+    }
+    if (!is.null(fitTest) && fitTest == "t")
+      testsTable$addFootnote(gettext("Moderation test based on a Wald-type F-test."))
+    else
+      testsTable$addFootnote(gettext("Moderation test based on a Wald-type chi-squared test."))
+  }
 
   # bind and clean rows
   tests <- .maSafeRbind(tests)
@@ -2236,7 +2248,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     predictedEffect        <- data.frame(
       pred  = fit$beta[1],
       se    = fit$se[1],
-      ddf   = fit$ddf[1],
+      ddf   = .maExtractDdf(fit)[1],
       ci.lb = fit$ci.lb[1],
       ci.ub = fit$ci.ub[1],
       pi.lb = fit$beta[1] - 1.96 * sqrt(fit$se[1]^2 + predictedHeterogeneity[1, 2]^2),
@@ -2333,7 +2345,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   predictedEffect <- data.frame(
     pred  = fit$beta[1],
     se    = fit$se[1],
-    ddf   = fit$ddf[1],
+    ddf   = .maExtractDdf(fit)[1],
     ci.lb = fit$ci.lb[1],
     ci.ub = fit$ci.ub[1],
     pi.lb = NA,
@@ -2353,8 +2365,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   # compute test against specified value
   if (.maIsMetaregressionFtest(options)) {
 
-    # to extract the degrees of freedom
-    tempDf <- predictedEffect$ddf
+    # to extract the degrees of freedom (rma.glmm predict may not have ddf)
+    tempDf <- if (!is.null(predictedEffect$ddf)) predictedEffect$ddf else .maExtractDdf(fit)[1]
     predictedEffect      <- .maExtractAndFormatPrediction(predictedEffect)
     predictedEffect$df   <- tempDf
     predictedEffect$stat <- (predictedEffect$est - 0)  / predictedEffect$se
@@ -2587,7 +2599,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     )
 
     if (.maIsMetaregressionFtest(options))
-      row$df2 <- fit[["QMdf"]][2]
+      row$df2 <- out[["QMdf"]][2]
 
   } else if (parameter == "heterogeneity") {
 
@@ -2916,8 +2928,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     # compute test against specified value
     if (.maIsMetaregressionFtest(options)) {
 
-      # extract degrees of freedom
-      tempDf                     <- computedMarginalMeans$ddf
+      # extract degrees of freedom (rma.glmm predict may not have ddf)
+      tempDf                     <- if (!is.null(computedMarginalMeans$ddf)) computedMarginalMeans$ddf else .maExtractDdf(fit)[1]
       computedMarginalMeans      <- .maExtractAndFormatPrediction(computedMarginalMeans)
       computedMarginalMeans$df   <- tempDf
       computedMarginalMeans$stat <- (computedMarginalMeans$est - testAgainst)  / computedMarginalMeans$se
@@ -3155,7 +3167,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   computedContrasts$comparison <- contrastComparisons
   computedContrasts$stat       <- computedContrastsTests$zval
   if (.maIsMetaregressionFtest(options))
-    computedContrasts$df <- computedContrastsTests$ddf
+    computedContrasts$df <- if (!is.null(computedContrastsTests$ddf)) computedContrastsTests$ddf else .maExtractDdf(fit)[1]
   computedContrasts$pval <- computedContrastsTests$pval
 
   computedContrasts$subgroup <- attr(fit, "subgroup")
@@ -3891,6 +3903,14 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 }
 .maIsMetaregressionFtest          <- function(options) {
   return(!is.null(options[["fixedEffectTest"]]) && options[["fixedEffectTest"]] %in% c("knha", "t"))
+}
+.maExtractDdf                     <- function(object) {
+  # rma.glmm does not store ddf; compute as k - p per metafor docs
+  if (!is.null(object[["ddf"]]))
+    return(object[["ddf"]])
+  if (!is.null(object[["k"]]) && !is.null(object[["p"]]))
+    return(rep(object[["k"]] - object[["p"]], object[["p"]]))
+  return(NULL)
 }
 .maIsMultilevelMultivariate       <- function(options) {
   return(options[["analysis"]] == "metaAnalysisMultilevelMultivariate")
@@ -4633,7 +4653,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
       estimates$pval2 <- attr(fit[["pval"]], "permutation")
 
     if (.maIsMetaregressionFtest(options))
-      estimates$df <- fit[["ddf"]]
+      estimates$df <- .maExtractDdf(fit)
 
     if (options[["confidenceIntervals"]]) {
       estimates$lCi <- fit[["ci.lb"]]

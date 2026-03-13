@@ -40,8 +40,15 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
   beta <- as.vector(fit$beta[btt])
   vb   <- fit$vb[btt, btt, drop = FALSE]
   QM   <- as.vector(t(beta) %*% chol2inv(chol(vb)) %*% beta)
-  QMdf <- c(length(btt), NA)
-  QMp  <- pchisq(QM, df = QMdf[1], lower.tail = FALSE)
+  m    <- length(btt)
+  if (!is.null(fit$test) && fit$test == "t") {
+    ddf  <- fit$k - fit$p
+    QMdf <- c(m, ddf)
+    QMp  <- pf(QM / m, df1 = m, df2 = ddf, lower.tail = FALSE)
+  } else {
+    QMdf <- c(m, NA)
+    QMp  <- pchisq(QM, df = m, lower.tail = FALSE)
+  }
   list(QM = QM, QMdf = QMdf, QMp = QMp)
 }
 
@@ -51,10 +58,15 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
   Xb   <- c(X %*% beta)
   se   <- sqrt(diag(X %*% tcrossprod(vb, X)))
   zval <- Xb / se
-  pval <- 2 * pnorm(abs(zval), lower.tail = FALSE)
+  if (!is.null(fit$test) && fit$test == "t") {
+    ddf  <- fit$k - fit$p
+    pval <- 2 * pt(abs(zval), df = ddf, lower.tail = FALSE)
+  } else {
+    pval <- 2 * pnorm(abs(zval), lower.tail = FALSE)
+  }
   if (adjust != "none")
     pval <- p.adjust(pval, method = adjust)
-  list(zval = zval, pval = pval)
+  list(zval = zval, pval = pval, ddf = if (!is.null(fit$test) && fit$test == "t") ddf else NULL)
 }
 
 .maglmmGetMeasureCategory <- function(options) {
@@ -361,7 +373,7 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
   # moderators
   mods <- .maGetFormula(options[["effectSizeModelTerms"]], options[["effectSizeModelIncludeIntercept"]])
   if (!is.null(mods))
-    rmaInput$mods <- paste0("'", deparse(mods), "'")
+    rmaInput$mods <- deparse(mods)
 
   rmaInput$nAGQ <- options[["glmmQuadraturePoints"]]
 

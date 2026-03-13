@@ -95,10 +95,11 @@ Section
 		Group
 		{
 			columns:	2
+			enabled:	forestPlotEstimatedMarginalMeans.checked
 
 			Group
 			{
-				enabled:	forestPlotEstimatedMarginalMeans.checked && (isClassical || (bayesianModelAveragingEffectSize.checked || bayesianModelAveragingModerations.checked))
+				enabled:	isClassical || (isBayesian && (bayesianModelAveragingEffectSize.checked || bayesianModelAveragingModerations.checked))
 
 				CheckBox
 				{
@@ -143,7 +144,6 @@ Section
 			{
 				name:		"forestPlotEstimatedMarginalMeansAdjustedEffectSizeEstimate"
 				label:		qsTr("Adjusted effect size estimate")
-				enabled:	forestPlotEstimatedMarginalMeans.checked
 				info: qsTr("Include the adjusted effect size estimate in the estimated marginal means section.")
 			}
 		}

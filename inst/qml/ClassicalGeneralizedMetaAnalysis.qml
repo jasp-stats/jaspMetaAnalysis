@@ -160,7 +160,7 @@ Form
 		{
 			name:			"fixedEffectTest"
 			label:			qsTr("Coefficient test")
-			startValue:		"z"
+			startValue:		"t"
 			info: qsTr("Test type for the fixed-effect coefficients: z (Wald test) or t (t-distribution).")
 			values:			[
 				{ label: qsTr("z"),	value: "z"	},
