@@ -175,8 +175,8 @@ Section
 			{
 				name:		"forestPlotHeterogeneityTest"
 				text:		qsTr("Test")
-				visible:	(isClassical || analysisType !== "generalizedMetaAnalysis") || (isBayesian && bayesianModelAveragingHeterogeneity.checked)
-				checked:	(isClassical || analysisType !== "generalizedMetaAnalysis") || (isBayesian && bayesianModelAveragingHeterogeneity.checked)
+				visible:	(isClassical && analysisType !== "generalizedMetaAnalysis") || (isBayesian && bayesianModelAveragingHeterogeneity.checked)
+				checked:	(isClassical && analysisType !== "generalizedMetaAnalysis") || (isBayesian && bayesianModelAveragingHeterogeneity.checked)
 				info: qsTr("Include the test of the residual heterogeneity in the model information section.")
 			}
 
