@@ -2,10 +2,11 @@
 
 Reading and testing the serialized output from `jaspTools::runAnalysis()`.
 For building tables see [jasp-tables.md](jasp-tables.md). For plots see [jasp-plots.md](jasp-plots.md).
+When you run it manually, use `view = FALSE` so JASP skips HTML generation and you can inspect the returned R object directly.
 
 ## 1) Top-Level `results` Object
 
-After `jaspTools::runAnalysis()`, the returned list has 5 keys:
+After `jaspTools::runAnalysis(..., view = FALSE)`, the returned list has 5 keys:
 - `status` -- `"complete"` or `"fatalError"`
 - `results` -- nested list of all output elements (containers, tables, plots)
 - `state` -- cached figures and computed objects
@@ -155,7 +156,7 @@ jaspTools::expect_equal_tables(table_data,
 
 ```r
 # Run analysis
-results <- jaspTools::runAnalysis("AnalysisName", dataset, options)
+results <- jaspTools::runAnalysis("AnalysisName", dataset, options, view = FALSE)
 
 # Check status
 results$status  # "complete" or "fatalError"

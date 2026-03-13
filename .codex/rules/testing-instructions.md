@@ -73,7 +73,7 @@ options$descriptives <- TRUE
 set.seed(1)
 
 # 3. Run the analysis
-results <- jaspTools::runAnalysis("AnalysisName", "debug.csv", options)
+results <- jaspTools::runAnalysis("AnalysisName", "debug.csv", options, view = FALSE)
 
 # 4. Test tables
 test_that("Table name matches", {
@@ -97,13 +97,13 @@ opts     <- jaspTools::analysisOptions(jaspFile)
 dataset  <- jaspTools::extractDatasetFromJASPFile(jaspFile)
 encoded  <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
 set.seed(1)
-results  <- jaspTools::runAnalysis("AnalysisName", encoded$dataset, encoded$options, encodedDataset = TRUE)
+results  <- jaspTools::runAnalysis("AnalysisName", encoded$dataset, encoded$options, encodedDataset = TRUE, view = FALSE)
 ```
 
 ### Key testing functions
 
 - `jaspTools::analysisOptions(name)` -- Get default options for an analysis
-- `jaspTools::runAnalysis(name, dataset, options)` -- Run analysis with options
+- `jaspTools::runAnalysis(name, dataset, options, view = FALSE)` -- Run analysis without generating HTML; inspect the returned R object
 - `jaspTools::expect_equal_tables(actual, expected)` -- Compare table output
 - `jaspTools::expect_equal_plots(plot, name, dir)` -- Compare plot output (snapshot-based)
 

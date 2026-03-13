@@ -9,7 +9,7 @@ How `$dependOn()` controls caching and invalidation of output elements in jaspRe
 
 For the reactive loop context see [jasp-module-architecture.md](jasp-module-architecture.md).
 
-Note that you cannot test this by running analysis via `runAnalysis()` because you only generate one state at a time
+Note that you cannot test this by running analysis via `runAnalysis(..., view = FALSE)` because you only generate one state at a time
 (with no initial elements - ask the human maintainer to validate the dependencies manually if you suspect an issue!).
 
 ---
