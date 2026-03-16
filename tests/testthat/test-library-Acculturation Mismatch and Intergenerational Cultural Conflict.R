@@ -1,12 +1,12 @@
-context("Example: Acculturation Mismatch and Intergenerational Cultural Conflict")
+context("Library: Acculturation Mismatch and Intergenerational Cultural Conflict")
 
 # This test file was auto-generated from a JASP example file.
-# The JASP file is stored in the module's examples/ folder.
+# The JASP file is stored in tests/testthat/jaspfiles/library/.
 
 test_that("EffectSizeComputation (analysis 1) results match", {
 
   # Load from JASP example file
-  jaspFile <- testthat::test_path("..", "..", "examples", "Acculturation Mismatch and Intergenerational Cultural Conflict.jasp")
+  jaspFile <- testthat::test_path("jaspfiles", "library", "Acculturation Mismatch and Intergenerational Cultural Conflict.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[1]]
   dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
 
@@ -24,7 +24,7 @@ test_that("EffectSizeComputation (analysis 1) results match", {
 test_that("PetPeese (analysis 2) results match", {
 
   # Load from JASP example file
-  jaspFile <- testthat::test_path("..", "..", "examples", "Acculturation Mismatch and Intergenerational Cultural Conflict.jasp")
+  jaspFile <- testthat::test_path("jaspfiles", "library", "Acculturation Mismatch and Intergenerational Cultural Conflict.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[2]]
   dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
 
@@ -54,7 +54,7 @@ test_that("PetPeese (analysis 2) results match", {
 test_that("SelectionModels (analysis 3) results match", {
 
   # Load from JASP example file
-  jaspFile <- testthat::test_path("..", "..", "examples", "Acculturation Mismatch and Intergenerational Cultural Conflict.jasp")
+  jaspFile <- testthat::test_path("jaspfiles", "library", "Acculturation Mismatch and Intergenerational Cultural Conflict.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[3]]
   dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
 
@@ -92,7 +92,7 @@ test_that("SelectionModels (analysis 3) results match", {
 test_that("RobustBayesianMetaAnalysis (analysis 4) results match", {
 
   # Load from JASP example file
-  jaspFile <- testthat::test_path("..", "..", "examples", "Acculturation Mismatch and Intergenerational Cultural Conflict.jasp")
+  jaspFile <- testthat::test_path("jaspfiles", "library", "Acculturation Mismatch and Intergenerational Cultural Conflict.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[4]]
   dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
 
