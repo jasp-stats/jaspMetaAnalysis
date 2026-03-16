@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.95.5\n"
 "POT-Creation-Date: 2025-11-15 02:55\n"
-"PO-Revision-Date: 2026-03-15 09:09+0000\n"
+"PO-Revision-Date: 2026-03-16 21:51+0000\n"
 "Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/id/>\n"
@@ -158,7 +158,7 @@ msgid "Effect size"
 msgstr ""
 
 msgid "Density"
-msgstr ""
+msgstr "Kepadatan"
 
 msgid "Prior and Posteriors"
 msgstr ""
@@ -221,19 +221,19 @@ msgid "fixed"
 msgstr ""
 
 msgid "Anecdotal"
-msgstr ""
+msgstr "Anekdot"
 
 msgid "Moderate"
-msgstr ""
+msgstr "Moderat"
 
 msgid "Strong"
-msgstr ""
+msgstr "Kuat"
 
 msgid "Very Strong"
-msgstr ""
+msgstr "Sangat Kuat"
 
 msgid "Extreme"
-msgstr ""
+msgstr "Ekstrim"
 
 msgid "Evidence for %s:"
 msgstr ""
@@ -1757,7 +1757,7 @@ msgid "Estimated %1$s Regression"
 msgstr ""
 
 msgid "Cohen's d"
-msgstr ""
+msgstr "d Cohen"
 
 msgid "Fisher's z"
 msgstr ""
