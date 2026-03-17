@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.95.5\n"
 "POT-Creation-Date: 2025-11-15 02:55\n"
-"PO-Revision-Date: 2026-03-16 21:51+0000\n"
+"PO-Revision-Date: 2026-03-18 03:09+0000\n"
 "Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/id/>\n"
@@ -116,10 +116,10 @@ msgid "Model Probabilities"
 msgstr ""
 
 msgid "Prior"
-msgstr ""
+msgstr "Priori"
 
 msgid "Posterior"
-msgstr ""
+msgstr "Posterior"
 
 msgid "Fixed H%s"
 msgstr ""
@@ -149,13 +149,13 @@ msgid "Posterior mean and 95%% credible interval estimates from the constrained 
 msgstr ""
 
 msgid "Effect Size"
-msgstr ""
+msgstr "Ukuran Efek"
 
 msgid "Heterogeneity"
 msgstr ""
 
 msgid "Effect size"
-msgstr ""
+msgstr "Ukuran efek"
 
 msgid "Density"
 msgstr "Kepadatan"
@@ -197,7 +197,7 @@ msgid "Overall effect size"
 msgstr ""
 
 msgid "Sequential Analysis"
-msgstr ""
+msgstr "Analisis Sekuensial"
 
 msgid "Bayes factors effect size"
 msgstr ""
@@ -320,7 +320,7 @@ msgid "Meta-Analytic Tests"
 msgstr ""
 
 msgid "Test"
-msgstr ""
+msgstr "Uji"
 
 msgid "p"
 msgstr ""
@@ -374,7 +374,7 @@ msgid "Heterogeneity Meta-Regression Terms Tests"
 msgstr ""
 
 msgid "F"
-msgstr ""
+msgstr "F"
 
 msgid "Qₘ"
 msgstr ""
@@ -401,7 +401,7 @@ msgid "t"
 msgstr ""
 
 msgid "z"
-msgstr ""
+msgstr "z"
 
 msgid "Effect Size Meta-Regression Correlation Matrix"
 msgstr ""
