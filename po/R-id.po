@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.95.5\n"
 "POT-Creation-Date: 2025-11-15 02:55\n"
-"PO-Revision-Date: 2026-03-18 03:09+0000\n"
+"PO-Revision-Date: 2026-03-21 03:15+0000\n"
 "Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/id/>\n"
@@ -56,13 +56,13 @@ msgid "SD"
 msgstr "SD"
 
 msgid "Lower"
-msgstr ""
+msgstr "Bawah"
 
 msgid "95%% Credible Interval"
 msgstr ""
 
 msgid "Upper"
-msgstr ""
+msgstr "Atas"
 
 msgid "Averaged"
 msgstr ""
@@ -266,7 +266,7 @@ msgid "Autocorrelations plot"
 msgstr ""
 
 msgid "Lag"
-msgstr ""
+msgstr "Penundaan"
 
 msgid "Autocorrelation"
 msgstr ""
@@ -323,7 +323,7 @@ msgid "Test"
 msgstr "Uji"
 
 msgid "p"
-msgstr ""
+msgstr "p"
 
 msgid "p (permutation)"
 msgstr ""
@@ -338,7 +338,7 @@ msgid "Meta-Analytic Estimates"
 msgstr ""
 
 msgid "Estimate"
-msgstr ""
+msgstr "Estimasi"
 
 msgid "Heterogeneity Level"
 msgstr ""
@@ -356,13 +356,13 @@ msgid "Deviance"
 msgstr ""
 
 msgid "AIC"
-msgstr ""
+msgstr "AIC"
 
 msgid "BIC"
-msgstr ""
+msgstr "BIC"
 
 msgid "AICc"
-msgstr ""
+msgstr "AICc"
 
 msgid "R²"
 msgstr ""
@@ -398,7 +398,7 @@ msgid "Heterogeneity Meta-Regression Coefficients"
 msgstr ""
 
 msgid "t"
-msgstr ""
+msgstr "t"
 
 msgid "z"
 msgstr "z"
@@ -431,7 +431,7 @@ msgid "Estimated Marginal Means"
 msgstr ""
 
 msgid "Level"
-msgstr ""
+msgstr "Tingkat"
 
 msgid "Contrasts"
 msgstr ""
@@ -545,7 +545,7 @@ msgid "Residual Funnel Plot"
 msgstr ""
 
 msgid "Model Summary"
-msgstr ""
+msgstr "Ringkasan Model"
 
 msgid "Meta-Regression Summary"
 msgstr ""
@@ -593,7 +593,7 @@ msgid "Residual Value"
 msgstr ""
 
 msgid "Standard Error"
-msgstr ""
+msgstr "Galat Standar"
 
 msgid "Profile Likelihood"
 msgstr ""
@@ -671,7 +671,7 @@ msgid "Benjamini-Yekutieli"
 msgstr ""
 
 msgid "Intercept"
-msgstr ""
+msgstr "Intersepsi"
 
 msgid "Residual heterogeneity"
 msgstr ""
@@ -707,7 +707,7 @@ msgid "Subgroup differences"
 msgstr ""
 
 msgid "%s%% CI"
-msgstr ""
+msgstr "%s%% CI"
 
 msgid "%s%% PI"
 msgstr ""
@@ -1352,7 +1352,7 @@ msgid "The model should contain at least one predictor or an intercept."
 msgstr ""
 
 msgid "Coefficients"
-msgstr ""
+msgstr "Koefisien"
 
 msgid "At least one predictor needs to be specified."
 msgstr ""
