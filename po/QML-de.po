@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2026-03-16 14:09+0000\n"
+"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.17-dev\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -1435,12 +1441,10 @@ msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Extend samples"
 msgstr "Stichprobe erweitern"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Baseline"
 msgstr "Referenz"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Baseline (null)"
 msgstr "Referenz (null)"
@@ -1525,7 +1529,6 @@ msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Type"
 msgstr "Typ"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Model averaged"
 msgstr "Modell-gemittelt"
@@ -1605,7 +1608,6 @@ msgctxt "ClassicalMetaAnalysis|"
 msgid "Maximum Likelihood"
 msgstr "Maximum-Likelihood"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Restricted ML"
 msgstr "Begrenztes ML"
@@ -1624,13 +1626,12 @@ msgstr "Hunter-Schmidt"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Hunter-Schmidt (SSC)"
-msgstr ""
+msgstr "Hunter-Schmidt (SSC)"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Sidik-Jonkman"
 msgstr "Sidik-Jonkman"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Empirical Bayes"
 msgstr "Empirische Bayes"
@@ -1645,9 +1646,8 @@ msgstr "Paule-Mandel (MU)"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Generalized Q-stat"
-msgstr ""
+msgstr "Verallgemeinerte Q-Statistik"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Generalized Q-stat (MU)"
 msgstr "Verallgemeinerte Q-Statistik (MU)"
@@ -1712,7 +1712,6 @@ msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Maximum Likelihood"
 msgstr "Maximum-Likelihood"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Restricted ML"
 msgstr "Begrenztes ML"
@@ -1810,7 +1809,6 @@ msgstr ""
 "'Autoregressiv' oder 'Räumlich' ist. Auswählbare Strukturen hängen vom "
 "gewählten Typ ab."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Compound symmetry"
 msgstr "Komponenten-Symmetrie"
@@ -3659,7 +3657,7 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Specify the effect size model."
-msgstr ""
+msgstr "Angeben des Effektstärkemodells."
 
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Available Components"
@@ -3671,7 +3669,7 @@ msgstr "Modellterme"
 
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Variables assigned as model terms in the effect size model."
-msgstr ""
+msgstr "Variablen, die als Modellterme im Effektstärkenmodell zugeordnet sind."
 
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Include intercept"
@@ -3693,7 +3691,7 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Include an intercept in the heterogeneity model."
-msgstr ""
+msgstr "Eine Konstante in das Heterogenitätsmodell einbeziehen."
 
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Link"
@@ -3729,7 +3727,6 @@ msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Include 𝜏², the estimated between-study variance."
 msgstr "𝜏² einschließen, die geschätzte zwischen-Studien-Varianz."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "I²"
 msgstr "I²"
@@ -3739,6 +3736,8 @@ msgid ""
 "Include I², the percentage of total variation across studies due to "
 "heterogeneity."
 msgstr ""
+"Einbeziehen von I², dem Prozentsatz der Gesamtvariation über Studien "
+"aufgrund der Heterogenität."
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "H²"
@@ -3749,6 +3748,8 @@ msgid ""
 "Include H², an index indicating the ratio of total variability to sampling "
 "variability."
 msgstr ""
+"Einbeziehen von H², einem Index für das Verhältnis von Gesamtvariation zu "
+"Stichprobenvariabilität."
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Available when performing multilevel/multivariate meta-analysis."
@@ -3939,7 +3940,6 @@ msgctxt "PredictionPerformanceInference|"
 msgid "Sidik-Jonkman"
 msgstr "Sidik-Jonkman"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Empirical Bayes"
 msgstr "Empirische Bayes"
@@ -3954,10 +3954,13 @@ msgid ""
 "hypothesis. The paramters are estimated with the 'Method' specified under "
 "'General Settings'."
 msgstr ""
+"Schätzung der mittleren Effektstärke und Heterogenität unter der "
+"alternativen Hypothese. Die Parameter werden mit der unter \"Allgemeine "
+"Einstellungen\" angegebenen \"Methode\" geschätzt."
 
 msgctxt "FunnelPlot|"
 msgid "General Settings"
-msgstr ""
+msgstr "Allgemeine Einstellungen"
 
 msgctxt "FunnelPlot|"
 msgid ""
@@ -3968,23 +3971,27 @@ msgstr ""
 
 msgctxt "FunnelPlot|"
 msgid "Publication Bias / Sensitivity Analyses"
-msgstr ""
+msgstr "Publikations-Bias / Sensitivitätsanalysen"
 
 msgctxt "FunnelPlot|"
 msgid ""
 "Detect and perform sensitivity analyses to funel plot asymmetry, publication "
 "bias, and small-study effects."
 msgstr ""
+"Erkennung und Ausführen von Sensitivitätsanalysen von Funnelplot-Asymmetrie, "
+"Publikations-Bias und Kleine-Studien-Effekten."
 
 msgctxt "FunnelPlot|"
 msgid "Asymmetry tests"
-msgstr ""
+msgstr "Asymmetrie-Tests"
 
 msgctxt "FunnelPlot|"
 msgid ""
 "Perform tests to detect asymmetry in the funnel plot indicating potential "
 "publication bias."
 msgstr ""
+"Durchführung von Tests zur Erkennung von Asymmetrie im Funnelplot, die auf "
+"potenziellen Publikations-Bias hindeutet."
 
 msgctxt "FunnelPlot|"
 msgid ""
