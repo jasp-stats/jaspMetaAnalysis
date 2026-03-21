@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2026-03-22 09:09+0000\n"
+"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.17-dev\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -2143,239 +2149,239 @@ msgstr ""
 
 msgctxt "EffectSizeComputation|"
 msgid "RD"
-msgstr ""
+msgstr "RD"
 
 msgctxt "EffectSizeComputation|"
 msgid "AS"
-msgstr ""
+msgstr "AS"
 
 msgctxt "EffectSizeComputation|"
 msgid "PETO"
-msgstr ""
+msgstr "PETO"
 
 msgctxt "EffectSizeComputation|"
 msgid "IRR"
-msgstr ""
+msgstr "IRR"
 
 msgctxt "EffectSizeComputation|"
 msgid "IRD"
-msgstr ""
+msgstr "IRD"
 
 msgctxt "EffectSizeComputation|"
 msgid "IRSD"
-msgstr ""
+msgstr "IRSD"
 
 msgctxt "EffectSizeComputation|"
 msgid "D2ORN"
-msgstr ""
+msgstr "D2ORN"
 
 msgctxt "EffectSizeComputation|"
 msgid "D2ORL"
-msgstr ""
+msgstr "D2ORL"
 
 msgctxt "EffectSizeComputation|"
 msgid "PBIT"
-msgstr ""
+msgstr "PBIT"
 
 msgctxt "EffectSizeComputation|"
 msgid "OR2DN"
-msgstr ""
+msgstr "OR2DN"
 
 msgctxt "EffectSizeComputation|"
 msgid "OR2DL"
-msgstr ""
+msgstr "OR2DL"
 
 msgctxt "EffectSizeComputation|"
 msgid "COR"
-msgstr ""
+msgstr "COR"
 
 msgctxt "EffectSizeComputation|"
 msgid "UCOR"
-msgstr ""
+msgstr "UCOR"
 
 msgctxt "EffectSizeComputation|"
 msgid "ZCOR"
-msgstr ""
+msgstr "ZCOR"
 
 msgctxt "EffectSizeComputation|"
 msgid "PHI"
-msgstr ""
+msgstr "PHI"
 
 msgctxt "EffectSizeComputation|"
 msgid "YUQ"
-msgstr ""
+msgstr "YUQ"
 
 msgctxt "EffectSizeComputation|"
 msgid "YUY"
-msgstr ""
+msgstr "YUY"
 
 msgctxt "EffectSizeComputation|"
 msgid "RTET"
-msgstr ""
+msgstr "RTET"
 
 msgctxt "EffectSizeComputation|"
 msgid "ZPHI"
-msgstr ""
+msgstr "ZPHI"
 
 msgctxt "EffectSizeComputation|"
 msgid "ZTET"
-msgstr ""
+msgstr "ZTET"
 
 msgctxt "EffectSizeComputation|"
 msgid "RPB"
-msgstr ""
+msgstr "RPB"
 
 msgctxt "EffectSizeComputation|"
 msgid "RBIS"
-msgstr ""
+msgstr "RBIS"
 
 msgctxt "EffectSizeComputation|"
 msgid "ZPB"
-msgstr ""
+msgstr "ZPB"
 
 msgctxt "EffectSizeComputation|"
 msgid "ZBIS"
-msgstr ""
+msgstr "ZBIS"
 
 msgctxt "EffectSizeComputation|"
 msgid "MN"
-msgstr ""
+msgstr "MN"
 
 msgctxt "EffectSizeComputation|"
 msgid "SMN"
-msgstr ""
+msgstr "SMN"
 
 msgctxt "EffectSizeComputation|"
 msgid "MNLN"
-msgstr ""
+msgstr "MNLN"
 
 msgctxt "EffectSizeComputation|"
 msgid "CVLN"
-msgstr ""
+msgstr "CVLN"
 
 msgctxt "EffectSizeComputation|"
 msgid "SDLN"
-msgstr ""
+msgstr "SDLN"
 
 msgctxt "EffectSizeComputation|"
 msgid "PR"
-msgstr ""
+msgstr "PR"
 
 msgctxt "EffectSizeComputation|"
 msgid "PLN"
-msgstr ""
+msgstr "PLN"
 
 msgctxt "EffectSizeComputation|"
 msgid "PLO"
-msgstr ""
+msgstr "PLO"
 
 msgctxt "EffectSizeComputation|"
 msgid "PAS"
-msgstr ""
+msgstr "PAS"
 
 msgctxt "EffectSizeComputation|"
 msgid "PFT"
-msgstr ""
+msgstr "PFT"
 
 msgctxt "EffectSizeComputation|"
 msgid "IR"
-msgstr ""
+msgstr "IR"
 
 msgctxt "EffectSizeComputation|"
 msgid "IRLN"
-msgstr ""
+msgstr "IRLN"
 
 msgctxt "EffectSizeComputation|"
 msgid "IRS"
-msgstr ""
+msgstr "IRS"
 
 msgctxt "EffectSizeComputation|"
 msgid "IRFT"
-msgstr ""
+msgstr "IRFT"
 
 msgctxt "EffectSizeComputation|"
 msgid "MC"
-msgstr ""
+msgstr "MC"
 
 msgctxt "EffectSizeComputation|"
 msgid "SMCC"
-msgstr ""
+msgstr "SMCC"
 
 msgctxt "EffectSizeComputation|"
 msgid "SMCR"
-msgstr ""
+msgstr "SMCR"
 
 msgctxt "EffectSizeComputation|"
 msgid "SMCRH"
-msgstr ""
+msgstr "SMCRH"
 
 msgctxt "EffectSizeComputation|"
 msgid "SMCRP"
-msgstr ""
+msgstr "SMCRP"
 
 msgctxt "EffectSizeComputation|"
 msgid "SMCRPH"
-msgstr ""
+msgstr "SMCRPH"
 
 msgctxt "EffectSizeComputation|"
 msgid "ROMC"
-msgstr ""
+msgstr "ROMC"
 
 msgctxt "EffectSizeComputation|"
 msgid "CVRC"
-msgstr ""
+msgstr "CVRC"
 
 msgctxt "EffectSizeComputation|"
 msgid "VRC"
-msgstr ""
+msgstr "VRC"
 
 msgctxt "EffectSizeComputation|"
 msgid "MPRR"
-msgstr ""
+msgstr "MPRR"
 
 msgctxt "EffectSizeComputation|"
 msgid "MPOR"
-msgstr ""
+msgstr "MPOR"
 
 msgctxt "EffectSizeComputation|"
 msgid "MPRD"
-msgstr ""
+msgstr "MPRD"
 
 msgctxt "EffectSizeComputation|"
 msgid "MPORC"
-msgstr ""
+msgstr "MPORC"
 
 msgctxt "EffectSizeComputation|"
 msgid "MPPETO"
-msgstr ""
+msgstr "MPPETO"
 
 msgctxt "EffectSizeComputation|"
 msgid "MPORM"
-msgstr ""
+msgstr "MPORM"
 
 msgctxt "EffectSizeComputation|"
 msgid "ARAW"
-msgstr ""
+msgstr "ARAW"
 
 msgctxt "EffectSizeComputation|"
 msgid "AHW"
-msgstr ""
+msgstr "AHW"
 
 msgctxt "EffectSizeComputation|"
 msgid "ABT"
-msgstr ""
+msgstr "ABT"
 
 msgctxt "EffectSizeComputation|"
 msgid "PCOR"
-msgstr ""
+msgstr "PCOR"
 
 msgctxt "EffectSizeComputation|"
 msgid "ZPCOR"
-msgstr ""
+msgstr "ZPCOR"
 
 msgctxt "EffectSizeComputation|"
 msgid "SPCOR"
-msgstr ""
+msgstr "SPCOR"
 
 msgctxt "EffectSizeComputation|"
 msgid "ZSPCOR"
@@ -2603,7 +2609,7 @@ msgstr ""
 
 msgctxt "EffectSizeComputation|"
 msgid "Subset"
-msgstr ""
+msgstr "Teilmenge"
 
 msgctxt "EffectSizeComputation|"
 msgid "Subset Level"
@@ -2653,53 +2659,52 @@ msgstr "Nein"
 
 msgctxt "EffectSizeComputation|"
 msgid "Sampling variance type"
-msgstr ""
+msgstr "Art Stichprobenvarianz"
 
 msgctxt "EffectSizeComputation|"
 msgid "LS"
-msgstr ""
+msgstr "LS"
 
 msgctxt "EffectSizeComputation|"
 msgid "HO"
-msgstr ""
+msgstr "HO"
 
 msgctxt "EffectSizeComputation|"
 msgid "LS2"
-msgstr ""
+msgstr "LS2"
 
 msgctxt "EffectSizeComputation|"
 msgid "UB"
-msgstr ""
+msgstr "UB"
 
 msgctxt "EffectSizeComputation|"
 msgid "AV"
-msgstr ""
+msgstr "AV"
 
 msgctxt "EffectSizeComputation|"
 msgid "AVHO"
-msgstr ""
+msgstr "AVHO"
 
 msgctxt "EffectSizeComputation|"
 msgid "ST"
-msgstr ""
+msgstr "ST"
 
 msgctxt "EffectSizeComputation|"
 msgid "CS"
-msgstr ""
+msgstr "CS"
 
 msgctxt "EffectSizeComputation|"
 msgid "mixed"
-msgstr ""
+msgstr "Gemischt"
 
 msgctxt "EffectSizeComputation|"
 msgid "AV2"
-msgstr ""
+msgstr "AV2"
 
 msgctxt "EffectSizeComputation|"
 msgid "Options"
 msgstr "Optionen"
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Compute sampling variance"
 msgstr "Stichprobenvarianz berechnen"
@@ -2716,7 +2721,6 @@ msgctxt "EffectSizeComputation|"
 msgid "Standard error"
 msgstr "Standardfehler"
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Sampling variance"
 msgstr "Stichprobenvarianz"
@@ -2853,7 +2857,6 @@ msgstr ""
 "Auswahl zwischen Schätzung oder manueller Fixierung der Parameter für das "
 "Trichterdiagramm unter der Alternativhypothese."
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Estimated"
 msgstr "Geschätzt"
@@ -2894,7 +2897,6 @@ msgctxt "FunnelPlot|"
 msgid "Hunter-Schmidt"
 msgstr "Hunter-Schmidt"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Hunter-Schmidt (SSC)"
 msgstr "Hunter-Schmidt (SSC)"
@@ -2903,7 +2905,6 @@ msgctxt "FunnelPlot|"
 msgid "Sidik-Jonkman"
 msgstr "Sidik-Jonkman"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Empirical Bayes"
 msgstr "Empirische Bayes"
@@ -2918,7 +2919,7 @@ msgstr "Paule-Mandel (MU)"
 
 msgctxt "FunnelPlot|"
 msgid "Include heterogeneity"
-msgstr ""
+msgstr "Heterogenität einbeziehen"
 
 msgctxt "FunnelPlot|"
 msgid ""
@@ -2930,10 +2931,9 @@ msgstr ""
 "unausgewählt, wird die Heterogenitätsschätzung nicht zur Anpassung der "
 "Vorhersageintervalle verwendet."
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Estimates table"
-msgstr "Schätzungen-Tabelle"
+msgstr "Tabelle Schätzungen"
 
 msgctxt "FunnelPlot|"
 msgid ""
@@ -3013,11 +3013,11 @@ msgstr "Alle"
 
 msgctxt "FunnelPlot|"
 msgid "Outside H₀"
-msgstr ""
+msgstr "Außerhalb H₀"
 
 msgctxt "FunnelPlot|"
 msgid "Outside H₁"
-msgstr ""
+msgstr "Außerhalb H₁"
 
 msgctxt "FunnelPlot|"
 msgid "Color"
