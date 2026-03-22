@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.95.5\n"
 "POT-Creation-Date: 2025-11-15 02:55\n"
-"PO-Revision-Date: 2026-03-21 03:15+0000\n"
+"PO-Revision-Date: 2026-03-22 16:09+0000\n"
 "Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/id/>\n"
@@ -59,7 +59,7 @@ msgid "Lower"
 msgstr "Bawah"
 
 msgid "95%% Credible Interval"
-msgstr ""
+msgstr "95%% Interval Kredibel"
 
 msgid "Upper"
 msgstr "Atas"
@@ -257,7 +257,7 @@ msgid "Running means plot"
 msgstr ""
 
 msgid "Iteration"
-msgstr ""
+msgstr "Iterasi"
 
 msgid "Running mean"
 msgstr ""
@@ -269,7 +269,7 @@ msgid "Lag"
 msgstr "Penundaan"
 
 msgid "Autocorrelation"
-msgstr ""
+msgstr "Korelasi Otomatis"
 
 msgid "Gelman-Rubin plot"
 msgstr ""
@@ -1442,7 +1442,7 @@ msgid "Conditional Meta-Analytic Estimates"
 msgstr ""
 
 msgid "Median"
-msgstr ""
+msgstr "Median"
 
 msgid "Conditional estimates are based on models assuming the presence of a given component."
 msgstr ""
@@ -1517,7 +1517,7 @@ msgid "ESS"
 msgstr ""
 
 msgid "R-hat"
-msgstr ""
+msgstr "R-hat"
 
 msgid "Weights"
 msgstr ""
@@ -1724,7 +1724,7 @@ msgid "Status"
 msgstr ""
 
 msgid "Path Diagram"
-msgstr ""
+msgstr "Diagram Jalur"
 
 msgid "Syntax failed with the following message %1$s."
 msgstr ""
