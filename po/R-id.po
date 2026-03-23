@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.95.5\n"
 "POT-Creation-Date: 2025-11-15 02:55\n"
-"PO-Revision-Date: 2026-03-22 16:09+0000\n"
+"PO-Revision-Date: 2026-03-24 13:09+0000\n"
 "Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/id/>\n"
@@ -251,7 +251,7 @@ msgid "Prior and posterior plot"
 msgstr ""
 
 msgid "Value"
-msgstr ""
+msgstr "Nilai"
 
 msgid "Running means plot"
 msgstr ""
@@ -389,7 +389,7 @@ msgid "df₂"
 msgstr ""
 
 msgid "Warning:"
-msgstr ""
+msgstr "Peringatan:"
 
 msgid "Effect Size Meta-Regression Coefficients"
 msgstr ""
@@ -944,7 +944,7 @@ msgid "Structured"
 msgstr ""
 
 msgid "Summary"
-msgstr ""
+msgstr "Ringkasan"
 
 msgid "Autoregressive"
 msgstr ""
@@ -1088,7 +1088,7 @@ msgid "Standard error"
 msgstr "Galat baku"
 
 msgid "Sample size"
-msgstr ""
+msgstr "Ukuran sampel"
 
 msgid "Total events"
 msgstr ""
@@ -1265,7 +1265,7 @@ msgid "%1$s: %1$s Matrix"
 msgstr ""
 
 msgid "Variable"
-msgstr ""
+msgstr "Variabel"
 
 msgid "%1$s: Means"
 msgstr ""
@@ -1409,10 +1409,10 @@ msgid "Model Components"
 msgstr ""
 
 msgid "Models"
-msgstr ""
+msgstr "Model"
 
 msgid "P(M)"
-msgstr ""
+msgstr "P(M)"
 
 msgid "Prior Distributions %1$s"
 msgstr ""
@@ -1421,13 +1421,13 @@ msgid "Prior Distributions Moderators"
 msgstr ""
 
 msgid "Alternative"
-msgstr ""
+msgstr "Alternatif"
 
 msgid "Null"
-msgstr ""
+msgstr "Null"
 
 msgid "P(M|data)"
-msgstr ""
+msgstr "P(M|data)"
 
 msgid "The analysis will estimate a complex meta-analytic model ensemble using MCMC and might require a prolonged time to complete."
 msgstr ""
@@ -1514,7 +1514,7 @@ msgid "MCMC error/SD"
 msgstr ""
 
 msgid "ESS"
-msgstr ""
+msgstr "ESS"
 
 msgid "R-hat"
 msgstr "R-hat"
@@ -1553,7 +1553,7 @@ msgid "Prior and Posterior Plots"
 msgstr ""
 
 msgid "Diagnostics"
-msgstr ""
+msgstr "Diagnostik"
 
 msgid "Adjusted effect"
 msgstr ""
@@ -1571,13 +1571,13 @@ msgid "Baseline"
 msgstr ""
 
 msgid "Inclusion BF"
-msgstr ""
+msgstr "BF Inklusi"
 
 msgid "Exclusion BF"
-msgstr ""
+msgstr "BF Ekslusi"
 
 msgid "log(Inclusion BF)"
-msgstr ""
+msgstr "log(BF Inklusi)"
 
 msgid "Large Bayes factors, i.e., BF > 100 or BF < 1/100, might be computationally unstable (a small change in posterior inclusion probability corresponds to a very large change in the Bayes factor). Consider increasing the number of chains and posterior samples to obtain more stable estimates."
 msgstr ""
