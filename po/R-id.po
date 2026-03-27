@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.95.5\n"
 "POT-Creation-Date: 2025-11-15 02:55\n"
-"PO-Revision-Date: 2026-03-24 13:09+0000\n"
+"PO-Revision-Date: 2026-03-28 01:09+0000\n"
 "Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/id/>\n"
@@ -437,7 +437,7 @@ msgid "Contrasts"
 msgstr ""
 
 msgid "Comparison"
-msgstr ""
+msgstr "Perbandingan"
 
 msgid "Bubble Plots"
 msgstr ""
@@ -500,7 +500,7 @@ msgid "Hat"
 msgstr ""
 
 msgid "Weight"
-msgstr ""
+msgstr "Berat"
 
 msgid "Difference in coefficients"
 msgstr ""
@@ -650,7 +650,7 @@ msgid "SMD to CLES, Pr(superiority)"
 msgstr ""
 
 msgid "None"
-msgstr ""
+msgstr "Tidak Ada"
 
 msgid "Bonferroni"
 msgstr ""
@@ -1259,7 +1259,7 @@ msgid "Available Variable Names"
 msgstr ""
 
 msgid "Descriptives"
-msgstr ""
+msgstr "Deskriptif"
 
 msgid "%1$s: %1$s Matrix"
 msgstr ""
@@ -1361,7 +1361,7 @@ msgid "%1$s observations were ommited due to missing values."
 msgstr ""
 
 msgid "Posterior distribution"
-msgstr ""
+msgstr "Distribusi posterior"
 
 msgid "Sampling diagnostics"
 msgstr ""
