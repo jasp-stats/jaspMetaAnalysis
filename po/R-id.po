@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.95.5\n"
 "POT-Creation-Date: 2025-11-15 02:55\n"
-"PO-Revision-Date: 2026-03-21 03:15+0000\n"
+"PO-Revision-Date: 2026-03-28 01:09+0000\n"
 "Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/id/>\n"
@@ -59,7 +59,7 @@ msgid "Lower"
 msgstr "Bawah"
 
 msgid "95%% Credible Interval"
-msgstr ""
+msgstr "95%% Interval Kredibel"
 
 msgid "Upper"
 msgstr "Atas"
@@ -251,13 +251,13 @@ msgid "Prior and posterior plot"
 msgstr ""
 
 msgid "Value"
-msgstr ""
+msgstr "Nilai"
 
 msgid "Running means plot"
 msgstr ""
 
 msgid "Iteration"
-msgstr ""
+msgstr "Iterasi"
 
 msgid "Running mean"
 msgstr ""
@@ -269,7 +269,7 @@ msgid "Lag"
 msgstr "Penundaan"
 
 msgid "Autocorrelation"
-msgstr ""
+msgstr "Korelasi Otomatis"
 
 msgid "Gelman-Rubin plot"
 msgstr ""
@@ -389,7 +389,7 @@ msgid "df₂"
 msgstr ""
 
 msgid "Warning:"
-msgstr ""
+msgstr "Peringatan:"
 
 msgid "Effect Size Meta-Regression Coefficients"
 msgstr ""
@@ -437,7 +437,7 @@ msgid "Contrasts"
 msgstr ""
 
 msgid "Comparison"
-msgstr ""
+msgstr "Perbandingan"
 
 msgid "Bubble Plots"
 msgstr ""
@@ -500,7 +500,7 @@ msgid "Hat"
 msgstr ""
 
 msgid "Weight"
-msgstr ""
+msgstr "Berat"
 
 msgid "Difference in coefficients"
 msgstr ""
@@ -650,7 +650,7 @@ msgid "SMD to CLES, Pr(superiority)"
 msgstr ""
 
 msgid "None"
-msgstr ""
+msgstr "Tidak Ada"
 
 msgid "Bonferroni"
 msgstr ""
@@ -944,7 +944,7 @@ msgid "Structured"
 msgstr ""
 
 msgid "Summary"
-msgstr ""
+msgstr "Ringkasan"
 
 msgid "Autoregressive"
 msgstr ""
@@ -1088,7 +1088,7 @@ msgid "Standard error"
 msgstr "Galat baku"
 
 msgid "Sample size"
-msgstr ""
+msgstr "Ukuran sampel"
 
 msgid "Total events"
 msgstr ""
@@ -1259,13 +1259,13 @@ msgid "Available Variable Names"
 msgstr ""
 
 msgid "Descriptives"
-msgstr ""
+msgstr "Deskriptif"
 
 msgid "%1$s: %1$s Matrix"
 msgstr ""
 
 msgid "Variable"
-msgstr ""
+msgstr "Variabel"
 
 msgid "%1$s: Means"
 msgstr ""
@@ -1361,7 +1361,7 @@ msgid "%1$s observations were ommited due to missing values."
 msgstr ""
 
 msgid "Posterior distribution"
-msgstr ""
+msgstr "Distribusi posterior"
 
 msgid "Sampling diagnostics"
 msgstr ""
@@ -1409,10 +1409,10 @@ msgid "Model Components"
 msgstr ""
 
 msgid "Models"
-msgstr ""
+msgstr "Model"
 
 msgid "P(M)"
-msgstr ""
+msgstr "P(M)"
 
 msgid "Prior Distributions %1$s"
 msgstr ""
@@ -1421,13 +1421,13 @@ msgid "Prior Distributions Moderators"
 msgstr ""
 
 msgid "Alternative"
-msgstr ""
+msgstr "Alternatif"
 
 msgid "Null"
-msgstr ""
+msgstr "Null"
 
 msgid "P(M|data)"
-msgstr ""
+msgstr "P(M|data)"
 
 msgid "The analysis will estimate a complex meta-analytic model ensemble using MCMC and might require a prolonged time to complete."
 msgstr ""
@@ -1442,7 +1442,7 @@ msgid "Conditional Meta-Analytic Estimates"
 msgstr ""
 
 msgid "Median"
-msgstr ""
+msgstr "Median"
 
 msgid "Conditional estimates are based on models assuming the presence of a given component."
 msgstr ""
@@ -1514,10 +1514,10 @@ msgid "MCMC error/SD"
 msgstr ""
 
 msgid "ESS"
-msgstr ""
+msgstr "ESS"
 
 msgid "R-hat"
-msgstr ""
+msgstr "R-hat"
 
 msgid "Weights"
 msgstr ""
@@ -1553,7 +1553,7 @@ msgid "Prior and Posterior Plots"
 msgstr ""
 
 msgid "Diagnostics"
-msgstr ""
+msgstr "Diagnostik"
 
 msgid "Adjusted effect"
 msgstr ""
@@ -1571,13 +1571,13 @@ msgid "Baseline"
 msgstr ""
 
 msgid "Inclusion BF"
-msgstr ""
+msgstr "BF Inklusi"
 
 msgid "Exclusion BF"
-msgstr ""
+msgstr "BF Ekslusi"
 
 msgid "log(Inclusion BF)"
-msgstr ""
+msgstr "log(BF Inklusi)"
 
 msgid "Large Bayes factors, i.e., BF > 100 or BF < 1/100, might be computationally unstable (a small change in posterior inclusion probability corresponds to a very large change in the Bayes factor). Consider increasing the number of chains and posterior samples to obtain more stable estimates."
 msgstr ""
@@ -1724,7 +1724,7 @@ msgid "Status"
 msgstr ""
 
 msgid "Path Diagram"
-msgstr ""
+msgstr "Diagram Jalur"
 
 msgid "Syntax failed with the following message %1$s."
 msgstr ""

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.95.5\n"
 "POT-Creation-Date: 2025-11-15 02:55\n"
-"PO-Revision-Date: 2026-03-09 00:09+0000\n"
+"PO-Revision-Date: 2026-03-28 01:09+0000\n"
 "Last-Translator: 陳正昌 <chencc99@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
 "projects/jasp/jaspmetaanalysis-r/zh_Hant/>\n"
@@ -39,6 +39,9 @@ msgstr ""
 
 msgid "The model could not be fit. Please check the following: Do you have at least n=2 studies? If the prior is truncated, is it consistent with the data (when most effect sizes are negative, the analysis may not work when the prior is constrained to be postive)?"
 msgstr ""
+"模型無法擬合。請檢查以下事項：是否至少有 n = 2 個研究？若先驗分配為截斷分配，"
+"其是否與資料一致（當多數效果量為負時，若先驗被限制為正值，分析可能無法進行）"
+"？"
 
 msgid "Posterior Estimates per Model"
 msgstr ""
@@ -50,19 +53,19 @@ msgid "Log(BF%1$s%2$s)"
 msgstr ""
 
 msgid "Mean"
-msgstr ""
+msgstr "平均數"
 
 msgid "SD"
-msgstr ""
+msgstr "標準差"
 
 msgid "Lower"
-msgstr ""
+msgstr "下界"
 
 msgid "95%% Credible Interval"
 msgstr ""
 
 msgid "Upper"
-msgstr ""
+msgstr "上界"
 
 msgid "Averaged"
 msgstr ""
@@ -149,13 +152,13 @@ msgid "Posterior mean and 95%% credible interval estimates from the constrained 
 msgstr ""
 
 msgid "Effect Size"
-msgstr ""
+msgstr "效果量"
 
 msgid "Heterogeneity"
 msgstr ""
 
 msgid "Effect size"
-msgstr ""
+msgstr "效果量"
 
 msgid "Density"
 msgstr ""
@@ -545,7 +548,7 @@ msgid "Residual Funnel Plot"
 msgstr ""
 
 msgid "Model Summary"
-msgstr ""
+msgstr "模型摘要"
 
 msgid "Meta-Regression Summary"
 msgstr ""
@@ -1352,7 +1355,7 @@ msgid "The model should contain at least one predictor or an intercept."
 msgstr ""
 
 msgid "Coefficients"
-msgstr ""
+msgstr "係數"
 
 msgid "At least one predictor needs to be specified."
 msgstr ""
