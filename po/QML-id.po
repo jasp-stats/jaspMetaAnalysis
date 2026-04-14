@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-04-13 23:10+0000\n"
+"PO-Revision-Date: 2026-04-14 16:15+0000\n"
 "Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/id/>\n"
@@ -559,11 +559,11 @@ msgstr "Batas atas:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Heterogeneity (between-study SD)"
-msgstr ""
+msgstr "Heterogenitas (SD antara-studi)"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Inverse gamma"
-msgstr ""
+msgstr "Gamma terbalik"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "shape:"
@@ -571,11 +571,11 @@ msgstr "bentuk:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Half t"
-msgstr ""
+msgstr "Setengah t"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Plot prior(s)"
-msgstr ""
+msgstr "Priori diagram"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Diagnostics"
@@ -587,7 +587,7 @@ msgstr "Diagram"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Casewise diagnostics"
-msgstr ""
+msgstr "Diagnostik sebaliknya"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Statistics"
@@ -599,7 +599,7 @@ msgstr "Interval kepercayaan diri"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Fit measures"
-msgstr ""
+msgstr "Pengukuran sesuai"
 
 msgctxt "PredictionPerformanceData|"
 msgid "Measure"
@@ -607,31 +607,31 @@ msgstr "Mengukur"
 
 msgctxt "PredictionPerformanceData|"
 msgid "C statistic"
-msgstr ""
+msgstr "Statistik C"
 
 msgctxt "PredictionPerformanceData|"
 msgid "C-statistic"
-msgstr ""
+msgstr "Statistik-C"
 
 msgctxt "PredictionPerformanceData|"
 msgid "Standard Error"
-msgstr ""
+msgstr "Galat Standar"
 
 msgctxt "PredictionPerformanceData|"
 msgid "95% CI Lower and Upper Bound"
-msgstr ""
+msgstr "95% CI Batas Bawah dan Atas"
 
 msgctxt "PredictionPerformanceData|"
 msgid "Number of Participants"
-msgstr ""
+msgstr "Jumlah Partisipan"
 
 msgctxt "PredictionPerformanceData|"
 msgid "Number of Observed Events"
-msgstr ""
+msgstr "Jumlah Peristiwa Terobservasi"
 
 msgctxt "PredictionPerformanceData|"
 msgid "Number of Expected Events"
-msgstr ""
+msgstr "Jumlah Peristiwa Terharapkan"
 
 msgctxt "PredictionPerformanceData|"
 msgid "Study Labels"
@@ -643,31 +643,31 @@ msgstr "Inferensi"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Within-study variation"
-msgstr ""
+msgstr "Variasi dalam-studi"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Normal/Log"
-msgstr ""
+msgstr "Normal/Log"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Normal/Identity"
-msgstr ""
+msgstr "Normal/Identitas"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Poisson/Log"
-msgstr ""
+msgstr "Poisson/Log"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Prior and posterior plot"
-msgstr ""
+msgstr "Diagram priori dan posterior"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Forest plot"
-msgstr ""
+msgstr "Diagram hutan"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Labels"
-msgstr ""
+msgstr "Label"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Estimates"
@@ -675,51 +675,51 @@ msgstr "Estimasi"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Column name (lCI)"
-msgstr ""
+msgstr "Nama kolom (lCI)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Column name (uCI)"
-msgstr ""
+msgstr "Nama kolom (uCI)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "C-statistics"
-msgstr ""
+msgstr "Statistik-C"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "C-statistics (lCI)"
-msgstr ""
+msgstr "Statistik-C (lCI)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "C-statistics (uCI)"
-msgstr ""
+msgstr "Statistik-C (uCI)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Funnel plot asymmetry test"
-msgstr ""
+msgstr "Uji asimetri diagram corong"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Egger (unweighted)"
-msgstr ""
+msgstr "Egger (tidak berberat)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Egger (multiplicative overdispersion)"
-msgstr ""
+msgstr "Egger (overdispersi multiplikatif)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Macaskill"
-msgstr ""
+msgstr "Macaskill"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Macaskill (pooled)"
-msgstr ""
+msgstr "Macaskill (terkumpul)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Peters"
-msgstr ""
+msgstr "Peters"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Debray"
-msgstr ""
+msgstr "Debray"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Plot"
@@ -727,19 +727,19 @@ msgstr "Diagram"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "Priors"
-msgstr ""
+msgstr "Priori"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "Normal mean:"
-msgstr ""
+msgstr "Rerata normal:"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "sd:"
-msgstr ""
+msgstr "sd:"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "Uniform"
-msgstr ""
+msgstr "Keseragaman"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "min:"
@@ -767,31 +767,31 @@ msgstr "Efek"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Effect (null)"
-msgstr ""
+msgstr "Efek (null)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Heterogeneity"
-msgstr ""
+msgstr "Heterogenitas"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Heterogeneity (null)"
-msgstr ""
+msgstr "Heterogenitas (null)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Publication bias: PET"
-msgstr ""
+msgstr "Bias publikasi: PET"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Publication bias: PET (null)"
-msgstr ""
+msgstr "Bias publikasi: PET (null)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Publication bias: PEESE"
-msgstr ""
+msgstr "Bias publikasi: PEESE"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Publication bias: PEESE (null)"
-msgstr ""
+msgstr "Bias publikasi: PEESE (null)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Distribution"
@@ -799,55 +799,55 @@ msgstr "Distribusi"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Parameters"
-msgstr ""
+msgstr "Parameter"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Truncation"
-msgstr ""
+msgstr "Trunkasi"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Prior weights"
-msgstr ""
+msgstr "Berat priori"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Normal(μ,σ)"
-msgstr ""
+msgstr "Normal(μ,σ)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Student-t(μ,σ,v)"
-msgstr ""
+msgstr "t-Student(μ,σ,v)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Cauchy(x₀,θ)"
-msgstr ""
+msgstr "Cauchy(x₀,θ)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Gamma(α,β)"
-msgstr ""
+msgstr "Gamma(α,β)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Gamma(k,θ)"
-msgstr ""
+msgstr "Gamma(k,θ)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Inverse-Gamma(α,β)"
-msgstr ""
+msgstr "Gamma-Terbalik(α,β)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Log-Normal(μ,σ)"
-msgstr ""
+msgstr "Normal-Log(μ,σ)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Beta(α,β)"
-msgstr ""
+msgstr "Beta(α,β)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Uniform(a,b)"
-msgstr ""
+msgstr "Keseragaman(a,b)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "Spike(x₀)"
-msgstr ""
+msgstr "Lonjakan(x₀)"
 
 msgctxt "RobustBayesianMetaAnalysisPriors|"
 msgid "None"
@@ -867,43 +867,43 @@ msgstr "Berat"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "Publication bias: selection models"
-msgstr ""
+msgstr "Bias publikasi: model pemilihan"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "Publication bias: selection models (null)"
-msgstr ""
+msgstr "Bias publikasi: model pemilihan (null)"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "Weight function"
-msgstr ""
+msgstr "Fungsi berat"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "Cut-points"
-msgstr ""
+msgstr "Titik-potong"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "Parameters"
-msgstr ""
+msgstr "Parameter"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "Prior weights"
-msgstr ""
+msgstr "Berat priori"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "Two-sided"
-msgstr ""
+msgstr "Dua sisi"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "One-sided"
-msgstr ""
+msgstr "Satu sisi"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "Two-sided (fixed)"
-msgstr ""
+msgstr "Dua sisi (tetap)"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "One-sided (fixed)"
-msgstr ""
+msgstr "Satu sisi (tetap)"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "None"
@@ -911,7 +911,7 @@ msgstr "Tidak ada"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "p-values"
-msgstr ""
+msgstr "nilai-p"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "Weight"
@@ -935,15 +935,15 @@ msgstr "Ukuran Efek"
 
 msgctxt "SelectionModels|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "Galat Standar Ukuran Efek"
 
 msgctxt "SelectionModels|"
 msgid "N"
-msgstr ""
+msgstr "N"
 
 msgctxt "SelectionModels|"
 msgid "P-value (one-sided)"
-msgstr ""
+msgstr "Nilai-P (satu sisi)"
 
 msgctxt "SelectionModels|"
 msgid "Model"
@@ -951,15 +951,15 @@ msgstr "Model"
 
 msgctxt "SelectionModels|"
 msgid "P-value cutoffs"
-msgstr ""
+msgstr "Pemotongan nilai-P"
 
 msgctxt "SelectionModels|"
 msgid "Two-sided selection"
-msgstr ""
+msgstr "Pemilihan dua sisi"
 
 msgctxt "SelectionModels|"
 msgid "Automatically join p-value intervals"
-msgstr ""
+msgstr "Secara otomatis gabung interval nilai-p"
 
 msgctxt "SelectionModels|"
 msgid "Positive"
@@ -979,7 +979,7 @@ msgstr "d cohen"
 
 msgctxt "SelectionModels|"
 msgid "Fisher's z"
-msgstr ""
+msgstr "z Fisher"
 
 msgctxt "SelectionModels|"
 msgid "Inference"
@@ -999,7 +999,7 @@ msgstr "Diagram"
 
 msgctxt "SelectionModels|"
 msgid "Weight Function"
-msgstr ""
+msgstr "Fungsi Berat"
 
 msgctxt "SelectionModels|"
 msgid "Fixed effects"
@@ -1011,11 +1011,11 @@ msgstr "Efek acak"
 
 msgctxt "SelectionModels|"
 msgid "Rescale x-axis"
-msgstr ""
+msgstr "Skalakan ulang sumbu-x"
 
 msgctxt "SelectionModels|"
 msgid "Mean model estimates"
-msgstr ""
+msgstr "Estimasi model rerata"
 
 msgctxt "WaapWls|"
 msgid "Effect sizes & SE"
@@ -1035,7 +1035,7 @@ msgstr "Ukuran Efek"
 
 msgctxt "WaapWls|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "Galat Standar Ukuran Efek"
 
 msgctxt "WaapWls|"
 msgid "Transform correlations to"
@@ -1043,7 +1043,7 @@ msgstr "Transformasikan korelasi ke"
 
 msgctxt "WaapWls|"
 msgid "Fisher's z"
-msgstr ""
+msgstr "z Fisher"
 
 msgctxt "WaapWls|"
 msgid "Cohen's d"
@@ -1059,15 +1059,15 @@ msgstr "Diagram"
 
 msgctxt "WaapWls|"
 msgid "Mean model estimates"
-msgstr ""
+msgstr "Estimasi model rerata"
 
 msgctxt "SelectionModels|"
 msgid "Expected direction of effect sizes"
-msgstr ""
+msgstr "Arahan terharapkan dari ukuran efek"
 
 msgctxt "Description|"
 msgid "Penalized Meta-Analysis"
-msgstr ""
+msgstr "Meta-Analisis Terpenalti"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Effect Size"
@@ -1075,7 +1075,7 @@ msgstr "Ukuran Efek"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr ""
+msgstr "Galat Standar Ukuran Efek"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Method"
@@ -1083,11 +1083,11 @@ msgstr "Metode"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Horseshoe"
-msgstr ""
+msgstr "Ladam"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Lasso"
-msgstr ""
+msgstr "Laso"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Covariates"
@@ -1099,7 +1099,7 @@ msgstr "Faktor"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Clustering"
-msgstr ""
+msgstr "Keklasteran"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Model"
@@ -1111,19 +1111,19 @@ msgstr "Komponen"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Include intercept"
-msgstr ""
+msgstr "Sertakan intersep"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale predictors"
-msgstr ""
+msgstr "Prediktor skala"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Priors"
-msgstr ""
+msgstr "Priori"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Df"
-msgstr ""
+msgstr "Df"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale"
@@ -1131,19 +1131,19 @@ msgstr "Skala"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Df (global)"
-msgstr ""
+msgstr "Df (global)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Df (slab)"
-msgstr ""
+msgstr "Df (slab)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale (global)"
-msgstr ""
+msgstr "Skala (global)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale (slab)"
-msgstr ""
+msgstr "Skala (slab)"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Inference"
@@ -1151,23 +1151,23 @@ msgstr "Kesimpulan"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "I²"
-msgstr ""
+msgstr "I²"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Posterior plots"
-msgstr ""
+msgstr "Diagram priori"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Model terms"
-msgstr ""
+msgstr "Istilah model"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Plotted term"
-msgstr ""
+msgstr "Istilah berdiagram"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "MCMC diagnostics"
-msgstr ""
+msgstr "Diagnostik MCMC"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Horizontal axis"
@@ -1179,19 +1179,19 @@ msgstr "Sumbu vertikal"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Plot type"
-msgstr ""
+msgstr "Jenis Diagram"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Traceplot"
-msgstr ""
+msgstr "Diagram Jejak"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Scatterplot"
-msgstr ""
+msgstr "Diagram Pencaran"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Histogram"
-msgstr ""
+msgstr "Histogram"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Density"
@@ -1223,11 +1223,11 @@ msgstr "Rantai"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Adapt delta"
-msgstr ""
+msgstr "Adaptasi delta"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Maximum treedepth"
-msgstr ""
+msgstr "Kedalaman pohon maksimum"
 
 msgctxt "PetPeese|"
 msgid "Measure"
@@ -1255,15 +1255,15 @@ msgstr "Tabel perkiraan"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Heterogeneity table"
-msgstr ""
+msgstr "Tabel heterogenitas"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Available terms"
-msgstr ""
+msgstr "Istilah tersedia"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Selected terms"
-msgstr ""
+msgstr "Istilah terpilih"
 
 msgctxt "PetPeese|"
 msgid "Sample size"
@@ -1271,63 +1271,63 @@ msgstr "Ukuran sampel"
 
 msgctxt "PetPeese|"
 msgid "Mean estimates table"
-msgstr ""
+msgstr "Tabel estimasi rerata"
 
 msgctxt "PetPeese|"
 msgid "Regression estimates table"
-msgstr ""
+msgstr "Tabel estimasi regresi"
 
 msgctxt "PetPeese|"
 msgid "Regression Estimate"
-msgstr ""
+msgstr "Estimasi Regresi"
 
 msgctxt "PredictionPerformanceData|"
 msgid "O/E Ratio"
-msgstr ""
+msgstr "Rasio O/E"
 
 msgctxt "PredictionPerformanceData|"
 msgid "O/E ratio"
-msgstr ""
+msgstr "Rasio O/E"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Export computed effect size"
-msgstr ""
+msgstr "Ekspor ukuran efek terhitung"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Column name (effect size)"
-msgstr ""
+msgstr "Nama kolom (ukuran efek)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "O/E ratios"
-msgstr ""
+msgstr "Rasio O/E"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "O/E ratios (lCI)"
-msgstr ""
+msgstr "Rasio O/E (lCI)"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "O/E ratios (uCI)"
-msgstr ""
+msgstr "Rasio O/E (uCI)"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "mu: summary estimate (O/E Ratio)"
-msgstr ""
+msgstr "mu: estimasi ringkasan (Rasio O/E)"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "mu: summary estimate (C statistic)"
-msgstr ""
+msgstr "mu: estimasi ringkasan (statistik C)"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "tau: heterogeneity (Between study SD)"
-msgstr ""
+msgstr "tau: heterogenitas (SD antara studi)"
 
 msgctxt "PredictionPerformancePriors|"
 msgid "T"
-msgstr ""
+msgstr "T"
 
 msgctxt "SelectionModels|"
 msgid "P-value frequency table"
-msgstr ""
+msgstr "Tabel frekuensi nilai-P"
 
 msgctxt "SelectionModels|"
 msgid "Mean estimates table"
