@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-04-15 22:09+0000\n"
+"PO-Revision-Date: 2026-04-16 07:37+0000\n"
 "Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/id/>\n"
@@ -327,7 +327,7 @@ msgstr "Estimasi model rerata"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Advanced"
-msgstr "Tingkat Lanjut"
+msgstr "Lanjutan"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Prior model probability"
@@ -367,7 +367,7 @@ msgstr "Pensampelan jembatan"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Inference"
-msgstr "Kesimpulan"
+msgstr "Inferensi"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model"
@@ -411,7 +411,7 @@ msgstr "Ukuran efek tiap studi"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Plots"
-msgstr "Plot"
+msgstr "Diagram"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Forest plot"
@@ -419,11 +419,11 @@ msgstr "Diagram hutan"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Observed"
-msgstr "Diamati"
+msgstr "Terobservasi"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Estimated"
-msgstr "Diperkirakan"
+msgstr "Diestimasi"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Both"
@@ -435,7 +435,7 @@ msgstr "Tampilkan label"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Ordering"
-msgstr "Pemesanan"
+msgstr "Pengurutan"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Year (ascending)"
@@ -531,7 +531,7 @@ msgstr "Normal"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "mean:"
-msgstr "rata-rata:"
+msgstr "rerata:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "std:"
@@ -595,7 +595,7 @@ msgstr "Statistik"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Confidence intervals"
-msgstr "Interval kepercayaan diri"
+msgstr "Interval kepercayaan"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Fit measures"
