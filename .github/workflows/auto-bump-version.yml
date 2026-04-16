@@ -1,0 +1,15 @@
+name: Auto-bump Version on Merge
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  call-bump-workflow:
+    uses: jasp-stats/jasp-actions/.github/workflows/auto-bump-version.yml@v1
+    secrets:
+      BUMP_TOKEN: ${{ secrets.BUMP_TOKEN }}
+    permissions:
+      contents: write
+
