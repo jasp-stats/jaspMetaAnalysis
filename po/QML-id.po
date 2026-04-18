@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-04-17 12:09+0000\n"
-"Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
-"Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
-"jaspmetaanalysis-qml/id/>\n"
-"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.17.1-dev\n"
 "X-Language: id\n"
 "X-Qt-Contexts: true\n"
 
@@ -2033,9 +2027,9 @@ msgid ""
 msgstr ""
 "Berkas CSV berisi matriks jarak untuk struktur efek acak spasial. Baris "
 "pertama dan kolom pertama daru berkas harus berisi nama yang memetakan entri "
-"matriks ke 'Pengidentifikasi Lokasi' (nama tidak dapat dimulai dengan angka)"
-". Tersedia ketika jenis efek acak adalah 'Spasial' dan metrik jarak dimuat "
-"dari berkas."
+"matriks ke 'Pengidentifikasi Lokasi' (nama tidak dapat dimulai dengan "
+"angka). Tersedia ketika jenis efek acak adalah 'Spasial' dan metrik jarak "
+"dimuat dari berkas."
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Correlation matrix file"
@@ -2854,7 +2848,8 @@ msgstr "Corong di bawah H₁"
 
 msgctxt "FunnelPlot|"
 msgid "Estimate or specify the funnel plot under the alternative hypothesis."
-msgstr "Estimasikan atau tentukan diagram corong di bawah hipotesis alternatif."
+msgstr ""
+"Estimasikan atau tentukan diagram corong di bawah hipotesis alternatif."
 
 msgctxt "FunnelPlot|"
 msgid ""
@@ -3009,7 +3004,8 @@ msgstr "Pemetaan Estimasi"
 msgctxt "FunnelPlot|"
 msgid ""
 "Set mapping for labels, colors, and shapes of the effect size estimates."
-msgstr "Atur pemetaan untuk label, warna, dan bentuk dari estimasi ukuran efek."
+msgstr ""
+"Atur pemetaan untuk label, warna, dan bentuk dari estimasi ukuran efek."
 
 msgctxt "FunnelPlot|"
 msgid "Label"
@@ -3141,9 +3137,10 @@ msgid ""
 "unweighted estimation."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Clustering"
-msgstr ""
+msgstr "Keklasteran"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Use clubSandwich"
@@ -3392,9 +3389,10 @@ msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Permutation test"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Type"
-msgstr ""
+msgstr "Jenis"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Select the type of permutation test."
@@ -3512,9 +3510,10 @@ msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Residual funnel"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Estimated Marginal Means"
-msgstr ""
+msgstr "Rerata Margin Terestimasi"
 
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Effect size"
@@ -3556,9 +3555,10 @@ msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Option to test the estimated marginal means against a specific value."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Heterogeneity"
-msgstr ""
+msgstr "Heterogenitas"
 
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid ""
@@ -3579,9 +3579,10 @@ msgid ""
 "squared (𝜏²)."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "𝜏"
-msgstr ""
+msgstr "𝜏"
 
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "𝜏²"
@@ -3609,17 +3610,19 @@ msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Available Components"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Model Terms"
-msgstr ""
+msgstr "Istilah Model"
 
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Variables assigned as model terms in the effect size model."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Include intercept"
-msgstr ""
+msgstr "Sertakan intersep"
 
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Include an intercept in the effect size model."
@@ -3651,13 +3654,15 @@ msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Options for summarizing the meta-analytic results."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Heterogeneity"
-msgstr ""
+msgstr "Heterogenitas"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "𝜏"
-msgstr ""
+msgstr "𝜏"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Include 𝜏, the square root of the estimated between-study variance."
@@ -3671,9 +3676,10 @@ msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Include 𝜏², the estimated between-study variance."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "I²"
-msgstr ""
+msgstr "I²"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid ""
@@ -3771,9 +3777,10 @@ msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Fisher's z to r"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Exponential"
-msgstr ""
+msgstr "Eksponensial"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Log odds to proportions"
@@ -3839,37 +3846,45 @@ msgctxt "PredictionPerformanceInference|"
 msgid "Fixed Effects"
 msgstr "Efek Tetap"
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Maximum Likelihood"
-msgstr ""
+msgstr "Kemungkinan Maksimum"
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Restricted ML"
-msgstr ""
+msgstr "ML Terbatas"
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "DerSimonian-Laird"
-msgstr ""
+msgstr "DerSimonian-Laird"
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Hedges"
-msgstr ""
+msgstr "Hedges"
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Hunter-Schmidt"
-msgstr ""
+msgstr "Hunter-Schmidt"
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Sidik-Jonkman"
-msgstr ""
+msgstr "Sidik-Jonkman"
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Empirical Bayes"
-msgstr ""
+msgstr "Bayes Empiris"
 
+#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Paule-Mandel"
-msgstr ""
+msgstr "Paule-Mandel"
 
 msgctxt "FunnelPlot|"
 msgid ""
@@ -4193,9 +4208,10 @@ msgid ""
 "effect sizes when they are not independent."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Type"
-msgstr ""
+msgstr "Jenis"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Type of variance-covariance matrix input method."
@@ -4454,9 +4470,10 @@ msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Successes Group 2"
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Sample Size Group 1"
-msgstr ""
+msgstr "Grup Ukuran Sampel 1"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Predictors"
@@ -4500,9 +4517,10 @@ msgid ""
 "resulting model assumes that the effect is present."
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Heterogeneity"
-msgstr ""
+msgstr "Heterogenitas"
 
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid ""
@@ -4575,19 +4593,24 @@ msgid ""
 "values larger than 1 lead to less informative priors."
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Show model specification"
-msgstr ""
+msgstr "Tampilkan spesifikasi model"
 
+#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid ""
 "Show the model specification. This is useful for understanding and reporting "
 "the specified model."
 msgstr ""
+"Tampilkan spesifikasi model. Ini berguna untuk memahami dan melaporkan model "
+"yang ditentukan."
 
+#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Prior Distributions (Custom)"
-msgstr ""
+msgstr "Distribusi Priori (Kustom)"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "References"
@@ -4597,14 +4620,16 @@ msgctxt "BayesianMetaAnalysis|"
 msgid "R Packages"
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Variable containing the observed effect sizes."
-msgstr ""
+msgstr "Variabel berisi ukuran efek terobservasi."
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid ""
 "Variable containing the standard errors corresponding to the effect sizes."
-msgstr ""
+msgstr "Variabel berisi galat standar yang sesuai dengan ukuran efek."
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Effect size measure"
@@ -4625,9 +4650,10 @@ msgctxt "BayesianMetaAnalysis|"
 msgid "Standardized mean difference such as Cohen's d, Hedge's g"
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Fisher's z"
-msgstr ""
+msgstr "z Fisher"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Fisher's z transformation of correlation coefficients"
@@ -4702,9 +4728,10 @@ msgid ""
 "resulting model assumes that the effect is present."
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Heterogeneity"
-msgstr ""
+msgstr "Heterogenitas"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid ""
@@ -4783,19 +4810,24 @@ msgid ""
 "values larger than 1 lead to less informative priors."
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Show model specification"
-msgstr ""
+msgstr "Tampilkan spesifikasi model"
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid ""
 "Show the model specification. This is useful for understanding and reporting "
 "the specified model."
 msgstr ""
+"Tampilkan spesifikasi model. Ini berguna untuk memahami dan melaporkan model "
+"yang ditentukan."
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Prior Distributions (Custom)"
-msgstr ""
+msgstr "Distribusi Priori (Kustom)"
 
 msgctxt "BayesianMetaAnalysisDeprecated|"
 msgid "Effect Size"
@@ -4805,9 +4837,10 @@ msgctxt "BayesianMetaAnalysisDeprecated|"
 msgid "Effect Size Standard Error"
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysisDeprecated|"
 msgid "95% CI Lower and Upper Bound"
-msgstr ""
+msgstr "95% CI Batas Bawah dan Atas"
 
 msgctxt "BayesianMetaAnalysisDeprecated|"
 msgid "Study Labels"
@@ -4986,9 +5019,10 @@ msgctxt "BubblePlot|"
 msgid "Adjust the text size of the bubble plot."
 msgstr ""
 
+#, fuzzy
 msgctxt "BubblePlot|"
 msgid "Legend position"
-msgstr ""
+msgstr "Posisi legenda"
 
 msgctxt "BubblePlot|"
 msgid "Set the legend position of the bubble plot."
@@ -4998,21 +5032,25 @@ msgctxt "BubblePlot|"
 msgid "None"
 msgstr "Tidak Ada"
 
+#, fuzzy
 msgctxt "BubblePlot|"
 msgid "Bottom"
-msgstr ""
+msgstr "Bawah"
 
+#, fuzzy
 msgctxt "BubblePlot|"
 msgid "Right"
-msgstr ""
+msgstr "Kanan"
 
+#, fuzzy
 msgctxt "BubblePlot|"
 msgid "Top"
-msgstr ""
+msgstr "Atas"
 
+#, fuzzy
 msgctxt "BubblePlot|"
 msgid "Left"
-msgstr ""
+msgstr "Kiri"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid ""
@@ -5075,17 +5113,19 @@ msgid ""
 "the study-level information panel."
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Left"
-msgstr ""
+msgstr "Kiri"
 
 msgctxt "ForestPlot|"
 msgid "Middle"
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Right"
-msgstr ""
+msgstr "Kanan"
 
 msgctxt "ForestPlot|"
 msgid "Predicted effects"
@@ -5117,9 +5157,10 @@ msgid ""
 "of the study-level information panel."
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Order"
-msgstr ""
+msgstr "Urutan"
 
 msgctxt "ForestPlot|"
 msgid "Order the study-level information panel by a variable."
@@ -5272,9 +5313,10 @@ msgctxt "ForestPlot|"
 msgid "Add meta-analytic model information to the forest plot."
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Heterogeneity"
-msgstr ""
+msgstr "Heterogenitas"
 
 msgctxt "ForestPlot|"
 msgid "Test"
@@ -5290,9 +5332,10 @@ msgctxt "ForestPlot|"
 msgid "Estimate"
 msgstr "Estimasi"
 
+#, fuzzy
 msgctxt "ForestPlot|"
 msgid "𝜏"
-msgstr ""
+msgstr "𝜏"
 
 msgctxt "ForestPlot|"
 msgid ""
@@ -5312,9 +5355,10 @@ msgid ""
 "analysis."
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlot|"
 msgid "I²"
-msgstr ""
+msgstr "I²"
 
 msgctxt "ForestPlot|"
 msgid ""
@@ -5543,9 +5587,10 @@ msgctxt "ForestPlot|"
 msgid "P-value"
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Color"
-msgstr ""
+msgstr "Warna"
 
 msgctxt "ForestPlot|"
 msgid ""
@@ -5661,9 +5706,10 @@ msgid ""
 "and the estimated marginal means output."
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Shape"
-msgstr ""
+msgstr "Bentuk"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Show RoBMA R code"
@@ -5944,9 +5990,10 @@ msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Moderation"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Estimated Marginal Means"
-msgstr ""
+msgstr "Rerata Margin Terestimasi"
 
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid ""
@@ -5999,17 +6046,19 @@ msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Options for summarizing the meta-analytic results."
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Heterogeneity"
-msgstr ""
+msgstr "Heterogenitas"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Summarize the meta-analytic between-study heterogeneity."
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "𝜏"
-msgstr ""
+msgstr "𝜏"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Include 𝜏, the square root of the estimated between-study variance."
@@ -6023,9 +6072,10 @@ msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Include 𝜏², the estimated between-study variance."
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "I²"
-msgstr ""
+msgstr "I²"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "H²"
@@ -6121,9 +6171,10 @@ msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "None"
 msgstr "Tidak Ada"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Exponential"
-msgstr ""
+msgstr "Eksponensial"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Log odds to proportions"
@@ -6225,9 +6276,10 @@ msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Available Components"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Model Terms"
-msgstr ""
+msgstr "Istilah Model"
 
 msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Variables assigned as model terms in the effect size model."
@@ -6261,13 +6313,15 @@ msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Continuous Moderators"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Truncation"
-msgstr ""
+msgstr "Trunkasi"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Prior weights"
-msgstr ""
+msgstr "Berat priori"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Lower"
@@ -6277,53 +6331,64 @@ msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Upper"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Parameters"
-msgstr ""
+msgstr "Parameter"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Distribution"
 msgstr "Distribusi"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Normal(μ,σ)"
-msgstr ""
+msgstr "Normal(μ,σ)"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Student-t(μ,σ,v)"
-msgstr ""
+msgstr "t-Student(μ,σ,v)"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Cauchy(x₀,θ)"
-msgstr ""
+msgstr "Cauchy(x₀,θ)"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Gamma(α,β)"
-msgstr ""
+msgstr "Gamma(α,β)"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Gamma(k,θ)"
-msgstr ""
+msgstr "Gamma(k,θ)"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Inverse-Gamma(α,β)"
-msgstr ""
+msgstr "Gamma-Terbalik(α,β)"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Log-Normal(μ,σ)"
-msgstr ""
+msgstr "Normal-Log(μ,σ)"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Beta(α,β)"
-msgstr ""
+msgstr "Beta(α,β)"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Uniform(a,b)"
-msgstr ""
+msgstr "Keseragaman(a,b)"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Spike(x₀)"
-msgstr ""
+msgstr "Lonjakan(x₀)"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "None"
@@ -6341,9 +6406,10 @@ msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Prior"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Truncation"
-msgstr ""
+msgstr "Trunkasi"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "weights"
@@ -6357,9 +6423,10 @@ msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Lower"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Parameters"
-msgstr ""
+msgstr "Parameter"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Distribution"
@@ -6385,45 +6452,55 @@ msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "None"
 msgstr "Tidak Ada"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Normal(μ,σ)"
-msgstr ""
+msgstr "Normal(μ,σ)"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Student-t(μ,σ,v)"
-msgstr ""
+msgstr "t-Student(μ,σ,v)"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Cauchy(x₀,θ)"
-msgstr ""
+msgstr "Cauchy(x₀,θ)"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Gamma(α,β)"
-msgstr ""
+msgstr "Gamma(α,β)"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Gamma(k,θ)"
-msgstr ""
+msgstr "Gamma(k,θ)"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Inverse-Gamma(α,β)"
-msgstr ""
+msgstr "Gamma-Terbalik(α,β)"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Log-Normal(μ,σ)"
-msgstr ""
+msgstr "Normal-Log(μ,σ)"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Beta(α,β)"
-msgstr ""
+msgstr "Beta(α,β)"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Uniform(a,b)"
-msgstr ""
+msgstr "Keseragaman(a,b)"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Spike(x₀)"
-msgstr ""
+msgstr "Lonjakan(x₀)"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Mean dif."
@@ -6462,9 +6539,10 @@ msgid ""
 "the `Variable name separator` option."
 msgstr ""
 
+#, fuzzy
 msgctxt "MetaAnalyticSem|"
 msgid "Sample Size"
-msgstr ""
+msgstr "Ukuran Sampel"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Variable containing sample sizes for the studies"
@@ -6562,9 +6640,10 @@ msgctxt "MetaAnalyticSem|"
 msgid "Random effects"
 msgstr "Efek acak"
 
+#, fuzzy
 msgctxt "MetaAnalyticSem|"
 msgid "Diagonal"
-msgstr ""
+msgstr "Diagonal"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Symmetric"
@@ -6924,9 +7003,10 @@ msgctxt "Description|"
 msgid "Mantel-Haenszel / Peto (beta)"
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Sample Size Group 2"
-msgstr ""
+msgstr "Grup Ukuran Sampel 2"
 
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid ""
@@ -6950,29 +7030,35 @@ msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Successes Group 2"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Sample Size Group 1"
-msgstr ""
+msgstr "Grup Ukuran Sampel 1"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Sample Size Group 2"
-msgstr ""
+msgstr "Grup Ukuran Sampel 2"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Events Group 1"
-msgstr ""
+msgstr "Grup Peristiwa 1"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Events Group 2"
-msgstr ""
+msgstr "Grup Peristiwa 2"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Person-Time Group 1"
-msgstr ""
+msgstr "Grup Waktu-Orang 1"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Person-Time Group 2"
-msgstr ""
+msgstr "Grup Waktu-Orang 2"
 
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Method"
@@ -7026,11 +7112,14 @@ msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Study Labels"
 msgstr "Label Studi"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid ""
 "Variable containing labels for the studies. Used for labeling outputs and "
 "plots."
 msgstr ""
+"Variabel berisi label untuk studi. Digunakan untuk melabeli luaran dan "
+"diagram."
 
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Subgroup"
@@ -7077,41 +7166,49 @@ msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "Options for handling zero frequencies in the data."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "Add"
-msgstr ""
+msgstr "Tambahkan"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "To"
-msgstr ""
+msgstr "Ke"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "All"
-msgstr ""
+msgstr "Semua"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "Only zero"
-msgstr ""
+msgstr "Hanya nol"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "If any zero"
-msgstr ""
+msgstr "Jika ada nol"
 
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "None"
 msgstr "Tidak Ada"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "Drop studies with no cases/events"
-msgstr ""
+msgstr "Hapus studi yang tidak ada kasus/peristiwa"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "Yes"
-msgstr ""
+msgstr "Ya"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "No"
-msgstr ""
+msgstr "Tidak"
 
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "Continuity correction"
@@ -7132,6 +7229,7 @@ msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Bayesian Model Averaging"
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid ""
 "Specify which components should be included Bayesian model averaging. If "
@@ -7141,11 +7239,18 @@ msgid ""
 "test is not conducted). The displayed estimates are averaged across null and "
 "alternative prior distributions of all specified components."
 msgstr ""
+"Tentukan mana komponen harus disertakan perataan model Bayes. Jika dipilih, "
+"distribusi priori di bawah kedua tertampil dan tidak tertampil dari komponen "
+"ditentukan. Ini mengizinkan untuk menguji untuk tertampil vs. tidak "
+"tertampil dari komponen (jika komponen tidak dipilih, uji faktor Bayes tidak "
+"dikonduksikan). Estimasi tertampil dirata-ratakan melintasi distribusi "
+"priori null dan alternatif dari semua komponen yang ditentukan."
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Bayesian Model Averaging"
 msgstr ""
 
+#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid ""
 "Specify which components should be included Bayesian model averaging. If "
@@ -7155,6 +7260,12 @@ msgid ""
 "test is not conducted). The displayed estimates are averaged across null and "
 "alternative prior distributions of all specified components."
 msgstr ""
+"Tentukan mana komponen harus disertakan perataan model Bayes. Jika dipilih, "
+"distribusi priori di bawah kedua tertampil dan tidak tertampil dari komponen "
+"ditentukan. Ini mengizinkan untuk menguji untuk tertampil vs. tidak "
+"tertampil dari komponen (jika komponen tidak dipilih, uji faktor Bayes tidak "
+"dikonduksikan). Estimasi tertampil dirata-ratakan melintasi distribusi "
+"priori null dan alternatif dari semua komponen yang ditentukan."
 
 msgctxt "EffectSizeComputation|"
 msgid "Group 2/Outcome -"
@@ -7306,18 +7417,20 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size"
 msgstr "Ukuran Efek"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Variable containing the observed effect sizes."
-msgstr ""
+msgstr "Variabel berisi ukuran efek terobservasi."
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
 "Variable containing the standard errors corresponding to the effect sizes."
-msgstr ""
+msgstr "Variabel berisi galat standar yang sesuai dengan ukuran efek."
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect size measure"
@@ -7338,9 +7451,10 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Standardized mean difference such as Cohen's d, Hedge's g"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Fisher's z"
-msgstr ""
+msgstr "z Fisher"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Fisher's z transformation of correlation coefficients"
@@ -7441,9 +7555,10 @@ msgid ""
 "resulting model assumes that the effect is present."
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Heterogeneity"
-msgstr ""
+msgstr "Heterogenitas"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
