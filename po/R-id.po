@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.95.5\n"
 "POT-Creation-Date: 2025-11-15 02:55\n"
-"PO-Revision-Date: 2026-04-11 03:26+0000\n"
+"PO-Revision-Date: 2026-04-16 07:37+0000\n"
 "Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/id/>\n"
@@ -11,43 +11,47 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 5.17.1-dev\n"
 
 msgid "There must be at least one observation in each group."
 msgstr ""
 
 msgid "The prior lower bound is not smaller than the upper bound."
-msgstr ""
+msgstr "Batas bawah priori tidak kecil dari batas atas."
 
 msgid "Your prior contains negative values."
-msgstr ""
+msgstr "Priori Anda berisi nilai negatif."
 
 msgid "Your prior contains positive values."
-msgstr ""
+msgstr "Priori Anda berisi nilai positif."
 
 msgid "No positive numbers found in %s"
-msgstr ""
+msgstr "Tidak ditemukan angka positif di %s"
 
 msgid "No negative numbers found in %s"
-msgstr ""
+msgstr "Tidak ditemukan bilangan negatif di %s"
 
 msgid "The 95%% CI Lower Bound must be smaller than the Upper Bound."
-msgstr ""
+msgstr "Batas Bawah 95%% CI harus lebih kecil dari Batas Atas."
 
 msgid "You cannot set all the prior model probabilties to zero."
-msgstr ""
+msgstr "Anda tidak dapat mengatur semua probabilitas model priori ke nol."
 
 msgid "The model could not be fit. Please check the following: Do you have at least n=2 studies? If the prior is truncated, is it consistent with the data (when most effect sizes are negative, the analysis may not work when the prior is constrained to be postive)?"
 msgstr ""
+"Model tidak dapat disesuaikan. Silakan periksa berikut: Apakah Anda memiliki "
+"setidaknya n=2 studi? Jika priori ditrunkasi, apakah itu konsisten dengan "
+"data (ketika sebagian besar ukuran efek adalah negatif, analisis mungkin "
+"tidak bekerja ketika priori dibatasi menjadi negatif)?"
 
 msgid "Posterior Estimates per Model"
-msgstr ""
+msgstr "Estimasi Posterior per Model"
 
 msgid "BF%1$s%2$s"
-msgstr ""
+msgstr "BF%1$s%2$s"
 
 msgid "Log(BF%1$s%2$s)"
-msgstr ""
+msgstr "Log(BF%1$s%2$s)"
 
 msgid "Mean"
 msgstr "Rerata"
@@ -65,55 +69,79 @@ msgid "Upper"
 msgstr "Atas"
 
 msgid "Averaged"
-msgstr ""
+msgstr "Direrata"
 
 msgid "Fixed effects"
-msgstr ""
+msgstr "Efek tetap"
 
 msgid "Random effects"
-msgstr ""
+msgstr "Efek acak"
 
 msgid "Ordered effects"
-msgstr ""
+msgstr "Efek terurut"
 
 msgid "%1$s and %2$s are the group-level effect size and standard deviation, respectively."
 msgstr ""
+"%1$s dan %2$s adalah ukuran efek tingkat grup dan deviasi standar, masing-"
+"masing."
 
 msgid "%s is the group-level effect size."
-msgstr ""
+msgstr "%s adalah ukuran efek tingkat grup."
 
 msgid "Bayes factor of the random effects H%1$s over the fixed effects H%1$s."
-msgstr ""
+msgstr "Faktor Bayes dari efek acak H%1$s di atas efek tetap H%1$s."
 
 msgid "Posterior estimates are based on the models that assume an effect to be present. The Bayes factor is based on all four models: fixed effects H%2$s & random effects H%2$s over the fixed effects H%1$s & random effects H%1$s."
 msgstr ""
+"Estimasi posterior berdasarkan model yang mengasumsikan efek untuk "
+"ditampilkan. Faktor Bayes berdasarkan semua empat model: efek tetap H%2$s & "
+"efek acak H%2$s di atas efek tetap H%1$s & efek acak H%1$s."
 
 msgid "Model averaged posterior estimates for %3$s are not yet available, but will be added in the future. The Bayes factor is based on all four models: random effects H%1$s & H%2$s over the fixed effects H%1$s & H%2$s."
 msgstr ""
+"Estimasi posterior direrata model untuk %3$s belum tersedia, tetapi akan "
+"ditambahkan di masa depan. Faktor Bayes berdasarkan semua empat model: efek "
+"acak H%1$s & H%2$s di atas efek tetap H%1$s & H%2$s."
 
 msgid "Bayes factor of the (unconstrained/constrained) random effects H%1$s over the fixed effects H%1$s."
 msgstr ""
+"Faktor Bayes dari efek acak (tidak terbatas/terbatas) H%1$s di atas efek "
+"tetap H%1$s."
 
 msgid "Bayes factor of the fixed effects H%1$s over the random effects H%1$s."
-msgstr ""
+msgstr "Faktor Bayes dari efek tetap H%1$s di atas efek acak H%1$s."
 
 msgid "Model averaged posterior estimates are based on the models that assume an effect to be present. The Bayes factor is based on all four models: fixed effects H%1$s & random effects H%1$s over the fixed effects H%2$s & random effects H%2$s."
 msgstr ""
+"Estimasi posterior direrata model berdasarkan model yang mengasumsikan efek "
+"untuk ditampilkan. Faktor Bayes berdasarkan semua empat model: efek tetap "
+"H%1$s & efek acak H%1$s di atas eefek tetap H%2$s & efek acak H%2$s."
 
 msgid "Model averaged posterior estimates for %3$s are not yet available, but will be added in the future. The Bayes factor is based on all four models: fixed effects H%1$s & H%2$s over the random effects H%1$s & H%2$s."
 msgstr ""
+"Estimasi posterior direrata model untuk %3$s belum tersedia, tetapi akan "
+"ditambahkan di masa depan. Faktor Bayes berdasarkan semua empat model: efek "
+"tetap H%1$s & H%2$s di atas efek acak H%1$s & H%2$s."
 
 msgid "Bayes factor of the fixed effects H%1$s over the (unconstrained/constrained) random effects H%1$s."
 msgstr ""
+"Faktor Bayes dari efek tetap H%1$s di atas efek acak (tidak terbatas/"
+"terbatas) H%1$s."
 
 msgid "Bayes factor of the ordered effects H%1$s over the fixed effects H%2$s. The Bayes factor for the ordered effects H%1$s versus the unconstrained (random) effects H%1$s model is %3$.3f."
 msgstr ""
+"Faktor Bayes dari efek terurut H%1$s di atas efek tetap H%2$s. Faktor Bayes "
+"untuk model efek terurut H%1$s versus efek (acak) tidak terbatas H%1$s "
+"adalah %3$.3f."
 
 msgid "Bayes factor of the fixed effects H%2$s over the ordered effects H%1$s. The Bayes factor for the unconstrained (random) effects H%1$s versus the ordered effects H%1$s model is %3$.3f."
 msgstr ""
+"Faktor Bayes dari efek tetap H%2$s di atas efek terurut H%1$s. Faktor Bayes "
+"untuk model efek (acak) tidak terbatas H%1$s versus efek terurut H%1$s "
+"adalah %3$.3f."
 
 msgid "Model Probabilities"
-msgstr ""
+msgstr "Probabilitas Model"
 
 msgid "Prior"
 msgstr "Priori"
@@ -122,37 +150,40 @@ msgid "Posterior"
 msgstr "Posterior"
 
 msgid "Fixed H%s"
-msgstr ""
+msgstr "H%s tetap"
 
 msgid "Random H%s"
-msgstr ""
+msgstr "H%s acak"
 
 msgid "Ordered H%s"
-msgstr ""
+msgstr "H%s terurut"
 
 msgid "Effect Sizes per Study"
-msgstr ""
+msgstr "Ukuran efek per Studi"
 
 msgid "Observed"
 msgstr "Terobservasi"
 
 msgid "Estimated"
-msgstr ""
+msgstr "Diestimasi"
 
 msgid "Study"
-msgstr ""
+msgstr "Studi"
 
 msgid "Posterior mean and 95%% credible interval estimates from the random effects model."
 msgstr ""
+"Rerata posterior dan 95%% estimasi interval kredibel dari model efek acak."
 
 msgid "Posterior mean and 95%% credible interval estimates from the constrained random effects model."
 msgstr ""
+"Rerata posterior dan 95%% estimasi interval kredibel dari model efek acak "
+"terbatas."
 
 msgid "Effect Size"
 msgstr "Ukuran Efek"
 
 msgid "Heterogeneity"
-msgstr ""
+msgstr "Heterogenitas"
 
 msgid "Effect size"
 msgstr "Ukuran efek"
@@ -161,64 +192,64 @@ msgid "Density"
 msgstr "Kepadatan"
 
 msgid "Prior and Posteriors"
-msgstr ""
+msgstr "Priori dan Posterior"
 
 msgid "Fixed H"
-msgstr ""
+msgstr "H Tetap"
 
 msgid "Random H"
-msgstr ""
+msgstr "H Acak"
 
 msgid "Averaged H"
-msgstr ""
+msgstr "H Direrata"
 
 msgid "Prior H"
-msgstr ""
+msgstr "H Priori"
 
 msgid "Ordered H"
-msgstr ""
+msgstr "H Terurut"
 
 msgid "Forest Plot"
-msgstr ""
+msgstr "Diagram Hutan"
 
 msgid "Observed study effects"
-msgstr ""
+msgstr "Efek studi terobservasi"
 
 msgid "Estimated study effects"
-msgstr ""
+msgstr "Efek studi terestimasi"
 
 msgid "Observed and estimated study effects"
-msgstr ""
+msgstr "Efek studi terobservasi dan terestimasi"
 
 msgid "Cumulative forest plot"
-msgstr ""
+msgstr "Diagram hutan kumulatif"
 
 msgid "Overall effect size"
-msgstr ""
+msgstr "Ukuran efek keseluruhan"
 
 msgid "Sequential Analysis"
 msgstr "Analisis Sekuensial"
 
 msgid "Bayes factors effect size"
-msgstr ""
+msgstr "Ukuran efek faktor Bayes"
 
 msgid "Bayes factors heterogeneity"
-msgstr ""
+msgstr "Heterogenitas faktor Bayes"
 
 msgid "Posterior model probabilities"
-msgstr ""
+msgstr "Probabilitas model posterior"
 
 msgid "Evidence for random effects"
-msgstr ""
+msgstr "Bukti untuk efek acak"
 
 msgid "Evidence for fixed effects"
-msgstr ""
+msgstr "Bukti untuk efek tetap"
 
 msgid "random"
-msgstr ""
+msgstr "acak"
 
 msgid "fixed"
-msgstr ""
+msgstr "tetap"
 
 msgid "Anecdotal"
 msgstr "Anekdot"
@@ -230,22 +261,24 @@ msgid "Strong"
 msgstr "Kuat"
 
 msgid "Very Strong"
-msgstr "Sangat Kuat"
+msgstr "Lebih Kuat"
 
 msgid "Extreme"
 msgstr "Ekstrim"
 
 msgid "Evidence for %s:"
-msgstr ""
+msgstr "Bukti untuk %s:"
 
 msgid "Plotting failed: The Bayes factors contain infinity."
-msgstr ""
+msgstr "Pendiagraman gagal: Faktor Bayes berisi ketidakterbatasan."
 
 msgid "Studies"
-msgstr ""
+msgstr "Studi"
 
 msgid "Posterior model \n probability"
 msgstr ""
+"Model posterior\n"
+" probabilitas"
 
 msgid "Prior and posterior plot"
 msgstr ""
@@ -353,7 +386,7 @@ msgid "Log Lik."
 msgstr ""
 
 msgid "Deviance"
-msgstr ""
+msgstr "Devians"
 
 msgid "AIC"
 msgstr "AIC"
@@ -473,10 +506,10 @@ msgid "Predictor"
 msgstr ""
 
 msgid "Standardized Residual"
-msgstr ""
+msgstr "Residu Terstandardisasi"
 
 msgid "DFFITS"
-msgstr ""
+msgstr "DFFITS"
 
 msgid "Cook's Distance"
 msgstr "Jarak Cook"
@@ -497,7 +530,7 @@ msgid "Qₑ"
 msgstr ""
 
 msgid "Hat"
-msgstr ""
+msgstr "Hat"
 
 msgid "Weight"
 msgstr "Berat"
@@ -590,7 +623,7 @@ msgid "Correlation Matrix"
 msgstr ""
 
 msgid "Residual Value"
-msgstr ""
+msgstr "Nilai Residu"
 
 msgid "Standard Error"
 msgstr "Galat Standar"
@@ -899,7 +932,7 @@ msgid "Simple / Nested Summary"
 msgstr ""
 
 msgid "Estimates"
-msgstr ""
+msgstr "Estimasi"
 
 msgid "σ²"
 msgstr ""
@@ -1142,7 +1175,7 @@ msgid "The dataset contains missing values: %1$i missing values were removed fro
 msgstr ""
 
 msgid "Funnel Plot"
-msgstr ""
+msgstr "Diagram Corong"
 
 msgid "Funnel plot prediction interval was specified in an incorrect format. Try '(0.90, 0.95, 0.99)'."
 msgstr ""
@@ -1349,7 +1382,7 @@ msgid "Model fit failed with the following message: %1$s."
 msgstr ""
 
 msgid "The model should contain at least one predictor or an intercept."
-msgstr ""
+msgstr "Model harus berisi setidaknya satu prediktor atau intersep."
 
 msgid "Coefficients"
 msgstr "Koefisien"
