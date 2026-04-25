@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-04-19 13:09+0000\n"
-"Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
-"Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
-"jaspmetaanalysis-qml/id/>\n"
-"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.17.1-dev\n"
 "X-Language: id\n"
 "X-Qt-Contexts: true\n"
 
@@ -3485,7 +3479,8 @@ msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid ""
 "Specify the number of permutations to use in the approximate permutation "
 "test."
-msgstr "Tentukan jumlah permutasi yang digunakan dalam uji permutasi perkiraan."
+msgstr ""
+"Tentukan jumlah permutasi yang digunakan dalam uji permutasi perkiraan."
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Extend metafor call"
@@ -3502,8 +3497,8 @@ msgstr ""
 "Argumen tambahan ke panggilan fungsi metafor harus ditentukan sebagai daftar "
 "bernama (panggilan 'list()' dapat dihapus). Mis. 'list(tau2 = 1)' (atau "
 "'tau2 = 1') dapat digunakan untuk memperbaiki heterogenitas antara-studi ke "
-"nilai yang diberikan. Beberapa argumen harus dipisahkan koma, mis. 'list"
-"(tau2 = 1, gamma2 = 0.5)' (atau 'tau2 = 1, gamma2 = 0.5'). Baris baru "
+"nilai yang diberikan. Beberapa argumen harus dipisahkan koma, mis. "
+"'list(tau2 = 1, gamma2 = 0.5)' (atau 'tau2 = 1, gamma2 = 0.5'). Baris baru "
 "diabaikan."
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
@@ -3586,7 +3581,8 @@ msgstr "Kemungkinan profil"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Include a profile likelihood plot for the heterogeneity parameter (τ²)."
-msgstr "Sertakan diagram kemungkinan profil untuk parameter heterogenitas (τ²)."
+msgstr ""
+"Sertakan diagram kemungkinan profil untuk parameter heterogenitas (τ²)."
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Baujat"
@@ -3772,9 +3768,10 @@ msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Include 𝜏, the square root of the estimated between-study variance."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "𝜏²"
-msgstr ""
+msgstr "𝜏²"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Include 𝜏², the estimated between-study variance."
@@ -4160,9 +4157,10 @@ msgid ""
 "completely aribitrary."
 msgstr ""
 
+#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Exact"
-msgstr ""
+msgstr "Tepat"
 
 msgctxt "FunnelPlot|"
 msgid "Use the exact method to calculate the fail-safe N."
@@ -5012,9 +5010,10 @@ msgid ""
 "Variable(s) according to which predictions are split across different plots."
 msgstr ""
 
+#, fuzzy
 msgctxt "BubblePlot|"
 msgid "SD factor covariates"
-msgstr ""
+msgstr "Kovariat faktor SD"
 
 msgctxt "BubblePlot|"
 msgid "Standard deviation cutoff used for binning continuous covariates."
@@ -5443,9 +5442,10 @@ msgid ""
 "multivariate meta-analysis."
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlot|"
 msgid "𝜏²"
-msgstr ""
+msgstr "𝜏²"
 
 msgctxt "ForestPlot|"
 msgid ""
@@ -6105,16 +6105,21 @@ msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Effect size"
 msgstr "Ukuran efek"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid ""
 "Variables selected for computing estimated marginal means in the effect size "
 "model."
 msgstr ""
+"Variabel dipilih untuk menghitung rerata margin terestimasi dalam model "
+"ukuran efek."
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Add adjusted estimate"
-msgstr ""
+msgstr "Tambahkan estimasi yang disesuaikan"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid ""
 "Include the adjusted effect estimate, which accounts for the moderators in "
@@ -6122,6 +6127,10 @@ msgid ""
 "influence of moderators, as opposed to the pooled effect which combines the "
 "estimates across all studies."
 msgstr ""
+"Sertakan estimasi efek yang disesuaikan, yang menghitung untuk moderator "
+"dalam model meta-regresi. Ini memberikan ukuran efek yang disesuaikan untuk "
+"influens moderator, berbeda dengan efek kumpulan yang mengombinasikan "
+"estimasi yang melintasi semua studi."
 
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Test against 0"
@@ -6163,9 +6172,10 @@ msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Include 𝜏, the square root of the estimated between-study variance."
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "𝜏²"
-msgstr ""
+msgstr "𝜏²"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Include 𝜏², the estimated between-study variance."
@@ -6357,32 +6367,40 @@ msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Model"
 msgstr "Model"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid ""
 "Options for specifing the effect size and heterogeneity models based on the "
 "included predictors, including model terms, intercepts, and link functions."
 msgstr ""
+"Opsi untuk menentukan ukuran efek dan model heterogenitas berdasarkan "
+"prediktor yang disertakan, mencakupi istilah model, intersep, dan fungsi "
+"tautan."
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Effect size model"
-msgstr ""
+msgstr "Model ukuran efek"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Specify the effect size model."
-msgstr ""
+msgstr "Tentukan model ukuran efek."
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Available Components"
-msgstr ""
+msgstr "Komponen Tersedia"
 
 #, fuzzy
 msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Model Terms"
 msgstr "Istilah Model"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Variables assigned as model terms in the effect size model."
-msgstr ""
+msgstr "Variabel ditugaskan sebagai istilah model dalam model ukuran efek."
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Prior and Posterior Plots"
@@ -7235,14 +7253,18 @@ msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "Advanced options for the meta-analysis."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "Show metafor R code"
-msgstr ""
+msgstr "Tampilkan kode R metafot"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid ""
 "Display the underlying R code used by the metafor package to fit the model."
 msgstr ""
+"Tampilkan kode R yang mendasari digunakan oleh paket metafor untuk "
+"menyesuaikan model."
 
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "Include full dataset in subgroup analysis"
