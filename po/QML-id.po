@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-04-29 19:45+0000\n"
-"Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
-"Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
-"jaspmetaanalysis-qml/id/>\n"
-"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.17.1-dev\n"
 "X-Language: id\n"
 "X-Qt-Contexts: true\n"
 
@@ -5188,7 +5182,8 @@ msgstr "Garis Terpisah"
 msgctxt "BubblePlot|"
 msgid ""
 "Variable(s) according to which predictions are split across different lines."
-msgstr "Variabel menurut mana prediksi yang dipisahkan melintasi garis berbeda."
+msgstr ""
+"Variabel menurut mana prediksi yang dipisahkan melintasi garis berbeda."
 
 msgctxt "BubblePlot|"
 msgid "Separate Plots"
@@ -5502,9 +5497,10 @@ msgid ""
 "whiskers corresponding to the min and max values."
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Bubbles"
-msgstr ""
+msgstr "Gelembung"
 
 msgctxt "ForestPlot|"
 msgid ""
@@ -5513,13 +5509,15 @@ msgid ""
 "total sample size for binomial models)."
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Relative size"
-msgstr ""
+msgstr "Ukuran relatif"
 
+#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Set the relative size of the observed estimates."
-msgstr ""
+msgstr "Atur ukuran relatif dari estimasi terobservasi."
 
 msgctxt "ForestPlot|"
 msgid "Estimated marginal means"
@@ -5531,17 +5529,19 @@ msgid ""
 "effect size meta-regression is specified."
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Model Variables"
-msgstr ""
+msgstr "Variabel Model"
 
 msgctxt "ForestPlot|"
 msgid "Select variables for which the estimated marginal means are visualized."
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Term tests"
-msgstr ""
+msgstr "Uji istilah"
 
 msgctxt "ForestPlot|"
 msgid ""
@@ -5650,9 +5650,10 @@ msgid ""
 "for multilevel/multivariate and binomial meta-analysis."
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlot|"
 msgid "H²"
-msgstr ""
+msgstr "H²"
 
 msgctxt "ForestPlot|"
 msgid ""
@@ -5743,13 +5744,15 @@ msgctxt "ForestPlot|"
 msgid "Settings"
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlot|"
 msgid "General"
-msgstr ""
+msgstr "Umum"
 
+#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Prediction intervals"
-msgstr ""
+msgstr "Interval prediksi"
 
 msgctxt "ForestPlot|"
 msgid ""
@@ -5795,9 +5798,10 @@ msgid ""
 "sections."
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Subgroup"
-msgstr ""
+msgstr "Subgrup"
 
 msgctxt "ForestPlot|"
 msgid ""
@@ -6001,15 +6005,19 @@ msgid ""
 "Display the underlying R code used by the RoBMA package to fit the model."
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Include full dataset in subgroup analysis"
-msgstr ""
+msgstr "Sertakan rangkaian data lengkap dalam analisis subgrup"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid ""
 "Include the full dataset output in the subgroup analysis. This option is "
 "only available when the subgroup analysis is selected."
 msgstr ""
+"Sertakan luaran rangkaian data lengkap dalam analisis subgrup. Opsi ini "
+"hanya tersedia ketika analisis subgrup dipilih."
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Shorten prior names"
@@ -6023,9 +6031,10 @@ msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Medical subfield"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "General"
-msgstr ""
+msgstr "Umum"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Acute Respiratory Infections"
@@ -6267,9 +6276,10 @@ msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Effect size"
 msgstr "Ukuran efek"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Moderation"
-msgstr ""
+msgstr "Moderasi"
 
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Estimated Marginal Means"
@@ -6328,9 +6338,10 @@ msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Statistics"
 msgstr "Statistik"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Options for summarizing the meta-analytic results."
-msgstr ""
+msgstr "Opsi untuk meringkaskan hasil meta-analisis."
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Heterogeneity"
@@ -6344,40 +6355,47 @@ msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "𝜏"
 msgstr "𝜏"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Include 𝜏, the square root of the estimated between-study variance."
-msgstr ""
+msgstr "Sertakan 𝜏, akar kuadrat dari varians antar-studi terestimasi."
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "𝜏²"
 msgstr "𝜏²"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Include 𝜏², the estimated between-study variance."
-msgstr ""
+msgstr "Sertakan 𝜏², varians antar-studi terestimasi."
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "I²"
 msgstr "I²"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "H²"
-msgstr ""
+msgstr "H²"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Meta-Regression"
-msgstr ""
+msgstr "Meta-Regresi"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid ""
 "Create summaries of the meta-regression. Available when predictors are "
 "included."
-msgstr ""
+msgstr "Buat ringkasan meta-regresi. Tersedia ketika prediktor disertakan."
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Term tests"
-msgstr ""
+msgstr "Uji istilah"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid ""
 "Include tests for each term in the meta-regression model. The null "
@@ -6385,10 +6403,14 @@ msgid ""
 "variable are equal or that there is no linear association between the effect "
 "size and the continuous variable)."
 msgstr ""
+"Sertakan uji untuk setiap istilah dalam model meta-regresi. Hipotesis null "
+"menyatakan bahwa ukuran efek di semua tingkat dari variabel kategorikal sama "
+"atau tidak ada asosiasi linear antara ukuran efek dan variabel kontinu)."
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Coefficient estimates"
-msgstr ""
+msgstr "Estimasi koefisien"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid ""
@@ -6420,13 +6442,15 @@ msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Include credible intervals in the tabular output."
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Prediction intervals"
-msgstr ""
+msgstr "Interval prediksi"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Include prediction intervals in the tabular output."
-msgstr ""
+msgstr "Sertakan interval prediksi dalam luaran tabuler."
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Conditional estimates"
@@ -6438,10 +6462,12 @@ msgid ""
 "corresponding model component/parameter, in the tabular output and figures."
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Transform effect size"
-msgstr ""
+msgstr "Transformasikan ukuran efek"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid ""
 "Select a transformation to apply to the effect size estimates in the output. "
@@ -6449,6 +6475,10 @@ msgid ""
 "'Estimated Marginal Means Table', 'Forest Plot', and  the 'Bubble Plot'. The "
 "'Meta-Regression Coeffient Estimates' are not transformed."
 msgstr ""
+"Pilih transformasi untuk menerapkan estimasi ukuran efek dalam luaran. "
+"Transformasi ini menerapkan ke 'Tabel Estimasi Meta-Analisis', 'Tabel Rerata "
+"Margin Terestimasi', 'Diagram Hutan', dan  'Diagram Gelembung'. 'Estimasi "
+"Koefisien Meta-Regresi' tidak ditransformasikan."
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "None"
@@ -6458,53 +6488,65 @@ msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Exponential"
 msgstr "Eksponensial"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Log odds to proportions"
-msgstr ""
+msgstr "Log ganjil ke proporsi"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Log odds to SMD (normal)"
-msgstr ""
+msgstr "Log ganjil ke SMD (normal)"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Log odds to SMD (logistic)"
-msgstr ""
+msgstr "Log ganjil ke SMD (logistik)"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "SMD to log odds (normal)"
-msgstr ""
+msgstr "SMD ke log ganjil (normal)"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "SMD to log odds (logistic)"
-msgstr ""
+msgstr "SMD ke log ganjil (logistik)"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "SMD to Cohen's U₁"
-msgstr ""
+msgstr "SMD ke U₁ Cohen"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "SMD to Cohen's U₂"
-msgstr ""
+msgstr "SMD ke U₂ Cohen"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "SMD to Cohen's U₃"
-msgstr ""
+msgstr "SMD ke U₃ Cohen"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Fisher's z to r"
-msgstr ""
+msgstr "z ke r Fisher"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Z to R²"
-msgstr ""
+msgstr "Z ke R²"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Hakstian & Whalen inverse α"
-msgstr ""
+msgstr "Hakstian & Whalen invers α"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Bonett inverse α"
-msgstr ""
+msgstr "Bonett invers α"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Publication Bias Adjustment"
@@ -6577,9 +6619,10 @@ msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Effect size"
 msgstr "Ukuran efek"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Moderation"
-msgstr ""
+msgstr "Moderasi"
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Estimated marginal means"
@@ -7270,21 +7313,25 @@ msgid ""
 "of frequencies / time to event outcomes."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "References"
-msgstr ""
+msgstr "Referensi"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "R Packages"
-msgstr ""
+msgstr "Paket R"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Successes Group 1"
-msgstr ""
+msgstr "Grup Sukses 1"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Successes Group 2"
-msgstr ""
+msgstr "Grup Sukses 2"
 
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Sample Size Group 1"
@@ -7330,25 +7377,29 @@ msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Peto"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Effect size measure"
-msgstr ""
+msgstr "Pengukuran ukuran efek"
 
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Select the effect size measure to be used in the meta-analysis."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Log odds ratio"
-msgstr ""
+msgstr "Rasio ganjil log"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Log risk ratio"
-msgstr ""
+msgstr "Rasio risiko log"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Risk difference"
-msgstr ""
+msgstr "Perbedaan risiko"
 
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Log incidence rate ratio"
@@ -7370,15 +7421,19 @@ msgstr ""
 "Variabel berisi label untuk studi. Digunakan untuk melabeli luaran dan "
 "diagram."
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Subgroup"
-msgstr ""
+msgstr "Subgrup"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid ""
 "Variable indicating subgroup stratification. For each subgroup, an "
 "independent model is fitted to the corresponding data set subset."
 msgstr ""
+"Variabel mengindikasikan stratifikasi subgrup. Untuk setiap subgrup, model "
+"independen disesuaikan dengan subrangkaian rangkaian data yang sesuai."
 
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "Advanced"
@@ -7399,15 +7454,19 @@ msgstr ""
 "Tampilkan kode R yang mendasari digunakan oleh paket metafor untuk "
 "menyesuaikan model."
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "Include full dataset in subgroup analysis"
-msgstr ""
+msgstr "Sertakan rangkaian data lengkap dalam analisis subgrup"
 
+#, fuzzy
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid ""
 "Include the full dataset output in the subgroup analysis. This option is "
 "only available when the subgroup analysis is selected."
 msgstr ""
+"Sertakan luaran rangkaian data lengkap dalam analisis subgrup. Opsi ini "
+"hanya tersedia ketika analisis subgrup dipilih."
 
 msgctxt "ClassicalMantelHaenszelPetoAdvanced|"
 msgid "Handling of zero frequencies"
@@ -7512,17 +7571,19 @@ msgctxt "EffectSizeComputation|"
 msgid "Group 2/Outcome -"
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Model Variables"
-msgstr ""
+msgstr "Variabel Model"
 
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Selected Variables"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Model Variables"
-msgstr ""
+msgstr "Variabel Model"
 
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Selected Variables"
@@ -7646,13 +7707,15 @@ msgid ""
 "detailed introduction to the module."
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "References"
-msgstr ""
+msgstr "Referensi"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "R Packages"
-msgstr ""
+msgstr "Paket R"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size"
@@ -7671,73 +7734,94 @@ msgid ""
 "Variable containing the standard errors corresponding to the effect sizes."
 msgstr "Variabel berisi galat standar yang sesuai dengan ukuran efek."
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect size measure"
-msgstr ""
+msgstr "Pengukuran ukuran efek"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
 "Effect size measure supplied as the 'Effect Size'. This is an important "
 "setting as it determines the defaul prior distributions and the model "
 "fitting transformation."
 msgstr ""
+"Pengukuran ukuran efek disediakan sebagai 'Ukuran Efek'. Ini pengaturan yang "
+"penting karena itu menentukan distribusi priori bawaan dan transformasi "
+"penyesuaian model."
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Standardized mean difference"
-msgstr ""
+msgstr "Perbedaan rerata terstandardisasi"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Standardized mean difference such as Cohen's d, Hedge's g"
-msgstr ""
+msgstr "Perbedaan rerata terstandardisasi seperti d Cohen, g Hedge"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Fisher's z"
 msgstr "z Fisher"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Fisher's z transformation of correlation coefficients"
-msgstr ""
+msgstr "Transformasi z Fisher dari koefisien korelasi"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Log odds ratio"
-msgstr ""
+msgstr "Rasio ganjil log"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Log risk ratio"
-msgstr ""
+msgstr "Rasio risiko log"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Log hazard ratio"
-msgstr ""
+msgstr "Rasio bahaya log"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Risk difference"
-msgstr ""
+msgstr "Perbedaan risiko"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "General"
-msgstr ""
+msgstr "Umum"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
 "General effect size that does not correspond to any of the measures above. "
 "Please, be careful when specifying the prior distributions as no sensible "
 "defaults are available."
 msgstr ""
+"Ukuran efek umum yang tidak sesuai dengan pengukuran apa pun di atas. "
+"Silakan, hati-hatilah ketika menentukan distribusi priori sebagai tidak ada "
+"bawaan sensibel tersedia."
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Predictors"
 msgstr "Prediktor"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
 "Variables to include as predictors (moderators) in the meta-regression "
 "model. See the 'Model' section for the meta-regression specification details."
 msgstr ""
+"Variabel yang disertakan sebagai prediktor (moderator) dalam molde meta-"
+"regresi. Lihat bagian 'Model' untuk rincian spesifikasi meta-regresi."
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Study Level (Multilevel)"
-msgstr ""
+msgstr "Tingkat Studi (Multitingkat)"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
@@ -7753,15 +7837,19 @@ msgstr ""
 "antara ukuran efek dalam setiap studi. Perlu diperhatikan bahwa ini adalah "
 "fitur eksperimental yang perlu secara manual diaktifkan di bagian 'Lanjutan'."
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Subgroup"
-msgstr ""
+msgstr "Subgrup"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
 "Variable indicating subgroup stratification. For each subgroup, an "
 "independent model is fitted to the corresponding data set subset."
 msgstr ""
+"Variabel mengindikasikan stratifikasi subgrup. Untuk setiap subgrup, model "
+"independen disesuaikan dengan subrangkaian rangkaian data yang sesuai."
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Bayesian Model Averaging"
@@ -7787,31 +7875,41 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect size"
 msgstr "Ukuran efek"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
 "Average over the presence vs. absence of the effect. If unspecified, the "
 "resulting model assumes that the effect is present."
 msgstr ""
+"Rata-rata antara ada vs. tidak ada efek. Jika tidak ditentukan, model yang "
+"dihasilkan mengasumsikan bahwa efek ada."
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Heterogeneity"
 msgstr "Heterogenitas"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
 "Average over the presence vs. absence of heterogeneity. If unspecified, the "
 "resulting model assumes that heterogeneity is present."
 msgstr ""
+"Rata-rata antara ada vs. tidak ada heterogenitas. Jika tidak ditentukan, "
+"model yang dihasilkan mengasumsikan bahwa heterogenitas ada."
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Moderation"
-msgstr ""
+msgstr "Moderasi"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
 "Average over the presence vs. absence of moderators. If unspecified, the "
 "resulting model assumes that all moderators models are present."
 msgstr ""
+"Rata-rata antara ada vs. tidak ada moderator. Jika tidak ditentukan, model "
+"yang dihasilkan mengasumsikan bahwa semua model moderator ada."
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Publication bias"
@@ -7823,66 +7921,88 @@ msgid ""
 "the resulting model assumes that publication bias is present."
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Prior Distributions"
-msgstr ""
+msgstr "Distribusi Priori"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect size and heterogeneity"
-msgstr ""
+msgstr "Ukuran efek dan heterogenitas"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
 "Specify the type of prior distributions for the effect size and "
 "heterogeneity."
-msgstr ""
+msgstr "Tentukan jenis distribusi priori untuk ukuran efek dan heterogenitas."
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Default"
-msgstr ""
+msgstr "Bawaan"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
 "Use default prior distributions for the effect size and heterogeneity based "
 "on Bartoš et al. (2022)."
 msgstr ""
+"Gunakan distribusi priori bawaan untuk ukuran efek dan heterogenitas "
+"berdasarkan Bartoš et al. (2022)."
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Medicine"
-msgstr ""
+msgstr "Medisin"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
 "Use prior distributions based on the Cochrane Database of Systematic Reviews "
 "developed by Bartoš et al. (2021)"
 msgstr ""
+"Gunakan distribusi priori berdasarkan Basis Data Cochrane dari Tinjauan "
+"Sistematis dikembangkan oleh Bartoš et al. (2021)"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Custom"
 msgstr "Kustom"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
 "Use custom prior distributions. This option allows you to specify a custom "
 "model ensemble for the effect size and heterogeneity prior distributions."
 msgstr ""
+"Gunakan distribusi priori kustom. Opsi ini mengizinkan Anda untuk menentukan "
+"ansambel model kustom untuk ukuran efek dan distribusi priori heterogenitas."
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
 "Use prior distributions based on the Cochrane Database of Systematic Reviews "
 "developed by Bartoš et al. (2023)."
 msgstr ""
+"Gunakan distribusi priori berdasarkan Basis Data Cochrane dari Tinjauan "
+"Sistematis dikembangkan oleh Bartoš et al. (2023)."
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Scale"
 msgstr "Skala"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
 "Setting value different than 1 re-scales the pre-specified prior "
 "distributions. Values smaller than 1 lead to more informative priors, while "
 "values larger than 1 lead to less informative priors."
 msgstr ""
+"Mengatur nilai berbeda dari 1 menskalakan kembali distribusi priori pra-"
+"tentukan. Nilai lebih kecil dari 1 menyebabkan lebih banyak priori "
+"informatif, sementara nilai lebih besar dari 1 menyebabkan lebih sedikit "
+"priori informatif."
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Publication bias adjustment"
