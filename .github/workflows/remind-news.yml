@@ -1,7 +1,7 @@
 name: Remind NEWS.md Update
 
 on:
-  pull_request:
+  pull_request_target:
     types: [opened] # Only run once when the PR is first created
 
 jobs:
