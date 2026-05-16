@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.95.5\n"
 "POT-Creation-Date: 2025-11-15 02:55\n"
-"PO-Revision-Date: 2026-04-16 07:37+0000\n"
-"Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
+"PO-Revision-Date: 2026-05-17 06:11+0000\n"
+"Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/id/>\n"
 "Language: id\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.17.1-dev\n"
+"X-Generator: Weblate 2026.6.dev0\n"
 
 msgid "There must be at least one observation in each group."
 msgstr ""
@@ -54,19 +54,19 @@ msgid "Log(BF%1$s%2$s)"
 msgstr "Log(BF%1$s%2$s)"
 
 msgid "Mean"
-msgstr "Rerata"
+msgstr "Rata-rata"
 
 msgid "SD"
 msgstr "SD"
 
 msgid "Lower"
-msgstr "Bawah"
+msgstr "Batas Bawah"
 
 msgid "95%% Credible Interval"
 msgstr "95%% Interval Kredibel"
 
 msgid "Upper"
-msgstr "Atas"
+msgstr "Batas Atas"
 
 msgid "Averaged"
 msgstr "Direrata"
@@ -189,7 +189,7 @@ msgid "Effect size"
 msgstr "Ukuran efek"
 
 msgid "Density"
-msgstr "Kepadatan"
+msgstr "Densitas"
 
 msgid "Prior and Posteriors"
 msgstr "Priori dan Posterior"
@@ -299,7 +299,7 @@ msgid "Autocorrelations plot"
 msgstr ""
 
 msgid "Lag"
-msgstr "Penundaan"
+msgstr "Lag"
 
 msgid "Autocorrelation"
 msgstr "Korelasi Otomatis"
@@ -500,7 +500,7 @@ msgid "Casewise diagnostics are not available for models that contain meta-regre
 msgstr ""
 
 msgid "Label"
-msgstr ""
+msgstr "Label"
 
 msgid "Predictor"
 msgstr ""
@@ -626,7 +626,7 @@ msgid "Residual Value"
 msgstr "Nilai Residu"
 
 msgid "Standard Error"
-msgstr "Galat Standar"
+msgstr "Kesalahan Standar"
 
 msgid "Profile Likelihood"
 msgstr ""
@@ -1331,7 +1331,7 @@ msgid "Column"
 msgstr ""
 
 msgid "95%% CI"
-msgstr ""
+msgstr "CI 95%%"
 
 msgid "Computing additional fit measures: %1$s"
 msgstr ""
@@ -1553,7 +1553,7 @@ msgid "R-hat"
 msgstr "R-hat"
 
 msgid "Weights"
-msgstr ""
+msgstr "Bobot"
 
 msgid "PET"
 msgstr ""
@@ -1568,7 +1568,7 @@ msgid "Autocorrelation Plot"
 msgstr ""
 
 msgid "Density Plot"
-msgstr ""
+msgstr "Plot Densitas"
 
 msgid "Please select at least one 'Type' of diagnostics plot (e.g., 'Trace', 'Autocorrelation' or 'Posterior samples density')."
 msgstr ""
@@ -1790,7 +1790,7 @@ msgid "Estimated %1$s Regression"
 msgstr ""
 
 msgid "Cohen's d"
-msgstr "d Cohen"
+msgstr "Cohen's d"
 
 msgid "Fisher's z"
 msgstr ""
