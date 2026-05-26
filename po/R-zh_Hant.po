@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.95.5\n"
 "POT-Creation-Date: 2025-11-15 02:55\n"
-"PO-Revision-Date: 2026-05-24 16:11+0000\n"
+"PO-Revision-Date: 2026-05-27 11:11+0000\n"
 "Last-Translator: 陳正昌 <chencc99@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
 "projects/jasp/jaspmetaanalysis-r/zh_Hant/>\n"
@@ -433,7 +433,6 @@ msgstr ""
 msgid "Estimated Marginal Means"
 msgstr "估計邊際平均數"
 
-#, fuzzy
 msgid "Level"
 msgstr "水準"
 
