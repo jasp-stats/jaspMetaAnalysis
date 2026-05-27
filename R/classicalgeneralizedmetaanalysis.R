@@ -21,6 +21,7 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
   options[["analysis"]] <- "generalizedMetaAnalysis"
 
   if (.maReady(options)) {
+    .maglmmCheckModelOptions(options)
     dataset <- .maglmmCheckData(dataset, options)
     .maglmmCheckErrors(dataset, options)
   }
@@ -42,9 +43,10 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
   QM   <- as.vector(t(beta) %*% chol2inv(chol(vb)) %*% beta)
   m    <- length(btt)
   if (!is.null(fit$test) && fit$test == "t") {
-    ddf  <- fit$k - fit$p
-    QMdf <- c(m, ddf)
-    QMp  <- pf(QM / m, df1 = m, df2 = ddf, lower.tail = FALSE)
+    ddf     <- fit$k - fit$p
+    QM      <- QM / m
+    QMdf    <- c(m, ddf)
+    QMp     <- pf(QM, df1 = m, df2 = ddf, lower.tail = FALSE)
   } else {
     QMdf <- c(m, NA)
     QMp  <- pchisq(QM, df = m, lower.tail = FALSE)
@@ -75,6 +77,28 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
     "OR" = , "RR" = , "RD" = "twoByTwo",
     "IRR"                  = "events"
   )
+}
+
+.maglmmGetValidModels <- function(effectSizeMeasure) {
+  switch(
+    effectSizeMeasure,
+    "OR"  = c("UM.FS", "UM.RS", "CM.AL", "CM.EL"),
+    "IRR" = c("UM.FS", "UM.RS", "CM.EL"),
+    "RR"  = ,
+    "RD"  = c("UM.FS", "UM.RS"),
+    character(0)
+  )
+}
+
+.maglmmCheckModelOptions <- function(options) {
+  validModels <- .maglmmGetValidModels(options[["effectSizeMeasure"]])
+
+  if (!(options[["glmmModel"]] %in% validModels)) {
+    .quitAnalysis(gettextf(
+      "Model type '%1$s' is not available for effect size measure '%2$s'.",
+      options[["glmmModel"]],
+      options[["effectSizeMeasure"]]))
+  }
 }
 
 # data loading and validation
@@ -151,6 +175,25 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
         return(gettext("All observations must be non-negative."))
     }),
     exitAnalysisIfErrors = TRUE)
+
+  if (measureCategory == "twoByTwo") {
+    sampleSize1 <- dataset[[options[["sampleSizeGroup1"]]]]
+    sampleSize2 <- dataset[[options[["sampleSizeGroup2"]]]]
+    events1     <- dataset[[options[["eventsGroup1"]]]]
+    events2     <- dataset[[options[["eventsGroup2"]]]]
+
+    if (any(sampleSize1 <= 0 | sampleSize2 <= 0, na.rm = TRUE))
+      .quitAnalysis(gettext("All sample sizes must be positive."))
+
+    if (any(events1 > sampleSize1 | events2 > sampleSize2, na.rm = TRUE))
+      .quitAnalysis(gettext("Event counts must be smaller than or equal to the corresponding sample sizes."))
+  } else if (measureCategory == "events") {
+    personTime1 <- dataset[[options[["personTimeGroup1"]]]]
+    personTime2 <- dataset[[options[["personTimeGroup2"]]]]
+
+    if (any(personTime1 <= 0 | personTime2 <= 0, na.rm = TRUE))
+      .quitAnalysis(gettext("All person-time values must be positive."))
+  }
 
   # check predictors
   otherVariable <- options[["predictors"]]

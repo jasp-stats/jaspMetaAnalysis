@@ -26,8 +26,8 @@ Form
 	info: qsTr("Generalized (GLMM) meta-analysis fits meta-analytic models via generalized linear (mixed-effects) models using metafor's rma.glmm function. It directly models event counts and proportions without requiring pre-computed effect sizes, making it suitable for sparse binary and count data where the normal approximation breaks down.")
 	infoBottom: "## " + qsTr("References") + "\n" +
 
-	"- Stijnen T, Hamza TH, & Ozdemir P (2010). “Random effects meta-analysis of event outcome in the framework of the generalized linear mixed model with applications in sparse data.” _Statistics in Medicine, 29_(29), 3046–3067. ⁠https://doi.org/10.1002/sim.4040\n", +
-    "- Jackson D, Law M, Stijnen T, Viechtbauer W, & White IR (2018). “A comparison of seven random-effects models for meta-analyses that estimate the summary odds ratio.” _Statistics in Medicine, 37_(7), 1059–1085. https://doi.org/10.1002/sim.7588⁠\n", +
+	"- Stijnen T, Hamza TH, & Ozdemir P (2010). “Random effects meta-analysis of event outcome in the framework of the generalized linear mixed model with applications in sparse data.” _Statistics in Medicine, 29_(29), 3046–3067. ⁠https://doi.org/10.1002/sim.4040\n" +
+	"- Jackson D, Law M, Stijnen T, Viechtbauer W, & White IR (2018). “A comparison of seven random-effects models for meta-analyses that estimate the summary odds ratio.” _Statistics in Medicine, 37_(7), 1059–1085. https://doi.org/10.1002/sim.7588⁠\n" +
 	"- Viechtbauer W (2010). “Conducting meta-analyses in R with the metafor package.” _Journal of Statistical Software, 36_(3), 1-48. https://doi.org/10.18637/jss.v036.i03\n" +
 	"## " + qsTr("R Packages") + "\n" +
 	"- metafor"
@@ -125,7 +125,8 @@ Form
 			name:			"glmmModel"
 			id:				glmmModel
 			label:			qsTr("Model type")
-			info: qsTr("Select the generalized linear model type. UM.FS = unconditional with fixed study effects (default); UM.RS = unconditional with random study effects; CM.AL = conditional with approximate likelihood; CM.EL = conditional with exact likelihood (OR only, slowest but most accurate).")
+			startValue:		"UM.FS"
+			info: qsTr("Select the generalized linear model type. UM.FS = unconditional with fixed study effects (default); UM.RS = unconditional with random study effects; CM.AL = conditional with approximate likelihood (odds ratios only); CM.EL = conditional with exact likelihood (odds ratios and incidence rate ratios).")
 			values: (function() {
 				if (effectSizeMeasure.value === "OR") {
 					return [
@@ -134,13 +135,27 @@ Form
 						{ label: qsTr("Conditional (approximate likelihood)"),		value: "CM.AL"	},
 						{ label: qsTr("Conditional (exact likelihood)"),			value: "CM.EL"	}
 					];
-				} else {
+				} else if (effectSizeMeasure.value === "IRR") {
 					return [
 						{ label: qsTr("Unconditional (fixed study effects)"),		value: "UM.FS"	},
 						{ label: qsTr("Unconditional (random study effects)"),		value: "UM.RS"	},
-						{ label: qsTr("Conditional (approximate likelihood)"),		value: "CM.AL"	}
+						{ label: qsTr("Conditional (exact likelihood)"),			value: "CM.EL"	}
+					];
+				} else {
+					return [
+						{ label: qsTr("Unconditional (fixed study effects)"),		value: "UM.FS"	},
+						{ label: qsTr("Unconditional (random study effects)"),		value: "UM.RS"	}
 					];
 				}})()
+			onValuesChanged: {
+				var modelAvailable = false;
+				for (var i = 0; i < glmmModel.values.length; ++i)
+					if (glmmModel.values[i].value === glmmModel.value)
+						modelAvailable = true;
+
+				if (!modelAvailable)
+					glmmModel.currentIndex = 0;
+			}
 		}
 
 		DropDown
