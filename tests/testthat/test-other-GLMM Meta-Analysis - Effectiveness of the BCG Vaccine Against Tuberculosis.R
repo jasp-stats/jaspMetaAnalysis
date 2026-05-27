@@ -141,14 +141,14 @@ test_that("ClassicalGeneralizedMetaAnalysis (analysis 6) results match", {
 
   table <- results[["results"]][["estimatedMarginalMeansAndContrastsContainer"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize_jaspColumn2"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize_jaspColumn2_contrastsTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list("alternate <unicode> random", 0.0870918032909199, -0.186000076727456,
-     -0.186000076727456, 0.470647986159603, 0.12072188639651, 0.721425135827216,
+    list("alternate <unicode> random", 9, 0.0870918032909199, -0.186000076727456,
+     -0.186000076727456, 0.488964466534816, 0.12072188639651, 0.721425135827216,
      0.360183683309296, 0.360183683309296, "alternate <unicode> systematic",
-     0.131359908327105, -0.188827199022547, -0.188827199022547, 0.353370111878846,
-     0.141540611154351, 0.928072213732747, 0.451547015676756, 0.451547015676756,
-     "random <unicode> systematic", 0.0442681050361849, -0.206877158883643,
-     -0.206877158883643, 0.690085529568204, 0.111020254494241, 0.398738998013026,
-     0.295413368956012, 0.295413368956012))
+     9, 0.131359908327105, -0.188827199022547, -0.188827199022547,
+     0.377588236727967, 0.141540611154351, 0.928072213732747, 0.451547015676756,
+     0.451547015676756, "random <unicode> systematic", 9, 0.0442681050361849,
+     -0.206877158883643, -0.206877158883643, 0.699380428417135, 0.111020254494241,
+     0.398738998013026, 0.295413368956012, 0.295413368956012))
 
   table <- results[["results"]][["estimatedMarginalMeansAndContrastsContainer"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize_jaspColumn2"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize_jaspColumn2_estimatedMarginalMeansTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
@@ -179,8 +179,8 @@ test_that("ClassicalGeneralizedMetaAnalysis (analysis 6) results match", {
 
   table <- results[["results"]][["metaregressionContainer"]][["collection"]][["metaregressionContainer_effectSizeTermsTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(1, "", 1.19838972983152e-27, 118.732676438729, "jaspColumn1",
-     2, "", 0.642476732410447, 0.88484935403135, "jaspColumn2"))
+    list(1, 9, 1.74351628413826e-06, 118.732676438729, "jaspColumn1", 2,
+     9, 0.655731497171499, 0.88484935403135, "jaspColumn2"))
 
   table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
