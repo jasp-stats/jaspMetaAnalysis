@@ -324,13 +324,5 @@ Form
 			]
 		}
 
-		CheckBox
-		{
-			name:		"includeOverall"
-			label:		qsTr("Include overall judgment")
-			checked:	true
-			enabled:	overallJudgment.count > 0
-			info:		qsTr("Include the overall risk-of-bias judgment in the plots. Requires an overall judgment variable.")
-		}
 	}
 }

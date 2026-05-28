@@ -18,7 +18,7 @@
 .robBaseDeps <- c(
   "robTool", "studyLabel", "overallJudgment",
   .robDomainOptionNames,
-  "colorScheme", "includeOverall"
+  "colorScheme"
 )
 
 RiskOfBiasPlot <- function(jaspResults, dataset, options) {
@@ -95,16 +95,15 @@ RiskOfBiasPlot <- function(jaspResults, dataset, options) {
 .robAssembleData <- function(dataset, options) {
   nRows <- nrow(dataset)
 
-  # use empty strings if study label not yet assigned
+  # use generated labels if study label not yet assigned
   if (options[["studyLabel"]] != "") {
     robData <- data.frame(Study = as.character(dataset[[options[["studyLabel"]]]]))
   } else {
-    robData <- data.frame(Study = rep("", nRows))
+    robData <- data.frame(Study = gettextf("Study %1$i", seq_len(nRows)))
   }
-    
 
   # robvis accesses columns by position index, so we must always include
-  # ALL expected domain columns + Overall in the exact order the tool expects
+  # ALL expected domain columns in the exact order the tool expects.
   keys <- .robGetDomainOptionKeys(options)
   for (key in keys) {
     col <- options[[key]]
@@ -115,14 +114,41 @@ RiskOfBiasPlot <- function(jaspResults, dataset, options) {
     }
   }
 
-  # Overall column is always required by robvis (positional access)
   if (options[["overallJudgment"]] != "") {
     robData[["Overall"]] <- as.character(dataset[[options[["overallJudgment"]]]])
-  } else {
-    robData[["Overall"]] <- rep(NA_character_, nRows)
   }
 
   return(robData)
+}
+
+.robAddSyntheticOverall <- function(robData) {
+  # robvis indexes Overall positionally before honoring its plotting options.
+  if (!"Overall" %in% names(robData))
+    robData[["Overall"]] <- rep(NA_character_, nrow(robData))
+
+  return(robData)
+}
+
+.robDropOverallDomain <- function(plotObj) {
+  dropOverall <- function(data) {
+    data <- data[is.na(data[["domain"]]) | data[["domain"]] != "Overall", , drop = FALSE]
+    if (is.factor(data[["domain"]]))
+      data[["domain"]] <- droplevels(data[["domain"]])
+    return(data)
+  }
+
+  if (is.data.frame(plotObj[["data"]]) && "domain" %in% names(plotObj[["data"]]))
+    plotObj[["data"]] <- dropOverall(plotObj[["data"]])
+
+  layers <- plotObj[["layers"]]
+  for (i in seq_along(layers)) {
+    layerData <- layers[[i]][["data"]]
+    if (is.data.frame(layerData) && "domain" %in% names(layerData))
+      layers[[i]][["data"]] <- dropOverall(layerData)
+  }
+  plotObj[["layers"]] <- layers
+
+  return(plotObj)
 }
 
 
@@ -146,18 +172,18 @@ RiskOfBiasPlot <- function(jaspResults, dataset, options) {
     return()
   }
 
-  robData  <- .robAssembleData(dataset, options)
-  tool     <- .robGetToolString(options)
-  overall  <- options[["includeOverall"]] && options[["overallJudgment"]] != ""
-  weighted <- options[["summaryPlotWeighted"]] && options[["studyWeights"]] != ""
+  robData    <- .robAssembleData(dataset, options)
+  tool       <- .robGetToolString(options)
+  overall    <- options[["overallJudgment"]] != ""
+  robvisData <- .robAddSyntheticOverall(robData)
+  weighted   <- options[["summaryPlotWeighted"]] && options[["studyWeights"]] != ""
 
   if (weighted) {
-    robData[["Weight"]] <- dataset[[options[["studyWeights"]]]]
+    robvisData[["Weight"]] <- dataset[[options[["studyWeights"]]]]
   }
-    
 
   plotObj <- try(robvis::rob_summary(
-    data     = robData,
+    data     = robvisData,
     tool     = tool,
     overall  = overall,
     weighted = weighted,
@@ -209,9 +235,10 @@ RiskOfBiasPlot <- function(jaspResults, dataset, options) {
 
   robData <- .robAssembleData(dataset, options)
   tool    <- .robGetToolString(options)
+  overall <- options[["overallJudgment"]] != ""
 
   plotObj <- try(robvis::rob_traffic_light(
-    data   = robData,
+    data   = .robAddSyntheticOverall(robData),
     tool   = tool,
     colour = options[["colorScheme"]],
     psize  = options[["trafficLightPlotPointSize"]]
@@ -226,6 +253,9 @@ RiskOfBiasPlot <- function(jaspResults, dataset, options) {
     jaspResults[["trafficLightPlot"]] <- plot
     return()
   }
+
+  if (!overall)
+    plotObj <- .robDropOverallDomain(plotObj)
 
   # dynamic dimensions: scale with studies (height) and domains (width)
   nStudies <- nrow(robData)
