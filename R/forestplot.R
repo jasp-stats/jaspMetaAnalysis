@@ -83,6 +83,7 @@ ForestPlot <- function(jaspResults, dataset, options) {
     forestPlotMappingShape                                          = "",
     # pipeline options not present in standalone QML
     subgroup                                                       = "",
+    weights                                                        = "",
     confidenceIntervals                                            = TRUE,
     confidenceIntervalsLevel                                       = 0.95,
     predictionIntervals                                            = FALSE,
@@ -133,6 +134,7 @@ ForestPlot <- function(jaspResults, dataset, options) {
   emptyValueOptions <- c(
     "forestPlotStudyInformationOrderBy",
     "forestPlotStudyInformationAggregateBy",
+    "weights",
     "forestPlotMappingColor",
     "forestPlotMappingShape"
   )
@@ -150,7 +152,7 @@ ForestPlot <- function(jaspResults, dataset, options) {
 .fpStandaloneDependencies <- c(
   .maForestPlotDependencies,
   "effectSize", "effectSizeStandardError",
-  "confidenceInterval", "predictionInterval",
+  "confidenceInterval", "predictionInterval", "weights",
   "row", "visualizationType",
   "visualizationTypeStudy", "visualizationTypeEstimate",
   "subgroup",
@@ -219,86 +221,90 @@ ForestPlot <- function(jaspResults, dataset, options) {
   if (!hasCi && !hasSe)
     options[["forestPlotEstimatesAndConfidenceIntervals"]] <- FALSE
 
+  if (options[["weights"]] == "")
+    options[["forestPlotStudyInformationStudyWeights"]] <- FALSE
+
   options  <- .forestPlotPrepareOptions(options)
   dataOpts <- .forestPlotPrepareDataOptions(options)
 
-  layout <- .forestPlotCreateLayout()
-
-  if (options[["subgroup"]] != "") {
-    layout <- .fpStandaloneBuildSubgroupLayout(dataset, dataOpts, layout)
-  } else {
-    layout <- .fpStandaloneBuildSingleLayout(dataset, dataOpts, layout)
-  }
-
-  plotData <- .forestPlotFinalizeLayout(layout, dataOpts)
+  plotInput <- .fpStandaloneBuildInput(dataset, dataOpts)
+  plotData  <- .forestPlotBuildPlotData(plotInput, dataOpts)
 
   return(.forestPlotRenderPlot(plotData, options))
 }
 
+.fpStandaloneBuildInput <- function(dataset, options) {
 
-# ── layout builders ─────────────────────────────────────────────────────────
-
-.fpStandaloneBuildSingleLayout <- function(dataset, options, layout) {
-
-  split <- .fpStandaloneSplitByVisualizationType(dataset, options)
-
-  studySection <- .fpStandaloneBuildStudySection(split[["study"]], options)
-  if (!is.null(studySection))
-    layout <- .forestPlotAppendStudySection(layout, studySection, blockId = 1, options = options)
-
-  # when row variable controls positioning, reset layout counter so
-  # estimate rows use their absolute user-specified positions
-  if (options[["row"]] != "")
-    layout[["row"]] <- 1
-
-  estimateSection <- .fpStandaloneBuildEstimateSection(split[["estimate"]], options)
-  if (!is.null(estimateSection)) {
-    if (.forestPlotHasEstimateInformationHeader(options)) {
-      layout[["estimateHeaderIndex"]] <- c(layout[["estimateHeaderIndex"]], layout[["row"]])
-      layout[["row"]] <- layout[["row"]] + 1
+  if (options[["subgroup"]] == "") {
+    sections <- .fpStandaloneCollectSections(dataset, options)
+    if (!.forestPlotSectionsHaveContent(sections)) {
+      stop(gettext("No rows to display. Check that the visualization type mapping assigns at least one level to 'Study' or 'Estimate'."))
     }
-    layout <- .forestPlotAppendAdditionalSection(layout, estimateSection, blockId = "est_1", addTitle = FALSE)
+
+    return(.forestPlotCreateInput(
+      items = list(.forestPlotCreateInputItem(
+        key           = "standalone",
+        index         = 1,
+        subgroup      = NULL,
+        isFullDataset = FALSE,
+        sections      = sections
+      )),
+      rowMode         = if (options[["row"]] != "") "absolute" else "stacked",
+      sectionGrouping = "byItem"
+    ))
   }
 
-  if (is.null(studySection) && is.null(estimateSection))
-    stop(gettext("No rows to display. Check that the visualization type mapping assigns at least one level to 'Study' or 'Estimate'."))
-
-  return(layout)
-}
-
-.fpStandaloneBuildSubgroupLayout <- function(dataset, options, layout) {
-
-  sgCol     <- dataset[[options[["subgroup"]]]]
-  sgLevels  <- levels(sgCol)
+  sgCol    <- dataset[[options[["subgroup"]]]]
+  sgLevels <- .fpStandaloneSubgroupLevels(sgCol)
+  items    <- list()
 
   for (sg in sgLevels) {
-    sgData <- dataset[sgCol == sg, , drop = FALSE]
+    sgRows <- !is.na(sgCol) & sgCol == sg
+    sgData <- dataset[sgRows, , drop = FALSE]
     if (nrow(sgData) == 0)
       next
 
-    layout <- .forestPlotAppendSubgroupHeading(layout, options, sg)
-    split  <- .fpStandaloneSplitByVisualizationType(sgData, options)
-
-    studySection <- .fpStandaloneBuildStudySection(split[["study"]], options)
-    if (!is.null(studySection))
-      layout <- .forestPlotAppendStudySection(layout, studySection, blockId = paste0("sg_", sg), options = options)
-
-    estimateSection <- .fpStandaloneBuildEstimateSection(split[["estimate"]], options)
-    if (!is.null(estimateSection)) {
-      if (.forestPlotHasEstimateInformationHeader(options)) {
-        layout[["estimateHeaderIndex"]] <- c(layout[["estimateHeaderIndex"]], layout[["row"]])
-        layout[["row"]] <- layout[["row"]] + 1
-      }
-      layout <- .forestPlotAppendAdditionalSection(layout, estimateSection, blockId = paste0("est_", sg), addTitle = FALSE)
+    sections <- .fpStandaloneCollectSections(sgData, options)
+    if (!.forestPlotSectionsHaveContent(sections)) {
+      next
     }
+
+    items[[length(items) + 1]] <- .forestPlotCreateInputItem(
+      key           = paste0("subgroup", sg),
+      index         = length(items) + 1,
+      subgroup      = sg,
+      isFullDataset = FALSE,
+      sections      = sections
+    )
   }
 
-  return(layout)
+  if (length(items) == 0)
+    stop(gettext("No rows to display. Check that the visualization type mapping assigns at least one level to 'Study' or 'Estimate'."))
+
+  return(.forestPlotCreateInput(items, sectionGrouping = "byItem"))
 }
 
+.fpStandaloneCollectSections <- function(dataset, options) {
 
-# ── visualization type splitting ─────────────────────────────────────────────
+  split <- .fpStandaloneSplitByVisualizationType(dataset, options)
 
+  return(list(
+    study      = .fpStandaloneBuildStudySection(split[["study"]], options),
+    additional = list(
+      estimates = .fpStandaloneBuildEstimateSection(split[["estimate"]], options)
+    )
+  ))
+}
+
+.fpStandaloneSubgroupLevels <- function(sgCol) {
+
+  if (is.factor(sgCol))
+    return(levels(droplevels(sgCol[!is.na(sgCol)])))
+
+  return(unique(as.character(sgCol[!is.na(sgCol)])))
+}
+
+# Split Study and Estimate rows from the user-selected visualization type.
 .fpStandaloneSplitByVisualizationType <- function(dataset, options) {
 
   studyRows    <- rep(TRUE, nrow(dataset))
@@ -310,14 +316,14 @@ ForestPlot <- function(jaspResults, dataset, options) {
     estimateLevel <- options[["visualizationTypeEstimate"]]
 
     if (studyLevel != "" || estimateLevel != "") {
-      studyRows    <- vizCol == studyLevel
-      estimateRows <- vizCol == estimateLevel
+      studyRows    <- !is.na(vizCol) & vizCol == studyLevel
+      estimateRows <- !is.na(vizCol) & vizCol == estimateLevel
     }
   }
 
   return(list(
-    study    = if (any(studyRows))    dataset[studyRows,    , drop = FALSE] else NULL,
-    estimate = if (any(estimateRows)) dataset[estimateRows, , drop = FALSE] else NULL
+    study    = if (any(studyRows, na.rm = TRUE))    dataset[studyRows,    , drop = FALSE] else NULL,
+    estimate = if (any(estimateRows, na.rm = TRUE)) dataset[estimateRows, , drop = FALSE] else NULL
   ))
 }
 
@@ -386,15 +392,14 @@ ForestPlot <- function(jaspResults, dataset, options) {
   n  <- nrow(studyData)
   es <- studyData[[options[["effectSize"]]]]
 
-  # standard error
+  # standard error and weights
   hasSe <- options[["effectSizeStandardError"]] != ""
   if (hasSe) {
-    se      <- studyData[[options[["effectSizeStandardError"]]]]
-    weights <- ifelse(is.na(se) | se == 0, 1, 1 / se^2)
+    se <- studyData[[options[["effectSizeStandardError"]]]]
   } else {
-    se      <- rep(NA_real_, n)
-    weights <- rep(1, n)
+    se <- rep(NA_real_, n)
   }
+  weights <- .fpStandaloneStudyWeights(studyData, se, options)
 
   dfForest <- data.frame(
     effectSize    = es,
@@ -445,8 +450,27 @@ ForestPlot <- function(jaspResults, dataset, options) {
   return(.forestPlotCreateAdditionalSection(
     heading     = gettext("Estimates"),
     information = information,
-    objects     = objects
+    objects     = objects,
+    showHeading = FALSE
   ))
+}
+
+# study weight builder
+.fpStandaloneStudyWeights <- function(studyData, standardError, options) {
+
+  if (options[["weights"]] != "") {
+    weights   <- suppressWarnings(as.numeric(studyData[[options[["weights"]]]]))
+    weightSum <- sum(weights)
+    if (any(!is.finite(weights) | weights < 0) || !is.finite(weightSum) || weightSum <= 0)
+      stop(gettext("The weights variable must contain finite, non-negative values with at least one positive value."))
+
+    return(weights)
+  }
+
+  if (all(is.na(standardError)))
+    return(rep(1, length(standardError)))
+
+  return(ifelse(is.na(standardError) | standardError == 0, 1, 1 / standardError^2))
 }
 
 # Extract effect sizes, CIs, and PIs from estimate rows; apply transformation.

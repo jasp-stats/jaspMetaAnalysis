@@ -408,6 +408,15 @@ Form
 	{
 		analysisType:				"RoBMA"
 		transformEffectSizeValue:	sectionInference.transformEffectSizeValue
+		effectSizeReady:			effectSize.count == 1 && effectSizeStandardError.count == 1
+		modelInformationEnabled:	effectSize.count == 1 && effectSizeStandardError.count == 1
+		effectSizeModelTermsCount:	sectionModel.effectSizeModelTermsCount
+		heterogeneityModelTermsCount: 0
+		bmaEffectSizeChecked:		bayesianModelAveragingEffectSize.checked
+		bmaHeterogeneityChecked:	bayesianModelAveragingHeterogeneity.checked
+		bmaModerationsChecked:		bayesianModelAveragingModerations.checked
+		publicationBiasAdjustmentValue: publicationBiasAdjustment.value
+		subgroupSelected:			subgroup.count > 0
 	}
 
 	//// Bubble Plot Section ////

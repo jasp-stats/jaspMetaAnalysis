@@ -25,6 +25,16 @@ Section
 	title:							qsTr("Forest Plot")
 	property string analysisType:	"metaAnalysis"
 	property string transformEffectSizeValue: "none"
+	property bool effectSizeReady:	false
+	property bool modelInformationEnabled: false
+	property int effectSizeModelTermsCount: 0
+	property int heterogeneityModelTermsCount: 0
+	property string methodValue:		""
+	property bool bmaEffectSizeChecked: false
+	property bool bmaHeterogeneityChecked: false
+	property bool bmaModerationsChecked: false
+	property string publicationBiasAdjustmentValue: "none"
+	property bool subgroupSelected:	false
 	columns:						1
 	info: qsTr("Options for visualizing study-level information, estimated marginal means, and the model information in an all encompassing forest plot. Different sections of the forest plot can be individually enabled/disabled.")
 
@@ -32,8 +42,9 @@ Section
 	readonly property bool isClassical:			analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || analysisType === "generalizedMetaAnalysis" || analysisType === "mantelHaenszelPeto"
 	readonly property bool isStandardClassical:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis"
 	readonly property bool isBayesian:			analysisType === "RoBMA" || analysisType === "NoBMA" || analysisType === "BiBMA"
-	readonly property bool isMetaRegression:	(analysisType !== "mantelHaenszelPeto") && sectionModel.effectSizeModelTermsCount > 0
-	readonly property bool isScaleRegression:	analysisType == "metaAnalysis" && sectionModel.heterogeneityModelTermsCount == 0
+	readonly property bool isMetaRegression:	(analysisType !== "mantelHaenszelPeto") && effectSizeModelTermsCount > 0
+	readonly property bool isScaleRegression:	analysisType === "metaAnalysis" && heterogeneityModelTermsCount > 0
+	readonly property bool isFixedOrEqualEffect: methodValue === "fixedEffects" || methodValue === "equalEffects"
 
 	CheckBox
 	{
@@ -46,7 +57,7 @@ Section
 	ForestPlotStudyInformation
 	{
 		panelEnabled:			forestPlotStudyInformation.checked
-		predictedEffectsEnabled:	effectSize.count == 1 && effectSizeStandardError.count == 1
+		predictedEffectsEnabled:	effectSizeReady
 		showPredictedEffects:	isStandardClassical
 		showStudyWeights:		isStandardClassical
 		showSecondaryCI:		true
@@ -99,7 +110,7 @@ Section
 
 			Group
 			{
-				enabled:	isClassical || (isBayesian && (bayesianModelAveragingEffectSize.checked || bayesianModelAveragingModerations.checked))
+				enabled:	isClassical || (isBayesian && (bmaEffectSizeChecked || bmaModerationsChecked))
 
 				CheckBox
 				{
@@ -156,7 +167,7 @@ Section
 	{
 		name:		"forestPlotModelInformation"
 		id:			forestPlotModelInformation
-		enabled:	(effectSize.count == 1 && effectSizeStandardError.count == 1) || analysisType === "generalizedMetaAnalysis" || analysisType === "mantelHaenszelPeto"
+		enabled:	modelInformationEnabled
 		text:		qsTr("Model information")
 		info: qsTr("Add meta-analytic model information to the forest plot.")
 	}
@@ -175,8 +186,8 @@ Section
 			{
 				name:		"forestPlotHeterogeneityTest"
 				text:		qsTr("Test")
-				visible:	(isClassical && analysisType !== "generalizedMetaAnalysis") || (isBayesian && bayesianModelAveragingHeterogeneity.checked)
-				checked:	(isClassical && analysisType !== "generalizedMetaAnalysis") || (isBayesian && bayesianModelAveragingHeterogeneity.checked)
+				visible:	(isClassical && analysisType !== "generalizedMetaAnalysis") || (isBayesian && bmaHeterogeneityChecked)
+				checked:	(isClassical && analysisType !== "generalizedMetaAnalysis") || (isBayesian && bmaHeterogeneityChecked)
 				info: qsTr("Include the test of the residual heterogeneity in the model information section.")
 			}
 
@@ -202,7 +213,7 @@ Section
 			{
 				title:		qsTr("Estimate")
 				columns:	2
-				enabled:	(method.value != "fixedEffects" || method.value != "equalEffects")
+				enabled:	!isFixedOrEqualEffect
 
 				CheckBox
 				{
@@ -247,7 +258,7 @@ Section
 				text:		qsTr("Moderation test")
 				enabled:	isScaleRegression
 				visible:	analysisType === "metaAnalysis"
-				checked:	analysisType === "metaAnalysis"
+				checked:	isScaleRegression
 				info: qsTr("Include the omnibus heterogeneity moderation test in the model information section. Available when heterogeneity meta-regression is specified.")
 			}
 		}
@@ -263,7 +274,7 @@ Section
 				id:			forestPlotEffectSizeFixedEffectEstimate
 				checked:	false
 				visible:	isStandardClassical
-				enabled:	isStandardClassical && !(method.value === "fixedEffects" || method.value === "equalEffects")
+				enabled:	isStandardClassical && !isFixedOrEqualEffect
 				info: qsTr("Include a fixed effect meta-analytic effect size estimate in the model information section. Not available if the model was already fitted with fixed effects or the model contains heterogeneity meta-regression.")
 			}
 
@@ -273,7 +284,7 @@ Section
 				text:		qsTr("Fixed effect estimate test")
 				checked:	true
 				visible:	isStandardClassical 
-				enabled:	isStandardClassical && !(method.value === "fixedEffects" || method.value === "equalEffects") && forestPlotEffectSizeFixedEffectEstimate.checked
+				enabled:	isStandardClassical && !isFixedOrEqualEffect && forestPlotEffectSizeFixedEffectEstimate.checked
 				info: qsTr("Include the test of the fixed effect meta-analytic effect size estimate in the model information section.")
 			}
 
@@ -291,7 +302,7 @@ Section
 			{
 				name:		"forestPlotEffectSizePooledEstimateTest"
 				text:		qsTr("Pooled estimate test")
-				enabled:	forestPlotEffectSizePooledEstimate.checked && (isClassical || bayesianModelAveragingEffectSize.checked)
+				enabled:	forestPlotEffectSizePooledEstimate.checked && (isClassical || bmaEffectSizeChecked)
 				checked:	true
 				info:
 					if (isClassical && isMetaRegression)
@@ -320,8 +331,8 @@ Section
 			{
 				name:		"forestPlotPublicationBiasTest"
 				text:		qsTr("Test")
-				enabled:	publicationBiasAdjustment.value != "none"
-				checked:	publicationBiasAdjustment.value != "none"
+				enabled:	publicationBiasAdjustmentValue !== "none"
+				checked:	publicationBiasAdjustmentValue !== "none"
 				info: qsTr("Include the publication bias test in the model information section.")
 			}
 		}
@@ -342,7 +353,7 @@ Section
 		showConditionalEstimates:	isBayesian
 		showTestsInRightPanel:		true
 		showTestsInformation:		isClassical
-		enableSubgroupSettings:		subgroup.count > 0
+		enableSubgroupSettings:		subgroupSelected
 		transformEffectSizeValue:	transformEffectSizeValue
 	}
 }

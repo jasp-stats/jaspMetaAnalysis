@@ -1,7 +1,7 @@
 # Forest plot pipeline: orchestration, layout, rendering, and composition.
 #
 # This is the main entry point for building forest plots.  The pipeline is:
-#   fit -> fitItems -> sections -> layout -> plotData -> render
+#   fit -> forestPlotInput -> layout -> plotData -> render
 #
 # The code is split across three files:
 #   forestplotcommon.R  -- this file: pipeline, section collection, layout,
@@ -18,12 +18,86 @@
 
 .maMakeTheUltimateForestPlot           <- function(fit, options) {
 
-  fitItems    <- .forestPlotPrepareFitItems(fit, options)
   options     <- .forestPlotPrepareOptions(options)
   dataOptions <- .forestPlotPrepareDataOptions(options)
-  plotData    <- .forestPlotBuildPlotData(fitItems, dataOptions)
+  plotInput   <- .forestPlotInputFromFit(fit, dataOptions)
+  plotData    <- .forestPlotBuildPlotData(plotInput, dataOptions)
 
   return(.forestPlotRenderPlot(plotData, options))
+}
+
+.forestPlotInputFromFit                <- function(fit, options) {
+
+  fitItems <- .forestPlotPrepareFitItems(fit, options)
+  return(.forestPlotCreateInput(.forestPlotCollectInputItems(fitItems, options)))
+}
+
+.forestPlotCreateInput                 <- function(items, rowMode = "stacked", sectionGrouping = NULL) {
+
+  return(structure(
+    list(
+      items           = items,
+      rowMode         = rowMode,
+      sectionGrouping = sectionGrouping
+    ),
+    class = "forestPlotInput"
+  ))
+}
+
+.forestPlotCreateInputItem             <- function(key, index, subgroup, isFullDataset, sections) {
+  return(list(
+    key           = key,
+    index         = index,
+    subgroup      = subgroup,
+    isFullDataset = isFullDataset,
+    sections      = sections
+  ))
+}
+
+# forestPlotInput items are the renderer boundary. Each item contains only plot
+# metadata and already-built sections; raw fit objects must stay upstream.
+.forestPlotValidateInput               <- function(plotInput) {
+
+  if (!inherits(plotInput, "forestPlotInput"))
+    stop(gettext("Invalid forest plot input."))
+
+  validRowMode         <- plotInput[["rowMode"]] %in% c("stacked", "absolute")
+  validSectionGrouping <- is.null(plotInput[["sectionGrouping"]]) ||
+    plotInput[["sectionGrouping"]] %in% c("byItem", "bySection")
+
+  if (!is.list(plotInput[["items"]]) || !validRowMode || !validSectionGrouping)
+    stop(gettext("Invalid forest plot input."))
+
+  requiredItemFields <- c("key", "index", "subgroup", "isFullDataset", "sections")
+
+  for (i in seq_along(plotInput[["items"]])) {
+    item <- plotInput[["items"]][[i]]
+
+    if (!is.list(item) ||
+        !all(requiredItemFields %in% names(item)) ||
+        !is.list(item[["sections"]]) ||
+        !("study" %in% names(item[["sections"]])) ||
+        !is.list(item[["sections"]][["additional"]]))
+      stop(gettext("Invalid forest plot input."))
+  }
+
+  return(plotInput)
+}
+
+.forestPlotAdditionalSectionNames      <- function(items) {
+
+  sectionNames <- unlist(lapply(items, function(item) {
+    names(item[["sections"]][["additional"]])
+  }), use.names = FALSE)
+
+  return(unique(sectionNames[sectionNames != ""]))
+}
+
+.forestPlotSectionsHaveContent         <- function(sections) {
+  return(
+    .forestPlotSectionHasContent(sections[["study"]]) ||
+      any(vapply(sections[["additional"]], .forestPlotSectionHasContent, logical(1)))
+  )
 }
 
 # Adapt the incoming fit list into a stable shape before the later section and
@@ -93,20 +167,32 @@
 # Build the three logical forest-plot sections (study, EMM, model info) so
 # the layout stage can stay agnostic to whether a row came from studies,
 # estimated marginal means, or model summaries.
-.forestPlotCollectSections             <- function(fitItems, options) {
+.forestPlotCollectInputItems           <- function(fitItems, options) {
 
-  fitSections <- lapply(fitItems, function(fitItem) {
-    sections <- list(
-      study                  = .forestPlotCollectStudySection(fitItem[["fit"]], options),
-      estimatedMarginalMeans = .forestPlotCollectEstimatedMarginalMeansSection(fitItem[["fit"]], options),
-      modelInformation       = .forestPlotCollectModelInformationSection(fitItem[["fit"]], options)
-    )
-
-    c(fitItem, list(sections = sections))
+  inputItems <- lapply(fitItems, function(fitItem) {
+    return(.forestPlotCreateInputItem(
+      key           = fitItem[["key"]],
+      index         = fitItem[["index"]],
+      subgroup      = fitItem[["subgroup"]],
+      isFullDataset = fitItem[["isFullDataset"]],
+      sections      = .forestPlotCollectItemSections(fitItem[["fit"]], options)
+    ))
   })
-  names(fitSections) <- names(fitItems)
+  names(inputItems) <- names(fitItems)
 
-  return(fitSections)
+  return(inputItems)
+}
+.forestPlotCollectItemSections         <- function(fit, options) {
+
+  additionalSections <- list(
+    estimatedMarginalMeans = .forestPlotCollectEstimatedMarginalMeansSection(fit, options),
+    modelInformation       = .forestPlotCollectModelInformationSection(fit, options)
+  )
+
+  return(list(
+    study      = .forestPlotCollectStudySection(fit, options),
+    additional = additionalSections
+  ))
 }
 .forestPlotCollectStudySection         <- function(fit, options) {
 
@@ -139,9 +225,10 @@
   }
 
   return(.forestPlotCreateAdditionalSection(
-    heading     = gettext("Estimated Marginal Means"),
-    information = estimatedMarginalMeansSection[["information"]],
-    objects     = estimatedMarginalMeansSection[["objects"]]
+    heading                = gettext("Estimated Marginal Means"),
+    information            = estimatedMarginalMeansSection[["information"]],
+    objects                = estimatedMarginalMeansSection[["objects"]],
+    includeWithFullDataset = options[["forestPlotSubgroupFullDatasetEstimatedMarginalMeans"]]
   ))
 }
 .forestPlotCollectModelInformationSection <- function(fit, options) {
@@ -156,9 +243,10 @@
   }
 
   return(.forestPlotCreateAdditionalSection(
-    heading     = gettext("Model Information"),
-    information = modelInformationSection[["information"]],
-    objects     = modelInformationSection[["objects"]]
+    heading                = gettext("Model Information"),
+    information            = modelInformationSection[["information"]],
+    objects                = modelInformationSection[["objects"]],
+    includeWithFullDataset = options[["forestPlotSubgroupFullDatasetModelInformation"]]
   ))
 }
 
@@ -181,7 +269,7 @@
     objects     = objects
   ))
 }
-.forestPlotCreateAdditionalSection    <- function(heading, information, objects = NULL) {
+.forestPlotCreateAdditionalSection    <- function(heading, information, objects = NULL, showHeading = TRUE, includeWithFullDataset = FALSE) {
 
   objects <- .forestPlotNormalizeObjectData(objects)
 
@@ -190,10 +278,12 @@
   }
 
   return(list(
-    kind        = "additional",
-    heading     = heading,
-    information = information,
-    objects     = objects
+    kind                   = "additional",
+    heading                = heading,
+    showHeading            = showHeading,
+    includeWithFullDataset = includeWithFullDataset,
+    information            = information,
+    objects                = objects
   ))
 }
 .forestPlotNormalizeObjectData        <- function(objects) {
@@ -244,49 +334,48 @@
     row                   = 1
   ))
 }
-.forestPlotBuildPlotData              <- function(fitItems, options) {
+.forestPlotBuildPlotData              <- function(plotInput, options) {
 
-  fitSections <- .forestPlotCollectSections(fitItems, options)
-  layout      <- .forestPlotCreateLayout()
+  plotInput <- .forestPlotValidateInput(plotInput)
+  items     <- plotInput[["items"]]
+  layout    <- .forestPlotCreateLayout()
 
-  if (options[["subgroup"]] == "" || options[["forestPlotSubgroupPanelsWithinSubgroup"]]) {
-    layout <- .forestPlotAppendGroupedFitSections(layout, fitSections, options)
+  if (identical(plotInput[["sectionGrouping"]], "byItem") ||
+      options[["subgroup"]] == "" || options[["forestPlotSubgroupPanelsWithinSubgroup"]]) {
+    layout <- .forestPlotAppendGroupedItems(layout, items, options, rowMode = plotInput[["rowMode"]])
   } else {
-    layout <- .forestPlotAppendGroupedSectionPanels(layout, fitSections, options)
+    layout <- .forestPlotAppendGroupedSectionPanels(layout, items, options)
   }
 
   return(.forestPlotFinalizeLayout(layout, options))
 }
 
-# Layout can be grouped by fit (study + extras together) or by section type
+# Layout can be grouped by item (study + extras together) or by section type
 # (all study blocks first, then shared EMM/model panels across subgroups).
-.forestPlotAppendGroupedFitSections   <- function(layout, fitSections, options) {
+.forestPlotAppendGroupedItems         <- function(layout, items, options, rowMode = "stacked") {
 
-  for (fitSection in fitSections) {
-    sectionVisibility <- .forestPlotFitSectionVisibility(fitSection, options)
+  for (item in items) {
 
     if (options[["subgroup"]] != "") {
-      layout <- .forestPlotAppendSubgroupHeading(layout, options, fitSection[["subgroup"]])
+      layout <- .forestPlotAppendSubgroupHeading(layout, options, item[["subgroup"]])
     }
 
-    if (sectionVisibility[["study"]]) {
-      layout <- .forestPlotAppendStudySection(layout, fitSection[["sections"]][["study"]], fitSection[["index"]], options)
+    if (.forestPlotShouldIncludeStudySection(item, options)) {
+      layout <- .forestPlotAppendStudySection(layout, item[["sections"]][["study"]], item[["index"]], options)
     }
 
-    if (sectionVisibility[["estimatedMarginalMeans"]]) {
+    if (identical(rowMode, "absolute") && options[["subgroup"]] == "") {
+      layout[["row"]] <- 1
+    }
+
+    for (sectionName in .forestPlotAdditionalSectionNames(items)) {
+      if (!.forestPlotShouldIncludeAdditionalSection(item, sectionName))
+        next
+
       layout <- .forestPlotAppendAdditionalSection(
         layout   = layout,
-        section  = fitSection[["sections"]][["estimatedMarginalMeans"]],
-        blockId  = paste("emm", fitSection[["index"]], sep = "_"),
-        addTitle = TRUE
-      )
-    }
-
-    if (sectionVisibility[["modelInformation"]]) {
-      layout <- .forestPlotAppendAdditionalSection(
-        layout   = layout,
-        section  = fitSection[["sections"]][["modelInformation"]],
-        blockId  = paste("mi", fitSection[["index"]], sep = "_"),
+        section  = item[["sections"]][["additional"]][[sectionName]],
+        blockId  = paste(sectionName, item[["index"]], sep = "_"),
         addTitle = TRUE
       )
     }
@@ -294,93 +383,75 @@
 
   return(layout)
 }
-.forestPlotAppendGroupedSectionPanels <- function(layout, fitSections, options) {
+.forestPlotAppendGroupedSectionPanels <- function(layout, items, options) {
 
-  layout <- .forestPlotAppendStudyBlocks(layout, fitSections, options)
-  layout <- .forestPlotAppendAdditionalBlocks(layout, fitSections, options, "estimatedMarginalMeans")
-  layout <- .forestPlotAppendAdditionalBlocks(layout, fitSections, options, "modelInformation")
+  layout <- .forestPlotAppendStudyBlocks(layout, items, options)
+
+  for (sectionName in .forestPlotAdditionalSectionNames(items))
+    layout <- .forestPlotAppendAdditionalBlocks(layout, items, options, sectionName)
 
   return(layout)
 }
-.forestPlotAppendStudyBlocks          <- function(layout, fitSections, options) {
+.forestPlotAppendStudyBlocks          <- function(layout, items, options) {
 
-  for (fitSection in fitSections) {
-    if (options[["subgroup"]] != "" && isTRUE(fitSection[["isFullDataset"]])) {
+  for (item in items) {
+    if (!.forestPlotShouldIncludeStudySection(item, options)) {
       next
     }
 
     if (options[["subgroup"]] != "") {
-      layout <- .forestPlotAppendSubgroupHeading(layout, options, fitSection[["subgroup"]])
+      layout <- .forestPlotAppendSubgroupHeading(layout, options, item[["subgroup"]])
     }
 
-    layout <- .forestPlotAppendStudySection(layout, fitSection[["sections"]][["study"]], fitSection[["index"]], options)
+    layout <- .forestPlotAppendStudySection(layout, item[["sections"]][["study"]], item[["index"]], options)
   }
 
   return(layout)
 }
-.forestPlotAppendAdditionalBlocks     <- function(layout, fitSections, options, sectionName) {
+.forestPlotAppendAdditionalBlocks     <- function(layout, items, options, sectionName) {
 
-  includedSections <- Filter(function(fitSection) {
-    .forestPlotShouldIncludeGroupedSection(fitSection, sectionName, options) &&
-      .forestPlotSectionHasContent(fitSection[["sections"]][[sectionName]])
-  }, fitSections)
+  includedItems <- Filter(function(item) {
+    .forestPlotShouldIncludeAdditionalSection(item, sectionName) &&
+      .forestPlotSectionHasContent(item[["sections"]][["additional"]][[sectionName]])
+  }, items)
 
-  if (length(includedSections) == 0) {
+  if (length(includedItems) == 0) {
     return(layout)
   }
 
-  layout <- .forestPlotAppendAdditionalHeading(layout, includedSections[[1]][["sections"]][[sectionName]][["heading"]])
+  layout <- .forestPlotAppendAdditionalHeading(layout, includedItems[[1]][["sections"]][["additional"]][[sectionName]][["heading"]])
 
-  for (fitSection in fitSections) {
-    if (!.forestPlotShouldIncludeGroupedSection(fitSection, sectionName, options)) {
+  for (item in items) {
+    if (!.forestPlotShouldIncludeAdditionalSection(item, sectionName)) {
       next
     }
 
     if (options[["subgroup"]] != "") {
-      layout <- .forestPlotAppendSubgroupHeading(layout, options, fitSection[["subgroup"]])
+      layout <- .forestPlotAppendSubgroupHeading(layout, options, item[["subgroup"]])
     }
 
     layout <- .forestPlotAppendAdditionalSection(
       layout   = layout,
-      section  = fitSection[["sections"]][[sectionName]],
-      blockId  = paste(sectionName, fitSection[["index"]], sep = "_"),
+      section  = item[["sections"]][["additional"]][[sectionName]],
+      blockId  = paste(sectionName, item[["index"]], sep = "_"),
       addTitle = FALSE
     )
   }
 
   return(layout)
 }
-.forestPlotFitSectionVisibility       <- function(fitSection, options) {
+.forestPlotShouldIncludeStudySection  <- function(item, options) {
 
-  if (options[["subgroup"]] != "" && isTRUE(fitSection[["isFullDataset"]])) {
-    return(list(
-      study                  = FALSE,
-      estimatedMarginalMeans = options[["forestPlotSubgroupFullDatasetEstimatedMarginalMeans"]],
-      modelInformation       = options[["forestPlotSubgroupFullDatasetModelInformation"]]
-    ))
-  }
-
-  return(list(
-    study                  = TRUE,
-    estimatedMarginalMeans = TRUE,
-    modelInformation       = TRUE
-  ))
+  return(!(options[["subgroup"]] != "" && isTRUE(item[["isFullDataset"]])))
 }
-.forestPlotShouldIncludeGroupedSection <- function(fitSection, sectionName, options) {
+.forestPlotShouldIncludeAdditionalSection <- function(item, sectionName) {
 
-  if (options[["subgroup"]] == "" || !isTRUE(fitSection[["isFullDataset"]])) {
+  if (!isTRUE(item[["isFullDataset"]])) {
     return(TRUE)
   }
 
-  if (sectionName == "estimatedMarginalMeans") {
-    return(options[["forestPlotSubgroupFullDatasetEstimatedMarginalMeans"]])
-  }
-
-  if (sectionName == "modelInformation") {
-    return(options[["forestPlotSubgroupFullDatasetModelInformation"]])
-  }
-
-  return(FALSE)
+  section <- item[["sections"]][["additional"]][[sectionName]]
+  return(!is.null(section) && isTRUE(section[["includeWithFullDataset"]]))
 }
 .forestPlotAppendSubgroupHeading      <- function(layout, options, subgroup) {
 
@@ -419,7 +490,7 @@
     return(layout)
   }
 
-  if (addTitle) {
+  if (addTitle && !isFALSE(section[["showHeading"]])) {
     layout <- .forestPlotAppendAdditionalHeading(layout, section[["heading"]])
   }
 
@@ -428,18 +499,29 @@
 # Shared append logic: offset y by current row, add info/objects to named slots.
 .forestPlotAppendSectionData         <- function(layout, section, blockId, infoSlot, objectSlot) {
 
-  info   <- section[["information"]]
-  info$y <- info$y + (layout[["row"]] - 1)
-  layout[[infoSlot]][[length(layout[[infoSlot]]) + 1]] <- info
+  infoRowValues   <- numeric(0)
+  objectRowValues <- numeric(0)
+
+  if (.forestPlotHasDataFrame(section[["information"]])) {
+    info          <- section[["information"]]
+    info$y        <- info$y + (layout[["row"]] - 1)
+    infoRowValues <- c(infoRowValues, info$y)
+    layout[[infoSlot]][[length(layout[[infoSlot]]) + 1]] <- info
+  }
 
   if (.forestPlotHasDataFrame(section[["objects"]])) {
     objects    <- section[["objects"]]
     objects$y  <- objects$y + (layout[["row"]] - 1)
     objects$id <- paste(objects$id, blockId, sep = "_")
+    objectRowValues <- c(objectRowValues, objects$y)
     layout[[objectSlot]][[length(layout[[objectSlot]]) + 1]] <- objects
   }
 
-  layout[["row"]] <- max(info$y, na.rm = TRUE) + 2
+  rowValues <- if (length(infoRowValues) > 0) infoRowValues else objectRowValues
+  rowValues <- rowValues[!is.na(rowValues)]
+  if (length(rowValues) > 0) {
+    layout[["row"]] <- max(rowValues) + 2
+  }
 
   return(layout)
 }
@@ -947,12 +1029,24 @@
   if (!.forestPlotHasDataFrame(forestInformation)) {
     return(NULL)
   }
+  if (!"weights" %in% colnames(forestInformation)) {
+    return(NULL)
+  }
 
   studyWeights       <- forestInformation[, c("y", "weights")]
   formatString       <- paste0("%1$.", options[["forestPlotAuxiliaryDigits"]], "f")
-  studyWeights$label <- paste0(sprintf(formatString, studyWeights$weights), " %")
+  suffix             <- if (.forestPlotUsesRawStudyWeights(options)) "" else " %"
+  studyWeights$label <- paste0(sprintf(formatString, studyWeights$weights), suffix)
 
   return(studyWeights[, c("y", "label")])
+}
+.forestPlotUsesRawStudyWeights       <- function(options) {
+
+  return(
+    isTRUE(options[["analysis"]] == "standaloneForestPlot") &&
+      !is.null(options[["weights"]]) &&
+      options[["weights"]] != ""
+  )
 }
 
 # Character counts drive the relative spacing between the interval column and
@@ -1000,7 +1094,6 @@
 
   if (isTRUE(options[["forestPlotStudyInformation"]]) &&
       options[["forestPlotStudyInformationStudyWeights"]] &&
-      options[["forestPlotStudyInformationAggregateBy"]] == "" &&
       .forestPlotHasDataFrame(forestInformation)) {
     studyWeights <- .forestPlotBuildStudyWeightLabels(forestInformation, options)
   } else {

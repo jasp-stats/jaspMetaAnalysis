@@ -234,6 +234,12 @@ Form
 	{
 		analysisType:				"generalizedMetaAnalysis"
 		transformEffectSizeValue:	sectionStatistics.transformEffectSizeValue
+		effectSizeReady:			false
+		modelInformationEnabled:	true
+		effectSizeModelTermsCount:	sectionModel.effectSizeModelTermsCount
+		heterogeneityModelTermsCount: sectionModel.heterogeneityModelTermsCount
+		methodValue:				method.value
+		subgroupSelected:			subgroup.count > 0
 	}
 
 	MA.BubblePlot

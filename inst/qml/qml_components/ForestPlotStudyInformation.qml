@@ -105,8 +105,8 @@ Group
 				enabled:	predictedEffectsEnabled
 				visible:	showPredictedEffects
 				checked:	false
-				Layout.preferredWidth: 300 * jaspTheme.uiScale
 				info: qsTr("Include predicted effect sizes in the middle section of the study-level information panel.")
+				Layout.preferredWidth: 300 * jaspTheme.uiScale
 			}
 
 			CheckBox
@@ -117,6 +117,7 @@ Group
 				visible:		showStudyWeights
 				checked:		false
 				info: qsTr("Include the study weights in the right section of the study-level information panel.")
+				Layout.preferredWidth: 300 * jaspTheme.uiScale
 			}
 
 			CheckBox
@@ -125,9 +126,9 @@ Group
 				text:				qsTr("Secondary confidence interval")
 				enabled:			panelEnabled
 				visible:			showSecondaryCI
-				Layout.preferredWidth: 300 * jaspTheme.uiScale
 				childrenOnSameRow:	true
 				info: qsTr("Include secondary confidence interval for effect sizes in the middle section of the study-level information panel.")
+				Layout.preferredWidth: 300 * jaspTheme.uiScale
 
 				CIField
 				{

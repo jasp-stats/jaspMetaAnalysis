@@ -28,7 +28,7 @@ Form
 
 	VariablesForm
 	{
-		preferredHeight: 450 * preferencesModel.uiScale
+		preferredHeight: 500 * preferencesModel.uiScale
 
 		AvailableVariablesList
 		{
@@ -50,7 +50,7 @@ Form
 			title:				qsTr("Effect Size Standard Error")
 			singleVariable:		true
 			allowedColumns:		["scale"]
-			info: qsTr("Variable containing the standard errors. Used to compute confidence intervals when not provided directly, and to determine point sizes via inverse-variance weights.")
+			info: qsTr("Variable containing the standard errors. Used to compute confidence intervals when not provided directly, and to determine point sizes via inverse-variance weights when no weights variable is specified.")
 		}
 
 		AssignedPairsVariablesList
@@ -69,6 +69,16 @@ Form
 			singleVariable:		true
 			allowedColumns:		["scale"]
 			info: qsTr("Two variables specifying the lower and upper bounds of the prediction interval. Displayed as rectangles behind estimate diamonds.")
+		}
+
+		AssignedVariablesList
+		{
+			name:				"weights"
+			id:					weights
+			title:				qsTr("Weights")
+			singleVariable:		true
+			allowedColumns:		["scale"]
+			info: qsTr("Variable containing study weights. When specified, study points are scaled by these weights and the study weights can be shown in the study information panel.")
 		}
 
 		AssignedVariablesList
@@ -155,7 +165,7 @@ Form
 	MA.ForestPlotStudyInformation
 	{
 		showPredictedEffects:	false
-		showStudyWeights:		false
+		showStudyWeights:		weights.count > 0
 		showSecondaryCI:		false
 		showAggregate:			true
 	}

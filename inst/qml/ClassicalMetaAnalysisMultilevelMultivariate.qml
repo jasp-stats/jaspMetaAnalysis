@@ -436,6 +436,12 @@ Form
 	{
 		analysisType:				"multilevelMultivariateMetaAnalysis"
 		transformEffectSizeValue:	sectionStatistics.transformEffectSizeValue
+		effectSizeReady:			effectSize.count == 1 && effectSizeStandardError.count == 1
+		modelInformationEnabled:	effectSize.count == 1 && effectSizeStandardError.count == 1
+		effectSizeModelTermsCount:	sectionModel.effectSizeModelTermsCount
+		heterogeneityModelTermsCount: sectionModel.heterogeneityModelTermsCount
+		methodValue:				method.value
+		subgroupSelected:			subgroup.count > 0
 	}
 
 	MA.BubblePlot {}

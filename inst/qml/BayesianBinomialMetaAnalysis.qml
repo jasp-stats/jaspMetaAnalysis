@@ -316,6 +316,14 @@ Form
 	{
 		analysisType:				"BiBMA"
 		transformEffectSizeValue:	sectionInference.transformEffectSizeValue
+		effectSizeReady:			false
+		modelInformationEnabled:	true
+		effectSizeModelTermsCount:	sectionModel.effectSizeModelTermsCount
+		heterogeneityModelTermsCount: 0
+		bmaEffectSizeChecked:		bayesianModelAveragingEffectSize.checked
+		bmaHeterogeneityChecked:	bayesianModelAveragingHeterogeneity.checked
+		bmaModerationsChecked:		bayesianModelAveragingModerations.checked
+		subgroupSelected:			subgroup.count > 0
 	}
 
 	//// Bubble Plot Section ////

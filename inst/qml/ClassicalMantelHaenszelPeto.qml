@@ -165,6 +165,12 @@ Form
 	{
 		analysisType:				"mantelHaenszelPeto"
 		transformEffectSizeValue:	sectionStatistics.transformEffectSizeValue
+		effectSizeReady:			false
+		modelInformationEnabled:	true
+		effectSizeModelTermsCount:	0
+		heterogeneityModelTermsCount: 0
+		methodValue:				method.value
+		subgroupSelected:			subgroup.count > 0
 	}
 
 	MA.ClassicalMetaAnalysisDiagnostics

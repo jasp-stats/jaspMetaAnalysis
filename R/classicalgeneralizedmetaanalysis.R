@@ -270,7 +270,7 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
   }
 
   attr(fit, "subgroup") <- paste0(subgroupName)
-  attr(fit, "dataset")  <- dataset
+  attr(fit, "dataset")  <- .maAlignDatasetToFitRows(fit, dataset, options)
 
   return(list(
     fit          = fit,

@@ -985,13 +985,14 @@
 
       # create a base of the geom
       tempDf <- data.frame(
-        id     = df$id[1],
-        min    = min(df$effectSize),
-        lower  = quantile(df$effectSize, 0.25),
-        middle = median(df$effectSize),
-        upper  = quantile(df$effectSize, 0.75),
-        max    = max(df$effectSize),
-        geom   = "boxplot"
+        id      = df$id[1],
+        weights = .forestPlotAggregateWeights(df$weights),
+        min     = min(df$effectSize),
+        lower   = quantile(df$effectSize, 0.25),
+        middle  = median(df$effectSize),
+        upper   = quantile(df$effectSize, 0.75),
+        max     = max(df$effectSize),
+        geom    = "boxplot"
       )
 
       # add the additional variables
@@ -1012,7 +1013,8 @@
     dfForest <- do.call(rbind, lapply(datasetSplit, function(df) {
 
       tempDf <- data.frame(
-        id     = df$id[1]
+        id      = df$id[1],
+        weights = .forestPlotAggregateWeights(df$weights)
       )
 
       # add the additional variables
@@ -1028,7 +1030,7 @@
       tempDf <- data.frame(
         id      = df$id[1],
         x       = df$effectSize,
-        weight  = 1/df$standardError^2,
+        weight  = df$weights,
         geom    = "bubbles"
       )
 
@@ -1046,4 +1048,12 @@
     forest = dfForest,
     geoms  = dfGeoms
   ))
+}
+.forestPlotAggregateWeights           <- function(weights) {
+
+  weights <- weights[!is.na(weights)]
+  if (length(weights) == 0)
+    return(NA_real_)
+
+  return(sum(weights))
 }

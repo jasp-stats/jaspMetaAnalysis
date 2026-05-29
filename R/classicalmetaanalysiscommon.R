@@ -338,10 +338,10 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # add attributes
   attr(fit, "subgroup") <- paste0(subgroupName)
-  attr(fit, "dataset")  <- dataset
+  attr(fit, "dataset")  <- .maAlignDatasetToFitRows(fit, dataset, options)
   if (!is.null(fitClustered)) {
     attr(fitClustered, "subgroup") <- subgroupName
-    attr(fitClustered, "dataset")  <- dataset
+    attr(fitClustered, "dataset")  <- .maAlignDatasetToFitRows(fitClustered, dataset, options)
   }
 
 
@@ -350,6 +350,19 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     fit            = fit,
     fitClustered   = fitClustered
   ))
+}
+.maAlignDatasetToFitRows          <- function(fit, dataset, options) {
+
+  if (!.maIsGLMM(options) || inherits(fit, "try-error") || !inherits(fit, "rma.glmm"))
+    return(dataset)
+
+  retainedRows <- fit[["not.na"]]
+  if (is.null(retainedRows) ||
+      length(retainedRows) != nrow(dataset) ||
+      sum(retainedRows, na.rm = TRUE) != length(fit[["yi"]]))
+    return(dataset)
+
+  return(dataset[retainedRows, , drop = FALSE])
 }
 .maUpdateFitModelDataset         <- function(jaspResults, dataset, options, objectName = "fit") {
 
@@ -406,7 +419,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   if (!is.null(fitOutput[["fit"]])) {
     fit <- fitOutput[["fit"]]
-    attr(fit, "dataset") <- dataset
+    attr(fit, "dataset") <- .maAlignDatasetToFitRows(fit, dataset, options)
   } else {
     fit <- NULL
   }
@@ -414,7 +427,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   if (.maIsClassical(options)) {
     if (!is.null(fitOutput[["fitClustered"]])) {
       fitClustered <- fitOutput[["fitClustered"]]
-      attr(fitClustered, "dataset") <- dataset
+      attr(fitClustered, "dataset") <- .maAlignDatasetToFitRows(fitClustered, dataset, options)
     } else {
       fitClustered <- NULL
     }
