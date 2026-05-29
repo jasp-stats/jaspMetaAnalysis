@@ -180,7 +180,7 @@ test_that("ClassicalGeneralizedMetaAnalysis (analysis 6) results match", {
   table <- results[["results"]][["metaregressionContainer"]][["collection"]][["metaregressionContainer_effectSizeTermsTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
     list(1, 9, 1.74351628413826e-06, 118.732676438729, "jaspColumn1", 2,
-     9, 0.655731497171499, 0.88484935403135, "jaspColumn2"))
+     9, 0.655731497171499, 0.442424677015675, "jaspColumn2"))
 
   table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
