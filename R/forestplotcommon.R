@@ -376,7 +376,8 @@
         layout   = layout,
         section  = item[["sections"]][["additional"]][[sectionName]],
         blockId  = paste(sectionName, item[["index"]], sep = "_"),
-        addTitle = TRUE
+        addTitle = TRUE,
+        options  = options
       )
     }
   }
@@ -434,7 +435,8 @@
       layout   = layout,
       section  = item[["sections"]][["additional"]][[sectionName]],
       blockId  = paste(sectionName, item[["index"]], sep = "_"),
-      addTitle = FALSE
+      addTitle = FALSE,
+      options  = options
     )
   }
 
@@ -484,7 +486,7 @@
 
   return(.forestPlotAppendSectionData(layout, section, blockId, infoSlot = "forestInformation", objectSlot = "forestObjects"))
 }
-.forestPlotAppendAdditionalSection    <- function(layout, section, blockId, addTitle = TRUE) {
+.forestPlotAppendAdditionalSection    <- function(layout, section, blockId, addTitle = TRUE, options = NULL) {
 
   if (!.forestPlotSectionHasContent(section)) {
     return(layout)
@@ -494,7 +496,35 @@
     layout <- .forestPlotAppendAdditionalHeading(layout, section[["heading"]])
   }
 
+  if (.forestPlotSectionNeedsEstimateHeader(section, options)) {
+    layout[["estimateHeaderIndex"]] <- c(layout[["estimateHeaderIndex"]], layout[["row"]])
+    layout[["row"]]                 <- layout[["row"]] + 1
+  }
+
   return(.forestPlotAppendSectionData(layout, section, blockId, infoSlot = "additionalInformation", objectSlot = "additionalObjects"))
+}
+.forestPlotSectionNeedsEstimateHeader <- function(section, options) {
+
+  if (is.null(options) || !.forestPlotHasDataFrame(section[["information"]])) {
+    return(FALSE)
+  }
+
+  rowVariable <- options[["row"]]
+  if (!is.null(rowVariable) && length(rowVariable) == 1 && !is.na(rowVariable) && rowVariable != "") {
+    return(FALSE)
+  }
+
+  estimateSettings <- .forestPlotEstimateInformationSettings(options)
+  if (nrow(estimateSettings) == 0) {
+    return(FALSE)
+  }
+
+  availableVars <- intersect(estimateSettings$value, colnames(section[["information"]]))
+  if (length(availableVars) == 0) {
+    return(FALSE)
+  }
+
+  return(any(rowSums(!is.na(section[["information"]][, availableVars, drop = FALSE])) > 0))
 }
 # Shared append logic: offset y by current row, add info/objects to named slots.
 .forestPlotAppendSectionData         <- function(layout, section, blockId, infoSlot, objectSlot) {
