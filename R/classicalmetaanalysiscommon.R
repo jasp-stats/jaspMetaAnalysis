@@ -983,12 +983,12 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   .maAddSubgroupColumn(fitMeasuresTable, options)
   fitMeasuresTable$addColumnInfo(name = "observations",  title = gettext("Observations"), type = "integer")
   fitMeasuresTable$addColumnInfo(name = "ll",            title = gettext("Log Lik."),     type = "number")
+  if (!.maIsUnrestrictedWeightedLeastSquares(options))
+    fitMeasuresTable$addColumnInfo(name = "dev",         title = gettext("Deviance"),     type = "number")
   fitMeasuresTable$addColumnInfo(name = "AIC",           title = gettext("AIC"),          type = "number")
   fitMeasuresTable$addColumnInfo(name = "BIC",           title = gettext("BIC"),          type = "number")
-  if (!.maIsUnrestrictedWeightedLeastSquares(options)) {
-    fitMeasuresTable$addColumnInfo(name = "dev",         title = gettext("Deviance"),     type = "number")
+  if (!.maIsUnrestrictedWeightedLeastSquares(options))
     fitMeasuresTable$addColumnInfo(name = "AICc",        title = gettext("AICc"),         type = "number")
-  }
 
   if (!.maIsUnrestrictedWeightedLeastSquares(options) &&
       .maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options) && !.maIsGLMM(options))
