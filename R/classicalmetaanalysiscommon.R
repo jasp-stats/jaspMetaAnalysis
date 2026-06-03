@@ -726,30 +726,6 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   return(out)
 }
-.maBaujatStudyLabels             <- function(fit, options, nRows) {
-
-  labelVariable <- options[["studyLabels"]]
-  if (is.null(labelVariable) || labelVariable == "")
-    return(NULL)
-
-  dataset <- attr(fit, "dataset")
-  if (is.null(dataset) || !labelVariable %in% colnames(dataset))
-    return(NULL)
-
-  labels <- dataset[[labelVariable]]
-  notNa  <- fit[["not.na"]]
-  if (!is.null(notNa) && length(notNa) == length(labels))
-    labels <- labels[notNa]
-
-  if (length(labels) != nRows)
-    return(NULL)
-
-  labels <- as.character(labels)
-  labels[is.na(labels)] <- ""
-
-  return(labels)
-}
-
 # output tables
 .maOverallTestsTable                     <- function(jaspResults, options) {
 
@@ -2642,10 +2618,14 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     return()
   }
 
-  studyLabels    <- .maBaujatStudyLabels(fit, options, nrow(dfBaujat))
-  hasStudyLabels <- !is.null(studyLabels) && length(studyLabels) == nrow(dfBaujat)
-  if (hasStudyLabels)
-    dfBaujat$label <- studyLabels
+  if (options[["studyLabels"]] != "") {
+    fitData <- attr(fit, "dataset")
+    if (!is.null(fitData) && nrow(fitData) == nrow(dfBaujat)) {
+      dfBaujat$label <- as.character(fitData[[options[["studyLabels"]]]])
+      dfBaujat$label[is.na(dfBaujat$label)] <- ""
+    }
+  }
+  hasStudyLabels <- "label" %in% colnames(dfBaujat)
 
   xTicks <- jaspGraphs::getPrettyAxisBreaks(range(dfBaujat$x, na.rm = TRUE))
   yTicks <- jaspGraphs::getPrettyAxisBreaks(range(dfBaujat$y, na.rm = TRUE))
