@@ -44,7 +44,7 @@ Section
 	readonly property bool isBayesian:			analysisType === "RoBMA" || analysisType === "NoBMA" || analysisType === "BiBMA"
 	readonly property bool isMetaRegression:	(analysisType !== "mantelHaenszelPeto") && effectSizeModelTermsCount > 0
 	readonly property bool isScaleRegression:	analysisType === "metaAnalysis" && heterogeneityModelTermsCount > 0
-	readonly property bool isFixedOrEqualEffect: methodValue === "fixedEffects" || methodValue === "equalEffects"
+	readonly property bool isFixedOrEqualEffect: methodValue === "fixedEffects" || methodValue === "equalEffects" || methodValue === "unrestrictedWeightedLeastSquares"
 
 	CheckBox
 	{

@@ -88,7 +88,7 @@ Form
 		name:		"funnelUnderH0"
 		id:			funnelUnderH0
 		label:		qsTr("Funnel under H₀")
-		checked:	true
+		checked:	false
 		info: qsTr("Specify the funnel plot under the null hypothesis.")
 
 		Group
@@ -118,7 +118,7 @@ Form
 		{
 			name:		"funnelUnderH0FillColors"
 			label:		qsTr("Fill colors")
-			checked:	true
+			checked:	false
 			info: qsTr("Fill the funnel plot's prediction intervals under the null hypothesis with different colors.")
 		}
 
@@ -126,6 +126,7 @@ Form
 		{
 			name:		"funnelUnderH0LineType"
 			label:		qsTr("Line type")
+			startValue:	"solid"
 			info: qsTr("Set the type of line of the funnel plot's prediction intervals under the null hypothesis.")
 			values:		[
 				{ label: qsTr("None"),		value: "none"	},
@@ -141,7 +142,7 @@ Form
 		name:		"funnelUnderH1"
 		id:			funnelUnderH1
 		label:		qsTr("Funnel under H₁")
-		checked:	false
+		checked:	true
 		info: qsTr("Estimate or specify the funnel plot under the alternative hypothesis.")
 
 		RadioButtonGroup
@@ -216,6 +217,7 @@ Form
 		{
 			name:		"funnelUnderH1FillColors"
 			label:		qsTr("Fill colors")
+			checked:	true
 			info: qsTr("Fill the funnel plot's prediction intervals under the alternative hypothesis with different colors.")
 		}
 
@@ -223,7 +225,6 @@ Form
 		{
 			name:		"funnelUnderH1LineType"
 			label:		qsTr("Line type")
-			startValue:	"solid"
 			info: qsTr("Set the type of line of the funnel plot's prediction intervals under the alternative hypothesis.")
 			values:		[
 				{ label: qsTr("None"),		value: "none"	},

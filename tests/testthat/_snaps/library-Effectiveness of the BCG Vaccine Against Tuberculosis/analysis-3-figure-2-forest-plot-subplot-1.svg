@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' data-engine-version='2.0' width='720.00pt' height='576.00pt' viewBox='0 0 720.00 576.00'>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='360.00pt' viewBox='0 0 504.00 360.00'>
+<g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
     .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
@@ -9,96 +10,103 @@
       stroke-linejoin: round;
       stroke-miterlimit: 10.00;
     }
+    .svglite text {
+      white-space: pre;
+    }
+    .svglite g.glyphgroup path {
+      fill: inherit;
+      stroke: none;
+    }
   ]]></style>
 </defs>
 <rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
 <defs>
-  <clipPath id='cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA='>
-    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  <clipPath id='cpMC4wMHw1MDQuMDB8MC4wMHwzNjAuMDA='>
+    <rect x='0.00' y='0.00' width='504.00' height='360.00' />
   </clipPath>
 </defs>
-<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MC4wMHwzNjAuMDA=)'>
 </g>
 <defs>
-  <clipPath id='cpNS40OHw3MTQuNTJ8MjIuNzh8NTQ0LjA5'>
-    <rect x='5.48' y='22.78' width='709.04' height='521.31' />
+  <clipPath id='cpNS40OHw0OTguNTJ8NS40OHwzMjcuMzY='>
+    <rect x='5.48' y='5.48' width='493.04' height='321.88' />
   </clipPath>
 </defs>
-<g clip-path='url(#cpNS40OHw3MTQuNTJ8MjIuNzh8NTQ0LjA5)'>
-<text x='5.48' y='45.10' style='font-size: 11.38px; font-weight: bold; font-family: sans;' textLength='39.23px' lengthAdjust='spacingAndGlyphs'>Authors</text>
-<text x='317.46' y='45.10' style='font-size: 11.38px; font-weight: bold; font-family: sans;' textLength='24.04px' lengthAdjust='spacingAndGlyphs'>Year</text>
-<text x='487.63' y='45.10' text-anchor='middle' style='font-size: 11.38px; font-weight: bold; font-family: sans;' textLength='49.35px' lengthAdjust='spacingAndGlyphs'>Allocation</text>
-<text x='643.62' y='45.10' text-anchor='middle' style='font-size: 11.38px; font-weight: bold; font-family: sans;' textLength='40.50px' lengthAdjust='spacingAndGlyphs'>Latitude</text>
-<text x='487.63' y='63.50' text-anchor='middle' style='font-size: 11.38px; fill: #00BA38; font-family: sans;' textLength='38.60px' lengthAdjust='spacingAndGlyphs'>random</text>
-<text x='487.63' y='81.90' text-anchor='middle' style='font-size: 11.38px; fill: #00BA38; font-family: sans;' textLength='38.60px' lengthAdjust='spacingAndGlyphs'>random</text>
-<text x='487.63' y='100.30' text-anchor='middle' style='font-size: 11.38px; fill: #619CFF; font-family: sans;' textLength='53.78px' lengthAdjust='spacingAndGlyphs'>systematic</text>
-<text x='487.63' y='118.69' text-anchor='middle' style='font-size: 11.38px; fill: #619CFF; font-family: sans;' textLength='53.78px' lengthAdjust='spacingAndGlyphs'>systematic</text>
-<text x='487.63' y='137.09' text-anchor='middle' style='font-size: 11.38px; fill: #F8766D; font-family: sans;' textLength='44.29px' lengthAdjust='spacingAndGlyphs'>alternate</text>
-<text x='487.63' y='155.49' text-anchor='middle' style='font-size: 11.38px; fill: #00BA38; font-family: sans;' textLength='38.60px' lengthAdjust='spacingAndGlyphs'>random</text>
-<text x='487.63' y='173.89' text-anchor='middle' style='font-size: 11.38px; fill: #619CFF; font-family: sans;' textLength='53.78px' lengthAdjust='spacingAndGlyphs'>systematic</text>
-<text x='487.63' y='192.29' text-anchor='middle' style='font-size: 11.38px; fill: #00BA38; font-family: sans;' textLength='38.60px' lengthAdjust='spacingAndGlyphs'>random</text>
-<text x='487.63' y='210.69' text-anchor='middle' style='font-size: 11.38px; fill: #619CFF; font-family: sans;' textLength='53.78px' lengthAdjust='spacingAndGlyphs'>systematic</text>
-<text x='487.63' y='229.09' text-anchor='middle' style='font-size: 11.38px; fill: #00BA38; font-family: sans;' textLength='38.60px' lengthAdjust='spacingAndGlyphs'>random</text>
-<text x='487.63' y='247.49' text-anchor='middle' style='font-size: 11.38px; fill: #F8766D; font-family: sans;' textLength='44.29px' lengthAdjust='spacingAndGlyphs'>alternate</text>
-<text x='487.63' y='265.89' text-anchor='middle' style='font-size: 11.38px; fill: #00BA38; font-family: sans;' textLength='38.60px' lengthAdjust='spacingAndGlyphs'>random</text>
-<text x='487.63' y='284.29' text-anchor='middle' style='font-size: 11.38px; fill: #00BA38; font-family: sans;' textLength='38.60px' lengthAdjust='spacingAndGlyphs'>random</text>
-<text x='5.48' y='63.50' style='font-size: 11.38px; font-family: sans;' textLength='62.62px' lengthAdjust='spacingAndGlyphs'>TPT Madras</text>
-<text x='5.48' y='81.90' style='font-size: 11.38px; font-family: sans;' textLength='90.47px' lengthAdjust='spacingAndGlyphs'>Hart &amp; Sutherland</text>
-<text x='5.48' y='100.30' style='font-size: 11.38px; font-family: sans;' textLength='75.29px' lengthAdjust='spacingAndGlyphs'>Comstock et al</text>
-<text x='5.48' y='118.69' style='font-size: 11.38px; font-family: sans;' textLength='75.29px' lengthAdjust='spacingAndGlyphs'>Comstock et al</text>
-<text x='5.48' y='137.09' style='font-size: 11.38px; font-family: sans;' textLength='98.03px' lengthAdjust='spacingAndGlyphs'>Frimodt-Moller et al</text>
-<text x='5.48' y='155.49' style='font-size: 11.38px; font-family: sans;' textLength='78.45px' lengthAdjust='spacingAndGlyphs'>Vandiviere et al</text>
-<text x='5.48' y='173.89' style='font-size: 11.38px; font-family: sans;' textLength='106.91px' lengthAdjust='spacingAndGlyphs'>Comstock &amp; Webster</text>
-<text x='5.48' y='192.29' style='font-size: 11.38px; font-family: sans;' textLength='88.58px' lengthAdjust='spacingAndGlyphs'>Coetzee &amp; Berjak</text>
-<text x='5.48' y='210.69' style='font-size: 11.38px; font-family: sans;' textLength='75.93px' lengthAdjust='spacingAndGlyphs'>Rosenthal et al</text>
-<text x='5.48' y='229.09' style='font-size: 11.38px; font-family: sans;' textLength='75.93px' lengthAdjust='spacingAndGlyphs'>Rosenthal et al</text>
-<text x='5.48' y='247.49' style='font-size: 11.38px; font-family: sans;' textLength='82.26px' lengthAdjust='spacingAndGlyphs'>Stein &amp; Aronson</text>
-<text x='5.48' y='265.89' style='font-size: 11.38px; font-family: sans;' textLength='93.63px' lengthAdjust='spacingAndGlyphs'>Ferguson &amp; Simes</text>
-<text x='5.48' y='284.29' style='font-size: 11.38px; font-family: sans;' textLength='42.40px' lengthAdjust='spacingAndGlyphs'>Aronson</text>
-<text x='317.46' y='63.50' style='font-size: 11.38px; font-family: sans;' textLength='25.32px' lengthAdjust='spacingAndGlyphs'>1980</text>
-<text x='317.46' y='81.90' style='font-size: 11.38px; font-family: sans;' textLength='25.32px' lengthAdjust='spacingAndGlyphs'>1977</text>
-<text x='317.46' y='100.30' style='font-size: 11.38px; font-family: sans;' textLength='25.32px' lengthAdjust='spacingAndGlyphs'>1976</text>
-<text x='317.46' y='118.69' style='font-size: 11.38px; font-family: sans;' textLength='25.32px' lengthAdjust='spacingAndGlyphs'>1974</text>
-<text x='317.46' y='137.09' style='font-size: 11.38px; font-family: sans;' textLength='25.32px' lengthAdjust='spacingAndGlyphs'>1973</text>
-<text x='317.46' y='155.49' style='font-size: 11.38px; font-family: sans;' textLength='25.32px' lengthAdjust='spacingAndGlyphs'>1973</text>
-<text x='317.46' y='173.89' style='font-size: 11.38px; font-family: sans;' textLength='25.32px' lengthAdjust='spacingAndGlyphs'>1969</text>
-<text x='317.46' y='192.29' style='font-size: 11.38px; font-family: sans;' textLength='25.32px' lengthAdjust='spacingAndGlyphs'>1968</text>
-<text x='317.46' y='210.69' style='font-size: 11.38px; font-family: sans;' textLength='25.32px' lengthAdjust='spacingAndGlyphs'>1961</text>
-<text x='317.46' y='229.09' style='font-size: 11.38px; font-family: sans;' textLength='25.32px' lengthAdjust='spacingAndGlyphs'>1960</text>
-<text x='317.46' y='247.49' style='font-size: 11.38px; font-family: sans;' textLength='25.32px' lengthAdjust='spacingAndGlyphs'>1953</text>
-<text x='317.46' y='265.89' style='font-size: 11.38px; font-family: sans;' textLength='25.32px' lengthAdjust='spacingAndGlyphs'>1949</text>
-<text x='317.46' y='284.29' style='font-size: 11.38px; font-family: sans;' textLength='25.32px' lengthAdjust='spacingAndGlyphs'>1948</text>
-<text x='643.62' y='63.50' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>13</text>
-<text x='643.62' y='81.90' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>52</text>
-<text x='643.62' y='100.30' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>33</text>
-<text x='643.62' y='118.69' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>18</text>
-<text x='643.62' y='137.09' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>13</text>
-<text x='643.62' y='155.49' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>19</text>
-<text x='643.62' y='173.89' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>33</text>
-<text x='643.62' y='192.29' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>27</text>
-<text x='643.62' y='210.69' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>42</text>
-<text x='643.62' y='229.09' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>42</text>
-<text x='643.62' y='247.49' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>44</text>
-<text x='643.62' y='265.89' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>55</text>
-<text x='643.62' y='284.29' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>44</text>
-<text x='714.52' y='321.08' text-anchor='end' style='font-size: 11.38px; font-weight: bold; font-family: sans;' textLength='134.76px' lengthAdjust='spacingAndGlyphs'>Estimated Marginal Means</text>
-<text x='714.52' y='339.48' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='195.51px' lengthAdjust='spacingAndGlyphs'>jaspColumn3: F(2, 9) = 0.60, p = 0.569</text>
-<text x='714.52' y='357.88' text-anchor='end' style='font-size: 11.38px; font-style: italic; font-family: sans;' textLength='160.71px' lengthAdjust='spacingAndGlyphs'>alternate: t(9) = -2.04, p = 0.072</text>
-<text x='714.52' y='376.28' text-anchor='end' style='font-size: 11.38px; font-style: italic; font-family: sans;' textLength='155.02px' lengthAdjust='spacingAndGlyphs'>random: t(9) = -4.49, p = 0.002</text>
-<text x='714.52' y='394.68' text-anchor='end' style='font-size: 11.38px; font-style: italic; font-family: sans;' textLength='170.20px' lengthAdjust='spacingAndGlyphs'>systematic: t(9) = -2.22, p = 0.054</text>
-<text x='714.52' y='431.48' text-anchor='end' style='font-size: 11.38px; font-weight: bold; font-family: sans;' textLength='91.10px' lengthAdjust='spacingAndGlyphs'>Model Information</text>
-<text x='714.52' y='449.88' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='241.09px' lengthAdjust='spacingAndGlyphs'>Residual heterogeneity: Q(9) = 26.20, p = 0.002</text>
-<text x='714.52' y='468.28' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='106.94px' lengthAdjust='spacingAndGlyphs'>𝜏  = 0.38 [0.15, 0.96]</text>
-<text x='714.52' y='486.68' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='124.34px' lengthAdjust='spacingAndGlyphs'>I²  = 70.11 [27.07, 93.72]</text>
-<text x='714.52' y='505.07' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='186.02px' lengthAdjust='spacingAndGlyphs'>Moderation: F(3, 9) = 3.45, p = 0.065</text>
-<text x='714.52' y='523.47' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='184.13px' lengthAdjust='spacingAndGlyphs'>Pooled Effect: t(9) = -5.32, p &lt; 0.001</text>
+<g clip-path='url(#cpNS40OHw0OTguNTJ8NS40OHwzMjcuMzY=)'>
+<text x='5.48' y='20.91' style='font-size: 11.38px; font-weight: bold; font-family: "Arial";' textLength='43.61px' lengthAdjust='spacingAndGlyphs'>Authors</text>
+<text x='222.42' y='20.91' style='font-size: 11.38px; font-weight: bold; font-family: "Arial";' textLength='24.05px' lengthAdjust='spacingAndGlyphs'>Year</text>
+<text x='340.75' y='20.91' text-anchor='middle' style='font-size: 11.38px; font-weight: bold; font-family: "Arial";' textLength='54.98px' lengthAdjust='spacingAndGlyphs'>Allocation</text>
+<text x='449.22' y='20.91' text-anchor='middle' style='font-size: 11.38px; font-weight: bold; font-family: "Arial";' textLength='44.23px' lengthAdjust='spacingAndGlyphs'>Latitude</text>
+<text x='340.75' y='32.27' text-anchor='middle' style='font-size: 11.38px;fill: #00BA38; font-family: "Arial";' textLength='38.56px' lengthAdjust='spacingAndGlyphs'>random</text>
+<text x='340.75' y='43.63' text-anchor='middle' style='font-size: 11.38px;fill: #00BA38; font-family: "Arial";' textLength='38.56px' lengthAdjust='spacingAndGlyphs'>random</text>
+<text x='340.75' y='54.99' text-anchor='middle' style='font-size: 11.38px;fill: #619CFF; font-family: "Arial";' textLength='53.72px' lengthAdjust='spacingAndGlyphs'>systematic</text>
+<text x='340.75' y='66.35' text-anchor='middle' style='font-size: 11.38px;fill: #619CFF; font-family: "Arial";' textLength='53.72px' lengthAdjust='spacingAndGlyphs'>systematic</text>
+<text x='340.75' y='77.71' text-anchor='middle' style='font-size: 11.38px;fill: #F8766D; font-family: "Arial";' textLength='44.27px' lengthAdjust='spacingAndGlyphs'>alternate</text>
+<text x='340.75' y='89.07' text-anchor='middle' style='font-size: 11.38px;fill: #00BA38; font-family: "Arial";' textLength='38.56px' lengthAdjust='spacingAndGlyphs'>random</text>
+<text x='340.75' y='100.43' text-anchor='middle' style='font-size: 11.38px;fill: #619CFF; font-family: "Arial";' textLength='53.72px' lengthAdjust='spacingAndGlyphs'>systematic</text>
+<text x='340.75' y='111.79' text-anchor='middle' style='font-size: 11.38px;fill: #00BA38; font-family: "Arial";' textLength='38.56px' lengthAdjust='spacingAndGlyphs'>random</text>
+<text x='340.75' y='123.15' text-anchor='middle' style='font-size: 11.38px;fill: #619CFF; font-family: "Arial";' textLength='53.72px' lengthAdjust='spacingAndGlyphs'>systematic</text>
+<text x='340.75' y='134.51' text-anchor='middle' style='font-size: 11.38px;fill: #00BA38; font-family: "Arial";' textLength='38.56px' lengthAdjust='spacingAndGlyphs'>random</text>
+<text x='340.75' y='145.88' text-anchor='middle' style='font-size: 11.38px;fill: #F8766D; font-family: "Arial";' textLength='44.27px' lengthAdjust='spacingAndGlyphs'>alternate</text>
+<text x='340.75' y='157.24' text-anchor='middle' style='font-size: 11.38px;fill: #00BA38; font-family: "Arial";' textLength='38.56px' lengthAdjust='spacingAndGlyphs'>random</text>
+<text x='340.75' y='168.60' text-anchor='middle' style='font-size: 11.38px;fill: #00BA38; font-family: "Arial";' textLength='38.56px' lengthAdjust='spacingAndGlyphs'>random</text>
+<text x='5.48' y='32.27' style='font-size: 11.38px; font-family: "Arial";' textLength='62.38px' lengthAdjust='spacingAndGlyphs'>TPT Madras</text>
+<text x='5.48' y='43.63' style='font-size: 11.38px; font-family: "Arial";' textLength='90.42px' lengthAdjust='spacingAndGlyphs'>Hart &amp; Sutherland</text>
+<text x='5.48' y='54.99' style='font-size: 11.38px; font-family: "Arial";' textLength='75.22px' lengthAdjust='spacingAndGlyphs'>Comstock et al</text>
+<text x='5.48' y='66.35' style='font-size: 11.38px; font-family: "Arial";' textLength='75.22px' lengthAdjust='spacingAndGlyphs'>Comstock et al</text>
+<text x='5.48' y='77.71' style='font-size: 11.38px; font-family: "Arial";' textLength='97.95px' lengthAdjust='spacingAndGlyphs'>Frimodt-Moller et al</text>
+<text x='5.48' y='89.07' style='font-size: 11.38px; font-family: "Arial";' textLength='77.58px' lengthAdjust='spacingAndGlyphs'>Vandiviere et al</text>
+<text x='5.48' y='100.43' style='font-size: 11.38px; font-family: "Arial";' textLength='106.61px' lengthAdjust='spacingAndGlyphs'>Comstock &amp; Webster</text>
+<text x='5.48' y='111.79' style='font-size: 11.38px; font-family: "Arial";' textLength='88.53px' lengthAdjust='spacingAndGlyphs'>Coetzee &amp; Berjak</text>
+<text x='5.48' y='123.15' style='font-size: 11.38px; font-family: "Arial";' textLength='75.89px' lengthAdjust='spacingAndGlyphs'>Rosenthal et al</text>
+<text x='5.48' y='134.51' style='font-size: 11.38px; font-family: "Arial";' textLength='75.89px' lengthAdjust='spacingAndGlyphs'>Rosenthal et al</text>
+<text x='5.48' y='145.88' style='font-size: 11.38px; font-family: "Arial";' textLength='81.59px' lengthAdjust='spacingAndGlyphs'>Stein &amp; Aronson</text>
+<text x='5.48' y='157.24' style='font-size: 11.38px; font-family: "Arial";' textLength='93.58px' lengthAdjust='spacingAndGlyphs'>Ferguson &amp; Simes</text>
+<text x='5.48' y='168.60' style='font-size: 11.38px; font-family: "Arial";' textLength='42.38px' lengthAdjust='spacingAndGlyphs'>Aronson</text>
+<text x='222.42' y='32.27' style='font-size: 11.38px; font-family: "Arial";' textLength='25.31px' lengthAdjust='spacingAndGlyphs'>1980</text>
+<text x='222.42' y='43.63' style='font-size: 11.38px; font-family: "Arial";' textLength='25.31px' lengthAdjust='spacingAndGlyphs'>1977</text>
+<text x='222.42' y='54.99' style='font-size: 11.38px; font-family: "Arial";' textLength='25.31px' lengthAdjust='spacingAndGlyphs'>1976</text>
+<text x='222.42' y='66.35' style='font-size: 11.38px; font-family: "Arial";' textLength='25.31px' lengthAdjust='spacingAndGlyphs'>1974</text>
+<text x='222.42' y='77.71' style='font-size: 11.38px; font-family: "Arial";' textLength='25.31px' lengthAdjust='spacingAndGlyphs'>1973</text>
+<text x='222.42' y='89.07' style='font-size: 11.38px; font-family: "Arial";' textLength='25.31px' lengthAdjust='spacingAndGlyphs'>1973</text>
+<text x='222.42' y='100.43' style='font-size: 11.38px; font-family: "Arial";' textLength='25.31px' lengthAdjust='spacingAndGlyphs'>1969</text>
+<text x='222.42' y='111.79' style='font-size: 11.38px; font-family: "Arial";' textLength='25.31px' lengthAdjust='spacingAndGlyphs'>1968</text>
+<text x='222.42' y='123.15' style='font-size: 11.38px; font-family: "Arial";' textLength='25.31px' lengthAdjust='spacingAndGlyphs'>1961</text>
+<text x='222.42' y='134.51' style='font-size: 11.38px; font-family: "Arial";' textLength='25.31px' lengthAdjust='spacingAndGlyphs'>1960</text>
+<text x='222.42' y='145.88' style='font-size: 11.38px; font-family: "Arial";' textLength='25.31px' lengthAdjust='spacingAndGlyphs'>1953</text>
+<text x='222.42' y='157.24' style='font-size: 11.38px; font-family: "Arial";' textLength='25.31px' lengthAdjust='spacingAndGlyphs'>1949</text>
+<text x='222.42' y='168.60' style='font-size: 11.38px; font-family: "Arial";' textLength='25.31px' lengthAdjust='spacingAndGlyphs'>1948</text>
+<text x='449.22' y='32.27' text-anchor='middle' style='font-size: 11.38px; font-family: "Arial";' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>13</text>
+<text x='449.22' y='43.63' text-anchor='middle' style='font-size: 11.38px; font-family: "Arial";' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>52</text>
+<text x='449.22' y='54.99' text-anchor='middle' style='font-size: 11.38px; font-family: "Arial";' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>33</text>
+<text x='449.22' y='66.35' text-anchor='middle' style='font-size: 11.38px; font-family: "Arial";' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>18</text>
+<text x='449.22' y='77.71' text-anchor='middle' style='font-size: 11.38px; font-family: "Arial";' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>13</text>
+<text x='449.22' y='89.07' text-anchor='middle' style='font-size: 11.38px; font-family: "Arial";' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>19</text>
+<text x='449.22' y='100.43' text-anchor='middle' style='font-size: 11.38px; font-family: "Arial";' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>33</text>
+<text x='449.22' y='111.79' text-anchor='middle' style='font-size: 11.38px; font-family: "Arial";' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>27</text>
+<text x='449.22' y='123.15' text-anchor='middle' style='font-size: 11.38px; font-family: "Arial";' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>42</text>
+<text x='449.22' y='134.51' text-anchor='middle' style='font-size: 11.38px; font-family: "Arial";' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>42</text>
+<text x='449.22' y='145.88' text-anchor='middle' style='font-size: 11.38px; font-family: "Arial";' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>44</text>
+<text x='449.22' y='157.24' text-anchor='middle' style='font-size: 11.38px; font-family: "Arial";' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>55</text>
+<text x='449.22' y='168.60' text-anchor='middle' style='font-size: 11.38px; font-family: "Arial";' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>44</text>
+<text x='498.52' y='191.32' text-anchor='end' style='font-size: 11.38px; font-weight: bold; font-family: "Arial";' textLength='142.84px' lengthAdjust='spacingAndGlyphs'>Estimated Marginal Means</text>
+<text x='498.52' y='202.68' text-anchor='end' style='font-size: 11.38px; font-family: "Arial";' textLength='195.36px' lengthAdjust='spacingAndGlyphs'>jaspColumn3: F(2, 9) = 0.60, p = 0.569</text>
+<text x='498.52' y='214.04' text-anchor='end' style='font-size: 11.38px; font-style: italic; font-family: "Arial";' textLength='160.56px' lengthAdjust='spacingAndGlyphs'>alternate: t(9) = -2.04, p = 0.072</text>
+<text x='498.52' y='225.40' text-anchor='end' style='font-size: 11.38px; font-style: italic; font-family: "Arial";' textLength='154.86px' lengthAdjust='spacingAndGlyphs'>random: t(9) = -4.49, p = 0.002</text>
+<text x='498.52' y='236.76' text-anchor='end' style='font-size: 11.38px; font-style: italic; font-family: "Arial";' textLength='170.02px' lengthAdjust='spacingAndGlyphs'>systematic: t(9) = -2.22, p = 0.054</text>
+<text x='498.52' y='259.48' text-anchor='end' style='font-size: 11.38px; font-weight: bold; font-family: "Arial";' textLength='98.56px' lengthAdjust='spacingAndGlyphs'>Model Information</text>
+<text x='498.52' y='270.84' text-anchor='end' style='font-size: 11.38px; font-family: "Arial";' textLength='240.91px' lengthAdjust='spacingAndGlyphs'>Residual heterogeneity: Q(9) = 26.20, p = 0.002</text>
+<text x='498.52' y='282.20' text-anchor='end' style='font-size: 11.38px; font-family: "Arial";' textLength='103.53px' lengthAdjust='spacingAndGlyphs'>𝜏  = 0.38 [0.15, 0.96]</text>
+<text x='498.52' y='293.56' text-anchor='end' style='font-size: 11.38px; font-family: "Arial";' textLength='123.39px' lengthAdjust='spacingAndGlyphs'>I²  = 70.11 [27.07, 93.72]</text>
+<text x='498.52' y='304.92' text-anchor='end' style='font-size: 11.38px; font-family: "Arial";' textLength='185.86px' lengthAdjust='spacingAndGlyphs'>Moderation: F(3, 9) = 3.45, p = 0.065</text>
+<text x='498.52' y='316.28' text-anchor='end' style='font-size: 11.38px; font-family: "Arial";' textLength='182.50px' lengthAdjust='spacingAndGlyphs'>Pooled effect: t(9) = -5.32, p &lt; 0.001</text>
 </g>
-<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-<text x='5.48' y='554.54' text-anchor='middle' style='font-size: 12.00px; fill: none; font-family: sans;' textLength='23.36px' lengthAdjust='spacingAndGlyphs'>0.00</text>
-<text x='182.74' y='554.54' text-anchor='middle' style='font-size: 12.00px; fill: none; font-family: sans;' textLength='23.36px' lengthAdjust='spacingAndGlyphs'>0.25</text>
-<text x='360.00' y='554.54' text-anchor='middle' style='font-size: 12.00px; fill: none; font-family: sans;' textLength='23.36px' lengthAdjust='spacingAndGlyphs'>0.50</text>
-<text x='537.26' y='554.54' text-anchor='middle' style='font-size: 12.00px; fill: none; font-family: sans;' textLength='23.36px' lengthAdjust='spacingAndGlyphs'>0.75</text>
-<text x='714.52' y='554.54' text-anchor='middle' style='font-size: 12.00px; fill: none; font-family: sans;' textLength='23.36px' lengthAdjust='spacingAndGlyphs'>1.00</text>
-<text x='5.48' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='236.28px' lengthAdjust='spacingAndGlyphs'>analysis-3_figure-2_forest-plot-subplot-1</text>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MC4wMHwzNjAuMDA=)'>
+<text x='5.48' y='338.14' text-anchor='middle' style='font-size: 12.00px;fill: none; font-family: "Arial";' textLength='23.34px' lengthAdjust='spacingAndGlyphs'>0.00</text>
+<text x='128.74' y='338.14' text-anchor='middle' style='font-size: 12.00px;fill: none; font-family: "Arial";' textLength='23.34px' lengthAdjust='spacingAndGlyphs'>0.25</text>
+<text x='252.00' y='338.14' text-anchor='middle' style='font-size: 12.00px;fill: none; font-family: "Arial";' textLength='23.34px' lengthAdjust='spacingAndGlyphs'>0.50</text>
+<text x='375.26' y='338.14' text-anchor='middle' style='font-size: 12.00px;fill: none; font-family: "Arial";' textLength='23.34px' lengthAdjust='spacingAndGlyphs'>0.75</text>
+<text x='498.52' y='338.14' text-anchor='middle' style='font-size: 12.00px;fill: none; font-family: "Arial";' textLength='23.34px' lengthAdjust='spacingAndGlyphs'>1.00</text>
+</g>
 </g>
 </svg>

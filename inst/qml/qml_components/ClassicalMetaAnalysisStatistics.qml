@@ -32,7 +32,7 @@ Section
 	{
 		title:		qsTr("Heterogeneity")
 		columns:	2
-		enabled:	method.value != "fixedEffects" && method.value != "equalEffects"
+		enabled:	method.value != "fixedEffects" && method.value != "equalEffects" && method.value != "unrestrictedWeightedLeastSquares"
 		visible:	analysisType === "metaAnalysis" || analysisType === "mantelHaenszelPeto" || analysisType === "generalizedMetaAnalysis"
 		info: qsTr("Summarize the meta-analytic between-study heterogeneity. Unavailable when performing multilevel/multivariate meta-analysis.")
 

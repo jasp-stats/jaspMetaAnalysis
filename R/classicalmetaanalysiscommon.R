@@ -85,7 +85,6 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   }
   if (options[["diagnosticsCasewiseDiagnostics"]]) {
     .maCasewiseDiagnosticsTable(jaspResults, options)
-    .maCasewiseDiagnosticsExportColumns(jaspResults, dataset, options)
   }
   if (options[["diagnosticsPlotsProfileLikelihood"]])
     .maProfileLikelihoodPlot(jaspResults, options)
@@ -93,6 +92,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     .maBaujatPlot(jaspResults, options)
   if (options[["diagnosticsResidualFunnel"]])
     .maResidualFunnelPlot(jaspResults, options)
+
+  # export
+  .maExportColumns(jaspResults, dataset, options)
 
   # additional
   if (options[["showMetaforRCode"]]) {
@@ -221,7 +223,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # add formulas if specified
   rmaInput$mods  <- .maGetFormula(options[["effectSizeModelTerms"]], options[["effectSizeModelIncludeIntercept"]])
-  rmaInput$scale <- .maGetFormula(options[["heterogeneityModelTerms"]], options[["heterogeneityModelIncludeIntercept"]])
+  rmaInput$scale <- if (!.maIsUnrestrictedWeightedLeastSquares(options)) .maGetFormula(options[["heterogeneityModelTerms"]], options[["heterogeneityModelIncludeIntercept"]])
 
   # add random effects
   if (.maIsMultilevelMultivariate(options)) {
@@ -265,7 +267,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # specify method and fixed effect terms test
   rmaInput$method <- .maGetMethodOptions(options)
-  rmaInput$test   <- options[["fixedEffectTest"]]
+  rmaInput$test   <- .maGetFixedEffectTestOptions(options)
 
   if (!options[["weightedEstimation"]])
     rmaInput$weighted <- FALSE
@@ -702,7 +704,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     jaspResults[["baujatResults"]] <- baujatResults
 
 
-    fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
+    baujatOptions <- options
+    baujatOptions[["includeFullDatasetInSubgroupAnalysis"]] <- TRUE
+    fit <- .maExtractFit(jaspResults, baujatOptions, nonClustered = TRUE)
     out <- list()
 
     for (i in seq_along(fit)) {
@@ -711,10 +715,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
         dfBaujat <- list()
       } else {
         dfBaujat <- try(.maSuppressPlot(metafor::baujat(fit[[i]])))
-        attr(dfBaujat, "studyLabels") <- attr(fit[[i]], "dataset")[[options[["studyLabels"]]]]
       }
 
-      out[[attr(fit[[i]], "subgroup")]] <- dfBaujat
+      out[[names(fit)[i]]] <- dfBaujat
     }
 
     jaspResults[["baujatResults"]]$object <- out
@@ -722,6 +725,29 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
 
   return(out)
+}
+.maBaujatStudyLabels             <- function(fit, options, nRows) {
+
+  labelVariable <- options[["studyLabels"]]
+  if (is.null(labelVariable) || labelVariable == "")
+    return(NULL)
+
+  dataset <- attr(fit, "dataset")
+  if (is.null(dataset) || !labelVariable %in% colnames(dataset))
+    return(NULL)
+
+  labels <- dataset[[labelVariable]]
+  notNa  <- fit[["not.na"]]
+  if (!is.null(notNa) && length(notNa) == length(labels))
+    labels <- labels[notNa]
+
+  if (length(labels) != nRows)
+    return(NULL)
+
+  labels <- as.character(labels)
+  labels[is.na(labels)] <- ""
+
+  return(labels)
 }
 
 # output tables
@@ -1529,11 +1555,10 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   }
 
   # try adjusting height and width
-  height <- 200 + (attr(plotOut, "rows")) * 10
-  if (!attr(plotOut, "isPanel"))
-    width <- 500
-  else
-    width <- 500 + 500 * attr(plotOut, "panelRatio")
+  height <- .forestPlotPlotHeight(plotOut, options)
+  width <- attr(plotOut, "plotWidth")
+  if (is.null(width))
+    width <- if (!attr(plotOut, "isPanel")) 500 else 500 + 500 * attr(plotOut, "panelRatio")
 
   forestPlot <- createJaspPlot(
     title  = gettext("Forest Plot"),
@@ -1833,96 +1858,624 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   return()
 }
 .maCasewiseDiagnosticsExportColumns      <- function(jaspResults, dataset, options) {
+  .maExportDiagnosticsColumns(jaspResults, dataset, options)
+  return()
+}
+.maExportColumns                         <- function(jaspResults, dataset, options) {
 
-  if (!options[["diagnosticsCasewiseDiagnosticsExportToDataset"]])
+  if (!.maAnyExportColumns(options) || is.null(dataset) || !.maReady(options))
     return()
 
-  if (.maIsMetaregressionHeterogeneity(options))
+  .maExportDiagnosticsColumns(jaspResults, dataset, options)
+  .maExportResidualColumns(jaspResults, dataset, options)
+  .maExportPredictedColumns(jaspResults, dataset, options)
+  .maExportTrueEffectColumns(jaspResults, dataset, options)
+  .maExportRandomEffectsColumns(jaspResults, dataset, options)
+  .maExportWeightsColumns(jaspResults, dataset, options)
+
+  return()
+}
+.maAnyExportColumns                      <- function(options) {
+
+  exportOptions <- c(.maExportOptions, "diagnosticsCasewiseDiagnosticsExportToDataset")
+  return(any(vapply(exportOptions, function(option) isTRUE(options[[option]]), logical(1))))
+}
+.maExportDiagnosticsColumns              <- function(jaspResults, dataset, options) {
+
+  if (!.maAnyDiagnosticsExportColumns(options) || .maIsMetaregressionHeterogeneity(options))
     return()
 
   # the fit diagnostics work only for the non-clustered fit
-  fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
+  fit <- .maExportFitList(jaspResults, options, nonClustered = TRUE)
 
-  # stop on error
   if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
-  # export diagnostics
   diagnostics <- .maDiagnostics(jaspResults, options)
 
-  # always drop the full from subgroups
-  if (options[["subgroup"]] != "" && options[["includeFullDatasetInSubgroupAnalysis"]]) {
-    fit         <- fit[-1]
+  if (options[["subgroup"]] != "" && isTRUE(options[["includeFullDatasetInSubgroupAnalysis"]]))
     diagnostics <- diagnostics[-1]
-  }
 
-  # return the diagnostics with order variable indicating the order in the full data set
+  exportOptions <- options
+  exportOptions[["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"]] <- .maExportDiagnosticsCoefficientInfluence(options)
+
   diagnosticsTable <- .maSafeRbind(lapply(seq_along(fit), function(i) .maRowDiagnosticsTable(
     fit         = fit[[i]],
     diagnostics = diagnostics[[attr(fit[[i]], "subgroup")]],
-    options     = options,
+    options     = exportOptions,
     forExport   = TRUE
   )))
 
-  # add empty rows for the missing observations
-  diagnosticsTable <- .maSafeRbind(list(
-    diagnosticsTable,
-    data.frame("datasetOrder" = setdiff(1:length(attr(dataset, "NasIds")), diagnosticsTable[["datasetOrder"]]))
+  if (is.null(diagnosticsTable) || !"datasetOrder" %in% colnames(diagnosticsTable))
+    return()
+
+  diagnosticsTable <- .maExportCompleteRows(diagnosticsTable, dataset)
+
+  if (.maExportDiagnosticsInfluentialCases(options) && "inf" %in% colnames(diagnosticsTable))
+    .maExportNominalColumn(jaspResults, "Diagnostics: Influential", diagnosticsTable[["inf"]], c(.maExportDependencies(), "exportDiagnosticsInfluentialCases"))
+
+  if (.maExportDiagnosticsCaseDiagnostics(options)) {
+    for (diagnosticName in intersect(c("rstudent", "cook.d", "hat", "weight"), colnames(diagnosticsTable))) {
+      columnName <- paste0("Diagnostics: ", .maCasewiseDiagnosticsExportColumnsNames(diagnosticName))
+      .maExportScaleColumn(jaspResults, columnName, diagnosticsTable[[diagnosticName]], c(.maExportDependencies(), "exportDiagnosticsCaseDiagnostics"))
+    }
+  }
+
+  if (.maExportDiagnosticsModelImpact(options)) {
+    for (diagnosticName in intersect(c("dffits", "cov.r", "tau.del", "tau2.del", "QE.del"), colnames(diagnosticsTable))) {
+      columnName <- paste0("Diagnostics: ", .maCasewiseDiagnosticsExportColumnsNames(diagnosticName))
+      .maExportScaleColumn(jaspResults, columnName, diagnosticsTable[[diagnosticName]], c(.maExportDependencies(), "exportDiagnosticsModelImpact"))
+    }
+  }
+
+  if (.maExportDiagnosticsCoefficientInfluence(options)) {
+    coefficientNames <- setdiff(colnames(diagnosticsTable), c("subgroup", "label", "datasetOrder", .maCasewiseDiagnosticsNames()))
+    variables        <- c(unlist(options[["effectSizeModelTerms"]]), unlist(options[["heterogeneityModelTerms"]]))
+
+    for (diagnosticName in coefficientNames) {
+      columnName <- decodeColNames(paste0("Difference in coefficients: ", .maVariableNames(diagnosticName, variables)))
+      .maExportScaleColumn(jaspResults, columnName, diagnosticsTable[[diagnosticName]], c(.maExportDependencies(), "exportDiagnosticsCoefficientInfluence"))
+    }
+  }
+
+  return()
+}
+.maAnyDiagnosticsExportColumns            <- function(options) {
+  return(
+    .maExportDiagnosticsInfluentialCases(options) ||
+      .maExportDiagnosticsCaseDiagnostics(options) ||
+      .maExportDiagnosticsModelImpact(options) ||
+      .maExportDiagnosticsCoefficientInfluence(options)
+  )
+}
+.maExportDiagnosticsInfluentialCases      <- function(options) {
+  if (.maIsMultilevelMultivariate(options))
+    return(FALSE)
+
+  return(isTRUE(options[["exportDiagnosticsInfluentialCases"]]) || isTRUE(options[["diagnosticsCasewiseDiagnosticsExportToDataset"]]))
+}
+.maExportDiagnosticsCaseDiagnostics       <- function(options) {
+  return(isTRUE(options[["exportDiagnosticsCaseDiagnostics"]]) || (
+    isTRUE(options[["diagnosticsCasewiseDiagnosticsExportToDataset"]]) &&
+      !isTRUE(options[["diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"]])
+  ))
+}
+.maExportDiagnosticsModelImpact           <- function(options) {
+  if (.maIsMultilevelMultivariate(options))
+    return(FALSE)
+
+  return(isTRUE(options[["exportDiagnosticsModelImpact"]]) || (
+    isTRUE(options[["diagnosticsCasewiseDiagnosticsExportToDataset"]]) &&
+      !isTRUE(options[["diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"]])
+  ))
+}
+.maExportDiagnosticsCoefficientInfluence  <- function(options) {
+  return(isTRUE(options[["exportDiagnosticsCoefficientInfluence"]]) || (
+    isTRUE(options[["diagnosticsCasewiseDiagnosticsExportToDataset"]]) &&
+      !isTRUE(options[["diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"]]) &&
+      isTRUE(options[["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"]])
+  ))
+}
+.maExportResidualColumns                  <- function(jaspResults, dataset, options) {
+
+  fit <- .maExportFitList(jaspResults, options)
+  if (is.null(fit))
+    return()
+
+  if (isTRUE(options[["exportResidualsRaw"]])) {
+    values <- .maExportVectorFromFitList(dataset, fit, function(fit) stats::residuals(fit, type = "response"))
+    .maExportScaleColumn(jaspResults, "Residuals: Raw", values, c(.maExportDependencies(), "exportResidualsRaw"))
+  }
+
+  if (isTRUE(options[["exportResidualsPearson"]])) {
+    values <- .maExportVectorFromFitList(dataset, fit, function(fit) stats::residuals(fit, type = "pearson"))
+    .maExportScaleColumn(jaspResults, "Residuals: Pearson", values, c(.maExportDependencies(), "exportResidualsPearson"))
+  }
+
+  if (isTRUE(options[["exportResidualsStandardized"]])) {
+    values <- .maExportVectorFromFitList(dataset, fit, function(fit) stats::residuals(fit, type = "rstandard"))
+    .maExportScaleColumn(jaspResults, "Residuals: Standardized", values, c(.maExportDependencies(), "exportResidualsStandardized"))
+  }
+
+  if (isTRUE(options[["exportResidualsStudentized"]])) {
+    values <- .maExportVectorFromFitList(dataset, fit, function(fit) stats::residuals(fit, type = "rstudent"))
+    .maExportScaleColumn(jaspResults, "Residuals: Studentized", values, c(.maExportDependencies(), "exportResidualsStudentized"))
+  }
+
+  if (isTRUE(options[["exportResidualsConditional"]]) && !.maIsMultilevelMultivariate(options)) {
+    values <- .maExportVectorFromFitList(dataset, fit, function(fit) stats::rstandard(fit, type = "conditional")[["z"]])
+    .maExportScaleColumn(jaspResults, "Residuals: Conditional Standardized", values, c(.maExportDependencies(), "exportResidualsConditional"))
+  }
+
+  return()
+}
+.maExportPredictedColumns                 <- function(jaspResults, dataset, options) {
+
+  if (!isTRUE(options[["exportPredictedValues"]]))
+    return()
+
+  fit     <- .maExportFitList(jaspResults, options)
+  columns <- .maExportDataFrameFromFitList(dataset, fit, .maExportPredictedDataFrame)
+
+  .maExportScaleColumns(jaspResults, columns, "Predicted Values", c(.maExportDependencies(), "exportPredictedValues"))
+
+  return()
+}
+.maExportTrueEffectColumns                <- function(jaspResults, dataset, options) {
+
+  if (!isTRUE(options[["exportTrueEffectEstimates"]]) || .maIsMultilevelMultivariate(options))
+    return()
+
+  fit     <- .maExportFitList(jaspResults, options)
+  columns <- .maExportDataFrameFromFitList(dataset, fit, .maExportTrueEffectDataFrame)
+
+  .maExportScaleColumns(jaspResults, columns, "True Effect Estimates (BLUPs)", c(.maExportDependencies(), "exportTrueEffectEstimates"))
+
+  return()
+}
+.maExportRandomEffectsColumns             <- function(jaspResults, dataset, options) {
+
+  if (!isTRUE(options[["exportRandomEffects"]]))
+    return()
+
+  fit <- .maExportFitList(jaspResults, options)
+
+  if (.maIsMultilevelMultivariate(options)) {
+    columns <- .maExportRandomEffectsMvColumns(dataset, fit)
+  } else {
+    columns <- .maExportDataFrameFromFitList(dataset, fit, .maExportRandomEffectsDataFrame)
+  }
+
+  .maExportScaleColumns(jaspResults, columns, "Random Effects", c(.maExportDependencies(), "exportRandomEffects"))
+
+  return()
+}
+.maExportWeightsColumns                   <- function(jaspResults, dataset, options) {
+
+  if (!isTRUE(options[["exportWeights"]]))
+    return()
+
+  fit        <- .maExportFitList(jaspResults, options)
+  columnName <- if (.maIsMultilevelMultivariate(options)) "Weights: Row Sum" else "Weights"
+  values     <- .maExportVectorFromFitList(dataset, fit, function(fit) .maExportWeights(fit, options))
+
+  .maExportScaleColumn(jaspResults, columnName, values, c(.maExportDependencies(), "exportWeights"))
+
+  return()
+}
+.maExportFitList                          <- function(jaspResults, options, nonClustered = FALSE) {
+
+  fit <- .maExtractFit(jaspResults, options, nonClustered = nonClustered)
+
+  if (is.null(fit))
+    return(NULL)
+
+  if (options[["subgroup"]] != "" && isTRUE(options[["includeFullDatasetInSubgroupAnalysis"]]))
+    fit <- fit[-1]
+
+  return(fit)
+}
+.maExportCompleteRows                     <- function(df, dataset) {
+
+  df <- .maSafeRbind(list(
+    df,
+    data.frame("datasetOrder" = setdiff(seq_len(.maExportDatasetRows(dataset)), df[["datasetOrder"]]))
   ))
 
-  # order according to the dataset order
-  diagnosticsTable <- diagnosticsTable[order(diagnosticsTable[["datasetOrder"]]),, drop = FALSE]
+  df <- df[order(df[["datasetOrder"]]),, drop = FALSE]
 
-  # export columns:
-  if (options[["diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"]]) {
+  return(df)
+}
+.maExportDataFrameFromFitList             <- function(dataset, fit, exportFunction) {
 
-    # export only the influential indicator
-    columnName <- "Diagnostics: Influential"
-    if (jaspBase:::columnExists(columnName) && !jaspBase:::columnIsMine(columnName))
-      .quitAnalysis(gettextf("Column name %s already exists in the dataset.", columnName))
+  columns <- list()
+  if (is.null(fit))
+    return(columns)
 
-    jaspResults[[columnName]] <- createJaspColumn(columnName = columnName, dependencies = .maDependencies)
-    jaspResults[[columnName]]$setNominal(diagnosticsTable[["inf"]])
+  for (i in seq_along(fit)) {
+    if (jaspBase::isTryError(fit[[i]]))
+      next
 
-  } else {
+    datasetOrder <- .maExportDatasetOrder(fit[[i]])
+    if (length(datasetOrder) == 0)
+      next
 
-    # export all diagnostics
-    diagnosticsNames <- .maCasewiseDiagnosticsNames()
-    diagnosticsNames <- intersect(diagnosticsNames, colnames(diagnosticsTable))
+    values <- try(exportFunction(fit[[i]]), silent = TRUE)
+    if (jaspBase::isTryError(values) || is.null(values) || nrow(values) == 0)
+      next
 
-    for (diagnosticName in diagnosticsNames) {
+    values <- .maExportRecycleRows(values, length(datasetOrder))
+    if (is.null(values))
+      next
 
-      columnName <- paste0("Diagnostics: ", .maCasewiseDiagnosticsExportColumnsNames(diagnosticName))
-
-      if (jaspBase:::columnExists(columnName) && !jaspBase:::columnIsMine(columnName))
-        .quitAnalysis(gettextf("Column name %s already exists in the dataset.", columnName))
-
-      jaspResults[[columnName]] <- createJaspColumn(columnName = columnName, dependencies = .maDependencies)
-      if (diagnosticName == "inf") {
-        jaspResults[[columnName]]$setNominal(diagnosticsTable[[diagnosticName]])
-      } else {
-        jaspResults[[columnName]]$setScale(diagnosticsTable[[diagnosticName]])
-      }
+    for (columnName in colnames(values)) {
+      if (is.null(columns[[columnName]]))
+        columns[[columnName]] <- rep(NA_real_, .maExportDatasetRows(dataset))
+      columns[[columnName]][datasetOrder] <- values[[columnName]]
     }
-
-    # export change in coefficients
-    if (options[["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"]]) {
-
-      coefDifferenceNames <- setdiff(colnames(diagnosticsTable), c("subgroup", "label", "datasetOrder", .maCasewiseDiagnosticsNames()))
-
-      for (diagnosticName in coefDifferenceNames) {
-
-        columnName <- decodeColNames(paste0("Difference in coefficients: ", .maVariableNames(diagnosticName, c(unlist(options[["effectSizeModelTerms"]]), unlist(options[["heterogeneityModelTerms"]])))))
-
-        if (jaspBase:::columnExists(columnName) && !jaspBase:::columnIsMine(columnName))
-          .quitAnalysis(gettextf("Column name %s already exists in the dataset.", columnName))
-
-        jaspResults[[columnName]] <- createJaspColumn(columnName = columnName, dependencies = .maDependencies)
-        jaspResults[[columnName]]$setScale(diagnosticsTable[[diagnosticName]])
-      }
-    }
-
   }
+
+  return(columns)
+}
+.maExportVectorFromFitList                <- function(dataset, fit, exportFunction) {
+
+  output    <- rep(NA_real_, .maExportDatasetRows(dataset))
+  hasValues <- FALSE
+  if (is.null(fit))
+    return(NULL)
+
+  for (i in seq_along(fit)) {
+    if (jaspBase::isTryError(fit[[i]]))
+      next
+
+    datasetOrder <- .maExportDatasetOrder(fit[[i]])
+    if (length(datasetOrder) == 0)
+      next
+
+    values <- try(exportFunction(fit[[i]]), silent = TRUE)
+    if (jaspBase::isTryError(values) || is.null(values))
+      next
+
+    values <- as.numeric(values)
+    if (length(values) == 1 && length(datasetOrder) > 1)
+      values <- rep(values, length(datasetOrder))
+    if (length(values) != length(datasetOrder))
+      next
+
+    output[datasetOrder] <- values
+    hasValues <- TRUE
+  }
+
+  if (!hasValues)
+    return(NULL)
+
+  return(output)
+}
+.maExportRandomEffectsMvColumns           <- function(dataset, fit) {
+
+  columns <- list()
+  if (is.null(fit))
+    return(columns)
+
+  for (i in seq_along(fit)) {
+    if (jaspBase::isTryError(fit[[i]]))
+      next
+
+    datasetOrder <- .maExportDatasetOrder(fit[[i]])
+    randomEffects <- try(metafor::ranef(fit[[i]]), silent = TRUE)
+    if (jaspBase::isTryError(randomEffects) || is.null(randomEffects))
+      next
+
+    if (is.matrix(randomEffects)) {
+      columns <- .maExportRandomEffectsMvMatrixColumns(columns, dataset, fit[[i]], randomEffects, datasetOrder)
+      next
+    }
+
+    for (componentName in names(randomEffects)) {
+      component <- randomEffects[[componentName]]
+      rowIndex  <- .maExportRandomEffectsMvRowIndex(fit[[i]], componentName, component)
+
+      if (is.null(rowIndex))
+        next
+
+      matched <- component[rowIndex,, drop = FALSE]
+      if (nrow(matched) != length(datasetOrder))
+        next
+
+      componentLabel <- .maExportCleanComponentName(componentName)
+      for (columnName in colnames(matched)) {
+        if (!is.numeric(matched[[columnName]]))
+          next
+
+        outputName <- paste0(componentLabel, " - ", .maExportStatisticName(columnName))
+        if (is.null(columns[[outputName]]))
+          columns[[outputName]] <- rep(NA_real_, .maExportDatasetRows(dataset))
+        columns[[outputName]][datasetOrder] <- matched[[columnName]]
+      }
+    }
+  }
+
+  return(columns)
+}
+.maExportPredictedDataFrame               <- function(fit) {
+  return(.maExportListRmaDataFrame(stats::predict(fit), c("pred", "se", "ci.lb", "ci.ub", "pi.lb", "pi.ub")))
+}
+.maExportTrueEffectDataFrame              <- function(fit) {
+  return(.maExportListRmaDataFrame(metafor::blup(fit), c("pred", "se", "pi.lb", "pi.ub")))
+}
+.maExportRandomEffectsDataFrame           <- function(fit) {
+  return(.maExportListRmaDataFrame(metafor::ranef(fit), c("pred", "se", "pi.lb", "pi.ub")))
+}
+.maExportWeights                          <- function(fit, options) {
+
+  if (.maIsMultilevelMultivariate(options)) {
+    if (!isTRUE(fit[["int.only"]]))
+      return(NULL)
+    return(stats::weights(fit, type = "rowsum"))
+  }
+
+  return(stats::weights(fit, type = "diagonal"))
+}
+.maExportListRmaDataFrame                 <- function(x, columns) {
+
+  values <- list()
+  lengths <- integer(0)
+
+  for (columnName in columns) {
+    if (!is.null(x[[columnName]]) && length(x[[columnName]]) > 0) {
+      values[[.maExportStatisticName(columnName)]] <- as.numeric(x[[columnName]])
+      lengths <- c(lengths, length(x[[columnName]]))
+    }
+  }
+
+  if (length(values) == 0)
+    return(NULL)
+
+  nRows <- max(lengths)
+  for (columnName in names(values)) {
+    if (length(values[[columnName]]) == 1 && nRows > 1)
+      values[[columnName]] <- rep(values[[columnName]], nRows)
+    if (length(values[[columnName]]) != nRows)
+      values[[columnName]] <- NULL
+  }
+
+  return(as.data.frame(values, check.names = FALSE))
+}
+.maExportRecycleRows                      <- function(values, nRows) {
+
+  if (nrow(values) == nRows)
+    return(values)
+  if (nrow(values) == 1 && nRows > 1)
+    return(values[rep(1, nRows),, drop = FALSE])
+
+  return(NULL)
+}
+.maExportCleanComponentName               <- function(componentName) {
+  componentName <- sub("^~", "", componentName)
+  componentName <- gsub("\\s+", " ", componentName)
+  return(trimws(componentName))
+}
+.maExportRandomEffectsMvMatrixColumns     <- function(columns, dataset, fit, randomEffects, datasetOrder) {
+
+  randomPart <- .maExportRandomEffectsMvMatrixRandomPart(fit)
+  if (is.null(randomPart))
+    return(columns)
+
+  rowIndex <- .maExportRandomEffectsMvMatrixRowIndex(fit, randomEffects)
+  if (is.null(rowIndex))
+    return(columns)
+
+  componentLabel <- .maExportRandomEffectFormulaName(fit, randomPart)
+
+  matched <- randomEffects[rowIndex,, drop = FALSE]
+  if (nrow(matched) != length(datasetOrder))
+    return(columns)
+
+  for (columnName in colnames(matched)) {
+    if (!is.numeric(matched[, columnName]))
+      next
+
+    outputName <- paste0(componentLabel, " - Estimate: ", .maExportRandomEffectCoefficientName(columnName))
+    if (is.null(columns[[outputName]]))
+      columns[[outputName]] <- rep(NA_real_, .maExportDatasetRows(dataset))
+    columns[[outputName]][datasetOrder] <- matched[, columnName]
+  }
+
+  return(columns)
+}
+.maExportRandomEffectsMvRowIndex          <- function(fit, componentName, component) {
+
+  sIndex <- match(componentName, fit[["s.names"]])
+  if (!is.na(sIndex))
+    return(.maExportRowsFromDesignMatrix(fit[["Z.S"]][[sIndex]], nrow(component)))
+
+  if (identical(componentName, .maExportRandomEffectFormulaName(fit, "g")))
+    return(.maExportInnerOuterRandomEffectRows(fit, component, "g"))
+
+  if (identical(componentName, .maExportRandomEffectFormulaName(fit, "h")))
+    return(.maExportInnerOuterRandomEffectRows(fit, component, "h"))
+
+  return(NULL)
+}
+.maExportRandomEffectsMvMatrixRowIndex    <- function(fit, randomEffects) {
+
+  randomPart <- .maExportRandomEffectsMvMatrixRandomPart(fit)
+  if (is.null(randomPart))
+    return(NULL)
+
+  modelFrame <- fit[[paste0("mf.", randomPart)]]
+  if (is.null(modelFrame) || !"outer" %in% colnames(modelFrame))
+    return(NULL)
+
+  rowIndex <- match(as.character(modelFrame[["outer"]]), rownames(randomEffects))
+  if (anyNA(rowIndex))
+    return(NULL)
+
+  return(rowIndex)
+}
+.maExportRandomEffectsMvMatrixRandomPart  <- function(fit) {
+
+  if (isTRUE(fit[["withG"]]) && fit[["struct"]][1] %in% c("GEN", "GDIAG"))
+    return("g")
+
+  if (isTRUE(fit[["withH"]]) && fit[["struct"]][2] %in% c("GEN", "GDIAG"))
+    return("h")
+
+  return(NULL)
+}
+.maExportRowsFromDesignMatrix             <- function(designMatrix, nComponentRows) {
+
+  if (is.null(designMatrix))
+    return(NULL)
+
+  designMatrix <- as.matrix(designMatrix)
+  if (nrow(designMatrix) == 0 || ncol(designMatrix) != nComponentRows)
+    return(NULL)
+
+  nonZeroRows <- rowSums(abs(designMatrix) > 0)
+  if (any(nonZeroRows != 1))
+    return(NULL)
+
+  return(max.col(abs(designMatrix), ties.method = "first"))
+}
+.maExportInnerOuterRandomEffectRows       <- function(fit, component, randomPart) {
+
+  modelFrame <- fit[[paste0("mf.", randomPart)]]
+  if (is.null(modelFrame) || ncol(modelFrame) < 2)
+    return(NULL)
+
+  struct <- fit[["struct"]][switch(randomPart, "g" = 1, "h" = 2)]
+  if (struct %in% c("GEN", "GDIAG"))
+    return(NULL)
+
+  nVars <- ncol(modelFrame)
+  outer <- modelFrame[[nVars]]
+
+  if (struct %in% .maExportSpatialRandomEffectStructures()) {
+    key         <- paste(seq_len(nrow(modelFrame)), as.character(outer), sep = "\r")
+    orderedRows <- which(!duplicated(key))
+  } else {
+    inner       <- modelFrame[[1]]
+    key         <- paste(as.character(inner), as.character(outer), sep = "\r")
+    uniqueRows  <- which(!duplicated(key))
+    orderedRows <- uniqueRows[order(outer[uniqueRows], inner[uniqueRows])]
+  }
+
+  if (nrow(component) != length(orderedRows))
+    return(NULL)
+
+  rowIndex <- match(key, key[orderedRows])
+  if (anyNA(rowIndex))
+    return(NULL)
+
+  return(rowIndex)
+}
+.maExportRandomEffectFormulaName          <- function(fit, randomPart) {
+
+  formulaIndex <- switch(randomPart, "g" = 1, "h" = 2)
+  formulas     <- fit[["formulas"]]
+
+  if (is.null(formulas) || length(formulas) < formulaIndex)
+    return("")
+
+  formula <- formulas[[formulaIndex]]
+
+  if (is.null(formula))
+    return("")
+
+  return(paste0(formula, collapse = ""))
+}
+.maExportRandomEffectCoefficientName      <- function(coefficientName) {
+
+  if (coefficientName == "intrcpt")
+    return("Intercept")
+
+  return(coefficientName)
+}
+.maExportSpatialRandomEffectStructures    <- function() {
+  return(c("SPEXP", "SPGAU", "SPLIN", "SPRAT", "SPSPH", "PHYBM", "PHYPL", "PHYPD"))
+}
+.maExportStatisticName                    <- function(columnName) {
+  return(switch(
+    columnName,
+    "pred"  = "Estimate",
+    "intrcpt" = "Estimate",
+    "se"    = "SE",
+    "ci.lb" = "CI Lower",
+    "ci.ub" = "CI Upper",
+    "pi.lb" = "PI Lower",
+    "pi.ub" = "PI Upper",
+    columnName
+  ))
+}
+.maExportFitDataset                       <- function(fit) {
+
+  fitData <- attr(fit, "dataset")
+  if (is.null(fitData))
+    fitData <- attr(fit, "data")
+
+  return(fitData)
+}
+.maExportDatasetOrder                     <- function(fit) {
+
+  fitData <- .maExportFitDataset(fit)
+  if (is.null(fitData))
+    return(integer(0))
+
+  nasIds  <- attr(fitData, "NasIds")
+
+  if (!is.null(nasIds))
+    datasetOrder <- as.numeric(names(nasIds)[!nasIds])
+  else
+    datasetOrder <- seq_len(nrow(fitData))
+
+  notNa <- fit[["not.na"]]
+  if (!is.null(notNa) && length(notNa) == length(datasetOrder))
+    datasetOrder <- datasetOrder[notNa]
+
+  return(datasetOrder)
+}
+.maExportDatasetRows                      <- function(dataset) {
+
+  nasIds <- attr(dataset, "NasIds")
+  if (!is.null(nasIds))
+    return(length(nasIds))
+
+  return(nrow(dataset))
+}
+.maExportDependencies                     <- function() {
+  return(c(.maDependencies, "includeFullDatasetInSubgroupAnalysis"))
+}
+.maExportScaleColumns                     <- function(jaspResults, columns, prefix, dependencies) {
+
+  for (columnName in names(columns))
+    .maExportScaleColumn(jaspResults, paste0(prefix, ": ", columnName), columns[[columnName]], dependencies)
+
+  return()
+}
+.maExportScaleColumn                      <- function(jaspResults, columnName, values, dependencies) {
+
+  if (is.null(values))
+    return()
+
+  .maExportValidateColumnName(columnName)
+  jaspResults[[columnName]] <- createJaspColumn(columnName = columnName, dependencies = dependencies)
+  jaspResults[[columnName]]$setScale(values)
+
+  return()
+}
+.maExportNominalColumn                    <- function(jaspResults, columnName, values, dependencies) {
+
+  .maExportValidateColumnName(columnName)
+  jaspResults[[columnName]] <- createJaspColumn(columnName = columnName, dependencies = dependencies)
+  jaspResults[[columnName]]$setNominal(values)
+
+  return()
+}
+.maExportValidateColumnName               <- function(columnName) {
+
+  if (jaspBase:::columnExists(columnName) && !jaspBase:::columnIsMine(columnName))
+    .quitAnalysis(gettextf("Column name %s already exists in the dataset.", columnName))
 
   return()
 }
@@ -2035,7 +2588,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   # create individual plots for each subgroup
   if (options[["subgroup"]] == "") {
 
-    baujatPlot       <- .maBaujatPlotFun(dfBaujat[[1]], options)
+    baujatPlot       <- .maBaujatPlotFun(dfBaujat[[names(fit)[1]]], options, fit[[1]])
     baujatPlot$title <- gettext("Baujat Plot")
     baujatPlot$dependOn(c(.maDependencies, "diagnosticsPlotsBaujat", "includeFullDatasetInSubgroupAnalysis", "studyLabels"))
     baujatPlot$position <- 9
@@ -2052,7 +2605,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     jaspResults[["baujatPlot"]] <- baujatPlot
 
     for (i in seq_along(fit)) {
-      baujatPlot[[names(fit)[i]]]          <- .maBaujatPlotFun(dfBaujat[[i]], options)
+      baujatPlot[[names(fit)[i]]]          <- .maBaujatPlotFun(dfBaujat[[names(fit)[i]]], options, fit[[i]])
       baujatPlot[[names(fit)[i]]]$title    <- gettextf("Subgroup: %1$s", attr(fit[[i]], "subgroup"))
       baujatPlot[[names(fit)[i]]]$position <- i
     }
@@ -2061,7 +2614,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   return()
 }
-.maBaujatPlotFun                         <- function(dfBaujat, options) {
+.maBaujatPlotFun                         <- function(dfBaujat, options, fit) {
 
   baujatPlot <- createJaspPlot(width = 400, height = 320)
 
@@ -2078,16 +2631,17 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     return()
   }
 
-  if (options[["studyLabels"]] != "")
-    dfBaujat$label <- attr(dfBaujat, "studyLabels")
+  studyLabels    <- .maBaujatStudyLabels(fit, options, nrow(dfBaujat))
+  hasStudyLabels <- !is.null(studyLabels) && length(studyLabels) == nrow(dfBaujat)
+  if (hasStudyLabels)
+    dfBaujat$label <- studyLabels
 
   xTicks <- jaspGraphs::getPrettyAxisBreaks(range(dfBaujat$x, na.rm = TRUE))
   yTicks <- jaspGraphs::getPrettyAxisBreaks(range(dfBaujat$y, na.rm = TRUE))
 
   aesCall <- list(
     x     = as.name("x"),
-    y     = as.name("y"),
-    label = if (options[["studyLabels"]] != "") as.name("label")
+    y     = as.name("y")
   )
   geomCall <- list(
     data    = dfBaujat,
@@ -2097,11 +2651,17 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   # create plot
   plotOut <- do.call(ggplot2::ggplot, geomCall) +
     jaspGraphs::geom_point(
-      size = if (options[["studyLabels"]] != "") 2 else 3
+      size = if (hasStudyLabels) 2 else 3
     )
 
-  if (options[["studyLabels"]] != "")
-    plotOut <- plotOut + ggplot2::geom_text(hjust = 0, vjust = 0)
+  if (hasStudyLabels)
+    plotOut <- plotOut + ggplot2::geom_text(
+      data        = dfBaujat,
+      mapping     = ggplot2::aes(x = x, y = y, label = label),
+      hjust       = 0,
+      vjust       = 0,
+      inherit.aes = FALSE
+    )
 
   plotOut <- plotOut +
     ggplot2::labs(x = gettext("Squared Pearson Residual"), y = gettext("Influence on Fitted Value")) +
@@ -3540,7 +4100,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # add formulas if specified
   rmaInput$mods  <- .maGetFormula(options[["effectSizeModelTerms"]], options[["effectSizeModelIncludeIntercept"]])
-  rmaInput$scale <- .maGetFormula(options[["heterogeneityModelTerms"]], options[["heterogeneityModelIncludeIntercept"]])
+  rmaInput$scale <- if (!.maIsUnrestrictedWeightedLeastSquares(options)) .maGetFormula(options[["heterogeneityModelTerms"]], options[["heterogeneityModelIncludeIntercept"]])
 
   # add random effects
   if (.maIsMultilevelMultivariate(options)) {
@@ -3576,7 +4136,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # specify method and fixed effect terms test
   rmaInput$method <- paste0("'", .maGetMethodOptions(options), "'")
-  rmaInput$test   <- paste0("'", options[["fixedEffectTest"]], "'")
+  rmaInput$test   <- paste0("'", .maGetFixedEffectTestOptions(options), "'")
 
   if (!options[["weightedEstimation"]])
     rmaInput$weighted <- FALSE
@@ -3909,13 +4469,17 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   return(!is.null(options[["effectSizeModelTerms"]]) && length(options[["effectSizeModelTerms"]]) > 0)
 }
 .maIsMetaregressionHeterogeneity  <- function(options) {
-  return(!is.null(options[["heterogeneityModelTerms"]]) && length(options[["heterogeneityModelTerms"]]) > 0)
+  return(!.maIsUnrestrictedWeightedLeastSquares(options) && !is.null(options[["heterogeneityModelTerms"]]) && length(options[["heterogeneityModelTerms"]]) > 0)
 }
 .maIsClustered                    <- function(options) {
   return(!is.null(options[["clustering"]]) && options[["clustering"]] != "")
 }
 .maIsMetaregressionFtest          <- function(options) {
-  return(!is.null(options[["fixedEffectTest"]]) && options[["fixedEffectTest"]] %in% c("knha", "t"))
+  test <- .maGetFixedEffectTestOptions(options)
+  return(test %in% c("knha", "t"))
+}
+.maIsUnrestrictedWeightedLeastSquares <- function(options) {
+  return(!is.null(options[["method"]]) && options[["method"]] == "unrestrictedWeightedLeastSquares")
 }
 .maExtractDdf                     <- function(object) {
   # rma.glmm does not store ddf; compute as k - p per metafor docs
@@ -3965,6 +4529,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     options[["method"]],
     "equalEffects"       = "EE",
     "fixedEffects"       = "FE",
+    "unrestrictedWeightedLeastSquares" = "FE",
     "maximumLikelihood"  = "ML",
     "restrictedML"       = "REML",
     "derSimonianLaird"   = "DL",
@@ -3982,6 +4547,12 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     "peto"                      = "PETO",
     NA
   )
+}
+.maGetFixedEffectTestOptions                    <- function(options) {
+  if (.maIsUnrestrictedWeightedLeastSquares(options))
+    return("knha")
+
+  return(options[["fixedEffectTest"]])
 }
 .maGetFixedTau2Options                          <- function(options) {
 
@@ -4286,9 +4857,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   if (.maIsMetaregressionHeterogeneity(options)) {
     if (parameter == "effectSize")
-      return(gettextf("Moderation (Effect Size): %1$s", outPrint))
+      return(gettextf("Moderation (effect size): %1$s", outPrint))
     else if (parameter == "heterogeneity")
-      return(gettextf("Moderation (Heterogeneity): %1$s", outPrint))
+      return(gettextf("Moderation (heterogeneity): %1$s", outPrint))
   } else {
     if (parameter == "effectSize")
       return(gettextf("Moderation: %1$s", outPrint))
@@ -5147,7 +5718,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 # messages
 .maFixedEffectTextMessage              <- function(options) {
   return(switch(
-    options[["fixedEffectTest"]],
+    .maGetFixedEffectTestOptions(options),
     "z"    = gettext("Fixed effects tested using z-distribution."),
     "t"    = gettext("Fixed effects tested using t-distribution."),
     "knha" = gettext("Fixed effects tested using Knapp and Hartung adjustment."),

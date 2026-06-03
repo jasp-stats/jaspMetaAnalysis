@@ -338,6 +338,79 @@ Upgrades
 			msg: qsTr("Results of this analysis cannot be updated. The analysis was created with an older version of JASP and the analysis options are not longer compatible. Please, redo the analysis with the updated module or download the 0.19.3 version of JASP to rerun or edit the analysis.")
 		}
 	}
+
+	Upgrade
+	{
+		functionName:	"ClassicalMetaAnalysis"
+		fromVersion:	"0.95.5"
+		toVersion:		"0.95.6"
+
+		ChangeJS
+		{
+			name:		"exportDiagnosticsInfluentialCases"
+			jsFunction:	function(options)
+			{
+				return options["diagnosticsCasewiseDiagnosticsExportToDataset"] === true;
+			}
+		}
+
+		ChangeJS
+		{
+			name:		"exportDiagnosticsCaseDiagnostics"
+			jsFunction:	function(options)
+			{
+				return options["diagnosticsCasewiseDiagnosticsExportToDataset"] === true &&
+					options["diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"] !== true;
+			}
+		}
+
+		ChangeJS
+		{
+			name:		"exportDiagnosticsModelImpact"
+			jsFunction:	function(options)
+			{
+				return options["diagnosticsCasewiseDiagnosticsExportToDataset"] === true &&
+					options["diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"] !== true;
+			}
+		}
+
+		ChangeJS
+		{
+			name:		"exportDiagnosticsCoefficientInfluence"
+			jsFunction:	function(options)
+			{
+				return options["diagnosticsCasewiseDiagnosticsExportToDataset"] === true &&
+					options["diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"] !== true &&
+					options["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"] === true;
+			}
+		}
+	}
+
+	Upgrade
+	{
+		functionName:	"ClassicalMetaAnalysisMultilevelMultivariate"
+		fromVersion:	"0.95.5"
+		toVersion:		"0.95.6"
+
+		ChangeJS
+		{
+			name:		"exportDiagnosticsCaseDiagnostics"
+			jsFunction:	function(options)
+			{
+				return options["diagnosticsCasewiseDiagnosticsExportToDataset"] === true;
+			}
+		}
+
+		ChangeJS
+		{
+			name:		"exportDiagnosticsCoefficientInfluence"
+			jsFunction:	function(options)
+			{
+				return options["diagnosticsCasewiseDiagnosticsExportToDataset"] === true &&
+					options["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"] === true;
+			}
+		}
+	}
 }
 
 

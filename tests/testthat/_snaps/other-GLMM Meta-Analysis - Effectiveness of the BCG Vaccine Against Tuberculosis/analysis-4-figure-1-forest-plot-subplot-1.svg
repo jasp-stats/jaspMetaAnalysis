@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' data-engine-version='2.0' width='720.00pt' height='576.00pt' viewBox='0 0 720.00 576.00'>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='360.00pt' viewBox='0 0 504.00 360.00'>
+<g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
     .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
@@ -9,47 +10,54 @@
       stroke-linejoin: round;
       stroke-miterlimit: 10.00;
     }
+    .svglite text {
+      white-space: pre;
+    }
+    .svglite g.glyphgroup path {
+      fill: inherit;
+      stroke: none;
+    }
   ]]></style>
 </defs>
 <rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
 <defs>
-  <clipPath id='cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA='>
-    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  <clipPath id='cpMC4wMHw1MDQuMDB8MC4wMHwzNjAuMDA='>
+    <rect x='0.00' y='0.00' width='504.00' height='360.00' />
   </clipPath>
 </defs>
-<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MC4wMHwzNjAuMDA=)'>
 </g>
 <defs>
-  <clipPath id='cpNS40OHw3MTQuNTJ8MjIuNzh8NTQ0LjA5'>
-    <rect x='5.48' y='22.78' width='709.04' height='521.31' />
+  <clipPath id='cpNS40OHw0OTguNTJ8NS40OHwzMjcuMzY='>
+    <rect x='5.48' y='5.48' width='493.04' height='321.88' />
   </clipPath>
 </defs>
-<g clip-path='url(#cpNS40OHw3MTQuNTJ8MjIuNzh8NTQ0LjA5)'>
-<text x='389.54' y='52.51' style='font-size: 11.38px; font-family: sans;' textLength='42.40px' lengthAdjust='spacingAndGlyphs'>Aronson</text>
-<text x='389.54' y='78.31' style='font-size: 11.38px; font-family: sans;' textLength='93.63px' lengthAdjust='spacingAndGlyphs'>Ferguson &amp; Simes</text>
-<text x='389.54' y='104.12' style='font-size: 11.38px; font-family: sans;' textLength='75.93px' lengthAdjust='spacingAndGlyphs'>Rosenthal et al</text>
-<text x='389.54' y='129.93' style='font-size: 11.38px; font-family: sans;' textLength='90.47px' lengthAdjust='spacingAndGlyphs'>Hart &amp; Sutherland</text>
-<text x='389.54' y='155.74' style='font-size: 11.38px; font-family: sans;' textLength='98.03px' lengthAdjust='spacingAndGlyphs'>Frimodt-Moller et al</text>
-<text x='389.54' y='181.54' style='font-size: 11.38px; font-family: sans;' textLength='82.26px' lengthAdjust='spacingAndGlyphs'>Stein &amp; Aronson</text>
-<text x='389.54' y='207.35' style='font-size: 11.38px; font-family: sans;' textLength='78.45px' lengthAdjust='spacingAndGlyphs'>Vandiviere et al</text>
-<text x='389.54' y='233.16' style='font-size: 11.38px; font-family: sans;' textLength='62.62px' lengthAdjust='spacingAndGlyphs'>TPT Madras</text>
-<text x='389.54' y='258.96' style='font-size: 11.38px; font-family: sans;' textLength='88.58px' lengthAdjust='spacingAndGlyphs'>Coetzee &amp; Berjak</text>
-<text x='389.54' y='284.77' style='font-size: 11.38px; font-family: sans;' textLength='75.93px' lengthAdjust='spacingAndGlyphs'>Rosenthal et al</text>
-<text x='389.54' y='310.58' style='font-size: 11.38px; font-family: sans;' textLength='75.29px' lengthAdjust='spacingAndGlyphs'>Comstock et al</text>
-<text x='389.54' y='336.39' style='font-size: 11.38px; font-family: sans;' textLength='106.91px' lengthAdjust='spacingAndGlyphs'>Comstock &amp; Webster</text>
-<text x='389.54' y='362.19' style='font-size: 11.38px; font-family: sans;' textLength='75.29px' lengthAdjust='spacingAndGlyphs'>Comstock et al</text>
-<text x='714.52' y='413.81' text-anchor='end' style='font-size: 11.38px; font-weight: bold; font-family: sans;' textLength='91.10px' lengthAdjust='spacingAndGlyphs'>Model Information</text>
-<text x='714.52' y='439.62' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='249.08px' lengthAdjust='spacingAndGlyphs'>Heterogeneity (Wald): Qₑ(12) = 163.16, p &lt; 0.001</text>
-<text x='714.52' y='465.42' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='244.66px' lengthAdjust='spacingAndGlyphs'>Heterogeneity (LRT): Qₑ(12) = 176.95, p &lt; 0.001</text>
-<text x='714.52' y='491.23' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='67.71px' lengthAdjust='spacingAndGlyphs'>Pooled Effect</text>
-<text x='714.52' y='517.04' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='116.43px' lengthAdjust='spacingAndGlyphs'>t(12) = -4.42, p &lt; 0.001</text>
+<g clip-path='url(#cpNS40OHw0OTguNTJ8NS40OHwzMjcuMzY=)'>
+<text x='272.54' y='25.49' style='font-size: 11.38px; font-family: "Arial";' textLength='42.38px' lengthAdjust='spacingAndGlyphs'>Aronson</text>
+<text x='272.54' y='41.42' style='font-size: 11.38px; font-family: "Arial";' textLength='93.58px' lengthAdjust='spacingAndGlyphs'>Ferguson &amp; Simes</text>
+<text x='272.54' y='57.35' style='font-size: 11.38px; font-family: "Arial";' textLength='75.89px' lengthAdjust='spacingAndGlyphs'>Rosenthal et al</text>
+<text x='272.54' y='73.29' style='font-size: 11.38px; font-family: "Arial";' textLength='90.42px' lengthAdjust='spacingAndGlyphs'>Hart &amp; Sutherland</text>
+<text x='272.54' y='89.22' style='font-size: 11.38px; font-family: "Arial";' textLength='97.95px' lengthAdjust='spacingAndGlyphs'>Frimodt-Moller et al</text>
+<text x='272.54' y='105.16' style='font-size: 11.38px; font-family: "Arial";' textLength='81.59px' lengthAdjust='spacingAndGlyphs'>Stein &amp; Aronson</text>
+<text x='272.54' y='121.09' style='font-size: 11.38px; font-family: "Arial";' textLength='77.58px' lengthAdjust='spacingAndGlyphs'>Vandiviere et al</text>
+<text x='272.54' y='137.03' style='font-size: 11.38px; font-family: "Arial";' textLength='62.38px' lengthAdjust='spacingAndGlyphs'>TPT Madras</text>
+<text x='272.54' y='152.96' style='font-size: 11.38px; font-family: "Arial";' textLength='88.53px' lengthAdjust='spacingAndGlyphs'>Coetzee &amp; Berjak</text>
+<text x='272.54' y='168.90' style='font-size: 11.38px; font-family: "Arial";' textLength='75.89px' lengthAdjust='spacingAndGlyphs'>Rosenthal et al</text>
+<text x='272.54' y='184.83' style='font-size: 11.38px; font-family: "Arial";' textLength='75.22px' lengthAdjust='spacingAndGlyphs'>Comstock et al</text>
+<text x='272.54' y='200.76' style='font-size: 11.38px; font-family: "Arial";' textLength='106.61px' lengthAdjust='spacingAndGlyphs'>Comstock &amp; Webster</text>
+<text x='272.54' y='216.70' style='font-size: 11.38px; font-family: "Arial";' textLength='75.22px' lengthAdjust='spacingAndGlyphs'>Comstock et al</text>
+<text x='498.52' y='248.57' text-anchor='end' style='font-size: 11.38px; font-weight: bold; font-family: "Arial";' textLength='98.56px' lengthAdjust='spacingAndGlyphs'>Model Information</text>
+<text x='498.52' y='264.50' text-anchor='end' style='font-size: 11.38px; font-family: "Arial";' textLength='248.47px' lengthAdjust='spacingAndGlyphs'>Heterogeneity (Wald): Qₑ(12) = 163.16, p &lt; 0.001</text>
+<text x='498.52' y='280.44' text-anchor='end' style='font-size: 11.38px; font-family: "Arial";' textLength='244.27px' lengthAdjust='spacingAndGlyphs'>Heterogeneity (LRT): Qₑ(12) = 176.95, p &lt; 0.001</text>
+<text x='498.52' y='296.37' text-anchor='end' style='font-size: 11.38px; font-family: "Arial";' textLength='66.20px' lengthAdjust='spacingAndGlyphs'>Pooled effect</text>
+<text x='498.52' y='312.31' text-anchor='end' style='font-size: 11.38px; font-family: "Arial";' textLength='116.31px' lengthAdjust='spacingAndGlyphs'>t(12) = -4.42, p &lt; 0.001</text>
 </g>
-<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-<text x='5.48' y='554.54' text-anchor='middle' style='font-size: 12.00px; fill: none; font-family: sans;' textLength='23.36px' lengthAdjust='spacingAndGlyphs'>0.00</text>
-<text x='182.74' y='554.54' text-anchor='middle' style='font-size: 12.00px; fill: none; font-family: sans;' textLength='23.36px' lengthAdjust='spacingAndGlyphs'>0.25</text>
-<text x='360.00' y='554.54' text-anchor='middle' style='font-size: 12.00px; fill: none; font-family: sans;' textLength='23.36px' lengthAdjust='spacingAndGlyphs'>0.50</text>
-<text x='537.26' y='554.54' text-anchor='middle' style='font-size: 12.00px; fill: none; font-family: sans;' textLength='23.36px' lengthAdjust='spacingAndGlyphs'>0.75</text>
-<text x='714.52' y='554.54' text-anchor='middle' style='font-size: 12.00px; fill: none; font-family: sans;' textLength='23.36px' lengthAdjust='spacingAndGlyphs'>1.00</text>
-<text x='5.48' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='236.28px' lengthAdjust='spacingAndGlyphs'>analysis-4_figure-1_forest-plot-subplot-1</text>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MC4wMHwzNjAuMDA=)'>
+<text x='5.48' y='338.14' text-anchor='middle' style='font-size: 12.00px;fill: none; font-family: "Arial";' textLength='23.34px' lengthAdjust='spacingAndGlyphs'>0.00</text>
+<text x='128.74' y='338.14' text-anchor='middle' style='font-size: 12.00px;fill: none; font-family: "Arial";' textLength='23.34px' lengthAdjust='spacingAndGlyphs'>0.25</text>
+<text x='252.00' y='338.14' text-anchor='middle' style='font-size: 12.00px;fill: none; font-family: "Arial";' textLength='23.34px' lengthAdjust='spacingAndGlyphs'>0.50</text>
+<text x='375.26' y='338.14' text-anchor='middle' style='font-size: 12.00px;fill: none; font-family: "Arial";' textLength='23.34px' lengthAdjust='spacingAndGlyphs'>0.75</text>
+<text x='498.52' y='338.14' text-anchor='middle' style='font-size: 12.00px;fill: none; font-family: "Arial";' textLength='23.34px' lengthAdjust='spacingAndGlyphs'>1.00</text>
+</g>
 </g>
 </svg>

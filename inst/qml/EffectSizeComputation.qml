@@ -285,6 +285,9 @@ Form
 			property var measurementLabel:	effectSizeType.rowAt(rowIndex).measurementLabel
 			property var effectSizeLabel:	effectSizeType.rowAt(rowIndex).effectSizeLabel
 			property var stepCounterValue:	effectSizeType.rowAt(rowIndex).stepCounterValue
+			property bool smallSampleCorrectionAvailable:
+				(designValue === "independentGroups" && measurementValue === "quantitative" && (effectSizeValue === "SMD" || effectSizeValue === "SMDH" || effectSizeValue === "SMD1" || effectSizeValue === "SMD1H")) ||
+				(designValue === "repeatedMeasures" && measurementValue === "quantitative" && (effectSizeValue === "SMCC" || effectSizeValue === "SMCR" || effectSizeValue === "SMCRH" || effectSizeValue === "SMCRP" || effectSizeValue === "SMCRPH"))
 
 			VariablesForm
 			{
@@ -1001,6 +1004,15 @@ Form
 						(designValue === "variableAssociation" && measurementValue === "mixed"  && (effectSizeValue === "RPB" || effectSizeValue === "ZPB")) ||
 						(designValue === "other" && measurementValue === "modelFit")
 			}
+
+			CheckBox
+			{
+				name:		"smallSampleCorrection"
+				text:		qsTr("Small sample correction")
+				checked:	true
+				visible:	smallSampleCorrectionAvailable
+				info:		qsTr("Apply the small-sample bias correction for standardized mean differences.")
+			}
 			
 			Divider { }
 
@@ -1012,12 +1024,22 @@ Form
 	{
 		title: qsTr("Options")
 
-		CheckBox
+		Group
 		{
-			id:			computeSamplingVariance
-			name:		"computeSamplingVariance"
-			text:		qsTr("Compute sampling variance")
-			checked:	false
+			CheckBox
+			{
+				name:		"showMetaforRCode"
+				text:		qsTr("Show metafor R code")
+				info:		qsTr("Display the underlying R code used by the metafor package to compute the effect sizes.")
+			}
+
+			CheckBox
+			{
+				id:			computeSamplingVariance
+				name:		"computeSamplingVariance"
+				text:		qsTr("Compute sampling variance")
+				checked:	false
+			}
 		}
 
 		Group

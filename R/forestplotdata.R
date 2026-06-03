@@ -536,7 +536,7 @@
 
     state <- .forestPlotAppendEstimateWithInterval(
       state                   = state,
-      label                   = gettext("Adjusted Estimate"),
+      label                   = gettext("Adjusted estimate"),
       estimate                = tempEstimatedMarginalMeans,
       testText                = tempCoefficientTest,
       testPlacement           = coefficientTestPlacement,
@@ -666,7 +666,7 @@
   if (options[["forestPlotPublicationBiasTest"]]) {
     state <- .forestPlotAppendAdditionalRow(
       state = state,
-      label = gettextf("Publication Bias: %1$s", .robmaPrintTest(fit, options, "bias", includeName = FALSE))
+      label = gettextf("Publication bias: %1$s", .robmaPrintTest(fit, options, "bias", includeName = FALSE))
     )
   }
 
@@ -685,7 +685,7 @@
 
     state <- .forestPlotAppendAdditionalDiamond(
       state = state,
-      label = .forestPlotApplyLeftTestLabel(gettext("Fixed Effect Estimate"), tempTestText, fixedEffectTestPlacement),
+      label = .forestPlotApplyLeftTestLabel(gettext("Fixed effect estimate"), tempTestText, fixedEffectTestPlacement),
       est   = tempPooledEstimate$est,
       lCi   = tempPooledEstimate$lCi,
       uCi   = tempPooledEstimate$uCi,
@@ -701,7 +701,7 @@
       options
     )
 
-    effectSizeName     <- gettext("Pooled Effect")
+    effectSizeName     <- gettext("Pooled effect")
     tempPooledEstimate <- try(.maComputePooledEffectPlot(fit, options))
     if (jaspBase::isTryError(tempPooledEstimate)) {
       stop(gettext("The pooled effect size could not be calculated."))
@@ -725,7 +725,7 @@
       options
     )
 
-    effectSizeName         <- gettext("Pooled Effect")
+    effectSizeName         <- gettext("Pooled effect")
     tempPooledEstimate     <- .robmaComputePooledEffect(fit, options, conditional = options[["forestPlotConditionalEstimates"]])
     tempPooledEstimate$est <- tempPooledEstimate$mean
     tempTestText           <- .robmaPrintTest(fit, options, "effect", includeName = FALSE)
@@ -761,11 +761,11 @@
         if (.robmaIsMetaregressionCentered(options)) {
           tempTestEstimate     <- .robmaComputeAdjustedEffect(fit, options, conditional = options[["forestPlotConditionalEstimates"]])
           tempTestEstimate$est <- tempPooledEstimate$mean
-          effectSizeName       <- gettext("Adjusted Estimate")
+          effectSizeName       <- gettext("Adjusted estimate")
         } else {
           tempTestEstimate     <- .robmaComputeInterceptEffect(fit, options, conditional = options[["forestPlotConditionalEstimates"]])
           tempTestEstimate$est <- tempPooledEstimate$mean
-          effectSizeName       <- gettext("Intercept Estimate")
+          effectSizeName       <- gettext("Intercept estimate")
         }
 
         state <- .forestPlotAppendEstimateWithInterval(
@@ -808,7 +808,7 @@
 .forestPlotEstimateInformationSettings <- function(options) {
   return(.forestPlotInformationSettings(options, "forestPlotEstimateInformationSelectedVariablesSettings"))
 }
-.forestPlotStudyInformationCharWidths  <- function(studyInformation, forestInformation) {
+.forestPlotStudyInformationColumnWidths <- function(studyInformation, forestInformation, options) {
 
   if (nrow(studyInformation) == 0) {
     return(numeric(0))
@@ -817,22 +817,31 @@
   valueWidths <- vapply(studyInformation$value, function(variable) {
     variableValues <- forestInformation[[variable]]
     variableValues <- ifelse(is.na(variableValues), "", as.character(variableValues))
-    max(nchar(variableValues), na.rm = TRUE)
+    widths <- .forestPlotMeasureTextWidthMm(variableValues, options)
+    if (length(widths) == 0) {
+      return(0)
+    }
+
+    return(max(widths, na.rm = TRUE))
   }, numeric(1))
 
-  return(pmax(nchar(studyInformation$title), valueWidths) + 2)
+  titleWidths <- .forestPlotMeasureTextWidthMm(studyInformation$title, options, fontface = "bold")
+  return(pmax(titleWidths, valueWidths) + .forestPlotInformationColumnGutterMm(options))
 }
-.forestPlotStudyInformationRelativeWidths <- function(studyInformation, maxCharsLeft, studyInformationChars, options) {
+.forestPlotInformationColumnGutterMm  <- function(options) {
+  return(6 * options[["forestPlotSizeText"]])
+}
+.forestPlotStudyInformationRelativeWidths <- function(studyInformation, studyInformationWidths) {
 
   if (nrow(studyInformation) == 0) {
     return(numeric(0))
   }
 
-  if (options[["forestPlotAuxiliaryAdjustWidthBasedOnText"]]) {
-    relativeWidths <- c(maxCharsLeft - sum(studyInformationChars), studyInformationChars)
-    relativeWidths[2:length(relativeWidths)] <- relativeWidths[2:length(relativeWidths)] * studyInformation$width
-  } else {
+  relativeWidths <- studyInformationWidths * studyInformation$width
+  relativeWidths[!is.finite(relativeWidths) | relativeWidths <= 0] <- 0
+  if (sum(relativeWidths) <= 0) {
     relativeWidths <- studyInformation$width
+    relativeWidths[!is.finite(relativeWidths) | relativeWidths <= 0] <- 1
   }
 
   return(relativeWidths / sum(relativeWidths))
@@ -842,41 +851,35 @@
   leftPanelStudyInformation <- .forestPlotStudyInformationSettings(options)
 
   if (options[["forestPlotStudyInformation"]] && nrow(leftPanelStudyInformation) > 0) {
-    leftPanelStudyInformationChars <- .forestPlotStudyInformationCharWidths(
+    leftPanelStudyInformationWidths <- .forestPlotStudyInformationColumnWidths(
       leftPanelStudyInformation,
-      forestInformation
-    )
-    maxCharsLeft <- sum(leftPanelStudyInformationChars)
-  } else {
-    leftPanelStudyInformationChars <- 0
-    maxCharsLeft <- 0
-  }
-  if (.forestPlotHasDataFrame(additionalInformation)) {
-    additionalInformationChars <- max(nchar(additionalInformation$label), na.rm = TRUE)
-    maxCharsLeft <- max(c(maxCharsLeft, additionalInformationChars))
-  } else {
-    additionalInformationChars <- 0
-  }
-
-  if (nrow(leftPanelStudyInformation) > 0) {
-    # Widths can either follow the user-provided relative column widths, or be
-    # reweighted by observed text lengths to avoid truncating dense study labels.
-    leftPanelRelativeWidths <- .forestPlotStudyInformationRelativeWidths(
-      leftPanelStudyInformation,
-      maxCharsLeft,
-      leftPanelStudyInformationChars,
+      forestInformation,
       options
     )
-    if (options[["forestPlotAuxiliaryAdjustWidthBasedOnText"]]) {
-      leftPanelStudyInformation$xStart <- cumsum(leftPanelRelativeWidths[-length(leftPanelRelativeWidths)])
-      leftPanelStudyInformation$xEnd   <- cumsum(leftPanelRelativeWidths)[-1]
-    } else {
-      leftPanelStudyInformation$xStart <- c(0, cumsum(leftPanelRelativeWidths[-length(leftPanelRelativeWidths)]))
-      leftPanelStudyInformation$xEnd   <- cumsum(leftPanelRelativeWidths)
+    maxPanelWidth <- sum(leftPanelStudyInformationWidths)
+  } else {
+    leftPanelStudyInformationWidths <- 0
+    maxPanelWidth <- 0
+  }
+  if (.forestPlotHasDataFrame(additionalInformation)) {
+    additionalInformationWidths <- .forestPlotMeasureTextWidthMm(additionalInformation$label, options)
+    if (length(additionalInformationWidths) > 0) {
+      maxPanelWidth <- max(c(maxPanelWidth, additionalInformationWidths), na.rm = TRUE)
     }
   }
 
-  attr(leftPanelStudyInformation, "maxChars") <- maxCharsLeft
+  if (nrow(leftPanelStudyInformation) > 0) {
+    # Use the same no-device text estimate for internal columns and outer panel
+    # sizing, so adjacent columns have real space between rendered labels.
+    leftPanelRelativeWidths <- .forestPlotStudyInformationRelativeWidths(
+      leftPanelStudyInformation,
+      leftPanelStudyInformationWidths
+    )
+    leftPanelStudyInformation$xStart <- c(0, cumsum(leftPanelRelativeWidths[-length(leftPanelRelativeWidths)]))
+    leftPanelStudyInformation$xEnd   <- cumsum(leftPanelRelativeWidths)
+  }
+
+  attr(leftPanelStudyInformation, "widthMm") <- maxPanelWidth
   return(leftPanelStudyInformation)
 }
 .forestPlotHasStudyInformationHeader   <- function(options) {
@@ -920,7 +923,7 @@
 .forestPlotSubgroupHeading             <- function(options, subgroup, tempRow) {
 
   return(data.frame(
-    "label"  = if (subgroup == gettext("Full dataset")) gettext("Full Dataset") else gettextf("Subgroup: %1$s", subgroup),
+    "label"  = if (subgroup == gettext("Full dataset")) gettext("Full dataset") else gettextf("Subgroup: %1$s", subgroup),
     "y"      = tempRow,
     "est"    = NA,
     "lCi"    = NA,
@@ -966,6 +969,59 @@
     return(paste0(xNames, xFreqs, collapse = ", "))
   }
 }
+.forestPlotColorKeyColumn             <- function() {
+  return(".forestPlotColorKey")
+}
+.forestPlotAggregateColorValue        <- function(x) {
+
+  x <- as.character(x)
+  if (any(is.na(x) | x == "")) {
+    return(NA_character_)
+  }
+
+  x <- unique(x)
+  if (length(x) != 1) {
+    return(NA_character_)
+  }
+
+  return(x)
+}
+.forestPlotAddAggregateColorKey       <- function(dfOut, df, options, method) {
+
+  colorVar <- options[["forestPlotMappingColor"]]
+  if (colorVar == "" || !colorVar %in% colnames(df)) {
+    return(dfOut)
+  }
+
+  if (method == "boxplot") {
+    dfOut[[.forestPlotColorKeyColumn()]] <- .forestPlotAggregateColorValue(df[[colorVar]])
+  } else if (method == "bubbles") {
+    dfOut[[.forestPlotColorKeyColumn()]] <- as.character(df[[colorVar]])
+  }
+
+  return(dfOut)
+}
+.forestPlotAggregateEffectSizeSummary  <- function(effectSize) {
+
+  effectSize <- effectSize[is.finite(effectSize)]
+  if (length(effectSize) == 0) {
+    return(list(
+      min    = NA_real_,
+      lower  = NA_real_,
+      middle = NA_real_,
+      upper  = NA_real_,
+      max    = NA_real_
+    ))
+  }
+
+  return(list(
+    min    = min(effectSize),
+    lower  = stats::quantile(effectSize, 0.25, names = FALSE),
+    middle = stats::median(effectSize),
+    upper  = stats::quantile(effectSize, 0.75, names = FALSE),
+    max    = max(effectSize)
+  ))
+}
 
 # Aggregation re-expresses study rows either as one boxplot summary per group or
 # as a group label plus one bubble per contributing study.
@@ -983,15 +1039,17 @@
 
     datasetAggregated <- do.call(rbind, lapply(datasetSplit, function(df) {
 
+      effectSizeSummary <- .forestPlotAggregateEffectSizeSummary(df$effectSize)
+
       # create a base of the geom
       tempDf <- data.frame(
         id      = df$id[1],
-        weights = .forestPlotAggregateWeights(df$weights),
-        min     = min(df$effectSize),
-        lower   = quantile(df$effectSize, 0.25),
-        middle  = median(df$effectSize),
-        upper   = quantile(df$effectSize, 0.75),
-        max     = max(df$effectSize),
+        weights = .forestPlotAggregateWeights(df$weights[is.finite(df$effectSize)]),
+        min     = effectSizeSummary[["min"]],
+        lower   = effectSizeSummary[["lower"]],
+        middle  = effectSizeSummary[["middle"]],
+        upper   = effectSizeSummary[["upper"]],
+        max     = effectSizeSummary[["max"]],
         geom    = "boxplot"
       )
 
@@ -999,13 +1057,19 @@
       for (var in additionalVariables) {
         tempDf[[var]] <- .forestPlotAggregateVariable(df[[var]])
       }
+      tempDf <- .forestPlotAddAggregateColorKey(tempDf, df, options, "boxplot")
 
       return(tempDf)
     }))
 
     # split into study information and geoms
     dfGeoms  <- datasetAggregated
-    dfForest <- datasetAggregated[,!colnames(datasetAggregated) %in% c("min", "lower", "middle", "upper", "max", "geom"),drop=FALSE]
+    dfForest <- datasetAggregated[
+      , !colnames(datasetAggregated) %in% c(
+        "min", "lower", "middle", "upper", "max", "geom", .forestPlotColorKeyColumn()
+      ),
+      drop = FALSE
+    ]
 
 
   } else if (options[["forestPlotStudyInformationAggregateMethod"]] == "bubbles") {
@@ -1038,6 +1102,7 @@
       for (var in additionalVariables) {
         tempDf[[var]] <- .forestPlotAggregateVariable(df[[var]])
       }
+      tempDf <- .forestPlotAddAggregateColorKey(tempDf, df, options, "bubbles")
 
       return(tempDf)
     }))

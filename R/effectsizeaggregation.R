@@ -23,6 +23,9 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
   .esaCreateSummaryTable(jaspResults, dataset, options, ready)
   .esaExportData(jaspResults, dataset, options, ready)
 
+  if (!is.null(options[["showMetaforRCode"]]) && options[["showMetaforRCode"]])
+    .esaShowMetaforRCode(jaspResults, options, ready)
+
   return()
 }
 
@@ -30,9 +33,9 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
   # input columns
   "effectSize", "effectSizeStandardError", "cluster",
   # aggregation options
-  "weighted", "addClusterSize",
+  "weighted", "addClusterSize", "computeSamplingVariance",
   "aggregatedColumnNamesEffectSize", "aggregatedColumnNamesStandardError",
-  "aggregatedColumnNamesClusterSize",
+  "aggregatedColumnNamesSamplingVariance", "aggregatedColumnNamesClusterSize",
   .effectSizeVarianceCovarianceMatrixDependencies
 )
 
@@ -291,11 +294,16 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
   jaspResults[["esColYi"]] <- createJaspColumn(columnName = columnName, dependencies = .esaDependencies)
   jaspResults[["esColYi"]]$setScale(yiOut)
 
-  # standard error column
-  columnName <- options[["aggregatedColumnNamesStandardError"]]
+  # standard error or sampling variance column
+  computeSamplingVariance <- .esaComputeSamplingVariance(options)
+  columnName <- if (computeSamplingVariance)
+    options[["aggregatedColumnNamesSamplingVariance"]]
+  else
+    options[["aggregatedColumnNamesStandardError"]]
+
   .esaValidateColumnName(columnName)
   jaspResults[["esColSe"]] <- createJaspColumn(columnName = columnName, dependencies = .esaDependencies)
-  jaspResults[["esColSe"]]$setScale(sqrt(viOut))
+  jaspResults[["esColSe"]]$setScale(if (computeSamplingVariance) viOut else sqrt(viOut))
 
   # cluster size column
   if (options[["addClusterSize"]]) {
@@ -314,4 +322,108 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
 .esaValidateColumnName <- function(columnName) {
   if (jaspBase:::columnExists(columnName) && !jaspBase:::columnIsMine(columnName))
     .quitAnalysis(gettextf("Column name %s already exists in the dataset.", columnName))
+}
+
+.esaComputeSamplingVariance <- function(options) {
+  return(!is.null(options[["computeSamplingVariance"]]) && options[["computeSamplingVariance"]])
+}
+
+.esaShowMetaforRCode <- function(jaspResults, options, ready) {
+
+  if (!ready || !is.null(jaspResults[["metaforRCode"]]))
+    return()
+
+  if (options[["varianceCovarianceMatrixType"]] == "simple") {
+    simpleReady <- .esaSimpleReady(options)
+    if (!simpleReady)
+      return()
+  } else if (!tryCatch(.mammVarianceCovarianceMatrixReady(options), error = function(e) FALSE)) {
+    return()
+  }
+
+  metaforRCode <- createJaspHtml(title = gettext("Metafor R Code"))
+  metaforRCode$dependOn(c(.esaDependencies, "showMetaforRCode"))
+  metaforRCode$position <- 99
+
+  metaforRCode$text <- .maTransformToHtml(.esaMakeMetaforCallText(options))
+
+  jaspResults[["metaforRCode"]] <- metaforRCode
+
+  return()
+}
+
+.esaMakeMetaforCallText <- function(options) {
+
+  datInput <- list(
+    measure = .esaQuoteRString("GEN"),
+    yi      = .esaAsRName(options[["effectSize"]]),
+    vi      = paste0(.esaAsRName(options[["effectSizeStandardError"]]), "^2"),
+    data    = "dataset"
+  )
+
+  aggInput <- list(
+    x        = "dat",
+    cluster  = .esaAsRName(options[["cluster"]]),
+    weighted = options[["weighted"]],
+    na.rm    = TRUE,
+    addk     = options[["addClusterSize"]]
+  )
+
+  vcalcText <- NULL
+  if (options[["varianceCovarianceMatrixType"]] == "simple") {
+    aggInput$struct <- .esaQuoteRString(options[["varianceCovarianceMatrixSimpleStructure"]])
+
+    rho <- options[["varianceCovarianceMatrixSimpleWithinClusterCorrelation"]]
+    if (length(rho) > 0)
+      aggInput$rho <- rho
+
+    phi <- options[["varianceCovarianceMatrixSimpleTimeLag1Correlation"]]
+    if (length(phi) > 0)
+      aggInput$phi <- phi
+
+    timeVar <- options[["varianceCovarianceMatrixSimpleTimeVariable"]]
+    if (length(timeVar) > 0 && !is.na(timeVar) && timeVar != "")
+      aggInput$time <- .esaAsRName(timeVar)
+  } else if (tryCatch(.mammVarianceCovarianceMatrixReady(options), error = function(e) FALSE)) {
+    vcalcInput       <- .mammGetVarianceCovarianceMatrix(NULL, options, returnCall = TRUE)
+    vcalcInput$data  <- as.name("dat")
+
+    aggInput$V <- "effectSizeVarianceCovarianceMatrix"
+
+    if (options[["varianceCovarianceMatrixType"]] == "precomputed") {
+      vcalcText <- paste0(
+        "effectSizeVarianceCovarianceMatrix <- ",
+        .esaQuoteRString(vcalcInput[["file"]])
+      )
+    } else {
+      vcalcText <- paste0(
+        "dat$samplingVariance <- dat$vi\n\n",
+        "effectSizeVarianceCovarianceMatrix <- vcalc(\n\t",
+        paste(names(vcalcInput), "=", vcalcInput, collapse = ",\n\t"),
+        "\n)"
+      )
+    }
+  }
+
+  datText <- paste0(
+    "dat <- escalc(\n\t",
+    paste(names(datInput), "=", datInput, collapse = ",\n\t"),
+    "\n)"
+  )
+
+  aggText <- paste0(
+    "aggResult <- aggregate.escalc(\n\t",
+    paste(names(aggInput), "=", aggInput, collapse = ",\n\t"),
+    "\n)"
+  )
+
+  return(paste(c(datText, vcalcText, aggText), collapse = "\n\n"))
+}
+
+.esaAsRName <- function(name) {
+  return(deparse(as.name(name), width.cutoff = 500))
+}
+
+.esaQuoteRString <- function(value) {
+  return(paste0("'", gsub("'", "\\\\'", value), "'"))
 }

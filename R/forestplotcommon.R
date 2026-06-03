@@ -143,12 +143,45 @@
     options[["forestPlotAuxiliaryXAxisTransformLabelsOnly"]] <- options[["transformEffectSize"]] != "none"
   }
 
+  sizeDefaults <- c(
+    forestPlotSizeEstimates  = 1,
+    forestPlotSizeText       = 1,
+    forestPlotSizeAxisLabels = 1,
+    forestPlotSizeRow        = 1,
+    forestPlotSizeLeftPanel  = 1,
+    forestPlotSizePlotArea   = 1,
+    forestPlotSizeRightPanel = 1
+  )
+  for (key in names(sizeDefaults)) {
+    if (is.null(options[[key]])) {
+      options[[key]] <- sizeDefaults[[key]]
+    }
+  }
+
   # cannot plot predicted effects alongside aggregate study information
   if (options[["forestPlotStudyInformationAggregateBy"]] != "") {
     options[["forestPlotStudyInformationPredictedEffects"]] <- FALSE
   }
 
   return(options)
+}
+.forestPlotPositiveOption             <- function(options, optionName) {
+
+  value <- suppressWarnings(as.numeric(options[[optionName]]))
+  if (length(value) != 1 || !is.finite(value) || value <= 0) {
+    return(1)
+  }
+
+  return(value)
+}
+.forestPlotEstimateSize               <- function(options) {
+  return(.forestPlotPositiveOption(options, "forestPlotSizeEstimates"))
+}
+.forestPlotRowSize                    <- function(options) {
+  return(.forestPlotPositiveOption(options, "forestPlotSizeRow"))
+}
+.forestPlotPlotHeight                 <- function(plotOut, options) {
+  return(200 + attr(plotOut, "rows") * 10 * .forestPlotRowSize(options))
 }
 .forestPlotPrepareDataOptions          <- function(options) {
 
@@ -570,9 +603,10 @@
     subgroupHeadings      = .forestPlotBindDataFrames(layout[["subgroupHeadings"]]),
     nextRow               = layout[["row"]]
   )
+  plotData[["rowCount"]] <- .forestPlotPlotDataRowCount(plotData)
 
   # Convert row indices to plot coordinates (negative = top-to-bottom, scaled)
-  rowSize <- options[["forestPlotRelativeSizeRow"]]
+  rowSize <- .forestPlotRowSize(options)
   plotData[["forestHeaderIndex"]]     <- .forestPlotScaleY(plotData[["forestHeaderIndex"]], rowSize)
   plotData[["estimateHeaderIndex"]]   <- .forestPlotScaleY(plotData[["estimateHeaderIndex"]], rowSize)
   plotData[["forestInformation"]]     <- .forestPlotScaleYColumn(plotData[["forestInformation"]],     rowSize)
@@ -582,6 +616,25 @@
   plotData[["subgroupHeadings"]]      <- .forestPlotScaleYColumn(plotData[["subgroupHeadings"]],      rowSize)
 
   return(plotData)
+}
+.forestPlotPlotDataRowCount          <- function(plotData) {
+
+  rowValues <- c(
+    plotData[["forestHeaderIndex"]],
+    plotData[["estimateHeaderIndex"]],
+    .forestPlotCollectNumericValues(plotData[["forestInformation"]],     "y"),
+    .forestPlotCollectNumericValues(plotData[["forestObjects"]],         "y"),
+    .forestPlotCollectNumericValues(plotData[["additionalInformation"]], "y"),
+    .forestPlotCollectNumericValues(plotData[["additionalObjects"]],     "y"),
+    .forestPlotCollectNumericValues(plotData[["subgroupHeadings"]],      "y"),
+    plotData[["nextRow"]] - 1
+  )
+  rowValues <- rowValues[is.finite(rowValues)]
+  if (length(rowValues) == 0) {
+    return(1)
+  }
+
+  return(ceiling(max(rowValues)))
 }
 .forestPlotScaleY                    <- function(values, rowSize) {
   if (is.null(values)) return(NULL)
@@ -598,6 +651,7 @@
 # independently from the forest geometry in the middle panel.
 .forestPlotRenderPlot                 <- function(plotData, options) {
 
+  plotData   <- .forestPlotBuildPlotModel(plotData, options)
   axisSpec   <- .forestPlotBuildAxisSpec(plotData, options)
   plotForest <- .forestPlotBuildMiddlePanel(plotData, axisSpec, options)
   plotLeft   <- .forestPlotBuildLeftPanel(plotData, options)
@@ -615,11 +669,84 @@
 
   return(.forestPlotComposeOutput(plotForest, plotLeft, plotRight, plotData, options))
 }
+.forestPlotBuildPlotModel             <- function(plotData, options) {
+
+  plotData[["forestInformation"]] <- .forestPlotAddColorKey(plotData[["forestInformation"]], options)
+  plotData[["forestObjects"]]     <- .forestPlotAddColorKey(plotData[["forestObjects"]], options)
+  plotData[["additionalObjects"]] <- .forestPlotAddObjectColorKey(plotData[["additionalObjects"]], options)
+
+  return(plotData)
+}
+.forestPlotAddColorKey                <- function(data, options) {
+
+  if (!.forestPlotHasDataFrame(data)) {
+    return(data)
+  }
+
+  colorKey <- .forestPlotColorKeyColumn()
+  if (colorKey %in% colnames(data)) {
+    return(data)
+  }
+
+  colorVar <- options[["forestPlotMappingColor"]]
+  if (colorVar != "" && colorVar %in% colnames(data)) {
+    data[[colorKey]] <- as.character(data[[colorVar]])
+  }
+
+  return(data)
+}
+.forestPlotAddObjectColorKey          <- function(data, options) {
+
+  data <- .forestPlotAddColorKey(data, options)
+  if (!.forestPlotHasDataFrame(data) || !("mapColor" %in% colnames(data))) {
+    return(data)
+  }
+
+  colorKey <- .forestPlotColorKeyColumn()
+  if (!colorKey %in% colnames(data)) {
+    data[[colorKey]] <- NA_character_
+  }
+
+  useMapColor <- !is.na(data[["mapColor"]]) & data[["mapColor"]] != ""
+  data[[colorKey]][useMapColor] <- as.character(data[["mapColor"]][useMapColor])
+
+  return(data)
+}
+.forestPlotColorRenderColumn          <- function(data, options) {
+
+  if (options[["forestPlotMappingColor"]] == "" || !.forestPlotHasDataFrame(data)) {
+    return("")
+  }
+
+  colorKey <- .forestPlotColorKeyColumn()
+  if (colorKey %in% colnames(data)) {
+    return(colorKey)
+  }
+
+  colorVar <- options[["forestPlotMappingColor"]]
+  if (colorVar %in% colnames(data)) {
+    return(colorVar)
+  }
+
+  return("")
+}
+.forestPlotColorRows                  <- function(data, colorColumn) {
+
+  if (!.forestPlotHasDataFrame(data)) {
+    return(logical(0))
+  }
+
+  if (colorColumn == "" || !colorColumn %in% colnames(data)) {
+    return(rep(FALSE, nrow(data)))
+  }
+
+  return(!is.na(data[[colorColumn]]) & data[[colorColumn]] != "")
+}
 .forestPlotBuildMiddlePanel           <- function(plotData, axisSpec, options) {
 
   plotForest <- ggplot2::ggplot()
   plotForest <- .forestPlotAddStudyObjects(plotForest, plotData, axisSpec, options)
-  plotForest <- .forestPlotAddAdditionalObjects(plotForest, plotData, axisSpec)
+  plotForest <- .forestPlotAddAdditionalObjects(plotForest, plotData, axisSpec, options)
   plotForest <- .forestPlotAddVerticalLines(plotForest, options)
 
   return(plotForest)
@@ -648,41 +775,72 @@
     return(plotForest)
   }
 
-  colorVar <- options[["forestPlotMappingColor"]]
+  estimateSize <- .forestPlotEstimateSize(options)
 
   if (options[["forestPlotStudyInformationAggregateMethod"]] == "boxplot") {
     forestObjects <- forestObjects[forestObjects$type == "boxplot", , drop = FALSE]
     forestObjects <- .forestPlotClipXAxisColumns(forestObjects, c("min", "lower", "middle", "upper", "max"), axisSpec[["xRange"]])
+    colorColumn   <- .forestPlotColorRenderColumn(forestObjects, options)
 
-    plotForest <- plotForest + .forestPlotGeomLayer(
-      ggplot2::geom_boxplot, forestObjects,
-      aes = list(
-        y = as.name("y"), group = as.name("id"),
-        xmin = as.name("min"), xlower = as.name("lower"), xmiddle = as.name("middle"),
-        xupper = as.name("upper"), xmax = as.name("max"),
-        fill = if (colorVar != "") as.name(colorVar)
-      ),
-      fill = if (colorVar == "") "grey20", alpha = 0.8, orientation = "y", stat = "identity"
-    )
+    if (colorColumn == "") {
+      plotForest <- .forestPlotAddAggregateBoxplotLayer(
+        plotForest, forestObjects, colorColumn = "", fill = "grey20", estimateSize = estimateSize
+      )
+    } else {
+      coloredRows <- .forestPlotColorRows(forestObjects, colorColumn)
+      plotForest <- .forestPlotAddAggregateBoxplotLayer(
+        plotForest, forestObjects[!coloredRows, , drop = FALSE],
+        colorColumn = "", fill = NA, estimateSize = estimateSize
+      )
+      plotForest <- .forestPlotAddAggregateBoxplotLayer(
+        plotForest, forestObjects[coloredRows, , drop = FALSE],
+        colorColumn = colorColumn, fill = NULL, estimateSize = estimateSize
+      )
+    }
   }
 
   if (options[["forestPlotStudyInformationAggregateMethod"]] == "bubbles") {
     forestObjects <- forestObjects[forestObjects$type == "bubbles", , drop = FALSE]
     forestObjects <- .forestPlotClipXAxisColumns(forestObjects, c("x"), axisSpec[["xRange"]])
+    colorColumn   <- .forestPlotColorRenderColumn(forestObjects, options)
 
     plotForest <- plotForest + .forestPlotGeomLayer(
       jaspGraphs::geom_point, forestObjects,
       aes = list(
         y = as.name("y"), x = as.name("x"), size = as.name("weight"),
-        fill  = if (colorVar != "") as.name(colorVar),
-        color = if (colorVar != "") as.name(colorVar)
+        fill  = if (colorColumn != "") as.name(colorColumn),
+        color = if (colorColumn != "") as.name(colorColumn)
       ),
-      fill = if (colorVar == "") "grey20", alpha = 0.8, na.rm = TRUE,
+      fill = if (colorColumn == "") "grey20", alpha = 0.8, na.rm = TRUE,
       position = ggplot2::position_jitter(width = 0, height = 0.10)
-    ) + ggplot2::scale_size(range = c(1.5, 10) * options[["forestPlotStudyInformationAggregateMethodBubbleRelativeSize"]])
+    ) + ggplot2::scale_size(range = c(1.5, 10) *
+      options[["forestPlotStudyInformationAggregateMethodBubbleRelativeSize"]] *
+      estimateSize)
   }
 
   return(plotForest)
+}
+.forestPlotAddAggregateBoxplotLayer  <- function(plotForest, forestObjects, colorColumn, fill, estimateSize) {
+
+  if (!.forestPlotHasDataFrame(forestObjects)) {
+    return(plotForest)
+  }
+
+  return(plotForest + .forestPlotGeomLayer(
+    ggplot2::geom_boxplot, forestObjects,
+    aes = list(
+      y = as.name("y"), group = as.name("id"),
+      xmin = as.name("min"), xlower = as.name("lower"), xmiddle = as.name("middle"),
+      xupper = as.name("upper"), xmax = as.name("max"),
+      fill = if (colorColumn != "") as.name(colorColumn)
+    ),
+    fill        = fill,
+    alpha       = 0.8,
+    orientation = "y",
+    stat        = "identity",
+    width       = 0.6 * estimateSize,
+    na.rm       = TRUE
+  ))
 }
 .forestPlotAddPredictionDiamonds     <- function(plotForest, forestObjects, axisSpec, options) {
 
@@ -692,15 +850,16 @@
 
   forestPrediction <- forestObjects[forestObjects$type == "diamond", , drop = FALSE]
   forestPrediction <- .forestPlotClipXAxisColumns(forestPrediction, c("x"), axisSpec[["xRange"]])
-  colorVar         <- options[["forestPlotMappingColor"]]
+  forestPrediction <- .forestPlotScaleObjectHeight(forestPrediction, options)
+  colorColumn      <- .forestPlotColorRenderColumn(forestPrediction, options)
 
   plotForest <- plotForest + .forestPlotGeomLayer(
     ggplot2::geom_polygon, forestPrediction,
     aes = list(
       x = as.name("x"), y = as.name("y"), group = as.name("id"),
-      fill = if (colorVar != "") as.name(colorVar)
+      fill = if (colorColumn != "") as.name(colorColumn)
     ),
-    fill = if (colorVar == "") "grey20", alpha = 0.8
+    fill = if (colorColumn == "") "grey20", alpha = 0.8
   )
 
   return(plotForest)
@@ -711,8 +870,9 @@
     return(plotForest)
   }
 
-  colorVar <- options[["forestPlotMappingColor"]]
-  shapeVar <- options[["forestPlotMappingShape"]]
+  colorColumn  <- .forestPlotColorRenderColumn(forestInformation, options)
+  shapeVar     <- options[["forestPlotMappingShape"]]
+  estimateSize <- .forestPlotEstimateSize(options)
 
   forestInformationPoints <- .forestPlotMaskOutsideXAxis(forestInformation, "effectSize", axisSpec[["xRange"]])
 
@@ -720,13 +880,13 @@
     ggplot2::geom_point, forestInformationPoints,
     aes = list(
       x     = as.name("effectSize"), y = as.name("y"), size = as.name("weights"),
-      color = if (colorVar != "") as.name(colorVar),
+      color = if (colorColumn != "") as.name(colorColumn),
       shape = if (shapeVar != "") as.name(shapeVar)
     ),
-    color = if (colorVar == "") options[["forestPlotAuxiliaryPlotColor"]],
+    color = if (colorColumn == "") options[["forestPlotAuxiliaryPlotColor"]],
     shape = if (shapeVar == "") 15,
     na.rm = TRUE
-  ) + ggplot2::scale_size(range = c(1, 6) * options[["forestPlotRelativeSizeEstimates"]])
+  ) + ggplot2::scale_size(range = c(1, 6) * estimateSize)
 
   if (shapeVar != "") {
     plotForest <- plotForest + ggplot2::scale_shape_manual(
@@ -740,9 +900,9 @@
     clippedIntervals  = .forestPlotPrepareClippedIntervalData(
       intervalData = data.frame(xmin = forestInformation$lCi, xmax = forestInformation$uCi,
                                 y = forestInformation$y, est = forestInformation$effectSize),
-      axisSpec = axisSpec, capHeight = 0, style = "interval"
+      axisSpec = axisSpec, capHeight = 0, style = "interval", heightScale = estimateSize
     ),
-    color = "black", lineWidth = 0.5, overflowLineWidth = 1
+    color = "black", lineWidth = 0.5 * estimateSize, overflowLineWidth = estimateSize
   )
 
   # Secondary confidence intervals
@@ -752,19 +912,20 @@
       clippedIntervals  = .forestPlotPrepareClippedIntervalData(
         intervalData = data.frame(xmin = forestInformation$lCi2, xmax = forestInformation$uCi2,
                                   y = forestInformation$y, est = forestInformation$effectSize),
-        axisSpec = axisSpec, capHeight = 0.3, style = "interval"
+        axisSpec = axisSpec, capHeight = 0.3 * estimateSize, style = "interval", heightScale = estimateSize
       ),
-      color = "darkblue", lineWidth = 0.5, overflowLineWidth = 1
+      color = "darkblue", lineWidth = 0.5 * estimateSize, overflowLineWidth = estimateSize
     )
   }
 
   return(plotForest)
 }
-.forestPlotAddAdditionalObjects       <- function(plotForest, plotData, axisSpec) {
+.forestPlotAddAdditionalObjects       <- function(plotForest, plotData, axisSpec, options) {
 
   additionalObjectsRaw <- plotData[["additionalObjects"]]
   forestObjects        <- plotData[["forestObjects"]]
   additionalObjects    <- additionalObjectsRaw
+  estimateSize         <- .forestPlotEstimateSize(options)
 
   if (!.forestPlotHasDataFrame(additionalObjects)) {
     additionalObjects <- NULL
@@ -774,45 +935,85 @@
       columns = c("x"),
       xRange  = axisSpec[["xRange"]]
     )
+    additionalObjects <- .forestPlotScaleObjectHeight(additionalObjects, options)
   }
 
-  if (.forestPlotHasDataFrame(additionalObjects) && any(!is.na(additionalObjects$mapColor))) {
-    plotForest <- plotForest + ggplot2::geom_polygon(
-      data    = additionalObjects[!is.na(additionalObjects$mapColor), , drop = FALSE],
-      mapping = ggplot2::aes(
-        x     = x,
-        y     = y,
-        group = id,
-        fill  = mapColor
+  colorColumn <- .forestPlotColorRenderColumn(additionalObjects, options)
+  coloredRows <- .forestPlotColorRows(additionalObjects, colorColumn)
+
+  if (.forestPlotHasDataFrame(additionalObjects) && any(coloredRows)) {
+    plotForest <- plotForest + .forestPlotGeomLayer(
+      ggplot2::geom_polygon,
+      additionalObjects[coloredRows, , drop = FALSE],
+      aes = list(
+        x     = as.name("x"),
+        y     = as.name("y"),
+        group = as.name("id"),
+        fill  = as.name(colorColumn)
       )
     )
   }
 
-  if (.forestPlotHasDataFrame(additionalObjects) && any(is.na(additionalObjects$mapColor))) {
+  if (.forestPlotHasDataFrame(additionalObjects) && any(!coloredRows)) {
     plotForest <- plotForest + ggplot2::geom_polygon(
-      data    = additionalObjects[is.na(additionalObjects$mapColor), , drop = FALSE],
+      data    = additionalObjects[!coloredRows, , drop = FALSE],
       mapping = ggplot2::aes(
         x     = x,
         y     = y,
         group = id
-      )
+      ),
+      fill = "grey20"
     )
   }
 
   objectIndicatorData <- .forestPlotPrepareObjectIndicatorData(
-    objects   = .forestPlotBindDataFrames(list(forestObjects, additionalObjectsRaw)),
-    axisSpec  = axisSpec,
-    skipTypes = c("boxplot", "bubbles")
+    objects   = .forestPlotBindDataFrames(list(
+      .forestPlotObjectIndicatorInput(forestObjects),
+      .forestPlotObjectIndicatorInput(additionalObjectsRaw)
+    )),
+    axisSpec    = axisSpec,
+    skipTypes   = c("boxplot", "bubbles"),
+    heightScale = estimateSize
   )
   plotForest <- .forestPlotAddClippedIntervalLayers(
     plotForest        = plotForest,
     clippedIntervals  = objectIndicatorData,
     color             = "grey20",
-    lineWidth         = 0.6,
-    overflowLineWidth = 1.2
+    lineWidth         = 0.6 * estimateSize,
+    overflowLineWidth = 1.2 * estimateSize
   )
 
   return(plotForest)
+}
+.forestPlotObjectIndicatorInput       <- function(objects) {
+
+  requiredColumns <- c("id", "x", "y", "type")
+  if (!.forestPlotHasDataFrame(objects) || !all(requiredColumns %in% colnames(objects))) {
+    return(NULL)
+  }
+
+  objects <- objects[objects$type %in% c("diamond", "rectangle"), requiredColumns, drop = FALSE]
+  if (!.forestPlotHasDataFrame(objects)) {
+    return(NULL)
+  }
+
+  return(objects)
+}
+.forestPlotScaleObjectHeight         <- function(objects, options) {
+
+  if (!.forestPlotHasDataFrame(objects) || !"id" %in% colnames(objects) || !"y" %in% colnames(objects)) {
+    return(objects)
+  }
+
+  estimateSize <- .forestPlotEstimateSize(options)
+  if (identical(estimateSize, 1)) {
+    return(objects)
+  }
+
+  yCenter   <- ave(objects$y, objects$id, FUN = function(y) stats::median(y, na.rm = TRUE))
+  objects$y <- yCenter + (objects$y - yCenter) * estimateSize
+
+  return(objects)
 }
 .forestPlotAddVerticalLines           <- function(plotForest, options) {
 
@@ -851,7 +1052,7 @@
   leftPanelData <- list(
     titles = NULL, studyDataColored = NULL, studyData = NULL,
     estimateTitles = NULL, additionalData = NULL, additionalInformation = NULL,
-    subgroupHeadings = NULL, maxCharsLeft = NULL
+    subgroupHeadings = NULL, widthMm = NULL
   )
 
   if (hasStudyVars) {
@@ -868,7 +1069,7 @@
 .forestPlotPrepareLeftPanelStudyData <- function(leftPanelData, plotData, forestInformation, additionalInformation, options) {
 
   studyInfo <- .forestPlotBuildStudyInformationHeader(options, forestInformation, additionalInformation)
-  leftPanelData[["maxCharsLeft"]] <- attr(studyInfo, "maxChars")
+  leftPanelData[["widthMm"]] <- attr(studyInfo, "widthMm")
 
   studyInfo$x <- ifelse(
     studyInfo$alignment == "left",   studyInfo$xStart,
@@ -933,22 +1134,11 @@
 
   estimateInfo <- additionalInformation[hasMultiColumn, , drop = FALSE]
 
-  charWidths       <- .forestPlotStudyInformationCharWidths(estimateSettings, estimateInfo)
-  maxCharsEstimate <- sum(charWidths)
+  columnWidths  <- .forestPlotStudyInformationColumnWidths(estimateSettings, estimateInfo, options)
+  relativeWidths <- .forestPlotStudyInformationRelativeWidths(estimateSettings, columnWidths)
 
-  leftPanelData[["maxCharsLeft"]] <- max(c(leftPanelData[["maxCharsLeft"]], maxCharsEstimate), na.rm = TRUE)
-
-  relativeWidths <- .forestPlotStudyInformationRelativeWidths(
-    estimateSettings, leftPanelData[["maxCharsLeft"]], charWidths, options
-  )
-
-  if (options[["forestPlotAuxiliaryAdjustWidthBasedOnText"]]) {
-    estimateSettings$xStart <- cumsum(relativeWidths[-length(relativeWidths)])
-    estimateSettings$xEnd   <- cumsum(relativeWidths)[-1]
-  } else {
-    estimateSettings$xStart <- c(0, cumsum(relativeWidths[-length(relativeWidths)]))
-    estimateSettings$xEnd   <- cumsum(relativeWidths)
-  }
+  estimateSettings$xStart <- c(0, cumsum(relativeWidths[-length(relativeWidths)]))
+  estimateSettings$xEnd   <- cumsum(relativeWidths)
 
   estimateSettings$x <- ifelse(
     estimateSettings$alignment == "left",   estimateSettings$xStart,
@@ -996,10 +1186,10 @@
   info$face[is.na(info$face)] <- "plain"
 
   leftPanelData[["additionalInformation"]] <- info
-  leftPanelData[["maxCharsLeft"]] <- max(c(
-    leftPanelData[["maxCharsLeft"]],
-    max(nchar(info$label))
-  ), na.rm = TRUE)
+  labelWidths <- .forestPlotMeasureTextWidthMm(info$label, options)
+  if (length(labelWidths) > 0) {
+    leftPanelData[["widthMm"]] <- max(c(leftPanelData[["widthMm"]], labelWidths), na.rm = TRUE)
+  }
 
   return(leftPanelData)
 }
@@ -1063,26 +1253,78 @@
     return(NULL)
   }
 
-  studyWeights       <- forestInformation[, c("y", "weights")]
-  formatString       <- paste0("%1$.", options[["forestPlotAuxiliaryDigits"]], "f")
-  suffix             <- if (.forestPlotUsesRawStudyWeights(options)) "" else " %"
-  studyWeights$label <- paste0(sprintf(formatString, studyWeights$weights), suffix)
+  studyWeights         <- forestInformation[, c("y", "weights")]
+  studyWeights$weights <- .forestPlotDisplayStudyWeights(studyWeights$weights, options)
+  formatString         <- paste0("%1$.", .forestPlotStudyWeightDigits(options), "f")
+  suffix               <- .forestPlotStudyWeightSuffix(options)
+  studyWeights$label   <- ""
+  nonMissingWeights    <- is.finite(studyWeights$weights)
+  studyWeights$label[nonMissingWeights] <- paste0(
+    sprintf(formatString, studyWeights$weights[nonMissingWeights]),
+    suffix
+  )
+  studyWeights$type <- "weight"
 
-  return(studyWeights[, c("y", "label")])
+  return(studyWeights[, c("y", "label", "type")])
 }
 .forestPlotUsesRawStudyWeights       <- function(options) {
 
   return(
     isTRUE(options[["analysis"]] == "standaloneForestPlot") &&
-      !is.null(options[["weights"]]) &&
-      options[["weights"]] != ""
+      !is.null(options[["weight"]]) &&
+      options[["weight"]] != ""
   )
+}
+.forestPlotDisplayStudyWeights       <- function(weights, options) {
+
+  if (!.forestPlotUsesRawStudyWeights(options) ||
+      !isTRUE(options[["forestPlotStudyInformationBoxplotWeightsNormalized"]])) {
+    return(weights)
+  }
+
+  weightSum <- sum(weights, na.rm = TRUE)
+  if (!is.finite(weightSum) || weightSum <= 0) {
+    return(weights)
+  }
+
+  return(weights / weightSum * 100)
+}
+.forestPlotStudyWeightSuffix         <- function(options) {
+
+  if (.forestPlotUsesRawStudyWeights(options)) {
+    return(if (isTRUE(options[["forestPlotStudyInformationBoxplotWeightsPercentage"]])) " %" else "")
+  }
+
+  return(" %")
+}
+.forestPlotStudyWeightDigits         <- function(options) {
+
+  if (.forestPlotUsesRawStudyWeights(options)) {
+    if (isTRUE(options[["forestPlotStudyInformationBoxplotWeightsNormalized"]]) ||
+        isTRUE(options[["forestPlotStudyInformationBoxplotWeightsPercentage"]])) {
+      return(1)
+    }
+
+    return(options[["forestPlotAuxiliaryDigits"]])
+  }
+
+  return(1)
 }
 
 # Character counts drive the relative spacing between the interval column and
 # the auxiliary tests/weights column on the right.
 .forestPlotPanelMaxChars              <- function(data) {
-  return(if (.forestPlotHasDataFrame(data)) max(nchar(data$label), na.rm = TRUE) else 0)
+  if (!.forestPlotHasDataFrame(data) || !"label" %in% colnames(data)) {
+    return(0)
+  }
+
+  chars <- nchar(data$label, type = "width")
+  chars <- chars[!is.na(chars)]
+  if (length(chars) == 0) {
+    return(0)
+  }
+
+  return(max(chars))
 }
 .forestPlotPrepareRightPanelData      <- function(plotData, options) {
 
@@ -1118,6 +1360,7 @@
   if (.forestPlotHasDataFrame(additionalInformation)) {
     rightPanelAdditionalTests <- additionalInformation[, c("y", "test")]
     colnames(rightPanelAdditionalTests) <- c("y", "label")
+    rightPanelAdditionalTests$type <- "test"
   } else {
     rightPanelAdditionalTests <- NULL
   }
@@ -1146,7 +1389,16 @@
     rightPanelCis$x <- maxCharsRightCis / maxCharsRight
   }
   if (.forestPlotHasDataFrame(rightPanelTestsAndWeights)) {
-    rightPanelTestsAndWeights$x <- (maxCharsRightCis + 2) / maxCharsRight
+    rightPanelTestsAndWeights$x <- ifelse(
+      rightPanelTestsAndWeights$type == "weight",
+      1,
+      (maxCharsRightCis + 2) / maxCharsRight
+    )
+    rightPanelTestsAndWeights$hjust <- ifelse(
+      rightPanelTestsAndWeights$type == "weight",
+      1,
+      0
+    )
   }
 
   return(list(
@@ -1165,10 +1417,159 @@
     data    = data,
     mapping = mapping,
     na.rm   = TRUE,
-    size    = 4 * options[["forestPlotRelativeSizeText"]],
+    size    = 4 * options[["forestPlotSizeText"]],
     vjust   = "middle",
     ...
   ))
+}
+.forestPlotMeasureTextWidthMm        <- function(labels, options, family = "", fontface = "plain") {
+
+  labels <- as.character(labels)
+  if (length(labels) == 0) {
+    return(numeric(0))
+  }
+
+  keep  <- !is.na(labels) & labels != ""
+  widths <- rep(0, length(labels))
+  if (!any(keep)) {
+    return(widths)
+  }
+
+  if (length(fontface) == 1) {
+    fontface <- rep(fontface, length(labels))
+  } else {
+    fontface <- rep_len(as.character(fontface), length(labels))
+  }
+  fontface <- fontface[keep]
+  fontface[is.na(fontface) | fontface == ""] <- "plain"
+
+  labelWidths <- vapply(labels[keep], .forestPlotEstimateTextWidthMm, numeric(1), family = family)
+  labelWidths[fontface == "bold"] <- labelWidths[fontface == "bold"] * 1.06
+  widths[keep] <- labelWidths * options[["forestPlotSizeText"]]
+
+  return(widths)
+}
+.forestPlotEstimateTextWidthMm       <- function(label, family = "") {
+
+  if (identical(family, "mono")) {
+    return(nchar(label, type = "width") * 1.65)
+  }
+
+  characters <- strsplit(label, "", fixed = TRUE)[[1]]
+  if (length(characters) == 0) {
+    return(0)
+  }
+
+  widths <- rep(1.00, length(characters))
+  widths[grepl("[ilI1\\.,:;!'\\|\\[\\]\\(\\)]", characters)] <- 0.45
+  widths[grepl("[fjrt\\-]", characters)] <- 0.70
+  widths[grepl("[MWmw@#%&]", characters)] <- 1.35
+  widths[characters == " "] <- 0.55
+
+  return(sum(widths) * 1.65)
+}
+.forestPlotNormalizeHjust            <- function(hjust) {
+
+  if (is.null(hjust)) {
+    return(NULL)
+  }
+
+  out <- suppressWarnings(as.numeric(hjust))
+  missing <- is.na(out)
+  if (any(missing)) {
+    hjustText <- as.character(hjust[missing])
+    hjustValues <- rep(0, length(hjustText))
+    hjustValues[hjustText %in% c("middle", "center")] <- 0.5
+    hjustValues[hjustText == "right"] <- 1
+    out[missing] <- hjustValues
+  }
+
+  return(pmin(pmax(out, 0), 1))
+}
+.forestPlotMeasurePanelWidthMm       <- function(textData, options, family = "", side = "left") {
+
+  if (!.forestPlotHasDataFrame(textData)) {
+    return(0)
+  }
+
+  textData <- textData[!is.na(textData$label) & textData$label != "", , drop = FALSE]
+  if (!.forestPlotHasDataFrame(textData)) {
+    return(0)
+  }
+
+  if (!"fontface" %in% colnames(textData)) {
+    textData$fontface <- "plain"
+  }
+
+  labelWidth <- .forestPlotMeasureTextWidthMm(textData$label, options, family = family, fontface = textData$fontface)
+  x          <- pmin(pmax(as.numeric(textData$x), 0), 1)
+  hjust      <- .forestPlotNormalizeHjust(textData$hjust)
+  epsilon    <- 0.02
+
+  leftWidth  <- ifelse(hjust > 0, hjust * labelWidth / pmax(x, epsilon), 0)
+  rightWidth <- ifelse(hjust < 1, (1 - hjust) * labelWidth / pmax(1 - x, epsilon), 0)
+  required   <- max(pmax(leftWidth, rightWidth), na.rm = TRUE)
+
+  return(required + .forestPlotPanelPaddingMm(options, side))
+}
+.forestPlotPanelPaddingMm            <- function(options, side) {
+
+  padding <- switch(
+    side,
+    "left"  = 12,
+    "right" = 4,
+    8
+  )
+
+  return(padding * options[["forestPlotSizeText"]])
+}
+.forestPlotTextData                  <- function(data, labelColumn = "label", hjustColumn = "hjust", hjust = NULL, fontface = "plain") {
+
+  if (!.forestPlotHasDataFrame(data) || !labelColumn %in% colnames(data) || !"x" %in% colnames(data)) {
+    return(NULL)
+  }
+
+  if (!is.null(hjust)) {
+    hjustValues <- hjust
+  } else if (hjustColumn %in% colnames(data)) {
+    hjustValues <- data[[hjustColumn]]
+  } else {
+    hjustValues <- 0
+  }
+
+  if ("fontface" %in% colnames(data)) {
+    fontfaceValues <- data[["fontface"]]
+  } else if ("face" %in% colnames(data)) {
+    fontfaceValues <- data[["face"]]
+  } else {
+    fontfaceValues <- fontface
+  }
+
+  return(data.frame(
+    label    = data[[labelColumn]],
+    x        = data[["x"]],
+    hjust    = hjustValues,
+    fontface = fontfaceValues
+  ))
+}
+.forestPlotLeftPanelTextData         <- function(leftPanelData, align) {
+
+  return(.forestPlotBindDataFrames(list(
+    .forestPlotTextData(leftPanelData[["titles"]], "title", "alignment", fontface = "bold"),
+    .forestPlotTextData(leftPanelData[["studyDataColored"]], "label", "alignment"),
+    .forestPlotTextData(leftPanelData[["studyData"]], "label", "alignment"),
+    .forestPlotTextData(leftPanelData[["estimateTitles"]], "label", "alignment", fontface = "bold"),
+    .forestPlotTextData(leftPanelData[["additionalData"]], "label", "alignment"),
+    .forestPlotTextData(leftPanelData[["additionalInformation"]], "label", hjust = align),
+    .forestPlotTextData(leftPanelData[["subgroupHeadings"]], "label", hjust = align)
+  )))
+}
+.forestPlotRightPanelTextData        <- function(rightPanelData) {
+
+  return(.forestPlotBindDataFrames(list(
+    .forestPlotTextData(rightPanelData[["cis"]], "label", hjust = 1),
+    .forestPlotTextData(rightPanelData[["testsAndWeights"]], "label", "hjust")
+  )))
 }
 .forestPlotBuildLeftPanel             <- function(plotData, options) {
 
@@ -1215,7 +1616,20 @@
     x = x, y = y, label = label, fontface = face
   ), options, hjust = align)
 
-  attr(plotLeft, "maxCharsLeft") <- leftPanelData[["maxCharsLeft"]]
+  measuredWidth <- .forestPlotMeasurePanelWidthMm(
+    .forestPlotLeftPanelTextData(leftPanelData, align),
+    options,
+    side = "left"
+  )
+  columnWidth <- leftPanelData[["widthMm"]]
+  if (is.null(columnWidth) || !is.finite(columnWidth)) {
+    columnWidth <- 0
+  }
+
+  attr(plotLeft, "requiredWidthMm") <- max(
+    measuredWidth,
+    columnWidth + .forestPlotPanelPaddingMm(options, "left")
+  )
 
   return(plotLeft)
 }
@@ -1239,7 +1653,7 @@
       na.rm  = TRUE,
       hjust  = "right",
       family = "mono",
-      size   = 4 * options[["forestPlotRelativeSizeText"]]
+      size   = 4 * options[["forestPlotSizeText"]]
     )
   }
 
@@ -1249,16 +1663,22 @@
       mapping = ggplot2::aes(
         x     = x,
         y     = y,
-        label = label
+        label = label,
+        hjust = hjust
       ),
       na.rm  = TRUE,
-      hjust  = "left",
       family = "mono",
-      size   = 4 * options[["forestPlotRelativeSizeText"]]
+      size   = 4 * options[["forestPlotSizeText"]]
     )
   }
 
   attr(plotRight, "maxCharsRight") <- rightPanelData[["maxCharsRight"]]
+  attr(plotRight, "requiredWidthMm") <- .forestPlotMeasurePanelWidthMm(
+    .forestPlotRightPanelTextData(rightPanelData),
+    options,
+    family = "mono",
+    side   = "right"
+  )
 
   return(plotRight)
 }
@@ -1321,7 +1741,7 @@
   }
 
   xPadding <- .forestPlotResolveXAxisPadding(plotData, xRange)
-  yRange   <- c(min(yValues, na.rm = TRUE) - options[["forestPlotRelativeSizeRow"]], 0)
+  yRange   <- c(min(yValues, na.rm = TRUE) - .forestPlotRowSize(options), 0)
 
   return(list(
     xBreaks  = xBreaks,
@@ -1356,10 +1776,10 @@
       axis.line.y      = ggplot2::element_blank(),
       axis.line.x      = ggplot2::element_line(color = "black"),
       axis.text.y      = ggplot2::element_blank(),
-      axis.text.x      = ggplot2::element_text(color = "black", size = 12 * options[["forestPlotRelativeSizeAxisLabels"]]),
+      axis.text.x      = ggplot2::element_text(color = "black", size = 12 * options[["forestPlotSizeAxisLabels"]]),
       axis.ticks.y     = ggplot2::element_blank(),
       axis.title.y     = ggplot2::element_blank(),
-      axis.title.x     = ggplot2::element_text(color = "black", size = 12 * options[["forestPlotRelativeSizeAxisLabels"]]),
+      axis.title.x     = ggplot2::element_text(color = "black", size = 12 * options[["forestPlotSizeAxisLabels"]]),
       legend.position  = "none",
       panel.background = ggplot2::element_blank(),
       panel.border     = ggplot2::element_blank(),
@@ -1449,8 +1869,8 @@
   )
 
   objectData <- .forestPlotBindDataFrames(list(
-    plotData[["forestObjects"]],
-    plotData[["additionalObjects"]]
+    .forestPlotObjectIndicatorInput(plotData[["forestObjects"]]),
+    .forestPlotObjectIndicatorInput(plotData[["additionalObjects"]])
   ))
   if (.forestPlotHasDataFrame(objectData)) {
     objectData <- objectData[objectData$type %in% c("diamond", "rectangle"), , drop = FALSE]
@@ -1580,7 +2000,7 @@
 .forestPlotClosedArrowBoundaryGap     <- function(style, padding, xSpan) {
   return(if (style == "object") xSpan * 0.01 else padding * 0.05)
 }
-.forestPlotPrepareClippedIntervalData <- function(intervalData, axisSpec, capHeight = 0, style = "interval") {
+.forestPlotPrepareClippedIntervalData <- function(intervalData, axisSpec, capHeight = 0, style = "interval", heightScale = 1) {
 
   intervalData <- .forestPlotFilterIntervalData(intervalData)
   if (is.null(intervalData)) {
@@ -1590,7 +2010,7 @@
   lower        <- axisSpec[["xRange"]][1]
   upper        <- axisSpec[["xRange"]][2]
   xSpan        <- max(diff(axisSpec[["xRange"]]), .Machine$double.eps)
-  rowHeight    <- .forestPlotIntervalRowHeight(intervalData$y)
+  rowHeight    <- .forestPlotIntervalRowHeight(intervalData$y) * heightScale
   xPadding     <- axisSpec[["xPadding"]]
 
   # Mark each interval as overlapping, fully outside, or overflowing the visible
@@ -1780,7 +2200,7 @@
 
 # Diamonds/rectangles can overflow too, so collapse each polygon to a single
 # xmin/xmax indicator before feeding it into the generic clipping pipeline.
-.forestPlotPrepareObjectIndicatorData <- function(objects, axisSpec, skipTypes = character(0)) {
+.forestPlotPrepareObjectIndicatorData <- function(objects, axisSpec, skipTypes = character(0), heightScale = 1) {
 
   if (!.forestPlotHasDataFrame(objects)) {
     return(NULL)
@@ -1814,7 +2234,8 @@
     intervalData = objects,
     axisSpec     = axisSpec,
     capHeight    = 0,
-    style        = "object"
+    style        = "object",
+    heightScale  = heightScale
   ))
 }
 .forestPlotApplySidePanelTheme        <- function(plotPanel, yRange, options) {
@@ -1829,10 +2250,10 @@
     ggplot2::theme(
       axis.line        = ggplot2::element_blank(),
       axis.text.y      = ggplot2::element_blank(),
-      axis.text.x      = ggplot2::element_text(color = NA, size = 12 * options[["forestPlotRelativeSizeAxisLabels"]]),
+      axis.text.x      = ggplot2::element_text(color = NA, size = 12 * options[["forestPlotSizeAxisLabels"]]),
       axis.ticks       = ggplot2::element_blank(),
       axis.title.y     = ggplot2::element_blank(),
-      axis.title.x     = ggplot2::element_text(color = NA, size = 12 * options[["forestPlotRelativeSizeAxisLabels"]]),
+      axis.title.x     = ggplot2::element_text(color = NA, size = 12 * options[["forestPlotSizeAxisLabels"]]),
       legend.position  = "none",
       panel.background = ggplot2::element_blank(),
       panel.border     = ggplot2::element_blank(),
@@ -1849,50 +2270,14 @@
 # plus layout metadata for jaspGraphsPlot.
 .forestPlotComposeOutput              <- function(plotForest, plotLeft, plotRight, plotData, options) {
 
-  if (!is.null(plotLeft)) {
-    maxCharsLeft <- attr(plotLeft, "maxCharsLeft")
-  } else {
-    maxCharsLeft <- NULL
-  }
-  if (!is.null(plotRight)) {
-    maxCharsRight <- attr(plotRight, "maxCharsRight")
-  } else {
-    maxCharsRight <- NULL
-  }
+  layoutSpec <- .forestPlotBuildLayoutSpec(plotLeft, plotRight, plotData, options)
 
-  plotsWidths <- c(
-    if (!is.null(plotLeft))  options[["forestPlotRelativeSizeLeftPanel"]],
-    options[["forestPlotRelativeSizeMiddlePanel"]],
-    if (!is.null(plotRight)) options[["forestPlotRelativeSizeRightPanel"]]
-  )
-
-  if (options[["forestPlotAuxiliaryAdjustWidthBasedOnText"]] && length(plotsWidths) == 3) {
-    plotsWidths[1] <- plotsWidths[1] * 2 * maxCharsLeft  / (maxCharsRight + maxCharsLeft)
-    plotsWidths[3] <- plotsWidths[3] * 2 * maxCharsRight / (maxCharsRight + maxCharsLeft)
-  }
-
-  if (length(plotsWidths) != 1) {
-    panelRatio <- 0
-
-    if (!is.null(plotLeft)) {
-      panelRatio <- panelRatio + options[["forestPlotRelativeSizeLeftPanel"]]
-    }
-    if (!is.null(plotRight)) {
-      panelRatio <- panelRatio + options[["forestPlotRelativeSizeRightPanel"]]
-    }
-
-    panelRatio <- panelRatio / options[["forestPlotRelativeSizeMiddlePanel"]]
-  }
-
-  if (length(plotsWidths) == 1) {
+  if (!layoutSpec[["isPanel"]]) {
     plotOut <- plotForest
-    attr(plotOut, "isPanel") <- FALSE
-    if (!is.null(plotData[["forestInformation"]])) {
-      forestRowsOffset <- max(plotData[["forestInformation"]]$y)
-    } else {
-      forestRowsOffset <- 0
-    }
-    attr(plotOut, "rows")    <- plotData[["nextRow"]] + forestRowsOffset
+    attr(plotOut, "isPanel")    <- FALSE
+    attr(plotOut, "plotWidth")  <- layoutSpec[["plotWidth"]]
+    attr(plotOut, "rows")       <- layoutSpec[["rows"]]
+    attr(plotOut, "layoutSpec") <- layoutSpec
 
     return(plotOut)
   }
@@ -1907,12 +2292,71 @@
   }
 
   attr(plotOut, "isPanel")    <- TRUE
-  attr(plotOut, "panelRatio") <- panelRatio
-  attr(plotOut, "rows")       <- plotData[["nextRow"]] + if (!is.null(plotData[["forestInformation"]])) max(plotData[["forestInformation"]]$y) else 0
-  attr(plotOut, "widths")     <- plotsWidths
+  attr(plotOut, "panelRatio") <- layoutSpec[["panelRatio"]]
+  attr(plotOut, "plotWidth")  <- layoutSpec[["plotWidth"]]
+  attr(plotOut, "rows")       <- layoutSpec[["rows"]]
+  attr(plotOut, "widths")     <- layoutSpec[["widths"]]
   attr(plotOut, "layout")     <- matrix(1:length(plotOut), nrow = 1, ncol = length(plotOut), byrow = TRUE)
+  attr(plotOut, "layoutSpec") <- layoutSpec
 
   return(plotOut)
+}
+.forestPlotBuildLayoutSpec           <- function(plotLeft, plotRight, plotData, options) {
+
+  middlePanelWidth <- .forestPlotMiddlePanelWidthMm(options)
+  widths <- c(
+    if (!is.null(plotLeft)) .forestPlotSidePanelWidthMm(plotLeft, options, "left"),
+    middlePanelWidth,
+    if (!is.null(plotRight)) .forestPlotSidePanelWidthMm(plotRight, options, "right")
+  )
+  isPanel <- length(widths) != 1
+
+  if (!isPanel) {
+    return(list(
+      isPanel    = FALSE,
+      widths     = widths,
+      panelRatio = 0,
+      plotWidth  = .forestPlotWidthToPixels(middlePanelWidth),
+      rows       = plotData[["rowCount"]]
+    ))
+  }
+
+  middlePanelIndex <- if (!is.null(plotLeft)) 2 else 1
+  panelRatio       <- (sum(widths) - widths[middlePanelIndex]) / widths[middlePanelIndex]
+  plotWidth        <- .forestPlotWidthToPixels(sum(widths))
+
+  return(list(
+    isPanel    = TRUE,
+    widths     = widths,
+    panelRatio = panelRatio,
+    plotWidth  = plotWidth,
+    rows       = plotData[["rowCount"]]
+  ))
+}
+.forestPlotMiddlePanelWidthMm        <- function(options) {
+  return(.forestPlotMiddlePanelBaseWidthMm() * .forestPlotPositiveOption(options, "forestPlotSizePlotArea"))
+}
+.forestPlotMiddlePanelBaseWidthMm    <- function() {
+  return(130)
+}
+.forestPlotWidthToPixels             <- function(widthMm) {
+  return(500 * widthMm / .forestPlotMiddlePanelBaseWidthMm())
+}
+.forestPlotSidePanelWidthMm          <- function(plotPanel, options, side) {
+
+  requiredWidth <- attr(plotPanel, "requiredWidthMm")
+  if (is.null(requiredWidth) || !is.finite(requiredWidth)) {
+    requiredWidth <- 0
+  }
+
+  multiplier <- switch(
+    side,
+    "left"  = .forestPlotPositiveOption(options, "forestPlotSizeLeftPanel"),
+    "right" = .forestPlotPositiveOption(options, "forestPlotSizeRightPanel"),
+    1
+  )
+
+  return(requiredWidth * multiplier)
 }
 
 # Safe numeric collector used by the axis and padding builders.

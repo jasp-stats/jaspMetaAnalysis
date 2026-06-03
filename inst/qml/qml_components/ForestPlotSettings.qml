@@ -250,12 +250,12 @@ Group
 
 	Group
 	{
-		title:		qsTr("Relative Size")
-		info: qsTr("Adjust the relative size of the forest plot components.")
+		title:		qsTr("Size")
+		info: qsTr("Adjust the size of the forest plot elements.")
 
 		DoubleField
 		{
-			name:			"forestPlotRelativeSizeEstimates"
+			name:			"forestPlotSizeEstimates"
 			text:			qsTr("Estimates")
 			defaultValue:	1
 			min:			0
@@ -264,7 +264,7 @@ Group
 
 		DoubleField
 		{
-			name:			"forestPlotRelativeSizeText"
+			name:			"forestPlotSizeText"
 			text:			qsTr("Text")
 			defaultValue:	1
 			min:			0
@@ -273,7 +273,7 @@ Group
 
 		DoubleField
 		{
-			name:			"forestPlotRelativeSizeAxisLabels"
+			name:			"forestPlotSizeAxisLabels"
 			text:			qsTr("Axis labels")
 			defaultValue:	1
 			min:			0
@@ -282,7 +282,7 @@ Group
 
 		DoubleField
 		{
-			name:			"forestPlotRelativeSizeRow"
+			name:			"forestPlotSizeRow"
 			text:			qsTr("Row")
 			defaultValue:	1
 			min:			0
@@ -291,17 +291,8 @@ Group
 
 		DoubleField
 		{
-			name:			"forestPlotRelativeSizeLeftPanel"
+			name:			"forestPlotSizeLeftPanel"
 			text:			qsTr("Left panel")
-			defaultValue:	0.5
-			min:			0
-			inclusive: 		JASP.None
-		}
-
-		DoubleField
-		{
-			name:			"forestPlotRelativeSizeMiddlePanel"
-			text:			qsTr("Middle panel")
 			defaultValue:	1
 			min:			0
 			inclusive: 		JASP.None
@@ -309,19 +300,20 @@ Group
 
 		DoubleField
 		{
-			name:			"forestPlotRelativeSizeRightPanel"
-			text:			qsTr("Right panel")
-			defaultValue:	0.5
+			name:			"forestPlotSizePlotArea"
+			text:			qsTr("Plot area")
+			defaultValue:	1
 			min:			0
 			inclusive: 		JASP.None
 		}
 
-		CheckBox
+		DoubleField
 		{
-			name:			"forestPlotAuxiliaryAdjustWidthBasedOnText"
-			text:			qsTr("Adjust width based on text")
-			checked:		true
-			info: qsTr("Turn off the automatic width adjustment of the individual components.")
+			name:			"forestPlotSizeRightPanel"
+			text:			qsTr("Right panel")
+			defaultValue:	1
+			min:			0
+			inclusive: 		JASP.None
 		}
 	}
 

@@ -98,6 +98,22 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "glmmModel", "glmmCoding", "glmmCorrelatedEffects", "glmmQuadraturePoints"
 )
 
+.maExportOptions <- c(
+  "exportDiagnosticsInfluentialCases",
+  "exportDiagnosticsCaseDiagnostics",
+  "exportDiagnosticsModelImpact",
+  "exportDiagnosticsCoefficientInfluence",
+  "exportResidualsRaw",
+  "exportResidualsPearson",
+  "exportResidualsStandardized",
+  "exportResidualsStudentized",
+  "exportResidualsConditional",
+  "exportPredictedValues",
+  "exportTrueEffectEstimates",
+  "exportRandomEffects",
+  "exportWeights"
+)
+
 .maForestPlotDependencies <- c(
   # do not forget to add variable carrying options to the .maDataPlottingDependencies
   "transformEffectSize", "confidenceIntervalsLevel", "bayesFactorType",
@@ -112,6 +128,8 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotStudyInformationAggregateBy",
   "forestPlotStudyInformationAggregateMethod",
   "forestPlotStudyInformationAggregateMethodBubbleRelativeSize",
+  "forestPlotStudyInformationBoxplotWeightsPercentage",
+  "forestPlotStudyInformationBoxplotWeightsNormalized",
   "forestPlotEstimatedMarginalMeans",
   "forestPlotEstimatedMarginalMeansModelVariables",
   "forestPlotEstimatedMarginalMeansSelectedVariables",
@@ -146,14 +164,13 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotSubgroupFullDatasetModelInformation",
   "forestPlotMappingColor",
   "forestPlotMappingShape",
-  "forestPlotRelativeSizeEstimates",
-  "forestPlotRelativeSizeText",
-  "forestPlotRelativeSizeAxisLabels",
-  "forestPlotRelativeSizeRow",
-  "forestPlotRelativeSizeLeftPanel",
-  "forestPlotRelativeSizeMiddlePanel",
-  "forestPlotRelativeSizeRightPanel",
-  "forestPlotAuxiliaryAdjustWidthBasedOnText",
+  "forestPlotSizeEstimates",
+  "forestPlotSizeText",
+  "forestPlotSizeAxisLabels",
+  "forestPlotSizeRow",
+  "forestPlotSizeLeftPanel",
+  "forestPlotSizePlotArea",
+  "forestPlotSizeRightPanel",
   "forestPlotAuxiliaryDigits",
   "forestPlotAuxiliaryTestsInformation",
   "forestPlotAuxiliaryPlotColor",

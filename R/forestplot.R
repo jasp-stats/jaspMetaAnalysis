@@ -50,6 +50,8 @@ ForestPlot <- function(jaspResults, dataset, options) {
     forestPlotStudyInformationAggregateBy                           = "",
     forestPlotStudyInformationAggregateMethod                       = "boxplot",
     forestPlotStudyInformationAggregateMethodBubbleRelativeSize     = 1,
+    forestPlotStudyInformationBoxplotWeightsPercentage              = TRUE,
+    forestPlotStudyInformationBoxplotWeightsNormalized              = TRUE,
     # shared component: estimate information
     forestPlotEstimateInformationSelectedVariables                  = list(),
     forestPlotEstimateInformationSelectedVariablesSettings          = list(),
@@ -71,19 +73,18 @@ ForestPlot <- function(jaspResults, dataset, options) {
     forestPlotAuxiliarySetXAxisTicks                                = FALSE,
     forestPlotAuxiliarySetXAxisTicksValues                          = "-1, -0.5, 0, 0.5, 1",
     forestPlotAuxiliaryXAxisTransformLabelsOnly                     = TRUE,
-    forestPlotAuxiliaryAdjustWidthBasedOnText                       = TRUE,
-    forestPlotRelativeSizeEstimates                                 = 1,
-    forestPlotRelativeSizeText                                      = 1,
-    forestPlotRelativeSizeAxisLabels                                = 1,
-    forestPlotRelativeSizeRow                                       = 1,
-    forestPlotRelativeSizeLeftPanel                                 = 0.5,
-    forestPlotRelativeSizeMiddlePanel                               = 1,
-    forestPlotRelativeSizeRightPanel                                = 0.5,
+    forestPlotSizeEstimates                                         = 1,
+    forestPlotSizeText                                              = 1,
+    forestPlotSizeAxisLabels                                        = 1,
+    forestPlotSizeRow                                               = 1,
+    forestPlotSizeLeftPanel                                         = 1,
+    forestPlotSizePlotArea                                          = 1,
+    forestPlotSizeRightPanel                                        = 1,
     forestPlotMappingColor                                          = "",
     forestPlotMappingShape                                          = "",
     # pipeline options not present in standalone QML
     subgroup                                                       = "",
-    weights                                                        = "",
+    weight                                                         = "",
     confidenceIntervals                                            = TRUE,
     confidenceIntervalsLevel                                       = 0.95,
     predictionIntervals                                            = FALSE,
@@ -134,7 +135,7 @@ ForestPlot <- function(jaspResults, dataset, options) {
   emptyValueOptions <- c(
     "forestPlotStudyInformationOrderBy",
     "forestPlotStudyInformationAggregateBy",
-    "weights",
+    "weight",
     "forestPlotMappingColor",
     "forestPlotMappingShape"
   )
@@ -152,7 +153,7 @@ ForestPlot <- function(jaspResults, dataset, options) {
 .fpStandaloneDependencies <- c(
   .maForestPlotDependencies,
   "effectSize", "effectSizeStandardError",
-  "confidenceInterval", "predictionInterval", "weights",
+  "confidenceInterval", "predictionInterval", "weight",
   "row", "visualizationType",
   "visualizationTypeStudy", "visualizationTypeEstimate",
   "subgroup",
@@ -185,11 +186,10 @@ ForestPlot <- function(jaspResults, dataset, options) {
     return()
   }
 
-  height <- 200 + attr(plotOut, "rows") * 10
-  if (!attr(plotOut, "isPanel"))
-    width <- 500
-  else
-    width <- 500 + 500 * attr(plotOut, "panelRatio")
+  height <- .forestPlotPlotHeight(plotOut, options)
+  width <- attr(plotOut, "plotWidth")
+  if (is.null(width))
+    width <- if (!attr(plotOut, "isPanel")) 500 else 500 + 500 * attr(plotOut, "panelRatio")
 
   forestPlot            <- createJaspPlot(title = gettext("Forest Plot"), width = width, height = height)
   forestPlot$position   <- 1
@@ -221,7 +221,7 @@ ForestPlot <- function(jaspResults, dataset, options) {
   if (!hasCi && !hasSe)
     options[["forestPlotEstimatesAndConfidenceIntervals"]] <- FALSE
 
-  if (options[["weights"]] == "")
+  if (options[["weight"]] == "")
     options[["forestPlotStudyInformationStudyWeights"]] <- FALSE
 
   options  <- .forestPlotPrepareOptions(options)
@@ -458,11 +458,11 @@ ForestPlot <- function(jaspResults, dataset, options) {
 # study weight builder
 .fpStandaloneStudyWeights <- function(studyData, standardError, options) {
 
-  if (options[["weights"]] != "") {
-    weights   <- suppressWarnings(as.numeric(studyData[[options[["weights"]]]]))
+  if (options[["weight"]] != "") {
+    weights   <- suppressWarnings(as.numeric(studyData[[options[["weight"]]]]))
     weightSum <- sum(weights)
     if (any(!is.finite(weights) | weights < 0) || !is.finite(weightSum) || weightSum <= 0)
-      stop(gettext("The weights variable must contain finite, non-negative values with at least one positive value."))
+      stop(gettext("The weight variable must contain finite, non-negative values with at least one positive value."))
 
     return(weights)
   }

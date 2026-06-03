@@ -82,22 +82,6 @@ Section
 					info: qsTr("Include the differences in model coefficients when each study is excluded (DFBETAS).")
 				}
 
-				CheckBox
-				{
-					name:		"diagnosticsCasewiseDiagnosticsExportToDataset"
-					text:		qsTr("Export to dataset")
-					info: qsTr("Export the casewise diagnostics results to the dataset.")
-
-					CheckBox
-					{
-						name:		"diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"
-						text:		qsTr("Influential indicator only")
-						checked:	true
-						visible:	analysisType === "metaAnalysis"
-						info: qsTr("Export only the indicator of influential cases to the dataset.")
-					}
-				}
-
 				/*
 				CheckBox
 				{

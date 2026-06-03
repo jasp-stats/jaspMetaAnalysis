@@ -451,6 +451,11 @@ Form
 		analysisType:	"multilevelMultivariateMetaAnalysis"
 	}
 
+	MA.ClassicalMetaAnalysisExport
+	{
+		analysisType:	"multilevelMultivariateMetaAnalysis"
+	}
+
 	MA.ClassicalMetaAnalysisAdvanced
 	{
 		analysisType:	"multilevelMultivariateMetaAnalysis"

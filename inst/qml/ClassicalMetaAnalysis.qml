@@ -72,12 +72,13 @@ Form
 			id:				method
 			label:			qsTr("Method")
 			startValue:		"restrictedML"
-			info: qsTr("Method used to estimate heterogeneity (tau-squared) in the meta-analysis. The available methods depend on the inclusion of heterogeneity model terms.")
+			info: qsTr("Method used for model estimation in the meta-analysis. The available methods depend on the inclusion of heterogeneity model terms.")
 			values:			(function() {
 				if (sectionModel.heterogeneityModelTermsCount == 0) {
 					return [
 						{ label: qsTr("Equal Effects")			, value: "equalEffects"		},
 						{ label: qsTr("Fixed Effects")			, value: "fixedEffects"		},
+						{ label: qsTr("Unrestricted Weighted Least Squares (UWLS)"), value: "unrestrictedWeightedLeastSquares" },
 						{ label: qsTr("Maximum Likelihood")		, value: "maximumLikelihood"},
 						{ label: qsTr("Restricted ML")			, value: "restrictedML"		},
 						{ label: qsTr("DerSimonian-Laird")		, value: "derSimonianLaird"	},
@@ -103,9 +104,10 @@ Form
 		DropDown
 		{
 			name:		"fixedEffectTest"
-			label:		qsTr("Fixed effect test")
+			label:		qsTr("Fixed effects test")
 			startValue:	"knha"
-			values:		[ "z", "t", "knha"]
+			enabled:	method.value !== "unrestrictedWeightedLeastSquares"
+			values:		method.value === "unrestrictedWeightedLeastSquares" ? [ "knha" ] : [ "z", "t", "knha"]
 			info: qsTr("Method for testing the model coefficients: 'z' uses standard normal approximation, 't' uses t-distribution, and 'knha' uses the Knapp and Hartung adjustment (default).")
 		}
 
@@ -152,7 +154,8 @@ Form
 
 	MA.ClassicalMetaAnalysisModel
 	{
-		id:		sectionModel
+		id:				sectionModel
+		methodValue:	method.value
 	}
 
 	MA.ClassicalMetaAnalysisStatistics
@@ -176,6 +179,8 @@ Form
 	MA.BubblePlot {}
 
 	MA.ClassicalMetaAnalysisDiagnostics {}
+
+	MA.ClassicalMetaAnalysisExport {}
 
 	MA.ClassicalMetaAnalysisAdvanced
 	{

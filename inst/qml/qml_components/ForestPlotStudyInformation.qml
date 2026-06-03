@@ -11,6 +11,10 @@ Group
 	property bool showAggregate:			false
 	property bool panelEnabled:				true
 	property bool predictedEffectsEnabled:	true
+	property bool showWeightDisplayOptions:	false
+	property bool weightDisplayOptionsEnabled:
+		panelEnabled &&
+		showStudyWeights
 
 	columns: 1
 
@@ -113,11 +117,30 @@ Group
 			{
 				name:			"forestPlotStudyInformationStudyWeights"
 				text:			qsTr("Study weights")
-				enabled:		panelEnabled
-				visible:		showStudyWeights
+				enabled:		panelEnabled && showStudyWeights
 				checked:		false
 				info: qsTr("Include the study weights in the right section of the study-level information panel.")
 				Layout.preferredWidth: 300 * jaspTheme.uiScale
+
+				CheckBox
+				{
+					name:		"forestPlotStudyInformationBoxplotWeightsPercentage"
+					text:		qsTr("Percentage")
+					checked:	true
+					visible:	showWeightDisplayOptions
+					enabled:	weightDisplayOptionsEnabled
+					info: qsTr("Display user-supplied weights as percentages.")
+				}
+
+				CheckBox
+				{
+					name:		"forestPlotStudyInformationBoxplotWeightsNormalized"
+					text:		qsTr("Normalized")
+					checked:	true
+					visible:	showWeightDisplayOptions
+					enabled:	weightDisplayOptionsEnabled
+					info: qsTr("Normalize displayed user-supplied weights to sum to 100.")
+				}
 			}
 
 			CheckBox

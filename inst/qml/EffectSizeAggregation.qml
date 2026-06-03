@@ -83,6 +83,21 @@ Form
 
 			CheckBox
 			{
+				name:		"showMetaforRCode"
+				text:		qsTr("Show metafor R code")
+				info:		qsTr("Display the underlying R code used by the metafor package to aggregate the effect sizes.")
+			}
+
+			CheckBox
+			{
+				id:			computeSamplingVariance
+				name:		"computeSamplingVariance"
+				text:		qsTr("Compute sampling variance")
+				checked:	false
+			}
+
+			CheckBox
+			{
 				name:		"weighted"
 				text:		qsTr("Inverse-variance weighting")
 				checked:	true
@@ -115,6 +130,15 @@ Form
 				name:			"aggregatedColumnNamesStandardError"
 				label:			qsTr("Standard error")
 				defaultValue:	"aggregated standard error"
+				visible:		!computeSamplingVariance.checked
+			}
+
+			TextField
+			{
+				name:			"aggregatedColumnNamesSamplingVariance"
+				label:			qsTr("Sampling variance")
+				defaultValue:	"aggregated sampling variance"
+				visible:		computeSamplingVariance.checked
 			}
 
 			TextField
