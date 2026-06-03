@@ -869,15 +869,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   }
 
   if (.maIsGLMM(options) && .maIsMetaregressionEffectSize(options)) {
-    # check whether the fit uses t/F-distribution
-    fitTest <- NULL
-    for (f in fit) {
-      if (!jaspBase::isTryError(f)) {
-        fitTest <- f[["test"]]
-        break
-      }
-    }
-    if (!is.null(fitTest) && fitTest == "t")
+    if (options[["fixedEffectTest"]] == "t")
       testsTable$addFootnote(gettext("Moderation test based on a Wald-type F-test."))
     else
       testsTable$addFootnote(gettext("Moderation test based on a Wald-type chi-squared test."))
