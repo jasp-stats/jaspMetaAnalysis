@@ -2015,16 +2015,28 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   if (.maIsMultilevelMultivariate(options)) {
     rowSumValues <- .maExportVectorFromFitList(
-      dataset,
-      fit,
-      function(fit) .maExportWeights(fit, options, type = "rowsum")
+      dataset        = dataset,
+      fit            = fit,
+      exportFunction = function(fit) {
+        .maExportWeights(
+          fit     = fit,
+          options = options,
+          type    = "rowsum"
+        )
+      }
     )
     .maExportScaleColumn(jaspResults, "Weights: Row Sum", rowSumValues, c(.maExportDependencies(), "exportWeights"))
 
     diagonalValues <- .maExportVectorFromFitList(
-      dataset,
-      fit,
-      function(fit) .maExportWeights(fit, options, type = "diagonal")
+      dataset        = dataset,
+      fit            = fit,
+      exportFunction = function(fit) {
+        .maExportWeights(
+          fit     = fit,
+          options = options,
+          type    = "diagonal"
+        )
+      }
     )
     .maExportScaleColumn(jaspResults, "Weights: Diagonal", diagonalValues, c(.maExportDependencies(), "exportWeights"))
 
@@ -2032,9 +2044,15 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   }
 
   values <- .maExportVectorFromFitList(
-    dataset,
-    fit,
-    function(fit) .maExportWeights(fit, options, type = "diagonal")
+    dataset        = dataset,
+    fit            = fit,
+    exportFunction = function(fit) {
+      .maExportWeights(
+        fit     = fit,
+        options = options,
+        type    = "diagonal"
+      )
+    }
   )
   .maExportScaleColumn(jaspResults, "Weights", values, c(.maExportDependencies(), "exportWeights"))
 
