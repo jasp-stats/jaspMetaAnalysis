@@ -881,7 +881,7 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     # varianceCovarianceMatrixCorrelationMatrix can contain NA's as it is only lower triangular
     variableNames <- c(
       options[["varianceCovarianceMatrixCluster"]],
-      options[["varianceCovarianceMatrixSubluster"]]
+      options[["varianceCovarianceMatrixSubcluster"]]
     )
     variableNames <- variableNames[variableNames != ""]
     return(variableNames)

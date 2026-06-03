@@ -33,7 +33,7 @@ test_that("PetPeese (analysis 2) results match", {
   set.seed(1)
   results <- jaspTools::runAnalysis("PetPeese", encoded$dataset, encoded$options, encodedDataset = TRUE)
 
-  table <- results[["results"]][["estimates"]][["collection"]][["estimates_estimatesMean"]][["data"]]
+  table <- results[["results"]][["estimates"]][["collection"]][["estimates_mean"]][["data"]]
   jaspTools::expect_equal_tables(table,
     list(16, -0.000872207822835111, -0.206619975057632, 0.993663506414102,
      0.104520755484612, -0.00806669053643172, "PET", 0.205022289978001,

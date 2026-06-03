@@ -1471,7 +1471,6 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   contrasts <- .maSafeRbind(lapply(fit, .maComputeContrastVariable,
     options          = options,
     selectedVariable = if (selectedVariable == "") "" else strsplit(selectedVariable, ":")[[1]],
-    testAgainst      = options[["contrastsEffectSizeTestAgainstValue"]],
     parameter        = parameter
   ))
 
@@ -1833,7 +1832,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 }
 .maAnyExportColumns                      <- function(options) {
 
-  exportOptions <- c(.maExportOptions, "diagnosticsCasewiseDiagnosticsExportToDataset")
+  exportOptions <- .maExportOptions
   return(any(vapply(exportOptions, function(option) isTRUE(options[[option]]), logical(1))))
 }
 .maExportDiagnosticsColumns              <- function(jaspResults, dataset, options) {
@@ -1908,29 +1907,19 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   if (.maIsMultilevelMultivariate(options))
     return(FALSE)
 
-  return(isTRUE(options[["exportDiagnosticsInfluentialCases"]]) || isTRUE(options[["diagnosticsCasewiseDiagnosticsExportToDataset"]]))
+  return(isTRUE(options[["exportDiagnosticsInfluentialCases"]]))
 }
 .maExportDiagnosticsCaseDiagnostics       <- function(options) {
-  return(isTRUE(options[["exportDiagnosticsCaseDiagnostics"]]) || (
-    isTRUE(options[["diagnosticsCasewiseDiagnosticsExportToDataset"]]) &&
-      !isTRUE(options[["diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"]])
-  ))
+  return(isTRUE(options[["exportDiagnosticsCaseDiagnostics"]]))
 }
 .maExportDiagnosticsModelImpact           <- function(options) {
   if (.maIsMultilevelMultivariate(options))
     return(FALSE)
 
-  return(isTRUE(options[["exportDiagnosticsModelImpact"]]) || (
-    isTRUE(options[["diagnosticsCasewiseDiagnosticsExportToDataset"]]) &&
-      !isTRUE(options[["diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"]])
-  ))
+  return(isTRUE(options[["exportDiagnosticsModelImpact"]]))
 }
 .maExportDiagnosticsCoefficientInfluence  <- function(options) {
-  return(isTRUE(options[["exportDiagnosticsCoefficientInfluence"]]) || (
-    isTRUE(options[["diagnosticsCasewiseDiagnosticsExportToDataset"]]) &&
-      !isTRUE(options[["diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"]]) &&
-      isTRUE(options[["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"]])
-  ))
+  return(isTRUE(options[["exportDiagnosticsCoefficientInfluence"]]))
 }
 .maExportResidualColumns                  <- function(jaspResults, dataset, options) {
 
@@ -3574,7 +3563,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   return(computedMarginalMeans)
 }
-.maComputeContrastVariable         <- function(fit, options, selectedVariable, testAgainst = 0, parameter) {
+.maComputeContrastVariable         <- function(fit, options, selectedVariable, parameter) {
 
   if (jaspBase::isTryError(fit)) {
     return(NULL)

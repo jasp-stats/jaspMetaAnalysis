@@ -14,7 +14,7 @@ dataset <- data.frame(
 results <- runAnalysis("WaapWls", dataset, options)
 
 test_that("Mean Estimates(mu) table results match", {
-  table <- results[["results"]][["estimates"]][["collection"]][["estimates_estimatesMean"]][["data"]]
+  table <- results[["results"]][["estimates"]][["collection"]][["estimates_mean"]][["data"]]
   jaspTools::expect_equal_tables(table,
                                  list(99, 0.308843185963856, 0.288136775996336, 1.70473190020944e-50,
                                       0.0105646890100273, 29.2335331092778, "WLS", 0.329549595931375,
@@ -58,7 +58,7 @@ dataset <- data.frame(
 results <- runAnalysis("WaapWls", dataset, options)
 
 test_that("Mean Estimates(rho) table results match", {
-  table <- results[["results"]][["estimates"]][["collection"]][["estimates_estimatesMean"]][["data"]]
+  table <- results[["results"]][["estimates"]][["collection"]][["estimates_mean"]][["data"]]
   jaspTools::expect_equal_tables(table,
                                  list(99, 0.152057482491801, 0.146823853705826, 7.49071897329892e-77,
                                       0.00265262252872538, 56.1079283503232, "WLS", 0.157282598014925,
