@@ -2095,8 +2095,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     if (length(datasetOrder) == 0)
       next
 
-    values <- try(exportFunction(fit[[i]]), silent = TRUE)
-    if (jaspBase::isTryError(values) || is.null(values) || nrow(values) == 0)
+    values <- exportFunction(fit[[i]])
+    if (is.null(values) || nrow(values) == 0)
       next
 
     values <- .maExportRecycleRows(values, length(datasetOrder))
@@ -2127,8 +2127,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     if (length(datasetOrder) == 0)
       next
 
-    values <- try(exportFunction(fit[[i]]), silent = TRUE)
-    if (jaspBase::isTryError(values) || is.null(values))
+    values <- exportFunction(fit[[i]])
+    if (is.null(values))
       next
 
     values <- as.numeric(values)
