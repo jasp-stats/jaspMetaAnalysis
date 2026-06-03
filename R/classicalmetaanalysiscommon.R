@@ -5862,7 +5862,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     if (anyNA) {
       messages <- c(messages, gettextf("NAs in the %1$s were introduced due to the %2$s transformation. Please verify that you are using the correct effect size transformation.", effectSizeName, .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
     } else {
-      messages <- c(messages, gettextf("The %1$s is transformed using %2$s transformation.", effectSizeName, .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
+      messages <- c(messages, gettextf("The %1$s is transformed using %2$s transformation. For nonlinear transformations, the transformed estimate is interpreted as a median on the transformed scale.", effectSizeName, .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
     }
   }
 
@@ -5954,9 +5954,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   if (parameter == "effectSize" && options[["transformEffectSize"]] != "none") {
     if (anyNA) {
-      messages <- c(messages, gettextf("NAs in the marginal mean estimatess were introduced due to the %1$s transformation. Please verify that you are using the correct effect size transformation.", .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
+      messages <- c(messages, gettextf("NAs in the marginal mean estimates were introduced due to the %1$s transformation. Please verify that you are using the correct effect size transformation.", .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
     } else {
-      messages <- c(messages, gettextf("The estimates and intervals are transformed using %1$s transformation.", .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
+      messages <- c(messages, gettextf("The marginal mean estimates and intervals are transformed using %1$s transformation. For nonlinear transformations, transformed marginal means are interpreted as medians on the transformed scale.", .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
     }
   }
 
