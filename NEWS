@@ -21,6 +21,7 @@
 * Added Effect Size Aggregation for clustered/dependent effect sizes.
 * Added Forest Plot analysis.
 * Added Risk of Bias Plot analysis for RoB 2, ROBINS-I, and QUADAS-2.
+* Added dataset exports for model-derived fit information in classical analyses, including diagnostics, residuals, predicted values, true-effect estimates, random effects, and weights.
 
 ## Changed
 * Improved forest plots with transformed axis labels, manual ticks, axis limits, reference lines, weights, metadata panels, and subgroup/aggregation displays.
