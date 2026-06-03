@@ -54,3 +54,4 @@ renv/activate.R
 
 knowledge-base/*
 .positai
+/.StatsVault

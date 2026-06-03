@@ -907,6 +907,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
       testsTable$addFootnote(gettext("Moderation test based on a Wald-type chi-squared test."))
   }
 
+  .maAddLowDdfWarning(testsTable, fit, options)
+
   # bind and clean rows
   tests <- .maSafeRbind(tests)
   tests <- .maSafeOrderAndSimplify(tests, "test", options)
@@ -1005,12 +1007,15 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   .maAddSubgroupColumn(fitMeasuresTable, options)
   fitMeasuresTable$addColumnInfo(name = "observations",  title = gettext("Observations"), type = "integer")
   fitMeasuresTable$addColumnInfo(name = "ll",            title = gettext("Log Lik."),     type = "number")
-  fitMeasuresTable$addColumnInfo(name = "dev",           title = gettext("Deviance"),     type = "number")
   fitMeasuresTable$addColumnInfo(name = "AIC",           title = gettext("AIC"),          type = "number")
   fitMeasuresTable$addColumnInfo(name = "BIC",           title = gettext("BIC"),          type = "number")
-  fitMeasuresTable$addColumnInfo(name = "AICc",          title = gettext("AICc"),         type = "number")
+  if (!.maIsUnrestrictedWeightedLeastSquares(options)) {
+    fitMeasuresTable$addColumnInfo(name = "dev",         title = gettext("Deviance"),     type = "number")
+    fitMeasuresTable$addColumnInfo(name = "AICc",        title = gettext("AICc"),         type = "number")
+  }
 
-  if (.maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options) && !.maIsGLMM(options))
+  if (!.maIsUnrestrictedWeightedLeastSquares(options) &&
+      .maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options) && !.maIsGLMM(options))
     fitMeasuresTable$addColumnInfo(name = "R2",  title = gettext("R\U00B2"),   type = "number")
 
   # skip on error
@@ -1064,7 +1069,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     termsTable$addFootnote(.maPermutationMessage(options))
   }
 
-  termsTable$addFootnote(.maFixedEffectTextMessage(options))
+  .maAddFixedEffectTestFootnote(termsTable, options)
 
   if (.maIsGLMM(options))
     termsTable$addFootnote(gettext("Term tests based on Wald-type chi-squared tests."))
@@ -1129,7 +1134,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     coefficientsTable$addFootnote(.maPermutationMessage(options))
   }
 
-  coefficientsTable$addFootnote(.maFixedEffectTextMessage(options))
+  .maAddFixedEffectTestFootnote(coefficientsTable, options)
 
   # skip on error
   if ((length(fit) == 1 && jaspBase::isTryError(fit[[1]]))  || !is.null(.maCheckIsPossibleOptions(options)))
@@ -1543,42 +1548,25 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     return()
 
   # try execute!
-  plotOut <- try(.maMakeTheUltimateForestPlot(fit, options))
+  plotRender <- try(.maMakeTheUltimateForestPlot(fit, options))
 
-  if (inherits(plotOut, "try-error")) {
+  if (inherits(plotRender, "try-error")) {
     forestPlot <- createJaspPlot(title = gettext("Forest Plot"))
     forestPlot$position <- 4
     forestPlot$dependOn(.maForestPlotDependencies)
-    forestPlot$setError(plotOut)
+    forestPlot$setError(plotRender)
     jaspResults[["forestPlot"]] <- forestPlot
     return()
   }
 
-  # try adjusting height and width
-  height <- .forestPlotPlotHeight(plotOut, options)
-  width <- attr(plotOut, "plotWidth")
-  if (is.null(width))
-    width <- if (!attr(plotOut, "isPanel")) 500 else 500 + 500 * attr(plotOut, "panelRatio")
-
   forestPlot <- createJaspPlot(
     title  = gettext("Forest Plot"),
-    width  = width,
-    height = height
+    width  = plotRender[["width"]],
+    height = plotRender[["height"]]
   )
   forestPlot$position <- if (.maIsClassical(options)) 5 else 7
   forestPlot$dependOn(c(.maForestPlotDependencies, if (.maIsClassical(options)) .maDependencies else .robmaDependencies))
-
-  if (!attr(plotOut, "isPanel")) {
-    forestPlot$plotObject <- plotOut
-  } else {
-    plotOut <- jaspGraphs:::jaspGraphsPlot$new(
-      subplots = plotOut,
-      layout   = attr(plotOut, "layout"),
-      heights  = 1,
-      widths   = attr(plotOut, "widths")
-    )
-    forestPlot$plotObject <- plotOut
-  }
+  forestPlot$plotObject <- plotRender[["plot"]]
 
   jaspResults[["forestPlot"]] <- forestPlot
 
@@ -2055,11 +2043,32 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   if (!isTRUE(options[["exportWeights"]]))
     return()
 
-  fit        <- .maExportFitList(jaspResults, options)
-  columnName <- if (.maIsMultilevelMultivariate(options)) "Weights: Row Sum" else "Weights"
-  values     <- .maExportVectorFromFitList(dataset, fit, function(fit) .maExportWeights(fit, options))
+  fit <- .maExportFitList(jaspResults, options)
 
-  .maExportScaleColumn(jaspResults, columnName, values, c(.maExportDependencies(), "exportWeights"))
+  if (.maIsMultilevelMultivariate(options)) {
+    rowSumValues <- .maExportVectorFromFitList(
+      dataset,
+      fit,
+      function(fit) .maExportWeights(fit, options, type = "rowsum")
+    )
+    .maExportScaleColumn(jaspResults, "Weights: Row Sum", rowSumValues, c(.maExportDependencies(), "exportWeights"))
+
+    diagonalValues <- .maExportVectorFromFitList(
+      dataset,
+      fit,
+      function(fit) .maExportWeights(fit, options, type = "diagonal")
+    )
+    .maExportScaleColumn(jaspResults, "Weights: Diagonal", diagonalValues, c(.maExportDependencies(), "exportWeights"))
+
+    return()
+  }
+
+  values <- .maExportVectorFromFitList(
+    dataset,
+    fit,
+    function(fit) .maExportWeights(fit, options, type = "diagonal")
+  )
+  .maExportScaleColumn(jaspResults, "Weights", values, c(.maExportDependencies(), "exportWeights"))
 
   return()
 }
@@ -2206,9 +2215,11 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 .maExportRandomEffectsDataFrame           <- function(fit) {
   return(.maExportListRmaDataFrame(metafor::ranef(fit), c("pred", "se", "pi.lb", "pi.ub")))
 }
-.maExportWeights                          <- function(fit, options) {
+.maExportWeights                          <- function(fit, options, type) {
 
   if (.maIsMultilevelMultivariate(options)) {
+    if (type == "diagonal")
+      return(stats::weights(fit, type = "diagonal"))
     if (!isTRUE(fit[["int.only"]]))
       return(NULL)
     return(stats::weights(fit, type = "rowsum"))
@@ -4552,6 +4563,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   if (.maIsUnrestrictedWeightedLeastSquares(options))
     return("knha")
 
+  if (identical(options[["analysis"]], "mantelHaenszelPeto"))
+    return("z")
+
   return(options[["fixedEffectTest"]])
 }
 .maGetFixedTau2Options                          <- function(options) {
@@ -5181,6 +5195,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   if (inherits(fit, "rma.glmm") && "REML" %in% colnames(fitStats))
     fitStats <- fitStats[, "ML", drop = FALSE]
 
+  if (.maIsUnrestrictedWeightedLeastSquares(options))
+    fitStats <- .maComputeUwlsFitMeasures(fitStats, fit)
+
   row <- cbind.data.frame(
     "subgroup"     = attr(fit, "subgroup"),
     "model"        = colnames(fitStats),
@@ -5188,10 +5205,27 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     data.frame(t(fitStats))
   )
 
-  if (.maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options) && !.maIsGLMM(options))
+  if (!.maIsUnrestrictedWeightedLeastSquares(options) &&
+      .maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options) && !.maIsGLMM(options))
     row$R2 <- fit[["R2"]]
 
   return(row)
+}
+.maComputeUwlsFitMeasures             <- function(fitStats, fit) {
+
+  yi          <- fit[["yi"]]
+  vi          <- fit[["vi"]]
+  k           <- fit[["k"]]
+  nParameters <- fit[["p"]] + 1
+
+  sigma2        <- sum(1 / vi * stats::resid(fit)^2) / k
+  logLikelihood <- sum(stats::dnorm(yi, mean = stats::fitted(fit), sd = sqrt(sigma2 * vi), log = TRUE))
+
+  fitStats["ll", ]  <- logLikelihood
+  fitStats["AIC", ] <- -2 * logLikelihood + 2 * nParameters
+  fitStats["BIC", ] <- -2 * logLikelihood + log(k) * nParameters
+
+  return(fitStats[c("ll", "AIC", "BIC"), , drop = FALSE])
 }
 .maRowTermTestTable                   <- function(fit, options, parameter) {
 
@@ -5725,6 +5759,45 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     stop(paste0("Unknown fixed effect test.", options[["fixedEffectTest"]]))
   ))
 }
+.maAddFixedEffectTestFootnote          <- function(table, options) {
+  if (!.maIsUnrestrictedWeightedLeastSquares(options))
+    table$addFootnote(.maFixedEffectTextMessage(options))
+}
+.maAddLowDdfWarning                    <- function(table, fit, options) {
+  lowDdfWarning <- .maLowDdfWarning(fit, options)
+
+  if (!is.null(lowDdfWarning))
+    table$addFootnote(lowDdfWarning, symbol = gettext("Warning:"))
+}
+.maLowDdfWarning                       <- function(fit, options) {
+  if (!.maHasDdfBelow(fit, threshold = 4))
+    return(NULL)
+
+  if (.maIsClustered(options) && isTRUE(options[["clusteringUseClubSandwich"]]))
+    return(gettext("Cluster-robust inference has very low effective degrees of freedom. When Satterthwaite df < 4, p-values should be interpreted with extreme caution."))
+
+  if (!.maIsClustered(options) && .maGetFixedEffectTestOptions(options) == "knha")
+    return(gettext("Knapp-Hartung inference is based on very few residual degrees of freedom; results can be sensitive and should be interpreted cautiously."))
+
+  return(NULL)
+}
+.maHasDdfBelow                         <- function(fit, threshold) {
+  ddf <- unlist(lapply(fit, .maExtractFitDdf), use.names = FALSE)
+  ddf <- as.numeric(ddf)
+  ddf <- ddf[is.finite(ddf)]
+
+  return(length(ddf) > 0 && any(ddf < threshold))
+}
+.maExtractFitDdf                       <- function(fit) {
+  if (jaspBase::isTryError(fit))
+    return(NULL)
+
+  return(c(
+    .maExtractDdf(fit),
+    fit[["QMdf"]][2],
+    fit[["QSdf"]][2]
+  ))
+}
 .meMetaregressionHeterogeneityMessages <- function(options) {
 
   if (options[["heterogeneityModelLink"]] == "log")
@@ -5757,10 +5830,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     if (!is.null(options[["clustering"]]) && options[["clustering"]] != "") {
       if (!jaspBase::isTryError(tempFit) && !is.null(tempFit)){
-        if (all(tempFit[["tcl"]][1] == tempFit[["tcl"]]))
-          messages <- c(messages, gettextf("%1$i clusters with %2$i estimates each.", tempFit[["n"]],  tempFit[["tcl"]][1]))
-        else
-          messages <- c(messages, gettextf("%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates.", tempFit[["n"]],  min(tempFit[["tcl"]]), round(median(tempFit[["tcl"]])), max(tempFit[["tcl"]])))
+        messages <- c(messages, .maClusterRobustInferenceMessage(tempFit, options))
       }
     }
   } else {
@@ -5774,13 +5844,18 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
       if (!is.null(options[["clustering"]]) && options[["clustering"]] != "") {
         if (!jaspBase::isTryError(tempFit) && !is.null(tempFit)) {
-          if (all(tempFit[["tcl"]][1] == tempFit[["tcl"]]))
-            messages <- c(messages, gettextf("%1$s: %2$i clusters with %3$i estimates each.", gettextf("Subgroup %1$s", attr(tempFit, "subgroup")), tempFit[["n"]],  tempFit[["tcl"]][1]))
-          else
-            messages <- c(messages, gettextf("%1$s: %2$i clusters with min/median/max %3$i/%4$i/%5$i estimates.", gettextf("Subgroup %1$s", attr(tempFit, "subgroup")), tempFit[["n"]],  min(tempFit[["tcl"]]), round(median(tempFit[["tcl"]])), max(tempFit[["tcl"]])))
+          clusterRobustMessage <- .maClusterRobustInferenceMessage(tempFit, options)
+          if (!is.null(clusterRobustMessage))
+            messages <- c(messages, gettextf("%1$s: %2$s", gettextf("Subgroup %1$s", attr(tempFit, "subgroup")), clusterRobustMessage))
         }
       }
     }
+  }
+
+  if (.maIsMultilevelMultivariate(options)) {
+    varianceCovarianceMatrixMessage <- .mammVarianceCovarianceMatrixMessage(options)
+    if (!is.null(varianceCovarianceMatrixMessage))
+      messages <- c(messages, varianceCovarianceMatrixMessage)
   }
 
   if (options[["transformEffectSize"]] != "none") {
@@ -5818,6 +5893,56 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     messages <- c(messages, gettextf("Prediction interval for the %1$s is not available for models with multiple heterogeneity estimates.", effectSizeName))
 
   return(messages)
+}
+.maClusterRobustInferenceMessage <- function(fit, options) {
+
+  if (!.maIsClustered(options) || jaspBase::isTryError(fit) || is.null(fit))
+    return(NULL)
+
+  clusterSummary <- .maClusterRobustSummaryMessage(fit)
+  if (is.null(clusterSummary))
+    return(NULL)
+
+  return(gettextf(
+    "Cluster-robust tests and confidence intervals were computed using %1$s as the clustering variable (%2$s). %3$s",
+    decodeColNames(options[["clustering"]]),
+    clusterSummary,
+    .maClusterRobustMethodMessage(options)
+  ))
+}
+.maClusterRobustSummaryMessage   <- function(fit) {
+
+  clusterCounts <- fit[["tcl"]]
+  nClusters     <- fit[["n"]]
+
+  if (is.null(clusterCounts) || is.null(nClusters) || length(clusterCounts) == 0)
+    return(NULL)
+
+  if (all(clusterCounts[1] == clusterCounts)) {
+    return(gettextf(
+      "%1$i clusters; %2$i estimates per cluster",
+      nClusters,
+      clusterCounts[1]
+    ))
+  }
+
+  return(gettextf(
+    "%1$i clusters; min/median/max %2$i/%3$i/%4$i estimates per cluster",
+    nClusters,
+    min(clusterCounts),
+    round(stats::median(clusterCounts)),
+    max(clusterCounts)
+  ))
+}
+.maClusterRobustMethodMessage    <- function(options) {
+
+  if (isTRUE(options[["clusteringUseClubSandwich"]]))
+    return(gettext("clubSandwich was used with CR2 adjustment and Satterthwaite degrees of freedom."))
+
+  if (isTRUE(options[["clusteringSmallSampleCorrection"]]))
+    return(gettext("A CR1 small-sample correction was applied."))
+
+  return(gettext("Unadjusted CR0 cluster-robust standard errors were used."))
 }
 .maEstimatedMarginalMeansMessages      <- function(options, parameter, anyNA = FALSE) {
 

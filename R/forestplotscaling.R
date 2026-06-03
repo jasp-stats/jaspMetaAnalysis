@@ -733,7 +733,15 @@
   if (is.null(bestResult)) {
     prettyBreaks <- pretty(axisRange, n = 6)
     prettyBreaks <- prettyBreaks[prettyBreaks >= axisRange[1] & prettyBreaks <= axisRange[2]]
-    return(list(range = axisRange, breaks = prettyBreaks, labels = ggplot2::waiver()))
+    displayBreaks <- .forestPlotClampAxisValues(
+      do.call(transform, list(prettyBreaks)),
+      bounds
+    )
+    return(list(
+      range  = axisRange,
+      breaks = prettyBreaks,
+      labels = .forestPlotFormatAxisValues(displayBreaks, transformationSpec)
+    ))
   }
 
   return(list(

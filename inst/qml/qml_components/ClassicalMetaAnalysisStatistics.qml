@@ -162,11 +162,12 @@ Section
 		}
 
 		DropDown
-		{//TODO: make shorter or across both rows?
+		{
 			id:				transformEffectSizeDropdown
 			name:			"transformEffectSize"
 			label:			qsTr("Transform effect size")
 			setLabelAbove:	true
+			fieldWidth:		125 * preferencesModel.uiScale
 			info: qsTr("Select a transformation to apply to the effect size estimates in the output. This transformation applies to the 'Meta-Analytic Estimates Table', 'Estimated Marginal Means Table', 'Forest Plot', and  the 'Bubble Plot'. The 'Meta-Regression Coeffient Estimates' are not transformed.")
 			values:			(function() {
 				if (analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis") {

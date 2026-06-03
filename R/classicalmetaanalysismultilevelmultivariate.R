@@ -625,6 +625,157 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
   attr(ready, "messages") <- messages
   return(ready)
 }
+.mammVarianceCovarianceMatrixMessage <- function(options) {
+
+  if (!.mammVarianceCovarianceMatrixReady(options))
+    return(NULL)
+
+  details <- switch(
+    options[["varianceCovarianceMatrixType"]],
+    "precomputed" = NULL,
+    "correlationMatrix" = c(
+      .mammVarianceCovarianceMatrixVariablePhrase(
+        options[["varianceCovarianceMatrixCorrelationMatrix"]],
+        gettext("correlation matrix variables")
+      ),
+      .mammVarianceCovarianceMatrixClusterPhrases(options)
+    ),
+    "constructsGroupsTimes" = c(
+      .mammVarianceCovarianceMatrixCorrelationPhrase(
+        options,
+        "varianceCovarianceMatrixConstruct",
+        gettext("construct"),
+        "varianceCovarianceMatrixConstructCorrelationMatrix",
+        "varianceCovarianceMatrixConstructCorrelationMatrixValue"
+      ),
+      .mammVarianceCovarianceMatrixCorrelationPhrase(
+        options,
+        "varianceCovarianceMatrixConstructType",
+        gettext("construct type"),
+        "varianceCovarianceMatrixConstructTypeCorrelationMatrix",
+        "varianceCovarianceMatrixConstructTypeCorrelationMatrixValue"
+      ),
+      .mammVarianceCovarianceMatrixTimePhrase(options),
+      .mammVarianceCovarianceMatrixVariablePairPhrase(
+        options[["varianceCovarianceMatrixGroup1"]],
+        gettext("group 1"),
+        options[["varianceCovarianceMatrixGroup2"]],
+        gettext("group 2")
+      ),
+      .mammVarianceCovarianceMatrixVariablePairPhrase(
+        options[["varianceCovarianceMatrixGroupSize1"]],
+        gettext("group size 1"),
+        options[["varianceCovarianceMatrixGroupSize2"]],
+        gettext("group size 2")
+      ),
+      .mammVarianceCovarianceMatrixClusterPhrases(options)
+    )
+  )
+
+  if (options[["varianceCovarianceMatrixType"]] == "precomputed")
+    return(gettext("The model was estimated using the selected precomputed working effect-size variance-covariance matrix."))
+
+  details <- details[details != ""]
+  if (length(details) == 0)
+    return(NULL)
+
+  return(gettextf(
+    "The model was estimated using a working effect-size variance-covariance matrix based on %1$s.",
+    .mammVarianceCovarianceMatrixJoin(details)
+  ))
+}
+.mammVarianceCovarianceMatrixCorrelationPhrase <- function(options, variableOption, variableRole, correlationMatrixOption, correlationValueOption) {
+  variableName <- .mammVarianceCovarianceMatrixVariableNames(options[[variableOption]])
+  if (is.null(variableName))
+    return(NULL)
+
+  correlationDescription <- switch(
+    options[[correlationMatrixOption]],
+    "commonCorrelation" = gettextf(
+      "with a common correlation of %1$s",
+      .mammVarianceCovarianceMatrixCorrelationValue(options[[correlationValueOption]])
+    ),
+    "correlationMatrix" = gettext("with a known correlation matrix")
+  )
+
+  return(gettextf("%1$s as %2$s %3$s", variableName, variableRole, correlationDescription))
+}
+.mammVarianceCovarianceMatrixTimePhrase <- function(options) {
+  time1 <- .mammVarianceCovarianceMatrixVariableNames(options[["varianceCovarianceMatrixTime1"]])
+  if (is.null(time1))
+    return(NULL)
+
+  timePhrases <- gettextf("%1$s as %2$s", time1, gettext("time 1"))
+
+  time2 <- .mammVarianceCovarianceMatrixVariableNames(options[["varianceCovarianceMatrixTime2"]])
+  if (!is.null(time2))
+    timePhrases <- c(timePhrases, gettextf("%1$s as %2$s", time2, gettext("time 2")))
+
+  return(gettextf(
+    "%1$s with lag-1 correlation of %2$s",
+    .mammVarianceCovarianceMatrixJoin(timePhrases),
+    .mammVarianceCovarianceMatrixCorrelationValue(options[["varianceCovarianceMatrixTimeLag1Correlation"]])
+  ))
+}
+.mammVarianceCovarianceMatrixVariablePairPhrase <- function(variable1, role1, variable2, role2) {
+  variable1 <- .mammVarianceCovarianceMatrixVariableNames(variable1)
+  if (is.null(variable1))
+    return(NULL)
+
+  phrases <- gettextf("%1$s as %2$s", variable1, role1)
+
+  variable2 <- .mammVarianceCovarianceMatrixVariableNames(variable2)
+  if (!is.null(variable2))
+    phrases <- c(phrases, gettextf("%1$s as %2$s", variable2, role2))
+
+  return(.mammVarianceCovarianceMatrixJoin(phrases))
+}
+.mammVarianceCovarianceMatrixVariablePhrase <- function(variables, role) {
+  variableNames <- .mammVarianceCovarianceMatrixVariableNames(variables)
+  if (is.null(variableNames))
+    return(NULL)
+
+  return(gettextf("%1$s as %2$s", .mammVarianceCovarianceMatrixJoin(variableNames), role))
+}
+.mammVarianceCovarianceMatrixClusterPhrases <- function(options) {
+  cluster <- .mammVarianceCovarianceMatrixVariableNames(options[["varianceCovarianceMatrixCluster"]])
+  if (is.null(cluster))
+    return(NULL)
+
+  phrases <- gettextf("%1$s as %2$s", cluster, gettext("cluster"))
+
+  subcluster <- .mammVarianceCovarianceMatrixVariableNames(options[["varianceCovarianceMatrixSubcluster"]])
+  if (!is.null(subcluster))
+    phrases <- c(phrases, gettextf("%1$s as %2$s", subcluster, gettext("subcluster")))
+
+  return(phrases)
+}
+.mammVarianceCovarianceMatrixVariableNames <- function(variables) {
+  variables <- unlist(variables, use.names = FALSE)
+  variables <- variables[!is.na(variables) & variables != ""]
+
+  if (length(variables) == 0)
+    return(NULL)
+
+  return(decodeColNames(variables))
+}
+.mammVarianceCovarianceMatrixCorrelationValue <- function(value) {
+  return(sprintf("%.3g", value))
+}
+.mammVarianceCovarianceMatrixJoin <- function(values) {
+  values <- values[values != ""]
+
+  if (length(values) == 0)
+    return(NULL)
+
+  if (length(values) == 1)
+    return(values)
+
+  if (length(values) == 2)
+    return(gettextf("%1$s and %2$s", values[1], values[2]))
+
+  return(gettextf("%1$s, and %2$s", paste(values[-length(values)], collapse = ", "), values[length(values)]))
+}
 .mammExportVarianceCovarianceMatrix <- function(dataset, options) {
 
   if (!.mammVarianceCovarianceMatrixReady(options))

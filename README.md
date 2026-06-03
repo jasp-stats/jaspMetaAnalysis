@@ -39,7 +39,7 @@ The meta-analytic functionality is served by several R packages
 - **metaSEM** - Package for meta-analytic SEM and SEM-based meta-analysis ([metaSEM on CRAN](https://cran.r-project.org/package=metaSEM))
 - **robvis** - Package for risk of bias visualization  ([robvis on CRAN](https://cran.r-project.org/package=robvis))
 
-See [Function Coverage](FUNCTION_COVERAGE.md) for the package functions and major features exposed by the module.
+See [Feature Coverage](FEATURE_COVERAGE.md) for the package functions and major features exposed by the module.
 
 ## Analyses
 

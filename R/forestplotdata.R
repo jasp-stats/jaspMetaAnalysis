@@ -14,8 +14,10 @@
 
     if (options[["analysis"]] %in% c("generalizedMetaAnalysis", "mantelHaenszelPeto")) {
       studyWeights <- 1 / fit[["vi"]]
+    } else if (.maIsMultilevelMultivariate(options)) {
+      studyWeights <- stats::weights(fit, type = "diagonal")
     } else {
-      studyWeights <- weights(fit)
+      studyWeights <- stats::weights(fit)
     }
 
     return(data.frame(

@@ -24,13 +24,12 @@ Section
 {
 	title:							qsTr("Export")
 	property string analysisType:	"metaAnalysis"
-	columns:						1
+	columns:						2
 	info: qsTr("Options for exporting model-derived quantities to the dataset.")
 
 	Group
 	{
 		title:		qsTr("Diagnostics")
-		columns:	2
 		visible:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis"
 
 		CheckBox
@@ -67,7 +66,6 @@ Section
 	Group
 	{
 		title:		qsTr("Residuals")
-		columns:	2
 
 		CheckBox
 		{
@@ -109,7 +107,6 @@ Section
 	Group
 	{
 		title:		qsTr("Model Values")
-		columns:	2
 
 		CheckBox
 		{
@@ -137,7 +134,7 @@ Section
 		{
 			name:	"exportWeights"
 			text:	qsTr("Weights")
-			info: qsTr("Export model fitting weights. These are not coefficient-specific contribution weights in meta-regression. For multilevel/multivariate models, row-sum weights are exported only for intercept-only models.")
+			info: qsTr("Export model fitting weights. These are not coefficient-specific contribution weights in meta-regression. For multilevel/multivariate models, diagonal weights match the default forest plot weights and row-sum weights are exported for intercept-only models.")
 		}
 	}
 }

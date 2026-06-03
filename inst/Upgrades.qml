@@ -119,7 +119,7 @@ Upgrades
 		ChangeRename { from: "funnelAsymmetryTestPeters"; to: "funnelPlotAsymmetryTestPeters" }
 		ChangeRename { from: "funnelAsymmetryTestDebrayFIV"; to: "funnelPlotAsymmetryTestDebray" }
 		ChangeRename { from: "funnelAsymmetryTestPlot"; to: "funnelPlotAsymmetryTestPlot" }
-	
+
 		// PredictionPerformancePriors
 		ChangeRename { from: "priorMuNMeam"; to: "muNormalPriorMean" }
 		ChangeRename { from: "priorMuNSD"; to: "muNormalPriorSd" }
@@ -182,7 +182,7 @@ Upgrades
 		ChangeRename { from: "estimatesSigma"; to: "inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable" }
 		ChangeRename { from: "regressionPeese"; to: "plotsRegressionEstimatePeesePlot" }
 		ChangeRename { from: "regressionPet"; to: "plotsRegressionEstimatePetPlot" }
-		ChangeRename { from: "plotModels"; to: "plotsMeanModelEstimatesPlot" }	
+		ChangeRename { from: "plotModels"; to: "plotsMeanModelEstimatesPlot" }
 	}
 
 	Upgrade
@@ -196,7 +196,7 @@ Upgrades
 		ChangeRename { from: "inputSE"; to: "effectSizeSe" }
 		ChangeRename { from: "inputCI"; to: "effectSizeCi" }
 		ChangeRename { from: "inputN"; to: "sampleSize" }
-		ChangeRename { from: "inputPVal"; to: "pValue" }	
+		ChangeRename { from: "inputPVal"; to: "pValue" }
 		ChangeRename { from: "inputLabels"; to: "studyLabel" }
 		ChangeRename { from: "muTransform"; to: "transformCorrelationsTo" }
 
@@ -215,8 +215,8 @@ Upgrades
 		ChangeRename { from: "weightFunctionFE"; to: "plotsWeightFunctionFixedEffectsPlot" }
 		ChangeRename { from: "weightFunctionRE"; to: "plotsWeightFunctionRandomEffectsPlot" }
 		ChangeRename { from: "weightFunctionRescale"; to: "plotsWeightFunctionRescaleXAxis" }
-		ChangeRename { from: "plotModels"; to: "plotsMeanModelEstimatesPlot" }	
-	}	
+		ChangeRename { from: "plotModels"; to: "plotsMeanModelEstimatesPlot" }
+	}
 
 	Upgrade
 	{
@@ -342,8 +342,8 @@ Upgrades
 	Upgrade
 	{
 		functionName:	"ClassicalMetaAnalysis"
-		fromVersion:	"0.95.5"
-		toVersion:		"0.95.6"
+		fromVersion:	"0.95.4"
+		toVersion:		"0.95.5"
 
 		ChangeJS
 		{
@@ -389,8 +389,8 @@ Upgrades
 	Upgrade
 	{
 		functionName:	"ClassicalMetaAnalysisMultilevelMultivariate"
-		fromVersion:	"0.95.5"
-		toVersion:		"0.95.6"
+		fromVersion:	"0.95.4"
+		toVersion:		"0.95.5"
 
 		ChangeJS
 		{

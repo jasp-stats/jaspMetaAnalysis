@@ -175,37 +175,25 @@ ForestPlot <- function(jaspResults, dataset, options) {
   }
 
   # build plot data from user columns
-  plotOut <- try(.fpStandaloneBuildAndRender(dataset, options))
+  plotRender <- try(.fpStandaloneBuildAndRender(dataset, options))
 
-  if (inherits(plotOut, "try-error")) {
+  if (inherits(plotRender, "try-error")) {
     forestPlot            <- createJaspPlot(title = gettext("Forest Plot"))
     forestPlot$position   <- 1
     forestPlot$dependOn(.fpStandaloneDependencies)
-    forestPlot$setError(plotOut)
+    forestPlot$setError(plotRender)
     jaspResults[["forestPlot"]] <- forestPlot
     return()
   }
 
-  height <- .forestPlotPlotHeight(plotOut, options)
-  width <- attr(plotOut, "plotWidth")
-  if (is.null(width))
-    width <- if (!attr(plotOut, "isPanel")) 500 else 500 + 500 * attr(plotOut, "panelRatio")
-
-  forestPlot            <- createJaspPlot(title = gettext("Forest Plot"), width = width, height = height)
+  forestPlot <- createJaspPlot(
+    title  = gettext("Forest Plot"),
+    width  = plotRender[["width"]],
+    height = plotRender[["height"]]
+  )
   forestPlot$position   <- 1
   forestPlot$dependOn(.fpStandaloneDependencies)
-
-  if (!attr(plotOut, "isPanel")) {
-    forestPlot$plotObject <- plotOut
-  } else {
-    plotOut <- jaspGraphs:::jaspGraphsPlot$new(
-      subplots = plotOut,
-      layout   = attr(plotOut, "layout"),
-      heights  = 1,
-      widths   = attr(plotOut, "widths")
-    )
-    forestPlot$plotObject <- plotOut
-  }
+  forestPlot$plotObject <- plotRender[["plot"]]
 
   jaspResults[["forestPlot"]] <- forestPlot
 }

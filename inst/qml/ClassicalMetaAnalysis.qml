@@ -72,13 +72,13 @@ Form
 			id:				method
 			label:			qsTr("Method")
 			startValue:		"restrictedML"
+			fieldWidth:		125 * preferencesModel.uiScale
 			info: qsTr("Method used for model estimation in the meta-analysis. The available methods depend on the inclusion of heterogeneity model terms.")
 			values:			(function() {
 				if (sectionModel.heterogeneityModelTermsCount == 0) {
 					return [
 						{ label: qsTr("Equal Effects")			, value: "equalEffects"		},
 						{ label: qsTr("Fixed Effects")			, value: "fixedEffects"		},
-						{ label: qsTr("Unrestricted Weighted Least Squares (UWLS)"), value: "unrestrictedWeightedLeastSquares" },
 						{ label: qsTr("Maximum Likelihood")		, value: "maximumLikelihood"},
 						{ label: qsTr("Restricted ML")			, value: "restrictedML"		},
 						{ label: qsTr("DerSimonian-Laird")		, value: "derSimonianLaird"	},
@@ -90,7 +90,8 @@ Form
 						{ label: qsTr("Paule-Mandel")			, value: "pauleMandel"		},
 						{ label: qsTr("Paule-Mandel (MU)")		, value: "pauleMandelMu"	},
 						{ label: qsTr("Generalized Q-stat")		, value: "qeneralizedQStat"	},
-						{ label: qsTr("Generalized Q-stat (MU)"), value: "qeneralizedQStatMu"}
+						{ label: qsTr("Generalized Q-stat (MU)"), value: "qeneralizedQStatMu"},
+						{ label: qsTr("Unrestricted Weighted Least Squares (UWLS)"), value: "unrestrictedWeightedLeastSquares" },
 					];
 				} else {
 					return [

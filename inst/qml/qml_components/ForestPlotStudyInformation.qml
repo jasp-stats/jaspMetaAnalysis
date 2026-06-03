@@ -119,7 +119,7 @@ Group
 				text:			qsTr("Study weights")
 				enabled:		panelEnabled && showStudyWeights
 				checked:		false
-				info: qsTr("Include the study weights in the right section of the study-level information panel.")
+				info: qsTr("Include study weights in the right section of the study-level information panel. For multilevel/multivariate meta-analysis, diagonal model weights are shown, matching the default forest plot point-size weights.")
 				Layout.preferredWidth: 300 * jaspTheme.uiScale
 
 				CheckBox
