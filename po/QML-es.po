@@ -110,7 +110,7 @@ msgstr "Tabla ANOVA"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fit Indices"
-msgstr "Índices de Ajuste"
+msgstr "Índices de ajuste"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Coefficients"
@@ -170,7 +170,7 @@ msgstr "Contraste de correlación por rangos"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Egger's Regression test"
-msgstr "Contraste de Regresión de Egger"
+msgstr "Contraste de regresión de Egger"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Fail-safe-N analysis (controversial)"
@@ -1430,7 +1430,7 @@ msgstr "Ampliar las muestras"
 
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Baseline"
-msgstr "Base"
+msgstr "Referencia"
 
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Baseline (null)"

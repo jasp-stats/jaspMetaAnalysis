@@ -1,0 +1,23 @@
+name: Build JASP Module on PR Comment
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  call-build-module:
+    # Only run if it's a PR, starts with 'build', and user has permissions
+    if: >
+      github.event.issue.pull_request && 
+      startsWith(github.event.comment.body, 'build') &&
+      contains(fromJson('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association)
+    
+    # Calls the reusable workflow from your central repo
+    uses: jasp-stats/jasp-actions/.github/workflows/build-bundle.yml@v1
+    
+    # Passes the local repository's GITHUB_TOKEN down so the central action can comment and checkout code
+    secrets: inherit

@@ -1,0 +1,11 @@
+name: Remind NEWS.md Update
+
+on:
+  pull_request_target:
+    types: [opened] # Only run once when the PR is first created
+
+jobs:
+  call-remind-news-workflow:
+    uses: jasp-stats/jasp-actions/.github/workflows/remind-news.yml@v1
+    permissions:
+      pull-requests: write

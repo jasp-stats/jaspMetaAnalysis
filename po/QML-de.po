@@ -1435,12 +1435,10 @@ msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Extend samples"
 msgstr "Stichprobe erweitern"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Baseline"
 msgstr "Referenz"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisBaseline|"
 msgid "Baseline (null)"
 msgstr "Referenz (null)"
@@ -1525,7 +1523,6 @@ msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Type"
 msgstr "Typ"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Model averaged"
 msgstr "Modell-gemittelt"
@@ -1605,7 +1602,6 @@ msgctxt "ClassicalMetaAnalysis|"
 msgid "Maximum Likelihood"
 msgstr "Maximum-Likelihood"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Restricted ML"
 msgstr "Begrenztes ML"
@@ -1624,13 +1620,12 @@ msgstr "Hunter-Schmidt"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Hunter-Schmidt (SSC)"
-msgstr ""
+msgstr "Hunter-Schmidt (SSC)"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Sidik-Jonkman"
 msgstr "Sidik-Jonkman"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Empirical Bayes"
 msgstr "Empirische Bayes"
@@ -1645,9 +1640,8 @@ msgstr "Paule-Mandel (MU)"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Generalized Q-stat"
-msgstr ""
+msgstr "Verallgemeinerte Q-Statistik"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Generalized Q-stat (MU)"
 msgstr "Verallgemeinerte Q-Statistik (MU)"
@@ -1712,7 +1706,6 @@ msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Maximum Likelihood"
 msgstr "Maximum-Likelihood"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Restricted ML"
 msgstr "Begrenztes ML"
@@ -1810,7 +1803,6 @@ msgstr ""
 "'Autoregressiv' oder 'Räumlich' ist. Auswählbare Strukturen hängen vom "
 "gewählten Typ ab."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Compound symmetry"
 msgstr "Komponenten-Symmetrie"
@@ -2151,239 +2143,239 @@ msgstr ""
 
 msgctxt "EffectSizeComputation|"
 msgid "RD"
-msgstr ""
+msgstr "RD"
 
 msgctxt "EffectSizeComputation|"
 msgid "AS"
-msgstr ""
+msgstr "AS"
 
 msgctxt "EffectSizeComputation|"
 msgid "PETO"
-msgstr ""
+msgstr "PETO"
 
 msgctxt "EffectSizeComputation|"
 msgid "IRR"
-msgstr ""
+msgstr "IRR"
 
 msgctxt "EffectSizeComputation|"
 msgid "IRD"
-msgstr ""
+msgstr "IRD"
 
 msgctxt "EffectSizeComputation|"
 msgid "IRSD"
-msgstr ""
+msgstr "IRSD"
 
 msgctxt "EffectSizeComputation|"
 msgid "D2ORN"
-msgstr ""
+msgstr "D2ORN"
 
 msgctxt "EffectSizeComputation|"
 msgid "D2ORL"
-msgstr ""
+msgstr "D2ORL"
 
 msgctxt "EffectSizeComputation|"
 msgid "PBIT"
-msgstr ""
+msgstr "PBIT"
 
 msgctxt "EffectSizeComputation|"
 msgid "OR2DN"
-msgstr ""
+msgstr "OR2DN"
 
 msgctxt "EffectSizeComputation|"
 msgid "OR2DL"
-msgstr ""
+msgstr "OR2DL"
 
 msgctxt "EffectSizeComputation|"
 msgid "COR"
-msgstr ""
+msgstr "COR"
 
 msgctxt "EffectSizeComputation|"
 msgid "UCOR"
-msgstr ""
+msgstr "UCOR"
 
 msgctxt "EffectSizeComputation|"
 msgid "ZCOR"
-msgstr ""
+msgstr "ZCOR"
 
 msgctxt "EffectSizeComputation|"
 msgid "PHI"
-msgstr ""
+msgstr "PHI"
 
 msgctxt "EffectSizeComputation|"
 msgid "YUQ"
-msgstr ""
+msgstr "YUQ"
 
 msgctxt "EffectSizeComputation|"
 msgid "YUY"
-msgstr ""
+msgstr "YUY"
 
 msgctxt "EffectSizeComputation|"
 msgid "RTET"
-msgstr ""
+msgstr "RTET"
 
 msgctxt "EffectSizeComputation|"
 msgid "ZPHI"
-msgstr ""
+msgstr "ZPHI"
 
 msgctxt "EffectSizeComputation|"
 msgid "ZTET"
-msgstr ""
+msgstr "ZTET"
 
 msgctxt "EffectSizeComputation|"
 msgid "RPB"
-msgstr ""
+msgstr "RPB"
 
 msgctxt "EffectSizeComputation|"
 msgid "RBIS"
-msgstr ""
+msgstr "RBIS"
 
 msgctxt "EffectSizeComputation|"
 msgid "ZPB"
-msgstr ""
+msgstr "ZPB"
 
 msgctxt "EffectSizeComputation|"
 msgid "ZBIS"
-msgstr ""
+msgstr "ZBIS"
 
 msgctxt "EffectSizeComputation|"
 msgid "MN"
-msgstr ""
+msgstr "MN"
 
 msgctxt "EffectSizeComputation|"
 msgid "SMN"
-msgstr ""
+msgstr "SMN"
 
 msgctxt "EffectSizeComputation|"
 msgid "MNLN"
-msgstr ""
+msgstr "MNLN"
 
 msgctxt "EffectSizeComputation|"
 msgid "CVLN"
-msgstr ""
+msgstr "CVLN"
 
 msgctxt "EffectSizeComputation|"
 msgid "SDLN"
-msgstr ""
+msgstr "SDLN"
 
 msgctxt "EffectSizeComputation|"
 msgid "PR"
-msgstr ""
+msgstr "PR"
 
 msgctxt "EffectSizeComputation|"
 msgid "PLN"
-msgstr ""
+msgstr "PLN"
 
 msgctxt "EffectSizeComputation|"
 msgid "PLO"
-msgstr ""
+msgstr "PLO"
 
 msgctxt "EffectSizeComputation|"
 msgid "PAS"
-msgstr ""
+msgstr "PAS"
 
 msgctxt "EffectSizeComputation|"
 msgid "PFT"
-msgstr ""
+msgstr "PFT"
 
 msgctxt "EffectSizeComputation|"
 msgid "IR"
-msgstr ""
+msgstr "IR"
 
 msgctxt "EffectSizeComputation|"
 msgid "IRLN"
-msgstr ""
+msgstr "IRLN"
 
 msgctxt "EffectSizeComputation|"
 msgid "IRS"
-msgstr ""
+msgstr "IRS"
 
 msgctxt "EffectSizeComputation|"
 msgid "IRFT"
-msgstr ""
+msgstr "IRFT"
 
 msgctxt "EffectSizeComputation|"
 msgid "MC"
-msgstr ""
+msgstr "MC"
 
 msgctxt "EffectSizeComputation|"
 msgid "SMCC"
-msgstr ""
+msgstr "SMCC"
 
 msgctxt "EffectSizeComputation|"
 msgid "SMCR"
-msgstr ""
+msgstr "SMCR"
 
 msgctxt "EffectSizeComputation|"
 msgid "SMCRH"
-msgstr ""
+msgstr "SMCRH"
 
 msgctxt "EffectSizeComputation|"
 msgid "SMCRP"
-msgstr ""
+msgstr "SMCRP"
 
 msgctxt "EffectSizeComputation|"
 msgid "SMCRPH"
-msgstr ""
+msgstr "SMCRPH"
 
 msgctxt "EffectSizeComputation|"
 msgid "ROMC"
-msgstr ""
+msgstr "ROMC"
 
 msgctxt "EffectSizeComputation|"
 msgid "CVRC"
-msgstr ""
+msgstr "CVRC"
 
 msgctxt "EffectSizeComputation|"
 msgid "VRC"
-msgstr ""
+msgstr "VRC"
 
 msgctxt "EffectSizeComputation|"
 msgid "MPRR"
-msgstr ""
+msgstr "MPRR"
 
 msgctxt "EffectSizeComputation|"
 msgid "MPOR"
-msgstr ""
+msgstr "MPOR"
 
 msgctxt "EffectSizeComputation|"
 msgid "MPRD"
-msgstr ""
+msgstr "MPRD"
 
 msgctxt "EffectSizeComputation|"
 msgid "MPORC"
-msgstr ""
+msgstr "MPORC"
 
 msgctxt "EffectSizeComputation|"
 msgid "MPPETO"
-msgstr ""
+msgstr "MPPETO"
 
 msgctxt "EffectSizeComputation|"
 msgid "MPORM"
-msgstr ""
+msgstr "MPORM"
 
 msgctxt "EffectSizeComputation|"
 msgid "ARAW"
-msgstr ""
+msgstr "ARAW"
 
 msgctxt "EffectSizeComputation|"
 msgid "AHW"
-msgstr ""
+msgstr "AHW"
 
 msgctxt "EffectSizeComputation|"
 msgid "ABT"
-msgstr ""
+msgstr "ABT"
 
 msgctxt "EffectSizeComputation|"
 msgid "PCOR"
-msgstr ""
+msgstr "PCOR"
 
 msgctxt "EffectSizeComputation|"
 msgid "ZPCOR"
-msgstr ""
+msgstr "ZPCOR"
 
 msgctxt "EffectSizeComputation|"
 msgid "SPCOR"
-msgstr ""
+msgstr "SPCOR"
 
 msgctxt "EffectSizeComputation|"
 msgid "ZSPCOR"
@@ -2611,7 +2603,7 @@ msgstr ""
 
 msgctxt "EffectSizeComputation|"
 msgid "Subset"
-msgstr ""
+msgstr "Teilmenge"
 
 msgctxt "EffectSizeComputation|"
 msgid "Subset Level"
@@ -2661,53 +2653,52 @@ msgstr "Nein"
 
 msgctxt "EffectSizeComputation|"
 msgid "Sampling variance type"
-msgstr ""
+msgstr "Art Stichprobenvarianz"
 
 msgctxt "EffectSizeComputation|"
 msgid "LS"
-msgstr ""
+msgstr "LS"
 
 msgctxt "EffectSizeComputation|"
 msgid "HO"
-msgstr ""
+msgstr "HO"
 
 msgctxt "EffectSizeComputation|"
 msgid "LS2"
-msgstr ""
+msgstr "LS2"
 
 msgctxt "EffectSizeComputation|"
 msgid "UB"
-msgstr ""
+msgstr "UB"
 
 msgctxt "EffectSizeComputation|"
 msgid "AV"
-msgstr ""
+msgstr "AV"
 
 msgctxt "EffectSizeComputation|"
 msgid "AVHO"
-msgstr ""
+msgstr "AVHO"
 
 msgctxt "EffectSizeComputation|"
 msgid "ST"
-msgstr ""
+msgstr "ST"
 
 msgctxt "EffectSizeComputation|"
 msgid "CS"
-msgstr ""
+msgstr "CS"
 
 msgctxt "EffectSizeComputation|"
 msgid "mixed"
-msgstr ""
+msgstr "Gemischt"
 
 msgctxt "EffectSizeComputation|"
 msgid "AV2"
-msgstr ""
+msgstr "AV2"
 
 msgctxt "EffectSizeComputation|"
 msgid "Options"
 msgstr "Optionen"
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Compute sampling variance"
 msgstr "Stichprobenvarianz berechnen"
@@ -2724,7 +2715,6 @@ msgctxt "EffectSizeComputation|"
 msgid "Standard error"
 msgstr "Standardfehler"
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Sampling variance"
 msgstr "Stichprobenvarianz"
@@ -2861,7 +2851,6 @@ msgstr ""
 "Auswahl zwischen Schätzung oder manueller Fixierung der Parameter für das "
 "Trichterdiagramm unter der Alternativhypothese."
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Estimated"
 msgstr "Geschätzt"
@@ -2904,13 +2893,12 @@ msgstr "Hunter-Schmidt"
 
 msgctxt "FunnelPlot|"
 msgid "Hunter-Schmidt (SSC)"
-msgstr ""
+msgstr "Hunter-Schmidt (SSC)"
 
 msgctxt "FunnelPlot|"
 msgid "Sidik-Jonkman"
 msgstr "Sidik-Jonkman"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Empirical Bayes"
 msgstr "Empirische Bayes"
@@ -2925,7 +2913,7 @@ msgstr "Paule-Mandel (MU)"
 
 msgctxt "FunnelPlot|"
 msgid "Include heterogeneity"
-msgstr ""
+msgstr "Heterogenität einbeziehen"
 
 msgctxt "FunnelPlot|"
 msgid ""
@@ -2937,10 +2925,9 @@ msgstr ""
 "unausgewählt, wird die Heterogenitätsschätzung nicht zur Anpassung der "
 "Vorhersageintervalle verwendet."
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Estimates table"
-msgstr "Schätzungen-Tabelle"
+msgstr "Tabelle Schätzungen"
 
 msgctxt "FunnelPlot|"
 msgid ""
@@ -3020,11 +3007,11 @@ msgstr "Alle"
 
 msgctxt "FunnelPlot|"
 msgid "Outside H₀"
-msgstr ""
+msgstr "Außerhalb H₀"
 
 msgctxt "FunnelPlot|"
 msgid "Outside H₁"
-msgstr ""
+msgstr "Außerhalb H₁"
 
 msgctxt "FunnelPlot|"
 msgid "Color"
@@ -3659,7 +3646,7 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Specify the effect size model."
-msgstr ""
+msgstr "Angeben des Effektstärkemodells."
 
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Available Components"
@@ -3671,7 +3658,7 @@ msgstr "Modellterme"
 
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Variables assigned as model terms in the effect size model."
-msgstr ""
+msgstr "Variablen, die als Modellterme im Effektstärkenmodell zugeordnet sind."
 
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Include intercept"
@@ -3693,7 +3680,7 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Include an intercept in the heterogeneity model."
-msgstr ""
+msgstr "Eine Konstante in das Heterogenitätsmodell einbeziehen."
 
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Link"
@@ -3729,7 +3716,6 @@ msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Include 𝜏², the estimated between-study variance."
 msgstr "𝜏² einschließen, die geschätzte zwischen-Studien-Varianz."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "I²"
 msgstr "I²"
@@ -3739,6 +3725,8 @@ msgid ""
 "Include I², the percentage of total variation across studies due to "
 "heterogeneity."
 msgstr ""
+"Einbeziehen von I², dem Prozentsatz der Gesamtvariation über Studien "
+"aufgrund der Heterogenität."
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "H²"
@@ -3749,6 +3737,8 @@ msgid ""
 "Include H², an index indicating the ratio of total variability to sampling "
 "variability."
 msgstr ""
+"Einbeziehen von H², einem Index für das Verhältnis von Gesamtvariation zu "
+"Stichprobenvariabilität."
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Available when performing multilevel/multivariate meta-analysis."
@@ -3939,7 +3929,6 @@ msgctxt "PredictionPerformanceInference|"
 msgid "Sidik-Jonkman"
 msgstr "Sidik-Jonkman"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Empirical Bayes"
 msgstr "Empirische Bayes"
@@ -3954,10 +3943,13 @@ msgid ""
 "hypothesis. The paramters are estimated with the 'Method' specified under "
 "'General Settings'."
 msgstr ""
+"Schätzung der mittleren Effektstärke und Heterogenität unter der "
+"alternativen Hypothese. Die Parameter werden mit der unter \"Allgemeine "
+"Einstellungen\" angegebenen \"Methode\" geschätzt."
 
 msgctxt "FunnelPlot|"
 msgid "General Settings"
-msgstr ""
+msgstr "Allgemeine Einstellungen"
 
 msgctxt "FunnelPlot|"
 msgid ""
@@ -3968,23 +3960,27 @@ msgstr ""
 
 msgctxt "FunnelPlot|"
 msgid "Publication Bias / Sensitivity Analyses"
-msgstr ""
+msgstr "Publikations-Bias / Sensitivitätsanalysen"
 
 msgctxt "FunnelPlot|"
 msgid ""
 "Detect and perform sensitivity analyses to funel plot asymmetry, publication "
 "bias, and small-study effects."
 msgstr ""
+"Erkennung und Ausführen von Sensitivitätsanalysen von Funnelplot-Asymmetrie, "
+"Publikations-Bias und Kleine-Studien-Effekten."
 
 msgctxt "FunnelPlot|"
 msgid "Asymmetry tests"
-msgstr ""
+msgstr "Asymmetrie-Tests"
 
 msgctxt "FunnelPlot|"
 msgid ""
 "Perform tests to detect asymmetry in the funnel plot indicating potential "
 "publication bias."
 msgstr ""
+"Durchführung von Tests zur Erkennung von Asymmetrie im Funnelplot, die auf "
+"potenziellen Publikations-Bias hindeutet."
 
 msgctxt "FunnelPlot|"
 msgid ""
@@ -6478,9 +6474,10 @@ msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Effect size model"
 msgstr ""
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Specify the effect size model."
-msgstr ""
+msgstr "Angeben des Effektstärkemodells."
 
 msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Available Components"
@@ -6490,9 +6487,10 @@ msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Model Terms"
 msgstr "Modellterme"
 
+#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Variables assigned as model terms in the effect size model."
-msgstr ""
+msgstr "Variablen, die als Modellterme im Effektstärkenmodell zugeordnet sind."
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Prior and Posterior Plots"
