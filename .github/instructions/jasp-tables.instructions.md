@@ -1,5 +1,6 @@
 ---
 applyTo: "**/R/*.R"
+description: "Table lifecycle, columns, rows, footnotes, error display in jaspResults"
 ---
 
 # JASP Table Building Patterns

@@ -31,6 +31,36 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   return()
 }
 
+.effectSizeVarianceCovarianceMatrixDependencies <- c(
+  # simple pathway
+  "varianceCovarianceMatrixType",
+  "varianceCovarianceMatrixSimpleStructure",
+  "varianceCovarianceMatrixSimpleWithinClusterCorrelation",
+  "varianceCovarianceMatrixSimpleTimeVariable",
+  "varianceCovarianceMatrixSimpleTimeLag1Correlation",
+  # precomputed
+  "varianceCovarianceMatrixFile",
+  # correlation matrix
+  "varianceCovarianceMatrixCorrelationMatrix",
+  "varianceCovarianceMatrixCluster", "varianceCovarianceMatrixSubcluster",
+  # constructs/groups/times
+  "varianceCovarianceMatrixConstruct", "varianceCovarianceMatrixConstructType",
+  "varianceCovarianceMatrixConstructCorrelationMatrix",
+  "varianceCovarianceMatrixConstructCorrelationMatrixValue",
+  "varianceCovarianceMatrixConstructCorrelationMatrixFilePath",
+  "varianceCovarianceMatrixConstructTypeCorrelationMatrix",
+  "varianceCovarianceMatrixConstructTypeCorrelationMatrixValue",
+  "varianceCovarianceMatrixConstructTypeCorrelationMatrixFilePath",
+  "varianceCovarianceMatrixTime1", "varianceCovarianceMatrixTime2",
+  "varianceCovarianceMatrixTimeLag1Correlation",
+  "varianceCovarianceMatrixGroup1", "varianceCovarianceMatrixGroup2",
+  "varianceCovarianceMatrixGroupSize1", "varianceCovarianceMatrixGroupSize2",
+  # matrix options
+  "varianceCovarianceMatrixCheckPositiveDefiniteness",
+  "varianceCovarianceMatrixForcePositiveDefiniteness",
+  "varianceCovarianceMatrixSaveComputedVarianceCovarianceMatrix"
+)
+
 .maDependencies        <- c(
   "effectSize", "effectSizeStandardError", "predictors", "predictors.types", "clustering", "subgroup", "method", "fixedEffectTest",
   "effectSizeModelTerms", "effectSizeModelIncludeIntercept",
@@ -56,35 +86,34 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "randomEffects", "randomEffectsSpecification",
   "computeCovarianceMatrix", "computeCovarianceMatrix",
   # multivariate effect size computation
-  "varianceCovarianceMatrixType",
-  "varianceCovarianceMatrixFile",
-  "varianceCovarianceMatrixCorrelationMatrix",
-  "varianceCovarianceMatrixSubcluster",
-  "varianceCovarianceMatrixCluster",
-  "varianceCovarianceMatrixForcePositiveDefiniteness",
-  "varianceCovarianceMatrixCheckPositiveDefiniteness",
-  "varianceCovarianceMatrixCorrelationMatrix",
-  "varianceCovarianceMatrixConstruct",
-  "varianceCovarianceMatrixConstructType",
-  "varianceCovarianceMatrixTime1",
-  "varianceCovarianceMatrixTime2",
-  "varianceCovarianceMatrixGroup1",
-  "varianceCovarianceMatrixGroup1",
-  "varianceCovarianceMatrixGroupSize1",
-  "varianceCovarianceMatrixGroupSize2",
-  "varianceCovarianceMatrixConstructCorrelationMatrix",
-  "varianceCovarianceMatrixConstructCorrelationMatrixValue",
-  "varianceCovarianceMatrixConstructCorrelationMatrixFilePath",
-  "varianceCovarianceMatrixConstructTypeCorrelationMatrix",
-  "varianceCovarianceMatrixConstructTypeCorrelationMatrixValue",
-  "varianceCovarianceMatrixConstructTypeCorrelationMatrixFilePath",
-  "varianceCovarianceMatrixTimeLag1Correlation",
-  # Mantel-Haenszel / Peto
-  "successesGroup1", "successesGroup2", "sampleSizeGroup1", "sampleSizeGroup2",
-  "eventsGroup1", "eventsGroup2", "personTimeGroup1", "personTimeGroup2",
+  .effectSizeVarianceCovarianceMatrixDependencies,
+  # BiBMA (frequency-based inputs)
+  "successesGroup1", "successesGroup2",
+  # GLMM / MHP (frequency-based inputs)
+  "eventsGroup1", "eventsGroup2", "sampleSizeGroup1", "sampleSizeGroup2",
+  "personTimeGroup1", "personTimeGroup2",
   "effectSizeMeasure",
-  "advancedAdd", "advancedTo", "advancedDropStudiesWithNoCasesOrEvents", "advancedContinuityCorrection"
+  "advancedAdd", "advancedTo", "advancedDropStudiesWithNoCasesOrEvents", "advancedContinuityCorrection",
+  # GLMM specific
+  "glmmModel", "glmmCoding", "glmmCorrelatedEffects", "glmmQuadraturePoints"
 )
+
+.maExportOptions <- c(
+  "exportDiagnosticsInfluentialCases",
+  "exportDiagnosticsCaseDiagnostics",
+  "exportDiagnosticsModelImpact",
+  "exportDiagnosticsCoefficientInfluence",
+  "exportResidualsRaw",
+  "exportResidualsPearson",
+  "exportResidualsStandardized",
+  "exportResidualsStudentized",
+  "exportResidualsConditional",
+  "exportPredictedValues",
+  "exportTrueEffectEstimates",
+  "exportRandomEffects",
+  "exportWeights"
+)
+
 .maForestPlotDependencies <- c(
   # do not forget to add variable carrying options to the .maDataPlottingDependencies
   "transformEffectSize", "confidenceIntervalsLevel", "bayesFactorType",
@@ -99,6 +128,8 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotStudyInformationAggregateBy",
   "forestPlotStudyInformationAggregateMethod",
   "forestPlotStudyInformationAggregateMethodBubbleRelativeSize",
+  "forestPlotStudyInformationBoxplotWeightsPercentage",
+  "forestPlotStudyInformationBoxplotWeightsNormalized",
   "forestPlotEstimatedMarginalMeans",
   "forestPlotEstimatedMarginalMeansModelVariables",
   "forestPlotEstimatedMarginalMeansSelectedVariables",
@@ -114,6 +145,8 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotEffectSizePooledEstimateTest",
   "forestPlotEffectSizeModerationTest",
   "forestPlotHeterogeneityTest",
+  "forestPlotHeterogeneityTestWald",
+  "forestPlotHeterogeneityTestLRT",
   "forestPlotHeterogeneityEstimateTau",
   "forestPlotHeterogeneityEstimateTau2",
   "forestPlotHeterogeneityEstimateI2",
@@ -125,19 +158,19 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotConditionalEstimates",
   "forestPlotTestsInRightPanel",
   "forestPlotAllignLeftPanel",
+  "forestPlotSubgroupShowTitles",
   "forestPlotSubgroupPanelsWithinSubgroup",
   "forestPlotSubgroupFullDatasetEstimatedMarginalMeans",
   "forestPlotSubgroupFullDatasetModelInformation",
   "forestPlotMappingColor",
   "forestPlotMappingShape",
-  "forestPlotRelativeSizeEstimates",
-  "forestPlotRelativeSizeText",
-  "forestPlotRelativeSizeAxisLabels",
-  "forestPlotRelativeSizeRow",
-  "forestPlotRelativeSizeLeftPanel",
-  "forestPlotRelativeSizeMiddlePanel",
-  "forestPlotRelativeSizeRightPanel",
-  "forestPlotAuxiliaryAdjustWidthBasedOnText",
+  "forestPlotSizeEstimates",
+  "forestPlotSizeText",
+  "forestPlotSizeAxisLabels",
+  "forestPlotSizeRow",
+  "forestPlotSizeLeftPanel",
+  "forestPlotSizePlotArea",
+  "forestPlotSizeRightPanel",
   "forestPlotAuxiliaryDigits",
   "forestPlotAuxiliaryTestsInformation",
   "forestPlotAuxiliaryPlotColor",
@@ -149,6 +182,9 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotAuxiliarySetXAxisLimit",
   "forestPlotAuxiliarySetXAxisLimitLower",
   "forestPlotAuxiliarySetXAxisLimitUpper",
+  "forestPlotAuxiliarySetXAxisTicks",
+  "forestPlotAuxiliarySetXAxisTicksValues",
+  "forestPlotAuxiliaryXAxisTransformLabelsOnly",
   "forestPlotStudyInformationSecondaryConfidenceInterval",
   "forestPlotStudyInformationSecondaryConfidenceIntervalLevel"
 )
@@ -192,11 +228,25 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
     return(inputReady && termsEffectSizeReady && termsHeterogeneityReady)
 
+  } else if (.maIsGLMM(options)) {
+
+    measureCategory <- .maglmmGetMeasureCategory(options)
+    if (measureCategory == "twoByTwo") {
+      inputReady <- options[["eventsGroup1"]] != "" && options[["eventsGroup2"]] != "" &&
+        options[["sampleSizeGroup1"]] != "" && options[["sampleSizeGroup2"]] != ""
+    } else if (measureCategory == "events") {
+      inputReady <- options[["eventsGroup1"]] != "" && options[["eventsGroup2"]] != "" &&
+        options[["personTimeGroup1"]] != "" && options[["personTimeGroup2"]] != ""
+    }
+
+    termsEffectSizeReady <- length(options[["effectSizeModelTerms"]]) > 0 || options[["effectSizeModelIncludeIntercept"]]
+    return(inputReady && termsEffectSizeReady)
+
   } else if (.maIsClassical(options)) {
 
     # data
     if (options[["method"]] %in% c("mantelHaenszelFrequencies", "peto")) {
-      inputReady <- options[["successesGroup1"]] != "" && options[["successesGroup2"]] != "" &&
+      inputReady <- options[["eventsGroup1"]] != "" && options[["eventsGroup2"]] != "" &&
         options[["sampleSizeGroup1"]] != "" && options[["sampleSizeGroup2"]] != ""
     } else if (options[["method"]] == "mantelHaenszelEvents") {
       inputReady <- options[["eventsGroup1"]] != "" && options[["eventsGroup2"]] != "" &&
@@ -285,7 +335,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 .maIsClassical         <- function(options, notMHP = FALSE) {
 
   # check if the analysis is classical
-  if (options[["analysis"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate", "mantelHaenszelPeto")) {
+  if (options[["analysis"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate", "mantelHaenszelPeto", "generalizedMetaAnalysis")) {
     if (notMHP) {
       return(options[["analysis"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate"))
     } else {

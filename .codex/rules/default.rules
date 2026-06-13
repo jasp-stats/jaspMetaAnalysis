@@ -1,0 +1,97 @@
+# Execution policy for JASP module development
+# See: https://developers.openai.com/codex/exec-policy
+
+# Allow safe read-only git commands
+prefix_rule(
+    pattern = ["git", ["status", "diff", "log", "branch", "show", "stash", "tag", "remote"]],
+    decision = "allow",
+    justification = "Read-only git operations are safe.",
+    match = [
+        "git status",
+        "git diff",
+        "git log --oneline -5",
+        "git branch",
+    ],
+)
+
+# Allow grep/find for code search
+prefix_rule(
+    pattern = ["grep"],
+    decision = "allow",
+    justification = "Code search is safe.",
+)
+
+prefix_rule(
+    pattern = ["find"],
+    decision = "allow",
+    justification = "File search is safe.",
+)
+
+# Allow Rscript execution (MCP server, tests, analysis runs)
+prefix_rule(
+    pattern = ["Rscript"],
+    decision = "allow",
+    justification = "R execution needed for MCP server, tests, and analysis.",
+)
+
+# Allow qmllint for QML validation
+prefix_rule(
+    pattern = ["qmllint"],
+    decision = "allow",
+    justification = "QML syntax validation is safe and required before commits.",
+)
+
+# Forbid force push
+prefix_rule(
+    pattern = ["git", "push", ["-f", "--force", "--force-with-lease"]],
+    decision = "forbidden",
+    justification = "Force pushing is forbidden per git-workflow.md. Use normal push.",
+    match = [
+        "git push -f origin main",
+        "git push --force origin feature/test",
+        "git push --force-with-lease origin main",
+    ],
+    not_match = [
+        "git push origin feature/test",
+    ],
+)
+
+# Forbid destructive git reset
+prefix_rule(
+    pattern = ["git", "reset", "--hard"],
+    decision = "forbidden",
+    justification = "Hard reset can lose work. Use 'git stash' or 'git checkout' instead.",
+    match = [
+        "git reset --hard HEAD",
+        "git reset --hard origin/master",
+    ],
+)
+
+# Forbid working on master directly
+prefix_rule(
+    pattern = ["git", "checkout", ["master", "main"]],
+    decision = "prompt",
+    justification = "Switching to master/main requires approval. Always work on feature branches.",
+    match = [
+        "git checkout master",
+        "git checkout main",
+    ],
+)
+
+# Prompt before any git push (requires human approval)
+prefix_rule(
+    pattern = ["git", "push"],
+    decision = "prompt",
+    justification = "Pushing to remote requires explicit human approval per git-workflow.md.",
+    match = [
+        "git push origin feature/test",
+        "git push -u origin feature/test",
+    ],
+)
+
+# Prompt before git commit (ensure tests were run)
+prefix_rule(
+    pattern = ["git", "commit"],
+    decision = "prompt",
+    justification = "Verify all tests pass before committing.",
+)

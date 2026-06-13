@@ -4,3 +4,5 @@
 ^\.Rproj\.user$
 ^tests/upgrades$
 ^examples
+^\.positai$
+^\.claude$

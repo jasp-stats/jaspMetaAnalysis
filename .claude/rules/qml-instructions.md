@@ -5,6 +5,30 @@ paths:
 
 # JASP QML Instructions
 
+## 0) QML Syntax Validation
+
+**ALWAYS validate QML files after editing** using `qmllint` to catch syntax errors:
+
+```powershell
+qmllint inst\qml\path\to\file.qml
+```
+
+- **Ignore import warnings**: Warnings about missing `JASP.Controls` and `JASP` modules are expected (qmllint lacks JASP's custom modules)
+- **Focus on syntax errors**: Look for missing braces `{}`, brackets `[]`, parentheses `()`, semicolons, or malformed property assignments
+- **Exit code matters**: Non-zero exit with syntax errors blocks parsing; zero exit means parseable (even with import warnings)
+- **Run before committing**: Catch structural issues (extra/missing braces) that break QML parsing
+
+Example of ignorable warnings:
+```
+Warning: Failed to import JASP.Controls  [import]
+Warning: IntegerField was not found  [import]
+```
+
+Example of critical errors:
+```
+Error: Expected token `}'  [syntax]
+```
+
 ## 1) Core Basics
 
 - **Imports:**

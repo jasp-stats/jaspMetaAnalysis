@@ -119,7 +119,7 @@ Upgrades
 		ChangeRename { from: "funnelAsymmetryTestPeters"; to: "funnelPlotAsymmetryTestPeters" }
 		ChangeRename { from: "funnelAsymmetryTestDebrayFIV"; to: "funnelPlotAsymmetryTestDebray" }
 		ChangeRename { from: "funnelAsymmetryTestPlot"; to: "funnelPlotAsymmetryTestPlot" }
-	
+
 		// PredictionPerformancePriors
 		ChangeRename { from: "priorMuNMeam"; to: "muNormalPriorMean" }
 		ChangeRename { from: "priorMuNSD"; to: "muNormalPriorSd" }
@@ -182,7 +182,7 @@ Upgrades
 		ChangeRename { from: "estimatesSigma"; to: "inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable" }
 		ChangeRename { from: "regressionPeese"; to: "plotsRegressionEstimatePeesePlot" }
 		ChangeRename { from: "regressionPet"; to: "plotsRegressionEstimatePetPlot" }
-		ChangeRename { from: "plotModels"; to: "plotsMeanModelEstimatesPlot" }	
+		ChangeRename { from: "plotModels"; to: "plotsMeanModelEstimatesPlot" }
 	}
 
 	Upgrade
@@ -196,7 +196,7 @@ Upgrades
 		ChangeRename { from: "inputSE"; to: "effectSizeSe" }
 		ChangeRename { from: "inputCI"; to: "effectSizeCi" }
 		ChangeRename { from: "inputN"; to: "sampleSize" }
-		ChangeRename { from: "inputPVal"; to: "pValue" }	
+		ChangeRename { from: "inputPVal"; to: "pValue" }
 		ChangeRename { from: "inputLabels"; to: "studyLabel" }
 		ChangeRename { from: "muTransform"; to: "transformCorrelationsTo" }
 
@@ -215,8 +215,8 @@ Upgrades
 		ChangeRename { from: "weightFunctionFE"; to: "plotsWeightFunctionFixedEffectsPlot" }
 		ChangeRename { from: "weightFunctionRE"; to: "plotsWeightFunctionRandomEffectsPlot" }
 		ChangeRename { from: "weightFunctionRescale"; to: "plotsWeightFunctionRescaleXAxis" }
-		ChangeRename { from: "plotModels"; to: "plotsMeanModelEstimatesPlot" }	
-	}	
+		ChangeRename { from: "plotModels"; to: "plotsMeanModelEstimatesPlot" }
+	}
 
 	Upgrade
 	{
@@ -336,6 +336,79 @@ Upgrades
 		ChangeIncompatible
 		{
 			msg: qsTr("Results of this analysis cannot be updated. The analysis was created with an older version of JASP and the analysis options are not longer compatible. Please, redo the analysis with the updated module or download the 0.19.3 version of JASP to rerun or edit the analysis.")
+		}
+	}
+
+	Upgrade
+	{
+		functionName:	"ClassicalMetaAnalysis"
+		fromVersion:	"0.95.4"
+		toVersion:		"0.95.5"
+
+		ChangeJS
+		{
+			name:		"exportDiagnosticsInfluentialCases"
+			jsFunction:	function(options)
+			{
+				return options["diagnosticsCasewiseDiagnosticsExportToDataset"] === true;
+			}
+		}
+
+		ChangeJS
+		{
+			name:		"exportDiagnosticsCaseDiagnostics"
+			jsFunction:	function(options)
+			{
+				return options["diagnosticsCasewiseDiagnosticsExportToDataset"] === true &&
+					options["diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"] !== true;
+			}
+		}
+
+		ChangeJS
+		{
+			name:		"exportDiagnosticsModelImpact"
+			jsFunction:	function(options)
+			{
+				return options["diagnosticsCasewiseDiagnosticsExportToDataset"] === true &&
+					options["diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"] !== true;
+			}
+		}
+
+		ChangeJS
+		{
+			name:		"exportDiagnosticsCoefficientInfluence"
+			jsFunction:	function(options)
+			{
+				return options["diagnosticsCasewiseDiagnosticsExportToDataset"] === true &&
+					options["diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"] !== true &&
+					options["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"] === true;
+			}
+		}
+	}
+
+	Upgrade
+	{
+		functionName:	"ClassicalMetaAnalysisMultilevelMultivariate"
+		fromVersion:	"0.95.4"
+		toVersion:		"0.95.5"
+
+		ChangeJS
+		{
+			name:		"exportDiagnosticsCaseDiagnostics"
+			jsFunction:	function(options)
+			{
+				return options["diagnosticsCasewiseDiagnosticsExportToDataset"] === true;
+			}
+		}
+
+		ChangeJS
+		{
+			name:		"exportDiagnosticsCoefficientInfluence"
+			jsFunction:	function(options)
+			{
+				return options["diagnosticsCasewiseDiagnosticsExportToDataset"] === true &&
+					options["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"] === true;
+			}
 		}
 	}
 }

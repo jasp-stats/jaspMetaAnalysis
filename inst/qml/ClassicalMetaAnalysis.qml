@@ -72,7 +72,8 @@ Form
 			id:				method
 			label:			qsTr("Method")
 			startValue:		"restrictedML"
-			info: qsTr("Method used to estimate heterogeneity (tau-squared) in the meta-analysis. The available methods depend on the inclusion of heterogeneity model terms.")
+			fieldWidth:		125 * preferencesModel.uiScale
+			info: qsTr("Method used for model estimation in the meta-analysis. The available methods depend on the inclusion of heterogeneity model terms.")
 			values:			(function() {
 				if (sectionModel.heterogeneityModelTermsCount == 0) {
 					return [
@@ -89,7 +90,8 @@ Form
 						{ label: qsTr("Paule-Mandel")			, value: "pauleMandel"		},
 						{ label: qsTr("Paule-Mandel (MU)")		, value: "pauleMandelMu"	},
 						{ label: qsTr("Generalized Q-stat")		, value: "qeneralizedQStat"	},
-						{ label: qsTr("Generalized Q-stat (MU)"), value: "qeneralizedQStatMu"}
+						{ label: qsTr("Generalized Q-stat (MU)"), value: "qeneralizedQStatMu"},
+						{ label: qsTr("Unrestricted Weighted Least Squares (UWLS)"), value: "unrestrictedWeightedLeastSquares" },
 					];
 				} else {
 					return [
@@ -103,9 +105,10 @@ Form
 		DropDown
 		{
 			name:		"fixedEffectTest"
-			label:		qsTr("Fixed effect test")
+			label:		qsTr("Fixed effects test")
 			startValue:	"knha"
-			values:		[ "z", "t", "knha"]
+			enabled:	method.value !== "unrestrictedWeightedLeastSquares"
+			values:		method.value === "unrestrictedWeightedLeastSquares" ? [ "knha" ] : [ "z", "t", "knha"]
 			info: qsTr("Method for testing the model coefficients: 'z' uses standard normal approximation, 't' uses t-distribution, and 'knha' uses the Knapp and Hartung adjustment (default).")
 		}
 
@@ -152,18 +155,33 @@ Form
 
 	MA.ClassicalMetaAnalysisModel
 	{
-		id:		sectionModel
+		id:				sectionModel
+		methodValue:	method.value
 	}
 
-	MA.ClassicalMetaAnalysisStatistics {}
+	MA.ClassicalMetaAnalysisStatistics
+	{
+		id:		sectionStatistics
+	}
 
 	MA.ClassicalMetaAnalysisEstimatedMarginalMeans {}
 
-	MA.ForestPlot {}
+	MA.ForestPlotSection
+	{
+		transformEffectSizeValue:	sectionStatistics.transformEffectSizeValue
+		effectSizeReady:			effectSize.count == 1 && effectSizeStandardError.count == 1
+		modelInformationEnabled:	effectSize.count == 1 && effectSizeStandardError.count == 1
+		effectSizeModelTermsCount:	sectionModel.effectSizeModelTermsCount
+		heterogeneityModelTermsCount: sectionModel.heterogeneityModelTermsCount
+		methodValue:				method.value
+		subgroupSelected:			subgroup.count > 0
+	}
 
 	MA.BubblePlot {}
 
 	MA.ClassicalMetaAnalysisDiagnostics {}
+
+	MA.ClassicalMetaAnalysisExport {}
 
 	MA.ClassicalMetaAnalysisAdvanced
 	{

@@ -21,6 +21,7 @@ For comprehensive guidance on specific topics, see:
 - **[Testing & Test Writing](.claude/rules/testing-instructions.md)** - Test framework, snapshots, and test workflow
 - **[Translation (i18n)](.claude/rules/translation-instructions.md)** - gettext/gettextf/qsTr usage, formatting, plurals
 - **[Output Structure](.claude/rules/jasp-output-structure.md)** - Reading/testing serialized output (containers, tables, plots, state)
+- **[Git Workflow](.claude/rules/git-workflow.md)** - Commit message style, branch strategy, PR guidelines, git safety rules
 
 ## R Session via MCP
 
@@ -30,10 +31,12 @@ This project uses the `btw` MCP server (`.claude/mcp-server.R`) to provide a per
 
 ### Available MCP Tools
 
-Use these R-specific tools instead of Bash when possible:
+These are MCP tools — invoke them directly as tool calls, not as R functions or shell commands:
 
 | Tool | Use for |
 |------|---------|
+| `list_r_sessions` | Discover available R sessions (call first) |
+| `select_r_session` | Connect to a session from the list |
 | `btw_tool_run_r` | Execute R code in persistent session (variables persist between calls) |
 | `btw_tool_docs_help_page` | Look up R function documentation |
 | `btw_tool_docs_package_news` | Check package changelogs |
@@ -44,7 +47,7 @@ Use these R-specific tools instead of Bash when possible:
 | `btw_tool_session_platform_info` | Check R version and platform |
 | `btw_tool_session_check_package_installed` | Verify package availability |
 
-**Use Claude Code native tools** (Read, Edit, Write, Glob, Grep, Bash) for file editing, git operations, and file search -- they are faster than MCP equivalents.
+**Use native tools** (Read, Edit, Write, Glob, Grep, Bash) for file editing, git operations, and file search -- they are faster than MCP equivalents.
 
 ## Working Effectively
 
@@ -67,18 +70,47 @@ This restores dependencies, installs the module, configures jaspTools, and regis
 
 Run via `btw_tool_run_r` in the persistent session:
 
-```r
-# Full test suite (300+ sec, NEVER CANCEL)
-testAll()
+**Agent-optimized** (preferred -- compact output, returns queryable result object):
 
-# Specific analysis tests (for quick iteration)
+```r
+# Full test suite -- returns rich S3 result object
+x <- agentTestAll()
+
+# Specific analysis tests
+x <- agentTestAnalysis("AnalysisName")
+```
+
+These return a `jaspAgentTestResults` object. Console output is a compact one-line summary:
+```
+== Test Results == FAIL: 0 | WARN: 0 | SKIP: 2 | PASS: 72 | Time: 3.6s
+```
+
+Query the result object directly:
+```r
+x$status        # 0 = all passed, 1 = failures
+x$summary       # list(fail, warn, skip, pass, time)
+x$failures      # data.frame: module | file | test | message
+x$warnings      # data.frame: module | file | test | message
+x$skips         # data.frame: module | file | test | reason
+x$tests         # data.frame: all tests with module | file | context | test | passed | failed | ...
+x$errorModules  # named character vector of module-level errors
+x$logFile       # path to detailed JSON log (with backtraces)
+```
+
+**Human-oriented** (verbose output, for interactive use):
+```r
+testAll()
 testAnalysis("AnalysisName")
 ```
 
-- `testAll()` at session start to verify baseline, and after all fixes to check regressions
-- `testAnalysis("Name")` for quick iteration while fixing specific analyses
+**Rules:**
+- Tests take 300+ seconds to complete -- **NEVER CANCEL**
+- Run `agentTestAll()` at session start to verify baseline, and after all fixes
+- Use `agentTestAnalysis("Name")` for quick iteration on specific analyses
 - Analysis names are PascalCase exports from NAMESPACE
-- Some tests may skip on certain platforms (e.g., Windows) -- this is expected
+- Some tests skip on certain platforms (e.g., Windows) -- expected
+- Some stderr noise (ggplot messages, tryCatch errors) may leak through -- expected and minor
+- **MCP timeout:** If `btw_tool_run_r` times out on `agentTestAll()`, do NOT retry -- use the Bash fallback in [testing-instructions.md](.claude/rules/testing-instructions.md)
 
 **See [testing-instructions.md](.claude/rules/testing-instructions.md) for detailed test writing guidelines, snapshots, and workflows.**
 
@@ -89,7 +121,7 @@ testAnalysis("AnalysisName")
 options <- jaspTools::analysisOptions("AnalysisName")
 options$someOption <- value
 set.seed(1)
-results <- jaspTools::runAnalysis("AnalysisName", "debug.csv", options)
+results <- jaspTools::runAnalysis("AnalysisName", "debug.csv", options, view = FALSE)
 ```
 
 **From a .jasp example file:**
@@ -99,14 +131,18 @@ opts     <- jaspTools::analysisOptions(jaspFile)
 dataset  <- jaspTools::extractDatasetFromJASPFile(jaspFile)
 encoded  <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
 set.seed(1)
-results  <- jaspTools::runAnalysis("AnalysisName", encoded$dataset, encoded$options, encodedDataset = TRUE)
+results  <- jaspTools::runAnalysis("AnalysisName", encoded$dataset, encoded$options, encodedDataset = TRUE, view = FALSE)
 ```
 
 The encoding step is required because JASP internally encodes variable names and options to resolve ambiguities (e.g., same variable used with different types).
 
 **From a user-provided .jasp file:** Use the same pattern above. This is the primary way to reproduce bugs reported by users.
 
+**NEVER instantiate jaspResults C++ objects directly** (e.g., `jaspResultsClass$new()`, `create_cpp_jaspResults()`, `jaspBase:::initJaspResults()`). These require JASP Desktop C++ initialization unavailable in headless R sessions. They crash with `Rcpp::not_initialized` or `Expecting an external pointer`. Always use `jaspTools::runAnalysis()` or `agentTestAll()` which handle initialization internally.
+
 ### Inspecting Results
+
+Always set `view = FALSE` when running `runAnalysis()` manually. This avoids HTML generation; inspect the returned R object instead.
 
 After `runAnalysis()`, check:
 - `results$status` -- `"complete"` or `"fatalError"`
@@ -214,7 +250,7 @@ After `runAnalysis()`, check:
 2. Add QML interface in `inst/qml/`
 3. Define analysis in `inst/Description.qml`
 4. Add unit tests in `tests/testthat/`
-5. Run `testAll()` to validate (300+ seconds, NEVER CANCEL)
+5. Run `agentTestAll()` to validate (300+ seconds, NEVER CANCEL)
 
 ### Modifying Existing Analysis
 
@@ -222,7 +258,7 @@ After `runAnalysis()`, check:
 2. Update QML if adding/changing options
 3. Update unit tests and expected results
 4. Add upgrade mapping to `inst/Upgrades.qml` if renaming options
-5. Run tests: `testAll()` (NEVER CANCEL, 300+ seconds)
+5. Run tests: `agentTestAll()` (NEVER CANCEL, 300+ seconds)
 
 ### Detailed Development Process
 - **Step 1**: Create main analysis function with `jaspResults`, `dataset`, `options` arguments
@@ -231,6 +267,31 @@ After `runAnalysis()`, check:
 - Use `createJaspTable()`, `createJaspPlot()`, `createJaspHtml()` for output elements
 - Always set `$dependOn()` for proper caching and state management
 - Use containers for grouping related elements, state objects for reusing computed results
+
+## Meta-Analysis Knowledge Base
+
+This module ships a comprehensive knowledge base at `knowledge-base/` built by analyzing all ~200 R packages from the [CRAN Task View for Meta-Analysis](https://cran.r-project.org/web/views/MetaAnalysis.html). Use it as reference when implementing or improving meta-analysis features.
+
+### How to Navigate
+
+| Goal | Action |
+|------|--------|
+| **Find a feature by name** | Grep `knowledge-base/_feature_lookup.json` for the name → note the `c` (category) field → grep `knowledge-base/categories/<category>.json` for the feature |
+| **Explore a domain** | Read `knowledge-base/_master_index.json` (~38K tok, always fits) → read `knowledge-base/categories/<name>.toc.json` (5-48K, always fits) → grep full `categories/<name>.json` for specifics |
+| **Research a package** | Read `knowledge-base/packages/profiles/<pkg>.md` (1-5K, quick summary) → for full detail, read `knowledge-base/packages/raw/<pkg>/knowledge.json` |
+| **Check integrations** | Read `knowledge-base/integrations/by-package/<pkg>.json` |
+| **Find feature gaps** | Read `knowledge-base/_gap_analysis.md` (~29K tok) for prioritized feature list |
+
+### Key Stats
+- 196 packages analyzed, 2,989 features, 5,511 implementations
+- 16 feature categories: model-fitting, data-preparation, diagnostics-influence, publication-bias, forest-plot, visualization-other, heterogeneity, prediction-ci, model-comparison, meta-regression, network-ma, bayesian, summary-print, reporting, utility, significance-values
+
+### When to Use
+- Implementing new statistical methods → check what approaches exist across packages
+- Adding new analyses → find best-practice patterns and established APIs
+- Writing effect size computations → check `data-preparation` category
+- Forest/funnel plot enhancements → check `forest-plot` and `publication-bias` categories
+- Bayesian methods → check `bayesian` category for prior/MCMC/posterior patterns
 
 ## Compact Instructions
 

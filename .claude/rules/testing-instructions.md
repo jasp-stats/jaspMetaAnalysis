@@ -13,13 +13,39 @@ This module uses the `jaspTools` testing framework. Tests are **critical** and m
 
 Run via `btw_tool_run_r` in the persistent R session:
 
-```r
-# Full test suite (300+ sec, NEVER CANCEL)
-testAll()
+**Agent-optimized** (preferred -- compact output, returns queryable result object):
 
-# Specific analysis tests (for quick iteration)
+```r
+# Full test suite -- returns rich S3 result object
+x <- agentTestAll()
+
+# Specific analysis tests
+x <- agentTestAnalysis("AnalysisName")
+```
+
+These return a `jaspAgentTestResults` object with fields: `$status`, `$summary`, `$failures`, `$warnings`, `$skips`, `$tests`, `$errorModules`, `$logFile`.
+
+**Human-oriented** (verbose output, for interactive use):
+
+```r
+testAll()
 testAnalysis("AnalysisName")
 ```
+
+**MCP timeout for large modules:** `agentTestAll()` can take 180-300+ seconds. If `btw_tool_run_r` times out, fall back to Bash:
+
+```bash
+Rscript --no-init-file -e '
+  renv::load()
+  library(jaspTools)
+  setupJaspTools(pathJaspDesktop="/opt/jasp-desktop", installJaspModules=FALSE, installJaspCorePkgs=FALSE, quiet=TRUE, force=TRUE)
+  setPkgOption("module.dirs", ".")
+  setPkgOption("reinstall.modules", FALSE)
+  agentTestAll()
+'
+```
+
+Do NOT retry via MCP after a timeout -- use the Bash fallback immediately.
 
 **Critical rules:**
 
@@ -28,6 +54,7 @@ testAnalysis("AnalysisName")
 - Some deprecation warnings are expected and can be ignored
 - ALL tests must pass before proceeding
 - Some tests skip on certain platforms (e.g., Windows) -- this is expected
+- Some stderr noise (ggplot messages, tryCatch errors) may leak through -- expected and minor
 
 ## 3) Test File Structure
 
@@ -35,7 +62,7 @@ Each test file in `tests/testthat/` corresponds to an R analysis file:
 
 - `test-penalizedmetaanalysis.R` -> `R/penalizedmetaanalysis.R`
 - Test file name pattern: `test-<analysisname>.R`
-- Analysis names for `testAnalysis()` come from NAMESPACE exports (PascalCase)
+- Analysis names for `agentTestAnalysis()` come from NAMESPACE exports (PascalCase)
 
 ## 4) Writing Tests
 
@@ -51,7 +78,7 @@ options$descriptives <- TRUE
 set.seed(1)
 
 # 3. Run the analysis
-results <- jaspTools::runAnalysis("AnalysisName", "debug.csv", options)
+results <- jaspTools::runAnalysis("AnalysisName", "debug.csv", options, view = FALSE)
 
 # 4. Test tables
 test_that("Table name matches", {
@@ -75,13 +102,13 @@ opts     <- jaspTools::analysisOptions(jaspFile)
 dataset  <- jaspTools::extractDatasetFromJASPFile(jaspFile)
 encoded  <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
 set.seed(1)
-results  <- jaspTools::runAnalysis("AnalysisName", encoded$dataset, encoded$options, encodedDataset = TRUE)
+results  <- jaspTools::runAnalysis("AnalysisName", encoded$dataset, encoded$options, encodedDataset = TRUE, view = FALSE)
 ```
 
 ### Key testing functions
 
 - `jaspTools::analysisOptions(name)` -- Get default options for an analysis
-- `jaspTools::runAnalysis(name, dataset, options)` -- Run analysis with options
+- `jaspTools::runAnalysis(name, dataset, options, view = FALSE)` -- Run analysis without generating HTML; inspect the returned R object
 - `jaspTools::expect_equal_tables(actual, expected)` -- Compare table output
 - `jaspTools::expect_equal_plots(plot, name, dir)` -- Compare plot output (snapshot-based)
 
@@ -117,13 +144,13 @@ results  <- jaspTools::runAnalysis("AnalysisName", encoded$dataset, encoded$opti
 
 ### Before making code changes
 
-Run `testAll()` via `btw_tool_run_r` to establish baseline -- all tests should pass.
+Run `agentTestAll()` via `btw_tool_run_r` to establish baseline -- all tests should pass.
 
 ### After making code changes
 
 1. Run `devtools::load_all()` to hot-reload R changes
-2. Run `testAnalysis("AnalysisName")` for quick iteration on the affected analysis
-3. Once the specific tests pass, run `testAll()` to check for regressions
+2. Run `agentTestAnalysis("AnalysisName")` for quick iteration on the affected analysis
+3. Once the specific tests pass, run `agentTestAll()` to check for regressions
 
 ### If tests fail
 

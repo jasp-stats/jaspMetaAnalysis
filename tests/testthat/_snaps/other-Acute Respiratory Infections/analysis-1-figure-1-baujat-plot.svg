@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' data-engine-version='2.0' width='720.00pt' height='576.00pt' viewBox='0 0 720.00 576.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA='>
+    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<rect x='0.00' y='0.00' width='720.00' height='576.00' style='stroke-width: 10.67; stroke: none;' />
+</g>
+<defs>
+  <clipPath id='cpODguMTl8NzIwLjAwfDIwLjcxfDUxMC4xNA=='>
+    <rect x='88.19' y='20.71' width='631.81' height='489.43' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpODguMTl8NzIwLjAwfDIwLjcxfDUxMC4xNA==)'>
+<rect x='88.19' y='20.71' width='631.81' height='489.43' style='stroke-width: 10.67; stroke: none;' />
+<circle cx='120.24' cy='47.00' r='2.49' style='stroke-width: 0.71; fill: #BEBEBE;' />
+<circle cx='658.03' cy='450.84' r='2.49' style='stroke-width: 0.71; fill: #BEBEBE;' />
+<text x='120.24' y='47.00' style='font-size: 11.00px; font-family: sans;' textLength='49.55px' lengthAdjust='spacingAndGlyphs'>Paul 2007</text>
+<text x='658.03' y='450.84' style='font-size: 11.00px; font-family: sans;' textLength='74.01px' lengthAdjust='spacingAndGlyphs'>Shadkam 2010</text>
+<line x1='116.59' y1='510.14' x2='691.60' y2='510.14' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<line x1='88.19' y1='488.21' x2='88.19' y2='42.64' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<rect x='88.19' y='20.71' width='631.81' height='489.43' style='stroke-width: 0.00; stroke: none;' />
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<polyline points='88.19,510.14 88.19,20.71 ' style='stroke-width: 0.00; stroke: none; stroke-linecap: butt;' />
+<text x='72.72' y='493.74' text-anchor='end' style='font-size: 17.00px; font-family: sans;' textLength='42.54px' lengthAdjust='spacingAndGlyphs'>0.004</text>
+<text x='72.72' y='430.18' text-anchor='end' style='font-size: 17.00px; font-family: sans;' textLength='42.54px' lengthAdjust='spacingAndGlyphs'>0.005</text>
+<text x='72.72' y='366.62' text-anchor='end' style='font-size: 17.00px; font-family: sans;' textLength='42.54px' lengthAdjust='spacingAndGlyphs'>0.006</text>
+<text x='72.72' y='303.05' text-anchor='end' style='font-size: 17.00px; font-family: sans;' textLength='42.54px' lengthAdjust='spacingAndGlyphs'>0.007</text>
+<text x='72.72' y='239.49' text-anchor='end' style='font-size: 17.00px; font-family: sans;' textLength='42.54px' lengthAdjust='spacingAndGlyphs'>0.008</text>
+<text x='72.72' y='175.93' text-anchor='end' style='font-size: 17.00px; font-family: sans;' textLength='42.54px' lengthAdjust='spacingAndGlyphs'>0.009</text>
+<text x='72.72' y='112.37' text-anchor='end' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>0.01</text>
+<text x='72.72' y='48.80' text-anchor='end' style='font-size: 17.00px; font-family: sans;' textLength='42.54px' lengthAdjust='spacingAndGlyphs'>0.011</text>
+<polyline points='79.69,487.89 88.19,487.89 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='79.69,424.33 88.19,424.33 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='79.69,360.77 88.19,360.77 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='79.69,297.21 88.19,297.21 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='79.69,233.64 88.19,233.64 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='79.69,170.08 88.19,170.08 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='79.69,106.52 88.19,106.52 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='79.69,42.95 88.19,42.95 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='88.19,510.14 720.00,510.14 ' style='stroke-width: 0.00; stroke: none; stroke-linecap: butt;' />
+<polyline points='116.91,518.64 116.91,510.14 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='260.51,518.64 260.51,510.14 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='404.10,518.64 404.10,510.14 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='547.69,518.64 547.69,510.14 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='691.28,518.64 691.28,510.14 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<text x='116.91' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='23.63px' lengthAdjust='spacingAndGlyphs'>0.1</text>
+<text x='260.51' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='23.63px' lengthAdjust='spacingAndGlyphs'>0.2</text>
+<text x='404.10' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='23.63px' lengthAdjust='spacingAndGlyphs'>0.3</text>
+<text x='547.69' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='23.63px' lengthAdjust='spacingAndGlyphs'>0.4</text>
+<text x='691.28' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='23.63px' lengthAdjust='spacingAndGlyphs'>0.5</text>
+<text x='404.10' y='567.49' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='203.21px' lengthAdjust='spacingAndGlyphs'>Squared Pearson Residual</text>
+<text transform='translate(16.68,265.42) rotate(-90)' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='188.08px' lengthAdjust='spacingAndGlyphs'>Influence on Fitted Value</text>
+<text x='404.10' y='11.70' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='232.49px' lengthAdjust='spacingAndGlyphs'>analysis-1_figure-1_baujat-plot</text>
+</g>
+</svg>

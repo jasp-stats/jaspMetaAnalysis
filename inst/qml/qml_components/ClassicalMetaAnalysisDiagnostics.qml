@@ -38,8 +38,8 @@ Section
 				name:		"diagnosticsVarianceInflationFactor"
 				text:		qsTr("Variance inflation factor")
 				Layout.preferredWidth: 300 * jaspTheme.uiScale
-				visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
-				enabled:	(analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate") && predictors.count > 0
+				visible:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis"
+				enabled:	(analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis") && predictors.count > 0
 				info: qsTr("Include variance inflation factors to assess multicollinearity among predictors. Available when predictors are included in the model.")
 
 				CheckBox
@@ -56,8 +56,8 @@ Section
 				name:		"diagnosticsCasewiseDiagnostics"
 				text:		qsTr("Casewise diagnostics")
 				Layout.preferredWidth: 300 * jaspTheme.uiScale
-				visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
-				enabled:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
+				visible:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis"
+				enabled:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis"
 				info: qsTr("Include casewise diagnostics to assess the influence of individual studies on the meta-analysis results. Note that diagnostics are always based on the non-clustered model.")
 
 				CheckBox
@@ -82,22 +82,6 @@ Section
 					info: qsTr("Include the differences in model coefficients when each study is excluded (DFBETAS).")
 				}
 
-				CheckBox
-				{
-					name:		"diagnosticsCasewiseDiagnosticsExportToDataset"
-					text:		qsTr("Export to dataset")
-					info: qsTr("Export the casewise diagnostics results to the dataset.")
-
-					CheckBox
-					{
-						name:		"diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"
-						text:		qsTr("Influential indicator only")
-						checked:	true
-						visible:	analysisType === "metaAnalysis"
-						info: qsTr("Export only the indicator of influential cases to the dataset.")
-					}
-				}
-
 				/*
 				CheckBox
 				{
@@ -118,8 +102,8 @@ Section
 			{
 				name:		"diagnosticsPlotsProfileLikelihood"
 				text:		qsTr("Profile likelihood")
-				visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
-				enabled:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
+				visible:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis"
+				enabled:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis"
 				info: qsTr("Include a profile likelihood plot for the heterogeneity parameter (τ²).")
 			}
 
@@ -127,7 +111,7 @@ Section
 			{
 				name:		"diagnosticsPlotsBaujat"
 				text:		qsTr("Baujat")
-				visible:	analysisType === "metaAnalysis" || analysisType === "ClassicalMantelHaenszelPeto"
+				visible:	analysisType === "metaAnalysis" || analysisType === "mantelHaenszelPeto"
 				info: qsTr("Include a Baujat plot to detect studies contributing to heterogeneity and overall effect size. Unavailable when performing multilevel/multivariate meta-analysis. Note that Baujat plot is always based on the non-clustered model.")
 			}
 
@@ -135,6 +119,7 @@ Section
 			{
 				name:		"diagnosticsResidualFunnel"
 				text:		qsTr("Residual funnel")
+				visible:	analysisType !== "generalizedMetaAnalysis"
 				info: qsTr("Include a residual funnel plot. Note that residual funnel plot is always based on the non-clustered model.")
 			}
 		}

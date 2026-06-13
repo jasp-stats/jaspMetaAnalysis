@@ -1,3 +1,9 @@
+---
+paths:
+  - "**/R/*.R"
+  - "**/inst/qml/*.qml"
+---
+
 # JASP Module Architecture
 
 How QML, JASP Desktop, and R interact. This explains *why* the patterns in the other rule files exist.

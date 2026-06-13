@@ -37,6 +37,9 @@ The meta-analytic functionality is served by several R packages
 - **pema** -  The package for penalized meta-analysis ([pema on CRAN](https://cran.r-project.org/package=pema))
 - **metamisc** -  Package for meta-analysis of prediction model performance ([metamisc on CRAN](https://cran.r-project.org/package=metamisc))
 - **metaSEM** - Package for meta-analytic SEM and SEM-based meta-analysis ([metaSEM on CRAN](https://cran.r-project.org/package=metaSEM))
+- **robvis** - Package for risk of bias visualization  ([robvis on CRAN](https://cran.r-project.org/package=robvis))
+
+See [Feature Coverage](FEATURE_COVERAGE.md) for the package functions and major features exposed by the module.
 
 ## Analyses
 
@@ -46,7 +49,10 @@ The organization of the analyses within the Meta-Analysis module in JASP is as f
 --- Meta-Analysis
     -- Miscellaneous
        - Effect Size Computation
+       - Effect Size Aggregation
        - Funnel Plot
+	   - Forest Plot
+	   - Risk of Bias Plot
     -- Classical
        - Meta-Analysis
        - Meta-Analysis (Multilevel/Multivariate)
