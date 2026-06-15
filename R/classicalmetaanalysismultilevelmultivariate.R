@@ -320,6 +320,10 @@ ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = N
     if (options[["subgroup"]] != "" && !is.null(attr(dataset, "subgroupIndx")))
       vMatrix <- vMatrix[attr(dataset, "subgroupIndx"), attr(dataset, "subgroupIndx")]
 
+    nasIds <- attr(dataset, "NasIds")
+    if (!is.null(nasIds) && nrow(vMatrix) == length(nasIds))
+      vMatrix <- vMatrix[!nasIds, !nasIds, drop = FALSE]
+
     if (nrow(vMatrix) != nrow(dataset))
       .quitAnalysis(gettextf("The variance-covariance matrix must match the dimensions of the data set. The number of the matrix rows/columns (%1$i) does not match the number of observations in the dataset (%2$i).",
                              nrow(vMatrix), nrow(dataset)))
