@@ -281,8 +281,13 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
 
   jaspResults[["summaryTable"]] <- summaryTable
 
-  if (!ready)
+  if (!ready) {
+    summaryTable$addFootnote(gettextf(
+      "Effect sizes were successfully aggregated and added to the dataset for 0 out of %1$i data entries.",
+      nrow(dataset)
+    ))
     return()
+  }
 
   cached <- jaspResults[["esaState"]]$object
   if (is.null(cached))
@@ -328,7 +333,7 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
   ))
 
   summaryTable$addFootnote(gettextf(
-    "%1$i effect sizes aggregated into %2$i cluster-level estimates.",
+    "%1$i effect sizes were successfully aggregated into %2$i cluster-level estimates and added to the dataset.",
     nrow(dataset), nrow(aggResult)
   ))
 
