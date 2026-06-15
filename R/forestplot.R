@@ -57,7 +57,7 @@ ForestPlot <- function(jaspResults, dataset, options) {
     forestPlotEstimateInformationSelectedVariablesSettings          = list(),
     # shared component: settings
     forestPlotEstimatesAndConfidenceIntervals                       = TRUE,
-    forestPlotAllignLeftPanel                                       = "right",
+    forestPlotAlignLeftPanel                                       = "right",
     forestPlotTestsInRightPanel                                     = FALSE,
     forestPlotSubgroupShowTitles                                    = TRUE,
     forestPlotAuxiliaryDigits                                       = 2,

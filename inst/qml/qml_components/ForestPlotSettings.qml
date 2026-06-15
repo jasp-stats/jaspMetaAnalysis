@@ -59,7 +59,7 @@ Group
 
 			DropDown
 			{
-				name:			"forestPlotAllignLeftPanel"
+				name:			"forestPlotAlignLeftPanel"
 				label:			qsTr("Align left panel")
 				startValue:		"right"
 				values:		[

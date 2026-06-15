@@ -950,7 +950,7 @@
 # Left-panel alignment is shared between x placement and hjust.
 .forestPlotLeftPanelAlign              <- function(options) {
   return(switch(
-    options[["forestPlotAllignLeftPanel"]],
+    options[["forestPlotAlignLeftPanel"]],
     "left"   = 0,
     "middle" = 0.5,
     "right"  = 1
