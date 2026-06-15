@@ -406,7 +406,6 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
           ti = dataset[[variables[["tStatistic"]]]],
           mi = dataset[[variables[["predictors"]]]],
           ni = dataset[[variables[["sampleSize"]]]],
-          ti = dataset[[variables[["tStatistic"]]]],
           ri = dataset[[variables[["semipartialCorrelation"]]]],
           pi = dataset[[variables[["pValue"]]]]
         )
@@ -416,7 +415,6 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
           mi  = dataset[[variables[["predictors"]]]],
           ni  = dataset[[variables[["sampleSize"]]]],
           r2i = dataset[[variables[["rSquared"]]]],
-          ti  = dataset[[variables[["tStatistic"]]]],
           ri  = dataset[[variables[["semipartialCorrelation"]]]],
           pi  = dataset[[variables[["pValue"]]]]
         )
