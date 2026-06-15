@@ -522,7 +522,7 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
   # Conditions for when vtype is appropriate
   if ((design == "independentGroups"   && measurement == "quantitative" && effectSize %in% c("MD", "SMD", "SMD1", "ROM")) ||
       (design == "variableAssociation" && measurement == "quantitative") ||
-      (design == "variableAssociation" && measurement == "binary" && effectSize %in% c("PHI", "ZHI")) ||
+      (design == "variableAssociation" && measurement == "binary" && effectSize %in% c("PHI", "ZPHI")) ||
       (design == "variableAssociation" && measurement == "mixed" && effectSize %in% c("RPB", "ZPB")) ||
       (design == "other" && measurement == "modelFit") &&
       variables[["samplingVarianceType"]] != "mixed") {
