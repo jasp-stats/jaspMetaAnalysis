@@ -35,9 +35,10 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   # simple pathway
   "varianceCovarianceMatrixType",
   "varianceCovarianceMatrixSimpleStructure",
-  "varianceCovarianceMatrixSimpleWithinClusterCorrelation",
-  "varianceCovarianceMatrixSimpleTimeVariable",
-  "varianceCovarianceMatrixSimpleTimeLag1Correlation",
+  "varianceCovarianceMatrixSimpleCompoundSymmetryConstruct",
+  "varianceCovarianceMatrixSimpleCompoundSymmetryWithinClusterCorrelation",
+  "varianceCovarianceMatrixSimpleAutoregressiveTime",
+  "varianceCovarianceMatrixSimpleAutoregressiveLag1Correlation",
   # precomputed
   "varianceCovarianceMatrixFile",
   # correlation matrix

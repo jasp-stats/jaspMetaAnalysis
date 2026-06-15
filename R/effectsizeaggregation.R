@@ -79,10 +79,14 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
   if (isTRUE(options[["varianceCovarianceMatrixType"]] == "simple")) {
     structure <- options[["varianceCovarianceMatrixSimpleStructure"]]
     usesCAR   <- structure %in% c("CAR", "CS+CAR", "CS*CAR")
-    timeVar   <- options[["varianceCovarianceMatrixSimpleTimeVariable"]]
+    timeVar   <- options[["varianceCovarianceMatrixSimpleAutoregressiveTime"]]
 
     if (isTRUE(usesCAR) && length(timeVar) > 0 && !is.na(timeVar) && timeVar != "")
       omitOnVariables <- c(omitOnVariables, timeVar)
+
+    constructVar <- options[["varianceCovarianceMatrixSimpleCompoundSymmetryConstruct"]]
+    if (isTRUE(structure == "CS*CAR") && length(constructVar) > 0 && !is.na(constructVar) && constructVar != "")
+      omitOnVariables <- c(omitOnVariables, constructVar)
   } else {
     omitOnVariables <- c(omitOnVariables, .mammExtractVarianceCovarianceMatrixNames(options))
   }
@@ -162,21 +166,25 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
     # simple path: pass struct/rho/phi/time directly to aggregate.escalc
     aggArgs$struct <- options[["varianceCovarianceMatrixSimpleStructure"]]
 
-    rho <- options[["varianceCovarianceMatrixSimpleWithinClusterCorrelation"]]
+    rho <- options[["varianceCovarianceMatrixSimpleCompoundSymmetryWithinClusterCorrelation"]]
     if (length(rho) > 0) {
       aggArgs$rho <- rho
     }
 
-    phi <- options[["varianceCovarianceMatrixSimpleTimeLag1Correlation"]]
+    phi <- options[["varianceCovarianceMatrixSimpleAutoregressiveLag1Correlation"]]
     if (length(phi) > 0) {
       aggArgs$phi <- phi
     }
 
-    timeVar <- options[["varianceCovarianceMatrixSimpleTimeVariable"]]
+    timeVar <- options[["varianceCovarianceMatrixSimpleAutoregressiveTime"]]
     if (length(timeVar) > 0 && !is.na(timeVar) && timeVar != "") {
       aggArgs$time <- dataset[[timeVar]]
     }
 
+    constructVar <- options[["varianceCovarianceMatrixSimpleCompoundSymmetryConstruct"]]
+    if (options[["varianceCovarianceMatrixSimpleStructure"]] == "CS*CAR" && length(constructVar) > 0 && !is.na(constructVar) && constructVar != "") {
+      aggArgs$obs <- dataset[[constructVar]]
+    }
 
   } else {
     # check non-simple readiness
@@ -236,22 +244,30 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
   usesCS    <- structure %in% c("CS", "CS+CAR", "CS*CAR")
   usesCAR   <- structure %in% c("CAR", "CS+CAR", "CS*CAR")
 
-  rho <- options[["varianceCovarianceMatrixSimpleWithinClusterCorrelation"]]
+  rho <- options[["varianceCovarianceMatrixSimpleCompoundSymmetryWithinClusterCorrelation"]]
   if (usesCS && length(rho) > 0 && rho == 0) {
     messages <- c(messages, gettext("The within-cluster correlation is set to 0. This corresponds to no adjustment for dependency between effect sizes within clusters."))
   }
 
 
   if (usesCAR) {
-    timeVar <- options[["varianceCovarianceMatrixSimpleTimeVariable"]]
+    timeVar <- options[["varianceCovarianceMatrixSimpleAutoregressiveTime"]]
     if (length(timeVar) == 0 || is.na(timeVar) || timeVar == "") {
       ready    <- FALSE
       messages <- c(messages, gettext("Please provide a time variable for autoregressive correlation structures."))
     }
 
-    phi <- options[["varianceCovarianceMatrixSimpleTimeLag1Correlation"]]
+    phi <- options[["varianceCovarianceMatrixSimpleAutoregressiveLag1Correlation"]]
     if (length(phi) > 0 && phi == 0) {
       messages <- c(messages, gettext("The lag-1 correlation is set to 0. This corresponds to no time-based dependency adjustment."))
+    }
+  }
+
+  if (structure == "CS*CAR") {
+    constructVar <- options[["varianceCovarianceMatrixSimpleCompoundSymmetryConstruct"]]
+    if (length(constructVar) == 0 || is.na(constructVar) || constructVar == "") {
+      ready    <- FALSE
+      messages <- c(messages, gettext("Please provide a construct variable for compound symmetry times autoregressive correlation structures."))
     }
   }
 
@@ -416,16 +432,17 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
 .esaSimpleVarianceCovarianceMatrixFootnote <- function(options) {
 
   structure <- options[["varianceCovarianceMatrixSimpleStructure"]]
-  rho       <- .mammVarianceCovarianceMatrixCorrelationValue(options[["varianceCovarianceMatrixSimpleWithinClusterCorrelation"]])
-  phi       <- .mammVarianceCovarianceMatrixCorrelationValue(options[["varianceCovarianceMatrixSimpleTimeLag1Correlation"]])
-  timeVar   <- .mammVarianceCovarianceMatrixVariableNames(options[["varianceCovarianceMatrixSimpleTimeVariable"]])
+  rho       <- .mammVarianceCovarianceMatrixCorrelationValue(options[["varianceCovarianceMatrixSimpleCompoundSymmetryWithinClusterCorrelation"]])
+  phi       <- .mammVarianceCovarianceMatrixCorrelationValue(options[["varianceCovarianceMatrixSimpleAutoregressiveLag1Correlation"]])
+  construct <- .mammVarianceCovarianceMatrixVariableNames(options[["varianceCovarianceMatrixSimpleCompoundSymmetryConstruct"]])
+  timeVar   <- .mammVarianceCovarianceMatrixVariableNames(options[["varianceCovarianceMatrixSimpleAutoregressiveTime"]])
 
   return(switch(structure,
     "ID"     = gettext("Aggregation assumed independent sampling errors within clusters."),
     "CS"     = gettextf("Aggregation used compound-symmetry sampling-error dependence within clusters with within-cluster correlation %1$s.", rho),
     "CAR"    = gettextf("Aggregation used autoregressive sampling-error dependence over %1$s with lag-1 correlation %2$s.", timeVar, phi),
     "CS+CAR" = gettextf("Aggregation used compound-symmetry plus autoregressive sampling-error dependence within clusters with within-cluster correlation %1$s and lag-1 correlation %2$s over %3$s.", rho, phi, timeVar),
-    "CS*CAR" = gettextf("Aggregation used compound-symmetry times autoregressive sampling-error dependence within clusters with within-cluster correlation %1$s and lag-1 correlation %2$s over %3$s.", rho, phi, timeVar)
+    "CS*CAR" = gettextf("Aggregation used compound-symmetry times autoregressive sampling-error dependence for %1$s with within-cluster correlation %2$s and lag-1 correlation %3$s over %4$s.", construct, rho, phi, timeVar)
   ))
 }
 .esaAddMissingDataFootnote <- function(table, nOmitted) {
@@ -543,8 +560,6 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
 }
 .esaMakeMetaforCallText     <- function(options) {
 
-  dataPrepText <- .esaMakeDataPrepText(options)
-
   datInput <- list(
     measure = .esaQuoteRString("GEN"),
     yi      = .esaAsRName(options[["effectSize"]]),
@@ -564,17 +579,21 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
   if (options[["varianceCovarianceMatrixType"]] == "simple") {
     aggInput$struct <- .esaQuoteRString(options[["varianceCovarianceMatrixSimpleStructure"]])
 
-    rho <- options[["varianceCovarianceMatrixSimpleWithinClusterCorrelation"]]
+    rho <- options[["varianceCovarianceMatrixSimpleCompoundSymmetryWithinClusterCorrelation"]]
     if (length(rho) > 0)
       aggInput$rho <- rho
 
-    phi <- options[["varianceCovarianceMatrixSimpleTimeLag1Correlation"]]
+    phi <- options[["varianceCovarianceMatrixSimpleAutoregressiveLag1Correlation"]]
     if (length(phi) > 0)
       aggInput$phi <- phi
 
-    timeVar <- options[["varianceCovarianceMatrixSimpleTimeVariable"]]
+    timeVar <- options[["varianceCovarianceMatrixSimpleAutoregressiveTime"]]
     if (length(timeVar) > 0 && !is.na(timeVar) && timeVar != "")
       aggInput$time <- .esaAsRName(timeVar)
+
+    constructVar <- options[["varianceCovarianceMatrixSimpleCompoundSymmetryConstruct"]]
+    if (options[["varianceCovarianceMatrixSimpleStructure"]] == "CS*CAR" && length(constructVar) > 0 && !is.na(constructVar) && constructVar != "")
+      aggInput$obs <- .esaAsRName(constructVar)
   } else if (tryCatch(.mammVarianceCovarianceMatrixReady(options), error = function(e) FALSE)) {
     vcalcInput       <- .mammGetVarianceCovarianceMatrix(NULL, options, returnCall = TRUE)
     vcalcInput$data  <- as.name("dat")
@@ -608,17 +627,7 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
     "\n)"
   )
 
-  return(paste(c(dataPrepText, datText, vcalcText, aggText), collapse = "\n\n"))
-}
-.esaMakeDataPrepText        <- function(options) {
-
-  omitOnVariables <- vapply(.esaOmitVariables(options), .esaQuoteRString, character(1))
-
-  return(paste0(
-    "dataset <- dataset[complete.cases(dataset[, c(",
-    paste(omitOnVariables, collapse = ", "),
-    "), drop = FALSE]), ]"
-  ))
+  return(paste(c(datText, vcalcText, aggText), collapse = "\n\n"))
 }
 .esaAsRName                 <- function(name) {
   return(deparse(as.name(name), width.cutoff = 500))

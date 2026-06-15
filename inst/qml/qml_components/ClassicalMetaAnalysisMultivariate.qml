@@ -92,27 +92,44 @@ Section
 			info: qsTr("Parametric correlation structure for sampling errors within clusters. 'Compound symmetry + autoregressive' assumes a constant baseline correlation plus additional correlation that decays over time. 'Compound symmetry × autoregressive' assumes the constant correlation and the time-based decay act jointly, so correlation vanishes at large time lags.")
 		}
 
-		DoubleField
+		Group
 		{
-			name:			"varianceCovarianceMatrixSimpleWithinClusterCorrelation"
-			label:			qsTr("Within cluster correlation")
-			defaultValue:	0
-			min:			-1
-			max:			1
-			inclusive:		JASP.None
 			enabled:		varianceCovarianceMatrixSimpleStructure.value === "CS" || varianceCovarianceMatrixSimpleStructure.value === "CS+CAR" || varianceCovarianceMatrixSimpleStructure.value === "CS*CAR"
-			info:			qsTr("Assumed correlation between sampling errors within clusters (compound symmetry).")
+			title:			qsTr("Compound Symmetry")
+
+			DropDown
+			{
+				name:			"varianceCovarianceMatrixSimpleCompoundSymmetryConstruct"
+				label:			qsTr("Construct")
+				source:			"allVariables"
+				addEmptyValue:	true
+				allowedColumns:	["nominal"]
+				visible:		varianceCovarianceMatrixSimpleStructure.value === "CS*CAR"
+				enabled:		varianceCovarianceMatrixSimpleStructure.value === "CS*CAR"
+				info:			qsTr("Variable identifying the construct, outcome, or endpoint measured by each effect size. Required for compound symmetry times autoregressive structures.")
+			}
+
+			DoubleField
+			{
+				name:			"varianceCovarianceMatrixSimpleCompoundSymmetryWithinClusterCorrelation"
+				label:			qsTr("Within cluster correlation")
+				defaultValue:	0
+				min:			-1
+				max:			1
+				inclusive:		JASP.None
+				info:			qsTr("Assumed correlation between sampling errors within clusters (compound symmetry).")
+			}
 		}
 
 		Group
 		{
-			title:			qsTr("Time")
+			title:			qsTr("Autoregressive")
 			enabled:		varianceCovarianceMatrixSimpleStructure.value === "CAR" || varianceCovarianceMatrixSimpleStructure.value === "CS+CAR" || varianceCovarianceMatrixSimpleStructure.value === "CS*CAR"
 
 			DropDown
 			{
-				name:			"varianceCovarianceMatrixSimpleTimeVariable"
-				label:			qsTr("Variable")
+				name:			"varianceCovarianceMatrixSimpleAutoregressiveTime"
+				label:			qsTr("Time")
 				source:			"allVariables"
 				addEmptyValue:	true
 				allowedColumns:	["scale"]
@@ -121,7 +138,7 @@ Section
 
 			DoubleField
 			{
-				name:			"varianceCovarianceMatrixSimpleTimeLag1Correlation"
+				name:			"varianceCovarianceMatrixSimpleAutoregressiveLag1Correlation"
 				label:			qsTr("Lag 1 correlation")
 				defaultValue:	0
 				min:			-1
