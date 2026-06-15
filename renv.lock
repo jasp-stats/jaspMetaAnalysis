@@ -3953,7 +3953,8 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspBase",
-      "RemoteSha": "244c661b7a4cdcc9aca0aacbf5555881d90c0985",
+      "RemoteRef": "master",
+      "RemoteSha": "209d1787d5c9400601df960535b261029a350b12",
       "Remotes": "jasp-stats/jaspGraphs"
     },
     "jaspGraphs": {
@@ -4028,7 +4029,8 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspSem",
-      "RemoteSha": "b5afe7a878b4a0b72d6281a3357e300cfd9e5d42",
+      "RemoteRef": "master",
+      "RemoteSha": "55c014ba2fcde91f1a7939a51a7e649342f52340",
       "Remotes": "jasp-stats/jaspBase, jasp-stats/jaspGraphs"
     },
     "jaspTools": {
@@ -4809,13 +4811,13 @@
     },
     "metaSEM": {
       "Package": "metaSEM",
-      "Version": "1.5.0",
-      "Source": "Repository",
+      "Version": "1.5.5",
+      "Source": "GitHub",
       "Type": "Package",
       "Title": "Meta-Analysis using Structural Equation Modeling",
-      "Date": "2024-09-26",
+      "Date": "2026-05-02",
       "Depends": [
-        "R (>= 3.4.0)",
+        "R (>= 4.2.0)",
         "OpenMx"
       ],
       "Imports": [
@@ -4840,15 +4842,22 @@
       "Authors@R": "person(given = \"Mike\", family = \"Cheung\", role = c(\"aut\",\"cre\"), email = \"mikewlcheung@nus.edu.sg\", comment = c(ORCID = \"0000-0003-0113-0758\"))",
       "Maintainer": "Mike Cheung <mikewlcheung@nus.edu.sg>",
       "Description": "A collection of functions for conducting meta-analysis using a structural equation modeling (SEM) approach via the 'OpenMx' and 'lavaan' packages. It also implements various procedures to perform meta-analytic structural equation modeling on the correlation and covariance matrices, see Cheung (2015) <doi:10.3389/fpsyg.2014.01521>.",
-      "License": "GPL (>= 2)",
+      "License": "GPL (>=2)",
+      "Encoding": "UTF-8",
       "LazyLoad": "yes",
       "LazyData": "yes",
       "ByteCompile": "yes",
       "URL": "https://github.com/mikewlcheung/metasem",
       "BugReports": "https://github.com/mikewlcheung/metasem/issues",
-      "NeedsCompilation": "no",
-      "Author": "Mike Cheung [aut, cre] (<https://orcid.org/0000-0003-0113-0758>)",
-      "Repository": "CRAN"
+      "RoxygenNote": "8.0.0",
+      "Config/roxygen2/version": "8.0.0",
+      "Author": "Mike Cheung [aut, cre] (ORCID: <https://orcid.org/0000-0003-0113-0758>)",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "mikewlcheung",
+      "RemoteRepo": "metasem",
+      "RemoteRef": "master",
+      "RemoteSha": "9cc232bf7ba70b1a270ac62b8f923b2d6cf757e4"
     },
     "metadat": {
       "Package": "metadat",
@@ -6969,8 +6978,8 @@
     },
     "rlang": {
       "Package": "rlang",
-      "Version": "1.1.7",
-      "Source": "Repository",
+      "Version": "1.2.0.9000",
+      "Source": "GitHub",
       "Title": "Functions for Base Types and Core R and 'Tidyverse' Features",
       "Description": "A toolbox for working with base types, core R features like the condition system, and core 'Tidyverse' features like tidy evaluation.",
       "Authors@R": "c( person(\"Lionel\", \"Henry\", ,\"lionel@posit.co\", c(\"aut\", \"cre\")), person(\"Hadley\", \"Wickham\", ,\"hadley@posit.co\", \"aut\"), person(given = \"mikefc\", email = \"mikefc@coolbutuseless.com\", role = \"cph\", comment = \"Hash implementation based on Mike's xxhashlite\"), person(given = \"Yann\", family = \"Collet\", role = \"cph\", comment = \"Author of the embedded xxHash library\"), person(given = \"Posit, PBC\", role = c(\"cph\", \"fnd\")) )",
@@ -6997,7 +7006,7 @@
         "pkgload",
         "rmarkdown",
         "stats",
-        "testthat (>= 3.2.0)",
+        "testthat (>= 3.3.2)",
         "tibble",
         "usethis",
         "vctrs (>= 0.2.3)",
@@ -7008,15 +7017,20 @@
       ],
       "Encoding": "UTF-8",
       "RoxygenNote": "7.3.3",
+      "Roxygen": "list(markdown = TRUE)",
       "URL": "https://rlang.r-lib.org, https://github.com/r-lib/rlang",
       "BugReports": "https://github.com/r-lib/rlang/issues",
       "Config/build/compilation-database": "true",
       "Config/testthat/edition": "3",
       "Config/Needs/website": "dplyr, tidyverse/tidytemplate",
-      "NeedsCompilation": "yes",
       "Author": "Lionel Henry [aut, cre], Hadley Wickham [aut], mikefc [cph] (Hash implementation based on Mike's xxhashlite), Yann Collet [cph] (Author of the embedded xxHash library), Posit, PBC [cph, fnd]",
       "Maintainer": "Lionel Henry <lionel@posit.co>",
-      "Repository": "CRAN"
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "r-lib",
+      "RemoteRepo": "rlang",
+      "RemoteRef": "main",
+      "RemoteSha": "e9279f49cbd7857e7a58bd3dd447f847f913947c"
     },
     "rmarkdown": {
       "Package": "rmarkdown",

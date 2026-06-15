@@ -46,19 +46,19 @@
 <text x='5.48' y='314.52' style='font-size: 11.38px; fill: #619CFF; font-family: sans;' textLength='53.78px' lengthAdjust='spacingAndGlyphs'>systematic</text>
 <text x='5.48' y='340.69' style='font-size: 11.38px; fill: #619CFF; font-family: sans;' textLength='53.78px' lengthAdjust='spacingAndGlyphs'>systematic</text>
 <text x='5.48' y='366.85' style='font-size: 11.38px; fill: #619CFF; font-family: sans;' textLength='53.78px' lengthAdjust='spacingAndGlyphs'>systematic</text>
-<text x='149.96' y='52.87' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>44</text>
-<text x='149.96' y='79.03' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>55</text>
-<text x='149.96' y='105.20' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>42</text>
-<text x='149.96' y='131.36' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>52</text>
-<text x='149.96' y='157.53' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>13</text>
-<text x='149.96' y='183.69' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>44</text>
-<text x='149.96' y='209.86' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>19</text>
-<text x='149.96' y='236.03' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>13</text>
-<text x='149.96' y='262.19' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>27</text>
-<text x='149.96' y='288.36' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>42</text>
-<text x='149.96' y='314.52' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>18</text>
-<text x='149.96' y='340.69' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>33</text>
-<text x='149.96' y='366.85' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>33</text>
+<text x='210.79' y='52.87' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>44</text>
+<text x='210.79' y='79.03' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>55</text>
+<text x='210.79' y='105.20' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>42</text>
+<text x='210.79' y='131.36' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>52</text>
+<text x='210.79' y='157.53' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>13</text>
+<text x='210.79' y='183.69' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>44</text>
+<text x='210.79' y='209.86' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>19</text>
+<text x='210.79' y='236.03' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>13</text>
+<text x='210.79' y='262.19' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>27</text>
+<text x='210.79' y='288.36' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>42</text>
+<text x='210.79' y='314.52' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>18</text>
+<text x='210.79' y='340.69' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>33</text>
+<text x='210.79' y='366.85' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>33</text>
 <text x='210.79' y='419.19' text-anchor='end' style='font-size: 11.38px; font-weight: bold; font-family: sans;' textLength='91.10px' lengthAdjust='spacingAndGlyphs'>Model Information</text>
 <text x='210.79' y='445.35' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='208.19px' lengthAdjust='spacingAndGlyphs'>Heterogeneity: Q(12) = 152.23, p &lt; 0.001</text>
 <text x='210.79' y='471.52' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='106.94px' lengthAdjust='spacingAndGlyphs'>𝜏  = 0.56 [0.35, 1.05]</text>

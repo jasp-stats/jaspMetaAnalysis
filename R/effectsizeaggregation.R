@@ -282,10 +282,7 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
   jaspResults[["summaryTable"]] <- summaryTable
 
   if (!ready) {
-    summaryTable$addFootnote(gettextf(
-      "Effect sizes were successfully aggregated and added to the dataset for 0 out of %1$i data entries.",
-      nrow(dataset)
-    ))
+    summaryTable$addFootnote(gettext("Effect size aggregation was not run yet."))
     return()
   }
 
@@ -332,14 +329,104 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
     method    = methodLabel
   ))
 
+  uncertaintyColumn <- if (.esaComputeSamplingVariance(options))
+    gettext("sampling variance")
+  else
+    gettext("standard error")
+
+  addedColumns <- if (options[["addClusterSize"]])
+    gettextf("aggregated effect-size, %1$s, and cluster-size", uncertaintyColumn)
+  else
+    gettextf("aggregated effect-size and %1$s", uncertaintyColumn)
+
   summaryTable$addFootnote(gettextf(
-    "%1$i effect sizes were successfully aggregated into %2$i cluster-level estimates and added to the dataset.",
-    nrow(dataset), nrow(aggResult)
+    "%1$i input rows were aggregated into %2$i cluster-level estimates. The %3$s columns were added to the dataset at the first row of each cluster.",
+    nrow(dataset), nrow(aggResult), addedColumns
   ))
+
+  aggregationFootnote <- .esaVarianceCovarianceMatrixFootnote(options)
+  if (!is.null(aggregationFootnote))
+    summaryTable$addFootnote(aggregationFootnote)
 
   # add variance-covariance matrix readiness notes
   for (msg in cached$vcovMessages)
     summaryTable$addFootnote(msg)
+}
+.esaVarianceCovarianceMatrixFootnote <- function(options) {
+
+  if (options[["varianceCovarianceMatrixType"]] == "simple")
+    return(.esaSimpleVarianceCovarianceMatrixFootnote(options))
+
+  if (!.mammVarianceCovarianceMatrixReady(options))
+    return(NULL)
+
+  if (options[["varianceCovarianceMatrixType"]] == "precomputed")
+    return(gettext("Aggregation used the selected precomputed working effect-size variance-covariance matrix."))
+
+  details <- switch(
+    options[["varianceCovarianceMatrixType"]],
+    "correlationMatrix" = c(
+      .mammVarianceCovarianceMatrixVariablePhrase(
+        options[["varianceCovarianceMatrixCorrelationMatrix"]],
+        gettext("correlation matrix variables")
+      ),
+      .mammVarianceCovarianceMatrixClusterPhrases(options)
+    ),
+    "constructsGroupsTimes" = c(
+      .mammVarianceCovarianceMatrixCorrelationPhrase(
+        options,
+        "varianceCovarianceMatrixConstruct",
+        gettext("construct"),
+        "varianceCovarianceMatrixConstructCorrelationMatrix",
+        "varianceCovarianceMatrixConstructCorrelationMatrixValue"
+      ),
+      .mammVarianceCovarianceMatrixCorrelationPhrase(
+        options,
+        "varianceCovarianceMatrixConstructType",
+        gettext("construct type"),
+        "varianceCovarianceMatrixConstructTypeCorrelationMatrix",
+        "varianceCovarianceMatrixConstructTypeCorrelationMatrixValue"
+      ),
+      .mammVarianceCovarianceMatrixTimePhrase(options),
+      .mammVarianceCovarianceMatrixVariablePairPhrase(
+        options[["varianceCovarianceMatrixGroup1"]],
+        gettext("group 1"),
+        options[["varianceCovarianceMatrixGroup2"]],
+        gettext("group 2")
+      ),
+      .mammVarianceCovarianceMatrixVariablePairPhrase(
+        options[["varianceCovarianceMatrixGroupSize1"]],
+        gettext("group size 1"),
+        options[["varianceCovarianceMatrixGroupSize2"]],
+        gettext("group size 2")
+      ),
+      .mammVarianceCovarianceMatrixClusterPhrases(options)
+    )
+  )
+
+  details <- details[details != ""]
+  if (length(details) == 0)
+    return(NULL)
+
+  return(gettextf(
+    "Aggregation used a working effect-size variance-covariance matrix based on %1$s.",
+    .mammVarianceCovarianceMatrixJoin(details)
+  ))
+}
+.esaSimpleVarianceCovarianceMatrixFootnote <- function(options) {
+
+  structure <- options[["varianceCovarianceMatrixSimpleStructure"]]
+  rho       <- .mammVarianceCovarianceMatrixCorrelationValue(options[["varianceCovarianceMatrixSimpleWithinClusterCorrelation"]])
+  phi       <- .mammVarianceCovarianceMatrixCorrelationValue(options[["varianceCovarianceMatrixSimpleTimeLag1Correlation"]])
+  timeVar   <- .mammVarianceCovarianceMatrixVariableNames(options[["varianceCovarianceMatrixSimpleTimeVariable"]])
+
+  return(switch(structure,
+    "ID"     = gettext("Aggregation assumed independent sampling errors within clusters."),
+    "CS"     = gettextf("Aggregation used compound-symmetry sampling-error dependence within clusters with within-cluster correlation %1$s.", rho),
+    "CAR"    = gettextf("Aggregation used autoregressive sampling-error dependence over %1$s with lag-1 correlation %2$s.", timeVar, phi),
+    "CS+CAR" = gettextf("Aggregation used compound-symmetry plus autoregressive sampling-error dependence within clusters with within-cluster correlation %1$s and lag-1 correlation %2$s over %3$s.", rho, phi, timeVar),
+    "CS*CAR" = gettextf("Aggregation used compound-symmetry times autoregressive sampling-error dependence within clusters with within-cluster correlation %1$s and lag-1 correlation %2$s over %3$s.", rho, phi, timeVar)
+  ))
 }
 .esaAddMissingDataFootnote <- function(table, nOmitted) {
 

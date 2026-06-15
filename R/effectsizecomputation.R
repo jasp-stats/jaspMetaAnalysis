@@ -124,12 +124,16 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
     # set the data
     computeSummary$setData(computeSummaryData)
 
-    if (nrow(dataset) == sum(computeSummaryData[["computed"]]))
+    totalComputed <- sum(computeSummaryData[["computed"]])
+
+    if (totalComputed == 0)
+      computeSummary$addFootnote(gettext("Effect size calculation was not run yet."))
+    else if (nrow(dataset) == totalComputed)
       computeSummary$addFootnote(gettext("Effect sizes were successfully computed and added to the dataset for each data entry."))
     else
       computeSummary$addFootnote(gettextf(
         "Effect sizes were successfully computed and added to the dataset for %1$i out of %2$i data entries.",
-        sum(computeSummaryData[["computed"]]),
+        totalComputed,
         nrow(dataset)))
   }
 
