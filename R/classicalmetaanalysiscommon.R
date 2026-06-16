@@ -204,6 +204,16 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   # when updating don't forget to update the '.maMakeMetaforCallText' function! #
   # --------------------------------------------------------------------------- #
 
+  if (nrow(dataset) < 2) {
+    fit <- try(stop("Fewer than two estimates."))
+    attr(fit, "subgroup") <- paste0(subgroupName)
+    attr(fit, "dataset")  <- dataset
+    return(list(
+      fit          = fit,
+      fitClustered = if (options[["clustering"]] != "") fit else NULL
+    ))
+  }
+
   # specify the effect size and outcome
   if (options[["analysis"]] == "metaAnalysis") {
     # specify the univariate input
@@ -300,9 +310,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     rmaInput <- c(rmaInput, .maExtendMetaforCallFromOptions(options))
 
   ### fit the model
-  if (nrow(dataset) < 2) {
-    fit <- try(stop("Fewer than two estimates."))
-  } else if (options[["analysis"]] == "metaAnalysis") {
+  if (options[["analysis"]] == "metaAnalysis") {
     fit <- try(do.call(metafor::rma, rmaInput))
   } else if (options[["analysis"]] == "metaAnalysisMultilevelMultivariate") {
     fit <- try(do.call(metafor::rma.mv, rmaInput))
