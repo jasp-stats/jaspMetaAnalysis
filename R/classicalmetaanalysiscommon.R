@@ -6017,6 +6017,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     return(gettext("Fewer than two estimates."))
   if (grepl("Must specify the 'weights' argument when method=", message))
     return(gettext("The selected 'Method' requires specification of the 'Weights' option in the 'Advanced' section."))
+  if (grepl("Cannot fit ML model", message))
+    return(gettext("The GLMM could not be estimated for the selected model. This can happen with sparse event counts, risk differences, random study effects, or a moderator structure that is too complex for the data. Try simplifying the moderator model, using the fixed study-effects GLMM, changing the effect-size measure if appropriate, or centering/scaling continuous moderators.\n\nMetafor reported: Cannot fit ML model."))
 
   return(message)
 }
