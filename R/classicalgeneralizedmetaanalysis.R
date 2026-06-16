@@ -354,6 +354,9 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
     ))
   }
 
+  waldMissing <- !.maIsFiniteScalar(fit[["QE.Wld"]])
+  lrtMissing  <- !.maIsFiniteScalar(fit[["QE.LRT"]])
+
   rows <- data.frame(
     subgroup = rep(attr(fit, "subgroup"), 2),
     test     = c(
@@ -361,11 +364,14 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
       if (.maIsMetaregression(options)) gettext("Residual heterogeneity (LRT)")  else gettext("Heterogeneity (LRT)")
     ),
     stat = c(
-      sprintf(paste0("Q(%1$i) = ", if (fit[["QE.Wld"]] < 1e5) "%2$.2f" else "%2$.3g"), fit[["QE.df"]], fit[["QE.Wld"]]),
-      sprintf(paste0("Q(%1$i) = ", if (fit[["QE.LRT"]] < 1e5) "%2$.2f" else "%2$.3g"), fit[["QE.df"]], fit[["QE.LRT"]])
+      if (waldMissing) NA_character_ else sprintf(paste0("Q(%1$i) = ", if (fit[["QE.Wld"]] < 1e5) "%2$.2f" else "%2$.3g"), fit[["QE.df"]], fit[["QE.Wld"]]),
+      if (lrtMissing)  NA_character_ else sprintf(paste0("Q(%1$i) = ", if (fit[["QE.LRT"]] < 1e5) "%2$.2f" else "%2$.3g"), fit[["QE.df"]], fit[["QE.LRT"]])
     ),
     pval = c(fit[["QEp.Wld"]], fit[["QEp.LRT"]])
   )
+
+  if (waldMissing || lrtMissing)
+    attr(rows, "footnote") <- gettext("Some GLMM heterogeneity tests could not be computed for this model fit.")
 
   return(rows)
 }

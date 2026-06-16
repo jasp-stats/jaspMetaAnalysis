@@ -780,7 +780,13 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   # add all the overall model test
   tests <- list()
   if (.maIsGLMM(options)) {
-    tests[["heterogeneity"]] <- .maSafeRbind(lapply(fit, .maglmmRowHeterogeneityTest, options = options))
+    tempHeterogeneity <- lapply(fit, .maglmmRowHeterogeneityTest, options = options)
+    tests[["heterogeneity"]] <- .maSafeRbind(tempHeterogeneity)
+
+    tempFootnotes <- unique(lapply(tempHeterogeneity, attr, which = "footnote"))
+    tempFootnotes <- Filter(Negate(is.null), tempFootnotes)
+    for (i in seq_along(tempFootnotes))
+      testsTable$addFootnote(tempFootnotes[[i]])
   } else {
     tests[["heterogeneity"]] <- .maSafeRbind(lapply(fit, .maRowHeterogeneityTest, options = options))
   }
@@ -4825,6 +4831,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     if (is.null(type) || type == "Wald") {
       heterogeneityName <- if (fit[["p"]] > 1) gettext("Residual heterogeneity (Wald)") else gettext("Heterogeneity (Wald)")
+      if (!.maIsFiniteScalar(fit[["QE.Wld"]]))
+        return(gettextf("%1$s: not available", heterogeneityName))
       return(sprintf(
         paste0("%1$s: Q\U2091(%2$i) = ", if (fit[["QE.Wld"]] < 1e5) "%3$.2f" else "%3$.3g", ", %4$s"),
         heterogeneityName,
@@ -4834,6 +4842,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
       ))
     } else if (type == "LRT") {
       heterogeneityName <- if (fit[["p"]] > 1) gettext("Residual heterogeneity (LRT)") else gettext("Heterogeneity (LRT)")
+      if (!.maIsFiniteScalar(fit[["QE.LRT"]]))
+        return(gettextf("%1$s: not available", heterogeneityName))
       return(sprintf(
         paste0("%1$s: Q\U2091(%2$i) = ", if (fit[["QE.LRT"]] < 1e5) "%3$.2f" else "%3$.3g", ", %4$s"),
         heterogeneityName,
@@ -4928,6 +4938,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   } else {
     return(sprintf("p = %.3f", pValue))
   }
+}
+.maIsFiniteScalar                     <- function(x) {
+  return(is.numeric(x) && length(x) == 1 && !is.na(x) && is.finite(x))
 }
 .maPrintEstimateAndInterval           <- function(est, lCi, uCi, digits) {
   return(sprintf(paste0(
