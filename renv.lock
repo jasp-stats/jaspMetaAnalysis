@@ -82,6 +82,22 @@
       "Author": "František Bartoš [aut, cre] (ORCID: <https://orcid.org/0000-0002-0018-5573>)",
       "Repository": "CRAN"
     },
+    "BiasedUrn": {
+      "Package": "BiasedUrn",
+      "Version": "2.0.12",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Biased Urn Model Distributions",
+      "Date": "2024-06-16",
+      "Author": "Agner Fog",
+      "Maintainer": "Agner Fog <agner@agner.org>",
+      "Description": "Statistical models of biased sampling in the form of  univariate and multivariate noncentral hypergeometric distributions,  including Wallenius' noncentral hypergeometric distribution and Fisher's noncentral hypergeometric distribution.  See vignette(\"UrnTheory\") for explanation of these distributions. Literature:  Fog, A. (2008a). Calculation Methods for Wallenius' Noncentral Hypergeometric Distribution, Communications in Statistics, Simulation and Computation, 37(2) <doi:10.1080/03610910701790269>. Fog, A. (2008b). Sampling methods for Wallenius’ and Fisher’s noncentral hypergeometric distributions, Communications in Statistics—Simulation and Computation, 37(2) <doi:10.1080/03610910701790236>.",
+      "License": "GPL-3",
+      "Encoding": "UTF-8",
+      "URL": "https://www.agner.org/random/ https://www.r-project.org/",
+      "NeedsCompilation": "yes",
+      "Repository": "CRAN"
+    },
     "Brobdingnag": {
       "Package": "Brobdingnag",
       "Version": "1.2-9",
@@ -3969,7 +3985,6 @@
       "License": "GPL",
       "Encoding": "UTF-8",
       "LazyData": "true",
-      "RoxygenNote": "7.3.3",
       "Imports": [
         "cli",
         "ggplot2 (>= 3.0.0)",
@@ -3988,12 +4003,13 @@
         "vdiffr"
       ],
       "Roxygen": "list(markdown = TRUE)",
+      "Config/roxygen2/version": "8.0.0",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspGraphs",
       "RemoteRef": "master",
-      "RemoteSha": "cbe943517ac21078d0a502bcfaf8ae5e11756a05"
+      "RemoteSha": "cac753920e984d3628cace64538c00acd3622a58"
     },
     "jaspSem": {
       "Package": "jaspSem",
