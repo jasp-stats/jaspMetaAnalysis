@@ -1428,7 +1428,11 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   estimatedMarginalMeansTable$setData(estimatedMarginalMeans)
 
   # add footnotes
-  estimatedMarginalMeansMessages <- .maEstimatedMarginalMeansMessages(options, parameter, anyNA(sapply(estimatedMarginalMeans[,colnames(estimatedMarginalMeans) %in% c("est", "lCi", "uCi", "lPi", "uPi")], anyNA)))
+  estimatesContainNA <- !is.null(estimatedMarginalMeans) && anyNA(sapply(
+    estimatedMarginalMeans[, colnames(estimatedMarginalMeans) %in% c("est", "lCi", "uCi", "lPi", "uPi"), drop = FALSE],
+    anyNA
+  ))
+  estimatedMarginalMeansMessages <- .maEstimatedMarginalMeansMessages(options, parameter, estimatesContainNA)
   for (i in seq_along(estimatedMarginalMeansMessages))
     estimatedMarginalMeansTable$addFootnote(estimatedMarginalMeansMessages[i])
 
@@ -1688,7 +1692,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   if (length(fit) == 1 && jaspBase::isTryError(fit[[1]]))
     return()
 
-  terms <- do.call(rbind, lapply(fit, .maComputeVifSummary, options = options, parameter = parameter))
+  terms <- .maSafeRbind(lapply(fit, .maComputeVifSummary, options = options, parameter = parameter))
   terms <- .maSafeOrderAndSimplify(terms, "term", options)
 
   termsTable$setData(terms)
@@ -1746,6 +1750,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # table information
   coefDifferenceNames <- setdiff(colnames(diagnosticsTable), c("subgroup", "label", .maCasewiseDiagnosticsNames()))
+  coefDifferenceNames <- if (is.null(coefDifferenceNames)) character(0) else coefDifferenceNames
 
   # prepare table
   .maAddSubgroupColumn(casewiseDiagnosticsTable, options)
@@ -1782,7 +1787,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
 
   # keep influential only
-  if (options[["diagnosticsCasewiseDiagnosticsShowInfluentialOnly"]]) {
+  if (options[["diagnosticsCasewiseDiagnosticsShowInfluentialOnly"]] &&
+      !is.null(diagnosticsTable) &&
+      "inf" %in% colnames(diagnosticsTable)) {
 
     diagnosticsTable <- diagnosticsTable[!is.na(diagnosticsTable[["inf"]]) ,,drop=FALSE]
     diagnosticsTable <- diagnosticsTable[diagnosticsTable[["inf"]] == "Yes",,drop=FALSE]
@@ -5075,9 +5082,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
       return(data.frame(.maComputePooledEffect(x, options, returnRaw = TRUE)))
     }
   })
-  est <- do.call(rbind, est[!sapply(est, is.null)])
+  est <- .maSafeRbind(est)
 
-  if (nrow(est) == 0)
+  if (is.null(est) || nrow(est) < 2)
     return()
 
   subFit <- try(metafor::rma(yi = est[["pred"]], sei = est[["se"]], mods = ~ as.factor(1:nrow(est)), method = "FE"))
@@ -5364,11 +5371,20 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   # the main issue is that some models might be missing coefficients/terms etc
   # as such, simple ordering of the output might misaligned the grouped output
 
+  if (is.null(df) ||
+      length(df) == 0 ||
+      is.null(nrow(df)) ||
+      nrow(df) == 0)
+    return(df)
+
   # drop the grouping column if no subgroups requested
   if (options[["subgroup"]] == "") {
     df <- df[,colnames(df) != "subgroup", drop = FALSE]
     return(df)
   }
+
+  if (!columnName %in% colnames(df))
+    return(df)
 
   # remove rows with NA in the grouping column
   if (anyNA(df[[columnName]])) {
