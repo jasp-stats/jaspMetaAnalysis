@@ -1530,7 +1530,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   fit <- .maExtractFit(jaspResults, options)
 
   # stop on error
-  if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit)) || (.maIsClassical(options) && !is.null(.maCheckIsPossibleOptions(options))))
+  if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) || (.maIsClassical(options) && !is.null(.maCheckIsPossibleOptions(options))))
     return()
 
   # try execute!
@@ -4888,7 +4888,6 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   out <- .maComputePooledHeterogeneityPlot(fit, options, parameter)
 
-  if (is.na(out$lCi) || is.na(out$uCi)) {
     return(sprintf(paste0("%1$s  = ", "%2$.", digits, "f"), out$par, out$est))
   }
 
