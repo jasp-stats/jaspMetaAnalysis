@@ -2836,8 +2836,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
       ddf   = .maExtractDdf(fit)[1],
       ci.lb = fit$ci.lb[1],
       ci.ub = fit$ci.ub[1],
-      pi.lb = fit$beta[1] - 1.96 * sqrt(fit$se[1]^2 + predictedHeterogeneity[1, 2]^2),
-      pi.ub = fit$beta[1] + 1.96 * sqrt(fit$se[1]^2 + predictedHeterogeneity[1, 2]^2)
+      pi.lb = fit$beta[1] - 1.96 * sqrt(fit$se[1]^2 + predictedHeterogeneity[["est"]][1]^2),
+      pi.ub = fit$beta[1] + 1.96 * sqrt(fit$se[1]^2 + predictedHeterogeneity[["est"]][1]^2)
     )
 
   } else {
@@ -3051,9 +3051,6 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     confIntHeterogeneity <- confIntHeterogeneity[heterogeneityShow,,drop = FALSE]
 
   }
-
-  if (!options[["confidenceIntervals"]])
-    confIntHeterogeneity <- confIntHeterogeneity[,c("par", "est")]
 
   return(confIntHeterogeneity)
 }
@@ -4888,6 +4885,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   out <- .maComputePooledHeterogeneityPlot(fit, options, parameter)
 
+  if (!options[["confidenceIntervals"]] || is.na(out$lCi) || is.na(out$uCi)) {
     return(sprintf(paste0("%1$s  = ", "%2$.", digits, "f"), out$par, out$est))
   }
 
