@@ -315,9 +315,6 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
 
   heterogeneity <- heterogeneity[heterogeneityShow, , drop = FALSE]
 
-  if (!options[["confidenceIntervals"]])
-    heterogeneity <- heterogeneity[, c("par", "est")]
-
   return(heterogeneity)
 }
 
