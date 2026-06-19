@@ -1131,6 +1131,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     coefficientsTable$addFootnote(coefficientsTableWarnings[i], symbol = gettext("Warning:"))
   if (parameter == "heterogeneity")
     coefficientsTable$addFootnote(.meMetaregressionHeterogeneityMessages(options))
+  .maAddLowDdfWarning(coefficientsTable, fit, options)
 
   coefficientsTable$setData(estimates)
 
