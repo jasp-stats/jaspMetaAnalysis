@@ -635,7 +635,7 @@ Form
 					title: qsTr("SD Group 1")
 					singleVariable: true
 					allowedColumns:	["scale"]
-					visible: (designValue === "independentGroups" && measurementValue === "quantitative" && (effectSizeValue != "SMD1" && effectSizeValue != "SMDH1")) || 
+					visible: (designValue === "independentGroups" && measurementValue === "quantitative" && (effectSizeValue != "SMD1" && effectSizeValue != "SMD1H")) || 
 						(designValue === "independentGroups" && measurementValue === "mixed" && (effectSizeValue === "D2ORN" || effectSizeValue === "D2ORL")) ||
 						(designValue === "variableAssociation" && measurementValue === "mixed")
 				}

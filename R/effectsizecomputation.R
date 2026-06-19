@@ -198,7 +198,7 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
           pi   = dataset[[variables[["pValue"]]]],
           di   = dataset[[variables[["cohensD"]]]]
         )
-      } else if (effectSize %in% c("SMD1", "SMDH1")) {
+      } else if (effectSize %in% c("SMD1", "SMD1H")) {
         inputs <- list(
           m1i  = dataset[[variables[["meanGroup1"]]]],
           m2i  = dataset[[variables[["meanGroup2"]]]],
@@ -555,7 +555,7 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
           pi   = "P-Value",
           di   = "Cohen's d"
         )
-      } else if (effectSize %in% c("SMD1", "SMDH1")) {
+      } else if (effectSize %in% c("SMD1", "SMD1H")) {
         inputs <- list(
           m1i  = "Mean Group 1",
           m2i  = "Mean Group 2",
@@ -989,7 +989,7 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
           pi   = "pValue",
           di   = "cohensD"
         )
-      } else if (effectSize %in% c("SMD1", "SMDH1")) {
+      } else if (effectSize %in% c("SMD1", "SMD1H")) {
         inputs <- list(
           m1i  = "meanGroup1",
           m2i  = "meanGroup2",
