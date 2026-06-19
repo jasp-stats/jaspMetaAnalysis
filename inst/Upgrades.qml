@@ -384,6 +384,8 @@ Upgrades
 					options["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"] === true;
 			}
 		}
+
+		ChangeRename { from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
 	}
 
 	Upgrade
