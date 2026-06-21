@@ -1530,7 +1530,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   fit <- .maExtractFit(jaspResults, options)
 
   # stop on error
-  if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) || (.maIsClassical(options) && !is.null(.maCheckIsPossibleOptions(options))))
+  if (is.null(fit) || all(vapply(fit, jaspBase::isTryError, logical(1))) || (.maIsClassical(options) && !is.null(.maCheckIsPossibleOptions(options))))
     return()
 
   # try execute!
