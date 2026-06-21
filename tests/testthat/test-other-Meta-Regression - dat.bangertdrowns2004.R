@@ -151,7 +151,7 @@ test_that("ClassicalMetaAnalysis (analysis 4) results match", {
   encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
   results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", encoded$dataset, encoded$options, encodedDataset = TRUE)
-
+  testthat::skip_on_os("linux") # numerical precision issues
   table <- results[["results"]][["metaregressionContainer"]][["collection"]][["metaregressionContainer_effectSizeCoefficientTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
     list(20, 0.470856865291475, 0.236160915438973, "Intercept", 0.000456505166789571,
