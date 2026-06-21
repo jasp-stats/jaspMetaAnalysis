@@ -412,6 +412,53 @@ Upgrades
 					options["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"] === true;
 			}
 		}
+
+		ChangeRename { from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
+	}
+
+	Upgrade
+	{
+		functionName:	"BayesianMetaAnalysis"
+		fromVersion:	"0.95.4"
+		toVersion:		"0.95.5"
+
+		ChangeRename { from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
+	}
+
+	Upgrade
+	{
+		functionName:	"BayesianBinomialMetaAnalysis"
+		fromVersion:	"0.95.4"
+		toVersion:		"0.95.5"
+
+		ChangeRename { from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
+	}
+
+	Upgrade
+	{
+		functionName:	"ClassicalMantelHaenszelPeto"
+		fromVersion:	"0.95.4"
+		toVersion:		"0.95.5"
+
+		ChangeRename { from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
+	}
+
+	Upgrade
+	{
+		functionName:	"ForestPlot"
+		fromVersion:	"0.95.4"
+		toVersion:		"0.95.5"
+
+		ChangeRename { from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
+	}
+
+	Upgrade
+	{
+		functionName:	"RobustBayesianMetaAnalysis"
+		fromVersion:	"0.95.4"
+		toVersion:		"0.95.5"
+
+		ChangeRename { from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
 	}
 }
 
