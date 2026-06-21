@@ -1,0 +1,18 @@
+# Codex CLI MCP server configuration
+# Equivalent of .mcp.json for the Codex CLI
+# Fallback: used when .codex/config.toml is not available
+#
+# Meta-Analysis Knowledge Base: see knowledge-base/ directory
+# and AGENTS.md "Meta-Analysis Knowledge Base" section for navigation instructions
+
+# Reasoning: use high effort for complex module-fixing tasks
+model_reasoning_effort = "high"
+model_reasoning_summary = "concise"
+model_auto_compact_token_limit = 80000
+
+[mcp_servers.r-mcptools]
+command = "Rscript"
+args = ["-e", "source('.claude/mcp-server.R')"]
+startup_timeout_sec = 60
+tool_timeout_sec = 600
+

@@ -1,7 +1,6 @@
 ---
-applyTo:
-  - "**/R/*.R"
-  - "**/inst/qml/*.qml"
+applyTo: "**/R/*.R,**/inst/qml/*.qml"
+description: "QML-Desktop-R reactive loop, jaspResults persistence, options mapping, data flow"
 ---
 
 # JASP Module Architecture

@@ -24,6 +24,9 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
   .escComputeSummaryTable(jaspResults, dataset, options, dataOutput)
   .escExportData(jaspResults, options, dataOutput)
 
+  if (!is.null(options[["showMetaforRCode"]]) && options[["showMetaforRCode"]])
+    .escShowMetaforRCode(jaspResults, dataset, options)
+
   return()
 }
 
@@ -51,13 +54,14 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
 
     # set error message if reported effect sizes cannot be performed
     if (effectSizeType[["design"]] == "reportedEffectSizes" && !.escReportedEffectSizesReady(variables, all = TRUE)) {
-      newDataOutput <- try(stop(gettextf("Cannot compute outcomes. Chech that all of the required information is specified via the appropriate arguments (i.e. an Effect Size and either Standard Error, Sampling Variance, or 95%% Confidence Interval).")))
+      newDataOutput <- try(stop(gettextf("Cannot compute outcomes. Check that all of the required information is specified via the appropriate arguments (i.e. an Effect Size and either Standard Error, Sampling Variance, or 95%% Confidence Interval).")))
     } else {
     # set escalc input
       escalcInput <- c(
         tempDataOptions,
         .escGetEscalcAdjustFrequenciesOptions(effectSizeType, variables),
         .escGetEscalcVtypeOption(effectSizeType, variables),
+        .escGetEscalcCorrectOption(effectSizeType, variables),
         measure     = if (effectSizeType[["design"]] == "reportedEffectSizes") "GEN" else effectSizeType[["effectSize"]],
         replace     = i == 1,
         add.measure = TRUE,
@@ -120,12 +124,16 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
     # set the data
     computeSummary$setData(computeSummaryData)
 
-    if (nrow(dataset) == sum(computeSummaryData[["computed"]]))
-      computeSummary$addFootnote(gettext("Effect sizes were successfully computed for each data entry."))
+    totalComputed <- sum(computeSummaryData[["computed"]])
+
+    if (totalComputed == 0)
+      computeSummary$addFootnote(gettext("Effect size calculation was not run yet."))
+    else if (nrow(dataset) == totalComputed)
+      computeSummary$addFootnote(gettext("Effect sizes were successfully computed and added to the dataset for each data entry."))
     else
       computeSummary$addFootnote(gettextf(
-        "Effect sizes were successfully computed for %1$i out of %2$i data entries.",
-        sum(computeSummaryData[["computed"]]),
+        "Effect sizes were successfully computed and added to the dataset for %1$i out of %2$i data entries.",
+        totalComputed,
         nrow(dataset)))
   }
 
@@ -190,7 +198,7 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
           pi   = dataset[[variables[["pValue"]]]],
           di   = dataset[[variables[["cohensD"]]]]
         )
-      } else if (effectSize %in% c("SMD1", "SMDH1")) {
+      } else if (effectSize %in% c("SMD1", "SMD1H")) {
         inputs <- list(
           m1i  = dataset[[variables[["meanGroup1"]]]],
           m2i  = dataset[[variables[["meanGroup2"]]]],
@@ -402,7 +410,6 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
           ti = dataset[[variables[["tStatistic"]]]],
           mi = dataset[[variables[["predictors"]]]],
           ni = dataset[[variables[["sampleSize"]]]],
-          ti = dataset[[variables[["tStatistic"]]]],
           ri = dataset[[variables[["semipartialCorrelation"]]]],
           pi = dataset[[variables[["pValue"]]]]
         )
@@ -412,7 +419,6 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
           mi  = dataset[[variables[["predictors"]]]],
           ni  = dataset[[variables[["sampleSize"]]]],
           r2i = dataset[[variables[["rSquared"]]]],
-          ti  = dataset[[variables[["tStatistic"]]]],
           ri  = dataset[[variables[["semipartialCorrelation"]]]],
           pi  = dataset[[variables[["pValue"]]]]
         )
@@ -457,6 +463,28 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
 
   return(inputs)
 }
+.escGetEscalcCorrectOption            <- function(effectSizeType, variables) {
+
+  if (!.escSmallSampleCorrectionAvailable(effectSizeType))
+    return(NULL)
+
+  smallSampleCorrection <- variables[["smallSampleCorrection"]]
+  if (is.null(smallSampleCorrection))
+    smallSampleCorrection <- TRUE
+
+  return(list(correct = smallSampleCorrection))
+}
+.escSmallSampleCorrectionAvailable    <- function(effectSizeType) {
+
+  design      <- effectSizeType[["design"]]
+  measurement <- effectSizeType[["measurement"]]
+  effectSize  <- effectSizeType[["effectSize"]]
+
+  return(
+    (design == "independentGroups" && measurement == "quantitative" && effectSize %in% c("SMD", "SMDH", "SMD1", "SMD1H")) ||
+      (design == "repeatedMeasures" && measurement == "quantitative" && effectSize %in% c("SMCC", "SMCR", "SMCRH", "SMCRP", "SMCRPH"))
+  )
+}
 .escGetEscalcAdjustFrequenciesOptions <- function(effectSizeType, variables) {
 
   design      <- effectSizeType[["design"]]
@@ -498,7 +526,7 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
   # Conditions for when vtype is appropriate
   if ((design == "independentGroups"   && measurement == "quantitative" && effectSize %in% c("MD", "SMD", "SMD1", "ROM")) ||
       (design == "variableAssociation" && measurement == "quantitative") ||
-      (design == "variableAssociation" && measurement == "binary" && effectSize %in% c("PHI", "ZHI")) ||
+      (design == "variableAssociation" && measurement == "binary" && effectSize %in% c("PHI", "ZPHI")) ||
       (design == "variableAssociation" && measurement == "mixed" && effectSize %in% c("RPB", "ZPB")) ||
       (design == "other" && measurement == "modelFit") &&
       variables[["samplingVarianceType"]] != "mixed") {
@@ -527,7 +555,7 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
           pi   = "P-Value",
           di   = "Cohen's d"
         )
-      } else if (effectSize %in% c("SMD1", "SMDH1")) {
+      } else if (effectSize %in% c("SMD1", "SMD1H")) {
         inputs <- list(
           m1i  = "Mean Group 1",
           m2i  = "Mean Group 2",
@@ -843,6 +871,381 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
     return((effectSizeReady + varianceMeasureReady) >= 1)
   }
 }
+.escShowMetaforRCode                  <- function(jaspResults, dataset, options) {
+
+  if (!is.null(jaspResults[["metaforRCode"]]))
+    return()
+
+  callText <- .escMakeMetaforCallText(dataset, options)
+  if (callText == "")
+    return()
+
+  metaforRCode <- createJaspHtml(title = gettext("Metafor R Code"))
+  metaforRCode$dependOn(c("effectSizeType", "variables", "showMetaforRCode"))
+  metaforRCode$position <- 99
+  metaforRCode$text <- .maTransformToHtml(callText)
+
+  jaspResults[["metaforRCode"]] <- metaforRCode
+
+  return()
+}
+.escMakeMetaforCallText               <- function(dataset, options) {
+
+  callText <- c()
+  dataName <- "dataset"
+
+  for (i in seq_along(options[["variables"]])) {
+
+    effectSizeType <- options[["effectSizeType"]][[i]]
+    variables      <- options[["variables"]][[i]]
+
+    if (effectSizeType[["design"]] == "reportedEffectSizes" && !.escReportedEffectSizesReady(variables, all = FALSE))
+      next
+
+    callDataOptions <- .escGetEscalcCallDataOptions(effectSizeType, variables)
+    if (length(callDataOptions) == 0)
+      next
+
+    escalcInput <- c(
+      callDataOptions,
+      .escGetEscalcCallAdjustFrequenciesOptions(effectSizeType, variables),
+      .escGetEscalcCallVtypeOption(effectSizeType, variables),
+      .escGetEscalcCorrectOption(effectSizeType, variables),
+      measure     = .escQuoteRString(if (effectSizeType[["design"]] == "reportedEffectSizes") "GEN" else effectSizeType[["effectSize"]]),
+      replace     = i == 1,
+      add.measure = TRUE,
+      data        = dataName
+    )
+
+    callText <- c(
+      callText,
+      paste0(
+        "dataset <- escalc(\n\t",
+        paste(names(escalcInput), "=", escalcInput, collapse = ",\n\t"),
+        "\n)"
+      )
+    )
+
+    dataName <- "dataset"
+  }
+
+  return(paste(callText, collapse = "\n\n"))
+}
+.escGetEscalcCallDataOptions          <- function(effectSizeType, variables) {
+
+  inputMapping <- .escMapEscalcInput2VariableInputs(effectSizeType)
+
+  if (length(inputMapping) == 0)
+    return(NULL)
+
+  inputs <- list()
+  for (inputName in names(inputMapping)) {
+    variableName  <- inputMapping[[inputName]]
+    variableValue <- variables[[variableName]]
+    if (!is.null(variableValue) && length(variableValue) == 1 && variableValue != "")
+      inputs[[inputName]] <- .escAsRName(variableValue)
+  }
+
+  if (effectSizeType[["design"]] == "reportedEffectSizes" && length(variables[["confidenceInterval"]]) != 0) {
+    inputs[["lci"]] <- .escAsRName(variables[["confidenceInterval"]][[1]][1])
+    inputs[["uci"]] <- .escAsRName(variables[["confidenceInterval"]][[1]][2])
+  }
+
+  return(inputs)
+}
+.escGetEscalcCallAdjustFrequenciesOptions <- function(effectSizeType, variables) {
+
+  adjustOptions <- .escGetEscalcAdjustFrequenciesOptions(effectSizeType, variables)
+  if (!is.null(adjustOptions))
+    adjustOptions[["to"]] <- .escQuoteRString(adjustOptions[["to"]])
+
+  return(adjustOptions)
+}
+.escGetEscalcCallVtypeOption          <- function(effectSizeType, variables) {
+
+  vtypeOption <- .escGetEscalcVtypeOption(effectSizeType, variables)
+  if (!is.null(vtypeOption))
+    vtypeOption[["vtype"]] <- .escQuoteRString(vtypeOption[["vtype"]])
+
+  return(vtypeOption)
+}
+.escMapEscalcInput2VariableInputs     <- function(effectSizeType) {
+
+  design      <- effectSizeType[["design"]]
+  measurement <- effectSizeType[["measurement"]]
+  effectSize  <- effectSizeType[["effectSize"]]
+
+  if (design == "independentGroups") {
+    if (measurement == "quantitative") {
+      if (effectSize == "SMD") {
+        inputs <- list(
+          m1i  = "meanGroup1",
+          m2i  = "meanGroup2",
+          sd1i = "sdGroup1",
+          sd2i = "sdGroup2",
+          n1i  = "sampleSizeGroup1",
+          n2i  = "sampleSizeGroup2",
+          ti   = "tStatistic",
+          pi   = "pValue",
+          di   = "cohensD"
+        )
+      } else if (effectSize %in% c("SMD1", "SMD1H")) {
+        inputs <- list(
+          m1i  = "meanGroup1",
+          m2i  = "meanGroup2",
+          sd2i = "sdGroup2",
+          n1i  = "sampleSizeGroup1",
+          n2i  = "sampleSizeGroup2"
+        )
+      } else if (effectSize %in% c("CVR", "VR")) {
+        inputs <- list(
+          sd1i = "sdGroup1",
+          sd2i = "sdGroup2",
+          n1i  = "sampleSizeGroup1",
+          n2i  = "sampleSizeGroup2"
+        )
+      } else {
+        inputs <- list(
+          m1i  = "meanGroup1",
+          m2i  = "meanGroup2",
+          sd1i = "sdGroup1",
+          sd2i = "sdGroup2",
+          n1i  = "sampleSizeGroup1",
+          n2i  = "sampleSizeGroup2"
+        )
+      }
+    } else if (measurement == "binary") {
+      inputs <- list(
+        ai  = "group1OutcomePlus",
+        bi  = "group1OutcomeMinus",
+        ci  = "group2OutcomePlus",
+        di  = "group2OutcomeMinus",
+        n1i = "sampleSizeGroup1",
+        n2i = "sampleSizeGroup2"
+      )
+    } else if (measurement == "countsPerTime") {
+      inputs <- list(
+        t1i = "personTimeGroup1",
+        t2i = "personTimeGroup2",
+        x1i = "eventsGroup1",
+        x2i = "eventsGroup2"
+      )
+    } else if (measurement == "mixed") {
+      if (effectSize %in% c("D2ORN", "D2ORL")) {
+        inputs <- list(
+          m1i  = "meanGroup1",
+          m2i  = "meanGroup2",
+          sd1i = "sdGroup1",
+          sd2i = "sdGroup2",
+          n1i  = "sampleSizeGroup1",
+          n2i  = "sampleSizeGroup2",
+          ti   = "tStatistic",
+          pi   = "pValue",
+          di   = "cohensD"
+        )
+      } else if (effectSize %in% c("PBIT", "OR2DN", "OR2DL")) {
+        inputs <- list(
+          ai  = "group1OutcomePlus",
+          bi  = "group1OutcomeMinus",
+          ci  = "group2OutcomePlus",
+          di  = "group2OutcomeMinus",
+          n1i = "sampleSizeGroup1",
+          n2i = "sampleSizeGroup2"
+        )
+      }
+    }
+  } else if (design == "variableAssociation") {
+    if (measurement == "quantitative") {
+      inputs <- list(
+        ri = "correlation",
+        ni = "sampleSize",
+        ti = "tStatistic",
+        pi = "pValue"
+      )
+    } else if (measurement == "binary") {
+      if (effectSize %in% c("OR", "YUQ", "YUY", "RTET", "ZTET")) {
+        inputs <- list(
+          ai  = "outcomePlusPlus",
+          bi  = "outcomePlusMinus",
+          ci  = "outcomeMinusPlus",
+          di  = "outcomeMinusMinus",
+          n1i = "outcomePlusPlusAndPlusMinus",
+          n2i = "outcomeMinusPlusAndMinusMinus"
+        )
+      } else if (effectSize %in% c("PHI", "ZPHI")) {
+        inputs <- list(
+          ai    = "outcomePlusPlus",
+          bi    = "outcomePlusMinus",
+          ci    = "outcomeMinusPlus",
+          di    = "outcomeMinusMinus",
+          n1i   = "outcomePlusPlusAndPlusMinus",
+          n2i   = "outcomeMinusPlusAndMinusMinus",
+          vtype = "samplingVarianceTypeMixed"
+        )
+      }
+    } else if (measurement == "mixed") {
+      if (effectSize %in% c("RBIS", "ZBIS")) {
+        inputs <- list(
+          m1i  = "meanGroup1",
+          m2i  = "meanGroup2",
+          sd1i = "sdGroup1",
+          sd2i = "sdGroup2",
+          n1i  = "sampleSizeGroup1",
+          n2i  = "sampleSizeGroup2",
+          ti   = "tStatistic",
+          pi   = "pValue",
+          di   = "cohensD"
+        )
+      } else if (effectSize %in% c("RPB", "ZPB")) {
+        inputs <- list(
+          m1i   = "meanGroup1",
+          m2i   = "meanGroup2",
+          sd1i  = "sdGroup1",
+          sd2i  = "sdGroup2",
+          n1i   = "sampleSizeGroup1",
+          n2i   = "sampleSizeGroup2",
+          ti    = "tStatistic",
+          pi    = "pValue",
+          di    = "cohensD",
+          vtype = "samplingVarianceTypeMixed"
+        )
+      }
+    }
+  } else if (design == "singleGroup") {
+    if (measurement == "quantitative") {
+      if (effectSize %in% c("MN", "SMN", "MNLN", "CVLN")) {
+        inputs <- list(
+          mi  = "mean",
+          sdi = "sd",
+          ni  = "sampleSize"
+        )
+      } else if (effectSize == "SDLN") {
+        inputs <- list(
+          sdi = "sd",
+          ni  = "sampleSize"
+        )
+      }
+    } else if (measurement == "binary") {
+      inputs <- list(
+        xi = "events",
+        mi = "nonEvents",
+        ni = "sampleSize"
+      )
+    } else if (measurement == "countsPerTime") {
+      inputs <- list(
+        xi = "events",
+        ti = "personTime",
+        ni = "sampleSize"
+      )
+    }
+  } else if (design == "repeatedMeasures") {
+    if (measurement == "quantitative") {
+      if (effectSize %in% c("MC", "SMCR", "SMCRH", "SMCRP", "SMCRPH", "ROMC")) {
+        inputs <- list(
+          m1i  = "meanTime1",
+          m2i  = "meanTime2",
+          sd1i = "sdTime1",
+          sd2i = "sdTime2",
+          ni   = "sampleSize",
+          ri   = "correlation"
+        )
+      } else if (effectSize == "SMCC") {
+        inputs <- list(
+          m1i  = "meanTime1",
+          m2i  = "meanTime2",
+          sd1i = "sdTime1",
+          sd2i = "sdTime2",
+          ni   = "sampleSize",
+          ri   = "correlation",
+          ti   = "tStatistic",
+          pi   = "pValue",
+          di   = "cohensD"
+        )
+      } else if (effectSize %in% c("CVRC", "VRC")) {
+        inputs <- list(
+          sd1i = "sdTime1",
+          sd2i = "sdTime2",
+          ni   = "sampleSize",
+          ri   = "correlation"
+        )
+      }
+    } else if (measurement == "binary") {
+      inputs <- list(
+        ai = "outcomePlusPlus",
+        bi = "outcomePlusMinus",
+        ci = "outcomeMinusPlus",
+        di = "outcomeMinusMinus"
+      )
+    } else if (measurement == "binaryMarginal") {
+      inputs <- list(
+        ai = "time1OutcomePlus",
+        bi = "time1OutcomeMinus",
+        ci = "time2OutcomePlus",
+        di = "time2OutcomeMinus",
+        ri = "correlation",
+        pi = "proportionPlusPlus"
+      )
+    }
+  } else if (design == "other") {
+    if (measurement == "reliability") {
+      inputs <- list(
+        ai = "coefficientAlpha",
+        mi = "items",
+        ni = "sampleSize"
+      )
+    } else if (measurement == "partialCorrelation") {
+      if (effectSize %in% c("PCOR", "ZPCOR")) {
+        inputs <- list(
+          ti = "tStatistic",
+          mi = "predictors",
+          ni = "sampleSize",
+          ri = "semipartialCorrelation",
+          pi = "pValue"
+        )
+      } else if (effectSize %in% c("SPCOR", "ZSPCOR")) {
+        inputs <- list(
+          ti  = "tStatistic",
+          mi  = "predictors",
+          ni  = "sampleSize",
+          r2i = "rSquared",
+          ri  = "semipartialCorrelation",
+          pi  = "pValue"
+        )
+      }
+    } else if (measurement == "modelFit") {
+      inputs <- list(
+        mi  = "predictors",
+        ni  = "sampleSize",
+        r2i = "rSquared",
+        fi  = "fStatistic",
+        pi  = "pValue"
+      )
+    } else if (measurement == "heterozygosity") {
+      inputs <- list(
+        ai = "homozygousDominantAlleles",
+        bi = "heterozygousAlleles",
+        ci = "homozygousRecessiveAlleles"
+      )
+    }
+  } else if (design == "reportedEffectSizes") {
+    inputs <- list(
+      yi  = "effectSize",
+      sei = "standardError",
+      vi  = "samplingVariance"
+    )
+  }
+
+  if (!exists("inputs"))
+    inputs <- list()
+
+  return(inputs)
+}
+.escAsRName                           <- function(name) {
+  return(deparse(as.name(name), width.cutoff = 500))
+}
+.escQuoteRString                      <- function(value) {
+  return(paste0("'", gsub("'", "\\\\'", value), "'"))
+}
 .escVariableInputs                    <- c(
   "group1OutcomePlus",
   "time1OutcomePlus",
@@ -896,5 +1299,6 @@ EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
   "standardError",
   "samplingVariance",
   "samplingVarianceTypeMixed",
+  "smallSampleCorrection",
   "subset", "subsetLevel"
 )

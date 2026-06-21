@@ -1,5 +1,6 @@
 ---
 applyTo: "**/R/*.R"
+description: "Container patterns, HTML output, and error handling in jaspResults"
 ---
 
 # JASP Containers, HTML Output & Error Handling

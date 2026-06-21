@@ -86,7 +86,7 @@ PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   if (options[["effectSizeSe"]] != "")
     .hasErrors(dataset               = dataset,
                type                  = c("negativeValues"),
-               negativeValues.target = options[["inputSE"]],
+               negativeValues.target = options[["effectSizeSe"]],
                exitAnalysisIfErrors  = TRUE)
 
   return(dataset)

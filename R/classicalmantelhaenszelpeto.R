@@ -62,8 +62,8 @@ ClassicalMantelHaenszelPeto <- function(jaspResults, dataset = NULL, options, ..
   # switch between frequencies / events
   if (options[["method"]] %in% c("mantelHaenszelFrequencies", "peto")) {
     omitOnVariables <- c(
-      options[["successesGroup1"]],
-      options[["successesGroup2"]],
+      options[["eventsGroup1"]],
+      options[["eventsGroup2"]],
       options[["sampleSizeGroup1"]],
       options[["sampleSizeGroup2"]],
       if (options[["subgroup"]] != "") options[["subgroup"]]
@@ -92,8 +92,8 @@ ClassicalMantelHaenszelPeto <- function(jaspResults, dataset = NULL, options, ..
   # switch between frequencies / events
   if (options[["method"]] %in% c("mantelHaenszelFrequencies", "peto")) {
     variables <- c(
-      options[["successesGroup1"]],
-      options[["successesGroup2"]],
+      options[["eventsGroup1"]],
+      options[["eventsGroup2"]],
       options[["sampleSizeGroup1"]],
       options[["sampleSizeGroup2"]],
       if (options[["subgroup"]] != "") options[["subgroup"]]
@@ -131,8 +131,8 @@ ClassicalMantelHaenszelPeto <- function(jaspResults, dataset = NULL, options, ..
   # specify the effect size and outcome
   if (options[["method"]] %in% c("mantelHaenszelFrequencies", "peto")) {
     rmaInput <- list(
-      ai   = as.name(options[["successesGroup1"]]),
-      ci   = as.name(options[["successesGroup2"]]),
+      ai   = as.name(options[["eventsGroup1"]]),
+      ci   = as.name(options[["eventsGroup2"]]),
       n1i  = as.name(options[["sampleSizeGroup1"]]),
       n2i  = as.name(options[["sampleSizeGroup2"]]),
       data = dataset
@@ -296,8 +296,8 @@ ClassicalMantelHaenszelPeto <- function(jaspResults, dataset = NULL, options, ..
   # specify the effect size and outcome
   if (options[["method"]] %in% c("mantelHaenszelFrequencies", "peto")) {
     rmaInput <- list(
-      ai   = as.name(options[["successesGroup1"]]),
-      ci   = as.name(options[["successesGroup2"]]),
+      ai   = as.name(options[["eventsGroup1"]]),
+      ci   = as.name(options[["eventsGroup2"]]),
       n1i  = as.name(options[["sampleSizeGroup1"]]),
       n2i  = as.name(options[["sampleSizeGroup2"]]),
       data = as.name("dataset")

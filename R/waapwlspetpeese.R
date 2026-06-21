@@ -388,7 +388,7 @@
     ))
     estimatesMean$position <- 1
     estimates$dependOn("inferenceMeanEstimatesTable")
-    estimates[["estimatesMean"]] <- estimatesMean
+    estimates[["mean"]] <- estimatesMean
     estimatesMean <- .wwppFillEstimates(jaspResults, estimatesMean, models, options, type)
   }
 

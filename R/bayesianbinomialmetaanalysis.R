@@ -23,7 +23,6 @@ BayesianBinomialMetaAnalysis <- function(jaspResults, dataset, options, state = 
   options[["effectSizeMeasure"]]         <- "logOR"
   options[["publicationBiasAdjustment"]] <- "none"
 
-
   if (.maReady(options)) {
     dataset <- .bibmaCheckData(dataset, options)
     .bibmaCheckErrors(dataset, options)

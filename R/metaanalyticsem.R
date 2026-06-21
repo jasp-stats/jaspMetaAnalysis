@@ -642,7 +642,13 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
     }
   }
 
-  out <- do.call(rbind, out)
+  out <- .maSafeRbind(out)
+
+  if (is.null(out)) {
+    pairwiseModelComparison$addFootnote(gettext("No pairwise model comparison with at least one degree of freedom difference available."))
+    return()
+  }
+
   out <- out[out[["difDf"]] > 0,,drop=FALSE]
 
   if (nrow(out) == 0)

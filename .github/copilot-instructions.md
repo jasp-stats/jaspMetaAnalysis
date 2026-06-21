@@ -13,11 +13,11 @@ For comprehensive guidance on specific topics, see:
 - **[Module Architecture](.github/instructions/jasp-module-architecture.instructions.md)** - **Start here.** QML-Desktop-R reactive loop, jaspResults persistence, options mapping, data flow
 - **[Dependency Management](.github/instructions/jasp-dependency-management.instructions.md)** - $dependOn mechanics, inheritance, vectors, per-value deps, sentinel pattern
 - **[State Management](.github/instructions/jasp-state-management.instructions.md)** - createJaspState caching, model fit patterns, metadata state, dynamic containers
-- **[R Backend Development](.github/instructions/r-instructions.md)** - R function structure, validation, style conventions
+- **[R Backend Development](.github/instructions/R.instructions.md)** - R function structure, validation, style conventions
 - **[Tables](.github/instructions/jasp-tables.instructions.md)** - Table lifecycle, columns, rows, footnotes, error display
 - **[Plots](.github/instructions/jasp-plots.instructions.md)** - Plot lifecycle, composite plots, subgroup/facet patterns
 - **[Containers & Errors](.github/instructions/jasp-containers-and-errors.instructions.md)** - Container patterns, HTML output, error handling
-- **[QML Interface Development](.github/instructions/qml-instructions.md)** - QML controls, validation, bindings, and UI patterns
+- **[QML Interface Development](.github/instructions/inst.qml.instructions.md)** - QML controls, validation, bindings, and UI patterns
 - **[Testing & Test Writing](.github/instructions/testing.instructions.md)** - Test framework, snapshots, and test workflow
 - **[Translation (i18n)](.github/instructions/translation.instructions.md)** - gettext/gettextf/qsTr usage, formatting, plurals
 - **[Output Structure](.github/instructions/jasp-output-structure.instructions.md)** - Reading/testing serialized output (containers, tables, plots, state)
@@ -31,10 +31,12 @@ This project uses the `btw` MCP server (`.claude/mcp-server.R`) to provide a per
 
 ### Available MCP Tools
 
-Use these R-specific tools instead of Bash when possible:
+These are MCP tools — invoke them directly as tool calls, not as R functions or shell commands:
 
 | Tool | Use for |
 |------|---------|
+| `list_r_sessions` | Discover available R sessions (call first) |
+| `select_r_session` | Connect to a session from the list |
 | `btw_tool_run_r` | Execute R code in persistent session (variables persist between calls) |
 | `btw_tool_docs_help_page` | Look up R function documentation |
 | `btw_tool_docs_package_news` | Check package changelogs |
@@ -45,7 +47,7 @@ Use these R-specific tools instead of Bash when possible:
 | `btw_tool_session_platform_info` | Check R version and platform |
 | `btw_tool_session_check_package_installed` | Verify package availability |
 
-**Use Copilot Code native tools** (Read, Edit, Write, Glob, Grep, Bash) for file editing, git operations, and file search -- they are faster than MCP equivalents.
+**Use native tools** (Read, Edit, Write, Glob, Grep, Bash) for file editing, git operations, and file search -- they are faster than MCP equivalents.
 
 ## Working Effectively
 
@@ -68,20 +70,48 @@ This restores dependencies, installs the module, configures jaspTools, and regis
 
 Run via `btw_tool_run_r` in the persistent session:
 
-```r
-# Full test suite (300+ sec, NEVER CANCEL)
-testAll()
+**Agent-optimized** (preferred -- compact output, returns queryable result object):
 
-# Specific analysis tests (for quick iteration)
+```r
+# Full test suite -- returns rich S3 result object
+x <- agentTestAll()
+
+# Specific analysis tests
+x <- agentTestAnalysis("AnalysisName")
+```
+
+These return a `jaspAgentTestResults` object. Console output is a compact one-line summary:
+```
+== Test Results == FAIL: 0 | WARN: 0 | SKIP: 2 | PASS: 72 | Time: 3.6s
+```
+
+Query the result object directly:
+```r
+x$status        # 0 = all passed, 1 = failures
+x$summary       # list(fail, warn, skip, pass, time)
+x$failures      # data.frame: module | file | test | message
+x$warnings      # data.frame: module | file | test | message
+x$skips         # data.frame: module | file | test | reason
+x$tests         # data.frame: all tests with module | file | context | test | passed | failed | ...
+x$errorModules  # named character vector of module-level errors
+x$logFile       # path to detailed JSON log (with backtraces)
+```
+
+**Human-oriented** (verbose output, for interactive use):
+```r
+testAll()
 testAnalysis("AnalysisName")
 ```
 
-- `testAll()` at session start to verify baseline, and after all fixes to check regressions
-- `testAnalysis("Name")` for quick iteration while fixing specific analyses
+**Rules:**
+- Tests take 300+ seconds to complete -- **NEVER CANCEL**
+- Run `agentTestAll()` at session start to verify baseline, and after all fixes
+- Use `agentTestAnalysis("Name")` for quick iteration on specific analyses
 - Analysis names are PascalCase exports from NAMESPACE
-- Some tests may skip on certain platforms (e.g., Windows) -- this is expected
+- Some tests skip on certain platforms (e.g., Windows) -- expected
+- Some stderr noise (ggplot messages, tryCatch errors) may leak through -- expected and minor
 
-**See [testing-instructions.md](.github/instructions/testing-instructions.md) for detailed test writing guidelines, snapshots, and workflows.**
+**See [testing.instructions.md](.github/instructions/testing.instructions.md) for detailed test writing guidelines, snapshots, and workflows.**
 
 ### Running a Specific Analysis
 
@@ -90,7 +120,7 @@ testAnalysis("AnalysisName")
 options <- jaspTools::analysisOptions("AnalysisName")
 options$someOption <- value
 set.seed(1)
-results <- jaspTools::runAnalysis("AnalysisName", "debug.csv", options)
+results <- jaspTools::runAnalysis("AnalysisName", "debug.csv", options, view = FALSE)
 ```
 
 **From a .jasp example file:**
@@ -100,7 +130,7 @@ opts     <- jaspTools::analysisOptions(jaspFile)
 dataset  <- jaspTools::extractDatasetFromJASPFile(jaspFile)
 encoded  <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
 set.seed(1)
-results  <- jaspTools::runAnalysis("AnalysisName", encoded$dataset, encoded$options, encodedDataset = TRUE)
+results  <- jaspTools::runAnalysis("AnalysisName", encoded$dataset, encoded$options, encodedDataset = TRUE, view = FALSE)
 ```
 
 The encoding step is required because JASP internally encodes variable names and options to resolve ambiguities (e.g., same variable used with different types).
@@ -108,6 +138,8 @@ The encoding step is required because JASP internally encodes variable names and
 **From a user-provided .jasp file:** Use the same pattern above. This is the primary way to reproduce bugs reported by users.
 
 ### Inspecting Results
+
+Always set `view = FALSE` when running `runAnalysis()` manually. This avoids HTML generation; inspect the returned R object instead.
 
 After `runAnalysis()`, check:
 - `results$status` -- `"complete"` or `"fatalError"`
@@ -160,7 +192,7 @@ After `runAnalysis()`, check:
 - Use existing QML files as examples for structure and style
 - Add default values to unit tests when adding new QML options
 
-**See [qml-instructions.md](.github/instructions/qml-instructions.md) for comprehensive QML controls reference, validation patterns, and UI conventions.**
+**See [inst.qml.instructions.md](.github/instructions/inst.qml.instructions.md) for comprehensive QML controls reference, validation patterns, and UI conventions.**
 
 ### R Backend Rules
 - R functions in `R/` directory called by analyses in `inst/Descriptions/`
@@ -169,7 +201,7 @@ After `runAnalysis()`, check:
 - Access `options` list via `options[["name"]]` notation to avoid partial matching
 - Follow CRAN guidelines for code structure and documentation
 
-**See [r-instructions.md](.github/instructions/r-instructions.md) for complete R function structure, jaspResults API, output components (tables/plots/containers/state), and coding conventions.**
+**See [R.instructions.md](.github/instructions/R.instructions.md) for complete R function structure, jaspResults API, output components (tables/plots/containers/state), and coding conventions.**
 
 ### Input Validation and Error Handling
 - **TARGETED VALIDATION ONLY**: Since `options` are validated in the GUI, R functions should NOT check user input validity except for specific cases
@@ -190,7 +222,32 @@ After `runAnalysis()`, check:
 - Use UTF-8 encoding for non-ASCII characters: `\u03B2` for beta
 - Double `%` characters in format strings: `gettextf("%s%% CI for Mean")`
 
-**See [translation-instructions.md](.github/instructions/translation-instructions.md) for comprehensive i18n guidelines including QML qsTr(), R gettext/gettextf/ngettext, formatting rules, and Weblate workflow.**
+**See [translation.instructions.md](.github/instructions/translation.instructions.md) for comprehensive i18n guidelines including QML qsTr(), R gettext/gettextf/ngettext, formatting rules, and Weblate workflow.**
+
+## Meta-Analysis Knowledge Base
+
+This module ships a comprehensive knowledge base at `knowledge-base/` built by analyzing all ~200 R packages from the [CRAN Task View for Meta-Analysis](https://cran.r-project.org/web/views/MetaAnalysis.html). Use it as reference when implementing or improving meta-analysis features.
+
+### How to Navigate
+
+| Goal | Action |
+|------|--------|
+| **Find a feature by name** | Search `knowledge-base/_feature_lookup.json` for the name → note the `c` (category) field → search `knowledge-base/categories/<category>.json` for the feature |
+| **Explore a domain** | Read `knowledge-base/_master_index.json` (~38K tok) → read `knowledge-base/categories/<name>.toc.json` (5-48K) → search full `categories/<name>.json` for specifics |
+| **Research a package** | Read `knowledge-base/packages/profiles/<pkg>.md` (1-5K, quick summary) → for full detail, read `knowledge-base/packages/raw/<pkg>/knowledge.json` |
+| **Check integrations** | Read `knowledge-base/integrations/by-package/<pkg>.json` |
+| **Find feature gaps** | Read `knowledge-base/_gap_analysis.md` (~29K tok) for prioritized feature list |
+
+### Key Stats
+- 196 packages analyzed, 2,989 features, 5,511 implementations
+- 16 feature categories: model-fitting, data-preparation, diagnostics-influence, publication-bias, forest-plot, visualization-other, heterogeneity, prediction-ci, model-comparison, meta-regression, network-ma, bayesian, summary-print, reporting, utility, significance-values
+
+### When to Use
+- Implementing new statistical methods → check what approaches exist across packages
+- Adding new analyses → find best-practice patterns and established APIs
+- Writing effect size computations → check `data-preparation` category
+- Forest/funnel plot enhancements → check `forest-plot` and `publication-bias` categories
+- Bayesian methods → check `bayesian` category for prior/MCMC/posterior patterns
 
 ## CI/CD Pipeline
 - GitHub Actions in `.github/workflows/unittests.yml` runs on every push
@@ -211,7 +268,7 @@ After `runAnalysis()`, check:
 2. Add QML interface in `inst/qml/`
 3. Define analysis in `inst/Description.qml`
 4. Add unit tests in `tests/testthat/`
-5. Run `testAll()` to validate (300+ seconds, NEVER CANCEL)
+5. Run `agentTestAll()` to validate (300+ seconds, NEVER CANCEL)
 
 ### Modifying Existing Analysis
 
@@ -219,7 +276,7 @@ After `runAnalysis()`, check:
 2. Update QML if adding/changing options
 3. Update unit tests and expected results
 4. Add upgrade mapping to `inst/Upgrades.qml` if renaming options
-5. Run tests: `testAll()` (NEVER CANCEL, 300+ seconds)
+5. Run tests: `agentTestAll()` (NEVER CANCEL, 300+ seconds)
 
 ### Detailed Development Process
 - **Step 1**: Create main analysis function with `jaspResults`, `dataset`, `options` arguments

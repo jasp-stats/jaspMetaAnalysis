@@ -85,7 +85,6 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   }
   if (options[["diagnosticsCasewiseDiagnostics"]]) {
     .maCasewiseDiagnosticsTable(jaspResults, options)
-    .maCasewiseDiagnosticsExportColumns(jaspResults, dataset, options)
   }
   if (options[["diagnosticsPlotsProfileLikelihood"]])
     .maProfileLikelihoodPlot(jaspResults, options)
@@ -94,13 +93,23 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   if (options[["diagnosticsResidualFunnel"]])
     .maResidualFunnelPlot(jaspResults, options)
 
+  # export
+  .maExportColumns(jaspResults, dataset, options)
+
   # additional
-  if (options[["showMetaforRCode"]])
-    .maShowMetaforRCode(jaspResults, options)
+  if (options[["showMetaforRCode"]]) {
+    if (.maIsGLMM(options)) {
+      .maglmmShowMetaforRCode(jaspResults, options)
+    } else {
+      .maShowMetaforRCode(jaspResults, options)
+    }
+  }
 
   # export the variance-covariance matrix if requested
-  if (.maIsMultilevelMultivariate(options) && options[["varianceCovarianceMatrixSaveComputedVarianceCovarianceMatrix"]] != "")
+  if (.maIsMultilevelMultivariate(options) && options[["varianceCovarianceMatrixSaveComputedVarianceCovarianceMatrix"]] != "") {
     .mammExportVarianceCovarianceMatrix(dataset, options)
+  }
+
 
   return()
 }
@@ -109,19 +118,21 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 .maGetFormula                    <- function(modelTerms, includeIntercept) {
 
   predictors <- unlist(lapply(modelTerms, function(x) {
-    if (length(x[["components"]]) > 1)
+    if (length(x[["components"]]) > 1) {
       return(paste(x[["components"]], collapse = ":"))
-    else
+    } else {
       return(x[["components"]])
+    }
   }))
 
   if (length(predictors) == 0)
     return(NULL)
 
-  if (includeIntercept)
+  if (includeIntercept) {
     formula <- paste("~", paste(predictors, collapse = "+"))
-  else
+  } else {
     formula <- paste("~", paste(predictors, collapse = "+"), "-1")
+  }
 
   return(as.formula(formula, env = parent.frame(1)))
 }
@@ -131,7 +142,10 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     return()
 
   # dispatch fitting function & dependencies
-  if (.maIsClassical(options, notMHP = TRUE)) {
+  if (.maIsGLMM(options)) {
+    fittingFunction <- .maglmmFitModelFun
+    dependencies    <- .maDependencies
+  } else if (.maIsClassical(options, notMHP = TRUE)) {
     fittingFunction <- .maFitModelFun
     dependencies    <- .maDependencies
   } else if (.maIsClassical(options)) {
@@ -190,6 +204,16 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   # when updating don't forget to update the '.maMakeMetaforCallText' function! #
   # --------------------------------------------------------------------------- #
 
+  if (nrow(dataset) < 2) {
+    fit <- try(stop("Fewer than two estimates."))
+    attr(fit, "subgroup") <- paste0(subgroupName)
+    attr(fit, "dataset")  <- dataset
+    return(list(
+      fit          = fit,
+      fitClustered = if (options[["clustering"]] != "") fit else NULL
+    ))
+  }
+
   # specify the effect size and outcome
   if (options[["analysis"]] == "metaAnalysis") {
     # specify the univariate input
@@ -209,7 +233,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # add formulas if specified
   rmaInput$mods  <- .maGetFormula(options[["effectSizeModelTerms"]], options[["effectSizeModelIncludeIntercept"]])
-  rmaInput$scale <- .maGetFormula(options[["heterogeneityModelTerms"]], options[["heterogeneityModelIncludeIntercept"]])
+  rmaInput$scale <- if (!.maIsUnrestrictedWeightedLeastSquares(options)) .maGetFormula(options[["heterogeneityModelTerms"]], options[["heterogeneityModelIncludeIntercept"]])
 
   # add random effects
   if (.maIsMultilevelMultivariate(options)) {
@@ -253,7 +277,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # specify method and fixed effect terms test
   rmaInput$method <- .maGetMethodOptions(options)
-  rmaInput$test   <- options[["fixedEffectTest"]]
+  rmaInput$test   <- .maGetFixedEffectTestOptions(options)
 
   if (!options[["weightedEstimation"]])
     rmaInput$weighted <- FALSE
@@ -286,9 +310,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     rmaInput <- c(rmaInput, .maExtendMetaforCallFromOptions(options))
 
   ### fit the model
-  if (nrow(dataset) < 2) {
-    fit <- try(stop("Fewer than two estimates."))
-  } else if (options[["analysis"]] == "metaAnalysis") {
+  if (options[["analysis"]] == "metaAnalysis") {
     fit <- try(do.call(metafor::rma, rmaInput))
   } else if (options[["analysis"]] == "metaAnalysisMultilevelMultivariate") {
     fit <- try(do.call(metafor::rma.mv, rmaInput))
@@ -326,10 +348,10 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # add attributes
   attr(fit, "subgroup") <- paste0(subgroupName)
-  attr(fit, "dataset")  <- dataset
+  attr(fit, "dataset")  <- .maAlignDatasetToFitRows(fit, dataset, options)
   if (!is.null(fitClustered)) {
     attr(fitClustered, "subgroup") <- subgroupName
-    attr(fitClustered, "dataset")  <- dataset
+    attr(fitClustered, "dataset")  <- .maAlignDatasetToFitRows(fitClustered, dataset, options)
   }
 
 
@@ -338,6 +360,19 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     fit            = fit,
     fitClustered   = fitClustered
   ))
+}
+.maAlignDatasetToFitRows          <- function(fit, dataset, options) {
+
+  if (!.maIsGLMM(options) || inherits(fit, "try-error") || !inherits(fit, "rma.glmm"))
+    return(dataset)
+
+  retainedRows <- fit[["not.na"]]
+  if (is.null(retainedRows) ||
+      length(retainedRows) != nrow(dataset) ||
+      sum(retainedRows, na.rm = TRUE) != length(fit[["yi"]]))
+    return(dataset)
+
+  return(dataset[retainedRows, , drop = FALSE])
 }
 .maUpdateFitModelDataset         <- function(jaspResults, dataset, options, objectName = "fit") {
 
@@ -394,7 +429,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   if (!is.null(fitOutput[["fit"]])) {
     fit <- fitOutput[["fit"]]
-    attr(fit, "dataset") <- dataset
+    attr(fit, "dataset") <- .maAlignDatasetToFitRows(fit, dataset, options)
   } else {
     fit <- NULL
   }
@@ -402,7 +437,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   if (.maIsClassical(options)) {
     if (!is.null(fitOutput[["fitClustered"]])) {
       fitClustered <- fitOutput[["fitClustered"]]
-      attr(fitClustered, "dataset") <- dataset
+      attr(fitClustered, "dataset") <- .maAlignDatasetToFitRows(fitClustered, dataset, options)
     } else {
       fitClustered <- NULL
     }
@@ -677,7 +712,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     jaspResults[["baujatResults"]] <- baujatResults
 
 
-    fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
+    baujatOptions <- options
+    baujatOptions[["includeFullDatasetInSubgroupAnalysis"]] <- TRUE
+    fit <- .maExtractFit(jaspResults, baujatOptions, nonClustered = TRUE)
     out <- list()
 
     for (i in seq_along(fit)) {
@@ -686,10 +723,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
         dfBaujat <- list()
       } else {
         dfBaujat <- try(.maSuppressPlot(metafor::baujat(fit[[i]])))
-        attr(dfBaujat, "studyLabels") <- attr(fit[[i]], "dataset")[[options[["studyLabels"]]]]
       }
 
-      out[[attr(fit[[i]], "subgroup")]] <- dfBaujat
+      out[[names(fit)[i]]] <- dfBaujat
     }
 
     jaspResults[["baujatResults"]]$object <- out
@@ -698,7 +734,6 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   return(out)
 }
-
 # output tables
 .maOverallTestsTable                     <- function(jaspResults, options) {
 
@@ -744,7 +779,17 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # add all the overall model test
   tests <- list()
-  tests[["heterogeneity"]] <- .maSafeRbind(lapply(fit, .maRowHeterogeneityTest, options = options))
+  if (.maIsGLMM(options)) {
+    tempHeterogeneity <- lapply(fit, .maglmmRowHeterogeneityTest, options = options)
+    tests[["heterogeneity"]] <- .maSafeRbind(tempHeterogeneity)
+
+    tempFootnotes <- unique(lapply(tempHeterogeneity, attr, which = "footnote"))
+    tempFootnotes <- Filter(Negate(is.null), tempFootnotes)
+    for (i in seq_along(tempFootnotes))
+      testsTable$addFootnote(tempFootnotes[[i]])
+  } else {
+    tests[["heterogeneity"]] <- .maSafeRbind(lapply(fit, .maRowHeterogeneityTest, options = options))
+  }
   tests[["effect"]]        <- .maSafeRbind(lapply(fit, .maRowEffectSizeTest,    options = options))
 
   # effect size moderation
@@ -753,7 +798,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     tests[["moderationEffect"]] <- .maSafeRbind(lapply(fit, .maRowModerationTest, options = options, parameter = "effectSize"))
 
     # additional custom test
-    if (options[["addOmnibusModeratorTestEffectSizeCoefficients"]]) {
+    if (isTRUE(options[["addOmnibusModeratorTestEffectSizeCoefficients"]])) {
 
       tempModerationEffect2 <- lapply(fit, .maRowModerationTest, options = options, parameter = "effectSize", coefficientsTest = TRUE)
       tests[["moderationEffect2"]] <- .maSafeRbind(tempModerationEffect2)
@@ -777,7 +822,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     tests[["moderationHeterogeneity"]] <- .maSafeRbind(lapply(fit, .maRowModerationTest, options = options, parameter = "heterogeneity"))
 
     # additional custom test
-    if (options[["addOmnibusModeratorTestHeterogeneityCoefficients"]]) {
+    if (isTRUE(options[["addOmnibusModeratorTestHeterogeneityCoefficients"]])) {
 
       tempModerationHeterogeneity2 <- lapply(fit, .maRowModerationTest, options = options, parameter = "heterogeneity", coefficientsTest = TRUE)
       tests[["moderationHeterogeneity2"]] <- .maSafeRbind(tempModerationHeterogeneity2)
@@ -837,6 +882,15 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     }
   }
 
+  if (.maIsGLMM(options) && .maIsMetaregressionEffectSize(options)) {
+    if (options[["fixedEffectTest"]] == "t")
+      testsTable$addFootnote(gettext("Moderation test based on a Wald-type F-test."))
+    else
+      testsTable$addFootnote(gettext("Moderation test based on a Wald-type chi-squared test."))
+  }
+
+  .maAddLowDdfWarning(testsTable, fit, options)
+
   # bind and clean rows
   tests <- .maSafeRbind(tests)
   tests <- .maSafeOrderAndSimplify(tests, "test", options)
@@ -886,7 +940,10 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   estimates[["effect"]] <- .maSafeRbind(lapply(fit, .maRowPooledEffectEstimate, options = options))
 
   # pooled heterogeneity
-  if (!.maGetMethodOptions(options) %in% c("EE", "FE", "MH", "PETO") && !.maIsMultilevelMultivariate(options) &&
+  if (.maIsGLMM(options) && .maGetMethodOptions(options) != "FE" &&
+      (options[["heterogeneityTau"]] || options[["heterogeneityTau2"]] || options[["heterogeneityI2"]] || options[["heterogeneityH2"]])) {
+    estimates[["heterogeneity"]] <- .maSafeRbind(lapply(fit, .maRowPooledHeterogeneity, options = options))
+  } else if (!.maGetMethodOptions(options) %in% c("EE", "FE", "MH", "PETO") && !.maIsMultilevelMultivariate(options) &&
       (options[["heterogeneityTau"]] ||options[["heterogeneityTau2"]] || options[["heterogeneityI2"]] || options[["heterogeneityH2"]])) {
 
     # requires non-clustered fit
@@ -932,12 +989,15 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   .maAddSubgroupColumn(fitMeasuresTable, options)
   fitMeasuresTable$addColumnInfo(name = "observations",  title = gettext("Observations"), type = "integer")
   fitMeasuresTable$addColumnInfo(name = "ll",            title = gettext("Log Lik."),     type = "number")
-  fitMeasuresTable$addColumnInfo(name = "dev",           title = gettext("Deviance"),     type = "number")
+  if (!.maIsUnrestrictedWeightedLeastSquares(options))
+    fitMeasuresTable$addColumnInfo(name = "dev",         title = gettext("Deviance"),     type = "number")
   fitMeasuresTable$addColumnInfo(name = "AIC",           title = gettext("AIC"),          type = "number")
   fitMeasuresTable$addColumnInfo(name = "BIC",           title = gettext("BIC"),          type = "number")
-  fitMeasuresTable$addColumnInfo(name = "AICc",          title = gettext("AICc"),         type = "number")
+  if (!.maIsUnrestrictedWeightedLeastSquares(options))
+    fitMeasuresTable$addColumnInfo(name = "AICc",        title = gettext("AICc"),         type = "number")
 
-  if (.maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options))
+  if (!.maIsUnrestrictedWeightedLeastSquares(options) &&
+      .maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options) && !.maIsGLMM(options))
     fitMeasuresTable$addColumnInfo(name = "R2",  title = gettext("R\U00B2"),   type = "number")
 
   # skip on error
@@ -991,7 +1051,10 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     termsTable$addFootnote(.maPermutationMessage(options))
   }
 
-  termsTable$addFootnote(.maFixedEffectTextMessage(options))
+  .maAddFixedEffectTestFootnote(termsTable, options)
+
+  if (.maIsGLMM(options))
+    termsTable$addFootnote(gettext("Term tests based on Wald-type chi-squared tests."))
 
   # skip on error
   if ((length(fit) == 1 && jaspBase::isTryError(fit[[1]]))  || !is.null(.maCheckIsPossibleOptions(options)))
@@ -1053,7 +1116,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     coefficientsTable$addFootnote(.maPermutationMessage(options))
   }
 
-  coefficientsTable$addFootnote(.maFixedEffectTextMessage(options))
+  .maAddFixedEffectTestFootnote(coefficientsTable, options)
 
   # skip on error
   if ((length(fit) == 1 && jaspBase::isTryError(fit[[1]]))  || !is.null(.maCheckIsPossibleOptions(options)))
@@ -1068,6 +1131,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     coefficientsTable$addFootnote(coefficientsTableWarnings[i], symbol = gettext("Warning:"))
   if (parameter == "heterogeneity")
     coefficientsTable$addFootnote(.meMetaregressionHeterogeneityMessages(options))
+  .maAddLowDdfWarning(coefficientsTable, fit, options)
 
   coefficientsTable$setData(estimates)
 
@@ -1134,7 +1198,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   correlationMatrixTable <- createJaspTable()
 
   if (is.null(fit) || jaspBase::isTryError(fit))
-    return()
+    return(correlationMatrixTable)
 
   if (parameter == "effectSize")
     correlationMatrix <- data.frame(as.matrix(cov2cor(fit[["vb"]])))
@@ -1165,9 +1229,11 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   # .maGetEstimatedMarginalMeansAndContrastsOptions()
 
   # check whether the section should be created at all
-  isReadyEffectSize    <- (length(options[["estimatedMarginalMeansEffectSizeSelectedVariables"]])    > 0 || options[["estimatedMarginalMeansEffectSizeAddAdjustedEstimate"]])    &&
+  isReadyEffectSize    <- .maIsMetaregressionEffectSize(options) &&
+                          (length(options[["estimatedMarginalMeansEffectSizeSelectedVariables"]])    > 0 || options[["estimatedMarginalMeansEffectSizeAddAdjustedEstimate"]])    &&
                           (options[["estimatedMarginalMeansEffectSize"]]    || options[["contrastsEffectSize"]])
-  isReadyHeterogeneity <- (length(options[["estimatedMarginalMeansHeterogeneitySelectedVariables"]]) > 0 || options[["estimatedMarginalMeansHeterogeneityAddAdjustedEstimate"]]) &&
+  isReadyHeterogeneity <- .maIsMetaregressionHeterogeneity(options) &&
+                          (length(options[["estimatedMarginalMeansHeterogeneitySelectedVariables"]]) > 0 || options[["estimatedMarginalMeansHeterogeneityAddAdjustedEstimate"]]) &&
                           (options[["estimatedMarginalMeansHeterogeneity"]] || options[["contrastsHeterogeneity"]])
 
   if (!isReadyEffectSize && !isReadyHeterogeneity) {
@@ -1377,7 +1443,11 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   estimatedMarginalMeansTable$setData(estimatedMarginalMeans)
 
   # add footnotes
-  estimatedMarginalMeansMessages <- .maEstimatedMarginalMeansMessages(options, parameter, anyNA(sapply(estimatedMarginalMeans[,colnames(estimatedMarginalMeans) %in% c("est", "lCi", "uCi", "lPi", "uPi")], anyNA)))
+  estimatesContainNA <- !is.null(estimatedMarginalMeans) && anyNA(sapply(
+    estimatedMarginalMeans[, colnames(estimatedMarginalMeans) %in% c("est", "lCi", "uCi", "lPi", "uPi"), drop = FALSE],
+    anyNA
+  ))
+  estimatedMarginalMeansMessages <- .maEstimatedMarginalMeansMessages(options, parameter, estimatesContainNA)
   for (i in seq_along(estimatedMarginalMeansMessages))
     estimatedMarginalMeansTable$addFootnote(estimatedMarginalMeansMessages[i])
 
@@ -1420,7 +1490,6 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   contrasts <- .maSafeRbind(lapply(fit, .maComputeContrastVariable,
     options          = options,
     selectedVariable = if (selectedVariable == "") "" else strsplit(selectedVariable, ":")[[1]],
-    testAgainst      = options[["contrastsEffectSizeTestAgainstValue"]],
     parameter        = parameter
   ))
 
@@ -1434,6 +1503,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   contrastsMessages <- .macontrastsMessages(options, parameter)
   for (i in seq_along(contrastsMessages))
     contrastsTable$addFootnote(contrastsMessages[i])
+
+  if (.maIsGLMM(options))
+    contrastsTable$addFootnote(gettext("Contrast tests based on Wald-type z-tests."))
 
   return()
 }
@@ -1458,47 +1530,29 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   fit <- .maExtractFit(jaspResults, options)
 
   # stop on error
-  if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit)) || (.maIsClassical(options) && !is.null(.maCheckIsPossibleOptions(options))))
+  if (is.null(fit) || all(vapply(fit, jaspBase::isTryError, logical(1))) || (.maIsClassical(options) && !is.null(.maCheckIsPossibleOptions(options))))
     return()
 
   # try execute!
-  plotOut <- try(.maMakeTheUltimateForestPlot(fit, options))
+  plotRender <- try(.maMakeTheUltimateForestPlot(fit, options))
 
-  if (inherits(plotOut, "try-error")) {
+  if (inherits(plotRender, "try-error")) {
     forestPlot <- createJaspPlot(title = gettext("Forest Plot"))
     forestPlot$position <- 4
     forestPlot$dependOn(.maForestPlotDependencies)
-    forestPlot$setError(plotOut)
+    forestPlot$setError(plotRender)
     jaspResults[["forestPlot"]] <- forestPlot
     return()
   }
 
-  # try adjusting height and width
-  height <- 200 + (attr(plotOut, "rows")) * 10
-  if (!attr(plotOut, "isPanel"))
-    width <- 500
-  else
-    width <- 500 + 500 * attr(plotOut, "panelRatio")
-
   forestPlot <- createJaspPlot(
     title  = gettext("Forest Plot"),
-    width  = width,
-    height = height
+    width  = plotRender[["width"]],
+    height = plotRender[["height"]]
   )
   forestPlot$position <- if (.maIsClassical(options)) 5 else 7
   forestPlot$dependOn(c(.maForestPlotDependencies, if (.maIsClassical(options)) .maDependencies else .robmaDependencies))
-
-  if (!attr(plotOut, "isPanel")) {
-    forestPlot$plotObject <- plotOut
-  } else {
-    plotOut <- jaspGraphs:::jaspGraphsPlot$new(
-      subplots = plotOut,
-      layout   = attr(plotOut, "layout"),
-      heights  = 1,
-      widths   = attr(plotOut, "widths")
-    )
-    forestPlot$plotObject <- plotOut
-  }
+  forestPlot$plotObject <- plotRender[["plot"]]
 
   jaspResults[["forestPlot"]] <- forestPlot
 
@@ -1653,7 +1707,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   if (length(fit) == 1 && jaspBase::isTryError(fit[[1]]))
     return()
 
-  terms <- do.call(rbind, lapply(fit, .maComputeVifSummary, options = options, parameter = parameter))
+  terms <- .maSafeRbind(lapply(fit, .maComputeVifSummary, options = options, parameter = parameter))
   terms <- .maSafeOrderAndSimplify(terms, "term", options)
 
   termsTable$setData(terms)
@@ -1711,6 +1765,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # table information
   coefDifferenceNames <- setdiff(colnames(diagnosticsTable), c("subgroup", "label", .maCasewiseDiagnosticsNames()))
+  coefDifferenceNames <- if (is.null(coefDifferenceNames)) character(0) else coefDifferenceNames
 
   # prepare table
   .maAddSubgroupColumn(casewiseDiagnosticsTable, options)
@@ -1747,7 +1802,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
 
   # keep influential only
-  if (options[["diagnosticsCasewiseDiagnosticsShowInfluentialOnly"]]) {
+  if (options[["diagnosticsCasewiseDiagnosticsShowInfluentialOnly"]] &&
+      !is.null(diagnosticsTable) &&
+      "inf" %in% colnames(diagnosticsTable)) {
 
     diagnosticsTable <- diagnosticsTable[!is.na(diagnosticsTable[["inf"]]) ,,drop=FALSE]
     diagnosticsTable <- diagnosticsTable[diagnosticsTable[["inf"]] == "Yes",,drop=FALSE]
@@ -1778,96 +1835,655 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   return()
 }
 .maCasewiseDiagnosticsExportColumns      <- function(jaspResults, dataset, options) {
+  .maExportDiagnosticsColumns(jaspResults, dataset, options)
+  return()
+}
+.maExportColumns                         <- function(jaspResults, dataset, options) {
 
-  if (!options[["diagnosticsCasewiseDiagnosticsExportToDataset"]])
+  if (!.maAnyExportColumns(options) || is.null(dataset) || !.maReady(options))
     return()
 
-  if (.maIsMetaregressionHeterogeneity(options))
+  .maExportDiagnosticsColumns(jaspResults, dataset, options)
+  .maExportResidualColumns(jaspResults, dataset, options)
+  .maExportPredictedColumns(jaspResults, dataset, options)
+  .maExportTrueEffectColumns(jaspResults, dataset, options)
+  .maExportRandomEffectsColumns(jaspResults, dataset, options)
+  .maExportWeightsColumns(jaspResults, dataset, options)
+
+  return()
+}
+.maAnyExportColumns                      <- function(options) {
+
+  exportOptions <- .maExportOptions
+  return(any(vapply(exportOptions, function(option) isTRUE(options[[option]]), logical(1))))
+}
+.maExportDiagnosticsColumns              <- function(jaspResults, dataset, options) {
+
+  if (!.maAnyDiagnosticsExportColumns(options) || .maIsMetaregressionHeterogeneity(options))
     return()
 
   # the fit diagnostics work only for the non-clustered fit
-  fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
+  fit <- .maExportFitList(jaspResults, options, nonClustered = TRUE)
 
-  # stop on error
   if (is.null(fit) || (length(fit) == 1 && jaspBase::isTryError(fit[[1]])) || !is.null(.maCheckIsPossibleOptions(options)))
     return()
 
-  # export diagnostics
   diagnostics <- .maDiagnostics(jaspResults, options)
 
-  # always drop the full from subgroups
-  if (options[["subgroup"]] != "" && options[["includeFullDatasetInSubgroupAnalysis"]]) {
-    fit         <- fit[-1]
+  if (options[["subgroup"]] != "" && isTRUE(options[["includeFullDatasetInSubgroupAnalysis"]]))
     diagnostics <- diagnostics[-1]
-  }
 
-  # return the diagnostics with order variable indicating the order in the full data set
+  exportOptions <- options
+  exportOptions[["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"]] <- .maExportDiagnosticsCoefficientInfluence(options)
+
   diagnosticsTable <- .maSafeRbind(lapply(seq_along(fit), function(i) .maRowDiagnosticsTable(
     fit         = fit[[i]],
     diagnostics = diagnostics[[attr(fit[[i]], "subgroup")]],
-    options     = options,
+    options     = exportOptions,
     forExport   = TRUE
   )))
 
-  # add empty rows for the missing observations
-  diagnosticsTable <- .maSafeRbind(list(
-    diagnosticsTable,
-    data.frame("datasetOrder" = setdiff(1:length(attr(dataset, "NasIds")), diagnosticsTable[["datasetOrder"]]))
+  if (is.null(diagnosticsTable) || !"datasetOrder" %in% colnames(diagnosticsTable))
+    return()
+
+  diagnosticsTable <- .maExportCompleteRows(diagnosticsTable, dataset)
+
+  if (.maExportDiagnosticsInfluentialCases(options) && "inf" %in% colnames(diagnosticsTable))
+    .maExportNominalColumn(jaspResults, "Diagnostics: Influential", diagnosticsTable[["inf"]], c(.maExportDependencies(), "exportDiagnosticsInfluentialCases"))
+
+  if (.maExportDiagnosticsCaseDiagnostics(options)) {
+    for (diagnosticName in intersect(c("rstudent", "cook.d", "hat", "weight"), colnames(diagnosticsTable))) {
+      columnName <- paste0("Diagnostics: ", .maCasewiseDiagnosticsExportColumnsNames(diagnosticName))
+      .maExportScaleColumn(jaspResults, columnName, diagnosticsTable[[diagnosticName]], c(.maExportDependencies(), "exportDiagnosticsCaseDiagnostics"))
+    }
+  }
+
+  if (.maExportDiagnosticsModelImpact(options)) {
+    for (diagnosticName in intersect(c("dffits", "cov.r", "tau.del", "tau2.del", "QE.del"), colnames(diagnosticsTable))) {
+      columnName <- paste0("Diagnostics: ", .maCasewiseDiagnosticsExportColumnsNames(diagnosticName))
+      .maExportScaleColumn(jaspResults, columnName, diagnosticsTable[[diagnosticName]], c(.maExportDependencies(), "exportDiagnosticsModelImpact"))
+    }
+  }
+
+  if (.maExportDiagnosticsCoefficientInfluence(options)) {
+    coefficientNames <- setdiff(colnames(diagnosticsTable), c("subgroup", "label", "datasetOrder", .maCasewiseDiagnosticsNames()))
+    variables        <- c(unlist(options[["effectSizeModelTerms"]]), unlist(options[["heterogeneityModelTerms"]]))
+
+    for (diagnosticName in coefficientNames) {
+      columnName <- decodeColNames(paste0("Difference in coefficients: ", .maVariableNames(diagnosticName, variables)))
+      .maExportScaleColumn(jaspResults, columnName, diagnosticsTable[[diagnosticName]], c(.maExportDependencies(), "exportDiagnosticsCoefficientInfluence"))
+    }
+  }
+
+  return()
+}
+.maAnyDiagnosticsExportColumns            <- function(options) {
+  return(
+    .maExportDiagnosticsInfluentialCases(options) ||
+      .maExportDiagnosticsCaseDiagnostics(options) ||
+      .maExportDiagnosticsModelImpact(options) ||
+      .maExportDiagnosticsCoefficientInfluence(options)
+  )
+}
+.maExportDiagnosticsInfluentialCases      <- function(options) {
+  if (.maIsMultilevelMultivariate(options))
+    return(FALSE)
+
+  return(isTRUE(options[["exportDiagnosticsInfluentialCases"]]))
+}
+.maExportDiagnosticsCaseDiagnostics       <- function(options) {
+  return(isTRUE(options[["exportDiagnosticsCaseDiagnostics"]]))
+}
+.maExportDiagnosticsModelImpact           <- function(options) {
+  if (.maIsMultilevelMultivariate(options))
+    return(FALSE)
+
+  return(isTRUE(options[["exportDiagnosticsModelImpact"]]))
+}
+.maExportDiagnosticsCoefficientInfluence  <- function(options) {
+  return(isTRUE(options[["exportDiagnosticsCoefficientInfluence"]]))
+}
+.maExportResidualColumns                  <- function(jaspResults, dataset, options) {
+
+  fit <- .maExportFitList(jaspResults, options)
+  if (is.null(fit))
+    return()
+
+  if (isTRUE(options[["exportResidualsRaw"]])) {
+    values <- .maExportVectorFromFitList(dataset, fit, function(fit) stats::residuals(fit, type = "response"))
+    .maExportScaleColumn(jaspResults, "Residuals: Raw", values, c(.maExportDependencies(), "exportResidualsRaw"))
+  }
+
+  if (isTRUE(options[["exportResidualsPearson"]])) {
+    values <- .maExportVectorFromFitList(dataset, fit, function(fit) stats::residuals(fit, type = "pearson"))
+    .maExportScaleColumn(jaspResults, "Residuals: Pearson", values, c(.maExportDependencies(), "exportResidualsPearson"))
+  }
+
+  if (isTRUE(options[["exportResidualsStandardized"]])) {
+    values <- .maExportVectorFromFitList(dataset, fit, function(fit) stats::residuals(fit, type = "rstandard"))
+    .maExportScaleColumn(jaspResults, "Residuals: Standardized", values, c(.maExportDependencies(), "exportResidualsStandardized"))
+  }
+
+  if (isTRUE(options[["exportResidualsStudentized"]])) {
+    values <- .maExportVectorFromFitList(dataset, fit, function(fit) stats::residuals(fit, type = "rstudent"))
+    .maExportScaleColumn(jaspResults, "Residuals: Studentized", values, c(.maExportDependencies(), "exportResidualsStudentized"))
+  }
+
+  if (isTRUE(options[["exportResidualsConditional"]]) && !.maIsMultilevelMultivariate(options)) {
+    values <- .maExportVectorFromFitList(dataset, fit, function(fit) stats::rstandard(fit, type = "conditional")[["z"]])
+    .maExportScaleColumn(jaspResults, "Residuals: Conditional Standardized", values, c(.maExportDependencies(), "exportResidualsConditional"))
+  }
+
+  return()
+}
+.maExportPredictedColumns                 <- function(jaspResults, dataset, options) {
+
+  if (!isTRUE(options[["exportPredictedValues"]]))
+    return()
+
+  fit     <- .maExportFitList(jaspResults, options)
+  columns <- .maExportDataFrameFromFitList(dataset, fit, .maExportPredictedDataFrame)
+
+  .maExportScaleColumns(jaspResults, columns, "Predicted Values", c(.maExportDependencies(), "exportPredictedValues"))
+
+  return()
+}
+.maExportTrueEffectColumns                <- function(jaspResults, dataset, options) {
+
+  if (!isTRUE(options[["exportTrueEffectEstimates"]]) || .maIsMultilevelMultivariate(options))
+    return()
+
+  fit     <- .maExportFitList(jaspResults, options)
+  columns <- .maExportDataFrameFromFitList(dataset, fit, .maExportTrueEffectDataFrame)
+
+  .maExportScaleColumns(jaspResults, columns, "True Effect Estimates (BLUPs)", c(.maExportDependencies(), "exportTrueEffectEstimates"))
+
+  return()
+}
+.maExportRandomEffectsColumns             <- function(jaspResults, dataset, options) {
+
+  if (!isTRUE(options[["exportRandomEffects"]]))
+    return()
+
+  fit <- .maExportFitList(jaspResults, options)
+
+  if (.maIsMultilevelMultivariate(options)) {
+    columns <- .maExportRandomEffectsMvColumns(dataset, fit)
+  } else {
+    columns <- .maExportDataFrameFromFitList(dataset, fit, .maExportRandomEffectsDataFrame)
+  }
+
+  .maExportScaleColumns(jaspResults, columns, "Random Effects", c(.maExportDependencies(), "exportRandomEffects"))
+
+  return()
+}
+.maExportWeightsColumns                   <- function(jaspResults, dataset, options) {
+
+  if (!isTRUE(options[["exportWeights"]]))
+    return()
+
+  fit <- .maExportFitList(jaspResults, options)
+
+  if (.maIsMultilevelMultivariate(options)) {
+    rowSumValues <- .maExportVectorFromFitList(
+      dataset        = dataset,
+      fit            = fit,
+      exportFunction = function(fit) {
+        .maExportWeights(
+          fit     = fit,
+          options = options,
+          type    = "rowsum"
+        )
+      }
+    )
+    .maExportScaleColumn(jaspResults, "Weights: Row Sum", rowSumValues, c(.maExportDependencies(), "exportWeights"))
+
+    diagonalValues <- .maExportVectorFromFitList(
+      dataset        = dataset,
+      fit            = fit,
+      exportFunction = function(fit) {
+        .maExportWeights(
+          fit     = fit,
+          options = options,
+          type    = "diagonal"
+        )
+      }
+    )
+    .maExportScaleColumn(jaspResults, "Weights: Diagonal", diagonalValues, c(.maExportDependencies(), "exportWeights"))
+
+    return()
+  }
+
+  values <- .maExportVectorFromFitList(
+    dataset        = dataset,
+    fit            = fit,
+    exportFunction = function(fit) {
+      .maExportWeights(
+        fit     = fit,
+        options = options,
+        type    = "diagonal"
+      )
+    }
+  )
+  .maExportScaleColumn(jaspResults, "Weights", values, c(.maExportDependencies(), "exportWeights"))
+
+  return()
+}
+.maExportFitList                          <- function(jaspResults, options, nonClustered = FALSE) {
+
+  fit <- .maExtractFit(jaspResults, options, nonClustered = nonClustered)
+
+  if (is.null(fit))
+    return(NULL)
+
+  if (options[["subgroup"]] != "" && isTRUE(options[["includeFullDatasetInSubgroupAnalysis"]]))
+    fit <- fit[-1]
+
+  return(fit)
+}
+.maExportCompleteRows                     <- function(df, dataset) {
+
+  df <- .maSafeRbind(list(
+    df,
+    data.frame("datasetOrder" = setdiff(seq_len(.maExportDatasetRows(dataset)), df[["datasetOrder"]]))
   ))
 
-  # order according to the dataset order
-  diagnosticsTable <- diagnosticsTable[order(diagnosticsTable[["datasetOrder"]]),, drop = FALSE]
+  df <- df[order(df[["datasetOrder"]]),, drop = FALSE]
 
-  # export columns:
-  if (options[["diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"]]) {
+  return(df)
+}
+.maExportDataFrameFromFitList             <- function(dataset, fit, exportFunction) {
 
-    # export only the influential indicator
-    columnName <- "Diagnostics: Influential"
-    if (jaspBase:::columnExists(columnName) && !jaspBase:::columnIsMine(columnName))
-      .quitAnalysis(gettextf("Column name %s already exists in the dataset.", columnName))
+  columns <- list()
+  if (is.null(fit))
+    return(columns)
 
-    jaspResults[[columnName]] <- createJaspColumn(columnName = columnName, dependencies = .maDependencies)
-    jaspResults[[columnName]]$setNominal(diagnosticsTable[["inf"]])
+  for (i in seq_along(fit)) {
+    if (jaspBase::isTryError(fit[[i]]))
+      next
 
-  } else {
+    datasetOrder <- .maExportDatasetOrder(fit[[i]])
+    if (length(datasetOrder) == 0)
+      next
 
-    # export all diagnostics
-    diagnosticsNames <- .maCasewiseDiagnosticsNames()
-    diagnosticsNames <- intersect(diagnosticsNames, colnames(diagnosticsTable))
+    values <- exportFunction(fit[[i]])
+    if (is.null(values) || nrow(values) == 0)
+      next
 
-    for (diagnosticName in diagnosticsNames) {
+    values <- .maExportRecycleRows(values, length(datasetOrder))
+    if (is.null(values))
+      next
 
-      columnName <- paste0("Diagnostics: ", .maCasewiseDiagnosticsExportColumnsNames(diagnosticName))
-
-      if (jaspBase:::columnExists(columnName) && !jaspBase:::columnIsMine(columnName))
-        .quitAnalysis(gettextf("Column name %s already exists in the dataset.", columnName))
-
-      jaspResults[[columnName]] <- createJaspColumn(columnName = columnName, dependencies = .maDependencies)
-      if (diagnosticName == "inf") {
-        jaspResults[[columnName]]$setNominal(diagnosticsTable[[diagnosticName]])
-      } else {
-        jaspResults[[columnName]]$setScale(diagnosticsTable[[diagnosticName]])
-      }
+    for (columnName in colnames(values)) {
+      if (is.null(columns[[columnName]]))
+        columns[[columnName]] <- rep(NA_real_, .maExportDatasetRows(dataset))
+      columns[[columnName]][datasetOrder] <- values[[columnName]]
     }
-
-    # export change in coefficients
-    if (options[["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"]]) {
-
-      coefDifferenceNames <- setdiff(colnames(diagnosticsTable), c("subgroup", "label", "datasetOrder", .maCasewiseDiagnosticsNames()))
-
-      for (diagnosticName in coefDifferenceNames) {
-
-        columnName <- decodeColNames(paste0("Difference in coefficients: ", .maVariableNames(diagnosticName, c(unlist(options[["effectSizeModelTerms"]]), unlist(options[["heterogeneityModelTerms"]])))))
-
-        if (jaspBase:::columnExists(columnName) && !jaspBase:::columnIsMine(columnName))
-          .quitAnalysis(gettextf("Column name %s already exists in the dataset.", columnName))
-
-        jaspResults[[columnName]] <- createJaspColumn(columnName = columnName, dependencies = .maDependencies)
-        jaspResults[[columnName]]$setScale(diagnosticsTable[[diagnosticName]])
-      }
-    }
-
   }
+
+  return(columns)
+}
+.maExportVectorFromFitList                <- function(dataset, fit, exportFunction) {
+
+  output    <- rep(NA_real_, .maExportDatasetRows(dataset))
+  hasValues <- FALSE
+  if (is.null(fit))
+    return(NULL)
+
+  for (i in seq_along(fit)) {
+    if (jaspBase::isTryError(fit[[i]]))
+      next
+
+    datasetOrder <- .maExportDatasetOrder(fit[[i]])
+    if (length(datasetOrder) == 0)
+      next
+
+    values <- exportFunction(fit[[i]])
+    if (is.null(values))
+      next
+
+    values <- as.numeric(values)
+    if (length(values) == 1 && length(datasetOrder) > 1)
+      values <- rep(values, length(datasetOrder))
+    if (length(values) != length(datasetOrder))
+      next
+
+    output[datasetOrder] <- values
+    hasValues <- TRUE
+  }
+
+  if (!hasValues)
+    return(NULL)
+
+  return(output)
+}
+.maExportRandomEffectsMvColumns           <- function(dataset, fit) {
+
+  columns <- list()
+  if (is.null(fit))
+    return(columns)
+
+  for (i in seq_along(fit)) {
+    if (jaspBase::isTryError(fit[[i]]))
+      next
+
+    datasetOrder <- .maExportDatasetOrder(fit[[i]])
+    randomEffects <- try(metafor::ranef(fit[[i]]), silent = TRUE)
+    if (jaspBase::isTryError(randomEffects) || is.null(randomEffects))
+      next
+
+    if (is.matrix(randomEffects)) {
+      columns <- .maExportRandomEffectsMvMatrixColumns(columns, dataset, fit[[i]], randomEffects, datasetOrder)
+      next
+    }
+
+    for (componentName in names(randomEffects)) {
+      component <- randomEffects[[componentName]]
+      rowIndex  <- .maExportRandomEffectsMvRowIndex(fit[[i]], componentName, component)
+
+      if (is.null(rowIndex))
+        next
+
+      matched <- component[rowIndex,, drop = FALSE]
+      if (nrow(matched) != length(datasetOrder))
+        next
+
+      componentLabel <- .maExportCleanComponentName(componentName)
+      for (columnName in colnames(matched)) {
+        if (!is.numeric(matched[[columnName]]))
+          next
+
+        outputName <- paste0(componentLabel, " - ", .maExportStatisticName(columnName))
+        if (is.null(columns[[outputName]]))
+          columns[[outputName]] <- rep(NA_real_, .maExportDatasetRows(dataset))
+        columns[[outputName]][datasetOrder] <- matched[[columnName]]
+      }
+    }
+  }
+
+  return(columns)
+}
+.maExportPredictedDataFrame               <- function(fit) {
+  return(.maExportListRmaDataFrame(stats::predict(fit), c("pred", "se", "ci.lb", "ci.ub", "pi.lb", "pi.ub")))
+}
+.maExportTrueEffectDataFrame              <- function(fit) {
+  return(.maExportListRmaDataFrame(metafor::blup(fit), c("pred", "se", "pi.lb", "pi.ub")))
+}
+.maExportRandomEffectsDataFrame           <- function(fit) {
+  return(.maExportListRmaDataFrame(metafor::ranef(fit), c("pred", "se", "pi.lb", "pi.ub")))
+}
+.maExportWeights                          <- function(fit, options, type) {
+
+  if (.maIsMultilevelMultivariate(options)) {
+    if (type == "diagonal")
+      return(stats::weights(fit, type = "diagonal"))
+    if (!isTRUE(fit[["int.only"]]))
+      return(NULL)
+    return(stats::weights(fit, type = "rowsum"))
+  }
+
+  return(stats::weights(fit, type = "diagonal"))
+}
+.maExportListRmaDataFrame                 <- function(x, columns) {
+
+  values <- list()
+  lengths <- integer(0)
+
+  for (columnName in columns) {
+    if (!is.null(x[[columnName]]) && length(x[[columnName]]) > 0) {
+      values[[.maExportStatisticName(columnName)]] <- as.numeric(x[[columnName]])
+      lengths <- c(lengths, length(x[[columnName]]))
+    }
+  }
+
+  if (length(values) == 0)
+    return(NULL)
+
+  nRows <- max(lengths)
+  for (columnName in names(values)) {
+    if (length(values[[columnName]]) == 1 && nRows > 1)
+      values[[columnName]] <- rep(values[[columnName]], nRows)
+    if (length(values[[columnName]]) != nRows)
+      values[[columnName]] <- NULL
+  }
+
+  return(as.data.frame(values, check.names = FALSE))
+}
+.maExportRecycleRows                      <- function(values, nRows) {
+
+  if (nrow(values) == nRows)
+    return(values)
+  if (nrow(values) == 1 && nRows > 1)
+    return(values[rep(1, nRows),, drop = FALSE])
+
+  return(NULL)
+}
+.maExportCleanComponentName               <- function(componentName) {
+  componentName <- sub("^~", "", componentName)
+  componentName <- gsub("\\s+", " ", componentName)
+  return(trimws(componentName))
+}
+.maExportRandomEffectsMvMatrixColumns     <- function(columns, dataset, fit, randomEffects, datasetOrder) {
+
+  randomPart <- .maExportRandomEffectsMvMatrixRandomPart(fit)
+  if (is.null(randomPart))
+    return(columns)
+
+  rowIndex <- .maExportRandomEffectsMvMatrixRowIndex(fit, randomEffects)
+  if (is.null(rowIndex))
+    return(columns)
+
+  componentLabel <- .maExportRandomEffectFormulaName(fit, randomPart)
+
+  matched <- randomEffects[rowIndex,, drop = FALSE]
+  if (nrow(matched) != length(datasetOrder))
+    return(columns)
+
+  for (columnName in colnames(matched)) {
+    if (!is.numeric(matched[, columnName]))
+      next
+
+    outputName <- paste0(componentLabel, " - Estimate: ", .maExportRandomEffectCoefficientName(columnName))
+    if (is.null(columns[[outputName]]))
+      columns[[outputName]] <- rep(NA_real_, .maExportDatasetRows(dataset))
+    columns[[outputName]][datasetOrder] <- matched[, columnName]
+  }
+
+  return(columns)
+}
+.maExportRandomEffectsMvRowIndex          <- function(fit, componentName, component) {
+
+  sIndex <- match(componentName, fit[["s.names"]])
+  if (!is.na(sIndex))
+    return(.maExportRowsFromDesignMatrix(fit[["Z.S"]][[sIndex]], nrow(component)))
+
+  if (identical(componentName, .maExportRandomEffectFormulaName(fit, "g")))
+    return(.maExportInnerOuterRandomEffectRows(fit, component, "g"))
+
+  if (identical(componentName, .maExportRandomEffectFormulaName(fit, "h")))
+    return(.maExportInnerOuterRandomEffectRows(fit, component, "h"))
+
+  return(NULL)
+}
+.maExportRandomEffectsMvMatrixRowIndex    <- function(fit, randomEffects) {
+
+  randomPart <- .maExportRandomEffectsMvMatrixRandomPart(fit)
+  if (is.null(randomPart))
+    return(NULL)
+
+  modelFrame <- fit[[paste0("mf.", randomPart)]]
+  if (is.null(modelFrame) || !"outer" %in% colnames(modelFrame))
+    return(NULL)
+
+  rowIndex <- match(as.character(modelFrame[["outer"]]), rownames(randomEffects))
+  if (anyNA(rowIndex))
+    return(NULL)
+
+  return(rowIndex)
+}
+.maExportRandomEffectsMvMatrixRandomPart  <- function(fit) {
+
+  if (isTRUE(fit[["withG"]]) && fit[["struct"]][1] %in% c("GEN", "GDIAG"))
+    return("g")
+
+  if (isTRUE(fit[["withH"]]) && fit[["struct"]][2] %in% c("GEN", "GDIAG"))
+    return("h")
+
+  return(NULL)
+}
+.maExportRowsFromDesignMatrix             <- function(designMatrix, nComponentRows) {
+
+  if (is.null(designMatrix))
+    return(NULL)
+
+  designMatrix <- as.matrix(designMatrix)
+  if (nrow(designMatrix) == 0 || ncol(designMatrix) != nComponentRows)
+    return(NULL)
+
+  nonZeroRows <- rowSums(abs(designMatrix) > 0)
+  if (any(nonZeroRows != 1))
+    return(NULL)
+
+  return(max.col(abs(designMatrix), ties.method = "first"))
+}
+.maExportInnerOuterRandomEffectRows       <- function(fit, component, randomPart) {
+
+  modelFrame <- fit[[paste0("mf.", randomPart)]]
+  if (is.null(modelFrame) || ncol(modelFrame) < 2)
+    return(NULL)
+
+  struct <- fit[["struct"]][switch(randomPart, "g" = 1, "h" = 2)]
+  if (struct %in% c("GEN", "GDIAG"))
+    return(NULL)
+
+  nVars <- ncol(modelFrame)
+  outer <- modelFrame[[nVars]]
+
+  if (struct %in% .maExportSpatialRandomEffectStructures()) {
+    key         <- paste(seq_len(nrow(modelFrame)), as.character(outer), sep = "\r")
+    orderedRows <- which(!duplicated(key))
+  } else {
+    inner       <- modelFrame[[1]]
+    key         <- paste(as.character(inner), as.character(outer), sep = "\r")
+    uniqueRows  <- which(!duplicated(key))
+    orderedRows <- uniqueRows[order(outer[uniqueRows], inner[uniqueRows])]
+  }
+
+  if (nrow(component) != length(orderedRows))
+    return(NULL)
+
+  rowIndex <- match(key, key[orderedRows])
+  if (anyNA(rowIndex))
+    return(NULL)
+
+  return(rowIndex)
+}
+.maExportRandomEffectFormulaName          <- function(fit, randomPart) {
+
+  formulaIndex <- switch(randomPart, "g" = 1, "h" = 2)
+  formulas     <- fit[["formulas"]]
+
+  if (is.null(formulas) || length(formulas) < formulaIndex)
+    return("")
+
+  formula <- formulas[[formulaIndex]]
+
+  if (is.null(formula))
+    return("")
+
+  return(paste0(formula, collapse = ""))
+}
+.maExportRandomEffectCoefficientName      <- function(coefficientName) {
+
+  if (coefficientName == "intrcpt")
+    return("Intercept")
+
+  return(coefficientName)
+}
+.maExportSpatialRandomEffectStructures    <- function() {
+  return(c("SPEXP", "SPGAU", "SPLIN", "SPRAT", "SPSPH", "PHYBM", "PHYPL", "PHYPD"))
+}
+.maExportStatisticName                    <- function(columnName) {
+  return(switch(
+    columnName,
+    "pred"  = "Estimate",
+    "intrcpt" = "Estimate",
+    "se"    = "SE",
+    "ci.lb" = "CI Lower",
+    "ci.ub" = "CI Upper",
+    "pi.lb" = "PI Lower",
+    "pi.ub" = "PI Upper",
+    columnName
+  ))
+}
+.maExportFitDataset                       <- function(fit) {
+
+  fitData <- attr(fit, "dataset")
+  if (is.null(fitData))
+    fitData <- attr(fit, "data")
+
+  return(fitData)
+}
+.maExportDatasetOrder                     <- function(fit) {
+
+  fitData <- .maExportFitDataset(fit)
+  if (is.null(fitData))
+    return(integer(0))
+
+  nasIds  <- attr(fitData, "NasIds")
+
+  if (!is.null(nasIds))
+    datasetOrder <- as.numeric(names(nasIds)[!nasIds])
+  else
+    datasetOrder <- seq_len(nrow(fitData))
+
+  notNa <- fit[["not.na"]]
+  if (!is.null(notNa) && length(notNa) == length(datasetOrder))
+    datasetOrder <- datasetOrder[notNa]
+
+  return(datasetOrder)
+}
+.maExportDatasetRows                      <- function(dataset) {
+
+  nasIds <- attr(dataset, "NasIds")
+  if (!is.null(nasIds))
+    return(length(nasIds))
+
+  return(nrow(dataset))
+}
+.maExportDependencies                     <- function() {
+  return(c(.maDependencies, "includeFullDatasetInSubgroupAnalysis"))
+}
+.maExportScaleColumns                     <- function(jaspResults, columns, prefix, dependencies) {
+
+  for (columnName in names(columns))
+    .maExportScaleColumn(jaspResults, paste0(prefix, ": ", columnName), columns[[columnName]], dependencies)
+
+  return()
+}
+.maExportScaleColumn                      <- function(jaspResults, columnName, values, dependencies) {
+
+  if (is.null(values))
+    return()
+
+  .maExportValidateColumnName(columnName)
+  jaspResults[[columnName]] <- createJaspColumn(columnName = columnName, dependencies = dependencies)
+  jaspResults[[columnName]]$setScale(values)
+
+  return()
+}
+.maExportNominalColumn                    <- function(jaspResults, columnName, values, dependencies) {
+
+  .maExportValidateColumnName(columnName)
+  jaspResults[[columnName]] <- createJaspColumn(columnName = columnName, dependencies = dependencies)
+  jaspResults[[columnName]]$setNominal(values)
+
+  return()
+}
+.maExportValidateColumnName               <- function(columnName) {
+
+  if (jaspBase:::columnExists(columnName) && !jaspBase:::columnIsMine(columnName))
+    .quitAnalysis(gettextf("Column name %s already exists in the dataset.", columnName))
 
   return()
 }
@@ -1980,7 +2596,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   # create individual plots for each subgroup
   if (options[["subgroup"]] == "") {
 
-    baujatPlot       <- .maBaujatPlotFun(dfBaujat[[1]], options)
+    baujatPlot       <- .maBaujatPlotFun(dfBaujat[[names(fit)[1]]], options, fit[[1]])
     baujatPlot$title <- gettext("Baujat Plot")
     baujatPlot$dependOn(c(.maDependencies, "diagnosticsPlotsBaujat", "includeFullDatasetInSubgroupAnalysis", "studyLabels"))
     baujatPlot$position <- 9
@@ -1997,7 +2613,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     jaspResults[["baujatPlot"]] <- baujatPlot
 
     for (i in seq_along(fit)) {
-      baujatPlot[[names(fit)[i]]]          <- .maBaujatPlotFun(dfBaujat[[i]], options)
+      baujatPlot[[names(fit)[i]]]          <- .maBaujatPlotFun(dfBaujat[[names(fit)[i]]], options, fit[[i]])
       baujatPlot[[names(fit)[i]]]$title    <- gettextf("Subgroup: %1$s", attr(fit[[i]], "subgroup"))
       baujatPlot[[names(fit)[i]]]$position <- i
     }
@@ -2006,7 +2622,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   return()
 }
-.maBaujatPlotFun                         <- function(dfBaujat, options) {
+.maBaujatPlotFun                         <- function(dfBaujat, options, fit) {
 
   baujatPlot <- createJaspPlot(width = 400, height = 320)
 
@@ -2023,16 +2639,21 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     return()
   }
 
-  if (options[["studyLabels"]] != "")
-    dfBaujat$label <- attr(dfBaujat, "studyLabels")
+  if (options[["studyLabels"]] != "") {
+    fitData <- attr(fit, "dataset")
+    if (!is.null(fitData) && nrow(fitData) == nrow(dfBaujat)) {
+      dfBaujat$label <- as.character(fitData[[options[["studyLabels"]]]])
+      dfBaujat$label[is.na(dfBaujat$label)] <- ""
+    }
+  }
+  hasStudyLabels <- "label" %in% colnames(dfBaujat)
 
   xTicks <- jaspGraphs::getPrettyAxisBreaks(range(dfBaujat$x, na.rm = TRUE))
   yTicks <- jaspGraphs::getPrettyAxisBreaks(range(dfBaujat$y, na.rm = TRUE))
 
   aesCall <- list(
     x     = as.name("x"),
-    y     = as.name("y"),
-    label = if (options[["studyLabels"]] != "") as.name("label")
+    y     = as.name("y")
   )
   geomCall <- list(
     data    = dfBaujat,
@@ -2042,11 +2663,17 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   # create plot
   plotOut <- do.call(ggplot2::ggplot, geomCall) +
     jaspGraphs::geom_point(
-      size = if (options[["studyLabels"]] != "") 2 else 3
+      size = if (hasStudyLabels) 2 else 3
     )
 
-  if (options[["studyLabels"]] != "")
-    plotOut <- plotOut + ggplot2::geom_text(hjust = 0, vjust = 0)
+  if (hasStudyLabels)
+    plotOut <- plotOut + ggplot2::geom_text(
+      data        = dfBaujat,
+      mapping     = ggplot2::aes(x = x, y = y, label = label),
+      hjust       = 0,
+      vjust       = 0,
+      inherit.aes = FALSE
+    )
 
   plotOut <- plotOut +
     ggplot2::labs(x = gettext("Squared Pearson Residual"), y = gettext("Influence on Fitted Value")) +
@@ -2062,6 +2689,10 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 .maResidualFunnelPlot                    <- function(jaspResults, options) {
 
   if (!is.null(jaspResults[["residualFunnelPlot"]]))
+    return()
+
+  # rstandard() is not available for rma.glmm
+  if (.maIsGLMM(options))
     return()
 
   fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
@@ -2202,11 +2833,11 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     predictedEffect        <- data.frame(
       pred  = fit$beta[1],
       se    = fit$se[1],
-      ddf   = fit$ddf[1],
+      ddf   = .maExtractDdf(fit)[1],
       ci.lb = fit$ci.lb[1],
       ci.ub = fit$ci.ub[1],
-      pi.lb = fit$beta[1] - 1.96 * sqrt(fit$se[1]^2 + predictedHeterogeneity[1, 2]^2),
-      pi.ub = fit$beta[1] + 1.96 * sqrt(fit$se[1]^2 + predictedHeterogeneity[1, 2]^2)
+      pi.lb = fit$beta[1] - 1.96 * sqrt(fit$se[1]^2 + predictedHeterogeneity[["est"]][1]^2),
+      pi.ub = fit$beta[1] + 1.96 * sqrt(fit$se[1]^2 + predictedHeterogeneity[["est"]][1]^2)
     )
 
   } else {
@@ -2299,7 +2930,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   predictedEffect <- data.frame(
     pred  = fit$beta[1],
     se    = fit$se[1],
-    ddf   = fit$ddf[1],
+    ddf   = .maExtractDdf(fit)[1],
     ci.lb = fit$ci.lb[1],
     ci.ub = fit$ci.ub[1],
     pi.lb = NA,
@@ -2319,8 +2950,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   # compute test against specified value
   if (.maIsMetaregressionFtest(options)) {
 
-    # to extract the degrees of freedom
-    tempDf <- predictedEffect$ddf
+    # to extract the degrees of freedom (rma.glmm predict may not have ddf)
+    tempDf <- if (!is.null(predictedEffect$ddf)) predictedEffect$ddf else .maExtractDdf(fit)[1]
     predictedEffect      <- .maExtractAndFormatPrediction(predictedEffect)
     predictedEffect$df   <- tempDf
     predictedEffect$stat <- (predictedEffect$est - 0)  / predictedEffect$se
@@ -2421,18 +3052,19 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   }
 
-  if (!options[["confidenceIntervals"]])
-    confIntHeterogeneity <- confIntHeterogeneity[,c("par", "est")]
-
   return(confIntHeterogeneity)
 }
 .maComputePooledHeterogeneityPlot  <- function(fit, options, parameter = "tau") {
+
+  # dispatch to GLMM-specific function
+  if (inherits(fit, "rma.glmm"))
+    return(.maglmmComputePooledHeterogeneityPlot(fit, options, parameter))
+
 
   # don't use the confint on robust.rma objects (they are not implemented)
   # the clustering works only on the fixed effect estimates
   # -> we can drop the class and compute confint and get the heterogeneity from the original fit
   # (the fit is passed directly from from forest plot function so it is cleaner to dispatch it here)
-
   if (inherits(fit, "robust.rma"))
     class(fit) <- class(fit)[!class(fit) %in% "robust.rma"]
 
@@ -2466,10 +3098,11 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   }
 
   if (.maIsMetaregressionFtest(options)) {
-    if (parameter == "effectSize")
+    if (parameter == "effectSize") {
       row$df2 <- fit[["QMdf"]][2]
-    else if (parameter == "heterogeneity")
+    } else if (parameter == "heterogeneity") {
       row$df2 <- fit[["QSdf"]][2]
+    }
   }
 
 
@@ -2535,7 +3168,11 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   if (parameter == "effectSize") {
 
-    out <- anova(fit, btt = selCoef)
+    if (.maIsGLMM(options)) {
+      out <- .maGlmmWaldTest(fit, btt = selCoef)
+    } else {
+      out <- anova(fit, btt = selCoef)
+    }
 
     row <- list(
       stat = out[["QM"]],
@@ -2544,7 +3181,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     )
 
     if (.maIsMetaregressionFtest(options))
-      row$df2 <- fit[["QMdf"]][2]
+      row$df2 <- out[["QMdf"]][2]
 
   } else if (parameter == "heterogeneity") {
 
@@ -2593,7 +3230,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")     # get terms indices from the model
     termsIndex <- attr(model.matrix(fit[["formula.mods"]], data = fit[["data"]]), "assign")  # get coefficient indices from the model matrix
-    termsIndex <- termsIndex[!fit$coef.na]                                                   # remove dropped coefficients
+    if (!is.null(fit$coef.na))
+      termsIndex <- termsIndex[!fit$coef.na]                                                   # remove dropped coefficients
 
     # deal with the possibility that all coefficients of the corresponding term were dropped
     if (sum(termsIndex == which(terms == term)) == 0) {
@@ -2613,7 +3251,12 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     } else {
 
-      termsAnova <- anova(fit, btt = seq_along(termsIndex)[termsIndex == which(terms == term)])
+      bttIdx <- seq_along(termsIndex)[termsIndex == which(terms == term)]
+      if (.maIsGLMM(options)) {
+        termsAnova <- .maGlmmWaldTest(fit, btt = bttIdx)
+      } else {
+        termsAnova <- anova(fit, btt = bttIdx)
+      }
 
       out <- list(
         term = .maVariableNames(term, unlist(options[["effectSizeModelTerms"]])),
@@ -2633,7 +3276,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     terms      <- attr(terms(fit[["formula.scale"]], data = fit[["data"]]),"term.labels")      # get terms indices from the model
     termsIndex <- attr(model.matrix(fit[["formula.scale"]], data = fit[["data"]]), "assign")   # get coefficient indices from the model matrix
-    termsIndex <- termsIndex[!fit$coef.na.Z]                                                   # remove dropped coefficients
+    if (!is.null(fit$coef.na.Z))
+      termsIndex <- termsIndex[!fit$coef.na.Z]                                                   # remove dropped coefficients
 
     # deal with the possibility that all coefficients of the corresponding term were dropped
     if (sum(termsIndex == which(terms == term)) == 0) {
@@ -2754,9 +3398,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   }
 
   # remove entries corresponding to omitted coefficients
-  if (parameter == "effectSize" && any(fit$coef.na)) {
+  if (parameter == "effectSize" && !is.null(fit$coef.na) && any(fit$coef.na)) {
     outMatrix <- outMatrix[, !fit$coef.na, drop=FALSE]
-  } else if (parameter == "heterogeneity" && any(fit$coef.na.Z)) {
+  } else if (parameter == "heterogeneity" && !is.null(fit$coef.na.Z) && any(fit$coef.na.Z)) {
     outMatrix <- outMatrix[, !fit$coef.na.Z, drop=FALSE]
   }
 
@@ -2866,8 +3510,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     # compute test against specified value
     if (.maIsMetaregressionFtest(options)) {
 
-      # extract degrees of freedom
-      tempDf                     <- computedMarginalMeans$ddf
+      # extract degrees of freedom (rma.glmm predict may not have ddf)
+      tempDf                     <- if (!is.null(computedMarginalMeans$ddf)) computedMarginalMeans$ddf else .maExtractDdf(fit)[1]
       computedMarginalMeans      <- .maExtractAndFormatPrediction(computedMarginalMeans)
       computedMarginalMeans$df   <- tempDf
       computedMarginalMeans$stat <- (computedMarginalMeans$est - testAgainst)  / computedMarginalMeans$se
@@ -2938,7 +3582,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   return(computedMarginalMeans)
 }
-.maComputeContrastVariable         <- function(fit, options, selectedVariable, testAgainst = 0, parameter) {
+.maComputeContrastVariable         <- function(fit, options, selectedVariable, parameter) {
 
   if (jaspBase::isTryError(fit)) {
     return(NULL)
@@ -2997,11 +3641,15 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
         newscale = contrastMatrixHeterogeneity,
         level    = 100 * options[["confidenceIntervalsLevel"]]
       )
-      computedContrastsTests <- anova(
-        fit,
-        X      = contrastMatrixEffectSize,
-        adjust = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]])
-      )
+      if (.maIsGLMM(options)) {
+        computedContrastsTests <- .maGlmmContrastTest(fit, X = contrastMatrixEffectSize, adjust = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]]))
+      } else {
+        computedContrastsTests <- anova(
+          fit,
+          X      = contrastMatrixEffectSize,
+          adjust = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]])
+        )
+      }
 
     } else {
 
@@ -3027,11 +3675,15 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
           newmods   = contrastMatrixEffectSize,
           level     = 100 * options[["confidenceIntervalsLevel"]]
         )
-        computedContrastsTests <- anova(
-          fit,
-          X         = contrastMatrixEffectSize,
-          adjust    = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]])
-        )
+        if (.maIsGLMM(options)) {
+          computedContrastsTests <- .maGlmmContrastTest(fit, X = contrastMatrixEffectSize, adjust = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]]))
+        } else {
+          computedContrastsTests <- anova(
+            fit,
+            X         = contrastMatrixEffectSize,
+            adjust    = .maGetPValueAdjustment(options[["contrastsEffectSizePValueAdjustment"]])
+          )
+        }
 
       }
     }
@@ -3097,7 +3749,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   computedContrasts$comparison <- contrastComparisons
   computedContrasts$stat       <- computedContrastsTests$zval
   if (.maIsMetaregressionFtest(options))
-    computedContrasts$df <- computedContrastsTests$ddf
+    computedContrasts$df <- if (!is.null(computedContrastsTests$ddf)) computedContrastsTests$ddf else .maExtractDdf(fit)[1]
   computedContrasts$pval <- computedContrastsTests$pval
 
   computedContrasts$subgroup <- attr(fit, "subgroup")
@@ -3267,7 +3919,16 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   ### add studies as bubbles
   dataset <- attr(fit, "dataset")
-  if (options[["analysis"]] == "BiBMA") {
+  if (.maIsGLMM(options)) {
+    tempDf    <- .maglmmEscalc(dataset, options)
+    dfStudies <- data.frame(
+      effectSize        = tempDf[["yi"]],
+      inverseVariance   = 1/tempDf[["vi"]],
+      sampleSize        = .maglmmGetSampleSize(dataset, options),
+      constant          = rep(options[["bubblePlotBubblesRelativeSize"]], nrow(dataset)),
+      selectedVariable  = dataset[[attr(dfPlot, "selectedVariable")]]
+    )
+  } else if (options[["analysis"]] == "BiBMA") {
     tempDf <- metafor::escalc(
       measure = "OR",
       ai      = dataset[[options[["successesGroup1"]]]],
@@ -3448,7 +4109,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # add formulas if specified
   rmaInput$mods  <- .maGetFormula(options[["effectSizeModelTerms"]], options[["effectSizeModelIncludeIntercept"]])
-  rmaInput$scale <- .maGetFormula(options[["heterogeneityModelTerms"]], options[["heterogeneityModelIncludeIntercept"]])
+  rmaInput$scale <- if (!.maIsUnrestrictedWeightedLeastSquares(options)) .maGetFormula(options[["heterogeneityModelTerms"]], options[["heterogeneityModelIncludeIntercept"]])
 
   # add random effects
   if (.maIsMultilevelMultivariate(options)) {
@@ -3484,7 +4145,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # specify method and fixed effect terms test
   rmaInput$method <- paste0("'", .maGetMethodOptions(options), "'")
-  rmaInput$test   <- paste0("'", options[["fixedEffectTest"]], "'")
+  rmaInput$test   <- paste0("'", .maGetFixedEffectTestOptions(options), "'")
 
   if (!options[["weightedEstimation"]])
     rmaInput$weighted <- FALSE
@@ -3773,10 +4434,11 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   # xTicks and other attributes only passed for rma.uni
   # (there are way too many options to deal with for rma.mv --- using the metafor package defaults)
-  if (!is.null(attr(dfPlot, "xTicks")))
+  if (!is.null(attr(dfPlot, "xTicks"))) {
     xTicks <- attr(dfPlot, "xTicks")
-  else
+  } else {
     xTicks <- jaspGraphs::getPrettyAxisBreaks(c(min(dfPlot[[1]]), max(dfPlot[[1]])))
+  }
 
   # create plot
   plotOut <- ggplot2::ggplot(
@@ -3816,13 +4478,25 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   return(!is.null(options[["effectSizeModelTerms"]]) && length(options[["effectSizeModelTerms"]]) > 0)
 }
 .maIsMetaregressionHeterogeneity  <- function(options) {
-  return(!is.null(options[["heterogeneityModelTerms"]]) && length(options[["heterogeneityModelTerms"]]) > 0)
+  return(!.maIsUnrestrictedWeightedLeastSquares(options) && !is.null(options[["heterogeneityModelTerms"]]) && length(options[["heterogeneityModelTerms"]]) > 0)
 }
 .maIsClustered                    <- function(options) {
   return(!is.null(options[["clustering"]]) && options[["clustering"]] != "")
 }
 .maIsMetaregressionFtest          <- function(options) {
-  return(!is.null(options[["fixedEffectTest"]]) && options[["fixedEffectTest"]] %in% c("knha", "t"))
+  test <- .maGetFixedEffectTestOptions(options)
+  return(test %in% c("knha", "t"))
+}
+.maIsUnrestrictedWeightedLeastSquares <- function(options) {
+  return(!is.null(options[["method"]]) && options[["method"]] == "unrestrictedWeightedLeastSquares")
+}
+.maExtractDdf                     <- function(object) {
+  # rma.glmm does not store ddf; compute as k - p per metafor docs
+  if (!is.null(object[["ddf"]]))
+    return(object[["ddf"]])
+  if (!is.null(object[["k"]]) && !is.null(object[["p"]]))
+    return(rep(object[["k"]] - object[["p"]], object[["p"]]))
+  return(NULL)
 }
 .maIsMultilevelMultivariate       <- function(options) {
   return(options[["analysis"]] == "metaAnalysisMultilevelMultivariate")
@@ -3851,10 +4525,20 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
       return("FE")
   }
 
+  # GLMM only supports ML/FE (not EE)
+  if (.maIsGLMM(options)) {
+    return(switch(
+      options[["method"]],
+      "maximumLikelihood" = "ML",
+      "equalEffects"      = "FE"
+    ))
+  }
+
   switch(
     options[["method"]],
     "equalEffects"       = "EE",
     "fixedEffects"       = "FE",
+    "unrestrictedWeightedLeastSquares" = "FE",
     "maximumLikelihood"  = "ML",
     "restrictedML"       = "REML",
     "derSimonianLaird"   = "DL",
@@ -3872,6 +4556,15 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     "peto"                      = "PETO",
     NA
   )
+}
+.maGetFixedEffectTestOptions                    <- function(options) {
+  if (.maIsUnrestrictedWeightedLeastSquares(options))
+    return("knha")
+
+  if (identical(options[["analysis"]], "mantelHaenszelPeto"))
+    return("z")
+
+  return(options[["fixedEffectTest"]])
 }
 .maGetFixedTau2Options                          <- function(options) {
 
@@ -4129,7 +4822,35 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   }))
 }
-.maPrintQTest                         <- function(fit) {
+.maPrintQTest                         <- function(fit, type = NULL) {
+
+  # rma.glmm uses QE.Wld/QE.LRT instead of QE/QEp
+  if (inherits(fit, "rma.glmm")) {
+
+    if (is.null(type) || type == "Wald") {
+      heterogeneityName <- if (fit[["p"]] > 1) gettext("Residual heterogeneity (Wald)") else gettext("Heterogeneity (Wald)")
+      if (!.maIsFiniteScalar(fit[["QE.Wld"]]))
+        return(gettextf("%1$s: not available", heterogeneityName))
+      return(sprintf(
+        paste0("%1$s: Q\U2091(%2$i) = ", if (fit[["QE.Wld"]] < 1e5) "%3$.2f" else "%3$.3g", ", %4$s"),
+        heterogeneityName,
+        fit[["QE.df"]],
+        fit[["QE.Wld"]],
+        .maPrintPValue(fit[["QEp.Wld"]])
+      ))
+    } else if (type == "LRT") {
+      heterogeneityName <- if (fit[["p"]] > 1) gettext("Residual heterogeneity (LRT)") else gettext("Heterogeneity (LRT)")
+      if (!.maIsFiniteScalar(fit[["QE.LRT"]]))
+        return(gettextf("%1$s: not available", heterogeneityName))
+      return(sprintf(
+        paste0("%1$s: Q\U2091(%2$i) = ", if (fit[["QE.LRT"]] < 1e5) "%3$.2f" else "%3$.3g", ", %4$s"),
+        heterogeneityName,
+        fit[["QE.df"]],
+        fit[["QE.LRT"]],
+        .maPrintPValue(fit[["QEp.LRT"]])
+      ))
+    }
+  }
 
   if (fit[["p"]] > 1) {
     heterogeneityName <- gettextf("Residual heterogeneity")
@@ -4152,9 +4873,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   if (.maIsMetaregressionHeterogeneity(options)) {
     if (parameter == "effectSize")
-      return(gettextf("Moderation (Effect Size): %1$s", outPrint))
+      return(gettextf("Moderation (effect size): %1$s", outPrint))
     else if (parameter == "heterogeneity")
-      return(gettextf("Moderation (Heterogeneity): %1$s", outPrint))
+      return(gettextf("Moderation (heterogeneity): %1$s", outPrint))
   } else {
     if (parameter == "effectSize")
       return(gettextf("Moderation: %1$s", outPrint))
@@ -4163,6 +4884,10 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 .maPrintHeterogeneityEstimate         <- function(fit, options, digits, parameter) {
 
   out <- .maComputePooledHeterogeneityPlot(fit, options, parameter)
+
+  if (!options[["confidenceIntervals"]] || is.na(out$lCi) || is.na(out$uCi)) {
+    return(sprintf(paste0("%1$s  = ", "%2$.", digits, "f"), out$par, out$est))
+  }
 
   return(sprintf(paste0(
     "%1$s  = ",
@@ -4211,6 +4936,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   } else {
     return(sprintf("p = %.3f", pValue))
   }
+}
+.maIsFiniteScalar                     <- function(x) {
+  return(is.numeric(x) && length(x) == 1 && !is.na(x) && is.finite(x))
 }
 .maPrintEstimateAndInterval           <- function(est, lCi, uCi, digits) {
   return(sprintf(paste0(
@@ -4359,9 +5087,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   row <- do.call(cbind.data.frame, row)
 
   # add footnote message if necessary
-  if (coefficientsTest) {
+  if (coefficientsTest)
     attr(row, "footnote") <- attr(moderationOut, "footnote")
-  }
 
   return(row)
 }
@@ -4374,9 +5101,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
       return(data.frame(.maComputePooledEffect(x, options, returnRaw = TRUE)))
     }
   })
-  est <- do.call(rbind, est[!sapply(est, is.null)])
+  est <- .maSafeRbind(est)
 
-  if (nrow(est) == 0)
+  if (is.null(est) || nrow(est) < 2)
     return()
 
   subFit <- try(metafor::rma(yi = est[["pred"]], sei = est[["se"]], mods = ~ as.factor(1:nrow(est)), method = "FE"))
@@ -4433,8 +5160,10 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     ))
   }
 
-  # pooled effect size
-  if (options[["analysis"]] == "mantelHaenszelPeto") {
+  # pooled heterogeneity
+  if (options[["analysis"]] == "generalizedMetaAnalysis") {
+    row <- .maglmmComputePooledHeterogeneity(fit, options)
+  } else if (options[["analysis"]] == "mantelHaenszelPeto") {
     row <- .mamhpComputePooledHeterogeneity(fit, options)
   } else {
     row <- .maComputePooledHeterogeneity(fit, options)
@@ -4465,17 +5194,43 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   }
 
   # pooled effect size
+  fitStats <- fit[["fit.stats"]]
+
+  # GLMM always uses ML; drop the REML column
+  if (inherits(fit, "rma.glmm") && "REML" %in% colnames(fitStats))
+    fitStats <- fitStats[, "ML", drop = FALSE]
+
+  if (.maIsUnrestrictedWeightedLeastSquares(options))
+    fitStats <- .maComputeUwlsFitMeasures(fitStats, fit)
+
   row <- cbind.data.frame(
     "subgroup"     = attr(fit, "subgroup"),
-    "model"        = colnames(fit[["fit.stats"]]),
+    "model"        = colnames(fitStats),
     "observations" = fit[["k"]],
-    data.frame(t(fit[["fit.stats"]]))
+    data.frame(t(fitStats))
   )
 
-  if (.maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options))
+  if (!.maIsUnrestrictedWeightedLeastSquares(options) &&
+      .maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options) && !.maIsGLMM(options))
     row$R2 <- fit[["R2"]]
 
   return(row)
+}
+.maComputeUwlsFitMeasures             <- function(fitStats, fit) {
+
+  yi          <- fit[["yi"]]
+  vi          <- fit[["vi"]]
+  k           <- fit[["k"]]
+  nParameters <- fit[["p"]] + 1
+
+  sigma2        <- sum(1 / vi * stats::resid(fit)^2) / k
+  logLikelihood <- sum(stats::dnorm(yi, mean = stats::fitted(fit), sd = sqrt(sigma2 * vi), log = TRUE))
+
+  fitStats["ll", ]  <- logLikelihood
+  fitStats["AIC", ] <- -2 * logLikelihood + 2 * nParameters
+  fitStats["BIC", ] <- -2 * logLikelihood + log(k) * nParameters
+
+  return(fitStats[c("ll", "AIC", "BIC"), , drop = FALSE])
 }
 .maRowTermTestTable                   <- function(fit, options, parameter) {
 
@@ -4521,7 +5276,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
       estimates$pval2 <- attr(fit[["pval"]], "permutation")
 
     if (.maIsMetaregressionFtest(options))
-      estimates$df <- fit[["ddf"]]
+      estimates$df <- .maExtractDdf(fit)
 
     if (options[["confidenceIntervals"]]) {
       estimates$lCi <- fit[["ci.lb"]]
@@ -4635,11 +5390,20 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   # the main issue is that some models might be missing coefficients/terms etc
   # as such, simple ordering of the output might misaligned the grouped output
 
+  if (is.null(df) ||
+      length(df) == 0 ||
+      is.null(nrow(df)) ||
+      nrow(df) == 0)
+    return(df)
+
   # drop the grouping column if no subgroups requested
   if (options[["subgroup"]] == "") {
     df <- df[,colnames(df) != "subgroup", drop = FALSE]
     return(df)
   }
+
+  if (!columnName %in% colnames(df))
+    return(df)
 
   # remove rows with NA in the grouping column
   if (anyNA(df[[columnName]])) {
@@ -4972,7 +5736,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")     # get terms indices from the model
     termsIndex <- attr(model.matrix(fit[["formula.mods"]], data = fit[["data"]]), "assign")  # get coefficient indices from the model matrix
-    termsIndex <- termsIndex[!fit$coef.na]                                                   # remove dropped coefficients
+    if (!is.null(fit$coef.na))
+      termsIndex <- termsIndex[!fit$coef.na]                                                   # remove dropped coefficients
 
     termsIndicies <- lapply(terms, function(term){
       seq_along(termsIndex)[termsIndex == which(terms == term)]
@@ -4983,7 +5748,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     terms      <- attr(terms(fit[["formula.scale"]], data = fit[["data"]]),"term.labels")      # get terms indices from the model
     termsIndex <- attr(model.matrix(fit[["formula.scale"]], data = fit[["data"]]), "assign")   # get coefficient indices from the model matrix
-    termsIndex <- termsIndex[!fit$coef.na.Z]                                                   # remove dropped coefficients
+    if (!is.null(fit$coef.na.Z))
+      termsIndex <- termsIndex[!fit$coef.na.Z]                                                   # remove dropped coefficients
 
     termsIndicies <- lapply(terms, function(term){
       seq_along(termsIndex)[termsIndex == which(terms == term)]
@@ -5000,11 +5766,50 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 # messages
 .maFixedEffectTextMessage              <- function(options) {
   return(switch(
-    options[["fixedEffectTest"]],
+    .maGetFixedEffectTestOptions(options),
     "z"    = gettext("Fixed effects tested using z-distribution."),
     "t"    = gettext("Fixed effects tested using t-distribution."),
     "knha" = gettext("Fixed effects tested using Knapp and Hartung adjustment."),
     stop(paste0("Unknown fixed effect test.", options[["fixedEffectTest"]]))
+  ))
+}
+.maAddFixedEffectTestFootnote          <- function(table, options) {
+  if (!.maIsUnrestrictedWeightedLeastSquares(options))
+    table$addFootnote(.maFixedEffectTextMessage(options))
+}
+.maAddLowDdfWarning                    <- function(table, fit, options) {
+  lowDdfWarning <- .maLowDdfWarning(fit, options)
+
+  if (!is.null(lowDdfWarning))
+    table$addFootnote(lowDdfWarning, symbol = gettext("Warning:"))
+}
+.maLowDdfWarning                       <- function(fit, options) {
+  if (!.maHasDdfBelow(fit, threshold = 4))
+    return(NULL)
+
+  if (.maIsClustered(options) && isTRUE(options[["clusteringUseClubSandwich"]]))
+    return(gettext("Cluster-robust inference has very low effective degrees of freedom. When Satterthwaite df < 4, p-values should be interpreted with extreme caution."))
+
+  if (!.maIsClustered(options) && .maGetFixedEffectTestOptions(options) == "knha")
+    return(gettext("Knapp-Hartung inference is based on very few residual degrees of freedom; results can be sensitive and should be interpreted cautiously."))
+
+  return(NULL)
+}
+.maHasDdfBelow                         <- function(fit, threshold) {
+  ddf <- unlist(lapply(fit, .maExtractFitDdf), use.names = FALSE)
+  ddf <- as.numeric(ddf)
+  ddf <- ddf[is.finite(ddf)]
+
+  return(length(ddf) > 0 && any(ddf < threshold))
+}
+.maExtractFitDdf                       <- function(fit) {
+  if (jaspBase::isTryError(fit))
+    return(NULL)
+
+  return(c(
+    .maExtractDdf(fit),
+    fit[["QMdf"]][2],
+    fit[["QSdf"]][2]
   ))
 }
 .meMetaregressionHeterogeneityMessages <- function(options) {
@@ -5039,10 +5844,7 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
     if (!is.null(options[["clustering"]]) && options[["clustering"]] != "") {
       if (!jaspBase::isTryError(tempFit) && !is.null(tempFit)){
-        if (all(tempFit[["tcl"]][1] == tempFit[["tcl"]]))
-          messages <- c(messages, gettextf("%1$i clusters with %2$i estimates each.", tempFit[["n"]],  tempFit[["tcl"]][1]))
-        else
-          messages <- c(messages, gettextf("%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates.", tempFit[["n"]],  min(tempFit[["tcl"]]), round(median(tempFit[["tcl"]])), max(tempFit[["tcl"]])))
+        messages <- c(messages, .maClusterRobustInferenceMessage(tempFit, options))
       }
     }
   } else {
@@ -5056,20 +5858,25 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
       if (!is.null(options[["clustering"]]) && options[["clustering"]] != "") {
         if (!jaspBase::isTryError(tempFit) && !is.null(tempFit)) {
-          if (all(tempFit[["tcl"]][1] == tempFit[["tcl"]]))
-            messages <- c(messages, gettextf("%1$s: %2$i clusters with %3$i estimates each.", gettextf("Subgroup %1$s", attr(tempFit, "subgroup")), tempFit[["n"]],  tempFit[["tcl"]][1]))
-          else
-            messages <- c(messages, gettextf("%1$s: %2$i clusters with min/median/max %3$i/%4$i/%5$i estimates.", gettextf("Subgroup %1$s", attr(tempFit, "subgroup")), tempFit[["n"]],  min(tempFit[["tcl"]]), round(median(tempFit[["tcl"]])), max(tempFit[["tcl"]])))
+          clusterRobustMessage <- .maClusterRobustInferenceMessage(tempFit, options)
+          if (!is.null(clusterRobustMessage))
+            messages <- c(messages, gettextf("%1$s: %2$s", gettextf("Subgroup %1$s", attr(tempFit, "subgroup")), clusterRobustMessage))
         }
       }
     }
+  }
+
+  if (.maIsMultilevelMultivariate(options)) {
+    varianceCovarianceMatrixMessage <- .mammVarianceCovarianceMatrixMessage(options)
+    if (!is.null(varianceCovarianceMatrixMessage))
+      messages <- c(messages, varianceCovarianceMatrixMessage)
   }
 
   if (options[["transformEffectSize"]] != "none") {
     if (anyNA) {
       messages <- c(messages, gettextf("NAs in the %1$s were introduced due to the %2$s transformation. Please verify that you are using the correct effect size transformation.", effectSizeName, .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
     } else {
-      messages <- c(messages, gettextf("The %1$s is transformed using %2$s transformation.", effectSizeName, .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
+      messages <- c(messages, gettextf("The %1$s is transformed using %2$s transformation. For nonlinear transformations, the transformed estimate is interpreted as a median on the transformed scale.", effectSizeName, .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
     }
   }
 
@@ -5085,7 +5892,13 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     messages <- c(messages, gettext("The pooled heterogeneity estimate corresponds to the heterogeneity at the average of predictor values."))
 
   if (.maIsMetaregressionHeterogeneity(options) && (options[["heterogeneityI2"]] || options[["heterogeneityH2"]]))
-    messages <- c(messages, gettext("The I² and H² statistics are not available for heterogeneity models."))
+    messages <- c(messages, gettext("The I\U00B2 and H\U00B2 statistics are not available for heterogeneity models."))
+
+  if (.maIsGLMM(options) && options[["confidenceIntervals"]] &&
+      (options[["heterogeneityTau"]] || options[["heterogeneityTau2"]] || options[["heterogeneityI2"]] || options[["heterogeneityH2"]]) &&
+      !jaspBase::isTryError(fit[[1]]) && is.na(fit[[1]][["ci.lb.tau2"]])) {
+    messages <- c(messages, gettext("Heterogeneity confidence intervals are not available for this GLMM model type."))
+  }
 
   if (.maIsMultilevelMultivariate(options) && any(attr(fit[[1]], "skipped")) && !jaspBase::isTryError(fit[[1]]))
     messages <- c(messages, gettextf("The Model Structure %1$s was not completely specified and was skipped.", paste0(which(attr(fit[[1]], "skipped")), collapse = " and ")))
@@ -5094,6 +5907,56 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     messages <- c(messages, gettextf("Prediction interval for the %1$s is not available for models with multiple heterogeneity estimates.", effectSizeName))
 
   return(messages)
+}
+.maClusterRobustInferenceMessage <- function(fit, options) {
+
+  if (!.maIsClustered(options) || jaspBase::isTryError(fit) || is.null(fit))
+    return(NULL)
+
+  clusterSummary <- .maClusterRobustSummaryMessage(fit)
+  if (is.null(clusterSummary))
+    return(NULL)
+
+  return(gettextf(
+    "Cluster-robust tests and confidence intervals were computed using %1$s as the clustering variable (%2$s). %3$s",
+    decodeColNames(options[["clustering"]]),
+    clusterSummary,
+    .maClusterRobustMethodMessage(options)
+  ))
+}
+.maClusterRobustSummaryMessage   <- function(fit) {
+
+  clusterCounts <- fit[["tcl"]]
+  nClusters     <- fit[["n"]]
+
+  if (is.null(clusterCounts) || is.null(nClusters) || length(clusterCounts) == 0)
+    return(NULL)
+
+  if (all(clusterCounts[1] == clusterCounts)) {
+    return(gettextf(
+      "%1$i clusters; %2$i estimates per cluster",
+      nClusters,
+      clusterCounts[1]
+    ))
+  }
+
+  return(gettextf(
+    "%1$i clusters; min/median/max %2$i/%3$i/%4$i estimates per cluster",
+    nClusters,
+    min(clusterCounts),
+    round(stats::median(clusterCounts)),
+    max(clusterCounts)
+  ))
+}
+.maClusterRobustMethodMessage    <- function(options) {
+
+  if (isTRUE(options[["clusteringUseClubSandwich"]]))
+    return(gettext("clubSandwich was used with CR2 adjustment and Satterthwaite degrees of freedom."))
+
+  if (isTRUE(options[["clusteringSmallSampleCorrection"]]))
+    return(gettext("A CR1 small-sample correction was applied."))
+
+  return(gettext("Unadjusted CR0 cluster-robust standard errors were used."))
 }
 .maEstimatedMarginalMeansMessages      <- function(options, parameter, anyNA = FALSE) {
 
@@ -5105,9 +5968,9 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
 
   if (parameter == "effectSize" && options[["transformEffectSize"]] != "none") {
     if (anyNA) {
-      messages <- c(messages, gettextf("NAs in the marginal mean estimatess were introduced due to the %1$s transformation. Please verify that you are using the correct effect size transformation.", .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
+      messages <- c(messages, gettextf("NAs in the marginal mean estimates were introduced due to the %1$s transformation. Please verify that you are using the correct effect size transformation.", .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
     } else {
-      messages <- c(messages, gettextf("The estimates and intervals are transformed using %1$s transformation.", .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
+      messages <- c(messages, gettextf("The marginal mean estimates and intervals are transformed using %1$s transformation. For nonlinear transformations, transformed marginal means are interpreted as medians on the transformed scale.", .maGetOptionsNameEffectSizeTransformation(options[["transformEffectSize"]])))
     }
   }
 
@@ -5165,6 +6028,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     return(gettext("Fewer than two estimates."))
   if (grepl("Must specify the 'weights' argument when method=", message))
     return(gettext("The selected 'Method' requires specification of the 'Weights' option in the 'Advanced' section."))
+  if (grepl("Cannot fit ML model", message))
+    return(gettext("The GLMM could not be estimated for the selected model. This can happen with sparse event counts, risk differences, random study effects, or a moderator structure that is too complex for the data. Try simplifying the moderator model, using the fixed study-effects GLMM, changing the effect-size measure if appropriate, or centering/scaling continuous moderators.\n\nMetafor reported: Cannot fit ML model."))
 
   return(message)
 }

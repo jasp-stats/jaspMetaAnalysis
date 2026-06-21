@@ -19,6 +19,7 @@ Imports:
   metaBMA (>= 0.6.3),
   metafor,
   metaSEM,
+  lme4,
   psych,
   purrr,
   rstan,
@@ -31,10 +32,14 @@ Imports:
   metamisc (>= 0.2.5),
   ggmcmc,
   pema,
+  robvis,
   clubSandwich,
   CompQuadForm,
   sp,
+  BiasedUrn,
   dfoptim,
+  minqa,
+  nloptr,
   nleqslv,
   patchwork
 Remotes:

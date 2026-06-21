@@ -51,3 +51,7 @@ _processedLockFile.lock
 renv/activate.R
 .Rprofile
 /.vs
+
+knowledge-base/*
+.positai
+/.StatsVault

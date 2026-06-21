@@ -25,6 +25,7 @@ Section
 	title:							qsTr("Model")
 	columns:						2
 	property string analysisType:	"metaAnalysis"
+	property string methodValue:		""
 	info: qsTr("Options for specifing the effect size and heterogeneity models based on the included predictors, including model terms, intercepts, and link functions.")
 
 	property alias effectSizeModelTerms:				effectSizeModelTerms
@@ -35,8 +36,8 @@ Section
 
 	Group
 	{
-		title: qsTr("Effect size model")
-		info: qsTr("Specify the effect size model.")
+		title: qsTr("Effect size model (location)")
+		info: qsTr("Specify the meta-regression model for the location (effect size) parameter. The simple terms are automatically filled in from the 'Predictors' variable input.")
 
 		VariablesForm
 		{
@@ -73,10 +74,11 @@ Section
 
 	Group
 	{
-		title:			qsTr("Heterogeneity model")
+		title:			qsTr("Heterogeneity model (scale)")
 		visible:		analysisType === "metaAnalysis"
+		enabled:		methodValue !== "unrestrictedWeightedLeastSquares"
 		columns:		2
-		info: qsTr("Specify the heterogeneity model. Unavailable when performing multilevel/multivariate meta-analysis.")
+		info: qsTr("Specify the meta-regression model for the scale (heterogeneity) parameter. Unavailable when performing multilevel/multivariate meta-analysis.")
 
 		VariablesForm
 		{

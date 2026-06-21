@@ -26,6 +26,8 @@ paths:
   Add `$dependOn()` to every output (table/plot/text/container/state) so JASP knows when to reuse or drop it.
   Outputs nested within containers inherit all dependencies from the container.
 
+- **NEVER instantiate jaspResults C++ objects directly** (e.g., `jaspResultsClass$new()`, `create_cpp_jaspResults()`, `jaspBase:::initJaspResults()`). These require JASP Desktop C++ initialization unavailable in headless R sessions. They crash with `Rcpp::not_initialized` or `Expecting an external pointer`. Always use `jaspTools::runAnalysis()` or `agentTestAll()` which handle initialization internally.
+
 - **Errors:**
   - Catch run-time errors with `try(...)` and report via `$setError()`.
   - Wrap user-visible text with `gettext()` / `gettextf()` for translation.

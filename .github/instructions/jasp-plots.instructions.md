@@ -1,5 +1,6 @@
 ---
 applyTo: "**/R/*.R"
+description: "Plot lifecycle, composite plots, subgroup/facet patterns in jaspResults"
 ---
 
 # JASP Plot Building Patterns
@@ -7,7 +8,7 @@ applyTo: "**/R/*.R"
 How to create and configure plots in jaspResults.
 
 For dependency mechanics see [jasp-dependency-management.md](jasp-dependency-management.md).
-For testing plots see [testing-instructions.md](testing-instructions.md) (`expect_equal_plots`).
+For testing plots see [testing.instructions.md](testing.instructions.md) (`expect_equal_plots`).
 
 ---
 

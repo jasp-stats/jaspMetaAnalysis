@@ -93,13 +93,13 @@ Section
 					label:		qsTr("Size")
 					info: qsTr("Options for determining the size of the observed estimates.")
 					values:
-					if (analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate")
+					if (analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis")
 						[
 							{ label: qsTr("Weight")				, value: "weight"},
 							{ label: qsTr("Inverse variance")	, value: "inverseVariance"	},
 							{ label: qsTr("Equal")				, value: "equal"	}
 						]
-					else if (analysisType === "BiBMA")
+					else if (analysisType === "BiBMA" || analysisType === "generalizedMetaAnalysis")
 						[
 							{ label: qsTr("Sample size")		, value: "sampleSize"	},
 							{ label: qsTr("Inverse variance")	, value: "inverseVariance"	},
@@ -171,7 +171,7 @@ Section
 				label:		qsTr("Prediction intervals")
 				checked:	true
 				info: qsTr("Include prediction intervals of the estimated effect sizes.")
-				visible:	analysisType === "metaAnalysis" || analysisType === "metaAnalysisMultilevelMultivariate"
+				visible:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || analysisType === "generalizedMetaAnalysis"
 
 				DoubleField
 				{
