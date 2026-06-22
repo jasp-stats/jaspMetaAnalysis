@@ -295,7 +295,7 @@
     },
     "RoBMA": {
       "Package": "RoBMA",
-      "Version": "4.0.0",
+      "Version": "3.6.1",
       "Source": "Repository",
       "Requirements": [
         "BayesTools",
