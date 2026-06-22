@@ -13,7 +13,7 @@
 >   * **Deprecated / Removed:** Outdated analyses, options, or legacy code.
 
 ---
-# jaspMetaAnalysis 0.95.6
+# jaspMetaAnalysis 0.96.6
 ## Fixed
 * Diagnostics handling for location-scale models
 
