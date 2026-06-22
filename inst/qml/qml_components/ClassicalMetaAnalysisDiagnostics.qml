@@ -24,6 +24,8 @@ Section
 {
 	title:							qsTr("Diagnostics")
 	property string analysisType:	"metaAnalysis"
+	property int heterogeneityModelTermsCount: 0
+	readonly property bool locationScaleModel: analysisType === "metaAnalysis" && heterogeneityModelTermsCount > 0
 	columns:						1
 	info: qsTr("Options for evaluating the influence of individual studies and assessing model diagnostics, including variance inflation factors, casewise diagnostics, and diagnostic plots.")
 
@@ -65,6 +67,7 @@ Section
 					name:		"diagnosticsCasewiseDiagnosticsShowInfluentialOnly"
 					text:		qsTr("Show influential only")
 					visible:	analysisType === "metaAnalysis"
+					enabled:	!locationScaleModel
 					info: qsTr("Show only the influential studies in the casewise diagnostics. Unavailable when performing multilevel/multivariate meta-analysis.")
 				}
 
@@ -79,6 +82,7 @@ Section
 				{
 					name:		"diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"
 					text:		qsTr("Difference in coefficients")
+					enabled:	!locationScaleModel
 					info: qsTr("Include the differences in model coefficients when each study is excluded (DFBETAS).")
 				}
 
@@ -103,7 +107,7 @@ Section
 				name:		"diagnosticsPlotsProfileLikelihood"
 				text:		qsTr("Profile likelihood")
 				visible:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis"
-				enabled:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis"
+				enabled:	(analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis") && !locationScaleModel
 				info: qsTr("Include a profile likelihood plot for the heterogeneity parameter (τ²).")
 			}
 
@@ -112,6 +116,7 @@ Section
 				name:		"diagnosticsPlotsBaujat"
 				text:		qsTr("Baujat")
 				visible:	analysisType === "metaAnalysis" || analysisType === "mantelHaenszelPeto"
+				enabled:	!locationScaleModel
 				info: qsTr("Include a Baujat plot to detect studies contributing to heterogeneity and overall effect size. Unavailable when performing multilevel/multivariate meta-analysis. Note that Baujat plot is always based on the non-clustered model.")
 			}
 
