@@ -1,41 +1,37 @@
 # jaspMetaAnalysis Changelog
 
 > **HOW TO READ AND UPDATE THIS CHANGELOG:**
-> 
+>
 > This document follows a modified [Keep a Changelog](https://keepachangelog.com/) format adapted for the R/JASP ecosystem. Releases are listed in reverse chronological order (newest first).
-> As an example see [jaspModuleTemplate](https://github.com/jasp-stats/jaspModuleTemplate/blob/master/NEWS.md)
-> * **Adding New Changes (For Contributors):** All new commits should be logged at the very top of the file under the `# jaspModuleTemplate (development version)` header. Place your bullet point under the appropriate category (`## Added`, `## Fixed`, etc.). 
-> * **Issue References:** Please reference the relevant GitHub Issue (if any) at the end of your line (e.g., `([Issue #19](https://github.com/jasp-stats/jaspModuleTemplate/issues/19)`). 
-> * **Format Categories:** >   * **Added:** New template features, QML examples, or build tools.
->   * **Changed:** Updates to default configurations, boilerplate code, or dependencies. 
->   * **Fixed:** Bug fixes in the build pipeline, R wrappers, or QML layouts.
->   * **Deprecated / Removed:** Outdated template components or legacy code.
-
-
----
-
-# jaspMetaAnalysis (development version)
-
-
+> As an example see [jaspModuleTemplate](https://github.com/jasp-stats/jaspModuleTemplate/blob/master/NEWS.md).
+> * **Adding New Changes (For Contributors):** All new commits should be logged at the very top of the file under the `# jaspMetaAnalysis (development version)` header. Place your bullet point under the appropriate category (`## Added`, `## Changed`, `## Fixed`, etc.).
+> * **Issue References:** Please reference the relevant GitHub Issue (if any) at the end of your line (e.g., `([Issue #19](https://github.com/jasp-stats/jaspMetaAnalysis/issues/19))`).
+> * **Format Categories:**
+>   * **Added:** New analyses, features, options, or output.
+>   * **Changed:** Updates to existing analyses, defaults, dependencies, or output.
+>   * **Fixed:** Bug fixes in analyses, plots, tables, help, or QML layouts.
+>   * **Deprecated / Removed:** Outdated analyses, options, or legacy code.
 
 ---
+# jaspMetaAnalysis 0.96.6
+## Fixed
+* Diagnostics handling for location-scale models
 
-# jaspModuleTemplate 0.2.0
-## Added
-* Added NEWS.md
-* Added workflow to remind users to update their `NEWS.md`.
-* Added workflow to auto-bump version when user does not do so.
-
----
-
-# jaspModuleTemplate 0.1.0
+# jaspMetaAnalysis 0.95.5
 
 ## Added
-* Initial examples to showcase JASP module development
+* Added Classical Generalized (GLMM) Meta-Analysis.
+* Added Effect Size Aggregation for clustered/dependent effect sizes.
+* Added Forest Plot analysis.
+* Added Risk of Bias Plot analysis for RoB 2, ROBINS-I, and QUADAS-2.
+* Added dataset exports for model-derived fit information in classical analyses, including diagnostics, residuals, predicted values, true-effect estimates, random effects, and weights.
 
 ## Changed
-* Use best practices for checking input ([Issue #19](https://github.com/jasp-stats/jaspModuleTemplate/issues/19)).
-* The main results table now defaults to displaying 95% Confidence Intervals for effect sizes.
+* Improved forest plots with transformed axis labels, manual ticks, axis limits, reference lines, weights, metadata panels, and subgroup/aggregation displays.
+* Improved forest plot handling of estimates and intervals outside the plotting range.
+* Updated dependencies and test coverage for new analyses and plots.
 
 ## Fixed
-* Remove deprecated dependencies from qml files ([Issue #14](https://github.com/jasp-stats/jaspModuleTemplate/issues/14)).
+* Fixed footnote handling in classical meta-analysis moderator-test tables.
+* Improved/fixed transformation notes for nonlinear estimates and marginal means.
+* Fixed small help/output typos.

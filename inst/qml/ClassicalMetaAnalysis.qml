@@ -179,9 +179,15 @@ Form
 
 	MA.BubblePlot {}
 
-	MA.ClassicalMetaAnalysisDiagnostics {}
+	MA.ClassicalMetaAnalysisDiagnostics
+	{
+		heterogeneityModelTermsCount: sectionModel.heterogeneityModelTermsCount
+	}
 
-	MA.ClassicalMetaAnalysisExport {}
+	MA.ClassicalMetaAnalysisExport
+	{
+		heterogeneityModelTermsCount: sectionModel.heterogeneityModelTermsCount
+	}
 
 	MA.ClassicalMetaAnalysisAdvanced
 	{

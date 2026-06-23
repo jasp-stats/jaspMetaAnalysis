@@ -22,9 +22,11 @@ import JASP
 
 Section
 {
-	title:							qsTr("Export")
-	property string analysisType:	"metaAnalysis"
-	columns:						2
+	title:										qsTr("Export")
+	property string analysisType:				"metaAnalysis"
+	property int heterogeneityModelTermsCount:	0
+	readonly property bool locationScaleModel: analysisType === "metaAnalysis" && heterogeneityModelTermsCount > 0
+	columns:									2
 	info: qsTr("Options for exporting model-derived quantities to the dataset.")
 
 	Group
@@ -37,6 +39,7 @@ Section
 			name:		"exportDiagnosticsInfluentialCases"
 			text:		qsTr("Influential cases")
 			visible:	analysisType === "metaAnalysis"
+			enabled:	!locationScaleModel
 			info: qsTr("Export an indicator for influential cases.")
 		}
 
@@ -52,6 +55,7 @@ Section
 			name:		"exportDiagnosticsModelImpact"
 			text:		qsTr("Model impact")
 			visible:	analysisType === "metaAnalysis"
+			enabled:	!locationScaleModel
 			info: qsTr("Export diagnostics for how individual cases affect the model fit.")
 		}
 
@@ -59,6 +63,7 @@ Section
 		{
 			name:	"exportDiagnosticsCoefficientInfluence"
 			text:	qsTr("Coefficient influence")
+			enabled:	!locationScaleModel
 			info: qsTr("Export coefficient influence diagnostics.")
 		}
 	}
@@ -90,8 +95,9 @@ Section
 
 		CheckBox
 		{
-			name:	"exportResidualsStudentized"
-			text:	qsTr("Studentized")
+			name:		"exportResidualsStudentized"
+			text:		qsTr("Studentized")
+			enabled:	!locationScaleModel
 			info: qsTr("Export studentized residuals.")
 		}
 
