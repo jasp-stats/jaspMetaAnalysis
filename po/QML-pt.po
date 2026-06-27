@@ -1552,14 +1552,6 @@ msgctxt "Description|"
 msgid "Funnel Plot"
 msgstr "Gráfico de Funil"
 
-msgctxt "Description|"
-msgid "Meta-Analysis (Multilevel/Multivariate)"
-msgstr "Meta-Análise (Multinível/Multivariada)"
-
-msgctxt "Description|"
-msgid "Classical Meta-Analysis (Multilevel/Multivariate)"
-msgstr "Meta-Análise Clássica (multinível/multivariada)"
-
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Variable containing the observed effect sizes."
 msgstr "Variável contendo os tamanhos de efeito observados."
@@ -1573,15 +1565,6 @@ msgstr ""
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Method"
 msgstr "Método"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid ""
-"Method used to estimate heterogeneity (tau-squared) in the meta-analysis. "
-"The available methods depend on the inclusion of heterogeneity model terms."
-msgstr ""
-"Método utilizado para estimar a heterogeneidade (tau-quadrado) na meta-"
-"análise. Os métodos disponíveis dependem da inclusão de termos do modelo de "
-"heterogeneidade."
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Equal Effects"
@@ -1638,10 +1621,6 @@ msgstr "Estat-Q generalizada"
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Generalized Q-stat (MU)"
 msgstr "Estat-Q generalizada (MU)"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Fixed effect test"
-msgstr "Teste de efeitos fixos"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid ""
@@ -2415,10 +2394,6 @@ msgid "REH"
 msgstr "REH"
 
 msgctxt "EffectSizeComputation|"
-msgid "Group 1/Outcome +"
-msgstr "Grupo 1/Resultado +"
-
-msgctxt "EffectSizeComputation|"
 msgid "Time 1/Outcome +"
 msgstr "Tempo 1/Resultado +"
 
@@ -2435,10 +2410,6 @@ msgid "Homozygous Dominant Alleles"
 msgstr "Alelos Dominantes Homozigotos"
 
 msgctxt "EffectSizeComputation|"
-msgid "Group 1/Outcome -"
-msgstr "Grupo 1/Resultado -"
-
-msgctxt "EffectSizeComputation|"
 msgid "Time 1/Outcome -"
 msgstr "Tempo 1/Resultado -"
 
@@ -2449,10 +2420,6 @@ msgstr "Resultado +/-"
 msgctxt "EffectSizeComputation|"
 msgid "Heterozygous Alleles"
 msgstr "Alelos Heterozigotos"
-
-msgctxt "EffectSizeComputation|"
-msgid "Group 2/Outcome +"
-msgstr "Grupo 2/Resultado +"
 
 msgctxt "EffectSizeComputation|"
 msgid "Time 2/Outcome +"
@@ -3580,24 +3547,6 @@ msgstr ""
 "excluído (DFBETAS)."
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
-msgid "Export to dataset"
-msgstr "Exportar para o conjunto de dados"
-
-msgctxt "ClassicalMetaAnalysisDiagnostics|"
-msgid "Export the casewise diagnostics results to the dataset."
-msgstr ""
-"Exporte os resultados do diagnóstico por caso para o conjunto de dados."
-
-msgctxt "ClassicalMetaAnalysisDiagnostics|"
-msgid "Influential indicator only"
-msgstr "Apenas indicador influente"
-
-msgctxt "ClassicalMetaAnalysisDiagnostics|"
-msgid "Export only the indicator of influential cases to the dataset."
-msgstr ""
-"Exporte apenas o indicador de casos influentes para o conjunto de dados."
-
-msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Profile likelihood"
 msgstr "Perfil de verossimilhança"
 
@@ -3721,14 +3670,6 @@ msgstr ""
 "funções de ligação."
 
 msgctxt "ClassicalMetaAnalysisModel|"
-msgid "Effect size model"
-msgstr "Modelo de tamanho de efeito"
-
-msgctxt "ClassicalMetaAnalysisModel|"
-msgid "Specify the effect size model."
-msgstr "Especifique o modelo de tamanho do efeito."
-
-msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Available Components"
 msgstr "Componentes Disponíveis"
 
@@ -3748,10 +3689,6 @@ msgstr "Incluir intercepto"
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Include an intercept in the effect size model."
 msgstr "Inclua um intercepto no modelo de tamanho do efeito."
-
-msgctxt "ClassicalMetaAnalysisModel|"
-msgid "Heterogeneity model"
-msgstr "Modelo de heterogeneidade"
 
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid ""
@@ -4412,321 +4349,6 @@ msgid ""
 msgstr ""
 "Incluir a saída completa do conjunto de dados na análise de subgrupo. Esta "
 "opção só está disponível quando a análise de subgrupo é selecionada."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Effect Size Variance-Covariance Matrix"
-msgstr "Matriz de Variância-Covariância do Tamanho do Efeito"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Options for specifying the approximate variance-covariance matrix of the "
-"effect sizes. This matrix is used to account for the correlation between "
-"effect sizes when they are not independent."
-msgstr ""
-"Opções para especificar a matriz de variância-covariância aproximada dos "
-"tamanhos de efeito. Esta matriz é usada para contabilizar a correlação entre "
-"os tamanhos de efeito quando eles não são independentes."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Type"
-msgstr "Tipo"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Type of variance-covariance matrix input method."
-msgstr "Tipo de método de entrada de matriz de variância-covariância."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Correlation matrix"
-msgstr "Matriz de correlação"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Use a list of variables to specify the correlation matrix of studies "
-"corresponding to the same cluster. Corresponds to the `rvars` option in the "
-"metafor's 'vcalc' function."
-msgstr ""
-"Use uma lista de variáveis para especificar a matriz de correlação de "
-"estudos correspondentes ao mesmo agrupamento. Corresponde à opção `rvars` na "
-"função `vcalc` do metafor."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Constructs, groups, and times"
-msgstr "Construções, grupos e tempos"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Specify constructs, groups, and times of the measurement to specify the "
-"correlation matrix of studies corresponding to the same cluster."
-msgstr ""
-"Especifique constructos, grupos e tempos da medição para especificar a "
-"matriz de correlação de estudos correspondentes ao mesmo agrupamento."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Precomputed"
-msgstr "Pré-calculado"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Load a csv file containing the precomputed variance-covariance matrix."
-msgstr ""
-"Carregue um arquivo csv contendo a matriz de variância-covariância pré-"
-"calculada."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Effect size variance-covariance matrix file"
-msgstr "Arquivo de matriz de variância-covariância do tamanho do efeito"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"CSV file containing the precomputed effect size variance-covariance matrix. "
-"The matrix needs to match the dimensions of the data set and cannot contain "
-"any other variables or names."
-msgstr ""
-"Arquivo CSV contendo a matriz de variância-covariância do tamanho do efeito "
-"pré-calculada. A matriz precisa corresponder às dimensões do conjunto de "
-"dados e não pode conter outras variáveis ou nomes."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Correlation Matrix"
-msgstr "Matriz de Correlação"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Variable specifying the correlation between the individual estimates within "
-"cluster. The column order of the variable correspond to the row order of "
-"effect size estimates within cluster. Only the lower triangle needs to be "
-"specified. Corresponds to the `rvars` option in the metafor's 'vcalc' "
-"function."
-msgstr ""
-"Variável que especifica a correlação entre as estimativas individuais dentro "
-"do agrupamento. A ordem das colunas da variável corresponde à ordem das "
-"linhas das estimativas do tamanho do efeito dentro do agrupamento. Apenas o "
-"triângulo inferior precisa ser especificado. Corresponde à opção `rvars` na "
-"função `vcalc` do metafor."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Construct"
-msgstr "Construto"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Variable specifying the construct measured by the effect size. Corresponds "
-"to the `obs` option in the metafor's 'vcalc' function."
-msgstr ""
-"Variável que especifica o constructo medido pelo tamanho do efeito. "
-"Corresponde à opção `obs` na função `vcalc' do metafor."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Construct Type"
-msgstr "Tipo de Construto"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Variable specifying the type of construct measured by the effect size. "
-"Construct Type corresponds to a higher level grouping of the Constructs. "
-"Corresponds to the `type` option in the metafor's 'vcalc' function."
-msgstr ""
-"Variável que especifica o tipo de constructo medido pelo tamanho do efeito. "
-"O Tipo de Construto corresponde a um agrupamento de nível superior dos "
-"Construtos. Corresponde à opção `type` na função `vcalc` do metafor."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Time 1"
-msgstr "Tempo 1"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Variable specifying the time point of the effect size measurement. In case "
-"multiple time points are specified, the first time corresponds to the first "
-"condition."
-msgstr ""
-"Variável que especifica o ponto temporal da medição do tamanho do efeito. "
-"Caso sejam especificados vários pontos temporais, o primeiro corresponde à "
-"primeira condição."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Time 2"
-msgstr "Tempo 2"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Variable specifying the time point of the effect size measurement. In case "
-"multiple time points are specified, the second time corresponds to the "
-"second condition."
-msgstr ""
-"Variável que especifica o ponto temporal da medição do tamanho do efeito. "
-"Caso sejam especificados vários pontos temporais, o segundo momento "
-"corresponde à segunda condição."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Group 1"
-msgstr "Grupo 1"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Variable to specify the group of the first condition when the observed "
-"effect sizes or outcomes represent contrasts between two conditions. "
-"Corresponds to the `grp1` argument in the metafor's 'vcalc' function."
-msgstr ""
-"Variável para especificar o grupo da primeira condição quando os tamanhos de "
-"efeito ou resultados observados representam contrastes entre duas condições. "
-"Corresponde ao argumento `grp1` na função `vcalc` do metafor."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Group 2"
-msgstr "Grupo 2"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Variable to specify the group of the second condition when the observed "
-"effect sizes or outcomes represent contrasts between two conditions. "
-"Corresponds to the `grp1` argument in the metafor's 'vcalc' function."
-msgstr ""
-"Variável para especificar o grupo da segunda condição quando os tamanhos de "
-"efeito ou resultados observados representam contrastes entre duas condições. "
-"Corresponde ao argumento `grp1` na função `vcalc' do metafor."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Group Size 1"
-msgstr "Tamanho do Grupo 1"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Variable to specify the size of the group (or more generally, the inverse-"
-"sampling variance weight) of the first condition when the observed effect "
-"sizes or outcomes represent contrasts between two conditions. Corresponds to "
-"the `w1` argument in the metafor's 'vcalc' function."
-msgstr ""
-"Variável para especificar o tamanho do grupo (ou, mais genericamente, o peso "
-"da variância da amostragem inversa) da primeira condição quando os tamanhos "
-"de efeito ou resultados observados representam contrastes entre duas "
-"condições. Corresponde ao argumento `w1` na função `vcalc` do metafor."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Group Size 2"
-msgstr "Tamanho do Grupo 2"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Optional numeric vector to specify the size of the group (or more generally, "
-"the inverse-sampling variance weight) of the second condition when the "
-"observed effect sizes or outcomes represent contrasts between two "
-"conditions. Corresponds to the `w2` argument in the metafor's 'vcalc' "
-"function."
-msgstr ""
-"Vetor numérico opcional para especificar o tamanho do grupo (ou, de forma "
-"mais geral, o peso da variância da amostragem inversa) da segunda condição "
-"quando os tamanhos de efeito ou resultados observados representam contrastes "
-"entre duas condições. Corresponde ao argumento `w2` na função `vcalc` do "
-"metafor."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Subcluster"
-msgstr "Subagrupamento"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Variable specifying additional structure of the subgroups. Effect sizes "
-"within the same cluster with different values of the cluster variable are "
-"assumed to be independent. Note that this input corresponds to the "
-"'subgroup' option in the metafor's 'vcalc' function and is renamed for "
-"differentiation from subgroup analysis. "
-msgstr ""
-"Variável que especifica a estrutura adicional dos subgrupos. Os tamanhos de "
-"efeito dentro do mesmo agrupamento com valores diferentes da variável de "
-"agrupamento são considerados independentes. Observe que esta entrada "
-"corresponde à opção 'subgroup' na função 'vcalc' do metafor e foi renomeada "
-"para diferenciação da análise de subgrupos. "
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Cluster"
-msgstr "Agrupamento"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Variable specifying clustering of the effect sizes for computing the "
-"variance covariance matrix. Effect sizes with different values of the "
-"cluster variable are assumed to be independent. Note that this input differs "
-"from the 'Clustering' option in the data input which is used to specify "
-"cluster-robust standard error. In most cases however, both input should "
-"contain the same variable."
-msgstr ""
-"Variável que especifica o agrupamento dos tamanhos de efeito para calcular a "
-"matriz de variância-covariância. Os tamanhos de efeito com valores "
-"diferentes da variável de agrupamento são considerados independentes. "
-"Observe que esta entrada difere da opção \"Agrupamento\" na entrada de "
-"dados, que é usada para especificar o erro padrão robusto para agrupamentos. "
-"Na maioria dos casos, no entanto, ambas as entradas devem conter a mesma "
-"variável."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Construct Correlation Matrix"
-msgstr "Matriz de Correlação de Construtos"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Common correlation"
-msgstr "Correlação comum"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Specify the correlation between the same construct levels."
-msgstr "Especifique a correlação entre os mesmos níveis de construção."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"CSV file containing the correlation matrix between the constructs levels. "
-"The first row and the first column of the file must contain names that map "
-"the matrix entries to the construct level names (the names cannot start with "
-"a number)."
-msgstr ""
-"Arquivo CSV contendo a matriz de correlação entre os níveis dos constructos. "
-"A primeira linha e a primeira coluna do arquivo devem conter nomes que "
-"mapeiem as entradas da matriz para os nomes dos níveis dos constructos (os "
-"nomes não podem começar com um número)."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Construct Type Correlation Matrix"
-msgstr "Matriz de Correlação de Tipo de Construção"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"CSV file containing the correlation matrix between the constructs type "
-"level. The first row and the first column of the file must contain names "
-"that map the matrix entries to the construct level type names (the names "
-"cannot start with a number)."
-msgstr ""
-"Arquivo CSV contendo a matriz de correlação entre os níveis de tipo de "
-"construção. A primeira linha e a primeira coluna do arquivo devem conter "
-"nomes que mapeiem as entradas da matriz para os nomes de tipo de nível de "
-"construção (os nomes não podem começar com um número)."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Time lag 1 correlation"
-msgstr "Correlação de atraso de tempo 1"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Check positive definiteness"
-msgstr "Verifique a definição positiva"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Check if the variance-covariance matrix is symmetric."
-msgstr "Verifique se a matriz de variância-covariância é simétrica."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Force positive definiteness"
-msgstr "Forçar a definição positiva"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Force the variance-covariance matrix to be positive definite. This option "
-"shuld be used with caution as non-positive definite matricies often indicate "
-"input misspecification."
-msgstr ""
-"Forçar a matriz de variância-covariância a ser positiva definida. Esta opção "
-"deve ser usada com cautela, pois matrizes não positivas definidas "
-"frequentemente indicam especificação incorreta da entrada."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Save computed variance-covariance matrix"
-msgstr "Salvar matriz de variância-covariância calculada"
 
 msgctxt "Description|"
 msgid "Meta-Analysis (Deprecated)"
@@ -5405,774 +5027,24 @@ msgstr ""
 "intensiva."
 
 msgctxt "ForestPlot|"
-msgid "Forest Plot"
-msgstr "Gráfico de Floresta"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Options for visualizing study-level information, estimated marginal means, "
-"and the model information in an all encompassing forest plot. Different "
-"sections of the forest plot can be individually enabled/disabled."
-msgstr ""
-"Opções para visualizar informações em nível de estudo, médias marginais "
-"estimadas e informações do modelo em um gráfico de floresta abrangente. "
-"Diferentes seções do gráfico de floresta podem ser ativadas/desativadas "
-"individualmente."
-
-msgctxt "ForestPlot|"
-msgid "Study information"
-msgstr "Informações do estudo"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Add study-level information panel to the forest plot. There are three "
-"sections of the study-level information panel: a) the left section with "
-"study labels, names, and etc designed via the 'Selected Variables' option, "
-"b) the middle section visualizing the estimates and confidence intervals "
-"based on the meta-analytic input, c) the right section textually summarizing "
-"the estimates and confidence intervals based on the meta-analytic input."
-msgstr ""
-"Adicione um painel de informações em nível de estudo ao gráfico de floresta. "
-"Há três seções no painel de informações em nível de estudo: a) a seção à "
-"esquerda com rótulos, nomes e outros elementos dos estudos, projetados por "
-"meio da opção 'Variáveis Selecionadas', b) a seção do meio, que visualiza as "
-"estimativas e os intervalos de confiança com base na entrada meta-analítica, "
-"c) a seção à direita, que resume textualmente as estimativas e os intervalos "
-"de confiança com base na entrada meta-analítica."
-
-msgctxt "ForestPlot|"
-msgid "Selected Variables"
-msgstr "Variáveis Selecionadas"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Select variables containing study-level information to be printed in the "
-"left section of the panel. Each variable creates a new column in the panel."
-msgstr ""
-"Selecione variáveis contendo informações do nível do estudo a serem "
-"impressas na seção esquerda do painel. Cada variável cria uma nova coluna no "
-"painel."
-
-msgctxt "ForestPlot|"
-msgid "Title"
-msgstr "Título"
-
-msgctxt "ForestPlot|"
-msgid "Width"
-msgstr "Largura"
-
-msgctxt "ForestPlot|"
-msgid "Alignment"
-msgstr "Alinhamento"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Adjust the Title, Width, and Alignment of each column in the left section of "
-"the study-level information panel."
-msgstr ""
-"Ajuste o Título, a Largura e o Alinhamento de cada coluna na seção esquerda "
-"do painel de informações do nível de estudo."
-
-msgctxt "ForestPlot|"
-msgid "Left"
-msgstr "Esquerda"
-
-msgctxt "ForestPlot|"
-msgid "Middle"
-msgstr "Meio"
-
-msgctxt "ForestPlot|"
-msgid "Right"
-msgstr "Direita"
-
-msgctxt "ForestPlot|"
-msgid "Predicted effects"
-msgstr "Efeitos previstos"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Include predicted effect sizes in the middle section of the study-level "
-"information panel."
-msgstr ""
-"Inclua os tamanhos de efeito previstos na seção intermediária do painel de "
-"informações do nível do estudo."
-
-msgctxt "ForestPlot|"
-msgid "Study weights"
-msgstr "Ponderações dos estudos"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Include the study weights in the right section of the study-level "
-"information panel."
-msgstr ""
-"Inclua as ponderações do estudo na seção direita do painel de informações do "
-"nível do estudo."
-
-msgctxt "ForestPlot|"
-msgid "Secondary confidence interval"
-msgstr "Intervalo de confiança secundário"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Include secondary confidence interval for effect sizes in the middle section "
-"of the study-level information panel."
-msgstr ""
-"Inclua o intervalo de confiança secundário para tamanhos de efeito na seção "
-"intermediária do painel de informações do nível do estudo."
-
-msgctxt "ForestPlot|"
-msgid "Order"
-msgstr "Ordem"
-
-msgctxt "ForestPlot|"
-msgid "Order the study-level information panel by a variable."
-msgstr "Ordene o painel de informações do nível de estudo por uma variável."
-
-msgctxt "ForestPlot|"
-msgid "By"
-msgstr "Por"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Select the variable by which the study-level information panel is ordered."
-msgstr ""
-"Selecione a variável pela qual o painel de informações do nível de estudo é "
-"ordenado."
-
-msgctxt "ForestPlot|"
-msgid "Ascending"
-msgstr "Ascendente"
-
-msgctxt "ForestPlot|"
-msgid "Order the study-level information panel in ascending order."
-msgstr ""
-"Classifique o painel de informações do nível de estudo em ordem crescente."
-
-msgctxt "ForestPlot|"
-msgid "Aggregate"
-msgstr "Agregar"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Aggregate the study-level information panel by a variable. If selected, "
-"`Predicted effects` and all `Study information` in the tight panel is "
-"supressed."
-msgstr ""
-"Agregar o painel de informações do nível do estudo por uma variável. Se "
-"selecionado, 'Efeitos previstos' e todas as 'Informações do estudo' no "
-"painel restrito serão suprimidos."
-
-msgctxt "ForestPlot|"
-msgid ""
-"Select the variable by which the study-level information panel is aggregated."
-msgstr ""
-"Selecione a variável pela qual o painel de informações do nível de estudo é "
-"agregado."
-
-msgctxt "ForestPlot|"
-msgid ""
-"Select the method for aggregating the estimates of the study-level "
-"information panel."
-msgstr ""
-"Selecione o método para agregar as estimativas do painel de informações do "
-"nível de estudo."
-
-msgctxt "ForestPlot|"
-msgid "Boxplot"
-msgstr "Diagrama de caixa"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Aggregate the estimates of the study-level information panel by boxplot with "
-"the box borders corresponding to the 25th, 50th, and 75th quantile and "
-"whiskers corresponding to the min and max values."
-msgstr ""
-"Agregue as estimativas do painel de informações do nível de estudo por "
-"diagrama de caixa com as bordas da caixa correspondendo aos quantis 25, 50 e "
-"75 e os limites correspondentes aos valores mínimo e máximo."
-
-msgctxt "ForestPlot|"
-msgid "Bubbles"
-msgstr "Bolhas"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Aggregate the estimates of the study-level information panel by bubbles. The "
-"size of the bubble corresponds to the inverse variance of the estimates (or "
-"total sample size for binomial models)."
-msgstr ""
-"Agregue as estimativas do painel de informações do estudo por bolhas. O "
-"tamanho da bolha corresponde à variância inversa das estimativas (ou ao "
-"tamanho total da amostra para modelos binomiais)."
-
-msgctxt "ForestPlot|"
-msgid "Relative size"
-msgstr "Tamanho relativo"
-
-msgctxt "ForestPlot|"
-msgid "Set the relative size of the observed estimates."
-msgstr "Defina o tamanho relativo das estimativas observadas."
-
-msgctxt "ForestPlot|"
-msgid "Estimated marginal means"
-msgstr "Médias marginais estimadas"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Add estimated marginal means information to the forest plot. Available when "
-"effect size meta-regression is specified."
-msgstr ""
-"Adicione informações de médias marginais estimadas ao gráfico de floresta. "
-"Disponível quando a metarregressão do tamanho do efeito é especificada."
-
-msgctxt "ForestPlot|"
-msgid "Model Variables"
-msgstr "Variáveis do Modelo"
-
-msgctxt "ForestPlot|"
-msgid "Select variables for which the estimated marginal means are visualized."
-msgstr ""
-"Selecione variáveis para as quais as médias marginais estimadas são "
-"visualizadas."
-
-msgctxt "ForestPlot|"
-msgid "Term tests"
-msgstr "Testes de termos"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Include the omnibus term test of variables included in the estimated "
-"marginal means. The null hypothesis states that the effect size at all "
-"levels of the categorical variable are equal or that there is no linear "
-"association between the effect size and the continuous variable."
-msgstr ""
-"Inclua o teste de termos abrangente das variáveis incluídas nas médias "
-"marginais estimadas. A hipótese nula afirma que o tamanho do efeito em todos "
-"os níveis da variável categórica é igual ou que não há associação linear "
-"entre o tamanho do efeito e a variável contínua."
-
-msgctxt "ForestPlot|"
-msgid "Coefficient tests"
-msgstr "Testes de coeficientes"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Include coefficient tests of variables included in the estimated marginal "
-"means. The null hypothesis states that the estimated marginal mean for a "
-"given level equals the tested value."
-msgstr ""
-"Incluir testes de coeficientes de variáveis incluídas nas médias marginais "
-"estimadas. A hipótese nula afirma que a média marginal estimada para um "
-"determinado nível é igual ao valor testado."
-
-msgctxt "ForestPlot|"
-msgid "Against"
-msgstr "Contra"
-
-msgctxt "ForestPlot|"
-msgid "Specify the test value for the coefficient tests."
-msgstr "Especifique o valor de teste para os testes de coeficiente."
-
-msgctxt "ForestPlot|"
-msgid "Coefficient tests against 0"
-msgstr "Teste dos coeficientes contra 0"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Include coefficient tests of variables included in the estimated marginal "
-"means against 0. The null hypothesis states that the estimated marginal mean "
-"for a given level equals the tested value."
-msgstr ""
-"Incluir testes de coeficientes de variáveis incluídas nas médias marginais "
-"estimadas em relação a 0. A hipótese nula afirma que a média marginal "
-"estimada para um determinado nível é igual ao valor testado."
-
-msgctxt "ForestPlot|"
-msgid "Adjusted effect size estimate"
-msgstr "Estimativa do tamanho do efeito ajustado"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Include the adjusted effect size estimate in the estimated marginal means "
-"section."
-msgstr ""
-"Inclua a estimativa do tamanho do efeito ajustado na seção de médias "
-"marginais estimadas."
-
-msgctxt "ForestPlot|"
-msgid "Model information"
-msgstr "Informação do modelo"
-
-msgctxt "ForestPlot|"
-msgid "Add meta-analytic model information to the forest plot."
-msgstr "Adicione informações do modelo meta-analítico ao gráfico de floresta."
-
-msgctxt "ForestPlot|"
-msgid "Heterogeneity"
-msgstr "Heterogeneidade"
-
-msgctxt "ForestPlot|"
-msgid "Test"
-msgstr "Teste"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Include the test of the residual heterogeneity in the model information "
-"section."
-msgstr ""
-"Inclua o teste da heterogeneidade residual na seção de informações do modelo."
-
-msgctxt "ForestPlot|"
 msgid "Estimate"
 msgstr "Estimar"
-
-msgctxt "ForestPlot|"
-msgid "𝜏"
-msgstr "𝜏"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Include the meta-analytic 𝜏, the square root of the estimated between-study "
-"variance in the model information section. Not available for multilevel/"
-"multivariate meta-analysis."
-msgstr ""
-"Inclua o 𝜏 meta-analítico, a raiz quadrada da variância estimada entre "
-"estudos, na seção de informações do modelo. Não disponível para meta-análise "
-"multinível/multivariada."
-
-msgctxt "ForestPlot|"
-msgid "𝜏²"
-msgstr "𝜏²"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Include the meta-analytic 𝜏², the estimated between-study variance in the "
-"model information section. Not available for multilevel/multivariate meta-"
-"analysis."
-msgstr ""
-"Inclua o 𝜏² meta-analítico, a variância estimada entre estudos, na seção de "
-"informações do modelo. Não disponível para meta-análise multinível/"
-"multivariada."
-
-msgctxt "ForestPlot|"
-msgid "I²"
-msgstr "I²"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Include the meta-analytic I², the percentage of total variation across "
-"studies due to heterogeneity in the model information section. Not available "
-"for multilevel/multivariate and binomial meta-analysis."
-msgstr ""
-"Incluir o I² meta-analítico, a porcentagem da variação total entre os "
-"estudos devido à heterogeneidade na seção de informações do modelo. Não "
-"disponível para meta-análises multinível/multivariadas e binomiais."
-
-msgctxt "ForestPlot|"
-msgid "H²"
-msgstr "H²"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Include the meta-analytic H², an index indicating the ratio of total "
-"variability to sampling variability in the model information section. Not "
-"available for multilevel/multivariate and binomial meta-analysis."
-msgstr ""
-"Incluir o H² meta-analítico, um índice que indica a razão entre a "
-"variabilidade total e a variabilidade amostral na seção de informações do "
-"modelo. Não disponível para meta-análises multinível/multivariada e binomial."
-
-msgctxt "ForestPlot|"
-msgid "Moderation test"
-msgstr "Teste de moderação"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Include the omnibus heterogeneity moderation test in the model information "
-"section. Available when heterogeneity meta-regression is specified."
-msgstr ""
-"Incluir o teste de moderação de heterogeneidade abrangente na seção de "
-"informações do modelo. Disponível quando a metarregressão de heterogeneidade "
-"é especificada."
 
 msgctxt "ForestPlot|"
 msgid "Effect Size"
 msgstr "Tamanho de Efeito"
 
 msgctxt "ForestPlot|"
-msgid "Fixed effect estimate"
-msgstr "Estimativa de efeito fixo"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Include a fixed effect meta-analytic effect size estimate in the model "
-"information section. Not available if the model was already fitted with "
-"fixed effects or the model contains heterogeneity meta-regression."
-msgstr ""
-"Incluir uma estimativa do tamanho do efeito meta-analítico de efeito fixo na "
-"seção de informações do modelo. Não disponível se o modelo já tiver sido "
-"ajustado com efeitos fixos ou se o modelo contiver metarregressão de "
-"heterogeneidade."
-
-msgctxt "ForestPlot|"
-msgid "Fixed effect estimate test"
-msgstr "Teste de estimativa de efeito fixo"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Include the test of the fixed effect meta-analytic effect size estimate in "
-"the model information section."
-msgstr ""
-"Inclua o teste da estimativa do tamanho do efeito meta-analítico de efeito "
-"fixo na seção de informações do modelo."
-
-msgctxt "ForestPlot|"
-msgid "Pooled estimate"
-msgstr "Estimativa combinada"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Include the overall meta-analytic effect size estimate in the model "
-"information section."
-msgstr ""
-"Inclua a estimativa geral do tamanho do efeito meta-analítico na seção de "
-"informações do modelo."
-
-msgctxt "ForestPlot|"
-msgid "Pooled estimate test"
-msgstr "Teste de estimativa combinada"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Include the test of the overall meta-analytic effect size estimate in the "
-"model information section."
-msgstr ""
-"Inclua o teste da estimativa geral do tamanho do efeito meta-analítico na "
-"seção de informações do modelo."
-
-msgctxt "ForestPlot|"
-msgid ""
-"Include the test of the overall meta-analytic effect size estimate in the "
-"model information section. If a meta-regression model is fitted, the test "
-"corresponds to either the adjusted effect or the meta-regression intercept "
-"term and the corresponding estimate is also displayed. The test is available "
-"only if Bayesian model averaging for the effect is selected."
-msgstr ""
-"Inclua o teste da estimativa geral do tamanho do efeito meta-analítico na "
-"seção de informações do modelo. Se um modelo de metarregressão for ajustado, "
-"o teste corresponde ao efeito ajustado ou ao termo de intercepto da "
-"metarregressão, e a estimativa correspondente também é exibida. O teste só "
-"estará disponível se a média do modelo Bayesiano para o efeito for "
-"selecionada."
-
-msgctxt "ForestPlot|"
-msgid ""
-"Include the omnibus effect size moderation test in the model information "
-"section. Available when effect size meta-regression is specified."
-msgstr ""
-"Incluir o teste de moderação do tamanho do efeito geral na seção de "
-"informações do modelo. Disponível quando a metarregressão do tamanho do "
-"efeito é especificada."
-
-msgctxt "ForestPlot|"
-msgid "Publication Bias"
-msgstr "Viés de Publicação"
-
-msgctxt "ForestPlot|"
-msgid "Include the publication bias test in the model information section."
-msgstr ""
-"Inclua o teste de viés de publicação na seção de informações do modelo."
-
-msgctxt "ForestPlot|"
 msgid "Settings"
 msgstr "Configurações"
-
-msgctxt "ForestPlot|"
-msgid "General"
-msgstr "Geral"
-
-msgctxt "ForestPlot|"
-msgid "Prediction intervals"
-msgstr "Intervalos de previsão"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Include prediction intervals of the estimated marginal means and the model "
-"information output."
-msgstr ""
-"Incluir intervalos de previsão das médias marginais estimadas e da saída de "
-"informações do modelo."
-
-msgctxt "ForestPlot|"
-msgid "Estimates and confidence intervals"
-msgstr "Estimativas e intervalos de confiança"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Include effect size estimates and confidence intervals summary text in the "
-"right panel of the forest plot."
-msgstr ""
-"Inclua estimativas do tamanho do efeito e texto de resumo dos intervalos de "
-"confiança no painel direito do gráfico de floresta."
-
-msgctxt "ForestPlot|"
-msgid "Conditional estimates"
-msgstr "Estimativas condicionais"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Display the conditional effect, heterogeneity, and estimated marginal means "
-"estimates."
-msgstr ""
-"Exibir o efeito condicional, a heterogeneidade e as estimativas de médias "
-"marginais estimadas."
-
-msgctxt "ForestPlot|"
-msgid "Tests in right panel"
-msgstr "Testes no painel direito"
-
-msgctxt "ForestPlot|"
-msgid "Move test results text to the right panel."
-msgstr "Mova o texto dos resultados do teste para o painel direito."
-
-msgctxt "ForestPlot|"
-msgid "Align left panel"
-msgstr "Alinhar painel esquerdo"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Align text of the `Estimated marginal means` and  `Model Information` "
-"sections."
-msgstr ""
-"Alinhe o texto das seções `Médias marginais estimadas` e `Informações do "
-"modelo`."
 
 msgctxt "ForestPlot|"
 msgid "Subgroup"
 msgstr "Subgrupo"
 
 msgctxt "ForestPlot|"
-msgid ""
-"Specify the forest plot behavior in the case of a subgroup analysis. These "
-"options is only available when the subgroup analysis is selected."
-msgstr ""
-"Especifique o comportamento do gráfico de floresta no caso de uma análise de "
-"subgrupo. Essas opções só estão disponíveis quando a análise de subgrupo é "
-"selecionada."
-
-msgctxt "ForestPlot|"
-msgid "Panels within subgroup"
-msgstr "Painéis dentro do subgrupo"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Group the output panels within their subgroup membership, i.e., the output "
-"panels are presented for each subgroup in a sequential order (i.e., Study "
-"information (Subgroup 1), Estimated marginal means (Subgroup 1), Model "
-"information (Subgroup 1), Study information (Subgroup 2), Estimated marginal "
-"means (Subgroup 2), Model information (Subgroup 2), .... If unchecked, the "
-"output is group by the panel membership first, i.e., Study information "
-"(Subgroup 1), Study information (Subgroup 2), Esimated marginal means "
-"(Subgroup 1), Estimated marginal means (Subgroup 2), Model information "
-"(Subgroup 1), Model information (Subgroup 2)..."
-msgstr ""
-"Agrupe os painéis de saída dentro de sua associação de subgrupo, ou seja, os "
-"painéis de saída são apresentados para cada subgrupo em uma ordem sequencial "
-"(ou seja, Informações do estudo (Subgrupo 1), Médias marginais estimadas "
-"(Subgrupo 1), Informações do modelo (Subgrupo 1), Informações do estudo "
-"(Subgrupo 2), Médias marginais estimadas (Subgrupo 2), Informações do modelo "
-"(Subgrupo 2), .... Se desmarcado, a saída é agrupada pela associação do "
-"painel primeiro, ou seja, Informações do estudo (Subgrupo 1), Informações do "
-"estudo (Subgrupo 2), Médias marginais estimadas (Subgrupo 1), Médias "
-"marginais estimadas (Subgrupo 2), Informações do modelo (Subgrupo 1), "
-"Informações do modelo (Subgrupo 2)..."
-
-msgctxt "ForestPlot|"
-msgid "Full dataset estimated marginal means"
-msgstr "Médias marginais estimadas do conjunto de dados completo"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Include the full dataset estimated marginal means in the forest plot if "
-"subgroups are specified. This option overrides the `Include full dataset in "
-"subgroup analysis` setting in the `Advanced` section."
-msgstr ""
-"Incluir as médias marginais estimadas do conjunto de dados completo no "
-"gráfico de floresta, se subgrupos forem especificados. Esta opção substitui "
-"a configuração `Incluir conjunto de dados completo na análise de subgrupos` "
-"na seção `Avançado`."
-
-msgctxt "ForestPlot|"
-msgid "Full dataset model information"
-msgstr "Informações completas do modelo do conjunto de dados"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Include the full dataset model information in the forest plot if subgroups "
-"are specified. This option overrides the `Include full dataset in subgroup "
-"analysis` setting in the `Advanced` section."
-msgstr ""
-"Incluir todas as informações do modelo do conjunto de dados no gráfico "
-"florestal se subgrupos forem especificados. Esta opção substitui a "
-"configuração `Incluir conjunto de dados completo na análise de subgrupos` na "
-"seção `Avançado`."
-
-msgctxt "ForestPlot|"
-msgid "Auxiliary"
-msgstr "Auxiliar"
-
-msgctxt "ForestPlot|"
-msgid "Digits"
-msgstr "Dígitos"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Number of digits printed for the effect size and confidence intervals "
-"summary text."
-msgstr ""
-"Número de dígitos impressos para o texto resumido do tamanho do efeito e dos "
-"intervalos de confiança."
-
-msgctxt "ForestPlot|"
-msgid "Tests information"
-msgstr "Informação dos testes"
-
-msgctxt "ForestPlot|"
-msgid "Statistic and p-value"
-msgstr "Estatística e valor-p"
-
-msgctxt "ForestPlot|"
-msgid "P-value"
-msgstr "Valor-p"
-
-msgctxt "ForestPlot|"
-msgid "Color"
-msgstr "Cor"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Change color of the plotted objects. Only available if no color mapping is "
-"selected."
-msgstr ""
-"Altera a cor dos objetos plotados. Disponível somente se nenhum mapeamento "
-"de cores estiver selecionado."
-
-msgctxt "ForestPlot|"
-msgid "Black"
-msgstr "Preto"
-
-msgctxt "ForestPlot|"
-msgid "Blue"
-msgstr "Azul"
-
-msgctxt "ForestPlot|"
-msgid "Red"
-msgstr "Vermelho"
-
-msgctxt "ForestPlot|"
-msgid "Add vertical line"
-msgstr "Adicionar linha vertical"
-
-msgctxt "ForestPlot|"
-msgid "Add a solid vertical line in the forest plot."
-msgstr "Adicione uma linha vertical sólida no gráfico de floresta."
-
-msgctxt "ForestPlot|"
-msgid "Add vertical line (2)"
-msgstr "Adicionar linha vertical (2)"
-
-msgctxt "ForestPlot|"
-msgid "Add a dotted vertical line in the forest plot."
-msgstr "Adicione uma linha vertical pontilhada no gráfico de floresta."
-
-msgctxt "ForestPlot|"
-msgid "X-axis label"
-msgstr "Rótulo do eixo x"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Change the x-axis label of the forest plot (the default 'Effect Size' "
-"changes in accordance with the selected effect size transformation)."
-msgstr ""
-"Altere o rótulo do eixo x do gráfico de floresta (o 'Tamanho do efeito' "
-"padrão muda de acordo com a transformação do tamanho do efeito selecionada)."
-
-msgctxt "ForestPlot|"
-msgid "X-axis limits"
-msgstr "Limites do eixo x"
-
-msgctxt "ForestPlot|"
-msgid "Change the default x-axis limits."
-msgstr "Alterar os limites padrão do eixo x."
-
-msgctxt "ForestPlot|"
-msgid "Lower"
-msgstr "Inferior"
-
-msgctxt "ForestPlot|"
-msgid "Upper"
-msgstr "Superior"
-
-msgctxt "ForestPlot|"
-msgid "Relative Size"
-msgstr "Tamanho Relativo"
-
-msgctxt "ForestPlot|"
-msgid "Adjust the relative size of the forest plot components."
-msgstr "Ajuste o tamanho relativo dos componentes do gráfico de floresta."
-
-msgctxt "ForestPlot|"
-msgid "Estimates"
-msgstr "Estimativas"
-
-msgctxt "ForestPlot|"
-msgid "Text"
-msgstr "Texto"
-
-msgctxt "ForestPlot|"
-msgid "Axis labels"
-msgstr "Rótulos dos eixos"
-
-msgctxt "ForestPlot|"
 msgid "Row"
 msgstr "Linha"
-
-msgctxt "ForestPlot|"
-msgid "Left panel"
-msgstr "Painel esquerdo"
-
-msgctxt "ForestPlot|"
-msgid "Middle panel"
-msgstr "Painel do meio"
-
-msgctxt "ForestPlot|"
-msgid "Right panel"
-msgstr "Painel direito"
-
-msgctxt "ForestPlot|"
-msgid "Adjust width based on text"
-msgstr "Ajuste a largura com base no texto"
-
-msgctxt "ForestPlot|"
-msgid "Turn off the automatic width adjustment of the individual components."
-msgstr "Desative o ajuste automático de largura dos componentes individuais."
-
-msgctxt "ForestPlot|"
-msgid "Mapping"
-msgstr "Mapeamento"
-
-msgctxt "ForestPlot|"
-msgid ""
-"Select a variable for encoding the color or shape of the study information "
-"and the estimated marginal means output."
-msgstr ""
-"Selecione uma variável para codificar a cor ou a forma das informações do "
-"estudo e a saída das médias marginais estimadas."
-
-msgctxt "ForestPlot|"
-msgid "Shape"
-msgstr "Forma"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Show RoBMA R code"
@@ -7489,14 +6361,6 @@ msgstr ""
 "modelo de heterogeneidade. Indisponível ao realizar meta-análise multinível/"
 "multivariada."
 
-msgctxt "ClassicalMetaAnalysisModel|"
-msgid ""
-"Specify the heterogeneity model. Unavailable when performing multilevel/"
-"multivariate meta-analysis."
-msgstr ""
-"Especifique o modelo de heterogeneidade. Indisponível ao realizar meta-"
-"análise multinível/multivariada."
-
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid ""
 "Summarize the meta-analytic between-study heterogeneity. Unavailable when "
@@ -7533,10 +6397,6 @@ msgctxt "SemBasedMetaAnalysis|"
 msgid "Show a summary of the model fit statistics."
 msgstr "Mostrar um resumo das estatísticas de ajuste do modelo."
 
-msgctxt "Description|"
-msgid "Mantel-Haenszel / Peto (beta)"
-msgstr "Mantel-Haenszel / Peto (beta)"
-
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Sample Size Group 2"
 msgstr "Tamanho de amostra Grupo 2"
@@ -7556,14 +6416,6 @@ msgstr "Referências"
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "R Packages"
 msgstr "Pacotes R"
-
-msgctxt "ClassicalMantelHaenszelPeto|"
-msgid "Successes Group 1"
-msgstr "Sucessos Grupo 1"
-
-msgctxt "ClassicalMantelHaenszelPeto|"
-msgid "Successes Group 2"
-msgstr "Sucessos Grupo 2"
 
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Sample Size Group 1"
@@ -7798,10 +6650,6 @@ msgstr ""
 "fator Bayesiano não será realizado). As estimativas exibidas são calculadas "
 "com base na média das distribuições a priori nulas e alternativas de todos "
 "os componentes especificados."
-
-msgctxt "EffectSizeComputation|"
-msgid "Group 2/Outcome -"
-msgstr "Grupo 2/Resultado -"
 
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Model Variables"
@@ -8428,3 +7276,2425 @@ msgstr ""
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Prior Distributions (Custom)"
 msgstr "Distribuições Anteriores (Personalizadas)"
+
+msgctxt "Description|"
+msgid "Effect Size Aggregation"
+msgstr ""
+
+#, fuzzy
+msgctxt "Description|"
+msgid "Forest Plot"
+msgstr "Gráfico de Floresta"
+
+msgctxt "Description|"
+msgid "Risk of Bias Plot"
+msgstr ""
+
+msgctxt "Description|"
+msgid "Multilevel/Multivariate Meta-Analysis"
+msgstr ""
+
+msgctxt "Description|"
+msgid "Classical Multilevel/Multivariate Meta-Analysis"
+msgstr ""
+
+msgctxt "Description|"
+msgid "Generalized (GLMM) Meta-Analysis"
+msgstr ""
+
+msgctxt "Description|"
+msgid "Classical Generalized (GLMM) Meta-Analysis"
+msgstr ""
+
+msgctxt "Description|"
+msgid "Mantel-Haenszel / Peto"
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid ""
+"Generalized (GLMM) meta-analysis fits meta-analytic models via generalized "
+"linear (mixed-effects) models using metafor's rma.glmm function. It directly "
+"models event counts and proportions without requiring pre-computed effect "
+"sizes, making it suitable for sparse binary and count data where the normal "
+"approximation breaks down."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "References"
+msgstr "Referências"
+
+#, fuzzy
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "R Packages"
+msgstr "Pacotes R"
+
+#, fuzzy
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Events Group 1"
+msgstr "Eventos Grupo 1"
+
+#, fuzzy
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Events Group 2"
+msgstr "Eventos Grupo 2"
+
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Sample Size Group 1"
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Sample Size Group 2"
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Person-Time Group 1"
+msgstr "Pessoa-Tempo Grupo 1"
+
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Person-Time Group 2"
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Effect size measure"
+msgstr "Medida do tamanho de efeito"
+
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid ""
+"Select the effect size measure to be used in the generalized meta-analysis."
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Log odds ratio"
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Log risk ratio"
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Risk difference"
+msgstr "Diferença de riscos"
+
+#, fuzzy
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Log incidence rate ratio"
+msgstr "Log da razão da taxa de incidência"
+
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Model type"
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid ""
+"Select the generalized linear model type. UM.FS = unconditional with fixed "
+"study effects (default); UM.RS = unconditional with random study effects; CM."
+"AL = conditional with approximate likelihood (odds ratios only); CM.EL = "
+"conditional with exact likelihood (odds ratios and incidence rate ratios)."
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Unconditional (fixed study effects)"
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Unconditional (random study effects)"
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Conditional (approximate likelihood)"
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Conditional (exact likelihood)"
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Method"
+msgstr "Método"
+
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid ""
+"Select the estimation method. Maximum Likelihood estimates a random-effects "
+"model; Equal Effects fixes tau-squared to zero."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Maximum Likelihood"
+msgstr "Máxima Verossimilhança"
+
+#, fuzzy
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Equal Effects"
+msgstr "Efeitos Iguais"
+
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Coefficient test"
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid ""
+"Test type for the fixed-effect coefficients: z (Wald test) or t (t-"
+"distribution)."
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "z"
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "t"
+msgstr "t"
+
+#, fuzzy
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Predictors"
+msgstr "Preditores"
+
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid ""
+"Variables to include as predictors (moderators) in a meta-regression model."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Study Labels"
+msgstr "Rótulos de Estudo"
+
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Variable containing labels for the studies."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Subgroup"
+msgstr "Subgrupo"
+
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid "Variable indicating subgroup stratification."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysis|"
+msgid ""
+"Method used for model estimation in the meta-analysis. The available methods "
+"depend on the inclusion of heterogeneity model terms."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysis|"
+msgid "Unrestricted Weighted Least Squares (UWLS)"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysis|"
+msgid "Fixed effects test"
+msgstr ""
+
+msgctxt "EffectSizeAggregation|"
+msgid ""
+"Effect Size Aggregation allows you to combine multiple effect sizes or "
+"outcomes from the same study into a single aggregate effect size.This is "
+"useful when a study reports multiple outcomes that should be treated as a "
+"single unit. Note that multilevel and multivariate models available in the "
+"Classical Meta-Analysis (Multilevel/Multivariate) option are preferable for "
+"analyzing such structures."
+msgstr ""
+
+#, fuzzy
+msgctxt "EffectSizeAggregation|"
+msgid "References"
+msgstr "Referências"
+
+#, fuzzy
+msgctxt "EffectSizeAggregation|"
+msgid "R Packages"
+msgstr "Pacotes R"
+
+msgctxt "EffectSizeAggregation|"
+msgid "Effect Size"
+msgstr ""
+
+#, fuzzy
+msgctxt "EffectSizeAggregation|"
+msgid "Variable containing the observed effect sizes."
+msgstr "Variável contendo os tamanhos de efeito observados."
+
+msgctxt "EffectSizeAggregation|"
+msgid "Effect Size Standard Error"
+msgstr ""
+
+msgctxt "EffectSizeAggregation|"
+msgid "Variable containing the standard errors of the effect sizes."
+msgstr ""
+
+#, fuzzy
+msgctxt "EffectSizeAggregation|"
+msgid "Cluster"
+msgstr "Agrupamento"
+
+msgctxt "EffectSizeAggregation|"
+msgid ""
+"Variable identifying the cluster (e.g., study) to aggregate effect sizes "
+"within."
+msgstr ""
+
+#, fuzzy
+msgctxt "EffectSizeAggregation|"
+msgid "Options"
+msgstr "Opções"
+
+#, fuzzy
+msgctxt "EffectSizeAggregation|"
+msgid "Show metafor R code"
+msgstr "Mostrar código R do metafor"
+
+msgctxt "EffectSizeAggregation|"
+msgid ""
+"Display the underlying R code used by the metafor package to aggregate the "
+"effect sizes."
+msgstr ""
+
+#, fuzzy
+msgctxt "EffectSizeAggregation|"
+msgid "Compute sampling variance"
+msgstr "Calcular a variância da amostragem"
+
+msgctxt "EffectSizeAggregation|"
+msgid "Inverse-variance weighting"
+msgstr ""
+
+msgctxt "EffectSizeAggregation|"
+msgid "Use inverse-variance weighting when aggregating effect sizes."
+msgstr ""
+
+msgctxt "EffectSizeAggregation|"
+msgid "Add cluster size column"
+msgstr ""
+
+msgctxt "EffectSizeAggregation|"
+msgid "Add a column with the number of effect sizes per cluster."
+msgstr ""
+
+msgctxt "EffectSizeAggregation|"
+msgid "Aggregated Column Names"
+msgstr ""
+
+#, fuzzy
+msgctxt "EffectSizeAggregation|"
+msgid "Effect size"
+msgstr "Tamanho de efeito"
+
+#, fuzzy
+msgctxt "EffectSizeAggregation|"
+msgid "Standard error"
+msgstr "Erro padrão"
+
+#, fuzzy
+msgctxt "EffectSizeAggregation|"
+msgid "Sampling variance"
+msgstr "Variância de amostragem"
+
+msgctxt "EffectSizeAggregation|"
+msgid "Cluster size"
+msgstr ""
+
+msgctxt "EffectSizeComputation|"
+msgid "Group 1/Outcome + (Events)"
+msgstr ""
+
+msgctxt "EffectSizeComputation|"
+msgid "Group 1/Outcome - (Non-Events)"
+msgstr ""
+
+msgctxt "EffectSizeComputation|"
+msgid "Group 2/Outcome + (Events)"
+msgstr ""
+
+msgctxt "EffectSizeComputation|"
+msgid "Group 2/Outcome - (Non-Events)"
+msgstr ""
+
+#, fuzzy
+msgctxt "EffectSizeComputation|"
+msgid "Small sample correction"
+msgstr "Correção para amostras pequenas"
+
+msgctxt "EffectSizeComputation|"
+msgid ""
+"Apply the small-sample bias correction for standardized mean differences."
+msgstr ""
+
+#, fuzzy
+msgctxt "EffectSizeComputation|"
+msgid "Show metafor R code"
+msgstr "Mostrar código R do metafor"
+
+msgctxt "EffectSizeComputation|"
+msgid ""
+"Display the underlying R code used by the metafor package to compute the "
+"effect sizes."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Create a forest plot from pre-computed effect sizes and confidence intervals "
+"without fitting a meta-analytic model. This allows visualizing results from "
+"any source — external software, individual studies, or custom computations."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Variable containing the effect size estimates."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Effect Size Standard Error"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Variable containing the standard errors. Used to compute confidence "
+"intervals when not provided directly, and to determine point sizes via "
+"inverse-variance weights when no weight variable is specified."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Confidence Interval"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Two variables specifying the lower and upper bounds of the confidence "
+"interval. If not provided, intervals are computed from the standard error at "
+"the 95%% level."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Prediction Interval"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Two variables specifying the lower and upper bounds of the prediction "
+"interval. Displayed as rectangles behind estimate diamonds."
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlot|"
+msgid "Weight"
+msgstr "Peso"
+
+msgctxt "ForestPlot|"
+msgid ""
+"Variable containing study weight. When specified, study points are scaled by "
+"these weights and the study weights can be shown in the study information "
+"panel."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Variable controlling the vertical positioning of rows. The first position "
+"appears at the top of the figure. If not provided, the dataset row order is "
+"used."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Visualization Type"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Nominal variable whose levels distinguish study rows (displayed as points "
+"with intervals) from estimate rows (displayed as diamonds)."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Study"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Specify the value in the Visualization Type variable that indicates the "
+"study visualization type."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Specify the value in the Visualization Type variable that indicates the "
+"estimate visualization type."
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid ""
+"Nominal variable defining subgroups. Each subgroup is displayed as a "
+"separate panel in the forest plot."
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlot|"
+msgid "Transform effect size"
+msgstr "Transformar o tamanho de efeito"
+
+msgctxt "ForestPlot|"
+msgid ""
+"Apply a transformation to the effect sizes and confidence intervals for "
+"display."
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlot|"
+msgid "None"
+msgstr "Nenhum"
+
+#, fuzzy
+msgctxt "ForestPlot|"
+msgid "Fisher's z to r"
+msgstr "z de Fisher a r"
+
+#, fuzzy
+msgctxt "ForestPlot|"
+msgid "Exponential"
+msgstr "Exponencial"
+
+msgctxt "ForestPlot|"
+msgid "Log odds to proportions"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Log odds to SMD (normal)"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Log odds to SMD (logistic)"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "SMD to log odds (normal)"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "SMD to log odds (logistic)"
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlot|"
+msgid "Hakstian & Whalen inverse α"
+msgstr "α inverso de Hakstian & Whalen"
+
+#, fuzzy
+msgctxt "ForestPlot|"
+msgid "Bonett inverse α"
+msgstr "α inverso de Bonett"
+
+msgctxt "ForestPlot|"
+msgid "Z to R²"
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlot|"
+msgid "SMD to Cohen's U₁"
+msgstr "SMD para U₁ de Cohen"
+
+#, fuzzy
+msgctxt "ForestPlot|"
+msgid "SMD to Cohen's U₂"
+msgstr "SMD para U₂ de Cohen"
+
+#, fuzzy
+msgctxt "ForestPlot|"
+msgid "SMD to Cohen's U₃"
+msgstr "SMD para U₃ de Cohen"
+
+#, fuzzy
+msgctxt "ForestPlot|"
+msgid "SMD to CLES, Pr(superiority)"
+msgstr "SMD a CLES, Pr(superioridade)"
+
+msgctxt "ForestPlot|"
+msgid "Study Information"
+msgstr ""
+
+msgctxt "ForestPlot|"
+msgid "Estimate Information"
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "Advanced"
+msgstr "Avançado"
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "Advanced options for the generalized (GLMM) meta-analysis."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "Show metafor R code"
+msgstr "Mostrar código R do metafor"
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "Display the underlying metafor R code used for the analysis."
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "Subgroup Analysis"
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "Include full dataset"
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "Include the full dataset estimate alongside the subgroup estimates."
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "GLMM Settings"
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "Settings specific to the generalized linear mixed model."
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "Group coding"
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid ""
+"Coding for the group variable in unconditional models. Contrast (plus/minus "
+"1/2) centers the intercept at the average log odds; Treatment (0/1) sets the "
+"intercept to the reference group."
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "Contrast (±½)"
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "Treatment (0/1, group 1 = 1)"
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "Treatment (0/1, group 2 = 1)"
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "Correlated random effects"
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid ""
+"Allow correlated random effects in the UM.RS model (random study effects and "
+"random treatment effects can be correlated)."
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "Quadrature points (nAGQ)"
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid ""
+"Number of quadrature points for the adaptive Gauss-Hermite approximation of "
+"the log-likelihood. Higher values increase accuracy but slow down estimation."
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "Handling of Zero Frequencies"
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid ""
+"Options for handling zero cell frequencies in the data. These affect the "
+"computation of observed effect sizes displayed in plots but do not affect "
+"the GLMM model fit itself."
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "Add to zero cells"
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid ""
+"Value to add to zero cells when computing observed effect sizes for plots."
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "Add to"
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "When to apply the continuity correction for zero cells."
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "All studies"
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "Only zero-cell studies"
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "If any zero-cell study"
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "None"
+msgstr "Nenhum"
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "Drop studies with no cases or events"
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid ""
+"Whether to drop studies that have no cases/events in both groups from the "
+"analysis."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "Yes"
+msgstr "Sim"
+
+#, fuzzy
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "No"
+msgstr "Não"
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "Extend Metafor Call"
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid "Extend metafor call"
+msgstr "Estender a chamada metafor"
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid ""
+"Extend the metafor function call with custom R code. Arguments are passed as "
+"additional named arguments to rma.glmm()."
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid ""
+"Custom R code to extend the metafor call (e.g., 'control = list(maxiter = "
+"1000)')."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Export"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Options for exporting model-derived quantities to the dataset."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Diagnostics"
+msgstr "Diagnóstico"
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Influential cases"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Export an indicator for influential cases."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Case diagnostics"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid ""
+"Export casewise residual, Cook's distance, leverage, and weight diagnostics "
+"where available."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Model impact"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Export diagnostics for how individual cases affect the model fit."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Coefficient influence"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Export coefficient influence diagnostics."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Residuals"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Raw"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Export raw residuals."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Pearson"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Export Pearson residuals."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Standardized"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Export standardized residuals."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Studentized"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Export studentized residuals."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Conditional standardized"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Export conditional standardized residuals."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Model Values"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Predicted values"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Export predicted values and interval bounds."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "True effect estimates (BLUPs)"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid ""
+"Export best linear unbiased predictions of the study-specific true effects."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Random effects"
+msgstr "Efeitos aleatórios"
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Export predicted random effects."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Weights"
+msgstr "Pesos"
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid ""
+"Export model fitting weights. These are not coefficient-specific "
+"contribution weights in meta-regression. For multilevel/multivariate models, "
+"diagonal weights match the default forest plot weights and row-sum weights "
+"are exported for intercept-only models."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisModel|"
+msgid "Effect size model (location)"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisModel|"
+msgid ""
+"Specify the meta-regression model for the location (effect size) parameter. "
+"The simple terms are automatically filled in from the 'Predictors' variable "
+"input."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisModel|"
+msgid "Heterogeneity model (scale)"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisModel|"
+msgid ""
+"Specify the meta-regression model for the scale (heterogeneity) parameter. "
+"Unavailable when performing multilevel/multivariate meta-analysis."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Effect Size Variance-Covariance Matrix"
+msgstr "Matriz de Variância-Covariância do Tamanho do Efeito"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid ""
+"Options for specifying the approximate variance-covariance matrix of the "
+"effect sizes. This matrix is used to account for the correlation between "
+"effect sizes when they are not independent."
+msgstr ""
+"Opções para especificar a matriz de variância-covariância aproximada dos "
+"tamanhos de efeito. Esta matriz é usada para contabilizar a correlação entre "
+"os tamanhos de efeito quando eles não são independentes."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Type"
+msgstr "Tipo"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Type of variance-covariance matrix input method."
+msgstr "Tipo de método de entrada de matriz de variância-covariância."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Simple"
+msgstr "Simples"
+
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid ""
+"Specify a simple parametric correlation structure for sampling errors within "
+"clusters."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Correlation matrix"
+msgstr "Matriz de correlação"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid ""
+"Use a list of variables to specify the correlation matrix of studies "
+"corresponding to the same cluster. Corresponds to the `rvars` option in the "
+"metafor's 'vcalc' function."
+msgstr ""
+"Use uma lista de variáveis para especificar a matriz de correlação de "
+"estudos correspondentes ao mesmo agrupamento. Corresponde à opção `rvars` na "
+"função `vcalc` do metafor."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Constructs, groups, and times"
+msgstr "Construções, grupos e tempos"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid ""
+"Specify constructs, groups, and times of the measurement to specify the "
+"correlation matrix of studies corresponding to the same cluster."
+msgstr ""
+"Especifique constructos, grupos e tempos da medição para especificar a "
+"matriz de correlação de estudos correspondentes ao mesmo agrupamento."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Precomputed"
+msgstr "Pré-calculado"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Load a csv file containing the precomputed variance-covariance matrix."
+msgstr ""
+"Carregue um arquivo csv contendo a matriz de variância-covariância pré-"
+"calculada."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Structure"
+msgstr "Estrutura"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Independent"
+msgstr "Independente"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Compound symmetry"
+msgstr "Simetria composta"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Autoregressive"
+msgstr "Autorregressivo"
+
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Compound symmetry + autoregressive"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Compound symmetry × autoregressive"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid ""
+"Parametric correlation structure for sampling errors within clusters. "
+"'Compound symmetry + autoregressive' assumes a constant baseline correlation "
+"plus additional correlation that decays over time. 'Compound symmetry × "
+"autoregressive' assumes the constant correlation and the time-based decay "
+"act jointly, so correlation vanishes at large time lags."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Compound Symmetry"
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Construct"
+msgstr "Construto"
+
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid ""
+"Variable identifying the construct, outcome, or endpoint measured by each "
+"effect size. Required for compound symmetry times autoregressive structures."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Within cluster correlation"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid ""
+"Assumed correlation between sampling errors within clusters (compound "
+"symmetry)."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Time"
+msgstr "Tempo"
+
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid ""
+"Variable specifying the time point of each effect size, required for "
+"autoregressive (CAR) structures."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Lag 1 correlation"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Correlation for lag-1 time points in autoregressive structures."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Effect size variance-covariance matrix file"
+msgstr "Arquivo de matriz de variância-covariância do tamanho do efeito"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid ""
+"CSV file containing the precomputed effect size variance-covariance matrix. "
+"The matrix needs to match the dimensions of the data set and cannot contain "
+"any other variables or names."
+msgstr ""
+"Arquivo CSV contendo a matriz de variância-covariância do tamanho do efeito "
+"pré-calculada. A matriz precisa corresponder às dimensões do conjunto de "
+"dados e não pode conter outras variáveis ou nomes."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Correlation Matrix"
+msgstr "Matriz de Correlação"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid ""
+"Variable specifying the correlation between the individual estimates within "
+"cluster. The column order of the variable correspond to the row order of "
+"effect size estimates within cluster. Only the lower triangle needs to be "
+"specified. Corresponds to the `rvars` option in the metafor's 'vcalc' "
+"function."
+msgstr ""
+"Variável que especifica a correlação entre as estimativas individuais dentro "
+"do agrupamento. A ordem das colunas da variável corresponde à ordem das "
+"linhas das estimativas do tamanho do efeito dentro do agrupamento. Apenas o "
+"triângulo inferior precisa ser especificado. Corresponde à opção `rvars` na "
+"função `vcalc` do metafor."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid ""
+"Variable specifying the construct measured by the effect size. Corresponds "
+"to the `obs` option in the metafor's 'vcalc' function."
+msgstr ""
+"Variável que especifica o constructo medido pelo tamanho do efeito. "
+"Corresponde à opção `obs` na função `vcalc' do metafor."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Construct Type"
+msgstr "Tipo de Construto"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid ""
+"Variable specifying the type of construct measured by the effect size. "
+"Construct Type corresponds to a higher level grouping of the Constructs. "
+"Corresponds to the `type` option in the metafor's 'vcalc' function."
+msgstr ""
+"Variável que especifica o tipo de constructo medido pelo tamanho do efeito. "
+"O Tipo de Construto corresponde a um agrupamento de nível superior dos "
+"Construtos. Corresponde à opção `type` na função `vcalc` do metafor."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Time 1"
+msgstr "Tempo 1"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid ""
+"Variable specifying the time point of the effect size measurement. In case "
+"multiple time points are specified, the first time corresponds to the first "
+"condition."
+msgstr ""
+"Variável que especifica o ponto temporal da medição do tamanho do efeito. "
+"Caso sejam especificados vários pontos temporais, o primeiro corresponde à "
+"primeira condição."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Time 2"
+msgstr "Tempo 2"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid ""
+"Variable specifying the time point of the effect size measurement. In case "
+"multiple time points are specified, the second time corresponds to the "
+"second condition."
+msgstr ""
+"Variável que especifica o ponto temporal da medição do tamanho do efeito. "
+"Caso sejam especificados vários pontos temporais, o segundo momento "
+"corresponde à segunda condição."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Group 1"
+msgstr "Grupo 1"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid ""
+"Variable to specify the group of the first condition when the observed "
+"effect sizes or outcomes represent contrasts between two conditions. "
+"Corresponds to the `grp1` argument in the metafor's 'vcalc' function."
+msgstr ""
+"Variável para especificar o grupo da primeira condição quando os tamanhos de "
+"efeito ou resultados observados representam contrastes entre duas condições. "
+"Corresponde ao argumento `grp1` na função `vcalc` do metafor."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Group 2"
+msgstr "Grupo 2"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid ""
+"Variable to specify the group of the second condition when the observed "
+"effect sizes or outcomes represent contrasts between two conditions. "
+"Corresponds to the `grp1` argument in the metafor's 'vcalc' function."
+msgstr ""
+"Variável para especificar o grupo da segunda condição quando os tamanhos de "
+"efeito ou resultados observados representam contrastes entre duas condições. "
+"Corresponde ao argumento `grp1` na função `vcalc' do metafor."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Group Size 1"
+msgstr "Tamanho do Grupo 1"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid ""
+"Variable to specify the size of the group (or more generally, the inverse-"
+"sampling variance weight) of the first condition when the observed effect "
+"sizes or outcomes represent contrasts between two conditions. Corresponds to "
+"the `w1` argument in the metafor's 'vcalc' function."
+msgstr ""
+"Variável para especificar o tamanho do grupo (ou, mais genericamente, o peso "
+"da variância da amostragem inversa) da primeira condição quando os tamanhos "
+"de efeito ou resultados observados representam contrastes entre duas "
+"condições. Corresponde ao argumento `w1` na função `vcalc` do metafor."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Group Size 2"
+msgstr "Tamanho do Grupo 2"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid ""
+"Optional numeric vector to specify the size of the group (or more generally, "
+"the inverse-sampling variance weight) of the second condition when the "
+"observed effect sizes or outcomes represent contrasts between two "
+"conditions. Corresponds to the `w2` argument in the metafor's 'vcalc' "
+"function."
+msgstr ""
+"Vetor numérico opcional para especificar o tamanho do grupo (ou, de forma "
+"mais geral, o peso da variância da amostragem inversa) da segunda condição "
+"quando os tamanhos de efeito ou resultados observados representam contrastes "
+"entre duas condições. Corresponde ao argumento `w2` na função `vcalc` do "
+"metafor."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Subcluster"
+msgstr "Subagrupamento"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid ""
+"Variable specifying additional structure of the subgroups. Effect sizes "
+"within the same cluster with different values of the cluster variable are "
+"assumed to be independent. Note that this input corresponds to the "
+"'subgroup' option in the metafor's 'vcalc' function and is renamed for "
+"differentiation from subgroup analysis. "
+msgstr ""
+"Variável que especifica a estrutura adicional dos subgrupos. Os tamanhos de "
+"efeito dentro do mesmo agrupamento com valores diferentes da variável de "
+"agrupamento são considerados independentes. Observe que esta entrada "
+"corresponde à opção 'subgroup' na função 'vcalc' do metafor e foi renomeada "
+"para diferenciação da análise de subgrupos. "
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Cluster"
+msgstr "Agrupamento"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid ""
+"Variable specifying clustering of the effect sizes for computing the "
+"variance covariance matrix. Effect sizes with different values of the "
+"cluster variable are assumed to be independent. Note that this input differs "
+"from the 'Clustering' option in the data input which is used to specify "
+"cluster-robust standard error. In most cases however, both input should "
+"contain the same variable."
+msgstr ""
+"Variável que especifica o agrupamento dos tamanhos de efeito para calcular a "
+"matriz de variância-covariância. Os tamanhos de efeito com valores "
+"diferentes da variável de agrupamento são considerados independentes. "
+"Observe que esta entrada difere da opção \"Agrupamento\" na entrada de "
+"dados, que é usada para especificar o erro padrão robusto para agrupamentos. "
+"Na maioria dos casos, no entanto, ambas as entradas devem conter a mesma "
+"variável."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Construct Correlation Matrix"
+msgstr "Matriz de Correlação de Construtos"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Common correlation"
+msgstr "Correlação comum"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Specify the correlation between the same construct levels."
+msgstr "Especifique a correlação entre os mesmos níveis de construção."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid ""
+"CSV file containing the correlation matrix between the constructs levels. "
+"The first row and the first column of the file must contain names that map "
+"the matrix entries to the construct level names (the names cannot start with "
+"a number)."
+msgstr ""
+"Arquivo CSV contendo a matriz de correlação entre os níveis dos constructos. "
+"A primeira linha e a primeira coluna do arquivo devem conter nomes que "
+"mapeiem as entradas da matriz para os nomes dos níveis dos constructos (os "
+"nomes não podem começar com um número)."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Construct Type Correlation Matrix"
+msgstr "Matriz de Correlação de Tipo de Construção"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid ""
+"CSV file containing the correlation matrix between the constructs type "
+"level. The first row and the first column of the file must contain names "
+"that map the matrix entries to the construct level type names (the names "
+"cannot start with a number)."
+msgstr ""
+"Arquivo CSV contendo a matriz de correlação entre os níveis de tipo de "
+"construção. A primeira linha e a primeira coluna do arquivo devem conter "
+"nomes que mapeiem as entradas da matriz para os nomes de tipo de nível de "
+"construção (os nomes não podem começar com um número)."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Time lag 1 correlation"
+msgstr "Correlação de atraso de tempo 1"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Check positive definiteness"
+msgstr "Verifique a definição positiva"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Check if the variance-covariance matrix is symmetric."
+msgstr "Verifique se a matriz de variância-covariância é simétrica."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Force positive definiteness"
+msgstr "Forçar a definição positiva"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid ""
+"Force the variance-covariance matrix to be positive definite. This option "
+"shuld be used with caution as non-positive definite matricies often indicate "
+"input misspecification."
+msgstr ""
+"Forçar a matriz de variância-covariância a ser positiva definida. Esta opção "
+"deve ser usada com cautela, pois matrizes não positivas definidas "
+"frequentemente indicam especificação incorreta da entrada."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Save computed variance-covariance matrix"
+msgstr "Salvar matriz de variância-covariância calculada"
+
+#, fuzzy
+msgctxt "ForestPlotEstimateInformation|"
+msgid "Selected Variables"
+msgstr "Variáveis Selecionadas"
+
+msgctxt "ForestPlotEstimateInformation|"
+msgid ""
+"Select variables containing estimate-level information to be printed in the "
+"left section of the panel for estimate rows."
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlotEstimateInformation|"
+msgid "Title"
+msgstr "Título"
+
+#, fuzzy
+msgctxt "ForestPlotEstimateInformation|"
+msgid "Width"
+msgstr "Largura"
+
+#, fuzzy
+msgctxt "ForestPlotEstimateInformation|"
+msgid "Alignment"
+msgstr "Alinhamento"
+
+msgctxt "ForestPlotEstimateInformation|"
+msgid ""
+"Adjust the Title, Width, and Alignment of each column in the left section "
+"for estimate rows."
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlotEstimateInformation|"
+msgid "Left"
+msgstr "Esquerda"
+
+#, fuzzy
+msgctxt "ForestPlotEstimateInformation|"
+msgid "Middle"
+msgstr "Meio"
+
+#, fuzzy
+msgctxt "ForestPlotEstimateInformation|"
+msgid "Right"
+msgstr "Direita"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Forest Plot"
+msgstr "Gráfico de Floresta"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid ""
+"Options for visualizing study-level information, estimated marginal means, "
+"and the model information in an all encompassing forest plot. Different "
+"sections of the forest plot can be individually enabled/disabled."
+msgstr ""
+"Opções para visualizar informações em nível de estudo, médias marginais "
+"estimadas e informações do modelo em um gráfico de floresta abrangente. "
+"Diferentes seções do gráfico de floresta podem ser ativadas/desativadas "
+"individualmente."
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Study information"
+msgstr "Informações do estudo"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid ""
+"Add study-level information panel to the forest plot. There are three "
+"sections of the study-level information panel: a) the left section with "
+"study labels, names, and etc designed via the 'Selected Variables' option, "
+"b) the middle section visualizing the estimates and confidence intervals "
+"based on the meta-analytic input, c) the right section textually summarizing "
+"the estimates and confidence intervals based on the meta-analytic input."
+msgstr ""
+"Adicione um painel de informações em nível de estudo ao gráfico de floresta. "
+"Há três seções no painel de informações em nível de estudo: a) a seção à "
+"esquerda com rótulos, nomes e outros elementos dos estudos, projetados por "
+"meio da opção 'Variáveis Selecionadas', b) a seção do meio, que visualiza as "
+"estimativas e os intervalos de confiança com base na entrada meta-analítica, "
+"c) a seção à direita, que resume textualmente as estimativas e os intervalos "
+"de confiança com base na entrada meta-analítica."
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Estimated marginal means"
+msgstr "Médias marginais estimadas"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid ""
+"Add estimated marginal means information to the forest plot. Available when "
+"effect size meta-regression is specified."
+msgstr ""
+"Adicione informações de médias marginais estimadas ao gráfico de floresta. "
+"Disponível quando a metarregressão do tamanho do efeito é especificada."
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Model Variables"
+msgstr "Variáveis do Modelo"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Selected Variables"
+msgstr "Variáveis Selecionadas"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Select variables for which the estimated marginal means are visualized."
+msgstr ""
+"Selecione variáveis para as quais as médias marginais estimadas são "
+"visualizadas."
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Term tests"
+msgstr "Testes de termos"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid ""
+"Include the omnibus term test of variables included in the estimated "
+"marginal means. The null hypothesis states that the effect size at all "
+"levels of the categorical variable are equal or that there is no linear "
+"association between the effect size and the continuous variable."
+msgstr ""
+"Inclua o teste de termos abrangente das variáveis incluídas nas médias "
+"marginais estimadas. A hipótese nula afirma que o tamanho do efeito em todos "
+"os níveis da variável categórica é igual ou que não há associação linear "
+"entre o tamanho do efeito e a variável contínua."
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Coefficient tests"
+msgstr "Testes de coeficientes"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid ""
+"Include coefficient tests of variables included in the estimated marginal "
+"means. The null hypothesis states that the estimated marginal mean for a "
+"given level equals the tested value."
+msgstr ""
+"Incluir testes de coeficientes de variáveis incluídas nas médias marginais "
+"estimadas. A hipótese nula afirma que a média marginal estimada para um "
+"determinado nível é igual ao valor testado."
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Against"
+msgstr "Contra"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Specify the test value for the coefficient tests."
+msgstr "Especifique o valor de teste para os testes de coeficiente."
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Coefficient tests against 0"
+msgstr "Teste dos coeficientes contra 0"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid ""
+"Include coefficient tests of variables included in the estimated marginal "
+"means against 0. The null hypothesis states that the estimated marginal mean "
+"for a given level equals the tested value."
+msgstr ""
+"Incluir testes de coeficientes de variáveis incluídas nas médias marginais "
+"estimadas em relação a 0. A hipótese nula afirma que a média marginal "
+"estimada para um determinado nível é igual ao valor testado."
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Adjusted effect size estimate"
+msgstr "Estimativa do tamanho do efeito ajustado"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid ""
+"Include the adjusted effect size estimate in the estimated marginal means "
+"section."
+msgstr ""
+"Inclua a estimativa do tamanho do efeito ajustado na seção de médias "
+"marginais estimadas."
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Model information"
+msgstr "Informação do modelo"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Add meta-analytic model information to the forest plot."
+msgstr "Adicione informações do modelo meta-analítico ao gráfico de floresta."
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Heterogeneity"
+msgstr "Heterogeneidade"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Test"
+msgstr "Teste"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid ""
+"Include the test of the residual heterogeneity in the model information "
+"section."
+msgstr ""
+"Inclua o teste da heterogeneidade residual na seção de informações do modelo."
+
+msgctxt "ForestPlotSection|"
+msgid "Wald test"
+msgstr ""
+
+msgctxt "ForestPlotSection|"
+msgid ""
+"Include the Wald-type test of the residual heterogeneity in the model "
+"information section."
+msgstr ""
+
+msgctxt "ForestPlotSection|"
+msgid "Likelihood ratio test"
+msgstr ""
+
+msgctxt "ForestPlotSection|"
+msgid ""
+"Include the likelihood ratio test of the residual heterogeneity in the model "
+"information section."
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Estimate"
+msgstr "Estimar"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "𝜏"
+msgstr "𝜏"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid ""
+"Include the meta-analytic 𝜏, the square root of the estimated between-study "
+"variance in the model information section. Not available for multilevel/"
+"multivariate meta-analysis."
+msgstr ""
+"Inclua o 𝜏 meta-analítico, a raiz quadrada da variância estimada entre "
+"estudos, na seção de informações do modelo. Não disponível para meta-análise "
+"multinível/multivariada."
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "𝜏²"
+msgstr "𝜏²"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid ""
+"Include the meta-analytic 𝜏², the estimated between-study variance in the "
+"model information section. Not available for multilevel/multivariate meta-"
+"analysis."
+msgstr ""
+"Inclua o 𝜏² meta-analítico, a variância estimada entre estudos, na seção de "
+"informações do modelo. Não disponível para meta-análise multinível/"
+"multivariada."
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "I²"
+msgstr "I²"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid ""
+"Include the meta-analytic I², the percentage of total variation across "
+"studies due to heterogeneity in the model information section. Not available "
+"for multilevel/multivariate and binomial meta-analysis."
+msgstr ""
+"Incluir o I² meta-analítico, a porcentagem da variação total entre os "
+"estudos devido à heterogeneidade na seção de informações do modelo. Não "
+"disponível para meta-análises multinível/multivariadas e binomiais."
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "H²"
+msgstr "H²"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid ""
+"Include the meta-analytic H², an index indicating the ratio of total "
+"variability to sampling variability in the model information section. Not "
+"available for multilevel/multivariate and binomial meta-analysis."
+msgstr ""
+"Incluir o H² meta-analítico, um índice que indica a razão entre a "
+"variabilidade total e a variabilidade amostral na seção de informações do "
+"modelo. Não disponível para meta-análises multinível/multivariada e binomial."
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Moderation test"
+msgstr "Teste de moderação"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid ""
+"Include the omnibus heterogeneity moderation test in the model information "
+"section. Available when heterogeneity meta-regression is specified."
+msgstr ""
+"Incluir o teste de moderação de heterogeneidade abrangente na seção de "
+"informações do modelo. Disponível quando a metarregressão de heterogeneidade "
+"é especificada."
+
+msgctxt "ForestPlotSection|"
+msgid "Effect Size"
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Fixed effect estimate"
+msgstr "Estimativa de efeito fixo"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid ""
+"Include a fixed effect meta-analytic effect size estimate in the model "
+"information section. Not available if the model was already fitted with "
+"fixed effects or the model contains heterogeneity meta-regression."
+msgstr ""
+"Incluir uma estimativa do tamanho do efeito meta-analítico de efeito fixo na "
+"seção de informações do modelo. Não disponível se o modelo já tiver sido "
+"ajustado com efeitos fixos ou se o modelo contiver metarregressão de "
+"heterogeneidade."
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Fixed effect estimate test"
+msgstr "Teste de estimativa de efeito fixo"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid ""
+"Include the test of the fixed effect meta-analytic effect size estimate in "
+"the model information section."
+msgstr ""
+"Inclua o teste da estimativa do tamanho do efeito meta-analítico de efeito "
+"fixo na seção de informações do modelo."
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Pooled estimate"
+msgstr "Estimativa combinada"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid ""
+"Include the overall meta-analytic effect size estimate in the model "
+"information section."
+msgstr ""
+"Inclua a estimativa geral do tamanho do efeito meta-analítico na seção de "
+"informações do modelo."
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Pooled estimate test"
+msgstr "Teste de estimativa combinada"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid ""
+"Include the test of the overall meta-analytic effect size estimate in the "
+"model information section."
+msgstr ""
+"Inclua o teste da estimativa geral do tamanho do efeito meta-analítico na "
+"seção de informações do modelo."
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid ""
+"Include the test of the overall meta-analytic effect size estimate in the "
+"model information section. If a meta-regression model is fitted, the test "
+"corresponds to either the adjusted effect or the meta-regression intercept "
+"term and the corresponding estimate is also displayed. The test is available "
+"only if Bayesian model averaging for the effect is selected."
+msgstr ""
+"Inclua o teste da estimativa geral do tamanho do efeito meta-analítico na "
+"seção de informações do modelo. Se um modelo de metarregressão for ajustado, "
+"o teste corresponde ao efeito ajustado ou ao termo de intercepto da "
+"metarregressão, e a estimativa correspondente também é exibida. O teste só "
+"estará disponível se a média do modelo Bayesiano para o efeito for "
+"selecionada."
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid ""
+"Include the omnibus effect size moderation test in the model information "
+"section. Available when effect size meta-regression is specified."
+msgstr ""
+"Incluir o teste de moderação do tamanho do efeito geral na seção de "
+"informações do modelo. Disponível quando a metarregressão do tamanho do "
+"efeito é especificada."
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Publication Bias"
+msgstr "Viés de Publicação"
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Include the publication bias test in the model information section."
+msgstr ""
+"Inclua o teste de viés de publicação na seção de informações do modelo."
+
+#, fuzzy
+msgctxt "ForestPlotSection|"
+msgid "Settings"
+msgstr "Configurações"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "General"
+msgstr "Geral"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Prediction intervals"
+msgstr "Intervalos de previsão"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid ""
+"Include prediction intervals of the estimated marginal means and the model "
+"information output."
+msgstr ""
+"Incluir intervalos de previsão das médias marginais estimadas e da saída de "
+"informações do modelo."
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Estimates and confidence intervals"
+msgstr "Estimativas e intervalos de confiança"
+
+msgctxt "ForestPlotSettings|"
+msgid ""
+"Include effect size estimates and confidence intervals summary text in the "
+"right panel."
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Conditional estimates"
+msgstr "Estimativas condicionais"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid ""
+"Display the conditional effect, heterogeneity, and estimated marginal means "
+"estimates."
+msgstr ""
+"Exibir o efeito condicional, a heterogeneidade e as estimativas de médias "
+"marginais estimadas."
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Tests in right panel"
+msgstr "Testes no painel direito"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Move test results text to the right panel."
+msgstr "Mova o texto dos resultados do teste para o painel direito."
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Align left panel"
+msgstr "Alinhar painel esquerdo"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Left"
+msgstr "Esquerda"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Middle"
+msgstr "Meio"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Right"
+msgstr "Direita"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Subgroup"
+msgstr "Subgrupo"
+
+msgctxt "ForestPlotSettings|"
+msgid "Specify the forest plot behavior for subgroup analysis."
+msgstr ""
+
+msgctxt "ForestPlotSettings|"
+msgid "Show subgroup titles"
+msgstr ""
+
+msgctxt "ForestPlotSettings|"
+msgid "Show the subgroup heading labels in the forest plot."
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Panels within subgroup"
+msgstr "Painéis dentro do subgrupo"
+
+msgctxt "ForestPlotSettings|"
+msgid "Group the output panels within their subgroup membership."
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Full dataset estimated marginal means"
+msgstr "Médias marginais estimadas do conjunto de dados completo"
+
+msgctxt "ForestPlotSettings|"
+msgid ""
+"Include the full dataset estimated marginal means in the forest plot if "
+"subgroups are specified."
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Full dataset model information"
+msgstr "Informações completas do modelo do conjunto de dados"
+
+msgctxt "ForestPlotSettings|"
+msgid ""
+"Include the full dataset model information in the forest plot if subgroups "
+"are specified."
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Auxiliary"
+msgstr "Auxiliar"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Digits"
+msgstr "Dígitos"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid ""
+"Number of digits printed for the effect size and confidence intervals "
+"summary text."
+msgstr ""
+"Número de dígitos impressos para o texto resumido do tamanho do efeito e dos "
+"intervalos de confiança."
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Tests information"
+msgstr "Informação dos testes"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Statistic and p-value"
+msgstr "Estatística e valor-p"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "P-value"
+msgstr "Valor-p"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Color"
+msgstr "Cor"
+
+msgctxt "ForestPlotSettings|"
+msgid "Change color of the plotted objects."
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Black"
+msgstr "Preto"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Blue"
+msgstr "Azul"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Red"
+msgstr "Vermelho"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Add vertical line"
+msgstr "Adicionar linha vertical"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Add a solid vertical line in the forest plot."
+msgstr "Adicione uma linha vertical sólida no gráfico de floresta."
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Add vertical line (2)"
+msgstr "Adicionar linha vertical (2)"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Add a dotted vertical line in the forest plot."
+msgstr "Adicione uma linha vertical pontilhada no gráfico de floresta."
+
+msgctxt "ForestPlotSettings|"
+msgid "X-axis"
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Label"
+msgstr "Rótulo"
+
+msgctxt "ForestPlotSettings|"
+msgid "Change the x-axis label of the forest plot."
+msgstr ""
+
+msgctxt "ForestPlotSettings|"
+msgid "Limits"
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Change the default x-axis limits."
+msgstr "Alterar os limites padrão do eixo x."
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Lower"
+msgstr "Inferior"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Upper"
+msgstr "Superior"
+
+msgctxt "ForestPlotSettings|"
+msgid "Ticks"
+msgstr ""
+
+msgctxt "ForestPlotSettings|"
+msgid "Specify x-axis ticks manually as comma-separated numbers or fractions."
+msgstr ""
+
+msgctxt "ForestPlotSettings|"
+msgid "Transform labels only"
+msgstr ""
+
+msgctxt "ForestPlotSettings|"
+msgid ""
+"Apply the selected effect size transformation only to the x-axis labels."
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Size"
+msgstr "Tamanho"
+
+msgctxt "ForestPlotSettings|"
+msgid "Adjust the size of the forest plot elements."
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Estimates"
+msgstr "Estimativas"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Text"
+msgstr "Texto"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Axis labels"
+msgstr "Rótulos dos eixos"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Row"
+msgstr "Linha"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Left panel"
+msgstr "Painel esquerdo"
+
+msgctxt "ForestPlotSettings|"
+msgid "Plot area"
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Right panel"
+msgstr "Painel direito"
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Mapping"
+msgstr "Mapeamento"
+
+msgctxt "ForestPlotSettings|"
+msgid ""
+"Select a variable for encoding the color or shape of the plotted objects."
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlotSettings|"
+msgid "Shape"
+msgstr "Forma"
+
+#, fuzzy
+msgctxt "ForestPlotStudyInformation|"
+msgid "Selected Variables"
+msgstr "Variáveis Selecionadas"
+
+msgctxt "ForestPlotStudyInformation|"
+msgid ""
+"Select variables containing study-level information to be printed in the "
+"left section of the panel."
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlotStudyInformation|"
+msgid "Title"
+msgstr "Título"
+
+#, fuzzy
+msgctxt "ForestPlotStudyInformation|"
+msgid "Width"
+msgstr "Largura"
+
+#, fuzzy
+msgctxt "ForestPlotStudyInformation|"
+msgid "Alignment"
+msgstr "Alinhamento"
+
+msgctxt "ForestPlotStudyInformation|"
+msgid ""
+"Adjust the Title, Width, and Alignment of each column in the left section."
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlotStudyInformation|"
+msgid "Left"
+msgstr "Esquerda"
+
+#, fuzzy
+msgctxt "ForestPlotStudyInformation|"
+msgid "Middle"
+msgstr "Meio"
+
+#, fuzzy
+msgctxt "ForestPlotStudyInformation|"
+msgid "Right"
+msgstr "Direita"
+
+#, fuzzy
+msgctxt "ForestPlotStudyInformation|"
+msgid "Predicted effects"
+msgstr "Efeitos previstos"
+
+#, fuzzy
+msgctxt "ForestPlotStudyInformation|"
+msgid ""
+"Include predicted effect sizes in the middle section of the study-level "
+"information panel."
+msgstr ""
+"Inclua os tamanhos de efeito previstos na seção intermediária do painel de "
+"informações do nível do estudo."
+
+#, fuzzy
+msgctxt "ForestPlotStudyInformation|"
+msgid "Study weights"
+msgstr "Ponderações dos estudos"
+
+msgctxt "ForestPlotStudyInformation|"
+msgid ""
+"Include study weights in the right section of the study-level information "
+"panel. For multilevel/multivariate meta-analysis, diagonal model weights are "
+"shown, matching the default forest plot point-size weights."
+msgstr ""
+
+msgctxt "ForestPlotStudyInformation|"
+msgid "Percentage"
+msgstr ""
+
+msgctxt "ForestPlotStudyInformation|"
+msgid "Display user-supplied weights as percentages."
+msgstr ""
+
+msgctxt "ForestPlotStudyInformation|"
+msgid "Normalized"
+msgstr ""
+
+msgctxt "ForestPlotStudyInformation|"
+msgid "Normalize displayed user-supplied weights to sum to 100."
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlotStudyInformation|"
+msgid "Secondary confidence interval"
+msgstr "Intervalo de confiança secundário"
+
+#, fuzzy
+msgctxt "ForestPlotStudyInformation|"
+msgid ""
+"Include secondary confidence interval for effect sizes in the middle section "
+"of the study-level information panel."
+msgstr ""
+"Inclua o intervalo de confiança secundário para tamanhos de efeito na seção "
+"intermediária do painel de informações do nível do estudo."
+
+#, fuzzy
+msgctxt "ForestPlotStudyInformation|"
+msgid "Order"
+msgstr "Ordem"
+
+#, fuzzy
+msgctxt "ForestPlotStudyInformation|"
+msgid "Order the study-level information panel by a variable."
+msgstr "Ordene o painel de informações do nível de estudo por uma variável."
+
+#, fuzzy
+msgctxt "ForestPlotStudyInformation|"
+msgid "By"
+msgstr "Por"
+
+#, fuzzy
+msgctxt "ForestPlotStudyInformation|"
+msgid ""
+"Select the variable by which the study-level information panel is ordered."
+msgstr ""
+"Selecione a variável pela qual o painel de informações do nível de estudo é "
+"ordenado."
+
+#, fuzzy
+msgctxt "ForestPlotStudyInformation|"
+msgid "Ascending"
+msgstr "Ascendente"
+
+#, fuzzy
+msgctxt "ForestPlotStudyInformation|"
+msgid "Order the study-level information panel in ascending order."
+msgstr ""
+"Classifique o painel de informações do nível de estudo em ordem crescente."
+
+#, fuzzy
+msgctxt "ForestPlotStudyInformation|"
+msgid "Aggregate"
+msgstr "Agregar"
+
+msgctxt "ForestPlotStudyInformation|"
+msgid "Aggregate the study-level information panel by a variable."
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlotStudyInformation|"
+msgid ""
+"Select the variable by which the study-level information panel is aggregated."
+msgstr ""
+"Selecione a variável pela qual o painel de informações do nível de estudo é "
+"agregado."
+
+msgctxt "ForestPlotStudyInformation|"
+msgid "Select the method for aggregating the estimates."
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlotStudyInformation|"
+msgid "Boxplot"
+msgstr "Diagrama de caixa"
+
+msgctxt "ForestPlotStudyInformation|"
+msgid "Aggregate the estimates by boxplot."
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlotStudyInformation|"
+msgid "Bubbles"
+msgstr "Bolhas"
+
+msgctxt "ForestPlotStudyInformation|"
+msgid "Aggregate the estimates by bubbles."
+msgstr ""
+
+#, fuzzy
+msgctxt "ForestPlotStudyInformation|"
+msgid "Relative size"
+msgstr "Tamanho relativo"
+
+msgctxt "RiskOfBiasPlot|"
+msgid ""
+"Create risk-of-bias visualizations from systematic review quality "
+"assessments. Supports RoB 2, ROBINS-I, and QUADAS-2."
+msgstr ""
+
+#, fuzzy
+msgctxt "RiskOfBiasPlot|"
+msgid "References"
+msgstr "Referências"
+
+#, fuzzy
+msgctxt "RiskOfBiasPlot|"
+msgid "R Packages"
+msgstr "Pacotes R"
+
+msgctxt "RiskOfBiasPlot|"
+msgid "Assessment tool"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid ""
+"Select the risk-of-bias assessment tool used for the systematic review. Each "
+"tool expects a specific number of domain columns with specific judgment "
+"values."
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "RoB 2"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "ROBINS-I"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "QUADAS-2"
+msgstr ""
+
+#, fuzzy
+msgctxt "RiskOfBiasPlot|"
+msgid "Study Label"
+msgstr "Rótulo do Estudo"
+
+msgctxt "RiskOfBiasPlot|"
+msgid "Variable containing study identifiers."
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "D1: Randomisation"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "D2: Deviations from interventions"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "D3: Missing outcome data"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "D4: Measurement of outcome"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "D5: Selection of reported result"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "D1: Confounding"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "D2: Selection of participants"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "D3: Classification of interventions"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "D4: Deviations from interventions"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "D5: Missing data"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "D6: Measurement of outcomes"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "D7: Selection of reported result"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "D1: Patient selection"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "D2: Index test"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "D3: Reference standard"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "D4: Flow & timing"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "Overall Judgment"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "Variable containing the overall risk-of-bias judgment for each study."
+msgstr ""
+
+#, fuzzy
+msgctxt "RiskOfBiasPlot|"
+msgid "Weights"
+msgstr "Pesos"
+
+msgctxt "RiskOfBiasPlot|"
+msgid ""
+"Variable containing study weights for weighted summary plots (e.g., inverse-"
+"variance weights)."
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "Plots"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "Summary plot"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid ""
+"Display a bar chart showing the distribution of risk-of-bias judgments "
+"across domains."
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "Weighted by study precision"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid ""
+"Weight the summary bars by study precision. Requires a weights variable."
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "Traffic light plot"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid ""
+"Display a matrix of colored circles showing per-study, per-domain risk-of-"
+"bias judgments."
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "Point size"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "Size of the traffic light circles."
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "Appearance"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "Color scheme"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "Select the color palette for risk-of-bias judgments."
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "Cochrane"
+msgstr ""
+
+msgctxt "RiskOfBiasPlot|"
+msgid "Colourblind"
+msgstr ""
