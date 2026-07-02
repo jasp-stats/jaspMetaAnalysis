@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-06-29 22:01+0000\n"
+"PO-Revision-Date: 2026-07-02 22:45+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/gl/>\n"
@@ -9,7 +9,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.7.dev0\n"
+"X-Generator: Weblate 2026.7.1.dev0\n"
 "X-Language: gl_ES\n"
 "X-Source-Language: C\n"
 "X-Qt-Contexts: true\n"
@@ -7701,10 +7701,14 @@ msgid ""
 "intervals when not provided directly, and to determine point sizes via "
 "inverse-variance weights when no weight variable is specified."
 msgstr ""
+"Variable que contén os erros padrón. Utilizada para calcular intervalos de "
+"confianza cando non se proporcionan directamente; e para determinar os "
+"tamaños dos puntos mediante ponderacións coas inversas das varianzas cando "
+"non se especifica ningunha variable de ponderación."
 
 msgctxt "ForestPlot|"
 msgid "Confidence Interval"
-msgstr ""
+msgstr "Intervalo de confianza"
 
 msgctxt "ForestPlot|"
 msgid ""
@@ -7712,18 +7716,22 @@ msgid ""
 "interval. If not provided, intervals are computed from the standard error at "
 "the 95%% level."
 msgstr ""
+"Dúas variables que especifican os límites inferior e superior do intervalo "
+"de confianza. Se non se proporcionan, os intervalos calcúlanse dos erros "
+"padrón cun nivel do 95%%."
 
 msgctxt "ForestPlot|"
 msgid "Prediction Interval"
-msgstr ""
+msgstr "Intervalo de predición"
 
 msgctxt "ForestPlot|"
 msgid ""
 "Two variables specifying the lower and upper bounds of the prediction "
 "interval. Displayed as rectangles behind estimate diamonds."
 msgstr ""
+"Dúas variables que especifican os lindeiros inferior e superior do intervalo "
+"de predición. Presentados como rectángulos detrás dos rombos estimados."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Weight"
 msgstr "Ponderación"
@@ -7734,6 +7742,9 @@ msgid ""
 "these weights and the study weights can be shown in the study information "
 "panel."
 msgstr ""
+"Variable que contén a ponderación dos estudos. Cando se especifica, os "
+"puntos dos estudos calcúlanse mediante estas ponderacións, e as ponderacións "
+"dos estudos poden amosarse no panel de información dos estudos."
 
 msgctxt "ForestPlot|"
 msgid ""
@@ -7741,40 +7752,50 @@ msgid ""
 "appears at the top of the figure. If not provided, the dataset row order is "
 "used."
 msgstr ""
+"Variable que controla a colocación vertical das filas. A primeira posición "
+"aparece no alto da imaxe. Se non se proporciona, utilízase a orde de filas "
+"do conxunto de datos."
 
 msgctxt "ForestPlot|"
 msgid "Visualization Type"
-msgstr ""
+msgstr "Tipo de visualización"
 
 msgctxt "ForestPlot|"
 msgid ""
 "Nominal variable whose levels distinguish study rows (displayed as points "
 "with intervals) from estimate rows (displayed as diamonds)."
 msgstr ""
+"Variable nominal cuxos niveis distinguen as filas dos estudos (presentadas "
+"como puntos con intervalos) das filas estimadas (presentadas como rombos)."
 
 msgctxt "ForestPlot|"
 msgid "Study"
-msgstr ""
+msgstr "Estudo"
 
 msgctxt "ForestPlot|"
 msgid ""
 "Specify the value in the Visualization Type variable that indicates the "
 "study visualization type."
 msgstr ""
+"Especificar o valor da variable Tipo de Visualización que indica o tipo de "
+"visualización dos estudos."
 
 msgctxt "ForestPlot|"
 msgid ""
 "Specify the value in the Visualization Type variable that indicates the "
 "estimate visualization type."
 msgstr ""
+"Especificar o valor da variable Tipo de Visualización que indica o tipo de "
+"visualización das estimacións."
 
 msgctxt "ForestPlot|"
 msgid ""
 "Nominal variable defining subgroups. Each subgroup is displayed as a "
 "separate panel in the forest plot."
 msgstr ""
+"Variable nominal que define subgrupos. Cada subgrupo preséntase como un "
+"panel separado na gráfica forestal."
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Transform effect size"
 msgstr "Transformar a magnitude do efecto"
@@ -7784,130 +7805,120 @@ msgid ""
 "Apply a transformation to the effect sizes and confidence intervals for "
 "display."
 msgstr ""
+"Aplicar unha transformación a magnitudes dos efectos e intervalos de "
+"confianza, para a presentación."
 
 msgctxt "ForestPlot|"
 msgid "None"
-msgstr ""
+msgstr "Ningunha"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Fisher's z to r"
 msgstr "z de Fisher a r"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Exponential"
 msgstr "Exponencial"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Log odds to proportions"
 msgstr "Log de probabilidades a proporcións"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Log odds to SMD (normal)"
 msgstr "Log de probabilidades a SMD (Normal)"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Log odds to SMD (logistic)"
 msgstr "Log de probabilidades a SMD (Loxística)"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "SMD to log odds (normal)"
 msgstr "SMD a Log de probabilidades (Normal)"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "SMD to log odds (logistic)"
 msgstr "SMD a Log de probabilidades (Loxística)"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Hakstian & Whalen inverse α"
 msgstr "α inversa de Hakstian & Whalen"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Bonett inverse α"
 msgstr "α inversa de Bonett"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Z to R²"
 msgstr "Z a R²"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "SMD to Cohen's U₁"
 msgstr "SMD a U₁ de Cohen"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "SMD to Cohen's U₂"
 msgstr "SMD a U₂ de Cohen"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "SMD to Cohen's U₃"
 msgstr "SMD a U₃ de Cohen"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "SMD to CLES, Pr(superiority)"
 msgstr "SMD a CLES, Pr(superioridade)"
 
 msgctxt "ForestPlot|"
 msgid "Study Information"
-msgstr ""
+msgstr "Información do estudo"
 
 msgctxt "ForestPlot|"
 msgid "Estimate Information"
-msgstr ""
+msgstr "Información da estimación"
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "Advanced"
 msgstr "Avanzado"
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "Advanced options for the generalized (GLMM) meta-analysis."
-msgstr ""
+msgstr "Opcións avanzadas para a Meta-Análise xeneralizada (GLMM)."
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "Show metafor R code"
 msgstr "Amosar o código de R de metafor"
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "Display the underlying metafor R code used for the analysis."
-msgstr ""
+msgstr "Presentar o código subxacente de R de metafor utilizado para a análise."
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "Subgroup Analysis"
-msgstr ""
+msgstr "Análise de subgrupos"
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "Include full dataset"
-msgstr ""
+msgstr "Incluír o conxunto completo de datos"
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "Include the full dataset estimate alongside the subgroup estimates."
 msgstr ""
+"Incluír a estimación do conxunto completo de datos xunto ás estimacións dos "
+"subgrupos."
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "GLMM Settings"
-msgstr ""
+msgstr "Configuración de GLMM"
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "Settings specific to the generalized linear mixed model."
 msgstr ""
+"Configuración específica para o modelo mixto linear xeneralizado (MMLX, GLMM)"
+"."
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "Group coding"
-msgstr ""
+msgstr "Codificación de grupos"
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid ""
@@ -7915,42 +7926,51 @@ msgid ""
 "1/2) centers the intercept at the average log odds; Treatment (0/1) sets the "
 "intercept to the reference group."
 msgstr ""
+"Codificación para a variable de grupos en modelos non condicionados. "
+"Contraste (máis/menos 1/2) centra a constante na razón media de "
+"probabilidades; Tratamento (0/1) fixa a constante no grupo de referencia."
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "Contrast (±½)"
-msgstr ""
+msgstr "Contraste (±½)"
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "Treatment (0/1, group 1 = 1)"
-msgstr ""
+msgstr "Tratamento (0/1, grupo 1 = 1)"
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "Treatment (0/1, group 2 = 1)"
-msgstr ""
+msgstr "Tratamento (0/1, grupo 2 = 1)"
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "Correlated random effects"
-msgstr ""
+msgstr "Efectos aleatorios correlacionados"
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid ""
 "Allow correlated random effects in the UM.RS model (random study effects and "
 "random treatment effects can be correlated)."
 msgstr ""
+"Permite efectos aleatorios correlacionados no modelo UM.RS (os efectos "
+"aleatorios de estudos e os efectos aleatorios de tratamentos poden estar "
+"correlacionados)."
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "Quadrature points (nAGQ)"
-msgstr ""
+msgstr "Puntos de cuadratura (nAGQ)"
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid ""
 "Number of quadrature points for the adaptive Gauss-Hermite approximation of "
 "the log-likelihood. Higher values increase accuracy but slow down estimation."
 msgstr ""
+"Número de puntos de cuadratura para a aproximación adaptable de Gauss-"
+"Hermite do logaritmo da verosimilitude. Valores maiores incrementan a "
+"precisión, pero adían a estimación."
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "Handling of Zero Frequencies"
-msgstr ""
+msgstr "Manexar as frecuencias nulas"
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid ""
@@ -7958,19 +7978,24 @@ msgid ""
 "computation of observed effect sizes displayed in plots but do not affect "
 "the GLMM model fit itself."
 msgstr ""
+"Opcións para manexar as frecuencias nulas nas celas nos datos. Isto afecta "
+"ao cálculo das magnitudes observadas dos efectos que se presentan nas "
+"gráficas, pero non afecta ao propio axuste do modelo GLMM."
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "Add to zero cells"
-msgstr ""
+msgstr "Engadir ás celas nulas"
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid ""
 "Value to add to zero cells when computing observed effect sizes for plots."
 msgstr ""
+"Valor a engadir ás celas nulas cando se calculan as magnitudes observadas "
+"dos efectos para as gráficas."
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "Add to"
-msgstr ""
+msgstr "Engadir a"
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "When to apply the continuity correction for zero cells."
