@@ -7,7 +7,7 @@ msgstr ""
 "X-Language: gl_ES\n"
 "X-Source-Language: C\n"
 "X-Qt-Contexts: true\n"
-"PO-Revision-Date: 2026-07-05 10:01+0000\n"
+"PO-Revision-Date: 2026-07-07 13:01+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-qml/gl/>\n"
@@ -720,7 +720,7 @@ msgstr "Unilateral (fixa)"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "None"
-msgstr "Ninguna"
+msgstr "Ningunha"
 
 msgctxt "RobustBayesianMetaAnalysisWeightfunctions|"
 msgid "p-values"
@@ -8618,22 +8618,18 @@ msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Time lag 1 correlation"
 msgstr "Correlación de retardo temporal 1"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Check positive definiteness"
 msgstr "Comprobar certeza positiva"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Check if the variance-covariance matrix is symmetric."
 msgstr "Comprobar se a matriz de varianzas-covarianzas é simétrica."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Force positive definiteness"
 msgstr "Forzar certeza positiva"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid ""
 "Force the variance-covariance matrix to be positive definite. This option "
@@ -8644,12 +8640,10 @@ msgstr ""
 "utilizarse con coidado, pois matrices definidas non-positivas habitualmente "
 "indican mala especificación da entrada."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Save computed variance-covariance matrix"
 msgstr "Gardar a matriz de varianzas-covarianzas calculada"
 
-#, fuzzy
 msgctxt "ForestPlotEstimateInformation|"
 msgid "Selected Variables"
 msgstr "Variables escollidas"
