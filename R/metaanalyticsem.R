@@ -15,6 +15,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+# Meta-analytic SEM data decoding, matrices, fit summaries, and model comparisons.
+
 MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 
   # set OpenMx options

@@ -15,6 +15,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+# SEM-based meta-analysis entry point, model fitting, output tables, and path diagrams.
+
 SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
   # set OpenMx options

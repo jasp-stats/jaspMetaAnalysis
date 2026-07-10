@@ -15,6 +15,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+# Bayesian prediction-performance entry point, model fit, and diagnostics.
+# Shared validation, output, and funnel-plot helpers are implemented in the
+# predictionperformance-*.R files.
+
 BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state = NULL) {
 
   options[["method"]] <- "BAYES"

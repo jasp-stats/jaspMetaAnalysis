@@ -15,6 +15,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+# Generalized meta-analysis validation, GLMM fitting, summaries, and reproducible R code.
+
 
 ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 
@@ -29,11 +31,6 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
   ClassicalMetaAnalysisCommon(jaspResults, dataset, options)
 
   return()
-}
-
-# predicates
-.maIsGLMM <- function(options) {
-  options[["analysis"]] == "generalizedMetaAnalysis"
 }
 
 # anova.rma is not available for rma.glmm; compute Wald-type tests manually
@@ -371,23 +368,6 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
     attr(rows, "footnote") <- gettext("Some GLMM heterogeneity tests could not be computed for this model fit.")
 
   return(rows)
-}
-
-# metafor R code display
-.maglmmShowMetaforRCode <- function(jaspResults, options) {
-
-  if (!.maReady(options) || !is.null(jaspResults[["metaforRCode"]]))
-    return()
-
-  metaforRCode <- createJaspHtml(title = gettext("Metafor R Code"))
-  metaforRCode$dependOn(c(.maDependencies, "showMetaforRCode"))
-  metaforRCode$position <- 99
-
-  metaforRCode$text <- .maTransformToHtml(.maglmmMakeMetaforCallText(options))
-
-  jaspResults[["metaforRCode"]] <- metaforRCode
-
-  return()
 }
 
 .maglmmMakeMetaforCallText <- function(options) {
