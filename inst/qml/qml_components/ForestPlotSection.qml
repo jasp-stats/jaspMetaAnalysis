@@ -214,13 +214,14 @@ Section
 				title:		qsTr("Estimate")
 				columns:	2
 				enabled:	!isFixedOrEqualEffect
+				visible:	analysisType !== "multilevelMultivariateMetaAnalysis"
 
 				CheckBox
 				{
 					text:		qsTr("\uD835\uDF0F")
 					name:		"forestPlotHeterogeneityEstimateTau"
-					visible:	analysisType !== "mantelHaenszelPeto"
-					checked:	analysisType !== "mantelHaenszelPeto"
+					visible:	analysisType !== "mantelHaenszelPeto" && analysisType !== "multilevelMultivariateMetaAnalysis"
+					checked:	analysisType !== "mantelHaenszelPeto" && analysisType !== "multilevelMultivariateMetaAnalysis"
 					info: qsTr("Include the meta-analytic \uD835\uDF0F, the square root of the estimated between-study variance in the model information section. Not available for multilevel/multivariate meta-analysis.")
 				}
 
@@ -228,7 +229,7 @@ Section
 				{
 					text:		qsTr("\uD835\uDF0F\u00B2")
 					name:		"forestPlotHeterogeneityEstimateTau2"
-					visible:	analysisType !== "mantelHaenszelPeto"
+					visible:	analysisType !== "mantelHaenszelPeto" && analysisType !== "multilevelMultivariateMetaAnalysis"
 					checked:	false
 					info: qsTr("Include the meta-analytic \uD835\uDF0F\u00B2, the estimated between-study variance in the model information section. Not available for multilevel/multivariate meta-analysis.")
 				}
@@ -237,18 +238,20 @@ Section
 				{
 					text:		qsTr("I\u00B2")
 					name:		"forestPlotHeterogeneityEstimateI2"
-					enabled:	analysisType !== "mantelHaenszelPeto" && !isScaleRegression
+					enabled:	analysisType !== "multilevelMultivariateMetaAnalysis" && !isScaleRegression
+					visible:	analysisType !== "multilevelMultivariateMetaAnalysis"
 					checked:	false
-					info: qsTr("Include the meta-analytic I\u00B2, the percentage of total variation across studies due to heterogeneity in the model information section. Not available for multilevel/multivariate and binomial meta-analysis.")
+					info: qsTr("Include the meta-analytic I\u00B2, the percentage of total variation across studies due to heterogeneity in the model information section. Not available for multilevel/multivariate meta-analysis or heterogeneity meta-regression.")
 				}
 
 				CheckBox
 				{
 					text:		qsTr("H\u00B2")
 					name:		"forestPlotHeterogeneityEstimateH2"
-					enabled:	analysisType !== "mantelHaenszelPeto" && !isScaleRegression
+					enabled:	analysisType !== "multilevelMultivariateMetaAnalysis" && !isScaleRegression
+					visible:	analysisType !== "multilevelMultivariateMetaAnalysis"
 					checked:	false
-					info: qsTr("Include the meta-analytic H\u00B2, an index indicating the ratio of total variability to sampling variability in the model information section. Not available for multilevel/multivariate and binomial meta-analysis.")
+					info: qsTr("Include the meta-analytic H\u00B2, an index indicating the ratio of total variability to sampling variability in the model information section. Not available for multilevel/multivariate meta-analysis or heterogeneity meta-regression.")
 				}
 			}
 
@@ -274,7 +277,7 @@ Section
 				id:			forestPlotEffectSizeFixedEffectEstimate
 				checked:	false
 				visible:	isStandardClassical
-				enabled:	isStandardClassical && !isFixedOrEqualEffect
+				enabled:	isStandardClassical && !isFixedOrEqualEffect && !isScaleRegression
 				info: qsTr("Include a fixed effect meta-analytic effect size estimate in the model information section. Not available if the model was already fitted with fixed effects or the model contains heterogeneity meta-regression.")
 			}
 
@@ -284,7 +287,7 @@ Section
 				text:		qsTr("Fixed effect estimate test")
 				checked:	true
 				visible:	isStandardClassical 
-				enabled:	isStandardClassical && !isFixedOrEqualEffect && forestPlotEffectSizeFixedEffectEstimate.checked
+				enabled:	isStandardClassical && !isFixedOrEqualEffect && !isScaleRegression && forestPlotEffectSizeFixedEffectEstimate.checked
 				info: qsTr("Include the test of the fixed effect meta-analytic effect size estimate in the model information section.")
 			}
 
@@ -315,9 +318,9 @@ Section
 			{
 				name:		"forestPlotEffectSizeModerationTest"
 				text:		qsTr("Moderation test")
-				enabled:	isClassical && analysisType !== "mantelHaenszelPeto"
+				enabled:	isClassical && isMetaRegression
 				visible: 	isClassical && analysisType !== "mantelHaenszelPeto"
-				checked:	isClassical && analysisType !== "mantelHaenszelPeto"
+				checked:	isClassical && isMetaRegression
 				info: qsTr("Include the omnibus effect size moderation test in the model information section. Available when effect size meta-regression is specified.")
 			}
 		}

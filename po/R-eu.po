@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.95.0\n"
-"POT-Creation-Date: 2025-11-01 03:00\n"
+"POT-Creation-Date: 2026-06-27 03:44\n"
 "PO-Revision-Date: 2025-12-23 10:38+0000\n"
 "Last-Translator: Jose Ramon Rueda <joseramon.rueda@ehu.eus>\n"
 "Language-Team: Basque <https://hosted.weblate.org/projects/jasp/"
@@ -214,8 +214,8 @@ msgid ""
 "Posterior mean and 95%% credible interval estimates from the constrained "
 "random effects model."
 msgstr ""
-"Ausazko efektu mugatuen eredutik ateratako atzeko batez bestekoaren eta "
-"%%95eko sinesgarritasun tartearen estimazioak."
+"Ausazko efektu mugatuen eredutik ateratako atzeko batez bestekoaren eta %"
+"%95eko sinesgarritasun tartearen estimazioak."
 
 msgid "Effect Size"
 msgstr "Efektuaren tamaina"
@@ -353,8 +353,45 @@ msgstr "Azken iterazioa katean"
 msgid "Shrink factor"
 msgstr "Txikitze faktorea"
 
+msgid "Model type '%1$s' is not available for effect size measure '%2$s'."
+msgstr ""
+
 msgid "All observations must be non-negative."
 msgstr "Behaketa guztiak ez-negatiboak izan behar dira."
+
+#, fuzzy
+msgid "All sample sizes must be positive."
+msgstr "Errore estandar guztiak positiboak izan behar dira."
+
+msgid ""
+"Event counts must be smaller than or equal to the corresponding sample sizes."
+msgstr ""
+
+#, fuzzy
+msgid "All person-time values must be positive."
+msgstr "Errore estandar guztiak positiboak izan behar dira."
+
+#, fuzzy
+msgid "Heterogeneity (Wald)"
+msgstr "(Heterogeneotasuna)"
+
+#, fuzzy
+msgid "Heterogeneity (LRT)"
+msgstr "(Heterogeneotasuna)"
+
+#, fuzzy
+msgid "Residual heterogeneity (Wald)"
+msgstr "Hondar-heterogeneotasuna"
+
+#, fuzzy
+msgid "Residual heterogeneity (LRT)"
+msgstr "Hondar-heterogeneotasuna"
+
+msgid "Some GLMM heterogeneity tests could not be computed for this model fit."
+msgstr ""
+
+msgid "Metafor R Code"
+msgstr "Metafor R kodea"
 
 msgid "Cochran-Mantel-Haenszel"
 msgstr "Cochran-Mantel-Haenszel"
@@ -364,9 +401,6 @@ msgstr "Mantel-Haenszel"
 
 msgid "Tarone"
 msgstr "Tarone"
-
-msgid "Metafor R Code"
-msgstr "Metafor R kodea"
 
 msgid "All standard errors must be positive."
 msgstr "Errore estandar guztiak positiboak izan behar dira."
@@ -414,6 +448,12 @@ msgstr "'%1$s' azpitalderako ereduak huts egin du errore honekin: %2$s"
 
 msgid "Error:"
 msgstr "Errorea:"
+
+msgid "Moderation test based on a Wald-type F-test."
+msgstr ""
+
+msgid "Moderation test based on a Wald-type chi-squared test."
+msgstr ""
 
 msgid "Meta-Analytic Estimates"
 msgstr "Metaanalisi estimazioak"
@@ -469,6 +509,9 @@ msgstr "df"
 msgid "df₂"
 msgstr "df₂"
 
+msgid "Term tests based on Wald-type chi-squared tests."
+msgstr ""
+
 msgid "Warning:"
 msgstr "Abisua:"
 
@@ -520,6 +563,9 @@ msgstr "Kontrasteak"
 msgid "Comparison"
 msgstr "Konparaketa"
 
+msgid "Contrast tests based on Wald-type z-tests."
+msgstr ""
+
 msgid "Bubble Plots"
 msgstr "Burbuila-diagramak"
 
@@ -543,13 +589,6 @@ msgstr "SIF"
 
 msgid "Casewise Diagnostics Table"
 msgstr "Kasuka Diagnostiko Taula"
-
-msgid ""
-"Casewise diagnostics are not available for models that contain meta-"
-"regression on heterogeneity."
-msgstr ""
-"Kasuz kasuko diagnostikoak ez daude eskuragarri heterogeneotasunean meta-"
-"erregresioa duten ereduetarako."
 
 msgid "Label"
 msgstr "Etiketa"
@@ -782,13 +821,18 @@ msgstr "Benjamini-Yekutieli"
 msgid "Intercept"
 msgstr "Atzeman"
 
+msgid "%1$s: not available"
+msgstr ""
+
 msgid "Residual heterogeneity"
 msgstr "Hondar-heterogeneotasuna"
 
-msgid "Moderation (Effect Size): %1$s"
+#, fuzzy
+msgid "Moderation (effect size): %1$s"
 msgstr "Moderazioa (Efektuaren Tamaina): %1$s"
 
-msgid "Moderation (Heterogeneity): %1$s"
+#, fuzzy
+msgid "Moderation (heterogeneity): %1$s"
 msgstr "Moderazioa (Heterogeneotasuna): %1$s"
 
 msgid "Moderation: %1$s"
@@ -833,6 +877,16 @@ msgstr "Efektu finkoak t-banaketa erabiliz probatu dira."
 msgid "Fixed effects tested using Knapp and Hartung adjustment."
 msgstr "Knapp eta Hartung doikuntza erabiliz probatutako efektu finkoak."
 
+msgid ""
+"Cluster-robust inference has very low effective degrees of freedom. When "
+"Satterthwaite df < 4, p-values should be interpreted with extreme caution."
+msgstr ""
+
+msgid ""
+"Knapp-Hartung inference is based on very few residual degrees of freedom; "
+"results can be sensitive and should be interpreted cautiously."
+msgstr ""
+
 msgid "The heterogeneity model for 𝜏² is specified on the log scale."
 msgstr "𝜏²-ren heterogeneotasun eredua eskala logaritmikoan zehazten da."
 
@@ -848,21 +902,11 @@ msgstr "efektu doitua"
 msgid "%1$i observations were ommited due to missing values."
 msgstr "%1$i behaketa ezabatu dira balio falta direlako."
 
-msgid "%1$i clusters with %2$i estimates each."
-msgstr "%1$i multzo %2$i estimaziorekin bakoitza."
-
-msgid "%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates."
-msgstr "%1$i multzo %2$i/%3$i/%4$i gutxieneko/mediana/gehieneko estimazioekin."
-
 msgid "%1$s: %2$i observations were ommited due to missing values."
 msgstr "%1$s: %2$i behaketa ezabatu dira balio falta direla eta."
 
-msgid "%1$s: %2$i clusters with %3$i estimates each."
-msgstr "%1$s: %2$i multzo %3$i estimaziorekin bakoitza."
-
-msgid "%1$s: %2$i clusters with min/median/max %3$i/%4$i/%5$i estimates."
-msgstr ""
-"%1$s: %2$i multzo %3$i/%4$i/%5$i gutxieneko/mediana/gehieneko estimazioekin."
+msgid "%1$s: %2$s"
+msgstr "%1$s: %2$s"
 
 msgid ""
 "NAs in the %1$s were introduced due to the %2$s transformation. Please "
@@ -871,8 +915,11 @@ msgstr ""
 "%1$s-ko NAak %2$s eraldaketa dela eta sartu dira. Mesedez, egiaztatu efektu-"
 "tamainaren eraldaketa zuzena erabiltzen ari zarela."
 
-msgid "The %1$s is transformed using %2$s transformation."
-msgstr "%1$s %2$s eraldaketa erabiliz eraldatu da."
+msgid ""
+"The %1$s is transformed using %2$s transformation. For nonlinear "
+"transformations, the transformed estimate is interpreted as a median on the "
+"transformed scale."
+msgstr ""
 
 msgid ""
 "The pooled effect size corresponds to the weighted average effect across "
@@ -899,6 +946,11 @@ msgid "The I² and H² statistics are not available for heterogeneity models."
 msgstr ""
 "I² eta H² estatistikak ez daude eskuragarri heterogeneotasun ereduetarako."
 
+msgid ""
+"Heterogeneity confidence intervals are not available for this GLMM model "
+"type."
+msgstr ""
+
 msgid "The Model Structure %1$s was not completely specified and was skipped."
 msgstr "%1$s Eredu Egitura ez zen guztiz zehaztu eta saltatu egin zen."
 
@@ -908,6 +960,30 @@ msgid ""
 msgstr ""
 "%1$s-ren iragarpen-tartea ez dago eskuragarri heterogeneotasun-estimazio "
 "anitz dituzten modeloetarako."
+
+msgid ""
+"Cluster-robust tests and confidence intervals were computed using %1$s as "
+"the clustering variable (%2$s). %3$s"
+msgstr ""
+
+#, fuzzy
+msgid "%1$i clusters; %2$i estimates per cluster"
+msgstr "%1$i multzo %2$i estimaziorekin bakoitza."
+
+#, fuzzy
+msgid "%1$i clusters; min/median/max %2$i/%3$i/%4$i estimates per cluster"
+msgstr "%1$i multzo %2$i/%3$i/%4$i gutxieneko/mediana/gehieneko estimazioekin."
+
+msgid ""
+"clubSandwich was used with CR2 adjustment and Satterthwaite degrees of "
+"freedom."
+msgstr ""
+
+msgid "A CR1 small-sample correction was applied."
+msgstr ""
+
+msgid "Unadjusted CR0 cluster-robust standard errors were used."
+msgstr ""
 
 msgid ""
 "Each marginal mean estimate is averaged across the levels of the remaining "
@@ -923,8 +999,9 @@ msgstr ""
 "Batez besteko marjinal bakoitzaren estimazioa azpitalde jakin bateko "
 "gainerako iragarleen mailen batez bestekoa da."
 
+#, fuzzy
 msgid ""
-"NAs in the marginal mean estimatess were introduced due to the %1$s "
+"NAs in the marginal mean estimates were introduced due to the %1$s "
 "transformation. Please verify that you are using the correct effect size "
 "transformation."
 msgstr ""
@@ -932,8 +1009,11 @@ msgstr ""
 "ziren. Mesedez, egiaztatu efektu-tamainaren eraldaketa zuzena erabiltzen ari "
 "zarela."
 
-msgid "The estimates and intervals are transformed using %1$s transformation."
-msgstr "Estimazioak eta tarteak %1$s eraldaketa erabiliz eraldatzen dira."
+msgid ""
+"The marginal mean estimates and intervals are transformed using %1$s "
+"transformation. For nonlinear transformations, transformed marginal means "
+"are interpreted as medians on the transformed scale."
+msgstr ""
 
 msgid "The estimates and intervals correspond to %1$s."
 msgstr "Estimazioak eta tarteak %1$s-ri dagozkio."
@@ -1000,6 +1080,16 @@ msgid ""
 msgstr ""
 "Hautatutako 'Metodoa' atalak 'Pisuak' aukera zehaztu behar du 'Aurreratua' "
 "atalean."
+
+msgid ""
+"The GLMM could not be estimated for the selected model. This can happen with "
+"sparse event counts, risk differences, random study effects, or a moderator "
+"structure that is too complex for the data. Try simplifying the moderator "
+"model, using the fixed study-effects GLMM, changing the effect-size measure "
+"if appropriate, or centering/scaling continuous moderators.\n"
+"\n"
+"Metafor reported: Cannot fit ML model."
+msgstr ""
 
 msgid "Subgroup %1$s:"
 msgstr "%1$s azpitaldea:"
@@ -1124,6 +1214,73 @@ msgid ""
 msgstr ""
 "Taldeen konparaketa arruntagatiko mendekotasuna zehazteko 'Taldearen "
 "tamaina' zehaztu gabe dago. Berez, taldeak berdinak direla suposatzen da."
+
+#, fuzzy
+msgid "correlation matrix variables"
+msgstr "Mesedez, eman korrelazio-matrizearen aldagaiak."
+
+#, fuzzy
+msgid "construct"
+msgstr "Egituratu gabea"
+
+#, fuzzy
+msgid "construct type"
+msgstr "Egituratu gabea"
+
+#, fuzzy
+msgid "group 1"
+msgstr "%1$s azpitaldea:"
+
+#, fuzzy
+msgid "group 2"
+msgstr "Azpitaldea"
+
+msgid "group size 1"
+msgstr ""
+
+msgid "group size 2"
+msgstr ""
+
+#, fuzzy
+msgid ""
+"The model was estimated using the selected precomputed working effect-size "
+"variance-covariance matrix."
+msgstr ""
+"Mesedez, eman aldez aurretik kalkulatutako bariantza-kobariantza matrizea "
+"duen fitxategi bat."
+
+#, fuzzy
+msgid ""
+"The model was estimated using a working effect-size variance-covariance "
+"matrix based on %1$s."
+msgstr "Errorea bariantza-kobariantza matrizearen fitxategia irakurtzean: %1$s"
+
+#, fuzzy
+msgid "with a common correlation of %1$s"
+msgstr "Autokorrelazioa (%1$s)"
+
+#, fuzzy
+msgid "with a known correlation matrix"
+msgstr "Ezagutzen den korrelazioaren laburpena"
+
+#, fuzzy
+msgid "%1$s as %2$s %3$s"
+msgstr "%1$s %2$s eskalan dago."
+
+#, fuzzy
+msgid "%1$s as %2$s"
+msgstr "%1$s: %2$s"
+
+msgid "%1$s with lag-1 correlation of %2$s"
+msgstr ""
+
+#, fuzzy
+msgid "%1$s and %2$s"
+msgstr "%1$s: %2$s"
+
+#, fuzzy
+msgid "%1$s, and %2$s"
+msgstr "%1$s: %2$s"
 
 msgid "Error writing the variance-covariance matrix file: %1$s"
 msgstr "Errorea bariantza-kobariantza matrizearen fitxategia idaztean: %1$s"
@@ -1334,6 +1491,133 @@ msgstr "Laginaren tamaina"
 msgid "Total events"
 msgstr "Gertaera guztiak"
 
+#, fuzzy
+msgid ""
+"The within-cluster correlation is set to 0. This corresponds to no "
+"adjustment for dependency between effect sizes within clusters."
+msgstr ""
+"Denbora-atzerapenen arteko korrelazioaren balioa 0ra ezarrita dago. Horrek "
+"denbora-atzerapenen arteko menpekotasuna doitzeko doikuntzarik ez dagoela "
+"adierazten du."
+
+#, fuzzy
+msgid ""
+"Please provide a time variable for autoregressive correlation structures."
+msgstr "Mesedez, eman korrelazio-matrizearen multzokatze-aldagai bat."
+
+#, fuzzy
+msgid ""
+"The lag-1 correlation is set to 0. This corresponds to no time-based "
+"dependency adjustment."
+msgstr ""
+"Denbora-atzerapenen arteko korrelazioaren balioa 0ra ezarrita dago. Horrek "
+"denbora-atzerapenen arteko menpekotasuna doitzeko doikuntzarik ez dagoela "
+"adierazten du."
+
+#, fuzzy
+msgid ""
+"Please provide a construct variable for compound symmetry times "
+"autoregressive correlation structures."
+msgstr "Mesedez, eman korrelazio-matrizearen multzokatze-aldagai bat."
+
+#, fuzzy
+msgid "Aggregation Summary"
+msgstr "Ezagutzen den korrelazioaren laburpena"
+
+msgid "Input Rows"
+msgstr ""
+
+msgid "Clusters"
+msgstr ""
+
+msgid "Effect size aggregation was not run yet."
+msgstr ""
+
+msgid "Independent"
+msgstr ""
+
+#, fuzzy
+msgid "Compound symmetry"
+msgstr "Simetria konposatua"
+
+#, fuzzy
+msgid "Compound symmetry + autoregressive"
+msgstr "Simetria konposatua"
+
+#, fuzzy
+msgid "Compound symmetry × autoregressive"
+msgstr "Simetria konposatua"
+
+#, fuzzy
+msgid "Precomputed variance-covariance matrix"
+msgstr "Errorea bariantza-kobariantza matrizea kalkulatzean: %1$s"
+
+#, fuzzy
+msgid "Correlation matrix"
+msgstr "Korrelazio Matrizea"
+
+msgid "Constructs/groups/times"
+msgstr ""
+
+#, fuzzy
+msgid "sampling variance"
+msgstr "Laginketa diagnostikoak"
+
+#, fuzzy
+msgid "standard error"
+msgstr "Errore estandarra"
+
+msgid "aggregated effect-size, %1$s, and cluster-size"
+msgstr ""
+
+#, fuzzy
+msgid "aggregated effect-size and %1$s"
+msgstr "Moderazio efektuaren tamaina %1$s"
+
+msgid ""
+"%1$i input rows were aggregated into %2$i cluster-level estimates. The %3$s "
+"columns were added to the dataset at the first row of each cluster."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Aggregation used the selected precomputed working effect-size variance-"
+"covariance matrix."
+msgstr ""
+"Mesedez, eman aldez aurretik kalkulatutako bariantza-kobariantza matrizea "
+"duen fitxategi bat."
+
+#, fuzzy
+msgid ""
+"Aggregation used a working effect-size variance-covariance matrix based on "
+"%1$s."
+msgstr "Errorea bariantza-kobariantza matrizearen fitxategia irakurtzean: %1$s"
+
+msgid "Aggregation assumed independent sampling errors within clusters."
+msgstr ""
+
+msgid ""
+"Aggregation used compound-symmetry sampling-error dependence within clusters "
+"with within-cluster correlation %1$s."
+msgstr ""
+
+msgid ""
+"Aggregation used autoregressive sampling-error dependence over %1$s with "
+"lag-1 correlation %2$s."
+msgstr ""
+
+msgid ""
+"Aggregation used compound-symmetry plus autoregressive sampling-error "
+"dependence within clusters with within-cluster correlation %1$s and lag-1 "
+"correlation %2$s over %3$s."
+msgstr ""
+
+msgid ""
+"Aggregation used compound-symmetry times autoregressive sampling-error "
+"dependence for %1$s with within-cluster correlation %2$s and lag-1 "
+"correlation %3$s over %4$s."
+msgstr ""
+
 msgid ""
 "Cannot compute outcomes. Check that all of the required information is "
 "specified via the appropriate arguments (i.e. an Effect Size and either "
@@ -1352,37 +1636,67 @@ msgstr "Kalkulatua"
 msgid "Total Computed"
 msgstr "Guztira kalkulatua"
 
-msgid "Effect sizes were successfully computed for each data entry."
+msgid "Effect size calculation was not run yet."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Effect sizes were successfully computed and added to the dataset for each "
+"data entry."
 msgstr "Efektu-tamainak arrakastaz kalkulatu dira datu-sarrera bakoitzerako."
 
+#, fuzzy
 msgid ""
-"Effect sizes were successfully computed for %1$i out of %2$i data entries."
+"Effect sizes were successfully computed and added to the dataset for %1$i "
+"out of %2$i data entries."
 msgstr ""
 "Efektu-tamainak arrakastaz kalkulatu dira %2$i datu-sarreratik %1$i-rako."
 
 msgid "Error in Step %1$i:"
 msgstr "Errorea %1$i urratsean:"
 
+msgid ""
+"No rows to display. Check that the visualization type mapping assigns at "
+"least one level to 'Study' or 'Estimate'."
+msgstr ""
+
+msgid ""
+"The weight variable must contain finite, non-negative values with at least "
+"one positive value."
+msgstr ""
+
+msgid "Invalid forest plot input."
+msgstr ""
+
 msgid "Model Information"
 msgstr "Modeloaren informazioa"
 
-msgid "Publication Bias: %1$s"
+#, fuzzy
+msgid "Publication bias: %1$s"
 msgstr "Argitalpen-alborapena: %1$s"
 
 msgid "The fixed effect effect size could not be calculated."
 msgstr "Efektu finkoaren efektuaren tamaina ezin izan da kalkulatu."
 
-msgid "Fixed Effect Estimate"
+#, fuzzy
+msgid "Fixed effect estimate"
 msgstr "Efektu Finkoaren Estimazioa"
 
-msgid "Pooled Effect"
-msgstr "Efektu metatua"
-
-msgid "Intercept Estimate"
+#, fuzzy
+msgid "Intercept estimate"
 msgstr "Interzepzioaren Estimazioa"
 
-msgid "Full Dataset"
-msgstr "Datu-multzo osoa"
+msgid ""
+"'%1$s' could not be converted into a numeric value for the custom x-axis "
+"ticks."
+msgstr ""
+
+#, fuzzy
+msgid "At least one manual x-axis tick must be specified."
+msgstr "Gutxienez potentzia hobetzeko etenaldi bat zehaztu behar da."
+
+msgid "At least one manual x-axis tick must fall within the x-axis limits."
+msgstr ""
 
 msgid "Missing Data Summary"
 msgstr "Datu faltaren laburpena"
@@ -1674,6 +1988,18 @@ msgstr ""
 "< %2$1.0f da. Zehaztasuna handitzeko, handitu 'Iterazioen' edo 'Egokitu "
 "delta' Aukerak atalean."
 
+msgid ""
+"Column '%1$s' contains invalid values: %2$s. Expected values for %3$s are: "
+"%4$s."
+msgstr ""
+
+#, fuzzy
+msgid "Study %1$i"
+msgstr "Ikasketa"
+
+msgid "Traffic Light"
+msgstr ""
+
 msgid "Interaction terms are currently not possible in Bayesian meta-analyses."
 msgstr ""
 "Elkarrekintza-terminoak ez dira posible gaur egun Bayes-en metaanalisietan."
@@ -1825,6 +2151,9 @@ msgstr ""
 
 msgid "Adjusted Effect"
 msgstr "Doitutako efektua"
+
+msgid "Pooled Effect"
+msgstr "Efektu metatua"
 
 msgid "Moderation: Estimated Marginal Means"
 msgstr "Moderazioa: Batez besteko marjinal estimatuak"
@@ -2106,9 +2435,6 @@ msgstr "saioa hasi Lik."
 msgid "%1$s fit failed with the following message %2$s."
 msgstr "%1$s doikuntzak huts egin du honako mezua emanez: %2$s."
 
-msgid "%1$s: %2$s"
-msgstr "%1$s: %2$s"
-
 msgid "Warning"
 msgstr "Abisua"
 
@@ -2166,7 +2492,13 @@ msgstr ""
 "zeuden (potentzia > %%80)."
 
 msgid "There were %1$i adequately powered studies (power > 80%%)."
-msgstr "Behar bezalako potentzia zuten %1$i ikerketa zeuden (potentzia > %%80)."
+msgstr ""
+"Behar bezalako potentzia zuten %1$i ikerketa zeuden (potentzia > %%80)."
+
+msgid "%i observation was removed due to missing values."
+msgid_plural "%i observations were removed due to missing values."
+msgstr[0] ""
+msgstr[1] ""
 
 msgid ""
 "The Hamiltonian Monte Carlo procedure might be invalid -- There was %i "
@@ -2201,7 +2533,27 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "%i observation was removed due to missing values."
-msgid_plural "%i observations were removed due to missing values."
-msgstr[0] ""
-msgstr[1] ""
+#~ msgid ""
+#~ "Casewise diagnostics are not available for models that contain meta-"
+#~ "regression on heterogeneity."
+#~ msgstr ""
+#~ "Kasuz kasuko diagnostikoak ez daude eskuragarri heterogeneotasunean meta-"
+#~ "erregresioa duten ereduetarako."
+
+#~ msgid "%1$s: %2$i clusters with %3$i estimates each."
+#~ msgstr "%1$s: %2$i multzo %3$i estimaziorekin bakoitza."
+
+#~ msgid "%1$s: %2$i clusters with min/median/max %3$i/%4$i/%5$i estimates."
+#~ msgstr ""
+#~ "%1$s: %2$i multzo %3$i/%4$i/%5$i gutxieneko/mediana/gehieneko "
+#~ "estimazioekin."
+
+#~ msgid "The %1$s is transformed using %2$s transformation."
+#~ msgstr "%1$s %2$s eraldaketa erabiliz eraldatu da."
+
+#~ msgid ""
+#~ "The estimates and intervals are transformed using %1$s transformation."
+#~ msgstr "Estimazioak eta tarteak %1$s eraldaketa erabiliz eraldatzen dira."
+
+#~ msgid "Full Dataset"
+#~ msgstr "Datu-multzo osoa"

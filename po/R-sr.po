@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.19.2\n"
-"POT-Creation-Date: 2025-11-01 03:00\n"
+"POT-Creation-Date: 2026-06-27 03:44\n"
 "PO-Revision-Date: 2025-12-17 23:00+0000\n"
 "Last-Translator: Marko Bojović <bojovicmarko@outlook.com>\n"
 "Language-Team: Serbian <https://hosted.weblate.org/projects/jasp/"
@@ -316,7 +316,38 @@ msgstr ""
 msgid "Shrink factor"
 msgstr ""
 
+msgid "Model type '%1$s' is not available for effect size measure '%2$s'."
+msgstr ""
+
 msgid "All observations must be non-negative."
+msgstr ""
+
+msgid "All sample sizes must be positive."
+msgstr ""
+
+msgid ""
+"Event counts must be smaller than or equal to the corresponding sample sizes."
+msgstr ""
+
+msgid "All person-time values must be positive."
+msgstr ""
+
+msgid "Heterogeneity (Wald)"
+msgstr ""
+
+msgid "Heterogeneity (LRT)"
+msgstr ""
+
+msgid "Residual heterogeneity (Wald)"
+msgstr ""
+
+msgid "Residual heterogeneity (LRT)"
+msgstr ""
+
+msgid "Some GLMM heterogeneity tests could not be computed for this model fit."
+msgstr ""
+
+msgid "Metafor R Code"
 msgstr ""
 
 msgid "Cochran-Mantel-Haenszel"
@@ -326,9 +357,6 @@ msgid "Mantel-Haenszel"
 msgstr ""
 
 msgid "Tarone"
-msgstr ""
-
-msgid "Metafor R Code"
 msgstr ""
 
 msgid "All standard errors must be positive."
@@ -372,6 +400,12 @@ msgid "The model for subgroup '%1$s' failed with the following error: %2$s"
 msgstr ""
 
 msgid "Error:"
+msgstr ""
+
+msgid "Moderation test based on a Wald-type F-test."
+msgstr ""
+
+msgid "Moderation test based on a Wald-type chi-squared test."
 msgstr ""
 
 msgid "Meta-Analytic Estimates"
@@ -428,6 +462,9 @@ msgstr "df"
 msgid "df₂"
 msgstr ""
 
+msgid "Term tests based on Wald-type chi-squared tests."
+msgstr ""
+
 msgid "Warning:"
 msgstr "Упозорење:"
 
@@ -480,6 +517,9 @@ msgstr ""
 msgid "Comparison"
 msgstr "Поређење"
 
+msgid "Contrast tests based on Wald-type z-tests."
+msgstr ""
+
 msgid "Bubble Plots"
 msgstr ""
 
@@ -502,11 +542,6 @@ msgid "SIF"
 msgstr ""
 
 msgid "Casewise Diagnostics Table"
-msgstr ""
-
-msgid ""
-"Casewise diagnostics are not available for models that contain meta-"
-"regression on heterogeneity."
 msgstr ""
 
 msgid "Label"
@@ -731,14 +766,19 @@ msgstr ""
 msgid "Intercept"
 msgstr "Пресек"
 
+msgid "%1$s: not available"
+msgstr ""
+
 msgid "Residual heterogeneity"
 msgstr ""
 
-msgid "Moderation (Effect Size): %1$s"
-msgstr ""
+#, fuzzy
+msgid "Moderation (effect size): %1$s"
+msgstr "Умерено"
 
-msgid "Moderation (Heterogeneity): %1$s"
-msgstr ""
+#, fuzzy
+msgid "Moderation (heterogeneity): %1$s"
+msgstr "Умерено"
 
 msgid "Moderation: %1$s"
 msgstr ""
@@ -783,6 +823,16 @@ msgstr ""
 msgid "Fixed effects tested using Knapp and Hartung adjustment."
 msgstr ""
 
+msgid ""
+"Cluster-robust inference has very low effective degrees of freedom. When "
+"Satterthwaite df < 4, p-values should be interpreted with extreme caution."
+msgstr ""
+
+msgid ""
+"Knapp-Hartung inference is based on very few residual degrees of freedom; "
+"results can be sensitive and should be interpreted cautiously."
+msgstr ""
+
 msgid "The heterogeneity model for 𝜏² is specified on the log scale."
 msgstr ""
 
@@ -800,19 +850,10 @@ msgstr "Величина ефекта"
 msgid "%1$i observations were ommited due to missing values."
 msgstr ""
 
-msgid "%1$i clusters with %2$i estimates each."
-msgstr ""
-
-msgid "%1$i clusters with min/median/max %2$i/%3$i/%4$i estimates."
-msgstr ""
-
 msgid "%1$s: %2$i observations were ommited due to missing values."
 msgstr ""
 
-msgid "%1$s: %2$i clusters with %3$i estimates each."
-msgstr ""
-
-msgid "%1$s: %2$i clusters with min/median/max %3$i/%4$i/%5$i estimates."
+msgid "%1$s: %2$s"
 msgstr ""
 
 msgid ""
@@ -820,7 +861,10 @@ msgid ""
 "verify that you are using the correct effect size transformation."
 msgstr ""
 
-msgid "The %1$s is transformed using %2$s transformation."
+msgid ""
+"The %1$s is transformed using %2$s transformation. For nonlinear "
+"transformations, the transformed estimate is interpreted as a median on the "
+"transformed scale."
 msgstr ""
 
 msgid ""
@@ -841,12 +885,39 @@ msgstr ""
 msgid "The I² and H² statistics are not available for heterogeneity models."
 msgstr ""
 
+msgid ""
+"Heterogeneity confidence intervals are not available for this GLMM model "
+"type."
+msgstr ""
+
 msgid "The Model Structure %1$s was not completely specified and was skipped."
 msgstr ""
 
 msgid ""
 "Prediction interval for the %1$s is not available for models with multiple "
 "heterogeneity estimates."
+msgstr ""
+
+msgid ""
+"Cluster-robust tests and confidence intervals were computed using %1$s as "
+"the clustering variable (%2$s). %3$s"
+msgstr ""
+
+msgid "%1$i clusters; %2$i estimates per cluster"
+msgstr ""
+
+msgid "%1$i clusters; min/median/max %2$i/%3$i/%4$i estimates per cluster"
+msgstr ""
+
+msgid ""
+"clubSandwich was used with CR2 adjustment and Satterthwaite degrees of "
+"freedom."
+msgstr ""
+
+msgid "A CR1 small-sample correction was applied."
+msgstr ""
+
+msgid "Unadjusted CR0 cluster-robust standard errors were used."
 msgstr ""
 
 msgid ""
@@ -860,12 +931,15 @@ msgid ""
 msgstr ""
 
 msgid ""
-"NAs in the marginal mean estimatess were introduced due to the %1$s "
+"NAs in the marginal mean estimates were introduced due to the %1$s "
 "transformation. Please verify that you are using the correct effect size "
 "transformation."
 msgstr ""
 
-msgid "The estimates and intervals are transformed using %1$s transformation."
+msgid ""
+"The marginal mean estimates and intervals are transformed using %1$s "
+"transformation. For nonlinear transformations, transformed marginal means "
+"are interpreted as medians on the transformed scale."
 msgstr ""
 
 msgid "The estimates and intervals correspond to %1$s."
@@ -914,6 +988,16 @@ msgstr ""
 msgid ""
 "The selected 'Method' requires specification of the 'Weights' option in the "
 "'Advanced' section."
+msgstr ""
+
+msgid ""
+"The GLMM could not be estimated for the selected model. This can happen with "
+"sparse event counts, risk differences, random study effects, or a moderator "
+"structure that is too complex for the data. Try simplifying the moderator "
+"model, using the fixed study-effects GLMM, changing the effect-size measure "
+"if appropriate, or centering/scaling continuous moderators.\n"
+"\n"
+"Metafor reported: Cannot fit ML model."
 msgstr ""
 
 msgid "Subgroup %1$s:"
@@ -1009,6 +1093,61 @@ msgid ""
 "The 'Group Size' for specifying dependency due to common group comparison is "
 "unspecified. As default, the groups are assumed to be equal."
 msgstr ""
+
+msgid "correlation matrix variables"
+msgstr ""
+
+msgid "construct"
+msgstr ""
+
+msgid "construct type"
+msgstr ""
+
+msgid "group 1"
+msgstr ""
+
+msgid "group 2"
+msgstr ""
+
+msgid "group size 1"
+msgstr ""
+
+msgid "group size 2"
+msgstr ""
+
+msgid ""
+"The model was estimated using the selected precomputed working effect-size "
+"variance-covariance matrix."
+msgstr ""
+
+msgid ""
+"The model was estimated using a working effect-size variance-covariance "
+"matrix based on %1$s."
+msgstr ""
+
+msgid "with a common correlation of %1$s"
+msgstr ""
+
+msgid "with a known correlation matrix"
+msgstr ""
+
+msgid "%1$s as %2$s %3$s"
+msgstr ""
+
+#, fuzzy
+msgid "%1$s as %2$s"
+msgstr "BF%1$s%2$s"
+
+msgid "%1$s with lag-1 correlation of %2$s"
+msgstr ""
+
+#, fuzzy
+msgid "%1$s and %2$s"
+msgstr "BF%1$s%2$s"
+
+#, fuzzy
+msgid "%1$s, and %2$s"
+msgstr "BF%1$s%2$s"
 
 msgid "Error writing the variance-covariance matrix file: %1$s"
 msgstr ""
@@ -1217,6 +1356,112 @@ msgid "Total events"
 msgstr ""
 
 msgid ""
+"The within-cluster correlation is set to 0. This corresponds to no "
+"adjustment for dependency between effect sizes within clusters."
+msgstr ""
+
+msgid ""
+"Please provide a time variable for autoregressive correlation structures."
+msgstr ""
+
+msgid ""
+"The lag-1 correlation is set to 0. This corresponds to no time-based "
+"dependency adjustment."
+msgstr ""
+
+msgid ""
+"Please provide a construct variable for compound symmetry times "
+"autoregressive correlation structures."
+msgstr ""
+
+msgid "Aggregation Summary"
+msgstr ""
+
+msgid "Input Rows"
+msgstr ""
+
+msgid "Clusters"
+msgstr ""
+
+msgid "Effect size aggregation was not run yet."
+msgstr ""
+
+msgid "Independent"
+msgstr ""
+
+msgid "Compound symmetry"
+msgstr ""
+
+msgid "Compound symmetry + autoregressive"
+msgstr ""
+
+msgid "Compound symmetry × autoregressive"
+msgstr ""
+
+msgid "Precomputed variance-covariance matrix"
+msgstr ""
+
+#, fuzzy
+msgid "Correlation matrix"
+msgstr "Корелација"
+
+msgid "Constructs/groups/times"
+msgstr ""
+
+msgid "sampling variance"
+msgstr ""
+
+#, fuzzy
+msgid "standard error"
+msgstr "Стандардна грешка"
+
+msgid "aggregated effect-size, %1$s, and cluster-size"
+msgstr ""
+
+msgid "aggregated effect-size and %1$s"
+msgstr ""
+
+msgid ""
+"%1$i input rows were aggregated into %2$i cluster-level estimates. The %3$s "
+"columns were added to the dataset at the first row of each cluster."
+msgstr ""
+
+msgid ""
+"Aggregation used the selected precomputed working effect-size variance-"
+"covariance matrix."
+msgstr ""
+
+msgid ""
+"Aggregation used a working effect-size variance-covariance matrix based on "
+"%1$s."
+msgstr ""
+
+msgid "Aggregation assumed independent sampling errors within clusters."
+msgstr ""
+
+msgid ""
+"Aggregation used compound-symmetry sampling-error dependence within clusters "
+"with within-cluster correlation %1$s."
+msgstr ""
+
+msgid ""
+"Aggregation used autoregressive sampling-error dependence over %1$s with "
+"lag-1 correlation %2$s."
+msgstr ""
+
+msgid ""
+"Aggregation used compound-symmetry plus autoregressive sampling-error "
+"dependence within clusters with within-cluster correlation %1$s and lag-1 "
+"correlation %2$s over %3$s."
+msgstr ""
+
+msgid ""
+"Aggregation used compound-symmetry times autoregressive sampling-error "
+"dependence for %1$s with within-cluster correlation %2$s and lag-1 "
+"correlation %3$s over %4$s."
+msgstr ""
+
+msgid ""
 "Cannot compute outcomes. Check that all of the required information is "
 "specified via the appropriate arguments (i.e. an Effect Size and either "
 "Standard Error, Sampling Variance, or 95%% Confidence Interval)."
@@ -1231,38 +1476,61 @@ msgstr ""
 msgid "Total Computed"
 msgstr ""
 
-msgid "Effect sizes were successfully computed for each data entry."
+msgid "Effect size calculation was not run yet."
 msgstr ""
 
 msgid ""
-"Effect sizes were successfully computed for %1$i out of %2$i data entries."
+"Effect sizes were successfully computed and added to the dataset for each "
+"data entry."
+msgstr ""
+
+msgid ""
+"Effect sizes were successfully computed and added to the dataset for %1$i "
+"out of %2$i data entries."
 msgstr ""
 
 msgid "Error in Step %1$i:"
 msgstr ""
 
+msgid ""
+"No rows to display. Check that the visualization type mapping assigns at "
+"least one level to 'Study' or 'Estimate'."
+msgstr ""
+
+msgid ""
+"The weight variable must contain finite, non-negative values with at least "
+"one positive value."
+msgstr ""
+
+msgid "Invalid forest plot input."
+msgstr ""
+
 msgid "Model Information"
 msgstr ""
 
-msgid "Publication Bias: %1$s"
+msgid "Publication bias: %1$s"
 msgstr ""
 
 msgid "The fixed effect effect size could not be calculated."
 msgstr ""
 
 #, fuzzy
-msgid "Fixed Effect Estimate"
+msgid "Fixed effect estimate"
 msgstr "Величина ефекта"
 
 #, fuzzy
-msgid "Pooled Effect"
-msgstr "Величина ефекта"
-
-#, fuzzy
-msgid "Intercept Estimate"
+msgid "Intercept estimate"
 msgstr "Пресек"
 
-msgid "Full Dataset"
+msgid ""
+"'%1$s' could not be converted into a numeric value for the custom x-axis "
+"ticks."
+msgstr ""
+
+msgid "At least one manual x-axis tick must be specified."
+msgstr ""
+
+msgid "At least one manual x-axis tick must fall within the x-axis limits."
 msgstr ""
 
 msgid "Missing Data Summary"
@@ -1539,6 +1807,17 @@ msgid ""
 "'Adapt delta' in the Options section."
 msgstr ""
 
+msgid ""
+"Column '%1$s' contains invalid values: %2$s. Expected values for %3$s are: "
+"%4$s."
+msgstr ""
+
+msgid "Study %1$i"
+msgstr ""
+
+msgid "Traffic Light"
+msgstr ""
+
 msgid "Interaction terms are currently not possible in Bayesian meta-analyses."
 msgstr ""
 
@@ -1672,6 +1951,10 @@ msgstr ""
 
 msgid "Adjusted Effect"
 msgstr ""
+
+#, fuzzy
+msgid "Pooled Effect"
+msgstr "Величина ефекта"
 
 msgid "Moderation: Estimated Marginal Means"
 msgstr ""
@@ -1928,9 +2211,6 @@ msgstr ""
 msgid "%1$s fit failed with the following message %2$s."
 msgstr ""
 
-msgid "%1$s: %2$s"
-msgstr ""
-
 msgid "Warning"
 msgstr ""
 
@@ -1988,6 +2268,11 @@ msgstr ""
 msgid "There were %1$i adequately powered studies (power > 80%%)."
 msgstr ""
 
+msgid "%i observation was removed due to missing values."
+msgid_plural "%i observations were removed due to missing values."
+msgstr[0] ""
+msgstr[1] ""
+
 msgid ""
 "The Hamiltonian Monte Carlo procedure might be invalid -- There was %i "
 "divergent transition after warmup. This can be solved by carefully "
@@ -2018,11 +2303,6 @@ msgid_plural ""
 "The Hamiltonian Monte Carlo procedure might be inefficient -- %i transitions "
 "exceeded the maximum tree depth. This can be solved by carefully increasing "
 "'Maximum tree depth'."
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "%i observation was removed due to missing values."
-msgid_plural "%i observations were removed due to missing values."
 msgstr[0] ""
 msgstr[1] ""
 

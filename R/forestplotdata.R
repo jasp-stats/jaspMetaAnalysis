@@ -576,10 +576,12 @@
     return(NULL)
 
   classical                   <- .maIsClassical(options)
+  standardClassical           <- .maIsClassical(options, notMHP = TRUE)
   method                      <- .maGetMethodOptions(options)
   randomEffectsMethod         <- !method %in% c("FE", "EE", "MH", "PETO")
   mantelHaenszelMethod        <- method %in% c("MH", "PETO")
   heterogeneityMetaregression <- .maIsMetaregressionHeterogeneity(options)
+  scaleRegression             <- options[["analysis"]] == "metaAnalysis" && heterogeneityMetaregression
   testsStatistics             <- options[["forestPlotAuxiliaryTestsInformation"]] == "statisticAndPValue"
 
   state <- .forestPlotCreateAdditionalSectionState()
@@ -672,7 +674,12 @@
     )
   }
 
-  if (options[["forestPlotEffectSizeFixedEffectEstimate"]]) {
+  if (
+    standardClassical &&
+    randomEffectsMethod &&
+    !scaleRegression &&
+    options[["forestPlotEffectSizeFixedEffectEstimate"]]
+  ) {
 
     fixedEffectTestPlacement <- .forestPlotResolveTestPlacement(
       options[["forestPlotEffectSizeFixedEffectTest"]],
