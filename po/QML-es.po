@@ -3,10 +3,16 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Language: es\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
+"PO-Revision-Date: 2026-07-07 13:01+0000\n"
+"Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/es/>\n"
+"Language: es\n"
+"X-Generator: Weblate 2026.7.1.dev0\n"
 
 msgctxt "Description|"
 msgid "Meta-Analysis"
@@ -8638,7 +8644,6 @@ msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Specify the correlation between the same construct levels."
 msgstr "Especificar la correlación entre los mismos niveles de constructos."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid ""
 "CSV file containing the correlation matrix between the constructs levels. "
@@ -8651,12 +8656,10 @@ msgstr ""
 "nombres que enlacen las entradas de la matriz con los nombres de los niveles "
 "de los constructos (los nombres no pueden comenzar con un número)."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Construct Type Correlation Matrix"
 msgstr "Matriz de correlaciones de los tipos de Constructos"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid ""
 "CSV file containing the correlation matrix between the constructs type "
@@ -8667,30 +8670,25 @@ msgstr ""
 "Archivo CSV que contiene la matriz de correlaciones entre niveles de tipos "
 "de constructos. La primera fila y la primera columna del archivo deben "
 "contener nombres que enlacen las entradas de la matriz con los nombres de "
-"los niveles de los tipos de constructos (los nombres no pueden comenzar con "
-"un número)."
+"los tipos de niveles de constructos (los nombres no pueden comenzar con un "
+"número)."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Time lag 1 correlation"
 msgstr "Correlación de retardo temporal 1"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Check positive definiteness"
 msgstr "Comprobar certeza positiva"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Check if the variance-covariance matrix is symmetric."
 msgstr "Comprobar si la matriz de varianzas-covarianzas es simétrica."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Force positive definiteness"
 msgstr "Forzar certeza positiva"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid ""
 "Force the variance-covariance matrix to be positive definite. This option "
@@ -8698,15 +8696,13 @@ msgid ""
 "input misspecification."
 msgstr ""
 "Forzar que la matriz de varianzas-covarianzas sea positiva. Esta opción debe "
-"utilizarse con cuidado, pues matrices definidas no-positivas habitualmente "
+"utilizarse con cuidado, pues matrices definidas no positivas habitualmente "
 "indican mala especificación de la entrada."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Save computed variance-covariance matrix"
 msgstr "Guardar la matriz de varianzas-covarianzas calculada"
 
-#, fuzzy
 msgctxt "ForestPlotEstimateInformation|"
 msgid "Selected Variables"
 msgstr "Variables seleccionadas"
