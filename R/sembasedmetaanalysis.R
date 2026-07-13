@@ -152,7 +152,8 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   # prepare RAM
   tempRam <- try(metaSEM::lavaan2RAM(
     model         = model[["syntax"]][["model"]],
-    obs.variables = .masemGetObservedVariables(model)
+    obs.variables = .masemGetObservedVariables(model),
+    std.lv        = FALSE
   ))
 
   # fit SEM

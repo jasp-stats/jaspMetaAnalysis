@@ -3,19 +3,19 @@ context("Other: SEM-Based Meta-Analysis - Jaramillo 2025")
 # This test file was auto-generated from a JASP example file.
 # The JASP file is stored in tests/testthat/jaspfiles/other/.
 
-test_that("SemBasedMetaAnalysis results match", {
-
-  skip(message = "Encoding is not working for non-preload dataset")
-
-  # Load from JASP example file
+test_that("hybrid SEM model log-likelihoods match the Cheung reference", {
   jaspFile <- testthat::test_path("jaspfiles", "other", "SEM-Based Meta-Analysis - Jaramillo 2025.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)
   dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
-  set.seed(1)
-  results <- jaspTools::runAnalysis("SemBasedMetaAnalysis", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  OpenMx::mxSetDefaultOptions()
+  logLikelihoods <- vapply(opts[["models"]][4:6], function(model) {
+    model[["syntax"]][["model"]] <- model[["syntax"]][["modelOriginal"]]
+    fit <- jaspMetaAnalysis:::.semmetaFitModelsFun(model, dataset, opts)
+    as.numeric(logLik(fit[["mx.fit"]]))
+  }, numeric(1))
+
+  expect_equal(logLikelihoods, c(27.88701, 27.80180, 27.72565), tolerance = 1e-5)
 
 })
 
