@@ -771,7 +771,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
     model$syntax$prefixedColumns$data.
   )
   observedVariables <- encodeColNames(observedVariables)
-  return()
+  return(observedVariables)
 }
 .masemGetRandomEffectsType <- function(type) {
   return(switch(
