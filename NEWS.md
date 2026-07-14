@@ -13,6 +13,10 @@
 >   * **Deprecated / Removed:** Outdated analyses, options, or legacy code.
 
 ---
+# jaspMetaAnalysis (development version)
+## Fixed
+* Corrected log-likelihoods for SEM-based meta-analysis models.
+
 # jaspMetaAnalysis 0.97.0
 ## Fixed
 * Forest plot heterogeneity disabling for multilevel/multivariate meta-analysis
