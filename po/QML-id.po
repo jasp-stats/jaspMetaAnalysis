@@ -6,12 +6,6 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Language: id\n"
 "X-Qt-Contexts: true\n"
-"PO-Revision-Date: 2026-07-14 00:01+0000\n"
-"Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
-"Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
-"jaspmetaanalysis-qml/id/>\n"
-"Language: id\n"
-"X-Generator: Weblate 2026.8.dev0\n"
 
 msgctxt "Description|"
 msgid "Meta-Analysis"
@@ -6663,9 +6657,10 @@ msgid ""
 "detailed introduction to the module."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Standard errors"
-msgstr ""
+msgstr "Galat standar"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid ""
@@ -7963,9 +7958,10 @@ msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Structure"
 msgstr "Struktur"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Independent"
-msgstr ""
+msgstr "Independen"
 
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Compound symmetry"
@@ -8583,9 +8579,10 @@ msgctxt "ForestPlotSection|"
 msgid "Include the publication bias test in the model information section."
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Settings"
-msgstr ""
+msgstr "Pengaturan"
 
 msgctxt "ForestPlotSettings|"
 msgid "General"
@@ -8611,9 +8608,10 @@ msgid ""
 "right panel."
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Conditional estimates"
-msgstr ""
+msgstr "Estimasi kondisional"
 
 msgctxt "ForestPlotSettings|"
 msgid ""
@@ -8771,13 +8769,15 @@ msgctxt "ForestPlotSettings|"
 msgid "Change the default x-axis limits."
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Lower"
-msgstr ""
+msgstr "Bawah"
 
+#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Upper"
-msgstr ""
+msgstr "Atas"
 
 msgctxt "ForestPlotSettings|"
 msgid "Ticks"
@@ -8816,9 +8816,10 @@ msgctxt "ForestPlotSettings|"
 msgid "Axis labels"
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Row"
-msgstr ""
+msgstr "Baris"
 
 msgctxt "ForestPlotSettings|"
 msgid "Left panel"
