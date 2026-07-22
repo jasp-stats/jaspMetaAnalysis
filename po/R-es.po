@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2026-06-27 03:44\n"
-"PO-Revision-Date: 2026-07-14 18:01+0000\n"
+"PO-Revision-Date: 2026-07-22 10:01+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
@@ -184,7 +184,7 @@ msgid "Model Probabilities"
 msgstr "Probabilidades del Modelo"
 
 msgid "Prior"
-msgstr "Previo"
+msgstr "Previa"
 
 msgid "Posterior"
 msgstr "Posterior"
@@ -363,40 +363,40 @@ msgstr "Factor de contracción"
 
 msgid "Model type '%1$s' is not available for effect size measure '%2$s'."
 msgstr ""
+"El tipo '%1$s' de modelo no está disponible para la medida '%2$s' de la "
+"magnitud del efecto."
 
 msgid "All observations must be non-negative."
 msgstr "Todas las observaciones deben no negativas."
 
-#, fuzzy
 msgid "All sample sizes must be positive."
-msgstr "Todos los errores típicos deben ser positivos."
+msgstr "Todos los tamaños muestrales deben ser positivos."
 
 msgid ""
 "Event counts must be smaller than or equal to the corresponding sample sizes."
 msgstr ""
+"Los recuentos de eventos deben ser menores o iguales que los "
+"correspondientes tamaños muestrales."
 
-#, fuzzy
 msgid "All person-time values must be positive."
-msgstr "Todos los errores típicos deben ser positivos."
+msgstr "Todos los valores de persona-tiempo deben ser positivos."
 
-#, fuzzy
 msgid "Heterogeneity (Wald)"
-msgstr "Heterogeneidad (%s)"
+msgstr "Heterogeneidad (Wald)"
 
-#, fuzzy
 msgid "Heterogeneity (LRT)"
-msgstr "Heterogeneidad (%s)"
+msgstr "Heterogeneidad (LRT)"
 
-#, fuzzy
 msgid "Residual heterogeneity (Wald)"
-msgstr "Heterogeneidad de los errores"
+msgstr "Heterogeneidad de los errores (Wald)"
 
-#, fuzzy
 msgid "Residual heterogeneity (LRT)"
-msgstr "Heterogeneidad de los errores"
+msgstr "Heterogeneidad de los errores (LRT)"
 
 msgid "Some GLMM heterogeneity tests could not be computed for this model fit."
 msgstr ""
+"Algunos contrastes GLMM de heterogeneidad no se pueden calcular para este "
+"ajuste del modelo."
 
 msgid "Metafor R Code"
 msgstr "Código de R de Metafor"
@@ -458,10 +458,11 @@ msgid "Error:"
 msgstr "Fallo:"
 
 msgid "Moderation test based on a Wald-type F-test."
-msgstr ""
+msgstr "Contraste de moderación basado en un contraste F de tipo Wald."
 
 msgid "Moderation test based on a Wald-type chi-squared test."
 msgstr ""
+"Contraste de moderación basado en un contraste Chi-cuadrado de tipo Wald."
 
 msgid "Meta-Analytic Estimates"
 msgstr "Estimaciones Meta-Analíticas"
@@ -519,7 +520,7 @@ msgid "df₂"
 msgstr "gl₂"
 
 msgid "Term tests based on Wald-type chi-squared tests."
-msgstr ""
+msgstr "Contrastes de términos basados en contrastes Chi-cuadrado de tipo Wald."
 
 msgid "Warning:"
 msgstr "Advertencia:"
@@ -573,7 +574,7 @@ msgid "Comparison"
 msgstr "Comparación"
 
 msgid "Contrast tests based on Wald-type z-tests."
-msgstr ""
+msgstr "Contrastes de comparación basados en contrastes Z de tipo Wald."
 
 msgid "Bubble Plots"
 msgstr "Gráficos de burbujas"
@@ -833,16 +834,14 @@ msgid "Intercept"
 msgstr "Constante"
 
 msgid "%1$s: not available"
-msgstr ""
+msgstr "%1$s: No disponible"
 
 msgid "Residual heterogeneity"
 msgstr "Heterogeneidad de los errores"
 
-#, fuzzy
 msgid "Moderation (effect size): %1$s"
 msgstr "Moderación (Magnitud del efecto): %1$s"
 
-#, fuzzy
 msgid "Moderation (heterogeneity): %1$s"
 msgstr "Moderación (Heterogeneidad): %1$s"
 
@@ -892,11 +891,17 @@ msgid ""
 "Cluster-robust inference has very low effective degrees of freedom. When "
 "Satterthwaite df < 4, p-values should be interpreted with extreme caution."
 msgstr ""
+"La inferencia robusta de conglomerados tiene muy pocos grados efectivos de "
+"libertad. Cuando los gl de Satterthwaite < 4, los valores P deben "
+"interpretarse con mucha prudencia."
 
 msgid ""
 "Knapp-Hartung inference is based on very few residual degrees of freedom; "
 "results can be sensitive and should be interpreted cautiously."
 msgstr ""
+"La inferencia de Knapp-Hartung se basa en muy pocos grados residuales de "
+"libertad; los resultados pueden ser sensibles y deberían interpretarse con "
+"prudencia."
 
 msgid "The heterogeneity model for 𝜏² is specified on the log scale."
 msgstr ""
@@ -936,6 +941,9 @@ msgid ""
 "transformations, the transformed estimate is interpreted as a median on the "
 "transformed scale."
 msgstr ""
+"Se transformó %1$s utilizando la transformación %2$s. Para transformaciones "
+"no lineales, la estimación transformada se interpreta como la mediana en la "
+"escala transformada."
 
 msgid ""
 "The pooled effect size corresponds to the weighted average effect across "
@@ -966,6 +974,8 @@ msgid ""
 "Heterogeneity confidence intervals are not available for this GLMM model "
 "type."
 msgstr ""
+"Los intervalos de confianza de la heterogeneidad no están disponibles para "
+"este tipo de modelo GLMM."
 
 msgid "The Model Structure %1$s was not completely specified and was skipped."
 msgstr ""
@@ -982,6 +992,8 @@ msgid ""
 "Cluster-robust tests and confidence intervals were computed using %1$s as "
 "the clustering variable (%2$s). %3$s"
 msgstr ""
+"Los contrastes robustos de los conglomerados y los intervalos de confianza "
+"se calcularon usando %1$s como variable de conglomeración (%2$s). %3$s"
 
 msgid "%1$i clusters; %2$i estimates per cluster"
 msgstr "%1$i conglomerados; %2$i estimaciones por conglomerado"
@@ -995,12 +1007,15 @@ msgid ""
 "clubSandwich was used with CR2 adjustment and Satterthwaite degrees of "
 "freedom."
 msgstr ""
+"Se utilizó clubSandwich con el ajuste CR2 y los grados de libertad de "
+"Satterthwaite."
 
 msgid "A CR1 small-sample correction was applied."
-msgstr ""
+msgstr "Se aplicó una corrección CR1 para muestras pequeñas."
 
 msgid "Unadjusted CR0 cluster-robust standard errors were used."
 msgstr ""
+"Se utilizaron errores típicos CR0 no ajustados robustos de conglomerados."
 
 msgid ""
 "Each marginal mean estimate is averaged across the levels of the remaining "
@@ -1016,7 +1031,6 @@ msgstr ""
 "Cada estimación de la media marginal se promedia entre los niveles de los "
 "predictores que quedan en un subgrupo dado."
 
-#, fuzzy
 msgid ""
 "NAs in the marginal mean estimates were introduced due to the %1$s "
 "transformation. Please verify that you are using the correct effect size "
@@ -1031,6 +1045,10 @@ msgid ""
 "transformation. For nonlinear transformations, transformed marginal means "
 "are interpreted as medians on the transformed scale."
 msgstr ""
+"Se transformaron las estimaciones y los intervalos marginales de las medias, "
+"utilizando la transformación %1$s. Para transformaciones no lineales, las "
+"medias marginales transformadas se interpretan como medianas en la escala "
+"transformada."
 
 msgid "The estimates and intervals correspond to %1$s."
 msgstr "Las estimaciones y los intervalos corresponden a %1$s."
@@ -1107,6 +1125,14 @@ msgid ""
 "\n"
 "Metafor reported: Cannot fit ML model."
 msgstr ""
+"No se pudo estimar el GLMM para el modelo seleccionado. Esto puede suceder "
+"con recuentos escasos de eventos, diferencias de riesgos, efectos aleatorios "
+"de estudios o una estructura del moderador que es demasiado compleja para "
+"los datos. Intente simplificar el modelo del moderator, utilizando el GLMM "
+"de efectos fijos del estudio, cambiando la medida de la magnitud del efecto "
+"si es conveniente o centrando/escalando los moderadores continuos.\n"
+"\n"
+"Informe de metafor: No se puede ajustar el modelo de MV."
 
 msgid "Subgroup %1$s:"
 msgstr "Subgrupo %1$s:"
@@ -1228,8 +1254,8 @@ msgid ""
 "The value of the correlation between time lags is set to 0. This corresponds "
 "to no adjustment for dependency between time lags."
 msgstr ""
-"El valor de la correlación entre retardos temporales está en 0. Esto se "
-"corresponde la ausencia de ajuste para la dependencia entre retardos "
+"El valor de la correlación entre retardos temporales está fijado en 0. Esto "
+"se corresponde a la ausencia de ajuste para la dependencia entre retardos "
 "temporales."
 
 msgid ""
@@ -1243,34 +1269,30 @@ msgstr ""
 msgid "correlation matrix variables"
 msgstr "Variables de la matriz de correlaciones"
 
-#, fuzzy
 msgid "construct"
-msgstr "No estructurada"
+msgstr "Constructo"
 
-#, fuzzy
 msgid "construct type"
-msgstr "No estructurada"
+msgstr "Tipo de constructo"
 
 msgid "group 1"
 msgstr "Grupo 1"
 
-#, fuzzy
 msgid "group 2"
-msgstr "Subgrupo"
+msgstr "Grupo 2"
 
 msgid "group size 1"
-msgstr ""
+msgstr "Tamaño de grupo 1"
 
 msgid "group size 2"
-msgstr ""
+msgstr "Tamaño de grupo 2"
 
-#, fuzzy
 msgid ""
 "The model was estimated using the selected precomputed working effect-size "
 "variance-covariance matrix."
 msgstr ""
-"Por favor, proporcione un archivo con la matriz de varianzas-covarianzas "
-"precalculadas."
+"El modelo se estimó utilizando la matriz seleccionada precalculada de "
+"varianzas-covarianzas de la magnitud del efecto en funcionamiento."
 
 msgid ""
 "The model was estimated using a working effect-size variance-covariance "
@@ -1279,31 +1301,26 @@ msgstr ""
 "El modelo se estimó usando una matriz de trabajo de varianzas-covarianzas de "
 "la magnitud del efecto basada en %1$s."
 
-#, fuzzy
 msgid "with a common correlation of %1$s"
-msgstr "Autocorrelación (%1$s)"
+msgstr "Con una correlación habitual de %1$s"
 
-#, fuzzy
 msgid "with a known correlation matrix"
-msgstr "Resumen de la correlación conocida"
+msgstr "Con una matriz conocida de correlaciones"
 
 msgid "%1$s as %2$s %3$s"
 msgstr "%1$s como %2$s %3$s"
 
-#, fuzzy
 msgid "%1$s as %2$s"
-msgstr "%1$s: %2$s"
+msgstr "%1$s como %2$s"
 
 msgid "%1$s with lag-1 correlation of %2$s"
-msgstr ""
+msgstr "%1$s con correlación de retardo 1 de %2$s"
 
-#, fuzzy
 msgid "%1$s and %2$s"
-msgstr "%1$s: %2$s"
+msgstr "%1$s y %2$s"
 
-#, fuzzy
 msgid "%1$s, and %2$s"
-msgstr "%1$s: %2$s"
+msgstr "%1$s, y %2$s"
 
 msgid "Error writing the variance-covariance matrix file: %1$s"
 msgstr ""
@@ -1520,21 +1537,19 @@ msgstr "Tamaño de la muestra"
 msgid "Total events"
 msgstr "Eventos totales"
 
-#, fuzzy
 msgid ""
 "The within-cluster correlation is set to 0. This corresponds to no "
 "adjustment for dependency between effect sizes within clusters."
 msgstr ""
-"El valor de la correlación entre retardos temporales está en 0. Esto se "
-"corresponde la ausencia de ajuste para la dependencia entre retardos "
-"temporales."
+"La correlación dentro del conglomerado está fijada en 0. Esto se corresponde "
+"a la ausencia de ajuste para la dependencia entre magnitudes de efectos "
+"dentro de los conglomerados."
 
-#, fuzzy
 msgid ""
 "Please provide a time variable for autoregressive correlation structures."
 msgstr ""
-"Por favor, proporcione una variable de conglomeración para la matriz de "
-"correlaciones."
+"Por favor, proporcione una variable temporal para estructuras "
+"autorregresivas de correlaciones."
 
 #, fuzzy
 msgid ""
