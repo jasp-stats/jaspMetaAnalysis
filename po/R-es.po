@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2026-06-27 03:44\n"
-"PO-Revision-Date: 2026-07-22 10:01+0000\n"
+"PO-Revision-Date: 2026-07-23 11:01+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/es/>\n"
@@ -1229,7 +1229,7 @@ msgid ""
 "corresponds to no adjustment for dependency between construct types."
 msgstr ""
 "El valor de la correlación entre tipos de constructos está en 0. Esto se "
-"corresponde la ausencia de ajuste para la dependencia entre tipos de "
+"corresponde con la ausencia de ajuste para la dependencia entre tipos de "
 "constructos."
 
 msgid ""
@@ -1243,7 +1243,7 @@ msgid ""
 "corresponds to no adjustment for dependency between constructs."
 msgstr ""
 "El valor de la correlación entre tipos de constructos está en 0. Esto se "
-"corresponde la ausencia de ajuste para la dependencia entre constructos."
+"corresponde con la ausencia de ajuste para la dependencia entre constructos."
 
 msgid "Please provide a file with the correlation matrix for the construct."
 msgstr ""
@@ -1255,7 +1255,7 @@ msgid ""
 "to no adjustment for dependency between time lags."
 msgstr ""
 "El valor de la correlación entre retardos temporales está fijado en 0. Esto "
-"se corresponde a la ausencia de ajuste para la dependencia entre retardos "
+"se corresponde con la ausencia de ajuste para la dependencia entre retardos "
 "temporales."
 
 msgid ""
@@ -1542,7 +1542,7 @@ msgid ""
 "adjustment for dependency between effect sizes within clusters."
 msgstr ""
 "La correlación dentro del conglomerado está fijada en 0. Esto se corresponde "
-"a la ausencia de ajuste para la dependencia entre magnitudes de efectos "
+"con la ausencia de ajuste para la dependencia entre magnitudes de efectos "
 "dentro de los conglomerados."
 
 msgid ""
@@ -1551,40 +1551,35 @@ msgstr ""
 "Por favor, proporcione una variable temporal para estructuras "
 "autorregresivas de correlaciones."
 
-#, fuzzy
 msgid ""
 "The lag-1 correlation is set to 0. This corresponds to no time-based "
 "dependency adjustment."
 msgstr ""
-"El valor de la correlación entre retardos temporales está en 0. Esto se "
-"corresponde la ausencia de ajuste para la dependencia entre retardos "
-"temporales."
+"La correlación de retardo 1 está fijada en 0. Esto se corresponde con la "
+"ausencia de ajuste para la dependencia basada en el tiempo."
 
-#, fuzzy
 msgid ""
 "Please provide a construct variable for compound symmetry times "
 "autoregressive correlation structures."
 msgstr ""
-"Por favor, proporcione una variable de conglomeración para la matriz de "
-"correlaciones."
+"Por favor, proporcione una variable constructo para simetría compuesta con "
+"estructuras de correlación autorregresiva."
 
-#, fuzzy
 msgid "Aggregation Summary"
-msgstr "Resumen de la correlación conocida"
+msgstr "Resumen de agregación"
 
 msgid "Input Rows"
-msgstr ""
+msgstr "Filas de entrada"
 
 msgid "Clusters"
-msgstr ""
+msgstr "Conglomerados"
 
 msgid "Effect size aggregation was not run yet."
-msgstr ""
+msgstr "La agregación de las magnitudes de efectos aún no se ejecutó."
 
 msgid "Independent"
-msgstr ""
+msgstr "Independiente"
 
-#, fuzzy
 msgid "Compound symmetry"
 msgstr "Simetría compuesta"
 
@@ -1601,22 +1596,19 @@ msgid "Correlation matrix"
 msgstr "Matriz de correlaciones"
 
 msgid "Constructs/groups/times"
-msgstr ""
+msgstr "Constructos/grupos/momentos"
 
-#, fuzzy
 msgid "sampling variance"
-msgstr "Diagnósticos del muestreo"
+msgstr "Varianza del muestreo"
 
-#, fuzzy
 msgid "standard error"
 msgstr "Error típico"
 
 msgid "aggregated effect-size, %1$s, and cluster-size"
-msgstr ""
+msgstr "Magnitud agregada de efectos, %1$s, y tamaño de conglomerados"
 
-#, fuzzy
 msgid "aggregated effect-size and %1$s"
-msgstr "Magnitud %1$s del efecto de moderación"
+msgstr "Magnitud agregada de efectos y %1$s"
 
 msgid ""
 "%1$i input rows were aggregated into %2$i cluster-level estimates. The %3$s "
