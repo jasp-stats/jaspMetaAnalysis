@@ -3,10 +3,16 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Language: es\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
+"PO-Revision-Date: 2026-07-21 10:01+0000\n"
+"Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/es/>\n"
+"Language: es\n"
+"X-Generator: Weblate 2026.8.dev0\n"
 
 msgctxt "Description|"
 msgid "Meta-Analysis"
@@ -8713,12 +8719,10 @@ msgctxt "ForestPlotEstimateInformation|"
 msgid "Title"
 msgstr "Título"
 
-#, fuzzy
 msgctxt "ForestPlotEstimateInformation|"
 msgid "Width"
 msgstr "Ancho"
 
-#, fuzzy
 msgctxt "ForestPlotEstimateInformation|"
 msgid "Alignment"
 msgstr "Alineamiento"
@@ -8728,28 +8732,25 @@ msgid ""
 "Adjust the Title, Width, and Alignment of each column in the left section "
 "for estimate rows."
 msgstr ""
+"Ajustar Título, Ancho y Alineamiento de cada columna en la sección izquierda "
+"para las filas estimadas."
 
-#, fuzzy
 msgctxt "ForestPlotEstimateInformation|"
 msgid "Left"
 msgstr "Izquierda"
 
-#, fuzzy
 msgctxt "ForestPlotEstimateInformation|"
 msgid "Middle"
 msgstr "Medio"
 
-#, fuzzy
 msgctxt "ForestPlotEstimateInformation|"
 msgid "Right"
 msgstr "Derecha"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Forest Plot"
 msgstr "Gráfico forestal"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid ""
 "Options for visualizing study-level information, estimated marginal means, "
@@ -8761,12 +8762,10 @@ msgstr ""
 "todo. Se pueden habilitar/deshabilitar por separado distintas secciones del "
 "gráfico forestal."
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Study information"
 msgstr "Información del estudio"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid ""
 "Add study-level information panel to the forest plot. There are three "
@@ -8784,12 +8783,10 @@ msgstr ""
 "c) la sección derecha que resume textualmente las estimaciones e intervalos "
 "de confianza basados en la entrada meta-analítica."
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Estimated marginal means"
 msgstr "Medias marginales estimadas"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid ""
 "Add estimated marginal means information to the forest plot. Available when "
@@ -8798,29 +8795,24 @@ msgstr ""
 "Añadir información de las medias marginales estimadas al gráfico forestal. "
 "Disponible cuando se especifica la Meta-Regresión de la magnitud del efecto."
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Model Variables"
 msgstr "Variables del modelo"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Selected Variables"
 msgstr "Variables seleccionadas"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Select variables for which the estimated marginal means are visualized."
 msgstr ""
 "Seleccionar las variables para las que se visualizan las medias marginales "
 "estimadas."
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Term tests"
 msgstr "Contrastes de términos"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid ""
 "Include the omnibus term test of variables included in the estimated "
@@ -8833,12 +8825,10 @@ msgstr ""
 "efecto en todos los niveles de la variable con categorías es la misma, o que "
 "no hay asociación lineal entre la magnitud del efecto y la variable continua."
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Coefficient tests"
 msgstr "Contrastes de coeficientes"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid ""
 "Include coefficient tests of variables included in the estimated marginal "
@@ -8849,23 +8839,19 @@ msgstr ""
 "medias marginales estimadas. La hipótesis nula establece que la media "
 "marginal estimada para un nivel dado es igual al valor que se contrasta."
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Against"
 msgstr "Frente a"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Specify the test value for the coefficient tests."
 msgstr ""
 "Especificar el valor que se contrasta para los contrastes de coeficientes."
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Coefficient tests against 0"
 msgstr "Contrastes de coeficientes frente a 0"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid ""
 "Include coefficient tests of variables included in the estimated marginal "
@@ -8877,41 +8863,34 @@ msgstr ""
 "media marginal estimada para un nivel dado es igual al valor que se "
 "contrasta."
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Adjusted effect size estimate"
-msgstr "Estimación de la magnitud del efecto ajustada"
+msgstr "Estimación de la magnitud ajustada del efecto"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid ""
 "Include the adjusted effect size estimate in the estimated marginal means "
 "section."
 msgstr ""
-"Incluir la estimación de la magnitud del efecto ajustada, en la sección de "
+"Incluir la estimación de la magnitud ajustada del efecto, en la sección de "
 "las medias marginales estimadas."
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Model information"
 msgstr "Información del modelo"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Add meta-analytic model information to the forest plot."
-msgstr "Añadir información del modelo meta-analítico al gráfico forestal."
+msgstr "Añadir información del modelo Meta-Analítico al gráfico forestal."
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Heterogeneity"
 msgstr "Heterogeneidad"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Test"
 msgstr "Contraste"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid ""
 "Include the test of the residual heterogeneity in the model information "
@@ -8922,77 +8901,72 @@ msgstr ""
 
 msgctxt "ForestPlotSection|"
 msgid "Wald test"
-msgstr ""
+msgstr "Contraste de Wald"
 
 msgctxt "ForestPlotSection|"
 msgid ""
 "Include the Wald-type test of the residual heterogeneity in the model "
 "information section."
 msgstr ""
+"Incluir el contraste de tipo Wald sobre la heterogeneidad de los errores, en "
+"la sección de información del modelo."
 
 msgctxt "ForestPlotSection|"
 msgid "Likelihood ratio test"
-msgstr ""
+msgstr "Contraste de razón de verosimilitudes"
 
 msgctxt "ForestPlotSection|"
 msgid ""
 "Include the likelihood ratio test of the residual heterogeneity in the model "
 "information section."
 msgstr ""
+"Incluir el contraste de razón de verosimilitudes sobre la heterogeneidad de "
+"los errores, en la sección de información del modelo."
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Estimate"
 msgstr "Estimar"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "𝜏"
 msgstr "𝜏"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid ""
 "Include the meta-analytic 𝜏, the square root of the estimated between-study "
 "variance in the model information section. Not available for multilevel/"
 "multivariate meta-analysis."
 msgstr ""
-"Incluir el 𝜏 meta-analítico, la raíz cuadrada de la varianza entre-estudios "
-"estimada, en la sección de información del modelo. No disponible en el Meta-"
+"Incluir el 𝜏 meta-analítico, la raíz cuadrada de la varianza estimada entre-"
+"estudios, en la sección de información del modelo. No disponible en el Meta-"
 "Análisis multinivel/multivariante."
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "𝜏²"
 msgstr "𝜏²"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid ""
 "Include the meta-analytic 𝜏², the estimated between-study variance in the "
 "model information section. Not available for multilevel/multivariate meta-"
 "analysis."
 msgstr ""
-"Incluir el 𝜏² meta-analítico, la varianza entre-estudios estimada, en la "
+"Incluir el 𝜏² meta-analítico, la varianza estimada entre-estudios, en la "
 "sección de información del modelo. No disponible en el Meta-Análisis "
 "multinivel/multivariante."
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "I²"
 msgstr "I²"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "H²"
 msgstr "H²"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Moderation test"
 msgstr "Contraste de moderación"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid ""
 "Include the omnibus heterogeneity moderation test in the model information "
@@ -9004,14 +8978,12 @@ msgstr ""
 
 msgctxt "ForestPlotSection|"
 msgid "Effect Size"
-msgstr ""
+msgstr "Magnitud del efecto"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Fixed effect estimate"
 msgstr "Estimación de efectos fijos"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid ""
 "Include a fixed effect meta-analytic effect size estimate in the model "
@@ -9019,15 +8991,13 @@ msgid ""
 "fixed effects or the model contains heterogeneity meta-regression."
 msgstr ""
 "Incluir una estimación de la magnitud del efecto fijo meta-analítico, en la "
-"sección de información del modelo. No disponible si el modelo fue ajustado "
-"con efectos fijos o contiene la Meta-Regresión de heterogeneidad."
+"sección de información del modelo. No disponible si el modelo ya fue "
+"ajustado con efectos fijos o contiene la Meta-Regresión de heterogeneidad."
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Fixed effect estimate test"
 msgstr "Contraste de la estimación de efectos fijos"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid ""
 "Include the test of the fixed effect meta-analytic effect size estimate in "
@@ -9036,33 +9006,29 @@ msgstr ""
 "Incluir el contraste de la estimación de la magnitud del efecto fijo meta-"
 "analítico, en la sección de información del modelo."
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Pooled estimate"
 msgstr "Estimación combinada"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid ""
 "Include the overall meta-analytic effect size estimate in the model "
 "information section."
 msgstr ""
-"Incluir la estimación de la magnitud del efecto meta-analítico global, en la "
+"Incluir la estimación de la magnitud del efecto global meta-analítico, en la "
 "sección de información del modelo."
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Pooled estimate test"
 msgstr "Contraste de estimación combinada"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid ""
 "Include the test of the overall meta-analytic effect size estimate in the "
 "model information section."
 msgstr ""
-"Incluir el contraste de la estimación de la magnitud del efecto meta-"
-"analítico global, en la sección de información del modelo."
+"Incluir el contraste de la estimación de la magnitud del efecto global meta-"
+"analítico, en la sección de información del modelo."
 
 msgctxt "ForestPlotSection|"
 msgid ""
@@ -9072,14 +9038,13 @@ msgid ""
 "term and the corresponding estimate is also displayed. The test is available "
 "only if Bayesian model averaging for the effect is selected."
 msgstr ""
-"Incluir el contraste de la estimación de la magnitud del efecto meta-"
-"analítico global, en la sección de información del modelo. Si se ajusta un "
-"modelo de Meta-Regresión, el contraste se corresponde con el efecto ajustado "
-"o con la constante de la Meta-Regresión, y la consecuente estimación también "
-"se presenta. EL contraste está disponible solo si se selecciona un modelo "
+"Incluir el contraste de la estimación de la magnitud del efecto global meta-"
+"analítico, en la sección de información del modelo. Si se ajusta un modelo "
+"de Meta-Regresión, el contraste se corresponde con el efecto ajustado o con "
+"la constante de la Meta-Regresión, y la consecuente estimación también se "
+"presenta. EL contraste está disponible solo si se selecciona un modelo "
 "bayesiano medio para el efecto."
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid ""
 "Include the omnibus effect size moderation test in the model information "
@@ -9089,34 +9054,28 @@ msgstr ""
 "sección de información del modelo. Disponible cuando se especifica la Meta-"
 "Regresión de la magnitud del efecto."
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Publication Bias"
 msgstr "Sesgo de publicación"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Include the publication bias test in the model information section."
 msgstr ""
 "Incluir el contraste de Sesgo de publicación, en la sección de información "
 "del modelo."
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Settings"
 msgstr "Configuración"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "General"
 msgstr "General"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Prediction intervals"
 msgstr "Intervalos de predicción"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid ""
 "Include prediction intervals of the estimated marginal means and the model "
@@ -9125,7 +9084,6 @@ msgstr ""
 "Incluir intervalos de predicción de las medias marginales estimadas y salida "
 "de resultados de la información del modelo."
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Estimates and confidence intervals"
 msgstr "Estimaciones e intervalos de confianza"
@@ -9135,13 +9093,13 @@ msgid ""
 "Include effect size estimates and confidence intervals summary text in the "
 "right panel."
 msgstr ""
+"Incluir texto de resumen sobre las estimaciones de la magnitud del efecto y "
+"los intervalos de confianza, en el panel de la derecha."
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Conditional estimates"
 msgstr "Estimaciones condicionadas"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid ""
 "Display the conditional effect, heterogeneity, and estimated marginal means "
@@ -9150,37 +9108,31 @@ msgstr ""
 "Presentar las estimaciones de efecto, heterogeneidad y medias marginales "
 "estimadas condicionadas."
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Tests in right panel"
 msgstr "Contrastes en el panel derecho"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Move test results text to the right panel."
-msgstr "Mover el texto con resultados de los contrastes, al panel derecho."
+msgstr ""
+"Mover el texto con resultados de los contrastes, al panel de la derecha."
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Align left panel"
 msgstr "Alinear panel a la izquierda"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Left"
 msgstr "Izquierda"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Middle"
 msgstr "Medio"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Right"
 msgstr "Derecha"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Subgroup"
 msgstr "Subgrupo"
@@ -9188,16 +9140,19 @@ msgstr "Subgrupo"
 msgctxt "ForestPlotSettings|"
 msgid "Specify the forest plot behavior for subgroup analysis."
 msgstr ""
+"Especificar el comportamiento del gráfico forestal para análisis de "
+"subgrupos."
 
 msgctxt "ForestPlotSettings|"
 msgid "Show subgroup titles"
-msgstr ""
+msgstr "Mostrar títulos de subgrupos"
 
 msgctxt "ForestPlotSettings|"
 msgid "Show the subgroup heading labels in the forest plot."
 msgstr ""
+"Mostrar las etiquetas de los encabezados de los subgrupos en el gráfico "
+"forestal."
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Panels within subgroup"
 msgstr "Paneles dentro del subgrupo"
@@ -9205,8 +9160,9 @@ msgstr "Paneles dentro del subgrupo"
 msgctxt "ForestPlotSettings|"
 msgid "Group the output panels within their subgroup membership."
 msgstr ""
+"Agrupar los paneles de salidas de resultados dentro de su pertenencia a "
+"subgrupos."
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Full dataset estimated marginal means"
 msgstr "Medias marginales estimadas del conjunto completo de datos"
@@ -9216,8 +9172,9 @@ msgid ""
 "Include the full dataset estimated marginal means in the forest plot if "
 "subgroups are specified."
 msgstr ""
+"Incluir las medias marginales estimadas del conjunto completo de datos en el "
+"gráfico forestal, cuando se especifican subgrupos."
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Full dataset model information"
 msgstr "Información del modelo del conjunto completo de datos"
@@ -9227,18 +9184,17 @@ msgid ""
 "Include the full dataset model information in the forest plot if subgroups "
 "are specified."
 msgstr ""
+"Incluir la información del modelo del conjunto completo de datos en el "
+"gráfico forestal, cuando se especifican subgrupos."
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Auxiliary"
 msgstr "Auxiliar"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Digits"
 msgstr "Dígitos"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid ""
 "Number of digits printed for the effect size and confidence intervals "
@@ -9247,158 +9203,139 @@ msgstr ""
 "Número de dígitos presentados en el texto del resumen de la magnitud del "
 "efecto e intervalos de confianza."
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Tests information"
 msgstr "Información de los contrastes"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Statistic and p-value"
 msgstr "Estadístico y valor P"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "P-value"
 msgstr "Valor P"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Color"
 msgstr "Color"
 
 msgctxt "ForestPlotSettings|"
 msgid "Change color of the plotted objects."
-msgstr ""
+msgstr "Cambiar el color de los objetos dibujados."
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Black"
 msgstr "Negro"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Blue"
 msgstr "Azul"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Red"
 msgstr "Rojo"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Add vertical line"
 msgstr "Añadir línea vertical"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Add a solid vertical line in the forest plot."
-msgstr "Añadir una línea vertical sólida en el gráfico forestal."
+msgstr "Añadir una línea sólida vertical en el gráfico forestal."
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Add vertical line (2)"
 msgstr "Añadir línea vertical (2)"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Add a dotted vertical line in the forest plot."
-msgstr "Añadir una línea vertical punteada en el gráfico forestal."
+msgstr "Añadir una línea punteada vertical en el gráfico forestal."
 
 msgctxt "ForestPlotSettings|"
 msgid "X-axis"
-msgstr ""
+msgstr "Eje X"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Label"
 msgstr "Etiqueta"
 
 msgctxt "ForestPlotSettings|"
 msgid "Change the x-axis label of the forest plot."
-msgstr ""
+msgstr "Cambiar la etiqueta del eje X del gráfico forestal."
 
 msgctxt "ForestPlotSettings|"
 msgid "Limits"
-msgstr ""
+msgstr "Límites"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Change the default x-axis limits."
 msgstr "Cambiar los límites predeterminados del eje X."
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Lower"
 msgstr "Inferior"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Upper"
 msgstr "Superior"
 
 msgctxt "ForestPlotSettings|"
 msgid "Ticks"
-msgstr ""
+msgstr "Marcas"
 
 msgctxt "ForestPlotSettings|"
 msgid "Specify x-axis ticks manually as comma-separated numbers or fractions."
 msgstr ""
+"Especificar manualmente las marcas del eje X como números o fracciones, "
+"separados por comas."
 
 msgctxt "ForestPlotSettings|"
 msgid "Transform labels only"
-msgstr ""
+msgstr "Transformar solo etiquetas"
 
 msgctxt "ForestPlotSettings|"
 msgid ""
 "Apply the selected effect size transformation only to the x-axis labels."
 msgstr ""
+"Aplicar la transformación seleccionada de la magnitud del efecto solo a las "
+"etiquetas do eje X."
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Size"
 msgstr "Tamaño"
 
 msgctxt "ForestPlotSettings|"
 msgid "Adjust the size of the forest plot elements."
-msgstr ""
+msgstr "Ajustar el tamaño de los elementos del gráfico forestal."
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Estimates"
 msgstr "Estimaciones"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Text"
 msgstr "Texto"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Axis labels"
 msgstr "Etiquetas de los ejes"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Row"
 msgstr "Fila"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Left panel"
 msgstr "Panel izquierdo"
 
 msgctxt "ForestPlotSettings|"
 msgid "Plot area"
-msgstr ""
+msgstr "Área del gráfico"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Right panel"
 msgstr "Panel derecho"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Mapping"
 msgstr "Cartografiar"
@@ -9407,13 +9344,13 @@ msgctxt "ForestPlotSettings|"
 msgid ""
 "Select a variable for encoding the color or shape of the plotted objects."
 msgstr ""
+"Seleccionar una variable para codificar el color o la forma de los objetos "
+"dibujados."
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Shape"
 msgstr "Forma"
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Selected Variables"
 msgstr "Variables seleccionadas"
@@ -9423,18 +9360,17 @@ msgid ""
 "Select variables containing study-level information to be printed in the "
 "left section of the panel."
 msgstr ""
+"Seleccionar variables que contienen la información del nivel de estudio a "
+"presentar en la sección izquierda del panel."
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Title"
 msgstr "Título"
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Width"
 msgstr "Ancho"
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Alignment"
 msgstr "Alineamiento"
@@ -9443,37 +9379,33 @@ msgctxt "ForestPlotStudyInformation|"
 msgid ""
 "Adjust the Title, Width, and Alignment of each column in the left section."
 msgstr ""
+"Ajustar el Título, Ancho y Alineamiento de cada columna en la sección de la "
+"izquierda."
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Left"
 msgstr "Izquierda"
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Middle"
 msgstr "Medio"
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Right"
 msgstr "Derecha"
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Predicted effects"
 msgstr "Efectos predichos"
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid ""
 "Include predicted effect sizes in the middle section of the study-level "
 "information panel."
 msgstr ""
 "Incluir magnitudes predichas del efecto en la sección media del panel de "
-"información de nivel-estudio."
+"información del nivel de estudio."
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Study weights"
 msgstr "Ponderaciones de estudios"
@@ -9484,71 +9416,71 @@ msgid ""
 "panel. For multilevel/multivariate meta-analysis, diagonal model weights are "
 "shown, matching the default forest plot point-size weights."
 msgstr ""
+"Incluir las ponderaciones de los estudios en la sección de la derecha del "
+"panel de información del nivel de estudio. Para el Meta-Análisis multinivel/"
+"multivariante, se muestran las ponderaciones diagonales del modelo, que "
+"coinciden con las ponderaciones predeterminadas del tamaño de puntos de los "
+"gráficos forestales."
 
 msgctxt "ForestPlotStudyInformation|"
 msgid "Percentage"
-msgstr ""
+msgstr "Porcentaje"
 
 msgctxt "ForestPlotStudyInformation|"
 msgid "Display user-supplied weights as percentages."
-msgstr ""
+msgstr "Presentar las poderaciones indicadas por el usuario como porcentajes."
 
 msgctxt "ForestPlotStudyInformation|"
 msgid "Normalized"
-msgstr ""
+msgstr "Normalizado"
 
 msgctxt "ForestPlotStudyInformation|"
 msgid "Normalize displayed user-supplied weights to sum to 100."
 msgstr ""
+"Normalizar las poderaciones que se presentan indicadas por el usuario para "
+"que sumen 100."
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Secondary confidence interval"
 msgstr "Intervalo secundario de confianza"
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid ""
 "Include secondary confidence interval for effect sizes in the middle section "
 "of the study-level information panel."
 msgstr ""
 "Incluir los intervalos secundarios de confianza para las magnitudes del "
-"efecto en la sección media del panel de información de nivel-estudio."
+"efecto en la sección media del panel de información del nivel de estudio."
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Order"
 msgstr "Orden"
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Order the study-level information panel by a variable."
-msgstr "Ordenar el panel de información de nivel-estudio según una variable."
+msgstr ""
+"Ordenar el panel de información del nivel de estudio según una variable."
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "By"
 msgstr "Por"
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid ""
 "Select the variable by which the study-level information panel is ordered."
 msgstr ""
 "Seleccionar la variable por la que se ordena el panel de información del "
-"nivel-estudio."
+"nivel de estudio."
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Ascending"
 msgstr "Ascendente"
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Order the study-level information panel in ascending order."
-msgstr "Ordenar el panel de información del nivel-estudio en orden ascendente."
+msgstr ""
+"Ordenar el panel de información del nivel de estudio en orden ascendente."
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Aggregate"
 msgstr "Agregar"
@@ -9556,38 +9488,35 @@ msgstr "Agregar"
 msgctxt "ForestPlotStudyInformation|"
 msgid "Aggregate the study-level information panel by a variable."
 msgstr ""
+"Agregar el panel de información del nivel de estudio según una variable."
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid ""
 "Select the variable by which the study-level information panel is aggregated."
 msgstr ""
 "Seleccionar la variable por la que se agrega el panel de información del "
-"nivel-estudio."
+"nivel de estudio."
 
 msgctxt "ForestPlotStudyInformation|"
 msgid "Select the method for aggregating the estimates."
-msgstr ""
+msgstr "Seleccionar el método para agregar las estimaciones."
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Boxplot"
 msgstr "Diagrama de caja"
 
 msgctxt "ForestPlotStudyInformation|"
 msgid "Aggregate the estimates by boxplot."
-msgstr ""
+msgstr "Agregar las estimaciones en un gráfico de caja."
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Bubbles"
 msgstr "Burbujas"
 
 msgctxt "ForestPlotStudyInformation|"
 msgid "Aggregate the estimates by bubbles."
-msgstr ""
+msgstr "Agregar las estimaciones en burbujas."
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Relative size"
 msgstr "Tamaño relativo"
@@ -9597,20 +9526,20 @@ msgid ""
 "Create risk-of-bias visualizations from systematic review quality "
 "assessments. Supports RoB 2, ROBINS-I, and QUADAS-2."
 msgstr ""
+"Crear visualizaciones del riesgo de sesgo a partir de evaluaciones de la "
+"calidad de revisiones sistemáticas. Admite RoB 2, ROBINS-I y QUADAS-2."
 
-#, fuzzy
 msgctxt "RiskOfBiasPlot|"
 msgid "References"
 msgstr "Referencias"
 
-#, fuzzy
 msgctxt "RiskOfBiasPlot|"
 msgid "R Packages"
 msgstr "Paquetes de R"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "Assessment tool"
-msgstr ""
+msgstr "Herramienta de evaluación"
 
 msgctxt "RiskOfBiasPlot|"
 msgid ""
@@ -9618,101 +9547,104 @@ msgid ""
 "tool expects a specific number of domain columns with specific judgment "
 "values."
 msgstr ""
+"Seleccionar la herramienta de evaluación del riesgo de sesgo utilizada para "
+"la revisión sitemática. Cada herramienta espera un número concreto de "
+"columnas de dominio con valores concretos de juicio."
 
 msgctxt "RiskOfBiasPlot|"
 msgid "RoB 2"
-msgstr ""
+msgstr "RoB 2"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "ROBINS-I"
-msgstr ""
+msgstr "ROBINS-I"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "QUADAS-2"
-msgstr ""
+msgstr "QUADAS-2"
 
-#, fuzzy
 msgctxt "RiskOfBiasPlot|"
 msgid "Study Label"
 msgstr "Etiqueta del estudio"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "Variable containing study identifiers."
-msgstr ""
+msgstr "Variable que contiene los identificadores de los estudios."
 
 msgctxt "RiskOfBiasPlot|"
 msgid "D1: Randomisation"
-msgstr ""
+msgstr "D1: Aleatorización"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "D2: Deviations from interventions"
-msgstr ""
+msgstr "D2: Desviaciones respecto a las intervenciones"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "D3: Missing outcome data"
-msgstr ""
+msgstr "D3: Datos ausentes de los resultados"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "D4: Measurement of outcome"
-msgstr ""
+msgstr "D4: Medición de los resultados"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "D5: Selection of reported result"
-msgstr ""
+msgstr "D5: Selección de los resultados presentados"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "D1: Confounding"
-msgstr ""
+msgstr "D1: Confusión"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "D2: Selection of participants"
-msgstr ""
+msgstr "D2: Selección de participantes"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "D3: Classification of interventions"
-msgstr ""
+msgstr "D3: Clasificación de las intervenciones"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "D4: Deviations from interventions"
-msgstr ""
+msgstr "D4: Desviaciones respecto a las intervenciones"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "D5: Missing data"
-msgstr ""
+msgstr "D5: Datos ausentes"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "D6: Measurement of outcomes"
-msgstr ""
+msgstr "D6: Medición de resultados"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "D7: Selection of reported result"
-msgstr ""
+msgstr "D7: Selección de los resultados presentados"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "D1: Patient selection"
-msgstr ""
+msgstr "D1: Selección de pacientes"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "D2: Index test"
-msgstr ""
+msgstr "D2: Test de índices"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "D3: Reference standard"
-msgstr ""
+msgstr "D3: Norma de referencia"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "D4: Flow & timing"
-msgstr ""
+msgstr "D4: Flujo y temporización"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "Overall Judgment"
-msgstr ""
+msgstr "Enjuiciamiento global"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "Variable containing the overall risk-of-bias judgment for each study."
 msgstr ""
+"Variable que contiene el enjuiciamiento global del riesgo de sesgo, para "
+"cada estudio."
 
-#, fuzzy
 msgctxt "RiskOfBiasPlot|"
 msgid "Weights"
 msgstr "Ponderaciones"
@@ -9722,68 +9654,76 @@ msgid ""
 "Variable containing study weights for weighted summary plots (e.g., inverse-"
 "variance weights)."
 msgstr ""
+"Variable que contiene las ponderaciones de los estudios para los gráficos "
+"ponderados de resumen (p.e. ponderaciones de las inversas de las varianzas)."
 
-#, fuzzy
 msgctxt "RiskOfBiasPlot|"
 msgid "Plots"
 msgstr "Gráficos"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "Summary plot"
-msgstr ""
+msgstr "Gráfico de resumen"
 
 msgctxt "RiskOfBiasPlot|"
 msgid ""
 "Display a bar chart showing the distribution of risk-of-bias judgments "
 "across domains."
 msgstr ""
+"Presentar un gráfico de barras que muestra la distribución de los "
+"enjuiciamientos de riesgo de sesgo a través de los dominios."
 
 msgctxt "RiskOfBiasPlot|"
 msgid "Weighted by study precision"
-msgstr ""
+msgstr "Ponderado según la precisión de los estudios"
 
 msgctxt "RiskOfBiasPlot|"
 msgid ""
 "Weight the summary bars by study precision. Requires a weights variable."
 msgstr ""
+"Ponderar las barras de resumen según la precisión de los estudios. Requiere "
+"una variable de ponderaciones."
 
 msgctxt "RiskOfBiasPlot|"
 msgid "Traffic light plot"
-msgstr ""
+msgstr "Gráfico de semáforo"
 
 msgctxt "RiskOfBiasPlot|"
 msgid ""
 "Display a matrix of colored circles showing per-study, per-domain risk-of-"
 "bias judgments."
 msgstr ""
+"Presentar una matriz de círculos coloreados que muestran por estudio, los "
+"enjuiciamientos del riesgo de sesgo por dominio."
 
 msgctxt "RiskOfBiasPlot|"
 msgid "Point size"
-msgstr ""
+msgstr "Tamaño de punto"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "Size of the traffic light circles."
-msgstr ""
+msgstr "Tamaño de los cículos del semáforo."
 
 msgctxt "RiskOfBiasPlot|"
 msgid "Appearance"
-msgstr ""
+msgstr "Apariencia"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "Color scheme"
-msgstr ""
+msgstr "Esquema de colores"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "Select the color palette for risk-of-bias judgments."
 msgstr ""
+"Seleccionar la paleta de colores para los enjuiciamientos de riesgo de sesgo."
 
 msgctxt "RiskOfBiasPlot|"
 msgid "Cochrane"
-msgstr ""
+msgstr "Cochrane"
 
 msgctxt "RiskOfBiasPlot|"
 msgid "Colourblind"
-msgstr ""
+msgstr "Daltónica"
 
 msgctxt "ForestPlotSection|"
 msgid ""
@@ -9791,6 +9731,10 @@ msgid ""
 "studies due to heterogeneity in the model information section. Not available "
 "for multilevel/multivariate meta-analysis or heterogeneity meta-regression."
 msgstr ""
+"Incluir el I² meta-analítico, el porcentaje de la variación total entre los "
+"estudios debido a la heterogeneidad, en la sección de información del "
+"modelo. No disponible para el Meta-Análisis multinivel/multivariante ni para "
+"la Meta-Regresión de la heterogeneidad."
 
 msgctxt "ForestPlotSection|"
 msgid ""
@@ -9799,3 +9743,7 @@ msgid ""
 "available for multilevel/multivariate meta-analysis or heterogeneity meta-"
 "regression."
 msgstr ""
+"Incluir el H² meta-analítico, un índice que expresa la proporción de la "
+"variabilidad total respecto a la variabilidad muestral, en la sección de "
+"información del modelo. No disponible para el Meta-Análisis multinivel/"
+"multivariante ni para la Meta-Regresión de la heterogeneidad."
