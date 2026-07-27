@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
 "POT-Creation-Date: 2026-06-27 03:44\n"
-"PO-Revision-Date: 2025-03-01 20:22+0000\n"
-"Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
+"PO-Revision-Date: 2026-07-28 05:02+0000\n"
+"Last-Translator: Koji Kosugi <kosugitti@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/ja/>\n"
 "Language: ja\n"
@@ -11,10 +11,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.10.3-dev\n"
+"X-Generator: Weblate 2026.8.dev0\n"
 
 msgid "There must be at least one observation in each group."
-msgstr ""
+msgstr "各群に少なくとも1つの観測が必要です。"
 
 msgid "The prior lower bound is not smaller than the upper bound."
 msgstr "事前分布の下限値が上限値よりも小さくない."
@@ -58,10 +58,10 @@ msgid "Log(BF%1$s%2$s)"
 msgstr "Log(BF%1$s%2$s)"
 
 msgid "Mean"
-msgstr "平均値"
+msgstr "平均"
 
 msgid "SD"
-msgstr "標準偏差"
+msgstr "SD"
 
 msgid "Lower"
 msgstr "下限"
@@ -101,9 +101,9 @@ msgid ""
 "present. The Bayes factor is based on all four models: fixed effects H%2$s & "
 "random effects H%2$s over the fixed effects H%1$s & random effects H%1$s."
 msgstr ""
-"事後推定値は、効果が存在すると仮定したモデルに基づいています。ベイズ因子は、"
-"固定効果 H%1$sおよびランダム効果Hs に対する固定効果 H%2$s およびランダム効果"
-"H%2$s のすべての4つのモデルに基づいています。"
+"事後推定値は、効果が存在すると仮定したモデルにもとづいています。"
+"ベイズファクターは4つのモデルすべてにもとづきます。すなわち、固定効果 H%1$s "
+"と変量効果 H%1$s に対する固定効果 H%2$s と変量効果 H%2$s です。"
 
 msgid ""
 "Model averaged posterior estimates for %3$s are not yet available, but will "
@@ -118,13 +118,11 @@ msgid ""
 "Bayes factor of the (unconstrained/constrained) random effects H%1$s over "
 "the fixed effects H%1$s."
 msgstr ""
-"固定効果 H%1$s に対する (制約なし/制約あり) 変量効果 H%1$s のベイズファク"
-"ター."
+"固定効果 H%1$s に対する(制約なし/制約つき)変量効果 H%1$s のベイズファクターで"
+"す。"
 
 msgid "Bayes factor of the fixed effects H%1$s over the random effects H%1$s."
-msgstr ""
-"変量効果 H%1$s に対する (制約なし/制約あり) 固定効果 H%1$s のベイズファク"
-"ター."
+msgstr "変量効果 H%1$s に対する固定効果 H%1$s のベイズファクターです。"
 
 msgid ""
 "Model averaged posterior estimates are based on the models that assume an "
@@ -132,40 +130,43 @@ msgid ""
 "effects H%1$s & random effects H%1$s over the fixed effects H%2$s & random "
 "effects H%2$s."
 msgstr ""
-"モデル平均事後推定値は効果が存在すると仮定したモデルに基づいています。ベイズ"
-"ファクターは、4つのモデルすべてに基づいています: 固定効果H%2$s & 変量効果"
-"H%2$s よりも固定効果H%1$s & 変量効果 H%2$s."
+"モデル平均事後推定値は、効果が存在すると仮定したモデルにもとづいています。"
+"ベイズファクターは4つのモデルすべてにもとづきます。すなわち、固定効果 H%2$s "
+"と変量効果 H%2$s に対する固定効果 H%1$s と変量効果 H%1$s です。"
 
 msgid ""
 "Model averaged posterior estimates for %3$s are not yet available, but will "
 "be added in the future. The Bayes factor is based on all four models: fixed "
 "effects H%1$s & H%2$s over the random effects H%1$s & H%2$s."
 msgstr ""
-"%3$s におけるモデル平均事後推定値はまだありませんが、今後追加される予定です。"
-"ベイズファクターは、4つのモデルすべてに基づいています: 変量効果H%1$s & H%2$s"
-"よりも固定効果H%1$s & H%2$s."
+"%3$s のモデル平均事後推定値はまだ利用できませんが、将来追加される予定です。"
+"ベイズファクターは4つのモデルすべてにもとづきます。すなわち、変量効果 H%1$s "
+"と H%2$s に対する固定効果 H%1$s と H%2$s です。"
 
 msgid ""
 "Bayes factor of the fixed effects H%1$s over the (unconstrained/constrained) "
 "random effects H%1$s."
 msgstr ""
-"（制約なし/制約付き）変量効果H%1$sに対する固定効果H%1$sのベイズファクター."
+"(制約なし/制約つき)変量効果 H%1$s に対する固定効果 H%1$s のベイズファクターで"
+"す。"
 
 msgid ""
 "Bayes factor of the ordered effects H%1$s over the fixed effects H%2$s. The "
 "Bayes factor for the ordered effects H%1$s versus the unconstrained (random) "
 "effects H%1$s model is %3$.3f."
 msgstr ""
-"固定効果 H%2$s に対する順序効果 H%1$s のベイズファクター. 制約のない(変量)効"
-"果 H%1$s モデルに対する順序効果 H%1$s のベイズファクターは %3$.3f."
+"固定効果 H%2$s に対する順序制約つき効果 H%1$s のベイズファクターです。制約な"
+"し(変量)効果 H%1$s モデルに対する順序制約つき効果 H%1$s のベイズファクターは "
+"%3$.3f です。"
 
 msgid ""
 "Bayes factor of the fixed effects H%2$s over the ordered effects H%1$s. The "
 "Bayes factor for the unconstrained (random) effects H%1$s versus the ordered "
 "effects H%1$s model is %3$.3f."
 msgstr ""
-"順序効果 H%1$s に対する固定効果 H%2$s のベイズファクター. 順序効果 H%1$s モデ"
-"ルに対する制約のない(変量)効果 H%1$s のベイズファクターは %3$.3f."
+"順序制約つき効果 H%1$s に対する固定効果 H%2$s のベイズファクターです。順序制"
+"約つき効果 H%1$s モデルに対する制約なし(変量)効果 H%1$s のベイズファクターは "
+"%3$.3f です。"
 
 msgid "Model Probabilities"
 msgstr "モデルの確率"
@@ -183,16 +184,16 @@ msgid "Random H%s"
 msgstr "変量 H%s"
 
 msgid "Ordered H%s"
-msgstr "順序 H%s"
+msgstr "順序制約 H%s"
 
 msgid "Effect Sizes per Study"
 msgstr "研究ごとの効果量"
 
 msgid "Observed"
-msgstr "観測された"
+msgstr "観測値"
 
 msgid "Estimated"
-msgstr "推定された"
+msgstr "推定"
 
 msgid "Study"
 msgstr "研究"
@@ -200,12 +201,12 @@ msgstr "研究"
 msgid ""
 "Posterior mean and 95%% credible interval estimates from the random effects "
 "model."
-msgstr "変量効果モデルからの事後平均と95 %%の信頼区間の推定."
+msgstr "変量効果モデルによる事後平均と95%%信用区間の推定値です。"
 
 msgid ""
 "Posterior mean and 95%% credible interval estimates from the constrained "
 "random effects model."
-msgstr "制約付き変量効果モデルからの事後平均と95 %%の信頼区間の推定."
+msgstr "制約つき変量効果モデルによる事後平均と95%%信用区間の推定値です。"
 
 msgid "Effect Size"
 msgstr "効果量"
@@ -229,49 +230,49 @@ msgid "Random H"
 msgstr "変量 H"
 
 msgid "Averaged H"
-msgstr "平均化 H"
+msgstr "平均 H"
 
 msgid "Prior H"
 msgstr "事前 H"
 
 msgid "Ordered H"
-msgstr "順序 H"
+msgstr "順序制約 H"
 
 msgid "Forest Plot"
 msgstr "フォレストプロット"
 
 msgid "Observed study effects"
-msgstr "観察された研究効果"
+msgstr "観測された研究の効果"
 
 msgid "Estimated study effects"
-msgstr "推定された研究効果"
+msgstr "推定された研究の効果"
 
 msgid "Observed and estimated study effects"
-msgstr "観察された研究効果と推定された研究効果"
+msgstr "観測された効果と推定された効果"
 
 msgid "Cumulative forest plot"
-msgstr "累積フォレスト プロット"
+msgstr "累積フォレストプロット"
 
 msgid "Overall effect size"
-msgstr "全体的な効果量"
+msgstr "全体の効果量"
 
 msgid "Sequential Analysis"
-msgstr "逐次解析"
+msgstr "逐次分析"
 
 msgid "Bayes factors effect size"
-msgstr "ベイズファクターの効果量"
+msgstr "効果量のベイズファクター"
 
 msgid "Bayes factors heterogeneity"
-msgstr "ベイズファクターの異質性"
+msgstr "異質性のベイズファクター"
 
 msgid "Posterior model probabilities"
 msgstr "事後モデル確率"
 
 msgid "Evidence for random effects"
-msgstr "変量効果におけるエビデンス"
+msgstr "変量効果の証拠"
 
 msgid "Evidence for fixed effects"
-msgstr "固定効果におけるエビデンス"
+msgstr "固定効果の証拠"
 
 msgid "random"
 msgstr "変量"
@@ -280,10 +281,10 @@ msgid "fixed"
 msgstr "固定"
 
 msgid "Anecdotal"
-msgstr "事例"
+msgstr "些細"
 
 msgid "Moderate"
-msgstr "調整"
+msgstr "中程度"
 
 msgid "Strong"
 msgstr "強い"
@@ -292,13 +293,13 @@ msgid "Very Strong"
 msgstr "非常に強い"
 
 msgid "Extreme"
-msgstr "極端"
+msgstr "極めて強い"
 
 msgid "Evidence for %s:"
-msgstr "%s におけるエビデンス:"
+msgstr "%s の証拠:"
 
 msgid "Plotting failed: The Bayes factors contain infinity."
-msgstr "プロットに失敗しました: ベイズファクターに無限大が含まれています."
+msgstr "プロットを作成できませんでした: ベイズファクターに無限大が含まれています。"
 
 msgid "Studies"
 msgstr "研究"
@@ -307,7 +308,7 @@ msgid ""
 "Posterior model \n"
 " probability"
 msgstr ""
-"事後モデル \n"
+"事後モデル\n"
 " 確率"
 
 msgid "Prior and posterior plot"
@@ -344,133 +345,121 @@ msgid "Shrink factor"
 msgstr "Shrink factor"
 
 msgid "Model type '%1$s' is not available for effect size measure '%2$s'."
-msgstr ""
+msgstr "モデルの種類 '%1$s' は効果量の指標 '%2$s' では利用できません。"
 
-#, fuzzy
 msgid "All observations must be non-negative."
-msgstr "全標準誤差とサンプルサイズは正である必要があります."
+msgstr "すべての観測値は非負でなければなりません。"
 
-#, fuzzy
 msgid "All sample sizes must be positive."
-msgstr "全標準誤差とサンプルサイズは正である必要があります."
+msgstr "すべてのサンプルサイズは正でなければなりません。"
 
 msgid ""
 "Event counts must be smaller than or equal to the corresponding sample sizes."
-msgstr ""
+msgstr "イベント数は、対応するサンプルサイズ以下である必要があります。"
 
-#, fuzzy
 msgid "All person-time values must be positive."
-msgstr "全標準誤差とサンプルサイズは正である必要があります."
+msgstr "すべての人時の値は正でなければなりません。"
 
-#, fuzzy
 msgid "Heterogeneity (Wald)"
-msgstr "異質性(%s)"
+msgstr "異質性 (Wald)"
 
-#, fuzzy
 msgid "Heterogeneity (LRT)"
-msgstr "異質性(%s)"
+msgstr "異質性 (LRT)"
 
-#, fuzzy
 msgid "Residual heterogeneity (Wald)"
-msgstr "残差異質性の推定値"
+msgstr "残差異質性 (Wald)"
 
-#, fuzzy
 msgid "Residual heterogeneity (LRT)"
-msgstr "残差異質性の推定値"
+msgstr "残差異質性 (LRT)"
 
 msgid "Some GLMM heterogeneity tests could not be computed for this model fit."
-msgstr ""
+msgstr "このモデルのあてはめでは、一部のGLMMの異質性の検定を計算できませんでした。"
 
 msgid "Metafor R Code"
-msgstr ""
+msgstr "metaforのRコード"
 
 msgid "Cochran-Mantel-Haenszel"
-msgstr ""
+msgstr "Cochran-Mantel-Haenszel"
 
 msgid "Mantel-Haenszel"
-msgstr ""
+msgstr "Mantel-Haenszel"
 
 msgid "Tarone"
-msgstr ""
+msgstr "Tarone"
 
-#, fuzzy
 msgid "All standard errors must be positive."
-msgstr "全標準誤差とサンプルサイズは正である必要があります."
+msgstr "すべての標準誤差は正でなければなりません。"
 
-#, fuzzy
 msgid "Estimating Meta-Analytic Model"
-msgstr "モデル推定値"
+msgstr "メタ分析モデルを推定しています"
 
 msgid "Full dataset"
-msgstr ""
+msgstr "全データ"
 
 msgid "Estimating Subgroup Models"
-msgstr ""
+msgstr "サブグループのモデルを推定しています"
 
 msgid ""
 "The loaded distance matrix for '%1$s' does not match the dataset. The "
 "following levels are missing: %2$s."
 msgstr ""
+"'%1$s' について読み込んだ距離行列がデータセットと一致しません。次の水準が不足"
+"しています: %2$s。"
 
 msgid ""
 "The loaded correlation matrix for '%1$s' does not match the dataset. The "
 "following levels are missing: %2$s."
 msgstr ""
+"'%1$s' について読み込んだ相関行列がデータセットと一致しません。次の水準が不足"
+"しています: %2$s。"
 
-#, fuzzy
 msgid "All observations were removed as influential."
-msgstr "%i の観測値が欠損しているため削除されました。"
+msgstr "すべての観測値が影響力の大きいものとして除外されました。"
 
-#, fuzzy
 msgid "Meta-Analytic Tests"
-msgstr "モデル推定値"
+msgstr "メタ分析の検定"
 
 msgid "Test"
-msgstr ""
+msgstr "検定"
 
 msgid "p"
 msgstr "p"
 
 msgid "p (permutation)"
-msgstr ""
+msgstr "p(並べ替え)"
 
-#, fuzzy
 msgid "The model for subgroup '%1$s' failed with the following error: %2$s"
-msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
+msgstr "サブグループ '%1$s' のモデルが次のエラーで失敗しました: %2$s"
 
 msgid "Error:"
 msgstr "エラー:"
 
 msgid "Moderation test based on a Wald-type F-test."
-msgstr ""
+msgstr "ワルド型のF検定に基づくモデレーションの検定です。"
 
 msgid "Moderation test based on a Wald-type chi-squared test."
-msgstr ""
+msgstr "ワルド型のカイ二乗検定に基づくモデレーションの検定です。"
 
-#, fuzzy
 msgid "Meta-Analytic Estimates"
-msgstr "モデル推定値"
+msgstr "メタ分析の推定値"
 
 msgid "Estimate"
-msgstr "推定"
+msgstr "推定値"
 
-#, fuzzy
 msgid "Heterogeneity Level"
-msgstr "異質性"
+msgstr "異質性の水準"
 
-#, fuzzy
 msgid "Fit Measures"
 msgstr "適合度指標"
 
-#, fuzzy
 msgid "Observations"
-msgstr "イテレーション"
+msgstr "観測数"
 
 msgid "Log Lik."
-msgstr ""
+msgstr "対数尤度"
 
 msgid "Deviance"
-msgstr "デビアンス"
+msgstr "逸脱度"
 
 msgid "AIC"
 msgstr "AIC"
@@ -482,41 +471,40 @@ msgid "AICc"
 msgstr "AICc"
 
 msgid "R²"
-msgstr ""
+msgstr "R²"
 
 msgid "Effect Size Meta-Regression Terms Tests"
-msgstr ""
+msgstr "効果量のメタ回帰の項の検定"
 
 msgid "Heterogeneity Meta-Regression Terms Tests"
-msgstr ""
+msgstr "異質性のメタ回帰の項の検定"
 
-#, fuzzy
 msgid "F"
-msgstr "FE"
+msgstr "F"
 
 msgid "Qₘ"
-msgstr ""
+msgstr "Qₘ"
 
 msgid "df₁"
-msgstr ""
+msgstr "df₁"
 
 msgid "df"
 msgstr "df"
 
 msgid "df₂"
-msgstr ""
+msgstr "df₂"
 
 msgid "Term tests based on Wald-type chi-squared tests."
-msgstr ""
+msgstr "ワルド型のカイ二乗検定に基づく項の検定です。"
 
 msgid "Warning:"
 msgstr "警告:"
 
 msgid "Effect Size Meta-Regression Coefficients"
-msgstr ""
+msgstr "効果量のメタ回帰係数"
 
 msgid "Heterogeneity Meta-Regression Coefficients"
-msgstr ""
+msgstr "異質性のメタ回帰係数"
 
 msgid "t"
 msgstr "t"
@@ -525,81 +513,73 @@ msgid "z"
 msgstr "z"
 
 msgid "Effect Size Meta-Regression Correlation Matrix"
-msgstr ""
+msgstr "効果量のメタ回帰の相関行列"
 
 msgid "Heterogeneity Meta-Regression Correlation Matrix"
-msgstr ""
+msgstr "異質性のメタ回帰の相関行列"
 
 msgid "Subgroup: %1$s"
-msgstr ""
+msgstr "サブグループ: %1$s"
 
 msgid "Estimated Marginal Means and Contrasts Summary"
-msgstr ""
+msgstr "推定周辺平均と対比の要約"
 
 msgid "Estimated Marginal Means / Contrasts"
-msgstr ""
+msgstr "推定周辺平均・対比"
 
-#, fuzzy
 msgid "(Effect Size)"
-msgstr "効果量"
+msgstr "(効果量)"
 
-#, fuzzy
 msgid "(Heterogeneity)"
-msgstr "異質性"
+msgstr "(異質性)"
 
-#, fuzzy
 msgid "Adjusted Estimate"
-msgstr "モデル推定値"
+msgstr "調整後推定値"
 
 msgid "Estimated Marginal Means"
-msgstr ""
+msgstr "推定周辺平均"
 
 msgid "Level"
-msgstr ""
+msgstr "水準"
 
 msgid "Contrasts"
-msgstr ""
+msgstr "対比"
 
-#, fuzzy
 msgid "Comparison"
-msgstr "分散成分"
+msgstr "比較"
 
 msgid "Contrast tests based on Wald-type z-tests."
-msgstr ""
+msgstr "ワルド型のz検定に基づく対比の検定です。"
 
-#, fuzzy
 msgid "Bubble Plots"
-msgstr "ファンネルプロット"
+msgstr "バブルプロット"
 
-#, fuzzy
 msgid "%1$s (%2$s)"
-msgstr "BF%1$s%2$s"
+msgstr "%1$s (%2$s)"
 
 msgid "Effect Size Meta-Regression Variance Inflation"
-msgstr ""
+msgstr "効果量のメタ回帰の分散拡大"
 
 msgid "Heterogeneity Meta-Regression Variance Inflation"
-msgstr ""
+msgstr "異質性のメタ回帰の分散拡大"
 
-#, fuzzy
 msgid "Parameters"
-msgstr "ピーターズ(Peters)"
+msgstr "パラメータ"
 
 msgid "VIF"
-msgstr ""
+msgstr "VIF"
 
 msgid "SIF"
-msgstr ""
+msgstr "SIF"
 
-#, fuzzy
 msgid "Casewise Diagnostics Table"
-msgstr "モデル診断の概要"
+msgstr "ケースワイズ診断表"
 
 msgid "Label"
-msgstr ""
+msgstr "ラベル"
 
 msgid "Predictor"
-msgstr ""
+msgstr "予測変数"
 
 msgid "Standardized Residual"
 msgstr "標準化残差"
@@ -610,457 +590,466 @@ msgstr "DFFITS"
 msgid "Cook's Distance"
 msgstr "クックの距離"
 
-#, fuzzy
 msgid "Covariance ratio"
 msgstr "共分散比"
 
 msgid "𝜏"
-msgstr ""
+msgstr "𝜏"
 
 msgid "Leave One Out"
-msgstr ""
+msgstr "1つずつ除外"
 
 msgid "𝜏²"
-msgstr ""
+msgstr "𝜏²"
 
 msgid "Qₑ"
-msgstr ""
+msgstr "Qₑ"
 
 msgid "Hat"
-msgstr "ハット"
+msgstr "ハット値"
 
 msgid "Weight"
 msgstr "重み"
 
 msgid "Difference in coefficients"
-msgstr ""
+msgstr "係数の差"
 
 msgid "Influential"
-msgstr ""
+msgstr "影響が大きい"
 
 msgid "No influential cases found."
-msgstr ""
+msgstr "影響の大きいケースは見つかりませんでした。"
 
 msgid "%1$sNo influential cases found."
-msgstr ""
+msgstr "%1$s影響の大きいケースは見つかりませんでした。"
 
 msgid "Diagnostics are based on the the subgroup models."
-msgstr ""
+msgstr "診断はサブグループのモデルに基づいています。"
 
 msgid "Diagnostics are based on the non-clustered model."
-msgstr ""
+msgstr "診断はクラスタを考慮しないモデルに基づいています。"
 
 msgid "Column name %s already exists in the dataset."
-msgstr ""
+msgstr "列名 %s はすでにデータセットに存在します。"
 
-#, fuzzy
 msgid "Profile Likelihood Plot"
-msgstr "プロファイルプロット"
+msgstr "プロファイル尤度プロット"
 
 msgid ""
 "Profile likelihood is not available for models that contain meta-regression "
 "on heterogeneity."
-msgstr ""
+msgstr "異質性についてのメタ回帰を含むモデルでは、プロファイル尤度は利用できません。"
 
-#, fuzzy
 msgid "Baujat Plot"
-msgstr "Radial プロット"
+msgstr "Baujatプロット"
 
 msgid ""
 "Baujat plot is not available for models that contain meta-regression on "
 "heterogeneity."
-msgstr ""
+msgstr "異質性についてのメタ回帰を含むモデルでは、Baujatプロットは利用できません。"
 
-#, fuzzy
 msgid "Squared Pearson Residual"
-msgstr "標準化残差"
+msgstr "ピアソン残差の二乗"
 
-#, fuzzy
 msgid "Influence on Fitted Value"
-msgstr "影響力の測定"
+msgstr "あてはめ値への影響"
 
-#, fuzzy
 msgid "Residual Funnel Plot"
-msgstr "ファンネルプロット"
+msgstr "残差ファンネルプロット"
 
 msgid "Model Summary"
-msgstr "モデルの概要"
+msgstr "モデルの要約"
 
-#, fuzzy
 msgid "Meta-Regression Summary"
-msgstr "PET-PEESE回帰推定値"
+msgstr "メタ回帰の要約"
 
 msgid "Variance Inflation Summary"
-msgstr ""
+msgstr "分散拡大の要約"
 
-#, fuzzy
 msgid "Pooled effect"
-msgstr "効果量の推定値"
+msgstr "統合効果"
 
 msgid ""
 "Indexes of %1$s moderation coefficients were specified in an incorrect "
 "format. Try '(1, 2)' to test the first two coefficients."
 msgstr ""
+"%1$s のモデレーション係数の番号の書き方が正しくありません。最初の2つの係数を"
+"検定するには '(1, 2)' と書いてください。"
 
 msgid ""
 "The selected coefficients for %1$s moderation must be between 1 and %2$i (i."
 "e., the number of regression parameters)."
 msgstr ""
+"%1$s のモデレーションで選んだ係数は、1から %2$i(すなわち回帰パラメータの数)の"
+"範囲である必要があります。"
 
-#, fuzzy
 msgid "Effect size (coef: %1$s)"
-msgstr "効果量（%s）"
+msgstr "効果量 (係数: %1$s)"
 
 msgid "Effect size coefficients %1$s correspond to %2$s."
-msgstr ""
+msgstr "効果量の係数 %1$s は %2$s に対応します。"
 
-#, fuzzy
 msgid "Heterogeneity (coef: %1$s)"
-msgstr "異質性(%s)"
+msgstr "異質性 (係数: %1$s)"
 
 msgid "Heterogeneity coefficients %1$s correspond to %2$s."
-msgstr ""
+msgstr "異質性の係数 %1$s は %2$s に対応します。"
 
 msgid "Mean - %1$sSD"
-msgstr ""
+msgstr "平均 - %1$sSD"
 
 msgid "Mean + %1$sSD"
-msgstr ""
+msgstr "平均 + %1$sSD"
 
-#, fuzzy
 msgid "Adjusted estimate"
-msgstr "モデル推定値"
+msgstr "調整後推定値"
 
 msgid "Distance Matrix"
-msgstr ""
+msgstr "距離行列"
 
-#, fuzzy
 msgid "Correlation Matrix"
-msgstr "自己相関プロット"
+msgstr "相関行列"
 
 msgid "Residual Value"
-msgstr "残差値"
+msgstr "残差の値"
 
 msgid "Standard Error"
 msgstr "標準誤差"
 
-#, fuzzy
 msgid "Profile Likelihood"
-msgstr "対数尤度"
+msgstr "プロファイル尤度"
 
 msgid ""
 "Clustering is not supported when specifying a heterogeneity meta-regression "
 "model."
-msgstr ""
+msgstr "異質性のメタ回帰モデルを指定する場合、クラスタリングは利用できません。"
 
 msgid "The fixed value for tau2 must be a positive number."
-msgstr ""
+msgstr "tau2の固定値は正の数である必要があります。"
 
-#, fuzzy
 msgid ""
 "The custom R code for extending the metafor call failed with the following "
 "message: %1$s"
-msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
+msgstr ""
+"metafor の呼び出しを拡張するカスタムRコードが次のメッセージで失敗しました: "
+"%1$s"
 
-#, fuzzy
 msgid "Fisher's z to r"
-msgstr "フィッシャー(Fisher)のz"
+msgstr "フィッシャー(Fisher)のzからrへ"
 
 msgid "exponential"
-msgstr ""
+msgstr "指数"
 
 msgid "log odds to proportions"
-msgstr ""
+msgstr "対数オッズから割合へ"
 
 msgid "log odds to SMD (normal)"
-msgstr ""
+msgstr "対数オッズからSMDへ(正規)"
 
 msgid "log odds to SMD (logistic)"
-msgstr ""
+msgstr "対数オッズからSMDへ(ロジスティック)"
 
 msgid "SMD to log odds (normal)"
-msgstr ""
+msgstr "SMDから対数オッズへ(正規)"
 
 msgid "SMD to log odds (logistic)"
-msgstr ""
+msgstr "SMDから対数オッズへ(ロジスティック)"
 
 msgid "Hakstian & Whalen inverse α"
-msgstr ""
+msgstr "Hakstian & Whalen の逆α"
 
 msgid "Bonett inverse α"
-msgstr ""
+msgstr "Bonett の逆α"
 
 msgid "z to R²"
-msgstr ""
+msgstr "zからR²へ"
 
 msgid "SMD to Cohen's U₁"
-msgstr ""
+msgstr "SMDからコーエンのU₁へ"
 
 msgid "SMD to Cohen's U₂"
-msgstr ""
+msgstr "SMDからコーエンのU₂へ"
 
 msgid "SMD to Cohen's U₃"
-msgstr ""
+msgstr "SMDからコーエンのU₃へ"
 
 msgid "SMD to CLES, Pr(superiority)"
-msgstr ""
+msgstr "SMDからCLES(優越の確率)へ"
 
 msgid "None"
-msgstr ""
+msgstr "なし"
 
 msgid "Bonferroni"
-msgstr ""
+msgstr "ボンフェローニ(Bonferroni)"
 
 msgid "Holm"
-msgstr ""
+msgstr "ホルム(Holm)"
 
 msgid "Hochberg"
-msgstr ""
+msgstr "ホッホベルグ(Hochberg)"
 
 msgid "Hommel"
-msgstr ""
+msgstr "Hommel"
 
 msgid "Benjamini-Hochberg"
-msgstr ""
+msgstr "Benjamini-Hochberg"
 
 msgid "Benjamini-Yekutieli"
-msgstr ""
+msgstr "Benjamini-Yekutieli"
 
 msgid "Intercept"
-msgstr ""
+msgstr "切片"
 
 msgid "%1$s: not available"
-msgstr ""
+msgstr "%1$s: 利用できません"
 
-#, fuzzy
 msgid "Residual heterogeneity"
-msgstr "残差異質性の推定値"
+msgstr "残差異質性"
 
-#, fuzzy
 msgid "Moderation (effect size): %1$s"
-msgstr "自己相関"
+msgstr "調整 (効果量): %1$s"
 
-#, fuzzy
 msgid "Moderation (heterogeneity): %1$s"
-msgstr "異質性の検定"
+msgstr "調整 (異質性): %1$s"
 
-#, fuzzy
 msgid "Moderation: %1$s"
-msgstr "自己相関"
+msgstr "調整: %1$s"
 
 msgid "The pooled effect size could not be calculated."
-msgstr ""
+msgstr "統合された効果量を計算できませんでした。"
 
-#, fuzzy
 msgid "(coef ...)"
-msgstr "効果量（%s）"
+msgstr "(係数 ...)"
 
-#, fuzzy
 msgid "Moderation effect size%1$s"
-msgstr "自己相関"
+msgstr "調整の効果量%1$s"
 
-#, fuzzy
 msgid "Moderation%1$s"
-msgstr "自己相関"
+msgstr "調整%1$s"
 
-#, fuzzy
 msgid "Moderation heterogeneity%1$s"
-msgstr "異質性の検定"
+msgstr "調整の異質性%1$s"
 
-#, fuzzy
 msgid "(coef: %1$s)"
-msgstr "効果量（%s）"
+msgstr "(係数: %1$s)"
 
 msgid "Subgroup differences"
-msgstr ""
+msgstr "サブグループ間の差"
 
 msgid "%s%% CI"
-msgstr "%s%% CI"
+msgstr "%s%% 信頼区間"
 
 msgid "%s%% PI"
 msgstr "%s%% PI"
 
 msgid "Subgroup"
-msgstr ""
+msgstr "サブグループ"
 
 msgid "Fixed effects tested using z-distribution."
-msgstr ""
+msgstr "固定効果はz分布で検定されています。"
 
 msgid "Fixed effects tested using t-distribution."
-msgstr ""
+msgstr "固定効果はt分布で検定されています。"
 
 msgid "Fixed effects tested using Knapp and Hartung adjustment."
-msgstr ""
+msgstr "固定効果はKnapp-Hartungの調整を使って検定されています。"
 
 msgid ""
 "Cluster-robust inference has very low effective degrees of freedom. When "
 "Satterthwaite df < 4, p-values should be interpreted with extreme caution."
 msgstr ""
+"クラスタに頑健な推測の有効自由度が非常に小さくなっています。Satterthwaiteの自"
+"由度が4未満の場合、p値の解釈には細心の注意が必要です。"
 
 msgid ""
 "Knapp-Hartung inference is based on very few residual degrees of freedom; "
 "results can be sensitive and should be interpreted cautiously."
 msgstr ""
+"Knapp-Hartungの推測が、ごく少ない残差自由度に基づいています。結果は敏感になり"
+"うるため、慎重に解釈してください。"
 
 msgid "The heterogeneity model for 𝜏² is specified on the log scale."
-msgstr ""
+msgstr "𝜏²の異質性のモデルは対数スケールで指定されています。"
 
 msgid "The heterogeneity model for 𝜏² is specified on the identity scale."
-msgstr ""
+msgstr "𝜏²の異質性のモデルは恒等スケールで指定されています。"
 
-#, fuzzy
 msgid "pooled effect"
-msgstr "効果量の推定値"
+msgstr "統合効果"
 
-#, fuzzy
 msgid "adjusted effect"
-msgstr "順序効果"
+msgstr "調整後の効果"
 
-#, fuzzy
 msgid "%1$i observations were ommited due to missing values."
-msgstr "%i の観測値が欠損しているため削除されました。"
+msgstr "欠測値のため %1$i 件の観測値が除外されました。"
 
-#, fuzzy
 msgid "%1$s: %2$i observations were ommited due to missing values."
-msgstr "%i の観測値が欠損しているため削除されました。"
+msgstr "%1$s: 欠測値のため %2$i 件の観測値が除外されました。"
 
-#, fuzzy
 msgid "%1$s: %2$s"
-msgstr "BF%1$s%2$s"
+msgstr "%1$s: %2$s"
 
 msgid ""
 "NAs in the %1$s were introduced due to the %2$s transformation. Please "
 "verify that you are using the correct effect size transformation."
 msgstr ""
+"%2$s 変換のため、%1$s に欠測値が生じました。正しい効果量の変換を使っているか"
+"確認してください。"
 
 msgid ""
 "The %1$s is transformed using %2$s transformation. For nonlinear "
 "transformations, the transformed estimate is interpreted as a median on the "
 "transformed scale."
 msgstr ""
+"%1$s は %2$s 変換で変換されています。非線形の変換では、変換後の推定値は変換後"
+"のスケールにおける中央値として解釈されます。"
 
 msgid ""
 "The pooled effect size corresponds to the weighted average effect across "
 "studies."
-msgstr ""
+msgstr "統合された効果量は、研究にわたる重みつき平均の効果に対応します。"
 
 msgid ""
 "The adjusted effect corresponds to the averaged effect size estimate across "
 "the levels of all moderators."
 msgstr ""
+"調整済みの効果は、すべてのモデレータの水準にわたって平均した効果量の推定値に"
+"対応します。"
 
 msgid ""
 "The pooled heterogeneity estimate corresponds to the heterogeneity at the "
 "average of predictor values."
 msgstr ""
+"統合された異質性の推定値は、予測変数の値が平均であるときの異質性に対応します"
+"。"
 
 msgid "The I² and H² statistics are not available for heterogeneity models."
-msgstr ""
+msgstr "異質性のモデルでは、I²とH²の統計量は利用できません。"
 
 msgid ""
 "Heterogeneity confidence intervals are not available for this GLMM model "
 "type."
-msgstr ""
+msgstr "このGLMMのモデルの種類では、異質性の信頼区間は利用できません。"
 
 msgid "The Model Structure %1$s was not completely specified and was skipped."
-msgstr ""
+msgstr "モデル構造 %1$s は完全には指定されていないため、飛ばされました。"
 
 msgid ""
 "Prediction interval for the %1$s is not available for models with multiple "
 "heterogeneity estimates."
-msgstr ""
+msgstr "異質性の推定値が複数あるモデルでは、%1$s の予測区間は利用できません。"
 
 msgid ""
 "Cluster-robust tests and confidence intervals were computed using %1$s as "
 "the clustering variable (%2$s). %3$s"
 msgstr ""
+"クラスタに頑健な検定と信頼区間は、%1$s をクラスタリング変数として計算されまし"
+"た(%2$s)。%3$s"
 
 msgid "%1$i clusters; %2$i estimates per cluster"
-msgstr ""
+msgstr "%1$i 個のクラスタ、1クラスタあたり %2$i 個の推定値"
 
 msgid "%1$i clusters; min/median/max %2$i/%3$i/%4$i estimates per cluster"
 msgstr ""
+"%1$i 個のクラスタ、1クラスタあたりの推定値は 最小/中央値/最大 で %2$i/%3$i/"
+"%4$i"
 
 msgid ""
 "clubSandwich was used with CR2 adjustment and Satterthwaite degrees of "
 "freedom."
-msgstr ""
+msgstr "clubSandwichをCR2調整とSatterthwaiteの自由度で使用しました。"
 
 msgid "A CR1 small-sample correction was applied."
-msgstr ""
+msgstr "CR1の小標本の補正を適用しました。"
 
 msgid "Unadjusted CR0 cluster-robust standard errors were used."
-msgstr ""
+msgstr "調整なしのCR0のクラスタに頑健な標準誤差を使用しました。"
 
 msgid ""
 "Each marginal mean estimate is averaged across the levels of the remaining "
 "predictors."
-msgstr ""
+msgstr "各周辺平均の推定値は、残りの予測変数の水準にわたって平均されています。"
 
 msgid ""
 "Each marginal mean estimate is averaged across the levels of the remaining "
 "predictors in a given subgroup."
 msgstr ""
+"各周辺平均の推定値は、そのサブグループ内で残りの予測変数の水準にわたって平均"
+"されています。"
 
 msgid ""
 "NAs in the marginal mean estimates were introduced due to the %1$s "
 "transformation. Please verify that you are using the correct effect size "
 "transformation."
 msgstr ""
+"%1$s 変換のため、周辺平均の推定値に欠測値が生じました。正しい効果量の変換を使"
+"っているか確認してください。"
 
 msgid ""
 "The marginal mean estimates and intervals are transformed using %1$s "
 "transformation. For nonlinear transformations, transformed marginal means "
 "are interpreted as medians on the transformed scale."
 msgstr ""
+"周辺平均の推定値と区間は %1$s 変換で変換されています。非線形の変換では、変換"
+"後の周辺平均は変換後のスケールにおける中央値として解釈されます。"
 
 msgid "The estimates and intervals correspond to %1$s."
-msgstr ""
+msgstr "推定値と区間は %1$s に対応します。"
 
 msgid ""
 "Each contrast is averaged across the levels of the remaining predictors."
-msgstr ""
+msgstr "各対比は、残りの予測変数の水準にわたって平均されています。"
 
 msgid ""
 "Contrasts of estimates marginal means cannot be transformed via the effect "
 "size transformation."
-msgstr ""
+msgstr "推定周辺平均の対比は、効果量の変換では変換できません。"
 
 msgid ""
 "Contrasts of estimated marginal means are adjusted for multiple comparisons "
 "using %1$s correction."
-msgstr ""
+msgstr "推定周辺平均の対比は、%1$s 補正によって多重比較の調整が行われています。"
 
 msgid ""
 "Contrasts of estimated marginal means cannot be transformed via the link "
 "function. As such, the contrasts are summarized on the model scale: log(𝜏²)."
 msgstr ""
+"推定周辺平均の対比は、リンク関数では変換できません。そのため、対比はモデルの"
+"スケール log(𝜏²) でまとめられています。"
 
 msgid ""
 "Contrasts of estimated marginal means cannot be transformed via the "
 "heterogeneity transformation. As such, the contrasts are summarized as 𝜏²."
 msgstr ""
+"推定周辺平均の対比は、異質性の変換では変換できません。そのため、対比は 𝜏² と"
+"してまとめられています。"
 
 msgid "Permutation p-value is based on %1$s permutations."
-msgstr ""
+msgstr "並べ替えのp値は %1$s 回の並べ替えに基づいています。"
 
 msgid ""
 "The model estimation failed with the following message: %1$s. Please, "
 "consider simplifying the model."
 msgstr ""
+"モデルの推定が次のメッセージで失敗しました: %1$s。モデルを単純にすることを検"
+"討してください。"
 
 msgid ""
 "The cluster-robust standard errors could not be computed. Please, consider "
 "modifying the clustering settings in the 'Advanced' section."
 msgstr ""
+"クラスタに頑健な標準誤差を計算できませんでした。「詳細」のセクションで"
+"クラスタリングの設定を見直すことを検討してください。"
 
 msgid "Fewer than two estimates."
-msgstr ""
+msgstr "推定値が2つ未満です。"
 
 msgid ""
 "The selected 'Method' requires specification of the 'Weights' option in the "
 "'Advanced' section."
 msgstr ""
+"選択した「方法」では、「詳細」のセクションで「重み」のオプションを指定する必"
+"要があります。"
 
 msgid ""
 "The GLMM could not be estimated for the selected model. This can happen with "
@@ -1071,312 +1060,324 @@ msgid ""
 "\n"
 "Metafor reported: Cannot fit ML model."
 msgstr ""
+"選択したモデルではGLMMを推定できませんでした。イベント数が疎な場合、リスク差"
+"の場合、研究の変量効果がある場合、あるいはモデレータの構造がデータに対して複"
+"雑すぎる場合に起こりえます。モデレータのモデルを単純にする、研究の固定効果の"
+"GLMMを使う、必要なら効果量の指標を変える、連続なモデレータを中心化または"
+"スケーリングする、といった対処をお試しください。\n"
+"\n"
+"metaforの報告: 最尤法のモデルをあてはめられません。"
 
 msgid "Subgroup %1$s:"
-msgstr ""
+msgstr "サブグループ %1$s:"
 
 msgid ""
 "%1$sThe term %2$s was completely removed from the model. Possible causes are "
 "missing values, collinear predictors, or missing crossed cells in an "
 "interaction term."
 msgstr ""
+"%1$s項 %2$s はモデルから完全に取り除かれました。欠測値、共線的な予測変数、交"
+"互作用項でセルの組み合わせが欠けていることなどが考えられます。"
 
 msgid ""
 "%1$sThe term %2$s was partilly removed (%3$i/%4$i coefficients) from the "
 "model. Possible causes are missing values, collinear predictors, or missing "
 "crossed cells in an interaction term."
 msgstr ""
+"%1$s項 %2$s はモデルから部分的に取り除かれました(%4$i 個中 %3$i 個の係数)。欠"
+"測値、共線的な予測変数、交互作用項でセルの組み合わせが欠けていることなどが考"
+"えられます。"
 
 msgid ""
 "%1$sThe following coefficients were removed from the model: %2$s. Possible "
 "causes are missing values, collinear predictors, or missing crossed cells in "
 "an interaction term."
 msgstr ""
+"%1$s次の係数がモデルから取り除かれました: %2$s。欠測値、共線的な予測変数、交"
+"互作用項でセルの組み合わせが欠けていることなどが考えられます。"
 
 msgid "Error reading the distance matrix file: %1$s"
-msgstr ""
+msgstr "距離行列のファイルの読み込みでエラーが発生しました: %1$s"
 
 msgid ""
 "The distance matrix must be square. The number of rows (%1$i) does not match "
 "the number of columns (%2$i)."
 msgstr ""
+"距離行列は正方行列である必要があります。行数(%1$i)が列数(%2$i)と一致しません"
+"。"
 
 msgid "Error reading the correlation matrix file: %1$s"
-msgstr ""
+msgstr "相関行列のファイルの読み込みでエラーが発生しました: %1$s"
 
 msgid "Error reading the variance-covariance matrix file: %1$s"
-msgstr ""
+msgstr "分散共分散行列のファイルの読み込みでエラーが発生しました: %1$s"
 
 msgid ""
 "The variance-covariance matrix must be square. The number of rows (%1$i) "
 "does not match the number of columns (%2$i)."
 msgstr ""
+"分散共分散行列は正方行列である必要があります。行数(%1$i)が列数(%2$i)と一致し"
+"ません。"
 
 msgid ""
 "The variance-covariance matrix must match the dimensions of the data set. "
 "The number of the matrix rows/columns (%1$i) does not match the number of "
 "observations in the dataset (%2$i)."
 msgstr ""
+"分散共分散行列はデータセットの次元と一致している必要があります。行列の行数・"
+"列数(%1$i)がデータセットの観測数(%2$i)と一致しません。"
 
 msgid "The supplied variance-covariance matrix is not positive definite."
-msgstr ""
+msgstr "与えられた分散共分散行列が正定値ではありません。"
 
 msgid ""
 "The Variance-Covariance Matrix could not be computed: There must be as many "
 "'Correlation Matrix' entries as is the number of estimates within the "
 "largest 'Cluster'."
 msgstr ""
+"分散共分散行列を計算できませんでした。「相関行列」の項目は、最大の「クラスタ"
+"」に含まれる推定値の数と同じだけ必要です。"
 
 msgid "Error computing the variance-covariance matrix: %1$s"
-msgstr ""
+msgstr "分散共分散行列の計算でエラーが発生しました: %1$s"
 
 msgid "Please provide a file with the precomputed variance-covariance matrix."
-msgstr ""
+msgstr "計算済みの分散共分散行列が入ったファイルを指定してください。"
 
 msgid "Please provide a clustering variable for the correlation matrix."
-msgstr ""
+msgstr "相関行列のためのクラスタリング変数を指定してください。"
 
 msgid "Please provide correlation matrix variables."
-msgstr ""
+msgstr "相関行列の変数を指定してください。"
 
 msgid ""
 "The value of the correlation between construct types is set to 0. This "
 "corresponds to no adjustment for dependency between construct types."
 msgstr ""
+"構成概念の種類どうしの相関の値が0に設定されています。これは構成概念の種類どう"
+"しの依存を調整しないことに相当します。"
 
 msgid ""
 "Please provide a file with the correlation matrix for the construct types."
-msgstr ""
+msgstr "構成概念の種類の相関行列が入ったファイルを指定してください。"
 
 msgid ""
 "The value of the correlation between construct types is set to 0. This "
 "corresponds to no adjustment for dependency between constructs."
 msgstr ""
+"構成概念の種類どうしの相関の値が0に設定されています。これは構成概念どうしの依"
+"存を調整しないことに相当します。"
 
 msgid "Please provide a file with the correlation matrix for the construct."
-msgstr ""
+msgstr "構成概念の相関行列が入ったファイルを指定してください。"
 
 msgid ""
 "The value of the correlation between time lags is set to 0. This corresponds "
 "to no adjustment for dependency between time lags."
 msgstr ""
+"時間ラグどうしの相関の値が0に設定されています。これは時間ラグどうしの依存を調"
+"整しないことに相当します。"
 
 msgid ""
 "The 'Group Size' for specifying dependency due to common group comparison is "
 "unspecified. As default, the groups are assumed to be equal."
 msgstr ""
+"共通の群を比較することによる依存を指定する「群の大きさ」が指定されていません"
+"。既定では、群の大きさは等しいと仮定されます。"
 
-#, fuzzy
 msgid "correlation matrix variables"
-msgstr "自己相関プロット"
+msgstr "相関行列の変数"
 
 msgid "construct"
-msgstr ""
+msgstr "構成概念"
 
 msgid "construct type"
-msgstr ""
+msgstr "構成概念の種類"
 
 msgid "group 1"
-msgstr ""
+msgstr "群1"
 
 msgid "group 2"
-msgstr ""
+msgstr "群2"
 
 msgid "group size 1"
-msgstr ""
+msgstr "群の大きさ1"
 
 msgid "group size 2"
-msgstr ""
+msgstr "群の大きさ2"
 
 msgid ""
 "The model was estimated using the selected precomputed working effect-size "
 "variance-covariance matrix."
 msgstr ""
+"選択した計算済みの作業用の効果量の分散共分散行列を使ってモデルを推定しました"
+"。"
 
 msgid ""
 "The model was estimated using a working effect-size variance-covariance "
 "matrix based on %1$s."
-msgstr ""
+msgstr "%1$s に基づく作業用の効果量の分散共分散行列を使ってモデルを推定しました。"
 
-#, fuzzy
 msgid "with a common correlation of %1$s"
-msgstr "自己相関"
+msgstr "共通相関 %1$s をもつ"
 
-#, fuzzy
 msgid "with a known correlation matrix"
-msgstr "自己相関プロット"
+msgstr "既知の相関行列をもつ"
 
-#, fuzzy
 msgid "%1$s as %2$s %3$s"
-msgstr "%1$sは%2$sのスケールです."
+msgstr "%1$s を %2$s %3$s として"
 
-#, fuzzy
 msgid "%1$s as %2$s"
-msgstr "BF%1$s%2$s"
+msgstr "%1$s を %2$s として"
 
 msgid "%1$s with lag-1 correlation of %2$s"
-msgstr ""
+msgstr "%1$s(ラグ1の相関は %2$s)"
 
-#, fuzzy
 msgid "%1$s and %2$s"
-msgstr "BF%1$s%2$s"
+msgstr "%1$s と %2$s"
 
-#, fuzzy
 msgid "%1$s, and %2$s"
-msgstr "BF%1$s%2$s"
+msgstr "%1$s、および %2$s"
 
 msgid "Error writing the variance-covariance matrix file: %1$s"
-msgstr ""
+msgstr "分散共分散行列のファイルの書き出しでエラーが発生しました: %1$s"
 
-#, fuzzy
 msgid "Random Effects / Model Stucture Summary"
-msgstr "変量効果モデル:"
+msgstr "変量効果・モデル構造の要約"
 
 msgid "Simple / Nested Summary"
-msgstr ""
+msgstr "単純・入れ子の要約"
 
 msgid "Estimates"
 msgstr "推定値"
 
 msgid "σ²"
-msgstr ""
+msgstr "σ²"
 
 msgid "σ"
-msgstr ""
+msgstr "σ"
 
 msgid "Levels"
-msgstr ""
+msgstr "水準"
 
-#, fuzzy
 msgid "Fixed"
-msgstr "固定 H"
+msgstr "固定"
 
-#, fuzzy
 msgid "Confidence Intervals"
-msgstr "95%% 信頼区間"
+msgstr "信頼区間"
 
-#, fuzzy
 msgid "Inclusion Tests"
-msgstr "包含BF"
+msgstr "包含検定"
 
-#, fuzzy
 msgid "Component Inclusion Test"
-msgstr "包含BF"
+msgstr "成分の包含検定"
 
-#, fuzzy
 msgid "%1$s: Level Inclusion Test"
-msgstr "包含BF"
+msgstr "%1$s: 水準の包含検定"
 
 msgid "Removed Levels"
-msgstr ""
+msgstr "取り除かれた水準"
 
-#, fuzzy
 msgid "Removed Component"
-msgstr "分散成分"
+msgstr "除外された成分"
 
 msgid "LRT"
-msgstr ""
+msgstr "尤度比検定"
 
 msgid ""
 "Likelihood Ratio Test (LRT) and p-value are based on a comparison with the "
 "complete model."
-msgstr ""
+msgstr "尤度比検定(LRT)とp値は、完全なモデルとの比較に基づいています。"
 
-#, fuzzy
 msgid "Random Slopes Summary"
-msgstr "個別モデルの要約"
+msgstr "変量傾きの要約"
 
 msgid "Structured"
-msgstr ""
+msgstr "構造化"
 
 msgid "Summary"
 msgstr "要約"
 
 msgid "Autoregressive"
-msgstr ""
+msgstr "自己回帰"
 
 msgid "Spatial"
-msgstr ""
+msgstr "空間"
 
 msgid "Known Correlation Summary"
-msgstr ""
+msgstr "既知の相関の要約"
 
 msgid "Testing Inclusion of Random Effects / Model Structure"
-msgstr ""
+msgstr "変量効果・モデル構造を含めることの検定"
 
 msgid "Subgroup %1$s: Testing Inclusion of Random Effects / Model Structure"
-msgstr ""
+msgstr "サブグループ %1$s: 変量効果・モデル構造を含めることの検定"
 
 msgid "Testing Inclusion of Nested Random Effects: %1$s"
-msgstr ""
+msgstr "入れ子の変量効果を含めることの検定: %1$s"
 
 msgid "Subgroup %1$s: Testing Inclusion of Nested Random Effects: %2$s"
-msgstr ""
+msgstr "サブグループ %1$s: 入れ子の変量効果を含めることの検定: %2$s"
 
-#, fuzzy
 msgid "Random Slopes"
-msgstr "変量 H%s"
+msgstr "変量傾き"
 
 msgid "Compound Symmetry"
-msgstr ""
+msgstr "複合対称"
 
 msgid "Heteroscedastic Compound Symmetry"
-msgstr ""
+msgstr "不等分散の複合対称"
 
 msgid "Unstructured"
-msgstr ""
+msgstr "無構造"
 
 msgid "Identity"
-msgstr ""
+msgstr "単位行列"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "対角"
 
 msgid "AR(1)"
-msgstr ""
+msgstr "AR(1)"
 
 msgid "Heteroskedastic AR(1)"
-msgstr ""
+msgstr "不等分散のAR(1)"
 
 msgid "Continuous-Time AR"
-msgstr ""
+msgstr "連続時間AR"
 
 msgid "Exponential"
-msgstr ""
+msgstr "指数"
 
 msgid "Gaussian"
-msgstr ""
+msgstr "ガウス"
 
 msgid "Linear"
-msgstr ""
+msgstr "線形"
 
 msgid "Rational Quadratic"
-msgstr ""
+msgstr "有理二次"
 
 msgid "Spherical"
-msgstr ""
+msgstr "球面"
 
-#, fuzzy
 msgid "Sqrt. Estimate"
-msgstr "推定"
+msgstr "推定値の平方根"
 
 msgid "Levels:"
-msgstr ""
+msgstr "水準:"
 
-#, fuzzy
 msgid "Component:"
-msgstr "分散成分"
+msgstr "成分:"
 
-#, fuzzy
 msgid "Estimates 𝜏²"
-msgstr "推定値"
+msgstr "𝜏² の推定値"
 
-#, fuzzy
 msgid "Estimates ρ"
-msgstr "推定値"
+msgstr "ρ の推定値"
 
 msgid "ρ"
-msgstr ""
+msgstr "ρ"
 
 msgid "%s Summary"
 msgstr "%s の要約"
@@ -1448,195 +1449,210 @@ msgid ""
 "The within-cluster correlation is set to 0. This corresponds to no "
 "adjustment for dependency between effect sizes within clusters."
 msgstr ""
+"クラスタ内の相関が0に設定されています。これはクラスタ内の効果量どうしの依存を"
+"調整しないことに相当します。"
 
 msgid ""
 "Please provide a time variable for autoregressive correlation structures."
-msgstr ""
+msgstr "自己回帰の相関構造には時間の変数を指定してください。"
 
 msgid ""
 "The lag-1 correlation is set to 0. This corresponds to no time-based "
 "dependency adjustment."
 msgstr ""
+"ラグ1の相関が0に設定されています。これは時間に基づく依存の調整を行わないこと"
+"に相当します。"
 
 msgid ""
 "Please provide a construct variable for compound symmetry times "
 "autoregressive correlation structures."
-msgstr ""
+msgstr "複合対称×自己回帰の相関構造には構成概念の変数を指定してください。"
 
-#, fuzzy
 msgid "Aggregation Summary"
-msgstr "PET-PEESE回帰推定値"
+msgstr "集約の要約"
 
 msgid "Input Rows"
-msgstr ""
+msgstr "入力の行数"
 
 msgid "Clusters"
-msgstr ""
+msgstr "クラスタ数"
 
 msgid "Effect size aggregation was not run yet."
-msgstr ""
+msgstr "効果量の集約はまだ実行されていません。"
 
 msgid "Independent"
-msgstr ""
+msgstr "独立"
 
 msgid "Compound symmetry"
-msgstr ""
+msgstr "複合対称"
 
 msgid "Compound symmetry + autoregressive"
-msgstr ""
+msgstr "複合対称 + 自己回帰"
 
 msgid "Compound symmetry × autoregressive"
-msgstr ""
+msgstr "複合対称 × 自己回帰"
 
 msgid "Precomputed variance-covariance matrix"
-msgstr ""
+msgstr "計算済みの分散共分散行列"
 
-#, fuzzy
 msgid "Correlation matrix"
-msgstr "自己相関プロット"
+msgstr "相関行列"
 
 msgid "Constructs/groups/times"
-msgstr ""
+msgstr "構成概念・群・時点"
 
-#, fuzzy
 msgid "sampling variance"
-msgstr "診断"
+msgstr "標本分散"
 
-#, fuzzy
 msgid "standard error"
 msgstr "標準誤差"
 
 msgid "aggregated effect-size, %1$s, and cluster-size"
-msgstr ""
+msgstr "集約された効果量、%1$s、クラスタの大きさ"
 
-#, fuzzy
 msgid "aggregated effect-size and %1$s"
-msgstr "自己相関"
+msgstr "集約された効果量と %1$s"
 
 msgid ""
 "%1$i input rows were aggregated into %2$i cluster-level estimates. The %3$s "
 "columns were added to the dataset at the first row of each cluster."
 msgstr ""
+"%1$i 行の入力が %2$i 個のクラスタ水準の推定値に集約されました。%3$s の列が、"
+"各クラスタの最初の行にデータセットへ追加されました。"
 
 msgid ""
 "Aggregation used the selected precomputed working effect-size variance-"
 "covariance matrix."
-msgstr ""
+msgstr "集約には、選択した計算済みの作業用の効果量の分散共分散行列を使いました。"
 
 msgid ""
 "Aggregation used a working effect-size variance-covariance matrix based on "
 "%1$s."
-msgstr ""
+msgstr "集約には、%1$s に基づく作業用の効果量の分散共分散行列を使いました。"
 
 msgid "Aggregation assumed independent sampling errors within clusters."
-msgstr ""
+msgstr "集約では、クラスタ内の標本抽出誤差は独立と仮定しました。"
 
 msgid ""
 "Aggregation used compound-symmetry sampling-error dependence within clusters "
 "with within-cluster correlation %1$s."
 msgstr ""
+"集約では、クラスタ内の標本抽出誤差に複合対称の依存を仮定し、クラスタ内の相関"
+"を %1$s としました。"
 
 msgid ""
 "Aggregation used autoregressive sampling-error dependence over %1$s with "
 "lag-1 correlation %2$s."
 msgstr ""
+"集約では、%1$s にわたる標本抽出誤差に自己回帰の依存を仮定し、ラグ1の相関を "
+"%2$s としました。"
 
 msgid ""
 "Aggregation used compound-symmetry plus autoregressive sampling-error "
 "dependence within clusters with within-cluster correlation %1$s and lag-1 "
 "correlation %2$s over %3$s."
 msgstr ""
+"集約では、クラスタ内の標本抽出誤差に複合対称と自己回帰を加えた依存を仮定し、"
+"クラスタ内の相関を %1$s、%3$s にわたるラグ1の相関を %2$s としました。"
 
 msgid ""
 "Aggregation used compound-symmetry times autoregressive sampling-error "
 "dependence for %1$s with within-cluster correlation %2$s and lag-1 "
 "correlation %3$s over %4$s."
 msgstr ""
+"集約では、%1$s について複合対称と自己回帰を掛け合わせた標本抽出誤差の依存を仮"
+"定し、クラスタ内の相関を %2$s、%4$s にわたるラグ1の相関を %3$s としました。"
 
 msgid ""
 "Cannot compute outcomes. Check that all of the required information is "
 "specified via the appropriate arguments (i.e. an Effect Size and either "
 "Standard Error, Sampling Variance, or 95%% Confidence Interval)."
 msgstr ""
+"アウトカムを計算できません。必要な情報がすべて適切な引数で指定されているか確"
+"認してください(すなわち効果量と、標準誤差・標本分散・95%%信頼区間のいずれか)"
+"。"
 
 msgid "Step"
-msgstr ""
+msgstr "ステップ"
 
 msgid "Computed"
-msgstr ""
+msgstr "計算済み"
 
 msgid "Total Computed"
-msgstr ""
+msgstr "計算済みの合計"
 
 msgid "Effect size calculation was not run yet."
-msgstr ""
+msgstr "効果量の計算はまだ実行されていません。"
 
 msgid ""
 "Effect sizes were successfully computed and added to the dataset for each "
 "data entry."
 msgstr ""
+"効果量が正しく計算され、すべてのデータ行についてデータセットに追加されました"
+"。"
 
 msgid ""
 "Effect sizes were successfully computed and added to the dataset for %1$i "
 "out of %2$i data entries."
 msgstr ""
+"効果量が正しく計算され、%2$i 件中 %1$i 件のデータ行についてデータセットに追加"
+"されました。"
 
 msgid "Error in Step %1$i:"
-msgstr ""
+msgstr "ステップ %1$i でエラーが発生しました:"
 
 msgid ""
 "No rows to display. Check that the visualization type mapping assigns at "
 "least one level to 'Study' or 'Estimate'."
 msgstr ""
+"表示する行がありません。可視化の種類の対応づけで、少なくとも1つの水準が「研究"
+"」または「推定値」に割り当てられているか確認してください。"
 
 msgid ""
 "The weight variable must contain finite, non-negative values with at least "
 "one positive value."
 msgstr ""
+"重みの変数は、有限で非負の値を含み、少なくとも1つは正の値である必要があります"
+"。"
 
-#, fuzzy
 msgid "Invalid forest plot input."
-msgstr "無効なコントラスト: 行(Rows in)"
+msgstr "フォレストプロットの入力が無効です。"
 
-#, fuzzy
 msgid "Model Information"
-msgstr "情報"
+msgstr "モデルの情報"
 
-#, fuzzy
 msgid "Publication bias: %1$s"
-msgstr "出版バイアス(Publication Bias)"
+msgstr "出版バイアス: %1$s"
 
 msgid "The fixed effect effect size could not be calculated."
-msgstr ""
+msgstr "固定効果の効果量を計算できませんでした。"
 
-#, fuzzy
 msgid "Fixed effect estimate"
 msgstr "固定効果の推定値"
 
-#, fuzzy
 msgid "Intercept estimate"
-msgstr "異質性推定"
+msgstr "切片の推定値"
 
 msgid ""
 "'%1$s' could not be converted into a numeric value for the custom x-axis "
 "ticks."
-msgstr ""
+msgstr "'%1$s' をカスタムのx軸の目盛の数値に変換できませんでした。"
 
-#, fuzzy
 msgid "At least one manual x-axis tick must be specified."
-msgstr "少なくとも1つのp値カットオフを設定する必要があります."
+msgstr "x軸の目盛りを手動で少なくとも1つ指定してください。"
 
 msgid "At least one manual x-axis tick must fall within the x-axis limits."
 msgstr ""
+"手動で指定したx軸の目盛のうち、少なくとも1つはx軸の範囲内にある必要があります"
+"。"
 
-#, fuzzy
 msgid "Missing Data Summary"
-msgstr "%s の要約"
+msgstr "欠測データの要約"
 
 msgid ""
 "The dataset contains missing values: %1$i missing values were removed from "
 "the analysis."
-msgstr ""
+msgstr "データセットに欠測値があります: %1$i 個の欠測値が分析から除かれました。"
 
 msgid "Funnel Plot"
 msgstr "ファンネルプロット"
@@ -1645,126 +1661,113 @@ msgid ""
 "Funnel plot prediction interval was specified in an incorrect format. Try "
 "'(0.90, 0.95, 0.99)'."
 msgstr ""
+"ファンネルプロットの予測区間の書き方が正しくありません。'(0.90, 0.95, 0.99)' "
+"のように書いてください。"
 
-#, fuzzy
 msgid "Funnel plot prediction intervals must be between 0 and 1."
-msgstr "すべてのp値のカットオフは0から1の間である必要があります."
+msgstr "ファンネルプロットの予測区間は0から1の間でなければなりません。"
 
-#, fuzzy
 msgid "Funnel plot prediction intervals must be specified."
-msgstr "少なくとも1つのp値カットオフを設定する必要があります."
+msgstr "ファンネルプロットの予測区間を指定してください。"
 
 msgid ""
 "Power enhancement breaks were specified in an incorrect format. Try '(0.30, "
 "0.50, 0.80)'."
 msgstr ""
+"検出力の強調の区切りの書き方が正しくありません。'(0.30, 0.50, 0.80)' のように"
+"書いてください。"
 
-#, fuzzy
 msgid "At least one power enhancement break must be specified."
-msgstr "少なくとも1つのp値カットオフを設定する必要があります."
+msgstr "検出力を高める区切りを少なくとも1つ指定してください。"
 
 msgid "Power enhancement breaks must be between 0.05 and 1."
-msgstr ""
+msgstr "検出力の強調の区切りは 0.05 から 1 の間である必要があります。"
 
-#, fuzzy
 msgid "Power"
-msgstr "下限"
+msgstr "検出力"
 
 msgid "H₁ Funnel Parameter Estimates"
-msgstr ""
+msgstr "H₁のファンネルのパラメータ推定値"
 
-#, fuzzy
 msgid "Estimate μ"
-msgstr "推定"
+msgstr "μ の推定値"
 
 msgid "Lower 95%% CI"
-msgstr ""
+msgstr "95%%信頼区間の下限"
 
 msgid "Upper 95%% CI"
-msgstr ""
+msgstr "95%%信頼区間の上限"
 
-#, fuzzy
 msgid "Estimate 𝜏"
-msgstr "推定値"
+msgstr "𝜏 の推定値"
 
-#, fuzzy
 msgid "The funnel plot parameter estimation failed with the following error:"
-msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
+msgstr "ファンネルプロットのパラメータ推定が次のエラーで失敗しました:"
 
 msgid "Trim and Fill Parameter Estimates"
-msgstr ""
+msgstr "トリム・アンド・フィルのパラメータ推定値"
 
-#, fuzzy
 msgid "Missing Estimates"
-msgstr "PET-PEESE回帰推定値"
+msgstr "欠測の推定値"
 
 msgid "Trim and Fill"
-msgstr ""
+msgstr "トリム・アンド・フィル"
 
-#, fuzzy
 msgid "Adjusted Estimate μ"
-msgstr "モデル推定値"
+msgstr "μ の調整後推定値"
 
-#, fuzzy
 msgid "Adjusted Estimate 𝜏"
-msgstr "モデル推定値"
+msgstr "𝜏 の調整後推定値"
 
-#, fuzzy
 msgid "Meta-Regression Test for Funnel Plot Asymmetry"
-msgstr "ファンネルプロットの非対称性に関する順位相関検定"
+msgstr "ファンネルプロットの非対称性に関するメタ回帰検定"
 
-#, fuzzy
 msgid "Asymmetry Test"
 msgstr "ファンネルプロットの非対称性検定"
 
-#, fuzzy
 msgid "Limit Estimate μ"
-msgstr "推定"
+msgstr "μ の極限推定値"
 
-#, fuzzy
 msgid "Weighted Regression Test for Funnel Plot Asymmetry"
 msgstr "ファンネルプロットの非対称性の回帰検定（\"Eggerの検定\"）"
 
-#, fuzzy
 msgid "Rank Correlation Test for Funnel Plot Asymmetry"
 msgstr "ファンネルプロットの非対称性に関する順位相関検定"
 
-#, fuzzy
 msgid "Fail-Safe N"
 msgstr "フェイル-セーフ(fail-safe) N"
 
 msgid "Fail-Safe N Summary Table"
-msgstr ""
+msgstr "フェイルセーフ数の要約表"
 
 msgid "Rosenthal"
-msgstr ""
+msgstr "Rosenthal"
 
 msgid "Orwin"
-msgstr ""
+msgstr "Orwin"
 
 msgid "Rosenberg"
-msgstr ""
+msgstr "Rosenberg"
 
 msgid "General"
-msgstr ""
+msgstr "一般的方法"
 
-#, fuzzy
 msgid "The funnel plot asymmetry test failed with the following error:"
-msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
+msgstr "ファンネルプロットの非対称性検定が次のエラーで失敗しました:"
 
-#, fuzzy
 msgid ""
 "The funnel plot asymmetry test at level %1$s failed with the following error:"
-msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
+msgstr "水準 %1$s におけるファンネルプロットの非対称性検定が次のエラーで失敗しました:"
 
 msgid ""
 "The meta-analytic model did not converge. Try modifying the 'Method' option."
 msgstr ""
+"メタ分析のモデルが収束しませんでした。「方法」のオプションを変えてみてくださ"
+"い。"
 
 msgid "The method is not available with only one observation."
-msgstr ""
+msgstr "観測が1つだけの場合、この方法は利用できません。"
 
-#, fuzzy
 msgid "The %1$s fail-safe N calculation %2$sfailed with the following error:"
 msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
 
@@ -1772,236 +1775,216 @@ msgid ""
 "The 'Correlation/Covariance Matrix' variable input contains the following "
 "variable that does not contain the variable name separator '%1$s': %2$s."
 msgstr ""
+"「相関・共分散行列」の変数の入力に、変数名の区切り文字 '%1$s' を含まない変数"
+"があります: %2$s。"
 
 msgid ""
 "The correlation matrix contains values outside the range of -1 and 1. Please "
 "check your input."
-msgstr ""
+msgstr "相関行列に -1 から 1 の範囲外の値が含まれています。入力を確認してください。"
 
 msgid ""
 "The 'Means' variable input contains the following variable that is not "
 "specified in the 'Correlation/Covariance Matrix' variable input: %1$s."
 msgstr ""
+"「平均」の変数の入力に、「相関・共分散行列」の変数の入力で指定されていない変"
+"数があります: %1$s。"
 
 msgid "Available Variable Names"
-msgstr ""
+msgstr "利用できる変数名"
 
 msgid "Descriptives"
-msgstr ""
+msgstr "記述統計"
 
 msgid "%1$s: %1$s Matrix"
-msgstr ""
+msgstr "%1$s: %1$s 行列"
 
 msgid "Variable"
-msgstr ""
+msgstr "変数"
 
 msgid "%1$s: Means"
-msgstr ""
+msgstr "%1$s: 平均"
 
-#, fuzzy
 msgid "Pooled %1$s Matrix"
-msgstr "モデル推定値"
+msgstr "統合された %1$s 行列"
 
 msgid ""
 "The pooled correlation/covariance matrix could not be computed. Consider "
 "verifying that all correlation/covariance matrix variables are correctly "
 "specified via 'Descriptives'."
 msgstr ""
+"統合された相関・共分散行列を計算できませんでした。「記述統計」で、相関・共分"
+"散行列の変数がすべて正しく指定されているか確認してください。"
 
-#, fuzzy
 msgid "Correlation"
-msgstr "自己相関"
+msgstr "相関"
 
-#, fuzzy
 msgid "Covariance"
-msgstr "共分散比"
+msgstr "共分散"
 
-#, fuzzy
 msgid "Random Effect"
 msgstr "変量効果"
 
-#, fuzzy
 msgid "Random Effect Covariance"
-msgstr "変量効果の推定値"
+msgstr "変量効果の共分散"
 
 msgid "Pooled %1$s Matrix Parameters"
-msgstr ""
+msgstr "統合された %1$s 行列のパラメータ"
 
 msgid "Row"
-msgstr ""
+msgstr "行"
 
 msgid "Column"
-msgstr ""
+msgstr "列"
 
-#, fuzzy
 msgid "95%% CI"
-msgstr "%s%% CI"
+msgstr "95%% 信頼区間"
 
 msgid "Computing additional fit measures: %1$s"
-msgstr ""
+msgstr "追加の適合度指標を計算しています: %1$s"
 
-#, fuzzy
 msgid "SEM Fit Measures"
 msgstr "適合度指標"
 
 msgid "CLI"
-msgstr ""
+msgstr "CLI"
 
 msgid "TLI"
-msgstr ""
+msgstr "TLI"
 
 msgid "RMSEA"
-msgstr ""
+msgstr "RMSEA"
 
 msgid "p(RMSEA < 0.05)"
-msgstr ""
+msgstr "p(RMSEA < 0.05)"
 
 msgid "Pairwise Model Comparison"
-msgstr ""
+msgstr "モデルの対比較"
 
 msgid "2ΔLL"
-msgstr ""
+msgstr "2ΔLL"
 
 msgid "Δ df"
-msgstr ""
+msgstr "Δ df"
 
 msgid "At least two models are required for pairwise model comparison."
-msgstr ""
+msgstr "モデルの対比較には少なくとも2つのモデルが必要です。"
 
 msgid ""
 "No pairwise model comparison with at least one degree of freedom difference "
 "available."
-msgstr ""
+msgstr "自由度の差が1以上ある対比較が見つかりません。"
 
-#, fuzzy
 msgid "Regression Estimates"
-msgstr "PET-PEESE回帰推定値"
+msgstr "回帰の推定値"
 
-#, fuzzy
 msgid "Mean/Intercept Estimates"
-msgstr "異質性推定"
+msgstr "平均・切片の推定値"
 
-#, fuzzy
 msgid "Covariance Estimates"
-msgstr "共分散比"
+msgstr "共分散の推定値"
 
 msgid "Random Effects Estimates"
 msgstr "変量効果の推定値"
 
-#, fuzzy
 msgid "Model fit failed with the following message: %1$s."
-msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
+msgstr "モデルのあてはめが次のメッセージで失敗しました: %1$s。"
 
 msgid "The model should contain at least one predictor or an intercept."
-msgstr ""
-"モデルには、少なくとも 1 つの予測変数または切片が含まれている必要があります."
+msgstr "モデルには予測変数か切片が少なくとも1つ必要です。"
 
 msgid "Coefficients"
 msgstr "係数"
 
-#, fuzzy
 msgid "At least one predictor needs to be specified."
-msgstr "少なくとも1つのp値カットオフを設定する必要があります."
+msgstr "予測変数を少なくとも1つ指定してください。"
 
-#, fuzzy
 msgid "%1$s observations were ommited due to missing values."
-msgstr "%i の観測値が欠損しているため削除されました。"
+msgstr "欠測値のため %1$s 件の観測値が除外されました。"
 
-#, fuzzy
 msgid "Posterior distribution"
-msgstr "事前分布"
+msgstr "事後分布"
 
-#, fuzzy
 msgid "Sampling diagnostics"
-msgstr "診断"
+msgstr "サンプリングの診断"
 
-#, fuzzy
 msgid "Autocorrelation (%1$s)"
-msgstr "自己相関"
+msgstr "自己相関 (%1$s)"
 
-#, fuzzy
 msgid ""
 "Inference possibly unreliable -- MCMC chains might not have converged; The "
 "largest R-hat is %1$.3f > 1.01. To lower R-hat please increase 'Iterations', "
 "or 'Adapt delta' in the Options section."
 msgstr ""
-"推論の信頼性が低い可能性があります -- MCMC チェーンが収束していない可能性があ"
-"ります。最大のR-hatが %.3f > 1.01でした。R-hatを下げるためには、オプションで"
-"「Iterations」や「Adapt delta」を増やしてください。"
+"推論の信頼性が低い可能性があります -- MCMCチェーンが収束していない可能性があ"
+"ります。最大の R-hat は %1$.3f > 1.01 です。R-hat を下げるには、オプションで"
+"「Iterations」または「Adapt delta」を増やしてください。"
 
-#, fuzzy
 msgid ""
 "Low estimation accuracy -- The smallest Effective Sample Size (ESS) is "
 "%1$.2f < %2$1.0f. To increase accuracy please increase 'Iterations', or "
 "'Adapt delta' in the Options section."
 msgstr ""
-"推論の信頼性が低い可能性があります -- MCMC チェーンが収束していない可能性があ"
-"ります。最大のR-hatが %.3f > 1.01でした。R-hatを下げるためには、オプションで"
-"「Iterations」や「Adapt delta」を増やしてください。"
+"推定精度が低いです -- 有効サンプルサイズ(ESS)の最小値は %1$.2f < %2$1.0f です"
+"。精度を上げるには、オプションで「Iterations」または「Adapt delta」を増やして"
+"ください。"
 
 msgid ""
 "Column '%1$s' contains invalid values: %2$s. Expected values for %3$s are: "
 "%4$s."
-msgstr ""
+msgstr "列 '%1$s' に不正な値が含まれています: %2$s。%3$s で想定される値は %4$s です。"
 
-#, fuzzy
 msgid "Study %1$i"
-msgstr "研究 %s"
+msgstr "研究 %1$i"
 
 msgid "Traffic Light"
-msgstr ""
+msgstr "信号機"
 
 msgid "Interaction terms are currently not possible in Bayesian meta-analyses."
-msgstr ""
+msgstr "ベイズメタ分析では、現在のところ交互作用項は利用できません。"
 
-#, fuzzy
 msgid "Estimating Marginal Means"
-msgstr "モデル推定値"
+msgstr "周辺平均を推定しています"
 
-#, fuzzy
 msgid ""
 "At least one prior distribution for the Effect component has to be specified."
-msgstr "少なくとも1つのp値カットオフを設定する必要があります."
+msgstr "効果成分の事前分布を少なくとも1つ指定してください。"
 
-#, fuzzy
 msgid ""
 "At least one prior distribution for the Heterogeneity component has to be "
 "specified."
-msgstr "少なくとも1つのp値カットオフを設定する必要があります."
+msgstr "異質性成分の事前分布を少なくとも1つ指定してください。"
 
-#, fuzzy
 msgid ""
 "At least one prior distribution for the %1$s moderator component has to be "
 "specified."
-msgstr "少なくとも1つのp値カットオフを設定する必要があります."
+msgstr "%1$s モデレータ成分の事前分布を少なくとも1つ指定してください。"
 
 msgid ""
 "Both priors distributions for the %1$s moderator component must have the "
 "same contrast type."
 msgstr ""
+"%1$s のモデレータの成分について、2つの事前分布は同じ対比の種類である必要があ"
+"ります。"
 
-#, fuzzy
 msgid ""
 "At least one prior distribution for the Publication Bias component has to be "
 "specified."
-msgstr "少なくとも1つのp値カットオフを設定する必要があります."
+msgstr "出版バイアス成分の事前分布を少なくとも1つ指定してください。"
 
-#, fuzzy
 msgid ""
 "At least one prior distribution for the Baseline component has to be "
 "specified."
-msgstr "少なくとも1つのp値カットオフを設定する必要があります."
+msgstr "ベースライン成分の事前分布を少なくとも1つ指定してください。"
 
 msgid "The priors for publication bias were set incorrectly."
 msgstr "出版バイアスの事前確率が正しく設定されていません."
 
-#, fuzzy
 msgid "Model Specification"
-msgstr "モデル仕様のプレビュー"
+msgstr "モデルの指定"
 
-#, fuzzy
 msgid "Model Components"
-msgstr "分散成分"
+msgstr "モデルの成分"
 
 msgid "Models"
 msgstr "モデル"
@@ -2009,24 +1992,21 @@ msgstr "モデル"
 msgid "P(M)"
 msgstr "P(M)"
 
-#, fuzzy
 msgid "Prior Distributions %1$s"
-msgstr "事前分布"
+msgstr "事前分布 %1$s"
 
-#, fuzzy
 msgid "Prior Distributions Moderators"
-msgstr "事後分布プロット"
+msgstr "モデレータの事前分布"
 
 msgid "Alternative"
 msgstr "対立"
 
 msgid "Null"
-msgstr "Null"
+msgstr "帰無"
 
 msgid "P(M|data)"
-msgstr "P(M|データ)"
+msgstr "P(M|data)"
 
-#, fuzzy
 msgid ""
 "The analysis will estimate a complex meta-analytic model ensemble using MCMC "
 "and might require a prolonged time to complete."
@@ -2034,18 +2014,15 @@ msgstr ""
 "この解析では、MCMCを用いて複数のメタ解析モデルを推定するため、完了までに長時"
 "間を要する可能性があります."
 
-#, fuzzy
 msgid ""
 "The model fit for subgroup '%1$s' resulted in the following warning: %2$s"
-msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
+msgstr "サブグループ '%1$s' のモデルのあてはめで次の警告が出ました: %2$s"
 
-#, fuzzy
 msgid "The model fit resulted in the following warning: %1$s"
-msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
+msgstr "モデルのあてはめで次の警告が出ました: %1$s"
 
-#, fuzzy
 msgid "Conditional Meta-Analytic Estimates"
-msgstr "モデル推定値"
+msgstr "条件付きメタ分析の推定値"
 
 msgid "Median"
 msgstr "中央値"
@@ -2053,83 +2030,74 @@ msgstr "中央値"
 msgid ""
 "Conditional estimates are based on models assuming the presence of a given "
 "component."
-msgstr ""
+msgstr "条件つき推定値は、その成分があると仮定したモデルに基づいています。"
 
 msgid "Standardized Conditional Meta-Regression Coefficients"
-msgstr ""
+msgstr "標準化した条件つきメタ回帰係数"
 
 msgid "Standardized Meta-Regression Coefficients"
-msgstr ""
+msgstr "標準化したメタ回帰係数"
 
 msgid "Conditional Meta-Regression Coefficients"
-msgstr ""
+msgstr "条件つきメタ回帰係数"
 
-#, fuzzy
 msgid "Meta-Regression Coefficients"
-msgstr "PET-PEESE回帰推定値"
+msgstr "メタ回帰の係数"
 
 msgid "Conditional Publication Bias Adjustment Estimates (Weight Function)"
-msgstr ""
+msgstr "条件つき出版バイアスの補正の推定値(重み関数)"
 
 msgid "Publication Bias Adjustment Estimates (Weight Function)"
-msgstr ""
+msgstr "出版バイアスの補正の推定値(重み関数)"
 
-#, fuzzy
 msgid "<em>p</em>-Values Interval"
 msgstr "<em>p</em>値区間"
 
 msgid "Conditional Publication Bias Adjustment Estimates (PET-PEESE)"
-msgstr ""
+msgstr "条件つき出版バイアスの補正の推定値(PET-PEESE)"
 
 msgid "Publication Bias Adjustment Estimates (PET-PEESE)"
-msgstr ""
+msgstr "出版バイアスの補正の推定値(PET-PEESE)"
 
 msgid "Estimated Conditional Marginal Means"
-msgstr ""
+msgstr "推定された条件つき周辺平均"
 
-#, fuzzy
 msgid "Conditional %1$s"
-msgstr "条件付き"
+msgstr "条件付き %1$s"
 
-#, fuzzy
 msgid "Conditional Estimated Marginal Means"
-msgstr "条件付き推定値"
+msgstr "条件付き推定周辺平均"
 
 msgid ""
 "The Bayes factor test for the adjusted estimate is not available for meta-"
 "regressions with non-centered parameteriazation."
 msgstr ""
+"中心化していないパラメータ化のメタ回帰では、調整済み推定値についての"
+"ベイズファクターの検定は利用できません。"
 
-#, fuzzy
 msgid "Adjusted Effect"
-msgstr "モデル推定値"
+msgstr "調整後の効果"
 
-#, fuzzy
 msgid "Pooled Effect"
-msgstr "効果量の推定値"
+msgstr "統合効果"
 
 msgid "Moderation: Estimated Marginal Means"
-msgstr ""
+msgstr "モデレーション: 推定周辺平均"
 
-#, fuzzy
 msgid "Moderation"
-msgstr "自己相関"
+msgstr "調整"
 
-#, fuzzy
 msgid "Weight Function"
-msgstr "重み関数(%s)"
+msgstr "重み関数"
 
-#, fuzzy
 msgid "PET-PEESE"
-msgstr "PEESE"
+msgstr "PET-PEESE"
 
-#, fuzzy
 msgid "P-Value"
-msgstr "値"
+msgstr "p値"
 
-#, fuzzy
 msgid "Diagnostics Summary"
-msgstr "診断"
+msgstr "診断の要約"
 
 msgid "MCMC error"
 msgstr "MCMC誤差"
@@ -2144,7 +2112,7 @@ msgid "R-hat"
 msgstr "R-hat"
 
 msgid "Weights"
-msgstr "ウェイト"
+msgstr "重み"
 
 msgid "PET"
 msgstr "PET"
@@ -2152,63 +2120,57 @@ msgstr "PET"
 msgid "PEESE"
 msgstr "PEESE"
 
-#, fuzzy
 msgid "Trace Plot"
 msgstr "トレースプロット"
 
-#, fuzzy
 msgid "Autocorrelation Plot"
 msgstr "自己相関プロット"
 
-#, fuzzy
 msgid "Density Plot"
-msgstr "密度"
+msgstr "密度プロット"
 
 msgid ""
 "Please select at least one 'Type' of diagnostics plot (e.g., 'Trace', "
 "'Autocorrelation' or 'Posterior samples density')."
 msgstr ""
+"診断プロットの「種類」を少なくとも1つ選んでください(たとえば「トレース」「自"
+"己相関」「事後サンプルの密度」)。"
 
 msgid "RoBMA R Code"
-msgstr ""
+msgstr "RoBMAのRコード"
 
-#, fuzzy
 msgid "Publication Bias Adjustment Summary"
-msgstr "出版バイアス(Publication Bias)"
+msgstr "出版バイアス調整の要約"
 
 msgid "Estimated Marginal Means Summary"
-msgstr ""
+msgstr "推定周辺平均の要約"
 
-#, fuzzy
 msgid "Prior and Posterior Plots"
 msgstr "事前分布と事後分布プロット"
 
 msgid "Diagnostics"
 msgstr "診断"
 
-#, fuzzy
 msgid "Adjusted effect"
-msgstr "モデル推定値"
+msgstr "調整後の効果"
 
-#, fuzzy
 msgid "Subgroup %1$s, %2$s"
-msgstr "BF%1$s%2$s"
+msgstr "サブグループ %1$s, %2$s"
 
-#, fuzzy
 msgid "Effect intercept"
-msgstr "効果量"
+msgstr "効果の切片"
 
 msgid "Publication bias"
 msgstr "出版バイアス(Publication Bias)"
 
 msgid "Baseline"
-msgstr ""
+msgstr "ベースライン"
 
 msgid "Inclusion BF"
 msgstr "包含BF"
 
 msgid "Exclusion BF"
-msgstr "除外 BF"
+msgstr "除外BF"
 
 msgid "log(Inclusion BF)"
 msgstr "log(包含BF)"
@@ -2219,6 +2181,10 @@ msgid ""
 "very large change in the Bayes factor). Consider increasing the number of "
 "chains and posterior samples to obtain more stable estimates."
 msgstr ""
+"ベイズファクターが大きい場合、すなわち BF > 100 や BF < 1/100 の場合、計算が"
+"不安定になることがあります(事後包含確率のわずかな変化が、ベイズファクターの非"
+"常に大きな変化に対応するためです)。より安定した推定値を得るには、チェイン数と"
+"事後サンプル数を増やすことを検討してください。"
 
 msgid ""
 "Cannot compute results. All entries of the p-value variable (%s) must be "
@@ -2254,7 +2220,7 @@ msgid "95%% Confidence Interval"
 msgstr "95%% 信頼区間"
 
 msgid "Note:"
-msgstr "注意:"
+msgstr "注:"
 
 msgid "%1$s is on %2$s scale."
 msgstr "%1$sは%2$sのスケールです."
@@ -2380,54 +2346,44 @@ msgstr ""
 msgid "Only the following one-sided p-value cutoffs were used: %s."
 msgstr "次の片側 p 値カットオフのみが使用されました: %s."
 
-#, fuzzy
 msgid "Estimating: %1$s"
-msgstr "推定値"
+msgstr "推定しています: %1$s"
 
-#, fuzzy
 msgid "Model Fit Measures"
 msgstr "適合度指標"
 
 msgid "log Lik."
-msgstr ""
+msgstr "対数尤度"
 
-#, fuzzy
 msgid "%1$s fit failed with the following message %2$s."
-msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
+msgstr "%1$s のあてはめが次のメッセージで失敗しました %2$s。"
 
-#, fuzzy
 msgid "Warning"
-msgstr "警告:"
+msgstr "警告"
 
-#, fuzzy
 msgid "Model Convergence"
-msgstr "モデルアベレージ"
+msgstr "モデルの収束"
 
 msgid "Status"
-msgstr ""
+msgstr "状態"
 
 msgid "Path Diagram"
-msgstr ""
+msgstr "パス図"
 
-#, fuzzy
 msgid "Syntax failed with the following message %1$s."
-msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
+msgstr "シンタックスが次のメッセージで失敗しました %1$s。"
 
-#, fuzzy
 msgid "Model fit failed with the following message %1$s."
-msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
+msgstr "モデルのあてはめが次のメッセージで失敗しました %1$s。"
 
-#, fuzzy
 msgid "Model visualization failed with the following message %1$s."
-msgstr "%1$s 検定が次のエラーで失敗しました: %2$s"
+msgstr "モデルの可視化が次のメッセージで失敗しました %1$s。"
 
-#, fuzzy
 msgid "Coefficient Summary"
-msgstr "係数"
+msgstr "係数の要約"
 
-#, fuzzy
 msgid "Computed Estimates Summary"
-msgstr "モデル推定値"
+msgstr "計算された推定値の要約"
 
 msgid "Error: There were not enough adequately powered studies (k = %1$i)"
 msgstr "エラー: 十分な検出力のある研究がありませんでした(k = %1$i)"
@@ -2448,7 +2404,7 @@ msgid "Cohen's d"
 msgstr "コーエン(Cohen)のd"
 
 msgid "Fisher's z"
-msgstr "フィッシャー(Fisher)のz"
+msgstr "フィッシャーのz"
 
 msgid ""
 "WAAP was not estimated: There were only %1$i adequately powered studies "
@@ -2473,6 +2429,9 @@ msgid_plural ""
 "divergent transitions after warmup. This can be solved by carefully "
 "increasing 'Adapt delta' until there are no divergent transitions."
 msgstr[0] ""
+"ハミルトニアン・モンテカルロの手続きが妥当でない可能性があります。"
+"ウォームアップ後に %i 回の発散遷移がありました。「adapt delta」を慎重に大きく"
+"して、発散遷移がなくなるようにすれば解決できます。"
 
 msgid ""
 "Bayesian Fraction of Missing Information (BFMI) that was too low in %i chain "
@@ -2496,6 +2455,9 @@ msgid_plural ""
 "exceeded the maximum tree depth. This can be solved by carefully increasing "
 "'Maximum tree depth'."
 msgstr[0] ""
+"ハミルトニアン・モンテカルロの手続きが非効率な可能性があります。%i 回の遷移が"
+"最大ツリー深度を超えました。「最大ツリー深度」を慎重に大きくすれば解決できま"
+"す。"
 
 #, fuzzy
 #~ msgid "Additional Fit Measures"
