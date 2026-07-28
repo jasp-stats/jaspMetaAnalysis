@@ -1,8 +1,8 @@
 # Standalone Forest Plot analysis.
 #
 # Renders a forest plot from user-supplied effect sizes, CIs, and section types
-# without fitting any model. Reuses the forest plot rendering pipeline from
-# forestplotcommon.R / forestplotdata.R / forestplotscaling.R.
+# without fitting any model. Reuses forestplotcommon.R and the focused
+# forestplot-*.R helpers.
 
 ForestPlot <- function(jaspResults, dataset, options) {
 

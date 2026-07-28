@@ -15,6 +15,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+# Penalized meta-analysis entry point, fitting, summaries, posterior plots, and diagnostics.
+
 # TODO:
 # - centering
 # - different CI widths
