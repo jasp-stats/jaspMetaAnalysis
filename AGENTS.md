@@ -186,7 +186,7 @@ After `runAnalysis()`, check:
 
 ### Key Files to Check After Changes
 - Always check corresponding test file in `tests/testthat/` when modifying R functions
-- Update `inst/Upgrades.qml` when renaming QML options to maintain backward compatibility
+- For released analyses, update `inst/Upgrades.qml` when renaming QML options to maintain backward compatibility. For unreleased analyses, keep only the current QML/R names.
 
 ## Critical Safety Rules
 
@@ -206,6 +206,10 @@ After `runAnalysis()`, check:
 - QML interfaces in `inst/qml/` define user-facing options passed to R functions
 - Each analysis links: `inst/Description.qml/` -> `inst/qml/` -> `R/` functions
 - QML elements use `name` (camelCase internal) and `title`/`label` (user-facing)
+- QML `name` values are the exact R option API. When changing option names, update R reads and dependency vectors to the current names; do not keep old aliases for unreleased analyses.
+- Keep maintainable imported QML components when they reduce duplication/clutter. Do not inline or flatten QML solely because `jaspTools::analysisOptions()` cannot see imported components or dynamic bindings.
+- Verify QML/R option contracts with source-aware checks across the main QML file and imported components; when tests need defaults tooling cannot derive, pass explicit GUI-equivalent options instead of adding R defaults.
+- Preserve dynamic `DropDown.values` when they are the clearer GUI. Use static values plus `enabledOptions` only when that is the intended UX, not as a tooling workaround.
 - Document QML elements using `info` property for help generation
 - Use existing QML files as examples for structure and style
 - Add default values to unit tests when adding new QML options
@@ -217,6 +221,8 @@ After `runAnalysis()`, check:
 - Use camelCase for all function and variable names
 - NEVER use `library()` or `require()` - use `package::function()` syntax
 - Access `options` list via `options[["name"]]` notation to avoid partial matching
+- Treat GUI options as a strict contract: do not add R-side normalization, alias maps, compatibility layers, or backup defaults for missing QML options in unreleased work. Missing/disconnected options should fail so the QML/R mismatch is fixed.
+- For checkbox options, use `if (options[["flag"]])`, not `isTRUE(options[["flag"]])`; `isTRUE()` masks missing options.
 - Follow CRAN guidelines for code structure and documentation
 
 **See [r-instructions.md](.codex/rules/r-instructions.md) for complete R function structure, jaspResults API, output components (tables/plots/containers/state), and coding conventions.**
@@ -241,31 +247,6 @@ After `runAnalysis()`, check:
 - Double `%` characters in format strings: `gettextf("%s%% CI for Mean")`
 
 **See [translation-instructions.md](.codex/rules/translation-instructions.md) for comprehensive i18n guidelines including QML qsTr(), R gettext/gettextf/ngettext, formatting rules, and Weblate workflow.**
-
-## Meta-Analysis Knowledge Base
-
-This module ships a comprehensive knowledge base at `knowledge-base/` built by analyzing all ~200 R packages from the [CRAN Task View for Meta-Analysis](https://cran.r-project.org/web/views/MetaAnalysis.html). Use it as reference when implementing or improving meta-analysis features.
-
-### How to Navigate
-
-| Goal | Action |
-|------|--------|
-| **Find a feature by name** | Search `knowledge-base/_feature_lookup.json` for the name → note the `c` (category) field → search `knowledge-base/categories/<category>.json` for the feature |
-| **Explore a domain** | Read `knowledge-base/_master_index.json` (~38K tok) → read `knowledge-base/categories/<name>.toc.json` (5-48K) → search full `categories/<name>.json` for specifics |
-| **Research a package** | Read `knowledge-base/packages/profiles/<pkg>.md` (1-5K, quick summary) → for full detail, read `knowledge-base/packages/raw/<pkg>/knowledge.json` |
-| **Check integrations** | Read `knowledge-base/integrations/by-package/<pkg>.json` |
-| **Find feature gaps** | Read `knowledge-base/_gap_analysis.md` (~29K tok) for prioritized feature list |
-
-### Key Stats
-- 196 packages analyzed, 2,989 features, 5,511 implementations
-- 16 feature categories: model-fitting, data-preparation, diagnostics-influence, publication-bias, forest-plot, visualization-other, heterogeneity, prediction-ci, model-comparison, meta-regression, network-ma, bayesian, summary-print, reporting, utility, significance-values
-
-### When to Use
-- Implementing new statistical methods → check what approaches exist across packages
-- Adding new analyses → find best-practice patterns and established APIs
-- Writing effect size computations → check `data-preparation` category
-- Forest/funnel plot enhancements → check `forest-plot` and `publication-bias` categories
-- Bayesian methods → check `bayesian` category for prior/MCMC/posterior patterns
 
 ## CI/CD Pipeline
 - GitHub Actions in `.github/workflows/unittests.yml` runs on every push
@@ -293,7 +274,7 @@ This module ships a comprehensive knowledge base at `knowledge-base/` built by a
 1. Update R function maintaining existing interface
 2. Update QML if adding/changing options
 3. Update unit tests and expected results
-4. Add upgrade mapping to `inst/Upgrades.qml` if renaming options
+4. Add upgrade mapping to `inst/Upgrades.qml` if renaming options for a released analysis
 5. Run tests: `agentTestAll()` (NEVER CANCEL, 300+ seconds)
 
 ### Detailed Development Process
@@ -303,3 +284,36 @@ This module ships a comprehensive knowledge base at `knowledge-base/` built by a
 - Use `createJaspTable()`, `createJaspPlot()`, `createJaspHtml()` for output elements
 - Always set `$dependOn()` for proper caching and state management
 - Use containers for grouping related elements, state objects for reusing computed results
+
+## Container Environment (overrides Session Setup section above)
+
+This is a **headless Docker container**. There is no interactive user.
+
+### MANDATORY FIRST ACTION — R Session Connection
+
+Before doing ANYTHING else (before reading code, before exploring the repo),
+you MUST connect to the pre-started R session:
+
+1. Call `list_r_sessions` to discover available sessions.
+2. Call `select_r_session` to connect to the listed session.
+3. Only then proceed with the workflow.
+
+If `list_r_sessions` returns empty, the background R session failed to start.
+Fall back to Bash for R execution. Do NOT spend more than 2 turns debugging.
+
+This step is NOT optional. Without it, `btw_tool_run_r` will fail.
+
+### Other container rules
+
+- `session_startup.R` is NOT relevant here — ignore references to it.
+- Do NOT run any git commands (the outer orchestrator handles git).
+
+## Compact Instructions
+
+When context is compacted, preserve:
+- Current workflow stage (from /workspace/.openclaw-run/current_stage)
+- Implementation plan (from /workspace/.openclaw-run/PLAN.md)
+- The module name and original task description
+- What git changes have been made so far
+
+After compaction, re-read /workspace/.openclaw-run/RECOVERY.md to re-orient.
