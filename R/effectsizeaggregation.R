@@ -15,6 +15,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+# Effect-size aggregation validation, computation, summary output, exports, and R code.
+
 EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
 
   ready         <- .esaReady(options)
@@ -379,49 +381,8 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
   if (options[["varianceCovarianceMatrixType"]] == "precomputed")
     return(gettext("Aggregation used the selected precomputed working effect-size variance-covariance matrix."))
 
-  details <- switch(
-    options[["varianceCovarianceMatrixType"]],
-    "correlationMatrix" = c(
-      .mammVarianceCovarianceMatrixVariablePhrase(
-        options[["varianceCovarianceMatrixCorrelationMatrix"]],
-        gettext("correlation matrix variables")
-      ),
-      .mammVarianceCovarianceMatrixClusterPhrases(options)
-    ),
-    "constructsGroupsTimes" = c(
-      .mammVarianceCovarianceMatrixCorrelationPhrase(
-        options,
-        "varianceCovarianceMatrixConstruct",
-        gettext("construct"),
-        "varianceCovarianceMatrixConstructCorrelationMatrix",
-        "varianceCovarianceMatrixConstructCorrelationMatrixValue"
-      ),
-      .mammVarianceCovarianceMatrixCorrelationPhrase(
-        options,
-        "varianceCovarianceMatrixConstructType",
-        gettext("construct type"),
-        "varianceCovarianceMatrixConstructTypeCorrelationMatrix",
-        "varianceCovarianceMatrixConstructTypeCorrelationMatrixValue"
-      ),
-      .mammVarianceCovarianceMatrixTimePhrase(options),
-      .mammVarianceCovarianceMatrixVariablePairPhrase(
-        options[["varianceCovarianceMatrixGroup1"]],
-        gettext("group 1"),
-        options[["varianceCovarianceMatrixGroup2"]],
-        gettext("group 2")
-      ),
-      .mammVarianceCovarianceMatrixVariablePairPhrase(
-        options[["varianceCovarianceMatrixGroupSize1"]],
-        gettext("group size 1"),
-        options[["varianceCovarianceMatrixGroupSize2"]],
-        gettext("group size 2")
-      ),
-      .mammVarianceCovarianceMatrixClusterPhrases(options)
-    )
-  )
-
-  details <- details[details != ""]
-  if (length(details) == 0)
+  details <- .mammVarianceCovarianceMatrixDetails(options)
+  if (is.null(details))
     return(NULL)
 
   return(gettextf(
@@ -490,7 +451,7 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
 
   # effect size column
   columnName <- options[["aggregatedColumnNamesEffectSize"]]
-  .esaValidateColumnName(columnName)
+  .metaValidateColumnName(columnName)
   jaspResults[["esColYi"]] <- createJaspColumn(columnName = columnName, dependencies = .esaDependencies)
   jaspResults[["esColYi"]]$setScale(yiOut)
 
@@ -501,7 +462,7 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
   else
     options[["aggregatedColumnNamesStandardError"]]
 
-  .esaValidateColumnName(columnName)
+  .metaValidateColumnName(columnName)
   jaspResults[["esColSe"]] <- createJaspColumn(columnName = columnName, dependencies = .esaDependencies)
   jaspResults[["esColSe"]]$setScale(if (computeSamplingVariance) viOut else sqrt(viOut))
 
@@ -510,7 +471,7 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
     kiOut <- rep(NA_real_, nRows)
     kiOut[outputRows[validRows]] <- aggResult$ki[validRows]
     columnName <- options[["aggregatedColumnNamesClusterSize"]]
-    .esaValidateColumnName(columnName)
+    .metaValidateColumnName(columnName)
     jaspResults[["esColKi"]] <- createJaspColumn(columnName = columnName, dependencies = .esaDependencies)
     jaspResults[["esColKi"]]$setScale(kiOut)
   }
@@ -527,10 +488,6 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
   }
 
   return(outputRows)
-}
-.esaValidateColumnName      <- function(columnName) {
-  if (jaspBase:::columnExists(columnName) && !jaspBase:::columnIsMine(columnName))
-    .quitAnalysis(gettextf("Column name %s already exists in the dataset.", columnName))
 }
 .esaComputeSamplingVariance <- function(options) {
   return(!is.null(options[["computeSamplingVariance"]]) && options[["computeSamplingVariance"]])
@@ -561,15 +518,15 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
 .esaMakeMetaforCallText     <- function(options) {
 
   datInput <- list(
-    measure = .esaQuoteRString("GEN"),
-    yi      = .esaAsRName(options[["effectSize"]]),
-    vi      = paste0(.esaAsRName(options[["effectSizeStandardError"]]), "^2"),
+    measure = .metaQuoteRString("GEN"),
+    yi      = .metaAsRName(options[["effectSize"]]),
+    vi      = paste0(.metaAsRName(options[["effectSizeStandardError"]]), "^2"),
     data    = "dataset"
   )
 
   aggInput <- list(
     x        = "dat",
-    cluster  = .esaAsRName(options[["cluster"]]),
+    cluster  = .metaAsRName(options[["cluster"]]),
     weighted = options[["weighted"]],
     na.rm    = TRUE,
     addk     = options[["addClusterSize"]]
@@ -577,7 +534,7 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
 
   vcalcText <- NULL
   if (options[["varianceCovarianceMatrixType"]] == "simple") {
-    aggInput$struct <- .esaQuoteRString(options[["varianceCovarianceMatrixSimpleStructure"]])
+    aggInput$struct <- .metaQuoteRString(options[["varianceCovarianceMatrixSimpleStructure"]])
 
     rho <- options[["varianceCovarianceMatrixSimpleCompoundSymmetryWithinClusterCorrelation"]]
     if (length(rho) > 0)
@@ -589,11 +546,11 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
 
     timeVar <- options[["varianceCovarianceMatrixSimpleAutoregressiveTime"]]
     if (length(timeVar) > 0 && !is.na(timeVar) && timeVar != "")
-      aggInput$time <- .esaAsRName(timeVar)
+      aggInput$time <- .metaAsRName(timeVar)
 
     constructVar <- options[["varianceCovarianceMatrixSimpleCompoundSymmetryConstruct"]]
     if (options[["varianceCovarianceMatrixSimpleStructure"]] == "CS*CAR" && length(constructVar) > 0 && !is.na(constructVar) && constructVar != "")
-      aggInput$obs <- .esaAsRName(constructVar)
+      aggInput$obs <- .metaAsRName(constructVar)
   } else if (tryCatch(.mammVarianceCovarianceMatrixReady(options), error = function(e) FALSE)) {
     vcalcInput       <- .mammGetVarianceCovarianceMatrix(NULL, options, returnCall = TRUE)
     vcalcInput$data  <- as.name("dat")
@@ -603,7 +560,7 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
     if (options[["varianceCovarianceMatrixType"]] == "precomputed") {
       vcalcText <- paste0(
         "effectSizeVarianceCovarianceMatrix <- ",
-        .esaQuoteRString(vcalcInput[["file"]])
+        .metaQuoteRString(vcalcInput[["file"]])
       )
     } else {
       vcalcText <- paste0(
@@ -628,10 +585,4 @@ EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
   )
 
   return(paste(c(datText, vcalcText, aggText), collapse = "\n\n"))
-}
-.esaAsRName                 <- function(name) {
-  return(deparse(as.name(name), width.cutoff = 500))
-}
-.esaQuoteRString            <- function(value) {
-  return(paste0("'", gsub("'", "\\\\'", value), "'"))
 }

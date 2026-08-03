@@ -15,6 +15,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+# Mantel-Haenszel and Peto meta-analysis validation, fitting, summaries, and R code.
+
 
 ClassicalMantelHaenszelPeto <- function(jaspResults, dataset = NULL, options, ...) {
 
@@ -52,7 +54,7 @@ ClassicalMantelHaenszelPeto <- function(jaspResults, dataset = NULL, options, ..
 
   # additional
   if (options[["showMetaforRCode"]])
-    .mamhpShowMetaforRCode(jaspResults, options)
+    .maShowMetaforRCode(jaspResults, options, .mamhpMakeMetaforCallText)
 
   return()
 }
@@ -275,21 +277,6 @@ ClassicalMantelHaenszelPeto <- function(jaspResults, dataset = NULL, options, ..
     "%1$s  = ",
     "%2$.", digits, "f"
   ), out$par, out$est))
-}
-.mamhpShowMetaforRCode               <- function(jaspResults, options) {
-
-  if (!.maReady(options) || !is.null(jaspResults[["metaforRCode"]]))
-    return()
-
-  metaforRCode <- createJaspHtml(title = gettext("Metafor R Code"))
-  metaforRCode$dependOn(c(.maDependencies, "showMetaforRCode"))
-  metaforRCode$position <- 99
-
-  metaforRCode$text <- .maTransformToHtml(.mamhpMakeMetaforCallText(options))
-
-  jaspResults[['metaforRCode']] <- metaforRCode
-
-  return()
 }
 .mamhpMakeMetaforCallText            <- function(options) {
 

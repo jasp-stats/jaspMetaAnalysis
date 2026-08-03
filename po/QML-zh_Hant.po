@@ -2115,7 +2115,7 @@ msgstr ""
 
 msgctxt "EffectSizeComputation|"
 msgid "Partial correlation"
-msgstr ""
+msgstr "偏相關"
 
 msgctxt "EffectSizeComputation|"
 msgid "Model fit"
