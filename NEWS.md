@@ -17,6 +17,10 @@
 ## Fixed
 * Corrected log-likelihoods for SEM-based meta-analysis models.
 
+# jaspMetaAnalysis 0.97.1
+## Changed
+* Reorganized the R backend into smaller, purpose-specific files and consolidated duplicated helpers without changing analysis behavior or output.
+
 # jaspMetaAnalysis 0.97.0
 ## Fixed
 * Forest plot heterogeneity disabling for multilevel/multivariate meta-analysis
