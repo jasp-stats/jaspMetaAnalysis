@@ -519,7 +519,7 @@
     },
     "OpenMx": {
       "Package": "OpenMx",
-      "Version": "2.22.11",
+      "Version": "2.22.10",
       "Source": "Repository",
       "Encoding": "UTF-8",
       "Date": "2026-02-27",
