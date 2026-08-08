@@ -154,7 +154,8 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
   # prepare RAM
   tempRam <- try(metaSEM::lavaan2RAM(
     model         = model[["syntax"]][["model"]],
-    obs.variables = .masemGetObservedVariables(model)
+    obs.variables = .masemGetObservedVariables(model),
+    std.lv        = FALSE
   ))
 
   # fit SEM
@@ -772,7 +773,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
     model$syntax$prefixedColumns$data.
   )
   observedVariables <- encodeColNames(observedVariables)
-  return()
+  return(observedVariables)
 }
 .masemGetRandomEffectsType <- function(type) {
   return(switch(

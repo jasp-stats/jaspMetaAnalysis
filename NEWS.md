@@ -13,6 +13,10 @@
 >   * **Deprecated / Removed:** Outdated analyses, options, or legacy code.
 
 ---
+# jaspMetaAnalysis (development version)
+## Fixed
+* Corrected log-likelihoods for SEM-based meta-analysis models.
+
 # jaspMetaAnalysis 0.97.1
 ## Changed
 * Reorganized the R backend into smaller, purpose-specific files and consolidated duplicated helpers without changing analysis behavior or output.
