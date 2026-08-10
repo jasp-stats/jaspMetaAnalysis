@@ -6,6 +6,12 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Language: ja\n"
 "X-Qt-Contexts: true\n"
+"PO-Revision-Date: 2026-08-10 14:03+0000\n"
+"Last-Translator: Koji Kosugi <kosugitti@gmail.com>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/ja/>\n"
+"Language: ja\n"
+"X-Generator: Weblate 2026.9.dev0\n"
 
 msgctxt "Description|"
 msgid "Meta-Analysis"
@@ -313,11 +319,11 @@ msgstr "推定設定 (MCMC)"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "iterations:"
-msgstr "イテレーション："
+msgstr "反復回数:"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "chains:"
-msgstr "チェーン："
+msgstr "チェイン数:"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Bayes factor computation"
@@ -325,7 +331,7 @@ msgstr "ベイズファクターの計算"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Integration"
-msgstr "統合"
+msgstr "数値積分"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Bridge sampling"
@@ -349,19 +355,19 @@ msgstr "変量効果"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model averaging"
-msgstr "モデル平均化"
+msgstr "モデル平均"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Constrained random effects"
-msgstr "制約付き変量効果"
+msgstr "制約つき変量効果"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "All positive"
-msgstr "すべて陽性"
+msgstr "すべて正"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "All negative"
-msgstr "すべて陰性"
+msgstr "すべて負"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Table"
@@ -369,7 +375,7 @@ msgstr "表"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model probabilities"
-msgstr "モデル確率"
+msgstr "モデルの確率"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Effect sizes per study"
@@ -385,11 +391,11 @@ msgstr "フォレストプロット"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Observed"
-msgstr "観察された"
+msgstr "観測値"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Estimated"
-msgstr "推定"
+msgstr "推定値"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Both"
@@ -401,23 +407,23 @@ msgstr "ラベルを表示"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Ordering"
-msgstr "順序"
+msgstr "並べ替え"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Year (ascending)"
-msgstr "年 (昇順)"
+msgstr "年(昇順)"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Year (descending)"
-msgstr "年 (降順)"
+msgstr "年(降順)"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Effect size (ascending)"
-msgstr "効果量 (昇順)"
+msgstr "効果量(昇順)"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Effect size (descending)"
-msgstr "効果量 (降順)"
+msgstr "効果量(降順)"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Order"
@@ -437,11 +443,11 @@ msgstr "行の順序"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Cumulative forest plot"
-msgstr "累積フォレスト プロット"
+msgstr "累積フォレストプロット"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Add prior"
-msgstr "事前分布の追加"
+msgstr "事前分布を追加"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Prior and posterior"
@@ -457,7 +463,7 @@ msgstr "固定効果と変量効果の事後分布を追加"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Shade 95% CI"
-msgstr "95%信頼区間に影をつける"
+msgstr "95% 信頼区間を網掛け"
 
 msgctxt "BayesianMetaAnalysisPlots|"
 msgid "Sequential plot"
@@ -481,15 +487,15 @@ msgstr "効果量"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Cauchy"
-msgstr "コーシー(Cauchy)"
+msgstr "コーシー"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "location:"
-msgstr "位置(location):"
+msgstr "位置:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "scale:"
-msgstr "尺度(scale):"
+msgstr "尺度:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Normal"
@@ -509,7 +515,7 @@ msgstr "t"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "df:"
-msgstr "自由度:"
+msgstr "df:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Truncation"
@@ -525,7 +531,7 @@ msgstr "上限:"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Heterogeneity (between-study SD)"
-msgstr "異質性(研究間SD)"
+msgstr "異質性 (研究間SD)"
 
 msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Inverse gamma"
