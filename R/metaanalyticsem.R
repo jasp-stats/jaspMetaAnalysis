@@ -15,7 +15,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-#' @export
+# Meta-analytic SEM data decoding, matrices, fit summaries, and model comparisons.
+
 MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 
   # set OpenMx options
@@ -746,7 +747,6 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   OpenMx::mxOption(NULL, "Gradient iterations", 2)
 }
 
-#' @export
 checkMetaModel <- function(model, availableVars) {
   # based on jaspSem:::checkLavaanModel
 

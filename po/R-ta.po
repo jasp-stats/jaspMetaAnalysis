@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.19.2\n"
-"POT-Creation-Date: 2026-06-27 03:44\n"
+"POT-Creation-Date: 2026-08-01 03:43\n"
 "PO-Revision-Date: 2026-01-01 18:01+0000\n"
 "Last-Translator: தமிழ்நேரம் <tamilneram247@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/jasp/"
@@ -16,37 +16,132 @@ msgstr ""
 msgid "There must be at least one observation in each group."
 msgstr "ஒவ்வொரு குழுவிலும் குறைந்தது ஒரு கண்காணிப்பு இருக்க வேண்டும்."
 
-msgid "The prior lower bound is not smaller than the upper bound."
-msgstr "முந்தைய கீழ் எல்லை மேல் எல்லையை விட சிறியதல்ல."
+msgid "Forest Plot"
+msgstr "வன சூழ்ச்சி"
 
-msgid "Your prior contains negative values."
-msgstr "உங்கள் முன் எதிர்மறை மதிப்புகளைக் கொண்டுள்ளது."
+msgid "Study"
+msgstr "பயில்"
 
-msgid "Your prior contains positive values."
-msgstr "உங்கள் முன் நேர்மறையான மதிப்புகள் உள்ளன."
+msgid "Observed study effects"
+msgstr "கவனிக்கப்பட்ட ஆய்வு விளைவுகள்"
 
-msgid "No positive numbers found in %s"
-msgstr "%s இல் நேர்மறையான எண்கள் இல்லை"
+msgid "Estimated study effects"
+msgstr "மதிப்பிடப்பட்ட ஆய்வு விளைவுகள்"
 
-msgid "No negative numbers found in %s"
-msgstr "%s இல் எதிர்மறை எண்கள் இல்லை"
+msgid "Observed and estimated study effects"
+msgstr "கவனிக்கப்பட்ட மற்றும் மதிப்பிடப்பட்ட ஆய்வு விளைவுகள்"
 
-msgid "The 95%% CI Lower Bound must be smaller than the Upper Bound."
-msgstr "95 %% தொஒ லோயர் பவுண்ட் மேல் எல்லையை விட சிறியதாக இருக்க வேண்டும்."
+msgid "Cumulative forest plot"
+msgstr "ஒட்டுமொத்த வன சூழ்ச்சி"
 
-msgid "You cannot set all the prior model probabilties to zero."
-msgstr "எல்லா முந்தைய மாதிரி நிகழ்தகவுகளையும் பூச்சியமாக அமைக்க முடியாது."
+msgid "Fixed effects"
+msgstr "நிலையான விளைவுகள்"
+
+msgid "Random effects"
+msgstr "சீரற்ற விளைவுகள்"
+
+msgid "Averaged"
+msgstr "சராசரி"
+
+msgid "Ordered effects"
+msgstr "ஆர்டர் செய்யப்பட்ட விளைவுகள்"
+
+msgid "Estimated"
+msgstr "மதிப்பிடப்பட்டது"
+
+msgid "Observed"
+msgstr "கவனிக்கப்பட்டது"
+
+msgid "Effect size"
+msgstr "விளைவு அளவு"
+
+msgid "Prior"
+msgstr "முன்"
+
+msgid "Overall effect size"
+msgstr "ஒட்டுமொத்த விளைவு அளவு"
+
+msgid "Effect Size"
+msgstr "விளைவு அளவு"
+
+msgid "Heterogeneity"
+msgstr "பன்முகத்தன்மை"
+
+msgid "Density"
+msgstr "அடர்த்தி"
+
+msgid "Prior and Posteriors"
+msgstr "முன் மற்றும் போச்டீரியர்ச்"
+
+msgid "Fixed H"
+msgstr "நிலையான ம"
+
+msgid "Random H"
+msgstr "சீரற்ற ம"
+
+msgid "Averaged H"
+msgstr "சராசரி ம"
+
+msgid "Prior H"
+msgstr "முன் ம"
+
+msgid "Ordered H"
+msgstr "ஆர்டர் செய்யப்பட்ட ம"
+
+msgid "Sequential Analysis"
+msgstr "தொடர்ச்சியான பகுப்பாய்வு"
+
+msgid "Bayes factors effect size"
+msgstr "பேயச் காரணிகள் விளைவு அளவு"
+
+msgid "Bayes factors heterogeneity"
+msgstr "பேயச் காரணிகள் பன்முகத்தன்மை"
+
+msgid "Posterior model probabilities"
+msgstr "பின்புற மாதிரி நிகழ்தகவுகள்"
+
+msgid "Evidence for random effects"
+msgstr "சீரற்ற விளைவுகளுக்கான சான்றுகள்"
+
+msgid "Evidence for fixed effects"
+msgstr "நிலையான விளைவுகளுக்கான சான்றுகள்"
+
+msgid "random"
+msgstr "சீரற்ற"
+
+msgid "fixed"
+msgstr "சரி"
+
+msgid "Anecdotal"
+msgstr "நிகழ்வு"
+
+msgid "Moderate"
+msgstr "மிதமான"
+
+msgid "Strong"
+msgstr "வலுவான"
+
+msgid "Very Strong"
+msgstr "மிகவும் வலுவானது"
+
+msgid "Extreme"
+msgstr "எக்ச்ட்ரீம்"
+
+msgid "Evidence for %s:"
+msgstr "%s க்கான சான்றுகள்:"
+
+msgid "Plotting failed: The Bayes factors contain infinity."
+msgstr "சூழ்ச்சி தோல்வியுற்றது: பேயச் காரணிகளில் முடிவிலி உள்ளது."
+
+msgid "Studies"
+msgstr "ஆய்வுகள்"
 
 msgid ""
-"The model could not be fit. Please check the following: Do you have at least "
-"n=2 studies? If the prior is truncated, is it consistent with the data (when "
-"most effect sizes are negative, the analysis may not work when the prior is "
-"constrained to be postive)?"
+"Posterior model \n"
+" probability"
 msgstr ""
-"மாதிரி பொருத்தமாக இருக்க முடியாது. தயவுசெய்து பின்வருவனவற்றைச் சரிபார்க்கவும்: "
-"உங்களிடம் குறைந்தது n = 2 ஆய்வுகள் உள்ளதா? முந்தையது துண்டிக்கப்பட்டால், அது தரவுகளுடன் "
-"ஒத்துப்போகிறதா (பெரும்பாலான விளைவு அளவுகள் எதிர்மறையாக இருக்கும்போது, முந்தையது "
-"போச்டிவ் எனக் கட்டுப்படுத்தப்படும்போது பகுப்பாய்வு செயல்படாது)?"
+"பின்புற மாதிரி \n"
+"நிகழ்தகவு"
 
 msgid "Posterior Estimates per Model"
 msgstr "ஒரு மாதிரிக்கு பின்புற மதிப்பீடுகள்"
@@ -71,18 +166,6 @@ msgstr "95 %% நம்பகமான இடைவெளி"
 
 msgid "Upper"
 msgstr "மேல்"
-
-msgid "Averaged"
-msgstr "சராசரி"
-
-msgid "Fixed effects"
-msgstr "நிலையான விளைவுகள்"
-
-msgid "Random effects"
-msgstr "சீரற்ற விளைவுகள்"
-
-msgid "Ordered effects"
-msgstr "ஆர்டர் செய்யப்பட்ட விளைவுகள்"
 
 msgid ""
 "%1$s and %2$s are the group-level effect size and standard deviation, "
@@ -171,9 +254,6 @@ msgstr ""
 msgid "Model Probabilities"
 msgstr "மாதிரி நிகழ்தகவுகள்"
 
-msgid "Prior"
-msgstr "முன்"
-
 msgid "Posterior"
 msgstr "பின்புறம்"
 
@@ -189,15 +269,6 @@ msgstr "H%s க்கு உத்தரவிடப்பட்டது"
 msgid "Effect Sizes per Study"
 msgstr "ஒரு ஆய்வுக்கு விளைவு அளவுகள்"
 
-msgid "Observed"
-msgstr "கவனிக்கப்பட்டது"
-
-msgid "Estimated"
-msgstr "மதிப்பிடப்பட்டது"
-
-msgid "Study"
-msgstr "பயில்"
-
 msgid ""
 "Posterior mean and 95%% credible interval estimates from the random effects "
 "model."
@@ -212,108 +283,37 @@ msgstr ""
 "கட்டுப்படுத்தப்பட்ட சீரற்ற விளைவுகள் மாதிரியிலிருந்து பின்புற சராசரி மற்றும் 95 %% "
 "நம்பகமான இடைவெளி மதிப்பீடுகள்."
 
-msgid "Effect Size"
-msgstr "விளைவு அளவு"
+msgid "The prior lower bound is not smaller than the upper bound."
+msgstr "முந்தைய கீழ் எல்லை மேல் எல்லையை விட சிறியதல்ல."
 
-msgid "Heterogeneity"
-msgstr "பன்முகத்தன்மை"
+msgid "Your prior contains negative values."
+msgstr "உங்கள் முன் எதிர்மறை மதிப்புகளைக் கொண்டுள்ளது."
 
-msgid "Effect size"
-msgstr "விளைவு அளவு"
+msgid "Your prior contains positive values."
+msgstr "உங்கள் முன் நேர்மறையான மதிப்புகள் உள்ளன."
 
-msgid "Density"
-msgstr "அடர்த்தி"
+msgid "No positive numbers found in %s"
+msgstr "%s இல் நேர்மறையான எண்கள் இல்லை"
 
-msgid "Prior and Posteriors"
-msgstr "முன் மற்றும் போச்டீரியர்ச்"
+msgid "No negative numbers found in %s"
+msgstr "%s இல் எதிர்மறை எண்கள் இல்லை"
 
-msgid "Fixed H"
-msgstr "நிலையான ம"
+msgid "The 95%% CI Lower Bound must be smaller than the Upper Bound."
+msgstr "95 %% தொஒ லோயர் பவுண்ட் மேல் எல்லையை விட சிறியதாக இருக்க வேண்டும்."
 
-msgid "Random H"
-msgstr "சீரற்ற ம"
-
-msgid "Averaged H"
-msgstr "சராசரி ம"
-
-msgid "Prior H"
-msgstr "முன் ம"
-
-msgid "Ordered H"
-msgstr "ஆர்டர் செய்யப்பட்ட ம"
-
-msgid "Forest Plot"
-msgstr "வன சூழ்ச்சி"
-
-msgid "Observed study effects"
-msgstr "கவனிக்கப்பட்ட ஆய்வு விளைவுகள்"
-
-msgid "Estimated study effects"
-msgstr "மதிப்பிடப்பட்ட ஆய்வு விளைவுகள்"
-
-msgid "Observed and estimated study effects"
-msgstr "கவனிக்கப்பட்ட மற்றும் மதிப்பிடப்பட்ட ஆய்வு விளைவுகள்"
-
-msgid "Cumulative forest plot"
-msgstr "ஒட்டுமொத்த வன சூழ்ச்சி"
-
-msgid "Overall effect size"
-msgstr "ஒட்டுமொத்த விளைவு அளவு"
-
-msgid "Sequential Analysis"
-msgstr "தொடர்ச்சியான பகுப்பாய்வு"
-
-msgid "Bayes factors effect size"
-msgstr "பேயச் காரணிகள் விளைவு அளவு"
-
-msgid "Bayes factors heterogeneity"
-msgstr "பேயச் காரணிகள் பன்முகத்தன்மை"
-
-msgid "Posterior model probabilities"
-msgstr "பின்புற மாதிரி நிகழ்தகவுகள்"
-
-msgid "Evidence for random effects"
-msgstr "சீரற்ற விளைவுகளுக்கான சான்றுகள்"
-
-msgid "Evidence for fixed effects"
-msgstr "நிலையான விளைவுகளுக்கான சான்றுகள்"
-
-msgid "random"
-msgstr "சீரற்ற"
-
-msgid "fixed"
-msgstr "சரி"
-
-msgid "Anecdotal"
-msgstr "நிகழ்வு"
-
-msgid "Moderate"
-msgstr "மிதமான"
-
-msgid "Strong"
-msgstr "வலுவான"
-
-msgid "Very Strong"
-msgstr "மிகவும் வலுவானது"
-
-msgid "Extreme"
-msgstr "எக்ச்ட்ரீம்"
-
-msgid "Evidence for %s:"
-msgstr "%s க்கான சான்றுகள்:"
-
-msgid "Plotting failed: The Bayes factors contain infinity."
-msgstr "சூழ்ச்சி தோல்வியுற்றது: பேயச் காரணிகளில் முடிவிலி உள்ளது."
-
-msgid "Studies"
-msgstr "ஆய்வுகள்"
+msgid "You cannot set all the prior model probabilties to zero."
+msgstr "எல்லா முந்தைய மாதிரி நிகழ்தகவுகளையும் பூச்சியமாக அமைக்க முடியாது."
 
 msgid ""
-"Posterior model \n"
-" probability"
+"The model could not be fit. Please check the following: Do you have at least "
+"n=2 studies? If the prior is truncated, is it consistent with the data (when "
+"most effect sizes are negative, the analysis may not work when the prior is "
+"constrained to be postive)?"
 msgstr ""
-"பின்புற மாதிரி \n"
-"நிகழ்தகவு"
+"மாதிரி பொருத்தமாக இருக்க முடியாது. தயவுசெய்து பின்வருவனவற்றைச் சரிபார்க்கவும்: "
+"உங்களிடம் குறைந்தது n = 2 ஆய்வுகள் உள்ளதா? முந்தையது துண்டிக்கப்பட்டால், அது தரவுகளுடன் "
+"ஒத்துப்போகிறதா (பெரும்பாலான விளைவு அளவுகள் எதிர்மறையாக இருக்கும்போது, முந்தையது "
+"போச்டிவ் எனக் கட்டுப்படுத்தப்படும்போது பகுப்பாய்வு செயல்படாது)?"
 
 msgid "Prior and posterior plot"
 msgstr "முன் மற்றும் பின்புற சூழ்ச்சி"
@@ -385,9 +385,6 @@ msgstr "மீதமுள்ள பன்முகத்தன்மை"
 msgid "Some GLMM heterogeneity tests could not be computed for this model fit."
 msgstr ""
 
-msgid "Metafor R Code"
-msgstr "மெட்டாஃபோர் ஆர் குறியீடு"
-
 msgid "Cochran-Mantel-Haenszel"
 msgstr "கோக்ரான்-மாண்டல்-ஏன்செல்"
 
@@ -397,175 +394,55 @@ msgstr "மாண்டல்-ஏன்செல்"
 msgid "Tarone"
 msgstr "டரோன்"
 
-msgid "All standard errors must be positive."
-msgstr "அனைத்து நிலையான பிழைகளும் நேர்மறையாக இருக்க வேண்டும்."
-
-msgid "Estimating Meta-Analytic Model"
-msgstr "மேவு பகுப்பாய்வு மாதிரியை மதிப்பிடுதல்"
-
-msgid "Full dataset"
-msgstr "முழு தரவுத்தொகுப்பு"
-
-msgid "Estimating Subgroup Models"
-msgstr "துணைக்குழு மாதிரிகளை மதிப்பிடுதல்"
-
-msgid ""
-"The loaded distance matrix for '%1$s' does not match the dataset. The "
-"following levels are missing: %2$s."
-msgstr ""
-"'%1$s' க்கான ஏற்றப்பட்ட தூர அணி தரவுத்தொகுப்புடன் பொருந்தவில்லை. பின்வரும் நிலைகள் "
-"காணவில்லை: %2$s."
-
-msgid ""
-"The loaded correlation matrix for '%1$s' does not match the dataset. The "
-"following levels are missing: %2$s."
-msgstr ""
-"'%1$s' க்கான ஏற்றப்பட்ட தொடர்பு அணி தரவுத்தொகுப்புடன் பொருந்தவில்லை. பின்வரும் நிலைகள் "
-"காணவில்லை: %2$s."
-
-msgid "All observations were removed as influential."
-msgstr "அனைத்து அவதானிப்புகளும் செல்வாக்குமிக்கவை."
-
-msgid "Meta-Analytic Tests"
-msgstr "மேவு பகுப்பாய்வு சோதனைகள்"
-
-msgid "Test"
-msgstr "சோதனை"
-
-msgid "p"
-msgstr "ப"
-
-msgid "p (permutation)"
-msgstr "பி (வரிசைமாற்றம்)"
-
-msgid "The model for subgroup '%1$s' failed with the following error: %2$s"
-msgstr "துணைக்குழுவின் மாதிரி ' %1$s' பின்வரும் பிழையுடன் தோல்வியடைந்தது: %2$s"
-
-msgid "Error:"
-msgstr "பிழை:"
-
-msgid "Moderation test based on a Wald-type F-test."
-msgstr ""
-
-msgid "Moderation test based on a Wald-type chi-squared test."
-msgstr ""
-
-msgid "Meta-Analytic Estimates"
-msgstr "மேவு பகுப்பாய்வு மதிப்பீடுகள்"
-
-msgid "Estimate"
-msgstr "மதிப்பிடு"
-
-msgid "Heterogeneity Level"
-msgstr "பன்முகத்தன்மை நிலை"
-
-msgid "Fit Measures"
-msgstr "பொருத்தமான நடவடிக்கைகள்"
-
-msgid "Observations"
-msgstr "அவதானிப்புகள்"
-
-msgid "Log Lik."
-msgstr "பதிவு லிக்."
-
-msgid "Deviance"
-msgstr "விலகல்"
-
-msgid "AIC"
-msgstr "எஐசி"
-
-msgid "BIC"
-msgstr "பிஐசி"
-
-msgid "AICc"
-msgstr "எஐசிசி"
-
-msgid "R²"
-msgstr "R²"
-
-msgid "Effect Size Meta-Regression Terms Tests"
-msgstr "விளைவு அளவு மெட்டா-பின்னடைவு விதிமுறைகள் சோதனைகள்"
-
-msgid "Heterogeneity Meta-Regression Terms Tests"
-msgstr "பன்முகத்தன்மை மெட்டா-பின்னடைவு விதிமுறைகள் சோதனைகள்"
-
-msgid "F"
-msgstr "எஃப்"
-
-msgid "Qₘ"
-msgstr "Qₘ"
-
-msgid "df₁"
-msgstr "டிஎப்₁"
-
-msgid "df"
-msgstr "டிஎஃப்"
-
-msgid "df₂"
-msgstr "டிஎப்₂"
-
-msgid "Term tests based on Wald-type chi-squared tests."
-msgstr ""
-
-msgid "Warning:"
-msgstr "எச்சரிக்கை:"
-
-msgid "Effect Size Meta-Regression Coefficients"
-msgstr "விளைவு அளவு மெட்டா-பின்னடைவு குணகங்கள்"
-
-msgid "Heterogeneity Meta-Regression Coefficients"
-msgstr "பன்முகத்தன்மை மெட்டா-பின்னடைவு குணகங்கள்"
-
-msgid "t"
-msgstr "டி"
-
-msgid "z"
-msgstr "ஔ"
-
-msgid "Effect Size Meta-Regression Correlation Matrix"
-msgstr "விளைவு அளவு மெட்டா-பின்னடைவு தொடர்பு அணி"
-
-msgid "Heterogeneity Meta-Regression Correlation Matrix"
-msgstr "பன்முகத்தன்மை மெட்டா-பின்னடைவு தொடர்பு அணி"
+msgid "Bubble Plots"
+msgstr "குமிழி அடுக்கு"
 
 msgid "Subgroup: %1$s"
 msgstr "துணைக்குழு: %1$s"
 
-msgid "Estimated Marginal Means and Contrasts Summary"
-msgstr "மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகள் மற்றும் முரண்பாடுகள் சுருக்கம்"
-
-msgid "Estimated Marginal Means / Contrasts"
-msgstr "மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகள் / முரண்பாடுகள்"
-
-msgid "(Effect Size)"
-msgstr "(விளைவு அளவு)"
-
-msgid "(Heterogeneity)"
-msgstr "(பன்முகத்தன்மை)"
-
-msgid "Adjusted Estimate"
-msgstr "சரிசெய்யப்பட்ட மதிப்பீடு"
-
-msgid "Estimated Marginal Means"
-msgstr "மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகள்"
-
-msgid "Level"
-msgstr "நிலை"
-
-msgid "Contrasts"
-msgstr "முரண்பாடுகள்"
-
-msgid "Comparison"
-msgstr "ஒப்பீடு"
-
-msgid "Contrast tests based on Wald-type z-tests."
-msgstr ""
-
-msgid "Bubble Plots"
-msgstr "குமிழி அடுக்கு"
-
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
+
+msgid "Profile Likelihood Plot"
+msgstr "சுயவிவர நிகழ்தகவு சூழ்ச்சி"
+
+msgid ""
+"Profile likelihood is not available for models that contain meta-regression "
+"on heterogeneity."
+msgstr ""
+"பன்முகத்தன்மை குறித்த மெட்டா-பின்னடைவு கொண்ட மாதிரிகளுக்கு சுயவிவர சாத்தியக்கூறு "
+"கிடைக்கவில்லை."
+
+msgid "Baujat Plot"
+msgstr "ப அயு சாத் சூழ்ச்சி"
+
+msgid ""
+"Baujat plot is not available for models that contain meta-regression on "
+"heterogeneity."
+msgstr ""
+"பன்முகத்தன்மை குறித்த மெட்டா-பின்னடைவு கொண்ட மாதிரிகளுக்கு ப அயு சாத் சூழ்ச்சி "
+"கிடைக்கவில்லை."
+
+msgid "Squared Pearson Residual"
+msgstr "ச்கொயர் பியர்சன் எஞ்சியவர்"
+
+msgid "Influence on Fitted Value"
+msgstr "பொருத்தப்பட்ட மதிப்பில் செல்வாக்கு"
+
+msgid "Residual Funnel Plot"
+msgstr "மீதமுள்ள புனல் சூழ்ச்சி"
+
+msgid "Residual Value"
+msgstr "மீதமுள்ள மதிப்பு"
+
+msgid "Standard Error"
+msgstr "நிலையான பிழை"
+
+msgid "Profile Likelihood"
+msgstr "சுயவிவர வாய்ப்பு"
+
+msgid "Variance Inflation Summary"
+msgstr "மாறுபாடு பணவீக்க சுருக்கம்"
 
 msgid "Effect Size Meta-Regression Variance Inflation"
 msgstr "விளைவு அளவு மெட்டா-பின்னடைவு மாறுபாடு பணவீக்கம்"
@@ -639,46 +516,297 @@ msgstr "நோயறிதல் துணைக்குழு மாதிர�
 msgid "Diagnostics are based on the non-clustered model."
 msgstr "கண்டறிதல் அல்லாத கிளச்டர்டு மாதிரியை அடிப்படையாகக் கொண்டது."
 
-msgid "Column name %s already exists in the dataset."
-msgstr "நெடுவரிசை பெயர் %s ஏற்கனவே தரவுத்தொகுப்பில் உள்ளன."
+msgid "Estimated Marginal Means and Contrasts Summary"
+msgstr "மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகள் மற்றும் முரண்பாடுகள் சுருக்கம்"
 
-msgid "Profile Likelihood Plot"
-msgstr "சுயவிவர நிகழ்தகவு சூழ்ச்சி"
+msgid "Estimated Marginal Means / Contrasts"
+msgstr "மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகள் / முரண்பாடுகள்"
+
+msgid "(Effect Size)"
+msgstr "(விளைவு அளவு)"
+
+msgid "(Heterogeneity)"
+msgstr "(பன்முகத்தன்மை)"
+
+msgid "Adjusted Estimate"
+msgstr "சரிசெய்யப்பட்ட மதிப்பீடு"
+
+msgid "Estimated Marginal Means"
+msgstr "மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகள்"
+
+msgid "Level"
+msgstr "நிலை"
+
+msgid "Estimate"
+msgstr "மதிப்பிடு"
+
+msgid "Heterogeneity Level"
+msgstr "பன்முகத்தன்மை நிலை"
+
+msgid "t"
+msgstr "டி"
+
+msgid "z"
+msgstr "ஔ"
+
+msgid "df"
+msgstr "டிஎஃப்"
+
+msgid "p"
+msgstr "ப"
+
+msgid "Contrasts"
+msgstr "முரண்பாடுகள்"
+
+msgid "Comparison"
+msgstr "ஒப்பீடு"
+
+msgid "Contrast tests based on Wald-type z-tests."
+msgstr ""
+
+msgid "Mean - %1$sSD"
+msgstr "சராசரி - %1$s திட நிலை இயக்கி"
+
+msgid "Mean + %1$sSD"
+msgstr "சராசரி + %1$s திட நிலை இயக்கி"
+
+msgid "Adjusted estimate"
+msgstr "சரிசெய்யப்பட்ட மதிப்பீடு"
 
 msgid ""
-"Profile likelihood is not available for models that contain meta-regression "
-"on heterogeneity."
+"Each marginal mean estimate is averaged across the levels of the remaining "
+"predictors."
 msgstr ""
-"பன்முகத்தன்மை குறித்த மெட்டா-பின்னடைவு கொண்ட மாதிரிகளுக்கு சுயவிவர சாத்தியக்கூறு "
-"கிடைக்கவில்லை."
-
-msgid "Baujat Plot"
-msgstr "ப அயு சாத் சூழ்ச்சி"
+"ஒவ்வொரு விளிம்பு சராசரி மதிப்பீடும் மீதமுள்ள முன்னறிவிப்பாளர்களின் அளவுகளில் சராசரியாக "
+"உள்ளது."
 
 msgid ""
-"Baujat plot is not available for models that contain meta-regression on "
-"heterogeneity."
+"Each marginal mean estimate is averaged across the levels of the remaining "
+"predictors in a given subgroup."
 msgstr ""
-"பன்முகத்தன்மை குறித்த மெட்டா-பின்னடைவு கொண்ட மாதிரிகளுக்கு ப அயு சாத் சூழ்ச்சி "
-"கிடைக்கவில்லை."
+"ஒவ்வொரு விளிம்பு சராசரி மதிப்பீடும் கொடுக்கப்பட்ட துணைக்குழுவில் மீதமுள்ள "
+"முன்னறிவிப்பாளர்களின் அளவுகளில் சராசரியாக உள்ளது."
 
-msgid "Squared Pearson Residual"
-msgstr "ச்கொயர் பியர்சன் எஞ்சியவர்"
+#, fuzzy
+msgid ""
+"NAs in the marginal mean estimates were introduced due to the %1$s "
+"transformation. Please verify that you are using the correct effect size "
+"transformation."
+msgstr ""
+"%1$s உருமாற்றம் காரணமாக விளிம்பு சராசரி மதிப்பீட்டில் நா கள் அறிமுகப்படுத்தப்பட்டன. நீங்கள் "
+"சரியான விளைவு அளவு மாற்றத்தைப் பயன்படுத்துகிறீர்கள் என்பதை சரிபார்க்கவும்."
 
-msgid "Influence on Fitted Value"
-msgstr "பொருத்தப்பட்ட மதிப்பில் செல்வாக்கு"
+msgid ""
+"The marginal mean estimates and intervals are transformed using %1$s "
+"transformation. For nonlinear transformations, transformed marginal means "
+"are interpreted as medians on the transformed scale."
+msgstr ""
 
-msgid "Residual Funnel Plot"
-msgstr "மீதமுள்ள புனல் சூழ்ச்சி"
+msgid "The estimates and intervals correspond to %1$s."
+msgstr "மதிப்பீடுகள் மற்றும் இடைவெளிகள் %1$s உடன் ஒத்திருக்கும்."
 
-msgid "Model Summary"
-msgstr "மாதிரி சுருக்கம்"
+msgid ""
+"Each contrast is averaged across the levels of the remaining predictors."
+msgstr "ஒவ்வொரு மாறுபாடும் மீதமுள்ள முன்கணிப்பாளர்களின் அளவுகளில் சராசரியாக உள்ளது."
+
+msgid ""
+"Contrasts of estimates marginal means cannot be transformed via the effect "
+"size transformation."
+msgstr ""
+"மதிப்பீடுகளின் முரண்பாடுகளை விளைவு அளவு மாற்றத்தின் மூலம் விளிம்பு வழிமுறைகளை மாற்ற "
+"முடியாது."
+
+msgid ""
+"Contrasts of estimated marginal means are adjusted for multiple comparisons "
+"using %1$s correction."
+msgstr ""
+"மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகளின் முரண்பாடுகள் %1$s திருத்தத்தைப் பயன்படுத்தி பல "
+"ஒப்பீடுகளுக்கு சரிசெய்யப்படுகின்றன."
+
+msgid ""
+"Contrasts of estimated marginal means cannot be transformed via the link "
+"function. As such, the contrasts are summarized on the model scale: log(𝜏²)."
+msgstr ""
+"மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகளின் முரண்பாடுகளை இணைப்பு செயல்பாடு வழியாக மாற்ற "
+"முடியாது. எனவே, முரண்பாடுகள் மாதிரி அளவில் சுருக்கப்பட்டுள்ளன: பதிவு (𝜏²)."
+
+msgid ""
+"Contrasts of estimated marginal means cannot be transformed via the "
+"heterogeneity transformation. As such, the contrasts are summarized as 𝜏²."
+msgstr ""
+"மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகளின் முரண்பாடுகளை பன்முகத்தன்மை மாற்றத்தின் மூலம் மாற்ற "
+"முடியாது. எனவே, முரண்பாடுகள் 𝜏² என சுருக்கப்பட்டுள்ளன."
+
+msgid "Estimating Meta-Analytic Model"
+msgstr "மேவு பகுப்பாய்வு மாதிரியை மதிப்பிடுதல்"
+
+msgid "Full dataset"
+msgstr "முழு தரவுத்தொகுப்பு"
+
+msgid "Estimating Subgroup Models"
+msgstr "துணைக்குழு மாதிரிகளை மதிப்பிடுதல்"
+
+msgid ""
+"The loaded distance matrix for '%1$s' does not match the dataset. The "
+"following levels are missing: %2$s."
+msgstr ""
+"'%1$s' க்கான ஏற்றப்பட்ட தூர அணி தரவுத்தொகுப்புடன் பொருந்தவில்லை. பின்வரும் நிலைகள் "
+"காணவில்லை: %2$s."
+
+msgid ""
+"The loaded correlation matrix for '%1$s' does not match the dataset. The "
+"following levels are missing: %2$s."
+msgstr ""
+"'%1$s' க்கான ஏற்றப்பட்ட தொடர்பு அணி தரவுத்தொகுப்புடன் பொருந்தவில்லை. பின்வரும் நிலைகள் "
+"காணவில்லை: %2$s."
+
+msgid "All observations were removed as influential."
+msgstr "அனைத்து அவதானிப்புகளும் செல்வாக்குமிக்கவை."
+
+msgid "Intercept"
+msgstr "இடைமறிப்பு"
+
+msgid "%1$s: not available"
+msgstr ""
+
+msgid "Residual heterogeneity"
+msgstr "மீதமுள்ள பன்முகத்தன்மை"
+
+#, fuzzy
+msgid "Moderation (effect size): %1$s"
+msgstr "மிதமான (விளைவு அளவு): %1$s"
+
+#, fuzzy
+msgid "Moderation (heterogeneity): %1$s"
+msgstr "மிதமான (பன்முகத்தன்மை): %1$s"
+
+msgid "Moderation: %1$s"
+msgstr "மிதமான: %1$s"
+
+msgid "%s%% CI"
+msgstr "%s%% தொஒ"
+
+msgid "%s%% PI"
+msgstr "%s %% PI"
+
+msgid "Subgroup"
+msgstr "துணைக்குழு"
+
+msgid "Warning:"
+msgstr "எச்சரிக்கை:"
+
+msgid ""
+"Cluster-robust inference has very low effective degrees of freedom. When "
+"Satterthwaite df < 4, p-values should be interpreted with extreme caution."
+msgstr ""
+
+msgid ""
+"Knapp-Hartung inference is based on very few residual degrees of freedom; "
+"results can be sensitive and should be interpreted cautiously."
+msgstr ""
+
+msgid ""
+"The model estimation failed with the following message: %1$s. Please, "
+"consider simplifying the model."
+msgstr ""
+"மாதிரி மதிப்பீடு பின்வரும் செய்தியுடன் தோல்வியடைந்தது: %1$s. தயவுசெய்து, மாதிரியை "
+"எளிதாக்குவதைக் கவனியுங்கள்."
+
+msgid ""
+"The cluster-robust standard errors could not be computed. Please, consider "
+"modifying the clustering settings in the 'Advanced' section."
+msgstr ""
+"கிளச்டர்-ரோபச்ட் நிலையான பிழைகள் கணக்கிட முடியவில்லை. தயவுசெய்து, 'மேம்பட்ட' பிரிவில் "
+"கிளச்டரிங் அமைப்புகளை மாற்றியமைப்பதைக் கவனியுங்கள்."
+
+msgid "Fewer than two estimates."
+msgstr "இரண்டு மதிப்பீடுகளுக்கு குறைவாக."
+
+msgid ""
+"The selected 'Method' requires specification of the 'Weights' option in the "
+"'Advanced' section."
+msgstr ""
+"தேர்ந்தெடுக்கப்பட்ட 'முறை' 'மேம்பட்ட' பிரிவில் 'எடைகள்' விருப்பத்தின் விவரக்குறிப்பு "
+"தேவைப்படுகிறது."
+
+msgid ""
+"The GLMM could not be estimated for the selected model. This can happen with "
+"sparse event counts, risk differences, random study effects, or a moderator "
+"structure that is too complex for the data. Try simplifying the moderator "
+"model, using the fixed study-effects GLMM, changing the effect-size measure "
+"if appropriate, or centering/scaling continuous moderators.\n"
+"\n"
+"Metafor reported: Cannot fit ML model."
+msgstr ""
 
 msgid "Meta-Regression Summary"
 msgstr "மெட்டா-பின்னடைவு சுருக்கம்"
 
-msgid "Variance Inflation Summary"
-msgstr "மாறுபாடு பணவீக்க சுருக்கம்"
+msgid "Effect Size Meta-Regression Terms Tests"
+msgstr "விளைவு அளவு மெட்டா-பின்னடைவு விதிமுறைகள் சோதனைகள்"
+
+msgid "Heterogeneity Meta-Regression Terms Tests"
+msgstr "பன்முகத்தன்மை மெட்டா-பின்னடைவு விதிமுறைகள் சோதனைகள்"
+
+msgid "F"
+msgstr "எஃப்"
+
+msgid "Qₘ"
+msgstr "Qₘ"
+
+msgid "df₁"
+msgstr "டிஎப்₁"
+
+msgid "df₂"
+msgstr "டிஎப்₂"
+
+msgid "p (permutation)"
+msgstr "பி (வரிசைமாற்றம்)"
+
+msgid "Term tests based on Wald-type chi-squared tests."
+msgstr ""
+
+msgid "Effect Size Meta-Regression Coefficients"
+msgstr "விளைவு அளவு மெட்டா-பின்னடைவு குணகங்கள்"
+
+msgid "Heterogeneity Meta-Regression Coefficients"
+msgstr "பன்முகத்தன்மை மெட்டா-பின்னடைவு குணகங்கள்"
+
+msgid "Effect Size Meta-Regression Correlation Matrix"
+msgstr "விளைவு அளவு மெட்டா-பின்னடைவு தொடர்பு அணி"
+
+msgid "Heterogeneity Meta-Regression Correlation Matrix"
+msgstr "பன்முகத்தன்மை மெட்டா-பின்னடைவு தொடர்பு அணி"
+
+msgid "Subgroup %1$s:"
+msgstr "துணைக்குழு %1$s:"
+
+msgid ""
+"%1$sThe term %2$s was completely removed from the model. Possible causes are "
+"missing values, collinear predictors, or missing crossed cells in an "
+"interaction term."
+msgstr ""
+"%1$sthe கால %2$s மாதிரியிலிருந்து முற்றிலும் அகற்றப்பட்டது. சாத்தியமான காரணங்கள் "
+"மதிப்புகள், கோலைனியர் முன்னறிவிப்பாளர்கள் அல்லது ஒரு தொடர்பு காலங்களில் குறுக்குவெட்டு "
+"செல்களைக் காணவில்லை."
+
+msgid ""
+"%1$sThe term %2$s was partilly removed (%3$i/%4$i coefficients) from the "
+"model. Possible causes are missing values, collinear predictors, or missing "
+"crossed cells in an interaction term."
+msgstr ""
+"%1$sthe கால%2$s மாதிரியிலிருந்து பார்ட்டிலி அகற்றப்பட்டது (%3$i/%4$i குணகங்கள்). "
+"சாத்தியமான காரணங்கள் மதிப்புகள், கோலைனியர் முன்னறிவிப்பாளர்கள் அல்லது ஒரு தொடர்பு "
+"காலங்களில் குறுக்குவெட்டு செல்களைக் காணவில்லை."
+
+msgid ""
+"%1$sThe following coefficients were removed from the model: %2$s. Possible "
+"causes are missing values, collinear predictors, or missing crossed cells in "
+"an interaction term."
+msgstr ""
+"%1$sthe பின்வரும் குணகங்கள் மாதிரியிலிருந்து அகற்றப்பட்டன: %2$s. சாத்தியமான காரணங்கள் "
+"மதிப்புகள், கோலைனியர் முன்னறிவிப்பாளர்கள் அல்லது ஒரு தொடர்பு காலங்களில் குறுக்குவெட்டு "
+"செல்களைக் காணவில்லை."
 
 msgid "Pooled effect"
 msgstr "பூல் விளைவு"
@@ -709,130 +837,6 @@ msgstr "பன்முகத்தன்மை (Coef: %1$s)"
 msgid "Heterogeneity coefficients %1$s correspond to %2$s."
 msgstr "பன்முகத்தன்மை குணகங்கள் %1$s %2$s உடன் ஒத்திருக்கும்."
 
-msgid "Mean - %1$sSD"
-msgstr "சராசரி - %1$s திட நிலை இயக்கி"
-
-msgid "Mean + %1$sSD"
-msgstr "சராசரி + %1$s திட நிலை இயக்கி"
-
-msgid "Adjusted estimate"
-msgstr "சரிசெய்யப்பட்ட மதிப்பீடு"
-
-msgid "Distance Matrix"
-msgstr "தொலைதூர அணி"
-
-msgid "Correlation Matrix"
-msgstr "தொடர்பு அணி"
-
-msgid "Residual Value"
-msgstr "மீதமுள்ள மதிப்பு"
-
-msgid "Standard Error"
-msgstr "நிலையான பிழை"
-
-msgid "Profile Likelihood"
-msgstr "சுயவிவர வாய்ப்பு"
-
-msgid ""
-"Clustering is not supported when specifying a heterogeneity meta-regression "
-"model."
-msgstr ""
-"ஒரு பன்முகத்தன்மை மெட்டா-பின்னடைவு மாதிரியைக் குறிப்பிடும்போது கிளச்டரிங் "
-"ஆதரிக்கப்படவில்லை."
-
-msgid "The fixed value for tau2 must be a positive number."
-msgstr "TAU2 க்கான நிலையான மதிப்பு நேர்மறை எண்ணாக இருக்க வேண்டும்."
-
-msgid ""
-"The custom R code for extending the metafor call failed with the following "
-"message: %1$s"
-msgstr ""
-"மெட்டாஃபோர் அழைப்பை நீட்டிப்பதற்கான தனிப்பயன் ஆர் குறியீடு பின்வரும் செய்தியுடன் "
-"தோல்வியடைந்தது: %1$s"
-
-msgid "Fisher's z to r"
-msgstr "ஃபிசரின் சட் முதல் ஆர்"
-
-msgid "exponential"
-msgstr "அடுக்குக்குறி"
-
-msgid "log odds to proportions"
-msgstr "விகிதாச்சாரத்திற்கு முரண்பாடுகள்"
-
-msgid "log odds to SMD (normal)"
-msgstr "SMD (இயல்பானது) க்கு பதிவு முரண்பாடுகள்"
-
-msgid "log odds to SMD (logistic)"
-msgstr "SMD க்கு பதிவு முரண்பாடுகள் (லாசிச்டிக்)"
-
-msgid "SMD to log odds (normal)"
-msgstr "பதிவு செய்ய SMD (இயல்பானது)"
-
-msgid "SMD to log odds (logistic)"
-msgstr "பதிவு செய்ய SMD (லாசிச்டிக்)"
-
-msgid "Hakstian & Whalen inverse α"
-msgstr "அக்ச்டியன் & வேலன் தலைகீழ் α"
-
-msgid "Bonett inverse α"
-msgstr "போனெட் தலைகீழ் α"
-
-msgid "z to R²"
-msgstr "இந்த r² உடன்"
-
-msgid "SMD to Cohen's U₁"
-msgstr "SMD பெறுநர் COHEN’S U₁"
-
-msgid "SMD to Cohen's U₂"
-msgstr "SMD பெறுநர் COHEN’S U₂"
-
-msgid "SMD to Cohen's U₃"
-msgstr "SMD பெறுநர் COHEN’S U₃"
-
-msgid "SMD to CLES, Pr(superiority)"
-msgstr "SMD பெறுநர் CLES, PR (மேன்மை)"
-
-msgid "None"
-msgstr "எதுவுமில்லை"
-
-msgid "Bonferroni"
-msgstr "போன்பெரோரோனி"
-
-msgid "Holm"
-msgstr "ஓல்ம்"
-
-msgid "Hochberg"
-msgstr "ஓட்ச்பெர்க்"
-
-msgid "Hommel"
-msgstr "பம்பல்பீ"
-
-msgid "Benjamini-Hochberg"
-msgstr "பெஞ்சமினி-ஓச்ச்பெர்க்"
-
-msgid "Benjamini-Yekutieli"
-msgstr "என்ன"
-
-msgid "Intercept"
-msgstr "இடைமறிப்பு"
-
-msgid "%1$s: not available"
-msgstr ""
-
-msgid "Residual heterogeneity"
-msgstr "மீதமுள்ள பன்முகத்தன்மை"
-
-#, fuzzy
-msgid "Moderation (effect size): %1$s"
-msgstr "மிதமான (விளைவு அளவு): %1$s"
-
-#, fuzzy
-msgid "Moderation (heterogeneity): %1$s"
-msgstr "மிதமான (பன்முகத்தன்மை): %1$s"
-
-msgid "Moderation: %1$s"
-msgstr "மிதமான: %1$s"
-
 msgid "The pooled effect size could not be calculated."
 msgstr "பூல் செய்யப்பட்ட விளைவு அளவைக் கணக்கிட முடியவில்லை."
 
@@ -854,14 +858,53 @@ msgstr "(கோஃப்: %1$s)"
 msgid "Subgroup differences"
 msgstr "துணைக்குழு வேறுபாடுகள்"
 
-msgid "%s%% CI"
-msgstr "%s%% தொஒ"
+msgid "Model Summary"
+msgstr "மாதிரி சுருக்கம்"
 
-msgid "%s%% PI"
-msgstr "%s %% PI"
+msgid "Meta-Analytic Tests"
+msgstr "மேவு பகுப்பாய்வு சோதனைகள்"
 
-msgid "Subgroup"
-msgstr "துணைக்குழு"
+msgid "Test"
+msgstr "சோதனை"
+
+msgid "The model for subgroup '%1$s' failed with the following error: %2$s"
+msgstr "துணைக்குழுவின் மாதிரி ' %1$s' பின்வரும் பிழையுடன் தோல்வியடைந்தது: %2$s"
+
+msgid "Error:"
+msgstr "பிழை:"
+
+msgid "Moderation test based on a Wald-type F-test."
+msgstr ""
+
+msgid "Moderation test based on a Wald-type chi-squared test."
+msgstr ""
+
+msgid "Meta-Analytic Estimates"
+msgstr "மேவு பகுப்பாய்வு மதிப்பீடுகள்"
+
+msgid "Fit Measures"
+msgstr "பொருத்தமான நடவடிக்கைகள்"
+
+msgid "Observations"
+msgstr "அவதானிப்புகள்"
+
+msgid "Log Lik."
+msgstr "பதிவு லிக்."
+
+msgid "Deviance"
+msgstr "விலகல்"
+
+msgid "AIC"
+msgstr "எஐசி"
+
+msgid "BIC"
+msgstr "பிஐசி"
+
+msgid "AICc"
+msgstr "எஐசிசி"
+
+msgid "R²"
+msgstr "R²"
 
 msgid "Fixed effects tested using z-distribution."
 msgstr "Z- விநியோகத்தைப் பயன்படுத்தி நிலையான விளைவுகள் சோதிக்கப்படுகின்றன."
@@ -871,16 +914,6 @@ msgstr "டி-விநியோகத்தைப் பயன்படுத�
 
 msgid "Fixed effects tested using Knapp and Hartung adjustment."
 msgstr "KNAPP மற்றும் HARTUNG சரிசெய்தலைப் பயன்படுத்தி நிலையான விளைவுகள் சோதிக்கப்பட்டன."
-
-msgid ""
-"Cluster-robust inference has very low effective degrees of freedom. When "
-"Satterthwaite df < 4, p-values should be interpreted with extreme caution."
-msgstr ""
-
-msgid ""
-"Knapp-Hartung inference is based on very few residual degrees of freedom; "
-"results can be sensitive and should be interpreted cautiously."
-msgstr ""
 
 msgid "The heterogeneity model for 𝜏² is specified on the log scale."
 msgstr "𝜏² க்கான பன்முகத்தன்மை மாதிரி பதிவு அளவில் குறிப்பிடப்பட்டுள்ளது."
@@ -979,136 +1012,100 @@ msgstr ""
 msgid "Unadjusted CR0 cluster-robust standard errors were used."
 msgstr ""
 
-msgid ""
-"Each marginal mean estimate is averaged across the levels of the remaining "
-"predictors."
-msgstr ""
-"ஒவ்வொரு விளிம்பு சராசரி மதிப்பீடும் மீதமுள்ள முன்னறிவிப்பாளர்களின் அளவுகளில் சராசரியாக "
-"உள்ளது."
-
-msgid ""
-"Each marginal mean estimate is averaged across the levels of the remaining "
-"predictors in a given subgroup."
-msgstr ""
-"ஒவ்வொரு விளிம்பு சராசரி மதிப்பீடும் கொடுக்கப்பட்ட துணைக்குழுவில் மீதமுள்ள "
-"முன்னறிவிப்பாளர்களின் அளவுகளில் சராசரியாக உள்ளது."
-
-#, fuzzy
-msgid ""
-"NAs in the marginal mean estimates were introduced due to the %1$s "
-"transformation. Please verify that you are using the correct effect size "
-"transformation."
-msgstr ""
-"%1$s உருமாற்றம் காரணமாக விளிம்பு சராசரி மதிப்பீட்டில் நா கள் அறிமுகப்படுத்தப்பட்டன. நீங்கள் "
-"சரியான விளைவு அளவு மாற்றத்தைப் பயன்படுத்துகிறீர்கள் என்பதை சரிபார்க்கவும்."
-
-msgid ""
-"The marginal mean estimates and intervals are transformed using %1$s "
-"transformation. For nonlinear transformations, transformed marginal means "
-"are interpreted as medians on the transformed scale."
-msgstr ""
-
-msgid "The estimates and intervals correspond to %1$s."
-msgstr "மதிப்பீடுகள் மற்றும் இடைவெளிகள் %1$s உடன் ஒத்திருக்கும்."
-
-msgid ""
-"Each contrast is averaged across the levels of the remaining predictors."
-msgstr "ஒவ்வொரு மாறுபாடும் மீதமுள்ள முன்கணிப்பாளர்களின் அளவுகளில் சராசரியாக உள்ளது."
-
-msgid ""
-"Contrasts of estimates marginal means cannot be transformed via the effect "
-"size transformation."
-msgstr ""
-"மதிப்பீடுகளின் முரண்பாடுகளை விளைவு அளவு மாற்றத்தின் மூலம் விளிம்பு வழிமுறைகளை மாற்ற "
-"முடியாது."
-
-msgid ""
-"Contrasts of estimated marginal means are adjusted for multiple comparisons "
-"using %1$s correction."
-msgstr ""
-"மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகளின் முரண்பாடுகள் %1$s திருத்தத்தைப் பயன்படுத்தி பல "
-"ஒப்பீடுகளுக்கு சரிசெய்யப்படுகின்றன."
-
-msgid ""
-"Contrasts of estimated marginal means cannot be transformed via the link "
-"function. As such, the contrasts are summarized on the model scale: log(𝜏²)."
-msgstr ""
-"மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகளின் முரண்பாடுகளை இணைப்பு செயல்பாடு வழியாக மாற்ற "
-"முடியாது. எனவே, முரண்பாடுகள் மாதிரி அளவில் சுருக்கப்பட்டுள்ளன: பதிவு (𝜏²)."
-
-msgid ""
-"Contrasts of estimated marginal means cannot be transformed via the "
-"heterogeneity transformation. As such, the contrasts are summarized as 𝜏²."
-msgstr ""
-"மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகளின் முரண்பாடுகளை பன்முகத்தன்மை மாற்றத்தின் மூலம் மாற்ற "
-"முடியாது. எனவே, முரண்பாடுகள் 𝜏² என சுருக்கப்பட்டுள்ளன."
-
 msgid "Permutation p-value is based on %1$s permutations."
 msgstr "வரிசைமாற்றம் p- மதிப்பு %1$s வரிசைமாற்றங்களை அடிப்படையாகக் கொண்டது."
 
 msgid ""
-"The model estimation failed with the following message: %1$s. Please, "
-"consider simplifying the model."
+"Clustering is not supported when specifying a heterogeneity meta-regression "
+"model."
 msgstr ""
-"மாதிரி மதிப்பீடு பின்வரும் செய்தியுடன் தோல்வியடைந்தது: %1$s. தயவுசெய்து, மாதிரியை "
-"எளிதாக்குவதைக் கவனியுங்கள்."
+"ஒரு பன்முகத்தன்மை மெட்டா-பின்னடைவு மாதிரியைக் குறிப்பிடும்போது கிளச்டரிங் "
+"ஆதரிக்கப்படவில்லை."
+
+msgid "The fixed value for tau2 must be a positive number."
+msgstr "TAU2 க்கான நிலையான மதிப்பு நேர்மறை எண்ணாக இருக்க வேண்டும்."
 
 msgid ""
-"The cluster-robust standard errors could not be computed. Please, consider "
-"modifying the clustering settings in the 'Advanced' section."
+"The custom R code for extending the metafor call failed with the following "
+"message: %1$s"
 msgstr ""
-"கிளச்டர்-ரோபச்ட் நிலையான பிழைகள் கணக்கிட முடியவில்லை. தயவுசெய்து, 'மேம்பட்ட' பிரிவில் "
-"கிளச்டரிங் அமைப்புகளை மாற்றியமைப்பதைக் கவனியுங்கள்."
+"மெட்டாஃபோர் அழைப்பை நீட்டிப்பதற்கான தனிப்பயன் ஆர் குறியீடு பின்வரும் செய்தியுடன் "
+"தோல்வியடைந்தது: %1$s"
 
-msgid "Fewer than two estimates."
-msgstr "இரண்டு மதிப்பீடுகளுக்கு குறைவாக."
+msgid "Fisher's z to r"
+msgstr "ஃபிசரின் சட் முதல் ஆர்"
 
-msgid ""
-"The selected 'Method' requires specification of the 'Weights' option in the "
-"'Advanced' section."
-msgstr ""
-"தேர்ந்தெடுக்கப்பட்ட 'முறை' 'மேம்பட்ட' பிரிவில் 'எடைகள்' விருப்பத்தின் விவரக்குறிப்பு "
-"தேவைப்படுகிறது."
+msgid "exponential"
+msgstr "அடுக்குக்குறி"
 
-msgid ""
-"The GLMM could not be estimated for the selected model. This can happen with "
-"sparse event counts, risk differences, random study effects, or a moderator "
-"structure that is too complex for the data. Try simplifying the moderator "
-"model, using the fixed study-effects GLMM, changing the effect-size measure "
-"if appropriate, or centering/scaling continuous moderators.\n"
-"\n"
-"Metafor reported: Cannot fit ML model."
-msgstr ""
+msgid "log odds to proportions"
+msgstr "விகிதாச்சாரத்திற்கு முரண்பாடுகள்"
 
-msgid "Subgroup %1$s:"
-msgstr "துணைக்குழு %1$s:"
+msgid "log odds to SMD (normal)"
+msgstr "SMD (இயல்பானது) க்கு பதிவு முரண்பாடுகள்"
 
-msgid ""
-"%1$sThe term %2$s was completely removed from the model. Possible causes are "
-"missing values, collinear predictors, or missing crossed cells in an "
-"interaction term."
-msgstr ""
-"%1$sthe கால %2$s மாதிரியிலிருந்து முற்றிலும் அகற்றப்பட்டது. சாத்தியமான காரணங்கள் "
-"மதிப்புகள், கோலைனியர் முன்னறிவிப்பாளர்கள் அல்லது ஒரு தொடர்பு காலங்களில் குறுக்குவெட்டு "
-"செல்களைக் காணவில்லை."
+msgid "log odds to SMD (logistic)"
+msgstr "SMD க்கு பதிவு முரண்பாடுகள் (லாசிச்டிக்)"
 
-msgid ""
-"%1$sThe term %2$s was partilly removed (%3$i/%4$i coefficients) from the "
-"model. Possible causes are missing values, collinear predictors, or missing "
-"crossed cells in an interaction term."
-msgstr ""
-"%1$sthe கால%2$s மாதிரியிலிருந்து பார்ட்டிலி அகற்றப்பட்டது (%3$i/%4$i குணகங்கள்). "
-"சாத்தியமான காரணங்கள் மதிப்புகள், கோலைனியர் முன்னறிவிப்பாளர்கள் அல்லது ஒரு தொடர்பு "
-"காலங்களில் குறுக்குவெட்டு செல்களைக் காணவில்லை."
+msgid "SMD to log odds (normal)"
+msgstr "பதிவு செய்ய SMD (இயல்பானது)"
 
-msgid ""
-"%1$sThe following coefficients were removed from the model: %2$s. Possible "
-"causes are missing values, collinear predictors, or missing crossed cells in "
-"an interaction term."
-msgstr ""
-"%1$sthe பின்வரும் குணகங்கள் மாதிரியிலிருந்து அகற்றப்பட்டன: %2$s. சாத்தியமான காரணங்கள் "
-"மதிப்புகள், கோலைனியர் முன்னறிவிப்பாளர்கள் அல்லது ஒரு தொடர்பு காலங்களில் குறுக்குவெட்டு "
-"செல்களைக் காணவில்லை."
+msgid "SMD to log odds (logistic)"
+msgstr "பதிவு செய்ய SMD (லாசிச்டிக்)"
+
+msgid "Hakstian & Whalen inverse α"
+msgstr "அக்ச்டியன் & வேலன் தலைகீழ் α"
+
+msgid "Bonett inverse α"
+msgstr "போனெட் தலைகீழ் α"
+
+msgid "z to R²"
+msgstr "இந்த r² உடன்"
+
+msgid "SMD to Cohen's U₁"
+msgstr "SMD பெறுநர் COHEN’S U₁"
+
+msgid "SMD to Cohen's U₂"
+msgstr "SMD பெறுநர் COHEN’S U₂"
+
+msgid "SMD to Cohen's U₃"
+msgstr "SMD பெறுநர் COHEN’S U₃"
+
+msgid "SMD to CLES, Pr(superiority)"
+msgstr "SMD பெறுநர் CLES, PR (மேன்மை)"
+
+msgid "None"
+msgstr "எதுவுமில்லை"
+
+msgid "Bonferroni"
+msgstr "போன்பெரோரோனி"
+
+msgid "Holm"
+msgstr "ஓல்ம்"
+
+msgid "Hochberg"
+msgstr "ஓட்ச்பெர்க்"
+
+msgid "Hommel"
+msgstr "பம்பல்பீ"
+
+msgid "Benjamini-Hochberg"
+msgstr "பெஞ்சமினி-ஓச்ச்பெர்க்"
+
+msgid "Benjamini-Yekutieli"
+msgstr "என்ன"
+
+msgid "Metafor R Code"
+msgstr "மெட்டாஃபோர் ஆர் குறியீடு"
+
+msgid "Distance Matrix"
+msgstr "தொலைதூர அணி"
+
+msgid "Correlation Matrix"
+msgstr "தொடர்பு அணி"
+
+msgid "All standard errors must be positive."
+msgstr "அனைத்து நிலையான பிழைகளும் நேர்மறையாக இருக்க வேண்டும்."
 
 msgid "Error reading the distance matrix file: %1$s"
 msgstr "தூர மேட்ரிக்ச் கோப்பைப் படிப்பதில் பிழை: %1$s"
@@ -1122,6 +1119,145 @@ msgstr ""
 
 msgid "Error reading the correlation matrix file: %1$s"
 msgstr "தொடர்பு மேட்ரிக்ச் கோப்பைப் படிப்பதில் பிழை: %1$s"
+
+msgid "Testing Inclusion of Random Effects / Model Structure"
+msgstr "சீரற்ற விளைவுகள் / மாதிரி கட்டமைப்பைச் சேர்ப்பது"
+
+msgid "Subgroup %1$s: Testing Inclusion of Random Effects / Model Structure"
+msgstr "துணைக்குழு %1$s: சீரற்ற விளைவுகள் / மாதிரி கட்டமைப்பின் சேர்க்கை சோதனை"
+
+msgid "Testing Inclusion of Nested Random Effects: %1$s"
+msgstr "உள்ளமைக்கப்பட்ட சீரற்ற விளைவுகளைச் சேர்ப்பது: %1$s"
+
+msgid "Subgroup %1$s: Testing Inclusion of Nested Random Effects: %2$s"
+msgstr "துணைக்குழு %1$s: உள்ளமைக்கப்பட்ட சீரற்ற விளைவுகளைச் சேர்ப்பது சோதனை: %2$s"
+
+msgid "Random Slopes"
+msgstr "சீரற்ற சரிவுகள்"
+
+msgid "Compound Symmetry"
+msgstr "கூட்டு சமச்சீர்"
+
+msgid "Heteroscedastic Compound Symmetry"
+msgstr "ஈட்டோரோச்கெச்டிக் கலவை சமச்சீர்"
+
+msgid "Unstructured"
+msgstr "கட்டமைக்கப்படாதது"
+
+msgid "Identity"
+msgstr "முற்றொருமை"
+
+msgid "Diagonal"
+msgstr "மூலைவிட்டம்"
+
+msgid "AR(1)"
+msgstr "Ar (1)"
+
+msgid "Heteroskedastic AR(1)"
+msgstr "ஈட்டோரோச்கெச்டாச்டிக் ஏ.ஆர் (1)"
+
+msgid "Continuous-Time AR"
+msgstr "தொடர்ச்சியான நேர ஏ.ஆர்"
+
+msgid "Exponential"
+msgstr "அடுக்குக்குறி"
+
+msgid "Gaussian"
+msgstr "காசியன்"
+
+msgid "Linear"
+msgstr "நேரியல்"
+
+msgid "Rational Quadratic"
+msgstr "பகுத்தறிவு இருபடி"
+
+msgid "Spherical"
+msgstr "கோள"
+
+msgid "Random Effects / Model Stucture Summary"
+msgstr "சீரற்ற விளைவுகள் / மாதிரி ச்டக்சர் சுருக்கம்"
+
+msgid "Simple / Nested Summary"
+msgstr "எளிய / உள்ளமைக்கப்பட்ட சுருக்கம்"
+
+msgid "Estimates"
+msgstr "மதிப்பீடுகள்"
+
+msgid "σ²"
+msgstr ". σ²"
+
+msgid "σ"
+msgstr "a"
+
+msgid "Levels"
+msgstr "நிலைகள்"
+
+msgid "Fixed"
+msgstr "சரி"
+
+msgid "Confidence Intervals"
+msgstr "நம்பிக்கை இடைவெளிகள்"
+
+msgid "Inclusion Tests"
+msgstr "சேர்த்தல் சோதனைகள்"
+
+msgid "Component Inclusion Test"
+msgstr "கூறு சேர்க்கும் சோதனை"
+
+msgid "%1$s: Level Inclusion Test"
+msgstr "%1$s: நிலை சேர்க்கை சோதனை"
+
+msgid "Removed Levels"
+msgstr "அகற்றப்பட்ட நிலைகள்"
+
+msgid "Removed Component"
+msgstr "அகற்றப்பட்ட கூறு"
+
+msgid "LRT"
+msgstr "எல்.ஆர்.டி."
+
+msgid ""
+"Likelihood Ratio Test (LRT) and p-value are based on a comparison with the "
+"complete model."
+msgstr ""
+"நிகழ்தகவு விகித சோதனை (எல்ஆர்டி) மற்றும் பி-மதிப்பு ஆகியவை முழுமையான மாதிரியுடன் "
+"ஒப்பிடுவதை அடிப்படையாகக் கொண்டவை."
+
+msgid "Random Slopes Summary"
+msgstr "சீரற்ற சரிவுகள் சுருக்கம்"
+
+msgid "Structured"
+msgstr "கட்டமைக்கப்பட்ட"
+
+msgid "Summary"
+msgstr "சுருக்கம்"
+
+msgid "Autoregressive"
+msgstr "தன்னியக்க முன்னேற்ற"
+
+msgid "Spatial"
+msgstr "இடஞ்சார்ந்த"
+
+msgid "Known Correlation Summary"
+msgstr "அறியப்பட்ட தொடர்பு சுருக்கம்"
+
+msgid "Sqrt. Estimate"
+msgstr "SQRT. மதிப்பீடு"
+
+msgid "Levels:"
+msgstr "நிலைகள்:"
+
+msgid "Component:"
+msgstr "கூறு:"
+
+msgid "Estimates 𝜏²"
+msgstr "மதிப்பீடுகள் 𝜏²"
+
+msgid "Estimates ρ"
+msgstr "மதிப்பீடுகள்"
+
+msgid "ρ"
+msgstr "r"
 
 msgid "Error reading the variance-covariance matrix file: %1$s"
 msgstr "மாறுபாடு-கோவாரன்ச் மேட்ரிக்ச் கோப்பைப் படிப்பது: %1$s"
@@ -1201,6 +1337,18 @@ msgstr ""
 "குறிப்பிடப்படவில்லை. இயல்புநிலையாக, குழுக்கள் சமமாக இருக்கும் என்று கருதப்படுகிறது."
 
 #, fuzzy
+msgid ""
+"The model was estimated using the selected precomputed working effect-size "
+"variance-covariance matrix."
+msgstr "தயவுசெய்து ஒரு கோப்பை முன்கூட்டிய மாறுபாடு-கோவாரன்ச் மேட்ரிக்சுடன் வழங்கவும்."
+
+#, fuzzy
+msgid ""
+"The model was estimated using a working effect-size variance-covariance "
+"matrix based on %1$s."
+msgstr "மாறுபாடு-கோவாரன்ச் மேட்ரிக்ச் கோப்பைப் படிப்பது: %1$s"
+
+#, fuzzy
 msgid "correlation matrix variables"
 msgstr "தொடர்பு மேட்ரிக்ச் மாறிகள் வழங்கவும்."
 
@@ -1225,18 +1373,6 @@ msgstr ""
 
 msgid "group size 2"
 msgstr ""
-
-#, fuzzy
-msgid ""
-"The model was estimated using the selected precomputed working effect-size "
-"variance-covariance matrix."
-msgstr "தயவுசெய்து ஒரு கோப்பை முன்கூட்டிய மாறுபாடு-கோவாரன்ச் மேட்ரிக்சுடன் வழங்கவும்."
-
-#, fuzzy
-msgid ""
-"The model was estimated using a working effect-size variance-covariance "
-"matrix based on %1$s."
-msgstr "மாறுபாடு-கோவாரன்ச் மேட்ரிக்ச் கோப்பைப் படிப்பது: %1$s"
 
 #, fuzzy
 msgid "with a common correlation of %1$s"
@@ -1267,211 +1403,6 @@ msgstr "%1$s: %2$s"
 
 msgid "Error writing the variance-covariance matrix file: %1$s"
 msgstr "மாறுபாடு எழுதுவது மாறுபாடு-கோவாரன்ச் மேட்ரிக்ச் கோப்பு: %1$s"
-
-msgid "Random Effects / Model Stucture Summary"
-msgstr "சீரற்ற விளைவுகள் / மாதிரி ச்டக்சர் சுருக்கம்"
-
-msgid "Simple / Nested Summary"
-msgstr "எளிய / உள்ளமைக்கப்பட்ட சுருக்கம்"
-
-msgid "Estimates"
-msgstr "மதிப்பீடுகள்"
-
-msgid "σ²"
-msgstr ". σ²"
-
-msgid "σ"
-msgstr "a"
-
-msgid "Levels"
-msgstr "நிலைகள்"
-
-msgid "Fixed"
-msgstr "சரி"
-
-msgid "Confidence Intervals"
-msgstr "நம்பிக்கை இடைவெளிகள்"
-
-msgid "Inclusion Tests"
-msgstr "சேர்த்தல் சோதனைகள்"
-
-msgid "Component Inclusion Test"
-msgstr "கூறு சேர்க்கும் சோதனை"
-
-msgid "%1$s: Level Inclusion Test"
-msgstr "%1$s: நிலை சேர்க்கை சோதனை"
-
-msgid "Removed Levels"
-msgstr "அகற்றப்பட்ட நிலைகள்"
-
-msgid "Removed Component"
-msgstr "அகற்றப்பட்ட கூறு"
-
-msgid "LRT"
-msgstr "எல்.ஆர்.டி."
-
-msgid ""
-"Likelihood Ratio Test (LRT) and p-value are based on a comparison with the "
-"complete model."
-msgstr ""
-"நிகழ்தகவு விகித சோதனை (எல்ஆர்டி) மற்றும் பி-மதிப்பு ஆகியவை முழுமையான மாதிரியுடன் "
-"ஒப்பிடுவதை அடிப்படையாகக் கொண்டவை."
-
-msgid "Random Slopes Summary"
-msgstr "சீரற்ற சரிவுகள் சுருக்கம்"
-
-msgid "Structured"
-msgstr "கட்டமைக்கப்பட்ட"
-
-msgid "Summary"
-msgstr "சுருக்கம்"
-
-msgid "Autoregressive"
-msgstr "தன்னியக்க முன்னேற்ற"
-
-msgid "Spatial"
-msgstr "இடஞ்சார்ந்த"
-
-msgid "Known Correlation Summary"
-msgstr "அறியப்பட்ட தொடர்பு சுருக்கம்"
-
-msgid "Testing Inclusion of Random Effects / Model Structure"
-msgstr "சீரற்ற விளைவுகள் / மாதிரி கட்டமைப்பைச் சேர்ப்பது"
-
-msgid "Subgroup %1$s: Testing Inclusion of Random Effects / Model Structure"
-msgstr "துணைக்குழு %1$s: சீரற்ற விளைவுகள் / மாதிரி கட்டமைப்பின் சேர்க்கை சோதனை"
-
-msgid "Testing Inclusion of Nested Random Effects: %1$s"
-msgstr "உள்ளமைக்கப்பட்ட சீரற்ற விளைவுகளைச் சேர்ப்பது: %1$s"
-
-msgid "Subgroup %1$s: Testing Inclusion of Nested Random Effects: %2$s"
-msgstr "துணைக்குழு %1$s: உள்ளமைக்கப்பட்ட சீரற்ற விளைவுகளைச் சேர்ப்பது சோதனை: %2$s"
-
-msgid "Random Slopes"
-msgstr "சீரற்ற சரிவுகள்"
-
-msgid "Compound Symmetry"
-msgstr "கூட்டு சமச்சீர்"
-
-msgid "Heteroscedastic Compound Symmetry"
-msgstr "ஈட்டோரோச்கெச்டிக் கலவை சமச்சீர்"
-
-msgid "Unstructured"
-msgstr "கட்டமைக்கப்படாதது"
-
-msgid "Identity"
-msgstr "முற்றொருமை"
-
-msgid "Diagonal"
-msgstr "மூலைவிட்டம்"
-
-msgid "AR(1)"
-msgstr "Ar (1)"
-
-msgid "Heteroskedastic AR(1)"
-msgstr "ஈட்டோரோச்கெச்டாச்டிக் ஏ.ஆர் (1)"
-
-msgid "Continuous-Time AR"
-msgstr "தொடர்ச்சியான நேர ஏ.ஆர்"
-
-msgid "Exponential"
-msgstr "அடுக்குக்குறி"
-
-msgid "Gaussian"
-msgstr "காசியன்"
-
-msgid "Linear"
-msgstr "நேரியல்"
-
-msgid "Rational Quadratic"
-msgstr "பகுத்தறிவு இருபடி"
-
-msgid "Spherical"
-msgstr "கோள"
-
-msgid "Sqrt. Estimate"
-msgstr "SQRT. மதிப்பீடு"
-
-msgid "Levels:"
-msgstr "நிலைகள்:"
-
-msgid "Component:"
-msgstr "கூறு:"
-
-msgid "Estimates 𝜏²"
-msgstr "மதிப்பீடுகள் 𝜏²"
-
-msgid "Estimates ρ"
-msgstr "மதிப்பீடுகள்"
-
-msgid "ρ"
-msgstr "r"
-
-msgid "%s Summary"
-msgstr "%s சுருக்கம்"
-
-msgid "metamisc package failed with the following error: '%s'"
-msgstr "பின்வரும் பிழையுடன் மெட்டாமிச்க் தொகுப்பு தோல்வியடைந்தது: '%s'"
-
-msgid "Based on %i studies."
-msgstr "%i நான் படிப்பின் அடிப்படையில்."
-
-msgid "The model was estimated using %1$s method with %2$s link function."
-msgstr "%2$s இணைப்பு செயல்பாட்டுடன் %1$s முறையைப் பயன்படுத்தி மாதிரி மதிப்பிடப்பட்டது."
-
-msgid "The model was estimated using MCMC with %1$s link function."
-msgstr "இந்த மாதிரி %1$s இணைப்பு செயல்பாட்டுடன் MCMC ஐப் பயன்படுத்தி மதிப்பிடப்பட்டது."
-
-msgid "Forest plot"
-msgstr "வன சூழ்ச்சி"
-
-msgid "Observed-Expected Ratio"
-msgstr "கவனிக்கப்பட்ட எதிர்பார்த்த விகிதம்"
-
-msgid "Concordance Statistic"
-msgstr "ஒத்திசைவு புள்ளிவிவரம்"
-
-msgid "Funnel Plot Asymmetry Tests"
-msgstr "புனல் சூழ்ச்சி சமச்சீரற்ற சோதனைகள்"
-
-msgid "Method"
-msgstr "முறை"
-
-msgid "t-statistic"
-msgstr "டி-புள்ளிவிவர"
-
-msgid "The %1$s test failed with the following error: %2$s"
-msgstr "பின்வரும் பிழையுடன் %1$s சோதனை தோல்வியடைந்தது: %2$s"
-
-msgid "Funnel Plot Asymmetry Plots"
-msgstr "புனல் சூழ்ச்சி சமச்சீரற்ற அடுக்கு"
-
-msgid "Egger (unweighted)"
-msgstr "Egger (கவனிக்கப்படாதது)"
-
-msgid "Egger (multiplicative overdispersion)"
-msgstr "எக்சர் (பெருக்கி அதிகப்படியான பரவல்)"
-
-msgid "Macaskill"
-msgstr "மேக்ச்கில்"
-
-msgid "Macaskill (pooled)"
-msgstr "மேக்ச்கில் (பூல் செய்யப்பட்ட)"
-
-msgid "Peters"
-msgstr "பீட்டர்ச்"
-
-msgid "Debray"
-msgstr "டெப்ரே"
-
-msgid "Standard error"
-msgstr "நிலையான பிழை"
-
-msgid "Sample size"
-msgstr "மாதிரி அளவு"
-
-msgid "Total events"
-msgstr "மொத்த நிகழ்வுகள்"
 
 #, fuzzy
 msgid ""
@@ -1509,6 +1440,9 @@ msgstr ""
 
 msgid "Clusters"
 msgstr ""
+
+msgid "Method"
+msgstr "முறை"
 
 msgid "Effect size aggregation was not run yet."
 msgstr ""
@@ -1632,22 +1566,6 @@ msgstr "எஃபெக்ட் அளவுகள் %2$i தரவு உள�
 msgid "Error in Step %1$i:"
 msgstr "படி %1$i இல் பிழை:"
 
-msgid ""
-"No rows to display. Check that the visualization type mapping assigns at "
-"least one level to 'Study' or 'Estimate'."
-msgstr ""
-
-msgid ""
-"The weight variable must contain finite, non-negative values with at least "
-"one positive value."
-msgstr ""
-
-msgid "Invalid forest plot input."
-msgstr ""
-
-msgid "Model Information"
-msgstr "மாதிரி செய்தி"
-
 #, fuzzy
 msgid "Publication bias: %1$s"
 msgstr "வெளியீட்டு சார்பு: %1$s"
@@ -1664,6 +1582,22 @@ msgid "Intercept estimate"
 msgstr "இடைமறிப்பு மதிப்பீடு"
 
 msgid ""
+"No rows to display. Check that the visualization type mapping assigns at "
+"least one level to 'Study' or 'Estimate'."
+msgstr ""
+
+msgid ""
+"The weight variable must contain finite, non-negative values with at least "
+"one positive value."
+msgstr ""
+
+msgid "Invalid forest plot input."
+msgstr ""
+
+msgid "Model Information"
+msgstr "மாதிரி செய்தி"
+
+msgid ""
 "'%1$s' could not be converted into a numeric value for the custom x-axis "
 "ticks."
 msgstr ""
@@ -1674,16 +1608,6 @@ msgstr "குறைந்தது ஒரு ஆற்றல் மேம்ப
 
 msgid "At least one manual x-axis tick must fall within the x-axis limits."
 msgstr ""
-
-msgid "Missing Data Summary"
-msgstr "தரவு சுருக்கத்தைக் காணவில்லை"
-
-msgid ""
-"The dataset contains missing values: %1$i missing values were removed from "
-"the analysis."
-msgstr ""
-"தரவுத்தொகுப்பில் காணாமல் போன மதிப்புகள் உள்ளன: %1$i நான் காணாமல் போன மதிப்புகள் "
-"பகுப்பாய்விலிருந்து அகற்றப்பட்டன."
 
 msgid "Funnel Plot"
 msgstr "புனல் சூழ்ச்சி"
@@ -1750,6 +1674,9 @@ msgstr "சரிசெய்யப்பட்ட மதிப்பீடு �
 msgid "Adjusted Estimate 𝜏"
 msgstr "சரிசெய்யப்பட்ட மதிப்பீடு 𝜏"
 
+msgid "Funnel Plot Asymmetry Tests"
+msgstr "புனல் சூழ்ச்சி சமச்சீரற்ற சோதனைகள்"
+
 msgid "Meta-Regression Test for Funnel Plot Asymmetry"
 msgstr "புனல் சூழ்ச்சி சமச்சீரற்ற தன்மைக்கான மெட்டா-பின்னடைவு சோதனை"
 
@@ -1800,6 +1727,19 @@ msgstr "ஒரே ஒரு கண்காணிப்புடன் முற
 
 msgid "The %1$s fail-safe N calculation %2$sfailed with the following error:"
 msgstr "%1$s தோல்வி-பாதுகாப்பான n கணக்கீடு %2$s பின்வரும் பிழையுடன் sfailed:"
+
+msgid "Missing Data Summary"
+msgstr "தரவு சுருக்கத்தைக் காணவில்லை"
+
+msgid ""
+"The dataset contains missing values: %1$i missing values were removed from "
+"the analysis."
+msgstr ""
+"தரவுத்தொகுப்பில் காணாமல் போன மதிப்புகள் உள்ளன: %1$i நான் காணாமல் போன மதிப்புகள் "
+"பகுப்பாய்விலிருந்து அகற்றப்பட்டன."
+
+msgid "Column name %s already exists in the dataset."
+msgstr "நெடுவரிசை பெயர் %s ஏற்கனவே தரவுத்தொகுப்பில் உள்ளன."
 
 msgid ""
 "The 'Correlation/Covariance Matrix' variable input contains the following "
@@ -1962,6 +1902,66 @@ msgstr ""
 "%2$1.0f. ஆகும். துல்லியத்தை அதிகரிக்க தயவுசெய்து 'மறு செய்கைகளை' அதிகரிக்கவும் அல்லது "
 "விருப்பங்கள் பிரிவில் 'டெல்டாவை மாற்றியமைக்கவும்'."
 
+msgid "t-statistic"
+msgstr "டி-புள்ளிவிவர"
+
+msgid "The %1$s test failed with the following error: %2$s"
+msgstr "பின்வரும் பிழையுடன் %1$s சோதனை தோல்வியடைந்தது: %2$s"
+
+msgid "Funnel Plot Asymmetry Plots"
+msgstr "புனல் சூழ்ச்சி சமச்சீரற்ற அடுக்கு"
+
+msgid "Egger (unweighted)"
+msgstr "Egger (கவனிக்கப்படாதது)"
+
+msgid "Egger (multiplicative overdispersion)"
+msgstr "எக்சர் (பெருக்கி அதிகப்படியான பரவல்)"
+
+msgid "Macaskill"
+msgstr "மேக்ச்கில்"
+
+msgid "Macaskill (pooled)"
+msgstr "மேக்ச்கில் (பூல் செய்யப்பட்ட)"
+
+msgid "Peters"
+msgstr "பீட்டர்ச்"
+
+msgid "Debray"
+msgstr "டெப்ரே"
+
+msgid "Standard error"
+msgstr "நிலையான பிழை"
+
+msgid "Sample size"
+msgstr "மாதிரி அளவு"
+
+msgid "Total events"
+msgstr "மொத்த நிகழ்வுகள்"
+
+msgid "%s Summary"
+msgstr "%s சுருக்கம்"
+
+msgid "metamisc package failed with the following error: '%s'"
+msgstr "பின்வரும் பிழையுடன் மெட்டாமிச்க் தொகுப்பு தோல்வியடைந்தது: '%s'"
+
+msgid "Based on %i studies."
+msgstr "%i நான் படிப்பின் அடிப்படையில்."
+
+msgid "The model was estimated using %1$s method with %2$s link function."
+msgstr "%2$s இணைப்பு செயல்பாட்டுடன் %1$s முறையைப் பயன்படுத்தி மாதிரி மதிப்பிடப்பட்டது."
+
+msgid "The model was estimated using MCMC with %1$s link function."
+msgstr "இந்த மாதிரி %1$s இணைப்பு செயல்பாட்டுடன் MCMC ஐப் பயன்படுத்தி மதிப்பிடப்பட்டது."
+
+msgid "Forest plot"
+msgstr "வன சூழ்ச்சி"
+
+msgid "Observed-Expected Ratio"
+msgstr "கவனிக்கப்பட்ட எதிர்பார்த்த விகிதம்"
+
+msgid "Concordance Statistic"
+msgstr "ஒத்திசைவு புள்ளிவிவரம்"
+
 msgid ""
 "Column '%1$s' contains invalid values: %2$s. Expected values for %3$s are: "
 "%4$s."
@@ -1974,11 +1974,142 @@ msgstr "பயில்"
 msgid "Traffic Light"
 msgstr ""
 
-msgid "Interaction terms are currently not possible in Bayesian meta-analyses."
-msgstr "பேய்சியன் மெட்டா பகுப்பாய்வுகளில் தொடர்புச் சொற்கள் தற்போது சாத்தியமில்லை."
+msgid "Adjusted effect"
+msgstr "சரிசெய்யப்பட்ட விளைவு"
+
+msgid "Diagnostics Summary"
+msgstr "கண்டறிதல் சுருக்கம்"
+
+msgid "MCMC error"
+msgstr "MCMC பிழை"
+
+msgid "MCMC error/SD"
+msgstr "MCMC பிழை/எச்டி"
+
+msgid "ESS"
+msgstr "எச்"
+
+msgid "R-hat"
+msgstr "ஆர்-தொப்பி"
+
+msgid "Adjusted Effect"
+msgstr "சரிசெய்யப்பட்ட விளைவு"
+
+msgid "Pooled Effect"
+msgstr "பூல் விளைவு"
+
+msgid "Moderation"
+msgstr "மிதமான"
+
+msgid "Weights"
+msgstr "எடைகள்"
+
+msgid "PET"
+msgstr "செல்லப்பிள்ளை"
+
+msgid "PEESE"
+msgstr "படம்"
+
+msgid "Trace Plot"
+msgstr "ட்ரேச் சூழ்ச்சி"
+
+msgid "Autocorrelation Plot"
+msgstr "தன்னியக்க தொடர்பு வரைபடம்"
+
+msgid "Density Plot"
+msgstr "அடர்த்தி சூழ்ச்சி"
+
+msgid ""
+"Please select at least one 'Type' of diagnostics plot (e.g., 'Trace', "
+"'Autocorrelation' or 'Posterior samples density')."
+msgstr ""
+"கண்டறியும் சதித்திட்டத்தின் குறைந்தது ஒரு 'வகை' (எ.கா., 'சுவடு', 'தன்னியக்க தொடர்பு' "
+"அல்லது 'பின்புற மாதிரிகள் அடர்த்தி') என்பதைத் தேர்ந்தெடுக்கவும்."
+
+msgid "Estimated Conditional Marginal Means"
+msgstr "மதிப்பிடப்பட்ட நிபந்தனை விளிம்பு வழிமுறைகள்"
+
+msgid "Conditional %1$s"
+msgstr "நிபந்தனை %1$s"
+
+msgid "Conditional Estimated Marginal Means"
+msgstr "நிபந்தனை மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகள்"
+
+msgid "Median"
+msgstr "இடைநடு"
+
+msgid ""
+"The Bayes factor test for the adjusted estimate is not available for meta-"
+"regressions with non-centered parameteriazation."
+msgstr ""
+"சரிசெய்யப்பட்ட மதிப்பீட்டிற்கான பேயச் காரணி சோதனை மெட்டா-மறுபயணுதல்களுக்கு "
+"மையப்படுத்தப்படாத அளவுருசேசனுடன் கிடைக்கவில்லை."
+
+msgid ""
+"Conditional estimates are based on models assuming the presence of a given "
+"component."
+msgstr ""
+"நிபந்தனை மதிப்பீடுகள் கொடுக்கப்பட்ட கூறுகளின் இருப்பைக் கருதும் மாதிரிகளை அடிப்படையாகக் "
+"கொண்டவை."
 
 msgid "Estimating Marginal Means"
 msgstr "விளிம்பு வழிமுறைகளை மதிப்பிடுதல்"
+
+msgid "Publication Bias Adjustment Summary"
+msgstr "வெளியீட்டு சார்பு சரிசெய்தல் சுருக்கம்"
+
+msgid "Estimated Marginal Means Summary"
+msgstr "மதிப்பிடப்பட்ட விளிம்பு என்றால் சுருக்கம்"
+
+msgid "Prior and Posterior Plots"
+msgstr "முன் மற்றும் பின்புற அடுக்குகள்"
+
+msgid "Diagnostics"
+msgstr "கண்டறிதல்"
+
+msgid "Subgroup %1$s, %2$s"
+msgstr "துணைக்குழு %1$s, %2$s"
+
+msgid "Effect intercept"
+msgstr "விளைவு இடைமறிப்பு"
+
+msgid "Publication bias"
+msgstr "வெளியீட்டு சார்பு"
+
+msgid "Baseline"
+msgstr "அடிப்படை"
+
+msgid "Inclusion BF"
+msgstr "சேர்த்தல் பி.எஃப்"
+
+msgid "Exclusion BF"
+msgstr "விலக்கு பி.எஃப்"
+
+msgid "log(Inclusion BF)"
+msgstr "பதிவு (சேர்த்தல் பி.எஃப்)"
+
+msgid ""
+"Large Bayes factors, i.e., BF > 100 or BF < 1/100, might be computationally "
+"unstable (a small change in posterior inclusion probability corresponds to a "
+"very large change in the Bayes factor). Consider increasing the number of "
+"chains and posterior samples to obtain more stable estimates."
+msgstr ""
+"பெரிய பேயஸ் காரணிகள், அதாவது, பி.எஃப்> 100 அல்லது பி.எஃப் <1/100, கணக்கீட்டு ரீதியாக "
+"நிலையற்றதாக இருக்கலாம் (பின்புற சேர்த்தல் நிகழ்தகவு ஒரு சிறிய மாற்றம் பேயஸ் காரணியில் "
+"மிகப் பெரிய மாற்றத்திற்கு ஒத்திருக்கிறது). மேலும் நிலையான மதிப்பீடுகளைப் பெற "
+"சங்கிலிகளின் எண்ணிக்கையையும் பின்புற மாதிரிகளையும் அதிகரிப்பதைக் கவனியுங்கள்."
+
+msgid "Moderation: Estimated Marginal Means"
+msgstr "மிதமான: மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகள்"
+
+msgid "Weight Function"
+msgstr "எடை செயல்பாடு"
+
+msgid "PET-PEESE"
+msgstr "வயிறு"
+
+msgid "P-Value"
+msgstr "பி-மதிப்பு"
 
 msgid ""
 "At least one prior distribution for the Effect component has to be specified."
@@ -2013,6 +2144,9 @@ msgstr "அடிப்படை கூறுகளுக்கு குறை�
 
 msgid "The priors for publication bias were set incorrectly."
 msgstr "வெளியீட்டு சார்புக்கான முன்னுரிமைகள் தவறாக அமைக்கப்பட்டன."
+
+msgid "RoBMA R Code"
+msgstr "ராப்மா ஆர் குறியீடு"
 
 msgid "Model Specification"
 msgstr "மாதிரி விவரக்குறிப்பு"
@@ -2059,16 +2193,6 @@ msgstr "மாதிரி பொருத்தம் பின்வரும�
 msgid "Conditional Meta-Analytic Estimates"
 msgstr "நிபந்தனை மேவு பகுப்பாய்வு மதிப்பீடுகள்"
 
-msgid "Median"
-msgstr "இடைநடு"
-
-msgid ""
-"Conditional estimates are based on models assuming the presence of a given "
-"component."
-msgstr ""
-"நிபந்தனை மதிப்பீடுகள் கொடுக்கப்பட்ட கூறுகளின் இருப்பைக் கருதும் மாதிரிகளை அடிப்படையாகக் "
-"கொண்டவை."
-
 msgid "Standardized Conditional Meta-Regression Coefficients"
 msgstr "தரப்படுத்தப்பட்ட நிபந்தனை மெட்டா-பின்னடைவு குணகங்கள்"
 
@@ -2096,132 +2220,79 @@ msgstr "நிபந்தனை வெளியீட்டு சார்ப�
 msgid "Publication Bias Adjustment Estimates (PET-PEESE)"
 msgstr "வெளியீட்டு சார்பு சரிசெய்தல் மதிப்பீடுகள் (பெட்-பெச்)"
 
-msgid "Estimated Conditional Marginal Means"
-msgstr "மதிப்பிடப்பட்ட நிபந்தனை விளிம்பு வழிமுறைகள்"
+msgid "Interaction terms are currently not possible in Bayesian meta-analyses."
+msgstr "பேய்சியன் மெட்டா பகுப்பாய்வுகளில் தொடர்புச் சொற்கள் தற்போது சாத்தியமில்லை."
 
-msgid "Conditional %1$s"
-msgstr "நிபந்தனை %1$s"
-
-msgid "Conditional Estimated Marginal Means"
-msgstr "நிபந்தனை மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகள்"
+msgid "Weight Function (%s)"
+msgstr "எடை செயல்பாடு (%s)"
 
 msgid ""
-"The Bayes factor test for the adjusted estimate is not available for meta-"
-"regressions with non-centered parameteriazation."
-msgstr ""
-"சரிசெய்யப்பட்ட மதிப்பீட்டிற்கான பேயச் காரணி சோதனை மெட்டா-மறுபயணுதல்களுக்கு "
-"மையப்படுத்தப்படாத அளவுருசேசனுடன் கிடைக்கவில்லை."
+"The figure could not be created since one of the estimates is not a number."
+msgstr "மதிப்பீடுகளில் ஒன்று எண் அல்ல என்பதால் உருவத்தை உருவாக்க முடியவில்லை."
 
-msgid "Adjusted Effect"
-msgstr "சரிசெய்யப்பட்ட விளைவு"
+msgid "P-value (One-sided)"
+msgstr "பி-மதிப்பு (ஒருதலைப்பட்ச)"
 
-msgid "Pooled Effect"
-msgstr "பூல் விளைவு"
+msgid "Publication Probability"
+msgstr "வெளியீட்டு நிகழ்தகவு"
 
-msgid "Moderation: Estimated Marginal Means"
-msgstr "மிதமான: மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகள்"
+msgid "Mean Model Estimates (%s)"
+msgstr "சராசரி மாதிரி மதிப்பீடுகள் (%s)"
 
-msgid "Moderation"
-msgstr "மிதமான"
+msgid "Fixed effects (adjusted)"
+msgstr "நிலையான விளைவுகள் (சரிசெய்யப்பட்டது)"
 
-msgid "Weight Function"
-msgstr "எடை செயல்பாடு"
+msgid "Random effects (adjusted)"
+msgstr "சீரற்ற விளைவுகள் (சரிசெய்யப்பட்டது)"
 
-msgid "PET-PEESE"
-msgstr "வயிறு"
+msgid "Model Tests"
+msgstr "மாதிரி சோதனைகள்"
 
-msgid "P-Value"
-msgstr "பி-மதிப்பு"
+msgid "Test of Heterogeneity"
+msgstr "பன்முகத்தன்மையின் சோதனை"
 
-msgid "Diagnostics Summary"
-msgstr "கண்டறிதல் சுருக்கம்"
+msgid "Note:"
+msgstr "குறிப்பு:"
 
-msgid "MCMC error"
-msgstr "MCMC பிழை"
+msgid "Test of Publication Bias"
+msgstr "வெளியீட்டு சார்புகளின் சோதனை"
 
-msgid "MCMC error/SD"
-msgstr "MCMC பிழை/எச்டி"
+msgid "ChiSq"
+msgstr "சிச்க்"
 
-msgid "ESS"
-msgstr "எச்"
+msgid "Assuming homogeneity"
+msgstr "ஒருமைப்பாட்டைக் கருதி"
 
-msgid "R-hat"
-msgstr "ஆர்-தொப்பி"
+msgid "Assuming heterogeneity"
+msgstr "பன்முகத்தன்மையைக் கருதி"
 
-msgid "Weights"
-msgstr "எடைகள்"
+msgid "Fixed Effects Estimates"
+msgstr "நிலையான விளைவுகள் மதிப்பீடுகள்"
 
-msgid "PET"
-msgstr "செல்லப்பிள்ளை"
+msgid "Mean Estimates (%s)"
+msgstr "சராசரி மதிப்பீடுகள் (%s)"
 
-msgid "PEESE"
-msgstr "படம்"
+msgid "Estimated Weights"
+msgstr "மதிப்பிடப்பட்ட எடைகள்"
 
-msgid "Trace Plot"
-msgstr "ட்ரேச் சூழ்ச்சி"
+msgid "Heterogeneity Estimates(%s)"
+msgstr "பன்முகத்தன்மை மதிப்பீடுகள் (%s)"
 
-msgid "Autocorrelation Plot"
-msgstr "தன்னியக்க தொடர்பு வரைபடம்"
+msgid "p-value Frequency"
+msgstr "பி-மதிப்பு அதிர்வெண்"
 
-msgid "Density Plot"
-msgstr "அடர்த்தி சூழ்ச்சி"
+msgid "<em>p</em>-values interval(one-sided)"
+msgstr "<em> ப </em>-மதிப்பீட்டு இடைவெளி (ஒருதலைப்பட்ச)"
 
-msgid ""
-"Please select at least one 'Type' of diagnostics plot (e.g., 'Trace', "
-"'Autocorrelation' or 'Posterior samples density')."
-msgstr ""
-"கண்டறியும் சதித்திட்டத்தின் குறைந்தது ஒரு 'வகை' (எ.கா., 'சுவடு', 'தன்னியக்க தொடர்பு' "
-"அல்லது 'பின்புற மாதிரிகள் அடர்த்தி') என்பதைத் தேர்ந்தெடுக்கவும்."
-
-msgid "RoBMA R Code"
-msgstr "ராப்மா ஆர் குறியீடு"
-
-msgid "Publication Bias Adjustment Summary"
-msgstr "வெளியீட்டு சார்பு சரிசெய்தல் சுருக்கம்"
-
-msgid "Estimated Marginal Means Summary"
-msgstr "மதிப்பிடப்பட்ட விளிம்பு என்றால் சுருக்கம்"
-
-msgid "Prior and Posterior Plots"
-msgstr "முன் மற்றும் பின்புற அடுக்குகள்"
-
-msgid "Diagnostics"
-msgstr "கண்டறிதல்"
-
-msgid "Adjusted effect"
-msgstr "சரிசெய்யப்பட்ட விளைவு"
-
-msgid "Subgroup %1$s, %2$s"
-msgstr "துணைக்குழு %1$s, %2$s"
-
-msgid "Effect intercept"
-msgstr "விளைவு இடைமறிப்பு"
-
-msgid "Publication bias"
-msgstr "வெளியீட்டு சார்பு"
-
-msgid "Baseline"
-msgstr "அடிப்படை"
-
-msgid "Inclusion BF"
-msgstr "சேர்த்தல் பி.எஃப்"
-
-msgid "Exclusion BF"
-msgstr "விலக்கு பி.எஃப்"
-
-msgid "log(Inclusion BF)"
-msgstr "பதிவு (சேர்த்தல் பி.எஃப்)"
+msgid "Frequency"
+msgstr "மீடிறன், மீள்திறன், நிகழ்வெண், நிகழ்வு"
 
 msgid ""
-"Large Bayes factors, i.e., BF > 100 or BF < 1/100, might be computationally "
-"unstable (a small change in posterior inclusion probability corresponds to a "
-"very large change in the Bayes factor). Consider increasing the number of "
-"chains and posterior samples to obtain more stable estimates."
+"There were no p-value cutoffs after their automatic reduction. The displayed "
+"frequencies correspond to the non-reduced p-value cutoffs."
 msgstr ""
-"பெரிய பேயஸ் காரணிகள், அதாவது, பி.எஃப்> 100 அல்லது பி.எஃப் <1/100, கணக்கீட்டு ரீதியாக "
-"நிலையற்றதாக இருக்கலாம் (பின்புற சேர்த்தல் நிகழ்தகவு ஒரு சிறிய மாற்றம் பேயஸ் காரணியில் "
-"மிகப் பெரிய மாற்றத்திற்கு ஒத்திருக்கிறது). மேலும் நிலையான மதிப்பீடுகளைப் பெற "
-"சங்கிலிகளின் எண்ணிக்கையையும் பின்புற மாதிரிகளையும் அதிகரிப்பதைக் கவனியுங்கள்."
+"அவற்றின் தானியங்கி குறைப்புக்குப் பிறகு பி-மதிப்பு வெட்டுக்கள் எதுவும் இல்லை. காட்டப்படும் "
+"அதிர்வெண்கள் குறைக்கப்பட்ட பி-மதிப்பு வெட்டுக்களுக்கு ஒத்திருக்கும்."
 
 msgid ""
 "Cannot compute results. All entries of the p-value variable (%s) must be "
@@ -2256,79 +2327,8 @@ msgstr "அனைத்து பி-மதிப்பு வெட்டுக
 msgid "95%% Confidence Interval"
 msgstr "95 %% நம்பிக்கை இடைவெளி"
 
-msgid "Note:"
-msgstr "குறிப்பு:"
-
 msgid "%1$s is on %2$s scale."
 msgstr "%1$s %2$s அளவில் உள்ளது."
-
-msgid "<em>p</em>-values interval(one-sided)"
-msgstr "<em> ப </em>-மதிப்பீட்டு இடைவெளி (ஒருதலைப்பட்ச)"
-
-msgid "Model Tests"
-msgstr "மாதிரி சோதனைகள்"
-
-msgid "Test of Heterogeneity"
-msgstr "பன்முகத்தன்மையின் சோதனை"
-
-msgid "Test of Publication Bias"
-msgstr "வெளியீட்டு சார்புகளின் சோதனை"
-
-msgid "ChiSq"
-msgstr "சிச்க்"
-
-msgid "Assuming homogeneity"
-msgstr "ஒருமைப்பாட்டைக் கருதி"
-
-msgid "Assuming heterogeneity"
-msgstr "பன்முகத்தன்மையைக் கருதி"
-
-msgid "Fixed Effects Estimates"
-msgstr "நிலையான விளைவுகள் மதிப்பீடுகள்"
-
-msgid "Mean Estimates (%s)"
-msgstr "சராசரி மதிப்பீடுகள் (%s)"
-
-msgid "Estimated Weights"
-msgstr "மதிப்பிடப்பட்ட எடைகள்"
-
-msgid "Heterogeneity Estimates(%s)"
-msgstr "பன்முகத்தன்மை மதிப்பீடுகள் (%s)"
-
-msgid "p-value Frequency"
-msgstr "பி-மதிப்பு அதிர்வெண்"
-
-msgid "Frequency"
-msgstr "மீடிறன், மீள்திறன், நிகழ்வெண், நிகழ்வு"
-
-msgid ""
-"There were no p-value cutoffs after their automatic reduction. The displayed "
-"frequencies correspond to the non-reduced p-value cutoffs."
-msgstr ""
-"அவற்றின் தானியங்கி குறைப்புக்குப் பிறகு பி-மதிப்பு வெட்டுக்கள் எதுவும் இல்லை. காட்டப்படும் "
-"அதிர்வெண்கள் குறைக்கப்பட்ட பி-மதிப்பு வெட்டுக்களுக்கு ஒத்திருக்கும்."
-
-msgid "Weight Function (%s)"
-msgstr "எடை செயல்பாடு (%s)"
-
-msgid ""
-"The figure could not be created since one of the estimates is not a number."
-msgstr "மதிப்பீடுகளில் ஒன்று எண் அல்ல என்பதால் உருவத்தை உருவாக்க முடியவில்லை."
-
-msgid "P-value (One-sided)"
-msgstr "பி-மதிப்பு (ஒருதலைப்பட்ச)"
-
-msgid "Publication Probability"
-msgstr "வெளியீட்டு நிகழ்தகவு"
-
-msgid "Mean Model Estimates (%s)"
-msgstr "சராசரி மாதிரி மதிப்பீடுகள் (%s)"
-
-msgid "Fixed effects (adjusted)"
-msgstr "நிலையான விளைவுகள் (சரிசெய்யப்பட்டது)"
-
-msgid "Random effects (adjusted)"
-msgstr "சீரற்ற விளைவுகள் (சரிசெய்யப்பட்டது)"
 
 msgid "Fixed effects model:"
 msgstr "நிலையான விளைவுகள் மாதிரி:"

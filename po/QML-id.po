@@ -4987,7 +4987,7 @@ msgstr "Ukuran Efek"
 
 msgctxt "ForestPlot|"
 msgid "Settings"
-msgstr ""
+msgstr "Pengaturan"
 
 msgctxt "ForestPlot|"
 msgid "Subgroup"
@@ -4995,16 +4995,18 @@ msgstr "Subgrup"
 
 msgctxt "ForestPlot|"
 msgid "Row"
-msgstr ""
+msgstr "Baris"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Show RoBMA R code"
-msgstr ""
+msgstr "Tampilkan kode R RoBMA"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid ""
 "Display the underlying R code used by the RoBMA package to fit the model."
 msgstr ""
+"Tampilkan kode R mendasar digunakan oleh paket RoBMA untuk menyesuaikan "
+"model."
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Include full dataset in subgroup analysis"
@@ -5020,15 +5022,15 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Shorten prior names"
-msgstr ""
+msgstr "Pendekkan nama priori"
 
 msgctxt "RobustBayesianMetaAnalysisAdvanced|"
 msgid "Shorten the prior names in the output."
-msgstr ""
+msgstr "Pendekkan nama priori di luaran."
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Medical subfield"
-msgstr ""
+msgstr "Subkolom medis"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "General"
@@ -5036,239 +5038,239 @@ msgstr "Umum"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Acute Respiratory Infections"
-msgstr ""
+msgstr "Infeksi Pernafasan Akut"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Airways"
-msgstr ""
+msgstr "Pernafasan"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Anaesthesia"
-msgstr ""
+msgstr "Anestesi"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Back and Neck"
-msgstr ""
+msgstr "Punggung dan Leher"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Bone, Joint and Muscle Trauma"
-msgstr ""
+msgstr "Trauma Tulang, Persendian dan Otot"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Colorectal"
-msgstr ""
+msgstr "Kolorektal"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Common Mental Disorders"
-msgstr ""
+msgstr "Gangguan Jiwa Umum"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Consumers and Communication"
-msgstr ""
+msgstr "Konsumen dan Komunikasi"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Cystic Fibrosis and Genetic Disorders"
-msgstr ""
+msgstr "Fibrosis Sistik dan Gangguan Genetik"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Dementia and Cognitive Improvement"
-msgstr ""
+msgstr "Peningkatan Demensia dan Kognitif"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Developmental, Psychosocial and Learning Problems"
-msgstr ""
+msgstr "Permasalahan Pengembangan, Psikososial dan Pembelajaran"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Drugs and Alcohol"
-msgstr ""
+msgstr "Narkoba dan Alkohol"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Effective Practice and Organisation of Care"
-msgstr ""
+msgstr "Praktik Efektif dan Organisasi Perawatan"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Emergency and Critical Care"
-msgstr ""
+msgstr "Darurat dan Perawatan Kritis"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "ENT"
-msgstr ""
+msgstr "ENT"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Eyes and Vision"
-msgstr ""
+msgstr "Mata dan Penglihatan"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Gynaecological, Neuro-oncology and Orphan Cancer"
-msgstr ""
+msgstr "Kanker Ginakologis, Neuro-onkologi, dan Langka"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Gynaecology and Fertility"
-msgstr ""
+msgstr "Ginakologi dan Fertilitas"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Heart"
-msgstr ""
+msgstr "Jantung"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Hepato-Biliary"
-msgstr ""
+msgstr "Hepato-Biliary"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "HIV/AIDS"
-msgstr ""
+msgstr "HIV/AIDS"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Hypertension"
-msgstr ""
+msgstr "Hipertensi"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Incontinence"
-msgstr ""
+msgstr "Inkontinens"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Infectious Diseases"
-msgstr ""
+msgstr "Gangguan Terinfeksi"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Inflammatory Bowel Disease"
-msgstr ""
+msgstr "Gangguan Bowel Inflamasi"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Injuries"
-msgstr ""
+msgstr "Cedera"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Kidney and Transplant"
-msgstr ""
+msgstr "Ginjal dan Transplantasi"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Metabolic and Endocrine Disorders"
-msgstr ""
+msgstr "Gangguan Metabolis dan Endokrin"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Methodology"
-msgstr ""
+msgstr "Metodologi"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Movement Disorders"
-msgstr ""
+msgstr "Gangguan Pergerakan"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Musculoskeletal"
-msgstr ""
+msgstr "Muskuloskelet"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Neonatal"
-msgstr ""
+msgstr "Neonat"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Oral Health"
-msgstr ""
+msgstr "Kesehatan Mulut"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Pain, Palliative and Supportive Care"
-msgstr ""
+msgstr "Perawatan Sakit, Paliatif dan Dukungan"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Pregnancy and Childbirth"
-msgstr ""
+msgstr "Kehamilan dan Persalinan"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Public Health"
-msgstr ""
+msgstr "Kesehatan Publik"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Schizophrenia"
-msgstr ""
+msgstr "Skizofrenia"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Sexually Transmitted Infections"
-msgstr ""
+msgstr "Infrkasi Bertransmisi Seksual"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Skin"
-msgstr ""
+msgstr "Kulit"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Stroke"
-msgstr ""
+msgstr "Stroke"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Tobacco Addiction"
-msgstr ""
+msgstr "Adiksi Rokok"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Upper GI and Pancreatic Diseases"
-msgstr ""
+msgstr "GI Atas dan Gangguan Pankreatis"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Urology"
-msgstr ""
+msgstr "Urologi"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Vascular"
-msgstr ""
+msgstr "Vaskular"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Work"
-msgstr ""
+msgstr "Kerja"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Wounds"
-msgstr ""
+msgstr "Luka"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Breast Cancer"
-msgstr ""
+msgstr "Kanker Payudara"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Chronic Pain"
-msgstr ""
+msgstr "Sakit Kronis"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Cirrhosis and Liver Transplantation"
-msgstr ""
+msgstr "Transplantasi Kirhosis dan Hati"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Cognitive Impairment and Dementia"
-msgstr ""
+msgstr "Gangguan Kognitif dan Demensia"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Colorectal Cancer"
-msgstr ""
+msgstr "Kanker Kolorektal"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Epilepsy"
-msgstr ""
+msgstr "Epilepsi"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Fertility Regulation"
-msgstr ""
+msgstr "Regulasi Fertilitas"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Gut"
-msgstr ""
+msgstr "Usus"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Haematology"
-msgstr ""
+msgstr "Hematologi"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Heart; Vascular"
-msgstr ""
+msgstr "Jantung; Vaskular"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Lung Cancer"
-msgstr ""
+msgstr "Kanker Paru-paru"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Multiple Sclerosis and Rare Diseases of the CNS"
-msgstr ""
+msgstr "Beberapa Gangguan Sklerosis dan Langka CNS"
 
 msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Neuromuscular"
-msgstr ""
+msgstr "Neuromuskular"
 
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Effect size"
@@ -5288,6 +5290,8 @@ msgid ""
 "predicted values at specific levels of moderators and their differences from "
 "0."
 msgstr ""
+"Opsi untuk menghitung rerata margin terestimasi, mengizinan analisis nilai "
+"terprediksi di tingkat moderator spesifik dan perbedaan mereka dari 0."
 
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Effect size"
@@ -5319,7 +5323,7 @@ msgstr ""
 
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Test against 0"
-msgstr ""
+msgstr "Uji terhadap 0"
 
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid ""
@@ -5330,6 +5334,12 @@ msgid ""
 "test based on the prior and posterior distributions assuming either the "
 "presence of the effect or moderation."
 msgstr ""
+"Opsi untuk menguji rerata margin terestimasi terhadap 0. Uji untuk estimasi "
+"disesuai tersedia hanya untuk model meta-regresi dengan parameterisasi "
+"terpusat (yaitu, tidak ada kontras faktor pemberlakuan). Uji untuk rerata "
+"margin terestimasi dilakukan menggunakan uji Rasio Kepadatan Savage-Dickey "
+"berdasarkan distribusi priori dan posterior mengasumsikan baik tampilan dari "
+"efek atau moderasi."
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Statistics"
@@ -5345,7 +5355,7 @@ msgstr "Heterogenitas"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Summarize the meta-analytic between-study heterogeneity."
-msgstr ""
+msgstr "Ringkaskan heterogenitas antar-studi meta-analitik."
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "𝜏"
@@ -5407,10 +5417,13 @@ msgid ""
 "correspond to the scale of the prior distribution (the RoBMA R package "
 "provides only standardized regression coefficients)."
 msgstr ""
+"Sertakan estimasi koefisien regresi di model meta-regresi. Dicatat bahwa "
+"koefisien regresi tidak distandardisasi dan sesuai dengan skala distribusi "
+"priori (paket R RoBMA hanya menyediakan koefisien regresi terstandardisasi)."
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Standardized coefficient estimates"
-msgstr ""
+msgstr "Estimasi koefisien terstandardisasi"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid ""
@@ -5421,14 +5434,19 @@ msgid ""
 "difference between standardized and non-standardized regression coefficients "
 "for categorical moderators)."
 msgstr ""
+"Sertakan estimasi koefisien regresi terstandardisasi di model meta-regresi. "
+"Koefisien regresi terstandardisasi adalah koefisien regresi dibagikan oleh "
+"deviasi standar dari variabel prediktor dan sesuai dengan skala distribusi "
+"priori (tidak ada perbedaan antara koefisien regresi terstandardisasi dan "
+"tidak terstandardisasi untuk moderator kategorikal)."
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Credible intervals"
-msgstr ""
+msgstr "Interval kredibel"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Include credible intervals in the tabular output."
-msgstr ""
+msgstr "Sertakan interval kredibel di luaran tabel."
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Prediction intervals"
@@ -5440,13 +5458,15 @@ msgstr "Sertakan interval prediksi dalam luaran tabuler."
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Conditional estimates"
-msgstr ""
+msgstr "Estimasi kondisional"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid ""
 "Include conditional estimates, i.e., estimates assuming the presence of the "
 "corresponding model component/parameter, in the tabular output and figures."
 msgstr ""
+"Sertakan estimasi kondisional, yaitu, estimasi mengasumsikan tampilan "
+"komponen/parameter model sesuai, di luaran tabel dan figur."
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Transform effect size"
@@ -5522,33 +5542,39 @@ msgstr "Bonett invers α"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Publication Bias Adjustment"
-msgstr ""
+msgstr "Penyesuaian Bias Publikasi"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid ""
 "Create summaries of the publication bias adjustment. Available when "
 "publication bias adjustment is specified."
 msgstr ""
+"Buat ringkasan dari penyesuaian bias publikasi. Tersedia ketika penyesuaian "
+"bias publikasi ditentukan."
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Weight function estimates"
-msgstr ""
+msgstr "Estimasi fungsi berat"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid ""
 "Include estimates of the weight function parameters in the publication bias "
 "adjustment model."
 msgstr ""
+"Sertakan estimasi dari parameter fungsi berat di model penyesuaian bias "
+"publikasi."
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "PET-PEESE estimates"
-msgstr ""
+msgstr "Estimasi PET-PEESE"
 
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid ""
 "Include estimates of the PET-PEESE parameters in the publication bias "
 "adjustment model."
 msgstr ""
+"Sertakan estimasi dari parameter PET-PEESE di model penyesuaian bias "
+"publikasi."
 
 msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Model"
@@ -5585,7 +5611,7 @@ msgstr "Variabel ditugaskan sebagai istilah model dalam model ukuran efek."
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Prior and Posterior Plots"
-msgstr ""
+msgstr "Diagram Priori dan Posterior"
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Effect size"
@@ -5595,22 +5621,21 @@ msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Moderation"
 msgstr "Moderasi"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Estimated marginal means"
 msgstr "Rerata margin terestimasi"
 
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Include prior distribution"
-msgstr ""
+msgstr "Sertakan distribusi priori"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Continuous Moderators (null)"
-msgstr ""
+msgstr "Moderator Berkelanjutan (null)"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Continuous Moderators"
-msgstr ""
+msgstr "Moderator Berkelanjutan"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Truncation"
@@ -5622,11 +5647,11 @@ msgstr "Berat priori"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Lower"
-msgstr ""
+msgstr "Bawah"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Upper"
-msgstr ""
+msgstr "Atas"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsContinuousModerators|"
 msgid "Parameters"
@@ -5682,15 +5707,15 @@ msgstr "Tidak Ada"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Factor Moderators (null)"
-msgstr ""
+msgstr "Faktor Moderator (null)"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Factor Moderators"
-msgstr ""
+msgstr "Faktor Moderator"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Prior"
-msgstr ""
+msgstr "Priori"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Truncation"
@@ -5698,15 +5723,15 @@ msgstr "Trunkasi"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "weights"
-msgstr ""
+msgstr "berat"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Upper"
-msgstr ""
+msgstr "Atas"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Lower"
-msgstr ""
+msgstr "Bawah"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Parameters"
@@ -5718,19 +5743,19 @@ msgstr "Distribusi"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Contrast"
-msgstr ""
+msgstr "Kontras"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "M-Normal(μ=0,σ)"
-msgstr ""
+msgstr "M-Normal(μ=0,σ)"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "M-T(μ=0,σ,v)"
-msgstr ""
+msgstr "M-T(μ=0,σ,v)"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Spike(x₀=0)"
-msgstr ""
+msgstr "Lonjakan(x₀=0)"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "None"
@@ -5778,31 +5803,31 @@ msgstr "Lonjakan(x₀)"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Mean dif."
-msgstr ""
+msgstr "Prb. rerata"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Treatment"
-msgstr ""
+msgstr "Perlakuan"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Orthonormal"
-msgstr ""
+msgstr "Ortonormal"
 
 msgctxt "RobustBayesianMetaAnalysisPriorsFactorModerators|"
 msgid "Independent"
-msgstr ""
+msgstr "Independen"
 
 msgctxt "Description|"
 msgid "Meta-Analytic SEM"
-msgstr ""
+msgstr "SEM Meta-Analitis"
 
 msgctxt "Description|"
 msgid "SEM-Based Meta-Analysis"
-msgstr ""
+msgstr "Meta-Analisis Berbasis-SEM"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Correlation/Covariance Matrix"
-msgstr ""
+msgstr "Matriks Korelasi/Kovarians"
 
 msgctxt "MetaAnalyticSem|"
 msgid ""
@@ -5812,6 +5837,10 @@ msgid ""
 "separator used in the variable names (defaults to `_`) can be changed via "
 "the `Variable name separator` option."
 msgstr ""
+"Variabel berisi korelasi/kovarians antara variabel. Nama variabel harus "
+"dalam `x_y` di mana `x` dan `y` sesuai dengan variabel antara mana korelasi/"
+"kovarians dilaporkan. Pemisah digunakan di nama variabel (bawaannya adalah "
+"`_`) dapat diubah melalui opsi `Pemisah nama variabel`."
 
 msgctxt "MetaAnalyticSem|"
 msgid "Sample Size"
@@ -5819,11 +5848,11 @@ msgstr "Ukuran Sampel"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Variable containing sample sizes for the studies"
-msgstr ""
+msgstr "Variabel berisi ukuran sampel untuk studi"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Means"
-msgstr ""
+msgstr "Rerata"
 
 msgctxt "MetaAnalyticSem|"
 msgid ""
@@ -5832,10 +5861,13 @@ msgid ""
 "covariance matrix input. This input is required only when meta-analytic sem "
 "with means is requested."
 msgstr ""
+"Variabel berisi rerata dari variabel. Nama variabel harus `x` di mana `x` "
+"sesuai dengan nama variabel di masukan matriks korelasi/kovarians. Masukan "
+"ini diperlukan hanya ketika sem meta-analitis dengan rerata diminta."
 
 msgctxt "MetaAnalyticSem|"
 msgid "Data Input Type"
-msgstr ""
+msgstr "Jenis Masukan Data"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Correlation"
@@ -5843,19 +5875,19 @@ msgstr "Korelasi"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Select this option for a correlation input."
-msgstr ""
+msgstr "Pilih opsi ini untuk masukan korelasi."
 
 msgctxt "MetaAnalyticSem|"
 msgid "Covariance"
-msgstr ""
+msgstr "Kovarians"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Select this option for a covariance input."
-msgstr ""
+msgstr "Pilih opsi ini untuk masukan kovarians."
 
 msgctxt "MetaAnalyticSem|"
 msgid "Variable name separator"
-msgstr ""
+msgstr "Pemisah nama variabel"
 
 msgctxt "MetaAnalyticSem|"
 msgid ""
@@ -5864,50 +5896,61 @@ msgid ""
 "corresponds to the variables between which the correlation/covariance is "
 "reported."
 msgstr ""
+"Pemisah digunakan di nama variabel di masukan matriks korelasi/kovarians. "
+"Nama variabel harus dalam bentuk `x_y` di mana `y` sesuai dengan variabel "
+"antara mana korelasi/kovarians dilaporkan."
 
 msgctxt "MetaAnalyticSem|"
 msgid "Available variable names"
-msgstr ""
+msgstr "Nama variabel tersedia"
 
 msgctxt "MetaAnalyticSem|"
 msgid ""
 "Show a summary of the available variable names in the correlation/covariance "
 "matrix input."
 msgstr ""
+"Tampilkan ringkasan dari nama variabel tersedia di masukan matriks korelasi/"
+"kovarians."
 
 msgctxt "MetaAnalyticSem|"
 msgid "Descriptives"
-msgstr ""
+msgstr "Deskriptif"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Number of estimates"
-msgstr ""
+msgstr "Jumlah estimasi"
 
 msgctxt "MetaAnalyticSem|"
 msgid ""
 "Show a frequency table of the estimates in the correlation/covariance matrix "
 "input."
 msgstr ""
+"Tampilkan tabel frekuensi dari estimasi di masukan matriks korelasi/"
+"kovarians."
 
 msgctxt "MetaAnalyticSem|"
 msgid "Number of observations"
-msgstr ""
+msgstr "Jumlah observasi"
 
 msgctxt "MetaAnalyticSem|"
 msgid ""
 "Show a frequency table of the observations in the correlation/covariance "
 "matrix input."
 msgstr ""
+"Tampilkan tabel frekuensi dari observasi di masukan matriks korelasi/"
+"kovarians."
 
 msgctxt "MetaAnalyticSem|"
 msgid "Pooled correlation/covariance matrix"
-msgstr ""
+msgstr "Matriks korelasi/kovarians terkumpul"
 
 msgctxt "MetaAnalyticSem|"
 msgid ""
 "Show the pooled correlation/covariance matrix. The pooled correlation/"
 "covariance matrix is from the first stage of two-stage meta-analytic SEM. "
 msgstr ""
+"Tampilkan matriks korelasi/kovarians terkumpul. Matriks korelasi/kovarians "
+"terkumpul dari tahap pertama dari SEM meta-analitis dua-tahap. "
 
 msgctxt "MetaAnalyticSem|"
 msgid "Random effects"
@@ -5919,37 +5962,39 @@ msgstr "Diagonal"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Symmetric"
-msgstr ""
+msgstr "Simetris"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Zero"
-msgstr ""
+msgstr "Nol"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Type of the random effects of the correlation or covariance vectors."
-msgstr ""
+msgstr "Jenis efek acak dari vektor korelasi atau kovarians."
 
 msgctxt "MetaAnalyticSem|"
 msgid "Model 1"
-msgstr ""
+msgstr "Model 1"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Specify model using a lavaan style syntax."
-msgstr ""
+msgstr "Tentukan model menggunakan sintaksis gaya lavaan."
 
 msgctxt "MetaAnalyticSem|"
 msgid "Model Settings"
-msgstr ""
+msgstr "Pengaturan Model"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Fix latent variance to 1"
-msgstr ""
+msgstr "Perbaiki variabel laten ke 1"
 
 msgctxt "MetaAnalyticSem|"
 msgid ""
 "Fix the variance of latent variables to 1. Only available for covariance "
 "input."
 msgstr ""
+"Perbaiki varians dari variabel laten ke 1. Hanya tersedia untuk masukan "
+"kovarians."
 
 msgctxt "MetaAnalyticSem|"
 msgid "Random Effects"
@@ -5957,205 +6002,205 @@ msgstr "Efek Acak"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Sigma"
-msgstr ""
+msgstr "Sigma"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Mu"
-msgstr ""
+msgstr "Mu"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Type of the random effects of the mean vectors."
-msgstr ""
+msgstr "Jenis efek acak dari vektor rerata."
 
 msgctxt "MetaAnalyticSem|"
 msgid "Sigma - Mu"
-msgstr ""
+msgstr "Sigma - Mu"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Full"
-msgstr ""
+msgstr "Penuh"
 
 msgctxt "MetaAnalyticSem|"
 msgid ""
 "Type of the random effects between the correlation/covariance vectors and "
 "the mean vectors."
-msgstr ""
+msgstr "Jenis efek acak antara vektor korelasi/kovarians dan vektor rerata."
 
 msgctxt "MetaAnalyticSem|"
 msgid "Pairwise model comparison"
-msgstr ""
+msgstr "Perbandingan model berpasangan"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Show a pairwise model comparison table."
-msgstr ""
+msgstr "Tampilkan tabel perbandingan model berpasangan."
 
 msgctxt "MetaAnalyticSem|"
 msgid "Model summary"
-msgstr ""
+msgstr "Ringkasan model"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Show a summary of the model coefficients and computed estimates."
-msgstr ""
+msgstr "Tampilkan ringkasan dari koefisien model dan estimasi terhitung."
 
 msgctxt "MetaAnalyticSem|"
 msgid "Regression"
-msgstr ""
+msgstr "Regresi"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Show regression estimates (A-Matrix) in the model summary."
-msgstr ""
+msgstr "Tampilkan estimasi regresi (Matriks-A) di ringkasan model."
 
 msgctxt "MetaAnalyticSem|"
 msgid "Covariances"
-msgstr ""
+msgstr "Kovarians"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Show covariance estimates (S-Matrix) in the model summary."
-msgstr ""
+msgstr "Tampilkan estimasi kovarians (Matriks-S) di ringkasan model."
 
 msgctxt "MetaAnalyticSem|"
 msgid "Show random effects in the model summary."
-msgstr ""
+msgstr "Tampilkan efek acak di ringkasan model."
 
 msgctxt "MetaAnalyticSem|"
 msgid "Show matrix indices"
-msgstr ""
+msgstr "Tampilkan indeks matriks"
 
 msgctxt "MetaAnalyticSem|"
 msgid "Show matrix indices (rows/columns) in the model summary."
-msgstr ""
+msgstr "Tampilkan indeks matriks (baris/kolom) di ringkasan model."
 
 msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Path diagram"
-msgstr ""
+msgstr "Diagram jalur"
 
 msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Show a path diagram of the model."
-msgstr ""
+msgstr "Tampilkan diagram jalur dari model."
 
 msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Layout"
-msgstr ""
+msgstr "Tata letak"
 
 msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Tree"
-msgstr ""
+msgstr "Pohon"
 
 msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Circle"
-msgstr ""
+msgstr "Lingkaran"
 
 msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Spring"
-msgstr ""
+msgstr "Pegas"
 
 msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Tree2"
-msgstr ""
+msgstr "Pohon2"
 
 msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Circle2"
-msgstr ""
+msgstr "Lingkaran2"
 
 msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Layout of the path diagram."
-msgstr ""
+msgstr "Tata letak diagram jalur."
 
 msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Show parameter names"
-msgstr ""
+msgstr "Tampilkan nama parameter"
 
 msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Show parameter names instead of the estimates in the path diagram."
-msgstr ""
+msgstr "Tampilkan nama parameter alih-alih estimasi di diagram jalur."
 
 msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Manifest node width"
-msgstr ""
+msgstr "Lebar simpul manifes"
 
 msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Width of manifest nodes."
-msgstr ""
+msgstr "Lebar dari simpul manifes."
 
 msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Latent node width"
-msgstr ""
+msgstr "Lebar simpul laten"
 
 msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Width of latent nodes."
-msgstr ""
+msgstr "Lebar dari simpul laten."
 
 msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Unit vector node width"
-msgstr ""
+msgstr "Lebar simpul vektor unit"
 
 msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Width of unit vector nodes."
-msgstr ""
+msgstr "Lebar dari simpul vektor unit."
 
 msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Label size"
-msgstr ""
+msgstr "Ukuran label"
 
 msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Size of the labels."
-msgstr ""
+msgstr "Ukuran dari label."
 
 msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Edge label size"
-msgstr ""
+msgstr "Ukuran label tepi"
 
 msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Size of the edge labels."
-msgstr ""
+msgstr "Ukuran dari label tepi."
 
 msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Number of digits"
-msgstr ""
+msgstr "Jumlah digit"
 
 msgctxt "SemBasedMetaAnalysisPlot|"
 msgid "Number of digits for rounding estimates."
-msgstr ""
+msgstr "Jumlah digit untuk estimasi kebulatan."
 
 msgctxt "SemBasedMetaAnalysis|"
 msgid "Model 1"
-msgstr ""
+msgstr "Model 1"
 
 msgctxt "SemBasedMetaAnalysis|"
 msgid "Specify model using a lavaan style syntax."
-msgstr ""
+msgstr "Tentukan model menggunakan sintaksis gaya lavaan."
 
 msgctxt "SemBasedMetaAnalysis|"
 msgid "Pairwise model comparison"
-msgstr ""
+msgstr "Perbandingan model berpasangan"
 
 msgctxt "SemBasedMetaAnalysis|"
 msgid "Show a pairwise model comparison table."
-msgstr ""
+msgstr "Tampilkan tabel perbandingan model berpasangan."
 
 msgctxt "SemBasedMetaAnalysis|"
 msgid "Model summary"
-msgstr ""
+msgstr "Ringkasan model"
 
 msgctxt "SemBasedMetaAnalysis|"
 msgid "Show a summary of the model coefficients and computed estimates."
-msgstr ""
+msgstr "Tampilkan ringkasan dari koefisien model dan estimasi terhitung."
 
 msgctxt "SemBasedMetaAnalysis|"
 msgid "Confidence interval type"
-msgstr ""
+msgstr "Jenis interval kepercayaan"
 
 msgctxt "SemBasedMetaAnalysis|"
 msgid "Standard errors"
-msgstr ""
+msgstr "Galat standar"
 
 msgctxt "SemBasedMetaAnalysis|"
 msgid "Likelihood based"
-msgstr ""
+msgstr "Berbasis kemungkinan"
 
 msgctxt "SemBasedMetaAnalysis|"
 msgid "Method for computing confidence interval."
-msgstr ""
+msgstr "Metode untuk menghitung interval kepercayaan."
 
 msgctxt "Upgrades|"
 msgid ""
@@ -6513,7 +6558,6 @@ msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Model Variables"
 msgstr "Variabel Model"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Selected Variables"
 msgstr "Variabel Terpilih"
@@ -6522,7 +6566,6 @@ msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Model Variables"
 msgstr "Variabel Model"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Selected Variables"
 msgstr "Variabel Terpilih"
@@ -6614,9 +6657,10 @@ msgid ""
 "detailed introduction to the module."
 msgstr ""
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Standard errors"
-msgstr ""
+msgstr "Galat standar"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid ""
@@ -7068,47 +7112,38 @@ msgid ""
 "approximation breaks down."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "References"
 msgstr "Referensi"
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "R Packages"
 msgstr "Paket R"
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Events Group 1"
 msgstr "Grup Peristiwa 1"
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Events Group 2"
 msgstr "Grup Peristiwa 2"
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Sample Size Group 1"
 msgstr "Grup Ukuran Sampel 1"
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Sample Size Group 2"
 msgstr "Grup Ukuran Sampel 2"
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Person-Time Group 1"
 msgstr "Grup Waktu-Orang 1"
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Person-Time Group 2"
 msgstr "Grup Waktu-Orang 2"
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Effect size measure"
 msgstr "Pengukuran ukuran efek"
@@ -7118,17 +7153,14 @@ msgid ""
 "Select the effect size measure to be used in the generalized meta-analysis."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Log odds ratio"
 msgstr "Rasio ganjil log"
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Log risk ratio"
 msgstr "Rasio risiko log"
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Risk difference"
 msgstr "Perbedaan risiko"
@@ -7165,7 +7197,6 @@ msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Conditional (exact likelihood)"
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Method"
 msgstr "Metode"
@@ -7176,12 +7207,10 @@ msgid ""
 "model; Equal Effects fixes tau-squared to zero."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Maximum Likelihood"
 msgstr "Kemungkinan Maksimum"
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Equal Effects"
 msgstr "Efek Sama"
@@ -7200,12 +7229,10 @@ msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "z"
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "t"
 msgstr "t"
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Predictors"
 msgstr "Prediktor"
@@ -7215,7 +7242,6 @@ msgid ""
 "Variables to include as predictors (moderators) in a meta-regression model."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Study Labels"
 msgstr "Label Studi"
@@ -7224,7 +7250,6 @@ msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Variable containing labels for the studies."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Subgroup"
 msgstr "Subgrup"
@@ -7257,22 +7282,18 @@ msgid ""
 "analyzing such structures."
 msgstr ""
 
-#, fuzzy
 msgctxt "EffectSizeAggregation|"
 msgid "References"
 msgstr "Referensi"
 
-#, fuzzy
 msgctxt "EffectSizeAggregation|"
 msgid "R Packages"
 msgstr "Paket R"
 
-#, fuzzy
 msgctxt "EffectSizeAggregation|"
 msgid "Effect Size"
 msgstr "Ukuran Efek"
 
-#, fuzzy
 msgctxt "EffectSizeAggregation|"
 msgid "Variable containing the observed effect sizes."
 msgstr "Variabel berisi ukuran efek terobservasi."
@@ -7285,7 +7306,6 @@ msgctxt "EffectSizeAggregation|"
 msgid "Variable containing the standard errors of the effect sizes."
 msgstr ""
 
-#, fuzzy
 msgctxt "EffectSizeAggregation|"
 msgid "Cluster"
 msgstr "Klaster"
@@ -7296,7 +7316,6 @@ msgid ""
 "within."
 msgstr ""
 
-#, fuzzy
 msgctxt "EffectSizeAggregation|"
 msgid "Options"
 msgstr "Opsi"
@@ -7311,7 +7330,6 @@ msgid ""
 "effect sizes."
 msgstr ""
 
-#, fuzzy
 msgctxt "EffectSizeAggregation|"
 msgid "Compute sampling variance"
 msgstr "Hitugn varians pensampelan"
@@ -7336,17 +7354,14 @@ msgctxt "EffectSizeAggregation|"
 msgid "Aggregated Column Names"
 msgstr ""
 
-#, fuzzy
 msgctxt "EffectSizeAggregation|"
 msgid "Effect size"
 msgstr "Ukuran efek"
 
-#, fuzzy
 msgctxt "EffectSizeAggregation|"
 msgid "Standard error"
 msgstr "Galat standar"
 
-#, fuzzy
 msgctxt "EffectSizeAggregation|"
 msgid "Sampling variance"
 msgstr "Varians pensampelan"
@@ -7371,7 +7386,6 @@ msgctxt "EffectSizeComputation|"
 msgid "Group 2/Outcome - (Non-Events)"
 msgstr ""
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Small sample correction"
 msgstr "Koreksi sampel kecil"
@@ -7434,7 +7448,6 @@ msgid ""
 "interval. Displayed as rectangles behind estimate diamonds."
 msgstr ""
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Weight"
 msgstr "Berat"
@@ -7485,7 +7498,6 @@ msgid ""
 "separate panel in the forest plot."
 msgstr ""
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Transform effect size"
 msgstr "Transformasikan ukuran efek"
@@ -7500,67 +7512,54 @@ msgctxt "ForestPlot|"
 msgid "None"
 msgstr ""
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Fisher's z to r"
 msgstr "z ke r Fisher"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Exponential"
 msgstr "Eksponensial"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Log odds to proportions"
 msgstr "Log ganjil ke proporsi"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Log odds to SMD (normal)"
 msgstr "Log ganjil ke SMD (normal)"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Log odds to SMD (logistic)"
 msgstr "Log ganjil ke SMD (logistik)"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "SMD to log odds (normal)"
 msgstr "SMD ke log ganjil (normal)"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "SMD to log odds (logistic)"
 msgstr "SMD ke log ganjil (logistik)"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Hakstian & Whalen inverse α"
 msgstr "Hakstian & Whalen invers α"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Bonett inverse α"
 msgstr "Bonett invers α"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Z to R²"
 msgstr "Z ke R²"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "SMD to Cohen's U₁"
 msgstr "SMD ke U₁ Cohen"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "SMD to Cohen's U₂"
 msgstr "SMD ke U₂ Cohen"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "SMD to Cohen's U₃"
 msgstr "SMD ke U₃ Cohen"
@@ -7577,7 +7576,6 @@ msgctxt "ForestPlot|"
 msgid "Estimate Information"
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "Advanced"
 msgstr "Lanjutan"
@@ -7711,12 +7709,10 @@ msgid ""
 "analysis."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "Yes"
 msgstr "Ya"
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "No"
 msgstr "Tidak"
@@ -7725,7 +7721,6 @@ msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "Extend Metafor Call"
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "Extend metafor call"
 msgstr "Luaskan panggilan metafor"
@@ -7750,7 +7745,6 @@ msgctxt "ClassicalMetaAnalysisExport|"
 msgid "Options for exporting model-derived quantities to the dataset."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisExport|"
 msgid "Diagnostics"
 msgstr "Diagnostik"
@@ -7854,7 +7848,6 @@ msgid ""
 "Export best linear unbiased predictions of the study-specific true effects."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisExport|"
 msgid "Random effects"
 msgstr "Efek acak"
@@ -7863,7 +7856,6 @@ msgctxt "ClassicalMetaAnalysisExport|"
 msgid "Export predicted random effects."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisExport|"
 msgid "Weights"
 msgstr "Berat"
@@ -7919,7 +7911,6 @@ msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Type of variance-covariance matrix input method."
 msgstr "Jenis metode masukan matriks varians-kovarians."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Simple"
 msgstr "Sederhana"
@@ -7963,21 +7954,19 @@ msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Load a csv file containing the precomputed variance-covariance matrix."
 msgstr "Muat berkas csv berisi matriks varians-kovarians diprahitung."
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Structure"
 msgstr "Struktur"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Independent"
-msgstr ""
+msgstr "Independen"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Compound symmetry"
 msgstr "Simetri gabungan"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Autoregressive"
 msgstr "Regresif-oto"
@@ -8023,7 +8012,6 @@ msgid ""
 "symmetry)."
 msgstr ""
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Time"
 msgstr "Waktu"
@@ -8289,7 +8277,6 @@ msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Save computed variance-covariance matrix"
 msgstr "Simpan matriks varians-kovarians terhitung"
 
-#, fuzzy
 msgctxt "ForestPlotEstimateInformation|"
 msgid "Selected Variables"
 msgstr "Variabel Terpilih"
@@ -8300,12 +8287,10 @@ msgid ""
 "left section of the panel for estimate rows."
 msgstr ""
 
-#, fuzzy
 msgctxt "ForestPlotEstimateInformation|"
 msgid "Title"
 msgstr "Judul"
 
-#, fuzzy
 msgctxt "ForestPlotEstimateInformation|"
 msgid "Width"
 msgstr "Lebar"
@@ -8320,22 +8305,18 @@ msgid ""
 "for estimate rows."
 msgstr ""
 
-#, fuzzy
 msgctxt "ForestPlotEstimateInformation|"
 msgid "Left"
 msgstr "Kiri"
 
-#, fuzzy
 msgctxt "ForestPlotEstimateInformation|"
 msgid "Middle"
 msgstr "Tengah"
 
-#, fuzzy
 msgctxt "ForestPlotEstimateInformation|"
 msgid "Right"
 msgstr "Kanan"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Forest Plot"
 msgstr "Diagram Hutan"
@@ -8384,7 +8365,6 @@ msgctxt "ForestPlotSection|"
 msgid "Model Variables"
 msgstr "Variabel Model"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Selected Variables"
 msgstr "Variabel Terpilih"
@@ -8453,7 +8433,6 @@ msgctxt "ForestPlotSection|"
 msgid "Add meta-analytic model information to the forest plot."
 msgstr ""
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Heterogeneity"
 msgstr "Heterogenitas"
@@ -8488,12 +8467,10 @@ msgid ""
 "information section."
 msgstr ""
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Estimate"
 msgstr "Estimasi"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "𝜏"
 msgstr "𝜏"
@@ -8505,7 +8482,6 @@ msgid ""
 "multivariate meta-analysis."
 msgstr ""
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "𝜏²"
 msgstr "𝜏²"
@@ -8517,7 +8493,6 @@ msgid ""
 "analysis."
 msgstr ""
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "I²"
 msgstr "I²"
@@ -8536,14 +8511,13 @@ msgid ""
 "section. Available when heterogeneity meta-regression is specified."
 msgstr ""
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Effect Size"
 msgstr "Ukuran Efek"
 
 msgctxt "ForestPlotSection|"
 msgid "Fixed effect estimate"
-msgstr ""
+msgstr "Estimasi efek tetap"
 
 msgctxt "ForestPlotSection|"
 msgid ""
@@ -8554,7 +8528,7 @@ msgstr ""
 
 msgctxt "ForestPlotSection|"
 msgid "Fixed effect estimate test"
-msgstr ""
+msgstr "Uji estimasi efek tetap"
 
 msgctxt "ForestPlotSection|"
 msgid ""
@@ -8605,11 +8579,11 @@ msgctxt "ForestPlotSection|"
 msgid "Include the publication bias test in the model information section."
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Settings"
-msgstr ""
+msgstr "Pengaturan"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "General"
 msgstr "Umum"
@@ -8634,9 +8608,10 @@ msgid ""
 "right panel."
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Conditional estimates"
-msgstr ""
+msgstr "Estimasi kondisional"
 
 msgctxt "ForestPlotSettings|"
 msgid ""
@@ -8660,17 +8635,14 @@ msgctxt "ForestPlotSettings|"
 msgid "Left"
 msgstr "Kiri"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Middle"
 msgstr "Tengah"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Right"
 msgstr "Kanan"
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Subgroup"
 msgstr "Subgrup"
@@ -8781,7 +8753,6 @@ msgctxt "ForestPlotSettings|"
 msgid "X-axis"
 msgstr ""
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Label"
 msgstr "Label"
@@ -8798,13 +8769,15 @@ msgctxt "ForestPlotSettings|"
 msgid "Change the default x-axis limits."
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Lower"
-msgstr ""
+msgstr "Bawah"
 
+#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Upper"
-msgstr ""
+msgstr "Atas"
 
 msgctxt "ForestPlotSettings|"
 msgid "Ticks"
@@ -8823,7 +8796,6 @@ msgid ""
 "Apply the selected effect size transformation only to the x-axis labels."
 msgstr ""
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Size"
 msgstr "Ukuran"
@@ -8844,9 +8816,10 @@ msgctxt "ForestPlotSettings|"
 msgid "Axis labels"
 msgstr ""
 
+#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Row"
-msgstr ""
+msgstr "Baris"
 
 msgctxt "ForestPlotSettings|"
 msgid "Left panel"
@@ -8869,7 +8842,6 @@ msgid ""
 "Select a variable for encoding the color or shape of the plotted objects."
 msgstr ""
 
-#, fuzzy
 msgctxt "ForestPlotSettings|"
 msgid "Shape"
 msgstr "Bentuk"
@@ -8892,7 +8864,6 @@ msgctxt "ForestPlotStudyInformation|"
 msgid "Width"
 msgstr "Lebar"
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Alignment"
 msgstr "Keselarasan"
@@ -8902,7 +8873,6 @@ msgid ""
 "Adjust the Title, Width, and Alignment of each column in the left section."
 msgstr ""
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Left"
 msgstr "Kiri"
@@ -8911,7 +8881,6 @@ msgctxt "ForestPlotStudyInformation|"
 msgid "Middle"
 msgstr "Tengah"
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Right"
 msgstr "Kanan"
@@ -8967,7 +8936,6 @@ msgstr ""
 "Sertakan interval kepercayaan sekunder untuk ukuran efek di bagian tengah "
 "panel informasi tingkat studi."
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Order"
 msgstr "Urutan"
@@ -8986,7 +8954,6 @@ msgid ""
 msgstr ""
 "Pilih variabel berdasarkan mana panel informasi tingkat studi diurutkan."
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Ascending"
 msgstr "Naik"
@@ -9021,7 +8988,6 @@ msgctxt "ForestPlotStudyInformation|"
 msgid "Aggregate the estimates by boxplot."
 msgstr ""
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Bubbles"
 msgstr "Gelembung"
@@ -9040,12 +9006,10 @@ msgid ""
 "assessments. Supports RoB 2, ROBINS-I, and QUADAS-2."
 msgstr ""
 
-#, fuzzy
 msgctxt "RiskOfBiasPlot|"
 msgid "References"
 msgstr "Referensi"
 
-#, fuzzy
 msgctxt "RiskOfBiasPlot|"
 msgid "R Packages"
 msgstr "Paket R"
@@ -9073,7 +9037,6 @@ msgctxt "RiskOfBiasPlot|"
 msgid "QUADAS-2"
 msgstr ""
 
-#, fuzzy
 msgctxt "RiskOfBiasPlot|"
 msgid "Study Label"
 msgstr "Label Studi"
@@ -9154,7 +9117,6 @@ msgctxt "RiskOfBiasPlot|"
 msgid "Variable containing the overall risk-of-bias judgment for each study."
 msgstr ""
 
-#, fuzzy
 msgctxt "RiskOfBiasPlot|"
 msgid "Weights"
 msgstr "Berat"
@@ -9165,7 +9127,6 @@ msgid ""
 "variance weights)."
 msgstr ""
 
-#, fuzzy
 msgctxt "RiskOfBiasPlot|"
 msgid "Plots"
 msgstr "Diagram"
