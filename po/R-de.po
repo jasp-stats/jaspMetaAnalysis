@@ -1299,9 +1299,6 @@ msgstr[1] "%i Beobachtungen wurden aufgrund fehlender Werte entfernt."
 #~ msgid "Rhat"
 #~ msgstr "R-Dach"
 
-#~ msgid "%1$s is on %2$s scale."
-#~ msgstr "%1$s ist auf Skala %2$s."
-
 #~ msgid "The weights (%1$s) correspond to %2$s <em>p</em>-values."
 #~ msgstr "Die Gewichte (%1$s) entsprechen den %2$s <em>p</em>-Werten."
 
