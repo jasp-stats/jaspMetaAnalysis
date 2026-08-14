@@ -14,41 +14,41 @@ msgstr ""
 "X-Generator: Weblate 2026.8.dev0\n"
 
 msgid "There must be at least one observation in each group."
-msgstr ""
 
+msgstr "每個組別至少必須有一個觀察值。"
 msgid "Forest Plot"
-msgstr ""
 
+msgstr "森林圖"
 msgid "Study"
-msgstr ""
 
+msgstr "研究"
 msgid "Observed study effects"
-msgstr ""
 
+msgstr "觀察到的研究效果"
 msgid "Estimated study effects"
-msgstr ""
 
+msgstr "估計的研究效果"
 msgid "Observed and estimated study effects"
-msgstr ""
 
+msgstr "觀察與估計的研究效果"
 msgid "Cumulative forest plot"
-msgstr ""
 
+msgstr "累積森林圖"
 msgid "Fixed effects"
-msgstr ""
 
+msgstr "固定效果"
 msgid "Random effects"
-msgstr ""
 
+msgstr "隨機效果"
 msgid "Averaged"
-msgstr ""
 
+msgstr "平均"
 msgid "Ordered effects"
-msgstr ""
 
+msgstr "排序效果"
 msgid "Estimated"
-msgstr ""
 
+msgstr "估計"
 msgid "Observed"
 msgstr "觀測值"
 
@@ -56,100 +56,100 @@ msgid "Effect size"
 msgstr "效果量"
 
 msgid "Prior"
-msgstr ""
 
+msgstr "先驗"
 msgid "Overall effect size"
-msgstr ""
 
+msgstr "整體效果量"
 msgid "Effect Size"
 msgstr "效果量"
 
 msgid "Heterogeneity"
-msgstr ""
 
+msgstr "異質性"
 msgid "Density"
 msgstr "密度"
 
 msgid "Prior and Posteriors"
-msgstr ""
 
+msgstr "先驗與後驗"
 msgid "Fixed H"
-msgstr ""
 
+msgstr "固定 H"
 msgid "Random H"
-msgstr ""
 
+msgstr "隨機 H"
 msgid "Averaged H"
-msgstr ""
 
+msgstr "平均 H"
 msgid "Prior H"
-msgstr ""
 
+msgstr "先驗 H"
 msgid "Ordered H"
-msgstr ""
 
+msgstr "排序 H"
 msgid "Sequential Analysis"
-msgstr ""
 
+msgstr "序列分析"
 msgid "Bayes factors effect size"
-msgstr ""
 
+msgstr "效果量的貝氏因子"
 msgid "Bayes factors heterogeneity"
-msgstr ""
 
+msgstr "異質性的貝氏因子"
 msgid "Posterior model probabilities"
-msgstr ""
 
+msgstr "後驗模型機率"
 msgid "Evidence for random effects"
-msgstr ""
 
+msgstr "隨機效果的證據"
 msgid "Evidence for fixed effects"
-msgstr ""
 
+msgstr "固定效果的證據"
 msgid "random"
-msgstr ""
 
+msgstr "隨機"
 msgid "fixed"
-msgstr ""
 
+msgstr "固定"
 msgid "Anecdotal"
-msgstr ""
 
+msgstr "軼聞性"
 msgid "Moderate"
-msgstr ""
 
+msgstr "中等"
 msgid "Strong"
-msgstr ""
 
+msgstr "強"
 msgid "Very Strong"
-msgstr ""
 
+msgstr "非常強"
 msgid "Extreme"
-msgstr ""
 
+msgstr "極強"
 msgid "Evidence for %s:"
-msgstr ""
 
+msgstr "%s 的證據："
 msgid "Plotting failed: The Bayes factors contain infinity."
-msgstr ""
 
+msgstr "繪圖失敗：貝氏因子包含無限值。"
 msgid "Studies"
-msgstr ""
 
+msgstr "研究"
 msgid ""
 "Posterior model \n"
 " probability"
-msgstr ""
 
+msgstr "後驗模型 \n 機率"
 msgid "Posterior Estimates per Model"
-msgstr ""
 
+msgstr "每個模型的後驗估計值"
 msgid "BF%1$s%2$s"
-msgstr ""
 
+msgstr "BF%1$s%2$s"
 msgid "Log(BF%1$s%2$s)"
-msgstr ""
 
+msgstr "Log（BF%1$s%2$s）"
 msgid "Mean"
 msgstr "平均數"
 
@@ -160,121 +160,121 @@ msgid "Lower"
 msgstr "下界"
 
 msgid "95%% Credible Interval"
-msgstr ""
 
+msgstr "95%% 可信區間"
 msgid "Upper"
 msgstr "上界"
 
 msgid ""
 "%1$s and %2$s are the group-level effect size and standard deviation, "
 "respectively."
-msgstr ""
 
+msgstr "%1$s 與 %2$s 分別是組別層級的效果量與標準差。"
 msgid "%s is the group-level effect size."
-msgstr ""
 
+msgstr "%s 是組別層級的效果量。"
 msgid "Bayes factor of the random effects H%1$s over the fixed effects H%1$s."
-msgstr ""
 
+msgstr "隨機效果 H%1$s 對上固定效果 H%1$s 的貝氏因子。"
 msgid ""
 "Posterior estimates are based on the models that assume an effect to be "
 "present. The Bayes factor is based on all four models: fixed effects H%2$s & "
 "random effects H%2$s over the fixed effects H%1$s & random effects H%1$s."
-msgstr ""
 
+msgstr "後驗估計值基於假定效果存在下的模型。貝氏因子基於全部四個模型：固定效果 H%2$s 與隨機效果 H%2$s 對上固定效果 H%1$s 與隨機效果 H%1$s。"
 msgid ""
 "Model averaged posterior estimates for %3$s are not yet available, but will "
 "be added in the future. The Bayes factor is based on all four models: random "
 "effects H%1$s & H%2$s over the fixed effects H%1$s & H%2$s."
-msgstr ""
 
+msgstr "%3$s 的模型平均後驗估計值目前尚不可用，但將在未來加入。貝氏因子基於全部四個模型：隨機效果 H%1$s 與 H%2$s 對上固定效果 H%1$s 與 H%2$s。"
 msgid ""
 "Bayes factor of the (unconstrained/constrained) random effects H%1$s over "
 "the fixed effects H%1$s."
-msgstr ""
 
+msgstr "（無限制／受限）隨機效果 H%1$s 對上固定效果 H%1$s 的貝氏因子。"
 msgid "Bayes factor of the fixed effects H%1$s over the random effects H%1$s."
-msgstr ""
 
+msgstr "固定效果 H%1$s 對上隨機效果 H%1$s 的貝氏因子。"
 msgid ""
 "Model averaged posterior estimates are based on the models that assume an "
 "effect to be present. The Bayes factor is based on all four models: fixed "
 "effects H%1$s & random effects H%1$s over the fixed effects H%2$s & random "
 "effects H%2$s."
-msgstr ""
 
+msgstr "模型平均後驗估計值基於假定效果存在下的模型。貝氏因子基於全部四個模型：固定效果 H%1$s 與隨機效果 H%1$s 對上固定效果 H%2$s 與隨機效果 H%2$s。"
 msgid ""
 "Model averaged posterior estimates for %3$s are not yet available, but will "
 "be added in the future. The Bayes factor is based on all four models: fixed "
 "effects H%1$s & H%2$s over the random effects H%1$s & H%2$s."
-msgstr ""
 
+msgstr "%3$s 的模型平均後驗估計值目前尚不可用，但將在未來加入。貝氏因子基於全部四個模型：固定效果 H%1$s 與 H%2$s 對上隨機效果 H%1$s 與 H%2$s。"
 msgid ""
 "Bayes factor of the fixed effects H%1$s over the (unconstrained/constrained) "
 "random effects H%1$s."
-msgstr ""
 
+msgstr "固定效果 H%1$s 對上（無限制／受限）隨機效果 H%1$s 的貝氏因子。"
 msgid ""
 "Bayes factor of the ordered effects H%1$s over the fixed effects H%2$s. The "
 "Bayes factor for the ordered effects H%1$s versus the unconstrained (random) "
 "effects H%1$s model is %3$.3f."
-msgstr ""
 
+msgstr "排序效果 H%1$s 對上固定效果 H%2$s 的貝氏因子。排序效果 H%1$s 對上無限制（隨機）效果 H%1$s 模型的貝氏因子為 %3$.3f。"
 msgid ""
 "Bayes factor of the fixed effects H%2$s over the ordered effects H%1$s. The "
 "Bayes factor for the unconstrained (random) effects H%1$s versus the ordered "
 "effects H%1$s model is %3$.3f."
-msgstr ""
 
+msgstr "固定效果 H%2$s 對上排序效果 H%1$s 的貝氏因子。無限制（隨機）效果 H%1$s 對上排序效果 H%1$s 模型的貝氏因子為 %3$.3f。"
 msgid "Model Probabilities"
-msgstr ""
 
+msgstr "模型機率"
 msgid "Posterior"
-msgstr ""
 
+msgstr "後驗"
 msgid "Fixed H%s"
-msgstr ""
 
+msgstr "固定 H%s"
 msgid "Random H%s"
-msgstr ""
 
+msgstr "隨機 H%s"
 msgid "Ordered H%s"
-msgstr ""
 
+msgstr "排序 H%s"
 msgid "Effect Sizes per Study"
-msgstr ""
 
+msgstr "每個研究的效果量"
 msgid ""
 "Posterior mean and 95%% credible interval estimates from the random effects "
 "model."
-msgstr ""
 
+msgstr "來自隨機效果模型的後驗平均與 95%% 可信區間估計值。"
 msgid ""
 "Posterior mean and 95%% credible interval estimates from the constrained "
 "random effects model."
-msgstr ""
 
+msgstr "來自受限隨機效果模型的後驗平均與 95%% 可信區間估計值。"
 msgid "The prior lower bound is not smaller than the upper bound."
-msgstr ""
 
+msgstr "先驗下界不小於上界。"
 msgid "Your prior contains negative values."
-msgstr ""
 
+msgstr "您的先驗包含負值。"
 msgid "Your prior contains positive values."
-msgstr ""
 
+msgstr "您的先驗包含正值。"
 msgid "No positive numbers found in %s"
-msgstr ""
 
+msgstr "在 %s 中找不到正數。"
 msgid "No negative numbers found in %s"
-msgstr ""
 
+msgstr "在 %s 中找不到負數。"
 msgid "The 95%% CI Lower Bound must be smaller than the Upper Bound."
-msgstr ""
 
+msgstr "95%% 信賴區間下界必須小於上界。"
 msgid "You cannot set all the prior model probabilties to zero."
-msgstr ""
 
+msgstr "您不能將所有先驗模型機率都設為零。"
 msgid ""
 "The model could not be fit. Please check the following: Do you have at least "
 "n=2 studies? If the prior is truncated, is it consistent with the data (when "
@@ -286,211 +286,211 @@ msgstr ""
 "行）？"
 
 msgid "Prior and posterior plot"
-msgstr ""
 
+msgstr "先驗與後驗圖"
 msgid "Value"
 msgstr "數值"
 
 msgid "Running means plot"
-msgstr ""
 
+msgstr "執行平均圖"
 msgid "Iteration"
-msgstr ""
 
+msgstr "迭代"
 msgid "Running mean"
-msgstr ""
 
+msgstr "執行平均"
 msgid "Autocorrelations plot"
-msgstr ""
 
+msgstr "自相關圖"
 msgid "Lag"
 msgstr "滯後"
 
 msgid "Autocorrelation"
-msgstr ""
 
+msgstr "自相關"
 msgid "Gelman-Rubin plot"
-msgstr ""
 
+msgstr "Gelman-Rubin 圖"
 msgid "Last iteration in chain"
-msgstr ""
 
+msgstr "鏈中的最後一次迭代"
 msgid "Shrink factor"
-msgstr ""
 
+msgstr "收縮因子"
 msgid "Model type '%1$s' is not available for effect size measure '%2$s'."
-msgstr ""
 
+msgstr "模型類型『%1$s』不適用於效果量測量『%2$s』。"
 msgid "All observations must be non-negative."
-msgstr ""
 
+msgstr "所有觀察值必須為非負數。"
 msgid "All sample sizes must be positive."
-msgstr ""
 
+msgstr "所有樣本人數必須為正數。"
 msgid ""
 "Event counts must be smaller than or equal to the corresponding sample sizes."
-msgstr ""
 
+msgstr "事件次數必須小於或等於對應的樣本人數。"
 msgid "All person-time values must be positive."
-msgstr ""
 
+msgstr "所有人時值必須為正數。"
 msgid "Heterogeneity (Wald)"
-msgstr ""
 
+msgstr "異質性（Wald）"
 msgid "Heterogeneity (LRT)"
-msgstr ""
 
+msgstr "異質性（LRT）"
 msgid "Residual heterogeneity (Wald)"
-msgstr ""
 
+msgstr "殘差異質性（Wald）"
 msgid "Residual heterogeneity (LRT)"
-msgstr ""
 
+msgstr "殘差異質性（LRT）"
 msgid "Some GLMM heterogeneity tests could not be computed for this model fit."
-msgstr ""
 
+msgstr "此模型適配無法計算部分 GLMM 異質性檢定。"
 msgid "Cochran-Mantel-Haenszel"
-msgstr ""
 
+msgstr "Cochran-Mantel-Haenszel"
 msgid "Mantel-Haenszel"
-msgstr ""
 
+msgstr "Mantel-Haenszel"
 msgid "Tarone"
-msgstr ""
 
+msgstr "Tarone"
 msgid "Bubble Plots"
-msgstr ""
 
+msgstr "泡泡圖"
 msgid "Subgroup: %1$s"
-msgstr ""
 
+msgstr "子群：%1$s"
 msgid "%1$s (%2$s)"
-msgstr ""
 
+msgstr "%1$s（%2$s）"
 msgid "Profile Likelihood Plot"
-msgstr ""
 
+msgstr "剖面概似圖"
 msgid ""
 "Profile likelihood is not available for models that contain meta-regression "
 "on heterogeneity."
-msgstr ""
 
+msgstr "對於在異質性上包含統合迴歸的模型，剖面概似不可用。"
 msgid "Baujat Plot"
-msgstr ""
 
+msgstr "Baujat 圖"
 msgid ""
 "Baujat plot is not available for models that contain meta-regression on "
 "heterogeneity."
-msgstr ""
 
+msgstr "對於在異質性上包含統合迴歸的模型，Baujat 圖不可用。"
 msgid "Squared Pearson Residual"
-msgstr ""
 
+msgstr "皮爾森殘差平方"
 msgid "Influence on Fitted Value"
-msgstr ""
 
+msgstr "對適配值的影響"
 msgid "Residual Funnel Plot"
-msgstr ""
 
+msgstr "殘差漏斗圖"
 msgid "Residual Value"
-msgstr ""
 
+msgstr "殘差值"
 msgid "Standard Error"
 msgstr "標準誤"
 
 msgid "Profile Likelihood"
-msgstr ""
 
+msgstr "剖面概似"
 msgid "Variance Inflation Summary"
-msgstr ""
 
+msgstr "變異膨脹摘要"
 msgid "Effect Size Meta-Regression Variance Inflation"
-msgstr ""
 
+msgstr "效果量統合迴歸變異膨脹"
 msgid "Heterogeneity Meta-Regression Variance Inflation"
-msgstr ""
 
+msgstr "異質性統合迴歸變異膨脹"
 msgid "Parameters"
-msgstr ""
 
+msgstr "參數"
 msgid "VIF"
-msgstr ""
 
+msgstr "VIF"
 msgid "SIF"
-msgstr ""
 
+msgstr "SIF"
 msgid "Casewise Diagnostics Table"
-msgstr ""
 
+msgstr "逐案診斷表"
 msgid "Label"
-msgstr ""
 
+msgstr "標籤"
 msgid "Predictor"
-msgstr ""
 
+msgstr "預測變項"
 msgid "Standardized Residual"
-msgstr ""
 
+msgstr "標準化殘差"
 msgid "DFFITS"
-msgstr ""
 
+msgstr "DFFITS"
 msgid "Cook's Distance"
-msgstr ""
 
+msgstr "庫克距離"
 msgid "Covariance ratio"
-msgstr ""
 
+msgstr "共變異數比值"
 msgid "𝜏"
-msgstr ""
 
+msgstr "𝜏"
 msgid "Leave One Out"
-msgstr ""
 
+msgstr "逐一排除"
 msgid "𝜏²"
-msgstr ""
 
+msgstr "𝜏²"
 msgid "Qₑ"
-msgstr ""
 
+msgstr "Qₑ"
 msgid "Hat"
-msgstr ""
 
+msgstr "槓桿值"
 msgid "Weight"
-msgstr ""
 
+msgstr "權重"
 msgid "Difference in coefficients"
-msgstr ""
 
+msgstr "係數差異"
 msgid "Influential"
-msgstr ""
 
+msgstr "具影響力"
 msgid "No influential cases found."
-msgstr ""
 
+msgstr "未找到具影響力的案例。"
 msgid "%1$sNo influential cases found."
-msgstr ""
 
+msgstr "%1$s未找到具影響力的案例。"
 msgid "Diagnostics are based on the the subgroup models."
-msgstr ""
 
+msgstr "診斷基於子群模型。"
 msgid "Diagnostics are based on the non-clustered model."
-msgstr ""
 
+msgstr "診斷基於非叢集模型。"
 msgid "Estimated Marginal Means and Contrasts Summary"
-msgstr ""
 
+msgstr "估計邊際平均與對比摘要"
 msgid "Estimated Marginal Means / Contrasts"
-msgstr ""
 
+msgstr "估計邊際平均／對比"
 msgid "(Effect Size)"
-msgstr ""
 
+msgstr "（效果量）"
 msgid "(Heterogeneity)"
-msgstr ""
 
+msgstr "（異質性）"
 msgid "Adjusted Estimate"
-msgstr ""
 
+msgstr "調整後估計值"
 msgid "Estimated Marginal Means"
 msgstr "估計邊際平均數"
 
@@ -501,167 +501,167 @@ msgid "Estimate"
 msgstr "估計值"
 
 msgid "Heterogeneity Level"
-msgstr ""
 
+msgstr "異質性水準"
 msgid "t"
-msgstr ""
 
+msgstr "t"
 msgid "z"
-msgstr ""
 
+msgstr "z"
 msgid "df"
-msgstr ""
 
+msgstr "自由度"
 msgid "p"
-msgstr ""
 
+msgstr "p"
 msgid "Contrasts"
-msgstr ""
 
+msgstr "對比"
 msgid "Comparison"
-msgstr ""
 
+msgstr "比較"
 msgid "Contrast tests based on Wald-type z-tests."
-msgstr ""
 
+msgstr "基於 Wald 型 z 檢定的對比檢定。"
 msgid "Mean - %1$sSD"
-msgstr ""
 
+msgstr "平均 - %1$sSD"
 msgid "Mean + %1$sSD"
-msgstr ""
 
+msgstr "平均 + %1$sSD"
 msgid "Adjusted estimate"
-msgstr ""
 
+msgstr "調整後估計值"
 msgid ""
 "Each marginal mean estimate is averaged across the levels of the remaining "
 "predictors."
-msgstr ""
 
+msgstr "每個邊際平均估計值都跨越其餘預測變項的水準取平均。"
 msgid ""
 "Each marginal mean estimate is averaged across the levels of the remaining "
 "predictors in a given subgroup."
-msgstr ""
 
+msgstr "在給定子群中，每個邊際平均估計值都跨越其餘預測變項的水準取平均。"
 msgid ""
 "NAs in the marginal mean estimates were introduced due to the %1$s "
 "transformation. Please verify that you are using the correct effect size "
 "transformation."
-msgstr ""
 
+msgstr "邊際平均估計值中的 NA 是由於 %1$s 轉換所產生。請確認您使用正確的效果量轉換。"
 msgid ""
 "The marginal mean estimates and intervals are transformed using %1$s "
 "transformation. For nonlinear transformations, transformed marginal means "
 "are interpreted as medians on the transformed scale."
-msgstr ""
 
+msgstr "邊際平均估計值與區間使用 %1$s 轉換進行轉換。對於非線性轉換，轉換後的邊際平均在轉換尺度上解釋為中位數。"
 msgid "The estimates and intervals correspond to %1$s."
-msgstr ""
 
+msgstr "估計值與區間對應於 %1$s。"
 msgid ""
 "Each contrast is averaged across the levels of the remaining predictors."
-msgstr ""
 
+msgstr "每個對比都跨越其餘預測變項的水準取平均。"
 msgid ""
 "Contrasts of estimates marginal means cannot be transformed via the effect "
 "size transformation."
-msgstr ""
 
+msgstr "估計邊際平均的對比無法透過效果量轉換進行轉換。"
 msgid ""
 "Contrasts of estimated marginal means are adjusted for multiple comparisons "
 "using %1$s correction."
-msgstr ""
 
+msgstr "估計邊際平均的對比使用 %1$s 校正對多重比較進行調整。"
 msgid ""
 "Contrasts of estimated marginal means cannot be transformed via the link "
 "function. As such, the contrasts are summarized on the model scale: log(𝜏²)."
-msgstr ""
 
+msgstr "估計邊際平均的對比無法透過連結函式進行轉換。因此，對比在模型尺度上摘要：log（𝜏²）。"
 msgid ""
 "Contrasts of estimated marginal means cannot be transformed via the "
 "heterogeneity transformation. As such, the contrasts are summarized as 𝜏²."
-msgstr ""
 
+msgstr "估計邊際平均的對比無法透過異質性轉換進行轉換。因此，對比以 𝜏² 摘要。"
 msgid "Estimating Meta-Analytic Model"
-msgstr ""
 
+msgstr "估計統合分析模型"
 msgid "Full dataset"
-msgstr ""
 
+msgstr "完整資料集"
 msgid "Estimating Subgroup Models"
-msgstr ""
 
+msgstr "估計子群模型"
 msgid ""
 "The loaded distance matrix for '%1$s' does not match the dataset. The "
 "following levels are missing: %2$s."
-msgstr ""
 
+msgstr "『%1$s』的已載入距離矩陣與資料集不符。缺少以下水準：%2$s。"
 msgid ""
 "The loaded correlation matrix for '%1$s' does not match the dataset. The "
 "following levels are missing: %2$s."
-msgstr ""
 
+msgstr "『%1$s』的已載入相關矩陣與資料集不符。缺少以下水準：%2$s。"
 msgid "All observations were removed as influential."
-msgstr ""
 
+msgstr "所有觀察值皆因具影響力而被移除。"
 msgid "Intercept"
 msgstr "截距"
 
 msgid "%1$s: not available"
-msgstr ""
 
+msgstr "%1$s：不可用"
 msgid "Residual heterogeneity"
-msgstr ""
 
+msgstr "殘差異質性"
 msgid "Moderation (effect size): %1$s"
-msgstr ""
 
+msgstr "調節作用（效果量）：%1$s"
 msgid "Moderation (heterogeneity): %1$s"
-msgstr ""
 
+msgstr "調節作用（異質性）：%1$s"
 msgid "Moderation: %1$s"
-msgstr ""
 
+msgstr "調節作用：%1$s"
 msgid "%s%% CI"
 msgstr "%s%% 可信區間（CI）"
 
 msgid "%s%% PI"
-msgstr ""
 
+msgstr "%s%% 預測區間"
 msgid "Subgroup"
-msgstr ""
 
+msgstr "子群"
 msgid "Warning:"
 msgstr "警告："
 
 msgid ""
 "Cluster-robust inference has very low effective degrees of freedom. When "
 "Satterthwaite df < 4, p-values should be interpreted with extreme caution."
-msgstr ""
 
+msgstr "叢集穩健推論的有效自由度非常低。當 Satterthwaite 自由度 < 4 時，p 值應極其謹慎地解釋。"
 msgid ""
 "Knapp-Hartung inference is based on very few residual degrees of freedom; "
 "results can be sensitive and should be interpreted cautiously."
-msgstr ""
 
+msgstr "Knapp-Hartung 推論基於極少的殘差自由度；結果可能敏感，應謹慎解釋。"
 msgid ""
 "The model estimation failed with the following message: %1$s. Please, "
 "consider simplifying the model."
-msgstr ""
 
+msgstr "模型估計因以下訊息而失敗：%1$s。請考慮簡化模型。"
 msgid ""
 "The cluster-robust standard errors could not be computed. Please, consider "
 "modifying the clustering settings in the 'Advanced' section."
-msgstr ""
 
+msgstr "無法計算叢集穩健標準誤。請考慮修改『進階』區段中的叢集設定。"
 msgid "Fewer than two estimates."
-msgstr ""
 
+msgstr "估計值少於兩個。"
 msgid ""
 "The selected 'Method' requires specification of the 'Weights' option in the "
 "'Advanced' section."
-msgstr ""
 
+msgstr "所選的『方法』需要在『進階』區段中指定『權重』選項。"
 msgid ""
 "The GLMM could not be estimated for the selected model. This can happen with "
 "sparse event counts, risk differences, random study effects, or a moderator "
@@ -670,1058 +670,1054 @@ msgid ""
 "if appropriate, or centering/scaling continuous moderators.\n"
 "\n"
 "Metafor reported: Cannot fit ML model."
-msgstr ""
 
+msgstr "無法對所選模型估計 GLMM。這可能發生在事件計數稀疏、風險差異、隨機研究效果，或調節變項結構對資料而言過於複雜時。請嘗試簡化調節變項模型、使用固定研究效果 GLMM、在適當的情況下變更效果量測量，或對連續調節變項進行置中／縮放。\n\nMetafor 報告：無法適配 ML 模型。"
 msgid "Meta-Regression Summary"
-msgstr ""
 
+msgstr "統合迴歸摘要"
 msgid "Effect Size Meta-Regression Terms Tests"
-msgstr ""
 
+msgstr "效果量統合迴歸模型項檢定"
 msgid "Heterogeneity Meta-Regression Terms Tests"
-msgstr ""
 
+msgstr "異質性統合迴歸模型項檢定"
 msgid "F"
-msgstr ""
 
+msgstr "F"
 msgid "Qₘ"
-msgstr ""
 
+msgstr "Qₘ"
 msgid "df₁"
-msgstr ""
 
+msgstr "df₁"
 msgid "df₂"
-msgstr ""
 
+msgstr "df₂"
 msgid "p (permutation)"
-msgstr ""
 
+msgstr "p（置換）"
 msgid "Term tests based on Wald-type chi-squared tests."
-msgstr ""
 
+msgstr "基於 Wald 型卡方檢定的模型項檢定。"
 msgid "Effect Size Meta-Regression Coefficients"
-msgstr ""
 
+msgstr "效果量統合迴歸係數"
 msgid "Heterogeneity Meta-Regression Coefficients"
-msgstr ""
 
+msgstr "異質性統合迴歸係數"
 msgid "Effect Size Meta-Regression Correlation Matrix"
-msgstr ""
 
+msgstr "效果量統合迴歸相關矩陣"
 msgid "Heterogeneity Meta-Regression Correlation Matrix"
-msgstr ""
 
+msgstr "異質性統合迴歸相關矩陣"
 msgid "Subgroup %1$s:"
-msgstr ""
 
+msgstr "子群 %1$s："
 msgid ""
 "%1$sThe term %2$s was completely removed from the model. Possible causes are "
 "missing values, collinear predictors, or missing crossed cells in an "
 "interaction term."
-msgstr ""
 
+msgstr "%1$s模型項 %2$s 已從模型中完全移除。可能的原因為缺失值、共線預測變項，或交互作用項中缺少交叉儲存格。"
 msgid ""
 "%1$sThe term %2$s was partilly removed (%3$i/%4$i coefficients) from the "
 "model. Possible causes are missing values, collinear predictors, or missing "
 "crossed cells in an interaction term."
-msgstr ""
 
+msgstr "%1$s模型項 %2$s 已從模型中部分移除（%3$i/%4$i 個係數）。可能的原因為缺失值、共線預測變項，或交互作用項中缺少交叉儲存格。"
 msgid ""
 "%1$sThe following coefficients were removed from the model: %2$s. Possible "
 "causes are missing values, collinear predictors, or missing crossed cells in "
 "an interaction term."
-msgstr ""
 
+msgstr "%1$s下列係數已從模型中移除：%2$s。可能的原因為缺失值、共線預測變項，或交互作用項中缺少交叉儲存格。"
 msgid "Pooled effect"
-msgstr ""
 
+msgstr "合併效果"
 msgid ""
 "Indexes of %1$s moderation coefficients were specified in an incorrect "
 "format. Try '(1, 2)' to test the first two coefficients."
-msgstr ""
 
+msgstr "%1$s調節作用係數的索引以不正確的格式指定。請嘗試用『(1, 2)』檢定前兩個係數。"
 msgid ""
 "The selected coefficients for %1$s moderation must be between 1 and %2$i (i."
 "e., the number of regression parameters)."
-msgstr ""
 
+msgstr "%1$s調節作用所選的係數必須介於 1 與 %2$i 之間（即迴歸參數數目）。"
 msgid "Effect size (coef: %1$s)"
-msgstr ""
 
+msgstr "效果量（係數：%1$s）"
 msgid "Effect size coefficients %1$s correspond to %2$s."
-msgstr ""
 
+msgstr "效果量係數 %1$s 對應於 %2$s。"
 msgid "Heterogeneity (coef: %1$s)"
-msgstr ""
 
+msgstr "異質性（係數：%1$s）"
 msgid "Heterogeneity coefficients %1$s correspond to %2$s."
-msgstr ""
 
+msgstr "異質性係數 %1$s 對應於 %2$s。"
 msgid "The pooled effect size could not be calculated."
-msgstr ""
 
+msgstr "無法計算合併效果量。"
 msgid "(coef ...)"
-msgstr ""
 
+msgstr "（係數 ...）"
 msgid "Moderation effect size%1$s"
-msgstr ""
 
+msgstr "調節作用效果量%1$s"
 msgid "Moderation%1$s"
-msgstr ""
 
+msgstr "調節作用%1$s"
 msgid "Moderation heterogeneity%1$s"
-msgstr ""
 
+msgstr "調節作用異質性%1$s"
 msgid "(coef: %1$s)"
-msgstr ""
 
+msgstr "（係數：%1$s）"
 msgid "Subgroup differences"
-msgstr ""
 
+msgstr "子群差異"
 msgid "Model Summary"
 msgstr "模型摘要"
 
 msgid "Meta-Analytic Tests"
-msgstr ""
 
+msgstr "統合分析檢定"
 msgid "Test"
-msgstr ""
 
+msgstr "檢定"
 msgid "The model for subgroup '%1$s' failed with the following error: %2$s"
-msgstr ""
 
+msgstr "子群『%1$s』的模型因以下錯誤而失敗：%2$s"
 msgid "Error:"
-msgstr ""
 
+msgstr "錯誤："
 msgid "Moderation test based on a Wald-type F-test."
-msgstr ""
 
+msgstr "基於 Wald 型 F 檢定的調節作用檢定。"
 msgid "Moderation test based on a Wald-type chi-squared test."
-msgstr ""
 
+msgstr "基於 Wald 型卡方檢定的調節作用檢定。"
 msgid "Meta-Analytic Estimates"
-msgstr ""
 
+msgstr "統合分析估計值"
 msgid "Fit Measures"
-msgstr ""
 
+msgstr "適配指標"
 msgid "Observations"
 msgstr "觀察值數"
 
 msgid "Log Lik."
-msgstr ""
 
+msgstr "對數概似"
 msgid "Deviance"
 msgstr "偏離差"
 
 msgid "AIC"
-msgstr ""
 
+msgstr "AIC"
 msgid "BIC"
-msgstr ""
 
+msgstr "BIC"
 msgid "AICc"
-msgstr ""
 
+msgstr "AICc"
 msgid "R²"
-msgstr ""
 
+msgstr "R²"
 msgid "Fixed effects tested using z-distribution."
-msgstr ""
 
+msgstr "固定效果使用 z 分配檢定。"
 msgid "Fixed effects tested using t-distribution."
-msgstr ""
 
+msgstr "固定效果使用 t 分配檢定。"
 msgid "Fixed effects tested using Knapp and Hartung adjustment."
-msgstr ""
 
+msgstr "固定效果使用 Knapp 與 Hartung 調整檢定。"
 msgid "The heterogeneity model for 𝜏² is specified on the log scale."
-msgstr ""
 
+msgstr "𝜏² 的異質性模型在對數尺度上指定。"
 msgid "The heterogeneity model for 𝜏² is specified on the identity scale."
-msgstr ""
 
+msgstr "𝜏² 的異質性模型在恆等尺度上指定。"
 msgid "pooled effect"
-msgstr ""
 
+msgstr "合併效果"
 msgid "adjusted effect"
-msgstr ""
 
+msgstr "調整後效果"
 msgid "%1$i observations were ommited due to missing values."
-msgstr ""
 
+msgstr "%1$i 個觀察值因缺失值而被省略。"
 msgid "%1$s: %2$i observations were ommited due to missing values."
-msgstr ""
 
+msgstr "%1$s：%2$i 個觀察值因缺失值而被省略。"
 msgid "%1$s: %2$s"
-msgstr ""
 
+msgstr "%1$s：%2$s"
 msgid ""
 "NAs in the %1$s were introduced due to the %2$s transformation. Please "
 "verify that you are using the correct effect size transformation."
-msgstr ""
 
+msgstr "%1$s 中的 NA 是由於 %2$s 轉換所產生。請確認您使用正確的效果量轉換。"
 msgid ""
 "The %1$s is transformed using %2$s transformation. For nonlinear "
 "transformations, the transformed estimate is interpreted as a median on the "
 "transformed scale."
-msgstr ""
 
+msgstr "%1$s 使用 %2$s 轉換進行轉換。對於非線性轉換，轉換後的估計值在轉換尺度上解釋為中位數。"
 msgid ""
 "The pooled effect size corresponds to the weighted average effect across "
 "studies."
-msgstr ""
 
+msgstr "合併效果量對應於跨研究的加權平均效果。"
 msgid ""
 "The adjusted effect corresponds to the averaged effect size estimate across "
 "the levels of all moderators."
-msgstr ""
 
+msgstr "調整後效果對應於跨越所有調節變項水準的平均效果量估計值。"
 msgid ""
 "The pooled heterogeneity estimate corresponds to the heterogeneity at the "
 "average of predictor values."
-msgstr ""
 
+msgstr "合併異質性估計值對應於預測變項平均值處的異質性。"
 msgid "The I² and H² statistics are not available for heterogeneity models."
-msgstr ""
 
+msgstr "異質性模型不提供 I² 與 H² 統計量。"
 msgid ""
 "Heterogeneity confidence intervals are not available for this GLMM model "
 "type."
-msgstr ""
 
+msgstr "此 GLMM 模型類型不提供異質性信賴區間。"
 msgid "The Model Structure %1$s was not completely specified and was skipped."
-msgstr ""
 
+msgstr "模型結構 %1$s 未被完整指定，因此已略過。"
 msgid ""
 "Prediction interval for the %1$s is not available for models with multiple "
 "heterogeneity estimates."
-msgstr ""
 
+msgstr "含多個異質性估計值之模型的 %1$s 不提供預測區間。"
 msgid ""
 "Cluster-robust tests and confidence intervals were computed using %1$s as "
 "the clustering variable (%2$s). %3$s"
-msgstr ""
 
+msgstr "叢集穩健檢定與信賴區間以 %1$s 作為叢集變項（%2$s）計算。%3$s"
 msgid "%1$i clusters; %2$i estimates per cluster"
-msgstr ""
 
+msgstr "%1$i 個叢集；每叢集 %2$i 個估計值"
 msgid "%1$i clusters; min/median/max %2$i/%3$i/%4$i estimates per cluster"
-msgstr ""
 
+msgstr "%1$i 個叢集；每叢集最少／中位數／最多 %2$i/%3$i/%4$i 個估計值"
 msgid ""
 "clubSandwich was used with CR2 adjustment and Satterthwaite degrees of "
 "freedom."
-msgstr ""
 
+msgstr "clubSandwich 以 CR2 調整與 Satterthwaite 自由度使用。"
 msgid "A CR1 small-sample correction was applied."
-msgstr ""
 
+msgstr "已套用 CR1 小樣本校正。"
 msgid "Unadjusted CR0 cluster-robust standard errors were used."
-msgstr ""
 
+msgstr "使用未調整的 CR0 叢集穩健標準誤。"
 msgid "Permutation p-value is based on %1$s permutations."
-msgstr ""
 
+msgstr "置換 p 值基於 %1$s 次置換。"
 msgid ""
 "Clustering is not supported when specifying a heterogeneity meta-regression "
 "model."
-msgstr ""
 
+msgstr "指定異質性統合迴歸模型時不支援叢集。"
 msgid "The fixed value for tau2 must be a positive number."
-msgstr ""
 
+msgstr "tau2 的固定值必須為正數。"
 msgid ""
 "The custom R code for extending the metafor call failed with the following "
 "message: %1$s"
-msgstr ""
 
+msgstr "用於延伸 metafor 呼叫的自訂 R 程式碼因以下訊息而失敗：%1$s"
 msgid "Fisher's z to r"
-msgstr ""
 
+msgstr "費雪 z 轉 r"
 msgid "exponential"
-msgstr ""
 
+msgstr "指數"
 msgid "log odds to proportions"
-msgstr ""
 
+msgstr "對數勝算轉比例"
 msgid "log odds to SMD (normal)"
-msgstr ""
 
+msgstr "對數勝算轉 SMD（常態）"
 msgid "log odds to SMD (logistic)"
-msgstr ""
 
+msgstr "對數勝算轉 SMD（邏輯）"
 msgid "SMD to log odds (normal)"
-msgstr ""
 
+msgstr "SMD 轉對數勝算（常態）"
 msgid "SMD to log odds (logistic)"
-msgstr ""
 
+msgstr "SMD 轉對數勝算（邏輯）"
 msgid "Hakstian & Whalen inverse α"
-msgstr ""
 
+msgstr "Hakstian 與 Whalen 反向 α"
 msgid "Bonett inverse α"
-msgstr ""
 
+msgstr "Bonett 反向 α"
 msgid "z to R²"
-msgstr ""
 
+msgstr "z 轉 R²"
 msgid "SMD to Cohen's U₁"
-msgstr ""
 
+msgstr "SMD 轉科恩 U₁"
 msgid "SMD to Cohen's U₂"
-msgstr ""
 
+msgstr "SMD 轉科恩 U₂"
 msgid "SMD to Cohen's U₃"
-msgstr ""
 
+msgstr "SMD 轉科恩 U₃"
 msgid "SMD to CLES, Pr(superiority)"
-msgstr ""
 
+msgstr "SMD 轉 CLES，Pr（優越性）"
 msgid "None"
-msgstr ""
 
+msgstr "無"
 msgid "Bonferroni"
-msgstr ""
 
+msgstr "Bonferroni"
 msgid "Holm"
-msgstr ""
 
+msgstr "Holm"
 msgid "Hochberg"
-msgstr ""
 
+msgstr "Hochberg"
 msgid "Hommel"
-msgstr ""
 
+msgstr "Hommel"
 msgid "Benjamini-Hochberg"
-msgstr ""
 
+msgstr "Benjamini-Hochberg"
 msgid "Benjamini-Yekutieli"
-msgstr ""
 
+msgstr "Benjamini-Yekutieli"
 msgid "Metafor R Code"
-msgstr ""
 
+msgstr "Metafor R 程式碼"
 msgid "Distance Matrix"
-msgstr ""
 
+msgstr "距離矩陣"
 msgid "Correlation Matrix"
-msgstr ""
 
+msgstr "相關矩陣"
 msgid "All standard errors must be positive."
-msgstr ""
 
+msgstr "所有標準誤必須為正數。"
 msgid "Error reading the distance matrix file: %1$s"
-msgstr ""
 
+msgstr "讀取距離矩陣檔案時發生錯誤：%1$s"
 msgid ""
 "The distance matrix must be square. The number of rows (%1$i) does not match "
 "the number of columns (%2$i)."
-msgstr ""
 
+msgstr "距離矩陣必須為方陣。列數（%1$i）與欄數（%2$i）不符。"
 msgid "Error reading the correlation matrix file: %1$s"
-msgstr ""
 
+msgstr "讀取相關矩陣檔案時發生錯誤：%1$s"
 msgid "Testing Inclusion of Random Effects / Model Structure"
-msgstr ""
 
+msgstr "檢定隨機效果／模型結構的納入"
 msgid "Subgroup %1$s: Testing Inclusion of Random Effects / Model Structure"
-msgstr ""
 
+msgstr "子群 %1$s：檢定隨機效果／模型結構的納入"
 msgid "Testing Inclusion of Nested Random Effects: %1$s"
-msgstr ""
 
+msgstr "檢定巢狀隨機效果的納入：%1$s"
 msgid "Subgroup %1$s: Testing Inclusion of Nested Random Effects: %2$s"
-msgstr ""
 
+msgstr "子群 %1$s：檢定巢狀隨機效果的納入：%2$s"
 msgid "Random Slopes"
-msgstr ""
 
+msgstr "隨機斜率"
 msgid "Compound Symmetry"
-msgstr ""
 
+msgstr "複合對稱"
 msgid "Heteroscedastic Compound Symmetry"
-msgstr ""
 
+msgstr "異質變異複合對稱"
 msgid "Unstructured"
-msgstr ""
 
+msgstr "非結構化"
 msgid "Identity"
-msgstr ""
 
+msgstr "恆等"
 msgid "Diagonal"
-msgstr ""
 
+msgstr "對角"
 msgid "AR(1)"
-msgstr ""
 
+msgstr "AR(1)"
 msgid "Heteroskedastic AR(1)"
-msgstr ""
 
+msgstr "異質變異 AR(1)"
 msgid "Continuous-Time AR"
-msgstr ""
 
+msgstr "連續時間 AR"
 msgid "Exponential"
-msgstr ""
 
+msgstr "指數"
 msgid "Gaussian"
-msgstr ""
 
+msgstr "高斯"
 msgid "Linear"
 msgstr "線性"
 
 msgid "Rational Quadratic"
-msgstr ""
 
+msgstr "有理二次"
 msgid "Spherical"
-msgstr ""
 
+msgstr "球形"
 msgid "Random Effects / Model Stucture Summary"
-msgstr ""
 
+msgstr "隨機效果／模型結構摘要"
 msgid "Simple / Nested Summary"
-msgstr ""
 
+msgstr "簡單／巢狀摘要"
 msgid "Estimates"
-msgstr ""
 
+msgstr "估計值"
 msgid "σ²"
-msgstr ""
 
+msgstr "σ²"
 msgid "σ"
-msgstr ""
 
+msgstr "σ"
 msgid "Levels"
-msgstr ""
 
+msgstr "水準"
 msgid "Fixed"
-msgstr ""
 
+msgstr "固定"
 msgid "Confidence Intervals"
-msgstr ""
 
+msgstr "信賴區間"
 msgid "Inclusion Tests"
-msgstr ""
 
+msgstr "納入檢定"
 msgid "Component Inclusion Test"
-msgstr ""
 
+msgstr "組成納入檢定"
 msgid "%1$s: Level Inclusion Test"
-msgstr ""
 
+msgstr "%1$s：水準納入檢定"
 msgid "Removed Levels"
-msgstr ""
 
+msgstr "已移除的水準"
 msgid "Removed Component"
-msgstr ""
 
+msgstr "已移除的組成"
 msgid "LRT"
-msgstr ""
 
+msgstr "LRT"
 msgid ""
 "Likelihood Ratio Test (LRT) and p-value are based on a comparison with the "
 "complete model."
-msgstr ""
 
+msgstr "概似比檢定（LRT）與 p 值基於與完整模型的比較。"
 msgid "Random Slopes Summary"
-msgstr ""
 
+msgstr "隨機斜率摘要"
 msgid "Structured"
-msgstr ""
 
+msgstr "結構化"
 msgid "Summary"
 msgstr "摘要"
 
 msgid "Autoregressive"
-msgstr ""
 
+msgstr "自迴歸"
 msgid "Spatial"
-msgstr ""
 
+msgstr "空間"
 msgid "Known Correlation Summary"
-msgstr ""
 
+msgstr "已知相關摘要"
 msgid "Sqrt. Estimate"
-msgstr ""
 
+msgstr "平方根估計值"
 msgid "Levels:"
-msgstr ""
 
+msgstr "水準："
 msgid "Component:"
-msgstr ""
 
+msgstr "組成："
 msgid "Estimates 𝜏²"
-msgstr ""
 
+msgstr "估計值 𝜏²"
 msgid "Estimates ρ"
-msgstr ""
 
+msgstr "估計值 ρ"
 msgid "ρ"
-msgstr ""
 
+msgstr "ρ"
 msgid "Error reading the variance-covariance matrix file: %1$s"
-msgstr ""
 
+msgstr "讀取變異數－共變異數矩陣檔案時發生錯誤：%1$s"
 msgid ""
 "The variance-covariance matrix must be square. The number of rows (%1$i) "
 "does not match the number of columns (%2$i)."
-msgstr ""
 
+msgstr "變異數－共變異數矩陣必須為方陣。列數（%1$i）與欄數（%2$i）不符。"
 msgid ""
 "The variance-covariance matrix must match the dimensions of the data set. "
 "The number of the matrix rows/columns (%1$i) does not match the number of "
 "observations in the dataset (%2$i)."
-msgstr ""
 
+msgstr "變異數－共變異數矩陣必須與資料集的維度相符。矩陣的列數／欄數（%1$i）與資料集中的觀察值數目（%2$i）不符。"
 msgid "The supplied variance-covariance matrix is not positive definite."
-msgstr ""
 
+msgstr "所提供的變異數－共變異數矩陣不是正定。"
 msgid ""
 "The Variance-Covariance Matrix could not be computed: There must be as many "
 "'Correlation Matrix' entries as is the number of estimates within the "
 "largest 'Cluster'."
-msgstr ""
 
+msgstr "無法計算變異數－共變異數矩陣：『相關矩陣』的項目數必須等於最大『叢集』內的估計值數目。"
 msgid "Error computing the variance-covariance matrix: %1$s"
-msgstr ""
 
+msgstr "計算變異數－共變異數矩陣時發生錯誤：%1$s"
 msgid "Please provide a file with the precomputed variance-covariance matrix."
-msgstr ""
 
+msgstr "請提供包含預先計算之變異數－共變異數矩陣的檔案。"
 msgid "Please provide a clustering variable for the correlation matrix."
-msgstr ""
 
+msgstr "請為相關矩陣提供叢集變項。"
 msgid "Please provide correlation matrix variables."
-msgstr ""
 
+msgstr "請提供相關矩陣變項。"
 msgid ""
 "The value of the correlation between construct types is set to 0. This "
 "corresponds to no adjustment for dependency between construct types."
-msgstr ""
 
+msgstr "構念類型之間的相關值設為 0。這對應於不對構念類型之間的相依性進行調整。"
 msgid ""
 "Please provide a file with the correlation matrix for the construct types."
-msgstr ""
 
+msgstr "請提供包含構念類型相關矩陣的檔案。"
 msgid ""
 "The value of the correlation between construct types is set to 0. This "
 "corresponds to no adjustment for dependency between constructs."
-msgstr ""
 
+msgstr "構念類型之間的相關值設為 0。這對應於不對構念之間的相依性進行調整。"
 msgid "Please provide a file with the correlation matrix for the construct."
-msgstr ""
 
+msgstr "請提供包含構念相關矩陣的檔案。"
 msgid ""
 "The value of the correlation between time lags is set to 0. This corresponds "
 "to no adjustment for dependency between time lags."
-msgstr ""
 
+msgstr "時間落差之間的相關值設為 0。這對應於不對時間落差之間的相依性進行調整。"
 msgid ""
 "The 'Group Size' for specifying dependency due to common group comparison is "
 "unspecified. As default, the groups are assumed to be equal."
-msgstr ""
 
+msgstr "用於指定因共同組別比較而產生相依性的『組規模』未被指定。依預設，假定各組規模相等。"
 msgid ""
 "The model was estimated using the selected precomputed working effect-size "
 "variance-covariance matrix."
-msgstr ""
 
+msgstr "模型使用所選的預先計算工作效果量變異數－共變異數矩陣進行估計。"
 msgid ""
 "The model was estimated using a working effect-size variance-covariance "
 "matrix based on %1$s."
-msgstr ""
 
+msgstr "模型使用基於 %1$s 的工作效果量變異數－共變異數矩陣進行估計。"
 msgid "correlation matrix variables"
-msgstr ""
 
+msgstr "相關矩陣變項"
 msgid "construct"
-msgstr ""
 
+msgstr "構念"
 msgid "construct type"
-msgstr ""
 
+msgstr "構念類型"
 msgid "group 1"
-msgstr ""
 
+msgstr "組 1"
 msgid "group 2"
-msgstr ""
 
+msgstr "組 2"
 msgid "group size 1"
-msgstr ""
 
+msgstr "組規模 1"
 msgid "group size 2"
-msgstr ""
 
+msgstr "組規模 2"
 msgid "with a common correlation of %1$s"
-msgstr ""
 
+msgstr "具 %1$s 的共同相關"
 msgid "with a known correlation matrix"
-msgstr ""
 
+msgstr "具已知的相關矩陣"
 msgid "%1$s as %2$s %3$s"
-msgstr ""
 
+msgstr "%1$s 作為 %2$s %3$s"
 msgid "%1$s as %2$s"
-msgstr ""
 
+msgstr "%1$s 作為 %2$s"
 msgid "%1$s with lag-1 correlation of %2$s"
-msgstr ""
 
+msgstr "%1$s 具 %2$s 的落差 1 相關"
 msgid "%1$s and %2$s"
-msgstr ""
 
+msgstr "%1$s 與 %2$s"
 msgid "%1$s, and %2$s"
-msgstr ""
 
+msgstr "%1$s，與 %2$s"
 msgid "Error writing the variance-covariance matrix file: %1$s"
-msgstr ""
 
+msgstr "寫入變異數－共變異數矩陣檔案時發生錯誤：%1$s"
 msgid ""
 "The within-cluster correlation is set to 0. This corresponds to no "
 "adjustment for dependency between effect sizes within clusters."
-msgstr ""
 
+msgstr "叢集內相關設為 0。這對應於不對叢集內效果量之間的相依性進行調整。"
 msgid ""
 "Please provide a time variable for autoregressive correlation structures."
-msgstr ""
 
+msgstr "請為自迴歸相關結構提供時間變項。"
 msgid ""
 "The lag-1 correlation is set to 0. This corresponds to no time-based "
 "dependency adjustment."
-msgstr ""
 
+msgstr "落差 1 相關設為 0。這對應於不進行基於時間的相依性調整。"
 msgid ""
 "Please provide a construct variable for compound symmetry times "
 "autoregressive correlation structures."
-msgstr ""
 
+msgstr "請為複合對稱乘自迴歸相關結構提供構念變項。"
 msgid "Aggregation Summary"
-msgstr ""
 
+msgstr "彙總摘要"
 msgid "Input Rows"
-msgstr ""
 
+msgstr "輸入列"
 msgid "Clusters"
-msgstr ""
 
+msgstr "叢集"
 msgid "Method"
 msgstr "方法"
 
 msgid "Effect size aggregation was not run yet."
-msgstr ""
 
+msgstr "效果量彙總尚未執行。"
 msgid "Independent"
-msgstr ""
 
+msgstr "獨立"
 msgid "Compound symmetry"
-msgstr ""
 
+msgstr "複合對稱"
 msgid "Compound symmetry + autoregressive"
-msgstr ""
 
+msgstr "複合對稱 + 自迴歸"
 msgid "Compound symmetry × autoregressive"
-msgstr ""
 
+msgstr "複合對稱 × 自迴歸"
 msgid "Precomputed variance-covariance matrix"
-msgstr ""
 
+msgstr "預先計算的變異數－共變異數矩陣"
 msgid "Correlation matrix"
-msgstr ""
 
+msgstr "相關矩陣"
 msgid "Constructs/groups/times"
-msgstr ""
 
-#, fuzzy
+msgstr "構念／組別／時間"
 msgid "sampling variance"
 msgstr "抽樣診斷"
 
-#, fuzzy
 msgid "standard error"
 msgstr "標準誤"
 
 msgid "aggregated effect-size, %1$s, and cluster-size"
-msgstr ""
 
+msgstr "彙總的效果量、%1$s 與叢集大小"
 msgid "aggregated effect-size and %1$s"
-msgstr ""
 
+msgstr "彙總的效果量與 %1$s"
 msgid ""
 "%1$i input rows were aggregated into %2$i cluster-level estimates. The %3$s "
 "columns were added to the dataset at the first row of each cluster."
-msgstr ""
 
+msgstr "%1$i 個輸入列被彙總為 %2$i 個叢集層級估計值。%3$s 欄在每個叢集的第一列處新增至資料集。"
 msgid ""
 "Aggregation used the selected precomputed working effect-size variance-"
 "covariance matrix."
-msgstr ""
 
+msgstr "彙總使用了所選的預先計算工作效果量變異數－共變異數矩陣。"
 msgid ""
 "Aggregation used a working effect-size variance-covariance matrix based on "
 "%1$s."
-msgstr ""
 
+msgstr "彙總使用了基於 %1$s 的工作效果量變異數－共變異數矩陣。"
 msgid "Aggregation assumed independent sampling errors within clusters."
-msgstr ""
 
+msgstr "彙總假定叢集內的抽樣誤差獨立。"
 msgid ""
 "Aggregation used compound-symmetry sampling-error dependence within clusters "
 "with within-cluster correlation %1$s."
-msgstr ""
 
+msgstr "彙總使用叢集內具 %1$s 叢集內相關的複合對稱抽樣誤差相依性。"
 msgid ""
 "Aggregation used autoregressive sampling-error dependence over %1$s with "
 "lag-1 correlation %2$s."
-msgstr ""
 
+msgstr "彙總使用跨越 %1$s、具 %2$s 落差 1 相關的自迴歸抽樣誤差相依性。"
 msgid ""
 "Aggregation used compound-symmetry plus autoregressive sampling-error "
 "dependence within clusters with within-cluster correlation %1$s and lag-1 "
 "correlation %2$s over %3$s."
-msgstr ""
 
+msgstr "彙總使用叢集內具 %1$s 叢集內相關與跨越 %3$s 之 %2$s 落差 1 相關的複合對稱加自迴歸抽樣誤差相依性。"
 msgid ""
 "Aggregation used compound-symmetry times autoregressive sampling-error "
 "dependence for %1$s with within-cluster correlation %2$s and lag-1 "
 "correlation %3$s over %4$s."
-msgstr ""
 
+msgstr "彙總使用 %1$s 具有 %2$s 叢集內相關與跨越 %4$s 之 %3$s 落差 1 相關的複合對稱乘自迴歸抽樣誤差相依性。"
 msgid ""
 "Cannot compute outcomes. Check that all of the required information is "
 "specified via the appropriate arguments (i.e. an Effect Size and either "
 "Standard Error, Sampling Variance, or 95%% Confidence Interval)."
-msgstr ""
 
+msgstr "無法計算結果。請確認所有必要資訊皆透過適當引數指定（即效果量以及標準誤、抽樣變異數或 95%% 信賴區間其中之一）。"
 msgid "Step"
-msgstr ""
 
+msgstr "步驟"
 msgid "Computed"
-msgstr ""
 
+msgstr "已計算"
 msgid "Total Computed"
-msgstr ""
 
+msgstr "總計已計算"
 msgid "Effect size calculation was not run yet."
-msgstr ""
 
+msgstr "效果量計算尚未執行。"
 msgid ""
 "Effect sizes were successfully computed and added to the dataset for each "
 "data entry."
-msgstr ""
 
+msgstr "效果量已成功計算並為每個資料列新增至資料集。"
 msgid ""
 "Effect sizes were successfully computed and added to the dataset for %1$i "
 "out of %2$i data entries."
-msgstr ""
 
+msgstr "效果量已成功計算並為 %2$i 個資料列中的 %1$i 個新增至資料集。"
 msgid "Error in Step %1$i:"
-msgstr ""
 
+msgstr "步驟 %1$i 中的錯誤："
 msgid "Publication bias: %1$s"
-msgstr ""
 
+msgstr "出版偏誤：%1$s"
 msgid "The fixed effect effect size could not be calculated."
-msgstr ""
 
-#, fuzzy
+msgstr "無法計算固定效果效果量。"
 msgid "Fixed effect estimate"
 msgstr "固定效果估計值"
 
-#, fuzzy
 msgid "Intercept estimate"
 msgstr "截距"
 
 msgid ""
 "No rows to display. Check that the visualization type mapping assigns at "
 "least one level to 'Study' or 'Estimate'."
-msgstr ""
 
+msgstr "沒有可顯示的列。請確認視覺化類型對應將至少一個水準指派給『研究』或『估計』。"
 msgid ""
 "The weight variable must contain finite, non-negative values with at least "
 "one positive value."
-msgstr ""
 
+msgstr "權重變項必須包含有限、非負的值，且至少有一個正值。"
 msgid "Invalid forest plot input."
-msgstr ""
 
+msgstr "無效的森林圖輸入。"
 msgid "Model Information"
-msgstr ""
 
+msgstr "模型資訊"
 msgid ""
 "'%1$s' could not be converted into a numeric value for the custom x-axis "
 "ticks."
-msgstr ""
 
+msgstr "『%1$s』無法轉換為自訂 x 軸刻度的數值。"
 msgid "At least one manual x-axis tick must be specified."
-msgstr ""
 
+msgstr "至少必須指定一個手動 x 軸刻度。"
 msgid "At least one manual x-axis tick must fall within the x-axis limits."
-msgstr ""
 
+msgstr "至少必須有一個手動 x 軸刻度落在 x 軸範圍內。"
 msgid "Funnel Plot"
-msgstr ""
 
+msgstr "漏斗圖"
 msgid ""
 "Funnel plot prediction interval was specified in an incorrect format. Try "
 "'(0.90, 0.95, 0.99)'."
-msgstr ""
 
+msgstr "漏斗圖預測區間以不正確的格式指定。請嘗試『(0.90, 0.95, 0.99)』。"
 msgid "Funnel plot prediction intervals must be between 0 and 1."
-msgstr ""
 
+msgstr "漏斗圖預測區間必須介於 0 與 1 之間。"
 msgid "Funnel plot prediction intervals must be specified."
-msgstr ""
 
+msgstr "必須指定漏斗圖預測區間。"
 msgid ""
 "Power enhancement breaks were specified in an incorrect format. Try '(0.30, "
 "0.50, 0.80)'."
-msgstr ""
 
+msgstr "檢定力提升間斷點以不正確的格式指定。請嘗試『(0.30, 0.50, 0.80)』。"
 msgid "At least one power enhancement break must be specified."
-msgstr ""
 
+msgstr "至少必須指定一個檢定力提升間斷點。"
 msgid "Power enhancement breaks must be between 0.05 and 1."
-msgstr ""
 
+msgstr "檢定力提升間斷點必須介於 0.05 與 1 之間。"
 msgid "Power"
 msgstr "檢定力"
 
 msgid "H₁ Funnel Parameter Estimates"
-msgstr ""
 
+msgstr "H₁ 漏斗參數估計值"
 msgid "Estimate μ"
-msgstr ""
 
+msgstr "估計值 μ"
 msgid "Lower 95%% CI"
-msgstr ""
 
+msgstr "95%% 信賴區間下限"
 msgid "Upper 95%% CI"
-msgstr ""
 
+msgstr "95%% 信賴區間上限"
 msgid "Estimate 𝜏"
-msgstr ""
 
+msgstr "估計值 𝜏"
 msgid "The funnel plot parameter estimation failed with the following error:"
-msgstr ""
 
+msgstr "漏斗圖參數估計因以下錯誤而失敗："
 msgid "Trim and Fill Parameter Estimates"
-msgstr ""
 
+msgstr "修剪與填補參數估計值"
 msgid "Missing Estimates"
-msgstr ""
 
+msgstr "缺失估計值"
 msgid "Trim and Fill"
-msgstr ""
 
+msgstr "修剪與填補"
 msgid "Adjusted Estimate μ"
-msgstr ""
 
+msgstr "調整後估計值 μ"
 msgid "Adjusted Estimate 𝜏"
-msgstr ""
 
+msgstr "調整後估計值 𝜏"
 msgid "Funnel Plot Asymmetry Tests"
-msgstr ""
 
+msgstr "漏斗圖不對稱性檢定"
 msgid "Meta-Regression Test for Funnel Plot Asymmetry"
-msgstr ""
 
+msgstr "漏斗圖不對稱性的統合迴歸檢定"
 msgid "Asymmetry Test"
-msgstr ""
 
+msgstr "不對稱性檢定"
 msgid "Limit Estimate μ"
-msgstr ""
 
+msgstr "極限估計值 μ"
 msgid "Weighted Regression Test for Funnel Plot Asymmetry"
-msgstr ""
 
+msgstr "漏斗圖不對稱性的加權迴歸檢定"
 msgid "Rank Correlation Test for Funnel Plot Asymmetry"
-msgstr ""
 
+msgstr "漏斗圖不對稱性的等級相關檢定"
 msgid "Fail-Safe N"
-msgstr ""
 
+msgstr "失安全 N"
 msgid "Fail-Safe N Summary Table"
-msgstr ""
 
+msgstr "失安全 N 摘要表"
 msgid "Rosenthal"
-msgstr ""
 
+msgstr "Rosenthal"
 msgid "Orwin"
-msgstr ""
 
+msgstr "Orwin"
 msgid "Rosenberg"
-msgstr ""
 
+msgstr "Rosenberg"
 msgid "General"
-msgstr ""
 
+msgstr "一般"
 msgid "The funnel plot asymmetry test failed with the following error:"
-msgstr ""
 
+msgstr "漏斗圖不對稱性檢定因以下錯誤而失敗："
 msgid ""
 "The funnel plot asymmetry test at level %1$s failed with the following error:"
-msgstr ""
 
+msgstr "水準 %1$s 的漏斗圖不對稱性檢定因以下錯誤而失敗："
 msgid ""
 "The meta-analytic model did not converge. Try modifying the 'Method' option."
-msgstr ""
 
+msgstr "統合分析模型未收斂。請嘗試修改『方法』選項。"
 msgid "The method is not available with only one observation."
-msgstr ""
 
+msgstr "僅有一個觀察值時此方法不可用。"
 msgid "The %1$s fail-safe N calculation %2$sfailed with the following error:"
-msgstr ""
 
+msgstr "%1$s 失安全 N 計算 %2$s因以下錯誤而失敗："
 msgid "Missing Data Summary"
-msgstr ""
 
+msgstr "缺失資料摘要"
 msgid ""
 "The dataset contains missing values: %1$i missing values were removed from "
 "the analysis."
-msgstr ""
 
+msgstr "資料集包含缺失值：%1$i 個缺失值已從分析中移除。"
 msgid "Column name %s already exists in the dataset."
-msgstr ""
 
+msgstr "欄名 %s 已存在於資料集中。"
 msgid ""
 "The 'Correlation/Covariance Matrix' variable input contains the following "
 "variable that does not contain the variable name separator '%1$s': %2$s."
-msgstr ""
 
+msgstr "『相關／共變異數矩陣』變項輸入包含以下不含變項名稱分隔符『%1$s』的變項：%2$s。"
 msgid ""
 "The correlation matrix contains values outside the range of -1 and 1. Please "
 "check your input."
-msgstr ""
 
+msgstr "相關矩陣包含超出 -1 與 1 範圍的值。請檢查您的輸入。"
 msgid ""
 "The 'Means' variable input contains the following variable that is not "
 "specified in the 'Correlation/Covariance Matrix' variable input: %1$s."
-msgstr ""
 
+msgstr "『平均值』變項輸入包含以下未在『相關／共變異數矩陣』變項輸入中指定的變項：%1$s。"
 msgid "Available Variable Names"
-msgstr ""
 
+msgstr "可用的變項名稱"
 msgid "Descriptives"
-msgstr ""
 
+msgstr "描述統計"
 msgid "%1$s: %1$s Matrix"
-msgstr ""
 
+msgstr "%1$s：%1$s 矩陣"
 msgid "Variable"
 msgstr "變項"
 
 msgid "%1$s: Means"
-msgstr ""
 
+msgstr "%1$s：平均值"
 msgid "Pooled %1$s Matrix"
-msgstr ""
 
+msgstr "合併 %1$s 矩陣"
 msgid ""
 "The pooled correlation/covariance matrix could not be computed. Consider "
 "verifying that all correlation/covariance matrix variables are correctly "
 "specified via 'Descriptives'."
-msgstr ""
 
+msgstr "無法計算合併的相關／共變異數矩陣。請考慮透過『描述統計』確認所有相關／共變異數矩陣變項皆正確指定。"
 msgid "Correlation"
-msgstr ""
 
+msgstr "相關"
 msgid "Covariance"
-msgstr ""
 
+msgstr "共變異數"
 msgid "Random Effect"
-msgstr ""
 
+msgstr "隨機效果"
 msgid "Random Effect Covariance"
-msgstr ""
 
+msgstr "隨機效果共變異數"
 msgid "Pooled %1$s Matrix Parameters"
-msgstr ""
 
+msgstr "合併 %1$s 矩陣參數"
 msgid "Row"
 msgstr "列"
 
 msgid "Column"
-msgstr ""
 
+msgstr "欄"
 msgid "95%% CI"
 msgstr "95%% 信賴區間"
 
 msgid "Computing additional fit measures: %1$s"
-msgstr ""
 
+msgstr "計算額外適配指標：%1$s"
 msgid "SEM Fit Measures"
-msgstr ""
 
+msgstr "SEM 適配指標"
 msgid "CLI"
-msgstr ""
 
+msgstr "CLI"
 msgid "TLI"
-msgstr ""
 
+msgstr "TLI"
 msgid "RMSEA"
-msgstr ""
 
+msgstr "RMSEA"
 msgid "p(RMSEA < 0.05)"
-msgstr ""
 
+msgstr "p（RMSEA < 0.05）"
 msgid "Pairwise Model Comparison"
-msgstr ""
 
+msgstr "成對模型比較"
 msgid "2ΔLL"
-msgstr ""
 
+msgstr "2ΔLL"
 msgid "Δ df"
-msgstr ""
 
+msgstr "Δ 自由度"
 msgid "At least two models are required for pairwise model comparison."
-msgstr ""
 
+msgstr "成對模型比較至少需要兩個模型。"
 msgid ""
 "No pairwise model comparison with at least one degree of freedom difference "
 "available."
-msgstr ""
 
+msgstr "沒有至少一個自由度差異的成對模型比較可用。"
 msgid "Regression Estimates"
-msgstr ""
 
+msgstr "迴歸估計值"
 msgid "Mean/Intercept Estimates"
-msgstr ""
 
+msgstr "平均／截距估計值"
 msgid "Covariance Estimates"
-msgstr ""
 
+msgstr "共變異數估計值"
 msgid "Random Effects Estimates"
-msgstr ""
 
+msgstr "隨機效果估計值"
 msgid "Model fit failed with the following message: %1$s."
-msgstr ""
 
+msgstr "模型適配因以下訊息而失敗：%1$s。"
 msgid "The model should contain at least one predictor or an intercept."
-msgstr ""
 
+msgstr "模型應至少包含一個預測變項或一個截距。"
 msgid "Coefficients"
 msgstr "係數"
 
 msgid "At least one predictor needs to be specified."
-msgstr ""
 
+msgstr "至少必須指定一個預測變項。"
 msgid "%1$s observations were ommited due to missing values."
-msgstr ""
 
+msgstr "%1$s 個觀察值因缺失值而被省略。"
 msgid "Posterior distribution"
-msgstr ""
 
+msgstr "後驗分配"
 msgid "Sampling diagnostics"
 msgstr "抽樣診斷"
 
 msgid "Autocorrelation (%1$s)"
-msgstr ""
 
+msgstr "自相關（%1$s）"
 msgid ""
 "Inference possibly unreliable -- MCMC chains might not have converged; The "
 "largest R-hat is %1$.3f > 1.01. To lower R-hat please increase 'Iterations', "
 "or 'Adapt delta' in the Options section."
-msgstr ""
 
+msgstr "推論可能不可靠——MCMC 鏈可能尚未收斂；最大的 R-hat 為 %1$.3f > 1.01。要降低 R-hat，請在選項區段中增加『Iterations』或『Adapt delta』。"
 msgid ""
 "Low estimation accuracy -- The smallest Effective Sample Size (ESS) is "
 "%1$.2f < %2$1.0f. To increase accuracy please increase 'Iterations', or "
@@ -1731,172 +1727,172 @@ msgstr ""
 "選項區塊中增加「疊代次數」或「Adapt delta」。"
 
 msgid "t-statistic"
-msgstr ""
 
+msgstr "t 統計量"
 msgid "The %1$s test failed with the following error: %2$s"
-msgstr ""
 
+msgstr "%1$s 檢定因以下錯誤而失敗：%2$s"
 msgid "Funnel Plot Asymmetry Plots"
-msgstr ""
 
+msgstr "漏斗圖不對稱性圖"
 msgid "Egger (unweighted)"
-msgstr ""
 
+msgstr "Egger（未加權）"
 msgid "Egger (multiplicative overdispersion)"
-msgstr ""
 
+msgstr "Egger（倍增過度離散）"
 msgid "Macaskill"
-msgstr ""
 
+msgstr "Macaskill"
 msgid "Macaskill (pooled)"
-msgstr ""
 
+msgstr "Macaskill（合併）"
 msgid "Peters"
-msgstr ""
 
+msgstr "Peters"
 msgid "Debray"
-msgstr ""
 
+msgstr "Debray"
 msgid "Standard error"
-msgstr ""
 
+msgstr "標準誤"
 msgid "Sample size"
-msgstr ""
 
+msgstr "樣本人數"
 msgid "Total events"
-msgstr ""
 
+msgstr "總事件數"
 msgid "%s Summary"
-msgstr ""
 
+msgstr "%s 摘要"
 msgid "metamisc package failed with the following error: '%s'"
-msgstr ""
 
+msgstr "metamisc 套件因以下錯誤而失敗：『%s』"
 msgid "Based on %i studies."
-msgstr ""
 
+msgstr "基於 %i 個研究。"
 msgid "The model was estimated using %1$s method with %2$s link function."
-msgstr ""
 
+msgstr "模型使用 %1$s 方法與 %2$s 連結函式進行估計。"
 msgid "The model was estimated using MCMC with %1$s link function."
-msgstr ""
 
+msgstr "模型使用 MCMC 與 %1$s 連結函式進行估計。"
 msgid "Forest plot"
-msgstr ""
 
+msgstr "森林圖"
 msgid "Observed-Expected Ratio"
-msgstr ""
 
+msgstr "觀察－期望比值"
 msgid "Concordance Statistic"
-msgstr ""
 
+msgstr "一致性統計量"
 msgid ""
 "Column '%1$s' contains invalid values: %2$s. Expected values for %3$s are: "
 "%4$s."
-msgstr ""
 
+msgstr "欄『%1$s』包含無效值：%2$s。%3$s 的預期值為：%4$s。"
 msgid "Study %1$i"
-msgstr ""
 
+msgstr "研究 %1$i"
 msgid "Traffic Light"
-msgstr ""
 
+msgstr "紅綠燈"
 msgid "Adjusted effect"
-msgstr ""
 
+msgstr "調整後效果"
 msgid "Diagnostics Summary"
-msgstr ""
 
+msgstr "診斷摘要"
 msgid "MCMC error"
-msgstr ""
 
+msgstr "MCMC 誤差"
 msgid "MCMC error/SD"
-msgstr ""
 
+msgstr "MCMC 誤差／標準差"
 msgid "ESS"
-msgstr ""
 
+msgstr "ESS"
 msgid "R-hat"
-msgstr ""
 
+msgstr "R-hat"
 msgid "Adjusted Effect"
-msgstr ""
 
+msgstr "調整後效果"
 msgid "Pooled Effect"
-msgstr ""
 
+msgstr "合併效果"
 msgid "Moderation"
-msgstr ""
 
+msgstr "調節作用"
 msgid "Weights"
 msgstr "權重"
 
 msgid "PET"
-msgstr ""
 
+msgstr "PET"
 msgid "PEESE"
-msgstr ""
 
+msgstr "PEESE"
 msgid "Trace Plot"
-msgstr ""
 
+msgstr "軌跡圖"
 msgid "Autocorrelation Plot"
-msgstr ""
 
+msgstr "自相關圖"
 msgid "Density Plot"
-msgstr ""
 
+msgstr "密度圖"
 msgid ""
 "Please select at least one 'Type' of diagnostics plot (e.g., 'Trace', "
 "'Autocorrelation' or 'Posterior samples density')."
-msgstr ""
 
+msgstr "請至少選取一種診斷圖的『類型』（例如『軌跡』、『自相關』或『後驗樣本密度』）。"
 msgid "Estimated Conditional Marginal Means"
-msgstr ""
 
+msgstr "估計的條件式邊際平均"
 msgid "Conditional %1$s"
-msgstr ""
 
+msgstr "條件式 %1$s"
 msgid "Conditional Estimated Marginal Means"
-msgstr ""
 
+msgstr "條件式估計邊際平均"
 msgid "Median"
 msgstr "中位數"
 
 msgid ""
 "The Bayes factor test for the adjusted estimate is not available for meta-"
 "regressions with non-centered parameteriazation."
-msgstr ""
 
+msgstr "對於具非置中參數化的統合迴歸，調整後估計值的貝氏因子檢定不可用。"
 msgid ""
 "Conditional estimates are based on models assuming the presence of a given "
 "component."
-msgstr ""
 
+msgstr "條件式估計值基於假定給定組成存在下的模型。"
 msgid "Estimating Marginal Means"
-msgstr ""
 
+msgstr "估計邊際平均"
 msgid "Publication Bias Adjustment Summary"
-msgstr ""
 
+msgstr "出版偏誤調整摘要"
 msgid "Estimated Marginal Means Summary"
-msgstr ""
 
+msgstr "估計邊際平均摘要"
 msgid "Prior and Posterior Plots"
-msgstr ""
 
+msgstr "先驗與後驗圖"
 msgid "Diagnostics"
 msgstr "診斷"
 
 msgid "Subgroup %1$s, %2$s"
-msgstr ""
 
+msgstr "子群 %1$s，%2$s"
 msgid "Effect intercept"
-msgstr ""
 
+msgstr "效果截距"
 msgid "Publication bias"
-msgstr ""
 
+msgstr "出版偏誤"
 msgid "Baseline"
 msgstr "基準線"
 
@@ -1914,73 +1910,73 @@ msgid ""
 "unstable (a small change in posterior inclusion probability corresponds to a "
 "very large change in the Bayes factor). Consider increasing the number of "
 "chains and posterior samples to obtain more stable estimates."
-msgstr ""
 
+msgstr "大的貝氏因子，即 BF > 100 或 BF < 1/100，可能在計算上不穩定（後驗納入機率的微小改變對應於貝氏因子的極大改變）。請考慮增加鏈數目與後驗樣本數，以獲得較穩定的估計值。"
 msgid "Moderation: Estimated Marginal Means"
-msgstr ""
 
+msgstr "調節作用：估計邊際平均"
 msgid "Weight Function"
-msgstr ""
 
+msgstr "權重函式"
 msgid "PET-PEESE"
-msgstr ""
 
+msgstr "PET-PEESE"
 msgid "P-Value"
-msgstr ""
 
+msgstr "P 值"
 msgid ""
 "At least one prior distribution for the Effect component has to be specified."
-msgstr ""
 
+msgstr "至少必須為效果組成指定一個先驗分配。"
 msgid ""
 "At least one prior distribution for the Heterogeneity component has to be "
 "specified."
-msgstr ""
 
+msgstr "至少必須為異質性組成指定一個先驗分配。"
 msgid ""
 "At least one prior distribution for the %1$s moderator component has to be "
 "specified."
-msgstr ""
 
+msgstr "至少必須為 %1$s 調節變項組成指定一個先驗分配。"
 msgid ""
 "Both priors distributions for the %1$s moderator component must have the "
 "same contrast type."
-msgstr ""
 
+msgstr "%1$s 調節變項組成的兩個先驗分配必須具有相同的對比類型。"
 msgid ""
 "At least one prior distribution for the Publication Bias component has to be "
 "specified."
-msgstr ""
 
+msgstr "至少必須為出版偏誤組成指定一個先驗分配。"
 msgid ""
 "At least one prior distribution for the Baseline component has to be "
 "specified."
-msgstr ""
 
+msgstr "至少必須為基線組成指定一個先驗分配。"
 msgid "The priors for publication bias were set incorrectly."
-msgstr ""
 
+msgstr "出版偏誤的先驗設定不正確。"
 msgid "RoBMA R Code"
-msgstr ""
 
+msgstr "RoBMA R 程式碼"
 msgid "Model Specification"
-msgstr ""
 
+msgstr "模型規格"
 msgid "Model Components"
-msgstr ""
 
+msgstr "模型組成"
 msgid "Models"
 msgstr "模型"
 
 msgid "P(M)"
-msgstr ""
 
+msgstr "P(M)"
 msgid "Prior Distributions %1$s"
-msgstr ""
 
+msgstr "先驗分配 %1$s"
 msgid "Prior Distributions Moderators"
-msgstr ""
 
+msgstr "調節變項先驗分配"
 msgid "Alternative"
 msgstr "對立假設"
 
@@ -1988,261 +1984,261 @@ msgid "Null"
 msgstr "虛無假設"
 
 msgid "P(M|data)"
-msgstr ""
 
+msgstr "P(M|data)"
 msgid ""
 "The analysis will estimate a complex meta-analytic model ensemble using MCMC "
 "and might require a prolonged time to complete."
-msgstr ""
 
+msgstr "此分析將使用 MCMC 估計複雜的統合分析模型組合，可能需要較長時間才能完成。"
 msgid ""
 "The model fit for subgroup '%1$s' resulted in the following warning: %2$s"
-msgstr ""
 
+msgstr "子群『%1$s』的模型適配產生以下警告：%2$s"
 msgid "The model fit resulted in the following warning: %1$s"
-msgstr ""
 
+msgstr "模型適配產生以下警告：%1$s"
 msgid "Conditional Meta-Analytic Estimates"
-msgstr ""
 
+msgstr "條件式統合分析估計值"
 msgid "Standardized Conditional Meta-Regression Coefficients"
-msgstr ""
 
+msgstr "標準化條件式統合迴歸係數"
 msgid "Standardized Meta-Regression Coefficients"
-msgstr ""
 
+msgstr "標準化統合迴歸係數"
 msgid "Conditional Meta-Regression Coefficients"
-msgstr ""
 
+msgstr "條件式統合迴歸係數"
 msgid "Meta-Regression Coefficients"
-msgstr ""
 
+msgstr "統合迴歸係數"
 msgid "Conditional Publication Bias Adjustment Estimates (Weight Function)"
-msgstr ""
 
+msgstr "條件式出版偏誤調整估計值（權重函式）"
 msgid "Publication Bias Adjustment Estimates (Weight Function)"
-msgstr ""
 
+msgstr "出版偏誤調整估計值（權重函式）"
 msgid "<em>p</em>-Values Interval"
-msgstr ""
 
+msgstr "<em>p</em> 值區間"
 msgid "Conditional Publication Bias Adjustment Estimates (PET-PEESE)"
-msgstr ""
 
+msgstr "條件式出版偏誤調整估計值（PET-PEESE）"
 msgid "Publication Bias Adjustment Estimates (PET-PEESE)"
-msgstr ""
 
+msgstr "出版偏誤調整估計值（PET-PEESE）"
 msgid "Interaction terms are currently not possible in Bayesian meta-analyses."
-msgstr ""
 
+msgstr "貝氏統合分析目前不支援交互作用項。"
 msgid "Weight Function (%s)"
-msgstr ""
 
+msgstr "權重函式（%s）"
 msgid ""
 "The figure could not be created since one of the estimates is not a number."
-msgstr ""
 
+msgstr "由於其中一個估計值不是數值，因此無法建立圖形。"
 msgid "P-value (One-sided)"
-msgstr ""
 
+msgstr "P 值（單尾）"
 msgid "Publication Probability"
-msgstr ""
 
+msgstr "出版機率"
 msgid "Mean Model Estimates (%s)"
-msgstr ""
 
+msgstr "平均模型估計值（%s）"
 msgid "Fixed effects (adjusted)"
-msgstr ""
 
+msgstr "固定效果（調整後）"
 msgid "Random effects (adjusted)"
-msgstr ""
 
+msgstr "隨機效果（調整後）"
 msgid "Model Tests"
-msgstr ""
 
+msgstr "模型檢定"
 msgid "Test of Heterogeneity"
-msgstr ""
 
+msgstr "異質性檢定"
 msgid "Note:"
 msgstr "附註："
 
 msgid "Test of Publication Bias"
-msgstr ""
 
+msgstr "出版偏誤檢定"
 msgid "ChiSq"
-msgstr ""
 
+msgstr "卡方"
 msgid "Assuming homogeneity"
-msgstr ""
 
+msgstr "假定同質"
 msgid "Assuming heterogeneity"
-msgstr ""
 
+msgstr "假定異質"
 msgid "Fixed Effects Estimates"
 msgstr "固定效果估計值"
 
 msgid "Mean Estimates (%s)"
-msgstr ""
 
+msgstr "平均估計值（%s）"
 msgid "Estimated Weights"
-msgstr ""
 
+msgstr "估計權重"
 msgid "Heterogeneity Estimates(%s)"
-msgstr ""
 
+msgstr "異質性估計值（%s）"
 msgid "p-value Frequency"
-msgstr ""
 
+msgstr "p 值頻率"
 msgid "<em>p</em>-values interval(one-sided)"
-msgstr ""
 
+msgstr "<em>p</em> 值區間（單尾）"
 msgid "Frequency"
-msgstr ""
 
+msgstr "頻率"
 msgid ""
 "There were no p-value cutoffs after their automatic reduction. The displayed "
 "frequencies correspond to the non-reduced p-value cutoffs."
-msgstr ""
 
+msgstr "經過自動縮減後，沒有剩餘的 p 值分界點。顯示的頻率對應於未縮減的 p 值分界點。"
 msgid ""
 "Cannot compute results. All entries of the p-value variable (%s) must be "
 "between 0 and 1."
-msgstr ""
 
+msgstr "無法計算結果。p 值變項（%s）的所有項目必須介於 0 與 1 之間。"
 msgid ""
 "Cannot compute results. All entries of the correlation coefficient variable "
 "(%s) must be between -1 and 1."
-msgstr ""
 
+msgstr "無法計算結果。相關係數變項（%s）的所有項目必須介於 -1 與 1 之間。"
 msgid ""
 "Cannot compute results. All entries of the sample size variable (%s) must be "
 "greater than four."
-msgstr ""
 
+msgstr "無法計算結果。樣本人數變項（%s）的所有項目必須大於四。"
 msgid "The p-value cutoffs were set incorectly."
-msgstr ""
 
+msgstr "p 值分界點設定不正確。"
 msgid "At least one p-value cutoff needs to be set."
-msgstr ""
 
+msgstr "至少需要設定一個 p 值分界點。"
 msgid "All p-value cutoffs needs to be between 0 and 1."
-msgstr ""
 
+msgstr "所有 p 值分界點都必須介於 0 與 1 之間。"
 msgid "95%% Confidence Interval"
-msgstr ""
 
+msgstr "95%% 信賴區間"
 msgid "%1$s is on %2$s scale."
-msgstr ""
 
+msgstr "%1$s 位於 %2$s 尺度上。"
 msgid "Fixed effects model:"
-msgstr ""
 
+msgstr "固定效果模型："
 msgid "Random effects model:"
-msgstr ""
 
+msgstr "隨機效果模型："
 msgid ""
 "%sThe optimizer failed to find a solution. Consider re-specifying the model "
 "or the p-value cutoffs."
-msgstr ""
 
+msgstr "%s最佳化器無法找到解。請考慮重新指定模型或 p 值分界點。"
 msgid ""
 "%sThe automatic cutoffs selection did not find viable p-value cutoffs. "
 "Please, specify them manually."
-msgstr ""
 
+msgstr "%s自動分界點選擇未找到可行的 p 值分界點。請手動指定。"
 msgid ""
 "At least one of the p-value intervals contains no effect sizes, leading to "
 "estimation problems. Consider re-specifying the cutoffs."
-msgstr ""
 
+msgstr "至少一個 p 值區間不包含效果量，導致估計問題。請考慮重新指定分界點。"
 msgid ""
 "At least one of the p-value intervals contains three or fewer effect sizes, "
 "which may lead to estimation problems. Consider re-specifying the cutoffs."
-msgstr ""
 
+msgstr "至少一個 p 值區間包含三個或更少的效果量，這可能導致估計問題。請考慮重新指定分界點。"
 msgid ""
 "The unadjusted estimate is negative. The selection model default "
 "specification expects that the expected direction of the effect size is "
 "positive. Please, check that you specified the effect sizes correctly or "
 "change the 'Expected effect size direction' option in the 'Model' tab."
-msgstr ""
 
+msgstr "未調整的估計值為負值。選擇模型的預設規格預期效果量的預期方向為正向。請確認您正確指定了效果量，或在『模型』分頁中變更『預期效果量方向』選項。"
 msgid ""
 "The analysis requires both 'Effect Size' and 'Effect Size Standard Error' to "
 "be specified."
-msgstr ""
 
+msgstr "此分析需要同時指定『效果量』與『效果量標準誤』。"
 msgid "Only the following one-sided p-value cutoffs were used: %s."
-msgstr ""
 
+msgstr "僅使用了下列單尾 p 值分界點：%s。"
 msgid "Estimating: %1$s"
-msgstr ""
 
+msgstr "估計中：%1$s"
 msgid "Model Fit Measures"
-msgstr ""
 
+msgstr "模型適配指標"
 msgid "log Lik."
 msgstr "對數概似"
 
 msgid "%1$s fit failed with the following message %2$s."
-msgstr ""
 
+msgstr "%1$s 適配因以下訊息而失敗：%2$s。"
 msgid "Warning"
-msgstr ""
 
+msgstr "警告"
 msgid "Model Convergence"
-msgstr ""
 
+msgstr "模型收斂"
 msgid "Status"
-msgstr ""
 
+msgstr "狀態"
 msgid "Path Diagram"
 msgstr "路徑圖"
 
 msgid "Syntax failed with the following message %1$s."
-msgstr ""
 
+msgstr "語法因以下訊息而失敗：%1$s。"
 msgid "Model fit failed with the following message %1$s."
-msgstr ""
 
+msgstr "模型適配因以下訊息而失敗：%1$s。"
 msgid "Model visualization failed with the following message %1$s."
-msgstr ""
 
+msgstr "模型視覺化因以下訊息而失敗：%1$s。"
 msgid "Coefficient Summary"
-msgstr ""
 
+msgstr "係數摘要"
 msgid "Computed Estimates Summary"
-msgstr ""
 
+msgstr "計算估計值摘要"
 msgid "Error: There were not enough adequately powered studies (k = %1$i)"
-msgstr ""
 
+msgstr "錯誤：檢定力充足的研究不足（k = %1$i）"
 msgid "Note: There were %1$i adequately powered studies"
-msgstr ""
 
+msgstr "注意：有 %1$i 個檢定力充足的研究"
 msgid "Test of Effect"
-msgstr ""
 
+msgstr "效果檢定"
 msgid "Multiplicative Heterogeneity Estimates"
-msgstr ""
 
+msgstr "倍增異質性估計值"
 msgid "Estimated %1$s Regression"
-msgstr ""
 
+msgstr "估計的 %1$s 迴歸"
 msgid "Cohen's d"
-msgstr ""
 
+msgstr "科恩 d"
 msgid "Fisher's z"
-msgstr ""
 
+msgstr "費雪 z"
 msgid ""
 "WAAP was not estimated: There were only %1$i adequately powered studies "
 "(power > 80%%)."
-msgstr ""
 
+msgstr "未估計 WAAP：只有 %1$i 個檢定力充足的研究（檢定力 > 80%%）。"
 msgid "There were %1$i adequately powered studies (power > 80%%)."
-msgstr ""
 
+msgstr "有 %1$i 個檢定力充足的研究（檢定力 > 80%%）。"
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
 msgstr[0] "因缺失值，已移除 %i 筆觀察資料。"

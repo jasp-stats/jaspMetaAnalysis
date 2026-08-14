@@ -1304,9 +1304,6 @@ msgstr[1] "%i observaties zijn verwijderd omdat de waarden ontbreken."
 #~ msgid "Rhat"
 #~ msgstr "R-dakje"
 
-#~ msgid "%1$s is on %2$s scale."
-#~ msgstr "%1$s is op %2$s schaal."
-
 #~ msgid "The weights (%1$s) correspond to %2$s <em>p</em>-values."
 #~ msgstr "De gewichten (%1$s) corresponderen met de %2$s <em>p</em>-waarden."
 
