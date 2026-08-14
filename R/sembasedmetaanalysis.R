@@ -154,9 +154,11 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 .semmetaFitModelsFun          <- function(model, dataset, options) {
 
   # prepare RAM
+  # std.lv = FALSE: do not force latent variances to 1. If needed, specify f ~~ 1*f in syntax.
   tempRam <- try(metaSEM::lavaan2RAM(
     model         = model[["syntax"]][["model"]],
-    obs.variables = .masemGetObservedVariables(model)
+    obs.variables = .masemGetObservedVariables(model),
+    std.lv        = FALSE
   ))
 
   # fit SEM
@@ -769,12 +771,10 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 }
 .masemGetObservedVariables <- function(model) {
 
-  observedVariables <- c(
-    model$syntax$columns,
-    model$syntax$prefixedColumns$data.
-  )
-  observedVariables <- encodeColNames(observedVariables)
-  return()
+  # Only actual observed variables. prefixedColumns$data. are definition
+  # variables (data.vi labels), not names in lavaan2RAM's observed set.
+  observedVariables <- encodeColNames(model$syntax$columns)
+  return(observedVariables)
 }
 .masemGetRandomEffectsType <- function(type) {
   return(switch(
