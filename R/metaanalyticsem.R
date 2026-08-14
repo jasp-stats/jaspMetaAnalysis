@@ -19,11 +19,12 @@
 
 MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
 
-  # set OpenMx options
-  # the JASP options() cleanup does not properly re-sets OpenMx settings
-  # consequently, the fitting function crashes with matrix(byrow) error
-  library(metaSEM)
+  # JASP restoreOptions() NULLs OpenMx globals after each analysis (mxByrow,
+  # mxOptions, ...) while leaving OpenMx loaded. Restore before metaSEM loads.
+  # Then attach metaSEM (and OpenMx via Depends): osmasem2/mxRun evaluate
+  # algebras in the global env and need OpenMx on the search path.
   .masemMxOptions()
+  library(metaSEM)
 
   # read the data set
   dataset <- .masemDecodeData(dataset, options)
@@ -49,7 +50,7 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   if (options[["modelFitMeasures"]])
     .masemModelFitMeasuresTable(jaspResults, options, MASEM = TRUE)
   if (options[["modelConvergence"]])
-    .masemModelConvergenceTable(jaspResults, options)
+    .masemModelConvergenceTable(jaspResults, options, MASEM = TRUE)
   if (options[["pairwiseModelComparison"]])
     .masemPairwiseModelComparisonTable(jaspResults, options)
 
@@ -740,6 +741,11 @@ MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
   return()
 }
 .masemMxOptions                    <- function(){
+  # 1) Rebuild OpenMx globals wiped by JASP (mxByrow, mxOptions, ...).
+  #    mxMatrix(byrow = getOption("mxByrow")) errors if mxByrow is NULL.
+  # 2) Re-apply metaSEM optimizer settings. mxSetDefaultOptions() resets to
+  #    OpenMx defaults (CSOLNP); metaSEM needs SLSQP + these gradient options.
+  # Must run before loadNamespace("metaSEM"): .onLoad calls mxOption().
   OpenMx::mxSetDefaultOptions()
   OpenMx::mxOption(NULL, "Default optimizer", "SLSQP")
   OpenMx::mxOption(NULL, "Gradient algorithm", "central")

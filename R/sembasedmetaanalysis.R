@@ -19,10 +19,12 @@
 
 SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
 
-  # set OpenMx options
-  # the JASP options() cleanup does not properly re-sets OpenMx settings
-  # consequently, the fitting function crashes with matrix(byrow) error
-  OpenMx::mxSetDefaultOptions()
+  # JASP restoreOptions() NULLs OpenMx globals after each analysis (mxByrow,
+  # mxOptions, ...) while leaving OpenMx loaded. Restore before metaSEM loads.
+  # Then attach metaSEM (and OpenMx via Depends): mxRun evaluates algebras
+  # in the global env and needs OpenMx on the search path.
+  .masemMxOptions()
+  library(metaSEM)
 
   # read the data set
   dataset <- .masemReadData(dataset)
@@ -333,7 +335,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
         status = ""
       )
       if (jaspBase::isTryError(tempFit))
-        modelFitTable$addFootnote(gettextf("%1$s fit failed with the following message %2$s.", model[["value"]], tempFit))
+        modelConvergenceTable$addFootnote(gettextf("%1$s fit failed with the following message %2$s.", model[["value"]], tempFit))
     } else {
 
       tempSummary <- summary(tempFit)
@@ -417,7 +419,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
     model <- options[["models"]][[i]]
 
     # get output container
-    tempOutputContainer <- .masemGetModelOutputContainer(jaspResults, model[["value"]], i)
+    tempOutputContainer <- .masemGetModelOutputContainer(jaspResults, model[["value"]], i, MASEM)
 
     # check if the plot already exists
     if (!is.null(tempOutputContainer[["pathDiagram"]]))
@@ -463,7 +465,7 @@ SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
       tempFit <- fits[[model[["value"]]]]
 
       if (is.null(tempFit))
-        return()
+        next
 
       # check if the model fit failed
       if (jaspBase::isTryError(tempFit)) {
