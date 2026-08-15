@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2026-08-15 02:47\n"
-"PO-Revision-Date: 2026-06-20 03:43+0000\n"
+"PO-Revision-Date: 2026-08-16 08:51+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/de/>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n==0 ? 0 : n==1 ? 0 : 1;\n"
-"X-Generator: Weblate 2026.7.dev0\n"
+"X-Generator: Weblate 2026.9.dev0\n"
 
 msgid "There must be at least one observation in each group."
 msgstr ""
@@ -433,9 +433,8 @@ msgid ""
 "heterogeneity."
 msgstr ""
 
-#, fuzzy
 msgid "Squared Pearson Residual"
-msgstr "Standardisierte Residuen"
+msgstr "Quadriertes Pearson Residuum"
 
 #, fuzzy
 msgid "Influence on Fitted Value"
@@ -580,7 +579,7 @@ msgid "Contrasts"
 msgstr ""
 
 msgid "Comparison"
-msgstr ""
+msgstr "Vergleich"
 
 msgid "Contrast tests based on Wald-type z-tests."
 msgstr ""
@@ -749,9 +748,8 @@ msgstr ""
 msgid "Heterogeneity Meta-Regression Terms Tests"
 msgstr ""
 
-#, fuzzy
 msgid "F"
-msgstr "FE"
+msgstr "F"
 
 msgid "Qₘ"
 msgstr ""
@@ -1169,9 +1167,8 @@ msgstr ""
 msgid "Spherical"
 msgstr ""
 
-#, fuzzy
 msgid "Random Effects / Model Stucture Summary"
-msgstr "Zufallseffekte-Modell:"
+msgstr "Zufallseffekte / Modellstruktur-Zusammenfassung"
 
 msgid "Simple / Nested Summary"
 msgstr ""
@@ -1196,9 +1193,8 @@ msgstr "Feste H"
 msgid "Confidence Intervals"
 msgstr "%g%% Konfidenzintervall"
 
-#, fuzzy
 msgid "Inclusion Tests"
-msgstr "BF Einschluss"
+msgstr "Inklusionstests"
 
 msgid "Component Inclusion Test"
 msgstr ""
@@ -1247,9 +1243,8 @@ msgstr "Schätzung"
 msgid "Levels:"
 msgstr ""
 
-#, fuzzy
 msgid "Component:"
-msgstr "Varianz-Komponenten"
+msgstr "Komponente:"
 
 #, fuzzy
 msgid "Estimates 𝜏²"
@@ -1362,9 +1357,8 @@ msgstr "Autokorrelation (%1$s)"
 msgid "with a known correlation matrix"
 msgstr ""
 
-#, fuzzy
 msgid "%1$s as %2$s %3$s"
-msgstr "%1$s ist auf Skala %2$s."
+msgstr "%1$s wie %2$s %3$s"
 
 #, fuzzy
 msgid "%1$s as %2$s"
@@ -1550,9 +1544,8 @@ msgid ""
 "one positive value."
 msgstr ""
 
-#, fuzzy
 msgid "Invalid forest plot input."
-msgstr "Ungültige Kontraste: Zeilen in"
+msgstr "Ungültige Forestplot-Eingabe."
 
 #, fuzzy
 msgid "Model Information"
@@ -1619,9 +1612,10 @@ msgstr ""
 msgid "Estimate 𝜏"
 msgstr "Schätzung"
 
-#, fuzzy
 msgid "The funnel plot parameter estimation failed with the following error:"
-msgstr "Der %1$s-Test stürzte mit folgendem Fehler ab: %2$s"
+msgstr ""
+"Die Schätzung der Trichterdiagramm-Parameter ist fehlgeschlagen, mit "
+"folgendem Fehler:"
 
 msgid "Trim and Fill Parameter Estimates"
 msgstr ""
@@ -1682,14 +1676,15 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#, fuzzy
 msgid "The funnel plot asymmetry test failed with the following error:"
-msgstr "Der %1$s-Test stürzte mit folgendem Fehler ab: %2$s"
+msgstr ""
+"Das Trichterdiagramm-Asymmetrietest ist fehlgeschlagen mit folgendem Fehler:"
 
-#, fuzzy
 msgid ""
 "The funnel plot asymmetry test at level %1$s failed with the following error:"
-msgstr "Der %1$s-Test stürzte mit folgendem Fehler ab: %2$s"
+msgstr ""
+"Das Trichterdiagramm-Asymmetrietest bei Stufe %1$s ist fehlgeschlagen mit "
+"folgendem Fehler:"
 
 msgid ""
 "The meta-analytic model did not converge. Try modifying the 'Method' option."
@@ -1698,9 +1693,9 @@ msgstr ""
 msgid "The method is not available with only one observation."
 msgstr ""
 
-#, fuzzy
 msgid "The %1$s fail-safe N calculation %2$sfailed with the following error:"
-msgstr "Der %1$s-Test stürzte mit folgendem Fehler ab: %2$s"
+msgstr ""
+"Die %1$s Fail-Safe-N-Berechnung %2$s ist fehlgeschlagen mit folgendem Fehler:"
 
 #, fuzzy
 msgid "Missing Data Summary"
@@ -1773,7 +1768,7 @@ msgid "Pooled %1$s Matrix Parameters"
 msgstr ""
 
 msgid "Row"
-msgstr ""
+msgstr "Zeile"
 
 msgid "Column"
 msgstr ""
@@ -1832,9 +1827,8 @@ msgstr "Modell-Schätzungen"
 msgid "Random Effects Estimates"
 msgstr "Schätzungen Zufallseffekte"
 
-#, fuzzy
 msgid "Model fit failed with the following message: %1$s."
-msgstr "Der %1$s-Test stürzte mit folgendem Fehler ab: %2$s"
+msgstr "Modellanpassung fehlgeschlagen mit folgender Fehlermedlung: %1$s."
 
 msgid "The model should contain at least one predictor or an intercept."
 msgstr "Das Modell muss mindestens einen Prädiktor oder Konstante beinhalten."
@@ -2400,13 +2394,11 @@ msgstr "Anpassungsmaße"
 msgid "log Lik."
 msgstr ""
 
-#, fuzzy
 msgid "%1$s fit failed with the following message %2$s."
-msgstr "Der %1$s-Test stürzte mit folgendem Fehler ab: %2$s"
+msgstr "%1$s Anpassung fehlgeschlagen mit folgender Meldung: %2$s."
 
-#, fuzzy
 msgid "Warning"
-msgstr "Warnung:"
+msgstr "Warnung"
 
 #, fuzzy
 msgid "Model Convergence"
@@ -2418,17 +2410,14 @@ msgstr ""
 msgid "Path Diagram"
 msgstr ""
 
-#, fuzzy
 msgid "Syntax failed with the following message %1$s."
-msgstr "Der %1$s-Test stürzte mit folgendem Fehler ab: %2$s"
+msgstr "Syntax fehlgeschlagen mit folgender Meldung: %1$s."
 
-#, fuzzy
 msgid "Model fit failed with the following message %1$s."
-msgstr "Der %1$s-Test stürzte mit folgendem Fehler ab: %2$s"
+msgstr "Modellanpassung fehlgeschlagen mit folgender Meldung: %1$s."
 
-#, fuzzy
 msgid "Model visualization failed with the following message %1$s."
-msgstr "Der %1$s-Test stürzte mit folgendem Fehler ab: %2$s"
+msgstr "Modell-Visualisierung fehlgeschlagen mit folgender Meldung %1$s."
 
 #, fuzzy
 msgid "Coefficient Summary"
