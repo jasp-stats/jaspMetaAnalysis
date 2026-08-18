@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2023-04-29 02:38\n"
+"POT-Creation-Date: 2026-08-15 02:47\n"
 "PO-Revision-Date: 2025-05-03 02:53+0000\n"
 "Last-Translator: Koen Derks <koen-derks@hotmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
@@ -14,38 +14,135 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n==0 ? 0 : n==1 ? 0 : 1;\n"
 "X-Generator: Weblate 5.12-dev\n"
 
-msgid "The prior lower bound is not smaller than the upper bound."
-msgstr "De prior ondergrens is niet kleiner dan de bovengrens."
+msgid "There must be at least one observation in each group."
+msgstr ""
 
-msgid "Your prior contains negative values."
-msgstr "Uw prior bevat negatieve waarden."
+msgid "Forest Plot"
+msgstr "Forest Grafiek"
 
-msgid "Your prior contains positive values."
-msgstr "Uw prior bevat positieve waarden."
+msgid "Study"
+msgstr "Onderzoek"
 
-msgid "No positive numbers found in %s"
-msgstr "Geen positieve waarden gevonden in %s"
+msgid "Observed study effects"
+msgstr "Geobserveerde onderzoekseffecten"
 
-msgid "No negative numbers found in %s"
-msgstr "Geen negatieve getallen gevonden in %s"
+msgid "Estimated study effects"
+msgstr "Geschatte onderzoekseffecten"
 
-msgid "The 95%% CI Lower Bound must be smaller than the Upper Bound."
-msgstr "Het 95%% betrouwbaarheidsinterval moet kleiner zijn dan de Bovengrens."
+msgid "Observed and estimated study effects"
+msgstr "Geobserveerde en geschatte onderzoekseffecten"
 
-msgid "You cannot set all the prior model probabilties to zero."
-msgstr "U kan niet alle prior modelkansen gelijk aan nul zetten."
+msgid "Cumulative forest plot"
+msgstr "Cumulatieve forest grafiek"
+
+msgid "Fixed effects"
+msgstr "Gefixeerde effecten"
+
+msgid "Random effects"
+msgstr "Willekeurige effecten"
+
+msgid "Averaged"
+msgstr "Gemiddeld"
+
+msgid "Ordered effects"
+msgstr "Geordende effecten"
+
+msgid "Estimated"
+msgstr "Geschat"
+
+msgid "Observed"
+msgstr "Geobserveerd"
+
+msgid "Effect size"
+msgstr "Effectgrootte"
+
+msgid "Prior"
+msgstr "Prior"
+
+msgid "Overall effect size"
+msgstr "Totale effectgrootte"
+
+msgid "Effect Size"
+msgstr "Effectgrootte"
+
+msgid "Heterogeneity"
+msgstr "Heterogeniteit"
+
+msgid "Density"
+msgstr "Dichtheid"
+
+msgid "Prior and Posteriors"
+msgstr "Prior en Posteriors"
+
+msgid "Fixed H"
+msgstr "Gefixeerde H"
+
+msgid "Random H"
+msgstr "Aselecte H"
+
+msgid "Averaged H"
+msgstr "Gemiddelde H"
+
+msgid "Prior H"
+msgstr "Prior H"
+
+msgid "Ordered H"
+msgstr "Geordende H"
+
+msgid "Sequential Analysis"
+msgstr "Sequentiële Analyse"
+
+msgid "Bayes factors effect size"
+msgstr "Bayes-factoren effectgrootte"
+
+msgid "Bayes factors heterogeneity"
+msgstr "Bayes factoren heterogeniteit"
+
+msgid "Posterior model probabilities"
+msgstr "Posterior model waarschijnlijkheden"
+
+msgid "Evidence for random effects"
+msgstr "Bewijs voor toevallige effecten"
+
+msgid "Evidence for fixed effects"
+msgstr "Bewijs voor gefixeerde effecten"
+
+msgid "random"
+msgstr "aselect"
+
+msgid "fixed"
+msgstr "gefixeerd"
+
+msgid "Anecdotal"
+msgstr "Anekdotisch"
+
+msgid "Moderate"
+msgstr "Matig"
+
+msgid "Strong"
+msgstr "Sterk"
+
+msgid "Very Strong"
+msgstr "Zeer Sterk"
+
+msgid "Extreme"
+msgstr "Extreem"
+
+msgid "Evidence for %s:"
+msgstr "Bewijs voor %s:"
+
+msgid "Plotting failed: The Bayes factors contain infinity."
+msgstr "Grafieken faalde: De Bayes-factoren bevatten oneindig."
+
+msgid "Studies"
+msgstr "Onderzoeken"
 
 msgid ""
-"The model could not be fit. Please check the following: Do you have at least "
-"n=2 studies? If the prior is truncated, is it consistent with the data (when "
-"most effect sizes are negative, the analysis may not work when the prior is "
-"constrained to be postive)?"
+"Posterior model \n"
+" probability"
 msgstr ""
-"Het model kon niet passend gemaakt worden. Controleer a.u.b. het volgende: "
-"Heeft u ten minste n=2 onderzoeken? Als de prior is afgekapt, is hij dan "
-"consistent met de data (wanneer de meeste effectgroottes negatief zijn, kan "
-"de analyse misschien niet uitgevoerd worden wanneer de prior positief dient "
-"te zijn)?"
+"Posterior model \n"
+" kans"
 
 msgid "Posterior Estimates per Model"
 msgstr "Posterior schattingen per model"
@@ -70,18 +167,6 @@ msgstr "95%% Geloofwaardigheidsinterval"
 
 msgid "Upper"
 msgstr "Boven"
-
-msgid "Averaged"
-msgstr "Gemiddeld"
-
-msgid "Fixed effects"
-msgstr "Gefixeerde effecten"
-
-msgid "Random effects"
-msgstr "Willekeurige effecten"
-
-msgid "Ordered effects"
-msgstr "Geordende effecten"
 
 msgid ""
 "%1$s and %2$s are the group-level effect size and standard deviation, "
@@ -179,9 +264,6 @@ msgstr ""
 msgid "Model Probabilities"
 msgstr "Modelkansen"
 
-msgid "Prior"
-msgstr "Prior"
-
 msgid "Posterior"
 msgstr "Posterior"
 
@@ -197,15 +279,6 @@ msgstr "Geordende H%s"
 msgid "Effect Sizes per Study"
 msgstr "Effectgroottes per studie"
 
-msgid "Observed"
-msgstr "Geobserveerd"
-
-msgid "Estimated"
-msgstr "Geschat"
-
-msgid "Study"
-msgstr "Onderzoek"
-
 msgid ""
 "Posterior mean and 95%% credible interval estimates from the random effects "
 "model."
@@ -220,108 +293,38 @@ msgstr ""
 "Posterior gemiddelde en 95%% geloofwaardigheidsintervalschattingen van het "
 "beperkteaselecte effectenmodel."
 
-msgid "Effect Size"
-msgstr "Effectgrootte"
+msgid "The prior lower bound is not smaller than the upper bound."
+msgstr "De prior ondergrens is niet kleiner dan de bovengrens."
 
-msgid "Heterogeneity"
-msgstr "Heterogeniteit"
+msgid "Your prior contains negative values."
+msgstr "Uw prior bevat negatieve waarden."
 
-msgid "Effect size"
-msgstr "Effectgrootte"
+msgid "Your prior contains positive values."
+msgstr "Uw prior bevat positieve waarden."
 
-msgid "Density"
-msgstr "Dichtheid"
+msgid "No positive numbers found in %s"
+msgstr "Geen positieve waarden gevonden in %s"
 
-msgid "Prior and Posteriors"
-msgstr "Prior en Posteriors"
+msgid "No negative numbers found in %s"
+msgstr "Geen negatieve getallen gevonden in %s"
 
-msgid "Fixed H"
-msgstr "Gefixeerde H"
+msgid "The 95%% CI Lower Bound must be smaller than the Upper Bound."
+msgstr "Het 95%% betrouwbaarheidsinterval moet kleiner zijn dan de Bovengrens."
 
-msgid "Random H"
-msgstr "Aselecte H"
-
-msgid "Averaged H"
-msgstr "Gemiddelde H"
-
-msgid "Prior H"
-msgstr "Prior H"
-
-msgid "Ordered H"
-msgstr "Geordende H"
-
-msgid "Forest Plot"
-msgstr "Forest Grafiek"
-
-msgid "Observed study effects"
-msgstr "Geobserveerde onderzoekseffecten"
-
-msgid "Estimated study effects"
-msgstr "Geschatte onderzoekseffecten"
-
-msgid "Observed and estimated study effects"
-msgstr "Geobserveerde en geschatte onderzoekseffecten"
-
-msgid "Cumulative forest plot"
-msgstr "Cumulatieve forest grafiek"
-
-msgid "Overall effect size"
-msgstr "Totale effectgrootte"
-
-msgid "Sequential Analysis"
-msgstr "Sequentiële Analyse"
-
-msgid "Bayes factors effect size"
-msgstr "Bayes-factoren effectgrootte"
-
-msgid "Bayes factors heterogeneity"
-msgstr "Bayes factoren heterogeniteit"
-
-msgid "Posterior model probabilities"
-msgstr "Posterior model waarschijnlijkheden"
-
-msgid "Evidence for random effects"
-msgstr "Bewijs voor toevallige effecten"
-
-msgid "Evidence for fixed effects"
-msgstr "Bewijs voor gefixeerde effecten"
-
-msgid "random"
-msgstr "aselect"
-
-msgid "fixed"
-msgstr "gefixeerd"
-
-msgid "Anecdotal"
-msgstr "Anekdotisch"
-
-msgid "Moderate"
-msgstr "Matig"
-
-msgid "Strong"
-msgstr "Sterk"
-
-msgid "Very Strong"
-msgstr "Zeer Sterk"
-
-msgid "Extreme"
-msgstr "Extreem"
-
-msgid "Evidence for %s:"
-msgstr "Bewijs voor %s:"
-
-msgid "Plotting failed: The Bayes factors contain infinity."
-msgstr "Grafieken faalde: De Bayes-factoren bevatten oneindig."
-
-msgid "Studies"
-msgstr "Onderzoeken"
+msgid "You cannot set all the prior model probabilties to zero."
+msgstr "U kan niet alle prior modelkansen gelijk aan nul zetten."
 
 msgid ""
-"Posterior model \n"
-" probability"
+"The model could not be fit. Please check the following: Do you have at least "
+"n=2 studies? If the prior is truncated, is it consistent with the data (when "
+"most effect sizes are negative, the analysis may not work when the prior is "
+"constrained to be postive)?"
 msgstr ""
-"Posterior model \n"
-" kans"
+"Het model kon niet passend gemaakt worden. Controleer a.u.b. het volgende: "
+"Heeft u ten minste n=2 onderzoeken? Als de prior is afgekapt, is hij dan "
+"consistent met de data (wanneer de meeste effectgroottes negatief zijn, kan "
+"de analyse misschien niet uitgevoerd worden wanneer de prior positief dient "
+"te zijn)?"
 
 msgid "Prior and posterior plot"
 msgstr "Prior en posterior grafiek"
@@ -356,71 +359,133 @@ msgstr "Laatste iteratie in de keten"
 msgid "Shrink factor"
 msgstr "Krimpfactor"
 
-msgid "All standard errors/sample sizes must be positive."
+msgid "Model type '%1$s' is not available for effect size measure '%2$s'."
+msgstr ""
+
+msgid "All observations must be non-negative."
+msgstr ""
+
+#, fuzzy
+msgid "All sample sizes must be positive."
 msgstr "Alle standaardfouten/steekproefgroottes moeten positief zijn."
 
-msgid "The metafor package crashed with the following error: %s"
-msgstr "Het metafor package is gecrasht met de volgende foutmelding: %s"
+msgid ""
+"Event counts must be smaller than or equal to the corresponding sample sizes."
+msgstr ""
 
-msgid "Fixed and Random Effects"
-msgstr "Gefixeerde en Willekeurige Effecten"
+#, fuzzy
+msgid "All person-time values must be positive."
+msgstr "Alle standaardfouten/steekproefgroottes moeten positief zijn."
 
-msgid "Q"
-msgstr "Q"
+#, fuzzy
+msgid "Heterogeneity (Wald)"
+msgstr "Heterogeniteit (%s)"
 
-msgid "df"
-msgstr "df"
+#, fuzzy
+msgid "Heterogeneity (LRT)"
+msgstr "Heterogeniteit (%s)"
 
-msgid "p"
-msgstr "p"
+#, fuzzy
+msgid "Residual heterogeneity (Wald)"
+msgstr "Residu Heterogeniteit Schattingen"
 
-msgid "<em>p</em>-values are approximate."
-msgstr "<em>p</em>-waarden zijn benaderingen."
+#, fuzzy
+msgid "Residual heterogeneity (LRT)"
+msgstr "Residu Heterogeniteit Schattingen"
 
-msgid "Coefficients"
-msgstr "Coëfficiënten"
+msgid "Some GLMM heterogeneity tests could not be computed for this model fit."
+msgstr ""
 
-msgid "Estimate"
-msgstr "Schatting"
+msgid "Cochran-Mantel-Haenszel"
+msgstr ""
+
+msgid "Mantel-Haenszel"
+msgstr ""
+
+msgid "Tarone"
+msgstr ""
+
+#, fuzzy
+msgid "Bubble Plots"
+msgstr "Funnelgrafiek"
+
+msgid "Subgroup: %1$s"
+msgstr ""
+
+msgid "%1$s (%2$s)"
+msgstr "%1$s (%2$s)"
+
+#, fuzzy
+msgid "Profile Likelihood Plot"
+msgstr "Profielgrafiek voor"
+
+msgid ""
+"Profile likelihood is not available for models that contain meta-regression "
+"on heterogeneity."
+msgstr ""
+
+#, fuzzy
+msgid "Baujat Plot"
+msgstr "Radiaal Grafiek"
+
+msgid ""
+"Baujat plot is not available for models that contain meta-regression on "
+"heterogeneity."
+msgstr ""
+
+#, fuzzy
+msgid "Squared Pearson Residual"
+msgstr "Gestandaardiseerde Residuen"
+
+#, fuzzy
+msgid "Influence on Fitted Value"
+msgstr "Invloedmetingen"
+
+#, fuzzy
+msgid "Residual Funnel Plot"
+msgstr "Funnelgrafiek"
+
+msgid "Residual Value"
+msgstr "Residuen Waarde"
 
 msgid "Standard Error"
 msgstr "Standaardfout"
 
-msgid "z"
-msgstr "z"
+#, fuzzy
+msgid "Profile Likelihood"
+msgstr "Log-likelihood"
 
-msgid "t"
-msgstr "t"
+msgid "Variance Inflation Summary"
+msgstr ""
 
-msgid "Wald test."
-msgstr "Wald toets."
+msgid "Effect Size Meta-Regression Variance Inflation"
+msgstr ""
 
-msgid "Knapp and Hartung test adjustment."
-msgstr "Knapp en Hartung test aanpassing."
+msgid "Heterogeneity Meta-Regression Variance Inflation"
+msgstr ""
 
-msgid "Fit measures"
-msgstr "Pasmaten"
+#, fuzzy
+msgid "Parameters"
+msgstr "Peters"
 
-msgid "Residual Heterogeneity Estimates"
-msgstr "Residu Heterogeniteit Schattingen"
+msgid "VIF"
+msgstr ""
 
-msgid "Parameter Covariances"
-msgstr "Parameter Covarianties"
+msgid "SIF"
+msgstr ""
 
-msgid "Rank correlation test for Funnel plot asymmetry"
-msgstr "Rang correlatietoets voor Funnelgrafiek-asymmetrie"
+#, fuzzy
+msgid "Casewise Diagnostics Table"
+msgstr "Modellen Diagnostiek Overzicht"
 
-msgid "Kendall's %s"
-msgstr "Kendall's %s"
+msgid "Label"
+msgstr ""
 
-msgid "Regression test for Funnel plot asymmetry (\"Egger's test\")"
-msgstr "Regressietoets voor Funnelgrafiek-asymmetrie(\"Egger's toets\")"
+msgid "Predictor"
+msgstr ""
 
-msgid "Influence Measures"
-msgstr "Invloedmetingen"
-
-msgid "Std. Residual"
-msgstr "Std. Residu"
+msgid "Standardized Residual"
+msgstr "Gestandaardiseerde Residuen"
 
 msgid "DFFITS"
 msgstr "DEFITS"
@@ -428,14 +493,21 @@ msgstr "DEFITS"
 msgid "Cook's Distance"
 msgstr "Cook's Afstand"
 
-msgid "Cov. Ratio"
+#, fuzzy
+msgid "Covariance ratio"
 msgstr "Cov. Ratio"
 
-msgid "%1$s%2$s<sub>(-i)</sub>"
-msgstr "%1$s%2$s<sub>(-i)</sub>"
+msgid "𝜏"
+msgstr ""
 
-msgid "Q<sub>E(-i)</sub>"
-msgstr "Q<sub>E(-i)</sub>"
+msgid "Leave One Out"
+msgstr ""
+
+msgid "𝜏²"
+msgstr ""
+
+msgid "Qₑ"
+msgstr ""
 
 msgid "Hat"
 msgstr "Hoedje"
@@ -443,29 +515,385 @@ msgstr "Hoedje"
 msgid "Weight"
 msgstr "Gewicht"
 
-msgid "File Drawer Analysis"
-msgstr "File Drawer Analyse"
+msgid "Difference in coefficients"
+msgstr ""
 
-msgid "Fail-safe N"
-msgstr "Fail-safe N"
+msgid "Influential"
+msgstr ""
 
-msgid "Target Significance"
-msgstr "Doelsignificantie"
+msgid "No influential cases found."
+msgstr ""
 
-msgid "Observed Significance"
-msgstr "Waargenomen Significantie"
+msgid "%1$sNo influential cases found."
+msgstr ""
 
-msgid "Omnibus test of Model Coefficients"
-msgstr "Omnibustoets van Modelcoëfficiënten"
+msgid "Diagnostics are based on the the subgroup models."
+msgstr ""
 
-msgid "Test of Residual Heterogeneity"
+msgid "Diagnostics are based on the non-clustered model."
+msgstr ""
+
+msgid "Estimated Marginal Means and Contrasts Summary"
+msgstr ""
+
+msgid "Estimated Marginal Means / Contrasts"
+msgstr ""
+
+#, fuzzy
+msgid "(Effect Size)"
+msgstr "Effectgrootte"
+
+#, fuzzy
+msgid "(Heterogeneity)"
+msgstr "Heterogeniteit"
+
+#, fuzzy
+msgid "Adjusted Estimate"
+msgstr "Model Schattingen"
+
+msgid "Estimated Marginal Means"
+msgstr ""
+
+msgid "Level"
+msgstr ""
+
+msgid "Estimate"
+msgstr "Schatting"
+
+#, fuzzy
+msgid "Heterogeneity Level"
+msgstr "Heterogeniteit"
+
+msgid "t"
+msgstr "t"
+
+msgid "z"
+msgstr "z"
+
+msgid "df"
+msgstr "df"
+
+msgid "p"
+msgstr "p"
+
+msgid "Contrasts"
+msgstr ""
+
+msgid "Comparison"
+msgstr ""
+
+msgid "Contrast tests based on Wald-type z-tests."
+msgstr ""
+
+msgid "Mean - %1$sSD"
+msgstr ""
+
+msgid "Mean + %1$sSD"
+msgstr ""
+
+#, fuzzy
+msgid "Adjusted estimate"
+msgstr "Model Schattingen"
+
+msgid ""
+"Each marginal mean estimate is averaged across the levels of the remaining "
+"predictors."
+msgstr ""
+
+msgid ""
+"Each marginal mean estimate is averaged across the levels of the remaining "
+"predictors in a given subgroup."
+msgstr ""
+
+msgid ""
+"NAs in the marginal mean estimates were introduced due to the %1$s "
+"transformation. Please verify that you are using the correct effect size "
+"transformation."
+msgstr ""
+
+msgid ""
+"The marginal mean estimates and intervals are transformed using %1$s "
+"transformation. For nonlinear transformations, transformed marginal means "
+"are interpreted as medians on the transformed scale."
+msgstr ""
+
+msgid "The estimates and intervals correspond to %1$s."
+msgstr ""
+
+msgid ""
+"Each contrast is averaged across the levels of the remaining predictors."
+msgstr ""
+
+msgid ""
+"Contrasts of estimates marginal means cannot be transformed via the effect "
+"size transformation."
+msgstr ""
+
+msgid ""
+"Contrasts of estimated marginal means are adjusted for multiple comparisons "
+"using %1$s correction."
+msgstr ""
+
+msgid ""
+"Contrasts of estimated marginal means cannot be transformed via the link "
+"function. As such, the contrasts are summarized on the model scale: log(𝜏²)."
+msgstr ""
+
+msgid ""
+"Contrasts of estimated marginal means cannot be transformed via the "
+"heterogeneity transformation. As such, the contrasts are summarized as 𝜏²."
+msgstr ""
+
+msgid "Estimating Meta-Analytic Model"
+msgstr ""
+
+msgid "Full dataset"
+msgstr ""
+
+msgid "Estimating Subgroup Models"
+msgstr ""
+
+msgid ""
+"The loaded distance matrix for '%1$s' does not match the dataset. The "
+"following levels are missing: %2$s."
+msgstr ""
+
+msgid ""
+"The loaded correlation matrix for '%1$s' does not match the dataset. The "
+"following levels are missing: %2$s."
+msgstr ""
+
+#, fuzzy
+msgid "All observations were removed as influential."
+msgstr "%i observatie is verwijderd, omdat de waarde ontbreekt."
+
+msgid "Intercept"
+msgstr "Intercept"
+
+msgid "%1$s: not available"
+msgstr ""
+
+#, fuzzy
+msgid "Residual heterogeneity"
 msgstr "Toets van Residuen Heterogeniteit"
 
-msgid "The model was estimated using %1$s method."
-msgstr "Het model werd geschat met de %1$s methode."
+#, fuzzy
+msgid "Moderation (effect size): %1$s"
+msgstr "Totale effectgrootte"
 
-msgid "Log-Likelihood"
-msgstr "Log-likelihood"
+#, fuzzy
+msgid "Moderation (heterogeneity): %1$s"
+msgstr "Bayes factoren heterogeniteit"
+
+#, fuzzy
+msgid "Moderation: %1$s"
+msgstr "Autocorrelatie (%1$s)"
+
+msgid "%s%% CI"
+msgstr "%s%% CI"
+
+msgid "%s%% PI"
+msgstr "%s%% PI"
+
+msgid "Subgroup"
+msgstr ""
+
+msgid "Warning:"
+msgstr "Waarschuwing:"
+
+msgid ""
+"Cluster-robust inference has very low effective degrees of freedom. When "
+"Satterthwaite df < 4, p-values should be interpreted with extreme caution."
+msgstr ""
+
+msgid ""
+"Knapp-Hartung inference is based on very few residual degrees of freedom; "
+"results can be sensitive and should be interpreted cautiously."
+msgstr ""
+
+msgid ""
+"The model estimation failed with the following message: %1$s. Please, "
+"consider simplifying the model."
+msgstr ""
+
+msgid ""
+"The cluster-robust standard errors could not be computed. Please, consider "
+"modifying the clustering settings in the 'Advanced' section."
+msgstr ""
+
+msgid "Fewer than two estimates."
+msgstr ""
+
+msgid ""
+"The selected 'Method' requires specification of the 'Weights' option in the "
+"'Advanced' section."
+msgstr ""
+
+msgid ""
+"The GLMM could not be estimated for the selected model. This can happen with "
+"sparse event counts, risk differences, random study effects, or a moderator "
+"structure that is too complex for the data. Try simplifying the moderator "
+"model, using the fixed study-effects GLMM, changing the effect-size measure "
+"if appropriate, or centering/scaling continuous moderators.\n"
+"\n"
+"Metafor reported: Cannot fit ML model."
+msgstr ""
+
+#, fuzzy
+msgid "Meta-Regression Summary"
+msgstr "Regressie Schattingen"
+
+msgid "Effect Size Meta-Regression Terms Tests"
+msgstr ""
+
+msgid "Heterogeneity Meta-Regression Terms Tests"
+msgstr ""
+
+#, fuzzy
+msgid "F"
+msgstr "FE"
+
+msgid "Qₘ"
+msgstr ""
+
+msgid "df₁"
+msgstr ""
+
+msgid "df₂"
+msgstr ""
+
+msgid "p (permutation)"
+msgstr ""
+
+msgid "Term tests based on Wald-type chi-squared tests."
+msgstr ""
+
+msgid "Effect Size Meta-Regression Coefficients"
+msgstr ""
+
+msgid "Heterogeneity Meta-Regression Coefficients"
+msgstr ""
+
+msgid "Effect Size Meta-Regression Correlation Matrix"
+msgstr ""
+
+msgid "Heterogeneity Meta-Regression Correlation Matrix"
+msgstr ""
+
+msgid "Subgroup %1$s:"
+msgstr ""
+
+msgid ""
+"%1$sThe term %2$s was completely removed from the model. Possible causes are "
+"missing values, collinear predictors, or missing crossed cells in an "
+"interaction term."
+msgstr ""
+
+msgid ""
+"%1$sThe term %2$s was partilly removed (%3$i/%4$i coefficients) from the "
+"model. Possible causes are missing values, collinear predictors, or missing "
+"crossed cells in an interaction term."
+msgstr ""
+
+msgid ""
+"%1$sThe following coefficients were removed from the model: %2$s. Possible "
+"causes are missing values, collinear predictors, or missing crossed cells in "
+"an interaction term."
+msgstr ""
+
+#, fuzzy
+msgid "Pooled effect"
+msgstr "Gefixeerde effecten"
+
+msgid ""
+"Indexes of %1$s moderation coefficients were specified in an incorrect "
+"format. Try '(1, 2)' to test the first two coefficients."
+msgstr ""
+
+msgid ""
+"The selected coefficients for %1$s moderation must be between 1 and %2$i (i."
+"e., the number of regression parameters)."
+msgstr ""
+
+#, fuzzy
+msgid "Effect size (coef: %1$s)"
+msgstr "Effectgrootte (%s)"
+
+#, fuzzy
+msgid "Effect size coefficients %1$s correspond to %2$s."
+msgstr ""
+"Geschatte onderzoekseffecten (%1$s) corresponderen met effectgrootte %2$s."
+
+#, fuzzy
+msgid "Heterogeneity (coef: %1$s)"
+msgstr "Heterogeniteit (%s)"
+
+#, fuzzy
+msgid "Heterogeneity coefficients %1$s correspond to %2$s."
+msgstr ""
+"Geschatte onderzoekseffecten (%1$s) corresponderen met effectgrootte %2$s."
+
+msgid "The pooled effect size could not be calculated."
+msgstr ""
+
+msgid "(coef ...)"
+msgstr ""
+
+#, fuzzy
+msgid "Moderation effect size%1$s"
+msgstr "Totale effectgrootte"
+
+#, fuzzy
+msgid "Moderation%1$s"
+msgstr "Matig"
+
+#, fuzzy
+msgid "Moderation heterogeneity%1$s"
+msgstr "Bayes factoren heterogeniteit"
+
+msgid "(coef: %1$s)"
+msgstr ""
+
+msgid "Subgroup differences"
+msgstr ""
+
+msgid "Model Summary"
+msgstr "Model Samenvatting"
+
+#, fuzzy
+msgid "Meta-Analytic Tests"
+msgstr "Modeltoetsen"
+
+msgid "Test"
+msgstr ""
+
+#, fuzzy
+msgid "The model for subgroup '%1$s' failed with the following error: %2$s"
+msgstr "De %1$s toets is mislukt met de volgende fout: %2$s"
+
+msgid "Error:"
+msgstr "Fout:"
+
+msgid "Moderation test based on a Wald-type F-test."
+msgstr ""
+
+msgid "Moderation test based on a Wald-type chi-squared test."
+msgstr ""
+
+#, fuzzy
+msgid "Meta-Analytic Estimates"
+msgstr "Model Schattingen"
+
+#, fuzzy
+msgid "Fit Measures"
+msgstr "Pasmaten"
+
+#, fuzzy
+msgid "Observations"
+msgstr "Iteratie"
+
+msgid "Log Lik."
+msgstr ""
 
 msgid "Deviance"
 msgstr "Afwijking"
@@ -479,155 +907,978 @@ msgstr "BIC"
 msgid "AICc"
 msgstr "AICc"
 
-msgid "I%s (%%)"
-msgstr "I%s (%%)"
+msgid "R²"
+msgstr ""
 
-msgid "H%s"
-msgstr "H%s"
+msgid "Fixed effects tested using z-distribution."
+msgstr ""
 
-msgid "Rank test"
-msgstr "Rang toets"
+msgid "Fixed effects tested using t-distribution."
+msgstr ""
 
-msgid "Cases marked with %s are influential."
-msgstr "Waarnemingen gemarkeerd met %s zijn invloedrijk."
+#, fuzzy
+msgid "Fixed effects tested using Knapp and Hartung adjustment."
+msgstr "Knapp en Hartung test aanpassing."
 
-msgid "Plot"
-msgstr "Grafiek"
+msgid "The heterogeneity model for 𝜏² is specified on the log scale."
+msgstr ""
+
+msgid "The heterogeneity model for 𝜏² is specified on the identity scale."
+msgstr ""
+
+#, fuzzy
+msgid "pooled effect"
+msgstr "Gefixeerde effecten"
+
+#, fuzzy
+msgid "adjusted effect"
+msgstr "Geordende effecten"
+
+#, fuzzy
+msgid "%1$i observations were ommited due to missing values."
+msgstr "%i observatie is verwijderd, omdat de waarde ontbreekt."
+
+#, fuzzy
+msgid "%1$s: %2$i observations were ommited due to missing values."
+msgstr "%i observatie is verwijderd, omdat de waarde ontbreekt."
+
+#, fuzzy
+msgid "%1$s: %2$s"
+msgstr "%1$s (%2$s)"
+
+msgid ""
+"NAs in the %1$s were introduced due to the %2$s transformation. Please "
+"verify that you are using the correct effect size transformation."
+msgstr ""
+
+msgid ""
+"The %1$s is transformed using %2$s transformation. For nonlinear "
+"transformations, the transformed estimate is interpreted as a median on the "
+"transformed scale."
+msgstr ""
+
+msgid ""
+"The pooled effect size corresponds to the weighted average effect across "
+"studies."
+msgstr ""
+
+msgid ""
+"The adjusted effect corresponds to the averaged effect size estimate across "
+"the levels of all moderators."
+msgstr ""
+
+msgid ""
+"The pooled heterogeneity estimate corresponds to the heterogeneity at the "
+"average of predictor values."
+msgstr ""
+
+msgid "The I² and H² statistics are not available for heterogeneity models."
+msgstr ""
+
+msgid ""
+"Heterogeneity confidence intervals are not available for this GLMM model "
+"type."
+msgstr ""
+
+msgid "The Model Structure %1$s was not completely specified and was skipped."
+msgstr ""
+
+msgid ""
+"Prediction interval for the %1$s is not available for models with multiple "
+"heterogeneity estimates."
+msgstr ""
+
+msgid ""
+"Cluster-robust tests and confidence intervals were computed using %1$s as "
+"the clustering variable (%2$s). %3$s"
+msgstr ""
+
+msgid "%1$i clusters; %2$i estimates per cluster"
+msgstr ""
+
+msgid "%1$i clusters; min/median/max %2$i/%3$i/%4$i estimates per cluster"
+msgstr ""
+
+msgid ""
+"clubSandwich was used with CR2 adjustment and Satterthwaite degrees of "
+"freedom."
+msgstr ""
+
+msgid "A CR1 small-sample correction was applied."
+msgstr ""
+
+msgid "Unadjusted CR0 cluster-robust standard errors were used."
+msgstr ""
+
+msgid "Permutation p-value is based on %1$s permutations."
+msgstr ""
+
+msgid ""
+"Clustering is not supported when specifying a heterogeneity meta-regression "
+"model."
+msgstr ""
+
+msgid "The fixed value for tau2 must be a positive number."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"The custom R code for extending the metafor call failed with the following "
+"message: %1$s"
+msgstr "De %1$s toets is mislukt met de volgende fout: %2$s"
+
+#, fuzzy
+msgid "Fisher's z to r"
+msgstr "Fisher's z"
+
+msgid "exponential"
+msgstr ""
+
+msgid "log odds to proportions"
+msgstr ""
+
+msgid "log odds to SMD (normal)"
+msgstr ""
+
+msgid "log odds to SMD (logistic)"
+msgstr ""
+
+msgid "SMD to log odds (normal)"
+msgstr ""
+
+msgid "SMD to log odds (logistic)"
+msgstr ""
+
+msgid "Hakstian & Whalen inverse α"
+msgstr ""
+
+msgid "Bonett inverse α"
+msgstr ""
+
+msgid "z to R²"
+msgstr ""
+
+msgid "SMD to Cohen's U₁"
+msgstr ""
+
+msgid "SMD to Cohen's U₂"
+msgstr ""
+
+msgid "SMD to Cohen's U₃"
+msgstr ""
+
+msgid "SMD to CLES, Pr(superiority)"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Bonferroni"
+msgstr ""
+
+msgid "Holm"
+msgstr ""
+
+msgid "Hochberg"
+msgstr ""
+
+msgid "Hommel"
+msgstr ""
+
+msgid "Benjamini-Hochberg"
+msgstr ""
+
+msgid "Benjamini-Yekutieli"
+msgstr ""
+
+msgid "Metafor R Code"
+msgstr ""
+
+msgid "Distance Matrix"
+msgstr ""
+
+#, fuzzy
+msgid "Correlation Matrix"
+msgstr "Autocorrelaties grafiek"
+
+#, fuzzy
+msgid "All standard errors must be positive."
+msgstr "Alle standaardfouten/steekproefgroottes moeten positief zijn."
+
+msgid "Error reading the distance matrix file: %1$s"
+msgstr ""
+
+msgid ""
+"The distance matrix must be square. The number of rows (%1$i) does not match "
+"the number of columns (%2$i)."
+msgstr ""
+
+msgid "Error reading the correlation matrix file: %1$s"
+msgstr ""
+
+msgid "Testing Inclusion of Random Effects / Model Structure"
+msgstr ""
+
+msgid "Subgroup %1$s: Testing Inclusion of Random Effects / Model Structure"
+msgstr ""
+
+msgid "Testing Inclusion of Nested Random Effects: %1$s"
+msgstr ""
+
+msgid "Subgroup %1$s: Testing Inclusion of Nested Random Effects: %2$s"
+msgstr ""
+
+#, fuzzy
+msgid "Random Slopes"
+msgstr "Aselecte H%s"
+
+msgid "Compound Symmetry"
+msgstr ""
+
+msgid "Heteroscedastic Compound Symmetry"
+msgstr ""
+
+msgid "Unstructured"
+msgstr ""
+
+msgid "Identity"
+msgstr ""
+
+msgid "Diagonal"
+msgstr ""
+
+msgid "AR(1)"
+msgstr ""
+
+msgid "Heteroskedastic AR(1)"
+msgstr ""
+
+msgid "Continuous-Time AR"
+msgstr ""
+
+msgid "Exponential"
+msgstr ""
+
+msgid "Gaussian"
+msgstr ""
+
+msgid "Linear"
+msgstr ""
+
+msgid "Rational Quadratic"
+msgstr ""
+
+msgid "Spherical"
+msgstr ""
+
+#, fuzzy
+msgid "Random Effects / Model Stucture Summary"
+msgstr "Willekeurige effecten model:"
+
+msgid "Simple / Nested Summary"
+msgstr ""
+
+msgid "Estimates"
+msgstr "Schattingen"
+
+msgid "σ²"
+msgstr ""
+
+msgid "σ"
+msgstr ""
+
+msgid "Levels"
+msgstr ""
+
+#, fuzzy
+msgid "Fixed"
+msgstr "Gefixeerde H"
+
+#, fuzzy
+msgid "Confidence Intervals"
+msgstr "%g%% Betrouwbaarheidsinterval"
+
+#, fuzzy
+msgid "Inclusion Tests"
+msgstr "Inclusie BF"
+
+msgid "Component Inclusion Test"
+msgstr ""
+
+msgid "%1$s: Level Inclusion Test"
+msgstr ""
+
+msgid "Removed Levels"
+msgstr ""
+
+#, fuzzy
+msgid "Removed Component"
+msgstr "Variantie Componenten"
+
+msgid "LRT"
+msgstr ""
+
+msgid ""
+"Likelihood Ratio Test (LRT) and p-value are based on a comparison with the "
+"complete model."
+msgstr ""
+
+#, fuzzy
+msgid "Random Slopes Summary"
+msgstr "Individuele Model Samenvatting"
+
+msgid "Structured"
+msgstr ""
+
+msgid "Summary"
+msgstr "Samenvatting"
+
+msgid "Autoregressive"
+msgstr ""
+
+msgid "Spatial"
+msgstr ""
+
+msgid "Known Correlation Summary"
+msgstr ""
+
+#, fuzzy
+msgid "Sqrt. Estimate"
+msgstr "Schatting"
+
+msgid "Levels:"
+msgstr ""
+
+#, fuzzy
+msgid "Component:"
+msgstr "Variantie Componenten"
+
+#, fuzzy
+msgid "Estimates 𝜏²"
+msgstr "Schattingen"
+
+#, fuzzy
+msgid "Estimates ρ"
+msgstr "Schattingen"
+
+msgid "ρ"
+msgstr ""
+
+msgid "Error reading the variance-covariance matrix file: %1$s"
+msgstr ""
+
+msgid ""
+"The variance-covariance matrix must be square. The number of rows (%1$i) "
+"does not match the number of columns (%2$i)."
+msgstr ""
+
+msgid ""
+"The variance-covariance matrix must match the dimensions of the data set. "
+"The number of the matrix rows/columns (%1$i) does not match the number of "
+"observations in the dataset (%2$i)."
+msgstr ""
+
+msgid "The supplied variance-covariance matrix is not positive definite."
+msgstr ""
+
+msgid ""
+"The Variance-Covariance Matrix could not be computed: There must be as many "
+"'Correlation Matrix' entries as is the number of estimates within the "
+"largest 'Cluster'."
+msgstr ""
+
+msgid "Error computing the variance-covariance matrix: %1$s"
+msgstr ""
+
+msgid "Please provide a file with the precomputed variance-covariance matrix."
+msgstr ""
+
+msgid "Please provide a clustering variable for the correlation matrix."
+msgstr ""
+
+msgid "Please provide correlation matrix variables."
+msgstr ""
+
+msgid ""
+"The value of the correlation between construct types is set to 0. This "
+"corresponds to no adjustment for dependency between construct types."
+msgstr ""
+
+msgid ""
+"Please provide a file with the correlation matrix for the construct types."
+msgstr ""
+
+msgid ""
+"The value of the correlation between construct types is set to 0. This "
+"corresponds to no adjustment for dependency between constructs."
+msgstr ""
+
+msgid "Please provide a file with the correlation matrix for the construct."
+msgstr ""
+
+msgid ""
+"The value of the correlation between time lags is set to 0. This corresponds "
+"to no adjustment for dependency between time lags."
+msgstr ""
+
+msgid ""
+"The 'Group Size' for specifying dependency due to common group comparison is "
+"unspecified. As default, the groups are assumed to be equal."
+msgstr ""
+
+msgid ""
+"The model was estimated using the selected precomputed working effect-size "
+"variance-covariance matrix."
+msgstr ""
+
+msgid ""
+"The model was estimated using a working effect-size variance-covariance "
+"matrix based on %1$s."
+msgstr ""
+
+msgid "correlation matrix variables"
+msgstr ""
+
+msgid "construct"
+msgstr ""
+
+msgid "construct type"
+msgstr ""
+
+msgid "group 1"
+msgstr ""
+
+msgid "group 2"
+msgstr ""
+
+msgid "group size 1"
+msgstr ""
+
+msgid "group size 2"
+msgstr ""
+
+#, fuzzy
+msgid "with a common correlation of %1$s"
+msgstr "Autocorrelatie (%1$s)"
+
+msgid "with a known correlation matrix"
+msgstr ""
+
+#, fuzzy
+msgid "%1$s as %2$s %3$s"
+msgstr "%1$s is op %2$s schaal."
+
+#, fuzzy
+msgid "%1$s as %2$s"
+msgstr "%1$s (%2$s)"
+
+msgid "%1$s with lag-1 correlation of %2$s"
+msgstr ""
+
+#, fuzzy
+msgid "%1$s and %2$s"
+msgstr "%1$s (%2$s)"
+
+#, fuzzy
+msgid "%1$s, and %2$s"
+msgstr "%1$s (%2$s)"
+
+msgid "Error writing the variance-covariance matrix file: %1$s"
+msgstr ""
+
+msgid ""
+"The within-cluster correlation is set to 0. This corresponds to no "
+"adjustment for dependency between effect sizes within clusters."
+msgstr ""
+
+msgid ""
+"Please provide a time variable for autoregressive correlation structures."
+msgstr ""
+
+msgid ""
+"The lag-1 correlation is set to 0. This corresponds to no time-based "
+"dependency adjustment."
+msgstr ""
+
+msgid ""
+"Please provide a construct variable for compound symmetry times "
+"autoregressive correlation structures."
+msgstr ""
+
+msgid "Aggregation Summary"
+msgstr ""
+
+msgid "Input Rows"
+msgstr ""
+
+msgid "Clusters"
+msgstr ""
+
+msgid "Method"
+msgstr "Methode"
+
+msgid "Effect size aggregation was not run yet."
+msgstr ""
+
+msgid "Independent"
+msgstr ""
+
+msgid "Compound symmetry"
+msgstr ""
+
+msgid "Compound symmetry + autoregressive"
+msgstr ""
+
+msgid "Compound symmetry × autoregressive"
+msgstr ""
+
+msgid "Precomputed variance-covariance matrix"
+msgstr ""
+
+#, fuzzy
+msgid "Correlation matrix"
+msgstr "Autocorrelaties grafiek"
+
+msgid "Constructs/groups/times"
+msgstr ""
+
+#, fuzzy
+msgid "sampling variance"
+msgstr "Steekproef diagnostieken"
+
+#, fuzzy
+msgid "standard error"
+msgstr "Standaard fout"
+
+msgid "aggregated effect-size, %1$s, and cluster-size"
+msgstr ""
+
+msgid "aggregated effect-size and %1$s"
+msgstr ""
+
+msgid ""
+"%1$i input rows were aggregated into %2$i cluster-level estimates. The %3$s "
+"columns were added to the dataset at the first row of each cluster."
+msgstr ""
+
+msgid ""
+"Aggregation used the selected precomputed working effect-size variance-"
+"covariance matrix."
+msgstr ""
+
+msgid ""
+"Aggregation used a working effect-size variance-covariance matrix based on "
+"%1$s."
+msgstr ""
+
+msgid "Aggregation assumed independent sampling errors within clusters."
+msgstr ""
+
+msgid ""
+"Aggregation used compound-symmetry sampling-error dependence within clusters "
+"with within-cluster correlation %1$s."
+msgstr ""
+
+msgid ""
+"Aggregation used autoregressive sampling-error dependence over %1$s with "
+"lag-1 correlation %2$s."
+msgstr ""
+
+msgid ""
+"Aggregation used compound-symmetry plus autoregressive sampling-error "
+"dependence within clusters with within-cluster correlation %1$s and lag-1 "
+"correlation %2$s over %3$s."
+msgstr ""
+
+msgid ""
+"Aggregation used compound-symmetry times autoregressive sampling-error "
+"dependence for %1$s with within-cluster correlation %2$s and lag-1 "
+"correlation %3$s over %4$s."
+msgstr ""
+
+msgid ""
+"Cannot compute outcomes. Check that all of the required information is "
+"specified via the appropriate arguments (i.e. an Effect Size and either "
+"Standard Error, Sampling Variance, or 95%% Confidence Interval)."
+msgstr ""
+
+msgid "Step"
+msgstr ""
+
+msgid "Computed"
+msgstr ""
+
+msgid "Total Computed"
+msgstr ""
+
+msgid "Effect size calculation was not run yet."
+msgstr ""
+
+msgid ""
+"Effect sizes were successfully computed and added to the dataset for each "
+"data entry."
+msgstr ""
+
+msgid ""
+"Effect sizes were successfully computed and added to the dataset for %1$i "
+"out of %2$i data entries."
+msgstr ""
+
+msgid "Error in Step %1$i:"
+msgstr ""
+
+#, fuzzy
+msgid "Publication bias: %1$s"
+msgstr "Publicatieonzuiverheid"
+
+msgid "The fixed effect effect size could not be calculated."
+msgstr ""
+
+#, fuzzy
+msgid "Fixed effect estimate"
+msgstr "Gefixeerde Effecten Schattingen"
+
+#, fuzzy
+msgid "Intercept estimate"
+msgstr "Intercept"
+
+msgid ""
+"No rows to display. Check that the visualization type mapping assigns at "
+"least one level to 'Study' or 'Estimate'."
+msgstr ""
+
+msgid ""
+"The weight variable must contain finite, non-negative values with at least "
+"one positive value."
+msgstr ""
+
+#, fuzzy
+msgid "Invalid forest plot input."
+msgstr "Invalide contrasten: Rijen in"
+
+#, fuzzy
+msgid "Model Information"
+msgstr "Informatie"
+
+msgid ""
+"'%1$s' could not be converted into a numeric value for the custom x-axis "
+"ticks."
+msgstr ""
+
+#, fuzzy
+msgid "At least one manual x-axis tick must be specified."
+msgstr "Er moet minstens één voorspeller worden ingesteld."
+
+msgid "At least one manual x-axis tick must fall within the x-axis limits."
+msgstr ""
 
 msgid "Funnel Plot"
 msgstr "Funnelgrafiek"
 
-msgid "Log-Likelihood for %1$s%2$s"
-msgstr "Log-likelihood voor %1$s%2$s"
+msgid ""
+"Funnel plot prediction interval was specified in an incorrect format. Try "
+"'(0.90, 0.95, 0.99)'."
+msgstr ""
 
-msgid "Trim-Fill Analysis"
-msgstr "Trim-fill Analyse"
+#, fuzzy
+msgid "Funnel plot prediction intervals must be between 0 and 1."
+msgstr "Alle p-afkapwaarden moeten tussen 0 en 1 liggen."
 
-msgid "Diagnostic Plots"
-msgstr "Diagnostische Grafieken"
-
-msgid "Study %s"
-msgstr "Onderzoek %s"
-
-msgid "FE Model"
-msgstr "FE Model"
-
-msgid "RE Model"
-msgstr "RE Model"
-
-msgid "Profile Plot for"
-msgstr "Profielgrafiek voor"
-
-msgid "Restricted Log-Likelihood"
-msgstr "Beperkte Log-likelihood"
-
-msgid "Residual Value"
-msgstr "Residuen Waarde"
-
-msgid "Radial Plot"
-msgstr "Radiaal Grafiek"
-
-msgid "Stopped because k = 1."
-msgstr "Gestopt omdat k = 1."
-
-msgid "Normal Q-Q Plot"
-msgstr "Normale Q-Q plot"
-
-msgid "Theoretical Quantiles"
-msgstr "Theoretische Kwantielen"
-
-msgid "Sample Quantiles"
-msgstr "Steekproefkwantielen"
-
-msgid "Standardized Residuals"
-msgstr "Gestandaardiseerde Residuen"
-
-msgid "Fitted vs. Standardized Residuals"
-msgstr "Passend vs. Gestandaardiseerde Residuen"
-
-msgid "Fitted Value"
-msgstr "Passende Waarde"
-
-msgid "Standardized Residual"
-msgstr "Gestandaardiseerde Residuen"
-
-msgid "The model should contain at least one predictor or an intercept."
-msgstr "Het model moet minstens één predictor bevatten of een interceptie."
-
-msgid "FE"
-msgstr "FE"
-
-msgid "ML"
-msgstr "ML"
-
-msgid "REML"
-msgstr "REML"
-
-msgid "DL"
-msgstr "DL"
-
-msgid "HE"
-msgstr "HE"
-
-msgid "HS"
-msgstr "HS"
-
-msgid "SJ"
-msgstr "SJ"
-
-msgid "EB"
-msgstr "EB"
-
-msgid "PM"
-msgstr "PM"
-
-msgid "%g%% Confidence Interval"
-msgstr "%g%% Betrouwbaarheidsinterval"
+#, fuzzy
+msgid "Funnel plot prediction intervals must be specified."
+msgstr "Er moet minstens één voorspeller worden ingesteld."
 
 msgid ""
-"The study labels contain invalid characters. Please, remove them before "
-"running the analysis."
+"Power enhancement breaks were specified in an incorrect format. Try '(0.30, "
+"0.50, 0.80)'."
 msgstr ""
-"De studielabels bevatten ongeldige tekens. Verwijder deze alvorens de "
-"analyse uit te voeren."
 
-msgid "%s%% CI"
-msgstr "%s%% CI"
+#, fuzzy
+msgid "At least one power enhancement break must be specified."
+msgstr "Er moet minstens één voorspeller worden ingesteld."
 
-msgid "%s%% PI"
-msgstr "%s%% PI"
-
-msgid "%s Summary"
-msgstr "%s Samenvatting"
-
-msgid "metamisc package failed with the following error: '%s'"
-msgstr "metamisc pakket is gecrasht met de volgende foutmelding: %s"
-
-msgid "Based on %i studies."
-msgstr "Gebaseerd op %i studies."
-
-msgid "The model was estimated using %1$s method with %2$s link function."
+msgid "Power enhancement breaks must be between 0.05 and 1."
 msgstr ""
-"Het model werd geschat met behulp van de %1$s methode met %2$s "
-"koppelingsfunctie."
 
-msgid "The model was estimated using MCMC with %1$s link function."
-msgstr "Het model werd geschat met behulp van MCMC met %1$s koppelingsfunctie."
+#, fuzzy
+msgid "Power"
+msgstr "Onder"
 
-msgid "Forest plot"
-msgstr "Forest grafiek"
+msgid "H₁ Funnel Parameter Estimates"
+msgstr ""
 
-msgid "Observed-Expected Ratio"
-msgstr "Geobserveerd-Verwacht Verhouding"
+#, fuzzy
+msgid "Estimate μ"
+msgstr "Schatting"
 
-msgid "Concordance Statistic"
-msgstr "Overeenstemmingsstatistiek"
+msgid "Lower 95%% CI"
+msgstr ""
+
+msgid "Upper 95%% CI"
+msgstr ""
+
+#, fuzzy
+msgid "Estimate 𝜏"
+msgstr "Schatting"
+
+#, fuzzy
+msgid "The funnel plot parameter estimation failed with the following error:"
+msgstr "De %1$s toets is mislukt met de volgende fout: %2$s"
+
+msgid "Trim and Fill Parameter Estimates"
+msgstr ""
+
+#, fuzzy
+msgid "Missing Estimates"
+msgstr "Regressie Schattingen"
+
+msgid "Trim and Fill"
+msgstr ""
+
+#, fuzzy
+msgid "Adjusted Estimate μ"
+msgstr "Model Schattingen"
+
+msgid "Adjusted Estimate 𝜏"
+msgstr ""
 
 msgid "Funnel Plot Asymmetry Tests"
 msgstr "Trechtergrafiek Asymmetrie Toetsen"
 
-msgid "Method"
-msgstr "Methode"
+#, fuzzy
+msgid "Meta-Regression Test for Funnel Plot Asymmetry"
+msgstr "Rang correlatietoets voor Funnelgrafiek-asymmetrie"
+
+#, fuzzy
+msgid "Asymmetry Test"
+msgstr "Trechtergrafiek Asymmetrie Toetsen"
+
+#, fuzzy
+msgid "Limit Estimate μ"
+msgstr "Schatting"
+
+#, fuzzy
+msgid "Weighted Regression Test for Funnel Plot Asymmetry"
+msgstr "Regressietoets voor Funnelgrafiek-asymmetrie(\"Egger's toets\")"
+
+#, fuzzy
+msgid "Rank Correlation Test for Funnel Plot Asymmetry"
+msgstr "Rang correlatietoets voor Funnelgrafiek-asymmetrie"
+
+#, fuzzy
+msgid "Fail-Safe N"
+msgstr "Fail-safe N"
+
+msgid "Fail-Safe N Summary Table"
+msgstr ""
+
+msgid "Rosenthal"
+msgstr ""
+
+msgid "Orwin"
+msgstr ""
+
+msgid "Rosenberg"
+msgstr ""
+
+msgid "General"
+msgstr ""
+
+#, fuzzy
+msgid "The funnel plot asymmetry test failed with the following error:"
+msgstr "De %1$s toets is mislukt met de volgende fout: %2$s"
+
+#, fuzzy
+msgid ""
+"The funnel plot asymmetry test at level %1$s failed with the following error:"
+msgstr "De %1$s toets is mislukt met de volgende fout: %2$s"
+
+msgid ""
+"The meta-analytic model did not converge. Try modifying the 'Method' option."
+msgstr ""
+
+msgid "The method is not available with only one observation."
+msgstr ""
+
+#, fuzzy
+msgid "The %1$s fail-safe N calculation %2$sfailed with the following error:"
+msgstr "De %1$s toets is mislukt met de volgende fout: %2$s"
+
+#, fuzzy
+msgid "Missing Data Summary"
+msgstr "%s Samenvatting"
+
+msgid ""
+"The dataset contains missing values: %1$i missing values were removed from "
+"the analysis."
+msgstr ""
+
+msgid "Column name %s already exists in the dataset."
+msgstr ""
+
+msgid ""
+"The 'Correlation/Covariance Matrix' variable input contains the following "
+"variable that does not contain the variable name separator '%1$s': %2$s."
+msgstr ""
+
+msgid ""
+"The correlation matrix contains values outside the range of -1 and 1. Please "
+"check your input."
+msgstr ""
+
+msgid ""
+"The 'Means' variable input contains the following variable that is not "
+"specified in the 'Correlation/Covariance Matrix' variable input: %1$s."
+msgstr ""
+
+msgid "Available Variable Names"
+msgstr ""
+
+msgid "Descriptives"
+msgstr ""
+
+msgid "%1$s: %1$s Matrix"
+msgstr ""
+
+msgid "Variable"
+msgstr ""
+
+msgid "%1$s: Means"
+msgstr ""
+
+msgid "Pooled %1$s Matrix"
+msgstr ""
+
+msgid ""
+"The pooled correlation/covariance matrix could not be computed. Consider "
+"verifying that all correlation/covariance matrix variables are correctly "
+"specified via 'Descriptives'."
+msgstr ""
+
+#, fuzzy
+msgid "Correlation"
+msgstr "Autocorrelatie"
+
+#, fuzzy
+msgid "Covariance"
+msgstr "Afwijking"
+
+#, fuzzy
+msgid "Random Effect"
+msgstr "Willekeurige effecten"
+
+#, fuzzy
+msgid "Random Effect Covariance"
+msgstr "Aselecte Effecten Schattingen"
+
+msgid "Pooled %1$s Matrix Parameters"
+msgstr ""
+
+msgid "Row"
+msgstr ""
+
+msgid "Column"
+msgstr ""
+
+#, fuzzy
+msgid "95%% CI"
+msgstr "%s%% CI"
+
+msgid "Computing additional fit measures: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid "SEM Fit Measures"
+msgstr "Pasmaten"
+
+msgid "CLI"
+msgstr ""
+
+msgid "TLI"
+msgstr ""
+
+msgid "RMSEA"
+msgstr ""
+
+msgid "p(RMSEA < 0.05)"
+msgstr ""
+
+msgid "Pairwise Model Comparison"
+msgstr ""
+
+msgid "2ΔLL"
+msgstr ""
+
+msgid "Δ df"
+msgstr ""
+
+msgid "At least two models are required for pairwise model comparison."
+msgstr ""
+
+msgid ""
+"No pairwise model comparison with at least one degree of freedom difference "
+"available."
+msgstr ""
+
+msgid "Regression Estimates"
+msgstr "Regressie Schattingen"
+
+#, fuzzy
+msgid "Mean/Intercept Estimates"
+msgstr "Geschatte heterogeniteit"
+
+#, fuzzy
+msgid "Covariance Estimates"
+msgstr "Model Schattingen"
+
+msgid "Random Effects Estimates"
+msgstr "Aselecte Effecten Schattingen"
+
+#, fuzzy
+msgid "Model fit failed with the following message: %1$s."
+msgstr "De %1$s toets is mislukt met de volgende fout: %2$s"
+
+msgid "The model should contain at least one predictor or an intercept."
+msgstr "Het model moet minstens één predictor bevatten of een interceptie."
+
+msgid "Coefficients"
+msgstr "Coëfficiënten"
+
+msgid "At least one predictor needs to be specified."
+msgstr "Er moet minstens één voorspeller worden ingesteld."
+
+#, fuzzy
+msgid "%1$s observations were ommited due to missing values."
+msgstr "%i observatie is verwijderd, omdat de waarde ontbreekt."
+
+msgid "Posterior distribution"
+msgstr "Posterior verdeling"
+
+msgid "Sampling diagnostics"
+msgstr "Steekproef diagnostieken"
+
+msgid "Autocorrelation (%1$s)"
+msgstr "Autocorrelatie (%1$s)"
+
+#, fuzzy
+msgid ""
+"Inference possibly unreliable -- MCMC chains might not have converged; The "
+"largest R-hat is %1$.3f > 1.01. To lower R-hat please increase 'Iterations', "
+"or 'Adapt delta' in the Options section."
+msgstr ""
+"Inferentie mogelijk onbetrouwbaar -- MCMC ketens mogelijk niet "
+"geconvergeerd; De hoogste R-dakje is %.3f > 1.01. Om R-dakje te verlagen "
+"kunt u 'Iteraties' of 'Aanpassingsdelta' in de Opties sectie verhogen."
+
+#, fuzzy
+msgid ""
+"Low estimation accuracy -- The smallest Effective Sample Size (ESS) is "
+"%1$.2f < %2$1.0f. To increase accuracy please increase 'Iterations', or "
+"'Adapt delta' in the Options section."
+msgstr ""
+"Lage schattingsaccuratesse -- De kleinste effectieve steekproefgrootte (ESS) "
+"is %.2f< %1.0f. Verhoog a.u.b. het aantal 'Iteraties', of 'Aanpassingsdelta' "
+"in de Opties sectie."
 
 msgid "t-statistic"
 msgstr "t-statistiek"
@@ -665,54 +1916,51 @@ msgstr "Steekproefomvang"
 msgid "Total events"
 msgstr "Totaal gebeurtenissen"
 
-msgid "Variance Components"
-msgstr "Variantie Componenten"
+msgid "%s Summary"
+msgstr "%s Samenvatting"
 
-msgid "Plots"
-msgstr "Grafieken"
+msgid "metamisc package failed with the following error: '%s'"
+msgstr "metamisc pakket is gecrasht met de volgende foutmelding: %s"
 
-msgid "Intercept"
-msgstr "Intercept"
+msgid "Based on %i studies."
+msgstr "Gebaseerd op %i studies."
 
-msgid "At least one predictor needs to be specified."
-msgstr "Er moet minstens één voorspeller worden ingesteld."
+msgid "The model was estimated using %1$s method with %2$s link function."
+msgstr ""
+"Het model werd geschat met behulp van de %1$s methode met %2$s "
+"koppelingsfunctie."
 
-msgid "Warning:"
-msgstr "Waarschuwing:"
+msgid "The model was estimated using MCMC with %1$s link function."
+msgstr "Het model werd geschat met behulp van MCMC met %1$s koppelingsfunctie."
 
-msgid "Posterior distribution"
-msgstr "Posterior verdeling"
+msgid "Forest plot"
+msgstr "Forest grafiek"
 
-msgid "Sampling diagnostics"
-msgstr "Steekproef diagnostieken"
+msgid "Observed-Expected Ratio"
+msgstr "Geobserveerd-Verwacht Verhouding"
 
-msgid "Autocorrelation (%1$s)"
-msgstr "Autocorrelatie (%1$s)"
+msgid "Concordance Statistic"
+msgstr "Overeenstemmingsstatistiek"
 
 msgid ""
-"Inference possibly unreliable -- MCMC chains might not have converged; The "
-"largest R-hat is %.3f > 1.01. To lower R-hat please increase 'Iterations', "
-"or 'Adapt delta' in the Options section."
+"Column '%1$s' contains invalid values: %2$s. Expected values for %3$s are: "
+"%4$s."
 msgstr ""
-"Inferentie mogelijk onbetrouwbaar -- MCMC ketens mogelijk niet "
-"geconvergeerd; De hoogste R-dakje is %.3f > 1.01. Om R-dakje te verlagen "
-"kunt u 'Iteraties' of 'Aanpassingsdelta' in de Opties sectie verhogen."
 
-msgid ""
-"Low estimation accuracy -- The smallest Effective Sample Size (ESS) is %.2f "
-"< %1.0f. To increase accuracy please increase 'Iterations', or 'Adapt delta' "
-"in the Options section."
+#, fuzzy
+msgid "Study %1$i"
+msgstr "Onderzoek %s"
+
+msgid "Traffic Light"
 msgstr ""
-"Lage schattingsaccuratesse -- De kleinste effectieve steekproefgrootte (ESS) "
-"is %.2f< %1.0f. Verhoog a.u.b. het aantal 'Iteraties', of 'Aanpassingsdelta' "
-"in de Opties sectie."
 
-msgid "The priors for publication bias were set incorrectly."
-msgstr ""
-"De a priori verdeling voor publicatieonzuiverheid is verkeerd ingesteld."
+#, fuzzy
+msgid "Adjusted effect"
+msgstr "Geordende effecten"
 
-msgid "Median"
-msgstr "Mediaan"
+#, fuzzy
+msgid "Diagnostics Summary"
+msgstr "Diagnostieken"
 
 msgid "MCMC error"
 msgstr "MCMC fout"
@@ -726,193 +1974,17 @@ msgstr "ESS"
 msgid "R-hat"
 msgstr "R-hat"
 
-msgid "<em>p</em>-values interval"
-msgstr "<em>p</em>-waarden interval"
+#, fuzzy
+msgid "Adjusted Effect"
+msgstr "Toets van Effect"
 
-msgid "Effect size (%s)"
-msgstr "Effectgrootte (%s)"
-
-msgid "Heterogeneity (%s)"
-msgstr "Heterogeniteit (%s)"
-
-msgid "Prior Plots"
-msgstr "Prior Grafieken"
-
-msgid "Effect"
+#, fuzzy
+msgid "Pooled Effect"
 msgstr "Effect"
 
-msgid "Publication Bias"
-msgstr "Publicatieonzuiverheid"
-
-msgid "Null"
-msgstr "Null"
-
-msgid "Alternative"
-msgstr "Alternatief"
-
-msgid "Model Preview"
-msgstr "Model Voorvertoning"
-
-msgid ""
-"Please specify a prior distribution for each parameter in the Models "
-"specification section (either null or alternative)."
-msgstr ""
-"Specificeer een priorverdeling voor elke parameter in de modelspecificatie "
-"(in het nul- of alternatieve model)."
-
-msgid "Model Summary"
-msgstr "Model Samenvatting"
-
-msgid "Models"
-msgstr "Modellen"
-
-msgid "P(M)"
-msgstr "P(M)"
-
-msgid "Publication bias"
-msgstr "Publicatieonzuiverheid"
-
-msgid ""
-"The analysis will estimate multiple meta-analytic models using MCMC and "
-"might require a prolonged time to complete."
-msgstr ""
-"De analyse zal meerdere meta-analytische modellen schatten met behulp van "
-"MCMC en kan een langere tijd nodig hebben om te voltooien."
-
-msgid "Model Specification Preview"
-msgstr "Model Specificatie Voorvertoning"
-
-msgid "Prior Distribution"
-msgstr "Prior-verdeling"
-
-msgid "The loaded object is not a RoBMA model."
-msgstr "Het ingeladen object is geen RoBMA model."
-
-msgid "Summary"
-msgstr "Samenvatting"
-
-msgid "Conditional Estimates"
-msgstr "Geconditioneerde Schattingen"
-
-msgid "Inclusion BF"
-msgstr "Inclusie BF"
-
-msgid "Exclusion BF"
-msgstr "Exclusie BF"
-
-msgid "log(Inclusion BF)"
-msgstr "log(Inclusie BF)"
-
-msgid "P(M|data)"
-msgstr "P(M|data)"
-
-msgid "Model Averaged Estimates"
-msgstr "Model Gemiddelde Schattingen"
-
-msgid "Model Averaged Weights (%s)"
-msgstr "Model Gemiddelde Gewichten (%s)"
-
-msgid "Model Averaged PET-PEESE Estimates"
-msgstr "Model Gemiddelde PET-PEESE-Schattingen"
-
-msgid "Conditional Weights (%s)"
-msgstr "Geconditioneerde Gewichten (%s)"
-
-msgid "Conditional PET-PEESE Estimates"
-msgstr "Conditionele PET-PEESE Schattingen"
-
-msgid "Models Overview"
-msgstr "Model Overzicht"
-
-msgid "BF%s"
-msgstr "BF%s"
-
-msgid "log(BF%s)"
-msgstr "log(BF%s)"
-
-msgid "log(MargLik)"
-msgstr "log(MargWaarschijn)"
-
-msgid "Individual Models Summary"
-msgstr "Individuele Model Samenvatting"
-
-msgid "Model #"
-msgstr "Model #"
-
-msgid "Priors"
-msgstr "Priors"
-
-msgid "Information"
-msgstr "Informatie"
-
-msgid "Model Estimates"
-msgstr "Model Schattingen"
-
-msgid "Model %i"
-msgstr "Model %i"
-
-msgid "Model %2$i does not exist. Select one of the models between 1 and %2$i."
-msgstr "Model %2$i bestaat niet. Selecteer een model tussen 1 en %2$i."
-
-msgid "Estimated Weights (%s)"
-msgstr "Geschatte Gewichten (%s)"
-
-msgid "PET-PEESE Estimates"
-msgstr "PET-PEESE Schattingen"
-
-msgid "%1$s Forest Plot"
-msgstr "%1$s Forest Grafiek"
-
-msgid "Posterior Distribution Plots"
-msgstr "Posterior Verdeling Grafieken"
-
-msgid "Conditional"
-msgstr "Conditioneel"
-
-msgid "Model Averaged"
-msgstr "Model Gemiddeld"
-
-msgid "Effect Size Estimate"
-msgstr "Geschatte effectgrootte"
-
-msgid "Heterogeneity Estimate"
-msgstr "Geschatte heterogeniteit"
-
-msgid "Weight Function Estimate"
-msgstr "Geschatte gewichtsfunctie"
-
-msgid "PET-PEESE Regression Estimate"
-msgstr "PET-PEESE Regressie Schatting"
-
-msgid "Posterior Model Estimates Plots"
-msgstr "Grafieken van Posteriormodel Schatting"
-
-msgid "Effect Size Estimates"
-msgstr "Geschatte effectgroottes"
-
-msgid "Heterogeneity Estimates"
-msgstr "Geschatte heterogeniteit"
-
-msgid "Diagnostics"
-msgstr "Diagnostieken"
-
-msgid "Models Diagnostics Overview"
-msgstr "Modellen Diagnostiek Overzicht"
-
-msgid "max(MCMC error)"
-msgstr "max(MCMC fout)"
-
-msgid "max(MCMC error/SD)"
-msgstr "max(MCMC fout/SD)"
-
-msgid "min(ESS)"
-msgstr "min(ESS)"
-
-msgid "max(R-hat)"
-msgstr "max(R-dakje)"
-
-msgid "Model %1$i does not exist. Select one of the models between 1 and %2$i."
-msgstr "Model %1$i bestaat niet. Selecteer een model tussen 1 en %2$i."
+#, fuzzy
+msgid "Moderation"
+msgstr "Matig"
 
 msgid "Weights"
 msgstr "Gewichten"
@@ -923,17 +1995,309 @@ msgstr "PET"
 msgid "PEESE"
 msgstr "PEESE"
 
-msgid "Trace plots"
+#, fuzzy
+msgid "Trace Plot"
 msgstr "Spoordiagram"
 
-msgid "Average autocorrelations"
-msgstr "Gemiddelde autocorrelatie"
+#, fuzzy
+msgid "Autocorrelation Plot"
+msgstr "Autocorrelaties grafiek"
 
-msgid "Posterior samples densities"
-msgstr "Posterior kansen"
+#, fuzzy
+msgid "Density Plot"
+msgstr "Dichtheid"
 
-msgid "Model %i does not contain any of the selected parameters."
-msgstr "De geselecteerd parameter zit niet in Model %i."
+msgid ""
+"Please select at least one 'Type' of diagnostics plot (e.g., 'Trace', "
+"'Autocorrelation' or 'Posterior samples density')."
+msgstr ""
+
+msgid "Estimated Conditional Marginal Means"
+msgstr ""
+
+#, fuzzy
+msgid "Conditional %1$s"
+msgstr "Conditioneel"
+
+#, fuzzy
+msgid "Conditional Estimated Marginal Means"
+msgstr "Geconditioneerde Schattingen"
+
+msgid "Median"
+msgstr "Mediaan"
+
+msgid ""
+"The Bayes factor test for the adjusted estimate is not available for meta-"
+"regressions with non-centered parameteriazation."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Conditional estimates are based on models assuming the presence of a given "
+"component."
+msgstr ""
+"De schattingen zijn gemiddeld over die modellen waar het effect bestaat, of "
+"waar heterogeniteit aanwezig is."
+
+msgid "Estimating Marginal Means"
+msgstr ""
+
+#, fuzzy
+msgid "Publication Bias Adjustment Summary"
+msgstr "Publicatieonzuiverheid"
+
+msgid "Estimated Marginal Means Summary"
+msgstr ""
+
+#, fuzzy
+msgid "Prior and Posterior Plots"
+msgstr "Prior en posterior grafiek"
+
+msgid "Diagnostics"
+msgstr "Diagnostieken"
+
+#, fuzzy
+msgid "Subgroup %1$s, %2$s"
+msgstr "%1$s (%2$s)"
+
+#, fuzzy
+msgid "Effect intercept"
+msgstr "Effectgrootte"
+
+msgid "Publication bias"
+msgstr "Publicatieonzuiverheid"
+
+msgid "Baseline"
+msgstr ""
+
+msgid "Inclusion BF"
+msgstr "Inclusie BF"
+
+msgid "Exclusion BF"
+msgstr "Exclusie BF"
+
+msgid "log(Inclusion BF)"
+msgstr "log(Inclusie BF)"
+
+msgid ""
+"Large Bayes factors, i.e., BF > 100 or BF < 1/100, might be computationally "
+"unstable (a small change in posterior inclusion probability corresponds to a "
+"very large change in the Bayes factor). Consider increasing the number of "
+"chains and posterior samples to obtain more stable estimates."
+msgstr ""
+
+msgid "Moderation: Estimated Marginal Means"
+msgstr ""
+
+#, fuzzy
+msgid "Weight Function"
+msgstr "Gewichtsfunctie"
+
+#, fuzzy
+msgid "PET-PEESE"
+msgstr "PEESE"
+
+#, fuzzy
+msgid "P-Value"
+msgstr "Waarde"
+
+#, fuzzy
+msgid ""
+"At least one prior distribution for the Effect component has to be specified."
+msgstr "Er moet minstens één voorspeller worden ingesteld."
+
+#, fuzzy
+msgid ""
+"At least one prior distribution for the Heterogeneity component has to be "
+"specified."
+msgstr "Er moet minstens één voorspeller worden ingesteld."
+
+#, fuzzy
+msgid ""
+"At least one prior distribution for the %1$s moderator component has to be "
+"specified."
+msgstr "Er moet minstens één voorspeller worden ingesteld."
+
+msgid ""
+"Both priors distributions for the %1$s moderator component must have the "
+"same contrast type."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"At least one prior distribution for the Publication Bias component has to be "
+"specified."
+msgstr "Er moet minstens één voorspeller worden ingesteld."
+
+#, fuzzy
+msgid ""
+"At least one prior distribution for the Baseline component has to be "
+"specified."
+msgstr "Er moet minstens één voorspeller worden ingesteld."
+
+msgid "The priors for publication bias were set incorrectly."
+msgstr ""
+"De a priori verdeling voor publicatieonzuiverheid is verkeerd ingesteld."
+
+msgid "RoBMA R Code"
+msgstr ""
+
+#, fuzzy
+msgid "Model Specification"
+msgstr "Model Specificatie Voorvertoning"
+
+#, fuzzy
+msgid "Model Components"
+msgstr "Variantie Componenten"
+
+msgid "Models"
+msgstr "Modellen"
+
+msgid "P(M)"
+msgstr "P(M)"
+
+#, fuzzy
+msgid "Prior Distributions %1$s"
+msgstr "Prior-verdeling"
+
+#, fuzzy
+msgid "Prior Distributions Moderators"
+msgstr "Posterior Verdeling Grafieken"
+
+msgid "Alternative"
+msgstr "Alternatief"
+
+msgid "Null"
+msgstr "Null"
+
+msgid "P(M|data)"
+msgstr "P(M|data)"
+
+#, fuzzy
+msgid ""
+"The analysis will estimate a complex meta-analytic model ensemble using MCMC "
+"and might require a prolonged time to complete."
+msgstr ""
+"De analyse zal meerdere meta-analytische modellen schatten met behulp van "
+"MCMC en kan een langere tijd nodig hebben om te voltooien."
+
+#, fuzzy
+msgid ""
+"The model fit for subgroup '%1$s' resulted in the following warning: %2$s"
+msgstr "De %1$s toets is mislukt met de volgende fout: %2$s"
+
+#, fuzzy
+msgid "The model fit resulted in the following warning: %1$s"
+msgstr "De %1$s toets is mislukt met de volgende fout: %2$s"
+
+#, fuzzy
+msgid "Conditional Meta-Analytic Estimates"
+msgstr "Geconditioneerde Schattingen"
+
+msgid "Standardized Conditional Meta-Regression Coefficients"
+msgstr ""
+
+msgid "Standardized Meta-Regression Coefficients"
+msgstr ""
+
+msgid "Conditional Meta-Regression Coefficients"
+msgstr ""
+
+#, fuzzy
+msgid "Meta-Regression Coefficients"
+msgstr "Coëfficiënten"
+
+msgid "Conditional Publication Bias Adjustment Estimates (Weight Function)"
+msgstr ""
+
+msgid "Publication Bias Adjustment Estimates (Weight Function)"
+msgstr ""
+
+#, fuzzy
+msgid "<em>p</em>-Values Interval"
+msgstr "<em>p</em>-waarden interval"
+
+msgid "Conditional Publication Bias Adjustment Estimates (PET-PEESE)"
+msgstr ""
+
+msgid "Publication Bias Adjustment Estimates (PET-PEESE)"
+msgstr ""
+
+msgid "Interaction terms are currently not possible in Bayesian meta-analyses."
+msgstr ""
+
+msgid "Weight Function (%s)"
+msgstr "Gewichtsfunctie(%s)"
+
+msgid ""
+"The figure could not be created since one of the estimates is not a number."
+msgstr ""
+"De afbeelding kon niet worden gemaakt omdat een van de schattingen geen "
+"getal is."
+
+msgid "P-value (One-sided)"
+msgstr "P-waarde (Eenzijdig)"
+
+msgid "Publication Probability"
+msgstr "Publicatie Waarschijnlijkheid"
+
+msgid "Mean Model Estimates (%s)"
+msgstr "Gemiddelde Modelschattingen (%s)"
+
+msgid "Fixed effects (adjusted)"
+msgstr "Gefixeerde effecten (aangepast)"
+
+msgid "Random effects (adjusted)"
+msgstr "Aselecte effecten (aangepast)"
+
+msgid "Model Tests"
+msgstr "Modeltoetsen"
+
+msgid "Test of Heterogeneity"
+msgstr "Toets van Heterogeniteit"
+
+msgid "Note:"
+msgstr "Opmerking:"
+
+msgid "Test of Publication Bias"
+msgstr "Toets van Publicatieonzuiverheid"
+
+msgid "ChiSq"
+msgstr "ChiKw"
+
+msgid "Assuming homogeneity"
+msgstr "Uitgaande van homogeniteit"
+
+msgid "Assuming heterogeneity"
+msgstr "Heterogeniteit Aannemende"
+
+msgid "Fixed Effects Estimates"
+msgstr "Gefixeerde Effecten Schattingen"
+
+msgid "Mean Estimates (%s)"
+msgstr "Gemiddelde Schattingen (%s)"
+
+msgid "Estimated Weights"
+msgstr "Geschatte Gewichten"
+
+msgid "Heterogeneity Estimates(%s)"
+msgstr "Heterogeniteitsschattingen (%s)"
+
+msgid "p-value Frequency"
+msgstr "p-waarde Frequentie"
+
+msgid "<em>p</em>-values interval(one-sided)"
+msgstr "<em>p</em>-waarden interval(eenzijdig)"
+
+msgid "Frequency"
+msgstr "Frequentie"
+
+msgid ""
+"There were no p-value cutoffs after their automatic reduction. The displayed "
+"frequencies correspond to the non-reduced p-value cutoffs."
+msgstr ""
+"Er waren geen p-afkapwaarden na hun automatische reductie. De weergegeven "
+"frequenties komen overeen met de niet-gereduceerde p-afkapwaarden."
 
 msgid ""
 "Cannot compute results. All entries of the p-value variable (%s) must be "
@@ -968,87 +2332,8 @@ msgstr "Alle p-afkapwaarden moeten tussen 0 en 1 liggen."
 msgid "95%% Confidence Interval"
 msgstr "95%% Betrouwbaarheidsinterval"
 
-msgid "Note:"
-msgstr "Opmerking:"
-
 msgid "%1$s is on %2$s scale."
 msgstr "%1$s is op %2$s schaal."
-
-msgid "<em>p</em>-values interval(one-sided)"
-msgstr "<em>p</em>-waarden interval(eenzijdig)"
-
-msgid "Model Tests"
-msgstr "Modeltoetsen"
-
-msgid "Test of Heterogeneity"
-msgstr "Toets van Heterogeniteit"
-
-msgid "Error:"
-msgstr "Fout:"
-
-msgid "Test of Publication Bias"
-msgstr "Toets van Publicatieonzuiverheid"
-
-msgid "ChiSq"
-msgstr "ChiKw"
-
-msgid "Assuming homogeneity"
-msgstr "Uitgaande van homogeniteit"
-
-msgid "Assuming heterogeneity"
-msgstr "Heterogeniteit Aannemende"
-
-msgid "Fixed Effects Estimates"
-msgstr "Gefixeerde Effecten Schattingen"
-
-msgid "Mean Estimates (%s)"
-msgstr "Gemiddelde Schattingen (%s)"
-
-msgid "Estimated Weights"
-msgstr "Geschatte Gewichten"
-
-msgid "Random Effects Estimates"
-msgstr "Aselecte Effecten Schattingen"
-
-msgid "Heterogeneity Estimates(%s)"
-msgstr "Heterogeniteitsschattingen (%s)"
-
-msgid "p-value Frequency"
-msgstr "p-waarde Frequentie"
-
-msgid "Frequency"
-msgstr "Frequentie"
-
-msgid ""
-"There were no p-value cutoffs after their automatic reduction. The displayed "
-"frequencies correspond to the non-reduced p-value cutoffs."
-msgstr ""
-"Er waren geen p-afkapwaarden na hun automatische reductie. De weergegeven "
-"frequenties komen overeen met de niet-gereduceerde p-afkapwaarden."
-
-msgid "Weight Function (%s)"
-msgstr "Gewichtsfunctie(%s)"
-
-msgid ""
-"The figure could not be created since one of the estimates is not a number."
-msgstr ""
-"De afbeelding kon niet worden gemaakt omdat een van de schattingen geen "
-"getal is."
-
-msgid "P-value (One-sided)"
-msgstr "P-waarde (Eenzijdig)"
-
-msgid "Publication Probability"
-msgstr "Publicatie Waarschijnlijkheid"
-
-msgid "Mean Model Estimates (%s)"
-msgstr "Gemiddelde Modelschattingen (%s)"
-
-msgid "Fixed effects (adjusted)"
-msgstr "Gefixeerde effecten (aangepast)"
-
-msgid "Random effects (adjusted)"
-msgstr "Aselecte effecten (aangepast)"
 
 msgid "Fixed effects model:"
 msgstr "Gefixeerde effecten model:"
@@ -1107,6 +2392,54 @@ msgstr ""
 msgid "Only the following one-sided p-value cutoffs were used: %s."
 msgstr "Alleen de volgende eenzijdige p-afkapwaarden werden gebruikt: %s."
 
+#, fuzzy
+msgid "Estimating: %1$s"
+msgstr "Schattingen"
+
+#, fuzzy
+msgid "Model Fit Measures"
+msgstr "Pasmaten"
+
+msgid "log Lik."
+msgstr ""
+
+#, fuzzy
+msgid "%1$s fit failed with the following message %2$s."
+msgstr "De %1$s toets is mislukt met de volgende fout: %2$s"
+
+#, fuzzy
+msgid "Warning"
+msgstr "Waarschuwing:"
+
+#, fuzzy
+msgid "Model Convergence"
+msgstr "Model Gemiddeld"
+
+msgid "Status"
+msgstr ""
+
+msgid "Path Diagram"
+msgstr ""
+
+#, fuzzy
+msgid "Syntax failed with the following message %1$s."
+msgstr "De %1$s toets is mislukt met de volgende fout: %2$s"
+
+#, fuzzy
+msgid "Model fit failed with the following message %1$s."
+msgstr "De %1$s toets is mislukt met de volgende fout: %2$s"
+
+#, fuzzy
+msgid "Model visualization failed with the following message %1$s."
+msgstr "De %1$s toets is mislukt met de volgende fout: %2$s"
+
+#, fuzzy
+msgid "Coefficient Summary"
+msgstr "Coëfficiënten"
+
+msgid "Computed Estimates Summary"
+msgstr ""
+
 msgid "Error: There were not enough adequately powered studies (k = %1$i)"
 msgstr ""
 "Fout: Er waren niet genoeg studies met voldoende statistische kracht (k = "
@@ -1117,12 +2450,6 @@ msgstr "Opmerking: Er waren %1$i studies met voldoende statistische kracht"
 
 msgid "Test of Effect"
 msgstr "Toets van Effect"
-
-msgid "Estimates"
-msgstr "Schattingen"
-
-msgid "Regression Estimates"
-msgstr "Regressie Schattingen"
 
 msgid "Multiplicative Heterogeneity Estimates"
 msgstr "Multiplicatieve Heterogeniteitsschattingen"
@@ -1146,6 +2473,11 @@ msgstr ""
 msgid "There were %1$i adequately powered studies (power > 80%%)."
 msgstr ""
 "Er waren %1$i studies met voldoende statistische kracht (power > 80%%)."
+
+msgid "%i observation was removed due to missing values."
+msgid_plural "%i observations were removed due to missing values."
+msgstr[0] "%i observatie is verwijderd, omdat de waarde ontbreekt."
+msgstr[1] "%i observaties zijn verwijderd omdat de waarden ontbreken."
 
 msgid ""
 "The Hamiltonian Monte Carlo procedure might be invalid -- There was %i "
@@ -1201,10 +2533,246 @@ msgstr[1] ""
 "transities overschreed de maximum boomdieptie. Dit kan opgelost worden door "
 "voorzichtig de 'Maximum boomdiepte' te verhogen."
 
-msgid "%i observation was removed due to missing values."
-msgid_plural "%i observations were removed due to missing values."
-msgstr[0] "%i observatie is verwijderd, omdat de waarde ontbreekt."
-msgstr[1] "%i observaties zijn verwijderd omdat de waarden ontbreken."
+#~ msgid "The metafor package crashed with the following error: %s"
+#~ msgstr "Het metafor package is gecrasht met de volgende foutmelding: %s"
+
+#~ msgid "Fixed and Random Effects"
+#~ msgstr "Gefixeerde en Willekeurige Effecten"
+
+#~ msgid "Q"
+#~ msgstr "Q"
+
+#~ msgid "<em>p</em>-values are approximate."
+#~ msgstr "<em>p</em>-waarden zijn benaderingen."
+
+#~ msgid "Wald test."
+#~ msgstr "Wald toets."
+
+#~ msgid "Parameter Covariances"
+#~ msgstr "Parameter Covarianties"
+
+#~ msgid "Kendall's %s"
+#~ msgstr "Kendall's %s"
+
+#~ msgid "Std. Residual"
+#~ msgstr "Std. Residu"
+
+#~ msgid "%1$s%2$s<sub>(-i)</sub>"
+#~ msgstr "%1$s%2$s<sub>(-i)</sub>"
+
+#~ msgid "Q<sub>E(-i)</sub>"
+#~ msgstr "Q<sub>E(-i)</sub>"
+
+#~ msgid "File Drawer Analysis"
+#~ msgstr "File Drawer Analyse"
+
+#~ msgid "Target Significance"
+#~ msgstr "Doelsignificantie"
+
+#~ msgid "Observed Significance"
+#~ msgstr "Waargenomen Significantie"
+
+#~ msgid "Omnibus test of Model Coefficients"
+#~ msgstr "Omnibustoets van Modelcoëfficiënten"
+
+#~ msgid "The model was estimated using %1$s method."
+#~ msgstr "Het model werd geschat met de %1$s methode."
+
+#~ msgid "I%s (%%)"
+#~ msgstr "I%s (%%)"
+
+#~ msgid "H%s"
+#~ msgstr "H%s"
+
+#~ msgid "Rank test"
+#~ msgstr "Rang toets"
+
+#~ msgid "Cases marked with %s are influential."
+#~ msgstr "Waarnemingen gemarkeerd met %s zijn invloedrijk."
+
+#~ msgid "Plot"
+#~ msgstr "Grafiek"
+
+#~ msgid "Log-Likelihood for %1$s%2$s"
+#~ msgstr "Log-likelihood voor %1$s%2$s"
+
+#~ msgid "Trim-Fill Analysis"
+#~ msgstr "Trim-fill Analyse"
+
+#~ msgid "Diagnostic Plots"
+#~ msgstr "Diagnostische Grafieken"
+
+#~ msgid "FE Model"
+#~ msgstr "FE Model"
+
+#~ msgid "RE Model"
+#~ msgstr "RE Model"
+
+#~ msgid "Restricted Log-Likelihood"
+#~ msgstr "Beperkte Log-likelihood"
+
+#~ msgid "Stopped because k = 1."
+#~ msgstr "Gestopt omdat k = 1."
+
+#~ msgid "Normal Q-Q Plot"
+#~ msgstr "Normale Q-Q plot"
+
+#~ msgid "Theoretical Quantiles"
+#~ msgstr "Theoretische Kwantielen"
+
+#~ msgid "Sample Quantiles"
+#~ msgstr "Steekproefkwantielen"
+
+#~ msgid "Standardized Residuals"
+#~ msgstr "Gestandaardiseerde Residuen"
+
+#~ msgid "Fitted vs. Standardized Residuals"
+#~ msgstr "Passend vs. Gestandaardiseerde Residuen"
+
+#~ msgid "Fitted Value"
+#~ msgstr "Passende Waarde"
+
+#~ msgid "ML"
+#~ msgstr "ML"
+
+#~ msgid "REML"
+#~ msgstr "REML"
+
+#~ msgid "DL"
+#~ msgstr "DL"
+
+#~ msgid "HE"
+#~ msgstr "HE"
+
+#~ msgid "HS"
+#~ msgstr "HS"
+
+#~ msgid "SJ"
+#~ msgstr "SJ"
+
+#~ msgid "EB"
+#~ msgstr "EB"
+
+#~ msgid "PM"
+#~ msgstr "PM"
+
+#~ msgid ""
+#~ "The study labels contain invalid characters. Please, remove them before "
+#~ "running the analysis."
+#~ msgstr ""
+#~ "De studielabels bevatten ongeldige tekens. Verwijder deze alvorens de "
+#~ "analyse uit te voeren."
+
+#~ msgid "Plots"
+#~ msgstr "Grafieken"
+
+#~ msgid "Prior Plots"
+#~ msgstr "Prior Grafieken"
+
+#~ msgid "Model Preview"
+#~ msgstr "Model Voorvertoning"
+
+#~ msgid ""
+#~ "Please specify a prior distribution for each parameter in the Models "
+#~ "specification section (either null or alternative)."
+#~ msgstr ""
+#~ "Specificeer een priorverdeling voor elke parameter in de "
+#~ "modelspecificatie (in het nul- of alternatieve model)."
+
+#~ msgid "The loaded object is not a RoBMA model."
+#~ msgstr "Het ingeladen object is geen RoBMA model."
+
+#~ msgid "Model Averaged Estimates"
+#~ msgstr "Model Gemiddelde Schattingen"
+
+#~ msgid "Model Averaged Weights (%s)"
+#~ msgstr "Model Gemiddelde Gewichten (%s)"
+
+#~ msgid "Model Averaged PET-PEESE Estimates"
+#~ msgstr "Model Gemiddelde PET-PEESE-Schattingen"
+
+#~ msgid "Conditional Weights (%s)"
+#~ msgstr "Geconditioneerde Gewichten (%s)"
+
+#~ msgid "Conditional PET-PEESE Estimates"
+#~ msgstr "Conditionele PET-PEESE Schattingen"
+
+#~ msgid "Models Overview"
+#~ msgstr "Model Overzicht"
+
+#~ msgid "BF%s"
+#~ msgstr "BF%s"
+
+#~ msgid "log(BF%s)"
+#~ msgstr "log(BF%s)"
+
+#~ msgid "log(MargLik)"
+#~ msgstr "log(MargWaarschijn)"
+
+#~ msgid "Model #"
+#~ msgstr "Model #"
+
+#~ msgid "Priors"
+#~ msgstr "Priors"
+
+#~ msgid "Model %i"
+#~ msgstr "Model %i"
+
+#~ msgid ""
+#~ "Model %2$i does not exist. Select one of the models between 1 and %2$i."
+#~ msgstr "Model %2$i bestaat niet. Selecteer een model tussen 1 en %2$i."
+
+#~ msgid "Estimated Weights (%s)"
+#~ msgstr "Geschatte Gewichten (%s)"
+
+#~ msgid "PET-PEESE Estimates"
+#~ msgstr "PET-PEESE Schattingen"
+
+#~ msgid "%1$s Forest Plot"
+#~ msgstr "%1$s Forest Grafiek"
+
+#~ msgid "Effect Size Estimate"
+#~ msgstr "Geschatte effectgrootte"
+
+#~ msgid "Heterogeneity Estimate"
+#~ msgstr "Geschatte heterogeniteit"
+
+#~ msgid "Weight Function Estimate"
+#~ msgstr "Geschatte gewichtsfunctie"
+
+#~ msgid "PET-PEESE Regression Estimate"
+#~ msgstr "PET-PEESE Regressie Schatting"
+
+#~ msgid "Posterior Model Estimates Plots"
+#~ msgstr "Grafieken van Posteriormodel Schatting"
+
+#~ msgid "Effect Size Estimates"
+#~ msgstr "Geschatte effectgroottes"
+
+#~ msgid "max(MCMC error)"
+#~ msgstr "max(MCMC fout)"
+
+#~ msgid "max(MCMC error/SD)"
+#~ msgstr "max(MCMC fout/SD)"
+
+#~ msgid "min(ESS)"
+#~ msgstr "min(ESS)"
+
+#~ msgid "max(R-hat)"
+#~ msgstr "max(R-dakje)"
+
+#~ msgid ""
+#~ "Model %1$i does not exist. Select one of the models between 1 and %2$i."
+#~ msgstr "Model %1$i bestaat niet. Selecteer een model tussen 1 en %2$i."
+
+#~ msgid "Average autocorrelations"
+#~ msgstr "Gemiddelde autocorrelatie"
+
+#~ msgid "Posterior samples densities"
+#~ msgstr "Posterior kansen"
+
+#~ msgid "Model %i does not contain any of the selected parameters."
+#~ msgstr "De geselecteerd parameter zit niet in Model %i."
 
 #~ msgid "Wald tests."
 #~ msgstr "Wald toetsen."
@@ -1263,9 +2831,6 @@ msgstr[1] "%i observaties zijn verwijderd omdat de waarden ontbreken."
 #~ msgid "Argument 'contrasts' should be a matrix."
 #~ msgstr "Argument 'contrasten' moet een matrix zijn."
 
-#~ msgid "Invalid contrasts: Rows in"
-#~ msgstr "Invalide contrasten: Rijen in"
-
 #~ msgid "do not add to 0."
 #~ msgstr "telt niet op tot 0."
 
@@ -1307,10 +2872,6 @@ msgstr[1] "%i observaties zijn verwijderd omdat de waarden ontbreken."
 #~ msgid "The weights (%1$s) correspond to %2$s <em>p</em>-values."
 #~ msgstr "De gewichten (%1$s) corresponderen met de %2$s <em>p</em>-waarden."
 
-#~ msgid "Estimated studies' effects (%1$s) correspond to effect size %2$s."
-#~ msgstr ""
-#~ "Geschatte onderzoekseffecten (%1$s) corresponderen met effectgrootte %2$s."
-
 #~ msgid ""
 #~ "All models failed to converge. Please, consider inspecting the 'MCMC "
 #~ "diagnostics' and changing the 'Advanced options'."
@@ -1332,13 +2893,6 @@ msgstr[1] "%i observaties zijn verwijderd omdat de waarden ontbreken."
 #~ msgstr "Model Gemiddelde Geschatte Onderzoekseffecten (%s)"
 
 #~ msgid ""
-#~ "Estimates are model averaged over models assuming existence of effect / "
-#~ "heterogeneity."
-#~ msgstr ""
-#~ "De schattingen zijn gemiddeld over die modellen waar het effect bestaat, "
-#~ "of waar heterogeniteit aanwezig is."
-
-#~ msgid ""
 #~ "Estimated weights (%s) are model averaged over models assuming existence "
 #~ "of publication bias."
 #~ msgstr ""
@@ -1358,14 +2912,8 @@ msgstr[1] "%i observaties zijn verwijderd omdat de waarden ontbreken."
 #~ msgid "Estimated Studies' Effects (%s)"
 #~ msgstr "Geschatte Onderzoekseffecten (%s)"
 
-#~ msgid "Weight function"
-#~ msgstr "Gewichtsfunctie"
-
 #~ msgid "Effect size vs Heterogeneity"
 #~ msgstr "Effectgrootte vs Heterogeniteit"
-
-#~ msgid "%1$s (%2$s)"
-#~ msgstr "%1$s (%2$s)"
 
 #~ msgid "Individual Models Plots"
 #~ msgstr "Individuele Modellengrafiek"
