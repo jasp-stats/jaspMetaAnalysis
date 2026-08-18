@@ -252,5 +252,10 @@ Form
 		analysisType:	"generalizedMetaAnalysis"
 	}
 
+	MA.ClassicalMetaAnalysisExport
+	{
+		analysisType:	"generalizedMetaAnalysis"
+	}
+
 	MA.ClassicalGeneralizedMetaAnalysisAdvanced {}
 }

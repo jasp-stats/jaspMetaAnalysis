@@ -41,7 +41,10 @@
         influenceResultsDfbs <- list()
         influenceResultsInf  <- list()
       } else {
-        if (.maIsMultilevelMultivariate(options)) {
+        if (.maIsGLMM(options)) {
+          influenceResultsDfbs <- data.frame()
+          influenceResultsInf  <- data.frame()
+        } else if (.maIsMultilevelMultivariate(options)) {
           # only a subset of diagnostics is available for rma.mv
           influenceResultsDfbs <- data.frame(dfbetas(fit[[i]], code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics: DFBETAS')", code2 = "jaspBase::progressbarTick()"))
           influenceResultsInf  <- data.frame(

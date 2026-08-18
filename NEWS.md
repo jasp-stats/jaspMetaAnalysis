@@ -13,6 +13,10 @@
 >   * **Deprecated / Removed:** Outdated analyses, options, or legacy code.
 
 ---
+# jaspMetaAnalysis 0.97.3
+## Fixed
+* Restored GLMM diagnostics and exports, exposing variance inflation factors, raw residuals, and predicted values.
+
 # jaspMetaAnalysis 0.97.2
 ## Fixed
 * Meta-analytic SEM failing to load because JASP wipes OpenMx `mxOptions` before `metaSEM` `.onLoad`.

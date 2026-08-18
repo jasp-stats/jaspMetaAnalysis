@@ -516,7 +516,7 @@
 
 .maExportFitSupportsWeights               <- function(fit) {
   return(
-    inherits(fit, c("rma.uni", "rma.mv", "rma.glmm", "rma.mh", "rma.peto")) &&
+    inherits(fit, c("rma.uni", "rma.mv", "rma.mh", "rma.peto")) &&
       !inherits(fit, c("rma.gen", "rma.uni.selmodel"))
   )
 }
