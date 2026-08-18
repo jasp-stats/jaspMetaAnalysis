@@ -126,7 +126,7 @@ Form
 			id:				glmmModel
 			label:			qsTr("Model type")
 			startValue:		"UM.FS"
-			info: qsTr("Select the generalized linear model type. UM.FS = unconditional with fixed study effects (default); UM.RS = unconditional with random study effects; CM.AL = conditional with approximate likelihood (odds ratios only); CM.EL = conditional with exact likelihood (odds ratios and incidence rate ratios).")
+			info: qsTr("Select the generalized linear model type. Unconditional with fixed study effects (UM.FS; default); unconditional with random study effects (UM.RS); conditional with approximate likelihood (CM.AL; odds ratios only); conditional with exact likelihood (CM.EL; odds ratios and incidence rate ratios).")
 			values: (function() {
 				if (effectSizeMeasure.value === "OR") {
 					return [

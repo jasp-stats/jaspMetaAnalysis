@@ -212,6 +212,21 @@
   .maAddSeColumn(pooledEstimatesTable, options)
   .maAddCiColumn(pooledEstimatesTable, options)
   .maAddPiColumn(pooledEstimatesTable, options)
+
+  if (.maIsGLMM(options) && options[["glmmModel"]] == "UM.RS") {
+    showSigma <- options[["heterogeneityTau"]] || options[["heterogeneityTau2"]]
+    showRho   <- options[["glmmCorrelatedEffects"]] &&
+      (showSigma || options[["heterogeneityI2"]] || options[["heterogeneityH2"]])
+
+    if (showSigma && showRho) {
+      pooledEstimatesTable$addFootnote(gettext("For unconditional models with random study effects, \u03C3\u00B2 denotes study-level variability and \u03C1 denotes the correlation between study and group random effects."))
+    } else if (showSigma) {
+      pooledEstimatesTable$addFootnote(gettext("For unconditional models with random study effects, \u03C3\u00B2 denotes study-level variability."))
+    } else if (showRho) {
+      pooledEstimatesTable$addFootnote(gettext("For unconditional models with random study effects, \u03C1 denotes the correlation between study and group random effects."))
+    }
+  }
+
   if (options[["predictionIntervals"]] && .mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)) {
     for (colName in .mammExtractTauLevelNamesList(fit)) {
       pooledEstimatesTable$addColumnInfo(name = colName, title = colName, type = .maGetVariableColumnType(colName, options), overtitle = gettext("Heterogeneity Level"))

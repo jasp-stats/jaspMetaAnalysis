@@ -276,7 +276,7 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
 }
 
 # heterogeneity
-.maglmmComputePooledHeterogeneity <- function(fit, options) {
+.maglmmComputePooledHeterogeneity <- function(fit, options, includeModelComponents = TRUE) {
 
   # derive I²/H² CIs from tau² CIs via monotonic transformation when available
   vt        <- fit[["vt"]]
@@ -312,6 +312,34 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
 
   heterogeneity <- heterogeneity[heterogeneityShow, , drop = FALSE]
 
+  if (includeModelComponents && identical(fit[["model"]], "UM.RS")) {
+    componentPar <- c(
+      if (options[["heterogeneityTau"]]  && .maIsFiniteScalar(fit[["sigma2"]])) "\u03C3",
+      if (options[["heterogeneityTau2"]] && .maIsFiniteScalar(fit[["sigma2"]])) "\u03C3\u00B2",
+      if (.maIsFiniteScalar(fit[["rho"]])) "\u03C1"
+    )
+    componentEst <- c(
+      if (options[["heterogeneityTau"]]  && .maIsFiniteScalar(fit[["sigma2"]])) sqrt(fit[["sigma2"]]),
+      if (options[["heterogeneityTau2"]] && .maIsFiniteScalar(fit[["sigma2"]])) fit[["sigma2"]],
+      if (.maIsFiniteScalar(fit[["rho"]])) fit[["rho"]]
+    )
+
+    if (length(componentPar) == 0)
+      return(heterogeneity)
+
+    modelComponents <- data.frame(
+      par = componentPar,
+      est = componentEst,
+      lCi = rep(NA_real_, length(componentPar)),
+      uCi = rep(NA_real_, length(componentPar))
+    )
+
+    if ("se" %in% names(heterogeneity))
+      modelComponents$se <- NA_real_
+
+    heterogeneity <- rbind(heterogeneity, modelComponents[, names(heterogeneity), drop = FALSE])
+  }
+
   return(heterogeneity)
 }
 
@@ -322,7 +350,7 @@ ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, option
   options[["heterogeneityI2"]]   <- parameter == "I2"
   options[["heterogeneityH2"]]   <- parameter == "H2"
 
-  confIntHeterogeneity <- .maglmmComputePooledHeterogeneity(fit, options)
+  confIntHeterogeneity <- .maglmmComputePooledHeterogeneity(fit, options, includeModelComponents = FALSE)
 
   return(confIntHeterogeneity)
 }

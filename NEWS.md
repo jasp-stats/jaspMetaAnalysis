@@ -16,6 +16,7 @@
 # jaspMetaAnalysis 0.97.3
 ## Fixed
 * Restored GLMM diagnostics and exports, exposing variance inflation factors, raw residuals, and predicted values.
+* Added study-level variability and random-effects correlation estimates for unconditional models with random study effects.
 
 # jaspMetaAnalysis 0.97.2
 ## Fixed
