@@ -48,6 +48,7 @@ Section
 				id:				estimatedMarginalMeansEffectSizeSelectedVariables
 				name:			"estimatedMarginalMeansEffectSizeSelectedVariables"
 				title:			qsTr("Selected Variables")
+				allowedColumns:	["scale", "nominal"]
 				allowTypeChange:false
 				info: qsTr("Variables selected for computing estimated marginal means in the effect size model.")
 			}
@@ -142,6 +143,7 @@ Section
 				id:				estimatedMarginalMeansHeterogeneitySelectedVariables
 				name:			"estimatedMarginalMeansHeterogeneitySelectedVariables"
 				title:			qsTr("Selected Variables")
+				allowedColumns:	["scale", "nominal"]
 				allowTypeChange:false
 				info: qsTr("Variables selected for computing estimated marginal means in the heterogeneity model. Unavailable when performing multilevel/multivariate meta-analysis.")
 			}
