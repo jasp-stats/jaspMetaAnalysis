@@ -219,9 +219,9 @@
       (showSigma || options[["heterogeneityI2"]] || options[["heterogeneityH2"]])
 
     if (showSigma && showRho) {
-      pooledEstimatesTable$addFootnote(gettext("For unconditional models with random study effects, \u03C3\u00B2 denotes study-level variability and \u03C1 denotes the correlation between study and group random effects."))
+      pooledEstimatesTable$addFootnote(gettext("For unconditional models with random study effects, \u03C3 and \u03C3\u00B2 denote the study-level standard deviation and variance, respectively, and \u03C1 denotes the correlation between study and group random effects."))
     } else if (showSigma) {
-      pooledEstimatesTable$addFootnote(gettext("For unconditional models with random study effects, \u03C3\u00B2 denotes study-level variability."))
+      pooledEstimatesTable$addFootnote(gettext("For unconditional models with random study effects, \u03C3 and \u03C3\u00B2 denote the study-level standard deviation and variance, respectively."))
     } else if (showRho) {
       pooledEstimatesTable$addFootnote(gettext("For unconditional models with random study effects, \u03C1 denotes the correlation between study and group random effects."))
     }
