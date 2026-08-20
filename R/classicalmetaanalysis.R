@@ -115,6 +115,11 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "exportWeights"
 )
 
+.maExportNameOptions <- c(
+  "exportColumnPrefix",
+  "exportColumnPrefixValue"
+)
+
 .maForestPlotDependencies <- c(
   # do not forget to add variable carrying options to the .maDataPlottingDependencies
   "transformEffectSize", "confidenceIntervalsLevel", "bayesFactorType",

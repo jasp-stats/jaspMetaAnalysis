@@ -38,41 +38,19 @@
     for (i in seq_along(fit)) {
 
       if (jaspBase::isTryError(fit[[i]])) {
-        influenceResultsDfbs <- list()
-        influenceResultsInf  <- list()
+        diagnostics <- list(
+          "influenceResultsDfbs" = list(),
+          "influenceResultsInf"  = list()
+        )
       } else {
-        if (.maIsGLMM(options)) {
-          influenceResultsDfbs <- data.frame()
-          influenceResultsInf  <- data.frame()
-        } else if (.maIsMultilevelMultivariate(options)) {
-          # only a subset of diagnostics is available for rma.mv
-          influenceResultsDfbs <- data.frame(dfbetas(fit[[i]], code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics: DFBETAS')", code2 = "jaspBase::progressbarTick()"))
-          influenceResultsInf  <- data.frame(
-            rstudent = rstudent(fit[[i]],       code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics: Studentized residuals')", code2 = "jaspBase::progressbarTick()")[["resid"]],
-            cook.d   = cooks.distance(fit[[i]], code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics: Cooks distance')",        code2 = "jaspBase::progressbarTick()"),
-            hat      = hatvalues(fit[[i]])
-          )
-        } else if (.maIsMetaregressionHeterogeneity(options)) {
-          influenceResultsDfbs <- data.frame()
-          influenceResultsInf  <- data.frame(
-            rstudent = stats::rstandard(fit[[i]])[["z"]],
-            hat      = hatvalues(fit[[i]]),
-            weight   = stats::weights(fit[[i]], type = "diagonal")
-          )
-        } else {
-          # the complete suite of influence diagnostics is only available for rma.uni
-          influenceResults     <- influence(fit[[i]], code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics')", code2 = "jaspBase::progressbarTick()")
-          influenceResultsDfbs <- data.frame(influenceResults$dfbs)
-          influenceResultsInf  <- data.frame(influenceResults$inf)
-          influenceResultsInf$tau.del <- sqrt(influenceResultsInf$tau2.del)
-          influenceResultsInf$inf[influenceResultsInf$inf == "*"] <- "Yes"
+        diagnostics <- try(.maComputeDiagnostics(fit[[i]], options), silent = TRUE)
+        if (jaspBase::isTryError(diagnostics)) {
+          jaspResults[["diagnosticsResults"]]$object <- diagnostics
+          return(diagnostics)
         }
       }
 
-      out[[attr(fit[[i]], "subgroup")]] <- list(
-        "influenceResultsDfbs" = influenceResultsDfbs,
-        "influenceResultsInf"  = influenceResultsInf
-      )
+      out[[attr(fit[[i]], "subgroup")]] <- diagnostics
     }
 
     # store the results
@@ -80,6 +58,53 @@
   }
 
   return(out)
+}
+
+.maComputeDiagnostics            <- function(fit, options) {
+
+  if (.maIsGLMM(options)) {
+    influenceResultsDfbs <- data.frame()
+    influenceResultsInf  <- data.frame()
+  } else if (.maIsMultilevelMultivariate(options)) {
+    # only a subset of diagnostics is available for rma.mv
+    influenceResultsDfbs <- data.frame(dfbetas(fit, code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics: DFBETAS')", code2 = "jaspBase::progressbarTick()"))
+    influenceResultsInf  <- data.frame(
+      rstudent = rstudent(fit,       code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics: Studentized residuals')", code2 = "jaspBase::progressbarTick()")[["resid"]],
+      cook.d   = cooks.distance(fit, code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics: Cooks distance')",        code2 = "jaspBase::progressbarTick()"),
+      hat      = hatvalues(fit)
+    )
+  } else if (.maIsMetaregressionHeterogeneity(options)) {
+    influenceResultsDfbs <- data.frame()
+    influenceResultsInf  <- data.frame(
+      rstudent = stats::rstandard(fit)[["z"]],
+      hat      = hatvalues(fit),
+      weight   = stats::weights(fit, type = "diagonal")
+    )
+  } else {
+    # the complete suite of influence diagnostics is only available for rma.uni
+    influenceResults     <- influence(fit, code1 = "jaspBase::startProgressbar(x$k, label = 'Casewise diagnostics')", code2 = "jaspBase::progressbarTick()")
+    influenceResultsDfbs <- data.frame(influenceResults$dfbs)
+    influenceResultsInf  <- data.frame(influenceResults$inf)
+    influenceResultsInf$tau.del <- sqrt(influenceResultsInf$tau2.del)
+    influenceResultsInf$inf[influenceResultsInf$inf == "*"] <- "Yes"
+  }
+
+  return(list(
+    "influenceResultsDfbs" = influenceResultsDfbs,
+    "influenceResultsInf"  = influenceResultsInf
+  ))
+}
+
+.maDiagnosticsErrorMessage       <- function(diagnostics) {
+
+  if (!jaspBase::isTryError(diagnostics))
+    return(NULL)
+
+  errorMessage <- conditionMessage(attr(diagnostics, "condition"))
+  if (grepl("not positive", errorMessage, fixed = TRUE))
+    return(gettext("Casewise diagnostics could not be computed because the model coefficient covariance matrix is not positive definite. This can occur with the Knapp and Hartung adjustment when effect sizes are identical or nearly identical. Try changing the fixed effects test or revising the model."))
+
+  return(gettextf("Casewise diagnostics could not be computed: %1$s", errorMessage))
 }
 
 .maProfile                       <- function(jaspResults, options) {
@@ -252,6 +277,11 @@
   ### the computation needs to be done before the table to get all the necessary information on column names
   # export diagnostics
   diagnostics <- .maDiagnostics(jaspResults, options)
+  diagnosticsError <- .maDiagnosticsErrorMessage(diagnostics)
+  if (!is.null(diagnosticsError)) {
+    casewiseDiagnosticsTable$setError(diagnosticsError)
+    return()
+  }
 
   # always drop the full from subgroups
   if (options[["subgroup"]] != "" && options[["includeFullDatasetInSubgroupAnalysis"]]) {

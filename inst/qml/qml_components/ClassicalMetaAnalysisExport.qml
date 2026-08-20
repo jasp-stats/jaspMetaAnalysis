@@ -30,6 +30,24 @@ Section
 	columns:									2
 	info: qsTr("Options for exporting model-derived quantities to the dataset.")
 
+	CheckBox
+	{
+		Layout.columnSpan:	2
+		id:					exportColumnPrefix
+		name:				"exportColumnPrefix"
+		text:				qsTr("Prefix exported column names")
+		childrenOnSameRow:	true
+		info: qsTr("Add a prefix to every column exported by this analysis.")
+
+		TextField
+		{
+			name:			"exportColumnPrefixValue"
+			placeholderText:	qsTr("Prefix")
+			fieldWidth:		120
+			info: qsTr("Prefix added to every exported column name.")
+		}
+	}
+
 	Group
 	{
 		title:		qsTr("Diagnostics")
