@@ -52,6 +52,7 @@ Section
 				id:				estimatedMarginalMeansEffectSizeSelectedVariables
 				name:			"estimatedMarginalMeansEffectSizeSelectedVariables"
 				title:			qsTr("Selected Variables")
+				allowedColumns:	["scale", "nominal"]
 				allowTypeChange:false
 				info: qsTr("Variables selected for computing estimated marginal means in the effect size model.")
 			}

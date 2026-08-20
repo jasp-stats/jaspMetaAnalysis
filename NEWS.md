@@ -13,6 +13,10 @@
 >   * **Deprecated / Removed:** Outdated analyses, options, or legacy code.
 
 ---
+# jaspMetaAnalysis 0.97.3
+## Fixed
+* Predictor type casts not being preserved in estimated marginal means and prediction plots.
+
 # jaspMetaAnalysis 0.97.2
 ## Fixed
 * Meta-analytic SEM failing to load because JASP wipes OpenMx `mxOptions` before `metaSEM` `.onLoad`.

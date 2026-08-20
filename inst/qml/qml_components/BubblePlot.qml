@@ -43,6 +43,7 @@ Section
 			id:				bubblePlotSelectedVariable
 			title:			qsTr("Selected Variable")
 			singleVariable:	true
+			allowedColumns:	["scale", "nominal"]
 			allowTypeChange:false
 			info: qsTr("Variable to be visualized on the x-axis.")
 		}
@@ -52,6 +53,7 @@ Section
 			name:			"bubblePlotSeparateLines"
 			id:				bubblePlotSeparateLines
 			title:			qsTr("Separate Lines")
+			allowedColumns:	["scale", "nominal"]
 			allowTypeChange:false
 			info: qsTr("Variable(s) according to which predictions are split across different lines.")
 		}
@@ -61,6 +63,7 @@ Section
 			name:			"bubblePlotSeparatePlots"
 			id:				bubblePlotSeparatePlots
 			title:			qsTr("Separate Plots")
+			allowedColumns:	["scale", "nominal"]
 			allowTypeChange:false
 			info: qsTr("Variable(s) according to which predictions are split across different plots.")
 		}

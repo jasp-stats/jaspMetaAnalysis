@@ -98,6 +98,7 @@ Section
 				id:				forestPlotEstimatedMarginalMeansSelectedVariables
 				name:			"forestPlotEstimatedMarginalMeansSelectedVariables"
 				title:			qsTr("Selected Variables")
+				allowedColumns:	["scale", "nominal"]
 				allowTypeChange:false
 				info: qsTr("Select variables for which the estimated marginal means are visualized.")
 			}
