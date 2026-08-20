@@ -13,12 +13,16 @@
 >   * **Deprecated / Removed:** Outdated analyses, options, or legacy code.
 
 ---
-# jaspMetaAnalysis 0.97.3
+# jaspMetaAnalysis 0.97.4
 ## Fixed
 * Restored GLMM diagnostics and exports, exposing variance inflation factors, raw residuals, and predicted values.
 * Added study-level variability and random-effects correlation estimates for unconditional models with random study effects.
 * Added optional prefixes for columns exported by classical meta-analyses, requiring them for additional analyses while preserving the original prefixless export.
 * Added clear errors when casewise diagnostics cannot be computed, without terminating analyses unless their export is requested.
+
+# jaspMetaAnalysis 0.97.3
+## Fixed
+* Predictor type casts not being preserved in estimated marginal means and prediction plots.
 
 # jaspMetaAnalysis 0.97.2
 ## Fixed
