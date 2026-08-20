@@ -75,7 +75,7 @@ Section
 			label:		qsTr("Correlated random effects")
 			checked:	false
 			visible:	glmmModel.value === "UM.RS"
-			info: qsTr("Allow correlated random effects in the UM.RS model (random study effects and random treatment effects can be correlated).")
+			info: qsTr("Allow the random study effects and random treatment effects to be correlated in the unconditional model with random study effects.")
 		}
 
 		IntegerField

@@ -26,8 +26,9 @@ Section
 	property string analysisType:	"metaAnalysis"
 	property int heterogeneityModelTermsCount: 0
 	readonly property bool locationScaleModel: analysisType === "metaAnalysis" && heterogeneityModelTermsCount > 0
+	readonly property bool generalizedMetaAnalysis: analysisType === "generalizedMetaAnalysis"
 	columns:						1
-	info: qsTr("Options for evaluating the influence of individual studies and assessing model diagnostics, including variance inflation factors, casewise diagnostics, and diagnostic plots.")
+	info: generalizedMetaAnalysis ? qsTr("Options for assessing multicollinearity among predictors.") : qsTr("Options for evaluating the influence of individual studies and assessing model diagnostics, including variance inflation factors, casewise diagnostics, and diagnostic plots.")
 
 	Group
 	{
@@ -40,8 +41,8 @@ Section
 				name:		"diagnosticsVarianceInflationFactor"
 				text:		qsTr("Variance inflation factor")
 				Layout.preferredWidth: 300 * jaspTheme.uiScale
-				visible:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis"
-				enabled:	(analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis") && predictors.count > 0
+				visible:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || generalizedMetaAnalysis
+				enabled:	(analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || generalizedMetaAnalysis) && predictors.count > 0
 				info: qsTr("Include variance inflation factors to assess multicollinearity among predictors. Available when predictors are included in the model.")
 
 				CheckBox
@@ -101,6 +102,7 @@ Section
 		Group
 		{
 			title:		qsTr("Plots")
+			visible:	!generalizedMetaAnalysis
 
 			CheckBox
 			{

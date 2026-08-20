@@ -86,14 +86,14 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
     .maVarianceInflationTable(jaspResults, options, "effectSize")
     .maVarianceInflationTable(jaspResults, options, "heterogeneity")
   }
-  if (options[["diagnosticsCasewiseDiagnostics"]]) {
+  if (!.maIsGLMM(options) && options[["diagnosticsCasewiseDiagnostics"]]) {
     .maCasewiseDiagnosticsTable(jaspResults, options)
   }
-  if (options[["diagnosticsPlotsProfileLikelihood"]])
+  if (!.maIsGLMM(options) && options[["diagnosticsPlotsProfileLikelihood"]])
     .maProfileLikelihoodPlot(jaspResults, options)
-  if (options[["diagnosticsPlotsBaujat"]])
+  if (!.maIsGLMM(options) && options[["diagnosticsPlotsBaujat"]])
     .maBaujatPlot(jaspResults, options)
-  if (options[["diagnosticsResidualFunnel"]])
+  if (!.maIsGLMM(options) && options[["diagnosticsResidualFunnel"]])
     .maResidualFunnelPlot(jaspResults, options)
 
   # export

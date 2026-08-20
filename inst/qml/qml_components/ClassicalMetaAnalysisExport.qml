@@ -26,8 +26,27 @@ Section
 	property string analysisType:				"metaAnalysis"
 	property int heterogeneityModelTermsCount:	0
 	readonly property bool locationScaleModel: analysisType === "metaAnalysis" && heterogeneityModelTermsCount > 0
+	readonly property bool generalizedMetaAnalysis: analysisType === "generalizedMetaAnalysis"
 	columns:									2
 	info: qsTr("Options for exporting model-derived quantities to the dataset.")
+
+	CheckBox
+	{
+		Layout.columnSpan:	2
+		id:					exportColumnPrefix
+		name:				"exportColumnPrefix"
+		text:				qsTr("Prefix exported column names")
+		childrenOnSameRow:	true
+		info: qsTr("Add a prefix to every column exported by this analysis.")
+
+		TextField
+		{
+			name:			"exportColumnPrefixValue"
+			placeholderText:	qsTr("Prefix")
+			fieldWidth:		120
+			info: qsTr("Prefix added to every exported column name.")
+		}
+	}
 
 	Group
 	{
@@ -76,13 +95,14 @@ Section
 		{
 			name:	"exportResidualsRaw"
 			text:	qsTr("Raw")
-			info: qsTr("Export raw residuals.")
+			info: generalizedMetaAnalysis ? qsTr("Export observed-minus-fitted residuals on the effect-size scale.") : qsTr("Export raw residuals.")
 		}
 
 		CheckBox
 		{
 			name:	"exportResidualsPearson"
 			text:	qsTr("Pearson")
+			visible:	!generalizedMetaAnalysis
 			info: qsTr("Export Pearson residuals.")
 		}
 
@@ -90,6 +110,7 @@ Section
 		{
 			name:	"exportResidualsStandardized"
 			text:	qsTr("Standardized")
+			visible:	!generalizedMetaAnalysis
 			info: qsTr("Export standardized residuals.")
 		}
 
@@ -97,6 +118,7 @@ Section
 		{
 			name:		"exportResidualsStudentized"
 			text:		qsTr("Studentized")
+			visible:	!generalizedMetaAnalysis
 			enabled:	!locationScaleModel
 			info: qsTr("Export studentized residuals.")
 		}
@@ -133,6 +155,7 @@ Section
 		{
 			name:	"exportRandomEffects"
 			text:	qsTr("Random effects")
+			visible:	!generalizedMetaAnalysis
 			info: qsTr("Export predicted random effects.")
 		}
 
@@ -140,6 +163,7 @@ Section
 		{
 			name:	"exportWeights"
 			text:	qsTr("Weights")
+			visible:	!generalizedMetaAnalysis
 			info: qsTr("Export model fitting weights. These are not coefficient-specific contribution weights in meta-regression. For multilevel/multivariate models, diagonal weights match the default forest plot weights and row-sum weights are exported for intercept-only models.")
 		}
 	}
