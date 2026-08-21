@@ -342,8 +342,56 @@ Upgrades
 	Upgrade
 	{
 		functionName:	"ClassicalMetaAnalysis"
-		fromVersion:	"0.95.4"
-		toVersion:		"0.95.5"
+		fromVersion:	"0.95.5"
+		toVersion:		"0.96.1"
+
+		ChangeSetValue
+		{
+			condition:	function(options) { return options["standardErrors"] === undefined; }
+			name:		"standardErrors"
+			jsonValue:	false
+		}
+	}
+
+	Upgrade
+	{
+		functionName:	"ClassicalMetaAnalysisMultilevelMultivariate"
+		fromVersion:	"0.95.5"
+		toVersion:		"0.96.1"
+
+		ChangeSetValue
+		{
+			condition:	function(options) { return options["standardErrors"] === undefined; }
+			name:		"standardErrors"
+			jsonValue:	false
+		}
+	}
+
+	Upgrade
+	{
+		functionName:	"ClassicalMantelHaenszelPeto"
+		fromVersion:	"0.95.5"
+		toVersion:		"0.96.1"
+
+		ChangeSetValue
+		{
+			condition:	function(options) { return options["standardErrors"] === undefined; }
+			name:		"standardErrors"
+			jsonValue:	false
+		}
+	}
+
+	Upgrade
+	{
+		functionName:	"ClassicalMetaAnalysis"
+		fromVersion:	"0.96.4"
+		toVersion:		"0.96.5"
+
+		ChangeCopy
+		{
+			from:	"diagnosticsCasewiseDiagnosticsExportToDataset"
+			to:		"exportDiagnosticsInfluentialCases"
+		}
 
 		ChangeJS
 		{
@@ -352,6 +400,12 @@ Upgrades
 			{
 				return options["diagnosticsCasewiseDiagnosticsExportToDataset"] === true;
 			}
+		}
+
+		ChangeCopy
+		{
+			from:	"diagnosticsCasewiseDiagnosticsExportToDataset"
+			to:		"exportDiagnosticsCaseDiagnostics"
 		}
 
 		ChangeJS
@@ -364,6 +418,12 @@ Upgrades
 			}
 		}
 
+		ChangeCopy
+		{
+			from:	"diagnosticsCasewiseDiagnosticsExportToDataset"
+			to:		"exportDiagnosticsModelImpact"
+		}
+
 		ChangeJS
 		{
 			name:		"exportDiagnosticsModelImpact"
@@ -372,6 +432,12 @@ Upgrades
 				return options["diagnosticsCasewiseDiagnosticsExportToDataset"] === true &&
 					options["diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"] !== true;
 			}
+		}
+
+		ChangeCopy
+		{
+			from:	"diagnosticsCasewiseDiagnosticsExportToDataset"
+			to:		"exportDiagnosticsCoefficientInfluence"
 		}
 
 		ChangeJS
@@ -386,13 +452,26 @@ Upgrades
 		}
 
 		ChangeRename { from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
+		ChangeRename { from: "forestPlotRelativeSizeEstimates"; to: "forestPlotSizeEstimates" }
+		ChangeRename { from: "forestPlotRelativeSizeText"; to: "forestPlotSizeText" }
+		ChangeRename { from: "forestPlotRelativeSizeAxisLabels"; to: "forestPlotSizeAxisLabels" }
+		ChangeRename { from: "forestPlotRelativeSizeRow"; to: "forestPlotSizeRow" }
+		ChangeRename { from: "forestPlotRelativeSizeLeftPanel"; to: "forestPlotSizeLeftPanel" }
+		ChangeRename { from: "forestPlotRelativeSizeMiddlePanel"; to: "forestPlotSizePlotArea" }
+		ChangeRename { from: "forestPlotRelativeSizeRightPanel"; to: "forestPlotSizeRightPanel" }
 	}
 
 	Upgrade
 	{
 		functionName:	"ClassicalMetaAnalysisMultilevelMultivariate"
-		fromVersion:	"0.95.4"
-		toVersion:		"0.95.5"
+		fromVersion:	"0.96.4"
+		toVersion:		"0.96.5"
+
+		ChangeCopy
+		{
+			from:	"diagnosticsCasewiseDiagnosticsExportToDataset"
+			to:		"exportDiagnosticsCaseDiagnostics"
+		}
 
 		ChangeJS
 		{
@@ -401,6 +480,12 @@ Upgrades
 			{
 				return options["diagnosticsCasewiseDiagnosticsExportToDataset"] === true;
 			}
+		}
+
+		ChangeCopy
+		{
+			from:	"diagnosticsCasewiseDiagnosticsExportToDataset"
+			to:		"exportDiagnosticsCoefficientInfluence"
 		}
 
 		ChangeJS
@@ -414,51 +499,108 @@ Upgrades
 		}
 
 		ChangeRename { from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
+		ChangeRename { from: "forestPlotRelativeSizeEstimates"; to: "forestPlotSizeEstimates" }
+		ChangeRename { from: "forestPlotRelativeSizeText"; to: "forestPlotSizeText" }
+		ChangeRename { from: "forestPlotRelativeSizeAxisLabels"; to: "forestPlotSizeAxisLabels" }
+		ChangeRename { from: "forestPlotRelativeSizeRow"; to: "forestPlotSizeRow" }
+		ChangeRename { from: "forestPlotRelativeSizeLeftPanel"; to: "forestPlotSizeLeftPanel" }
+		ChangeRename { from: "forestPlotRelativeSizeMiddlePanel"; to: "forestPlotSizePlotArea" }
+		ChangeRename { from: "forestPlotRelativeSizeRightPanel"; to: "forestPlotSizeRightPanel" }
 	}
 
 	Upgrade
 	{
 		functionName:	"BayesianMetaAnalysis"
-		fromVersion:	"0.95.4"
-		toVersion:		"0.95.5"
+		fromVersion:	"0.96.4"
+		toVersion:		"0.96.5"
 
 		ChangeRename { from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
+		ChangeRename { from: "forestPlotRelativeSizeEstimates"; to: "forestPlotSizeEstimates" }
+		ChangeRename { from: "forestPlotRelativeSizeText"; to: "forestPlotSizeText" }
+		ChangeRename { from: "forestPlotRelativeSizeAxisLabels"; to: "forestPlotSizeAxisLabels" }
+		ChangeRename { from: "forestPlotRelativeSizeRow"; to: "forestPlotSizeRow" }
+		ChangeRename { from: "forestPlotRelativeSizeLeftPanel"; to: "forestPlotSizeLeftPanel" }
+		ChangeRename { from: "forestPlotRelativeSizeMiddlePanel"; to: "forestPlotSizePlotArea" }
+		ChangeRename { from: "forestPlotRelativeSizeRightPanel"; to: "forestPlotSizeRightPanel" }
 	}
 
 	Upgrade
 	{
 		functionName:	"BayesianBinomialMetaAnalysis"
-		fromVersion:	"0.95.4"
-		toVersion:		"0.95.5"
+		fromVersion:	"0.96.4"
+		toVersion:		"0.96.5"
 
 		ChangeRename { from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
+		ChangeRename { from: "forestPlotRelativeSizeEstimates"; to: "forestPlotSizeEstimates" }
+		ChangeRename { from: "forestPlotRelativeSizeText"; to: "forestPlotSizeText" }
+		ChangeRename { from: "forestPlotRelativeSizeAxisLabels"; to: "forestPlotSizeAxisLabels" }
+		ChangeRename { from: "forestPlotRelativeSizeRow"; to: "forestPlotSizeRow" }
+		ChangeRename { from: "forestPlotRelativeSizeLeftPanel"; to: "forestPlotSizeLeftPanel" }
+		ChangeRename { from: "forestPlotRelativeSizeMiddlePanel"; to: "forestPlotSizePlotArea" }
+		ChangeRename { from: "forestPlotRelativeSizeRightPanel"; to: "forestPlotSizeRightPanel" }
 	}
 
 	Upgrade
 	{
 		functionName:	"ClassicalMantelHaenszelPeto"
-		fromVersion:	"0.95.4"
-		toVersion:		"0.95.5"
+		fromVersion:	"0.96.4"
+		toVersion:		"0.96.5"
+
+		ChangeCopy
+		{
+			condition:	function(options) { return options["method"] === "mantelHaenszelFrequencies" || options["method"] === "peto"; }
+			from:	"successesGroup1"
+			to:		"eventsGroup1"
+		}
+		ChangeCopy
+		{
+			condition:	function(options) { return options["method"] === "mantelHaenszelFrequencies" || options["method"] === "peto"; }
+			from:	"successesGroup2"
+			to:		"eventsGroup2"
+		}
+		ChangeRemove { name: "successesGroup1" }
+		ChangeRemove { name: "successesGroup2" }
 
 		ChangeRename { from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
+		ChangeRename { from: "forestPlotRelativeSizeEstimates"; to: "forestPlotSizeEstimates" }
+		ChangeRename { from: "forestPlotRelativeSizeText"; to: "forestPlotSizeText" }
+		ChangeRename { from: "forestPlotRelativeSizeAxisLabels"; to: "forestPlotSizeAxisLabels" }
+		ChangeRename { from: "forestPlotRelativeSizeRow"; to: "forestPlotSizeRow" }
+		ChangeRename { from: "forestPlotRelativeSizeLeftPanel"; to: "forestPlotSizeLeftPanel" }
+		ChangeRename { from: "forestPlotRelativeSizeMiddlePanel"; to: "forestPlotSizePlotArea" }
+		ChangeRename { from: "forestPlotRelativeSizeRightPanel"; to: "forestPlotSizeRightPanel" }
 	}
 
 	Upgrade
 	{
 		functionName:	"ForestPlot"
-		fromVersion:	"0.95.4"
-		toVersion:		"0.95.5"
+		fromVersion:	"0.96.4"
+		toVersion:		"0.96.5"
 
 		ChangeRename { from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
+		ChangeRename { from: "forestPlotRelativeSizeEstimates"; to: "forestPlotSizeEstimates" }
+		ChangeRename { from: "forestPlotRelativeSizeText"; to: "forestPlotSizeText" }
+		ChangeRename { from: "forestPlotRelativeSizeAxisLabels"; to: "forestPlotSizeAxisLabels" }
+		ChangeRename { from: "forestPlotRelativeSizeRow"; to: "forestPlotSizeRow" }
+		ChangeRename { from: "forestPlotRelativeSizeLeftPanel"; to: "forestPlotSizeLeftPanel" }
+		ChangeRename { from: "forestPlotRelativeSizeMiddlePanel"; to: "forestPlotSizePlotArea" }
+		ChangeRename { from: "forestPlotRelativeSizeRightPanel"; to: "forestPlotSizeRightPanel" }
 	}
 
 	Upgrade
 	{
 		functionName:	"RobustBayesianMetaAnalysis"
-		fromVersion:	"0.95.4"
-		toVersion:		"0.95.5"
+		fromVersion:	"0.96.4"
+		toVersion:		"0.96.5"
 
 		ChangeRename { from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
+		ChangeRename { from: "forestPlotRelativeSizeEstimates"; to: "forestPlotSizeEstimates" }
+		ChangeRename { from: "forestPlotRelativeSizeText"; to: "forestPlotSizeText" }
+		ChangeRename { from: "forestPlotRelativeSizeAxisLabels"; to: "forestPlotSizeAxisLabels" }
+		ChangeRename { from: "forestPlotRelativeSizeRow"; to: "forestPlotSizeRow" }
+		ChangeRename { from: "forestPlotRelativeSizeLeftPanel"; to: "forestPlotSizeLeftPanel" }
+		ChangeRename { from: "forestPlotRelativeSizeMiddlePanel"; to: "forestPlotSizePlotArea" }
+		ChangeRename { from: "forestPlotRelativeSizeRightPanel"; to: "forestPlotSizeRightPanel" }
 	}
 }
 
