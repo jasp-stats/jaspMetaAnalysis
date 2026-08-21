@@ -13,6 +13,11 @@
 >   * **Deprecated / Removed:** Outdated analyses, options, or legacy code.
 
 ---
+# jaspMetaAnalysis 0.97.5
+## Fixed
+* Fixed updater failures when legacy diagnostic export settings are migrated to the current split export options.
+* Added missing migrations for standard-error output, forest plot sizing, and Mantel-Haenszel/Peto event inputs.
+
 # jaspMetaAnalysis 0.97.4
 ## Fixed
 * Restored GLMM diagnostics and exports, exposing variance inflation factors, raw residuals, and predicted values.

@@ -21,7 +21,7 @@ import JASP.Controls
 import JASP
 
 Section
-{	
+{
 	title:							qsTr("Effect Size Variance-Covariance Matrix")
 	property string analysisType:	"multilevelMultivariateMetaAnalysis"
 	expanded:						analysisType === "effectSizeAggregation"
@@ -148,7 +148,7 @@ Section
 			}
 		}
 	}
-	
+
 	FileSelector
 	{
 		name:		"varianceCovarianceMatrixFile"
@@ -163,13 +163,13 @@ Section
 	{
 		removeInvisibles:	true
 		preferredHeight: 	(varianceCovarianceMatrixCorrelationMatrix.checked ? 250 : 525) * preferencesModel.uiScale
-		visible:			varianceCovarianceMatrixConstructsGroupsTimes.checked || varianceCovarianceMatrixCorrelationMatrix.checked	
+		visible:			varianceCovarianceMatrixConstructsGroupsTimes.checked || varianceCovarianceMatrixCorrelationMatrix.checked
 
 		AvailableVariablesList
 		{
 			name:				"varianceCovarianceMatrixAllVariables"
 		}
-			
+
 		AssignedVariablesList
 		{
 			name:				"varianceCovarianceMatrixCorrelationMatrix"
@@ -223,7 +223,7 @@ Section
 			property bool active:	varianceCovarianceMatrixConstructsGroupsTimes.checked
 			onActiveChanged: 		if (!active && count > 0) itemDoubleClicked(0)
 			info: qsTr("Variable specifying the time point of the effect size measurement. In case multiple time points are specified, the first time corresponds to the first condition.")
-		}			
+		}
 
 		AssignedVariablesList
 		{
@@ -237,7 +237,7 @@ Section
 			property bool active:	varianceCovarianceMatrixConstructsGroupsTimes.checked
 			onActiveChanged: 		if (!active && count > 0) itemDoubleClicked(0)
 			info: qsTr("Variable specifying the time point of the effect size measurement. In case multiple time points are specified, the second time corresponds to the second condition.")
-		}			
+		}
 
 		AssignedVariablesList
 		{
@@ -371,7 +371,7 @@ Section
 		{
 			name:		"commonCorrelation"
 			label:		qsTr("Common correlation")
-			info: qsTr("Specify the correlation between the same construct levels.")
+			info: qsTr("Specify the correlation between the same construct type levels.")
 			childrenOnSameRow: true
 			checked: true
 
