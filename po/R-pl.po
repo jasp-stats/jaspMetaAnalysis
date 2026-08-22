@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.0\n"
-"POT-Creation-Date: 2026-08-01 03:43\n"
+"POT-Creation-Date: 2026-08-22 02:47\n"
 "PO-Revision-Date: 2025-08-07 23:01+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
@@ -412,6 +412,16 @@ msgstr "Log. prawdopodobieństwo"
 msgid "Variance Inflation Summary"
 msgstr ""
 
+msgid ""
+"Casewise diagnostics could not be computed because the model coefficient "
+"covariance matrix is not positive definite. This can occur with the Knapp "
+"and Hartung adjustment when effect sizes are identical or nearly identical. "
+"Try changing the fixed effects test or revising the model."
+msgstr ""
+
+msgid "Casewise diagnostics could not be computed: %1$s"
+msgstr ""
+
 msgid "Effect Size Meta-Regression Variance Inflation"
 msgstr ""
 
@@ -592,6 +602,16 @@ msgstr ""
 msgid ""
 "Contrasts of estimated marginal means cannot be transformed via the "
 "heterogeneity transformation. As such, the contrasts are summarized as 𝜏²."
+msgstr ""
+
+msgid ""
+"Another analysis has already exported columns. Specify a prefix for the "
+"exported column names before exporting from this analysis."
+msgstr ""
+
+msgid ""
+"Another analysis already exported columns with the same names. Specify a "
+"unique prefix for the exported column names."
 msgstr ""
 
 msgid "Estimating Meta-Analytic Model"
@@ -821,6 +841,22 @@ msgid "Moderation test based on a Wald-type chi-squared test."
 msgstr ""
 
 msgid "Meta-Analytic Estimates"
+msgstr ""
+
+msgid ""
+"For unconditional models with random study effects, σ and σ² denote the "
+"study-level standard deviation and variance, respectively, and ρ denotes the "
+"correlation between study and group random effects."
+msgstr ""
+
+msgid ""
+"For unconditional models with random study effects, σ and σ² denote the "
+"study-level standard deviation and variance, respectively."
+msgstr ""
+
+msgid ""
+"For unconditional models with random study effects, ρ denotes the "
+"correlation between study and group random effects."
 msgstr ""
 
 msgid "Fit Measures"

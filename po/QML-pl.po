@@ -6843,14 +6843,6 @@ msgid "Model type"
 msgstr ""
 
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
-msgid ""
-"Select the generalized linear model type. UM.FS = unconditional with fixed "
-"study effects (default); UM.RS = unconditional with random study effects; CM."
-"AL = conditional with approximate likelihood (odds ratios only); CM.EL = "
-"conditional with exact likelihood (odds ratios and incidence rate ratios)."
-msgstr ""
-
-msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Unconditional (fixed study effects)"
 msgstr ""
 
@@ -7317,12 +7309,6 @@ msgstr ""
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid "Correlated random effects"
-msgstr ""
-
-msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
-msgid ""
-"Allow correlated random effects in the UM.RS model (random study effects and "
-"random treatment effects can be correlated)."
 msgstr ""
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
@@ -8814,4 +8800,47 @@ msgid ""
 "variability to sampling variability in the model information section. Not "
 "available for multilevel/multivariate meta-analysis or heterogeneity meta-"
 "regression."
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysis|"
+msgid ""
+"Select the generalized linear model type. Unconditional with fixed study "
+"effects (UM.FS; default); unconditional with random study effects (UM.RS); "
+"conditional with approximate likelihood (CM.AL; odds ratios only); "
+"conditional with exact likelihood (CM.EL; odds ratios and incidence rate "
+"ratios)."
+msgstr ""
+
+msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
+msgid ""
+"Allow the random study effects and random treatment effects to be correlated "
+"in the unconditional model with random study effects."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisDiagnostics|"
+msgid "Options for assessing multicollinearity among predictors."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Prefix exported column names"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Add a prefix to every column exported by this analysis."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Prefix"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Prefix added to every exported column name."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Export observed-minus-fitted residuals on the effect-size scale."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisMultivariate|"
+msgid "Specify the correlation between the same construct type levels."
 msgstr ""

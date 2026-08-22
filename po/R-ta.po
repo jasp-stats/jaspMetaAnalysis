@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.19.2\n"
-"POT-Creation-Date: 2026-08-01 03:43\n"
+"POT-Creation-Date: 2026-08-22 02:47\n"
 "PO-Revision-Date: 2026-01-01 18:01+0000\n"
 "Last-Translator: தமிழ்நேரம் <tamilneram247@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/jasp/"
@@ -444,6 +444,16 @@ msgstr "சுயவிவர வாய்ப்பு"
 msgid "Variance Inflation Summary"
 msgstr "மாறுபாடு பணவீக்க சுருக்கம்"
 
+msgid ""
+"Casewise diagnostics could not be computed because the model coefficient "
+"covariance matrix is not positive definite. This can occur with the Knapp "
+"and Hartung adjustment when effect sizes are identical or nearly identical. "
+"Try changing the fixed effects test or revising the model."
+msgstr ""
+
+msgid "Casewise diagnostics could not be computed: %1$s"
+msgstr ""
+
 msgid "Effect Size Meta-Regression Variance Inflation"
 msgstr "விளைவு அளவு மெட்டா-பின்னடைவு மாறுபாடு பணவீக்கம்"
 
@@ -636,6 +646,16 @@ msgid ""
 msgstr ""
 "மதிப்பிடப்பட்ட விளிம்பு வழிமுறைகளின் முரண்பாடுகளை பன்முகத்தன்மை மாற்றத்தின் மூலம் மாற்ற "
 "முடியாது. எனவே, முரண்பாடுகள் 𝜏² என சுருக்கப்பட்டுள்ளன."
+
+msgid ""
+"Another analysis has already exported columns. Specify a prefix for the "
+"exported column names before exporting from this analysis."
+msgstr ""
+
+msgid ""
+"Another analysis already exported columns with the same names. Specify a "
+"unique prefix for the exported column names."
+msgstr ""
 
 msgid "Estimating Meta-Analytic Model"
 msgstr "மேவு பகுப்பாய்வு மாதிரியை மதிப்பிடுதல்"
@@ -881,6 +901,22 @@ msgstr ""
 
 msgid "Meta-Analytic Estimates"
 msgstr "மேவு பகுப்பாய்வு மதிப்பீடுகள்"
+
+msgid ""
+"For unconditional models with random study effects, σ and σ² denote the "
+"study-level standard deviation and variance, respectively, and ρ denotes the "
+"correlation between study and group random effects."
+msgstr ""
+
+msgid ""
+"For unconditional models with random study effects, σ and σ² denote the "
+"study-level standard deviation and variance, respectively."
+msgstr ""
+
+msgid ""
+"For unconditional models with random study effects, ρ denotes the "
+"correlation between study and group random effects."
+msgstr ""
 
 msgid "Fit Measures"
 msgstr "பொருத்தமான நடவடிக்கைகள்"
