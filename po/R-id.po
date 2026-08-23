@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.95.5\n"
 "POT-Creation-Date: 2026-08-22 02:47\n"
-"PO-Revision-Date: 2026-08-22 02:45+0000\n"
+"PO-Revision-Date: 2026-08-23 05:51+0000\n"
 "Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/id/>\n"
@@ -418,7 +418,7 @@ msgid ""
 msgstr ""
 
 msgid "Squared Pearson Residual"
-msgstr ""
+msgstr "Residu Pearson Kuadrat"
 
 msgid "Influence on Fitted Value"
 msgstr ""
@@ -536,7 +536,7 @@ msgid "Adjusted Estimate"
 msgstr ""
 
 msgid "Estimated Marginal Means"
-msgstr ""
+msgstr "Rerata Margin Terestimasi"
 
 msgid "Level"
 msgstr "Tingkat"
@@ -878,7 +878,7 @@ msgid "Fit Measures"
 msgstr ""
 
 msgid "Observations"
-msgstr ""
+msgstr "Observasi"
 
 msgid "Log Lik."
 msgstr ""
@@ -1054,22 +1054,22 @@ msgid "None"
 msgstr "Tidak Ada"
 
 msgid "Bonferroni"
-msgstr ""
+msgstr "Bonferroni"
 
 msgid "Holm"
-msgstr ""
+msgstr "Holm"
 
 msgid "Hochberg"
-msgstr ""
+msgstr "Hochberg"
 
 msgid "Hommel"
 msgstr ""
 
 msgid "Benjamini-Hochberg"
-msgstr ""
+msgstr "Benjamini-Hochberg"
 
 msgid "Benjamini-Yekutieli"
-msgstr ""
+msgstr "Benjamini-Yekutieli"
 
 msgid "Metafor R Code"
 msgstr ""
@@ -1137,7 +1137,7 @@ msgid "Exponential"
 msgstr ""
 
 msgid "Gaussian"
-msgstr ""
+msgstr "Gauss"
 
 msgid "Linear"
 msgstr ""
@@ -1783,7 +1783,7 @@ msgid "Posterior distribution"
 msgstr "Distribusi posterior"
 
 msgid "Sampling diagnostics"
-msgstr ""
+msgstr "Diagnostik pensampelan"
 
 msgid "Autocorrelation (%1$s)"
 msgstr ""
@@ -1799,6 +1799,9 @@ msgid ""
 "%1$.2f < %2$1.0f. To increase accuracy please increase 'Iterations', or "
 "'Adapt delta' in the Options section."
 msgstr ""
+"Akurasi estimasi rendah — Ukuran Sampel Efektif (ESS) terkecil adalah %1$.2f "
+"< %2$1.0f. Untuk meningkatkan akurasi silakan tingkatkan 'Iterasi', atau "
+"'Adaptasi delta' di bagian Opsi."
 
 msgid "t-statistic"
 msgstr ""
@@ -2141,7 +2144,7 @@ msgid "Test of Publication Bias"
 msgstr ""
 
 msgid "ChiSq"
-msgstr ""
+msgstr "ChiKuad"
 
 msgid "Assuming homogeneity"
 msgstr ""
@@ -2150,7 +2153,7 @@ msgid "Assuming heterogeneity"
 msgstr ""
 
 msgid "Fixed Effects Estimates"
-msgstr ""
+msgstr "Estimasi Efek Tetap"
 
 msgid "Mean Estimates (%s)"
 msgstr ""
@@ -2253,7 +2256,7 @@ msgid "Model Fit Measures"
 msgstr ""
 
 msgid "log Lik."
-msgstr ""
+msgstr "Kem. log"
 
 msgid "%1$s fit failed with the following message %2$s."
 msgstr ""
