@@ -2,14 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.96.4\n"
 "POT-Creation-Date: 2026-08-22 02:47\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2026-09-14 02:25+0000\n"
+"Last-Translator: Sohrab Delshad <sdel4030@gmail.com>\n"
+"Language-Team: Persian <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-r/fa/>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 
 msgid "There must be at least one observation in each group."
 msgstr ""
@@ -66,7 +68,7 @@ msgid "Heterogeneity"
 msgstr ""
 
 msgid "Density"
-msgstr ""
+msgstr "چگالی"
 
 msgid "Prior and Posteriors"
 msgstr ""
@@ -149,19 +151,19 @@ msgid "Log(BF%1$s%2$s)"
 msgstr ""
 
 msgid "Mean"
-msgstr ""
+msgstr "میانگین"
 
 msgid "SD"
-msgstr ""
+msgstr "انحراف معیار"
 
 msgid "Lower"
-msgstr ""
+msgstr "پایین"
 
 msgid "95%% Credible Interval"
 msgstr ""
 
 msgid "Upper"
-msgstr ""
+msgstr "بالا"
 
 msgid ""
 "%1$s and %2$s are the group-level effect size and standard deviation, "
@@ -284,7 +286,7 @@ msgid "Prior and posterior plot"
 msgstr ""
 
 msgid "Value"
-msgstr ""
+msgstr "مقدار"
 
 msgid "Running means plot"
 msgstr ""
@@ -302,7 +304,7 @@ msgid "Lag"
 msgstr ""
 
 msgid "Autocorrelation"
-msgstr ""
+msgstr "خودهمبستگی"
 
 msgid "Gelman-Rubin plot"
 msgstr ""
@@ -431,7 +433,7 @@ msgid "Label"
 msgstr ""
 
 msgid "Predictor"
-msgstr ""
+msgstr "پیش‌بین"
 
 msgid "Standardized Residual"
 msgstr ""
@@ -440,7 +442,7 @@ msgid "DFFITS"
 msgstr ""
 
 msgid "Cook's Distance"
-msgstr ""
+msgstr "فاصله کوک"
 
 msgid "Covariance ratio"
 msgstr ""
@@ -461,7 +463,7 @@ msgid "Hat"
 msgstr ""
 
 msgid "Weight"
-msgstr ""
+msgstr "وزن"
 
 msgid "Difference in coefficients"
 msgstr ""
@@ -500,31 +502,31 @@ msgid "Estimated Marginal Means"
 msgstr ""
 
 msgid "Level"
-msgstr ""
+msgstr "سطح"
 
 msgid "Estimate"
-msgstr ""
+msgstr "برآورد"
 
 msgid "Heterogeneity Level"
 msgstr ""
 
 msgid "t"
-msgstr ""
+msgstr "t"
 
 msgid "z"
 msgstr ""
 
 msgid "df"
-msgstr ""
+msgstr "درجه آزادی"
 
 msgid "p"
-msgstr ""
+msgstr "p"
 
 msgid "Contrasts"
 msgstr ""
 
 msgid "Comparison"
-msgstr ""
+msgstr "مقایسه"
 
 msgid "Contrast tests based on Wald-type z-tests."
 msgstr ""
@@ -620,7 +622,7 @@ msgid "All observations were removed as influential."
 msgstr ""
 
 msgid "Intercept"
-msgstr ""
+msgstr "عرض از مبدأ"
 
 msgid "%1$s: not available"
 msgstr ""
@@ -638,7 +640,7 @@ msgid "Moderation: %1$s"
 msgstr ""
 
 msgid "%s%% CI"
-msgstr ""
+msgstr "فاصله اطمینان %s%%"
 
 msgid "%s%% PI"
 msgstr ""
@@ -697,7 +699,7 @@ msgid "Heterogeneity Meta-Regression Terms Tests"
 msgstr ""
 
 msgid "F"
-msgstr ""
+msgstr "F"
 
 msgid "Qₘ"
 msgstr ""
@@ -794,13 +796,13 @@ msgid "Subgroup differences"
 msgstr ""
 
 msgid "Model Summary"
-msgstr ""
+msgstr "خلاصه مدل"
 
 msgid "Meta-Analytic Tests"
 msgstr ""
 
 msgid "Test"
-msgstr ""
+msgstr "آزمون"
 
 msgid "The model for subgroup '%1$s' failed with the following error: %2$s"
 msgstr ""
@@ -1010,13 +1012,13 @@ msgid "SMD to CLES, Pr(superiority)"
 msgstr ""
 
 msgid "None"
-msgstr ""
+msgstr "هیچ"
 
 msgid "Bonferroni"
-msgstr ""
+msgstr "بونفرونی"
 
 msgid "Holm"
-msgstr ""
+msgstr "هولم"
 
 msgid "Hochberg"
 msgstr ""
@@ -1628,13 +1630,13 @@ msgid "Available Variable Names"
 msgstr ""
 
 msgid "Descriptives"
-msgstr ""
+msgstr "آماره‌های توصیفی"
 
 msgid "%1$s: %1$s Matrix"
 msgstr ""
 
 msgid "Variable"
-msgstr ""
+msgstr "متغیّر"
 
 msgid "%1$s: Means"
 msgstr ""
@@ -1726,7 +1728,7 @@ msgid "The model should contain at least one predictor or an intercept."
 msgstr ""
 
 msgid "Coefficients"
-msgstr ""
+msgstr "ضرایب"
 
 msgid "At least one predictor needs to be specified."
 msgstr ""
@@ -1735,7 +1737,7 @@ msgid "%1$s observations were ommited due to missing values."
 msgstr ""
 
 msgid "Posterior distribution"
-msgstr ""
+msgstr "توزیع پسین"
 
 msgid "Sampling diagnostics"
 msgstr ""
@@ -1783,10 +1785,10 @@ msgid "Debray"
 msgstr ""
 
 msgid "Standard error"
-msgstr ""
+msgstr "خطای استاندارد"
 
 msgid "Sample size"
-msgstr ""
+msgstr "اندازه نمونه"
 
 msgid "Total events"
 msgstr ""
@@ -1839,10 +1841,11 @@ msgid "MCMC error/SD"
 msgstr ""
 
 msgid "ESS"
-msgstr ""
+msgstr "اندازه نمونه مؤثر"
 
+#, fuzzy
 msgid "R-hat"
-msgstr ""
+msgstr "R-hat"
 
 msgid "Adjusted Effect"
 msgstr ""
@@ -1995,10 +1998,10 @@ msgid "Model Components"
 msgstr ""
 
 msgid "Models"
-msgstr ""
+msgstr "مدل‌ها"
 
 msgid "P(M)"
-msgstr ""
+msgstr "P(M)"
 
 msgid "Prior Distributions %1$s"
 msgstr ""
@@ -2013,7 +2016,7 @@ msgid "Null"
 msgstr ""
 
 msgid "P(M|data)"
-msgstr ""
+msgstr "P(M|داده‌ها)"
 
 msgid ""
 "The analysis will estimate a complex meta-analytic model ensemble using MCMC "
@@ -2255,7 +2258,7 @@ msgid "Estimated %1$s Regression"
 msgstr ""
 
 msgid "Cohen's d"
-msgstr ""
+msgstr "d کوهن"
 
 msgid "Fisher's z"
 msgstr ""
