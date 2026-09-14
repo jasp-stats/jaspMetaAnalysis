@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.96.4\n"
 "POT-Creation-Date: 2026-08-22 02:47\n"
-"PO-Revision-Date: 2026-09-14 02:25+0000\n"
+"PO-Revision-Date: 2026-09-15 03:57+0000\n"
 "Last-Translator: Sohrab Delshad <sdel4030@gmail.com>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/jasp/"
 "jaspmetaanalysis-r/fa/>\n"
@@ -50,19 +50,19 @@ msgid "Estimated"
 msgstr ""
 
 msgid "Observed"
-msgstr ""
+msgstr "مشاهده‌شده"
 
 msgid "Effect size"
-msgstr ""
+msgstr "اندازه اثر"
 
 msgid "Prior"
-msgstr ""
+msgstr "پیشین"
 
 msgid "Overall effect size"
 msgstr ""
 
 msgid "Effect Size"
-msgstr ""
+msgstr "اندازه اثر"
 
 msgid "Heterogeneity"
 msgstr ""
@@ -89,7 +89,7 @@ msgid "Ordered H"
 msgstr ""
 
 msgid "Sequential Analysis"
-msgstr ""
+msgstr "تحلیل ترتیبی"
 
 msgid "Bayes factors effect size"
 msgstr ""
@@ -107,7 +107,7 @@ msgid "Evidence for fixed effects"
 msgstr ""
 
 msgid "random"
-msgstr ""
+msgstr "تصادفی"
 
 msgid "fixed"
 msgstr ""
@@ -230,7 +230,7 @@ msgid "Model Probabilities"
 msgstr ""
 
 msgid "Posterior"
-msgstr ""
+msgstr "پسین"
 
 msgid "Fixed H%s"
 msgstr ""
@@ -301,7 +301,7 @@ msgid "Autocorrelations plot"
 msgstr ""
 
 msgid "Lag"
-msgstr ""
+msgstr "تأخیر"
 
 msgid "Autocorrelation"
 msgstr "خودهمبستگی"
@@ -393,7 +393,7 @@ msgid "Residual Value"
 msgstr ""
 
 msgid "Standard Error"
-msgstr ""
+msgstr "خطای معیار"
 
 msgid "Profile Likelihood"
 msgstr ""
@@ -514,7 +514,7 @@ msgid "t"
 msgstr "t"
 
 msgid "z"
-msgstr ""
+msgstr "z"
 
 msgid "df"
 msgstr "درجه آزادی"
@@ -1116,7 +1116,7 @@ msgid "Simple / Nested Summary"
 msgstr ""
 
 msgid "Estimates"
-msgstr ""
+msgstr "برآوردها"
 
 msgid "σ²"
 msgstr ""
@@ -1666,7 +1666,7 @@ msgid "Pooled %1$s Matrix Parameters"
 msgstr ""
 
 msgid "Row"
-msgstr ""
+msgstr "ردیف"
 
 msgid "Column"
 msgstr ""
@@ -1728,7 +1728,7 @@ msgid "The model should contain at least one predictor or an intercept."
 msgstr ""
 
 msgid "Coefficients"
-msgstr "ضرایب"
+msgstr "ضریب‌ها"
 
 msgid "At least one predictor needs to be specified."
 msgstr ""
@@ -1889,7 +1889,7 @@ msgid "Conditional Estimated Marginal Means"
 msgstr ""
 
 msgid "Median"
-msgstr ""
+msgstr "میانه"
 
 msgid ""
 "The Bayes factor test for the adjusted estimate is not available for meta-"
@@ -2125,7 +2125,7 @@ msgid "<em>p</em>-values interval(one-sided)"
 msgstr ""
 
 msgid "Frequency"
-msgstr ""
+msgstr "فراوانی"
 
 msgid ""
 "There were no p-value cutoffs after their automatic reduction. The displayed "
@@ -2225,7 +2225,7 @@ msgid "Status"
 msgstr ""
 
 msgid "Path Diagram"
-msgstr ""
+msgstr "نمودار مسیر"
 
 msgid "Syntax failed with the following message %1$s."
 msgstr ""
