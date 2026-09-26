@@ -6,6 +6,12 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Language: zh_Hans\n"
 "X-Qt-Contexts: true\n"
+"PO-Revision-Date: 2026-09-26 15:28+0000\n"
+"Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
+"Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
+"projects/jasp/jaspmetaanalysis-qml/zh_Hans/>\n"
+"Language: zh_Hans\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 
 msgctxt "Description|"
 msgid "Meta-Analysis"
@@ -37,7 +43,7 @@ msgstr "效应量"
 
 msgctxt "BayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr "效应量标准误差"
+msgstr "效应量标准误"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Effect Size"
@@ -45,7 +51,7 @@ msgstr "效应量"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr "效应量标准误差"
+msgstr "效应量标准误"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Study Labels"
@@ -491,10 +497,9 @@ msgctxt "SelectionModels|"
 msgid "Effect Size"
 msgstr "效应量"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Effect Size Standard Error"
-msgstr "效应量标准误差"
+msgstr "效应量标准误"
 
 msgctxt "SelectionModels|"
 msgid "N"
@@ -819,10 +824,9 @@ msgctxt "PetPeese|"
 msgid "Effect Size"
 msgstr "效应量"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Effect Size Standard Error"
-msgstr "效应量标准误差"
+msgstr "效应量标准误"
 
 msgctxt "PetPeese|"
 msgid "Fisher's z"
@@ -1104,10 +1108,9 @@ msgctxt "PenalizedMetaAnalysis|"
 msgid "Effect Size"
 msgstr "效应量"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr "效应量标准误差"
+msgstr "效应量标准误"
 
 #, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
@@ -1690,10 +1693,9 @@ msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Variable containing the observed effect sizes."
 msgstr "包含观察到的效应量的变量。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Effect Size Standard Error"
-msgstr "效应量标准误差"
+msgstr "效应量标准误"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
@@ -2725,10 +2727,9 @@ msgctxt "FunnelPlot|"
 msgid "Variable containing the observed effect sizes."
 msgstr "包含观察到的效应量的变量。"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Effect Size Standard Error"
-msgstr "效应量标准误差"
+msgstr "效应量标准误"
 
 msgctxt "FunnelPlot|"
 msgid ""
@@ -4597,10 +4598,9 @@ msgctxt "BayesianMetaAnalysisDeprecated|"
 msgid "Effect Size"
 msgstr "效应量"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisDeprecated|"
 msgid "Effect Size Standard Error"
-msgstr "效应量标准误差"
+msgstr "效应量标准误"
 
 #, fuzzy
 msgctxt "BayesianMetaAnalysisDeprecated|"
@@ -6563,10 +6563,9 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Variable containing the observed effect sizes."
 msgstr "包含观察到的效应量的变量。"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size Standard Error"
-msgstr "效应量标准误差"
+msgstr "效应量标准误"
 
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid ""
@@ -7136,10 +7135,9 @@ msgctxt "EffectSizeAggregation|"
 msgid "Variable containing the observed effect sizes."
 msgstr "包含观察到的效应量的变量。"
 
-#, fuzzy
 msgctxt "EffectSizeAggregation|"
 msgid "Effect Size Standard Error"
-msgstr "效应量标准误差"
+msgstr "效应量标准误"
 
 msgctxt "EffectSizeAggregation|"
 msgid "Variable containing the standard errors of the effect sizes."
@@ -7258,10 +7256,9 @@ msgctxt "ForestPlot|"
 msgid "Variable containing the effect size estimates."
 msgstr "包含效应量估计的变量。"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Effect Size Standard Error"
-msgstr "效应量标准误差"
+msgstr "效应量标准误"
 
 msgctxt "ForestPlot|"
 msgid ""
