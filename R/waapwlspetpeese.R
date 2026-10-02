@@ -570,10 +570,8 @@
 
   # in the case that correlation input was used, this part will transform the results back
   # from the estimation scale to the outcome scale
-  for (i in 1:nrow(fit)) {
-    fit["(Intercept)", "Std. Error"]                <- .maInvTransformSe(fit["(Intercept)", "Estimate"], fit["(Intercept)", "Std. Error"], options[["transformCorrelationsTo"]])
-    fit["(Intercept)", c("Estimate", "lCI", "uCI")] <- .maInvTransformEs(fit["(Intercept)", c("Estimate", "lCI", "uCI")],      options[["transformCorrelationsTo"]])
-  }
+  fit["(Intercept)", "Std. Error"]                <- .maInvTransformSe(fit["(Intercept)", "Estimate"], fit["(Intercept)", "Std. Error"], options[["transformCorrelationsTo"]])
+  fit["(Intercept)", c("Estimate", "lCI", "uCI")] <- .maInvTransformEs(fit["(Intercept)", c("Estimate", "lCI", "uCI")],      options[["transformCorrelationsTo"]])
 
   return(fit)
 }
