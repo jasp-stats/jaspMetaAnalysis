@@ -5,6 +5,71 @@ Upgrades
 {
 	Upgrade
 	{
+		functionName:	"SelectionModels"
+		fromVersion:	"0.97.5"
+		toVersion:		"0.98.0"
+		msg:			qsTr("Selection Models was reworked in Meta-Analysis module 0.98.0. Refreshing this analysis replaces the saved results and may reset incompatible settings. To rerun the original analysis, use JASP 0.98.1 with Meta-Analysis module 0.95.5.")
+
+		ChangeRename { condition: function(options) { return options["effectSizeSe"] !== undefined && options["effectSizeStandardError"] === undefined; }; from: "effectSizeSe"; to: "effectSizeStandardError" }
+		ChangeRename { condition: function(options) { return options["studyLabel"] !== undefined && options["studyLabels"] === undefined; }; from: "studyLabel"; to: "studyLabels" }
+		ChangeRename { condition: function(options) { return options["modelExpectedDirectionOfEffectSizes"] !== undefined && options["modelExpectedDirectionOfTheEffect"] === undefined; }; from: "modelExpectedDirectionOfEffectSizes"; to: "modelExpectedDirectionOfTheEffect" }
+		ChangeRename { condition: function(options) { return options["modelPValueFrequencyTable"] !== undefined && options["weightFunctionPValueFrequencyTable"] === undefined; }; from: "modelPValueFrequencyTable"; to: "weightFunctionPValueFrequencyTable" }
+
+		ChangeJS
+		{
+			condition: function(options) { return options["modelPValueCutoffs"] !== undefined && options["selectionModels"] === undefined; }
+			name: "selectionModels"
+			isNewOption: true
+			jsFunction: function(options)
+			{
+				// Desktop also applies this change to column-encoding metadata.
+				if (options["modelPValueCutoffs"] === undefined)
+					return { sampleSize: { shouldEncode: true } };
+
+				var steps = options["modelPValueCutoffs"];
+				var cutoffs = String(steps).replace(/^\s*c?\s*\(?/, "").replace(/\)?\s*$/, "").split(",").filter(function(value) { return value.trim() !== ""; }).map(Number);
+				if (cutoffs.length > 0 && cutoffs.every(function(value) { return isFinite(value) && value > 0 && value < 1; }))
+				{
+					if (options["modelTwoSidedSelection"] === true)
+						cutoffs = cutoffs.map(function(value) { return value / 2; }).concat(cutoffs.map(function(value) { return 1 - value / 2; }));
+					cutoffs.sort(function(a, b) { return a - b; });
+					steps = "(" + cutoffs.join(", ") + ")";
+				}
+				// Legacy cutoffs and supplied p-values use the one-sided scale.
+				return [{ name: ["model1"], type: "stepfun", steps: steps, delta: "", sidedness: "oneSided", prec: "none", sampleSize: { types: [], value: "" }, scaleprec: true, decreasing: false }];
+			}
+		}
+		ChangeSetValue { condition: function(options) { return options["modelPValueCutoffs"] !== undefined && options["publicationBiasAdjustment"] === undefined; }; name: "publicationBiasAdjustment"; jsonValue: "custom" }
+		ChangeSetValue { condition: function(options) { return options["method"] === undefined && ["inferenceFixedEffectsMeanEstimatesTable", "inferenceFixedEffectsEstimatedWeightsTable", "plotsWeightFunctionFixedEffectsPlot"].some(function(name) { return options[name] === true; }) && ["inferenceRandomEffectsMeanEstimatesTable", "inferenceRandomEffectsEstimatedHeterogeneityTable", "inferenceRandomEffectsEstimatedWeightsTable", "plotsWeightFunctionRandomEffectsPlot"].every(function(name) { return options[name] !== true; }); }; name: "method"; jsonValue: "fixedEffects" }
+		ChangeSetValue { condition: function(options) { return options["weightFunctionEstimates"] === undefined && (options["inferenceFixedEffectsEstimatedWeightsTable"] === true || options["inferenceRandomEffectsEstimatedWeightsTable"] === true); }; name: "weightFunctionEstimates"; jsonValue: true }
+		ChangeSetValue { condition: function(options) { return options["weightFunctionEstimates"] === undefined && options["inferenceFixedEffectsEstimatedWeightsTable"] === false && options["inferenceRandomEffectsEstimatedWeightsTable"] === false; }; name: "weightFunctionEstimates"; jsonValue: false }
+		ChangeSetValue { condition: function(options) { return options["weightFunctionPlot"] === undefined && (options["plotsWeightFunctionFixedEffectsPlot"] === true || options["plotsWeightFunctionRandomEffectsPlot"] === true); }; name: "weightFunctionPlot"; jsonValue: true }
+		ChangeSetValue { condition: function(options) { return options["weightFunctionPlot"] === undefined && options["plotsWeightFunctionFixedEffectsPlot"] === false && options["plotsWeightFunctionRandomEffectsPlot"] === false; }; name: "weightFunctionPlot"; jsonValue: false }
+
+		ChangeRemove { condition: function(options) { return options["effectSizeSe"] !== undefined; }; name: "effectSizeSe" }
+		ChangeRemove { condition: function(options) { return options["effectSizeCi"] !== undefined; }; name: "effectSizeCi" }
+		ChangeRemove { condition: function(options) { return options["studyLabel"] !== undefined; }; name: "studyLabel" }
+		ChangeRemove { condition: function(options) { return options["modelExpectedDirectionOfEffectSizes"] !== undefined; }; name: "modelExpectedDirectionOfEffectSizes" }
+		ChangeRemove { condition: function(options) { return options["modelPValueFrequencyTable"] !== undefined; }; name: "modelPValueFrequencyTable" }
+		ChangeRemove { condition: function(options) { return options["modelPValueCutoffs"] !== undefined; }; name: "modelPValueCutoffs" }
+		ChangeRemove { condition: function(options) { return options["modelTwoSidedSelection"] !== undefined; }; name: "modelTwoSidedSelection" }
+		ChangeRemove { condition: function(options) { return options["modelAutomaticallyJoinPValueIntervals"] !== undefined; }; name: "modelAutomaticallyJoinPValueIntervals" }
+		ChangeRemove { condition: function(options) { return options["measures"] !== undefined; }; name: "measures" }
+		ChangeRemove { condition: function(options) { return options["transformCorrelationsTo"] !== undefined; }; name: "transformCorrelationsTo" }
+		ChangeRemove { condition: function(options) { return options["sampleSize"] !== undefined; }; name: "sampleSize" }
+		ChangeRemove { condition: function(options) { return options["inferenceFixedEffectsMeanEstimatesTable"] !== undefined; }; name: "inferenceFixedEffectsMeanEstimatesTable" }
+		ChangeRemove { condition: function(options) { return options["inferenceFixedEffectsEstimatedWeightsTable"] !== undefined; }; name: "inferenceFixedEffectsEstimatedWeightsTable" }
+		ChangeRemove { condition: function(options) { return options["inferenceRandomEffectsMeanEstimatesTable"] !== undefined; }; name: "inferenceRandomEffectsMeanEstimatesTable" }
+		ChangeRemove { condition: function(options) { return options["inferenceRandomEffectsEstimatedHeterogeneityTable"] !== undefined; }; name: "inferenceRandomEffectsEstimatedHeterogeneityTable" }
+		ChangeRemove { condition: function(options) { return options["inferenceRandomEffectsEstimatedWeightsTable"] !== undefined; }; name: "inferenceRandomEffectsEstimatedWeightsTable" }
+		ChangeRemove { condition: function(options) { return options["plotsMeanModelEstimatesPlot"] !== undefined; }; name: "plotsMeanModelEstimatesPlot" }
+		ChangeRemove { condition: function(options) { return options["plotsWeightFunctionFixedEffectsPlot"] !== undefined; }; name: "plotsWeightFunctionFixedEffectsPlot" }
+		ChangeRemove { condition: function(options) { return options["plotsWeightFunctionRandomEffectsPlot"] !== undefined; }; name: "plotsWeightFunctionRandomEffectsPlot" }
+		ChangeRemove { condition: function(options) { return options["plotsWeightFunctionRescaleXAxis"] !== undefined; }; name: "plotsWeightFunctionRescaleXAxis" }
+	}
+
+	Upgrade
+	{
 		functionName:	"ClassicalPredictionPerformance"
 		fromVersion:	"0.17.2"
 		toVersion:		"0.17.3"
@@ -192,30 +257,30 @@ Upgrades
 		toVersion:		"0.17.3"
 
 		// SelectionModels.qml
-		ChangeRename { from: "inputES"; to: "effectSize" }
-		ChangeRename { from: "inputSE"; to: "effectSizeSe" }
-		ChangeRename { from: "inputCI"; to: "effectSizeCi" }
-		ChangeRename { from: "inputN"; to: "sampleSize" }
-		ChangeRename { from: "inputPVal"; to: "pValue" }
-		ChangeRename { from: "inputLabels"; to: "studyLabel" }
-		ChangeRename { from: "muTransform"; to: "transformCorrelationsTo" }
+		ChangeRename { condition: function(options) { return options["inputES"] !== undefined && options["effectSize"] === undefined; }; from: "inputES"; to: "effectSize" }
+		ChangeRename { condition: function(options) { return options["inputSE"] !== undefined && options["effectSizeSe"] === undefined; }; from: "inputSE"; to: "effectSizeSe" }
+		ChangeRename { condition: function(options) { return options["inputCI"] !== undefined && options["effectSizeCi"] === undefined; }; from: "inputCI"; to: "effectSizeCi" }
+		ChangeRename { condition: function(options) { return options["inputN"] !== undefined && options["sampleSize"] === undefined; }; from: "inputN"; to: "sampleSize" }
+		ChangeRename { condition: function(options) { return options["inputPVal"] !== undefined && options["pValue"] === undefined; }; from: "inputPVal"; to: "pValue" }
+		ChangeRename { condition: function(options) { return options["inputLabels"] !== undefined && options["studyLabel"] === undefined; }; from: "inputLabels"; to: "studyLabel" }
+		ChangeRename { condition: function(options) { return options["muTransform"] !== undefined && options["transformCorrelationsTo"] === undefined; }; from: "muTransform"; to: "transformCorrelationsTo" }
 
-		ChangeRename { from: "cutoffsPVal"; to: "modelPValueCutoffs" }
-		ChangeRename { from: "selectionTwosided"; to: "modelTwoSidedSelection" }
-		ChangeRename { from: "tablePVal"; to: "modelPValueFrequencyTable" }
-		ChangeRename { from: "joinPVal"; to: "modelAutomaticallyJoinPValueIntervals" }
-		ChangeRename { from: "effectDirection"; to: "modelExpectedDirectionOfEffectSizes" }
+		ChangeRename { condition: function(options) { return options["cutoffsPVal"] !== undefined && options["modelPValueCutoffs"] === undefined; }; from: "cutoffsPVal"; to: "modelPValueCutoffs" }
+		ChangeRename { condition: function(options) { return options["selectionTwosided"] !== undefined && options["modelTwoSidedSelection"] === undefined; }; from: "selectionTwosided"; to: "modelTwoSidedSelection" }
+		ChangeRename { condition: function(options) { return options["tablePVal"] !== undefined && options["modelPValueFrequencyTable"] === undefined; }; from: "tablePVal"; to: "modelPValueFrequencyTable" }
+		ChangeRename { condition: function(options) { return options["joinPVal"] !== undefined && options["modelAutomaticallyJoinPValueIntervals"] === undefined; }; from: "joinPVal"; to: "modelAutomaticallyJoinPValueIntervals" }
+		ChangeRename { condition: function(options) { return options["effectDirection"] !== undefined && options["modelExpectedDirectionOfEffectSizes"] === undefined; }; from: "effectDirection"; to: "modelExpectedDirectionOfEffectSizes" }
 
-		ChangeRename { from: "estimatesFE"; to: "inferenceFixedEffectsMeanEstimatesTable" }
-		ChangeRename { from: "weightsFE"; to: "inferenceFixedEffectsEstimatedWeightsTable" }
-		ChangeRename { from: "estimatesRE"; to: "inferenceRandomEffectsMeanEstimatesTable" }
-		ChangeRename { from: "heterogeneityRE"; to: "inferenceRandomEffectsEstimatedHeterogeneityTable" }
-		ChangeRename { from: "weightsRE"; to: "inferenceRandomEffectsEstimatedWeightsTable" }
+		ChangeRename { condition: function(options) { return options["estimatesFE"] !== undefined && options["inferenceFixedEffectsMeanEstimatesTable"] === undefined; }; from: "estimatesFE"; to: "inferenceFixedEffectsMeanEstimatesTable" }
+		ChangeRename { condition: function(options) { return options["weightsFE"] !== undefined && options["inferenceFixedEffectsEstimatedWeightsTable"] === undefined; }; from: "weightsFE"; to: "inferenceFixedEffectsEstimatedWeightsTable" }
+		ChangeRename { condition: function(options) { return options["estimatesRE"] !== undefined && options["inferenceRandomEffectsMeanEstimatesTable"] === undefined; }; from: "estimatesRE"; to: "inferenceRandomEffectsMeanEstimatesTable" }
+		ChangeRename { condition: function(options) { return options["heterogeneityRE"] !== undefined && options["inferenceRandomEffectsEstimatedHeterogeneityTable"] === undefined; }; from: "heterogeneityRE"; to: "inferenceRandomEffectsEstimatedHeterogeneityTable" }
+		ChangeRename { condition: function(options) { return options["weightsRE"] !== undefined && options["inferenceRandomEffectsEstimatedWeightsTable"] === undefined; }; from: "weightsRE"; to: "inferenceRandomEffectsEstimatedWeightsTable" }
 
-		ChangeRename { from: "weightFunctionFE"; to: "plotsWeightFunctionFixedEffectsPlot" }
-		ChangeRename { from: "weightFunctionRE"; to: "plotsWeightFunctionRandomEffectsPlot" }
-		ChangeRename { from: "weightFunctionRescale"; to: "plotsWeightFunctionRescaleXAxis" }
-		ChangeRename { from: "plotModels"; to: "plotsMeanModelEstimatesPlot" }
+		ChangeRename { condition: function(options) { return options["weightFunctionFE"] !== undefined && options["plotsWeightFunctionFixedEffectsPlot"] === undefined; }; from: "weightFunctionFE"; to: "plotsWeightFunctionFixedEffectsPlot" }
+		ChangeRename { condition: function(options) { return options["weightFunctionRE"] !== undefined && options["plotsWeightFunctionRandomEffectsPlot"] === undefined; }; from: "weightFunctionRE"; to: "plotsWeightFunctionRandomEffectsPlot" }
+		ChangeRename { condition: function(options) { return options["weightFunctionRescale"] !== undefined && options["plotsWeightFunctionRescaleXAxis"] === undefined; }; from: "weightFunctionRescale"; to: "plotsWeightFunctionRescaleXAxis" }
+		ChangeRename { condition: function(options) { return options["plotModels"] !== undefined && options["plotsMeanModelEstimatesPlot"] === undefined; }; from: "plotModels"; to: "plotsMeanModelEstimatesPlot" }
 	}
 
 	Upgrade
@@ -451,14 +516,14 @@ Upgrades
 			}
 		}
 
-		ChangeRename { from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
-		ChangeRename { from: "forestPlotRelativeSizeEstimates"; to: "forestPlotSizeEstimates" }
-		ChangeRename { from: "forestPlotRelativeSizeText"; to: "forestPlotSizeText" }
-		ChangeRename { from: "forestPlotRelativeSizeAxisLabels"; to: "forestPlotSizeAxisLabels" }
-		ChangeRename { from: "forestPlotRelativeSizeRow"; to: "forestPlotSizeRow" }
-		ChangeRename { from: "forestPlotRelativeSizeLeftPanel"; to: "forestPlotSizeLeftPanel" }
-		ChangeRename { from: "forestPlotRelativeSizeMiddlePanel"; to: "forestPlotSizePlotArea" }
-		ChangeRename { from: "forestPlotRelativeSizeRightPanel"; to: "forestPlotSizeRightPanel" }
+		ChangeRename { condition: function(options) { return options["forestPlotAllignLeftPanel"] !== undefined && options["forestPlotAlignLeftPanel"] === undefined; }; from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeEstimates"] !== undefined && options["forestPlotSizeEstimates"] === undefined; }; from: "forestPlotRelativeSizeEstimates"; to: "forestPlotSizeEstimates" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeText"] !== undefined && options["forestPlotSizeText"] === undefined; }; from: "forestPlotRelativeSizeText"; to: "forestPlotSizeText" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeAxisLabels"] !== undefined && options["forestPlotSizeAxisLabels"] === undefined; }; from: "forestPlotRelativeSizeAxisLabels"; to: "forestPlotSizeAxisLabels" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeRow"] !== undefined && options["forestPlotSizeRow"] === undefined; }; from: "forestPlotRelativeSizeRow"; to: "forestPlotSizeRow" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeLeftPanel"] !== undefined && options["forestPlotSizeLeftPanel"] === undefined; }; from: "forestPlotRelativeSizeLeftPanel"; to: "forestPlotSizeLeftPanel" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeMiddlePanel"] !== undefined && options["forestPlotSizePlotArea"] === undefined; }; from: "forestPlotRelativeSizeMiddlePanel"; to: "forestPlotSizePlotArea" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeRightPanel"] !== undefined && options["forestPlotSizeRightPanel"] === undefined; }; from: "forestPlotRelativeSizeRightPanel"; to: "forestPlotSizeRightPanel" }
 	}
 
 	Upgrade
@@ -498,14 +563,14 @@ Upgrades
 			}
 		}
 
-		ChangeRename { from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
-		ChangeRename { from: "forestPlotRelativeSizeEstimates"; to: "forestPlotSizeEstimates" }
-		ChangeRename { from: "forestPlotRelativeSizeText"; to: "forestPlotSizeText" }
-		ChangeRename { from: "forestPlotRelativeSizeAxisLabels"; to: "forestPlotSizeAxisLabels" }
-		ChangeRename { from: "forestPlotRelativeSizeRow"; to: "forestPlotSizeRow" }
-		ChangeRename { from: "forestPlotRelativeSizeLeftPanel"; to: "forestPlotSizeLeftPanel" }
-		ChangeRename { from: "forestPlotRelativeSizeMiddlePanel"; to: "forestPlotSizePlotArea" }
-		ChangeRename { from: "forestPlotRelativeSizeRightPanel"; to: "forestPlotSizeRightPanel" }
+		ChangeRename { condition: function(options) { return options["forestPlotAllignLeftPanel"] !== undefined && options["forestPlotAlignLeftPanel"] === undefined; }; from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeEstimates"] !== undefined && options["forestPlotSizeEstimates"] === undefined; }; from: "forestPlotRelativeSizeEstimates"; to: "forestPlotSizeEstimates" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeText"] !== undefined && options["forestPlotSizeText"] === undefined; }; from: "forestPlotRelativeSizeText"; to: "forestPlotSizeText" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeAxisLabels"] !== undefined && options["forestPlotSizeAxisLabels"] === undefined; }; from: "forestPlotRelativeSizeAxisLabels"; to: "forestPlotSizeAxisLabels" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeRow"] !== undefined && options["forestPlotSizeRow"] === undefined; }; from: "forestPlotRelativeSizeRow"; to: "forestPlotSizeRow" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeLeftPanel"] !== undefined && options["forestPlotSizeLeftPanel"] === undefined; }; from: "forestPlotRelativeSizeLeftPanel"; to: "forestPlotSizeLeftPanel" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeMiddlePanel"] !== undefined && options["forestPlotSizePlotArea"] === undefined; }; from: "forestPlotRelativeSizeMiddlePanel"; to: "forestPlotSizePlotArea" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeRightPanel"] !== undefined && options["forestPlotSizeRightPanel"] === undefined; }; from: "forestPlotRelativeSizeRightPanel"; to: "forestPlotSizeRightPanel" }
 	}
 
 	Upgrade
@@ -514,14 +579,14 @@ Upgrades
 		fromVersion:	"0.96.4"
 		toVersion:		"0.96.5"
 
-		ChangeRename { from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
-		ChangeRename { from: "forestPlotRelativeSizeEstimates"; to: "forestPlotSizeEstimates" }
-		ChangeRename { from: "forestPlotRelativeSizeText"; to: "forestPlotSizeText" }
-		ChangeRename { from: "forestPlotRelativeSizeAxisLabels"; to: "forestPlotSizeAxisLabels" }
-		ChangeRename { from: "forestPlotRelativeSizeRow"; to: "forestPlotSizeRow" }
-		ChangeRename { from: "forestPlotRelativeSizeLeftPanel"; to: "forestPlotSizeLeftPanel" }
-		ChangeRename { from: "forestPlotRelativeSizeMiddlePanel"; to: "forestPlotSizePlotArea" }
-		ChangeRename { from: "forestPlotRelativeSizeRightPanel"; to: "forestPlotSizeRightPanel" }
+		ChangeRename { condition: function(options) { return options["forestPlotAllignLeftPanel"] !== undefined && options["forestPlotAlignLeftPanel"] === undefined; }; from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeEstimates"] !== undefined && options["forestPlotSizeEstimates"] === undefined; }; from: "forestPlotRelativeSizeEstimates"; to: "forestPlotSizeEstimates" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeText"] !== undefined && options["forestPlotSizeText"] === undefined; }; from: "forestPlotRelativeSizeText"; to: "forestPlotSizeText" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeAxisLabels"] !== undefined && options["forestPlotSizeAxisLabels"] === undefined; }; from: "forestPlotRelativeSizeAxisLabels"; to: "forestPlotSizeAxisLabels" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeRow"] !== undefined && options["forestPlotSizeRow"] === undefined; }; from: "forestPlotRelativeSizeRow"; to: "forestPlotSizeRow" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeLeftPanel"] !== undefined && options["forestPlotSizeLeftPanel"] === undefined; }; from: "forestPlotRelativeSizeLeftPanel"; to: "forestPlotSizeLeftPanel" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeMiddlePanel"] !== undefined && options["forestPlotSizePlotArea"] === undefined; }; from: "forestPlotRelativeSizeMiddlePanel"; to: "forestPlotSizePlotArea" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeRightPanel"] !== undefined && options["forestPlotSizeRightPanel"] === undefined; }; from: "forestPlotRelativeSizeRightPanel"; to: "forestPlotSizeRightPanel" }
 	}
 
 	Upgrade
@@ -577,14 +642,14 @@ Upgrades
 		fromVersion:	"0.96.4"
 		toVersion:		"0.96.5"
 
-		ChangeRename { from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
-		ChangeRename { from: "forestPlotRelativeSizeEstimates"; to: "forestPlotSizeEstimates" }
-		ChangeRename { from: "forestPlotRelativeSizeText"; to: "forestPlotSizeText" }
-		ChangeRename { from: "forestPlotRelativeSizeAxisLabels"; to: "forestPlotSizeAxisLabels" }
-		ChangeRename { from: "forestPlotRelativeSizeRow"; to: "forestPlotSizeRow" }
-		ChangeRename { from: "forestPlotRelativeSizeLeftPanel"; to: "forestPlotSizeLeftPanel" }
-		ChangeRename { from: "forestPlotRelativeSizeMiddlePanel"; to: "forestPlotSizePlotArea" }
-		ChangeRename { from: "forestPlotRelativeSizeRightPanel"; to: "forestPlotSizeRightPanel" }
+		ChangeRename { condition: function(options) { return options["forestPlotAllignLeftPanel"] !== undefined && options["forestPlotAlignLeftPanel"] === undefined; }; from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeEstimates"] !== undefined && options["forestPlotSizeEstimates"] === undefined; }; from: "forestPlotRelativeSizeEstimates"; to: "forestPlotSizeEstimates" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeText"] !== undefined && options["forestPlotSizeText"] === undefined; }; from: "forestPlotRelativeSizeText"; to: "forestPlotSizeText" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeAxisLabels"] !== undefined && options["forestPlotSizeAxisLabels"] === undefined; }; from: "forestPlotRelativeSizeAxisLabels"; to: "forestPlotSizeAxisLabels" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeRow"] !== undefined && options["forestPlotSizeRow"] === undefined; }; from: "forestPlotRelativeSizeRow"; to: "forestPlotSizeRow" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeLeftPanel"] !== undefined && options["forestPlotSizeLeftPanel"] === undefined; }; from: "forestPlotRelativeSizeLeftPanel"; to: "forestPlotSizeLeftPanel" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeMiddlePanel"] !== undefined && options["forestPlotSizePlotArea"] === undefined; }; from: "forestPlotRelativeSizeMiddlePanel"; to: "forestPlotSizePlotArea" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeRightPanel"] !== undefined && options["forestPlotSizeRightPanel"] === undefined; }; from: "forestPlotRelativeSizeRightPanel"; to: "forestPlotSizeRightPanel" }
 	}
 
 	Upgrade
@@ -593,14 +658,14 @@ Upgrades
 		fromVersion:	"0.96.4"
 		toVersion:		"0.96.5"
 
-		ChangeRename { from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
-		ChangeRename { from: "forestPlotRelativeSizeEstimates"; to: "forestPlotSizeEstimates" }
-		ChangeRename { from: "forestPlotRelativeSizeText"; to: "forestPlotSizeText" }
-		ChangeRename { from: "forestPlotRelativeSizeAxisLabels"; to: "forestPlotSizeAxisLabels" }
-		ChangeRename { from: "forestPlotRelativeSizeRow"; to: "forestPlotSizeRow" }
-		ChangeRename { from: "forestPlotRelativeSizeLeftPanel"; to: "forestPlotSizeLeftPanel" }
-		ChangeRename { from: "forestPlotRelativeSizeMiddlePanel"; to: "forestPlotSizePlotArea" }
-		ChangeRename { from: "forestPlotRelativeSizeRightPanel"; to: "forestPlotSizeRightPanel" }
+		ChangeRename { condition: function(options) { return options["forestPlotAllignLeftPanel"] !== undefined && options["forestPlotAlignLeftPanel"] === undefined; }; from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeEstimates"] !== undefined && options["forestPlotSizeEstimates"] === undefined; }; from: "forestPlotRelativeSizeEstimates"; to: "forestPlotSizeEstimates" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeText"] !== undefined && options["forestPlotSizeText"] === undefined; }; from: "forestPlotRelativeSizeText"; to: "forestPlotSizeText" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeAxisLabels"] !== undefined && options["forestPlotSizeAxisLabels"] === undefined; }; from: "forestPlotRelativeSizeAxisLabels"; to: "forestPlotSizeAxisLabels" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeRow"] !== undefined && options["forestPlotSizeRow"] === undefined; }; from: "forestPlotRelativeSizeRow"; to: "forestPlotSizeRow" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeLeftPanel"] !== undefined && options["forestPlotSizeLeftPanel"] === undefined; }; from: "forestPlotRelativeSizeLeftPanel"; to: "forestPlotSizeLeftPanel" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeMiddlePanel"] !== undefined && options["forestPlotSizePlotArea"] === undefined; }; from: "forestPlotRelativeSizeMiddlePanel"; to: "forestPlotSizePlotArea" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeRightPanel"] !== undefined && options["forestPlotSizeRightPanel"] === undefined; }; from: "forestPlotRelativeSizeRightPanel"; to: "forestPlotSizeRightPanel" }
 	}
 }
 
