@@ -66,40 +66,11 @@ Form
 			info: qsTr("Variable containing the standard errors corresponding to the effect sizes.")
 		}
 
-		DropDown
+		MA.ClassicalMetaAnalysisMethod
 		{
-			name:			"method"
-			id:				method
-			label:			qsTr("Method")
-			startValue:		"restrictedML"
-			fieldWidth:		125 * preferencesModel.uiScale
-			info: qsTr("Method used for model estimation in the meta-analysis. The available methods depend on the inclusion of heterogeneity model terms.")
-			values:			(function() {
-				if (sectionModel.heterogeneityModelTermsCount == 0) {
-					return [
-						{ label: qsTr("Equal Effects")			, value: "equalEffects"		},
-						{ label: qsTr("Fixed Effects")			, value: "fixedEffects"		},
-						{ label: qsTr("Maximum Likelihood")		, value: "maximumLikelihood"},
-						{ label: qsTr("Restricted ML")			, value: "restrictedML"		},
-						{ label: qsTr("DerSimonian-Laird")		, value: "derSimonianLaird"	},
-						{ label: qsTr("Hedges")					, value: "hedges"			},
-						{ label: qsTr("Hunter-Schmidt")			, value: "hunterSchmidt"	},
-						{ label: qsTr("Hunter-Schmidt (SSC)")	, value: "hunterSchmidtSsc"	},
-						{ label: qsTr("Sidik-Jonkman")			, value: "sidikJonkman"		},
-						{ label: qsTr("Empirical Bayes")		, value: "empiricalBayes"	},
-						{ label: qsTr("Paule-Mandel")			, value: "pauleMandel"		},
-						{ label: qsTr("Paule-Mandel (MU)")		, value: "pauleMandelMu"	},
-						{ label: qsTr("Generalized Q-stat")		, value: "qeneralizedQStat"	},
-						{ label: qsTr("Generalized Q-stat (MU)"), value: "qeneralizedQStatMu"},
-						{ label: qsTr("Unrestricted Weighted Least Squares (UWLS)"), value: "unrestrictedWeightedLeastSquares" },
-					];
-				} else {
-					return [
-						{ label: qsTr("Maximum Likelihood")		, value: "maximumLikelihood"},
-						{ label: qsTr("Restricted ML")			, value: "restrictedML"		},
-						{ label: qsTr("Empirical Bayes")		, value: "empiricalBayes"	}
-					];
-				}})()
+			id: method
+			heterogeneityModelTermsCount: sectionModel.heterogeneityModelTermsCount
+			fieldWidth: 125 * preferencesModel.uiScale
 		}
 
 		DropDown

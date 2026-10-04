@@ -1,173 +1,401 @@
-# Selection-model figures.
+# Selection-model plots.
 #
-# Builds weight-function and estimate plots.
+# Defines selection-function geometry and overall diagnostics. Study-level
+# forest and bubble plots use the classical meta-analysis pipeline.
 
-.smWeightsPlot             <- function(jaspResults, dataset, options, type = "FE") {
+# Weight-function output ----
 
-  if (!is.null(jaspResults[[paste0(type, "_weights")]])) {
+.smModelPlots                           <- function(target, options) {
+
+  if (!options[["weightFunctionPlot"]])
     return()
-  } else {
-    plotWeights <- createJaspPlot(
-      title  = gettextf(
-        "Weight Function (%s)",
-        ifelse(type == "FE", gettext("Fixed Effects"), gettext("Random Effects"))
-      ),
-      width  = 500,
-      height = 400)
-    plotWeights$dependOn(c(.smDependencies, "plotsWeightFunctionRescaleXAxis", ifelse(type == "FE", "plotsWeightFunctionFixedEffectsPlot", "plotsWeightFunctionRandomEffectsPlot")))
-    plotWeights$position <- ifelse(type == "FE", 5, 6)
-    jaspResults[[paste0(type, "_weights")]] <- plotWeights
+
+  fits <- .maExtractFit(target, options)
+  container <- .smExtractWeightFunctionContainer(target, options)
+
+  for (scope in names(fits)) {
+    fit <- fits[[scope]]
+
+    if (inherits(fit, "try-error"))
+      next
+
+    if (options[["subgroup"]] == "") {
+
+      .smWeightsPlot(container, fit, options)
+
+    } else {
+
+      if (is.null(container[["selectionWeightFunctions"]])) {
+        plots <- createJaspContainer(gettext("Weight Function"))
+        plots$dependOn("weightFunctionPlot")
+        plots$position <- 2
+        container[["selectionWeightFunctions"]] <- plots
+      }
+
+      .smWeightsPlot(
+        container[["selectionWeightFunctions"]],
+        fit,
+        options,
+        scope,
+        gettextf("Subgroup: %1$s", attr(fit, "subgroup"))
+      )
+    }
   }
-
-  if (!.smCheckReady(options))
-    return()
-
-
-  # handle errors
-  fit <- jaspResults[["models"]]$object[[type]]
-  if (jaspBase::isTryError(fit)) {
-    errorMessage <- .smSetErrorMessage(fit)
-    if (!is.null(errorMessage))
-      plotWeights$setError(errorMessage)
-    return()
-  }
-
-  # get the weights and steps
-  steps       <- c(0, fit[["steps"]])
-  weightsMean <- c(1, fit[["adj_est"]][  ifelse(type == "FE", 2, 3):nrow(fit[["adj_est"]]),  1])
-  weightsLowerCI  <- c(1, fit[["ci.lb_adj"]][ifelse(type == "FE", 2, 3):nrow(fit[["ci.lb_adj"]]), 1])
-  weightsupperCI  <- c(1, fit[["ci.ub_adj"]][ifelse(type == "FE", 2, 3):nrow(fit[["ci.ub_adj"]]), 1])
-
-  # handle NaN in the estimates
-  if (any(c(is.nan(weightsMean), is.nan(weightsLowerCI), is.nan(weightsupperCI)))) {
-    plotWeights$setError(gettext("The figure could not be created since one of the estimates is not a number."))
-    return()
-  }
-
-  # correct the lower bound
-  weightsLowerCI[weightsLowerCI < 0] <- 0
-
-  # get the ordering for plotting
-  coordOrder <- sort(rep(1:(length(steps)-1),2), decreasing = FALSE)
-  stepsOrder <- c(1, sort(rep(2:(length(steps)-1), 2)), length(steps))
-
-  # axis ticks
-  xTicks    <- trimws(steps, which = "both", whitespace = "0")
-  xTicks[1] <- 0
-  yTicks    <- jaspGraphs::getPrettyAxisBreaks(range(c(weightsMean, weightsLowerCI, weightsupperCI)))
-  xSteps    <- if (options[["plotsWeightFunctionRescaleXAxis"]]) seq(0, 1, length.out = length(steps)) else steps
-
-  # make the plot happen
-  plot <- ggplot2::ggplot() +
-    ggplot2::geom_polygon(
-      ggplot2::aes(
-        x = c(xSteps[stepsOrder], rev(xSteps[stepsOrder])),
-        y = c(weightsLowerCI[coordOrder], rev(weightsupperCI[coordOrder]))
-      ),
-      fill = "grey80") +
-    ggplot2::geom_path(
-      ggplot2::aes(
-        x = xSteps[stepsOrder],
-        y = weightsMean[coordOrder]
-      ),
-      size = 1.25) +
-    ggplot2::scale_x_continuous(
-      gettext("P-value (One-sided)"),
-      breaks = xSteps,
-      labels = xTicks,
-      limits = c(0, 1)) +
-    ggplot2::scale_y_continuous(
-      gettext("Publication Probability"),
-      breaks = yTicks,
-      limits = range(yTicks))+
-    jaspGraphs::geom_rangeframe() +
-    jaspGraphs::themeJaspRaw()
-
-  plotWeights$plotObject <- plot
-
-  return()
 }
 
-.smEstimatesPlot           <- function(jaspResults, dataset, options) {
+.smPrintBiasTest                        <- function(fit) {
 
-  if (!is.null(jaspResults[["plotEstimates"]])) {
-    return()
-  } else {
-    plotEstimates <- createJaspPlot(
-      title  = gettextf(
-        "Mean Model Estimates (%s)",
-        if (options[["measures"]] == "correlation") "\u03C1" else "\u03BC"
-      ),
-      width  = 500,
-      height = 200)
-    plotEstimates$dependOn(c(.smDependencies, "plotsMeanModelEstimatesPlot"))
-    plotEstimates$position <- 7
-    jaspResults[["plotEstimates"]] <- plotEstimates
-  }
+  if (!inherits(fit, "rma.uni.selmodel"))
+    return(gettext("Publication bias test: not available"))
 
-  if (!.smCheckReady(options))
-    return()
+  comparison <- .smPublicationBiasComparison(fit)
 
+  if (!is.finite(comparison$stat))
+    return(gettext("Publication bias test: not available"))
 
-  # handle errors
-  FE <- jaspResults[["models"]]$object[["FE"]]
-  RE <- jaspResults[["models"]]$object[["RE"]]
-
-  if (jaspBase::isTryError(FE)) {
-    errorMessage <- .smSetErrorMessage(FE)
-    if (!is.null(errorMessage))
-      plotEstimates$setError(errorMessage)
-    return()
-  }
-  if (jaspBase::isTryError(RE)) {
-    errorMessage <- .smSetErrorMessage(RE)
-    if (!is.null(errorMessage))
-      plotEstimates$setError(errorMessage)
-    return()
-  }
-
-  # get the estimates
-  estimates <- data.frame(
-    model = c(gettext("Fixed effects"),    gettext("Fixed effects (adjusted)"),    gettext("Random effects"),   gettext("Random effects (adjusted)")),
-    mean  = c(FE[["unadj_est"]][1, 1],     FE[["adj_est"]][1, 1],                  RE[["unadj_est"]][2, 1],     RE[["adj_est"]][2, 1]),
-    lowerCI   = c(FE[["ci.lb_unadj"]][1, 1],   FE[["ci.lb_adj"]][1, 1],                RE[["ci.lb_unadj"]][2, 1],   RE[["ci.lb_adj"]][2, 1]),
-    upperCI   = c(FE[["ci.ub_unadj"]][1, 1],   FE[["ci.ub_adj"]][1, 1],                RE[["ci.ub_unadj"]][2, 1],   RE[["ci.ub_adj"]][2, 1])
+  paste0(
+    gettext("Publication bias"), ": ", .smPrintLikelihoodRatio(comparison),
+    if (is.finite(comparison$pval)) paste0(", ", .maPrintPValue(comparison$pval))
   )
-  estimates <- estimates[4:1,]
+}
 
-  # handle NaN in the estimates
-  if (any(c(is.nan(estimates[,"mean"]), is.nan(estimates[,"lowerCI"]), is.nan(estimates[,"upperCI"]))))
-    plotEstimates$setError(gettext("The figure could not be created since one of the estimates is not a number."))
+.smPlotTheme                            <- function() {
 
-  xTicks <- jaspGraphs::getPrettyAxisBreaks(range(c(0, estimates[,"lowerCI"], estimates[,"upperCI"])))
+  ggplot2::theme(
+    axis.title  = ggplot2::element_text(size = 12),
+    axis.text   = ggplot2::element_text(size = 11),
+    plot.margin = ggplot2::margin(10, 14, 10, 10)
+  )
+}
 
-  # make the plot happen
-  plot <- ggplot2::ggplot() +
-    ggplot2::geom_errorbarh(
-      ggplot2::aes(
-        xmin = estimates[,"lowerCI"],
-        xmax = estimates[,"upperCI"],
-        y    = 1:4
-      ),
-      height = 0.3) +
-    jaspGraphs::geom_point(
-      ggplot2::aes(
-        x = estimates[,"mean"],
-        y = 1:4)) +
-    ggplot2::geom_line(ggplot2::aes(x = c(0,0), y = c(.5, 4.5)), linetype = "dotted") +
-    ggplot2::scale_x_continuous(
-      bquote("Mean Estimate"~.(if (options[["measures"]] == "correlation") bquote(rho) else bquote(mu))),
-      breaks = xTicks,
-      limits = range(xTicks)) +
-    ggplot2::scale_y_continuous(
-      "",
-      breaks = 1:4,
-      labels = estimates[,"model"],
-      limits = c(0.5, 4.5)) +
-    ggplot2::theme(axis.ticks.y = ggplot2::element_blank()) +
-    jaspGraphs::geom_rangeframe(sides = "b") + jaspGraphs::themeJaspRaw()
+.smWeightData                           <- function(fit) {
 
-  plotEstimates$plotObject <- plot
+  if (!inherits(fit, "rma.uni.selmodel"))
+    return(.smWeightFrame(c(0, 1), c(1, 1), matrix(1, nrow = 2, ncol = 2)))
 
-  return()
+  # Truncation is a step on the effect-size scale, rather than the p-value scale.
+  if (fit$type %in% c("trunc", "truncest")) {
+    cutoff  <- if (fit$type == "trunc") fit$steps else fit$delta[2]
+    range   <- range(c(fit$yi, cutoff))
+    padding <- max(diff(range) * .1, .1)
+    if (fit$type == "trunc") {
+      x <- c(range[1] - padding, cutoff, cutoff, range[2] + padding)
+      selected <- if (fit$alternative == "greater") c(TRUE, TRUE, FALSE, FALSE) else c(FALSE, FALSE, TRUE, TRUE)
+      weights <- function(delta) ifelse(selected, delta[1], 1)
+    } else {
+      # Include cutoff uncertainty for estimated truncation.
+      x <- sort(unique(c(seq(range[1] - padding, range[2] + padding, length.out = 501), cutoff)))
+      weights <- function(delta) {
+        selected <- if (fit$alternative == "greater") x <= delta[2] else x >= delta[2]
+        ifelse(selected, delta[1], 1)
+      }
+    }
+
+    return(.smWeightFrame(x, weights(fit$delta), .smWeightBounds(fit, weights)))
+  }
+
+  if (fit$type == "stepfun") {
+    x <- as.vector(rbind(head(c(0, fit$steps), -1), fit$steps))
+
+    weights <- function(delta) rep(delta, each = 2)
+    return(.smWeightFrame(x, weights(fit$delta), .smWeightBounds(fit, weights)))
+  }
+
+  # Use the fitted weight function and its own precision scale. Show the
+  # observed precision extremes when the function depends on precision.
+  cutoffs   <- fit$steps[is.finite(fit$steps) & fit$steps > 0 & fit$steps < 1]
+  x         <- sort(unique(c(seq(.0001, .9999, length.out = 501), cutoffs)))
+  precision <- if (fit$precspec) unique(c(fit$precis["min"], fit$precis["max"])) else 1
+
+  frames <- lapply(precision, function(prec) {
+
+    weights <- function(delta) fit$wi.fun(
+      x, delta, yi = 0, vi = 1, preci = prec,
+      alternative = fit$alternative, steps = fit$steps
+    )
+    y <- weights(fit$delta)
+
+    bounds <- .smWeightBounds(fit, weights)
+
+    .smWeightFrame(
+      x, y, cbind(pmax(0, bounds[, 1]), pmax(0, bounds[, 2])),
+      if (fit$precspec) gettextf("Precision index: %1$.3f", prec) else ""
+    )
+  })
+
+  do.call(rbind, frames)
+}
+
+.smWeightFrame                          <- function(x, y, bounds, precision = "") {
+
+  data.frame(x = x, y = y, lower = bounds[, 1], upper = bounds[, 2], precision = precision)
+}
+
+.smWeightBounds                         <- function(fit, weights) {
+
+  if (all(fit$delta.fix))
+    return(cbind(weights(fit$delta), weights(fit$delta)))
+
+  # Step-function bands use each interval's Wald CI. Single-parameter smooth
+  # functions transform the parameter CI; other functions use joint draws.
+  if (fit$type == "stepfun" || (sum(!fit$delta.fix) == 1 && fit$type != "truncest")) {
+    lower <- weights(ifelse(fit$delta.fix, fit$delta, fit$ci.lb.delta))
+    upper <- weights(ifelse(fit$delta.fix, fit$delta, fit$ci.ub.delta))
+    return(cbind(pmin(lower, upper), pmax(lower, upper)))
+  }
+
+  .smWeightBootstrap(fit, weights)
+}
+
+# Pointwise parametric bands, as in metafor's selection-function plot. Preserve
+# the analysis RNG state so requesting a plot does not change later computations.
+.smWeightBootstrap                      <- function(fit, weights) {
+
+  free <- which(!fit$delta.fix)
+  out  <- matrix(NA_real_, nrow = length(weights(fit$delta)), ncol = 2)
+
+  if (!length(free))
+    return(cbind(weights(fit$delta), weights(fit$delta)))
+
+  covariance <- fit$vd[free, free, drop = FALSE]
+  if (any(!is.finite(covariance)))
+    return(out)
+
+  seed <- if (exists(".Random.seed", envir = .GlobalEnv, inherits = FALSE)) get(".Random.seed", envir = .GlobalEnv) else NULL
+  on.exit({
+    if (is.null(seed)) {
+      rm(".Random.seed", envir = .GlobalEnv)
+    } else {
+      assign(".Random.seed", seed, envir = .GlobalEnv)
+    }
+  })
+  set.seed(1)
+
+  samples <- MASS::mvrnorm(1000, mu = fit$delta[free], Sigma = covariance)
+  samples <- matrix(samples, ncol = length(free))
+  curves  <- vapply(seq_len(nrow(samples)), function(i) {
+    delta <- fit$delta
+    delta[free] <- pmin(fit$delta.max[free], pmax(fit$delta.min[free], samples[i, ]))
+    weights(delta)
+  }, numeric(nrow(out)))
+
+  t(apply(curves, 1, stats::quantile, probs = c(fit$level / 2, 1 - fit$level / 2), na.rm = TRUE))
+}
+
+.smWeightsPlot                          <- function(container, fit, options,
+                                                    key = "weightFunction", title = gettext("Weight Function")) {
+
+  if (!options[["weightFunctionPlot"]] ||
+      !is.null(container[[key]]) ||
+      inherits(fit, "try-error"))
+    return()
+
+  plot          <- createJaspPlot(title = title, width = 500, height = 350)
+  plot$position <- 2
+  plot$dependOn(c(.smDependencies, "weightFunctionPlot"))
+  container[[key]] <- plot
+
+  data <- .smCapture(.smWeightData(fit))
+
+  if (inherits(data, "try-error")) {
+    plot$setError(as.character(data))
+    return()
+  }
+
+  label <- if (!inherits(fit, "rma.uni.selmodel")) {
+    gettext("P-value")
+  } else if (fit$type %in% c("trunc", "truncest")) {
+    gettext("Effect size")
+  } else if (fit$alternative == "two.sided") {
+    gettext("P-value (two-sided)")
+  } else {
+    gettext("P-value (one-sided)")
+  }
+  precisionDependent <- inherits(fit, "rma.uni.selmodel") && fit$precspec
+  data$interval <- if (inherits(fit, "rma.uni.selmodel") && fit$type == "stepfun") {
+    rep(seq_along(fit$delta), each = 2)
+  } else if (inherits(fit, "rma.uni.selmodel") && fit$type == "trunc") {
+    rep(1:2, each = 2)
+  } else {
+    1L
+  }
+
+  plot$plotObject <- ggplot2::ggplot(
+    data,
+    ggplot2::aes(x = x, y = y, group = interaction(precision, interval), linetype = precision)
+  ) +
+    ggplot2::geom_ribbon(ggplot2::aes(ymin = lower, ymax = upper), alpha = .15, colour = NA, na.rm = TRUE) +
+    ggplot2::geom_line(ggplot2::aes(group = precision)) +
+    ggplot2::labs(x = label, y = gettext("Relative selection likelihood"), linetype = NULL) +
+    jaspGraphs::geom_rangeframe(sides = "bl") +
+    jaspGraphs::themeJaspRaw() +
+    .smPlotTheme() +
+    ggplot2::theme(legend.position = if (precisionDependent) "bottom" else "none")
+}
+
+# Overall profile-likelihood diagnostics ----
+
+.smDiagnostics                          <- function(jaspResults, fits, options, specifications) {
+
+  if (!options[["diagnosticsPlotsProfileLikelihood"]] ||
+      is.null(fits) ||
+      !is.null(jaspResults[["selectionDiagnostics"]]))
+    return()
+
+  diagnostics          <- createJaspContainer(gettext("Diagnostics"))
+  diagnostics$position <- 8
+  diagnostics$dependOn(c(
+    .smDependencies, "diagnosticsPlotsProfileLikelihood", "showSelectionModels",
+    "includeFullDatasetInSubgroupAnalysis"
+  ))
+  jaspResults[["selectionDiagnostics"]] <- diagnostics
+
+  scopes   <- .smVisibleScopes(fits, options)
+  modelIds <- .smDisplayedModelIds(scopes)
+
+  # Keep diagnostics in one analysis-level section, grouped by displayed model.
+  for (i in seq_along(specifications)) {
+
+    id <- names(specifications)[i]
+
+    if (!id %in% modelIds)
+      next
+
+    target <- .smModelContainer(diagnostics, id, i, options)
+    modelFits <- .smModelFits(scopes, id)
+
+    for (scope in names(modelFits)) {
+      fit <- modelFits[[scope]]
+
+      if (options[["subgroup"]] == "") {
+        .smProfilePlots(jaspResults, target, fit, id, scope, options)
+      } else {
+        .smProfilePlots(
+          jaspResults,
+          target,
+          fit,
+          id,
+          scope,
+          options,
+          scope,
+          gettextf("Subgroup: %1$s", scopes[[scope]]$label)
+        )
+      }
+    }
+  }
+
+  if (!length(modelIds)) {
+    message <- createJaspHtml(
+      text = gettext("No fitted model is available for profile likelihood diagnostics.")
+    )
+    diagnostics[["unavailable"]] <- message
+  }
+}
+
+.smComputeProfiles                      <- function(fit) {
+
+  parameters <- if (.smHasEstimatedHeterogeneity(fit)) {
+    list(tau2 = list(tau2 = 1))
+  } else {
+    list()
+  }
+
+  if (inherits(fit, "rma.uni.selmodel")) {
+    for (i in which(!fit$delta.fix))
+      parameters[[paste0("delta", i)]] <- list(delta = i)
+  }
+
+  out <- list()
+
+  for (parameter in names(parameters)) {
+    args <- c(
+      list(fitted = fit, plot = FALSE, progbar = FALSE),
+      parameters[[parameter]]
+    )
+
+    # The unadjusted rma.uni method profiles heterogeneity without tau2 = 1.
+    if (!inherits(fit, "rma.uni.selmodel"))
+      args$tau2 <- NULL
+
+    out[[parameter]] <- .smCapture(do.call(stats::profile, args))
+  }
+
+  out
+}
+
+.smProfilePlots                         <- function(jaspResults, container, fit, id, scope, options,
+                                                    key = "selectionProfiles", title = gettext("Profile Likelihood")) {
+
+  if (!options[["diagnosticsPlotsProfileLikelihood"]] || !is.null(container[[key]]))
+    return()
+
+  profiles          <- createJaspContainer(title)
+  profiles$position <- 8
+  profiles$dependOn(c(.smDependencies, "diagnosticsPlotsProfileLikelihood"))
+  container[[key]] <- profiles
+
+  if (inherits(fit, "try-error")) {
+    output                    <- createJaspPlot(title = title)
+    profiles[["unavailable"]] <- output
+    output$setError(gettextf("The model could not be fitted: %1$s", as.character(fit)))
+    return()
+  }
+
+  if (inherits(fit, "rma.uni.selmodel") && fit$decreasing) {
+    output                    <- createJaspPlot(title = title)
+    profiles[["unavailable"]] <- output
+    output$setError(gettext("Profile likelihood diagnostics are not available for ordinal selection models."))
+    return()
+  }
+
+  profileResults <- .smCachedResult(jaspResults, id, scope, "profiles", function() .smComputeProfiles(fit))
+
+  if (!length(profileResults)) {
+    profiles[["unavailable"]] <- createJaspHtml(
+      text = gettext("There are no free heterogeneity or selection parameters to profile.")
+    )
+    return()
+  }
+
+  for (parameter in names(profileResults)) {
+
+    title <- if (parameter == "tau2") {
+      "\U1D70F\u00b2"
+    } else {
+      gettextf("Selection Parameter %1$i", as.integer(sub("delta", "", parameter)))
+    }
+    output                <- createJaspPlot(title = title, width = 400, height = 320)
+    output$position       <- 2 * match(parameter, names(profileResults))
+    profiles[[parameter]] <- output
+
+    result <- .smMakeProfilePlot(profileResults[[parameter]], parameter)
+
+    if (inherits(result, "try-error")) {
+      output$setError(as.character(result))
+    } else {
+      output$plotObject <- result
+    }
+  }
+}
+
+.smMakeProfilePlot                      <- function(profile, parameter) {
+
+  if (inherits(profile, "try-error"))
+    return(profile)
+
+  finite <- is.finite(profile[[1]]) & is.finite(profile$ll)
+
+  if (sum(finite) < 2)
+    return(.smError(gettext("Fewer than two finite profile likelihood values are available.")))
+
+  profile[[1]] <- profile[[1]][finite]
+  profile$ll   <- profile$ll[finite]
+  profile$xlab <- if (parameter == "tau2") "\U1D70F\u00b2" else paste0("\u03b4", sub("delta", "", parameter))
+
+  plot <- .smCapture(.maMakeProfileLikelihoodPlot(profile))
+
+  if (inherits(plot, "try-error"))
+    return(plot)
+
+  plot + .smPlotTheme()
 }

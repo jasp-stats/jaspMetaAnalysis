@@ -37,6 +37,11 @@
 }
 
 .maPrintQTest                         <- function(fit, type = NULL) {
+  if (inherits(fit, "rma.uni.selmodel")) {
+    if (!.maIsFiniteScalar(fit$LRT.tau2))
+      return(gettext("Heterogeneity test: not available"))
+    return(sprintf("%s: LR(1) = %.2f, %s", gettext("Heterogeneity"), fit$LRT.tau2, .maPrintPValue(fit$LRTp.tau2)))
+  }
 
   # rma.glmm uses QE.Wld/QE.LRT instead of QE/QEp
   if (inherits(fit, "rma.glmm")) {

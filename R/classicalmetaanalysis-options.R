@@ -2,8 +2,30 @@
 #
 # Contains analysis predicates, option extraction, validation, and display-name mapping.
 
+.maIsSelection                    <- function(options) {
+
+  identical(options[["analysis"]], "selectionModels")
+}
+
 .maIsGLMM                         <- function(options) {
   options[["analysis"]] == "generalizedMetaAnalysis"
+}
+
+.maModelDependencies              <- function(options) {
+
+  if (.maIsSelection(options))
+    return(.smDependencies)
+
+  if (.maIsClassical(options))
+    return(.maDependencies)
+
+  return(.robmaDependencies)
+}
+
+.maHasR2                          <- function(options) {
+
+  !.maIsUnrestrictedWeightedLeastSquares(options) && .maIsMetaregressionEffectSize(options) &&
+    !.maIsMultilevelMultivariate(options) && !.maIsGLMM(options) && !.maIsSelection(options)
 }
 
 .maIsMetaregression               <- function(options) {
@@ -15,6 +37,8 @@
 }
 
 .maIsMetaregressionHeterogeneity  <- function(options) {
+  if (.maIsSelection(options))
+    return(FALSE)
   return(!.maIsUnrestrictedWeightedLeastSquares(options) && !is.null(options[["heterogeneityModelTerms"]]) && length(options[["heterogeneityModelTerms"]]) > 0)
 }
 
@@ -45,10 +69,14 @@
 }
 
 .maIsPermutation                  <- function(options) {
+  if (.maIsSelection(options))
+    return(FALSE)
   return(.maIsClassical(options, notMHP = TRUE) && !.maIsClustered(options) && options[["permutationTest"]])
 }
 
 .maCheckIsPossibleOptions         <- function(options) {
+  if (.maIsSelection(options))
+    return(NULL)
 
   if (length(options[["heterogeneityModelTerms"]]) > 0 && options[["clustering"]] != "") {
     return(gettext("Clustering is not supported when specifying a heterogeneity meta-regression model."))
@@ -102,6 +130,8 @@
 }
 
 .maGetFixedEffectTestOptions                    <- function(options) {
+  if (.maIsSelection(options))
+    return("z")
   if (.maIsUnrestrictedWeightedLeastSquares(options))
     return("knha")
 

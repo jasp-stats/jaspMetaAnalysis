@@ -2,14 +2,39 @@
 #
 # Builds terms, coefficient, correlation, and associated warning output.
 
-.maExtractMetaregressionContainer    <- function(jaspResults) {
+.maMetaregressionTables                  <- function(jaspResults, options) {
+
+  if (!.maIsMetaregression(options))
+    return()
+
+  parameters <- c("effectSize", if (!.maIsSelection(options)) "heterogeneity")
+
+  for (parameter in parameters) {
+    if (options[["metaregressionTermTests"]])
+      .maTermsTable(jaspResults, options, parameter)
+
+    if (options[["metaregressionCoefficientEstimates"]])
+      .maCoefficientEstimatesTable(jaspResults, options, parameter)
+
+    if (options[["metaregressionCoefficientCorrelationMatrix"]])
+      .maCoefficientCorrelationMatrixTable(jaspResults, options, parameter)
+  }
+}
+
+.maMetaregressionTablePosition           <- function(parameter, table) {
+
+  switch(table, terms = 1L, coefficients = 3L, correlation = 5L) +
+    as.integer(parameter == "heterogeneity")
+}
+
+.maExtractMetaregressionContainer    <- function(jaspResults, options) {
 
   if (!is.null(jaspResults[["metaregressionContainer"]]))
     return(jaspResults[["metaregressionContainer"]])
 
   # create the output container
   metaregressionContainer <- createJaspContainer(gettext("Meta-Regression Summary"))
-  metaregressionContainer$dependOn(c(.maDependencies))
+  metaregressionContainer$dependOn(.maModelDependencies(options))
   metaregressionContainer$position <- 3
   jaspResults[["metaregressionContainer"]] <- metaregressionContainer
 
@@ -18,7 +43,7 @@
 
 .maTermsTable                            <- function(jaspResults, options, parameter = "effectSize") {
 
-  metaregressionContainer <- .maExtractMetaregressionContainer(jaspResults)
+  metaregressionContainer <- .maExtractMetaregressionContainer(jaspResults, options)
 
   if (!is.null(metaregressionContainer[[paste0(parameter, "TermsTable")]]))
     return()
@@ -33,11 +58,7 @@
     effectSize    = gettext("Effect Size Meta-Regression Terms Tests"),
     heterogeneity = gettext("Heterogeneity Meta-Regression Terms Tests")
   ))
-  termsTable$position <- switch(
-    parameter,
-    effectSize    = 1,
-    heterogeneity = 2
-  )
+  termsTable$position <- .maMetaregressionTablePosition(parameter, "terms")
   termsTable$dependOn(c("metaregressionTermTests", "includeFullDatasetInSubgroupAnalysis"))
   metaregressionContainer[[paste0(parameter, "TermsTable")]] <- termsTable
 
@@ -84,7 +105,7 @@
 
 .maCoefficientEstimatesTable             <- function(jaspResults, options, parameter = "effectSize") {
 
-  metaregressionContainer <- .maExtractMetaregressionContainer(jaspResults)
+  metaregressionContainer <- .maExtractMetaregressionContainer(jaspResults, options)
 
   if (!is.null(metaregressionContainer[[paste0(parameter, "CoefficientTable")]]))
     return()
@@ -99,11 +120,7 @@
     effectSize    = gettext("Effect Size Meta-Regression Coefficients"),
     heterogeneity = gettext("Heterogeneity Meta-Regression Coefficients")
   ))
-  coefficientsTable$position <- switch(
-    parameter,
-    effectSize    = 3,
-    heterogeneity = 4
-  )
+  coefficientsTable$position <- .maMetaregressionTablePosition(parameter, "coefficients")
   coefficientsTable$dependOn(c("metaregressionCoefficientEstimates", "confidenceIntervals", "confidenceIntervalsLevel", "standardErrors", "includeFullDatasetInSubgroupAnalysis"))
   metaregressionContainer[[paste0(parameter, "CoefficientTable")]] <- coefficientsTable
 
@@ -145,7 +162,7 @@
 
 .maCoefficientCorrelationMatrixTable     <- function(jaspResults, options, parameter = "effectSize") {
 
-  metaregressionContainer <- .maExtractMetaregressionContainer(jaspResults)
+  metaregressionContainer <- .maExtractMetaregressionContainer(jaspResults, options)
 
   if (!is.null(metaregressionContainer[[paste0(parameter, "CorrelationTable")]]))
     return()
@@ -165,11 +182,7 @@
       heterogeneity = gettext("Heterogeneity Meta-Regression Correlation Matrix")
     )
     correlationMatrixTable$dependOn(c("metaregressionCoefficientCorrelationMatrix", "includeFullDatasetInSubgroupAnalysis"))
-    correlationMatrixTable$position <- switch(
-      parameter,
-      effectSize    = 5,
-      heterogeneity = 6
-    )
+    correlationMatrixTable$position <- .maMetaregressionTablePosition(parameter, "correlation")
     metaregressionContainer[[paste0(parameter, "CorrelationTable")]] <- correlationMatrixTable
     return()
 
@@ -181,12 +194,8 @@
       effectSize    = gettext("Effect Size Meta-Regression Correlation Matrix"),
       heterogeneity = gettext("Heterogeneity Meta-Regression Correlation Matrix")
     ))
-    correlationMatrixTable$dependOn(c(.maDependencies, "metaregressionCoefficientCorrelationMatrix", "includeFullDatasetInSubgroupAnalysis"))
-    correlationMatrixTable$position <- switch(
-      parameter,
-      effectSize    = 5,
-      heterogeneity = 6
-    )
+    correlationMatrixTable$dependOn(c(.maModelDependencies(options), "metaregressionCoefficientCorrelationMatrix", "includeFullDatasetInSubgroupAnalysis"))
+    correlationMatrixTable$position <- .maMetaregressionTablePosition(parameter, "correlation")
     metaregressionContainer[[paste0(parameter, "CorrelationTable")]] <- correlationMatrixTable
 
     for (i in seq_along(fit)) {

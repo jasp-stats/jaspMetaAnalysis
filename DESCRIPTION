@@ -26,7 +26,6 @@ Imports:
   stringr,
   tibble,
   tidyr,
-  weightr,
   BayesTools,
   RoBMA (>= 3.5.0),
   metamisc (>= 0.2.5),
