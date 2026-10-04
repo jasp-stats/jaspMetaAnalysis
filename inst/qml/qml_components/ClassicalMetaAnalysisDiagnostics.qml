@@ -27,15 +27,17 @@ Section
 	property int heterogeneityModelTermsCount: 0
 	readonly property bool locationScaleModel: analysisType === "metaAnalysis" && heterogeneityModelTermsCount > 0
 	readonly property bool generalizedMetaAnalysis: analysisType === "generalizedMetaAnalysis"
+	readonly property bool selectionModels: analysisType === "selectionModels"
 	columns:						1
-	info: generalizedMetaAnalysis ? qsTr("Options for assessing multicollinearity among predictors.") : qsTr("Options for evaluating the influence of individual studies and assessing model diagnostics, including variance inflation factors, casewise diagnostics, and diagnostic plots.")
+	info: selectionModels ? qsTr("Profile likelihood diagnostics for free heterogeneity and selection parameters.") : generalizedMetaAnalysis ? qsTr("Options for assessing multicollinearity among predictors.") : qsTr("Options for evaluating the influence of individual studies and assessing model diagnostics, including variance inflation factors, casewise diagnostics, and diagnostic plots.")
 
 	Group
 	{
-		columns:	2
+		columns:	selectionModels ? 1 : 2
 
 		Group
 		{
+			visible: !selectionModels
 			CheckBox
 			{
 				name:		"diagnosticsVarianceInflationFactor"
@@ -108,9 +110,9 @@ Section
 			{
 				name:		"diagnosticsPlotsProfileLikelihood"
 				text:		qsTr("Profile likelihood")
-				visible:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis"
-				enabled:	(analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis") && !locationScaleModel
-				info: qsTr("Include a profile likelihood plot for the heterogeneity parameter (τ²).")
+				visible:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || selectionModels
+				enabled:	(analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || selectionModels) && !locationScaleModel
+				info: selectionModels ? qsTr("Profile free heterogeneity and selection parameters. Unavailable for ordinal models.") : qsTr("Include a profile likelihood plot for the heterogeneity parameter (τ²).")
 			}
 
 			CheckBox
@@ -126,7 +128,7 @@ Section
 			{
 				name:		"diagnosticsResidualFunnel"
 				text:		qsTr("Residual funnel")
-				visible:	analysisType !== "generalizedMetaAnalysis"
+				visible:	analysisType !== "generalizedMetaAnalysis" && !selectionModels
 				info: qsTr("Include a residual funnel plot. Note that residual funnel plot is always based on the non-clustered model.")
 			}
 		}

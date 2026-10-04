@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' data-engine-version='2.0' width='720.00pt' height='576.00pt' viewBox='0 0 720.00 576.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA='>
+    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<polygon points='360.10,110.19 399.85,100.48 439.61,110.19 399.85,119.90 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='344.01,133.50 455.69,133.50 455.69,145.15 344.01,145.15 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='340.01,168.46 376.97,158.75 413.92,168.46 376.97,178.17 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='323.09,191.77 430.85,191.77 430.85,203.42 323.09,203.42 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='361.25,459.81 385.82,450.10 410.39,459.81 385.82,469.52 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='344.65,226.73 394.30,217.02 443.94,226.73 394.30,236.44 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='339.55,483.12 432.09,483.12 432.09,494.77 339.55,494.77 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='331.04,250.04 457.56,250.04 457.56,261.69 331.04,261.69 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<text x='220.17' y='55.83' text-anchor='end' style='font-size: 11.38px; font-weight: bold; font-family: sans;' textLength='134.76px' lengthAdjust='spacingAndGlyphs'>Estimated Marginal Means</text>
+<text x='220.17' y='84.97' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='193.30px' lengthAdjust='spacingAndGlyphs'>jaspColumn3: Qₘ(2) = 0.95, p = 0.623</text>
+<text x='220.17' y='114.10' text-anchor='end' style='font-size: 11.38px; font-style: italic; font-family: sans;' textLength='44.29px' lengthAdjust='spacingAndGlyphs'>alternate</text>
+<text x='220.17' y='143.24' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='98.72px' lengthAdjust='spacingAndGlyphs'>z = -3.54, p &lt; 0.001</text>
+<text x='220.17' y='172.37' text-anchor='end' style='font-size: 11.38px; font-style: italic; font-family: sans;' textLength='38.60px' lengthAdjust='spacingAndGlyphs'>random</text>
+<text x='220.17' y='201.51' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='98.72px' lengthAdjust='spacingAndGlyphs'>z = -5.03, p &lt; 0.001</text>
+<text x='220.17' y='230.64' text-anchor='end' style='font-size: 11.38px; font-style: italic; font-family: sans;' textLength='53.78px' lengthAdjust='spacingAndGlyphs'>systematic</text>
+<text x='220.17' y='259.78' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='98.72px' lengthAdjust='spacingAndGlyphs'>z = -3.06, p = 0.002</text>
+<text x='220.17' y='318.05' text-anchor='end' style='font-size: 11.38px; font-weight: bold; font-family: sans;' textLength='91.10px' lengthAdjust='spacingAndGlyphs'>Model Information</text>
+<text x='220.17' y='347.18' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='194.89px' lengthAdjust='spacingAndGlyphs'>Heterogeneity: LR(1) = 0.00, p = 1.000</text>
+<text x='220.17' y='376.32' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='46.82px' lengthAdjust='spacingAndGlyphs'>𝜏  = 0.16</text>
+<text x='220.17' y='405.45' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='190.14px' lengthAdjust='spacingAndGlyphs'>Moderation: Qₘ(3) = 35.63, p &lt; 0.001</text>
+<text x='220.17' y='434.59' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='203.75px' lengthAdjust='spacingAndGlyphs'>Publication bias: LR(1) = 0.35, p = 0.552</text>
+<text x='220.17' y='463.72' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='66.44px' lengthAdjust='spacingAndGlyphs'>Pooled effect</text>
+<text x='220.17' y='492.86' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='98.72px' lengthAdjust='spacingAndGlyphs'>z = -6.85, p &lt; 0.001</text>
+<text x='703.89' y='114.10' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='93.63px' lengthAdjust='spacingAndGlyphs'>-0.57 [-0.89, -0.26]</text>
+<text x='703.89' y='143.24' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='78.45px' lengthAdjust='spacingAndGlyphs'>PI [-1.02, -0.13]</text>
+<text x='703.89' y='172.37' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='93.63px' lengthAdjust='spacingAndGlyphs'>-0.75 [-1.05, -0.46]</text>
+<text x='703.89' y='201.51' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='78.45px' lengthAdjust='spacingAndGlyphs'>PI [-1.18, -0.33]</text>
+<text x='703.89' y='230.64' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='93.63px' lengthAdjust='spacingAndGlyphs'>-0.62 [-1.01, -0.22]</text>
+<text x='703.89' y='259.78' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='78.45px' lengthAdjust='spacingAndGlyphs'>PI [-1.12, -0.11]</text>
+<text x='703.89' y='463.72' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='93.63px' lengthAdjust='spacingAndGlyphs'>-0.68 [-0.88, -0.49]</text>
+<text x='703.89' y='492.86' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='78.45px' lengthAdjust='spacingAndGlyphs'>PI [-1.05, -0.32]</text>
+<line x1='220.17' y1='534.10' x2='597.54' y2='534.10' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='220.17' y1='534.10' x2='220.17' y2='537.60' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='283.06' y1='534.10' x2='283.06' y2='537.60' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='345.96' y1='534.10' x2='345.96' y2='537.60' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='408.85' y1='534.10' x2='408.85' y2='537.60' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='471.75' y1='534.10' x2='471.75' y2='537.60' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='534.64' y1='534.10' x2='534.64' y2='537.60' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='597.54' y1='534.10' x2='597.54' y2='537.60' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<text x='220.17' y='551.26' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='19.61px' lengthAdjust='spacingAndGlyphs'>-2.0</text>
+<text x='283.06' y='551.26' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='19.61px' lengthAdjust='spacingAndGlyphs'>-1.5</text>
+<text x='345.96' y='551.26' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='19.61px' lengthAdjust='spacingAndGlyphs'>-1.0</text>
+<text x='408.85' y='551.26' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='19.61px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
+<text x='471.75' y='551.26' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='15.82px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='534.64' y='551.26' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='15.82px' lengthAdjust='spacingAndGlyphs'>0.5</text>
+<text x='597.54' y='551.26' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='15.82px' lengthAdjust='spacingAndGlyphs'>1.0</text>
+<text x='408.85' y='569.61' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='54.41px' lengthAdjust='spacingAndGlyphs'>Effect Size</text>
+<text x='5.48' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='177.57px' lengthAdjust='spacingAndGlyphs'>analysis-2_figure-2_forest-plot</text>
+</g>
+</svg>

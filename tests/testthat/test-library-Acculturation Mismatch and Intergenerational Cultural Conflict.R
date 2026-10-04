@@ -63,29 +63,24 @@ test_that("SelectionModels (analysis 3) results match", {
   set.seed(1)
   results <- jaspTools::runAnalysis("SelectionModels", encoded$dataset, encoded$options, encodedDataset = TRUE)
 
-  table <- results[["results"]][["fitTests"]][["collection"]][["fitTests_biasTest"]][["data"]]
+  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(1, 0.0871956871948914, 2.92539862891996, "Assuming homogeneity",
-     1, 0.0779480017861305, 3.1071760337503, "Assuming heterogeneity"
-    ))
+    list(0.1697119, -0.04982383, -0.2275482, "Pooled effect", 0.373604,
+     0.5185411, 0.171845505608945, 0.0960069367192093, "", "𝜏", 0.366425739000944,
+     "", 0.0295308777979941, 0.00921733189820625, "", "𝜏<unicode>",
+     0.134267822202388, ""))
 
-  table <- results[["results"]][["fitTests"]][["collection"]][["fitTests_heterogeneityTest"]][["data"]]
+  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_testsTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(17, 5.18834758470277e-09, 75.4999011503259))
+    list(2.21614422060384e-08, "LR(1) = 31.30", "Heterogeneity", 0.128964119019704,
+     "z = 1.52", "Pooled effect", 0.538968465061593, "LR(2) = 1.24",
+     "Publication bias"))
 
-  table <- results[["results"]][["inferenceFixedEffectsMeanEstimatesTable"]][["collection"]][["inferenceFixedEffectsMeanEstimatesTable_meanFE"]][["data"]]
+  table <- results[["results"]][["weightFunctionSummary"]][["collection"]][["weightFunctionSummary_selectionParameters"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(0.207801809051088, 0.172749992783511, 2.67046218315371e-29, 0.0176934238092525,
-     11.2374291313837, "Unadjusted", 0.242071241082355, 0.186709301877958,
-     0.141245590530067, 3.76216117286539e-15, 0.0229186729664062,
-     7.86260827697221, "Adjusted", 0.231004878574876))
-
-  table <- results[["results"]][["inferenceRandomEffectsMeanEstimatesTable"]][["collection"]][["inferenceRandomEffectsMeanEstimatesTable_meanRE"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(0.249828986368464, 0.172357164320453, 1.12828330201181e-09, 0.0384616644696701,
-     6.09011681436316, "Unadjusted", 0.322789379075183, 0.158935800368333,
-     -0.00324200847584841, 0.0546975000934211, 0.0806346193688665,
-     1.9212714056052, "Adjusted", 0.309263371437758))
+    list(1, "", "[0, 0.025)", "", "", 0.435511231401042, 0, "[0.025, 0.5)",
+     0.3562708222836, 1.13378921181937, 0.18796847999249, 0, "[0.5, 1)",
+     0.343299350813174, 0.860822843502293))
 
 })
 

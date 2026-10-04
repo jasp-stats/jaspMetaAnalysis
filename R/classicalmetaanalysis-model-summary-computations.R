@@ -163,6 +163,8 @@
 # Pooled heterogeneity ----
 
 .maComputePooledHeterogeneity      <- function(fit, options) {
+  if (inherits(fit, "rma.uni.selmodel"))
+    return(.smHeterogeneity(fit, options))
 
   if (fit[["tau2.fix"]]) {
 
@@ -417,6 +419,21 @@
 # Table rows and fit measures ----
 
 .maRowHeterogeneityTest               <- function(fit, options) {
+  if (.maIsSelection(options) && inherits(fit, "rma.uni.selmodel")) {
+
+    # selection models only test heterogeneity when tau2 is estimated
+    if (!.smHasEstimatedHeterogeneity(fit))
+      return(NULL)
+
+    row <- data.frame(
+      subgroup = attr(fit, "subgroup"),
+      test     = if (.maIsMetaregression(options)) gettext("Residual heterogeneity") else gettext("Heterogeneity"),
+      stat     = if (.maIsFiniteScalar(fit$LRT.tau2)) sprintf("LR(1) = %.2f", fit$LRT.tau2) else NA_character_,
+      pval     = fit$LRTp.tau2
+    )
+
+    return(row)
+  }
 
   # handle missing subfits
   if (jaspBase::isTryError(fit) || (!is.null(fit[["QE"]]) && is.na(fit[["QE"]]))) {
@@ -455,6 +472,15 @@
       test     = gettext("Pooled effect"),
       stat     = gettext("The pooled effect size could not be calculated.")
     ))
+
+  if (!.maIsFiniteScalar(predictedEffect[["stat"]][1])) {
+    return(data.frame(
+      subgroup = attr(fit, "subgroup"),
+      test     = gettext("Pooled effect"),
+      stat     = NA_character_,
+      pval     = NA_real_
+    ))
+  }
 
   row <- data.frame(
     subgroup = attr(fit, "subgroup"),
@@ -658,8 +684,8 @@
   # pooled effect size
   fitStats <- fit[["fit.stats"]]
 
-  # GLMM always uses ML; drop the REML column
-  if (inherits(fit, "rma.glmm") && "REML" %in% colnames(fitStats))
+  # GLMM and selection models only supply ML fit statistics.
+  if (inherits(fit, c("rma.glmm", "rma.uni.selmodel")) && "REML" %in% colnames(fitStats))
     fitStats <- fitStats[, "ML", drop = FALSE]
 
   if (.maIsUnrestrictedWeightedLeastSquares(options))
@@ -672,8 +698,7 @@
     data.frame(t(fitStats))
   )
 
-  if (!.maIsUnrestrictedWeightedLeastSquares(options) &&
-      .maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options) && !.maIsGLMM(options))
+  if (.maHasR2(options))
     row$R2 <- fit[["R2"]]
 
   return(row)

@@ -1,250 +1,147 @@
-//
-// Copyright (C) 2013-2018 University of Amsterdam
-//
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Affero General Public License as
-// published by the Free Software Foundation, either version 3 of the
-// License, or (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Affero General Public License for more details.
-//
-// You should have received a copy of the GNU Affero General Public
-// License along with this program.  If not, see
-// <http://www.gnu.org/licenses/>.
-//
 import QtQuick
 import QtQuick.Layouts
 import JASP.Controls
 import JASP
+import "qml_components" as MA
 
 Form
 {
-
+	info: qsTr("Fit publication-bias selection models with metafor, including moderators and comparisons between weight functions. All candidate models use the same observations within each subgroup.")
 	VariablesForm
 	{
-		preferredHeight: 200 * preferencesModel.uiScale
-
-		AvailableVariablesList
-		{
-			name: "allVariables"
-		}
-
+		preferredHeight: 550 * preferencesModel.uiScale
+		AvailableVariablesList { name: "allVariables" }
 		AssignedVariablesList
 		{
-			name:			"effectSize"
-			title:			if (measures_correlation.checked) {
-				qsTr("Correlation")
-			} else {
-				qsTr("Effect Size")
-			}
-			singleVariable:	true
-			allowedColumns:	["scale"]
-		}
-
-		AssignedVariablesList
-		{
-			name:			"effectSizeSe"
-			title:			qsTr("Effect Size Standard Error")
-			singleVariable:	true
-			allowedColumns:	["scale"]
-			visible:		active
-			
-			property bool active:   measures_general.checked
-			onActiveChanged: if (!active && count > 0) itemDoubleClicked(0);
-		}
-
-		AssignedVariablesList
-		{
-			name: 			"sampleSize"
-			title: 			qsTr("N")
+			name: "effectSize"
+			id: effectSize
+			title: qsTr("Effect Size")
 			singleVariable: true
 			allowedColumns: ["scale"]
-			visible:		active
-			
-			property bool active:   measures_correlation.checked
-			onActiveChanged: if (!active && count > 0) itemDoubleClicked(0);
+			info: qsTr("Observed effect sizes, on the scale used to fit the model.")
 		}
-
 		AssignedVariablesList
 		{
-			name:			"pValue"
-			title:			qsTr("P-value (one-sided)")
-			singleVariable:	true
-			allowedColumns:	["scale"]
+			name: "effectSizeStandardError"
+			id: effectSizeStandardError
+			title: qsTr("Effect Size Standard Error")
+			singleVariable: true
+			allowedColumns: ["scale"]
+			info: qsTr("Standard errors corresponding to the effect sizes.")
 		}
-	}
-
-	RadioButtonGroup
-	{
-		name:					"measures"
-		title:					qsTr("Measure")
-
-		RadioButton
+		MA.ClassicalMetaAnalysisMethod
 		{
-			label: qsTr("Effect sizes & SE")
-			value: "general"
-			id: 	measures_general
-			checked:true
+			id: method
+			analysisType: "selectionModels"
 		}
-
-		RadioButton
+		AssignedVariablesList
 		{
-			label: qsTr("Correlations & N")
-			value: "correlation"
-			id: 	measures_correlation
+			name: "predictors"
+			id: predictors
+			title: qsTr("Predictors")
+			allowedColumns: ["nominal", "scale"]
+			allowTypeChange: true
+			info: qsTr("Continuous and categorical moderators. Specify interactions and the intercept in Model.")
 		}
-	}
-
-	Section
-	{
-		title: qsTr("Model")
-
-		TextField
+		AssignedVariablesList
 		{
-			name:		"modelPValueCutoffs"
-			text:		qsTr("P-value cutoffs")
-			value:		"(.05, .10)"
-			fieldWidth:	150
+			name: "studyLabels"
+			title: qsTr("Study Labels")
+			singleVariable: true
+			allowedColumns: ["nominal"]
+			info: qsTr("Labels for studies in plots. Missing labels do not exclude observations from fitting.")
 		}
-
-		CheckBox
+		AssignedVariablesList
 		{
-			name:		"modelTwoSidedSelection"
-			text:		qsTr("Two-sided selection")
-			checked:	true
+			name: "subgroup"
+			id: subgroup
+			title: qsTr("Subgroup")
+			singleVariable: true
+			allowedColumns: ["nominal"]
+			info: qsTr("Fit each candidate separately within each subgroup. Best AIC/BIC is determined separately for each subgroup.")
 		}
-
-		CheckBox
+		AssignedVariablesList
 		{
-			name:	"modelPValueFrequencyTable"
-			text:	qsTr("P-value frequency table")
+			name: "pValue"
+			title: qsTr("P-Value")
+			singleVariable: true
+			allowedColumns: ["scale"]
+			info: qsTr("Optional selection p-values, greater than 0 and at most 1. Use p-values matching the sidedness of each selection function. If unassigned, p-values are calculated from effect sizes and standard errors.")
 		}
-		
-		CheckBox
+		AssignedVariablesList
 		{
-			name:		"modelAutomaticallyJoinPValueIntervals"
-			text:		qsTr("Automatically join p-value intervals")
-			checked:	true
+			id: noSelection
+			name: "noSelection"
+			title: qsTr("No Selection")
+			singleVariable: true
+			allowedColumns: ["nominal"]
+			allowTypeChange: true
+			info: qsTr("Optional factor identifying studies unaffected by selection. Choose the unaffected level below; selection applies to all other levels. Both remain in the analysis.")
 		}
-
-		RadioButtonGroup
-		{
-			columns:	2
-			name:		"modelExpectedDirectionOfEffectSizes"
-			title:		qsTr("Expected direction of effect sizes")
-
-			RadioButton
-			{
-				value:		"positive"
-				label:		qsTr("Positive")
-				checked: 	true
-			}
-
-			RadioButton
-			{
-				value:		"negative"
-				label:		qsTr("Negative")
-			}
-
-		}
-
 		DropDown
 		{
-			visible:	measures_correlation.checked
-			label:		qsTr("Transform correlations to")
-			name:		"transformCorrelationsTo"
-			values:
-			[
-				{ label: qsTr("Cohen's d"),		value: "cohensD"},
-				{ label: qsTr("Fisher's z"),	value: "fishersZ"}
-			]
+			name: "noSelectionLevel"
+			label: qsTr("Unaffected Level")
+			enabled: noSelection.count > 0
+			source: [{ name: "noSelection", use: "levels" }]
+			info: qsTr("Studies at this level are unaffected by selection. Selection applies to all other levels of the assigned factor.")
 		}
 	}
-
-	Section
+	Group
 	{
-		title: qsTr("Inference")
-
-		Group
+		DropDown
 		{
-			title: qsTr("Fixed Effects")
-			
-			CheckBox
-			{
-				name:	"inferenceFixedEffectsMeanEstimatesTable"
-				text:	qsTr("Mean estimates table")
-				checked: true
-			}
-
-			CheckBox
-			{
-				name:	"inferenceFixedEffectsEstimatedWeightsTable"
-				text:	qsTr("Estimated weights table")
-			}
-		
+			name: "publicationBiasAdjustment"
+			id: publicationBiasAdjustment
+			label: qsTr("Publication bias adjustment")
+			startValue: "4PSM"
+			values: [ { label: "4PSM", value: "4PSM" }, { label: "3PSM", value: "3PSM" }, { label: qsTr("Custom"), value: "custom" } ]
+			info: qsTr("4PSM uses one-sided p-value cutoffs .025 and .50; 3PSM uses .025. Custom permits multiple weight functions.")
 		}
-		
-		Group
+		DropDown
 		{
-			title: qsTr("Random Effects")
-		
-			CheckBox
-			{
-				name:	"inferenceRandomEffectsMeanEstimatesTable"
-				text:	qsTr("Mean estimates table")
-				checked: true
-			}
-
-			CheckBox
-			{
-				name:	"inferenceRandomEffectsEstimatedHeterogeneityTable"
-				text:	qsTr("Estimated heterogeneity table")
-			}
-
-			CheckBox
-			{
-				name:	"inferenceRandomEffectsEstimatedWeightsTable"
-				text:	qsTr("Estimated weights table")
-			}
-	
+			name: "modelExpectedDirectionOfTheEffect"
+			label: qsTr("Expected direction of the effect")
+			startValue: "detect"
+			values: [ { label: qsTr("Detect"), value: "detect" }, { label: qsTr("Positive"), value: "positive" }, { label: qsTr("Negative"), value: "negative" } ]
+			info: qsTr("Detect uses the median effect in the fitted dataset, separately per subgroup; a zero median selects positive. Two-sided functions ignore direction.")
 		}
-
-	}
-	Section
-	{
-		title: qsTr("Plots")
-
-		Group
-		{
-			title: qsTr("Weight Function")
-
-			CheckBox
-			{
-				name:	"plotsWeightFunctionFixedEffectsPlot"
-				text:	qsTr("Fixed effects")
-			}
-
-			CheckBox
-			{
-				name:	"plotsWeightFunctionRandomEffectsPlot"
-				text:	qsTr("Random effects")
-			}
-
-			CheckBox
-			{
-				name:	"plotsWeightFunctionRescaleXAxis"
-				text:	qsTr("Rescale x-axis")
-			}
-		}
-
 		CheckBox
 		{
-			name: "plotsMeanModelEstimatesPlot"
-			text:	qsTr("Mean model estimates")
+			name: "selectionForceOrdinality"
+			label: qsTr("Force ordinality")
+			checked: false
+			visible: publicationBiasAdjustment.value !== "custom"
+			info: qsTr("Require non-increasing step-function weights. Under Custom, specify this for each model separately. Metafor's ordinal implementation is experimental; some intervals and tests are unavailable.")
 		}
-
+	}
+	MA.ClassicalMetaAnalysisModel { id: sectionModel; analysisType: "selectionModels"; methodValue: method.value }
+	MA.SelectionModelsWeightfunctions
+	{
+		customSelected: publicationBiasAdjustment.value === "custom"
+	}
+	MA.ClassicalMetaAnalysisStatistics { id: sectionStatistics; analysisType: "selectionModels" }
+	MA.ClassicalMetaAnalysisEstimatedMarginalMeans { analysisType: "selectionModels" }
+	MA.ForestPlotSection
+	{
+		analysisType: "selectionModels"
+		transformEffectSizeValue: sectionStatistics.transformEffectSizeValue
+		effectSizeReady: effectSize.count === 1 && effectSizeStandardError.count === 1
+		modelInformationEnabled: effectSizeReady
+		effectSizeModelTermsCount: sectionModel.effectSizeModelTermsCount
+		methodValue: method.value
+		publicationBiasAdjustmentValue: publicationBiasAdjustment.value
+		subgroupSelected: subgroup.count > 0
+	}
+	MA.BubblePlot { analysisType: "selectionModels" }
+	MA.ClassicalMetaAnalysisDiagnostics { analysisType: "selectionModels" }
+	MA.ClassicalMetaAnalysisExport
+	{
+		analysisType: "selectionModels"
+	}
+	MA.ClassicalMetaAnalysisAdvanced
+	{
+		id: sectionAdvanced
+		analysisType: "selectionModels"
 	}
 }

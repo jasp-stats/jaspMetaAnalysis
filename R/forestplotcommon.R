@@ -99,15 +99,8 @@
 # layout builders start combining subgroup/full-dataset outputs.
 .forestPlotPrepareFitItems             <- function(fit, options) {
 
-  if (options[["subgroup"]] != "" && length(fit) > 1) {
-    fit <- fit[c(2:length(fit), 1)]
-  }
-
-  if (options[["subgroup"]] != "" && length(fit) > 0) {
-    fullDatasetName <- names(fit)[length(fit)]
-  } else {
-    fullDatasetName <- NULL
-  }
+  fullDatasetName <- if (options[["subgroup"]] != "" && "__fullDataset" %in% names(fit)) "__fullDataset" else NULL
+  if (!is.null(fullDatasetName)) fit <- fit[c(setdiff(names(fit), fullDatasetName), fullDatasetName)]
   fit <- fit[!vapply(fit, jaspBase::isTryError, logical(1))]
 
   fitItems <- lapply(seq_along(fit), function(i) {

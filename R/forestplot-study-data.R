@@ -6,7 +6,7 @@
 
   if (.maIsClassical(options)) {
 
-    if (options[["analysis"]] %in% c("generalizedMetaAnalysis", "mantelHaenszelPeto")) {
+    if (options[["analysis"]] %in% c("generalizedMetaAnalysis", "mantelHaenszelPeto", "selectionModels")) {
       studyWeights <- 1 / fit[["vi"]]
     } else if (.maIsMultilevelMultivariate(options)) {
       studyWeights <- stats::weights(fit, type = "diagonal")

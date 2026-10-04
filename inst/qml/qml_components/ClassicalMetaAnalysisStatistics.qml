@@ -33,7 +33,7 @@ Section
 		title:		qsTr("Heterogeneity")
 		columns:	2
 		enabled:	method.value != "fixedEffects" && method.value != "equalEffects" && method.value != "unrestrictedWeightedLeastSquares"
-		visible:	analysisType === "metaAnalysis" || analysisType === "mantelHaenszelPeto" || analysisType === "generalizedMetaAnalysis"
+		visible:	analysisType === "metaAnalysis" || analysisType === "selectionModels" || analysisType === "mantelHaenszelPeto" || analysisType === "generalizedMetaAnalysis"
 		info: qsTr("Summarize the meta-analytic between-study heterogeneity. Unavailable when performing multilevel/multivariate meta-analysis.")
 
 		CheckBox
@@ -41,7 +41,7 @@ Section
 			text:		qsTr("𝜏")
 			name:		"heterogeneityTau"
 			checked:	true
-			visible:	analysisType === "metaAnalysis" || analysisType === "generalizedMetaAnalysis"
+			visible:	analysisType === "metaAnalysis" || analysisType === "selectionModels" || analysisType === "generalizedMetaAnalysis"
 			info: qsTr("Include 𝜏, the square root of the estimated between-study variance.")
 		}
 
@@ -50,7 +50,7 @@ Section
 			text:		qsTr("𝜏²")
 			name:		"heterogeneityTau2"
 			checked:	true
-			visible:	analysisType === "metaAnalysis" || analysisType === "generalizedMetaAnalysis"
+			visible:	analysisType === "metaAnalysis" || analysisType === "selectionModels" || analysisType === "generalizedMetaAnalysis"
 			info: qsTr("Include 𝜏², the estimated between-study variance.")
 		}
 
@@ -58,6 +58,7 @@ Section
 		{
 			text:		qsTr("I²")
 			name:		"heterogeneityI2"
+			visible: analysisType !== "selectionModels"
 			checked:	analysisType === "mantelHaenszelPeto"
 			info: qsTr("Include I², the percentage of total variation across studies due to heterogeneity.")
 		}
@@ -66,6 +67,7 @@ Section
 		{
 			text:		qsTr("H²")
 			name:		"heterogeneityH2"
+			visible: analysisType !== "selectionModels"
 			checked:	false
 			info: qsTr("Include H², an index indicating the ratio of total variability to sampling variability.")
 		}
@@ -98,7 +100,7 @@ Section
 	{
 		title:		qsTr("Meta-Regression")
 		enabled:	predictors.count > 0
-		visible:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || analysisType === "generalizedMetaAnalysis"
+		visible:	analysisType === "metaAnalysis" || analysisType === "selectionModels" || analysisType === "multilevelMultivariateMetaAnalysis" || analysisType === "generalizedMetaAnalysis"
 		info: qsTr("Create summaries of the meta-regression. Available when predictors are included.")
 
 		CheckBox
@@ -157,7 +159,7 @@ Section
 			text:		qsTr("Prediction intervals")
 			name:		"predictionIntervals"
 			checked:	true
-			visible:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || analysisType === "generalizedMetaAnalysis"
+			visible:	analysisType === "metaAnalysis" || analysisType === "selectionModels" || analysisType === "multilevelMultivariateMetaAnalysis" || analysisType === "generalizedMetaAnalysis"
 			info: qsTr("Include prediction intervals in the tabular output.")
 		}
 
@@ -170,7 +172,7 @@ Section
 			fieldWidth:		125 * preferencesModel.uiScale
 			info: qsTr("Select a transformation to apply to the effect size estimates in the output. This transformation applies to the 'Meta-Analytic Estimates Table', 'Estimated Marginal Means Table', 'Forest Plot', and  the 'Bubble Plot'. The 'Meta-Regression Coeffient Estimates' are not transformed.")
 			values:			(function() {
-				if (analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis") {
+				if (analysisType === "metaAnalysis" || analysisType === "selectionModels" || analysisType === "multilevelMultivariateMetaAnalysis") {
 					return [
 						{ label: qsTr("None")								, value: "none"							},  // NULL
 						{ label: qsTr("Fisher's z to r")					, value: "fishersZToCorrelation"		},  // transf.ztor
@@ -200,11 +202,45 @@ Section
 		}
 	}
 
-	CheckBox
+	Group
 	{
-		name:		"fitMeasures"
-		text:		qsTr("Fit measures")
-		info: qsTr("Include fit statistics for the model, such as AIC and BIC.")
+
+		CheckBox
+		{
+			name:		"fitMeasures"
+			text:		qsTr("Fit measures")
+			info: 		qsTr("Include fit statistics for the model, such as AIC and BIC.")
+		}
+
+		Group
+		{
+			title: 		qsTr("Weight Function")
+			visible:	analysisType === "selectionModels"
+
+			CheckBox
+			{
+				name: 		"weightFunctionEstimates"
+				label: 		qsTr("Estimates")
+				checked:	true
+				info: 		qsTr("Include weight function estimates in the output.")
+			}
+
+			CheckBox
+			{
+				name:		"weightFunctionPlot"
+				label:		qsTr("Plot")
+				info:		qsTr("Visualize the relative probability of study being published across the range of p-values.")
+			}
+
+			CheckBox
+			{
+				name:	"weightFunctionPValueFrequencyTable"
+				label:	qsTr("P-value frequency table")
+				info:	qsTr("Study counts within the specified p-value intervals.")
+			}
+
+		}
+
 	}
 
 }

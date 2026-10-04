@@ -27,8 +27,9 @@ Section
 	property int heterogeneityModelTermsCount:	0
 	readonly property bool locationScaleModel: analysisType === "metaAnalysis" && heterogeneityModelTermsCount > 0
 	readonly property bool generalizedMetaAnalysis: analysisType === "generalizedMetaAnalysis"
+	readonly property bool selectionModels: analysisType === "selectionModels"
 	columns:									2
-	info: qsTr("Options for exporting model-derived quantities to the dataset.")
+	info: selectionModels ? qsTr("Export all candidate models independently of the display filter. Column names include the model and subgroup.") : qsTr("Options for exporting model-derived quantities to the dataset.")
 
 	CheckBox
 	{
@@ -102,7 +103,7 @@ Section
 		{
 			name:	"exportResidualsPearson"
 			text:	qsTr("Pearson")
-			visible:	!generalizedMetaAnalysis
+			visible:	!generalizedMetaAnalysis && !selectionModels
 			info: qsTr("Export Pearson residuals.")
 		}
 
@@ -110,7 +111,7 @@ Section
 		{
 			name:	"exportResidualsStandardized"
 			text:	qsTr("Standardized")
-			visible:	!generalizedMetaAnalysis
+			visible:	!generalizedMetaAnalysis && !selectionModels
 			info: qsTr("Export standardized residuals.")
 		}
 
@@ -118,7 +119,7 @@ Section
 		{
 			name:		"exportResidualsStudentized"
 			text:		qsTr("Studentized")
-			visible:	!generalizedMetaAnalysis
+			visible:	!generalizedMetaAnalysis && !selectionModels
 			enabled:	!locationScaleModel
 			info: qsTr("Export studentized residuals.")
 		}
@@ -155,7 +156,7 @@ Section
 		{
 			name:	"exportRandomEffects"
 			text:	qsTr("Random effects")
-			visible:	!generalizedMetaAnalysis
+			visible:	!generalizedMetaAnalysis && !selectionModels
 			info: qsTr("Export predicted random effects.")
 		}
 
@@ -163,7 +164,7 @@ Section
 		{
 			name:	"exportWeights"
 			text:	qsTr("Weights")
-			visible:	!generalizedMetaAnalysis
+			visible:	!generalizedMetaAnalysis && !selectionModels
 			info: qsTr("Export model fitting weights. These are not coefficient-specific contribution weights in meta-regression. For multilevel/multivariate models, diagonal weights match the default forest plot weights and row-sum weights are exported for intercept-only models.")
 		}
 	}

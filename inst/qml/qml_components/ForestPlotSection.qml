@@ -39,7 +39,7 @@ Section
 	info: qsTr("Options for visualizing study-level information, estimated marginal means, and the model information in an all encompassing forest plot. Different sections of the forest plot can be individually enabled/disabled.")
 
 	// analysis type helpers
-	readonly property bool isClassical:			analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || analysisType === "generalizedMetaAnalysis" || analysisType === "mantelHaenszelPeto"
+	readonly property bool isClassical:			analysisType === "selectionModels" || analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || analysisType === "generalizedMetaAnalysis" || analysisType === "mantelHaenszelPeto"
 	readonly property bool isStandardClassical:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis"
 	readonly property bool isBayesian:			analysisType === "RoBMA" || analysisType === "NoBMA" || analysisType === "BiBMA"
 	readonly property bool isMetaRegression:	(analysisType !== "mantelHaenszelPeto") && effectSizeModelTermsCount > 0
@@ -58,7 +58,7 @@ Section
 	{
 		panelEnabled:			forestPlotStudyInformation.checked
 		predictedEffectsEnabled:	effectSizeReady
-		showPredictedEffects:	isStandardClassical
+		showPredictedEffects:	isStandardClassical || analysisType === "selectionModels"
 		showStudyWeights:		isStandardClassical
 		showSecondaryCI:		true
 		showAggregate:			true
@@ -240,7 +240,7 @@ Section
 					text:		qsTr("I\u00B2")
 					name:		"forestPlotHeterogeneityEstimateI2"
 					enabled:	analysisType !== "multilevelMultivariateMetaAnalysis" && !isScaleRegression
-					visible:	analysisType !== "multilevelMultivariateMetaAnalysis"
+					visible:	analysisType !== "multilevelMultivariateMetaAnalysis" && analysisType !== "selectionModels"
 					checked:	false
 					info: qsTr("Include the meta-analytic I\u00B2, the percentage of total variation across studies due to heterogeneity in the model information section. Not available for multilevel/multivariate meta-analysis or heterogeneity meta-regression.")
 				}
@@ -250,7 +250,7 @@ Section
 					text:		qsTr("H\u00B2")
 					name:		"forestPlotHeterogeneityEstimateH2"
 					enabled:	analysisType !== "multilevelMultivariateMetaAnalysis" && !isScaleRegression
-					visible:	analysisType !== "multilevelMultivariateMetaAnalysis"
+					visible:	analysisType !== "multilevelMultivariateMetaAnalysis" && analysisType !== "selectionModels"
 					checked:	false
 					info: qsTr("Include the meta-analytic H\u00B2, an index indicating the ratio of total variability to sampling variability in the model information section. Not available for multilevel/multivariate meta-analysis or heterogeneity meta-regression.")
 				}
@@ -329,7 +329,7 @@ Section
 		Group
 		{
 			title:		qsTr("Publication Bias")
-			visible: 	analysisType === "RoBMA"
+			visible: 	analysisType === "RoBMA" || analysisType === "selectionModels"
 
 			CheckBox
 			{

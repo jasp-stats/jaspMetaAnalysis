@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' data-engine-version='2.0' width='720.00pt' height='576.00pt' viewBox='0 0 720.00 576.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA='>
+    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<rect x='0.00' y='0.00' width='720.00' height='576.00' style='stroke-width: 10.67; stroke: none;' />
+</g>
+<defs>
+  <clipPath id='cpNjAuNTl8NzA2LjA1fDMwLjY3fDUwNC42Ng=='>
+    <rect x='60.59' y='30.67' width='645.46' height='473.99' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpNjAuNTl8NzA2LjA1fDMwLjY3fDUwNC42Ng==)'>
+<rect x='60.59' y='30.67' width='645.46' height='473.99' style='stroke-width: 10.67; stroke: none;' />
+<polygon points='89.93,363.19 104.60,363.19 104.60,363.19 89.93,363.19 ' style='stroke-width: 0.00; stroke: none; stroke-linecap: butt; fill: #333333; fill-opacity: 0.15;' />
+<polyline points='89.93,363.19 104.60,363.19 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt;' />
+<polyline points='104.60,363.19 89.93,363.19 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt;' />
+<polygon points='104.60,268.42 383.32,268.42 383.32,483.11 104.60,483.11 ' style='stroke-width: 0.00; stroke: none; stroke-linecap: butt; fill: #333333; fill-opacity: 0.15;' />
+<polyline points='104.60,268.42 383.32,268.42 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt;' />
+<polyline points='383.32,483.11 104.60,483.11 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt;' />
+<polygon points='383.32,52.22 676.71,52.22 676.71,483.11 383.32,483.11 ' style='stroke-width: 0.00; stroke: none; stroke-linecap: butt; fill: #333333; fill-opacity: 0.15;' />
+<polyline points='383.32,52.22 676.71,52.22 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt;' />
+<polyline points='676.71,483.11 383.32,483.11 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt;' />
+<polyline points='89.93,363.19 104.60,363.19 104.60,407.38 383.32,407.38 383.32,371.85 676.71,371.85 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='89.61' y1='504.66' x2='677.03' y2='504.66' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<line x1='60.59' y1='483.43' x2='60.59' y2='123.04' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<rect x='60.59' y='30.67' width='645.46' height='473.99' style='stroke-width: 0.00; stroke: none;' />
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<polyline points='60.59,504.66 60.59,30.67 ' style='stroke-width: 0.00; stroke: none; stroke-linecap: butt;' />
+<text x='45.11' y='488.96' text-anchor='end' style='font-size: 17.00px; font-family: sans;' textLength='9.46px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='45.11' y='369.04' text-anchor='end' style='font-size: 17.00px; font-family: sans;' textLength='9.46px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='45.11' y='249.13' text-anchor='end' style='font-size: 17.00px; font-family: sans;' textLength='9.46px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text x='45.11' y='129.21' text-anchor='end' style='font-size: 17.00px; font-family: sans;' textLength='9.46px' lengthAdjust='spacingAndGlyphs'>3</text>
+<polyline points='52.09,483.11 60.59,483.11 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='52.09,363.19 60.59,363.19 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='52.09,243.28 60.59,243.28 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='52.09,123.36 60.59,123.36 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='60.59,504.66 706.05,504.66 ' style='stroke-width: 0.00; stroke: none; stroke-linecap: butt;' />
+<polyline points='89.93,513.16 89.93,504.66 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='236.62,513.16 236.62,504.66 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='383.32,513.16 383.32,504.66 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='530.02,513.16 530.02,504.66 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='676.71,513.16 676.71,504.66 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<text x='89.93' y='531.83' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>0.00</text>
+<text x='236.62' y='531.83' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>0.25</text>
+<text x='383.32' y='531.83' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>0.50</text>
+<text x='530.02' y='531.83' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>0.75</text>
+<text x='676.71' y='531.83' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>1.00</text>
+<text x='383.32' y='558.56' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='104.73px' lengthAdjust='spacingAndGlyphs'>P-value (one-sided)</text>
+<text transform='translate(23.20,267.66) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='147.43px' lengthAdjust='spacingAndGlyphs'>Relative selection likelihood</text>
+<text x='383.32' y='21.66' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='267.45px' lengthAdjust='spacingAndGlyphs'>analysis-1_figure-4_weight-function</text>
+</g>
+</svg>

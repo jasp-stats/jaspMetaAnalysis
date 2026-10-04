@@ -23,8 +23,8 @@
 
     bubblePlot       <- .maBubblePlotFun(fit[[1]], options)
     bubblePlot$title <- gettext("Bubble Plots")
-    bubblePlot$dependOn(c(.maBubblePlotDependencies, "includeFullDatasetInSubgroupAnalysis", if (.maIsClassical(options)) .maDependencies else .robmaDependencies))
-    bubblePlot$position <- if (.maIsClassical(options)) 5 else 6
+    bubblePlot$dependOn(c(.maBubblePlotDependencies, "includeFullDatasetInSubgroupAnalysis", .maModelDependencies(options)))
+    bubblePlot$position <- if (.maIsSelection(options)) 7 else if (.maIsClassical(options)) 5 else 6
     jaspResults[["bubblePlot"]] <- bubblePlot
     return()
 
@@ -33,8 +33,8 @@
     # create the output container
     bubblePlot       <- createJaspContainer()
     bubblePlot$title <- gettext("Bubble Plots")
-    bubblePlot$dependOn(c(.maBubblePlotDependencies, "includeFullDatasetInSubgroupAnalysis", if (.maIsClassical(options)) .maDependencies else .robmaDependencies))
-    bubblePlot$position <- if (.maIsClassical(options)) 5 else 6
+    bubblePlot$dependOn(c(.maBubblePlotDependencies, "includeFullDatasetInSubgroupAnalysis", .maModelDependencies(options)))
+    bubblePlot$position <- if (.maIsSelection(options)) 7 else if (.maIsClassical(options)) 5 else 6
     jaspResults[["bubblePlot"]] <- bubblePlot
 
     for (i in seq_along(fit)) {
@@ -293,7 +293,7 @@
       effectSize        = tempDf[["yi"]],
       inverseVariance   = 1/tempDf[["vi"]],
       sampleSize        = (dataset[[options[["sampleSizeGroup1"]]]] + dataset[[options[["sampleSizeGroup2"]]]]),
-      weight            = if (.maIsClassical(options)) weights(fit) else NA,
+      weight            = if (.maIsClassical(options) && !.maIsSelection(options)) weights(fit) else NA,
       constant          = rep(options[["bubblePlotBubblesRelativeSize"]], nrow(dataset)),
       selectedVariable  = dataset[[attr(dfPlot, "selectedVariable")]]
     )
@@ -301,7 +301,7 @@
     dfStudies <- data.frame(
       effectSize        = dataset[[options[["effectSize"]]]],
       inverseVariance   = 1/dataset[[options[["effectSizeStandardError"]]]]^2,
-      weight            = if (.maIsClassical(options)) weights(fit) else NA,
+      weight            = if (.maIsClassical(options) && !.maIsSelection(options)) weights(fit) else NA,
       constant          = rep(options[["bubblePlotBubblesRelativeSize"]], nrow(dataset)),
       selectedVariable  = dataset[[attr(dfPlot, "selectedVariable")]]
     )
