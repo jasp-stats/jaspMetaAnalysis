@@ -13,6 +13,11 @@
 >   * **Deprecated / Removed:** Outdated analyses, options, or legacy code.
 
 ---
+# jaspMetaAnalysis 0.98.0
+## Changed
+* Full rewrite of selection models (now rely on metafor::selmoded) and breaking backwards compatibility
+* Minor updated fixes and refactor
+
 # jaspMetaAnalysis 0.97.5
 ## Fixed
 * Fixed updater failures when legacy diagnostic export settings are migrated to the current split export options.
