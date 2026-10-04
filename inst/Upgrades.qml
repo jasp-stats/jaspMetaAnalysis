@@ -530,14 +530,14 @@ Upgrades
 		fromVersion:	"0.96.4"
 		toVersion:		"0.96.5"
 
-		ChangeRename { from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
-		ChangeRename { from: "forestPlotRelativeSizeEstimates"; to: "forestPlotSizeEstimates" }
-		ChangeRename { from: "forestPlotRelativeSizeText"; to: "forestPlotSizeText" }
-		ChangeRename { from: "forestPlotRelativeSizeAxisLabels"; to: "forestPlotSizeAxisLabels" }
-		ChangeRename { from: "forestPlotRelativeSizeRow"; to: "forestPlotSizeRow" }
-		ChangeRename { from: "forestPlotRelativeSizeLeftPanel"; to: "forestPlotSizeLeftPanel" }
-		ChangeRename { from: "forestPlotRelativeSizeMiddlePanel"; to: "forestPlotSizePlotArea" }
-		ChangeRename { from: "forestPlotRelativeSizeRightPanel"; to: "forestPlotSizeRightPanel" }
+		ChangeRename { condition: function(options) { return options["forestPlotAllignLeftPanel"] !== undefined && options["forestPlotAlignLeftPanel"] === undefined; }; from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeEstimates"] !== undefined && options["forestPlotSizeEstimates"] === undefined; }; from: "forestPlotRelativeSizeEstimates"; to: "forestPlotSizeEstimates" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeText"] !== undefined && options["forestPlotSizeText"] === undefined; }; from: "forestPlotRelativeSizeText"; to: "forestPlotSizeText" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeAxisLabels"] !== undefined && options["forestPlotSizeAxisLabels"] === undefined; }; from: "forestPlotRelativeSizeAxisLabels"; to: "forestPlotSizeAxisLabels" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeRow"] !== undefined && options["forestPlotSizeRow"] === undefined; }; from: "forestPlotRelativeSizeRow"; to: "forestPlotSizeRow" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeLeftPanel"] !== undefined && options["forestPlotSizeLeftPanel"] === undefined; }; from: "forestPlotRelativeSizeLeftPanel"; to: "forestPlotSizeLeftPanel" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeMiddlePanel"] !== undefined && options["forestPlotSizePlotArea"] === undefined; }; from: "forestPlotRelativeSizeMiddlePanel"; to: "forestPlotSizePlotArea" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeRightPanel"] !== undefined && options["forestPlotSizeRightPanel"] === undefined; }; from: "forestPlotRelativeSizeRightPanel"; to: "forestPlotSizeRightPanel" }
 	}
 
 	Upgrade
@@ -548,27 +548,27 @@ Upgrades
 
 		ChangeCopy
 		{
-			condition:	function(options) { return options["method"] === "mantelHaenszelFrequencies" || options["method"] === "peto"; }
+			condition:	function(options) { return (options["method"] === "mantelHaenszelFrequencies" || options["method"] === "peto") && options["successesGroup1"] !== undefined && options["eventsGroup1"] === undefined; }
 			from:	"successesGroup1"
 			to:		"eventsGroup1"
 		}
 		ChangeCopy
 		{
-			condition:	function(options) { return options["method"] === "mantelHaenszelFrequencies" || options["method"] === "peto"; }
+			condition:	function(options) { return (options["method"] === "mantelHaenszelFrequencies" || options["method"] === "peto") && options["successesGroup2"] !== undefined && options["eventsGroup2"] === undefined; }
 			from:	"successesGroup2"
 			to:		"eventsGroup2"
 		}
-		ChangeRemove { name: "successesGroup1" }
-		ChangeRemove { name: "successesGroup2" }
+		ChangeRemove { condition: function(options) { return options["successesGroup1"] !== undefined; }; name: "successesGroup1" }
+		ChangeRemove { condition: function(options) { return options["successesGroup2"] !== undefined; }; name: "successesGroup2" }
 
-		ChangeRename { from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
-		ChangeRename { from: "forestPlotRelativeSizeEstimates"; to: "forestPlotSizeEstimates" }
-		ChangeRename { from: "forestPlotRelativeSizeText"; to: "forestPlotSizeText" }
-		ChangeRename { from: "forestPlotRelativeSizeAxisLabels"; to: "forestPlotSizeAxisLabels" }
-		ChangeRename { from: "forestPlotRelativeSizeRow"; to: "forestPlotSizeRow" }
-		ChangeRename { from: "forestPlotRelativeSizeLeftPanel"; to: "forestPlotSizeLeftPanel" }
-		ChangeRename { from: "forestPlotRelativeSizeMiddlePanel"; to: "forestPlotSizePlotArea" }
-		ChangeRename { from: "forestPlotRelativeSizeRightPanel"; to: "forestPlotSizeRightPanel" }
+		ChangeRename { condition: function(options) { return options["forestPlotAllignLeftPanel"] !== undefined && options["forestPlotAlignLeftPanel"] === undefined; }; from: "forestPlotAllignLeftPanel"; to: "forestPlotAlignLeftPanel" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeEstimates"] !== undefined && options["forestPlotSizeEstimates"] === undefined; }; from: "forestPlotRelativeSizeEstimates"; to: "forestPlotSizeEstimates" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeText"] !== undefined && options["forestPlotSizeText"] === undefined; }; from: "forestPlotRelativeSizeText"; to: "forestPlotSizeText" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeAxisLabels"] !== undefined && options["forestPlotSizeAxisLabels"] === undefined; }; from: "forestPlotRelativeSizeAxisLabels"; to: "forestPlotSizeAxisLabels" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeRow"] !== undefined && options["forestPlotSizeRow"] === undefined; }; from: "forestPlotRelativeSizeRow"; to: "forestPlotSizeRow" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeLeftPanel"] !== undefined && options["forestPlotSizeLeftPanel"] === undefined; }; from: "forestPlotRelativeSizeLeftPanel"; to: "forestPlotSizeLeftPanel" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeMiddlePanel"] !== undefined && options["forestPlotSizePlotArea"] === undefined; }; from: "forestPlotRelativeSizeMiddlePanel"; to: "forestPlotSizePlotArea" }
+		ChangeRename { condition: function(options) { return options["forestPlotRelativeSizeRightPanel"] !== undefined && options["forestPlotSizeRightPanel"] === undefined; }; from: "forestPlotRelativeSizeRightPanel"; to: "forestPlotSizeRightPanel" }
 	}
 
 	Upgrade
