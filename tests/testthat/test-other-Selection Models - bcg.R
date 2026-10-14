@@ -341,14 +341,18 @@ test_that("SelectionModels (analysis 4) results match", {
      "Publication bias"))
 
   table <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model"]][["collection"]][["selectionModelResults_model_weightFunctionSummary"]][["collection"]][["selectionModelResults_model_weightFunctionSummary_selectionParameters"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(0.852671000803155, 1e-05, "<unicode>1", 0.802657515905965, 2.42585082389923,
-     0.00310080481116186, 1e-05, "<unicode>2", 3.71380902686755,
-     7.28203274293131))
+  # Selection-parameter uncertainty varies slightly across metafor versions.
+  testthat::expect_equal(as.numeric(table[[1]][["se"]]), 0.802657515905965, tolerance = 1e-3)
+  testthat::expect_equal(as.numeric(table[[1]][["uCi"]]), 2.42585082389923, tolerance = 1e-3)
+  testthat::expect_equal(as.numeric(table[[2]][["se"]]), 3.71380902686755, tolerance = 1e-3)
+  testthat::expect_equal(as.numeric(table[[2]][["uCi"]]), 7.28203274293131, tolerance = 1e-3)
+  jaspTools::expect_equal_tables(
+    lapply(table, function(row) row[!names(row) %in% c("se", "uCi")]),
+    list(0.852671000803155, 1e-05, "<unicode>1", 0.00310080481116186, 1e-05, "<unicode>2"))
 
   plotName <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model"]][["collection"]][["selectionModelResults_model_weightFunctionSummary"]][["collection"]][["selectionModelResults_model_weightFunctionSummary_weightFunction"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "analysis-4_figure-1_weight-function")
+  jaspTools::expect_equal_plots(testPlot, "analysis-4_figure-1_weight-function", tolerance = 1e-3)
 
   table <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model1"]][["collection"]][["selectionModelResults_model1_modelSummaryContainer"]][["collection"]][["selectionModelResults_model1_modelSummaryContainer_pooledEstimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
@@ -459,13 +463,16 @@ test_that("SelectionModels (analysis 6) results match", {
     ))
 
   table <- results[["results"]][["weightFunctionSummary"]][["collection"]][["weightFunctionSummary_selectionParameters"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(0.00133484913415478, 0, "<unicode>1", 3.61311425231623, 7.08290865570233
-    ))
+  # Selection-parameter uncertainty varies slightly across metafor versions.
+  testthat::expect_equal(as.numeric(table[[1]][["se"]]), 3.61311425231623, tolerance = 1e-3)
+  testthat::expect_equal(as.numeric(table[[1]][["uCi"]]), 7.08290865570233, tolerance = 1e-3)
+  jaspTools::expect_equal_tables(
+    lapply(table, function(row) row[!names(row) %in% c("se", "uCi")]),
+    list(0.00133484913415478, 0, "<unicode>1"))
 
   plotName <- results[["results"]][["weightFunctionSummary"]][["collection"]][["weightFunctionSummary_weightFunction"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "analysis-6_figure-1_weight-function")
+  jaspTools::expect_equal_plots(testPlot, "analysis-6_figure-1_weight-function", tolerance = 1e-3)
 
 })
 
