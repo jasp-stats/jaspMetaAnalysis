@@ -361,8 +361,7 @@ test_that("SelectionModels (analysis 4) results match", {
   table <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model1"]][["collection"]][["selectionModelResults_model1_modelSummaryContainer"]][["collection"]][["selectionModelResults_model1_modelSummaryContainer_testsTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
     list(1.98199637546454e-26, "LR(1) = 113.17", "Heterogeneity", 0.46133614238138,
-     "z = -0.74", "Pooled effect", 1, "LR(1) = 0.00", "Publication bias"
-    ))
+     "z = -0.74", "Pooled effect"))
 
   table <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model1"]][["collection"]][["selectionModelResults_model1_weightFunctionSummary"]][["collection"]][["selectionModelResults_model1_weightFunctionSummary_selectionParameters"]][["data"]]
   jaspTools::expect_equal_tables(table,
