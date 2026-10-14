@@ -30,6 +30,12 @@
   all(spec[["delta"]][fixed] == null[fixed])
 }
 
+.smHasPublicationBiasTest                <- function(fit) {
+
+  inherits(fit, "rma.uni.selmodel") && .smNoBiasNested(fit) &&
+    .maIsFiniteScalar(fit$LRTdf) && fit$LRTdf > 0
+}
+
 .smPublicationBiasComparison             <- function(fit) {
 
   list(

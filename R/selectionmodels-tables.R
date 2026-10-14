@@ -50,11 +50,12 @@
     return(fit)
 
   # Equal- and fixed-effects models have no tau2 to profile.
-  needed <- options[["confidenceIntervals"]] && .smHasEstimatedHeterogeneity(fit) &&
-    (options[["heterogeneityTau"]] ||
-     options[["heterogeneityTau2"]] ||
-     options[["forestPlotHeterogeneityEstimateTau"]] ||
-     options[["forestPlotHeterogeneityEstimateTau2"]])
+  needed <- .smHasEstimatedHeterogeneity(fit) && (
+    (options[["confidenceIntervals"]] &&
+     (options[["heterogeneityTau"]] || options[["heterogeneityTau2"]])) ||
+    (options[["forestPlotModelInformation"]] &&
+     (options[["forestPlotHeterogeneityEstimateTau"]] || options[["forestPlotHeterogeneityEstimateTau2"]]))
+  )
 
   # Profile intervals can be expensive; table and forest output share them.
   if (needed) {
@@ -96,7 +97,7 @@
 
 .smRowPublicationBiasTest               <- function(fit) {
 
-  if (!inherits(fit, "rma.uni.selmodel"))
+  if (!.smHasPublicationBiasTest(fit))
     return(NULL)
 
   comparison <- .smPublicationBiasComparison(fit)
@@ -145,13 +146,21 @@
     if (any(!is.finite(fit$se)))
       gettext("Coefficient standard errors could not be estimated. Wald tests and coefficient confidence intervals are unavailable; review the fitting warnings before interpreting this model."),
     if (options[["noSelection"]] != "")
-      gettextf(
-        "Selection applies to %1$i studies; %2$i studies at level '%3$s' are unaffected.",
-        fit$k1, fit$k0, options[["noSelectionLevel"]]
+      paste(
+        sprintf(ngettext(fit$k1,
+          "Selection applies to %1$i study.",
+          "Selection applies to %1$i studies."
+        ), fit$k1),
+        sprintf(ngettext(fit$k0,
+          "%1$i study at level '%2$s' is unaffected.",
+          "%1$i studies at level '%2$s' are unaffected."
+        ), fit$k0, options[["noSelectionLevel"]])
       ),
     .smClippedPValueMessage(fit, options),
-    if (!.smNoBiasNested(fit) || fit$LRTdf == 0)
-      gettext("The publication-bias test is not applicable with fixed selection parameters.")
+    if (!.smHasPublicationBiasTest(fit))
+      gettext("The publication-bias test is not applicable with fixed selection parameters."),
+    if (.smHasEstimatedHeterogeneity(fit) && !.maIsFiniteScalar(fit$LRT.tau2))
+      gettext("The heterogeneity likelihood-ratio test could not be computed. Review the fitting warnings before interpreting this model.")
   )
 }
 
@@ -181,10 +190,10 @@
   if (!any(clipped))
     return(NULL)
 
-  gettextf(
-    "For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. Affected selected studies: %3$i.",
-    fit$pval.min, 1 - fit$pval.min, sum(clipped)
-  )
+  sprintf(ngettext(sum(clipped),
+    "For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. This affects %3$i selected study.",
+    "For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. This affects %3$i selected studies."
+  ), fit$pval.min, 1 - fit$pval.min, sum(clipped))
 }
 
 .smAddHeterogeneityFootnotes            <- function(table, fits, options) {
@@ -308,7 +317,7 @@
     return(NULL)
 
   labels <- if (stepFunction) {
-    paste0("[", head(c(0, fit$steps), -1), ", ", fit$steps, ")")
+    paste0("(", head(c(0, fit$steps), -1), ", ", fit$steps, "]")
   } else {
     paste0("\u03b4", seq_along(fit$delta))
   }
@@ -339,7 +348,7 @@
   if (!is.null(container[["selectionFrequencies"]]))
     return()
 
-  if (!length(frequencyFits)) {
+  if (!is.null(fits) && !length(frequencyFits)) {
     message <- createJaspHtml(
       title = gettext("P-Value Frequencies"),
       text  = gettext("P-value frequencies require a fitted selection model with p-value cutoffs.")
@@ -363,6 +372,9 @@
     title = if (options[["noSelection"]] != "") gettext("Selected Studies") else gettext("Studies"),
     type  = "integer"
   )
+
+  if (is.null(fits))
+    return()
 
   if (options[["noSelection"]] != "")
     table$addFootnote(gettext("P-value frequencies include only studies to which selection applies."))

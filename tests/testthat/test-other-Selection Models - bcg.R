@@ -53,8 +53,8 @@ test_that("SelectionModels (analysis 1) results match", {
 
   table <- results[["results"]][["weightFunctionSummary"]][["collection"]][["weightFunctionSummary_selectionParameters"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(1, "", "[0, 0.025)", "", "", 0.631550088319224, 0, "[0.025, 0.5)",
-     0.591229157859145, 1.79033794433309, 0.92784376191832, 0, "[0.5, 1)",
+    list(1, "", "(0, 0.025]", "", "", 0.631550088319224, 0, "(0.025, 0.5]",
+     0.591229157859145, 1.79033794433309, 0.92784376191832, 0, "(0.5, 1]",
      1.35993039801969, 3.59325836351813))
 
   plotName <- results[["results"]][["weightFunctionSummary"]][["collection"]][["weightFunctionSummary_weightFunction"]][["data"]]
@@ -140,7 +140,7 @@ test_that("SelectionModels (analysis 2) results match", {
 
   table <- results[["results"]][["weightFunctionSummary"]][["collection"]][["weightFunctionSummary_selectionParameters"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(1, "", "[0, 0.025)", "", "", 0.570731990855494, 0, "[0.025, 1)",
+    list(1, "", "(0, 0.025]", "", "", 0.570731990855494, 0, "(0.025, 1]",
      0.540005185256366, 1))
 
 })
@@ -366,8 +366,8 @@ test_that("SelectionModels (analysis 4) results match", {
 
   table <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model1"]][["collection"]][["selectionModelResults_model1_weightFunctionSummary"]][["collection"]][["selectionModelResults_model1_weightFunctionSummary_selectionParameters"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(1, "", "[0, 0.025)", "", "", 0.304618457905443, 0, "[0.025, 0.5)",
-     0.235662158717604, 0.766507801510909, 0.1, "", "[0.5, 1)", "",
+    list(1, "", "(0, 0.025]", "", "", 0.304618457905443, 0, "(0.025, 0.5]",
+     0.235662158717604, 0.766507801510909, 0.1, "", "(0.5, 1]", "",
      ""))
 
   plotName <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model1"]][["collection"]][["selectionModelResults_model1_weightFunctionSummary"]][["collection"]][["selectionModelResults_model1_weightFunctionSummary_weightFunction"]][["data"]]
@@ -390,8 +390,8 @@ test_that("SelectionModels (analysis 4) results match", {
 
   table <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model2"]][["collection"]][["selectionModelResults_model2_weightFunctionSummary"]][["collection"]][["selectionModelResults_model2_weightFunctionSummary_selectionParameters"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(1, "", "[0, 0.025)", "", "", 2.18481969028412, 0, "[0.025, 0.5)",
-     2.07418510913153, 6.2501478014512, 4.08139830302146, 0, "[0.5, 1)",
+    list(1, "", "(0, 0.025]", "", "", 2.18481969028412, 0, "(0.025, 0.5]",
+     2.07418510913153, 6.2501478014512, 4.08139830302146, 0, "(0.5, 1]",
      4.66923549841224, 13.2329317152454))
 
   plotName <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model2"]][["collection"]][["selectionModelResults_model2_weightFunctionSummary"]][["collection"]][["selectionModelResults_model2_weightFunctionSummary_weightFunction"]][["data"]]
@@ -428,7 +428,7 @@ test_that("SelectionModels (analysis 5) results match", {
 
   table <- results[["results"]][["weightFunctionSummary"]][["collection"]][["weightFunctionSummary_selectionParameters"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(1, "", "[0, 0.025)", "", "", 2.62778983499746, 0, "[0.025, 1)",
+    list(1, "", "(0, 0.025]", "", "", 2.62778983499746, 0, "(0.025, 1]",
      2.90052161773468, 8.31270774213728))
 
 })

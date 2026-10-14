@@ -272,7 +272,10 @@
   if (!identical(cache[["key"]], key))
     cache <- list(key = key, scopes = list())
 
-  scopes <- list(full = seq_len(nrow(dataset)))
+  scopes <- list()
+
+  if (options[["subgroup"]] == "" || options[["includeFullDatasetInSubgroupAnalysis"]])
+    scopes[["full"]] <- seq_len(nrow(dataset))
 
   if (options[["subgroup"]] != "") {
     groups <- unique(as.character(dataset[[options[["subgroup"]]]]))
@@ -291,7 +294,7 @@
     rows      <- scopes[[scope]]
     scopeData <- droplevels(dataset[rows, , drop = FALSE])
     label     <- if (scope == "full") {
-      gettext("Full Dataset")
+      gettext("Full dataset")
     } else {
       as.character(scopeData[[options[["subgroup"]]]][1])
     }

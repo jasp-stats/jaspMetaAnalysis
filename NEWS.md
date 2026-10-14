@@ -15,7 +15,7 @@
 ---
 # jaspMetaAnalysis 0.98.0
 ## Changed
-* Full rewrite of selection models (now rely on metafor::selmoded) and breaking backwards compatibility
+* Rewrote selection models using `metafor::selmodel`, replacing `weightr`. Legacy analyses are converted; incompatible settings may reset on refresh.
 * Minor updated fixes and refactor
 
 # jaspMetaAnalysis 0.97.5

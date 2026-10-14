@@ -9,7 +9,8 @@
 
 .smParseNumbers                         <- function(text, allowNA = FALSE) {
 
-  text <- trimws(text)
+  # Headless option loading can convert the literal text NA to a missing value.
+  text <- if (is.na(text)) "NA" else trimws(text)
 
   if (!nzchar(text))
     return(numeric())

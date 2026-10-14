@@ -434,7 +434,8 @@
     )
   }
 
-  if (options[["forestPlotPublicationBiasTest"]]) {
+  if (options[["forestPlotPublicationBiasTest"]] &&
+      (!.maIsSelection(options) || .smHasPublicationBiasTest(fit))) {
     state <- .forestPlotAppendAdditionalRow(
       state = state,
       label = if (.maIsSelection(options)) .smPrintBiasTest(fit) else gettextf("Publication bias: %1$s", .robmaPrintTest(fit, options, "bias", includeName = FALSE))

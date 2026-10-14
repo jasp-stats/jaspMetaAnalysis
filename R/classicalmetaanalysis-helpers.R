@@ -156,6 +156,9 @@
 }
 
 .maPrintPValue                        <- function(pValue) {
+  if (!.maIsFiniteScalar(pValue))
+    return("p = NA")
+
   if (pValue < 0.001) {
     return("p < 0.001")
   } else {
@@ -332,6 +335,9 @@
 
   xOut <- rep("", length(x))
   xNa  <- is.na(x)
+
+  if (all(xNa))
+    return(xOut)
 
   # compute the character width
   nDigits    <- .maGetDigitsBeforeDecimal(x[!xNa])

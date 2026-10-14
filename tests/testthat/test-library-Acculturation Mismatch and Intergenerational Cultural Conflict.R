@@ -78,8 +78,8 @@ test_that("SelectionModels (analysis 3) results match", {
 
   table <- results[["results"]][["weightFunctionSummary"]][["collection"]][["weightFunctionSummary_selectionParameters"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(1, "", "[0, 0.025)", "", "", 0.435511231401042, 0, "[0.025, 0.5)",
-     0.3562708222836, 1.13378921181937, 0.18796847999249, 0, "[0.5, 1)",
+    list(1, "", "(0, 0.025]", "", "", 0.435511231401042, 0, "(0.025, 0.5]",
+     0.3562708222836, 1.13378921181937, 0.18796847999249, 0, "(0.5, 1]",
      0.343299350813174, 0.860822843502293))
 
 })

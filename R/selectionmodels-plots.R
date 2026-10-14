@@ -45,8 +45,8 @@
 
 .smPrintBiasTest                        <- function(fit) {
 
-  if (!inherits(fit, "rma.uni.selmodel"))
-    return(gettext("Publication bias test: not available"))
+  if (!.smHasPublicationBiasTest(fit))
+    return(NULL)
 
   comparison <- .smPublicationBiasComparison(fit)
 

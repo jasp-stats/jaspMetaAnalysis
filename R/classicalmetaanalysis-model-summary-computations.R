@@ -421,14 +421,14 @@
 .maRowHeterogeneityTest               <- function(fit, options) {
   if (.maIsSelection(options) && inherits(fit, "rma.uni.selmodel")) {
 
-    # selection models only test heterogeneity when tau2 is estimated
-    if (!.smHasEstimatedHeterogeneity(fit))
+    # Selection models only test heterogeneity when tau2 is estimated and the test is available.
+    if (!.smHasEstimatedHeterogeneity(fit) || !.maIsFiniteScalar(fit$LRT.tau2))
       return(NULL)
 
     row <- data.frame(
       subgroup = attr(fit, "subgroup"),
       test     = if (.maIsMetaregression(options)) gettext("Residual heterogeneity") else gettext("Heterogeneity"),
-      stat     = if (.maIsFiniteScalar(fit$LRT.tau2)) sprintf("LR(1) = %.2f", fit$LRT.tau2) else NA_character_,
+      stat     = sprintf("LR(1) = %.2f", fit$LRT.tau2),
       pval     = fit$LRTp.tau2
     )
 
@@ -685,8 +685,12 @@
   fitStats <- fit[["fit.stats"]]
 
   # GLMM and selection models only supply ML fit statistics.
-  if (inherits(fit, c("rma.glmm", "rma.uni.selmodel")) && "REML" %in% colnames(fitStats))
+  if ((.maIsSelection(options) || inherits(fit, c("rma.glmm", "rma.uni.selmodel"))) &&
+      "REML" %in% colnames(fitStats))
     fitStats <- fitStats[, "ML", drop = FALSE]
+
+  if (.maIsSelection(options))
+    fitStats["dev", "ML"] <- -2 * fitStats["ll", "ML"]
 
   if (.maIsUnrestrictedWeightedLeastSquares(options))
     fitStats <- .maComputeUwlsFitMeasures(fitStats, fit)
