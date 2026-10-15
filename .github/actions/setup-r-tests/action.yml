@@ -12,6 +12,16 @@ runs:
         r-version: '4.5.2'
         Ncpus: 1
 
+    - name: Use reference BLAS on macOS
+      if: runner.os == 'macOS'
+      shell: bash
+      run: |
+        # R 4.5.2 arm64 defaults to Accelerate; use R's reference arithmetic
+        # for reproducible optimizer and numerical-Hessian regression tests.
+        r_home=$(R RHOME)
+        test -f "$r_home/lib/libRblas.0.dylib"
+        sudo ln -sf libRblas.0.dylib "$r_home/lib/libRblas.dylib"
+
     - name: Configure R installation
       shell: bash
       run: |
