@@ -18,7 +18,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest]
+        # The stored numerical regression baseline uses x86-64 arithmetic.
+        os: [macos-26-intel, windows-latest, ubuntu-latest]
         r: ['4.5.2']
         packages: [lockfile]
         include:

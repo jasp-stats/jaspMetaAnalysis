@@ -16,8 +16,8 @@ runs:
       if: runner.os == 'macOS'
       shell: bash
       run: |
-        # R 4.5.2 arm64 defaults to Accelerate; use R's reference arithmetic
-        # for reproducible optimizer and numerical-Hessian regression tests.
+        # Keep the reference arithmetic used by the numerical regression baseline.
+        # Vendor BLAS changes flat-boundary optimizers and numerical Hessians.
         r_home=$(R RHOME)
         test -f "$r_home/lib/libRblas.0.dylib"
         sudo ln -sf libRblas.0.dylib "$r_home/lib/libRblas.dylib"
@@ -110,7 +110,7 @@ runs:
     - uses: r-lib/actions/setup-renv@v2
       if: inputs.packages == 'lockfile'
       with:
-        cache-version: module-tests-1
+        cache-version: module-tests-renv-1.1.8-${{ runner.arch }}
         bypass-cache: never
 
     - uses: r-lib/actions/setup-r-dependencies@v2
