@@ -1,5 +1,5 @@
 # Focused review regressions, run separately from the human-owned output tests.
-# Run from the repository root after loading the module with pkgload::load_all().
+# Run from the repository root after installing the module from source.
 
 selectionFunction <- function(name) get(name, asNamespace("jaspMetaAnalysis"))
 selectionFile <- "tests/testthat/jaspfiles/other/Selection Models - bcg.jasp"

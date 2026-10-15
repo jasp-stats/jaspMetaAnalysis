@@ -39,7 +39,7 @@ jobs:
 
       - name: Run selection-model review regressions
         run: |
-          pkgload::load_all()
+          install.packages(".", repos = NULL, type = "source", INSTALL_opts = "--no-multiarch")
           source(".github/scripts/selectionmodels-regression.R")
         shell: Rscript {0}
 
