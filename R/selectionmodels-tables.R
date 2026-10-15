@@ -340,7 +340,10 @@
 
   fits          <- .maExtractFit(jaspResults, options)
   frequencyFits <- Filter(
-    function(fit) inherits(fit, "rma.uni.selmodel") && !all(is.na(fit$ptable)),
+    function(fit) {
+      counts <- attr(fit, "selectionFrequencies")
+      !is.null(counts) && !inherits(counts, "try-error") && !all(is.na(counts))
+    },
     fits
   )
   container <- .smExtractWeightFunctionContainer(jaspResults, options)
@@ -351,7 +354,7 @@
   if (!is.null(fits) && !length(frequencyFits)) {
     message <- createJaspHtml(
       title = gettext("P-Value Frequencies"),
-      text  = gettext("P-value frequencies require a fitted selection model with p-value cutoffs.")
+      text  = gettext("P-value frequencies require valid p-value cutoffs and study p-values.")
     )
     message$dependOn(c("weightFunctionPValueFrequencyTable", "includeFullDatasetInSubgroupAnalysis"))
     message$position                    <- 3
@@ -380,7 +383,7 @@
     table$addFootnote(gettext("P-value frequencies include only studies to which selection applies."))
 
   rows <- lapply(frequencyFits, function(fit) {
-    counts <- as.data.frame(fit$ptable)
+    counts <- as.data.frame(attr(fit, "selectionFrequencies"))
     data.frame(
       interval = rownames(counts),
       subgroup = attr(fit, "subgroup"),

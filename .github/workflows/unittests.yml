@@ -37,6 +37,12 @@ jobs:
         with:
           packages: ${{ matrix.packages }}
 
+      - name: Run selection-model review regressions
+        run: |
+          pkgload::load_all()
+          source(".github/scripts/selectionmodels-regression.R")
+        shell: Rscript {0}
+
       - name: Run unit tests
         run: source("tests/testthat.R")
         shell: Rscript {0}

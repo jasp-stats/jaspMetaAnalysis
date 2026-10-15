@@ -4,6 +4,13 @@
 
 # Model specification ----
 
+.robmaPrintPrior                                 <- function(prior, shortName) {
+
+  # metaBMA also registers print.prior; resolve the BayesTools method explicitly.
+  printer <- utils::getS3method("print", "prior", envir = asNamespace("BayesTools"))
+  printer(prior, short_name = shortName, silent = TRUE)
+}
+
 .robmaModelSpecificationTables                    <- function(jaspResults, options) {
 
   # create / access the container
@@ -103,7 +110,7 @@
 
   # print notes & fill empty spots
   priors <- lapply(priors, function(x) c(
-    if (length(x) > 0) sapply(x, BayesTools:::print.prior, short_name = options[["shortenPriorName"]], silent = TRUE),
+    if (length(x) > 0) sapply(x, .robmaPrintPrior, shortName = options[["shortenPriorName"]]),
     rep("", max(lengths(priors)) - length(x))
   ))
 
@@ -137,8 +144,8 @@
   priors <- lapply(names(priors), function(x) {
     data.frame(
       term        = x,
-      alternative = if (!is.null(priors[[x]][["alt"]]))  BayesTools:::print.prior(priors[[x]][["alt"]], short_name = options[["shortenPriorName"]], silent = TRUE)  else "",
-      null        = if (!is.null(priors[[x]][["null"]])) BayesTools:::print.prior(priors[[x]][["null"]], short_name = options[["shortenPriorName"]], silent = TRUE) else ""
+      alternative = if (!is.null(priors[[x]][["alt"]]))  .robmaPrintPrior(priors[[x]][["alt"]], shortName = options[["shortenPriorName"]])  else "",
+      null        = if (!is.null(priors[[x]][["null"]])) .robmaPrintPrior(priors[[x]][["null"]], shortName = options[["shortenPriorName"]]) else ""
     )
   })
 

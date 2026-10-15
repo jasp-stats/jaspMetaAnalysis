@@ -9,6 +9,7 @@ Group
 	readonly property bool selectionEnabled: functionType.value !== "none"
 	readonly property bool truncation: functionType.value === "trunc" || functionType.value === "truncest"
 	readonly property bool supportsPrecision: ["halfnorm", "negexp", "logistic", "power", "negexppow"].includes(functionType.value)
+	onTruncationChanged: if (truncation && selection.initialized) selection.currentIndex = 0;
 	DropDown
 	{
 		id: functionType
@@ -36,12 +37,15 @@ Group
 	}
 	DropDown
 	{
+		id: selection
 		name: "sidedness"
 		label: qsTr("Selection")
 		visible: selectionEnabled
 		values: truncation ?
 			[ { label: qsTr("One-sided"), value: "oneSided" } ] :
 			[ { label: qsTr("One-sided"), value: "oneSided" }, { label: qsTr("Two-sided"), value: "twoSided" } ]
+		onInitializedChanged: if (initialized && truncation) currentIndex = 0;
+		onCurrentValueChanged: if (initialized && truncation && currentValue !== "oneSided") currentIndex = 0;
 		info: qsTr("Use one-sided study p-values in the expected direction, or two-sided study p-values for significance in either direction. This determines publication selection; coefficient tests remain two-sided.")
 	}
 	TextField

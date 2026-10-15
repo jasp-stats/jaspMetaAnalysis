@@ -24,7 +24,8 @@
     error = function(e) .smError(conditionMessage(e))
   )
 
-  attr(value, "selectionWarnings") <- unique(warnings)
+  if (!is.null(value))
+    attr(value, "selectionWarnings") <- unique(warnings)
 
   return(value)
 }
@@ -124,6 +125,18 @@
 
 # Candidate fitting ----
 
+.smPValueFrequencies                    <- function(reference, spec, dataset, options) {
+
+  if (inherits(reference, "try-error") || inherits(spec, "try-error") ||
+      spec[["type"]] %in% c("none", "trunc", "truncest") || !length(spec[["steps"]]))
+    return(NULL)
+
+  .smCapture(do.call(
+    metafor::selmodel,
+    c(list(x = reference), .smSelectionArguments(spec, dataset, options), list(ptable = TRUE))
+  ))
+}
+
 .smFitOne                               <- function(reference, spec, dataset, options) {
 
   if (inherits(reference, "try-error"))
@@ -160,10 +173,7 @@
   if (spec[["type"]] == "stepfun" &&
       (!length(spec[["delta"]]) || anyNA(spec[["delta"]][-1]))) {
 
-    frequencies <- .smCapture(do.call(
-      metafor::selmodel,
-      c(list(x = reference), args, list(ptable = TRUE))
-    ))
+    frequencies <- .smPValueFrequencies(reference, spec, dataset, options)
 
     if (inherits(frequencies, "try-error"))
       return(frequencies)
@@ -224,8 +234,12 @@
     model <- cache[["models"]][[id]]
 
     # Editing one candidate reuses the reference and unaffected candidates.
-    if (is.null(model) || !identical(model[["key"]], key))
+    if (is.null(model) || !identical(model[["key"]], key)) {
       model <- list(key = key, fit = .smFitOne(cache[["reference"]], spec, dataset, options))
+      attr(model[["fit"]], "selectionFrequencies") <- .smPValueFrequencies(
+        cache[["reference"]], spec, dataset, options
+      )
+    }
 
     model[["fit"]] <- .smAttachFitMetadata(
       fit       = model[["fit"]],

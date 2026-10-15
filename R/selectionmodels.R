@@ -80,6 +80,9 @@ SelectionModels                         <- function(jaspResults, dataset = NULL,
 
   if (length(sampleSizeVariables)) {
 
+    if (any(!sampleSizeVariables %in% names(dataset)))
+      .quitAnalysis(gettext("Sample-size variable not found in the data. Assign an available sample-size variable."))
+
     keep     <- stats::complete.cases(dataset[, sampleSizeVariables, drop = FALSE])
     dataset  <- dataset[keep, , drop = FALSE]
     retained <- retained[keep]
