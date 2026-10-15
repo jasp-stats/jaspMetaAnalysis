@@ -42,6 +42,15 @@ runs:
       with:
         type: full
 
+    - name: Configure headless macOS bitmap graphics
+      if: runner.os == 'macOS'
+      shell: bash
+      run: |
+        # jaspBase opens temporary PNG devices while decoding ggplots. Quartz
+        # can crash on headless Intel runners; use Cairo in every R process.
+        printf '%s\n' 'options(bitmapType = "cairo")' > "$RUNNER_TEMP/jasp-ci-profile.R"
+        echo "R_PROFILE=$RUNNER_TEMP/jasp-ci-profile.R" >> "$GITHUB_ENV"
+
     - name: Install JAGS 4 and configure OpenMP on macOS
       if: runner.os == 'macOS'
       shell: bash
@@ -124,5 +133,7 @@ runs:
     - name: Set up jaspTools without replacing restored dependencies
       shell: Rscript {0}
       run: |
+        if (Sys.info()[["sysname"]] == "Darwin")
+          stopifnot(capabilities("cairo"), identical(getOption("bitmapType"), "cairo"))
         jaspTools::setupJaspTools(installJaspCorePkgs = FALSE)
         print(sessionInfo())
