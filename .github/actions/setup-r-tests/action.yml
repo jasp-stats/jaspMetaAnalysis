@@ -32,21 +32,25 @@ runs:
       with:
         type: full
 
-    - name: Configure JAGS and OpenMP on macOS
+    - name: Install JAGS 4 and configure OpenMP on macOS
       if: runner.os == 'macOS'
       shell: bash
       run: |
-        brew install jags
-        jags_prefix=$(brew --prefix jags)
+        # Homebrew's JAGS 5 is incompatible with the module's JAGS 4 extensions.
+        curl --fail --location --retry 3 \
+          'https://sourceforge.net/projects/mcmc-jags/files/JAGS/4.x/Mac%20OS%20X/extras/JAGS-4.3.2-universal.tar.gz/download' \
+          --output "$RUNNER_TEMP/JAGS-4.3.2.tar.gz"
+        echo "33846102cf5918d979395c789598ba20001ae935b95892bc73594e4b948d6482  $RUNNER_TEMP/JAGS-4.3.2.tar.gz" | shasum -a 256 --check
+        sudo tar -xzf "$RUNNER_TEMP/JAGS-4.3.2.tar.gz" -C /
+        echo /usr/local/bin >> "$GITHUB_PATH"
+        brew install libomp
+        jags_prefix=/usr/local
+        PKG_CONFIG_PATH="$jags_prefix/lib/pkgconfig" pkg-config --exact-version=4.3.2 jags
         omp_prefix=$(brew --prefix libomp)
         echo "PKG_CONFIG_PATH=$jags_prefix/lib/pkgconfig:${PKG_CONFIG_PATH:-}" >> "$GITHUB_ENV"
         # R's bundled older libomp cannot load code compiled with current clang.
         echo "R_LD_LIBRARY_PATH=$omp_prefix/lib:$jags_prefix/lib" >> "$GITHUB_ENV"
         echo "DYLD_LIBRARY_PATH=$omp_prefix/lib:$jags_prefix/lib" >> "$GITHUB_ENV"
-        sudo mkdir -p /usr/local/lib
-        sudo ln -sf "$jags_prefix"/lib/libjags.*.dylib /usr/local/lib/
-        sudo ln -sf "$jags_prefix"/lib/libjrmath.*.dylib /usr/local/lib/
-        sudo ln -sfn "$jags_prefix/lib/JAGS" /usr/local/lib/JAGS
 
     - name: Install JAGS on Windows
       if: runner.os == 'Windows'
@@ -96,6 +100,7 @@ runs:
       if: inputs.packages == 'lockfile'
       with:
         cache-version: module-tests-1
+        bypass-cache: never
 
     - uses: r-lib/actions/setup-r-dependencies@v2
       if: inputs.packages == 'latest'
