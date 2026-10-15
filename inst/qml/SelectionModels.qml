@@ -76,7 +76,7 @@ Form
 			singleVariable: true
 			allowedColumns: ["nominal"]
 			allowTypeChange: true
-			info: qsTr("Optional factor identifying studies unaffected by selection. Choose the unaffected level below; selection applies to all other levels. Both remain in the analysis.")
+			info: qsTr("Optional factor identifying estimates unaffected by selection. Choose the unaffected level below; selection applies to all other levels. Both remain in the analysis.")
 		}
 		DropDown
 		{
@@ -84,7 +84,7 @@ Form
 			label: qsTr("Unaffected Level")
 			enabled: noSelection.count > 0
 			source: [{ name: "noSelection", use: "levels" }]
-			info: qsTr("Studies at this level are unaffected by selection. Selection applies to all other levels of the assigned factor.")
+			info: qsTr("Estimates at this level are unaffected by selection. Selection applies to all other levels of the assigned factor.")
 		}
 	}
 	Group
@@ -136,12 +136,20 @@ Form
 			name: "weightFunctionPlot"
 			label: qsTr("Plot")
 			info: qsTr("Visualize the relative probability of study being published across the range of p-values.")
+
+			CheckBox
+			{
+				name: "weightFunctionPlotRescaleXAxis"
+				label: qsTr("Rescale x-axis")
+				checked: true
+				info: qsTr("Space p-value thresholds equally along the x-axis.")
+			}
 		}
 		CheckBox
 		{
 			name: "weightFunctionPValueFrequencyTable"
 			label: qsTr("P-value frequency table")
-			info: qsTr("Study counts within the specified p-value intervals.")
+			info: qsTr("Estimate counts within the specified p-value intervals.")
 		}
 	}
 	MA.ClassicalMetaAnalysisEstimatedMarginalMeans { analysisType: "selectionModels" }

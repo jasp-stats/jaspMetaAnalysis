@@ -59,15 +59,6 @@
   )
 }
 
-.smPlotTheme                            <- function() {
-
-  ggplot2::theme(
-    axis.title  = ggplot2::element_text(size = 12),
-    axis.text   = ggplot2::element_text(size = 11),
-    plot.margin = ggplot2::margin(10, 14, 10, 10)
-  )
-}
-
 .smWeightData                           <- function(fit) {
 
   if (!inherits(fit, "rma.uni.selmodel"))
@@ -192,7 +183,7 @@
 
   plot          <- createJaspPlot(title = title, width = 500, height = 350)
   plot$position <- 2
-  plot$dependOn(c(.smDependencies, "weightFunctionPlot"))
+  plot$dependOn(c(.smDependencies, "weightFunctionPlot", "weightFunctionPlotRescaleXAxis"))
   container[[key]] <- plot
 
   data <- .smCapture(.smWeightData(fit))
@@ -220,17 +211,25 @@
     1L
   }
 
+  xScale <- NULL
+  if (options[["weightFunctionPlotRescaleXAxis"]] &&
+      inherits(fit, "rma.uni.selmodel") && !fit$type %in% c("trunc", "truncest")) {
+    thresholds <- sort(unique(c(0, fit$steps, 1)))
+    breaks     <- seq(0, 1, length.out = length(thresholds))
+    data$x     <- stats::approx(thresholds, breaks, xout = data$x)$y
+    xScale     <- ggplot2::scale_x_continuous(breaks = breaks, labels = as.character(thresholds))
+  }
+
   plot$plotObject <- ggplot2::ggplot(
     data,
     ggplot2::aes(x = x, y = y, group = interaction(precision, interval), linetype = precision)
   ) +
     ggplot2::geom_ribbon(ggplot2::aes(ymin = lower, ymax = upper), alpha = .15, colour = NA, na.rm = TRUE) +
     ggplot2::geom_line(ggplot2::aes(group = precision)) +
+    xScale +
     ggplot2::labs(x = label, y = gettext("Relative selection likelihood"), linetype = NULL) +
     jaspGraphs::geom_rangeframe(sides = "bl") +
-    jaspGraphs::themeJaspRaw() +
-    .smPlotTheme() +
-    ggplot2::theme(legend.position = if (precisionDependent) "bottom" else "none")
+    jaspGraphs::themeJaspRaw(legend.position = if (precisionDependent) "bottom" else "none")
 }
 
 # Overall profile-likelihood diagnostics ----
@@ -392,10 +391,5 @@
   profile$ll   <- profile$ll[finite]
   profile$xlab <- if (parameter == "tau2") "\U1D70F\u00b2" else paste0("\u03b4", sub("delta", "", parameter))
 
-  plot <- .smCapture(.maMakeProfileLikelihoodPlot(profile))
-
-  if (inherits(plot, "try-error"))
-    return(plot)
-
-  plot + .smPlotTheme()
+  .smCapture(.maMakeProfileLikelihoodPlot(profile))
 }

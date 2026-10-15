@@ -148,12 +148,12 @@
     if (options[["noSelection"]] != "")
       paste(
         sprintf(ngettext(fit$k1,
-          "Selection applies to %1$i study.",
-          "Selection applies to %1$i studies."
+          "Selection applies to %1$i estimate.",
+          "Selection applies to %1$i estimates."
         ), fit$k1),
         sprintf(ngettext(fit$k0,
-          "%1$i study at level '%2$s' is unaffected.",
-          "%1$i studies at level '%2$s' are unaffected."
+          "%1$i estimate at level '%2$s' is unaffected.",
+          "%1$i estimates at level '%2$s' are unaffected."
         ), fit$k0, options[["noSelectionLevel"]])
       ),
     .smClippedPValueMessage(fit, options),
@@ -169,7 +169,7 @@
   if (fit$pval.min <= 0)
     return(NULL)
 
-  # Report clipping only for studies to which selection actually applies.
+  # Report clipping only for estimates to which selection actually applies.
   rawPValues <- if (options[["pValue"]] != "") {
     attr(fit, "dataset")[[options[["pValue"]]]]
   } else {
@@ -191,8 +191,8 @@
     return(NULL)
 
   sprintf(ngettext(sum(clipped),
-    "For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. This affects %3$i selected study.",
-    "For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. This affects %3$i selected studies."
+    "For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. This affects %3$i selected estimate.",
+    "For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. This affects %3$i selected estimates."
   ), fit$pval.min, 1 - fit$pval.min, sum(clipped))
 }
 
@@ -317,7 +317,7 @@
     return(NULL)
 
   labels <- if (stepFunction) {
-    paste0("(", head(c(0, fit$steps), -1), ", ", fit$steps, "]")
+    .smPValueIntervalLabels(fit$steps)
   } else {
     paste0("\u03b4", seq_along(fit$delta))
   }
@@ -331,6 +331,11 @@
     lCi      = ifelse(fit$delta.fix, NA_real_, fit$ci.lb.delta),
     uCi      = ifelse(fit$delta.fix, NA_real_, fit$ci.ub.delta)
   )
+}
+
+.smPValueIntervalLabels                 <- function(steps) {
+
+  paste0("(", head(c(0, steps), -1), ", ", steps, "]")
 }
 
 .smFrequencyTable                       <- function(jaspResults, options) {
@@ -368,11 +373,11 @@
   table$position                      <- 3
   container[["selectionFrequencies"]] <- table
 
-  table$addColumnInfo(name = "interval", title = gettext("Interval"), type = "string")
+  table$addColumnInfo(name = "interval", title = gettext("<em>p</em>-Values Interval"), type = "string")
   .maAddSubgroupColumn(table, options)
   table$addColumnInfo(
     name  = "count",
-    title = if (options[["noSelection"]] != "") gettext("Selected Studies") else gettext("Studies"),
+    title = if (options[["noSelection"]] != "") gettext("Selected Estimates") else gettext("Estimates"),
     type  = "integer"
   )
 
@@ -380,12 +385,13 @@
     return()
 
   if (options[["noSelection"]] != "")
-    table$addFootnote(gettext("P-value frequencies include only studies to which selection applies."))
+    table$addFootnote(gettext("P-value frequencies include only estimates to which selection applies."))
 
   rows <- lapply(frequencyFits, function(fit) {
     counts <- as.data.frame(attr(fit, "selectionFrequencies"))
+    steps  <- as.numeric(sub(".*<= ", "", rownames(counts)))
     data.frame(
-      interval = rownames(counts),
+      interval = .smPValueIntervalLabels(steps),
       subgroup = attr(fit, "subgroup"),
       count    = counts[["k"]]
     )

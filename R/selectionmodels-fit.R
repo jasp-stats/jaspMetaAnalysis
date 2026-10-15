@@ -164,9 +164,9 @@
 
   args <- .smSelectionArguments(spec, dataset, options)
 
-  # metafor cannot fit a selection model without selected studies, even with fixed parameters.
+  # metafor cannot fit a selection model without selected estimates, even with fixed parameters.
   if (!is.null(args$subset) && !any(args$subset)) {
-    return(.smError(gettext("No studies are marked as subject to selection. Use the unadjusted model (None) or choose a different unaffected level.")))
+    return(.smError(gettext("No estimates are marked as subject to selection. Use the unadjusted model (None) or choose a different unaffected level.")))
   }
 
   # Do not silently merge empty intervals. Fixed non-reference weights are allowed.
@@ -186,7 +186,7 @@
     empty <- frequencies[["k"]] == 0
 
     if (empty[1] || any(empty & is.na(delta))) {
-      return(.smError(gettext("The reference interval or an interval with an estimated weight contains no selected studies. Change the cutoffs or fix the empty interval's weight; intervals are not merged automatically.")))
+      return(.smError(gettext("The reference interval or an interval with an estimated weight contains no selected estimates. Change the cutoffs or fix the empty interval's weight; intervals are not merged automatically.")))
     }
   }
 
