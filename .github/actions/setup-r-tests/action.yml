@@ -52,7 +52,8 @@ runs:
           --output "$RUNNER_TEMP/JAGS-4.3.2.tar.gz"
         echo "33846102cf5918d979395c789598ba20001ae935b95892bc73594e4b948d6482  $RUNNER_TEMP/JAGS-4.3.2.tar.gz" | shasum -a 256 --check
         sudo mkdir -p /usr/local
-        sudo tar -xzf "$RUNNER_TEMP/JAGS-4.3.2.tar.gz" --strip-components=2 -C /usr/local
+        sudo tar -xzf "$RUNNER_TEMP/JAGS-4.3.2.tar.gz" --strip-components=2 \
+          --no-same-owner --no-same-permissions -C /usr/local
         echo /usr/local/bin >> "$GITHUB_PATH"
         brew install libomp
         jags_prefix=/usr/local
