@@ -42,6 +42,7 @@ Imports:
   nleqslv,
   patchwork
 Remotes:
+  FBartos/BayesTools@v0.2.23,
   FBartos/RoBMA@v3.6.1,
   jasp-stats/jaspBase,
   jasp-stats/jaspGraphs,
