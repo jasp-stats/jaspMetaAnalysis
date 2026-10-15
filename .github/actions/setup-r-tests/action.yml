@@ -84,6 +84,14 @@ runs:
         # Keep RStan and RcppParallel binaries from the same repository snapshot.
         echo "RENV_CONFIG_REPOS_OVERRIDE=https://packagemanager.posit.co/cran/2026-06-30" >> "$GITHUB_ENV"
 
+    - name: Install the lockfile version of renv
+      if: inputs.packages == 'lockfile'
+      shell: Rscript {0}
+      run: |
+        # setup-renv otherwise bootstraps the newest installer before restoring.
+        install.packages("https://cran.r-project.org/src/contrib/Archive/renv/renv_1.1.8.tar.gz",
+                         repos = NULL, type = "source")
+
     - uses: r-lib/actions/setup-renv@v2
       if: inputs.packages == 'lockfile'
       with:
