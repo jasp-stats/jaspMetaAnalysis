@@ -42,6 +42,7 @@ Imports:
   nleqslv,
   patchwork
 Remotes:
+  FBartos/RoBMA@v3.6.1,
   jasp-stats/jaspBase,
   jasp-stats/jaspGraphs,
   jasp-stats/jaspSem,
