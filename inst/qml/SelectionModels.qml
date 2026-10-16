@@ -121,37 +121,6 @@ Form
 		customSelected: publicationBiasAdjustment.value === "custom"
 	}
 	MA.ClassicalMetaAnalysisStatistics { id: sectionStatistics; analysisType: "selectionModels" }
-	Section
-	{
-		title: qsTr("Weight Function")
-		CheckBox
-		{
-			name: "weightFunctionEstimates"
-			label: qsTr("Estimates")
-			checked: true
-			info: qsTr("Include weight function estimates in the output.")
-		}
-		CheckBox
-		{
-			name: "weightFunctionPlot"
-			label: qsTr("Plot")
-			info: qsTr("Visualize the relative probability of study being published across the range of p-values.")
-
-			CheckBox
-			{
-				name: "weightFunctionPlotRescaleXAxis"
-				label: qsTr("Rescale x-axis")
-				checked: true
-				info: qsTr("Space p-value thresholds equally along the x-axis.")
-			}
-		}
-		CheckBox
-		{
-			name: "weightFunctionPValueFrequencyTable"
-			label: qsTr("P-value frequency table")
-			info: qsTr("Estimate counts within the specified p-value intervals.")
-		}
-	}
 	MA.ClassicalMetaAnalysisEstimatedMarginalMeans { analysisType: "selectionModels" }
 	MA.ForestPlotSection
 	{

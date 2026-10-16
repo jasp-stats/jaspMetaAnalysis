@@ -5,7 +5,7 @@ import JASP
 
 Section
 {
-	title: qsTr("Weight Functions (Custom)")
+	title: qsTr("Weight Function (Custom)")
 	columns: 1
 	property bool customSelected: false
 	enabled: customSelected

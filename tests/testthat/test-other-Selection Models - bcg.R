@@ -48,8 +48,7 @@ test_that("SelectionModels (analysis 1) results match", {
 
   table <- results[["results"]][["weightFunctionSummary"]][["collection"]][["weightFunctionSummary_selectionFrequencies"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(8, "0     &lt; p &lt;= 0.025", 3, "0.025 &lt; p &lt;= 0.5", 2,
-     "0.5   &lt; p &lt;= 1"))
+    list(8, "(0, 0.025]", 3, "(0.025, 0.5]", 2, "(0.5, 1]"))
 
   table <- results[["results"]][["weightFunctionSummary"]][["collection"]][["weightFunctionSummary_selectionParameters"]][["data"]]
   jaspTools::expect_equal_tables(table,
@@ -191,6 +190,11 @@ test_that("SelectionModels (analysis 3) results match", {
      "z = -2.37", "Pooled effect", 0.622406656819688, "LR(1) = 0.24",
      "Publication bias"))
 
+  table <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model"]][["collection"]][["selectionModelResults_model_weightFunctionSummary"]][["collection"]][["selectionModelResults_model_weightFunctionSummary_selectionParameters"]][["data"]]
+  jaspTools::expect_equal_tables(table,
+    list(1, "", "(0, 0.025]", "", "", 0.635529779305167, 0, "(0.025, 1]",
+     0.586619067187675, 1.78528202363749))
+
   plotName <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model"]][["collection"]][["selectionModelResults_model_weightFunctionSummary"]][["collection"]][["selectionModelResults_model_weightFunctionSummary_weightFunction"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "analysis-3_figure-1_weight-function")
@@ -226,6 +230,12 @@ test_that("SelectionModels (analysis 3) results match", {
      "z = -2.40", "Pooled effect", 0.840750861182679, "LR(2) = 0.35",
      "Publication bias"))
 
+  table <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model2"]][["collection"]][["selectionModelResults_model2_weightFunctionSummary"]][["collection"]][["selectionModelResults_model2_weightFunctionSummary_selectionParameters"]][["data"]]
+  jaspTools::expect_equal_tables(table,
+    list(1, "", "(0, 0.025]", "", "", 0.631550088319224, 0, "(0.025, 0.5]",
+     0.591229157859145, 1.79033794433309, 0.92784376191832, 0, "(0.5, 1]",
+     1.35993039801969, 3.59325836351813))
+
   plotName <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model2"]][["collection"]][["selectionModelResults_model2_weightFunctionSummary"]][["collection"]][["selectionModelResults_model2_weightFunctionSummary_weightFunction"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "analysis-3_figure-3_weight-function")
@@ -243,6 +253,12 @@ test_that("SelectionModels (analysis 3) results match", {
     list(1.6902168833355e-26, "LR(1) = 113.48", "Heterogeneity", 0.16008180241724,
      "z = -1.40", "Pooled effect", 0.490604893740814, "LR(2) = 1.42",
      "Publication bias"))
+
+  table <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model3"]][["collection"]][["selectionModelResults_model3_weightFunctionSummary"]][["collection"]][["selectionModelResults_model3_weightFunctionSummary_selectionParameters"]][["data"]]
+  jaspTools::expect_equal_tables(table,
+    list(1.10863656194187, 0.791539197737963, "<unicode>1", 0.16178734237217,
+     1.42573392614577, 1.49251724790659, 0.0364039638126816, "<unicode>2",
+     0.742928592351462, 2.94863053200049))
 
   plotName <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model3"]][["collection"]][["selectionModelResults_model3_weightFunctionSummary"]][["collection"]][["selectionModelResults_model3_weightFunctionSummary_weightFunction"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
@@ -262,6 +278,11 @@ test_that("SelectionModels (analysis 3) results match", {
      "z = -1.76", "Pooled effect", 0.692077849842567, "LR(1) = 0.16",
      "Publication bias"))
 
+  table <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model4"]][["collection"]][["selectionModelResults_model4_weightFunctionSummary"]][["collection"]][["selectionModelResults_model4_weightFunctionSummary_selectionParameters"]][["data"]]
+  jaspTools::expect_equal_tables(table,
+    list(0.913355362696277, 0, "<unicode>1", 2.37478998498445, 5.56785820411221
+    ))
+
   plotName <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model4"]][["collection"]][["selectionModelResults_model4_weightFunctionSummary"]][["collection"]][["selectionModelResults_model4_weightFunctionSummary_weightFunction"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "analysis-3_figure-5_weight-function")
@@ -280,6 +301,11 @@ test_that("SelectionModels (analysis 3) results match", {
      "z = -2.33", "Pooled effect", 0.980489193045497, "LR(1) = 0.00",
      "Publication bias"))
 
+  table <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model5"]][["collection"]][["selectionModelResults_model5_weightFunctionSummary"]][["collection"]][["selectionModelResults_model5_weightFunctionSummary_selectionParameters"]][["data"]]
+  jaspTools::expect_equal_tables(table,
+    list(0.0743684680714243, 0, "<unicode>1", 2.06186721961366, 4.11555395941793
+    ))
+
   plotName <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model5"]][["collection"]][["selectionModelResults_model5_weightFunctionSummary"]][["collection"]][["selectionModelResults_model5_weightFunctionSummary_weightFunction"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "analysis-3_figure-6_weight-function")
@@ -297,6 +323,11 @@ test_that("SelectionModels (analysis 3) results match", {
     list(7.41059077081358e-27, "LR(1) = 115.12", "Heterogeneity", 0.07623941393456,
      "z = -1.77", "Pooled effect", 0.965719028803835, "LR(1) = 0.00",
      "Publication bias"))
+
+  table <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model6"]][["collection"]][["selectionModelResults_model6_weightFunctionSummary"]][["collection"]][["selectionModelResults_model6_weightFunctionSummary_selectionParameters"]][["data"]]
+  jaspTools::expect_equal_tables(table,
+    list(0.276793761983473, 0, "<unicode>1", 5.18211112719636, 10.4335449351726
+    ))
 
   plotName <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model6"]][["collection"]][["selectionModelResults_model6_weightFunctionSummary"]][["collection"]][["selectionModelResults_model6_weightFunctionSummary_weightFunction"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
@@ -341,18 +372,14 @@ test_that("SelectionModels (analysis 4) results match", {
      "Publication bias"))
 
   table <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model"]][["collection"]][["selectionModelResults_model_weightFunctionSummary"]][["collection"]][["selectionModelResults_model_weightFunctionSummary_selectionParameters"]][["data"]]
-  # Selection-parameter uncertainty varies slightly across metafor versions.
-  testthat::expect_equal(as.numeric(table[[1]][["se"]]), 0.802657515905965, tolerance = 1e-3)
-  testthat::expect_equal(as.numeric(table[[1]][["uCi"]]), 2.42585082389923, tolerance = 1e-3)
-  testthat::expect_equal(as.numeric(table[[2]][["se"]]), 3.71380902686755, tolerance = 1e-3)
-  testthat::expect_equal(as.numeric(table[[2]][["uCi"]]), 7.28203274293131, tolerance = 1e-3)
-  jaspTools::expect_equal_tables(
-    lapply(table, function(row) row[!names(row) %in% c("se", "uCi")]),
-    list(0.852671000803155, 1e-05, "<unicode>1", 0.00310080481116186, 1e-05, "<unicode>2"))
+  jaspTools::expect_equal_tables(table,
+    list(0.852671000803155, 1e-05, "<unicode>1", 0.802657515905965, 2.42585082389923,
+     0.00310080481116186, 1e-05, "<unicode>2", 3.71380902686755,
+     7.28203274293131))
 
   plotName <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model"]][["collection"]][["selectionModelResults_model_weightFunctionSummary"]][["collection"]][["selectionModelResults_model_weightFunctionSummary_weightFunction"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "analysis-4_figure-1_weight-function", tolerance = 1e-3)
+  jaspTools::expect_equal_plots(testPlot, "analysis-4_figure-1_weight-function")
 
   table <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model1"]][["collection"]][["selectionModelResults_model1_modelSummaryContainer"]][["collection"]][["selectionModelResults_model1_modelSummaryContainer_pooledEstimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
@@ -463,16 +490,13 @@ test_that("SelectionModels (analysis 6) results match", {
     ))
 
   table <- results[["results"]][["weightFunctionSummary"]][["collection"]][["weightFunctionSummary_selectionParameters"]][["data"]]
-  # Selection-parameter uncertainty varies slightly across metafor versions.
-  testthat::expect_equal(as.numeric(table[[1]][["se"]]), 3.61311425231623, tolerance = 1e-3)
-  testthat::expect_equal(as.numeric(table[[1]][["uCi"]]), 7.08290865570233, tolerance = 1e-3)
-  jaspTools::expect_equal_tables(
-    lapply(table, function(row) row[!names(row) %in% c("se", "uCi")]),
-    list(0.00133484913415478, 0, "<unicode>1"))
+  jaspTools::expect_equal_tables(table,
+    list(0.00133484913415478, 0, "<unicode>1", 3.61311425231623, 7.08290865570233
+    ))
 
   plotName <- results[["results"]][["weightFunctionSummary"]][["collection"]][["weightFunctionSummary_weightFunction"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "analysis-6_figure-1_weight-function", tolerance = 1e-3)
+  jaspTools::expect_equal_plots(testPlot, "analysis-6_figure-1_weight-function")
 
 })
 

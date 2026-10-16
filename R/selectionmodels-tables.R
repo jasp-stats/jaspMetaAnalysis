@@ -229,7 +229,7 @@
 
 .smSelectionTable                       <- function(jaspResults, options, specification) {
 
-  if (!options[["weightFunctionEstimates"]])
+  if (!options[["weightFunctionCoefficientEstimates"]])
     return()
 
   container <- .smExtractWeightFunctionContainer(jaspResults, options)
@@ -242,7 +242,7 @@
       title = gettext("Weight Function Estimates"),
       text  = gettext("The unadjusted model has no selection parameters.")
     )
-    message$dependOn("weightFunctionEstimates")
+    message$dependOn("weightFunctionCoefficientEstimates")
     message$position                   <- 1
     container[["selectionParameters"]] <- message
     return()
@@ -257,7 +257,7 @@
     }
   )
   table$dependOn(c(
-    "weightFunctionEstimates", "confidenceIntervals", "standardErrors",
+    "weightFunctionCoefficientEstimates", "confidenceIntervals", "standardErrors",
     "includeFullDatasetInSubgroupAnalysis"
   ))
   table$showSpecifiedColumnsOnly     <- TRUE
