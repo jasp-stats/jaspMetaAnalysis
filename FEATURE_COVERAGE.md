@@ -14,6 +14,7 @@
 | `metafor::vcalc()` | Classical Meta-Analysis (Multilevel/Multivariate); Effect Size Aggregation. Variance-covariance matrix construction for dependent effect sizes; cluster-based dependence; subgrouped dependence; construct/type variables; within-study correlations; contrast groups; weights for contrast-based dependence. |
 | `metafor::robust()` | Classical Meta-Analysis; Classical Meta-Analysis (Multilevel/Multivariate). Cluster-robust coefficient tests and confidence intervals when a clustering variable is supplied. |
 | `metafor::permutest()` | Classical Meta-Analysis; Classical Meta-Analysis (Multilevel/Multivariate). Permutation tests for effect-size moderation and heterogeneity moderation; omnibus and term-level tests. |
+| `metafor::selmodel()` | Selection Models. Publication-bias selection models with 3PSM/4PSM presets and custom step, continuous, and truncation weight functions; moderator and subgroup models; one- or two-sided selection; precision dependence; ordinal weight constraints; multiple candidate models with fit statistics and AIC/AICc/BIC weights. |
 | `metafor::trimfill()` | Funnel Plot. Trim-and-fill publication-bias adjustment; missing-study estimates; adjusted funnel plot; trim-and-fill parameter table. |
 | `metafor::regtest()` | Funnel Plot. Funnel-plot asymmetry tests through meta-regression and weighted-regression/Egger-style tests. |
 | `metafor::ranktest()` | Funnel Plot. Rank-correlation/Begg-style funnel-plot asymmetry test. |
@@ -26,7 +27,6 @@
 Major `metafor` functions not implemented yet:
 
 - `metafor::rcalc()` for variance-covariance matrices of overlapping correlations.
-- `metafor::selmodel()` for selection models.
 - `metafor::hc()` for Henmi-Copas adjustment.
 - `metafor::tes()` for test of excess significance.
 - `metafor::cumul()` for cumulative meta-analysis.

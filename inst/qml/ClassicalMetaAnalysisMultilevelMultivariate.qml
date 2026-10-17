@@ -66,17 +66,11 @@ Form
 			info: qsTr("Variable containing the standard errors corresponding to the effect sizes.")
 		}
 
-		DropDown
+		MA.ClassicalMetaAnalysisMethod
 		{
-			name:			"method"
-			id:				method
-			label:			qsTr("Method")
-			startValue:		"restrictedML"
+			id: method
+			analysisType: "multilevelMultivariateMetaAnalysis"
 			info: qsTr("Method used to estimate heterogeneity in the meta-analysis.")
-			values:			[
-						{ label: qsTr("Maximum Likelihood")		, value: "maximumLikelihood"},
-						{ label: qsTr("Restricted ML")			, value: "restrictedML"		}
-					]
 		}
 
 		DropDown

@@ -4,14 +4,26 @@
 
 # Container ----
 
-.maExtractModelSummaryContainer      <- function(jaspResults) {
+.maModelSummaryTables                    <- function(jaspResults, options) {
+
+  .maOverallTestsTable(jaspResults, options)
+  .maPooledEstimatesTable(jaspResults, options)
+
+  if (.maIsMultilevelMultivariate(options))
+    .mammRandomEstimatesTable(jaspResults, options)
+
+  if (options[["fitMeasures"]])
+    .maFitMeasuresTable(jaspResults, options)
+}
+
+.maExtractModelSummaryContainer      <- function(jaspResults, options) {
 
   if (!is.null(jaspResults[["modelSummaryContainer"]]))
     return(jaspResults[["modelSummaryContainer"]])
 
   # create the output container
   modelSummaryContainer <- createJaspContainer(gettext("Model Summary"))
-  modelSummaryContainer$dependOn(.maDependencies)
+  modelSummaryContainer$dependOn(.maModelDependencies(options))
   modelSummaryContainer$position <- 1
   jaspResults[["modelSummaryContainer"]] <- modelSummaryContainer
 
@@ -22,7 +34,7 @@
 
 .maOverallTestsTable                     <- function(jaspResults, options) {
 
-  modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults)
+  modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults, options)
 
   if (!is.null(modelSummaryContainer[["testsTable"]]))
     return()
@@ -76,6 +88,10 @@
     tests[["heterogeneity"]] <- .maSafeRbind(lapply(fit, .maRowHeterogeneityTest, options = options))
   }
   tests[["effect"]]        <- .maSafeRbind(lapply(fit, .maRowEffectSizeTest,    options = options))
+  if (.maIsSelection(options)) {
+    tests[["bias"]] <- .maSafeRbind(lapply(fit, .smRowPublicationBiasTest))
+    .smAddInferenceFootnotes(testsTable, fit, options)
+  }
 
   # effect size moderation
   if (.maIsMetaregressionEffectSize(options)) {
@@ -144,7 +160,7 @@
   }
 
   # additional tests for subgroup differences
-  if (options[["subgroup"]] != "") {
+  if (options[["subgroup"]] != "" && !.maIsSelection(options)) {
     tests[["subgroup"]] <- .maRowSubgroupTest(fit, options = options)
   }
 
@@ -190,7 +206,7 @@
 
 .maPooledEstimatesTable                  <- function(jaspResults, options) {
 
-  modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults)
+  modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults, options)
 
   if (!is.null(modelSummaryContainer[["pooledEstimatesTable"]]))
     return()
@@ -263,6 +279,8 @@
   pooledEstimatesMessages <- .maPooledEstimatesMessages(fit, options, anyNA(estimates[["effect"]]))
   for (i in seq_along(pooledEstimatesMessages))
     pooledEstimatesTable$addFootnote(pooledEstimatesMessages[i])
+  if (.maIsSelection(options))
+    .smAddHeterogeneityFootnotes(pooledEstimatesTable, fit, options)
 
   # merge and clean estimates
   estimates <- .maSafeRbind(estimates)
@@ -277,7 +295,7 @@
 
 .maFitMeasuresTable                      <- function(jaspResults, options) {
 
-  modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults)
+  modelSummaryContainer <- .maExtractModelSummaryContainer(jaspResults, options)
 
   if (!is.null(modelSummaryContainer[["fitMeasuresTable"]]))
     return()
@@ -287,7 +305,7 @@
   # fit measures table
   fitMeasuresTable          <- createJaspTable(gettext("Fit Measures"))
   fitMeasuresTable$position <- 4
-  fitMeasuresTable$dependOn(c(.maDependencies, "fitMeasures", "includeFullDatasetInSubgroupAnalysis"))
+  fitMeasuresTable$dependOn(c(.maModelDependencies(options), "fitMeasures", "includeFullDatasetInSubgroupAnalysis"))
   modelSummaryContainer[["fitMeasuresTable"]] <- fitMeasuresTable
 
 
@@ -302,8 +320,7 @@
   if (!.maIsUnrestrictedWeightedLeastSquares(options))
     fitMeasuresTable$addColumnInfo(name = "AICc",        title = gettext("AICc"),         type = "number")
 
-  if (!.maIsUnrestrictedWeightedLeastSquares(options) &&
-      .maIsMetaregressionEffectSize(options) && !.maIsMultilevelMultivariate(options) && !.maIsGLMM(options))
+  if (.maHasR2(options))
     fitMeasuresTable$addColumnInfo(name = "R2",  title = gettext("R\U00B2"),   type = "number")
 
   # skip on error
@@ -422,7 +439,12 @@
 
   if (.maIsMetaregressionEffectSize(options)) {
     if (.maIsClassical(options)) {
-      messages <- c(messages, gettext("The pooled effect size corresponds to the weighted average effect across studies."))
+      message <- if (.maIsSelection(options)) {
+        gettext("The pooled effect is evaluated at the average moderator design vector.")
+      } else {
+        gettext("The pooled effect size corresponds to the weighted average effect across studies.")
+      }
+      messages <- c(messages, message)
     } else {
       messages <- c(messages, gettext("The adjusted effect corresponds to the averaged effect size estimate across the levels of all moderators."))
     }

@@ -7,15 +7,68 @@ on:
   pull_request:
     # Triggers when a PR is opened, updated, or marked ready for review
     types: [opened, synchronize, reopened, ready_for_review]
-    paths: ['**.R', 'tests/**', '**.c', '**.cpp', '**.h', '**.hpp', 'DESCRIPTION', 'NAMESPACE', 'MAKEVARS', 'MAKEVARS.win']
+    paths: ['**.R', 'tests/**', '**.c', '**.cpp', '**.h', '**.hpp', 'DESCRIPTION', 'NAMESPACE', 'MAKEVARS', 'MAKEVARS.win', '**.yml', 'renv.lock']
 
 jobs:
   coverage:
-    # Run if it is a push (merge) OR if the PR is NOT a draft
     if: github.event_name == 'push' || github.event.pull_request.draft == false
 
-    uses: jasp-stats/jasp-actions/.github/workflows/coverage.yml@master
-    with:
-      needs_JAGS: true
-    secrets:
-      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    runs-on: ubuntu-latest
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up the test environment
+        uses: ./.github/actions/setup-r-tests
+
+      - name: Install covr if missing from lockfile
+        run: |
+          if (!requireNamespace("covr", quietly = TRUE)) renv::install("covr")
+        shell: Rscript {0}
+
+      - name: Copy examples to inst (allows coverage testing for examples)
+        run: |
+          if [ -d examples ] && [ -n "$(ls -A examples 2>/dev/null)" ]; then
+            mkdir -p inst/examples
+            cp -r examples/* inst/examples/
+          else
+            echo "No examples directory or no example files found; skipping copy."
+          fi
+        shell: bash
+
+      - name: Test coverage
+        run: |
+          cov <- covr::package_coverage(
+            quiet = FALSE,
+            clean = FALSE,
+            install_path = file.path(normalizePath(Sys.getenv("RUNNER_TEMP"), winslash = "/"), "package")
+          )
+          print(cov)
+          covr::to_cobertura(cov)
+        shell: Rscript {0}
+
+      - name: Upload to Codecov
+        uses: codecov/codecov-action@v6
+        with:
+          fail_ci_if_error: ${{ github.event_name != 'pull_request' }}
+          files: ./cobertura.xml
+          plugins: noop
+          disable_search: true
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Show testthat output
+        if: always()
+        run: |
+          ## --------------------------------------------------------------------
+          find '${{ runner.temp }}/package' -name 'testthat.Rout*' -exec cat '{}' \; || true
+        shell: bash
+
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage-test-failures
+          path: ${{ runner.temp }}/package

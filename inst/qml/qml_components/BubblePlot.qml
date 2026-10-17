@@ -174,7 +174,7 @@ Section
 				label:		qsTr("Prediction intervals")
 				checked:	true
 				info: qsTr("Include prediction intervals of the estimated effect sizes.")
-				visible:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || analysisType === "generalizedMetaAnalysis"
+				visible:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || analysisType === "generalizedMetaAnalysis" || analysisType === "selectionModels"
 
 				DoubleField
 				{

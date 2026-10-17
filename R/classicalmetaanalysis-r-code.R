@@ -2,6 +2,12 @@
 #
 # Constructs and formats reproducible metafor calls shown in JASP output.
 
+.maFormatRCall                           <- function(functionName, arguments, result = "fit") {
+
+  paste0(result, " <- ", functionName, "(\n\t",
+         paste(names(arguments), "=", arguments, collapse = ",\n\t"), "\n)\n")
+}
+
 .maShowMetaforRCode                      <- function(jaspResults, options, makeCallText = .maMakeMetaforCallText) {
 
   if (!.maReady(options) || !is.null(jaspResults[["metaforRCode"]]))
@@ -112,9 +118,9 @@
 
   ### fit the model
   if (.maIsMultilevelMultivariate(options)) {
-    fit <- paste0("fit <- rma.mv(\n\t", paste(names(rmaInput), "=", rmaInput, collapse = ",\n\t"), "\n)\n")
+    fit <- .maFormatRCall("rma.mv", rmaInput)
   } else {
-    fit <- paste0("fit <- rma(\n\t", paste(names(rmaInput), "=", rmaInput, collapse = ",\n\t"), "\n)\n")
+    fit <- .maFormatRCall("rma", rmaInput)
   }
 
   if (.maIsMultilevelMultivariate(options) &&  .mammVarianceCovarianceMatrixReady(options)) {

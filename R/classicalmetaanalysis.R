@@ -319,11 +319,25 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   if (length(otherVariable) > 0) {
     .hasErrors(
       dataset              = dataset,
-      type                 = c("infinity", "observations", "variance", "factorLevels"),
+      type                 = "observations",
       all.target           = otherVariable,
       observations.amount  = "< 2",
-      factorLevels.amount  = "< 2",
       exitAnalysisIfErrors = TRUE)
+    numericPredictors <- otherVariable[options[["predictors.types"]] == "scale"]
+    factorPredictors  <- otherVariable[options[["predictors.types"]] == "nominal"]
+    if (length(numericPredictors))
+      .hasErrors(
+        dataset              = dataset,
+        type                 = c("infinity", "variance"),
+        all.target           = numericPredictors,
+        exitAnalysisIfErrors = TRUE)
+    if (length(factorPredictors))
+      .hasErrors(
+        dataset              = dataset,
+        type                 = "factorLevels",
+        all.target           = factorPredictors,
+        factorLevels.amount  = "< 2",
+        exitAnalysisIfErrors = TRUE)
   }
 
   .hasErrors(
@@ -341,9 +355,9 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 .maIsClassical         <- function(options, notMHP = FALSE) {
 
   # check if the analysis is classical
-  if (options[["analysis"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate", "mantelHaenszelPeto", "generalizedMetaAnalysis")) {
+  if (options[["analysis"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate", "mantelHaenszelPeto", "generalizedMetaAnalysis", "selectionModels")) {
     if (notMHP) {
-      return(options[["analysis"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate"))
+      return(options[["analysis"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate", "selectionModels"))
     } else {
       return(TRUE)
     }

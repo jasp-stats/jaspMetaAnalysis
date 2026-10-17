@@ -47,32 +47,8 @@ ClassicalMetaAnalysisCommon <- function(jaspResults, dataset, options, ...) {
   #   .maFitModel(jaspResults, dataset, options, objectName = "fitNoInfluence")
   # }
 
-  # model summary
-  .maOverallTestsTable(jaspResults, options)
-  .maPooledEstimatesTable(jaspResults, options)
-
-  # random effects
-  if (.maIsMultilevelMultivariate(options))
-    .mammRandomEstimatesTable(jaspResults, options)
-
-  if (options[["fitMeasures"]])
-    .maFitMeasuresTable(jaspResults, options)
-
-  # meta-regression tables
-  if (.maIsMetaregression(options)) {
-    if (options[["metaregressionTermTests"]]) {
-      .maTermsTable(jaspResults, options, "effectSize")
-      .maTermsTable(jaspResults, options, "heterogeneity")
-    }
-    if (options[["metaregressionCoefficientEstimates"]]) {
-      .maCoefficientEstimatesTable(jaspResults, options, "effectSize")
-      .maCoefficientEstimatesTable(jaspResults, options, "heterogeneity")
-    }
-    if (options[["metaregressionCoefficientCorrelationMatrix"]]) {
-      .maCoefficientCorrelationMatrixTable(jaspResults, options, "effectSize")
-      .maCoefficientCorrelationMatrixTable(jaspResults, options, "heterogeneity")
-    }
-  }
+  .maModelSummaryTables(jaspResults, options)
+  .maMetaregressionTables(jaspResults, options)
 
   # estimated marginal means and contrasts (the whole section is created within the dispatch)
   .maEstimatedMarginalMeansAndContrasts(jaspResults, options)
