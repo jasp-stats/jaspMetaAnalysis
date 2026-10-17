@@ -45,6 +45,19 @@ Section
 		minimumItems: 1
 		newItemValue: "model"
 		defaultValues: [ { name: "model1", type: "stepfun", steps: "(.025, .50)", delta: "", sidedness: "oneSided", prec: "none", sampleSize: "", scaleprec: true, decreasing: false } ]
-		rowComponent: SelectionModelsWeightfunction { modelIndex: rowIndex }
+		function updateModelIndices()
+		{
+			for (var i = 0; i < models.count; i++)
+			{
+				var row = models.rowAt(i);
+				if (row)
+					row.modelIndex = i;
+			}
+		}
+		onCountChanged: Qt.callLater(updateModelIndices)
+		rowComponent: SelectionModelsWeightfunction
+		{
+			Component.onCompleted: Qt.callLater(models.updateModelIndices)
+		}
 	}
 }

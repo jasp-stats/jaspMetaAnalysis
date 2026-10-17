@@ -70,14 +70,59 @@ testthat::test_that("frequency counts survive failed fits", {
   testthat::expect_s3_class(fit, "try-error")
   testthat::expect_equal(as.numeric(attr(fit, "selectionFrequencies")$k), c(0, 0, nrow(data)))
 
-  # Zero fixed weights induce an optimizer error without invalidating cutoffs.
+  # Occupied zero-weight intervals are rejected without invalidating cutoffs.
   element[["delta"]] <- "1, 0, 0"
   spec <- selectionFunction(".smSpecification")(element)
   data[["reviewPValue"]] <- rep(c(.01, .1, .7), length.out = nrow(data))
   cache <- selectionFunction(".smFitCandidates")(NULL, data, opts, list(model1 = spec), "Full dataset")
   fit <- cache$models$model1$fit
   testthat::expect_s3_class(fit, "try-error")
+  testthat::expect_match(as.character(fit), "fixed at zero", fixed = TRUE)
   testthat::expect_equal(sum(attr(fit, "selectionFrequencies")$k), nrow(data))
+})
+
+testthat::test_that("zero weights use interval endpoints and selected counts", {
+  opts <- selectionOptions
+  opts[["pValue"]] <- "reviewPValue"
+  opts[["modelExpectedDirectionOfTheEffect"]] <- "positive"
+  data <- selectionData
+  data[["reviewPValue"]] <- c(.025, .5, rep(.01, nrow(data) - 2L))
+  element <- selectionElement
+  element[["delta"]] <- "1, 0, 0"
+  spec <- selectionFunction(".smSpecification")(element)
+  reference <- do.call(metafor::rma.uni, selectionFunction(".smBaseArguments")(data, opts))
+  fit <- selectionFunction(".smFitOne")(reference, spec, data, opts)
+  testthat::expect_match(as.character(fit), "(0.025, 0.5]", fixed = TRUE)
+  testthat::expect_match(as.character(fit), "1 selected estimate.", fixed = TRUE)
+  testthat::expect_match(as.character(fit), "positive weight or NA", fixed = TRUE)
+
+  # Unaffected estimates in zero-weight intervals retain their unadjusted likelihood.
+  opts[["noSelection"]] <- "reviewSelection"
+  opts[["noSelectionLevel"]] <- "unaffected"
+  data[["reviewSelection"]] <- factor(ifelse(data[["reviewPValue"]] > .025, "unaffected", "selected"))
+  data[[opts[["effectSize"]]]] <- seq(.5, 1, length.out = nrow(data))
+  data[[opts[["effectSizeStandardError"]]]] <- rep(.1, nrow(data))
+  reference <- do.call(metafor::rma.uni, selectionFunction(".smBaseArguments")(data, opts))
+  fit <- selectionFunction(".smFitOne")(reference, spec, data, opts)
+  testthat::expect_s3_class(fit, "rma.uni.selmodel")
+})
+
+testthat::test_that("convergence failures refer to available optimizer controls", {
+  opts <- selectionOptions
+  opts[["pValue"]] <- "reviewPValue"
+  opts[["modelExpectedDirectionOfTheEffect"]] <- "positive"
+  opts[["optimizerMaximumIterations"]] <- TRUE
+  opts[["optimizerMaximumIterationsValue"]] <- 1
+  data <- selectionData
+  data[["reviewPValue"]] <- rep(c(.01, .1, .7), length.out = nrow(data))
+  element <- selectionElement
+  element[["delta"]] <- ""
+  spec <- selectionFunction(".smSpecification")(element)
+  reference <- do.call(metafor::rma.uni, selectionFunction(".smBaseArguments")(data, opts))
+  fit <- selectionFunction(".smFitOne")(reference, spec, data, opts)
+  testthat::expect_s3_class(fit, "try-error")
+  testthat::expect_match(as.character(fit), "Advanced Options", fixed = TRUE)
+  testthat::expect_match(as.character(fit), "maximum number of iterations", fixed = TRUE)
 })
 
 testthat::test_that("failed models display their frequency counts", {

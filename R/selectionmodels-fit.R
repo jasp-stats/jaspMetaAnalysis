@@ -171,7 +171,8 @@
 
   # Do not silently merge empty intervals. Fixed non-reference weights are allowed.
   if (spec[["type"]] == "stepfun" &&
-      (!length(spec[["delta"]]) || anyNA(spec[["delta"]][-1]))) {
+      (!length(spec[["delta"]]) || anyNA(spec[["delta"]][-1]) ||
+       any(spec[["delta"]] == 0, na.rm = TRUE))) {
 
     frequencies <- .smPValueFrequencies(reference, spec, dataset, options)
 
@@ -185,12 +186,29 @@
     }
     empty <- frequencies[["k"]] == 0
 
-    if (empty[1] || any(empty & is.na(delta))) {
+    zero <- which(!is.na(delta) & delta == 0 & !empty)
+
+    if (length(zero)) {
+      intervals <- .smPValueIntervalLabels(spec[["steps"]])
+      messages  <- vapply(zero, function(i) sprintf(ngettext(frequencies[["k"]][i],
+        "The selection weight for p-value interval %1$s is fixed at zero, but the interval contains %2$i selected estimate. Use a positive weight or NA to estimate the weight.",
+        "The selection weight for p-value interval %1$s is fixed at zero, but the interval contains %2$i selected estimates. Use a positive weight or NA to estimate the weight."
+      ), intervals[i], frequencies[["k"]][i]), character(1))
+      return(.smError(paste(messages, collapse = "\n")))
+    }
+
+    if ((!length(spec[["delta"]]) || anyNA(spec[["delta"]][-1])) &&
+        (empty[1] || any(empty & is.na(delta)))) {
       return(.smError(gettext("The reference interval or an interval with an estimated weight contains no selected estimates. Change the cutoffs or fix the empty interval's weight; intervals are not merged automatically.")))
     }
   }
 
   fit <- .smCapture(do.call(metafor::selmodel, c(list(x = reference), args)))
+
+  if (inherits(fit, "try-error") &&
+      grepl("Error during the optimization\\.|did not achieve convergence", fit)) {
+    fit[] <- gettext("Selection model fitting failed. In Advanced Options, try a different optimizer or increase the maximum number of iterations. Also check the cutoffs and fixed selection parameters.")
+  }
 
   attr(fit, "selectionWarnings") <- unique(c(
     attr(reference, "selectionWarnings"),
