@@ -6,6 +6,12 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Language: zh_Hans\n"
 "X-Qt-Contexts: true\n"
+"PO-Revision-Date: 2026-10-26 13:51+0000\n"
+"Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
+"Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
+"projects/jasp/jaspmetaanalysis-qml/zh_Hans/>\n"
+"Language: zh_Hans\n"
+"X-Generator: Weblate 2026.11.dev0\n"
 
 msgctxt "Description|"
 msgid "Meta-Analysis"
@@ -85,7 +91,7 @@ msgstr "预测变量"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Model Terms"
-msgstr "模型的项"
+msgstr "模型项"
 
 msgctxt "MultilevelMetaAnalysis|"
 msgid "Use intercept"
@@ -197,7 +203,7 @@ msgstr "配置文件随机效应参数（较为耗时）"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Advanced"
-msgstr "高级选项"
+msgstr "高级"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Prior model probability"
@@ -269,7 +275,7 @@ msgstr "全部为负"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Table"
-msgstr "表"
+msgstr "表格"
 
 msgctxt "BayesianMetaAnalysisInference|"
 msgid "Model probabilities"
@@ -447,12 +453,10 @@ msgctxt "BayesianMetaAnalysisPriors|"
 msgid "Plot prior(s)"
 msgstr "绘制先验分布"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Diagnostics"
 msgstr "诊断"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Plots"
 msgstr "绘图"
@@ -461,7 +465,6 @@ msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Casewise diagnostics"
 msgstr "逐例诊断"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Statistics"
 msgstr "统计量"
@@ -486,7 +489,6 @@ msgctxt "SelectionModels|"
 msgid "Correlation"
 msgstr "相关"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Effect Size"
 msgstr "效应量"
@@ -503,7 +505,6 @@ msgctxt "SelectionModels|"
 msgid "P-value (one-sided)"
 msgstr "p值（单侧）"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Model"
 msgstr "模型"
@@ -536,7 +537,6 @@ msgctxt "SelectionModels|"
 msgid "Fisher's z"
 msgstr "Fisher's z"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Inference"
 msgstr "推断"
@@ -549,7 +549,6 @@ msgctxt "SelectionModels|"
 msgid "Random Effects"
 msgstr "随机效应"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Plots"
 msgstr "绘图"
@@ -558,12 +557,10 @@ msgctxt "SelectionModels|"
 msgid "Weight Function"
 msgstr "权重函数"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Fixed effects"
 msgstr "固定效应"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Random effects"
 msgstr "随机效应"
@@ -764,7 +761,6 @@ msgctxt "BayesianPredictionPerformance|"
 msgid "MCMC Diagnostics"
 msgstr "MCMC诊断"
 
-#, fuzzy
 msgctxt "BayesianPredictionPerformance|"
 msgid "Plots"
 msgstr "绘图"
@@ -813,7 +809,6 @@ msgctxt "PetPeese|"
 msgid "Correlation"
 msgstr "相关"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Effect Size"
 msgstr "效应量"
@@ -830,7 +825,6 @@ msgctxt "PetPeese|"
 msgid "Cohen's d"
 msgstr "Cohen's d"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Inference"
 msgstr "推断"
@@ -839,7 +833,6 @@ msgctxt "PetPeese|"
 msgid "Multiplicative heterogeneity estimates"
 msgstr "乘法异质性估计"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Plots"
 msgstr "绘图"
@@ -872,10 +865,9 @@ msgctxt "PredictionPerformanceData|"
 msgid "Standard Error"
 msgstr "标准误"
 
-#, fuzzy
 msgctxt "PredictionPerformanceData|"
 msgid "95% CI Lower and Upper Bound"
-msgstr "95% 可信区间的上界和下界"
+msgstr "95% 置信区间的下界和上界"
 
 msgctxt "PredictionPerformanceData|"
 msgid "Number of Participants"
@@ -889,12 +881,10 @@ msgctxt "PredictionPerformanceData|"
 msgid "Number of Expected Events"
 msgstr "期望事件数量"
 
-#, fuzzy
 msgctxt "PredictionPerformanceData|"
 msgid "Study Labels"
 msgstr "研究标签"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Inference"
 msgstr "推断"
@@ -919,7 +909,6 @@ msgctxt "PredictionPerformanceInference|"
 msgid "Prior and posterior plot"
 msgstr "先验和后验图"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Forest plot"
 msgstr "森林图"
@@ -984,7 +973,6 @@ msgctxt "PredictionPerformanceInference|"
 msgid "Plot"
 msgstr "绘图"
 
-#, fuzzy
 msgctxt "PredictionPerformancePriors|"
 msgid "Priors"
 msgstr "先验"
@@ -1033,15 +1021,13 @@ msgctxt "WaapWls|"
 msgid "Correlation"
 msgstr "相关"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Effect Size"
 msgstr "效应量"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Effect Size Standard Error"
-msgstr "效应量标准误差"
+msgstr "效应量标准误"
 
 msgctxt "WaapWls|"
 msgid "Fisher's z"
@@ -1051,12 +1037,10 @@ msgctxt "WaapWls|"
 msgid "Cohen's d"
 msgstr "Cohen's d"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Inference"
 msgstr "推断"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Plots"
 msgstr "绘图"
@@ -1097,7 +1081,6 @@ msgctxt "Description|"
 msgid "Penalized Meta-Analysis"
 msgstr "惩罚元分析"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Effect Size"
 msgstr "效应量"
@@ -1106,7 +1089,6 @@ msgctxt "PenalizedMetaAnalysis|"
 msgid "Effect Size Standard Error"
 msgstr "效应量标准误"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Method"
 msgstr "方法"
@@ -1119,12 +1101,10 @@ msgctxt "PenalizedMetaAnalysis|"
 msgid "Lasso"
 msgstr "Lasso"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Covariates"
 msgstr "协变量"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Factors"
 msgstr "因子"
@@ -1133,17 +1113,14 @@ msgctxt "PenalizedMetaAnalysis|"
 msgid "Clustering"
 msgstr "聚类"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Model"
 msgstr "模型"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Components"
 msgstr "成分"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Include intercept"
 msgstr "包括截距"
@@ -1152,7 +1129,6 @@ msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale predictors"
 msgstr "缩放预测变量"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Priors"
 msgstr "先验"
@@ -1181,7 +1157,6 @@ msgctxt "PenalizedMetaAnalysis|"
 msgid "Scale (slab)"
 msgstr "缩放（板）"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Inference"
 msgstr "推断"
@@ -1208,7 +1183,7 @@ msgstr "MCMC诊断"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Horizontal axis"
-msgstr "水平轴"
+msgstr "横轴"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Vertical axis"
@@ -1242,10 +1217,9 @@ msgctxt "PenalizedMetaAnalysis|"
 msgid "Advanced"
 msgstr "高级"
 
-#, fuzzy
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Estimation settings (MCMC)"
-msgstr "估计设置 (MCMC)"
+msgstr "估计设置（MCMC）"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Warmup"
@@ -1592,7 +1566,6 @@ msgid ""
 "Variable containing the standard errors corresponding to the effect sizes."
 msgstr "包含与效应量对应的标准误的变量。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Method"
 msgstr "方法"
@@ -1601,14 +1574,13 @@ msgctxt "ClassicalMetaAnalysis|"
 msgid "Equal Effects"
 msgstr "相等效应"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Fixed Effects"
 msgstr "固定效应"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Maximum Likelihood"
-msgstr "极大似然"
+msgstr "最大似然"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Restricted ML"
@@ -1663,7 +1635,6 @@ msgstr ""
 "检验模型系数的方法：'z'使用标准正态近似，'t'使用t分布，'knha'使用Knapp和"
 "Hartung调整（默认）。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Predictors"
 msgstr "预测变量"
@@ -1678,7 +1649,6 @@ msgid ""
 "plots."
 msgstr "包含研究标签的变量。用于为输出和图表添加标签。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Effect Size"
 msgstr "效应量"
@@ -1696,7 +1666,6 @@ msgid ""
 "Variable containing the standard errors corresponding to the effect sizes."
 msgstr "包含与效应量对应的标准误的变量。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Method"
 msgstr "方法"
@@ -1707,7 +1676,7 @@ msgstr "用于估计元分析中异质性的方法。"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Maximum Likelihood"
-msgstr "极大似然"
+msgstr "最大似然"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Restricted ML"
@@ -1723,7 +1692,6 @@ msgid ""
 "approximation, 't' uses t-distribution."
 msgstr "检验模型系数的方法：'z'使用标准正态近似，'t'使用t分布。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Predictors"
 msgstr "预测变量"
@@ -1743,7 +1711,6 @@ msgid ""
 "permutation tests are selected."
 msgstr "指示效应量聚类的变量。当选择置换检验时，此选项被禁用。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Study Labels"
 msgstr "研究标签"
@@ -1809,7 +1776,7 @@ msgstr "异方差复合对称"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Unstructured "
-msgstr "无结构"
+msgstr "无结构 "
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Identity"
@@ -1995,7 +1962,7 @@ msgstr "曼哈顿"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Maximum"
-msgstr "最大"
+msgstr "最大值"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Great-circle"
@@ -2465,7 +2432,6 @@ msgctxt "EffectSizeComputation|"
 msgid "Items"
 msgstr "项目"
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Predictors"
 msgstr "预测变量"
@@ -2552,7 +2518,7 @@ msgstr "Cohen's d"
 
 msgctxt "EffectSizeComputation|"
 msgid "R-Squared"
-msgstr "R平方"
+msgstr "R²"
 
 msgctxt "EffectSizeComputation|"
 msgid "T-Statistic"
@@ -2570,7 +2536,6 @@ msgctxt "EffectSizeComputation|"
 msgid "P-Value"
 msgstr "p值"
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Effect Size"
 msgstr "效应量"
@@ -2695,7 +2660,6 @@ msgctxt "EffectSizeComputation|"
 msgid "Computed Columns Names"
 msgstr "计算的列名"
 
-#, fuzzy
 msgctxt "EffectSizeComputation|"
 msgid "Effect size"
 msgstr "效应量"
@@ -2712,7 +2676,6 @@ msgctxt "EffectSizeComputation|"
 msgid "Effect size type"
 msgstr "效应量类型"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Effect Size"
 msgstr "效应量"
@@ -2828,7 +2791,6 @@ msgid ""
 "plot under the alternative hypothesis."
 msgstr "选择是估计还是手动固定备择假设下漏斗图的参数。"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Estimated"
 msgstr "估计"
@@ -2837,7 +2799,6 @@ msgctxt "FunnelPlot|"
 msgid "Fixed"
 msgstr "固定"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Method"
 msgstr "方法"
@@ -2846,14 +2807,13 @@ msgctxt "FunnelPlot|"
 msgid "Equal Effects"
 msgstr "相等效应"
 
-#, fuzzy
 msgctxt "FunnelPlot|"
 msgid "Fixed Effects"
 msgstr "固定效应"
 
 msgctxt "FunnelPlot|"
 msgid "Maximum Likelihood"
-msgstr "极大似然"
+msgstr "最大似然"
 
 msgctxt "FunnelPlot|"
 msgid "Restricted ML"
@@ -3228,7 +3188,6 @@ msgstr ""
 "用于估计元分析模型的优化器设置。更复杂/不可用的设置可通过“扩展metafor调用”选"
 "项指定。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Method"
 msgstr "方法"
@@ -3482,12 +3441,10 @@ msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Residual funnel"
 msgstr "残差漏斗"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Estimated Marginal Means"
-msgstr "边际均值估计"
+msgstr "估计边际均值"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "Effect size"
 msgstr "效应量"
@@ -3563,7 +3520,6 @@ msgctxt "ClassicalMetaAnalysisEstimatedMarginalMeans|"
 msgid "𝜏²"
 msgstr "𝜏²"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Model"
 msgstr "模型"
@@ -3580,16 +3536,14 @@ msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Available Components"
 msgstr "可用成分"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Model Terms"
-msgstr "模型的项"
+msgstr "模型项"
 
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Variables assigned as model terms in the effect size model."
 msgstr "在效应量模型中作为模型项指定的变量。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisModel|"
 msgid "Include intercept"
 msgstr "包括截距"
@@ -3808,19 +3762,17 @@ msgstr ""
 "此分析的结果无法更新。该分析是由旧版本的JASP创建的，分析选项已不再兼容。请使"
 "用更新后的模块重新进行分析，或下载0.19.1版本的JASP以重新运行或编辑该分析。"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Method"
 msgstr "方法"
 
-#, fuzzy
 msgctxt "PredictionPerformanceInference|"
 msgid "Fixed Effects"
 msgstr "固定效应"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Maximum Likelihood"
-msgstr "极大似然"
+msgstr "最大似然"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Restricted ML"
@@ -4222,7 +4174,6 @@ msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Sample Size Group 1"
 msgstr "组1样本量"
 
-#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Predictors"
 msgstr "预测变量"
@@ -4260,7 +4211,6 @@ msgid ""
 msgstr ""
 "指示亚组分层的变量。对于每个亚组，都拟合一个独立模型到相应的数据集子集。"
 
-#, fuzzy
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Effect size"
 msgstr "效应量"
@@ -4439,7 +4389,6 @@ msgstr ""
 "不对应于上述任何度量的通用效应量。请指定先验分布时务必小心，因为没有合理的默"
 "认值可用。"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Predictors"
 msgstr "预测变量"
@@ -4477,7 +4426,6 @@ msgid ""
 msgstr ""
 "指示亚组分层的变量。对于每个亚组，都拟合一个独立模型到相应的数据集子集。"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysis|"
 msgid "Effect size"
 msgstr "效应量"
@@ -4587,7 +4535,6 @@ msgctxt "BayesianMetaAnalysis|"
 msgid "Prior Distributions (Custom)"
 msgstr "先验分布（自定义）"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisDeprecated|"
 msgid "Effect Size"
 msgstr "效应量"
@@ -4596,12 +4543,10 @@ msgctxt "BayesianMetaAnalysisDeprecated|"
 msgid "Effect Size Standard Error"
 msgstr "效应量标准误"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisDeprecated|"
 msgid "95% CI Lower and Upper Bound"
-msgstr "95% 可信区间的上界和下界"
+msgstr "95% 置信区间的下界和上界"
 
-#, fuzzy
 msgctxt "BayesianMetaAnalysisDeprecated|"
 msgid "Study Labels"
 msgstr "研究标签"
@@ -4669,7 +4614,7 @@ msgstr "根据其将预测分隔到不同线条上的变量。"
 
 msgctxt "BubblePlot|"
 msgid "Separate Plots"
-msgstr "分隔图面"
+msgstr "分隔绘图"
 
 msgctxt "BubblePlot|"
 msgid ""
@@ -4738,7 +4683,6 @@ msgid ""
 "when the x-axis variable is nominal."
 msgstr "设置观察估计的x坐标抖动程度。当x轴变量为名义变量时可用。"
 
-#, fuzzy
 msgctxt "BubblePlot|"
 msgid "Confidence intervals"
 msgstr "置信区间"
@@ -4825,7 +4769,6 @@ msgctxt "ForestPlot|"
 msgid "Estimate"
 msgstr "估计值"
 
-#, fuzzy
 msgctxt "ForestPlot|"
 msgid "Effect Size"
 msgstr "效应量"
@@ -5113,7 +5056,6 @@ msgctxt "RobustBayesianMetaAnalysisCochranePriorDistributions|"
 msgid "Neuromuscular"
 msgstr "神经肌肉"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Effect size"
 msgstr "效应量"
@@ -5122,10 +5064,9 @@ msgctxt "RobustBayesianMetaAnalysisDiagnostics|"
 msgid "Moderation"
 msgstr "调节"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Estimated Marginal Means"
-msgstr "边际均值估计"
+msgstr "估计边际均值"
 
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid ""
@@ -5135,7 +5076,6 @@ msgid ""
 msgstr ""
 "用于计算估计边际均值的选项，允许检验调节变量特定水平处的预测值及其与0的差异。"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisEstimatedMarginalMeans|"
 msgid "Effect size"
 msgstr "效应量"
@@ -5177,7 +5117,6 @@ msgstr ""
 "处理因素对比）的元回归模型。估计边际均值的检验使用基于先验和后验分布（假设存"
 "在效应或调节）的Savage-Dickey密度比检验执行。"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisInference|"
 msgid "Statistics"
 msgstr "统计量"
@@ -5399,7 +5338,6 @@ msgid ""
 "adjustment model."
 msgstr "纳入发表偏倚调整模型中PET-PEESE参数的估计。"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Model"
 msgstr "模型"
@@ -5424,10 +5362,9 @@ msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Available Components"
 msgstr "可用成分"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Model Terms"
-msgstr "模型的项"
+msgstr "模型项"
 
 msgctxt "RobustBayesianMetaAnalysisModel|"
 msgid "Variables assigned as model terms in the effect size model."
@@ -5437,7 +5374,6 @@ msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Prior and Posterior Plots"
 msgstr "先验与后验图"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysisPlots|"
 msgid "Effect size"
 msgstr "效应量"
@@ -5765,10 +5701,9 @@ msgid ""
 "Show the pooled correlation/covariance matrix. The pooled correlation/"
 "covariance matrix is from the first stage of two-stage meta-analytic SEM. "
 msgstr ""
-"显示合并的相关/协方差矩阵。合并的相关/协方差矩阵来自两阶段元分析SEM的第一阶"
-"段。"
+"显示合并的相关/协方差矩阵。合并的相关/协方差矩阵来自两阶段元分析SEM的第一阶段"
+"。 "
 
-#, fuzzy
 msgctxt "MetaAnalyticSem|"
 msgid "Random effects"
 msgstr "随机效应"
@@ -6174,7 +6109,6 @@ msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Person-Time Group 2"
 msgstr "组2人时"
 
-#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Method"
 msgstr "方法"
@@ -6223,7 +6157,6 @@ msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Incidence rate difference"
 msgstr "发病密度差"
 
-#, fuzzy
 msgctxt "ClassicalMantelHaenszelPeto|"
 msgid "Study Labels"
 msgstr "研究标签"
@@ -6548,7 +6481,6 @@ msgctxt "RobustBayesianMetaAnalysis|"
 msgid "R Packages"
 msgstr "R包"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect Size"
 msgstr "效应量"
@@ -6624,7 +6556,6 @@ msgstr ""
 "不对应于上述任何度量的通用效应量。请指定先验分布时务必小心，因为没有合理的默"
 "认值可用。"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Predictors"
 msgstr "预测变量"
@@ -6681,7 +6612,6 @@ msgstr ""
 "情况下的先验分布。这允许检验成分的有无（如果成分未被选择，则不进行贝叶斯因子"
 "检验）。显示的平均估计是跨所有指定成分的零先验和备择先验分布取平均得到的。"
 
-#, fuzzy
 msgctxt "RobustBayesianMetaAnalysis|"
 msgid "Effect size"
 msgstr "效应量"
@@ -7021,7 +6951,6 @@ msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Conditional (exact likelihood)"
 msgstr "条件（精确似然）"
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Method"
 msgstr "方法"
@@ -7030,11 +6959,11 @@ msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid ""
 "Select the estimation method. Maximum Likelihood estimates a random-effects "
 "model; Equal Effects fixes tau-squared to zero."
-msgstr "选择估计方法。极大似然估计随机效应模型；相等效应将tau平方固定为零。"
+msgstr "选择估计方法。最大似然估计随机效应模型；相等效应将tau平方固定为零。"
 
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Maximum Likelihood"
-msgstr "极大似然"
+msgstr "最大似然"
 
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Equal Effects"
@@ -7058,7 +6987,6 @@ msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "t"
 msgstr "t"
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Predictors"
 msgstr "预测变量"
@@ -7068,7 +6996,6 @@ msgid ""
 "Variables to include as predictors (moderators) in a meta-regression model."
 msgstr "在元回归模型中作为预测变量（调节变量）纳入的变量。"
 
-#, fuzzy
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Study Labels"
 msgstr "研究标签"
@@ -7120,7 +7047,6 @@ msgctxt "EffectSizeAggregation|"
 msgid "R Packages"
 msgstr "R包"
 
-#, fuzzy
 msgctxt "EffectSizeAggregation|"
 msgid "Effect Size"
 msgstr "效应量"
@@ -7185,7 +7111,6 @@ msgctxt "EffectSizeAggregation|"
 msgid "Aggregated Column Names"
 msgstr "聚合列名"
 
-#, fuzzy
 msgctxt "EffectSizeAggregation|"
 msgid "Effect size"
 msgstr "效应量"
@@ -7589,7 +7514,6 @@ msgctxt "ClassicalMetaAnalysisExport|"
 msgid "Options for exporting model-derived quantities to the dataset."
 msgstr "用于将模型得出的量导出到数据集的选项。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisExport|"
 msgid "Diagnostics"
 msgstr "诊断"
@@ -7693,7 +7617,6 @@ msgid ""
 "Export best linear unbiased predictions of the study-specific true effects."
 msgstr "导出研究特定真实效应的最佳线性无偏预测。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisExport|"
 msgid "Random effects"
 msgstr "随机效应"
@@ -8019,9 +7942,9 @@ msgid ""
 "'subgroup' option in the metafor's 'vcalc' function and is renamed for "
 "differentiation from subgroup analysis. "
 msgstr ""
-"指定亚组额外结构的变量。同一聚类内聚类变量值不同的效应量被假定为独立。请注"
-"意，此输入对应于metafor的'vcalc'函数中的'subgroup'选项，为与亚组分析区分而重"
-"命名。"
+"指定亚组额外结构的变量。同一聚类内聚类变量值不同的效应量被假定为独立。请注意"
+"，此输入对应于metafor的'vcalc'函数中的'subgroup'选项，为与亚组分析区分而重命"
+"名。 "
 
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Cluster"
@@ -8344,7 +8267,6 @@ msgid ""
 "section. Available when heterogeneity meta-regression is specified."
 msgstr "在模型信息部分包含全能异质性调节检验。当指定异质性元回归时可用。"
 
-#, fuzzy
 msgctxt "ForestPlotSection|"
 msgid "Effect Size"
 msgstr "效应量"
@@ -8768,7 +8690,6 @@ msgid ""
 "of the study-level information panel."
 msgstr "在研究水平信息面板的中部分为效应量包含次要置信区间。"
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Order"
 msgstr "排序"
@@ -8786,7 +8707,6 @@ msgid ""
 "Select the variable by which the study-level information panel is ordered."
 msgstr "选择用于对研究水平信息面板排序的变量。"
 
-#, fuzzy
 msgctxt "ForestPlotStudyInformation|"
 msgid "Ascending"
 msgstr "升序"
@@ -8961,7 +8881,6 @@ msgid ""
 "variance weights)."
 msgstr "包含用于加权汇总图（例如，逆方差权重）的研究权重的变量。"
 
-#, fuzzy
 msgctxt "RiskOfBiasPlot|"
 msgid "Plots"
 msgstr "绘图"
@@ -9050,37 +8969,40 @@ msgid ""
 "conditional with exact likelihood (CM.EL; odds ratios and incidence rate "
 "ratios)."
 msgstr ""
+"选择广义线性模型类型。固定研究效应的无条件模型（UM.FS；默认）；随机研究效应的"
+"无条件模型（UM.RS）；近似似然的条件模型（CM.AL；仅优势比）；精确似然的条件模"
+"型（CM.EL；优势比和发病率比）。"
 
 msgctxt "ClassicalGeneralizedMetaAnalysisAdvanced|"
 msgid ""
 "Allow the random study effects and random treatment effects to be correlated "
 "in the unconditional model with random study effects."
-msgstr ""
+msgstr "在随机研究效应的无条件模型中，允许随机研究效应与随机处理效应相关。"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Options for assessing multicollinearity among predictors."
-msgstr ""
+msgstr "评估预测变量间多重共线性的选项。"
 
 msgctxt "ClassicalMetaAnalysisExport|"
 msgid "Prefix exported column names"
-msgstr ""
+msgstr "为导出的列名添加前缀"
 
 msgctxt "ClassicalMetaAnalysisExport|"
 msgid "Add a prefix to every column exported by this analysis."
-msgstr ""
+msgstr "为此分析导出的每一列添加前缀。"
 
 msgctxt "ClassicalMetaAnalysisExport|"
 msgid "Prefix"
-msgstr ""
+msgstr "前缀"
 
 msgctxt "ClassicalMetaAnalysisExport|"
 msgid "Prefix added to every exported column name."
-msgstr ""
+msgstr "添加到每个导出列名的前缀。"
 
 msgctxt "ClassicalMetaAnalysisExport|"
 msgid "Export observed-minus-fitted residuals on the effect-size scale."
-msgstr ""
+msgstr "按效应量尺度导出观测值减拟合值的残差。"
 
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Specify the correlation between the same construct type levels."
-msgstr ""
+msgstr "指定同一构念类型水平之间的相关。"
