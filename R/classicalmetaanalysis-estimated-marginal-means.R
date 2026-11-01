@@ -33,8 +33,8 @@
   } else {
     # create the output container
     estimatedMarginalMeansAndContrastsContainer <- createJaspContainer(gettext("Estimated Marginal Means and Contrasts Summary"))
-    estimatedMarginalMeansAndContrastsContainer$dependOn(c(.maDependencies, "confidenceIntervals", "confidenceIntervalsLevel", "includeFullDatasetInSubgroupAnalysis"))
-    estimatedMarginalMeansAndContrastsContainer$position <- 4
+    estimatedMarginalMeansAndContrastsContainer$dependOn(c(.maModelDependencies(options), "confidenceIntervals", "confidenceIntervalsLevel", "includeFullDatasetInSubgroupAnalysis"))
+    estimatedMarginalMeansAndContrastsContainer$position <- if (.maIsSelection(options)) 5 else 4
     jaspResults[["estimatedMarginalMeansAndContrastsContainer"]] <- estimatedMarginalMeansAndContrastsContainer
   }
 

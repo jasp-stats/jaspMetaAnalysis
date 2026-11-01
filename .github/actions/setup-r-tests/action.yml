@@ -1,0 +1,139 @@
+name: Set up module tests
+description: Restore a consistent R library and JAGS before testing or coverage.
+inputs:
+  packages:
+    description: Install lockfile or latest dependencies.
+    default: lockfile
+runs:
+  using: composite
+  steps:
+    - uses: r-lib/actions/setup-r@v2
+      with:
+        r-version: '4.5.2'
+        Ncpus: 1
+
+    - name: Use reference BLAS on macOS
+      if: runner.os == 'macOS'
+      shell: bash
+      run: |
+        # Keep the reference arithmetic used by the numerical regression baseline.
+        # Vendor BLAS changes flat-boundary optimizers and numerical Hessians.
+        r_home=$(R RHOME)
+        test -f "$r_home/lib/libRblas.0.dylib"
+        sudo ln -sf libRblas.0.dylib "$r_home/lib/libRblas.dylib"
+
+    - name: Configure R installation
+      shell: bash
+      run: |
+        cat >> "$GITHUB_ENV" <<'EOF'
+        R_REMOTES_NO_ERRORS_FROM_WARNINGS=true
+        R_REMOTES_UPGRADE=never
+        VDIFFR_RUN_TESTS=true
+        RENV_CONFIG_PAK_ENABLED=false
+        RENV_CONFIG_INSTALL_JOBS=1
+        PKG_BUILD_CORES=1
+        _R_CHECK_LENGTH_1_CONDITION_=TRUE
+        _R_CHECK_MATRIX_DATA_=TRUE
+        EOF
+
+    - name: Install macOS system dependencies
+      if: runner.os == 'macOS'
+      uses: r-hub/actions/setup-r-sysreqs@v1
+      with:
+        type: full
+
+    - name: Configure headless macOS bitmap graphics
+      if: runner.os == 'macOS'
+      shell: bash
+      run: |
+        # jaspBase opens temporary PNG devices while decoding ggplots. Quartz
+        # can crash on headless Intel runners; use Cairo in every R process.
+        printf '%s\n' 'options(bitmapType = "cairo")' > "$RUNNER_TEMP/jasp-ci-profile.R"
+        echo "R_PROFILE=$RUNNER_TEMP/jasp-ci-profile.R" >> "$GITHUB_ENV"
+
+    - name: Install JAGS 4 and configure OpenMP on macOS
+      if: runner.os == 'macOS'
+      shell: bash
+      run: |
+        # Homebrew's JAGS 5 is incompatible with the module's JAGS 4 extensions.
+        curl --fail --location --retry 3 \
+          'https://sourceforge.net/projects/mcmc-jags/files/JAGS/4.x/Mac%20OS%20X/extras/JAGS-4.3.2-universal.tar.gz/download' \
+          --output "$RUNNER_TEMP/JAGS-4.3.2.tar.gz"
+        echo "33846102cf5918d979395c789598ba20001ae935b95892bc73594e4b948d6482  $RUNNER_TEMP/JAGS-4.3.2.tar.gz" | shasum -a 256 --check
+        sudo mkdir -p /usr/local
+        sudo tar -xzf "$RUNNER_TEMP/JAGS-4.3.2.tar.gz" --strip-components=2 \
+          --no-same-owner --no-same-permissions -C /usr/local
+        echo /usr/local/bin >> "$GITHUB_PATH"
+        brew install libomp
+        jags_prefix=/usr/local
+        PKG_CONFIG_PATH="$jags_prefix/lib/pkgconfig" pkg-config --exact-version=4.3.2 jags
+        omp_prefix=$(brew --prefix libomp)
+        echo "PKG_CONFIG_PATH=$jags_prefix/lib/pkgconfig:${PKG_CONFIG_PATH:-}" >> "$GITHUB_ENV"
+        # R's bundled older libomp cannot load code compiled with current clang.
+        echo "R_LD_LIBRARY_PATH=$omp_prefix/lib:$jags_prefix/lib" >> "$GITHUB_ENV"
+        echo "DYLD_LIBRARY_PATH=$omp_prefix/lib:$jags_prefix/lib" >> "$GITHUB_ENV"
+
+    - name: Install JAGS on Windows
+      if: runner.os == 'Windows'
+      shell: Rscript {0}
+      run: |
+        download.file("https://static.jasp-stats.org/development/JAGS-4.3.1-Windows.zip", "JAGS.zip")
+        unzip("JAGS.zip", exdir = "JAGS")
+        jagsHome <- normalizePath("JAGS", winslash = "/")
+        cat(paste0("JAGS_HOME=", jagsHome, "\nJAGS_ROOT=", jagsHome, "\n"),
+            file = Sys.getenv("GITHUB_ENV"), append = TRUE)
+        cat(paste0(jagsHome, "/x64/bin\n"), file = Sys.getenv("GITHUB_PATH"), append = TRUE)
+
+    - name: Install Linux system dependencies
+      if: runner.os == 'Linux'
+      shell: Rscript {0}
+      run: |
+        install.packages("pak", repos = "https://r-lib.github.io/p/pak/stable")
+        install.packages("jsonlite")
+        lockfile <- jsonlite::read_json("renv.lock", simplifyVector = TRUE)
+        packages <- vapply(lockfile$Packages, function(record) {
+          if (record$Source == "GitHub")
+            paste0(record$RemoteUsername, "/", record$RemoteRepo)
+          else
+            record$Package
+        }, character(1))
+        requirements <- pak::pkg_sysreqs(packages, sysreqs_platform = "ubuntu")
+        for (command in requirements$install_scripts)
+          stopifnot(system(paste("sudo", command)) == 0L)
+        stopifnot(system("sudo apt-get install -y jags") == 0L)
+
+    - name: Configure lockfile repositories
+      if: inputs.packages == 'lockfile'
+      shell: bash
+      run: |
+        # Keep RStan and RcppParallel binaries from the same repository snapshot.
+        echo "RENV_CONFIG_REPOS_OVERRIDE=https://packagemanager.posit.co/cran/2026-06-30" >> "$GITHUB_ENV"
+
+    - name: Install the lockfile version of renv
+      if: inputs.packages == 'lockfile'
+      shell: Rscript {0}
+      run: |
+        # setup-renv otherwise bootstraps the newest installer before restoring.
+        install.packages("https://cran.r-project.org/src/contrib/Archive/renv/renv_1.1.8.tar.gz",
+                         repos = NULL, type = "source")
+
+    - uses: r-lib/actions/setup-renv@v2
+      if: inputs.packages == 'lockfile'
+      with:
+        cache-version: module-tests-renv-1.1.8-${{ runner.arch }}
+        bypass-cache: never
+
+    - uses: r-lib/actions/setup-r-dependencies@v2
+      if: inputs.packages == 'latest'
+      with:
+        extra-packages: github::jasp-stats/jaspTools
+        needs: check
+        cache-version: module-tests-1
+
+    - name: Set up jaspTools without replacing restored dependencies
+      shell: Rscript {0}
+      run: |
+        if (Sys.info()[["sysname"]] == "Darwin")
+          stopifnot(capabilities("cairo"), identical(getOption("bitmapType"), "cairo"))
+        jaspTools::setupJaspTools(installJaspCorePkgs = FALSE)
+        print(sessionInfo())

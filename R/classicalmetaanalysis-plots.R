@@ -32,7 +32,7 @@
   if (inherits(plotRender, "try-error")) {
     forestPlot <- createJaspPlot(title = gettext("Forest Plot"))
     forestPlot$position <- 4
-    forestPlot$dependOn(.maForestPlotDependencies)
+    forestPlot$dependOn(c(.maForestPlotDependencies, .maModelDependencies(options)))
     forestPlot$setError(plotRender)
     jaspResults[["forestPlot"]] <- forestPlot
     return()
@@ -43,8 +43,8 @@
     width  = plotRender[["width"]],
     height = plotRender[["height"]]
   )
-  forestPlot$position <- if (.maIsClassical(options)) 5 else 7
-  forestPlot$dependOn(c(.maForestPlotDependencies, if (.maIsClassical(options)) .maDependencies else .robmaDependencies))
+  forestPlot$position <- if (.maIsSelection(options)) 6 else if (.maIsClassical(options)) 5 else 7
+  forestPlot$dependOn(c(.maForestPlotDependencies, .maModelDependencies(options)))
   forestPlot$plotObject <- plotRender[["plot"]]
 
   jaspResults[["forestPlot"]] <- forestPlot
