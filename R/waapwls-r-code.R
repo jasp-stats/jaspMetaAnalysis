@@ -23,20 +23,32 @@
     )
   }, character(1))
 
+  # estimates with a missing no-selection indicator are excluded from all models
+  if (options[["noSelection"]] != "")
+    code <- c(paste0("dataset <- dataset[!is.na(dataset$", options[["noSelection"]], "), ]\n"), code)
+
   html$text <- .maTransformToHtml(paste(code, collapse = "\n"))
 
   return()
 }
 
-.wwFitCode                              <- function(options, dataName, rows) {
+.wwFitCode                              <- function(options, dataName, rows, waap = FALSE) {
 
   fitCode <- .maMakeMetaforCallText(.ppModelOptions(options))
   fitCode <- gsub("data = dataset", paste0("data = ", dataName), fitCode, fixed = TRUE)
   fitCode <- gsub("dataset$", paste0(dataName, "$"), fitCode, fixed = TRUE)
 
-  # a precomputed variance-covariance matrix corresponds to the complete data set
-  if (length(rows) > 0 && .maIsMultilevelMultivariate(options) && options[["varianceCovarianceMatrixType"]] == "precomputed")
-    fitCode <- sub(", header = FALSE))", paste0(", header = FALSE))", paste0("[", rows, ", ", rows, "]", collapse = "")), fitCode, fixed = TRUE)
+  if (!.maIsMultilevelMultivariate(options) || !.mammVarianceCovarianceMatrixReady(options))
+    return(fitCode)
+
+  if (waap) {
+    # the WAAP model uses the retained rows of the variance-covariance matrix of all estimates
+    fitCode <- sub("^[\\s\\S]*?(?=fit <- rma\\.mv\\()", "", fitCode, perl = TRUE)
+    fitCode <- sub("V = effectSizeVarianceCovarianceMatrix", "V = effectSizeVarianceCovarianceMatrix[waapRows, waapRows]", fitCode, fixed = TRUE)
+  } else if (!is.null(rows) && options[["varianceCovarianceMatrixType"]] == "precomputed") {
+    # a precomputed variance-covariance matrix corresponds to the complete data set
+    fitCode <- sub(", header = FALSE))", paste0(", header = FALSE))[", rows, ", ", rows, "]"), fitCode, fixed = TRUE)
+  }
 
   return(fitCode)
 }
@@ -76,16 +88,15 @@
       "subgroupData <- droplevels(dataset[subgroupRows, ])\n"
     )
   }
-  rows     <- if (subgroup) "subgroupRows"
 
-  code <- paste0(dataCode, .wwFitCode(options, dataName, rows))
+  code <- paste0(dataCode, .wwFitCode(options, dataName, rows = if (subgroup) "subgroupRows"))
 
   if (jaspBase::isTryError(fit))
     return(paste0(code, "# ", gettextf("The module reported: %1$s", .maTryCleanErrorMessages(fit)), "\n"))
 
   # the WAAP model refits the WLS model to the retained estimates
   if (decision[["selected"]] == "waap")
-    code <- paste0(code, .wwSelectionCode(options, dataName), .wwFitCode(options, "waapData", c(rows, "waapRows")))
+    code <- paste0(code, .wwSelectionCode(options, dataName), .wwFitCode(options, "waapData", rows = NULL, waap = TRUE))
 
   return(code)
 }

@@ -106,10 +106,11 @@ Group
 				name:		"forestPlotStudyInformationPredictedEffects"
 				id:			forestPlotStudyInformationPredictedEffects
 				text:		qsTr("Predicted effects")
-				enabled:	predictedEffectsEnabled
+				// aggregated rows combine estimates with different predicted effects
+				enabled:	predictedEffectsEnabled && forestPlotStudyInformationAggregateBy.value === ""
 				visible:	showPredictedEffects
 				checked:	false
-				info: qsTr("Include predicted effect sizes in the middle section of the study-level information panel.")
+				info: qsTr("Include predicted effect sizes in the middle section of the study-level information panel. Unavailable when the panel is aggregated.")
 				Layout.preferredWidth: 300 * jaspTheme.uiScale
 			}
 
@@ -195,6 +196,7 @@ Group
 				DropDown
 				{
 					name:			"forestPlotStudyInformationAggregateBy"
+					id:				forestPlotStudyInformationAggregateBy
 					label:			qsTr("By")
 					addEmptyValue:	true
 					fieldWidth:		125 * preferencesModel.uiScale

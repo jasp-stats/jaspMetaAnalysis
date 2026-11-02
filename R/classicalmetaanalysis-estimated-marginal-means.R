@@ -297,7 +297,7 @@
 
 .maGetMarginalMeansPredictorMatrix <- function(fit, options, selectedVariables, trendVarible = NULL, trendSequence = NULL, sdFactor, parameter, dropIntercept = TRUE) {
 
-  dataset <- attr(fit, "dataset")
+  dataset <- .maReferenceDataset(fit)
   variablesContinuous <- options[["predictors"]][options[["predictors.types"]] == "scale"]
   variablesFactors    <- options[["predictors"]][options[["predictors.types"]] == "nominal"]
 

@@ -40,6 +40,27 @@
   return(which(!rownames(fit[["beta"]]) %in% c("intrcpt", .maBiasTerm(fit))))
 }
 
+# Moderator profile ----
+
+.maReferenceFit                       <- function(fit) {
+
+  # model of all estimates whose moderators define the pooled effect and marginal means; the WAAP-WLS
+  # model of the retained estimates is evaluated at the moderators of all estimates (WLS model)
+  referenceFit <- attr(fit, "referenceFit")
+
+  return(if (is.null(referenceFit)) fit else referenceFit)
+}
+
+.maReferenceModelMatrix               <- function(fit) {
+
+  return(stats::model.matrix(.maReferenceFit(fit)))
+}
+
+.maReferenceDataset                   <- function(fit) {
+
+  return(attr(.maReferenceFit(fit), "dataset"))
+}
+
 .maVariableNames                      <- function(varNames, variables) {
 
   # sometimes interactions are missformated as "."
@@ -130,7 +151,7 @@
 .maPrintModerationTest                <- function(fit, options, parameter) {
 
   out      <- .maOmnibusTest(fit, options, parameter)
-  outPrint <- .maPrintTermTest(out, testStatistic = TRUE)
+  outPrint <- if (is.na(out[["pval"]])) gettext("not available") else .maPrintTermTest(out, testStatistic = TRUE)
 
   if (.maIsMetaregressionHeterogeneity(options)) {
     if (parameter == "effectSize")

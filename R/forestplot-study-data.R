@@ -165,7 +165,8 @@
 
 .forestPlotStudyBuildPredictions       <- function(fit, dfForest, options) {
 
-  if (!options[["forestPlotStudyInformationPredictedEffects"]]) {
+  # aggregated rows combine estimates with different predicted effects (the GUI disables the option)
+  if (!options[["forestPlotStudyInformationPredictedEffects"]] || options[["forestPlotStudyInformationAggregateBy"]] != "") {
     return(NULL)
   }
 

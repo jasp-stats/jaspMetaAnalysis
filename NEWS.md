@@ -23,6 +23,8 @@
 ## Fixed
 * Clustered meta-analyses no longer offer z-tests; saved analyses are switched to t-tests.
 * Multilevel/multivariate meta-analysis fixes (profile plots, random effects confidence intervals, weighted estimation, models with multiple heterogeneity levels).
+* Precomputed variance-covariance matrices in semicolon-separated files (decimal commas) are read correctly.
+* Forest plot predicted effects are unavailable when the study information is aggregated.
 
 # jaspMetaAnalysis 0.98.0
 ## Changed

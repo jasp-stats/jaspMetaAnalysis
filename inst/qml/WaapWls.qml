@@ -131,8 +131,8 @@ Form
 			label: qsTr("Power criterion")
 			defaultValue: 80
 			min: 5
-			max: 100
-			info: qsTr("Power that an estimate needs to reach to be retained in the WAAP model (default 80%). The power is the probability that a two-sided z-test (α = .05) with the standard error of the estimate detects the effect of the WLS model. At 5%, all estimates are retained; at 100%, no estimate is retained and WLS is reported.")
+			max: 99
+			info: qsTr("Power that an estimate needs to reach to be retained in the WAAP model (default 80%, between 5% and 99%). The power is the probability that a two-sided z-test (α = .05) with the standard error of the estimate detects the effect of the WLS model. At 5%, all estimates are retained.")
 		}
 		CheckBox
 		{

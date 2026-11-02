@@ -316,15 +316,15 @@ Upgrades
 		toVersion:		"0.17.3"
 
 		// WaapWls.qml
-		ChangeRename { from: "inputES"; to: "effectSize" }
-		ChangeRename { from: "inputSE"; to: "effectSizeSe" }
-		ChangeRename { from: "inputCI"; to: "effectSizeCi" }
-		ChangeRename { from: "inputN"; to: "sampleSize" }
-		ChangeRename { from: "inputLabels"; to: "studyLabel" }
-		ChangeRename { from: "muTransform"; to: "transformCorrelationsTo" }
-		ChangeRename { from: "estimatesMean"; to: "inferenceMeanEstimatesTable" }
-		ChangeRename { from: "estimatesSigma"; to: "inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable" }
-		ChangeRename { from: "plotModels"; to: "plotsMeanModelEstimatesPlot" }
+		ChangeRename { condition: function(options) { return options["inputES"] !== undefined && options["effectSize"] === undefined; }; from: "inputES"; to: "effectSize" }
+		ChangeRename { condition: function(options) { return options["inputSE"] !== undefined && options["effectSizeSe"] === undefined; }; from: "inputSE"; to: "effectSizeSe" }
+		ChangeRename { condition: function(options) { return options["inputCI"] !== undefined && options["effectSizeCi"] === undefined; }; from: "inputCI"; to: "effectSizeCi" }
+		ChangeRename { condition: function(options) { return options["inputN"] !== undefined && options["sampleSize"] === undefined; }; from: "inputN"; to: "sampleSize" }
+		ChangeRename { condition: function(options) { return options["inputLabels"] !== undefined && options["studyLabel"] === undefined; }; from: "inputLabels"; to: "studyLabel" }
+		ChangeRename { condition: function(options) { return options["muTransform"] !== undefined && options["transformCorrelationsTo"] === undefined; }; from: "muTransform"; to: "transformCorrelationsTo" }
+		ChangeRename { condition: function(options) { return options["estimatesMean"] !== undefined && options["inferenceMeanEstimatesTable"] === undefined; }; from: "estimatesMean"; to: "inferenceMeanEstimatesTable" }
+		ChangeRename { condition: function(options) { return options["estimatesSigma"] !== undefined && options["inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable"] === undefined; }; from: "estimatesSigma"; to: "inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable" }
+		ChangeRename { condition: function(options) { return options["plotModels"] !== undefined && options["plotsMeanModelEstimatesPlot"] === undefined; }; from: "plotModels"; to: "plotsMeanModelEstimatesPlot" }
 	}
 
 	Upgrade
@@ -334,18 +334,18 @@ Upgrades
 		toVersion:		"0.17.3"
 
 		// PetPeese.qml
-		ChangeRename { from: "inputES"; to: "effectSize" }
-		ChangeRename { from: "inputSE"; to: "effectSizeSe" }
-		ChangeRename { from: "inputCI"; to: "effectSizeCi" }
-		ChangeRename { from: "inputN"; to: "sampleSize" }
-		ChangeRename { from: "inputLabels"; to: "studyLabel" }
-		ChangeRename { from: "muTransform"; to: "transformCorrelationsTo" }
-		ChangeRename { from: "estimatesMean"; to: "inferenceMeanEstimatesTable" }
-		ChangeRename { from: "estimatesPetPeese"; to: "inferenceRegressionEstimatesTable" }
-		ChangeRename { from: "estimatesSigma"; to: "inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable" }
-		ChangeRename { from: "regressionPeese"; to: "plotsRegressionEstimatePeesePlot" }
-		ChangeRename { from: "regressionPet"; to: "plotsRegressionEstimatePetPlot" }
-		ChangeRename { from: "plotModels"; to: "plotsMeanModelEstimatesPlot" }
+		ChangeRename { condition: function(options) { return options["inputES"] !== undefined && options["effectSize"] === undefined; }; from: "inputES"; to: "effectSize" }
+		ChangeRename { condition: function(options) { return options["inputSE"] !== undefined && options["effectSizeSe"] === undefined; }; from: "inputSE"; to: "effectSizeSe" }
+		ChangeRename { condition: function(options) { return options["inputCI"] !== undefined && options["effectSizeCi"] === undefined; }; from: "inputCI"; to: "effectSizeCi" }
+		ChangeRename { condition: function(options) { return options["inputN"] !== undefined && options["sampleSize"] === undefined; }; from: "inputN"; to: "sampleSize" }
+		ChangeRename { condition: function(options) { return options["inputLabels"] !== undefined && options["studyLabel"] === undefined; }; from: "inputLabels"; to: "studyLabel" }
+		ChangeRename { condition: function(options) { return options["muTransform"] !== undefined && options["transformCorrelationsTo"] === undefined; }; from: "muTransform"; to: "transformCorrelationsTo" }
+		ChangeRename { condition: function(options) { return options["estimatesMean"] !== undefined && options["inferenceMeanEstimatesTable"] === undefined; }; from: "estimatesMean"; to: "inferenceMeanEstimatesTable" }
+		ChangeRename { condition: function(options) { return options["estimatesPetPeese"] !== undefined && options["inferenceRegressionEstimatesTable"] === undefined; }; from: "estimatesPetPeese"; to: "inferenceRegressionEstimatesTable" }
+		ChangeRename { condition: function(options) { return options["estimatesSigma"] !== undefined && options["inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable"] === undefined; }; from: "estimatesSigma"; to: "inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable" }
+		ChangeRename { condition: function(options) { return options["regressionPeese"] !== undefined && options["plotsRegressionEstimatePeesePlot"] === undefined; }; from: "regressionPeese"; to: "plotsRegressionEstimatePeesePlot" }
+		ChangeRename { condition: function(options) { return options["regressionPet"] !== undefined && options["plotsRegressionEstimatePetPlot"] === undefined; }; from: "regressionPet"; to: "plotsRegressionEstimatePetPlot" }
+		ChangeRename { condition: function(options) { return options["plotModels"] !== undefined && options["plotsMeanModelEstimatesPlot"] === undefined; }; from: "plotModels"; to: "plotsMeanModelEstimatesPlot" }
 	}
 
 	Upgrade

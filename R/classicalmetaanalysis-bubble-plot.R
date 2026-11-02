@@ -113,7 +113,7 @@
   separatePlots        <- unlist(options[["bubblePlotSeparatePlots"]])
   selectedVariable     <- options[["bubblePlotSelectedVariable"]][[1]][["variable"]]
   selectedVariableType <- options[["predictors.types"]][options[["predictors"]] == selectedVariable]
-  dataset              <- attr(fit, "dataset")
+  dataset              <- .maReferenceDataset(fit)
 
   # create a range of values for continuous predictors to plot the trend but use lvls for factors
   if (selectedVariableType == "scale") {

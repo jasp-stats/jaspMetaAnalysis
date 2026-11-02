@@ -2,7 +2,22 @@
 #
 # Builds, describes, exports, and names sampling variance-covariance matrices.
 
+.mammVarianceCovarianceMatrixReader <- function(fileName) {
+
+  # semicolon-separated files use decimal commas (read.csv2), other files are comma-separated (read.csv)
+  firstLine <- try(readLines(fileName, n = 1, warn = FALSE), silent = TRUE)
+
+  if (!jaspBase::isTryError(firstLine) && length(firstLine) == 1 && grepl(";", firstLine, fixed = TRUE))
+    return("read.csv2")
+
+  return("read.csv")
+}
+
 .mammGetVarianceCovarianceMatrix    <- function(dataset, options, returnCall = FALSE) {
+
+  # WAAP-WLS refits use the rows of the matrix of all estimates
+  if (!returnCall && !is.null(attr(dataset, "varianceCovarianceMatrix")))
+    return(attr(dataset, "varianceCovarianceMatrix"))
 
   if (options[["varianceCovarianceMatrixType"]] == "precomputed") {
 
@@ -12,17 +27,16 @@
     if (vMatrixFileName == "")
       return()
 
-    vMatrix <- try(as.matrix(read.csv(file = vMatrixFileName, header = FALSE)))
+    reader <- .mammVarianceCovarianceMatrixReader(vMatrixFileName)
 
     if (returnCall)
-      return(list(file = vMatrixFileName))
+      return(list(file = vMatrixFileName, reader = reader))
 
-    if (inherits(vMatrix, "try-error"))
-      .quitAnalysis(gettextf("Error reading the variance-covariance matrix file: %1$s", vMatrix))
-
-    # if there is only one column, try csv2 (indicates different decimals enconding)
-    if (ncol(vMatrix) == 1)
-      vMatrix <- try(as.matrix(read.csv2(file = vMatrixFileName, header = FALSE)))
+    vMatrix <- try(as.matrix(switch(
+      reader,
+      read.csv  = utils::read.csv(file = vMatrixFileName, header = FALSE),
+      read.csv2 = utils::read.csv2(file = vMatrixFileName, header = FALSE)
+    )))
 
     if (inherits(vMatrix, "try-error"))
       .quitAnalysis(gettextf("Error reading the variance-covariance matrix file: %1$s", vMatrix))
@@ -37,8 +51,8 @@
     if (!is.null(nasIds) && nrow(vMatrix) == length(nasIds))
       vMatrix <- vMatrix[!nasIds, !nasIds, drop = FALSE]
 
-    # extract the rows of the subset (a subgroup or the WAAP-WLS retained estimates)
-    if (!is.null(attr(dataset, "subgroupIndx")))
+    # extract the subgroup relevant section if subgroups are specified
+    if (options[["subgroup"]] != "" && !is.null(attr(dataset, "subgroupIndx")))
       vMatrix <- vMatrix[attr(dataset, "subgroupIndx"), attr(dataset, "subgroupIndx"), drop = FALSE]
 
     if (nrow(vMatrix) != nrow(dataset))

@@ -126,7 +126,7 @@
   if (.maIsMultilevelMultivariate(options) &&  .mammVarianceCovarianceMatrixReady(options)) {
     if (options[["varianceCovarianceMatrixType"]] == "precomputed") {
       fit <- paste0(
-        paste0("effectSizeVarianceCovarianceMatrix <- as.matrix(read.csv(", deparse(vcalcInput[["file"]]), ", header = FALSE))\n"), "\n",
+        paste0("effectSizeVarianceCovarianceMatrix <- as.matrix(", vcalcInput[["reader"]], "(", deparse(vcalcInput[["file"]]), ", header = FALSE))\n"), "\n",
         fit
       )
     } else {

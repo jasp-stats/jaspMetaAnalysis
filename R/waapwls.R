@@ -56,22 +56,6 @@ WaapWls                                 <- function(jaspResults, dataset = NULL,
   return(stats::pnorm(abs(z) - zAlpha) + stats::pnorm(-abs(z) - zAlpha))
 }
 
-.wwCriticalZ             <- function(power) {
-
-  # |effect| / SE at which the power criterion is attained
-  # (every estimate has at least 5% power and none has 100% power)
-  if (power <= 0.05)
-    return(0)
-  if (power >= 1)
-    return(Inf)
-
-  return(stats::uniroot(
-    function(z) .wwPower(z) - power,
-    interval = c(0, stats::qnorm(0.975) + stats::qnorm(power) + 1),
-    tol      = 1e-10
-  )$root)
-}
-
 .wwPowerEffects          <- function(fit, options) {
 
   # effect sizes (model scale) at which the power is evaluated: the predicted effects of the
@@ -95,12 +79,13 @@ WaapWls                                 <- function(jaspResults, dataset = NULL,
     return(effects)
 
   # estimates at the unaffected level are not subject to selection and are always retained
-  z        <- abs(effects) / dataset[[options[["effectSizeStandardError"]]]]
+  # (every estimate has at least 5% power, the lowest criterion)
+  power    <- .wwPower(effects / dataset[[options[["effectSizeStandardError"]]]])
   selected <- .ppSelected(dataset, options)
-  powered  <- selected & z >= .wwCriticalZ(options[["powerCriterion"]])
+  powered  <- selected & power >= options[["powerCriterion"]]
 
   return(list(
-    power    = .wwPower(z),
+    power    = power,
     selected = selected,
     powered  = powered,
     retained = powered | !selected
@@ -117,21 +102,14 @@ WaapWls                                 <- function(jaspResults, dataset = NULL,
 
 .wwRetainedData          <- function(dataset, retained) {
 
-  # The retained rows are tracked against the complete-case dataset (as for subgroups):
-  # exports map them back and a precomputed variance-covariance matrix is subset to them.
-  nasIds    <- attr(dataset, "NasIds")
-  scopeRows <- attr(dataset, "subgroupIndx")
-  if (is.null(scopeRows))
-    scopeRows <- rep(TRUE, nrow(dataset))
-  scopeRows[scopeRows] <- retained
+  # the retained rows keep their row ids in the complete-case dataset (exports map them back)
+  nasIds <- attr(dataset, "NasIds")
 
   # factor levels are kept: metafor drops moderators that are not estimable from the retained estimates
   data <- dataset[retained, , drop = FALSE]
-  attr(data, "NAs")           <- attr(dataset, "NAs")
-  attr(data, "NasIds")        <- nasIds[!nasIds][retained]
-  attr(data, "subgroupIndx")  <- scopeRows
-  attr(data, "datasetNasIds") <- if (is.null(attr(dataset, "datasetNasIds"))) nasIds else attr(dataset, "datasetNasIds")
-  attr(data, "subgroupName")  <- attr(dataset, "subgroupName")
+  attr(data, "NAs")          <- attr(dataset, "NAs")
+  attr(data, "NasIds")       <- nasIds[!nasIds][retained]
+  attr(data, "subgroupName") <- attr(dataset, "subgroupName")
 
   return(data)
 }
@@ -154,6 +132,11 @@ WaapWls                                 <- function(jaspResults, dataset = NULL,
     return(NULL)
 
   data <- .wwRetainedData(dataset, selection[["retained"]])
+
+  # the sampling variance-covariance matrix of all estimates is subset to the retained rows
+  # (a matrix rebuilt from the retained rows can differ, e.g., positional vcalc correlations)
+  if (.maIsMultilevelMultivariate(options) && .mammVarianceCovarianceMatrixReady(options))
+    attr(data, "varianceCovarianceMatrix") <- wlsFit[["V"]][selection[["retained"]], selection[["retained"]], drop = FALSE]
 
   return(.maFitModelFun(data, .ppModelOptions(options), attr(dataset, "subgroupName")))
 }
@@ -267,7 +250,9 @@ WaapWls                                 <- function(jaspResults, dataset = NULL,
       next
 
     attr(output[[type]], "waapWlsDecision") <- decision
-    attr(output[[type]], "wlsFit")          <- scope[["wls"]][[type]]
+    # the WAAP model is evaluated at the moderators of all estimates (WLS model)
+    if (decision[["selected"]] == "waap")
+      attr(output[[type]], "referenceFit") <- scope[["wls"]][["fit"]]
     attr(output[[type]], "unadjustedFits")  <- lapply(scope[c("fixedEffect", "randomEffects")], `[[`, type)
   }
 

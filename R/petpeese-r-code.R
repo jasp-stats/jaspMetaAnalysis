@@ -63,20 +63,10 @@
   if (subgroup && .maIsMultilevelMultivariate(options) && options[["varianceCovarianceMatrixType"]] == "precomputed")
     fitCode <- sub(", header = FALSE))", ", header = FALSE))[subgroupRows, subgroupRows]", fitCode, fixed = TRUE)
 
-  code <- paste0(
-    if (options[["publicationBiasAdjustment"]] == "petPeese") paste0("# ", .ppDecisionMessage(fit, options), "\n"),
-    dataCode,
-    biasCode,
-    fitCode
-  )
+  code <- paste0(dataCode, biasCode, fitCode)
 
   if (jaspBase::isTryError(fit))
     return(paste0(code, "# ", gettextf("The module reported: %1$s", .maTryCleanErrorMessages(fit)), "\n"))
 
-  # the adjusted estimate is the prediction at a zero standard error
-  newmods <- .maZeroBiasTerm(t(colMeans(stats::model.matrix(fit))), fit)
-  if (fit[["int.incl"]])
-    newmods <- newmods[, -1, drop = FALSE]
-
-  paste0(code, "\npredict(fit, newmods = c(", paste(signif(newmods[1, ], 8), collapse = ", "), "))\n")
+  return(code)
 }

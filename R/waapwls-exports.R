@@ -20,7 +20,7 @@
       next
 
     # the WLS model holds all estimates of the subgroup (the reported WAAP model only the retained ones)
-    datasetOrder <- .maExportDatasetOrder(attr(fit, "wlsFit"))
+    datasetOrder <- .maExportDatasetOrder(.maReferenceFit(fit))
     if (length(datasetOrder) != length(selection[["retained"]]))
       next
 

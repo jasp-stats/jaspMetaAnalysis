@@ -31,7 +31,7 @@
       predictInput$newmods  <- t(colMeans(model.matrix(fit)$location))
       predictInput$newscale <- t(colMeans(model.matrix(fit)$scale))
     } else if (.maIsMetaregressionEffectSize(options) || !is.null(.maBiasTerm(fit))) {
-      predictInput$newmods  <- .maZeroBiasTerm(t(colMeans(model.matrix(fit))), fit)
+      predictInput$newmods  <- .maZeroBiasTerm(t(colMeans(.maReferenceModelMatrix(fit))), fit)
     }
 
     if (!is.null(predictInput$newmods) && options[["effectSizeModelIncludeIntercept"]])
@@ -275,7 +275,12 @@
 
   if (parameter == "effectSize" && !is.null(.maBiasTerm(fit))) {
     # the PET-PEESE moderation test excludes the bias term
-    test <- anova(fit, btt = .maModeratorCoefficients(fit))
+    # (not available if metafor dropped all moderators, e.g., a moderator constant within a subgroup)
+    moderators <- .maModeratorCoefficients(fit)
+    if (length(moderators) == 0)
+      return(list(parameter = gettext("Effect Size"), stat = NA_real_, df1 = NA_real_, pval = NA_real_))
+
+    test <- anova(fit, btt = moderators)
     row  <- list(
       parameter = gettext("Effect Size"),
       stat      = test[["QM"]],

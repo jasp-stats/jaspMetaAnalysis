@@ -100,9 +100,16 @@ PetPeese                                <- function(jaspResults, dataset = NULL,
 
   dataset <- if (.maIsMultilevelMultivariate(options)) .mammCheckData(dataset, options) else .maCheckData(dataset, options)
 
-  # The classical data check does not consider the no-selection indicator.
-  if (options[["noSelection"]] != "") {
-    keep    <- !is.na(dataset[[options[["noSelection"]]]])
+  # The classical data check does not consider the no-selection indicator and the custom weights
+  # (metafor would drop rows with missing weights; the bias terms and the WAAP-WLS power refer to all rows).
+  modelOptions <- .ppModelOptions(options)
+  keep         <- rep(TRUE, nrow(dataset))
+  if (options[["noSelection"]] != "")
+    keep <- keep & !is.na(dataset[[options[["noSelection"]]]])
+  if (modelOptions[["fixParametersWeights"]] && modelOptions[["fixParametersWeightsVariable"]] != "")
+    keep <- keep & !is.na(dataset[[modelOptions[["fixParametersWeightsVariable"]]]])
+
+  if (!all(keep)) {
     nasIds  <- attr(dataset, "NasIds")
     nasIds[which(!nasIds)[!keep]] <- TRUE
 
