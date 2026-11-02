@@ -364,7 +364,7 @@
   casewiseDiagnosticsTable$setData(diagnosticsTable)
 
   if (options[["subgroup"]] != "")
-    casewiseDiagnosticsTable$addFootnote(gettext("Diagnostics are based on the the subgroup models."))
+    casewiseDiagnosticsTable$addFootnote(gettext("Diagnostics are based on the subgroup models."))
   if (.maIsClustered(options))
     casewiseDiagnosticsTable$addFootnote(gettext("Diagnostics are based on the non-clustered model."))
 

@@ -174,12 +174,13 @@
 
   # add errors messages for failed fits
   for (i in seq_along(fit)[sapply(fit, jaspBase::isTryError)]) {
-    testsTable$addFootnote(
-      gettextf("The model for subgroup '%1$s' failed with the following error: %2$s",
-               attr(fit[[i]], "subgroup"),
-               .maTryCleanErrorMessages(fit[[i]])),
-      symbol = gettext("Error:")
-    )
+    # analyses can describe a failed subgroup themselves (e.g., the PET-PEESE model selection)
+    message <- attr(fit[[i]], "subgroupMessage")
+    if (is.null(message))
+      message <- gettextf("The model for subgroup '%1$s' failed with the following error: %2$s",
+                          attr(fit[[i]], "subgroup"),
+                          .maTryCleanErrorMessages(fit[[i]]))
+    testsTable$addFootnote(message, symbol = gettext("Error:"))
   }
 
   # add multivariate settings notes
@@ -415,7 +416,9 @@
     tempDataset <- attr(tempFit, "dataset")
 
     if (attr(tempDataset, "NAs") > 0)
-      messages <- c(messages, gettextf("%1$i observations were ommited due to missing values.", attr(tempDataset, "NAs")))
+      messages <- c(messages, sprintf(ngettext(attr(tempDataset, "NAs"),
+                                               "%1$i observation was omitted due to missing values.",
+                                               "%1$i observations were omitted due to missing values."), attr(tempDataset, "NAs")))
 
     if (!is.null(options[["clustering"]]) && options[["clustering"]] != "") {
       if (!jaspBase::isTryError(tempFit) && !is.null(tempFit)){
@@ -429,7 +432,10 @@
       tempDataset <- attr(tempFit, "dataset")
 
       if (attr(tempDataset, "NAs") > 0)
-        messages <- c(messages, gettextf("%1$s: %2$i observations were ommited due to missing values.", gettextf("Subgroup %1$s", attr(tempFit, "subgroup")), attr(tempDataset, "NAs")))
+        messages <- c(messages, sprintf(ngettext(attr(tempDataset, "NAs"),
+                                                 "%1$s: %2$i observation was omitted due to missing values.",
+                                                 "%1$s: %2$i observations were omitted due to missing values."),
+                                        gettextf("Subgroup %1$s", attr(tempFit, "subgroup")), attr(tempDataset, "NAs")))
 
       if (!is.null(options[["clustering"]]) && options[["clustering"]] != "") {
         if (!jaspBase::isTryError(tempFit) && !is.null(tempFit)) {

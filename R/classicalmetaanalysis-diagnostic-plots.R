@@ -368,7 +368,7 @@
 
 .maPlotmathText                    <- function(x) {
 
-  # plain-text version of the metafor rma.mv profile labels, e.g., sigma[1]^2 ~ "Value"
+  # plain-text version of the metafor profile labels, e.g., sigma[1]^2 ~ "Value" or paste(tau^2, " Value")
   if (is.name(x)) {
     name <- as.character(x)
     return(switch(name, sigma = "\u03C3", tau = "\u03C4", rho = "\u03C1", gamma = "\u03B3", phi = "\u03C6", name))
@@ -381,6 +381,7 @@
     "~" = paste(.maPlotmathText(x[[2]]), .maPlotmathText(x[[3]])),
     "^" = paste0(.maPlotmathText(x[[2]]), if (identical(x[[3]], 2)) "\u00B2" else paste0("^", .maPlotmathText(x[[3]]))),
     "[" = paste0(.maPlotmathText(x[[2]]), chartr("0123456789", "\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089", .maPlotmathText(x[[3]]))),
+    "paste" = paste(vapply(as.list(x)[-1], .maPlotmathText, character(1)), collapse = ""),
     paste(deparse(x), collapse = "")
   )
 }
@@ -417,8 +418,11 @@
         y = rep(max(dfPlot[["maxll"]]), 2)),
       linetype = "dotted")
 
-  # rma.mv profiles store the axis label as a plotmath call
+  # metafor stores the axis label as plotmath (an expression for rma.uni, a call for rma.mv);
+  # plot editing in JASP serializes the labels, which works with text only
   xlab <- dfPlot[["xlab"]]
+  if (is.expression(xlab))
+    xlab <- xlab[[1]]
   if (is.call(xlab))
     xlab <- .maPlotmathText(xlab)
 

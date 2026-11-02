@@ -108,15 +108,8 @@
             # allow to load example data for data library
             distanceMatrix <- .mammGetExampleMaire2019DistanceMatrix()
           }else{
-            distanceMatrix <- try(as.matrix(read.csv(file = distanceMatrixFileName, row.names = 1)))
+            distanceMatrix <- .mammReadNamedMatrixFile(distanceMatrixFileName)
           }
-
-          if (inherits(distanceMatrix, "try-error"))
-            .quitAnalysis(gettextf("Error reading the distance matrix file: %1$s", distanceMatrix))
-
-          # if there is only one column, try csv2 (indicates different decimals enconding)
-          if (ncol(distanceMatrix) == 1)
-            distanceMatrix <- try(as.matrix(read.csv2(file = distanceMatrixFileName, row.names = 1)))
 
           if (inherits(distanceMatrix, "try-error"))
             .quitAnalysis(gettextf("Error reading the distance matrix file: %1$s", distanceMatrix))
@@ -145,15 +138,7 @@
       tempValueOuter         <- options[["randomEffectsSpecification"]][[i]][["groupingFactor"]]
       distanceMatrixFileName <- options[["randomEffectsSpecification"]][[i]][["correlationMatrixFile"]]
       if (tempValueOuter != "" && distanceMatrixFileName != "") {
-        # try regular csv loading
-        correlationMatrix <- try(as.matrix(read.csv(file = distanceMatrixFileName, row.names = 1)))
-
-        if (inherits(correlationMatrix, "try-error"))
-          .quitAnalysis(gettextf("Error reading the correlation matrix file: %1$s", correlationMatrix))
-
-        # if there is only one column, try csv2 (indicates different decimals encoding)
-        if (ncol(correlationMatrix) == 1)
-          correlationMatrix <- try(as.matrix(read.csv2(file = distanceMatrixFileName, row.names = 1)))
+        correlationMatrix <- .mammReadNamedMatrixFile(distanceMatrixFileName)
 
         if (inherits(correlationMatrix, "try-error"))
           .quitAnalysis(gettextf("Error reading the correlation matrix file: %1$s", correlationMatrix))

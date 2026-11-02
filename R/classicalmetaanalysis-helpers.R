@@ -510,7 +510,14 @@
 }
 
 .maTryCleanErrorMessages               <- function(message) {
+
+  # report the error without the failing call (e.g., "Error in (function (yi, vi, ...) : ...")
+  if (inherits(message, "try-error") && !is.null(attr(message, "condition")))
+    message <- conditionMessage(attr(message, "condition"))
+
   # probably more messages will be gathered over time
+  if (.maIsTooFewEstimatesError(message))
+    return(gettext("There are too few estimates to estimate the model."))
   if (grepl("singular matrix", message))
     return(gettextf("The model estimation failed with the following message: %1$s. Please, consider simplifying the model.", message))
   if (grepl("Could not obtain the cluster-robust variance-covariance matrix", message))
@@ -523,4 +530,9 @@
     return(gettext("The GLMM could not be estimated for the selected model. This can happen with sparse event counts, risk differences, random study effects, or a moderator structure that is too complex for the data. Try simplifying the moderator model, using the fixed study-effects GLMM, changing the effect-size measure if appropriate, or centering/scaling continuous moderators.\n\nMetafor reported: Cannot fit ML model."))
 
   return(message)
+}
+
+.maIsTooFewEstimatesError              <- function(message) {
+  # metafor messages for models with more parameters than estimates
+  return(grepl("Number of parameters to be estimated is larger than the number of observations|Processing terminated since k <= 1", message))
 }

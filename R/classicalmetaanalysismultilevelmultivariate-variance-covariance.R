@@ -13,6 +13,16 @@
   return("read.csv")
 }
 
+.mammReadNamedMatrixFile            <- function(fileName) {
+
+  # correlation and distance matrices with row and column names
+  return(try(as.matrix(switch(
+    .mammVarianceCovarianceMatrixReader(fileName),
+    read.csv  = utils::read.csv(file = fileName, row.names = 1),
+    read.csv2 = utils::read.csv2(file = fileName, row.names = 1)
+  ))))
+}
+
 .mammGetVarianceCovarianceMatrix    <- function(dataset, options, returnCall = FALSE) {
 
   # WAAP-WLS refits use the rows of the matrix of all estimates
@@ -141,14 +151,7 @@
           if (returnCall) {
             rho1 <- rho1File
           } else  {
-            rho1 <- try(as.matrix(read.csv(file = rho1File, row.names = 1)))
-
-            if (inherits(rho1, "try-error"))
-              .quitAnalysis(gettextf("Error reading the variance-covariance matrix file: %1$s", rho1))
-
-            # if there is only one column, try csv2 (indicates different decimals enconding)
-            if (ncol(rho1) == 1)
-              rho1 <- try(as.matrix(read.csv2(file = rho1File, row.names = 1)))
+            rho1 <- .mammReadNamedMatrixFile(rho1File)
 
             if (inherits(rho1, "try-error"))
               .quitAnalysis(gettextf("Error reading the variance-covariance matrix file: %1$s", rho1))
@@ -180,14 +183,7 @@
           if (returnCall) {
             rho2 <- rho2File
           } else  {
-            rho2 <- try(as.matrix(read.csv(file = rho2File, row.names = 1)))
-
-            if (inherits(rho2, "try-error"))
-              .quitAnalysis(gettextf("Error reading the variance-covariance matrix file: %1$s", rho2))
-
-            # if there is only one column, try csv2 (indicates different decimals enconding)
-            if (ncol(rho2) == 1)
-              rho2 <- try(as.matrix(read.csv2(file = rho2File, row.names = 1)))
+            rho2 <- .mammReadNamedMatrixFile(rho2File)
 
             if (inherits(rho2, "try-error"))
               .quitAnalysis(gettextf("Error reading the variance-covariance matrix file: %1$s", rho2))
@@ -535,11 +531,11 @@
   if (!.mammVarianceCovarianceMatrixReady(options))
     return()
 
-  V <- .mammGetVarianceCovarianceMatrix(dataset, options)
-  try(write.table(V, file = options[["varianceCovarianceMatrixSaveComputedVarianceCovarianceMatrix"]], sep = ",", row.names = FALSE, col.names = FALSE))
+  V       <- .mammGetVarianceCovarianceMatrix(dataset, options)
+  written <- try(utils::write.table(V, file = options[["varianceCovarianceMatrixSaveComputedVarianceCovarianceMatrix"]], sep = ",", row.names = FALSE, col.names = FALSE))
 
-  if (jaspBase::isTryError(V))
-    .quitAnalysis(gettextf("Error writing the variance-covariance matrix file: %1$s", V))
+  if (jaspBase::isTryError(written))
+    .quitAnalysis(gettextf("Error writing the variance-covariance matrix file: %1$s", .maTryCleanErrorMessages(written)))
 
   return()
 }

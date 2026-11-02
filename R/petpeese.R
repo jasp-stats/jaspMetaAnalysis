@@ -354,10 +354,7 @@ PetPeese                                <- function(jaspResults, dataset = NULL,
   pet <- .ppReportedFit(scope[["pet"]], options)
 
   if (jaspBase::isTryError(pet))
-    return(list(selected = NA_character_, message = gettextf(
-      "PET-PEESE model selection is unavailable because the PET model failed: %1$s",
-      .maTryCleanErrorMessages(pet)
-    )))
+    return(.ppPetFailure(pet, options))
 
   # a single test of the adjusted effect, also for models with multiple heterogeneity levels
   options[["predictionIntervals"]] <- FALSE
@@ -375,14 +372,37 @@ PetPeese                                <- function(jaspResults, dataset = NULL,
   ))
 }
 
+.ppPetFailure           <- function(pet, options) {
+
+  # the model selection requires the PET model; a model with too many parameters is reported with the number of estimates
+  reason    <- .maTryCleanErrorMessages(pet)
+  estimates <- nrow(attr(pet, "dataset"))
+  tooFew    <- .maIsTooFewEstimatesError(pet)
+
+  message <- if (tooFew) {
+    gettextf("The PET model could not be estimated because there are too few estimates (%1$i).", estimates)
+  } else {
+    gettextf("The PET model could not be estimated: %1$s", reason)
+  }
+
+  subgroupMessage <- if (options[["subgroup"]] == "") NULL else if (tooFew) {
+    gettextf("The PET model for subgroup '%1$s' could not be estimated because there are too few estimates (%2$i).", attr(pet, "subgroup"), estimates)
+  } else {
+    gettextf("The PET model for subgroup '%1$s' could not be estimated: %2$s", attr(pet, "subgroup"), reason)
+  }
+
+  return(list(selected = NA_character_, message = message, subgroupMessage = subgroupMessage))
+}
+
 .ppSelectScope          <- function(scope, options) {
 
   decision <- .ppDecision(scope, options)
 
   if (is.na(decision[["selected"]])) {
     error  <- .ppError(decision[["message"]])
-    attr(error, "subgroup") <- attr(scope[["pet"]][["fit"]], "subgroup")
-    attr(error, "dataset")  <- attr(scope[["pet"]][["fit"]], "dataset")
+    attr(error, "subgroup")        <- attr(scope[["pet"]][["fit"]], "subgroup")
+    attr(error, "subgroupMessage") <- decision[["subgroupMessage"]]
+    attr(error, "dataset")         <- attr(scope[["pet"]][["fit"]], "dataset")
     output <- list(fit = error, fitClustered = if (.maIsClustered(options)) error)
   } else {
     output <- scope[[decision[["selected"]]]]

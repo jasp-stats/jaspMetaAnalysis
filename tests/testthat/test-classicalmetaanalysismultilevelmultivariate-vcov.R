@@ -6,7 +6,7 @@ jaspFile <- testthat::test_path("jaspfiles", "other", "Multivariate and Multilev
 dataset  <- jaspTools::extractDatasetFromJASPFile(jaspFile)
 V        <- metafor::vcalc(vi = sei^2, cluster = study, obs = esid, rho = 0.6, data = dataset)
 
-.mammVcovReference <- function(rows = rep(TRUE, nrow(dataset))) {
+.mammVcovReference <- function(V, rows = rep(TRUE, nrow(dataset))) {
   fit <- metafor::rma.mv(yi, V[rows, rows], mods = ~ deltype, random = ~ 1 | study / esid,
                          data = droplevels(dataset[rows, ]), test = "t")
   data.frame(est = unname(fit$beta[, 1]), se = unname(fit$se))
@@ -29,6 +29,16 @@ V        <- metafor::vcalc(vi = sei^2, cluster = study, obs = esid, rho = 0.6, d
   data.frame(est = vapply(rows, `[[`, numeric(1), "est"), se = vapply(rows, `[[`, numeric(1), "se"))
 }
 
+# the matrix computed from the within-study correlation of the estimates
+constructOptions <- list(
+  varianceCovarianceMatrixType                            = "constructsGroupsTimes",
+  varianceCovarianceMatrixCluster                         = "study",
+  varianceCovarianceMatrixCluster.types                   = "nominal",
+  varianceCovarianceMatrixConstruct                       = "esid",
+  varianceCovarianceMatrixConstruct.types                 = "nominal",
+  varianceCovarianceMatrixConstructCorrelationMatrixValue = 0.6
+)
+
 fileComma     <- tempfile(fileext = ".csv")
 fileSemicolon <- tempfile(fileext = ".csv")
 utils::write.table(V, fileComma,     sep = ",",             row.names = FALSE, col.names = FALSE)
@@ -36,32 +46,45 @@ utils::write.table(V, fileSemicolon, sep = ";", dec = ",", row.names = FALSE, co
 
 test_that("Precomputed matrix from a comma-separated file matches metafor", {
   results <- .mammVcovRun(varianceCovarianceMatrixType = "precomputed", varianceCovarianceMatrixFile = fileComma)
-  expect_equal(.mammVcovCoefficients(results), .mammVcovReference(), tolerance = 1e-6)
+  expect_equal(.mammVcovCoefficients(results), .mammVcovReference(V), tolerance = 1e-6)
 })
 
 test_that("Precomputed matrix from a semicolon-separated file with decimal commas matches metafor", {
   results <- .mammVcovRun(varianceCovarianceMatrixType = "precomputed", varianceCovarianceMatrixFile = fileSemicolon)
-  expect_equal(.mammVcovCoefficients(results), .mammVcovReference(), tolerance = 1e-6)
+  expect_equal(.mammVcovCoefficients(results), .mammVcovReference(V), tolerance = 1e-6)
 })
 
 test_that("Subgroup analyses use the matching block of the precomputed matrix", {
   results <- .mammVcovRun(varianceCovarianceMatrixType = "precomputed", varianceCovarianceMatrixFile = fileComma,
                           subgroup = "pubstatus", subgroup.types = "nominal")
   for (level in c("0", "1"))
-    expect_equal(.mammVcovCoefficients(results, level), .mammVcovReference(dataset$pubstatus == as.numeric(level)), tolerance = 1e-6)
+    expect_equal(.mammVcovCoefficients(results, level), .mammVcovReference(V, dataset$pubstatus == as.numeric(level)), tolerance = 1e-6)
 })
 
 test_that("Computed matrix is saved to the selected file", {
   fileSaved <- tempfile(fileext = ".csv")
-  results   <- .mammVcovRun(
-    varianceCovarianceMatrixType                                 = "constructsGroupsTimes",
-    varianceCovarianceMatrixCluster                              = "study",
-    varianceCovarianceMatrixCluster.types                        = "nominal",
-    varianceCovarianceMatrixConstruct                            = "esid",
-    varianceCovarianceMatrixConstruct.types                      = "nominal",
-    varianceCovarianceMatrixConstructCorrelationMatrixValue      = 0.6,
-    varianceCovarianceMatrixSaveComputedVarianceCovarianceMatrix = fileSaved
-  )
-  expect_equal(.mammVcovCoefficients(results), .mammVcovReference(), tolerance = 1e-6)
+  results   <- do.call(.mammVcovRun, c(constructOptions, varianceCovarianceMatrixSaveComputedVarianceCovarianceMatrix = fileSaved))
+  expect_equal(.mammVcovCoefficients(results), .mammVcovReference(V), tolerance = 1e-6)
   expect_equal(unname(as.matrix(utils::read.csv(fileSaved, header = FALSE))), matrix(as.numeric(V), nrow(V)), tolerance = 1e-10)
+})
+
+test_that("Saving the computed matrix to an unwritable location reports an error", {
+  results <- do.call(.mammVcovRun, c(constructOptions, varianceCovarianceMatrixSaveComputedVarianceCovarianceMatrix = file.path(tempfile(), "V.csv")))
+  expect_identical(results[["status"]], "validationError")
+  expect_match(results[["results"]][["errorMessage"]], "Error writing the variance-covariance matrix file", fixed = TRUE)
+})
+
+test_that("Construct-type correlation matrix from a semicolon-separated file matches metafor", {
+  # correlations between the three delinquency types, with decimal commas
+  rho  <- matrix(c(1, .5, .3, .5, 1, .4, .3, .4, 1), 3, dimnames = rep(list(c("covert", "general", "overt")), 2))
+  file <- tempfile(fileext = ".csv")
+  utils::write.csv2(rho, file)
+  results <- do.call(.mammVcovRun, c(constructOptions, list(
+    varianceCovarianceMatrixConstructType                         = "deltype",
+    varianceCovarianceMatrixConstructType.types                   = "nominal",
+    varianceCovarianceMatrixConstructTypeCorrelationMatrix        = "correlationMatrix",
+    varianceCovarianceMatrixConstructTypeCorrelationMatrixFilePath = file
+  )))
+  VType <- metafor::vcalc(vi = sei^2, cluster = study, obs = esid, type = deltype, rho = list(0.6, rho), data = dataset)
+  expect_equal(.mammVcovCoefficients(results), .mammVcovReference(VType), tolerance = 1e-6)
 })
