@@ -1,7 +1,6 @@
 # WAAP-WLS reporting.
 #
-# Model-selection notes and the WLS/WAAP comparison table. The remaining output
-# uses the classical meta-analysis builders.
+# Model-selection notes. The output uses the classical meta-analysis builders.
 
 # Model and inference notes ----
 
@@ -68,95 +67,4 @@
       .wwNoSelectionMessage(fit, options)
     ), fit, options)
   }
-}
-
-# WLS and WAAP estimates ----
-
-.wwEstimatesTable        <- function(jaspResults, options) {
-
-  if (!options[["waapWlsEstimates"]] || !is.null(jaspResults[["waapWlsEstimates"]]))
-    return()
-
-  table <- createJaspTable(gettext("WLS and WAAP Estimates"))
-  table$dependOn(c(.wwDependencies, "waapWlsEstimates", "includeFullDatasetInSubgroupAnalysis",
-                   "confidenceIntervals", "confidenceIntervalsLevel", "standardErrors", "transformEffectSize"))
-  table$showSpecifiedColumnsOnly <- TRUE
-  table$position                 <- 4
-  jaspResults[["waapWlsEstimates"]] <- table
-
-  table$addColumnInfo(name = "par", title = "", type = "string")
-  .maAddSubgroupColumn(table, options)
-  table$addColumnInfo(name = "k",   title = gettext("k"), type = "integer")
-  table$addColumnInfo(name = "est", title = gettext("Estimate"), type = "number")
-  .maAddSeColumn(table, options)
-  .maAddCiColumn(table, options)
-  table$addColumnInfo(name = "stat", title = if (.maIsMetaregressionFtest(options)) gettext("t") else gettext("z"), type = "number")
-  if (.maIsMetaregressionFtest(options))
-    table$addColumnInfo(name = "df", title = gettext("df"), type = "number")
-  table$addColumnInfo(name = "pval", title = gettext("p"), type = "pvalue")
-
-  fits <- .maExtractFit(jaspResults, options)
-
-  if (is.null(fits))
-    return()
-
-  if (length(fits) == 1 && jaspBase::isTryError(fits[[1]])) {
-    table$setError(.maTryCleanErrorMessages(fits[[1]]))
-    return()
-  }
-
-  table$setData(.maSafeOrderAndSimplify(.maSafeRbind(lapply(fits, .wwRowEstimates, options = options)), "par", options))
-
-  table$addFootnote(gettextf(
-    "WLS includes all estimates, WAAP the adequately powered estimates (power ≥ %1$s%%)%2$s. The reported model is WAAP if it is estimable, WLS otherwise.",
-    format(100 * options[["powerCriterion"]]),
-    if (options[["noSelection"]] != "") gettext(" and the unaffected estimates") else ""
-  ))
-  if (.maIsMetaregressionEffectSize(options))
-    table$addFootnote(gettext("The estimates are evaluated at the mean of the moderators."))
-
-  return()
-}
-
-.wwRowEstimates          <- function(fit, options) {
-
-  decision <- attr(fit, "waapWlsDecision")
-
-  if (is.null(decision))
-    return(NULL)
-
-  # a single estimate, also for models with multiple heterogeneity levels
-  options[["predictionIntervals"]] <- FALSE
-
-  selection <- decision[["selection"]]
-
-  rows <- lapply(c("wls", "waap"), function(candidate) {
-
-    candidateFit <- attr(fit, "candidateFits")[[candidate]]
-    row          <- data.frame(
-      par      = .wwCandidateLabel(candidate),
-      subgroup = attr(fit, "subgroup"),
-      k        = if (!is.list(selection)) NA_integer_ else if (candidate == "wls") length(selection[["retained"]]) else sum(selection[["retained"]])
-    )
-
-    # the WAAP estimate is shown only for the reported (estimable) WAAP model
-    if (is.null(candidateFit) || jaspBase::isTryError(candidateFit) || (candidate == "waap" && decision[["selected"]] != "waap"))
-      return(row)
-
-    estimate <- try(.maComputePooledEffectPlot(candidateFit, options))
-    if (jaspBase::isTryError(estimate))
-      return(row)
-
-    cbind(row, data.frame(
-      est  = estimate[["est"]],
-      se   = estimate[["se"]],
-      lCi  = estimate[["lCi"]],
-      uCi  = estimate[["uCi"]],
-      stat = estimate[["stat"]],
-      df   = if (is.null(estimate[["df"]])) NA_real_ else estimate[["df"]],
-      pval = estimate[["pval"]]
-    ))
-  })
-
-  return(.maSafeRbind(rows))
 }

@@ -103,13 +103,13 @@ Upgrades
 		ChangeRename { condition: function(options) { return options["effectSizeSe"] !== undefined && options["effectSizeStandardError"] === undefined; }; from: "effectSizeSe"; to: "effectSizeStandardError" }
 		ChangeRename { condition: function(options) { return options["studyLabel"] !== undefined && options["studyLabels"] === undefined; }; from: "studyLabel"; to: "studyLabels" }
 		ChangeRename { condition: function(options) { return options["inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable"] !== undefined && options["heterogeneitySqrtGamma"] === undefined; }; from: "inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable"; to: "heterogeneitySqrtGamma" }
-		ChangeRename { condition: function(options) { return options["inferenceMeanEstimatesTable"] !== undefined && options["waapWlsEstimates"] === undefined; }; from: "inferenceMeanEstimatesTable"; to: "waapWlsEstimates" }
 
 		ChangeRemove { condition: function(options) { return options["plotsMeanModelEstimatesPlot"] !== undefined; }; name: "plotsMeanModelEstimatesPlot" }
 		ChangeRemove { condition: function(options) { return options["measures"] !== undefined; }; name: "measures" }
 		ChangeRemove { condition: function(options) { return options["transformCorrelationsTo"] !== undefined; }; name: "transformCorrelationsTo" }
 		ChangeRemove { condition: function(options) { return options["sampleSize"] !== undefined; }; name: "sampleSize" }
 		ChangeRemove { condition: function(options) { return options["effectSizeCi"] !== undefined; }; name: "effectSizeCi" }
+		ChangeRemove { condition: function(options) { return options["inferenceMeanEstimatesTable"] !== undefined; }; name: "inferenceMeanEstimatesTable" }
 	}
 
 	// Typo fix of the multilevel/multivariate sparse matrices option name (stored by all analyses with the classical Advanced section).

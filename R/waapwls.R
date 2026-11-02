@@ -24,7 +24,6 @@ WaapWls                                 <- function(jaspResults, dataset = NULL,
 
   .maUltimateForestPlot(jaspResults, options)
   .maBubblePlot(jaspResults, options)
-  .wwEstimatesTable(jaspResults, options)
 
   .ppDiagnostics(jaspResults, options)
   .maExportColumns(jaspResults, dataset, options)
@@ -46,11 +45,6 @@ WaapWls                                 <- function(jaspResults, dataset = NULL,
 .wwSelectionDependencies <- c("powerCriterion", "powerConditionalOnModerators")
 
 .wwDependencies          <- c(.wwBaseDependencies, .wwSelectionDependencies)
-
-.wwCandidateLabel        <- function(candidate) {
-
-  switch(candidate, wls = "WLS", waap = "WAAP")
-}
 
 # Power-based selection ----
 
@@ -80,10 +74,10 @@ WaapWls                                 <- function(jaspResults, dataset = NULL,
 
 .wwPowerEffects          <- function(fit, options) {
 
-  # effect sizes (model scale) at which the power is evaluated: the moderator-specific
-  # predicted effects of the estimates or the pooled effect
-  if (.maIsMetaregressionEffectSize(options) && options[["powerConditionalOnModerators"]])
-    return(as.vector(stats::fitted(fit)))
+  # effect sizes (model scale) at which the power is evaluated: the predicted effects of the
+  # estimates (a single value without moderators) or the pooled effect at the mean of the moderators
+  if (!.maIsMetaregressionEffectSize(options) || options[["powerConditionalOnModerators"]])
+    return(stats::predict(fit)[["pred"]])
 
   # a single pooled effect, also for models with multiple heterogeneity levels
   options[["predictionIntervals"]] <- FALSE
@@ -273,7 +267,7 @@ WaapWls                                 <- function(jaspResults, dataset = NULL,
       next
 
     attr(output[[type]], "waapWlsDecision") <- decision
-    attr(output[[type]], "candidateFits")   <- lapply(scope[c("wls", "waap")], `[[`, type)
+    attr(output[[type]], "wlsFit")          <- scope[["wls"]][[type]]
     attr(output[[type]], "unadjustedFits")  <- lapply(scope[c("fixedEffect", "randomEffects")], `[[`, type)
   }
 

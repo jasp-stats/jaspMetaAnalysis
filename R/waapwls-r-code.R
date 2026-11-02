@@ -1,7 +1,7 @@
 # WAAP-WLS R code.
 #
 # Reproducible calls reuse the classical metafor call: the WLS model of all
-# estimates, the power-based selection, and the WAAP model of the retained estimates.
+# estimates and, if reported, the WAAP model of the retained estimates.
 
 .wwShowRCode                            <- function(jaspResults, options) {
 
@@ -41,31 +41,23 @@
   return(fitCode)
 }
 
-.wwSelectionCode                        <- function(fit, options, dataName) {
+.wwSelectionCode                        <- function(options, dataName) {
 
-  # the power is evaluated at the effects of the WLS model
-  wlsFit <- attr(fit, "candidateFits")[["wls"]]
-
-  if (.maIsMetaregressionEffectSize(options) && options[["powerConditionalOnModerators"]]) {
-    effectCode <- "fitted(fit)"
-  } else if (.maIsMetaregressionEffectSize(options)) {
-    newmods <- t(colMeans(stats::model.matrix(wlsFit)))
-    if (wlsFit[["int.incl"]])
-      newmods <- newmods[, -1, drop = FALSE]
-    effectCode <- paste0("predict(fit, newmods = c(", paste(signif(newmods[1, ], 8), collapse = ", "), "))$pred")
-  } else {
-    effectCode <- "predict(fit)$pred"
-  }
+  # the power is evaluated at the predicted effects of the WLS model (or at its pooled effect at the mean of the moderators)
+  effectCode <- "predict(fit)$pred"
+  if (.maIsMetaregressionEffectSize(options) && !options[["powerConditionalOnModerators"]])
+    effectCode <- paste0("predict(fit, newmods = colMeans(model.matrix(fit))", if (options[["effectSizeModelIncludeIntercept"]]) "[-1]", ")$pred")
 
   paste0(
-    "\n# ", gettextf("adequately powered estimates: power of a two-sided z-test (alpha = 0.05) of at least %1$s%%", format(100 * options[["powerCriterion"]])), "\n",
-    "powerEffect <- ", effectCode, "\n",
-    "waapRows    <- abs(powerEffect) / ", dataName, "$", options[["effectSizeStandardError"]], " >= ", signif(.wwCriticalZ(options[["powerCriterion"]]), 8),
+    "\n",
+    "z        <- abs(", effectCode, ") / ", dataName, "$", options[["effectSizeStandardError"]], "\n",
+    "power    <- pnorm(z - qnorm(0.975)) + pnorm(-z - qnorm(0.975))\n",
+    "waapRows <- power >= ", format(options[["powerCriterion"]]),
     if (options[["noSelection"]] != "") {
       paste0(" | ", dataName, "$", options[["noSelection"]], " == ", .smCodeString(options[["noSelectionLevel"]]))
     },
     "\n",
-    "waapData    <- droplevels(", dataName, "[waapRows, ])\n\n"
+    "waapData <- ", dataName, "[waapRows, ]\n\n"
   )
 }
 
@@ -86,30 +78,14 @@
   }
   rows     <- if (subgroup) "subgroupRows"
 
-  code <- paste0(
-    if (!jaspBase::isTryError(fit)) paste0("# ", gsub("[\r\n]+\\s*", " ", .wwDecisionMessage(fit, options)), "\n"),
-    dataCode,
-    .wwFitCode(options, dataName, rows)
-  )
+  code <- paste0(dataCode, .wwFitCode(options, dataName, rows))
 
   if (jaspBase::isTryError(fit))
     return(paste0(code, "# ", gettextf("The module reported: %1$s", .maTryCleanErrorMessages(fit)), "\n"))
 
-  if (decision[["selected"]] == "waap") {
-    code <- paste0(
-      code,
-      .wwSelectionCode(fit, options, dataName),
-      .wwFitCode(options, "waapData", c(rows, "waapRows"))
-    )
-  }
+  # the WAAP model refits the WLS model to the retained estimates
+  if (decision[["selected"]] == "waap")
+    code <- paste0(code, .wwSelectionCode(options, dataName), .wwFitCode(options, "waapData", c(rows, "waapRows")))
 
-  # the reported estimate is the pooled effect (at the mean of the moderators)
-  if (!.maIsMetaregressionEffectSize(options))
-    return(paste0(code, "\npredict(fit)\n"))
-
-  newmods <- t(colMeans(stats::model.matrix(fit)))
-  if (fit[["int.incl"]])
-    newmods <- newmods[, -1, drop = FALSE]
-
-  paste0(code, "\npredict(fit, newmods = c(", paste(signif(newmods[1, ], 8), collapse = ", "), "))\n")
+  return(code)
 }

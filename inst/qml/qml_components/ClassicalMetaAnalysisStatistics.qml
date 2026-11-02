@@ -247,20 +247,6 @@ Section
 
 	Group
 	{
-		title:		qsTr("WAAP-WLS")
-		visible:	analysisType === "waapWls"
-
-		CheckBox
-		{
-			name:		"waapWlsEstimates"
-			text:		qsTr("WLS and WAAP estimates")
-			checked:	true
-			info: qsTr("Include the pooled effect estimates of the WLS model (all estimates) and the WAAP model (adequately powered estimates) with the number of estimates in each model. The WAAP estimate is shown if the WAAP model is reported.")
-		}
-	}
-
-	Group
-	{
 		title: qsTr("Weight Function")
 		visible: analysisType === "selectionModels"
 		CheckBox
