@@ -55,3 +55,8 @@ renv/activate.R
 knowledge-base/*
 .positai
 /.StatsVault
+/.claude
+
+# StatsVault local workspace and generated agent bridges
+.StatsVault/
+CLAUDE.md
