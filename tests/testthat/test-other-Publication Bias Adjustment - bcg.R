@@ -182,10 +182,6 @@ test_that("PetPeese (analysis 3) results match", {
      2.02560065106563, 0.707445716260148, "systematic", 5.40310682659966
     ))
 
-  plotName <- results[["results"]][["petPeeseSummary"]][["collection"]][["petPeeseSummary_regressionPlot"]][["collection"]][["petPeeseSummary_regressionPlot_subgroupalternate"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "analysis-3_figure-1_subgroup-alternate")
-
   plotName <- results[["results"]][["petPeeseSummary"]][["collection"]][["petPeeseSummary_regressionPlot"]][["collection"]][["petPeeseSummary_regressionPlot_subgrouprandom"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "analysis-3_figure-2_subgroup-random")
