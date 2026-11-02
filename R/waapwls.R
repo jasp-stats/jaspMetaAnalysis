@@ -28,6 +28,7 @@ WaapWls                                 <- function(jaspResults, dataset = NULL,
 
   .ppDiagnostics(jaspResults, options)
   .maExportColumns(jaspResults, dataset, options)
+  .wwExportColumns(jaspResults, dataset, options)
 
   if (options[["showMetaforRCode"]])
     .wwShowRCode(jaspResults, options)
@@ -53,20 +54,26 @@ WaapWls                                 <- function(jaspResults, dataset = NULL,
 
 # Power-based selection ----
 
+.wwPower                 <- function(z) {
+
+  # power of a two-sided z-test (alpha = .05) for an effect of z standard errors
+  zAlpha <- stats::qnorm(0.975)
+
+  return(stats::pnorm(abs(z) - zAlpha) + stats::pnorm(-abs(z) - zAlpha))
+}
+
 .wwCriticalZ             <- function(power) {
 
-  # |effect| / SE at which a two-sided z-test (alpha = .05) attains the power criterion
+  # |effect| / SE at which the power criterion is attained
   # (every estimate has at least 5% power and none has 100% power)
   if (power <= 0.05)
     return(0)
   if (power >= 1)
     return(Inf)
 
-  zAlpha <- stats::qnorm(0.975)
-
   return(stats::uniroot(
-    function(z) stats::pnorm(z - zAlpha) + stats::pnorm(-z - zAlpha) - power,
-    interval = c(0, zAlpha + stats::qnorm(power) + 1),
+    function(z) .wwPower(z) - power,
+    interval = c(0, stats::qnorm(0.975) + stats::qnorm(power) + 1),
     tol      = 1e-10
   )$root)
 }
@@ -94,10 +101,12 @@ WaapWls                                 <- function(jaspResults, dataset = NULL,
     return(effects)
 
   # estimates at the unaffected level are not subject to selection and are always retained
+  z        <- abs(effects) / dataset[[options[["effectSizeStandardError"]]]]
   selected <- .ppSelected(dataset, options)
-  powered  <- selected & abs(effects) / dataset[[options[["effectSizeStandardError"]]]] >= .wwCriticalZ(options[["powerCriterion"]])
+  powered  <- selected & z >= .wwCriticalZ(options[["powerCriterion"]])
 
   return(list(
+    power    = .wwPower(z),
     selected = selected,
     powered  = powered,
     retained = powered | !selected

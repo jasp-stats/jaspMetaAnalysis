@@ -77,6 +77,8 @@
     "True Effect Estimates \\(BLUPs\\):|",
     "Random Effects:|",
     "Weights($|:)|",
+    "Estimated Power$|",
+    "Included in WAAP$|",
     "Difference in coefficients:",
     ")"
   )

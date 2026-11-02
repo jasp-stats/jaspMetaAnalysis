@@ -172,4 +172,24 @@ Section
 			info: qsTr("Export model fitting weights. These are not coefficient-specific contribution weights in meta-regression. For multilevel/multivariate models, diagonal weights match the default forest plot weights and row-sum weights are exported for intercept-only models.")
 		}
 	}
+
+	Group
+	{
+		title:		qsTr("WAAP-WLS")
+		visible:	waapWls
+
+		CheckBox
+		{
+			name:	"exportWaapWlsEstimatedPower"
+			text:	qsTr("Estimated power")
+			info: qsTr("Export the power of each estimate to detect the effect of the WLS model (two-sided z-test, α = .05), i.e., the value compared with the power criterion. Exported for all estimates, also when WLS is reported.")
+		}
+
+		CheckBox
+		{
+			name:	"exportWaapWlsIncludedInWaap"
+			text:	qsTr("Included in WAAP")
+			info: qsTr("Export an indicator of the estimates included in the WAAP model (the adequately powered and the unaffected estimates). Exported for all estimates, also when WLS is reported.")
+		}
+	}
 }
