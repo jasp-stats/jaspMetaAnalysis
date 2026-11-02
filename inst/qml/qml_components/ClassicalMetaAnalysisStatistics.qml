@@ -35,7 +35,7 @@ Section
 		title:		qsTr("Heterogeneity")
 		columns:	2
 		enabled:	method.value != "fixedEffects" && method.value != "equalEffects"
-		visible:	(analysisType === "metaAnalysis" || analysisType === "selectionModels" || analysisType === "petPeese" || analysisType === "mantelHaenszelPeto" || analysisType === "generalizedMetaAnalysis") && !multilevelMultivariate
+		visible:	(analysisType === "metaAnalysis" || analysisType === "selectionModels" || analysisType === "petPeese" || analysisType === "waapWls" || analysisType === "mantelHaenszelPeto" || analysisType === "generalizedMetaAnalysis") && !multilevelMultivariate
 		info: qsTr("Summarize the meta-analytic between-study heterogeneity. Unavailable when performing multilevel/multivariate meta-analysis.")
 
 		CheckBox
@@ -43,7 +43,7 @@ Section
 			text:		qsTr("𝜏")
 			name:		"heterogeneityTau"
 			checked:	true
-			visible:	(analysisType === "metaAnalysis" || analysisType === "selectionModels" || analysisType === "petPeese" || analysisType === "generalizedMetaAnalysis") && !unrestrictedWeightedLeastSquares
+			visible:	(analysisType === "metaAnalysis" || analysisType === "selectionModels" || analysisType === "petPeese" || analysisType === "waapWls" || analysisType === "generalizedMetaAnalysis") && !unrestrictedWeightedLeastSquares
 			info: qsTr("Include 𝜏, the square root of the estimated between-study variance.")
 		}
 
@@ -52,7 +52,7 @@ Section
 			text:		qsTr("𝜏²")
 			name:		"heterogeneityTau2"
 			checked:	true
-			visible:	(analysisType === "metaAnalysis" || analysisType === "selectionModels" || analysisType === "petPeese" || analysisType === "generalizedMetaAnalysis") && !unrestrictedWeightedLeastSquares
+			visible:	(analysisType === "metaAnalysis" || analysisType === "selectionModels" || analysisType === "petPeese" || analysisType === "waapWls" || analysisType === "generalizedMetaAnalysis") && !unrestrictedWeightedLeastSquares
 			info: qsTr("Include 𝜏², the estimated between-study variance.")
 		}
 
@@ -120,7 +120,7 @@ Section
 	{
 		title:		qsTr("Meta-Regression")
 		enabled:	predictors.count > 0
-		visible:	analysisType === "metaAnalysis" || analysisType === "selectionModels" || analysisType === "petPeese" || analysisType === "multilevelMultivariateMetaAnalysis" || analysisType === "generalizedMetaAnalysis"
+		visible:	analysisType === "metaAnalysis" || analysisType === "selectionModels" || analysisType === "petPeese" || analysisType === "waapWls" || analysisType === "multilevelMultivariateMetaAnalysis" || analysisType === "generalizedMetaAnalysis"
 		info: qsTr("Create summaries of the meta-regression. Available when predictors are included.")
 
 		CheckBox
@@ -179,7 +179,7 @@ Section
 			text:		qsTr("Prediction intervals")
 			name:		"predictionIntervals"
 			checked:	true
-			visible:	analysisType === "metaAnalysis" || analysisType === "selectionModels" || analysisType === "petPeese" || analysisType === "multilevelMultivariateMetaAnalysis" || analysisType === "generalizedMetaAnalysis"
+			visible:	analysisType === "metaAnalysis" || analysisType === "selectionModels" || analysisType === "petPeese" || analysisType === "waapWls" || analysisType === "multilevelMultivariateMetaAnalysis" || analysisType === "generalizedMetaAnalysis"
 			enabled:	!unrestrictedWeightedLeastSquares
 			info: qsTr("Include prediction intervals in the tabular output. Unavailable for unrestricted weighted least squares.")
 		}
@@ -193,7 +193,7 @@ Section
 			fieldWidth:		125 * preferencesModel.uiScale
 			info: qsTr("Select a transformation to apply to the effect size estimates in the output. This transformation applies to the 'Meta-Analytic Estimates Table', 'Estimated Marginal Means Table', 'Forest Plot', and  the 'Bubble Plot'. The 'Meta-Regression Coeffient Estimates' are not transformed.")
 			values:			(function() {
-				if (analysisType === "metaAnalysis" || analysisType === "selectionModels" || analysisType === "petPeese" || analysisType === "multilevelMultivariateMetaAnalysis") {
+				if (analysisType === "metaAnalysis" || analysisType === "selectionModels" || analysisType === "petPeese" || analysisType === "waapWls" || analysisType === "multilevelMultivariateMetaAnalysis") {
 					return [
 						{ label: qsTr("None")								, value: "none"							},  // NULL
 						{ label: qsTr("Fisher's z to r")					, value: "fishersZToCorrelation"		},  // transf.ztor
@@ -242,6 +242,20 @@ Section
 			text:		qsTr("Regression plot")
 			checked:	false
 			info: qsTr("Visualize the fitted relationship between the effect sizes and their standard errors. The fitted line (PET) or curve (PEESE) at a standard error of zero corresponds to the adjusted estimate.")
+		}
+	}
+
+	Group
+	{
+		title:		qsTr("WAAP-WLS")
+		visible:	analysisType === "waapWls"
+
+		CheckBox
+		{
+			name:		"waapWlsEstimates"
+			text:		qsTr("WLS and WAAP estimates")
+			checked:	true
+			info: qsTr("Include the pooled effect estimates of the WLS model (all estimates) and the WAAP model (adequately powered estimates) with the number of estimates in each model. The WAAP estimate is shown if the WAAP model is reported.")
 		}
 	}
 

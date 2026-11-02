@@ -7,12 +7,13 @@ DropDown
 	property int heterogeneityModelTermsCount: 0
 	readonly property bool selectionModels: analysisType === "selectionModels"
 	readonly property bool petPeese: analysisType === "petPeese"
+	readonly property bool waapWls: analysisType === "waapWls"
 	property bool multilevelMultivariate: analysisType === "multilevelMultivariateMetaAnalysis"
 
 	name:			"method"
 	label:			qsTr("Method")
-	startValue:		selectionModels ? "maximumLikelihood" : petPeese ? "unrestrictedWeightedLeastSquares" : "restrictedML"
-	info: selectionModels ? qsTr("Selection models use maximum likelihood and z/Wald coefficient tests. The same method and moderators apply to all candidates.") : petPeese ? qsTr("Method used for estimating the PET and PEESE meta-regressions. Unrestricted weighted least squares (default) corresponds to the original PET-PEESE specification with multiplicative heterogeneity (Stanley & Doucouliagos, 2014); the remaining methods estimate additive heterogeneity. The multilevel/multivariate model is estimated with (restricted) maximum likelihood.") : qsTr("Method used for model estimation in the meta-analysis. The available methods depend on the inclusion of heterogeneity model terms.")
+	startValue:		selectionModels ? "maximumLikelihood" : (petPeese || waapWls) ? "unrestrictedWeightedLeastSquares" : "restrictedML"
+	info: selectionModels ? qsTr("Selection models use maximum likelihood and z/Wald coefficient tests. The same method and moderators apply to all candidates.") : petPeese ? qsTr("Method used for estimating the PET and PEESE meta-regressions. Unrestricted weighted least squares (default) corresponds to the original PET-PEESE specification with multiplicative heterogeneity (Stanley & Doucouliagos, 2014); the remaining methods estimate additive heterogeneity. The multilevel/multivariate model is estimated with (restricted) maximum likelihood.") : waapWls ? qsTr("Method used for estimating the WLS and WAAP meta-analyses. Unrestricted weighted least squares (default) corresponds to the original WAAP-WLS specification with multiplicative heterogeneity (Stanley & Doucouliagos, 2017); the remaining methods estimate additive heterogeneity. The multilevel/multivariate model is estimated with (restricted) maximum likelihood.") : qsTr("Method used for model estimation in the meta-analysis. The available methods depend on the inclusion of heterogeneity model terms.")
 	readonly property var methodChoices: [
 		{ label: qsTr("Equal Effects")			, value: "equalEffects"		},
 		{ label: qsTr("Fixed Effects")			, value: "fixedEffects"		},
@@ -31,8 +32,8 @@ DropDown
 		{ label: qsTr("Unrestricted Weighted Least Squares (UWLS)"), value: "unrestrictedWeightedLeastSquares" },
 	]
 
-	// PET-PEESE lists restricted ML first: the first value replaces UWLS when the multilevel/multivariate model is selected
-	readonly property var multilevelMultivariateChoices: petPeese ? ["restrictedML", "maximumLikelihood"] : ["maximumLikelihood", "restrictedML"]
+	// PET-PEESE and WAAP-WLS list restricted ML first: the first value replaces UWLS when the multilevel/multivariate model is selected
+	readonly property var multilevelMultivariateChoices: (petPeese || waapWls) ? ["restrictedML", "maximumLikelihood"] : ["maximumLikelihood", "restrictedML"]
 
 	values: multilevelMultivariate ? multilevelMultivariateChoices.map(function(value) {
 		return methodChoices.find(function(choice) { return choice.value === value; });

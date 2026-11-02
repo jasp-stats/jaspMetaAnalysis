@@ -10,7 +10,7 @@ Group
 	property string heterogeneityModelLinkValue: "log"
 	readonly property bool selectionModels:			analysisType === "selectionModels"
 	property bool multilevelMultivariate:			analysisType === "multilevelMultivariateMetaAnalysis"
-	readonly property bool metaAnalysis:			(analysisType === "metaAnalysis" || analysisType === "petPeese") && !multilevelMultivariate
+	readonly property bool metaAnalysis:			(analysisType === "metaAnalysis" || analysisType === "petPeese" || analysisType === "waapWls") && !multilevelMultivariate
 	readonly property bool likelihoodEstimation: ["restrictedML", "maximumLikelihood", "empiricalBayes"].includes(methodValue)
 	readonly property bool qStatisticEstimation: ["pauleMandel", "pauleMandelMu", "qeneralizedQStatMu"].includes(methodValue)
 	readonly property bool trustRegionOptimizer: ["uobyqa", "newuoa", "bobyqa"].includes(optimizerMethod.value)

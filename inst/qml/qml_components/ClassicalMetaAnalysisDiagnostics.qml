@@ -32,7 +32,7 @@ Section
 	readonly property bool selectionModels: analysisType === "selectionModels"
 	readonly property bool petPeese: analysisType === "petPeese"
 	property bool multilevelMultivariate: analysisType === "multilevelMultivariateMetaAnalysis"
-	readonly property bool univariate: (analysisType === "metaAnalysis" || petPeese) && !multilevelMultivariate
+	readonly property bool univariate: (analysisType === "metaAnalysis" || petPeese || analysisType === "waapWls") && !multilevelMultivariate
 	columns:						1
 	info: selectionModels ? qsTr("Profile likelihood diagnostics for free heterogeneity and selection parameters.") : generalizedMetaAnalysis ? qsTr("Options for assessing multicollinearity among predictors.") : qsTr("Options for evaluating the influence of individual studies and assessing model diagnostics, including variance inflation factors, casewise diagnostics, and diagnostic plots.")
 

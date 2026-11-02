@@ -360,9 +360,9 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 .maIsClassical         <- function(options, notMHP = FALSE) {
 
   # check if the analysis is classical
-  if (options[["analysis"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate", "mantelHaenszelPeto", "generalizedMetaAnalysis", "selectionModels", "petPeese")) {
+  if (options[["analysis"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate", "mantelHaenszelPeto", "generalizedMetaAnalysis", "selectionModels", "petPeese", "waapWls")) {
     if (notMHP) {
-      return(options[["analysis"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate", "selectionModels", "petPeese"))
+      return(options[["analysis"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate", "selectionModels", "petPeese", "waapWls"))
     } else {
       return(TRUE)
     }

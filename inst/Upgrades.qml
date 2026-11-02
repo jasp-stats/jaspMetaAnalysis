@@ -93,6 +93,25 @@ Upgrades
 		ChangeRemove { condition: function(options) { return options["inferenceRegressionEstimatesTable"] !== undefined; }; name: "inferenceRegressionEstimatesTable" }
 	}
 
+	Upgrade
+	{
+		functionName:	"WaapWls"
+		fromVersion:	"0.98.0"
+		toVersion:		"0.99.0"
+		msg:			qsTr("WAAP-WLS was reworked in Meta-Analysis module 0.99.0. Refreshing this analysis replaces the saved results and may reset incompatible settings (e.g., correlations and sample sizes are no longer accepted as input; use Effect Size Computation to compute effect sizes and standard errors). To rerun the original analysis, use the Meta-Analysis module 0.98.0.")
+
+		ChangeRename { condition: function(options) { return options["effectSizeSe"] !== undefined && options["effectSizeStandardError"] === undefined; }; from: "effectSizeSe"; to: "effectSizeStandardError" }
+		ChangeRename { condition: function(options) { return options["studyLabel"] !== undefined && options["studyLabels"] === undefined; }; from: "studyLabel"; to: "studyLabels" }
+		ChangeRename { condition: function(options) { return options["inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable"] !== undefined && options["heterogeneitySqrtGamma"] === undefined; }; from: "inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable"; to: "heterogeneitySqrtGamma" }
+		ChangeRename { condition: function(options) { return options["inferenceMeanEstimatesTable"] !== undefined && options["waapWlsEstimates"] === undefined; }; from: "inferenceMeanEstimatesTable"; to: "waapWlsEstimates" }
+
+		ChangeRemove { condition: function(options) { return options["plotsMeanModelEstimatesPlot"] !== undefined; }; name: "plotsMeanModelEstimatesPlot" }
+		ChangeRemove { condition: function(options) { return options["measures"] !== undefined; }; name: "measures" }
+		ChangeRemove { condition: function(options) { return options["transformCorrelationsTo"] !== undefined; }; name: "transformCorrelationsTo" }
+		ChangeRemove { condition: function(options) { return options["sampleSize"] !== undefined; }; name: "sampleSize" }
+		ChangeRemove { condition: function(options) { return options["effectSizeCi"] !== undefined; }; name: "effectSizeCi" }
+	}
+
 	// Typo fix of the multilevel/multivariate sparse matrices option name (stored by all analyses with the classical Advanced section).
 	Upgrade
 	{

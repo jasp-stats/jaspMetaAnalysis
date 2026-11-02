@@ -12,6 +12,11 @@
   identical(options[["analysis"]], "petPeese")
 }
 
+.maIsWaapWls                      <- function(options) {
+
+  identical(options[["analysis"]], "waapWls")
+}
+
 .maIsGLMM                         <- function(options) {
   options[["analysis"]] == "generalizedMetaAnalysis"
 }
@@ -23,6 +28,9 @@
 
   if (.maIsPetPeese(options))
     return(.ppDependencies)
+
+  if (.maIsWaapWls(options))
+    return(.wwDependencies)
 
   if (.maIsClassical(options))
     return(.maDependencies)
@@ -45,7 +53,7 @@
 }
 
 .maIsMetaregressionHeterogeneity  <- function(options) {
-  if (.maIsSelection(options) || .maIsPetPeese(options))
+  if (.maIsSelection(options) || .maIsPetPeese(options) || .maIsWaapWls(options))
     return(FALSE)
   return(!.maIsUnrestrictedWeightedLeastSquares(options) && !is.null(options[["heterogeneityModelTerms"]]) && length(options[["heterogeneityModelTerms"]]) > 0)
 }
@@ -73,8 +81,8 @@
 }
 
 .maIsMultilevelMultivariate       <- function(options) {
-  # PET-PEESE fits the multilevel/multivariate model when its checkbox is ticked
-  if (.maIsPetPeese(options))
+  # PET-PEESE and WAAP-WLS fit the multilevel/multivariate model when its checkbox is ticked
+  if (.maIsPetPeese(options) || .maIsWaapWls(options))
     return(options[["multilevelMultivariate"]])
 
   return(options[["analysis"]] == "metaAnalysisMultilevelMultivariate")
@@ -82,7 +90,8 @@
 
 .maIsPermutation                  <- function(options) {
   # permuting design rows breaks the link between the PET-PEESE bias term and the weights
-  if (.maIsSelection(options) || .maIsPetPeese(options))
+  # (and the WAAP-WLS selection of the adequately powered estimates)
+  if (.maIsSelection(options) || .maIsPetPeese(options) || .maIsWaapWls(options))
     return(FALSE)
   return(.maIsClassical(options, notMHP = TRUE) && !.maIsClustered(options) && options[["permutationTest"]])
 }

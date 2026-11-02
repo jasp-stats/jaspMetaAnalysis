@@ -37,8 +37,8 @@
     if (!is.null(nasIds) && nrow(vMatrix) == length(nasIds))
       vMatrix <- vMatrix[!nasIds, !nasIds, drop = FALSE]
 
-    # extract the subgroup relevant section if subgroups are specified
-    if (options[["subgroup"]] != "" && !is.null(attr(dataset, "subgroupIndx")))
+    # extract the rows of the subset (a subgroup or the WAAP-WLS retained estimates)
+    if (!is.null(attr(dataset, "subgroupIndx")))
       vMatrix <- vMatrix[attr(dataset, "subgroupIndx"), attr(dataset, "subgroupIndx"), drop = FALSE]
 
     if (nrow(vMatrix) != nrow(dataset))

@@ -39,14 +39,14 @@ Section
 	info: qsTr("Options for visualizing study-level information, estimated marginal means, and the model information in an all encompassing forest plot. Different sections of the forest plot can be individually enabled/disabled.")
 
 	// analysis type helpers
-	readonly property bool isClassical:			analysisType === "selectionModels" || analysisType === "petPeese" || analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || analysisType === "generalizedMetaAnalysis" || analysisType === "mantelHaenszelPeto"
+	readonly property bool isClassical:			analysisType === "selectionModels" || analysisType === "petPeese" || analysisType === "waapWls" || analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || analysisType === "generalizedMetaAnalysis" || analysisType === "mantelHaenszelPeto"
 	readonly property bool isStandardClassical:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis"
 	property bool multilevelMultivariate:		analysisType === "multilevelMultivariateMetaAnalysis"
 	readonly property bool isBayesian:			analysisType === "RoBMA" || analysisType === "NoBMA" || analysisType === "BiBMA"
 	readonly property bool isMetaRegression:	(analysisType !== "mantelHaenszelPeto") && effectSizeModelTermsCount > 0
 	readonly property bool isScaleRegression:	analysisType === "metaAnalysis" && heterogeneityModelTermsCount > 0
 	readonly property bool isFixedOrEqualEffect: methodValue === "fixedEffects" || methodValue === "equalEffects" || methodValue === "unrestrictedWeightedLeastSquares"
-	readonly property bool isPublicationBiasAdjusted: analysisType === "selectionModels" || analysisType === "petPeese"
+	readonly property bool isPublicationBiasAdjusted: analysisType === "selectionModels" || analysisType === "petPeese" || analysisType === "waapWls"
 
 	CheckBox
 	{
@@ -61,7 +61,7 @@ Section
 		panelEnabled:			forestPlotStudyInformation.checked
 		predictedEffectsEnabled:	effectSizeReady
 		showPredictedEffects:	isStandardClassical || isPublicationBiasAdjusted
-		showStudyWeights:		isStandardClassical || analysisType === "petPeese"
+		showStudyWeights:		isStandardClassical || analysisType === "petPeese" || analysisType === "waapWls"
 		showSecondaryCI:		true
 		showAggregate:			true
 	}
@@ -371,7 +371,8 @@ Section
 		Group
 		{
 			title:		qsTr("Publication Bias")
-			visible: 	analysisType === "RoBMA" || isPublicationBiasAdjusted
+			// WAAP-WLS has no publication bias test
+			visible: 	analysisType === "RoBMA" || (isPublicationBiasAdjusted && analysisType !== "waapWls")
 
 			CheckBox
 			{

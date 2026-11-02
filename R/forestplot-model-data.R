@@ -454,7 +454,7 @@
   }
 
   # unadjusted estimates for comparison with publication-bias adjusted models
-  if (.maIsSelection(options) || .maIsPetPeese(options)) {
+  if (.maIsSelection(options) || .maIsPetPeese(options) || .maIsWaapWls(options)) {
     for (benchmark in c("fixedEffect", "randomEffects")) {
       state <- .forestPlotAppendUnadjustedEstimate(state, fit, options, benchmark, testsStatistics)
     }

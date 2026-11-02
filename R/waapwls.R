@@ -1,38 +1,286 @@
+# WAAP-WLS.
 #
-# Copyright (C) 2013-2018 University of Amsterdam
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
+# Fits the WLS meta-analysis of all estimates and the WAAP meta-analysis of the
+# adequately powered estimates with metafor, selects the reported model, and
+# coordinates the classical meta-analysis output builders.
 
-WaapWls <- function(jaspResults, dataset, options, state = NULL) {
+# Analysis and dependencies ----
 
-  if (.wwppCheckReady(options)) {
-    # check the data
-    dataset <- .wwppCheckData(jaspResults, dataset, options)
+WaapWls                                 <- function(jaspResults, dataset = NULL, options, ...) {
 
-    # fit the models
-    .wwppFit(jaspResults, dataset, options, "waapWls")
+  options[["analysis"]] <- "waapWls"
+
+  if (.maReady(options)) {
+    dataset <- .ppCheckData(dataset, options)
+    if (.maIsMultilevelMultivariate(options)) .mammCheckErrors(dataset, options) else .maCheckErrors(dataset, options)
   }
 
-  # main summary tables
-  .wwppMakeTestsTables(jaspResults, dataset, options, "waapWls")
-  .wwppMakeEstimatesTables(jaspResults, dataset, options, "waapWls")
+  fits <- .wwFitModels(jaspResults, dataset, options)
+  .wwReportingFits(jaspResults, fits, options)
 
+  .maModelSummaryTables(jaspResults, options)
+  .maMetaregressionTables(jaspResults, options)
+  .maEstimatedMarginalMeansAndContrasts(jaspResults, options)
 
-  # figures
-  if (options[["plotsMeanModelEstimatesPlot"]])
-    .wwppEstimatesPlot(jaspResults, dataset, options, "waapWls")
+  .maUltimateForestPlot(jaspResults, options)
+  .maBubblePlot(jaspResults, options)
+  .wwEstimatesTable(jaspResults, options)
+
+  .ppDiagnostics(jaspResults, options)
+  .maExportColumns(jaspResults, dataset, options)
+
+  if (options[["showMetaforRCode"]])
+    .wwShowRCode(jaspResults, options)
+
+  if (.maIsMultilevelMultivariate(options) && options[["varianceCovarianceMatrixSaveComputedVarianceCovarianceMatrix"]] != "")
+    .mammExportVarianceCovarianceMatrix(dataset, options)
+
+  return()
+}
+
+# Model inputs (data, moderators, method, clustering); changing them refits all models.
+.wwBaseDependencies      <- c(.maDependencies, "noSelection", "noSelectionLevel", "multilevelMultivariate", "useSparseMatrices")
+
+# Power-based selection; changing it refits the WAAP model only if the retained estimates change.
+.wwSelectionDependencies <- c("powerCriterion", "powerConditionalOnModerators")
+
+.wwDependencies          <- c(.wwBaseDependencies, .wwSelectionDependencies)
+
+.wwCandidateLabel        <- function(candidate) {
+
+  switch(candidate, wls = "WLS", waap = "WAAP")
+}
+
+# Power-based selection ----
+
+.wwCriticalZ             <- function(power) {
+
+  # |effect| / SE at which a two-sided z-test (alpha = .05) attains the power criterion
+  # (every estimate has at least 5% power and none has 100% power)
+  if (power <= 0.05)
+    return(0)
+  if (power >= 1)
+    return(Inf)
+
+  zAlpha <- stats::qnorm(0.975)
+
+  return(stats::uniroot(
+    function(z) stats::pnorm(z - zAlpha) + stats::pnorm(-z - zAlpha) - power,
+    interval = c(0, zAlpha + stats::qnorm(power) + 1),
+    tol      = 1e-10
+  )$root)
+}
+
+.wwPowerEffects          <- function(fit, options) {
+
+  # effect sizes (model scale) at which the power is evaluated: the moderator-specific
+  # predicted effects of the estimates or the pooled effect
+  if (.maIsMetaregressionEffectSize(options) && options[["powerConditionalOnModerators"]])
+    return(as.vector(stats::fitted(fit)))
+
+  # a single pooled effect, also for models with multiple heterogeneity levels
+  options[["predictionIntervals"]] <- FALSE
+
+  return(.maComputePooledEffect(fit, options, returnRaw = TRUE)[["pred"]][1])
+}
+
+.wwPowerSelection        <- function(fit, dataset, options) {
+
+  if (jaspBase::isTryError(fit))
+    return(NULL)
+
+  effects <- try(.wwPowerEffects(fit, options))
+  if (jaspBase::isTryError(effects))
+    return(effects)
+
+  # estimates at the unaffected level are not subject to selection and are always retained
+  selected <- .ppSelected(dataset, options)
+  powered  <- selected & abs(effects) / dataset[[options[["effectSizeStandardError"]]]] >= .wwCriticalZ(options[["powerCriterion"]])
+
+  return(list(
+    selected = selected,
+    powered  = powered,
+    retained = powered | !selected
+  ))
+}
+
+.wwRequiredEstimates     <- function(fit) {
+
+  # the WAAP model needs residual degrees of freedom (at least two estimates without moderators)
+  return(nrow(fit[["beta"]]) + 1)
+}
+
+# Model fitting ----
+
+.wwRetainedData          <- function(dataset, retained) {
+
+  # The retained rows are tracked against the complete-case dataset (as for subgroups):
+  # exports map them back and a precomputed variance-covariance matrix is subset to them.
+  nasIds    <- attr(dataset, "NasIds")
+  scopeRows <- attr(dataset, "subgroupIndx")
+  if (is.null(scopeRows))
+    scopeRows <- rep(TRUE, nrow(dataset))
+  scopeRows[scopeRows] <- retained
+
+  # factor levels are kept: metafor drops moderators that are not estimable from the retained estimates
+  data <- dataset[retained, , drop = FALSE]
+  attr(data, "NAs")           <- attr(dataset, "NAs")
+  attr(data, "NasIds")        <- nasIds[!nasIds][retained]
+  attr(data, "subgroupIndx")  <- scopeRows
+  attr(data, "datasetNasIds") <- if (is.null(attr(dataset, "datasetNasIds"))) nasIds else attr(dataset, "datasetNasIds")
+  attr(data, "subgroupName")  <- attr(dataset, "subgroupName")
+
+  return(data)
+}
+
+.wwFitScope              <- function(dataset, options, subgroupName) {
+
+  # the WLS model includes all estimates
+  scope <- list(wls = .maFitModelFun(dataset, .ppModelOptions(options), subgroupName))
+
+  for (benchmark in c("fixedEffect", "randomEffects"))
+    scope[[benchmark]] <- .maFitModelFun(dataset, .ppUnadjustedOptions(options, benchmark), subgroupName)
+
+  return(scope)
+}
+
+.wwFitWaap               <- function(dataset, selection, wlsFit, options) {
+
+  # too few retained estimates: the WLS model is reported
+  if (!is.list(selection) || sum(selection[["retained"]]) < .wwRequiredEstimates(wlsFit))
+    return(NULL)
+
+  data <- .wwRetainedData(dataset, selection[["retained"]])
+
+  return(.maFitModelFun(data, .ppModelOptions(options), attr(dataset, "subgroupName")))
+}
+
+.wwAttachDatasets        <- function(scopes, dataset, options) {
+
+  # Plotting variables (e.g., study labels) do not refit the models; the fits
+  # carry the current data, the WAAP model only its retained estimates.
+  scopeData <- .ppScopeDatasets(dataset, options)
+
+  for (scope in names(scopes)) {
+    for (model in c("wls", "waap", "fixedEffect", "randomEffects")) {
+
+      if (is.null(scopes[[scope]][[model]]))
+        next
+
+      data <- scopeData[[scope]]
+      if (model == "waap")
+        data <- .wwRetainedData(data, scopes[[scope]][["selection"]][["retained"]])
+
+      for (type in names(scopes[[scope]][[model]])) {
+        if (!is.null(scopes[[scope]][[model]][[type]]))
+          attr(scopes[[scope]][[model]][[type]], "dataset") <- data
+      }
+    }
+  }
+
+  return(scopes)
+}
+
+.wwFitModels             <- function(jaspResults, dataset, options) {
+
+  if (!.maReady(options))
+    return(NULL)
+
+  if (is.null(jaspResults[["waapWlsFitCache"]])) {
+    state <- createJaspState()
+    state$dependOn(.wwBaseDependencies)
+    jaspResults[["waapWlsFitCache"]] <- state
+  }
+
+  cache     <- jaspResults[["waapWlsFitCache"]]$object
+  key       <- .ppFitCacheKey(dataset, options, .wwBaseDependencies)
+  scopeData <- .ppScopeDatasets(dataset, options)
+
+  if (!identical(cache[["key"]], key)) {
+    scopes <- lapply(scopeData, function(data) .wwFitScope(data, options, attr(data, "subgroupName")))
+    cache  <- list(key = key, scopes = scopes, waap = list())
+  }
+
+  # the power-based selection is cheap; the WAAP model is refitted only if the retained estimates change
+  scopes <- cache[["scopes"]]
+  for (scope in names(scopes)) {
+
+    wlsFit    <- scopes[[scope]][["wls"]][["fit"]]
+    selection <- .wwPowerSelection(wlsFit, scopeData[[scope]], options)
+
+    if (is.null(cache[["waap"]][[scope]]) || !identical(cache[["waap"]][[scope]][["selection"]], selection))
+      cache[["waap"]][[scope]] <- list(selection = selection, output = .wwFitWaap(scopeData[[scope]], selection, wlsFit, options))
+
+    scopes[[scope]][["selection"]] <- selection
+    scopes[[scope]]["waap"]        <- list(cache[["waap"]][[scope]][["output"]])
+  }
+
+  jaspResults[["waapWlsFitCache"]]$object <- cache
+
+  return(.wwAttachDatasets(scopes, dataset, options))
+}
+
+# Model selection ----
+
+.wwDecision              <- function(scope, options) {
+
+  wls       <- .ppReportedFit(scope[["wls"]], options)
+  waap      <- if (!is.null(scope[["waap"]])) .ppReportedFit(scope[["waap"]], options)
+  selection <- scope[["selection"]]
+
+  # a failed WLS model is reported with its error
+  if (jaspBase::isTryError(wls))
+    return(list(selected = "wls"))
+
+  if (jaspBase::isTryError(selection))
+    return(list(selected = "wls", message = gettextf(
+      "The power of the estimates could not be computed: %1$s", .maTryCleanErrorMessages(selection)
+    )))
+
+  decision <- list(selected = "wls", selection = selection, required = .wwRequiredEstimates(wls))
+
+  if (is.null(waap))
+    return(decision)
+
+  if (jaspBase::isTryError(waap))
+    return(c(decision, message = gettextf("The WAAP model failed: %1$s", .maTryCleanErrorMessages(waap))))
+
+  # metafor drops moderators that are not estimable from the retained estimates
+  if (!identical(rownames(waap[["beta"]]), rownames(wls[["beta"]])))
+    return(c(decision, message = gettext("The moderators of the WAAP model are not estimable from the retained estimates.")))
+
+  decision[["selected"]] <- "waap"
+
+  return(decision)
+}
+
+.wwSelectScope           <- function(scope, options) {
+
+  decision <- .wwDecision(scope, options)
+  output   <- scope[[decision[["selected"]]]]
+
+  for (type in names(output)) {
+    if (is.null(output[[type]]))
+      next
+
+    attr(output[[type]], "waapWlsDecision") <- decision
+    attr(output[[type]], "candidateFits")   <- lapply(scope[c("wls", "waap")], `[[`, type)
+    attr(output[[type]], "unadjustedFits")  <- lapply(scope[c("fixedEffect", "randomEffects")], `[[`, type)
+  }
+
+  return(output)
+}
+
+.wwReportingFits         <- function(jaspResults, fits, options) {
+
+  # Adapt the selected models to the state layout expected by the shared builders.
+  if (is.null(jaspResults[["fit"]])) {
+    state <- createJaspState()
+    state$dependOn(.wwDependencies)
+    jaspResults[["fit"]] <- state
+  }
+
+  jaspResults[["fit"]]$object <- if (is.null(fits)) NULL else lapply(fits, .wwSelectScope, options = options)
 
   return()
 }

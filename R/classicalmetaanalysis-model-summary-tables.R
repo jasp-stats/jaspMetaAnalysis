@@ -96,6 +96,8 @@
     tests[["bias"]] <- .maSafeRbind(lapply(fit, .ppRowBiasTest, options = options))
     .ppAddInferenceFootnotes(testsTable, fit, options)
   }
+  if (.maIsWaapWls(options))
+    .wwAddInferenceFootnotes(testsTable, fit, options)
 
   # effect size moderation
   if (.maIsMetaregressionEffectSize(options)) {

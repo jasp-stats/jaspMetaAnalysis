@@ -7,7 +7,7 @@
   if (!.maIsMetaregression(options))
     return()
 
-  parameters <- c("effectSize", if (!.maIsSelection(options) && !.maIsPetPeese(options)) "heterogeneity")
+  parameters <- c("effectSize", if (!.maIsSelection(options) && !.maIsPetPeese(options) && !.maIsWaapWls(options)) "heterogeneity")
 
   for (parameter in parameters) {
     if (options[["metaregressionTermTests"]])

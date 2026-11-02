@@ -129,6 +129,12 @@ PetPeese                                <- function(jaspResults, dataset = NULL,
     list(list(components = .ppBiasTerms[[candidate]]))
   )
 
+  return(.ppModelOptions(options))
+}
+
+.ppModelOptions         <- function(options) {
+
+  # (shared with WAAP-WLS)
   # UWLS is defined by the inverse-variance weights
   if (.maIsUnrestrictedWeightedLeastSquares(options)) {
     options[["fixParametersWeights"]] <- FALSE
@@ -275,18 +281,9 @@ PetPeese                                <- function(jaspResults, dataset = NULL,
   return(scopes)
 }
 
-.ppFitModels            <- function(jaspResults, dataset, options) {
+.ppFitCacheKey          <- function(dataset, options, dependencies) {
 
-  if (!.maReady(options))
-    return(NULL)
-
-  if (is.null(jaspResults[["petPeeseFitCache"]])) {
-    state <- createJaspState()
-    state$dependOn(.ppBaseDependencies)
-    jaspResults[["petPeeseFitCache"]] <- state
-  }
-
-  cache   <- jaspResults[["petPeeseFitCache"]]$object
+  # (shared with WAAP-WLS)
   columns <- unique(c(
     options[["effectSize"]],
     options[["effectSizeStandardError"]],
@@ -299,11 +296,26 @@ PetPeese                                <- function(jaspResults, dataset = NULL,
   ))
   columns <- columns[columns != ""]
 
-  # A data change without an option change must also refit the candidates.
-  key <- list(
+  # A data change without an option change must also refit the models.
+  return(list(
     data    = dataset[, columns, drop = FALSE],
-    options = options[.ppBaseDependencies]
-  )
+    options = options[dependencies]
+  ))
+}
+
+.ppFitModels            <- function(jaspResults, dataset, options) {
+
+  if (!.maReady(options))
+    return(NULL)
+
+  if (is.null(jaspResults[["petPeeseFitCache"]])) {
+    state <- createJaspState()
+    state$dependOn(.ppBaseDependencies)
+    jaspResults[["petPeeseFitCache"]] <- state
+  }
+
+  cache <- jaspResults[["petPeeseFitCache"]]$object
+  key   <- .ppFitCacheKey(dataset, options, .ppBaseDependencies)
 
   if (!identical(cache[["key"]], key)) {
     scopes <- lapply(.ppScopeDatasets(dataset, options), function(data) .ppFitScope(data, options, attr(data, "subgroupName")))

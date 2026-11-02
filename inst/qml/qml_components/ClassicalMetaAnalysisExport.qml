@@ -29,8 +29,9 @@ Section
 	readonly property bool generalizedMetaAnalysis: analysisType === "generalizedMetaAnalysis"
 	readonly property bool selectionModels: analysisType === "selectionModels"
 	readonly property bool petPeese: analysisType === "petPeese"
+	readonly property bool waapWls: analysisType === "waapWls"
 	property bool multilevelMultivariate: analysisType === "multilevelMultivariateMetaAnalysis"
-	readonly property bool univariate: (analysisType === "metaAnalysis" || petPeese) && !multilevelMultivariate
+	readonly property bool univariate: (analysisType === "metaAnalysis" || petPeese || waapWls) && !multilevelMultivariate
 	columns:									2
 	info: selectionModels ? qsTr("Export all candidate models independently of the display filter. Column names include the model and subgroup.") : qsTr("Options for exporting model-derived quantities to the dataset.")
 
@@ -144,7 +145,7 @@ Section
 		{
 			name:	"exportPredictedValues"
 			text:	qsTr("Predicted values")
-			info: petPeese ? qsTr("Export the publication bias adjusted predicted values (i.e., at a standard error of zero) and interval bounds.") : qsTr("Export predicted values and interval bounds.")
+			info: petPeese ? qsTr("Export the publication bias adjusted predicted values (i.e., at a standard error of zero) and interval bounds.") : waapWls ? qsTr("Export predicted values and interval bounds of the reported model. When WAAP is reported, only the retained estimates receive values.") : qsTr("Export predicted values and interval bounds.")
 		}
 
 		CheckBox
@@ -159,7 +160,7 @@ Section
 		{
 			name:	"exportRandomEffects"
 			text:	qsTr("Random effects")
-			visible:	!generalizedMetaAnalysis && !selectionModels && !petPeese
+			visible:	!generalizedMetaAnalysis && !selectionModels && !petPeese && !waapWls
 			info: qsTr("Export predicted random effects.")
 		}
 

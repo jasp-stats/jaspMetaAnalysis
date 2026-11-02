@@ -33,6 +33,7 @@ Section
 	readonly property bool metaAnalysis: analysisType === "metaAnalysis"
 	property bool multilevelMultivariate: analysisType === "multilevelMultivariateMetaAnalysis"
 	readonly property bool petPeese: analysisType === "petPeese"
+	readonly property bool waapWls: analysisType === "waapWls"
 	readonly property bool heterogeneityModel: sectionModel.heterogeneityModelTermsCount > 0
 	property bool petPeeseConditional: false
 
@@ -56,7 +57,7 @@ Section
 			{
 				name:		"weightedEstimation"
 				visible:	!selectionModels
-				enabled:	!multilevelMultivariate && !(petPeese && method.value === "unrestrictedWeightedLeastSquares")
+				enabled:	!multilevelMultivariate && !((petPeese || waapWls) && method.value === "unrestrictedWeightedLeastSquares")
 				text:		qsTr("Weighted estimation")
 				checked:	true
 				info: qsTr("Perform weighted estimation using inverse-variance weights. Uncheck for unweighted estimation. Unavailable for multilevel/multivariate models, which are always weighted by the inverse of the variance-covariance matrix.")
@@ -133,7 +134,7 @@ Section
 		Group
 		{
 			title:		qsTr("Fix Parameters")
-			visible:	metaAnalysis || (petPeese && !multilevelMultivariate)
+			visible:	metaAnalysis || ((petPeese || waapWls) && !multilevelMultivariate)
 
 			CheckBox
 			{	// TODO: allow fixing in multivariate models
@@ -158,8 +159,8 @@ Section
 				name:	"fixParametersWeights"
 				text:	qsTr("Weights")
 				childrenOnSameRow:	true
-				enabled:	!(petPeese && method.value === "unrestrictedWeightedLeastSquares")
-				info: qsTr("Use custom weights for the effect sizes instead of inverse-variance weights. Unavailable for PET-PEESE estimated with unrestricted weighted least squares, which is defined by the inverse-variance weights.")
+				enabled:	!((petPeese || waapWls) && method.value === "unrestrictedWeightedLeastSquares")
+				info: qsTr("Use custom weights for the effect sizes instead of inverse-variance weights. Unavailable for PET-PEESE and WAAP-WLS estimated with unrestricted weighted least squares, which is defined by the inverse-variance weights.")
 
 				DropDown
 				{
@@ -279,7 +280,7 @@ Section
 	CheckBox
 	{
 		name:		"advancedExtendMetaforCall"
-		visible:	!selectionModels && !petPeese
+		visible:	!selectionModels && !petPeese && !waapWls
 		id:			advancedExtendMetaforCall
 		text:		qsTr("Extend metafor call")
 		checked:	false
@@ -293,7 +294,7 @@ Section
 	TextArea
 	{
 		name: 				"advancedExtendMetaforCallCode"
-		visible:			!selectionModels && !petPeese && advancedExtendMetaforCall.checked
+		visible:			!selectionModels && !petPeese && !waapWls && advancedExtendMetaforCall.checked
 		info: qsTr("The additional arguments to the metafor function call must be specified as a named list (the 'list()' call can be ommited). E.g., 'list(tau2 = 1)' (or 'tau2 = 1') can be used to fix the between-study heterogeneity to a given value. Multiple arguments must be comma-seprated, e.g. 'list(tau2 = 1, gamma2 = 0.5)' (or 'tau2 = 1, gamma2 = 0.5'). New lines are ignored." )
 	}
 }

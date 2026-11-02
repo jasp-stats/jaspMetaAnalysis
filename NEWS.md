@@ -16,7 +16,8 @@
 # jaspMetaAnalysis 0.99.0
 ## Changed
 * Rewrote PET-PEESE using `metafor`, including optional multilevel/multivariate models. Legacy analyses are converted; incompatible settings may reset on refresh.
-* Selection Models and PET-PEESE forest plots can show unadjusted fixed and random effects estimates.
+* Rewrote WAAP-WLS using `metafor` in the PET-PEESE style (moderators, subgroups, clustering, no-selection indicator, optional multilevel/multivariate models), with an adjustable power criterion evaluated at the pooled or moderator-specific predicted effects. Legacy analyses are converted; incompatible settings may reset on refresh.
+* Selection Models, PET-PEESE, and WAAP-WLS forest plots can show unadjusted fixed and random effects estimates.
 * Unrestricted weighted least squares reports the multiplicative heterogeneity (γ and √γ).
 
 ## Fixed

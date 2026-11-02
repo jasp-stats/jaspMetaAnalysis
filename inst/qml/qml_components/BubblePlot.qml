@@ -100,7 +100,7 @@ Section
 					label:		qsTr("Size")
 					info: qsTr("Options for determining the size of the observed estimates.")
 					values:
-					if (analysisType === "metaAnalysis" || analysisType === "petPeese" || analysisType === "multilevelMultivariateMetaAnalysis")
+					if (analysisType === "metaAnalysis" || analysisType === "petPeese" || analysisType === "waapWls" || analysisType === "multilevelMultivariateMetaAnalysis")
 						[
 							{ label: qsTr("Weight")				, value: "weight"},
 							{ label: qsTr("Inverse variance")	, value: "inverseVariance"	},
@@ -178,7 +178,7 @@ Section
 				label:		qsTr("Prediction intervals")
 				checked:	true
 				info: qsTr("Include prediction intervals of the estimated effect sizes. Unavailable for unrestricted weighted least squares.")
-				visible:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || analysisType === "generalizedMetaAnalysis" || analysisType === "selectionModels" || analysisType === "petPeese"
+				visible:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || analysisType === "generalizedMetaAnalysis" || analysisType === "selectionModels" || analysisType === "petPeese" || analysisType === "waapWls"
 				enabled:	methodValue !== "unrestrictedWeightedLeastSquares"
 
 				DoubleField
