@@ -91,12 +91,10 @@ runs:
         install.packages("pak", repos = "https://r-lib.github.io/p/pak/stable")
         install.packages("jsonlite")
         lockfile <- jsonlite::read_json("renv.lock", simplifyVector = TRUE)
-        packages <- vapply(lockfile$Packages, function(record) {
-          if (record$Source == "GitHub")
-            paste0(record$RemoteUsername, "/", record$RemoteRepo)
-          else
-            record$Package
-        }, character(1))
+        # System requirements come from the repository packages; the GitHub packages need none of their own,
+        # and resolving their current versions fails (jaspTools imports jaspSyntax, which pak cannot resolve).
+        records  <- Filter(function(record) record$Source != "GitHub", lockfile$Packages)
+        packages <- vapply(records, function(record) record$Package, character(1))
         requirements <- pak::pkg_sysreqs(packages, sysreqs_platform = "ubuntu")
         for (command in requirements$install_scripts)
           stopifnot(system(paste("sudo", command)) == 0L)
@@ -123,10 +121,21 @@ runs:
         cache-version: module-tests-renv-1.1.8-${{ runner.arch }}
         bypass-cache: never
 
+    - name: Use the lockfile version of jaspTools
+      id: jaspTools
+      if: inputs.packages == 'latest'
+      shell: Rscript {0}
+      run: |
+        # newer jaspTools imports jaspSyntax, which pak cannot resolve; the latest CRAN dependencies are tested with the locked jaspTools
+        if (!requireNamespace("jsonlite", quietly = TRUE))
+          install.packages("jsonlite")
+        record <- jsonlite::read_json("renv.lock")$Packages$jaspTools
+        cat(paste0("ref=github::jasp-stats/jaspTools@", record$RemoteSha, "\n"), file = Sys.getenv("GITHUB_OUTPUT"), append = TRUE)
+
     - uses: r-lib/actions/setup-r-dependencies@v2
       if: inputs.packages == 'latest'
       with:
-        extra-packages: github::jasp-stats/jaspTools
+        extra-packages: ${{ steps.jaspTools.outputs.ref }}
         needs: check
         cache-version: module-tests-1
 
