@@ -2,6 +2,44 @@
 #
 # Formatting, safe result assembly, table columns, transformations, and shared messages.
 
+# PET-PEESE bias term ----
+
+.maBiasTerm                           <- function(fit) {
+
+  # name of the PET-PEESE bias coefficient (NULL for all other models)
+  return(attr(fit, "biasTerm"))
+}
+
+.maZeroBiasTerm                       <- function(newmods, fit) {
+
+  # PET-PEESE adjusted predictions are evaluated at a zero standard error
+  biasTerm <- .maBiasTerm(fit)
+
+  if (!is.null(biasTerm) && biasTerm %in% colnames(newmods))
+    newmods[, biasTerm] <- 0
+
+  return(newmods)
+}
+
+.maPredictStudies                     <- function(fit) {
+
+  # PET-PEESE study-level predictions are bias-adjusted (evaluated at a zero standard error)
+  if (is.null(.maBiasTerm(fit)))
+    return(stats::predict(fit))
+
+  newmods <- .maZeroBiasTerm(stats::model.matrix(fit), fit)
+  if (fit[["int.incl"]])
+    newmods <- newmods[, -1, drop = FALSE]
+
+  return(stats::predict(fit, newmods = newmods))
+}
+
+.maModeratorCoefficients              <- function(fit) {
+
+  # coefficient indices of the user moderators (without intercept and PET-PEESE bias term)
+  return(which(!rownames(fit[["beta"]]) %in% c("intrcpt", .maBiasTerm(fit))))
+}
+
 .maVariableNames                      <- function(varNames, variables) {
 
   # sometimes interactions are missformated as "."
@@ -11,6 +49,9 @@
 
     if (varName %in% c("intrcpt", "intercept"))
       return(gettext("Intercept"))
+
+    if (varName %in% .ppBiasTerms)
+      return(.ppBiasTermLabel(varName))
 
     for (vn in unique(variables)) {
       inf <- regexpr(vn, varName, fixed = TRUE)
@@ -274,9 +315,23 @@
   return(tempTable)
 }
 
+.maHasPredictionIntervals       <- function(options) {
+
+  # metafor provides no prediction intervals for models without (a single) heterogeneity
+  return(options[["predictionIntervals"]] && !.maGetMethodOptions(options) %in% c("EE", "FE", "MH", "PETO") && !.mammAnyStructureGen(options))
+}
+
+.maTransformationIntroducedNA   <- function(estimates, options) {
+
+  # missing prediction intervals of models without heterogeneity are not caused by the transformation
+  columns <- intersect(c("est", "lCi", "uCi", if (.maHasPredictionIntervals(options)) c("lPi", "uPi")), colnames(estimates))
+  return(!is.null(estimates) && anyNA(estimates[, columns, drop = FALSE]))
+}
+
 .maAddPiColumn                  <- function(tempTable, options) {
 
-  if (options[["predictionIntervals"]]) {
+  # unrestricted weighted least squares has no prediction intervals (the GUI option is disabled)
+  if (options[["predictionIntervals"]] && !.maIsUnrestrictedWeightedLeastSquares(options)) {
     overtitleCi <- gettextf("%s%% PI", 100 * options[["confidenceIntervalsLevel"]])
     tempTable$addColumnInfo(name = "lPi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
     tempTable$addColumnInfo(name = "uPi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)

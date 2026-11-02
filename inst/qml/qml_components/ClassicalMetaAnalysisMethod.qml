@@ -6,11 +6,13 @@ DropDown
 	property string analysisType: "metaAnalysis"
 	property int heterogeneityModelTermsCount: 0
 	readonly property bool selectionModels: analysisType === "selectionModels"
+	readonly property bool petPeese: analysisType === "petPeese"
+	property bool multilevelMultivariate: analysisType === "multilevelMultivariateMetaAnalysis"
 
 	name:			"method"
 	label:			qsTr("Method")
-	startValue:		selectionModels ? "maximumLikelihood" : "restrictedML"
-	info: selectionModels ? qsTr("Selection models use maximum likelihood and z/Wald coefficient tests. The same method and moderators apply to all candidates.") : qsTr("Method used for model estimation in the meta-analysis. The available methods depend on the inclusion of heterogeneity model terms.")
+	startValue:		selectionModels ? "maximumLikelihood" : petPeese ? "unrestrictedWeightedLeastSquares" : "restrictedML"
+	info: selectionModels ? qsTr("Selection models use maximum likelihood and z/Wald coefficient tests. The same method and moderators apply to all candidates.") : petPeese ? qsTr("Method used for estimating the PET and PEESE meta-regressions. Unrestricted weighted least squares (default) corresponds to the original PET-PEESE specification with multiplicative heterogeneity (Stanley & Doucouliagos, 2014); the remaining methods estimate additive heterogeneity. The multilevel/multivariate model is estimated with (restricted) maximum likelihood.") : qsTr("Method used for model estimation in the meta-analysis. The available methods depend on the inclusion of heterogeneity model terms.")
 	readonly property var methodChoices: [
 		{ label: qsTr("Equal Effects")			, value: "equalEffects"		},
 		{ label: qsTr("Fixed Effects")			, value: "fixedEffects"		},
@@ -29,11 +31,14 @@ DropDown
 		{ label: qsTr("Unrestricted Weighted Least Squares (UWLS)"), value: "unrestrictedWeightedLeastSquares" },
 	]
 
-	values: methodChoices.filter(function(choice) {
+	// PET-PEESE lists restricted ML first: the first value replaces UWLS when the multilevel/multivariate model is selected
+	readonly property var multilevelMultivariateChoices: petPeese ? ["restrictedML", "maximumLikelihood"] : ["maximumLikelihood", "restrictedML"]
+
+	values: multilevelMultivariate ? multilevelMultivariateChoices.map(function(value) {
+		return methodChoices.find(function(choice) { return choice.value === value; });
+	}) : methodChoices.filter(function(choice) {
 		if (selectionModels)
 			return ["equalEffects", "fixedEffects", "maximumLikelihood"].includes(choice.value);
-		if (analysisType === "multilevelMultivariateMetaAnalysis")
-			return ["maximumLikelihood", "restrictedML"].includes(choice.value);
 		if (heterogeneityModelTermsCount > 0)
 			return ["maximumLikelihood", "restrictedML", "empiricalBayes"].includes(choice.value);
 		return true;

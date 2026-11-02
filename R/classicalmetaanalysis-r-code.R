@@ -14,7 +14,7 @@
     return()
 
   metaforRCode <- createJaspHtml(title = gettext("Metafor R Code"))
-  metaforRCode$dependOn(c(.maDependencies, "showMetaforRCode"))
+  metaforRCode$dependOn(c(.maModelDependencies(options), "showMetaforRCode"))
   metaforRCode$position <- 99
 
   metaforRCode$text <- .maTransformToHtml(makeCallText(options))
@@ -26,13 +26,13 @@
 
 .maMakeMetaforCallText             <- function(options) {
 
-  if (options[["analysis"]] == "metaAnalysis") {
+  if (!.maIsMultilevelMultivariate(options)) {
     rmaInput <- list(
       yi   = as.name(options[["effectSize"]]),
       sei  = as.name(options[["effectSizeStandardError"]]),
       data = as.name("dataset")
     )
-  } else if (options[["analysis"]] == "metaAnalysisMultilevelMultivariate") {
+  } else {
 
     if (.mammVarianceCovarianceMatrixReady(options)) {
       vcalcInput <-.mammGetVarianceCovarianceMatrix(NULL, options, returnCall = TRUE)
@@ -86,7 +86,7 @@
   rmaInput$method <- paste0("'", .maGetMethodOptions(options), "'")
   rmaInput$test   <- paste0("'", .maGetFixedEffectTestOptions(options), "'")
 
-  if (!options[["weightedEstimation"]])
+  if (!options[["weightedEstimation"]] && !.maIsMultilevelMultivariate(options))
     rmaInput$weighted <- FALSE
 
   # add fixed parameters if needed
@@ -100,7 +100,7 @@
     rmaInput$link <- paste0("'", options[["heterogeneityModelLink"]], "'")
 
   if (.maIsMultilevelMultivariate(options)) {
-    rmaInput$sparse <- if (options[["useSparseMatricies"]])       options[["useSparseMatricies"]]
+    rmaInput$sparse <- if (options[["useSparseMatrices"]])       options[["useSparseMatrices"]]
     rmaInput$cvvc   <- if (!options[["computeCovarianceMatrix"]]) !options[["computeCovarianceMatrix"]]
   }
 
@@ -126,11 +126,13 @@
   if (.maIsMultilevelMultivariate(options) &&  .mammVarianceCovarianceMatrixReady(options)) {
     if (options[["varianceCovarianceMatrixType"]] == "precomputed") {
       fit <- paste0(
-        paste0("effectSizeVarianceCovarianceMatrix <- ", vcalcInput[["file"]], "\n"), "\n",
+        paste0("effectSizeVarianceCovarianceMatrix <- as.matrix(read.csv(", deparse(vcalcInput[["file"]]), ", header = FALSE))\n"), "\n",
         fit
       )
     } else {
+      # vcalc uses the sampling variances computed from the standard errors
       fit <- paste0(
+        paste0("dataset$samplingVariance <- dataset$", options[["effectSizeStandardError"]], "^2\n"),
         paste0("effectSizeVarianceCovarianceMatrix <- vcalc(\n\t", paste(names(vcalcInput), "=", vcalcInput, collapse = ",\n\t"), "\n)\n"), "\n",
         fit
       )

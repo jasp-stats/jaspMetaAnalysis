@@ -28,6 +28,9 @@ Section
 	readonly property bool locationScaleModel: analysisType === "metaAnalysis" && heterogeneityModelTermsCount > 0
 	readonly property bool generalizedMetaAnalysis: analysisType === "generalizedMetaAnalysis"
 	readonly property bool selectionModels: analysisType === "selectionModels"
+	readonly property bool petPeese: analysisType === "petPeese"
+	property bool multilevelMultivariate: analysisType === "multilevelMultivariateMetaAnalysis"
+	readonly property bool univariate: (analysisType === "metaAnalysis" || petPeese) && !multilevelMultivariate
 	columns:									2
 	info: selectionModels ? qsTr("Export all candidate models independently of the display filter. Column names include the model and subgroup.") : qsTr("Options for exporting model-derived quantities to the dataset.")
 
@@ -52,13 +55,13 @@ Section
 	Group
 	{
 		title:		qsTr("Diagnostics")
-		visible:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis"
+		visible:	univariate || multilevelMultivariate
 
 		CheckBox
 		{
 			name:		"exportDiagnosticsInfluentialCases"
 			text:		qsTr("Influential cases")
-			visible:	analysisType === "metaAnalysis"
+			visible:	univariate
 			enabled:	!locationScaleModel
 			info: qsTr("Export an indicator for influential cases.")
 		}
@@ -74,7 +77,7 @@ Section
 		{
 			name:		"exportDiagnosticsModelImpact"
 			text:		qsTr("Model impact")
-			visible:	analysisType === "metaAnalysis"
+			visible:	univariate
 			enabled:	!locationScaleModel
 			info: qsTr("Export diagnostics for how individual cases affect the model fit.")
 		}
@@ -128,7 +131,7 @@ Section
 		{
 			name:		"exportResidualsConditional"
 			text:		qsTr("Conditional standardized")
-			visible:	analysisType === "metaAnalysis"
+			visible:	univariate
 			info: qsTr("Export conditional standardized residuals.")
 		}
 	}
@@ -141,7 +144,7 @@ Section
 		{
 			name:	"exportPredictedValues"
 			text:	qsTr("Predicted values")
-			info: qsTr("Export predicted values and interval bounds.")
+			info: petPeese ? qsTr("Export the publication bias adjusted predicted values (i.e., at a standard error of zero) and interval bounds.") : qsTr("Export predicted values and interval bounds.")
 		}
 
 		CheckBox
@@ -156,7 +159,7 @@ Section
 		{
 			name:	"exportRandomEffects"
 			text:	qsTr("Random effects")
-			visible:	!generalizedMetaAnalysis && !selectionModels
+			visible:	!generalizedMetaAnalysis && !selectionModels && !petPeese
 			info: qsTr("Export predicted random effects.")
 		}
 

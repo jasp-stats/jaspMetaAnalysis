@@ -2,15 +2,15 @@
 #
 # Computes and presents casewise, profile, Baujat, and variance-inflation diagnostics.
 
-.maExtractVarianceInflationContainer <- function(jaspResults) {
+.maExtractVarianceInflationContainer <- function(jaspResults, options) {
 
   if (!is.null(jaspResults[["varianceInflationContainer"]]))
     return(jaspResults[["varianceInflationContainer"]])
 
   # create the output container
   varianceInflationContainer <- createJaspContainer(gettext("Variance Inflation Summary"))
-  varianceInflationContainer$dependOn(c(.maDependencies, "diagnosticsVarianceInflationFactor", "diagnosticsVarianceInflationFactorAggregate", "includeFullDatasetInSubgroupAnalysis"))
-  varianceInflationContainer$position <- 7
+  varianceInflationContainer$dependOn(c(.maModelDependencies(options), "diagnosticsVarianceInflationFactor", "diagnosticsVarianceInflationFactorAggregate", "includeFullDatasetInSubgroupAnalysis"))
+  varianceInflationContainer$position <- 8
   jaspResults[["varianceInflationContainer"]] <- varianceInflationContainer
 
   return(varianceInflationContainer)
@@ -30,7 +30,7 @@
 
     # create the output container
     diagnosticsResults <- createJaspState()
-    diagnosticsResults$dependOn(.maDependencies)
+    diagnosticsResults$dependOn(c(.maModelDependencies(options), "includeFullDatasetInSubgroupAnalysis"))
     jaspResults[["diagnosticsResults"]] <- diagnosticsResults
 
     out <- list()
@@ -118,7 +118,7 @@
 
     # create the output container
     profileLikelihoodResults <- createJaspState()
-    profileLikelihoodResults$dependOn(.maDependencies)
+    profileLikelihoodResults$dependOn(c(.maModelDependencies(options), "includeFullDatasetInSubgroupAnalysis"))
     jaspResults[["profileLikelihoodResults"]] <- profileLikelihoodResults
 
 
@@ -127,8 +127,9 @@
 
     for (i in seq_along(fit)) {
 
-      if (jaspBase::isTryError(fit[[i]])) {
+      if (jaspBase::isTryError(fit[[i]]) || (!.maIsMultilevelMultivariate(options) && .maGetMethodOptions(options) %in% c("EE", "FE"))) {
 
+        # no heterogeneity parameter to profile
         dfProfile <- list()
 
       } else if (.maIsMultilevelMultivariate(options)) {
@@ -184,7 +185,7 @@
 
     # create the output container
     baujatResults <- createJaspState()
-    baujatResults$dependOn(.maDependencies)
+    baujatResults$dependOn(c(.maModelDependencies(options), "includeFullDatasetInSubgroupAnalysis"))
     jaspResults[["baujatResults"]] <- baujatResults
 
 
@@ -213,7 +214,7 @@
 
 .maVarianceInflationTable                <- function(jaspResults, options, parameter = "effectSize") {
 
-  varianceInflationContainer <- .maExtractVarianceInflationContainer(jaspResults)
+  varianceInflationContainer <- .maExtractVarianceInflationContainer(jaspResults, options)
 
   if (!is.null(varianceInflationContainer[[parameter]]))
     return()
@@ -268,8 +269,8 @@
 
   # fit measures table
   casewiseDiagnosticsTable          <- createJaspTable(gettext("Casewise Diagnostics Table"))
-  casewiseDiagnosticsTable$position <- 7
-  casewiseDiagnosticsTable$dependOn(c(.maDependencies, "diagnosticsCasewiseDiagnostics", "diagnosticsCasewiseDiagnosticsShowInfluentialOnly",
+  casewiseDiagnosticsTable$position <- 9
+  casewiseDiagnosticsTable$dependOn(c(.maModelDependencies(options), "diagnosticsCasewiseDiagnostics", "diagnosticsCasewiseDiagnosticsShowInfluentialOnly",
                                       "diagnosticsCasewiseDiagnosticsIncludePredictors", "diagnosticsCasewiseDiagnosticsDifferenceInCoefficients",
                                       "studyLabels"))
   jaspResults[["casewiseDiagnosticsTable"]] <- casewiseDiagnosticsTable
@@ -382,9 +383,11 @@
     if (parameter == "effectSize") {
       terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")
       termsIndex <- attr(model.matrix(fit[["formula.mods"]], data = fit[["data"]]), "assign")
+      if (!is.null(fit$coef.na))
+        termsIndex <- termsIndex[!fit$coef.na]                                                   # remove dropped coefficients
       tableVif   <- do.call(rbind, lapply(seq_along(terms), function(i) {
         cbind.data.frame(
-          term = terms[i],
+          term = if (terms[i] %in% .ppBiasTerms) .ppBiasTermLabel(terms[i]) else terms[i],
           .maExtractVifResults(try(metafor::vif(fit, btt = seq_along(termsIndex)[termsIndex == i])), options, parameter)
         )
       }))

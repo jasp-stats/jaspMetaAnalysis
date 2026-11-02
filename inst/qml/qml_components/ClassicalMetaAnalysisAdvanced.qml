@@ -31,8 +31,10 @@ Section
 	
 	readonly property bool selectionModels: analysisType === "selectionModels"
 	readonly property bool metaAnalysis: analysisType === "metaAnalysis"
-	readonly property bool multilevelMultivariate: analysisType === "multilevelMultivariateMetaAnalysis"
+	property bool multilevelMultivariate: analysisType === "multilevelMultivariateMetaAnalysis"
+	readonly property bool petPeese: analysisType === "petPeese"
 	readonly property bool heterogeneityModel: sectionModel.heterogeneityModelTermsCount > 0
+	property bool petPeeseConditional: false
 
 	property alias permutationTestChecked:		permutationTest.checked
 
@@ -54,9 +56,10 @@ Section
 			{
 				name:		"weightedEstimation"
 				visible:	!selectionModels
+				enabled:	!multilevelMultivariate && !(petPeese && method.value === "unrestrictedWeightedLeastSquares")
 				text:		qsTr("Weighted estimation")
 				checked:	true
-				info: qsTr("Perform weighted estimation using inverse-variance weights. Uncheck for unweighted estimation.")
+				info: qsTr("Perform weighted estimation using inverse-variance weights. Uncheck for unweighted estimation. Unavailable for multilevel/multivariate models, which are always weighted by the inverse of the variance-covariance matrix.")
 			}
 
 			CheckBox
@@ -66,6 +69,19 @@ Section
 				enabled:	subgroup.count == 1
 				checked:	false
 				info: qsTr("Include the full dataset output in the subgroup analysis. This option is only available when the subgroup analysis is selected.")
+			}
+
+			DoubleField
+			{
+				name:			"petPeeseThreshold"
+				label:			qsTr("PET-PEESE threshold")
+				visible:		petPeese
+				enabled:		petPeeseConditional
+				defaultValue:	0.10
+				min:			0
+				max:			1
+				inclusive:		JASP.None
+				info: qsTr("Significance level of the two-sided test of the PET adjusted effect. If the test is significant, PEESE is reported; otherwise PET is reported (Stanley & Doucouliagos, 2014). Available for the conditional PET-PEESE adjustment.")
 			}
 
 			Group
@@ -94,12 +110,12 @@ Section
 			Group
 			{
 				visible:	multilevelMultivariate
-				title:		qsTr("Random Effects / Modele Structure")
+				title:		qsTr("Random Effects / Model Structure")
 
 				CheckBox
 				{
-					name:		"useSparseMatricies"
-					text:		qsTr("Use sparse matricies")
+					name:		"useSparseMatrices"
+					text:		qsTr("Use sparse matrices")
 					checked:	false
 					info: qsTr("Use sparse matrix representations to speed up computations in models with large datasets or complex random effects structures. Available in multilevel/multivariate meta-analysis.")
 				}
@@ -117,7 +133,7 @@ Section
 		Group
 		{
 			title:		qsTr("Fix Parameters")
-			visible:	metaAnalysis
+			visible:	metaAnalysis || (petPeese && !multilevelMultivariate)
 
 			CheckBox
 			{	// TODO: allow fixing in multivariate models
@@ -142,7 +158,8 @@ Section
 				name:	"fixParametersWeights"
 				text:	qsTr("Weights")
 				childrenOnSameRow:	true
-				info: qsTr("Use custom weights for the effect sizes instead of inverse-variance weights.")
+				enabled:	!(petPeese && method.value === "unrestrictedWeightedLeastSquares")
+				info: qsTr("Use custom weights for the effect sizes instead of inverse-variance weights. Unavailable for PET-PEESE estimated with unrestricted weighted least squares, which is defined by the inverse-variance weights.")
 
 				DropDown
 				{
@@ -200,6 +217,7 @@ Section
 		ClassicalMetaAnalysisOptimizer
 		{
 			analysisType: advanced.analysisType
+			multilevelMultivariate: advanced.multilevelMultivariate
 			methodValue: method.value
 			heterogeneityModel: sectionModel.heterogeneityModelTermsCount > 0
 			heterogeneityModelLinkValue: sectionModel.heterogeneityModelLinkValue
@@ -261,7 +279,7 @@ Section
 	CheckBox
 	{
 		name:		"advancedExtendMetaforCall"
-		visible:	!selectionModels
+		visible:	!selectionModels && !petPeese
 		id:			advancedExtendMetaforCall
 		text:		qsTr("Extend metafor call")
 		checked:	false
@@ -275,7 +293,7 @@ Section
 	TextArea
 	{
 		name: 				"advancedExtendMetaforCallCode"
-		visible:			!selectionModels && advancedExtendMetaforCall.checked
+		visible:			!selectionModels && !petPeese && advancedExtendMetaforCall.checked
 		info: qsTr("The additional arguments to the metafor function call must be specified as a named list (the 'list()' call can be ommited). E.g., 'list(tau2 = 1)' (or 'tau2 = 1') can be used to fix the between-study heterogeneity to a given value. Multiple arguments must be comma-seprated, e.g. 'list(tau2 = 1, gamma2 = 0.5)' (or 'tau2 = 1, gamma2 = 0.5'). New lines are ignored." )
 	}
 }

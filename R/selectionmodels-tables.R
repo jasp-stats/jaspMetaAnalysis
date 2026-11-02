@@ -457,6 +457,7 @@
     modelFits <- .smModelFits(scopes, id)
     reportingFits <- lapply(names(modelFits), function(scope) {
       fit <- .smPrepareInference(jaspResults, modelFits[[scope]], id, scope, options)
+      attr(fit, "unadjustedFits") <- scopes[[scope]][["unadjusted"]]
       list(fit = fit, fitClustered = NULL)
     })
     names(reportingFits) <- ifelse(names(modelFits) == "full", "__fullDataset", names(modelFits))

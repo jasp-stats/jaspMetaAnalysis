@@ -39,12 +39,14 @@ Section
 	info: qsTr("Options for visualizing study-level information, estimated marginal means, and the model information in an all encompassing forest plot. Different sections of the forest plot can be individually enabled/disabled.")
 
 	// analysis type helpers
-	readonly property bool isClassical:			analysisType === "selectionModels" || analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || analysisType === "generalizedMetaAnalysis" || analysisType === "mantelHaenszelPeto"
+	readonly property bool isClassical:			analysisType === "selectionModels" || analysisType === "petPeese" || analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || analysisType === "generalizedMetaAnalysis" || analysisType === "mantelHaenszelPeto"
 	readonly property bool isStandardClassical:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis"
+	property bool multilevelMultivariate:		analysisType === "multilevelMultivariateMetaAnalysis"
 	readonly property bool isBayesian:			analysisType === "RoBMA" || analysisType === "NoBMA" || analysisType === "BiBMA"
 	readonly property bool isMetaRegression:	(analysisType !== "mantelHaenszelPeto") && effectSizeModelTermsCount > 0
 	readonly property bool isScaleRegression:	analysisType === "metaAnalysis" && heterogeneityModelTermsCount > 0
 	readonly property bool isFixedOrEqualEffect: methodValue === "fixedEffects" || methodValue === "equalEffects" || methodValue === "unrestrictedWeightedLeastSquares"
+	readonly property bool isPublicationBiasAdjusted: analysisType === "selectionModels" || analysisType === "petPeese"
 
 	CheckBox
 	{
@@ -58,8 +60,8 @@ Section
 	{
 		panelEnabled:			forestPlotStudyInformation.checked
 		predictedEffectsEnabled:	effectSizeReady
-		showPredictedEffects:	isStandardClassical || analysisType === "selectionModels"
-		showStudyWeights:		isStandardClassical
+		showPredictedEffects:	isStandardClassical || isPublicationBiasAdjusted
+		showStudyWeights:		isStandardClassical || analysisType === "petPeese"
 		showSecondaryCI:		true
 		showAggregate:			true
 	}
@@ -215,13 +217,13 @@ Section
 				title:		qsTr("Estimate")
 				columns:	2
 				enabled:	!isFixedOrEqualEffect
-				visible:	analysisType !== "multilevelMultivariateMetaAnalysis"
+				visible:	!multilevelMultivariate
 
 				CheckBox
 				{
 					text:		qsTr("\uD835\uDF0F")
 					name:		"forestPlotHeterogeneityEstimateTau"
-					visible:	analysisType !== "mantelHaenszelPeto" && analysisType !== "multilevelMultivariateMetaAnalysis"
+					visible:	analysisType !== "mantelHaenszelPeto" && !multilevelMultivariate
 					checked:	analysisType !== "mantelHaenszelPeto" && analysisType !== "multilevelMultivariateMetaAnalysis"
 					info: qsTr("Include the meta-analytic \uD835\uDF0F, the square root of the estimated between-study variance in the model information section. Not available for multilevel/multivariate meta-analysis.")
 				}
@@ -230,7 +232,7 @@ Section
 				{
 					text:		qsTr("\uD835\uDF0F\u00B2")
 					name:		"forestPlotHeterogeneityEstimateTau2"
-					visible:	analysisType !== "mantelHaenszelPeto" && analysisType !== "multilevelMultivariateMetaAnalysis"
+					visible:	analysisType !== "mantelHaenszelPeto" && !multilevelMultivariate
 					checked:	false
 					info: qsTr("Include the meta-analytic \uD835\uDF0F\u00B2, the estimated between-study variance in the model information section. Not available for multilevel/multivariate meta-analysis.")
 				}
@@ -239,8 +241,8 @@ Section
 				{
 					text:		qsTr("I\u00B2")
 					name:		"forestPlotHeterogeneityEstimateI2"
-					enabled:	analysisType !== "multilevelMultivariateMetaAnalysis" && !isScaleRegression
-					visible:	analysisType !== "multilevelMultivariateMetaAnalysis" && analysisType !== "selectionModels"
+					enabled:	!multilevelMultivariate && !isScaleRegression
+					visible:	!multilevelMultivariate && analysisType !== "selectionModels"
 					checked:	false
 					info: qsTr("Include the meta-analytic I\u00B2, the percentage of total variation across studies due to heterogeneity in the model information section. Not available for multilevel/multivariate meta-analysis or heterogeneity meta-regression.")
 				}
@@ -249,8 +251,8 @@ Section
 				{
 					text:		qsTr("H\u00B2")
 					name:		"forestPlotHeterogeneityEstimateH2"
-					enabled:	analysisType !== "multilevelMultivariateMetaAnalysis" && !isScaleRegression
-					visible:	analysisType !== "multilevelMultivariateMetaAnalysis" && analysisType !== "selectionModels"
+					enabled:	!multilevelMultivariate && !isScaleRegression
+					visible:	!multilevelMultivariate && analysisType !== "selectionModels"
 					checked:	false
 					info: qsTr("Include the meta-analytic H\u00B2, an index indicating the ratio of total variability to sampling variability in the model information section. Not available for multilevel/multivariate meta-analysis or heterogeneity meta-regression.")
 				}
@@ -294,6 +296,46 @@ Section
 
 			CheckBox
 			{
+				name:		"forestPlotEffectSizeUnadjustedFixedEffectEstimate"
+				text:		qsTr("Unadjusted fixed effect estimate")
+				id:			forestPlotEffectSizeUnadjustedFixedEffectEstimate
+				checked:	false
+				visible:	isPublicationBiasAdjusted
+				info: qsTr("Include the fixed effect estimate without publication bias adjustment (same moderators and subgroups) for comparison with the adjusted estimate in the model information section.")
+			}
+
+			CheckBox
+			{
+				name:		"forestPlotEffectSizeUnadjustedFixedEffectTest"
+				text:		qsTr("Unadjusted fixed effect estimate test")
+				checked:	true
+				visible:	isPublicationBiasAdjusted
+				enabled:	forestPlotEffectSizeUnadjustedFixedEffectEstimate.checked
+				info: qsTr("Include the test of the unadjusted fixed effect estimate in the model information section.")
+			}
+
+			CheckBox
+			{
+				name:		"forestPlotEffectSizeUnadjustedRandomEffectsEstimate"
+				text:		qsTr("Unadjusted random effects estimate")
+				id:			forestPlotEffectSizeUnadjustedRandomEffectsEstimate
+				checked:	false
+				visible:	isPublicationBiasAdjusted
+				info: qsTr("Include the random effects estimate (restricted maximum likelihood) without publication bias adjustment (same moderators and subgroups) for comparison with the adjusted estimate in the model information section.")
+			}
+
+			CheckBox
+			{
+				name:		"forestPlotEffectSizeUnadjustedRandomEffectsTest"
+				text:		qsTr("Unadjusted random effects estimate test")
+				checked:	true
+				visible:	isPublicationBiasAdjusted
+				enabled:	forestPlotEffectSizeUnadjustedRandomEffectsEstimate.checked
+				info: qsTr("Include the test of the unadjusted random effects estimate in the model information section.")
+			}
+
+			CheckBox
+			{
 				name:		"forestPlotEffectSizePooledEstimate"
 				text:		qsTr("Pooled estimate")
 				id:			forestPlotEffectSizePooledEstimate
@@ -329,7 +371,7 @@ Section
 		Group
 		{
 			title:		qsTr("Publication Bias")
-			visible: 	analysisType === "RoBMA" || analysisType === "selectionModels"
+			visible: 	analysisType === "RoBMA" || isPublicationBiasAdjusted
 
 			CheckBox
 			{
@@ -354,6 +396,7 @@ Section
 	{
 		settingsEnabled:			forestPlotStudyInformation.checked || forestPlotEstimatedMarginalMeans.checked || forestPlotModelInformation.checked
 		showPredictionIntervals:	(isClassical && analysisType !== "mantelHaenszelPeto") || isBayesian
+		enablePredictionIntervals:	methodValue !== "unrestrictedWeightedLeastSquares"
 		showConditionalEstimates:	isBayesian
 		showTestsInRightPanel:		true
 		showTestsInformation:		isClassical

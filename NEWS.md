@@ -13,6 +13,16 @@
 >   * **Deprecated / Removed:** Outdated analyses, options, or legacy code.
 
 ---
+# jaspMetaAnalysis 0.99.0
+## Changed
+* Rewrote PET-PEESE using `metafor`, including optional multilevel/multivariate models. Legacy analyses are converted; incompatible settings may reset on refresh.
+* Selection Models and PET-PEESE forest plots can show unadjusted fixed and random effects estimates.
+* Unrestricted weighted least squares reports the multiplicative heterogeneity (γ and √γ).
+
+## Fixed
+* Clustered meta-analyses no longer offer z-tests; saved analyses are switched to t-tests.
+* Multilevel/multivariate meta-analysis fixes (profile plots, random effects confidence intervals, weighted estimation, models with multiple heterogeneity levels).
+
 # jaspMetaAnalysis 0.98.0
 ## Changed
 * Rewrote selection models using `metafor::selmodel`, replacing `weightr`. Legacy analyses are converted; incompatible settings may reset on refresh.

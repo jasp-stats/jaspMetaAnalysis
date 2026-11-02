@@ -204,7 +204,7 @@
 
     # create the output container
     confintRandomContainer <- createJaspState()
-    confintRandomContainer$dependOn(.maDependencies)
+    confintRandomContainer$dependOn(c(.maModelDependencies(options), "includeFullDatasetInSubgroupAnalysis"))
     jaspResults[["dropOneFits"]] <- confintRandomContainer
 
     fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
@@ -281,7 +281,7 @@
 
     # create the output container
     confintRandomContainer <- createJaspState()
-    confintRandomContainer$dependOn(.maDependencies)
+    confintRandomContainer$dependOn(c(.maModelDependencies(options), "includeFullDatasetInSubgroupAnalysis"))
     jaspResults[["dropLevelFits"]] <- confintRandomContainer
 
     fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
@@ -376,7 +376,7 @@
 
     # create the output container
     confintRandomContainer <- createJaspState()
-    confintRandomContainer$dependOn(.maDependencies)
+    confintRandomContainer$dependOn(c(.maModelDependencies(options), "includeFullDatasetInSubgroupAnalysis"))
     jaspResults[["confintRandom"]] <- confintRandomContainer
 
     fit <- .maExtractFit(jaspResults, options)
@@ -484,7 +484,7 @@
 
 .mammAnyStructureGen             <- function(options) {
   # only relevant for multivariate
-  if (options[["analysis"]] != "metaAnalysisMultilevelMultivariate")
+  if (!.maIsMultilevelMultivariate(options))
     return(FALSE)
 
   # get all the active components types
@@ -499,7 +499,7 @@
 
 .mammHasMultipleHeterogeneities  <- function(options, canAddOutput = FALSE) {
   # only relevant for multivariate
-  if (options[["analysis"]] != "metaAnalysisMultilevelMultivariate")
+  if (!.maIsMultilevelMultivariate(options))
     return(FALSE)
 
   # get all the active components types

@@ -8,8 +8,8 @@
   if (!is.null(jaspResults[["randomEstimatesContainer"]])) {
     randomEstimatesContainer <- jaspResults[["randomEstimatesContainer"]]
   } else {
-    randomEstimatesContainer <- createJaspContainer(title = gettext("Random Effects / Model Stucture Summary"))
-    randomEstimatesContainer$dependOn(.maDependencies)
+    randomEstimatesContainer <- createJaspContainer(title = gettext("Random Effects / Model Structure Summary"))
+    randomEstimatesContainer$dependOn(c(.maModelDependencies(options), "includeFullDatasetInSubgroupAnalysis"))
     randomEstimatesContainer$position <- 2
     jaspResults[["randomEstimatesContainer"]] <- randomEstimatesContainer
   }
@@ -560,6 +560,20 @@
   return()
 }
 
+.mammAlignRandomCi               <- function(ci, estimates) {
+
+  # match the intervals to the components by the index in their name (e.g., tau^2.2);
+  # the skipped (fixed) components keep their estimate without an interval
+  index <- suppressWarnings(as.integer(sub(".*[.]", "", ci[["parameter"]])))
+  if (anyNA(index))
+    index <- seq_len(nrow(ci))
+
+  out <- data.frame(estimate = estimates, ci.lb = NA_real_, ci.ub = NA_real_)
+  out[index, ] <- ci[, c("estimate", "ci.lb", "ci.ub")]
+
+  return(out)
+}
+
 .mammExtractRandomCiTables       <- function(tempContainer, options, x, confintRandom, indx = 0) {
 
   overtitleCi <- gettextf("%s%% CI", 100 * options[["confidenceIntervalsLevel"]])
@@ -618,6 +632,13 @@
     }
   } else if (is.element(struct, c("GEN", "GDIAG"))) {
     par1Levels <- .maVariableNames(x[[g.namesName]][-length(x[[g.namesName]])], unlist(.mammExtractRandomVariableNames(options)))
+  }
+
+  # metafor does not profile components it fixes (e.g., levels with a single estimate)
+  if (length(x[[tau2Name]]) == length(par1Levels) && nrow(tau2Ci) < length(par1Levels)) {
+    tau2Ci <- .mammAlignRandomCi(tau2Ci, x[[tau2Name]])
+    tauCi  <- .mammAlignRandomCi(tauCi,  sqrt(x[[tau2Name]]))
+    tempTable$addFootnote(gettext("Confidence intervals are not available for variance components fixed to zero (e.g., levels with a single estimate)."))
   }
 
   tempData <- data.frame(

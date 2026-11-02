@@ -153,19 +153,19 @@
     .maExportUnavailableDiagnosticsColumns(jaspResults, dataset, options)
 
   if (.maExportDiagnosticsInfluentialCases(options) && "inf" %in% colnames(diagnosticsTable))
-    .maExportNominalColumn(jaspResults, "Diagnostics: Influential", diagnosticsTable[["inf"]], c(.maExportDependencies(), "exportDiagnosticsInfluentialCases"), options)
+    .maExportNominalColumn(jaspResults, "Diagnostics: Influential", diagnosticsTable[["inf"]], c(.maExportDependencies(options), "exportDiagnosticsInfluentialCases"), options)
 
   if (.maExportDiagnosticsCaseDiagnostics(options)) {
     for (diagnosticName in intersect(c("rstudent", "cook.d", "hat", "weight"), colnames(diagnosticsTable))) {
       columnName <- paste0("Diagnostics: ", .maCasewiseDiagnosticsExportColumnsNames(diagnosticName))
-      .maExportScaleColumn(jaspResults, columnName, diagnosticsTable[[diagnosticName]], c(.maExportDependencies(), "exportDiagnosticsCaseDiagnostics"), options)
+      .maExportScaleColumn(jaspResults, columnName, diagnosticsTable[[diagnosticName]], c(.maExportDependencies(options), "exportDiagnosticsCaseDiagnostics"), options)
     }
   }
 
   if (.maExportDiagnosticsModelImpact(options)) {
     for (diagnosticName in intersect(c("dffits", "cov.r", "tau.del", "tau2.del", "QE.del"), colnames(diagnosticsTable))) {
       columnName <- paste0("Diagnostics: ", .maCasewiseDiagnosticsExportColumnsNames(diagnosticName))
-      .maExportScaleColumn(jaspResults, columnName, diagnosticsTable[[diagnosticName]], c(.maExportDependencies(), "exportDiagnosticsModelImpact"), options)
+      .maExportScaleColumn(jaspResults, columnName, diagnosticsTable[[diagnosticName]], c(.maExportDependencies(options), "exportDiagnosticsModelImpact"), options)
     }
   }
 
@@ -175,7 +175,7 @@
 
     for (diagnosticName in coefficientNames) {
       columnName <- decodeColNames(paste0("Difference in coefficients: ", .maVariableNames(diagnosticName, variables)))
-      .maExportScaleColumn(jaspResults, columnName, diagnosticsTable[[diagnosticName]], c(.maExportDependencies(), "exportDiagnosticsCoefficientInfluence"), options)
+      .maExportScaleColumn(jaspResults, columnName, diagnosticsTable[[diagnosticName]], c(.maExportDependencies(options), "exportDiagnosticsCoefficientInfluence"), options)
     }
   }
 
@@ -218,15 +218,15 @@
   nRows <- .maExportDatasetRows(dataset)
 
   if (.maExportDiagnosticsInfluentialCases(options))
-    .maExportNominalColumn(jaspResults, "Diagnostics: Influential", rep(NA_character_, nRows), c(.maExportDependencies(), "exportDiagnosticsInfluentialCases"), options)
+    .maExportNominalColumn(jaspResults, "Diagnostics: Influential", rep(NA_character_, nRows), c(.maExportDependencies(options), "exportDiagnosticsInfluentialCases"), options)
 
   if (.maExportDiagnosticsCaseDiagnostics(options))
-    .maExportScaleColumn(jaspResults, "Diagnostics: Cook's Distance", rep(NA_real_, nRows), c(.maExportDependencies(), "exportDiagnosticsCaseDiagnostics"), options)
+    .maExportScaleColumn(jaspResults, "Diagnostics: Cook's Distance", rep(NA_real_, nRows), c(.maExportDependencies(options), "exportDiagnosticsCaseDiagnostics"), options)
 
   if (.maExportDiagnosticsModelImpact(options)) {
     for (diagnosticName in c("dffits", "cov.r", "tau.del", "tau2.del", "QE.del")) {
       columnName <- paste0("Diagnostics: ", .maCasewiseDiagnosticsExportColumnsNames(diagnosticName))
-      .maExportScaleColumn(jaspResults, columnName, rep(NA_real_, nRows), c(.maExportDependencies(), "exportDiagnosticsModelImpact"), options)
+      .maExportScaleColumn(jaspResults, columnName, rep(NA_real_, nRows), c(.maExportDependencies(options), "exportDiagnosticsModelImpact"), options)
     }
   }
 
@@ -236,7 +236,7 @@
 
     for (diagnosticName in coefficientNames) {
       columnName <- decodeColNames(paste0("Difference in coefficients: ", .maVariableNames(diagnosticName, variables)))
-      .maExportScaleColumn(jaspResults, columnName, rep(NA_real_, nRows), c(.maExportDependencies(), "exportDiagnosticsCoefficientInfluence"), options)
+      .maExportScaleColumn(jaspResults, columnName, rep(NA_real_, nRows), c(.maExportDependencies(options), "exportDiagnosticsCoefficientInfluence"), options)
     }
   }
 
@@ -277,7 +277,7 @@
       exportFunction = function(fit) stats::residuals(fit, type = "response"),
       isAvailable    = function(fit) .maExportFitSupportsResidual(fit, "response")
     )
-    .maExportScaleColumn(jaspResults, "Residuals: Raw", values, c(.maExportDependencies(), "exportResidualsRaw"), options)
+    .maExportScaleColumn(jaspResults, "Residuals: Raw", values, c(.maExportDependencies(options), "exportResidualsRaw"), options)
   }
 
   if (isTRUE(options[["exportResidualsPearson"]])) {
@@ -287,7 +287,7 @@
       exportFunction = function(fit) stats::residuals(fit, type = "pearson"),
       isAvailable    = function(fit) .maExportFitSupportsResidual(fit, "pearson")
     )
-    .maExportScaleColumn(jaspResults, "Residuals: Pearson", values, c(.maExportDependencies(), "exportResidualsPearson"), options)
+    .maExportScaleColumn(jaspResults, "Residuals: Pearson", values, c(.maExportDependencies(options), "exportResidualsPearson"), options)
   }
 
   if (isTRUE(options[["exportResidualsStandardized"]])) {
@@ -297,7 +297,7 @@
       exportFunction = function(fit) stats::residuals(fit, type = "rstandard"),
       isAvailable    = function(fit) .maExportFitSupportsResidual(fit, "rstandard")
     )
-    .maExportScaleColumn(jaspResults, "Residuals: Standardized", values, c(.maExportDependencies(), "exportResidualsStandardized"), options)
+    .maExportScaleColumn(jaspResults, "Residuals: Standardized", values, c(.maExportDependencies(options), "exportResidualsStandardized"), options)
   }
 
   if (isTRUE(options[["exportResidualsStudentized"]])) {
@@ -307,7 +307,7 @@
       exportFunction = function(fit) stats::residuals(fit, type = "rstudent"),
       isAvailable    = function(fit) .maExportFitSupportsResidual(fit, "rstudent")
     )
-    .maExportScaleColumn(jaspResults, "Residuals: Studentized", values, c(.maExportDependencies(), "exportResidualsStudentized"), options)
+    .maExportScaleColumn(jaspResults, "Residuals: Studentized", values, c(.maExportDependencies(options), "exportResidualsStudentized"), options)
   }
 
   if (isTRUE(options[["exportResidualsConditional"]]) && !.maIsMultilevelMultivariate(options)) {
@@ -317,7 +317,7 @@
       exportFunction = function(fit) stats::rstandard(fit, type = "conditional")[["z"]],
       isAvailable    = function(fit) .maExportFitSupportsResidual(fit, "conditional")
     )
-    .maExportScaleColumn(jaspResults, "Residuals: Conditional Standardized", values, c(.maExportDependencies(), "exportResidualsConditional"), options)
+    .maExportScaleColumn(jaspResults, "Residuals: Conditional Standardized", values, c(.maExportDependencies(options), "exportResidualsConditional"), options)
   }
 
   return()
@@ -331,7 +331,7 @@
   fit     <- .maExportFitList(jaspResults, options)
   columns <- .maExportDataFrameFromFitList(dataset, fit, .maExportPredictedDataFrame, .maExportFitSupportsPredicted)
 
-  .maExportScaleColumns(jaspResults, columns, "Predicted Values", c(.maExportDependencies(), "exportPredictedValues"), options)
+  .maExportScaleColumns(jaspResults, columns, "Predicted Values", c(.maExportDependencies(options), "exportPredictedValues"), options)
 
   return()
 }
@@ -344,7 +344,7 @@
   fit     <- .maExportFitList(jaspResults, options)
   columns <- .maExportDataFrameFromFitList(dataset, fit, .maExportTrueEffectDataFrame, .maExportFitSupportsTrueEffect)
 
-  .maExportScaleColumns(jaspResults, columns, "True Effect Estimates (BLUPs)", c(.maExportDependencies(), "exportTrueEffectEstimates"), options)
+  .maExportScaleColumns(jaspResults, columns, "True Effect Estimates (BLUPs)", c(.maExportDependencies(options), "exportTrueEffectEstimates"), options)
 
   return()
 }
@@ -362,7 +362,7 @@
     columns <- .maExportDataFrameFromFitList(dataset, fit, .maExportRandomEffectsDataFrame, .maExportFitSupportsRandomEffects)
   }
 
-  .maExportScaleColumns(jaspResults, columns, "Random Effects", c(.maExportDependencies(), "exportRandomEffects"), options)
+  .maExportScaleColumns(jaspResults, columns, "Random Effects", c(.maExportDependencies(options), "exportRandomEffects"), options)
 
   return()
 }
@@ -387,7 +387,7 @@
       },
       isAvailable    = .maExportFitSupportsWeights
     )
-    .maExportScaleColumn(jaspResults, "Weights: Row Sum", rowSumValues, c(.maExportDependencies(), "exportWeights"), options)
+    .maExportScaleColumn(jaspResults, "Weights: Row Sum", rowSumValues, c(.maExportDependencies(options), "exportWeights"), options)
 
     diagonalValues <- .maExportVectorFromFitList(
       dataset        = dataset,
@@ -401,7 +401,7 @@
       },
       isAvailable    = .maExportFitSupportsWeights
     )
-    .maExportScaleColumn(jaspResults, "Weights: Diagonal", diagonalValues, c(.maExportDependencies(), "exportWeights"), options)
+    .maExportScaleColumn(jaspResults, "Weights: Diagonal", diagonalValues, c(.maExportDependencies(options), "exportWeights"), options)
 
     return()
   }
@@ -418,7 +418,7 @@
     },
     isAvailable    = .maExportFitSupportsWeights
   )
-  .maExportScaleColumn(jaspResults, "Weights", values, c(.maExportDependencies(), "exportWeights"), options)
+  .maExportScaleColumn(jaspResults, "Weights", values, c(.maExportDependencies(options), "exportWeights"), options)
 
   return()
 }
@@ -608,7 +608,7 @@
 }
 
 .maExportPredictedDataFrame               <- function(fit) {
-  return(.maExportListRmaDataFrame(stats::predict(fit), c("pred", "se", "ci.lb", "ci.ub", "pi.lb", "pi.ub")))
+  return(.maExportListRmaDataFrame(.maPredictStudies(fit), c("pred", "se", "ci.lb", "ci.ub", "pi.lb", "pi.ub")))
 }
 
 .maExportTrueEffectDataFrame              <- function(fit) {
@@ -877,8 +877,8 @@
 
 # JASP column helpers ----
 
-.maExportDependencies                     <- function() {
-  return(c(.maDependencies, .maExportNameOptions, "includeFullDatasetInSubgroupAnalysis"))
+.maExportDependencies                     <- function(options) {
+  return(c(.maModelDependencies(options), .maExportNameOptions, "includeFullDatasetInSubgroupAnalysis"))
 }
 
 .maExportScaleColumns                     <- function(jaspResults, columns, prefix, dependencies, options) {

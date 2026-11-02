@@ -7,6 +7,11 @@
   identical(options[["analysis"]], "selectionModels")
 }
 
+.maIsPetPeese                     <- function(options) {
+
+  identical(options[["analysis"]], "petPeese")
+}
+
 .maIsGLMM                         <- function(options) {
   options[["analysis"]] == "generalizedMetaAnalysis"
 }
@@ -15,6 +20,9 @@
 
   if (.maIsSelection(options))
     return(.smDependencies)
+
+  if (.maIsPetPeese(options))
+    return(.ppDependencies)
 
   if (.maIsClassical(options))
     return(.maDependencies)
@@ -25,7 +33,7 @@
 .maHasR2                          <- function(options) {
 
   !.maIsUnrestrictedWeightedLeastSquares(options) && .maIsMetaregressionEffectSize(options) &&
-    !.maIsMultilevelMultivariate(options) && !.maIsGLMM(options) && !.maIsSelection(options)
+    !.maIsMultilevelMultivariate(options) && !.maIsGLMM(options) && !.maIsSelection(options) && !.maIsPetPeese(options)
 }
 
 .maIsMetaregression               <- function(options) {
@@ -37,7 +45,7 @@
 }
 
 .maIsMetaregressionHeterogeneity  <- function(options) {
-  if (.maIsSelection(options))
+  if (.maIsSelection(options) || .maIsPetPeese(options))
     return(FALSE)
   return(!.maIsUnrestrictedWeightedLeastSquares(options) && !is.null(options[["heterogeneityModelTerms"]]) && length(options[["heterogeneityModelTerms"]]) > 0)
 }
@@ -65,11 +73,16 @@
 }
 
 .maIsMultilevelMultivariate       <- function(options) {
+  # PET-PEESE fits the multilevel/multivariate model when its checkbox is ticked
+  if (.maIsPetPeese(options))
+    return(options[["multilevelMultivariate"]])
+
   return(options[["analysis"]] == "metaAnalysisMultilevelMultivariate")
 }
 
 .maIsPermutation                  <- function(options) {
-  if (.maIsSelection(options))
+  # permuting design rows breaks the link between the PET-PEESE bias term and the weights
+  if (.maIsSelection(options) || .maIsPetPeese(options))
     return(FALSE)
   return(.maIsClassical(options, notMHP = TRUE) && !.maIsClustered(options) && options[["permutationTest"]])
 }

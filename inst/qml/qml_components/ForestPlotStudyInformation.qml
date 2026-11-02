@@ -87,7 +87,7 @@ Group
 						{ label: qsTr("Middle")		, value: "middle"	},
 						{ label: qsTr("Right")		, value: "right"	}
 					]
-				fieldWidth:			40 * preferencesModel.uiScale
+				fieldWidth:			52 * preferencesModel.uiScale
 				useExternalBorder:	false
 				showBorder:			true
 			}

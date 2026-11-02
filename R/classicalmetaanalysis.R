@@ -85,7 +85,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "permutationTest", "permutationTestIteration", "permutationTestType", "setSeed", "seed",
   # multilevel/multivariate specific
   "randomEffects", "randomEffectsSpecification",
-  "computeCovarianceMatrix", "computeCovarianceMatrix",
+  "useSparseMatrices", "computeCovarianceMatrix",
   # multivariate effect size computation
   .effectSizeVarianceCovarianceMatrixDependencies,
   # BiBMA (frequency-based inputs)
@@ -147,6 +147,10 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "forestPlotModelInformation",
   "forestPlotEffectSizeFixedEffectEstimate",
   "forestPlotEffectSizeFixedEffectTest",
+  "forestPlotEffectSizeUnadjustedFixedEffectEstimate",
+  "forestPlotEffectSizeUnadjustedFixedEffectTest",
+  "forestPlotEffectSizeUnadjustedRandomEffectsEstimate",
+  "forestPlotEffectSizeUnadjustedRandomEffectsTest",
   "forestPlotEffectSizePooledEstimate",
   "forestPlotEffectSizePooledEstimateTest",
   "forestPlotEffectSizeModerationTest",
@@ -200,6 +204,7 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
   "bubblePlotSeparateLines",
   "bubblePlotSeparatePlots",
   "bubblePlotSdFactorCovariates",
+  "bubblePlotBubbles",
   "bubblePlotBubblesSize",
   "bubblePlotBubblesRelativeSize",
   "bubblePlotBubblesTransparency",
@@ -355,9 +360,9 @@ ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
 .maIsClassical         <- function(options, notMHP = FALSE) {
 
   # check if the analysis is classical
-  if (options[["analysis"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate", "mantelHaenszelPeto", "generalizedMetaAnalysis", "selectionModels")) {
+  if (options[["analysis"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate", "mantelHaenszelPeto", "generalizedMetaAnalysis", "selectionModels", "petPeese")) {
     if (notMHP) {
-      return(options[["analysis"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate", "selectionModels"))
+      return(options[["analysis"]] %in% c("metaAnalysis", "metaAnalysisMultilevelMultivariate", "selectionModels", "petPeese"))
     } else {
       return(TRUE)
     }

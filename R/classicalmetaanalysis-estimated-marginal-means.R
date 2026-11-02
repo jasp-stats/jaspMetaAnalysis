@@ -34,7 +34,7 @@
     # create the output container
     estimatedMarginalMeansAndContrastsContainer <- createJaspContainer(gettext("Estimated Marginal Means and Contrasts Summary"))
     estimatedMarginalMeansAndContrastsContainer$dependOn(c(.maModelDependencies(options), "confidenceIntervals", "confidenceIntervalsLevel", "includeFullDatasetInSubgroupAnalysis"))
-    estimatedMarginalMeansAndContrastsContainer$position <- if (.maIsSelection(options)) 5 else 4
+    estimatedMarginalMeansAndContrastsContainer$position <- 5
     jaspResults[["estimatedMarginalMeansAndContrastsContainer"]] <- estimatedMarginalMeansAndContrastsContainer
   }
 
@@ -228,10 +228,7 @@
   estimatedMarginalMeansTable$setData(estimatedMarginalMeans)
 
   # add footnotes
-  estimatesContainNA <- !is.null(estimatedMarginalMeans) && anyNA(sapply(
-    estimatedMarginalMeans[, colnames(estimatedMarginalMeans) %in% c("est", "lCi", "uCi", "lPi", "uPi"), drop = FALSE],
-    anyNA
-  ))
+  estimatesContainNA <- .maTransformationIntroducedNA(estimatedMarginalMeans, options)
   estimatedMarginalMeansMessages <- .maEstimatedMarginalMeansMessages(options, parameter, estimatesContainNA)
   for (i in seq_along(estimatedMarginalMeansMessages))
     estimatedMarginalMeansTable$addFootnote(estimatedMarginalMeansMessages[i])
@@ -332,6 +329,9 @@
       contrasts(predictorsRemaining[[remainingVariables[i]]]) <- contrasts(dataset[[remainingVariables[[i]]]])
     } else if (remainingVariables[[i]] %in% variablesContinuous) {
       predictorsRemaining[[remainingVariables[i]]] <- mean(dataset[[remainingVariables[[i]]]])
+    } else if (identical(remainingVariables[[i]], .maBiasTerm(fit))) {
+      # PET-PEESE adjusted estimates are evaluated at a zero standard error
+      predictorsRemaining[[remainingVariables[i]]] <- 0
     }
   }
 
@@ -463,6 +463,7 @@
         tauLevelsMatrix            <- .mammExtractTauLevels(fit)
         tempPredictorMatrixRepeats <- rep(1:nrow(predictorMatrixEffectSize), each = nrow(tauLevelsMatrix)) # repeat the predictors for each tau level
         attr(predictorMatrixEffectSize, attr(predictorMatrixEffectSize, "variable")) <- attr(predictorMatrixEffectSize, attr(predictorMatrixEffectSize, "variable"))[tempPredictorMatrixRepeats]
+        attr(predictorMatrixEffectSize, "selectedGridNames") <- attr(predictorMatrixEffectSize, "selectedGridNames")[tempPredictorMatrixRepeats, , drop = FALSE]
         computedMarginalMeans <- predict(
           fit,
           newmods = predictorMatrixEffectSize[tempPredictorMatrixRepeats,,drop=FALSE],

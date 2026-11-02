@@ -24,6 +24,7 @@ Section
 {
 	title:							qsTr("Bubble Plot")
 	property string analysisType:	"metaAnalysis"
+	property string methodValue:	""
 	info: qsTr("Options for visualizing the estimated effect sizes at different levels of the predictors with the observed estimates visualized as bubbles. Continuous predictors can be split into three bins with cutoffs at ±x standard deviations from the mean. Predictors that are not specified for either the x-axis, lines, or plots are averaged over.")
 
 	VariablesForm
@@ -86,9 +87,12 @@ Section
 				info: qsTr("Standard deviation cutoff used for binning continuous covariates.")
 			}
 
-			Group
+			CheckBox
 			{
-				title:		qsTr("Bubbles")
+				name:		"bubblePlotBubbles"
+				label:		qsTr("Bubbles")
+				checked:	true
+				info: qsTr("Show the observed estimates as bubbles. Uncheck to show only the model-based estimates.")
 
 				DropDown
 				{
@@ -96,7 +100,7 @@ Section
 					label:		qsTr("Size")
 					info: qsTr("Options for determining the size of the observed estimates.")
 					values:
-					if (analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis")
+					if (analysisType === "metaAnalysis" || analysisType === "petPeese" || analysisType === "multilevelMultivariateMetaAnalysis")
 						[
 							{ label: qsTr("Weight")				, value: "weight"},
 							{ label: qsTr("Inverse variance")	, value: "inverseVariance"	},
@@ -173,8 +177,9 @@ Section
 				name:		"bubblePlotPredictionIntervals"
 				label:		qsTr("Prediction intervals")
 				checked:	true
-				info: qsTr("Include prediction intervals of the estimated effect sizes.")
-				visible:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || analysisType === "generalizedMetaAnalysis" || analysisType === "selectionModels"
+				info: qsTr("Include prediction intervals of the estimated effect sizes. Unavailable for unrestricted weighted least squares.")
+				visible:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || analysisType === "generalizedMetaAnalysis" || analysisType === "selectionModels" || analysisType === "petPeese"
+				enabled:	methodValue !== "unrestrictedWeightedLeastSquares"
 
 				DoubleField
 				{

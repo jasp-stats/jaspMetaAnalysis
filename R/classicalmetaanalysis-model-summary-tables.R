@@ -92,6 +92,10 @@
     tests[["bias"]] <- .maSafeRbind(lapply(fit, .smRowPublicationBiasTest))
     .smAddInferenceFootnotes(testsTable, fit, options)
   }
+  if (.maIsPetPeese(options)) {
+    tests[["bias"]] <- .maSafeRbind(lapply(fit, .ppRowBiasTest, options = options))
+    .ppAddInferenceFootnotes(testsTable, fit, options)
+  }
 
   # effect size moderation
   if (.maIsMetaregressionEffectSize(options)) {
@@ -161,7 +165,8 @@
 
   # additional tests for subgroup differences
   if (options[["subgroup"]] != "" && !.maIsSelection(options)) {
-    tests[["subgroup"]] <- .maRowSubgroupTest(fit, options = options)
+    # the full dataset overlaps with the subgroups
+    tests[["subgroup"]] <- .maRowSubgroupTest(fit[names(fit) != "__fullDataset"], options = options)
   }
 
 
@@ -217,7 +222,7 @@
   pooledEstimatesTable          <- createJaspTable(gettext("Meta-Analytic Estimates"))
   pooledEstimatesTable$showSpecifiedColumnsOnly <- TRUE
   pooledEstimatesTable$position <- 4
-  pooledEstimatesTable$dependOn(c("heterogeneityTau", "heterogeneityTau2", "heterogeneityI2", "heterogeneityH2",
+  pooledEstimatesTable$dependOn(c("heterogeneityTau", "heterogeneityTau2", "heterogeneityI2", "heterogeneityH2", "heterogeneityGamma", "heterogeneitySqrtGamma",
                                   "confidenceIntervals", "confidenceIntervalsLevel", "predictionIntervals", "transformEffectSize",
                                   "standardErrors", "includeFullDatasetInSubgroupAnalysis"))
   modelSummaryContainer[["pooledEstimatesTable"]] <- pooledEstimatesTable
@@ -275,8 +280,15 @@
     estimates[["heterogeneity"]] <- .maSafeRbind(lapply(fitNonClustered, .maRowPooledHeterogeneity, options = options))
   }
 
+  # multiplicative heterogeneity of the unrestricted weighted least squares model
+  # (robust() resets it, so it is taken from the non-clustered fit)
+  if (.maIsUnrestrictedWeightedLeastSquares(options) && (options[["heterogeneityGamma"]] || options[["heterogeneitySqrtGamma"]])) {
+    fitNonClustered <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
+    estimates[["heterogeneity"]] <- .maSafeRbind(lapply(fitNonClustered, .maRowMultiplicativeHeterogeneity, options = options))
+  }
+
   # add messages
-  pooledEstimatesMessages <- .maPooledEstimatesMessages(fit, options, anyNA(estimates[["effect"]]))
+  pooledEstimatesMessages <- .maPooledEstimatesMessages(fit, options, .maTransformationIntroducedNA(estimates[["effect"]], options))
   for (i in seq_along(pooledEstimatesMessages))
     pooledEstimatesTable$addFootnote(pooledEstimatesMessages[i])
   if (.maIsSelection(options))
@@ -354,6 +366,10 @@
 # Messages and footnotes ----
 
 .maFixedEffectTextMessage              <- function(options) {
+  # robust() replaces the selected test by cluster-robust t-tests
+  if (.maIsClustered(options))
+    return(gettext("Fixed effects tested using cluster-robust t-distribution."))
+
   return(switch(
     .maGetFixedEffectTestOptions(options),
     "z"    = gettext("Fixed effects tested using z-distribution."),

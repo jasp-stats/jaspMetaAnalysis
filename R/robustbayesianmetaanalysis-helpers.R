@@ -80,7 +80,7 @@
   # create the output container
   diagnosticsContainer <- createJaspContainer(gettext("Diagnostics"))
   diagnosticsContainer$dependOn(.robmaDependencies)
-  diagnosticsContainer$position <- 8
+  diagnosticsContainer$position <- 9
   jaspResults[["diagnosticsContainer"]] <- diagnosticsContainer
 
   return(diagnosticsContainer)
