@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2026-08-22 02:47\n"
-"PO-Revision-Date: 2026-10-26 12:51+0000\n"
+"PO-Revision-Date: 2026-11-01 08:51+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/jasp/jaspmetaanalysis-r/zh_Hans/>\n"
@@ -51,7 +51,7 @@ msgid "Estimated"
 msgstr "估计"
 
 msgid "Observed"
-msgstr "观测"
+msgstr "观测值"
 
 msgid "Effect size"
 msgstr "效应量"
@@ -164,7 +164,7 @@ msgid "95%% Credible Interval"
 msgstr "95%%可信区间"
 
 msgid "Upper"
-msgstr "上限"
+msgstr "上界"
 
 msgid ""
 "%1$s and %2$s are the group-level effect size and standard deviation, "
@@ -374,7 +374,7 @@ msgid "Bubble Plots"
 msgstr "气泡图"
 
 msgid "Subgroup: %1$s"
-msgstr "亚组：%1$s"
+msgstr "子组：%1$s"
 
 msgid "%1$s (%2$s)"
 msgstr "%1$s（%2$s）"
@@ -523,7 +523,7 @@ msgid "Level"
 msgstr "水平"
 
 msgid "Estimate"
-msgstr "估计"
+msgstr "估计值"
 
 msgid "Heterogeneity Level"
 msgstr "异质性水平"
@@ -535,7 +535,7 @@ msgid "z"
 msgstr "z"
 
 msgid "df"
-msgstr "df"
+msgstr "自由度"
 
 msgid "p"
 msgstr "p"
@@ -669,7 +669,7 @@ msgid "%s%% PI"
 msgstr "%s%%预测区间"
 
 msgid "Subgroup"
-msgstr "亚组"
+msgstr "子组"
 
 msgid "Warning:"
 msgstr "警告："
@@ -1567,7 +1567,7 @@ msgid "Power enhancement breaks must be between 0.05 and 1."
 msgstr "功效增强断点必须介于0.05和1之间。"
 
 msgid "Power"
-msgstr "功效"
+msgstr "效力"
 
 msgid "H₁ Funnel Parameter Estimates"
 msgstr "H₁漏斗参数估计"
