@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.95.5\n"
-"POT-Creation-Date: 2026-08-22 02:47\n"
+"POT-Creation-Date: 2026-11-07 02:33\n"
 "PO-Revision-Date: 2026-07-28 05:02+0000\n"
 "Last-Translator: 陳正昌 <chencc99@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
@@ -646,6 +646,10 @@ msgstr "所有觀察值皆因具影響力而被移除。"
 msgid "Intercept"
 msgstr "截距"
 
+#, fuzzy
+msgid "Heterogeneity test: not available"
+msgstr "異質性水準"
+
 msgid "%1$s: not available"
 msgstr "%1$s：不可用"
 
@@ -794,8 +798,8 @@ msgstr ""
 "%1$s調節作用係數的索引以不正確的格式指定。請嘗試用『(1, 2)』檢定前兩個係數。"
 
 msgid ""
-"The selected coefficients for %1$s moderation must be between 1 and %2$i (i."
-"e., the number of regression parameters)."
+"The selected coefficients for %1$s moderation must be between 1 and %2$i "
+"(i.e., the number of regression parameters)."
 msgstr "%1$s調節作用所選的係數必須介於 1 與 %2$i 之間（即迴歸參數數目）。"
 
 msgid "Effect size (coef: %1$s)"
@@ -937,6 +941,9 @@ msgid ""
 msgstr ""
 "%1$s 使用 %2$s 轉換進行轉換。對於非線性轉換，轉換後的估計值在轉換尺度上解釋為"
 "中位數。"
+
+msgid "The pooled effect is evaluated at the average moderator design vector."
+msgstr ""
 
 msgid ""
 "The pooled effect size corresponds to the weighted average effect across "
@@ -2131,150 +2138,321 @@ msgstr "出版偏誤調整估計值（PET-PEESE）"
 msgid "Interaction terms are currently not possible in Bayesian meta-analyses."
 msgstr "貝氏統合分析目前不支援交互作用項。"
 
-msgid "Weight Function (%s)"
-msgstr "權重函式（%s）"
+#, fuzzy
+msgid "Model %1$i"
+msgstr "模型"
+
+#, fuzzy
+msgid "Model Comparison"
+msgstr "成對模型比較"
+
+#, fuzzy
+msgid "Model"
+msgstr "模型"
+
+#, fuzzy
+msgid "AIC weight"
+msgstr "權重"
+
+msgid "AICc weight"
+msgstr ""
+
+#, fuzzy
+msgid "BIC weight"
+msgstr "權重"
+
+msgid "Add at least one weight-function model in the Custom section."
+msgstr ""
+
+#, fuzzy
+msgid "Model %1$i: %2$s"
+msgstr "%1$s：%2$s"
+
+#, fuzzy
+msgid "Model %1$i, %2$s: %3$s"
+msgstr "%1$s 作為 %2$s %3$s"
+
+#, fuzzy
+msgid "Model %1$i: %2$s: %3$s"
+msgstr "%1$s 作為 %2$s %3$s"
+
+msgid "Assign a sample-size variable for this precision measure."
+msgstr ""
 
 msgid ""
-"The figure could not be created since one of the estimates is not a number."
-msgstr "由於其中一個估計值不是數值，因此無法建立圖形。"
+"No estimates are marked as subject to selection. Use the unadjusted model "
+"(None) or choose a different unaffected level."
+msgstr ""
 
-msgid "P-value (One-sided)"
-msgstr "P 值（單尾）"
+msgid ""
+"The reference interval or an interval with an estimated weight contains no "
+"selected estimates. Change the cutoffs or fix the empty interval's weight; "
+"intervals are not merged automatically."
+msgstr ""
 
-msgid "Publication Probability"
-msgstr "出版機率"
+msgid ""
+"Selection model fitting failed. In Advanced Options, try a different "
+"optimizer or increase the maximum number of iterations. Also check the "
+"cutoffs and fixed selection parameters."
+msgstr ""
 
-msgid "Mean Model Estimates (%s)"
-msgstr "平均模型估計值（%s）"
+msgid ""
+"Enter comma-separated numbers, optionally enclosed in parentheses. Use NA "
+"for parameters to estimate."
+msgstr ""
 
-msgid "Fixed effects (adjusted)"
-msgstr "固定效果（調整後）"
+#, fuzzy
+msgid "All specified numbers must be finite."
+msgstr "所有人時值必須為正數。"
 
-msgid "Random effects (adjusted)"
+msgid ""
+"Step-function cutoffs must be strictly increasing and greater than 0, with a "
+"maximum of 1."
+msgstr ""
+
+msgid "Specify at least one cutoff below 1."
+msgstr ""
+
+msgid ""
+"Beta truncation requires two increasing p-value cutoffs strictly between 0 "
+"and 1."
+msgstr ""
+
+msgid "Specify one effect-size cutoff for the truncated model."
+msgstr ""
+
+msgid ""
+"Specify a single p-value threshold strictly between 0 and 1, or leave the "
+"threshold empty."
+msgstr ""
+
+msgid ""
+"This model requires %1$i selection parameters. Use NA for each parameter to "
+"estimate, or leave the field empty to estimate all parameters."
+msgstr ""
+
+msgid ""
+"Selection parameters must be non-negative; beta parameters must be strictly "
+"positive."
+msgstr ""
+
+msgid "The first step-function weight must equal 1 (the reference interval)."
+msgstr ""
+
+msgid ""
+"Ordinality requires estimated non-reference weights. Clear the parameters or "
+"turn off ordinality."
+msgstr ""
+
+#, fuzzy
+msgid "Invalid specification"
+msgstr "模型規格"
+
+#, fuzzy
+msgid "None (unadjusted)"
 msgstr "隨機效果（調整後）"
 
-msgid "Model Tests"
-msgstr "模型檢定"
+#, fuzzy
+msgid "Step function"
+msgstr "權重函式"
 
-msgid "Test of Heterogeneity"
-msgstr "異質性檢定"
+msgid "Beta"
+msgstr ""
 
-msgid "Note:"
-msgstr "附註："
+msgid "Half-normal"
+msgstr ""
 
-msgid "Test of Publication Bias"
-msgstr "出版偏誤檢定"
+#, fuzzy
+msgid "Negative exponential"
+msgstr "指數"
 
-msgid "ChiSq"
-msgstr "卡方"
+msgid "Logistic"
+msgstr ""
 
-msgid "Assuming homogeneity"
-msgstr "假定同質"
+msgid "Negative exponential power"
+msgstr ""
 
-msgid "Assuming heterogeneity"
-msgstr "假定異質"
+#, fuzzy
+msgid "Truncation"
+msgstr "迭代"
 
-msgid "Fixed Effects Estimates"
-msgstr "固定效果估計值"
+#, fuzzy
+msgid "Estimated truncation"
+msgstr "估計的研究效果"
 
-msgid "Mean Estimates (%s)"
-msgstr "平均估計值（%s）"
+#, fuzzy
+msgid "Variance"
+msgstr "共變異數"
 
-msgid "Estimated Weights"
-msgstr "估計權重"
+#, fuzzy
+msgid "Inverse sample size"
+msgstr "樣本人數"
 
-msgid "Heterogeneity Estimates(%s)"
-msgstr "異質性估計值（%s）"
+msgid "Inverse square root sample size"
+msgstr ""
 
-msgid "p-value Frequency"
+msgid "; ordinal"
+msgstr ""
+
+msgid "; two-sided"
+msgstr ""
+
+#, fuzzy
+msgid "; one-sided"
+msgstr "P 值（單尾）"
+
+#, fuzzy
+msgid "; sample size: %1$s"
+msgstr "樣本人數"
+
+msgid "; unscaled precision"
+msgstr ""
+
+#, fuzzy
+msgid "Publication bias test: not available"
+msgstr "出版偏誤：%1$s"
+
+msgid "Precision index: %1$.3f"
+msgstr ""
+
+#, fuzzy
+msgid "P-value"
+msgstr "P 值"
+
+#, fuzzy
+msgid "P-value (two-sided)"
+msgstr "P 值（單尾）"
+
+#, fuzzy
+msgid "P-value (one-sided)"
+msgstr "P 值（單尾）"
+
+msgid "Relative selection likelihood"
+msgstr ""
+
+msgid "No fitted model is available for profile likelihood diagnostics."
+msgstr ""
+
+msgid "The model could not be fitted: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Profile likelihood diagnostics are not available for ordinal selection "
+"models."
+msgstr "對於在異質性上包含統合迴歸的模型，剖面概似不可用。"
+
+msgid "There are no free heterogeneity or selection parameters to profile."
+msgstr ""
+
+msgid "Selection Parameter %1$i"
+msgstr ""
+
+msgid "Fewer than two finite profile likelihood values are available."
+msgstr ""
+
+msgid "R code unavailable until the specification is valid: %1$s"
+msgstr ""
+
+msgid "The module reported: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid "R Code"
+msgstr "RoBMA R 程式碼"
+
+msgid ""
+"Selection p-values were supplied rather than calculated from effect sizes "
+"and standard errors."
+msgstr ""
+
+msgid ""
+"Coefficient standard errors could not be estimated. Wald tests and "
+"coefficient confidence intervals are unavailable; review the fitting "
+"warnings before interpreting this model."
+msgstr ""
+
+msgid ""
+"The publication-bias test is not applicable with fixed selection parameters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"The heterogeneity likelihood-ratio test could not be computed. Review the "
+"fitting warnings before interpreting this model."
+msgstr "此模型適配無法計算部分 GLMM 異質性檢定。"
+
+#, fuzzy
+msgid "Heterogeneity confidence interval unavailable: %1$s"
+msgstr "此 GLMM 模型類型不提供異質性信賴區間。"
+
+#, fuzzy
+msgid "Weight Function Summary"
+msgstr "權重函式"
+
+#, fuzzy
+msgid "Weight Function Estimates"
+msgstr "權重函式（%s）"
+
+msgid "The unadjusted model has no selection parameters."
+msgstr ""
+
+#, fuzzy
+msgid "Selection Parameter Estimates"
+msgstr "H₁ 漏斗參數估計值"
+
+msgid "Selection uses two-sided p-values."
+msgstr ""
+
+#, fuzzy
+msgid "Expected effect direction: %1$s."
+msgstr "效果量（係數：%1$s）"
+
+msgid ""
+"Fixed selection parameters have no standard errors or confidence intervals."
+msgstr ""
+
+#, fuzzy
+msgid "P-Value Frequencies"
 msgstr "p 值頻率"
 
-msgid "<em>p</em>-values interval(one-sided)"
-msgstr "<em>p</em> 值區間（單尾）"
-
-msgid "Frequency"
-msgstr "頻率"
-
-msgid ""
-"There were no p-value cutoffs after their automatic reduction. The displayed "
-"frequencies correspond to the non-reduced p-value cutoffs."
+msgid "P-value frequencies require valid p-value cutoffs and study p-values."
 msgstr ""
-"經過自動縮減後，沒有剩餘的 p 值分界點。顯示的頻率對應於未縮減的 p 值分界點。"
 
-msgid ""
-"Cannot compute results. All entries of the p-value variable (%s) must be "
-"between 0 and 1."
-msgstr "無法計算結果。p 值變項（%s）的所有項目必須介於 0 與 1 之間。"
+#, fuzzy
+msgid "Selected Estimates"
+msgstr "平方根估計值"
 
-msgid ""
-"Cannot compute results. All entries of the correlation coefficient variable "
-"(%s) must be between -1 and 1."
-msgstr "無法計算結果。相關係數變項（%s）的所有項目必須介於 -1 與 1 之間。"
-
-msgid ""
-"Cannot compute results. All entries of the sample size variable (%s) must be "
-"greater than four."
-msgstr "無法計算結果。樣本人數變項（%s）的所有項目必須大於四。"
-
-msgid "The p-value cutoffs were set incorectly."
-msgstr "p 值分界點設定不正確。"
-
-msgid "At least one p-value cutoff needs to be set."
-msgstr "至少需要設定一個 p 值分界點。"
-
-msgid "All p-value cutoffs needs to be between 0 and 1."
-msgstr "所有 p 值分界點都必須介於 0 與 1 之間。"
-
-msgid "95%% Confidence Interval"
-msgstr "95%% 信賴區間"
-
-msgid "%1$s is on %2$s scale."
-msgstr "%1$s 位於 %2$s 尺度上。"
-
-msgid "Fixed effects model:"
-msgstr "固定效果模型："
-
-msgid "Random effects model:"
-msgstr "隨機效果模型："
-
-msgid ""
-"%sThe optimizer failed to find a solution. Consider re-specifying the model "
-"or the p-value cutoffs."
-msgstr "%s最佳化器無法找到解。請考慮重新指定模型或 p 值分界點。"
-
-msgid ""
-"%sThe automatic cutoffs selection did not find viable p-value cutoffs. "
-"Please, specify them manually."
-msgstr "%s自動分界點選擇未找到可行的 p 值分界點。請手動指定。"
-
-msgid ""
-"At least one of the p-value intervals contains no effect sizes, leading to "
-"estimation problems. Consider re-specifying the cutoffs."
-msgstr "至少一個 p 值區間不包含效果量，導致估計問題。請考慮重新指定分界點。"
-
-msgid ""
-"At least one of the p-value intervals contains three or fewer effect sizes, "
-"which may lead to estimation problems. Consider re-specifying the cutoffs."
+msgid "P-value frequencies include only estimates to which selection applies."
 msgstr ""
-"至少一個 p 值區間包含三個或更少的效果量，這可能導致估計問題。請考慮重新指定分"
-"界點。"
 
-msgid ""
-"The unadjusted estimate is negative. The selection model default "
-"specification expects that the expected direction of the effect size is "
-"positive. Please, check that you specified the effect sizes correctly or "
-"change the 'Expected effect size direction' option in the 'Model' tab."
+#, fuzzy
+msgid "Model Results"
+msgstr "模型檢定"
+
+msgid "No fitted model is available for the requested selection."
 msgstr ""
-"未調整的估計值為負值。選擇模型的預設規格預期效果量的預期方向為正向。請確認您"
-"正確指定了效果量，或在『模型』分頁中變更『預期效果量方向』選項。"
 
 msgid ""
-"The analysis requires both 'Effect Size' and 'Effect Size Standard Error' to "
-"be specified."
-msgstr "此分析需要同時指定『效果量』與『效果量標準誤』。"
+"The unaffected level is not present in the no-selection variable. Choose an "
+"available level."
+msgstr ""
 
-msgid "Only the following one-sided p-value cutoffs were used: %s."
-msgstr "僅使用了下列單尾 p 值分界點：%s。"
+msgid "P-values must be finite, greater than zero, and at most one."
+msgstr ""
+
+msgid ""
+"Sample-size variable not found in the data. Assign an available sample-size "
+"variable."
+msgstr ""
+
+msgid "Sample sizes must be finite and greater than zero."
+msgstr ""
+
+msgid ""
+"Standard errors are too small or too large to yield finite positive sampling "
+"variances. Rescale effect sizes and standard errors."
+msgstr ""
 
 msgid "Estimating: %1$s"
 msgstr "估計中：%1$s"
@@ -2315,14 +2493,36 @@ msgstr "係數摘要"
 msgid "Computed Estimates Summary"
 msgstr "計算估計值摘要"
 
+msgid ""
+"Cannot compute results. All entries of the correlation coefficient variable "
+"(%s) must be between -1 and 1."
+msgstr "無法計算結果。相關係數變項（%s）的所有項目必須介於 -1 與 1 之間。"
+
+msgid ""
+"Cannot compute results. All entries of the sample size variable (%s) must be "
+"greater than four."
+msgstr "無法計算結果。樣本人數變項（%s）的所有項目必須大於四。"
+
+msgid "95%% Confidence Interval"
+msgstr "95%% 信賴區間"
+
 msgid "Error: There were not enough adequately powered studies (k = %1$i)"
 msgstr "錯誤：檢定力充足的研究不足（k = %1$i）"
 
 msgid "Note: There were %1$i adequately powered studies"
 msgstr "注意：有 %1$i 個檢定力充足的研究"
 
+msgid "Model Tests"
+msgstr "模型檢定"
+
 msgid "Test of Effect"
 msgstr "效果檢定"
+
+msgid "Test of Publication Bias"
+msgstr "出版偏誤檢定"
+
+msgid "Mean Estimates (%s)"
+msgstr "平均估計值（%s）"
 
 msgid "Multiplicative Heterogeneity Estimates"
 msgstr "倍增異質性估計值"
@@ -2335,6 +2535,13 @@ msgstr "科恩 d"
 
 msgid "Fisher's z"
 msgstr "費雪 z"
+
+msgid "Mean Model Estimates (%s)"
+msgstr "平均模型估計值（%s）"
+
+msgid ""
+"The figure could not be created since one of the estimates is not a number."
+msgstr "由於其中一個估計值不是數值，因此無法建立圖形。"
 
 msgid ""
 "WAAP was not estimated: There were only %1$i adequately powered studies "
@@ -2383,3 +2590,135 @@ msgid_plural ""
 msgstr[0] ""
 "Hamiltonian Monte Carlo 程序可能效率低下 —— %i 次轉換超過最大樹深度。可透過逐"
 "步增加「Maximum tree depth」來解決此問題。"
+
+msgid ""
+"The selection weight for p-value interval %1$s is fixed at zero, but the "
+"interval contains %2$i selected estimate. Use a positive weight or NA to "
+"estimate the weight."
+msgid_plural ""
+"The selection weight for p-value interval %1$s is fixed at zero, but the "
+"interval contains %2$i selected estimates. Use a positive weight or NA to "
+"estimate the weight."
+msgstr[0] ""
+
+msgid "Selection applies to %1$i estimate."
+msgid_plural "Selection applies to %1$i estimates."
+msgstr[0] ""
+
+msgid "%1$i estimate at level '%2$s' is unaffected."
+msgid_plural "%1$i estimates at level '%2$s' are unaffected."
+msgstr[0] ""
+
+msgid ""
+"For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. "
+"This affects %3$i selected estimate."
+msgid_plural ""
+"For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. "
+"This affects %3$i selected estimates."
+msgstr[0] ""
+
+#~ msgid "Publication Probability"
+#~ msgstr "出版機率"
+
+#~ msgid "Fixed effects (adjusted)"
+#~ msgstr "固定效果（調整後）"
+
+#~ msgid "Test of Heterogeneity"
+#~ msgstr "異質性檢定"
+
+#~ msgid "Note:"
+#~ msgstr "附註："
+
+#~ msgid "ChiSq"
+#~ msgstr "卡方"
+
+#~ msgid "Assuming homogeneity"
+#~ msgstr "假定同質"
+
+#~ msgid "Assuming heterogeneity"
+#~ msgstr "假定異質"
+
+#~ msgid "Fixed Effects Estimates"
+#~ msgstr "固定效果估計值"
+
+#~ msgid "Estimated Weights"
+#~ msgstr "估計權重"
+
+#~ msgid "Heterogeneity Estimates(%s)"
+#~ msgstr "異質性估計值（%s）"
+
+#~ msgid "<em>p</em>-values interval(one-sided)"
+#~ msgstr "<em>p</em> 值區間（單尾）"
+
+#~ msgid "Frequency"
+#~ msgstr "頻率"
+
+#~ msgid ""
+#~ "There were no p-value cutoffs after their automatic reduction. The "
+#~ "displayed frequencies correspond to the non-reduced p-value cutoffs."
+#~ msgstr ""
+#~ "經過自動縮減後，沒有剩餘的 p 值分界點。顯示的頻率對應於未縮減的 p 值分界"
+#~ "點。"
+
+#~ msgid ""
+#~ "Cannot compute results. All entries of the p-value variable (%s) must be "
+#~ "between 0 and 1."
+#~ msgstr "無法計算結果。p 值變項（%s）的所有項目必須介於 0 與 1 之間。"
+
+#~ msgid "The p-value cutoffs were set incorectly."
+#~ msgstr "p 值分界點設定不正確。"
+
+#~ msgid "At least one p-value cutoff needs to be set."
+#~ msgstr "至少需要設定一個 p 值分界點。"
+
+#~ msgid "All p-value cutoffs needs to be between 0 and 1."
+#~ msgstr "所有 p 值分界點都必須介於 0 與 1 之間。"
+
+#~ msgid "%1$s is on %2$s scale."
+#~ msgstr "%1$s 位於 %2$s 尺度上。"
+
+#~ msgid "Fixed effects model:"
+#~ msgstr "固定效果模型："
+
+#~ msgid "Random effects model:"
+#~ msgstr "隨機效果模型："
+
+#~ msgid ""
+#~ "%sThe optimizer failed to find a solution. Consider re-specifying the "
+#~ "model or the p-value cutoffs."
+#~ msgstr "%s最佳化器無法找到解。請考慮重新指定模型或 p 值分界點。"
+
+#~ msgid ""
+#~ "%sThe automatic cutoffs selection did not find viable p-value cutoffs. "
+#~ "Please, specify them manually."
+#~ msgstr "%s自動分界點選擇未找到可行的 p 值分界點。請手動指定。"
+
+#~ msgid ""
+#~ "At least one of the p-value intervals contains no effect sizes, leading "
+#~ "to estimation problems. Consider re-specifying the cutoffs."
+#~ msgstr "至少一個 p 值區間不包含效果量，導致估計問題。請考慮重新指定分界點。"
+
+#~ msgid ""
+#~ "At least one of the p-value intervals contains three or fewer effect "
+#~ "sizes, which may lead to estimation problems. Consider re-specifying the "
+#~ "cutoffs."
+#~ msgstr ""
+#~ "至少一個 p 值區間包含三個或更少的效果量，這可能導致估計問題。請考慮重新指"
+#~ "定分界點。"
+
+#~ msgid ""
+#~ "The unadjusted estimate is negative. The selection model default "
+#~ "specification expects that the expected direction of the effect size is "
+#~ "positive. Please, check that you specified the effect sizes correctly or "
+#~ "change the 'Expected effect size direction' option in the 'Model' tab."
+#~ msgstr ""
+#~ "未調整的估計值為負值。選擇模型的預設規格預期效果量的預期方向為正向。請確認"
+#~ "您正確指定了效果量，或在『模型』分頁中變更『預期效果量方向』選項。"
+
+#~ msgid ""
+#~ "The analysis requires both 'Effect Size' and 'Effect Size Standard Error' "
+#~ "to be specified."
+#~ msgstr "此分析需要同時指定『效果量』與『效果量標準誤』。"
+
+#~ msgid "Only the following one-sided p-value cutoffs were used: %s."
+#~ msgstr "僅使用了下列單尾 p 值分界點：%s。"

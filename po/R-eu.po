@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.95.0\n"
-"POT-Creation-Date: 2026-08-22 02:47\n"
+"POT-Creation-Date: 2026-11-07 02:33\n"
 "PO-Revision-Date: 2025-12-23 10:38+0000\n"
 "Last-Translator: Jose Ramon Rueda <joseramon.rueda@ehu.eus>\n"
 "Language-Team: Basque <https://hosted.weblate.org/projects/jasp/"
@@ -696,6 +696,10 @@ msgstr "Behaketa guztiak eragingarriak zirela esanez kendu ziren."
 msgid "Intercept"
 msgstr "Atzeman"
 
+#, fuzzy
+msgid "Heterogeneity test: not available"
+msgstr "Heterogeneotasun maila"
+
 msgid "%1$s: not available"
 msgstr ""
 
@@ -849,8 +853,8 @@ msgstr ""
 "'(1, 2)' lehenengo bi koefizienteak probatzeko."
 
 msgid ""
-"The selected coefficients for %1$s moderation must be between 1 and %2$i (i."
-"e., the number of regression parameters)."
+"The selected coefficients for %1$s moderation must be between 1 and %2$i "
+"(i.e., the number of regression parameters)."
 msgstr ""
 "%1$s moderaziorako hautatutako koefizienteak 1 eta %2$i artean egon behar "
 "dira (hau da, erregresio-parametroen kopurua)."
@@ -993,6 +997,9 @@ msgid ""
 "The %1$s is transformed using %2$s transformation. For nonlinear "
 "transformations, the transformed estimate is interpreted as a median on the "
 "transformed scale."
+msgstr ""
+
+msgid "The pooled effect is evaluated at the average moderator design vector."
 msgstr ""
 
 msgid ""
@@ -2297,167 +2304,321 @@ msgid "Interaction terms are currently not possible in Bayesian meta-analyses."
 msgstr ""
 "Elkarrekintza-terminoak ez dira posible gaur egun Bayes-en metaanalisietan."
 
-msgid "Weight Function (%s)"
-msgstr "Pisu funtzioa (%s)"
+#, fuzzy
+msgid "Model %1$i"
+msgstr "Modeloak"
 
-msgid ""
-"The figure could not be created since one of the estimates is not a number."
-msgstr "Ezin izan da zifra sortu, kalkuluetako bat ez baita zenbaki bat."
+#, fuzzy
+msgid "Model Comparison"
+msgstr "Bikoteka ereduen konparaketa"
 
-msgid "P-value (One-sided)"
-msgstr "P-balioa (alde bakarrekoa)"
+#, fuzzy
+msgid "Model"
+msgstr "Modeloak"
 
-msgid "Publication Probability"
-msgstr "Argitalpen Probabilitatea"
+#, fuzzy
+msgid "AIC weight"
+msgstr "Pisua"
 
-msgid "Mean Model Estimates (%s)"
-msgstr "Batez besteko ereduaren estimazioak (%s)"
-
-msgid "Fixed effects (adjusted)"
-msgstr "Efektu finkoak (egokituak)"
-
-msgid "Random effects (adjusted)"
-msgstr "Ausazko efektuak (egokituta)"
-
-msgid "Model Tests"
-msgstr "Eredu probak"
-
-msgid "Test of Heterogeneity"
-msgstr "Heterogeneotasun proba"
-
-msgid "Note:"
-msgstr "Oharra:"
-
-msgid "Test of Publication Bias"
-msgstr "Argitalpen-alborapenaren proba"
-
-msgid "ChiSq"
-msgstr "ChiSq"
-
-msgid "Assuming homogeneity"
-msgstr "Homogeneotasuna suposatuz"
-
-msgid "Assuming heterogeneity"
-msgstr "Heterogeneotasuna suposatuz"
-
-msgid "Fixed Effects Estimates"
-msgstr "Efektu Finkoen Estimazioak"
-
-msgid "Mean Estimates (%s)"
-msgstr "Batez besteko estimazioak (%s)"
-
-msgid "Estimated Weights"
-msgstr "Pisu estimatuak"
-
-msgid "Heterogeneity Estimates(%s)"
-msgstr "Heterogeneotasun Estimazioak (%s)"
-
-msgid "p-value Frequency"
-msgstr "p-balioa Maiztasuna"
-
-msgid "<em>p</em>-values interval(one-sided)"
-msgstr "<em>p</em>-balioen tartea (alde bakarrekoa)"
-
-msgid "Frequency"
-msgstr "Maiztasuna"
-
-msgid ""
-"There were no p-value cutoffs after their automatic reduction. The displayed "
-"frequencies correspond to the non-reduced p-value cutoffs."
+msgid "AICc weight"
 msgstr ""
-"Ez zegoen p-balio mugarik haien murrizketa automatikoaren ondoren. "
-"Bistaratutako maiztasunak murriztu gabeko p-balio mugak dira."
 
-msgid ""
-"Cannot compute results. All entries of the p-value variable (%s) must be "
-"between 0 and 1."
+#, fuzzy
+msgid "BIC weight"
+msgstr "Pisua"
+
+msgid "Add at least one weight-function model in the Custom section."
 msgstr ""
-"Ezin dira emaitzak kalkulatu. p-balio aldagaiaren (%s) sarrera guztiak 0 eta "
-"1 artean egon behar dira."
 
-msgid ""
-"Cannot compute results. All entries of the correlation coefficient variable "
-"(%s) must be between -1 and 1."
-msgstr ""
-"Ezin dira emaitzak kalkulatu. Korrelazio-koefizientearen aldagaiaren (%s) "
-"sarrera guztiak -1 eta 1 artean egon behar dira."
+#, fuzzy
+msgid "Model %1$i: %2$s"
+msgstr "%1$s: %2$s"
 
-msgid ""
-"Cannot compute results. All entries of the sample size variable (%s) must be "
-"greater than four."
-msgstr ""
-"Ezin dira emaitzak kalkulatu. Laginaren tamaina aldagaiaren (%s) sarrera "
-"guztiak lau baino handiagoak izan behar dira."
-
-msgid "The p-value cutoffs were set incorectly."
-msgstr "p-balioaren mugak gaizki ezarri ziren."
-
-msgid "At least one p-value cutoff needs to be set."
-msgstr "Gutxienez p-balioaren muga bat ezarri behar da."
-
-msgid "All p-value cutoffs needs to be between 0 and 1."
-msgstr "p-balioaren muga guztiak 0 eta 1 artean egon behar dira."
-
-msgid "95%% Confidence Interval"
-msgstr "%%95eko konfiantza-tartea"
-
-msgid "%1$s is on %2$s scale."
+#, fuzzy
+msgid "Model %1$i, %2$s: %3$s"
 msgstr "%1$s %2$s eskalan dago."
 
-msgid "Fixed effects model:"
-msgstr "Efektu finkoen eredua:"
+#, fuzzy
+msgid "Model %1$i: %2$s: %3$s"
+msgstr "%1$s %2$s eskalan dago."
 
-msgid "Random effects model:"
-msgstr "Ausazko efektuen eredua:"
+msgid "Assign a sample-size variable for this precision measure."
+msgstr ""
 
 msgid ""
-"%sThe optimizer failed to find a solution. Consider re-specifying the model "
-"or the p-value cutoffs."
+"No estimates are marked as subject to selection. Use the unadjusted model "
+"(None) or choose a different unaffected level."
 msgstr ""
-"%sOptimizatzaileak ez du irtenbiderik aurkitu. Kontuan hartu eredua edo p-"
-"balio mugak berriro zehaztea."
 
 msgid ""
-"%sThe automatic cutoffs selection did not find viable p-value cutoffs. "
-"Please, specify them manually."
+"The reference interval or an interval with an estimated weight contains no "
+"selected estimates. Change the cutoffs or fix the empty interval's weight; "
+"intervals are not merged automatically."
 msgstr ""
-"%sMuga automatikoen hautaketak ez du p-balioaren muga bideragarririk "
-"aurkitu. Mesedez, zehaztu itzazu eskuz."
 
 msgid ""
-"At least one of the p-value intervals contains no effect sizes, leading to "
-"estimation problems. Consider re-specifying the cutoffs."
+"Selection model fitting failed. In Advanced Options, try a different "
+"optimizer or increase the maximum number of iterations. Also check the "
+"cutoffs and fixed selection parameters."
 msgstr ""
-"Gutxienez p-balio tarte batek ez du efektu-tamainarik, eta horrek estimazio-"
-"arazoak sortzen ditu. Kontuan hartu mugak berriro zehaztea."
 
 msgid ""
-"At least one of the p-value intervals contains three or fewer effect sizes, "
-"which may lead to estimation problems. Consider re-specifying the cutoffs."
+"Enter comma-separated numbers, optionally enclosed in parentheses. Use NA "
+"for parameters to estimate."
 msgstr ""
-"Gutxienez p-balio tarte batek hiru efektu-tamaina edo gutxiago ditu, eta "
-"horrek estimazio-arazoak sor ditzake. Kontuan hartu mugak berriro zehaztea."
+
+#, fuzzy
+msgid "All specified numbers must be finite."
+msgstr "Errore estandar guztiak positiboak izan behar dira."
 
 msgid ""
-"The unadjusted estimate is negative. The selection model default "
-"specification expects that the expected direction of the effect size is "
-"positive. Please, check that you specified the effect sizes correctly or "
-"change the 'Expected effect size direction' option in the 'Model' tab."
+"Step-function cutoffs must be strictly increasing and greater than 0, with a "
+"maximum of 1."
 msgstr ""
-"Doitu gabeko estimazioa negatiboa da. Hautapen-ereduaren lehenetsitako "
-"zehaztapenak efektu-tamainaren espero den norabidea positiboa izatea espero "
-"du. Mesedez, egiaztatu efektu-tamainak behar bezala zehaztu dituzula edo "
-"aldatu 'Espero den efektu-tamainaren norabidea' aukera 'Eredua' fitxan."
+
+msgid "Specify at least one cutoff below 1."
+msgstr ""
 
 msgid ""
-"The analysis requires both 'Effect Size' and 'Effect Size Standard Error' to "
-"be specified."
+"Beta truncation requires two increasing p-value cutoffs strictly between 0 "
+"and 1."
 msgstr ""
-"Analisiak 'Efektuaren Tamaina' eta 'Efektuaren Tamainaren Errore Estandarra' "
-"zehaztu behar ditu."
 
-msgid "Only the following one-sided p-value cutoffs were used: %s."
-msgstr "Alde bakarreko p-balioaren muga hauek bakarrik erabili ziren: %s."
+msgid "Specify one effect-size cutoff for the truncated model."
+msgstr ""
+
+msgid ""
+"Specify a single p-value threshold strictly between 0 and 1, or leave the "
+"threshold empty."
+msgstr ""
+
+msgid ""
+"This model requires %1$i selection parameters. Use NA for each parameter to "
+"estimate, or leave the field empty to estimate all parameters."
+msgstr ""
+
+msgid ""
+"Selection parameters must be non-negative; beta parameters must be strictly "
+"positive."
+msgstr ""
+
+msgid "The first step-function weight must equal 1 (the reference interval)."
+msgstr ""
+
+msgid ""
+"Ordinality requires estimated non-reference weights. Clear the parameters or "
+"turn off ordinality."
+msgstr ""
+
+#, fuzzy
+msgid "Invalid specification"
+msgstr "Modeloaren zehaztapena"
+
+#, fuzzy
+msgid "None (unadjusted)"
+msgstr "Ausazko efektuak (egokituta)"
+
+#, fuzzy
+msgid "Step function"
+msgstr "Pisu funtzioa"
+
+msgid "Beta"
+msgstr ""
+
+msgid "Half-normal"
+msgstr ""
+
+#, fuzzy
+msgid "Negative exponential"
+msgstr "esponentziala"
+
+msgid "Logistic"
+msgstr ""
+
+msgid "Negative exponential power"
+msgstr ""
+
+#, fuzzy
+msgid "Truncation"
+msgstr "Iterazioa"
+
+#, fuzzy
+msgid "Estimated truncation"
+msgstr "Ikerketaren efektu estimatuak"
+
+#, fuzzy
+msgid "Variance"
+msgstr "Kobariantza"
+
+#, fuzzy
+msgid "Inverse sample size"
+msgstr "Laginaren tamaina"
+
+msgid "Inverse square root sample size"
+msgstr ""
+
+msgid "; ordinal"
+msgstr ""
+
+msgid "; two-sided"
+msgstr ""
+
+#, fuzzy
+msgid "; one-sided"
+msgstr "P-balioa (alde bakarrekoa)"
+
+#, fuzzy
+msgid "; sample size: %1$s"
+msgstr "Laginaren tamaina"
+
+msgid "; unscaled precision"
+msgstr ""
+
+#, fuzzy
+msgid "Publication bias test: not available"
+msgstr "Argitalpen-alborapena: %1$s"
+
+msgid "Precision index: %1$.3f"
+msgstr ""
+
+#, fuzzy
+msgid "P-value"
+msgstr "P-Balioa"
+
+#, fuzzy
+msgid "P-value (two-sided)"
+msgstr "P-balioa (alde bakarrekoa)"
+
+#, fuzzy
+msgid "P-value (one-sided)"
+msgstr "P-balioa (alde bakarrekoa)"
+
+msgid "Relative selection likelihood"
+msgstr ""
+
+msgid "No fitted model is available for profile likelihood diagnostics."
+msgstr ""
+
+msgid "The model could not be fitted: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Profile likelihood diagnostics are not available for ordinal selection "
+"models."
+msgstr ""
+"Profilaren probabilitatea ez dago eskuragarri heterogeneotasunean meta-"
+"erregresioa duten ereduetarako."
+
+msgid "There are no free heterogeneity or selection parameters to profile."
+msgstr ""
+
+msgid "Selection Parameter %1$i"
+msgstr ""
+
+msgid "Fewer than two finite profile likelihood values are available."
+msgstr ""
+
+msgid "R code unavailable until the specification is valid: %1$s"
+msgstr ""
+
+msgid "The module reported: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid "R Code"
+msgstr "RoBMA R kodea"
+
+msgid ""
+"Selection p-values were supplied rather than calculated from effect sizes "
+"and standard errors."
+msgstr ""
+
+msgid ""
+"Coefficient standard errors could not be estimated. Wald tests and "
+"coefficient confidence intervals are unavailable; review the fitting "
+"warnings before interpreting this model."
+msgstr ""
+
+msgid ""
+"The publication-bias test is not applicable with fixed selection parameters."
+msgstr ""
+
+msgid ""
+"The heterogeneity likelihood-ratio test could not be computed. Review the "
+"fitting warnings before interpreting this model."
+msgstr ""
+
+msgid "Heterogeneity confidence interval unavailable: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid "Weight Function Summary"
+msgstr "Pisu funtzioa"
+
+#, fuzzy
+msgid "Weight Function Estimates"
+msgstr "Pisu funtzioa (%s)"
+
+msgid "The unadjusted model has no selection parameters."
+msgstr ""
+
+#, fuzzy
+msgid "Selection Parameter Estimates"
+msgstr "H₁ Inbutuaren Parametroen Estimazioak"
+
+msgid "Selection uses two-sided p-values."
+msgstr ""
+
+#, fuzzy
+msgid "Expected effect direction: %1$s."
+msgstr "Efektuaren tamaina (koefizientea: %1$s)"
+
+msgid ""
+"Fixed selection parameters have no standard errors or confidence intervals."
+msgstr ""
+
+#, fuzzy
+msgid "P-Value Frequencies"
+msgstr "p-balioa Maiztasuna"
+
+msgid "P-value frequencies require valid p-value cutoffs and study p-values."
+msgstr ""
+
+#, fuzzy
+msgid "Selected Estimates"
+msgstr "Karratuaren estimazioa"
+
+msgid "P-value frequencies include only estimates to which selection applies."
+msgstr ""
+
+#, fuzzy
+msgid "Model Results"
+msgstr "Eredu probak"
+
+msgid "No fitted model is available for the requested selection."
+msgstr ""
+
+msgid ""
+"The unaffected level is not present in the no-selection variable. Choose an "
+"available level."
+msgstr ""
+
+msgid "P-values must be finite, greater than zero, and at most one."
+msgstr ""
+
+msgid ""
+"Sample-size variable not found in the data. Assign an available sample-size "
+"variable."
+msgstr ""
+
+msgid "Sample sizes must be finite and greater than zero."
+msgstr ""
+
+msgid ""
+"Standard errors are too small or too large to yield finite positive sampling "
+"variances. Rescale effect sizes and standard errors."
+msgstr ""
 
 msgid "Estimating: %1$s"
 msgstr "Kalkulatzen: %1$s"
@@ -2498,6 +2659,23 @@ msgstr "Koefizientearen laburpena"
 msgid "Computed Estimates Summary"
 msgstr "Kalkulatutako Estimazioen Laburpena"
 
+msgid ""
+"Cannot compute results. All entries of the correlation coefficient variable "
+"(%s) must be between -1 and 1."
+msgstr ""
+"Ezin dira emaitzak kalkulatu. Korrelazio-koefizientearen aldagaiaren (%s) "
+"sarrera guztiak -1 eta 1 artean egon behar dira."
+
+msgid ""
+"Cannot compute results. All entries of the sample size variable (%s) must be "
+"greater than four."
+msgstr ""
+"Ezin dira emaitzak kalkulatu. Laginaren tamaina aldagaiaren (%s) sarrera "
+"guztiak lau baino handiagoak izan behar dira."
+
+msgid "95%% Confidence Interval"
+msgstr "%%95eko konfiantza-tartea"
+
 msgid "Error: There were not enough adequately powered studies (k = %1$i)"
 msgstr ""
 "Errorea: Ez zegoen behar adina ikerketa behar bezala indartuta (k = %1$i)"
@@ -2505,8 +2683,17 @@ msgstr ""
 msgid "Note: There were %1$i adequately powered studies"
 msgstr "Oharra: %1$i ikerketa behar bezala indartuak izan ziren"
 
+msgid "Model Tests"
+msgstr "Eredu probak"
+
 msgid "Test of Effect"
 msgstr "Efektuaren proba"
+
+msgid "Test of Publication Bias"
+msgstr "Argitalpen-alborapenaren proba"
+
+msgid "Mean Estimates (%s)"
+msgstr "Batez besteko estimazioak (%s)"
 
 msgid "Multiplicative Heterogeneity Estimates"
 msgstr "Heterogeneotasun biderkatzailearen estimazioak"
@@ -2519,6 +2706,13 @@ msgstr "Cohenen d"
 
 msgid "Fisher's z"
 msgstr "Fisherren z"
+
+msgid "Mean Model Estimates (%s)"
+msgstr "Batez besteko ereduaren estimazioak (%s)"
+
+msgid ""
+"The figure could not be created since one of the estimates is not a number."
+msgstr "Ezin izan da zifra sortu, kalkuluetako bat ez baita zenbaki bat."
 
 msgid ""
 "WAAP was not estimated: There were only %1$i adequately powered studies "
@@ -2568,6 +2762,156 @@ msgid_plural ""
 "'Maximum tree depth'."
 msgstr[0] ""
 msgstr[1] ""
+
+msgid ""
+"The selection weight for p-value interval %1$s is fixed at zero, but the "
+"interval contains %2$i selected estimate. Use a positive weight or NA to "
+"estimate the weight."
+msgid_plural ""
+"The selection weight for p-value interval %1$s is fixed at zero, but the "
+"interval contains %2$i selected estimates. Use a positive weight or NA to "
+"estimate the weight."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Selection applies to %1$i estimate."
+msgid_plural "Selection applies to %1$i estimates."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "%1$i estimate at level '%2$s' is unaffected."
+msgid_plural "%1$i estimates at level '%2$s' are unaffected."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid ""
+"For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. "
+"This affects %3$i selected estimate."
+msgid_plural ""
+"For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. "
+"This affects %3$i selected estimates."
+msgstr[0] ""
+msgstr[1] ""
+
+#~ msgid "Publication Probability"
+#~ msgstr "Argitalpen Probabilitatea"
+
+#~ msgid "Fixed effects (adjusted)"
+#~ msgstr "Efektu finkoak (egokituak)"
+
+#~ msgid "Test of Heterogeneity"
+#~ msgstr "Heterogeneotasun proba"
+
+#~ msgid "Note:"
+#~ msgstr "Oharra:"
+
+#~ msgid "ChiSq"
+#~ msgstr "ChiSq"
+
+#~ msgid "Assuming homogeneity"
+#~ msgstr "Homogeneotasuna suposatuz"
+
+#~ msgid "Assuming heterogeneity"
+#~ msgstr "Heterogeneotasuna suposatuz"
+
+#~ msgid "Fixed Effects Estimates"
+#~ msgstr "Efektu Finkoen Estimazioak"
+
+#~ msgid "Estimated Weights"
+#~ msgstr "Pisu estimatuak"
+
+#~ msgid "Heterogeneity Estimates(%s)"
+#~ msgstr "Heterogeneotasun Estimazioak (%s)"
+
+#~ msgid "<em>p</em>-values interval(one-sided)"
+#~ msgstr "<em>p</em>-balioen tartea (alde bakarrekoa)"
+
+#~ msgid "Frequency"
+#~ msgstr "Maiztasuna"
+
+#~ msgid ""
+#~ "There were no p-value cutoffs after their automatic reduction. The "
+#~ "displayed frequencies correspond to the non-reduced p-value cutoffs."
+#~ msgstr ""
+#~ "Ez zegoen p-balio mugarik haien murrizketa automatikoaren ondoren. "
+#~ "Bistaratutako maiztasunak murriztu gabeko p-balio mugak dira."
+
+#~ msgid ""
+#~ "Cannot compute results. All entries of the p-value variable (%s) must be "
+#~ "between 0 and 1."
+#~ msgstr ""
+#~ "Ezin dira emaitzak kalkulatu. p-balio aldagaiaren (%s) sarrera guztiak 0 "
+#~ "eta 1 artean egon behar dira."
+
+#~ msgid "The p-value cutoffs were set incorectly."
+#~ msgstr "p-balioaren mugak gaizki ezarri ziren."
+
+#~ msgid "At least one p-value cutoff needs to be set."
+#~ msgstr "Gutxienez p-balioaren muga bat ezarri behar da."
+
+#~ msgid "All p-value cutoffs needs to be between 0 and 1."
+#~ msgstr "p-balioaren muga guztiak 0 eta 1 artean egon behar dira."
+
+#~ msgid "%1$s is on %2$s scale."
+#~ msgstr "%1$s %2$s eskalan dago."
+
+#~ msgid "Fixed effects model:"
+#~ msgstr "Efektu finkoen eredua:"
+
+#~ msgid "Random effects model:"
+#~ msgstr "Ausazko efektuen eredua:"
+
+#~ msgid ""
+#~ "%sThe optimizer failed to find a solution. Consider re-specifying the "
+#~ "model or the p-value cutoffs."
+#~ msgstr ""
+#~ "%sOptimizatzaileak ez du irtenbiderik aurkitu. Kontuan hartu eredua edo p-"
+#~ "balio mugak berriro zehaztea."
+
+#~ msgid ""
+#~ "%sThe automatic cutoffs selection did not find viable p-value cutoffs. "
+#~ "Please, specify them manually."
+#~ msgstr ""
+#~ "%sMuga automatikoen hautaketak ez du p-balioaren muga bideragarririk "
+#~ "aurkitu. Mesedez, zehaztu itzazu eskuz."
+
+#~ msgid ""
+#~ "At least one of the p-value intervals contains no effect sizes, leading "
+#~ "to estimation problems. Consider re-specifying the cutoffs."
+#~ msgstr ""
+#~ "Gutxienez p-balio tarte batek ez du efektu-tamainarik, eta horrek "
+#~ "estimazio-arazoak sortzen ditu. Kontuan hartu mugak berriro zehaztea."
+
+#~ msgid ""
+#~ "At least one of the p-value intervals contains three or fewer effect "
+#~ "sizes, which may lead to estimation problems. Consider re-specifying the "
+#~ "cutoffs."
+#~ msgstr ""
+#~ "Gutxienez p-balio tarte batek hiru efektu-tamaina edo gutxiago ditu, eta "
+#~ "horrek estimazio-arazoak sor ditzake. Kontuan hartu mugak berriro "
+#~ "zehaztea."
+
+#~ msgid ""
+#~ "The unadjusted estimate is negative. The selection model default "
+#~ "specification expects that the expected direction of the effect size is "
+#~ "positive. Please, check that you specified the effect sizes correctly or "
+#~ "change the 'Expected effect size direction' option in the 'Model' tab."
+#~ msgstr ""
+#~ "Doitu gabeko estimazioa negatiboa da. Hautapen-ereduaren lehenetsitako "
+#~ "zehaztapenak efektu-tamainaren espero den norabidea positiboa izatea "
+#~ "espero du. Mesedez, egiaztatu efektu-tamainak behar bezala zehaztu "
+#~ "dituzula edo aldatu 'Espero den efektu-tamainaren norabidea' aukera "
+#~ "'Eredua' fitxan."
+
+#~ msgid ""
+#~ "The analysis requires both 'Effect Size' and 'Effect Size Standard Error' "
+#~ "to be specified."
+#~ msgstr ""
+#~ "Analisiak 'Efektuaren Tamaina' eta 'Efektuaren Tamainaren Errore "
+#~ "Estandarra' zehaztu behar ditu."
+
+#~ msgid "Only the following one-sided p-value cutoffs were used: %s."
+#~ msgstr "Alde bakarreko p-balioaren muga hauek bakarrik erabili ziren: %s."
 
 #~ msgid ""
 #~ "Casewise diagnostics are not available for models that contain meta-"

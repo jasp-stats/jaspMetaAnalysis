@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: jaspMetaAnalysis 0.97.5\n"
-"POT-Creation-Date: 2026-08-22 02:47\n"
+"Project-Id-Version: jaspMetaAnalysis 0.98.0\n"
+"POT-Creation-Date: 2026-11-07 02:33\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -551,6 +551,9 @@ msgstr ""
 msgid "Intercept"
 msgstr ""
 
+msgid "Heterogeneity test: not available"
+msgstr ""
+
 msgid "%1$s: not available"
 msgstr ""
 
@@ -783,6 +786,9 @@ msgid "NAs in the %1$s were introduced due to the %2$s transformation. Please ve
 msgstr ""
 
 msgid "The %1$s is transformed using %2$s transformation. For nonlinear transformations, the transformed estimate is interpreted as a median on the transformed scale."
+msgstr ""
+
+msgid "The pooled effect is evaluated at the average moderator design vector."
 msgstr ""
 
 msgid "The pooled effect size corresponds to the weighted average effect across studies."
@@ -1817,121 +1823,247 @@ msgstr ""
 msgid "Interaction terms are currently not possible in Bayesian meta-analyses."
 msgstr ""
 
-msgid "Weight Function (%s)"
+msgid "Model %1$i"
 msgstr ""
 
-msgid "The figure could not be created since one of the estimates is not a number."
+msgid "Model Comparison"
 msgstr ""
 
-msgid "P-value (One-sided)"
+msgid "Model"
 msgstr ""
 
-msgid "Publication Probability"
+msgid "AIC weight"
 msgstr ""
 
-msgid "Mean Model Estimates (%s)"
+msgid "AICc weight"
 msgstr ""
 
-msgid "Fixed effects (adjusted)"
+msgid "BIC weight"
 msgstr ""
 
-msgid "Random effects (adjusted)"
+msgid "Add at least one weight-function model in the Custom section."
 msgstr ""
 
-msgid "Model Tests"
+msgid "Model %1$i: %2$s"
 msgstr ""
 
-msgid "Test of Heterogeneity"
+msgid "Model %1$i, %2$s: %3$s"
 msgstr ""
 
-msgid "Note:"
+msgid "Model %1$i: %2$s: %3$s"
 msgstr ""
 
-msgid "Test of Publication Bias"
+msgid "Assign a sample-size variable for this precision measure."
 msgstr ""
 
-msgid "ChiSq"
+msgid "No estimates are marked as subject to selection. Use the unadjusted model (None) or choose a different unaffected level."
 msgstr ""
 
-msgid "Assuming homogeneity"
+msgid "The reference interval or an interval with an estimated weight contains no selected estimates. Change the cutoffs or fix the empty interval's weight; intervals are not merged automatically."
 msgstr ""
 
-msgid "Assuming heterogeneity"
+msgid "Selection model fitting failed. In Advanced Options, try a different optimizer or increase the maximum number of iterations. Also check the cutoffs and fixed selection parameters."
 msgstr ""
 
-msgid "Fixed Effects Estimates"
+msgid "Enter comma-separated numbers, optionally enclosed in parentheses. Use NA for parameters to estimate."
 msgstr ""
 
-msgid "Mean Estimates (%s)"
+msgid "All specified numbers must be finite."
 msgstr ""
 
-msgid "Estimated Weights"
+msgid "Step-function cutoffs must be strictly increasing and greater than 0, with a maximum of 1."
 msgstr ""
 
-msgid "Heterogeneity Estimates(%s)"
+msgid "Specify at least one cutoff below 1."
 msgstr ""
 
-msgid "p-value Frequency"
+msgid "Beta truncation requires two increasing p-value cutoffs strictly between 0 and 1."
 msgstr ""
 
-msgid "<em>p</em>-values interval(one-sided)"
+msgid "Specify one effect-size cutoff for the truncated model."
 msgstr ""
 
-msgid "Frequency"
+msgid "Specify a single p-value threshold strictly between 0 and 1, or leave the threshold empty."
 msgstr ""
 
-msgid "There were no p-value cutoffs after their automatic reduction. The displayed frequencies correspond to the non-reduced p-value cutoffs."
+msgid "This model requires %1$i selection parameters. Use NA for each parameter to estimate, or leave the field empty to estimate all parameters."
 msgstr ""
 
-msgid "Cannot compute results. All entries of the p-value variable (%s) must be between 0 and 1."
+msgid "Selection parameters must be non-negative; beta parameters must be strictly positive."
 msgstr ""
 
-msgid "Cannot compute results. All entries of the correlation coefficient variable (%s) must be between -1 and 1."
+msgid "The first step-function weight must equal 1 (the reference interval)."
 msgstr ""
 
-msgid "Cannot compute results. All entries of the sample size variable (%s) must be greater than four."
+msgid "Ordinality requires estimated non-reference weights. Clear the parameters or turn off ordinality."
 msgstr ""
 
-msgid "The p-value cutoffs were set incorectly."
+msgid "Invalid specification"
 msgstr ""
 
-msgid "At least one p-value cutoff needs to be set."
+msgid "None (unadjusted)"
 msgstr ""
 
-msgid "All p-value cutoffs needs to be between 0 and 1."
+msgid "Step function"
 msgstr ""
 
-msgid "95%% Confidence Interval"
+msgid "Beta"
 msgstr ""
 
-msgid "%1$s is on %2$s scale."
+msgid "Half-normal"
 msgstr ""
 
-msgid "Fixed effects model:"
+msgid "Negative exponential"
 msgstr ""
 
-msgid "Random effects model:"
+msgid "Logistic"
 msgstr ""
 
-msgid "%sThe optimizer failed to find a solution. Consider re-specifying the model or the p-value cutoffs."
+msgid "Negative exponential power"
 msgstr ""
 
-msgid "%sThe automatic cutoffs selection did not find viable p-value cutoffs. Please, specify them manually."
+msgid "Truncation"
 msgstr ""
 
-msgid "At least one of the p-value intervals contains no effect sizes, leading to estimation problems. Consider re-specifying the cutoffs."
+msgid "Estimated truncation"
 msgstr ""
 
-msgid "At least one of the p-value intervals contains three or fewer effect sizes, which may lead to estimation problems. Consider re-specifying the cutoffs."
+msgid "Variance"
 msgstr ""
 
-msgid "The unadjusted estimate is negative. The selection model default specification expects that the expected direction of the effect size is positive. Please, check that you specified the effect sizes correctly or change the 'Expected effect size direction' option in the 'Model' tab."
+msgid "Inverse sample size"
 msgstr ""
 
-msgid "The analysis requires both 'Effect Size' and 'Effect Size Standard Error' to be specified."
+msgid "Inverse square root sample size"
 msgstr ""
 
-msgid "Only the following one-sided p-value cutoffs were used: %s."
+msgid "; ordinal"
+msgstr ""
+
+msgid "; two-sided"
+msgstr ""
+
+msgid "; one-sided"
+msgstr ""
+
+msgid "; sample size: %1$s"
+msgstr ""
+
+msgid "; unscaled precision"
+msgstr ""
+
+msgid "Publication bias test: not available"
+msgstr ""
+
+msgid "Precision index: %1$.3f"
+msgstr ""
+
+msgid "P-value"
+msgstr ""
+
+msgid "P-value (two-sided)"
+msgstr ""
+
+msgid "P-value (one-sided)"
+msgstr ""
+
+msgid "Relative selection likelihood"
+msgstr ""
+
+msgid "No fitted model is available for profile likelihood diagnostics."
+msgstr ""
+
+msgid "The model could not be fitted: %1$s"
+msgstr ""
+
+msgid "Profile likelihood diagnostics are not available for ordinal selection models."
+msgstr ""
+
+msgid "There are no free heterogeneity or selection parameters to profile."
+msgstr ""
+
+msgid "Selection Parameter %1$i"
+msgstr ""
+
+msgid "Fewer than two finite profile likelihood values are available."
+msgstr ""
+
+msgid "R code unavailable until the specification is valid: %1$s"
+msgstr ""
+
+msgid "The module reported: %1$s"
+msgstr ""
+
+msgid "R Code"
+msgstr ""
+
+msgid "Selection p-values were supplied rather than calculated from effect sizes and standard errors."
+msgstr ""
+
+msgid "Coefficient standard errors could not be estimated. Wald tests and coefficient confidence intervals are unavailable; review the fitting warnings before interpreting this model."
+msgstr ""
+
+msgid "The publication-bias test is not applicable with fixed selection parameters."
+msgstr ""
+
+msgid "The heterogeneity likelihood-ratio test could not be computed. Review the fitting warnings before interpreting this model."
+msgstr ""
+
+msgid "Heterogeneity confidence interval unavailable: %1$s"
+msgstr ""
+
+msgid "Weight Function Summary"
+msgstr ""
+
+msgid "Weight Function Estimates"
+msgstr ""
+
+msgid "The unadjusted model has no selection parameters."
+msgstr ""
+
+msgid "Selection Parameter Estimates"
+msgstr ""
+
+msgid "Selection uses two-sided p-values."
+msgstr ""
+
+msgid "Expected effect direction: %1$s."
+msgstr ""
+
+msgid "Fixed selection parameters have no standard errors or confidence intervals."
+msgstr ""
+
+msgid "P-Value Frequencies"
+msgstr ""
+
+msgid "P-value frequencies require valid p-value cutoffs and study p-values."
+msgstr ""
+
+msgid "Selected Estimates"
+msgstr ""
+
+msgid "P-value frequencies include only estimates to which selection applies."
+msgstr ""
+
+msgid "Model Results"
+msgstr ""
+
+msgid "No fitted model is available for the requested selection."
+msgstr ""
+
+msgid "The unaffected level is not present in the no-selection variable. Choose an available level."
+msgstr ""
+
+msgid "P-values must be finite, greater than zero, and at most one."
+msgstr ""
+
+msgid "Sample-size variable not found in the data. Assign an available sample-size variable."
+msgstr ""
+
+msgid "Sample sizes must be finite and greater than zero."
+msgstr ""
+
+msgid "Standard errors are too small or too large to yield finite positive sampling variances. Rescale effect sizes and standard errors."
 msgstr ""
 
 msgid "Estimating: %1$s"
@@ -1973,13 +2105,31 @@ msgstr ""
 msgid "Computed Estimates Summary"
 msgstr ""
 
+msgid "Cannot compute results. All entries of the correlation coefficient variable (%s) must be between -1 and 1."
+msgstr ""
+
+msgid "Cannot compute results. All entries of the sample size variable (%s) must be greater than four."
+msgstr ""
+
+msgid "95%% Confidence Interval"
+msgstr ""
+
 msgid "Error: There were not enough adequately powered studies (k = %1$i)"
 msgstr ""
 
 msgid "Note: There were %1$i adequately powered studies"
 msgstr ""
 
+msgid "Model Tests"
+msgstr ""
+
 msgid "Test of Effect"
+msgstr ""
+
+msgid "Test of Publication Bias"
+msgstr ""
+
+msgid "Mean Estimates (%s)"
 msgstr ""
 
 msgid "Multiplicative Heterogeneity Estimates"
@@ -1992,6 +2142,12 @@ msgid "Cohen's d"
 msgstr ""
 
 msgid "Fisher's z"
+msgstr ""
+
+msgid "Mean Model Estimates (%s)"
+msgstr ""
+
+msgid "The figure could not be created since one of the estimates is not a number."
 msgstr ""
 
 msgid "WAAP was not estimated: There were only %1$i adequately powered studies (power > 80%%)."
@@ -2017,5 +2173,25 @@ msgstr[1]    ""
 
 msgid        "The Hamiltonian Monte Carlo procedure might be inefficient -- %i transition exceeded the maximum tree depth. This can be solved by carefully increasing 'Maximum tree depth'."
 msgid_plural "The Hamiltonian Monte Carlo procedure might be inefficient -- %i transitions exceeded the maximum tree depth. This can be solved by carefully increasing 'Maximum tree depth'."
+msgstr[0]    ""
+msgstr[1]    ""
+
+msgid        "The selection weight for p-value interval %1$s is fixed at zero, but the interval contains %2$i selected estimate. Use a positive weight or NA to estimate the weight."
+msgid_plural "The selection weight for p-value interval %1$s is fixed at zero, but the interval contains %2$i selected estimates. Use a positive weight or NA to estimate the weight."
+msgstr[0]    ""
+msgstr[1]    ""
+
+msgid        "Selection applies to %1$i estimate."
+msgid_plural "Selection applies to %1$i estimates."
+msgstr[0]    ""
+msgstr[1]    ""
+
+msgid        "%1$i estimate at level '%2$s' is unaffected."
+msgid_plural "%1$i estimates at level '%2$s' are unaffected."
+msgstr[0]    ""
+msgstr[1]    ""
+
+msgid        "For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. This affects %3$i selected estimate."
+msgid_plural "For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. This affects %3$i selected estimates."
 msgstr[0]    ""
 msgstr[1]    ""

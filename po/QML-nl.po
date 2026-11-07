@@ -193,18 +193,6 @@ msgid "Profile Random Effects Parameters (takes time)"
 msgstr "Portretteer aselecte-effectenparameters (kost tijd)"
 
 msgctxt "SelectionModels|"
-msgid "Effect sizes & SE"
-msgstr "Effectgroottes & SE"
-
-msgctxt "SelectionModels|"
-msgid "Correlations & N"
-msgstr "Correlaties & N"
-
-msgctxt "SelectionModels|"
-msgid "Correlation"
-msgstr "Correlatie"
-
-msgctxt "SelectionModels|"
 msgid "Effect Size"
 msgstr "Effectgrootte"
 
@@ -213,80 +201,12 @@ msgid "Effect Size Standard Error"
 msgstr "Standaardfout effectgrootte"
 
 msgctxt "SelectionModels|"
-msgid "N"
-msgstr "N"
-
-msgctxt "SelectionModels|"
-msgid "P-value (one-sided)"
-msgstr "P-waarde (eenzijdig)"
-
-msgctxt "SelectionModels|"
-msgid "Model"
-msgstr "Model"
-
-msgctxt "SelectionModels|"
-msgid "P-value cutoffs"
-msgstr "P-waarde grenzen"
-
-msgctxt "SelectionModels|"
-msgid "Two-sided selection"
-msgstr "Twee-zijdige selectie"
-
-msgctxt "SelectionModels|"
-msgid "Automatically join p-value intervals"
-msgstr "Automatisch p-waarde intervallen samenvoegen"
-
-msgctxt "SelectionModels|"
 msgid "Positive"
 msgstr "Positief"
 
 msgctxt "SelectionModels|"
 msgid "Negative"
 msgstr "Negatief"
-
-msgctxt "SelectionModels|"
-msgid "Cohen's d"
-msgstr "Cohen's d"
-
-msgctxt "SelectionModels|"
-msgid "Fisher's z"
-msgstr "Fisher's z"
-
-msgctxt "SelectionModels|"
-msgid "Inference"
-msgstr "Inferentie"
-
-msgctxt "SelectionModels|"
-msgid "Fixed Effects"
-msgstr "Gefixeerde effecten"
-
-msgctxt "SelectionModels|"
-msgid "Random Effects"
-msgstr "Willekeurige effecten"
-
-msgctxt "SelectionModels|"
-msgid "Plots"
-msgstr "Grafieken"
-
-msgctxt "SelectionModels|"
-msgid "Weight Function"
-msgstr "Gewichtsfunctie"
-
-msgctxt "SelectionModels|"
-msgid "Fixed effects"
-msgstr "Gefixeerde effecten"
-
-msgctxt "SelectionModels|"
-msgid "Random effects"
-msgstr "Willekeurige effecten"
-
-msgctxt "SelectionModels|"
-msgid "Rescale x-axis"
-msgstr "Herschaal x-as"
-
-msgctxt "SelectionModels|"
-msgid "Mean model estimates"
-msgstr "Gemiddelde model schattingen"
 
 msgctxt "Description|"
 msgid "Synthesize evidence across multiple studies"
@@ -1048,23 +968,11 @@ msgctxt "PetPeese|"
 msgid "Transform correlations to"
 msgstr "Transformeer correlaties naar"
 
-msgctxt "SelectionModels|"
-msgid "Transform correlations to"
-msgstr "Transformeer correlaties naar"
-
 msgctxt "WaapWls|"
 msgid "Transform correlations to"
 msgstr "Transformeer correlaties naar"
 
-msgctxt "SelectionModels|"
-msgid "Expected direction of effect sizes"
-msgstr "Verwachte richting van de effectgroottes"
-
 msgctxt "PetPeese|"
-msgid "Measure"
-msgstr "Maat"
-
-msgctxt "SelectionModels|"
 msgid "Measure"
 msgstr "Maat"
 
@@ -1320,22 +1228,6 @@ msgctxt "PredictionPerformancePriors|"
 msgid "T"
 msgstr "T"
 
-msgctxt "SelectionModels|"
-msgid "P-value frequency table"
-msgstr "P-waarde frequentietabel"
-
-msgctxt "SelectionModels|"
-msgid "Mean estimates table"
-msgstr "Tabel met gemiddelde schattingen"
-
-msgctxt "SelectionModels|"
-msgid "Estimated weights table"
-msgstr "Tabel met geschatte gewichten"
-
-msgctxt "SelectionModels|"
-msgid "Estimated heterogeneity table"
-msgstr "Geschatte heterogeniteitstabel"
-
 msgctxt "WaapWls|"
 msgid "Sample size"
 msgstr "Steekproefgrootte"
@@ -1562,75 +1454,6 @@ msgid ""
 msgstr ""
 "Variabele met de standaardfouten die overeenkomen met de effectgroottes."
 
-#, fuzzy
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Method"
-msgstr "Methode"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Equal Effects"
-msgstr "Gelijke effecten"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Fixed Effects"
-msgstr "Vaste effecten"
-
-#, fuzzy
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Maximum Likelihood"
-msgstr "Maximale aannemelijkheid"
-
-#, fuzzy
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Restricted ML"
-msgstr "Beperkte ML"
-
-#, fuzzy
-msgctxt "ClassicalMetaAnalysis|"
-msgid "DerSimonian-Laird"
-msgstr "DerSimonian-Laird"
-
-#, fuzzy
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Hedges"
-msgstr "Hedges"
-
-#, fuzzy
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Hunter-Schmidt"
-msgstr "Hunter-Schmidt"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Hunter-Schmidt (SSC)"
-msgstr "Hunter-Schmidt (SSC)"
-
-#, fuzzy
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Sidik-Jonkman"
-msgstr "Sidik-Jonkman"
-
-#, fuzzy
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Empirical Bayes"
-msgstr "Empirische Bayes"
-
-#, fuzzy
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Paule-Mandel"
-msgstr "Paule-Mandel"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Paule-Mandel (MU)"
-msgstr "Paule-Mandel (MU)"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Generalized Q-stat"
-msgstr "Gegeneraliseerde Q-statistiek"
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Generalized Q-stat (MU)"
-msgstr "Gegeneraliseerde Q-statistiek (MU)"
-
 msgctxt "ClassicalMetaAnalysis|"
 msgid ""
 "Method for testing the model coefficients: 'z' uses standard normal "
@@ -1678,24 +1501,9 @@ msgid ""
 msgstr ""
 "Variabele met de standaardfouten die overeenkomen met de effectgroottes."
 
-#, fuzzy
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Method"
-msgstr "Methode"
-
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Method used to estimate heterogeneity in the meta-analysis."
 msgstr "Methode voor het schatten van heterogeniteit in de meta-analyse."
-
-#, fuzzy
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Maximum Likelihood"
-msgstr "Maximale aannemelijkheid"
-
-#, fuzzy
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Restricted ML"
-msgstr "Beperkte ML"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Fixed effect test"
@@ -3320,175 +3128,6 @@ msgstr ""
 "Specificeer de indices van de heterogeniteit-meta-regressiecoëfficiënten die "
 "in de omnibustoets moeten worden opgenomen, bijv. '(1, 2)' voor de eerste en "
 "de tweede coëfficiënt."
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid "Optimizer"
-msgstr "Optimalisator"
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid ""
-"Optimizer settings for estimating the meta-analytic models. A more complex/"
-"unavailbe settings can be specified via the 'Extend metafor call' option."
-msgstr ""
-"Optimalisator-instellingen voor het schatten van de meta-analytische "
-"modellen. Complexere/niet-beschikbare instellingen kunnen worden "
-"gespecificeerd via de optie 'Metafor-aanroep uitbreiden'."
-
-#, fuzzy
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid "Method"
-msgstr "Methode"
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid ""
-"Select the optimization method to use for fitting the model. Available in "
-"multilevel/multivariate meta-analysis or when heterogeneity model terms are "
-"included."
-msgstr ""
-"Selecteer de optimalisatiemethode om het model te schatten. Beschikbaar in "
-"multilevel/multivariate meta-analyse of wanneer heterogeniteitsmodeltermen "
-"zijn opgenomen."
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid "Initial 𝜏²"
-msgstr "Initiële 𝜏²"
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid ""
-"Specify the initial value of 𝜏² for the optimization algorithm. Available "
-"only for specific optimization methods and unavailable in multilevel/"
-"multivariate meta-analysis or when heterogeneity model terms are included."
-msgstr ""
-"Specificeer de beginwaarde van 𝜏² voor het optimalisatie-algoritme. Alleen "
-"beschikbaar voor specifieke optimalisatiemethoden en niet beschikbaar in "
-"multilevel/multivariate meta-analyse of wanneer heterogeniteitsmodeltermen "
-"zijn opgenomen."
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid "Minimum 𝜏²"
-msgstr "Minimum 𝜏²"
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid ""
-"Specify the minimum allowable value of 𝜏² during optimization. Available "
-"only for specific optimization methods and unavailable in multilevel/"
-"multivariate meta-analysis or when heterogeneity model terms are included."
-msgstr ""
-"Specificeer de minimaal toegestane waarde van 𝜏² tijdens optimalisatie. "
-"Alleen beschikbaar voor specifieke optimalisatiemethoden en niet beschikbaar "
-"in multilevel/multivariate meta-analyse of wanneer "
-"heterogeniteitsmodeltermen zijn opgenomen."
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid "Maximum 𝜏²"
-msgstr "Maximum 𝜏²"
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid "Maximum evaluations"
-msgstr "Maximum aantal evaluaties"
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid ""
-"Set the maximum number of function evaluations for the optimizer. Available "
-"when using specific optimization methods in multilevel/multivariate meta-"
-"analysis."
-msgstr ""
-"Stel het maximum aantal functie-evaluaties in voor de optimalisator. "
-"Beschikbaar bij gebruik van specifieke optimalisatiemethoden in multilevel/"
-"multivariate meta-analyse."
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid "Maximum iterations"
-msgstr "Maximum aantal iteraties"
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid ""
-"Set the maximum number of iterations for the optimizer. Available when using "
-"certain estimation or optimization methods."
-msgstr ""
-"Stel het maximum aantal iteraties in voor de optimalisator. Beschikbaar bij "
-"gebruik van bepaalde schattings- of optimalisatiemethoden."
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid "Convergence tolerance"
-msgstr "Convergentietolerantie"
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid ""
-"Set the convergence tolerance for the optimizer. Available when using "
-"certain methods without heterogeneity model terms or specific optimizers in "
-"multilevel/multivariate meta-analysis."
-msgstr ""
-"Stel de convergentietolerantie in voor de optimalisator. Beschikbaar bij "
-"gebruik van bepaalde methoden zonder heterogeniteitsmodeltermen of "
-"specifieke optimalisatoren in multilevel/multivariate meta-analyse."
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid "Convergence relative tolerance"
-msgstr "Relatieve convergentietolerantie"
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid ""
-"Set the relative convergence tolerance for the optimizer. Available when "
-"heterogeneity model terms are included or using specific optimizers in "
-"multilevel/multivariate meta-analysis."
-msgstr ""
-"Stel de relatieve convergentietolerantie in voor de optimalisator. "
-"Beschikbaar wanneer heterogeniteitsmodeltermen zijn opgenomen of bij gebruik "
-"van specifieke optimalisatoren in multilevel/multivariate meta-analyse."
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid "Step adjustment"
-msgstr "Stapaanpassing"
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid ""
-"Set the step adjustment factor for the optimizer. Available when using "
-"certain methods without heterogeneity model terms and unavailable in "
-"multilevel/multivariate meta-analysis."
-msgstr ""
-"Stel de stapaanpassingsfactor in voor de optimalisator. Beschikbaar bij "
-"gebruik van bepaalde methoden zonder heterogeniteitsmodeltermen en niet "
-"beschikbaar in multilevel/multivariate meta-analyse."
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid "Initial trust region radius"
-msgstr "Initiële trustregion-straal"
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid ""
-"Set the initial trust region radius for the optimizer. Available when using "
-"specific optimization methods in multilevel/multivariate meta-analysis."
-msgstr ""
-"Stel de initiële trustregion-straal in voor de optimalisator. Beschikbaar "
-"bij gebruik van specifieke optimalisatiemethoden in multilevel/multivariate "
-"meta-analyse."
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid "Final trust region radius"
-msgstr "Laatste trustregion-straal"
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid ""
-"Set the final trust region radius for the optimizer. Available when using "
-"specific optimization methods in multilevel/multivariate meta-analysis."
-msgstr ""
-"Stel de laatste trustregion-straal in voor de optimalisator. Beschikbaar bij "
-"gebruik van specifieke optimalisatiemethoden in multilevel/multivariate meta-"
-"analyse."
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid "Maximum restarts"
-msgstr "Maximum aantal herstarts"
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid ""
-"Set the maximum number of restarts for the optimizer. Available when using "
-"the Nelder-Mead method ('nmk') in multilevel/multivariate meta-analysis."
-msgstr ""
-"Stel het maximum aantal herstarts in voor de optimalisator. Beschikbaar bij "
-"gebruik van de Nelder-Mead-methode ('nmk') in multilevel/multivariate meta-"
-"analyse."
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Permutation test"
@@ -6766,17 +6405,6 @@ msgstr ""
 "Pas een continuïteitscorrectie toe op de Cochran-Mantel-Haenszel-"
 "toetsstatistiek."
 
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid ""
-"Specify the maximum allowable value of 𝜏² during optimization. Available "
-"only for specific optimization methods and unavailable in multilevel/"
-"multivariate meta-analysis or when heterogeneity model terms are included."
-msgstr ""
-"Specificeer de maximaal toegestane waarde van 𝜏² tijdens optimalisatie. "
-"Alleen beschikbaar voor specifieke optimalisatiemethoden en niet beschikbaar "
-"in multilevel/multivariate meta-analyse of wanneer "
-"heterogeniteitsmodeltermen zijn opgenomen."
-
 msgctxt "BayesianBinomialMetaAnalysis|"
 msgid "Bayesian Model Averaging"
 msgstr "Bayesiaanse modelmiddeling"
@@ -7660,18 +7288,6 @@ msgstr "Subgroep"
 msgctxt "ClassicalGeneralizedMetaAnalysis|"
 msgid "Variable indicating subgroup stratification."
 msgstr "Variabele die de subgroepstratificatie aangeeft."
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid ""
-"Method used for model estimation in the meta-analysis. The available methods "
-"depend on the inclusion of heterogeneity model terms."
-msgstr ""
-"Methode voor modelschatting in de meta-analyse. De beschikbare methoden "
-"hangen af van de opname van heterogeniteitsmodeltermen."
-
-msgctxt "ClassicalMetaAnalysis|"
-msgid "Unrestricted Weighted Least Squares (UWLS)"
-msgstr "Ongerestricteerde gewogen kleinste-kwadraten (UWLS)"
 
 msgctxt "ClassicalMetaAnalysis|"
 msgid "Fixed effects test"
@@ -9874,4 +9490,721 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisMultivariate|"
 msgid "Specify the correlation between the same construct type levels."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisDiagnostics|"
+msgid ""
+"Profile likelihood diagnostics for free heterogeneity and selection "
+"parameters."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisDiagnostics|"
+msgid ""
+"Profile free heterogeneity and selection parameters. Unavailable for ordinal "
+"models."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid ""
+"Export all candidate models independently of the display filter. Column "
+"names include the model and subgroup."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Method"
+msgstr "Methode"
+
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid ""
+"Selection models use maximum likelihood and z/Wald coefficient tests. The "
+"same method and moderators apply to all candidates."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid ""
+"Method used for model estimation in the meta-analysis. The available methods "
+"depend on the inclusion of heterogeneity model terms."
+msgstr ""
+"Methode voor modelschatting in de meta-analyse. De beschikbare methoden "
+"hangen af van de opname van heterogeniteitsmodeltermen."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Equal Effects"
+msgstr "Gelijke effecten"
+
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Fixed Effects"
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Maximum Likelihood"
+msgstr "Maximale aannemelijkheid"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Restricted ML"
+msgstr "Beperkte ML"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "DerSimonian-Laird"
+msgstr "DerSimonian-Laird"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Hedges"
+msgstr "Hedges"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Hunter-Schmidt"
+msgstr "Hunter-Schmidt"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Hunter-Schmidt (SSC)"
+msgstr "Hunter-Schmidt (SSC)"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Sidik-Jonkman"
+msgstr "Sidik-Jonkman"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Empirical Bayes"
+msgstr "Empirische Bayes"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Paule-Mandel"
+msgstr "Paule-Mandel"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Paule-Mandel (MU)"
+msgstr "Paule-Mandel (MU)"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Generalized Q-stat"
+msgstr "Gegeneraliseerde Q-statistiek"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Generalized Q-stat (MU)"
+msgstr "Gegeneraliseerde Q-statistiek (MU)"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid "Unrestricted Weighted Least Squares (UWLS)"
+msgstr "Ongerestricteerde gewogen kleinste-kwadraten (UWLS)"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid "Optimizer"
+msgstr "Optimalisator"
+
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid "Optimizer settings for fitting the selection models."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid ""
+"Optimizer settings for estimating the meta-analytic models. A more complex/"
+"unavailbe settings can be specified via the 'Extend metafor call' option."
+msgstr ""
+"Optimalisator-instellingen voor het schatten van de meta-analytische "
+"modellen. Complexere/niet-beschikbare instellingen kunnen worden "
+"gespecificeerd via de optie 'Metafor-aanroep uitbreiden'."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid "Method"
+msgstr "Methode"
+
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid ""
+"Select the optimizer used by metafor. The default is BFGS, including for "
+"ordinal step functions."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid ""
+"Select the optimization method to use for fitting the model. Available in "
+"multilevel/multivariate meta-analysis or when heterogeneity model terms are "
+"included."
+msgstr ""
+"Selecteer de optimalisatiemethode om het model te schatten. Beschikbaar in "
+"multilevel/multivariate meta-analyse of wanneer heterogeniteitsmodeltermen "
+"zijn opgenomen."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid "Default"
+msgstr "Standaard"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid "Initial 𝜏²"
+msgstr "Initiële 𝜏²"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid ""
+"Specify the initial value of 𝜏² for the optimization algorithm. Available "
+"only for specific optimization methods and unavailable in multilevel/"
+"multivariate meta-analysis or when heterogeneity model terms are included."
+msgstr ""
+"Specificeer de beginwaarde van 𝜏² voor het optimalisatie-algoritme. Alleen "
+"beschikbaar voor specifieke optimalisatiemethoden en niet beschikbaar in "
+"multilevel/multivariate meta-analyse of wanneer heterogeniteitsmodeltermen "
+"zijn opgenomen."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid "Minimum 𝜏²"
+msgstr "Minimum 𝜏²"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid ""
+"Specify the minimum allowable value of 𝜏² during optimization. Available "
+"only for specific optimization methods and unavailable in multilevel/"
+"multivariate meta-analysis or when heterogeneity model terms are included."
+msgstr ""
+"Specificeer de minimaal toegestane waarde van 𝜏² tijdens optimalisatie. "
+"Alleen beschikbaar voor specifieke optimalisatiemethoden en niet beschikbaar "
+"in multilevel/multivariate meta-analyse of wanneer "
+"heterogeniteitsmodeltermen zijn opgenomen."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid "Maximum 𝜏²"
+msgstr "Maximum 𝜏²"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid ""
+"Specify the maximum allowable value of 𝜏² during optimization. Available "
+"only for specific optimization methods and unavailable in multilevel/"
+"multivariate meta-analysis or when heterogeneity model terms are included."
+msgstr ""
+"Specificeer de maximaal toegestane waarde van 𝜏² tijdens optimalisatie. "
+"Alleen beschikbaar voor specifieke optimalisatiemethoden en niet beschikbaar "
+"in multilevel/multivariate meta-analyse of wanneer "
+"heterogeniteitsmodeltermen zijn opgenomen."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid "Maximum evaluations"
+msgstr "Maximum aantal evaluaties"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid ""
+"Set the maximum number of function evaluations for the optimizer. Available "
+"when using specific optimization methods in multilevel/multivariate meta-"
+"analysis."
+msgstr ""
+"Stel het maximum aantal functie-evaluaties in voor de optimalisator. "
+"Beschikbaar bij gebruik van specifieke optimalisatiemethoden in multilevel/"
+"multivariate meta-analyse."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid "Maximum iterations"
+msgstr "Maximum aantal iteraties"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid ""
+"Set the maximum number of iterations for the optimizer. Available when using "
+"certain estimation or optimization methods."
+msgstr ""
+"Stel het maximum aantal iteraties in voor de optimalisator. Beschikbaar bij "
+"gebruik van bepaalde schattings- of optimalisatiemethoden."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid "Convergence tolerance"
+msgstr "Convergentietolerantie"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid ""
+"Set the convergence tolerance for the optimizer. Available when using "
+"certain methods without heterogeneity model terms or specific optimizers in "
+"multilevel/multivariate meta-analysis."
+msgstr ""
+"Stel de convergentietolerantie in voor de optimalisator. Beschikbaar bij "
+"gebruik van bepaalde methoden zonder heterogeniteitsmodeltermen of "
+"specifieke optimalisatoren in multilevel/multivariate meta-analyse."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid "Convergence relative tolerance"
+msgstr "Relatieve convergentietolerantie"
+
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid "Override the optimizer's relative convergence tolerance."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid ""
+"Set the relative convergence tolerance for the optimizer. Available when "
+"heterogeneity model terms are included or using specific optimizers in "
+"multilevel/multivariate meta-analysis."
+msgstr ""
+"Stel de relatieve convergentietolerantie in voor de optimalisator. "
+"Beschikbaar wanneer heterogeniteitsmodeltermen zijn opgenomen of bij gebruik "
+"van specifieke optimalisatoren in multilevel/multivariate meta-analyse."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid "Step adjustment"
+msgstr "Stapaanpassing"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid ""
+"Set the step adjustment factor for the optimizer. Available when using "
+"certain methods without heterogeneity model terms and unavailable in "
+"multilevel/multivariate meta-analysis."
+msgstr ""
+"Stel de stapaanpassingsfactor in voor de optimalisator. Beschikbaar bij "
+"gebruik van bepaalde methoden zonder heterogeniteitsmodeltermen en niet "
+"beschikbaar in multilevel/multivariate meta-analyse."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid "Initial trust region radius"
+msgstr "Initiële trustregion-straal"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid ""
+"Set the initial trust region radius for the optimizer. Available when using "
+"specific optimization methods in multilevel/multivariate meta-analysis."
+msgstr ""
+"Stel de initiële trustregion-straal in voor de optimalisator. Beschikbaar "
+"bij gebruik van specifieke optimalisatiemethoden in multilevel/multivariate "
+"meta-analyse."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid "Final trust region radius"
+msgstr "Laatste trustregion-straal"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid ""
+"Set the final trust region radius for the optimizer. Available when using "
+"specific optimization methods in multilevel/multivariate meta-analysis."
+msgstr ""
+"Stel de laatste trustregion-straal in voor de optimalisator. Beschikbaar bij "
+"gebruik van specifieke optimalisatiemethoden in multilevel/multivariate meta-"
+"analyse."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid "Maximum restarts"
+msgstr "Maximum aantal herstarts"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisOptimizer|"
+msgid ""
+"Set the maximum number of restarts for the optimizer. Available when using "
+"the Nelder-Mead method ('nmk') in multilevel/multivariate meta-analysis."
+msgstr ""
+"Stel het maximum aantal herstarts in voor de optimalisator. Beschikbaar bij "
+"gebruik van de Nelder-Mead-methode ('nmk') in multilevel/multivariate meta-"
+"analyse."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Weight Function"
+msgstr "Gewichtsfunctie"
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Include weight function estimates in the output."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "P-value frequency table"
+msgstr "P-waarde frequentietabel"
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Estimate counts within the specified p-value intervals."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Plot"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid ""
+"Visualize the relative probability of study being published across the range "
+"of p-values."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Rescale x-axis"
+msgstr "Herschaal x-as"
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Space p-value thresholds equally along the x-axis."
+msgstr ""
+
+#, qt-format
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Model %1"
+msgstr ""
+
+#, fuzzy
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Weight function"
+msgstr "Gewichtsfunctie"
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Step function"
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Beta"
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Half-normal"
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Negative exponential"
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Logistic"
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Power"
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Negative exponential power"
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Truncation"
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Estimated truncation (experimental)"
+msgstr ""
+
+#, fuzzy
+msgctxt "SelectionModelsWeightfunction|"
+msgid "None"
+msgstr "Geen"
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid ""
+"Choose a documented metafor selection function. Changing the function resets "
+"the cutoff and selection-parameter fields to the new function's defaults."
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Selection"
+msgstr ""
+
+#, fuzzy
+msgctxt "SelectionModelsWeightfunction|"
+msgid "One-sided"
+msgstr "Een-zijdig"
+
+#, fuzzy
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Two-sided"
+msgstr "Twee-zijdig"
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid ""
+"Use one-sided study p-values in the expected direction, or two-sided study p-"
+"values for significance in either direction. This determines publication "
+"selection; coefficient tests remain two-sided."
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Effect-size cutoff"
+msgstr ""
+
+#, fuzzy
+msgctxt "SelectionModelsWeightfunction|"
+msgid "P-value cutoffs"
+msgstr "P-waarde grenzen"
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid ""
+"Step functions: increasing cutoffs; 1 is appended automatically. Beta: "
+"optional lower and upper truncation thresholds. Other p-value functions: "
+"optional single threshold."
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Selection parameters"
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid ""
+"Leave empty to estimate parameters, or enter one number/NA per parameter. "
+"For step functions, enter 1 for the first, fixed reference weight. Beta and "
+"negative exponential power have two parameters; estimated truncation uses "
+"weight and cutoff."
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Precision dependence"
+msgstr ""
+
+#, fuzzy
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Standard error"
+msgstr "Standaardfout"
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Variance"
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Inverse sample size"
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Inverse square root sample size"
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid ""
+"Allow publication probability to depend on study precision as well as p-"
+"values."
+msgstr ""
+
+#, fuzzy
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Sample size"
+msgstr "Steekproefgrootte"
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Select the sample-size variable used by this model's precision measure."
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Rescale precision"
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid ""
+"Divide the precision measure by its maximum, as in metafor's default. This "
+"changes the scale of selection parameters. Turn off to reproduce "
+"specifications using unscaled precision, including Preston et al. (2004)."
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid "Force ordinality"
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunction|"
+msgid ""
+"Constrain weights to decrease with increasing p-values. Applies only to this "
+"model."
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunctions|"
+msgid "Weight Function (Custom)"
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunctions|"
+msgid ""
+"Each element is a separate candidate model. Cutoffs use the selected p-value "
+"sidedness; truncation cutoffs use the effect-size scale. None adds the "
+"unadjusted model to the comparison."
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunctions|"
+msgid "Show models"
+msgstr ""
+
+#, fuzzy
+msgctxt "SelectionModelsWeightfunctions|"
+msgid "All"
+msgstr "Alle"
+
+msgctxt "SelectionModelsWeightfunctions|"
+msgid "Best BIC"
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunctions|"
+msgid "Best AIC"
+msgstr ""
+
+#, qt-format
+msgctxt "SelectionModelsWeightfunctions|"
+msgid "Model %1"
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunctions|"
+msgid ""
+"Filter detailed output when comparing multiple custom models. Comparisons "
+"and exports always include all candidates. Ties are resolved by model order."
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunctions|"
+msgid "Model comparison"
+msgstr ""
+
+msgctxt "SelectionModelsWeightfunctions|"
+msgid ""
+"Compare all custom models using fit statistics and AIC, AICc, and BIC "
+"weights, separately by subgroup."
+msgstr ""
+
+msgctxt "SelectionModels|"
+msgid ""
+"Fit publication-bias selection models with metafor, including moderators and "
+"comparisons between weight functions. All candidate models use the same "
+"observations within each subgroup."
+msgstr ""
+
+msgctxt "SelectionModels|"
+msgid "Observed effect sizes, on the scale used to fit the model."
+msgstr ""
+
+msgctxt "SelectionModels|"
+msgid "Standard errors corresponding to the effect sizes."
+msgstr ""
+
+#, fuzzy
+msgctxt "SelectionModels|"
+msgid "Predictors"
+msgstr "Voorspellers"
+
+msgctxt "SelectionModels|"
+msgid ""
+"Continuous and categorical moderators. Specify interactions and the "
+"intercept in Model."
+msgstr ""
+
+msgctxt "SelectionModels|"
+msgid "Study Labels"
+msgstr ""
+
+msgctxt "SelectionModels|"
+msgid ""
+"Labels for studies in plots. Missing labels do not exclude observations from "
+"fitting."
+msgstr ""
+
+#, fuzzy
+msgctxt "SelectionModels|"
+msgid "Subgroup"
+msgstr "Subgroep"
+
+msgctxt "SelectionModels|"
+msgid ""
+"Fit each candidate separately within each subgroup. Best AIC/BIC is "
+"determined separately for each subgroup."
+msgstr ""
+
+#, fuzzy
+msgctxt "SelectionModels|"
+msgid "P-Value"
+msgstr "P-waarde"
+
+msgctxt "SelectionModels|"
+msgid ""
+"Optional selection p-values, greater than 0 and at most 1. Use p-values "
+"matching the sidedness of each selection function. If unassigned, p-values "
+"are calculated from effect sizes and standard errors."
+msgstr ""
+
+msgctxt "SelectionModels|"
+msgid "No Selection"
+msgstr ""
+
+msgctxt "SelectionModels|"
+msgid ""
+"Optional factor identifying estimates unaffected by selection. Choose the "
+"unaffected level below; selection applies to all other levels. Both remain "
+"in the analysis."
+msgstr ""
+
+msgctxt "SelectionModels|"
+msgid "Unaffected Level"
+msgstr ""
+
+msgctxt "SelectionModels|"
+msgid ""
+"Estimates at this level are unaffected by selection. Selection applies to "
+"all other levels of the assigned factor."
+msgstr ""
+
+#, fuzzy
+msgctxt "SelectionModels|"
+msgid "Publication bias adjustment"
+msgstr "Correctie voor publicatiebias"
+
+#, fuzzy
+msgctxt "SelectionModels|"
+msgid "Custom"
+msgstr "Aangepast"
+
+msgctxt "SelectionModels|"
+msgid ""
+"4PSM uses one-sided p-value cutoffs .025 and .50; 3PSM uses .025. Custom "
+"permits multiple weight functions."
+msgstr ""
+
+#, fuzzy
+msgctxt "SelectionModels|"
+msgid "Expected direction of the effect"
+msgstr "Verwachte richting van het effect"
+
+#, fuzzy
+msgctxt "SelectionModels|"
+msgid "Detect"
+msgstr "Detecteren"
+
+msgctxt "SelectionModels|"
+msgid ""
+"Detect uses the median effect in the fitted dataset, separately per "
+"subgroup; a zero median selects positive. Two-sided functions ignore "
+"direction."
+msgstr ""
+
+msgctxt "SelectionModels|"
+msgid "Force ordinality"
+msgstr ""
+
+msgctxt "SelectionModels|"
+msgid ""
+"Require non-increasing step-function weights. Under Custom, specify this for "
+"each model separately. Metafor's ordinal implementation is experimental; "
+"some intervals and tests are unavailable."
+msgstr ""
+
+msgctxt "Upgrades|"
+msgid ""
+"Selection Models was reworked in Meta-Analysis module 0.98.0. Refreshing "
+"this analysis replaces the saved results and may reset incompatible "
+"settings. To rerun the original analysis, use JASP 0.98.1 with Meta-Analysis "
+"module 0.95.5."
 msgstr ""

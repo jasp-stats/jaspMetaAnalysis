@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
-"POT-Creation-Date: 2026-08-22 02:47\n"
+"POT-Creation-Date: 2026-11-07 02:33\n"
 "PO-Revision-Date: 2026-08-23 05:51+0000\n"
 "Last-Translator: Koji Kosugi <kosugitti@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -679,6 +679,10 @@ msgstr "すべての観測値が影響力の大きいものとして除外され
 msgid "Intercept"
 msgstr "切片"
 
+#, fuzzy
+msgid "Heterogeneity test: not available"
+msgstr "異質性の推定値"
+
 msgid "%1$s: not available"
 msgstr "%1$s: 利用できません"
 
@@ -839,8 +843,8 @@ msgstr ""
 "検定するには '(1, 2)' と書いてください。"
 
 msgid ""
-"The selected coefficients for %1$s moderation must be between 1 and %2$i (i."
-"e., the number of regression parameters)."
+"The selected coefficients for %1$s moderation must be between 1 and %2$i "
+"(i.e., the number of regression parameters)."
 msgstr ""
 "%1$s のモデレーションで選んだ係数は、1から %2$i(すなわち回帰パラメータの数)の"
 "範囲である必要があります。"
@@ -992,6 +996,9 @@ msgid ""
 msgstr ""
 "%1$s は %2$s 変換で変換されています。非線形の変換では、変換後の推定値は変換後"
 "のスケールにおける中央値として解釈されます。"
+
+msgid "The pooled effect is evaluated at the average moderator design vector."
+msgstr ""
 
 msgid ""
 "The pooled effect size corresponds to the weighted average effect across "
@@ -2246,166 +2253,324 @@ msgstr "出版バイアスの補正の推定値(PET-PEESE)"
 msgid "Interaction terms are currently not possible in Bayesian meta-analyses."
 msgstr "ベイズメタ分析では、現在のところ交互作用項は利用できません。"
 
-msgid "Weight Function (%s)"
-msgstr "重み関数(%s)"
+#, fuzzy
+msgid "Model %1$i"
+msgstr "モデル %i"
+
+#, fuzzy
+msgid "Model Comparison"
+msgstr "モデルの対比較"
+
+#, fuzzy
+msgid "Model"
+msgstr "モデル"
+
+#, fuzzy
+msgid "AIC weight"
+msgstr "重み"
+
+msgid "AICc weight"
+msgstr ""
+
+#, fuzzy
+msgid "BIC weight"
+msgstr "重み"
+
+msgid "Add at least one weight-function model in the Custom section."
+msgstr ""
+
+#, fuzzy
+msgid "Model %1$i: %2$s"
+msgstr "%1$s: %2$s"
+
+#, fuzzy
+msgid "Model %1$i, %2$s: %3$s"
+msgstr "%1$s を %2$s %3$s として"
+
+#, fuzzy
+msgid "Model %1$i: %2$s: %3$s"
+msgstr "%1$s を %2$s %3$s として"
+
+msgid "Assign a sample-size variable for this precision measure."
+msgstr ""
 
 msgid ""
-"The figure could not be created since one of the estimates is not a number."
-msgstr "推定値の1つが数字ではないため、図は作成できませんでした。"
+"No estimates are marked as subject to selection. Use the unadjusted model "
+"(None) or choose a different unaffected level."
+msgstr ""
 
-msgid "P-value (One-sided)"
-msgstr "P値(片側)"
+msgid ""
+"The reference interval or an interval with an estimated weight contains no "
+"selected estimates. Change the cutoffs or fix the empty interval's weight; "
+"intervals are not merged automatically."
+msgstr ""
 
-msgid "Publication Probability"
-msgstr "出版確率"
+msgid ""
+"Selection model fitting failed. In Advanced Options, try a different "
+"optimizer or increase the maximum number of iterations. Also check the "
+"cutoffs and fixed selection parameters."
+msgstr ""
 
-msgid "Mean Model Estimates (%s)"
-msgstr "平均モデル推定値 (%s)"
+msgid ""
+"Enter comma-separated numbers, optionally enclosed in parentheses. Use NA "
+"for parameters to estimate."
+msgstr ""
 
-msgid "Fixed effects (adjusted)"
-msgstr "固定効果 (調整済み)"
+#, fuzzy
+msgid "All specified numbers must be finite."
+msgstr "すべての人時の値は正でなければなりません。"
 
-msgid "Random effects (adjusted)"
+msgid ""
+"Step-function cutoffs must be strictly increasing and greater than 0, with a "
+"maximum of 1."
+msgstr ""
+
+msgid "Specify at least one cutoff below 1."
+msgstr ""
+
+msgid ""
+"Beta truncation requires two increasing p-value cutoffs strictly between 0 "
+"and 1."
+msgstr ""
+
+msgid "Specify one effect-size cutoff for the truncated model."
+msgstr ""
+
+msgid ""
+"Specify a single p-value threshold strictly between 0 and 1, or leave the "
+"threshold empty."
+msgstr ""
+
+msgid ""
+"This model requires %1$i selection parameters. Use NA for each parameter to "
+"estimate, or leave the field empty to estimate all parameters."
+msgstr ""
+
+msgid ""
+"Selection parameters must be non-negative; beta parameters must be strictly "
+"positive."
+msgstr ""
+
+msgid "The first step-function weight must equal 1 (the reference interval)."
+msgstr ""
+
+msgid ""
+"Ordinality requires estimated non-reference weights. Clear the parameters or "
+"turn off ordinality."
+msgstr ""
+
+#, fuzzy
+msgid "Invalid specification"
+msgstr "モデルの指定"
+
+#, fuzzy
+msgid "None (unadjusted)"
 msgstr "変量効果(調整済み)"
 
-msgid "Model Tests"
-msgstr "モデル検定"
+#, fuzzy
+msgid "Step function"
+msgstr "重み関数"
 
-msgid "Test of Heterogeneity"
-msgstr "異質性の検定"
+msgid "Beta"
+msgstr ""
 
-msgid "Note:"
-msgstr "注:"
+msgid "Half-normal"
+msgstr ""
 
-msgid "Test of Publication Bias"
-msgstr "出版バイアス(Publication Bias)の検定"
+#, fuzzy
+msgid "Negative exponential"
+msgstr "指数"
 
-msgid "ChiSq"
-msgstr "カイ二乗"
+msgid "Logistic"
+msgstr ""
 
-msgid "Assuming homogeneity"
-msgstr "同質性を仮定"
+msgid "Negative exponential power"
+msgstr ""
 
-msgid "Assuming heterogeneity"
-msgstr "異質性を仮定"
+#, fuzzy
+msgid "Truncation"
+msgstr "イテレーション"
 
-msgid "Fixed Effects Estimates"
-msgstr "固定効果の推定値"
+#, fuzzy
+msgid "Estimated truncation"
+msgstr "推定された研究の効果"
 
-msgid "Mean Estimates (%s)"
-msgstr "平均推定値(%s)"
+#, fuzzy
+msgid "Variance"
+msgstr "共分散"
 
-msgid "Estimated Weights"
-msgstr "推定ウェイト"
+#, fuzzy
+msgid "Inverse sample size"
+msgstr "サンプルサイズ"
 
-msgid "Heterogeneity Estimates(%s)"
-msgstr "異質性の推定値(%s)"
+msgid "Inverse square root sample size"
+msgstr ""
 
-msgid "p-value Frequency"
+msgid "; ordinal"
+msgstr ""
+
+msgid "; two-sided"
+msgstr ""
+
+#, fuzzy
+msgid "; one-sided"
+msgstr "P値(片側)"
+
+#, fuzzy
+msgid "; sample size: %1$s"
+msgstr "サンプルサイズ"
+
+msgid "; unscaled precision"
+msgstr ""
+
+#, fuzzy
+msgid "Publication bias test: not available"
+msgstr "出版バイアス: %1$s"
+
+msgid "Precision index: %1$.3f"
+msgstr ""
+
+#, fuzzy
+msgid "P-value"
+msgstr "p値"
+
+#, fuzzy
+msgid "P-value (two-sided)"
+msgstr "P値(片側)"
+
+#, fuzzy
+msgid "P-value (one-sided)"
+msgstr "P値(片側)"
+
+msgid "Relative selection likelihood"
+msgstr ""
+
+msgid "No fitted model is available for profile likelihood diagnostics."
+msgstr ""
+
+#, fuzzy
+msgid "The model could not be fitted: %1$s"
+msgstr "ケースワイズ診断を計算できませんでした: %1$s"
+
+#, fuzzy
+msgid ""
+"Profile likelihood diagnostics are not available for ordinal selection "
+"models."
+msgstr ""
+"異質性についてのメタ回帰を含むモデルでは、プロファイル尤度は利用できません。"
+
+msgid "There are no free heterogeneity or selection parameters to profile."
+msgstr ""
+
+msgid "Selection Parameter %1$i"
+msgstr ""
+
+msgid "Fewer than two finite profile likelihood values are available."
+msgstr ""
+
+msgid "R code unavailable until the specification is valid: %1$s"
+msgstr ""
+
+msgid "The module reported: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid "R Code"
+msgstr "RoBMAのRコード"
+
+msgid ""
+"Selection p-values were supplied rather than calculated from effect sizes "
+"and standard errors."
+msgstr ""
+
+msgid ""
+"Coefficient standard errors could not be estimated. Wald tests and "
+"coefficient confidence intervals are unavailable; review the fitting "
+"warnings before interpreting this model."
+msgstr ""
+
+msgid ""
+"The publication-bias test is not applicable with fixed selection parameters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"The heterogeneity likelihood-ratio test could not be computed. Review the "
+"fitting warnings before interpreting this model."
+msgstr ""
+"このモデルのあてはめでは、一部のGLMMの異質性の検定を計算できませんでした。"
+
+#, fuzzy
+msgid "Heterogeneity confidence interval unavailable: %1$s"
+msgstr "このGLMMのモデルの種類では、異質性の信頼区間は利用できません。"
+
+#, fuzzy
+msgid "Weight Function Summary"
+msgstr "重み関数"
+
+#, fuzzy
+msgid "Weight Function Estimates"
+msgstr "重み関数の推定"
+
+msgid "The unadjusted model has no selection parameters."
+msgstr ""
+
+#, fuzzy
+msgid "Selection Parameter Estimates"
+msgstr "H₁のファンネルのパラメータ推定値"
+
+msgid "Selection uses two-sided p-values."
+msgstr ""
+
+#, fuzzy
+msgid "Expected effect direction: %1$s."
+msgstr "効果量 (係数: %1$s)"
+
+msgid ""
+"Fixed selection parameters have no standard errors or confidence intervals."
+msgstr ""
+
+#, fuzzy
+msgid "P-Value Frequencies"
 msgstr "p値の度数(Frequency)"
 
-msgid "<em>p</em>-values interval(one-sided)"
-msgstr "<em>p</em>値の区間(片側)"
+msgid "P-value frequencies require valid p-value cutoffs and study p-values."
+msgstr ""
 
-msgid "Frequency"
-msgstr "頻度"
+#, fuzzy
+msgid "Selected Estimates"
+msgstr "モデル推定値"
+
+msgid "P-value frequencies include only estimates to which selection applies."
+msgstr ""
+
+#, fuzzy
+msgid "Model Results"
+msgstr "モデル検定"
+
+msgid "No fitted model is available for the requested selection."
+msgstr ""
 
 msgid ""
-"There were no p-value cutoffs after their automatic reduction. The displayed "
-"frequencies correspond to the non-reduced p-value cutoffs."
+"The unaffected level is not present in the no-selection variable. Choose an "
+"available level."
 msgstr ""
-"自動減少(automatic reduction)後、p値のカットオフはありませんでした。表示され"
-"る度数は、減少していないp値のカットオフに対応します。"
+
+msgid "P-values must be finite, greater than zero, and at most one."
+msgstr ""
 
 msgid ""
-"Cannot compute results. All entries of the p-value variable (%s) must be "
-"between 0 and 1."
+"Sample-size variable not found in the data. Assign an available sample-size "
+"variable."
 msgstr ""
-"結果を計算できません。p値変数 (%s) のすべてのエントリは 0 と 1 の間でなければ"
-"なりません。"
+
+msgid "Sample sizes must be finite and greater than zero."
+msgstr ""
 
 msgid ""
-"Cannot compute results. All entries of the correlation coefficient variable "
-"(%s) must be between -1 and 1."
+"Standard errors are too small or too large to yield finite positive sampling "
+"variances. Rescale effect sizes and standard errors."
 msgstr ""
-"結果を計算できません。相関係数変数 (%s) のすべてのエントリは -1 から 1 の間で"
-"なければなりません。"
-
-msgid ""
-"Cannot compute results. All entries of the sample size variable (%s) must be "
-"greater than four."
-msgstr ""
-"結果を計算できません。サンプルサイズ変数 (%s) のすべてのエントリは 4 より大き"
-"い値でなければなりません。"
-
-msgid "The p-value cutoffs were set incorectly."
-msgstr "p値のカットオフが正しく設定されていませんでした。"
-
-msgid "At least one p-value cutoff needs to be set."
-msgstr "少なくとも1つのp値カットオフを設定する必要があります。"
-
-msgid "All p-value cutoffs needs to be between 0 and 1."
-msgstr "すべてのp値のカットオフは0から1の間である必要があります。"
-
-msgid "95%% Confidence Interval"
-msgstr "95%% 信頼区間"
-
-msgid "%1$s is on %2$s scale."
-msgstr "%1$sは%2$sのスケールです。"
-
-msgid "Fixed effects model:"
-msgstr "固定効果モデル:"
-
-msgid "Random effects model:"
-msgstr "変量効果モデル:"
-
-msgid ""
-"%sThe optimizer failed to find a solution. Consider re-specifying the model "
-"or the p-value cutoffs."
-msgstr ""
-"%s最適化は解を見つけることができませんでした。モデルまたは p 値カットオフを再"
-"指定することを検討してください。"
-
-msgid ""
-"%sThe automatic cutoffs selection did not find viable p-value cutoffs. "
-"Please, specify them manually."
-msgstr ""
-"%s自動カットオフ選択は、実行可能な p 値カットオフを検出できませんでした。手動"
-"で指定してください。"
-
-msgid ""
-"At least one of the p-value intervals contains no effect sizes, leading to "
-"estimation problems. Consider re-specifying the cutoffs."
-msgstr ""
-"p値区間の少なくとも1つに効果量が含まれていないため、推定に問題がある。カット"
-"オフの再設定を検討してください。"
-
-msgid ""
-"At least one of the p-value intervals contains three or fewer effect sizes, "
-"which may lead to estimation problems. Consider re-specifying the cutoffs."
-msgstr ""
-"p値区間の少なくとも1つに3つ以下の効果量が含まれており、推定問題につながる可能"
-"性があります。カットオフの再設定を検討してください。"
-
-msgid ""
-"The unadjusted estimate is negative. The selection model default "
-"specification expects that the expected direction of the effect size is "
-"positive. Please, check that you specified the effect sizes correctly or "
-"change the 'Expected effect size direction' option in the 'Model' tab."
-msgstr ""
-"調整前の推定値は負である。選択モデルのデフォルト指定では、効果量の期待される"
-"方向が正であることを期待しています。効果量が正しく指定されているか確認する"
-"か、「モデル」タブの「期待される効果量の方向」オプションを変更してください。"
-
-msgid ""
-"The analysis requires both 'Effect Size' and 'Effect Size Standard Error' to "
-"be specified."
-msgstr ""
-"この分析では、「効果量」と「効果量の標準誤差」の両方を指定する必要がありま"
-"す。"
-
-msgid "Only the following one-sided p-value cutoffs were used: %s."
-msgstr "次の片側 p 値カットオフのみが使用されました: %s。"
 
 msgid "Estimating: %1$s"
 msgstr "推定しています: %1$s"
@@ -2446,14 +2611,40 @@ msgstr "係数の要約"
 msgid "Computed Estimates Summary"
 msgstr "計算された推定値の要約"
 
+msgid ""
+"Cannot compute results. All entries of the correlation coefficient variable "
+"(%s) must be between -1 and 1."
+msgstr ""
+"結果を計算できません。相関係数変数 (%s) のすべてのエントリは -1 から 1 の間で"
+"なければなりません。"
+
+msgid ""
+"Cannot compute results. All entries of the sample size variable (%s) must be "
+"greater than four."
+msgstr ""
+"結果を計算できません。サンプルサイズ変数 (%s) のすべてのエントリは 4 より大き"
+"い値でなければなりません。"
+
+msgid "95%% Confidence Interval"
+msgstr "95%% 信頼区間"
+
 msgid "Error: There were not enough adequately powered studies (k = %1$i)"
 msgstr "エラー: 十分な検出力のある研究がありませんでした(k = %1$i)"
 
 msgid "Note: There were %1$i adequately powered studies"
 msgstr "注: 十分に検出力のある研究が %1$i ありました"
 
+msgid "Model Tests"
+msgstr "モデル検定"
+
 msgid "Test of Effect"
 msgstr "効果量の検定"
+
+msgid "Test of Publication Bias"
+msgstr "出版バイアス(Publication Bias)の検定"
+
+msgid "Mean Estimates (%s)"
+msgstr "平均推定値(%s)"
 
 msgid "Multiplicative Heterogeneity Estimates"
 msgstr "乗法異質性の推定値"
@@ -2466,6 +2657,13 @@ msgstr "コーエン(Cohen)のd"
 
 msgid "Fisher's z"
 msgstr "フィッシャーのz"
+
+msgid "Mean Model Estimates (%s)"
+msgstr "平均モデル推定値 (%s)"
+
+msgid ""
+"The figure could not be created since one of the estimates is not a number."
+msgstr "推定値の1つが数字ではないため、図は作成できませんでした。"
 
 msgid ""
 "WAAP was not estimated: There were only %1$i adequately powered studies "
@@ -2520,13 +2718,156 @@ msgstr[0] ""
 "最大ツリー深度を超えました。「最大ツリー深度」を慎重に大きくすれば解決できま"
 "す。"
 
+msgid ""
+"The selection weight for p-value interval %1$s is fixed at zero, but the "
+"interval contains %2$i selected estimate. Use a positive weight or NA to "
+"estimate the weight."
+msgid_plural ""
+"The selection weight for p-value interval %1$s is fixed at zero, but the "
+"interval contains %2$i selected estimates. Use a positive weight or NA to "
+"estimate the weight."
+msgstr[0] ""
+
+msgid "Selection applies to %1$i estimate."
+msgid_plural "Selection applies to %1$i estimates."
+msgstr[0] ""
+
+msgid "%1$i estimate at level '%2$s' is unaffected."
+msgid_plural "%1$i estimates at level '%2$s' are unaffected."
+msgstr[0] ""
+
+msgid ""
+"For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. "
+"This affects %3$i selected estimate."
+msgid_plural ""
+"For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. "
+"This affects %3$i selected estimates."
+msgstr[0] ""
+
+#~ msgid "Weight Function (%s)"
+#~ msgstr "重み関数(%s)"
+
+#~ msgid "Publication Probability"
+#~ msgstr "出版確率"
+
+#~ msgid "Fixed effects (adjusted)"
+#~ msgstr "固定効果 (調整済み)"
+
+#~ msgid "Test of Heterogeneity"
+#~ msgstr "異質性の検定"
+
+#~ msgid "Note:"
+#~ msgstr "注:"
+
+#~ msgid "ChiSq"
+#~ msgstr "カイ二乗"
+
+#~ msgid "Assuming homogeneity"
+#~ msgstr "同質性を仮定"
+
+#~ msgid "Assuming heterogeneity"
+#~ msgstr "異質性を仮定"
+
+#~ msgid "Fixed Effects Estimates"
+#~ msgstr "固定効果の推定値"
+
+#~ msgid "Estimated Weights"
+#~ msgstr "推定ウェイト"
+
+#~ msgid "Heterogeneity Estimates(%s)"
+#~ msgstr "異質性の推定値(%s)"
+
+#~ msgid "<em>p</em>-values interval(one-sided)"
+#~ msgstr "<em>p</em>値の区間(片側)"
+
+#~ msgid "Frequency"
+#~ msgstr "頻度"
+
+#~ msgid ""
+#~ "There were no p-value cutoffs after their automatic reduction. The "
+#~ "displayed frequencies correspond to the non-reduced p-value cutoffs."
+#~ msgstr ""
+#~ "自動減少(automatic reduction)後、p値のカットオフはありませんでした。表示さ"
+#~ "れる度数は、減少していないp値のカットオフに対応します。"
+
+#~ msgid ""
+#~ "Cannot compute results. All entries of the p-value variable (%s) must be "
+#~ "between 0 and 1."
+#~ msgstr ""
+#~ "結果を計算できません。p値変数 (%s) のすべてのエントリは 0 と 1 の間でなけ"
+#~ "ればなりません。"
+
+#~ msgid "The p-value cutoffs were set incorectly."
+#~ msgstr "p値のカットオフが正しく設定されていませんでした。"
+
+#~ msgid "At least one p-value cutoff needs to be set."
+#~ msgstr "少なくとも1つのp値カットオフを設定する必要があります。"
+
+#~ msgid "All p-value cutoffs needs to be between 0 and 1."
+#~ msgstr "すべてのp値のカットオフは0から1の間である必要があります。"
+
+#~ msgid "%1$s is on %2$s scale."
+#~ msgstr "%1$sは%2$sのスケールです。"
+
+#~ msgid "Fixed effects model:"
+#~ msgstr "固定効果モデル:"
+
+#~ msgid "Random effects model:"
+#~ msgstr "変量効果モデル:"
+
+#~ msgid ""
+#~ "%sThe optimizer failed to find a solution. Consider re-specifying the "
+#~ "model or the p-value cutoffs."
+#~ msgstr ""
+#~ "%s最適化は解を見つけることができませんでした。モデルまたは p 値カットオフ"
+#~ "を再指定することを検討してください。"
+
+#~ msgid ""
+#~ "%sThe automatic cutoffs selection did not find viable p-value cutoffs. "
+#~ "Please, specify them manually."
+#~ msgstr ""
+#~ "%s自動カットオフ選択は、実行可能な p 値カットオフを検出できませんでした。"
+#~ "手動で指定してください。"
+
+#~ msgid ""
+#~ "At least one of the p-value intervals contains no effect sizes, leading "
+#~ "to estimation problems. Consider re-specifying the cutoffs."
+#~ msgstr ""
+#~ "p値区間の少なくとも1つに効果量が含まれていないため、推定に問題がある。カッ"
+#~ "トオフの再設定を検討してください。"
+
+#~ msgid ""
+#~ "At least one of the p-value intervals contains three or fewer effect "
+#~ "sizes, which may lead to estimation problems. Consider re-specifying the "
+#~ "cutoffs."
+#~ msgstr ""
+#~ "p値区間の少なくとも1つに3つ以下の効果量が含まれており、推定問題につながる"
+#~ "可能性があります。カットオフの再設定を検討してください。"
+
+#~ msgid ""
+#~ "The unadjusted estimate is negative. The selection model default "
+#~ "specification expects that the expected direction of the effect size is "
+#~ "positive. Please, check that you specified the effect sizes correctly or "
+#~ "change the 'Expected effect size direction' option in the 'Model' tab."
+#~ msgstr ""
+#~ "調整前の推定値は負である。選択モデルのデフォルト指定では、効果量の期待され"
+#~ "る方向が正であることを期待しています。効果量が正しく指定されているか確認す"
+#~ "るか、「モデル」タブの「期待される効果量の方向」オプションを変更してくださ"
+#~ "い。"
+
+#~ msgid ""
+#~ "The analysis requires both 'Effect Size' and 'Effect Size Standard Error' "
+#~ "to be specified."
+#~ msgstr ""
+#~ "この分析では、「効果量」と「効果量の標準誤差」の両方を指定する必要がありま"
+#~ "す。"
+
+#~ msgid "Only the following one-sided p-value cutoffs were used: %s."
+#~ msgstr "次の片側 p 値カットオフのみが使用されました: %s。"
+
 #, fuzzy
 #~ msgid "Additional Fit Measures"
 #~ msgstr "適合度指標"
-
-#, fuzzy
-#~ msgid "Model Fit"
-#~ msgstr "モデル %i"
 
 #~ msgid ""
 #~ "The study labels contain invalid characters. Please, remove them before "
@@ -2600,9 +2941,6 @@ msgstr[0] ""
 #~ msgid "Information"
 #~ msgstr "情報"
 
-#~ msgid "Model Estimates"
-#~ msgstr "モデル推定値"
-
 #~ msgid ""
 #~ "Model %1$i does not exist. Select one of the models between 1 and %2$i."
 #~ msgstr ""
@@ -2621,9 +2959,6 @@ msgstr[0] ""
 #~ msgid "Effect Size Estimate"
 #~ msgstr "効果量の推定値"
 
-#~ msgid "Weight Function Estimate"
-#~ msgstr "重み関数の推定"
-
 #~ msgid "PET-PEESE Regression Estimate"
 #~ msgstr "PET-PEESE回帰推定"
 
@@ -2632,9 +2967,6 @@ msgstr[0] ""
 
 #~ msgid "Effect Size Estimates"
 #~ msgstr "効果量の推定値"
-
-#~ msgid "Heterogeneity Estimates"
-#~ msgstr "異質性の推定値"
 
 #~ msgid "Models Diagnostics Overview"
 #~ msgstr "モデル診断の概要"

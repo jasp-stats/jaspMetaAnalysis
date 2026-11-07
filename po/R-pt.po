@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2026-08-22 02:47\n"
+"POT-Creation-Date: 2026-11-07 02:33\n"
 "PO-Revision-Date: 2026-02-10 14:09+0000\n"
 "Last-Translator: Wendel Paulo Silvestre <wpsilvestre@ucs.br>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
@@ -703,6 +703,10 @@ msgstr "Todas as observações foram removidas como influentes."
 msgid "Intercept"
 msgstr "Intercepto"
 
+#, fuzzy
+msgid "Heterogeneity test: not available"
+msgstr "Testes de homogeneidade"
+
 msgid "%1$s: not available"
 msgstr ""
 
@@ -856,8 +860,8 @@ msgstr ""
 "formato incorreto. Tente '(1, 2)' para testar os dois primeiros coeficientes."
 
 msgid ""
-"The selected coefficients for %1$s moderation must be between 1 and %2$i (i."
-"e., the number of regression parameters)."
+"The selected coefficients for %1$s moderation must be between 1 and %2$i "
+"(i.e., the number of regression parameters)."
 msgstr ""
 "Os coeficientes selecionados para moderação %1$s devem estar entre 1 e %2$i "
 "(i.e., o número de parâmetros de regressão)."
@@ -1002,6 +1006,9 @@ msgid ""
 "The %1$s is transformed using %2$s transformation. For nonlinear "
 "transformations, the transformed estimate is interpreted as a median on the "
 "transformed scale."
+msgstr ""
+
+msgid "The pooled effect is evaluated at the average moderator design vector."
 msgstr ""
 
 msgid ""
@@ -2326,170 +2333,321 @@ msgid "Interaction terms are currently not possible in Bayesian meta-analyses."
 msgstr ""
 "Termos de interação não são atualmente possíveis em meta-análises Bayesianas."
 
-msgid "Weight Function (%s)"
-msgstr "Função de Ponderação (%s)"
+#, fuzzy
+msgid "Model %1$i"
+msgstr "Modelo"
 
-msgid ""
-"The figure could not be created since one of the estimates is not a number."
+#, fuzzy
+msgid "Model Comparison"
+msgstr "Modelo de Comparação em Pares"
+
+#, fuzzy
+msgid "Model"
+msgstr "Modelos"
+
+#, fuzzy
+msgid "AIC weight"
+msgstr "Peso"
+
+msgid "AICc weight"
 msgstr ""
-"O valor não pôde ser criado porque uma das estimativas não é um número."
 
-msgid "P-value (One-sided)"
-msgstr "Valor-p (Unilateral)"
+#, fuzzy
+msgid "BIC weight"
+msgstr "Peso"
 
-msgid "Publication Probability"
-msgstr "Probabilidade de Publicação"
-
-msgid "Mean Model Estimates (%s)"
-msgstr "Estimativas do Modelo Médio (%s)"
-
-msgid "Fixed effects (adjusted)"
-msgstr "Efeitos fixos (ajustados)"
-
-msgid "Random effects (adjusted)"
-msgstr "Efeitos aleatórios (ajustado)"
-
-msgid "Model Tests"
-msgstr "Testes do Modelo"
-
-msgid "Test of Heterogeneity"
-msgstr "Teste de Heterogeneidade"
-
-msgid "Note:"
-msgstr "Nota:"
-
-msgid "Test of Publication Bias"
-msgstr "Teste de Viés de Publicação"
-
-msgid "ChiSq"
-msgstr "Qui-quadrado"
-
-msgid "Assuming homogeneity"
-msgstr "Assumindo homogeneidade"
-
-msgid "Assuming heterogeneity"
-msgstr "Assumindo heterogeneidade"
-
-msgid "Fixed Effects Estimates"
-msgstr "Estimativas de efeitos fixos"
-
-msgid "Mean Estimates (%s)"
-msgstr "Estimativas Médias (%s)"
-
-msgid "Estimated Weights"
-msgstr "Pesos Estimados"
-
-msgid "Heterogeneity Estimates(%s)"
-msgstr "Estimativas de Heterogeneidade(%s)"
-
-msgid "p-value Frequency"
-msgstr "Frequência de valor-p"
-
-msgid "<em>p</em>-values interval(one-sided)"
-msgstr "intervalo de valores-<em>p</em> (unilateral)"
-
-msgid "Frequency"
-msgstr "Frequência"
-
-msgid ""
-"There were no p-value cutoffs after their automatic reduction. The displayed "
-"frequencies correspond to the non-reduced p-value cutoffs."
+msgid "Add at least one weight-function model in the Custom section."
 msgstr ""
-"Não houve cortes de valor-p após a redução automática. As frequências "
-"exibidas correspondem aos cortes de valor-p não reduzidos."
 
-msgid ""
-"Cannot compute results. All entries of the p-value variable (%s) must be "
-"between 0 and 1."
-msgstr ""
-"Não é possível calcular os resultados. Todas as entradas da variável de "
-"valor-p (%s) devem estar entre 0 e 1."
+#, fuzzy
+msgid "Model %1$i: %2$s"
+msgstr "%1$s: %2$s"
 
-msgid ""
-"Cannot compute results. All entries of the correlation coefficient variable "
-"(%s) must be between -1 and 1."
-msgstr ""
-"Não é possível calcular os resultados. Todas as entradas da variável de "
-"coeficiente de correlação (%s) devem estar entre -1 e 1."
-
-msgid ""
-"Cannot compute results. All entries of the sample size variable (%s) must be "
-"greater than four."
-msgstr ""
-"Não é possível calcular os resultados. Todas as entradas da variável de "
-"tamanho da amostra (%s) devem ser maiores que quatro."
-
-msgid "The p-value cutoffs were set incorectly."
-msgstr "Os pontos de corte do valor-p foram definidos incorretamente."
-
-msgid "At least one p-value cutoff needs to be set."
-msgstr "Pelo menos um valor de corte para o valor-p precisa ser definido."
-
-msgid "All p-value cutoffs needs to be between 0 and 1."
-msgstr "Todos os pontos de corte do valor-p precisam estar entre 0 e 1."
-
-msgid "95%% Confidence Interval"
-msgstr "Intervalo de Confiança 95%%"
-
-msgid "%1$s is on %2$s scale."
+#, fuzzy
+msgid "Model %1$i, %2$s: %3$s"
 msgstr "%1$s está na escala %2$s."
 
-msgid "Fixed effects model:"
-msgstr "Modelo de efeitos fixos:"
+#, fuzzy
+msgid "Model %1$i: %2$s: %3$s"
+msgstr "%1$s está na escala %2$s."
 
-msgid "Random effects model:"
-msgstr "Modelo de efeitos aleatórios:"
+msgid "Assign a sample-size variable for this precision measure."
+msgstr ""
 
 msgid ""
-"%sThe optimizer failed to find a solution. Consider re-specifying the model "
-"or the p-value cutoffs."
+"No estimates are marked as subject to selection. Use the unadjusted model "
+"(None) or choose a different unaffected level."
 msgstr ""
-"%s O otimizador não conseguiu encontrar uma solução. Considere reespecificar "
-"o modelo ou os pontos de corte do valor-p."
 
 msgid ""
-"%sThe automatic cutoffs selection did not find viable p-value cutoffs. "
-"Please, specify them manually."
+"The reference interval or an interval with an estimated weight contains no "
+"selected estimates. Change the cutoffs or fix the empty interval's weight; "
+"intervals are not merged automatically."
 msgstr ""
-"%s A seleção automática de pontos de corte não encontrou pontos de corte "
-"para valores-p viáveis. Por favor, especifique-os manualmente."
 
 msgid ""
-"At least one of the p-value intervals contains no effect sizes, leading to "
-"estimation problems. Consider re-specifying the cutoffs."
+"Selection model fitting failed. In Advanced Options, try a different "
+"optimizer or increase the maximum number of iterations. Also check the "
+"cutoffs and fixed selection parameters."
 msgstr ""
-"Pelo menos um dos intervalos de valor-p não contém tamanhos de efeito, o que "
-"leva a problemas de estimativa. Considere reespecificar os pontos de corte."
 
 msgid ""
-"At least one of the p-value intervals contains three or fewer effect sizes, "
-"which may lead to estimation problems. Consider re-specifying the cutoffs."
+"Enter comma-separated numbers, optionally enclosed in parentheses. Use NA "
+"for parameters to estimate."
 msgstr ""
-"Pelo menos um dos intervalos de valor-p contém três ou menos tamanhos de "
-"efeito, o que pode levar a problemas de estimativa. Considere redefinir os "
-"pontos de corte."
+
+#, fuzzy
+msgid "All specified numbers must be finite."
+msgstr "Todos os erros padrões devem ser positivos."
 
 msgid ""
-"The unadjusted estimate is negative. The selection model default "
-"specification expects that the expected direction of the effect size is "
-"positive. Please, check that you specified the effect sizes correctly or "
-"change the 'Expected effect size direction' option in the 'Model' tab."
+"Step-function cutoffs must be strictly increasing and greater than 0, with a "
+"maximum of 1."
 msgstr ""
-"A estimativa não ajustada é negativa. A especificação padrão do modelo de "
-"seleção espera que a direção esperada do tamanho do efeito seja positiva. "
-"Verifique se você especificou os tamanhos do efeito corretamente ou altere a "
-"opção 'Direção esperada do tamanho do efeito' na aba 'Modelo'."
+
+msgid "Specify at least one cutoff below 1."
+msgstr ""
 
 msgid ""
-"The analysis requires both 'Effect Size' and 'Effect Size Standard Error' to "
-"be specified."
+"Beta truncation requires two increasing p-value cutoffs strictly between 0 "
+"and 1."
 msgstr ""
-"A análise requer que tanto o 'Tamanho do Efeito' quanto o 'Erro Padrão do "
-"Tamanho do Efeito' sejam especificados."
 
-msgid "Only the following one-sided p-value cutoffs were used: %s."
+msgid "Specify one effect-size cutoff for the truncated model."
 msgstr ""
-"Somente os seguintes pontos de corte de valor-p unilateral foram usados: %s."
+
+msgid ""
+"Specify a single p-value threshold strictly between 0 and 1, or leave the "
+"threshold empty."
+msgstr ""
+
+msgid ""
+"This model requires %1$i selection parameters. Use NA for each parameter to "
+"estimate, or leave the field empty to estimate all parameters."
+msgstr ""
+
+msgid ""
+"Selection parameters must be non-negative; beta parameters must be strictly "
+"positive."
+msgstr ""
+
+msgid "The first step-function weight must equal 1 (the reference interval)."
+msgstr ""
+
+msgid ""
+"Ordinality requires estimated non-reference weights. Clear the parameters or "
+"turn off ordinality."
+msgstr ""
+
+#, fuzzy
+msgid "Invalid specification"
+msgstr "Especificações do Modelo"
+
+#, fuzzy
+msgid "None (unadjusted)"
+msgstr "Efeitos aleatórios (ajustado)"
+
+#, fuzzy
+msgid "Step function"
+msgstr "Função de ponderação"
+
+msgid "Beta"
+msgstr ""
+
+msgid "Half-normal"
+msgstr ""
+
+#, fuzzy
+msgid "Negative exponential"
+msgstr "exponencial"
+
+msgid "Logistic"
+msgstr ""
+
+msgid "Negative exponential power"
+msgstr ""
+
+#, fuzzy
+msgid "Truncation"
+msgstr "Iteração"
+
+#, fuzzy
+msgid "Estimated truncation"
+msgstr "Efeitos estimados do estudo"
+
+#, fuzzy
+msgid "Variance"
+msgstr "Covariância"
+
+#, fuzzy
+msgid "Inverse sample size"
+msgstr "Tamanho da amostra"
+
+msgid "Inverse square root sample size"
+msgstr ""
+
+msgid "; ordinal"
+msgstr ""
+
+msgid "; two-sided"
+msgstr ""
+
+#, fuzzy
+msgid "; one-sided"
+msgstr "Valor-p (Unilateral)"
+
+#, fuzzy
+msgid "; sample size: %1$s"
+msgstr "Tamanho da amostra"
+
+msgid "; unscaled precision"
+msgstr ""
+
+#, fuzzy
+msgid "Publication bias test: not available"
+msgstr "Viés de Publicação: %1$s"
+
+msgid "Precision index: %1$.3f"
+msgstr ""
+
+#, fuzzy
+msgid "P-value"
+msgstr "Valor-p"
+
+#, fuzzy
+msgid "P-value (two-sided)"
+msgstr "Valor-p (Unilateral)"
+
+#, fuzzy
+msgid "P-value (one-sided)"
+msgstr "Valor-p (Unilateral)"
+
+msgid "Relative selection likelihood"
+msgstr ""
+
+msgid "No fitted model is available for profile likelihood diagnostics."
+msgstr ""
+
+msgid "The model could not be fitted: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Profile likelihood diagnostics are not available for ordinal selection "
+"models."
+msgstr ""
+"A verossimilhança do perfil não está disponível para modelos que contêm "
+"metarregressão sobre heterogeneidade."
+
+msgid "There are no free heterogeneity or selection parameters to profile."
+msgstr ""
+
+msgid "Selection Parameter %1$i"
+msgstr ""
+
+msgid "Fewer than two finite profile likelihood values are available."
+msgstr ""
+
+msgid "R code unavailable until the specification is valid: %1$s"
+msgstr ""
+
+msgid "The module reported: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid "R Code"
+msgstr "Código R de RoBMA"
+
+msgid ""
+"Selection p-values were supplied rather than calculated from effect sizes "
+"and standard errors."
+msgstr ""
+
+msgid ""
+"Coefficient standard errors could not be estimated. Wald tests and "
+"coefficient confidence intervals are unavailable; review the fitting "
+"warnings before interpreting this model."
+msgstr ""
+
+msgid ""
+"The publication-bias test is not applicable with fixed selection parameters."
+msgstr ""
+
+msgid ""
+"The heterogeneity likelihood-ratio test could not be computed. Review the "
+"fitting warnings before interpreting this model."
+msgstr ""
+
+msgid "Heterogeneity confidence interval unavailable: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid "Weight Function Summary"
+msgstr "Função de ponderação"
+
+#, fuzzy
+msgid "Weight Function Estimates"
+msgstr "Medidas adicionais de ajuste"
+
+msgid "The unadjusted model has no selection parameters."
+msgstr ""
+
+#, fuzzy
+msgid "Selection Parameter Estimates"
+msgstr "Estimativas de Parâmetros de Funil H₁"
+
+msgid "Selection uses two-sided p-values."
+msgstr ""
+
+#, fuzzy
+msgid "Expected effect direction: %1$s."
+msgstr "Tamanho do efeito (coef: %1$s)"
+
+msgid ""
+"Fixed selection parameters have no standard errors or confidence intervals."
+msgstr ""
+
+#, fuzzy
+msgid "P-Value Frequencies"
+msgstr "Frequência de valor-p"
+
+msgid "P-value frequencies require valid p-value cutoffs and study p-values."
+msgstr ""
+
+#, fuzzy
+msgid "Selected Estimates"
+msgstr "Estimativas de efeitos fixos"
+
+msgid "P-value frequencies include only estimates to which selection applies."
+msgstr ""
+
+#, fuzzy
+msgid "Model Results"
+msgstr "Testes do Modelo"
+
+msgid "No fitted model is available for the requested selection."
+msgstr ""
+
+msgid ""
+"The unaffected level is not present in the no-selection variable. Choose an "
+"available level."
+msgstr ""
+
+msgid "P-values must be finite, greater than zero, and at most one."
+msgstr ""
+
+msgid ""
+"Sample-size variable not found in the data. Assign an available sample-size "
+"variable."
+msgstr ""
+
+msgid "Sample sizes must be finite and greater than zero."
+msgstr ""
+
+msgid ""
+"Standard errors are too small or too large to yield finite positive sampling "
+"variances. Rescale effect sizes and standard errors."
+msgstr ""
 
 msgid "Estimating: %1$s"
 msgstr "Estimando: %1$s"
@@ -2530,14 +2688,40 @@ msgstr "Resumo dos Coeficientes"
 msgid "Computed Estimates Summary"
 msgstr "Resumo das Estimativas Calculadas"
 
+msgid ""
+"Cannot compute results. All entries of the correlation coefficient variable "
+"(%s) must be between -1 and 1."
+msgstr ""
+"Não é possível calcular os resultados. Todas as entradas da variável de "
+"coeficiente de correlação (%s) devem estar entre -1 e 1."
+
+msgid ""
+"Cannot compute results. All entries of the sample size variable (%s) must be "
+"greater than four."
+msgstr ""
+"Não é possível calcular os resultados. Todas as entradas da variável de "
+"tamanho da amostra (%s) devem ser maiores que quatro."
+
+msgid "95%% Confidence Interval"
+msgstr "Intervalo de Confiança 95%%"
+
 msgid "Error: There were not enough adequately powered studies (k = %1$i)"
 msgstr "Erro: Não houve estudos suficientes com poder adequado (k = %1$i)"
 
 msgid "Note: There were %1$i adequately powered studies"
 msgstr "Nota: Houve %1$i estudos com poder adequado"
 
+msgid "Model Tests"
+msgstr "Testes do Modelo"
+
 msgid "Test of Effect"
 msgstr "teste do Efeito"
+
+msgid "Test of Publication Bias"
+msgstr "Teste de Viés de Publicação"
+
+msgid "Mean Estimates (%s)"
+msgstr "Estimativas Médias (%s)"
 
 msgid "Multiplicative Heterogeneity Estimates"
 msgstr "Estimativas de Heterogeneidade Multiplicativas"
@@ -2550,6 +2734,14 @@ msgstr "d de Cohen"
 
 msgid "Fisher's z"
 msgstr "z de Fisher"
+
+msgid "Mean Model Estimates (%s)"
+msgstr "Estimativas do Modelo Médio (%s)"
+
+msgid ""
+"The figure could not be created since one of the estimates is not a number."
+msgstr ""
+"O valor não pôde ser criado porque uma das estimativas não é um número."
 
 msgid ""
 "WAAP was not estimated: There were only %1$i adequately powered studies "
@@ -2617,6 +2809,161 @@ msgstr[1] ""
 "excederam a profundidade máxima da árvore. Isso pode ser resolvido pelo "
 "acréscimo cauteloso da 'Profundidade Máxima da Árvore'."
 
+msgid ""
+"The selection weight for p-value interval %1$s is fixed at zero, but the "
+"interval contains %2$i selected estimate. Use a positive weight or NA to "
+"estimate the weight."
+msgid_plural ""
+"The selection weight for p-value interval %1$s is fixed at zero, but the "
+"interval contains %2$i selected estimates. Use a positive weight or NA to "
+"estimate the weight."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Selection applies to %1$i estimate."
+msgid_plural "Selection applies to %1$i estimates."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "%1$i estimate at level '%2$s' is unaffected."
+msgid_plural "%1$i estimates at level '%2$s' are unaffected."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid ""
+"For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. "
+"This affects %3$i selected estimate."
+msgid_plural ""
+"For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. "
+"This affects %3$i selected estimates."
+msgstr[0] ""
+msgstr[1] ""
+
+#~ msgid "Weight Function (%s)"
+#~ msgstr "Função de Ponderação (%s)"
+
+#~ msgid "Publication Probability"
+#~ msgstr "Probabilidade de Publicação"
+
+#~ msgid "Fixed effects (adjusted)"
+#~ msgstr "Efeitos fixos (ajustados)"
+
+#~ msgid "Test of Heterogeneity"
+#~ msgstr "Teste de Heterogeneidade"
+
+#~ msgid "Note:"
+#~ msgstr "Nota:"
+
+#~ msgid "ChiSq"
+#~ msgstr "Qui-quadrado"
+
+#~ msgid "Assuming homogeneity"
+#~ msgstr "Assumindo homogeneidade"
+
+#~ msgid "Assuming heterogeneity"
+#~ msgstr "Assumindo heterogeneidade"
+
+#~ msgid "Fixed Effects Estimates"
+#~ msgstr "Estimativas de efeitos fixos"
+
+#~ msgid "Estimated Weights"
+#~ msgstr "Pesos Estimados"
+
+#~ msgid "Heterogeneity Estimates(%s)"
+#~ msgstr "Estimativas de Heterogeneidade(%s)"
+
+#~ msgid "<em>p</em>-values interval(one-sided)"
+#~ msgstr "intervalo de valores-<em>p</em> (unilateral)"
+
+#~ msgid "Frequency"
+#~ msgstr "Frequência"
+
+#~ msgid ""
+#~ "There were no p-value cutoffs after their automatic reduction. The "
+#~ "displayed frequencies correspond to the non-reduced p-value cutoffs."
+#~ msgstr ""
+#~ "Não houve cortes de valor-p após a redução automática. As frequências "
+#~ "exibidas correspondem aos cortes de valor-p não reduzidos."
+
+#~ msgid ""
+#~ "Cannot compute results. All entries of the p-value variable (%s) must be "
+#~ "between 0 and 1."
+#~ msgstr ""
+#~ "Não é possível calcular os resultados. Todas as entradas da variável de "
+#~ "valor-p (%s) devem estar entre 0 e 1."
+
+#~ msgid "The p-value cutoffs were set incorectly."
+#~ msgstr "Os pontos de corte do valor-p foram definidos incorretamente."
+
+#~ msgid "At least one p-value cutoff needs to be set."
+#~ msgstr "Pelo menos um valor de corte para o valor-p precisa ser definido."
+
+#~ msgid "All p-value cutoffs needs to be between 0 and 1."
+#~ msgstr "Todos os pontos de corte do valor-p precisam estar entre 0 e 1."
+
+#~ msgid "%1$s is on %2$s scale."
+#~ msgstr "%1$s está na escala %2$s."
+
+#~ msgid "Fixed effects model:"
+#~ msgstr "Modelo de efeitos fixos:"
+
+#~ msgid "Random effects model:"
+#~ msgstr "Modelo de efeitos aleatórios:"
+
+#~ msgid ""
+#~ "%sThe optimizer failed to find a solution. Consider re-specifying the "
+#~ "model or the p-value cutoffs."
+#~ msgstr ""
+#~ "%s O otimizador não conseguiu encontrar uma solução. Considere "
+#~ "reespecificar o modelo ou os pontos de corte do valor-p."
+
+#~ msgid ""
+#~ "%sThe automatic cutoffs selection did not find viable p-value cutoffs. "
+#~ "Please, specify them manually."
+#~ msgstr ""
+#~ "%s A seleção automática de pontos de corte não encontrou pontos de corte "
+#~ "para valores-p viáveis. Por favor, especifique-os manualmente."
+
+#~ msgid ""
+#~ "At least one of the p-value intervals contains no effect sizes, leading "
+#~ "to estimation problems. Consider re-specifying the cutoffs."
+#~ msgstr ""
+#~ "Pelo menos um dos intervalos de valor-p não contém tamanhos de efeito, o "
+#~ "que leva a problemas de estimativa. Considere reespecificar os pontos de "
+#~ "corte."
+
+#~ msgid ""
+#~ "At least one of the p-value intervals contains three or fewer effect "
+#~ "sizes, which may lead to estimation problems. Consider re-specifying the "
+#~ "cutoffs."
+#~ msgstr ""
+#~ "Pelo menos um dos intervalos de valor-p contém três ou menos tamanhos de "
+#~ "efeito, o que pode levar a problemas de estimativa. Considere redefinir "
+#~ "os pontos de corte."
+
+#~ msgid ""
+#~ "The unadjusted estimate is negative. The selection model default "
+#~ "specification expects that the expected direction of the effect size is "
+#~ "positive. Please, check that you specified the effect sizes correctly or "
+#~ "change the 'Expected effect size direction' option in the 'Model' tab."
+#~ msgstr ""
+#~ "A estimativa não ajustada é negativa. A especificação padrão do modelo de "
+#~ "seleção espera que a direção esperada do tamanho do efeito seja positiva. "
+#~ "Verifique se você especificou os tamanhos do efeito corretamente ou "
+#~ "altere a opção 'Direção esperada do tamanho do efeito' na aba 'Modelo'."
+
+#~ msgid ""
+#~ "The analysis requires both 'Effect Size' and 'Effect Size Standard Error' "
+#~ "to be specified."
+#~ msgstr ""
+#~ "A análise requer que tanto o 'Tamanho do Efeito' quanto o 'Erro Padrão do "
+#~ "Tamanho do Efeito' sejam especificados."
+
+#~ msgid "Only the following one-sided p-value cutoffs were used: %s."
+#~ msgstr ""
+#~ "Somente os seguintes pontos de corte de valor-p unilateral foram usados: "
+#~ "%s."
+
 #~ msgid ""
 #~ "Casewise diagnostics are not available for models that contain meta-"
 #~ "regression on heterogeneity."
@@ -2646,10 +2993,6 @@ msgstr[1] ""
 #, fuzzy
 #~ msgid "Additional Fit Measures"
 #~ msgstr "Medidas adicionais de ajuste"
-
-#, fuzzy
-#~ msgid "Model Fit"
-#~ msgstr "Modelo"
 
 #, fuzzy
 #~ msgid "Prior Plots"
@@ -2717,20 +3060,8 @@ msgstr[1] ""
 #~ msgstr "Tamanho de efeito"
 
 #, fuzzy
-#~ msgid "Weight Function Estimate"
-#~ msgstr "Medidas adicionais de ajuste"
-
-#, fuzzy
 #~ msgid "Posterior Model Estimates Plots"
 #~ msgstr "Estimativas"
-
-#, fuzzy
-#~ msgid "Effect Size Estimates"
-#~ msgstr "Estimativas de efeitos fixos"
-
-#, fuzzy
-#~ msgid "Heterogeneity Estimates"
-#~ msgstr "Testes de homogeneidade"
 
 #, fuzzy
 #~ msgid "Average autocorrelations"

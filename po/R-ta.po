@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.19.2\n"
-"POT-Creation-Date: 2026-08-22 02:47\n"
+"POT-Creation-Date: 2026-11-07 02:33\n"
 "PO-Revision-Date: 2026-01-01 18:01+0000\n"
 "Last-Translator: தமிழ்நேரம் <tamilneram247@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/jasp/"
@@ -686,6 +686,10 @@ msgstr "அனைத்து அவதானிப்புகளும் ச�
 msgid "Intercept"
 msgstr "இடைமறிப்பு"
 
+#, fuzzy
+msgid "Heterogeneity test: not available"
+msgstr "பன்முகத்தன்மை மதிப்பீடுகள்"
+
 msgid "%1$s: not available"
 msgstr ""
 
@@ -839,8 +843,8 @@ msgstr ""
 "குணகங்களை சோதிக்க '(1, 2)' முயற்சிக்கவும்."
 
 msgid ""
-"The selected coefficients for %1$s moderation must be between 1 and %2$i (i."
-"e., the number of regression parameters)."
+"The selected coefficients for %1$s moderation must be between 1 and %2$i "
+"(i.e., the number of regression parameters)."
 msgstr ""
 "%1$s மிதமான தேர்ந்தெடுக்கப்பட்ட குணகங்கள் 1 முதல் %2$i க்கு இடையில் இருக்க வேண்டும் "
 "(அதாவது, பின்னடைவு அளவுருக்களின் எண்ணிக்கை)."
@@ -983,6 +987,9 @@ msgid ""
 "The %1$s is transformed using %2$s transformation. For nonlinear "
 "transformations, the transformed estimate is interpreted as a median on the "
 "transformed scale."
+msgstr ""
+
+msgid "The pooled effect is evaluated at the average moderator design vector."
 msgstr ""
 
 msgid ""
@@ -2259,167 +2266,321 @@ msgstr "வெளியீட்டு சார்பு சரிசெய்�
 msgid "Interaction terms are currently not possible in Bayesian meta-analyses."
 msgstr "பேய்சியன் மெட்டா பகுப்பாய்வுகளில் தொடர்புச் சொற்கள் தற்போது சாத்தியமில்லை."
 
-msgid "Weight Function (%s)"
-msgstr "எடை செயல்பாடு (%s)"
+#, fuzzy
+msgid "Model %1$i"
+msgstr "மாதிரி %i"
 
-msgid ""
-"The figure could not be created since one of the estimates is not a number."
-msgstr "மதிப்பீடுகளில் ஒன்று எண் அல்ல என்பதால் உருவத்தை உருவாக்க முடியவில்லை."
+#, fuzzy
+msgid "Model Comparison"
+msgstr "சோடிவரிசை மாதிரி ஒப்பீடு"
 
-msgid "P-value (One-sided)"
-msgstr "பி-மதிப்பு (ஒருதலைப்பட்ச)"
+#, fuzzy
+msgid "Model"
+msgstr "மாதிரிகள்"
 
-msgid "Publication Probability"
-msgstr "வெளியீட்டு நிகழ்தகவு"
+#, fuzzy
+msgid "AIC weight"
+msgstr "எடை"
 
-msgid "Mean Model Estimates (%s)"
-msgstr "சராசரி மாதிரி மதிப்பீடுகள் (%s)"
-
-msgid "Fixed effects (adjusted)"
-msgstr "நிலையான விளைவுகள் (சரிசெய்யப்பட்டது)"
-
-msgid "Random effects (adjusted)"
-msgstr "சீரற்ற விளைவுகள் (சரிசெய்யப்பட்டது)"
-
-msgid "Model Tests"
-msgstr "மாதிரி சோதனைகள்"
-
-msgid "Test of Heterogeneity"
-msgstr "பன்முகத்தன்மையின் சோதனை"
-
-msgid "Note:"
-msgstr "குறிப்பு:"
-
-msgid "Test of Publication Bias"
-msgstr "வெளியீட்டு சார்புகளின் சோதனை"
-
-msgid "ChiSq"
-msgstr "சிச்க்"
-
-msgid "Assuming homogeneity"
-msgstr "ஒருமைப்பாட்டைக் கருதி"
-
-msgid "Assuming heterogeneity"
-msgstr "பன்முகத்தன்மையைக் கருதி"
-
-msgid "Fixed Effects Estimates"
-msgstr "நிலையான விளைவுகள் மதிப்பீடுகள்"
-
-msgid "Mean Estimates (%s)"
-msgstr "சராசரி மதிப்பீடுகள் (%s)"
-
-msgid "Estimated Weights"
-msgstr "மதிப்பிடப்பட்ட எடைகள்"
-
-msgid "Heterogeneity Estimates(%s)"
-msgstr "பன்முகத்தன்மை மதிப்பீடுகள் (%s)"
-
-msgid "p-value Frequency"
-msgstr "பி-மதிப்பு அதிர்வெண்"
-
-msgid "<em>p</em>-values interval(one-sided)"
-msgstr "<em> ப </em>-மதிப்பீட்டு இடைவெளி (ஒருதலைப்பட்ச)"
-
-msgid "Frequency"
-msgstr "மீடிறன், மீள்திறன், நிகழ்வெண், நிகழ்வு"
-
-msgid ""
-"There were no p-value cutoffs after their automatic reduction. The displayed "
-"frequencies correspond to the non-reduced p-value cutoffs."
+msgid "AICc weight"
 msgstr ""
-"அவற்றின் தானியங்கி குறைப்புக்குப் பிறகு பி-மதிப்பு வெட்டுக்கள் எதுவும் இல்லை. காட்டப்படும் "
-"அதிர்வெண்கள் குறைக்கப்பட்ட பி-மதிப்பு வெட்டுக்களுக்கு ஒத்திருக்கும்."
 
-msgid ""
-"Cannot compute results. All entries of the p-value variable (%s) must be "
-"between 0 and 1."
+#, fuzzy
+msgid "BIC weight"
+msgstr "எடை"
+
+msgid "Add at least one weight-function model in the Custom section."
 msgstr ""
-"முடிவுகளை கணக்கிட முடியாது. பி-மதிப்பு மாறியின் அனைத்து உள்ளீடுகளும் (%s) 0 முதல் 1 "
-"வரை இருக்க வேண்டும்."
 
-msgid ""
-"Cannot compute results. All entries of the correlation coefficient variable "
-"(%s) must be between -1 and 1."
-msgstr ""
-"முடிவுகளைக் கணக்கிட முடியவில்லை. தொடர்பு குணக மாறியின் (%s) அனைத்து உள்ளீடுகளும் -1 "
-"மற்றும் 1 க்கு இடையில் இருக்க வேண்டும்."
+#, fuzzy
+msgid "Model %1$i: %2$s"
+msgstr "%1$s: %2$s"
 
-msgid ""
-"Cannot compute results. All entries of the sample size variable (%s) must be "
-"greater than four."
-msgstr ""
-"முடிவுகளை கணக்கிட முடியாது. மாதிரி அளவு மாறியின் அனைத்து உள்ளீடுகளும் (%s) நான்கை "
-"விட அதிகமாக இருக்க வேண்டும்."
-
-msgid "The p-value cutoffs were set incorectly."
-msgstr "பி-மதிப்பு வெட்டுக்கள் தவறாக அமைக்கப்பட்டுள்ளன."
-
-msgid "At least one p-value cutoff needs to be set."
-msgstr "குறைந்தது ஒரு பி-மதிப்பு வெட்டு அமைக்கப்பட வேண்டும்."
-
-msgid "All p-value cutoffs needs to be between 0 and 1."
-msgstr "அனைத்து பி-மதிப்பு வெட்டுக்களும் 0 முதல் 1 வரை இருக்க வேண்டும்."
-
-msgid "95%% Confidence Interval"
-msgstr "95 %% நம்பிக்கை இடைவெளி"
-
-msgid "%1$s is on %2$s scale."
+#, fuzzy
+msgid "Model %1$i, %2$s: %3$s"
 msgstr "%1$s %2$s அளவில் உள்ளது."
 
-msgid "Fixed effects model:"
-msgstr "நிலையான விளைவுகள் மாதிரி:"
+#, fuzzy
+msgid "Model %1$i: %2$s: %3$s"
+msgstr "%1$s %2$s அளவில் உள்ளது."
 
-msgid "Random effects model:"
-msgstr "சீரற்ற விளைவுகள் மாதிரி:"
+msgid "Assign a sample-size variable for this precision measure."
+msgstr ""
 
 msgid ""
-"%sThe optimizer failed to find a solution. Consider re-specifying the model "
-"or the p-value cutoffs."
+"No estimates are marked as subject to selection. Use the unadjusted model "
+"(None) or choose a different unaffected level."
 msgstr ""
-"%s ஆப்டிமைசர் ஒரு தீர்வைக் கண்டுபிடிக்கத் தவறிவிட்டது. மாதிரி அல்லது p-மதிப்பு "
-"வெட்டுக்களை மீண்டும் குறிப்பிடுவதைக் கருத்தில் கொள்ளுங்கள்."
 
 msgid ""
-"%sThe automatic cutoffs selection did not find viable p-value cutoffs. "
-"Please, specify them manually."
+"The reference interval or an interval with an estimated weight contains no "
+"selected estimates. Change the cutoffs or fix the empty interval's weight; "
+"intervals are not merged automatically."
 msgstr ""
-"%sthe தானியங்கி கட் ஆப் தேர்வு சாத்தியமான பி-மதிப்பு வெட்டைக் காணவில்லை. தயவுசெய்து, "
-"அவற்றை கைமுறையாக குறிப்பிடவும்."
 
 msgid ""
-"At least one of the p-value intervals contains no effect sizes, leading to "
-"estimation problems. Consider re-specifying the cutoffs."
+"Selection model fitting failed. In Advanced Options, try a different "
+"optimizer or increase the maximum number of iterations. Also check the "
+"cutoffs and fixed selection parameters."
 msgstr ""
-"பி-மதிப்பு இடைவெளிகளில் குறைந்தபட்சம் ஒரு விளைவு அளவுகள் இல்லை, இது மதிப்பீட்டு "
-"சிக்கல்களுக்கு வழிவகுக்கிறது. வெட்டுக்களை மீண்டும் விவரிப்பதைக் கவனியுங்கள்."
 
 msgid ""
-"At least one of the p-value intervals contains three or fewer effect sizes, "
-"which may lead to estimation problems. Consider re-specifying the cutoffs."
+"Enter comma-separated numbers, optionally enclosed in parentheses. Use NA "
+"for parameters to estimate."
 msgstr ""
-"பி-மதிப்பு இடைவெளிகளில் குறைந்தபட்சம் மூன்று அல்லது குறைவான விளைவு அளவுகள் உள்ளன, அவை "
-"மதிப்பீட்டு சிக்கல்களுக்கு வழிவகுக்கும். வெட்டுக்களை மீண்டும் விவரிப்பதைக் கவனியுங்கள்."
+
+#, fuzzy
+msgid "All specified numbers must be finite."
+msgstr "அனைத்து நிலையான பிழைகளும் நேர்மறையாக இருக்க வேண்டும்."
 
 msgid ""
-"The unadjusted estimate is negative. The selection model default "
-"specification expects that the expected direction of the effect size is "
-"positive. Please, check that you specified the effect sizes correctly or "
-"change the 'Expected effect size direction' option in the 'Model' tab."
+"Step-function cutoffs must be strictly increasing and greater than 0, with a "
+"maximum of 1."
 msgstr ""
-"சரிசெய்யப்படாத மதிப்பீடு எதிர்மறையானது. தேர்வு மாதிரி இயல்புநிலை விவரக்குறிப்பு "
-"விளைவு அளவின் எதிர்பார்க்கப்படும் திசை நேர்மறையானது என்று எதிர்பார்க்கிறது. தயவுசெய்து, "
-"விளைவு அளவுகளை நீங்கள் சரியாகக் குறிப்பிட்டுள்ளீர்களா என்பதைச் சரிபார்க்கவும் அல்லது "
-"'மாதிரி' தாவலில் 'எதிர்பார்க்கப்படும் விளைவு அளவு திசை' விருப்பத்தை மாற்றவும்."
+
+msgid "Specify at least one cutoff below 1."
+msgstr ""
 
 msgid ""
-"The analysis requires both 'Effect Size' and 'Effect Size Standard Error' to "
-"be specified."
+"Beta truncation requires two increasing p-value cutoffs strictly between 0 "
+"and 1."
 msgstr ""
-"பகுப்பாய்விற்கு 'விளைவு அளவு' மற்றும் 'விளைவு அளவு நிலையான பிழை' இரண்டையும் "
-"குறிப்பிட வேண்டும்."
 
-msgid "Only the following one-sided p-value cutoffs were used: %s."
-msgstr "பின்வரும் ஒருதலைப்பட்ச பி-மதிப்பு வெட்டுக்கள் மட்டுமே பயன்படுத்தப்பட்டன: %s."
+msgid "Specify one effect-size cutoff for the truncated model."
+msgstr ""
+
+msgid ""
+"Specify a single p-value threshold strictly between 0 and 1, or leave the "
+"threshold empty."
+msgstr ""
+
+msgid ""
+"This model requires %1$i selection parameters. Use NA for each parameter to "
+"estimate, or leave the field empty to estimate all parameters."
+msgstr ""
+
+msgid ""
+"Selection parameters must be non-negative; beta parameters must be strictly "
+"positive."
+msgstr ""
+
+msgid "The first step-function weight must equal 1 (the reference interval)."
+msgstr ""
+
+msgid ""
+"Ordinality requires estimated non-reference weights. Clear the parameters or "
+"turn off ordinality."
+msgstr ""
+
+#, fuzzy
+msgid "Invalid specification"
+msgstr "மாதிரி விவரக்குறிப்பு"
+
+#, fuzzy
+msgid "None (unadjusted)"
+msgstr "சீரற்ற விளைவுகள் (சரிசெய்யப்பட்டது)"
+
+#, fuzzy
+msgid "Step function"
+msgstr "எடை செயல்பாடு"
+
+msgid "Beta"
+msgstr ""
+
+msgid "Half-normal"
+msgstr ""
+
+#, fuzzy
+msgid "Negative exponential"
+msgstr "அடுக்குக்குறி"
+
+msgid "Logistic"
+msgstr ""
+
+msgid "Negative exponential power"
+msgstr ""
+
+#, fuzzy
+msgid "Truncation"
+msgstr "மறுசெய்கை"
+
+#, fuzzy
+msgid "Estimated truncation"
+msgstr "மதிப்பிடப்பட்ட ஆய்வு விளைவுகள்"
+
+#, fuzzy
+msgid "Variance"
+msgstr "கோவாரன்ச்"
+
+#, fuzzy
+msgid "Inverse sample size"
+msgstr "மாதிரி அளவு"
+
+msgid "Inverse square root sample size"
+msgstr ""
+
+msgid "; ordinal"
+msgstr ""
+
+msgid "; two-sided"
+msgstr ""
+
+#, fuzzy
+msgid "; one-sided"
+msgstr "பி-மதிப்பு (ஒருதலைப்பட்ச)"
+
+#, fuzzy
+msgid "; sample size: %1$s"
+msgstr "மாதிரி அளவு"
+
+msgid "; unscaled precision"
+msgstr ""
+
+#, fuzzy
+msgid "Publication bias test: not available"
+msgstr "வெளியீட்டு சார்பு: %1$s"
+
+msgid "Precision index: %1$.3f"
+msgstr ""
+
+#, fuzzy
+msgid "P-value"
+msgstr "பி-மதிப்பு"
+
+#, fuzzy
+msgid "P-value (two-sided)"
+msgstr "பி-மதிப்பு (ஒருதலைப்பட்ச)"
+
+#, fuzzy
+msgid "P-value (one-sided)"
+msgstr "பி-மதிப்பு (ஒருதலைப்பட்ச)"
+
+msgid "Relative selection likelihood"
+msgstr ""
+
+msgid "No fitted model is available for profile likelihood diagnostics."
+msgstr ""
+
+msgid "The model could not be fitted: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Profile likelihood diagnostics are not available for ordinal selection "
+"models."
+msgstr ""
+"பன்முகத்தன்மை குறித்த மெட்டா-பின்னடைவு கொண்ட மாதிரிகளுக்கு சுயவிவர சாத்தியக்கூறு "
+"கிடைக்கவில்லை."
+
+msgid "There are no free heterogeneity or selection parameters to profile."
+msgstr ""
+
+msgid "Selection Parameter %1$i"
+msgstr ""
+
+msgid "Fewer than two finite profile likelihood values are available."
+msgstr ""
+
+msgid "R code unavailable until the specification is valid: %1$s"
+msgstr ""
+
+msgid "The module reported: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid "R Code"
+msgstr "ராப்மா ஆர் குறியீடு"
+
+msgid ""
+"Selection p-values were supplied rather than calculated from effect sizes "
+"and standard errors."
+msgstr ""
+
+msgid ""
+"Coefficient standard errors could not be estimated. Wald tests and "
+"coefficient confidence intervals are unavailable; review the fitting "
+"warnings before interpreting this model."
+msgstr ""
+
+msgid ""
+"The publication-bias test is not applicable with fixed selection parameters."
+msgstr ""
+
+msgid ""
+"The heterogeneity likelihood-ratio test could not be computed. Review the "
+"fitting warnings before interpreting this model."
+msgstr ""
+
+msgid "Heterogeneity confidence interval unavailable: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid "Weight Function Summary"
+msgstr "எடை செயல்பாடு"
+
+#, fuzzy
+msgid "Weight Function Estimates"
+msgstr "எடை செயல்பாடு மதிப்பீடு"
+
+msgid "The unadjusted model has no selection parameters."
+msgstr ""
+
+#, fuzzy
+msgid "Selection Parameter Estimates"
+msgstr "H₁ புனல் அளவுரு மதிப்பீடுகள்"
+
+msgid "Selection uses two-sided p-values."
+msgstr ""
+
+#, fuzzy
+msgid "Expected effect direction: %1$s."
+msgstr "விளைவு அளவு (COEF: %1$s)"
+
+msgid ""
+"Fixed selection parameters have no standard errors or confidence intervals."
+msgstr ""
+
+#, fuzzy
+msgid "P-Value Frequencies"
+msgstr "பி-மதிப்பு அதிர்வெண்"
+
+msgid "P-value frequencies require valid p-value cutoffs and study p-values."
+msgstr ""
+
+#, fuzzy
+msgid "Selected Estimates"
+msgstr "மாதிரி மதிப்பீடுகள்"
+
+msgid "P-value frequencies include only estimates to which selection applies."
+msgstr ""
+
+#, fuzzy
+msgid "Model Results"
+msgstr "மாதிரி சோதனைகள்"
+
+msgid "No fitted model is available for the requested selection."
+msgstr ""
+
+msgid ""
+"The unaffected level is not present in the no-selection variable. Choose an "
+"available level."
+msgstr ""
+
+msgid "P-values must be finite, greater than zero, and at most one."
+msgstr ""
+
+msgid ""
+"Sample-size variable not found in the data. Assign an available sample-size "
+"variable."
+msgstr ""
+
+msgid "Sample sizes must be finite and greater than zero."
+msgstr ""
+
+msgid ""
+"Standard errors are too small or too large to yield finite positive sampling "
+"variances. Rescale effect sizes and standard errors."
+msgstr ""
 
 msgid "Estimating: %1$s"
 msgstr "மதிப்பீடு: %1$s"
@@ -2460,14 +2621,40 @@ msgstr "குணக சுருக்கம்"
 msgid "Computed Estimates Summary"
 msgstr "கணக்கிடப்பட்ட மதிப்பீடுகள் சுருக்கம்"
 
+msgid ""
+"Cannot compute results. All entries of the correlation coefficient variable "
+"(%s) must be between -1 and 1."
+msgstr ""
+"முடிவுகளைக் கணக்கிட முடியவில்லை. தொடர்பு குணக மாறியின் (%s) அனைத்து உள்ளீடுகளும் -1 "
+"மற்றும் 1 க்கு இடையில் இருக்க வேண்டும்."
+
+msgid ""
+"Cannot compute results. All entries of the sample size variable (%s) must be "
+"greater than four."
+msgstr ""
+"முடிவுகளை கணக்கிட முடியாது. மாதிரி அளவு மாறியின் அனைத்து உள்ளீடுகளும் (%s) நான்கை "
+"விட அதிகமாக இருக்க வேண்டும்."
+
+msgid "95%% Confidence Interval"
+msgstr "95 %% நம்பிக்கை இடைவெளி"
+
 msgid "Error: There were not enough adequately powered studies (k = %1$i)"
 msgstr "பிழை: போதுமான அளவு இயங்கும் ஆய்வுகள் இல்லை (k = %1$i)"
 
 msgid "Note: There were %1$i adequately powered studies"
 msgstr "குறிப்பு: %1$i நான் போதுமான அளவு இயங்கும் ஆய்வுகள் இருந்தன"
 
+msgid "Model Tests"
+msgstr "மாதிரி சோதனைகள்"
+
 msgid "Test of Effect"
 msgstr "விளைவு சோதனை"
+
+msgid "Test of Publication Bias"
+msgstr "வெளியீட்டு சார்புகளின் சோதனை"
+
+msgid "Mean Estimates (%s)"
+msgstr "சராசரி மதிப்பீடுகள் (%s)"
 
 msgid "Multiplicative Heterogeneity Estimates"
 msgstr "பெருக்கல் பன்முகத்தன்மை மதிப்பீடுகள்"
@@ -2480,6 +2667,13 @@ msgstr "கோஅனின் டி"
 
 msgid "Fisher's z"
 msgstr "ஃபிசரின் சட்"
+
+msgid "Mean Model Estimates (%s)"
+msgstr "சராசரி மாதிரி மதிப்பீடுகள் (%s)"
+
+msgid ""
+"The figure could not be created since one of the estimates is not a number."
+msgstr "மதிப்பீடுகளில் ஒன்று எண் அல்ல என்பதால் உருவத்தை உருவாக்க முடியவில்லை."
 
 msgid ""
 "WAAP was not estimated: There were only %1$i adequately powered studies "
@@ -2545,6 +2739,158 @@ msgstr[1] ""
 "ஆமில்டோனிய மான்டே கார்லோ செயல்முறை திறமையற்றதாக இருக்கலாம் - %i மாற்றங்கள் அதிகபட்ச மர "
 "ஆழத்தை மீறிவிட்டன. 'அதிகபட்ச மர ஆழத்தை' கவனமாக அதிகரிப்பதன் மூலம் இதை தீர்க்க முடியும்."
 
+msgid ""
+"The selection weight for p-value interval %1$s is fixed at zero, but the "
+"interval contains %2$i selected estimate. Use a positive weight or NA to "
+"estimate the weight."
+msgid_plural ""
+"The selection weight for p-value interval %1$s is fixed at zero, but the "
+"interval contains %2$i selected estimates. Use a positive weight or NA to "
+"estimate the weight."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Selection applies to %1$i estimate."
+msgid_plural "Selection applies to %1$i estimates."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "%1$i estimate at level '%2$s' is unaffected."
+msgid_plural "%1$i estimates at level '%2$s' are unaffected."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid ""
+"For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. "
+"This affects %3$i selected estimate."
+msgid_plural ""
+"For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. "
+"This affects %3$i selected estimates."
+msgstr[0] ""
+msgstr[1] ""
+
+#~ msgid "Weight Function (%s)"
+#~ msgstr "எடை செயல்பாடு (%s)"
+
+#~ msgid "Publication Probability"
+#~ msgstr "வெளியீட்டு நிகழ்தகவு"
+
+#~ msgid "Fixed effects (adjusted)"
+#~ msgstr "நிலையான விளைவுகள் (சரிசெய்யப்பட்டது)"
+
+#~ msgid "Test of Heterogeneity"
+#~ msgstr "பன்முகத்தன்மையின் சோதனை"
+
+#~ msgid "Note:"
+#~ msgstr "குறிப்பு:"
+
+#~ msgid "ChiSq"
+#~ msgstr "சிச்க்"
+
+#~ msgid "Assuming homogeneity"
+#~ msgstr "ஒருமைப்பாட்டைக் கருதி"
+
+#~ msgid "Assuming heterogeneity"
+#~ msgstr "பன்முகத்தன்மையைக் கருதி"
+
+#~ msgid "Fixed Effects Estimates"
+#~ msgstr "நிலையான விளைவுகள் மதிப்பீடுகள்"
+
+#~ msgid "Estimated Weights"
+#~ msgstr "மதிப்பிடப்பட்ட எடைகள்"
+
+#~ msgid "Heterogeneity Estimates(%s)"
+#~ msgstr "பன்முகத்தன்மை மதிப்பீடுகள் (%s)"
+
+#~ msgid "<em>p</em>-values interval(one-sided)"
+#~ msgstr "<em> ப </em>-மதிப்பீட்டு இடைவெளி (ஒருதலைப்பட்ச)"
+
+#~ msgid "Frequency"
+#~ msgstr "மீடிறன், மீள்திறன், நிகழ்வெண், நிகழ்வு"
+
+#~ msgid ""
+#~ "There were no p-value cutoffs after their automatic reduction. The "
+#~ "displayed frequencies correspond to the non-reduced p-value cutoffs."
+#~ msgstr ""
+#~ "அவற்றின் தானியங்கி குறைப்புக்குப் பிறகு பி-மதிப்பு வெட்டுக்கள் எதுவும் இல்லை. "
+#~ "காட்டப்படும் அதிர்வெண்கள் குறைக்கப்பட்ட பி-மதிப்பு வெட்டுக்களுக்கு ஒத்திருக்கும்."
+
+#~ msgid ""
+#~ "Cannot compute results. All entries of the p-value variable (%s) must be "
+#~ "between 0 and 1."
+#~ msgstr ""
+#~ "முடிவுகளை கணக்கிட முடியாது. பி-மதிப்பு மாறியின் அனைத்து உள்ளீடுகளும் (%s) 0 முதல் "
+#~ "1 வரை இருக்க வேண்டும்."
+
+#~ msgid "The p-value cutoffs were set incorectly."
+#~ msgstr "பி-மதிப்பு வெட்டுக்கள் தவறாக அமைக்கப்பட்டுள்ளன."
+
+#~ msgid "At least one p-value cutoff needs to be set."
+#~ msgstr "குறைந்தது ஒரு பி-மதிப்பு வெட்டு அமைக்கப்பட வேண்டும்."
+
+#~ msgid "All p-value cutoffs needs to be between 0 and 1."
+#~ msgstr "அனைத்து பி-மதிப்பு வெட்டுக்களும் 0 முதல் 1 வரை இருக்க வேண்டும்."
+
+#~ msgid "%1$s is on %2$s scale."
+#~ msgstr "%1$s %2$s அளவில் உள்ளது."
+
+#~ msgid "Fixed effects model:"
+#~ msgstr "நிலையான விளைவுகள் மாதிரி:"
+
+#~ msgid "Random effects model:"
+#~ msgstr "சீரற்ற விளைவுகள் மாதிரி:"
+
+#~ msgid ""
+#~ "%sThe optimizer failed to find a solution. Consider re-specifying the "
+#~ "model or the p-value cutoffs."
+#~ msgstr ""
+#~ "%s ஆப்டிமைசர் ஒரு தீர்வைக் கண்டுபிடிக்கத் தவறிவிட்டது. மாதிரி அல்லது p-மதிப்பு "
+#~ "வெட்டுக்களை மீண்டும் குறிப்பிடுவதைக் கருத்தில் கொள்ளுங்கள்."
+
+#~ msgid ""
+#~ "%sThe automatic cutoffs selection did not find viable p-value cutoffs. "
+#~ "Please, specify them manually."
+#~ msgstr ""
+#~ "%sthe தானியங்கி கட் ஆப் தேர்வு சாத்தியமான பி-மதிப்பு வெட்டைக் காணவில்லை. "
+#~ "தயவுசெய்து, அவற்றை கைமுறையாக குறிப்பிடவும்."
+
+#~ msgid ""
+#~ "At least one of the p-value intervals contains no effect sizes, leading "
+#~ "to estimation problems. Consider re-specifying the cutoffs."
+#~ msgstr ""
+#~ "பி-மதிப்பு இடைவெளிகளில் குறைந்தபட்சம் ஒரு விளைவு அளவுகள் இல்லை, இது மதிப்பீட்டு "
+#~ "சிக்கல்களுக்கு வழிவகுக்கிறது. வெட்டுக்களை மீண்டும் விவரிப்பதைக் கவனியுங்கள்."
+
+#~ msgid ""
+#~ "At least one of the p-value intervals contains three or fewer effect "
+#~ "sizes, which may lead to estimation problems. Consider re-specifying the "
+#~ "cutoffs."
+#~ msgstr ""
+#~ "பி-மதிப்பு இடைவெளிகளில் குறைந்தபட்சம் மூன்று அல்லது குறைவான விளைவு அளவுகள் உள்ளன, "
+#~ "அவை மதிப்பீட்டு சிக்கல்களுக்கு வழிவகுக்கும். வெட்டுக்களை மீண்டும் விவரிப்பதைக் கவனியுங்கள்."
+
+#~ msgid ""
+#~ "The unadjusted estimate is negative. The selection model default "
+#~ "specification expects that the expected direction of the effect size is "
+#~ "positive. Please, check that you specified the effect sizes correctly or "
+#~ "change the 'Expected effect size direction' option in the 'Model' tab."
+#~ msgstr ""
+#~ "சரிசெய்யப்படாத மதிப்பீடு எதிர்மறையானது. தேர்வு மாதிரி இயல்புநிலை விவரக்குறிப்பு "
+#~ "விளைவு அளவின் எதிர்பார்க்கப்படும் திசை நேர்மறையானது என்று எதிர்பார்க்கிறது. "
+#~ "தயவுசெய்து, விளைவு அளவுகளை நீங்கள் சரியாகக் குறிப்பிட்டுள்ளீர்களா என்பதைச் "
+#~ "சரிபார்க்கவும் அல்லது 'மாதிரி' தாவலில் 'எதிர்பார்க்கப்படும் விளைவு அளவு திசை' "
+#~ "விருப்பத்தை மாற்றவும்."
+
+#~ msgid ""
+#~ "The analysis requires both 'Effect Size' and 'Effect Size Standard Error' "
+#~ "to be specified."
+#~ msgstr ""
+#~ "பகுப்பாய்விற்கு 'விளைவு அளவு' மற்றும் 'விளைவு அளவு நிலையான பிழை' இரண்டையும் "
+#~ "குறிப்பிட வேண்டும்."
+
+#~ msgid "Only the following one-sided p-value cutoffs were used: %s."
+#~ msgstr "பின்வரும் ஒருதலைப்பட்ச பி-மதிப்பு வெட்டுக்கள் மட்டுமே பயன்படுத்தப்பட்டன: %s."
+
 #~ msgid ""
 #~ "Casewise diagnostics are not available for models that contain meta-"
 #~ "regression on heterogeneity."
@@ -2574,10 +2920,6 @@ msgstr[1] ""
 #, fuzzy
 #~ msgid "Additional Fit Measures"
 #~ msgstr "பொருத்தமான நடவடிக்கைகள்"
-
-#, fuzzy
-#~ msgid "Model Fit"
-#~ msgstr "மாதிரி %i"
 
 #~ msgid ""
 #~ "The study labels contain invalid characters. Please, remove them before "
@@ -2662,9 +3004,6 @@ msgstr[1] ""
 #~ msgid "Information"
 #~ msgstr "தகவல்"
 
-#~ msgid "Model Estimates"
-#~ msgstr "மாதிரி மதிப்பீடுகள்"
-
 #~ msgid ""
 #~ "Model %1$i does not exist. Select one of the models between 1 and %2$i."
 #~ msgstr ""
@@ -2683,9 +3022,6 @@ msgstr[1] ""
 #~ msgid "Effect Size Estimate"
 #~ msgstr "விளைவு அளவு மதிப்பீடு"
 
-#~ msgid "Weight Function Estimate"
-#~ msgstr "எடை செயல்பாடு மதிப்பீடு"
-
 #~ msgid "PET-PEESE Regression Estimate"
 #~ msgstr "பெட்-பீச் பின்னடைவு மதிப்பீடு"
 
@@ -2694,9 +3030,6 @@ msgstr[1] ""
 
 #~ msgid "Effect Size Estimates"
 #~ msgstr "விளைவு அளவு மதிப்பீடுகள்"
-
-#~ msgid "Heterogeneity Estimates"
-#~ msgstr "பன்முகத்தன்மை மதிப்பீடுகள்"
 
 #~ msgid "Models Diagnostics Overview"
 #~ msgstr "மாதிரிகள் கண்டறிதல் கண்ணோட்டம்"
