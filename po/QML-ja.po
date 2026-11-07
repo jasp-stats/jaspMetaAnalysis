@@ -6,6 +6,12 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Language: ja\n"
 "X-Qt-Contexts: true\n"
+"PO-Revision-Date: 2026-11-08 05:51+0000\n"
+"Last-Translator: Koji Kosugi <kosugitti@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/ja/>\n"
+"Language: ja\n"
+"X-Generator: Weblate 2026.11.2.dev0\n"
 
 msgctxt "Description|"
 msgid "Meta-Analysis"
@@ -17,7 +23,7 @@ msgstr "伝統的メタ分析"
 
 msgctxt "Description|"
 msgid "Selection Models"
-msgstr "モデル選択"
+msgstr "選択モデル"
 
 msgctxt "Description|"
 msgid "Bayesian Meta-Analysis"
@@ -8937,20 +8943,25 @@ msgid ""
 "Profile likelihood diagnostics for free heterogeneity and selection "
 "parameters."
 msgstr ""
+"固定されていない異質性のパラメータと選択パラメータについて、プロファイル尤度"
+"による診断を行います。"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid ""
 "Profile free heterogeneity and selection parameters. Unavailable for ordinal "
 "models."
 msgstr ""
+"固定されていない異質性のパラメータと選択パラメータのプロファイル尤度を求めま"
+"す。順序制約を課したモデルでは利用できません。"
 
 msgctxt "ClassicalMetaAnalysisExport|"
 msgid ""
 "Export all candidate models independently of the display filter. Column "
 "names include the model and subgroup."
 msgstr ""
+"表示の絞り込みにかかわらず、すべての候補のモデルを書き出します。列名には"
+"モデルとサブグループが含まれます。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Method"
 msgstr "方法"
@@ -8960,8 +8971,9 @@ msgid ""
 "Selection models use maximum likelihood and z/Wald coefficient tests. The "
 "same method and moderators apply to all candidates."
 msgstr ""
+"選択モデルでは、最尤法と係数のz検定(ワルド検定)を使います。すべての候補の"
+"モデルに同じ方法とモデレータが適用されます。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid ""
 "Method used for model estimation in the meta-analysis. The available methods "
@@ -8970,100 +8982,82 @@ msgstr ""
 "メタ分析でモデルの推定に使う方法です。使える方法は、異質性のモデル項を含める"
 "かどうかで変わります。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Equal Effects"
 msgstr "等効果"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Fixed Effects"
 msgstr "固定効果"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Maximum Likelihood"
 msgstr "最尤"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Restricted ML"
 msgstr "制限付き最尤法"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "DerSimonian-Laird"
 msgstr "DerSimonian-Laird法"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Hedges"
 msgstr "ヘッジ(Hedges)"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Hunter-Schmidt"
 msgstr "Hunter-Schmidt"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Hunter-Schmidt (SSC)"
 msgstr "Hunter-Schmidt (SSC)"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Sidik-Jonkman"
 msgstr "Sidik-Jonkman"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Empirical Bayes"
 msgstr "経験ベイズ"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Paule-Mandel"
 msgstr "Paule-Mandel"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Paule-Mandel (MU)"
 msgstr "Paule-Mandel (MU)"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Generalized Q-stat"
 msgstr "一般化Q統計量"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Generalized Q-stat (MU)"
 msgstr "一般化Q統計量 (MU)"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid "Unrestricted Weighted Least Squares (UWLS)"
 msgstr "制約なし重みつき最小二乗法(UWLS)"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid "Optimizer"
 msgstr "最適化"
 
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid "Optimizer settings for fitting the selection models."
-msgstr ""
+msgstr "選択モデルのあてはめに使う最適化の設定です。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid ""
 "Optimizer settings for estimating the meta-analytic models. A more complex/"
 "unavailbe settings can be specified via the 'Extend metafor call' option."
 msgstr ""
-"メタ分析モデルを推定する最適化の設定です。より複雑な設定やここにない設定は"
-"「metaforの呼び出しを拡張」で指定できます。"
+"メタ分析モデルを推定する最適化の設定です。より複雑な設定やここにない設定は「"
+"metaforの呼び出しを拡張」で指定できます。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid "Method"
 msgstr "方法"
@@ -9073,8 +9067,9 @@ msgid ""
 "Select the optimizer used by metafor. The default is BFGS, including for "
 "ordinal step functions."
 msgstr ""
+"metaforが使う最適化の方法を選びます。既定はBFGSで、順序制約を課したステップ関"
+"数でも同じです。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid ""
 "Select the optimization method to use for fitting the model. Available in "
@@ -9084,17 +9079,14 @@ msgstr ""
 "モデルのあてはめに使う最適化の方法を選びます。マルチレベル・多変量メタ分析の"
 "場合、または異質性のモデル項を含めた場合に使えます。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid "Default"
 msgstr "既定"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid "Initial 𝜏²"
 msgstr "𝜏²の初期値"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid ""
 "Specify the initial value of 𝜏² for the optimization algorithm. Available "
@@ -9105,12 +9097,10 @@ msgstr ""
 "え、マルチレベル・多変量メタ分析や異質性のモデル項を含めた場合には利用できま"
 "せん。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid "Minimum 𝜏²"
 msgstr "𝜏²の最小値"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid ""
 "Specify the minimum allowable value of 𝜏² during optimization. Available "
@@ -9118,15 +9108,13 @@ msgid ""
 "multivariate meta-analysis or when heterogeneity model terms are included."
 msgstr ""
 "最適化の途中で𝜏²が取りうる最小値を指定します。特定の最適化の方法でのみ使え、"
-"マルチレベル・多変量メタ分析や異質性のモデル項を含めた場合には利用できませ"
-"ん。"
+"マルチレベル・多変量メタ分析や異質性のモデル項を含めた場合には利用できません"
+"。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid "Maximum 𝜏²"
 msgstr "𝜏²の最大値"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid ""
 "Specify the maximum allowable value of 𝜏² during optimization. Available "
@@ -9134,15 +9122,13 @@ msgid ""
 "multivariate meta-analysis or when heterogeneity model terms are included."
 msgstr ""
 "最適化の途中で𝜏²が取りうる最大値を指定します。特定の最適化の方法でのみ使え、"
-"マルチレベル・多変量メタ分析や異質性のモデル項を含めた場合には利用できませ"
-"ん。"
+"マルチレベル・多変量メタ分析や異質性のモデル項を含めた場合には利用できません"
+"。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid "Maximum evaluations"
 msgstr "関数評価の最大回数"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid ""
 "Set the maximum number of function evaluations for the optimizer. Available "
@@ -9152,12 +9138,10 @@ msgstr ""
 "最適化における関数評価の最大回数を設定します。マルチレベル・多変量メタ分析で"
 "特定の最適化の方法を使う場合に利用できます。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid "Maximum iterations"
 msgstr "最大反復回数"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid ""
 "Set the maximum number of iterations for the optimizer. Available when using "
@@ -9166,12 +9150,10 @@ msgstr ""
 "最適化の最大反復回数を設定します。特定の推定法または最適化の方法を使う場合に"
 "利用できます。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid "Convergence tolerance"
 msgstr "収束の許容誤差"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid ""
 "Set the convergence tolerance for the optimizer. Available when using "
@@ -9179,19 +9161,17 @@ msgid ""
 "multilevel/multivariate meta-analysis."
 msgstr ""
 "最適化の収束の許容誤差を設定します。異質性のモデル項がない特定の方法を使う場"
-"合、またはマルチレベル・多変量メタ分析で特定の最適化を使う場合に利用できま"
-"す。"
+"合、またはマルチレベル・多変量メタ分析で特定の最適化を使う場合に利用できます"
+"。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid "Convergence relative tolerance"
 msgstr "収束の相対許容誤差"
 
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid "Override the optimizer's relative convergence tolerance."
-msgstr ""
+msgstr "最適化の相対的な収束の許容誤差を上書きします。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid ""
 "Set the relative convergence tolerance for the optimizer. Available when "
@@ -9201,12 +9181,10 @@ msgstr ""
 "最適化の相対的な収束の許容誤差を設定します。異質性のモデル項を含めた場合、ま"
 "たはマルチレベル・多変量メタ分析で特定の最適化を使う場合に利用できます。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid "Step adjustment"
 msgstr "ステップの調整"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid ""
 "Set the step adjustment factor for the optimizer. Available when using "
@@ -9216,12 +9194,10 @@ msgstr ""
 "最適化のステップの調整係数を設定します。異質性のモデル項がない特定の方法を使"
 "う場合に利用でき、マルチレベル・多変量メタ分析では使えません。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid "Initial trust region radius"
 msgstr "信頼領域の初期半径"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid ""
 "Set the initial trust region radius for the optimizer. Available when using "
@@ -9230,12 +9206,10 @@ msgstr ""
 "最適化における信頼領域の初期半径を設定します。マルチレベル・多変量メタ分析で"
 "特定の最適化の方法を使う場合に利用できます。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid "Final trust region radius"
 msgstr "信頼領域の最終半径"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid ""
 "Set the final trust region radius for the optimizer. Available when using "
@@ -9244,12 +9218,10 @@ msgstr ""
 "最適化における信頼領域の最終半径を設定します。マルチレベル・多変量メタ分析で"
 "特定の最適化の方法を使う場合に利用できます。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid "Maximum restarts"
 msgstr "再開の最大回数"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisOptimizer|"
 msgid ""
 "Set the maximum number of restarts for the optimizer. Available when using "
@@ -9258,25 +9230,22 @@ msgstr ""
 "最適化の再開の最大回数を設定します。マルチレベル・多変量メタ分析でネルダー・"
 "ミード法('nmk')を使う場合に利用できます。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Weight Function"
 msgstr "重み関数"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Include weight function estimates in the output."
-msgstr ""
+msgstr "出力に重み関数の推定値を含めます。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "P-value frequency table"
 msgstr "p値の度数表"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Estimate counts within the specified p-value intervals."
-msgstr ""
+msgstr "指定したp値の区間ごとに、推定値の個数を数えます。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Plot"
 msgstr "プロット"
@@ -9285,65 +9254,61 @@ msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid ""
 "Visualize the relative probability of study being published across the range "
 "of p-values."
-msgstr ""
+msgstr "p値の範囲にわたって、研究が出版される相対的な確率を可視化します。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Rescale x-axis"
 msgstr "x軸を再スケール"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Space p-value thresholds equally along the x-axis."
-msgstr ""
+msgstr "p値の閾値をx軸上に等間隔に配置します。"
 
 #, qt-format
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Model %1"
-msgstr ""
+msgstr "モデル %1"
 
-#, fuzzy
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Weight function"
 msgstr "重み関数"
 
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Step function"
-msgstr ""
+msgstr "ステップ関数"
 
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Beta"
-msgstr ""
+msgstr "ベータ"
 
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Half-normal"
-msgstr ""
+msgstr "ハーフノーマル"
 
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Negative exponential"
-msgstr ""
+msgstr "負の指数"
 
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Logistic"
-msgstr ""
+msgstr "ロジスティック"
 
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Power"
-msgstr ""
+msgstr "べき"
 
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Negative exponential power"
-msgstr ""
+msgstr "負の指数べき"
 
-#, fuzzy
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Truncation"
 msgstr "切断"
 
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Estimated truncation (experimental)"
-msgstr ""
+msgstr "切断(推定・試験的)"
 
-#, fuzzy
 msgctxt "SelectionModelsWeightfunction|"
 msgid "None"
 msgstr "なし"
@@ -9353,17 +9318,17 @@ msgid ""
 "Choose a documented metafor selection function. Changing the function resets "
 "the cutoff and selection-parameter fields to the new function's defaults."
 msgstr ""
+"metaforに用意されている選択関数を選びます。関数を変えると、カットオフと選択"
+"パラメータの欄は新しい関数の既定値に戻ります。"
 
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Selection"
-msgstr ""
+msgstr "選択"
 
-#, fuzzy
 msgctxt "SelectionModelsWeightfunction|"
 msgid "One-sided"
 msgstr "片側"
 
-#, fuzzy
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Two-sided"
 msgstr "両側"
@@ -9374,12 +9339,14 @@ msgid ""
 "values for significance in either direction. This determines publication "
 "selection; coefficient tests remain two-sided."
 msgstr ""
+"研究のp値として、予想される向きの片側p値か、どちらの向きの有意性も対象とする"
+"両側p値を使います。これは出版における選択を決めるもので、係数の検定は両側のま"
+"まです。"
 
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Effect-size cutoff"
-msgstr ""
+msgstr "効果量のカットオフ"
 
-#, fuzzy
 msgctxt "SelectionModelsWeightfunction|"
 msgid "P-value cutoffs"
 msgstr "P値のカットオフ"
@@ -9390,10 +9357,13 @@ msgid ""
 "optional lower and upper truncation thresholds. Other p-value functions: "
 "optional single threshold."
 msgstr ""
+"ステップ関数: 増加していくカットオフを指定します。1は自動で末尾に追加されます"
+"。ベータ: 切断の下限と上限の閾値を任意で指定します。その他のp値の関数: 閾値を"
+"1つ任意で指定します。"
 
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Selection parameters"
-msgstr ""
+msgstr "選択パラメータ"
 
 msgctxt "SelectionModelsWeightfunction|"
 msgid ""
@@ -9402,46 +9372,48 @@ msgid ""
 "negative exponential power have two parameters; estimated truncation uses "
 "weight and cutoff."
 msgstr ""
+"空欄にするとパラメータを推定します。値を指定する場合は、パラメータごとに数値"
+"かNAを1つずつ入力します。ステップ関数では、最初の固定された基準の重みとして1"
+"を入力します。ベータと負の指数べきはパラメータが2つです。切断の推定では重みと"
+"カットオフを使います。"
 
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Precision dependence"
-msgstr ""
+msgstr "精度への依存"
 
-#, fuzzy
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Standard error"
 msgstr "標準誤差"
 
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Variance"
-msgstr ""
+msgstr "分散"
 
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Inverse sample size"
-msgstr ""
+msgstr "サンプルサイズの逆数"
 
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Inverse square root sample size"
-msgstr ""
+msgstr "サンプルサイズの平方根の逆数"
 
 msgctxt "SelectionModelsWeightfunction|"
 msgid ""
 "Allow publication probability to depend on study precision as well as p-"
 "values."
-msgstr ""
+msgstr "出版される確率が、p値だけでなく研究の精度にも依存することを許します。"
 
-#, fuzzy
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Sample size"
 msgstr "サンプルサイズ"
 
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Select the sample-size variable used by this model's precision measure."
-msgstr ""
+msgstr "このモデルの精度の指標に使うサンプルサイズの変数を選びます。"
 
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Rescale precision"
-msgstr ""
+msgstr "精度を再スケール"
 
 msgctxt "SelectionModelsWeightfunction|"
 msgid ""
@@ -9449,20 +9421,25 @@ msgid ""
 "changes the scale of selection parameters. Turn off to reproduce "
 "specifications using unscaled precision, including Preston et al. (2004)."
 msgstr ""
+"metaforの既定と同じく、精度の指標をその最大値で割ります。これにより選択"
+"パラメータのスケールが変わります。Preston et al. (2004) など、再スケールして"
+"いない精度を使う指定を再現するには、オフにしてください。"
 
 msgctxt "SelectionModelsWeightfunction|"
 msgid "Force ordinality"
-msgstr ""
+msgstr "順序制約を課す"
 
 msgctxt "SelectionModelsWeightfunction|"
 msgid ""
 "Constrain weights to decrease with increasing p-values. Applies only to this "
 "model."
 msgstr ""
+"p値が大きくなるにつれて重みが小さくなるよう制約します。このモデルにのみ適用さ"
+"れます。"
 
 msgctxt "SelectionModelsWeightfunctions|"
 msgid "Weight Function (Custom)"
-msgstr ""
+msgstr "重み関数(カスタム)"
 
 msgctxt "SelectionModelsWeightfunctions|"
 msgid ""
@@ -9470,44 +9447,50 @@ msgid ""
 "sidedness; truncation cutoffs use the effect-size scale. None adds the "
 "unadjusted model to the comparison."
 msgstr ""
+"各要素が別々の候補のモデルになります。カットオフは選んだp値の片側・両側に従い"
+"、切断のカットオフは効果量のスケールを使います。「なし」は、補正なしのモデル"
+"を比較に加えます。"
 
 msgctxt "SelectionModelsWeightfunctions|"
 msgid "Show models"
-msgstr ""
+msgstr "表示するモデル"
 
-#, fuzzy
 msgctxt "SelectionModelsWeightfunctions|"
 msgid "All"
 msgstr "すべて"
 
 msgctxt "SelectionModelsWeightfunctions|"
 msgid "Best BIC"
-msgstr ""
+msgstr "BICが最良"
 
 msgctxt "SelectionModelsWeightfunctions|"
 msgid "Best AIC"
-msgstr ""
+msgstr "AICが最良"
 
 #, qt-format
 msgctxt "SelectionModelsWeightfunctions|"
 msgid "Model %1"
-msgstr ""
+msgstr "モデル %1"
 
 msgctxt "SelectionModelsWeightfunctions|"
 msgid ""
 "Filter detailed output when comparing multiple custom models. Comparisons "
 "and exports always include all candidates. Ties are resolved by model order."
 msgstr ""
+"複数のカスタムモデルを比較するときに、詳細な出力を絞り込みます。比較と書き出"
+"しには常にすべての候補が含まれます。同順位の場合はモデルの順番で決まります。"
 
 msgctxt "SelectionModelsWeightfunctions|"
 msgid "Model comparison"
-msgstr ""
+msgstr "モデル比較"
 
 msgctxt "SelectionModelsWeightfunctions|"
 msgid ""
 "Compare all custom models using fit statistics and AIC, AICc, and BIC "
 "weights, separately by subgroup."
 msgstr ""
+"適合統計量と、AIC・AICc・BICの重みを使って、すべてのカスタムモデルを"
+"サブグループごとに比較します。"
 
 msgctxt "SelectionModels|"
 msgid ""
@@ -9515,16 +9498,18 @@ msgid ""
 "comparisons between weight functions. All candidate models use the same "
 "observations within each subgroup."
 msgstr ""
+"metaforを使って、出版バイアスの選択モデルをあてはめます。モデレータや重み関数"
+"どうしの比較も含められます。各サブグループの中では、すべての候補のモデルが同"
+"じ観測値を使います。"
 
 msgctxt "SelectionModels|"
 msgid "Observed effect sizes, on the scale used to fit the model."
-msgstr ""
+msgstr "モデルのあてはめに使うスケールでの、観測された効果量です。"
 
 msgctxt "SelectionModels|"
 msgid "Standard errors corresponding to the effect sizes."
-msgstr ""
+msgstr "効果量に対応する標準誤差です。"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Predictors"
 msgstr "予測変数"
@@ -9533,9 +9518,8 @@ msgctxt "SelectionModels|"
 msgid ""
 "Continuous and categorical moderators. Specify interactions and the "
 "intercept in Model."
-msgstr ""
+msgstr "連続とカテゴリカルのモデレータです。交互作用と切片は「モデル」で指定します。"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Study Labels"
 msgstr "研究ラベル"
@@ -9545,8 +9529,9 @@ msgid ""
 "Labels for studies in plots. Missing labels do not exclude observations from "
 "fitting."
 msgstr ""
+"プロットに表示する研究のラベルです。ラベルが欠測していても、その観測値はあて"
+"はめから除外されません。"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Subgroup"
 msgstr "サブグループ"
@@ -9556,8 +9541,9 @@ msgid ""
 "Fit each candidate separately within each subgroup. Best AIC/BIC is "
 "determined separately for each subgroup."
 msgstr ""
+"サブグループごとに、各候補を別々にあてはめます。AIC・BICが最良のモデルも"
+"サブグループごとに決まります。"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "P-Value"
 msgstr "p値"
@@ -9568,10 +9554,13 @@ msgid ""
 "matching the sidedness of each selection function. If unassigned, p-values "
 "are calculated from effect sizes and standard errors."
 msgstr ""
+"選択に使うp値で、0より大きく1以下の値です(任意)。各選択関数の片側・両側に合っ"
+"たp値を使ってください。割り当てない場合、p値は効果量と標準誤差から計算されま"
+"す。"
 
 msgctxt "SelectionModels|"
 msgid "No Selection"
-msgstr ""
+msgstr "選択なし"
 
 msgctxt "SelectionModels|"
 msgid ""
@@ -9579,23 +9568,26 @@ msgid ""
 "unaffected level below; selection applies to all other levels. Both remain "
 "in the analysis."
 msgstr ""
+"選択の影響を受けない推定値を識別する要因です(任意)。影響を受けない水準を下で"
+"選ぶと、それ以外のすべての水準に選択が適用されます。どちらも分析には残ります"
+"。"
 
 msgctxt "SelectionModels|"
 msgid "Unaffected Level"
-msgstr ""
+msgstr "影響を受けない水準"
 
 msgctxt "SelectionModels|"
 msgid ""
 "Estimates at this level are unaffected by selection. Selection applies to "
 "all other levels of the assigned factor."
 msgstr ""
+"この水準の推定値は選択の影響を受けません。割り当てた要因のそれ以外のすべての"
+"水準に選択が適用されます。"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Publication bias adjustment"
 msgstr "出版バイアスの補正"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Custom"
 msgstr "カスタム"
@@ -9605,13 +9597,13 @@ msgid ""
 "4PSM uses one-sided p-value cutoffs .025 and .50; 3PSM uses .025. Custom "
 "permits multiple weight functions."
 msgstr ""
+"4PSMは片側p値のカットオフ .025 と .50 を、3PSMは .025 を使います。「カスタム"
+"」では複数の重み関数を指定できます。"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Expected direction of the effect"
 msgstr "予想される効果の向き"
 
-#, fuzzy
 msgctxt "SelectionModels|"
 msgid "Detect"
 msgstr "自動判定"
@@ -9622,10 +9614,13 @@ msgid ""
 "subgroup; a zero median selects positive. Two-sided functions ignore "
 "direction."
 msgstr ""
+"「自動判定」は、あてはめに使うデータセットにおける効果の中央値を、"
+"サブグループごとに使います。中央値が0のときは正になります。両側の関数では向き"
+"を考慮しません。"
 
 msgctxt "SelectionModels|"
 msgid "Force ordinality"
-msgstr ""
+msgstr "順序制約を課す"
 
 msgctxt "SelectionModels|"
 msgid ""
@@ -9633,6 +9628,9 @@ msgid ""
 "each model separately. Metafor's ordinal implementation is experimental; "
 "some intervals and tests are unavailable."
 msgstr ""
+"ステップ関数の重みが増加しないよう制約します。「カスタム」では、モデルごとに"
+"個別に指定してください。metaforの順序制約の実装は試験的なもので、一部の区間と"
+"検定は利用できません。"
 
 msgctxt "Upgrades|"
 msgid ""
@@ -9641,3 +9639,7 @@ msgid ""
 "settings. To rerun the original analysis, use JASP 0.98.1 with Meta-Analysis "
 "module 0.95.5."
 msgstr ""
+"選択モデルの分析は、メタ分析モジュール 0.98.0 で作り直されました。この分析を"
+"更新すると、保存されている結果が置き換えられ、互換でない設定が初期化されるこ"
+"とがあります。元の分析を再実行するには、JASP 0.98.1 とメタ分析モジュール "
+"0.95.5 を使ってください。"
