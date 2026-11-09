@@ -1,0 +1,37 @@
+on:
+  push:
+    paths: ['**.R', 'tests/**', '**.Rd', '**.c', '**.cpp', '**.h', '**.hpp', 'DESCRIPTION', 'NAMESPACE', 'MAKEVARS', 'MAKEVARS.win', '**.yml', 'renv.lock']
+  pull_request:
+    paths: ['**.R', 'tests/**', '**.Rd', '**.c', '**.cpp', '**.h', '**.hpp', 'DESCRIPTION', 'NAMESPACE', 'MAKEVARS', 'MAKEVARS.win', '**.yml', 'renv.lock']
+
+name: selection-model-regressions
+
+jobs:
+  regressions:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.os }} (R 4.5.2 - lockfile packages)
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up the test environment
+        uses: jasp-stats/jasp-actions/setup-r-test-env@master
+        with:
+          r-version: '4.5.2'
+          packages: lockfile
+          needs-jags: 'true'
+
+      - name: Run selection-model review regressions
+        run: |
+          install.packages(".", repos = NULL, type = "source", INSTALL_opts = "--no-multiarch")
+          source(".github/scripts/selectionmodels-regression.R")
+        shell: Rscript {0}
