@@ -28,8 +28,8 @@
 <line x1='301.26' y1='190.15' x2='301.26' y2='159.72' style='stroke-width: 1.07; stroke: #00008B; stroke-linecap: butt;' />
 <line x1='606.29' y1='139.43' x2='606.29' y2='109.00' style='stroke-width: 1.07; stroke: #00008B; stroke-linecap: butt;' />
 <line x1='560.38' y1='190.15' x2='560.38' y2='159.72' style='stroke-width: 1.07; stroke: #00008B; stroke-linecap: butt;' />
-<polygon points='334.70,377.80 379.65,360.89 493.98,377.80 379.65,394.70 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
-<polygon points='269.05,418.37 510.95,418.37 510.95,438.66 269.05,438.66 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='334.85,377.80 379.99,360.89 497.36,377.80 379.99,394.70 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='263.13,418.37 515.10,418.37 515.10,438.66 263.13,438.66 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
 <line x1='344.86' y1='507.13' x2='344.86' y2='22.78' style='stroke-width: 1.07; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
 <text x='5.48' y='77.42' style='font-size: 11.38px; font-weight: bold; font-family: sans;' textLength='29.11px' lengthAdjust='spacingAndGlyphs'>Study</text>
 <text x='107.24' y='77.42' style='font-size: 11.38px; font-weight: bold; font-family: sans;' textLength='66.44px' lengthAdjust='spacingAndGlyphs'>jaspColumn2</text>
@@ -47,13 +47,13 @@
 <text x='207.77' y='128.13' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>39</text>
 <text x='207.77' y='178.85' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>40</text>
 <text x='241.29' y='280.28' text-anchor='end' style='font-size: 11.38px; font-weight: bold; font-family: sans;' textLength='91.10px' lengthAdjust='spacingAndGlyphs'>Model Information</text>
-<text x='241.29' y='331.00' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='143.93px' lengthAdjust='spacingAndGlyphs'>Heterogeneity: BF₁₀ = 1.26</text>
+<text x='241.29' y='331.00' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='143.93px' lengthAdjust='spacingAndGlyphs'>Heterogeneity: BF₁₀ = 1.29</text>
 <text x='241.29' y='381.71' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='66.44px' lengthAdjust='spacingAndGlyphs'>Pooled effect</text>
-<text x='241.29' y='432.43' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='66.74px' lengthAdjust='spacingAndGlyphs'>BF₁₀ = 2.38</text>
+<text x='241.29' y='432.43' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='66.74px' lengthAdjust='spacingAndGlyphs'>BF₁₀ = 2.42</text>
 <text x='708.63' y='128.13' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='86.05px' lengthAdjust='spacingAndGlyphs'>2.66 [-0.28, 5.59]</text>
 <text x='708.63' y='178.85' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='86.05px' lengthAdjust='spacingAndGlyphs'>1.66 [-1.41, 4.73]</text>
-<text x='708.63' y='381.71' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='86.05px' lengthAdjust='spacingAndGlyphs'>0.67 [-0.20, 2.88]</text>
-<text x='708.63' y='432.43' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='74.66px' lengthAdjust='spacingAndGlyphs'>PI [-1.46, 3.21]</text>
+<text x='708.63' y='381.71' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='86.05px' lengthAdjust='spacingAndGlyphs'>0.68 [-0.19, 2.94]</text>
+<text x='708.63' y='432.43' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='74.66px' lengthAdjust='spacingAndGlyphs'>PI [-1.58, 3.29]</text>
 <line x1='241.29' y1='507.13' x2='655.57' y2='507.13' style='stroke-width: 1.07; stroke-linecap: butt;' />
 <line x1='241.29' y1='507.13' x2='241.29' y2='513.21' style='stroke-width: 1.07; stroke-linecap: butt;' />
 <line x1='293.07' y1='507.13' x2='293.07' y2='513.21' style='stroke-width: 1.07; stroke-linecap: butt;' />
