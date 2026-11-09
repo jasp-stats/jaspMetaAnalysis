@@ -514,7 +514,9 @@
 
 .maClusterRobustSummaryMessage   <- function(fit) {
 
+  # factor levels without estimates in this fit are not clusters of the model
   clusterCounts <- fit[["tcl"]]
+  clusterCounts <- clusterCounts[clusterCounts > 0]
   nClusters     <- fit[["n"]]
 
   if (is.null(clusterCounts) || is.null(nClusters) || length(clusterCounts) == 0)
