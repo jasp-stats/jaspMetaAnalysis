@@ -33,21 +33,22 @@ test_that("PetPeese (analysis 2) results match", {
   set.seed(1)
   results <- jaspTools::runAnalysis("PetPeese", encoded$dataset, encoded$options, encodedDataset = TRUE)
 
-  table <- results[["results"]][["estimates"]][["collection"]][["estimates_mean"]][["data"]]
+  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(16, -0.000872207822835111, -0.206619975057632, 0.993663506414102,
-     0.104520755484612, -0.00806669053643172, "PET", 0.205022289978001,
-     16, 0.113979304264294, -0.00656089452971465, 0.0822429941554453,
-     0.0593407825514921, 1.85416107044634, "PEESE", 0.228123078852392
-    ))
+    list(-0.000872208, -0.2261102, "Pooled effect", 0.2244543, 3.60484158287611,
+     "", "<unicode>", "", 1.8986420365293, "", "<unicode><unicode>",
+     ""))
 
-  table <- results[["results"]][["fitTests"]][["collection"]][["fitTests_biasTest"]][["data"]]
+  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_testsTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(16, 0.0519157244990328, 2.10025053076424, "PET"))
+    list(1.28220172450603e-06, "Q<unicode>(16) = 57.68", "Residual heterogeneity",
+     0.993663506414097, "t(16) = -0.01", "Pooled effect", 0.0519157244990323,
+     "t(16) = 2.10", "Publication bias (PET)"))
 
-  table <- results[["results"]][["fitTests"]][["collection"]][["fitTests_effectTest"]][["data"]]
+  table <- results[["results"]][["petPeeseSummary"]][["collection"]][["petPeeseSummary_coefficientEstimates"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(16, 0.993663506414102, -0.00806669053643172, "PET"))
+    list(16, 2.85496499301765, -0.0267176106224909, "SE", 0.0519157244990323,
+     1.35934496918269, 2.10025053076424, 5.7366475966578))
 
 })
 

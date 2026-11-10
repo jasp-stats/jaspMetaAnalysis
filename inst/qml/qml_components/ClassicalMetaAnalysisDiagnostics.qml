@@ -25,9 +25,14 @@ Section
 	title:							qsTr("Diagnostics")
 	property string analysisType:	"metaAnalysis"
 	property int heterogeneityModelTermsCount: 0
+	property string methodValue:	""
 	readonly property bool locationScaleModel: analysisType === "metaAnalysis" && heterogeneityModelTermsCount > 0
+	readonly property bool noHeterogeneity: ["equalEffects", "fixedEffects", "unrestrictedWeightedLeastSquares"].includes(methodValue)
 	readonly property bool generalizedMetaAnalysis: analysisType === "generalizedMetaAnalysis"
 	readonly property bool selectionModels: analysisType === "selectionModels"
+	readonly property bool petPeese: analysisType === "petPeese"
+	property bool multilevelMultivariate: analysisType === "multilevelMultivariateMetaAnalysis"
+	readonly property bool univariate: (analysisType === "metaAnalysis" || petPeese || analysisType === "waapWls") && !multilevelMultivariate
 	columns:						1
 	info: selectionModels ? qsTr("Profile likelihood diagnostics for free heterogeneity and selection parameters.") : generalizedMetaAnalysis ? qsTr("Options for assessing multicollinearity among predictors.") : qsTr("Options for evaluating the influence of individual studies and assessing model diagnostics, including variance inflation factors, casewise diagnostics, and diagnostic plots.")
 
@@ -43,8 +48,8 @@ Section
 				name:		"diagnosticsVarianceInflationFactor"
 				text:		qsTr("Variance inflation factor")
 				Layout.preferredWidth: 300 * jaspTheme.uiScale
-				visible:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || generalizedMetaAnalysis
-				enabled:	(analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || generalizedMetaAnalysis) && predictors.count > 0
+				visible:	univariate || multilevelMultivariate || generalizedMetaAnalysis
+				enabled:	(univariate || multilevelMultivariate || generalizedMetaAnalysis) && predictors.count > 0
 				info: qsTr("Include variance inflation factors to assess multicollinearity among predictors. Available when predictors are included in the model.")
 
 				CheckBox
@@ -61,15 +66,15 @@ Section
 				name:		"diagnosticsCasewiseDiagnostics"
 				text:		qsTr("Casewise diagnostics")
 				Layout.preferredWidth: 300 * jaspTheme.uiScale
-				visible:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis"
-				enabled:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis"
+				visible:	univariate || multilevelMultivariate
+				enabled:	univariate || multilevelMultivariate
 				info: qsTr("Include casewise diagnostics to assess the influence of individual studies on the meta-analysis results. Note that diagnostics are always based on the non-clustered model.")
 
 				CheckBox
 				{
 					name:		"diagnosticsCasewiseDiagnosticsShowInfluentialOnly"
 					text:		qsTr("Show influential only")
-					visible:	analysisType === "metaAnalysis"
+					visible:	univariate
 					enabled:	!locationScaleModel
 					info: qsTr("Show only the influential studies in the casewise diagnostics. Unavailable when performing multilevel/multivariate meta-analysis.")
 				}
@@ -110,16 +115,16 @@ Section
 			{
 				name:		"diagnosticsPlotsProfileLikelihood"
 				text:		qsTr("Profile likelihood")
-				visible:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || selectionModels
-				enabled:	(analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis" || selectionModels) && !locationScaleModel
-				info: selectionModels ? qsTr("Profile free heterogeneity and selection parameters. Unavailable for ordinal models.") : qsTr("Include a profile likelihood plot for the heterogeneity parameter (τ²).")
+				visible:	univariate || multilevelMultivariate || selectionModels
+				enabled:	(univariate || multilevelMultivariate || selectionModels) && !locationScaleModel && (selectionModels || !noHeterogeneity)
+				info: selectionModels ? qsTr("Profile free heterogeneity and selection parameters. Unavailable for ordinal models.") : qsTr("Include a profile likelihood plot for the heterogeneity parameter (τ²). Unavailable for equal effects, fixed effects, and unrestricted weighted least squares models.")
 			}
 
 			CheckBox
 			{
 				name:		"diagnosticsPlotsBaujat"
 				text:		qsTr("Baujat")
-				visible:	analysisType === "metaAnalysis" || analysisType === "mantelHaenszelPeto"
+				visible:	univariate || analysisType === "mantelHaenszelPeto"
 				enabled:	!locationScaleModel
 				info: qsTr("Include a Baujat plot to detect studies contributing to heterogeneity and overall effect size. Unavailable when performing multilevel/multivariate meta-analysis. Note that Baujat plot is always based on the non-clustered model.")
 			}

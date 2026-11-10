@@ -2,6 +2,65 @@
 #
 # Formatting, safe result assembly, table columns, transformations, and shared messages.
 
+# PET-PEESE bias term ----
+
+.maBiasTerm                           <- function(fit) {
+
+  # name of the PET-PEESE bias coefficient (NULL for all other models)
+  return(attr(fit, "biasTerm"))
+}
+
+.maZeroBiasTerm                       <- function(newmods, fit) {
+
+  # PET-PEESE adjusted predictions are evaluated at a zero standard error
+  biasTerm <- .maBiasTerm(fit)
+
+  if (!is.null(biasTerm) && biasTerm %in% colnames(newmods))
+    newmods[, biasTerm] <- 0
+
+  return(newmods)
+}
+
+.maPredictStudies                     <- function(fit) {
+
+  # PET-PEESE study-level predictions are bias-adjusted (evaluated at a zero standard error)
+  if (is.null(.maBiasTerm(fit)))
+    return(stats::predict(fit))
+
+  newmods <- .maZeroBiasTerm(stats::model.matrix(fit), fit)
+  if (fit[["int.incl"]])
+    newmods <- newmods[, -1, drop = FALSE]
+
+  return(stats::predict(fit, newmods = newmods))
+}
+
+.maModeratorCoefficients              <- function(fit) {
+
+  # coefficient indices of the user moderators (without intercept and PET-PEESE bias term)
+  return(which(!rownames(fit[["beta"]]) %in% c("intrcpt", .maBiasTerm(fit))))
+}
+
+# Moderator profile ----
+
+.maReferenceFit                       <- function(fit) {
+
+  # model of all estimates whose moderators define the pooled effect and marginal means; the WAAP-WLS
+  # model of the retained estimates is evaluated at the moderators of all estimates (WLS model)
+  referenceFit <- attr(fit, "referenceFit")
+
+  return(if (is.null(referenceFit)) fit else referenceFit)
+}
+
+.maReferenceModelMatrix               <- function(fit) {
+
+  return(stats::model.matrix(.maReferenceFit(fit)))
+}
+
+.maReferenceDataset                   <- function(fit) {
+
+  return(attr(.maReferenceFit(fit), "dataset"))
+}
+
 .maVariableNames                      <- function(varNames, variables) {
 
   # sometimes interactions are missformated as "."
@@ -11,6 +70,9 @@
 
     if (varName %in% c("intrcpt", "intercept"))
       return(gettext("Intercept"))
+
+    if (varName %in% .ppBiasTerms)
+      return(.ppBiasTermLabel(varName))
 
     for (vn in unique(variables)) {
       inf <- regexpr(vn, varName, fixed = TRUE)
@@ -89,7 +151,7 @@
 .maPrintModerationTest                <- function(fit, options, parameter) {
 
   out      <- .maOmnibusTest(fit, options, parameter)
-  outPrint <- .maPrintTermTest(out, testStatistic = TRUE)
+  outPrint <- if (is.na(out[["pval"]])) gettext("not available") else .maPrintTermTest(out, testStatistic = TRUE)
 
   if (.maIsMetaregressionHeterogeneity(options)) {
     if (parameter == "effectSize")
@@ -274,9 +336,23 @@
   return(tempTable)
 }
 
+.maHasPredictionIntervals       <- function(options) {
+
+  # metafor provides no prediction intervals for models without (a single) heterogeneity
+  return(options[["predictionIntervals"]] && !.maGetMethodOptions(options) %in% c("EE", "FE", "MH", "PETO") && !.mammAnyStructureGen(options))
+}
+
+.maTransformationIntroducedNA   <- function(estimates, options) {
+
+  # missing prediction intervals of models without heterogeneity are not caused by the transformation
+  columns <- intersect(c("est", "lCi", "uCi", if (.maHasPredictionIntervals(options)) c("lPi", "uPi")), colnames(estimates))
+  return(!is.null(estimates) && anyNA(estimates[, columns, drop = FALSE]))
+}
+
 .maAddPiColumn                  <- function(tempTable, options) {
 
-  if (options[["predictionIntervals"]]) {
+  # unrestricted weighted least squares has no prediction intervals (the GUI option is disabled)
+  if (options[["predictionIntervals"]] && !.maIsUnrestrictedWeightedLeastSquares(options)) {
     overtitleCi <- gettextf("%s%% PI", 100 * options[["confidenceIntervalsLevel"]])
     tempTable$addColumnInfo(name = "lPi", title = gettext("Lower"), type = "number", overtitle = overtitleCi)
     tempTable$addColumnInfo(name = "uPi", title = gettext("Upper"), type = "number", overtitle = overtitleCi)
@@ -434,7 +510,14 @@
 }
 
 .maTryCleanErrorMessages               <- function(message) {
+
+  # report the error without the failing call (e.g., "Error in (function (yi, vi, ...) : ...")
+  if (inherits(message, "try-error") && !is.null(attr(message, "condition")))
+    message <- conditionMessage(attr(message, "condition"))
+
   # probably more messages will be gathered over time
+  if (.maIsTooFewEstimatesError(message))
+    return(gettext("There are too few estimates to estimate the model."))
   if (grepl("singular matrix", message))
     return(gettextf("The model estimation failed with the following message: %1$s. Please, consider simplifying the model.", message))
   if (grepl("Could not obtain the cluster-robust variance-covariance matrix", message))
@@ -447,4 +530,9 @@
     return(gettext("The GLMM could not be estimated for the selected model. This can happen with sparse event counts, risk differences, random study effects, or a moderator structure that is too complex for the data. Try simplifying the moderator model, using the fixed study-effects GLMM, changing the effect-size measure if appropriate, or centering/scaling continuous moderators.\n\nMetafor reported: Cannot fit ML model."))
 
   return(message)
+}
+
+.maIsTooFewEstimatesError              <- function(message) {
+  # metafor messages for models with more parameters than estimates
+  return(grepl("Number of parameters to be estimated is larger than the number of observations|Processing terminated since k <= 1", message))
 }

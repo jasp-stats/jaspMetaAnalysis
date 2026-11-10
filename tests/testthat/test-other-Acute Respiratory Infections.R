@@ -74,15 +74,15 @@ test_that("BayesianBinomialMetaAnalysis (analysis 2) results match", {
 
   table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(-0.196026243391854, -1.46377470349988, 0.671910521645827, 0.365075334082838,
-     "Pooled effect", 2.8796263557547, 3.20728958661247, 0, "", 0.400875253832723,
-     0.100615270221908, "𝜏", 2.71865671196185, "", 0, "", 0.847708467442748,
-     0.0101234326018276, "𝜏<unicode>", 7.39109624725573, ""))
+    list(-0.193269706246593, -1.57813491975667, 0.678381387816045, 0.383002990446205,
+     "Pooled effect", 2.94493385762583, 3.28744374404855, 0, "", 0.437578119124753,
+     0.108483302784548, "𝜏", 2.96139619802782, "", 0, "", 1.09100647076274,
+     0.0117686269830439, "𝜏<unicode>", 8.76986747387201, ""))
 
   table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_testsTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(2.37753264295362, 0.703925881490369, 0.5, "Pooled effect", 1.26050926623474,
-     0.557621808971539, 0.5, "Heterogeneity"))
+    list(2.42143671607754, 0.707725121642338, 0.5, "Pooled effect", 1.28599725735182,
+     0.5625541558355, 0.5, "Heterogeneity"))
 
   plotName <- results[["results"]][["priorAndPosteriorPlotContainer"]][["collection"]][["priorAndPosteriorPlotContainer_heterogeneity"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]

@@ -165,14 +165,24 @@
 
 .forestPlotStudyBuildPredictions       <- function(fit, dfForest, options) {
 
-  if (!options[["forestPlotStudyInformationPredictedEffects"]]) {
+  # aggregated rows combine estimates with different predicted effects (the GUI disables the option)
+  if (!options[["forestPlotStudyInformationPredictedEffects"]] || options[["forestPlotStudyInformationAggregateBy"]] != "") {
     return(NULL)
   }
 
-  dfForestPrediction <- data.frame(predict(fit))
+  dfForestPrediction <- data.frame(.maPredictStudies(fit))
+
+  # fixed-effect type models have no prediction intervals (they equal the confidence intervals)
+  if (!"pi.lb" %in% colnames(dfForestPrediction)) {
+    dfForestPrediction$pi.lb <- dfForestPrediction$ci.lb
+    dfForestPrediction$pi.ub <- dfForestPrediction$ci.ub
+  }
 
   if (nrow(dfForestPrediction) == 1) {
     dfForestPrediction <- do.call(rbind, replicate(nrow(dfForest), dfForestPrediction, simplify = FALSE))
+  } else if (nrow(dfForestPrediction) == nrow(dfForest) && all(dfForest$id %in% seq_len(nrow(dfForestPrediction)))) {
+    # predictions follow the fitting order; align them with the (possibly reordered) study rows
+    dfForestPrediction <- dfForestPrediction[dfForest$id, , drop = FALSE]
   }
 
   dfForestPrediction$id <- dfForest$id

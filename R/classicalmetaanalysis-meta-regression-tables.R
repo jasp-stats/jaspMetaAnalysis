@@ -7,7 +7,7 @@
   if (!.maIsMetaregression(options))
     return()
 
-  parameters <- c("effectSize", if (!.maIsSelection(options)) "heterogeneity")
+  parameters <- c("effectSize", if (!.maIsSelection(options) && !.maIsPetPeese(options) && !.maIsWaapWls(options)) "heterogeneity")
 
   for (parameter in parameters) {
     if (options[["metaregressionTermTests"]])
@@ -216,9 +216,11 @@
   if (is.null(fit) || jaspBase::isTryError(fit))
     return(correlationMatrixTable)
 
-  if (parameter == "effectSize")
-    correlationMatrix <- data.frame(as.matrix(cov2cor(fit[["vb"]])))
-  else if (parameter == "heterogeneity")
+  if (parameter == "effectSize") {
+    # the PET-PEESE bias term is reported in the model summary, not as a moderator
+    moderators        <- !rownames(fit[["vb"]]) %in% .maBiasTerm(fit)
+    correlationMatrix <- data.frame(as.matrix(cov2cor(fit[["vb"]]))[moderators, moderators, drop = FALSE])
+  } else if (parameter == "heterogeneity")
     correlationMatrix <- data.frame(as.matrix(cov2cor(fit[["va"]])))
 
   correlationMatrixNames      <- .maVariableNames(colnames(correlationMatrix), switch(
@@ -342,6 +344,7 @@
 
   if (parameter == "effectSize") {
     terms      <- attr(terms(fit[["formula.mods"]], data = fit[["data"]]),"term.labels")
+    terms      <- terms[!terms %in% .maBiasTerm(fit)]
     termsTests <- do.call(rbind.data.frame, lapply(terms, function(term)
       .maTermTests(fit, options, term, parameter = "effectSize")
     ))
@@ -384,6 +387,9 @@
       estimates$lCi <- fit[["ci.lb"]]
       estimates$uCi <- fit[["ci.ub"]]
     }
+
+    # the PET-PEESE bias term is reported in the model summary, not as a moderator
+    estimates <- estimates[!rownames(fit[["beta"]]) %in% .maBiasTerm(fit), , drop = FALSE]
 
   } else if (parameter == "heterogeneity") {
 

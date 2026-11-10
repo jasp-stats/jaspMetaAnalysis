@@ -28,6 +28,10 @@ Section
 	readonly property bool locationScaleModel: analysisType === "metaAnalysis" && heterogeneityModelTermsCount > 0
 	readonly property bool generalizedMetaAnalysis: analysisType === "generalizedMetaAnalysis"
 	readonly property bool selectionModels: analysisType === "selectionModels"
+	readonly property bool petPeese: analysisType === "petPeese"
+	readonly property bool waapWls: analysisType === "waapWls"
+	property bool multilevelMultivariate: analysisType === "multilevelMultivariateMetaAnalysis"
+	readonly property bool univariate: (analysisType === "metaAnalysis" || petPeese || waapWls) && !multilevelMultivariate
 	columns:									2
 	info: selectionModels ? qsTr("Export all candidate models independently of the display filter. Column names include the model and subgroup.") : qsTr("Options for exporting model-derived quantities to the dataset.")
 
@@ -52,13 +56,13 @@ Section
 	Group
 	{
 		title:		qsTr("Diagnostics")
-		visible:	analysisType === "metaAnalysis" || analysisType === "multilevelMultivariateMetaAnalysis"
+		visible:	univariate || multilevelMultivariate
 
 		CheckBox
 		{
 			name:		"exportDiagnosticsInfluentialCases"
 			text:		qsTr("Influential cases")
-			visible:	analysisType === "metaAnalysis"
+			visible:	univariate
 			enabled:	!locationScaleModel
 			info: qsTr("Export an indicator for influential cases.")
 		}
@@ -74,7 +78,7 @@ Section
 		{
 			name:		"exportDiagnosticsModelImpact"
 			text:		qsTr("Model impact")
-			visible:	analysisType === "metaAnalysis"
+			visible:	univariate
 			enabled:	!locationScaleModel
 			info: qsTr("Export diagnostics for how individual cases affect the model fit.")
 		}
@@ -128,7 +132,7 @@ Section
 		{
 			name:		"exportResidualsConditional"
 			text:		qsTr("Conditional standardized")
-			visible:	analysisType === "metaAnalysis"
+			visible:	univariate
 			info: qsTr("Export conditional standardized residuals.")
 		}
 	}
@@ -141,7 +145,7 @@ Section
 		{
 			name:	"exportPredictedValues"
 			text:	qsTr("Predicted values")
-			info: qsTr("Export predicted values and interval bounds.")
+			info: petPeese ? qsTr("Export the publication bias adjusted predicted values (i.e., at a standard error of zero) and interval bounds.") : waapWls ? qsTr("Export predicted values and interval bounds of the reported model. When WAAP is reported, only the retained estimates receive values.") : qsTr("Export predicted values and interval bounds.")
 		}
 
 		CheckBox
@@ -156,7 +160,7 @@ Section
 		{
 			name:	"exportRandomEffects"
 			text:	qsTr("Random effects")
-			visible:	!generalizedMetaAnalysis && !selectionModels
+			visible:	!generalizedMetaAnalysis && !selectionModels && !petPeese && !waapWls
 			info: qsTr("Export predicted random effects.")
 		}
 
@@ -166,6 +170,26 @@ Section
 			text:	qsTr("Weights")
 			visible:	!generalizedMetaAnalysis && !selectionModels
 			info: qsTr("Export model fitting weights. These are not coefficient-specific contribution weights in meta-regression. For multilevel/multivariate models, diagonal weights match the default forest plot weights and row-sum weights are exported for intercept-only models.")
+		}
+	}
+
+	Group
+	{
+		title:		qsTr("WAAP-WLS")
+		visible:	waapWls
+
+		CheckBox
+		{
+			name:	"exportWaapWlsEstimatedPower"
+			text:	qsTr("Estimated power")
+			info: qsTr("Export the power of each estimate to detect the effect of the WLS model (two-sided z-test, α = .05), i.e., the value compared with the power criterion. Exported for all estimates, also when WLS is reported.")
+		}
+
+		CheckBox
+		{
+			name:	"exportWaapWlsIncludedInWaap"
+			text:	qsTr("Included in WAAP")
+			info: qsTr("Export an indicator of the estimates included in the WAAP model (the adequately powered and the unaffected estimates). Exported for all estimates, also when WLS is reported.")
 		}
 	}
 }

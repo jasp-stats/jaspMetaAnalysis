@@ -70,6 +70,104 @@ Upgrades
 
 	Upgrade
 	{
+		functionName:	"PetPeese"
+		fromVersion:	"0.98.0"
+		toVersion:		"0.99.0"
+		msg:			qsTr("PET-PEESE was reworked in Meta-Analysis module 0.99.0. Refreshing this analysis replaces the saved results and may reset incompatible settings (e.g., correlations and sample sizes are no longer accepted as input; use Effect Size Computation to compute effect sizes and standard errors). To rerun the original analysis, use the Meta-Analysis module 0.98.0.")
+
+		ChangeRename { condition: function(options) { return options["effectSizeSe"] !== undefined && options["effectSizeStandardError"] === undefined; }; from: "effectSizeSe"; to: "effectSizeStandardError" }
+		ChangeRename { condition: function(options) { return options["studyLabel"] !== undefined && options["studyLabels"] === undefined; }; from: "studyLabel"; to: "studyLabels" }
+		ChangeRename { condition: function(options) { return options["inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable"] !== undefined && options["heterogeneitySqrtGamma"] === undefined; }; from: "inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable"; to: "heterogeneitySqrtGamma" }
+		ChangeSetValue { condition: function(options) { return options["petPeeseRegressionPlot"] === undefined && (options["plotsRegressionEstimatePetPlot"] === true || options["plotsRegressionEstimatePeesePlot"] === true); }; name: "petPeeseRegressionPlot"; jsonValue: true }
+
+		ChangeRemove { condition: function(options) { return options["plotsRegressionEstimatePetPlot"] !== undefined; }; name: "plotsRegressionEstimatePetPlot" }
+		ChangeRemove { condition: function(options) { return options["plotsRegressionEstimatePeesePlot"] !== undefined; }; name: "plotsRegressionEstimatePeesePlot" }
+		ChangeRemove { condition: function(options) { return options["plotsMeanModelEstimatesPlot"] !== undefined; }; name: "plotsMeanModelEstimatesPlot" }
+		ChangeRemove { condition: function(options) { return options["measures"] !== undefined; }; name: "measures" }
+		ChangeRemove { condition: function(options) { return options["transformCorrelationsTo"] !== undefined; }; name: "transformCorrelationsTo" }
+		ChangeRemove { condition: function(options) { return options["sampleSize"] !== undefined; }; name: "sampleSize" }
+		ChangeRemove { condition: function(options) { return options["effectSizeCi"] !== undefined; }; name: "effectSizeCi" }
+		ChangeRemove { condition: function(options) { return options["inferenceMeanEstimatesTable"] !== undefined; }; name: "inferenceMeanEstimatesTable" }
+		ChangeSetValue { condition: function(options) { return options["petPeeseCoefficientEstimates"] === undefined && options["inferenceRegressionEstimatesTable"] === true; }; name: "petPeeseCoefficientEstimates"; jsonValue: true }
+		ChangeSetValue { condition: function(options) { return options["petPeeseCoefficientEstimates"] === undefined && options["inferenceRegressionEstimatesTable"] === false; }; name: "petPeeseCoefficientEstimates"; jsonValue: false }
+		ChangeRemove { condition: function(options) { return options["inferenceRegressionEstimatesTable"] !== undefined; }; name: "inferenceRegressionEstimatesTable" }
+	}
+
+	Upgrade
+	{
+		functionName:	"WaapWls"
+		fromVersion:	"0.98.0"
+		toVersion:		"0.99.0"
+		msg:			qsTr("WAAP-WLS was reworked in Meta-Analysis module 0.99.0. Refreshing this analysis replaces the saved results and may reset incompatible settings (e.g., correlations and sample sizes are no longer accepted as input; use Effect Size Computation to compute effect sizes and standard errors). To rerun the original analysis, use the Meta-Analysis module 0.98.0.")
+
+		ChangeRename { condition: function(options) { return options["effectSizeSe"] !== undefined && options["effectSizeStandardError"] === undefined; }; from: "effectSizeSe"; to: "effectSizeStandardError" }
+		ChangeRename { condition: function(options) { return options["studyLabel"] !== undefined && options["studyLabels"] === undefined; }; from: "studyLabel"; to: "studyLabels" }
+		ChangeRename { condition: function(options) { return options["inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable"] !== undefined && options["heterogeneitySqrtGamma"] === undefined; }; from: "inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable"; to: "heterogeneitySqrtGamma" }
+
+		ChangeRemove { condition: function(options) { return options["plotsMeanModelEstimatesPlot"] !== undefined; }; name: "plotsMeanModelEstimatesPlot" }
+		ChangeRemove { condition: function(options) { return options["measures"] !== undefined; }; name: "measures" }
+		ChangeRemove { condition: function(options) { return options["transformCorrelationsTo"] !== undefined; }; name: "transformCorrelationsTo" }
+		ChangeRemove { condition: function(options) { return options["sampleSize"] !== undefined; }; name: "sampleSize" }
+		ChangeRemove { condition: function(options) { return options["effectSizeCi"] !== undefined; }; name: "effectSizeCi" }
+		ChangeRemove { condition: function(options) { return options["inferenceMeanEstimatesTable"] !== undefined; }; name: "inferenceMeanEstimatesTable" }
+	}
+
+	// Typo fix of the multilevel/multivariate sparse matrices option name (stored by all analyses with the classical Advanced section).
+	Upgrade
+	{
+		functionName:	"SelectionModels"
+		fromVersion:	"0.98.0"
+		toVersion:		"0.99.0"
+
+		ChangeRename { condition: function(options) { return options["useSparseMatricies"] !== undefined && options["useSparseMatrices"] === undefined; }; from: "useSparseMatricies"; to: "useSparseMatrices" }
+	}
+
+	// Clustered models use cluster-robust t-tests; the GUI no longer offers z-tests with clustering.
+	// The sparse matrices option name is corrected as in Selection Models above.
+	Upgrade
+	{
+		functionName:	"ClassicalMetaAnalysis"
+		fromVersion:	"0.98.0"
+		toVersion:		"0.99.0"
+
+		ChangeRename { condition: function(options) { return options["useSparseMatricies"] !== undefined && options["useSparseMatrices"] === undefined; }; from: "useSparseMatricies"; to: "useSparseMatrices" }
+
+		ChangeSetValue
+		{
+			condition: function(options)
+			{
+				var clustering = options["clustering"];
+				var value      = (clustering !== null && typeof clustering === "object") ? clustering["value"] : clustering;
+				return value !== undefined && value !== "" && options["fixedEffectTest"] === "z";
+			}
+			name:		"fixedEffectTest"
+			jsonValue:	"t"
+		}
+	}
+
+	Upgrade
+	{
+		functionName:	"ClassicalMetaAnalysisMultilevelMultivariate"
+		fromVersion:	"0.98.0"
+		toVersion:		"0.99.0"
+
+		ChangeRename { condition: function(options) { return options["useSparseMatricies"] !== undefined && options["useSparseMatrices"] === undefined; }; from: "useSparseMatricies"; to: "useSparseMatrices" }
+
+		ChangeSetValue
+		{
+			condition: function(options)
+			{
+				var clustering = options["clustering"];
+				var value      = (clustering !== null && typeof clustering === "object") ? clustering["value"] : clustering;
+				return value !== undefined && value !== "" && options["fixedEffectTest"] === "z";
+			}
+			name:		"fixedEffectTest"
+			jsonValue:	"t"
+		}
+	}
+
+	Upgrade
+	{
 		functionName:	"ClassicalPredictionPerformance"
 		fromVersion:	"0.17.2"
 		toVersion:		"0.17.3"
@@ -218,15 +316,15 @@ Upgrades
 		toVersion:		"0.17.3"
 
 		// WaapWls.qml
-		ChangeRename { from: "inputES"; to: "effectSize" }
-		ChangeRename { from: "inputSE"; to: "effectSizeSe" }
-		ChangeRename { from: "inputCI"; to: "effectSizeCi" }
-		ChangeRename { from: "inputN"; to: "sampleSize" }
-		ChangeRename { from: "inputLabels"; to: "studyLabel" }
-		ChangeRename { from: "muTransform"; to: "transformCorrelationsTo" }
-		ChangeRename { from: "estimatesMean"; to: "inferenceMeanEstimatesTable" }
-		ChangeRename { from: "estimatesSigma"; to: "inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable" }
-		ChangeRename { from: "plotModels"; to: "plotsMeanModelEstimatesPlot" }
+		ChangeRename { condition: function(options) { return options["inputES"] !== undefined && options["effectSize"] === undefined; }; from: "inputES"; to: "effectSize" }
+		ChangeRename { condition: function(options) { return options["inputSE"] !== undefined && options["effectSizeSe"] === undefined; }; from: "inputSE"; to: "effectSizeSe" }
+		ChangeRename { condition: function(options) { return options["inputCI"] !== undefined && options["effectSizeCi"] === undefined; }; from: "inputCI"; to: "effectSizeCi" }
+		ChangeRename { condition: function(options) { return options["inputN"] !== undefined && options["sampleSize"] === undefined; }; from: "inputN"; to: "sampleSize" }
+		ChangeRename { condition: function(options) { return options["inputLabels"] !== undefined && options["studyLabel"] === undefined; }; from: "inputLabels"; to: "studyLabel" }
+		ChangeRename { condition: function(options) { return options["muTransform"] !== undefined && options["transformCorrelationsTo"] === undefined; }; from: "muTransform"; to: "transformCorrelationsTo" }
+		ChangeRename { condition: function(options) { return options["estimatesMean"] !== undefined && options["inferenceMeanEstimatesTable"] === undefined; }; from: "estimatesMean"; to: "inferenceMeanEstimatesTable" }
+		ChangeRename { condition: function(options) { return options["estimatesSigma"] !== undefined && options["inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable"] === undefined; }; from: "estimatesSigma"; to: "inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable" }
+		ChangeRename { condition: function(options) { return options["plotModels"] !== undefined && options["plotsMeanModelEstimatesPlot"] === undefined; }; from: "plotModels"; to: "plotsMeanModelEstimatesPlot" }
 	}
 
 	Upgrade
@@ -236,18 +334,18 @@ Upgrades
 		toVersion:		"0.17.3"
 
 		// PetPeese.qml
-		ChangeRename { from: "inputES"; to: "effectSize" }
-		ChangeRename { from: "inputSE"; to: "effectSizeSe" }
-		ChangeRename { from: "inputCI"; to: "effectSizeCi" }
-		ChangeRename { from: "inputN"; to: "sampleSize" }
-		ChangeRename { from: "inputLabels"; to: "studyLabel" }
-		ChangeRename { from: "muTransform"; to: "transformCorrelationsTo" }
-		ChangeRename { from: "estimatesMean"; to: "inferenceMeanEstimatesTable" }
-		ChangeRename { from: "estimatesPetPeese"; to: "inferenceRegressionEstimatesTable" }
-		ChangeRename { from: "estimatesSigma"; to: "inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable" }
-		ChangeRename { from: "regressionPeese"; to: "plotsRegressionEstimatePeesePlot" }
-		ChangeRename { from: "regressionPet"; to: "plotsRegressionEstimatePetPlot" }
-		ChangeRename { from: "plotModels"; to: "plotsMeanModelEstimatesPlot" }
+		ChangeRename { condition: function(options) { return options["inputES"] !== undefined && options["effectSize"] === undefined; }; from: "inputES"; to: "effectSize" }
+		ChangeRename { condition: function(options) { return options["inputSE"] !== undefined && options["effectSizeSe"] === undefined; }; from: "inputSE"; to: "effectSizeSe" }
+		ChangeRename { condition: function(options) { return options["inputCI"] !== undefined && options["effectSizeCi"] === undefined; }; from: "inputCI"; to: "effectSizeCi" }
+		ChangeRename { condition: function(options) { return options["inputN"] !== undefined && options["sampleSize"] === undefined; }; from: "inputN"; to: "sampleSize" }
+		ChangeRename { condition: function(options) { return options["inputLabels"] !== undefined && options["studyLabel"] === undefined; }; from: "inputLabels"; to: "studyLabel" }
+		ChangeRename { condition: function(options) { return options["muTransform"] !== undefined && options["transformCorrelationsTo"] === undefined; }; from: "muTransform"; to: "transformCorrelationsTo" }
+		ChangeRename { condition: function(options) { return options["estimatesMean"] !== undefined && options["inferenceMeanEstimatesTable"] === undefined; }; from: "estimatesMean"; to: "inferenceMeanEstimatesTable" }
+		ChangeRename { condition: function(options) { return options["estimatesPetPeese"] !== undefined && options["inferenceRegressionEstimatesTable"] === undefined; }; from: "estimatesPetPeese"; to: "inferenceRegressionEstimatesTable" }
+		ChangeRename { condition: function(options) { return options["estimatesSigma"] !== undefined && options["inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable"] === undefined; }; from: "estimatesSigma"; to: "inferenceMultiplicativeHeterogeneityEstimatesEstimatesTable" }
+		ChangeRename { condition: function(options) { return options["regressionPeese"] !== undefined && options["plotsRegressionEstimatePeesePlot"] === undefined; }; from: "regressionPeese"; to: "plotsRegressionEstimatePeesePlot" }
+		ChangeRename { condition: function(options) { return options["regressionPet"] !== undefined && options["plotsRegressionEstimatePetPlot"] === undefined; }; from: "regressionPet"; to: "plotsRegressionEstimatePetPlot" }
+		ChangeRename { condition: function(options) { return options["plotModels"] !== undefined && options["plotsMeanModelEstimatesPlot"] === undefined; }; from: "plotModels"; to: "plotsMeanModelEstimatesPlot" }
 	}
 
 	Upgrade
@@ -452,63 +550,49 @@ Upgrades
 		fromVersion:	"0.96.4"
 		toVersion:		"0.96.5"
 
-		ChangeCopy
-		{
-			from:	"diagnosticsCasewiseDiagnosticsExportToDataset"
-			to:		"exportDiagnosticsInfluentialCases"
-		}
-
+		// The diagnostics export option was split into separate export options; files saved with
+		// module 0.96.4 after the split already contain them and skip these changes.
 		ChangeJS
 		{
-			name:		"exportDiagnosticsInfluentialCases"
-			jsFunction:	function(options)
+			condition:		function(options) { return options["diagnosticsCasewiseDiagnosticsExportToDataset"] !== undefined && options["exportDiagnosticsInfluentialCases"] === undefined; }
+			name:			"exportDiagnosticsInfluentialCases"
+			isNewOption:	true
+			jsFunction:		function(options)
 			{
 				return options["diagnosticsCasewiseDiagnosticsExportToDataset"] === true;
 			}
 		}
 
-		ChangeCopy
-		{
-			from:	"diagnosticsCasewiseDiagnosticsExportToDataset"
-			to:		"exportDiagnosticsCaseDiagnostics"
-		}
-
 		ChangeJS
 		{
-			name:		"exportDiagnosticsCaseDiagnostics"
-			jsFunction:	function(options)
+			condition:		function(options) { return options["diagnosticsCasewiseDiagnosticsExportToDataset"] !== undefined && options["exportDiagnosticsCaseDiagnostics"] === undefined; }
+			name:			"exportDiagnosticsCaseDiagnostics"
+			isNewOption:	true
+			jsFunction:		function(options)
 			{
 				return options["diagnosticsCasewiseDiagnosticsExportToDataset"] === true &&
 					options["diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"] !== true;
 			}
 		}
 
-		ChangeCopy
-		{
-			from:	"diagnosticsCasewiseDiagnosticsExportToDataset"
-			to:		"exportDiagnosticsModelImpact"
-		}
-
 		ChangeJS
 		{
-			name:		"exportDiagnosticsModelImpact"
-			jsFunction:	function(options)
+			condition:		function(options) { return options["diagnosticsCasewiseDiagnosticsExportToDataset"] !== undefined && options["exportDiagnosticsModelImpact"] === undefined; }
+			name:			"exportDiagnosticsModelImpact"
+			isNewOption:	true
+			jsFunction:		function(options)
 			{
 				return options["diagnosticsCasewiseDiagnosticsExportToDataset"] === true &&
 					options["diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"] !== true;
 			}
 		}
 
-		ChangeCopy
-		{
-			from:	"diagnosticsCasewiseDiagnosticsExportToDataset"
-			to:		"exportDiagnosticsCoefficientInfluence"
-		}
-
 		ChangeJS
 		{
-			name:		"exportDiagnosticsCoefficientInfluence"
-			jsFunction:	function(options)
+			condition:		function(options) { return options["diagnosticsCasewiseDiagnosticsExportToDataset"] !== undefined && options["exportDiagnosticsCoefficientInfluence"] === undefined; }
+			name:			"exportDiagnosticsCoefficientInfluence"
+			isNewOption:	true
+			jsFunction:		function(options)
 			{
 				return options["diagnosticsCasewiseDiagnosticsExportToDataset"] === true &&
 					options["diagnosticsCasewiseDiagnosticsExportToDatasetInfluentialIndicatorOnly"] !== true &&
@@ -532,31 +616,24 @@ Upgrades
 		fromVersion:	"0.96.4"
 		toVersion:		"0.96.5"
 
-		ChangeCopy
-		{
-			from:	"diagnosticsCasewiseDiagnosticsExportToDataset"
-			to:		"exportDiagnosticsCaseDiagnostics"
-		}
-
+		// See the ClassicalMetaAnalysis 0.96.4 -> 0.96.5 upgrade.
 		ChangeJS
 		{
-			name:		"exportDiagnosticsCaseDiagnostics"
-			jsFunction:	function(options)
+			condition:		function(options) { return options["diagnosticsCasewiseDiagnosticsExportToDataset"] !== undefined && options["exportDiagnosticsCaseDiagnostics"] === undefined; }
+			name:			"exportDiagnosticsCaseDiagnostics"
+			isNewOption:	true
+			jsFunction:		function(options)
 			{
 				return options["diagnosticsCasewiseDiagnosticsExportToDataset"] === true;
 			}
 		}
 
-		ChangeCopy
-		{
-			from:	"diagnosticsCasewiseDiagnosticsExportToDataset"
-			to:		"exportDiagnosticsCoefficientInfluence"
-		}
-
 		ChangeJS
 		{
-			name:		"exportDiagnosticsCoefficientInfluence"
-			jsFunction:	function(options)
+			condition:		function(options) { return options["diagnosticsCasewiseDiagnosticsExportToDataset"] !== undefined && options["exportDiagnosticsCoefficientInfluence"] === undefined; }
+			name:			"exportDiagnosticsCoefficientInfluence"
+			isNewOption:	true
+			jsFunction:		function(options)
 			{
 				return options["diagnosticsCasewiseDiagnosticsExportToDataset"] === true &&
 					options["diagnosticsCasewiseDiagnosticsDifferenceInCoefficients"] === true;

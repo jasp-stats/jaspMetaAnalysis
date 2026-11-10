@@ -242,7 +242,7 @@
     return()
 
   diagnostics          <- createJaspContainer(gettext("Diagnostics"))
-  diagnostics$position <- 8
+  diagnostics$position <- 10
   diagnostics$dependOn(c(
     .smDependencies, "diagnosticsPlotsProfileLikelihood", "showSelectionModels",
     "includeFullDatasetInSubgroupAnalysis"

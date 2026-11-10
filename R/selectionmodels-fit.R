@@ -230,6 +230,20 @@
   return(fit)
 }
 
+.smUnadjustedFits                       <- function(dataset, options, subgroup) {
+
+  # Unadjusted fixed and random effects models with the same moderators, used
+  # for comparison with the adjusted estimates in the forest plot.
+  lapply(c(fixedEffect = "FE", randomEffects = "REML"), function(method) {
+    args        <- .smBaseArguments(dataset, options)
+    args$method <- method
+    fit         <- .smCapture(do.call(metafor::rma.uni, args))
+    attr(fit, "subgroup") <- subgroup
+    attr(fit, "dataset")  <- dataset
+    fit
+  })
+}
+
 .smFitCandidates                        <- function(cache, dataset, options, specifications, subgroup) {
 
   if (is.null(cache)) {
@@ -237,7 +251,11 @@
       metafor::rma.uni,
       .smBaseArguments(dataset, options)
     ))
-    cache <- list(reference = reference, models = list())
+    cache <- list(
+      reference  = reference,
+      unadjusted = .smUnadjustedFits(dataset, options, subgroup),
+      models     = list()
+    )
   }
 
   models <- list()
@@ -348,7 +366,11 @@
       subgroup        = label
     )
     cache[["scopes"]][[scope]] <- scopeCache
-    output[[scope]]            <- list(label = label, models = lapply(scopeCache[["models"]], `[[`, "fit"))
+    output[[scope]]            <- list(
+      label      = label,
+      models     = lapply(scopeCache[["models"]], `[[`, "fit"),
+      unadjusted = scopeCache[["unadjusted"]]
+    )
   }
 
   jaspResults[["selectionFitCache"]]$object <- cache

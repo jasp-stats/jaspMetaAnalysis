@@ -24,7 +24,7 @@
     bubblePlot       <- .maBubblePlotFun(fit[[1]], options)
     bubblePlot$title <- gettext("Bubble Plots")
     bubblePlot$dependOn(c(.maBubblePlotDependencies, "includeFullDatasetInSubgroupAnalysis", .maModelDependencies(options)))
-    bubblePlot$position <- if (.maIsSelection(options)) 7 else if (.maIsClassical(options)) 5 else 6
+    bubblePlot$position <- if (.maIsClassical(options)) 7 else 8
     jaspResults[["bubblePlot"]] <- bubblePlot
     return()
 
@@ -34,7 +34,7 @@
     bubblePlot       <- createJaspContainer()
     bubblePlot$title <- gettext("Bubble Plots")
     bubblePlot$dependOn(c(.maBubblePlotDependencies, "includeFullDatasetInSubgroupAnalysis", .maModelDependencies(options)))
-    bubblePlot$position <- if (.maIsSelection(options)) 7 else if (.maIsClassical(options)) 5 else 6
+    bubblePlot$position <- if (.maIsClassical(options)) 7 else 8
     jaspResults[["bubblePlot"]] <- bubblePlot
 
     for (i in seq_along(fit)) {
@@ -113,7 +113,7 @@
   separatePlots        <- unlist(options[["bubblePlotSeparatePlots"]])
   selectedVariable     <- options[["bubblePlotSelectedVariable"]][[1]][["variable"]]
   selectedVariableType <- options[["predictors.types"]][options[["predictors"]] == selectedVariable]
-  dataset              <- attr(fit, "dataset")
+  dataset              <- .maReferenceDataset(fit)
 
   # create a range of values for continuous predictors to plot the trend but use lvls for factors
   if (selectedVariableType == "scale") {
@@ -267,103 +267,124 @@
       mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)])
     )
     bubblePlot <- bubblePlot + do.call(jaspGraphs::geom_line, geomCall)
-    yRange <- range(c(yRange, dfPlot$pred), na.rm = TRUE)
+    yRange <- range(c(yRange, dfPlot$est), na.rm = TRUE)
+  } else if (!options[["bubblePlotBubbles"]]) {
+    # without bubbles, show the factor estimates as points
+    dfEstimates          <- dfPlot
+    dfEstimates[["est"]] <- do.call(.maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]), list(dfEstimates[["est"]]))
+    aesCall <- list(
+      x    = as.name("selectedVariable"),
+      y    = as.name("est"),
+      fill = if (hasSeparateLines) as.name("separateLines")
+    )
+    geomCall <- list(
+      data        = dfEstimates,
+      mapping     = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
+      size        = 3,
+      show.legend = FALSE
+    )
+    if (hasSeparateLines)
+      geomCall$position <- ggplot2::position_dodge(width = 0.9)
+    bubblePlot <- bubblePlot + do.call(jaspGraphs::geom_point, geomCall)
+    yRange     <- range(c(yRange, dfEstimates[["est"]]), na.rm = TRUE)
   }
 
   ### add studies as bubbles
-  dataset <- attr(fit, "dataset")
-  if (.maIsGLMM(options)) {
-    tempDf    <- .maglmmEscalc(dataset, options)
-    dfStudies <- data.frame(
-      effectSize        = tempDf[["yi"]],
-      inverseVariance   = 1/tempDf[["vi"]],
-      sampleSize        = .maglmmGetSampleSize(dataset, options),
-      constant          = rep(options[["bubblePlotBubblesRelativeSize"]], nrow(dataset)),
-      selectedVariable  = dataset[[attr(dfPlot, "selectedVariable")]]
+  if (options[["bubblePlotBubbles"]]) {
+    dataset <- attr(fit, "dataset")
+    if (.maIsGLMM(options)) {
+      tempDf    <- .maglmmEscalc(dataset, options)
+      dfStudies <- data.frame(
+        effectSize        = tempDf[["yi"]],
+        inverseVariance   = 1/tempDf[["vi"]],
+        sampleSize        = .maglmmGetSampleSize(dataset, options),
+        constant          = rep(options[["bubblePlotBubblesRelativeSize"]], nrow(dataset)),
+        selectedVariable  = dataset[[attr(dfPlot, "selectedVariable")]]
+      )
+    } else if (options[["analysis"]] == "BiBMA") {
+      tempDf <- metafor::escalc(
+        measure = "OR",
+        ai      = dataset[[options[["successesGroup1"]]]],
+        n1i     = dataset[[options[["sampleSizeGroup1"]]]],
+        ci      = dataset[[options[["successesGroup2"]]]],
+        n2i     = dataset[[options[["sampleSizeGroup2"]]]]
+      )
+      dfStudies <- data.frame(
+        effectSize        = tempDf[["yi"]],
+        inverseVariance   = 1/tempDf[["vi"]],
+        sampleSize        = (dataset[[options[["sampleSizeGroup1"]]]] + dataset[[options[["sampleSizeGroup2"]]]]),
+        weight            = if (.maIsClassical(options) && !.maIsSelection(options)) weights(fit) else NA,
+        constant          = rep(options[["bubblePlotBubblesRelativeSize"]], nrow(dataset)),
+        selectedVariable  = dataset[[attr(dfPlot, "selectedVariable")]]
+      )
+    } else {
+      dfStudies <- data.frame(
+        effectSize        = dataset[[options[["effectSize"]]]],
+        inverseVariance   = 1/dataset[[options[["effectSizeStandardError"]]]]^2,
+        weight            = if (.maIsClassical(options) && !.maIsSelection(options)) weights(fit) else NA,
+        constant          = rep(options[["bubblePlotBubblesRelativeSize"]], nrow(dataset)),
+        selectedVariable  = dataset[[attr(dfPlot, "selectedVariable")]]
+      )
+    }
+
+
+    # add separate lines and plots
+    if (hasSeparateLines)
+      dfStudies[attr(dfPlot, "variablesLines")] <- dataset[attr(dfPlot, "variablesLines")]
+    if (hasSeparatePlots)
+      dfStudies[attr(dfPlot, "variablesPlots")] <- dataset[attr(dfPlot, "variablesPlots")]
+
+    # make same encoding
+    dfStudies <- .maDichotomizeVariablesDataset(dfStudies, c(attr(dfPlot, "variablesLines"), attr(dfPlot, "variablesPlots")), attr(dfPlot, "continuousLevels"), options)
+    dfStudies <- .maMergeVariablesLevels(dfStudies, attr(dfPlot, "variablesLines"), "separateLines")
+    dfStudies <- .maMergeVariablesLevels(dfStudies, attr(dfPlot, "variablesPlots"), "separatePlots")
+    if (hasSeparateLines)
+      levels(dfStudies[,"separateLines"]) <- levels(dfPlot[,"separateLines"])
+
+    # subset original data across plots
+    if (!is.null(separatePlotsLvl))
+      dfStudies <- dfStudies[dfStudies$separatePlots == separatePlotsLvl,]
+
+    aesCall <- list(
+      x     = as.name("selectedVariable"),
+      y     = as.name("effectSize"),
+      size  = switch(
+        options[["bubblePlotBubblesSize"]],
+        "weight"            = as.name("weight"),
+        "inverseVariance"   = as.name("inverseVariance"),
+        "sampleSize"        = as.name("sampleSize"),
+        "equal"             = as.name("constant")
+      ),
+      color = if (hasSeparateLines) as.name("separateLines"),
+      fill  = if (hasSeparateLines) as.name("separateLines"),
+      alpha = options[["bubblePlotBubblesTransparency"]]
     )
-  } else if (options[["analysis"]] == "BiBMA") {
-    tempDf <- metafor::escalc(
-      measure = "OR",
-      ai      = dataset[[options[["successesGroup1"]]]],
-      n1i     = dataset[[options[["sampleSizeGroup1"]]]],
-      ci      = dataset[[options[["successesGroup2"]]]],
-      n2i     = dataset[[options[["sampleSizeGroup2"]]]]
+
+    dfStudies[["effectSize"]] <- do.call(.maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]), list(dfStudies[["effectSize"]]))
+
+    geomCall <- list(
+      data    = dfStudies,
+      mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
+      show.legend = FALSE
     )
-    dfStudies <- data.frame(
-      effectSize        = tempDf[["yi"]],
-      inverseVariance   = 1/tempDf[["vi"]],
-      sampleSize        = (dataset[[options[["sampleSizeGroup1"]]]] + dataset[[options[["sampleSizeGroup2"]]]]),
-      weight            = if (.maIsClassical(options) && !.maIsSelection(options)) weights(fit) else NA,
-      constant          = rep(options[["bubblePlotBubblesRelativeSize"]], nrow(dataset)),
-      selectedVariable  = dataset[[attr(dfPlot, "selectedVariable")]]
-    )
-  } else {
-    dfStudies <- data.frame(
-      effectSize        = dataset[[options[["effectSize"]]]],
-      inverseVariance   = 1/dataset[[options[["effectSizeStandardError"]]]]^2,
-      weight            = if (.maIsClassical(options) && !.maIsSelection(options)) weights(fit) else NA,
-      constant          = rep(options[["bubblePlotBubblesRelativeSize"]], nrow(dataset)),
-      selectedVariable  = dataset[[attr(dfPlot, "selectedVariable")]]
-    )
-  }
+    if (attr(dfPlot, "selectedVariableType") == "nominal" && hasSeparateLines) {
+      geomCall$position <- ggplot2::position_jitterdodge(
+        jitter.width  = 0.35 * options[["bubblePlotBubblesJitter"]],
+        jitter.height = 0,
+        dodge.width   = 0.9
+      )
+    }else if (attr(dfPlot, "selectedVariableType") == "nominal") {
+      geomCall$position <- ggplot2::position_jitter(
+        width       = 0.35 * options[["bubblePlotBubblesJitter"]],
+        height      = 0
+      )
+    }
 
-
-  # add separate lines and plots
-  if (hasSeparateLines)
-    dfStudies[attr(dfPlot, "variablesLines")] <- dataset[attr(dfPlot, "variablesLines")]
-  if (hasSeparatePlots)
-    dfStudies[attr(dfPlot, "variablesPlots")] <- dataset[attr(dfPlot, "variablesPlots")]
-
-  # make same encoding
-  dfStudies <- .maDichotomizeVariablesDataset(dfStudies, c(attr(dfPlot, "variablesLines"), attr(dfPlot, "variablesPlots")), attr(dfPlot, "continuousLevels"), options)
-  dfStudies <- .maMergeVariablesLevels(dfStudies, attr(dfPlot, "variablesLines"), "separateLines")
-  dfStudies <- .maMergeVariablesLevels(dfStudies, attr(dfPlot, "variablesPlots"), "separatePlots")
-  if (hasSeparateLines)
-    levels(dfStudies[,"separateLines"]) <- levels(dfPlot[,"separateLines"])
-
-  # subset original data across plots
-  if (!is.null(separatePlotsLvl))
-    dfStudies <- dfStudies[dfStudies$separatePlots == separatePlotsLvl,]
-
-  aesCall <- list(
-    x     = as.name("selectedVariable"),
-    y     = as.name("effectSize"),
-    size  = switch(
-      options[["bubblePlotBubblesSize"]],
-      "weight"            = as.name("weight"),
-      "inverseVariance"   = as.name("inverseVariance"),
-      "sampleSize"        = as.name("sampleSize"),
-      "equal"             = as.name("constant")
-    ),
-    color = if (hasSeparateLines) as.name("separateLines"),
-    fill  = if (hasSeparateLines) as.name("separateLines"),
-    alpha = options[["bubblePlotBubblesTransparency"]]
-  )
-
-  dfStudies[["effectSize"]] <- do.call(.maGetEffectSizeTransformationOptions(options[["transformEffectSize"]]), list(dfStudies[["effectSize"]]))
-
-  geomCall <- list(
-    data    = dfStudies,
-    mapping = do.call(ggplot2::aes, aesCall[!sapply(aesCall, is.null)]),
-    show.legend = FALSE
-  )
-  if (attr(dfPlot, "selectedVariableType") == "nominal" && hasSeparateLines) {
-    geomCall$position <- ggplot2::position_jitterdodge(
-      jitter.width  = 0.35 * options[["bubblePlotBubblesJitter"]],
-      jitter.height = 0,
-      dodge.width   = 0.9
-    )
-  }else if (attr(dfPlot, "selectedVariableType") == "nominal") {
-    geomCall$position <- ggplot2::position_jitter(
-      width       = 0.35 * options[["bubblePlotBubblesJitter"]],
-      height      = 0
-    )
-  }
-
-  if (nrow(dfStudies) > 0) {
-    bubblePlot <- bubblePlot + do.call(jaspGraphs::geom_point, geomCall) +
-      ggplot2::scale_size(range = c(1.5, 10) * options[["bubblePlotBubblesRelativeSize"]])
-    yRange     <- range(c(yRange, dfStudies[["effectSize"]]))
+    if (nrow(dfStudies) > 0) {
+      bubblePlot <- bubblePlot + do.call(jaspGraphs::geom_point, geomCall) +
+        ggplot2::scale_size(range = c(1.5, 10) * options[["bubblePlotBubblesRelativeSize"]])
+      yRange     <- range(c(yRange, dfStudies[["effectSize"]]))
+    }
   }
 
   # add color palette

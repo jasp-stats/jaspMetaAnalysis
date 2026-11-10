@@ -13,6 +13,21 @@
 >   * **Deprecated / Removed:** Outdated analyses, options, or legacy code.
 
 ---
+# jaspMetaAnalysis 0.99.0
+## Changed
+* Rewrote PET-PEESE using `metafor`, including optional multilevel/multivariate models. Legacy analyses are converted; incompatible settings may reset on refresh.
+* Rewrote WAAP-WLS using `metafor` in the PET-PEESE style (moderators, subgroups, clustering, no-selection indicator, optional multilevel/multivariate models), with an adjustable power criterion evaluated at the pooled or moderator-specific predicted effects, and exports of the estimated power and WAAP inclusion. Legacy analyses are converted; incompatible settings may reset on refresh.
+* Selection Models, PET-PEESE, and WAAP-WLS forest plots can show unadjusted fixed and random effects estimates.
+* Unrestricted weighted least squares reports the multiplicative heterogeneity (γ and √γ).
+
+## Fixed
+* Clustered meta-analyses no longer offer z-tests; saved analyses are switched to t-tests.
+* Multilevel/multivariate meta-analysis fixes (profile plots, random effects confidence intervals, weighted estimation, models with multiple heterogeneity levels).
+* Precomputed variance-covariance matrices, construct correlation matrices, and random effects distance/correlation matrices in semicolon-separated files (decimal commas) are read correctly.
+* Saving the computed variance-covariance matrix reports an error when the file cannot be written.
+* Failed models are reported without the internal function call; models with too few estimates say so.
+* Forest plot predicted effects are unavailable when the study information is aggregated.
+
 # jaspMetaAnalysis 0.98.0
 ## Changed
 * Rewrote selection models using `metafor::selmodel`, replacing `weightr`. Legacy analyses are converted; incompatible settings may reset on refresh.

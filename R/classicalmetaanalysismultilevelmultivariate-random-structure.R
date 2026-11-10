@@ -108,15 +108,8 @@
             # allow to load example data for data library
             distanceMatrix <- .mammGetExampleMaire2019DistanceMatrix()
           }else{
-            distanceMatrix <- try(as.matrix(read.csv(file = distanceMatrixFileName, row.names = 1)))
+            distanceMatrix <- .mammReadNamedMatrixFile(distanceMatrixFileName)
           }
-
-          if (inherits(distanceMatrix, "try-error"))
-            .quitAnalysis(gettextf("Error reading the distance matrix file: %1$s", distanceMatrix))
-
-          # if there is only one column, try csv2 (indicates different decimals enconding)
-          if (ncol(distanceMatrix) == 1)
-            distanceMatrix <- try(as.matrix(read.csv2(file = distanceMatrixFileName, row.names = 1)))
 
           if (inherits(distanceMatrix, "try-error"))
             .quitAnalysis(gettextf("Error reading the distance matrix file: %1$s", distanceMatrix))
@@ -145,15 +138,7 @@
       tempValueOuter         <- options[["randomEffectsSpecification"]][[i]][["groupingFactor"]]
       distanceMatrixFileName <- options[["randomEffectsSpecification"]][[i]][["correlationMatrixFile"]]
       if (tempValueOuter != "" && distanceMatrixFileName != "") {
-        # try regular csv loading
-        correlationMatrix <- try(as.matrix(read.csv(file = distanceMatrixFileName, row.names = 1)))
-
-        if (inherits(correlationMatrix, "try-error"))
-          .quitAnalysis(gettextf("Error reading the correlation matrix file: %1$s", correlationMatrix))
-
-        # if there is only one column, try csv2 (indicates different decimals encoding)
-        if (ncol(correlationMatrix) == 1)
-          correlationMatrix <- try(as.matrix(read.csv2(file = distanceMatrixFileName, row.names = 1)))
+        correlationMatrix <- .mammReadNamedMatrixFile(distanceMatrixFileName)
 
         if (inherits(correlationMatrix, "try-error"))
           .quitAnalysis(gettextf("Error reading the correlation matrix file: %1$s", correlationMatrix))
@@ -204,7 +189,7 @@
 
     # create the output container
     confintRandomContainer <- createJaspState()
-    confintRandomContainer$dependOn(.maDependencies)
+    confintRandomContainer$dependOn(c(.maModelDependencies(options), "includeFullDatasetInSubgroupAnalysis"))
     jaspResults[["dropOneFits"]] <- confintRandomContainer
 
     fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
@@ -281,7 +266,7 @@
 
     # create the output container
     confintRandomContainer <- createJaspState()
-    confintRandomContainer$dependOn(.maDependencies)
+    confintRandomContainer$dependOn(c(.maModelDependencies(options), "includeFullDatasetInSubgroupAnalysis"))
     jaspResults[["dropLevelFits"]] <- confintRandomContainer
 
     fit <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
@@ -376,7 +361,7 @@
 
     # create the output container
     confintRandomContainer <- createJaspState()
-    confintRandomContainer$dependOn(.maDependencies)
+    confintRandomContainer$dependOn(c(.maModelDependencies(options), "includeFullDatasetInSubgroupAnalysis"))
     jaspResults[["confintRandom"]] <- confintRandomContainer
 
     fit <- .maExtractFit(jaspResults, options)
@@ -484,7 +469,7 @@
 
 .mammAnyStructureGen             <- function(options) {
   # only relevant for multivariate
-  if (options[["analysis"]] != "metaAnalysisMultilevelMultivariate")
+  if (!.maIsMultilevelMultivariate(options))
     return(FALSE)
 
   # get all the active components types
@@ -499,7 +484,7 @@
 
 .mammHasMultipleHeterogeneities  <- function(options, canAddOutput = FALSE) {
   # only relevant for multivariate
-  if (options[["analysis"]] != "metaAnalysisMultilevelMultivariate")
+  if (!.maIsMultilevelMultivariate(options))
     return(FALSE)
 
   # get all the active components types

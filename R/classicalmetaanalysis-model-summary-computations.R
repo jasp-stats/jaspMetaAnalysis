@@ -30,8 +30,8 @@
     if (.maIsMetaregressionHeterogeneity(options)) {
       predictInput$newmods  <- t(colMeans(model.matrix(fit)$location))
       predictInput$newscale <- t(colMeans(model.matrix(fit)$scale))
-    } else if (.maIsMetaregressionEffectSize(options)) {
-      predictInput$newmods  <- t(colMeans(model.matrix(fit)))
+    } else if (.maIsMetaregressionEffectSize(options) || !is.null(.maBiasTerm(fit))) {
+      predictInput$newmods  <- .maZeroBiasTerm(t(colMeans(.maReferenceModelMatrix(fit))), fit)
     }
 
     if (!is.null(predictInput$newmods) && options[["effectSizeModelIncludeIntercept"]])
@@ -45,7 +45,7 @@
       predictInput$tau2.levels   <- tauLevelsMatrix[["tau2.levels"]]
       predictInput$gamma2.levels <- tauLevelsMatrix[["gamma2.levels"]]
 
-      if (.maIsMetaregressionEffectSize(options))
+      if (!is.null(predictInput$newmods))
         predictInput$newmods <- do.call(rbind, lapply(1:nrow(tauLevelsMatrix), function(i) predictInput$newmods))
     }
 
@@ -133,7 +133,8 @@
   if (.maIsMetaregressionFtest(options)) {
 
     # to extract the degrees of freedom (rma.glmm predict may not have ddf)
-    tempDf <- if (!is.null(predictedEffect$ddf)) predictedEffect$ddf else .maExtractDdf(fit)[1]
+    # (predictions of models with multiple heterogeneity levels keep a ddf per level; all levels share it)
+    tempDf <- if (!is.null(predictedEffect$ddf)) predictedEffect$ddf[1] else .maExtractDdf(fit)[1]
     predictedEffect      <- .maExtractAndFormatPrediction(predictedEffect)
     predictedEffect$df   <- tempDf
     predictedEffect$stat <- (predictedEffect$est - 0)  / predictedEffect$se
@@ -271,6 +272,27 @@
 # Omnibus tests ----
 
 .maOmnibusTest                     <- function(fit, options, parameter = "effectSize") {
+
+  if (parameter == "effectSize" && !is.null(.maBiasTerm(fit))) {
+    # the PET-PEESE moderation test excludes the bias term
+    # (not available if metafor dropped all moderators, e.g., a moderator constant within a subgroup)
+    moderators <- .maModeratorCoefficients(fit)
+    if (length(moderators) == 0)
+      return(list(parameter = gettext("Effect Size"), stat = NA_real_, df1 = NA_real_, pval = NA_real_))
+
+    test <- anova(fit, btt = moderators)
+    row  <- list(
+      parameter = gettext("Effect Size"),
+      stat      = test[["QM"]],
+      df1       = test[["QMdf"]][1],
+      pval      = test[["QMp"]]
+    )
+
+    if (.maIsMetaregressionFtest(options))
+      row$df2 <- test[["QMdf"]][2]
+
+    return(row)
+  }
 
   if (parameter == "effectSize") {
     row <- list(
@@ -427,7 +449,7 @@
 
     row <- data.frame(
       subgroup = attr(fit, "subgroup"),
-      test     = if (.maIsMetaregression(options)) gettext("Residual heterogeneity") else gettext("Heterogeneity"),
+      test     = if (.maIsMetaregression(options) || .maIsPetPeese(options)) gettext("Residual heterogeneity") else gettext("Heterogeneity"),
       stat     = sprintf("LR(1) = %.2f", fit$LRT.tau2),
       pval     = fit$LRTp.tau2
     )
@@ -439,13 +461,13 @@
   if (jaspBase::isTryError(fit) || (!is.null(fit[["QE"]]) && is.na(fit[["QE"]]))) {
     return(data.frame(
       subgroup = attr(fit, "subgroup"),
-      test     = if (.maIsMetaregression(options)) gettext("Residual heterogeneity") else gettext("Heterogeneity")
+      test     = if (.maIsMetaregression(options) || .maIsPetPeese(options)) gettext("Residual heterogeneity") else gettext("Heterogeneity")
     ))
   }
 
   row <- data.frame(
     subgroup = attr(fit, "subgroup"),
-    test     = if (.maIsMetaregression(options)) gettext("Residual heterogeneity") else gettext("Heterogeneity"),
+    test     = if (.maIsMetaregression(options) || .maIsPetPeese(options)) gettext("Residual heterogeneity") else gettext("Heterogeneity"),
     stat     = sprintf(paste0("Q\U2091(%1$i) = ", if (fit[["QE"]] < 1e5) "%2$.2f" else "%2$.3g"), fit[["k"]] - fit[["p"]], fit[["QE"]]),
     pval     = fit[["QEp"]]
   )
@@ -579,6 +601,9 @@
 
 .maRowSubgroupTest                    <- function(fit, options) {
 
+  # one estimate per subgroup, also for models with multiple heterogeneity levels
+  options[["predictionIntervals"]] <- FALSE
+
   est <- lapply(fit, function(x) {
     if (isTryError(x)) {
       return()
@@ -658,6 +683,21 @@
   row$subgroup <- attr(fit, "subgroup")
 
   return(row)
+}
+
+.maRowMultiplicativeHeterogeneity     <- function(fit, options) {
+
+  show <- c(options[["heterogeneityGamma"]], options[["heterogeneitySqrtGamma"]])
+  par  <- c("\u03B3", "\u221A\u03B3")[show]
+
+  if (jaspBase::isTryError(fit))
+    return(data.frame(par = par, subgroup = attr(fit, "subgroup")))
+
+  return(data.frame(
+    par      = par,
+    est      = c(fit[["s2w"]], sqrt(fit[["s2w"]]))[show],
+    subgroup = attr(fit, "subgroup")
+  ))
 }
 
 .maRowFitMeasures                     <- function(fit, options) {

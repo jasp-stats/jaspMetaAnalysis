@@ -92,6 +92,12 @@
     tests[["bias"]] <- .maSafeRbind(lapply(fit, .smRowPublicationBiasTest))
     .smAddInferenceFootnotes(testsTable, fit, options)
   }
+  if (.maIsPetPeese(options)) {
+    tests[["bias"]] <- .maSafeRbind(lapply(fit, .ppRowBiasTest, options = options))
+    .ppAddInferenceFootnotes(testsTable, fit, options)
+  }
+  if (.maIsWaapWls(options))
+    .wwAddInferenceFootnotes(testsTable, fit, options)
 
   # effect size moderation
   if (.maIsMetaregressionEffectSize(options)) {
@@ -161,18 +167,20 @@
 
   # additional tests for subgroup differences
   if (options[["subgroup"]] != "" && !.maIsSelection(options)) {
-    tests[["subgroup"]] <- .maRowSubgroupTest(fit, options = options)
+    # the full dataset overlaps with the subgroups
+    tests[["subgroup"]] <- .maRowSubgroupTest(fit[names(fit) != "__fullDataset"], options = options)
   }
 
 
   # add errors messages for failed fits
   for (i in seq_along(fit)[sapply(fit, jaspBase::isTryError)]) {
-    testsTable$addFootnote(
-      gettextf("The model for subgroup '%1$s' failed with the following error: %2$s",
-               attr(fit[[i]], "subgroup"),
-               .maTryCleanErrorMessages(fit[[i]])),
-      symbol = gettext("Error:")
-    )
+    # analyses can describe a failed subgroup themselves (e.g., the PET-PEESE model selection)
+    message <- attr(fit[[i]], "subgroupMessage")
+    if (is.null(message))
+      message <- gettextf("The model for subgroup '%1$s' failed with the following error: %2$s",
+                          attr(fit[[i]], "subgroup"),
+                          .maTryCleanErrorMessages(fit[[i]]))
+    testsTable$addFootnote(message, symbol = gettext("Error:"))
   }
 
   # add multivariate settings notes
@@ -217,7 +225,7 @@
   pooledEstimatesTable          <- createJaspTable(gettext("Meta-Analytic Estimates"))
   pooledEstimatesTable$showSpecifiedColumnsOnly <- TRUE
   pooledEstimatesTable$position <- 4
-  pooledEstimatesTable$dependOn(c("heterogeneityTau", "heterogeneityTau2", "heterogeneityI2", "heterogeneityH2",
+  pooledEstimatesTable$dependOn(c("heterogeneityTau", "heterogeneityTau2", "heterogeneityI2", "heterogeneityH2", "heterogeneityGamma", "heterogeneitySqrtGamma",
                                   "confidenceIntervals", "confidenceIntervalsLevel", "predictionIntervals", "transformEffectSize",
                                   "standardErrors", "includeFullDatasetInSubgroupAnalysis"))
   modelSummaryContainer[["pooledEstimatesTable"]] <- pooledEstimatesTable
@@ -275,8 +283,15 @@
     estimates[["heterogeneity"]] <- .maSafeRbind(lapply(fitNonClustered, .maRowPooledHeterogeneity, options = options))
   }
 
+  # multiplicative heterogeneity of the unrestricted weighted least squares model
+  # (robust() resets it, so it is taken from the non-clustered fit)
+  if (.maIsUnrestrictedWeightedLeastSquares(options) && (options[["heterogeneityGamma"]] || options[["heterogeneitySqrtGamma"]])) {
+    fitNonClustered <- .maExtractFit(jaspResults, options, nonClustered = TRUE)
+    estimates[["heterogeneity"]] <- .maSafeRbind(lapply(fitNonClustered, .maRowMultiplicativeHeterogeneity, options = options))
+  }
+
   # add messages
-  pooledEstimatesMessages <- .maPooledEstimatesMessages(fit, options, anyNA(estimates[["effect"]]))
+  pooledEstimatesMessages <- .maPooledEstimatesMessages(fit, options, .maTransformationIntroducedNA(estimates[["effect"]], options))
   for (i in seq_along(pooledEstimatesMessages))
     pooledEstimatesTable$addFootnote(pooledEstimatesMessages[i])
   if (.maIsSelection(options))
@@ -354,6 +369,10 @@
 # Messages and footnotes ----
 
 .maFixedEffectTextMessage              <- function(options) {
+  # robust() replaces the selected test by cluster-robust t-tests
+  if (.maIsClustered(options))
+    return(gettext("Fixed effects tested using cluster-robust t-distribution."))
+
   return(switch(
     .maGetFixedEffectTestOptions(options),
     "z"    = gettext("Fixed effects tested using z-distribution."),
@@ -397,7 +416,9 @@
     tempDataset <- attr(tempFit, "dataset")
 
     if (attr(tempDataset, "NAs") > 0)
-      messages <- c(messages, gettextf("%1$i observations were ommited due to missing values.", attr(tempDataset, "NAs")))
+      messages <- c(messages, sprintf(ngettext(attr(tempDataset, "NAs"),
+                                               "%1$i observation was omitted due to missing values.",
+                                               "%1$i observations were omitted due to missing values."), attr(tempDataset, "NAs")))
 
     if (!is.null(options[["clustering"]]) && options[["clustering"]] != "") {
       if (!jaspBase::isTryError(tempFit) && !is.null(tempFit)){
@@ -411,7 +432,10 @@
       tempDataset <- attr(tempFit, "dataset")
 
       if (attr(tempDataset, "NAs") > 0)
-        messages <- c(messages, gettextf("%1$s: %2$i observations were ommited due to missing values.", gettextf("Subgroup %1$s", attr(tempFit, "subgroup")), attr(tempDataset, "NAs")))
+        messages <- c(messages, sprintf(ngettext(attr(tempDataset, "NAs"),
+                                                 "%1$s: %2$i observation was omitted due to missing values.",
+                                                 "%1$s: %2$i observations were omitted due to missing values."),
+                                        gettextf("Subgroup %1$s", attr(tempFit, "subgroup")), attr(tempDataset, "NAs")))
 
       if (!is.null(options[["clustering"]]) && options[["clustering"]] != "") {
         if (!jaspBase::isTryError(tempFit) && !is.null(tempFit)) {
@@ -490,7 +514,9 @@
 
 .maClusterRobustSummaryMessage   <- function(fit) {
 
+  # factor levels without estimates in this fit are not clusters of the model
   clusterCounts <- fit[["tcl"]]
+  clusterCounts <- clusterCounts[clusterCounts > 0]
   nClusters     <- fit[["n"]]
 
   if (is.null(clusterCounts) || is.null(nClusters) || length(clusterCounts) == 0)

@@ -79,8 +79,8 @@ Form
 			label:		qsTr("Fixed effects test")
 			startValue:	"knha"
 			enabled:	method.value !== "unrestrictedWeightedLeastSquares"
-			values:		method.value === "unrestrictedWeightedLeastSquares" ? [ "knha" ] : [ "z", "t", "knha"]
-			info: qsTr("Method for testing the model coefficients: 'z' uses standard normal approximation, 't' uses t-distribution, and 'knha' uses the Knapp and Hartung adjustment (default).")
+			values:		method.value === "unrestrictedWeightedLeastSquares" ? [ "knha" ] : clustering.count > 0 ? [ "t", "knha" ] : [ "z", "t", "knha"]
+			info: qsTr("Method for testing the model coefficients: 'z' uses standard normal approximation, 't' uses t-distribution, and 'knha' uses the Knapp and Hartung adjustment (default). Clustered models use t-distribution based tests.")
 		}
 
 		AssignedVariablesList
@@ -148,11 +148,15 @@ Form
 		subgroupSelected:			subgroup.count > 0
 	}
 
-	MA.BubblePlot {}
+	MA.BubblePlot
+	{
+		methodValue:	method.value
+	}
 
 	MA.ClassicalMetaAnalysisDiagnostics
 	{
 		heterogeneityModelTermsCount: sectionModel.heterogeneityModelTermsCount
+		methodValue:	method.value
 	}
 
 	MA.ClassicalMetaAnalysisExport

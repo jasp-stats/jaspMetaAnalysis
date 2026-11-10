@@ -2,7 +2,32 @@
 #
 # Builds, describes, exports, and names sampling variance-covariance matrices.
 
+.mammVarianceCovarianceMatrixReader <- function(fileName) {
+
+  # semicolon-separated files use decimal commas (read.csv2), other files are comma-separated (read.csv)
+  firstLine <- try(readLines(fileName, n = 1, warn = FALSE), silent = TRUE)
+
+  if (!jaspBase::isTryError(firstLine) && length(firstLine) == 1 && grepl(";", firstLine, fixed = TRUE))
+    return("read.csv2")
+
+  return("read.csv")
+}
+
+.mammReadNamedMatrixFile            <- function(fileName) {
+
+  # correlation and distance matrices with row and column names
+  return(try(as.matrix(switch(
+    .mammVarianceCovarianceMatrixReader(fileName),
+    read.csv  = utils::read.csv(file = fileName, row.names = 1),
+    read.csv2 = utils::read.csv2(file = fileName, row.names = 1)
+  ))))
+}
+
 .mammGetVarianceCovarianceMatrix    <- function(dataset, options, returnCall = FALSE) {
+
+  # WAAP-WLS refits use the rows of the matrix of all estimates
+  if (!returnCall && !is.null(attr(dataset, "varianceCovarianceMatrix")))
+    return(attr(dataset, "varianceCovarianceMatrix"))
 
   if (options[["varianceCovarianceMatrixType"]] == "precomputed") {
 
@@ -12,17 +37,16 @@
     if (vMatrixFileName == "")
       return()
 
-    vMatrix <- try(as.matrix(read.csv(file = vMatrixFileName, header = FALSE)))
+    reader <- .mammVarianceCovarianceMatrixReader(vMatrixFileName)
 
     if (returnCall)
-      return(list(file = vMatrixFileName))
+      return(list(file = vMatrixFileName, reader = reader))
 
-    if (inherits(vMatrix, "try-error"))
-      .quitAnalysis(gettextf("Error reading the variance-covariance matrix file: %1$s", vMatrix))
-
-    # if there is only one column, try csv2 (indicates different decimals enconding)
-    if (ncol(vMatrix) == 1)
-      vMatrix <- try(as.matrix(read.csv2(file = vMatrixFileName, header = FALSE)))
+    vMatrix <- try(as.matrix(switch(
+      reader,
+      read.csv  = utils::read.csv(file = vMatrixFileName, header = FALSE),
+      read.csv2 = utils::read.csv2(file = vMatrixFileName, header = FALSE)
+    )))
 
     if (inherits(vMatrix, "try-error"))
       .quitAnalysis(gettextf("Error reading the variance-covariance matrix file: %1$s", vMatrix))
@@ -31,13 +55,15 @@
       .quitAnalysis(gettextf("The variance-covariance matrix must be square. The number of rows (%1$i) does not match the number of columns (%2$i).",
                              nrow(vMatrix), ncol(vMatrix)))
 
-    # extract the subgroup relevant section if subgroups are specified
-    if (options[["subgroup"]] != "" && !is.null(attr(dataset, "subgroupIndx")))
-      vMatrix <- vMatrix[attr(dataset, "subgroupIndx"), attr(dataset, "subgroupIndx")]
-
-    nasIds <- attr(dataset, "NasIds")
+    # remove the excluded observations of the complete data set first; the subgroup
+    # indicator refers to the rows of the data set without the excluded observations
+    nasIds <- if (!is.null(attr(dataset, "subgroupIndx"))) attr(dataset, "datasetNasIds") else attr(dataset, "NasIds")
     if (!is.null(nasIds) && nrow(vMatrix) == length(nasIds))
       vMatrix <- vMatrix[!nasIds, !nasIds, drop = FALSE]
+
+    # extract the subgroup relevant section if subgroups are specified
+    if (options[["subgroup"]] != "" && !is.null(attr(dataset, "subgroupIndx")))
+      vMatrix <- vMatrix[attr(dataset, "subgroupIndx"), attr(dataset, "subgroupIndx"), drop = FALSE]
 
     if (nrow(vMatrix) != nrow(dataset))
       .quitAnalysis(gettextf("The variance-covariance matrix must match the dimensions of the data set. The number of the matrix rows/columns (%1$i) does not match the number of observations in the dataset (%2$i).",
@@ -125,14 +151,7 @@
           if (returnCall) {
             rho1 <- rho1File
           } else  {
-            rho1 <- try(as.matrix(read.csv(file = rho1File, row.names = 1)))
-
-            if (inherits(rho1, "try-error"))
-              .quitAnalysis(gettextf("Error reading the variance-covariance matrix file: %1$s", rho1))
-
-            # if there is only one column, try csv2 (indicates different decimals enconding)
-            if (ncol(rho1) == 1)
-              rho1 <- try(as.matrix(read.csv2(file = rho1File, row.names = 1)))
+            rho1 <- .mammReadNamedMatrixFile(rho1File)
 
             if (inherits(rho1, "try-error"))
               .quitAnalysis(gettextf("Error reading the variance-covariance matrix file: %1$s", rho1))
@@ -164,14 +183,7 @@
           if (returnCall) {
             rho2 <- rho2File
           } else  {
-            rho2 <- try(as.matrix(read.csv(file = rho2File, row.names = 1)))
-
-            if (inherits(rho2, "try-error"))
-              .quitAnalysis(gettextf("Error reading the variance-covariance matrix file: %1$s", rho2))
-
-            # if there is only one column, try csv2 (indicates different decimals enconding)
-            if (ncol(rho2) == 1)
-              rho2 <- try(as.matrix(read.csv2(file = rho2File, row.names = 1)))
+            rho2 <- .mammReadNamedMatrixFile(rho2File)
 
             if (inherits(rho2, "try-error"))
               .quitAnalysis(gettextf("Error reading the variance-covariance matrix file: %1$s", rho2))
@@ -519,11 +531,11 @@
   if (!.mammVarianceCovarianceMatrixReady(options))
     return()
 
-  V <- .mammGetVarianceCovarianceMatrix(dataset, options)
-  try(write.table(V, file = options[["varianceCovarianceMatrixSaveComputedVarianceCovarianceMatrix"]], sep = ",", row.names = FALSE, col.names = FALSE))
+  V       <- .mammGetVarianceCovarianceMatrix(dataset, options)
+  written <- try(utils::write.table(V, file = options[["varianceCovarianceMatrixSaveComputedVarianceCovarianceMatrix"]], sep = ",", row.names = FALSE, col.names = FALSE))
 
-  if (jaspBase::isTryError(V))
-    .quitAnalysis(gettextf("Error writing the variance-covariance matrix file: %1$s", V))
+  if (jaspBase::isTryError(written))
+    .quitAnalysis(gettextf("Error writing the variance-covariance matrix file: %1$s", .maTryCleanErrorMessages(written)))
 
   return()
 }

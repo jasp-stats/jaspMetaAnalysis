@@ -23,8 +23,8 @@
 
     profileLikelihoodPlot       <- .maProfileLikelihoodPlotFun(fit[[1]], dfProfile[[1]], options)
     profileLikelihoodPlot$title <- gettext("Profile Likelihood Plot")
-    profileLikelihoodPlot$dependOn(c(.maDependencies, "diagnosticsPlotsProfileLikelihood", "includeFullDatasetInSubgroupAnalysis"))
-    profileLikelihoodPlot$position <- 8
+    profileLikelihoodPlot$dependOn(c(.maModelDependencies(options), "diagnosticsPlotsProfileLikelihood", "includeFullDatasetInSubgroupAnalysis"))
+    profileLikelihoodPlot$position <- 10
     jaspResults[["profileLikelihoodPlot"]] <- profileLikelihoodPlot
     return()
 
@@ -33,8 +33,8 @@
     # create the output container
     profileLikelihoodPlot       <- createJaspContainer()
     profileLikelihoodPlot$title <- gettext("Profile Likelihood Plot")
-    profileLikelihoodPlot$dependOn(c(.maDependencies, "diagnosticsPlotsProfileLikelihood", "includeFullDatasetInSubgroupAnalysis"))
-    profileLikelihoodPlot$position <- 8
+    profileLikelihoodPlot$dependOn(c(.maModelDependencies(options), "diagnosticsPlotsProfileLikelihood", "includeFullDatasetInSubgroupAnalysis"))
+    profileLikelihoodPlot$position <- 10
     jaspResults[["profileLikelihoodPlot"]] <- profileLikelihoodPlot
 
     for (i in seq_along(fit)) {
@@ -69,7 +69,7 @@
 
     # component specific plots
     for (i in 1:dfProfile[["comps"]]) {
-      tempProfilePlot <- createJaspPlot(title = paste0(dfProfile[[i]][["title"]][-1], collapse = " "), width = 400, height = 320)
+      tempProfilePlot <- createJaspPlot(title = .maPlotmathText(dfProfile[[i]][["title"]]), width = 400, height = 320)
       tempProfilePlot$position <- i
       profileLikelihoodPlot[[paste0("plot", i)]] <- tempProfilePlot
       tempProfilePlot$plotObject <- .maMakeProfileLikelihoodPlot(dfProfile[[i]])
@@ -82,6 +82,10 @@
 
     if (.maIsMetaregressionHeterogeneity(options)) {
       profileLikelihoodPlot$setError(gettext("Profile likelihood is not available for models that contain meta-regression on heterogeneity."))
+      return(profileLikelihoodPlot)
+    }
+    if (.maGetMethodOptions(options) %in% c("EE", "FE")) {
+      profileLikelihoodPlot$setError(gettext("Profile likelihood is not available for equal effects, fixed effects, or unrestricted weighted least squares models."))
       return(profileLikelihoodPlot)
     }
     if (jaspBase::isTryError(dfProfile)) {
@@ -119,8 +123,8 @@
 
     baujatPlot       <- .maBaujatPlotFun(dfBaujat[[names(fit)[1]]], options, fit[[1]])
     baujatPlot$title <- gettext("Baujat Plot")
-    baujatPlot$dependOn(c(.maDependencies, "diagnosticsPlotsBaujat", "includeFullDatasetInSubgroupAnalysis", "studyLabels"))
-    baujatPlot$position <- 9
+    baujatPlot$dependOn(c(.maModelDependencies(options), "diagnosticsPlotsBaujat", "includeFullDatasetInSubgroupAnalysis", "studyLabels"))
+    baujatPlot$position <- 11
     jaspResults[["baujatPlot"]] <- baujatPlot
     return()
 
@@ -129,8 +133,8 @@
     # create the output container
     baujatPlot       <- createJaspContainer()
     baujatPlot$title <- gettext("Baujat Plot")
-    baujatPlot$dependOn(c(.maDependencies, "diagnosticsPlotsBaujat", "includeFullDatasetInSubgroupAnalysis", "studyLabels"))
-    baujatPlot$position <- 9
+    baujatPlot$dependOn(c(.maModelDependencies(options), "diagnosticsPlotsBaujat", "includeFullDatasetInSubgroupAnalysis", "studyLabels"))
+    baujatPlot$position <- 11
     jaspResults[["baujatPlot"]] <- baujatPlot
 
     for (i in seq_along(fit)) {
@@ -231,8 +235,8 @@
 
     residualFunnelPlot       <- .maResidualFunnelPlotFun(fit[[1]], options)
     residualFunnelPlot$title <- gettext("Residual Funnel Plot")
-    residualFunnelPlot$dependOn(c(.maDependencies, "diagnosticsResidualFunnel", "studyLabels", "includeFullDatasetInSubgroupAnalysis"))
-    residualFunnelPlot$position <- 10
+    residualFunnelPlot$dependOn(c(.maModelDependencies(options), "diagnosticsResidualFunnel", "studyLabels", "includeFullDatasetInSubgroupAnalysis"))
+    residualFunnelPlot$position <- 12
     jaspResults[["residualFunnelPlot"]] <- residualFunnelPlot
     return()
 
@@ -241,8 +245,8 @@
     # create the output container
     residualFunnelPlot       <- createJaspContainer()
     residualFunnelPlot$title <- gettext("Residual Funnel Plot")
-    residualFunnelPlot$dependOn(c(.maDependencies, "diagnosticsResidualFunnel", "studyLabels", "includeFullDatasetInSubgroupAnalysis"))
-    residualFunnelPlot$position <- 10
+    residualFunnelPlot$dependOn(c(.maModelDependencies(options), "diagnosticsResidualFunnel", "studyLabels", "includeFullDatasetInSubgroupAnalysis"))
+    residualFunnelPlot$position <- 12
     jaspResults[["residualFunnelPlot"]] <- residualFunnelPlot
 
     for (i in seq_along(fit)) {
@@ -362,6 +366,26 @@
   return(out)
 }
 
+.maPlotmathText                    <- function(x) {
+
+  # plain-text version of the metafor profile labels, e.g., sigma[1]^2 ~ "Value" or paste(tau^2, " Value")
+  if (is.name(x)) {
+    name <- as.character(x)
+    return(switch(name, sigma = "\u03C3", tau = "\u03C4", rho = "\u03C1", gamma = "\u03B3", phi = "\u03C6", name))
+  }
+  if (!is.call(x))
+    return(as.character(x))
+
+  switch(
+    as.character(x[[1]]),
+    "~" = paste(.maPlotmathText(x[[2]]), .maPlotmathText(x[[3]])),
+    "^" = paste0(.maPlotmathText(x[[2]]), if (identical(x[[3]], 2)) "\u00B2" else paste0("^", .maPlotmathText(x[[3]]))),
+    "[" = paste0(.maPlotmathText(x[[2]]), chartr("0123456789", "\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089", .maPlotmathText(x[[3]]))),
+    "paste" = paste(vapply(as.list(x)[-1], .maPlotmathText, character(1)), collapse = ""),
+    paste(deparse(x), collapse = "")
+  )
+}
+
 .maMakeProfileLikelihoodPlot       <- function(dfPlot) {
 
   yTicks <- jaspGraphs::getPrettyAxisBreaks(c(min(dfPlot$ll), max(dfPlot$ll)))
@@ -394,8 +418,16 @@
         y = rep(max(dfPlot[["maxll"]]), 2)),
       linetype = "dotted")
 
+  # metafor stores the axis label as plotmath (an expression for rma.uni, a call for rma.mv);
+  # plot editing in JASP serializes the labels, which works with text only
+  xlab <- dfPlot[["xlab"]]
+  if (is.expression(xlab))
+    xlab <- xlab[[1]]
+  if (is.call(xlab))
+    xlab <- .maPlotmathText(xlab)
+
   plotOut <- plotOut +
-    ggplot2::labs(x = dfPlot[["xlab"]], y = gettext("Profile Likelihood")) +
+    ggplot2::labs(x = xlab, y = gettext("Profile Likelihood")) +
     jaspGraphs::scale_x_continuous(breaks = xTicks, limits = range(xTicks)) +
     jaspGraphs::scale_y_continuous(breaks = yTicks, limits = range(yTicks)) +
     jaspGraphs::geom_rangeframe() +

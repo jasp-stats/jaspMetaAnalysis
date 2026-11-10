@@ -326,6 +326,9 @@
   }
 
   if (!any(unlist(options[c(
+    "forestPlotEffectSizeUnadjustedFixedEffectEstimate",
+    "forestPlotEffectSizeUnadjustedRandomEffectsEstimate",
+    "forestPlotPublicationBiasTest",
     "forestPlotEffectSizeFixedEffectEstimate",
     "forestPlotEffectSizeFixedEffectTest",
     "forestPlotEffectSizePooledEstimate",
@@ -346,6 +349,8 @@
   standardClassical           <- .maIsClassical(options, notMHP = TRUE)
   method                      <- .maGetMethodOptions(options)
   randomEffectsMethod         <- !method %in% c("FE", "EE", "MH", "PETO")
+  # single heterogeneity estimates (tau, I2, ...) are not defined for multilevel/multivariate models
+  heterogeneityEstimates      <- randomEffectsMethod && !.maIsMultilevelMultivariate(options)
   mantelHaenszelMethod        <- method %in% c("MH", "PETO")
   heterogeneityMetaregression <- .maIsMetaregressionHeterogeneity(options)
   scaleRegression             <- options[["analysis"]] == "metaAnalysis" && heterogeneityMetaregression
@@ -374,7 +379,7 @@
     )
   }
 
-  if (randomEffectsMethod && options[["forestPlotHeterogeneityEstimateTau"]]) {
+  if (heterogeneityEstimates && options[["forestPlotHeterogeneityEstimateTau"]]) {
     state <- .forestPlotAppendAdditionalRow(
       state = state,
       label = if (classical) .maPrintHeterogeneityEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "tau")
@@ -382,7 +387,7 @@
     )
   }
 
-  if (randomEffectsMethod && options[["forestPlotHeterogeneityEstimateTau2"]]) {
+  if (heterogeneityEstimates && options[["forestPlotHeterogeneityEstimateTau2"]]) {
     state <- .forestPlotAppendAdditionalRow(
       state = state,
       label = if (classical) .maPrintHeterogeneityEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "tau2")
@@ -390,7 +395,7 @@
     )
   }
 
-  if (randomEffectsMethod && !heterogeneityMetaregression && options[["forestPlotHeterogeneityEstimateI2"]]) {
+  if (heterogeneityEstimates && !heterogeneityMetaregression && options[["forestPlotHeterogeneityEstimateI2"]]) {
     state <- .forestPlotAppendAdditionalRow(
       state = state,
       label = if (classical) .maPrintHeterogeneityEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "I2")
@@ -405,7 +410,7 @@
     )
   }
 
-  if (randomEffectsMethod && !heterogeneityMetaregression && options[["forestPlotHeterogeneityEstimateH2"]]) {
+  if (heterogeneityEstimates && !heterogeneityMetaregression && options[["forestPlotHeterogeneityEstimateH2"]]) {
     state <- .forestPlotAppendAdditionalRow(
       state = state,
       label = if (classical) .maPrintHeterogeneityEstimate(fit, options, digits = options[["forestPlotAuxiliaryDigits"]], parameter = "H2")
@@ -438,8 +443,21 @@
       (!.maIsSelection(options) || .smHasPublicationBiasTest(fit))) {
     state <- .forestPlotAppendAdditionalRow(
       state = state,
-      label = if (.maIsSelection(options)) .smPrintBiasTest(fit) else gettextf("Publication bias: %1$s", .robmaPrintTest(fit, options, "bias", includeName = FALSE))
+      label = if (.maIsSelection(options)) {
+        .smPrintBiasTest(fit)
+      } else if (.maIsPetPeese(options)) {
+        .ppPrintBiasTest(fit, options)
+      } else {
+        gettextf("Publication bias: %1$s", .robmaPrintTest(fit, options, "bias", includeName = FALSE))
+      }
     )
+  }
+
+  # unadjusted estimates for comparison with publication-bias adjusted models
+  if (.maIsSelection(options) || .maIsPetPeese(options) || .maIsWaapWls(options)) {
+    for (benchmark in c("fixedEffect", "randomEffects")) {
+      state <- .forestPlotAppendUnadjustedEstimate(state, fit, options, benchmark, testsStatistics)
+    }
   }
 
   if (
@@ -478,8 +496,13 @@
       options
     )
 
+    # a single diamond: models with multiple heterogeneity levels have one prediction interval per level
+    multipleHeterogeneities <- .mammHasMultipleHeterogeneities(options, canAddOutput = TRUE)
+    pooledOptions           <- options
+    pooledOptions[["predictionIntervals"]] <- FALSE
+
     effectSizeName     <- gettext("Pooled effect")
-    tempPooledEstimate <- try(.maComputePooledEffectPlot(fit, options))
+    tempPooledEstimate <- try(.maComputePooledEffectPlot(fit, if (multipleHeterogeneities) pooledOptions else options))
     if (jaspBase::isTryError(tempPooledEstimate)) {
       stop(gettext("The pooled effect size could not be calculated."))
     }
@@ -491,7 +514,7 @@
       estimate                = tempPooledEstimate,
       testText                = tempTestText,
       testPlacement           = pooledEffectTestPlacement,
-      showPredictionIntervals = options[["forestPlotPredictionIntervals"]]
+      showPredictionIntervals = options[["forestPlotPredictionIntervals"]] && !multipleHeterogeneities
     )
   }
 
@@ -561,4 +584,52 @@
 
 
   return(.forestPlotFinalizeAdditionalSectionState(state))
+}
+
+.forestPlotAppendUnadjustedEstimate    <- function(state, fit, options, benchmark, testsStatistics) {
+
+  estimateOption <- switch(
+    benchmark,
+    fixedEffect   = "forestPlotEffectSizeUnadjustedFixedEffectEstimate",
+    randomEffects = "forestPlotEffectSizeUnadjustedRandomEffectsEstimate"
+  )
+
+  if (!options[[estimateOption]])
+    return(state)
+
+  label <- switch(
+    benchmark,
+    fixedEffect   = gettext("Unadjusted fixed effect"),
+    randomEffects = gettext("Unadjusted random effects")
+  )
+  testPlacement <- .forestPlotResolveTestPlacement(
+    options[[paste0(sub("Estimate$", "", estimateOption), "Test")]],
+    options
+  )
+
+  # the same scope and moderators as the adjusted model, without the bias adjustment
+  # (a single estimate, also for models with multiple heterogeneity levels)
+  options[["predictionIntervals"]] <- FALSE
+  unadjustedFit      <- attr(fit, "unadjustedFits")[[benchmark]]
+  tempPooledEstimate <- if (is.null(unadjustedFit) || jaspBase::isTryError(unadjustedFit)) unadjustedFit else try(.maComputePooledEffectPlot(unadjustedFit, options))
+  if (is.null(tempPooledEstimate) || jaspBase::isTryError(tempPooledEstimate))
+    stop(switch(
+      benchmark,
+      fixedEffect   = gettext("The unadjusted fixed effect estimate could not be calculated."),
+      randomEffects = gettext("The unadjusted random effects estimate could not be calculated.")
+    ))
+
+  tempTestText <- .maPrintCoefficientTest(tempPooledEstimate, testsStatistics)
+
+  state <- .forestPlotAppendAdditionalDiamond(
+    state = state,
+    label = .forestPlotApplyLeftTestLabel(label, tempTestText, testPlacement),
+    est   = tempPooledEstimate$est,
+    lCi   = tempPooledEstimate$lCi,
+    uCi   = tempPooledEstimate$uCi,
+    test  = .forestPlotApplyRightTestLabel(tempTestText, testPlacement)
+  )
+  state <- .forestPlotAppendBelowTestRow(state, tempTestText, testPlacement)
+
+  return(state)
 }

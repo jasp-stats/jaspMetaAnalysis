@@ -73,6 +73,7 @@
       attr(subgroupData, "NAs")          <- sum(tempNasIds[subgroupIndx])
       attr(subgroupData, "NasIds")       <- tempNasIds[subgroupIndx]
       attr(subgroupData, "subgroupIndx") <- subgroupIndx
+      attr(subgroupData, "datasetNasIds") <- attr(dataset, "NasIds")
 
       # fit the model
       fitOutput[[paste0("subgroup", subgroupLevel)]] <- do.call(fittingFunction, list(dataset = subgroupData, options = options, subgroupName = as.character(subgroupLevel)))
@@ -104,14 +105,14 @@
   }
 
   # specify the effect size and outcome
-  if (options[["analysis"]] == "metaAnalysis") {
+  if (!.maIsMultilevelMultivariate(options)) {
     # specify the univariate input
     rmaInput <- list(
       yi   = as.name(options[["effectSize"]]),
       sei  = as.name(options[["effectSizeStandardError"]]),
       data = dataset
     )
-  } else if (options[["analysis"]] == "metaAnalysisMultilevelMultivariate") {
+  } else {
     # specify the multivariate input
     rmaInput <- list(
       yi   = as.name(options[["effectSize"]]),
@@ -168,7 +169,8 @@
   rmaInput$method <- .maGetMethodOptions(options)
   rmaInput$test   <- .maGetFixedEffectTestOptions(options)
 
-  if (!options[["weightedEstimation"]])
+  # rma.mv has no 'weighted' argument; the multilevel/multivariate model is always weighted
+  if (!options[["weightedEstimation"]] && !.maIsMultilevelMultivariate(options))
     rmaInput$weighted <- FALSE
 
   # add fixed parameters if needed
@@ -182,7 +184,7 @@
     rmaInput$link <- options[["heterogeneityModelLink"]]
 
   if (.maIsMultilevelMultivariate(options)) {
-    rmaInput$sparse <- if (options[["useSparseMatricies"]])       options[["useSparseMatricies"]]
+    rmaInput$sparse <- if (options[["useSparseMatrices"]])       options[["useSparseMatrices"]]
     rmaInput$cvvc   <- if (!options[["computeCovarianceMatrix"]]) !options[["computeCovarianceMatrix"]]
   }
 
@@ -199,9 +201,9 @@
     rmaInput <- c(rmaInput, .maExtendMetaforCallFromOptions(options))
 
   ### fit the model
-  if (options[["analysis"]] == "metaAnalysis") {
+  if (!.maIsMultilevelMultivariate(options)) {
     fit <- try(do.call(metafor::rma, rmaInput))
-  } else if (options[["analysis"]] == "metaAnalysisMultilevelMultivariate") {
+  } else {
     fit <- try(do.call(metafor::rma.mv, rmaInput))
   }
 

@@ -6,6 +6,7 @@ import JASP
 Group
 {
 	property bool showPredictionIntervals:		false
+	property bool enablePredictionIntervals:	true
 	property bool showConditionalEstimates:		false
 	property bool showTestsInRightPanel:		false
 	property bool showTestsInformation:			false
@@ -27,6 +28,7 @@ Group
 				text:		qsTr("Prediction intervals")
 				checked:	true
 				visible:	showPredictionIntervals
+				enabled:	enablePredictionIntervals
 				Layout.preferredWidth: 300 * jaspTheme.uiScale
 				info: qsTr("Include prediction intervals of the estimated marginal means and the model information output.")
 			}
