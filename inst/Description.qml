@@ -126,8 +126,8 @@ Description
 
 	Analysis
 	{
-		menu:			qsTr("Network Meta-Analysis")
-		title:			qsTr("Classical Network Meta-Analysis")
+		menu:			qsTr("Network Meta-Analysis (beta)")
+		title:			qsTr("Classical Network Meta-Analysis (beta)")
 		func:			"ClassicalNetworkMetaAnalysis"
 	}
 
