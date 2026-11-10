@@ -383,7 +383,9 @@ test_that("SelectionModels (analysis 4) results match", {
 
   plotName <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model"]][["collection"]][["selectionModelResults_model_weightFunctionSummary"]][["collection"]][["selectionModelResults_model_weightFunctionSummary_weightFunction"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "analysis-4_figure-1_weight-function", tolerance = 1e-3)
+  # The band draws from the covariance of the selection parameters: its lower edge changes about 2.5 times as much as their
+  # standard errors, which vary across platforms within 1e-3 (above).
+  jaspTools::expect_equal_plots(testPlot, "analysis-4_figure-1_weight-function", tolerance = 1e-2)
 
   table <- results[["results"]][["selectionModelResults"]][["collection"]][["selectionModelResults_model1"]][["collection"]][["selectionModelResults_model1_modelSummaryContainer"]][["collection"]][["selectionModelResults_model1_modelSummaryContainer_pooledEstimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,

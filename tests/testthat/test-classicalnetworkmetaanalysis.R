@@ -1011,14 +1011,15 @@ test_that("the inactive component is not estimated in a subgroup without the ina
 
 # Reference treatment and exclusions under the count-based pooling methods ----
 
-test_that("without a requested reference treatment the reference treatment is a treatment of the fitted network", {
+test_that("the default reference treatment (the first treatment) outside the fitted network is replaced by a treatment of the network", {
 
   data <- nmaTestSparseDesignData()
 
   for (method in c("MH", "NCH")) {
 
+    # the reference treatment of the form is never empty: it defaults to the first treatment (A)
     pooling <- c(MH = "mantelHaenszel", NCH = "nonCentralHypergeometric")[[method]]
-    results <- do.call(nmaTestRun, c(list(data), nmaTestBinaryOptions, list(poolingMethod = pooling, method = "equalEffects", referenceTreatment = "", showNetmetaRCode = TRUE)))
+    results <- do.call(nmaTestRun, c(list(data), nmaTestBinaryOptions, list(poolingMethod = pooling, method = "equalEffects", referenceTreatment = "A", showNetmetaRCode = TRUE)))
     expect_identical(results[["status"]], "complete", info = method)
 
     # netmetabin selects A as its reference treatment before it excludes the design A:B, and A is not in the network (B, C, D)
@@ -1035,8 +1036,8 @@ test_that("without a requested reference treatment the reference treatment is a 
     expect_false(anyNA(effects$est), info = method)
     expect_equal(effects$est[match(c("C", "D"), effects$comparison)], unname(fit$TE.common[c("C", "D"), "B"]), tolerance = 1e-10, info = method)
 
-    # no reference treatment was requested: the title names the reference treatment and there is no note about a replaced one
-    expect_false(any(grepl("not part of the analysed network", nmaTestFootnotes(results, "treatmentEffectsContainer", "treatmentEffectsContainer_treatmentEffectsTable"), fixed = TRUE)), info = method)
+    # the title names the reference treatment of the network, and a note names the replaced one
+    expect_true("Reference treatment 'A' is not part of the analysed network; 'B' is used as reference." %in% nmaTestFootnotes(results, "treatmentEffectsContainer", "treatmentEffectsContainer_treatmentEffectsTable"), info = method)
 
     # the printed code fits the same network
     code <- nmaTestCode(results)
@@ -1246,8 +1247,8 @@ test_that("each validation stop of the data checks ends the analysis with its me
     results[["results"]][["errorMessage"]]
   }
 
-  # the method of the random effects (dispersion), the fixed between-study variance (a FormulaField: a positive number is required)
-  expect_identical(stopMessage(contrast, options, method = "randomEffects"), "The selected method is only available for the penalized logistic regression pooling method.")
+  # the fixed between-study variance (a FormulaField: a positive number is required); the form offers the method of the random effects
+  # (dispersion) only with penalized logistic regression, so no options of the form reach the check of the method in R
   for (value in c("-1", "abc", "c(1, 2)"))
     expect_identical(stopMessage(contrast, options, method = "derSimonianLaird", fixParametersTau2 = TRUE, fixParametersTau2Value = value), "The fixed value for tau2 must be a positive number.", info = value)
   results <- do.call(nmaTestRun, c(list(contrast), options, list(method = "derSimonianLaird", fixParametersTau2 = TRUE, fixParametersTau2Value = "0.1")))
@@ -1494,8 +1495,9 @@ test_that("the meta-regression tables have a note if netmeta treats the comparis
 
   # arm-based data (nmaTestArmData() has the three-arm study s5): the arm-level data of the summary measures with a covariance formula in netmeta
   # (calcV) give the full covariance, the other inputs (ROM, incidence rates, general effect sizes) the diagonal matrix
+  # (not whole numbers: a column of a few whole numbers is read as a nominal variable, and a predictor with three levels is not supported)
   data     <- nmaTestArmData()
-  data$cov <- as.integer(sub("s", "", as.character(data$study))) %% 3
+  data$cov <- as.integer(sub("s", "", as.character(data$study))) %% 3 + 0.5
   reference <- list(referenceTreatment = "A", predictor = "cov")
 
   cases <- list(
