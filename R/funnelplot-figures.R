@@ -129,15 +129,7 @@
       .quitAnalysis(gettext("Funnel plot prediction intervals must be specified."))
     funnelLevels <- (1 - funnelLevels) / 2
     funnelLevels <- sort(funnelLevels)
-
-    # funnel colors
-    funnelColorsSteps <- 2 * length(funnelLevels) + 1
-    funnelColorsSteps <- seq(0, 1, length.out = funnelColorsSteps)
-    funnelColorsSteps <- funnelColorsSteps[-c(1, length(funnelColorsSteps))]
-    funnelColors      <- paste0("grey", round(funnelColorsSteps * 100))
-
-    if (options[["invertColors"]])
-      funnelColors <- rev(funnelColors)
+    funnelColors <- .fpFunnelColors(funnelLevels, options[["invertColors"]])
   }
 
   ### data-points
@@ -326,52 +318,16 @@
   }
 
   # add H0 funnel
-  if (!isTrimAndFill && options[["funnelUnderH0"]]) {
-
-    if (options[["funnelUnderH0FillColors"]]) {
-      for (i in rev(seq_along(dfsFunnel0)[-length(dfsFunnel0)])) {
-        out <- out + ggplot2::geom_polygon(
-          data     = dfsFunnel0[[i]],
-          mapping  = ggplot2::aes(x = x, y = y),
-          fill     = scales::alpha(funnelColors[i], .25)
-        )
-      }
-    }
-
-    if (options[["funnelUnderH0LineType"]]!= "none") {
-      for (i in rev(seq_along(dfsFunnel0))) {
-        out <- out + ggplot2::geom_line(
-          data     = dfsFunnel0[[i]],
-          mapping  = ggplot2::aes(x = x, y = y),
-          linetype = options[["funnelUnderH0LineType"]]
-        )
-      }
-    }
-  }
+  if (!isTrimAndFill && options[["funnelUnderH0"]])
+    out <- .fpAddFunnelLayers(out, dfsFunnel0, funnelColors, options[["funnelUnderH0FillColors"]], options[["funnelUnderH0LineType"]])
 
   # add H1 funnel
-  if (isTrimAndFill || options[["funnelUnderH1"]]) {
-
-    if ((isTrimAndFill && options[["trimAndFillFillColors"]]) || (!isTrimAndFill && options[["funnelUnderH1FillColors"]])) {
-      for (i in rev(seq_along(dfsFunnel1)[-length(dfsFunnel1)])) {
-        out <- out + ggplot2::geom_polygon(
-          data     = dfsFunnel1[[i]],
-          mapping  = ggplot2::aes(x = x, y = y),
-          fill     = scales::alpha(funnelColors[i], .25)
-        )
-      }
-    }
-
-    if ((isTrimAndFill && options[["trimAndFillLineType"]]!= "none") || (!isTrimAndFill && options[["funnelUnderH1LineType"]]!= "none")) {
-      for (i in rev(seq_along(dfsFunnel1))) {
-        out <- out + ggplot2::geom_line(
-          data     = dfsFunnel1[[i]],
-          mapping  = ggplot2::aes(x = x, y = y),
-          linetype = if (isTrimAndFill) options[["trimAndFillLineType"]] else options[["funnelUnderH1LineType"]]
-        )
-      }
-    }
-  }
+  if (isTrimAndFill || options[["funnelUnderH1"]])
+    out <- .fpAddFunnelLayers(
+      out, dfsFunnel1, funnelColors,
+      fillColors = if (isTrimAndFill) options[["trimAndFillFillColors"]] else options[["funnelUnderH1FillColors"]],
+      lineType   = if (isTrimAndFill) options[["trimAndFillLineType"]]   else options[["funnelUnderH1LineType"]]
+    )
 
   # add estimates
   pointAes <- list(
@@ -438,6 +394,45 @@
     jaspGraphs::themeJaspRaw(legend.position = options[["estimatesLegendPosition"]])
 
   return(out)
+}
+
+# grey shades of the funnel levels (sorted (1 - level) / 2, the widest funnel first), reversed for inverted colors
+.fpFunnelColors   <- function(funnelLevels, invertColors = FALSE) {
+
+  steps  <- seq(0, 1, length.out = 2 * length(funnelLevels) + 1)
+  steps  <- steps[-c(1, length(steps))]
+  colors <- paste0("grey", round(steps * 100))
+
+  if (invertColors)
+    colors <- rev(colors)
+
+  return(colors)
+}
+
+# the funnels of .fpComputeFunnelDf() (the center line last) as filled areas and/or lines; also used by the network meta-analysis funnel plot
+.fpAddFunnelLayers <- function(plot, dfsFunnel, funnelColors, fillColors, lineType) {
+
+  if (fillColors) {
+    for (i in rev(seq_along(dfsFunnel)[-length(dfsFunnel)])) {
+      plot <- plot + ggplot2::geom_polygon(
+        data     = dfsFunnel[[i]],
+        mapping  = ggplot2::aes(x = x, y = y),
+        fill     = scales::alpha(funnelColors[i], .25)
+      )
+    }
+  }
+
+  if (lineType != "none") {
+    for (i in rev(seq_along(dfsFunnel))) {
+      plot <- plot + ggplot2::geom_line(
+        data     = dfsFunnel[[i]],
+        mapping  = ggplot2::aes(x = x, y = y),
+        linetype = lineType
+      )
+    }
+  }
+
+  return(plot)
 }
 
 .power_to_z       <- function(power, alpha = .05, a = stats::qnorm(alpha/2,lower.tail = FALSE), two.sided = TRUE, nleqslv_control = list(xtol = 1e-15, maxit = 300, stepmax = .5)){

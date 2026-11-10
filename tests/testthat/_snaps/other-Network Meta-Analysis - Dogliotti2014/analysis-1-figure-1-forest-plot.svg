@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' data-engine-version='2.0' width='720.00pt' height='576.00pt' viewBox='0 0 720.00 576.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA='>
+    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<polygon points='301.75,77.92 363.69,59.54 425.64,77.92 363.69,96.31 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='505.53,133.07 553.70,114.69 601.87,133.07 553.70,151.45 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='430.50,188.21 486.98,169.83 543.45,188.21 486.98,206.59 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='323.71,243.35 394.87,224.97 466.03,243.35 394.87,261.73 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='241.49,298.49 315.71,280.11 389.92,298.49 315.71,316.87 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='288.28,353.63 356.97,335.25 425.67,353.63 356.97,372.01 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='359.11,408.77 412.62,390.39 466.14,408.77 412.62,427.15 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<text x='224.78' y='81.84' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='149.33px' lengthAdjust='spacingAndGlyphs'>Apixaban vs. Placebo/Control</text>
+<text x='224.78' y='136.98' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='136.66px' lengthAdjust='spacingAndGlyphs'>Aspirin vs. Placebo/Control</text>
+<text x='224.78' y='192.12' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='204.04px' lengthAdjust='spacingAndGlyphs'>Aspirin+Clopidogtrel vs. Placebo/Control</text>
+<text x='224.78' y='247.26' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='195.51px' lengthAdjust='spacingAndGlyphs'>Dabigatran 110mg vs. Placebo/Control</text>
+<text x='224.78' y='302.41' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='195.51px' lengthAdjust='spacingAndGlyphs'>Dabigatran 150mg vs. Placebo/Control</text>
+<text x='224.78' y='357.55' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='165.77px' lengthAdjust='spacingAndGlyphs'>Rivaroxaban vs. Placebo/Control</text>
+<text x='224.78' y='412.69' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='130.34px' lengthAdjust='spacingAndGlyphs'>VKAs vs. Placebo/Control</text>
+<text x='703.50' y='81.84' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='82.26px' lengthAdjust='spacingAndGlyphs'>0.33 [0.25, 0.44]</text>
+<text x='703.50' y='136.98' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='82.26px' lengthAdjust='spacingAndGlyphs'>0.78 [0.63, 0.96]</text>
+<text x='703.50' y='192.12' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='82.26px' lengthAdjust='spacingAndGlyphs'>0.58 [0.45, 0.74]</text>
+<text x='703.50' y='247.26' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='82.26px' lengthAdjust='spacingAndGlyphs'>0.38 [0.28, 0.52]</text>
+<text x='703.50' y='302.41' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='82.26px' lengthAdjust='spacingAndGlyphs'>0.27 [0.19, 0.37]</text>
+<text x='703.50' y='357.55' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='82.26px' lengthAdjust='spacingAndGlyphs'>0.32 [0.24, 0.44]</text>
+<text x='703.50' y='412.69' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='82.26px' lengthAdjust='spacingAndGlyphs'>0.41 [0.32, 0.52]</text>
+<line x1='224.78' y1='501.59' x2='609.82' y2='501.59' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='224.78' y1='501.59' x2='224.78' y2='508.21' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='301.78' y1='501.59' x2='301.78' y2='508.21' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='378.79' y1='501.59' x2='378.79' y2='508.21' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='455.80' y1='501.59' x2='455.80' y2='508.21' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='532.81' y1='501.59' x2='532.81' y2='508.21' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='609.82' y1='501.59' x2='609.82' y2='508.21' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<text x='224.78' y='527.07' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='28.48px' lengthAdjust='spacingAndGlyphs'>0.177</text>
+<text x='301.78' y='527.07' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='22.15px' lengthAdjust='spacingAndGlyphs'>0.25</text>
+<text x='378.79' y='527.07' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='28.48px' lengthAdjust='spacingAndGlyphs'>0.354</text>
+<text x='455.80' y='527.07' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='15.82px' lengthAdjust='spacingAndGlyphs'>0.5</text>
+<text x='532.81' y='527.07' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='28.48px' lengthAdjust='spacingAndGlyphs'>0.707</text>
+<text x='609.82' y='527.07' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='6.33px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='417.30' y='561.81' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='58.22px' lengthAdjust='spacingAndGlyphs'>exponential</text>
+<text x='5.48' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='177.57px' lengthAdjust='spacingAndGlyphs'>analysis-1_figure-1_forest-plot</text>
+</g>
+</svg>

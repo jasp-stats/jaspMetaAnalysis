@@ -13,6 +13,9 @@ Group
 	property bool enableSubgroupSettings:			false
 	property bool settingsEnabled:				true
 	property string transformEffectSizeValue:	"none"
+	property bool showMappingSettings:			true
+	property bool showSubgroupFullDatasetSettings:	true
+	property string predictionIntervalsInfo:	qsTr("Include prediction intervals of the estimated marginal means and the model information output.")
 
 	columns:	2
 
@@ -30,7 +33,7 @@ Group
 				visible:	showPredictionIntervals
 				enabled:	enablePredictionIntervals
 				Layout.preferredWidth: 300 * jaspTheme.uiScale
-				info: qsTr("Include prediction intervals of the estimated marginal means and the model information output.")
+				info: predictionIntervalsInfo
 			}
 
 			CheckBox
@@ -91,6 +94,7 @@ Group
 				name:			"forestPlotSubgroupPanelsWithinSubgroup"
 				text:			qsTr("Panels within subgroup")
 				checked:		false
+				visible:		showSubgroupFullDatasetSettings
 				info: qsTr("Group the output panels within their subgroup membership.")
 			}
 
@@ -99,6 +103,7 @@ Group
 				name:			"forestPlotSubgroupFullDatasetEstimatedMarginalMeans"
 				text:			qsTr("Full dataset estimated marginal means")
 				checked:		true
+				visible:		showSubgroupFullDatasetSettings
 				info: qsTr("Include the full dataset estimated marginal means in the forest plot if subgroups are specified.")
 			}
 
@@ -107,6 +112,7 @@ Group
 				name:			"forestPlotSubgroupFullDatasetModelInformation"
 				text:			qsTr("Full dataset model information")
 				checked:		true
+				visible:		showSubgroupFullDatasetSettings
 				info: qsTr("Include the full dataset model information in the forest plot if subgroups are specified.")
 			}
 		}
@@ -322,6 +328,7 @@ Group
 	Group
 	{
 		title:	qsTr("Mapping")
+		visible:	showMappingSettings
 		info: qsTr("Select a variable for encoding the color or shape of the plotted objects.")
 
 		DropDown

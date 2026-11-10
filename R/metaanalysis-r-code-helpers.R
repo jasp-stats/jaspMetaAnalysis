@@ -7,5 +7,6 @@
 }
 
 .metaQuoteRString <- function(value) {
-  return(paste0("'", gsub("'", "\\\\'", value), "'"))
+  # the backslashes are escaped first: the printed string evaluates to the value (a backslash is no escape sequence of the value)
+  return(paste0("'", gsub("'", "\\\\'", gsub("\\", "\\\\", value, fixed = TRUE)), "'"))
 }
