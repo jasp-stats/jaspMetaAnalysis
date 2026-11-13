@@ -17,7 +17,7 @@
 
 # Main function ----
 
-BayesianMetaAnalysisDeprecated <- function(jaspResults, dataset, ready, options) {
+BayesianMetaAnalysisDeprecatedInternal <- function(jaspResults, dataset, ready, options) {
 
   # the module here is remnant of the analysis being imported into Cochrane
   options[["analysis"]] <- "bmaDeprecated"

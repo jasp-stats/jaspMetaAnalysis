@@ -21,7 +21,7 @@
   "colorScheme"
 )
 
-RiskOfBiasPlot <- function(jaspResults, dataset, options) {
+RiskOfBiasPlotInternal <- function(jaspResults, dataset, options) {
 
   ready <- length(.robGetDomainColumns(options)) > 0
 

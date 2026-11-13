@@ -21,7 +21,7 @@
 # predictionperformance-validation.R, predictionperformance-output.R, and
 # predictionperformance-funnel.R.
 
-ClassicalPredictionPerformance   <- function(jaspResults, dataset, options, state = NULL) {
+ClassicalPredictionPerformanceInternal   <- function(jaspResults, dataset, options, state = NULL) {
 
   # required for dispatching
   options[["analysis"]] <- "metaAnalysis"

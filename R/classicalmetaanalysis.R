@@ -16,7 +16,7 @@
 #
 
 
-ClassicalMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
+ClassicalMetaAnalysisInternal <- function(jaspResults, dataset = NULL, options, ...) {
 
   options[["analysis"]] <- "metaAnalysis"
 

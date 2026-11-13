@@ -17,7 +17,7 @@
 
 #"successesGroup1", "successesGroup2", "sampleSizeGroup1", "sampleSizeGroup2"
 
-BayesianBinomialMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
+BayesianBinomialMetaAnalysisInternal <- function(jaspResults, dataset, options, state = NULL) {
 
   options[["analysis"]] <- "BiBMA"
   options[["effectSizeMeasure"]]         <- "logOR"

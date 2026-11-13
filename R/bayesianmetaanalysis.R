@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-BayesianMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
+BayesianMetaAnalysisInternal <- function(jaspResults, dataset, options, state = NULL) {
 
   options[["analysis"]] <- "NoBMA"
   options[['publicationBiasAdjustment']] <- "none"

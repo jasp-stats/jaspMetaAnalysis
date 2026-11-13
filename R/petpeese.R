@@ -5,7 +5,7 @@
 
 # Analysis and dependencies ----
 
-PetPeese                                <- function(jaspResults, dataset = NULL, options, ...) {
+PetPeeseInternal                        <- function(jaspResults, dataset = NULL, options, ...) {
 
   options[["analysis"]] <- "petPeese"
 

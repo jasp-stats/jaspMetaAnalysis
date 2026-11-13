@@ -20,7 +20,7 @@
 # Figure builders and table builders are implemented in funnelplot-figures.R and
 # funnelplot-tables.R.
 
-FunnelPlot <- function(jaspResults, dataset = NULL, options, ...) {
+FunnelPlotInternal <- function(jaspResults, dataset = NULL, options, ...) {
 
   options[["analysis"]] <- "metaAnalysis"
 

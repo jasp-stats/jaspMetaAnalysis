@@ -1,0 +1,433 @@
+#
+# Copyright (C) 2013-2025 University of Amsterdam
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+# This is a generated file. Don't change it!
+
+#' Robust Bayesian Meta-Analysis
+#'
+#' Robust Bayesian meta-analysis allows you to conduct a publication-bias adjusted meta-analysis using the Bayesian approach. By default, Bayesian meta-analysis model-averages across models assuming the presence vs. absence of the effect, heterogeneity, publication bias, and moderation (if specified). The analysis provides pre-specified prior distributions for different effect size measures and fields. Additional care is required when using a different type of effect sizes as the default prior distributions might not match the proper scaling of the effect size and heterogeneity. The analysis allows you to specify meta-regression, 3-level meta-analysis, and subgroup analysis. The results include estimates of effect sizes, heterogeneity, moderation, and various plots to visualize the results.
+#' 
+#' The analysis is based on the Bayesian meta-analysis/meta-regression parameterization as outlined in Bartoš et al. (2025).
+#' 
+#' See [this tutorial](https://doi.org/10.48550/arXiv.2509.09850) for a detailed introduction to the module.
+#'
+#' @param bayesianModelAveragingEffectSize, Average over the presence vs. absence of the effect. If unspecified, the resulting model assumes that the effect is present.
+#'    Defaults to \code{TRUE}.
+#' @param bayesianModelAveragingHeterogeneity, Average over the presence vs. absence of heterogeneity. If unspecified, the resulting model assumes that heterogeneity is present.
+#'    Defaults to \code{TRUE}.
+#' @param bayesianModelAveragingModerations, Average over the presence vs. absence of moderators. If unspecified, the resulting model assumes that all moderators models are present.
+#'    Defaults to \code{TRUE}.
+#' @param bayesianModelAveragingPublicationBias, Average over the presence vs. absence of publication bias. If unspecified, the resulting model assumes that publication bias is present.
+#'    Defaults to \code{TRUE}.
+#' @param bubblePlotBubbles, Show the observed estimates as bubbles. Uncheck to show only the model-based estimates.
+#'    Defaults to \code{TRUE}.
+#' @param bubblePlotBubblesJitter, Set the degree of x-coordinate jitter of the observed estimates. Available when the x-axis variable is nominal.
+#' @param bubblePlotBubblesRelativeSize, Set the relative size of the observed estimates.
+#' @param bubblePlotBubblesSize, Options for determining the size of the observed estimates.
+#' @param bubblePlotBubblesTransparency, Set the transparency of the observed estimates.
+#' @param bubblePlotConfidenceIntervals, Include confidence intervals of the estimated effect sizes.
+#'    Defaults to \code{TRUE}.
+#' @param bubblePlotLegendPosition, Set the legend position of the bubble plot.
+#' @param bubblePlotPredictionIntervals, Include prediction intervals of the estimated effect sizes. Unavailable for unrestricted weighted least squares.
+#'    Defaults to \code{TRUE}.
+#' @param bubblePlotRelativeSizeText, Adjust the text size of the bubble plot.
+#' @param bubblePlotSdFactorCovariates, Standard deviation cutoff used for binning continuous covariates.
+#' @param bubblePlotSelectedVariable, Variable to be visualized on the x-axis.
+#' @param bubblePlotSeparateLines, Variable(s) according to which predictions are split across different lines.
+#' @param bubblePlotSeparatePlots, Variable(s) according to which predictions are split across different plots.
+#' @param bubblePlotTheme, Set the theme of the bubble plot.
+#' @param conditionalEstimates, Include conditional estimates, i.e., estimates assuming the presence of the corresponding model component/parameter, in the tabular output and figures.
+#'    Defaults to \code{FALSE}.
+#' @param confidenceIntervals, Include credible intervals in the tabular output.
+#'    Defaults to \code{TRUE}.
+#' @param effectSize, Variable containing the observed effect sizes.
+#' @param effectSizeMeasure, Effect size measure supplied as the 'Effect Size'. This is an important setting as it determines the defaul prior distributions and the model fitting transformation.
+#' \itemize{
+#'   \item \code{"SMD"} (default) : Standardized mean difference such as Cohen's d, Hedge's g
+#'   \item \code{"fishersZ"}: Fisher's z transformation of correlation coefficients
+#'   \item \code{"logOR"}: Log odds ratio
+#'   \item \code{"logRR"}: Log risk ratio
+#'   \item \code{"logHR"}: Log hazard ratio
+#'   \item \code{"RD"}: Risk difference
+#'   \item \code{"general"}: General effect size that does not correspond to any of the measures above. Please, be careful when specifying the prior distributions as no sensible defaults are available.
+#' }
+#' @param effectSizeModelTerms, Variables assigned as model terms in the effect size model.
+#' @param effectSizeStandardError, Variable containing the standard errors corresponding to the effect sizes.
+#' @param estimatedMarginalMeansEffectSizeAddAdjustedEstimate, Include the adjusted effect estimate, which accounts for the moderators in the meta-regression model. This provides the effect size adjusted for the influence of moderators, as opposed to the pooled effect which combines the estimates across all studies.
+#'    Defaults to \code{FALSE}.
+#' @param estimatedMarginalMeansEffectSizeSelectedVariables, Variables selected for computing estimated marginal means in the effect size model.
+#' @param estimatedMarginalMeansEffectSizeTestAgainst0, Option to test the estimated marginal means against 0. The test for the adjusted estimate is available only for meta-regression models with centred parameterization (i.e., no treatment factor contrasts). The test for the estimated marginal means is performed using a Savage-Dickey Density Ratio test based on the prior and posterior distributions assuming either the presence of the effect or moderation.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotAuxiliaryAddVerticalLine, Add a solid vertical line in the forest plot.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotAuxiliaryAddVerticalLine2, Add a dotted vertical line in the forest plot.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotAuxiliaryDigits, Number of digits printed for the effect size and confidence intervals summary text.
+#' @param forestPlotAuxiliaryEffectLabel, Change the x-axis label of the forest plot.
+#' @param forestPlotAuxiliaryPlotColor, Change color of the plotted objects.
+#' @param forestPlotAuxiliarySetXAxisLimit, Change the default x-axis limits.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotAuxiliarySetXAxisTicks, Specify x-axis ticks manually as comma-separated numbers or fractions.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotAuxiliaryXAxisTransformLabelsOnly, Apply the selected effect size transformation only to the x-axis labels.
+#'    Defaults to \code{TRUE}.
+#' @param forestPlotConditionalEstimates, Display the conditional effect, heterogeneity, and estimated marginal means estimates.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotEffectSizeFixedEffectEstimate, Include a fixed effect meta-analytic effect size estimate in the model information section. Not available if the model was already fitted with fixed effects or the model contains heterogeneity meta-regression.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotEffectSizeFixedEffectTest, Include the test of the fixed effect meta-analytic effect size estimate in the model information section.
+#'    Defaults to \code{TRUE}.
+#' @param forestPlotEffectSizeModerationTest, Include the omnibus effect size moderation test in the model information section. Available when effect size meta-regression is specified.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotEffectSizePooledEstimate, Include the overall meta-analytic effect size estimate in the model information section.
+#'    Defaults to \code{TRUE}.
+#' @param forestPlotEffectSizePooledEstimateTest, Include the test of the overall meta-analytic effect size estimate in the model information section. If a meta-regression model is fitted, the test corresponds to either the adjusted effect or the meta-regression intercept term and the corresponding estimate is also displayed. The test is available only if Bayesian model averaging for the effect is selected.
+#'    Defaults to \code{TRUE}.
+#' @param forestPlotEffectSizeUnadjustedFixedEffectEstimate, Include the fixed effect estimate without publication bias adjustment (same moderators and subgroups) for comparison with the adjusted estimate in the model information section.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotEffectSizeUnadjustedFixedEffectTest, Include the test of the unadjusted fixed effect estimate in the model information section.
+#'    Defaults to \code{TRUE}.
+#' @param forestPlotEffectSizeUnadjustedRandomEffectsEstimate, Include the random effects estimate (restricted maximum likelihood) without publication bias adjustment (same moderators and subgroups) for comparison with the adjusted estimate in the model information section.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotEffectSizeUnadjustedRandomEffectsTest, Include the test of the unadjusted random effects estimate in the model information section.
+#'    Defaults to \code{TRUE}.
+#' @param forestPlotEstimatedMarginalMeans, Add estimated marginal means information to the forest plot. Available when effect size meta-regression is specified.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotEstimatedMarginalMeansAdjustedEffectSizeEstimate, Include the adjusted effect size estimate in the estimated marginal means section.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotEstimatedMarginalMeansCoefficientTests, Include coefficient tests of variables included in the estimated marginal means. The null hypothesis states that the estimated marginal mean for a given level equals the tested value.
+#'    Defaults to \code{TRUE}.
+#' @param forestPlotEstimatedMarginalMeansCoefficientTestsAgainst, Specify the test value for the coefficient tests.
+#' @param forestPlotEstimatedMarginalMeansCoefficientTestsAgainst0, Include coefficient tests of variables included in the estimated marginal means against 0. The null hypothesis states that the estimated marginal mean for a given level equals the tested value.
+#'    Defaults to \code{TRUE}.
+#' @param forestPlotEstimatedMarginalMeansSelectedVariables, Select variables for which the estimated marginal means are visualized.
+#' @param forestPlotEstimatedMarginalMeansTermTests, Include the omnibus term test of variables included in the estimated marginal means. The null hypothesis states that the effect size at all levels of the categorical variable are equal or that there is no linear association between the effect size and the continuous variable.
+#'    Defaults to \code{TRUE}.
+#' @param forestPlotEstimatesAndConfidenceIntervals, Include effect size estimates and confidence intervals summary text in the right panel.
+#'    Defaults to \code{TRUE}.
+#' @param forestPlotHeterogeneityEstimateH2, Include the meta-analytic H², an index indicating the ratio of total variability to sampling variability in the model information section. Not available for multilevel/multivariate meta-analysis or heterogeneity meta-regression.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotHeterogeneityEstimateI2, Include the meta-analytic I², the percentage of total variation across studies due to heterogeneity in the model information section. Not available for multilevel/multivariate meta-analysis or heterogeneity meta-regression.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotHeterogeneityEstimateTau, Include the meta-analytic 𝜏, the square root of the estimated between-study variance in the model information section. Not available for multilevel/multivariate meta-analysis.
+#'    Defaults to \code{TRUE}.
+#' @param forestPlotHeterogeneityEstimateTau2, Include the meta-analytic 𝜏², the estimated between-study variance in the model information section. Not available for multilevel/multivariate meta-analysis.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotHeterogeneityModerationTest, Include the omnibus heterogeneity moderation test in the model information section. Available when heterogeneity meta-regression is specified.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotHeterogeneityTest, Include the test of the residual heterogeneity in the model information section.
+#'    Defaults to \code{TRUE}.
+#' @param forestPlotHeterogeneityTestLRT, Include the likelihood ratio test of the residual heterogeneity in the model information section.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotHeterogeneityTestWald, Include the Wald-type test of the residual heterogeneity in the model information section.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotModelInformation, Add meta-analytic model information to the forest plot.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotPredictionIntervals, Include prediction intervals of the estimated marginal means and the model information output.
+#'    Defaults to \code{TRUE}.
+#' @param forestPlotPublicationBiasTest, Include the publication bias test in the model information section.
+#'    Defaults to \code{TRUE}.
+#' @param forestPlotStudyInformation, Add study-level information panel to the forest plot. There are three sections of the study-level information panel: a) the left section with study labels, names, and etc designed via the 'Selected Variables' option, b) the middle section visualizing the estimates and confidence intervals based on the meta-analytic input, c) the right section textually summarizing the estimates and confidence intervals based on the meta-analytic input.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotStudyInformationAggregateBy, Select the variable by which the study-level information panel is aggregated.
+#' @param forestPlotStudyInformationAggregateMethod, Select the method for aggregating the estimates.
+#' \itemize{
+#'   \item \code{"boxplot"}: Aggregate the estimates by boxplot.
+#'   \item \code{"bubbles"}: Aggregate the estimates by bubbles.
+#' }
+#' @param forestPlotStudyInformationBoxplotWeightsNormalized, Normalize displayed user-supplied weights to sum to 100.
+#'    Defaults to \code{TRUE}.
+#' @param forestPlotStudyInformationBoxplotWeightsPercentage, Display user-supplied weights as percentages.
+#'    Defaults to \code{TRUE}.
+#' @param forestPlotStudyInformationOrderAscending, Order the study-level information panel in ascending order.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotStudyInformationOrderBy, Select the variable by which the study-level information panel is ordered.
+#' @param forestPlotStudyInformationPredictedEffects, Include predicted effect sizes in the middle section of the study-level information panel. Unavailable when the panel is aggregated.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotStudyInformationSecondaryConfidenceInterval, Include secondary confidence interval for effect sizes in the middle section of the study-level information panel.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotStudyInformationSelectedVariables, Select variables containing study-level information to be printed in the left section of the panel.
+#' @param forestPlotStudyInformationSelectedVariablesSettings, Adjust the Title, Width, and Alignment of each column in the left section.
+#' @param forestPlotStudyInformationStudyWeights, Include study weights in the right section of the study-level information panel. For multilevel/multivariate meta-analysis, diagonal model weights are shown, matching the default forest plot point-size weights.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotSubgroupFullDatasetEstimatedMarginalMeans, Include the full dataset estimated marginal means in the forest plot if subgroups are specified.
+#'    Defaults to \code{TRUE}.
+#' @param forestPlotSubgroupFullDatasetModelInformation, Include the full dataset model information in the forest plot if subgroups are specified.
+#'    Defaults to \code{TRUE}.
+#' @param forestPlotSubgroupPanelsWithinSubgroup, Group the output panels within their subgroup membership.
+#'    Defaults to \code{FALSE}.
+#' @param forestPlotSubgroupShowTitles, Show the subgroup heading labels in the forest plot.
+#'    Defaults to \code{TRUE}.
+#' @param forestPlotTestsInRightPanel, Move test results text to the right panel.
+#'    Defaults to \code{FALSE}.
+#' @param heterogeneityH2, Include H², an index indicating the ratio of total variability to sampling variability. Unavailable when performing binomial meta-analysis.
+#'    Defaults to \code{FALSE}.
+#' @param heterogeneityI2, Include I², the percentage of total variation across studies due to heterogeneity. Unavailable when performing binomial meta-analysis.
+#'    Defaults to \code{FALSE}.
+#' @param heterogeneityTau, Include 𝜏, the square root of the estimated between-study variance.
+#'    Defaults to \code{TRUE}.
+#' @param heterogeneityTau2, Include 𝜏², the estimated between-study variance.
+#'    Defaults to \code{TRUE}.
+#' @param includeFullDatasetInSubgroupAnalysis, Include the full dataset output in the subgroup analysis. This option is only available when the subgroup analysis is selected.
+#'    Defaults to \code{FALSE}.
+#' @param metaregressionCoefficientEstimates, Include estimates of the regression coefficients in the meta-regression model. Note that the regression coefficients are not standardized and correspond to the scale of the prior distribution (the RoBMA R package provides only standardized regression coefficients).
+#'    Defaults to \code{TRUE}.
+#' @param metaregressionStandardizedCoefficientEstimates, Include estimates of the standardized regression coefficients in the meta-regression model. The standardized regression coefficients are the regression coefficients divided by the standard deviation of the predictor variable and correspond to the scale of prior distribution (there is no difference between standardized and non-standardized regression coefficients for categorical moderators).
+#'    Defaults to \code{FALSE}.
+#' @param metaregressionTermTests, Include tests for each term in the meta-regression model. The null hypothesis states that the effect size at all levels of the categorical variable are equal or that there is no linear association between the effect size and the continuous variable).
+#'    Defaults to \code{TRUE}.
+#' @param modelExpectedDirectionOfTheEffect, The expected direction of the effect. This setting is important for the publication bias adjustment (one-sided selection models specify different publication probabilities for estimates in the expected vs. unexpected direction and PET-PEESE is bounded to adjust in the expected direction). The default is 'Positive'.
+#' \itemize{
+#'   \item \code{"detect"} (default) : Determine the expected direction of the effect automatically based on the median effect size in the data.
+#'   \item \code{"positive"}: Positive effect
+#'   \item \code{"negative"}: Negative effect
+#' }
+#' @param predictionIntervals, Include prediction intervals in the tabular output.
+#'    Defaults to \code{TRUE}.
+#' @param predictors, Variables to include as predictors (moderators) in the meta-regression model. See the 'Model' section for the meta-regression specification details.
+#' @param priorDistributionsEffectSizeAndHeterogeneity, Specify the type of prior distributions for the effect size and heterogeneity.
+#' \itemize{
+#'   \item \code{"default"} (default) : Use default prior distributions for the effect size and heterogeneity based on Bartoš et al. (2022).
+#'   \item \code{"medicine"}: Use prior distributions based on the Cochrane Database of Systematic Reviews developed by Bartoš et al. (2021)
+#'   \item \code{"custom"}: Use custom prior distributions. This option allows you to specify a custom model ensemble for the effect size and heterogeneity prior distributions.
+#' }
+#' @param priorDistributionsScale, Setting value different than 1 re-scales the pre-specified prior distributions. Values smaller than 1 lead to more informative priors, while values larger than 1 lead to less informative priors.
+#' @param publicationBiasAdjustment, Publication bias adjustment method. The default is the RoBMA-PSMA method (combination of 6 weight functions and PET-PEESE).
+#' \itemize{
+#'   \item \code{"PSMA"} (default) : RoBMA-PSMA method (combination of 6 weight functions and PET-PEESE) as described in Bartoš et al. (2022). This is the recommended method.
+#'   \item \code{"PP"}: RoBMA PET-PEESE method. A simplification of the RoBMA-PSMA method that uses only the PET-PEESE weight function.
+#'   \item \code{"original"}: Original RoBMA method (combination of 2 weight functions) as described in Maier et al. (2023).
+#'   \item \code{"custom"}: Custom model ensemble. This option allows you to specify a custom model ensemble for the publication bias adjustment.
+#'   \item \code{"none"}: No publication bias adjustment.
+#' }
+#' @param publicationBiasAdjustmentPetPeeseEstimates, Include estimates of the PET-PEESE parameters in the publication bias adjustment model.
+#'    Defaults to \code{FALSE}.
+#' @param publicationBiasAdjustmentWeightfunctionEstimates, Include estimates of the weight function parameters in the publication bias adjustment model.
+#'    Defaults to \code{FALSE}.
+#' @param shortenPriorName, Shorten the prior names in the output.
+#'    Defaults to \code{FALSE}.
+#' @param showModelSpecification, Show the model specification. This is useful for understanding and reporting the specified model.
+#'    Defaults to \code{FALSE}.
+#' @param showRoBMARCode, Display the underlying R code used by the RoBMA package to fit the model.
+#'    Defaults to \code{FALSE}.
+#' @param studyLevelMultilevel, Variable indicating the study level nesting. This variable is used to specify the nesting of the studies in the meta-analysis. The nesting is used to specify the model structure and to account for the correlation between the effect sizes within each study. Note that this is an experimental feature that needs to be manually enabled in the 'Advanced' section.
+#' @param subgroup, Variable indicating subgroup stratification. For each subgroup, an independent model is fitted to the corresponding data set subset.
+#' @param transformEffectSize, Select a transformation to apply to the effect size estimates in the output. This transformation applies to the 'Meta-Analytic Estimates Table', 'Estimated Marginal Means Table', 'Forest Plot', and  the 'Bubble Plot'. The 'Meta-Regression Coeffient Estimates' are not transformed.
+RobustBayesianMetaAnalysis <- function(
+          data = NULL,
+          version = "1",
+          advancedAutofitEss = TRUE,
+          advancedAutofitEssTarget = 500,
+          advancedAutofitExtendSamples = 5000,
+          advancedAutofitMaximumFittingTime = FALSE,
+          advancedAutofitMaximumFittingTimeTarget = 1,
+          advancedAutofitMaximumFittingTimeTargetUnit = "hours",
+          advancedAutofitMcmcError = FALSE,
+          advancedAutofitMcmcErrorSd = FALSE,
+          advancedAutofitMcmcErrorSdTarget = 0.01,
+          advancedAutofitMcmcErrorTarget = 0.001,
+          advancedAutofitRHat = TRUE,
+          advancedAutofitRHatTarget = 1.05,
+          advancedMcmcAdaptation = 3500,
+          advancedMcmcBurnin = 4500,
+          advancedMcmcChains = 3,
+          advancedMcmcSamples = 10000,
+          advancedMcmcThin = 1,
+          autofit = FALSE,
+          bayesFactorType = "BF10",
+          bayesianModelAveragingEffectSize = TRUE,
+          bayesianModelAveragingHeterogeneity = TRUE,
+          bayesianModelAveragingModerations = TRUE,
+          bayesianModelAveragingPublicationBias = TRUE,
+          bubblePlotBubbles = TRUE,
+          bubblePlotBubblesJitter = 1,
+          bubblePlotBubblesRelativeSize = 1,
+          bubblePlotBubblesSize = "inverseVariance",
+          bubblePlotBubblesTransparency = 0.9,
+          bubblePlotConfidenceIntervals = TRUE,
+          bubblePlotConfidenceIntervalsTransparency = 0.3,
+          bubblePlotLegendPosition = "right",
+          bubblePlotPredictionIntervals = TRUE,
+          bubblePlotPredictionIntervalsTransparency = 0.1,
+          bubblePlotRelativeSizeText = 1.5,
+          bubblePlotSdFactorCovariates = 1,
+          bubblePlotSelectedVariable = list(optionKey = "variable", types = list(), value = list()),
+          bubblePlotSeparateLines = list(optionKey = "variable", types = list(), value = list()),
+          bubblePlotSeparatePlots = list(optionKey = "variable", types = list(), value = list()),
+          bubblePlotTheme = "jasp",
+          colorPalette = "colorblind",
+          conditionalEstimates = FALSE,
+          confidenceIntervals = TRUE,
+          confidenceIntervalsLevel = 0.95,
+          effectSize = list(types = list(), value = ""),
+          effectSizeMeasure = "SMD",
+          effectSizeModelTerms = list(optionKey = "components", types = list(), value = list()),
+          effectSizeStandardError = list(types = list(), value = ""),
+          estimatedMarginalMeansEffectSize = TRUE,
+          estimatedMarginalMeansEffectSizeAddAdjustedEstimate = FALSE,
+          estimatedMarginalMeansEffectSizeSelectedVariables = list(optionKey = "variable", types = list(), value = list()),
+          estimatedMarginalMeansEffectSizeTestAgainst0 = FALSE,
+          forestPlotAlignLeftPanel = "right",
+          forestPlotAuxiliaryAddVerticalLine = FALSE,
+          forestPlotAuxiliaryAddVerticalLine2 = FALSE,
+          forestPlotAuxiliaryAddVerticalLineValue = 0,
+          forestPlotAuxiliaryAddVerticalLineValue2 = 0,
+          forestPlotAuxiliaryDigits = 2,
+          forestPlotAuxiliaryEffectLabel = "Effect Size",
+          forestPlotAuxiliaryPlotColor = "black",
+          forestPlotAuxiliarySetXAxisLimit = FALSE,
+          forestPlotAuxiliarySetXAxisLimitLower = -1,
+          forestPlotAuxiliarySetXAxisLimitUpper = 1,
+          forestPlotAuxiliarySetXAxisTicks = FALSE,
+          forestPlotAuxiliarySetXAxisTicksValues = "-1, -0.5, 0, 0.5, 1",
+          forestPlotAuxiliaryTestsInformation = "statisticAndPValue",
+          forestPlotAuxiliaryXAxisTransformLabelsOnly = TRUE,
+          forestPlotConditionalEstimates = FALSE,
+          forestPlotEffectSizeFixedEffectEstimate = FALSE,
+          forestPlotEffectSizeFixedEffectTest = TRUE,
+          forestPlotEffectSizeModerationTest = FALSE,
+          forestPlotEffectSizePooledEstimate = TRUE,
+          forestPlotEffectSizePooledEstimateTest = TRUE,
+          forestPlotEffectSizeUnadjustedFixedEffectEstimate = FALSE,
+          forestPlotEffectSizeUnadjustedFixedEffectTest = TRUE,
+          forestPlotEffectSizeUnadjustedRandomEffectsEstimate = FALSE,
+          forestPlotEffectSizeUnadjustedRandomEffectsTest = TRUE,
+          forestPlotEstimatedMarginalMeans = FALSE,
+          forestPlotEstimatedMarginalMeansAdjustedEffectSizeEstimate = FALSE,
+          forestPlotEstimatedMarginalMeansCoefficientTests = TRUE,
+          forestPlotEstimatedMarginalMeansCoefficientTestsAgainst = 0,
+          forestPlotEstimatedMarginalMeansCoefficientTestsAgainst0 = TRUE,
+          forestPlotEstimatedMarginalMeansSelectedVariables = list(optionKey = "variable", types = list(), value = list()),
+          forestPlotEstimatedMarginalMeansTermTests = TRUE,
+          forestPlotEstimatesAndConfidenceIntervals = TRUE,
+          forestPlotHeterogeneityEstimateH2 = FALSE,
+          forestPlotHeterogeneityEstimateI2 = FALSE,
+          forestPlotHeterogeneityEstimateTau = TRUE,
+          forestPlotHeterogeneityEstimateTau2 = FALSE,
+          forestPlotHeterogeneityModerationTest = FALSE,
+          forestPlotHeterogeneityTest = TRUE,
+          forestPlotHeterogeneityTestLRT = FALSE,
+          forestPlotHeterogeneityTestWald = FALSE,
+          forestPlotMappingColor = list(types = "unknown", value = ""),
+          forestPlotMappingShape = list(types = "unknown", value = ""),
+          forestPlotModelInformation = FALSE,
+          forestPlotPredictionIntervals = TRUE,
+          forestPlotPublicationBiasTest = TRUE,
+          forestPlotSizeAxisLabels = 1,
+          forestPlotSizeEstimates = 1,
+          forestPlotSizeLeftPanel = 1,
+          forestPlotSizePlotArea = 1,
+          forestPlotSizeRightPanel = 1,
+          forestPlotSizeRow = 1,
+          forestPlotSizeText = 1,
+          forestPlotStudyInformation = FALSE,
+          forestPlotStudyInformationAggregateBy = list(types = "unknown", value = ""),
+          forestPlotStudyInformationAggregateMethod = "boxplot",
+          forestPlotStudyInformationAggregateMethodBubbleRelativeSize = 1,
+          forestPlotStudyInformationBoxplotWeightsNormalized = TRUE,
+          forestPlotStudyInformationBoxplotWeightsPercentage = TRUE,
+          forestPlotStudyInformationOrderAscending = FALSE,
+          forestPlotStudyInformationOrderBy = list(types = "unknown", value = ""),
+          forestPlotStudyInformationPredictedEffects = FALSE,
+          forestPlotStudyInformationSecondaryConfidenceInterval = FALSE,
+          forestPlotStudyInformationSecondaryConfidenceIntervalLevel = 0.89,
+          forestPlotStudyInformationSelectedVariables = list(types = list(), value = list()),
+          forestPlotStudyInformationSelectedVariablesSettings = list(),
+          forestPlotStudyInformationStudyWeights = FALSE,
+          forestPlotSubgroupFullDatasetEstimatedMarginalMeans = TRUE,
+          forestPlotSubgroupFullDatasetModelInformation = TRUE,
+          forestPlotSubgroupPanelsWithinSubgroup = FALSE,
+          forestPlotSubgroupShowTitles = TRUE,
+          forestPlotTestsInRightPanel = FALSE,
+          heterogeneityH2 = FALSE,
+          heterogeneityI2 = FALSE,
+          heterogeneityTau = TRUE,
+          heterogeneityTau2 = TRUE,
+          includeFullDatasetInSubgroupAnalysis = FALSE,
+          mcmcDiagnosticsOverviewTable = FALSE,
+          mcmcDiagnosticsPlotEffectSize = FALSE,
+          mcmcDiagnosticsPlotHeterogeneity = FALSE,
+          mcmcDiagnosticsPlotModeration = FALSE,
+          mcmcDiagnosticsPlotPeese = FALSE,
+          mcmcDiagnosticsPlotPet = FALSE,
+          mcmcDiagnosticsPlotTypeAutocorrelation = FALSE,
+          mcmcDiagnosticsPlotTypePosteriorSamplesDensity = FALSE,
+          mcmcDiagnosticsPlotTypeTrace = TRUE,
+          mcmcDiagnosticsPlotWeights = FALSE,
+          metaregressionCoefficientEstimates = TRUE,
+          metaregressionStandardizedCoefficientEstimates = FALSE,
+          metaregressionTermTests = TRUE,
+          modelExpectedDirectionOfTheEffect = "detect",
+          plotHeight = 320,
+          plotWidth = 480,
+          predictionIntervals = TRUE,
+          predictors = list(types = list(), value = list()),
+          priorAndPosteriorPlotEffectSize = FALSE,
+          priorAndPosteriorPlotHeterogeneity = FALSE,
+          priorAndPosteriorPlotIncludePriorDistribution = TRUE,
+          priorAndPosteriorPlotModeration = FALSE,
+          priorAndPosteriorPlotModerationEstimatedMarginalMeans = FALSE,
+          priorAndPosteriorPlotPetPeese = FALSE,
+          priorAndPosteriorPlotType = "averaged",
+          priorAndPosteriorPlotWeightFunction = FALSE,
+          priorAndPosteriorPlotWeightFunctionRescaleXAxis = TRUE,
+          priorDistributionsEffectSizeAndHeterogeneity = "default",
+          priorDistributionsEffectSizeAndHeterogeneityMedicineSubfield = "general",
+          priorDistributionsScale = 1,
+          priorsBiasPeese = list(list(name = "#", priorWeight = "1/4", theta = "5", type = "cauchy", x0 = "0")),
+          priorsBiasPeeseNull = list(),
+          priorsBiasPet = list(list(name = "#", priorWeight = "1/4", theta = "1", type = "cauchy", x0 = "0")),
+          priorsBiasPetNull = list(),
+          priorsBiasSelectionModels = list(list(alpha = "(1,1)", name = "#", pValues = "(.05)", priorWeight = "1/12", type = "twoSided"), list(alpha = "(1,1,1)", name = "#2", pValues = "(.05, .10)", priorWeight = "1/12", type = "twoSided"), list(alpha = "(1,1)", name = "#3", pValues = "(.05)", priorWeight = "1/12", type = "oneSided"), list(alpha = "(1,1,1)", name = "#4", pValues = "(.025, .05)", priorWeight = "1/12", type = "oneSided"), list(alpha = "(1,1,1)", name = "#5", pValues = "(.05, .50)", priorWeight = "1/12", type = "oneSided"), list(alpha = "(1,1,1,1)", name = "#6", pValues = "(.025, .05, .10)", priorWeight = "1/12", type = "oneSided")),
+          priorsBiasSelectionModelsNull = list(list(name = "#", type = "none")),
+          priorsEffect = list(list(mu = "0", name = "#", sigma = "1", type = "normal")),
+          priorsEffectNull = list(list(name = "#", type = "spike", x0 = "0")),
+          priorsHeterogeneity = list(list(alpha = "1", beta = "0.15", name = "#", type = "invgamma")),
+          priorsHeterogeneityNull = list(list(name = "#", type = "spike", x0 = "0")),
+          priorsModeratorsContinuous = list(optionKey = "value", types = list(), value = list()),
+          priorsModeratorsContinuousNull = list(optionKey = "value", types = list(), value = list()),
+          priorsModeratorsFactor = list(optionKey = "value", types = list(), value = list()),
+          priorsModeratorsFactorNull = list(optionKey = "value", types = list(), value = list()),
+          publicationBiasAdjustment = "PSMA",
+          publicationBiasAdjustmentPetPeeseEstimates = FALSE,
+          publicationBiasAdjustmentWeightfunctionEstimates = FALSE,
+          seed = 1,
+          setSeed = FALSE,
+          shortenPriorName = FALSE,
+          showModelSpecification = FALSE,
+          showRoBMARCode = FALSE,
+          studyLevelMultilevel = list(types = list(), value = ""),
+          subgroup = list(types = list(), value = ""),
+          transformEffectSize = "none") {
+
+   options <- mget(names(formals(sys.function())), envir = environment(), inherits = FALSE)
+   options[["data"]] <- NULL
+   options[["version"]] <- NULL
+
+
+   if (!jaspBase::jaspResultsCalledFromJasp() && !is.null(data)) {
+      jaspBase::storeDataSet(data)
+   }
+
+   optionsWithFormula <- c("advancedAutofitMaximumFittingTimeTargetUnit", "bubblePlotBubblesSize", "bubblePlotLegendPosition", "bubblePlotSelectedVariable", "bubblePlotSeparateLines", "bubblePlotSeparatePlots", "bubblePlotTheme", "colorPalette", "effectSize", "effectSizeMeasure", "effectSizeModelTerms", "effectSizeStandardError", "estimatedMarginalMeansEffectSizeSelectedVariables", "forestPlotAlignLeftPanel", "forestPlotAuxiliaryPlotColor", "forestPlotAuxiliaryTestsInformation", "forestPlotEstimatedMarginalMeansSelectedVariables", "forestPlotMappingColor", "forestPlotMappingShape", "forestPlotStudyInformationAggregateBy", "forestPlotStudyInformationOrderBy", "forestPlotStudyInformationSelectedVariables", "forestPlotStudyInformationSelectedVariablesSettings", "modelExpectedDirectionOfTheEffect", "predictors", "priorDistributionsEffectSizeAndHeterogeneity", "priorDistributionsEffectSizeAndHeterogeneityMedicineSubfield", "priorsBiasPeese", "priorsBiasPeeseNull", "priorsBiasPet", "priorsBiasPetNull", "priorsBiasSelectionModels", "priorsBiasSelectionModelsNull", "priorsEffect", "priorsEffectNull", "priorsHeterogeneity", "priorsHeterogeneityNull", "priorsModeratorsContinuous", "priorsModeratorsContinuousNull", "priorsModeratorsFactor", "priorsModeratorsFactorNull", "publicationBiasAdjustment", "studyLevelMultilevel", "subgroup", "transformEffectSize")
+   for (name in optionsWithFormula) {
+      if ((name %in% optionsWithFormula) && inherits(options[[name]], "formula")) options[[name]] = jaspBase::jaspFormula(options[[name]], data)   }
+
+   # Options not given in the call get their default from the form, which can depend on the other options.
+   options <- options[names(options) %in% names(match.call())[-1L]]
+   return(jaspBase::runWrappedAnalysis("jaspMetaAnalysis", "RobustBayesianMetaAnalysis", "RobustBayesianMetaAnalysis.qml", options, version, TRUE))
+}

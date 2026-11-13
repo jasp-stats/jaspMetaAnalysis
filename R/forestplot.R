@@ -4,7 +4,7 @@
 # without fitting any model. Reuses forestplotcommon.R and the focused
 # forestplot-*.R helpers.
 
-ForestPlot <- function(jaspResults, dataset, options) {
+ForestPlotInternal <- function(jaspResults, dataset, options) {
 
   options[["analysis"]] <- "standaloneForestPlot"
   options              <- .fpStandaloneDefaults(options)
