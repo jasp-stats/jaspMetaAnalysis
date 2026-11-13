@@ -6,7 +6,7 @@ Description
 	title : 		qsTr("Meta-Analysis")
 	description:	qsTr("Synthesize evidence across multiple studies")
 	icon:			"meta-analysis.svg"
-	hasWrappers: 	false
+	hasWrappers: 	true
 	
 	GroupTitle
 	{

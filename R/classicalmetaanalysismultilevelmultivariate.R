@@ -20,7 +20,7 @@
 # Random structures, variance-covariance handling, and random-effect tables are
 # implemented in the classicalmetaanalysismultilevelmultivariate-*.R files.
 
-ClassicalMetaAnalysisMultilevelMultivariate <- function(jaspResults, dataset = NULL, options, ...) {
+ClassicalMetaAnalysisMultilevelMultivariateInternal <- function(jaspResults, dataset = NULL, options, ...) {
 
   options[["analysis"]] <- "metaAnalysisMultilevelMultivariate"
 

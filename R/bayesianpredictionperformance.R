@@ -19,7 +19,7 @@
 # Shared validation, output, and funnel-plot helpers are implemented in the
 # predictionperformance-*.R files.
 
-BayesianPredictionPerformance  <- function(jaspResults, dataset, options, state = NULL) {
+BayesianPredictionPerformanceInternal  <- function(jaspResults, dataset, options, state = NULL) {
 
   options[["method"]] <- "BAYES"
   ready <- .metamiscReady(options)

@@ -6,7 +6,7 @@
 
 # Analysis and dependencies ----
 
-WaapWls                                 <- function(jaspResults, dataset = NULL, options, ...) {
+WaapWlsInternal                         <- function(jaspResults, dataset = NULL, options, ...) {
 
   options[["analysis"]] <- "waapWls"
 

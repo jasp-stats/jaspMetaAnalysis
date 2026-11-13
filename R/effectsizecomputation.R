@@ -20,7 +20,7 @@
 # Input mapping and reproducible R-code helpers are implemented in
 # effectsizecomputation-mapping.R and effectsizecomputation-r-code.R.
 
-EffectSizeComputation <- function(jaspResults, dataset, options, state = NULL) {
+EffectSizeComputationInternal <- function(jaspResults, dataset, options, state = NULL) {
 
   # all input checking is done within the escalc function
   # - error messages are cleaned and forwarded to the user
