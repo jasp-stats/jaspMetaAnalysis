@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.13.0\n"
-"POT-Creation-Date: 2026-11-07 02:33\n"
+"POT-Creation-Date: 2026-11-14 02:33\n"
 "PO-Revision-Date: 2026-11-08 05:51+0000\n"
 "Last-Translator: Koji Kosugi <kosugitti@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -404,6 +404,11 @@ msgid ""
 msgstr ""
 "異質性についてのメタ回帰を含むモデルでは、プロファイル尤度は利用できません。"
 
+msgid ""
+"Profile likelihood is not available for equal effects, fixed effects, or "
+"unrestricted weighted least squares models."
+msgstr ""
+
 msgid "Baujat Plot"
 msgstr "Baujatプロット"
 
@@ -513,7 +518,8 @@ msgstr "影響の大きいケースは見つかりませんでした。"
 msgid "%1$sNo influential cases found."
 msgstr "%1$s影響の大きいケースは見つかりませんでした。"
 
-msgid "Diagnostics are based on the the subgroup models."
+#, fuzzy
+msgid "Diagnostics are based on the subgroup models."
 msgstr "診断はサブグループのモデルに基づいています。"
 
 msgid "Diagnostics are based on the non-clustered model."
@@ -688,6 +694,10 @@ msgstr "%1$s: 利用できません"
 msgid "Residual heterogeneity"
 msgstr "残差異質性"
 
+#, fuzzy
+msgid "not available"
+msgstr "%1$s: 利用できません"
+
 msgid "Moderation (effect size): %1$s"
 msgstr "調整 (効果量): %1$s"
 
@@ -722,6 +732,9 @@ msgid ""
 msgstr ""
 "Knapp-Hartungの推測が、ごく少ない残差自由度に基づいています。結果は敏感になり"
 "うるため、慎重に解釈してください。"
+
+msgid "There are too few estimates to estimate the model."
+msgstr ""
 
 msgid ""
 "The model estimation failed with the following message: %1$s. Please, "
@@ -951,6 +964,10 @@ msgstr "AICc"
 msgid "R²"
 msgstr "R²"
 
+#, fuzzy
+msgid "Fixed effects tested using cluster-robust t-distribution."
+msgstr "固定効果はt分布で検定されています。"
+
 msgid "Fixed effects tested using z-distribution."
 msgstr "固定効果はz分布で検定されています。"
 
@@ -972,11 +989,9 @@ msgstr "統合効果"
 msgid "adjusted effect"
 msgstr "調整後の効果"
 
-msgid "%1$i observations were ommited due to missing values."
-msgstr "欠測値のため %1$i 件の観測値が除外されました。"
-
-msgid "%1$s: %2$i observations were ommited due to missing values."
-msgstr "%1$s: 欠測値のため %2$i 件の観測値が除外されました。"
+#, fuzzy
+msgid "Subgroup %1$s"
+msgstr "サブグループ %1$s:"
 
 msgid "%1$s: %2$s"
 msgstr "%1$s: %2$s"
@@ -1220,7 +1235,8 @@ msgstr "有理二次"
 msgid "Spherical"
 msgstr "球面"
 
-msgid "Random Effects / Model Stucture Summary"
+#, fuzzy
+msgid "Random Effects / Model Structure Summary"
 msgstr "変量効果・モデル構造の要約"
 
 msgid "Simple / Nested Summary"
@@ -1299,6 +1315,11 @@ msgstr "𝜏² の推定値"
 
 msgid "Estimates ρ"
 msgstr "ρ の推定値"
+
+msgid ""
+"Confidence intervals are not available for variance components fixed to zero "
+"(e.g., levels with a single estimate)."
+msgstr ""
 
 msgid "ρ"
 msgstr "ρ"
@@ -1608,6 +1629,22 @@ msgstr "固定効果の推定値"
 
 msgid "Intercept estimate"
 msgstr "切片の推定値"
+
+#, fuzzy
+msgid "Unadjusted fixed effect"
+msgstr "調整後の効果"
+
+#, fuzzy
+msgid "Unadjusted random effects"
+msgstr "調整後の効果"
+
+#, fuzzy
+msgid "The unadjusted fixed effect estimate could not be calculated."
+msgstr "固定効果の効果量を計算できませんでした。"
+
+#, fuzzy
+msgid "The unadjusted random effects estimate could not be calculated."
+msgstr "統合された効果量を計算できませんでした。"
 
 msgid ""
 "No rows to display. Check that the visualization type mapping assigns at "
@@ -1933,6 +1970,104 @@ msgstr ""
 "推定精度が低いです -- 有効サンプルサイズ(ESS)の最小値は %1$.2f < %2$1.0f で"
 "す。精度を上げるには、オプションで「Iterations」または「Adapt delta」を増やし"
 "てください。"
+
+#, fuzzy
+msgid "Regression Plot"
+msgstr "回帰の推定値"
+
+#, fuzzy
+msgid "The regression plot could not be created."
+msgstr "統合された効果量を計算できませんでした。"
+
+msgid "Subject to selection"
+msgstr ""
+
+#, fuzzy
+msgid "Unaffected"
+msgstr "効果"
+
+#, fuzzy
+msgid "R code unavailable: %1$s"
+msgstr "異質性の信頼区間は利用できません: %1$s"
+
+msgid "The module reported: %1$s"
+msgstr "モジュールからの報告: %1$s"
+
+#, fuzzy
+msgid "Publication bias (PEESE)"
+msgstr "出版バイアス(Publication Bias)"
+
+#, fuzzy
+msgid "Publication bias (PET)"
+msgstr "出版バイアス(Publication Bias)"
+
+#, fuzzy
+msgid "PET-PEESE Summary"
+msgstr "PET-PEESE"
+
+#, fuzzy
+msgid "Bias Coefficient Estimates"
+msgstr "固定効果の推定値"
+
+msgid "The coefficient is not transformed."
+msgstr ""
+
+#, fuzzy
+msgid "Results are based on the %1$s model."
+msgstr "診断はクラスタを考慮しないモデルに基づいています。"
+
+msgid ""
+"Results are based on the %1$s model: the PET adjusted effect test resulted "
+"in %2$s (threshold %3$s)."
+msgstr ""
+
+#, fuzzy
+msgid "Standard error (PET)"
+msgstr "標準誤差"
+
+#, fuzzy
+msgid "Standard error² (PEESE)"
+msgstr "標準誤差"
+
+msgid ""
+"The unaffected level is not present in the no-selection variable. Choose an "
+"available level."
+msgstr ""
+"影響を受けない水準が「選択なし」の変数にありません。存在する水準を選んでくだ"
+"さい。"
+
+msgid ""
+"No estimates are subject to selection (all estimates are at the unaffected "
+"level). The publication bias adjustment is not estimable."
+msgstr ""
+
+msgid ""
+"The publication bias adjustment is not estimable: the standard errors are "
+"constant or redundant with the moderators."
+msgstr ""
+
+msgid ""
+"PET-PEESE model selection is unavailable because the test of the PET "
+"adjusted effect could not be computed."
+msgstr ""
+
+msgid ""
+"The PET model could not be estimated because there are too few estimates "
+"(%1$i)."
+msgstr ""
+
+#, fuzzy
+msgid "The PET model could not be estimated: %1$s"
+msgstr "モデルをあてはめられませんでした: %1$s"
+
+msgid ""
+"The PET model for subgroup '%1$s' could not be estimated because there are "
+"too few estimates (%2$i)."
+msgstr ""
+
+#, fuzzy
+msgid "The PET model for subgroup '%1$s' could not be estimated: %2$s"
+msgstr "サブグループ '%1$s' のモデルが次のエラーで失敗しました: %2$s"
 
 msgid "t-statistic"
 msgstr "t統計量"
@@ -2271,7 +2406,8 @@ msgid "BIC weight"
 msgstr "BICの重み"
 
 msgid "Add at least one weight-function model in the Custom section."
-msgstr "「カスタム」のセクションで、重み関数のモデルを少なくとも1つ追加してください。"
+msgstr ""
+"「カスタム」のセクションで、重み関数のモデルを少なくとも1つ追加してください。"
 
 msgid "Model %1$i: %2$s"
 msgstr "モデル %1$i: %2$s"
@@ -2334,8 +2470,8 @@ msgid ""
 "Beta truncation requires two increasing p-value cutoffs strictly between 0 "
 "and 1."
 msgstr ""
-"ベータの切断には、0と1の間(両端を含まない)にある、増加する2つのp値の"
-"カットオフが必要です。"
+"ベータの切断には、0と1の間(両端を含まない)にある、増加する2つのp値のカットオ"
+"フが必要です。"
 
 msgid "Specify one effect-size cutoff for the truncated model."
 msgstr "切断のモデルには、効果量のカットオフを1つ指定してください。"
@@ -2452,7 +2588,8 @@ msgstr "モデルをあてはめられませんでした: %1$s"
 msgid ""
 "Profile likelihood diagnostics are not available for ordinal selection "
 "models."
-msgstr "順序制約を課した選択モデルでは、プロファイル尤度による診断は利用できません。"
+msgstr ""
+"順序制約を課した選択モデルでは、プロファイル尤度による診断は利用できません。"
 
 msgid "There are no free heterogeneity or selection parameters to profile."
 msgstr ""
@@ -2468,9 +2605,6 @@ msgstr "有限なプロファイル尤度の値が2つ未満しかありませ�
 msgid "R code unavailable until the specification is valid: %1$s"
 msgstr "指定が妥当になるまでRコードは利用できません: %1$s"
 
-msgid "The module reported: %1$s"
-msgstr "モジュールからの報告: %1$s"
-
 msgid "R Code"
 msgstr "Rコード"
 
@@ -2478,8 +2612,8 @@ msgid ""
 "Selection p-values were supplied rather than calculated from effect sizes "
 "and standard errors."
 msgstr ""
-"選択に使うp値は、効果量と標準誤差から計算したものではなく、与えられたものです"
-"。"
+"選択に使うp値は、効果量と標準誤差から計算したものではなく、与えられたもので"
+"す。"
 
 msgid ""
 "Coefficient standard errors could not be estimated. Wald tests and "
@@ -2543,13 +2677,6 @@ msgstr "モデルの結果"
 msgid "No fitted model is available for the requested selection."
 msgstr "表示するモデルとして指定したものに、あてはめたモデルがありません。"
 
-msgid ""
-"The unaffected level is not present in the no-selection variable. Choose an "
-"available level."
-msgstr ""
-"影響を受けない水準が「選択なし」の変数にありません。存在する水準を選んでくだ"
-"さい。"
-
 msgid "P-values must be finite, greater than zero, and at most one."
 msgstr "p値は有限で、0より大きく1以下である必要があります。"
 
@@ -2609,69 +2736,54 @@ msgstr "係数の要約"
 msgid "Computed Estimates Summary"
 msgstr "計算された推定値の要約"
 
+#, fuzzy
+msgid "Results are based on the WAAP model."
+msgstr "診断はクラスタを考慮しないモデルに基づいています。"
+
+#, fuzzy
+msgid "Results are based on the WLS model. %1$s"
+msgstr "診断はクラスタを考慮しないモデルに基づいています。"
+
 msgid ""
-"Cannot compute results. All entries of the correlation coefficient variable "
-"(%s) must be between -1 and 1."
+"Results are based on the WLS model: the WAAP model requires at least %1$i "
+"adequately powered estimates."
 msgstr ""
-"結果を計算できません。相関係数変数 (%s) のすべてのエントリは -1 から 1 の間で"
-"なければなりません。"
 
 msgid ""
-"Cannot compute results. All entries of the sample size variable (%s) must be "
-"greater than four."
+"Results are based on the WLS model: the WAAP model requires at least %1$i "
+"adequately powered or unaffected estimates."
 msgstr ""
-"結果を計算できません。サンプルサイズ変数 (%s) のすべてのエントリは 4 より大き"
-"い値でなければなりません。"
-
-msgid "95%% Confidence Interval"
-msgstr "95%% 信頼区間"
-
-msgid "Error: There were not enough adequately powered studies (k = %1$i)"
-msgstr "エラー: 十分な検出力のある研究がありませんでした(k = %1$i)"
-
-msgid "Note: There were %1$i adequately powered studies"
-msgstr "注: 十分に検出力のある研究が %1$i ありました"
-
-msgid "Model Tests"
-msgstr "モデル検定"
-
-msgid "Test of Effect"
-msgstr "効果量の検定"
-
-msgid "Test of Publication Bias"
-msgstr "出版バイアス(Publication Bias)の検定"
-
-msgid "Mean Estimates (%s)"
-msgstr "平均推定値(%s)"
-
-msgid "Multiplicative Heterogeneity Estimates"
-msgstr "乗法異質性の推定値"
-
-msgid "Estimated %1$s Regression"
-msgstr "推定された %1$s 回帰"
-
-msgid "Cohen's d"
-msgstr "コーエン(Cohen)のd"
-
-msgid "Fisher's z"
-msgstr "フィッシャーのz"
-
-msgid "Mean Model Estimates (%s)"
-msgstr "平均モデル推定値 (%s)"
 
 msgid ""
-"The figure could not be created since one of the estimates is not a number."
-msgstr "推定値の1つが数字ではないため、図は作成できませんでした。"
-
-msgid ""
-"WAAP was not estimated: There were only %1$i adequately powered studies "
-"(power > 80%%)."
+"The power is evaluated at the moderator-specific predicted effects of the "
+"WLS model."
 msgstr ""
-"WAAP は推定されなかった: 十分な検出力を持つ研究は %1$i のみであった(検出力"
-">80%%)。"
 
-msgid "There were %1$i adequately powered studies (power > 80%%)."
-msgstr "十分な検出力を持つ研究は %1$i あった(検出力>80%%)。"
+msgid "The power is evaluated at the pooled effect of the WLS model."
+msgstr ""
+
+#, fuzzy
+msgid "The power of the estimates could not be computed: %1$s"
+msgstr "ケースワイズ診断を計算できませんでした: %1$s"
+
+#, fuzzy
+msgid "The WAAP model failed: %1$s"
+msgstr "モジュールからの報告: %1$s"
+
+msgid ""
+"The moderators of the WAAP model are not estimable from the retained "
+"estimates."
+msgstr ""
+
+#, fuzzy
+msgid "%1$i observation was omitted due to missing values."
+msgid_plural "%1$i observations were omitted due to missing values."
+msgstr[0] "欠測値のため %1$i 件の観測値が除外されました。"
+
+#, fuzzy
+msgid "%1$s: %2$i observation was omitted due to missing values."
+msgid_plural "%1$s: %2$i observations were omitted due to missing values."
+msgstr[0] "%1$s: 欠測値のため %2$i 件の観測値が除外されました。"
 
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
@@ -2716,6 +2828,15 @@ msgstr[0] ""
 "最大ツリー深度を超えました。「最大ツリー深度」を慎重に大きくすれば解決できま"
 "す。"
 
+#, fuzzy
+msgid "The bias adjustment applies to %1$i estimate."
+msgid_plural "The bias adjustment applies to %1$i estimates."
+msgstr[0] "選択は %1$i 個の推定値に適用されます。"
+
+msgid "%1$i estimate at level '%2$s' is unaffected."
+msgid_plural "%1$i estimates at level '%2$s' are unaffected."
+msgstr[0] "水準 '%2$s' の推定値 %1$i 個は選択の影響を受けません。"
+
 msgid ""
 "The selection weight for p-value interval %1$s is fixed at zero, but the "
 "interval contains %2$i selected estimate. Use a positive weight or NA to "
@@ -2733,10 +2854,6 @@ msgid "Selection applies to %1$i estimate."
 msgid_plural "Selection applies to %1$i estimates."
 msgstr[0] "選択は %1$i 個の推定値に適用されます。"
 
-msgid "%1$i estimate at level '%2$s' is unaffected."
-msgid_plural "%1$i estimates at level '%2$s' are unaffected."
-msgstr[0] "水準 '%2$s' の推定値 %1$i 個は選択の影響を受けません。"
-
 msgid ""
 "For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. "
 "This affects %3$i selected estimate."
@@ -2746,6 +2863,79 @@ msgid_plural ""
 msgstr[0] ""
 "数値的な安定のため、metaforは選択に使うp値を [%1$s, %2$s] の範囲に切り詰めま"
 "す。これは選択の対象となる推定値 %3$i 個に影響します。"
+
+#, fuzzy
+msgid "%1$i of %2$i estimates is adequately powered (power ≥ %3$s%%)."
+msgid_plural "%1$i of %2$i estimates are adequately powered (power ≥ %3$s%%)."
+msgstr[0] "十分な検出力を持つ研究は %1$i あった(検出力>80%%)。"
+
+#, fuzzy
+msgid "%1$i estimate at level '%2$s' is unaffected and always retained."
+msgid_plural ""
+"%1$i estimates at level '%2$s' are unaffected and always retained."
+msgstr[0] "水準 '%2$s' の推定値 %1$i 個は選択の影響を受けません。"
+
+#~ msgid ""
+#~ "Cannot compute results. All entries of the correlation coefficient "
+#~ "variable (%s) must be between -1 and 1."
+#~ msgstr ""
+#~ "結果を計算できません。相関係数変数 (%s) のすべてのエントリは -1 から 1 の"
+#~ "間でなければなりません。"
+
+#~ msgid ""
+#~ "Cannot compute results. All entries of the sample size variable (%s) must "
+#~ "be greater than four."
+#~ msgstr ""
+#~ "結果を計算できません。サンプルサイズ変数 (%s) のすべてのエントリは 4 より"
+#~ "大きい値でなければなりません。"
+
+#~ msgid "95%% Confidence Interval"
+#~ msgstr "95%% 信頼区間"
+
+#~ msgid "Error: There were not enough adequately powered studies (k = %1$i)"
+#~ msgstr "エラー: 十分な検出力のある研究がありませんでした(k = %1$i)"
+
+#~ msgid "Note: There were %1$i adequately powered studies"
+#~ msgstr "注: 十分に検出力のある研究が %1$i ありました"
+
+#~ msgid "Model Tests"
+#~ msgstr "モデル検定"
+
+#~ msgid "Test of Effect"
+#~ msgstr "効果量の検定"
+
+#~ msgid "Test of Publication Bias"
+#~ msgstr "出版バイアス(Publication Bias)の検定"
+
+#~ msgid "Mean Estimates (%s)"
+#~ msgstr "平均推定値(%s)"
+
+#~ msgid "Multiplicative Heterogeneity Estimates"
+#~ msgstr "乗法異質性の推定値"
+
+#~ msgid "Estimated %1$s Regression"
+#~ msgstr "推定された %1$s 回帰"
+
+#~ msgid "Cohen's d"
+#~ msgstr "コーエン(Cohen)のd"
+
+#~ msgid "Fisher's z"
+#~ msgstr "フィッシャーのz"
+
+#~ msgid "Mean Model Estimates (%s)"
+#~ msgstr "平均モデル推定値 (%s)"
+
+#~ msgid ""
+#~ "The figure could not be created since one of the estimates is not a "
+#~ "number."
+#~ msgstr "推定値の1つが数字ではないため、図は作成できませんでした。"
+
+#~ msgid ""
+#~ "WAAP was not estimated: There were only %1$i adequately powered studies "
+#~ "(power > 80%%)."
+#~ msgstr ""
+#~ "WAAP は推定されなかった: 十分な検出力を持つ研究は %1$i のみであった(検出力"
+#~ ">80%%)。"
 
 #~ msgid "Weight Function (%s)"
 #~ msgstr "重み関数(%s)"
@@ -2770,9 +2960,6 @@ msgstr[0] ""
 
 #~ msgid "Assuming heterogeneity"
 #~ msgstr "異質性を仮定"
-
-#~ msgid "Fixed Effects Estimates"
-#~ msgstr "固定効果の推定値"
 
 #~ msgid "Estimated Weights"
 #~ msgstr "推定ウェイト"
@@ -2881,9 +3068,6 @@ msgstr[0] ""
 
 #~ msgid "Prior Plots"
 #~ msgstr "事前分布プロット"
-
-#~ msgid "Effect"
-#~ msgstr "効果"
 
 #~ msgid "Model Preview"
 #~ msgstr "モデルプレビュー"

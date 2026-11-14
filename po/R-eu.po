@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.95.0\n"
-"POT-Creation-Date: 2026-11-07 02:33\n"
+"POT-Creation-Date: 2026-11-14 02:33\n"
 "PO-Revision-Date: 2025-12-23 10:38+0000\n"
 "Last-Translator: Jose Ramon Rueda <joseramon.rueda@ehu.eus>\n"
 "Language-Team: Basque <https://hosted.weblate.org/projects/jasp/"
@@ -418,6 +418,11 @@ msgstr ""
 "Profilaren probabilitatea ez dago eskuragarri heterogeneotasunean meta-"
 "erregresioa duten ereduetarako."
 
+msgid ""
+"Profile likelihood is not available for equal effects, fixed effects, or "
+"unrestricted weighted least squares models."
+msgstr ""
+
 msgid "Baujat Plot"
 msgstr "Baujat lursaila"
 
@@ -525,7 +530,8 @@ msgstr "Ez da eragin handiko kasurik aurkitu."
 msgid "%1$sNo influential cases found."
 msgstr "%1$sEz da eragin handiko kasurik aurkitu."
 
-msgid "Diagnostics are based on the the subgroup models."
+#, fuzzy
+msgid "Diagnostics are based on the subgroup models."
 msgstr "Diagnostikoak azpitaldeen ereduetan oinarritzen dira."
 
 msgid "Diagnostics are based on the non-clustered model."
@@ -706,6 +712,9 @@ msgstr ""
 msgid "Residual heterogeneity"
 msgstr "Hondar-heterogeneotasuna"
 
+msgid "not available"
+msgstr ""
+
 #, fuzzy
 msgid "Moderation (effect size): %1$s"
 msgstr "Moderazioa (Efektuaren Tamaina): %1$s"
@@ -737,6 +746,9 @@ msgstr ""
 msgid ""
 "Knapp-Hartung inference is based on very few residual degrees of freedom; "
 "results can be sensitive and should be interpreted cautiously."
+msgstr ""
+
+msgid "There are too few estimates to estimate the model."
 msgstr ""
 
 msgid ""
@@ -956,6 +968,10 @@ msgstr "AICc"
 msgid "R²"
 msgstr "R²"
 
+#, fuzzy
+msgid "Fixed effects tested using cluster-robust t-distribution."
+msgstr "Efektu finkoak t-banaketa erabiliz probatu dira."
+
 msgid "Fixed effects tested using z-distribution."
 msgstr "Z-banaketa erabiliz probatutako efektu finkoak."
 
@@ -977,11 +993,9 @@ msgstr "efektu metatua"
 msgid "adjusted effect"
 msgstr "efektu doitua"
 
-msgid "%1$i observations were ommited due to missing values."
-msgstr "%1$i behaketa ezabatu dira balio falta direlako."
-
-msgid "%1$s: %2$i observations were ommited due to missing values."
-msgstr "%1$s: %2$i behaketa ezabatu dira balio falta direla eta."
+#, fuzzy
+msgid "Subgroup %1$s"
+msgstr "%1$s azpitaldea:"
 
 msgid "%1$s: %2$s"
 msgstr "%1$s: %2$s"
@@ -1229,7 +1243,8 @@ msgstr "Ekuazio koadratiko arrazionala"
 msgid "Spherical"
 msgstr "Esferikoa"
 
-msgid "Random Effects / Model Stucture Summary"
+#, fuzzy
+msgid "Random Effects / Model Structure Summary"
 msgstr "Ausazko efektuak / Ereduaren egituraren laburpena"
 
 msgid "Simple / Nested Summary"
@@ -1310,6 +1325,11 @@ msgstr "Estimazioak 𝜏²"
 
 msgid "Estimates ρ"
 msgstr "ρ estimazioak"
+
+msgid ""
+"Confidence intervals are not available for variance components fixed to zero "
+"(e.g., levels with a single estimate)."
+msgstr ""
 
 msgid "ρ"
 msgstr "ρ"
@@ -1647,6 +1667,22 @@ msgstr "Efektu Finkoaren Estimazioa"
 msgid "Intercept estimate"
 msgstr "Interzepzioaren Estimazioa"
 
+#, fuzzy
+msgid "Unadjusted fixed effect"
+msgstr "efektu doitua"
+
+#, fuzzy
+msgid "Unadjusted random effects"
+msgstr "efektu doitua"
+
+#, fuzzy
+msgid "The unadjusted fixed effect estimate could not be calculated."
+msgstr "Efektu finkoaren efektuaren tamaina ezin izan da kalkulatu."
+
+#, fuzzy
+msgid "The unadjusted random effects estimate could not be calculated."
+msgstr "Ezin izan da efektu metatuaren tamaina kalkulatu."
+
 msgid ""
 "No rows to display. Check that the visualization type mapping assigns at "
 "least one level to 'Study' or 'Estimate'."
@@ -1970,6 +2006,99 @@ msgstr ""
 "Estimazio-zehaztasun txikia -- Lagin-tamaina eraginkor txikiena (ESS) %1$.2f "
 "< %2$1.0f da. Zehaztasuna handitzeko, handitu 'Iterazioen' edo 'Egokitu "
 "delta' Aukerak atalean."
+
+#, fuzzy
+msgid "Regression Plot"
+msgstr "Erregresio-estimazioak"
+
+#, fuzzy
+msgid "The regression plot could not be created."
+msgstr "Ezin izan da efektu metatuaren tamaina kalkulatu."
+
+msgid "Subject to selection"
+msgstr ""
+
+msgid "Unaffected"
+msgstr ""
+
+msgid "R code unavailable: %1$s"
+msgstr ""
+
+msgid "The module reported: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid "Publication bias (PEESE)"
+msgstr "Argitalpen-alborapena"
+
+#, fuzzy
+msgid "Publication bias (PET)"
+msgstr "Argitalpen-alborapena"
+
+#, fuzzy
+msgid "PET-PEESE Summary"
+msgstr "PET-PEESE"
+
+#, fuzzy
+msgid "Bias Coefficient Estimates"
+msgstr "Efektu Finkoen Estimazioak"
+
+msgid "The coefficient is not transformed."
+msgstr ""
+
+#, fuzzy
+msgid "Results are based on the %1$s model."
+msgstr "Diagnostikoak multzokatutako eredu ez-multzoan oinarritzen dira."
+
+msgid ""
+"Results are based on the %1$s model: the PET adjusted effect test resulted "
+"in %2$s (threshold %3$s)."
+msgstr ""
+
+#, fuzzy
+msgid "Standard error (PET)"
+msgstr "Errore estandarra"
+
+#, fuzzy
+msgid "Standard error² (PEESE)"
+msgstr "Errore estandarra"
+
+msgid ""
+"The unaffected level is not present in the no-selection variable. Choose an "
+"available level."
+msgstr ""
+
+msgid ""
+"No estimates are subject to selection (all estimates are at the unaffected "
+"level). The publication bias adjustment is not estimable."
+msgstr ""
+
+msgid ""
+"The publication bias adjustment is not estimable: the standard errors are "
+"constant or redundant with the moderators."
+msgstr ""
+
+msgid ""
+"PET-PEESE model selection is unavailable because the test of the PET "
+"adjusted effect could not be computed."
+msgstr ""
+
+msgid ""
+"The PET model could not be estimated because there are too few estimates "
+"(%1$i)."
+msgstr ""
+
+msgid "The PET model could not be estimated: %1$s"
+msgstr ""
+
+msgid ""
+"The PET model for subgroup '%1$s' could not be estimated because there are "
+"too few estimates (%2$i)."
+msgstr ""
+
+#, fuzzy
+msgid "The PET model for subgroup '%1$s' could not be estimated: %2$s"
+msgstr "'%1$s' azpitalderako ereduak huts egin du errore honekin: %2$s"
 
 msgid "t-statistic"
 msgstr "t-estatistika"
@@ -2522,9 +2651,6 @@ msgstr ""
 msgid "R code unavailable until the specification is valid: %1$s"
 msgstr ""
 
-msgid "The module reported: %1$s"
-msgstr ""
-
 #, fuzzy
 msgid "R Code"
 msgstr "RoBMA R kodea"
@@ -2599,11 +2725,6 @@ msgstr "Eredu probak"
 msgid "No fitted model is available for the requested selection."
 msgstr ""
 
-msgid ""
-"The unaffected level is not present in the no-selection variable. Choose an "
-"available level."
-msgstr ""
-
 msgid "P-values must be finite, greater than zero, and at most one."
 msgstr ""
 
@@ -2659,71 +2780,55 @@ msgstr "Koefizientearen laburpena"
 msgid "Computed Estimates Summary"
 msgstr "Kalkulatutako Estimazioen Laburpena"
 
-msgid ""
-"Cannot compute results. All entries of the correlation coefficient variable "
-"(%s) must be between -1 and 1."
-msgstr ""
-"Ezin dira emaitzak kalkulatu. Korrelazio-koefizientearen aldagaiaren (%s) "
-"sarrera guztiak -1 eta 1 artean egon behar dira."
+#, fuzzy
+msgid "Results are based on the WAAP model."
+msgstr "Diagnostikoak multzokatutako eredu ez-multzoan oinarritzen dira."
+
+#, fuzzy
+msgid "Results are based on the WLS model. %1$s"
+msgstr "Diagnostikoak multzokatutako eredu ez-multzoan oinarritzen dira."
 
 msgid ""
-"Cannot compute results. All entries of the sample size variable (%s) must be "
-"greater than four."
+"Results are based on the WLS model: the WAAP model requires at least %1$i "
+"adequately powered estimates."
 msgstr ""
-"Ezin dira emaitzak kalkulatu. Laginaren tamaina aldagaiaren (%s) sarrera "
-"guztiak lau baino handiagoak izan behar dira."
-
-msgid "95%% Confidence Interval"
-msgstr "%%95eko konfiantza-tartea"
-
-msgid "Error: There were not enough adequately powered studies (k = %1$i)"
-msgstr ""
-"Errorea: Ez zegoen behar adina ikerketa behar bezala indartuta (k = %1$i)"
-
-msgid "Note: There were %1$i adequately powered studies"
-msgstr "Oharra: %1$i ikerketa behar bezala indartuak izan ziren"
-
-msgid "Model Tests"
-msgstr "Eredu probak"
-
-msgid "Test of Effect"
-msgstr "Efektuaren proba"
-
-msgid "Test of Publication Bias"
-msgstr "Argitalpen-alborapenaren proba"
-
-msgid "Mean Estimates (%s)"
-msgstr "Batez besteko estimazioak (%s)"
-
-msgid "Multiplicative Heterogeneity Estimates"
-msgstr "Heterogeneotasun biderkatzailearen estimazioak"
-
-msgid "Estimated %1$s Regression"
-msgstr "%1$s-ko erregresio estimatua"
-
-msgid "Cohen's d"
-msgstr "Cohenen d"
-
-msgid "Fisher's z"
-msgstr "Fisherren z"
-
-msgid "Mean Model Estimates (%s)"
-msgstr "Batez besteko ereduaren estimazioak (%s)"
 
 msgid ""
-"The figure could not be created since one of the estimates is not a number."
-msgstr "Ezin izan da zifra sortu, kalkuluetako bat ez baita zenbaki bat."
+"Results are based on the WLS model: the WAAP model requires at least %1$i "
+"adequately powered or unaffected estimates."
+msgstr ""
 
 msgid ""
-"WAAP was not estimated: There were only %1$i adequately powered studies "
-"(power > 80%%)."
+"The power is evaluated at the moderator-specific predicted effects of the "
+"WLS model."
 msgstr ""
-"WAAP ez zen kalkulatu: %1$i ikerketa behar bezala potentziatu baino ez "
-"zeuden (potentzia > %%80)."
 
-msgid "There were %1$i adequately powered studies (power > 80%%)."
+msgid "The power is evaluated at the pooled effect of the WLS model."
 msgstr ""
-"Behar bezalako potentzia zuten %1$i ikerketa zeuden (potentzia > %%80)."
+
+#, fuzzy
+msgid "The power of the estimates could not be computed: %1$s"
+msgstr "Ezin izan da efektu metatuaren tamaina kalkulatu."
+
+msgid "The WAAP model failed: %1$s"
+msgstr ""
+
+msgid ""
+"The moderators of the WAAP model are not estimable from the retained "
+"estimates."
+msgstr ""
+
+#, fuzzy
+msgid "%1$i observation was omitted due to missing values."
+msgid_plural "%1$i observations were omitted due to missing values."
+msgstr[0] "%1$i behaketa ezabatu dira balio falta direlako."
+msgstr[1] "%1$i behaketa ezabatu dira balio falta direlako."
+
+#, fuzzy
+msgid "%1$s: %2$i observation was omitted due to missing values."
+msgid_plural "%1$s: %2$i observations were omitted due to missing values."
+msgstr[0] "%1$s: %2$i behaketa ezabatu dira balio falta direla eta."
+msgstr[1] "%1$s: %2$i behaketa ezabatu dira balio falta direla eta."
 
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
@@ -2763,6 +2868,16 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
+msgid "The bias adjustment applies to %1$i estimate."
+msgid_plural "The bias adjustment applies to %1$i estimates."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "%1$i estimate at level '%2$s' is unaffected."
+msgid_plural "%1$i estimates at level '%2$s' are unaffected."
+msgstr[0] ""
+msgstr[1] ""
+
 msgid ""
 "The selection weight for p-value interval %1$s is fixed at zero, but the "
 "interval contains %2$i selected estimate. Use a positive weight or NA to "
@@ -2779,11 +2894,6 @@ msgid_plural "Selection applies to %1$i estimates."
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "%1$i estimate at level '%2$s' is unaffected."
-msgid_plural "%1$i estimates at level '%2$s' are unaffected."
-msgstr[0] ""
-msgstr[1] ""
-
 msgid ""
 "For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. "
 "This affects %3$i selected estimate."
@@ -2792,6 +2902,83 @@ msgid_plural ""
 "This affects %3$i selected estimates."
 msgstr[0] ""
 msgstr[1] ""
+
+#, fuzzy
+msgid "%1$i of %2$i estimates is adequately powered (power ≥ %3$s%%)."
+msgid_plural "%1$i of %2$i estimates are adequately powered (power ≥ %3$s%%)."
+msgstr[0] ""
+"Behar bezalako potentzia zuten %1$i ikerketa zeuden (potentzia > %%80)."
+msgstr[1] ""
+"Behar bezalako potentzia zuten %1$i ikerketa zeuden (potentzia > %%80)."
+
+msgid "%1$i estimate at level '%2$s' is unaffected and always retained."
+msgid_plural ""
+"%1$i estimates at level '%2$s' are unaffected and always retained."
+msgstr[0] ""
+msgstr[1] ""
+
+#~ msgid ""
+#~ "Cannot compute results. All entries of the correlation coefficient "
+#~ "variable (%s) must be between -1 and 1."
+#~ msgstr ""
+#~ "Ezin dira emaitzak kalkulatu. Korrelazio-koefizientearen aldagaiaren (%s) "
+#~ "sarrera guztiak -1 eta 1 artean egon behar dira."
+
+#~ msgid ""
+#~ "Cannot compute results. All entries of the sample size variable (%s) must "
+#~ "be greater than four."
+#~ msgstr ""
+#~ "Ezin dira emaitzak kalkulatu. Laginaren tamaina aldagaiaren (%s) sarrera "
+#~ "guztiak lau baino handiagoak izan behar dira."
+
+#~ msgid "95%% Confidence Interval"
+#~ msgstr "%%95eko konfiantza-tartea"
+
+#~ msgid "Error: There were not enough adequately powered studies (k = %1$i)"
+#~ msgstr ""
+#~ "Errorea: Ez zegoen behar adina ikerketa behar bezala indartuta (k = %1$i)"
+
+#~ msgid "Note: There were %1$i adequately powered studies"
+#~ msgstr "Oharra: %1$i ikerketa behar bezala indartuak izan ziren"
+
+#~ msgid "Model Tests"
+#~ msgstr "Eredu probak"
+
+#~ msgid "Test of Effect"
+#~ msgstr "Efektuaren proba"
+
+#~ msgid "Test of Publication Bias"
+#~ msgstr "Argitalpen-alborapenaren proba"
+
+#~ msgid "Mean Estimates (%s)"
+#~ msgstr "Batez besteko estimazioak (%s)"
+
+#~ msgid "Multiplicative Heterogeneity Estimates"
+#~ msgstr "Heterogeneotasun biderkatzailearen estimazioak"
+
+#~ msgid "Estimated %1$s Regression"
+#~ msgstr "%1$s-ko erregresio estimatua"
+
+#~ msgid "Cohen's d"
+#~ msgstr "Cohenen d"
+
+#~ msgid "Fisher's z"
+#~ msgstr "Fisherren z"
+
+#~ msgid "Mean Model Estimates (%s)"
+#~ msgstr "Batez besteko ereduaren estimazioak (%s)"
+
+#~ msgid ""
+#~ "The figure could not be created since one of the estimates is not a "
+#~ "number."
+#~ msgstr "Ezin izan da zifra sortu, kalkuluetako bat ez baita zenbaki bat."
+
+#~ msgid ""
+#~ "WAAP was not estimated: There were only %1$i adequately powered studies "
+#~ "(power > 80%%)."
+#~ msgstr ""
+#~ "WAAP ez zen kalkulatu: %1$i ikerketa behar bezala potentziatu baino ez "
+#~ "zeuden (potentzia > %%80)."
 
 #~ msgid "Publication Probability"
 #~ msgstr "Argitalpen Probabilitatea"
@@ -2813,9 +3000,6 @@ msgstr[1] ""
 
 #~ msgid "Assuming heterogeneity"
 #~ msgstr "Heterogeneotasuna suposatuz"
-
-#~ msgid "Fixed Effects Estimates"
-#~ msgstr "Efektu Finkoen Estimazioak"
 
 #~ msgid "Estimated Weights"
 #~ msgstr "Pisu estimatuak"

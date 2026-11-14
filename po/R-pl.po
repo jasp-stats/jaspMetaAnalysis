@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.17.0\n"
-"POT-Creation-Date: 2026-11-07 02:33\n"
+"POT-Creation-Date: 2026-11-14 02:33\n"
 "PO-Revision-Date: 2025-08-07 23:01+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
@@ -382,6 +382,11 @@ msgid ""
 "on heterogeneity."
 msgstr ""
 
+msgid ""
+"Profile likelihood is not available for equal effects, fixed effects, or "
+"unrestricted weighted least squares models."
+msgstr ""
+
 msgid "Baujat Plot"
 msgstr ""
 
@@ -488,7 +493,7 @@ msgstr "Nie znaleziono obserwacji kluczowych."
 msgid "%1$sNo influential cases found."
 msgstr ""
 
-msgid "Diagnostics are based on the the subgroup models."
+msgid "Diagnostics are based on the subgroup models."
 msgstr ""
 
 msgid "Diagnostics are based on the non-clustered model."
@@ -650,6 +655,9 @@ msgstr ""
 msgid "Residual heterogeneity"
 msgstr "Heterogeniczność"
 
+msgid "not available"
+msgstr ""
+
 #, fuzzy
 msgid "Moderation (effect size): %1$s"
 msgstr "Umiarkowany"
@@ -681,6 +689,9 @@ msgstr ""
 msgid ""
 "Knapp-Hartung inference is based on very few residual degrees of freedom; "
 "results can be sensitive and should be interpreted cautiously."
+msgstr ""
+
+msgid "There are too few estimates to estimate the model."
 msgstr ""
 
 msgid ""
@@ -887,6 +898,9 @@ msgstr "AICc"
 msgid "R²"
 msgstr "R²"
 
+msgid "Fixed effects tested using cluster-robust t-distribution."
+msgstr ""
+
 msgid "Fixed effects tested using z-distribution."
 msgstr ""
 
@@ -910,11 +924,9 @@ msgstr "Wielkość efektu (%s)"
 msgid "adjusted effect"
 msgstr "Efekty stałe"
 
-msgid "%1$i observations were ommited due to missing values."
-msgstr ""
-
-msgid "%1$s: %2$i observations were ommited due to missing values."
-msgstr ""
+#, fuzzy
+msgid "Subgroup %1$s"
+msgstr "BF%1$s%2$s"
 
 #, fuzzy
 msgid "%1$s: %2$s"
@@ -1146,7 +1158,7 @@ msgstr ""
 msgid "Spherical"
 msgstr ""
 
-msgid "Random Effects / Model Stucture Summary"
+msgid "Random Effects / Model Structure Summary"
 msgstr ""
 
 msgid "Simple / Nested Summary"
@@ -1231,6 +1243,11 @@ msgstr "Oszacowania"
 #, fuzzy
 msgid "Estimates ρ"
 msgstr "Oszacowania"
+
+msgid ""
+"Confidence intervals are not available for variance components fixed to zero "
+"(e.g., levels with a single estimate)."
+msgstr ""
 
 msgid "ρ"
 msgstr ""
@@ -1512,6 +1529,20 @@ msgstr "Oszacowania efektów stałych"
 #, fuzzy
 msgid "Intercept estimate"
 msgstr "Oszacowanie"
+
+#, fuzzy
+msgid "Unadjusted fixed effect"
+msgstr "Efekty stałe"
+
+#, fuzzy
+msgid "Unadjusted random effects"
+msgstr "Efekty stałe"
+
+msgid "The unadjusted fixed effect estimate could not be calculated."
+msgstr ""
+
+msgid "The unadjusted random effects estimate could not be calculated."
+msgstr ""
 
 msgid ""
 "No rows to display. Check that the visualization type mapping assigns at "
@@ -1830,6 +1861,94 @@ msgstr ""
 "Niska dokładność estymacji — najmniejsza efektywna liczba prób (ESS) wynosi "
 "%1$.2f < %2$1.0f. Aby zwiększyć dokładność, należy zwiększyć liczbę "
 "„Iteracji” lub wartość „Adapt delta” w sekcji Opcje."
+
+#, fuzzy
+msgid "Regression Plot"
+msgstr "Wykres leśny"
+
+msgid "The regression plot could not be created."
+msgstr ""
+
+msgid "Subject to selection"
+msgstr ""
+
+#, fuzzy
+msgid "Unaffected"
+msgstr "Efekt"
+
+msgid "R code unavailable: %1$s"
+msgstr ""
+
+msgid "The module reported: %1$s"
+msgstr ""
+
+msgid "Publication bias (PEESE)"
+msgstr ""
+
+msgid "Publication bias (PET)"
+msgstr ""
+
+msgid "PET-PEESE Summary"
+msgstr ""
+
+#, fuzzy
+msgid "Bias Coefficient Estimates"
+msgstr "Oszacowania efektów stałych"
+
+msgid "The coefficient is not transformed."
+msgstr ""
+
+msgid "Results are based on the %1$s model."
+msgstr ""
+
+msgid ""
+"Results are based on the %1$s model: the PET adjusted effect test resulted "
+"in %2$s (threshold %3$s)."
+msgstr ""
+
+#, fuzzy
+msgid "Standard error (PET)"
+msgstr "Błąd standardowy"
+
+#, fuzzy
+msgid "Standard error² (PEESE)"
+msgstr "Błąd standardowy"
+
+msgid ""
+"The unaffected level is not present in the no-selection variable. Choose an "
+"available level."
+msgstr ""
+
+msgid ""
+"No estimates are subject to selection (all estimates are at the unaffected "
+"level). The publication bias adjustment is not estimable."
+msgstr ""
+
+msgid ""
+"The publication bias adjustment is not estimable: the standard errors are "
+"constant or redundant with the moderators."
+msgstr ""
+
+msgid ""
+"PET-PEESE model selection is unavailable because the test of the PET "
+"adjusted effect could not be computed."
+msgstr ""
+
+msgid ""
+"The PET model could not be estimated because there are too few estimates "
+"(%1$i)."
+msgstr ""
+
+msgid "The PET model could not be estimated: %1$s"
+msgstr ""
+
+msgid ""
+"The PET model for subgroup '%1$s' could not be estimated because there are "
+"too few estimates (%2$i)."
+msgstr ""
+
+msgid "The PET model for subgroup '%1$s' could not be estimated: %2$s"
+msgstr ""
 
 msgid "t-statistic"
 msgstr ""
@@ -2358,9 +2477,6 @@ msgstr ""
 msgid "R code unavailable until the specification is valid: %1$s"
 msgstr ""
 
-msgid "The module reported: %1$s"
-msgstr ""
-
 msgid "R Code"
 msgstr ""
 
@@ -2433,11 +2549,6 @@ msgstr "Miary dopasowania"
 msgid "No fitted model is available for the requested selection."
 msgstr ""
 
-msgid ""
-"The unaffected level is not present in the no-selection variable. Choose an "
-"available level."
-msgstr ""
-
 msgid "P-values must be finite, greater than zero, and at most one."
 msgstr ""
 
@@ -2498,63 +2609,54 @@ msgstr "Współczyniki"
 msgid "Computed Estimates Summary"
 msgstr "Oszacowanie"
 
-msgid ""
-"Cannot compute results. All entries of the correlation coefficient variable "
-"(%s) must be between -1 and 1."
+msgid "Results are based on the WAAP model."
+msgstr ""
+
+msgid "Results are based on the WLS model. %1$s"
 msgstr ""
 
 msgid ""
-"Cannot compute results. All entries of the sample size variable (%s) must be "
-"greater than four."
-msgstr ""
-
-msgid "95%% Confidence Interval"
-msgstr "95%% przedział ufności"
-
-msgid "Error: There were not enough adequately powered studies (k = %1$i)"
-msgstr ""
-
-msgid "Note: There were %1$i adequately powered studies"
-msgstr ""
-
-msgid "Model Tests"
-msgstr ""
-
-msgid "Test of Effect"
-msgstr ""
-
-msgid "Test of Publication Bias"
-msgstr ""
-
-msgid "Mean Estimates (%s)"
-msgstr ""
-
-msgid "Multiplicative Heterogeneity Estimates"
-msgstr ""
-
-msgid "Estimated %1$s Regression"
-msgstr ""
-
-msgid "Cohen's d"
-msgstr "d Cohena"
-
-msgid "Fisher's z"
-msgstr ""
-
-msgid "Mean Model Estimates (%s)"
+"Results are based on the WLS model: the WAAP model requires at least %1$i "
+"adequately powered estimates."
 msgstr ""
 
 msgid ""
-"The figure could not be created since one of the estimates is not a number."
+"Results are based on the WLS model: the WAAP model requires at least %1$i "
+"adequately powered or unaffected estimates."
 msgstr ""
 
 msgid ""
-"WAAP was not estimated: There were only %1$i adequately powered studies "
-"(power > 80%%)."
+"The power is evaluated at the moderator-specific predicted effects of the "
+"WLS model."
 msgstr ""
 
-msgid "There were %1$i adequately powered studies (power > 80%%)."
+msgid "The power is evaluated at the pooled effect of the WLS model."
 msgstr ""
+
+msgid "The power of the estimates could not be computed: %1$s"
+msgstr ""
+
+msgid "The WAAP model failed: %1$s"
+msgstr ""
+
+msgid ""
+"The moderators of the WAAP model are not estimable from the retained "
+"estimates."
+msgstr ""
+
+#, fuzzy
+msgid "%1$i observation was omitted due to missing values."
+msgid_plural "%1$i observations were omitted due to missing values."
+msgstr[0] "Usunięto %i obserwację z brakami danych."
+msgstr[1] "Usunięto %i obserwacje z brakami danych.."
+msgstr[2] "Usunięto %i obserwacji z brakami danych."
+
+#, fuzzy
+msgid "%1$s: %2$i observation was omitted due to missing values."
+msgid_plural "%1$s: %2$i observations were omitted due to missing values."
+msgstr[0] "Usunięto %i obserwację z brakami danych."
+msgstr[1] "Usunięto %i obserwacje z brakami danych.."
+msgstr[2] "Usunięto %i obserwacji z brakami danych."
 
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
@@ -2628,6 +2730,18 @@ msgstr[2] ""
 "przekroczyło maksymalną głębokość drzewa. Problem ten można rozwiązać "
 "poprzez ostrożnee zwiększanie wartości „Maksymalna głębokość drzewa”."
 
+msgid "The bias adjustment applies to %1$i estimate."
+msgid_plural "The bias adjustment applies to %1$i estimates."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "%1$i estimate at level '%2$s' is unaffected."
+msgid_plural "%1$i estimates at level '%2$s' are unaffected."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 msgid ""
 "The selection weight for p-value interval %1$s is fixed at zero, but the "
 "interval contains %2$i selected estimate. Use a positive weight or NA to "
@@ -2646,12 +2760,6 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-msgid "%1$i estimate at level '%2$s' is unaffected."
-msgid_plural "%1$i estimates at level '%2$s' are unaffected."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
 msgid ""
 "For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. "
 "This affects %3$i selected estimate."
@@ -2662,14 +2770,30 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
+msgid "%1$i of %2$i estimates is adequately powered (power ≥ %3$s%%)."
+msgid_plural "%1$i of %2$i estimates are adequately powered (power ≥ %3$s%%)."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "%1$i estimate at level '%2$s' is unaffected and always retained."
+msgid_plural ""
+"%1$i estimates at level '%2$s' are unaffected and always retained."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#~ msgid "95%% Confidence Interval"
+#~ msgstr "95%% przedział ufności"
+
+#~ msgid "Cohen's d"
+#~ msgstr "d Cohena"
+
 #~ msgid "Note:"
 #~ msgstr "Uwaga:"
 
 #~ msgid "ChiSq"
 #~ msgstr "Chi-kwadrat"
-
-#~ msgid "Fixed Effects Estimates"
-#~ msgstr "Oszacowania efektów stałych"
 
 #~ msgid "Frequency"
 #~ msgstr "Częstości"
@@ -2677,9 +2801,6 @@ msgstr[2] ""
 #, fuzzy
 #~ msgid "Additional Fit Measures"
 #~ msgstr "Miary dopasowania"
-
-#~ msgid "Effect"
-#~ msgstr "Efekt"
 
 #~ msgid "Effect size (%s)"
 #~ msgstr "Wielkość efektu (%s)"

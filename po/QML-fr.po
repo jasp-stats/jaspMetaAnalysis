@@ -265,18 +265,6 @@ msgctxt "MultilevelMetaAnalysis|"
 msgid "Profile Random Effects Parameters (takes time)"
 msgstr "Paramètres profils des effets aléatoires (long)"
 
-msgctxt "PetPeese|"
-msgid "Effect sizes & SE"
-msgstr "Tailles d'effet et erreur standard"
-
-msgctxt "PetPeese|"
-msgid "Correlations & N"
-msgstr "Corrélations et N"
-
-msgctxt "PetPeese|"
-msgid "Correlation"
-msgstr "Corrélation"
-
 #, fuzzy
 msgctxt "PetPeese|"
 msgid "Effect Size"
@@ -286,43 +274,6 @@ msgstr "Taille d'Effet"
 msgctxt "PetPeese|"
 msgid "Effect Size Standard Error"
 msgstr "Erreur Standard de la Taille d'Effet"
-
-msgctxt "PetPeese|"
-msgid "Transform correlations to"
-msgstr "Transformer les corrélations en"
-
-msgctxt "PetPeese|"
-msgid "Fisher's z"
-msgstr "z de Fisher"
-
-msgctxt "PetPeese|"
-msgid "Cohen's d"
-msgstr "d de Cohen"
-
-msgctxt "PetPeese|"
-msgid "Inference"
-msgstr "Inférence"
-
-msgctxt "PetPeese|"
-msgid "Multiplicative heterogeneity estimates"
-msgstr "Estimations d'hétérogénéité multiplicative"
-
-#, fuzzy
-msgctxt "PetPeese|"
-msgid "Plots"
-msgstr "Tracés"
-
-msgctxt "PetPeese|"
-msgid "PET"
-msgstr "PET"
-
-msgctxt "PetPeese|"
-msgid "PEESE"
-msgstr "PEESE"
-
-msgctxt "PetPeese|"
-msgid "Mean model estimates"
-msgstr "Estimations moyennes du modèle"
 
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "Advanced"
@@ -936,18 +887,6 @@ msgctxt "SelectionModels|"
 msgid "Negative"
 msgstr "Négative"
 
-msgctxt "WaapWls|"
-msgid "Effect sizes & SE"
-msgstr "Tailles d'effet et erreur standard"
-
-msgctxt "WaapWls|"
-msgid "Correlations & N"
-msgstr "Corrélations et N"
-
-msgctxt "WaapWls|"
-msgid "Correlation"
-msgstr "Corrélation"
-
 #, fuzzy
 msgctxt "WaapWls|"
 msgid "Effect Size"
@@ -957,31 +896,6 @@ msgstr "Taille d'Effet"
 msgctxt "WaapWls|"
 msgid "Effect Size Standard Error"
 msgstr "Erreur Standard de la Taille d'Effet"
-
-msgctxt "WaapWls|"
-msgid "Transform correlations to"
-msgstr "Transformer les corrélations en"
-
-msgctxt "WaapWls|"
-msgid "Fisher's z"
-msgstr "z de Fisher"
-
-msgctxt "WaapWls|"
-msgid "Cohen's d"
-msgstr "d de Cohen"
-
-msgctxt "WaapWls|"
-msgid "Inference"
-msgstr "Inférence"
-
-#, fuzzy
-msgctxt "WaapWls|"
-msgid "Plots"
-msgstr "Tracés"
-
-msgctxt "WaapWls|"
-msgid "Mean model estimates"
-msgstr "Estimations moyennes du modèle"
 
 msgctxt "Description|"
 msgid "Penalized Meta-Analysis"
@@ -1150,17 +1064,9 @@ msgctxt "PenalizedMetaAnalysis|"
 msgid "Maximum treedepth"
 msgstr "Profondeur d'arbre maximale"
 
-msgctxt "PetPeese|"
-msgid "Measure"
-msgstr "Mesure"
-
 msgctxt "BayesianMetaAnalysisAdvanced|"
 msgid "samples:"
 msgstr "échantillons :"
-
-msgctxt "WaapWls|"
-msgid "Measure"
-msgstr "Mesure"
 
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Terms"
@@ -1181,22 +1087,6 @@ msgstr "Termes disponibles"
 msgctxt "PenalizedMetaAnalysis|"
 msgid "Selected terms"
 msgstr "Termes sélectionnés"
-
-msgctxt "PetPeese|"
-msgid "Sample size"
-msgstr "Taille d'échantillon"
-
-msgctxt "PetPeese|"
-msgid "Mean estimates table"
-msgstr "Tableau des estimations moyennes"
-
-msgctxt "PetPeese|"
-msgid "Regression estimates table"
-msgstr "Tableau des estimations de régression"
-
-msgctxt "PetPeese|"
-msgid "Regression Estimate"
-msgstr "Estimation de régression"
 
 msgctxt "PredictionPerformanceData|"
 msgid "O/E Ratio"
@@ -1241,18 +1131,6 @@ msgstr "tau : hétérogénéité (écart-type inter-études)"
 msgctxt "PredictionPerformancePriors|"
 msgid "T"
 msgstr "T"
-
-msgctxt "WaapWls|"
-msgid "Sample size"
-msgstr "Taille d'échantillon"
-
-msgctxt "WaapWls|"
-msgid "Mean estimates table"
-msgstr "Tableau des estimations moyennes"
-
-msgctxt "WaapWls|"
-msgid "Multiplicative heterogeneity estimates table"
-msgstr "Tableau des estimations d'hétérogénéité multiplicative"
 
 msgctxt "PredictionPerformanceInference|"
 msgid "Normal/Logit"
@@ -1471,16 +1349,6 @@ msgstr ""
 "Variable contenant les erreurs standard correspondant aux tailles d'effet."
 
 msgctxt "ClassicalMetaAnalysis|"
-msgid ""
-"Method for testing the model coefficients: 'z' uses standard normal "
-"approximation, 't' uses t-distribution, and 'knha' uses the Knapp and "
-"Hartung adjustment (default)."
-msgstr ""
-"Méthode de test des coefficients du modèle : « z » utilise l'approximation "
-"normale standard, « t » utilise la distribution t, et « knha » utilise "
-"l'ajustement de Knapp et Hartung (par défaut)."
-
-msgctxt "ClassicalMetaAnalysis|"
 msgid "Predictors"
 msgstr "Prédicteurs"
 
@@ -1525,14 +1393,6 @@ msgid "Fixed effect test"
 msgstr "Test de l'effet fixe"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Method for testing the model coefficients: 'z' uses standard normal "
-"approximation, 't' uses t-distribution."
-msgstr ""
-"Méthode de test des coefficients du modèle : « z » utilise l'approximation "
-"normale standard, « t » utilise la distribution t."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid "Predictors"
 msgstr "Prédicteurs"
 
@@ -1566,316 +1426,6 @@ msgid ""
 msgstr ""
 "Variable contenant les étiquettes des études. Utilisée pour étiqueter les "
 "sorties et les graphiques."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Type of random effect to include in the model."
-msgstr "Type d'effet aléatoire à inclure dans le modèle."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Simple"
-msgstr "Simple"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Nested (multilevel)"
-msgstr "Imbriqué (multiniveau)"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Random slopes"
-msgstr "Pentes aléatoires"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Structured"
-msgstr "Structuré"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Autoregressive"
-msgstr "Autorégressif"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Spatial"
-msgstr "Spatial"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Known correlation"
-msgstr "Corrélation connue"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Structure"
-msgstr "Structure"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Structure of the random effect when the type is 'Structured', "
-"'Autoregressive', or 'Spatial'. Available structures depend on the selected "
-"type."
-msgstr ""
-"Structure de l'effet aléatoire lorsque le type est « Structuré », "
-"« Autorégressif » ou « Spatial ». Les structures disponibles dépendent du "
-"type sélectionné."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Compound symmetry"
-msgstr "Symétrie composée"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Heteroscedastic compound symmetry"
-msgstr "Symétrie composée hétéroscédastique"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Unstructured "
-msgstr "Non structuré "
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Identity"
-msgstr "Identité"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Diagonal"
-msgstr "Diagonal"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "AR(1)"
-msgstr "AR(1)"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Heteroscedastic AR(1)"
-msgstr "AR(1) hétéroscédastique"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Continuous-time AR"
-msgstr "AR en temps continu"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Exponential"
-msgstr "Exponentielle"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Gaussian"
-msgstr "Gaussien"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Linear"
-msgstr "Linéaire"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Rational quadratic"
-msgstr "Quadratique rationnelle"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Spherical"
-msgstr "Sphérique"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Specification"
-msgstr "Spécification"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Random Slope Terms"
-msgstr "Termes de pente aléatoire"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Variables to include as random slope terms in the model. Available when the "
-"random effect type is 'Random slopes'."
-msgstr ""
-"Variables à inclure comme termes de pente aléatoire dans le modèle. "
-"Disponible lorsque le type d'effet aléatoire est « Pentes aléatoires »."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Factor Levels"
-msgstr "Niveaux de facteur"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Variable indicating the factor levels ('Inner Term') for the structured "
-"random effect. Available when the random effect type is 'Structured'."
-msgstr ""
-"Variable indiquant les niveaux de facteur (« Terme interne ») pour l'effet "
-"aléatoire structuré. Disponible lorsque le type d'effet aléatoire est "
-"« Structuré »."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Level 1"
-msgstr "Niveau 1"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Level 2"
-msgstr "Niveau 2"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Level 3"
-msgstr "Niveau 3"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Level 4"
-msgstr "Niveau 4"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Level 5"
-msgstr "Niveau 5"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Time"
-msgstr "Temps"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Variable indicating time points for an autoregressive random effects "
-"structure. Available when the random effect type is 'Autoregressive'."
-msgstr ""
-"Variable indiquant les moments temporels pour une structure d'effets "
-"aléatoires autorégressive. Disponible lorsque le type d'effet aléatoire est "
-"« Autorégressif »."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Spatial Coordinates"
-msgstr "Coordonnées spatiales"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Variables representing spatial coordinates for a spatial random effects "
-"structure. Available when the random effect type is 'Spatial' and the "
-"distance metric is not 'Great-circle' or prespecified in a file."
-msgstr ""
-"Variables représentant les coordonnées spatiales pour une structure d'effets "
-"aléatoires spatiale. Disponible lorsque le type d'effet aléatoire est "
-"« Spatial » et que la métrique de distance n'est pas « Grand cercle » ou "
-"prédéfinie dans un fichier."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Longitude"
-msgstr "Longitude"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Variable representing longitude (in decimal degrees, with minus signs for "
-"West) for a spatial random effects structure using the 'Great-circle' "
-"distance metric. Available when the random effect type is 'Spatial' and the "
-"distance metric is 'Great-circle'."
-msgstr ""
-"Variable représentant la longitude (en degrés décimaux, avec des signes "
-"négatifs pour l'Ouest) pour une structure d'effets aléatoires spatiale "
-"utilisant la métrique de distance « Grand cercle ». Disponible lorsque le "
-"type d'effet aléatoire est « Spatial » et que la métrique de distance est "
-"« Grand cercle »."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Latitude"
-msgstr "Latitude"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Variable representing latitude (in decimal degrees, with minus signs for "
-"South) for a spatial random effects structure using the 'Great-circle' "
-"distance metric. Available when the random effect type is 'Spatial' and the "
-"distance metric is 'Great-circle'."
-msgstr ""
-"Variable représentant la latitude (en degrés décimaux, avec des signes "
-"négatifs pour le Sud) pour une structure d'effets aléatoires spatiale "
-"utilisant la métrique de distance « Grand cercle ». Disponible lorsque le "
-"type d'effet aléatoire est « Spatial » et que la métrique de distance est "
-"« Grand cercle »."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Location Identifier"
-msgstr "Identifiant du lieu"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Variable identifying locations when loading distances matrix from a file for "
-"a spatial random effects structure. The location corresponds to the row and "
-"column names of the distance matrix. The names cannot start with a number."
-msgstr ""
-"Variable identifiant les lieux lors du chargement d'une matrice de distances "
-"depuis un fichier pour une structure d'effets aléatoires spatiale. Le lieu "
-"correspond aux noms des lignes et des colonnes de la matrice de distances. "
-"Les noms ne peuvent pas commencer par un chiffre."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Grouping Factor"
-msgstr "Facteur de groupement"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Grouping variable specifying which observations share the same random effect "
-"('Outer Term'). Available for random effect types other than 'Nested "
-"(Multilevel)'. The 'Grouping Factor' is not required for 'Spatial' Random "
-"Effects."
-msgstr ""
-"Variable de groupement spécifiant quelles observations partagent le même "
-"effet aléatoire (« Terme externe »). Disponible pour les types d'effets "
-"aléatoires autres que « Imbriqué (multiniveau) ». Le « Facteur de "
-"groupement » n'est pas requis pour les effets aléatoires « Spatial »."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Distance metric"
-msgstr "Métrique de distance"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Distance metric used to calculate distances in a spatial random effects "
-"structure. Available when the random effect type is 'Spatial'."
-msgstr ""
-"Métrique de distance utilisée pour calculer les distances dans une structure "
-"d'effets aléatoires spatiale. Disponible lorsque le type d'effet aléatoire "
-"est « Spatial »."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Euclidean"
-msgstr "Euclidienne"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Manhattan"
-msgstr "Manhattan"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Maximum"
-msgstr "Maximum"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Great-circle"
-msgstr "Grand cercle"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Load from file"
-msgstr "Charger depuis un fichier"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Distance matrix file"
-msgstr "Fichier de matrice de distances"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"CSV file containing the distance matrix for the spatial random effects "
-"structure. The first row and the first column of the file must contain names "
-"that map the matrix entries to the 'Location Identifier' (the names cannot "
-"start with a number). Available when the random effect type is 'Spatial' and "
-"the distance metric is loaded from a file."
-msgstr ""
-"Fichier CSV contenant la matrice de distances pour la structure d'effets "
-"aléatoires spatiale. La première ligne et la première colonne du fichier "
-"doivent contenir des noms qui associent les entrées de la matrice à "
-"l'« Identifiant du lieu » (les noms ne peuvent pas commencer par un "
-"chiffre). Disponible lorsque le type d'effet aléatoire est « Spatial » et "
-"que la métrique de distance est chargée depuis un fichier."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Correlation matrix file"
-msgstr "Fichier de matrice de corrélation"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"CSV file containing the known correlation matrix for the random effects "
-"structure. The first row and the first column of the file must contain names "
-"that map the matrix entries to the 'Grouping Factor' (the names cannot start "
-"with a number). Available when the random effect type is 'Known correlation'."
-msgstr ""
-"Fichier CSV contenant la matrice de corrélation connue pour la structure "
-"d'effets aléatoires. La première ligne et la première colonne du fichier "
-"doivent contenir des noms qui associent les entrées de la matrice au "
-"« Facteur de groupement » (les noms ne peuvent pas commencer par un "
-"chiffre). Disponible lorsque le type d'effet aléatoire est « Corrélation "
-"connue »."
 
 #, qt-format
 msgctxt "EffectSizeComputation|"
@@ -2965,14 +2515,6 @@ msgid "Weighted estimation"
 msgstr "Estimation pondérée"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid ""
-"Perform weighted estimation using inverse-variance weights. Uncheck for "
-"unweighted estimation."
-msgstr ""
-"Effectuer une estimation pondérée à l'aide des poids d'inverse de la "
-"variance. Décocher pour une estimation non pondérée."
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Clustering"
 msgstr "Regroupement"
 
@@ -2998,14 +2540,6 @@ msgid "Apply a small-sample correction to the clustered standard errors."
 msgstr ""
 "Appliquer une correction pour petits échantillons aux erreurs standard "
 "regroupées."
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid "Random Effects / Modele Structure"
-msgstr "Effets aléatoires / Structure du modèle"
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid "Use sparse matricies"
-msgstr "Utiliser des matrices creuses"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid ""
@@ -3054,13 +2588,6 @@ msgstr ""
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Weights"
 msgstr "Poids"
-
-msgctxt "ClassicalMetaAnalysisAdvanced|"
-msgid ""
-"Use custom weights for the effect sizes instead of inverse-variance weights."
-msgstr ""
-"Utiliser des poids personnalisés pour les tailles d'effet au lieu des poids "
-"d'inverse de la variance."
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Add Omibus Moderator Test"
@@ -3236,12 +2763,6 @@ msgstr ""
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Profile likelihood"
 msgstr "Vraisemblance de profil"
-
-msgctxt "ClassicalMetaAnalysisDiagnostics|"
-msgid "Include a profile likelihood plot for the heterogeneity parameter (τ²)."
-msgstr ""
-"Inclure un graphique de vraisemblance de profil pour le paramètre "
-"d'hétérogénéité (τ²)."
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid "Baujat"
@@ -3512,10 +3033,6 @@ msgstr "Inclure les intervalles de confiance dans la sortie tabulaire."
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Prediction intervals"
 msgstr "Intervalles de prédiction"
-
-msgctxt "ClassicalMetaAnalysisStatistics|"
-msgid "Include prediction intervals in the tabular output."
-msgstr "Inclure les intervalles de prédiction dans la sortie tabulaire."
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Transform effect size"
@@ -3899,28 +3416,6 @@ msgid ""
 msgstr ""
 "Définir la taille d'effet cible pour les tests fail-safe N d'Orwin et "
 "général."
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Random Effects / Model Components"
-msgstr "Effets aléatoires / Composants du modèle"
-
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid ""
-"Options for specifying the random effects components for the meta-analysis "
-"model, including the types of random effects and their associated variables. "
-"Allows modeling of complex data structures such as multilevel, multivariate, "
-"autoregressive, spatial, and other forms of dependency."
-msgstr ""
-"Options pour spécifier les composants d'effets aléatoires du modèle de méta-"
-"analyse, notamment les types d'effets aléatoires et leurs variables "
-"associées. Permet de modéliser des structures de données complexes telles "
-"que multiniveau, multivariées, autorégressives, spatiales et d'autres formes "
-"de dépendance."
-
-#, qt-format
-msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
-msgid "Component %1"
-msgstr "Composant %1"
 
 #, qt-format
 msgctxt "ClassicalMetaAnalysisAdvanced|"
@@ -4657,10 +4152,6 @@ msgstr "Inclure les intervalles de confiance des tailles d'effet estimées."
 msgctxt "BubblePlot|"
 msgid "Prediction intervals"
 msgstr "Intervalles de prédiction"
-
-msgctxt "BubblePlot|"
-msgid "Include prediction intervals of the estimated effect sizes."
-msgstr "Inclure les intervalles de prédiction des tailles d'effet estimées."
 
 msgctxt "BubblePlot|"
 msgid "Theme"
@@ -8811,14 +8302,6 @@ msgid "Predicted effects"
 msgstr "Effets prédits"
 
 msgctxt "ForestPlotStudyInformation|"
-msgid ""
-"Include predicted effect sizes in the middle section of the study-level "
-"information panel."
-msgstr ""
-"Inclure les tailles d'effet prédites dans la section centrale du panneau "
-"d'informations au niveau de l'étude."
-
-msgctxt "ForestPlotStudyInformation|"
 msgid "Study weights"
 msgstr "Poids des études"
 
@@ -10030,4 +9513,924 @@ msgid ""
 "this analysis replaces the saved results and may reset incompatible "
 "settings. To rerun the original analysis, use JASP 0.98.1 with Meta-Analysis "
 "module 0.95.5."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysis|"
+msgid ""
+"Method for testing the model coefficients: 'z' uses standard normal "
+"approximation, 't' uses t-distribution, and 'knha' uses the Knapp and "
+"Hartung adjustment (default). Clustered models use t-distribution based "
+"tests."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
+msgid ""
+"Method for testing the model coefficients: 'z' uses standard normal "
+"approximation, 't' uses t-distribution. Clustered models use t-distribution "
+"based tests."
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid ""
+"Adjust for publication bias with PET-PEESE meta-regressions fitted with "
+"metafor. PET includes the standard errors and PEESE the sampling variances "
+"as an additional moderator; the adjusted estimates correspond to a study "
+"with a standard error of zero. Moderators, subgroups, clustering, and the "
+"optional multilevel/multivariate model use the same specification as the "
+"classical meta-analyses."
+msgstr ""
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "References"
+msgstr "Références"
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "R Packages"
+msgstr "Packages R"
+
+msgctxt "PetPeese|"
+msgid "Observed effect sizes, on the scale used to fit the model."
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Standard errors corresponding to the effect sizes."
+msgstr ""
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Fixed effects test"
+msgstr "Test des effets fixes"
+
+msgctxt "PetPeese|"
+msgid ""
+"Method for testing the model coefficients: 'z' uses standard normal "
+"approximation, 't' uses t-distribution, and 'knha' uses the Knapp and "
+"Hartung adjustment (default). Unrestricted weighted least squares always "
+"uses the 'knha' test; clustered models use t-distribution based tests. The "
+"multilevel/multivariate model uses 'z' or 't' tests."
+msgstr ""
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Predictors"
+msgstr "Prédicteurs"
+
+msgctxt "PetPeese|"
+msgid ""
+"Continuous and categorical moderators. Specify interactions and the "
+"intercept in Model. The bias term (standard error or sampling variance) is "
+"always included."
+msgstr ""
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Clustering"
+msgstr "Regroupement"
+
+msgctxt "PetPeese|"
+msgid ""
+"Variable indicating clustering of effect sizes for robust variance "
+"estimation. If the variable is specified, cluster-robust tests and "
+"confidence intervals are provided, including the test used for the PET-PEESE "
+"model selection. See the 'Advanced' section for additional clustering "
+"options."
+msgstr ""
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Study Labels"
+msgstr "Étiquettes des études"
+
+msgctxt "PetPeese|"
+msgid ""
+"Labels for studies in plots. Missing labels do not exclude observations from "
+"fitting."
+msgstr ""
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Subgroup"
+msgstr "Sous-groupe"
+
+msgctxt "PetPeese|"
+msgid ""
+"Fit the models separately within each subgroup. The PET-PEESE model "
+"selection is performed separately for each subgroup."
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "No Selection"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid ""
+"Optional factor identifying estimates unaffected by publication bias. Choose "
+"the unaffected level below; the bias term is set to zero for estimates at "
+"that level, so only the remaining estimates inform the small-study effect. "
+"Both remain in the analysis."
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Unaffected Level"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid ""
+"Estimates at this level are unaffected by publication bias. The bias "
+"adjustment applies to all other levels of the assigned factor."
+msgstr ""
+
+#, fuzzy
+msgctxt "PetPeese|"
+msgid "Publication bias adjustment"
+msgstr "Ajustement du biais de publication"
+
+msgctxt "PetPeese|"
+msgid ""
+"PET adjusts for the relationship between the effect sizes and their standard "
+"errors, PEESE for the relationship with the sampling variances. PET-PEESE "
+"reports PEESE if the PET adjusted effect is significant at the PET-PEESE "
+"threshold (see 'Advanced'), and PET otherwise (Stanley & Doucouliagos, 2014)."
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid "Multilevel/multivariate"
+msgstr ""
+
+msgctxt "PetPeese|"
+msgid ""
+"Fit the PET and PEESE meta-regressions as multilevel/multivariate models "
+"(metafor's 'rma.mv' function). Specify the dependency between the effect "
+"sizes in the 'Effect Size Variance-Covariance Matrix' and 'Random Effects / "
+"Model Components' sections. The standard errors used as the bias term are "
+"the square roots of the sampling variances."
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid ""
+"Show the observed estimates as bubbles. Uncheck to show only the model-based "
+"estimates."
+msgstr ""
+
+msgctxt "BubblePlot|"
+msgid ""
+"Include prediction intervals of the estimated effect sizes. Unavailable for "
+"unrestricted weighted least squares."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisAdvanced|"
+msgid ""
+"Perform weighted estimation using inverse-variance weights. Uncheck for "
+"unweighted estimation. Unavailable for multilevel/multivariate models, which "
+"are always weighted by the inverse of the variance-covariance matrix."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisAdvanced|"
+msgid "PET-PEESE threshold"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisAdvanced|"
+msgid ""
+"Significance level of the two-sided test of the PET adjusted effect. If the "
+"test is significant, PEESE is reported; otherwise PET is reported (Stanley & "
+"Doucouliagos, 2014). Available for the conditional PET-PEESE adjustment."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisAdvanced|"
+msgid "Random Effects / Model Structure"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisAdvanced|"
+msgid "Use sparse matrices"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisAdvanced|"
+msgid ""
+"Use custom weights for the effect sizes instead of inverse-variance weights. "
+"Unavailable for PET-PEESE and WAAP-WLS estimated with unrestricted weighted "
+"least squares, which is defined by the inverse-variance weights."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisDiagnostics|"
+msgid ""
+"Include a profile likelihood plot for the heterogeneity parameter (τ²). "
+"Unavailable for equal effects, fixed effects, and unrestricted weighted "
+"least squares models."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid ""
+"Export the publication bias adjusted predicted values (i.e., at a standard "
+"error of zero) and interval bounds."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid ""
+"Export predicted values and interval bounds of the reported model. When WAAP "
+"is reported, only the retained estimates receive values."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "WAAP-WLS"
+msgstr "WAAP-WLS"
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Estimated power"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid ""
+"Export the power of each estimate to detect the effect of the WLS model (two-"
+"sided z-test, α = .05), i.e., the value compared with the power criterion. "
+"Exported for all estimates, also when WLS is reported."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid "Included in WAAP"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisExport|"
+msgid ""
+"Export an indicator of the estimates included in the WAAP model (the "
+"adequately powered and the unaffected estimates). Exported for all "
+"estimates, also when WLS is reported."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid ""
+"Method used for estimating the PET and PEESE meta-regressions. Unrestricted "
+"weighted least squares (default) corresponds to the original PET-PEESE "
+"specification with multiplicative heterogeneity (Stanley & Doucouliagos, "
+"2014); the remaining methods estimate additive heterogeneity. The multilevel/"
+"multivariate model is estimated with (restricted) maximum likelihood."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisMethod|"
+msgid ""
+"Method used for estimating the WLS and WAAP meta-analyses. Unrestricted "
+"weighted least squares (default) corresponds to the original WAAP-WLS "
+"specification with multiplicative heterogeneity (Stanley & Doucouliagos, "
+"2017); the remaining methods estimate additive heterogeneity. The multilevel/"
+"multivariate model is estimated with (restricted) maximum likelihood."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Random Effects / Model Components"
+msgstr "Effets aléatoires / Composants du modèle"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid ""
+"Options for specifying the random effects components for the meta-analysis "
+"model, including the types of random effects and their associated variables. "
+"Allows modeling of complex data structures such as multilevel, multivariate, "
+"autoregressive, spatial, and other forms of dependency."
+msgstr ""
+"Options pour spécifier les composants d'effets aléatoires du modèle de méta-"
+"analyse, notamment les types d'effets aléatoires et leurs variables "
+"associées. Permet de modéliser des structures de données complexes telles "
+"que multiniveau, multivariées, autorégressives, spatiales et d'autres formes "
+"de dépendance."
+
+#, fuzzy, qt-format
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Component %1"
+msgstr "Composant %1"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Type of random effect to include in the model."
+msgstr "Type d'effet aléatoire à inclure dans le modèle."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Simple"
+msgstr "Simple"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Nested (multilevel)"
+msgstr "Imbriqué (multiniveau)"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Random slopes"
+msgstr "Pentes aléatoires"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Structured"
+msgstr "Structuré"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Autoregressive"
+msgstr "Autorégressif"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Spatial"
+msgstr "Spatial"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Known correlation"
+msgstr "Corrélation connue"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Structure"
+msgstr "Structure"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid ""
+"Structure of the random effect when the type is 'Structured', "
+"'Autoregressive', or 'Spatial'. Available structures depend on the selected "
+"type."
+msgstr ""
+"Structure de l'effet aléatoire lorsque le type est « Structuré », "
+"« Autorégressif » ou « Spatial ». Les structures disponibles dépendent du "
+"type sélectionné."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Compound symmetry"
+msgstr "Symétrie composée"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Heteroscedastic compound symmetry"
+msgstr "Symétrie composée hétéroscédastique"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Unstructured "
+msgstr "Non structuré "
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Identity"
+msgstr "Identité"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Diagonal"
+msgstr "Diagonal"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "AR(1)"
+msgstr "AR(1)"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Heteroscedastic AR(1)"
+msgstr "AR(1) hétéroscédastique"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Continuous-time AR"
+msgstr "AR en temps continu"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Exponential"
+msgstr "Exponentielle"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Gaussian"
+msgstr "Gaussien"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Linear"
+msgstr "Linéaire"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Rational quadratic"
+msgstr "Quadratique rationnelle"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Spherical"
+msgstr "Sphérique"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Specification"
+msgstr "Spécification"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Random Slope Terms"
+msgstr "Termes de pente aléatoire"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid ""
+"Variables to include as random slope terms in the model. Available when the "
+"random effect type is 'Random slopes'."
+msgstr ""
+"Variables à inclure comme termes de pente aléatoire dans le modèle. "
+"Disponible lorsque le type d'effet aléatoire est « Pentes aléatoires »."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Factor Levels"
+msgstr "Niveaux de facteur"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid ""
+"Variable indicating the factor levels ('Inner Term') for the structured "
+"random effect. Available when the random effect type is 'Structured'."
+msgstr ""
+"Variable indiquant les niveaux de facteur (« Terme interne ») pour l'effet "
+"aléatoire structuré. Disponible lorsque le type d'effet aléatoire est "
+"« Structuré »."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Level 1"
+msgstr "Niveau 1"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Level 2"
+msgstr "Niveau 2"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Level 3"
+msgstr "Niveau 3"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Level 4"
+msgstr "Niveau 4"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Level 5"
+msgstr "Niveau 5"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Time"
+msgstr "Temps"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid ""
+"Variable indicating time points for an autoregressive random effects "
+"structure. Available when the random effect type is 'Autoregressive'."
+msgstr ""
+"Variable indiquant les moments temporels pour une structure d'effets "
+"aléatoires autorégressive. Disponible lorsque le type d'effet aléatoire est "
+"« Autorégressif »."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Spatial Coordinates"
+msgstr "Coordonnées spatiales"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid ""
+"Variables representing spatial coordinates for a spatial random effects "
+"structure. Available when the random effect type is 'Spatial' and the "
+"distance metric is not 'Great-circle' or prespecified in a file."
+msgstr ""
+"Variables représentant les coordonnées spatiales pour une structure d'effets "
+"aléatoires spatiale. Disponible lorsque le type d'effet aléatoire est "
+"« Spatial » et que la métrique de distance n'est pas « Grand cercle » ou "
+"prédéfinie dans un fichier."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Longitude"
+msgstr "Longitude"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid ""
+"Variable representing longitude (in decimal degrees, with minus signs for "
+"West) for a spatial random effects structure using the 'Great-circle' "
+"distance metric. Available when the random effect type is 'Spatial' and the "
+"distance metric is 'Great-circle'."
+msgstr ""
+"Variable représentant la longitude (en degrés décimaux, avec des signes "
+"négatifs pour l'Ouest) pour une structure d'effets aléatoires spatiale "
+"utilisant la métrique de distance « Grand cercle ». Disponible lorsque le "
+"type d'effet aléatoire est « Spatial » et que la métrique de distance est "
+"« Grand cercle »."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Latitude"
+msgstr "Latitude"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid ""
+"Variable representing latitude (in decimal degrees, with minus signs for "
+"South) for a spatial random effects structure using the 'Great-circle' "
+"distance metric. Available when the random effect type is 'Spatial' and the "
+"distance metric is 'Great-circle'."
+msgstr ""
+"Variable représentant la latitude (en degrés décimaux, avec des signes "
+"négatifs pour le Sud) pour une structure d'effets aléatoires spatiale "
+"utilisant la métrique de distance « Grand cercle ». Disponible lorsque le "
+"type d'effet aléatoire est « Spatial » et que la métrique de distance est "
+"« Grand cercle »."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Location Identifier"
+msgstr "Identifiant du lieu"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid ""
+"Variable identifying locations when loading distances matrix from a file for "
+"a spatial random effects structure. The location corresponds to the row and "
+"column names of the distance matrix. The names cannot start with a number."
+msgstr ""
+"Variable identifiant les lieux lors du chargement d'une matrice de distances "
+"depuis un fichier pour une structure d'effets aléatoires spatiale. Le lieu "
+"correspond aux noms des lignes et des colonnes de la matrice de distances. "
+"Les noms ne peuvent pas commencer par un chiffre."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Grouping Factor"
+msgstr "Facteur de groupement"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid ""
+"Grouping variable specifying which observations share the same random effect "
+"('Outer Term'). Available for random effect types other than 'Nested "
+"(Multilevel)'. The 'Grouping Factor' is not required for 'Spatial' Random "
+"Effects."
+msgstr ""
+"Variable de groupement spécifiant quelles observations partagent le même "
+"effet aléatoire (« Terme externe »). Disponible pour les types d'effets "
+"aléatoires autres que « Imbriqué (multiniveau) ». Le « Facteur de "
+"groupement » n'est pas requis pour les effets aléatoires « Spatial »."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Distance metric"
+msgstr "Métrique de distance"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid ""
+"Distance metric used to calculate distances in a spatial random effects "
+"structure. Available when the random effect type is 'Spatial'."
+msgstr ""
+"Métrique de distance utilisée pour calculer les distances dans une structure "
+"d'effets aléatoires spatiale. Disponible lorsque le type d'effet aléatoire "
+"est « Spatial »."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Euclidean"
+msgstr "Euclidienne"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Manhattan"
+msgstr "Manhattan"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Maximum"
+msgstr "Maximum"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Great-circle"
+msgstr "Grand cercle"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Load from file"
+msgstr "Charger depuis un fichier"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Distance matrix file"
+msgstr "Fichier de matrice de distances"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid ""
+"CSV file containing the distance matrix for the spatial random effects "
+"structure. The first row and the first column of the file must contain names "
+"that map the matrix entries to the 'Location Identifier' (the names cannot "
+"start with a number). Available when the random effect type is 'Spatial' and "
+"the distance metric is loaded from a file."
+msgstr ""
+"Fichier CSV contenant la matrice de distances pour la structure d'effets "
+"aléatoires spatiale. La première ligne et la première colonne du fichier "
+"doivent contenir des noms qui associent les entrées de la matrice à "
+"l'« Identifiant du lieu » (les noms ne peuvent pas commencer par un "
+"chiffre). Disponible lorsque le type d'effet aléatoire est « Spatial » et "
+"que la métrique de distance est chargée depuis un fichier."
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid "Correlation matrix file"
+msgstr "Fichier de matrice de corrélation"
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisRandomEffects|"
+msgid ""
+"CSV file containing the known correlation matrix for the random effects "
+"structure. The first row and the first column of the file must contain names "
+"that map the matrix entries to the 'Grouping Factor' (the names cannot start "
+"with a number). Available when the random effect type is 'Known correlation'."
+msgstr ""
+"Fichier CSV contenant la matrice de corrélation connue pour la structure "
+"d'effets aléatoires. La première ligne et la première colonne du fichier "
+"doivent contenir des noms qui associent les entrées de la matrice au "
+"« Facteur de groupement » (les noms ne peuvent pas commencer par un "
+"chiffre). Disponible lorsque le type d'effet aléatoire est « Corrélation "
+"connue »."
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "γ"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid ""
+"Include γ, the multiplicative heterogeneity of the unrestricted weighted "
+"least squares model, i.e., the factor by which the sampling variances are "
+"multiplied."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "√γ"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid ""
+"Include √γ, the square root of the multiplicative heterogeneity of the "
+"unrestricted weighted least squares model."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid ""
+"Include prediction intervals in the tabular output. Unavailable for "
+"unrestricted weighted least squares."
+msgstr ""
+
+#, fuzzy
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "PET-PEESE"
+msgstr "PET-PEESE"
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid ""
+"Include the estimate of the bias coefficient: the standard error (PET) or "
+"the sampling variance (PEESE) coefficient of the reported model."
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid "Regression plot"
+msgstr ""
+
+msgctxt "ClassicalMetaAnalysisStatistics|"
+msgid ""
+"Visualize the fitted relationship between the effect sizes and their "
+"standard errors. The fitted line (PET) or curve (PEESE) at a standard error "
+"of zero corresponds to the adjusted estimate."
+msgstr ""
+
+msgctxt "ForestPlotSection|"
+msgid "Unadjusted fixed effect estimate"
+msgstr ""
+
+msgctxt "ForestPlotSection|"
+msgid ""
+"Include the fixed effect estimate without publication bias adjustment (same "
+"moderators and subgroups) for comparison with the adjusted estimate in the "
+"model information section."
+msgstr ""
+
+msgctxt "ForestPlotSection|"
+msgid "Unadjusted fixed effect estimate test"
+msgstr ""
+
+msgctxt "ForestPlotSection|"
+msgid ""
+"Include the test of the unadjusted fixed effect estimate in the model "
+"information section."
+msgstr ""
+
+msgctxt "ForestPlotSection|"
+msgid "Unadjusted random effects estimate"
+msgstr ""
+
+msgctxt "ForestPlotSection|"
+msgid ""
+"Include the random effects estimate (restricted maximum likelihood) without "
+"publication bias adjustment (same moderators and subgroups) for comparison "
+"with the adjusted estimate in the model information section."
+msgstr ""
+
+msgctxt "ForestPlotSection|"
+msgid "Unadjusted random effects estimate test"
+msgstr ""
+
+msgctxt "ForestPlotSection|"
+msgid ""
+"Include the test of the unadjusted random effects estimate in the model "
+"information section."
+msgstr ""
+
+msgctxt "ForestPlotStudyInformation|"
+msgid ""
+"Include predicted effect sizes in the middle section of the study-level "
+"information panel. Unavailable when the panel is aggregated."
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid ""
+"Adjust for publication bias with WAAP-WLS meta-analyses fitted with metafor. "
+"WLS is the meta-analysis of all estimates; WAAP (weighted average of the "
+"adequately powered) is the meta-analysis of the estimates whose power to "
+"detect the WLS effect reaches the power criterion. WAAP is reported if "
+"enough estimates are adequately powered, WLS otherwise (Stanley, "
+"Doucouliagos, & Ioannidis, 2017). Moderators, subgroups, clustering, and the "
+"optional multilevel/multivariate model use the same specification as the "
+"classical meta-analyses. When WAAP is reported, the study-level output "
+"(e.g., forest plot, diagnostics, and exported values) includes only the "
+"retained estimates."
+msgstr ""
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "References"
+msgstr "Références"
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "R Packages"
+msgstr "Packages R"
+
+msgctxt "WaapWls|"
+msgid "Observed effect sizes, on the scale used to fit the model."
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid ""
+"Standard errors corresponding to the effect sizes. The power of each "
+"estimate is computed from its standard error."
+msgstr ""
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Fixed effects test"
+msgstr "Test des effets fixes"
+
+msgctxt "WaapWls|"
+msgid ""
+"Method for testing the model coefficients: 'z' uses standard normal "
+"approximation, 't' uses t-distribution, and 'knha' uses the Knapp and "
+"Hartung adjustment (default). Unrestricted weighted least squares always "
+"uses the 'knha' test; clustered models use t-distribution based tests. The "
+"multilevel/multivariate model uses 'z' or 't' tests."
+msgstr ""
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Predictors"
+msgstr "Prédicteurs"
+
+msgctxt "WaapWls|"
+msgid ""
+"Continuous and categorical moderators. Specify interactions and the "
+"intercept in Model."
+msgstr ""
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Clustering"
+msgstr "Regroupement"
+
+msgctxt "WaapWls|"
+msgid ""
+"Variable indicating clustering of effect sizes for robust variance "
+"estimation. If the variable is specified, cluster-robust tests and "
+"confidence intervals are provided. See the 'Advanced' section for additional "
+"clustering options."
+msgstr ""
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Study Labels"
+msgstr "Étiquettes des études"
+
+msgctxt "WaapWls|"
+msgid ""
+"Labels for studies in plots. Missing labels do not exclude observations from "
+"fitting."
+msgstr ""
+
+#, fuzzy
+msgctxt "WaapWls|"
+msgid "Subgroup"
+msgstr "Sous-groupe"
+
+msgctxt "WaapWls|"
+msgid ""
+"Fit the models separately within each subgroup. The power of the estimates "
+"and the WAAP-WLS model selection are evaluated separately for each subgroup."
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid "No Selection"
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid ""
+"Optional factor identifying estimates unaffected by publication bias. Choose "
+"the unaffected level below; estimates at that level are always retained in "
+"the WAAP model, regardless of their power."
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid "Unaffected Level"
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid ""
+"Estimates at this level are unaffected by publication bias. The power "
+"criterion applies to all other levels of the assigned factor."
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid "Power criterion"
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid ""
+"Power that an estimate needs to reach to be retained in the WAAP model "
+"(default 80%, between 5% and 99%). The power is the probability that a two-"
+"sided z-test (α = .05) with the standard error of the estimate detects the "
+"effect of the WLS model. At 5%, all estimates are retained."
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid "Power conditional on moderators"
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid ""
+"Evaluate the power of each estimate at its predicted effect from the WLS "
+"meta-regression, i.e., conditional on its moderator values (default). If "
+"unticked, the power of all estimates is evaluated at the pooled effect of "
+"the WLS model (at the mean of the moderators). Available when the model "
+"includes moderators."
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid "Multilevel/multivariate"
+msgstr ""
+
+msgctxt "WaapWls|"
+msgid ""
+"Fit the WLS and WAAP models as multilevel/multivariate models (metafor's "
+"'rma.mv' function). Specify the dependency between the effect sizes in the "
+"'Effect Size Variance-Covariance Matrix' and 'Random Effects / Model "
+"Components' sections. The power of each estimate is computed from its "
+"standard error."
+msgstr ""
+
+msgctxt "Upgrades|"
+msgid ""
+"PET-PEESE was reworked in Meta-Analysis module 0.99.0. Refreshing this "
+"analysis replaces the saved results and may reset incompatible settings "
+"(e.g., correlations and sample sizes are no longer accepted as input; use "
+"Effect Size Computation to compute effect sizes and standard errors). To "
+"rerun the original analysis, use the Meta-Analysis module 0.98.0."
+msgstr ""
+
+msgctxt "Upgrades|"
+msgid ""
+"WAAP-WLS was reworked in Meta-Analysis module 0.99.0. Refreshing this "
+"analysis replaces the saved results and may reset incompatible settings "
+"(e.g., correlations and sample sizes are no longer accepted as input; use "
+"Effect Size Computation to compute effect sizes and standard errors). To "
+"rerun the original analysis, use the Meta-Analysis module 0.98.0."
 msgstr ""

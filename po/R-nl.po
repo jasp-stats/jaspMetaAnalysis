@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2026-11-07 02:33\n"
+"POT-Creation-Date: 2026-11-14 02:33\n"
 "PO-Revision-Date: 2025-05-03 02:53+0000\n"
 "Last-Translator: Koen Derks <koen-derks@hotmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
@@ -424,6 +424,11 @@ msgid ""
 "on heterogeneity."
 msgstr ""
 
+msgid ""
+"Profile likelihood is not available for equal effects, fixed effects, or "
+"unrestricted weighted least squares models."
+msgstr ""
+
 #, fuzzy
 msgid "Baujat Plot"
 msgstr "Radiaal Grafiek"
@@ -537,7 +542,7 @@ msgstr ""
 msgid "%1$sNo influential cases found."
 msgstr ""
 
-msgid "Diagnostics are based on the the subgroup models."
+msgid "Diagnostics are based on the subgroup models."
 msgstr ""
 
 msgid "Diagnostics are based on the non-clustered model."
@@ -701,6 +706,9 @@ msgstr ""
 msgid "Residual heterogeneity"
 msgstr "Toets van Residuen Heterogeniteit"
 
+msgid "not available"
+msgstr ""
+
 #, fuzzy
 msgid "Moderation (effect size): %1$s"
 msgstr "Totale effectgrootte"
@@ -733,6 +741,9 @@ msgstr ""
 msgid ""
 "Knapp-Hartung inference is based on very few residual degrees of freedom; "
 "results can be sensitive and should be interpreted cautiously."
+msgstr ""
+
+msgid "There are too few estimates to estimate the model."
 msgstr ""
 
 msgid ""
@@ -950,6 +961,10 @@ msgstr "AICc"
 msgid "R²"
 msgstr ""
 
+#, fuzzy
+msgid "Fixed effects tested using cluster-robust t-distribution."
+msgstr "Knapp en Hartung test aanpassing."
+
 msgid "Fixed effects tested using z-distribution."
 msgstr ""
 
@@ -975,12 +990,8 @@ msgid "adjusted effect"
 msgstr "Geordende effecten"
 
 #, fuzzy
-msgid "%1$i observations were ommited due to missing values."
-msgstr "%i observatie is verwijderd, omdat de waarde ontbreekt."
-
-#, fuzzy
-msgid "%1$s: %2$i observations were ommited due to missing values."
-msgstr "%i observatie is verwijderd, omdat de waarde ontbreekt."
+msgid "Subgroup %1$s"
+msgstr "%1$s (%2$s)"
 
 #, fuzzy
 msgid "%1$s: %2$s"
@@ -1215,7 +1226,7 @@ msgid "Spherical"
 msgstr ""
 
 #, fuzzy
-msgid "Random Effects / Model Stucture Summary"
+msgid "Random Effects / Model Structure Summary"
 msgstr "Willekeurige effecten model:"
 
 msgid "Simple / Nested Summary"
@@ -1303,6 +1314,11 @@ msgstr "Schattingen"
 #, fuzzy
 msgid "Estimates ρ"
 msgstr "Schattingen"
+
+msgid ""
+"Confidence intervals are not available for variance components fixed to zero "
+"(e.g., levels with a single estimate)."
+msgstr ""
 
 msgid "ρ"
 msgstr ""
@@ -1584,6 +1600,20 @@ msgstr "Gefixeerde Effecten Schattingen"
 #, fuzzy
 msgid "Intercept estimate"
 msgstr "Intercept"
+
+#, fuzzy
+msgid "Unadjusted fixed effect"
+msgstr "Geordende effecten"
+
+#, fuzzy
+msgid "Unadjusted random effects"
+msgstr "Geordende effecten"
+
+msgid "The unadjusted fixed effect estimate could not be calculated."
+msgstr ""
+
+msgid "The unadjusted random effects estimate could not be calculated."
+msgstr ""
 
 msgid ""
 "No rows to display. Check that the visualization type mapping assigns at "
@@ -1922,6 +1952,97 @@ msgstr ""
 "Lage schattingsaccuratesse -- De kleinste effectieve steekproefgrootte (ESS) "
 "is %.2f< %1.0f. Verhoog a.u.b. het aantal 'Iteraties', of 'Aanpassingsdelta' "
 "in de Opties sectie."
+
+#, fuzzy
+msgid "Regression Plot"
+msgstr "Regressie Schattingen"
+
+msgid "The regression plot could not be created."
+msgstr ""
+
+msgid "Subject to selection"
+msgstr ""
+
+msgid "Unaffected"
+msgstr ""
+
+msgid "R code unavailable: %1$s"
+msgstr ""
+
+msgid "The module reported: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid "Publication bias (PEESE)"
+msgstr "Publicatieonzuiverheid"
+
+#, fuzzy
+msgid "Publication bias (PET)"
+msgstr "Publicatieonzuiverheid"
+
+#, fuzzy
+msgid "PET-PEESE Summary"
+msgstr "PEESE"
+
+#, fuzzy
+msgid "Bias Coefficient Estimates"
+msgstr "Gefixeerde Effecten Schattingen"
+
+msgid "The coefficient is not transformed."
+msgstr ""
+
+msgid "Results are based on the %1$s model."
+msgstr ""
+
+msgid ""
+"Results are based on the %1$s model: the PET adjusted effect test resulted "
+"in %2$s (threshold %3$s)."
+msgstr ""
+
+#, fuzzy
+msgid "Standard error (PET)"
+msgstr "Standaard fout"
+
+#, fuzzy
+msgid "Standard error² (PEESE)"
+msgstr "Standaard fout"
+
+msgid ""
+"The unaffected level is not present in the no-selection variable. Choose an "
+"available level."
+msgstr ""
+
+msgid ""
+"No estimates are subject to selection (all estimates are at the unaffected "
+"level). The publication bias adjustment is not estimable."
+msgstr ""
+
+msgid ""
+"The publication bias adjustment is not estimable: the standard errors are "
+"constant or redundant with the moderators."
+msgstr ""
+
+msgid ""
+"PET-PEESE model selection is unavailable because the test of the PET "
+"adjusted effect could not be computed."
+msgstr ""
+
+msgid ""
+"The PET model could not be estimated because there are too few estimates "
+"(%1$i)."
+msgstr ""
+
+msgid "The PET model could not be estimated: %1$s"
+msgstr ""
+
+msgid ""
+"The PET model for subgroup '%1$s' could not be estimated because there are "
+"too few estimates (%2$i)."
+msgstr ""
+
+#, fuzzy
+msgid "The PET model for subgroup '%1$s' could not be estimated: %2$s"
+msgstr "De %1$s toets is mislukt met de volgende fout: %2$s"
 
 msgid "t-statistic"
 msgstr "t-statistiek"
@@ -2483,9 +2604,6 @@ msgstr ""
 msgid "R code unavailable until the specification is valid: %1$s"
 msgstr ""
 
-msgid "The module reported: %1$s"
-msgstr ""
-
 msgid "R Code"
 msgstr ""
 
@@ -2559,11 +2677,6 @@ msgstr "Modeltoetsen"
 msgid "No fitted model is available for the requested selection."
 msgstr ""
 
-msgid ""
-"The unaffected level is not present in the no-selection variable. Choose an "
-"available level."
-msgstr ""
-
 msgid "P-values must be finite, greater than zero, and at most one."
 msgstr ""
 
@@ -2628,74 +2741,52 @@ msgstr "Coëfficiënten"
 msgid "Computed Estimates Summary"
 msgstr ""
 
-msgid ""
-"Cannot compute results. All entries of the correlation coefficient variable "
-"(%s) must be between -1 and 1."
+msgid "Results are based on the WAAP model."
 msgstr ""
-"Kan geen resultaten berekenen. Alle waarden van de "
-"correlatiecoëfficiëntvariabele (%s) moeten tussen -1 en 1 liggen."
 
-msgid ""
-"Cannot compute results. All entries of the sample size variable (%s) must be "
-"greater than four."
+msgid "Results are based on the WLS model. %1$s"
 msgstr ""
-"Kan geen resultaten berekenen. Alle waarden van de "
-"steekproefgroottevariabele (%s) moeten groter zijn dan vier."
-
-msgid "95%% Confidence Interval"
-msgstr "95%% Betrouwbaarheidsinterval"
-
-msgid "Error: There were not enough adequately powered studies (k = %1$i)"
-msgstr ""
-"Fout: Er waren niet genoeg studies met voldoende statistische kracht (k = "
-"%1$i)"
-
-msgid "Note: There were %1$i adequately powered studies"
-msgstr "Opmerking: Er waren %1$i studies met voldoende statistische kracht"
-
-msgid "Model Tests"
-msgstr "Modeltoetsen"
-
-msgid "Test of Effect"
-msgstr "Toets van Effect"
-
-msgid "Test of Publication Bias"
-msgstr "Toets van Publicatieonzuiverheid"
-
-msgid "Mean Estimates (%s)"
-msgstr "Gemiddelde Schattingen (%s)"
-
-msgid "Multiplicative Heterogeneity Estimates"
-msgstr "Multiplicatieve Heterogeniteitsschattingen"
-
-msgid "Estimated %1$s Regression"
-msgstr "Geschatte %1$s Regressie"
-
-msgid "Cohen's d"
-msgstr "Cohen's d"
-
-msgid "Fisher's z"
-msgstr "Fisher's z"
-
-msgid "Mean Model Estimates (%s)"
-msgstr "Gemiddelde Modelschattingen (%s)"
 
 msgid ""
-"The figure could not be created since one of the estimates is not a number."
+"Results are based on the WLS model: the WAAP model requires at least %1$i "
+"adequately powered estimates."
 msgstr ""
-"De afbeelding kon niet worden gemaakt omdat een van de schattingen geen "
-"getal is."
 
 msgid ""
-"WAAP was not estimated: There were only %1$i adequately powered studies "
-"(power > 80%%)."
+"Results are based on the WLS model: the WAAP model requires at least %1$i "
+"adequately powered or unaffected estimates."
 msgstr ""
-"WAAP werd niet geschat: Er waren slechts %1$i studies met voldoende "
-"statistische kracht."
 
-msgid "There were %1$i adequately powered studies (power > 80%%)."
+msgid ""
+"The power is evaluated at the moderator-specific predicted effects of the "
+"WLS model."
 msgstr ""
-"Er waren %1$i studies met voldoende statistische kracht (power > 80%%)."
+
+msgid "The power is evaluated at the pooled effect of the WLS model."
+msgstr ""
+
+msgid "The power of the estimates could not be computed: %1$s"
+msgstr ""
+
+msgid "The WAAP model failed: %1$s"
+msgstr ""
+
+msgid ""
+"The moderators of the WAAP model are not estimable from the retained "
+"estimates."
+msgstr ""
+
+#, fuzzy
+msgid "%1$i observation was omitted due to missing values."
+msgid_plural "%1$i observations were omitted due to missing values."
+msgstr[0] "%i observatie is verwijderd, omdat de waarde ontbreekt."
+msgstr[1] "%i observatie is verwijderd, omdat de waarde ontbreekt."
+
+#, fuzzy
+msgid "%1$s: %2$i observation was omitted due to missing values."
+msgid_plural "%1$s: %2$i observations were omitted due to missing values."
+msgstr[0] "%i observatie is verwijderd, omdat de waarde ontbreekt."
+msgstr[1] "%i observatie is verwijderd, omdat de waarde ontbreekt."
 
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
@@ -2756,6 +2847,16 @@ msgstr[1] ""
 "transities overschreed de maximum boomdieptie. Dit kan opgelost worden door "
 "voorzichtig de 'Maximum boomdiepte' te verhogen."
 
+msgid "The bias adjustment applies to %1$i estimate."
+msgid_plural "The bias adjustment applies to %1$i estimates."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "%1$i estimate at level '%2$s' is unaffected."
+msgid_plural "%1$i estimates at level '%2$s' are unaffected."
+msgstr[0] ""
+msgstr[1] ""
+
 msgid ""
 "The selection weight for p-value interval %1$s is fixed at zero, but the "
 "interval contains %2$i selected estimate. Use a positive weight or NA to "
@@ -2772,11 +2873,6 @@ msgid_plural "Selection applies to %1$i estimates."
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "%1$i estimate at level '%2$s' is unaffected."
-msgid_plural "%1$i estimates at level '%2$s' are unaffected."
-msgstr[0] ""
-msgstr[1] ""
-
 msgid ""
 "For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. "
 "This affects %3$i selected estimate."
@@ -2785,6 +2881,86 @@ msgid_plural ""
 "This affects %3$i selected estimates."
 msgstr[0] ""
 msgstr[1] ""
+
+#, fuzzy
+msgid "%1$i of %2$i estimates is adequately powered (power ≥ %3$s%%)."
+msgid_plural "%1$i of %2$i estimates are adequately powered (power ≥ %3$s%%)."
+msgstr[0] ""
+"Er waren %1$i studies met voldoende statistische kracht (power > 80%%)."
+msgstr[1] ""
+"Er waren %1$i studies met voldoende statistische kracht (power > 80%%)."
+
+msgid "%1$i estimate at level '%2$s' is unaffected and always retained."
+msgid_plural ""
+"%1$i estimates at level '%2$s' are unaffected and always retained."
+msgstr[0] ""
+msgstr[1] ""
+
+#~ msgid ""
+#~ "Cannot compute results. All entries of the correlation coefficient "
+#~ "variable (%s) must be between -1 and 1."
+#~ msgstr ""
+#~ "Kan geen resultaten berekenen. Alle waarden van de "
+#~ "correlatiecoëfficiëntvariabele (%s) moeten tussen -1 en 1 liggen."
+
+#~ msgid ""
+#~ "Cannot compute results. All entries of the sample size variable (%s) must "
+#~ "be greater than four."
+#~ msgstr ""
+#~ "Kan geen resultaten berekenen. Alle waarden van de "
+#~ "steekproefgroottevariabele (%s) moeten groter zijn dan vier."
+
+#~ msgid "95%% Confidence Interval"
+#~ msgstr "95%% Betrouwbaarheidsinterval"
+
+#~ msgid "Error: There were not enough adequately powered studies (k = %1$i)"
+#~ msgstr ""
+#~ "Fout: Er waren niet genoeg studies met voldoende statistische kracht (k = "
+#~ "%1$i)"
+
+#~ msgid "Note: There were %1$i adequately powered studies"
+#~ msgstr "Opmerking: Er waren %1$i studies met voldoende statistische kracht"
+
+#~ msgid "Model Tests"
+#~ msgstr "Modeltoetsen"
+
+#~ msgid "Test of Effect"
+#~ msgstr "Toets van Effect"
+
+#~ msgid "Test of Publication Bias"
+#~ msgstr "Toets van Publicatieonzuiverheid"
+
+#~ msgid "Mean Estimates (%s)"
+#~ msgstr "Gemiddelde Schattingen (%s)"
+
+#~ msgid "Multiplicative Heterogeneity Estimates"
+#~ msgstr "Multiplicatieve Heterogeniteitsschattingen"
+
+#~ msgid "Estimated %1$s Regression"
+#~ msgstr "Geschatte %1$s Regressie"
+
+#~ msgid "Cohen's d"
+#~ msgstr "Cohen's d"
+
+#~ msgid "Fisher's z"
+#~ msgstr "Fisher's z"
+
+#~ msgid "Mean Model Estimates (%s)"
+#~ msgstr "Gemiddelde Modelschattingen (%s)"
+
+#~ msgid ""
+#~ "The figure could not be created since one of the estimates is not a "
+#~ "number."
+#~ msgstr ""
+#~ "De afbeelding kon niet worden gemaakt omdat een van de schattingen geen "
+#~ "getal is."
+
+#~ msgid ""
+#~ "WAAP was not estimated: There were only %1$i adequately powered studies "
+#~ "(power > 80%%)."
+#~ msgstr ""
+#~ "WAAP werd niet geschat: Er waren slechts %1$i studies met voldoende "
+#~ "statistische kracht."
 
 #~ msgid "Weight Function (%s)"
 #~ msgstr "Gewichtsfunctie(%s)"
@@ -2809,9 +2985,6 @@ msgstr[1] ""
 
 #~ msgid "Assuming heterogeneity"
 #~ msgstr "Heterogeniteit Aannemende"
-
-#~ msgid "Fixed Effects Estimates"
-#~ msgstr "Gefixeerde Effecten Schattingen"
 
 #~ msgid "Estimated Weights"
 #~ msgstr "Geschatte Gewichten"

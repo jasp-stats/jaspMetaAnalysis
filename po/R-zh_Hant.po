@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.95.5\n"
-"POT-Creation-Date: 2026-11-07 02:33\n"
+"POT-Creation-Date: 2026-11-14 02:33\n"
 "PO-Revision-Date: 2026-07-28 05:02+0000\n"
 "Last-Translator: 陳正昌 <chencc99@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
@@ -389,6 +389,11 @@ msgid ""
 "on heterogeneity."
 msgstr "對於在異質性上包含統合迴歸的模型，剖面概似不可用。"
 
+msgid ""
+"Profile likelihood is not available for equal effects, fixed effects, or "
+"unrestricted weighted least squares models."
+msgstr ""
+
 msgid "Baujat Plot"
 msgstr "Baujat 圖"
 
@@ -494,7 +499,8 @@ msgstr "未找到具影響力的案例。"
 msgid "%1$sNo influential cases found."
 msgstr "%1$s未找到具影響力的案例。"
 
-msgid "Diagnostics are based on the the subgroup models."
+#, fuzzy
+msgid "Diagnostics are based on the subgroup models."
 msgstr "診斷基於子群模型。"
 
 msgid "Diagnostics are based on the non-clustered model."
@@ -656,6 +662,10 @@ msgstr "%1$s：不可用"
 msgid "Residual heterogeneity"
 msgstr "殘差異質性"
 
+#, fuzzy
+msgid "not available"
+msgstr "%1$s：不可用"
+
 msgid "Moderation (effect size): %1$s"
 msgstr "調節作用（效果量）：%1$s"
 
@@ -688,6 +698,9 @@ msgid ""
 "Knapp-Hartung inference is based on very few residual degrees of freedom; "
 "results can be sensitive and should be interpreted cautiously."
 msgstr "Knapp-Hartung 推論基於極少的殘差自由度；結果可能敏感，應謹慎解釋。"
+
+msgid "There are too few estimates to estimate the model."
+msgstr ""
 
 msgid ""
 "The model estimation failed with the following message: %1$s. Please, "
@@ -899,6 +912,10 @@ msgstr "AICc"
 msgid "R²"
 msgstr "R²"
 
+#, fuzzy
+msgid "Fixed effects tested using cluster-robust t-distribution."
+msgstr "固定效果使用 t 分配檢定。"
+
 msgid "Fixed effects tested using z-distribution."
 msgstr "固定效果使用 z 分配檢定。"
 
@@ -920,11 +937,9 @@ msgstr "合併效果"
 msgid "adjusted effect"
 msgstr "調整後效果"
 
-msgid "%1$i observations were ommited due to missing values."
-msgstr "%1$i 個觀察值因缺失值而被省略。"
-
-msgid "%1$s: %2$i observations were ommited due to missing values."
-msgstr "%1$s：%2$i 個觀察值因缺失值而被省略。"
+#, fuzzy
+msgid "Subgroup %1$s"
+msgstr "子群 %1$s："
 
 msgid "%1$s: %2$s"
 msgstr "%1$s：%2$s"
@@ -1154,7 +1169,8 @@ msgstr "有理二次"
 msgid "Spherical"
 msgstr "球形"
 
-msgid "Random Effects / Model Stucture Summary"
+#, fuzzy
+msgid "Random Effects / Model Structure Summary"
 msgstr "隨機效果／模型結構摘要"
 
 msgid "Simple / Nested Summary"
@@ -1233,6 +1249,11 @@ msgstr "估計值 𝜏²"
 
 msgid "Estimates ρ"
 msgstr "估計值 ρ"
+
+msgid ""
+"Confidence intervals are not available for variance components fixed to zero "
+"(e.g., levels with a single estimate)."
+msgstr ""
 
 msgid "ρ"
 msgstr "ρ"
@@ -1517,6 +1538,22 @@ msgstr "固定效果估計值"
 
 msgid "Intercept estimate"
 msgstr "截距"
+
+#, fuzzy
+msgid "Unadjusted fixed effect"
+msgstr "調整後效果"
+
+#, fuzzy
+msgid "Unadjusted random effects"
+msgstr "調整後效果"
+
+#, fuzzy
+msgid "The unadjusted fixed effect estimate could not be calculated."
+msgstr "無法計算固定效果效果量。"
+
+#, fuzzy
+msgid "The unadjusted random effects estimate could not be calculated."
+msgstr "無法計算合併效果量。"
 
 msgid ""
 "No rows to display. Check that the visualization type mapping assigns at "
@@ -1826,6 +1863,100 @@ msgid ""
 msgstr ""
 "估計準確度低——最小有效樣本數 (ESS) 為 %1$.2f < %2$1.0f。若要提高準確度，請在"
 "選項區塊中增加「疊代次數」或「Adapt delta」。"
+
+#, fuzzy
+msgid "Regression Plot"
+msgstr "迴歸估計值"
+
+#, fuzzy
+msgid "The regression plot could not be created."
+msgstr "無法計算合併效果量。"
+
+msgid "Subject to selection"
+msgstr ""
+
+msgid "Unaffected"
+msgstr ""
+
+#, fuzzy
+msgid "R code unavailable: %1$s"
+msgstr "此 GLMM 模型類型不提供異質性信賴區間。"
+
+msgid "The module reported: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid "Publication bias (PEESE)"
+msgstr "出版偏誤"
+
+#, fuzzy
+msgid "Publication bias (PET)"
+msgstr "出版偏誤"
+
+#, fuzzy
+msgid "PET-PEESE Summary"
+msgstr "PET-PEESE"
+
+#, fuzzy
+msgid "Bias Coefficient Estimates"
+msgstr "固定效果估計值"
+
+msgid "The coefficient is not transformed."
+msgstr ""
+
+#, fuzzy
+msgid "Results are based on the %1$s model."
+msgstr "診斷基於非叢集模型。"
+
+msgid ""
+"Results are based on the %1$s model: the PET adjusted effect test resulted "
+"in %2$s (threshold %3$s)."
+msgstr ""
+
+#, fuzzy
+msgid "Standard error (PET)"
+msgstr "標準誤"
+
+#, fuzzy
+msgid "Standard error² (PEESE)"
+msgstr "標準誤"
+
+msgid ""
+"The unaffected level is not present in the no-selection variable. Choose an "
+"available level."
+msgstr ""
+
+msgid ""
+"No estimates are subject to selection (all estimates are at the unaffected "
+"level). The publication bias adjustment is not estimable."
+msgstr ""
+
+msgid ""
+"The publication bias adjustment is not estimable: the standard errors are "
+"constant or redundant with the moderators."
+msgstr ""
+
+msgid ""
+"PET-PEESE model selection is unavailable because the test of the PET "
+"adjusted effect could not be computed."
+msgstr ""
+
+msgid ""
+"The PET model could not be estimated because there are too few estimates "
+"(%1$i)."
+msgstr ""
+
+msgid "The PET model could not be estimated: %1$s"
+msgstr ""
+
+msgid ""
+"The PET model for subgroup '%1$s' could not be estimated because there are "
+"too few estimates (%2$i)."
+msgstr ""
+
+#, fuzzy
+msgid "The PET model for subgroup '%1$s' could not be estimated: %2$s"
+msgstr "子群『%1$s』的模型因以下錯誤而失敗：%2$s"
 
 msgid "t-statistic"
 msgstr "t 統計量"
@@ -2354,9 +2485,6 @@ msgstr ""
 msgid "R code unavailable until the specification is valid: %1$s"
 msgstr ""
 
-msgid "The module reported: %1$s"
-msgstr ""
-
 #, fuzzy
 msgid "R Code"
 msgstr "RoBMA R 程式碼"
@@ -2433,11 +2561,6 @@ msgstr "模型檢定"
 msgid "No fitted model is available for the requested selection."
 msgstr ""
 
-msgid ""
-"The unaffected level is not present in the no-selection variable. Choose an "
-"available level."
-msgstr ""
-
 msgid "P-values must be finite, greater than zero, and at most one."
 msgstr ""
 
@@ -2493,63 +2616,53 @@ msgstr "係數摘要"
 msgid "Computed Estimates Summary"
 msgstr "計算估計值摘要"
 
-msgid ""
-"Cannot compute results. All entries of the correlation coefficient variable "
-"(%s) must be between -1 and 1."
-msgstr "無法計算結果。相關係數變項（%s）的所有項目必須介於 -1 與 1 之間。"
+#, fuzzy
+msgid "Results are based on the WAAP model."
+msgstr "診斷基於非叢集模型。"
+
+#, fuzzy
+msgid "Results are based on the WLS model. %1$s"
+msgstr "診斷基於非叢集模型。"
 
 msgid ""
-"Cannot compute results. All entries of the sample size variable (%s) must be "
-"greater than four."
-msgstr "無法計算結果。樣本人數變項（%s）的所有項目必須大於四。"
-
-msgid "95%% Confidence Interval"
-msgstr "95%% 信賴區間"
-
-msgid "Error: There were not enough adequately powered studies (k = %1$i)"
-msgstr "錯誤：檢定力充足的研究不足（k = %1$i）"
-
-msgid "Note: There were %1$i adequately powered studies"
-msgstr "注意：有 %1$i 個檢定力充足的研究"
-
-msgid "Model Tests"
-msgstr "模型檢定"
-
-msgid "Test of Effect"
-msgstr "效果檢定"
-
-msgid "Test of Publication Bias"
-msgstr "出版偏誤檢定"
-
-msgid "Mean Estimates (%s)"
-msgstr "平均估計值（%s）"
-
-msgid "Multiplicative Heterogeneity Estimates"
-msgstr "倍增異質性估計值"
-
-msgid "Estimated %1$s Regression"
-msgstr "估計的 %1$s 迴歸"
-
-msgid "Cohen's d"
-msgstr "科恩 d"
-
-msgid "Fisher's z"
-msgstr "費雪 z"
-
-msgid "Mean Model Estimates (%s)"
-msgstr "平均模型估計值（%s）"
+"Results are based on the WLS model: the WAAP model requires at least %1$i "
+"adequately powered estimates."
+msgstr ""
 
 msgid ""
-"The figure could not be created since one of the estimates is not a number."
-msgstr "由於其中一個估計值不是數值，因此無法建立圖形。"
+"Results are based on the WLS model: the WAAP model requires at least %1$i "
+"adequately powered or unaffected estimates."
+msgstr ""
 
 msgid ""
-"WAAP was not estimated: There were only %1$i adequately powered studies "
-"(power > 80%%)."
-msgstr "未估計 WAAP：只有 %1$i 個檢定力充足的研究（檢定力 > 80%%）。"
+"The power is evaluated at the moderator-specific predicted effects of the "
+"WLS model."
+msgstr ""
 
-msgid "There were %1$i adequately powered studies (power > 80%%)."
-msgstr "有 %1$i 個檢定力充足的研究（檢定力 > 80%%）。"
+msgid "The power is evaluated at the pooled effect of the WLS model."
+msgstr ""
+
+#, fuzzy
+msgid "The power of the estimates could not be computed: %1$s"
+msgstr "無法計算合併效果量。"
+
+msgid "The WAAP model failed: %1$s"
+msgstr ""
+
+msgid ""
+"The moderators of the WAAP model are not estimable from the retained "
+"estimates."
+msgstr ""
+
+#, fuzzy
+msgid "%1$i observation was omitted due to missing values."
+msgid_plural "%1$i observations were omitted due to missing values."
+msgstr[0] "%1$i 個觀察值因缺失值而被省略。"
+
+#, fuzzy
+msgid "%1$s: %2$i observation was omitted due to missing values."
+msgid_plural "%1$s: %2$i observations were omitted due to missing values."
+msgstr[0] "%1$s：%2$i 個觀察值因缺失值而被省略。"
 
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
@@ -2591,6 +2704,14 @@ msgstr[0] ""
 "Hamiltonian Monte Carlo 程序可能效率低下 —— %i 次轉換超過最大樹深度。可透過逐"
 "步增加「Maximum tree depth」來解決此問題。"
 
+msgid "The bias adjustment applies to %1$i estimate."
+msgid_plural "The bias adjustment applies to %1$i estimates."
+msgstr[0] ""
+
+msgid "%1$i estimate at level '%2$s' is unaffected."
+msgid_plural "%1$i estimates at level '%2$s' are unaffected."
+msgstr[0] ""
+
 msgid ""
 "The selection weight for p-value interval %1$s is fixed at zero, but the "
 "interval contains %2$i selected estimate. Use a positive weight or NA to "
@@ -2605,10 +2726,6 @@ msgid "Selection applies to %1$i estimate."
 msgid_plural "Selection applies to %1$i estimates."
 msgstr[0] ""
 
-msgid "%1$i estimate at level '%2$s' is unaffected."
-msgid_plural "%1$i estimates at level '%2$s' are unaffected."
-msgstr[0] ""
-
 msgid ""
 "For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. "
 "This affects %3$i selected estimate."
@@ -2616,6 +2733,72 @@ msgid_plural ""
 "For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. "
 "This affects %3$i selected estimates."
 msgstr[0] ""
+
+#, fuzzy
+msgid "%1$i of %2$i estimates is adequately powered (power ≥ %3$s%%)."
+msgid_plural "%1$i of %2$i estimates are adequately powered (power ≥ %3$s%%)."
+msgstr[0] "有 %1$i 個檢定力充足的研究（檢定力 > 80%%）。"
+
+msgid "%1$i estimate at level '%2$s' is unaffected and always retained."
+msgid_plural ""
+"%1$i estimates at level '%2$s' are unaffected and always retained."
+msgstr[0] ""
+
+#~ msgid ""
+#~ "Cannot compute results. All entries of the correlation coefficient "
+#~ "variable (%s) must be between -1 and 1."
+#~ msgstr "無法計算結果。相關係數變項（%s）的所有項目必須介於 -1 與 1 之間。"
+
+#~ msgid ""
+#~ "Cannot compute results. All entries of the sample size variable (%s) must "
+#~ "be greater than four."
+#~ msgstr "無法計算結果。樣本人數變項（%s）的所有項目必須大於四。"
+
+#~ msgid "95%% Confidence Interval"
+#~ msgstr "95%% 信賴區間"
+
+#~ msgid "Error: There were not enough adequately powered studies (k = %1$i)"
+#~ msgstr "錯誤：檢定力充足的研究不足（k = %1$i）"
+
+#~ msgid "Note: There were %1$i adequately powered studies"
+#~ msgstr "注意：有 %1$i 個檢定力充足的研究"
+
+#~ msgid "Model Tests"
+#~ msgstr "模型檢定"
+
+#~ msgid "Test of Effect"
+#~ msgstr "效果檢定"
+
+#~ msgid "Test of Publication Bias"
+#~ msgstr "出版偏誤檢定"
+
+#~ msgid "Mean Estimates (%s)"
+#~ msgstr "平均估計值（%s）"
+
+#~ msgid "Multiplicative Heterogeneity Estimates"
+#~ msgstr "倍增異質性估計值"
+
+#~ msgid "Estimated %1$s Regression"
+#~ msgstr "估計的 %1$s 迴歸"
+
+#~ msgid "Cohen's d"
+#~ msgstr "科恩 d"
+
+#~ msgid "Fisher's z"
+#~ msgstr "費雪 z"
+
+#~ msgid "Mean Model Estimates (%s)"
+#~ msgstr "平均模型估計值（%s）"
+
+#~ msgid ""
+#~ "The figure could not be created since one of the estimates is not a "
+#~ "number."
+#~ msgstr "由於其中一個估計值不是數值，因此無法建立圖形。"
+
+#~ msgid ""
+#~ "WAAP was not estimated: There were only %1$i adequately powered studies "
+#~ "(power > 80%%)."
+#~ msgstr "未估計 WAAP：只有 %1$i 個檢定力充足的研究（檢定力 > 80%%）。"
 
 #~ msgid "Publication Probability"
 #~ msgstr "出版機率"
@@ -2637,9 +2820,6 @@ msgstr[0] ""
 
 #~ msgid "Assuming heterogeneity"
 #~ msgstr "假定異質"
-
-#~ msgid "Fixed Effects Estimates"
-#~ msgstr "固定效果估計值"
 
 #~ msgid "Estimated Weights"
 #~ msgstr "估計權重"

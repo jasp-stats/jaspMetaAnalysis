@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.18.2\n"
-"POT-Creation-Date: 2026-11-07 02:33\n"
+"POT-Creation-Date: 2026-11-14 02:33\n"
 "PO-Revision-Date: 2026-11-12 10:28+0000\n"
 "Last-Translator: Fahad Mahfouz Al-Subhi "
 "<fahadalsubhi@users.noreply.hosted.weblate.org>\n"
@@ -188,8 +188,8 @@ msgid ""
 "random effects H%2$s over the fixed effects H%1$s & random effects H%1$s."
 msgstr ""
 "تستند التقديرات البعدية إلى نماذج وجود الأثر. ويستند عامل بايز إلى النماذج "
-"الأربعة: الآثار الثابتة H%2$s والعشوائية H%2$s مقابل الثابتة H%1$s والعشوائية "
-"H%1$s."
+"الأربعة: الآثار الثابتة H%2$s والعشوائية H%2$s مقابل الثابتة H%1$s "
+"والعشوائية H%1$s."
 
 msgid ""
 "Model averaged posterior estimates for %3$s are not yet available, but will "
@@ -197,8 +197,8 @@ msgid ""
 "effects H%1$s & H%2$s over the fixed effects H%1$s & H%2$s."
 msgstr ""
 "التقديرات البعدية المحسوبة بمتوسط النماذج لـ %3$s غير متاحة بعد، وستُضاف "
-"لاحقًا. يستند عامل بايز إلى النماذج الأربعة: الآثار العشوائية H%1$s وH%2$s مقابل "
-"الثابتة H%1$s وH%2$s."
+"لاحقًا. يستند عامل بايز إلى النماذج الأربعة: الآثار العشوائية H%1$s وH%2$s "
+"مقابل الثابتة H%1$s وH%2$s."
 
 msgid ""
 "Bayes factor of the (unconstrained/constrained) random effects H%1$s over "
@@ -226,8 +226,8 @@ msgid ""
 "effects H%1$s & H%2$s over the random effects H%1$s & H%2$s."
 msgstr ""
 "التقديرات البعدية المحسوبة بمتوسط النماذج لـ %3$s غير متاحة بعد، وستُضاف "
-"لاحقًا. يستند عامل بايز إلى النماذج الأربعة: الآثار الثابتة H%1$s وH%2$s مقابل "
-"العشوائية H%1$s وH%2$s."
+"لاحقًا. يستند عامل بايز إلى النماذج الأربعة: الآثار الثابتة H%1$s وH%2$s "
+"مقابل العشوائية H%1$s وH%2$s."
 
 msgid ""
 "Bayes factor of the fixed effects H%1$s over the (unconstrained/constrained) "
@@ -249,8 +249,8 @@ msgid ""
 "Bayes factor for the unconstrained (random) effects H%1$s versus the ordered "
 "effects H%1$s model is %3$.3f."
 msgstr ""
-"عامل بايز للآثار الثابتة H%2$s مقابل الآثار المرتبة H%1$s. عامل بايز للآثار غير "
-"المقيّدة (العشوائية) H%1$s مقابل نموذج الآثار المرتبة H%1$s يساوي %3$.3f."
+"عامل بايز للآثار الثابتة H%2$s مقابل الآثار المرتبة H%1$s. عامل بايز للآثار "
+"غير المقيّدة (العشوائية) H%1$s مقابل نموذج الآثار المرتبة H%1$s يساوي %3$.3f."
 
 msgid "Model Probabilities"
 msgstr "احتمالات النماذج"
@@ -310,9 +310,9 @@ msgid ""
 "most effect sizes are negative, the analysis may not work when the prior is "
 "constrained to be postive)?"
 msgstr ""
-"تعذّرت ملاءمة النموذج. تحقق مما يأتي: هل لديك دراستان على الأقل (n=2)؟ وإذا كان "
-"التوزيع القبلي مبتورًا، فهل يتسق مع البيانات؟ مثلًا، قد لا يعمل التحليل إذا كانت "
-"معظم أحجام الأثر سالبة وقُيِّد التوزيع القبلي بالقيم الموجبة."
+"تعذّرت ملاءمة النموذج. تحقق مما يأتي: هل لديك دراستان على الأقل (n=2)؟ وإذا "
+"كان التوزيع القبلي مبتورًا، فهل يتسق مع البيانات؟ مثلًا، قد لا يعمل التحليل "
+"إذا كانت معظم أحجام الأثر سالبة وقُيِّد التوزيع القبلي بالقيم الموجبة."
 
 msgid "Prior and posterior plot"
 msgstr "مخطط التوزيعين القبلي والبعدي"
@@ -404,6 +404,11 @@ msgid ""
 "on heterogeneity."
 msgstr ""
 "الإمكان الجانبي غير متاح للنماذج التي تتضمن انحدارًا تلويًا لعدم التجانس."
+
+msgid ""
+"Profile likelihood is not available for equal effects, fixed effects, or "
+"unrestricted weighted least squares models."
+msgstr ""
 
 msgid "Baujat Plot"
 msgstr "مخطط بوجا (Baujat)"
@@ -513,7 +518,8 @@ msgstr "لم يُعثر على حالات مؤثرة."
 msgid "%1$sNo influential cases found."
 msgstr "%1$sلم يُعثر على حالات مؤثرة."
 
-msgid "Diagnostics are based on the the subgroup models."
+#, fuzzy
+msgid "Diagnostics are based on the subgroup models."
 msgstr "تستند مؤشرات التشخيص إلى نماذج المجموعات الفرعية."
 
 msgid "Diagnostics are based on the non-clustered model."
@@ -636,8 +642,8 @@ msgid ""
 "Contrasts of estimated marginal means cannot be transformed via the "
 "heterogeneity transformation. As such, the contrasts are summarized as 𝜏²."
 msgstr ""
-"لا يمكن تطبيق تحويل عدم التجانس على المقابلات الإحصائية بين المتوسطات الهامشية "
-"المقدَّرة. لذا تُعرض على مقياس 𝜏²."
+"لا يمكن تطبيق تحويل عدم التجانس على المقابلات الإحصائية بين المتوسطات "
+"الهامشية المقدَّرة. لذا تُعرض على مقياس 𝜏²."
 
 msgid ""
 "Another analysis has already exported columns. Specify a prefix for the "
@@ -691,6 +697,10 @@ msgstr "%1$s: غير متاح"
 msgid "Residual heterogeneity"
 msgstr "عدم التجانس المتبقي"
 
+#, fuzzy
+msgid "not available"
+msgstr "%1$s: غير متاح"
+
 msgid "Moderation (effect size): %1$s"
 msgstr "التعديل (حجم الأثر): %1$s"
 
@@ -725,6 +735,9 @@ msgid ""
 msgstr ""
 "يستند استدلال كناب–هارتونغ إلى عدد قليل جدًا من درجات حرية البواقي. قد تكون "
 "النتائج حساسة، لذا ينبغي تفسيرها بحذر."
+
+msgid "There are too few estimates to estimate the model."
+msgstr ""
 
 msgid ""
 "The model estimation failed with the following message: %1$s. Please, "
@@ -918,8 +931,8 @@ msgid ""
 "For unconditional models with random study effects, σ and σ² denote the "
 "study-level standard deviation and variance, respectively."
 msgstr ""
-"في النماذج غير المشروطة ذات الآثار العشوائية للدراسة، يشير σ وσ² إلى الانحراف "
-"المعياري والتباين على مستوى الدراسة، على الترتيب."
+"في النماذج غير المشروطة ذات الآثار العشوائية للدراسة، يشير σ وσ² إلى "
+"الانحراف المعياري والتباين على مستوى الدراسة، على الترتيب."
 
 msgid ""
 "For unconditional models with random study effects, ρ denotes the "
@@ -952,6 +965,10 @@ msgstr "AICc"
 msgid "R²"
 msgstr "R²"
 
+#, fuzzy
+msgid "Fixed effects tested using cluster-robust t-distribution."
+msgstr "تُختبر الآثار الثابتة باستخدام توزيع t."
+
 msgid "Fixed effects tested using z-distribution."
 msgstr "تُختبر الآثار الثابتة باستخدام توزيع z."
 
@@ -973,11 +990,9 @@ msgstr "الأثر المجمّع"
 msgid "adjusted effect"
 msgstr "الأثر المعدل"
 
-msgid "%1$i observations were ommited due to missing values."
-msgstr "استُبعدت %1$i مشاهدة بسبب القيم المفقودة."
-
-msgid "%1$s: %2$i observations were ommited due to missing values."
-msgstr "%1$s: استُبعدت %2$i مشاهدة بسبب القيم المفقودة."
+#, fuzzy
+msgid "Subgroup %1$s"
+msgstr "المجموعة الفرعية %1$s:"
 
 msgid "%1$s: %2$s"
 msgstr "%1$s: %2$s"
@@ -1009,7 +1024,8 @@ msgid ""
 "The adjusted effect corresponds to the averaged effect size estimate across "
 "the levels of all moderators."
 msgstr ""
-"يقابل الأثر المعدَّل متوسط تقديرات حجم الأثر عبر مستويات جميع المتغيرات المعدِّلة."
+"يقابل الأثر المعدَّل متوسط تقديرات حجم الأثر عبر مستويات جميع المتغيرات "
+"المعدِّلة."
 
 msgid ""
 "The pooled heterogeneity estimate corresponds to the heterogeneity at the "
@@ -1045,7 +1061,8 @@ msgstr "عدد العناقيد %1$i؛ وعدد التقديرات في كل ع�
 
 msgid "%1$i clusters; min/median/max %2$i/%3$i/%4$i estimates per cluster"
 msgstr ""
-"%1$i عنقودًا؛ الحد الأدنى/الوسيط/الحد الأقصى للتقديرات لكل عنقود: %2$i/%3$i/%4$i"
+"%1$i عنقودًا؛ الحد الأدنى/الوسيط/الحد الأقصى للتقديرات لكل عنقود: %2$i/%3$i/"
+"%4$i"
 
 msgid ""
 "clubSandwich was used with CR2 adjustment and Satterthwaite degrees of "
@@ -1218,7 +1235,8 @@ msgstr "تربيعي نسبي (Rational quadratic)"
 msgid "Spherical"
 msgstr "كروي"
 
-msgid "Random Effects / Model Stucture Summary"
+#, fuzzy
+msgid "Random Effects / Model Structure Summary"
 msgstr "ملخص الآثار العشوائية / بنية النموذج"
 
 msgid "Simple / Nested Summary"
@@ -1263,7 +1281,8 @@ msgstr "LRT"
 msgid ""
 "Likelihood Ratio Test (LRT) and p-value are based on a comparison with the "
 "complete model."
-msgstr "يستند اختبار نسبة الإمكان (LRT) وقيمة p إلى المقارنة مع النموذج الكامل."
+msgstr ""
+"يستند اختبار نسبة الإمكان (LRT) وقيمة p إلى المقارنة مع النموذج الكامل."
 
 msgid "Random Slopes Summary"
 msgstr "ملخص الميول العشوائية"
@@ -1297,6 +1316,11 @@ msgstr "تقديرات 𝜏²"
 
 msgid "Estimates ρ"
 msgstr "تقديرات ρ"
+
+msgid ""
+"Confidence intervals are not available for variance components fixed to zero "
+"(e.g., levels with a single estimate)."
+msgstr ""
 
 msgid "ρ"
 msgstr "ρ"
@@ -1437,8 +1461,8 @@ msgid ""
 "The within-cluster correlation is set to 0. This corresponds to no "
 "adjustment for dependency between effect sizes within clusters."
 msgstr ""
-"ضُبط الارتباط داخل العنقود على 0. يقابل ذلك عدم إجراء تصحيح للاعتماد بين أحجام "
-"الأثر داخل العناقيد."
+"ضُبط الارتباط داخل العنقود على 0. يقابل ذلك عدم إجراء تصحيح للاعتماد بين "
+"أحجام الأثر داخل العناقيد."
 
 msgid ""
 "Please provide a time variable for autoregressive correlation structures."
@@ -1516,8 +1540,8 @@ msgid ""
 "Aggregation used the selected precomputed working effect-size variance-"
 "covariance matrix."
 msgstr ""
-"استُخدمت للتجميع مصفوفة التباين–التغاير العاملة لأحجام الأثر المحددة والمحسوبة "
-"مسبقًا."
+"استُخدمت للتجميع مصفوفة التباين–التغاير العاملة لأحجام الأثر المحددة "
+"والمحسوبة مسبقًا."
 
 msgid ""
 "Aggregation used a working effect-size variance-covariance matrix based on "
@@ -1556,8 +1580,8 @@ msgid ""
 "correlation %3$s over %4$s."
 msgstr ""
 "استُخدم في التجميع اعتماد أخطاء المعاينة بالتناظر المركب مضروبًا في الانحدار "
-"الذاتي لـ %1$s، بارتباط داخل العنقود %2$s وارتباط عند الإبطاء 1 قدره %3$s عبر "
-"%4$s."
+"الذاتي لـ %1$s، بارتباط داخل العنقود %2$s وارتباط عند الإبطاء 1 قدره %3$s "
+"عبر %4$s."
 
 msgid ""
 "Cannot compute outcomes. Check that all of the required information is "
@@ -1606,18 +1630,35 @@ msgstr "تقدير الأثر الثابت"
 msgid "Intercept estimate"
 msgstr "تقدير الثابت"
 
+#, fuzzy
+msgid "Unadjusted fixed effect"
+msgstr "الأثر المعدل"
+
+#, fuzzy
+msgid "Unadjusted random effects"
+msgstr "الأثر المعدل"
+
+#, fuzzy
+msgid "The unadjusted fixed effect estimate could not be calculated."
+msgstr "تعذر حساب حجم الأثر الثابت."
+
+#, fuzzy
+msgid "The unadjusted random effects estimate could not be calculated."
+msgstr "تعذر حساب حجم الأثر المجمّع."
+
 msgid ""
 "No rows to display. Check that the visualization type mapping assigns at "
 "least one level to 'Study' or 'Estimate'."
 msgstr ""
-"لا توجد صفوف لعرضها. تحقق من إسناد مستوى واحد على الأقل إلى 'دراسة' أو 'تقدير' "
-"في تعيين نوع العرض البياني."
+"لا توجد صفوف لعرضها. تحقق من إسناد مستوى واحد على الأقل إلى 'دراسة' أو "
+"'تقدير' في تعيين نوع العرض البياني."
 
 msgid ""
 "The weight variable must contain finite, non-negative values with at least "
 "one positive value."
 msgstr ""
-"يجب أن يتضمن متغير الأوزان قيمًا منتهية غير سالبة، وقيمة موجبة واحدة على الأقل."
+"يجب أن يتضمن متغير الأوزان قيمًا منتهية غير سالبة، وقيمة موجبة واحدة على "
+"الأقل."
 
 msgid "Invalid forest plot input."
 msgstr "مدخلات مخطط الغابة غير صالحة."
@@ -1655,7 +1696,8 @@ msgid ""
 "Power enhancement breaks were specified in an incorrect format. Try '(0.30, "
 "0.50, 0.80)'."
 msgstr ""
-"تنسيق القيم الفاصلة لتحسين القوة الإحصائية غير صحيح. جرّب '(0.30, 0.50, 0.80)'."
+"تنسيق القيم الفاصلة لتحسين القوة الإحصائية غير صحيح. جرّب '(0.30, 0.50, "
+"0.80)'."
 
 msgid "At least one power enhancement break must be specified."
 msgstr "يجب تحديد قيمة فاصلة واحدة على الأقل لتحسين القوة الإحصائية."
@@ -1911,16 +1953,113 @@ msgid ""
 "largest R-hat is %1$.3f > 1.01. To lower R-hat please increase 'Iterations', "
 "or 'Adapt delta' in the Options section."
 msgstr ""
-"قد يكون الاستدلال غير موثوق؛ ربما لم تتقارب سلاسل MCMC. أكبر R-hat هو %1$.3f > "
-"1.01. لخفضه، زِد 'التكرارات' أو 'Adapt delta' في قسم الخيارات."
+"قد يكون الاستدلال غير موثوق؛ ربما لم تتقارب سلاسل MCMC. أكبر R-hat هو %1$.3f "
+"> 1.01. لخفضه، زِد 'التكرارات' أو 'Adapt delta' في قسم الخيارات."
 
 msgid ""
 "Low estimation accuracy -- The smallest Effective Sample Size (ESS) is "
 "%1$.2f < %2$1.0f. To increase accuracy please increase 'Iterations', or "
 "'Adapt delta' in the Options section."
 msgstr ""
-"دقة تقدير منخفضة؛ أصغر حجم عينة فعّال (ESS) هو %1$.2f < %2$1.0f. لزيادة الدقة"
-"، زِد 'التكرارات' أو 'Adapt delta' في الخيارات."
+"دقة تقدير منخفضة؛ أصغر حجم عينة فعّال (ESS) هو %1$.2f < %2$1.0f. لزيادة "
+"الدقة، زِد 'التكرارات' أو 'Adapt delta' في الخيارات."
+
+#, fuzzy
+msgid "Regression Plot"
+msgstr "تقديرات الانحدار"
+
+#, fuzzy
+msgid "The regression plot could not be created."
+msgstr "تعذر حساب حجم الأثر المجمّع."
+
+msgid "Subject to selection"
+msgstr ""
+
+msgid "Unaffected"
+msgstr ""
+
+#, fuzzy
+msgid "R code unavailable: %1$s"
+msgstr "فترة الثقة لعدم التجانس غير متاحة: %1$s"
+
+msgid "The module reported: %1$s"
+msgstr "أبلغت الوحدة عن: %1$s"
+
+#, fuzzy
+msgid "Publication bias (PEESE)"
+msgstr "تحيز النشر"
+
+#, fuzzy
+msgid "Publication bias (PET)"
+msgstr "تحيز النشر"
+
+#, fuzzy
+msgid "PET-PEESE Summary"
+msgstr "PET-PEESE"
+
+#, fuzzy
+msgid "Bias Coefficient Estimates"
+msgstr "تقديرات التغاير"
+
+msgid "The coefficient is not transformed."
+msgstr ""
+
+#, fuzzy
+msgid "Results are based on the %1$s model."
+msgstr "تستند مؤشرات التشخيص إلى النموذج دون ضبط التجميع العنقودي."
+
+msgid ""
+"Results are based on the %1$s model: the PET adjusted effect test resulted "
+"in %2$s (threshold %3$s)."
+msgstr ""
+
+#, fuzzy
+msgid "Standard error (PET)"
+msgstr "الخطأ المعياري"
+
+#, fuzzy
+msgid "Standard error² (PEESE)"
+msgstr "الخطأ المعياري"
+
+msgid ""
+"The unaffected level is not present in the no-selection variable. Choose an "
+"available level."
+msgstr ""
+"المستوى المستثنى من الانتقاء غير موجود في متغير الاستثناء من الانتقاء. اختر "
+"مستوى متاحًا."
+
+msgid ""
+"No estimates are subject to selection (all estimates are at the unaffected "
+"level). The publication bias adjustment is not estimable."
+msgstr ""
+
+msgid ""
+"The publication bias adjustment is not estimable: the standard errors are "
+"constant or redundant with the moderators."
+msgstr ""
+
+msgid ""
+"PET-PEESE model selection is unavailable because the test of the PET "
+"adjusted effect could not be computed."
+msgstr ""
+
+msgid ""
+"The PET model could not be estimated because there are too few estimates "
+"(%1$i)."
+msgstr ""
+
+#, fuzzy
+msgid "The PET model could not be estimated: %1$s"
+msgstr "تعذّرت ملاءمة النموذج: %1$s"
+
+msgid ""
+"The PET model for subgroup '%1$s' could not be estimated because there are "
+"too few estimates (%2$i)."
+msgstr ""
+
+#, fuzzy
+msgid "The PET model for subgroup '%1$s' could not be estimated: %2$s"
+msgstr "تعذّرت ملاءمة نموذج المجموعة الفرعية '%1$s' بسبب الخطأ الآتي: %2$s"
 
 msgid "t-statistic"
 msgstr "إحصاء t"
@@ -2043,8 +2182,8 @@ msgid ""
 "Please select at least one 'Type' of diagnostics plot (e.g., 'Trace', "
 "'Autocorrelation' or 'Posterior samples density')."
 msgstr ""
-"اختر نوعًا واحدًا على الأقل من مخططات التشخيص، مثل التتبع أو الارتباط الذاتي أو "
-"كثافة العينات البعدية."
+"اختر نوعًا واحدًا على الأقل من مخططات التشخيص، مثل التتبع أو الارتباط الذاتي "
+"أو كثافة العينات البعدية."
 
 msgid "Estimated Conditional Marginal Means"
 msgstr "المتوسطات الهامشية المشروطة المقدّرة"
@@ -2277,8 +2416,8 @@ msgid ""
 "No estimates are marked as subject to selection. Use the unadjusted model "
 "(None) or choose a different unaffected level."
 msgstr ""
-"لا توجد تقديرات وسمت بأنها خاضعة للاختيار. استخدم النموذج غير المعدل (None) أو "
-"اختر مستوى مختلفا غير متأثر."
+"لا توجد تقديرات وسمت بأنها خاضعة للاختيار. استخدم النموذج غير المعدل (None) "
+"أو اختر مستوى مختلفا غير متأثر."
 
 msgid ""
 "The reference interval or an interval with an estimated weight contains no "
@@ -2311,8 +2450,8 @@ msgid ""
 "Step-function cutoffs must be strictly increasing and greater than 0, with a "
 "maximum of 1."
 msgstr ""
-"يجب أن تكون القيم الفاصلة للدالة الدرجية متزايدة تزايدًا تامًا وأكبر من 0، وألا "
-"تتجاوز 1."
+"يجب أن تكون القيم الفاصلة للدالة الدرجية متزايدة تزايدًا تامًا وأكبر من 0، "
+"وألا تتجاوز 1."
 
 msgid "Specify at least one cutoff below 1."
 msgstr "حدّد قيمة فاصلة واحدة على الأقل تقل عن 1."
@@ -2437,7 +2576,8 @@ msgstr "تشخيصات الإمكان الجانبي غير متاحة لنما�
 
 msgid "There are no free heterogeneity or selection parameters to profile."
 msgstr ""
-"لا توجد معلمات حرة لعدم التجانس أو الانتقاء لحساب منحنيات الإمكان الجانبي لها."
+"لا توجد معلمات حرة لعدم التجانس أو الانتقاء لحساب منحنيات الإمكان الجانبي "
+"لها."
 
 msgid "Selection Parameter %1$i"
 msgstr "معلمة الانتقاء %1$i"
@@ -2447,9 +2587,6 @@ msgstr "يقل عدد قيم الإمكان الجانبي المنتهية ال
 
 msgid "R code unavailable until the specification is valid: %1$s"
 msgstr "شيفرة R غير متاحة حتى يصبح التوصيف صالحًا: %1$s"
-
-msgid "The module reported: %1$s"
-msgstr "أبلغت الوحدة عن: %1$s"
 
 msgid "R Code"
 msgstr "شيفرة R"
@@ -2523,21 +2660,13 @@ msgstr "نتائج النموذج"
 msgid "No fitted model is available for the requested selection."
 msgstr "لا يتوفر نموذج جرت ملاءمته للانتقاء المطلوب."
 
-msgid ""
-"The unaffected level is not present in the no-selection variable. Choose an "
-"available level."
-msgstr ""
-"المستوى المستثنى من الانتقاء غير موجود في متغير الاستثناء من الانتقاء. اختر "
-"مستوى متاحًا."
-
 msgid "P-values must be finite, greater than zero, and at most one."
 msgstr "يجب أن تكون قيم p منتهية وأكبر من صفر وألا تتجاوز واحدًا."
 
 msgid ""
 "Sample-size variable not found in the data. Assign an available sample-size "
 "variable."
-msgstr ""
-"متغير حجم العينة غير موجود في البيانات. عيّن متغيرًا متاحًا لحجم العينة."
+msgstr "متغير حجم العينة غير موجود في البيانات. عيّن متغيرًا متاحًا لحجم العينة."
 
 msgid "Sample sizes must be finite and greater than zero."
 msgstr "يجب أن تكون أحجام العينات منتهية وأكبر من صفر."
@@ -2588,68 +2717,64 @@ msgstr "ملخص المعامل"
 msgid "Computed Estimates Summary"
 msgstr "ملخص التقديرات المحسوبة"
 
-msgid ""
-"Cannot compute results. All entries of the correlation coefficient variable "
-"(%s) must be between -1 and 1."
-msgstr ""
-"تعذر حساب النتائج. يجب أن تقع جميع قيم متغير معامل الارتباط (%s) بين -1 و1."
+#, fuzzy
+msgid "Results are based on the WAAP model."
+msgstr "تستند مؤشرات التشخيص إلى النموذج دون ضبط التجميع العنقودي."
+
+#, fuzzy
+msgid "Results are based on the WLS model. %1$s"
+msgstr "تستند مؤشرات التشخيص إلى النموذج دون ضبط التجميع العنقودي."
 
 msgid ""
-"Cannot compute results. All entries of the sample size variable (%s) must be "
-"greater than four."
+"Results are based on the WLS model: the WAAP model requires at least %1$i "
+"adequately powered estimates."
 msgstr ""
-"تعذر حساب النتائج. يجب أن تكون جميع قيم متغير حجم العينة (%s) أكبر من أربعة."
-
-msgid "95%% Confidence Interval"
-msgstr "فترة الثقة 95%%"
-
-msgid "Error: There were not enough adequately powered studies (k = %1$i)"
-msgstr "خطأ: عدد الدراسات ذات القوة الإحصائية الكافية غير كافٍ (k = %1$i)"
-
-msgid "Note: There were %1$i adequately powered studies"
-msgstr "ملاحظة: بلغ عدد الدراسات ذات القوة الإحصائية الكافية %1$i"
-
-msgid "Model Tests"
-msgstr "اختبارات النموذج"
-
-msgid "Test of Effect"
-msgstr "اختبار الأثر"
-
-msgid "Test of Publication Bias"
-msgstr "اختبار تحيز النشر"
-
-msgid "Mean Estimates (%s)"
-msgstr "تقديرات المتوسط (%s)"
-
-msgid "Multiplicative Heterogeneity Estimates"
-msgstr "تقديرات عدم التجانس المضاعِف"
-
-msgid "Estimated %1$s Regression"
-msgstr "انحدار %1$s المقدّر"
-
-msgid "Cohen's d"
-msgstr "معامل d لكوهين"
-
-msgid "Fisher's z"
-msgstr "z لفيشر"
-
-msgid "Mean Model Estimates (%s)"
-msgstr "تقديرات نموذج المتوسط (%s)"
 
 msgid ""
-"The figure could not be created since one of the estimates is not a number."
-msgstr "تعذر إنشاء الشكل لأن أحد التقديرات ليس عددًا."
+"Results are based on the WLS model: the WAAP model requires at least %1$i "
+"adequately powered or unaffected estimates."
+msgstr ""
 
 msgid ""
-"WAAP was not estimated: There were only %1$i adequately powered studies "
-"(power > 80%%)."
+"The power is evaluated at the moderator-specific predicted effects of the "
+"WLS model."
 msgstr ""
-"لم يُقدَّر WAAP: لم توجد سوى %1$i من الدراسات ذات القوة الإحصائية الكافية (القوة "
-"الإحصائية > 80%%)."
 
-msgid "There were %1$i adequately powered studies (power > 80%%)."
+msgid "The power is evaluated at the pooled effect of the WLS model."
 msgstr ""
-"بلغ عدد الدراسات ذات القوة الإحصائية الكافية %1$i (القوة الإحصائية > 80%%)."
+
+#, fuzzy
+msgid "The power of the estimates could not be computed: %1$s"
+msgstr "تعذّر حساب مؤشرات تشخيص الحالات: %1$s"
+
+#, fuzzy
+msgid "The WAAP model failed: %1$s"
+msgstr "أبلغت الوحدة عن: %1$s"
+
+msgid ""
+"The moderators of the WAAP model are not estimable from the retained "
+"estimates."
+msgstr ""
+
+#, fuzzy
+msgid "%1$i observation was omitted due to missing values."
+msgid_plural "%1$i observations were omitted due to missing values."
+msgstr[0] "استُبعدت %1$i مشاهدة بسبب القيم المفقودة."
+msgstr[1] "استُبعدت %1$i مشاهدة بسبب القيم المفقودة."
+msgstr[2] "استُبعدت %1$i مشاهدة بسبب القيم المفقودة."
+msgstr[3] "استُبعدت %1$i مشاهدة بسبب القيم المفقودة."
+msgstr[4] "استُبعدت %1$i مشاهدة بسبب القيم المفقودة."
+msgstr[5] "استُبعدت %1$i مشاهدة بسبب القيم المفقودة."
+
+#, fuzzy
+msgid "%1$s: %2$i observation was omitted due to missing values."
+msgid_plural "%1$s: %2$i observations were omitted due to missing values."
+msgstr[0] "%1$s: استُبعدت %2$i مشاهدة بسبب القيم المفقودة."
+msgstr[1] "%1$s: استُبعدت %2$i مشاهدة بسبب القيم المفقودة."
+msgstr[2] "%1$s: استُبعدت %2$i مشاهدة بسبب القيم المفقودة."
+msgstr[3] "%1$s: استُبعدت %2$i مشاهدة بسبب القيم المفقودة."
+msgstr[4] "%1$s: استُبعدت %2$i مشاهدة بسبب القيم المفقودة."
+msgstr[5] "%1$s: استُبعدت %2$i مشاهدة بسبب القيم المفقودة."
 
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
@@ -2735,29 +2860,48 @@ msgid_plural ""
 "exceeded the maximum tree depth. This can be solved by carefully increasing "
 "'Maximum tree depth'."
 msgstr[0] ""
-"قد يكون إجراء مونت كارلو الهاملتوني غير كفء -- بلغ عدد الانتقالات التي تجاوزت "
-"العمق الأقصى للشجرة %i. يمكن معالجة ذلك بزيادة 'Maximum tree depth' تدريجيًا "
-"وبحذر."
+"قد يكون إجراء مونت كارلو الهاملتوني غير كفء -- بلغ عدد الانتقالات التي "
+"تجاوزت العمق الأقصى للشجرة %i. يمكن معالجة ذلك بزيادة 'Maximum tree depth' "
+"تدريجيًا وبحذر."
 msgstr[1] ""
-"قد يكون إجراء مونت كارلو الهاملتوني غير كفء -- بلغ عدد الانتقالات التي تجاوزت "
-"العمق الأقصى للشجرة %i. يمكن معالجة ذلك بزيادة 'Maximum tree depth' تدريجيًا "
-"وبحذر."
+"قد يكون إجراء مونت كارلو الهاملتوني غير كفء -- بلغ عدد الانتقالات التي "
+"تجاوزت العمق الأقصى للشجرة %i. يمكن معالجة ذلك بزيادة 'Maximum tree depth' "
+"تدريجيًا وبحذر."
 msgstr[2] ""
-"قد يكون إجراء مونت كارلو الهاملتوني غير كفء -- بلغ عدد الانتقالات التي تجاوزت "
-"العمق الأقصى للشجرة %i. يمكن معالجة ذلك بزيادة 'Maximum tree depth' تدريجيًا "
-"وبحذر."
+"قد يكون إجراء مونت كارلو الهاملتوني غير كفء -- بلغ عدد الانتقالات التي "
+"تجاوزت العمق الأقصى للشجرة %i. يمكن معالجة ذلك بزيادة 'Maximum tree depth' "
+"تدريجيًا وبحذر."
 msgstr[3] ""
-"قد يكون إجراء مونت كارلو الهاملتوني غير كفء -- بلغ عدد الانتقالات التي تجاوزت "
-"العمق الأقصى للشجرة %i. يمكن معالجة ذلك بزيادة 'Maximum tree depth' تدريجيًا "
-"وبحذر."
+"قد يكون إجراء مونت كارلو الهاملتوني غير كفء -- بلغ عدد الانتقالات التي "
+"تجاوزت العمق الأقصى للشجرة %i. يمكن معالجة ذلك بزيادة 'Maximum tree depth' "
+"تدريجيًا وبحذر."
 msgstr[4] ""
-"قد يكون إجراء مونت كارلو الهاملتوني غير كفء -- بلغ عدد الانتقالات التي تجاوزت "
-"العمق الأقصى للشجرة %i. يمكن معالجة ذلك بزيادة 'Maximum tree depth' تدريجيًا "
-"وبحذر."
+"قد يكون إجراء مونت كارلو الهاملتوني غير كفء -- بلغ عدد الانتقالات التي "
+"تجاوزت العمق الأقصى للشجرة %i. يمكن معالجة ذلك بزيادة 'Maximum tree depth' "
+"تدريجيًا وبحذر."
 msgstr[5] ""
-"قد يكون إجراء مونت كارلو الهاملتوني غير كفء -- بلغ عدد الانتقالات التي تجاوزت "
-"العمق الأقصى للشجرة %i. يمكن معالجة ذلك بزيادة 'Maximum tree depth' تدريجيًا "
-"وبحذر."
+"قد يكون إجراء مونت كارلو الهاملتوني غير كفء -- بلغ عدد الانتقالات التي "
+"تجاوزت العمق الأقصى للشجرة %i. يمكن معالجة ذلك بزيادة 'Maximum tree depth' "
+"تدريجيًا وبحذر."
+
+#, fuzzy
+msgid "The bias adjustment applies to %1$i estimate."
+msgid_plural "The bias adjustment applies to %1$i estimates."
+msgstr[0] "عدد التقديرات التي ينطبق عليها الانتقاء: %1$i."
+msgstr[1] "عدد التقديرات التي ينطبق عليها الانتقاء: %1$i."
+msgstr[2] "عدد التقديرات التي ينطبق عليها الانتقاء: %1$i."
+msgstr[3] "عدد التقديرات التي ينطبق عليها الانتقاء: %1$i."
+msgstr[4] "عدد التقديرات التي ينطبق عليها الانتقاء: %1$i."
+msgstr[5] "عدد التقديرات التي ينطبق عليها الانتقاء: %1$i."
+
+msgid "%1$i estimate at level '%2$s' is unaffected."
+msgid_plural "%1$i estimates at level '%2$s' are unaffected."
+msgstr[0] "عدد التقديرات غير المتأثرة عند المستوى '%2$s': %1$i."
+msgstr[1] "عدد التقديرات غير المتأثرة عند المستوى '%2$s': %1$i."
+msgstr[2] "عدد التقديرات غير المتأثرة عند المستوى '%2$s': %1$i."
+msgstr[3] "عدد التقديرات غير المتأثرة عند المستوى '%2$s': %1$i."
+msgstr[4] "عدد التقديرات غير المتأثرة عند المستوى '%2$s': %1$i."
+msgstr[5] "عدد التقديرات غير المتأثرة عند المستوى '%2$s': %1$i."
 
 msgid ""
 "The selection weight for p-value interval %1$s is fixed at zero, but the "
@@ -2795,15 +2939,6 @@ msgstr[3] "عدد التقديرات التي ينطبق عليها الانتق
 msgstr[4] "عدد التقديرات التي ينطبق عليها الانتقاء: %1$i."
 msgstr[5] "عدد التقديرات التي ينطبق عليها الانتقاء: %1$i."
 
-msgid "%1$i estimate at level '%2$s' is unaffected."
-msgid_plural "%1$i estimates at level '%2$s' are unaffected."
-msgstr[0] "عدد التقديرات غير المتأثرة عند المستوى '%2$s': %1$i."
-msgstr[1] "عدد التقديرات غير المتأثرة عند المستوى '%2$s': %1$i."
-msgstr[2] "عدد التقديرات غير المتأثرة عند المستوى '%2$s': %1$i."
-msgstr[3] "عدد التقديرات غير المتأثرة عند المستوى '%2$s': %1$i."
-msgstr[4] "عدد التقديرات غير المتأثرة عند المستوى '%2$s': %1$i."
-msgstr[5] "عدد التقديرات غير المتأثرة عند المستوى '%2$s': %1$i."
-
 msgid ""
 "For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. "
 "This affects %3$i selected estimate."
@@ -2811,20 +2946,109 @@ msgid_plural ""
 "For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. "
 "This affects %3$i selected estimates."
 msgstr[0] ""
-"لضمان الاستقرار العددي، يقصر metafor قيم p الخاصة بالانتقاء على المجال [%1$s, "
-"%2$s]. عدد التقديرات المنتقاة المتأثرة: %3$i."
+"لضمان الاستقرار العددي، يقصر metafor قيم p الخاصة بالانتقاء على المجال "
+"[%1$s, %2$s]. عدد التقديرات المنتقاة المتأثرة: %3$i."
 msgstr[1] ""
-"لضمان الاستقرار العددي، يقصر metafor قيم p الخاصة بالانتقاء على المجال [%1$s, "
-"%2$s]. عدد التقديرات المنتقاة المتأثرة: %3$i."
+"لضمان الاستقرار العددي، يقصر metafor قيم p الخاصة بالانتقاء على المجال "
+"[%1$s, %2$s]. عدد التقديرات المنتقاة المتأثرة: %3$i."
 msgstr[2] ""
-"لضمان الاستقرار العددي، يقصر metafor قيم p الخاصة بالانتقاء على المجال [%1$s, "
-"%2$s]. عدد التقديرات المنتقاة المتأثرة: %3$i."
+"لضمان الاستقرار العددي، يقصر metafor قيم p الخاصة بالانتقاء على المجال "
+"[%1$s, %2$s]. عدد التقديرات المنتقاة المتأثرة: %3$i."
 msgstr[3] ""
-"لضمان الاستقرار العددي، يقصر metafor قيم p الخاصة بالانتقاء على المجال [%1$s, "
-"%2$s]. عدد التقديرات المنتقاة المتأثرة: %3$i."
+"لضمان الاستقرار العددي، يقصر metafor قيم p الخاصة بالانتقاء على المجال "
+"[%1$s, %2$s]. عدد التقديرات المنتقاة المتأثرة: %3$i."
 msgstr[4] ""
-"لضمان الاستقرار العددي، يقصر metafor قيم p الخاصة بالانتقاء على المجال [%1$s, "
-"%2$s]. عدد التقديرات المنتقاة المتأثرة: %3$i."
+"لضمان الاستقرار العددي، يقصر metafor قيم p الخاصة بالانتقاء على المجال "
+"[%1$s, %2$s]. عدد التقديرات المنتقاة المتأثرة: %3$i."
 msgstr[5] ""
-"لضمان الاستقرار العددي، يقصر metafor قيم p الخاصة بالانتقاء على المجال [%1$s, "
-"%2$s]. عدد التقديرات المنتقاة المتأثرة: %3$i."
+"لضمان الاستقرار العددي، يقصر metafor قيم p الخاصة بالانتقاء على المجال "
+"[%1$s, %2$s]. عدد التقديرات المنتقاة المتأثرة: %3$i."
+
+#, fuzzy
+msgid "%1$i of %2$i estimates is adequately powered (power ≥ %3$s%%)."
+msgid_plural "%1$i of %2$i estimates are adequately powered (power ≥ %3$s%%)."
+msgstr[0] ""
+"بلغ عدد الدراسات ذات القوة الإحصائية الكافية %1$i (القوة الإحصائية > 80%%)."
+msgstr[1] ""
+"بلغ عدد الدراسات ذات القوة الإحصائية الكافية %1$i (القوة الإحصائية > 80%%)."
+msgstr[2] ""
+"بلغ عدد الدراسات ذات القوة الإحصائية الكافية %1$i (القوة الإحصائية > 80%%)."
+msgstr[3] ""
+"بلغ عدد الدراسات ذات القوة الإحصائية الكافية %1$i (القوة الإحصائية > 80%%)."
+msgstr[4] ""
+"بلغ عدد الدراسات ذات القوة الإحصائية الكافية %1$i (القوة الإحصائية > 80%%)."
+msgstr[5] ""
+"بلغ عدد الدراسات ذات القوة الإحصائية الكافية %1$i (القوة الإحصائية > 80%%)."
+
+#, fuzzy
+msgid "%1$i estimate at level '%2$s' is unaffected and always retained."
+msgid_plural ""
+"%1$i estimates at level '%2$s' are unaffected and always retained."
+msgstr[0] "عدد التقديرات غير المتأثرة عند المستوى '%2$s': %1$i."
+msgstr[1] "عدد التقديرات غير المتأثرة عند المستوى '%2$s': %1$i."
+msgstr[2] "عدد التقديرات غير المتأثرة عند المستوى '%2$s': %1$i."
+msgstr[3] "عدد التقديرات غير المتأثرة عند المستوى '%2$s': %1$i."
+msgstr[4] "عدد التقديرات غير المتأثرة عند المستوى '%2$s': %1$i."
+msgstr[5] "عدد التقديرات غير المتأثرة عند المستوى '%2$s': %1$i."
+
+#~ msgid ""
+#~ "Cannot compute results. All entries of the correlation coefficient "
+#~ "variable (%s) must be between -1 and 1."
+#~ msgstr ""
+#~ "تعذر حساب النتائج. يجب أن تقع جميع قيم متغير معامل الارتباط (%s) بين -1 "
+#~ "و1."
+
+#~ msgid ""
+#~ "Cannot compute results. All entries of the sample size variable (%s) must "
+#~ "be greater than four."
+#~ msgstr ""
+#~ "تعذر حساب النتائج. يجب أن تكون جميع قيم متغير حجم العينة (%s) أكبر من "
+#~ "أربعة."
+
+#~ msgid "95%% Confidence Interval"
+#~ msgstr "فترة الثقة 95%%"
+
+#~ msgid "Error: There were not enough adequately powered studies (k = %1$i)"
+#~ msgstr "خطأ: عدد الدراسات ذات القوة الإحصائية الكافية غير كافٍ (k = %1$i)"
+
+#~ msgid "Note: There were %1$i adequately powered studies"
+#~ msgstr "ملاحظة: بلغ عدد الدراسات ذات القوة الإحصائية الكافية %1$i"
+
+#~ msgid "Model Tests"
+#~ msgstr "اختبارات النموذج"
+
+#~ msgid "Test of Effect"
+#~ msgstr "اختبار الأثر"
+
+#~ msgid "Test of Publication Bias"
+#~ msgstr "اختبار تحيز النشر"
+
+#~ msgid "Mean Estimates (%s)"
+#~ msgstr "تقديرات المتوسط (%s)"
+
+#~ msgid "Multiplicative Heterogeneity Estimates"
+#~ msgstr "تقديرات عدم التجانس المضاعِف"
+
+#~ msgid "Estimated %1$s Regression"
+#~ msgstr "انحدار %1$s المقدّر"
+
+#~ msgid "Cohen's d"
+#~ msgstr "معامل d لكوهين"
+
+#~ msgid "Fisher's z"
+#~ msgstr "z لفيشر"
+
+#~ msgid "Mean Model Estimates (%s)"
+#~ msgstr "تقديرات نموذج المتوسط (%s)"
+
+#~ msgid ""
+#~ "The figure could not be created since one of the estimates is not a "
+#~ "number."
+#~ msgstr "تعذر إنشاء الشكل لأن أحد التقديرات ليس عددًا."
+
+#~ msgid ""
+#~ "WAAP was not estimated: There were only %1$i adequately powered studies "
+#~ "(power > 80%%)."
+#~ msgstr ""
+#~ "لم يُقدَّر WAAP: لم توجد سوى %1$i من الدراسات ذات القوة الإحصائية الكافية "
+#~ "(القوة الإحصائية > 80%%)."

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.19.2\n"
-"POT-Creation-Date: 2026-11-07 02:33\n"
+"POT-Creation-Date: 2026-11-14 02:33\n"
 "PO-Revision-Date: 2026-01-01 18:01+0000\n"
 "Last-Translator: தமிழ்நேரம் <tamilneram247@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/jasp/"
@@ -413,6 +413,11 @@ msgstr ""
 "பன்முகத்தன்மை குறித்த மெட்டா-பின்னடைவு கொண்ட மாதிரிகளுக்கு சுயவிவர சாத்தியக்கூறு "
 "கிடைக்கவில்லை."
 
+msgid ""
+"Profile likelihood is not available for equal effects, fixed effects, or "
+"unrestricted weighted least squares models."
+msgstr ""
+
 msgid "Baujat Plot"
 msgstr "ப அயு சாத் சூழ்ச்சி"
 
@@ -520,7 +525,8 @@ msgstr "செல்வாக்குமிக்க வழக்குகள�
 msgid "%1$sNo influential cases found."
 msgstr "%1$s ச்னோ செல்வாக்குமிக்க வழக்குகள் காணப்படுகின்றன."
 
-msgid "Diagnostics are based on the the subgroup models."
+#, fuzzy
+msgid "Diagnostics are based on the subgroup models."
 msgstr "நோயறிதல் துணைக்குழு மாதிரிகளை அடிப்படையாகக் கொண்டது."
 
 msgid "Diagnostics are based on the non-clustered model."
@@ -696,6 +702,9 @@ msgstr ""
 msgid "Residual heterogeneity"
 msgstr "மீதமுள்ள பன்முகத்தன்மை"
 
+msgid "not available"
+msgstr ""
+
 #, fuzzy
 msgid "Moderation (effect size): %1$s"
 msgstr "மிதமான (விளைவு அளவு): %1$s"
@@ -727,6 +736,9 @@ msgstr ""
 msgid ""
 "Knapp-Hartung inference is based on very few residual degrees of freedom; "
 "results can be sensitive and should be interpreted cautiously."
+msgstr ""
+
+msgid "There are too few estimates to estimate the model."
 msgstr ""
 
 msgid ""
@@ -946,6 +958,10 @@ msgstr "எஐசிசி"
 msgid "R²"
 msgstr "R²"
 
+#, fuzzy
+msgid "Fixed effects tested using cluster-robust t-distribution."
+msgstr "டி-விநியோகத்தைப் பயன்படுத்தி நிலையான விளைவுகள் சோதிக்கப்பட்டன."
+
 msgid "Fixed effects tested using z-distribution."
 msgstr "Z- விநியோகத்தைப் பயன்படுத்தி நிலையான விளைவுகள் சோதிக்கப்படுகின்றன."
 
@@ -967,11 +983,9 @@ msgstr "பூல் விளைவு"
 msgid "adjusted effect"
 msgstr "சரிசெய்யப்பட்ட விளைவு"
 
-msgid "%1$i observations were ommited due to missing values."
-msgstr "மதிப்புகள் காணாமல் போனதால் %1$i அவதானிப்புகள் வெளியேற்றப்பட்டன."
-
-msgid "%1$s: %2$i observations were ommited due to missing values."
-msgstr "%1$s: %2$i மதிப்புகள் காணாமல் போனதால் அவதானிப்புகள் பயன்படுத்தப்பட்டன."
+#, fuzzy
+msgid "Subgroup %1$s"
+msgstr "துணைக்குழு %1$s:"
 
 msgid "%1$s: %2$s"
 msgstr "%1$s: %2$s"
@@ -1217,7 +1231,8 @@ msgstr "பகுத்தறிவு இருபடி"
 msgid "Spherical"
 msgstr "கோள"
 
-msgid "Random Effects / Model Stucture Summary"
+#, fuzzy
+msgid "Random Effects / Model Structure Summary"
 msgstr "சீரற்ற விளைவுகள் / மாதிரி ச்டக்சர் சுருக்கம்"
 
 msgid "Simple / Nested Summary"
@@ -1298,6 +1313,11 @@ msgstr "மதிப்பீடுகள் 𝜏²"
 
 msgid "Estimates ρ"
 msgstr "மதிப்பீடுகள்"
+
+msgid ""
+"Confidence intervals are not available for variance components fixed to zero "
+"(e.g., levels with a single estimate)."
+msgstr ""
 
 msgid "ρ"
 msgstr "r"
@@ -1624,6 +1644,22 @@ msgstr "நிலையான விளைவு மதிப்பீடு"
 msgid "Intercept estimate"
 msgstr "இடைமறிப்பு மதிப்பீடு"
 
+#, fuzzy
+msgid "Unadjusted fixed effect"
+msgstr "சரிசெய்யப்பட்ட விளைவு"
+
+#, fuzzy
+msgid "Unadjusted random effects"
+msgstr "சரிசெய்யப்பட்ட விளைவு"
+
+#, fuzzy
+msgid "The unadjusted fixed effect estimate could not be calculated."
+msgstr "நிலையான விளைவு விளைவு அளவைக் கணக்கிட முடியவில்லை."
+
+#, fuzzy
+msgid "The unadjusted random effects estimate could not be calculated."
+msgstr "பூல் செய்யப்பட்ட விளைவு அளவைக் கணக்கிட முடியவில்லை."
+
 msgid ""
 "No rows to display. Check that the visualization type mapping assigns at "
 "least one level to 'Study' or 'Estimate'."
@@ -1944,6 +1980,100 @@ msgstr ""
 "குறைந்த மதிப்பீட்டு துல்லியம் - மிகச்சிறிய பயனுள்ள மாதிரி அளவு (ESS) %1$.2f < "
 "%2$1.0f. ஆகும். துல்லியத்தை அதிகரிக்க தயவுசெய்து 'மறு செய்கைகளை' அதிகரிக்கவும் அல்லது "
 "விருப்பங்கள் பிரிவில் 'டெல்டாவை மாற்றியமைக்கவும்'."
+
+#, fuzzy
+msgid "Regression Plot"
+msgstr "பின்னடைவு மதிப்பீடுகள்"
+
+#, fuzzy
+msgid "The regression plot could not be created."
+msgstr "பூல் செய்யப்பட்ட விளைவு அளவைக் கணக்கிட முடியவில்லை."
+
+msgid "Subject to selection"
+msgstr ""
+
+#, fuzzy
+msgid "Unaffected"
+msgstr "விளைவு"
+
+msgid "R code unavailable: %1$s"
+msgstr ""
+
+msgid "The module reported: %1$s"
+msgstr ""
+
+#, fuzzy
+msgid "Publication bias (PEESE)"
+msgstr "வெளியீட்டு சார்பு"
+
+#, fuzzy
+msgid "Publication bias (PET)"
+msgstr "வெளியீட்டு சார்பு"
+
+#, fuzzy
+msgid "PET-PEESE Summary"
+msgstr "வயிறு"
+
+#, fuzzy
+msgid "Bias Coefficient Estimates"
+msgstr "நிலையான விளைவுகள் மதிப்பீடுகள்"
+
+msgid "The coefficient is not transformed."
+msgstr ""
+
+#, fuzzy
+msgid "Results are based on the %1$s model."
+msgstr "கண்டறிதல் அல்லாத கிளச்டர்டு மாதிரியை அடிப்படையாகக் கொண்டது."
+
+msgid ""
+"Results are based on the %1$s model: the PET adjusted effect test resulted "
+"in %2$s (threshold %3$s)."
+msgstr ""
+
+#, fuzzy
+msgid "Standard error (PET)"
+msgstr "நிலையான பிழை"
+
+#, fuzzy
+msgid "Standard error² (PEESE)"
+msgstr "நிலையான பிழை"
+
+msgid ""
+"The unaffected level is not present in the no-selection variable. Choose an "
+"available level."
+msgstr ""
+
+msgid ""
+"No estimates are subject to selection (all estimates are at the unaffected "
+"level). The publication bias adjustment is not estimable."
+msgstr ""
+
+msgid ""
+"The publication bias adjustment is not estimable: the standard errors are "
+"constant or redundant with the moderators."
+msgstr ""
+
+msgid ""
+"PET-PEESE model selection is unavailable because the test of the PET "
+"adjusted effect could not be computed."
+msgstr ""
+
+msgid ""
+"The PET model could not be estimated because there are too few estimates "
+"(%1$i)."
+msgstr ""
+
+msgid "The PET model could not be estimated: %1$s"
+msgstr ""
+
+msgid ""
+"The PET model for subgroup '%1$s' could not be estimated because there are "
+"too few estimates (%2$i)."
+msgstr ""
+
+#, fuzzy
+msgid "The PET model for subgroup '%1$s' could not be estimated: %2$s"
+msgstr "துணைக்குழுவின் மாதிரி ' %1$s' பின்வரும் பிழையுடன் தோல்வியடைந்தது: %2$s"
 
 msgid "t-statistic"
 msgstr "டி-புள்ளிவிவர"
@@ -2484,9 +2614,6 @@ msgstr ""
 msgid "R code unavailable until the specification is valid: %1$s"
 msgstr ""
 
-msgid "The module reported: %1$s"
-msgstr ""
-
 #, fuzzy
 msgid "R Code"
 msgstr "ராப்மா ஆர் குறியீடு"
@@ -2561,11 +2688,6 @@ msgstr "மாதிரி சோதனைகள்"
 msgid "No fitted model is available for the requested selection."
 msgstr ""
 
-msgid ""
-"The unaffected level is not present in the no-selection variable. Choose an "
-"available level."
-msgstr ""
-
 msgid "P-values must be finite, greater than zero, and at most one."
 msgstr ""
 
@@ -2621,69 +2743,55 @@ msgstr "குணக சுருக்கம்"
 msgid "Computed Estimates Summary"
 msgstr "கணக்கிடப்பட்ட மதிப்பீடுகள் சுருக்கம்"
 
+#, fuzzy
+msgid "Results are based on the WAAP model."
+msgstr "கண்டறிதல் அல்லாத கிளச்டர்டு மாதிரியை அடிப்படையாகக் கொண்டது."
+
+#, fuzzy
+msgid "Results are based on the WLS model. %1$s"
+msgstr "கண்டறிதல் அல்லாத கிளச்டர்டு மாதிரியை அடிப்படையாகக் கொண்டது."
+
 msgid ""
-"Cannot compute results. All entries of the correlation coefficient variable "
-"(%s) must be between -1 and 1."
+"Results are based on the WLS model: the WAAP model requires at least %1$i "
+"adequately powered estimates."
 msgstr ""
-"முடிவுகளைக் கணக்கிட முடியவில்லை. தொடர்பு குணக மாறியின் (%s) அனைத்து உள்ளீடுகளும் -1 "
-"மற்றும் 1 க்கு இடையில் இருக்க வேண்டும்."
 
 msgid ""
-"Cannot compute results. All entries of the sample size variable (%s) must be "
-"greater than four."
+"Results are based on the WLS model: the WAAP model requires at least %1$i "
+"adequately powered or unaffected estimates."
 msgstr ""
-"முடிவுகளை கணக்கிட முடியாது. மாதிரி அளவு மாறியின் அனைத்து உள்ளீடுகளும் (%s) நான்கை "
-"விட அதிகமாக இருக்க வேண்டும்."
-
-msgid "95%% Confidence Interval"
-msgstr "95 %% நம்பிக்கை இடைவெளி"
-
-msgid "Error: There were not enough adequately powered studies (k = %1$i)"
-msgstr "பிழை: போதுமான அளவு இயங்கும் ஆய்வுகள் இல்லை (k = %1$i)"
-
-msgid "Note: There were %1$i adequately powered studies"
-msgstr "குறிப்பு: %1$i நான் போதுமான அளவு இயங்கும் ஆய்வுகள் இருந்தன"
-
-msgid "Model Tests"
-msgstr "மாதிரி சோதனைகள்"
-
-msgid "Test of Effect"
-msgstr "விளைவு சோதனை"
-
-msgid "Test of Publication Bias"
-msgstr "வெளியீட்டு சார்புகளின் சோதனை"
-
-msgid "Mean Estimates (%s)"
-msgstr "சராசரி மதிப்பீடுகள் (%s)"
-
-msgid "Multiplicative Heterogeneity Estimates"
-msgstr "பெருக்கல் பன்முகத்தன்மை மதிப்பீடுகள்"
-
-msgid "Estimated %1$s Regression"
-msgstr "மதிப்பிடப்பட்ட %1$s பின்னடைவு"
-
-msgid "Cohen's d"
-msgstr "கோஅனின் டி"
-
-msgid "Fisher's z"
-msgstr "ஃபிசரின் சட்"
-
-msgid "Mean Model Estimates (%s)"
-msgstr "சராசரி மாதிரி மதிப்பீடுகள் (%s)"
 
 msgid ""
-"The figure could not be created since one of the estimates is not a number."
-msgstr "மதிப்பீடுகளில் ஒன்று எண் அல்ல என்பதால் உருவத்தை உருவாக்க முடியவில்லை."
-
-msgid ""
-"WAAP was not estimated: There were only %1$i adequately powered studies "
-"(power > 80%%)."
+"The power is evaluated at the moderator-specific predicted effects of the "
+"WLS model."
 msgstr ""
-"WAAP மதிப்பிடப்படவில்லை:%1$i நான் போதுமான அளவு இயங்கும் ஆய்வுகள் (சக்தி> 80 %%) "
-"மட்டுமே இருந்தன."
 
-msgid "There were %1$i adequately powered studies (power > 80%%)."
-msgstr "%1$i நான் போதுமான அளவு இயங்கும் ஆய்வுகள் (சக்தி> 80 %%)."
+msgid "The power is evaluated at the pooled effect of the WLS model."
+msgstr ""
+
+#, fuzzy
+msgid "The power of the estimates could not be computed: %1$s"
+msgstr "பூல் செய்யப்பட்ட விளைவு அளவைக் கணக்கிட முடியவில்லை."
+
+msgid "The WAAP model failed: %1$s"
+msgstr ""
+
+msgid ""
+"The moderators of the WAAP model are not estimable from the retained "
+"estimates."
+msgstr ""
+
+#, fuzzy
+msgid "%1$i observation was omitted due to missing values."
+msgid_plural "%1$i observations were omitted due to missing values."
+msgstr[0] "மதிப்புகள் காணாமல் போனதால் %1$i அவதானிப்புகள் வெளியேற்றப்பட்டன."
+msgstr[1] "மதிப்புகள் காணாமல் போனதால் %1$i அவதானிப்புகள் வெளியேற்றப்பட்டன."
+
+#, fuzzy
+msgid "%1$s: %2$i observation was omitted due to missing values."
+msgid_plural "%1$s: %2$i observations were omitted due to missing values."
+msgstr[0] "%1$s: %2$i மதிப்புகள் காணாமல் போனதால் அவதானிப்புகள் பயன்படுத்தப்பட்டன."
+msgstr[1] "%1$s: %2$i மதிப்புகள் காணாமல் போனதால் அவதானிப்புகள் பயன்படுத்தப்பட்டன."
 
 msgid "%i observation was removed due to missing values."
 msgid_plural "%i observations were removed due to missing values."
@@ -2739,6 +2847,16 @@ msgstr[1] ""
 "ஆமில்டோனிய மான்டே கார்லோ செயல்முறை திறமையற்றதாக இருக்கலாம் - %i மாற்றங்கள் அதிகபட்ச மர "
 "ஆழத்தை மீறிவிட்டன. 'அதிகபட்ச மர ஆழத்தை' கவனமாக அதிகரிப்பதன் மூலம் இதை தீர்க்க முடியும்."
 
+msgid "The bias adjustment applies to %1$i estimate."
+msgid_plural "The bias adjustment applies to %1$i estimates."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "%1$i estimate at level '%2$s' is unaffected."
+msgid_plural "%1$i estimates at level '%2$s' are unaffected."
+msgstr[0] ""
+msgstr[1] ""
+
 msgid ""
 "The selection weight for p-value interval %1$s is fixed at zero, but the "
 "interval contains %2$i selected estimate. Use a positive weight or NA to "
@@ -2755,11 +2873,6 @@ msgid_plural "Selection applies to %1$i estimates."
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "%1$i estimate at level '%2$s' is unaffected."
-msgid_plural "%1$i estimates at level '%2$s' are unaffected."
-msgstr[0] ""
-msgstr[1] ""
-
 msgid ""
 "For numerical stability, metafor clips selection p-values to [%1$s, %2$s]. "
 "This affects %3$i selected estimate."
@@ -2768,6 +2881,80 @@ msgid_plural ""
 "This affects %3$i selected estimates."
 msgstr[0] ""
 msgstr[1] ""
+
+#, fuzzy
+msgid "%1$i of %2$i estimates is adequately powered (power ≥ %3$s%%)."
+msgid_plural "%1$i of %2$i estimates are adequately powered (power ≥ %3$s%%)."
+msgstr[0] "%1$i நான் போதுமான அளவு இயங்கும் ஆய்வுகள் (சக்தி> 80 %%)."
+msgstr[1] "%1$i நான் போதுமான அளவு இயங்கும் ஆய்வுகள் (சக்தி> 80 %%)."
+
+msgid "%1$i estimate at level '%2$s' is unaffected and always retained."
+msgid_plural ""
+"%1$i estimates at level '%2$s' are unaffected and always retained."
+msgstr[0] ""
+msgstr[1] ""
+
+#~ msgid ""
+#~ "Cannot compute results. All entries of the correlation coefficient "
+#~ "variable (%s) must be between -1 and 1."
+#~ msgstr ""
+#~ "முடிவுகளைக் கணக்கிட முடியவில்லை. தொடர்பு குணக மாறியின் (%s) அனைத்து உள்ளீடுகளும் "
+#~ "-1 மற்றும் 1 க்கு இடையில் இருக்க வேண்டும்."
+
+#~ msgid ""
+#~ "Cannot compute results. All entries of the sample size variable (%s) must "
+#~ "be greater than four."
+#~ msgstr ""
+#~ "முடிவுகளை கணக்கிட முடியாது. மாதிரி அளவு மாறியின் அனைத்து உள்ளீடுகளும் (%s) "
+#~ "நான்கை விட அதிகமாக இருக்க வேண்டும்."
+
+#~ msgid "95%% Confidence Interval"
+#~ msgstr "95 %% நம்பிக்கை இடைவெளி"
+
+#~ msgid "Error: There were not enough adequately powered studies (k = %1$i)"
+#~ msgstr "பிழை: போதுமான அளவு இயங்கும் ஆய்வுகள் இல்லை (k = %1$i)"
+
+#~ msgid "Note: There were %1$i adequately powered studies"
+#~ msgstr "குறிப்பு: %1$i நான் போதுமான அளவு இயங்கும் ஆய்வுகள் இருந்தன"
+
+#~ msgid "Model Tests"
+#~ msgstr "மாதிரி சோதனைகள்"
+
+#~ msgid "Test of Effect"
+#~ msgstr "விளைவு சோதனை"
+
+#~ msgid "Test of Publication Bias"
+#~ msgstr "வெளியீட்டு சார்புகளின் சோதனை"
+
+#~ msgid "Mean Estimates (%s)"
+#~ msgstr "சராசரி மதிப்பீடுகள் (%s)"
+
+#~ msgid "Multiplicative Heterogeneity Estimates"
+#~ msgstr "பெருக்கல் பன்முகத்தன்மை மதிப்பீடுகள்"
+
+#~ msgid "Estimated %1$s Regression"
+#~ msgstr "மதிப்பிடப்பட்ட %1$s பின்னடைவு"
+
+#~ msgid "Cohen's d"
+#~ msgstr "கோஅனின் டி"
+
+#~ msgid "Fisher's z"
+#~ msgstr "ஃபிசரின் சட்"
+
+#~ msgid "Mean Model Estimates (%s)"
+#~ msgstr "சராசரி மாதிரி மதிப்பீடுகள் (%s)"
+
+#~ msgid ""
+#~ "The figure could not be created since one of the estimates is not a "
+#~ "number."
+#~ msgstr "மதிப்பீடுகளில் ஒன்று எண் அல்ல என்பதால் உருவத்தை உருவாக்க முடியவில்லை."
+
+#~ msgid ""
+#~ "WAAP was not estimated: There were only %1$i adequately powered studies "
+#~ "(power > 80%%)."
+#~ msgstr ""
+#~ "WAAP மதிப்பிடப்படவில்லை:%1$i நான் போதுமான அளவு இயங்கும் ஆய்வுகள் (சக்தி> 80 %%) "
+#~ "மட்டுமே இருந்தன."
 
 #~ msgid "Weight Function (%s)"
 #~ msgstr "எடை செயல்பாடு (%s)"
@@ -2792,9 +2979,6 @@ msgstr[1] ""
 
 #~ msgid "Assuming heterogeneity"
 #~ msgstr "பன்முகத்தன்மையைக் கருதி"
-
-#~ msgid "Fixed Effects Estimates"
-#~ msgstr "நிலையான விளைவுகள் மதிப்பீடுகள்"
 
 #~ msgid "Estimated Weights"
 #~ msgstr "மதிப்பிடப்பட்ட எடைகள்"
@@ -2930,9 +3114,6 @@ msgstr[1] ""
 
 #~ msgid "Prior Plots"
 #~ msgstr "முன் அடுக்கு"
-
-#~ msgid "Effect"
-#~ msgstr "விளைவு"
 
 #~ msgid "Model Preview"
 #~ msgstr "மாதிரி முன்னோட்டம்"
