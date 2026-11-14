@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' data-engine-version='2.0' width='720.00pt' height='576.00pt' viewBox='0 0 720.00 576.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA='>
+    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<defs>
+  <clipPath id='cpMzYuNjN8NjgzLjM3fDAuMDB8NTc2LjAw'>
+    <rect x='36.63' y='0.00' width='646.73' height='576.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMzYuNjN8NjgzLjM3fDAuMDB8NTc2LjAw)'>
+<rect x='36.63' y='0.00' width='646.73' height='576.00' style='stroke-width: 10.67; stroke: none;' />
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<rect x='41.61' y='25.69' width='636.77' height='545.33' style='stroke-width: 10.67; stroke: none;' />
+<line x1='541.87' y1='151.40' x2='394.91' y2='90.53' style='stroke-width: 3.56; stroke: #666666;' />
+<line x1='541.87' y1='151.40' x2='602.74' y2='298.35' style='stroke-width: 3.56; stroke: #666666;' />
+<line x1='394.91' y1='90.53' x2='247.96' y2='151.40' style='stroke-width: 3.56; stroke: #666666;' />
+<line x1='394.91' y1='90.53' x2='394.91' y2='506.18' style='stroke-width: 7.95; stroke: #666666;' />
+<line x1='394.91' y1='90.53' x2='602.74' y2='298.35' style='stroke-width: 10.67; stroke: #666666;' />
+<line x1='247.96' y1='151.40' x2='602.74' y2='298.35' style='stroke-width: 3.56; stroke: #666666;' />
+<line x1='187.09' y1='298.35' x2='247.96' y2='445.31' style='stroke-width: 3.56; stroke: #666666;' />
+<line x1='187.09' y1='298.35' x2='602.74' y2='298.35' style='stroke-width: 3.56; stroke: #666666;' />
+<line x1='247.96' y1='445.31' x2='602.74' y2='298.35' style='stroke-width: 3.56; stroke: #666666;' />
+<line x1='394.91' y1='506.18' x2='602.74' y2='298.35' style='stroke-width: 8.71; stroke: #666666;' />
+<line x1='541.87' y1='445.31' x2='602.74' y2='298.35' style='stroke-width: 3.56; stroke: #666666;' />
+<circle cx='541.87' cy='151.40' r='8.04' style='stroke-width: 1.13; fill: #D9D9D9;' />
+<circle cx='394.91' cy='90.53' r='8.04' style='stroke-width: 1.13; fill: #D9D9D9;' />
+<circle cx='247.96' cy='151.40' r='8.04' style='stroke-width: 1.13; fill: #D9D9D9;' />
+<circle cx='187.09' cy='298.35' r='8.04' style='stroke-width: 1.13; fill: #D9D9D9;' />
+<circle cx='247.96' cy='445.31' r='8.04' style='stroke-width: 1.13; fill: #D9D9D9;' />
+<circle cx='394.91' cy='506.18' r='8.04' style='stroke-width: 1.13; fill: #D9D9D9;' />
+<circle cx='541.87' cy='445.31' r='8.04' style='stroke-width: 1.13; fill: #D9D9D9;' />
+<circle cx='602.74' cy='298.35' r='8.04' style='stroke-width: 1.13; fill: #D9D9D9;' />
+<text x='569.01' y='118.45' style='font-size: 11.38px; font-family: sans;' textLength='47.47px' lengthAdjust='spacingAndGlyphs'>Apixaban</text>
+<text x='394.91' y='42.32' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='34.79px' lengthAdjust='spacingAndGlyphs'>Aspirin</text>
+<text x='228.83' y='118.45' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='102.18px' lengthAdjust='spacingAndGlyphs'>Aspirin+Clopidogtrel</text>
+<text x='138.88' y='302.27' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='93.65px' lengthAdjust='spacingAndGlyphs'>Dabigatran 110mg</text>
+<text x='227.58' y='486.09' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='93.65px' lengthAdjust='spacingAndGlyphs'>Dabigatran 150mg</text>
+<text x='394.91' y='562.23' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='80.99px' lengthAdjust='spacingAndGlyphs'>Placebo/Control</text>
+<text x='566.60' y='486.09' style='font-size: 11.38px; font-family: sans;' textLength='63.91px' lengthAdjust='spacingAndGlyphs'>Rivaroxaban</text>
+<text x='650.95' y='302.27' style='font-size: 11.38px; font-family: sans;' textLength='28.48px' lengthAdjust='spacingAndGlyphs'>VKAs</text>
+<rect x='41.61' y='25.69' width='636.77' height='545.33' style='stroke-width: 0.00; stroke: none;' />
+<text x='360.00' y='16.68' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='245.71px' lengthAdjust='spacingAndGlyphs'>analysis-3_figure-1_network-plot</text>
+</g>
+</svg>
