@@ -12,15 +12,15 @@
   if (.nmaIsCountBased(options))
     options[c("designDecomposition", "netHeatPlot")] <- FALSE
   if (.nmaPoolingMethod(options) == "penalizedLogisticRegression")
-    options[c("nodeSplitting", "nodeSplittingForestPlot")] <- FALSE
+    options[c("directIndirectEvidence", "directIndirectEvidenceForestPlot")] <- FALSE
 
   if (options[["designDecomposition"]])
     .nmaDesignDecompositionTables(jaspResults, options)
 
-  if (options[["nodeSplitting"]])
+  if (options[["directIndirectEvidence"]])
     .nmaNodeSplittingTable(jaspResults, options)
 
-  if (options[["nodeSplitting"]] && options[["nodeSplittingForestPlot"]])
+  if (options[["directIndirectEvidence"]] && options[["directIndirectEvidenceForestPlot"]])
     .nmaNodeSplittingForestPlot(jaspResults, options)
 
   if (options[["netHeatPlot"]])
@@ -33,7 +33,7 @@
 
   return(.nmaExtractOutputContainer(
     jaspResults, "inconsistencyContainer", gettext("Inconsistency"), 7,
-    c("designDecomposition", "nodeSplitting", "nodeSplittingForestPlot", "netHeatPlot")
+    c("designDecomposition", "directIndirectEvidence", "directIndirectEvidenceForestPlot", "netHeatPlot")
   ))
 }
 
@@ -142,7 +142,7 @@
 # The method of the node splitting matters for the inverse variance fits only (the count-based fits provide SIDDE only).
 .nmaNodeSplittingMethodDependency <- function(options) {
 
-  return(if (.nmaPoolingMethod(options) == "inverseVariance") "nodeSplittingMethod")
+  return(if (.nmaPoolingMethod(options) == "inverseVariance") "directIndirectEvidenceMethod")
 }
 
 .nmaNetsplitState       <- function(jaspResults, options) {
@@ -186,7 +186,7 @@
   hasDirect   <- !is.na(direct[["TE"]])
   hasIndirect <- !is.na(indirect[["TE"]])
   selected    <- switch(
-    options[["nodeSplittingShow"]],
+    options[["directIndirectEvidenceShow"]],
     all        = rep(TRUE, nrow(data)),
     both       = hasDirect & hasIndirect,
     withDirect = hasDirect
@@ -207,7 +207,7 @@
   nodeSplittingTable          <- createJaspTable(gettext("Direct and Indirect Evidence"))
   nodeSplittingTable$position <- 3
   nodeSplittingTable$showSpecifiedColumnsOnly <- TRUE
-  nodeSplittingTable$dependOn(c("nodeSplitting", .nmaNodeSplittingMethodDependency(options), "nodeSplittingShow", "confidenceIntervals", "transformEffectSize"))
+  nodeSplittingTable$dependOn(c("directIndirectEvidence", .nmaNodeSplittingMethodDependency(options), "directIndirectEvidenceShow", "confidenceIntervals", "transformEffectSize"))
   inconsistencyContainer[["nodeSplittingTable"]] <- nodeSplittingTable
 
   nodeSplittingTable$addColumnInfo(name = "comparison", type = "string",  title = gettext("Comparison"))
@@ -219,20 +219,23 @@
 
   # estimates (with confidence intervals) of the network, direct, indirect evidence and their difference
   groups <- list(
-    list(suffix = "",           overtitle = gettext("Network"),    intervals = FALSE),
-    list(suffix = "Direct",     overtitle = gettext("Direct"),     intervals = TRUE),
-    list(suffix = "Indirect",   overtitle = gettext("Indirect"),   intervals = TRUE),
-    list(suffix = "Difference", overtitle = if (options[["transformEffectSize"]] == "exponential") gettext("Ratio") else gettext("Difference"), intervals = TRUE)
+    list(suffix = "",           overtitle = gettext("Network")),
+    list(suffix = "Direct",     overtitle = gettext("Direct")),
+    list(suffix = "Indirect",   overtitle = gettext("Indirect")),
+    list(suffix = "Difference", overtitle = if (options[["transformEffectSize"]] == "exponential") gettext("Ratio") else gettext("Difference"))
   )
   for (group in groups) {
     nodeSplittingTable$addColumnInfo(name = paste0("est", group$suffix), type = "number", title = gettext("Estimate"), overtitle = group$overtitle)
-    if (group$intervals && options[["confidenceIntervals"]]) {
-      nodeSplittingTable$addColumnInfo(name = paste0("lCi", group$suffix), type = "number", title = gettext("Lower"), overtitle = group$overtitle)
-      nodeSplittingTable$addColumnInfo(name = paste0("uCi", group$suffix), type = "number", title = gettext("Upper"), overtitle = group$overtitle)
+    if (group$suffix == "Difference") {
+      nodeSplittingTable$addColumnInfo(name = "z",    type = "number", title = "z",          overtitle = group$overtitle)
+      nodeSplittingTable$addColumnInfo(name = "pval", type = "pvalue", title = gettext("p"), overtitle = group$overtitle)
+    }
+    if (options[["confidenceIntervals"]]) {
+      level <- 100 * options[["confidenceIntervalsLevel"]]
+      nodeSplittingTable$addColumnInfo(name = paste0("lCi", group$suffix), type = "number", title = gettextf("Lower %s%% CI", level), overtitle = group$overtitle)
+      nodeSplittingTable$addColumnInfo(name = paste0("uCi", group$suffix), type = "number", title = gettextf("Upper %s%% CI", level), overtitle = group$overtitle)
     }
   }
-  nodeSplittingTable$addColumnInfo(name = "z",    type = "number", title = "z")
-  nodeSplittingTable$addColumnInfo(name = "pval", type = "pvalue", title = gettext("p"))
 
   if (is.null(fits))
     return()
@@ -269,8 +272,6 @@
   # footnotes
   methods <- unique(vapply(.nmaSuccessfulResults(splits), function(split) split[["method"]], character(1)))
   nodeSplittingTable$addFootnote(gettextf("The direct and indirect evidence were separated using the %1$s method.", paste(methods, collapse = "/")))
-  if (options[["nodeSplittingMethod"]] == "backCalculation" && "SIDDE" %in% methods)
-    nodeSplittingTable$addFootnote(gettext("The Mantel-Haenszel and non-central hypergeometric fits use the SIDDE method."))
   # (netsplit() provides the direct evidence proportion of the SIDDE method for the inverse variance fits only)
   .nmaAddFitNote(
     nodeSplittingTable,
@@ -281,11 +282,9 @@
   # (netsplit() reports z-tests and normal-theory confidence intervals also if the t-distribution is used for the treatment effects)
   if (.nmaOptionsTTest(options)) {
     nodeSplittingTable$addFootnote(gettext("Node splitting uses normal-theory (z) inference."))
-    if (options[["nodeSplittingForestPlot"]])
+    if (options[["directIndirectEvidenceForestPlot"]])
       nodeSplittingTable$addFootnote(gettext("The node-splitting forest plot shows normal-theory (z) intervals, also for the network estimates."))
   }
-  if (options[["confidenceIntervals"]])
-    nodeSplittingTable$addFootnote(gettextf("Lower and upper limits are the limits of the %1$s%% confidence intervals.", 100 * options[["confidenceIntervalsLevel"]]))
   for (message in .nmaTransformationMessage(options, anyNA))
     nodeSplittingTable$addFootnote(message)
   if (options[["transformEffectSize"]] != "none")
@@ -309,7 +308,7 @@
 
   nodeSplittingForestPlot          <- createJaspPlot(title = gettext("Direct and Indirect Evidence"), width = 600, height = 400)
   nodeSplittingForestPlot$position <- 4
-  nodeSplittingForestPlot$dependOn(c("nodeSplittingForestPlot", .nmaNodeSplittingMethodDependency(options), .nmaForestRendererDependencies))
+  nodeSplittingForestPlot$dependOn(c("directIndirectEvidenceForestPlot", .nmaNodeSplittingMethodDependency(options), .nmaForestRendererDependencies))
   inconsistencyContainer[["nodeSplittingForestPlot"]] <- nodeSplittingForestPlot
 
   if (is.null(fits))
@@ -473,8 +472,7 @@
 # between-design inconsistency Q of a design (row) after detaching another design (column), the
 # hierarchical clustering order, and the hat matrix elements that determine the size of the squares.
 # netheat() returns no data, and the helpers nma_krahn() and tau.within() are not exported, so they are
-# called with ':::' (netmeta 3.7-0). The matrix, the order, and the sizes of the squares equal the values computed inside
-# netheat() (test V7 of the network meta-analysis tests compares them for the common-effect and random-effects models).
+# called with ':::' (netmeta 3.7-0). The network tests check the heat cells and square sizes for common and random effects.
 .nmaNetHeatData         <- function(fit) {
 
   if (fit[["d"]] <= 2)

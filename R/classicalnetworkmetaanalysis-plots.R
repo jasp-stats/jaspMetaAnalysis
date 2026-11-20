@@ -572,7 +572,10 @@
 
 .nmaSmallStudyEffectsOutputs <- function(jaspResults, options) {
 
-  anyTest <- options[["funnelPlotEggerTest"]] || options[["funnelPlotBeggTest"]] || options[["funnelPlotThompsonSharpTest"]]
+  if (options[["funnelPlotTreatmentOrder"]] == "referenceFirst" && options[["referenceTreatment"]] == "")
+    return()
+
+  anyTest <- options[["funnelPlotAsymmetryTestsWeightedRegression"]] || options[["funnelPlotAsymmetryTestsRankCorrelation"]] || options[["funnelPlotAsymmetryTestsThompsonSharp"]]
 
   if (options[["funnelPlot"]])
     .nmaFunnelPlot(jaspResults, options)
@@ -587,7 +590,7 @@
 
   return(.nmaExtractOutputContainer(
     jaspResults, "smallStudyEffectsContainer", gettext("Small-Study Effects"), 11,
-    c("funnelPlot", "funnelPlotEggerTest", "funnelPlotBeggTest", "funnelPlotThompsonSharpTest")
+    c("funnelPlot", "funnelPlotAsymmetryTestsWeightedRegression", "funnelPlotAsymmetryTestsRankCorrelation", "funnelPlotAsymmetryTestsThompsonSharp")
   ))
 }
 
@@ -784,7 +787,7 @@
   testsTable          <- createJaspTable(gettext("Funnel Plot Asymmetry Tests"))
   testsTable$position <- 2
   testsTable$showSpecifiedColumnsOnly <- TRUE
-  testsTable$dependOn(c("funnelPlotEggerTest", "funnelPlotBeggTest", "funnelPlotThompsonSharpTest", "funnelPlotTreatmentOrder", "funnelPlotTreatmentOrderCustom"))
+  testsTable$dependOn(c("funnelPlotAsymmetryTestsWeightedRegression", "funnelPlotAsymmetryTestsRankCorrelation", "funnelPlotAsymmetryTestsThompsonSharp", "funnelPlotTreatmentOrder", "funnelPlotTreatmentOrderCustom"))
   smallStudyEffectsContainer[["funnelPlotAsymmetryTestsTable"]] <- testsTable
 
   testsTable$addColumnInfo(name = "test", type = "string", title = "")
@@ -829,9 +832,9 @@
 .nmaFunnelTests         <- function(funnel, options) {
 
   tests <- c(
-    Egger    = options[["funnelPlotEggerTest"]],
-    Begg     = options[["funnelPlotBeggTest"]],
-    Thompson = options[["funnelPlotThompsonSharpTest"]]
+    Egger    = options[["funnelPlotAsymmetryTestsWeightedRegression"]],
+    Begg     = options[["funnelPlotAsymmetryTestsRankCorrelation"]],
+    Thompson = options[["funnelPlotAsymmetryTestsThompsonSharp"]]
   )
   labels <- c(Egger = gettext("Egger (t)"), Begg = gettext("Begg and Mazumdar (z)"), Thompson = gettext("Thompson and Sharp (t)"))
   tests  <- names(tests)[tests]

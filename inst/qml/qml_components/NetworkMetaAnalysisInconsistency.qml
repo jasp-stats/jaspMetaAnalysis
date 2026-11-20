@@ -27,7 +27,7 @@ Section
 	enabled:	networkModel.value === "standard"
 	info: qsTr("Options for assessing the inconsistency between direct and indirect evidence in the network. Available for the standard model.")
 
-	property alias nodeSplittingForestPlotChecked:	nodeSplittingForestPlot.checked
+	property alias directIndirectEvidenceForestPlotChecked:	directIndirectEvidenceForestPlot.checked
 
 	Group
 	{
@@ -54,7 +54,7 @@ Section
 	{
 		CheckBox
 		{
-			name:		"nodeSplitting"
+			name:		"directIndirectEvidence"
 			text:		qsTr("Direct and indirect evidence")
 			checked:	false
 			enabled:	!poolingMethod.dispersionModel
@@ -62,7 +62,7 @@ Section
 
 			DropDown
 			{
-				name:		"nodeSplittingMethod"
+				name:		"directIndirectEvidenceMethod"
 				label:		qsTr("Method")
 				startValue:	"backCalculation"
 				// (the Mantel-Haenszel and non-central hypergeometric fits always use SIDDE)
@@ -76,7 +76,7 @@ Section
 
 			DropDown
 			{
-				name:		"nodeSplittingShow"
+				name:		"directIndirectEvidenceShow"
 				label:		qsTr("Show")
 				startValue:	"all"
 				info: qsTr("Select the comparisons included in the table.")
@@ -89,8 +89,8 @@ Section
 
 			CheckBox
 			{
-				id:			nodeSplittingForestPlot
-				name:		"nodeSplittingForestPlot"
+				id:			directIndirectEvidenceForestPlot
+				name:		"directIndirectEvidenceForestPlot"
 				text:		qsTr("Forest plot")
 				checked:	false
 				info: qsTr("Visualize the direct, indirect, and network estimates of each comparison in a forest plot.")

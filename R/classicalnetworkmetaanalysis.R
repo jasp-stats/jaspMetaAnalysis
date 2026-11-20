@@ -31,7 +31,8 @@ ClassicalNetworkMetaAnalysis <- function(jaspResults, dataset = NULL, options, .
   if (options[["networkPlot"]])
     .nmaNetworkPlot(jaspResults, options)
 
-  if (options[["forestPlot"]])
+  if (options[["forestPlot"]] && (options[["referenceTreatment"]] != "" ||
+      (options[["forestPlotComparisons"]] == "allPairwise" && options[["forestPlotOrder"]] != "effectSize")))
     .nmaForestPlot(jaspResults, options)
 
   if (.nmaIsComponentModel(options) && options[["componentForestPlot"]])
@@ -53,12 +54,12 @@ ClassicalNetworkMetaAnalysis <- function(jaspResults, dataset = NULL, options, .
 .nmaModelDependencies <- c(
   # variables
   "studyId", "effectSize", "effectSizeStandardError", "treatment1", "treatment2",
-  "treatment", "armEvents", "armSampleSize", "armMean", "armStandardDeviation", "armPersonTime",
-  "armEffectSize", "armEffectSizeStandardError", "predictor", "subgroup",
+  "treatment", "eventsArm", "sampleSizeArm", "meanArm", "standardDeviationArm", "personTimeArm",
+  "effectSizeArm", "effectSizeStandardErrorArm", "predictors", "subgroup",
   # data format, outcome, and pooling
   "dataFormat", "outcomeType", "effectSizeMeasure", "poolingMethod",
   # model (standard or component; the components, the inactive treatment, and the interactions of the component model)
-  "model", "componentSpecification", "componentSeparator", "componentVariables", "componentInactiveTreatment", "componentInteractions",
+  "networkModel", "componentSpecification", "componentSeparator", "componentVariables", "componentInactiveTreatment", "componentInteractions",
   "method", "fixedEffectTest", "referenceTreatment", "confidenceIntervalsLevel",
   "advancedMultiArmTolerance", "fixParametersTau2", "fixParametersTau2Value",
   # continuity correction
@@ -87,13 +88,13 @@ ClassicalNetworkMetaAnalysis <- function(jaspResults, dataset = NULL, options, .
 
 .nmaIsComponentModel    <- function(options) {
 
-  return(options[["model"]] == "component")
+  return(options[["networkModel"]] == "component")
 }
 
 # A note on the variables that the selected model still needs: the indicator variables of the component model with indicators.
 .nmaMissingVariablesMessage <- function(options) {
 
-  if (.nmaIsComponentModel(options) && .nmaComponentMode(options) == "indicatorVariables" && length(options[["componentVariables"]]) == 0)
+  if (.nmaIsComponentModel(options) && .nmaComponentMode(options) == "indicators" && length(options[["componentVariables"]]) == 0)
     return(gettext("The component model with indicators requires the component indicator variables."))
 
   return(NULL)
@@ -109,10 +110,10 @@ ClassicalNetworkMetaAnalysis <- function(jaspResults, dataset = NULL, options, .
   # the data columns of the selected arm-based outcome type (in the order of the pairwise() call)
   return(switch(
     options[["outcomeType"]],
-    binary        = c(options[["armEvents"]], options[["armSampleSize"]]),
-    continuous    = c(options[["armMean"]], options[["armStandardDeviation"]], options[["armSampleSize"]]),
-    incidenceRate = c(options[["armEvents"]], options[["armPersonTime"]]),
-    general       = c(options[["armEffectSize"]], options[["armEffectSizeStandardError"]])
+    binary        = c(options[["eventsArm"]], options[["sampleSizeArm"]]),
+    continuous    = c(options[["meanArm"]], options[["standardDeviationArm"]], options[["sampleSizeArm"]]),
+    incidenceRate = c(options[["eventsArm"]], options[["personTimeArm"]]),
+    general       = c(options[["effectSizeArm"]], options[["effectSizeStandardErrorArm"]])
   ))
 }
 
@@ -165,8 +166,8 @@ ClassicalNetworkMetaAnalysis <- function(jaspResults, dataset = NULL, options, .
 
   tau2 <- try(.parseRCodeInOptions(options[["fixParametersTau2Value"]]), silent = TRUE)
 
-  if (jaspBase::isTryError(tau2) || !is.numeric(tau2) || length(tau2) != 1 || is.na(tau2) || tau2 < 0)
-    .quitAnalysis(gettext("The fixed value for tau2 must be a positive number."))
+  if (jaspBase::isTryError(tau2) || !is.numeric(tau2) || length(tau2) != 1 || !is.finite(tau2) || tau2 < 0)
+    .quitAnalysis(gettext("The fixed value for tau2 must be a finite, non-negative number."))
 
   return(tau2)
 }

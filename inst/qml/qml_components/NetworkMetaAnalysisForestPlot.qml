@@ -89,7 +89,7 @@ Section
 	ForestPlotSettings
 	{
 		// the settings apply to every forest plot of the analysis
-		enabled:						forestPlot.checked || sectionInconsistency.nodeSplittingForestPlotChecked || componentForestPlot.checked
+		enabled:						forestPlot.checked || sectionInconsistency.directIndirectEvidenceForestPlotChecked || componentForestPlot.checked
 		transformEffectSizeValue:		sectionStatistics.transformEffectSizeValue
 		showPredictionIntervals:		true
 		enablePredictionIntervals:		method.value !== "equalEffects" && !poolingMethod.noHeterogeneity && networkModel.value === "standard"

@@ -63,10 +63,10 @@
 
   outcomeArguments <- switch(
     options[["outcomeType"]],
-    binary        = list(event = .nmaColumn(options[["armEvents"]]), n = .nmaColumn(options[["armSampleSize"]])),
-    continuous    = list(mean = .nmaColumn(options[["armMean"]]), sd = .nmaColumn(options[["armStandardDeviation"]]), n = .nmaColumn(options[["armSampleSize"]])),
-    incidenceRate = list(event = .nmaColumn(options[["armEvents"]]), time = .nmaColumn(options[["armPersonTime"]])),
-    general       = list(TE = .nmaColumn(options[["armEffectSize"]]), seTE = .nmaColumn(options[["armEffectSizeStandardError"]]))
+    binary        = list(event = .nmaColumn(options[["eventsArm"]]), n = .nmaColumn(options[["sampleSizeArm"]])),
+    continuous    = list(mean = .nmaColumn(options[["meanArm"]]), sd = .nmaColumn(options[["standardDeviationArm"]]), n = .nmaColumn(options[["sampleSizeArm"]])),
+    incidenceRate = list(event = .nmaColumn(options[["eventsArm"]]), time = .nmaColumn(options[["personTimeArm"]])),
+    general       = list(TE = .nmaColumn(options[["effectSizeArm"]]), seTE = .nmaColumn(options[["effectSizeStandardErrorArm"]]))
   )
 
   arguments <- c(list(treat = .nmaColumn(options[["treatment"]])), outcomeArguments, list(studlab = .nmaColumn(options[["studyId"]])))
@@ -213,7 +213,7 @@
     )
   )
 
-  attr(result, "warnings") <- unique(warnings)
+  attr(result, "warnings") <- vapply(unique(warnings), .nmaCleanNetmetaWarning, character(1), pairwise = objects[["pw"]], USE.NAMES = FALSE)
 
   return(result)
 }
@@ -310,6 +310,30 @@
   }
 
   return(message)
+}
+
+.nmaCleanNetmetaWarning <- function(message, pairwise) {
+
+  message <- trimws(gsub("[[:blank:]]*\n[[:space:]]*", " ", message))
+  if (!grepl("excluded from network meta-analysis", message, fixed = TRUE))
+    return(message)
+
+  # Only expand separators inside designs. Study and treatment labels can themselves contain punctuation.
+  pattern <- if (startsWith(message, "Treatment arm '")) {
+    "(?<=in design ')[^']+"
+  } else if (startsWith(message, "Treatment arms ")) {
+    "(?<= in )[^']+'(?= - |$)"
+  } else if (startsWith(message, "Design")) {
+    "(?<=')[^']+(?='(?: - | with |$))"
+  }
+  treatments <- c(as.character(pairwise[["treat1"]]), as.character(pairwise[["treat2"]]))
+  if (!is.null(pattern) && !any(grepl(":", treatments, fixed = TRUE))) {
+    positions <- gregexpr(pattern, message, perl = TRUE)
+    designs <- regmatches(message, positions)
+    regmatches(message, positions) <- lapply(designs, function(x) gsub(":", " / ", x, fixed = TRUE))
+  }
+
+  return(gsub("' - '", "', '", message, fixed = TRUE))
 }
 
 # The Mantel-Haenszel and the non-central hypergeometric methods exclude the studies and designs with zero cells before they fit the network

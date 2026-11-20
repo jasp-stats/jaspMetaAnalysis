@@ -20,7 +20,7 @@
     return()
 
   # (the results of the network meta-regression of the tables: a regression that failed is commented out)
-  metaregressions <- if (options[["predictor"]] != "" && !.nmaIsComponentModel(options)) .nmaMetaregressionState(jaspResults, options)
+  metaregressions <- if (.nmaShowMetaregression(options)) .nmaMetaregressionState(jaspResults, options)
 
   isSubgroup <- options[["subgroup"]] != ""
   code       <- vapply(names(scopes), function(scope) {
@@ -111,7 +111,7 @@
     # (a message in a comment must not contain line breaks)
     code <- paste0(code, "# ", gsub("[\r\n]+", " ", gettextf("The module reported: %1$s", .maTryCleanErrorMessages(fit))), "\n")
   } else {
-    if (options[["predictor"]] != "" && !component)
+    if (.nmaShowMetaregression(options))
       code <- paste0(code, .nmaMetaregressionCode(scope, options, dataName, metaregression))
     # (the models of the subgroups are collected, and the model of the full dataset of a subgroup analysis is kept: the next scope assigns 'fit')
     if (subgroup) {
@@ -156,7 +156,7 @@
     "# ", gettext("Network meta-regression"), "\n",
     # (the levels of a factor predictor are renamed because netmetareg() fails if a level has the name of a treatment and removes columns by the label of the first level)
     # (the mapping of the labels to the levels of the data is a comment because the results of netmetareg() contain the labels)
-    if (is.factor(scope[["data"]][[options[["predictor"]]]])) {
+    if (is.factor(scope[["data"]][[options[["predictors"]]]])) {
       levels <- .nmaMetaregressionPredictorLevels(scope[["data"]], fit, options)
       paste0(
         "# ", gettext("The levels of the predictor are renamed (see the factor() call): netmetareg() fails if a level has the name of a treatment."), "\n",

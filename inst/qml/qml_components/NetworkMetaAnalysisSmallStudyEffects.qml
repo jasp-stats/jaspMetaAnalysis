@@ -51,8 +51,8 @@ Section
 
 		CheckBox
 		{
-			name:		"funnelPlotEggerTest"
-			id:			funnelPlotEggerTest
+			name:		"funnelPlotAsymmetryTestsWeightedRegression"
+			id:			funnelPlotAsymmetryTestsWeightedRegression
 			text:		qsTr("Egger")
 			checked:	false
 			info: qsTr("Include the regression test of funnel plot asymmetry (Egger).")
@@ -60,8 +60,8 @@ Section
 
 		CheckBox
 		{
-			name:		"funnelPlotBeggTest"
-			id:			funnelPlotBeggTest
+			name:		"funnelPlotAsymmetryTestsRankCorrelation"
+			id:			funnelPlotAsymmetryTestsRankCorrelation
 			text:		qsTr("Begg and Mazumdar")
 			checked:	false
 			info: qsTr("Include the rank correlation test of funnel plot asymmetry (Begg and Mazumdar).")
@@ -69,8 +69,8 @@ Section
 
 		CheckBox
 		{
-			name:		"funnelPlotThompsonSharpTest"
-			id:			funnelPlotThompsonSharpTest
+			name:		"funnelPlotAsymmetryTestsThompsonSharp"
+			id:			funnelPlotAsymmetryTestsThompsonSharp
 			text:		qsTr("Thompson and Sharp")
 			checked:	false
 			info: qsTr("Include the regression test of funnel plot asymmetry (Thompson and Sharp).")
@@ -82,7 +82,7 @@ Section
 		// the funnel plot and the asymmetry tests use the same order of the treatments
 		id:			treatmentOrderGroup
 		title:		qsTr("Treatment order")
-		enabled:	funnelPlot.checked || funnelPlotEggerTest.checked || funnelPlotBeggTest.checked || funnelPlotThompsonSharpTest.checked
+		enabled:	funnelPlot.checked || funnelPlotAsymmetryTestsWeightedRegression.checked || funnelPlotAsymmetryTestsRankCorrelation.checked || funnelPlotAsymmetryTestsThompsonSharp.checked
 		info: qsTr("Order of the treatments used by the comparison-adjusted funnel plot and the asymmetry tests: each comparison is oriented by the treatment that comes first. Available when the funnel plot or an asymmetry test is included.")
 
 		RadioButtonGroup

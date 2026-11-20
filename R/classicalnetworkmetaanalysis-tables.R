@@ -125,13 +125,13 @@
 
   if (!is.null(reference)) {
     if (ratio)
-      return(gettextf("Estimates above one indicate a larger effect for the treatment than for %1$s.", reference))
-    return(gettextf("Positive estimates indicate a larger effect for the treatment than for %1$s.", reference))
+      return(gettextf("Estimates above one indicate higher values for the treatment than for %1$s.", reference))
+    return(gettextf("Positive estimates indicate higher values for the treatment than for %1$s.", reference))
   }
 
   if (ratio)
-    return(gettext("Estimates above one indicate a larger effect for the first treatment of the comparison than for the second."))
-  return(gettext("Positive estimates indicate a larger effect for the first treatment of the comparison than for the second."))
+    return(gettext("Estimates above one indicate higher values for the first treatment of the comparison than for the second."))
+  return(gettext("Positive estimates indicate higher values for the first treatment of the comparison than for the second."))
 }
 
 # The scope of a fit or a result: the full dataset or a subgroup (titles of the outputs and notes)
@@ -150,8 +150,8 @@
   # errors of individual subgroup fits
   for (fit in fits[vapply(fits, jaspBase::isTryError, logical(1))])
     table$addFootnote(
-      gettextf("%1$s: the model failed with the following error: %2$s", .nmaScopeQuoted(fit), .maTryCleanErrorMessages(fit)),
-      symbol = gettext("Error:")
+      gettextf("%1$s: the results could not be computed: %2$s", .nmaScopeQuoted(fit), .maTryCleanErrorMessages(fit)),
+      symbol = gettext("Warning:")
     )
 
   return()
@@ -473,7 +473,7 @@
   personTime <- data.frame(
     study     = as.character(dataset[[options[["studyId"]]]]),
     treatment = as.character(dataset[[options[["treatment"]]]]),
-    time      = dataset[[options[["armPersonTime"]]]]
+    time      = dataset[[options[["personTimeArm"]]]]
   )
 
   return(sum(merge(arms, personTime, by = c("study", "treatment"))[["time"]]))
@@ -595,6 +595,8 @@
   }
 
   # notes on the data and the fits (omitted observations and studies, reference treatment, pooling method), as in the classical meta-analysis
+  if (options[["referenceTreatment"]] == "")
+    testsTable$addFootnote(gettext("Select a reference treatment to see results that depend on this choice."))
   for (message in .nmaModelSummaryMessages(fits, options))
     testsTable$addFootnote(message)
   for (warning in .nmaNetmetaWarnings(fits, options))
@@ -785,7 +787,7 @@
 
 .nmaTreatmentEffectsTables <- function(jaspResults, options) {
 
-  if (options[["treatmentEffects"]])
+  if (options[["treatmentEffects"]] && (options[["treatmentEffectsComparisons"]] == "allPairwise" || options[["referenceTreatment"]] != ""))
     .nmaTreatmentEffectsTable(jaspResults, options)
 
   if (options[["leagueTable"]])
@@ -998,7 +1000,7 @@
     return()
 
   fits         <- .nmaExtractFits(jaspResults, options)
-  dependencies <- c("leagueTable", "leagueTableOrder", "leagueTableDirectEstimates", "leagueTableConfidenceIntervals",
+  dependencies <- c("leagueTable", "leagueTableOrder", "leagueTableDirectEstimates", "leagueTableConfidenceIntervals", "leagueTableDecimals",
                     "beneficialEffect", "transformEffectSize", "includeFullDatasetInSubgroupAnalysis")
 
   if (is.null(fits) || options[["subgroup"]] == "") {
@@ -1064,10 +1066,13 @@
   if (is.na(est))
     return("")
 
+  digits <- options[["leagueTableDecimals"]]
+  if (is.null(digits))
+    digits <- 2L
   if (options[["leagueTableConfidenceIntervals"]] && !is.na(lCi) && !is.na(uCi))
-    return(sprintf("%.2f [%.2f, %.2f]", est, lCi, uCi))
+    return(sprintf("%.*f [%.*f, %.*f]", digits, est, digits, lCi, digits, uCi))
 
-  return(sprintf("%.2f", est))
+  return(sprintf("%.*f", digits, est))
 }
 
 # the elements of the estimate, the lower and the upper limit of a network meta-analysis (the matrices TE.common, lower.common, ...)

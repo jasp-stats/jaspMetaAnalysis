@@ -31,7 +31,7 @@ Section
 	{
 		CheckBox
 		{
-			name:		"directEvidence"
+			name:		"directEvidenceProportion"
 			text:		qsTr("Direct evidence proportion")
 			checked:	false
 			info: qsTr("Include a table with the proportion of direct evidence contributing to each network estimate, the mean path length, and the minimal parallelism (the last two describe the indirect evidence; König et al., 2013). The mean path length and the minimal parallelism are not available for the Mantel-Haenszel, non-central hypergeometric, and penalized logistic regression pooling methods. The minimal parallelism is not defined for a network of two treatments.")

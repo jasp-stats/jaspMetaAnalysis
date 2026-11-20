@@ -11,13 +11,14 @@
   if (.nmaIsCountBased(options))
     options[["contributionMatrix"]] <- FALSE
 
-  if (options[["directEvidence"]])
+  if (options[["directEvidenceProportion"]])
     .nmaDirectEvidenceTable(jaspResults, options)
 
   if (options[["contributionMatrix"]])
     .nmaContributionMatrixTables(jaspResults, options)
 
-  if (options[["studyImpact"]])
+  if (options[["studyImpact"]] && (options[["referenceTreatment"]] != "" ||
+      (options[["treatmentEffects"]] && options[["treatmentEffectsComparisons"]] == "allPairwise")))
     .nmaStudyImpactTables(jaspResults, options)
 
   if (options[["pairwiseMetaAnalyses"]])
@@ -30,7 +31,7 @@
 
   return(.nmaExtractOutputContainer(
     jaspResults, "evidenceContainer", gettext("Evidence Structure"), 8,
-    c("directEvidence", "contributionMatrix", "studyImpact", "pairwiseMetaAnalyses")
+    c("directEvidenceProportion", "contributionMatrix", "studyImpact", "pairwiseMetaAnalyses")
   ))
 }
 
@@ -48,7 +49,7 @@
   directEvidenceTable          <- createJaspTable(gettext("Direct Evidence"))
   directEvidenceTable$position <- 1
   directEvidenceTable$showSpecifiedColumnsOnly <- TRUE
-  directEvidenceTable$dependOn("directEvidence")
+  directEvidenceTable$dependOn("directEvidenceProportion")
   evidenceContainer[["directEvidenceTable"]] <- directEvidenceTable
 
   directEvidenceTable$addColumnInfo(name = "comparison", type = "string", title = gettext("Comparison"))

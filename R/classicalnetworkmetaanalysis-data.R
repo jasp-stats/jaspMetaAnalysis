@@ -9,7 +9,7 @@
 # component model and the count-based pooling methods ignore it, while the form keeps the assigned variable)
 .nmaUsesPredictor       <- function(options) {
 
-  return(options[["predictor"]] != "" && !.nmaIsComponentModel(options) && !.nmaIsCountBased(options))
+  return(options[["predictors"]] != "" && !.nmaIsComponentModel(options) && !.nmaIsCountBased(options))
 }
 
 .nmaDataVariables       <- function(options) {
@@ -20,9 +20,9 @@
     .nmaTreatmentVariables(options),
     .nmaNumericVariables(options),
     # (the indicator variables of the components of the component model with indicators)
-    if (.nmaIsComponentModel(options) && .nmaComponentMode(options) == "indicatorVariables") options[["componentVariables"]],
+    if (.nmaIsComponentModel(options) && .nmaComponentMode(options) == "indicators") options[["componentVariables"]],
     # (the network meta-regression belongs to the standard model with the inverse variance pooling)
-    if (.nmaUsesPredictor(options)) options[["predictor"]],
+    if (.nmaUsesPredictor(options)) options[["predictors"]],
     if (options[["subgroup"]]  != "") options[["subgroup"]]
   )
 
@@ -122,28 +122,28 @@
     switch(
       options[["outcomeType"]],
       binary        = {
-        checkRange(options[["armEvents"]],     positive = FALSE)
-        checkRange(options[["armSampleSize"]], positive = TRUE)
+        checkRange(options[["eventsArm"]],     positive = FALSE)
+        checkRange(options[["sampleSizeArm"]], positive = TRUE)
       },
       continuous    = {
         # the standardized mean difference and the ratio of means divide by the standard deviations; the ratio of means is the logarithm of
         # the ratio of the means, which are positive
-        checkRange(options[["armStandardDeviation"]], positive = options[["effectSizeMeasure"]] %in% c("SMD", "ROM"))
+        checkRange(options[["standardDeviationArm"]], positive = options[["effectSizeMeasure"]] %in% c("SMD", "ROM"))
         if (options[["effectSizeMeasure"]] == "ROM")
-          checkRange(options[["armMean"]],            positive = TRUE)
-        checkRange(options[["armSampleSize"]],        positive = TRUE)
+          checkRange(options[["meanArm"]],            positive = TRUE)
+        checkRange(options[["sampleSizeArm"]],        positive = TRUE)
       },
       incidenceRate = {
-        checkRange(options[["armEvents"]],     positive = FALSE)
-        checkRange(options[["armPersonTime"]], positive = TRUE)
+        checkRange(options[["eventsArm"]],     positive = FALSE)
+        checkRange(options[["personTimeArm"]], positive = TRUE)
       },
-      general       = checkRange(options[["armEffectSizeStandardError"]], positive = TRUE)
+      general       = checkRange(options[["effectSizeStandardErrorArm"]], positive = TRUE)
     )
   }
 
   # binary outcomes cannot have more events than participants
   if (.nmaIsArmBased(options) && options[["outcomeType"]] == "binary") {
-    tooManyEvents <- which(dataset[[options[["armEvents"]]]] > dataset[[options[["armSampleSize"]]]])
+    tooManyEvents <- which(dataset[[options[["eventsArm"]]]] > dataset[[options[["sampleSizeArm"]]]])
     if (length(tooManyEvents) > 0)
       .quitAnalysis(gettextf(
         "The number of events exceeds the sample size in the study '%1$s' (treatment '%2$s').",
@@ -205,7 +205,7 @@
   studies <- as.character(dataset[[options[["studyId"]]]])
 
   # (the predictor of the network meta-regression is used by the standard model with the inverse variance pooling only)
-  for (variable in c(if (.nmaUsesPredictor(options)) options[["predictor"]], options[["subgroup"]])) {
+  for (variable in c(if (.nmaUsesPredictor(options)) options[["predictors"]], options[["subgroup"]])) {
 
     if (variable == "")
       next

@@ -9,13 +9,18 @@
 .nmaExtensionOutputs    <- function(jaspResults, options) {
 
   # (the network meta-regression belongs to the standard model)
-  if (options[["predictor"]] != "" && !.nmaIsComponentModel(options))
+  if (.nmaShowMetaregression(options))
     .nmaMetaregressionOutputs(jaspResults, options)
 
   if (options[["subgroup"]] != "")
     .nmaSubgroupDifferencesTable(jaspResults, options)
 
   return()
+}
+
+.nmaShowMetaregression  <- function(options) {
+
+  return(options[["predictors"]] != "" && options[["referenceTreatment"]] != "" && !.nmaIsComponentModel(options))
 }
 
 # Follow-up calls ----
@@ -63,7 +68,7 @@
 .nmaCallNetsplit        <- function(options, fit) {
 
   # (the Mantel-Haenszel and non-central hypergeometric fits provide SIDDE only; the form disables node splitting for penalized logistic regression)
-  method <- if (inherits(fit, "netmetabin") || options[["nodeSplittingMethod"]] == "sidde") "SIDDE" else "Back-calculation"
+  method <- if (inherits(fit, "netmetabin") || options[["directIndirectEvidenceMethod"]] == "sidde") "SIDDE" else "Back-calculation"
 
   return(list(fun = "netmeta::netsplit", arguments = list(.nmaObject("fit"), method = method)))
 }
@@ -185,7 +190,7 @@
 .nmaMetaregressionPredictor <- function(dataset, fit, options) {
 
   studies   <- as.character(fit[["data"]][[".studlab"]])[.nmaAnalysedRows(fit)]
-  predictor <- dataset[[options[["predictor"]]]][match(studies, as.character(dataset[[options[["studyId"]]]]))]
+  predictor <- dataset[[options[["predictors"]]]][match(studies, as.character(dataset[[options[["studyId"]]]]))]
 
   return(if (is.factor(predictor)) droplevels(predictor) else predictor)
 }
@@ -204,11 +209,11 @@
 .nmaMetaregressionFitData <- function(dataset, fit, options, dataName) {
 
   code <- paste0(
-    dataName, "$", .metaAsRName(options[["predictor"]]),
+    dataName, "$", .metaAsRName(options[["predictors"]]),
     "[match(fit$data$.studlab, ", dataName, "$", .metaAsRName(options[["studyId"]]), ")]"
   )
 
-  if (!is.factor(dataset[[options[["predictor"]]]]))
+  if (!is.factor(dataset[[options[["predictors"]]]]))
     return(list(covariate = code))
 
   # the levels of the predictor among the rows of the fit are renamed
@@ -481,7 +486,7 @@
   if (.nmaReportFailedResults(coefficientsTable, results))
     return()
 
-  covariate <- .nmaVariableName(options[["predictor"]])
+  covariate <- .nmaVariableName(options[["predictors"]])
   rows      <- .maSafeRbind(lapply(.nmaSuccessfulResults(results), .nmaRowsMetaregression, covariate = covariate, options = options))
 
   # the treatment effects are transformed (without standard errors), the slopes are not
@@ -651,7 +656,7 @@
 # the components are defined by the treatment names (arm-based data may use indicator variables)
 .nmaComponentMode       <- function(options) {
 
-  return(if (.nmaIsArmBased(options) && options[["componentSpecification"]] == "indicatorVariables") "indicatorVariables" else "separator")
+  return(if (.nmaIsArmBased(options) && options[["componentSpecification"]] == "indicators") "indicators" else "splitNames")
 }
 
 .nmaComponentTreatments <- function(scope, options) {
@@ -672,7 +677,7 @@
   dropped  <- character(0)
   inactive <- NULL
 
-  if (.nmaComponentMode(options) == "separator") {
+  if (.nmaComponentMode(options) == "splitNames") {
 
     separator <- options[["componentSeparator"]]
     selected  <- options[["componentInactiveTreatment"]]
@@ -738,7 +743,7 @@
   # additional indicator variable: the list applies to split treatment names only). The form lists the treatments of the data: an interaction is
   # defined by the components of its combination and applies to a scope (e.g., a subgroup) if a treatment of the scope contains all of them,
   # also if the combination itself is not a treatment of the scope (its column is the product of the indicators of the components).
-  interactions <- if (.nmaComponentMode(options) == "separator") .nmaComponentInteractions(options)
+  interactions <- if (.nmaComponentMode(options) == "splitNames") .nmaComponentInteractions(options)
 
   added <- list()
 
@@ -790,7 +795,7 @@
     arguments[["tau.preset"]] <- sqrt(.nmaFixedTau2(options))
 
   # the components of the treatment names are split by the separator (the separator of the interactions is changed if needed)
-  if (.nmaComponentMode(options) == "separator") {
+  if (.nmaComponentMode(options) == "splitNames") {
     arguments[["sep.comps"]] <- options[["componentSeparator"]]
     if (options[["componentSeparator"]] == "*")
       arguments[["sep.ia"]] <- ":"
@@ -1065,6 +1070,8 @@
   inactive <- unique(unlist(lapply(Filter(.nmaIsComponentFit, fits), function(fit) attr(fit, "components")[["inactive"]])))
   if (length(inactive) > 0)
     effectsTable$addFootnote(gettextf("The effects of the components are relative to the inactive treatment %1$s.", paste(inactive, collapse = ", ")))
+  if (.nmaComponentMode(options) == "splitNames" && options[["componentInactiveTreatment"]] == "")
+    effectsTable$addFootnote(gettext("No inactive treatment was selected. Each treatment name contributes its components to the model, including the reference treatment."))
   .nmaComponentUnidentifiedFootnote(effectsTable, fits)
   for (message in .nmaTransformationMessage(options, anyNA))
     effectsTable$addFootnote(message)

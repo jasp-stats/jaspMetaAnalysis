@@ -62,6 +62,17 @@ Section
 
 			IntegerField
 			{
+				name:			"leagueTableDecimals"
+				label:			qsTr("League table decimal places")
+				defaultValue:	2
+				min:			0
+				max:			10
+				fieldWidth:		70 * preferencesModel.uiScale
+				info: qsTr("Number of decimal places shown for estimates and confidence limits in the league table.")
+			}
+
+			IntegerField
+			{
 				name:			"rankingNumberOfSimulations"
 				label:			qsTr("Number of ranking simulations")
 				defaultValue:	1000
@@ -94,7 +105,7 @@ Section
 					name: 				"fixParametersTau2Value"
 					value:				"1"
 					min: 				0
-					inclusive: 			JASP.None
+					inclusive: 			JASP.MinOnly
 					info: qsTr("Value of 𝜏² (the common between-study variance) used in the model.")
 				}
 			}

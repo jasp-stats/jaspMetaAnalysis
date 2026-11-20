@@ -57,15 +57,15 @@ nmaTestDefaults <- function() {
     treatment1                 = "",
     treatment2                 = "",
     treatment                  = "",
-    armEvents                  = "",
-    armMean                    = "",
-    armStandardDeviation       = "",
-    armSampleSize              = "",
-    armPersonTime              = "",
-    armEffectSize              = "",
-    armEffectSizeStandardError = "",
+    eventsArm                  = "",
+    meanArm                    = "",
+    standardDeviationArm       = "",
+    sampleSizeArm              = "",
+    personTimeArm              = "",
+    effectSizeArm              = "",
+    effectSizeStandardErrorArm = "",
     componentVariables         = character(0),
-    predictor                  = "",
+    predictors                 = "",
     subgroup                   = "",
 
     # data format and model
@@ -89,6 +89,7 @@ nmaTestDefaults <- function() {
     leagueTableOrder                = "treatmentOrder",
     leagueTableDirectEstimates      = TRUE,
     leagueTableConfidenceIntervals  = TRUE,
+    leagueTableDecimals             = 2L,
     standardErrors                  = TRUE,
     confidenceIntervals             = TRUE,
     confidenceIntervalsLevel        = 0.95,
@@ -110,10 +111,10 @@ nmaTestDefaults <- function() {
 
     # inconsistency
     designDecomposition        = FALSE,
-    nodeSplitting              = FALSE,
-    nodeSplittingMethod        = "backCalculation",
-    nodeSplittingShow          = "all",
-    nodeSplittingForestPlot    = FALSE,
+    directIndirectEvidence     = FALSE,
+    directIndirectEvidenceMethod = "backCalculation",
+    directIndirectEvidenceShow = "all",
+    directIndirectEvidenceForestPlot = FALSE,
     netHeatPlot                = FALSE,
 
     # network plot (the GUI default is TRUE: switched off to speed up the tests)
@@ -169,20 +170,20 @@ nmaTestDefaults <- function() {
     funnelPlotTreatmentOrder             = "referenceFirst",
     funnelPlotTreatmentOrderCustom       = list(),
     funnelPlotPseudoConfidenceIntervals  = TRUE,
-    funnelPlotEggerTest                  = FALSE,
-    funnelPlotBeggTest                   = FALSE,
-    funnelPlotThompsonSharpTest          = FALSE,
+    funnelPlotAsymmetryTestsWeightedRegression = FALSE,
+    funnelPlotAsymmetryTestsRankCorrelation = FALSE,
+    funnelPlotAsymmetryTestsThompsonSharp = FALSE,
 
     # evidence structure
-    directEvidence             = FALSE,
+    directEvidenceProportion   = FALSE,
     contributionMatrix         = FALSE,
     contributionMatrixMethod   = "shortestPath",
     studyImpact                = FALSE,
     pairwiseMetaAnalyses       = FALSE,
 
     # model (standard or component) and the outputs of the component model
-    model                        = "standard",
-    componentSpecification       = "separator",
+    networkModel                 = "standard",
+    componentSpecification       = "splitNames",
     componentSeparator           = "+",
     componentInactiveTreatment   = "",
     componentInteractions        = list(),
@@ -410,7 +411,7 @@ nmaTestDisconnected <- function(third = FALSE) {
 
 nmaTestDisconnectedOptions <- list(
   studyId = "study", effectSize = "TE", effectSizeStandardError = "seTE", treatment1 = "treat1", treatment2 = "treat2",
-  model = "component", componentInactiveTreatment = "Placebo", referenceTreatment = "Placebo"
+  networkModel = "component", componentInactiveTreatment = "Placebo", referenceTreatment = "Placebo"
 )
 
 # arm-based continuous data with component indicators (P/Placebo = all zero): g1 holds Placebo, A, and B (cC is 0 for all its treatments), g2 holds
@@ -441,8 +442,8 @@ nmaTestIndicatorData <- function() {
 
 nmaTestIndicatorOptions <- list(
   dataFormat = "armBased", outcomeType = "continuous", effectSizeMeasure = "MD", studyId = "study", treatment = "treatment",
-  armMean = "mean", armStandardDeviation = "sd", armSampleSize = "n",
-  model = "component", componentSpecification = "indicatorVariables", componentVariables = c("cA", "cB", "cC")
+  meanArm = "mean", standardDeviationArm = "sd", sampleSizeArm = "n",
+  networkModel = "component", componentSpecification = "indicators", componentVariables = c("cA", "cB", "cC")
 )
 
 # netcomb() of the random-effects (DerSimonian-Laird) network meta-analysis of arm-based continuous data with the C matrix of the indicators
@@ -498,8 +499,8 @@ nmaTestFields <- function(element) {
 }
 
 nmaTestBinaryOptions <- list(
-  dataFormat = "armBased", outcomeType = "binary", effectSizeMeasure = "OR", studyId = "study", treatment = "treatment", armEvents = "events",
-  armSampleSize = "n"
+  dataFormat = "armBased", outcomeType = "binary", effectSizeMeasure = "OR", studyId = "study", treatment = "treatment", eventsArm = "events",
+  sampleSizeArm = "n"
 )
 
 # arm-based binary data without a transformation of the pairwise() call of the module
@@ -637,10 +638,10 @@ nmaTestArmData <- function() {
 }
 
 nmaTestArmOptions <- list(
-  binary        = list(dataFormat = "armBased", outcomeType = "binary", studyId = "study", treatment = "treatment", armEvents = "events", armSampleSize = "n"),
-  continuous    = list(dataFormat = "armBased", outcomeType = "continuous", studyId = "study", treatment = "treatment", armMean = "mean", armStandardDeviation = "sd", armSampleSize = "n"),
-  incidenceRate = list(dataFormat = "armBased", outcomeType = "incidenceRate", studyId = "study", treatment = "treatment", armEvents = "events", armPersonTime = "time"),
-  general       = list(dataFormat = "armBased", outcomeType = "general", studyId = "study", treatment = "treatment", armEffectSize = "te", armEffectSizeStandardError = "se")
+  binary        = list(dataFormat = "armBased", outcomeType = "binary", studyId = "study", treatment = "treatment", eventsArm = "events", sampleSizeArm = "n"),
+  continuous    = list(dataFormat = "armBased", outcomeType = "continuous", studyId = "study", treatment = "treatment", meanArm = "mean", standardDeviationArm = "sd", sampleSizeArm = "n"),
+  incidenceRate = list(dataFormat = "armBased", outcomeType = "incidenceRate", studyId = "study", treatment = "treatment", eventsArm = "events", personTimeArm = "time"),
+  general       = list(dataFormat = "armBased", outcomeType = "general", studyId = "study", treatment = "treatment", effectSizeArm = "te", effectSizeStandardErrorArm = "se")
 )
 
 # the random-effects (DerSimonian-Laird) network meta-analysis of meta::pairwise() with the arguments of the module for the data of nmaTestArmData()
@@ -846,13 +847,13 @@ test_that("a disconnected network is reported by the standard model with its sub
     list(data = contrast, options = nmaTestSennOptions[c("studyId", "effectSize", "effectSizeStandardError", "treatment1", "treatment2")]),
     list(data = arms, options = nmaTestBinaryOptions)
   )) {
-    results <- do.call(nmaTestRun, c(list(case$data), case$options, list(method = "equalEffects")))
+    results <- do.call(nmaTestRun, c(list(case$data), case$options, list(method = "equalEffects", referenceTreatment = "A")))
     expect_identical(results[["status"]], "complete")
     expect_identical(nmaTestFitError(results), expected)
     expect_identical(nmaTestError(results[["results"]][["treatmentEffectsContainer"]][["collection"]][["treatmentEffectsContainer_treatmentEffectsTable"]]), expected)
 
     # the component model fits the network (the treatments are components of their own)
-    component <- do.call(nmaTestRun, c(list(case$data), case$options, list(method = "equalEffects", model = "component", componentInactiveTreatment = "")))
+    component <- do.call(nmaTestRun, c(list(case$data), case$options, list(method = "equalEffects", networkModel = "component", componentInactiveTreatment = "")))
     expect_identical(component[["status"]], "complete")
     expect_length(nmaTestAllErrors(component[["results"]]), 0)
     expect_true(any(grepl("The network is disconnected: the component model is fitted to the subnetworks jointly", nmaTestFootnotes(component, "modelSummaryContainer", "modelSummaryContainer_testsTable"), fixed = TRUE)))
@@ -866,8 +867,8 @@ test_that("the component model with indicator variables equals netcomb() with th
   baker   <- nmaTestBakerIndicators()
   data    <- baker$data
   options <- list(
-    dataFormat = "armBased", outcomeType = "binary", effectSizeMeasure = "OR", studyId = "study", treatment = "treatment", armEvents = "exac", armSampleSize = "total",
-    referenceTreatment = unname(baker$labels["Placebo"]), method = "derSimonianLaird", model = "component", componentSpecification = "indicatorVariables",
+    dataFormat = "armBased", outcomeType = "binary", effectSizeMeasure = "OR", studyId = "study", treatment = "treatment", eventsArm = "exac", sampleSizeArm = "total",
+    referenceTreatment = unname(baker$labels["Placebo"]), method = "derSimonianLaird", networkModel = "component", componentSpecification = "indicators",
     componentVariables = baker$variables, rankingTable = TRUE
   )
   results <- do.call(nmaTestRun, c(list(data), options))
@@ -915,7 +916,7 @@ test_that("the component model with indicator variables equals netcomb() with th
   expect_true(any(grepl(paste("inactive treatment", reference), nmaTestFootnotes(results, "treatmentEffectsContainer", "treatmentEffectsContainer_componentEffectsTable"), fixed = TRUE)))
 
   # (the treatment names have no components: the separator of the names would give the treatments as components of their own)
-  separator <- do.call(nmaTestRun, c(list(data), options[!names(options) %in% c("componentSpecification", "componentVariables")], list(componentSpecification = "separator", componentInactiveTreatment = reference)))
+  separator <- do.call(nmaTestRun, c(list(data), options[!names(options) %in% c("componentSpecification", "componentVariables")], list(componentSpecification = "splitNames", componentInactiveTreatment = reference)))
   expect_gt(length(nmaTestComponentTable(separator)$component), length(baker$variables))
 })
 
@@ -943,7 +944,7 @@ test_that("with indicators, a subgroup without a component is fitted without it 
 
   # no subgroup fails; the note names the dropped indicator and the subgroup
   notes <- nmaTestFootnotes(results, "modelSummaryContainer", "modelSummaryContainer_testsTable")
-  expect_false(any(grepl("the model failed", notes, fixed = TRUE)))
+  expect_false(any(grepl("the results could not be computed", notes, fixed = TRUE)))
   expect_true(any(grepl("'cC'", notes, fixed = TRUE) & grepl("Subgroup 'g1'", notes, fixed = TRUE) & grepl("not used as a component", notes, fixed = TRUE)))
   expect_identical(sum(grepl("not used as a component", notes, fixed = TRUE)), 1L)
 })
@@ -952,7 +953,7 @@ test_that("an interaction applies to every subgroup with a treatment that contai
 
   # G1 contains the treatment A+B; G2 contains A+B+C, not A+B (A, B, C: 2; A+B: 7; A+B+C: 10 = 6 + 4)
   data    <- nmaTestComponentSubgroups(list(G1 = c(P = 0, A = 2, B = 2, "A+B" = 7), G2 = c(P = 0, A = 2, B = 2, C = 2, "A+B+C" = 10)))
-  results <- do.call(nmaTestRun, c(list(data), nmaTestDisconnectedOptions[c("studyId", "model")], list(
+  results <- do.call(nmaTestRun, c(list(data), nmaTestDisconnectedOptions[c("studyId", "networkModel")], list(
     effectSize = "TE", effectSizeStandardError = "seTE", treatment1 = "treat1", treatment2 = "treat2", componentInactiveTreatment = "P", referenceTreatment = "P",
     method = "equalEffects", subgroup = "group", componentInteractions = list(list(value = list("A+B"), include = TRUE))
   )))
@@ -990,7 +991,7 @@ test_that("the inactive component is not estimated in a subgroup without the ina
   # G1: P is inactive (P+A = A); G2 has no standalone P: P+A and P+B differ from A and B by 0.6 in the data
   set.seed(6)
   data    <- nmaTestComponentSubgroups(list(G1 = c(P = 0, A = 1, B = 2, "P+A" = 1, "P+B" = 2), G2 = c(A = 1, B = 2, "P+A" = 1.6, "P+B" = 2.6)), noise = 0.05)
-  results <- do.call(nmaTestRun, c(list(data), nmaTestDisconnectedOptions[c("studyId", "model")], list(
+  results <- do.call(nmaTestRun, c(list(data), nmaTestDisconnectedOptions[c("studyId", "networkModel")], list(
     effectSize = "TE", effectSizeStandardError = "seTE", treatment1 = "treat1", treatment2 = "treat2", componentInactiveTreatment = "P",
     method = "equalEffects", subgroup = "group", treatmentEffectsComparisons = "allPairwise"
   )))
@@ -1010,6 +1011,33 @@ test_that("the inactive component is not estimated in a subgroup without the ina
 })
 
 # Reference treatment and exclusions under the count-based pooling methods ----
+
+test_that("reference-dependent results wait for an explicit reference treatment", {
+
+  data <- data.frame(study = paste0("s", 1:4), treat1 = c("A", "A", "B", "A"), treat2 = c("B", "C", "C", "B"),
+                     TE = c(0.2, 0.3, 0.1, 0.4), seTE = 0.2, year = 1:4)
+  run <- function(...) nmaTestRun(data, studyId = "study", treatment1 = "treat1", treatment2 = "treat2",
+                                  effectSize = "TE", effectSizeStandardError = "seTE", method = "equalEffects", inputSummary = TRUE, ...)
+
+  empty <- run(networkPlot = TRUE, forestPlot = TRUE, funnelPlot = TRUE, studyImpact = TRUE, predictors = "year", showNetmetaRCode = TRUE)
+  expect_identical(empty[["status"]], "complete")
+  expect_equal(nmaTestTable(empty, "modelSummaryContainer", "modelSummaryContainer_inputSummaryTable")[["n"]], 3)
+  expect_identical(empty[["results"]][["networkPlot"]][["status"]], "complete")
+  expect_null(nmaTestEffectsTitle(empty))
+  expect_null(empty[["results"]][["forestPlot"]])
+  expect_null(empty[["results"]][["smallStudyEffectsContainer"]])
+  expect_null(empty[["results"]][["evidenceContainer"]])
+  expect_null(empty[["results"]][["metaregressionContainer"]])
+  expect_false(any(grepl("netmetareg(", nmaTestCode(empty), fixed = TRUE)))
+
+  pairwise <- run(treatmentEffectsComparisons = "allPairwise", forestPlot = TRUE, forestPlotComparisons = "allPairwise")
+  expect_equal(nrow(nmaTestEffectsTable(pairwise)), 3L)
+  expect_identical(pairwise[["results"]][["forestPlot"]][["status"]], "complete")
+
+  selected <- run(referenceTreatment = "C")
+  expect_identical(nmaTestEffectsTitle(selected), "Treatment Effects vs. C")
+  expect_setequal(nmaTestEffectsTable(selected)[["comparison"]], c("A", "B"))
+})
 
 test_that("the default reference treatment (the first treatment) outside the fitted network is replaced by a treatment of the network", {
 
@@ -1091,7 +1119,7 @@ test_that("a network that the exclusion of designs disconnects ends in the messa
   noEvents$events[5:6] <- 0
 
   for (pooling in c("mantelHaenszel", "nonCentralHypergeometric")) {
-    for (scenario in list(list(data = data, excluded = "design 'B:C'"), list(data = noEvents, excluded = "Study 's3' without any events"))) {
+    for (scenario in list(list(data = data, excluded = "design 'B / C'"), list(data = noEvents, excluded = "Study 's3' without any events"))) {
 
       results <- do.call(nmaTestRun, c(list(scenario$data), nmaTestBinaryOptions, list(poolingMethod = pooling, method = "equalEffects")))
       info    <- paste(pooling, scenario$excluded)
@@ -1163,7 +1191,7 @@ test_that("for a network of two treatments the resampled ranking metrics and the
 test_that("the direct evidence of a network of two treatments is reported and a failing subgroup does not remove the others", {
 
   data    <- data.frame(TE = c(0.2, 0.4, 0.1), seTE = c(0.1, 0.2, 0.15), treat1 = "A", treat2 = "B", study = factor(paste0("s", 1:3)))
-  options <- list(studyId = "study", effectSize = "TE", effectSizeStandardError = "seTE", treatment1 = "treat1", treatment2 = "treat2", method = "derSimonianLaird", directEvidence = TRUE)
+  options <- list(studyId = "study", effectSize = "TE", effectSizeStandardError = "seTE", treatment1 = "treat1", treatment2 = "treat2", method = "derSimonianLaird", directEvidenceProportion = TRUE)
 
   results <- do.call(nmaTestRun, c(list(data), options))
   expect_identical(results[["status"]], "complete")
@@ -1223,7 +1251,7 @@ test_that("penalized logistic regression of a network of two treatments ends in 
 
   results <- do.call(nmaTestRun, c(list(both), options, list(subgroup = "group", referenceTreatment = "A")))
   expect_identical(results[["status"]], "complete")
-  expect_true(paste0("Subgroup 'G2': the model failed with the following error: ", message) %in% notes(results))
+  expect_true(paste0("Subgroup 'G2': the results could not be computed: ", message) %in% notes(results))
 
   effects            <- nmaTestEffectsTable(results)
   effects$subgroup   <- nmaTestFill(effects$subgroup)
@@ -1247,10 +1275,10 @@ test_that("each validation stop of the data checks ends the analysis with its me
     results[["results"]][["errorMessage"]]
   }
 
-  # the fixed between-study variance (a FormulaField: a positive number is required); the form offers the method of the random effects
+  # the fixed between-study variance (a FormulaField: a finite, non-negative number is required); the form offers the method of the random effects
   # (dispersion) only with penalized logistic regression, so no options of the form reach the check of the method in R
   for (value in c("-1", "abc", "c(1, 2)"))
-    expect_identical(stopMessage(contrast, options, method = "derSimonianLaird", fixParametersTau2 = TRUE, fixParametersTau2Value = value), "The fixed value for tau2 must be a positive number.", info = value)
+    expect_identical(stopMessage(contrast, options, method = "derSimonianLaird", fixParametersTau2 = TRUE, fixParametersTau2Value = value), "The fixed value for tau2 must be a finite, non-negative number.", info = value)
   results <- do.call(nmaTestRun, c(list(contrast), options, list(method = "derSimonianLaird", fixParametersTau2 = TRUE, fixParametersTau2Value = "0.1")))
   expect_identical(results[["status"]], "complete")
   expect_true(any(grepl("fixed to 0.1", nmaTestFootnotes(results, "modelSummaryContainer", "modelSummaryContainer_heterogeneityTable"), fixed = TRUE)))
@@ -1309,7 +1337,7 @@ test_that("each validation stop of the data checks ends the analysis with its me
     x = c(1, 2, 3), g = factor(c("u", "v", "v"))
   )
   expect_identical(
-    stopMessage(varying, options, predictor = "x", method = "restrictedML"),
+    stopMessage(varying, options, predictors = "x", method = "restrictedML"),
     "The variable 'x' is not constant within the study 's1'. The predictor and the subgroup must be study-level variables."
   )
   expect_identical(
@@ -1405,7 +1433,7 @@ test_that("the R code of a failed network meta-regression is commented out with 
     data[[variable]] <- factor(data[[variable]], levels = unique(data[[variable]]))
 
   results <- do.call(nmaTestRun, c(list(data), nmaTestSyntheticOptions[c("studyId", "effectSize", "effectSizeStandardError", "treatment1", "treatment2")], list(
-    referenceTreatment = "A", method = "equalEffects", subgroup = "g", predictor = "x", showNetmetaRCode = TRUE
+    referenceTreatment = "A", method = "equalEffects", subgroup = "g", predictors = "x", showNetmetaRCode = TRUE
   )))
   expect_identical(results[["status"]], "complete")
 
@@ -1438,7 +1466,7 @@ test_that("the predictor of the network meta-regression is checked among the ana
   data$mod <- factor(ifelse(number == 10, "L3", ifelse(number %% 2 == 1, "L1", "L2")))
   without  <- droplevels(data[data$study != "s10", ])
 
-  results <- do.call(nmaTestRun, c(list(data), options, list(predictor = "mod", showNetmetaRCode = TRUE)))
+  results <- do.call(nmaTestRun, c(list(data), options, list(predictors = "mod", showNetmetaRCode = TRUE)))
   expect_identical(results[["status"]], "complete")
   expect_length(nmaTestAllErrors(elements(results)), 0)
 
@@ -1454,7 +1482,7 @@ test_that("the predictor of the network meta-regression is checked among the ana
     nmaTestAgree(table[[pair[1]]], regression[["results"]][[pair[2]]], 1e-8, info = pair[1])
 
   # the module without the study gives the same results
-  reference <- do.call(nmaTestRun, c(list(without), options, list(predictor = "mod")))
+  reference <- do.call(nmaTestRun, c(list(without), options, list(predictors = "mod")))
   nmaTestAgree(table$est, coefficients(reference)$est, 1e-10)
 
   # the notes name the levels of the analysed studies, and the printed code reproduces the coefficients (without the level of the excluded study)
@@ -1470,13 +1498,13 @@ test_that("the predictor of the network meta-regression is checked among the ana
   # a predictor that varies only in the excluded study has no variation among the analysed studies (the message of the module, not the error of netmetareg())
   message <- "The predictor has no variation among the studies."
   data$mod <- factor(ifelse(number == 10, "L2", "L1"))
-  results  <- do.call(nmaTestRun, c(list(data), options, list(predictor = "mod", showNetmetaRCode = TRUE)))
+  results  <- do.call(nmaTestRun, c(list(data), options, list(predictors = "mod", showNetmetaRCode = TRUE)))
   expect_identical(results[["status"]], "complete")
   expect_true(message %in% nmaTestAllErrors(elements(results)))
   expect_true(any(grepl(message, nmaTestCode(results), fixed = TRUE)))
 
   data$num <- ifelse(number == 10, 7, 0)
-  results  <- do.call(nmaTestRun, c(list(data), options, list(predictor = "num")))
+  results  <- do.call(nmaTestRun, c(list(data), options, list(predictors = "num")))
   expect_identical(results[["status"]], "complete")
   expect_true(message %in% nmaTestAllErrors(elements(results)))
 })
@@ -1485,20 +1513,20 @@ test_that("the meta-regression tables have a note if netmeta treats the comparis
 
   # contrast-based data: no arm-level data, netmeta uses the diagonal covariance
   multiArm <- nmaTestMultiArmContrastData(c("G1", "G2"))
-  nmaTestCovarianceCase(multiArm, c(nmaTestSyntheticOptions, list(predictor = "covariate")), multiArm = TRUE, note = TRUE, info = "contrast-based, multi-arm")
+  nmaTestCovarianceCase(multiArm, c(nmaTestSyntheticOptions, list(predictors = "covariate")), multiArm = TRUE, note = TRUE, info = "contrast-based, multi-arm")
 
   # contrast-based data of two-arm studies only: nothing to treat as independent
-  nmaTestCovarianceCase(nmaTestSynthetic(), c(nmaTestSyntheticOptions, list(predictor = "covariate")), multiArm = FALSE, note = FALSE, info = "contrast-based, two-arm")
+  nmaTestCovarianceCase(nmaTestSynthetic(), c(nmaTestSyntheticOptions, list(predictors = "covariate")), multiArm = FALSE, note = FALSE, info = "contrast-based, two-arm")
 
   # a predictor with two levels (moderator: L1 and L2 in the subgroup G1)
-  nmaTestCovarianceCase(droplevels(multiArm[multiArm$group == "G1", ]), c(nmaTestSyntheticOptions, list(predictor = "moderator")), multiArm = TRUE, note = TRUE, info = "contrast-based, multi-arm, factor")
+  nmaTestCovarianceCase(droplevels(multiArm[multiArm$group == "G1", ]), c(nmaTestSyntheticOptions, list(predictors = "moderator")), multiArm = TRUE, note = TRUE, info = "contrast-based, multi-arm, factor")
 
   # arm-based data (nmaTestArmData() has the three-arm study s5): the arm-level data of the summary measures with a covariance formula in netmeta
   # (calcV) give the full covariance, the other inputs (ROM, incidence rates, general effect sizes) the diagonal matrix
   # (not whole numbers: a column of a few whole numbers is read as a nominal variable, and a predictor with three levels is not supported)
   data     <- nmaTestArmData()
   data$cov <- as.integer(sub("s", "", as.character(data$study))) %% 3 + 0.5
-  reference <- list(referenceTreatment = "A", predictor = "cov")
+  reference <- list(referenceTreatment = "A", predictors = "cov")
 
   cases <- list(
     list(type = "binary", measure = "OR", note = FALSE), list(type = "binary", measure = "RR", note = FALSE),
@@ -1548,5 +1576,28 @@ test_that("the effect size measures of incidence rates equal pairwise() and netm
 
     expect_identical(network[["sm"]], measure)
     nmaTestAgreeArmModel(results, network, measure)
+  }
+})
+
+test_that("net heat cells and square sizes match netheat for common and random effects", {
+
+  data <- data.frame(
+    effect = c(0, .8, .15, 1.2, .8, -.15), se = c(.11, .13, .12, .11, .13, .14),
+    first = rep(c("A", "A", "B"), each = 2), second = rep(c("B", "C", "C"), each = 2),
+    study = letters[1:6]
+  )
+  # netmeta 3.7-0 netheat(): ordered heat matrix and absolute hat matrix before drawing.
+  # The within-design heterogeneity is nonzero, so the random-effects case also exercises tau.within().
+  for (random in c(FALSE, TRUE)) {
+    fit <- netmeta::netmeta(effect, se, first, second, study, data = data, sm = "MD", common = !random, random = random)
+    plotData <- jaspMetaAnalysis:::.nmaNetHeatData(fit)
+    heat <- if (random) c(-.00115610, -.00114638, -.00114317) else c(-.01249325, -.00970733, -.00905165)
+    offDiagonal <- if (random) c(.3355251, .3327029, .3317719) else c(.3997556, .3106123, .2896321)
+    sizes <- matrix(offDiagonal, 3, 3)
+    diag(sizes) <- 1 - offDiagonal
+
+    expect_identical(plotData$labels, c("B:C", "A:B", "A:C"))
+    expect_lt(max(abs(plotData$t1 - matrix(heat, 3, 3))), 1e-7)
+    expect_lt(max(abs(plotData$size - sizes)), 1e-7)
   }
 })

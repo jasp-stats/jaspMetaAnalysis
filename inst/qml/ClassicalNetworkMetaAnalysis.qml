@@ -66,8 +66,8 @@ Form
 		// rows) get the space of about three variables
 		preferredHeight:	{
 			var controls	= [outcomeType, effectSizeMeasure, effectSizeVariable, effectSizeStandardErrorVariable, treatment1Variable, treatment2Variable,
-				treatmentVariable, armEventsVariable, armMeanVariable, armStandardDeviationVariable, armSampleSizeVariable, armPersonTimeVariable,
-				armEffectSizeVariable, armEffectSizeStandardErrorVariable, studyIdVariable, poolingMethod, method, fixedEffectTest, predictors, subgroup]
+				treatmentVariable, eventsArmVariable, meanArmVariable, standardDeviationArmVariable, sampleSizeArmVariable, personTimeArmVariable,
+				effectSizeArmVariable, effectSizeStandardErrorArmVariable, studyIdVariable, poolingMethod, method, fixedEffectTest, predictors, subgroup]
 			var margin		= 8 * preferencesModel.uiScale
 			var height		= componentVariables.visible ? 125 * preferencesModel.uiScale + margin : 0
 			for (var i = 0; i < controls.length; i++)
@@ -128,7 +128,12 @@ Form
 						{ label: qsTr("Square root incidence rate difference")	, value: "IRSD"	, info: qsTr("Square root incidence rate difference")}
 					];
 				} else {
-					return [
+					var contrastMeasures = dataFormat.value === "contrastBased" ? [
+						{ label: qsTr("Mean difference")					, value: "MD"		, info: qsTr("Mean difference on the original outcome scale")},
+						{ label: qsTr("Log ratio of means")					, value: "ROM"		, info: qsTr("Log ratio of means")},
+						{ label: qsTr("Log incidence rate ratio")			, value: "IRR"		, info: qsTr("Log incidence rate ratio")}
+					] : []
+					return contrastMeasures.concat([
 						{ label: qsTr("Standardized mean difference")		, value: "SMD"		, info: qsTr("Standardized mean difference such as Cohen's d or Hedges' g")},
 						{ label: qsTr("Fisher's z")							, value: "ZCOR"		, info: qsTr("Fisher's z transformation of correlation coefficients")},
 						{ label: qsTr("Log odds ratio")						, value: "OR"		, info: qsTr("Log odds ratio")},
@@ -136,7 +141,7 @@ Form
 						{ label: qsTr("Log hazard ratio")					, value: "HR"		, info: qsTr("Log hazard ratio")},
 						{ label: qsTr("Risk difference")					, value: "RD"		, info: qsTr("Risk difference")},
 						{ label: qsTr("General")							, value: "general"	, info: qsTr("General effect size that does not correspond to any of the measures above.")}
-					];
+					]);
 				}})()
 		}
 
@@ -207,8 +212,8 @@ Form
 
 		AssignedVariablesList
 		{
-			name:				"armEvents"
-			id:				armEventsVariable
+			name:				"eventsArm"
+			id:				eventsArmVariable
 			title:				qsTr("Events")
 			singleVariable:		true
 			allowedColumns:		["scale"]
@@ -220,8 +225,8 @@ Form
 
 		AssignedVariablesList
 		{
-			name:				"armMean"
-			id:				armMeanVariable
+			name:				"meanArm"
+			id:				meanArmVariable
 			title:				qsTr("Mean")
 			singleVariable:		true
 			allowedColumns:		["scale"]
@@ -233,8 +238,8 @@ Form
 
 		AssignedVariablesList
 		{
-			name:				"armStandardDeviation"
-			id:				armStandardDeviationVariable
+			name:				"standardDeviationArm"
+			id:				standardDeviationArmVariable
 			title:				qsTr("Standard Deviation")
 			singleVariable:		true
 			allowedColumns:		["scale"]
@@ -246,8 +251,8 @@ Form
 
 		AssignedVariablesList
 		{
-			name:				"armSampleSize"
-			id:				armSampleSizeVariable
+			name:				"sampleSizeArm"
+			id:				sampleSizeArmVariable
 			title:				qsTr("Sample Size")
 			singleVariable:		true
 			allowedColumns:		["scale"]
@@ -259,8 +264,8 @@ Form
 
 		AssignedVariablesList
 		{
-			name:				"armPersonTime"
-			id:				armPersonTimeVariable
+			name:				"personTimeArm"
+			id:				personTimeArmVariable
 			title:				qsTr("Person-Time")
 			singleVariable:		true
 			allowedColumns:		["scale"]
@@ -272,8 +277,8 @@ Form
 
 		AssignedVariablesList
 		{
-			name:				"armEffectSize"
-			id:				armEffectSizeVariable
+			name:				"effectSizeArm"
+			id:				effectSizeArmVariable
 			title:				qsTr("Arm Effect Size")
 			singleVariable:		true
 			allowedColumns:		["scale"]
@@ -285,8 +290,8 @@ Form
 
 		AssignedVariablesList
 		{
-			name:				"armEffectSizeStandardError"
-			id:				armEffectSizeStandardErrorVariable
+			name:				"effectSizeStandardErrorArm"
+			id:				effectSizeStandardErrorArmVariable
 			title:				qsTr("Arm Effect Size Standard Error")
 			singleVariable:		true
 			allowedColumns:		["scale"]
@@ -362,8 +367,8 @@ Form
 			id:				componentVariables
 			title:				qsTr("Component Indicators")
 			allowedColumns:		["scale"]
-			visible:			networkModel.value === "component" && componentSpecification.value === "indicatorVariables" && dataFormat.value === "armBased"
-			enabled:			networkModel.value === "component" && componentSpecification.value === "indicatorVariables" && dataFormat.value === "armBased"
+			visible:			networkModel.value === "component" && componentSpecification.value === "indicators" && dataFormat.value === "armBased"
+			enabled:			networkModel.value === "component" && componentSpecification.value === "indicators" && dataFormat.value === "armBased"
 			// (a list with several variables: all of them are returned to the available variables when the list is disabled)
 			onEnabledChanged:
 			{
@@ -378,7 +383,7 @@ Form
 
 		AssignedVariablesList
 		{
-			name:				"predictor"
+			name:				"predictors"
 			id:					predictors
 			title:				qsTr("Predictor")
 			singleVariable:		true
@@ -439,8 +444,10 @@ Form
 		{
 			name:			"referenceTreatment"
 			label:			qsTr("Reference treatment")
+			addEmptyValue:	true
+			placeholderText:	qsTr("Select a reference treatment")
 			source:			dataFormat.value === "armBased" ? [{ name: "treatment", use: "levels" }] : [{ name: "treatment1", use: "levels" }, { name: "treatment2", use: "levels" }]
-			info:			qsTr("Treatment used as the reference for the treatment effects (versus reference), the forest plot, the default treatment order of the funnel plot, and the effects and slopes of the network meta-regression. If the reference treatment is not part of the analysed network (e.g., in a subgroup), the first treatment of the network (the default reference treatment of netmeta) is used; the component model of a disconnected network uses the inactive treatment if it is part of the network.")
+			info:			qsTr("Select a treatment to see comparisons against it, including treatment effects, forest plots, and study impact. This choice also sets the reference for network meta-regression and for ordering the forest plot by effect size or the funnel plot and its tests by reference treatment. The network summary, network plot, and all-pairwise comparisons are available before a reference is selected. If the selected treatment is absent from an analysed network (e.g., in a subgroup), the first treatment in that network is used. A disconnected component model uses the inactive treatment if available.")
 		}
 
 		DropDown
@@ -458,7 +465,7 @@ Form
 
 	RadioButtonGroup
 	{
-		name:		"model"
+		name:		"networkModel"
 		id:			networkModel
 		title:		qsTr("Model")
 		info:		qsTr("Model of the treatment effects. The standard model estimates a separate effect for each treatment. The component model (additive component network meta-analysis) estimates the effects of the components that form the treatments (e.g., the parts of combination therapies) and models each treatment effect as the sum of the effects of its components.")
@@ -503,13 +510,13 @@ Form
 					name:		"componentSpecification"
 					id:			componentSpecification
 					label:		qsTr("Components")
-					startValue:	"separator"
+					startValue:	"splitNames"
 					info:		qsTr("Specify how the components of the treatments are defined.")
 					values:		dataFormat.value === "armBased" ? [
-						{ label: qsTr("Split names")			, value: "separator"			, info: qsTr("The components are the parts of the treatment names split at the separator (e.g., 'A+B' consists of the components 'A' and 'B').")},
-						{ label: qsTr("Indicators")				, value: "indicatorVariables"	, info: qsTr("The components are defined by the 0/1 indicator variables assigned in 'Component Indicators'. The treatment with all indicators equal to zero is the inactive treatment.")}
+						{ label: qsTr("Split names")			, value: "splitNames"			, info: qsTr("The components are the parts of the treatment names split at the separator (e.g., 'A+B' consists of the components 'A' and 'B').")},
+						{ label: qsTr("Indicators")				, value: "indicators"	, info: qsTr("The components are defined by the 0/1 indicator variables assigned in 'Component Indicators'. The treatment with all indicators equal to zero is the inactive treatment.")}
 					] : [
-						{ label: qsTr("Split names")			, value: "separator"			, info: qsTr("The components are the parts of the treatment names split at the separator (e.g., 'A+B' consists of the components 'A' and 'B').")}
+						{ label: qsTr("Split names")			, value: "splitNames"			, info: qsTr("The components are the parts of the treatment names split at the separator (e.g., 'A+B' consists of the components 'A' and 'B').")}
 					]
 				}
 
@@ -520,7 +527,7 @@ Form
 					label:			""
 					value:			"+"
 					fieldWidth:		30 * preferencesModel.uiScale
-					visible:		componentSpecification.value === "separator"
+					visible:		componentSpecification.value === "splitNames"
 					info:			qsTr("Character separating the components in the treatment names (a single character).")
 				}
 			}
@@ -532,7 +539,7 @@ Form
 				addEmptyValue:		true
 				placeholderText:	qsTr("None")
 				// (the indicators define the inactive treatment: the treatment with all indicators equal to zero)
-				visible:			componentSpecification.value === "separator"
+				visible:			componentSpecification.value === "splitNames"
 				// the treatments that consist of a single component: the treatment names without the separator
 				values:				{
 					var levels		= dataFormat.value === "armBased" ? treatmentVariable.levels : treatment1Variable.levels.concat(treatment2Variable.levels)
@@ -553,7 +560,7 @@ Form
 				// the treatments that combine components: the treatment names containing the separator (the levels come from the assigned
 				// treatment variables); with indicators, an interaction is an additional indicator variable (no list)
 				values:		{
-					if (componentSpecification.value !== "separator")
+					if (componentSpecification.value !== "splitNames")
 						return []
 					var levels		= dataFormat.value === "armBased" ? treatmentVariable.levels : treatment1Variable.levels.concat(treatment2Variable.levels)
 					var separator	= componentSeparator.value
