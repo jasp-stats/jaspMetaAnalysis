@@ -1488,6 +1488,48 @@
       "Author": "Angelo Canty [aut] (author of original code for S), Brian Ripley [aut, trl] (conversion to R, maintainer 1999--2022, author of parallel support), Alessandra R. Brazzale [ctb, cre] (minor bug fixes)",
       "Repository": "CRAN"
     },
+    "brglm2": {
+      "Package": "brglm2",
+      "Version": "1.1.1",
+      "Source": "Repository",
+      "Title": "Bias Reduction in Generalized Linear Models",
+      "Authors@R": "c(person(given = \"Ioannis\", family = \"Kosmidis\", role = c(\"aut\", \"cre\"), email = \"ioannis.kosmidis@warwick.ac.uk\", comment = c(ORCID = \"0000-0003-1556-0302\")), person(given = c(\"Euloge\", \"Clovis\"), family = c(\"Kenne Pagui\"), role = \"aut\", email = \"kenne@stat.unipd.it\", comment = c(ORCID = \"0000-0002-8998-9251\")), person(given = \"Federico\", family = \"Boiocchi\", role = \"ctb\", email = \"federico.boiocchi@gmail.com\"), person(given = \"Philipp\", family = \"Sterzinger\", role = \"ctb\", email = \"P.Sterzinger@lse.ac.uk\", comment = c(ORCID = \"0009-0007-7348-5810\")), person(given = \"Kjell\", family = \"Konis\", role = \"ctb\", email = \"kjell.konis@me.com\"), person(given = \"Nicola\", family = \"Sartori\", role = \"ctb\", email = \"sartori@stat.unipd.it\"))",
+      "Description": "Estimation and inference from generalized linear models based on various methods for bias reduction and maximum penalized likelihood with powers of the Jeffreys prior as penalty. The 'brglmFit()' fitting method can achieve reduction of estimation bias by solving either the mean bias-reducing adjusted score equations in Firth (1993) <doi:10.1093/biomet/80.1.27> and Kosmidis and Firth (2009) <doi:10.1093/biomet/asp055>, or the median bias-reducing adjusted score equations in Kenne et al. (2017) <doi:10.1093/biomet/asx046>, or through the direct subtraction of an estimate of the bias of the maximum likelihood estimator from the maximum likelihood estimates as in Cordeiro and McCullagh (1991) <https://www.jstor.org/stable/2345592>. See Kosmidis et al (2020) <doi:10.1007/s11222-019-09860-6> for more details. Estimation in all cases takes place via a quasi Fisher scoring algorithm, and S3 methods for the construction of of confidence intervals for the reduced-bias estimates are provided. In the special case of generalized linear models for binomial and multinomial responses (both ordinal and nominal), the adjusted score approaches to mean and media bias reduction have been found to return estimates with improved frequentist properties, that are also always finite, even in cases where the maximum likelihood estimates are infinite (e.g. complete and quasi-complete separation; see Kosmidis and Firth, 2020 <doi:10.1093/biomet/asaa052>, for a proof for mean bias reduction in logistic regression). The 'mdyplFit()' fitting method fits logistic regression models using maximum Diaconis-Ylvisaker prior penalized likelihood, which also guarantees finite estimates. High-dimensionality corrections under proportional asymptotics can be applied to the resulting objects; see Sterzinger and Kosmidis (2024) <doi:10.48550/arXiv.2311.07419> for details.",
+      "URL": "https://github.com/ikosmidis/brglm2",
+      "BugReports": "https://github.com/ikosmidis/brglm2/issues",
+      "Depends": [
+        "R (>= 3.5)"
+      ],
+      "Imports": [
+        "MASS",
+        "stats",
+        "Matrix",
+        "graphics",
+        "nnet",
+        "enrichwith",
+        "numDeriv",
+        "statmod",
+        "nleqslv"
+      ],
+      "License": "GPL-3",
+      "Encoding": "UTF-8",
+      "LazyData": "true",
+      "Suggests": [
+        "detectseparation",
+        "knitr",
+        "rmarkdown",
+        "covr",
+        "tinytest",
+        "VGAM",
+        "brglm"
+      ],
+      "VignetteBuilder": "knitr",
+      "Config/roxygen2/version": "8.1.0",
+      "NeedsCompilation": "yes",
+      "Author": "Ioannis Kosmidis [aut, cre] (ORCID: <https://orcid.org/0000-0003-1556-0302>), Euloge Clovis Kenne Pagui [aut] (ORCID: <https://orcid.org/0000-0002-8998-9251>), Federico Boiocchi [ctb], Philipp Sterzinger [ctb] (ORCID: <https://orcid.org/0009-0007-7348-5810>), Kjell Konis [ctb], Nicola Sartori [ctb]",
+      "Maintainer": "Ioannis Kosmidis <ioannis.kosmidis@warwick.ac.uk>",
+      "Repository": "CRAN"
+    },
     "bridgesampling": {
       "Package": "bridgesampling",
       "Version": "1.2-1",
@@ -1873,6 +1915,37 @@
       "Author": "Gábor Csárdi [aut, cre], Hadley Wickham [ctb], Kirill Müller [ctb], Salim Brüggemann [ctb] (ORCID: <https://orcid.org/0000-0002-5329-5987>), Posit Software, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>)",
       "Maintainer": "Gábor Csárdi <gabor@posit.co>",
       "Repository": "RSPM"
+    },
+    "clipr": {
+      "Package": "clipr",
+      "Version": "0.8.0",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Read and Write from the System Clipboard",
+      "Authors@R": "c( person(\"Matthew\", \"Lincoln\", , \"matthew.d.lincoln@gmail.com\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-4387-3384\")), person(\"Louis\", \"Maddox\", role = \"ctb\"), person(\"Steve\", \"Simpson\", role = \"ctb\"), person(\"Jennifer\", \"Bryan\", role = \"ctb\") )",
+      "Description": "Simple utility functions to read from and write to the Windows, OS X, and X11 clipboards.",
+      "License": "GPL-3",
+      "URL": "https://github.com/mdlincoln/clipr, http://matthewlincoln.net/clipr/",
+      "BugReports": "https://github.com/mdlincoln/clipr/issues",
+      "Imports": [
+        "utils"
+      ],
+      "Suggests": [
+        "covr",
+        "knitr",
+        "rmarkdown",
+        "rstudioapi (>= 0.5)",
+        "testthat (>= 2.0.0)"
+      ],
+      "VignetteBuilder": "knitr",
+      "Encoding": "UTF-8",
+      "Language": "en-US",
+      "RoxygenNote": "7.1.2",
+      "SystemRequirements": "xclip (https://github.com/astrand/xclip) or xsel (http://www.vergenet.net/~conrad/software/xsel/) for accessing the X11 clipboard, or wl-clipboard (https://github.com/bugaevc/wl-clipboard) for systems using Wayland.",
+      "NeedsCompilation": "no",
+      "Author": "Matthew Lincoln [aut, cre] (<https://orcid.org/0000-0002-4387-3384>), Louis Maddox [ctb], Steve Simpson [ctb], Jennifer Bryan [ctb]",
+      "Maintainer": "Matthew Lincoln <matthew.d.lincoln@gmail.com>",
+      "Repository": "CRAN"
     },
     "clubSandwich": {
       "Package": "clubSandwich",
@@ -2570,6 +2643,44 @@
       "NeedsCompilation": "no",
       "Repository": "CRAN"
     },
+    "enrichwith": {
+      "Package": "enrichwith",
+      "Version": "0.6",
+      "Source": "Repository",
+      "Title": "Methods to Enrich R Objects with Extra Components",
+      "Authors@R": "person(\"Ioannis\", \"Kosmidis\", email = \"ioannis.kosmidis@warwick.ac.uk\", role = c(\"aut\", \"cre\"))",
+      "Description": "Provides the \"enrich()\" method for augmenting list-like R objects with additional, model-specific components. Methods are currently available for objects of class \"family\", \"link-glm\", \"lm\", \"glm\", and \"betareg\". Enriched objects retain their original class and remain compatible with existing methods. For example, enriching a \"glm\" object produces an \"enriched_glm\" object that also inherits from \"glm\". In addition to the standard components, the \"enriched_glm\" object includes methods for simulation and functions to compute scores, observed and expected information matrices, first-order bias, and other model quantities such as densities, probabilities, and quantiles, which can be evaluated at use-supplied parameter values. The package also provides tools for generating customizable source code templates for the structured implementation of methods to compute new components and enrich arbitrary objects.",
+      "Depends": [
+        "R (>= 3.0.0)"
+      ],
+      "URL": "https://github.com/ikosmidis/enrichwith",
+      "BugReports": "https://github.com/ikosmidis/enrichwith/issues",
+      "License": "GPL-3",
+      "Encoding": "UTF-8",
+      "LazyData": "true",
+      "Suggests": [
+        "whisker",
+        "SuppDists",
+        "brglm",
+        "brglm2",
+        "ggplot2",
+        "MASS",
+        "knitr",
+        "rmarkdown",
+        "testthat",
+        "numDeriv"
+      ],
+      "Enhances": [
+        "betareg (> 3.2-0)",
+        "gnm"
+      ],
+      "VignetteBuilder": "knitr",
+      "Config/roxygen2/version": "8.1.0",
+      "NeedsCompilation": "no",
+      "Author": "Ioannis Kosmidis [aut, cre]",
+      "Maintainer": "Ioannis Kosmidis <ioannis.kosmidis@warwick.ac.uk>",
+      "Repository": "CRAN"
+    },
     "evaluate": {
       "Package": "evaluate",
       "Version": "1.0.5",
@@ -3215,6 +3326,59 @@
       "NeedsCompilation": "no",
       "Author": "Hadley Wickham [aut] (ORCID: <https://orcid.org/0000-0003-4757-117X>), Winston Chang [aut] (ORCID: <https://orcid.org/0000-0002-1576-2126>), Lionel Henry [aut], Thomas Lin Pedersen [aut, cre] (ORCID: <https://orcid.org/0000-0002-5147-4711>), Kohske Takahashi [aut], Claus Wilke [aut] (ORCID: <https://orcid.org/0000-0002-7470-9261>), Kara Woo [aut] (ORCID: <https://orcid.org/0000-0002-5125-4188>), Hiroaki Yutani [aut] (ORCID: <https://orcid.org/0000-0002-3385-7233>), Dewey Dunnington [aut] (ORCID: <https://orcid.org/0000-0002-9415-4582>), Teun van den Brand [aut] (ORCID: <https://orcid.org/0000-0002-9335-7468>), Posit, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>)",
       "Maintainer": "Thomas Lin Pedersen <thomas.pedersen@posit.co>",
+      "Repository": "CRAN"
+    },
+    "ggrepel": {
+      "Package": "ggrepel",
+      "Version": "0.9.8",
+      "Source": "Repository",
+      "Authors@R": "c( person(\"Kamil\", \"Slowikowski\", email = \"kslowikowski@gmail.com\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-2843-6370\")), person(\"Teun\", \"van den Brand\", role = \"ctb\", comment = c(ORCID = \"0000-0002-9335-7468\")), person(\"Alicia\", \"Schep\", role = \"ctb\", comment = c(ORCID = \"0000-0002-3915-0618\")), person(\"Sean\", \"Hughes\", role = \"ctb\", comment = c(ORCID = \"0000-0002-9409-9405\")), person(\"Trung Kien\", \"Dang\", role = \"ctb\", comment = c(ORCID = \"0000-0001-7562-6495\")), person(\"Saulius\", \"Lukauskas\", role = \"ctb\"), person(\"Jean-Olivier\", \"Irisson\", role = \"ctb\", comment = c(ORCID = \"0000-0003-4920-3880\")), person(\"Zhian N\", \"Kamvar\", role = \"ctb\", comment = c(ORCID = \"0000-0003-1458-7108\")), person(\"Thompson\", \"Ryan\", role = \"ctb\", comment = c(ORCID = \"0000-0002-0450-8181\")), person(\"Dervieux\", \"Christophe\", role = \"ctb\", comment = c(ORCID = \"0000-0003-4474-2498\")), person(\"Yutani\", \"Hiroaki\", role = \"ctb\"), person(\"Pierre\", \"Gramme\", role = \"ctb\"), person(\"Amir Masoud\", \"Abdol\", role = \"ctb\"), person(\"Malcolm\", \"Barrett\", role = \"ctb\", comment = c(ORCID = \"0000-0003-0299-5825\")), person(\"Robrecht\", \"Cannoodt\", role = \"ctb\", comment = c(ORCID = \"0000-0003-3641-729X\")), person(\"Michał\", \"Krassowski\", role = \"ctb\", comment = c(ORCID = \"0000-0002-9638-7785\")), person(\"Michael\", \"Chirico\", role = \"ctb\", comment = c(ORCID = \"0000-0003-0787-087X\")), person(\"Pedro\", \"Aphalo\", role = \"ctb\", comment = c(ORCID = \"0000-0003-3385-972X\")), person(\"Francis\", \"Barton\", role = \"ctb\") )",
+      "Title": "Automatically Position Non-Overlapping Text Labels with 'ggplot2'",
+      "Description": "Provides text and label geoms for 'ggplot2' that help to avoid overlapping text labels. Labels repel away from each other and away from the data points.",
+      "Depends": [
+        "R (>= 4.1.0)",
+        "ggplot2 (>= 3.5.2)"
+      ],
+      "Imports": [
+        "grid",
+        "Rcpp",
+        "rlang (>= 1.1.6)",
+        "S7",
+        "scales (>= 1.4.0)",
+        "withr (>= 3.0.2)"
+      ],
+      "Suggests": [
+        "knitr",
+        "rmarkdown",
+        "testthat",
+        "svglite",
+        "vdiffr",
+        "gridExtra",
+        "ggpp",
+        "patchwork",
+        "devtools",
+        "prettydoc",
+        "ggbeeswarm",
+        "dplyr",
+        "magrittr",
+        "readr",
+        "stringr",
+        "marquee",
+        "rsvg",
+        "sf"
+      ],
+      "VignetteBuilder": "knitr",
+      "License": "GPL-3 | file LICENSE",
+      "URL": "https://ggrepel.slowkow.com/, https://github.com/slowkow/ggrepel",
+      "BugReports": "https://github.com/slowkow/ggrepel/issues",
+      "RoxygenNote": "7.3.3",
+      "LinkingTo": [
+        "Rcpp"
+      ],
+      "Encoding": "UTF-8",
+      "NeedsCompilation": "yes",
+      "Author": "Kamil Slowikowski [aut, cre] (ORCID: <https://orcid.org/0000-0002-2843-6370>), Teun van den Brand [ctb] (ORCID: <https://orcid.org/0000-0002-9335-7468>), Alicia Schep [ctb] (ORCID: <https://orcid.org/0000-0002-3915-0618>), Sean Hughes [ctb] (ORCID: <https://orcid.org/0000-0002-9409-9405>), Trung Kien Dang [ctb] (ORCID: <https://orcid.org/0000-0001-7562-6495>), Saulius Lukauskas [ctb], Jean-Olivier Irisson [ctb] (ORCID: <https://orcid.org/0000-0003-4920-3880>), Zhian N Kamvar [ctb] (ORCID: <https://orcid.org/0000-0003-1458-7108>), Thompson Ryan [ctb] (ORCID: <https://orcid.org/0000-0002-0450-8181>), Dervieux Christophe [ctb] (ORCID: <https://orcid.org/0000-0003-4474-2498>), Yutani Hiroaki [ctb], Pierre Gramme [ctb], Amir Masoud Abdol [ctb], Malcolm Barrett [ctb] (ORCID: <https://orcid.org/0000-0003-0299-5825>), Robrecht Cannoodt [ctb] (ORCID: <https://orcid.org/0000-0003-3641-729X>), Michał Krassowski [ctb] (ORCID: <https://orcid.org/0000-0002-9638-7785>), Michael Chirico [ctb] (ORCID: <https://orcid.org/0000-0003-0787-087X>), Pedro Aphalo [ctb] (ORCID: <https://orcid.org/0000-0003-3385-972X>), Francis Barton [ctb]",
+      "Maintainer": "Kamil Slowikowski <kslowikowski@gmail.com>",
       "Repository": "CRAN"
     },
     "ggstats": {
@@ -4646,6 +4810,25 @@
       "Author": "Aki Vehtari [aut], Jonah Gabry [cre, aut], Måns Magnusson [aut], Yuling Yao [aut], Paul-Christian Bürkner [aut], Topi Paananen [aut], Andrew Gelman [aut], Ben Goodrich [ctb], Juho Piironen [ctb], Bruno Nicenboim [ctb], Leevi Lindgren [ctb], Visruth Srimath Kandali [ctb]",
       "Repository": "CRAN"
     },
+    "magic": {
+      "Package": "magic",
+      "Version": "1.6-1-1",
+      "Source": "Repository",
+      "Title": "Create and Investigate Magic Squares",
+      "Authors@R": "person(given=c(\"Robin\", \"K. S.\"), family=\"Hankin\", role = c(\"aut\",\"cre\"), email=\"hankin.robin@gmail.com\", comment = c(ORCID = \"0000-0001-5982-0415\"))",
+      "Depends": [
+        "R (>= 4.2)",
+        "abind"
+      ],
+      "Description": "A collection of functions for the manipulation and analysis of arbitrarily dimensioned arrays.  The original motivation for the package was the development of efficient, vectorized algorithms for the creation and investigation of magic squares and high-dimensional magic hypercubes.",
+      "Maintainer": "Robin K. S. Hankin <hankin.robin@gmail.com>",
+      "License": "GPL-2",
+      "URL": "https://github.com/RobinHankin/magic, https://robinhankin.github.io/magic/",
+      "BugReports": "https://github.com/RobinHankin/magic/issues",
+      "NeedsCompilation": "no",
+      "Author": "Robin K. S. Hankin [aut, cre] (ORCID: <https://orcid.org/0000-0001-5982-0415>)",
+      "Repository": "CRAN"
+    },
     "magrittr": {
       "Package": "magrittr",
       "Version": "2.0.5",
@@ -4775,6 +4958,63 @@
       "Maintainer": "Winston Chang <winston@rstudio.com>",
       "Repository": "CRAN"
     },
+    "meta": {
+      "Package": "meta",
+      "Version": "8.5-0",
+      "Source": "Repository",
+      "Title": "General Package for Meta-Analysis",
+      "Date": "2026-05-25",
+      "Depends": [
+        "R (>= 4.0.0)",
+        "metabook (>= 0.2-0)"
+      ],
+      "Imports": [
+        "metafor (>= 3.0-0)",
+        "grid",
+        "ggplot2",
+        "lme4",
+        "CompQuadForm",
+        "xml2",
+        "methods",
+        "readr",
+        "dplyr",
+        "magrittr",
+        "purrr",
+        "stringr",
+        "rlang",
+        "tibble",
+        "scales",
+        "cli"
+      ],
+      "Suggests": [
+        "netmeta",
+        "BiasedUrn",
+        "pimeta",
+        "estmeansd",
+        "robvis",
+        "brglm2",
+        "writexl",
+        "rmarkdown",
+        "knitr",
+        "ggpubr",
+        "gridExtra",
+        "gemtc",
+        "ragg",
+        "metadat",
+        "svglite"
+      ],
+      "Authors@R": "person(\"Guido\", \"Schwarzer\", role = c(\"cre\", \"aut\"), email = \"guido.schwarzer@uniklinik-freiburg.de\", comment = c(ORCID = \"0000-0001-6214-9087\"))",
+      "Author": "Guido Schwarzer [cre, aut] (ORCID: <https://orcid.org/0000-0001-6214-9087>)",
+      "Maintainer": "Guido Schwarzer <guido.schwarzer@uniklinik-freiburg.de>",
+      "URL": "https://github.com/guido-s/meta/ https://link.springer.com/book/10.1007/978-3-319-21416-0",
+      "Description": "User-friendly general package providing standard methods for meta-analysis and supporting Schwarzer, Carpenter, and Rücker <DOI:10.1007/978-3-319-21416-0>, \"Meta-Analysis with R\" (2015): - common effect and random effects meta-analysis; - several plots (forest, funnel, Galbraith / radial, L'Abbe, Baujat, bubble); - three-level meta-analysis model; - generalised linear mixed model; - logistic regression with penalised likelihood for rare events; - Hartung-Knapp method for random effects model; - Kenward-Roger method for random effects model; - prediction interval and density of the prediction distribution; - expected proportion of comparable studies with clinically important benefit or harm; - statistical tests  for funnel plot asymmetry; - trim-and-fill method to evaluate bias in meta-analysis; - meta-regression; - cumulative meta-analysis and leave-one-out meta-analysis; - import data from 'RevMan 5'; - produce forest plot summarising several (subgroup) meta-analyses.",
+      "License": "GPL (>= 2)",
+      "Encoding": "UTF-8",
+      "VignetteBuilder": "knitr",
+      "Config/roxygen2/version": "8.0.0",
+      "NeedsCompilation": "no",
+      "Repository": "CRAN"
+    },
     "metaBMA": {
       "Package": "metaBMA",
       "Version": "0.6.9",
@@ -4876,6 +5116,33 @@
       "RemoteRepo": "metasem",
       "RemoteRef": "master",
       "RemoteSha": "9cc232bf7ba70b1a270ac62b8f923b2d6cf757e4"
+    },
+    "metabook": {
+      "Package": "metabook",
+      "Version": "0.2-0",
+      "Source": "Repository",
+      "Title": "Data Sets and Code for \"Meta-Analysis with R\"",
+      "Date": "2026-03-13",
+      "Depends": [
+        "R (>= 4.0.0)"
+      ],
+      "Suggests": [
+        "meta",
+        "netmeta",
+        "metasens",
+        "netdose"
+      ],
+      "Authors@R": "person(\"Guido\", \"Schwarzer\", role = c(\"cre\", \"aut\"), email = \"guido.schwarzer@uniklinik-freiburg.de\", comment = c(ORCID = \"0000-0001-6214-9087\"))",
+      "Author": "Guido Schwarzer [cre, aut] (ORCID: <https://orcid.org/0000-0001-6214-9087>)",
+      "Maintainer": "Guido Schwarzer <guido.schwarzer@uniklinik-freiburg.de>",
+      "URL": "https://github.com/guido-s/metabook/",
+      "Description": "Data sets and code supporting the second edition of \"Meta-Analysis with R\"; first edition: Schwarzer, Carpenter, and Rücker (2015) <DOI:10.1007/978-3-319-21416-0>.",
+      "LazyData": "TRUE",
+      "License": "GPL (>= 2)",
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.3.3",
+      "NeedsCompilation": "no",
+      "Repository": "RSPM"
     },
     "metadat": {
       "Package": "metadat",
@@ -5267,6 +5534,61 @@
       "VignetteBuilder": "knitr",
       "NeedsCompilation": "yes",
       "Author": "Jannik H. Orzek [aut, cre, cph] (<https://orcid.org/0000-0002-3123-2248>)",
+      "Repository": "CRAN"
+    },
+    "netmeta": {
+      "Package": "netmeta",
+      "Version": "3.7-0",
+      "Source": "Repository",
+      "Title": "Network Meta-Analysis using Frequentist Methods",
+      "Date": "2026-09-17",
+      "Depends": [
+        "R (>= 4.0.0)",
+        "meta (>= 8.5-0)"
+      ],
+      "Imports": [
+        "Matrix",
+        "metafor",
+        "MASS",
+        "mvtnorm",
+        "magic",
+        "igraph",
+        "ggplot2",
+        "colorspace",
+        "grid",
+        "dplyr",
+        "magrittr",
+        "methods",
+        "stringr",
+        "tidyr",
+        "ggrepel",
+        "reshape2"
+      ],
+      "Suggests": [
+        "Rgraphviz",
+        "graph",
+        "rgl",
+        "gridExtra",
+        "tictoc",
+        "writexl",
+        "R.rsp",
+        "cccp",
+        "brglm2",
+        "crossnma",
+        "gemtc",
+        "rmarkdown",
+        "knitr"
+      ],
+      "Authors@R": "c(person(\"Gerta\", \"Rücker\", role = \"aut\", comment = c(ORCID = \"0000-0002-2192-2560\")), person(\"Ulrike\", \"Krahn\", role = \"aut\"), person(\"Jochem\", \"König\", role = \"aut\", comment = c(ORCID = \"0000-0003-4683-0360\")), person(\"Orestis\", \"Efthimiou\", role = \"aut\", comment = c(ORCID = \"0000-0002-0955-7572\")), person(\"Annabel\", \"Davies\", role = \"aut\", comment = c(ORCID = \"0000-0003-2320-7701\")), person(\"Theodoros\", \"Papakonstantinou\", role = \"aut\", comment = c(ORCID = \"0000-0002-6630-6817\")), person(\"Theodoros\", \"Evrenoglou\", role = \"ctb\", comment = c(ORCID = \"0000-0003-3336-8058\")), person(\"Krzysztof\", \"Ciomek\", role = \"ctb\", comment = c(ORCID = \"0000-0002-2293-2146\", paste(\"Author of the original MIT-licensed\", \"R package hasseDiagram\"))), person(\"Nana-adjoa\", \"Kwarteng\", role = \"ctb\", comment = c(ORCID = \"0009-0009-0502-6887\")), person(\"Noosheen R.\", \"Tahmasebi\", role = \"ctb\", comment = c(ORCID = \"0009-0000-9660-3655\")), person(\"Guido\", \"Schwarzer\", role = c(\"aut\", \"cre\"), email = \"guido.schwarzer@uniklinik-freiburg.de\", comment = c(ORCID = \"0000-0001-6214-9087\")))",
+      "URL": "https://github.com/guido-s/netmeta",
+      "Description": "A comprehensive set of functions providing frequentist methods for network meta-analysis (Balduzzi et al., 2023) <doi:10.18637/jss.v106.i02> and supporting Schwarzer et al. (2015) <doi:10.1007/978-3-319-21416-0>, Chapter 8 \"Network Meta-Analysis\": - frequentist network meta-analysis following Rücker (2012) <doi:10.1002/jrsm.1058>; - additive network meta-analysis for combinations of treatments (Rücker et al., 2020) <doi:10.1002/bimj.201800167>; - network meta-analysis of binary data using the Mantel-Haenszel or non-central hypergeometric distribution method (Efthimiou et al., 2019) <doi:10.1002/sim.8158>, or penalised logistic regression (Evrenoglou et al., 2022) <doi:10.1002/sim.9562>; - rankograms and ranking of treatments by the Surface under the cumulative ranking curve (SUCRA) (Salanti et al., 2013) <doi:10.1016/j.jclinepi.2010.03.016>; - ranking of treatments using P-scores (frequentist analogue of SUCRAs without resampling) according to Rücker & Schwarzer (2015) <doi:10.1186/s12874-015-0060-8>; - split direct and indirect evidence to check consistency (Dias et al., 2010) <doi:10.1002/sim.3767>, (Efthimiou et al., 2019) <doi:10.1002/sim.8158>; - scatter plot to visualize local inconsistency (Wilson et al., 2026) <doi:10.1017/rsm.2026.10082>; - league table with network meta-analysis results; - 'comparison-adjusted' funnel plot (Chaimani & Salanti, 2012) <doi:10.1002/jrsm.57>; - net heat plot and design-based decomposition of Cochran's Q according to Krahn et al. (2013) <doi:10.1186/1471-2288-13-35>; - measures characterizing the flow of evidence between two treatments by König et al. (2013) <doi:10.1002/sim.6001>; - automated drawing of network graphs described in Rücker & Schwarzer (2016) <doi:10.1002/jrsm.1143>; - partial order of treatment rankings ('poset') and Hasse diagram for 'poset' (Carlsen & Bruggemann, 2014) <doi:10.1002/cem.2569>; (Rücker & Schwarzer, 2017) <doi:10.1002/jrsm.1270>; - contribution matrix as described in Papakonstantinou et al. (2018) <doi:10.12688/f1000research.14770.3> and Davies et al. (2022) <doi:10.1002/sim.9346>; - path-based approach for detecting and assessing inconsistency; - network meta-regression with a single continuous or binary covariate (Kwarteng et al., 2026) <doi:10.21203/rs.3.rs-8235913/v1>; - subgroup network meta-analysis.",
+      "License": "GPL (>= 2) | file LICENSE",
+      "Encoding": "UTF-8",
+      "VignetteBuilder": "R.rsp, knitr",
+      "Config/roxygen2/version": "8.1.0",
+      "NeedsCompilation": "no",
+      "Author": "Gerta Rücker [aut] (ORCID: <https://orcid.org/0000-0002-2192-2560>), Ulrike Krahn [aut], Jochem König [aut] (ORCID: <https://orcid.org/0000-0003-4683-0360>), Orestis Efthimiou [aut] (ORCID: <https://orcid.org/0000-0002-0955-7572>), Annabel Davies [aut] (ORCID: <https://orcid.org/0000-0003-2320-7701>), Theodoros Papakonstantinou [aut] (ORCID: <https://orcid.org/0000-0002-6630-6817>), Theodoros Evrenoglou [ctb] (ORCID: <https://orcid.org/0000-0003-3336-8058>), Krzysztof Ciomek [ctb] (ORCID: <https://orcid.org/0000-0002-2293-2146>, Author of the original MIT-licensed R package hasseDiagram), Nana-adjoa Kwarteng [ctb] (ORCID: <https://orcid.org/0009-0009-0502-6887>), Noosheen R. Tahmasebi [ctb] (ORCID: <https://orcid.org/0009-0000-9660-3655>), Guido Schwarzer [aut, cre] (ORCID: <https://orcid.org/0000-0001-6214-9087>)",
+      "Maintainer": "Guido Schwarzer <guido.schwarzer@uniklinik-freiburg.de>",
       "Repository": "CRAN"
     },
     "nleqslv": {
@@ -6785,6 +7107,64 @@
       "Maintainer": "Georgi N. Boshnakov <georgi.boshnakov@manchester.ac.uk>",
       "Repository": "CRAN"
     },
+    "readr": {
+      "Package": "readr",
+      "Version": "2.2.0",
+      "Source": "Repository",
+      "Title": "Read Rectangular Text Data",
+      "Authors@R": "c( person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = \"aut\"), person(\"Jim\", \"Hester\", role = \"aut\"), person(\"Romain\", \"Francois\", role = \"ctb\"), person(\"Jennifer\", \"Bryan\", , \"jenny@posit.co\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-6983-2759\")), person(\"Shelby\", \"Bearrows\", role = \"ctb\"), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\"), comment = c(ROR = \"03wc8by49\")), person(\"https://github.com/mandreyel/\", role = \"cph\", comment = \"mio library\"), person(\"Jukka\", \"Jylänki\", role = c(\"ctb\", \"cph\"), comment = \"grisu3 implementation\"), person(\"Mikkel\", \"Jørgensen\", role = c(\"ctb\", \"cph\"), comment = \"grisu3 implementation\") )",
+      "Description": "The goal of 'readr' is to provide a fast and friendly way to read rectangular data (like 'csv', 'tsv', and 'fwf').  It is designed to flexibly parse many types of data found in the wild, while still cleanly failing when data unexpectedly changes.",
+      "License": "MIT + file LICENSE",
+      "URL": "https://readr.tidyverse.org, https://github.com/tidyverse/readr",
+      "BugReports": "https://github.com/tidyverse/readr/issues",
+      "Depends": [
+        "R (>= 4.1)"
+      ],
+      "Imports": [
+        "cli",
+        "clipr",
+        "crayon",
+        "glue",
+        "hms (>= 0.4.1)",
+        "lifecycle",
+        "methods",
+        "R6",
+        "rlang",
+        "tibble",
+        "utils",
+        "vroom (>= 1.7.0)",
+        "withr"
+      ],
+      "Suggests": [
+        "covr",
+        "curl",
+        "datasets",
+        "knitr",
+        "rmarkdown",
+        "spelling",
+        "stringi",
+        "testthat (>= 3.2.0)",
+        "tzdb (>= 0.1.1)",
+        "waldo",
+        "xml2"
+      ],
+      "LinkingTo": [
+        "cpp11",
+        "tzdb (>= 0.1.1)"
+      ],
+      "VignetteBuilder": "knitr",
+      "Config/Needs/website": "tidyverse, tidyverse/tidytemplate",
+      "Config/testthat/edition": "3",
+      "Config/testthat/parallel": "false",
+      "Config/usethis/last-upkeep": "2025-11-14",
+      "Encoding": "UTF-8",
+      "Language": "en-US",
+      "RoxygenNote": "7.3.3",
+      "NeedsCompilation": "yes",
+      "Author": "Hadley Wickham [aut], Jim Hester [aut], Romain Francois [ctb], Jennifer Bryan [aut, cre] (ORCID: <https://orcid.org/0000-0002-6983-2759>), Shelby Bearrows [ctb], Posit Software, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>), https://github.com/mandreyel/ [cph] (mio library), Jukka Jylänki [ctb, cph] (grisu3 implementation), Mikkel Jørgensen [ctb, cph] (grisu3 implementation)",
+      "Maintainer": "Jennifer Bryan <jenny@posit.co>",
+      "Repository": "RSPM"
+    },
     "reformulas": {
       "Package": "reformulas",
       "Version": "0.4.4",
@@ -7946,6 +8326,31 @@
       "Author": "Tyler Morgan-Wall [aut, cph, cre] (<https://orcid.org/0000-0002-3131-3814>), Andrew Helmer [ctb, cph], Leonhard Grünschloß [ctb, cph], Eric Heitz [ctb, cph]",
       "Repository": "CRAN"
     },
+    "statmod": {
+      "Package": "statmod",
+      "Version": "1.5.2",
+      "Source": "Repository",
+      "Date": "2026-05-17",
+      "Title": "Statistical Modeling",
+      "Authors@R": "c(person(given = \"Gordon\", family = \"Smyth\", role = c(\"cre\", \"aut\"), email = \"smyth@wehi.edu.au\"), person(given = \"Lizhong\", family = \"Chen\", role = \"aut\"), person(given = \"Yifang\", family = \"Hu\", role = \"ctb\"), person(given = \"Peter\", family = \"Dunn\", role = \"ctb\"), person(given = \"Belinda\", family = \"Phipson\", role = \"ctb\"), person(given = \"Yunshun\", family = \"Chen\", role = \"ctb\"))",
+      "Maintainer": "Gordon Smyth <smyth@wehi.edu.au>",
+      "Depends": [
+        "R (>= 3.0.0)"
+      ],
+      "Imports": [
+        "stats",
+        "graphics"
+      ],
+      "Suggests": [
+        "MASS",
+        "tweedie"
+      ],
+      "Description": "A collection of algorithms and functions to aid statistical modeling. Includes limiting dilution analysis (aka ELDA), growth curve comparisons, mixed linear models, heteroscedastic regression, inverse-Gaussian probability calculations, Gauss quadrature and a secure convergence algorithm for nonlinear models. Also includes advanced generalized linear model functions including Tweedie and Digamma distributional families, secure convergence and exact distributional calculations for unit deviances.",
+      "License": "GPL-2 | GPL-3",
+      "NeedsCompilation": "yes",
+      "Author": "Gordon Smyth [cre, aut], Lizhong Chen [aut], Yifang Hu [ctb], Peter Dunn [ctb], Belinda Phipson [ctb], Yunshun Chen [ctb]",
+      "Repository": "CRAN"
+    },
     "stringi": {
       "Package": "stringi",
       "Version": "1.8.7",
@@ -8514,6 +8919,36 @@
       "Maintainer": "Yihui Xie <xie@yihui.name>",
       "Repository": "CRAN"
     },
+    "tzdb": {
+      "Package": "tzdb",
+      "Version": "0.5.0",
+      "Source": "Repository",
+      "Title": "Time Zone Database Information",
+      "Authors@R": "c( person(\"Davis\", \"Vaughan\", , \"davis@posit.co\", role = c(\"aut\", \"cre\")), person(\"Howard\", \"Hinnant\", role = \"cph\", comment = \"Author of the included date library\"), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")) )",
+      "Description": "Provides an up-to-date copy of the Internet Assigned Numbers Authority (IANA) Time Zone Database. It is updated periodically to reflect changes made by political bodies to time zone boundaries, UTC offsets, and daylight saving time rules. Additionally, this package provides a C++ interface for working with the 'date' library. 'date' provides comprehensive support for working with dates and date-times, which this package exposes to make it easier for other R packages to utilize. Headers are provided for calendar specific calculations, along with a limited interface for time zone manipulations.",
+      "License": "MIT + file LICENSE",
+      "URL": "https://tzdb.r-lib.org, https://github.com/r-lib/tzdb",
+      "BugReports": "https://github.com/r-lib/tzdb/issues",
+      "Depends": [
+        "R (>= 4.0.0)"
+      ],
+      "Suggests": [
+        "covr",
+        "testthat (>= 3.0.0)"
+      ],
+      "LinkingTo": [
+        "cpp11 (>= 0.5.2)"
+      ],
+      "Biarch": "yes",
+      "Config/Needs/website": "tidyverse/tidytemplate",
+      "Config/testthat/edition": "3",
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.3.2",
+      "NeedsCompilation": "yes",
+      "Author": "Davis Vaughan [aut, cre], Howard Hinnant [cph] (Author of the included date library), Posit Software, PBC [cph, fnd]",
+      "Maintainer": "Davis Vaughan <davis@posit.co>",
+      "Repository": "CRAN"
+    },
     "utf8": {
       "Package": "utf8",
       "Version": "1.2.6",
@@ -8683,6 +9118,78 @@
       "NeedsCompilation": "no",
       "Author": "Simon Garnier [aut, cre], Noam Ross [ctb, cph], Bob Rudis [ctb, cph], Marco Sciaini [ctb, cph], Antônio Pedro Camargo [ctb, cph], Cédric Scherer [ctb, cph]",
       "Repository": "CRAN"
+    },
+    "vroom": {
+      "Package": "vroom",
+      "Version": "1.7.1",
+      "Source": "Repository",
+      "Title": "Read and Write Rectangular Text Data Quickly",
+      "Authors@R": "c( person(\"Jim\", \"Hester\", role = \"aut\", comment = c(ORCID = \"0000-0002-2739-7082\")), person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = \"aut\", comment = c(ORCID = \"0000-0003-4757-117X\")), person(\"Jennifer\", \"Bryan\", , \"jenny@posit.co\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-6983-2759\")), person(\"Shelby\", \"Bearrows\", role = \"ctb\"), person(\"https://github.com/mandreyel/\", role = \"cph\", comment = \"mio library\"), person(\"Jukka\", \"Jylänki\", role = \"cph\", comment = \"grisu3 implementation\"), person(\"Mikkel\", \"Jørgensen\", role = \"cph\", comment = \"grisu3 implementation\"), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\"), comment = c(ROR = \"03wc8by49\")) )",
+      "Description": "The goal of 'vroom' is to read and write data (like 'csv', 'tsv' and 'fwf') quickly. When reading it uses a quick initial indexing step, then reads the values lazily , so only the data you actually use needs to be read.  The writer formats the data in parallel and writes to disk asynchronously from formatting.",
+      "License": "MIT + file LICENSE",
+      "URL": "https://vroom.tidyverse.org, https://github.com/tidyverse/vroom",
+      "BugReports": "https://github.com/tidyverse/vroom/issues",
+      "Depends": [
+        "R (>= 4.1)"
+      ],
+      "Imports": [
+        "bit64",
+        "cli (>= 3.2.0)",
+        "crayon",
+        "glue",
+        "hms",
+        "lifecycle (>= 1.0.3)",
+        "methods",
+        "rlang (>= 1.1.0)",
+        "stats",
+        "tibble (>= 2.0.0)",
+        "tidyselect",
+        "tzdb (>= 0.1.1)",
+        "vctrs (>= 0.2.0)",
+        "withr"
+      ],
+      "Suggests": [
+        "archive",
+        "bench (>= 1.1.0)",
+        "covr",
+        "curl",
+        "dplyr",
+        "forcats",
+        "fs",
+        "ggplot2",
+        "knitr",
+        "patchwork",
+        "prettyunits",
+        "purrr",
+        "rmarkdown",
+        "rstudioapi",
+        "scales",
+        "spelling",
+        "testthat (>= 2.1.0)",
+        "tidyr",
+        "utils",
+        "waldo",
+        "xml2"
+      ],
+      "LinkingTo": [
+        "cpp11 (>= 0.2.0)",
+        "progress (>= 1.2.3)",
+        "tzdb (>= 0.1.1)"
+      ],
+      "VignetteBuilder": "knitr",
+      "Config/Needs/website": "nycflights13, tidyverse/tidytemplate",
+      "Config/testthat/edition": "3",
+      "Config/testthat/parallel": "false",
+      "Config/usethis/last-upkeep": "2025-11-25",
+      "Copyright": "file COPYRIGHTS",
+      "Encoding": "UTF-8",
+      "Language": "en-US",
+      "RoxygenNote": "7.3.3",
+      "Config/build/compilation-database": "true",
+      "NeedsCompilation": "yes",
+      "Author": "Jim Hester [aut] (ORCID: <https://orcid.org/0000-0002-2739-7082>), Hadley Wickham [aut] (ORCID: <https://orcid.org/0000-0003-4757-117X>), Jennifer Bryan [aut, cre] (ORCID: <https://orcid.org/0000-0002-6983-2759>), Shelby Bearrows [ctb], https://github.com/mandreyel/ [cph] (mio library), Jukka Jylänki [cph] (grisu3 implementation), Mikkel Jørgensen [cph] (grisu3 implementation), Posit Software, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>)",
+      "Maintainer": "Jennifer Bryan <jenny@posit.co>",
+      "Repository": "RSPM"
     },
     "waldo": {
       "Package": "waldo",

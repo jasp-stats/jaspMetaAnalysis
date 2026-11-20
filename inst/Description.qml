@@ -124,6 +124,13 @@ Description
 		requiresData:	true
 	}
 
+	Analysis
+	{
+		menu:			qsTr("Network Meta-Analysis (beta)")
+		title:			qsTr("Classical Network Meta-Analysis (beta)")
+		func:			"ClassicalNetworkMetaAnalysis"
+	}
+
 	GroupTitle
 	{
 		title:	 	qsTr("Bayesian")

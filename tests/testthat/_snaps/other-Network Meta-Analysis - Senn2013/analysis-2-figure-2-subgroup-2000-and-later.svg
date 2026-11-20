@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' data-engine-version='2.0' width='720.00pt' height='576.00pt' viewBox='0 0 720.00 576.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA='>
+    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<defs>
+  <clipPath id='cpMjkuNzB8NjkwLjMwfDAuMDB8NTc2LjAw'>
+    <rect x='29.70' y='0.00' width='660.61' height='576.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMjkuNzB8NjkwLjMwfDAuMDB8NTc2LjAw)'>
+<rect x='29.70' y='0.00' width='660.61' height='576.00' style='stroke-width: 10.67; stroke: none;' />
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<rect x='34.68' y='25.69' width='650.64' height='545.33' style='stroke-width: 10.67; stroke: none;' />
+<line x1='513.21' y1='162.28' x2='513.21' y2='434.43' style='stroke-width: 4.77; stroke: #666666;' />
+<line x1='387.80' y1='89.87' x2='152.11' y2='370.76' style='stroke-width: 4.77; stroke: #666666;' />
+<line x1='245.19' y1='115.02' x2='152.11' y2='225.95' style='stroke-width: 4.77; stroke: #666666;' />
+<line x1='245.19' y1='115.02' x2='152.11' y2='370.76' style='stroke-width: 6.75; stroke: #666666;' />
+<line x1='245.19' y1='115.02' x2='245.19' y2='481.69' style='stroke-width: 6.75; stroke: #666666;' />
+<line x1='152.11' y1='225.95' x2='152.11' y2='370.76' style='stroke-width: 4.77; stroke: #666666;' />
+<line x1='152.11' y1='225.95' x2='245.19' y2='481.69' style='stroke-width: 4.77; stroke: #666666;' />
+<line x1='152.11' y1='370.76' x2='245.19' y2='481.69' style='stroke-width: 10.67; stroke: #666666;' />
+<line x1='152.11' y1='370.76' x2='387.80' y2='506.83' style='stroke-width: 4.77; stroke: #666666;' />
+<line x1='152.11' y1='370.76' x2='562.74' y2='298.35' style='stroke-width: 4.77; stroke: #666666;' />
+<line x1='245.19' y1='481.69' x2='513.21' y2='434.43' style='stroke-width: 4.77; stroke: #666666;' />
+<circle cx='513.21' cy='162.28' r='8.04' style='stroke-width: 1.13; fill: #D9D9D9;' />
+<circle cx='387.80' cy='89.87' r='8.04' style='stroke-width: 1.13; fill: #D9D9D9;' />
+<circle cx='245.19' cy='115.02' r='8.04' style='stroke-width: 1.13; fill: #D9D9D9;' />
+<circle cx='152.11' cy='225.95' r='8.04' style='stroke-width: 1.13; fill: #D9D9D9;' />
+<circle cx='152.11' cy='370.76' r='8.04' style='stroke-width: 1.13; fill: #D9D9D9;' />
+<circle cx='245.19' cy='481.69' r='8.04' style='stroke-width: 1.13; fill: #D9D9D9;' />
+<circle cx='387.80' cy='506.83' r='8.04' style='stroke-width: 1.13; fill: #D9D9D9;' />
+<circle cx='513.21' cy='434.43' r='8.04' style='stroke-width: 1.13; fill: #D9D9D9;' />
+<circle cx='562.74' cy='298.35' r='8.04' style='stroke-width: 1.13; fill: #D9D9D9;' />
+<text x='544.63' y='132.59' style='font-size: 11.38px; font-family: sans;' textLength='48.09px' lengthAdjust='spacingAndGlyphs'>Acarbose</text>
+<text x='400.92' y='42.30' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='54.42px' lengthAdjust='spacingAndGlyphs'>Benfluorex</text>
+<text x='208.36' y='73.66' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='50.60px' lengthAdjust='spacingAndGlyphs'>Metformin</text>
+<text x='108.53' y='211.98' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='62.01px' lengthAdjust='spacingAndGlyphs'>Pioglitazone</text>
+<text x='107.90' y='392.56' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='41.14px' lengthAdjust='spacingAndGlyphs'>Placebo</text>
+<text x='238.09' y='530.88' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='68.33px' lengthAdjust='spacingAndGlyphs'>Rosiglitazone</text>
+<text x='400.48' y='562.24' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='49.34px' lengthAdjust='spacingAndGlyphs'>Sitagliptin</text>
+<text x='542.86' y='471.95' style='font-size: 11.38px; font-family: sans;' textLength='63.27px' lengthAdjust='spacingAndGlyphs'>Sulfonylurea</text>
+<text x='611.10' y='302.27' style='font-size: 11.38px; font-family: sans;' textLength='55.04px' lengthAdjust='spacingAndGlyphs'>Vildagliptin</text>
+<rect x='34.68' y='25.69' width='650.64' height='545.33' style='stroke-width: 0.00; stroke: none;' />
+<text x='360.00' y='16.68' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='340.24px' lengthAdjust='spacingAndGlyphs'>analysis-2_figure-2_subgroup-2000-and-later</text>
+</g>
+</svg>
