@@ -9848,9 +9848,10 @@ msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Structured"
 msgstr "Estruturado"
 
+#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Autoregressive"
-msgstr ""
+msgstr "Autorregresiva"
 
 #, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
