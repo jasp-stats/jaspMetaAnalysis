@@ -6,6 +6,12 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Language: ja\n"
 "X-Qt-Contexts: true\n"
+"PO-Revision-Date: 2026-11-16 06:38+0000\n"
+"Last-Translator: Koji Kosugi <kosugitti@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
+"jaspmetaanalysis-qml/ja/>\n"
+"Language: ja\n"
+"X-Generator: Weblate 2026.12.dev0\n"
 
 msgctxt "Description|"
 msgid "Meta-Analysis"
@@ -9159,6 +9165,9 @@ msgid ""
 "Hartung adjustment (default). Clustered models use t-distribution based "
 "tests."
 msgstr ""
+"モデルの係数を検定する方法です。'z'は標準正規近似、't'はt分布、'knha'はKnapp-"
+"Hartungの調整(既定)を使います。クラスタのあるモデルではt分布による検定を使い"
+"ます。"
 
 msgctxt "ClassicalMetaAnalysisMultilevelMultivariate|"
 msgid ""
@@ -9166,6 +9175,8 @@ msgid ""
 "approximation, 't' uses t-distribution. Clustered models use t-distribution "
 "based tests."
 msgstr ""
+"モデルの係数を検定する方法です。'z'は標準正規近似、't'はt分布を使います。"
+"クラスタのあるモデルではt分布による検定を使います。"
 
 msgctxt "PetPeese|"
 msgid ""
@@ -9176,28 +9187,28 @@ msgid ""
 "optional multilevel/multivariate model use the same specification as the "
 "classical meta-analyses."
 msgstr ""
+"metaforであてはめたPET-PEESEのメタ回帰によって、出版バイアスを補正します。PET"
+"は標準誤差を、PEESEは標本分散を、追加のモデレータとして含めます。補正後の推定"
+"値は、標準誤差が0の研究に対応します。モデレータ、サブグループ、クラスタリング"
+"、任意で指定するマルチレベル・多変量モデルは、古典的なメタ分析と同じ指定を使"
+"います。"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "References"
 msgstr "文献"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "R Packages"
 msgstr "Rパッケージ"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Observed effect sizes, on the scale used to fit the model."
 msgstr "モデルのあてはめに使うスケールでの、観測された効果量です。"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Standard errors corresponding to the effect sizes."
 msgstr "効果量に対応する標準誤差です。"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Fixed effects test"
 msgstr "固定効果の検定"
@@ -9210,8 +9221,11 @@ msgid ""
 "uses the 'knha' test; clustered models use t-distribution based tests. The "
 "multilevel/multivariate model uses 'z' or 't' tests."
 msgstr ""
+"モデルの係数を検定する方法です。'z'は標準正規近似、't'はt分布、'knha'はKnapp-"
+"Hartungの調整(既定)を使います。制約なし重みつき最小二乗法では常に'knha'の検定"
+"を使い、クラスタのあるモデルではt分布による検定を使います。マルチレベル・多変"
+"量モデルでは'z'か't'の検定を使います。"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Predictors"
 msgstr "予測変数"
@@ -9222,8 +9236,9 @@ msgid ""
 "intercept in Model. The bias term (standard error or sampling variance) is "
 "always included."
 msgstr ""
+"連続とカテゴリカルのモデレータです。交互作用と切片は「モデル」で指定します。"
+"バイアス項(標準誤差または標本分散)は常に含まれます。"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Clustering"
 msgstr "クラスタリング"
@@ -9236,13 +9251,15 @@ msgid ""
 "model selection. See the 'Advanced' section for additional clustering "
 "options."
 msgstr ""
+"頑健な分散推定のために、効果量のクラスタを示す変数です。変数を指定すると、"
+"PET-PEESEのモデル選択に使う検定も含め、クラスタに頑健な検定と信頼区間が求めら"
+"れます。クラスタリングのほかのオプションは「詳細」のセクションを見てください"
+"。"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Study Labels"
 msgstr "研究ラベル"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid ""
 "Labels for studies in plots. Missing labels do not exclude observations from "
@@ -9251,7 +9268,6 @@ msgstr ""
 "プロットに表示する研究のラベルです。ラベルが欠測していても、その観測値はあて"
 "はめから除外されません。"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Subgroup"
 msgstr "サブグループ"
@@ -9261,8 +9277,9 @@ msgid ""
 "Fit the models separately within each subgroup. The PET-PEESE model "
 "selection is performed separately for each subgroup."
 msgstr ""
+"サブグループごとに、モデルを別々にあてはめます。PET-PEESEのモデル選択も"
+"サブグループごとに行われます。"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "No Selection"
 msgstr "選択なし"
@@ -9274,8 +9291,10 @@ msgid ""
 "that level, so only the remaining estimates inform the small-study effect. "
 "Both remain in the analysis."
 msgstr ""
+"出版バイアスの影響を受けない推定値を識別する要因です(任意)。影響を受けない水"
+"準を下で選ぶと、その水準の推定値ではバイアス項が0に設定され、残りの推定値だけ"
+"が小規模研究効果の推定に使われます。どちらも分析には残ります。"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Unaffected Level"
 msgstr "影響を受けない水準"
@@ -9285,8 +9304,9 @@ msgid ""
 "Estimates at this level are unaffected by publication bias. The bias "
 "adjustment applies to all other levels of the assigned factor."
 msgstr ""
+"この水準の推定値は出版バイアスの影響を受けません。割り当てた要因のそれ以外の"
+"すべての水準にバイアスの補正が適用されます。"
 
-#, fuzzy
 msgctxt "PetPeese|"
 msgid "Publication bias adjustment"
 msgstr "出版バイアスの補正"
@@ -9298,10 +9318,13 @@ msgid ""
 "reports PEESE if the PET adjusted effect is significant at the PET-PEESE "
 "threshold (see 'Advanced'), and PET otherwise (Stanley & Doucouliagos, 2014)."
 msgstr ""
+"PETは効果量とその標準誤差との関係を、PEESEは標本分散との関係を補正します。"
+"PET-PEESEは、PETで補正した効果がPET-PEESEの閾値(「詳細」を参照)で有意であれば"
+"PEESEを、そうでなければPETを報告します(Stanley & Doucouliagos, 2014)。"
 
 msgctxt "PetPeese|"
 msgid "Multilevel/multivariate"
-msgstr ""
+msgstr "マルチレベル・多変量"
 
 msgctxt "PetPeese|"
 msgid ""
@@ -9311,18 +9334,26 @@ msgid ""
 "Model Components' sections. The standard errors used as the bias term are "
 "the square roots of the sampling variances."
 msgstr ""
+"PETとPEESEのメタ回帰を、マルチレベル・多変量モデル(metaforの 'rma.mv' 関数)と"
+"してあてはめます。効果量のあいだの依存関係は、「効果量の分散共分散行列」と「"
+"変量効果・モデルの成分」のセクションで指定します。バイアス項に使う標準誤差は"
+"、標本分散の平方根です。"
 
 msgctxt "BubblePlot|"
 msgid ""
 "Show the observed estimates as bubbles. Uncheck to show only the model-based "
 "estimates."
 msgstr ""
+"観測された推定値をバブルとして表示します。チェックを外すと、モデルにもとづく"
+"推定値だけを表示します。"
 
 msgctxt "BubblePlot|"
 msgid ""
 "Include prediction intervals of the estimated effect sizes. Unavailable for "
 "unrestricted weighted least squares."
 msgstr ""
+"推定された効果量の予測区間を含めます。制約なし重みつき最小二乗法では利用でき"
+"ません。"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid ""
@@ -9330,10 +9361,13 @@ msgid ""
 "unweighted estimation. Unavailable for multilevel/multivariate models, which "
 "are always weighted by the inverse of the variance-covariance matrix."
 msgstr ""
+"分散の逆数による重みを使って重みつき推定を行います。チェックを外すと重みなし"
+"の推定になります。マルチレベル・多変量モデルでは利用できません。このモデルで"
+"は常に分散共分散行列の逆行列で重みづけされます。"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "PET-PEESE threshold"
-msgstr ""
+msgstr "PET-PEESEの閾値"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid ""
@@ -9341,14 +9375,17 @@ msgid ""
 "test is significant, PEESE is reported; otherwise PET is reported (Stanley & "
 "Doucouliagos, 2014). Available for the conditional PET-PEESE adjustment."
 msgstr ""
+"PETで補正した効果についての両側検定の有意水準です。検定が有意であればPEESEを"
+"、そうでなければPETを報告します(Stanley & Doucouliagos, 2014)。条件つきのPET-"
+"PEESEによる補正で使えます。"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Random Effects / Model Structure"
-msgstr ""
+msgstr "変量効果・モデルの構造"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid "Use sparse matrices"
-msgstr ""
+msgstr "疎行列を使う"
 
 msgctxt "ClassicalMetaAnalysisAdvanced|"
 msgid ""
@@ -9356,6 +9393,9 @@ msgid ""
 "Unavailable for PET-PEESE and WAAP-WLS estimated with unrestricted weighted "
 "least squares, which is defined by the inverse-variance weights."
 msgstr ""
+"分散の逆数による重みではなく、効果量にカスタムの重みを使います。制約なし重み"
+"つき最小二乗法で推定するPET-PEESEとWAAP-WLSでは利用できません。この方法は分散"
+"の逆数による重みで定義されているためです。"
 
 msgctxt "ClassicalMetaAnalysisDiagnostics|"
 msgid ""
@@ -9363,27 +9403,32 @@ msgid ""
 "Unavailable for equal effects, fixed effects, and unrestricted weighted "
 "least squares models."
 msgstr ""
+"異質性のパラメータ(τ²)についてプロファイル尤度のプロットを含めます。等効果、"
+"固定効果、制約なし重みつき最小二乗法のモデルでは利用できません。"
 
 msgctxt "ClassicalMetaAnalysisExport|"
 msgid ""
 "Export the publication bias adjusted predicted values (i.e., at a standard "
 "error of zero) and interval bounds."
 msgstr ""
+"出版バイアスを補正した予測値(標準誤差が0のときの値)と区間の限界を書き出します"
+"。"
 
 msgctxt "ClassicalMetaAnalysisExport|"
 msgid ""
 "Export predicted values and interval bounds of the reported model. When WAAP "
 "is reported, only the retained estimates receive values."
 msgstr ""
+"報告するモデルの予測値と区間の限界を書き出します。WAAPを報告する場合は、残し"
+"た推定値にだけ値が入ります。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisExport|"
 msgid "WAAP-WLS"
 msgstr "WAAP-WLS"
 
 msgctxt "ClassicalMetaAnalysisExport|"
 msgid "Estimated power"
-msgstr ""
+msgstr "推定された検出力"
 
 msgctxt "ClassicalMetaAnalysisExport|"
 msgid ""
@@ -9391,10 +9436,13 @@ msgid ""
 "sided z-test, α = .05), i.e., the value compared with the power criterion. "
 "Exported for all estimates, also when WLS is reported."
 msgstr ""
+"各推定値がWLSモデルの効果を検出する検出力(両側z検定、α = .05)を書き出します。"
+"これは検出力の基準と比べる値です。WLSを報告する場合も含め、すべての推定値につ"
+"いて書き出します。"
 
 msgctxt "ClassicalMetaAnalysisExport|"
 msgid "Included in WAAP"
-msgstr ""
+msgstr "WAAPに含まれる"
 
 msgctxt "ClassicalMetaAnalysisExport|"
 msgid ""
@@ -9402,6 +9450,9 @@ msgid ""
 "adequately powered and the unaffected estimates). Exported for all "
 "estimates, also when WLS is reported."
 msgstr ""
+"WAAPモデルに含まれる推定値(十分な検出力を持つ推定値と影響を受けない推定値)を"
+"示す指標を書き出します。WLSを報告する場合も含め、すべての推定値について書き出"
+"します。"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid ""
@@ -9411,6 +9462,10 @@ msgid ""
 "2014); the remaining methods estimate additive heterogeneity. The multilevel/"
 "multivariate model is estimated with (restricted) maximum likelihood."
 msgstr ""
+"PETとPEESEのメタ回帰の推定に使う方法です。制約なし重みつき最小二乗法(既定)は"
+"、乗法異質性を仮定する元のPET-PEESEの指定に対応します(Stanley & "
+"Doucouliagos, 2014)。それ以外の方法は加法異質性を推定します。マルチレベル・多"
+"変量モデルは(制限付き)最尤法で推定します。"
 
 msgctxt "ClassicalMetaAnalysisMethod|"
 msgid ""
@@ -9420,13 +9475,15 @@ msgid ""
 "2017); the remaining methods estimate additive heterogeneity. The multilevel/"
 "multivariate model is estimated with (restricted) maximum likelihood."
 msgstr ""
+"WLSとWAAPのメタ分析の推定に使う方法です。制約なし重みつき最小二乗法(既定)は、"
+"乗法異質性を仮定する元のWAAP-WLSの指定に対応します(Stanley & Doucouliagos, "
+"2017)。それ以外の方法は加法異質性を推定します。マルチレベル・多変量モデルは"
+"(制限付き)最尤法で推定します。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Random Effects / Model Components"
 msgstr "変量効果・モデルの成分"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid ""
 "Options for specifying the random effects components for the meta-analysis "
@@ -9438,57 +9495,47 @@ msgstr ""
 "に対応する変数を含みます。マルチレベル、多変量、自己回帰、空間など、複雑な"
 "データ構造や依存の形をモデル化できます。"
 
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Component %1"
 msgstr "成分 %1"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Type of random effect to include in the model."
 msgstr "モデルに含める変量効果の種類です。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Simple"
 msgstr "単純"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Nested (multilevel)"
 msgstr "入れ子(マルチレベル)"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Random slopes"
 msgstr "変量傾き"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Structured"
 msgstr "構造化"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Autoregressive"
 msgstr "自己回帰"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Spatial"
 msgstr "空間"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Known correlation"
 msgstr "既知の相関"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Structure"
 msgstr "構造"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid ""
 "Structure of the random effect when the type is 'Structured', "
@@ -9498,82 +9545,66 @@ msgstr ""
 "種類が「構造化」「自己回帰」「空間」の場合の変量効果の構造です。選べる構造は"
 "種類によって変わります。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Compound symmetry"
 msgstr "複合対称"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Heteroscedastic compound symmetry"
 msgstr "不等分散の複合対称"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Unstructured "
 msgstr "無構造 "
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Identity"
 msgstr "単位行列"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Diagonal"
 msgstr "対角"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "AR(1)"
 msgstr "AR(1)"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Heteroscedastic AR(1)"
 msgstr "不等分散のAR(1)"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Continuous-time AR"
 msgstr "連続時間AR"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Exponential"
 msgstr "指数"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Gaussian"
 msgstr "ガウス"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Linear"
 msgstr "線形"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Rational quadratic"
 msgstr "有理二次"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Spherical"
 msgstr "球面"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Specification"
 msgstr "指定"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Random Slope Terms"
 msgstr "変量傾きの項"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid ""
 "Variables to include as random slope terms in the model. Available when the "
@@ -9582,65 +9613,54 @@ msgstr ""
 "モデルに変量傾きの項として含める変数です。変量効果の種類が「変量傾き」の場合"
 "に使えます。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Factor Levels"
 msgstr "要因の水準"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid ""
 "Variable indicating the factor levels ('Inner Term') for the structured "
 "random effect. Available when the random effect type is 'Structured'."
 msgstr ""
-"構造化された変量効果の要因の水準(内側の項)を示す変数です。変量効果の種類が"
-"「構造化」の場合に使えます。"
+"構造化された変量効果の要因の水準(内側の項)を示す変数です。変量効果の種類が「"
+"構造化」の場合に使えます。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Level 1"
 msgstr "水準1"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Level 2"
 msgstr "水準2"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Level 3"
 msgstr "水準3"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Level 4"
 msgstr "水準4"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Level 5"
 msgstr "水準5"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Time"
 msgstr "時間"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid ""
 "Variable indicating time points for an autoregressive random effects "
 "structure. Available when the random effect type is 'Autoregressive'."
 msgstr ""
-"自己回帰の変量効果構造における時点を示す変数です。変量効果の種類が「自己回"
-"帰」の場合に使えます。"
+"自己回帰の変量効果構造における時点を示す変数です。変量効果の種類が「自己回帰"
+"」の場合に使えます。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Spatial Coordinates"
 msgstr "空間座標"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid ""
 "Variables representing spatial coordinates for a spatial random effects "
@@ -9650,12 +9670,10 @@ msgstr ""
 "空間的な変量効果構造の座標を表す変数です。変量効果の種類が「空間」で、距離の"
 "指標が「大圏距離」でもファイル指定でもない場合に使えます。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Longitude"
 msgstr "経度"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid ""
 "Variable representing longitude (in decimal degrees, with minus signs for "
@@ -9666,12 +9684,10 @@ msgstr ""
 "「大圏距離」を使う空間的な変量効果構造で、経度(十進度。西経は負)を表す変数で"
 "す。変量効果の種類が「空間」で、距離の指標が「大圏距離」の場合に使えます。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Latitude"
 msgstr "緯度"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid ""
 "Variable representing latitude (in decimal degrees, with minus signs for "
@@ -9682,12 +9698,10 @@ msgstr ""
 "「大圏距離」を使う空間的な変量効果構造で、緯度(十進度。南緯は負)を表す変数で"
 "す。変量効果の種類が「空間」で、距離の指標が「大圏距離」の場合に使えます。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Location Identifier"
 msgstr "地点の識別子"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid ""
 "Variable identifying locations when loading distances matrix from a file for "
@@ -9698,12 +9712,10 @@ msgstr ""
 "数です。地点は距離行列の行名・列名に対応します。名前を数字で始めることはでき"
 "ません。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Grouping Factor"
 msgstr "グループ化要因"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid ""
 "Grouping variable specifying which observations share the same random effect "
@@ -9711,16 +9723,14 @@ msgid ""
 "(Multilevel)'. The 'Grouping Factor' is not required for 'Spatial' Random "
 "Effects."
 msgstr ""
-"どの観測が同じ変量効果を共有するか(外側の項)を指定するグループ化変数です。"
-"「入れ子(マルチレベル)」以外の変量効果の種類で使えます。「空間」の変量効果で"
-"は不要です。"
+"どの観測が同じ変量効果を共有するか(外側の項)を指定するグループ化変数です。「"
+"入れ子(マルチレベル)」以外の変量効果の種類で使えます。「空間」の変量効果では"
+"不要です。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Distance metric"
 msgstr "距離の指標"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid ""
 "Distance metric used to calculate distances in a spatial random effects "
@@ -9729,37 +9739,30 @@ msgstr ""
 "空間的な変量効果構造で距離を計算する指標です。変量効果の種類が「空間」の場合"
 "に使えます。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Euclidean"
 msgstr "ユークリッド"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Manhattan"
 msgstr "マンハッタン"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Maximum"
 msgstr "最大値"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Great-circle"
 msgstr "大圏距離"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Load from file"
 msgstr "ファイルから読み込む"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Distance matrix file"
 msgstr "距離行列のファイル"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid ""
 "CSV file containing the distance matrix for the spatial random effects "
@@ -9773,12 +9776,10 @@ msgstr ""
 "ることはできません)。変量効果の種類が「空間」で、距離の指標をファイルから読み"
 "込む場合に使えます。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid "Correlation matrix file"
 msgstr "相関行列のファイル"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisRandomEffects|"
 msgid ""
 "CSV file containing the known correlation matrix for the random effects "
@@ -9792,7 +9793,7 @@ msgstr ""
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "γ"
-msgstr ""
+msgstr "γ"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid ""
@@ -9800,24 +9801,25 @@ msgid ""
 "least squares model, i.e., the factor by which the sampling variances are "
 "multiplied."
 msgstr ""
+"制約なし重みつき最小二乗法のモデルの乗法異質性γ、すなわち標本分散にかける係数"
+"を含めます。"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "√γ"
-msgstr ""
+msgstr "√γ"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid ""
 "Include √γ, the square root of the multiplicative heterogeneity of the "
 "unrestricted weighted least squares model."
-msgstr ""
+msgstr "制約なし重みつき最小二乗法のモデルの乗法異質性の平方根√γを含めます。"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid ""
 "Include prediction intervals in the tabular output. Unavailable for "
 "unrestricted weighted least squares."
-msgstr ""
+msgstr "表の出力に予測区間を含めます。制約なし重みつき最小二乗法では利用できません。"
 
-#, fuzzy
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "PET-PEESE"
 msgstr "PET-PEESE"
@@ -9827,10 +9829,12 @@ msgid ""
 "Include the estimate of the bias coefficient: the standard error (PET) or "
 "the sampling variance (PEESE) coefficient of the reported model."
 msgstr ""
+"報告するモデルのバイアス係数、すなわち標準誤差(PET)または標本分散(PEESE)の係"
+"数の推定値を含めます。"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid "Regression plot"
-msgstr ""
+msgstr "回帰プロット"
 
 msgctxt "ClassicalMetaAnalysisStatistics|"
 msgid ""
@@ -9838,10 +9842,12 @@ msgid ""
 "standard errors. The fitted line (PET) or curve (PEESE) at a standard error "
 "of zero corresponds to the adjusted estimate."
 msgstr ""
+"効果量とその標準誤差とのあいだのあてはめた関係を可視化します。標準誤差が0のと"
+"きのあてはめた直線(PET)または曲線(PEESE)の値が、補正後の推定値に対応します。"
 
 msgctxt "ForestPlotSection|"
 msgid "Unadjusted fixed effect estimate"
-msgstr ""
+msgstr "補正なしの固定効果の推定値"
 
 msgctxt "ForestPlotSection|"
 msgid ""
@@ -9849,20 +9855,23 @@ msgid ""
 "moderators and subgroups) for comparison with the adjusted estimate in the "
 "model information section."
 msgstr ""
+"モデルの情報のセクションに、出版バイアスを補正しない固定効果の推定値"
+"(モデレータとサブグループは同じ)を含め、補正後の推定値と比べられるようにしま"
+"す。"
 
 msgctxt "ForestPlotSection|"
 msgid "Unadjusted fixed effect estimate test"
-msgstr ""
+msgstr "補正なしの固定効果の推定値の検定"
 
 msgctxt "ForestPlotSection|"
 msgid ""
 "Include the test of the unadjusted fixed effect estimate in the model "
 "information section."
-msgstr ""
+msgstr "モデルの情報のセクションに、補正なしの固定効果の推定値の検定を含めます。"
 
 msgctxt "ForestPlotSection|"
 msgid "Unadjusted random effects estimate"
-msgstr ""
+msgstr "補正なしの変量効果の推定値"
 
 msgctxt "ForestPlotSection|"
 msgid ""
@@ -9870,22 +9879,27 @@ msgid ""
 "publication bias adjustment (same moderators and subgroups) for comparison "
 "with the adjusted estimate in the model information section."
 msgstr ""
+"モデルの情報のセクションに、出版バイアスを補正しない変量効果の推定値(制限付き"
+"最尤法。モデレータとサブグループは同じ)を含め、補正後の推定値と比べられるよう"
+"にします。"
 
 msgctxt "ForestPlotSection|"
 msgid "Unadjusted random effects estimate test"
-msgstr ""
+msgstr "補正なしの変量効果の推定値の検定"
 
 msgctxt "ForestPlotSection|"
 msgid ""
 "Include the test of the unadjusted random effects estimate in the model "
 "information section."
-msgstr ""
+msgstr "モデルの情報のセクションに、補正なしの変量効果の推定値の検定を含めます。"
 
 msgctxt "ForestPlotStudyInformation|"
 msgid ""
 "Include predicted effect sizes in the middle section of the study-level "
 "information panel. Unavailable when the panel is aggregated."
 msgstr ""
+"研究ごとの情報のパネルの中央のセクションに、予測された効果量を含めます。"
+"パネルを集約している場合は利用できません。"
 
 msgctxt "WaapWls|"
 msgid ""
@@ -9900,18 +9914,23 @@ msgid ""
 "(e.g., forest plot, diagnostics, and exported values) includes only the "
 "retained estimates."
 msgstr ""
+"metaforであてはめたWAAP-WLSのメタ分析によって、出版バイアスを補正します。WLS"
+"はすべての推定値のメタ分析で、WAAP(十分な検出力を持つ推定値の重みつき平均)は"
+"、WLSの効果を検出する検出力が検出力の基準に達する推定値のメタ分析です。十分な"
+"検出力を持つ推定値が足りていればWAAPを、そうでなければWLSを報告します"
+"(Stanley, Doucouliagos, & Ioannidis, 2017)。モデレータ、サブグループ、"
+"クラスタリング、任意で指定するマルチレベル・多変量モデルは、古典的なメタ分析"
+"と同じ指定を使います。WAAPを報告する場合、研究ごとの出力(フォレストプロット、"
+"診断、書き出す値など)には残した推定値だけが含まれます。"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "References"
 msgstr "文献"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "R Packages"
 msgstr "Rパッケージ"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Observed effect sizes, on the scale used to fit the model."
 msgstr "モデルのあてはめに使うスケールでの、観測された効果量です。"
@@ -9921,8 +9940,9 @@ msgid ""
 "Standard errors corresponding to the effect sizes. The power of each "
 "estimate is computed from its standard error."
 msgstr ""
+"効果量に対応する標準誤差です。各推定値の検出力は、その標準誤差から計算されま"
+"す。"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Fixed effects test"
 msgstr "固定効果の検定"
@@ -9935,21 +9955,21 @@ msgid ""
 "uses the 'knha' test; clustered models use t-distribution based tests. The "
 "multilevel/multivariate model uses 'z' or 't' tests."
 msgstr ""
+"モデルの係数を検定する方法です。'z'は標準正規近似、't'はt分布、'knha'はKnapp-"
+"Hartungの調整(既定)を使います。制約なし重みつき最小二乗法では常に'knha'の検定"
+"を使い、クラスタのあるモデルではt分布による検定を使います。マルチレベル・多変"
+"量モデルでは'z'か't'の検定を使います。"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Predictors"
 msgstr "予測変数"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid ""
 "Continuous and categorical moderators. Specify interactions and the "
 "intercept in Model."
-msgstr ""
-"連続とカテゴリカルのモデレータです。交互作用と切片は「モデル」で指定します。"
+msgstr "連続とカテゴリカルのモデレータです。交互作用と切片は「モデル」で指定します。"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Clustering"
 msgstr "クラスタリング"
@@ -9961,13 +9981,14 @@ msgid ""
 "confidence intervals are provided. See the 'Advanced' section for additional "
 "clustering options."
 msgstr ""
+"頑健な分散推定のために、効果量のクラスタを示す変数です。変数を指定すると、"
+"クラスタに頑健な検定と信頼区間が求められます。クラスタリングのほかの"
+"オプションは「詳細」のセクションを見てください。"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Study Labels"
 msgstr "研究ラベル"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid ""
 "Labels for studies in plots. Missing labels do not exclude observations from "
@@ -9976,7 +9997,6 @@ msgstr ""
 "プロットに表示する研究のラベルです。ラベルが欠測していても、その観測値はあて"
 "はめから除外されません。"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Subgroup"
 msgstr "サブグループ"
@@ -9986,8 +10006,9 @@ msgid ""
 "Fit the models separately within each subgroup. The power of the estimates "
 "and the WAAP-WLS model selection are evaluated separately for each subgroup."
 msgstr ""
+"サブグループごとに、モデルを別々にあてはめます。推定値の検出力とWAAP-WLSの"
+"モデル選択も、サブグループごとに評価されます。"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "No Selection"
 msgstr "選択なし"
@@ -9998,8 +10019,10 @@ msgid ""
 "the unaffected level below; estimates at that level are always retained in "
 "the WAAP model, regardless of their power."
 msgstr ""
+"出版バイアスの影響を受けない推定値を識別する要因です(任意)。影響を受けない水"
+"準を下で選ぶと、その水準の推定値は検出力にかかわらず常にWAAPモデルに残ります"
+"。"
 
-#, fuzzy
 msgctxt "WaapWls|"
 msgid "Unaffected Level"
 msgstr "影響を受けない水準"
@@ -10009,10 +10032,12 @@ msgid ""
 "Estimates at this level are unaffected by publication bias. The power "
 "criterion applies to all other levels of the assigned factor."
 msgstr ""
+"この水準の推定値は出版バイアスの影響を受けません。割り当てた要因のそれ以外の"
+"すべての水準に検出力の基準が適用されます。"
 
 msgctxt "WaapWls|"
 msgid "Power criterion"
-msgstr ""
+msgstr "検出力の基準"
 
 msgctxt "WaapWls|"
 msgid ""
@@ -10021,10 +10046,13 @@ msgid ""
 "sided z-test (α = .05) with the standard error of the estimate detects the "
 "effect of the WLS model. At 5%, all estimates are retained."
 msgstr ""
+"推定値がWAAPモデルに残るために達する必要がある検出力です(既定は80%、5%から"
+"99%の間)。検出力は、推定値の標準誤差を使った両側z検定(α = .05)がWLSモデルの効"
+"果を検出する確率です。5%にすると、すべての推定値が残ります。"
 
 msgctxt "WaapWls|"
 msgid "Power conditional on moderators"
-msgstr ""
+msgstr "モデレータを条件とした検出力"
 
 msgctxt "WaapWls|"
 msgid ""
@@ -10034,10 +10062,14 @@ msgid ""
 "the WLS model (at the mean of the moderators). Available when the model "
 "includes moderators."
 msgstr ""
+"各推定値の検出力を、WLSのメタ回帰から予測されるその推定値の効果、すなわち"
+"モデレータの値を条件として評価します(既定)。チェックを外すと、すべての推定値"
+"の検出力をWLSモデルの統合効果(モデレータの平均における値)で評価します。モデル"
+"にモデレータを含む場合に使えます。"
 
 msgctxt "WaapWls|"
 msgid "Multilevel/multivariate"
-msgstr ""
+msgstr "マルチレベル・多変量"
 
 msgctxt "WaapWls|"
 msgid ""
@@ -10047,6 +10079,10 @@ msgid ""
 "Components' sections. The power of each estimate is computed from its "
 "standard error."
 msgstr ""
+"WLSとWAAPのモデルを、マルチレベル・多変量モデル(metaforの 'rma.mv' 関数)とし"
+"てあてはめます。効果量のあいだの依存関係は、「効果量の分散共分散行列」と「変"
+"量効果・モデルの成分」のセクションで指定します。各推定値の検出力は、その標準"
+"誤差から計算されます。"
 
 msgctxt "Upgrades|"
 msgid ""
@@ -10056,6 +10092,11 @@ msgid ""
 "Effect Size Computation to compute effect sizes and standard errors). To "
 "rerun the original analysis, use the Meta-Analysis module 0.98.0."
 msgstr ""
+"PET-PEESEは、メタ分析モジュール 0.99.0 で作り直されました。この分析を更新する"
+"と、保存されている結果が置き換えられ、互換でない設定が初期化されることがあり"
+"ます(たとえば、相関とサンプルサイズは入力として受け付けなくなりました。効果量"
+"と標準誤差は「効果量の計算」で求めてください)。元の分析を再実行するには、メタ"
+"分析モジュール 0.98.0 を使ってください。"
 
 msgctxt "Upgrades|"
 msgid ""
@@ -10065,3 +10106,8 @@ msgid ""
 "Effect Size Computation to compute effect sizes and standard errors). To "
 "rerun the original analysis, use the Meta-Analysis module 0.98.0."
 msgstr ""
+"WAAP-WLSは、メタ分析モジュール 0.99.0 で作り直されました。この分析を更新する"
+"と、保存されている結果が置き換えられ、互換でない設定が初期化されることがあり"
+"ます(たとえば、相関とサンプルサイズは入力として受け付けなくなりました。効果量"
+"と標準誤差は「効果量の計算」で求めてください)。元の分析を再実行するには、メタ"
+"分析モジュール 0.98.0 を使ってください。"
