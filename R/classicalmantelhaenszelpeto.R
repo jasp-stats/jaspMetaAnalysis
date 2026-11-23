@@ -18,7 +18,7 @@
 # Mantel-Haenszel and Peto meta-analysis validation, fitting, summaries, and R code.
 
 
-ClassicalMantelHaenszelPeto <- function(jaspResults, dataset = NULL, options, ...) {
+ClassicalMantelHaenszelPetoInternal <- function(jaspResults, dataset = NULL, options, ...) {
 
   options[["analysis"]] <- "mantelHaenszelPeto"
   options[["predictionIntervals"]] <- FALSE

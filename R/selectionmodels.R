@@ -5,7 +5,7 @@
 
 # Analysis and dependencies ----
 
-SelectionModels                         <- function(jaspResults, dataset = NULL, options, ...) {
+SelectionModelsInternal                 <- function(jaspResults, dataset = NULL, options, ...) {
 
   options[["analysis"]] <- "selectionModels"
   specifications        <- .smSpecifications(options)

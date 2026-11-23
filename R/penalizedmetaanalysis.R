@@ -21,7 +21,7 @@
 # - centering
 # - different CI widths
 
-PenalizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
+PenalizedMetaAnalysisInternal <- function(jaspResults, dataset = NULL, options, ...) {
 
   if (.pemaCheckReady(options)) {
     # get the data

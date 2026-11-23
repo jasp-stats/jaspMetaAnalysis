@@ -17,7 +17,7 @@
 
 # SEM-based meta-analysis entry point, model fitting, output tables, and path diagrams.
 
-SemBasedMetaAnalysis <- function(jaspResults, dataset, options, state = NULL) {
+SemBasedMetaAnalysisInternal <- function(jaspResults, dataset, options, state = NULL) {
 
   # JASP restoreOptions() NULLs OpenMx globals after each analysis (mxByrow,
   # mxOptions, ...) while leaving OpenMx loaded. Restore before metaSEM loads.

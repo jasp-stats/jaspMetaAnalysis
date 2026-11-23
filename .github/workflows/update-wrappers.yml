@@ -1,0 +1,16 @@
+name: Update R Wrappers
+
+on:
+  push:
+    branches:
+      - master
+    paths: ['inst/qml/**', 'inst/Description.qml', '.github/workflows/update-wrappers.yml']
+  workflow_dispatch:
+
+jobs:
+  update-wrappers:
+    uses: jasp-stats/jasp-actions/.github/workflows/update-wrappers.yml@master
+    secrets:
+      PUSH_TOKEN: ${{ secrets.REPOS_KEY }}
+    permissions:
+      contents: write

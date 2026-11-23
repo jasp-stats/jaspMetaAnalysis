@@ -17,7 +17,7 @@
 
 # Meta-analytic SEM data decoding, matrices, fit summaries, and model comparisons.
 
-MetaAnalyticSem <- function(jaspResults, dataset, options, state = NULL) {
+MetaAnalyticSemInternal <- function(jaspResults, dataset, options, state = NULL) {
 
   # JASP restoreOptions() NULLs OpenMx globals after each analysis (mxByrow,
   # mxOptions, ...) while leaving OpenMx loaded. Restore before metaSEM loads.

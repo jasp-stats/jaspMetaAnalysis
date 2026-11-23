@@ -17,7 +17,7 @@
 
 # Effect-size aggregation validation, computation, summary output, exports, and R code.
 
-EffectSizeAggregation <- function(jaspResults, dataset, options, state = NULL) {
+EffectSizeAggregationInternal <- function(jaspResults, dataset, options, state = NULL) {
 
   ready         <- .esaReady(options)
   exportDataset <- dataset

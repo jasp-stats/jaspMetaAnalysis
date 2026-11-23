@@ -18,7 +18,7 @@
 # Generalized meta-analysis validation, GLMM fitting, summaries, and reproducible R code.
 
 
-ClassicalGeneralizedMetaAnalysis <- function(jaspResults, dataset = NULL, options, ...) {
+ClassicalGeneralizedMetaAnalysisInternal <- function(jaspResults, dataset = NULL, options, ...) {
 
   options[["analysis"]] <- "generalizedMetaAnalysis"
 
