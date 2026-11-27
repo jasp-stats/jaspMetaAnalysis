@@ -1,4 +1,3 @@
-jaspTools::preserveSnapshotReferences()
 context("Other: Forest Plot - dat.bangertdrowns2004")
 
 # This test file was auto-generated from a JASP example file.

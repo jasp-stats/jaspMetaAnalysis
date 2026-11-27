@@ -1,4 +1,3 @@
-jaspTools::preserveSnapshotReferences()
 context("Other: Autoregressive Meta-Analysis - dat.ishak2007")
 
 # This test file was auto-generated from a JASP example file.

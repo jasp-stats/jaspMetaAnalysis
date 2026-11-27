@@ -1,4 +1,3 @@
-jaspTools::preserveSnapshotReferences()
 context("Library: Acculturation Mismatch and Intergenerational Cultural Conflict")
 
 # This test file was auto-generated from a JASP example file.

@@ -1,4 +1,3 @@
-jaspTools::preserveSnapshotReferences()
 context("Other: Multivariate and Multilevel Meta-Analysis - dat.assink2016")
 
 # This test file was auto-generated from a JASP example file.

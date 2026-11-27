@@ -1,4 +1,3 @@
-jaspTools::preserveSnapshotReferences()
 context("Library: Temporal Trends in Fish Community Structures in French Rivers")
 
 # This test file was auto-generated from a JASP example file.

@@ -1,4 +1,3 @@
-jaspTools::preserveSnapshotReferences()
 context("Other: Network Meta-Analysis - Baker2009")
 
 # This test file was auto-generated from a JASP example file.

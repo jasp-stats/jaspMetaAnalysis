@@ -1,4 +1,3 @@
-jaspTools::preserveSnapshotReferences()
 context("Other: Acute Respiratory Infections")
 
 # This test file was auto-generated from a JASP example file.

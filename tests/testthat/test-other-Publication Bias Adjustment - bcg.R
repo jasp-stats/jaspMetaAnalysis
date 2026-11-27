@@ -1,4 +1,3 @@
-jaspTools::preserveSnapshotReferences()
 context("Other: Publication Bias Adjustment - bcg")
 
 # This test file was auto-generated from a JASP example file.

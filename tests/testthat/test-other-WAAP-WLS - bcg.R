@@ -1,4 +1,3 @@
-jaspTools::preserveSnapshotReferences()
 context("Other: WAAP-WLS - bcg")
 
 # This test file was auto-generated from a JASP example file.

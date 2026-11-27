@@ -1,4 +1,3 @@
-jaspTools::preserveSnapshotReferences()
 context("Bayesian Meta Analysis (Deprecated)")
 
 options <- jaspTools::analysisOptions("BayesianMetaAnalysisDeprecated")

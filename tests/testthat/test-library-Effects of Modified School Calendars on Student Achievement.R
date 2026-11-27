@@ -1,4 +1,3 @@
-jaspTools::preserveSnapshotReferences()
 context("Library: Effects of Modified School Calendars on Student Achievement")
 
 # This test file was auto-generated from a JASP example file.

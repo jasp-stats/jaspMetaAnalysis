@@ -1,4 +1,3 @@
-jaspTools::preserveSnapshotReferences()
 context("Classical Prediction Model Performance")
 
 # load the test data

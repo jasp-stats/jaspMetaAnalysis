@@ -1,4 +1,3 @@
-jaspTools::preserveSnapshotReferences()
 context("Library: Effectiveness of the BCG Vaccine Against Tuberculosis")
 
 # This test file was auto-generated from a JASP example file.

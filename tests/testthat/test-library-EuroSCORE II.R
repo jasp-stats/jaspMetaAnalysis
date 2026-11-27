@@ -1,4 +1,3 @@
-jaspTools::preserveSnapshotReferences()
 context("Library: EuroSCORE II")
 
 # This test file was auto-generated from a JASP example file.

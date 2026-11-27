@@ -1,4 +1,3 @@
-jaspTools::preserveSnapshotReferences()
 context("Library: Recidivism and Mental Health in Delinquent Juveniles")
 
 # This test file was auto-generated from a JASP example file.
