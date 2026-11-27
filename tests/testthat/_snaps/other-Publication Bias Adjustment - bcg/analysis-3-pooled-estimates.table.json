@@ -1,0 +1,154 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "est": "-0.415447",
+      "lCi": "-1.324669",
+      "lPi": "-1.846907",
+      "par": "Pooled effect",
+      "se": "0.4638973",
+      "subgroup": "random",
+      "uCi": "0.4937749",
+      "uPi": "1.016012"
+    },
+    {
+      "est": "",
+      "lCi": "",
+      "lPi": "",
+      "par": "",
+      "se": "",
+      "subgroup": "alternate",
+      "uCi": "",
+      "uPi": ""
+    },
+    {
+      "est": "-0.8297695",
+      "lCi": "-2.23254",
+      "lPi": "-2.825813",
+      "par": "",
+      "se": "0.7157122",
+      "subgroup": "systematic",
+      "uCi": "0.5730006",
+      "uPi": "1.166274"
+    },
+    {
+      "est": "0.564101324892427",
+      "lCi": "0.272717970293103",
+      "lPi": "",
+      "par": "𝜏",
+      "se": "0.249764435928978",
+      "subgroup": "random",
+      "uCi": "1.36408513805951",
+      "uPi": ""
+    },
+    {
+      "est": "",
+      "lCi": "",
+      "lPi": "",
+      "par": "",
+      "se": "",
+      "subgroup": "alternate",
+      "uCi": "",
+      "uPi": ""
+    },
+    {
+      "est": "0.724507616418871",
+      "lCi": "0.299953940953253",
+      "lPi": "",
+      "par": "",
+      "se": "0.411025675278223",
+      "subgroup": "systematic",
+      "uCi": "4.85686117601759",
+      "uPi": ""
+    },
+    {
+      "est": "0.318210304745392",
+      "lCi": "0.07437509132079",
+      "lPi": "",
+      "par": "𝜏²",
+      "se": "0.281784898437092",
+      "subgroup": "random",
+      "uCi": "1.86072826387483",
+      "uPi": ""
+    },
+    {
+      "est": "",
+      "lCi": "",
+      "lPi": "",
+      "par": "",
+      "se": "",
+      "subgroup": "alternate",
+      "uCi": "",
+      "uPi": ""
+    },
+    {
+      "est": "0.524911286248954",
+      "lCi": "0.0899723666933874",
+      "lPi": "",
+      "par": "",
+      "se": "0.595582464565565",
+      "subgroup": "systematic",
+      "uCi": "23.589100483107",
+      "uPi": ""
+    }
+  ],
+  "footnotes": [],
+  "name": "modelSummaryContainer_pooledEstimatesTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "par",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "subgroup",
+        "title": "Subgroup",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "se",
+        "title": "Standard Error",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lPi",
+        "overTitle": "95% PI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uPi",
+        "overTitle": "95% PI",
+        "title": "Upper",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Meta-Analytic Estimates"
+}

@@ -1,0 +1,91 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "df": 44,
+      "est": 0.24828456023186063,
+      "lCi": 0.06696341171785478,
+      "name": "Intercept",
+      "pval": 0.008402026014508597,
+      "se": 0.08996926953340013,
+      "stat": 2.7596596206628936,
+      "uCi": 0.42960570874586645
+    },
+    {
+      "df": 44,
+      "est": -0.06256567505848284,
+      "lCi": -0.2728590475128775,
+      "name": "wic (yes)",
+      "pval": 0.5518452848878457,
+      "se": 0.10434492204849286,
+      "stat": -0.5996044065221143,
+      "uCi": 0.14772769739591182
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Fixed effects tested using Knapp and Hartung adjustment."
+    }
+  ],
+  "name": "metaregressionContainer_effectSizeCoefficientTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "name",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "se",
+        "title": "Standard Error",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "stat",
+        "title": "t",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "df",
+        "title": "df",
+        "type": "number"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Effect Size Meta-Regression Coefficients"
+}

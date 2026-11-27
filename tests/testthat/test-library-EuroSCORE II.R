@@ -1,3 +1,4 @@
+jaspTools::preserveSnapshotReferences()
 context("Library: EuroSCORE II")
 
 # This test file was auto-generated from a JASP example file.
@@ -25,15 +26,11 @@ test_that("ClassicalPredictionPerformance results match", {
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "analysis-1_figure-3_egger-unweighted-")
 
-  table <- results[["results"]][["funnelTestTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(21, "Egger (unweighted)", 0.311590678361251, -1.03686654753257,
-     21, "Debray", 0.317958608756867, -1.02297870880589))
+  table <- results[["results"]][["funnelTestTable"]]
+  jaspTools::expect_snapshot_table(table, "funnel-test")
 
-  table <- results[["results"]][["summaryTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(0.788860284346523, 0.764878400321528, 0.679256845535331, 0.811000494043596,
-     0.868273578310498))
+  table <- results[["results"]][["summaryTable"]]
+  jaspTools::expect_snapshot_table(table, "summary")
 
 })
 

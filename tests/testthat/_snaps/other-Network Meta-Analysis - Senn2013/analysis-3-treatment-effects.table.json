@@ -1,0 +1,146 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "comparison": "Acarbose",
+      "est": -0.827368972010615,
+      "lCi": -1.0400659206438523,
+      "pval": 2.4582718129800818e-14,
+      "se": 0.10852084543948959,
+      "stat": -7.624055716299683,
+      "uCi": -0.6146720233773777
+    },
+    {
+      "comparison": "Benfluorex",
+      "est": -0.9051864494172426,
+      "lCi": -1.1542804959760748,
+      "pval": 1.0610882390370632e-12,
+      "se": 0.12709113459413252,
+      "stat": -7.122341399405784,
+      "uCi": -0.6560924028584103
+    },
+    {
+      "comparison": "Metformin",
+      "est": -1.1141101890441707,
+      "lCi": -1.23094653810733,
+      "pval": 6.024720493842772e-78,
+      "se": 0.059611477549970024,
+      "stat": -18.689524816932355,
+      "uCi": -0.9972738399810115
+    },
+    {
+      "comparison": "Miglitol",
+      "est": -0.9439329628555989,
+      "lCi": -1.1926643882835923,
+      "pval": 1.0218912758568674e-13,
+      "se": 0.12690612041341337,
+      "stat": -7.438041284223433,
+      "uCi": -0.6952015374276054
+    },
+    {
+      "comparison": "Pioglitazone",
+      "est": -1.066433106870697,
+      "lCi": -1.2150914886061166,
+      "pval": 6.667271688333675e-45,
+      "se": 0.07584750684605336,
+      "stat": -14.06022625153944,
+      "uCi": -0.9177747251352772
+    },
+    {
+      "comparison": "Rosiglitazone",
+      "est": -1.2018420107007177,
+      "lCi": -1.2952581381744626,
+      "pval": 2.684614679966496e-140,
+      "se": 0.047662165330893506,
+      "stat": -25.215849979894045,
+      "uCi": -1.1084258832269729
+    },
+    {
+      "comparison": "Sitagliptin",
+      "est": -0.5699999999999954,
+      "lCi": -0.8230313504041162,
+      "pval": 1.0092502837578543e-05,
+      "se": 0.12909999999999996,
+      "stat": -4.415182029434512,
+      "uCi": -0.31696864959587456
+    },
+    {
+      "comparison": "Sulfonylurea",
+      "est": -0.4394971506296679,
+      "lCi": -0.6187929416965593,
+      "pval": 1.5526000621015044e-06,
+      "se": 0.0914791253722792,
+      "stat": -4.80434360124357,
+      "uCi": -0.26020135956277646
+    },
+    {
+      "comparison": "Vildagliptin",
+      "est": -0.7000000000000108,
+      "lCi": -0.9495034152319597,
+      "pval": 3.823375331665608e-08,
+      "se": 0.1273,
+      "stat": -5.498821681068428,
+      "uCi": -0.450496584768062
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Positive estimates indicate higher values for the treatment than for Placebo."
+    }
+  ],
+  "name": "treatmentEffectsContainer_treatmentEffectsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "comparison",
+        "title": "Treatment",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "se",
+        "title": "Standard Error",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "stat",
+        "title": "z",
+        "type": "number"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Treatment Effects vs. Placebo"
+}

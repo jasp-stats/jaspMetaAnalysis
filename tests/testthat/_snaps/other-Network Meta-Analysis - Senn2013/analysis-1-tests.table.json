@@ -1,0 +1,50 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "pval": 7.871368552046784e-13,
+      "stat": "Q(18) = 96.99",
+      "test": "Total"
+    },
+    {
+      "pval": 1.7239435555580576e-11,
+      "stat": "Q(11) = 74.46",
+      "test": "Within designs"
+    },
+    {
+      "pval": 0.002057014238009823,
+      "stat": "Q(7) = 22.53",
+      "test": "Between designs"
+    },
+    {
+      "pval": 0.9483271073511128,
+      "stat": "Q(7) = 2.19",
+      "test": "Between designs (design-by-treatment interaction)"
+    }
+  ],
+  "footnotes": [],
+  "name": "modelSummaryContainer_testsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "test",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "stat",
+        "title": "Test",
+        "type": "string"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Network Meta-Analytic Tests"
+}

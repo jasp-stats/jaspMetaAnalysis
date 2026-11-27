@@ -1,0 +1,48 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "df": 21,
+      "method": "Egger (unweighted)",
+      "p": 0.31159067836125104,
+      "t": -1.0368665475325693
+    },
+    {
+      "df": 21,
+      "method": "Debray",
+      "p": 0.3179586087568673,
+      "t": -1.022978708805888
+    }
+  ],
+  "footnotes": [],
+  "name": "funnelTestTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "method",
+        "title": "Method",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "t",
+        "title": "t-statistic",
+        "type": "number"
+      },
+      {
+        "name": "df",
+        "title": "df",
+        "type": "integer"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "p",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Funnel Plot Asymmetry Tests"
+}

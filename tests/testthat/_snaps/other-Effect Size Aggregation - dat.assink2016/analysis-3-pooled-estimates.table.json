@@ -1,0 +1,94 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "est": "0.2631714",
+      "lCi": "0.05344562",
+      "lPi": "-0.4579155",
+      "par": "Pooled effect",
+      "se": "0.09893166",
+      "uCi": "0.4728971",
+      "uPi": "0.9842583"
+    },
+    {
+      "est": "0.325445697533635",
+      "lCi": "0.238654066460495",
+      "lPi": "",
+      "par": "𝜏",
+      "se": "0.0704947854981674",
+      "uCi": "0.663035048112564",
+      "uPi": ""
+    },
+    {
+      "est": "0.105914902043154",
+      "lCi": "0.0569557634381304",
+      "lPi": "",
+      "par": "𝜏²",
+      "se": "0.0458844492778701",
+      "uCi": "0.43961547502563",
+      "uPi": ""
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "83 observations were omitted due to missing values."
+    }
+  ],
+  "name": "modelSummaryContainer_pooledEstimatesTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "par",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "se",
+        "title": "Standard Error",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lPi",
+        "overTitle": "95% PI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uPi",
+        "overTitle": "95% PI",
+        "title": "Upper",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Meta-Analytic Estimates"
+}

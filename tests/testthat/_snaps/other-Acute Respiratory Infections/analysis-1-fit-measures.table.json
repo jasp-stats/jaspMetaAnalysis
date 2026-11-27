@@ -1,0 +1,72 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "AIC": 6.23389290828086,
+      "AICc": 10.233892908280861,
+      "BIC": 4.927040088840806,
+      "dev": 0.5791537105434585,
+      "ll": -2.11694645414043,
+      "model": "ML",
+      "observations": 2
+    },
+    {
+      "AIC": 4.457864826855486,
+      "AICc": 8.457864826855486,
+      "BIC": 2.457864826855486,
+      "dev": 2.457864826855486,
+      "ll": -1.228932413427743,
+      "model": "REML",
+      "observations": 2
+    }
+  ],
+  "footnotes": [],
+  "name": "modelSummaryContainer_fitMeasuresTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "model",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "observations",
+        "title": "Observations",
+        "type": "integer"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "ll",
+        "title": "Log Lik.",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "dev",
+        "title": "Deviance",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "AIC",
+        "title": "AIC",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "BIC",
+        "title": "BIC",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "AICc",
+        "title": "AICc",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Fit Measures"
+}

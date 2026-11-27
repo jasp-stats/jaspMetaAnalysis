@@ -1,0 +1,55 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "Intercept": 1,
+      "ablat": -0.5775092648659417,
+      "name": "Intercept",
+      "year": -0.9999541871869162
+    },
+    {
+      "Intercept": -0.9999541871869162,
+      "ablat": 0.5707637653678103,
+      "name": "year",
+      "year": 1
+    },
+    {
+      "Intercept": -0.5775092648659417,
+      "ablat": 1,
+      "name": "ablat",
+      "year": 0.5707637653678103
+    }
+  ],
+  "footnotes": [],
+  "name": "metaregressionContainer_effectSizeCorrelationTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "name",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "Intercept",
+        "title": "Intercept",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "year",
+        "title": "year",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "ablat",
+        "title": "ablat",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Effect Size Meta-Regression Correlation Matrix"
+}

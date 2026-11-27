@@ -1,0 +1,62 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "est": -0.5104318837267625,
+      "k": 13,
+      "lCI": -1.1182240447667846,
+      "p": 0.4217845356279411,
+      "uCI": 0.09736027731325958,
+      "z": -0.8033291121467477
+    }
+  ],
+  "footnotes": [],
+  "name": "funnelAsymetryTests_metaRegressionTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "k",
+        "title": "Estimates",
+        "type": "integer"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "z",
+        "overTitle": "Asymmetry Test",
+        "title": "z",
+        "type": "number"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "p",
+        "overTitle": "Asymmetry Test",
+        "title": "p",
+        "type": "pvalue"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "overTitle": "Limit Estimate μ",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCI",
+        "overTitle": "Limit Estimate μ",
+        "title": "Lower 95% CI",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCI",
+        "overTitle": "Limit Estimate μ",
+        "title": "Upper 95% CI",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Meta-Regression Test for Funnel Plot Asymmetry"
+}

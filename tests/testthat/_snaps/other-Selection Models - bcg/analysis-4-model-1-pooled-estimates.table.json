@@ -1,0 +1,86 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "est": "-0.2267047",
+      "lCi": "-0.8298866",
+      "lPi": "-1.642201",
+      "par": "Pooled effect",
+      "se": "0.3077515",
+      "uCi": "0.3764772",
+      "uPi": "1.188791"
+    },
+    {
+      "est": "0.653352232405955",
+      "lCi": "0.373230858949483",
+      "lPi": "",
+      "par": "𝜏",
+      "se": "0.197245505508585",
+      "uCi": "1.23803269236332",
+      "uPi": ""
+    },
+    {
+      "est": "0.426869139589845",
+      "lCi": "0.139301274072169",
+      "lPi": "",
+      "par": "𝜏²",
+      "se": "0.257741582712151",
+      "uCi": "1.53272494736037",
+      "uPi": ""
+    }
+  ],
+  "footnotes": [],
+  "name": "selectionModelResults_model1_modelSummaryContainer_pooledEstimatesTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "par",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "se",
+        "title": "Standard Error",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lPi",
+        "overTitle": "95% PI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uPi",
+        "overTitle": "95% PI",
+        "title": "Upper",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Meta-Analytic Estimates"
+}

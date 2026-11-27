@@ -1,0 +1,48 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "factor": "study",
+      "nlvls": 6,
+      "sigma": 0.13529978023656095,
+      "sigma2": 0.01830603053206169
+    },
+    {
+      "factor": "study/esid",
+      "nlvls": 19,
+      "sigma": 0.11055730333429706,
+      "sigma2": 0.012222917320551772
+    }
+  ],
+  "footnotes": [],
+  "name": "randomEstimatesContainer_containerS_tableS",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "factor",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "sigma2",
+        "title": "σ²",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "sigma",
+        "title": "σ",
+        "type": "number"
+      },
+      {
+        "name": "nlvls",
+        "title": "Levels",
+        "type": "integer"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Estimates"
+}

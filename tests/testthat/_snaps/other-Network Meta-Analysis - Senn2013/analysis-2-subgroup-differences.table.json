@@ -1,0 +1,126 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "Q": 3.672411192758969,
+      "comparison": "Acarbose vs. Benfluorex",
+      "df": 1,
+      "pval": 0.05532010022425832
+    },
+    {
+      "Q": 0.0007185942962957784,
+      "comparison": "Acarbose vs. Metformin",
+      "df": 1,
+      "pval": 0.9786139817418306
+    },
+    {
+      "Q": 1.5382510728227228,
+      "comparison": "Acarbose vs. Placebo",
+      "df": 1,
+      "pval": 0.21487831729400267
+    },
+    {
+      "Q": 1.3562200862281575,
+      "comparison": "Acarbose vs. Rosiglitazone",
+      "df": 1,
+      "pval": 0.24419364935924923
+    },
+    {
+      "Q": 1.4437547869440728,
+      "comparison": "Acarbose vs. Sulfonylurea",
+      "df": 1,
+      "pval": 0.22953269946277316
+    },
+    {
+      "Q": 5.008136690594368,
+      "comparison": "Benfluorex vs. Metformin",
+      "df": 1,
+      "pval": 0.025228447361193233
+    },
+    {
+      "Q": 2.139508246433901,
+      "comparison": "Benfluorex vs. Placebo",
+      "df": 1,
+      "pval": 0.1435478994516454
+    },
+    {
+      "Q": 1.2687820544148654,
+      "comparison": "Benfluorex vs. Rosiglitazone",
+      "df": 1,
+      "pval": 0.2599952900499527
+    },
+    {
+      "Q": 7.618860340047293,
+      "comparison": "Benfluorex vs. Sulfonylurea",
+      "df": 1,
+      "pval": 0.005776097903359809
+    },
+    {
+      "Q": 3.836673412303728,
+      "comparison": "Metformin vs. Placebo",
+      "df": 1,
+      "pval": 0.050142913692501324
+    },
+    {
+      "Q": 2.1857837388148518,
+      "comparison": "Metformin vs. Rosiglitazone",
+      "df": 1,
+      "pval": 0.13929014465077602
+    },
+    {
+      "Q": 2.175435191616173,
+      "comparison": "Metformin vs. Sulfonylurea",
+      "df": 1,
+      "pval": 0.1402298428826413
+    },
+    {
+      "Q": 0.036636072202468395,
+      "comparison": "Placebo vs. Rosiglitazone",
+      "df": 1,
+      "pval": 0.8482078974931092
+    },
+    {
+      "Q": 6.07117245216685,
+      "comparison": "Placebo vs. Sulfonylurea",
+      "df": 1,
+      "pval": 0.013740572213397305
+    },
+    {
+      "Q": 4.940591432870883,
+      "comparison": "Rosiglitazone vs. Sulfonylurea",
+      "df": 1,
+      "pval": 0.02623305888161512
+    }
+  ],
+  "footnotes": [],
+  "name": "subgroupDifferencesTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "comparison",
+        "title": "Comparison",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "Q",
+        "title": "Q",
+        "type": "number"
+      },
+      {
+        "name": "df",
+        "title": "df",
+        "type": "integer"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Test for Subgroup Differences"
+}

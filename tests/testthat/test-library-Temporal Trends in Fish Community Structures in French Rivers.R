@@ -1,3 +1,4 @@
+jaspTools::preserveSnapshotReferences()
 context("Library: Temporal Trends in Fish Community Structures in French Rivers")
 
 # This test file was auto-generated from a JASP example file.
@@ -13,25 +14,17 @@ test_that("ClassicalMetaAnalysisMultilevelMultivariate results match", {
   set.seed(1)
   results <- jaspTools::runAnalysis("ClassicalMetaAnalysisMultilevelMultivariate", dataset, opts, view = FALSE)
 
-  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(182.1199, 118.5497, -36.40474, "Pooled effect", 31.2808, 245.6901,
-     400.6445))
+  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]]
+  jaspTools::expect_snapshot_table(table, "pooled-estimates")
 
-  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_testsTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(7.50257965780061e-24, "Q<unicode>(34) = 191.48", "Heterogeneity",
-     1.46608437476369e-06, "t(34) = 5.82", "Pooled effect"))
+  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_testsTable"]]
+  jaspTools::expect_snapshot_table(table, "tests")
 
-  table <- results[["results"]][["randomEstimatesContainer"]][["collection"]][["randomEstimatesContainer_containerG"]][["collection"]][["randomEstimatesContainer_containerG_table1"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(3425.58619145785, 58.5285075109373, "𝜏<unicode>", 12.8755264659828,
-     "", "<unicode>"))
+  table <- results[["results"]][["randomEstimatesContainer"]][["collection"]][["randomEstimatesContainer_containerG"]][["collection"]][["randomEstimatesContainer_containerG_table1"]]
+  jaspTools::expect_snapshot_table(table, "random-estimates-g-1")
 
-  table <- results[["results"]][["randomEstimatesContainer"]][["collection"]][["randomEstimatesContainer_containerS"]][["collection"]][["randomEstimatesContainer_containerS_tableS"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list("site", 11, 84.6070278952636, 7158.34916926991, "site/station",
-     35, 0.00388667306616194, 1.51062275232287e-05))
+  table <- results[["results"]][["randomEstimatesContainer"]][["collection"]][["randomEstimatesContainer_containerS"]][["collection"]][["randomEstimatesContainer_containerS_tableS"]]
+  jaspTools::expect_snapshot_table(table, "random-estimates-s")
 
 })
 

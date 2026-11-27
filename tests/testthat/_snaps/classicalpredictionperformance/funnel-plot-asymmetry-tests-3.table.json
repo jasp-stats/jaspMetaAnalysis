@@ -1,0 +1,94 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "df": 14,
+      "method": "Egger (unweighted)",
+      "p": 0.016248803207124005,
+      "t": -2.730704134507731
+    },
+    {
+      "df": 14,
+      "method": "Egger (multiplicative overdispersion)",
+      "p": 0.1801921081575459,
+      "t": -1.4106084842032378
+    },
+    {
+      "df": null,
+      "method": "Macaskill",
+      "p": null,
+      "t": null
+    },
+    {
+      "df": null,
+      "method": "Macaskill (pooled)",
+      "p": null,
+      "t": null
+    },
+    {
+      "df": null,
+      "method": "Peters",
+      "p": null,
+      "t": null
+    },
+    {
+      "df": 14,
+      "method": "Debray",
+      "p": 0.5528492101087693,
+      "t": -0.6081153849746271
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "The Macaskill (pooled) test failed with the following error: The number of participants must be specified."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "The Macaskill test failed with the following error: The number of participants must be specified."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "The Peters test failed with the following error: The number of participants must be specified."
+    }
+  ],
+  "name": "funnelTestTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "method",
+        "title": "Method",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "t",
+        "title": "t-statistic",
+        "type": "number"
+      },
+      {
+        "name": "df",
+        "title": "df",
+        "type": "integer"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "p",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Funnel Plot Asymmetry Tests"
+}

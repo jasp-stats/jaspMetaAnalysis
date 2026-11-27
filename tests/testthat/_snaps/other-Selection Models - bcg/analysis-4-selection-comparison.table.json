@@ -1,0 +1,133 @@
+{
+  "casesAcrossColumns": false,
+  "citation": [
+    "Viechtbauer, W. (2010). Conducting meta-analyses in R with the metafor package. Journal of Statistical Software, 36(3), 1-48."
+  ],
+  "data": [
+    {
+      "AIC": 32.99357959802916,
+      "AICc": 35.66024626469583,
+      "BIC": 34.68842767041377,
+      "dev": 26.99357959802916,
+      "logLik": -13.49678979901458,
+      "model": "Model 1",
+      "parameters": 3,
+      "weightAIC": 0.25699743583092816,
+      "weightAICc": 0.5262342060725985,
+      "weightBIC": 0.3145012317328831
+    },
+    {
+      "AIC": 32.93573197750441,
+      "AICc": 37.93573197750441,
+      "BIC": 35.195529407350556,
+      "dev": 24.93573197750441,
+      "logLik": -12.467865988752205,
+      "model": "Model 2",
+      "parameters": 4,
+      "weightAIC": 0.2645393252117934,
+      "weightAICc": 0.16868001468359062,
+      "weightBIC": 0.24406562014183608
+    },
+    {
+      "AIC": 31.750553048384628,
+      "AICc": 36.75055304838463,
+      "BIC": 34.01035047823078,
+      "dev": 23.750553048384628,
+      "logLik": -11.875276524192314,
+      "model": "Model 3",
+      "parameters": 4,
+      "weightAIC": 0.4784632389572784,
+      "weightAICc": 0.3050857792438109,
+      "weightBIC": 0.44143314812528084
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Model 1: Step function (0.025, 0.5, 1); one-sided; delta = (1, NA, 0.1)"
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Model 2: Beta (0.025, 0.5); one-sided"
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Model 3: Step function (0.025, 0.5, 1); two-sided"
+    }
+  ],
+  "name": "selectionComparison",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "model",
+        "title": "Model",
+        "type": "string"
+      },
+      {
+        "name": "parameters",
+        "title": "Parameters",
+        "type": "integer"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "logLik",
+        "title": "Log Lik.",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "dev",
+        "title": "Deviance",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "AIC",
+        "title": "AIC",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "AICc",
+        "title": "AICc",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "BIC",
+        "title": "BIC",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "weightAIC",
+        "title": "AIC weight",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "weightAICc",
+        "title": "AICc weight",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "weightBIC",
+        "title": "BIC weight",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Model Comparison"
+}

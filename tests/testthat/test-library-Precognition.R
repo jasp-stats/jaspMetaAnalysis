@@ -1,3 +1,4 @@
+jaspTools::preserveSnapshotReferences()
 context("Library: Precognition")
 
 # This test file was auto-generated from a JASP example file.
@@ -13,16 +14,11 @@ test_that("PetPeese results match", {
   set.seed(1)
   results <- jaspTools::runAnalysis("PetPeese", dataset, opts, view = FALSE)
 
-  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(0.02364776, -0.0413722, "Pooled effect", 0.02749695, 0.08866772,
-     0.10890430076217, "", "<unicode>", "", ""))
+  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]]
+  jaspTools::expect_snapshot_table(table, "pooled-estimates")
 
-  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_testsTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(0.9978096529631, "Q<unicode>(7) = 0.76", "Residual heterogeneity",
-     0.418258983005765, "t(7) = 0.86", "Pooled effect", 0.000116024151718745,
-     "t(7) = 7.70", "Publication bias (PET)"))
+  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_testsTable"]]
+  jaspTools::expect_snapshot_table(table, "tests")
 
 })
 

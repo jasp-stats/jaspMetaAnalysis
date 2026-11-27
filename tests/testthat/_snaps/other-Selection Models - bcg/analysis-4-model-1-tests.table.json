@@ -1,0 +1,48 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "pval": 1.981996373205538e-26,
+      "stat": "LR(1) = 113.17",
+      "test": "Heterogeneity"
+    },
+    {
+      "pval": 0.4613361423603784,
+      "stat": "z = -0.74",
+      "test": "Pooled effect"
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "The publication-bias test is not applicable with fixed selection parameters."
+    }
+  ],
+  "name": "selectionModelResults_model1_modelSummaryContainer_testsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "test",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "stat",
+        "title": "Test",
+        "type": "string"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Meta-Analytic Tests"
+}

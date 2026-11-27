@@ -1,0 +1,112 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "ESS": 1084,
+      "MCMC_SD_error": 0.030320330912525777,
+      "MCMC_error": 0.0034084626491759393,
+      "R_hat": 1.0050827333642398,
+      "par": "mu"
+    },
+    {
+      "ESS": 2765,
+      "MCMC_SD_error": 0.019162317107670145,
+      "MCMC_error": 0.0010536737489805976,
+      "R_hat": 1.0006996312962846,
+      "par": "tau"
+    },
+    {
+      "ESS": 881,
+      "MCMC_SD_error": 0.03354611946836911,
+      "MCMC_error": 0.04161895844413517,
+      "R_hat": 1.0084713390778706,
+      "par": "PET"
+    },
+    {
+      "ESS": 4264,
+      "MCMC_SD_error": 0.015380422928993151,
+      "MCMC_error": 0.08044333929693903,
+      "R_hat": 1.0007497868205382,
+      "par": "PEESE"
+    },
+    {
+      "ESS": "",
+      "MCMC_SD_error": "",
+      "MCMC_error": "",
+      "R_hat": "",
+      "par": "omega[0,0.025]"
+    },
+    {
+      "ESS": 9985,
+      "MCMC_SD_error": 0.010086362232534046,
+      "MCMC_error": 0.0011860959421638184,
+      "R_hat": 1.0007425635526765,
+      "par": "omega[0.025,0.05]"
+    },
+    {
+      "ESS": 2479,
+      "MCMC_SD_error": 0.020239014900935704,
+      "MCMC_error": 0.007068552989220588,
+      "R_hat": 1.0010779076115728,
+      "par": "omega[0.05,0.5]"
+    },
+    {
+      "ESS": 2282,
+      "MCMC_SD_error": 0.020971296453338104,
+      "MCMC_error": 0.008255580178374992,
+      "R_hat": 1.0008740044926727,
+      "par": "omega[0.5,0.95]"
+    },
+    {
+      "ESS": 2361,
+      "MCMC_SD_error": 0.020579153439889048,
+      "MCMC_error": 0.008047320138427821,
+      "R_hat": 1.0008150703264207,
+      "par": "omega[0.95,0.975]"
+    },
+    {
+      "ESS": 2377,
+      "MCMC_SD_error": 0.02051169676717722,
+      "MCMC_error": 0.008044972336165163,
+      "R_hat": 1.000752792631874,
+      "par": "omega[0.975,1]"
+    }
+  ],
+  "footnotes": [],
+  "name": "diagnosticsContainer_diagnosticsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "par",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "MCMC_error",
+        "title": "MCMC error",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "MCMC_SD_error",
+        "title": "MCMC error/SD",
+        "type": "number"
+      },
+      {
+        "name": "ESS",
+        "title": "ESS",
+        "type": "integer"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "R_hat",
+        "title": "R-hat",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Diagnostics Summary"
+}

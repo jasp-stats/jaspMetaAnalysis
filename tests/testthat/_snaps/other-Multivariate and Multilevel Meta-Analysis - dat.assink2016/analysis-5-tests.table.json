@@ -1,0 +1,53 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "pval": 8.470248022265078e-108,
+      "stat": "Qₑ(97) = 783.02",
+      "test": "Residual heterogeneity"
+    },
+    {
+      "pval": 0.00379241956472367,
+      "stat": "t(13.68) = 3.48",
+      "test": "Pooled effect"
+    },
+    {
+      "pval": 0.14328009255592572,
+      "stat": "Fₘ(2, 0.88) = 35.40",
+      "test": "Moderation"
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "Warning:",
+      "text": "Cluster-robust inference has very low effective degrees of freedom. When Satterthwaite df < 4, p-values should be interpreted with extreme caution."
+    }
+  ],
+  "name": "modelSummaryContainer_testsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "test",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "stat",
+        "title": "Test",
+        "type": "string"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Meta-Analytic Tests"
+}

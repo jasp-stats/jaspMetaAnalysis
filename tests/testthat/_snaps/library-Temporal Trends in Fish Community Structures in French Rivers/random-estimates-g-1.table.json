@@ -1,0 +1,56 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "estimate": 3425.58619095928,
+      "estimateSqrt": 58.5285075066782,
+      "parameter": "𝜏²"
+    },
+    {
+      "estimate": 12.8755264674047,
+      "estimateSqrt": "",
+      "parameter": "ρ"
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "Levels: ",
+      "text": "35 | 1"
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "Component: ",
+      "text": "~site_station | constant"
+    }
+  ],
+  "name": "randomEstimatesContainer_containerG_table1",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "parameter",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "estimate",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "estimateSqrt",
+        "title": "Sqrt. Estimate",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Estimates"
+}

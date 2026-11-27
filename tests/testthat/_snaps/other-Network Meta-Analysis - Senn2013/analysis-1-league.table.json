@@ -1,0 +1,207 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "treatment": "Acarbose",
+      "trt1": "Acarbose",
+      "trt10": "",
+      "trt2": "",
+      "trt3": "0.20 [-0.75, 1.15]",
+      "trt4": "",
+      "trt5": "",
+      "trt6": "-0.86 [-1.45, -0.26]",
+      "trt7": "",
+      "trt8": "",
+      "trt9": "-0.40 [-1.11, 0.31]"
+    },
+    {
+      "treatment": "Benfluorex",
+      "trt1": "-0.11 [-0.85, 0.63]",
+      "trt10": "",
+      "trt2": "Benfluorex",
+      "trt3": "",
+      "trt4": "",
+      "trt5": "",
+      "trt6": "-0.73 [-1.29, -0.17]",
+      "trt7": "",
+      "trt8": "",
+      "trt9": ""
+    },
+    {
+      "treatment": "Metformin",
+      "trt1": "0.28 [-0.22, 0.79]",
+      "trt10": "",
+      "trt2": "0.40 [-0.24, 1.03]",
+      "trt3": "Metformin",
+      "trt4": "",
+      "trt5": "-0.16 [-0.83, 0.51]",
+      "trt6": "-1.18 [-1.58, -0.78]",
+      "trt7": "0.07 [-0.49, 0.63]",
+      "trt8": "",
+      "trt9": "-0.37 [-1.06, 0.32]"
+    },
+    {
+      "treatment": "Miglitol",
+      "trt1": "0.11 [-0.55, 0.77]",
+      "trt10": "",
+      "trt2": "0.22 [-0.50, 0.94]",
+      "trt3": "-0.18 [-0.72, 0.37]",
+      "trt4": "Miglitol",
+      "trt5": "",
+      "trt6": "-0.95 [-1.40, -0.50]",
+      "trt7": "",
+      "trt8": "",
+      "trt9": ""
+    },
+    {
+      "treatment": "Pioglitazone",
+      "trt1": "0.29 [-0.33, 0.91]",
+      "trt10": "",
+      "trt2": "0.40 [-0.31, 1.10]",
+      "trt3": "0.00 [-0.44, 0.44]",
+      "trt4": "0.18 [-0.45, 0.81]",
+      "trt5": "Pioglitazone",
+      "trt6": "-1.30 [-1.99, -0.61]",
+      "trt7": "0.10 [-0.64, 0.84]",
+      "trt8": "",
+      "trt9": ""
+    },
+    {
+      "treatment": "Placebo",
+      "trt1": "-0.84 [-1.32, -0.36]",
+      "trt10": "0.70 [0.01, 1.39]",
+      "trt2": "-0.73 [-1.29, -0.17]",
+      "trt3": "-1.13 [-1.43, -0.82]",
+      "trt4": "-0.95 [-1.40, -0.50]",
+      "trt5": "-1.13 [-1.56, -0.70]",
+      "trt6": "Placebo",
+      "trt7": "1.18 [0.89, 1.47]",
+      "trt8": "0.57 [-0.12, 1.26]",
+      "trt9": ""
+    },
+    {
+      "treatment": "Rosiglitazone",
+      "trt1": "0.39 [-0.12, 0.90]",
+      "trt10": "",
+      "trt2": "0.50 [-0.11, 1.12]",
+      "trt3": "0.11 [-0.22, 0.43]",
+      "trt4": "0.28 [-0.23, 0.80]",
+      "trt5": "0.10 [-0.33, 0.54]",
+      "trt6": "1.23 [0.98, 1.48]",
+      "trt7": "Rosiglitazone",
+      "trt8": "",
+      "trt9": "-1.20 [-1.90, -0.50]"
+    },
+    {
+      "treatment": "Sitagliptin",
+      "trt1": "-0.27 [-1.12, 0.57]",
+      "trt10": "",
+      "trt2": "-0.16 [-1.05, 0.73]",
+      "trt3": "-0.56 [-1.31, 0.20]",
+      "trt4": "-0.38 [-1.21, 0.45]",
+      "trt5": "-0.56 [-1.38, 0.26]",
+      "trt6": "0.57 [-0.12, 1.26]",
+      "trt7": "-0.66 [-1.40, 0.07]",
+      "trt8": "Sitagliptin",
+      "trt9": ""
+    },
+    {
+      "treatment": "Sulfonylurea",
+      "trt1": "-0.43 [-0.95, 0.10]",
+      "trt10": "",
+      "trt2": "-0.31 [-1.05, 0.42]",
+      "trt3": "-0.71 [-1.17, -0.25]",
+      "trt4": "-0.53 [-1.19, 0.12]",
+      "trt5": "-0.71 [-1.30, -0.12]",
+      "trt6": "0.42 [-0.06, 0.89]",
+      "trt7": "-0.82 [-1.28, -0.35]",
+      "trt8": "-0.15 [-0.99, 0.69]",
+      "trt9": "Sulfonylurea"
+    },
+    {
+      "treatment": "Vildagliptin",
+      "trt1": "-0.14 [-0.99, 0.70]",
+      "trt10": "Vildagliptin",
+      "trt2": "-0.03 [-0.92, 0.86]",
+      "trt3": "-0.43 [-1.18, 0.33]",
+      "trt4": "-0.25 [-1.08, 0.58]",
+      "trt5": "-0.43 [-1.24, 0.39]",
+      "trt6": "0.70 [0.01, 1.39]",
+      "trt7": "-0.53 [-1.27, 0.20]",
+      "trt8": "0.13 [-0.85, 1.11]",
+      "trt9": "0.28 [-0.55, 1.12]"
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Lower triangle: network estimates of the column treatment versus the row treatment. Upper triangle: direct estimates of the row treatment versus the column treatment."
+    }
+  ],
+  "name": "treatmentEffectsContainer_leagueTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "treatment",
+        "title": "Treatment",
+        "type": "string"
+      },
+      {
+        "name": "trt1",
+        "title": "Acarbose",
+        "type": "string"
+      },
+      {
+        "name": "trt2",
+        "title": "Benfluorex",
+        "type": "string"
+      },
+      {
+        "name": "trt3",
+        "title": "Metformin",
+        "type": "string"
+      },
+      {
+        "name": "trt4",
+        "title": "Miglitol",
+        "type": "string"
+      },
+      {
+        "name": "trt5",
+        "title": "Pioglitazone",
+        "type": "string"
+      },
+      {
+        "name": "trt6",
+        "title": "Placebo",
+        "type": "string"
+      },
+      {
+        "name": "trt7",
+        "title": "Rosiglitazone",
+        "type": "string"
+      },
+      {
+        "name": "trt8",
+        "title": "Sitagliptin",
+        "type": "string"
+      },
+      {
+        "name": "trt9",
+        "title": "Sulfonylurea",
+        "type": "string"
+      },
+      {
+        "name": "trt10",
+        "title": "Vildagliptin",
+        "type": "string"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "League Table"
+}

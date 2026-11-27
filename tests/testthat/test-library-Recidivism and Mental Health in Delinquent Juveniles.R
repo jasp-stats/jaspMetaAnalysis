@@ -1,3 +1,4 @@
+jaspTools::preserveSnapshotReferences()
 context("Library: Recidivism and Mental Health in Delinquent Juveniles")
 
 # This test file was auto-generated from a JASP example file.
@@ -13,11 +14,8 @@ test_that("ClassicalMetaAnalysisMultilevelMultivariate results match", {
   set.seed(1)
   results <- jaspTools::runAnalysis("ClassicalMetaAnalysisMultilevelMultivariate", dataset, opts, view = FALSE)
 
-  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_testsTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(8.47024802226508e-108, "Q<unicode>(97) = 783.02", "Residual heterogeneity",
-     0.00379241956472367, "t(13.68) = 3.48", "Pooled effect", 0.143280092555926,
-     "F<unicode>(2, 0.88) = 35.40", "Moderation"))
+  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_testsTable"]]
+  jaspTools::expect_snapshot_table(table, "tests")
 
 })
 

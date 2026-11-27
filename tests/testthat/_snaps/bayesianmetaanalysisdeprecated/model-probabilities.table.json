@@ -1,0 +1,51 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "model": "Fixed H₀",
+      "postProb": 2.158931833018405e-48,
+      "priorProb": 0.25
+    },
+    {
+      "model": "Fixed H₁",
+      "postProb": 2.3426844054637313e-25,
+      "priorProb": 0.25
+    },
+    {
+      "model": "Random H₀",
+      "postProb": 0.02232694134078293,
+      "priorProb": 0.25
+    },
+    {
+      "model": "Random H₁",
+      "postProb": 0.977673058659217,
+      "priorProb": 0.25
+    }
+  ],
+  "footnotes": [],
+  "name": "modelProbability",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "model",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "priorProb",
+        "title": "Prior",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "postProb",
+        "title": "Posterior",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Model Probabilities"
+}

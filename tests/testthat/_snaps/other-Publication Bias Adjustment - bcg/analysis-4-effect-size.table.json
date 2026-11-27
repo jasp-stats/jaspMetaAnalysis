@@ -1,0 +1,54 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "m": 1,
+      "sif": 1.29657609170345,
+      "term": "year",
+      "vif": 1.6811095615769929
+    },
+    {
+      "m": 1,
+      "sif": 1.2453204436553063,
+      "term": "ablat",
+      "vif": 1.5508230073858487
+    },
+    {
+      "m": 1,
+      "sif": 1.0646550083499227,
+      "term": "Standard error² (PEESE)",
+      "vif": 1.1334902868045738
+    }
+  ],
+  "footnotes": [],
+  "name": "varianceInflationContainer_effectSize",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "term",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "m",
+        "title": "Parameters",
+        "type": "integer"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "vif",
+        "title": "VIF",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "sif",
+        "title": "SIF",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Effect Size Meta-Regression Variance Inflation"
+}

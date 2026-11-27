@@ -1,0 +1,209 @@
+{
+  "casesAcrossColumns": false,
+  "citation": [
+    "Viechtbauer, W. (2010). Conducting meta-analyses in R with the metafor package. Journal of Statistical Software, 36(3), 1-48."
+  ],
+  "data": [
+    {
+      "AIC": 29.330152695033178,
+      "AICc": 30.530152695033177,
+      "BIC": 30.46005140995625,
+      "dev": 25.330152695033178,
+      "logLik": -12.665076347516589,
+      "model": "Model 1",
+      "parameters": 2,
+      "weightAIC": 0.33487097110495806,
+      "weightAICc": 0.552632510544034,
+      "weightBIC": 0.41383814048892514
+    },
+    {
+      "AIC": 31.08765321243233,
+      "AICc": 33.75431987909899,
+      "BIC": 32.78250128481694,
+      "dev": 25.08765321243233,
+      "logLik": -12.543826606216165,
+      "model": "Model 2",
+      "parameters": 3,
+      "weightAIC": 0.13907245245998684,
+      "weightAICc": 0.11023447087792712,
+      "weightBIC": 0.12957372121377256
+    },
+    {
+      "AIC": 32.98323288665279,
+      "AICc": 37.98323288665279,
+      "BIC": 35.24303031649894,
+      "dev": 24.983232886652793,
+      "logLik": -12.491616443326397,
+      "model": "Model 3",
+      "parameters": 4,
+      "weightAIC": 0.053904027721585694,
+      "weightAICc": 0.013305176192424748,
+      "weightBIC": 0.03786342017410151
+    },
+    {
+      "AIC": 31.90592035112472,
+      "AICc": 36.90592035112472,
+      "BIC": 34.165717780970866,
+      "dev": 23.90592035112472,
+      "logLik": -11.95296017556236,
+      "model": "Model 4",
+      "parameters": 4,
+      "weightAIC": 0.09237547013791184,
+      "weightAICc": 0.022801114462005407,
+      "weightBIC": 0.0648866399683024
+    },
+    {
+      "AIC": 31.173307515029887,
+      "AICc": 33.839974181696554,
+      "BIC": 32.8681555874145,
+      "dev": 25.173307515029887,
+      "logLik": -12.586653757514943,
+      "model": "Model 5",
+      "parameters": 3,
+      "weightAIC": 0.13324211499220048,
+      "weightAICc": 0.10561310874306347,
+      "weightBIC": 0.12414159926388066
+    },
+    {
+      "AIC": 31.329554618275875,
+      "AICc": 33.99622128494254,
+      "BIC": 33.02440269066049,
+      "dev": 25.329554618275875,
+      "logLik": -12.664777309137937,
+      "model": "Model 6",
+      "parameters": 3,
+      "weightAIC": 0.12322899040286062,
+      "weightAICc": 0.09767629975310037,
+      "weightBIC": 0.11481237704144819
+    },
+    {
+      "AIC": 31.328305581968504,
+      "AICc": 33.99497224863517,
+      "BIC": 33.023153654353116,
+      "dev": 25.328305581968504,
+      "logLik": -12.664152790984252,
+      "model": "Model 7",
+      "parameters": 3,
+      "weightAIC": 0.12330597318049653,
+      "weightAICc": 0.09773731942744493,
+      "weightBIC": 0.11488410184956951
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Model 1: None (unadjusted)"
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Model 2: Step function (0.025, 1); one-sided"
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Model 3: Step function (0.025, 0.5, 1); one-sided"
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Model 4: Beta; one-sided"
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Model 5: Half-normal; one-sided"
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Model 6: Negative exponential; one-sided"
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Model 7: Logistic; one-sided"
+    }
+  ],
+  "name": "selectionComparison",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "model",
+        "title": "Model",
+        "type": "string"
+      },
+      {
+        "name": "parameters",
+        "title": "Parameters",
+        "type": "integer"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "logLik",
+        "title": "Log Lik.",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "dev",
+        "title": "Deviance",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "AIC",
+        "title": "AIC",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "AICc",
+        "title": "AICc",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "BIC",
+        "title": "BIC",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "weightAIC",
+        "title": "AIC weight",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "weightAICc",
+        "title": "AICc weight",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "weightBIC",
+        "title": "BIC weight",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Model Comparison"
+}

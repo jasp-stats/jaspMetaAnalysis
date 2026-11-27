@@ -1,0 +1,163 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      ".isNewGroup": true,
+      "BF": 1.085112725485372e+23,
+      "ES": -0.4275026126051146,
+      "SD": 0.041531343723290745,
+      "lb": -0.5075864963096177,
+      "model": "Fixed effects",
+      "parameter": "μ",
+      "ub": -0.3463562075119078
+    },
+    {
+      ".isNewGroup": true,
+      "BF": 43.788938383305364,
+      "ES": -0.6619330420539048,
+      "SD": 0.1913201599927263,
+      "lb": -1.0279312259738893,
+      "model": "Random effects",
+      "parameter": "μ",
+      "ub": -0.27297376167035925
+    },
+    {
+      ".footnotes": {
+        "BF": [
+          1
+        ]
+      },
+      ".isNewGroup": false,
+      "BF": 4.1733024575526825e+24,
+      "ES": 0.5661063888522812,
+      "SD": 0.16475533530367384,
+      "lb": 0.33304441954100295,
+      "model": "Random effects",
+      "parameter": "τ",
+      "ub": 0.9793162902500988
+    },
+    {
+      ".footnotes": {
+        "parameter": [
+          2
+        ]
+      },
+      ".isNewGroup": true,
+      "BF": 43.788938383305336,
+      "ES": -0.6619330862836976,
+      "SD": 0.19125484014373312,
+      "lb": -1.0355053252755682,
+      "model": "Averaged",
+      "parameter": "μ",
+      "ub": -0.27109614374100705
+    },
+    {
+      ".footnotes": {
+        "parameter": [
+          3
+        ]
+      },
+      ".isNewGroup": false,
+      "BF": 4.268607404683907e+24,
+      "ES": "",
+      "SD": "",
+      "lb": "",
+      "model": "Averaged",
+      "parameter": "τ",
+      "ub": ""
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "μ and τ are the group-level effect size and standard deviation, respectively."
+    },
+    {
+      "cols": [
+        "BF"
+      ],
+      "myOrder": 54,
+      "rows": [
+        "row2"
+      ],
+      "symbol": 0,
+      "text": "Bayes factor of the random effects H₁ over the fixed effects H₁."
+    },
+    {
+      "cols": [
+        "parameter"
+      ],
+      "myOrder": 65,
+      "rows": [
+        "row3"
+      ],
+      "symbol": 1,
+      "text": "Posterior estimates are based on the models that assume an effect to be present. The Bayes factor is based on all four models: fixed effects H₁ & random effects H₁ over the fixed effects H₀ & random effects H₀."
+    },
+    {
+      "cols": [
+        "parameter"
+      ],
+      "myOrder": 81,
+      "rows": [
+        "row4"
+      ],
+      "symbol": 2,
+      "text": "Model averaged posterior estimates for τ are not yet available, but will be added in the future. The Bayes factor is based on all four models: random effects H₀ & H₁ over the fixed effects H₀ & H₁."
+    }
+  ],
+  "name": "bmaTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "combine": true,
+        "name": "model",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "parameter",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "ES",
+        "title": "Mean",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "SD",
+        "title": "SD",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lb",
+        "overTitle": "95% Credible Interval",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "ub",
+        "overTitle": "95% Credible Interval",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "BF",
+        "title": "BF₁₀",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Posterior Estimates per Model"
+}

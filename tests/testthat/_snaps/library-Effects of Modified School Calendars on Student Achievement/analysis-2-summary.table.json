@@ -1,0 +1,49 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "method": "Independent",
+      "nClusters": 11,
+      "nInput": 56
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "56 input rows were aggregated into 11 cluster-level estimates. The aggregated effect-size and standard error columns were added to the dataset at the first row of each cluster."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Aggregation assumed independent sampling errors within clusters."
+    }
+  ],
+  "name": "summaryTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "nInput",
+        "title": "Input Rows",
+        "type": "integer"
+      },
+      {
+        "name": "nClusters",
+        "title": "Clusters",
+        "type": "integer"
+      },
+      {
+        "name": "method",
+        "title": "Method",
+        "type": "string"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Aggregation Summary"
+}

@@ -1,0 +1,36 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "count": 8,
+      "interval": "(0, 0.025]"
+    },
+    {
+      "count": 3,
+      "interval": "(0.025, 0.5]"
+    },
+    {
+      "count": 2,
+      "interval": "(0.5, 1]"
+    }
+  ],
+  "footnotes": [],
+  "name": "weightFunctionSummary_selectionFrequencies",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "interval",
+        "title": "<em>p<\/em>-Values Interval",
+        "type": "string"
+      },
+      {
+        "name": "count",
+        "title": "Estimates",
+        "type": "integer"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "P-Value Frequencies"
+}

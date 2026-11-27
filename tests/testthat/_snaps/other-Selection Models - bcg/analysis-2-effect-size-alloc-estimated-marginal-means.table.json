@@ -1,0 +1,94 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "est": -0.5715466420372635,
+      "lCi": -0.8875903864403637,
+      "lPi": -1.0154330972605519,
+      "se": 0.16124977137131755,
+      "uCi": -0.25550289763416323,
+      "uPi": -0.12766018681397512,
+      "value": "alternate"
+    },
+    {
+      "est": -0.7534592274977927,
+      "lCi": -1.0472454716423285,
+      "lPi": -1.181783746995471,
+      "se": 0.14989369522189405,
+      "uCi": -0.4596729833532568,
+      "uPi": -0.3251347080001143,
+      "value": "random"
+    },
+    {
+      "est": -0.6156943083003035,
+      "lCi": -1.010369727846987,
+      "lPi": -1.1186060535883957,
+      "se": 0.20136871017010158,
+      "uCi": -0.2210188887536199,
+      "uPi": -0.11278256301221123,
+      "value": "systematic"
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Each marginal mean estimate is averaged across the levels of the remaining predictors."
+    }
+  ],
+  "name": "estimatedMarginalMeansAndContrastsContainer_effectSize_alloc_estimatedMarginalMeansTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "value",
+        "title": "Level",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "se",
+        "title": "Standard Error",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lPi",
+        "overTitle": "95% PI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uPi",
+        "overTitle": "95% PI",
+        "title": "Upper",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Estimated Marginal Means"
+}

@@ -1,0 +1,91 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "estimate": 20.3254707402712,
+      "estimateSqrt": 4.50837783912032,
+      "level": "1",
+      "nLevels": 24,
+      "parameter": "𝜏²[1]"
+    },
+    {
+      "estimate": 36.0030944947955,
+      "estimateSqrt": 6.00025786902492,
+      "level": "2",
+      "nLevels": 22,
+      "parameter": "𝜏²[2]"
+    },
+    {
+      "estimate": 26.4067954347798,
+      "estimateSqrt": 5.13875426876785,
+      "level": "3",
+      "nLevels": 25,
+      "parameter": "𝜏²[3]"
+    },
+    {
+      "estimate": 30.1322365302863,
+      "estimateSqrt": 5.48928379028505,
+      "level": "4",
+      "nLevels": 11,
+      "parameter": "𝜏²[4]"
+    },
+    {
+      "estimate": 0.999999999135574,
+      "estimateSqrt": "",
+      "level": "",
+      "nLevels": "",
+      "parameter": "ρ"
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "Levels: ",
+      "text": "4 | 46"
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "Component: ",
+      "text": "time | study"
+    }
+  ],
+  "name": "randomEstimatesContainer_containerG_table1",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "parameter",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "level",
+        "title": "Level",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "estimate",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "estimateSqrt",
+        "title": "Sqrt. Estimate",
+        "type": "number"
+      },
+      {
+        "name": "nLevels",
+        "title": "Levels",
+        "type": "integer"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Estimates"
+}

@@ -1,0 +1,58 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "components": 5,
+      "d": 13,
+      "k": 38,
+      "m": 74,
+      "multiarm": 9,
+      "n": 8,
+      "observations": 28217
+    }
+  ],
+  "footnotes": [],
+  "name": "modelSummaryContainer_inputSummaryTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "k",
+        "title": "Studies (k)",
+        "type": "integer"
+      },
+      {
+        "name": "m",
+        "title": "Comparisons (m)",
+        "type": "integer"
+      },
+      {
+        "name": "n",
+        "title": "Treatments (n)",
+        "type": "integer"
+      },
+      {
+        "name": "d",
+        "title": "Designs (d)",
+        "type": "integer"
+      },
+      {
+        "name": "multiarm",
+        "title": "Multi-arm studies",
+        "type": "integer"
+      },
+      {
+        "name": "components",
+        "title": "Components",
+        "type": "integer"
+      },
+      {
+        "name": "observations",
+        "title": "Observations",
+        "type": "integer"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Input Summary"
+}

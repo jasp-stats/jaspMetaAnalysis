@@ -1,0 +1,91 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "df": 9,
+      "est": -0.7214659784661956,
+      "lCi": -0.8372764083466635,
+      "lPi": -0.8372764083466635,
+      "pval": 1.9372510484949977e-07,
+      "se": 0.05119468787801401,
+      "stat": -14.09259453217675,
+      "uCi": -0.6056555485857278,
+      "uPi": -0.6056555485857278
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Each marginal mean estimate is averaged across the levels of the remaining predictors."
+    }
+  ],
+  "name": "estimatedMarginalMeansAndContrastsContainer_effectSize_adjustedEstimate_estimatedMarginalMeansTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "se",
+        "title": "Standard Error",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lPi",
+        "overTitle": "95% PI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uPi",
+        "overTitle": "95% PI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "stat",
+        "title": "t",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "df",
+        "title": "df",
+        "type": "number"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Adjusted Estimate"
+}

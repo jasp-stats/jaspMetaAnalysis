@@ -1,0 +1,34 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "baseline": "independent contrast: Beta(1, 1)",
+      "effect": "Spike(0)",
+      "heterogeneity": "Spike(0)"
+    }
+  ],
+  "footnotes": [],
+  "name": "modelSpecification_componentPriorsNull",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "effect",
+        "title": "Pooled effect",
+        "type": "string"
+      },
+      {
+        "name": "heterogeneity",
+        "title": "Heterogeneity",
+        "type": "string"
+      },
+      {
+        "name": "baseline",
+        "title": "Baseline",
+        "type": "string"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Prior Distributions (Null)"
+}

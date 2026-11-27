@@ -1,0 +1,40 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "pval": 1.9967645896803787e-26,
+      "stat": "Qₑ(12) = 152.23",
+      "test": "Heterogeneity"
+    },
+    {
+      "pval": 3.5132356772046735e-05,
+      "stat": "z = -4.14",
+      "test": "Pooled effect"
+    }
+  ],
+  "footnotes": [],
+  "name": "selectionModelResults_model1_modelSummaryContainer_testsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "test",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "stat",
+        "title": "Test",
+        "type": "string"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Meta-Analytic Tests"
+}

@@ -1,0 +1,106 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "component": "Budesonide",
+      "est": 0.7314524713876025,
+      "lCi": 0.5797417723682805,
+      "pval": 0.008368881671129405,
+      "stat": -2.6368135500651855,
+      "uCi": 0.9228638393839224
+    },
+    {
+      "component": "Fluticasone",
+      "est": 0.8996346938750203,
+      "lCi": 0.8133749490866956,
+      "pval": 0.039724478031401236,
+      "stat": -2.0566024951537742,
+      "uCi": 0.9950424257992924
+    },
+    {
+      "component": "Formoterol",
+      "est": 0.9427852805013198,
+      "lCi": 0.7824692574021643,
+      "pval": 0.5355523623618554,
+      "stat": -0.6195526292020175,
+      "uCi": 1.1359476129208672
+    },
+    {
+      "component": "Salmeterol",
+      "est": 0.8229256387587949,
+      "lCi": 0.7527410571424276,
+      "pval": 1.8281430431324064e-05,
+      "stat": -4.284908631297221,
+      "uCi": 0.8996541380343959
+    },
+    {
+      "component": "Tiotropium",
+      "est": 0.687722000221269,
+      "lCi": 0.6137927606182837,
+      "pval": 1.1048557586004518e-10,
+      "stat": -6.451860066641309,
+      "uCi": 0.7705557639877032
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "The effects of the components are relative to the inactive treatment Placebo."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "The treatment effects are transformed using exponential transformation. For nonlinear transformations, the transformed estimates are interpreted as medians on the transformed scale."
+    }
+  ],
+  "name": "treatmentEffectsContainer_componentEffectsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "component",
+        "title": "Component",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "stat",
+        "title": "z",
+        "type": "number"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Component Effects"
+}

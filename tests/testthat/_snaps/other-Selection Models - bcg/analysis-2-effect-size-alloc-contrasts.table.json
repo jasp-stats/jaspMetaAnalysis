@@ -1,0 +1,112 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "comparison": "alternate – random",
+      "est": 0.1819125854605293,
+      "lCi": -0.1986360971469615,
+      "lPi": -0.3099906942486641,
+      "pval": 0.3488018138040578,
+      "se": 0.19416105888129084,
+      "stat": 0.9369159115049419,
+      "uCi": 0.5624612680680201,
+      "uPi": 0.6738158651697227
+    },
+    {
+      "comparison": "alternate – systematic",
+      "est": 0.044147666263040064,
+      "lCi": -0.5087723583161117,
+      "lPi": -0.5905743912826027,
+      "pval": 0.8756448320693475,
+      "se": 0.2821072371433937,
+      "stat": 0.156492498065904,
+      "uCi": 0.5970676908421919,
+      "uPi": 0.6788697238086827
+    },
+    {
+      "comparison": "random – systematic",
+      "est": -0.13776491919748923,
+      "lCi": -0.6597678690845933,
+      "lPi": -0.7457440442052502,
+      "pval": 0.6049706158899786,
+      "se": 0.2663329295867663,
+      "stat": -0.5172658124222225,
+      "uCi": 0.3842380306896148,
+      "uPi": 0.47021420581027173
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Each contrast is averaged across the levels of the remaining predictors."
+    }
+  ],
+  "name": "estimatedMarginalMeansAndContrastsContainer_effectSize_alloc_contrastsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "comparison",
+        "title": "Comparison",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "se",
+        "title": "Standard Error",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lPi",
+        "overTitle": "95% PI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uPi",
+        "overTitle": "95% PI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "stat",
+        "title": "z",
+        "type": "number"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Contrasts"
+}

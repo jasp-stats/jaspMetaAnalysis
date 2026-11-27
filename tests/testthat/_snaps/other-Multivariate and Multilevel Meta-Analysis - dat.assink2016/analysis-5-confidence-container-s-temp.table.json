@@ -1,0 +1,77 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "estTau": 0.2734126102208269,
+      "estTau2": 0.07475445542776582,
+      "lCiTau": 0.10684825139987922,
+      "lCiTau2": 0.01141654882721179,
+      "par": "study",
+      "uCiTau": 0.514151202825638,
+      "uCiTau2": 0.2643514593670503
+    },
+    {
+      "estTau": 0.37241648322468374,
+      "estTau2": 0.13869403697744115,
+      "lCiTau": 0.3103657928552864,
+      "lCiTau2": 0.09632692537469058,
+      "par": "study/esid",
+      "uCiTau": 0.45010492092419646,
+      "uCiTau2": 0.20259443984017714
+    }
+  ],
+  "footnotes": [],
+  "name": "randomEstimatesContainer_confidenceIntervalsContainer_confidenceContainerS_tempTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "par",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "estTau2",
+        "title": "σ²",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCiTau2",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCiTau2",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "estTau",
+        "title": "σ",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCiTau",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCiTau",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Estimates"
+}

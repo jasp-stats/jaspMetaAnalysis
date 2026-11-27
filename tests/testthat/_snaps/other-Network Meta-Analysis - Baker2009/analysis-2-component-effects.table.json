@@ -1,0 +1,114 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "component": "Budesonide",
+      "est": 0.7308632704693261,
+      "lCi": 0.5779086337758605,
+      "pval": 0.008869977094096246,
+      "stat": -2.6170252835289416,
+      "uCi": 0.9243002940293352
+    },
+    {
+      "component": "Fluticasone",
+      "est": 0.8621722302891024,
+      "lCi": 0.7481637634974695,
+      "pval": 0.04042975997066077,
+      "stat": -2.049330993285612,
+      "uCi": 0.9935538059298153
+    },
+    {
+      "component": "Formoterol",
+      "est": 0.943570527130053,
+      "lCi": 0.7816477823258373,
+      "pval": 0.5453857887911147,
+      "stat": -0.604688803783562,
+      "uCi": 1.1390364813922613
+    },
+    {
+      "component": "Salmeterol",
+      "est": 0.8013366373491875,
+      "lCi": 0.7201886638562813,
+      "pval": 4.7898074250303965e-05,
+      "stat": -4.0656534105037245,
+      "uCi": 0.8916280394080832
+    },
+    {
+      "component": "Tiotropium",
+      "est": 0.6853814945067689,
+      "lCi": 0.6104839377640182,
+      "pval": 1.5711575787292432e-10,
+      "stat": -6.398300588929125,
+      "uCi": 0.7694678990783088
+    },
+    {
+      "component": "Fluticasone * Salmeterol",
+      "est": 1.0857169987133033,
+      "lCi": 0.9009531912277594,
+      "pval": 0.38754128638973695,
+      "stat": 0.8640848398944343,
+      "uCi": 1.3083714145999723
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "The effects of the components are relative to the inactive treatment Placebo."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "The treatment effects are transformed using exponential transformation. For nonlinear transformations, the transformed estimates are interpreted as medians on the transformed scale."
+    }
+  ],
+  "name": "treatmentEffectsContainer_componentEffectsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "component",
+        "title": "Component",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "stat",
+        "title": "z",
+        "type": "number"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Component Effects"
+}

@@ -1,0 +1,276 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "QE.del": 109.11668622145605,
+      "cook.d": 0.0005520233319913735,
+      "cov.r": 1.199046528512923,
+      "dffits": -0.02155556627733687,
+      "hat": 0.009162294189379342,
+      "inf": "",
+      "label": "Aronson (1948)",
+      "rstudent": -0.2241602399874608,
+      "subgroup": "random",
+      "tau.del": 0,
+      "tau2.del": 0,
+      "weight": 0.9162294189379342
+    },
+    {
+      "QE.del": 101.51641304162887,
+      "cook.d": 0.007371512044751491,
+      "cov.r": 1.122518084874715,
+      "dffits": -0.08166509306511703,
+      "hat": 0.01533089839051234,
+      "inf": "",
+      "label": "Ferguson &amp; Simes (1949)",
+      "rstudent": -0.6544821612530669,
+      "subgroup": "",
+      "tau.del": 0,
+      "tau2.del": 0,
+      "weight": 1.533089839051234
+    },
+    {
+      "QE.del": 107.52174842051177,
+      "cook.d": 0.0010599354924634838,
+      "cov.r": 1.1791634122816375,
+      "dffits": -0.030089700305287126,
+      "hat": 0.0071818330951681775,
+      "inf": "",
+      "label": "Rosenthal et al (1960)",
+      "rstudent": -0.3537814567691507,
+      "subgroup": "",
+      "tau.del": 0,
+      "tau2.del": 0,
+      "weight": 0.7181833095168179
+    },
+    {
+      "QE.del": 32.944931557967244,
+      "cook.d": 0.7369718779259077,
+      "cov.r": 0.4215484250755167,
+      "dffits": -1.4333671820601848,
+      "hat": 0.1490803920799002,
+      "inf": "Yes",
+      "label": "Hart &amp; Sutherland (1977)",
+      "rstudent": -3.4244549659002304,
+      "subgroup": "",
+      "tau.del": 0,
+      "tau2.del": 0,
+      "weight": 14.90803920799002
+    },
+    {
+      "QE.del": 102.21797939361593,
+      "cook.d": 0.005901051450385293,
+      "cov.r": 1.1280362538080366,
+      "dffits": -0.07281609057175789,
+      "hat": 0.013376110738137282,
+      "inf": "",
+      "label": "Vandiviere et al (1973)",
+      "rstudent": -0.6253717285702936,
+      "subgroup": "",
+      "tau.del": 0,
+      "tau2.del": 0,
+      "weight": 1.3376110738137281
+    },
+    {
+      "QE.del": 14.211401878109191,
+      "cook.d": 15.933647927117837,
+      "cov.r": 0.6264732550490939,
+      "dffits": 10.147649342753985,
+      "hat": 0.7530086303370932,
+      "inf": "Yes",
+      "label": "TPT Madras (1980)",
+      "rstudent": 5.811742500972894,
+      "subgroup": "",
+      "tau.del": 0,
+      "tau2.del": 0,
+      "weight": 75.30086303370932
+    },
+    {
+      "QE.del": 109.64108672275131,
+      "cook.d": 0.0017384310775238807,
+      "cov.r": 1.260394423720767,
+      "dffits": -0.038160879594100444,
+      "hat": 0.0528598411698095,
+      "inf": "",
+      "label": "Coetzee &amp; Berjak (1968)",
+      "rstudent": -0.1615334895607555,
+      "subgroup": "",
+      "tau.del": 0,
+      "tau2.del": 0,
+      "weight": 5.285984116980949
+    },
+    {
+      "QE.del": 0,
+      "cook.d": 0.13484856940296744,
+      "cov.r": 0.20401722492093152,
+      "dffits": 0.8660813984740142,
+      "hat": 0.11882516578745861,
+      "inf": "",
+      "label": "Frimodt-Moller et al (1973)",
+      "rstudent": 2.358498146614995,
+      "subgroup": "alternate",
+      "tau.del": 0,
+      "tau2.del": 0,
+      "weight": 11.88251657874586
+    },
+    {
+      "QE.del": 0,
+      "cook.d": 7.41572568717211,
+      "cov.r": 1.5129357754717225,
+      "dffits": -6.422622073845701,
+      "hat": 0.8811748342125414,
+      "inf": "Yes",
+      "label": "Stein &amp; Aronson (1953)",
+      "rstudent": -2.3584981466149957,
+      "subgroup": "",
+      "tau.del": 0,
+      "tau2.del": 0,
+      "weight": 88.11748342125412
+    },
+    {
+      "QE.del": 2.239117778261157,
+      "cook.d": 0.3684645293725341,
+      "cov.r": 0.2311705209897053,
+      "dffits": -1.3491533885704392,
+      "hat": 0.12432978550240649,
+      "inf": "Yes",
+      "label": "Rosenthal et al (1961)",
+      "rstudent": -3.58050286122063,
+      "subgroup": "systematic",
+      "tau.del": 0,
+      "tau2.del": 0,
+      "weight": 12.432978550240648
+    },
+    {
+      "QE.del": 14.950279146741902,
+      "cook.d": 0.8085224522419601,
+      "cov.r": 5.033289384230578,
+      "dffits": 0.7734341534028696,
+      "hat": 0.7314695791500287,
+      "inf": "Yes",
+      "label": "Comstock et al (1974)",
+      "rstudent": 0.46862122771787923,
+      "subgroup": "",
+      "tau.del": 0,
+      "tau2.del": 0,
+      "weight": 73.14695791500286
+    },
+    {
+      "QE.del": 15.18135765561318,
+      "cook.d": 0.0044237508282874306,
+      "cov.r": 1.3962886888743296,
+      "dffits": 0.05677301740030711,
+      "hat": 0.01704987280585724,
+      "inf": "",
+      "label": "Comstock &amp; Webster (1969)",
+      "rstudent": 0.43106935216190995,
+      "subgroup": "",
+      "tau.del": 0,
+      "tau2.del": 0,
+      "weight": 1.704987280585724
+    },
+    {
+      "QE.del": 14.075599389813739,
+      "cook.d": 0.06627687965794975,
+      "cov.r": 1.4578866265557016,
+      "dffits": 0.228217809334783,
+      "hat": 0.12715076254170757,
+      "inf": "",
+      "label": "Comstock et al (1976)",
+      "rstudent": 0.5979428349184766,
+      "subgroup": "",
+      "tau.del": 0,
+      "tau2.del": 0,
+      "weight": 12.715076254170757
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Diagnostics are based on the subgroup models."
+    }
+  ],
+  "name": "casewiseDiagnosticsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "subgroup",
+        "title": "Subgroup",
+        "type": "string"
+      },
+      {
+        "name": "label",
+        "title": "Label",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "rstudent",
+        "title": "Standardized Residual",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "dffits",
+        "title": "DFFITS",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "cook.d",
+        "title": "Cook's Distance",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "cov.r",
+        "title": "Covariance ratio",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "tau.del",
+        "overTitle": "Leave One Out",
+        "title": "𝜏",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "tau2.del",
+        "overTitle": "Leave One Out",
+        "title": "𝜏²",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "QE.del",
+        "overTitle": "Leave One Out",
+        "title": "Qₑ",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "hat",
+        "title": "Hat",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "weight",
+        "title": "Weight",
+        "type": "number"
+      },
+      {
+        "name": "inf",
+        "title": "Influential",
+        "type": "string"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Casewise Diagnostics Table"
+}

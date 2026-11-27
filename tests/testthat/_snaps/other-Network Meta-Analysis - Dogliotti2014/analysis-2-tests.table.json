@@ -1,0 +1,43 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "pval": 0.36841062743977604,
+      "stat": "Q(5) = 5.41",
+      "test": "Between designs"
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "Warning:",
+      "text": "Study 'WASPO, 2007' without any events excluded from network meta-analysis."
+    }
+  ],
+  "name": "modelSummaryContainer_testsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "test",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "stat",
+        "title": "Test",
+        "type": "string"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Network Meta-Analytic Tests"
+}

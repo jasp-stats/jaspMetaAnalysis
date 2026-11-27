@@ -1,0 +1,65 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "est": "-0.0008722081",
+      "lCi": "-0.2261102",
+      "par": "Pooled effect",
+      "uCi": "0.2244543"
+    },
+    {
+      "est": "3.6048415839123",
+      "lCi": "",
+      "par": "γ",
+      "uCi": ""
+    },
+    {
+      "est": "1.89864203680217",
+      "lCi": "",
+      "par": "√γ",
+      "uCi": ""
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "The pooled effect is transformed using Fisher's z to r transformation. For nonlinear transformations, the transformed estimate is interpreted as a median on the transformed scale."
+    }
+  ],
+  "name": "modelSummaryContainer_pooledEstimatesTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "par",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Meta-Analytic Estimates"
+}

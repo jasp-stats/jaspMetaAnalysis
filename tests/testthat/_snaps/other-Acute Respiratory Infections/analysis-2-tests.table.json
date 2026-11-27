@@ -1,0 +1,49 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "bf": 2.421436716077537,
+      "postProb": 0.7077251216423383,
+      "priorProb": 0.5,
+      "test": "Pooled effect"
+    },
+    {
+      "bf": 1.2859972573518208,
+      "postProb": 0.5625541558354996,
+      "priorProb": 0.5,
+      "test": "Heterogeneity"
+    }
+  ],
+  "footnotes": [],
+  "name": "modelSummaryContainer_testsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "test",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "priorProb",
+        "title": "P(M)",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "postProb",
+        "title": "P(M|data)",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "bf",
+        "title": "Inclusion BF",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Meta-Analytic Tests"
+}

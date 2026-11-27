@@ -1,3 +1,4 @@
+jaspTools::preserveSnapshotReferences()
 context("Library: Effects of Modified School Calendars on Student Achievement")
 
 # This test file was auto-generated from a JASP example file.
@@ -13,15 +14,11 @@ test_that("ClassicalMetaAnalysisMultilevelMultivariate (analysis 1) results matc
   set.seed(1)
   results <- jaspTools::runAnalysis("ClassicalMetaAnalysisMultilevelMultivariate", dataset, opts, view = FALSE)
 
-  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(0.1847132, 0.01525932, -0.4645113, "Pooled effect", 0.08455592,
-     0.354167, 0.8339376))
+  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]]
+  jaspTools::expect_snapshot_table(table, "analysis-1-pooled-estimates")
 
-  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_testsTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(1.7968303019345e-88, "Q<unicode>(55) = 578.86", "Heterogeneity",
-     0.0332050188118433, "t(55) = 2.18", "Pooled effect"))
+  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_testsTable"]]
+  jaspTools::expect_snapshot_table(table, "analysis-1-tests")
 
   plotName <- results[["results"]][["profileLikelihoodPlot"]][["collection"]][["profileLikelihoodPlot_plot1"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
@@ -31,25 +28,14 @@ test_that("ClassicalMetaAnalysisMultilevelMultivariate (analysis 1) results matc
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "analysis-1_figure-2_profile-plot-for-sigma-2-2")
 
-  table <- results[["results"]][["randomEstimatesContainer"]][["collection"]][["randomEstimatesContainer_containerS"]][["collection"]][["randomEstimatesContainer_containerS_tableS"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list("district", 11, 0.255072429499733, 0.0650619442908961, "district/school",
-     56, 0.180932354841744, 0.0327365170285789))
+  table <- results[["results"]][["randomEstimatesContainer"]][["collection"]][["randomEstimatesContainer_containerS"]][["collection"]][["randomEstimatesContainer_containerS_tableS"]]
+  jaspTools::expect_snapshot_table(table, "analysis-1-random-estimates-s")
 
-  table <- results[["results"]][["randomEstimatesContainer"]][["collection"]][["randomEstimatesContainer_inclusionTestsContainer"]][["collection"]][["randomEstimatesContainer_inclusionTestsContainer_tableInclusion"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(21.9174480674219, 22.388036302716, 27.9394476231193, "", 3, -7.95872403371093,
-     "", "", 439.723624453116, 439.799096151229, 441.730957638348,
-     421.806176385694, 1, -218.861812226558, "Component 1", 2.54655219172131e-92
-    ))
+  table <- results[["results"]][["randomEstimatesContainer"]][["collection"]][["randomEstimatesContainer_inclusionTestsContainer"]][["collection"]][["randomEstimatesContainer_inclusionTestsContainer_tableInclusion"]]
+  jaspTools::expect_snapshot_table(table, "analysis-1-random-estimates-inclusion")
 
-  table <- results[["results"]][["randomEstimatesContainer"]][["collection"]][["randomEstimatesContainer_inclusionTestsContainer"]][["collection"]][["randomEstimatesContainer_inclusionTestsContainer_tableInclusion1"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(21.9174480674219, 22.388036302716, 27.9394476231193, "", 3, -7.95872403371093,
-     "", "", 37.6909989052213, 37.9217681359905, 41.7056652756862,
-     17.7735508377994, 2, -16.8454994526106, "district", 2.48818251251384e-05,
-     68.4329523719603, 68.6637216027295, 72.4476187424252, 48.5155043045384,
-     2, -32.2164761859801, "school", 3.27687921744215e-12))
+  table <- results[["results"]][["randomEstimatesContainer"]][["collection"]][["randomEstimatesContainer_inclusionTestsContainer"]][["collection"]][["randomEstimatesContainer_inclusionTestsContainer_tableInclusion1"]]
+  jaspTools::expect_snapshot_table(table, "analysis-1-random-estimates-inclusion1")
 
 })
 
@@ -63,9 +49,8 @@ test_that("EffectSizeAggregation (analysis 2) results match", {
   set.seed(1)
   results <- jaspTools::runAnalysis("EffectSizeAggregation", dataset, opts, view = FALSE)
 
-  table <- results[["results"]][["summaryTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list("Independent", 11, 56))
+  table <- results[["results"]][["summaryTable"]]
+  jaspTools::expect_snapshot_table(table, "analysis-2-summary")
 
 })
 
@@ -79,18 +64,11 @@ test_that("ClassicalMetaAnalysis (analysis 3) results match", {
   set.seed(1)
   results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", dataset, opts, view = FALSE)
 
-  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(0.1960299, -0.003266479, -0.4755446, "Pooled effect", 0.08944523,
-     0.3953263, 0.8676044, 0.287828331811827, 0.193633194775452,
-     "", "𝜏", 0.0689964199690152, 0.513389932442685, "", 0.0828451485935791,
-     0.037493814118948, "", "𝜏<unicode>", 0.0397182489213397, 0.263569222733505,
-     ""))
+  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]]
+  jaspTools::expect_snapshot_table(table, "analysis-3-pooled-estimates")
 
-  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_testsTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(3.83843303769695e-83, "Q<unicode>(10) = 415.92", "Heterogeneity",
-     0.0531900165513901, "t(10) = 2.19", "Pooled effect"))
+  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_testsTable"]]
+  jaspTools::expect_snapshot_table(table, "analysis-3-tests")
 
 })
 

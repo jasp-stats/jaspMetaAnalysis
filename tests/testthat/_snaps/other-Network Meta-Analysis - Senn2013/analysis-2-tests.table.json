@@ -1,0 +1,107 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "pval": 7.871368552046784e-13,
+      "stat": "Q(18) = 96.99",
+      "subgroup": "Full dataset",
+      "test": "Total"
+    },
+    {
+      "pval": 0.013105480412528452,
+      "stat": "Q(4) = 12.65",
+      "subgroup": "before 2000",
+      "test": ""
+    },
+    {
+      "pval": 4.199487066491171e-05,
+      "stat": "Q(9) = 35.86",
+      "subgroup": "2000 and later",
+      "test": ""
+    },
+    {
+      "pval": 1.7239435555580576e-11,
+      "stat": "Q(11) = 74.46",
+      "subgroup": "Full dataset",
+      "test": "Within designs"
+    },
+    {
+      "pval": 0.03977014038011196,
+      "stat": "Q(2) = 6.45",
+      "subgroup": "before 2000",
+      "test": ""
+    },
+    {
+      "pval": 0.0011529363987882978,
+      "stat": "Q(6) = 22.12",
+      "subgroup": "2000 and later",
+      "test": ""
+    },
+    {
+      "pval": 0.002057014238009823,
+      "stat": "Q(7) = 22.53",
+      "subgroup": "Full dataset",
+      "test": "Between designs"
+    },
+    {
+      "pval": 0.04497988122476113,
+      "stat": "Q(2) = 6.20",
+      "subgroup": "before 2000",
+      "test": ""
+    },
+    {
+      "pval": 0.0032787566110330808,
+      "stat": "Q(3) = 13.74",
+      "subgroup": "2000 and later",
+      "test": ""
+    },
+    {
+      "pval": 0.9483271073511128,
+      "stat": "Q(7) = 2.19",
+      "subgroup": "Full dataset",
+      "test": "Between designs (design-by-treatment interaction)"
+    },
+    {
+      "pval": 0.38153377268634503,
+      "stat": "Q(2) = 1.93",
+      "subgroup": "before 2000",
+      "test": ""
+    },
+    {
+      "pval": 0.41136530297693336,
+      "stat": "Q(3) = 2.87",
+      "subgroup": "2000 and later",
+      "test": ""
+    }
+  ],
+  "footnotes": [],
+  "name": "modelSummaryContainer_testsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "test",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "subgroup",
+        "title": "Subgroup",
+        "type": "string"
+      },
+      {
+        "name": "stat",
+        "title": "Test",
+        "type": "string"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Network Meta-Analytic Tests"
+}

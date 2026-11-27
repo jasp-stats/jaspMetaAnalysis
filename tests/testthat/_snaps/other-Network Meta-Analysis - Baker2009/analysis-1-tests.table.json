@@ -1,0 +1,53 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "pval": 0.07498991015557832,
+      "stat": "Q(48) = 62.74",
+      "test": "Additive model"
+    },
+    {
+      "pval": 0.06996737008434321,
+      "stat": "Q(46) = 60.86",
+      "test": "Standard model"
+    },
+    {
+      "pval": 0.39082744575326644,
+      "stat": "Q(2) = 1.88",
+      "test": "Difference"
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "1 study was excluded because none of its effect sizes could be computed (e.g., events in all or in none of the participants of the compared arms): 'DalNegro 2003'."
+    }
+  ],
+  "name": "modelSummaryContainer_testsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "test",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "stat",
+        "title": "Test",
+        "type": "string"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Network Meta-Analytic Tests"
+}

@@ -1,0 +1,68 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "d": 15,
+      "k": 26,
+      "m": 28,
+      "multiarm": 1,
+      "n": 10,
+      "subgroup": "Full dataset"
+    },
+    {
+      "d": 7,
+      "k": 9,
+      "m": 11,
+      "multiarm": 1,
+      "n": 7,
+      "subgroup": "before 2000"
+    },
+    {
+      "d": 11,
+      "k": 17,
+      "m": 17,
+      "multiarm": 0,
+      "n": 9,
+      "subgroup": "2000 and later"
+    }
+  ],
+  "footnotes": [],
+  "name": "modelSummaryContainer_inputSummaryTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "subgroup",
+        "title": "Subgroup",
+        "type": "string"
+      },
+      {
+        "name": "k",
+        "title": "Studies (k)",
+        "type": "integer"
+      },
+      {
+        "name": "m",
+        "title": "Comparisons (m)",
+        "type": "integer"
+      },
+      {
+        "name": "n",
+        "title": "Treatments (n)",
+        "type": "integer"
+      },
+      {
+        "name": "d",
+        "title": "Designs (d)",
+        "type": "integer"
+      },
+      {
+        "name": "multiarm",
+        "title": "Multi-arm studies",
+        "type": "integer"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Input Summary"
+}

@@ -1,0 +1,45 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "component": "Pooled effect",
+      "models": "1/2",
+      "priorProb": 0.5
+    },
+    {
+      "component": "Heterogeneity",
+      "models": "1/2",
+      "priorProb": 0.5
+    },
+    {
+      "component": "Baseline",
+      "models": "0/1",
+      "priorProb": 0
+    }
+  ],
+  "footnotes": [],
+  "name": "modelSpecification_overallSummary",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "component",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "models",
+        "title": "Models",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "priorProb",
+        "title": "P(M)",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Model Components"
+}

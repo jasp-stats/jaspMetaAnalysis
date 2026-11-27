@@ -1,0 +1,98 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "AIC": 142.22241023463724,
+      "AICc": 142.8817508939779,
+      "BIC": 155.09596512715416,
+      "LRT": "",
+      "df": 5,
+      "logLik": -66.11120511731862,
+      "model": "",
+      "pval": ""
+    },
+    {
+      "AIC": 147.39197720877164,
+      "AICc": 147.8267598174673,
+      "BIC": 157.69082112278517,
+      "LRT": 7.169566974134398,
+      "df": 4,
+      "logLik": -69.69598860438582,
+      "model": "study",
+      "pval": 0.007415067163382751
+    },
+    {
+      "AIC": 553.6275938115743,
+      "AICc": 554.06237642027,
+      "BIC": 563.9264377255879,
+      "LRT": 413.40518357693713,
+      "df": 4,
+      "logLik": -272.81379690578717,
+      "model": "esid",
+      "pval": 6.651396572083173e-92
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Likelihood Ratio Test (LRT) and p-value are based on a comparison with the complete model."
+    }
+  ],
+  "name": "randomEstimatesContainer_inclusionTestsContainer_tableInclusion1",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "model",
+        "title": "Removed Levels",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "logLik",
+        "title": "Log Lik.",
+        "type": "number"
+      },
+      {
+        "name": "df",
+        "title": "df",
+        "type": "integer"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "AIC",
+        "title": "AIC",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "BIC",
+        "title": "BIC",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "AICc",
+        "title": "AICc",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "LRT",
+        "title": "LRT",
+        "type": "number"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Component 1: Level Inclusion Test"
+}

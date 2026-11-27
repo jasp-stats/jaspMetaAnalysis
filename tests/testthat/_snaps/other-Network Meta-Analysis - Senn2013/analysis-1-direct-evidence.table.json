@@ -1,0 +1,307 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "comparison": "Acarbose vs. Benfluorex",
+      "meanPath": 2.7810054064917598,
+      "minPar": 1.0000000000000002,
+      "proportion": 0
+    },
+    {
+      "comparison": "Acarbose vs. Metformin",
+      "meanPath": 2.008230917118884,
+      "minPar": 2.503695685241404,
+      "proportion": 0.281224092924669
+    },
+    {
+      "comparison": "Acarbose vs. Miglitol",
+      "meanPath": 2.78100540649176,
+      "minPar": 1.0000000000000002,
+      "proportion": 0
+    },
+    {
+      "comparison": "Acarbose vs. Pioglitazone",
+      "meanPath": 2.4710661915698617,
+      "minPar": 2.311900490252513,
+      "proportion": 0
+    },
+    {
+      "comparison": "Acarbose vs. Placebo",
+      "meanPath": 1.78100540649176,
+      "minPar": 2.138478354189348,
+      "proportion": 0.6525787713202571
+    },
+    {
+      "comparison": "Acarbose vs. Rosiglitazone",
+      "meanPath": 2.213711516882384,
+      "minPar": 1.816207545661179,
+      "proportion": 0
+    },
+    {
+      "comparison": "Acarbose vs. Sitagliptin",
+      "meanPath": 2.781005406491758,
+      "minPar": 1,
+      "proportion": 0
+    },
+    {
+      "comparison": "Acarbose vs. Sulfonylurea",
+      "meanPath": 1.8192536589048252,
+      "minPar": 1.8827208937546502,
+      "proportion": 0.5311461743040053
+    },
+    {
+      "comparison": "Acarbose vs. Vildagliptin",
+      "meanPath": 2.781005406491759,
+      "minPar": 1.0000000000000004,
+      "proportion": 0
+    },
+    {
+      "comparison": "Benfluorex vs. Metformin",
+      "meanPath": 2.565835958167856,
+      "minPar": 1,
+      "proportion": 0
+    },
+    {
+      "comparison": "Benfluorex vs. Miglitol",
+      "meanPath": 2,
+      "minPar": 1,
+      "proportion": 0
+    },
+    {
+      "comparison": "Benfluorex vs. Pioglitazone",
+      "meanPath": 2.7180596923225164,
+      "minPar": 1,
+      "proportion": 0
+    },
+    {
+      "comparison": "Benfluorex vs. Placebo",
+      "meanPath": 1,
+      "minPar": 1,
+      "proportion": 1
+    },
+    {
+      "comparison": "Benfluorex vs. Rosiglitazone",
+      "meanPath": 2.306359514547846,
+      "minPar": 1,
+      "proportion": 0
+    },
+    {
+      "comparison": "Benfluorex vs. Sitagliptin",
+      "meanPath": 2.000000000000002,
+      "minPar": 0.9999999999999998,
+      "proportion": 0
+    },
+    {
+      "comparison": "Benfluorex vs. Sulfonylurea",
+      "meanPath": 3.1121135170370025,
+      "minPar": 1,
+      "proportion": 0
+    },
+    {
+      "comparison": "Benfluorex vs. Vildagliptin",
+      "meanPath": 2.000000000000001,
+      "minPar": 0.9999999999999998,
+      "proportion": 0
+    },
+    {
+      "comparison": "Metformin vs. Miglitol",
+      "meanPath": 2.565835958167856,
+      "minPar": 1.0000000000000002,
+      "proportion": 0
+    },
+    {
+      "comparison": "Metformin vs. Pioglitazone",
+      "meanPath": 1.6908759672874414,
+      "minPar": 2.278568360669016,
+      "proportion": 0.43887206425809727
+    },
+    {
+      "comparison": "Metformin vs. Placebo",
+      "meanPath": 1.5658359581678558,
+      "minPar": 2.1488609339963913,
+      "proportion": 0.5605774160236129
+    },
+    {
+      "comparison": "Metformin vs. Rosiglitazone",
+      "meanPath": 1.7237121825294208,
+      "minPar": 2.1790467502251523,
+      "proportion": 0.33867982775447747
+    },
+    {
+      "comparison": "Metformin vs. Sitagliptin",
+      "meanPath": 2.5658359581678543,
+      "minPar": 1,
+      "proportion": 0
+    },
+    {
+      "comparison": "Metformin vs. Sulfonylurea",
+      "meanPath": 1.8531212959227992,
+      "minPar": 2.217670416192454,
+      "proportion": 0.4509236326094445
+    },
+    {
+      "comparison": "Metformin vs. Vildagliptin",
+      "meanPath": 2.565835958167855,
+      "minPar": 1.0000000000000002,
+      "proportion": 0
+    },
+    {
+      "comparison": "Miglitol vs. Pioglitazone",
+      "meanPath": 2.718059692322517,
+      "minPar": 1.0000000000000002,
+      "proportion": 0
+    },
+    {
+      "comparison": "Miglitol vs. Placebo",
+      "meanPath": 1,
+      "minPar": 1.0000000000000002,
+      "proportion": 0.9999999999999994
+    },
+    {
+      "comparison": "Miglitol vs. Rosiglitazone",
+      "meanPath": 2.3063595145478466,
+      "minPar": 1.0000000000000002,
+      "proportion": 0
+    },
+    {
+      "comparison": "Miglitol vs. Sitagliptin",
+      "meanPath": 2.000000000000002,
+      "minPar": 0.9999999999999998,
+      "proportion": 0
+    },
+    {
+      "comparison": "Miglitol vs. Sulfonylurea",
+      "meanPath": 3.112113517037003,
+      "minPar": 1,
+      "proportion": 0
+    },
+    {
+      "comparison": "Miglitol vs. Vildagliptin",
+      "meanPath": 2.0000000000000004,
+      "minPar": 1.0000000000000002,
+      "proportion": 0
+    },
+    {
+      "comparison": "Pioglitazone vs. Placebo",
+      "meanPath": 1.7180596923225167,
+      "minPar": 2.5869157047292437,
+      "proportion": 0.386560721005273
+    },
+    {
+      "comparison": "Pioglitazone vs. Rosiglitazone",
+      "meanPath": 1.8132943423072465,
+      "minPar": 2.3620827039216135,
+      "proportion": 0.3528382391648056
+    },
+    {
+      "comparison": "Pioglitazone vs. Sitagliptin",
+      "meanPath": 2.7180596923225155,
+      "minPar": 0.9999999999999998,
+      "proportion": 0
+    },
+    {
+      "comparison": "Pioglitazone vs. Sulfonylurea",
+      "meanPath": 2.3823114149002,
+      "minPar": 2.5649465539062493,
+      "proportion": 0
+    },
+    {
+      "comparison": "Pioglitazone vs. Vildagliptin",
+      "meanPath": 2.718059692322516,
+      "minPar": 1.0000000000000002,
+      "proportion": 0
+    },
+    {
+      "comparison": "Placebo vs. Rosiglitazone",
+      "meanPath": 1.3063595145478464,
+      "minPar": 1.3218773133517476,
+      "proportion": 0.7564998581180002
+    },
+    {
+      "comparison": "Placebo vs. Sitagliptin",
+      "meanPath": 1.0000000000000027,
+      "minPar": 0.9999999999999998,
+      "proportion": 1
+    },
+    {
+      "comparison": "Placebo vs. Sulfonylurea",
+      "meanPath": 2.112113517037003,
+      "minPar": 2.3831223769998022,
+      "proportion": 0
+    },
+    {
+      "comparison": "Placebo vs. Vildagliptin",
+      "meanPath": 1.0000000000000009,
+      "minPar": 1.0000000000000002,
+      "proportion": 0.9999999999999997
+    },
+    {
+      "comparison": "Rosiglitazone vs. Sitagliptin",
+      "meanPath": 2.306359514547845,
+      "minPar": 1,
+      "proportion": 0
+    },
+    {
+      "comparison": "Rosiglitazone vs. Sulfonylurea",
+      "meanPath": 1.9787700422674122,
+      "minPar": 2.299801756210593,
+      "proportion": 0.4348200871225138
+    },
+    {
+      "comparison": "Rosiglitazone vs. Vildagliptin",
+      "meanPath": 2.3063595145478457,
+      "minPar": 1.0000000000000002,
+      "proportion": 0
+    },
+    {
+      "comparison": "Sitagliptin vs. Sulfonylurea",
+      "meanPath": 3.1121135170370007,
+      "minPar": 1,
+      "proportion": 0
+    },
+    {
+      "comparison": "Sitagliptin vs. Vildagliptin",
+      "meanPath": 2.0000000000000013,
+      "minPar": 1,
+      "proportion": 0
+    },
+    {
+      "comparison": "Sulfonylurea vs. Vildagliptin",
+      "meanPath": 3.1121135170370016,
+      "minPar": 1.0000000000000004,
+      "proportion": 0
+    }
+  ],
+  "footnotes": [],
+  "name": "evidenceContainer_directEvidenceTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "comparison",
+        "title": "Comparison",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "proportion",
+        "title": "Direct evidence proportion",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "meanPath",
+        "title": "Mean path length",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "minPar",
+        "title": "Minimal parallelism",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Direct Evidence"
+}

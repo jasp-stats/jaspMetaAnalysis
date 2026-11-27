@@ -1,0 +1,48 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "computed": 13,
+      "effectSize": "RR",
+      "step": 1,
+      "totalComputed": 13
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Effect sizes were successfully computed and added to the dataset for each data entry."
+    }
+  ],
+  "name": "computeSummary",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "step",
+        "title": "Step",
+        "type": "integer"
+      },
+      {
+        "name": "effectSize",
+        "title": "Effect Size",
+        "type": "string"
+      },
+      {
+        "name": "computed",
+        "title": "Computed",
+        "type": "integer"
+      },
+      {
+        "name": "totalComputed",
+        "title": "Total Computed",
+        "type": "integer"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Summary"
+}

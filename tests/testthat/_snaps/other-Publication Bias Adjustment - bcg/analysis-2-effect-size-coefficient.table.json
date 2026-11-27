@@ -1,0 +1,111 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "df": 2,
+      "est": -88.23550083915566,
+      "lCi": -619.9997320088899,
+      "name": "Intercept",
+      "pval": 0.549340042595972,
+      "se": 123.58985597257299,
+      "stat": -0.7139380505365817,
+      "uCi": 443.5287303305786
+    },
+    {
+      "df": 2,
+      "est": 0.04475708147415249,
+      "lCi": -0.22719065931790441,
+      "name": "year",
+      "pval": 0.5522692420625113,
+      "se": 0.06320466881088309,
+      "stat": 0.708129356837099,
+      "uCi": 0.3167048222662094
+    },
+    {
+      "df": 2,
+      "est": -0.574434065968128,
+      "lCi": -7.449197389013686,
+      "name": "alloc (random)",
+      "pval": 0.7536201460588478,
+      "se": 1.5977964653089407,
+      "stat": -0.3595164205455034,
+      "uCi": 6.30032925707743
+    },
+    {
+      "df": 2,
+      "est": -0.4543368191142696,
+      "lCi": -6.668032256816519,
+      "name": "alloc (systematic)",
+      "pval": 0.7828496360501386,
+      "se": 1.4441545316310163,
+      "stat": -0.3146040185887485,
+      "uCi": 5.759358618587981
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "Warning:",
+      "text": "Knapp-Hartung inference is based on very few residual degrees of freedom; results can be sensitive and should be interpreted cautiously."
+    }
+  ],
+  "name": "metaregressionContainer_effectSizeCoefficientTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "name",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "se",
+        "title": "Standard Error",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "stat",
+        "title": "t",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "df",
+        "title": "df",
+        "type": "number"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Effect Size Meta-Regression Coefficients"
+}
