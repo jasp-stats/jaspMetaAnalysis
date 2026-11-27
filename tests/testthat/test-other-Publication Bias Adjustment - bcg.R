@@ -8,12 +8,10 @@ test_that("WaapWls (analysis 1) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Publication Bias Adjustment - bcg.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[1]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("WaapWls", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("WaapWls", dataset, opts, view = FALSE)
 
   plotName <- results[["results"]][["baujatPlot"]][["collection"]][["baujatPlot_subgroupalternate"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
@@ -96,12 +94,10 @@ test_that("WaapWls (analysis 2) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Publication Bias Adjustment - bcg.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[2]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("WaapWls", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("WaapWls", dataset, opts, view = FALSE)
 
   plotName <- results[["results"]][["bubblePlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
@@ -111,17 +107,17 @@ test_that("WaapWls (analysis 2) results match", {
   jaspTools::expect_equal_tables(table,
     list(2, -88.2355008361923, -619.999731956146, "Intercept", 0.549340042574413,
      123.589855961003, -0.713938050579439, 443.528730283761, 2, 0.0447570814726275,
-     -0.227190659293973, "jaspColumn2", 0.5522692420412, 0.0632046688049667,
+     -0.227190659293973, "year", 0.5522692420412, 0.0632046688049667,
      0.708129356879256, 0.316704822239228, 2, -0.574434065890861,
-     -7.44919738832706, "jaspColumn1 (random)", 0.753620146069464,
+     -7.44919738832706, "alloc (random)", 0.753620146069464,
      1.59779646516732, -0.359516420529012, 6.30032925654534, 2, -0.454336819106728,
-     -6.66803225627946, "jaspColumn1 (systematic)", 0.78284963603594,
+     -6.66803225627946, "alloc (systematic)", 0.78284963603594,
      1.44415453150795, -0.314604018610337, 5.759358618066))
 
   table <- results[["results"]][["metaregressionContainer"]][["collection"]][["metaregressionContainer_effectSizeTermsTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(1, 2, 0.5522692420412, 0.501447186074229, "jaspColumn2", 2, 2,
-     0.939228282699013, 0.0647038834119758, "jaspColumn1"))
+    list(1, 2, 0.5522692420412, 0.501447186074229, "year", 2, 2,
+     0.939228282699013, 0.0647038834119758, "alloc"))
 
   table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
@@ -142,12 +138,10 @@ test_that("PetPeese (analysis 3) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Publication Bias Adjustment - bcg.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[3]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("PetPeese", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("PetPeese", dataset, opts, view = FALSE)
 
   table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
@@ -205,14 +199,12 @@ test_that("PetPeese (analysis 4) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Publication Bias Adjustment - bcg.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[4]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("PetPeese", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("PetPeese", dataset, opts, view = FALSE)
 
-  table <- results[["results"]][["estimatedMarginalMeansAndContrastsContainer"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize_jaspColumn2"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize_jaspColumn2_estimatedMarginalMeansTable"]][["data"]]
+  table <- results[["results"]][["estimatedMarginalMeansAndContrastsContainer"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize_year"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize_year_estimatedMarginalMeansTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
     list(0.472650670351467, 0.233659148826611, 0.161143927037911, 0.956087777027153,
      1.3863299740184, "Mean - 1SD", 0.483264179877859, 0.315677940729823,
@@ -228,21 +220,21 @@ test_that("PetPeese (analysis 4) results match", {
   jaspTools::expect_equal_tables(table,
     list(9, -3.79562988382569, -85.7509951571378, "Intercept", 0.918857515499877,
      36.2288556343876, -0.104768141785383, 78.1597353894864, 9, 0.00203122067084694,
-     -0.0393159897470378, "jaspColumn2", 0.913951653703273, 0.0182777797660795,
+     -0.0393159897470378, "year", 0.913951653703273, 0.0182777797660795,
      0.11113060212141, 0.0433784310887317, 9, -0.0276559464814083,
-     -0.0554634729760006, "jaspColumn3", 0.0510177581537889, 0.0122924821280744,
+     -0.0554634729760006, "ablat", 0.0510177581537889, 0.0122924821280744,
      -2.24982604760074, 0.000151580013184074))
 
   table <- results[["results"]][["metaregressionContainer"]][["collection"]][["metaregressionContainer_effectSizeCorrelationTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(1, -0.999954187186916, -0.57750926488372, "Intercept", -0.999954187186916,
-     1, 0.570763765385701, "jaspColumn2", -0.57750926488372, 0.570763765385701,
-     1, "jaspColumn3"))
+    list(1, -0.577509264865942, "Intercept", -0.999954187186916, -0.999954187186916,
+     0.57076376536781, "year", 1, -0.577509264865942, 1, "ablat",
+     0.57076376536781))
 
   table <- results[["results"]][["metaregressionContainer"]][["collection"]][["metaregressionContainer_effectSizeTermsTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(1, 9, 0.913951653703273, 0.0123500107278671, "jaspColumn2", 1,
-     9, 0.0510177581537889, 5.06171724446276, "jaspColumn3"))
+    list(1, 9, 0.913951653703273, 0.0123500107278671, "year", 1,
+     9, 0.0510177581537889, 5.06171724446276, "ablat"))
 
   table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
@@ -269,8 +261,8 @@ test_that("PetPeese (analysis 4) results match", {
 
   table <- results[["results"]][["varianceInflationContainer"]][["collection"]][["varianceInflationContainer_effectSize"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(1, 1.29657609173229, "jaspColumn2", 1.68110956165179, 1, 1.24532044368049,
-     "jaspColumn3", 1.55082300744858, 1, 1.06465500835752, "Standard error<unicode> (PEESE)",
+    list(1, 1.29657609173229, "year", 1.68110956165179, 1, 1.24532044368049,
+     "ablat", 1.55082300744858, 1, 1.06465500835752, "Standard error<unicode> (PEESE)",
      1.13349028682076))
 
 })

@@ -8,12 +8,10 @@ test_that("WaapWls (analysis 1) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "WAAP-WLS - bcg.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[1]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("WaapWls", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("WaapWls", dataset, opts, view = FALSE)
 
   table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
@@ -33,12 +31,10 @@ test_that("WaapWls (analysis 2) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "WAAP-WLS - bcg.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[2]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("WaapWls", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("WaapWls", dataset, opts, view = FALSE)
 
   plotName <- results[["results"]][["baujatPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
@@ -52,17 +48,17 @@ test_that("WaapWls (analysis 2) results match", {
   jaspTools::expect_equal_tables(table,
     list(4, -106.928797754669, -324.770654515972, "Intercept", 0.244614054198113,
      78.4607109117628, -1.36283238466857, 110.913059006634, 4, 0.054348531576469,
-     -0.0571924370254334, "jaspColumn1", 0.247522730048707, 0.0401740226713239,
+     -0.0571924370254334, "year", 0.247522730048707, 0.0401740226713239,
      1.35282772206087, 0.165889500178371, 4, -0.847336602659409,
-     -3.89979488565055, "jaspColumn3 (random)", 0.483872093402281,
+     -3.89979488565055, "alloc (random)", 0.483872093402281,
      1.09941243832865, -0.770717678933622, 2.20512168033174, 4, -0.741844233660375,
-     -3.41307793382219, "jaspColumn3 (systematic)", 0.48368884357541,
+     -3.41307793382219, "alloc (systematic)", 0.48368884357541,
      0.962105713943699, -0.771063120100944, 1.92938946650144))
 
   table <- results[["results"]][["metaregressionContainer"]][["collection"]][["metaregressionContainer_effectSizeTermsTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(1, 4, 0.247522730048707, 1.83014284557641, "jaspColumn1", 2, 4,
-     0.743214081923513, 0.319920116507993, "jaspColumn3"))
+    list(1, 4, 0.247522730048707, 1.83014284557641, "year", 2, 4,
+     0.743214081923513, 0.319920116507993, "alloc"))
 
   table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
@@ -87,12 +83,10 @@ test_that("WaapWls (analysis 3) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "WAAP-WLS - bcg.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[3]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("WaapWls", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("WaapWls", dataset, opts, view = FALSE)
 
   table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,

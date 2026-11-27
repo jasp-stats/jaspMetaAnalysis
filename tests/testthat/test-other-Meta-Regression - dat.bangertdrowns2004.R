@@ -8,24 +8,22 @@ test_that("ClassicalMetaAnalysis (analysis 1) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Meta-Regression - dat.bangertdrowns2004.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[1]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", dataset, opts, view = FALSE)
 
   table <- results[["results"]][["metaregressionContainer"]][["collection"]][["metaregressionContainer_effectSizeCoefficientTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
     list(22, 0.47241396214642, 0.296509823410256, "Intercept", 1.342262652363e-05,
      0.0848191441696781, 5.5696619763266, 0.648318100882585, 22,
-     -0.0201599020560654, -0.0312365471907467, "jaspColumn2", 0.00104362642988289,
+     -0.0201599020560654, -0.0312365471907467, "minutes", 0.00104362642988289,
      0.00534104295296917, -3.77452535648644, -0.00908325692138401
     ))
 
   table <- results[["results"]][["metaregressionContainer"]][["collection"]][["metaregressionContainer_effectSizeTermsTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(1, 22, 0.00104362642988289, 14.2470416667591, "jaspColumn2"))
+    list(1, 22, 0.00104362642988289, 14.2470416667591, "minutes"))
 
   table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
@@ -47,12 +45,10 @@ test_that("ClassicalMetaAnalysis (analysis 2) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Meta-Regression - dat.bangertdrowns2004.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[2]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", dataset, opts, view = FALSE)
 
   table <- results[["results"]][["metaregressionContainer"]][["collection"]][["metaregressionContainer_effectSizeCoefficientTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
@@ -60,7 +56,7 @@ test_that("ClassicalMetaAnalysis (analysis 2) results match", {
      0.219795558495195, 3.23457682841654, "yes", 1.20068064387459,
      10, 0.470856865282848, 0.236465353537849, "", 0.00118635998764145,
      0.105196097422767, 4.47599176032689, "no", 0.705248377027848,
-     10, -0.0437868764823113, -0.0873241014697863, "jaspColumn2",
+     10, -0.0437868764823113, -0.0873241014697863, "minutes",
      0.0489281877415188, 0.019539727045585, -2.24091546315663, "yes",
      -0.000249651494836398, 10, -0.019193966266897, -0.0311596308766734,
      "", 0.00506087190762515, 0.00537025087063567, -3.57412842142047,
@@ -68,7 +64,7 @@ test_that("ClassicalMetaAnalysis (analysis 2) results match", {
 
   table <- results[["results"]][["metaregressionContainer"]][["collection"]][["metaregressionContainer_effectSizeTermsTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(1, 10, 0.0489281877415188, 5.02170211301451, "yes", "jaspColumn2",
+    list(1, 10, 0.0489281877415188, 5.02170211301451, "yes", "minutes",
      1, 10, 0.00506087190762515, 12.7743939728056, "no", ""))
 
   table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
@@ -99,30 +95,28 @@ test_that("ClassicalMetaAnalysis (analysis 3) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Meta-Regression - dat.bangertdrowns2004.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[3]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", dataset, opts, view = FALSE)
 
   table <- results[["results"]][["metaregressionContainer"]][["collection"]][["metaregressionContainer_effectSizeCoefficientTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
     list(20, 0.488492400281355, 0.233597733171357, "Intercept", 0.000707414949312178,
      0.122195174342147, 3.99764068353121, 0.743387067391353, 20,
-     -0.0192108908754727, -0.0321385397705634, "jaspColumn2", 0.00564734832990584,
+     -0.0192108908754727, -0.0321385397705634, "minutes", 0.00564734832990584,
      0.00619744747302993, -3.09980697038172, -0.00628324198038211,
-     20, 0.207566123704415, -0.262920821049974, "jaspColumn3 (yes)",
+     20, 0.207566123704415, -0.262920821049974, "feedback (yes)",
      0.368398762288976, 0.225548988104787, 0.920270693513297, 0.678053068458803,
-     20, -0.0237671729719295, -0.0604619129344197, "jaspColumn2<unicode><unicode><unicode>jaspColumn3 (yes)",
+     20, -0.0237671729719295, -0.0604619129344197, "minutes<unicode><unicode><unicode>feedback (yes)",
      0.191758017456955, 0.0175912670045044, -1.35107795054465, 0.0129275669905607
     ))
 
   table <- results[["results"]][["metaregressionContainer"]][["collection"]][["metaregressionContainer_effectSizeTermsTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(1, 20, 0.00564734832990584, 9.60880325362709, "jaspColumn2", 1,
-     20, 0.368398762288976, 0.846898149339445, "jaspColumn3", 1,
-     20, 0.191758017456955, 1.82541162844793, "jaspColumn2<unicode><unicode><unicode>jaspColumn3"
+    list(1, 20, 0.00564734832990584, 9.60880325362709, "minutes", 1,
+     20, 0.368398762288976, 0.846898149339445, "feedback", 1,
+     20, 0.191758017456955, 1.82541162844793, "minutes<unicode><unicode><unicode>feedback"
     ))
 
   table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
@@ -145,43 +139,41 @@ test_that("ClassicalMetaAnalysis (analysis 4) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Meta-Regression - dat.bangertdrowns2004.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[4]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", dataset, opts, view = FALSE)
   # Near-zero variance gives platform-dependent log-scale estimates and standard errors.
   testthat::skip_on_os(c("linux", "mac"))
   table <- results[["results"]][["metaregressionContainer"]][["collection"]][["metaregressionContainer_effectSizeCoefficientTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
     list(20, 0.470856865291475, 0.236160915438973, "Intercept", 0.000456505166789571,
      0.112512014608945, 4.18494742030903, 0.705552815143977, 20,
-     -0.0191939662668959, -0.0311751724133729, "jaspColumn2", 0.00324945058653455,
+     -0.0191939662668959, -0.0311751724133729, "minutes", 0.00324945058653455,
      0.00574372775428118, -3.34172632966271, -0.00721276012041892,
-     20, 0.240085052489594, -0.251644014551271, "jaspColumn3 (yes)",
+     20, 0.240085052489594, -0.251644014551271, "feedback (yes)",
      0.320620029873434, 0.235732350768365, 1.01846459218279, 0.731814119530458,
-     20, -0.0245926981054849, -0.0648315910358425, "jaspColumn2<unicode><unicode><unicode>jaspColumn3 (yes)",
+     20, -0.0245926981054849, -0.0648315910358425, "minutes<unicode><unicode><unicode>feedback (yes)",
      0.216966636394573, 0.0192903154573969, -1.27487278058249, 0.0156461948248727
     ))
 
   table <- results[["results"]][["metaregressionContainer"]][["collection"]][["metaregressionContainer_effectSizeTermsTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(1, 20, 0.00324945058653455, 11.167134862361, "jaspColumn2", 1,
-     20, 0.320620029873434, 1.03727012553006, "jaspColumn3", 1, 20,
-     0.216966636394573, 1.62530060667012, "jaspColumn2<unicode><unicode><unicode>jaspColumn3"
+    list(1, 20, 0.00324945058653455, 11.167134862361, "minutes", 1,
+     20, 0.320620029873434, 1.03727012553006, "feedback", 1, 20,
+     0.216966636394573, 1.62530060667012, "minutes<unicode><unicode><unicode>feedback"
     ))
 
   table <- results[["results"]][["metaregressionContainer"]][["collection"]][["metaregressionContainer_heterogeneityCoefficientTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
     list(22, -26.5603875444667, -181733.224672667, "Intercept", 0.999760859953866,
      87617.0615729945, -0.000303141729106483, 181680.103897578, 22,
-     22.443958385964, -181684.220333328, "jaspColumn3 (yes)", 0.999797922780334,
+     22.443958385964, -181684.220333328, "feedback (yes)", 0.999797922780334,
      87617.061576173, 0.000256159679201882, 181729.1082501))
 
   table <- results[["results"]][["metaregressionContainer"]][["collection"]][["metaregressionContainer_heterogeneityTermsTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(1, 22, 0.999797922780334, 6.56177812488112e-08, "jaspColumn3"
+    list(1, 22, 0.999797922780334, 6.56177812488112e-08, "feedback"
     ))
 
   table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]

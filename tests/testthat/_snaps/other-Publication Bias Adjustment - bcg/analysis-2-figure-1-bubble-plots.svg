@@ -92,11 +92,11 @@
 <text x='163.79' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='66.16px' lengthAdjust='spacingAndGlyphs'>alternate</text>
 <text x='319.74' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='57.65px' lengthAdjust='spacingAndGlyphs'>random</text>
 <text x='475.69' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='80.33px' lengthAdjust='spacingAndGlyphs'>systematic</text>
-<text x='319.74' y='567.49' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='99.24px' lengthAdjust='spacingAndGlyphs'>jaspColumn1</text>
+<text x='319.74' y='567.49' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='34.97px' lengthAdjust='spacingAndGlyphs'>alloc</text>
 <text transform='translate(16.68,265.42) rotate(-90)' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='81.27px' lengthAdjust='spacingAndGlyphs'>Effect Size</text>
 <rect x='580.22' y='20.71' width='139.78' height='116.71' style='stroke-width: 0.75; stroke: none;' />
 <rect x='580.22' y='20.71' width='139.78' height='116.71' style='stroke-width: 10.67; stroke: none;' />
-<text x='650.11' y='39.65' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='99.24px' lengthAdjust='spacingAndGlyphs'>jaspColumn2</text>
+<text x='650.11' y='39.65' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='33.08px' lengthAdjust='spacingAndGlyphs'>year</text>
 <rect x='585.70' y='46.90' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
 <polyline points='599.88,72.41 599.88,68.16 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt; stroke-linejoin: miter;' />
 <polyline points='599.88,53.98 599.88,49.73 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt; stroke-linejoin: miter;' />

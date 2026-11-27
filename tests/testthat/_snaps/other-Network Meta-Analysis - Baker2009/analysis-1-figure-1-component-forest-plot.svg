@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' data-engine-version='2.0' width='720.00pt' height='576.00pt' viewBox='0 0 720.00 576.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA='>
+    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<polygon points='180.58,145.41 286.26,124.97 391.93,145.41 286.26,165.85 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='334.52,206.73 380.34,186.29 426.17,206.73 380.34,227.16 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='316.91,268.04 401.64,247.60 486.38,268.04 401.64,288.48 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='299.30,329.35 339.83,308.91 380.35,329.35 339.83,349.79 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='206.53,390.67 258.23,370.23 309.93,390.67 258.23,411.10 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<text x='113.31' y='88.01' text-anchor='end' style='font-size: 11.38px; font-weight: bold; font-family: sans;' textLength='64.54px' lengthAdjust='spacingAndGlyphs'>Components</text>
+<text x='113.31' y='149.33' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='60.13px' lengthAdjust='spacingAndGlyphs'>Budesonide</text>
+<text x='113.31' y='210.64' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='58.21px' lengthAdjust='spacingAndGlyphs'>Fluticasone</text>
+<text x='113.31' y='271.96' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='55.03px' lengthAdjust='spacingAndGlyphs'>Formoterol</text>
+<text x='113.31' y='333.27' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='54.40px' lengthAdjust='spacingAndGlyphs'>Salmeterol</text>
+<text x='113.31' y='394.58' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='53.76px' lengthAdjust='spacingAndGlyphs'>Tiotropium</text>
+<text x='700.99' y='149.33' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='82.26px' lengthAdjust='spacingAndGlyphs'>0.73 [0.58, 0.92]</text>
+<text x='700.99' y='210.64' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='82.26px' lengthAdjust='spacingAndGlyphs'>0.90 [0.81, 1.00]</text>
+<text x='700.99' y='271.96' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='82.26px' lengthAdjust='spacingAndGlyphs'>0.94 [0.78, 1.14]</text>
+<text x='700.99' y='333.27' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='82.26px' lengthAdjust='spacingAndGlyphs'>0.82 [0.75, 0.90]</text>
+<text x='700.99' y='394.58' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='82.26px' lengthAdjust='spacingAndGlyphs'>0.69 [0.61, 0.77]</text>
+<line x1='113.31' y1='493.88' x2='585.99' y2='493.88' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='113.31' y1='493.88' x2='113.31' y2='501.24' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='270.87' y1='493.88' x2='270.87' y2='501.24' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='428.43' y1='493.88' x2='428.43' y2='501.24' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='585.99' y1='493.88' x2='585.99' y2='501.24' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<text x='113.31' y='521.33' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='15.82px' lengthAdjust='spacingAndGlyphs'>0.5</text>
+<text x='270.87' y='521.33' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='22.15px' lengthAdjust='spacingAndGlyphs'>0.71</text>
+<text x='428.43' y='521.33' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='6.33px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='585.99' y='521.33' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='22.15px' lengthAdjust='spacingAndGlyphs'>1.41</text>
+<text x='349.65' y='559.96' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='58.22px' lengthAdjust='spacingAndGlyphs'>exponential</text>
+<text x='5.48' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='247.29px' lengthAdjust='spacingAndGlyphs'>analysis-1_figure-1_component-forest-plot</text>
+</g>
+</svg>

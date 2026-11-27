@@ -2,8 +2,8 @@ context("Selection Models - focused regressions")
 
 selectionFunction <- function(name) get(name, asNamespace("jaspMetaAnalysis"))
 selectionFile <- testthat::test_path("jaspfiles", "other", "Selection Models - bcg.jasp")
-selectionOptions <- jaspTools::analysisOptions(selectionFile)[[1]]
-selectionData <- jaspTools::extractDatasetFromJASPFile(selectionFile)
+selectionOptions <- jaspSyntax::readAnalysisOptionsFromJaspFile(selectionFile, flattenTypes = TRUE)[[1]][["options"]]
+selectionData <- jaspSyntax::readDatasetFromJaspFile(selectionFile)
 selectionOptions[["analysis"]] <- "selectionModels"
 selectionElement <- list(
   name = "model1", type = "stepfun", steps = "(.025, .50)", delta = "1, .5, .2",
@@ -125,26 +125,20 @@ testthat::test_that("convergence failures refer to available optimizer controls"
 })
 
 testthat::test_that("failed models display their frequency counts", {
-  opts <- selectionOptions
+  opts <- jaspTools::analysisOptions(selectionFile)[[1]]
   opts[["publicationBiasAdjustment"]] <- "custom"
   opts[["weightFunctionPValueFrequencyTable"]] <- TRUE
-  opts[["pValue"]] <- "reviewPValue"
-  opts[["pValue.types"]] <- "scale"
-  opts[[".meta"]][["pValue"]] <- list(shouldEncode = TRUE)
+  opts[["pValue"]] <- list(value = "reviewPValue", types = list("scale"))
   opts[["confidenceIntervals"]] <- FALSE
-  opts[["profileLikelihood"]] <- FALSE
-  opts[["profileLikelihoodSelection"]] <- FALSE
-  opts[["profileLikelihoodHeterogeneity"]] <- FALSE
+  opts[["diagnosticsPlotsProfileLikelihood"]] <- FALSE
   data <- selectionData
   data[["reviewPValue"]] <- rep(.7, nrow(data))
   for (parameters in c("", "1, 0, 0")) {
     element <- selectionElement
     element[["delta"]] <- parameters
     opts[["selectionModels"]] <- list(element)
-    encoded <- jaspTools:::encodeOptionsAndDataset(opts, data)
     set.seed(1)
-    result <- jaspTools::runAnalysis("SelectionModels", encoded$dataset, encoded$options,
-                                    encodedDataset = TRUE, view = FALSE)
+    result <- jaspTools::runAnalysis("SelectionModels", data, opts, view = FALSE)
     testthat::expect_identical(result$status, "complete")
     frequency <- result$results$weightFunctionSummary$collection$weightFunctionSummary_selectionFrequencies
     testthat::expect_equal(vapply(frequency$data, `[[`, numeric(1), "count"), c(0, 0, nrow(data)))

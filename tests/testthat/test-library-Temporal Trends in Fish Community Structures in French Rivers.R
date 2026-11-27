@@ -8,12 +8,10 @@ test_that("ClassicalMetaAnalysisMultilevelMultivariate results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "library", "Temporal Trends in Fish Community Structures in French Rivers.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("ClassicalMetaAnalysisMultilevelMultivariate", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("ClassicalMetaAnalysisMultilevelMultivariate", dataset, opts, view = FALSE)
 
   table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
@@ -32,8 +30,8 @@ test_that("ClassicalMetaAnalysisMultilevelMultivariate results match", {
 
   table <- results[["results"]][["randomEstimatesContainer"]][["collection"]][["randomEstimatesContainer_containerS"]][["collection"]][["randomEstimatesContainer_containerS_tableS"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list("jaspColumn3", 11, 84.6070278841486, 7158.34916738909, "jaspColumn3/jaspColumn4",
-     35, 0.00388666709694833, 1.51061811225008e-05))
+    list("site", 11, 84.6070278952636, 7158.34916926991, "site/station",
+     35, 0.00388667306616194, 1.51062275232287e-05))
 
 })
 

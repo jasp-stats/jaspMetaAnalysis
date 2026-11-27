@@ -8,12 +8,10 @@ test_that("WaapWls (analysis 1) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Dependent Effect Sizes - dat.assink2016.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[1]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("WaapWls", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("WaapWls", dataset, opts, view = FALSE)
 
   table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
@@ -27,7 +25,7 @@ test_that("WaapWls (analysis 1) results match", {
 
   table <- results[["results"]][["randomEstimatesContainer"]][["collection"]][["randomEstimatesContainer_containerS"]][["collection"]][["randomEstimatesContainer_containerS_tableS"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list("jaspColumn3", 6, 0.135299780236561, 0.0183060305320617, "jaspColumn3/jaspColumn4",
+    list("study", 6, 0.135299780236561, 0.0183060305320617, "study/esid",
      19, 0.110557303334297, 0.0122229173205518))
 
 })
@@ -37,12 +35,10 @@ test_that("PetPeese (analysis 2) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Dependent Effect Sizes - dat.assink2016.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[2]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("PetPeese", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("PetPeese", dataset, opts, view = FALSE)
 
   table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
@@ -72,32 +68,30 @@ test_that("ClassicalMetaAnalysisMultilevelMultivariate (analysis 3) results matc
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Dependent Effect Sizes - dat.assink2016.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[3]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("ClassicalMetaAnalysisMultilevelMultivariate", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("ClassicalMetaAnalysisMultilevelMultivariate", dataset, opts, view = FALSE)
 
-  table <- results[["results"]][["estimatedMarginalMeansAndContrastsContainer"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize_jaspColumn2"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize_jaspColumn2_estimatedMarginalMeansTable"]][["data"]]
+  table <- results[["results"]][["estimatedMarginalMeansAndContrastsContainer"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize_deltype"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize_deltype_estimatedMarginalMeansTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(-0.226523390050997, "covert", -0.38210651208498, -0.38210651208498,
+    list("covert", -0.226523390050997, -0.38210651208498, -0.38210651208498,
      0.0783903383254406, -0.0709402680170144, -0.0709402680170144,
-     "covert", -0.226523390050997, "general", -0.38210651208498,
+     "covert", "general", -0.226523390050997, -0.38210651208498,
      -1.11460507773896, 0.0783903383254406, -0.0709402680170144,
-     0.661558297636967, "covert", -0.226523390050997, "overt", -0.38210651208498,
+     0.661558297636967, "covert", "overt", -0.226523390050997, -0.38210651208498,
      -0.97965484272174, 0.0783903383254406, -0.0709402680170144,
-     0.526608062619746, "covert", 0.436911239322366, "covert", 0.215508422147968,
+     0.526608062619746, "covert", "covert", 0.436911239322366, 0.215508422147968,
      0.215508422147968, 0.111553499618782, 0.658314056496764, 0.658314056496764,
-     "general", 0.436911239322366, "general", 0.215508422147968,
+     "general", "general", 0.436911239322366, 0.215508422147968,
      -0.465032319664349, 0.111553499618782, 0.658314056496764, 1.33885479830908,
-     "general", 0.436911239322366, "overt", 0.215508422147968, -0.33251717488708,
+     "general", "overt", 0.436911239322366, 0.215508422147968, -0.33251717488708,
      0.111553499618782, 0.658314056496764, 1.20633965353181, "general",
-     0.373731875863292, "covert", 0.163310352702806, 0.163310352702806,
+     "covert", 0.373731875863292, 0.163310352702806, 0.163310352702806,
      0.106020589996273, 0.584153399023777, 0.584153399023777, "overt",
-     0.373731875863292, "general", 0.163310352702806, -0.525579079009404,
+     "general", 0.373731875863292, 0.163310352702806, -0.525579079009404,
      0.106020589996273, 0.584153399023777, 1.27304283073599, "overt",
-     0.373731875863292, "overt", 0.163310352702806, -0.392608841147935,
+     "overt", 0.373731875863292, 0.163310352702806, -0.392608841147935,
      0.106020589996273, 0.584153399023777, 1.14007259287452, "overt"
     ))
 
@@ -105,15 +99,15 @@ test_that("ClassicalMetaAnalysisMultilevelMultivariate (analysis 3) results matc
   jaspTools::expect_equal_tables(table,
     list(97, -0.226523390050997, -0.38210651208498, "Intercept", 0.0047576191764636,
      0.0783903383254406, -2.88968506693486, -0.0709402680170144,
-     97, 0.663434629373363, 0.392832864200626, "jaspColumn2 (general)",
+     97, 0.663434629373363, 0.392832864200626, "deltype (general)",
      4.40763285457964e-06, 0.136342320722418, 4.86594790126878, 0.9340363945461,
-     97, 0.600255265914289, 0.338562076719347, "jaspColumn2 (overt)",
+     97, 0.600255265914289, 0.338562076719347, "deltype (overt)",
      1.5396299513104e-05, 0.131853747182, 4.55243236345604, 0.861948455109231
     ))
 
   table <- results[["results"]][["metaregressionContainer"]][["collection"]][["metaregressionContainer_effectSizeTermsTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(2, 97, 2.43258295481882e-05, 11.87739400628, "jaspColumn2"))
+    list(2, 97, 2.43258295481882e-05, 11.87739400628, "deltype"))
 
   table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,

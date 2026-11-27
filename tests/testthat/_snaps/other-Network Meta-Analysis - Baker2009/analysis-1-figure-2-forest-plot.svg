@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' data-engine-version='2.0' width='720.00pt' height='576.00pt' viewBox='0 0 720.00 576.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA='>
+    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<polygon points='263.89,77.92 353.08,59.54 442.27,77.92 353.08,96.31 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='219.10,133.07 330.47,114.69 441.84,133.07 330.47,151.45 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='393.81,188.21 432.49,169.83 471.16,188.21 432.49,206.59 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='308.36,243.35 357.71,224.97 407.06,243.35 357.71,261.73 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='378.95,298.49 450.46,280.11 521.97,298.49 450.46,316.87 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='364.09,353.63 398.29,335.25 432.49,353.63 398.29,372.01 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<polygon points='285.79,408.77 329.43,390.39 373.06,408.77 329.43,427.15 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; fill: #333333;' />
+<text x='207.11' y='81.84' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='122.14px' lengthAdjust='spacingAndGlyphs'>Budesonide vs. Placebo</text>
+<text x='207.11' y='136.98' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='183.81px' lengthAdjust='spacingAndGlyphs'>Budesonide+Formoterol vs. Placebo</text>
+<text x='207.11' y='192.12' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='120.22px' lengthAdjust='spacingAndGlyphs'>Fluticasone vs. Placebo</text>
+<text x='207.11' y='247.26' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='181.27px' lengthAdjust='spacingAndGlyphs'>Fluticasone+Salmeterol vs. Placebo</text>
+<text x='207.11' y='302.41' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='117.04px' lengthAdjust='spacingAndGlyphs'>Formoterol vs. Placebo</text>
+<text x='207.11' y='357.55' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='116.42px' lengthAdjust='spacingAndGlyphs'>Salmeterol vs. Placebo</text>
+<text x='207.11' y='412.69' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='115.77px' lengthAdjust='spacingAndGlyphs'>Tiotropium vs. Placebo</text>
+<text x='703.10' y='81.84' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='82.26px' lengthAdjust='spacingAndGlyphs'>0.73 [0.58, 0.92]</text>
+<text x='703.10' y='136.98' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='82.26px' lengthAdjust='spacingAndGlyphs'>0.69 [0.52, 0.92]</text>
+<text x='703.10' y='192.12' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='82.26px' lengthAdjust='spacingAndGlyphs'>0.90 [0.81, 1.00]</text>
+<text x='703.10' y='247.26' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='82.26px' lengthAdjust='spacingAndGlyphs'>0.74 [0.65, 0.84]</text>
+<text x='703.10' y='302.41' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='82.26px' lengthAdjust='spacingAndGlyphs'>0.94 [0.78, 1.14]</text>
+<text x='703.10' y='357.55' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='82.26px' lengthAdjust='spacingAndGlyphs'>0.82 [0.75, 0.90]</text>
+<text x='703.10' y='412.69' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='82.26px' lengthAdjust='spacingAndGlyphs'>0.69 [0.61, 0.77]</text>
+<line x1='207.11' y1='501.59' x2='606.04' y2='501.59' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='207.11' y1='501.59' x2='207.11' y2='508.21' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='340.09' y1='501.59' x2='340.09' y2='508.21' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='473.07' y1='501.59' x2='473.07' y2='508.21' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='606.04' y1='501.59' x2='606.04' y2='508.21' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<text x='207.11' y='527.07' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='15.82px' lengthAdjust='spacingAndGlyphs'>0.5</text>
+<text x='340.09' y='527.07' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='22.15px' lengthAdjust='spacingAndGlyphs'>0.71</text>
+<text x='473.07' y='527.07' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='6.33px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='606.04' y='527.07' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='22.15px' lengthAdjust='spacingAndGlyphs'>1.41</text>
+<text x='406.58' y='561.81' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='58.22px' lengthAdjust='spacingAndGlyphs'>exponential</text>
+<text x='5.48' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='177.57px' lengthAdjust='spacingAndGlyphs'>analysis-1_figure-2_forest-plot</text>
+</g>
+</svg>

@@ -8,12 +8,10 @@ test_that("RiskOfBiasPlot (analysis 1) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Risk of Bias - rob2.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[1]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("RiskOfBiasPlot", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("RiskOfBiasPlot", dataset, opts, view = FALSE)
 
   plotName <- results[["results"]][["summaryPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
@@ -30,12 +28,10 @@ test_that("RiskOfBiasPlot (analysis 2) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Risk of Bias - rob2.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[2]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("RiskOfBiasPlot", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("RiskOfBiasPlot", dataset, opts, view = FALSE)
 
   plotName <- results[["results"]][["summaryPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
@@ -52,12 +48,10 @@ test_that("RiskOfBiasPlot (analysis 3) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Risk of Bias - rob2.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[3]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("RiskOfBiasPlot", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("RiskOfBiasPlot", dataset, opts, view = FALSE)
 
   plotName <- results[["results"]][["summaryPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
@@ -74,12 +68,10 @@ test_that("RiskOfBiasPlot (analysis 4) shows waiting state with no domains", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Risk of Bias - rob2.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[4]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("RiskOfBiasPlot", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("RiskOfBiasPlot", dataset, opts, view = FALSE)
 
   # no domain columns assigned → plots should be empty/waiting (no plot object, no error message)
   expect_identical(results[["status"]], "complete")
@@ -93,12 +85,10 @@ test_that("RiskOfBiasPlot (analysis 5) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Risk of Bias - rob2.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[5]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("RiskOfBiasPlot", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("RiskOfBiasPlot", dataset, opts, view = FALSE)
 
   plotName <- results[["results"]][["summaryPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
@@ -115,12 +105,10 @@ test_that("RiskOfBiasPlot (analysis 6) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Risk of Bias - rob2.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[6]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("RiskOfBiasPlot", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("RiskOfBiasPlot", dataset, opts, view = FALSE)
 
   expect_true(grepl("contains invalid value", results$results$errorMessage))
 

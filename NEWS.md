@@ -14,6 +14,9 @@
 
 ---
 # jaspMetaAnalysis 0.99.0
+## Added
+* Added Classical Network Meta-Analysis (netmeta): contrast- and arm-based input, network plot, league table, treatment ranking, inconsistency assessment, comparison-adjusted funnel plot, network meta-regression, subgroup analysis, rare-event methods, and component network meta-analysis.
+
 ## Changed
 * Rewrote PET-PEESE using `metafor`, including optional multilevel/multivariate models. Legacy analyses are converted; incompatible settings may reset on refresh.
 * Rewrote WAAP-WLS using `metafor` in the PET-PEESE style (moderators, subgroups, clustering, no-selection indicator, optional multilevel/multivariate models), with an adjustable power criterion evaluated at the pooled or moderator-specific predicted effects, and exports of the estimated power and WAAP inclusion. Legacy analyses are converted; incompatible settings may reset on refresh.
