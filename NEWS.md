@@ -30,6 +30,7 @@
 * Saving the computed variance-covariance matrix reports an error when the file cannot be written.
 * Failed models are reported without the internal function call; models with too few estimates say so.
 * Forest plot predicted effects are unavailable when the study information is aggregated.
+* Pooled-effect prediction intervals of location-scale models without effect size moderators use τ², the confidence level, and the t/Knapp-Hartung critical value.
 
 # jaspMetaAnalysis 0.98.0
 ## Changed
