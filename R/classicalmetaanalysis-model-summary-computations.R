@@ -9,15 +9,23 @@
   # prediction for effect size of a location-scale models without effect size moderator does not work (compute it manually)
   if (!.maIsMetaregressionEffectSize(options) && .maIsMetaregressionHeterogeneity(options)) {
 
-    predictedHeterogeneity <- .maComputePooledHeterogeneity(fit, options)
-    predictedEffect        <- data.frame(
+    predictedTau2 <- max(0, .maComputePooledHeterogeneityPlot(fit, options, parameter = "tau2")[["est"]][1])
+    ddf           <- .maExtractDdf(fit)[1]
+    alpha         <- 1 - options[["confidenceIntervalsLevel"]]
+    crit          <- if (is.element(fit[["test"]], c("knha", "adhoc", "t"))) {
+      if (!is.na(ddf) && ddf > 0) stats::qt(alpha / 2, df = ddf, lower.tail = FALSE) else NA_real_
+    } else {
+      stats::qnorm(alpha / 2, lower.tail = FALSE)
+    }
+    piSe          <- sqrt(fit$se[1]^2 + predictedTau2)
+    predictedEffect <- data.frame(
       pred  = fit$beta[1],
       se    = fit$se[1],
-      ddf   = .maExtractDdf(fit)[1],
+      ddf   = ddf,
       ci.lb = fit$ci.lb[1],
       ci.ub = fit$ci.ub[1],
-      pi.lb = fit$beta[1] - 1.96 * sqrt(fit$se[1]^2 + predictedHeterogeneity[["est"]][1]^2),
-      pi.ub = fit$beta[1] + 1.96 * sqrt(fit$se[1]^2 + predictedHeterogeneity[["est"]][1]^2)
+      pi.lb = fit$beta[1] - crit * piSe,
+      pi.ub = fit$beta[1] + crit * piSe
     )
 
   } else {
