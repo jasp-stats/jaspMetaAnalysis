@@ -10,12 +10,10 @@ test_that("SemBasedMetaAnalysis results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "SEM-Based Meta-Analysis - Jaramillo 2025.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("SemBasedMetaAnalysis", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("SemBasedMetaAnalysis", dataset, opts, view = FALSE)
 
 })
 

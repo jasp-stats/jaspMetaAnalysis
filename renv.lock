@@ -4215,9 +4215,46 @@
       "RemoteSha": "cde3bd55e11cdbfc3f4e671bee04fcd905501c28",
       "Remotes": "jasp-stats/jaspBase, jasp-stats/jaspGraphs"
     },
+    "jaspSyntax": {
+      "Package": "jaspSyntax",
+      "Version": "1.4.7",
+      "Source": "GitHub",
+      "Type": "Package",
+      "Title": "Makes JASP analyses available in R",
+      "Date": "2026-11-18",
+      "Author": "JASP Team",
+      "Website": "jasp-stats.org",
+      "Maintainer": "JASP Team <info@jasp-stats.org>",
+      "Description": "Exposes the native JASP SyntaxInterface bridge to R so package code can parse module descriptions, replay QML option binding, load datasets, and read saved .jasp files using the same runtime preparation path as JASP Desktop.",
+      "License": "GPL-3 + file LICENSE",
+      "Encoding": "UTF-8",
+      "URL": "https://github.com/jasp-stats/jaspSyntax",
+      "BugReports": "https://github.com/jasp-stats/jaspSyntax/issues",
+      "SystemRequirements": "libcurl or wget (for downloading the SyntaxInterface library during installation), OpenGL (libglvnd; provides libOpenGL.so.0)",
+      "Imports": [
+        "callr",
+        "jsonlite",
+        "Rcpp (>= 1.0.5)"
+      ],
+      "Suggests": [
+        "pkgload",
+        "testthat"
+      ],
+      "LinkingTo": [
+        "Rcpp"
+      ],
+      "RoxygenNote": "7.3.3",
+      "Config/pak/sysreqs": "libgl1-mesa-dev wget",
+      "RemoteRef": "master",
+      "RemoteSha": "b566c058ea52fb377af1d33ca1d873575b5aead6",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "jasp-stats",
+      "RemoteRepo": "jaspSyntax"
+    },
     "jaspTools": {
       "Package": "jaspTools",
-      "Version": "0.20.1",
+      "Version": "0.21.0",
       "Source": "GitHub",
       "Type": "Package",
       "Title": "Helps Preview and Debug JASP Analyses",
@@ -4228,34 +4265,36 @@
       "Encoding": "UTF-8",
       "LazyData": "true",
       "Imports": [
-        "archive (>= 1.1.6)",
         "cli",
         "data.table",
-        "DBI",
         "httr",
+        "jaspSyntax (>= 1.4.2)",
         "jsonlite",
         "lifecycle",
         "pkgload",
         "remotes",
         "rjson",
-        "RSQLite",
         "stringi",
         "stringr",
         "testthat (>= 3.2.2)",
         "vdiffr (>= 1.0.7)"
       ],
       "Suggests": [
-        "ggplot2"
+        "ggplot2",
+        "jaspBase",
+        "withr"
       ],
-      "RoxygenNote": "7.3.3",
+      "Remotes": "jasp-stats/jaspBase",
+      "Additional_repositories": "https://jasp-stats.r-universe.dev",
       "Roxygen": "list(markdown = TRUE)",
+      "Config/roxygen2/version": "8.0.0",
       "Author": "Tim de Jong [aut], Don van den Bergh [ctb, cre], František Bartoš [ctb]",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspTools",
       "RemoteRef": "master",
-      "RemoteSha": "55ab6bcd2e3828fc923a9bdf513c50a06da3d6ad"
+      "RemoteSha": "a151d2783cea72faeaa2a0a31d56a531821f2b6a"
     },
     "jpeg": {
       "Package": "jpeg",

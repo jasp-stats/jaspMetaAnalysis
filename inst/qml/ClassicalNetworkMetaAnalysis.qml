@@ -24,7 +24,7 @@ import "./qml_components" as MA
 Form
 {
 	info: qsTr("Classical network meta-analysis compares multiple treatments simultaneously by combining direct and indirect evidence from studies comparing different sets of treatments. " +
-		"It uses the frequentist graph-theoretical approach implemented in the netmeta package and supports contrast-based data (one row per treatment comparison) and arm-based data (one row per study arm) for binary, continuous, incidence rate, and generic outcomes. " +
+		"It uses the frequentist graph-theoretical approach implemented in the netmeta package and supports contrast-based data (one row per treatment comparison) and arm-based data (one row per study arm) for binary, continuous, and incidence rate outcomes and for arm-level effect sizes with standard errors. " +
 		"The analysis provides common-effect and random-effects network estimates, heterogeneity and inconsistency assessments, treatment rankings, league tables, network and forest plots, small-study effects assessment, network meta-regression, subgroup analysis, rare-event pooling methods, component network meta-analysis, and the netmeta R code.")
 	infoBottom: "## " + qsTr("References") + "\n" +
 		"- Balduzzi S, Rücker G, Nikolakopoulou A, Papakonstantinou T, Salanti G, Efthimiou O, Schwarzer G (2023). “netmeta: An R Package for Network Meta-Analysis Using Frequentist Methods.” _Journal of Statistical Software, 106_(2), 1-40. https://doi.org/10.18637/jss.v106.i02\n" +
@@ -65,7 +65,7 @@ Form
 		// the available list is as long as the column of the controls on the right; the component indicators (a list with several
 		// rows) get the space of about three variables
 		preferredHeight:	{
-			var controls	= [outcomeType, effectSizeMeasure, effectSizeVariable, effectSizeStandardErrorVariable, treatment1Variable, treatment2Variable,
+			var controls	= [outcomeType, effectSizeMeasure, armEffectSizeMeasure, effectSizeVariable, effectSizeStandardErrorVariable, treatment1Variable, treatment2Variable,
 				treatmentVariable, eventsArmVariable, meanArmVariable, standardDeviationArmVariable, sampleSizeArmVariable, personTimeArmVariable,
 				effectSizeArmVariable, effectSizeStandardErrorArmVariable, studyIdVariable, poolingMethod, method, fixedEffectTest, predictors, subgroup]
 			var margin		= 8 * preferencesModel.uiScale
@@ -88,25 +88,27 @@ Form
 			name:			"outcomeType"
 			id:				outcomeType
 			label:			qsTr("Outcome")
-			startValue:		"general"
+			startValue:		"effectSizeAndStandardError"
 			visible:		dataFormat.value === "armBased"
 			info:			qsTr("Type of the arm-level outcome data.")
 			values:			[
 				{ label: qsTr("Binary")			, value: "binary"			, info: qsTr("Number of events and sample size per arm.")},
 				{ label: qsTr("Continuous")		, value: "continuous"		, info: qsTr("Mean, standard deviation, and sample size per arm.")},
 				{ label: qsTr("Incidence rate")	, value: "incidenceRate"	, info: qsTr("Number of events and person-time at risk per arm.")},
-				{ label: qsTr("General")		, value: "general"			, info: qsTr("Arm-level effect size and its standard error per arm.")}
+				{ label: qsTr("Effect size and standard error")	, value: "effectSizeAndStandardError"	, info: qsTr("Effect size and its standard error per arm (e.g., the mean of the arm and its standard error); the treatment effects are the differences of the arm effect sizes.")}
 			]
 		}
 
-		// the effect size measure of contrast-based data and general arm-level data uses the labels of Robust Bayesian Meta-Analysis
+		// the effect size measure of contrast-based data uses the labels of Robust Bayesian Meta-Analysis; arm-level effect sizes specify their
+		// measure with the arm effect size measure instead (the treatment effects are their differences)
 		DropDown
 		{
 			name:			"effectSizeMeasure"
 			id:				effectSizeMeasure
 			label:			qsTr("Effect size measure")
 			startValue:		"general"
-			info:			qsTr("Effect size measure of the treatment effects: supplied as the 'Effect Size' (contrast-based data) or computed from the arm-level data (arm-based data). The measure labels the netmeta model; the estimates of contrast-based and general arm-level data do not depend on it.")
+			visible:		!(dataFormat.value === "armBased" && outcomeType.value === "effectSizeAndStandardError")
+			info:			qsTr("Effect size measure of the treatment effects: supplied as the 'Effect Size' (contrast-based data) or computed from the arm-level data (arm-based binary, continuous, and incidence rate data). The measure labels the netmeta model; the estimates of contrast-based data do not depend on it.")
 			values: (function() {
 				if (dataFormat.value === "armBased" && outcomeType.value === "binary") {
 					return [
@@ -128,12 +130,10 @@ Form
 						{ label: qsTr("Square root incidence rate difference")	, value: "IRSD"	, info: qsTr("Square root incidence rate difference")}
 					];
 				} else {
-					var contrastMeasures = dataFormat.value === "contrastBased" ? [
+					return [
 						{ label: qsTr("Mean difference")					, value: "MD"		, info: qsTr("Mean difference on the original outcome scale")},
 						{ label: qsTr("Log ratio of means")					, value: "ROM"		, info: qsTr("Log ratio of means")},
-						{ label: qsTr("Log incidence rate ratio")			, value: "IRR"		, info: qsTr("Log incidence rate ratio")}
-					] : []
-					return contrastMeasures.concat([
+						{ label: qsTr("Log incidence rate ratio")			, value: "IRR"		, info: qsTr("Log incidence rate ratio")},
 						{ label: qsTr("Standardized mean difference")		, value: "SMD"		, info: qsTr("Standardized mean difference such as Cohen's d or Hedges' g")},
 						{ label: qsTr("Fisher's z")							, value: "ZCOR"		, info: qsTr("Fisher's z transformation of correlation coefficients")},
 						{ label: qsTr("Log odds ratio")						, value: "OR"		, info: qsTr("Log odds ratio")},
@@ -141,8 +141,30 @@ Form
 						{ label: qsTr("Log hazard ratio")					, value: "HR"		, info: qsTr("Log hazard ratio")},
 						{ label: qsTr("Risk difference")					, value: "RD"		, info: qsTr("Risk difference")},
 						{ label: qsTr("General")							, value: "general"	, info: qsTr("General effect size that does not correspond to any of the measures above.")}
-					]);
+					];
 				}})()
+		}
+
+		// the measure of the arm-level effect sizes (the single-group measures of the Effect Size Computation); it defines the effect size
+		// measure of the treatment effects, which are the differences of the arm effect sizes
+		DropDown
+		{
+			name:			"armEffectSizeMeasure"
+			id:				armEffectSizeMeasure
+			label:			qsTr("Arm effect size measure")
+			startValue:		"general"
+			visible:		dataFormat.value === "armBased" && outcomeType.value === "effectSizeAndStandardError"
+			info:			qsTr("Measure of the 'Arm Effect Size'. The treatment effects are the differences of the arm effect sizes, and the measure defines their effect size measure (e.g., the differences of arm means are mean differences). The measure labels the netmeta model; the estimates do not depend on it.")
+			values:			[
+				{ label: qsTr("Mean")				, value: "MN"		, info: qsTr("Mean of the arm; the treatment effects are mean differences.")},
+				{ label: qsTr("Log mean")			, value: "MNLN"		, info: qsTr("Log mean of the arm; the treatment effects are log ratios of means.")},
+				{ label: qsTr("Proportion")			, value: "PR"		, info: qsTr("Proportion of the arm; the treatment effects are risk differences.")},
+				{ label: qsTr("Log proportion")		, value: "PLN"		, info: qsTr("Log proportion of the arm; the treatment effects are log risk ratios.")},
+				{ label: qsTr("Logit proportion")	, value: "PLO"		, info: qsTr("Logit proportion (log odds) of the arm; the treatment effects are log odds ratios.")},
+				{ label: qsTr("Incidence rate")		, value: "IR"		, info: qsTr("Incidence rate of the arm; the treatment effects are incidence rate differences.")},
+				{ label: qsTr("Log incidence rate")	, value: "IRLN"		, info: qsTr("Log incidence rate of the arm; the treatment effects are log incidence rate ratios.")},
+				{ label: qsTr("General")			, value: "general"	, info: qsTr("General arm effect size that does not correspond to any of the measures above.")}
+			]
 		}
 
 		AssignedVariablesList
@@ -282,10 +304,10 @@ Form
 			title:				qsTr("Arm Effect Size")
 			singleVariable:		true
 			allowedColumns:		["scale"]
-			visible:			dataFormat.value === "armBased" && outcomeType.value === "general"
-			enabled:			dataFormat.value === "armBased" && outcomeType.value === "general"
+			visible:			dataFormat.value === "armBased" && outcomeType.value === "effectSizeAndStandardError"
+			enabled:			dataFormat.value === "armBased" && outcomeType.value === "effectSizeAndStandardError"
 			onEnabledChanged:	itemDoubleClicked(0)
-			info:				qsTr("Variable containing the arm-level effect size (e.g., a log rate or a mean) in the study arm.")
+			info:				qsTr("Variable containing the effect size of the study arm, on the scale of the 'Arm effect size measure' (e.g., the mean or the log incidence rate of the arm).")
 		}
 
 		AssignedVariablesList
@@ -295,8 +317,8 @@ Form
 			title:				qsTr("Arm Effect Size Standard Error")
 			singleVariable:		true
 			allowedColumns:		["scale"]
-			visible:			dataFormat.value === "armBased" && outcomeType.value === "general"
-			enabled:			dataFormat.value === "armBased" && outcomeType.value === "general"
+			visible:			dataFormat.value === "armBased" && outcomeType.value === "effectSizeAndStandardError"
+			enabled:			dataFormat.value === "armBased" && outcomeType.value === "effectSizeAndStandardError"
 			onEnabledChanged:	itemDoubleClicked(0)
 			info:				qsTr("Variable containing the standard errors of the arm-level effect sizes.")
 		}
@@ -590,6 +612,13 @@ Form
 		analysisType:		"networkMetaAnalysis"
 		noHeterogeneity:	poolingMethod.noHeterogeneity
 		componentModel:		networkModel.value === "component"
+		// the measure of the treatment effects: arm-level effect sizes define it by the measure of the arms (as .nmaEffectSizeMeasure() in R)
+		effectSizeMeasureValue:	{
+			if (dataFormat.value !== "armBased" || outcomeType.value !== "effectSizeAndStandardError")
+				return effectSizeMeasure.value
+			var armMeasures = { MN: "MD", MNLN: "ROM", PR: "RD", PLN: "RR", PLO: "OR", IR: "IRD", IRLN: "IRR", general: "general" }
+			return armMeasures[armEffectSizeMeasure.value]
+		}
 
 		// (the ranking is a group of the statistics of the network meta-analysis)
 		MA.NetworkMetaAnalysisRanking {}

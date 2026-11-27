@@ -10,7 +10,7 @@ context("Classical Network Meta-Analysis")
 #   - networks of two treatments,
 #   - the messages of the data checks and of netmeta(),
 #   - network meta-regression (failed fits in the R code, predictors of excluded studies, the note on multi-arm studies),
-#   - effect size measures without an example file (continuous and incidence rate arm-level data).
+#   - effect size measures without an example file (continuous, incidence rate, and effect size arm-level data).
 # The tests compare the tables of the module with netmeta/meta functions run on the same data (netcomb(), discomb(), netmetabin(), pairwise()) and
 # check the texts of the messages. They run the analysis with the GUI defaults of the QML interface (nmaTestDefaults()), except for the network
 # plot and the four ranking metrics from the simulation, which are switched off (the plots take time, the simulation is random without a seed).
@@ -71,8 +71,9 @@ nmaTestDefaults <- function() {
     # data format and model
     dataFormat                 = "contrastBased",
     inputSummary               = FALSE,
-    outcomeType                = "general",
+    outcomeType                = "effectSizeAndStandardError",
     effectSizeMeasure          = "general",
+    armEffectSizeMeasure       = "general",
     poolingMethod              = "inverseVariance",
     method                     = "derSimonianLaird",
     fixedEffectTest            = "z",
@@ -638,10 +639,10 @@ nmaTestArmData <- function() {
 }
 
 nmaTestArmOptions <- list(
-  binary        = list(dataFormat = "armBased", outcomeType = "binary", studyId = "study", treatment = "treatment", eventsArm = "events", sampleSizeArm = "n"),
-  continuous    = list(dataFormat = "armBased", outcomeType = "continuous", studyId = "study", treatment = "treatment", meanArm = "mean", standardDeviationArm = "sd", sampleSizeArm = "n"),
-  incidenceRate = list(dataFormat = "armBased", outcomeType = "incidenceRate", studyId = "study", treatment = "treatment", eventsArm = "events", personTimeArm = "time"),
-  general       = list(dataFormat = "armBased", outcomeType = "general", studyId = "study", treatment = "treatment", effectSizeArm = "te", effectSizeStandardErrorArm = "se")
+  binary                     = list(dataFormat = "armBased", outcomeType = "binary", studyId = "study", treatment = "treatment", eventsArm = "events", sampleSizeArm = "n"),
+  continuous                 = list(dataFormat = "armBased", outcomeType = "continuous", studyId = "study", treatment = "treatment", meanArm = "mean", standardDeviationArm = "sd", sampleSizeArm = "n"),
+  incidenceRate              = list(dataFormat = "armBased", outcomeType = "incidenceRate", studyId = "study", treatment = "treatment", eventsArm = "events", personTimeArm = "time"),
+  effectSizeAndStandardError = list(dataFormat = "armBased", outcomeType = "effectSizeAndStandardError", studyId = "study", treatment = "treatment", effectSizeArm = "te", effectSizeStandardErrorArm = "se")
 )
 
 # the random-effects (DerSimonian-Laird) network meta-analysis of meta::pairwise() with the arguments of the module for the data of nmaTestArmData()
@@ -1304,7 +1305,7 @@ test_that("each validation stop of the data checks ends the analysis with its me
   expect_identical(stopMessage(change(arms, "n", 4, 0), continuous, effectSizeMeasure = "MD"), positive("n", "0", "s2"))
   expect_identical(stopMessage(change(arms, "events", 1, -2), nmaTestArmOptions$incidenceRate, effectSizeMeasure = "IRR"), nonNegative("events", "-2", "s1"))
   expect_identical(stopMessage(change(arms, "time", 2, 0), nmaTestArmOptions$incidenceRate, effectSizeMeasure = "IRR"), positive("time", "0", "s1"))
-  expect_identical(stopMessage(change(arms, "se", 2, 0), nmaTestArmOptions$general, effectSizeMeasure = "general"), positive("se", "0", "s1"))
+  expect_identical(stopMessage(change(arms, "se", 2, 0), nmaTestArmOptions$effectSizeAndStandardError), positive("se", "0", "s1"))
 
   # (a standard deviation of zero is accepted for the mean difference)
   results <- do.call(nmaTestRun, c(list(change(arms, "sd", 3, 0)), continuous, list(effectSizeMeasure = "MD")))
@@ -1521,62 +1522,124 @@ test_that("the meta-regression tables have a note if netmeta treats the comparis
   # a predictor with two levels (moderator: L1 and L2 in the subgroup G1)
   nmaTestCovarianceCase(droplevels(multiArm[multiArm$group == "G1", ]), c(nmaTestSyntheticOptions, list(predictors = "moderator")), multiArm = TRUE, note = TRUE, info = "contrast-based, multi-arm, factor")
 
-  # arm-based data (nmaTestArmData() has the three-arm study s5): the arm-level data of the summary measures with a covariance formula in netmeta
-  # (calcV) give the full covariance, the other inputs (ROM, incidence rates, general effect sizes) the diagonal matrix
+  # arm-based data (nmaTestArmData() has the three-arm study s5) of a measure with a covariance formula in netmeta: the full covariance, no note
   # (not whole numbers: a column of a few whole numbers is read as a nominal variable, and a predictor with three levels is not supported)
   data     <- nmaTestArmData()
   data$cov <- as.integer(sub("s", "", as.character(data$study))) %% 3 + 0.5
-  reference <- list(referenceTreatment = "A", predictors = "cov")
+  nmaTestCovarianceCase(data, c(nmaTestArmOptions$binary, list(effectSizeMeasure = "OR", referenceTreatment = "A", predictors = "cov")), multiArm = TRUE, note = FALSE, info = "binary OR")
+})
 
-  cases <- list(
-    list(type = "binary", measure = "OR", note = FALSE), list(type = "binary", measure = "RR", note = FALSE),
-    list(type = "binary", measure = "RD", note = FALSE), list(type = "binary", measure = "ASD", note = FALSE),
-    list(type = "continuous", measure = "MD", note = FALSE), list(type = "continuous", measure = "SMD", note = FALSE),
-    list(type = "continuous", measure = "ROM", note = TRUE),
-    list(type = "incidenceRate", measure = "IRR", note = TRUE), list(type = "incidenceRate", measure = "IRD", note = TRUE),
-    list(type = "incidenceRate", measure = "IRSD", note = TRUE),
-    list(type = "general", measure = "general", note = TRUE)
+test_that("the note on independent multi-arm comparisons follows the covariance that netmetareg() uses for each arm-level input", {
+
+  # The note depends on the arm-level columns of the fit (set by the outcome type) and on its summary measure only. For each input, the module's
+  # decision (.nmaMetaregressionIndependentComparisons()) is compared with the covariance of netmetareg() on the same fit: one fit per outcome type,
+  # whose summary measure is replaced by each measure of that outcome (netmetareg() reads the measure of the fit). The arm-level data of the
+  # measures with a covariance formula in netmeta (calcV) give the full covariance; the other inputs (ROM, incidence rates, arm effect sizes: also
+  # with a measure of calcV such as the mean difference of arm means, since the data have no sample sizes and standard deviations) the diagonal
+  # matrix; without the multi-arm study no input has a note.
+  data <- nmaTestArmData()
+
+  fit <- function(data, arguments) {
+    pairwise     <- do.call(meta::pairwise, c(list(treat = as.character(data$treatment), studlab = as.character(data$study)), arguments))
+    pairwise$cov <- as.integer(sub("s", "", pairwise$studlab)) %% 3 + 0.5
+    return(suppressWarnings(netmeta::netmeta(pairwise, common = FALSE, random = TRUE, method.tau = "REML", reference.group = "A", backtransf = FALSE)))
+  }
+  arguments <- function(data) list(
+    binary                     = list(event = data$events, n = data$n),
+    continuous                 = list(mean = data$mean, sd = data$sd, n = data$n),
+    incidenceRate              = list(event = data$events, time = data$time),
+    effectSizeAndStandardError = list(TE = data$te, seTE = data$se)
   )
-
-  for (case in cases) {
-    measure <- if (case$type == "general") list() else list(effectSizeMeasure = case$measure)
-    nmaTestCovarianceCase(data, c(nmaTestArmOptions[[case$type]], measure, reference), multiArm = TRUE, note = case$note, info = paste(case$type, case$measure))
+  check <- function(fit, measure, note, info) {
+    fit[["sm"]] <- measure
+    covariance  <- netmeta::netmetareg(fit, cov)[["V"]]  # (netmetareg() evaluates the covariate in the data of the fit)
+    expect_identical(jaspMetaAnalysis:::.nmaMetaregressionIndependentComparisons(fit), note, info = info)
+    expect_identical(any(covariance[row(covariance) != col(covariance)] != 0), !note, info = info)
   }
 
-  # arm-based data without the multi-arm study: no note for any input
-  twoArm <- droplevels(data[data$study != "s5", ])
-  nmaTestCovarianceCase(twoArm, c(nmaTestArmOptions$incidenceRate, list(effectSizeMeasure = "IRR"), reference), multiArm = FALSE, note = FALSE, info = "incidence rate, two-arm")
-  nmaTestCovarianceCase(twoArm, c(nmaTestArmOptions$general, reference), multiArm = FALSE, note = FALSE, info = "general, two-arm")
+  # (the summary measures of the arm effect sizes: MD for the arm means, "" for the general arm effect sizes)
+  cases <- list(
+    binary                     = c(OR = FALSE, RR = FALSE, RD = FALSE, ASD = FALSE),
+    continuous                 = c(MD = FALSE, SMD = FALSE, ROM = TRUE),
+    incidenceRate              = c(IRR = TRUE, IRD = TRUE, IRSD = TRUE),
+    effectSizeAndStandardError = c(MD = TRUE, general = TRUE)
+  )
+  multiArm <- arguments(data)
+  for (type in names(cases)) {
+    network <- fit(data, multiArm[[type]])
+    for (measure in names(cases[[type]]))
+      check(network, if (measure == "general") "" else measure, cases[[type]][[measure]], info = paste(type, measure))
+  }
+
+  twoArm      <- droplevels(data[data$study != "s5", ])
+  twoArmInput <- arguments(twoArm)
+  for (type in c("incidenceRate", "effectSizeAndStandardError")) {
+    network    <- fit(twoArm, twoArmInput[[type]])
+    covariance <- netmeta::netmetareg(network, cov)[["V"]]
+    expect_false(jaspMetaAnalysis:::.nmaMetaregressionIndependentComparisons(network), info = paste(type, "two-arm"))
+    expect_false(any(covariance[row(covariance) != col(covariance)] != 0), info = paste(type, "two-arm"))
+  }
 })
 
 # Effect size measures without an example file ----
 
-test_that("the effect size measures of continuous arm-level data equal pairwise() and netmeta()", {
+test_that("the effect size measure of each input is the summary measure of pairwise() and netmeta()", {
 
-  data <- nmaTestArmData()
+  # the measures only set the summary measure ('sm') of the calls; the computations are those of meta and netmeta, which the analyses below and
+  # the example files compare
+  specification <- function(...) jaspMetaAnalysis:::.nmaPairwiseSpecification(modifyList(nmaTestDefaults(), list(...)))
 
-  for (measure in c("MD", "SMD", "ROM")) {
+  measures <- list(binary = c("OR", "RR", "RD", "ASD"), continuous = c("MD", "SMD", "ROM"), incidenceRate = c("IRR", "IRD", "IRSD"))
+  for (type in names(measures))
+    for (measure in measures[[type]])
+      expect_identical(do.call(specification, c(nmaTestArmOptions[[type]], list(effectSizeMeasure = measure)))[["arguments"]][["sm"]], measure, info = paste(type, measure))
 
-    results <- do.call(nmaTestRun, c(list(data), nmaTestArmOptions$continuous, list(effectSizeMeasure = measure, method = "derSimonianLaird", referenceTreatment = "A")))
-    network <- nmaTestArmNetwork(data, list(mean = data$mean, sd = data$sd, n = data$n, sm = measure))
-
-    expect_identical(network[["sm"]], measure)
-    nmaTestAgreeArmModel(results, network, measure)
+  # the arm effect sizes: the measure of their differences, and no measure for general arm effect sizes; the hidden effect size measure of the
+  # other outcomes (here SMD) does not enter
+  armMeasures <- c(MN = "MD", MNLN = "ROM", PR = "RD", PLN = "RR", PLO = "OR", IR = "IRD", IRLN = "IRR", general = NA)
+  for (armMeasure in names(armMeasures)) {
+    arguments <- do.call(specification, c(nmaTestArmOptions$effectSizeAndStandardError, list(armEffectSizeMeasure = armMeasure, effectSizeMeasure = "SMD")))[["arguments"]]
+    if (is.na(armMeasures[[armMeasure]]))
+      expect_false("sm" %in% names(arguments), info = armMeasure)
+    else
+      expect_identical(arguments[["sm"]], armMeasures[[armMeasure]], info = armMeasure)
   }
+
+  # contrast-based data: the measure labels the netmeta() call, the arm effect size measure does not enter
+  for (measure in c("MD", "SMD", "OR", "HR"))
+    expect_identical(jaspMetaAnalysis:::.nmaSummaryMeasureArgument(modifyList(nmaTestDefaults(), list(effectSizeMeasure = measure, armEffectSizeMeasure = "MN"))), list(sm = measure), info = measure)
+  expect_identical(jaspMetaAnalysis:::.nmaSummaryMeasureArgument(modifyList(nmaTestDefaults(), list(effectSizeMeasure = "general", armEffectSizeMeasure = "MN"))), list())
 })
 
-test_that("the effect size measures of incidence rates equal pairwise() and netmeta()", {
+test_that("the effect sizes computed from continuous and incidence rate arm-level data equal pairwise() and netmeta()", {
 
+  # one measure per outcome type without an example file: the standardized mean difference (consistent in the multi-arm study s5) and the log
+  # incidence rate ratio (with the continuity correction of the study s9 with a single zero cell; the study s10 without events is dropped)
   data <- nmaTestArmData()
 
-  for (measure in c("IRR", "IRD", "IRSD")) {
+  results <- do.call(nmaTestRun, c(list(data), nmaTestArmOptions$continuous, list(effectSizeMeasure = "SMD", method = "derSimonianLaird", referenceTreatment = "A")))
+  network <- nmaTestArmNetwork(data, list(mean = data$mean, sd = data$sd, n = data$n, sm = "SMD"))
+  expect_identical(network[["sm"]], "SMD")
+  nmaTestAgreeArmModel(results, network, "SMD")
 
-    results <- do.call(nmaTestRun, c(list(data), nmaTestArmOptions$incidenceRate, list(effectSizeMeasure = measure, method = "derSimonianLaird", referenceTreatment = "A")))
-    network <- nmaTestArmNetwork(data, list(event = data$events, time = data$time, sm = measure, incr = 0.5, method.incr = "only0", allstudies = FALSE))
+  results <- do.call(nmaTestRun, c(list(data), nmaTestArmOptions$incidenceRate, list(effectSizeMeasure = "IRR", method = "derSimonianLaird", referenceTreatment = "A")))
+  network <- nmaTestArmNetwork(data, list(event = data$events, time = data$time, sm = "IRR", incr = 0.5, method.incr = "only0", allstudies = FALSE))
+  expect_identical(network[["sm"]], "IRR")
+  nmaTestAgreeArmModel(results, network, "IRR")
+})
 
-    expect_identical(network[["sm"]], measure)
-    nmaTestAgreeArmModel(results, network, measure)
-  }
+test_that("the means and standard errors of the arms give the mean differences of the continuous arm-level data", {
+
+  # the example of ?meta::pairwise: the arm means with their standard errors (sd / sqrt(n)) reproduce the analysis of the means, standard
+  # deviations, and sample sizes
+  data    <- nmaTestArmData()
+  data$te <- data$mean
+  data$se <- data$sd / sqrt(data$n)
+
+  results <- do.call(nmaTestRun, c(list(data), nmaTestArmOptions$effectSizeAndStandardError, list(armEffectSizeMeasure = "MN", method = "derSimonianLaird", referenceTreatment = "A")))
+  network <- nmaTestArmNetwork(data, list(mean = data$mean, sd = data$sd, n = data$n, sm = "MD"))
+
+  nmaTestAgreeArmModel(results, network, "means and standard errors")
 })
 
 test_that("net heat cells and square sizes match netheat for common and random effects", {

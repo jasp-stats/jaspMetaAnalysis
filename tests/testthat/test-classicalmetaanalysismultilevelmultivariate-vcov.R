@@ -3,7 +3,7 @@ context("Multilevel/Multivariate Meta-Analysis - variance-covariance matrix file
 # The multilevel example data (moderator deltype) with estimates nested in studies and sampling errors
 # correlated .6 within studies. The references are direct metafor fits with the same matrix.
 jaspFile <- testthat::test_path("jaspfiles", "other", "Multivariate and Multilevel Meta-Analysis - dat.assink2016.jasp")
-dataset  <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+dataset  <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 V        <- metafor::vcalc(vi = sei^2, cluster = study, obs = esid, rho = 0.6, data = dataset)
 
 .mammVcovReference <- function(V, rows = rep(TRUE, nrow(dataset))) {
@@ -14,12 +14,11 @@ V        <- metafor::vcalc(vi = sei^2, cluster = study, obs = esid, rho = 0.6, d
 
 .mammVcovRun <- function(...) {
   options <- jaspTools::analysisOptions(jaspFile)[[1]]
-  options[["randomEffectsSpecification"]][[1]][c("level1", "level2")]       <- list("study", "esid")
-  options[["randomEffectsSpecification.types"]][[1]][c("level1", "level2")] <- list("nominal", "nominal")
+  options[["randomEffectsSpecification"]][[1]][["level1"]] <- list(value = "study", types = list("nominal"))
+  options[["randomEffectsSpecification"]][[1]][["level2"]] <- list(value = "esid", types = list("nominal"))
   changes <- list(...)
   options[names(changes)] <- changes
-  encoded <- jaspTools:::encodeOptionsAndDataset(options, dataset)
-  jaspTools::runAnalysis("ClassicalMetaAnalysisMultilevelMultivariate", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  jaspTools::runAnalysis("ClassicalMetaAnalysisMultilevelMultivariate", dataset, options, view = FALSE)
 }
 
 .mammVcovCoefficients <- function(results, subgroup = NULL) {
@@ -32,10 +31,8 @@ V        <- metafor::vcalc(vi = sei^2, cluster = study, obs = esid, rho = 0.6, d
 # the matrix computed from the within-study correlation of the estimates
 constructOptions <- list(
   varianceCovarianceMatrixType                            = "constructsGroupsTimes",
-  varianceCovarianceMatrixCluster                         = "study",
-  varianceCovarianceMatrixCluster.types                   = "nominal",
-  varianceCovarianceMatrixConstruct                       = "esid",
-  varianceCovarianceMatrixConstruct.types                 = "nominal",
+  varianceCovarianceMatrixCluster                         = list(value = "study", types = list("nominal")),
+  varianceCovarianceMatrixConstruct                       = list(value = "esid", types = list("nominal")),
   varianceCovarianceMatrixConstructCorrelationMatrixValue = 0.6
 )
 
@@ -56,7 +53,7 @@ test_that("Precomputed matrix from a semicolon-separated file with decimal comma
 
 test_that("Subgroup analyses use the matching block of the precomputed matrix", {
   results <- .mammVcovRun(varianceCovarianceMatrixType = "precomputed", varianceCovarianceMatrixFile = fileComma,
-                          subgroup = "pubstatus", subgroup.types = "nominal")
+                          subgroup = list(value = "pubstatus", types = list("nominal")))
   for (level in c("0", "1"))
     expect_equal(.mammVcovCoefficients(results, level), .mammVcovReference(V, dataset$pubstatus == as.numeric(level)), tolerance = 1e-6)
 })
@@ -80,8 +77,7 @@ test_that("Construct-type correlation matrix from a semicolon-separated file mat
   file <- tempfile(fileext = ".csv")
   utils::write.csv2(rho, file)
   results <- do.call(.mammVcovRun, c(constructOptions, list(
-    varianceCovarianceMatrixConstructType                         = "deltype",
-    varianceCovarianceMatrixConstructType.types                   = "nominal",
+    varianceCovarianceMatrixConstructType                         = list(value = "deltype", types = list("nominal")),
     varianceCovarianceMatrixConstructTypeCorrelationMatrix        = "correlationMatrix",
     varianceCovarianceMatrixConstructTypeCorrelationMatrixFilePath = file
   )))

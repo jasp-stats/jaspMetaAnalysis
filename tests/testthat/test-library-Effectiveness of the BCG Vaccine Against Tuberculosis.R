@@ -8,12 +8,10 @@ test_that("EffectSizeComputation (analysis 1) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "library", "Effectiveness of the BCG Vaccine Against Tuberculosis.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[1]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("EffectSizeComputation", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("EffectSizeComputation", dataset, opts, view = FALSE)
 
   table <- results[["results"]][["computeSummary"]][["data"]]
   jaspTools::expect_equal_tables(table,
@@ -26,12 +24,10 @@ test_that("FunnelPlot (analysis 2) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "library", "Effectiveness of the BCG Vaccine Against Tuberculosis.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[2]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("FunnelPlot", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("FunnelPlot", dataset, opts, view = FALSE)
 
   table <- results[["results"]][["funnelAsymetryTests"]][["collection"]][["funnelAsymetryTests_metaRegressionTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
@@ -49,12 +45,10 @@ test_that("ClassicalMetaAnalysis (analysis 3) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "library", "Effectiveness of the BCG Vaccine Against Tuberculosis.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[3]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", dataset, opts, view = FALSE)
 
   plotName <- results[["results"]][["bubblePlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
@@ -66,7 +60,7 @@ test_that("ClassicalMetaAnalysis (analysis 3) results match", {
      0.147898433812982, -4.65975903724313, -0.354601562137474, 0.233804590091553
     ))
 
-  table <- results[["results"]][["estimatedMarginalMeansAndContrastsContainer"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize_jaspColumn3"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize_jaspColumn3_contrastsTable"]][["data"]]
+  table <- results[["results"]][["estimatedMarginalMeansAndContrastsContainer"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize_alloc"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize_alloc_contrastsTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
     list("alternate <unicode> random", 9, 0.267491666550525, -0.552339459310787,
      -0.920814009980363, 0.479262979895169, 0.362411214987031, 0.738088821451338,
@@ -77,7 +71,7 @@ test_that("ClassicalMetaAnalysis (analysis 3) results match", {
      -1.05214214982371, -1.45169653162192, 0.33644180969223, 0.321015940625031,
      -1.01538147835198, 0.400234869090924, 0.79978925088913))
 
-  table <- results[["results"]][["estimatedMarginalMeansAndContrastsContainer"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize_jaspColumn3"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize_jaspColumn3_estimatedMarginalMeansTable"]][["data"]]
+  table <- results[["results"]][["estimatedMarginalMeansAndContrastsContainer"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize_alloc"]][["collection"]][["estimatedMarginalMeansAndContrastsContainer_effectSize_alloc_estimatedMarginalMeansTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
     list(9, -0.619494499309261, -1.30623885441101, -1.72020568541061, 0.071691568426309,
      0.303579418086176, -2.04063405620406, 0.0672498557924919, 0.481216686792083,
@@ -95,18 +89,18 @@ test_that("ClassicalMetaAnalysis (analysis 3) results match", {
   jaspTools::expect_equal_tables(table,
     list(9, 0.29319369372162, -0.654295239237754, "Intercept", 0.501614036693835,
      0.418843106279745, 0.700008402491879, 1.24068262668099, 9, -0.0272757391020723,
-     -0.0487976390634342, "jaspColumn1", 0.0185690742051195, 0.00951388361308199,
+     -0.0487976390634342, "ablat", 0.0185690742051195, 0.00951388361308199,
      -2.86694059033548, -0.00575383914071043, 9, -0.267491666550525,
-     -1.08732279241184, "jaspColumn3 (random)", 0.479262979895169,
+     -1.08732279241184, "alloc (random)", 0.479262979895169,
      0.362411214987031, -0.738088821451338, 0.552339459310787, 9,
-     0.0584619738158694, -0.829406926861432, "jaspColumn3 (systematic)",
+     0.0584619738158694, -0.829406926861432, "alloc (systematic)",
      0.884875417595857, 0.392487717157123, 0.148952365285015, 0.946330874493171
     ))
 
   table <- results[["results"]][["metaregressionContainer"]][["collection"]][["metaregressionContainer_effectSizeTermsTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list(1, 9, 0.0185690742051195, 8.21934834851315, "jaspColumn1", 2,
-     9, 0.568999143161717, 0.600727887026436, "jaspColumn3"))
+    list(1, 9, 0.0185690742051195, 8.21934834851315, "ablat", 2,
+     9, 0.568999143161717, 0.600727887026436, "alloc"))
 
   table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,

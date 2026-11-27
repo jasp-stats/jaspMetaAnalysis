@@ -51,22 +51,33 @@
   return(NULL)
 }
 
-# the summary measure labels the netmeta objects; with backtransf = FALSE it does not change the estimates of contrast-based
-# and general arm-level data ("general" = no measure), for the other arm-level data it defines the computed effect sizes
+# the summary measure labels the netmeta objects; with backtransf = FALSE it does not change the estimates of contrast-based data and arm-level
+# effect sizes ("general" = no measure), for the other arm-level data it defines the computed effect sizes
 .nmaSummaryMeasureArgument <- function(options) {
-  if (options[["effectSizeMeasure"]] == "general")
+  measure <- .nmaEffectSizeMeasure(options)
+  if (measure == "general")
     return(list())
-  return(list(sm = options[["effectSizeMeasure"]]))
+  return(list(sm = measure))
+}
+
+# The effect size measure of the treatment effects. Arm-level effect sizes specify the measure of the arms (the single-group measures of
+# metafor::escalc()), and their differences (meta::pairwise() with TE and seTE) have the corresponding measure; the hidden 'Effect size
+# measure' is ignored for them.
+.nmaArmEffectSizeMeasures <- c(MN = "MD", MNLN = "ROM", PR = "RD", PLN = "RR", PLO = "OR", IR = "IRD", IRLN = "IRR", general = "general")
+.nmaEffectSizeMeasure     <- function(options) {
+  if (.nmaIsArmBased(options) && options[["outcomeType"]] == "effectSizeAndStandardError")
+    return(unname(.nmaArmEffectSizeMeasures[options[["armEffectSizeMeasure"]]]))
+  return(options[["effectSizeMeasure"]])
 }
 
 .nmaPairwiseSpecification <- function(options) {
 
   outcomeArguments <- switch(
     options[["outcomeType"]],
-    binary        = list(event = .nmaColumn(options[["eventsArm"]]), n = .nmaColumn(options[["sampleSizeArm"]])),
-    continuous    = list(mean = .nmaColumn(options[["meanArm"]]), sd = .nmaColumn(options[["standardDeviationArm"]]), n = .nmaColumn(options[["sampleSizeArm"]])),
-    incidenceRate = list(event = .nmaColumn(options[["eventsArm"]]), time = .nmaColumn(options[["personTimeArm"]])),
-    general       = list(TE = .nmaColumn(options[["effectSizeArm"]]), seTE = .nmaColumn(options[["effectSizeStandardErrorArm"]]))
+    binary                     = list(event = .nmaColumn(options[["eventsArm"]]), n = .nmaColumn(options[["sampleSizeArm"]])),
+    continuous                 = list(mean = .nmaColumn(options[["meanArm"]]), sd = .nmaColumn(options[["standardDeviationArm"]]), n = .nmaColumn(options[["sampleSizeArm"]])),
+    incidenceRate              = list(event = .nmaColumn(options[["eventsArm"]]), time = .nmaColumn(options[["personTimeArm"]])),
+    effectSizeAndStandardError = list(TE = .nmaColumn(options[["effectSizeArm"]]), seTE = .nmaColumn(options[["effectSizeStandardErrorArm"]]))
   )
 
   arguments <- c(list(treat = .nmaColumn(options[["treatment"]])), outcomeArguments, list(studlab = .nmaColumn(options[["studyId"]])))

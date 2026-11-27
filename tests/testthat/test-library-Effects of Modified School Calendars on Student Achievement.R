@@ -8,12 +8,10 @@ test_that("ClassicalMetaAnalysisMultilevelMultivariate (analysis 1) results matc
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "library", "Effects of Modified School Calendars on Student Achievement.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[1]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("ClassicalMetaAnalysisMultilevelMultivariate", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("ClassicalMetaAnalysisMultilevelMultivariate", dataset, opts, view = FALSE)
 
   table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
@@ -35,7 +33,7 @@ test_that("ClassicalMetaAnalysisMultilevelMultivariate (analysis 1) results matc
 
   table <- results[["results"]][["randomEstimatesContainer"]][["collection"]][["randomEstimatesContainer_containerS"]][["collection"]][["randomEstimatesContainer_containerS_tableS"]][["data"]]
   jaspTools::expect_equal_tables(table,
-    list("jaspColumn3", 11, 0.255072429499733, 0.0650619442908961, "jaspColumn3/jaspColumn4",
+    list("district", 11, 0.255072429499733, 0.0650619442908961, "district/school",
      56, 0.180932354841744, 0.0327365170285789))
 
   table <- results[["results"]][["randomEstimatesContainer"]][["collection"]][["randomEstimatesContainer_inclusionTestsContainer"]][["collection"]][["randomEstimatesContainer_inclusionTestsContainer_tableInclusion"]][["data"]]
@@ -49,9 +47,9 @@ test_that("ClassicalMetaAnalysisMultilevelMultivariate (analysis 1) results matc
   jaspTools::expect_equal_tables(table,
     list(21.9174480674219, 22.388036302716, 27.9394476231193, "", 3, -7.95872403371093,
      "", "", 37.6909989052213, 37.9217681359905, 41.7056652756862,
-     17.7735508377994, 2, -16.8454994526106, "jaspColumn3", 2.48818251251384e-05,
+     17.7735508377994, 2, -16.8454994526106, "district", 2.48818251251384e-05,
      68.4329523719603, 68.6637216027295, 72.4476187424252, 48.5155043045384,
-     2, -32.2164761859801, "jaspColumn4", 3.27687921744215e-12))
+     2, -32.2164761859801, "school", 3.27687921744215e-12))
 
 })
 
@@ -60,12 +58,10 @@ test_that("EffectSizeAggregation (analysis 2) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "library", "Effects of Modified School Calendars on Student Achievement.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[2]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("EffectSizeAggregation", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("EffectSizeAggregation", dataset, opts, view = FALSE)
 
   table <- results[["results"]][["summaryTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
@@ -78,12 +74,10 @@ test_that("ClassicalMetaAnalysis (analysis 3) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "library", "Effects of Modified School Calendars on Student Achievement.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[3]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", dataset, opts, view = FALSE)
 
   table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,

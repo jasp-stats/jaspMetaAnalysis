@@ -57,7 +57,7 @@ ClassicalNetworkMetaAnalysis <- function(jaspResults, dataset = NULL, options, .
   "treatment", "eventsArm", "sampleSizeArm", "meanArm", "standardDeviationArm", "personTimeArm",
   "effectSizeArm", "effectSizeStandardErrorArm", "predictors", "subgroup",
   # data format, outcome, and pooling
-  "dataFormat", "outcomeType", "effectSizeMeasure", "poolingMethod",
+  "dataFormat", "outcomeType", "effectSizeMeasure", "armEffectSizeMeasure", "poolingMethod",
   # model (standard or component; the components, the inactive treatment, and the interactions of the component model)
   "networkModel", "componentSpecification", "componentSeparator", "componentVariables", "componentInactiveTreatment", "componentInteractions",
   "method", "fixedEffectTest", "referenceTreatment", "confidenceIntervalsLevel",
@@ -110,10 +110,10 @@ ClassicalNetworkMetaAnalysis <- function(jaspResults, dataset = NULL, options, .
   # the data columns of the selected arm-based outcome type (in the order of the pairwise() call)
   return(switch(
     options[["outcomeType"]],
-    binary        = c(options[["eventsArm"]], options[["sampleSizeArm"]]),
-    continuous    = c(options[["meanArm"]], options[["standardDeviationArm"]], options[["sampleSizeArm"]]),
-    incidenceRate = c(options[["eventsArm"]], options[["personTimeArm"]]),
-    general       = c(options[["effectSizeArm"]], options[["effectSizeStandardErrorArm"]])
+    binary                     = c(options[["eventsArm"]], options[["sampleSizeArm"]]),
+    continuous                 = c(options[["meanArm"]], options[["standardDeviationArm"]], options[["sampleSizeArm"]]),
+    incidenceRate              = c(options[["eventsArm"]], options[["personTimeArm"]]),
+    effectSizeAndStandardError = c(options[["effectSizeArm"]], options[["effectSizeStandardErrorArm"]])
   ))
 }
 

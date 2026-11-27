@@ -121,11 +121,11 @@
   } else {
     switch(
       options[["outcomeType"]],
-      binary        = {
+      binary                     = {
         checkRange(options[["eventsArm"]],     positive = FALSE)
         checkRange(options[["sampleSizeArm"]], positive = TRUE)
       },
-      continuous    = {
+      continuous                 = {
         # the standardized mean difference and the ratio of means divide by the standard deviations; the ratio of means is the logarithm of
         # the ratio of the means, which are positive
         checkRange(options[["standardDeviationArm"]], positive = options[["effectSizeMeasure"]] %in% c("SMD", "ROM"))
@@ -133,11 +133,11 @@
           checkRange(options[["meanArm"]],            positive = TRUE)
         checkRange(options[["sampleSizeArm"]],        positive = TRUE)
       },
-      incidenceRate = {
+      incidenceRate              = {
         checkRange(options[["eventsArm"]],     positive = FALSE)
         checkRange(options[["personTimeArm"]], positive = TRUE)
       },
-      general       = checkRange(options[["effectSizeStandardErrorArm"]], positive = TRUE)
+      effectSizeAndStandardError = checkRange(options[["effectSizeStandardErrorArm"]], positive = TRUE)
     )
   }
 

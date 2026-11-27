@@ -33,6 +33,8 @@ Section
 	property bool noHeterogeneity: false
 	// network meta-analysis component model (component effects; no direct estimates and prediction intervals)
 	property bool componentModel: false
+	// network meta-analysis effect size measure of the treatment effects (the netmeta summary measure; "general" = no measure)
+	property string effectSizeMeasureValue: "general"
 	info: qsTr("Options for summarizing the meta-analytic results.")
 
 	Group
@@ -309,15 +311,29 @@ Section
 						{ label: qsTr("Log odds to SMD (logistic)")			, value: "logOddsToSmdLogistic"			},  // transf.lnortod.logis
 					];
 				} else if (networkMetaAnalysis) {
-					// transformations of relative treatment effects (contrasts) only
-					return [
-						{ label: qsTr("None")								, value: "none"							},  // NULL
-						{ label: qsTr("Exponential")						, value: "exponential"					},  // exp
+					// transformations of relative treatment effects (contrasts) only, restricted to those that apply to the effect size measure:
+					// the exponential of the log ratio measures, the conversions between log odds ratios and SMDs, and no transformation of the
+					// differences (MD, RD, ASD, IRD, IRSD, Fisher's z); a general effect size keeps all transformations
+					var none		= [{ label: qsTr("None")							, value: "none"					}]  // NULL
+					var exponential	= [{ label: qsTr("Exponential")						, value: "exponential"			}]  // exp
+					var logOddsToSmd	= [
 						{ label: qsTr("Log odds to SMD (normal)")			, value: "logOddsToSmdNormal"			},  // transf.lnortod.norm
-						{ label: qsTr("Log odds to SMD (logistic)")			, value: "logOddsToSmdLogistic"			},  // transf.lnortod.logis
+						{ label: qsTr("Log odds to SMD (logistic)")			, value: "logOddsToSmdLogistic"			}   // transf.lnortod.logis
+					]
+					var smdToLogOdds	= [
 						{ label: qsTr("SMD to log odds (normal)")			, value: "smdToLogOddsNormal"			},  // transf.dtolnor.norm
 						{ label: qsTr("SMD to log odds (logistic)")			, value: "smdToLogOddsLogistic"			}   // transf.dtolnor.logis
-					];
+					]
+					switch (effectSizeMeasureValue) {
+						case "OR":		return none.concat(exponential, logOddsToSmd);
+						case "RR":
+						case "ROM":
+						case "IRR":
+						case "HR":		return none.concat(exponential);
+						case "SMD":		return none.concat(smdToLogOdds);
+						case "general":	return none.concat(exponential, logOddsToSmd, smdToLogOdds);
+						default:		return none;
+					}
 				}})()
 		}
 	}

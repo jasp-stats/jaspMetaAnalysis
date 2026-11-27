@@ -172,7 +172,7 @@
 <text x='317.76' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='9.46px' lengthAdjust='spacingAndGlyphs'>2</text>
 <text x='472.47' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='9.46px' lengthAdjust='spacingAndGlyphs'>3</text>
 <text x='627.17' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='9.46px' lengthAdjust='spacingAndGlyphs'>4</text>
-<text x='395.11' y='567.49' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='99.24px' lengthAdjust='spacingAndGlyphs'>jaspColumn1</text>
+<text x='395.11' y='567.49' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='32.12px' lengthAdjust='spacingAndGlyphs'>time</text>
 <text transform='translate(16.68,265.42) rotate(-90)' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='81.27px' lengthAdjust='spacingAndGlyphs'>Effect Size</text>
 <text x='395.11' y='11.70' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='245.73px' lengthAdjust='spacingAndGlyphs'>analysis-4_figure-1_bubble-plots</text>
 </g>

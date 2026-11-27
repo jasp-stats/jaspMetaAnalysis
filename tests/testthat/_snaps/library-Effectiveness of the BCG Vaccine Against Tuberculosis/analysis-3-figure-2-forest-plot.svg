@@ -106,7 +106,7 @@
 <text x='244.37' y='264.58' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>55</text>
 <text x='244.37' y='282.88' text-anchor='middle' style='font-size: 11.38px; font-family: sans;' textLength='12.66px' lengthAdjust='spacingAndGlyphs'>44</text>
 <text x='272.22' y='319.48' text-anchor='end' style='font-size: 11.38px; font-weight: bold; font-family: sans;' textLength='134.76px' lengthAdjust='spacingAndGlyphs'>Estimated Marginal Means</text>
-<text x='272.22' y='337.78' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='195.51px' lengthAdjust='spacingAndGlyphs'>jaspColumn3: F(2, 9) = 0.60, p = 0.569</text>
+<text x='272.22' y='337.78' text-anchor='end' style='font-size: 11.38px; font-family: sans;' textLength='152.48px' lengthAdjust='spacingAndGlyphs'>alloc: F(2, 9) = 0.60, p = 0.569</text>
 <text x='272.22' y='356.07' text-anchor='end' style='font-size: 11.38px; font-style: italic; font-family: sans;' textLength='160.71px' lengthAdjust='spacingAndGlyphs'>alternate: t(9) = -2.04, p = 0.072</text>
 <text x='272.22' y='374.37' text-anchor='end' style='font-size: 11.38px; font-style: italic; font-family: sans;' textLength='155.02px' lengthAdjust='spacingAndGlyphs'>random: t(9) = -4.49, p = 0.002</text>
 <text x='272.22' y='392.67' text-anchor='end' style='font-size: 11.38px; font-style: italic; font-family: sans;' textLength='170.20px' lengthAdjust='spacingAndGlyphs'>systematic: t(9) = -2.22, p = 0.054</text>

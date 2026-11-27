@@ -8,12 +8,10 @@ test_that("ClassicalMetaAnalysis (analysis 1) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Forest Plot - edge cases.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[1]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", dataset, opts, view = FALSE)
 
   plotName <- results[["results"]][["forestPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
@@ -39,12 +37,10 @@ test_that("ClassicalMetaAnalysis (analysis 2) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Forest Plot - edge cases.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[2]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", dataset, opts, view = FALSE)
 
   plotName <- results[["results"]][["forestPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
@@ -70,12 +66,10 @@ test_that("ClassicalMetaAnalysis (analysis 3) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Forest Plot - edge cases.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[3]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", dataset, opts, view = FALSE)
 
   plotName <- results[["results"]][["forestPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
@@ -100,12 +94,10 @@ test_that("ClassicalMetaAnalysis (analysis 4) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Forest Plot - edge cases.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[4]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", dataset, opts, view = FALSE)
 
   plotName <- results[["results"]][["forestPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
@@ -130,12 +122,10 @@ test_that("ClassicalMetaAnalysis (analysis 5) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Forest Plot - edge cases.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[5]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", dataset, opts, view = FALSE)
 
   plotName <- results[["results"]][["forestPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
@@ -160,12 +150,10 @@ test_that("ClassicalMetaAnalysis (analysis 6) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Forest Plot - edge cases.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[6]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", dataset, opts, view = FALSE)
 
   plotName <- results[["results"]][["forestPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
@@ -190,12 +178,10 @@ test_that("ClassicalMetaAnalysis (analysis 7) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Forest Plot - edge cases.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[7]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", dataset, opts, view = FALSE)
 
   plotName <- results[["results"]][["forestPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
@@ -220,12 +206,10 @@ test_that("ClassicalMetaAnalysis (analysis 8) results match", {
   # Load from JASP example file
   jaspFile <- testthat::test_path("jaspfiles", "other", "Forest Plot - edge cases.jasp")
   opts <- jaspTools::analysisOptions(jaspFile)[[8]]
-  dataset <- jaspTools::extractDatasetFromJASPFile(jaspFile)
+  dataset <- jaspSyntax::readDatasetFromJaspFile(jaspFile)
 
-  # Encode and run analysis
-  encoded <- jaspTools:::encodeOptionsAndDataset(opts, dataset)
   set.seed(1)
-  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", encoded$dataset, encoded$options, encodedDataset = TRUE)
+  results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", dataset, opts, view = FALSE)
 
   plotName <- results[["results"]][["forestPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
