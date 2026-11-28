@@ -1,0 +1,72 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "df": 21,
+      "method": "Egger (unweighted)",
+      "p": 0.3917887298900319,
+      "t": -0.8744043304132584
+    },
+    {
+      "df": 21,
+      "method": "Egger (multiplicative overdispersion)",
+      "p": 0.8115022047132214,
+      "t": -0.2415103375485324
+    },
+    {
+      "df": 21,
+      "method": "Macaskill",
+      "p": 0.22346901194859686,
+      "t": -1.254429841461889
+    },
+    {
+      "df": 21,
+      "method": "Macaskill (pooled)",
+      "p": 0.11480188100849244,
+      "t": -1.6452645282482958
+    },
+    {
+      "df": 21,
+      "method": "Peters",
+      "p": 0.48675668574843656,
+      "t": -0.7079559376411221
+    },
+    {
+      "df": 21,
+      "method": "Debray",
+      "p": 0.3838392854899213,
+      "t": -0.8894463327494697
+    }
+  ],
+  "footnotes": [],
+  "name": "funnelTestTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "method",
+        "title": "Method",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "t",
+        "title": "t-statistic",
+        "type": "number"
+      },
+      {
+        "name": "df",
+        "title": "df",
+        "type": "integer"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "p",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Funnel Plot Asymmetry Tests"
+}

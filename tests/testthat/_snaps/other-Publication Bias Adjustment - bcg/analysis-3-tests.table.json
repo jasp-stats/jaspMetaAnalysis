@@ -1,0 +1,117 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "pval": 1.2572044295483625e-12,
+      "stat": "Qₑ(5) = 64.76",
+      "subgroup": "random",
+      "test": "Residual heterogeneity"
+    },
+    {
+      "pval": "",
+      "stat": "",
+      "subgroup": "alternate",
+      "test": ""
+    },
+    {
+      "pval": 0.00025503438395703057,
+      "stat": "Qₑ(2) = 16.55",
+      "subgroup": "systematic",
+      "test": ""
+    },
+    {
+      "pval": 0.3704887228457251,
+      "stat": "z = -0.90",
+      "subgroup": "random",
+      "test": "Pooled effect"
+    },
+    {
+      "pval": "",
+      "stat": "",
+      "subgroup": "alternate",
+      "test": ""
+    },
+    {
+      "pval": 0.2463086487821603,
+      "stat": "z = -1.16",
+      "subgroup": "systematic",
+      "test": ""
+    },
+    {
+      "pval": 0.16247323859434196,
+      "stat": "z = -1.40",
+      "subgroup": "random",
+      "test": "Publication bias (PET)"
+    },
+    {
+      "pval": "",
+      "stat": "",
+      "subgroup": "alternate",
+      "test": ""
+    },
+    {
+      "pval": 0.4792895355326815,
+      "stat": "z = 0.71",
+      "subgroup": "systematic",
+      "test": ""
+    },
+    {
+      "pval": 0.6271240139864039,
+      "stat": "Qₘ(1) = 0.24",
+      "subgroup": "",
+      "test": "Subgroup differences"
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "Error:",
+      "text": "The PET model for subgroup 'alternate' could not be estimated because there are too few estimates (2)."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "random: Results are based on the PET model: the PET adjusted effect test resulted in p = 0.370 (threshold 0.1)."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "systematic: Results are based on the PET model: the PET adjusted effect test resulted in p = 0.246 (threshold 0.1)."
+    }
+  ],
+  "name": "modelSummaryContainer_testsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "test",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "subgroup",
+        "title": "Subgroup",
+        "type": "string"
+      },
+      {
+        "name": "stat",
+        "title": "Test",
+        "type": "string"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Meta-Analytic Tests"
+}

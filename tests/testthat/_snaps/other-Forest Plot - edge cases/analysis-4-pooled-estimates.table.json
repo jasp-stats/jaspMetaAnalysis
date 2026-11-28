@@ -1,0 +1,85 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "est": "0.4894209",
+      "lCi": "0.3300722",
+      "lPi": "0.1358754",
+      "par": "Pooled effect",
+      "uCi": "0.7256983",
+      "uPi": "1.762886"
+    },
+    {
+      "est": "0.559681450400675",
+      "lCi": "0.345970103896593",
+      "lPi": "",
+      "par": "𝜏",
+      "uCi": "1.05427048810547",
+      "uPi": ""
+    },
+    {
+      "est": "0.313243325922604",
+      "lCi": "0.119695312790219",
+      "lPi": "",
+      "par": "𝜏²",
+      "uCi": "1.11148626209015",
+      "uPi": ""
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "The pooled effect is transformed using exponential transformation. For nonlinear transformations, the transformed estimate is interpreted as a median on the transformed scale."
+    }
+  ],
+  "name": "modelSummaryContainer_pooledEstimatesTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "par",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lPi",
+        "overTitle": "95% PI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uPi",
+        "overTitle": "95% PI",
+        "title": "Upper",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Meta-Analytic Estimates"
+}

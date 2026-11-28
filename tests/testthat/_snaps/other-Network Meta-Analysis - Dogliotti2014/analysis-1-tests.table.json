@@ -1,0 +1,53 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "pval": 0.28145529694591276,
+      "stat": "Q(16) = 18.76",
+      "test": "Total"
+    },
+    {
+      "pval": 0.28265147501159477,
+      "stat": "Q(11) = 13.17",
+      "test": "Within designs"
+    },
+    {
+      "pval": 0.34798740897275476,
+      "stat": "Q(5) = 5.59",
+      "test": "Between designs"
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "1 study was excluded because none of its effect sizes could be computed (e.g., events in all or in none of the participants of the compared arms): 'WASPO, 2007'."
+    }
+  ],
+  "name": "modelSummaryContainer_testsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "test",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "stat",
+        "title": "Test",
+        "type": "string"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Network Meta-Analytic Tests"
+}

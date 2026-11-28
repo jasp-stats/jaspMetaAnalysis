@@ -1,0 +1,152 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "comparison": "Apixaban vs. Aspirin",
+      "proportion": 0.3657883327854082
+    },
+    {
+      "comparison": "Apixaban vs. Aspirin+Clopidogtrel",
+      "proportion": 0
+    },
+    {
+      "comparison": "Apixaban vs. Dabigatran 110mg",
+      "proportion": 0
+    },
+    {
+      "comparison": "Apixaban vs. Dabigatran 150mg",
+      "proportion": 0
+    },
+    {
+      "comparison": "Apixaban vs. Placebo/Control",
+      "proportion": 0
+    },
+    {
+      "comparison": "Apixaban vs. Rivaroxaban",
+      "proportion": 0
+    },
+    {
+      "comparison": "Apixaban vs. VKAs",
+      "proportion": 0.7906649995566126
+    },
+    {
+      "comparison": "Aspirin vs. Aspirin+Clopidogtrel",
+      "proportion": 0.7745813140114987
+    },
+    {
+      "comparison": "Aspirin vs. Dabigatran 110mg",
+      "proportion": 0
+    },
+    {
+      "comparison": "Aspirin vs. Dabigatran 150mg",
+      "proportion": 0
+    },
+    {
+      "comparison": "Aspirin vs. Placebo/Control",
+      "proportion": 0.7102075894966858
+    },
+    {
+      "comparison": "Aspirin vs. Rivaroxaban",
+      "proportion": 0
+    },
+    {
+      "comparison": "Aspirin vs. VKAs",
+      "proportion": 0.5192283573271663
+    },
+    {
+      "comparison": "Aspirin+Clopidogtrel vs. Dabigatran 110mg",
+      "proportion": 0
+    },
+    {
+      "comparison": "Aspirin+Clopidogtrel vs. Dabigatran 150mg",
+      "proportion": 0
+    },
+    {
+      "comparison": "Aspirin+Clopidogtrel vs. Placebo/Control",
+      "proportion": 0
+    },
+    {
+      "comparison": "Aspirin+Clopidogtrel vs. Rivaroxaban",
+      "proportion": 0
+    },
+    {
+      "comparison": "Aspirin+Clopidogtrel vs. VKAs",
+      "proportion": 0.3431404306432889
+    },
+    {
+      "comparison": "Dabigatran 110mg vs. Dabigatran 150mg",
+      "proportion": 0.9765662733549847
+    },
+    {
+      "comparison": "Dabigatran 110mg vs. Placebo/Control",
+      "proportion": 0
+    },
+    {
+      "comparison": "Dabigatran 110mg vs. Rivaroxaban",
+      "proportion": 0
+    },
+    {
+      "comparison": "Dabigatran 110mg vs. VKAs",
+      "proportion": 0.9703955598525114
+    },
+    {
+      "comparison": "Dabigatran 150mg vs. Placebo/Control",
+      "proportion": 0
+    },
+    {
+      "comparison": "Dabigatran 150mg vs. Rivaroxaban",
+      "proportion": 0
+    },
+    {
+      "comparison": "Dabigatran 150mg vs. VKAs",
+      "proportion": 0.9757421422995662
+    },
+    {
+      "comparison": "Placebo/Control vs. Rivaroxaban",
+      "proportion": 0
+    },
+    {
+      "comparison": "Placebo/Control vs. VKAs",
+      "proportion": 0.5022482765584166
+    },
+    {
+      "comparison": "Rivaroxaban vs. VKAs",
+      "proportion": 0.9702671955682678
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "For the non-central hypergeometric method, the direct evidence proportion compares the variance of the network estimate with the variance of the Mantel-Haenszel direct estimate, so comparisons with only direct evidence can have proportions below 1."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "The mean path length and the minimal parallelism are not available for the Mantel-Haenszel, non-central hypergeometric, and penalized logistic regression pooling methods."
+    }
+  ],
+  "name": "evidenceContainer_directEvidenceTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "comparison",
+        "title": "Comparison",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "proportion",
+        "title": "Direct evidence proportion",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Direct Evidence"
+}

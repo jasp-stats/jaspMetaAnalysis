@@ -1,0 +1,60 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "pval": 3.190982328731065e-25,
+      "stat": "Qₑ(11) = 143.48",
+      "test": "Residual heterogeneity"
+    },
+    {
+      "pval": 0.016697519971305502,
+      "stat": "t(11) = -2.82",
+      "test": "Pooled effect"
+    },
+    {
+      "pval": 0.6316540321912398,
+      "stat": "t(11) = -0.49",
+      "test": "Publication bias (PEESE)"
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Results are based on the PEESE model."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "The bias adjustment applies to 11 estimates. 2 estimates at level 'alternate' are unaffected."
+    }
+  ],
+  "name": "modelSummaryContainer_testsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "test",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "stat",
+        "title": "Test",
+        "type": "string"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Meta-Analytic Tests"
+}

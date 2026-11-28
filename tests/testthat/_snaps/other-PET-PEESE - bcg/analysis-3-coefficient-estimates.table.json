@@ -1,0 +1,73 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "df": 11,
+      "est": -0.6478595551821419,
+      "lCi": -3.5397633755791307,
+      "par": "SE²",
+      "pval": 0.6316540321912398,
+      "se": 1.3139133660840236,
+      "stat": -0.49307631074110847,
+      "uCi": 2.2440442652148467
+    }
+  ],
+  "footnotes": [],
+  "name": "petPeeseSummary_coefficientEstimates",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "par",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "se",
+        "title": "Standard Error",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "stat",
+        "title": "t",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "df",
+        "title": "df",
+        "type": "number"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Bias Coefficient Estimates"
+}

@@ -1,0 +1,45 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "est": 0.9999999991935454,
+      "lCi": 0.43125272308677776,
+      "par": "ρ",
+      "uCi": 1
+    }
+  ],
+  "footnotes": [],
+  "name": "randomEstimatesContainer_confidenceIntervalsContainer_confidenceContainerG_tempTable2",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "par",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "ρ",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Estimates 𝜏²"
+}

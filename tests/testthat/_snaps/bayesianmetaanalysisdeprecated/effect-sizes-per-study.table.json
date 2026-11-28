@@ -1,0 +1,158 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "estimatedES": -0.7621952873686099,
+      "estimatedLower": -1.56463441301078,
+      "estimatedUpper": 0.004341209864667922,
+      "observedES": -0.8893113339202054,
+      "study": "Study 1"
+    },
+    {
+      "estimatedES": -1.2164141455546187,
+      "estimatedLower": -1.9524173632606125,
+      "estimatedUpper": -0.5314091072115494,
+      "observedES": -1.5853886572014306,
+      "study": "Study 2"
+    },
+    {
+      "estimatedES": -0.954517427695111,
+      "estimatedLower": -1.870341348188226,
+      "estimatedUpper": -0.15429646804257927,
+      "observedES": -1.3480731482996933,
+      "study": "Study 3"
+    },
+    {
+      "estimatedES": -1.3873259704177259,
+      "estimatedLower": -1.6514208396460137,
+      "estimatedUpper": -1.117382947070346,
+      "observedES": -1.4415511900213054,
+      "study": "Study 4"
+    },
+    {
+      "estimatedES": -0.28778727651212427,
+      "estimatedLower": -0.7005225477535636,
+      "estimatedUpper": 0.1381366672226366,
+      "observedES": -0.21754732221129558,
+      "study": "Study 5"
+    },
+    {
+      "estimatedES": -0.7835170314395931,
+      "estimatedLower": -0.9506295706960957,
+      "estimatedUpper": -0.616959899178507,
+      "observedES": -0.786115585818864,
+      "study": "Study 6"
+    },
+    {
+      "estimatedES": -1.2103401639242215,
+      "estimatedLower": -1.96329934619858,
+      "estimatedUpper": -0.5082815720041055,
+      "observedES": -1.6208982235983918,
+      "study": "Study 7"
+    },
+    {
+      "estimatedES": 0.0013714326595682278,
+      "estimatedLower": -0.12001211415657344,
+      "estimatedUpper": 0.12369437482119129,
+      "observedES": 0.011952333523840508,
+      "study": "Study 8"
+    },
+    {
+      "estimatedES": -0.5025486722915029,
+      "estimatedLower": -0.9452226512013923,
+      "estimatedUpper": -0.06809762071008248,
+      "observedES": -0.4694176487381494,
+      "study": "Study 9"
+    },
+    {
+      "estimatedES": -1.2242254079315844,
+      "estimatedLower": -1.7220073712744002,
+      "estimatedUpper": -0.7386903388667494,
+      "observedES": -1.3713448034727844,
+      "study": "Study 10"
+    },
+    {
+      "estimatedES": -0.35460996456965826,
+      "estimatedLower": -0.5674007854550115,
+      "estimatedUpper": -0.14191813148403837,
+      "observedES": -0.3393588283383906,
+      "study": "Study 11"
+    },
+    {
+      "estimatedES": -0.25871365166814847,
+      "estimatedLower": -1.1452191618445764,
+      "estimatedUpper": 0.705133634656889,
+      "observedES": 0.44591340057137874,
+      "study": "Study 12"
+    },
+    {
+      "estimatedES": -0.15342379446065552,
+      "estimatedLower": -0.6453893347709012,
+      "estimatedUpper": 0.33588126873061436,
+      "observedES": -0.017313948216879815,
+      "study": "Study 13"
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": [
+        "estimatedES",
+        "estimatedLower",
+        "estimatedUpper"
+      ],
+      "myOrder": 12,
+      "rows": null,
+      "symbol": 0,
+      "text": "Posterior mean and 95% credible interval estimates from the random effects model."
+    }
+  ],
+  "name": "effectSizePerStudy",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "study",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "observedES",
+        "title": "Observed",
+        "type": "number"
+      },
+      {
+        ".footnotes": [
+          0
+        ],
+        "format": "sf:4;dp:3",
+        "name": "estimatedES",
+        "overTitle": "Estimated",
+        "title": "Mean",
+        "type": "number"
+      },
+      {
+        ".footnotes": [
+          0
+        ],
+        "format": "sf:4;dp:3",
+        "name": "estimatedLower",
+        "overTitle": "Estimated",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        ".footnotes": [
+          0
+        ],
+        "format": "sf:4;dp:3",
+        "name": "estimatedUpper",
+        "overTitle": "Estimated",
+        "title": "Upper",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Effect Sizes per Study"
+}

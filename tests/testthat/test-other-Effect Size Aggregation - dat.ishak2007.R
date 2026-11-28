@@ -13,20 +13,14 @@ test_that("ClassicalMetaAnalysisMultilevelMultivariate (analysis 1) results matc
   set.seed(1)
   results <- jaspTools::runAnalysis("ClassicalMetaAnalysisMultilevelMultivariate", dataset, opts, view = FALSE)
 
-  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(-27.20167, -29.13199, -38.14078, "Pooled effect", 0.9701636, -25.27134,
-     -16.26255))
+  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]]
+  jaspTools::expect_snapshot_table(table, "analysis-1-pooled-estimates")
 
-  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_testsTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(4.13628015865022e-159, "Q<unicode>(81) = 1003.86", "Heterogeneity",
-     1.85396853361382e-43, "t(81) = -28.04", "Pooled effect"))
+  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_testsTable"]]
+  jaspTools::expect_snapshot_table(table, "analysis-1-tests")
 
-  table <- results[["results"]][["randomEstimatesContainer"]][["collection"]][["randomEstimatesContainer_containerG"]][["collection"]][["randomEstimatesContainer_containerG_table1"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(29.2857791691486, 5.41163368763525, "𝜏<unicode>", 0.847080448797304,
-     "", "<unicode>"))
+  table <- results[["results"]][["randomEstimatesContainer"]][["collection"]][["randomEstimatesContainer_containerG"]][["collection"]][["randomEstimatesContainer_containerG_table1"]]
+  jaspTools::expect_snapshot_table(table, "analysis-1-random-estimates-g-1")
 
 })
 
@@ -40,9 +34,8 @@ test_that("EffectSizeAggregation (analysis 2) results match", {
   set.seed(1)
   results <- jaspTools::runAnalysis("EffectSizeAggregation", dataset, opts, view = FALSE)
 
-  table <- results[["results"]][["summaryTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list("Autoregressive", 46, 82))
+  table <- results[["results"]][["summaryTable"]]
+  jaspTools::expect_snapshot_table(table, "analysis-2-summary")
 
 })
 
@@ -56,17 +49,11 @@ test_that("ClassicalMetaAnalysis (analysis 3) results match", {
   set.seed(1)
   results <- jaspTools::runAnalysis("ClassicalMetaAnalysis", dataset, opts, view = FALSE)
 
-  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(-27.60449, -29.58568, -38.59124, "Pooled effect", 0.9836601, -25.6233,
-     -16.61774, 5.36548620206849, 3.92310724580388, "", "𝜏", 0.839352829974039,
-     7.47902931880001, "", 28.7884421845874, 15.3907704620789, "",
-     "𝜏<unicode>", 9.00707205578569, 55.9358795514702, ""))
+  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]]
+  jaspTools::expect_snapshot_table(table, "analysis-3-pooled-estimates")
 
-  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_testsTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(2.33754320207953e-22, "Q<unicode>(45) = 205.41", "Heterogeneity",
-     3.73848444374336e-30, "t(45) = -28.06", "Pooled effect"))
+  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_testsTable"]]
+  jaspTools::expect_snapshot_table(table, "analysis-3-tests")
 
 })
 

@@ -1,0 +1,70 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "estimate": 0.7918660752729385,
+      "lowerCI": 0.7848948921646596,
+      "lowerPI": "",
+      "upperCI": 0.7986692854197579,
+      "upperPI": ""
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Based on 23 studies."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "The model was estimated using fixedEffects method with normal/logit link function."
+    }
+  ],
+  "name": "summaryTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "format": "sf:4;dp:3",
+        "name": "estimate",
+        "title": "Mean",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lowerCI",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "upperCI",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lowerPI",
+        "overTitle": "95% PI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "upperPI",
+        "overTitle": "95% PI",
+        "title": "Upper",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Concordance Statistic Meta-Analysis Summary"
+}

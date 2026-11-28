@@ -71,21 +71,13 @@ test_that("Peters plot matches", {
 })
 
 test_that("Funnel Plot Asymmetry Tests table results match", {
-  table <- results[["results"]][["funnelTestTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-                                 list(21, "Egger (unweighted)", 0.247492409917581, 1.18956830232744,
-                                      21, "Egger (multiplicative overdispersion)", 0.104342197958761,
-                                      1.69766707464803, 21, "Macaskill", 0.00307473290181148, -3.34424947062035,
-                                      21, "Macaskill (pooled)", 0.00290867961304971, -3.36795372835898,
-                                      21, "Peters", 0.0378044019226087, 2.21684931244986, 21, "Debray",
-                                      0.199963923458596, 1.32329829199447))
+  table <- results[["results"]][["funnelTestTable"]]
+  jaspTools::expect_snapshot_table(table, "funnel-plot-asymmetry-tests")
 })
 
 test_that("Observed-Expected Ratio Meta-Analysis Summary table results match", {
-  table <- results[["results"]][["summaryTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-                                 list(1.10759727531355, 0.899897320351101, 0.429525045622228, 1.36323522310676,
-                                      2.85611220296795))
+  table <- results[["results"]][["summaryTable"]]
+  jaspTools::expect_snapshot_table(table, "observed-expected-ratio-meta-analysis-summary")
 })
 
 
@@ -244,21 +236,13 @@ test_that("Peters plot matches", {
 })
 
 test_that("Funnel Plot Asymmetry Tests table results match", {
-  table <- results[["results"]][["funnelTestTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-                                 list(21, "Egger (unweighted)", 0.391788729890032, -0.874404330413258,
-                                      21, "Egger (multiplicative overdispersion)", 0.811502204713222,
-                                      -0.241510337548532, 21, "Macaskill", 0.223469011948597, -1.25442984146189,
-                                      21, "Macaskill (pooled)", 0.114801881008492, -1.6452645282483,
-                                      21, "Peters", 0.486756685748436, -0.707955937641122, 21, "Debray",
-                                      0.383839285489921, -0.889446332749469))
+  table <- results[["results"]][["funnelTestTable"]]
+  jaspTools::expect_snapshot_table(table, "funnel-plot-asymmetry-tests-2")
 })
 
 test_that("Concordance Statistic Meta-Analysis Summary table results match", {
-  table <- results[["results"]][["summaryTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-                                 list(0.791866075272939, 0.78489489216466, "", 0.798669285419758, ""
-                                 ))
+  table <- results[["results"]][["summaryTable"]]
+  jaspTools::expect_snapshot_table(table, "concordance-statistic-meta-analysis-summary")
 })
 
 
@@ -317,17 +301,11 @@ test_that("Egger (unweighted) plot matches", {
 })
 
 test_that("Funnel Plot Asymmetry Tests table results match", {
-  table <- results[["results"]][["funnelTestTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-                                 list(14, "Egger (unweighted)", 0.016248803207124, -2.73070413450773,
-                                      14, "Egger (multiplicative overdispersion)", 0.180192108157545,
-                                      -1.41060848420324, "Macaskill", "Macaskill (pooled)", "Peters",
-                                      14, "Debray", 0.55284921010877, -0.608115384974626))
+  table <- results[["results"]][["funnelTestTable"]]
+  jaspTools::expect_snapshot_table(table, "funnel-plot-asymmetry-tests-3")
 })
 
 test_that("Concordance Statistic Meta-Analysis Summary table results match", {
-  table <- results[["results"]][["summaryTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-                                 list(0.791292758203948, 0.765567095481128, 0.708105255501217, 0.817018420926768,
-                                      0.874480260906679))
+  table <- results[["results"]][["summaryTable"]]
+  jaspTools::expect_snapshot_table(table, "concordance-statistic-meta-analysis-summary-2")
 })

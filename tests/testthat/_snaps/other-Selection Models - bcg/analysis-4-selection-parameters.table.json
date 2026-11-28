@@ -1,0 +1,67 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "est": 0.8526709895627304,
+      "lCi": 1e-05,
+      "par": "δ1",
+      "se": 0.8026549754709852,
+      "uCi": 2.4258458334977417
+    },
+    {
+      "est": 0.003100803442236057,
+      "lCi": 1e-05,
+      "par": "δ2",
+      "se": 3.7137925076946083,
+      "uCi": 7.2820003645783595
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Expected effect direction: negative."
+    }
+  ],
+  "name": "selectionModelResults_model_weightFunctionSummary_selectionParameters",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "par",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "se",
+        "title": "Standard Error",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Selection Parameter Estimates"
+}

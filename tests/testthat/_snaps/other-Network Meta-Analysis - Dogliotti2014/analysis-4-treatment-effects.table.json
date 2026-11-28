@@ -1,0 +1,122 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "comparison": "Apixaban",
+      "est": 0.35000800155634726,
+      "lCi": 0.26842376317937866,
+      "pval": 8.9727376125189e-15,
+      "stat": -7.753027218700611,
+      "uCi": 0.45638880739333637
+    },
+    {
+      "comparison": "Aspirin",
+      "est": 0.7988930824024733,
+      "lCi": 0.6537180253269619,
+      "pval": 0.028214565449727266,
+      "stat": -2.1942900341227967,
+      "uCi": 0.9763080294310522
+    },
+    {
+      "comparison": "Aspirin+Clopidogtrel",
+      "est": 0.607822742455335,
+      "lCi": 0.47949181379840294,
+      "pval": 3.878009312190975e-05,
+      "stat": -4.114630014209394,
+      "uCi": 0.770500091167886
+    },
+    {
+      "comparison": "Dabigatran 110mg",
+      "est": 0.40241259701615595,
+      "lCi": 0.29617836411694026,
+      "pval": 5.863285105317642e-09,
+      "stat": -5.8206111062826285,
+      "uCi": 0.5467512750976972
+    },
+    {
+      "comparison": "Dabigatran 150mg",
+      "est": 0.284152314522646,
+      "lCi": 0.2061495664555731,
+      "pval": 1.532462236267468e-14,
+      "stat": -7.684791618003971,
+      "uCi": 0.3916696951481458
+    },
+    {
+      "comparison": "Rivaroxaban",
+      "est": 0.34101744004754503,
+      "lCi": 0.25383725356230746,
+      "pval": 9.206075951658017e-13,
+      "stat": -7.141883278759113,
+      "uCi": 0.4581395866231095
+    },
+    {
+      "comparison": "VKAs",
+      "est": 0.43492627039707077,
+      "lCi": 0.3472177383472057,
+      "pval": 4.314031725255924e-13,
+      "stat": -7.245325094077034,
+      "uCi": 0.5447903139451695
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Estimates above one indicate higher values for the treatment than for Placebo/Control."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "The treatment effects are transformed using exponential transformation. For nonlinear transformations, the transformed estimates are interpreted as medians on the transformed scale."
+    }
+  ],
+  "name": "treatmentEffectsContainer_treatmentEffectsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "comparison",
+        "title": "Treatment",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "stat",
+        "title": "z",
+        "type": "number"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Treatment Effects vs. Placebo/Control"
+}

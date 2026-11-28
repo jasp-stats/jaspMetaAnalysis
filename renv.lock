@@ -4254,7 +4254,7 @@
     },
     "jaspTools": {
       "Package": "jaspTools",
-      "Version": "0.21.0",
+      "Version": "0.21.0.9000",
       "Source": "GitHub",
       "Type": "Package",
       "Title": "Helps Preview and Debug JASP Analyses",
@@ -4267,22 +4267,24 @@
       "Imports": [
         "cli",
         "data.table",
+        "digest",
         "httr",
         "jaspSyntax (>= 1.4.2)",
         "jsonlite",
         "lifecycle",
         "pkgload",
+        "R6",
         "remotes",
         "rjson",
         "stringi",
         "stringr",
         "testthat (>= 3.2.2)",
-        "vdiffr (>= 1.0.7)"
+        "vdiffr (>= 1.0.7)",
+        "withr"
       ],
       "Suggests": [
         "ggplot2",
-        "jaspBase",
-        "withr"
+        "jaspBase"
       ],
       "Remotes": "jasp-stats/jaspBase",
       "Additional_repositories": "https://jasp-stats.r-universe.dev",
@@ -4293,8 +4295,8 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspTools",
-      "RemoteRef": "master",
-      "RemoteSha": "a151d2783cea72faeaa2a0a31d56a531821f2b6a"
+      "RemoteRef": "7cbb5c86415a375dd85afdf93d527fc040f697ef",
+      "RemoteSha": "7cbb5c86415a375dd85afdf93d527fc040f697ef"
     },
     "jpeg": {
       "Package": "jpeg",

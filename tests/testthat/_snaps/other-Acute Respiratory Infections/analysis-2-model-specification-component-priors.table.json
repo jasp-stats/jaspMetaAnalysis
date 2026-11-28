@@ -1,0 +1,34 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "baseline": null,
+      "effect": "Student-t(0, 0.37, 2)",
+      "heterogeneity": "InvGamma(1.35, 0.27)"
+    }
+  ],
+  "footnotes": [],
+  "name": "modelSpecification_componentPriors",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "effect",
+        "title": "Pooled effect",
+        "type": "string"
+      },
+      {
+        "name": "heterogeneity",
+        "title": "Heterogeneity",
+        "type": "string"
+      },
+      {
+        "name": "baseline",
+        "title": "Baseline",
+        "type": "string"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Prior Distributions (Alternative)"
+}

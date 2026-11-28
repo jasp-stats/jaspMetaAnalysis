@@ -1,0 +1,58 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "pval": 0.003811628582168634,
+      "stat": "Q(9) = 24.33",
+      "test": "Residual heterogeneity (Wald)"
+    },
+    {
+      "pval": 0.004101892315852628,
+      "stat": "Q(9) = 24.13",
+      "test": "Residual heterogeneity (LRT)"
+    },
+    {
+      "pval": 2.0236114409359255e-07,
+      "stat": "t(9) = -14.02",
+      "test": "Pooled effect"
+    },
+    {
+      "pval": 7.483092760649691e-06,
+      "stat": "Fₘ(3, 9) = 47.76",
+      "test": "Moderation"
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Moderation test based on a Wald-type F-test."
+    }
+  ],
+  "name": "modelSummaryContainer_testsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "test",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "stat",
+        "title": "Test",
+        "type": "string"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Meta-Analytic Tests"
+}

@@ -1,0 +1,254 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "I2": "",
+      "comparison": "Acarbose vs. Metformin",
+      "est": 0.2,
+      "k": 1,
+      "lCi": -0.5014711100668852,
+      "pval": 0.5762877716346051,
+      "se": 0.3579,
+      "stat": 0.5588153115395362,
+      "tau2": "",
+      "uCi": 0.9014711100668853
+    },
+    {
+      "I2": 0,
+      "comparison": "Acarbose vs. Placebo",
+      "est": -0.8171958750005504,
+      "k": 2,
+      "lCi": -1.0855257985217857,
+      "pval": 2.3864032355927092e-09,
+      "se": 0.13690553787609752,
+      "stat": -5.969049080688981,
+      "tau2": 0,
+      "uCi": -0.548865951479315
+    },
+    {
+      "I2": "",
+      "comparison": "Acarbose vs. Sulfonylurea",
+      "est": -0.4,
+      "k": 1,
+      "lCi": -0.7035984212052544,
+      "pval": 0.009814105288121199,
+      "se": 0.1549,
+      "stat": -2.5823111684958038,
+      "tau2": "",
+      "uCi": -0.0964015787947457
+    },
+    {
+      "I2": 77.17612590401052,
+      "comparison": "Benfluorex vs. Placebo",
+      "est": -0.6850905961538462,
+      "k": 2,
+      "lCi": -1.4387552754373343,
+      "pval": 0.07480930912600854,
+      "se": 0.3845298613792393,
+      "stat": -1.7816317143655624,
+      "tau2": 0.23476977500000015,
+      "uCi": 0.06857408312964208
+    },
+    {
+      "I2": "",
+      "comparison": "Metformin vs. Pioglitazone",
+      "est": -0.16,
+      "k": 1,
+      "lCi": -0.32640094228745054,
+      "pval": 0.0594879046581677,
+      "se": 0.0849,
+      "stat": -1.8845700824499412,
+      "tau2": "",
+      "uCi": 0.006400942287450556
+    },
+    {
+      "I2": 92.88781788650812,
+      "comparison": "Metformin vs. Placebo",
+      "est": -1.1215844029777127,
+      "k": 4,
+      "lCi": -1.8410031332424692,
+      "pval": 0.0022460114738008857,
+      "se": 0.36705711734472674,
+      "stat": -3.055612737034496,
+      "tau2": 0.45942007423349157,
+      "uCi": -0.402165672712956
+    },
+    {
+      "I2": 0,
+      "comparison": "Metformin vs. Rosiglitazone",
+      "est": 0.07305664551897065,
+      "k": 2,
+      "lCi": -0.2439497545821284,
+      "pval": 0.6514928387805654,
+      "se": 0.16174093126282174,
+      "stat": 0.45168928451547546,
+      "tau2": 0,
+      "uCi": 0.39006304562006966
+    },
+    {
+      "I2": "",
+      "comparison": "Metformin vs. Sulfonylurea",
+      "est": -0.37,
+      "k": 1,
+      "lCi": -0.6020597357695423,
+      "pval": 0.0017780505982168636,
+      "se": 0.1184,
+      "stat": -3.125,
+      "tau2": "",
+      "uCi": -0.13794026423045763
+    },
+    {
+      "I2": 68.98877567002796,
+      "comparison": "Miglitol vs. Placebo",
+      "est": -0.9496184758154775,
+      "k": 3,
+      "lCi": -1.4112950915602367,
+      "pval": 5.5437970931830396e-05,
+      "se": 0.23555362210040878,
+      "stat": -4.031432280038072,
+      "tau2": 0.11397184154029465,
+      "uCi": -0.4879418600707183
+    },
+    {
+      "I2": "",
+      "comparison": "Pioglitazone vs. Placebo",
+      "est": -1.3,
+      "k": 1,
+      "lCi": -1.548523433239679,
+      "pval": 1.154816391162983e-24,
+      "se": 0.1268,
+      "stat": -10.25236593059937,
+      "tau2": "",
+      "uCi": -1.0514765667603212
+    },
+    {
+      "I2": "",
+      "comparison": "Pioglitazone vs. Rosiglitazone",
+      "est": 0.1,
+      "k": 1,
+      "lCi": -0.25886940556928384,
+      "pval": 0.584963076510379,
+      "se": 0.1831,
+      "stat": 0.5461496450027308,
+      "tau2": "",
+      "uCi": 0.4588694055692838
+    },
+    {
+      "I2": 76.49642772624658,
+      "comparison": "Rosiglitazone vs. Placebo",
+      "est": -1.1764389660070331,
+      "k": 6,
+      "lCi": -1.3965555491087345,
+      "pval": 1.1223112768192625e-25,
+      "se": 0.11230644279076195,
+      "stat": -10.475258024144312,
+      "tau2": 0.055627344131377744,
+      "uCi": -0.9563223829053318
+    },
+    {
+      "I2": "",
+      "comparison": "Rosiglitazone vs. Sulfonylurea",
+      "est": -1.2,
+      "k": 1,
+      "lCi": -1.4814508281799517,
+      "pval": 6.458127865302321e-17,
+      "se": 0.1436,
+      "stat": -8.356545961002785,
+      "tau2": "",
+      "uCi": -0.9185491718200482
+    },
+    {
+      "I2": "",
+      "comparison": "Sitagliptin vs. Placebo",
+      "est": -0.57,
+      "k": 1,
+      "lCi": -0.8230313504041209,
+      "pval": 1.0092502837576923e-05,
+      "se": 0.1291,
+      "stat": -4.415182029434547,
+      "tau2": "",
+      "uCi": -0.31696864959587906
+    },
+    {
+      "I2": "",
+      "comparison": "Vildagliptin vs. Placebo",
+      "est": -0.7,
+      "k": 1,
+      "lCi": -0.9495034152319488,
+      "pval": 3.823375331667456e-08,
+      "se": 0.1273,
+      "stat": -5.498821681068343,
+      "tau2": "",
+      "uCi": -0.4504965847680511
+    }
+  ],
+  "footnotes": [],
+  "name": "evidenceContainer_pairwiseMetaAnalysesTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "comparison",
+        "title": "Comparison",
+        "type": "string"
+      },
+      {
+        "name": "k",
+        "title": "k",
+        "type": "integer"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "se",
+        "title": "Standard Error",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "stat",
+        "title": "z",
+        "type": "number"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "tau2",
+        "title": "𝜏²",
+        "type": "number"
+      },
+      {
+        "format": "dp:1",
+        "name": "I2",
+        "title": "I² (%)",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Pairwise Meta-Analyses"
+}

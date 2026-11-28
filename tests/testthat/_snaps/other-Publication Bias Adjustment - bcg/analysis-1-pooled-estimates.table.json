@@ -1,0 +1,122 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "est": "-0.2945367",
+      "lCi": "-0.8673245",
+      "par": "Pooled effect",
+      "se": "0.234086",
+      "subgroup": "random",
+      "uCi": "0.2782512"
+    },
+    {
+      "est": "-0.7185554",
+      "lCi": "-3.056228",
+      "par": "",
+      "se": "0.1839788",
+      "subgroup": "alternate",
+      "uCi": "1.619117"
+    },
+    {
+      "est": "-0.4133284",
+      "lCi": "-1.126462",
+      "par": "",
+      "se": "0.2240834",
+      "subgroup": "systematic",
+      "uCi": "0.2998051"
+    },
+    {
+      "est": "18.3688768657527",
+      "lCi": "",
+      "par": "γ",
+      "se": "",
+      "subgroup": "random",
+      "uCi": ""
+    },
+    {
+      "est": "5.56251350758637",
+      "lCi": "",
+      "par": "",
+      "se": "",
+      "subgroup": "alternate",
+      "uCi": ""
+    },
+    {
+      "est": "5.53062118816776",
+      "lCi": "",
+      "par": "",
+      "se": "",
+      "subgroup": "systematic",
+      "uCi": ""
+    },
+    {
+      "est": "4.28589277347821",
+      "lCi": "",
+      "par": "√γ",
+      "se": "",
+      "subgroup": "random",
+      "uCi": ""
+    },
+    {
+      "est": "2.358498146615",
+      "lCi": "",
+      "par": "",
+      "se": "",
+      "subgroup": "alternate",
+      "uCi": ""
+    },
+    {
+      "est": "2.35172727759146",
+      "lCi": "",
+      "par": "",
+      "se": "",
+      "subgroup": "systematic",
+      "uCi": ""
+    }
+  ],
+  "footnotes": [],
+  "name": "modelSummaryContainer_pooledEstimatesTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "par",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "subgroup",
+        "title": "Subgroup",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "se",
+        "title": "Standard Error",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Meta-Analytic Estimates"
+}

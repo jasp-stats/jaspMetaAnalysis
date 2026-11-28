@@ -1,0 +1,101 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "df": 97,
+      "est": -0.22652339005099664,
+      "lCi": -0.38210651208497937,
+      "name": "Intercept",
+      "pval": 0.0047576191764637015,
+      "se": 0.07839033832544065,
+      "stat": -2.889685066934852,
+      "uCi": -0.07094026801701389
+    },
+    {
+      "df": 97,
+      "est": 0.525676185612534,
+      "lCi": 0.3663294893509138,
+      "name": "deltype (general)",
+      "pval": 2.790171129359962e-09,
+      "se": 0.08028660993357158,
+      "stat": 6.547495105939507,
+      "uCi": 0.6850228818741543
+    },
+    {
+      "df": 97,
+      "est": 0.5766001960567193,
+      "lCi": 0.40991283059253336,
+      "name": "deltype (overt)",
+      "pval": 6.304342938145933e-10,
+      "se": 0.08398519583930102,
+      "stat": 6.865498023723108,
+      "uCi": 0.7432875615209052
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Fixed effects tested using t-distribution."
+    }
+  ],
+  "name": "metaregressionContainer_effectSizeCoefficientTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "name",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "se",
+        "title": "Standard Error",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "stat",
+        "title": "t",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "df",
+        "title": "df",
+        "type": "number"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Effect Size Meta-Regression Coefficients"
+}

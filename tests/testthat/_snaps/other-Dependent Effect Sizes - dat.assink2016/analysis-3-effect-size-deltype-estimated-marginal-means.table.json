@@ -1,0 +1,163 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "deltype": "covert",
+      "est": -0.22652339005099698,
+      "lCi": -0.3821065120849796,
+      "lPi": -0.3821065120849796,
+      "se": 0.07839033832544057,
+      "uCi": -0.07094026801701439,
+      "uPi": -0.07094026801701439,
+      "value": "covert"
+    },
+    {
+      "deltype": "general",
+      "est": -0.22652339005099698,
+      "lCi": -0.3821065120849796,
+      "lPi": -1.1146050777389611,
+      "se": 0.07839033832544057,
+      "uCi": -0.07094026801701439,
+      "uPi": 0.6615582976369672,
+      "value": "covert"
+    },
+    {
+      "deltype": "overt",
+      "est": -0.22652339005099698,
+      "lCi": -0.3821065120849796,
+      "lPi": -0.9796548427217403,
+      "se": 0.07839033832544057,
+      "uCi": -0.07094026801701439,
+      "uPi": 0.5266080626197464,
+      "value": "covert"
+    },
+    {
+      "deltype": "covert",
+      "est": 0.43691123932236586,
+      "lCi": 0.21550842214796756,
+      "lPi": 0.21550842214796756,
+      "se": 0.11155349961878172,
+      "uCi": 0.6583140564967642,
+      "uPi": 0.6583140564967642,
+      "value": "general"
+    },
+    {
+      "deltype": "general",
+      "est": 0.43691123932236586,
+      "lCi": 0.21550842214796756,
+      "lPi": -0.465032319664349,
+      "se": 0.11155349961878172,
+      "uCi": 0.6583140564967642,
+      "uPi": 1.3388547983090806,
+      "value": "general"
+    },
+    {
+      "deltype": "overt",
+      "est": 0.43691123932236586,
+      "lCi": 0.21550842214796756,
+      "lPi": -0.3325171748870802,
+      "se": 0.11155349961878172,
+      "uCi": 0.6583140564967642,
+      "uPi": 1.206339653531812,
+      "value": "general"
+    },
+    {
+      "deltype": "covert",
+      "est": 0.3737318758632917,
+      "lCi": 0.1633103527028065,
+      "lPi": 0.1633103527028065,
+      "se": 0.10602058999627292,
+      "uCi": 0.5841533990237769,
+      "uPi": 0.5841533990237769,
+      "value": "overt"
+    },
+    {
+      "deltype": "general",
+      "est": 0.3737318758632917,
+      "lCi": 0.1633103527028065,
+      "lPi": -0.5255790790094041,
+      "se": 0.10602058999627292,
+      "uCi": 0.5841533990237769,
+      "uPi": 1.2730428307359876,
+      "value": "overt"
+    },
+    {
+      "deltype": "overt",
+      "est": 0.3737318758632917,
+      "lCi": 0.1633103527028065,
+      "lPi": -0.39260884114793526,
+      "se": 0.10602058999627292,
+      "uCi": 0.5841533990237769,
+      "uPi": 1.1400725928745188,
+      "value": "overt"
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Each marginal mean estimate is averaged across the levels of the remaining predictors."
+    }
+  ],
+  "name": "estimatedMarginalMeansAndContrastsContainer_effectSize_deltype_estimatedMarginalMeansTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "value",
+        "title": "Level",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "se",
+        "title": "Standard Error",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lPi",
+        "overTitle": "95% PI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uPi",
+        "overTitle": "95% PI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "name": "deltype",
+        "overTitle": "Heterogeneity Level",
+        "title": "deltype",
+        "type": "string"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Estimated Marginal Means"
+}

@@ -1,0 +1,53 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "pval": 1.1222999712960042e-26,
+      "stat": "LR(1) = 114.30",
+      "test": "Heterogeneity"
+    },
+    {
+      "pval": 0.005278776678099811,
+      "stat": "z = -2.79",
+      "test": "Pooled effect"
+    },
+    {
+      "pval": 0.8210179068336122,
+      "stat": "LR(2) = 0.39",
+      "test": "Publication bias"
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "For numerical stability, metafor clips selection p-values to [1e-05, 0.99999]. This affects 3 selected estimates."
+    }
+  ],
+  "name": "selectionModelResults_model_modelSummaryContainer_testsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "test",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "stat",
+        "title": "Test",
+        "type": "string"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Meta-Analytic Tests"
+}

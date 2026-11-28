@@ -1,0 +1,92 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "est": 0.4726506704419231,
+      "lCi": 0.23365914888444542,
+      "lPi": 0.16114392709951236,
+      "uCi": 0.9560877771564585,
+      "uPi": 1.3863299740190793,
+      "value": "Mean - 1SD"
+    },
+    {
+      "est": 0.4832641799316197,
+      "lCi": 0.31567794077654704,
+      "lPi": 0.1929536695453727,
+      "uCi": 0.7398181419660723,
+      "uPi": 1.2103644784535357,
+      "value": "Mean"
+    },
+    {
+      "est": 0.49411601889111806,
+      "lCi": 0.2924570288824261,
+      "lPi": 0.18772302409666697,
+      "uCi": 0.8348256872395481,
+      "uPi": 1.300589745449038,
+      "value": "Mean + 1SD"
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Each marginal mean estimate is averaged across the levels of the remaining predictors."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "The marginal mean estimates and intervals are transformed using exponential transformation. For nonlinear transformations, transformed marginal means are interpreted as medians on the transformed scale."
+    }
+  ],
+  "name": "estimatedMarginalMeansAndContrastsContainer_effectSize_year_estimatedMarginalMeansTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "value",
+        "title": "Level",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lPi",
+        "overTitle": "95% PI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uPi",
+        "overTitle": "95% PI",
+        "title": "Upper",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Estimated Marginal Means"
+}

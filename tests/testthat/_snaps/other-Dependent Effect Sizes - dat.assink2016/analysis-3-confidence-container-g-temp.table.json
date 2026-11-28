@@ -1,0 +1,94 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "estTau": 0,
+      "estTau2": 0,
+      "lCiTau": "",
+      "lCiTau2": "",
+      "par": "𝜏²[1]",
+      "uCiTau": "",
+      "uCiTau2": ""
+    },
+    {
+      "estTau": 0.44053859881665886,
+      "estTau2": 0.1940742570473451,
+      "lCiTau": 0.3056087357454132,
+      "lCiTau2": 0.09339669936390979,
+      "par": "𝜏²[2]",
+      "uCiTau": 0.6790212231672716,
+      "uCiTau2": 0.4610698215115777
+    },
+    {
+      "estTau": 0.3712789458184332,
+      "estTau2": 0.13784805560804705,
+      "lCiTau": 0.22766175320666138,
+      "lCiTau2": 0.051829873873130795,
+      "par": "𝜏²[3]",
+      "uCiTau": 0.7432511897131218,
+      "uCiTau2": 0.552422331009971
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Confidence intervals are not available for variance components fixed to zero (e.g., levels with a single estimate)."
+    }
+  ],
+  "name": "randomEstimatesContainer_confidenceIntervalsContainer_confidenceContainerG_tempTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "par",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "estTau2",
+        "title": "𝜏²",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCiTau2",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCiTau2",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "estTau",
+        "title": "𝜏",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCiTau",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCiTau",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Estimates 𝜏²"
+}

@@ -1,0 +1,101 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "est": "0.2020404",
+      "lCi": "0.1101935",
+      "lPi": "-0.1997385",
+      "par": "Pooled effect",
+      "se": "0.04557326",
+      "uCi": "0.2938872",
+      "uPi": "0.6038192"
+    },
+    {
+      "est": "0.194078687887308",
+      "lCi": "0.125642828813893",
+      "lPi": "",
+      "par": "𝜏",
+      "se": "0.0439924856736385",
+      "uCi": "0.342899280617828",
+      "uPi": ""
+    },
+    {
+      "est": "0.0376665370920592",
+      "lCi": "0.0157861204323573",
+      "lPi": "",
+      "par": "𝜏²",
+      "se": "0.0170760077928819",
+      "uCi": "0.117579916648224",
+      "uPi": ""
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "2 observations were omitted due to missing values."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "The pooled effect size corresponds to the weighted average effect across studies."
+    }
+  ],
+  "name": "modelSummaryContainer_pooledEstimatesTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "par",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "se",
+        "title": "Standard Error",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lPi",
+        "overTitle": "95% PI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uPi",
+        "overTitle": "95% PI",
+        "title": "Upper",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Meta-Analytic Estimates"
+}

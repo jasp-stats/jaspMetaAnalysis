@@ -1,0 +1,66 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "est": "-0.39828",
+      "lCi": "-1.270512",
+      "par": "Pooled effect",
+      "se": "0.2740759",
+      "uCi": "0.473952"
+    },
+    {
+      "est": "39.6451934318268",
+      "lCi": "",
+      "par": "γ",
+      "se": "",
+      "uCi": ""
+    },
+    {
+      "est": "6.29644291896836",
+      "lCi": "",
+      "par": "√γ",
+      "se": "",
+      "uCi": ""
+    }
+  ],
+  "footnotes": [],
+  "name": "modelSummaryContainer_pooledEstimatesTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "par",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "se",
+        "title": "Standard Error",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Meta-Analytic Estimates"
+}

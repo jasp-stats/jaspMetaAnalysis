@@ -1,0 +1,86 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "pval": 0.03416726135600972,
+      "stat": "Q(7) = 15.15",
+      "subgroup": "Full dataset",
+      "test": "Moderation"
+    },
+    {
+      "pval": 0.72300627753272,
+      "stat": "Q(3) = 1.33",
+      "subgroup": "before 2000",
+      "test": ""
+    },
+    {
+      "pval": 0.74198368782076,
+      "stat": "Q(3) = 1.25",
+      "subgroup": "2000 and later",
+      "test": ""
+    },
+    {
+      "pval": 0.0005243074658586524,
+      "stat": "Q(11) = 33.01",
+      "subgroup": "Full dataset",
+      "test": "Residual heterogeneity"
+    },
+    {
+      "pval": 0.042845197480334815,
+      "stat": "Q(1) = 4.10",
+      "subgroup": "before 2000",
+      "test": ""
+    },
+    {
+      "pval": 0.00025899875087783395,
+      "stat": "Q(6) = 25.65",
+      "subgroup": "2000 and later",
+      "test": ""
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Full dataset, Subgroup 'before 2000': For this input, netmeta treats the comparisons of a multi-arm study as independent in the meta-regression, so the standard errors may be understated."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "The network meta-regression uses z-tests (the t-distribution is not available)."
+    }
+  ],
+  "name": "metaregressionContainer_metaregressionTestsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "test",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "subgroup",
+        "title": "Subgroup",
+        "type": "string"
+      },
+      {
+        "name": "stat",
+        "title": "Test",
+        "type": "string"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Network Meta-Regression Tests"
+}

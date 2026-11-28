@@ -1,0 +1,48 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "pval": 4.3085093775099704e-15,
+      "stat": "Qₑ(18) = 109.27",
+      "test": "Heterogeneity"
+    },
+    {
+      "pval": 0.011304330924602785,
+      "stat": "t(18) = 2.82",
+      "test": "Pooled effect"
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Results are based on the WAAP model. 19 of 100 estimates are adequately powered (power ≥ 80%)."
+    }
+  ],
+  "name": "modelSummaryContainer_testsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "test",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "stat",
+        "title": "Test",
+        "type": "string"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Meta-Analytic Tests"
+}

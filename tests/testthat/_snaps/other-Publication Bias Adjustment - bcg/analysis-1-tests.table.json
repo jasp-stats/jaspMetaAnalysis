@@ -1,0 +1,106 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "pval": 1.839207527515887e-21,
+      "stat": "Qₑ(6) = 110.21",
+      "subgroup": "random",
+      "test": "Heterogeneity"
+    },
+    {
+      "pval": 0.018349051414122904,
+      "stat": "Qₑ(1) = 5.56",
+      "subgroup": "alternate",
+      "test": ""
+    },
+    {
+      "pval": 0.0008573296384835008,
+      "stat": "Qₑ(3) = 16.59",
+      "subgroup": "systematic",
+      "test": ""
+    },
+    {
+      "pval": 0.2550509489040588,
+      "stat": "t(6) = -1.26",
+      "subgroup": "random",
+      "test": "Pooled effect"
+    },
+    {
+      "pval": 0.15957201710921606,
+      "stat": "t(1) = -3.91",
+      "subgroup": "alternate",
+      "test": ""
+    },
+    {
+      "pval": 0.1623049393459389,
+      "stat": "t(3) = -1.84",
+      "subgroup": "systematic",
+      "test": ""
+    },
+    {
+      "pval": 0.3139602259119528,
+      "stat": "Qₘ(2) = 2.32",
+      "subgroup": "",
+      "test": "Subgroup differences"
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "Warning:",
+      "text": "Knapp-Hartung inference is based on very few residual degrees of freedom; results can be sensitive and should be interpreted cautiously."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "alternate: Results are based on the WAAP model. 2 of 2 estimates are adequately powered (power ≥ 80%)."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "random: Results are based on the WLS model: the WAAP model requires at least 2 adequately powered estimates. 1 of 7 estimates is adequately powered (power ≥ 80%)."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "systematic: Results are based on the WLS model: the WAAP model requires at least 2 adequately powered estimates. 1 of 4 estimates is adequately powered (power ≥ 80%)."
+    }
+  ],
+  "name": "modelSummaryContainer_testsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "test",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "subgroup",
+        "title": "Subgroup",
+        "type": "string"
+      },
+      {
+        "name": "stat",
+        "title": "Test",
+        "type": "string"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Meta-Analytic Tests"
+}

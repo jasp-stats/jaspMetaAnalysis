@@ -1,0 +1,49 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "method": "Compound symmetry",
+      "nClusters": 17,
+      "nInput": 100
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "100 input rows were aggregated into 17 cluster-level estimates. The aggregated effect-size and standard error columns were added to the dataset at the first row of each cluster."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Aggregation used compound-symmetry sampling-error dependence within clusters with within-cluster correlation 0.6."
+    }
+  ],
+  "name": "summaryTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "nInput",
+        "title": "Input Rows",
+        "type": "integer"
+      },
+      {
+        "name": "nClusters",
+        "title": "Clusters",
+        "type": "integer"
+      },
+      {
+        "name": "method",
+        "title": "Method",
+        "type": "string"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Aggregation Summary"
+}

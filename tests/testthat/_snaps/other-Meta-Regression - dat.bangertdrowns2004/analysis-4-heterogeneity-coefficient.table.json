@@ -1,0 +1,98 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "df": 22,
+      "est": -26.560387544466714,
+      "lCi": -181733.2246726666,
+      "name": "Intercept",
+      "pval": 0.9997608599538655,
+      "se": 87617.06157299453,
+      "stat": -0.0003031417291064826,
+      "uCi": 181680.10389757765
+    },
+    {
+      "df": 22,
+      "est": 22.443958385964038,
+      "lCi": -181684.2203333279,
+      "name": "feedback (yes)",
+      "pval": 0.999797922780334,
+      "se": 87617.06157617299,
+      "stat": 0.0002561596792018823,
+      "uCi": 181729.10825009982
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Fixed effects tested using Knapp and Hartung adjustment."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "The heterogeneity model for 𝜏² is specified on the log scale."
+    }
+  ],
+  "name": "metaregressionContainer_heterogeneityCoefficientTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "name",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "se",
+        "title": "Standard Error",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "stat",
+        "title": "t",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "df",
+        "title": "df",
+        "type": "number"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Heterogeneity Meta-Regression Coefficients"
+}

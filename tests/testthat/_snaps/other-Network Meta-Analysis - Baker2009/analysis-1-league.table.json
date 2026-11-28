@@ -1,0 +1,162 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "treatment": "Budesonide",
+      "trt1": "Budesonide",
+      "trt2": "1.06 [0.88, 1.28]",
+      "trt3": "0.81 [0.63, 1.05]",
+      "trt4": "0.99 [0.76, 1.29]",
+      "trt5": "0.78 [0.57, 1.05]",
+      "trt6": "0.73 [0.58, 0.92]",
+      "trt7": "0.89 [0.69, 1.14]",
+      "trt8": "1.06 [0.82, 1.38]"
+    },
+    {
+      "treatment": "Budesonide+Formoterol",
+      "trt1": "1.06 [0.88, 1.28]",
+      "trt2": "Budesonide+Formoterol",
+      "trt3": "0.77 [0.56, 1.04]",
+      "trt4": "0.93 [0.68, 1.28]",
+      "trt5": "0.73 [0.58, 0.92]",
+      "trt6": "0.69 [0.52, 0.92]",
+      "trt7": "0.84 [0.62, 1.14]",
+      "trt8": "1.00 [0.73, 1.37]"
+    },
+    {
+      "treatment": "Fluticasone",
+      "trt1": "0.81 [0.63, 1.05]",
+      "trt2": "0.77 [0.56, 1.04]",
+      "trt3": "Fluticasone",
+      "trt4": "1.22 [1.11, 1.33]",
+      "trt5": "0.95 [0.77, 1.18]",
+      "trt6": "0.90 [0.81, 1.00]",
+      "trt7": "1.09 [0.95, 1.26]",
+      "trt8": "1.31 [1.13, 1.51]"
+    },
+    {
+      "treatment": "Fluticasone+Salmeterol",
+      "trt1": "0.99 [0.76, 1.29]",
+      "trt2": "0.93 [0.68, 1.28]",
+      "trt3": "1.22 [1.11, 1.33]",
+      "trt4": "Fluticasone+Salmeterol",
+      "trt5": "0.79 [0.63, 0.98]",
+      "trt6": "0.74 [0.65, 0.84]",
+      "trt7": "0.90 [0.81, 1.00]",
+      "trt8": "1.08 [0.93, 1.25]"
+    },
+    {
+      "treatment": "Formoterol",
+      "trt1": "0.78 [0.57, 1.05]",
+      "trt2": "0.73 [0.58, 0.92]",
+      "trt3": "0.95 [0.77, 1.18]",
+      "trt4": "0.79 [0.63, 0.98]",
+      "trt5": "Formoterol",
+      "trt6": "0.94 [0.78, 1.14]",
+      "trt7": "1.15 [0.93, 1.41]",
+      "trt8": "1.37 [1.10, 1.70]"
+    },
+    {
+      "treatment": "Placebo",
+      "trt1": "0.73 [0.58, 0.92]",
+      "trt2": "0.69 [0.52, 0.92]",
+      "trt3": "0.90 [0.81, 1.00]",
+      "trt4": "0.74 [0.65, 0.84]",
+      "trt5": "0.94 [0.78, 1.14]",
+      "trt6": "Placebo",
+      "trt7": "1.22 [1.11, 1.33]",
+      "trt8": "1.45 [1.30, 1.63]"
+    },
+    {
+      "treatment": "Salmeterol",
+      "trt1": "0.89 [0.69, 1.14]",
+      "trt2": "0.84 [0.62, 1.14]",
+      "trt3": "1.09 [0.95, 1.26]",
+      "trt4": "0.90 [0.81, 1.00]",
+      "trt5": "1.15 [0.93, 1.41]",
+      "trt6": "1.22 [1.11, 1.33]",
+      "trt7": "Salmeterol",
+      "trt8": "1.20 [1.05, 1.36]"
+    },
+    {
+      "treatment": "Tiotropium",
+      "trt1": "1.06 [0.82, 1.38]",
+      "trt2": "1.00 [0.73, 1.37]",
+      "trt3": "1.31 [1.13, 1.51]",
+      "trt4": "1.08 [0.93, 1.25]",
+      "trt5": "1.37 [1.10, 1.70]",
+      "trt6": "1.45 [1.30, 1.63]",
+      "trt7": "1.20 [1.05, 1.36]",
+      "trt8": "Tiotropium"
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Lower triangle: network estimates of the column treatment versus the row treatment. Upper triangle: network estimates of the row treatment versus the column treatment."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "The treatment effects are transformed using exponential transformation. For nonlinear transformations, the transformed estimates are interpreted as medians on the transformed scale."
+    }
+  ],
+  "name": "treatmentEffectsContainer_leagueTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "treatment",
+        "title": "Treatment",
+        "type": "string"
+      },
+      {
+        "name": "trt1",
+        "title": "Budesonide",
+        "type": "string"
+      },
+      {
+        "name": "trt2",
+        "title": "Budesonide+Formoterol",
+        "type": "string"
+      },
+      {
+        "name": "trt3",
+        "title": "Fluticasone",
+        "type": "string"
+      },
+      {
+        "name": "trt4",
+        "title": "Fluticasone+Salmeterol",
+        "type": "string"
+      },
+      {
+        "name": "trt5",
+        "title": "Formoterol",
+        "type": "string"
+      },
+      {
+        "name": "trt6",
+        "title": "Placebo",
+        "type": "string"
+      },
+      {
+        "name": "trt7",
+        "title": "Salmeterol",
+        "type": "string"
+      },
+      {
+        "name": "trt8",
+        "title": "Tiotropium",
+        "type": "string"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "League Table"
+}

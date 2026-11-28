@@ -1,0 +1,88 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "AIC": 142.58673580406915,
+      "AICc": 143.24607646340982,
+      "BIC": 155.46029069658607,
+      "LRT": "",
+      "df": 5,
+      "logLik": -66.29336790203457,
+      "model": "",
+      "pval": ""
+    },
+    {
+      "AIC": 649.6198666738599,
+      "AICc": 649.8779311899889,
+      "BIC": 657.34399960937,
+      "LRT": 511.03313086979074,
+      "df": 3,
+      "logLik": -321.80993333692993,
+      "model": "Component 1",
+      "pval": 1.0729156910445676e-111
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Likelihood Ratio Test (LRT) and p-value are based on a comparison with the complete model."
+    }
+  ],
+  "name": "randomEstimatesContainer_inclusionTestsContainer_tableInclusion",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "model",
+        "title": "Removed Component",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "logLik",
+        "title": "Log Lik.",
+        "type": "number"
+      },
+      {
+        "name": "df",
+        "title": "df",
+        "type": "integer"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "AIC",
+        "title": "AIC",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "BIC",
+        "title": "BIC",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "AICc",
+        "title": "AICc",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "LRT",
+        "title": "LRT",
+        "type": "number"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Component Inclusion Test"
+}

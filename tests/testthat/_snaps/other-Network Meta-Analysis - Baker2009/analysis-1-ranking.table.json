@@ -1,0 +1,65 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "pScore": 0.858847281350161,
+      "treatment": "Tiotropium"
+    },
+    {
+      "pScore": 0.8161275359990825,
+      "treatment": "Budesonide+Formoterol"
+    },
+    {
+      "pScore": 0.703752502599232,
+      "treatment": "Fluticasone+Salmeterol"
+    },
+    {
+      "pScore": 0.690885999792646,
+      "treatment": "Budesonide"
+    },
+    {
+      "pScore": 0.44598281241309307,
+      "treatment": "Salmeterol"
+    },
+    {
+      "pScore": 0.2648676138411946,
+      "treatment": "Fluticasone"
+    },
+    {
+      "pScore": 0.1769818622126705,
+      "treatment": "Formoterol"
+    },
+    {
+      "pScore": 0.04255439179192029,
+      "treatment": "Placebo"
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Negative treatment effects are considered beneficial."
+    }
+  ],
+  "name": "rankingContainer_rankingTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "treatment",
+        "title": "Treatment",
+        "type": "string"
+      },
+      {
+        "format": "dp:3",
+        "name": "pScore",
+        "title": "P-score",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Ranking of Treatments"
+}

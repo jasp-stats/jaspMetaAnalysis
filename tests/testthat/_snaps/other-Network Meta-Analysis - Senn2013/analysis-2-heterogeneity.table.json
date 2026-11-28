@@ -1,0 +1,107 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "est": 0.31788374830506255,
+      "lCi": "",
+      "par": "𝜏",
+      "subgroup": "Full dataset",
+      "uCi": ""
+    },
+    {
+      "est": 0.3046326411036986,
+      "lCi": "",
+      "par": "",
+      "subgroup": "before 2000",
+      "uCi": ""
+    },
+    {
+      "est": 0.2295711521220374,
+      "lCi": "",
+      "par": "",
+      "subgroup": "2000 and later",
+      "uCi": ""
+    },
+    {
+      "est": 0.10105007743647636,
+      "lCi": "",
+      "par": "𝜏²",
+      "subgroup": "Full dataset",
+      "uCi": ""
+    },
+    {
+      "est": 0.09280104602581483,
+      "lCi": "",
+      "par": "",
+      "subgroup": "before 2000",
+      "uCi": ""
+    },
+    {
+      "est": 0.05270291388663964,
+      "lCi": "",
+      "par": "",
+      "subgroup": "2000 and later",
+      "uCi": ""
+    },
+    {
+      "est": 81.44053475776566,
+      "lCi": 71.97720105825451,
+      "par": "I²",
+      "subgroup": "Full dataset",
+      "uCi": 87.7080890173118
+    },
+    {
+      "est": 68.38533902854967,
+      "lCi": 18.541168759231244,
+      "par": "",
+      "subgroup": "before 2000",
+      "uCi": 87.73016046123284
+    },
+    {
+      "est": 74.9017721080497,
+      "lCi": 53.18118231513584,
+      "par": "",
+      "subgroup": "2000 and later",
+      "uCi": 86.54555850691811
+    }
+  ],
+  "footnotes": [],
+  "name": "modelSummaryContainer_heterogeneityTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "par",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "subgroup",
+        "title": "Subgroup",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Heterogeneity"
+}

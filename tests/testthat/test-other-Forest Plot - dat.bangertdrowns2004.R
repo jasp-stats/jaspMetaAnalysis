@@ -17,30 +17,17 @@ test_that("ClassicalMetaAnalysis results match", {
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "analysis-1_figure-1_forest-plot")
 
-  table <- results[["results"]][["metaregressionContainer"]][["collection"]][["metaregressionContainer_effectSizeCoefficientTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(44, 0.248284560231861, 0.0669634117178548, "Intercept", 0.0084020260145086,
-     0.0899692695334001, 2.75965962066289, 0.429605708745866, 44,
-     -0.0625656750584828, -0.272859047512877, "wic (yes)", 0.551845284887846,
-     0.104344922048493, -0.599604406522114, 0.147727697395912))
+  table <- results[["results"]][["metaregressionContainer"]][["collection"]][["metaregressionContainer_effectSizeCoefficientTable"]]
+  jaspTools::expect_snapshot_table(table, "effect-size-coefficient")
 
-  table <- results[["results"]][["metaregressionContainer"]][["collection"]][["metaregressionContainer_effectSizeTermsTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(1, 44, 0.551845284887846, 0.359525444320737, "wic"))
+  table <- results[["results"]][["metaregressionContainer"]][["collection"]][["metaregressionContainer_effectSizeTermsTable"]]
+  jaspTools::expect_snapshot_table(table, "effect-size-terms")
 
-  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(0.2020404, 0.1101935, -0.1997385, "Pooled effect", 0.04557326,
-     0.2938872, 0.6038192, 0.194078687887308, 0.125642828813893,
-     "", "𝜏", 0.0439924856736385, 0.342899280617828, "", 0.0376665370920592,
-     0.0157861204323573, "", "𝜏<unicode>", 0.0170760077928819, 0.117579916648224,
-     ""))
+  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_pooledEstimatesTable"]]
+  jaspTools::expect_snapshot_table(table, "pooled-estimates")
 
-  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_testsTable"]][["data"]]
-  jaspTools::expect_equal_tables(table,
-    list(6.25876712219827e-05, "Q<unicode>(44) = 89.40", "Residual heterogeneity",
-     6.10354425498986e-05, "t(44) = 4.43", "Pooled effect", 0.551845284887846,
-     "F<unicode>(1, 44) = 0.36", "Moderation"))
+  table <- results[["results"]][["modelSummaryContainer"]][["collection"]][["modelSummaryContainer_testsTable"]]
+  jaspTools::expect_snapshot_table(table, "tests")
 
 })
 

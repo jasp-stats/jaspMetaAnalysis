@@ -1,0 +1,101 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "est": 0.44886925342520323,
+      "lCi": -0.08499141925233344,
+      "name": "Intercept",
+      "pval": 0.0993660552900233,
+      "se": 0.2723828993229272,
+      "stat": 1.6479347805643272,
+      "uCi": 0.9827299261027399
+    },
+    {
+      "est": -0.1819125854605293,
+      "lCi": -0.5624612680680201,
+      "name": "alloc (random)",
+      "pval": 0.3488018138040578,
+      "se": 0.19416105888129084,
+      "stat": -0.9369159115049419,
+      "uCi": 0.1986360971469615
+    },
+    {
+      "est": -0.044147666263040064,
+      "lCi": -0.5970676908421919,
+      "name": "alloc (systematic)",
+      "pval": 0.8756448320693475,
+      "se": 0.2821072371433937,
+      "stat": -0.156492498065904,
+      "uCi": 0.5087723583161117
+    },
+    {
+      "est": -0.03049518768048751,
+      "lCi": -0.0416774005607603,
+      "name": "ablat",
+      "pval": 9.039287461033155e-08,
+      "se": 0.005705315489711372,
+      "stat": -5.345048443943323,
+      "uCi": -0.01931297480021472
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Fixed effects tested using z-distribution."
+    }
+  ],
+  "name": "metaregressionContainer_effectSizeCoefficientTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "name",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "se",
+        "title": "Standard Error",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "stat",
+        "title": "z",
+        "type": "number"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Effect Size Meta-Regression Coefficients"
+}

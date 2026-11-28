@@ -1,0 +1,56 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "df1": 1,
+      "df2": 2,
+      "pval": 0.5522692420625113,
+      "stat": 0.5014471860145234,
+      "term": "year"
+    },
+    {
+      "df1": 2,
+      "df2": 2,
+      "pval": 0.9392282826946556,
+      "stat": 0.06470388341691503,
+      "term": "alloc"
+    }
+  ],
+  "footnotes": [],
+  "name": "metaregressionContainer_effectSizeTermsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "term",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "stat",
+        "title": "F",
+        "type": "number"
+      },
+      {
+        "name": "df1",
+        "title": "df₁",
+        "type": "integer"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "df2",
+        "title": "df₂",
+        "type": "number"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Effect Size Meta-Regression Terms Tests"
+}

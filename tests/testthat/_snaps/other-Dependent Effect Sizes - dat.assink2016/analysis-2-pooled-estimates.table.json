@@ -1,0 +1,74 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "est": "0.0017591",
+      "lCi": "-0.3961404",
+      "par": "Pooled effect",
+      "se": "0.1335419",
+      "uCi": "0.3996586"
+    },
+    {
+      "est": "6.39294279922889",
+      "lCi": "",
+      "par": "γ",
+      "se": "",
+      "uCi": ""
+    },
+    {
+      "est": "2.52842694164354",
+      "lCi": "",
+      "par": "√γ",
+      "se": "",
+      "uCi": ""
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Cluster-robust tests and confidence intervals were computed using study as the clustering variable (17 clusters; min/median/max 1/5/22 estimates per cluster). clubSandwich was used with CR2 adjustment and Satterthwaite degrees of freedom."
+    }
+  ],
+  "name": "modelSummaryContainer_pooledEstimatesTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "par",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "se",
+        "title": "Standard Error",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Meta-Analytic Estimates"
+}

@@ -1,0 +1,48 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "factor": "district",
+      "nlvls": 11,
+      "sigma": 0.2550724295386881,
+      "sigma2": 0.065061944310769
+    },
+    {
+      "factor": "district/school",
+      "nlvls": 56,
+      "sigma": 0.1809323548265394,
+      "sigma2": 0.032736517023076755
+    }
+  ],
+  "footnotes": [],
+  "name": "randomEstimatesContainer_containerS_tableS",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "factor",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "sigma2",
+        "title": "σ²",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "sigma",
+        "title": "σ",
+        "type": "number"
+      },
+      {
+        "name": "nlvls",
+        "title": "Levels",
+        "type": "integer"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Estimates"
+}

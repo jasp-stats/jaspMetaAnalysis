@@ -1,0 +1,42 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "factor": "alloc",
+      "nlvls": 3,
+      "sigma": 0.31257972366806325,
+      "sigma2": 0.09770608364840279
+    }
+  ],
+  "footnotes": [],
+  "name": "randomEstimatesContainer_containerS_tableS",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "factor",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "sigma2",
+        "title": "σ²",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "sigma",
+        "title": "σ",
+        "type": "number"
+      },
+      {
+        "name": "nlvls",
+        "title": "Levels",
+        "type": "integer"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Estimates"
+}

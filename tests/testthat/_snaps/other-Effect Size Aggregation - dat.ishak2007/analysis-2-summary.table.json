@@ -1,0 +1,49 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "method": "Autoregressive",
+      "nClusters": 46,
+      "nInput": 82
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "82 input rows were aggregated into 46 cluster-level estimates. The aggregated effect-size and standard error columns were added to the dataset at the first row of each cluster."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Aggregation used autoregressive sampling-error dependence over time with lag-1 correlation 0.9."
+    }
+  ],
+  "name": "summaryTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "nInput",
+        "title": "Input Rows",
+        "type": "integer"
+      },
+      {
+        "name": "nClusters",
+        "title": "Clusters",
+        "type": "integer"
+      },
+      {
+        "name": "method",
+        "title": "Method",
+        "type": "string"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Aggregation Summary"
+}

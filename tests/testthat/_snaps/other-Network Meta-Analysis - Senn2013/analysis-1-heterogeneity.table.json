@@ -1,0 +1,57 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "est": 0.3297224941407829,
+      "lCi": "",
+      "par": "𝜏",
+      "uCi": ""
+    },
+    {
+      "est": 0.10871692314241863,
+      "lCi": "",
+      "par": "𝜏²",
+      "uCi": ""
+    },
+    {
+      "est": 81.44053475776566,
+      "lCi": 71.97720105825451,
+      "par": "I²",
+      "uCi": 87.7080890173118
+    }
+  ],
+  "footnotes": [],
+  "name": "modelSummaryContainer_heterogeneityTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "par",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Heterogeneity"
+}

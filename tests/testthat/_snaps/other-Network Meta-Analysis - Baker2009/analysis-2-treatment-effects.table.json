@@ -1,0 +1,129 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "comparison": "Budesonide",
+      "est": 0.7308632704693261,
+      "lCi": 0.5779086337758605,
+      "pval": 0.008869977094096246,
+      "stat": -2.6170252835289416,
+      "uCi": 0.9243002940293352
+    },
+    {
+      "comparison": "Budesonide+Formoterol",
+      "est": 0.6896210413767365,
+      "lCi": 0.5143038666339639,
+      "pval": 0.013026255559586303,
+      "stat": -2.4830506740632114,
+      "uCi": 0.9247007684816969
+    },
+    {
+      "comparison": "Fluticasone",
+      "est": 0.8621722302891024,
+      "lCi": 0.7481637634974695,
+      "pval": 0.04042975997066077,
+      "stat": -2.049330993285612,
+      "uCi": 0.9935538059298153
+    },
+    {
+      "comparison": "Fluticasone+Salmeterol",
+      "est": 0.7501112298632028,
+      "lCi": 0.6552963569948682,
+      "pval": 3.041309636225476e-05,
+      "stat": -4.170350914587161,
+      "uCi": 0.8586448729048756
+    },
+    {
+      "comparison": "Formoterol",
+      "est": 0.943570527130053,
+      "lCi": 0.7816477823258373,
+      "pval": 0.5453857887911147,
+      "stat": -0.604688803783562,
+      "uCi": 1.1390364813922613
+    },
+    {
+      "comparison": "Salmeterol",
+      "est": 0.8013366373491875,
+      "lCi": 0.7201886638562813,
+      "pval": 4.7898074250303965e-05,
+      "stat": -4.0656534105037245,
+      "uCi": 0.8916280394080832
+    },
+    {
+      "comparison": "Tiotropium",
+      "est": 0.6853814945067689,
+      "lCi": 0.6104839377640182,
+      "pval": 1.5711575787292432e-10,
+      "stat": -6.398300588929125,
+      "uCi": 0.7694678990783088
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Estimates above one indicate higher values for the treatment than for Placebo."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Fixed effects tested using z-distribution."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "The treatment effects are transformed using exponential transformation. For nonlinear transformations, the transformed estimates are interpreted as medians on the transformed scale."
+    }
+  ],
+  "name": "treatmentEffectsContainer_treatmentEffectsTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "comparison",
+        "title": "Treatment",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "stat",
+        "title": "z",
+        "type": "number"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Treatment Effects vs. Placebo"
+}

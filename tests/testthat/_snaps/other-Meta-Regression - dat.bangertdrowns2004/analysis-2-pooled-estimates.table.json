@@ -1,0 +1,132 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "est": "0.2840236",
+      "lCi": "0.134232",
+      "lPi": "-0.03751217",
+      "par": "Pooled effect",
+      "se": "0.06722721",
+      "subgroup": "yes",
+      "uCi": "0.4338151",
+      "uPi": "0.6055593"
+    },
+    {
+      "est": "0.1349625",
+      "lCi": "0.03320579",
+      "lPi": "0.03320579",
+      "par": "",
+      "se": "0.04566891",
+      "subgroup": "no",
+      "uCi": "0.2367191",
+      "uPi": "0.2367191"
+    },
+    {
+      "est": "0.127690932460808",
+      "lCi": "0",
+      "lPi": "",
+      "par": "𝜏",
+      "se": "0.0945880189510315",
+      "subgroup": "yes",
+      "uCi": "0.36737215592763",
+      "uPi": ""
+    },
+    {
+      "est": "0",
+      "lCi": "0",
+      "lPi": "",
+      "par": "",
+      "se": "Inf",
+      "subgroup": "no",
+      "uCi": "0.196301929799156",
+      "uPi": ""
+    },
+    {
+      "est": "0.0163049742327106",
+      "lCi": "0",
+      "lPi": "",
+      "par": "𝜏²",
+      "se": "0.0241560646789555",
+      "subgroup": "yes",
+      "uCi": "0.134962300950915",
+      "uPi": ""
+    },
+    {
+      "est": "0",
+      "lCi": "0",
+      "lPi": "",
+      "par": "",
+      "se": "0.0133163523668545",
+      "subgroup": "no",
+      "uCi": "0.0385344476428727",
+      "uPi": ""
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "The pooled effect size corresponds to the weighted average effect across studies."
+    }
+  ],
+  "name": "modelSummaryContainer_pooledEstimatesTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "par",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "subgroup",
+        "title": "Subgroup",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "se",
+        "title": "Standard Error",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lPi",
+        "overTitle": "95% PI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uPi",
+        "overTitle": "95% PI",
+        "title": "Upper",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Meta-Analytic Estimates"
+}

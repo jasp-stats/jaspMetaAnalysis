@@ -1,0 +1,144 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "meanRank": 1.946,
+      "medianRank": 2,
+      "pBest": 0.426,
+      "pScore": 0.8933681812552101,
+      "sucra": 0.894888888888889,
+      "treatment": "Rosiglitazone"
+    },
+    {
+      "meanRank": 2.955,
+      "medianRank": 3,
+      "pBest": 0.134,
+      "pScore": 0.7817765315822707,
+      "sucra": 0.7827777777777778,
+      "treatment": "Metformin"
+    },
+    {
+      "meanRank": 2.9610000000000003,
+      "medianRank": 3,
+      "pBest": 0.247,
+      "pScore": 0.7745697307006257,
+      "sucra": 0.7821111111111111,
+      "treatment": "Pioglitazone"
+    },
+    {
+      "meanRank": 4.512,
+      "medianRank": 5,
+      "pBest": 0.08,
+      "pScore": 0.6136555281943245,
+      "sucra": 0.6097777777777779,
+      "treatment": "Miglitol"
+    },
+    {
+      "meanRank": 5.3020000000000005,
+      "medianRank": 5,
+      "pBest": 0.031,
+      "pScore": 0.5202644153469339,
+      "sucra": 0.522,
+      "treatment": "Acarbose"
+    },
+    {
+      "meanRank": 6.182,
+      "medianRank": 6,
+      "pBest": 0.028,
+      "pScore": 0.43581702350037177,
+      "sucra": 0.4242222222222222,
+      "treatment": "Benfluorex"
+    },
+    {
+      "meanRank": 6.192,
+      "medianRank": 7,
+      "pBest": 0.035,
+      "pScore": 0.4232466695437182,
+      "sucra": 0.4231111111111111,
+      "treatment": "Vildagliptin"
+    },
+    {
+      "meanRank": 7.022,
+      "medianRank": 7,
+      "pBest": 0.019,
+      "pScore": 0.33309920641694235,
+      "sucra": 0.3308888888888889,
+      "treatment": "Sitagliptin"
+    },
+    {
+      "meanRank": 8.051,
+      "medianRank": 8,
+      "pBest": 0,
+      "pScore": 0.2103076596511693,
+      "sucra": 0.21655555555555556,
+      "treatment": "Sulfonylurea"
+    },
+    {
+      "meanRank": 9.877,
+      "medianRank": 10,
+      "pBest": 0,
+      "pScore": 0.013895053808433607,
+      "sucra": 0.013666666666666667,
+      "treatment": "Placebo"
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Negative treatment effects are considered beneficial."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "The ranking metrics other than the P-score are based on 1000 simulations of the treatment effects."
+    }
+  ],
+  "name": "rankingContainer_rankingTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "treatment",
+        "title": "Treatment",
+        "type": "string"
+      },
+      {
+        "format": "dp:3",
+        "name": "pScore",
+        "title": "P-score",
+        "type": "number"
+      },
+      {
+        "format": "dp:3",
+        "name": "sucra",
+        "title": "SUCRA",
+        "type": "number"
+      },
+      {
+        "format": "dp:3",
+        "name": "pBest",
+        "title": "P(best)",
+        "type": "number"
+      },
+      {
+        "format": "dp:2",
+        "name": "meanRank",
+        "title": "Mean rank",
+        "type": "number"
+      },
+      {
+        "format": "dp:1",
+        "name": "medianRank",
+        "title": "Median rank",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Ranking of Treatments"
+}

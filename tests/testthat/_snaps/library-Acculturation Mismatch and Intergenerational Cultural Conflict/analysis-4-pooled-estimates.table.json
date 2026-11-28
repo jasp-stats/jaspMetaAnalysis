@@ -1,0 +1,94 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "lCi": 0,
+      "lPi": -0.29790824551531475,
+      "mean": 0.1024494786782262,
+      "median": 0.07656388800059995,
+      "par": "Pooled effect",
+      "uCi": 0.292253764991898,
+      "uPi": 0.4614740471553952
+    },
+    {
+      "lCi": 0.0810093579629565,
+      "lPi": "",
+      "mean": 0.16139043572005213,
+      "median": 0.1506327035245114,
+      "par": "𝜏",
+      "uCi": 0.29243330803831935,
+      "uPi": ""
+    },
+    {
+      "lCi": 0.006562516080676945,
+      "lPi": "",
+      "mean": 0.029070315840839092,
+      "median": 0.022690211371103355,
+      "par": "𝜏²",
+      "uCi": 0.08551723965290031,
+      "uPi": ""
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "The pooled effect is transformed using Fisher's z to r transformation. For nonlinear transformations, the transformed estimate is interpreted as a median on the transformed scale."
+    }
+  ],
+  "name": "modelSummaryContainer_pooledEstimatesTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "par",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "mean",
+        "title": "Mean",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "median",
+        "title": "Median",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lPi",
+        "overTitle": "95% PI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uPi",
+        "overTitle": "95% PI",
+        "title": "Upper",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Meta-Analytic Estimates"
+}

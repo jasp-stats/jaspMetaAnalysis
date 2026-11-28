@@ -1,0 +1,110 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "Q": 22.517140236024133,
+      "design": "Acarbose:Sulfonylurea",
+      "df": 6,
+      "pval": 0.0009754280290718043
+    },
+    {
+      "Q": 17.12863945982122,
+      "design": "Metformin:Pioglitazone",
+      "df": 6,
+      "pval": 0.008821922451267266
+    },
+    {
+      "Q": 22.52029252019172,
+      "design": "Metformin:Rosiglitazone",
+      "df": 6,
+      "pval": 0.0009741406230429643
+    },
+    {
+      "Q": 7.513486950504159,
+      "design": "Metformin:Sulfonylurea",
+      "df": 6,
+      "pval": 0.27595510196314665
+    },
+    {
+      "Q": 22.483554433384654,
+      "design": "Pioglitazone:Rosiglitazone",
+      "df": 6,
+      "pval": 0.0009892487029320724
+    },
+    {
+      "Q": 22.444462971748436,
+      "design": "Placebo:Acarbose",
+      "df": 6,
+      "pval": 0.0010055770977924717
+    },
+    {
+      "Q": 22.069517380673425,
+      "design": "Placebo:Metformin",
+      "df": 6,
+      "pval": 0.001176246117647303
+    },
+    {
+      "Q": 17.246842418841023,
+      "design": "Placebo:Pioglitazone",
+      "df": 6,
+      "pval": 0.00841761574994073
+    },
+    {
+      "Q": 16.29071020213629,
+      "design": "Placebo:Rosiglitazone",
+      "df": 6,
+      "pval": 0.012275810052708216
+    },
+    {
+      "Q": 6.771656938293673,
+      "design": "Rosiglitazone:Sulfonylurea",
+      "df": 6,
+      "pval": 0.3424815165694211
+    },
+    {
+      "Q": 22.384427651058676,
+      "design": "Placebo:Acarbose:Metformin",
+      "df": 5,
+      "pval": 0.0004424240963359303
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Designs whose removal disconnects the network cannot be detached and are not shown."
+    }
+  ],
+  "name": "inconsistencyContainer_designDecompositionDetachTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "design",
+        "title": "Detached design",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "Q",
+        "title": "Q",
+        "type": "number"
+      },
+      {
+        "name": "df",
+        "title": "df",
+        "type": "integer"
+      },
+      {
+        "format": "dp:3;p:.001",
+        "name": "pval",
+        "title": "p",
+        "type": "pvalue"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Between-Designs Inconsistency After Detaching Single Designs"
+}

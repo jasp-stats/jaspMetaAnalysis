@@ -1,0 +1,81 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "est": 1,
+      "lCi": "",
+      "par": "(0, 0.025]",
+      "se": "",
+      "uCi": ""
+    },
+    {
+      "est": 0.4355112315370358,
+      "lCi": 0,
+      "par": "(0.025, 0.5]",
+      "se": 0.356270822383773,
+      "uCi": 1.1337892121516973
+    },
+    {
+      "est": 0.18796848003161326,
+      "lCi": 0,
+      "par": "(0.5, 1]",
+      "se": 0.34329935092023806,
+      "uCi": 0.8608228437512573
+    }
+  ],
+  "footnotes": [
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Expected effect direction: positive."
+    },
+    {
+      "cols": null,
+      "myOrder": 0,
+      "rows": null,
+      "symbol": "<em>Note.<\/em>",
+      "text": "Fixed selection parameters have no standard errors or confidence intervals."
+    }
+  ],
+  "name": "weightFunctionSummary_selectionParameters",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "par",
+        "title": "<em>p<\/em>-Values Interval",
+        "type": "string"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "est",
+        "title": "Estimate",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "se",
+        "title": "Standard Error",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "lCi",
+        "overTitle": "95% CI",
+        "title": "Lower",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "uCi",
+        "overTitle": "95% CI",
+        "title": "Upper",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Weight Function Estimates"
+}

@@ -1,0 +1,63 @@
+{
+  "casesAcrossColumns": false,
+  "data": [
+    {
+      "AIC": 32.98323288665279,
+      "AICc": 37.98323288665279,
+      "BIC": 35.24303031649894,
+      "dev": 24.983232886652793,
+      "ll": -12.491616443326397,
+      "model": "ML",
+      "observations": 13
+    }
+  ],
+  "footnotes": [],
+  "name": "modelSummaryContainer_fitMeasuresTable",
+  "overTitle": false,
+  "schema": {
+    "fields": [
+      {
+        "name": "model",
+        "title": "",
+        "type": "string"
+      },
+      {
+        "name": "observations",
+        "title": "Observations",
+        "type": "integer"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "ll",
+        "title": "Log Lik.",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "dev",
+        "title": "Deviance",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "AIC",
+        "title": "AIC",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "BIC",
+        "title": "BIC",
+        "type": "number"
+      },
+      {
+        "format": "sf:4;dp:3",
+        "name": "AICc",
+        "title": "AICc",
+        "type": "number"
+      }
+    ]
+  },
+  "status": "complete",
+  "title": "Fit Measures"
+}
