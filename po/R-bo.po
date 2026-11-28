@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspMetaAnalysis 0.95.5\n"
-"POT-Creation-Date: 2026-11-14 02:33\n"
+"POT-Creation-Date: 2026-11-28 02:32\n"
 "PO-Revision-Date: 2026-01-06 14:01+0000\n"
 "Last-Translator: Zev Oster <zevelijah@gmail.com>\n"
 "Language-Team: Tibetan <https://hosted.weblate.org/projects/jasp/"
@@ -1339,6 +1339,748 @@ msgid "Error writing the variance-covariance matrix file: %1$s"
 msgstr ""
 
 msgid ""
+"The selected method is only available for the penalized logistic regression "
+"pooling method."
+msgstr ""
+
+msgid ""
+"The variable '%1$s' must contain positive values, but it contains %2$s in "
+"the study '%3$s'."
+msgstr ""
+
+msgid ""
+"The variable '%1$s' must contain non-negative values, but it contains %2$s "
+"in the study '%3$s'."
+msgstr ""
+
+msgid ""
+"The number of events exceeds the sample size in the study '%1$s' (treatment "
+"'%2$s')."
+msgstr ""
+
+msgid "The network meta-analysis requires at least two different treatments."
+msgstr ""
+
+msgid ""
+"The study '%1$s' contains the treatment '%2$s' in more than one arm. Each "
+"treatment can appear in a study only once."
+msgstr ""
+
+msgid ""
+"The study '%1$s' contains a comparison of the treatment '%2$s' with itself. "
+"The two treatments of a comparison must differ."
+msgstr ""
+
+msgid ""
+"The study '%1$s' contains the comparison '%2$s' vs. '%3$s' more than once. "
+"Each comparison can appear in a study only once."
+msgstr ""
+
+msgid ""
+"The variable '%1$s' is not constant within the study '%2$s'. The predictor "
+"and the subgroup must be study-level variables."
+msgstr ""
+
+msgid "Evidence Structure"
+msgstr ""
+
+msgid "Direct Evidence"
+msgstr ""
+
+msgid "Direct evidence proportion"
+msgstr ""
+
+msgid "Mean path length"
+msgstr ""
+
+msgid "Minimal parallelism"
+msgstr ""
+
+msgid ""
+"The mean path length and the minimal parallelism are not available for the "
+"Mantel-Haenszel, non-central hypergeometric, and penalized logistic "
+"regression pooling methods."
+msgstr ""
+
+msgid ""
+"For the non-central hypergeometric method, the direct evidence proportion "
+"compares the variance of the network estimate with the variance of the "
+"Mantel-Haenszel direct estimate, so comparisons with only direct evidence "
+"can have proportions below 1."
+msgstr ""
+
+msgid "The minimal parallelism is not defined for a network of two treatments."
+msgstr ""
+
+msgid "Computing Contribution Matrix"
+msgstr ""
+
+#, fuzzy
+msgid "Contribution Matrix"
+msgstr "རང་ལྟོས་འབྲེལ"
+
+msgid "Network comparison"
+msgstr ""
+
+msgid ""
+"Percentage contribution of each direct comparison (columns) to each network "
+"estimate (rows)."
+msgstr ""
+
+msgid ""
+"The study impact cannot be computed because removing a single study "
+"disconnects the network."
+msgstr ""
+
+msgid "Computing Study Impact"
+msgstr ""
+
+msgid "Study Impact"
+msgstr ""
+
+msgid ""
+"Percentage loss of precision of each network estimate (columns) when the "
+"study (rows) is removed."
+msgstr ""
+
+msgid "Pairwise Meta-Analyses"
+msgstr ""
+
+msgid ""
+"The confidence intervals and tests of the pairwise meta-analyses use the "
+"normal distribution, also if the t-distribution is used for the treatment "
+"effects of the network."
+msgstr ""
+
+msgid ""
+"The fixed between-study variance of the network meta-analysis is not "
+"applied: each pairwise meta-analysis estimates its own between-study "
+"variance by the %1$s estimator (a comparison with a single study has no "
+"between-study variance)."
+msgstr ""
+
+msgid ""
+"Penalized logistic regression provides no between-study variance: 𝜏² is not "
+"available for the pairwise meta-analyses."
+msgstr ""
+
+msgid "%1$s vs. %2$s"
+msgstr ""
+
+msgid "Network Meta-Regression"
+msgstr ""
+
+msgid "Not available for the selected pooling method."
+msgstr ""
+
+msgid ""
+"Network meta-regression supports a continuous predictor or a predictor with "
+"two levels."
+msgstr ""
+
+msgid "The predictor has no variation among the studies."
+msgstr ""
+
+msgid ""
+"For this input, netmeta treats the comparisons of a multi-arm study as "
+"independent in the meta-regression, so the standard errors may be "
+"understated."
+msgstr ""
+
+msgid ""
+"The predictor does not vary among the studies that include the reference "
+"treatment '%1$s'. Please, select another reference treatment."
+msgstr ""
+
+msgid ""
+"The network meta-regression does not support the DerSimonian-Laird "
+"estimator: the restricted maximum likelihood estimator is used."
+msgstr ""
+
+msgid ""
+"The network meta-regression uses z-tests (the t-distribution is not "
+"available)."
+msgstr ""
+
+msgid ""
+"The fixed value of the between-study variance is not applied in the network "
+"meta-regression: the between-study variance is estimated."
+msgstr ""
+
+msgid "Network Meta-Regression Tests"
+msgstr ""
+
+msgid "Moderation"
+msgstr ""
+
+msgid ""
+"The treatment effects are estimated at %1$s = %2$s (the reference level of "
+"the predictor); the slopes are the differences in the treatment effects "
+"between %1$s = %3$s and %1$s = %2$s."
+msgstr ""
+
+msgid "The treatment effects are estimated at %1$s = 0."
+msgstr ""
+
+msgid "Network Meta-Regression Coefficients"
+msgstr ""
+
+msgid ""
+"The slopes and their standard errors are not transformed (they are shown on "
+"the scale of the analysis). No standard errors are shown for the transformed "
+"treatment effects."
+msgstr ""
+
+msgid ""
+"The slopes are not transformed (they are shown on the scale of the analysis)."
+msgstr ""
+
+msgid "%1$s vs. %2$s × %3$s"
+msgstr ""
+
+msgid "Test for Subgroup Differences"
+msgstr ""
+
+msgid ""
+"The test for subgroup differences requires network estimates from at least "
+"two subgroups."
+msgstr ""
+
+msgid "No treatment comparison is estimated in at least two subgroups."
+msgstr ""
+
+msgid ""
+"The test is based on the estimates on the scale of the analysis (not "
+"transformed)."
+msgstr ""
+
+msgid "The component separator must be a single character."
+msgstr ""
+
+msgid "The inactive treatment '%1$s' must consist of a single component."
+msgstr ""
+
+msgid "Please, assign the component indicator variables."
+msgstr ""
+
+msgid "The component indicator '%1$s' must contain only the values 0 and 1."
+msgstr ""
+
+msgid ""
+"The component indicator '%1$s' is not constant within the treatment '%2$s'."
+msgstr ""
+
+msgid "The component indicators are 0 for all treatments."
+msgstr ""
+
+msgid ""
+"The interaction combination '%1$s' must consist of at least two active "
+"components."
+msgstr ""
+
+msgid "The component model is not available for the selected pooling method."
+msgstr ""
+
+msgid ""
+"The network is disconnected: the component model is fitted to the "
+"subnetworks jointly (the standard model is not available)."
+msgstr ""
+
+msgid "The following components are not uniquely identifiable: %1$s."
+msgstr ""
+
+msgid "Component Effects"
+msgstr ""
+
+msgid "Component"
+msgstr ""
+
+msgid ""
+"The effects of the components are relative to the inactive treatment %1$s."
+msgstr ""
+
+msgid ""
+"No inactive treatment was selected. Each treatment name contributes its "
+"components to the model, including the reference treatment."
+msgstr ""
+
+msgid "Components"
+msgstr ""
+
+msgid "Component Forest Plot"
+msgstr ""
+
+msgid ""
+"The network is disconnected: it consists of %1$s separate subnetworks, %2$s."
+msgstr ""
+
+msgid "A component network meta-analysis can analyse disconnected networks."
+msgstr ""
+
+msgid ""
+"Study '%1$s' has a wrong number of comparisons: a study with %2$s arms needs "
+"all %3$s pairwise comparisons."
+msgstr ""
+
+msgid ""
+"Please check the data of the multi-arm studies. The tolerance of the "
+"consistency check can be changed by the 'Multi-arm consistency tolerance' "
+"option in the 'Advanced' section."
+msgstr ""
+
+msgid "Please check the data of the multi-arm studies."
+msgstr ""
+
+msgid ""
+"The analysis failed after the studies and designs that the selected pooling "
+"method cannot analyse (studies without events or with all events, and "
+"treatment arms without events or with all events in a design) were excluded: "
+"the exclusions can disconnect the network. Penalized logistic regression "
+"keeps all studies and designs."
+msgstr ""
+
+msgid "The error of the analysis: %1$s"
+msgstr ""
+
+msgid "Penalized logistic regression requires at least three treatments."
+msgstr ""
+
+msgid "Estimating Network Meta-Analysis"
+msgstr ""
+
+msgid "Inconsistency"
+msgstr ""
+
+msgid "Within-Design Heterogeneity"
+msgstr ""
+
+msgid "Design"
+msgstr ""
+
+msgid "Between-Designs Inconsistency After Detaching Single Designs"
+msgstr ""
+
+msgid "Detached design"
+msgstr ""
+
+msgid "Not available for a network of two treatments."
+msgstr ""
+
+msgid ""
+"Designs whose removal disconnects the network cannot be detached and are not "
+"shown."
+msgstr ""
+
+msgid "Separating Direct and Indirect Evidence"
+msgstr ""
+
+msgid "Direct and Indirect Evidence"
+msgstr ""
+
+msgid "Direct proportion"
+msgstr ""
+
+msgid "Network"
+msgstr ""
+
+msgid "Direct"
+msgstr ""
+
+msgid "Indirect"
+msgstr ""
+
+msgid "Ratio"
+msgstr ""
+
+msgid "Difference"
+msgstr ""
+
+msgid "Lower %s%% CI"
+msgstr ""
+
+msgid "Upper %s%% CI"
+msgstr ""
+
+msgid "The direct and indirect evidence were separated using the %1$s method."
+msgstr ""
+
+msgid ""
+"The SIDDE method of the Mantel-Haenszel and non-central hypergeometric fits "
+"provides no direct evidence proportion."
+msgstr ""
+
+msgid "Node splitting uses normal-theory (z) inference."
+msgstr ""
+
+msgid ""
+"The node-splitting forest plot shows normal-theory (z) intervals, also for "
+"the network estimates."
+msgstr ""
+
+msgid "The test of disagreement (z, p) is on the analysis scale."
+msgstr ""
+
+msgid "There are no comparisons with both direct and indirect evidence."
+msgstr ""
+
+msgid "Direct vs. indirect"
+msgstr ""
+
+msgid "Net Heat Plot"
+msgstr ""
+
+msgid ""
+"The net heat plot is not available for a network with only %1$s designs."
+msgstr ""
+
+msgid ""
+"The net heat plot is not available because the network does not contain a "
+"loop of more than one design."
+msgstr ""
+
+msgid ""
+"The net heat plot is not available because the network contains no between-"
+"design heterogeneity."
+msgstr ""
+
+msgid ""
+"The net heat plot is not available because the network contains too few "
+"informative designs."
+msgstr ""
+
+msgid "Reduction in Q"
+msgstr ""
+
+msgid "Network Plot"
+msgstr ""
+
+msgid ""
+"The edge widths by precision are not available for the component model of a "
+"disconnected network: the edge widths show the number of studies."
+msgstr ""
+
+msgid "Multi-arm study"
+msgstr ""
+
+msgid "vs. %1$s"
+msgstr ""
+
+msgid "Small-Study Effects"
+msgstr ""
+
+msgid "Comparison-Adjusted Funnel Plot"
+msgstr ""
+
+msgid "There are no comparisons with an effect size and a standard error."
+msgstr ""
+
+msgid "Comparison-Adjusted Effect Size"
+msgstr ""
+
+msgid "Funnel Plot Asymmetry Tests"
+msgstr ""
+
+msgid "Statistic"
+msgstr ""
+
+msgid "Asymmetry tests require at least 10 comparisons."
+msgstr ""
+
+msgid "Egger (t)"
+msgstr ""
+
+msgid "Begg and Mazumdar (z)"
+msgstr ""
+
+msgid "Thompson and Sharp (t)"
+msgstr ""
+
+msgid "netmeta R Code"
+msgstr ""
+
+msgid "Complete cases of the variables used by the analysis"
+msgstr ""
+
+msgid "The contrasts could not be computed:"
+msgstr ""
+
+msgid "The module reported: %1$s"
+msgstr ""
+
+msgid ""
+"The standard network meta-analysis is not available for a disconnected "
+"network:"
+msgstr ""
+
+msgid "The network meta-analysis could not be fitted:"
+msgstr ""
+
+msgid "Network meta-regression"
+msgstr ""
+
+msgid ""
+"The levels of the predictor are renamed (see the factor() call): "
+"netmetareg() fails if a level has the name of a treatment."
+msgstr ""
+
+msgid ""
+"Labels of the levels in metareg$results (columns cov_lvl and cov_ref; the "
+"first level is the reference level):"
+msgstr ""
+
+msgid "Component model (additive component network meta-analysis)"
+msgstr ""
+
+msgid "Not estimable (reported as NA by the module): %1$s."
+msgstr ""
+
+msgid "Treatment Ranking"
+msgstr ""
+
+msgid "Simulating Rank Probabilities"
+msgstr ""
+
+msgid "Ranking of Treatments"
+msgstr ""
+
+msgid "Treatment"
+msgstr ""
+
+msgid "P-score"
+msgstr ""
+
+msgid "SUCRA"
+msgstr ""
+
+msgid "P(best)"
+msgstr ""
+
+msgid "Mean rank"
+msgstr ""
+
+#, fuzzy
+msgid "Median rank"
+msgstr "དཀྱིལ་གྲངས།"
+
+msgid "Negative treatment effects are considered beneficial."
+msgstr ""
+
+msgid "Positive treatment effects are considered beneficial."
+msgstr ""
+
+msgid ""
+"The ranking metrics other than the P-score are based on %1$s simulations of "
+"the treatment effects."
+msgstr ""
+
+msgid ""
+"The P-scores are based on the p-values of the normal distribution because "
+"the network has no degrees of freedom for heterogeneity (the t-distribution "
+"is not available)."
+msgstr ""
+
+msgid "Rankogram"
+msgstr ""
+
+msgid "Rank"
+msgstr ""
+
+msgid "Cumulative probability"
+msgstr ""
+
+msgid "Probability"
+msgstr ""
+
+msgid ""
+"NAs in the treatment effects were introduced due to the %1$s transformation. "
+"Please verify that you are using the correct effect size transformation."
+msgstr ""
+
+msgid ""
+"The treatment effects are transformed using %1$s transformation. For "
+"nonlinear transformations, the transformed estimates are interpreted as "
+"medians on the transformed scale."
+msgstr ""
+
+msgid ""
+"Estimates above one indicate higher values for the treatment than for %1$s."
+msgstr ""
+
+msgid ""
+"Positive estimates indicate higher values for the treatment than for %1$s."
+msgstr ""
+
+msgid ""
+"Estimates above one indicate higher values for the first treatment of the "
+"comparison than for the second."
+msgstr ""
+
+msgid ""
+"Positive estimates indicate higher values for the first treatment of the "
+"comparison than for the second."
+msgstr ""
+
+msgid "Subgroup '%1$s'"
+msgstr ""
+
+msgid "%1$s: the results could not be computed: %2$s"
+msgstr ""
+
+msgid ""
+"The ranking is not available because some treatment comparisons are not "
+"estimable (the treatments are in different subnetworks and their components "
+"do not identify the contrasts)."
+msgstr ""
+
+msgid "Network Meta-Analysis Summary"
+msgstr ""
+
+msgid "Input Summary"
+msgstr ""
+
+msgid "Studies (k)"
+msgstr ""
+
+msgid "Comparisons (m)"
+msgstr ""
+
+msgid "Treatments (n)"
+msgstr ""
+
+msgid "Designs (d)"
+msgstr ""
+
+msgid "Multi-arm studies"
+msgstr ""
+
+msgid "Person-time"
+msgstr ""
+
+msgid "and %1$i more"
+msgstr ""
+
+msgid ""
+"Penalized logistic regression models random effects by a dispersion factor. "
+"The between-study variance, the Q statistics, I², and the prediction "
+"intervals are not available."
+msgstr ""
+
+msgid "Network Meta-Analytic Tests"
+msgstr ""
+
+msgid "Select a reference treatment to see results that depend on this choice."
+msgstr ""
+
+msgid ""
+"Heterogeneity and inconsistency tests are not available for the selected "
+"pooling method."
+msgstr ""
+
+msgid ""
+"No heterogeneity or inconsistency tests are available because the network "
+"has no degrees of freedom."
+msgstr ""
+
+msgid "Additive model"
+msgstr ""
+
+msgid "Standard model"
+msgstr ""
+
+msgid "Total"
+msgstr ""
+
+msgid "Within designs"
+msgstr ""
+
+msgid "Between designs"
+msgstr ""
+
+msgid "Between designs (design-by-treatment interaction)"
+msgstr ""
+
+msgid "The between-study variance 𝜏² was fixed to %1$s."
+msgstr ""
+
+msgid "Network Treatment Effects"
+msgstr ""
+
+msgid "Treatment Effects vs. %1$s"
+msgstr ""
+
+msgid "Treatment Effects"
+msgstr ""
+
+msgid ""
+"%1$s: the t-distribution is not available because the network has no degrees "
+"of freedom for heterogeneity; z-tests are reported (the statistic is z, df "
+"is empty)."
+msgstr ""
+
+msgid ""
+"The t-distribution is not available because the network has no degrees of "
+"freedom for heterogeneity; z-tests are reported."
+msgstr ""
+
+msgid ""
+"Prediction intervals are based on very few degrees of freedom and may be "
+"very wide."
+msgstr ""
+
+msgid ""
+"Prediction intervals are not available because the network has fewer than "
+"two degrees of freedom for heterogeneity (the degrees of freedom of the "
+"overall Q statistic)."
+msgstr ""
+
+msgid ""
+"Reference treatment '%1$s' is not part of the analysed network (%2$s); "
+"'%3$s' is used as reference."
+msgstr ""
+
+msgid ""
+"Reference treatment '%1$s' is not part of the analysed network; '%2$s' is "
+"used as reference."
+msgstr ""
+
+msgid ""
+"The effect of a comparison is not estimable (NA) if the treatments are in "
+"different subnetworks and their components do not identify the contrast."
+msgstr ""
+
+msgid "League Table"
+msgstr ""
+
+msgid "The treatments could not be ordered by the ranking: %1$s"
+msgstr ""
+
+msgid ""
+"Lower triangle: network estimates of the column treatment versus the row "
+"treatment. Upper triangle: direct estimates of the row treatment versus the "
+"column treatment."
+msgstr ""
+
+msgid ""
+"Lower triangle: network estimates of the column treatment versus the row "
+"treatment. Upper triangle: network estimates of the row treatment versus the "
+"column treatment."
+msgstr ""
+
+msgid ""
+"The confidence intervals of the direct estimates (upper triangle) are based "
+"on the normal distribution; the confidence intervals of the network "
+"estimates (lower triangle) are based on the t-distribution."
+msgstr ""
+
+msgid ""
+"The component model with indicators requires the component indicator "
+"variables."
+msgstr ""
+
+msgid "The fixed value for tau2 must be a finite, non-negative number."
+msgstr ""
+
+msgid ""
 "The within-cluster correlation is set to 0. This corresponds to no "
 "adjustment for dependency between effect sizes within clusters."
 msgstr ""
@@ -1589,9 +2331,6 @@ msgstr ""
 msgid "Adjusted Estimate 𝜏"
 msgstr ""
 
-msgid "Funnel Plot Asymmetry Tests"
-msgstr ""
-
 msgid "Meta-Regression Test for Funnel Plot Asymmetry"
 msgstr ""
 
@@ -1814,9 +2553,6 @@ msgstr ""
 msgid "R code unavailable: %1$s"
 msgstr ""
 
-msgid "The module reported: %1$s"
-msgstr ""
-
 msgid "Publication bias (PEESE)"
 msgstr ""
 
@@ -1975,9 +2711,6 @@ msgid "Adjusted Effect"
 msgstr ""
 
 msgid "Pooled Effect"
-msgstr ""
-
-msgid "Moderation"
 msgstr ""
 
 msgid "Weights"
@@ -2545,6 +3278,74 @@ msgstr[0] ""
 
 msgid "%1$s: %2$i observation was omitted due to missing values."
 msgid_plural "%1$s: %2$i observations were omitted due to missing values."
+msgstr[0] ""
+
+msgid ""
+"The component indicator %1$s is 0 for all treatments of the scope and is not "
+"used as a component."
+msgid_plural ""
+"The component indicators %1$s are 0 for all treatments of the scope and are "
+"not used as components."
+msgstr[0] ""
+
+msgid ""
+"The component indicator %1$s is 0 for all treatments of the network and is "
+"not used as a component."
+msgid_plural ""
+"The component indicators %1$s are 0 for all treatments of the network and "
+"are not used as components."
+msgstr[0] ""
+
+msgid ""
+"The multi-arm study %1$s has comparisons without an effect size (e.g., "
+"events in all or in none of the participants of two of its arms), but a "
+"multi-arm study needs all of its comparisons. Set 'Drop studies with no "
+"cases/events' in the 'Advanced' section to 'No' to keep these comparisons "
+"(with the continuity correction), or remove the study."
+msgid_plural ""
+"The multi-arm studies %1$s have comparisons without an effect size (e.g., "
+"events in all or in none of the participants of two of their arms), but a "
+"multi-arm study needs all of its comparisons. Set 'Drop studies with no "
+"cases/events' in the 'Advanced' section to 'No' to keep these comparisons "
+"(with the continuity correction), or remove the studies."
+msgstr[0] ""
+
+msgid "%1$i more study has a wrong number of comparisons."
+msgid_plural "%1$i more studies have a wrong number of comparisons."
+msgstr[0] ""
+
+msgid ""
+"%1$i study with a single arm was excluded (a study needs at least two arms): "
+"%2$s."
+msgid_plural ""
+"%1$i studies with a single arm were excluded (a study needs at least two "
+"arms): %2$s."
+msgstr[0] ""
+
+msgid ""
+"%1$i study was excluded because none of its effect sizes could be computed "
+"(e.g., events in all or in none of the participants of the compared arms): "
+"%2$s."
+msgid_plural ""
+"%1$i studies were excluded because none of their effect sizes could be "
+"computed (e.g., events in all or in none of the participants of the compared "
+"arms): %2$s."
+msgstr[0] ""
+
+msgid ""
+"%1$i study had arms omitted due to missing values and is analysed with its "
+"remaining arms: %2$s."
+msgid_plural ""
+"%1$i studies had arms omitted due to missing values and are analysed with "
+"their remaining arms: %2$s."
+msgstr[0] ""
+
+msgid ""
+"%1$i multi-arm study had comparisons omitted due to missing values and is "
+"analysed with its remaining comparisons: %2$s."
+msgid_plural ""
+"%1$i multi-arm studies had comparisons omitted due to missing values and are "
+"analysed with their remaining comparisons: %2$s."
 msgstr[0] ""
 
 msgid "%i observation was removed due to missing values."
